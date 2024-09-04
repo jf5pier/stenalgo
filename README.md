@@ -53,6 +53,7 @@ The mapping of keys to the sound they represent must be coherent :
 - Phonemes must have a maximum of one canonical representation on the keyboard, one portion of a chord (todo: validate)
 - Syllables must have the minimum number of chord representation (variations) on the keyboard to distinguish between the different spellings
 - Rules (chord variations) to distinguish between spelling of a syllable must be consistent across a maximum of words sharing that syllable
+- As much as possible, the order in wich phonems are typed must match the order they occure in the syllable
 
 Words that do not respect an established rule are deemed an exception
 - The number of exceptions must be minimized
