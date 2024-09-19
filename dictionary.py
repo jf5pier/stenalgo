@@ -20,7 +20,7 @@ class Word:
     word : str
         The word's orthograph
     phonology : str
-        Collection of phonems representing the pronunciation
+        Collection of phonemes representing the pronunciation
     lemme : str
         Root of the word
     gram_cat : GramCat
@@ -34,7 +34,7 @@ class Word:
     info_verb : str
         Conjugaiton of the verb
     syll : str
-        Syllables in phonems as provided by the lexic
+        Syllables in phonemes as provided by the lexic
     cv-cv : str
         Consonant-Vowel brokendown by syllable  
     orthosyll : str
@@ -55,17 +55,21 @@ class Word:
     orthosyll : str
     frequency : float
 
-    def breakdownSyllables(self, graphem_phonem : str):
-        graph_phon_pairs = [(gp.split("-")[0], gp[1].split("-")) for gp in graphem_phonem.split(".")]
+    def breakdownSyllables(self, graphem_phoneme : str):
+        try :   
+            graph_phon_pairs = [(gp.split("-")[0], gp[1].split("-")) for gp in graphem_phoneme.split(".")]
+        except IndexError as e :
+            print(graphem_phoneme)
+            sys.exit(1)
         return
 
 @dataclass
-class Phonem :
+class Phoneme :
     """
     Representation of the parts of a Syllable
     
     name : str
-        Single char IPA representation of the phonem
+        Single char IPA representation of the phoneme
     frequency : float
         Frequency of occurence in the underlying lexicon/corpus
     """
@@ -84,68 +88,68 @@ class Phonem :
     def __repr__(self):
         return self.name + ":" + "%.1f"%self.frequency
 
-class PhonemCollection:
+class PhonemeCollection:
     """
-    Collection of Phonems representing the existing sounds of a lexicon/corpus
+    Collection of Phonemes representing the existing sounds of a lexicon/corpus
     
-    phonems_names: {str:phonem}
-    phonems : [Phonem]
+    phonemes_names: {str:phoneme}
+    phonemes : [Phoneme]
     """
-    phonem_names ={} 
-    phonems = []
+    phoneme_names ={} 
+    phonemes = []
 
-    def getPhonems(self, phonem_names:str):
-        """ Get phonems from collection, adding missing ones if needed """
+    def getPhonemes(self, phoneme_names:str):
+        """ Get phonemes from collection, adding missing ones if needed """
         ret = []
-        for phonem_name in phonem_names :
-            if phonem_name not in self.phonem_names :
-                p = Phonem(phonem_name)
-                self.phonem_names[phonem_name] = p
-                self.phonems.append(p)
+        for phoneme_name in phoneme_names :
+            if phoneme_name not in self.phoneme_names :
+                p = Phoneme(phoneme_name)
+                self.phoneme_names[phoneme_name] = p
+                self.phonemes.append(p)
 
-            ret.append( self.phonem_names[phonem_name] )
+            ret.append( self.phoneme_names[phoneme_name] )
         return ret
 
-    def printTopPhonems(self, nb: int) :
-        self.phonems.sort(reverse=True)
-        print(self.phonems[:nb])
+    def printTopPhonemes(self, nb: int) :
+        self.phonemes.sort(reverse=True)
+        print(self.phonemes[:nb])
 
 
 class Syllable :
     """
     Representation of a unique sound part of a word 
     
-    phonems : [Phonem]
-        List of Phonems sounding the Syllable
+    phonemes : [Phoneme]
+        List of Phonemes sounding the Syllable
     spellings : {str: float}
         Dict of orthographic spelling that sound the same Syllable and frequency
     frequency : float
         Frequency of occurence in the underlying lexicon/corpus
-    phonemCol : PhonemCollection
-        Collection of Phonems found in the underlying lexicon/corpus
+    phonemeCol : PhonemeCollection
+        Collection of Phonemes found in the underlying lexicon/corpus
     """
-    phonemCol : PhonemCollection = PhonemCollection()
+    phonemeCol : PhonemeCollection = PhonemeCollection()
 
-    def __init__(self, phonem_names: str, spelling: str, frequency: float = 0.0): 
-        self.phonems = []
+    def __init__(self, phoneme_names: str, spelling: str, frequency: float = 0.0): 
+        self.phonemes = []
         self.spellings = {}
-        for phonem in Syllable.phonemCol.getPhonems(phonem_names):
-            phonem.increaseFrequency(frequency)
-            self.phonems.append(phonem)
+        for phoneme in Syllable.phonemeCol.getPhonemes(phoneme_names):
+            phoneme.increaseFrequency(frequency)
+            self.phonemes.append(phoneme)
         self.frequency = frequency
         self.spellings[spelling] = frequency
 
     def increaseFrequency(self, frequency: float):
         self.frequency += frequency
-        for phonem in self.phonems :
-            phonem.increaseFrequency(frequency)
+        for phoneme in self.phonemes :
+            phoneme.increaseFrequency(frequency)
 
     def increaseSpellingFrequency(self, spelling: str, frequency: float):
         spelling_frequency = self.spellings.get(spelling, 0.0) + frequency
         self.spellings[spelling] = spelling_frequency
 
-    def printTopPhonems(nb : int):
-        Syllable.phonemCol.printTopPhonems( nb )
+    def printTopPhonemes(nb : int):
+        Syllable.phonemeCol.printTopPhonemes( nb )
 
     def sortedSpellings(self) :
         spel_freq = [(k,v) for k,v in self.spellings.items()]
@@ -153,11 +157,11 @@ class Syllable :
         return spel_freq
 
     def __eq__(self, other) :
-        self.phonems == other.phonems
+        self.phonemes == other.phonemes
     def __lt__(self, other) :
         return self.frequency < other.frequency
     def __str__(self) :
-        return "".join([str(p) for p in self.phonems]) + " > " + \
+        return "".join([str(p) for p in self.phonemes]) + " > " + \
                 ",".join([str(spel)+":%.1f"%freq for (spel,freq) in self.sortedSpellings()]) \
                 + " > " + "%.1f"%self.frequency
 
@@ -165,7 +169,7 @@ class SyllableCollection :
     """
     Collection of all Syllables found in a lexicon/corpus
     
-    syllable_names: {str:phonem}
+    syllable_names: {str:phoneme}
     syllables : [Syllables]
     """
     syllable_names = {} 
@@ -196,7 +200,7 @@ class Dictionary:
     words = []
     words_by_ortho= {}
     word_source = "resources/Lexique383.tsv"
-    graphem_phonem_source= "resources/LexiqueInfraCorrespondance.tsv"
+    graphem_phoneme_source= "resources/LexiqueInfraCorrespondance.tsv"
     sylCol = SyllableCollection()
 
 
@@ -205,7 +209,7 @@ class Dictionary:
             corpus = csv.DictReader(f, delimiter='\t')
             
             for corpus_word in corpus:
-                if corpus_word["ortho"] != None :
+                if corpus_word["ortho"] != None and corpus_word["ortho"][0] != "#":
                     word = Word(word = corpus_word["ortho"],
                             phonology = corpus_word["phon"],
                             lemme = corpus_word["lemme"],
@@ -226,13 +230,14 @@ class Dictionary:
         return self.words
 
     def breakdownSyllables(self):
-        with open(self.graphem_phonem_source) as f:
+        with open(self.graphem_phoneme_source) as f:
             graph_phon_asso = csv.DictReader(f, delimiter='\t')
             for asso_word in graph_phon_asso :
-                corpus_words = self.words_by_ortho[asso_word["item"]]
-                for word in corpus_words : 
-                    if word.phonology == asso_word["phono"]:
-                        word.breakdownSyllables(asso_word["assoc"])
+                if asso_word["item"][0] != "#":
+                    corpus_words = self.words_by_ortho[asso_word["item"]]
+                    for word in corpus_words : 
+                        if word.phonology == asso_word["phono"]:
+                            word.breakdownSyllables(asso_word["assoc"])
 
 
         return
@@ -251,7 +256,7 @@ class Dictionary:
                     syllable = self.sylCol.updateSyllable(syllable_name, spelling, word.frequency)
 
         self.sylCol.printTopSyllables(20)
-        Syllable.printTopPhonems(20)
+        Syllable.printTopPhonemes(20)
         print(len(self.mismatchSyllableSpelling))
 
 Dictionary().analyseFrequencies()
