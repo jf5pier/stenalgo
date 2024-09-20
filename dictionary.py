@@ -41,6 +41,12 @@ class Word:
         Orthograph of the syllables (some are mistaken)
     frequency : float
         Frequency of the word in the chosen corpus
+    syll_cv : [str]
+        Syllables in phonemes as provided by the lexicInfra and 
+        groupped by cv_cv field
+    orthosyll_cv : [str] 
+        Orthograph of the syllables as provided by the lexicInfra
+        and groupped by cv_cv field
     """
     word : str
     phonology : str
@@ -54,14 +60,94 @@ class Word:
     cv_cv : str
     orthosyll : str
     frequency : float
+    #syll_cv : [str]
+    #orthosyll_cv : [str]
+
+    def __post_init__(self) :
+        self.fixX_KS()
+
+    def fixCC_KS(graphem_phoneme) :
+        if "cc-ks" in graphem_phoneme :
+            pos = graphem_phoneme.index("cc-ks")
+            return graphem_phoneme[0:pos] + "c-k.c-s" + graphem_phoneme[pos+5:]
+        return graphem_phoneme
 
     def breakdownSyllables(self, graphem_phoneme : str):
+        # Uses the CV-CV breakdown of phonemes from Lexique with the grapheme-phoneme decomposition of 
+        #  LexiqueInfra to find the graphemes parts of each syllable
+        self.syll_cv = []
+        self.orthosyll_cv = []
         try :   
-            graph_phon_pairs = [(gp.split("-")[0], gp[1].split("-")) for gp in graphem_phoneme.split(".")]
-        except IndexError as e :
-            print(graphem_phoneme)
+            graphem_phoneme = Word.fixCC_KS(graphem_phoneme)
+            graph_phon_pairs = [(gp.split("-")[0], gp.split("-")[1]) for gp in graphem_phoneme.split(".")]
+            for cv_syll in self.cv_cv.split("-"):
+                syll_phon = []
+                syll_graph = []
+                for cv_phoneme in cv_syll :
+                    if cv_phoneme == "Y" and graph_phon_pairs[0][1] != "j":
+                        continue 
+                    graph_phon = graph_phon_pairs.pop(0)
+                    #silent phonemes are not matched by a cv_phoneme
+                    while graph_phon[1] == "#" :
+                        syll_phon.append( graph_phon[0] )
+                        syll_graph.append( graph_phon[1] )
+                        graph_phon = graph_phon_pairs.pop(0)
+                    syll_graph.append( graph_phon[0] )
+                    syll_phon.append( graph_phon[1] )
+                self.syll_cv.append(syll_phon)
+                self.orthosyll_cv.append(syll_graph)
+                #Append silent phonemes to end of previous syllable
+                while len(graph_phon_pairs) > 0 and graph_phon_pairs[0][1] == "#" :
+                    graph_phon = graph_phon_pairs.pop(0)
+                    self.syll_cv[-1].append( graph_phon[0] )
+                    self.orthosyll_cv[-1].append( graph_phon[1] )
+
+            if len(graph_phon_pairs) > 0 :
+                print(self.word, graphem_phoneme, self.syll, self.cv_cv, self.syll_cv, self.orthosyll_cv, "extra:", graph_phon_pairs)
+                sys.exit(1)
+        except Exception as e :
+            print(e)
+            print(self.cv_cv, self.syll, graphem_phoneme)
             sys.exit(1)
         return
+
+    def fixX_KS(self) :
+        #X sound should not be broken into 2 consonnants (k-s) in 2 syllables
+        if self.isWellFormedCVSyll() and "x" in self.word and "k-s" in self.syll :
+            pos = self.syll.index("k-s")
+            self.syll = self.syll[0:pos] + "-ks" + self.syll[pos+3:]
+            self.cv_cv= self.cv_cv[0:pos] + self.cv_cv[pos+1:]  # "*C-C*" becomes "*-C*"
+            self.fixX_KS() #recurse if there is more than one X
+
+    def isWellFormedCVSyll(self):
+        # Verify cv_cv and syll have the same form
+        a = self.cv_cv.split("-")
+        b = self.syll.split("-")
+        return len(a) == len(b) and list(map(len, a)) == list(map(len,b))
+
+    def isWellFormedCVOrthosyll(self):
+        # Verify cv_cv and orthosyll have generally the same form
+        a = self.cv_cv.split("-")
+        b = self.orthosyll.split("-")
+        return len(a) == len(b) 
+
+    def isSyllConsensus(self) :
+        # Verify if the phonologic syll and syll_cv match once silent phonemes are removed
+        if self.isWellFormedCVSyll() :
+            for syll, syll_cv in zip(self.syll.split("-"), self.syll_cv):
+                if syll != "".join(syll_cv).replace("#","") :
+                    return False
+            return True
+        return False
+
+    def isOrthoSyllConsensus(self) :
+        # Verify if the orthograph of orthosyll and orthosyll_cv match 
+        if self.isWellFormedCVOrthosyll() :
+            for orthosyll, orthosyll_cv in zip(self.orthosyll.split("-"), self.orthosyll_cv):
+                if orthosyll != "".join(orthosyll_cv) :
+                    return False
+            return True
+        return False
 
 @dataclass
 class Phoneme :
@@ -112,7 +198,7 @@ class PhonemeCollection:
 
     def printTopPhonemes(self, nb: int) :
         self.phonemes.sort(reverse=True)
-        print(self.phonemes[:nb])
+        print("Top phonemes:",self.phonemes[:nb])
 
 
 class Syllable :
@@ -162,7 +248,7 @@ class Syllable :
         return self.frequency < other.frequency
     def __str__(self) :
         return "".join([str(p) for p in self.phonemes]) + " > " + \
-                ",".join([str(spel)+":%.1f"%freq for (spel,freq) in self.sortedSpellings()]) \
+                ",".join([str(spel)+":%.1f"%freq for (spel,freq) in self.sortedSpellings()[:2]]) \
                 + " > " + "%.1f"%self.frequency
 
 class SyllableCollection :
@@ -192,7 +278,7 @@ class SyllableCollection :
     def printTopSyllables(self, nb: int) :
         self.syllables.sort(reverse=True)
         for syl in self.syllables[:nb] :
-            print(str(syl))
+            print("Syllable:",str(syl))
 
 class Dictionary:
 
@@ -255,8 +341,8 @@ class Dictionary:
                 for (syllable_name, spelling) in zip(syllable_names, spellings): 
                     syllable = self.sylCol.updateSyllable(syllable_name, spelling, word.frequency)
 
-        self.sylCol.printTopSyllables(20)
-        Syllable.printTopPhonemes(20)
+        Syllable.printTopPhonemes(1)
+        self.sylCol.printTopSyllables(1)
         print(len(self.mismatchSyllableSpelling))
 
 Dictionary().analyseFrequencies()
