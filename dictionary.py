@@ -66,48 +66,112 @@ class Word:
     def __post_init__(self) :
         self.fixX_KS()
 
-    def fixCC_KS(graphem_phoneme) :
-        if "cc-ks" in graphem_phoneme :
-            pos = graphem_phoneme.index("cc-ks")
-            return graphem_phoneme[0:pos] + "c-k.c-s" + graphem_phoneme[pos+5:]
+    def fixLexiqueInfraGraphPhon(graphem_phonem) :
+        # Apply correction to LexiqueInfra Graphem-Phonem correspondance
+        # that are represented by a differente CV-CV in Lexique
+        graphem_phonem = Word.fixAssociation(graphem_phonem, "cc-ks", "c-k.c-s")
+        graphem_phonem = Word.fixAssociation(graphem_phonem, "rr-RR", "r-R.r-R")
+        graphem_phonem = Word.fixAssociation(graphem_phonem, "oy-waj", "o-wa.y-j")
+        # accastillage a-a.cc-k.a-a.s-s.t-t.ill-ij.a-a.ge-Z
+        graphem_phonem = Word.fixAssociation(graphem_phonem, "ill-ij", "i-i.ll-j")
+        # acuité a-a.c-k.ui-8i.t-t.é-e
+        graphem_phonem = Word.fixAssociation(graphem_phonem, "ui-8i", "u-u.i-i")
+        # aiguille ai-e.gu-g8.i-i.ll-j.e-#
+        graphem_phonem = Word.fixAssociation(graphem_phonem, "gu-g8", "g-g.u-8")
+        return graphem_phonem
+
+    def fixAssociation(graphem_phoneme, badAsso, goodAsso) :
+        if badAsso in graphem_phoneme :
+            pos = graphem_phoneme.index(badAsso)
+            return graphem_phoneme[0:pos] + goodAsso + \
+                    graphem_phoneme[pos+len(badAsso):]
         return graphem_phoneme
+
 
     def breakdownSyllables(self, graphem_phoneme : str):
         # Uses the CV-CV breakdown of phonemes from Lexique with the grapheme-phoneme decomposition of 
         #  LexiqueInfra to find the graphemes parts of each syllable
         self.syll_cv = []
         self.orthosyll_cv = []
+        syll_phon = []
+        syll_graph = []
+        semi_vowel_liaison = False
+        skip_next_Y = False
         try :   
-            graphem_phoneme = Word.fixCC_KS(graphem_phoneme)
+            graphem_phoneme = Word.fixLexiqueInfraGraphPhon(graphem_phoneme)
             graph_phon_pairs = [(gp.split("-")[0], gp.split("-")[1]) for gp in graphem_phoneme.split(".")]
-            for cv_syll in self.cv_cv.split("-"):
+            cv_split = self.cv_cv.split("-")
+            for syllNb, cv_syll in enumerate(cv_split):
+                last_syllable = syllNb == len(cv_syll) -1
                 syll_phon = []
                 syll_graph = []
-                for cv_phoneme in cv_syll :
-                    if cv_phoneme == "Y" and graph_phon_pairs[0][1] != "j":
-                        continue 
+                for cvNb, cv_phoneme in enumerate(cv_syll) :
+                    #if cv_phoneme == "Y" and graph_phon_pairs[0][1] in ["wa"]:
+                    #    if len(cv_split) < syllNb - 1 and cv_split[syllNb+1][0] == "Y":
+                    #        semi_vowel_liaison = True
+                    #    continue 
+                    #if cv_phoneme == "Y" and semi_vowel_liaison :
+                    #    semi_vowel_liaison = False
+                    #    continue
+                    if cv_phoneme == "C" :
+                        #if graph_phon_pairs[0][0] in ["x"] :
+                            
+                    if cv_phoneme == "Y" :
+                        while graph_phon_pairs[0][1] == "#" :
+                            #admixtion a-a.d-d.m-m.i-i.x-ks.t-#.i-j.on-§
+                            graph_phon = graph_phon_pairs.pop(0)
+                            syll_phon.append( ("#", graph_phon[0]) )
+                            syll_graph.append( graph_phon[1] )
+                        if graph_phon_pairs[0][0] not in ["i", "ll", "o", "y", "u", "ill", \
+                                "il", "ou"]:
+                            continue
+                        if skip_next_Y  :
+                            # Rare english words and other exceptions
+                            skip_next_Y = False
+                            continue
+                        #Some semi-vowel Y in Lexique are superflous because their vowel is already
+                        #assigned to a V matched to a graphem-phonem in LexiqueInfra
+                        if graph_phon_pairs[0][0] in ["oi", "o", "oin", "oî"] :
+                            # le Y /j/ dans a-ba-ttoir , a-bo-ya, a-ccoin-tance
+                            continue
+                        if graph_phon_pairs[0][0] in ["ez", "ons"]:
+                            # le Y /j/ dans ab-sou-dri-ez, a-cca-bli-ons
+                            continue 
+
+
+                    #if cv_phoneme == "Y" and graph_phon_pairs[0][1] not in ["j","8"]:
+                    #    continue 
                     graph_phon = graph_phon_pairs.pop(0)
+                    if graph_phon[1] == "Ej" :
+                        #ace a-Ej.c-s.e-# Ejs VYC englis word
+                        skip_next_Y = True
                     #silent phonemes are not matched by a cv_phoneme
                     while graph_phon[1] == "#" :
-                        syll_phon.append( graph_phon[0] )
+                        syll_phon.append( ("#", graph_phon[0]) )
                         syll_graph.append( graph_phon[1] )
                         graph_phon = graph_phon_pairs.pop(0)
-                    syll_graph.append( graph_phon[0] )
+                    syll_graph.append( (cv_phoneme, graph_phon[0]) )
                     syll_phon.append( graph_phon[1] )
                 self.syll_cv.append(syll_phon)
                 self.orthosyll_cv.append(syll_graph)
                 #Append silent phonemes to end of previous syllable
                 while len(graph_phon_pairs) > 0 and graph_phon_pairs[0][1] == "#" :
                     graph_phon = graph_phon_pairs.pop(0)
-                    self.syll_cv[-1].append( graph_phon[0] )
+                    self.syll_cv[-1].append( ("#", graph_phon[0]) )
                     self.orthosyll_cv[-1].append( graph_phon[1] )
 
             if len(graph_phon_pairs) > 0 :
-                print(self.word, graphem_phoneme, self.syll, self.cv_cv, self.syll_cv, self.orthosyll_cv, "extra:", graph_phon_pairs)
+                print("Left-over graphem-phoneme not assigned")
+                print(self.word, graphem_phoneme, self.syll, self.cv_cv)
+                print(self.syll_cv)
+                print(self.orthosyll_cv, "extra:", graph_phon_pairs)
                 sys.exit(1)
         except Exception as e :
             print(e)
-            print(self.cv_cv, self.syll, graphem_phoneme)
+            print(self.word, graphem_phoneme, self.syll, self.cv_cv)
+            print(self.syll_cv)
+            print(self.orthosyll_cv)
+            print(syll_phon, syll_graph, "extra:", graph_phon_pairs)
             sys.exit(1)
         return
 
