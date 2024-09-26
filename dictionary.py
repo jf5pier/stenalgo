@@ -22,15 +22,15 @@ ignoredList = ["ausweis", "beagle", "beagles", "bintje", "borchtch",  #Mots étr
         "ranchs", "ranches", "sandjak", "sandwiches", "sandwichs", "schampooing", "schampooiner", 
         "shampooiner", "shampooing", "shampooings", "puzzle", "puzzles", "rough",
         "panzers", "shogun", "shôgun", "skinheads", "smiley", "teenager", "training", "wharf", 
-        "whig", "whigs", "whipcord", "whiskey", "whiskies", "whiskys", "whist", "whisky"
-        "winchesters" ] + ["autocritiquer", "est", "fjord", "convient", "insolent", 
+        "whig", "whigs", "whipcord", "whiskey", "whiskies", "whiskys", "whist", "whisky",
+        "winchesters" ] + ["autocritiquer", "fjord",  
         "jungien", "jungiens", "mails", "fjords", "sprinteurs", "pierreries", "quidams",
         "requiems", "revoyure", "suppliât", "voyoute", "voyoutisme", "voyouterie", 
         "voyoutes", "voyoucratie", "voyous"] 
 
-def printVerbose(word,msg) :
+def printVerbose(word : str,msg : list) :
     if word in [] :
-        print(word, " :\n", msg)
+        print(word, " :\n", " ".join(map(str,msg)))
 
 @dataclass
 class Word:
@@ -95,7 +95,7 @@ class Word:
     def fix_x_k_s(self) :
         #X sound should not be broken into 2 consonnants (k-s) in 2 syllables
         if self.isWellFormedCVSyll() and "x" in self.word and "k-s" in self.syll :
-            printVerbose(self.word, "fix_x_k_s")
+            printVerbose(self.word, ["fix_x_k_s"])
             pos = self.syll.index("k-s")
             self.syll = self.syll[0:pos] + "-ks" + self.syll[pos+3:]
             self.cv_cv= self.cv_cv[0:pos] + "-CC"+ self.cv_cv[pos+3:]  # "*C-C*" becomes "*-CC*"
@@ -104,7 +104,7 @@ class Word:
     def fix_g_dZ(self) :
         # adagio a-a.d-d.a-a.g-dZ.i-j.o-o a-dad-Zjo V-CVC-CYV
         if self.isWellFormedCVSyll() and "g" in self.word and "d-Z" in self.syll :
-            printVerbose(self.word, "fix_g_dZ")
+            printVerbose(self.word, ["fix_g_dZ"])
             pos = self.syll.index("d-Z")
             self.syll = self.syll[0:pos] + "-dZ" + self.syll[pos+3:]
             self.cv_cv= self.cv_cv[0:pos] + "-CC"+ self.cv_cv[pos+3:]  # "*C-C*" becomes "*-CC*"
@@ -113,7 +113,7 @@ class Word:
     def fix_j_dZ(self) :
         # banjo b-b.an-@.j-dZ.o-o b@d-Zo CVC-CV
         if self.isWellFormedCVSyll() and "j" in self.word and "d-Z" in self.syll :
-            printVerbose(self.word, "fix_j_dZ")
+            printVerbose(self.word, ["fix_j_dZ"])
             pos = self.syll.index("d-Z")
             self.syll = self.syll[0:pos] + "-dZ" + self.syll[pos+3:]
             self.cv_cv= self.cv_cv[0:pos] + "-CC"+ self.cv_cv[pos+3:]  # "*C-C*" becomes "*-CC*"
@@ -122,7 +122,7 @@ class Word:
     def fix_5_n_5(self) :
         # bienheureuse b-b.i-j.en-5n.h-#.eu-2.r-R.eu-2.s-z.e-# bj5-n2-R2z CYV-CV-CVC
         if self.isWellFormedCVSyll() and  "5-n" in self.syll :
-            printVerbose(self.word, "fix_5_n_5")
+            printVerbose(self.word, ["fix_5_n_5"])
             pos = self.syll.index("5-n")
             self.syll = self.syll[0:pos] + "5n-" + self.syll[pos+3:]
             self.cv_cv= self.cv_cv[0:pos] + "VC-"+ self.cv_cv[pos+3:]  # "*V-C*" becomes "*VC-*"
@@ -131,7 +131,7 @@ class Word:
     def fix_ch_tS(self) :
         # machos m-m.a-a.ch-tS.o-o.s-# mat-So mat-So CVC-CV CVC-C
         if self.isWellFormedCVSyll() and  "t-S" in self.syll :
-            printVerbose(self.word, "fix_ch_tS")
+            printVerbose(self.word, ["fix_ch_tS"])
             pos = self.syll.index("t-S")
             self.syll = self.syll[0:pos] + "-tS" + self.syll[pos+3:]
             self.cv_cv= self.cv_cv[0:pos] + "-CC"+ self.cv_cv[pos+3:]  # "*C-C*" becomes "*-CC*"
@@ -197,9 +197,9 @@ class Word:
                 syll_phon = []
                 syll_graph = []
                 for cvNb, cv_phoneme in enumerate(cv_syll) :
-                    printVerbose(self.word," ".join(map(str,[ syllNb,cv_syll,cvNb,cv_phoneme, "\n",\
+                    printVerbose(self.word,[ syllNb,cv_syll,cvNb,cv_phoneme, "\n",\
                             "g/p:", graph_phon_pairs[0][0],graph_phon_pairs[0][1], "\n",\
-                            "skip Y/C:", skip_next_Y, skip_next_C])))
+                            "skip Y/C:", skip_next_Y, skip_next_C])
                     #if cv_phoneme == "Y" and graph_phon_pairs[0][1] in ["wa"]:
                     #    if len(cv_split) < syllNb - 1 and cv_split[syllNb+1][0] == "Y":
                     #        semi_vowel_liaison = True
@@ -228,7 +228,7 @@ class Word:
                             #    #antimarxiste an-@.t-t.i-i.m-m.a-a.r-R.x-ks.i-i.s-s.t-t.e-# @-ti-maR-ksist V-CV-CVC-CCVCC
                             #    elif cv_syll[cvNb+2] == "V" :
                             #        skip_next_C = True
-                            printVerbose(self.word,"x: skip_next_C " + str(skip_next_C))
+                            printVerbose(self.word,["x: skip_next_C " , skip_next_C])
                         elif graph_phon_pairs[0][0] in ["g", "j"] and graph_phon_pairs[0][1] == "dZ":
                             #adagio a-a.d-d.a-a.g-dZ.i-j.o-o a-da-dZjo V-CV-CCYV after fix
                             skip_next_C = True
@@ -241,7 +241,7 @@ class Word:
                             
                     if cv_phoneme == "V" :
                         while graph_phon_pairs[0][1] == "#" :
-                            printVerbose(self.word,"Pop # in V")
+                            printVerbose(self.word,["Pop # in V"])
                             graph_phon = graph_phon_pairs.pop(0)
                             syll_phon.append( graph_phon[0] )
                             syll_graph.append( ("#", graph_phon[1]) )
@@ -252,7 +252,7 @@ class Word:
 
                     if cv_phoneme == "Y" :
                         while graph_phon_pairs[0][1] == "#" :
-                            printVerbose(self.word,"Pop # in Y")
+                            printVerbose(self.word,["Pop # in Y"])
                             #admixtion a-a.d-d.m-m.i-i.x-ks.t-#.i-j.on-§
                             graph_phon = graph_phon_pairs.pop(0)
                             syll_phon.append( graph_phon[0] )
@@ -261,13 +261,13 @@ class Word:
                                 return
                         if graph_phon_pairs[0][0] not in ["i", "ll", "o", "y", "u", "ill", \
                                 "il", "ou", "l", "lli", "w", "ï"]:
-                            printVerbose(self.word,"skip Y of" + str(graph_phon_pairs[0]))
+                            printVerbose(self.word,["skip Y of", graph_phon_pairs[0]])
                             skip_next_Y = False
                             continue
                         if skip_next_Y  :
                             skip_next_Y = False
                             # Rare english words and other exceptions
-                            printVerbose(self.word,"skip next Y of"+ str(graph_phon_pairs[0]))
+                            printVerbose(self.word,["skip next Y of", graph_phon_pairs[0]])
                             continue
                         #Some semi-vowel Y in Lexique are superflous because their vowel is already
                         #assigned to a V matched to a graphem-phonem in LexiqueInfra
@@ -292,15 +292,15 @@ class Word:
                             skip_next_Y = True
                         #silent phonemes are not matched by a cv_phoneme
                         while graph_phon[1] == "#" :
-                            printVerbose(self.word,"Pop # at end")
+                            printVerbose(self.word,["Pop # at end"])
                             syll_phon.append( graph_phon[0] )
                             syll_graph.append( ("#", graph_phon[1]) )
                             graph_phon = graph_phon_pairs.pop(0)
                         syll_graph.append( (cv_phoneme, graph_phon[0]) )
                         syll_phon.append( graph_phon[1] )
-                    printVerbose(self.word,"appended g/p "+ " ".join(map(str,[syll_graph, syll_phon])))
+                    printVerbose(self.word,["appended g/p ", syll_graph, syll_phon])
                     if len(graph_phon_pairs) == 0 :
-                        printVerbose(self.word,"no more graph/phon")
+                        printVerbose(self.word,["no more graph/phon"])
                         return
 
                 self.syll_cv.append(syll_phon)
@@ -311,7 +311,7 @@ class Word:
                     self.syll_cv[-1].append( ("#", graph_phon[0]) )
                     self.orthosyll_cv[-1].append( graph_phon[1] )
                 if len(graph_phon_pairs) == 0 :
-                    printVerbose(self.word,"no more graph/phon")
+                    printVerbose(self.word,["no more graph/phon"])
                     return
 
             if len(graph_phon_pairs) > 0 :

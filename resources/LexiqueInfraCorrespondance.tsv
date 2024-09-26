@@ -930,7 +930,7 @@ acceptes	aksEpt	VER	a.cc.e.p.t.es	a-a.cc-ks.e-E.p-p.t-t.es-#	1.0.1.1.1.1.
 acceptez	aksEpte	VER	a.cc.e.p.t.ez	a-a.cc-ks.e-E.p-p.t-t.ez-e	1.0.1.1.1.1.
 acceptiez	aksEptje	VER	a.cc.e.p.t.i.ez	a-a.cc-ks.e-E.p-p.t-t.i-j.ez-e	1.0.1.1.1.0.1.
 acception	aksEpsj§	NOM	a.cc.e.p.t.i.on	a-a.cc-ks.e-E.p-p.t-s.i-j.on-§	1.0.1.1.0.0.1.
-acceptions	aksEpsj§	NOM	a.cc.e.p.t.i.on.s	a-a.cc-ks.e-E.p-p.t-t.i-j.on-§.s-#	1.0.1.1.1.0.1.1.
+acceptions	aksEpsj§	NOM	a.cc.e.p.t.i.on.s	a-a.cc-ks.e-E.p-p.t-s.i-j.on-§.s-#	1.0.1.1.1.0.1.1.
 acceptions	aksEptj§	VER	a.cc.e.p.t.i.ons	a-a.cc-ks.e-E.p-p.t-t.i-j.ons-§	1.0.1.1.1.0.1.
 acceptons	aksEpt§	VER	a.cc.e.p.t.ons	a-a.cc-ks.e-E.p-p.t-t.ons-§	1.0.1.1.1.1.
 acceptâmes	aksEptam	VER	a.cc.e.p.t.â.m.es	a-a.cc-ks.e-E.p-p.t-t.â-a.m-m.es-#	1.0.1.1.1.1.1.1.
@@ -1949,7 +1949,7 @@ actionné	aksjone	VER	a.c.t.i.o.nn.é	a-a.c-k.t-s.i-j.o-o.nn-n.é-e	1.0.0.0.0.1.
 actionnée	aksjone	VER	a.c.t.i.o.nn.é.e	a-a.c-k.t-s.i-j.o-o.nn-n.é-e.e-#	1.0.0.0.0.1.1.1.
 actionnées	aksjone	VER	a.c.t.i.o.nn.é.es	a-a.c-k.t-s.i-j.o-o.nn-n.é-e.es-#	1.0.0.0.0.1.1.1.
 actionnés	aksjone	VER	a.c.t.i.o.nn.é.s	a-a.c-k.t-s.i-j.o-o.nn-n.é-e.s-#	1.0.0.0.0.1.1.1.
-actions	aksj§	NOM	a.c.t.i.on.s	a-a.c-k.t-t.i-j.on-§.s-#	1.0.1.0.1.1.
+actions	aksj§	NOM	a.c.t.i.on.s	a-a.c-k.t-s.i-j.on-§.s-#	1.0.1.0.1.1.
 actions	aktj§	VER	a.c.t.i.ons	a-a.c-k.t-t.i-j.ons-§	1.0.1.0.1.
 activa	aktiva	VER	a.c.t.i.v.a	a-a.c-k.t-t.i-i.v-v.a-a	1.0.1.1.1.1.
 activai	aktivE	VER	a.c.t.i.v.ai	a-a.c-k.t-t.i-i.v-v.ai-E	1.0.1.1.1.1.
@@ -2393,7 +2393,7 @@ adoptez	adOpte	VER	a.d.o.p.t.ez	a-a.d-d.o-O.p-p.t-t.ez-e	1.1.1.1.1.1.
 adoptif	adOptif	ADJ	a.d.o.p.t.i.f	a-a.d-d.o-O.p-p.t-t.i-i.f-f	1.1.1.1.1.1.1.
 adoptifs	adOptif	ADJ	a.d.o.p.t.i.f.s	a-a.d-d.o-O.p-p.t-t.i-i.f-f.s-#	1.1.1.1.1.1.1.1.
 adoption	adOpsj§	NOM	a.d.o.p.t.i.on	a-a.d-d.o-O.p-p.t-s.i-j.on-§	1.1.1.1.0.0.1.
-adoptions	adOpsj§	NOM	a.d.o.p.t.i.on.s	a-a.d-d.o-O.p-p.t-t.i-j.on-§.s-#	1.1.1.1.1.0.1.1.
+adoptions	adOpsj§	NOM	a.d.o.p.t.i.on.s	a-a.d-d.o-O.p-p.t-s.i-j.on-§.s-#	1.1.1.1.1.0.1.1.
 adoptions	adOptj§	VER	a.d.o.p.t.i.ons	a-a.d-d.o-O.p-p.t-t.i-j.ons-§	1.1.1.1.1.0.1.
 adoptive	adOptiv	ADJ	a.d.o.p.t.i.v.e	a-a.d-d.o-O.p-p.t-t.i-i.v-v.e-#	1.1.1.1.1.1.1.1.
 adoptives	adOptiv	ADJ	a.d.o.p.t.i.v.es	a-a.d-d.o-O.p-p.t-t.i-i.v-v.es-#	1.1.1.1.1.1.1.1.
@@ -2787,7 +2787,7 @@ affectionné	afEksjone	ADJ	a.ff.e.c.t.i.o.nn.é	a-a.ff-f.e-E.c-k.t-s.i-j.o-o.nn-
 affectionnée	afEksjone	VER	a.ff.e.c.t.i.o.nn.é.e	a-a.ff-f.e-E.c-k.t-s.i-j.o-o.nn-n.é-e.e-#	1.1.1.0.0.0.0.1.1.1.
 affectionnée	afEksjone	ADJ	a.ff.e.c.t.i.o.nn.é.e	a-a.ff-f.e-E.c-k.t-s.i-j.o-o.nn-n.é-e.e-#	1.1.1.0.0.0.0.1.1.1.
 affectionnés	afEksjone	ADJ	a.ff.e.c.t.i.o.nn.é.s	a-a.ff-f.e-E.c-k.t-s.i-j.o-o.nn-n.é-e.s-#	1.1.1.0.0.0.0.1.1.1.
-affections	afEksj§	NOM	a.ff.e.c.t.i.on.s	a-a.ff-f.e-E.c-k.t-t.i-j.on-§.s-#	1.1.1.0.1.0.1.1.
+affections	afEksj§	NOM	a.ff.e.c.t.i.on.s	a-a.ff-f.e-E.c-k.t-s.i-j.on-§.s-#	1.1.1.0.1.0.1.1.
 affections	afEktj§	VER	a.ff.e.c.t.i.ons	a-a.ff-f.e-E.c-k.t-t.i-j.ons-§	1.1.1.0.1.0.1.
 affective	afEktiv	ADJ	a.ff.e.c.t.i.v.e	a-a.ff-f.e-E.c-k.t-t.i-i.v-v.e-#	1.1.1.0.1.1.1.1.
 affectivement	afEktiv°m@	ADV	a.ff.e.c.t.i.v.e.m.ent	a-a.ff-f.e-E.c-k.t-t.i-i.v-v.e-°.m-m.ent-@	1.1.1.0.1.1.1.0.1.1.
@@ -16364,12 +16364,12 @@ boxant	bOks@	VER	b.o.x.ant	b-b.o-O.x-ks.ant-@	1.1.1.1.
 boxe	bOks	NOM	b.o.x.e	b-b.o-O.x-ks.e-#	1.1.1.1.
 boxe	bOks	VER	b.o.x.e	b-b.o-O.x-ks.e-#	1.1.1.1.
 boxent	bOks	VER	b.o.x.ent	b-b.o-O.x-ks.ent-#	1.1.1.0.
-boxer	bOksER	NOM	b.o.x.er	b-b.o-O.x-ks.er-e	1.1.1.1.
+boxer	bOksER	NOM	b.o.x.E.r	b-b.o-O.x-ks.e-E.r-R	1.1.1.1.1.
 boxer	bOkse	VER	b.o.x.er	b-b.o-O.x-ks.er-e	1.1.1.1.
 boxerai	bOks°RE	VER	b.o.x.e.r.ai	b-b.o-O.x-ks.e-°.r-R.ai-E	1.1.1.0.1.1.
 boxerais	bOks°RE	VER	b.o.x.e.r.ais	b-b.o-O.x-ks.e-°.r-R.ais-E	1.1.1.0.1.1.
 boxerez	bOks°Re	VER	b.o.x.e.r.ez	b-b.o-O.x-ks.e-°.r-R.ez-e	1.1.1.0.1.1.
-boxers	bOks9R	NOM	b.o.x.e.r.s	b-b.o-O.x-ks.e-9.r-R.s-#	1.1.1.0.1.1.
+boxers	bOksER	NOM	b.o.x.e.r.s	b-b.o-O.x-ks.e-E.r-R.s-#	1.1.1.0.1.1.
 boxes	bOks	NOM	b.o.x.es	b-b.o-O.x-ks.es-#	1.1.1.1.
 boxes	bOks	VER	b.o.x.es	b-b.o-O.x-ks.es-#	1.1.1.1.
 boxeur	bOks9R	NOM	b.o.x.eu.r	b-b.o-O.x-ks.eu-9.r-R	1.1.1.0.1.
@@ -20596,7 +20596,7 @@ cartables	kaRtabl	NOM	c.a.r.t.a.b.l.es	c-k.a-a.r-R.t-t.a-a.b-b.l-l.es-#	1.1.1.1.
 carte	kaRt	NOM	c.a.r.t.e	c-k.a-a.r-R.t-t.e-#	1.1.1.1.1.
 cartel	kaRtEl	NOM	c.a.r.t.e.l	c-k.a-a.r-R.t-t.e-E.l-l	1.1.1.1.1.1.
 cartels	kaRtEl	NOM	c.a.r.t.e.l.s	c-k.a-a.r-R.t-t.e-E.l-l.s-#	1.1.1.1.1.1.1.
-carter	kaRtER	NOM	c.a.r.t.er	c-k.a-a.r-R.t-t.er-e	1.1.1.1.1.
+carter	kaRtER	NOM	c.a.r.t.E.r	c-k.a-a.r-R.t-t.e-E.r-r	1.1.1.1.1.1.
 carter	kaRte	VER	c.a.r.t.er	c-k.a-a.r-R.t-t.er-e	1.1.1.1.1.
 carterie	kaRt2Ri	NOM	c.a.r.t.e.r.i.e	c-k.a-a.r-R.t-t.e-2.r-R.i-i.e-#	1.1.1.1.0.1.1.1.
 carters	kaRtER	NOM	c.a.r.t.e.r.s	c-k.a-a.r-R.t-t.e-E.r-R.s-#	1.1.1.1.1.1.1.
@@ -29242,7 +29242,7 @@ contracterait	k§tRakt°RE	VER	c.on.t.r.a.c.t.e.r.ait	c-k.on-§.t-t.r-R.a-a.c-k.
 contractez	k§tRakte	VER	c.on.t.r.a.c.t.ez	c-k.on-§.t-t.r-R.a-a.c-k.t-t.ez-e	1.1.1.1.1.0.1.1.
 contractile	k§tRaktil	ADJ	c.on.t.r.a.c.t.i.l.e	c-k.on-§.t-t.r-R.a-a.c-k.t-t.i-i.l-l.e-#	1.1.1.1.1.0.1.1.1.1.
 contraction	k§tRaksj§	NOM	c.on.t.r.a.c.t.i.on	c-k.on-§.t-t.r-R.a-a.c-k.t-s.i-j.on-§	1.1.1.1.1.0.0.0.1.
-contractions	k§tRaksj§	NOM	c.on.t.r.a.c.t.i.on.s	c-k.on-§.t-t.r-R.a-a.c-k.t-t.i-j.on-§.s-#	1.1.1.1.1.0.1.0.1.1.
+contractions	k§tRaksj§	NOM	c.on.t.r.a.c.t.i.on.s	c-k.on-§.t-t.r-R.a-a.c-k.t-s.i-j.on-§.s-#	1.1.1.1.1.0.1.0.1.1.
 contractions	k§tRaktj§	VER	c.on.t.r.a.c.t.i.ons	c-k.on-§.t-t.r-R.a-a.c-k.t-t.i-j.ons-§	1.1.1.1.1.0.1.0.1.
 contractons	k§tRakt§	VER	c.on.t.r.a.c.t.ons	c-k.on-§.t-t.r-R.a-a.c-k.t-t.ons-§	1.1.1.1.1.0.1.1.
 contractuel	k§tRakt8El	ADJ	c.on.t.r.a.c.t.u.e.l	c-k.on-§.t-t.r-R.a-a.c-k.t-t.u-8.e-E.l-l	1.1.1.1.1.0.1.0.1.1.
@@ -29788,7 +29788,7 @@ conviendront	k§vj5dR§	VER	c.on.v.i.en.d.r.ont	c-k.on-§.v-v.i-j.en-5.d-d.r-R.o
 convienne	k§vjEn	VER	c.on.v.i.e.nn.e	c-k.on-§.v-v.i-j.e-E.nn-n.e-#	1.1.1.0.1.1.1.
 conviennent	k§vjEn	VER	c.on.v.i.e.nn.ent	c-k.on-§.v-v.i-j.e-E.nn-n.ent-#	1.1.1.0.1.1.0.
 conviens	k§vj5	VER	c.on.v.i.en.s	c-k.on-§.v-v.i-j.en-5.s-#	1.1.1.0.0.1.
-convient	k§vi	VER	c.on.v.i.en.t	c-k.on-§.v-v.i-j.en-5.t-#	1.1.1.0.0.1.
+convient	k§vi	VER	c.on.v.i.ent	c-k.on-§.v-v.i-i.ent-#	1.1.1.0.1.
 convient	k§vj5	VER	c.on.v.i.en.t	c-k.on-§.v-v.i-j.en-5.t-#	1.1.1.0.0.1.
 convier	k§vje	VER	c.on.v.i.er	c-k.on-§.v-v.i-j.er-e	1.1.1.0.1.
 conviera	k§viRa	VER	c.on.v.i.e.r.a	c-k.on-§.v-v.i-i.e-#.r-R.a-a	1.1.1.1.0.1.1.
@@ -30249,7 +30249,7 @@ cornemuse	kORn°myz	NOM	c.o.r.n.e.m.u.s.e	c-k.o-O.r-R.n-n.e-°.m-m.u-y.s-z.e-#	1
 cornemuses	kORn°myz	NOM	c.o.r.n.e.m.u.s.es	c-k.o-O.r-R.n-n.e-°.m-m.u-y.s-z.es-#	1.1.1.1.0.1.1.0.1.
 cornemuseur	kORn°myz9R	NOM	c.o.r.n.e.m.u.s.eu.r	c-k.o-O.r-R.n-n.e-°.m-m.u-y.s-z.eu-9.r-R	1.1.1.1.0.1.1.0.0.1.
 cornent	kORn	VER	c.o.r.n.ent	c-k.o-O.r-R.n-n.ent-#	1.1.1.1.0.
-corner	koRnER	NOM	c.o.r.n.er	c-k.o-o.r-R.n-n.er-e	1.0.1.1.1.
+corner	koRnER	NOM	c.o.r.n.e.r	c-k.o-o.r-R.n-n.e-E.r-R	1.0.1.1.1.1.
 corner	koRne	VER	c.o.r.n.er	c-k.o-o.r-R.n-n.er-e	1.0.1.1.1.
 corners	kORnER	NOM	c.o.r.n.e.r.s	c-k.o-O.r-R.n-n.e-E.r-R.s-#	1.1.1.1.1.1.1.
 cornes	kORn	NOM	c.o.r.n.es	c-k.o-O.r-R.n-n.es-#	1.1.1.1.1.
@@ -37401,7 +37401,7 @@ drisses	dRis	NOM	d.r.i.ss.es	d-d.r-R.i-i.ss-s.es-#	1.1.1.1.1.
 drivait	dRajvE	VER	d.r.i.v.ait	d-d.r-R.i-aj.v-v.ait-E	1.1.0.1.1.
 drivant	dRajv@	VER	d.r.i.v.ant	d-d.r-R.i-aj.v-v.ant-@	1.1.0.1.1.
 drive	dRajv	NOM	d.r.i.v.e	d-d.r-R.i-aj.v-v.e-#	1.1.0.1.1.
-driver	dRajv9R	NOM	d.r.i.v.er	d-d.r-R.i-aj.v-v.er-e	1.1.0.1.1.
+driver	dRajv9R	NOM	d.r.i.v.e.r	d-d.r-R.i-aj.v-v.e-9.r-R	1.1.0.1.0.1.
 driver	dRajve	VER	d.r.i.v.er	d-d.r-R.i-aj.v-v.er-e	1.1.0.1.1.
 drivers	dRajv9R	NOM	d.r.i.v.e.r.s	d-d.r-R.i-aj.v-v.e-9.r-R.s-#	1.1.0.1.0.1.1.
 drives	dRiv	NOM	d.r.i.v.es	d-d.r-R.i-i.v-v.es-#	1.1.1.1.1.
@@ -50956,8 +50956,8 @@ essuyé	es8ije	VER	e.ss.u.y.é	e-e.ss-s.u-8.y-ij.é-e	1.1.0.0.1.
 essuyée	es8ije	VER	e.ss.u.y.é.e	e-e.ss-s.u-8.y-ij.é-e.e-#	1.1.0.0.1.1.
 essuyées	es8ije	VER	e.ss.u.y.é.es	e-e.ss-s.u-8.y-ij.é-e.es-#	1.1.0.0.1.1.
 essuyés	es8ije	VER	e.ss.u.y.é.s	e-e.ss-s.u-8.y-ij.é-e.s-#	1.1.0.0.1.1.
-est	Est	ADJ	e.s.t	e-e.s-#.t-#	1.1.1.
-est	Est	NOM	e.s.t	e-e.s-#.t-#	1.1.1.
+est	Est	ADJ	e.s.t	e-E.s-s.t-t	1.1.1.
+est	Est	NOM	e.s.t	e-e.s-s.t-t	1.1.1.
 est	e	AUX	e.s.t	e-e.s-#.t-#	1.1.1.
 est	e	VER	e.s.t	e-e.s-#.t-#	1.1.1.
 establishment	EstabliSmEnt	NOM	e.s.t.a.b.l.i.sh.m.e.n.t	e-E.s-s.t-t.a-a.b-b.l-l.i-i.sh-S.m-m.e-E.n-n.t-t	0.0.1.1.1.1.1.1.1.1.1.0.
@@ -50990,7 +50990,7 @@ estampée	Est@pe	VER	e.s.t.am.p.é.e	e-E.s-s.t-t.am-@.p-p.é-e.e-#	0.0.1.1.1.1.1
 estancia	Est@sja	NOM	e.s.t.an.c.i.a	e-E.s-s.t-t.an-@.c-s.i-j.a-a	0.0.1.1.1.0.1.
 estancias	Est@sja	NOM	e.s.t.an.c.i.a.s	e-E.s-s.t-t.an-@.c-s.i-j.a-a.s-#	0.0.1.1.1.0.1.1.
 este	Est	NOM	e.s.t.e	e-E.s-s.t-t.e-#	0.0.1.1.
-ester	estER	NOM	e.s.t.er	e-e.s-s.t-t.er-e	1.0.1.1.
+ester	estER	NOM	e.s.t.e.r	e-e.s-s.t-t.e-E.r-R	1.0.1.1.1.
 ester	este	VER	e.s.t.er	e-e.s-s.t-t.er-e	1.0.1.1.
 estes	Est	NOM	e.s.t.es	e-E.s-s.t-t.es-#	0.0.1.1.
 esthète	EstEt	NOM	e.s.th.è.t.e	e-E.s-s.th-t.è-E.t-t.e-#	0.0.1.1.1.1.
@@ -51444,7 +51444,7 @@ exceptionnelle	EksEpsjonEl	ADJ	e.x.c.e.p.t.i.o.nn.e.ll.e	e-E.x-ks.c-#.e-E.p-p.t-
 exceptionnellement	EksEpsjonEl°m@	ADV	e.x.c.e.p.t.i.o.nn.e.ll.e.m.ent	e-E.x-ks.c-#.e-E.p-p.t-s.i-j.o-o.nn-n.e-E.ll-l.e-°.m-m.ent-@	0.1.0.1.1.0.0.0.1.1.1.0.1.1.
 exceptionnelles	EksEpsjonEl	ADJ	e.x.c.e.p.t.i.o.nn.e.ll.es	e-E.x-ks.c-#.e-E.p-p.t-s.i-j.o-o.nn-n.e-E.ll-l.es-#	0.1.0.1.1.0.0.0.1.1.1.1.
 exceptionnels	EksEpsjonEl	ADJ	e.x.c.e.p.t.i.o.nn.e.l.s	e-E.x-ks.c-#.e-E.p-p.t-s.i-j.o-o.nn-n.e-E.l-l.s-#	0.1.0.1.1.0.0.0.1.1.1.1.
-exceptions	eksEpsj§	NOM	e.x.c.e.p.t.i.on.s	e-e.x-ks.c-#.e-E.p-p.t-t.i-j.on-§.s-#	1.1.0.1.1.1.0.1.1.
+exceptions	eksEpsj§	NOM	e.x.c.e.p.t.i.on.s	e-e.x-ks.c-#.e-E.p-p.t-s.i-j.on-§.s-#	1.1.0.1.1.1.0.1.1.
 exceptions	eksEptj§	VER	e.x.c.e.p.t.i.ons	e-e.x-ks.c-#.e-E.p-p.t-t.i-j.ons-§	1.1.0.1.1.1.0.1.
 excepté	EksEpte	VER	e.x.c.e.p.t.é	e-E.x-ks.c-#.e-E.p-p.t-t.é-e	0.1.0.1.1.1.1.
 excepté	EksEpte	ADJ	e.x.c.e.p.t.é	e-E.x-ks.c-#.e-E.p-p.t-t.é-e	0.1.0.1.1.1.1.
@@ -52374,7 +52374,7 @@ expédiais	EkspedjE	VER	e.x.p.é.d.i.ais	e-E.x-ks.p-p.é-e.d-d.i-j.ais-E	0.1.1.1
 expédiait	EkspedjE	VER	e.x.p.é.d.i.ait	e-E.x-ks.p-p.é-e.d-d.i-j.ait-E	0.1.1.1.1.0.1.
 expédiant	Ekspedj@	VER	e.x.p.é.d.i.ant	e-E.x-ks.p-p.é-e.d-d.i-j.ant-@	0.1.1.1.1.0.1.
 expédie	Ekspedi	VER	e.x.p.é.d.i.e	e-E.x-ks.p-p.é-e.d-d.i-i.e-#	0.1.1.1.1.1.1.
-expédient	Ekspedj@	NOM	e.x.p.é.d.i.ent	e-e.x-ks.p-p.é-e.d-d.i-j.ent-@	1.1.1.1.1.0.1.
+expédient	Ekspedj@	NOM	e.x.p.é.d.i.ent	e-E.x-ks.p-p.é-e.d-d.i-j.ent-@	1.1.1.1.1.0.1.
 expédient	ekspedi	VER	e.x.p.é.d.i.ent	e-e.x-ks.p-p.é-e.d-d.i-i.ent-#	1.1.1.1.1.1.0.
 expédient	ekspedj@	ADJ	e.x.p.é.d.i.ent	e-e.x-ks.p-p.é-e.d-d.i-j.ent-@	1.1.1.1.1.0.1.
 expédientes	Ekspedj@t	ADJ	e.x.p.é.d.i.en.t.es	e-E.x-ks.p-p.é-e.d-d.i-j.en-@.t-t.es-#	0.1.1.1.1.0.1.1.1.
@@ -52778,7 +52778,7 @@ exécutif	Egzekytif	NOM	e.x.é.c.u.t.i.f	e-E.x-gz.é-e.c-k.u-y.t-t.i-i.f-f	0.0.1
 exécutifs	Egzekytif	ADJ	e.x.é.c.u.t.i.f.s	e-E.x-gz.é-e.c-k.u-y.t-t.i-i.f-f.s-#	0.0.1.0.1.1.1.1.1.
 exécutifs	Egzekytif	NOM	e.x.é.c.u.t.i.f.s	e-E.x-gz.é-e.c-k.u-y.t-t.i-i.f-f.s-#	0.0.1.0.1.1.1.1.1.
 exécution	Egzekysj§	NOM	e.x.é.c.u.t.i.on	e-E.x-gz.é-e.c-k.u-y.t-s.i-j.on-§	0.0.1.0.1.0.0.1.
-exécutions	egzekysj§	NOM	e.x.é.c.u.t.i.on.s	e-e.x-gz.é-e.c-k.u-y.t-t.i-j.on-§.s-#	1.0.1.0.1.1.0.1.1.
+exécutions	egzekysj§	NOM	e.x.é.c.u.t.i.on.s	e-e.x-gz.é-e.c-k.u-y.t-s.i-j.on-§.s-#	1.0.1.0.1.1.0.1.1.
 exécutions	egzekytj§	VER	e.x.é.c.u.t.i.ons	e-e.x-gz.é-e.c-k.u-y.t-t.i-j.ons-§	1.0.1.0.1.1.0.1.
 exécutive	Egzekytiv	ADJ	e.x.é.c.u.t.i.v.e	e-E.x-gz.é-e.c-k.u-y.t-t.i-i.v-v.e-#	0.0.1.0.1.1.1.1.1.
 exécutoire	EgzekytwaR	ADJ	e.x.é.c.u.t.oi.r.e	e-E.x-gz.é-e.c-k.u-y.t-t.oi-wa.r-R.e-#	0.0.1.0.1.1.1.1.1.
@@ -54413,7 +54413,7 @@ fientes	fj@t	NOM	f.i.en.t.es	f-f.i-j.en-@.t-t.es-#	1.0.1.1.1.
 fienteuse	fj@t2z	ADJ	f.i.en.t.eu.s.e	f-f.i-j.en-@.t-t.eu-2.s-z.e-#	1.0.1.1.1.0.1.
 fienteux	fj@t2	ADJ	f.i.en.t.eu.x	f-f.i-j.en-@.t-t.eu-2.x-#	1.0.1.1.1.1.
 fienté	fj@te	VER	f.i.en.t.é	f-f.i-j.en-@.t-t.é-e	1.0.1.1.1.
-fier	fjER	ADJ	f.i.er	f-f.i-j.er-e	1.0.1.
+fier	fjER	ADJ	f.i.e.r	f-f.i-j.e-E.r-R	1.0.1.1.
 fier	fje	VER	f.i.er	f-f.i-j.er-e	1.0.1.
 fiera	fiRa	VER	f.i.e.r.a	f-f.i-i.e-#.r-R.a-a	1.1.0.1.1.
 fierai	fiRE	VER	f.i.e.r.ai	f-f.i-i.e-#.r-R.ai-E	1.1.0.1.1.
@@ -54654,7 +54654,7 @@ filouteries	filut°Ri	NOM	f.i.l.ou.t.e.r.i.es	f-f.i-i.l-l.ou-u.t-t.e-°.r-R.i-i.
 filoutes	filut	VER	f.i.l.ou.t.es	f-f.i-i.l-l.ou-u.t-t.es-#	1.1.1.1.1.1.
 filouté	filute	VER	f.i.l.ou.t.é	f-f.i-i.l-l.ou-u.t-t.é-e	1.1.1.1.1.1.
 filoutés	filute	VER	f.i.l.ou.t.é.s	f-f.i-i.l-l.ou-u.t-t.é-e.s-#	1.1.1.1.1.1.1.
-fils	fil	NOM	f.i.l.s	f-f.i-i.l-#.s-s	1.1.0.0.
+fils	fil	NOM	f.i.l.s	f-f.i-i.l-l.s-#	1.1.0.1.
 fils	fis	NOM	f.i.l.s	f-f.i-i.l-#.s-s	1.1.0.0.
 filtra	filtRa	VER	f.i.l.t.r.a	f-f.i-i.l-l.t-t.r-R.a-a	1.1.1.1.1.1.
 filtrage	filtRaZ	NOM	f.i.l.t.r.a.ge	f-f.i-i.l-l.t-t.r-R.a-a.ge-Z	1.1.1.1.1.1.1.
@@ -69340,7 +69340,7 @@ insolations	5solasj§	NOM	in.s.o.l.a.t.i.on.s	in-5.s-s.o-o.l-l.a-a.t-s.i-j.on-§
 insolemment	5solam@	ADV	in.s.o.l.e.mm.ent	in-5.s-s.o-o.l-l.e-a.mm-m.ent-@	1.0.0.1.0.1.1.
 insolence	5sol@s	NOM	in.s.o.l.en.c.e	in-5.s-s.o-o.l-l.en-@.c-s.e-#	1.0.0.1.1.1.1.
 insolences	5sol@s	NOM	in.s.o.l.en.c.es	in-5.s-s.o-o.l-l.en-@.c-s.es-#	1.0.0.1.1.1.1.
-insolent	5sOl	NOM	in.s.o.l.ent	in-5.s-s.o-O.l-l.ent-@	1.0.1.1.1.
+insolent	5sOl@	NOM	in.s.o.l.ent	in-5.s-s.o-O.l-l.ent-@	1.0.1.1.1.
 insolent	5sOl	VER	in.s.o.l.ent	in-5.s-s.o-O.l-l.ent-#	1.0.1.1.0.
 insolent	5sOl@	ADJ	in.s.o.l.ent	in-5.s-s.o-O.l-l.ent-@	1.0.1.1.1.
 insolente	5sol@t	ADJ	in.s.o.l.en.t.e	in-5.s-s.o-o.l-l.en-@.t-t.e-#	1.0.0.1.1.1.1.
@@ -69419,7 +69419,7 @@ inspecteurs	5spEkt9R	NOM	in.s.p.e.c.t.eu.r.s	in-5.s-s.p-p.e-E.c-k.t-t.eu-9.r-R.s
 inspectez	5spEkte	VER	in.s.p.e.c.t.ez	in-5.s-s.p-p.e-E.c-k.t-t.ez-e	1.0.1.1.0.1.1.
 inspectiez	5spEktje	VER	in.s.p.e.c.t.i.ez	in-5.s-s.p-p.e-E.c-k.t-t.i-j.ez-e	1.0.1.1.0.1.0.1.
 inspection	5spEksj§	NOM	in.s.p.e.c.t.i.on	in-5.s-s.p-p.e-E.c-k.t-s.i-j.on-§	1.0.1.1.0.0.0.1.
-inspections	5spEksj§	NOM	in.s.p.e.c.t.i.on.s	in-5.s-s.p-p.e-E.c-k.t-t.i-j.on-§.s-#	1.0.1.1.0.1.0.1.1.
+inspections	5spEksj§	NOM	in.s.p.e.c.t.i.on.s	in-5.s-s.p-p.e-E.c-k.t-s.i-j.on-§.s-#	1.0.1.1.0.1.0.1.1.
 inspections	5spEktj§	VER	in.s.p.e.c.t.i.ons	in-5.s-s.p-p.e-E.c-k.t-t.i-j.ons-§	1.0.1.1.0.1.0.1.
 inspectons	5spEkt§	VER	in.s.p.e.c.t.ons	in-5.s-s.p-p.e-E.c-k.t-t.ons-§	1.0.1.1.0.1.1.
 inspectrice	5spEktRis	NOM	in.s.p.e.c.t.r.i.c.e	in-5.s-s.p-p.e-E.c-k.t-t.r-R.i-i.c-s.e-#	1.0.1.1.0.1.1.1.1.1.
@@ -69878,7 +69878,7 @@ intentionné	5t@sjone	ADJ	in.t.en.t.i.o.nn.é	in-5.t-t.en-@.t-s.i-j.o-o.nn-n.é-
 intentionnée	5t@sjone	ADJ	in.t.en.t.i.o.nn.é.e	in-5.t-t.en-@.t-s.i-j.o-o.nn-n.é-e.e-#	1.1.1.0.0.0.1.1.1.
 intentionnées	5t@sjone	ADJ	in.t.en.t.i.o.nn.é.es	in-5.t-t.en-@.t-s.i-j.o-o.nn-n.é-e.es-#	1.1.1.0.0.0.1.1.1.
 intentionnés	5t@sjone	ADJ	in.t.en.t.i.o.nn.é.s	in-5.t-t.en-@.t-s.i-j.o-o.nn-n.é-e.s-#	1.1.1.0.0.0.1.1.1.
-intentions	5t@sj§	NOM	in.t.en.t.i.on.s	in-5.t-t.en-@.t-t.i-j.on-§.s-#	1.1.1.1.0.1.1.
+intentions	5t@sj§	NOM	in.t.en.t.i.on.s	in-5.t-t.en-@.t-s.i-j.on-§.s-#	1.1.1.1.0.1.1.
 intentions	5t@tj§	VER	in.t.en.t.i.ons	in-5.t-t.en-@.t-t.i-j.ons-§	1.1.1.1.0.1.
 intenté	5t@te	VER	in.t.en.t.é	in-5.t-t.en-@.t-t.é-e	1.1.1.1.1.
 intentée	5t@te	VER	in.t.en.t.é.e	in-5.t-t.en-@.t-t.é-e.e-#	1.1.1.1.1.1.
@@ -70858,7 +70858,7 @@ inventiez	5v@tje	VER	in.v.en.t.i.ez	in-5.v-v.en-@.t-t.i-j.ez-e	1.1.1.1.0.1.
 inventif	5v@tif	ADJ	in.v.en.t.i.f	in-5.v-v.en-@.t-t.i-i.f-f	1.1.1.1.1.1.
 inventifs	5v@tif	ADJ	in.v.en.t.i.f.s	in-5.v-v.en-@.t-t.i-i.f-f.s-#	1.1.1.1.1.1.1.
 invention	5v@sj§	NOM	in.v.en.t.i.on	in-5.v-v.en-@.t-s.i-j.on-§	1.1.1.0.0.1.
-inventions	5v@sj§	NOM	in.v.en.t.i.on.s	in-5.v-v.en-@.t-t.i-j.on-§.s-#	1.1.1.1.0.1.1.
+inventions	5v@sj§	NOM	in.v.en.t.i.on.s	in-5.v-v.en-@.t-s.i-j.on-§.s-#	1.1.1.1.0.1.1.
 inventions	5v@tj§	VER	in.v.en.t.i.ons	in-5.v-v.en-@.t-t.i-j.ons-§	1.1.1.1.0.1.
 inventive	5v@tiv	ADJ	in.v.en.t.i.v.e	in-5.v-v.en-@.t-t.i-i.v-v.e-#	1.1.1.1.1.1.1.
 inventivité	5v@tivite	NOM	in.v.en.t.i.v.i.t.é	in-5.v-v.en-@.t-t.i-i.v-v.i-i.t-t.é-e	1.1.1.1.1.1.1.1.1.
@@ -77043,7 +77043,7 @@ manades	manad	NOM	m.a.n.a.d.es	m-m.a-a.n-n.a-a.d-d.es-#	1.1.1.1.1.1.
 manage	manaZ	VER	m.a.n.a.ge	m-m.a-a.n-n.a-a.ge-Z	1.1.1.1.1.
 manageait	manaZE	VER	m.a.n.a.ge.ait	m-m.a-a.n-n.a-a.ge-Z.ait-E	1.1.1.1.1.1.
 management	manaZ°m@	NOM	m.a.n.a.g.e.m.ent	m-m.a-a.n-n.a-a.g-Z.e-°.m-m.ent-@	1.1.1.1.1.0.1.1.
-manager	manadZ9R	NOM	m.a.n.a.g.er	m-m.a-a.n-n.a-a.g-dZ.er-e	1.1.1.1.0.1.
+manager	manadZ9R	NOM	m.a.n.a.g.e.r	m-m.a-a.n-n.a-a.g-dZ.e-9.r-R	1.1.1.1.0.1.1.
 manager	manadZe	VER	m.a.n.a.g.er	m-m.a-a.n-n.a-a.g-dZ.er-e	1.1.1.1.0.1.
 managerais	manaZ°RE	VER	m.a.n.a.g.e.r.ais	m-m.a-a.n-n.a-a.g-Z.e-°.r-R.ais-E	1.1.1.1.1.0.1.1.
 managers	manadZER	NOM	m.a.n.a.g.e.r.s	m-m.a-a.n-n.a-a.g-dZ.e-E.r-R.s-#	1.1.1.1.0.1.1.1.
@@ -79010,7 +79010,7 @@ mentionné	m@sjone	VER	m.en.t.i.o.nn.é	m-m.en-@.t-s.i-j.o-o.nn-n.é-e	1.1.0.0.0
 mentionnée	m@sjone	VER	m.en.t.i.o.nn.é.e	m-m.en-@.t-s.i-j.o-o.nn-n.é-e.e-#	1.1.0.0.0.1.1.1.
 mentionnées	m@sjone	VER	m.en.t.i.o.nn.é.es	m-m.en-@.t-s.i-j.o-o.nn-n.é-e.es-#	1.1.0.0.0.1.1.1.
 mentionnés	m@sjone	VER	m.en.t.i.o.nn.é.s	m-m.en-@.t-s.i-j.o-o.nn-n.é-e.s-#	1.1.0.0.0.1.1.1.
-mentions	m@sj§	NOM	m.en.t.i.on.s	m-m.en-@.t-t.i-j.on-§.s-#	1.1.1.0.1.1.
+mentions	m@sj§	NOM	m.en.t.i.on.s	m-m.en-@.t-s.i-j.on-§.s-#	1.1.1.0.1.1.
 mentions	m@tj§	VER	m.en.t.i.ons	m-m.en-@.t-t.i-j.ons-§	1.1.1.0.1.
 mentir	m@tiR	VER	m.en.t.i.r	m-m.en-@.t-t.i-i.r-R	1.1.1.1.1.
 mentira	m@tiRa	VER	m.en.t.i.r.a	m-m.en-@.t-t.i-i.r-R.a-a	1.1.1.1.1.1.
@@ -80210,7 +80210,7 @@ mités	mite	ADJ	m.i.t.é.s	m-m.i-i.t-t.é-e.s-#	1.1.1.1.1.
 mixage	miksaZ	NOM	m.i.x.a.ge	m-m.i-i.x-ks.a-a.ge-Z	1.1.1.1.1.
 mixait	miksE	VER	m.i.x.ait	m-m.i-i.x-ks.ait-E	1.1.1.1.
 mixe	miks	VER	m.i.x.e	m-m.i-i.x-ks.e-#	1.1.1.1.
-mixer	miks9R	NOM	m.i.x.er	m-m.i-i.x-ks.er-e	1.1.1.1.
+mixer	miks9R	NOM	m.i.x.e.r	m-m.i-i.x-ks.e-9.r-R	1.1.1.1.1.
 mixer	mikse	VER	m.i.x.er	m-m.i-i.x-ks.er-e	1.1.1.1.
 mixers	miks9R	NOM	m.i.x.e.r.s	m-m.i-i.x-ks.e-9.r-R.s-#	1.1.1.0.1.1.
 mixeur	miks9R	NOM	m.i.x.eu.r	m-m.i-i.x-ks.eu-9.r-R	1.1.1.0.1.
@@ -84752,7 +84752,7 @@ notifiée	notifje	ADJ	n.o.t.i.f.i.é.e	n-n.o-o.t-t.i-i.f-f.i-j.é-e.e-#	1.0.1.1.
 notifiées	notifje	VER	n.o.t.i.f.i.é.es	n-n.o-o.t-t.i-i.f-f.i-j.é-e.es-#	1.0.1.1.1.0.1.1.
 notifiées	notifje	ADJ	n.o.t.i.f.i.é.es	n-n.o-o.t-t.i-i.f-f.i-j.é-e.es-#	1.0.1.1.1.0.1.1.
 notion	nosj§	NOM	n.o.t.i.on	n-n.o-o.t-s.i-j.on-§	1.0.0.0.1.
-notions	nOsj§	NOM	n.o.t.i.on.s	n-n.o-O.t-t.i-j.on-§.s-#	1.1.1.0.1.1.
+notions	nOsj§	NOM	n.o.t.i.on.s	n-n.o-O.t-s.i-j.on-§.s-#	1.1.1.0.1.1.
 notions	nOtj§	VER	n.o.t.i.ons	n-n.o-O.t-t.i-j.ons-§	1.1.1.0.1.
 notoire	notwaR	ADJ	n.o.t.oi.r.e	n-n.o-o.t-t.oi-wa.r-R.e-#	1.0.1.1.1.1.
 notoirement	notwaR°m@	ADV	n.o.t.oi.r.e.m.ent	n-n.o-o.t-t.oi-wa.r-R.e-°.m-m.ent-@	1.0.1.1.1.0.1.1.
@@ -85462,7 +85462,7 @@ objectif	ObZEktif	NOM	o.b.j.e.c.t.i.f	o-O.b-b.j-Z.e-E.c-k.t-t.i-i.f-f	0.1.1.1.0.
 objectifs	ObZEktif	ADJ	o.b.j.e.c.t.i.f.s	o-O.b-b.j-Z.e-E.c-k.t-t.i-i.f-f.s-#	0.1.1.1.0.1.1.1.1.
 objectifs	ObZEktif	NOM	o.b.j.e.c.t.i.f.s	o-O.b-b.j-Z.e-E.c-k.t-t.i-i.f-f.s-#	0.1.1.1.0.1.1.1.1.
 objection	ObZEksj§	NOM	o.b.j.e.c.t.i.on	o-O.b-b.j-Z.e-E.c-k.t-s.i-j.on-§	0.1.1.1.0.0.0.1.
-objections	ObZEksj§	NOM	o.b.j.e.c.t.i.on.s	o-O.b-b.j-Z.e-E.c-k.t-t.i-j.on-§.s-#	0.1.1.1.0.1.0.1.1.
+objections	ObZEksj§	NOM	o.b.j.e.c.t.i.on.s	o-O.b-b.j-Z.e-E.c-k.t-s.i-j.on-§.s-#	0.1.1.1.0.1.0.1.1.
 objections	ObZEktj§	VER	o.b.j.e.c.t.i.ons	o-O.b-b.j-Z.e-E.c-k.t-t.i-j.ons-§	0.1.1.1.0.1.0.1.
 objectivation	ObZEktivasj§	NOM	o.b.j.e.c.t.i.v.a.t.i.on	o-O.b-b.j-Z.e-E.c-k.t-t.i-i.v-v.a-a.t-s.i-j.on-§	0.1.1.1.0.1.1.1.1.0.0.1.
 objective	ObZEktiv	ADJ	o.b.j.e.c.t.i.v.e	o-O.b-b.j-Z.e-E.c-k.t-t.i-i.v-v.e-#	0.1.1.1.0.1.1.1.1.
@@ -88260,7 +88260,7 @@ palmaire	palmER	ADJ	p.a.l.m.ai.r.e	p-p.a-a.l-l.m-m.ai-E.r-R.e-#	1.1.1.1.1.1.1.
 palmarès	palmaREs	NOM	p.a.l.m.a.r.è.s	p-p.a-a.l-l.m-m.a-a.r-R.è-E.s-s	1.1.1.1.1.1.1.0.
 palmas	palma	NOM	p.a.l.m.a.s	p-p.a-a.l-l.m-m.a-a.s-#	1.1.1.1.1.1.
 palme	palm	NOM	p.a.l.m.e	p-p.a-a.l-l.m-m.e-#	1.1.1.1.1.
-palmer	palmER	NOM	p.a.l.m.er	p-p.a-a.l-l.m-m.er-e	1.1.1.1.1.
+palmer	palmER	NOM	p.a.l.m.e.r	p-p.a-a.l-l.m-m.e-E-r-R	1.1.1.1.1.1.
 palmer	palme	VER	p.a.l.m.er	p-p.a-a.l-l.m-m.er-e	1.1.1.1.1.
 palmeraie	palm°Re	NOM	p.a.l.m.e.r.ai.e	p-p.a-a.l-l.m-m.e-°.r-R.ai-e.e-#	1.1.1.1.0.1.0.1.
 palmeraies	palm°RE	NOM	p.a.l.m.e.r.ai.es	p-p.a-a.l-l.m-m.e-°.r-R.ai-E.es-#	1.1.1.1.0.1.1.1.
@@ -93019,7 +93019,7 @@ placent	plas	VER	p.l.a.c.ent	p-p.l-l.a-a.c-s.ent-#	1.1.1.1.0.
 placenta	plas5ta	NOM	p.l.a.c.en.t.a	p-p.l-l.a-a.c-s.en-5.t-t.a-a	1.1.1.1.0.1.1.
 placentaire	plas5tER	ADJ	p.l.a.c.en.t.ai.r.e	p-p.l-l.a-a.c-s.en-5.t-t.ai-E.r-R.e-#	1.1.1.1.0.1.1.1.1.
 placentas	plas5ta	NOM	p.l.a.c.en.t.a.s	p-p.l-l.a-a.c-s.en-5.t-t.a-a.s-#	1.1.1.1.0.1.1.1.
-placer	plasER	NOM	p.l.a.c.er	p-p.l-l.a-a.c-s.er-e	1.1.1.1.1.
+placer	plasER	NOM	p.l.a.c.e.r	p-p.l-l.a-a.c-s.e-E.r-R	1.1.1.1.1.1.
 placer	plase	VER	p.l.a.c.er	p-p.l-l.a-a.c-s.er-e	1.1.1.1.1.
 placera	plas°Ra	VER	p.l.a.c.e.r.a	p-p.l-l.a-a.c-s.e-°.r-R.a-a	1.1.1.1.0.1.1.
 placerai	plas°RE	VER	p.l.a.c.e.r.ai	p-p.l-l.a-a.c-s.e-°.r-R.ai-E	1.1.1.1.0.1.1.
@@ -93884,7 +93884,7 @@ plurielle	plyRjEl	ADJ	p.l.u.r.i.e.ll.e	p-p.l-l.u-y.r-R.i-j.e-E.ll-l.e-#	1.1.1.1.
 pluriels	plyRjEl	NOM	p.l.u.r.i.e.l.s	p-p.l-l.u-y.r-R.i-j.e-E.l-l.s-#	1.1.1.1.0.1.1.1.
 plurinational	plyRinasjOnal	ADJ	p.l.u.r.i.n.a.t.i.o.n.a.l	p-p.l-l.u-y.r-R.i-i.n-n.a-a.t-s.i-j.o-O.n-n.a-a.l-l	1.1.1.1.1.1.1.0.0.1.1.1.1.
 plus	ply	VER	p.l.us	p-p.l-l.us-y	1.1.1.
-plus	ply	ADV	p.l.u.s	p-p.l-l.u-y.s-s	1.1.1.0.
+plus	ply	ADV	p.l.us	p-p.l-l.us-y	1.1.1.
 plus	ply	VER	p.l.us	p-p.l-l.us-y	1.1.1.
 plus	plys	NOM	p.l.u.s	p-p.l-l.u-y.s-s	1.1.1.0.
 plusieurs	plyzj9R	ADJ:ind	p.l.u.s.i.eu.r.s	p-p.l-l.u-y.s-z.i-j.eu-9.r-R.s-#	1.1.1.0.0.0.1.1.
@@ -94116,7 +94116,7 @@ pointe	pw5t	VER	p.oin.t.e	p-p.oin-w5.t-t.e-#	1.1.1.1.
 pointeau	pw5to	NOM	p.oin.t.eau	p-p.oin-w5.t-t.eau-o	1.1.1.1.
 pointement	pw5t°m@	NOM	p.oin.t.e.m.ent	p-p.oin-w5.t-t.e-°.m-m.ent-@	1.1.1.0.1.1.
 pointent	pw5t	VER	p.oin.t.ent	p-p.oin-w5.t-t.ent-#	1.1.1.0.
-pointer	pw5t9R	NOM	p.oin.t.er	p-p.oin-w5.t-t.er-e	1.1.1.1.
+pointer	pw5t9R	NOM	p.oin.t.e.r	p-p.oin-w5.t-t.e-9.r-R	1.1.1.1.1.
 pointer	pw5te	VER	p.oin.t.er	p-p.oin-w5.t-t.er-e	1.1.1.1.
 pointera	pw5t°Ra	VER	p.oin.t.e.r.a	p-p.oin-w5.t-t.e-°.r-R.a-a	1.1.1.0.1.1.
 pointerai	pw5t°RE	VER	p.oin.t.e.r.ai	p-p.oin-w5.t-t.e-°.r-R.ai-E	1.1.1.0.1.1.
@@ -94908,7 +94908,7 @@ portemanteau	pORt°m@to	NOM	p.o.r.t.e.m.an.t.eau	p-p.o-O.r-R.t-t.e-°.m-m.an-@.t
 portemanteaux	pORt°m@to	NOM	p.o.r.t.e.m.an.t.eau.x	p-p.o-O.r-R.t-t.e-°.m-m.an-@.t-t.eau-o.x-#	1.1.1.1.0.1.1.1.1.1.
 portement	pORt°m@	NOM	p.o.r.t.e.m.ent	p-p.o-O.r-R.t-t.e-°.m-m.ent-@	1.1.1.1.0.1.1.
 portent	pORt	VER	p.o.r.t.ent	p-p.o-O.r-R.t-t.ent-#	1.1.1.1.0.
-porter	pORtER	NOM	p.o.r.t.er	p-p.o-o.r-R.t-t.er-e	1.0.1.1.1.
+porter	pORtER	NOM	p.o.r.t.e.r	p-p.o-o.r-R.t-t.e-E.r-R	1.0.1.1.1.1.
 porter	poRte	VER	p.o.r.t.er	p-p.o-o.r-R.t-t.er-e	1.0.1.1.1.
 portera	pORt°Ra	VER	p.o.r.t.e.r.a	p-p.o-O.r-R.t-t.e-°.r-R.a-a	1.1.1.1.0.1.1.
 porterai	pORt°RE	VER	p.o.r.t.e.r.ai	p-p.o-O.r-R.t-t.e-°.r-R.ai-E	1.1.1.1.0.1.1.
@@ -95907,7 +95907,7 @@ presse	pREs	VER	p.r.e.ss.e	p-p.r-R.e-E.ss-s.e-#	1.1.1.1.1.
 pressement	pREs°m@	NOM	p.r.e.ss.e.m.ent	p-p.r-R.e-E.ss-s.e-°.m-m.ent-@	1.1.1.1.0.1.1.
 pressements	pREs°m@	NOM	p.r.e.ss.e.m.en.ts	p-p.r-R.e-E.ss-s.e-°.m-m.en-@.ts-#	1.1.1.1.0.1.1.1.
 pressens	pRes@	VER	p.r.e.ss.en.s	p-p.r-R.e-e.ss-s.en-@.s-#	1.1.0.1.1.1.
-pressent	pRes	VER	p.r.e.ss.ent	p-p.r-R.e-e.ss-s.ent-@	1.1.0.1.1.
+pressent	pRes	VER	p.r.e.ss.ent	p-p.r-R.e-e.ss-s.ent-#	1.1.0.1.1.
 pressent	pRes@	VER	p.r.e.ss.ent	p-p.r-R.e-e.ss-s.ent-@	1.1.0.1.1.
 pressentaient	pRes@tE	VER	p.r.e.ss.en.t.aient	p-p.r-R.e-e.ss-s.en-@.t-t.aient-E	1.1.0.1.1.1.1.
 pressentais	pRes@tE	VER	p.r.e.ss.en.t.ais	p-p.r-R.e-e.ss-s.en-@.t-t.ais-E	1.1.0.1.1.1.1.
@@ -101943,7 +101943,7 @@ rangement	R@Z°m@	NOM	r.an.g.e.m.ent	r-R.an-@.g-Z.e-°.m-m.ent-@	1.1.1.0.1.1.
 rangements	R@Z°m@	NOM	r.an.g.e.m.en.ts	r-R.an-@.g-Z.e-°.m-m.en-@.ts-#	1.1.1.0.1.1.1.
 rangent	R@Z	VER	r.an.g.ent	r-R.an-@.g-Z.ent-#	1.1.1.0.
 rangeons	R@Z§	VER	r.an.ge.ons	r-R.an-@.ge-Z.ons-§	1.1.1.1.
-ranger	R@ZER	NOM	r.an.g.er	r-R.an-@.g-Z.er-e	1.1.1.1.
+ranger	R@ZER	NOM	r.an.g.e.r	r-R.an-@.g-Z.e-E.r-R	1.1.1.1.1.
 ranger	R@Ze	VER	r.an.g.er	r-R.an-@.g-Z.er-e	1.1.1.1.
 rangera	R@Z°Ra	VER	r.an.g.e.r.a	r-R.an-@.g-Z.e-°.r-R.a-a	1.1.1.0.1.1.
 rangerai	R@Z°RE	VER	r.an.g.e.r.ai	r-R.an-@.g-Z.e-°.r-R.ai-E	1.1.1.0.1.1.
@@ -102536,7 +102536,7 @@ rationné	Rasjone	VER	r.a.t.i.o.nn.é	r-R.a-a.t-s.i-j.o-o.nn-n.é-e	1.1.0.0.0.1.
 rationnée	Rasjone	VER	r.a.t.i.o.nn.é.e	r-R.a-a.t-s.i-j.o-o.nn-n.é-e.e-#	1.1.0.0.0.1.1.1.
 rationnées	Rasjone	VER	r.a.t.i.o.nn.é.es	r-R.a-a.t-s.i-j.o-o.nn-n.é-e.es-#	1.1.0.0.0.1.1.1.
 rationnés	Rasjone	VER	r.a.t.i.o.nn.é.s	r-R.a-a.t-s.i-j.o-o.nn-n.é-e.s-#	1.1.0.0.0.1.1.1.
-rations	Rasj§	NOM	r.a.t.i.on.s	r-R.a-a.t-t.i-j.on-§.s-#	1.1.1.0.1.1.
+rations	Rasj§	NOM	r.a.t.i.on.s	r-R.a-a.t-s.i-j.on-§.s-#	1.1.1.0.1.1.
 rations	Ratj§	VER	r.a.t.i.ons	r-R.a-a.t-t.i-j.ons-§	1.1.1.0.1.
 ratissa	Ratisa	VER	r.a.t.i.ss.a	r-R.a-a.t-t.i-i.ss-s.a-a	1.1.1.1.1.1.
 ratissage	RatisaZ	NOM	r.a.t.i.ss.a.ge	r-R.a-a.t-t.i-i.ss-s.a-a.ge-Z	1.1.1.1.1.1.1.
@@ -104981,7 +104981,7 @@ relationnel	R°lasjonEl	ADJ	r.e.l.a.t.i.o.nn.e.l	r-R.e-°.l-l.a-a.t-s.i-j.o-o.nn
 relationnelle	R°lasjonEl	ADJ	r.e.l.a.t.i.o.nn.e.ll.e	r-R.e-°.l-l.a-a.t-s.i-j.o-o.nn-n.e-E.ll-l.e-#	1.0.1.1.0.0.0.1.1.1.1.
 relationnelles	R°lasjonEl	ADJ	r.e.l.a.t.i.o.nn.e.ll.es	r-R.e-°.l-l.a-a.t-s.i-j.o-o.nn-n.e-E.ll-l.es-#	1.0.1.1.0.0.0.1.1.1.1.
 relationnels	R°lasjonEl	ADJ	r.e.l.a.t.i.o.nn.e.l.s	r-R.e-°.l-l.a-a.t-s.i-j.o-o.nn-n.e-E.l-l.s-#	1.0.1.1.0.0.0.1.1.1.1.
-relations	R2lasj§	NOM	r.e.l.a.t.i.on.s	r-R.e-2.l-l.a-a.t-t.i-j.on-§.s-#	1.0.1.1.1.0.1.1.
+relations	R2lasj§	NOM	r.e.l.a.t.i.on.s	r-R.e-2.l-l.a-a.t-s.i-j.on-§.s-#	1.0.1.1.1.0.1.1.
 relations	R2latj§	VER	r.e.l.a.t.i.ons	r-R.e-2.l-l.a-a.t-t.i-j.ons-§	1.0.1.1.1.0.1.
 relative	R°lativ	ADJ	r.e.l.a.t.i.v.e	r-R.e-°.l-l.a-a.t-t.i-i.v-v.e-#	1.0.1.1.1.1.1.1.
 relative	R°lativ	NOM	r.e.l.a.t.i.v.e	r-R.e-°.l-l.a-a.t-t.i-i.v-v.e-#	1.0.1.1.1.1.1.1.
@@ -106813,7 +106813,7 @@ reportant	R°pORt@	VER	r.e.p.o.r.t.ant	r-R.e-°.p-p.o-O.r-R.t-t.ant-@	1.0.1.1.1.
 reporte	R°pORt	VER	r.e.p.o.r.t.e	r-R.e-°.p-p.o-O.r-R.t-t.e-#	1.0.1.1.1.1.1.
 reportent	R°pORt	VER	r.e.p.o.r.t.ent	r-R.e-°.p-p.o-O.r-R.t-t.ent-#	1.0.1.1.1.1.0.
 reporter	R°pORte	ADJ	r.e.p.o.r.t.er	r-R.e-°.p-p.o-o.r-R.t-t.er-e	1.0.1.0.1.1.1.
-reporter	R°poRtER	NOM	r.e.p.o.r.t.er	r-R.e-°.p-p.o-o.r-R.t-t.er-e	1.0.1.0.1.1.1.
+reporter	R°poRtER	NOM	r.e.p.o.r.t.e.r	r-R.e-°.p-p.o-o.r-R.t-t.e-E.r-R	1.0.1.0.1.1.1.1.
 reporter	R°poRte	VER	r.e.p.o.r.t.er	r-R.e-°.p-p.o-o.r-R.t-t.er-e	1.0.1.0.1.1.1.
 reportera	R°pORt°Ra	VER	r.e.p.o.r.t.e.r.a	r-R.e-°.p-p.o-O.r-R.t-t.e-°.r-R.a-a	1.0.1.1.1.1.0.1.1.
 reporterai	R°pORt°RE	VER	r.e.p.o.r.t.e.r.ai	r-R.e-°.p-p.o-O.r-R.t-t.e-°.r-R.ai-E	1.0.1.1.1.1.0.1.1.
@@ -113247,9 +113247,6 @@ rôtissoires	RotiswaR	NOM	r.ô.t.i.ss.oi.r.es	r-R.ô-o.t-t.i-i.ss-s.oi-wa.r-R.es
 rôtit	Roti	VER	r.ô.t.it	r-R.ô-o.t-t.it-i	1.1.1.1.
 rôts	Ro	NOM	r.ô.ts	r-R.ô-o.ts-#	1.1.1.
 röntgens	R2ntgEns	NOM	r.ö.n.t.g.e.n.s	r-R.ö-2.n-n.t-t.g-g.e-E.n-n.s-s	1.1.1.1.0.1.1.0.
-s	Es	CON	s	s-#	0
-s	Es	NOM	s	s-#	0
-s	Es	PRO:per	s	s-#	0
 s'	s	NOM	s.'	s-s.'-#	1.1.
 s'	s	CON	s.'	s-s.'-#	1.1.
 s'	s	PRO:per	s.'	s-s.'-#	1.1.
@@ -114819,7 +114816,7 @@ scannage	skanaZ	NOM	s.c.a.nn.a.ge	s-s.c-k.a-a.nn-n.a-a.ge-Z	1.0.1.1.1.1.
 scannais	skanE	VER	s.c.a.nn.ais	s-s.c-k.a-a.nn-n.ais-E	1.0.1.1.1.
 scanne	skan	VER	s.c.a.nn.e	s-s.c-k.a-a.nn-n.e-#	1.0.1.1.1.
 scannent	skan	VER	s.c.a.nn.ent	s-s.c-k.a-a.nn-n.ent-#	1.0.1.1.0.
-scanner	skanER	NOM	s.c.a.nn.er	s-s.c-k.a-a.nn-n.er-e	1.0.1.1.1.
+scanner	skanER	NOM	s.c.a.nn.e.r	s-s.c-k.a-a.nn-n.e-E.r-R	1.0.1.1.1.
 scanner	skane	VER	s.c.a.nn.er	s-s.c-k.a-a.nn-n.er-e	1.0.1.1.1.
 scannera	skan°Ra	VER	s.c.a.nn.e.r.a	s-s.c-k.a-a.nn-n.e-°.r-R.a-a	1.0.1.1.0.1.1.
 scanneront	skan°R§	VER	s.c.a.nn.e.r.ont	s-s.c-k.a-a.nn-n.e-°.r-R.ont-§	1.0.1.1.0.1.1.
@@ -117366,7 +117363,7 @@ somnolant	sOmnol@	VER	s.o.m.n.o.l.ant	s-s.o-O.m-m.n-n.o-o.l-l.ant-@	1.1.1.1.0.1.
 somnole	sOmnOl	VER	s.o.m.n.o.l.e	s-s.o-O.m-m.n-n.o-O.l-l.e-#	1.1.1.1.1.1.1.
 somnolence	sOmnol@s	NOM	s.o.m.n.o.l.en.c.e	s-s.o-O.m-m.n-n.o-o.l-l.en-@.c-s.e-#	1.1.1.1.0.1.1.1.1.
 somnolences	sOmnol@s	NOM	s.o.m.n.o.l.en.c.es	s-s.o-O.m-m.n-n.o-o.l-l.en-@.c-s.es-#	1.1.1.1.0.1.1.1.1.
-somnolent	sOmnOl@	ADJ	s.o.m.n.o.l.ent	s-s.o-o.m-m.n-n.o-O.l-l.ent-#	1.0.1.1.1.1.0.
+somnolent	sOmnOl@	ADJ	s.o.m.n.o.l.ent	s-s.o-o.m-m.n-n.o-O.l-l.ent-@	1.0.1.1.1.1.0.
 somnolent	somnOl	VER	s.o.m.n.o.l.ent	s-s.o-o.m-m.n-n.o-O.l-l.ent-#	1.0.1.1.1.1.0.
 somnolente	sOmnol@t	ADJ	s.o.m.n.o.l.en.t.e	s-s.o-O.m-m.n-n.o-o.l-l.en-@.t-t.e-#	1.1.1.1.0.1.1.1.1.
 somnolentes	sOmnol@t	ADJ	s.o.m.n.o.l.en.t.es	s-s.o-O.m-m.n-n.o-o.l-l.en-@.t-t.es-#	1.1.1.1.0.1.1.1.1.
@@ -118712,7 +118709,7 @@ sprinta	spRinta	VER	s.p.r.i.n.t.a	s-s.p-p.r-R.i-i.n-n.t-t.a-a	1.1.1.1.1.1.1.
 sprintait	spRintE	VER	s.p.r.i.n.t.ait	s-s.p-p.r-R.i-i.n-n.t-t.ait-E	1.1.1.1.1.1.1.
 sprintant	spRint@	VER	s.p.r.i.n.t.ant	s-s.p-p.r-R.i-i.n-n.t-t.ant-@	1.1.1.1.1.1.1.
 sprinte	spRint	VER	s.p.r.i.n.t.e	s-s.p-p.r-R.i-i.n-n.t-t.e-#	1.1.1.1.1.1.1.
-sprinter	spRint9R	NOM	s.p.r.i.n.t.er	s-s.p-p.r-R.i-i.n-n.t-t.er-e	1.1.1.1.1.1.1.
+sprinter	spRint9R	NOM	s.p.r.i.n.t.e.r	s-s.p-p.r-R.i-i.n-n.t-t.e-9.r-R	1.1.1.1.1.1.0.1.
 sprinter	spRinte	VER	s.p.r.i.n.t.er	s-s.p-p.r-R.i-i.n-n.t-t.er-e	1.1.1.1.1.1.1.
 sprinters	spRint9R	NOM	s.p.r.i.n.t.e.r.s	s-s.p-p.r-R.i-i.n-n.t-t.e-9.r-R.s-#	1.1.1.1.1.1.0.1.1.
 sprinteur	spRint9R	NOM	s.p.r.i.n.t.eu.r	s-s.p-p.r-R.i-i.n-#.t-t.eu-9.r-R	1.1.1.1.0.1.0.1.
@@ -120472,7 +120469,7 @@ supportait	sypORtE	VER	s.u.pp.o.r.t.ait	s-s.u-y.pp-p.o-O.r-R.t-t.ait-E	1.1.1.1.1
 supportant	sypORt@	VER	s.u.pp.o.r.t.ant	s-s.u-y.pp-p.o-O.r-R.t-t.ant-@	1.1.1.1.1.1.1.
 supporte	sypORt	VER	s.u.pp.o.r.t.e	s-s.u-y.pp-p.o-O.r-R.t-t.e-#	1.1.1.1.1.1.1.
 supportent	sypORt	VER	s.u.pp.o.r.t.ent	s-s.u-y.pp-p.o-O.r-R.t-t.ent-#	1.1.1.1.1.1.0.
-supporter	sypoRt9R	NOM	s.u.pp.o.r.t.er	s-s.u-y.pp-p.o-o.r-R.t-t.er-e	1.1.1.0.1.1.1.
+supporter	sypoRt9R	NOM	s.u.pp.o.r.t.e.r	s-s.u-y.pp-p.o-o.r-R.t-t.e-9.r-R	1.1.1.0.1.1.0.1.
 supporter	sypoRte	VER	s.u.pp.o.r.t.er	s-s.u-y.pp-p.o-o.r-R.t-t.er-e	1.1.1.0.1.1.1.
 supportera	sypORt°Ra	VER	s.u.pp.o.r.t.e.r.a	s-s.u-y.pp-p.o-O.r-R.t-t.e-°.r-R.a-a	1.1.1.1.1.1.0.1.1.
 supporterai	sypORt°RE	VER	s.u.pp.o.r.t.e.r.ai	s-s.u-y.pp-p.o-O.r-R.t-t.e-°.r-R.ai-E	1.1.1.1.1.1.0.1.1.
@@ -121980,7 +121977,7 @@ sélectionnées	selEksjone	ADJ	s.é.l.e.c.t.i.o.nn.é.es	s-s.é-e.l-l.e-E.c-k.t-
 sélectionnés	selEksjone	VER	s.é.l.e.c.t.i.o.nn.é.s	s-s.é-e.l-l.e-E.c-k.t-s.i-j.o-o.nn-n.é-e.s-#	1.1.1.1.0.0.0.0.1.1.1.
 sélectionnés	selEksjone	ADJ	s.é.l.e.c.t.i.o.nn.é.s	s-s.é-e.l-l.e-E.c-k.t-s.i-j.o-o.nn-n.é-e.s-#	1.1.1.1.0.0.0.0.1.1.1.
 sélectionnés	selEksjone	NOM	s.é.l.e.c.t.i.o.nn.é.s	s-s.é-e.l-l.e-E.c-k.t-s.i-j.o-o.nn-n.é-e.s-#	1.1.1.1.0.0.0.0.1.1.1.
-sélections	selEksj§	NOM	s.é.l.e.c.t.i.on.s	s-s.é-e.l-l.e-E.c-k.t-t.i-j.on-§.s-#	1.1.1.1.0.1.0.1.1.
+sélections	selEksj§	NOM	s.é.l.e.c.t.i.on.s	s-s.é-e.l-l.e-E.c-k.t-s.i-j.on-§.s-#	1.1.1.1.0.1.0.1.1.
 sélections	selEktj§	VER	s.é.l.e.c.t.i.ons	s-s.é-e.l-l.e-E.c-k.t-t.i-j.ons-§	1.1.1.1.0.1.0.1.
 sélective	selEktiv	ADJ	s.é.l.e.c.t.i.v.e	s-s.é-e.l-l.e-E.c-k.t-t.i-i.v-v.e-#	1.1.1.1.0.1.1.1.1.
 sélectivement	selEktiv°m@	ADV	s.é.l.e.c.t.i.v.e.m.ent	s-s.é-e.l-l.e-E.c-k.t-t.i-i.v-v.e-°.m-m.ent-@	1.1.1.1.0.1.1.1.0.1.1.
@@ -131006,7 +131003,7 @@ viole	vjOl	VER	v.i.o.l.e	v-v.i-j.o-O.l-l.e-#	1.0.1.1.1.
 violemment	vjolam@	ADV	v.i.o.l.e.mm.ent	v-v.i-j.o-o.l-l.e-a.mm-m.ent-@	1.0.0.1.0.1.1.
 violence	vjol@s	NOM	v.i.o.l.en.c.e	v-v.i-j.o-o.l-l.en-@.c-s.e-#	1.0.0.1.1.1.1.
 violences	vjol@s	NOM	v.i.o.l.en.c.es	v-v.i-j.o-o.l-l.en-@.c-s.es-#	1.0.0.1.1.1.1.
-violent	vjOl	NOM	v.i.o.l.ent	v-v.i-j.o-o.l-l.ent-@	1.0.0.1.1.
+violent	vjOl@	NOM	v.i.o.l.ent	v-v.i-j.o-o.l-l.ent-@	1.0.0.1.1.
 violent	vjOl	VER	v.i.o.l.ent	v-v.i-j.o-O.l-l.ent-#	1.0.1.1.0.
 violent	vjol@	ADJ	v.i.o.l.ent	v-v.i-j.o-o.l-l.ent-@	1.0.0.1.1.
 violentaient	vjol@tE	VER	v.i.o.l.en.t.aient	v-v.i-j.o-o.l-l.en-@.t-t.aient-E	1.0.0.1.1.1.1.
@@ -134332,7 +134329,7 @@ zézettes	zezEt	NOM	z.é.z.e.tt.es	z-z.é-e.z-z.e-E.tt-t.es-#	1.1.1.1.1.1.
 éditeur	edit9R	NOM	é.d.i.t.eu.r	é-e.d-d.i-i.t-t.eu-9.r-R	1.1.1.1.0.1.
 éditeurs	edit9R	NOM	é.d.i.t.eu.r.s	é-e.d-d.i-i.t-t.eu-9.r-R.s-#	1.1.1.1.0.1.1.
 édition	edisj§	NOM	é.d.i.t.i.on	é-e.d-d.i-i.t-s.i-j.on-§	1.1.1.0.0.1.
-éditions	edisj§	NOM	é.d.i.t.i.on.s	é-e.d-d.i-i.t-t.i-j.on-§.s-#	1.1.1.1.0.1.1.
+éditions	edisj§	NOM	é.d.i.t.i.on.s	é-e.d-d.i-i.t-s.i-j.on-§.s-#	1.1.1.1.0.1.1.
 éditions	editj§	VER	é.d.i.t.i.ons	é-e.d-d.i-i.t-t.i-j.ons-§	1.1.1.1.0.1.
 édito	edito	NOM	é.d.i.t.o	é-e.d-d.i-i.t-t.o-o	1.1.1.1.1.
 éditons	edit§	VER	é.d.i.t.ons	é-e.d-d.i-i.t-t.ons-§	1.1.1.1.1.
