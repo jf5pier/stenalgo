@@ -84,6 +84,8 @@ class Word:
     #orthosyll_cv : [str]
 
     def __post_init__(self) :
+        self.syll_cv = deepcopy([])
+        self.orthosyll_cv = deepcopy([])
         self.orig_syll = deepcopy(self.syll)
         self.orig_cv_cv = deepcopy(self.cv_cv)
         self.fix_x_k_s()
@@ -118,15 +120,6 @@ class Word:
             self.syll = self.syll[0:pos] + "-dZ" + self.syll[pos+3:]
             self.cv_cv= self.cv_cv[0:pos] + "-CC"+ self.cv_cv[pos+3:]  # "*C-C*" becomes "*-CC*"
             self.fix_j_dZ() #recurse if there is more than one
-
-    def fix_5_n_5(self) :
-        # bienheureuse b-b.i-j.en-5n.h-#.eu-2.r-R.eu-2.s-z.e-# bj5-n2-R2z CYV-CV-CVC
-        if self.isWellFormedCVSyll() and  "5-n" in self.syll :
-            printVerbose(self.word, ["fix_5_n_5"])
-            pos = self.syll.index("5-n")
-            self.syll = self.syll[0:pos] + "5n-" + self.syll[pos+3:]
-            self.cv_cv= self.cv_cv[0:pos] + "VC-"+ self.cv_cv[pos+3:]  # "*V-C*" becomes "*VC-*"
-            self.fix_5_n_5() #recurse if there is more than one
 
     def fix_ch_tS(self) :
         # machos m-m.a-a.ch-tS.o-o.s-# mat-So mat-So CVC-CV CVC-C
@@ -176,12 +169,24 @@ class Word:
                     graphem_phoneme[pos+len(badAsso):]
         return graphem_phoneme
 
+    def phonemesToSyllables(self) : 
+        return [".".join(syll) for syll in self.syll_cv]
+
+    def lettersToSyllables(self) : 
+        return ["".join(map(lambda cv_lett: cv_lett[1], syll)) for syll in self.orthosyll_cv]
+
+    def syllablesToWord(self) :
+        return "".join(self.phonemesToSyllables())
 
     def breakdownSyllables(self, graphem_phoneme : str):
         # Uses the CV-CV breakdown of phonemes from Lexique with the grapheme-phoneme decomposition of 
         #  LexiqueInfra to find the graphemes parts of each syllable
-        self.syll_cv = []
-        self.orthosyll_cv = []
+        if self.syll_cv != [] or self.orthosyll_cv != [] :
+            #print("Word ", self.word, "is already already broke down")
+            #print(self.syllablesToWord())
+            #print(self.syll_cv, self.orthosyll_cv)
+            #print(graphem_phoneme)
+            return
         syll_phon = []
         syll_graph = []
         semi_vowel_liaison = False
@@ -200,13 +205,6 @@ class Word:
                     printVerbose(self.word,[ syllNb,cv_syll,cvNb,cv_phoneme, "\n",\
                             "g/p:", graph_phon_pairs[0][0],graph_phon_pairs[0][1], "\n",\
                             "skip Y/C:", skip_next_Y, skip_next_C])
-                    #if cv_phoneme == "Y" and graph_phon_pairs[0][1] in ["wa"]:
-                    #    if len(cv_split) < syllNb - 1 and cv_split[syllNb+1][0] == "Y":
-                    #        semi_vowel_liaison = True
-                    #    continue 
-                    #if cv_phoneme == "Y" and semi_vowel_liaison :
-                    #    semi_vowel_liaison = False
-                    #    continue
                     if cv_phoneme == "C" :
                         if skip_next_C :
                             skip_next_C = False
@@ -219,15 +217,6 @@ class Word:
                                 graph_phon_pairs[0][1] in ["ks", "gz"]:
                             #ajax  a.j.a.x a-a.j-Z.a-a.x-ks a-Zaks V-CVCC
                             skip_next_C = True
-                            #if cvNb == len(cv_syll) - 2  and cv_syll[cvNb+1] == "C": # next phoneme in syll is 's' of 'ks' 
-                            #    skip_next_C = True
-                            #elif False and cvNb < len(cv_syll) - 2  and cv_syll[cvNb+1] == "C" :
-                            #    #ambidextre am-@.b-b.i-i.d-d.e-E.x-ks.t-t.r-R.e-# @-bi-dEkstR V-CV-CVCCCC
-                            #    if cv_syll[cvNb+2] == "C": # next phoneme after "ks" is a consonant 
-                            #        skip_next_C = True
-                            #    #antimarxiste an-@.t-t.i-i.m-m.a-a.r-R.x-ks.i-i.s-s.t-t.e-# @-ti-maR-ksist V-CV-CVC-CCVCC
-                            #    elif cv_syll[cvNb+2] == "V" :
-                            #        skip_next_C = True
                             printVerbose(self.word,["x: skip_next_C " , skip_next_C])
                         elif graph_phon_pairs[0][0] in ["g", "j"] and graph_phon_pairs[0][1] == "dZ":
                             #adagio a-a.d-d.a-a.g-dZ.i-j.o-o a-da-dZjo V-CV-CCYV after fix
@@ -237,14 +226,12 @@ class Word:
                             #appropriation a-a.pp-p.r-R.o-o.p-p.r-R.i-ij.a-a.t-s.i-j.on-§ a-pRo-pRi-ja-sj§ V-CCV-CCV-YV-CYV
                             skip_next_C = True
                                 
-                                #continue #Skip the first symbol "k" in x = ks
-                            
                     if cv_phoneme == "V" :
                         while graph_phon_pairs[0][1] == "#" :
                             printVerbose(self.word,["Pop # in V"])
                             graph_phon = graph_phon_pairs.pop(0)
-                            syll_phon.append( graph_phon[0] )
-                            syll_graph.append( ("#", graph_phon[1]) )
+                            syll_phon.append( graph_phon[1] )
+                            syll_graph.append( ("#", graph_phon[0]) )
                         #appropriation a-a.pp-p.r-R.o-o.p-p.r-R.i-ij.a-a.t-s.i-j.on-§ a-pRo-pRi-ja-sj§ V-CCV-CCV-YV-CYV
                         #balaye b-b.a-a.l-l.ay-Ej.e-# ba-lEj CV-CVY
                         if graph_phon_pairs[0][1] in ["ij", "Ej"]:
@@ -255,8 +242,8 @@ class Word:
                             printVerbose(self.word,["Pop # in Y"])
                             #admixtion a-a.d-d.m-m.i-i.x-ks.t-#.i-j.on-§
                             graph_phon = graph_phon_pairs.pop(0)
-                            syll_phon.append( graph_phon[0] )
-                            syll_graph.append( ("#", graph_phon[1]) )
+                            syll_phon.append( graph_phon[1] )
+                            syll_graph.append( ("#", graph_phon[0]) )
                             if len(graph_phon_pairs) == 0 : 
                                 return
                         if graph_phon_pairs[0][0] not in ["i", "ll", "o", "y", "u", "ill", \
@@ -269,18 +256,7 @@ class Word:
                             # Rare english words and other exceptions
                             printVerbose(self.word,["skip next Y of", graph_phon_pairs[0]])
                             continue
-                        #Some semi-vowel Y in Lexique are superflous because their vowel is already
-                        #assigned to a V matched to a graphem-phonem in LexiqueInfra
-                        #if graph_phon_pairs[0][0] in ["oi", "o", "oin", "oî"] :
-                        #    # le Y /j/ dans a-ba-ttoir , a-bo-ya, a-ccoin-tance
-                        #    continue
-                        #if graph_phon_pairs[0][0] in ["ez", "ons"]:
-                        #    # le Y /j/ dans ab-sou-dri-ez, a-cca-bli-ons
-                        #    continue 
 
-
-                    #if cv_phoneme == "Y" and graph_phon_pairs[0][1] not in ["j","8"]:
-                    #    continue 
                     if len(graph_phon_pairs) > 0 :
                         graph_phon = graph_phon_pairs.pop(0)
                         if graph_phon[1] == "Ej"  and cvNb <= len(cv_syll) - 2  \
@@ -293,14 +269,16 @@ class Word:
                         #silent phonemes are not matched by a cv_phoneme
                         while graph_phon[1] == "#" :
                             printVerbose(self.word,["Pop # at end"])
-                            syll_phon.append( graph_phon[0] )
-                            syll_graph.append( ("#", graph_phon[1]) )
+                            syll_phon.append( graph_phon[1] )
+                            syll_graph.append( ("#", graph_phon[0]) )
                             graph_phon = graph_phon_pairs.pop(0)
                         syll_graph.append( (cv_phoneme, graph_phon[0]) )
                         syll_phon.append( graph_phon[1] )
                     printVerbose(self.word,["appended g/p ", syll_graph, syll_phon])
                     if len(graph_phon_pairs) == 0 :
                         printVerbose(self.word,["no more graph/phon"])
+                        self.syll_cv.append(syll_phon)
+                        self.orthosyll_cv.append(syll_graph)
                         return
 
                 self.syll_cv.append(syll_phon)
@@ -308,8 +286,8 @@ class Word:
                 #Append silent phonemes to end of previous syllable
                 while len(graph_phon_pairs) > 0 and graph_phon_pairs[0][1] == "#" :
                     graph_phon = graph_phon_pairs.pop(0)
-                    self.syll_cv[-1].append( ("#", graph_phon[0]) )
-                    self.orthosyll_cv[-1].append( graph_phon[1] )
+                    self.syll_cv[-1].append( graph_phon[1] )
+                    self.orthosyll_cv[-1].append( ("#", graph_phon[0]) )
                 if len(graph_phon_pairs) == 0 :
                     printVerbose(self.word,["no more graph/phon"])
                     return
@@ -317,17 +295,17 @@ class Word:
             if len(graph_phon_pairs) > 0 :
                 print("Left-over graphem-phoneme not assigned")
                 print(self.word, graphem_phoneme, self.syll, self.cv_cv)
-                #print(self.syll_cv)
-                #print(self.orthosyll_cv, "extra:", graph_phon_pairs)
-                #sys.exit(1)
+                print(self.syll_cv)
+                print(self.orthosyll_cv, "extra:", graph_phon_pairs)
+                sys.exit(1)
         #if False:
         except Exception as e :
             print(e)
             print(self.word, graphem_phoneme, self.orig_syll, self.syll, self.orig_cv_cv, self.cv_cv)
-            #print(self.syll_cv)
-            #print(self.orthosyll_cv)
-            #print(syll_phon, syll_graph, "extra:", graph_phon_pairs)
-            #sys.exit(1)
+            print(self.syll_cv)
+            print(self.orthosyll_cv)
+            print(syll_phon, syll_graph, "extra:", graph_phon_pairs)
+            sys.exit(1)
         return
 
     def isWellFormedCVSyll(self):
@@ -511,8 +489,10 @@ class Dictionary:
                     word = Word(word = corpus_word["ortho"],
                             phonology = corpus_word["phon"],
                             lemme = corpus_word["lemme"],
-                            gram_cat = GramCat[corpus_word["cgram"]] if corpus_word["cgram"] != '' else None,
-                            ortho_gram_cat = [GramCat[gc] for gc in corpus_word["cgramortho"].split(",")],
+                            gram_cat = GramCat[corpus_word["cgram"]] if \
+                                    corpus_word["cgram"] != '' else None,
+                            ortho_gram_cat = [GramCat[gc] for gc in \
+                                    corpus_word["cgramortho"].split(",")],
                             gender = corpus_word["genre"],
                             number = corpus_word["nombre"],
                             info_verb = corpus_word["infover"],
@@ -522,7 +502,8 @@ class Dictionary:
                             frequency = float(corpus_word["freqlivres"])
                             )
                     self.words.append(word)
-                    same_ortho = self.words_by_ortho.get(corpus_word["ortho"], []) + [word]
+                    same_ortho = self.words_by_ortho.get(corpus_word["ortho"], 
+                                                         deepcopy([])) + [word]
                     self.words_by_ortho[corpus_word["ortho"]] = same_ortho
         self.breakdownSyllables()
         return self.words
@@ -536,6 +517,8 @@ class Dictionary:
                     for word in corpus_words : 
                         if word.phonology == asso_word["phono"]:
                             word.breakdownSyllables(asso_word["assoc"])
+                            #print("bd: ",  asso_word["item"], asso_word["phono"], 
+                            #      word.word, word.phonology, word.syllablesToWord())
 
 
         return
@@ -553,8 +536,9 @@ class Dictionary:
                 for (syllable_name, spelling) in zip(syllable_names, spellings): 
                     syllable = self.sylCol.updateSyllable(syllable_name, spelling, word.frequency)
 
-        Syllable.printTopPhonemes(1)
-        self.sylCol.printTopSyllables(1)
-        print(len(self.mismatchSyllableSpelling))
+        Syllable.printTopPhonemes(5)
+        self.sylCol.printTopSyllables(5)
+        print("Nb Mismatched", len(self.mismatchSyllableSpelling))
+        print("Nb broken down", len(list(filter(lambda w: w.orthosyll_cv != [], self.words))))
 
 Dictionary().analyseFrequencies()
