@@ -25,10 +25,10 @@ ignoredList = ["ausweis", "beagle", "beagles", "bintje", "borchtch",  #Mots étr
         "whig", "whigs", "whipcord", "whiskey", "whiskies", "whiskys", "whist", "whisky",
         "winchesters" ] + ["autocritiquer", "fjord",  
         "jungien", "jungiens", "mails", "fjords", "sprinteurs", "pierreries", "quidams",
-        "requiems", "revoyure", "suppliât", "voyoute", "voyoutisme", "voyouterie", 
-        "voyoutes", "voyoucratie", "voyous"] 
+        "requiems",  "suppliât"]  
 
 def printVerbose(word : str,msg : list) :
+    #return
     if word in [] :
         print(word, " :\n", " ".join(map(str,msg)))
 
@@ -192,8 +192,8 @@ class Word:
         semi_vowel_liaison = False
         skip_next_Y = False
         skip_next_C = False
-        #if True:
-        try :   
+        if True:
+        #try :   
             graphem_phoneme = Word.fixLexiqueInfraGraphPhon(graphem_phoneme)
             graph_phon_pairs = [(gp.split("-")[0], gp.split("-")[1]) for gp in graphem_phoneme.split(".")]
             cv_split = self.cv_cv.split("-")
@@ -232,6 +232,11 @@ class Word:
                             graph_phon = graph_phon_pairs.pop(0)
                             syll_phon.append( graph_phon[1] )
                             syll_graph.append( ("#", graph_phon[0]) )
+                            if len(graph_phon_pairs) == 0 :
+                                printVerbose(self.word,["no more graph/phon"])
+                                self.syll_cv.append(syll_phon)
+                                self.orthosyll_cv.append(syll_graph)
+                                return
                         #appropriation a-a.pp-p.r-R.o-o.p-p.r-R.i-ij.a-a.t-s.i-j.on-§ a-pRo-pRi-ja-sj§ V-CCV-CCV-YV-CYV
                         #balaye b-b.a-a.l-l.ay-Ej.e-# ba-lEj CV-CVY
                         if graph_phon_pairs[0][1] in ["ij", "Ej"]:
@@ -271,6 +276,11 @@ class Word:
                             printVerbose(self.word,["Pop # at end"])
                             syll_phon.append( graph_phon[1] )
                             syll_graph.append( ("#", graph_phon[0]) )
+                            if len(graph_phon_pairs) == 0 :
+                                printVerbose(self.word,["no more graph/phon"])
+                                self.syll_cv.append(syll_phon)
+                                self.orthosyll_cv.append(syll_graph)
+                                return
                             graph_phon = graph_phon_pairs.pop(0)
                         syll_graph.append( (cv_phoneme, graph_phon[0]) )
                         syll_phon.append( graph_phon[1] )
@@ -298,8 +308,8 @@ class Word:
                 print(self.syll_cv)
                 print(self.orthosyll_cv, "extra:", graph_phon_pairs)
                 sys.exit(1)
-        #if False:
-        except Exception as e :
+        if False:
+        #except Exception as e :
             print(e)
             print(self.word, graphem_phoneme, self.orig_syll, self.syll, self.orig_cv_cv, self.cv_cv)
             print(self.syll_cv)
