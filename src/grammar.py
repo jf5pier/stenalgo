@@ -2,12 +2,12 @@
 # coding: utf-8
 #
 from dataclasses import dataclass
+from enum import Enum
 
 GramCat = Enum("GramCat",["ADJ", "ADJ:dem", "ADJ:ind", "ADJ:int", "ADJ:num", 
                           "ADJ:pos", "ADV", "ART:def", "ART:ind", "AUX", "CON", 
                           "LIA", "NOM", "ONO", "PRE", "PRO:dem", "PRO:ind", 
                           "PRO:int", "PRO:per", "PRO:pos", "PRO:rel", "VER"])
-
 
 @dataclass
 class Phoneme :
@@ -31,6 +31,12 @@ class Phoneme :
         self.posFrequency[pos] += frequency
         self.invPosFrequency[invPos] += frequency
 
+    def isVowel(self) :
+        return self.name in "aeiE@o°§uy5O9821"
+
+    def isConsonant(self) :
+        return self.name in "RtsplkmdvjnfbZwzSgNG"
+
     def __eq__(self, other) :
         self.name == other.name
     def __lt__(self, other) :
@@ -39,6 +45,31 @@ class Phoneme :
         return self.name
     def __repr__(self):
         return self.name + ":" + "%.1f"%self.frequency
+
+@dataclass
+class Biphoneme :
+    """
+    Coocurence of two phonemes in a group of phonemes (syllable or other)
+
+    pair : (Phoneme, Phoneme)
+        Pair of phonemes
+    frequency : 
+        Occurence frequency of the pair of phoenemes
+    """
+    pair : (Phoneme, Phoneme)
+    frequency : float = 0.0
+
+    def increaseFrequency(self, frequency: float) :
+        self.frequency += frequency
+
+    def __eq__(self, other) :
+        self.pair == other.pair
+    def __lt__(self, other) :
+        return self.frequency < other.frequency
+    def __str__(self) :
+        return self.pair
+    def __repr__(self):
+        return self.pair + ":" + "%.1f"%self.frequency
 
 class PhonemeCollection:
     """
@@ -78,6 +109,38 @@ class PhonemeCollection:
             print("Phonemes in inverted pos -%i"%(i+1), list(map(lambda p : (\
                     p.name, "%.1f"%p.invPosFrequency[i]), self.phonemes[:nb])), "\n")
 
+class BiphonemeCollection:
+    """
+    Collection of pairs of phonemes found in syllables
+    
+    biphonemes_names: {(str,str):Biphoneme}
+    biphonemes : [Biphoneme]
+    """
+    
+    def __init__(self) :
+        self.biphoneme_names ={} 
+        self.biphonemes = []
+
+    def getBiphonemes(self, biphoneme_names:[(str,str)]):
+        """ Get biphonemes from collection, adding missing ones if needed """
+        ret = []
+        for biphoneme_name in biphoneme_names :
+            if biphoneme_name not in self.biphoneme_names :
+                bp = Biphoneme(biphoneme_name)
+                self.biphoneme_names[biphoneme_name] = bp
+                self.biphonemes.append(bp)
+
+            ret.append( self.biphoneme_names[biphoneme_name] )
+        return ret
+
+    def getBiphoneme(self, biphoneme_name : (str,str) ):
+        return self.getBiphonemes([biphoneme_name])[0]
+
+    def printTopBiphonemes(self, nb: int = -1) :
+        self.biphonemes.sort(reverse=True)
+        print("Biphonemes:", list(map(lambda bp : (\
+                bp.pair, "%.1f"%bp.frequency), self.biphonemes[:nb])), "\n")
+
 
 class Syllable :
     """
@@ -91,16 +154,61 @@ class Syllable :
         Frequency of occurence in the underlying lexicon/corpus
     phonemeCol : PhonemeCollection
         Collection of Phonemes found in the underlying lexicon/corpus
+    preVowelBiphonemeCol : BiphonemeCollection
+        Collection of pair of phonemes found before the vowels of a syllable
+    postVowelBiphonemeCol : BiphonemeCollection
+        Collection of pair of phonemes found after the vowels of a syllable
     """
     phonemeCol : PhonemeCollection = PhonemeCollection()
+    preVowelBiphonemeCol : BiphonemeCollection = BiphonemeCollection()
+    postVowelBiphonemeCol : BiphonemeCollection = BiphonemeCollection()
+    multiVowelBiphonemeCol : BiphonemeCollection = BiphonemeCollection()
 
     def __init__(self, phoneme_names: str, spelling: str, frequency: float = 0.0): 
         self.phonemes = []
+        self.biphonemes_pre = []
+        self.biphonemes_post =[]
+        self.biphonemes_vowel=[]
         self.spellings = {}
         phonemes = Syllable.phonemeCol.getPhonemes(phoneme_names)
+        firstVowelPos = -1
+        lastVowelPos = -1
         for pos,phoneme in enumerate(phonemes):
             phoneme.increaseFrequency(frequency, pos=pos, invPos=len(phonemes)-pos-1 )
             self.phonemes.append(phoneme)
+            #Break down the syllable into consonants-vowels-consonants
+            if phoneme.isVowel() :
+                if firstVowelPos == -1 :
+                    firstVowelPos = pos
+                lastVowelPos = pos
+
+        #Track the cooccurences of phonemes pairs in the first consonnants group
+        if firstVowelPos >= 2 :
+            for pos1,phoneme1 in enumerate(phonemes[:firstVowelPos-1]) :
+                for phoneme2 in phonemes[pos1+1:firstVowelPos]:
+                    biphoneme  = Syllable.preVowelBiphonemeCol.getBiphoneme( \
+                                    (phoneme1.name, phoneme2.name) )
+                    biphoneme.increaseFrequency(frequency) 
+                    self.biphonemes_pre.append(biphoneme)
+
+        #Track the cooccurences of phonemes pairs in the last consonnants group
+        if lastVowelPos <= len(phonemes) - 3 :
+            for pos1,phoneme1 in enumerate(phonemes[lastVowelPos+1:-1]) :
+                for phoneme2 in phonemes[lastVowelPos+pos1+2:]:
+                    biphoneme  = Syllable.postVowelBiphonemeCol.getBiphoneme( \
+                                    (phoneme1.name, phoneme2.name) )
+                    biphoneme.increaseFrequency(frequency) 
+                    self.biphonemes_post.append(biphoneme)
+        
+        #Track the cases where multiple vowels are part of the middle (inclue semivowels??)
+        if firstVowelPos < lastVowelPos :
+            for pos1,phoneme1 in enumerate(phonemes[firstVowelPos:lastVowelPos]) :
+                for phoneme2 in phonemes[firstVowelPos+pos1+1:lastVowelPos+1]:
+                    biphoneme  = Syllable.multiVowelBiphonemeCol.getBiphoneme( \
+                                    (phoneme1.name, phoneme2.name) )
+                    biphoneme.increaseFrequency(frequency) 
+                    self.biphonemes_vowel.append(biphoneme)
+        
         self.frequency = frequency
         self.spellings[spelling] = frequency
 
@@ -108,6 +216,12 @@ class Syllable :
         self.frequency += frequency
         for pos,phoneme in enumerate(self.phonemes) :
             phoneme.increaseFrequency(frequency, pos=pos, invPos=len(self.phonemes)-pos-1)
+        for biphoneme in self.biphonemes_pre:
+            biphoneme.increaseFrequency(frequency)
+        for biphoneme in self.biphonemes_post:
+            biphoneme.increaseFrequency(frequency)
+        for biphoneme in self.biphonemes_vowel:
+            biphoneme.increaseFrequency(frequency)
 
     def increaseSpellingFrequency(self, spelling: str, frequency: float):
         spelling_frequency = self.spellings.get(spelling, 0.0) + frequency
@@ -122,6 +236,14 @@ class Syllable :
 
     def printTopPhonemes(nb: int =-1 ):
         Syllable.phonemeCol.printTopPhonemes( nb )
+
+    def printTopBiphonemes(nb: int =-1 ):
+        print("Pre-vowels biphonemes")
+        Syllable.preVowelBiphonemeCol.printTopBiphonemes( nb )
+        print("Vowel biphonemes")
+        Syllable.multiVowelBiphonemeCol.printTopBiphonemes( nb )
+        print("Post-vowels biphonemes")
+        Syllable.postVowelBiphonemeCol.printTopBiphonemes( nb )
 
     def sortedSpellings(self) :
         spel_freq = [(k,v) for k,v in self.spellings.items()]
@@ -143,8 +265,8 @@ class SyllableCollection :
     """
     Collection of all Syllables found in a lexicon/corpus
     
-    syllable_names: {str:phoneme}
-    syllables : [Syllables]
+    syllable_names: {str : Syllable}
+    syllables : [Syllable]
     """
     syllable_names = {} 
     syllables = []
