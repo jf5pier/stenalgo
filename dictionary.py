@@ -233,8 +233,9 @@ class Dictionary:
         Syllable.printTopPhonemes()
         #self.sylCol.printTopSyllables()
         #print(self.sylCol.syllable_names.keys())
-        Syllable.printTopPhonemesPerPosition()
-        Syllable.printTopPhonemesPerInvPosition()
+        #Syllable.printTopPhonemesPerPosition()
+        #Syllable.printTopPhonemesPerInvPosition()
+        Syllable.printTopBiphonemes(50)
 
 dictionary = Dictionary() 
 dictionary.printSyllabificationStats()
