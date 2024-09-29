@@ -94908,7 +94908,7 @@ portemanteau	pORt°m@to	NOM	p.o.r.t.e.m.an.t.eau	p-p.o-O.r-R.t-t.e-°.m-m.an-@.t
 portemanteaux	pORt°m@to	NOM	p.o.r.t.e.m.an.t.eau.x	p-p.o-O.r-R.t-t.e-°.m-m.an-@.t-t.eau-o.x-#	1.1.1.1.0.1.1.1.1.1.
 portement	pORt°m@	NOM	p.o.r.t.e.m.ent	p-p.o-O.r-R.t-t.e-°.m-m.ent-@	1.1.1.1.0.1.1.
 portent	pORt	VER	p.o.r.t.ent	p-p.o-O.r-R.t-t.ent-#	1.1.1.1.0.
-porter	pORtER	NOM	p.o.r.t.e.r	p-p.o-o.r-R.t-t.e-E.r-R	1.0.1.1.1.1.
+porter	pORtER	NOM	p.o.r.t.e.r	p-p.o-O.r-R.t-t.e-E.r-R	1.0.1.1.1.1.
 porter	poRte	VER	p.o.r.t.er	p-p.o-o.r-R.t-t.er-e	1.0.1.1.1.
 portera	pORt°Ra	VER	p.o.r.t.e.r.a	p-p.o-O.r-R.t-t.e-°.r-R.a-a	1.1.1.1.0.1.1.
 porterai	pORt°RE	VER	p.o.r.t.e.r.ai	p-p.o-O.r-R.t-t.e-°.r-R.ai-E	1.1.1.1.0.1.1.
@@ -106812,7 +106812,7 @@ reportait	R°pORtE	VER	r.e.p.o.r.t.ait	r-R.e-°.p-p.o-O.r-R.t-t.ait-E	1.0.1.1.1.
 reportant	R°pORt@	VER	r.e.p.o.r.t.ant	r-R.e-°.p-p.o-O.r-R.t-t.ant-@	1.0.1.1.1.1.1.
 reporte	R°pORt	VER	r.e.p.o.r.t.e	r-R.e-°.p-p.o-O.r-R.t-t.e-#	1.0.1.1.1.1.1.
 reportent	R°pORt	VER	r.e.p.o.r.t.ent	r-R.e-°.p-p.o-O.r-R.t-t.ent-#	1.0.1.1.1.1.0.
-reporter	R°pORte	ADJ	r.e.p.o.r.t.er	r-R.e-°.p-p.o-o.r-R.t-t.er-e	1.0.1.0.1.1.1.
+reporter	R°pORte	ADJ	r.e.p.o.r.t.er	r-R.e-°.p-p.o-O.r-R.t-t.er-e	1.0.1.0.1.1.1.
 reporter	R°poRtER	NOM	r.e.p.o.r.t.e.r	r-R.e-°.p-p.o-o.r-R.t-t.e-E.r-R	1.0.1.0.1.1.1.1.
 reporter	R°poRte	VER	r.e.p.o.r.t.er	r-R.e-°.p-p.o-o.r-R.t-t.er-e	1.0.1.0.1.1.1.
 reportera	R°pORt°Ra	VER	r.e.p.o.r.t.e.r.a	r-R.e-°.p-p.o-O.r-R.t-t.e-°.r-R.a-a	1.0.1.1.1.1.0.1.1.
@@ -117363,7 +117363,7 @@ somnolant	sOmnol@	VER	s.o.m.n.o.l.ant	s-s.o-O.m-m.n-n.o-o.l-l.ant-@	1.1.1.1.0.1.
 somnole	sOmnOl	VER	s.o.m.n.o.l.e	s-s.o-O.m-m.n-n.o-O.l-l.e-#	1.1.1.1.1.1.1.
 somnolence	sOmnol@s	NOM	s.o.m.n.o.l.en.c.e	s-s.o-O.m-m.n-n.o-o.l-l.en-@.c-s.e-#	1.1.1.1.0.1.1.1.1.
 somnolences	sOmnol@s	NOM	s.o.m.n.o.l.en.c.es	s-s.o-O.m-m.n-n.o-o.l-l.en-@.c-s.es-#	1.1.1.1.0.1.1.1.1.
-somnolent	sOmnOl@	ADJ	s.o.m.n.o.l.ent	s-s.o-o.m-m.n-n.o-O.l-l.ent-@	1.0.1.1.1.1.0.
+somnolent	sOmnOl@	ADJ	s.o.m.n.o.l.ent	s-s.o-O.m-m.n-n.o-O.l-l.ent-@	1.0.1.1.1.1.0.
 somnolent	somnOl	VER	s.o.m.n.o.l.ent	s-s.o-o.m-m.n-n.o-O.l-l.ent-#	1.0.1.1.1.1.0.
 somnolente	sOmnol@t	ADJ	s.o.m.n.o.l.en.t.e	s-s.o-O.m-m.n-n.o-o.l-l.en-@.t-t.e-#	1.1.1.1.0.1.1.1.1.
 somnolentes	sOmnol@t	ADJ	s.o.m.n.o.l.en.t.es	s-s.o-O.m-m.n-n.o-o.l-l.en-@.t-t.es-#	1.1.1.1.0.1.1.1.1.
@@ -131003,7 +131003,7 @@ viole	vjOl	VER	v.i.o.l.e	v-v.i-j.o-O.l-l.e-#	1.0.1.1.1.
 violemment	vjolam@	ADV	v.i.o.l.e.mm.ent	v-v.i-j.o-o.l-l.e-a.mm-m.ent-@	1.0.0.1.0.1.1.
 violence	vjol@s	NOM	v.i.o.l.en.c.e	v-v.i-j.o-o.l-l.en-@.c-s.e-#	1.0.0.1.1.1.1.
 violences	vjol@s	NOM	v.i.o.l.en.c.es	v-v.i-j.o-o.l-l.en-@.c-s.es-#	1.0.0.1.1.1.1.
-violent	vjOl@	NOM	v.i.o.l.ent	v-v.i-j.o-o.l-l.ent-@	1.0.0.1.1.
+violent	vjOl@	NOM	v.i.o.l.ent	v-v.i-j.o-O.l-l.ent-@	1.0.0.1.1.
 violent	vjOl	VER	v.i.o.l.ent	v-v.i-j.o-O.l-l.ent-#	1.0.1.1.0.
 violent	vjol@	ADJ	v.i.o.l.ent	v-v.i-j.o-o.l-l.ent-@	1.0.0.1.1.
 violentaient	vjol@tE	VER	v.i.o.l.en.t.aient	v-v.i-j.o-o.l-l.en-@.t-t.aient-E	1.0.0.1.1.1.1.

@@ -1,5 +1,23 @@
 #!/usr/bin/python
 # coding: utf-8
+#
+# This class provides functions to read Lexique version 383 [1,2] for its data
+# concerning French word ortograph, frequency, grammatical info, phonology and
+# phonetic syllable breakdow.  It the corrects the orthographic syllable
+# breakdow using the phoneme to graphem association of LexiqueInfra [3].
+# The output is a simplified French Lexique with corrected ortographic syllables.
+#
+# 1. New, B., Pallier, C., Brysbaert, M., Ferrand, L. (2004) 
+#  Lexique 2 : A New French Lexical Database.
+#  Behavior Research Methods, Instruments, & Computers, 36 (3), 516-524.
+# 2. New, B., Brysbaert, M., Veronis, J., & Pallier, C. (2007). 
+#  The use of film subtitles to estimate word frequencies. 
+#  Applied Psycholinguistics, 28(4), 661-677.
+# 3. Gimenes, M., Perret, C., & New, B. (2020). 
+#  Lexique-Infra: grapheme-phoneme, phoneme-grapheme regularity, consistency, 
+#  and other sublexical statistics for 137,717 polysyllabic French words. 
+#  Behavior Research Methods. doi.org/10.3758/s13428-020-01396-2
+#
 import sys
 import json
 import numpy as np
@@ -7,29 +25,35 @@ import csv
 from copy import deepcopy
 from enum import Enum
 from dataclasses import dataclass
+from src.grammar import *
 
-GramCat = Enum("GramCat",["ADJ", "ADJ:dem", "ADJ:ind", "ADJ:int", "ADJ:num", 
-                          "ADJ:pos", "ADV", "ART:def", "ART:ind", "AUX", "CON", 
-                          "LIA", "NOM", "ONO", "PRE", "PRO:dem", "PRO:ind", 
-                          "PRO:int", "PRO:per", "PRO:pos", "PRO:rel", "VER"])
+problemList = ["autocritiquer", "fjord", "carter", "cappuccino", "capucino", "capuccino", 
+               "cappuccinos",  "mamma", "voyouterie",  "voyoucratie", "jungien", "jungiens", 
+               "mails", "fjords", "sprinteur", "sprinteurs", "pierreries", "quidams", 
+               "voyoutisme", "fettucine", "requiems",  "suppliât", "niquait","télétexte", 
+               "tangerine", "réattaquait", "chopper", "tangerine", "mail"]
 
-ignoredList = ["ausweis", "beagle", "beagles", "bintje", "borchtch",  #Mots étrangers
-        "brainstorming", "breitschwanz", "cappuccinos", "catgut", "catguts", "challenge",
-        "challengers", "cheeseburgers", "chippendale", "chippendales", "chorizos", 
-        "coache", "coaches", "coachs", "conjungo", "conjungos", "duces", "gun", "guns", 
-        "highlanders", "jingles", "jodler", "jonkheer", "kandjar", "kommandantur", "lazzis", 
-        "lunches", "lychees", "mailing", "mile", "panzer", "pickles", "ranch", "rancher", 
-        "ranchs", "ranches", "sandjak", "sandwiches", "sandwichs", "schampooing", "schampooiner", 
-        "shampooiner", "shampooing", "shampooings", "puzzle", "puzzles", "rough",
-        "panzers", "shogun", "shôgun", "skinheads", "smiley", "teenager", "training", "wharf", 
-        "whig", "whigs", "whipcord", "whiskey", "whiskies", "whiskys", "whist", "whisky",
-        "winchesters" ] + ["autocritiquer", "fjord",  
-        "jungien", "jungiens", "mails", "fjords", "sprinteurs", "pierreries", "quidams",
-        "requiems",  "suppliât"]  
+foreignList = ["ausweis", "beagle", "beagles", "bintje", "boghei", "borchtch", 
+               "brainstorming", "breitschwanz", "catgut", "catguts", "challenge", 
+               "challengers", "cheeseburgers", "chippendale", "chippendales", "chorizos", 
+               "cinzano", "coache", "coaches", "coachs", "conjungo", "conjungos", "crumble", 
+               "curant", "duces", "foil", "gun", "highlander", "hydrofoil", "guns", 
+               "highlanders", "interviewer", "jingle", "jingles", "jodler", "jonkheer", 
+               "kandjar", "kierkegaardienne", "kommandantur", "lazzis", "lunches", "lychees",
+               "mailing", "mile", "muchas", "nikkei", "palmer", "panzer", "panzers", 
+               "people", "pickles", "pschent", "quattrocento", "quite", "ranch", "rancher", 
+               "ranchs", "ranches", "roadster", "rock'n'roll", "sandjak", "sandwiches", 
+               "sandwichs", "schampooing", "schampooiner", "shampooiner", "shampooing", 
+               "shampooings", "puzzle", "puzzles","rinforzando", "rough", "rhythm'n'blues", 
+               "single", "shogun", "shôgun", "skinhead","skinheads", "smiley", "teenager", 
+               "training", "trecento", "valpolicella", "wharf", "whig", "whigs", "whipcord", 
+               "whiskey", "whiskies", "whiskys", "whist", "whisky", "wildcat", "winchesters" ]    
+
+ignoredList = problemList + foreignList
 
 def printVerbose(word : str,msg : list) :
     #return
-    if word in [] :
+    if word in []: #["soleil"] :
         print(word, " :\n", " ".join(map(str,msg)))
 
 @dataclass
@@ -37,7 +61,7 @@ class Word:
     """
     Representation of a Word defined by an orthograph and a pronunciation
     
-    word : str
+    ortho : str
         The word's orthograph
     phonology : str
         Collection of phonemes representing the pronunciation
@@ -54,21 +78,23 @@ class Word:
     info_verb : str
         Conjugaiton of the verb
     syll : str
-        Syllables in phonemes as provided by the lexic
+        Syllables in phonemes as provided by the Lexique383
     cv-cv : str
         Consonant-Vowel brokendown by syllable  
     orthosyll : str
         Orthograph of the syllables (some are mistaken)
     frequency : float
-        Frequency of the word in the chosen corpus
-    syll_cv : [str]
-        Syllables in phonemes as provided by the lexicInfra and 
-        groupped by cv_cv field
-    orthosyll_cv : [str] 
-        Orthograph of the syllables as provided by the lexicInfra
-        and groupped by cv_cv field
+        Frequency of the word in the written chosen corpus
+    frequencyFilm : float
+        Frequency of the word in the film chosen corpus
+    syll_cv : [[str]]
+        Syllables in phonemes as provided by the LexicInfra and 
+        groupped by Lexique383 cv_cv field into list of phonems
+    orthosyll_cv : [[str]] 
+        Orthograph of the syllables as provided by the LexicInfra
+        and groupped by Lexique383 cv_cv field into list of phonems' graphems
     """
-    word : str
+    ortho: str
     phonology : str
     lemme : str
     gram_cat : str
@@ -79,9 +105,8 @@ class Word:
     syll : str
     cv_cv : str
     orthosyll : str
-    frequency : float
-    #syll_cv : [str]
-    #orthosyll_cv : [str]
+    frequency : str
+    frequencyFilm : str
 
     def __post_init__(self) :
         self.syll_cv = deepcopy([])
@@ -92,6 +117,7 @@ class Word:
         self.fix_g_dZ()
         self.fix_j_dZ()
         self.fix_ch_tS()
+
 
 
     def fix_x_k_s(self) :
@@ -148,7 +174,8 @@ class Word:
         # bienheureuse b-b.i-j.en-5n.h-#.eu-2.r-R.eu-2.s-z.e-# bj5-n2-R2z CYV-CV-CVC
         graphem_phonem = Word.fixAssociation(graphem_phonem, "en-5n", "e-5.n-n")
         graphem_phonem = Word.fixAssociation(graphem_phonem, "enn-@n", "en-@.n-n") #désennuie
-        graphem_phonem = Word.fixAssociation(graphem_phonem, "en-@n", "e-@.n-n") #ennamourée
+        #This is not the perfect treatment, it creates ortho-syll like e-nivre instead of en-ivre
+        graphem_phonem = Word.fixAssociation(graphem_phonem, "en-@n", "e-@.n-n") #enamourée
         # coordinateurs c-k.oo-oO.r-R.d-d.i-i.n-n.a-a.t-t.eu-9.r-R.s-# 
         # ko-OR-di-na-t9R ko-OR-di-na-t9R CV-VC-CV-CV-CVC CV-VC-CV-CV-CVC
         graphem_phonem = Word.fixAssociation(graphem_phonem, "oo-oO", "o-o.o-O")
@@ -169,17 +196,26 @@ class Word:
                     graphem_phoneme[pos+len(badAsso):]
         return graphem_phoneme
 
-    def phonemesToSyllables(self, withSilent=True) : 
+    def phonemesToSyllables(self, withSilent=True, symbol="") : 
         if withSilent:
-            return ["".join(syll) for syll in self.syll_cv]
+            return [symbol.join(syll) for syll in self.syll_cv]
         else :
-            return ["".join(syll).replace("#","") for syll in self.syll_cv]
+            return [symbol.join(syll).replace("#","") for syll in self.syll_cv]
 
-    def lettersToSyllables(self) : 
-        return ["".join(map(lambda cv_lett: cv_lett[1], syll)) for syll in self.orthosyll_cv]
+    def lettersToSyllables(self, symbol="") : 
+        return [symbol.join(map(lambda cv_lett: cv_lett[1], syll)) for syll in self.orthosyll_cv]
 
     def syllablesToWord(self) :
         return "".join(self.phonemesToSyllables())
+
+    def writeOrthoSyll(self) :
+        # Format is "syll1letter1_syll1letter2|syll2letter1_..."
+        return "|".join(self.lettersToSyllables(symbol="_"))
+
+    def writePhonoSyll(self) :
+        # Format is "syll1phonem1_syll1phonem2|syll2phonem1_..."
+        return "|".join(self.phonemesToSyllables(symbol="_"))
+
 
     def breakdownSyllables(self, graphem_phoneme : str):
         # Uses the CV-CV breakdown of phonemes from Lexique with the grapheme-phoneme decomposition of 
@@ -195,8 +231,8 @@ class Word:
         semi_vowel_liaison = False
         skip_next_Y = False
         skip_next_C = False
-        if True:
-        #try :   
+        #if True:
+        try :   
             graphem_phoneme = Word.fixLexiqueInfraGraphPhon(graphem_phoneme)
             graph_phon_pairs = [(gp.split("-")[0], gp.split("-")[1]) for gp in graphem_phoneme.split(".")]
             cv_split = self.cv_cv.split("-")
@@ -311,8 +347,8 @@ class Word:
                 print(self.syll_cv)
                 print(self.orthosyll_cv, "extra:", graph_phon_pairs)
                 sys.exit(1)
-        if False:
-        #except Exception as e :
+        #if False:
+        except Exception as e :
             print(e)
             print(self.ortho, graphem_phoneme, self.orig_syll, self.syll, self.orig_cv_cv, self.cv_cv)
             print(self.syll_cv)
@@ -351,137 +387,6 @@ class Word:
             return True
         return False
 
-@dataclass
-class Phoneme :
-    """
-    Representation of the parts of a Syllable
-    
-    name : str
-        Single char IPA representation of the phoneme
-    frequency : float
-        Frequency of occurence in the underlying lexicon/corpus
-    """
-    name : str
-    frequency : float = 0.0
-
-    def increaseFrequency(self, frequency: float):
-        self.frequency += frequency
-
-    def __eq__(self, other) :
-        self.name == other.name
-    def __lt__(self, other) :
-        return self.frequency < other.frequency
-    def __str__(self) :
-        return self.name
-    def __repr__(self):
-        return self.name + ":" + "%.1f"%self.frequency
-
-class PhonemeCollection:
-    """
-    Collection of Phonemes representing the existing sounds of a lexicon/corpus
-    
-    phonemes_names: {str:phoneme}
-    phonemes : [Phoneme]
-    """
-    phoneme_names ={} 
-    phonemes = []
-
-    def getPhonemes(self, phoneme_names:str):
-        """ Get phonemes from collection, adding missing ones if needed """
-        ret = []
-        for phoneme_name in phoneme_names :
-            if phoneme_name not in self.phoneme_names :
-                p = Phoneme(phoneme_name)
-                self.phoneme_names[phoneme_name] = p
-                self.phonemes.append(p)
-
-            ret.append( self.phoneme_names[phoneme_name] )
-        return ret
-
-    def printTopPhonemes(self, nb: int) :
-        self.phonemes.sort(reverse=True)
-        print("Top phonemes:",self.phonemes[:nb])
-
-
-class Syllable :
-    """
-    Representation of a unique sound part of a word 
-    
-    phonemes : [Phoneme]
-        List of Phonemes sounding the Syllable
-    spellings : {str: float}
-        Dict of orthographic spelling that sound the same Syllable and frequency
-    frequency : float
-        Frequency of occurence in the underlying lexicon/corpus
-    phonemeCol : PhonemeCollection
-        Collection of Phonemes found in the underlying lexicon/corpus
-    """
-    phonemeCol : PhonemeCollection = PhonemeCollection()
-
-    def __init__(self, phoneme_names: str, spelling: str, frequency: float = 0.0): 
-        self.phonemes = []
-        self.spellings = {}
-        for phoneme in Syllable.phonemeCol.getPhonemes(phoneme_names):
-            phoneme.increaseFrequency(frequency)
-            self.phonemes.append(phoneme)
-        self.frequency = frequency
-        self.spellings[spelling] = frequency
-
-    def increaseFrequency(self, frequency: float):
-        self.frequency += frequency
-        for phoneme in self.phonemes :
-            phoneme.increaseFrequency(frequency)
-
-    def increaseSpellingFrequency(self, spelling: str, frequency: float):
-        spelling_frequency = self.spellings.get(spelling, 0.0) + frequency
-        self.spellings[spelling] = spelling_frequency
-
-    def printTopPhonemes(nb : int):
-        Syllable.phonemeCol.printTopPhonemes( nb )
-
-    def sortedSpellings(self) :
-        spel_freq = [(k,v) for k,v in self.spellings.items()]
-        spel_freq.sort(key=lambda kv: kv[1], reverse=True)
-        return spel_freq
-
-    def __eq__(self, other) :
-        self.phonemes == other.phonemes
-    def __lt__(self, other) :
-        return self.frequency < other.frequency
-    def __str__(self) :
-        return "".join([str(p) for p in self.phonemes]) + " > " + \
-                ",".join([str(spel)+":%.1f"%freq for (spel,freq) in self.sortedSpellings()[:2]]) \
-                + " > " + "%.1f"%self.frequency
-
-class SyllableCollection :
-    """
-    Collection of all Syllables found in a lexicon/corpus
-    
-    syllable_names: {str:phoneme}
-    syllables : [Syllables]
-    """
-    syllable_names = {} 
-    syllables = []
-
-    def updateSyllable(self, syllable_name:str, spelling: str, addedfrequency: float):
-        """ Updates syllable from collection, adding missing ones if needed """
-        if syllable_name not in self.syllable_names:
-            s = Syllable(syllable_name, spelling, addedfrequency)
-            self.syllable_names[syllable_name] = s
-            self.syllables.append(s)
-        # Adds the spelling if it is missing
-        self.syllable_names[syllable_name].increaseSpellingFrequency(spelling, addedfrequency) 
-
-    def getSyllable(self, syllable_name:str, spelling: str, frequency = 0.0):
-        """ Get syllable from collection, adding missing ones if needed """
-        self.updatSyllable(syllable_name, spelling, frequency)
-        return self.syllable_names[syllable_name] 
-    
-    def printTopSyllables(self, nb: int) :
-        self.syllables.sort(reverse=True)
-        for syl in self.syllables[:nb] :
-            print("Syllable:",str(syl))
-
 class Lexique:
 
     picked = []
@@ -491,6 +396,9 @@ class Lexique:
     graphem_phoneme_source= "resources/LexiqueInfraCorrespondance.tsv"
     sylCol = SyllableCollection()
 
+    def __init__(self):
+        self.words = self.read_corpus()
+        
 
     def read_corpus(self):
         with open(self.word_source) as f:
@@ -499,20 +407,23 @@ class Lexique:
             for corpus_word in corpus:
                 if corpus_word["ortho"] != None and corpus_word["ortho"][0] != "#" \
                         and corpus_word["ortho"] not in ignoredList :
-                    word = Word(word = corpus_word["ortho"],
+                    word = Word(ortho= corpus_word["ortho"],
                             phonology = corpus_word["phon"],
                             lemme = corpus_word["lemme"],
-                            gram_cat = GramCat[corpus_word["cgram"]] if \
-                                    corpus_word["cgram"] != '' else None,
-                            ortho_gram_cat = [GramCat[gc] for gc in \
-                                    corpus_word["cgramortho"].split(",")],
+                            #gram_cat = GramCat[corpus_word["cgram"]] if \
+                            #        corpus_word["cgram"] != '' else None,
+                            #ortho_gram_cat = [GramCat[gc] for gc in \
+                            #        corpus_word["cgramortho"].split(",")],
+                            gram_cat = corpus_word["cgram"],
+                            ortho_gram_cat = corpus_word["cgramortho"],
                             gender = corpus_word["genre"],
                             number = corpus_word["nombre"],
                             info_verb = corpus_word["infover"],
                             syll = corpus_word["syll"],
                             cv_cv= corpus_word["cv-cv"],
                             orthosyll = corpus_word["orthosyll"],
-                            frequency = float(corpus_word["freqlivres"])
+                            frequency = float(corpus_word["freqlivres"]),
+                            frequencyFilm = float(corpus_word["freqfilms2"])
                             )
                     self.words.append(word)
                     same_ortho = self.words_by_ortho.get(corpus_word["ortho"], 
@@ -532,25 +443,68 @@ class Lexique:
                             word.breakdownSyllables(asso_word["assoc"])
                             #print("bd: ",  asso_word["item"], asso_word["phono"], 
                             #      word.ortho, word.phonology, word.syllablesToWord())
-
-
         return
 
-    def analyseFrequencies(self) :
+    def isVowel(char : str) :
+        return char in "aeiouy2589OE§@°"
+
+    def moveDualPhonem(syllables: [str] ) :
+        #Move dual-phonems representation ij and gz to better compare to Lexique383
+        #This function is only used to compare the analysis to Lexique383.
+        #Its result is currently not kept
+
+        if (len(syllables) <= 1):
+            return syllables
+        ret = []
+        semivowelToMove = ""
+        for i,syllOrig in enumerate(syllables) :
+            s = deepcopy(syllOrig)
+            if semivowelToMove != "":
+                s = semivowelToMove + s
+                semivowelToMove = ""
+            if i+1 < len(syllables) :
+                if s[-1] == "j":  #['prié', ['pRi', 'je'], ['pRij', 'e']]
+                    if Lexique.isVowel( syllables[i+1][0] ) : # not bouilloire
+                        ret.append(s[:-1])
+                        semivowelToMove = "j"
+                    else :
+                        ret.append(s)
+                elif len(s) > 2 and s[-2:] == "gz": 
+                    #['exigé', ['Eg', 'zi', 'Ze'], ['Egz', 'i', 'Ze']]
+                    ret.append(s[:-1])
+                    semivowelToMove = "z"
+                else :
+                    ret.append(s)
+            else :
+                ret.append(s)
+        return ret
+
+    def printTopWordsFilm(self, nb=500):
+        print("Somme\t%f"% sum(map(lambda w: w.frequencyFilm,self.words)))
+        for w in self.words[:nb] :
+            print("%s\t%f"%(w.ortho, w.frequencyFilm))
+
+    def printTopWordsBooks(self, nb=500):
+        print("Somme\t%f"% sum(map(lambda w: w.frequency,self.words)))
+        for w in self.words[:nb] :
+            print("%s\t%f"%(w.ortho, w.frequency))
+
+    def printSyllabificationStats(self) :
         self.mismatchSyllableSpelling = []
         self.mismatchSyllableAssociation = []
         self.matchSyllableAssociation = []
-        self.words = self.read_corpus()
-        self.words.sort(key=lambda x: x.frequency, reverse=True)
+        self.words.sort(key=lambda x: x.frequencyFilm, reverse=True)
         for word in self.words :
             syllable_names = word.syll.split("-")
             spellings = word.orthosyll.split("-")
             if len(syllable_names) != len(spellings):
                 self.mismatchSyllableSpelling.append(word)
             if len(syllable_names) == len(word.phonemesToSyllables()) :
-                if syllable_names != word.phonemesToSyllables(False) :
+                #if syllable_names != word.phonemesToSyllables(False) :
+                if syllable_names != Lexique.moveDualPhonem(word.phonemesToSyllables(False)) :
                     self.mismatchSyllableAssociation.append( \
-                            [word.ortho, syllable_names, word.phonemesToSyllables()])
+                            [word.ortho, syllable_names, Lexique.moveDualPhonem(\
+                            word.phonemesToSyllables(False)), word.lettersToSyllables()])
                 else :
                     self.matchSyllableAssociation.append( \
                             [word.ortho, syllable_names, word.phonemesToSyllables()])
@@ -568,4 +522,32 @@ class Lexique:
         print("Nb missing", len([ w.ortho for w in filter(lambda w: w.orthosyll_cv == [], self.words)]))
         print("\n".join(map(str,self.mismatchSyllableAssociation)))
 
-Lexique().analyseFrequencies()
+    def outputMixedLexique(self, filename : str):
+        with open(filename,"w") as f :
+            fieldnames = ["ortho", "phon", "lemme", "cgram", "cgramortho", "genre", "nombre",
+                          "infover", "syll_cv", "orthosyll_cv", "freqlivres", "freqfilms2"]
+
+            corpus = csv.DictWriter(f, fieldnames=fieldnames, delimiter='\t')
+            corpus.writeheader()
+
+            for word in sorted(self.words, key=lambda w: w.ortho) :
+                if word.orthosyll_cv != [] :
+                    corpus.writerow({
+                        "ortho" : word.ortho, 
+                        "phon" : word.phonology,
+                        "lemme" : word.lemme, 
+                        "cgram" : word.gram_cat, 
+                        "cgramortho" : word.ortho_gram_cat, 
+                        "genre" : word.gender, 
+                        "nombre" : word.number, 
+                        "infover" : word.info_verb, 
+                        "syll_cv" : word.writePhonoSyll(), 
+                        "orthosyll_cv" : word.writeOrthoSyll(), 
+                        "freqlivres" : word.frequency, 
+                        "freqfilms2" : word.frequencyFilm
+                        })
+                
+
+lexique = Lexique() 
+lexique.printSyllabificationStats()
+#lexique.outputMixedLexique("resources/LexiqueMixte.tsv")
