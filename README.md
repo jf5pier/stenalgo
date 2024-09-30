@@ -83,9 +83,14 @@ syllables (V, VC, CV, CVC).
 While biphoneme frequencies inform on the order of the phonemes, single-phoneme frequencies inform on the importance of the phoneme. Here
 is a representation of a phoneme order for all 3 groups of phonemes that minimize the frequency of chords where the phones are in the wrong
 order. Bar charts represent the frequency of the individual phonemes in each of the 3 groups.
+
+
+##### Example of optimal phonemes order for the left hand, thumb vowels and right hand
 ```
 Left hand optimization :
-Best order (ordered score: 91215.3, disordered score: -1400.5): dZksptvSgmnzfbRlNwj
+Best order (ordered score: 91215.3, disordered score: -1400.5): 
+dZksptvSgmnzfbRlNwj
+
 >               R     <
 >               R     <
 >               R     <
@@ -100,7 +105,9 @@ Best order (ordered score: 91215.3, disordered score: -1400.5): dZksptvSgmnzfbRl
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 Right hand optimization :
-Best order (ordered score: 15509.1, disordered score: -5766.6): pjbgvwdzsfktRlmnZNS
+Best order (ordered score: 15509.1, disordered score: -5766.6): 
+pjbgvwdzsfktRlmnZNS
+
 >             R       <
 >             R       <
 >             R       <
@@ -115,7 +122,9 @@ Best order (ordered score: 15509.1, disordered score: -5766.6): pjbgvwdzsfktRlmn
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 Vowel optimization :
-Best order (ordered score: 6585.4, disordered score: 0.0): 8ae§E9o@i52O
+Best order (ordered score: 6585.4, disordered score: 0.0): 
+8ae§E9o@i52O
+
 >  a           <
 >  a           <
 >  ae          <
