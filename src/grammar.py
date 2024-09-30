@@ -76,7 +76,7 @@ class Biphoneme :
     def __lt__(self, other) :
         return self.frequency < other.frequency
     def __str__(self) :
-        return self.pair
+        return "(%s, %s)"%(self.pair[0], self.pair[1])
     def __repr__(self):
         return self.pair[0]+ self.pair[1] + ":" + "%.1f"%self.frequency
 
@@ -124,19 +124,27 @@ class PhonemeCollection:
             print("Phonemes in inverted pos -%i"%(i+1), list(map(lambda p : (\
                     p.name, "%.1f"%p.invPosFrequency[i]), self.phonemes[:nb])), "\n")
 
-    def printBarchart(self,phoneme_order : str, vsize : int = 10):
+    def printBarchart(self, phoneme_order : str, exhaustive_phonemes : str, vsize : int = 10):
         maxFreq = 0.0
-        for phoneme_name in phoneme_order :
+        excluded_phonemes = list(filter(lambda p : p not in phoneme_order, exhaustive_phonemes))
+        for phoneme_name in exhaustive_phonemes :
            maxFreq = max(maxFreq, self.phoneme_names[phoneme_name].frequency)
         for i in range(vsize,0,-1) :
             toPrint = "> "
             for phoneme_name in phoneme_order :
                 phoneme = self.phoneme_names[phoneme_name]
                 toPrint += phoneme.name if phoneme.frequency >= i*maxFreq/vsize else " "
+            toPrint += " | "
+            for phoneme_name in excluded_phonemes :
+                phoneme = self.phoneme_names[phoneme_name]
+                toPrint += phoneme.name if phoneme.frequency >= i*maxFreq/vsize else " "
             toPrint += " <"
             print(toPrint)
-        print("> " + phoneme_order + " <")
-        print("^"*(len(phoneme_order)+4), "\n")
+        print("> " + phoneme_order + " | " + "".join(excluded_phonemes) + " <")
+        barsWidth = len(phoneme_order)+3
+        barsWidth2 = len(excluded_phonemes) + 3
+        print("^"*(barsWidth) + "|" + "^"*(barsWidth2))
+        print(" "*(barsWidth-8) + "ordered | floating", "\n")
 
 
 
@@ -224,10 +232,9 @@ class BiphonemeCollection:
                         bestNegScore = negScore
                         bestPermutation = p
                         bestBadOrder = badOrder
-        print("Best order (%0.1f %0.1f):"%(bestScore,bestNegScore), bestPermutation)
-        print("Disordered:", bestBadOrder)
+        print("\nBest order (ordered score %0.1f, disordered score %0.1f):\n"%(bestScore,bestNegScore), bestPermutation)
+        #print("Disordered:", bestBadOrder)
         return bestPermutation
-        #print("Biphonemes in wrong order:", bestBadOrder)
 
     def scorePermutation(self, permutation : str) :
         score = 0.0
@@ -288,19 +295,24 @@ class Syllable :
         phonemes = Syllable.phonemeCol.getPhonemes(phoneme_names)
         firstVowelPos = -1
         lastVowelPos = -1
+        verbose = True if phoneme_names == "" else False
         for pos,phoneme in enumerate(phonemes):
             phoneme.increaseFrequency(frequency, pos=pos, invPos=len(phonemes)-pos-1 )
+            if verbose : print(phoneme, phoneme.frequency)
             self.phonemes.append(phoneme)
             if firstVowelPos == -1 and not phoneme.isVowel() :
+                if verbose : print("Left hand consonant", phoneme)
                 phoneme_pre = Syllable.preVowelPhonemeCol.getPhoneme(phoneme.name)
                 phoneme_pre.increaseFrequency(frequency)
                 self.phonemes_pre.append(phoneme_pre)
             elif firstVowelPos != -1 and not phoneme.isVowel() :
+                if verbose : print("Right hand consonant", phoneme)
                 phoneme_post = Syllable.postVowelPhonemeCol.getPhoneme(phoneme.name)
                 phoneme_post.increaseFrequency(frequency)
                 self.phonemes_post.append(phoneme_post)
             #Break down the syllable into consonants-vowels-consonants
             if phoneme.isVowel() :
+                if verbose : print("Vowel", phoneme)
                 phoneme_vowel = Syllable.vowelPhonemeCol.getPhoneme(phoneme.name)
                 phoneme_vowel.increaseFrequency(frequency)
                 self.phonemes_vowel.append(phoneme_vowel)
@@ -316,6 +328,7 @@ class Syllable :
                     biphoneme  = Syllable.preVowelBiphonemeCol.getBiphoneme( \
                                     (phoneme1.name, phoneme2.name) )
                     biphoneme.increaseFrequency(frequency) 
+                    if verbose : print("Left hand biphoneme", biphoneme)
                     self.biphonemes_pre.append(biphoneme)
 
         #Track the cooccurences of phonemes pairs in the last consonnants group
@@ -325,6 +338,7 @@ class Syllable :
                     biphoneme  = Syllable.postVowelBiphonemeCol.getBiphoneme( \
                                     (phoneme1.name, phoneme2.name) )
                     biphoneme.increaseFrequency(frequency) 
+                    if verbose : print("Right hand biphoneme", biphoneme)
                     self.biphonemes_post.append(biphoneme)
         
         #Track the cases where multiple vowels are part of the middle (inclue semivowels??)
@@ -334,6 +348,7 @@ class Syllable :
                     biphoneme  = Syllable.multiVowelBiphonemeCol.getBiphoneme( \
                                     (phoneme1.name, phoneme2.name) )
                     biphoneme.increaseFrequency(frequency) 
+                    if verbose : print("Vowel biphoneme", biphoneme)
                     self.biphonemes_vowel.append(biphoneme)
         
         self.frequency = frequency
@@ -389,17 +404,17 @@ class Syllable :
         print("Left hand optimization :")
         #for i in range(10):
         order = Syllable.preVowelBiphonemeCol.optimizeOrder()
-        Syllable.preVowelPhonemeCol.printBarchart(order)
+        Syllable.preVowelPhonemeCol.printBarchart(order, Phoneme.consonant_phonemes)
 
         print("Right hand optimization :")
         #for i in range(10):
         order = Syllable.postVowelBiphonemeCol.optimizeOrder()
-        Syllable.postVowelPhonemeCol.printBarchart(order)
+        Syllable.postVowelPhonemeCol.printBarchart(order, Phoneme.consonant_phonemes)
 
         print("Vowel optimization :")
         #for i in range(10):
         order = Syllable.multiVowelBiphonemeCol.optimizeOrder()
-        Syllable.vowelPhonemeCol.printBarchart(order)
+        Syllable.vowelPhonemeCol.printBarchart(order, Phoneme.vowel_phonemes)
         print("")
 
     def sortedSpellings(self) :
