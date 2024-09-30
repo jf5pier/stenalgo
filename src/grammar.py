@@ -3,6 +3,11 @@
 #
 from dataclasses import dataclass
 from enum import Enum
+from itertools import permutations,chain
+from multiprocessing import Pool
+from copy import deepcopy
+import numpy as np
+
 
 GramCat = Enum("GramCat",["ADJ", "ADJ:dem", "ADJ:ind", "ADJ:int", "ADJ:num", 
                           "ADJ:pos", "ADV", "ART:def", "ART:ind", "AUX", "CON", 
@@ -21,6 +26,11 @@ class Phoneme :
     """
     name : str
     frequency : float = 0.0
+
+    #There's an argument to have "w" and "j" as part of the vowels
+    vowel_phonemes = "aeiE@o°§uy5O9821"
+    consonant_phonemes = "RtsplkmdvjnfbZwzSgNG"
+
     def __post_init__(self) :
         # 7 phonemes is the max per syll
         self.posFrequency = [0.0,0.0,0.0,0.0,0.0,0.0,0.0] 
@@ -32,10 +42,9 @@ class Phoneme :
         self.invPosFrequency[invPos] += frequency
 
     def isVowel(self) :
-        return self.name in "aeiE@o°§uy5O9821"
-
+        return self.name in self.vowel_phonemes
     def isConsonant(self) :
-        return self.name in "RtsplkmdvjnfbZwzSgNG"
+        return self.name in self.consonant_phonemes
 
     def __eq__(self, other) :
         self.name == other.name
@@ -51,12 +60,12 @@ class Biphoneme :
     """
     Coocurence of two phonemes in a group of phonemes (syllable or other)
 
-    pair : (Phoneme, Phoneme)
+    pair : (str, str)
         Pair of phonemes
     frequency : 
         Occurence frequency of the pair of phoenemes
     """
-    pair : (Phoneme, Phoneme)
+    pair : (str, str)
     frequency : float = 0.0
 
     def increaseFrequency(self, frequency: float) :
@@ -69,7 +78,7 @@ class Biphoneme :
     def __str__(self) :
         return self.pair
     def __repr__(self):
-        return self.pair + ":" + "%.1f"%self.frequency
+        return self.pair[0]+ self.pair[1] + ":" + "%.1f"%self.frequency
 
 class PhonemeCollection:
     """
@@ -141,6 +150,71 @@ class BiphonemeCollection:
         print("Biphonemes:", list(map(lambda bp : (\
                 bp.pair, "%.1f"%bp.frequency), self.biphonemes[:nb])), "\n")
 
+    def getPhonemesNames(self) :
+        """ Extract single phonemes names from pairs of phonemes"""
+        left = set(map(lambda p : p.pair[0], self.biphonemes))
+        right = set(map(lambda p : p.pair[1], self.biphonemes))
+        return "".join(set(list(left) + list(right)))
+
+        
+    def optimizeOrder(self) :
+        """ Optimize the order of the phonemes found in the biphonemes
+            to reduce the frequency where two phonemes would be types in
+            the wrong order to produce a syllable. """
+        score=0
+        phonemes = list(self.getPhonemesNames())
+        np.random.shuffle(phonemes)
+        bestPermutation = "".join(phonemes)
+        bestScore,bestBadOrder = self.scorePermutation(phonemes)
+        print("Starting order (%0.1f):"%bestScore, bestPermutation)
+        #print("Biphonemes in wrong order:", bestBadOrder)
+
+        #The algorithm moves a window over the phonem string and tests permutations
+        # in that window exclusively.  A window scan goes over every phonem substring
+        # left to right, then right to left.
+        windowSize = 4
+        windowScans = 400
+        maxShuffleSize = 7
+        randOrder = np.array(range(len(phonemes)))
+        for scan in range(windowScans) :
+            np.random.shuffle(randOrder)
+            shuffleSize=np.random.randint(2,maxShuffleSize)
+            mutatedPermutation = list(deepcopy(bestPermutation))
+            tmp = bestPermutation[randOrder[0]]
+            for i in range(1, shuffleSize) :
+                mutatedPermutation[randOrder[i-1]] = bestPermutation[randOrder[i]]
+            mutatedPermutation[randOrder[shuffleSize-1]] = tmp
+            mutatedPermutation = "".join(mutatedPermutation)
+            
+            #print("Test perm:", mutatedPermutation, scan)
+            for pos in chain(range(len(phonemes) - windowSize), 
+                             range(len(phonemes) - windowSize, 0, -1)):
+                subPhonemes = mutatedPermutation[pos:pos+windowSize]
+                for permutation in permutations(subPhonemes):
+                    subp = "".join(permutation)
+                    p = mutatedPermutation[:pos] + subp + mutatedPermutation[pos+windowSize:]
+                    score, badOrder = self.scorePermutation(p)
+                    if score > bestScore :
+                        #if score > (bestScore * 1.03) :
+                            #print("New order (%0.1f > %0.1f):"%(score,bestScore), p)
+                            #print("Biphonemes in wrong order:", badOrder)
+                        bestScore = score
+                        bestPermutation = p
+                        bestBadOrder = badOrder
+        print("Best order (%0.1f):"%bestScore, bestPermutation)
+        #print("Biphonemes in wrong order:", bestBadOrder)
+
+    def scorePermutation(self, permutation : str) :
+        score = 0.0
+        badOrder = []
+        for biphoneme in self.biphonemes :
+            left,right = biphoneme.pair
+            if permutation.index(left) < permutation.index(right) :
+                score += biphoneme.frequency
+            else :
+                score -= biphoneme.frequency
+                badOrder.append(biphoneme)
+        return score, badOrder
 
 class Syllable :
     """
@@ -158,6 +232,8 @@ class Syllable :
         Collection of pair of phonemes found before the vowels of a syllable
     postVowelBiphonemeCol : BiphonemeCollection
         Collection of pair of phonemes found after the vowels of a syllable
+    multiVowelBiphonemeCol : BiphonemeCollection
+        Collection of pair of phonemes found in multi-vowels syllable
     """
     phonemeCol : PhonemeCollection = PhonemeCollection()
     preVowelBiphonemeCol : BiphonemeCollection = BiphonemeCollection()
@@ -245,6 +321,18 @@ class Syllable :
         print("Post-vowels biphonemes")
         Syllable.postVowelBiphonemeCol.printTopBiphonemes( nb )
 
+    def optimizeBiphonemeOrder() :
+        print("Left hand optimization :")
+        for i in range(10):
+            Syllable.preVowelBiphonemeCol.optimizeOrder()
+        print("Right hand optimization :")
+        for i in range(10):
+            Syllable.postVowelBiphonemeCol.optimizeOrder()
+        print("Vowel optimization :")
+        for i in range(10):
+            Syllable.multiVowelBiphonemeCol.optimizeOrder()
+        print("")
+
     def sortedSpellings(self) :
         spel_freq = [(k,v) for k,v in self.spellings.items()]
         spel_freq.sort(key=lambda kv: kv[1], reverse=True)
@@ -290,5 +378,3 @@ class SyllableCollection :
         for syl in self.syllables[:nb] :
             print("Syllable:",str(syl))
 
-    def printTopPhonemPerPositon(self) :
-        return

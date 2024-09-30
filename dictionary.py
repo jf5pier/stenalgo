@@ -230,12 +230,14 @@ class Dictionary:
             for (syllable_name, spelling) in zip(syllable_names, spellings): 
                 syllable = self.sylCol.updateSyllable(syllable_name, spelling, frequency)
 
-        Syllable.printTopPhonemes()
+        #Syllable.printTopPhonemes()
         #self.sylCol.printTopSyllables()
         #print(self.sylCol.syllable_names.keys())
         #Syllable.printTopPhonemesPerPosition()
         #Syllable.printTopPhonemesPerInvPosition()
-        Syllable.printTopBiphonemes(50)
+        #Syllable.printTopBiphonemes(50)
+        for i in range(10):
+            Syllable.optimizeBiphonemeOrder()
 
 dictionary = Dictionary() 
 dictionary.printSyllabificationStats()
