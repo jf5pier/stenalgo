@@ -11313,8 +11313,6 @@ aztèque	astEk	aztèque	ADJ	ADJ,NOM		s		a_s|t_E_k_#	a_z|t_è_qu_e	0.27	0.51
 aztèque	astEk	aztèque	NOM	ADJ,NOM		s		a_s|t_E_k_#	a_z|t_è_qu_e	0.0	0.14
 aztèques	astEk	aztèque	ADJ	ADJ,NOM		p		a_s|t_E_k_#	a_z|t_è_qu_es	0.47	0.09
 aztèques	astEk	aztèque	NOM	ADJ,NOM		p		a_s|t_E_k_#	a_z|t_è_qu_es	0.07	0.01
-azulejo	azulexo	azulejo	NOM	NOM	m	s		a|z_u|l_e|x_o	a|z_u|l_e|j_o	0.0	0.1
-azulejos	azulexOs	azulejo	NOM	NOM	m	p		a|z_u|l_e|x_O_s	a|z_u|l_e|j_o_s	0.54	0.0
 azur	azyR	azur	NOM	ADJ,NOM	m	s		a|z_y_R	a|z_u_r	9.39	2.98
 azur	azyR	azur	ADJ	ADJ,NOM				a|z_y_R	a|z_u_r	1.62	0.3
 azurs	azyR	azur	NOM	NOM	m	p		a|z_y_R_#	a|z_u_r_s	0.14	0.0
@@ -70565,7 +70563,6 @@ jeep	dZip	jeep	NOM	NOM	f	s		dZ_i_p	j_ee_p	2.16	4.18
 jeeps	dZip	jeep	NOM	NOM	f	p		dZ_i_p_#	j_ee_p_s	0.81	0.47
 jellaba	dZElaba	jellaba	NOM	NOM	f	s		dZ_E|l_a|b_a	j_e|ll_a|b_a	0.14	0.0
 jenny	Zeni	jenny	NOM	NOM	f	s		Z_e|n_i	j_e|nn_y	9.32	0.12
-jerez	xeREs	jerez	NOM	NOM	m			x_e|R_E_s	j_e|r_e_z	0.68	0.67
 jerk	dZERk	jerk	NOM	NOM	m	s		dZ_E_R_k	j_e_r_k	0.54	0.11
 jerrican	ZeRikan	jerrican	NOM	NOM	m	s		Z_e|R_i|k_a_n	j_e|rr_i|c_a_n	0.07	0.34
 jerricane	ZERikan	jerricane	NOM	NOM	m	s		Z_E|R_i|k_a_n_#	j_e|rr_i|c_a_n_e	0.0	0.19
@@ -70980,7 +70977,6 @@ joyeuseté	Zwaj2z°te	joyeuseté	NOM	NOM	f	s		Z_wa_j|2|z_°|t_e	j_o_y|eu|s_e|t_�
 joyeusetés	Zwaj2z°te	joyeuseté	NOM	NOM	f	p		Z_wa_j|2|z_°|t_e_#	j_o_y|eu|s_e|t_é_s	0.14	0.01
 joyeux	Zwaj2	joyeux	ADJ	ADJ	m			Z_wa_j|2_#	j_o_y|eu_x	26.69	31.81
 joystick	ZOjstik	joystick	NOM	NOM	m	s		Z_O_j|s_t_i_k	j_o_y|s_t_i_ck	0.0	0.11
-juan	xwan	juan	NOM	NOM	m	s		x_w_a_n	j_u_a_n	0.2	0.01
 jubila	Zybila	jubiler	VER	VER			ind:pas:3s;	Z_y|b_i|l_a	j_u|b_i|l_a	0.34	0.01
 jubilai	ZybilE	jubiler	VER	VER			ind:pas:1s;	Z_y|b_i|l_E	j_u|b_i|l_ai	0.14	0.0
 jubilaient	ZybilE	jubiler	VER	VER			ind:imp:3p;	Z_y|b_i|l_E	j_u|b_i|l_aient	0.07	0.0
@@ -107485,7 +107481,6 @@ rinçaient	R5sE	rincer	VER	VER			ind:imp:3p;	R_5|s_E	r_in|ç_aient	0.07	0.0
 rinçais	R5sE	rincer	VER	VER			ind:imp:1s;ind:imp:2s;	R_5|s_E	r_in|ç_ais	0.14	0.01
 rinçait	R5sE	rincer	VER	VER			ind:imp:3s;	R_5|s_E	r_in|ç_ait	1.42	0.01
 rinçant	R5s@	rincer	VER	VER			par:pre;	R_5|s_@	r_in|ç_ant	0.27	0.11
-rioja	Rjoxa	rioja	NOM	NOM	m	s		R_j_o|x_a	r_i_o|j_a	0.0	0.01
 rions	Rj§	rire	VER	VER			imp:pre:1p;ind:pre:1p;	R_j_§	r_i_ons	1.49	0.63
 ripa	Ripa	riper	VER	VER			ind:pas:3s;	R_i|p_a	r_i|p_a	0.07	0.0
 ripaillait	RipajE	ripailler	VER	VER			ind:imp:3s;	R_i|p_a|j_E	r_i|p_a|ill_ait	0.07	0.0
