@@ -76,9 +76,9 @@ associations for 137k of the 142k words of Lexique383. The final lexicon `resour
 #### Phoneme and biphoneme frequencies must be extracted [x]
 Typically, the order of the phonemes (from left to right) typed to form a chord must ressemble the order of the phonemes in the syllable.
 Ordered biphoneme frequencies informs on the order the phonemes should be placed on the keymap. For this example, we assumed that the typical
-order of the keys on the keymap would be the 3 groups of phonemes : Left-consonants -> Vowels -> Right-consonants.  Syllable in French 
+order of the keys on the keymap would be the 3 groups of phonemes : Left-consonants -> Vowels -> Right-consonants.  Syllables in French 
 do not typically have two groups of vowels phonemes separated by consonants (VCV), so this mapping is consistent with the typicals French 
-vowels (V, VC, CV, CVC).
+syllables (V, VC, CV, CVC).
 
 While biphoneme frequencies inform on the order of the phonemes, single-phoneme frequencies inform on the importance of the phoneme. Here
 is a representation of a phoneme order for all 3 groups of phonemes that minimize the frequency of chords where the phones are in the wrong
