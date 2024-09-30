@@ -86,57 +86,64 @@ order. Bar charts represent the frequency of the individual phonemes in each of 
 
 
 ##### Example of optimal phonemes order for the left hand, thumb vowels and right hand
+
 ```
 Left hand optimization :
-Best order (ordered score: 91215.3, disordered score: -1400.5): 
-dZksptvSgmnzfbRlNwj
 
->               R     <
->               R     <
->               R     <
->      t        R     <
->    spt        R     <
->    spt   m    R     <
-> d ksptv  m    Rl    <
-> d ksptv  m    Rl  j <
-> d ksptv  mn fbRl  j <
-> dZksptvSgmnzfbRl wj <
-> dZksptvSgmnzfbRlNwj <
-^^^^^^^^^^^^^^^^^^^^^^^
+Best order (ordered score 91215.3, disordered score -1400.5):
+ dZksNptgfvSmnbzRljw
+
+>                R    |   <
+>                R    |   <
+>                R    |   <
+>       t        R    |   <
+>    s pt        R    |   <
+>    s pt    m   R    |   <
+> d ks pt  v m   Rl   |   <
+> d ks pt  v m   Rlj  |   <
+> d ks pt fv mnb Rlj  |   <
+> dZks ptgfvSmnbzRljw |   <
+> dZksNptgfvSmnbzRljw | G <
+^^^^^^^^^^^^^^^^^^^^^^|^^^^
+              ordered | floating
 
 Right hand optimization :
-Best order (ordered score: 15509.1, disordered score: -5766.6): 
-pjbgvwdzsfktRlmnZNS
 
->             R       <
->             R       <
->             R       <
->             R       <
->             R       <
->             R       <
->             R       <
->         s  tR       <
->         s  tRl      <
->       d s ktRl      <
-> pjbgvwdzsfktRlmnZNS <
-^^^^^^^^^^^^^^^^^^^^^^^
+Best order (ordered score 15522.8, disordered score -5759.7):
+ wpjfvbskdgtRNlzmnZS
+
+>            R        |   <
+>            R        |   <
+>            R        |   <
+>            R        |   <
+>            R        |   <
+>            R        |   <
+>            R        |   <
+>       s   tR        |   <
+>       s   tR l      |   <
+>       skd tR l      |   <
+> wpjfvbskdgtRNlzmnZS | G <
+^^^^^^^^^^^^^^^^^^^^^^|^^^^
+              ordered | floating
 
 Vowel optimization :
-Best order (ordered score: 6585.4, disordered score: 0.0): 
-8ae§E9o@i52O
 
->  a           <
->  a           <
->  ae          <
->  ae E   i    <
->  ae E   i    <
->  ae E   i    <
->  ae E  @i    <
->  ae E o@i    <
->  ae§E o@i    <
->  ae§E o@i5 O <
-> 8ae§E9o@i52O <
-^^^^^^^^^^^^^^^^
+Best order (ordered score 6585.4, disordered score 0.0):
+ 8§O92aoE@5ie
+
+>      a       |      <
+>      a       |      <
+>      a     e |      <
+>      a E  ie |      <
+>      a E  ie |      <
+>      a E  ie |      <
+>      a E@ ie |      <
+>      aoE@ ie |      <
+>  §   aoE@ ie | °uy  <
+>  §O  aoE@5ie | °uy  <
+> 8§O92aoE@5ie | °uy1 <
+^^^^^^^^^^^^^^^|^^^^^^^
+       ordered | floating
 ```
 
 Negative (disordered) score represent the sum of frequencies of biphonemes that would be in the wrong order. In the case of the right hand
