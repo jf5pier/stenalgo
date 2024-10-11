@@ -47,7 +47,11 @@ class Phoneme :
         return self.name in self.consonant_phonemes
 
     def __eq__(self, other) :
-        self.name == other.name
+        if type(other) == Phoneme :
+            return self.name == other.name
+        else:
+            return self.name == other
+
     def __lt__(self, other) :
         return self.frequency < other.frequency
     def __str__(self) :
@@ -284,15 +288,19 @@ class Syllable :
     multiVowelBiphonemeCol : BiphonemeCollection = BiphonemeCollection()
 
     def __init__(self, phoneme_names: str, spelling: str, frequency: float = 0.0): 
-        self.phonemes = []
-        self.phonemes_pre = []
-        self.phonemes_post = []
-        self.phonemes_vowel = []
-        self.biphonemes_pre = []
-        self.biphonemes_post = []
-        self.biphonemes_vowel = []
-        self.spellings = {}
+        self.phonemes : list[Phoneme] = []
+        self.name : str = ""
+        self.phonemes_pre : list[Phoneme] = []
+        self.phonemes_post : list[Phoneme] = []
+        self.phonemes_vowel : list[Phoneme] = []
+        self.biphonemes_pre : list[Biphoneme] = []
+        self.biphonemes_post : list[Biphoneme] = []
+        self.biphonemes_vowel : list[Biphoneme] = []
+        self.spellings : Dict[str,float] = {}
+
         phonemes = Syllable.phonemeCol.getPhonemes(phoneme_names)
+        self.name = "".join(list(map(lambda p : p.name, phonemes)))
+
         firstVowelPos = -1
         lastVowelPos = -1
         verbose = True if phoneme_names == "" else False
@@ -354,6 +362,10 @@ class Syllable :
         self.frequency = frequency
         self.spellings[spelling] = frequency
 
+        #print("pho",self.phonemes, "pre",self.phonemes_pre, "post",self.phonemes_post, 
+        #      "vow",self.phonemes_vowel, "bpre", self.biphonemes_pre, "bpost",
+        #      self.biphonemes_post, "bvow",self.biphonemes_vowel)
+
     def increaseFrequency(self, frequency: float):
         self.frequency += frequency
         for pos,phoneme in enumerate(self.phonemes) :
@@ -402,20 +414,37 @@ class Syllable :
 
     def optimizeBiphonemeOrder() :
         print("Left hand optimization :")
-        #for i in range(10):
         order = Syllable.preVowelBiphonemeCol.optimizeOrder()
         Syllable.preVowelPhonemeCol.printBarchart(order, Phoneme.consonant_phonemes)
 
         print("Right hand optimization :")
-        #for i in range(10):
         order = Syllable.postVowelBiphonemeCol.optimizeOrder()
         Syllable.postVowelPhonemeCol.printBarchart(order, Phoneme.consonant_phonemes)
 
         print("Vowel optimization :")
-        #for i in range(10):
         order = Syllable.multiVowelBiphonemeCol.optimizeOrder()
         Syllable.vowelPhonemeCol.printBarchart(order, Phoneme.vowel_phonemes)
         print("")
+
+    def replacePhonemeInPos(self, phoneme1 : Phoneme, phoneme2 : Phoneme, pos : str) :
+        """ Replace a phoneme in one of 3 positions in a syllable """
+        if pos == "preVowels": 
+            pre = "".join(map(str,self.phonemes_pre))
+            pre.replace(str(phoneme1), str(phoneme2))
+            return pre + "".join(map(str,self.phonemes_vowel)) + \
+                "".join(map(str,self.phonemes_post))
+        elif pos == "postVowels": 
+            post = "".join(map(str,self.phonemes_post))
+            post.replace(str(phoneme1), str(phoneme2))
+            return "".join(map(str,self.phonemes_pre)) + \
+                "".join(map(str,self.phonemes_vowel)) +  post
+        elif pos == "vowels": 
+            vowel = "".join(map(str,self.phonemes_vowel))
+            vowel.replace(str(phoneme1), str(phoneme2))
+            return "".join(map(str,self.phonemes_pre)) + vowel + \
+                "".join(map(str,self.phonemes_post))
+        else :
+            return "".join(map(str,self.phonemes))
 
     def sortedSpellings(self) :
         spel_freq = [(k,v) for k,v in self.spellings.items()]
@@ -456,7 +485,122 @@ class SyllableCollection :
         """ Get syllable from collection, adding missing ones if needed """
         self.updatSyllable(syllable_name, spelling, frequency)
         return self.syllable_names[syllable_name] 
+
+    def getFrequency(self, syllable: Syllable|str) :
+        if type(syllable) == Syllable :
+            name = syllable.name
+        elif type(syllable) == str:
+            name = syllable
+        else :
+            print("Type syllable|str not found", syllable)
+            sys.exit(1)
+
+        if name not in self.syllable_names :
+            print("Not found syllable", name)
+            return 0.0
+        else :
+            #print("Found syllable", name, self.syllable_names[name].frequency )
+            return self.syllable_names[name].frequency 
     
+    def ambiguityScore(self, phoneme1 : str, phoneme2 : str, pos : str) :
+        """ Ambiguity is defined by the existance of two syllables that are different by only
+            one phoneme, or that contain a pair of phonemes. If a single key is assigned to 
+            those different single phonemes or to that pair of phonemes or, then using
+            that key will be ambigous.  The score is defined by the frequency of the least
+            frequent ambigous syllable of the pair. """
+
+        def phonemesByPos(syllable : Syllable, pos : str) :
+            """ Helper function """
+            if pos == "preVowels": return syllable.phonemes_pre
+            elif pos == "postVowels": return syllable.phonemes_post
+            elif pos == "vowels": return syllable.phonemes_vowel
+            else : return ""
+
+        p1_syll = list(filter(lambda s : phoneme1 in phonemesByPos(s, pos), self.syllables))
+        
+        score = 0.0
+        for syll1 in p1_syll:
+            if phoneme2 in phonemesByPos(syll1, pos) :
+                # Case where both phonemes are part of the same syllable
+                # This is a tripple ambiguity with the 2 syllables that only contains
+                # one of the 2 phonemes. Score is the sum of the 2 least frequent syllables
+                shortSyll1 = syll1.replacePhonemeInPos(phoneme1, "", pos)
+                shortSyll2 = syll1.replacePhonemeInPos(phoneme2, "", pos)
+
+                #shortSyll1.pop( syll1.index(phoneme2) )
+                score += self.getFrequency(syll1.name) \
+                        + self.getFrequency(shortSyll1) \
+                        + self.getFrequency(shortSyll2)  \
+                        -max(self.getFrequency(syll1.name), \
+                             self.getFrequency(shortSyll1), \
+                             self.getFrequency(shortSyll2))
+#                print("Score1",score)
+            else :
+                # Score is only defined by the 2 syllables that have 1 phoneme different
+                p1_to_p2 = syll1.replacePhonemeInPos(phoneme1, phoneme2, pos)
+                score += min(self.getFrequency(syll1.name), \
+                             self.getFrequency(p1_to_p2))    
+#                print("Score2",score)
+        return score
+
+
+    def analysePhonemAmbiguity(self) :
+        """ Determines how ambigous would the replacement of a pair of phonemes 
+            by a variable phoneme meaning Either of these Phonemes be over the 
+            collection of syllables. Low ambiguity mean a key can be assigned
+            to two phonemes and the other keys will give enough context to resolve
+            the right syllable."""
+        print("Left hand ambiguity optimization")
+        pre_vowel_inter_syll_ambiguity = {}
+        post_vowel_inter_syll_ambiguity = {}
+        vowel_inter_syll_ambiguity = {}
+        for p1 in Phoneme.consonant_phonemes[:-1] :
+            p1i = Phoneme.consonant_phonemes.index(p1)
+            for p2 in Phoneme.consonant_phonemes[p1i+1:] :
+                conflict = self.ambiguityScore(p1, p2, "preVowels")
+                pre_vowel_inter_syll_ambiguity[(p1,p2)] = conflict
+
+        print("Right hand ambiguity optimization")
+        for p1 in Phoneme.consonant_phonemes[:-1] :
+            p1i = Phoneme.consonant_phonemes.index(p1)
+            for p2 in Phoneme.consonant_phonemes[p1i+1:] :
+                conflict = self.ambiguityScore(p1, p2, "postVowels")
+                post_vowel_inter_syll_ambiguity[(p1,p2)] = conflict
+
+        print("Vowel ambiguity optimization")
+        for p1 in Phoneme.vowel_phonemes[:-1] :
+            p1i = Phoneme.vowel_phonemes.index(p1)
+            for p2 in Phoneme.vowel_phonemes[p1i+1:] :
+                conflict = self.ambiguityScore(p1, p2, "vowels")
+                vowel_inter_syll_ambiguity[(p1,p2)] = conflict
+
+        print("")
+        return pre_vowel_inter_syll_ambiguity, \
+                post_vowel_inter_syll_ambiguity, \
+                vowel_inter_syll_ambiguity
+
+    def printAmbiguityStats(self, nb : int = -1) :
+        pre, post, vowels = self.analysePhonemAmbiguity()
+        sorted_pre = {(k1,k2): v for (k1,k2), v in \
+            sorted(pre.items(), key=lambda item: item[1])}
+        sorted_post= {(k1,k2): v for (k1,k2), v in \
+            sorted(post.items(), key=lambda item: item[1])}
+        sorted_vowels = {(k1,k2): v for (k1,k2), v in \
+            sorted(vowels.items(), key=lambda item: item[1])}
+
+        print("Left hand minimal-ambiguity phonemes pairs")
+        for (p1,p2), score in list(sorted_pre.items())[:nb]:
+            print(" Pair:", p1,p2,"score: %.1f"%score )
+
+        print("Right hand minimal-ambiguity phonemes pairs")
+        for (p1,p2), score in list(sorted_post.items())[:nb]:
+            print(" Pair:", p1,p2,"score: %.1f"%score )
+
+        print("Vowels minimal-ambiguity phonemes pairs")
+        for (p1,p2), score in list(sorted_vowels.items())[:nb]:
+            print(" Pair:", p1,p2,"score: %.1f"%score )
+
+
     def printTopSyllables(self, nb: int = -1) :
         self.syllables.sort(reverse=True)
         for syl in self.syllables[:nb] :

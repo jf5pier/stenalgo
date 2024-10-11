@@ -236,6 +236,7 @@ class Dictionary:
 #        Syllable.printTopPhonemesPerInvPosition()
         Syllable.printTopBiphonemes(20)
         Syllable.optimizeBiphonemeOrder()
+        self.sylCol.printAmbiguityStats(nb=5)
 
 dictionary = Dictionary() 
 dictionary.printSyllabificationStats()
