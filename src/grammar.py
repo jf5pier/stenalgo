@@ -7,6 +7,7 @@ from enum import Enum
 from itertools import permutations, chain
 from copy import deepcopy
 from typing import Tuple, List, Dict
+from word import Word
 import numpy as np
 
 
@@ -520,7 +521,7 @@ class SyllableCollection:
     syllables = []
 
     def updateSyllable(self, syllable_name: str, spelling: str,
-                       addedfrequency: float):
+                       addedfrequency: float, word: Word | None = None):
         """ Updates syllable from collection, adding missing ones if needed """
         if syllable_name not in self.syllable_names:
             s = Syllable(syllable_name, spelling)
