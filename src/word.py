@@ -1,6 +1,15 @@
+#!/usr/bin/python
+# coding: utf-8
+#
 from dataclasses import dataclass
-from grammar import GramCat
+from enum import Enum
 from typing import List
+
+GramCat = Enum("GramCat",
+               ["ADJ", "ADJ:dem", "ADJ:ind", "ADJ:int", "ADJ:num",
+                "ADJ:pos", "ADV", "ART:def", "ART:ind", "AUX", "CON",
+                "LIA", "NOM", "ONO", "PRE", "PRO:dem", "PRO:ind",
+                "PRO:int", "PRO:per", "PRO:pos", "PRO:rel", "VER"])
 
 
 @dataclass

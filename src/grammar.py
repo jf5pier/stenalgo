@@ -3,18 +3,11 @@
 #
 import sys
 from dataclasses import dataclass
-from enum import Enum
 from itertools import permutations, chain
 from copy import deepcopy
 from typing import Tuple, List, Dict
-from word import Word
+from .word import Word
 import numpy as np
-
-
-GramCat = Enum("GramCat", ["ADJ", "ADJ:dem", "ADJ:ind", "ADJ:int", "ADJ:num",
-                           "ADJ:pos", "ADV", "ART:def", "ART:ind", "AUX", "CON",
-                           "LIA", "NOM", "ONO", "PRE", "PRO:dem", "PRO:ind",
-                           "PRO:int", "PRO:per", "PRO:pos", "PRO:rel", "VER"])
 
 
 @dataclass
@@ -298,6 +291,8 @@ class Syllable:
         Collection of pair of phonemes found after the vowels of a syllable
     multiVowelBiphonemeCol : BiphonemeCollection
         Collection of pair of phonemes found in multi-vowels syllable
+    words : Word
+        List of words from the Lexicon that contain that syllable
     """
     phonemeCol: PhonemeCollection = PhonemeCollection()
     preVowelPhonemeCol: PhonemeCollection = PhonemeCollection()
@@ -317,6 +312,7 @@ class Syllable:
         self.biphonemes_post: list[Biphoneme] = []
         self.biphonemes_vowel: list[Biphoneme] = []
         self.spellings: Dict[str, float] = {}
+        self.words = []
 
         phonemes = Syllable.phonemeCol.getPhonemes(phoneme_names)
         self.name = "".join(list(map(lambda p: p.name, phonemes)))
@@ -424,6 +420,9 @@ class Syllable:
         self.spellings[spelling] = spelling_frequency
         self.increaseFrequency(frequency)
 
+    def trackWord(self, word: Word):
+        self.words.append(word)
+
     @staticmethod
     def printTopPhonemesPerPosition(nb: int = -1):
         Syllable.phonemeCol.printTopPhonemesPerPosition(nb)
@@ -530,6 +529,9 @@ class SyllableCollection:
         # Adds the spelling if it is missing
         self.syllable_names[syllable_name].increaseSpellingFrequency(
             spelling, addedfrequency)
+        # Keep track of words using syllable
+        if word is not None:
+            self.syllable_names[syllable_name].trackWord(word)
 
     def getSyllable(self, syllable_name: str, spelling: str,
                     frequency: float = 0.0):

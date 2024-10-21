@@ -19,10 +19,8 @@
 #
 import csv
 from copy import deepcopy
-from dataclasses import dataclass
-from src.grammar import GramCat, Syllable, SyllableCollection
-from src.word import Word
-from typing import List
+from src.grammar import Syllable, SyllableCollection
+from src.word import GramCat, Word
 
 
 def printVerbose(word: str, msg: list):
@@ -32,7 +30,6 @@ def printVerbose(word: str, msg: list):
 
 
 class Dictionary:
-
     picked = []
     words = []
     words_by_ortho = {}
@@ -93,7 +90,7 @@ class Dictionary:
             syllable_names = word.phonemesToSyllableNames(withSilent=False)
             spellings = word.graphemsToSyllables(withSilent=False)
             for (syllable_name, spelling) in zip(syllable_names, spellings):
-                syllable = self.sylCol.updateSyllable(
+                _ = self.sylCol.updateSyllable(
                     syllable_name, spelling, frequency, word)
 
     def printSyllabificationStats(self):
