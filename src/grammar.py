@@ -555,7 +555,7 @@ class SyllableCollection:
             # print("Found", name, self.syllable_names[name].frequency )
             return self.syllable_names[name].frequency
 
-    def ambiguityScore(self, phoneme1: str, phoneme2: str, pos: str):
+    def syllabicAmbiguityScore(self, phoneme1: str, phoneme2: str, pos: str):
         """ Ambiguity is defined by the existance of two syllables that are
             different by only one phoneme, or that contain a pair of phonemes.
             If a single key is assigned to those different single phonemes or
@@ -604,7 +604,56 @@ class SyllableCollection:
 #                print("Score2",score)
         return score
 
-    def analysePhonemAmbiguity(self):
+    def lexicalAmbiguityScore(self, phoneme1: str, phoneme2: str, pos: str):
+        """ Ambiguity is defined by the existance of two words that are
+            different by only one phoneme, or that contain a pair of phonemes.
+            If a single key is assigned to those different single phonemes or
+            to that pair of phonemes, then using that key will be ambigous.
+            The score is defined by the frequnecy of the sum of least frequent
+            ambgious words. """
+
+        def phonemesByPos(syllable: Syllable, pos: str):
+            """ Helper function """
+            if pos == "preVowels":
+                return syllable.phonemes_pre
+            elif pos == "postVowels":
+                return syllable.phonemes_post
+            elif pos == "vowels":
+                return syllable.phonemes_vowel
+            else:
+                return ""
+
+        p1_syll = list(filter(lambda s: phoneme1 in phonemesByPos(s, pos),
+                              self.syllables))
+
+        score = 0.0
+        for syll1 in p1_syll:
+            if phoneme2 in phonemesByPos(syll1, pos):
+                # Case where both phonemes are part of the same syllable
+                # This is a tripple ambiguity with the 2 syllables that only
+                # contains one of the 2 phonemes. Score is the sum of the 2
+                # least frequent syllables
+                shortSyll1 = syll1.replacePhonemeInPos(phoneme1, "", pos)
+                shortSyll2 = syll1.replacePhonemeInPos(phoneme2, "", pos)
+
+                # shortSyll1.pop( syll1.index(phoneme2) )
+                score += self.getFrequency(syll1.name) \
+                    + self.getFrequency(shortSyll1) \
+                    + self.getFrequency(shortSyll2)  \
+                    - max(self.getFrequency(syll1.name),
+                          self.getFrequency(shortSyll1),
+                          self.getFrequency(shortSyll2))
+#                print("Score1",score)
+            else:
+                # Score is only defined by the 2 syllables that
+                # have 1 phoneme different
+                p1_to_p2 = syll1.replacePhonemeInPos(phoneme1, phoneme2, pos)
+                score += min(self.getFrequency(syll1.name),
+                             self.getFrequency(p1_to_p2))
+#                print("Score2",score)
+        return score
+
+    def analysePhonemSyllabicAmbiguity(self):
         """ Determines how ambigous would the replacement of a pair of phonemes
             by a variable phoneme meaning Either of these Phonemes be over the
             collection of syllables. Low ambiguity mean a key can be assigned
@@ -617,21 +666,56 @@ class SyllableCollection:
         for p1 in Phoneme.consonant_phonemes[:-1]:
             p1i = Phoneme.consonant_phonemes.index(p1)
             for p2 in Phoneme.consonant_phonemes[p1i+1:]:
-                conflict = self.ambiguityScore(p1, p2, "preVowels")
+                conflict = self.syllabicAmbiguityScore(p1, p2, "preVowels")
                 pre_vowel_inter_syll_ambiguity[(p1, p2)] = conflict
 
         print("Right hand ambiguity optimization")
         for p1 in Phoneme.consonant_phonemes[:-1]:
             p1i = Phoneme.consonant_phonemes.index(p1)
             for p2 in Phoneme.consonant_phonemes[p1i+1:]:
-                conflict = self.ambiguityScore(p1, p2, "postVowels")
+                conflict = self.syllabicAmbiguityScore(p1, p2, "postVowels")
                 post_vowel_inter_syll_ambiguity[(p1, p2)] = conflict
 
         print("Vowel ambiguity optimization")
         for p1 in Phoneme.vowel_phonemes[:-1]:
             p1i = Phoneme.vowel_phonemes.index(p1)
             for p2 in Phoneme.vowel_phonemes[p1i+1:]:
-                conflict = self.ambiguityScore(p1, p2, "vowels")
+                conflict = self.syllabicAmbiguityScore(p1, p2, "vowels")
+                vowel_inter_syll_ambiguity[(p1, p2)] = conflict
+
+        print("")
+        return pre_vowel_inter_syll_ambiguity, \
+            post_vowel_inter_syll_ambiguity, \
+            vowel_inter_syll_ambiguity
+
+    def analysePhonemLexicalAmbiguity(self):
+        """ Similairly to the Syllabic Ambiguity, but over the whole lexicon:
+            determines if a key assigned  to two phonemes will create
+            ambiguities when typing a full word. Low ambiguity means that the
+            other keys in the syllable and the other syllables of the word
+            provide enough context."""
+        print("Left hand ambiguity optimization")
+        pre_vowel_inter_syll_ambiguity = {}
+        post_vowel_inter_syll_ambiguity = {}
+        vowel_inter_syll_ambiguity = {}
+        for p1 in Phoneme.consonant_phonemes[:-1]:
+            p1i = Phoneme.consonant_phonemes.index(p1)
+            for p2 in Phoneme.consonant_phonemes[p1i+1:]:
+                conflict = self.lexicalAmbiguityScore(p1, p2, "preVowels")
+                pre_vowel_inter_syll_ambiguity[(p1, p2)] = conflict
+
+        print("Right hand ambiguity optimization")
+        for p1 in Phoneme.consonant_phonemes[:-1]:
+            p1i = Phoneme.consonant_phonemes.index(p1)
+            for p2 in Phoneme.consonant_phonemes[p1i+1:]:
+                conflict = self.lexicalAmbiguityScore(p1, p2, "postVowels")
+                post_vowel_inter_syll_ambiguity[(p1, p2)] = conflict
+
+        print("Vowel ambiguity optimization")
+        for p1 in Phoneme.vowel_phonemes[:-1]:
+            p1i = Phoneme.vowel_phonemes.index(p1)
+            for p2 in Phoneme.vowel_phonemes[p1i+1:]:
+                conflict = self.lexicalAmbiguityScore(p1, p2, "vowels")
                 vowel_inter_syll_ambiguity[(p1, p2)] = conflict
 
         print("")
@@ -640,7 +724,7 @@ class SyllableCollection:
             vowel_inter_syll_ambiguity
 
     def printAmbiguityStats(self, nb: int = -1):
-        pre, post, vowels = self.analysePhonemAmbiguity()
+        pre, post, vowels = self.analysePhonemSyllabicAmbiguity()
         sorted_pre = {(k1, k2): v for (k1, k2), v in
                       sorted(pre.items(), key=lambda item: item[1])}
         sorted_post = {(k1, k2): v for (k1, k2), v in
