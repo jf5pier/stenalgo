@@ -62,10 +62,10 @@ class Dictionary:
                     word = Word(ortho=corpus_word["ortho"],
                                 phonology=corpus_word["phon"],
                                 lemme=corpus_word["lemme"],
-                                gram_cat=GramCat[corpus_word["cgram"]
-                                                 ] if corpus_word["cgram"] != '' else None,
+                                gram_cat=GramCat[corpus_word["cgram"]]
+                                    if corpus_word["cgram"] != '' else None,
                                 ortho_gram_cat=[GramCat[gc] for gc in
-                                                corpus_word["cgramortho"].split(",")],
+                                    corpus_word["cgramortho"].split(",")],
                                 # gram_cat = corpus_word["cgram"],
                                 # ortho_gram_cat = corpus_word["cgramortho"],
                                 gender=corpus_word["genre"],
