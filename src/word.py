@@ -2,6 +2,7 @@
 # coding: utf-8
 #
 from dataclasses import dataclass
+from deepcopy import deepcopy
 from enum import Enum
 from typing import List
 
@@ -107,6 +108,14 @@ class Word:
         # Format is "syll1phonem1_syll1phonem2|syll2phonem1_..."
         self.syll_cv = map(lambda syll: syll.split("_"),
                            self.raw_syll_cv.split("|"))
+
+    def replaceSyllables(self, syll_orig : str, syll_final : str) -> str:
+        phono = deepcopy(self.phonology)
+        while pos = phono.find(syll_orig) != -1 :
+            phono = phono[0:pos] + syll_final + phono[len(syll_orig)+pos:]
+        return phono
+
+
 
 #    def writeOrthoSyll(self):
 #        # Format is "syll1letter1_syll1letter2|syll2letter1_..."

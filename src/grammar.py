@@ -555,6 +555,10 @@ class SyllableCollection:
             # print("Found", name, self.syllable_names[name].frequency )
             return self.syllable_names[name].frequency
 
+    def getWordsByPhono(self, phono: str) -> List[Word] :
+        return list(filte(lambda w: w.phono == phono, self.words))
+
+
     def syllabicAmbiguityScore(self, phoneme1: str, phoneme2: str, pos: str):
         """ Ambiguity is defined by the existance of two syllables that are
             different by only one phoneme, or that contain a pair of phonemes.
@@ -625,7 +629,6 @@ class SyllableCollection:
 
         p1_syll = list(filter(lambda s: phoneme1 in phonemesByPos(s, pos),
                               self.syllables))
-
         score = 0.0
         for syll1 in p1_syll:
             if phoneme2 in phonemesByPos(syll1, pos):
@@ -648,6 +651,8 @@ class SyllableCollection:
                 # Score is only defined by the 2 syllables that
                 # have 1 phoneme different
                 p1_to_p2 = syll1.replacePhonemeInPos(phoneme1, phoneme2, pos)
+                for word in syll1.words:
+                    phono2 = word.replaceSyllables(syll1.name, p1_to_p2)
                 score += min(self.getFrequency(syll1.name),
                              self.getFrequency(p1_to_p2))
 #                print("Score2",score)
