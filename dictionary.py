@@ -100,7 +100,8 @@ class Dictionary:
 #        Syllable.printTopPhonemesPerInvPosition()
         Syllable.printTopBiphonemes(20)
         Syllable.optimizeBiphonemeOrder()
-        self.sylCol.printAmbiguityStats(nb=5)
+        self.sylCol.printSyllacbicAmbiguityStats(nb=15)
+        self.sylCol.printLexicalAmbiguityStats(nb=15)
 
 
 dictionary = Dictionary()

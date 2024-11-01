@@ -2,15 +2,37 @@
 # coding: utf-8
 #
 from dataclasses import dataclass
-from deepcopy import deepcopy
+from copy import deepcopy
 from enum import Enum
 from typing import List
 
-GramCat = Enum("GramCat",
-               ["ADJ", "ADJ:dem", "ADJ:ind", "ADJ:int", "ADJ:num",
-                "ADJ:pos", "ADV", "ART:def", "ART:ind", "AUX", "CON",
-                "LIA", "NOM", "ONO", "PRE", "PRO:dem", "PRO:ind",
-                "PRO:int", "PRO:per", "PRO:pos", "PRO:rel", "VER"])
+GramCat = Enum(
+    "GramCat",
+    [
+        "ADJ",
+        "ADJ:dem",
+        "ADJ:ind",
+        "ADJ:int",
+        "ADJ:num",
+        "ADJ:pos",
+        "ADV",
+        "ART:def",
+        "ART:ind",
+        "AUX",
+        "CON",
+        "LIA",
+        "NOM",
+        "ONO",
+        "PRE",
+        "PRO:dem",
+        "PRO:ind",
+        "PRO:int",
+        "PRO:per",
+        "PRO:pos",
+        "PRO:rel",
+        "VER",
+    ],
+)
 
 
 @dataclass
@@ -50,6 +72,7 @@ class Word:
     frequency : float
         Chosen mix of the film and book frequencies
     """
+
     ortho: str
     phonology: str
     lemme: str
@@ -75,46 +98,48 @@ class Word:
         # enivre @nivR @|n_i_v_R_# e|n_i_v_r_e --> @|i_v_R_# en|i_v_r_e
         if "@|n_" in self.raw_syll_cv and "e|n_" in self.raw_orthosyll_cv:
             pos = self.raw_syll_cv.index("@|n_")
-            self.raw_syll_cv = self.raw_syll_cv[:pos] + "@|" +\
-                self.raw_syll_cv[pos+2:]
+            self.raw_syll_cv = (
+                self.raw_syll_cv[:pos] + "@|" + self.raw_syll_cv[pos + 2 :]
+            )
             pos = self.raw_orthosyll_cv.index("e|n_")
-            self.raw_orthosyll_cv = self.raw_orthosyll_cv[:pos] + "en|" +\
-                self.raw_orthosyll_cv[pos+3:]
+            self.raw_orthosyll_cv = (
+                self.raw_orthosyll_cv[:pos] + "en|" + self.raw_orthosyll_cv[pos + 3 :]
+            )
             self.fix_e_n_en()
 
     def phonemesToSyllableNames(self, withSilent=True, symbol=""):
         if withSilent:
             return [symbol.join(syll) for syll in self.syll_cv]
         else:
-            return [symbol.join(syll).replace("#", "")
-                    for syll in self.syll_cv]
+            return [symbol.join(syll).replace("#", "") for syll in self.syll_cv]
 
     def graphemsToSyllables(self, withSilent=True, symbol=""):
         if withSilent:
             return [symbol.join(syll) for syll in self.orthosyll_cv]
         else:
-            return [symbol.join(syll).replace("#", "")
-                    for syll in self.orthosyll_cv]
+            return [symbol.join(syll).replace("#", "") for syll in self.orthosyll_cv]
 
     def syllablesToWord(self):
         return "".join(self.phonemesToSyllableNames())
 
     def parseOrthoSyll(self):
         # Format is "syll1letter1_syll1letter2|syll2letter1_..."
-        self.orthosyll_cv = map(lambda syll: syll.split(
-            "_"), self.raw_orthosyll_cv.split("|"))
+        self.orthosyll_cv = map(
+            lambda syll: syll.split("_"), self.raw_orthosyll_cv.split("|")
+        )
 
     def parsePhonoSyll(self):
         # Format is "syll1phonem1_syll1phonem2|syll2phonem1_..."
-        self.syll_cv = map(lambda syll: syll.split("_"),
-                           self.raw_syll_cv.split("|"))
+        self.syll_cv = map(lambda syll: syll.split("_"), self.raw_syll_cv.split("|"))
 
-    def replaceSyllables(self, syll_orig : str, syll_final : str) -> str:
+    def replaceSyllables(self, syll_orig: str, syll_final: str) -> str:
         phono = deepcopy(self.phonology)
-        while pos = phono.find(syll_orig) != -1 :
-            phono = phono[0:pos] + syll_final + phono[len(syll_orig)+pos:]
+        if syll_orig == syll_final :
+            return phono
+        while (pos := phono.find(syll_orig)) != -1:
+            phono = phono[0:pos] + syll_final + phono[len(syll_orig) + pos :]
+            #print(phono, syll_orig, syll_final, pos)
         return phono
-
 
 
 #    def writeOrthoSyll(self):
