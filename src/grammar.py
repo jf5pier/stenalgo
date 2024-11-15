@@ -37,25 +37,26 @@ class Phoneme:
         self.posFrequency[pos] += frequency
         self.invPosFrequency[invPos] += frequency
 
-    def isVowel(self):
+    def isVowel(self) -> bool:
         return self.name in self.vowel_phonemes
 
-    def isConsonant(self):
+    def isConsonant(self) -> bool:
         return self.name in self.consonant_phonemes
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if type(other) is Phoneme:
             return self.name == other.name
-        else:
+        elif type(other) is str:
             return self.name == other
+        else : return False
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> bool:
         return self.frequency < other.frequency
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.name + ":" + "%.1f" % self.frequency
 
 
@@ -76,16 +77,18 @@ class Biphoneme:
     def increaseFrequency(self, frequency: float):
         self.frequency += frequency
 
-    def __eq__(self, other) :
-        return self.pair == other.pair
+    def __eq__(self, other) -> bool:
+        if isinstance(other, Biphoneme):
+            return self.pair == other.pair
+        return False
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> bool:
         return self.frequency < other.frequency
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "(%s, %s)" % (self.pair[0], self.pair[1])
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.pair[0] + self.pair[1] + ":" + "%.1f" % self.frequency
 
 
@@ -141,7 +144,7 @@ class PhonemeCollection:
     def printBarchart(self, phoneme_order: str,
                       exhaustive_phonemes: str, vsize: int = 10):
         maxFreq = 0.0
-        excluded_phonemes = list(
+        excluded_phonemes: list[str] = list(
             filter(lambda p: p not in phoneme_order, exhaustive_phonemes)
         )
         for phoneme_name in exhaustive_phonemes:
@@ -162,8 +165,8 @@ class PhonemeCollection:
             toPrint += " <"
             print(toPrint)
         print("> " + phoneme_order + " | " + "".join(excluded_phonemes) + " <")
-        barsWidth = len(phoneme_order) + 3
-        barsWidth2 = len(excluded_phonemes) + 3
+        barsWidth: int = len(phoneme_order) + 3
+        barsWidth2: int = len(excluded_phonemes) + 3
         print("^" * (barsWidth) + "|" + "^" * (barsWidth2))
         print(" " * (barsWidth - 8) + "ordered | floating", "\n")
 
@@ -250,7 +253,7 @@ class BiphonemeCollection:
                         mutatedPermutation[:pos] + subp
                         + mutatedPermutation[pos + windowSize :]
                     )
-                    score, negScore, badOrder = self.scorePermutation(p)
+                    score, negScore, _ = self.scorePermutation(p)
                     if score > bestScore:
                         # if score > (bestScore * 1.03) :
                         # print("New order (%0.1f > %0.1f):"%(score,bestScore), p)
@@ -258,7 +261,7 @@ class BiphonemeCollection:
                         bestScore = score
                         bestNegScore = negScore
                         bestPermutation = p
-                        bestBadOrder = badOrder
+                        #bestBadOrder = badOrder
         print(
             "\nBest order (ordered score %0.1f, disordered score %0.1f):\n"
             % (bestScore, bestNegScore),
@@ -474,18 +477,23 @@ class Syllable:
         Syllable.postVowelBiphonemeCol.printTopBiphonemes(nb)
 
     @staticmethod
-    def optimizeBiphonemeOrder():
+    def optimizeBiphonemeOrder() -> tuple[str, str, str]:
+        left_hand_order: str= Syllable.preVowelBiphonemeCol.optimizeOrder()
+        right_hand_order: str = Syllable.postVowelBiphonemeCol.optimizeOrder()
+        vowel_order: str = Syllable.multiVowelBiphonemeCol.optimizeOrder()
+        return left_hand_order, right_hand_order, vowel_order
+
+    @staticmethod
+    def printOptimizedBiphonemeOrder():
+        left_hand_order, right_hand_order, vowel_order = Syllable.optimizeBiphonemeOrder()
         print("Left hand optimization :")
-        order = Syllable.preVowelBiphonemeCol.optimizeOrder()
-        Syllable.preVowelPhonemeCol.printBarchart(order, Phoneme.consonant_phonemes)
+        Syllable.preVowelPhonemeCol.printBarchart(left_hand_order, Phoneme.consonant_phonemes)
 
         print("Right hand optimization :")
-        order = Syllable.postVowelBiphonemeCol.optimizeOrder()
-        Syllable.postVowelPhonemeCol.printBarchart(order, Phoneme.consonant_phonemes)
+        Syllable.postVowelPhonemeCol.printBarchart(right_hand_order, Phoneme.consonant_phonemes)
 
         print("Vowel optimization :")
-        order = Syllable.multiVowelBiphonemeCol.optimizeOrder()
-        Syllable.vowelPhonemeCol.printBarchart(order, Phoneme.vowel_phonemes)
+        Syllable.vowelPhonemeCol.printBarchart(vowel_order, Phoneme.vowel_phonemes)
         print("")
 
     def replacePhonemeInPos(self, phoneme1: Phoneme|str, phoneme2: Phoneme|str, pos: str):
@@ -522,13 +530,15 @@ class Syllable:
         spel_freq.sort(key=lambda kv: kv[1], reverse=True)
         return spel_freq
 
-    def __eq__(self, other):
-        return self.phonemes == other.phonemes
+    def __eq__(self, other) -> bool:
+        if isinstance(other, Syllable):
+            return self.phonemes == other.phonemes
+        return False
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> bool:
         return self.frequency < other.frequency
 
-    def __str__(self):
+    def __str__(self) -> str:
         return ( "".join([str(p) for p in self.phonemes])
             + " > " + ", ".join([
                     str(spel) + ": %.1f" % freq
@@ -536,7 +546,7 @@ class Syllable:
                 ])
             + " > SyllFreq " + "%.1f %.1f"
             % ( self.frequency,
-                sum([freq for (spel, freq) in self.sortedSpellings()[:4]]),
+                sum([freq for (_, freq) in self.sortedSpellings()[:4]]),
             )
         )
 
@@ -734,9 +744,9 @@ class SyllableCollection:
         to two phonemes and the other keys will give enough context to
         resolve the right syllable."""
         print("Left hand ambiguity optimization")
-        pre_vowel_inter_syll_ambiguity = {}
-        post_vowel_inter_syll_ambiguity = {}
-        vowel_inter_syll_ambiguity = {}
+        pre_vowel_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
+        post_vowel_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
+        vowel_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
         for p1 in Phoneme.consonant_phonemes[:-1]:
             p1i = Phoneme.consonant_phonemes.index(p1)
             for p2 in Phoneme.consonant_phonemes[p1i + 1 :]:
@@ -771,9 +781,9 @@ class SyllableCollection:
         other keys in the syllable and the other syllables of the word
         provide enough context."""
         print("Left hand ambiguity optimization")
-        pre_vowel_inter_syll_ambiguity = {}
-        post_vowel_inter_syll_ambiguity = {}
-        vowel_inter_syll_ambiguity = {}
+        pre_vowel_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
+        post_vowel_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
+        vowel_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
         for p1 in Phoneme.consonant_phonemes[:-1]:
             p1i = Phoneme.consonant_phonemes.index(p1)
             for p2 in Phoneme.consonant_phonemes[p1i + 1 :]:
