@@ -30,21 +30,20 @@ def printVerbose(word: str, msg: list):
 
 
 class Dictionary:
-    picked = []
     words = []
-    words_by_ortho = {}
-    frequent_word = []
-    nb_frequent_words = 200
-    totalFrequencies = 0.0
-    frequent_word_frequencies = 0.0
-    word_source = "resources/LexiqueMixte.tsv"
-    frequent_word_file = "resources/top500_film.txt"
-    sylCol = SyllableCollection()
+    words_by_ortho: dict[str, list[Word]] = {}
+    frequent_word: list[str] = []
+    nb_frequent_words: int = 200
+    totalFrequencies: float = 0.0
+    frequent_word_frequencies: float = 0.0
+    word_source: str = "resources/LexiqueMixte.tsv"
+    frequent_word_file: str = "resources/top500_film.txt"
+    sylCol: SyllableCollection = SyllableCollection()
 
     def __init__(self):
-        self.words = self.read_corpus()
+        self.words: list[Word]= self.read_corpus()
 
-    def read_corpus(self):
+    def read_corpus(self) -> list[Word]:
         with open(self.frequent_word_file) as fw:
             self.totalFrequencies = float(
                 fw.readline().strip().split("\t")[-1])
@@ -59,7 +58,7 @@ class Dictionary:
             for corpus_word in corpus:
                 if corpus_word["ortho"] is not None \
                         and corpus_word["ortho"][0] != "#":
-                    word = Word(ortho=corpus_word["ortho"],
+                    word: Word = Word(ortho=corpus_word["ortho"],
                                 phonology=corpus_word["phon"],
                                 lemme=corpus_word["lemme"],
                                 gram_cat=GramCat[corpus_word["cgram"]]
@@ -99,7 +98,7 @@ class Dictionary:
 #        Syllable.printTopPhonemesPerPosition()
 #        Syllable.printTopPhonemesPerInvPosition()
         Syllable.printTopBiphonemes(20)
-        Syllable.optimizeBiphonemeOrder()
+        Syllable.printOptimizedBiphonemeOrder()
         self.sylCol.printSyllacbicAmbiguityStats(nb=15)
         self.sylCol.printLexicalAmbiguityStats(nb=15)
 

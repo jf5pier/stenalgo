@@ -4,33 +4,15 @@
 from dataclasses import dataclass
 from copy import deepcopy
 from enum import Enum
-from typing import List
 
 GramCat = Enum(
     "GramCat",
     [
-        "ADJ",
-        "ADJ:dem",
-        "ADJ:ind",
-        "ADJ:int",
-        "ADJ:num",
-        "ADJ:pos",
-        "ADV",
-        "ART:def",
-        "ART:ind",
-        "AUX",
-        "CON",
-        "LIA",
-        "NOM",
-        "ONO",
-        "PRE",
-        "PRO:dem",
-        "PRO:ind",
-        "PRO:int",
-        "PRO:per",
-        "PRO:pos",
-        "PRO:rel",
-        "VER",
+        "ADJ", "ADJ:dem", "ADJ:ind", "ADJ:int", "ADJ:num",
+        "ADJ:pos", "ADV", "ART:def", "ART:ind", "AUX",
+        "CON", "LIA", "NOM", "ONO", "PRE",
+        "PRO:dem", "PRO:ind", "PRO:int", "PRO:per", "PRO:pos",
+        "PRO:rel", "VER",
     ],
 )
 
@@ -77,7 +59,7 @@ class Word:
     phonology: str
     lemme: str
     gram_cat: GramCat | None
-    ortho_gram_cat: List[GramCat]
+    ortho_gram_cat: list[GramCat]
     gender: str
     number: str
     info_verb: str
@@ -88,8 +70,8 @@ class Word:
 
     def __post_init__(self):
         self.fix_e_n_en()
-        self.parseOrthoSyll()
-        self.parsePhonoSyll()
+        self.orthosyll_cv = self.parseOrthoSyll()
+        self.syll_cv = self.parsePhonoSyll()
         # Formula to be optimized following the need of the typist
         # self.frequency = 0.9*self.frequencyFilm + 0.1* self.frequencyBook
         self.frequency = self.frequencyFilm
@@ -107,13 +89,13 @@ class Word:
             )
             self.fix_e_n_en()
 
-    def phonemesToSyllableNames(self, withSilent=True, symbol=""):
+    def phonemesToSyllableNames(self, withSilent: bool=True, symbol: str=""):
         if withSilent:
             return [symbol.join(syll) for syll in self.syll_cv]
         else:
             return [symbol.join(syll).replace("#", "") for syll in self.syll_cv]
 
-    def graphemsToSyllables(self, withSilent=True, symbol=""):
+    def graphemsToSyllables(self, withSilent: bool=True, symbol: str=""):
         if withSilent:
             return [symbol.join(syll) for syll in self.orthosyll_cv]
         else:
@@ -124,13 +106,13 @@ class Word:
 
     def parseOrthoSyll(self):
         # Format is "syll1letter1_syll1letter2|syll2letter1_..."
-        self.orthosyll_cv = map(
+        return map(
             lambda syll: syll.split("_"), self.raw_orthosyll_cv.split("|")
         )
 
     def parsePhonoSyll(self):
         # Format is "syll1phonem1_syll1phonem2|syll2phonem1_..."
-        self.syll_cv = map(lambda syll: syll.split("_"), self.raw_syll_cv.split("|"))
+        return map(lambda syll: syll.split("_"), self.raw_syll_cv.split("|"))
 
     def replaceSyllables(self, syll_orig: str, syll_final: str) -> str:
         phono = deepcopy(self.phonology)
