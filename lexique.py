@@ -117,10 +117,10 @@ class Word:
     frequencyFilm: float
 
     def __post_init__(self):
-        self.syll_cv = deepcopy([])
-        self.orthosyll_cv = deepcopy([])
-        self.orig_syll = deepcopy(self.syll)
-        self.orig_cv_cv = deepcopy(self.cv_cv)
+        self.syll_cv: list[str] = deepcopy([])
+        self.orthosyll_cv: list[str] = deepcopy([])
+        self.orig_syll: str = deepcopy(self.syll)
+        self.orig_cv_cv: str = deepcopy(self.cv_cv)
         self.fix_x_k_s()
         self.fix_g_dZ()
         self.fix_j_dZ()
@@ -231,14 +231,14 @@ class Word:
                 graphem_phoneme[pos+len(badAsso):]
         return graphem_phoneme
 
-    def phonemesToSyllables(self, withSilent=True, symbol=""):
+    def phonemesToSyllables(self, withSilent:bool =True, symbol: str=""):
         if withSilent:
             return [symbol.join(syll) for syll in self.syll_cv]
         else:
             return [symbol.join(syll).replace("#", "")
                     for syll in self.syll_cv]
 
-    def lettersToSyllables(self, symbol=""):
+    def lettersToSyllables(self, symbol: str =""):
         return [symbol.join(map(lambda cv_lett: cv_lett[1], syll))
                 for syll in self.orthosyll_cv]
 
@@ -455,12 +455,12 @@ class Word:
 
 class Lexique:
 
-    picked = []
-    words = []
-    words_by_ortho = {}
-    word_source = "resources/Lexique383.tsv"
-    graphem_phoneme_source = "resources/LexiqueInfraCorrespondance.tsv"
-    sylCol = SyllableCollection()
+    #picked = []
+    words: list[Word] = []
+    words_by_ortho: dict[str, list[Word]] = {}
+    word_source: str = "resources/Lexique383.tsv"
+    graphem_phoneme_source: str = "resources/LexiqueInfraCorrespondance.tsv"
+    sylCol: SyllableCollection = SyllableCollection()
 
     def __init__(self):
         self.words = self.read_corpus()
@@ -553,7 +553,7 @@ class Lexique:
         return char in "aeiouy2589OE§@°"
 
     @staticmethod
-    def moveDualPhonem(syllables: List[str]):
+    def moveDualPhonem(syllables: list[str]) -> list[str]:
         # Move dual-phonems representation ij and gz to better compare
         # to Lexique383
         # This function is only used to compare the analysis to Lexique383.
@@ -561,7 +561,7 @@ class Lexique:
 
         if (len(syllables) <= 1):
             return syllables
-        ret = []
+        ret: list[str] = []
         semivowelToMove = ""
         for i, syllOrig in enumerate(syllables):
             s = deepcopy(syllOrig)
@@ -596,7 +596,7 @@ class Lexique:
             print("%s\t%f" % (w.ortho, w.frequency))
 
     def printSyllabificationStats(self):
-        self.mismatchSyllableSpelling = []
+        self.mismatchSyllableSpelling: list[Word] = []
         self.mismatchSyllableAssociation = []
         self.matchSyllableAssociation = []
         self.words.sort(key=lambda x: x.frequencyFilm, reverse=True)
