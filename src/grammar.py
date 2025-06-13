@@ -24,7 +24,7 @@ class Phoneme:
     frequency: float = 0.0
 
     # There's an argument to have "w" and "j" as part of the vowels
-    vowel_phonemes: str = "aeiE@o°§uy5O9821"
+    nucleus_phonemes: str = "aeiE@o°§uy5O9821"
     consonant_phonemes: str = "RtsplkmdvjnfbZwzSgNG"
 
     def __post_init__(self):
@@ -38,7 +38,7 @@ class Phoneme:
         self.invPosFrequency[invPos] += frequency
 
     def isVowel(self) -> bool:
-        return self.name in self.vowel_phonemes
+        return self.name in self.nucleus_phonemes
 
     def isConsonant(self) -> bool:
         return self.name in self.consonant_phonemes
@@ -297,15 +297,15 @@ class Syllable:
         Frequency of occurence in the underlying lexicon/corpus
     phonemeCol : PhonemeCollection
         Collection of Phonemes found in the underlying lexicon/corpus
-    preVowelPhonemeCol : PhonemeCollection
+    onsetPhonemCol : PhonemeCollection
         Collection of phonemes found before the vowels of a syllable
-    postVowelPhonemeCol : PhonemeCollection
+    codaPhonemCol : PhonemeCollection
         Collection of phonemes found after the vowels of a syllable
-    vowelPhonemeCol : PhonemeCollection
+    nucleusPhonemCol : PhonemeCollection
         Collection phonemes found in the vowels part syllable
-    preVowelBiphonemeCol : BiphonemeCollection
+    onsetBiphonemCol : BiphonemeCollection
         Collection of pair of phonemes found before the vowels of a syllable
-    postVowelBiphonemeCol : BiphonemeCollection
+    codaBiphonemCol : BiphonemeCollection
         Collection of pair of phonemes found after the vowels of a syllable
     multiVowelBiphonemeCol : BiphonemeCollection
         Collection of pair of phonemes found in multi-vowels syllable
@@ -315,22 +315,22 @@ class Syllable:
     """
 
     phonemeCol: PhonemeCollection = PhonemeCollection()
-    preVowelPhonemeCol: PhonemeCollection = PhonemeCollection()
-    postVowelPhonemeCol: PhonemeCollection = PhonemeCollection()
-    vowelPhonemeCol: PhonemeCollection = PhonemeCollection()
-    preVowelBiphonemeCol: BiphonemeCollection = BiphonemeCollection()
-    postVowelBiphonemeCol: BiphonemeCollection = BiphonemeCollection()
+    onsetPhonemCol: PhonemeCollection = PhonemeCollection()
+    codaPhonemCol: PhonemeCollection = PhonemeCollection()
+    nucleusPhonemCol: PhonemeCollection = PhonemeCollection()
+    onsetBiphonemCol: BiphonemeCollection = BiphonemeCollection()
+    codaBiphonemCol: BiphonemeCollection = BiphonemeCollection()
     multiVowelBiphonemeCol: BiphonemeCollection = BiphonemeCollection()
 
     def __init__(self, phoneme_names: str, spelling: str, frequency: float = 0.0):
         self.phonemes: list[Phoneme] = []
         self.name: str = ""
-        self.phonemes_pre: list[Phoneme] = []
-        self.phonemes_post: list[Phoneme] = []
-        self.phonemes_vowel: list[Phoneme] = []
-        self.biphonemes_pre: list[Biphoneme] = []
-        self.biphonemes_post: list[Biphoneme] = []
-        self.biphonemes_vowel: list[Biphoneme] = []
+        self.phonemes_onset: list[Phoneme] = []
+        self.phonemes_coda: list[Phoneme] = []
+        self.phonemes_nucleus: list[Phoneme] = []
+        self.biphonemes_onset: list[Biphoneme] = []
+        self.biphonemes_coda: list[Biphoneme] = []
+        self.biphonemes_nucleus: list[Biphoneme] = []
         self.spellings: dict[str, float] = {}
         self.phono_words: dict[str, list[Word]] = {}
 
@@ -353,22 +353,22 @@ class Syllable:
             if firstVowelPos == -1 and not phoneme.isVowel():
                 if verbose:
                     print("Left hand consonant", phoneme)
-                phoneme_pre = Syllable.preVowelPhonemeCol.getPhoneme(phoneme.name)
-                phoneme_pre.increaseFrequency(frequency)
-                self.phonemes_pre.append(phoneme_pre)
+                phoneme_onset = Syllable.onsetPhonemCol.getPhoneme(phoneme.name)
+                phoneme_onset.increaseFrequency(frequency)
+                self.phonemes_onset.append(phoneme_onset)
             elif firstVowelPos != -1 and not phoneme.isVowel():
                 if verbose:
                     print("Right hand consonant", phoneme)
-                phoneme_post = Syllable.postVowelPhonemeCol.getPhoneme(phoneme.name)
-                phoneme_post.increaseFrequency(frequency)
-                self.phonemes_post.append(phoneme_post)
+                phoneme_coda = Syllable.codaPhonemCol.getPhoneme(phoneme.name)
+                phoneme_coda.increaseFrequency(frequency)
+                self.phonemes_coda.append(phoneme_coda)
             # Break down the syllable into consonants-vowels-consonants
             if phoneme.isVowel():
                 if verbose:
                     print("Vowel", phoneme)
-                phoneme_vowel = Syllable.vowelPhonemeCol.getPhoneme(phoneme.name)
-                phoneme_vowel.increaseFrequency(frequency)
-                self.phonemes_vowel.append(phoneme_vowel)
+                phoneme_nucleus = Syllable.nucleusPhonemCol.getPhoneme(phoneme.name)
+                phoneme_nucleus.increaseFrequency(frequency)
+                self.phonemes_nucleus.append(phoneme_nucleus)
 
                 if firstVowelPos == -1:
                     firstVowelPos = pos
@@ -379,26 +379,26 @@ class Syllable:
         if firstVowelPos >= 2:
             for pos1, phoneme1 in enumerate(phonemes[: firstVowelPos - 1]):
                 for phoneme2 in phonemes[pos1 + 1 : firstVowelPos]:
-                    biphoneme = Syllable.preVowelBiphonemeCol.getBiphoneme(
+                    biphoneme = Syllable.onsetBiphonemCol.getBiphoneme(
                         (phoneme1.name, phoneme2.name)
                     )
                     biphoneme.increaseFrequency(frequency)
                     if verbose:
                         print("Left hand biphoneme", biphoneme)
-                    self.biphonemes_pre.append(biphoneme)
+                    self.biphonemes_onset.append(biphoneme)
 
         # Track the cooccurences of phonemes pairs in the last
         # consonnants group
         if lastVowelPos <= len(phonemes) - 3:
             for pos1, phoneme1 in enumerate(phonemes[lastVowelPos + 1 : -1]):
                 for phoneme2 in phonemes[lastVowelPos + pos1 + 2 :]:
-                    biphoneme = Syllable.postVowelBiphonemeCol.getBiphoneme(
+                    biphoneme = Syllable.codaBiphonemCol.getBiphoneme(
                         (phoneme1.name, phoneme2.name)
                     )
                     biphoneme.increaseFrequency(frequency)
                     if verbose:
                         print("Right hand biphoneme", biphoneme)
-                    self.biphonemes_post.append(biphoneme)
+                    self.biphonemes_coda.append(biphoneme)
 
         # Track the cases where multiple vowels are part of the
         # middle (inclue semivowels??)
@@ -411,12 +411,12 @@ class Syllable:
                     biphoneme.increaseFrequency(frequency)
                     if verbose:
                         print("Vowel biphoneme", biphoneme)
-                    self.biphonemes_vowel.append(biphoneme)
+                    self.biphonemes_nucleus.append(biphoneme)
 
-        # print("pho",self.phonemes, "pre",self.phonemes_pre,
-        # "post",self.phonemes_post,
-        #      "vow",self.phonemes_vowel, "bpre", self.biphonemes_pre, "bpost",
-        #      self.biphonemes_post, "bvow",self.biphonemes_vowel)
+        # print("pho",self.phonemes, "pre",self.phonemes_onset,
+        # "post",self.phonemes_coda,
+        #      "vow",self.phonemes_nucleus, "bpre", self.biphonemes_onset, "bpost",
+        #      self.biphonemes_coda, "bvow",self.biphonemes_nucleus)
 
     def increaseFrequency(self, frequency: float):
         self.frequency += frequency
@@ -424,17 +424,17 @@ class Syllable:
             phoneme.increaseFrequency(
                 frequency, pos=pos, invPos=len(self.phonemes) - pos - 1
             )
-        for phoneme in self.phonemes_pre:
+        for phoneme in self.phonemes_onset:
             phoneme.increaseFrequency(frequency)
-        for phoneme in self.phonemes_post:
+        for phoneme in self.phonemes_coda:
             phoneme.increaseFrequency(frequency)
-        for phoneme in self.phonemes_vowel:
+        for phoneme in self.phonemes_nucleus:
             phoneme.increaseFrequency(frequency)
-        for biphoneme in self.biphonemes_pre:
+        for biphoneme in self.biphonemes_onset:
             biphoneme.increaseFrequency(frequency)
-        for biphoneme in self.biphonemes_post:
+        for biphoneme in self.biphonemes_coda:
             biphoneme.increaseFrequency(frequency)
-        for biphoneme in self.biphonemes_vowel:
+        for biphoneme in self.biphonemes_nucleus:
             biphoneme.increaseFrequency(frequency)
 
     def increaseSpellingFrequency(self, spelling: str, frequency: float):
@@ -461,66 +461,66 @@ class Syllable:
         print("Whole words phonemes:")
         Syllable.phonemeCol.printTopPhonemes(nb)
         print("Pre-vowel phonemes :")
-        Syllable.preVowelPhonemeCol.printTopPhonemes(nb)
+        Syllable.onsetPhonemCol.printTopPhonemes(nb)
         print("Vowel phonemes :")
-        Syllable.vowelPhonemeCol.printTopPhonemes(nb)
+        Syllable.nucleusPhonemCol.printTopPhonemes(nb)
         print("Post-vowel phonemes :")
-        Syllable.postVowelPhonemeCol.printTopPhonemes(nb)
+        Syllable.codaPhonemCol.printTopPhonemes(nb)
 
     @staticmethod
     def printTopBiphonemes(nb: int = -1):
         print("Pre-vowels biphonemes")
-        Syllable.preVowelBiphonemeCol.printTopBiphonemes(nb)
+        Syllable.onsetBiphonemCol.printTopBiphonemes(nb)
         print("Vowel biphonemes")
         Syllable.multiVowelBiphonemeCol.printTopBiphonemes(nb)
         print("Post-vowels biphonemes")
-        Syllable.postVowelBiphonemeCol.printTopBiphonemes(nb)
+        Syllable.codaBiphonemCol.printTopBiphonemes(nb)
 
     @staticmethod
     def optimizeBiphonemeOrder() -> tuple[str, str, str]:
-        left_hand_order: str= Syllable.preVowelBiphonemeCol.optimizeOrder()
-        right_hand_order: str = Syllable.postVowelBiphonemeCol.optimizeOrder()
-        vowel_order: str = Syllable.multiVowelBiphonemeCol.optimizeOrder()
-        return left_hand_order, right_hand_order, vowel_order
+        left_hand_order: str= Syllable.onsetBiphonemCol.optimizeOrder()
+        right_hand_order: str = Syllable.codaBiphonemCol.optimizeOrder()
+        nucleus_order: str = Syllable.multiVowelBiphonemeCol.optimizeOrder()
+        return left_hand_order, right_hand_order, nucleus_order
 
     @staticmethod
     def printOptimizedBiphonemeOrder():
-        left_hand_order, right_hand_order, vowel_order = Syllable.optimizeBiphonemeOrder()
+        left_hand_order, right_hand_order, nucleus_order = Syllable.optimizeBiphonemeOrder()
         print("Left hand optimization :")
-        Syllable.preVowelPhonemeCol.printBarchart(left_hand_order, Phoneme.consonant_phonemes)
+        Syllable.onsetPhonemCol.printBarchart(left_hand_order, Phoneme.consonant_phonemes)
 
         print("Right hand optimization :")
-        Syllable.postVowelPhonemeCol.printBarchart(right_hand_order, Phoneme.consonant_phonemes)
+        Syllable.codaPhonemCol.printBarchart(right_hand_order, Phoneme.consonant_phonemes)
 
         print("Vowel optimization :")
-        Syllable.vowelPhonemeCol.printBarchart(vowel_order, Phoneme.vowel_phonemes)
+        Syllable.nucleusPhonemCol.printBarchart(nucleus_order, Phoneme.nucleus_phonemes)
         print("")
 
     def replacePhonemeInPos(self, phoneme1: Phoneme|str, phoneme2: Phoneme|str, pos: str):
         """Replace a phoneme in one of 3 positions in a syllable"""
-        if pos == "preVowels":
-            pre = "".join(map(str, self.phonemes_pre))
-            pre = pre.replace(str(phoneme1), str(phoneme2))
+        if pos == "onset":
+            onset= "".join(map(str, self.phonemes_onset))
+            onset= onset.replace(str(phoneme1), str(phoneme2))
             return (
-                pre
-                + "".join(map(str, self.phonemes_vowel))
-                + "".join(map(str, self.phonemes_post))
+                onset 
+                + "".join(map(str, self.phonemes_nucleus))
+                + "".join(map(str, self.phonemes_coda))
             )
-        elif pos == "postVowels":
-            post = "".join(map(str, self.phonemes_post))
-            post = post.replace(str(phoneme1), str(phoneme2))
+        elif pos == "coda":
+            coda= "".join(map(str, self.phonemes_coda))
+            coda= coda.replace(str(phoneme1), str(phoneme2))
             return (
-                "".join(map(str, self.phonemes_pre))
-                + "".join(map(str, self.phonemes_vowel))
-                + post
+                "".join(map(str, self.phonemes_onset))
+                + "".join(map(str, self.phonemes_nucleus))
+                + coda 
             )
-        elif pos == "vowels":
-            vowel = "".join(map(str, self.phonemes_vowel))
-            vowel = vowel.replace(str(phoneme1), str(phoneme2))
+        elif pos == "nucleus":
+            nucleus= "".join(map(str, self.phonemes_nucleus))
+            nucleus = nucleus.replace(str(phoneme1), str(phoneme2))
             return (
-                "".join(map(str, self.phonemes_pre))
-                + vowel
-                + "".join(map(str, self.phonemes_post))
+                "".join(map(str, self.phonemes_onset))
+                + nucleus
+                + "".join(map(str, self.phonemes_coda))
             )
         else:
             return "".join(map(str, self.phonemes))
@@ -617,12 +617,12 @@ class SyllableCollection:
 
         def phonemesByPos(syllable: Syllable, pos: str):
             """Helper function"""
-            if pos == "preVowels":
-                return syllable.phonemes_pre
-            elif pos == "postVowels":
-                return syllable.phonemes_post
-            elif pos == "vowels":
-                return syllable.phonemes_vowel
+            if pos == "onset":
+                return syllable.phonemes_onset
+            elif pos == "coda":
+                return syllable.phonemes_coda
+            elif pos == "nucleus":
+                return syllable.phonemes_nucleus
             else:
                 return ""
 
@@ -670,12 +670,12 @@ class SyllableCollection:
 
         def phonemesByPos(syllable: Syllable, pos: str):
             """Helper function"""
-            if pos == "preVowels":
-                return syllable.phonemes_pre
-            elif pos == "postVowels":
-                return syllable.phonemes_post
-            elif pos == "vowels":
-                return syllable.phonemes_vowel
+            if pos == "onset":
+                return syllable.phonemes_onset
+            elif pos == "coda":
+                return syllable.phonemes_coda
+            elif pos == "nucleus":
+                return syllable.phonemes_nucleus
             else:
                 return ""
 
@@ -744,34 +744,39 @@ class SyllableCollection:
         to two phonemes and the other keys will give enough context to
         resolve the right syllable."""
         print("Left hand ambiguity optimization")
-        pre_vowel_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
-        post_vowel_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
-        vowel_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
+        onset_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
+        nucleus_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
+        coda_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
         for p1 in Phoneme.consonant_phonemes[:-1]:
             p1i = Phoneme.consonant_phonemes.index(p1)
             for p2 in Phoneme.consonant_phonemes[p1i + 1 :]:
-                conflict = self.syllabicAmbiguityScore(p1, p2, "preVowels")
-                pre_vowel_inter_syll_ambiguity[(p1, p2)] = conflict
+                conflict = self.syllabicAmbiguityScore(p1, p2, "onset")
+                onset_inter_syll_ambiguity[(p1, p2)] = conflict
 
         print("Right hand ambiguity optimization")
         for p1 in Phoneme.consonant_phonemes[:-1]:
             p1i = Phoneme.consonant_phonemes.index(p1)
             for p2 in Phoneme.consonant_phonemes[p1i + 1 :]:
-                conflict = self.syllabicAmbiguityScore(p1, p2, "postVowels")
-                post_vowel_inter_syll_ambiguity[(p1, p2)] = conflict
+                conflict = self.syllabicAmbiguityScore(p1, p2, "coda")
+                coda_inter_syll_ambiguity[(p1, p2)] = conflict
 
         print("Vowel ambiguity optimization")
-        for p1 in Phoneme.vowel_phonemes[:-1]:
-            p1i = Phoneme.vowel_phonemes.index(p1)
-            for p2 in Phoneme.vowel_phonemes[p1i + 1 :]:
-                conflict = self.syllabicAmbiguityScore(p1, p2, "vowels")
-                vowel_inter_syll_ambiguity[(p1, p2)] = conflict
+        for p1 in Phoneme.nucleus_phonemes[:-1]:
+            p1i = Phoneme.nucleus_phonemes.index(p1)
+            for p2 in Phoneme.nucleus_phonemes[p1i + 1 :]:
+                conflict = self.syllabicAmbiguityScore(p1, p2, "nucleus")
+                nucleus_inter_syll_ambiguity[(p1, p2)] = conflict
 
+        def _sorted_inter_syll_ambiguity(scored_phonem_pairs) -> dict[tuple[str,str], float]:
+            return {
+                (k1, k2): v for (k1, k2), v in sorted(scored_phonem_pairs.items(),
+                                                      key=lambda item: item[1])
+            }
         print("")
         return (
-            pre_vowel_inter_syll_ambiguity,
-            post_vowel_inter_syll_ambiguity,
-            vowel_inter_syll_ambiguity,
+            _sorted_inter_syll_ambiguity(onset_inter_syll_ambiguity),
+            _sorted_inter_syll_ambiguity(coda_inter_syll_ambiguity),
+            _sorted_inter_syll_ambiguity(nucleus_inter_syll_ambiguity)
         )
 
     def analysePhonemLexicalAmbiguity(self):
@@ -781,86 +786,69 @@ class SyllableCollection:
         other keys in the syllable and the other syllables of the word
         provide enough context."""
         print("Left hand ambiguity optimization")
-        pre_vowel_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
-        post_vowel_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
-        vowel_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
+        onset_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
+        coda_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
+        nucleus_inter_syll_ambiguity: dict[tuple[str,str], float] = {}
         for p1 in Phoneme.consonant_phonemes[:-1]:
             p1i = Phoneme.consonant_phonemes.index(p1)
             for p2 in Phoneme.consonant_phonemes[p1i + 1 :]:
-                conflict = self.lexicalAmbiguityScore(p1, p2, "preVowels")
-                pre_vowel_inter_syll_ambiguity[(p1, p2)] = conflict
+                conflict = self.lexicalAmbiguityScore(p1, p2, "onset")
+                onset_inter_syll_ambiguity[(p1, p2)] = conflict
 
         print("Right hand ambiguity optimization")
         for p1 in Phoneme.consonant_phonemes[:-1]:
             p1i = Phoneme.consonant_phonemes.index(p1)
             for p2 in Phoneme.consonant_phonemes[p1i + 1 :]:
-                conflict = self.lexicalAmbiguityScore(p1, p2, "postVowels")
-                post_vowel_inter_syll_ambiguity[(p1, p2)] = conflict
+                conflict = self.lexicalAmbiguityScore(p1, p2, "coda")
+                coda_inter_syll_ambiguity[(p1, p2)] = conflict
 
         print("Vowel ambiguity optimization")
-        for p1 in Phoneme.vowel_phonemes[:-1]:
-            p1i = Phoneme.vowel_phonemes.index(p1)
-            for p2 in Phoneme.vowel_phonemes[p1i + 1 :]:
-                conflict = self.lexicalAmbiguityScore(p1, p2, "vowels")
-                vowel_inter_syll_ambiguity[(p1, p2)] = conflict
+        for p1 in Phoneme.nucleus_phonemes[:-1]:
+            p1i = Phoneme.nucleus_phonemes.index(p1)
+            for p2 in Phoneme.nucleus_phonemes[p1i + 1 :]:
+                conflict = self.lexicalAmbiguityScore(p1, p2, "nucleus")
+                nucleus_inter_syll_ambiguity[(p1, p2)] = conflict
 
+        def _sorted_inter_syll_ambiguity(scored_phonem_pairs) -> dict[tuple[str,str], float]:
+            return {
+                (k1, k2): v for (k1, k2), v in sorted(scored_phonem_pairs.items(),
+                                                      key=lambda item: item[1])
+            }
         print("")
         return (
-            pre_vowel_inter_syll_ambiguity,
-            post_vowel_inter_syll_ambiguity,
-            vowel_inter_syll_ambiguity,
+            _sorted_inter_syll_ambiguity(onset_inter_syll_ambiguity),
+            _sorted_inter_syll_ambiguity(nucleus_inter_syll_ambiguity),
+            _sorted_inter_syll_ambiguity(coda_inter_syll_ambiguity)
         )
 
     def printSyllacbicAmbiguityStats(self, nb: int = -1):
-        pre, post, vowels = self.analysePhonemSyllabicAmbiguity()
-        sorted_pre = {
-            (k1, k2): v for (k1, k2), v in sorted(pre.items(), key=lambda item: item[1])
-        }
-        sorted_post = {
-            (k1, k2): v
-            for (k1, k2), v in sorted(post.items(), key=lambda item: item[1])
-        }
-        sorted_vowels = {
-            (k1, k2): v
-            for (k1, k2), v in sorted(vowels.items(), key=lambda item: item[1])
-        }
+        sorted_onset, sorted_nucleus, sorted_coda = self.analysePhonemSyllabicAmbiguity()
 
         print("Left hand syllabic minimal-ambiguity phonemes pairs")
-        for (p1, p2), score in list(sorted_pre.items())[:nb]:
+        for (p1, p2), score in list(sorted_onset.items())[:nb]:
             print(" Pair:", p1, p2, "score: %.1f" % score)
 
         print("Right hand syllabic minimal-ambiguity phonemes pairs")
-        for (p1, p2), score in list(sorted_post.items())[:nb]:
+        for (p1, p2), score in list(sorted_coda.items())[:nb]:
             print(" Pair:", p1, p2, "score: %.1f" % score)
 
         print("Vowels syllabic minimal-ambiguity phonemes pairs")
-        for (p1, p2), score in list(sorted_vowels.items())[:nb]:
+        for (p1, p2), score in list(sorted_nucleus.items())[:nb]:
             print(" Pair:", p1, p2, "score: %.1f" % score)
 
     def printLexicalAmbiguityStats(self, nb: int = -1):
-        pre, post, vowels = self.analysePhonemLexicalAmbiguity()
-        sorted_pre = {
-            (k1, k2): v for (k1, k2), v in sorted(pre.items(), key=lambda item: item[1])
-        }
-        sorted_post = {
-            (k1, k2): v
-            for (k1, k2), v in sorted(post.items(), key=lambda item: item[1])
-        }
-        sorted_vowels = {
-            (k1, k2): v
-            for (k1, k2), v in sorted(vowels.items(), key=lambda item: item[1])
-        }
+        sorted_onset, sorted_nucleus, sorted_coda = self.analysePhonemLexicalAmbiguity()
 
         print("Left hand lexical minimal-ambiguity phonemes pairs")
-        for (p1, p2), score in list(sorted_pre.items())[:nb]:
+        for (p1, p2), score in list(sorted_onset.items())[:nb]:
             print(" Pair:", p1, p2, "score: %.1f" % score)
 
         print("Right hand lexical minimal-ambiguity phonemes pairs")
-        for (p1, p2), score in list(sorted_post.items())[:nb]:
+        for (p1, p2), score in list(sorted_coda.items())[:nb]:
             print(" Pair:", p1, p2, "score: %.1f" % score)
 
         print("Vowels lexical minimal-ambiguity phonemes pairs")
-        for (p1, p2), score in list(sorted_vowels.items())[:nb]:
+        for (p1, p2), score in list(sorted_nucleus.items())[:nb]:
             print(" Pair:", p1, p2, "score: %.1f" % score)
 
     def printTopSyllables(self, nb: int = -1):
