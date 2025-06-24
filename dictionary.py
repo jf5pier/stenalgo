@@ -9,9 +9,11 @@
 # 1. New, B., Pallier, C., Brysbaert, M., Ferrand, L. (2004)
 #  Lexique 2 : A New French Lexical Database.
 #  Behavior Research Methods, Instruments, & Computers, 36 (3), 516-524.
+#  doi.org/10.3758/BF03195598
 # 2. New, B., Brysbaert, M., Veronis, J., & Pallier, C. (2007).
 #  The use of film subtitles to estimate word frequencies.
 #  Applied Psycholinguistics, 28(4), 661-677.
+#  doi.org/10.1017/S014271640707035X
 # 3. Gimenes, M., Perret, C., & New, B. (2020).
 #  Lexique-Infra: grapheme-phoneme, phoneme-grapheme regularity, consistency,
 #  and other sublexical statistics for 137,717 polysyllabic French words.
@@ -21,9 +23,9 @@ import csv
 from copy import deepcopy
 from src.grammar import Syllable, SyllableCollection
 from src.word import GramCat, Word
+from typing import Any
 
-
-def printVerbose(word: str, msg: list):
+def printVerbose(word: str, msg: list[Any]):
     # return
     if word in []:  # ["soleil"] :
         print(word, " :\n", " ".join(map(str, msg)))
@@ -104,5 +106,11 @@ class Dictionary:
 
 
 dictionary = Dictionary()
+
+#from src.grammar import Phoneme
+#print (Phoneme.nucleusPhonemesIPA, len(Phoneme.nucleusPhonemesIPA))
+#print (Phoneme.nucleusPhonemes, len(Phoneme.nucleusPhonemes))
+#for i in Phoneme.nucleusPhonemesIPA :
+#    print(i)
 dictionary.analyseSyllabification()
 dictionary.printSyllabificationStats()
