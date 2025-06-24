@@ -94,6 +94,8 @@ class Dictionary:
                 _ = self.sylCol.updateSyllable(
                     syllable_name, spelling, frequency, word)
 
+        Syllable.sortCollections()
+
     def printSyllabificationStats(self):
         Syllable.printTopPhonemes()
 #        self.sylCol.printTopSyllables(20)
@@ -101,8 +103,12 @@ class Dictionary:
 #        Syllable.printTopPhonemesPerInvPosition()
         Syllable.printTopBiphonemes(20)
         Syllable.printOptimizedBiphonemeOrder()
-        self.sylCol.printSyllacbicAmbiguityStats(nb=15)
-        self.sylCol.printLexicalAmbiguityStats(nb=15)
+        syll_onset, syll_nucleus, syll_coda = self.sylCol.analysePhonemSyllabicAmbiguity()
+        self.sylCol.printSyllacbicAmbiguityStats(
+            syll_onset, syll_nucleus, syll_coda, nb=15)
+        lexical_onset, lexical_nucleus, lexical_coda = self.sylCol.analysePhonemLexicalAmbiguity()
+        self.sylCol.printLexicalAmbiguityStats(
+            lexical_onset, lexical_nucleus, lexical_coda, nb=15)
 
 
 dictionary = Dictionary()

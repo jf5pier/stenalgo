@@ -444,6 +444,16 @@ class Syllable:
         self.spellings[spelling] = spelling_frequency
         self.increaseFrequency(frequency)
 
+    @staticmethod
+    def sortCollections():
+        Syllable.phonemeCol.phonemes.sort(reverse=True)
+        Syllable.onsetPhonemCol.phonemes.sort(reverse=True)
+        Syllable.codaPhonemCol.phonemes.sort(reverse=True)
+        Syllable.nucleusPhonemCol.phonemes.sort(reverse=True)
+        Syllable.onsetBiphonemCol.biphonemes.sort(reverse=True)
+        Syllable.codaBiphonemCol.biphonemes.sort(reverse=True)
+        Syllable.multiVowelBiphonemeCol.biphonemes.sort(reverse=True)
+
     def trackWord(self, word: Word):
         if word.phonology in self.phono_words:
             self.phono_words[word.phonology].append(word)
@@ -823,8 +833,7 @@ class SyllableCollection:
             _sorted_inter_syll_ambiguity(coda_inter_syll_ambiguity)
         )
 
-    def printSyllacbicAmbiguityStats(self, nb: int = -1):
-        sorted_onset, sorted_nucleus, sorted_coda = self.analysePhonemSyllabicAmbiguity()
+    def printSyllacbicAmbiguityStats(self,sorted_onset, sorted_nucleus, sorted_coda, nb: int = -1):
 
         print("Left hand syllabic minimal-ambiguity phonemes pairs")
         for (p1, p2), score in list(sorted_onset.items())[:nb]:
@@ -838,8 +847,7 @@ class SyllableCollection:
         for (p1, p2), score in list(sorted_nucleus.items())[:nb]:
             print(" Pair:", p1, p2, "score: %.1f" % score)
 
-    def printLexicalAmbiguityStats(self, nb: int = -1):
-        sorted_onset, sorted_nucleus, sorted_coda = self.analysePhonemLexicalAmbiguity()
+    def printLexicalAmbiguityStats(self, sorted_onset, sorted_nucleus, sorted_coda,  nb: int = -1):
 
         print("Left hand lexical minimal-ambiguity phonemes pairs")
         for (p1, p2), score in list(sorted_onset.items())[:nb]:
