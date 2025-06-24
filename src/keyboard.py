@@ -47,7 +47,7 @@ class Keyboard(object):
     # One key keyboard template
     _keyboardTemplate: str = """
 ------
-|{0:>3}|
+|{0: >4}|
 ------"""
     _keyIndexes: list[str] = list(map(str, range(1)))
     _fingerAssignments: list[str] = ["li"]
@@ -158,45 +158,63 @@ Fingers assignments :
             (23, 25):_fw.pinky2keysHorzBottom})
 
     def __init__(self):
+        self.keypressPhonemMap: dict[tuple[int, ...], list[str]] = {}
         self.allowedKeys: list[int] = [k for k in self._possibleKeys if k not in self._reservedKeys]
         self.allowed1fingerKeypress: list[tuple[tuple[int, ...], float]] = list(
-            filter(lambda k : len(k[0]) == len(list(filter(lambda x: x in self.allowedKeys, list(k[0])))), self._possibleKeypress.toList()))
-        self.nbKeys = len(self._keyIndexes)
-        listKeypresses = list(map(lambda f: f.keys(), self._possibleKeypress.__dict__.values()))
-        flatKeypresses = [item for sublist in listKeypresses for item in sublist]
-        self.maxKeyPerFinger = max(list(map(len, flatKeypresses)))
+            filter(lambda k : len(k[0]) == len(list(
+                filter(lambda x: x in self.allowedKeys, list(k[0])))), self._possibleKeypress.toList()))
+        self.nbKeys: int = len(self._keyIndexes)
+        listKeypresses: list[list[tuple[int, ...]]] = list(
+            map(lambda f: list(f.keys()), self._possibleKeypress.__dict__.values()))
+        flatKeypresses: list[tuple[int, ...]] = [item for sublist in listKeypresses for item in sublist]
+        self.maxKeyPerFinger: int = max(list(map(len, flatKeypresses)))
         return
 
-    def printLayout(self, phonemKeymap: dict[tuple[int,...], str|list[str]]):
-        maxKeyPress = max(list(map(len, phonemKeymap.keys())))
+    def printLayout(self) -> None:
+        maxKeyPress = max(list(map(len, self.keypressPhonemMap.keys())))
         for i in range(1, maxKeyPress+1):
-            nbKeys =0
+            nbKeys = 0
             phonemKeymapList = self.nbKeys * [""]
-            for (keyPress, phonem) in phonemKeymap.items():
+            for (keyPress, phonem) in self.keypressPhonemMap.items():
                 if i  == len(keyPress):
                     nbKeys += 1
                     for key in keyPress:
-                        phonemList: list[str] = [phonem] if type(phonem) is str else phonem
-                        for p in phonemList:
-                            if phonemKeymapList[key] != "":
-                                phonemKeymapList[key] = phonemKeymapList[key] +  p
-                            else :
-                                phonemKeymapList[key] = p
+                        for p in phonem:
+                            phonemKeymapList[key] = phonemKeymapList[key] +  p
             if nbKeys > 0:
                 print("Phonemes defined by " + (f"{i} keys pressed together" if i >1 else "1 key"))
                 print(self._keyboardTemplate.format(*phonemKeymapList))
 
         return
 
+    def clearLayout(self) -> None:
+        self.keypressPhonemMap = {}
+
+    def addToLayout(self, keyPress: tuple[int, ...], phonem: str) -> None:
+        existingKeypressPhonem = self.keypressPhonemMap.get(keyPress, [])
+        existingKeypressPhonem.append(phonem)
+        self.keypressPhonemMap[keyPress] = existingKeypressPhonem
+    
+    def setIrelandEnglishLayout(self) -> None:
+        layout: list[tuple[tuple[int, ...], str]] = [
+            ((2,),"s"), ((3,),"s"), ((4,),"t"), ((5,),"k"), ((6,),"p"), ((7,),"w"), 
+            ((8,),"h"), ((9,),"r"), ((10,),"*"), ((11,),"a"), ((12,),"o"), ((13,),"e"), 
+            ((14,),"u"), ((15,),"*"), ((16,),"f"), ((16,),"v"), ((17,),"r"), ((18,),"p"), 
+            ((19,),"b"), ((20,),"l"), ((21,),"g"), ((22,),"t"), ((23,),"s"), ((24,),"d"), 
+            ((25,),"z"), ((2,4),"f"), ((3,4),"x"), ((3,5),"q"), ((3,9),"v"), ((4,5),"d"), 
+            ((5,9),"c"), ((6,7),"b"), ((6,8),"m"), ((8,9),"l"), ((13,14),"i"), ((18,19),"n"), 
+            ((18,20),"m"), ((19,21),"k"), ((4,6,8),"n"), ((5,7,9),"y"), ((19,21,23),"x"), 
+            ((1,3,5,7),"j"), ((4,5,6,7),"g"), ((18,19,20,21),"j"), ((3,4,5,6,7),"z")]
+
+        self.clearLayout()
+        for (keyPress, phonem) in layout:
+            self.addToLayout(keyPress, phonem)
+                                        
 if __name__ == "__main__":
     sb = Starboard()
     sb.printTemplate()
     sb.keypressBinaryEncodingSize()
 
     print("\nPhonetic rules of the english Ireland layout on the Starboard keyboard")
-    sb.printLayout({(2,):"s", (3,):"s", (4,):"t", (5,):"k", (6,):"p", (7,):"w", (8,):"h",
-        (9,):"r", (10,):"*", (11,):"a", (12,):"o", (13,):"e", (14,):"u", (15,):"*", (16,):["f", "v"],
-        (17,):"r", (18,):"p", (19,):"b", (20,):"l", (21,):"g", (22,):"t", (23,):"s", (24,):"d", (25,):"z",
-        (2,4): "f", (3,4):"x", (3,5):"q", (3,9):"v", (4,5):"d", (5,9):"c", (6,7):"b", (6,8): "m", (8,9):"l",
-        (13,14):"i", (18,19):"n", (18,20):"m", (19,21):"k", (4,6,8):"n", (5,7,9):"y", (19,21,23):"x",
-        (1,3,5,7):"j", (4,5,6,7):"g", (18,19,20,21):"j", (3,4,5,6,7):"z"})
+    sb.setIrelandEnglishLayout()
+    sb.printLayout()  
