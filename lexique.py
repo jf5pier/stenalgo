@@ -3,7 +3,7 @@
 #
 # This class provides functions to read Lexique version 383 [1,2] for its data
 # concerning French word ortograph, frequency, grammatical info, phonology and
-# phonetic syllable breakdow.  It the corrects the orthographic syllable
+# phonetic syllable breakdow.  It then corrects the orthographic syllable
 # breakdow using the phoneme to graphem association of LexiqueInfra [3].
 # The output is a simplified French Lexique with corrected ortographic
 # syllables.

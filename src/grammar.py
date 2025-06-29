@@ -8,6 +8,8 @@ from copy import deepcopy
 from src.word import Word
 import numpy as np
 from tqdm import tqdm
+from rich.table import Table
+from rich.console import Console
 
 
 @dataclass
@@ -330,7 +332,7 @@ class Syllable:
         Collection of pair of phonemes found after the vowels of a syllable
     multiVowelBiphonemeCol : BiphonemeCollection
         Collection of pair of phonemes found in multi-vowels syllable
-    phono_words : Word
+    phonoWords : Word
         Dictionnary of words grouped by their phonology from the Lexicon that
         contain that syllable
     """
@@ -353,7 +355,7 @@ class Syllable:
         self.biphonemesCoda: list[Biphoneme] = []
         self.biphonemesNucleus: list[Biphoneme] = []
         self.spellings: dict[str, float] = {}
-        self.phono_words: dict[str, list[Word]] = {}
+        self.phonoWords: dict[str, list[Word]] = {}
 
         phonemes: list[Phoneme] = Syllable.phonemeCol.getPhonemes(phoneme_names)
         self.name = "".join(list(map(lambda p: p.name, phonemes)))
@@ -474,10 +476,10 @@ class Syllable:
         Syllable.multiVowelBiphonemeCol.biphonemes.sort(reverse=True)
 
     def trackWord(self, word: Word):
-        if word.phonology in self.phono_words:
-            self.phono_words[word.phonology].append(word)
+        if word.phonology in self.phonoWords:
+            self.phonoWords[word.phonology].append(word)
         else:
-            self.phono_words[word.phonology] = [word]
+            self.phonoWords[word.phonology] = [word]
 
     @staticmethod
     def printTopPhonemesPerPosition(nb: int = -1):
@@ -719,15 +721,15 @@ class SyllableCollection:
                 base_score_short2 = 0.0
                 short_syllable1 = syll1.replacePhonemeInPos(phoneme1, "", pos)
                 short_syllable2 = syll1.replacePhonemeInPos(phoneme2, "", pos)
-                for phono_word1 in syll1.phono_words:
-                    base_score1 = sum(map(lambda w: w.frequency, syll1.phono_words[phono_word1]))
-                    word: Word = syll1.phono_words[phono_word1][0]
+                for phono_word1 in syll1.phonoWords:
+                    base_score1 = sum(map(lambda w: w.frequency, syll1.phonoWords[phono_word1]))
+                    word: Word = syll1.phonoWords[phono_word1][0]
                     phono_short_word1 = word.replaceSyllables(
                         syll1.name, short_syllable1
                     )
                     phono_short_syll1 = self.getSyllable(phono_short_word1)
                     if phono_short_syll1 is not None:
-                        phono_short_words1 = phono_short_syll1.phono_words
+                        phono_short_words1 = phono_short_syll1.phonoWords
                         base_score_short1 = (
                             sum(map(lambda w: w.frequency, phono_short_words1[phono_short_word1]))
                             if phono_short_word1 in phono_short_words1
@@ -738,7 +740,7 @@ class SyllableCollection:
                         syll1.name, short_syllable2)
                     phono_short_syll2 = self.getSyllable(phono_short_word2)
                     if phono_short_syll2 is not None:
-                        phono_short_words2 = phono_short_syll2.phono_words
+                        phono_short_words2 = phono_short_syll2.phonoWords
                         base_score_short2 = (
                             sum(map(lambda w: w.frequency, phono_short_words2[phono_short_word2]))
                             if phono_short_word2 in phono_short_words2
@@ -751,13 +753,13 @@ class SyllableCollection:
                 # Score is only defined by the 2 syllables that
                 # have 1 phoneme different
                 p1_to_p2 = syll1.replacePhonemeInPos(phoneme1, phoneme2, pos)
-                for phono_word1 in syll1.phono_words:
-                    base_score1 = sum(map(lambda w: w.frequency, syll1.phono_words[phono_word1]))
-                    word = syll1.phono_words[phono_word1][0]
+                for phono_word1 in syll1.phonoWords:
+                    base_score1 = sum(map(lambda w: w.frequency, syll1.phonoWords[phono_word1]))
+                    word = syll1.phonoWords[phono_word1][0]
                     phono_word2 = word.replaceSyllables(syll1.name, p1_to_p2)
                     phono_syll2= self.getSyllable(p1_to_p2)
                     if phono_syll2 is not None :
-                        phono_words2 = phono_syll2.phono_words
+                        phono_words2 = phono_syll2.phonoWords
                         if phono_word2 in phono_words2:
                             base_score2 = sum(map(lambda w: w.frequency, phono_words2[phono_word2]))
                             score += min(base_score1, base_score2)

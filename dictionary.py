@@ -81,7 +81,7 @@ class Dictionary:
                                 # ortho_gram_cat = corpus_word["cgramortho"],
                                 gender=corpusWord["genre"],
                                 number=corpusWord["nombre"],
-                                info_verb=corpusWord["infover"],
+                                infoVerb=corpusWord["infover"],
                                 rawSyllCV=corpusWord["syll_cv"],
                                 rawOrthosyllCV=corpusWord["orthosyll_cv"],
                                 frequencyBook=float(corpusWord["freqlivres"]),
