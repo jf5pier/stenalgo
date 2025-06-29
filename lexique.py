@@ -25,7 +25,7 @@ from copy import deepcopy
 from dataclasses import dataclass
 from src.grammar import Syllable, SyllableCollection
 # from src.word import GramCat
-from typing import List
+from typing import Any
 
 problemList = ["autocritiquer", "fjord", "carter", "cappuccino", "capucino",
                "capuccino", "cappuccinos",  "mamma", "voyouterie",
@@ -58,7 +58,7 @@ foreignList = ["ausweis", "beagle", "beagles", "bintje", "boghei", "borchtch",
 ignoredList = problemList + foreignList
 
 
-def printVerbose(word: str, msg: list):
+def printVerbose(word: str, msg: list[Any]) -> None:
     # return
     if word in [""]:  # ["soleil"] :
         print(word, " :\n", " ".join(map(str, msg)))
@@ -98,7 +98,7 @@ class Word:
     syll_cv : [[str]]
         Syllables in phonemes as provided by the LexicInfra and
         groupped by Lexique383 cv_cv field into list of phonems
-    orthosyll_cv : [[str]]
+    orthosyll_cv : [[(str, str)]
         Orthograph of the syllables as provided by the LexicInfra
         and groupped by Lexique383 cv_cv field into list of phonems' graphems
     """
@@ -116,9 +116,9 @@ class Word:
     frequency: float
     frequencyFilm: float
 
-    def __post_init__(self):
-        self.syll_cv: list[str] = deepcopy([])
-        self.orthosyll_cv: list[str] = deepcopy([])
+    def __post_init__(self) -> None:
+        self.syll_cv: list[list[str]] = deepcopy([])
+        self.orthosyll_cv: list[list[tuple[str, str]]] = deepcopy([])
         self.orig_syll: str = deepcopy(self.syll)
         self.orig_cv_cv: str = deepcopy(self.cv_cv)
         self.fix_x_k_s()
@@ -126,7 +126,7 @@ class Word:
         self.fix_j_dZ()
         self.fix_ch_tS()
 
-    def fix_x_k_s(self):
+    def fix_x_k_s(self) -> None:
         # X sound should not be broken into 2 consonnants (k-s) in 2 syllables
         if (self.isWellFormedCVSyll()
                 and "x" in self.ortho and "k-s" in self.syll):
@@ -137,7 +137,7 @@ class Word:
                 self.cv_cv[pos+3:]  # "*C-C*" becomes "*-CC*"
             self.fix_x_k_s()  # recurse if there is more than one
 
-    def fix_g_dZ(self):
+    def fix_g_dZ(self) -> None:
         # adagio a-a.d-d.a-a.g-dZ.i-j.o-o a-dad-Zjo V-CVC-CYV
         if (self.isWellFormedCVSyll()
                 and "g" in self.ortho and "d-Z" in self.syll):
@@ -148,7 +148,7 @@ class Word:
                 self.cv_cv[pos+3:]  # "*C-C*" becomes "*-CC*"
             self.fix_g_dZ()  # recurse if there is more than one
 
-    def fix_j_dZ(self):
+    def fix_j_dZ(self) -> None:
         # banjo b-b.an-@.j-dZ.o-o b@d-Zo CVC-CV
         if (self.isWellFormedCVSyll()
                 and "j" in self.ortho and "d-Z" in self.syll):
@@ -159,7 +159,7 @@ class Word:
                 self.cv_cv[pos+3:]  # "*C-C*" becomes "*-CC*"
             self.fix_j_dZ()  # recurse if there is more than one
 
-    def fix_ch_tS(self):
+    def fix_ch_tS(self) -> None:
         # machos m-m.a-a.ch-tS.o-o.s-# mat-So mat-So CVC-CV CVC-C
         if self.isWellFormedCVSyll() and "t-S" in self.syll:
             printVerbose(self.ortho, ["fix_ch_tS"])
@@ -170,7 +170,7 @@ class Word:
             self.fix_ch_tS()  # recurse if there is more than one
 
     @staticmethod
-    def fixLexiqueInfraGraphPhon(graphem_phonem: str):
+    def fixLexiqueInfraGraphPhon(graphem_phonem: str) -> str:
         # Apply correction to LexiqueInfra Graphem-Phonem correspondance
         # that are represented by a differente CV-CV in Lexique
         graphem_phonem = Word.fixAssociation(
@@ -231,29 +231,29 @@ class Word:
                 graphem_phoneme[pos+len(badAsso):]
         return graphem_phoneme
 
-    def phonemesToSyllables(self, withSilent:bool =True, symbol: str=""):
+    def phonemesToSyllables(self, withSilent:bool = True, symbol: str = "") -> list[str]:
         if withSilent:
             return [symbol.join(syll) for syll in self.syll_cv]
         else:
             return [symbol.join(syll).replace("#", "")
                     for syll in self.syll_cv]
 
-    def lettersToSyllables(self, symbol: str =""):
+    def lettersToSyllables(self, symbol: str = "") -> list[str]:
         return [symbol.join(map(lambda cv_lett: cv_lett[1], syll))
                 for syll in self.orthosyll_cv]
 
-    def syllablesToWord(self):
+    def syllablesToWord(self) ->str:
         return "".join(self.phonemesToSyllables())
 
-    def writeOrthoSyll(self):
+    def writeOrthoSyll(self) ->str:
         # Format is "syll1letter1_syll1letter2|syll2letter1_..."
         return "|".join(self.lettersToSyllables(symbol="_"))
 
-    def writePhonoSyll(self):
+    def writePhonoSyll(self) ->str:
         # Format is "syll1phonem1_syll1phonem2|syll2phonem1_..."
         return "|".join(self.phonemesToSyllables(symbol="_"))
 
-    def breakdownSyllables(self, graphem_phoneme: str):
+    def breakdownSyllables(self, graphem_phoneme: str) -> None:
         # Uses the CV-CV breakdown of phonemes from Lexique with the
         # grapheme-phoneme decomposition of LexiqueInfra to find
         # the graphemes parts of each syllable
@@ -266,8 +266,8 @@ class Word:
             # print(self.syll_cv, self.orthosyll_cv)
             # print(graphem_phoneme)
             return
-        syll_phon = []
-        syll_graph = []
+        syll_phon: list[str] = []
+        syll_graph: list[tuple[str, str]] = []
         skip_next_Y = False
         skip_next_C = False
         # if True:
@@ -420,19 +420,19 @@ class Word:
             sys.exit(1)
         return
 
-    def isWellFormedCVSyll(self):
+    def isWellFormedCVSyll(self) -> bool:
         # Verify cv_cv and syll have the same form
         a = self.cv_cv.split("-")
         b = self.syll.split("-")
         return len(a) == len(b) and list(map(len, a)) == list(map(len, b))
 
-    def isWellFormedCVOrthosyll(self):
+    def isWellFormedCVOrthosyll(self) -> bool:
         # Verify cv_cv and orthosyll have generally the same form
         a = self.cv_cv.split("-")
         b = self.orthosyll.split("-")
         return len(a) == len(b)
 
-    def isSyllConsensus(self):
+    def isSyllConsensus(self) -> bool:
         # Verify if the phonologic syll and syll_cv match once silent phonemes
         # are removed
         if self.isWellFormedCVSyll():
@@ -442,12 +442,12 @@ class Word:
             return True
         return False
 
-    def isOrthoSyllConsensus(self):
+    def isOrthoSyllConsensus(self) -> bool:
         # Verify if the orthograph of orthosyll and orthosyll_cv match
         if self.isWellFormedCVOrthosyll():
             for orthosyll, orthosyll_cv in zip(self.orthosyll.split("-"),
                                                self.orthosyll_cv):
-                if orthosyll != "".join(orthosyll_cv):
+                if orthosyll != "".join(map(lambda o: o[1], orthosyll_cv)):
                     return False
             return True
         return False
@@ -462,10 +462,10 @@ class Lexique:
     graphem_phoneme_source: str = "resources/LexiqueInfraCorrespondance.tsv"
     sylCol: SyllableCollection = SyllableCollection()
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.words = self.read_corpus()
 
-    def read_corpus(self):
+    def read_corpus(self) -> list[Word]:
         with open(self.word_source) as f:
             corpus = csv.DictReader(f, delimiter='\t')
 
@@ -474,23 +474,23 @@ class Lexique:
                     and corpus_word["ortho"][0] != "#"
                         and corpus_word["ortho"] not in ignoredList):
                     printVerbose(corpus_word["ortho"], ["Creating word"])
-                    word = Word(ortho=corpus_word["ortho"],
-                                phonology=corpus_word["phon"],
-                                lemme=corpus_word["lemme"],
+                    word = Word(ortho=corpus_word["ortho"],                   # mangeait
+                                phonology=corpus_word["phon"],                      # m@ZE
+                                lemme=corpus_word["lemme"],                         # manger
                                 # gram_cat = GramCat[corpus_word["cgram"]] if \
                                 #        corpus_word["cgram"] != '' else None,
                                 # ortho_gram_cat = [GramCat[gc] for gc in \
                                 #        corpus_word["cgramortho"].split(",")],
-                                gram_cat=corpus_word["cgram"],
-                                ortho_gram_cat=corpus_word["cgramortho"],
-                                gender=corpus_word["genre"],
-                                number=corpus_word["nombre"],
-                                info_verb=corpus_word["infover"],
-                                syll=corpus_word["syll"],
-                                cv_cv=corpus_word["cv-cv"],
-                                orthosyll=corpus_word["orthosyll"],
-                                frequency=float(corpus_word["freqlivres"]),
-                                frequencyFilm=float(corpus_word["freqfilms2"])
+                                gram_cat=corpus_word["cgram"],                      # VER
+                                ortho_gram_cat=corpus_word["cgramortho"],           # VER
+                                gender=corpus_word["genre"],                        # 
+                                number=corpus_word["nombre"],                       # 
+                                info_verb=corpus_word["infover"],                   # ind:imp:3s;
+                                syll=corpus_word["syll"],                           # m@-ZE
+                                cv_cv=corpus_word["cv-cv"],                         # CV-CV
+                                orthosyll=corpus_word["orthosyll"],                 # man-geait
+                                frequency=float(corpus_word["freqlivres"]),         # 20.14
+                                frequencyFilm=float(corpus_word["freqfilms2"])      # 4.93
                                 )
                     self.words.append(word)
                     same_ortho = self.words_by_ortho.get(corpus_word["ortho"],
@@ -505,7 +505,7 @@ class Lexique:
         phono = list(map(lambda s: s[1], asso_split))
         return "".join(phono).replace("#", "")
 
-    def breakdownSyllables(self):
+    def breakdownSyllables(self) -> None:
         with open(self.graphem_phoneme_source) as f:
             graph_phon_asso = csv.DictReader(f, delimiter='\t')
             for asso_word in graph_phon_asso:
@@ -549,7 +549,7 @@ class Lexique:
         return
 
     @staticmethod
-    def isVowel(char: str):
+    def isVowel(char: str) -> bool:
         return char in "aeiouy2589OE§@°"
 
     @staticmethod
@@ -585,17 +585,17 @@ class Lexique:
                 ret.append(s)
         return ret
 
-    def printTopWordsFilm(self, nb=500):
+    def printTopWordsFilm(self, nb=500) -> None:
         print("Somme\t%f" % sum(map(lambda w: w.frequencyFilm, self.words)))
         for w in self.words[:nb]:
             print("%s\t%f" % (w.ortho, w.frequencyFilm))
 
-    def printTopWordsBooks(self, nb=500):
+    def printTopWordsBooks(self, nb=500) -> None:
         print("Somme\t%f" % sum(map(lambda w: w.frequency, self.words)))
         for w in self.words[:nb]:
             print("%s\t%f" % (w.ortho, w.frequency))
 
-    def printSyllabificationStats(self):
+    def printSyllabificationStats(self) -> None:
         self.mismatchSyllableSpelling: list[Word] = []
         self.mismatchSyllableAssociation = []
         self.matchSyllableAssociation = []
@@ -640,7 +640,7 @@ class Lexique:
         print("Nb missing", len(missing))
         print("\n".join(map(str, self.mismatchSyllableAssociation)))
 
-    def outputMixedLexique(self, filename: str):
+    def outputMixedLexique(self, filename: str) -> None:
         with open(filename, "w") as f:
             fieldnames = ["ortho", "phon", "lemme", "cgram", "cgramortho",
                           "genre", "nombre", "infover", "syll_cv",

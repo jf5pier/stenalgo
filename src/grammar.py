@@ -5,8 +5,9 @@ import sys
 from dataclasses import dataclass
 from itertools import permutations, chain
 from copy import deepcopy
-from .word import Word
+from src.word import Word
 import numpy as np
+from tqdm import tqdm
 
 
 @dataclass
@@ -15,7 +16,9 @@ class Phoneme:
     Representation of the parts of a Syllable
 
     name : str
-        Single char IPA representation of the phoneme
+        Single char X-Sampa representation of the phoneme
+        (Based on the Lexiques's version of X-Sampa that has 1
+        ascii character representation of each phoneme)
     frequency : float
         Frequency of occurence in the underlying lexicon/corpus
     """
@@ -25,11 +28,11 @@ class Phoneme:
 
     # There's an argument to have "w" and "j" as part of the vowels
     nucleusPhonemes: str   = "aeiE@o°§uy5O9821"  #X-Sampa alphabet with "5@§1aGN8°" for "e~a~o~g~ANJH@"
-    nucleusPhonemesIPA: str= "aeiɛɑ̃o°ɔ̃uyɛ̃ɔœɥøœ̃"  #Nasal are 2 chars istead of 1"
+#    nucleusPhonemesIPA: str= "aeiɛɑ̃o°ɔ̃uyɛ̃ɔœɥøœ̃"  #Nasal are 2 chars istead of 1"
     consonantPhonemes: str    = "RtsplkmdvjnfbZwzSgNG"
-    consonantPhonemesIPA: str = "ʀtsplkmdvjnfbʒwzʃgɲŋ"
+ #   consonantPhonemesIPA: str = "ʀtsplkmdvjnfbʒwzʃgɲŋ"
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         # 7 phonemes is the max per syll
         self.posFrequency = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         self.invPosFrequency = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -98,34 +101,39 @@ class PhonemeCollection:
     """
     Collection of Phonemes representing the existing sounds of a lexicon/corpus
 
-    phonemes_names: {str:Phoneme}
+    syllabicPart : str
+        Part of the syllable in which the phoneme is found (all, onset, nucleus, coda)
+    phonemesNames: {str:Phoneme}
+        Dictionnary where each phoneme name is used as key to find its Phonem object
     phonemes : [Phoneme]
+        List of all Phonemes found in this part of the syllables
     """
 
-    def __init__(self):
-        self.phoneme_names: dict[str, Phoneme] = {}
+    def __init__(self, syllabicPart: str) -> None:
+        self.syllabicPart: str = syllabicPart
+        self.phonemeNames: dict[str, Phoneme] = {}
         self.phonemes: list[Phoneme] = []
 
     def getPhonemes(self, phoneme_names: str) -> list[Phoneme]:
         """Get phonemes from collection, adding missing ones if needed"""
         ret: list[Phoneme] = []
         for phoneme_name in phoneme_names:
-            if phoneme_name not in self.phoneme_names:
+            if phoneme_name not in self.phonemeNames:
                 p = Phoneme(phoneme_name)
-                self.phoneme_names[phoneme_name] = p
+                self.phonemeNames[phoneme_name] = p
                 self.phonemes.append(p)
 
-            ret.append(self.phoneme_names[phoneme_name])
+            ret.append(self.phonemeNames[phoneme_name])
         return ret
 
-    def getPhoneme(self, phoneme_name: str):
+    def getPhoneme(self, phoneme_name: str) -> Phoneme:
         return self.getPhonemes(phoneme_name)[0]
 
-    def printTopPhonemes(self, nb: int = -1):
+    def printTopPhonemes(self, nb: int = -1) -> None:
         self.phonemes.sort(reverse=True)
         print("Top phonemes:", self.phonemes[:nb], "\n")
 
-    def printTopPhonemesPerPosition(self, nb: int = -1):
+    def printTopPhonemesPerPosition(self, nb: int = -1) -> None:
         for i in range(7):
             self.phonemes.sort(key=lambda p: p.posFrequency[i], reverse=True)
             print("Phonemes in pos %i" % i,
@@ -134,7 +142,7 @@ class PhonemeCollection:
                 "\n",
             )
 
-    def printTopPhonemesPerInvPosition(self, nb: int = -1):
+    def printTopPhonemesPerInvPosition(self, nb: int = -1) -> None:
         for i in range(7):
             self.phonemes.sort(key=lambda p: p.invPosFrequency[i], reverse=True)
             print("Phonemes in inverted pos -%i" % (i + 1),
@@ -144,31 +152,31 @@ class PhonemeCollection:
             )
 
     def printBarchart(self, phoneme_order: str,
-                      exhaustive_phonemes: str, vsize: int = 10):
+                      exhaustive_phonemes: str, vsize: int = 10) -> None:
         maxFreq = 0.0
-        excluded_phonemes: list[str] = list(
+        excludedPhonemes: list[str] = list(
             filter(lambda p: p not in phoneme_order, exhaustive_phonemes)
         )
         for phoneme_name in exhaustive_phonemes:
-            maxFreq = max(maxFreq, self.phoneme_names[phoneme_name].frequency)
+            maxFreq = max(maxFreq, self.phonemeNames[phoneme_name].frequency)
         for i in range(vsize, 0, -1):
             toPrint = "> "
             for phoneme_name in phoneme_order:
-                phoneme = self.phoneme_names[phoneme_name]
+                phoneme = self.phonemeNames[phoneme_name]
                 toPrint += (
                     phoneme.name if phoneme.frequency >= i * maxFreq / vsize else " "
                 )
             toPrint += " | "
-            for phoneme_name in excluded_phonemes:
-                phoneme = self.phoneme_names[phoneme_name]
+            for phoneme_name in excludedPhonemes:
+                phoneme = self.phonemeNames[phoneme_name]
                 toPrint += (
                     phoneme.name if phoneme.frequency >= i * maxFreq / vsize else " "
                 )
             toPrint += " <"
             print(toPrint)
-        print("> " + phoneme_order + " | " + "".join(excluded_phonemes) + " <")
+        print("> " + phoneme_order + " | " + "".join(excludedPhonemes) + " <")
         barsWidth: int = len(phoneme_order) + 3
-        barsWidth2: int = len(excluded_phonemes) + 3
+        barsWidth2: int = len(excludedPhonemes) + 3
         print("^" * (barsWidth) + "|" + "^" * (barsWidth2))
         print(" " * (barsWidth - 8) + "ordered | floating", "\n")
 
@@ -177,30 +185,44 @@ class BiphonemeCollection:
     """
     Collection of pairs of phonemes found in syllables
 
-    biphonemes_names: {(str,str):Biphoneme}
+    biphonemesNames: {(str,str):Biphoneme}
+        Dict of pairs of phonemes serving as key to find the
+        corresponding Biphoneme object
     biphonemes : list[Biphoneme]
+        List of all Biphonemes found in this part of the syllables
+    bestPermutation : str
+        Permutation of all Phonemes in this part of the syllables based
+        on the frequency of order of all Biphonemes found in the lexicon
+    bestPermutationScore : float
+        Total score of the best permutation of phonemes
+    bestPermutationNegativeScore : float
+        Negative portion of the score of the best permutation of phonemes
     """
 
-    def __init__(self):
-        self.biphoneme_names: dict[tuple[str, str], Biphoneme] = {}
+    def __init__(self, syllabicPart: str) -> None:
+        self.syllabicPart: str = syllabicPart
+        self.biphonemeNames: dict[tuple[str, str], Biphoneme] = {}
         self.biphonemes: list[Biphoneme] = []
+        self.bestPermutation: str = ""
+        self.bestPermutationScore: float = 0.0
+        self.bestPermutationNegativeScore: float = 0.0
 
-    def getBiphonemes(self, biphoneme_names: list[tuple[str, str]]) -> list[Biphoneme]:
+    def getBiphonemes(self, biphonemeNames: list[tuple[str, str]]) -> list[Biphoneme]:
         """Get biphonemes from collection, adding missing ones if needed"""
         ret: list[Biphoneme] = []
-        for biphoneme_name in biphoneme_names:
-            if biphoneme_name not in self.biphoneme_names:
-                bp = Biphoneme(biphoneme_name)
-                self.biphoneme_names[biphoneme_name] = bp
+        for biphonemeName in biphonemeNames:
+            if biphonemeName not in self.biphonemeNames:
+                bp = Biphoneme(biphonemeName)
+                self.biphonemeNames[biphonemeName] = bp
                 self.biphonemes.append(bp)
 
-            ret.append(self.biphoneme_names[biphoneme_name])
+            ret.append(self.biphonemeNames[biphonemeName])
         return ret
 
-    def getBiphoneme(self, biphoneme_name: tuple[str, str]) -> Biphoneme:
-        return self.getBiphonemes([biphoneme_name])[0]
+    def getBiphoneme(self, biphonemeName: tuple[str, str]) -> Biphoneme:
+        return self.getBiphonemes([biphonemeName])[0]
 
-    def printTopBiphonemes(self, nb: int = -1):
+    def printTopBiphonemes(self, nb: int = -1) -> None:
         self.biphonemes.sort(reverse=True)
         print(
             "Biphonemes:",
@@ -208,15 +230,15 @@ class BiphonemeCollection:
             ), "\n",
         )
 
-    def getPhonemesNames(self):
+    def getPhonemesNames(self) -> str:
         """Extract single phonemes names from pairs of phonemes"""
         left = set(map(lambda p: p.pair[0], self.biphonemes))
         right = set(map(lambda p: p.pair[1], self.biphonemes))
         return "".join(set(list(left) + list(right)))
 
-    def optimizeOrder(self):
+    def optimizeOrder(self) -> None:
         """Optimize the order of the phonemes found in the biphonemes
-        to reduce the frequency where two phonemes would be types in
+        to reduce the frequency where two phonemes would be typed in
         the wrong order to produce a syllable."""
         score = 0
         phonemes = list(self.getPhonemesNames())
@@ -231,7 +253,8 @@ class BiphonemeCollection:
         windowScans = 400
         maxShuffleSize = 7
         randOrder = np.array(range(len(phonemes)))
-        for scan in range(windowScans):
+        print("Optimizing biphonemes order in syllabic part : " + self.syllabicPart)
+        for _ in tqdm(list(range(windowScans)), ascii=True, ncols=80, unit=" phoneme shuffle scans"):
             np.random.shuffle(randOrder)
             shuffleSize = np.random.randint(2, maxShuffleSize)
             mutatedPermutation = list(deepcopy(bestPermutation))
@@ -261,9 +284,12 @@ class BiphonemeCollection:
         print(
             "\nBest order (ordered score %0.1f, disordered score %0.1f):\n"
             % (bestScore, bestNegScore),
-            bestPermutation,
+            bestPermutation, "\n"
         )
-        return bestPermutation
+        self.bestPermutation = bestPermutation
+        self.bestPermutationScore = bestScore
+        self.bestPermutationNegativeScore = bestNegScore
+
 
     def scorePermutation(self, permutation: str):
         score = 0.0
@@ -309,15 +335,15 @@ class Syllable:
         contain that syllable
     """
 
-    phonemeCol: PhonemeCollection = PhonemeCollection()
-    onsetPhonemCol: PhonemeCollection = PhonemeCollection()
-    codaPhonemCol: PhonemeCollection = PhonemeCollection()
-    nucleusPhonemCol: PhonemeCollection = PhonemeCollection()
-    onsetBiphonemCol: BiphonemeCollection = BiphonemeCollection()
-    codaBiphonemCol: BiphonemeCollection = BiphonemeCollection()
-    multiVowelBiphonemeCol: BiphonemeCollection = BiphonemeCollection()
+    phonemeCol: PhonemeCollection = PhonemeCollection("all")
+    onsetPhonemCol: PhonemeCollection = PhonemeCollection("onset")
+    nucleusPhonemCol: PhonemeCollection = PhonemeCollection("nucleus")
+    codaPhonemCol: PhonemeCollection = PhonemeCollection("coda")
+    onsetBiphonemCol: BiphonemeCollection = BiphonemeCollection("onset")
+    multiVowelBiphonemeCol: BiphonemeCollection = BiphonemeCollection("nucleus")
+    codaBiphonemCol: BiphonemeCollection = BiphonemeCollection("coda")
 
-    def __init__(self, phoneme_names: str, spelling: str, frequency: float = 0.0):
+    def __init__(self, phoneme_names: str, spelling: str, frequency: float = 0.0) -> None:
         self.phonemes: list[Phoneme] = []
         self.name: str = ""
         self.phonemesOnset: list[Phoneme] = []
@@ -329,7 +355,7 @@ class Syllable:
         self.spellings: dict[str, float] = {}
         self.phono_words: dict[str, list[Word]] = {}
 
-        phonemes = Syllable.phonemeCol.getPhonemes(phoneme_names)
+        phonemes: list[Phoneme] = Syllable.phonemeCol.getPhonemes(phoneme_names)
         self.name = "".join(list(map(lambda p: p.name, phonemes)))
         self.frequency : float = frequency
         self.spellings[spelling] = frequency
@@ -348,22 +374,22 @@ class Syllable:
             if firstVowelPos == -1 and not phoneme.isVowel():
                 if verbose:
                     print("Left hand consonant", phoneme)
-                phoneme_onset = Syllable.onsetPhonemCol.getPhoneme(phoneme.name)
-                phoneme_onset.increaseFrequency(frequency)
-                self.phonemesOnset.append(phoneme_onset)
+                onsetPhoneme = Syllable.onsetPhonemCol.getPhoneme(phoneme.name)
+                onsetPhoneme.increaseFrequency(frequency)
+                self.phonemesOnset.append(onsetPhoneme)
             elif firstVowelPos != -1 and not phoneme.isVowel():
                 if verbose:
                     print("Right hand consonant", phoneme)
-                phoneme_coda = Syllable.codaPhonemCol.getPhoneme(phoneme.name)
-                phoneme_coda.increaseFrequency(frequency)
-                self.phonemesCoda.append(phoneme_coda)
+                codaPhoneme = Syllable.codaPhonemCol.getPhoneme(phoneme.name)
+                codaPhoneme.increaseFrequency(frequency)
+                self.phonemesCoda.append(codaPhoneme)
             # Break down the syllable into consonants-vowels-consonants
             if phoneme.isVowel():
                 if verbose:
                     print("Vowel", phoneme)
-                phoneme_nucleus = Syllable.nucleusPhonemCol.getPhoneme(phoneme.name)
-                phoneme_nucleus.increaseFrequency(frequency)
-                self.phonemesNucleus.append(phoneme_nucleus)
+                nucleusPhoneme = Syllable.nucleusPhonemCol.getPhoneme(phoneme.name)
+                nucleusPhoneme.increaseFrequency(frequency)
+                self.phonemesNucleus.append(nucleusPhoneme)
 
                 if firstVowelPos == -1:
                     firstVowelPos = pos
@@ -438,7 +464,7 @@ class Syllable:
         self.increaseFrequency(frequency)
 
     @staticmethod
-    def sortCollections():
+    def sortPhonemesCollections() -> None:
         Syllable.phonemeCol.phonemes.sort(reverse=True)
         Syllable.onsetPhonemCol.phonemes.sort(reverse=True)
         Syllable.codaPhonemCol.phonemes.sort(reverse=True)
@@ -482,23 +508,25 @@ class Syllable:
         Syllable.codaBiphonemCol.printTopBiphonemes(nb)
 
     @staticmethod
-    def optimizeBiphonemeOrder() -> tuple[str, str, str]:
-        left_hand_order: str= Syllable.onsetBiphonemCol.optimizeOrder()
-        right_hand_order: str = Syllable.codaBiphonemCol.optimizeOrder()
-        nucleus_order: str = Syllable.multiVowelBiphonemeCol.optimizeOrder()
-        return left_hand_order, right_hand_order, nucleus_order
+    def optimizeBiphonemeOrder() -> None:
+        Syllable.onsetBiphonemCol.optimizeOrder()
+        Syllable.codaBiphonemCol.optimizeOrder()
+        Syllable.multiVowelBiphonemeCol.optimizeOrder()
 
     @staticmethod
-    def printOptimizedBiphonemeOrder():
-        left_hand_order, right_hand_order, nucleus_order = Syllable.optimizeBiphonemeOrder()
-        print("Left hand optimization :")
+    def printOptimizedBiphonemeOrder() -> None:
+        print("Left hand (syllable onset) consonant optimization :")
+        left_hand_order = Syllable.onsetBiphonemCol.bestPermutation
         Syllable.onsetPhonemCol.printBarchart(left_hand_order, Phoneme.consonantPhonemes)
 
-        print("Right hand optimization :")
+        print("Thumbs (syllable nucleus) vowel optimization :")
+        nucleus_order = Syllable.multiVowelBiphonemeCol.bestPermutation
+        Syllable.nucleusPhonemCol.printBarchart(nucleus_order, Phoneme.nucleusPhonemes)
+
+        print("Right hand (syllale coda) consonant optimization :")
+        right_hand_order = Syllable.codaBiphonemCol.bestPermutation
         Syllable.codaPhonemCol.printBarchart(right_hand_order, Phoneme.consonantPhonemes)
 
-        print("Vowel optimization :")
-        Syllable.nucleusPhonemCol.printBarchart(nucleus_order, Phoneme.nucleusPhonemes)
         print("")
 
     def replacePhonemeInPos(self, phoneme1: Phoneme|str, phoneme2: Phoneme|str, pos: str):
@@ -741,10 +769,10 @@ class SyllableCollection:
         different phonemes and the other keypressess of the syllable will
         give enough context to resolve the right phonem of the syllable."""
 
-        def _getSyllabicAmbiguityScores(phonems: str, pos: str):
+        def _getSyllabicAmbiguityScores(phonemes: str, pos: str):
             syllAmbiguity: dict[tuple[str,str], float] = {}
-            for p1i, p1 in enumerate(phonems[:-1]):
-                for p2 in phonems[p1i + 1 :]:
+            for p1i, p1 in tqdm(list(enumerate(phonemes[:-1])), ascii=True, ncols=80, unit=" phonemes pairs"):
+                for p2 in phonemes[p1i + 1 :]:
                     conflict = self.syllabicAmbiguityScore(p1, p2, pos)
                     syllAmbiguity[(p1, p2)] = conflict
             return {
@@ -770,10 +798,10 @@ class SyllableCollection:
         provide enough context to identify which of the multiple phonemes
         assgined to a keypress to choose."""
 
-        def _getLexicalAmbiguityScores(phonems: str,  pos: str):
+        def _getLexicalAmbiguityScores(phonemes: str,  pos: str):
             lexicalAmbiguity: dict[tuple[str,str], float] = {}
-            for p1i, p1 in enumerate(phonems[:-1]):
-                for p2 in phonems[p1i + 1 :]:
+            for p1i, p1 in tqdm(list(enumerate(phonemes[:-1])), ascii=True, ncols=80, unit=" phonemes pairs") :
+                for p2 in phonemes[p1i + 1 :]:
                     conflict = self.lexicalAmbiguityScore(p1, p2, pos)
                     lexicalAmbiguity[(p1, p2)] = conflict
             return {
