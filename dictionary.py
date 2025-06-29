@@ -24,6 +24,9 @@ from copy import deepcopy
 from src.grammar import Syllable, SyllableCollection
 from src.word import GramCat, Word
 from typing import Any
+from src.keyboard import Keyboard, Starboard
+from tqdm import tqdm
+import sys
 
 def printVerbose(word: str, msg: list[Any]):
     # return
@@ -32,91 +35,135 @@ def printVerbose(word: str, msg: list[Any]):
 
 
 class Dictionary:
-    words = []
-    words_by_ortho: dict[str, list[Word]] = {}
-    frequent_word: list[str] = []
-    nb_frequent_words: int = 200
+    words: list[Word]
+    wordsByOrtho: dict[str, list[Word]] = {}
+    frequentWords: list[str] = []
+    nbFrequentWords: int = 200
     totalFrequencies: float = 0.0
-    frequent_word_frequencies: float = 0.0
-    word_source: str = "resources/LexiqueMixte.tsv"
-    frequent_word_file: str = "resources/top500_film.txt"
-    sylCol: SyllableCollection = SyllableCollection()
+    frequentWordsFrequencies: float = 0.0
+    wordSource: str = "resources/LexiqueMixte.tsv"
+    frequentWordsFile: str = "resources/top500_film.txt"
+    syllableCollection: SyllableCollection = SyllableCollection()
+    onsetSyllabicAmbiguity: dict[tuple[str, str], float] = {}
+    nucleusSyllabicAmbiguity: dict[tuple[str, str], float] = {}
+    codaSyllabicAmbiguity: dict[tuple[str, str], float] = {}
+    onsetLexicalAmbiguity: dict[tuple[str, str], float] = {}
+    nucleusLexicalAmbiguity: dict[tuple[str, str], float] = {}
+    codaLexicalAmbiguity: dict[tuple[str, str], float] = {}
 
-    def __init__(self):
-        self.words: list[Word]= self.read_corpus()
+    def __init__(self) -> None:
+        self.words: list[Word]= self.readCorpus()
 
-    def read_corpus(self) -> list[Word]:
-        with open(self.frequent_word_file) as fw:
+    def readCorpus(self) -> list[Word]:
+        words : list[Word] = []
+        with open(self.frequentWordsFile) as fw:
             self.totalFrequencies = float(
                 fw.readline().strip().split("\t")[-1])
-            for line in fw.readlines()[:self.nb_frequent_words]:
+            for line in fw.readlines()[:self.nbFrequentWords]:
                 ls = line.strip().split("\t")
-                self.frequent_word.append(ls[0])
-                self.frequent_word_frequencies += float(ls[1])
+                self.frequentWords.append(ls[0])
+                self.frequentWordsFrequencies += float(ls[1])
 
-        with open(self.word_source) as f:
+        with open(self.wordSource) as f:
             corpus = csv.DictReader(f, delimiter='\t')
 
-            for corpus_word in corpus:
-                if corpus_word["ortho"] is not None \
-                        and corpus_word["ortho"][0] != "#":
-                    word: Word = Word(ortho=corpus_word["ortho"],
-                                phonology=corpus_word["phon"],
-                                lemme=corpus_word["lemme"],
-                                gram_cat=GramCat[corpus_word["cgram"]]
-                                    if corpus_word["cgram"] != '' else None,
-                                ortho_gram_cat=[GramCat[gc] for gc in
-                                    corpus_word["cgramortho"].split(",")],
+            for corpusWord in tqdm(corpus, desc="Reading corpus", unit=" words"):
+                if corpusWord["ortho"] is not None \
+                        and corpusWord["ortho"][0] != "#":
+                    word: Word = Word(ortho=corpusWord["ortho"],
+                                phonology=corpusWord["phon"],
+                                lemme=corpusWord["lemme"],
+                                gramCat=GramCat[corpusWord["cgram"]]
+                                    if corpusWord["cgram"] != '' else None,
+                                orthoGramCat=[GramCat[gc] for gc in
+                                    corpusWord["cgramortho"].split(",")],
                                 # gram_cat = corpus_word["cgram"],
                                 # ortho_gram_cat = corpus_word["cgramortho"],
-                                gender=corpus_word["genre"],
-                                number=corpus_word["nombre"],
-                                info_verb=corpus_word["infover"],
-                                raw_syll_cv=corpus_word["syll_cv"],
-                                raw_orthosyll_cv=corpus_word["orthosyll_cv"],
-                                frequencyBook=float(corpus_word["freqlivres"]),
-                                frequencyFilm=float(corpus_word["freqfilms2"])
+                                gender=corpusWord["genre"],
+                                number=corpusWord["nombre"],
+                                info_verb=corpusWord["infover"],
+                                rawSyllCV=corpusWord["syll_cv"],
+                                rawOrthosyllCV=corpusWord["orthosyll_cv"],
+                                frequencyBook=float(corpusWord["freqlivres"]),
+                                frequencyFilm=float(corpusWord["freqfilms2"])
                                 )
-                    self.words.append(word)
-                    same_ortho = self.words_by_ortho.get(corpus_word["ortho"],
+                    words.append(word)
+                    same_ortho = self.wordsByOrtho.get(corpusWord["ortho"],
                                                          deepcopy([])) + [word]
-                    self.words_by_ortho[corpus_word["ortho"]] = same_ortho
-        return self.words
+                    self.wordsByOrtho[corpusWord["ortho"]] = same_ortho
+        return words
 
-    def analyseSyllabification(self):
+    def analyseSyllabification(self) -> None:
+        print("Analyzing syllabification...")
         self.words.sort(key=lambda x: x.frequency, reverse=True)
-        for word in self.words:
+        for word in tqdm(self.words, unit=" words", ascii=True, ncols=80):
             # Remove the frequent words from syllable frequency statistics
-            frequency = word.frequency if word.ortho not in self.frequent_word else 0.0
+            frequency = word.frequency if word.ortho not in self.frequentWords else 0.0
             syllable_names = word.phonemesToSyllableNames(withSilent=False)
             spellings = word.graphemsToSyllables(withSilent=False)
             for (syllable_name, spelling) in zip(syllable_names, spellings):
-                _ = self.sylCol.updateSyllable(
+                _ = self.syllableCollection.updateSyllable(
                     syllable_name, spelling, frequency, word)
 
-        Syllable.sortCollections()
+        Syllable.sortPhonemesCollections()
 
-    def printSyllabificationStats(self):
+    def analyseAmbiguities(self) -> None:
+        """
+        Analyse the syllabic ambiguities in the syllable collection.
+        """
+        print("Analyzing syllabic ambiguities...")
+        self.onsetSyllabicAmbiguity, self.nucleusSyllabicAmbiguity, self.codaSyllabicAmbiguity = \
+            self.syllableCollection.analysePhonemSyllabicAmbiguity()
+        print("Analyzing lexical ambiguities...")
+        self.onsetLexicalAmbiguity, self.nucleusLexicalAmbiguity, self.codaLexicalAmbiguity = \
+            self.syllableCollection.analysePhonemLexicalAmbiguity()
+
+    def printSyllabificationStats(self) -> None:
         Syllable.printTopPhonemes()
 #        self.sylCol.printTopSyllables(20)
 #        Syllable.printTopPhonemesPerPosition()
 #        Syllable.printTopPhonemesPerInvPosition()
         Syllable.printTopBiphonemes(20)
         Syllable.printOptimizedBiphonemeOrder()
-        syll_onset, syll_nucleus, syll_coda = self.sylCol.analysePhonemSyllabicAmbiguity()
-        self.sylCol.printSyllacbicAmbiguityStats(
-            syll_onset, syll_nucleus, syll_coda, nb=15)
-        lexical_onset, lexical_nucleus, lexical_coda = self.sylCol.analysePhonemLexicalAmbiguity()
-        self.sylCol.printLexicalAmbiguityStats(
-            lexical_onset, lexical_nucleus, lexical_coda, nb=15)
+        self.syllableCollection.printSyllacbicAmbiguityStats(
+            self.onsetSyllabicAmbiguity,
+            self.nucleusSyllabicAmbiguity,
+            self.codaSyllabicAmbiguity, nb=15)
+        self.syllableCollection.printLexicalAmbiguityStats(
+            self.onsetLexicalAmbiguity,
+            self.nucleusLexicalAmbiguity,
+            self.codaLexicalAmbiguity, nb=15)
+
+    def generateKeymap(self, keyboard: Keyboard) -> None:
+        """ 
+        Generates a keymap of the differen phonemes by trying to minimize ambiguities and 
+        maximize the number of keystrokes that are in the right order to spell the words phonetically.
+        """
+        # Start by assigning greedily the most frequent phonemes to the most accessible keys which
+        # are the single keys per phoneme.
+        onsetSingleKeys, nucleusSingleKeys, codaSingleKeys = keyboard.getSingleKeys(["onset", "nucleus", "coda"])
+        sortedOnsetPhonems = sorted(Syllable.onsetPhonemCol.phonemes, reverse=True)
+        topOnsetPhonems = sortedOnsetPhonems[:len(onsetSingleKeys)]
+        sortedNucleusPhonems = sorted(Syllable.nucleusPhonemCol.phonemes, reverse=True)
+        topNucleusPhonems = sortedNucleusPhonems[:len(nucleusSingleKeys)]
+        sortedCodaPhonems = sorted(Syllable.codaPhonemCol.phonemes, reverse=True)
+        topCodaPhonems = sortedCodaPhonems[:len(codaSingleKeys)]
 
 
-dictionary = Dictionary()
 
-#from src.grammar import Phoneme
-#print (Phoneme.nucleusPhonemesIPA, len(Phoneme.nucleusPhonemesIPA))
-#print (Phoneme.nucleusPhonemes, len(Phoneme.nucleusPhonemes))
-#for i in Phoneme.nucleusPhonemesIPA :
-#    print(i)
-dictionary.analyseSyllabification()
-dictionary.printSyllabificationStats()
+
+
+
+if __name__ == "__main__":
+    dictionary = Dictionary()
+
+    dictionary.analyseSyllabification()
+    Syllable.optimizeBiphonemeOrder()
+
+    dictionary.analyseAmbiguities()
+#    sys.exit(1)
+    dictionary.printSyllabificationStats()
+
+#   Create a default starboard keyboard and assign the keymap
+    starboard = Starboard()
+    dictionary.generateKeymap(starboard)

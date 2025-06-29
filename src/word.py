@@ -28,7 +28,7 @@ class Word:
         Collection of phonemes representing the pronunciation
     lemme : str
         Root of the word
-    gram_cat : GramCat
+    gramCat : GramCat
         Grammatical category
     cgramortho : [GramCat]
         All grammatical categories of the words sharing this orthograph
@@ -36,21 +36,21 @@ class Word:
         Gender of the noun or adjectiv
     number : str
         Number (singular or plural) of the noun or adjectiv
-    info_verb : str
+    infoVerb : str
         Conjugaiton of the verb
-    raw_syll_cv : str
+    rawSyllCV : str
         Phonemes in syllables after analysis of Lexique383 and LexiqueInfra
-    raw_orthosyll_cv : str
+    rawOrthosyllCV : str
         Orthograph of the syllables after analysis of Lexique383
         and LexiqueInfra
     frequencyBook : float
         Frequency of the word in the written corpus
     frequencyFilm : float
         Frequency of the word in the film corpus
-    syll_cv : [[str]]
-        Parsed raw_syll_cv
-    orthosyll_cv : [[str]]
-        Parsed raw_orthosyll_cv
+    syllCV : [[str]]
+        Parsed rawSyllCV
+    orthosyllCV : [[str]]
+        Parsed rawOrthosyllCV
     frequency : float
         Chosen mix of the film and book frequencies
     """
@@ -58,61 +58,61 @@ class Word:
     ortho: str
     phonology: str
     lemme: str
-    gram_cat: GramCat | None
-    ortho_gram_cat: list[GramCat]
+    gramCat: GramCat | None
+    orthoGramCat: list[GramCat]
     gender: str
     number: str
-    info_verb: str
-    raw_syll_cv: str
-    raw_orthosyll_cv: str
+    infoVerb: str
+    rawSyllCV: str
+    rawOrthosyllCV: str
     frequencyBook: float
     frequencyFilm: float
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.fix_e_n_en()
-        self.orthosyll_cv = self.parseOrthoSyll()
-        self.syll_cv = self.parsePhonoSyll()
+        self.orthosyllCV = self.parseOrthoSyll()
+        self.syllCV = self.parsePhonoSyll()
         # Formula to be optimized following the need of the typist
         # self.frequency = 0.9*self.frequencyFilm + 0.1* self.frequencyBook
         self.frequency = self.frequencyFilm
 
-    def fix_e_n_en(self):
+    def fix_e_n_en(self) -> None:
         # enivre @nivR @|n_i_v_R_# e|n_i_v_r_e --> @|i_v_R_# en|i_v_r_e
-        if "@|n_" in self.raw_syll_cv and "e|n_" in self.raw_orthosyll_cv:
-            pos = self.raw_syll_cv.index("@|n_")
-            self.raw_syll_cv = (
-                self.raw_syll_cv[:pos] + "@|" + self.raw_syll_cv[pos + 2 :]
+        if "@|n_" in self.rawSyllCV and "e|n_" in self.rawOrthosyllCV:
+            pos = self.rawSyllCV.index("@|n_")
+            self.rawSyllCV = (
+                self.rawSyllCV[:pos] + "@|" + self.rawSyllCV[pos + 2 :]
             )
-            pos = self.raw_orthosyll_cv.index("e|n_")
-            self.raw_orthosyll_cv = (
-                self.raw_orthosyll_cv[:pos] + "en|" + self.raw_orthosyll_cv[pos + 3 :]
+            pos = self.rawOrthosyllCV.index("e|n_")
+            self.rawOrthosyllCV = (
+                self.rawOrthosyllCV[:pos] + "en|" + self.rawOrthosyllCV[pos + 3 :]
             )
             self.fix_e_n_en()
 
-    def phonemesToSyllableNames(self, withSilent: bool=True, symbol: str=""):
+    def phonemesToSyllableNames(self, withSilent: bool=True, symbol: str="") -> list[str]:
         if withSilent:
-            return [symbol.join(syll) for syll in self.syll_cv]
+            return [symbol.join(syll) for syll in self.syllCV]
         else:
-            return [symbol.join(syll).replace("#", "") for syll in self.syll_cv]
+            return [symbol.join(syll).replace("#", "") for syll in self.syllCV]
 
-    def graphemsToSyllables(self, withSilent: bool=True, symbol: str=""):
+    def graphemsToSyllables(self, withSilent: bool=True, symbol: str="") -> list[str]:
         if withSilent:
-            return [symbol.join(syll) for syll in self.orthosyll_cv]
+            return [symbol.join(syll) for syll in self.orthosyllCV]
         else:
-            return [symbol.join(syll).replace("#", "") for syll in self.orthosyll_cv]
+            return [symbol.join(syll).replace("#", "") for syll in self.orthosyllCV]
 
-    def syllablesToWord(self):
+    def syllablesToWord(self) -> str:
         return "".join(self.phonemesToSyllableNames())
 
-    def parseOrthoSyll(self):
+    def parseOrthoSyll(self) ->list[list[str]]:
         # Format is "syll1letter1_syll1letter2|syll2letter1_..."
-        return map(
-            lambda syll: syll.split("_"), self.raw_orthosyll_cv.split("|")
-        )
+        return list(map(
+            lambda syll: syll.split("_"), self.rawOrthosyllCV.split("|")
+        ))
 
-    def parsePhonoSyll(self):
+    def parsePhonoSyll(self) -> list[list[str]]:
         # Format is "syll1phonem1_syll1phonem2|syll2phonem1_..."
-        return map(lambda syll: syll.split("_"), self.raw_syll_cv.split("|"))
+        return list(map(lambda syll: syll.split("_"), self.rawSyllCV.split("|")))
 
     def replaceSyllables(self, syll_orig: str, syll_final: str) -> str:
         phono = deepcopy(self.phonology)

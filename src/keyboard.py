@@ -1,6 +1,8 @@
 #!/bin/env python3
 from dataclasses import dataclass
 from math import log,ceil
+from abc  import ABC, abstractmethod
+from typing import override
 
 class FingerWeights(object):
     noPress: float = 0.0
@@ -43,7 +45,7 @@ class PositionWeights(object):
             list(self.rightIndex.items()) + list(self.rightMiddle.items()) +
             list(self.rightRing.items()) + list(self.rightPinky.items()))
 
-class Keyboard(object):
+class Keyboard(ABC):
     # One key keyboard template
     _keyboardTemplate: str = """
 ------
@@ -59,13 +61,13 @@ class Keyboard(object):
         {}, {},
         {}, {},
         {}, {})
-    def printTemplate(self):
+    def printTemplate(self) -> None:
         print("Key indexes :")
         print(self._keyboardTemplate.format(*self._keyIndexes))
         print("Fingers assignments :")
         print(self._keyboardTemplate.format(*self._fingerAssignments))
 
-    def keypressBinaryEncodingSize(self):
+    def keypressBinaryEncodingSize(self) -> None:
         bitsNeeded = 0
         fingerKeypressDict:dict[str, dict[tuple[int, ...], float]] = self._possibleKeypress.__dict__
         for finger in fingerKeypressDict:
@@ -78,6 +80,10 @@ class Keyboard(object):
             bitsNeeded += bit
         print("Total bits needed:", bitsNeeded)
 
+    @abstractmethod
+    def getSingleKeys(self, syllabicParts : list[str]) -> tuple[list[int],...]:
+        ...
+
 
 class Starboard(Keyboard):
     _keyboardTemplate: str = \
@@ -89,9 +95,6 @@ class Starboard(Keyboard):
                        |{11: ^4}|{12: ^4}| |{13: ^4}|{14: ^4}|
                        ----------- -----------"""
 
-    _keyIndexes: list[str] = list(map(str, range(26)))
-    _fingerAssignments: list[str] = 4*["lp"] + 2*["lr"] + 2*["lm"] + 3*["li"] +2*["lt"] + \
-        2*["rt"] + 3* ["ri"] + 2*["rm"] +2*["rr"] +4*["rp"]
     _printableKeyLayout: str = """
 Keys indexes :
 -------------------------------       -------------------------------
@@ -114,6 +117,9 @@ Fingers assignments :
 
     _reservedKeys: list[int] = [0, 1, 10, 15]
     _possibleKeys: list[int] = list(range(26))
+    _fingerAssignments: list[str] = 4*["lp"] + 2*["lr"] + 2*["lm"] + 3*["li"] +2*["lt"] + \
+        2*["rt"] + 3* ["ri"] + 2*["rm"] +2*["rr"] +4*["rp"]
+    _keyIndexes: list[str] = list(map(str, _possibleKeys))
     _fw: FingerWeights = FingerWeights()
     _possibleKeypress: PositionWeights = PositionWeights(
         leftPinky={
@@ -157,9 +163,23 @@ Fingers assignments :
             (24, 25):_fw.pinky2keysVertOffHome, (22, 24):_fw.pinky2keysHorzTop,
             (23, 25):_fw.pinky2keysHorzBottom})
 
-    def __init__(self):
+    def __init__(self, phonemKeyPartition: tuple[tuple[str, int], ...] =
+                 (("onset", 8), ("nucleus", 4), ("coda", 10))) -> None:
         self.keypressPhonemMap: dict[tuple[int, ...], list[str]] = {}
         self.allowedKeys: list[int] = [k for k in self._possibleKeys if k not in self._reservedKeys]
+
+        len1 = len(self.allowedKeys)
+        len2 = sum(map(lambda a: a[1], phonemKeyPartition))
+        if len1 != len2 :
+            raise ValueError(f"Number of allowed keys {len1} does not match the number of phonem keys {len2} in the partitions {phonemKeyPartition}")
+
+        unassignedKeys: list[int] = self.allowedKeys[:]
+        self.phonemKeyIDPartition: dict[str, list[int]] = {}
+        for partitinonStr, partitionSize in phonemKeyPartition:
+            self.phonemKeyIDPartition[partitinonStr] = unassignedKeys[:partitionSize]
+            unassignedKeys = unassignedKeys[partitionSize:]
+
+
         self.allowed1fingerKeypress: list[tuple[tuple[int, ...], float]] = list(
             filter(lambda k : len(k[0]) == len(list(
                 filter(lambda x: x in self.allowedKeys, list(k[0])))), self._possibleKeypress.toList()))
@@ -195,6 +215,10 @@ Fingers assignments :
         existingKeypressPhonem.append(phonem)
         self.keypressPhonemMap[keyPress] = existingKeypressPhonem
     
+    @override
+    def getSingleKeys(self, syllabicParts : list[str]) -> tuple[list[int],...]:
+        return tuple(map(lambda p: self.phonemKeyIDPartition[p], syllabicParts))
+
     def setIrelandEnglishLayout(self) -> None:
         layout: list[tuple[tuple[int, ...], str]] = [
             ((2,),"s"), ((3,),"s"), ((4,),"t"), ((5,),"k"), ((6,),"p"), ((7,),"w"), 
