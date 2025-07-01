@@ -123,7 +123,7 @@ class Dictionary:
 #        self.sylCol.printTopSyllables(20)
 #        Syllable.printTopPhonemesPerPosition()
 #        Syllable.printTopPhonemesPerInvPosition()
-        Syllable.printTopBiphonemes(20)
+        Syllable.printTopBiphonemes(5)
         Syllable.printOptimizedBiphonemeOrder()
         self.syllableCollection.printSyllacbicAmbiguityStats(
             self.onsetSyllabicAmbiguity,
@@ -142,11 +142,11 @@ class Dictionary:
         # Start by assigning greedily the most frequent phonemes to the most accessible keys which
         # are the single keys per phoneme.
         onsetSingleKeys, nucleusSingleKeys, codaSingleKeys = keyboard.getSingleKeys(["onset", "nucleus", "coda"])
-        sortedOnsetPhonems = sorted(Syllable.onsetPhonemCol.phonemes, reverse=True)
+        sortedOnsetPhonems = sorted(Syllable.onsetPhonemeCol.phonemes, reverse=True)
         topOnsetPhonems = sortedOnsetPhonems[:len(onsetSingleKeys)]
-        sortedNucleusPhonems = sorted(Syllable.nucleusPhonemCol.phonemes, reverse=True)
+        sortedNucleusPhonems = sorted(Syllable.nucleusPhonemeCol.phonemes, reverse=True)
         topNucleusPhonems = sortedNucleusPhonems[:len(nucleusSingleKeys)]
-        sortedCodaPhonems = sorted(Syllable.codaPhonemCol.phonemes, reverse=True)
+        sortedCodaPhonems = sorted(Syllable.codaPhonemeCol.phonemes, reverse=True)
         topCodaPhonems = sortedCodaPhonems[:len(codaSingleKeys)]
 
 if __name__ == "__main__":
