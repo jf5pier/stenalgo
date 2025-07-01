@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # coding: utf-8
 #
+import sys
 from dataclasses import dataclass
 from copy import deepcopy
 from enum import Enum
@@ -81,11 +82,11 @@ class Word:
         if "@|n_" in self.rawSyllCV and "e|n_" in self.rawOrthosyllCV:
             pos = self.rawSyllCV.index("@|n_")
             self.rawSyllCV = (
-                self.rawSyllCV[:pos] + "@|" + self.rawSyllCV[pos + 2 :]
+                self.rawSyllCV[:pos] + "@|" + self.rawSyllCV[pos + 4 :]
             )
             pos = self.rawOrthosyllCV.index("e|n_")
             self.rawOrthosyllCV = (
-                self.rawOrthosyllCV[:pos] + "en|" + self.rawOrthosyllCV[pos + 3 :]
+                self.rawOrthosyllCV[:pos] + "en|" + self.rawOrthosyllCV[pos + 4 :]
             )
             self.fix_e_n_en()
 
