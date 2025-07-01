@@ -149,11 +149,6 @@ class Dictionary:
         sortedCodaPhonems = sorted(Syllable.codaPhonemCol.phonemes, reverse=True)
         topCodaPhonems = sortedCodaPhonems[:len(codaSingleKeys)]
 
-
-
-
-
-
 if __name__ == "__main__":
     dictionary = Dictionary()
 
