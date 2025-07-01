@@ -29,15 +29,19 @@ class Phoneme:
     frequency: float = 0.0
 
     # There's an argument to have "w" and "j" as part of the vowels
-    nucleusPhonemes: str   = "aeiE@o°§uy5O9821"  #X-Sampa alphabet with "5@§1aGN8°" for "e~a~o~g~ANJH@"
+    nucleusPhonemes: str = "aeiE@o°§uy5O9821"  #X-Sampa alphabet with "5@§1aGN8°" for "e~a~o~g~ANJH@"
 #    nucleusPhonemesIPA: str= "aeiɛɑ̃o°ɔ̃uyɛ̃ɔœɥøœ̃"  #Nasal are 2 chars istead of 1"
-    consonantPhonemes: str    = "RtsplkmdvjnfbZwzSgNG"
+    consonantPhonemes: str = "RtsplkmdvjnfbZwzSgNG"
  #   consonantPhonemesIPA: str = "ʀtsplkmdvjnfbʒwzʃgɲŋ"
+    temporaryPhonemes: str = "x"
 
     def __post_init__(self) -> None:
         # 7 phonemes is the max per syll
         self.posFrequency = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         self.invPosFrequency = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        if not (self.isVowel() or self.isConsonant()
+                or self.isTemporaryPhoneme()):
+            raise ValueError("Phoneme %s is not a vowel or consonant" % self.name)
 
     def increaseFrequency(self, frequency: float, pos: int = 0, invPos: int = 0):
         self.frequency += frequency
@@ -49,6 +53,9 @@ class Phoneme:
 
     def isConsonant(self) -> bool:
         return self.name in self.consonantPhonemes
+
+    def isTemporaryPhoneme(self) -> bool:
+        return self.name in self.temporaryPhonemes
 
     def __eq__(self, other) -> bool:
         if type(other) is Phoneme:
@@ -238,7 +245,12 @@ class BiphonemeCollection:
         right = set(map(lambda p: p.pair[1], self.biphonemes))
         return "".join(set(list(left) + list(right)))
 
-    def optimizeOrder(self) -> None:
+    def registerBestPermutation(self, bestPermutation, bestScore, bestNegScore) -> None:
+        self.bestPermutation = bestPermutation
+        self.bestPermutationScore = bestScore
+        self.bestPermutationNegativeScore = bestNegScore
+
+    def optimizeOrder(self, send_end = None) -> None:
         """Optimize the order of the phonemes found in the biphonemes
         to reduce the frequency where two phonemes would be typed in
         the wrong order to produce a syllable."""
@@ -288,9 +300,9 @@ class BiphonemeCollection:
             % (bestScore, bestNegScore),
             bestPermutation, "\n"
         )
-        self.bestPermutation = bestPermutation
-        self.bestPermutationScore = bestScore
-        self.bestPermutationNegativeScore = bestNegScore
+        self.registerBestPermutation(bestPermutation, bestScore, bestNegScore)
+        if send_end is not None :
+            send_end.send((bestPermutation, bestScore, bestNegScore))
 
 
     def scorePermutation(self, permutation: str):
@@ -510,10 +522,29 @@ class Syllable:
         Syllable.codaBiphonemCol.printTopBiphonemes(nb)
 
     @staticmethod
-    def optimizeBiphonemeOrder() -> None:
+    def optimizeBiphonemeOrder_old() -> None:
         Syllable.onsetBiphonemCol.optimizeOrder()
         Syllable.codaBiphonemCol.optimizeOrder()
         Syllable.multiVowelBiphonemeCol.optimizeOrder()
+
+    @staticmethod
+    def optimizeBiphonemeOrder() -> None:
+        from multiprocessing import Process, Pipe
+        send1, recv1 = Pipe()
+        p1 = Process(target = Syllable.onsetBiphonemCol.optimizeOrder, args=(send1,))
+        p1.start()
+        send2, recv2 = Pipe()
+        p2 = Process(target = Syllable.codaBiphonemCol.optimizeOrder, args=(send2,))
+        p2.start()
+        send3, recv3 = Pipe()
+        p3 = Process(target = Syllable.multiVowelBiphonemeCol.optimizeOrder, args=(send3,))
+        p3.start()
+        p1.join()
+        p2.join()
+        p3.join()
+        Syllable.onsetBiphonemCol.registerBestPermutation(*(recv1.recv()))
+        Syllable.codaBiphonemCol.registerBestPermutation(*(recv2.recv()))
+        Syllable.multiVowelBiphonemeCol.registerBestPermutation(*(recv3.recv()))
 
     @staticmethod
     def printOptimizedBiphonemeOrder() -> None:
@@ -792,7 +823,7 @@ class SyllableCollection:
                             #         base_score1, base_score2, 0.0, least_scores, score])))
         return score
 
-    def analysePhonemSyllabicAmbiguity(self):
+    def analysePhonemSyllabicAmbiguity_old(self):
         """Determines the ambiguity of assigning multiple phonemes to a
         single keypress. Low ambiguity mean a keypress can mean two
         different phonemes and the other keypressess of the syllable will
@@ -805,21 +836,63 @@ class SyllableCollection:
                     conflict = self.syllabicAmbiguityScore(p1, p2, pos)
                     syllAmbiguity[(p1, p2)] = conflict
             return {
-                (k1, k2): v for (k1, k2), v in sorted(syllAmbiguity.items(),
-                                                      key=lambda item: item[1]) } 
-        
+                 (k1, k2): v for (k1, k2), v in sorted(syllAmbiguity.items(),
+                 key=lambda item: item[1]) }
+
         print("Left hand ambiguity optimization")
         onset_inter_syll_ambiguity = _getSyllabicAmbiguityScores(Phoneme.consonantPhonemes, "onset")
         print("Middle keys ambiguity optimization")
         nucleus_inter_syll_ambiguity = _getSyllabicAmbiguityScores(Phoneme.nucleusPhonemes, "nucleus")
         print("Right hand ambiguity optimization")
         coda_inter_syll_ambiguity = _getSyllabicAmbiguityScores(Phoneme.consonantPhonemes, "coda")
-        
         print("")
         return (onset_inter_syll_ambiguity, nucleus_inter_syll_ambiguity, coda_inter_syll_ambiguity)
 
+    def analysePhonemSyllabicAmbiguity(self):
+        """Determines the ambiguity of assigning multiple phonemes to a
+        single keypress. Low ambiguity mean a keypress can mean two
+        different phonemes and the other keypressess of the syllable will
+        give enough context to resolve the right phonem of the syllable."""
 
-    def analysePhonemLexicalAmbiguity(self):
+        from multiprocessing import Process, Pipe
+        def _getSyllabicAmbiguityScores(phonemes: str, pos: str, send_end):
+            syllAmbiguity: dict[tuple[str,str], float] = {}
+            for p1i, p1 in tqdm(list(enumerate(phonemes[:-1])), ascii=True, ncols=80, unit=" phonemes pairs"):
+                for p2 in phonemes[p1i + 1 :]:
+                    conflict = self.syllabicAmbiguityScore(p1, p2, pos)
+                    syllAmbiguity[(p1, p2)] = conflict
+            # return {
+            send_end.send({
+                 (k1, k2): v for (k1, k2), v in sorted(syllAmbiguity.items(),
+                                                       key=lambda item: item[1]) 
+            })
+            #} 
+
+        print("Left hand ambiguity optimization")
+#        onset_inter_syll_ambiguity = _getSyllabicAmbiguityScores(Phoneme.consonantPhonemes, "onset")
+        recv1, send1 = Pipe()
+        p1 = Process(target = _getSyllabicAmbiguityScores, args = (Phoneme.consonantPhonemes, "onset", send1))
+        p1.start()
+        print("Middle keys ambiguity optimization")
+        #nucleus_inter_syll_ambiguity = _getSyllabicAmbiguityScores(Phoneme.nucleusPhonemes, "nucleus")
+        recv2, send2 = Pipe()
+        p2 = Process(target = _getSyllabicAmbiguityScores, args = (Phoneme.nucleusPhonemes, "nucleus", send2))
+        p2.start()
+        print("Right hand ambiguity optimization")
+        #coda_inter_syll_ambiguity = _getSyllabicAmbiguityScores(Phoneme.consonantPhonemes, "coda")
+        recv3, send3 = Pipe()
+        p3 = Process(target = _getSyllabicAmbiguityScores, args = (Phoneme.consonantPhonemes, "coda", send3))
+        p3.start()
+
+        p1.join()
+        p2.join()
+        p3.join()
+        print("")
+        return(recv1.recv(), recv2.recv(), recv3.recv())
+#        return (onset_inter_syll_ambiguity, nucleus_inter_syll_ambiguity, coda_inter_syll_ambiguity)
+
+
+    def analysePhonemLexicalAmbiguity_old(self):
         """Similairly to the Syllabic Ambiguity, but over the whole lexicon:
         determines if a key assigned  to two phonemes will create
         ambiguities when typing a full word. Low ambiguity means that the
@@ -846,10 +919,52 @@ class SyllableCollection:
 
         return (onset_inter_syll_ambiguity, nucleus_inter_syll_ambiguity, coda_inter_syll_ambiguity)
 
+    def analysePhonemLexicalAmbiguity(self):
+        """Similairly to the Syllabic Ambiguity, but over the whole lexicon:
+        determines if a key assigned  to two phonemes will create
+        ambiguities when typing a full word. Low ambiguity means that the
+        other keys in the syllable and the other syllables of the word
+        provide enough context to identify which of the multiple phonemes
+        assgined to a keypress to choose."""
+
+        from multiprocessing import Process, Pipe
+        def _getLexicalAmbiguityScores(phonemes: str,  pos: str, send_end):
+            lexicalAmbiguity: dict[tuple[str,str], float] = {}
+            for p1i, p1 in tqdm(list(enumerate(phonemes[:-1])), ascii=True, ncols=80, unit=" phonemes pairs") :
+                for p2 in phonemes[p1i + 1 :]:
+                    conflict = self.lexicalAmbiguityScore(p1, p2, pos)
+                    lexicalAmbiguity[(p1, p2)] = conflict
+            send_end.send({
+                (k1, k2): v for (k1, k2), v in sorted(lexicalAmbiguity.items(),
+                                                      key=lambda item: item[1]) })
+
+        print("Left hand ambiguity optimization")
+        send1,recv1 = Pipe()
+        #onset_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.consonantPhonemes, "onset")
+        p1 = Process(target = _getLexicalAmbiguityScores, args = (Phoneme.consonantPhonemes, "onset", send1))
+        p1.start()
+        print("Middle keys ambiguity optimization")
+        send2,recv2 = Pipe()
+        #nucleus_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.nucleusPhonemes, "nucleus")
+        p2 = Process(target = _getLexicalAmbiguityScores, args = (Phoneme.nucleusPhonemes, "nucleus", send2))
+        p2.start()
+        print("Right hand ambiguity optimization")
+        send3,recv3 = Pipe()
+        #coda_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.consonantPhonemes, "coda")
+        p3 = Process(target = _getLexicalAmbiguityScores, args = (Phoneme.consonantPhonemes, "coda", send3))
+        p3.start()
+        
+        p1.join()
+        p2.join()
+        p3.join()
+        return (recv1.recv(), recv2.recv(), recv3.recv())
+        #return (onset_inter_syll_ambiguity, nucleus_inter_syll_ambiguity, coda_inter_syll_ambiguity)
+
     def _richBiphonemePrint(self, biphonemeScores: dict[tuple[str,str], float], quantization: int = 100, triangular: bool = False) -> None:
         uniquePhonemes1 = list(set(map(lambda t: t[0], biphonemeScores.keys())))
-        uniquePhonemes2 = list(set(map(lambda t: t[0], biphonemeScores.keys())))
+        uniquePhonemes2 = list(set(map(lambda t: t[1], biphonemeScores.keys())))
         uniquePhonemes = sorted(list(set(uniquePhonemes1 + uniquePhonemes2)))
+
         maxTotalScore = max(biphonemeScores.values(), default=0.0)
         table = Table("Phonemes")
         for p in uniquePhonemes:
