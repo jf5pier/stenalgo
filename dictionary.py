@@ -128,11 +128,11 @@ class Dictionary:
         self.syllableCollection.printSyllacbicAmbiguityStats(
             self.onsetSyllabicAmbiguity,
             self.nucleusSyllabicAmbiguity,
-            self.codaSyllabicAmbiguity, nb=15)
+            self.codaSyllabicAmbiguity)
         self.syllableCollection.printLexicalAmbiguityStats(
             self.onsetLexicalAmbiguity,
             self.nucleusLexicalAmbiguity,
-            self.codaLexicalAmbiguity, nb=15)
+            self.codaLexicalAmbiguity)
 
     def generateKeymap(self, keyboard: Keyboard) -> None:
         """ 
