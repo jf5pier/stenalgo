@@ -696,7 +696,7 @@ class SyllableCollection:
         The score is defined by the frequnecy of the sum of least frequent
         ambgious words."""
 
-        def phonemesByPos(syllable: Syllable, pos: str):
+        def phonemesByPos(syllable: Syllable, pos: str) -> list[Phoneme]:
             """Helper function"""
             if pos == "onset":
                 return syllable.phonemesOnset
@@ -705,7 +705,7 @@ class SyllableCollection:
             elif pos == "nucleus":
                 return syllable.phonemesNucleus
             else:
-                return ""
+                raise ValueError("Invalid position: " + pos)
 
         phoneme1_syllables = list(
             filter(lambda s: phoneme1 in phonemesByPos(s, pos), self.syllables)
@@ -717,17 +717,21 @@ class SyllableCollection:
                 # This is a tripple ambiguity with the 2 syllables that only
                 # contains one of the 2 phonemes. Score is the sum of the 2
                 # least frequent syllables
-                base_score_short1 = 0.0
-                base_score_short2 = 0.0
+                # French example : if a single key represented both "p" and "l" phonemes,
+                # we would get a triple ambiguity with words "plurent", "lurent", and "purent"
+                # and all other words matching phonology regex "^(p|l|pl)uR"
                 short_syllable1 = syll1.replacePhonemeInPos(phoneme1, "", pos)
                 short_syllable2 = syll1.replacePhonemeInPos(phoneme2, "", pos)
                 for phono_word1 in syll1.phonoWords:
-                    base_score1 = sum(map(lambda w: w.frequency, syll1.phonoWords[phono_word1]))
+                    base_score1: float = sum(map(lambda w: w.frequency, syll1.phonoWords[phono_word1]))
+                    base_words_ortho = list(map(lambda w: w.ortho, syll1.phonoWords[phono_word1]))
                     word: Word = syll1.phonoWords[phono_word1][0]
                     phono_short_word1 = word.replaceSyllables(
                         syll1.name, short_syllable1
                     )
                     phono_short_syll1 = self.getSyllable(phono_short_word1)
+                    listOrthoOtherWords1 = []
+                    base_score_short1: float = 0.0
                     if phono_short_syll1 is not None:
                         phono_short_words1 = phono_short_syll1.phonoWords
                         base_score_short1 = (
@@ -735,34 +739,57 @@ class SyllableCollection:
                             if phono_short_word1 in phono_short_words1
                             else 0.0
                         )
+                        listOrthoOtherWords1 = [phono_short_word1]+ list(
+                            map(lambda w: w.ortho, phono_short_words1[phono_short_word1])
+                            if phono_short_word1 in phono_short_words1
+                            else []
+                        )
 
                     phono_short_word2 = word.replaceSyllables(
                         syll1.name, short_syllable2)
                     phono_short_syll2 = self.getSyllable(phono_short_word2)
+                    listOrthoOtherWords2 = []
+                    base_score_short2: float = 0.0
                     if phono_short_syll2 is not None:
                         phono_short_words2 = phono_short_syll2.phonoWords
-                        base_score_short2 = (
+                        base_score_short2  = (
                             sum(map(lambda w: w.frequency, phono_short_words2[phono_short_word2]))
                             if phono_short_word2 in phono_short_words2
                             else 0.0
                         )
+                        listOrthoOtherWords2 = [phono_short_word2]+ list(
+                            map(lambda w: w.ortho, phono_short_words2[phono_short_word2])
+                            if phono_short_word2 in phono_short_words2
+                            else []
+                        )
+
                     least_scores = sum(sorted(
                         [base_score1, base_score_short1, base_score_short2])[:-1])
                     score += least_scores
+                    # if (phoneme1, phoneme2) in [("p","l"), ("l","p")] and least_scores > 0.0 and pos == "onset":
+                    #     print("AMBIGUITY1,", ",".join(map(str,[phoneme1, phoneme2, syll1.name, phono_word1,
+                    #         base_score1, base_words_ortho, base_score_short1, listOrthoOtherWords1, 
+                    #         base_score_short2, listOrthoOtherWords2, "%.1f"%least_scores, "%.1f"%score, word.ortho
+                    #         ])))
+
             else:
                 # Score is only defined by the 2 syllables that
                 # have 1 phoneme different
                 p1_to_p2 = syll1.replacePhonemeInPos(phoneme1, phoneme2, pos)
                 for phono_word1 in syll1.phonoWords:
-                    base_score1 = sum(map(lambda w: w.frequency, syll1.phonoWords[phono_word1]))
+                    base_score1: float = sum(map(lambda w: w.frequency, syll1.phonoWords[phono_word1]))
                     word = syll1.phonoWords[phono_word1][0]
                     phono_word2 = word.replaceSyllables(syll1.name, p1_to_p2)
                     phono_syll2= self.getSyllable(p1_to_p2)
                     if phono_syll2 is not None :
                         phono_words2 = phono_syll2.phonoWords
                         if phono_word2 in phono_words2:
-                            base_score2 = sum(map(lambda w: w.frequency, phono_words2[phono_word2]))
-                            score += min(base_score1, base_score2)
+                            base_score2: float = sum(map(lambda w: w.frequency, phono_words2[phono_word2]))
+                            least_scores = min(base_score1, base_score2)
+                            score += least_scores
+                            # if (phoneme1, phoneme2) in [("p","l"), ("l","p")] and least_scores > 0.0 and pos == "onset":
+                            #     print("AMBIGUITY2,", ",".join(map(str, [phoneme1, phoneme2, syll1.name, len(phono_word1), phono_word1,
+                            #         base_score1, base_score2, 0.0, least_scores, score])))
         return score
 
     def analysePhonemSyllabicAmbiguity(self):
@@ -819,37 +846,79 @@ class SyllableCollection:
 
         return (onset_inter_syll_ambiguity, nucleus_inter_syll_ambiguity, coda_inter_syll_ambiguity)
 
+    def _richBiphonemePrint(self, biphonemeScores: dict[tuple[str,str], float], quantization: int = 100, triangular: bool = False) -> None:
+        uniquePhonemes1 = list(set(map(lambda t: t[0], biphonemeScores.keys())))
+        uniquePhonemes2 = list(set(map(lambda t: t[0], biphonemeScores.keys())))
+        uniquePhonemes = sorted(list(set(uniquePhonemes1 + uniquePhonemes2)))
+        maxTotalScore = max(biphonemeScores.values(), default=0.0)
+        table = Table("Phonemes")
+        for p in uniquePhonemes:
+            table.add_column(p)
+        if not triangular:
+            table.add_column("sum")
+        for i,p1 in enumerate(uniquePhonemes):
+            pScores: list[str] = []
+            pScoreSum = 0
+            for j,p2 in enumerate(uniquePhonemes):
+                if triangular and j <= i:
+                    pScores.append("")
+                else:
+                    maxScoreFloat: float = max(biphonemeScores.get((p1, p2), 0.0),
+                                   biphonemeScores.get((p2, p1), 0.0) )
+                    if quantization > 0:
+                        maxScoreInt: int = int(maxScoreFloat/maxTotalScore * quantization)
+                        pScores.append(str(maxScoreInt))
+                        pScoreSum += maxScoreInt
+                    else:
+                        pScores.append("%.1f"%(maxScoreFloat))
+                        pScoreSum += maxScoreFloat
+            if not triangular:
+                table.add_row(p1, *pScores, str(pScoreSum))
+            else :
+                table.add_row(p1, *pScores)
+
+        console = Console(color_system="auto")
+        console.print(table)
+        if quantization > 0:
+            print("Quantization scale: 0-%d, while real value of max score is %0.1f\n" % (quantization, maxTotalScore))
+
     def printSyllacbicAmbiguityStats(self, sorted_onset: dict[tuple[str,str], float],
                                      sorted_nucleus: dict[tuple[str,str], float],
-                                     sorted_coda: dict[tuple[str,str], float], nb: int = -1):
+                                     sorted_coda: dict[tuple[str,str], float]) -> None:
 
         print("Left hand syllabic minimal-ambiguity phonemes pairs")
-        for (p1, p2), score in list(sorted_onset.items())[:nb]:
-            print(" Pair:", p1, p2, "score: %.1f" % score)
+        self._richBiphonemePrint(sorted_onset)
+        #for (p1, p2), score in list(sorted_onset.items())[:nb]:
+        #    print(" Pair:", p1, p2, "score: %.1f" % score)
 
         print("Vowels syllabic minimal-ambiguity phonemes pairs")
-        for (p1, p2), score in list(sorted_nucleus.items())[:nb]:
-            print(" Pair:", p1, p2, "score: %.1f" % score)
+        self._richBiphonemePrint(sorted_nucleus)
+        #for (p1, p2), score in list(sorted_nucleus.items())[:nb]:
+        #    print(" Pair:", p1, p2, "score: %.1f" % score)
 
         print("Right hand syllabic minimal-ambiguity phonemes pairs")
-        for (p1, p2), score in list(sorted_coda.items())[:nb]:
-            print(" Pair:", p1, p2, "score: %.1f" % score)
+        self._richBiphonemePrint(sorted_coda)
+        #for (p1, p2), score in list(sorted_coda.items())[:nb]:
+        #    print(" Pair:", p1, p2, "score: %.1f" % score)
 
     def printLexicalAmbiguityStats(self, sorted_onset: dict[tuple[str,str], float],
                                    sorted_nucleus: dict[tuple[str,str], float],
-                                   sorted_coda: dict[tuple[str,str], float],  nb: int = -1):
+                                   sorted_coda: dict[tuple[str,str], float]) -> None:
 
         print("Left hand lexical minimal-ambiguity phonemes pairs")
-        for (p1, p2), score in list(sorted_onset.items())[:nb]:
-            print(" Pair:", p1, p2, "score: %.1f" % score)
+        self._richBiphonemePrint(sorted_onset, quantization=100)
+        #for (p1, p2), score in list(sorted_onset.items())[:nb]:
+        #    print(" Pair:", p1, p2, "score: %.1f" % score)
 
         print("Vowels lexical minimal-ambiguity phonemes pairs")
-        for (p1, p2), score in list(sorted_nucleus.items())[:nb]:
-            print(" Pair:", p1, p2, "score: %.1f" % score)
+        self._richBiphonemePrint(sorted_nucleus)
+        #for (p1, p2), score in list(sorted_nucleus.items())[:nb]:
+        #    print(" Pair:", p1, p2, "score: %.1f" % score)
 
         print("Right hand lexical minimal-ambiguity phonemes pairs")
-        for (p1, p2), score in list(sorted_coda.items())[:nb]:
-            print(" Pair:", p1, p2, "score: %.1f" % score)
+        self._richBiphonemePrint(sorted_coda)
+        #for (p1, p2), score in list(sorted_coda.items())[:nb]:
+        #    print(" Pair:", p1, p2, "score: %.1f" % score)
 
     def printTopSyllables(self, nb: int = -1):
         self.syllables.sort(reverse=True)
