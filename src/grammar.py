@@ -75,7 +75,6 @@ class Phoneme:
     def __repr__(self) -> str:
         return self.name + ":" + "%.1f" % self.frequency
 
-
 @dataclass
 class Biphoneme:
     """
@@ -202,7 +201,7 @@ class PhonemeCollection:
                 if pair in pairwise_order:
                     toPrint += pairwise_order[pair]
                 else:
-                    toPrint += " "
+                    toPrint += "="
             print(toPrint)
 
 
@@ -812,7 +811,7 @@ class SyllableCollection:
         )
         score: float = 0.0
         for syll1 in phoneme1_syllables:
-            if phoneme2 in phonemesByPos(syll1, pos):
+            if phoneme2 in list(map(str, phonemesByPos(syll1, pos))):
                 # Case where both phonemes are part of the same syllable
                 # This is a tripple ambiguity with the 2 syllables that only
                 # contains one of the 2 phonemes. Score is the sum of the 2
@@ -1070,18 +1069,12 @@ class SyllableCollection:
 
         print("Left hand syllabic minimal-ambiguity phonemes pairs")
         self._richBiphonemePrint(sorted_onset)
-        #for (p1, p2), score in list(sorted_onset.items())[:nb]:
-        #    print(" Pair:", p1, p2, "score: %.1f" % score)
 
         print("Vowels syllabic minimal-ambiguity phonemes pairs")
         self._richBiphonemePrint(sorted_nucleus)
-        #for (p1, p2), score in list(sorted_nucleus.items())[:nb]:
-        #    print(" Pair:", p1, p2, "score: %.1f" % score)
 
         print("Right hand syllabic minimal-ambiguity phonemes pairs")
         self._richBiphonemePrint(sorted_coda)
-        #for (p1, p2), score in list(sorted_coda.items())[:nb]:
-        #    print(" Pair:", p1, p2, "score: %.1f" % score)
 
     def printLexicalAmbiguityStats(self, sorted_onset: dict[tuple[str,str], float],
                                    sorted_nucleus: dict[tuple[str,str], float],
@@ -1089,18 +1082,12 @@ class SyllableCollection:
 
         print("Left hand lexical minimal-ambiguity phonemes pairs")
         self._richBiphonemePrint(sorted_onset, quantization=100)
-        #for (p1, p2), score in list(sorted_onset.items())[:nb]:
-        #    print(" Pair:", p1, p2, "score: %.1f" % score)
 
         print("Vowels lexical minimal-ambiguity phonemes pairs")
         self._richBiphonemePrint(sorted_nucleus)
-        #for (p1, p2), score in list(sorted_nucleus.items())[:nb]:
-        #    print(" Pair:", p1, p2, "score: %.1f" % score)
 
         print("Right hand lexical minimal-ambiguity phonemes pairs")
         self._richBiphonemePrint(sorted_coda)
-        #for (p1, p2), score in list(sorted_coda.items())[:nb]:
-        #    print(" Pair:", p1, p2, "score: %.1f" % score)
 
     def printTopSyllables(self, nb: int = -1):
         self.syllables.sort(reverse=True)
