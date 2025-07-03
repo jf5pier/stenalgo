@@ -19,7 +19,7 @@ For hobbists, there is little added benefit to learning a traditional steno layo
 are not common and it is unlikely that one will need to use a steno keyboard that is not his own. 
 
 This project aims at generating keymaps and theories for any keyboard layout (number and arrangement of key switches) based on some
-keyboard constrains (prefered keys) and using a . 
+keyboard constrains (prefered keys) and using a multi-dimensional optimization approach. 
 
 ## Introduction
 
@@ -27,13 +27,13 @@ Stenotyping is done on custom (minimal keys) keyboards. The user simultaneously 
 The fingers move as little as possible, but each can press multiple keys situated on the same column, or adjacent columns to the pinky or
 index fingers.
 
-Those keypress (or chord) are interpreted by a software layer implementing a Theory. The theory translate the chord or group of chords into
+Those keypresses (or chord) are interpreted by a software layer implementing a Theory. The theory translate the chord or group of chords into
 one or multiple words.
 
 The theory must closely match the syllable(s) pressed to the typed word(s), otherwise learning and remebering the corresponding keypress will
-be difficult. It must also distinguish between words that have the same pronunciation, but differnent spellings (homophones). 
+be difficult. It must also distinguish between words that have the same pronunciation, but different spellings (homophones). 
 
-The best theory for a lexicon is as easy to learn and use as possible.
+The best theory for a lexicon is as easy to learn and easy to use.
 
 ## Minimizing complexity
 
@@ -76,13 +76,9 @@ associations for 137k of the 142k words of Lexique383. The final lexicon `resour
 #### Phoneme and biphoneme frequencies must be extracted [x]
 Typically, the order of the phonemes (from left to right) typed to form a chord must ressemble the order of the phonemes in the syllable.
 Ordered biphoneme frequencies informs on the order the phonemes should be placed on the keymap. For this example, we assumed that the typical
-order of the keys on the keymap would be the 3 groups of phonemes : Left-consonants -> Vowels -> Right-consonants.  Syllables in French 
-do not typically have two groups of vowels phonemes separated by consonants (VCV), so this mapping is consistent with the typicals French 
-syllables (V, VC, CV, CVC).
+order of the keys on the keymap would be the 3 groups of phonemes : Left-consonants -> Vowels -> Right-consonants.  In linquistic parlance, these phoneme groups are called the Onset, Nucleus and Coda  components of a [syllable](https://en.wikipedia.org/wiki/Syllable#Grouping_of_components).
 
-While biphoneme frequencies inform on the order of the phonemes, single-phoneme frequencies inform on the importance of the phoneme. Here
-is a representation of a phoneme order for all 3 groups of phonemes that minimize the frequency of chords where the phones are in the wrong
-order. Bar charts represent the frequency of the individual phonemes in each of the 3 groups.
+While pairs of phonemes (biphonemes) frequencies inform on the order of the phonemes, single-phoneme frequencies inform on the importance of the phoneme. Here is a representation of a phoneme order for all 3 groups of phonemes that minimize the frequency of chords where the phones are in the wrong order. Bar charts represent the frequency of the individual phonemes in each of the 3 groups.
 
 
 ##### Example of optimal phonemes order for the left hand, thumb vowels and right hand
@@ -90,60 +86,61 @@ order. Bar charts represent the frequency of the individual phonemes in each of 
 ```
 Left hand optimization :
 
-Best order (ordered score 91215.3, disordered score -1400.5):
- dZksNptgfvSmnbzRljw
+Best order (ordered score 91215.1, disordered score -1400.5):
+ dksptSgNxvZmzfnblRwj
 
->                R    |   <
->                R    |   <
->                R    |   <
->       t        R    |   <
->    s pt        R    |   <
->    s pt    m   R    |   <
-> d ks pt  v m   Rl   |   <
-> d ks pt  v m   Rlj  |   <
-> d ks pt fv mnb Rlj  |   <
-> dZks ptgfvSmnbzRljw |   <
-> dZksNptgfvSmnbzRljw | G <
-^^^^^^^^^^^^^^^^^^^^^^|^^^^
-              ordered | floating
+Left hand (syllable onset) consonant optimization :
+┃                  R   ┃   ┃
+┃                  R   ┃   ┃
+┃                  R   ┃   ┃
+┃     t            R   ┃   ┃
+┃   spt            R   ┃   ┃
+┃   spt      m     R   ┃   ┃
+┃ dkspt    v m    lR   ┃   ┃
+┃ dkspt    v m    lR j ┃   ┃
+┃ dkspt    v m fnblR j ┃   ┃
+┃ dksptSg  vZmzfnblRwj ┃   ┃
+┃ dksptSgNxvZmzfnblRwj ┃ G ┃
+┗━━━━━━━━━━━━━━━━━━━━━━╋━━━┛
+               ordered ┃ floating 
 
 Right hand optimization :
 
 Best order (ordered score 15522.8, disordered score -5759.7):
- wpjfvbskdgtRNlzmnZS
+ wjbpfvdsktgRlzNmnSZ
 
->            R        |   <
->            R        |   <
->            R        |   <
->            R        |   <
->            R        |   <
->            R        |   <
->            R        |   <
->       s   tR        |   <
->       s   tR l      |   <
->       skd tR l      |   <
-> wpjfvbskdgtRNlzmnZS | G <
-^^^^^^^^^^^^^^^^^^^^^^|^^^^
-              ordered | floating
+┃            R        ┃   ┃
+┃            R        ┃   ┃
+┃            R        ┃   ┃
+┃            R        ┃   ┃
+┃            R        ┃   ┃
+┃            R        ┃   ┃
+┃            R        ┃   ┃
+┃        s t R        ┃   ┃
+┃        s t Rl       ┃   ┃
+┃  j    dskt Rl       ┃   ┃
+┃ wjbpfvdsktgRlzNmnSZ ┃ G ┃
+┗━━━━━━━━━━━━━━━━━━━━━╋━━━┛
+              ordered ┃ floating 
 
 Vowel optimization :
 
-Best order (ordered score 6585.4, disordered score 0.0):
- 8§O92aoE@5ie
+Best order (ordered score 6599.0, disordered score 0.0):
+ 8§i5ea9o2@OE
 
->      a       |      <
->      a       |      <
->      a     e |      <
->      a E  ie |      <
->      a E  ie |      <
->      a E  ie |      <
->      a E@ ie |      <
->      aoE@ ie |      <
->  §   aoE@ ie | °uy  <
->  §O  aoE@5ie | °uy  <
-> 8§O92aoE@5ie | °uy1 <
-^^^^^^^^^^^^^^^|^^^^^^^
-       ordered | floating
+┃      a       ┃      ┃
+┃      a       ┃      ┃
+┃     ea       ┃      ┃
+┃   i ea     E ┃      ┃
+┃   i ea     E ┃      ┃
+┃   i ea     E ┃      ┃
+┃   i ea   @ E ┃      ┃
+┃   i ea o @ E ┃      ┃
+┃  §i ea o @ E ┃ °uy  ┃
+┃  §i5ea o @OE ┃ °uy  ┃
+┃ 8§i5ea9o2@OE ┃ °uy1 ┃
+┗━━━━━━━━━━━━━━╋━━━━━━┛
+       ordered ┃ floating 
 ```
 
 Negative (disordered) score represent the sum of frequencies of biphonemes that would be in the wrong order. In the case of the right hand
@@ -156,36 +153,64 @@ phonemes:
 
 The algorithm choose the least penalizing option, placint "R" after "t" and "d".
 
+There is not a single best order for phoneme arrangement. The final order offers some flexibility since some of the phonemes do not appear together in syllables. For example in the pairwise order preferences for the left hand phonemes shown below, the "v" phoneme line indicates that "v" can be placed in any position after the "k" and "s" phonemes and anywhere before the "l", "R", "w", "j" phonemes, indicated by the "<<" and ">>>>" symbols respectively.
+```
+   ↓↓             ↓↓↓↓
+ ┃dksptSgNxvZmzfnblRwjG
+━╋━━━━━━━━━━━━━━━━━━━━━
+d┃=>>><=====>>=====>>>=
+k┃<=>>><===><>>>>=>>>>=
+s┃<<=>><>==>=>=>>>>>>>=
+p┃<<<=><=======>>=>>>>=
+t┃><<<=>>====>>><>>>>>=
+S┃=>>><======>==>=>>>>=
+g┃==<=<======>>=>=>>>>=
+N┃==================>==
+x┃==================>==
+v┃=<<=============>>>>=  ←←
+Z┃<>================>>=
+m┃<<<=<<<=======>===>>=
+z┃=<==<=<=========>>>>=
+f┃=<<<<===========>>>>=
+n┃=<<<><<====<===>>>>>=
+b┃==<=<=========<=>>>>=
+l┃=<<<<<<==<==<<<<==>>=
+R┃<<<<<<<==<==<<<<==>>=
+w┃<<<<<<<<<<<<<<<<<<===
+j┃<<<<<<<==<<<<<<<<<===
+G┃=====================
+```
 
 #### Physical keyboard representation must be used [ ]
-Work is ongloing in `keyboardtemplate.py` where a description of the [Starboard keyboard](stenograpy.store) is provided. The different
+The file `keyboard.py` provides a description of the [Starboard keyboard](stenograpy.store). The different
 keypresses are assigned to fingers and penalty scores loosely corresponding to the strain they induce.
 
 #### Mapping of the phonemes to the physical keys [ ]
-This is the last step to obtain an optimal phonetic keyboard. Most popular keys must be easily accesible. Phonemes that require key combos
+This is the last step to obtain an optimal phonetic keyboard. Most popular keys must be easily accessible. Phonemes that require key combos
 must not cause conflicts with other words that use the same keys to represent other phonemes.
 
 #### Identifying homophones and define treatment rules [ ]
-Typicaly, homophones have "alternative spelling" where extra phonemes or the * key are added to distinguish the different ortographical
+Typically, homophones have "alternative spelling" where extra phonemes or the * key are added to distinguish the different orthographical
 spellings. A system must be devised to make the treatment of these exceptions so that it is intuitive
 
 #### Treatment of verbs, prefixes, suffixes [ ]
 French verbs have multiple conjugations suffixes per tense, some of which are homophones (je mange - m@Ze, tu manges - m@Ze). A system based 
 on the function of the verb may simplify the selection of verb homophones.
 
-Other common prefixes and suffixes should have consistent phoneme-keymap associations to reduce the congitive load to lear exceptions.
-
+Other common prefixes and suffixes should have consistent phoneme-keymap associations to reduce the cognitive load to learn exceptions.
 
 ## References
 <a id="1">[1]</a> 
 New, B., Pallier, C., Brysbaert, M., Ferrand, L. (2004) 
 Lexique 2 : A New French Lexical Database.
 Behavior Research Methods, Instruments, & Computers, 36 (3), 516-524.
+doi.org/10.3758/BF03195598
 
 <a id="2">[2]</a> 
 New, B., Brysbaert, M., Veronis, J., & Pallier, C. (2007). 
 The use of film subtitles to estimate word frequencies. 
 Applied Psycholinguistics, 28(4), 661-677.
+doi.org/10.1017/S014271640707035X
 
 <a id="3">[3]</a> 
 Gimenes, M., Perret, C., & New, B. (2020). 

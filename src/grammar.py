@@ -170,32 +170,32 @@ class PhonemeCollection:
         for phoneme_name in exhaustive_phonemes:
             maxFreq = max(maxFreq, self.phonemeNames[phoneme_name].frequency)
         for i in range(vsize, 0, -1):
-            toPrint = "│ "
+            toPrint = "┃ "
             for phoneme_name in phoneme_order:
                 phoneme = self.phonemeNames[phoneme_name]
                 toPrint += (
                     phoneme.name if phoneme.frequency >= i * maxFreq / vsize else " "
                 )
-            toPrint += " │ "
+            toPrint += " ┃ "
             for phoneme_name in excludedPhonemes:
                 phoneme = self.phonemeNames[phoneme_name]
                 toPrint += (
                     phoneme.name if phoneme.frequency >= i * maxFreq / vsize else " "
                 )
-            toPrint += " │"
+            toPrint += " ┃"
             print(toPrint)
-        print("│ " + phoneme_order + " │ " + "".join(excludedPhonemes) + " │")
+        print("┃ " + phoneme_order + " ┃ " + "".join(excludedPhonemes) + " ┃")
         barsWidth: int = len(phoneme_order) + 3
         barsWidth2: int = len(excludedPhonemes) + 3
-        print("─" * (barsWidth) + "┴" + "─" * (barsWidth2))
-        print(" " * (barsWidth - 8) + "ordered │ floating", "\n")
+        print("┗" + "━" * (barsWidth-1) + "╋" + "━" * (barsWidth2-1) +"┛")
+        print(" " * (barsWidth - 8) + "ordered ┃ floating", "\n")
 
         print("Pairwise order of each pair of phonemes")
         all_phonemes_ordered = phoneme_order + "".join(excludedPhonemes)
         print(" ┃" + all_phonemes_ordered)
-        print("━╇" + "━"*(len(all_phonemes_ordered)))
+        print("━╋" + "━"*(len(all_phonemes_ordered)))
         for p1 in all_phonemes_ordered:
-            toPrint = p1 + "│"
+            toPrint = p1 + "┃"
             for p2 in all_phonemes_ordered:
                 pair = (p1, p2)
                 if pair in pairwise_order:
