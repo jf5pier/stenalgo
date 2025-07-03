@@ -13,7 +13,7 @@ one or more phoneme / syllable in a word. Steno machines were once proprietary a
 through custom keyboards using popular mechanical keyboards parts and software or firmware interpreter. Those new keyboards are
 programmable, so it is not needed to stick to the original century-old phoneme-keymap layout.
 
-Visit the [Open Steno Project](openstenoproject.org) for an in depth introduction to the subject.
+Visit the [Open Steno Project](https://openstenoproject.org) for an in depth introduction to the subject.
 
 For hobbists, there is little added benefit to learning a traditional steno layout if better layouts can be generated. Steno keyboards
 are not common and it is unlikely that one will need to use a steno keyboard that is not his own. 
@@ -55,7 +55,7 @@ The mapping of keys to the sound they represent must be coherent :
 - Phonemes must have a maximum of one canonical representation on the keyboard, one portion of a chord (todo: validate)
 - Syllables must have the minimum number of chord representation (variations) on the keyboard to distinguish between the different spellings
 - Rules (chord variations) to distinguish between spelling of a syllable must be consistent across a maximum of words sharing that syllable
-- As much as possible, the order in wich phonems are typed must match the order they occure in the syllable
+- As much as possible, the order in wich phonemes are typed must match the order they occure in the syllable
 
 Words that do not respect an established rule are deemed an exception
 - The number of exceptions must be minimized
@@ -68,20 +68,23 @@ words frequency extracted from 2 differnt corpus : Written French books and Fren
 the grapheme (spelling) breakdown of syllable with only 2/3 of the words providing a breakdown allowing to map phonetic syllables to written 
 syllables.
 
-A second lexicon, LexiqueInfra [[3]](#3), was used to build graphem representations of the syllable. This lexicon provides phoneme-grapheme 
-associations for 137k of the 142k words of Lexique383. The final lexicon `resources/LexiqueMixte.tsv` was built by `lexique.py` and contains 
+A second lexicon, LexiqueInfra [[3]](#3), was used to build graphem representations of the syllable (ex.: Manger, man-ger). This lexicon provides phoneme-grapheme 
+associations for 137k of the 142k words of Lexique383. The final lexicon [`resources/LexiqueMixte.tsv`](resources/LexiqueMixte.tsv) was built by [`lexique.py`](lexique.py) and contains 
 136,348 French words with corpus frequencies and both phoneme and grapheme syllable breakdowns. 
 
 
 #### Phoneme and biphoneme frequencies must be extracted [x]
 Typically, the order of the phonemes (from left to right) typed to form a chord must ressemble the order of the phonemes in the syllable.
 Ordered biphoneme frequencies informs on the order the phonemes should be placed on the keymap. For this example, we assumed that the typical
-order of the keys on the keymap would be the 3 groups of phonemes : Left-consonants -> Vowels -> Right-consonants.  In linquistic parlance, these phoneme groups are called the Onset, Nucleus and Coda  components of a [syllable](https://en.wikipedia.org/wiki/Syllable#Grouping_of_components).
+order of the keys on the keymap would be the 3 groups of phonemes : Left-consonants -> Vowels -> Right-consonants.  In linquistic parlance, 
+these phoneme groups are called the Onset, Nucleus and Coda components of a [syllable](https://en.wikipedia.org/wiki/Syllable#Grouping_of_components).
 
-While pairs of phonemes (biphonemes) frequencies inform on the order of the phonemes, single-phoneme frequencies inform on the importance of the phoneme. Here is a representation of a phoneme order for all 3 groups of phonemes that minimize the frequency of chords where the phones are in the wrong order. Bar charts represent the frequency of the individual phonemes in each of the 3 groups.
+While pairs of phonemes (biphonemes) frequencies inform on the order of the phonemes, single-phoneme frequencies inform on the importance of the phoneme. 
+Here is a representation of a phoneme order for all 3 groups of phonemes that minimize the frequency of chords where the phones are in the wrong order. 
+Bar charts represent the frequency of the individual phonemes in each of the 3 groups.
 
 
-##### Example of optimal phonemes order for the left hand, thumb vowels and right hand
+##### Example of optimal phonemes order for the left hand (Onset), thumb vowels (Nucleus) and right hand (Coda)
 
 ```
 Left hand optimization :
@@ -144,16 +147,18 @@ Best order (ordered score 6599.0, disordered score 0.0):
 ```
 
 Negative (disordered) score represent the sum of frequencies of biphonemes that would be in the wrong order. In the case of the right hand
-consonants, the 25% disorded to 75% orderded ratio is mainly due to to the "R" biphonemes where "R" can be before or after other consonant 
+consonants, the 25% disorded to 75% orderded ratio is mainly due to the "R" biphonemes where "R" can be before or after other consonant 
 phonemes:
-- "tR" frequency: 4110
-- "Rt" frequency: 1822
-- "dR" frequency: 2265  
-- "Rd" frequency: 1339
+- "tR" frequency: 4110 (ex.: montre)
+- "Rt" frequency: 1822 (ex.: forte)
+- "dR" frequency: 2265 (ex.: tondre) 
+- "Rd" frequency: 1339 (ex.: horde)
 
-The algorithm choose the least penalizing option, placint "R" after "t" and "d".
+The algorithm choose the least penalizing option, placing "R" after "t" and "d".
 
-There is not a single best order for phoneme arrangement. The final order offers some flexibility since some of the phonemes do not appear together in syllables. For example in the pairwise order preferences for the left hand phonemes shown below, the "v" phoneme line indicates that "v" can be placed in any position after the "k" and "s" phonemes and anywhere before the "l", "R", "w", "j" phonemes, indicated by the "<<" and ">>>>" symbols respectively.
+There is not a single best order for phoneme arrangement. The final order offers some flexibility since some of the phonemes do not appear together in syllables. 
+For example in the pairwise order preferences for the left hand phonemes shown below, the "v" phoneme line indicates that "v" can be placed in any position after 
+the "k" and "s" phonemes and anywhere before the "l", "R", "w", "j" phonemes, indicated by the "<<" and ">>>>" symbols respectively.
 ```
    ↓↓             ↓↓↓↓
  ┃dksptSgNxvZmzfnblRwjG
@@ -181,8 +186,8 @@ j┃<<<<<<<==<<<<<<<<<===
 G┃=====================
 ```
 
-#### Physical keyboard representation must be used [ ]
-The file [`keyboard.py`](src/keyboard.py) provides a description of the [Starboard keyboard](stenograpy.store). The different
+#### Physical keyboard representation must be used [x]
+The file [`keyboard.py`](src/keyboard.py) provides a description of the [Starboard keyboard](https://www.stenograpy.store). The different
 keypresses are assigned to fingers and penalty scores loosely corresponding to the strain they induce. Here is the Irland english keymap on the Starboard :
 
 ```
@@ -209,7 +214,7 @@ Some phonemes need more than a single keypress to be registered. For instance, h
 ```
 
 #### Mapping of the phonemes to the physical keys [ ]
-This is the last step to obtain an optimal phonetic keyboard. Most popular keys must be easily accessible. Phonemes that require key combos
+This is the last step to obtain an optimal phonetic keyboard. The most popular keys must be easily accessible. Phonemes that require key combos
 must not cause conflicts with other words that use the same keys to represent other phonemes.
 
 #### Identifying homophones and define treatment rules [ ]
@@ -227,18 +232,18 @@ Other common prefixes and suffixes should have consistent phoneme-keymap associa
 New, B., Pallier, C., Brysbaert, M., Ferrand, L. (2004) 
 Lexique 2 : A New French Lexical Database.
 Behavior Research Methods, Instruments, & Computers, 36 (3), 516-524.
-[doi](doi.org/10.3758/BF03195598)
+[doi](https://doi.org/10.3758/BF03195598)
 
 <a id="2">[2]</a> 
 New, B., Brysbaert, M., Veronis, J., & Pallier, C. (2007). 
 The use of film subtitles to estimate word frequencies. 
 Applied Psycholinguistics, 28(4), 661-677.
-[doi](doi.org/10.1017/S014271640707035X)
+[doi](https://doi.org/10.1017/S014271640707035X)
 
 <a id="3">[3]</a> 
 Gimenes, M., Perret, C., & New, B. (2020). 
 Lexique-Infra: grapheme-phoneme, phoneme-grapheme regularity, consistency, 
 and other sublexical statistics for 137,717 polysyllabic French words. 
 Behavior Research Methods. 
-[doi](doi.org/10.3758/s13428-020-01396-2)
+[doi](https://doi.org/10.3758/s13428-020-01396-2)
 
