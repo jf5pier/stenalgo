@@ -1,5 +1,5 @@
-# stenalgo
-Stenotype keyboard layout generator
+![Stenalgo](images/Stenalgo.png)
+Stenotype keyboard layout and theory generator
 
 
 ## Objective
@@ -182,8 +182,31 @@ G┃=====================
 ```
 
 #### Physical keyboard representation must be used [ ]
-The file `keyboard.py` provides a description of the [Starboard keyboard](stenograpy.store). The different
-keypresses are assigned to fingers and penalty scores loosely corresponding to the strain they induce.
+The file [`keyboard.py`](src/keyboard.py) provides a description of the [Starboard keyboard](stenograpy.store). The different
+keypresses are assigned to fingers and penalty scores loosely corresponding to the strain they induce. Here is the Irland english keymap on the Starboard :
+
+```
+┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓       ┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓
+┃    ┃ s  ┃ t  ┃ p  ┃ h  ┃    ┃       ┃    ┃ fv ┃ p  ┃ l  ┃ t  ┃ d  ┃
+┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫ *  ┃       ┃ *  ┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫
+┃    ┃ s  ┃ k  ┃ w  ┃ r  ┃    ┃       ┃    ┃ r  ┃ b  ┃ g  ┃ s  ┃ z  ┃
+┗━━━━┻━━━━┻━━━━┻━━━━┻━━┳━┻━━┳━┻━━┓ ┏━━┻━┳━━┻━┳━━┻━━━━┻━━━━┻━━━━┻━━━━┛
+                       ┃ a  ┃ o  ┃ ┃ e  ┃ u  ┃
+                       ┗━━━━┻━━━━┛ ┗━━━━┻━━━━┛
+Single keypress characters keymap
+```
+
+Some phonemes need more than a single keypress to be registered. For instance, here is the map of the phonemes requireing 2 keypresses to be registered.
+
+```
+┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓       ┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓
+┃    ┃ f  ┃fxd ┃ bm ┃ ml ┃    ┃       ┃    ┃    ┃ nm ┃ m  ┃    ┃    ┃
+┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫    ┃       ┃    ┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫
+┃    ┃xqv ┃qdc ┃ b  ┃vcl ┃    ┃       ┃    ┃    ┃ nk ┃ k  ┃    ┃    ┃
+┗━━━━┻━━━━┻━━━━┻━━━━┻━━┳━┻━━┳━┻━━┓ ┏━━┻━┳━━┻━┳━━┻━━━━┻━━━━┻━━━━┻━━━━┛
+                       ┃    ┃    ┃ ┃ i  ┃ i  ┃
+                       ┗━━━━┻━━━━┛ ┗━━━━┻━━━━┛
+```
 
 #### Mapping of the phonemes to the physical keys [ ]
 This is the last step to obtain an optimal phonetic keyboard. Most popular keys must be easily accessible. Phonemes that require key combos
@@ -204,17 +227,18 @@ Other common prefixes and suffixes should have consistent phoneme-keymap associa
 New, B., Pallier, C., Brysbaert, M., Ferrand, L. (2004) 
 Lexique 2 : A New French Lexical Database.
 Behavior Research Methods, Instruments, & Computers, 36 (3), 516-524.
-doi.org/10.3758/BF03195598
+[doi](doi.org/10.3758/BF03195598)
 
 <a id="2">[2]</a> 
 New, B., Brysbaert, M., Veronis, J., & Pallier, C. (2007). 
 The use of film subtitles to estimate word frequencies. 
 Applied Psycholinguistics, 28(4), 661-677.
-doi.org/10.1017/S014271640707035X
+[doi](doi.org/10.1017/S014271640707035X)
 
 <a id="3">[3]</a> 
 Gimenes, M., Perret, C., & New, B. (2020). 
 Lexique-Infra: grapheme-phoneme, phoneme-grapheme regularity, consistency, 
 and other sublexical statistics for 137,717 polysyllabic French words. 
-Behavior Research Methods. doi.org/10.3758/s13428-020-01396-2
+Behavior Research Methods. 
+[doi](doi.org/10.3758/s13428-020-01396-2)
 
