@@ -410,7 +410,7 @@ class Syllable:
     nucleusPhonemeCol: PhonemeCollection = PhonemeCollection("nucleus")
     codaPhonemeCol: PhonemeCollection = PhonemeCollection("coda")
     onsetBiphonemeCol: BiphonemeCollection = BiphonemeCollection("onset")
-    multiVowelBiphonemeCol: BiphonemeCollection = BiphonemeCollection("nucleus")
+    nucleusBiphonemeCol: BiphonemeCollection = BiphonemeCollection("nucleus")
     codaBiphonemeCol: BiphonemeCollection = BiphonemeCollection("coda")
 
     def __init__(self, phoneme_names: str, spelling: str, frequency: float = 0.0) -> None:
@@ -496,7 +496,7 @@ class Syllable:
         if firstVowelPos < lastVowelPos:
             for pos1, phoneme1 in enumerate(phonemes[firstVowelPos:lastVowelPos]):
                 for phoneme2 in phonemes[firstVowelPos + pos1 + 1 : lastVowelPos + 1]:
-                    biphoneme = Syllable.multiVowelBiphonemeCol.getBiphoneme(
+                    biphoneme = Syllable.nucleusBiphonemeCol.getBiphoneme(
                         (phoneme1.name, phoneme2.name)
                     )
                     biphoneme.increaseFrequency(frequency)
@@ -541,7 +541,7 @@ class Syllable:
         Syllable.nucleusPhonemeCol.phonemes.sort(reverse=True)
         Syllable.onsetBiphonemeCol.biphonemes.sort(reverse=True)
         Syllable.codaBiphonemeCol.biphonemes.sort(reverse=True)
-        Syllable.multiVowelBiphonemeCol.biphonemes.sort(reverse=True)
+        Syllable.nucleusBiphonemeCol.biphonemes.sort(reverse=True)
 
     def trackWord(self, word: Word):
         if word.phonology in self.phonoWords:
@@ -573,7 +573,7 @@ class Syllable:
         print("Pre-vowels biphonemes")
         Syllable.onsetBiphonemeCol.printTopBiphonemes(nb)
         print("Vowel biphonemes")
-        Syllable.multiVowelBiphonemeCol.printTopBiphonemes(nb)
+        Syllable.nucleusBiphonemeCol.printTopBiphonemes(nb)
         print("Post-vowels biphonemes")
         Syllable.codaBiphonemeCol.printTopBiphonemes(nb)
 
@@ -581,7 +581,7 @@ class Syllable:
     def optimizeBiphonemeOrder_old() -> None:
         Syllable.onsetBiphonemeCol.optimizeOrder()
         Syllable.codaBiphonemeCol.optimizeOrder()
-        Syllable.multiVowelBiphonemeCol.optimizeOrder()
+        Syllable.nucleusBiphonemeCol.optimizeOrder()
 
     @staticmethod
     def optimizeBiphonemeOrder() -> None:
@@ -592,18 +592,18 @@ class Syllable:
         p2 = Process(target = Syllable.codaBiphonemeCol.optimizeOrder, args=(send2,))
         p2.start()
         send3, recv3 = Pipe()
-        p3 = Process(target = Syllable.multiVowelBiphonemeCol.optimizeOrder, args=(send3,))
+        p3 = Process(target = Syllable.nucleusBiphonemeCol.optimizeOrder, args=(send3,))
         p3.start()
         p1.join()
         p2.join()
         p3.join()
         Syllable.onsetBiphonemeCol.registerBestPermutation(*(recv1.recv()))
         Syllable.codaBiphonemeCol.registerBestPermutation(*(recv2.recv()))
-        Syllable.multiVowelBiphonemeCol.registerBestPermutation(*(recv3.recv()))
+        Syllable.nucleusBiphonemeCol.registerBestPermutation(*(recv3.recv()))
 
         Syllable.onsetBiphonemeCol.generateBiphonemeOrderMatrix()
         Syllable.codaBiphonemeCol.generateBiphonemeOrderMatrix()
-        Syllable.multiVowelBiphonemeCol.generateBiphonemeOrderMatrix()
+        Syllable.nucleusBiphonemeCol.generateBiphonemeOrderMatrix()
 
     @staticmethod
     def printOptimizedBiphonemeOrder() -> None:
@@ -615,8 +615,8 @@ class Syllable:
                                               Phoneme.consonantPhonemes)
 
         print("Thumbs (syllable nucleus) vowel optimization :")
-        nucleus_order = Syllable.multiVowelBiphonemeCol.bestPermutation
-        nucleus_pairwise_order = Syllable.multiVowelBiphonemeCol.pairwiseBiphonemeOrder
+        nucleus_order = Syllable.nucleusBiphonemeCol.bestPermutation
+        nucleus_pairwise_order = Syllable.nucleusBiphonemeCol.pairwiseBiphonemeOrder
         Syllable.nucleusPhonemeCol.printBarchart(nucleus_order, 
                                                 nucleus_pairwise_order,
                                                 Phoneme.nucleusPhonemes)
@@ -630,9 +630,31 @@ class Syllable:
 
         print("")
 
-    def replacePhonemeInPos(self, phoneme1: Phoneme|str, phoneme2: Phoneme|str, pos: str):
+    @staticmethod
+    def phonemeCollectionByPart(syllabicPart:str) -> PhonemeCollection:
+        if syllabicPart == "onset":
+            return Syllable.onsetPhonemeCol
+        elif syllabicPart == "coda":
+            return Syllable.codaPhonemeCol
+        elif syllabicPart == "nucleus":
+            return Syllable.nucleusPhonemeCol
+        else:
+            raise ValueError("Unknown syllabic position: " + syllabicPart)
+
+    @staticmethod
+    def biphonemeCollectionByPart(syllabicPart:str) -> BiphonemeCollection:
+        if syllabicPart == "onset":
+            return Syllable.onsetBiphonemeCol
+        elif syllabicPart == "coda":
+            return Syllable.codaBiphonemeCol
+        elif syllabicPart == "nucleus":
+            return Syllable.nucleusBiphonemeCol
+        else:
+            raise ValueError("Unknown syllabic position: " + syllabicPart)
+
+    def replacePhonemeInSyllabicPart(self, phoneme1: Phoneme|str, phoneme2: Phoneme|str, syllabicPart: str):
         """Replace a phoneme in one of 3 positions in a syllable"""
-        if pos == "onset":
+        if syllabicPart == "onset":
             onset= "".join(map(str, self.phonemesOnset))
             onset= onset.replace(str(phoneme1), str(phoneme2))
             return (
@@ -640,7 +662,7 @@ class Syllable:
                 + "".join(map(str, self.phonemesNucleus))
                 + "".join(map(str, self.phonemesCoda))
             )
-        elif pos == "coda":
+        elif syllabicPart == "coda":
             coda= "".join(map(str, self.phonemesCoda))
             coda= coda.replace(str(phoneme1), str(phoneme2))
             return (
@@ -648,7 +670,7 @@ class Syllable:
                 + "".join(map(str, self.phonemesNucleus))
                 + coda 
             )
-        elif pos == "nucleus":
+        elif syllabicPart == "nucleus":
             nucleus= "".join(map(str, self.phonemesNucleus))
             nucleus = nucleus.replace(str(phoneme1), str(phoneme2))
             return (
@@ -734,7 +756,7 @@ class SyllableCollection:
             # print("Found", name, self.syllable_names[name].frequency )
             return self.syllable_names[name].frequency
 
-    def syllabicAmbiguityScore(self, phoneme1: str, phoneme2: str, pos: str) -> float:
+    def syllabicAmbiguityScore(self, phoneme1: str, phoneme2: str, syllabicPart: str) -> float:
         """Ambiguity is defined by the existance of two syllables that are
         different by only one phoneme, or that contain a pair of phonemes.
         If a single key is assigned to those different single phonemes or
@@ -742,30 +764,30 @@ class SyllableCollection:
         The score is defined by the frequency of the least frequent
         ambigous syllable of the pair."""
 
-        def phonemesByPos(syllable: Syllable, pos: str):
+        def phonemesBySyllabicPart(syllable: Syllable, syllabicPart: str):
             """Helper function"""
-            if pos == "onset":
+            if syllabicPart == "onset":
                 return syllable.phonemesOnset
-            elif pos == "coda":
+            elif syllabicPart == "coda":
                 return syllable.phonemesCoda
-            elif pos == "nucleus":
+            elif syllabicPart == "nucleus":
                 return syllable.phonemesNucleus
             else:
                 return ""
 
         phoneme1_syllables = list(
-            filter(lambda s: phoneme1 in phonemesByPos(s, pos), self.syllables)
+            filter(lambda s: phoneme1 in phonemesBySyllabicPart(s, syllabicPart), self.syllables)
         )
 
         score: float = 0.0
         for syll1 in phoneme1_syllables:
-            if phoneme2 in phonemesByPos(syll1, pos):
+            if phoneme2 in phonemesBySyllabicPart(syll1, syllabicPart):
                 # Case where both phonemes are part of the same syllable
                 # This is a tripple ambiguity with the 2 syllables that only
                 # contains one of the 2 phonemes. Score is the sum of the 2
                 # least frequent syllables
-                short_syllable1 = syll1.replacePhonemeInPos(phoneme1, "", pos)
-                short_syllable2 = syll1.replacePhonemeInPos(phoneme2, "", pos)
+                short_syllable1 = syll1.replacePhonemeInSyllabicPart(phoneme1, "", syllabicPart)
+                short_syllable2 = syll1.replacePhonemeInSyllabicPart(phoneme2, "", syllabicPart)
 
                 # short_syllable1.pop( syll1.index(phoneme2) )
                 score += (
@@ -782,12 +804,12 @@ class SyllableCollection:
             else:
                 # Score is only defined by the 2 syllables that
                 # have 1 phoneme different
-                p1_to_p2 = syll1.replacePhonemeInPos(phoneme1, phoneme2, pos)
+                p1_to_p2 = syll1.replacePhonemeInSyllabicPart(phoneme1, phoneme2, syllabicPart)
                 score += min(self.getFrequency(syll1.name), self.getFrequency(p1_to_p2))
         #                print("Score2",score)
         return score
 
-    def lexicalAmbiguityScore(self, phoneme1: str, phoneme2: str, pos: str) -> float:
+    def lexicalAmbiguityScore(self, phoneme1: str, phoneme2: str, syllabicPart: str) -> float:
         """Ambiguity is defined by the existance of two words that are
         different by only one phoneme, or that contain a pair of phonemes.
         If a single key is assigned to those different single phonemes or
@@ -795,23 +817,23 @@ class SyllableCollection:
         The score is defined by the frequnecy of the sum of least frequent
         ambgious words."""
 
-        def phonemesByPos(syllable: Syllable, pos: str) -> list[Phoneme]:
+        def phonemesBysyllabicPart(syllable: Syllable, syllabicPart: str) -> list[Phoneme]:
             """Helper function"""
-            if pos == "onset":
+            if syllabicPart == "onset":
                 return syllable.phonemesOnset
-            elif pos == "coda":
+            elif syllabicPart == "coda":
                 return syllable.phonemesCoda
-            elif pos == "nucleus":
+            elif syllabicPart == "nucleus":
                 return syllable.phonemesNucleus
             else:
-                raise ValueError("Invalid position: " + pos)
+                raise ValueError("Invalid position: " + syllabicPart)
 
         phoneme1_syllables = list(
-            filter(lambda s: phoneme1 in phonemesByPos(s, pos), self.syllables)
+            filter(lambda s: phoneme1 in phonemesBysyllabicPart(s, syllabicPart), self.syllables)
         )
         score: float = 0.0
         for syll1 in phoneme1_syllables:
-            if phoneme2 in list(map(str, phonemesByPos(syll1, pos))):
+            if phoneme2 in list(map(str, phonemesBysyllabicPart(syll1, syllabicPart))):
                 # Case where both phonemes are part of the same syllable
                 # This is a tripple ambiguity with the 2 syllables that only
                 # contains one of the 2 phonemes. Score is the sum of the 2
@@ -819,8 +841,8 @@ class SyllableCollection:
                 # French example : if a single key represented both "p" and "l" phonemes,
                 # we would get a triple ambiguity with words "plurent", "lurent", and "purent"
                 # and all other words matching phonology regex "^(p|l|pl)uR"
-                short_syllable1 = syll1.replacePhonemeInPos(phoneme1, "", pos)
-                short_syllable2 = syll1.replacePhonemeInPos(phoneme2, "", pos)
+                short_syllable1 = syll1.replacePhonemeInSyllabicPart(phoneme1, "", syllabicPart)
+                short_syllable2 = syll1.replacePhonemeInSyllabicPart(phoneme2, "", syllabicPart)
                 for phono_word1 in syll1.phonoWords:
                     base_score1: float = sum(map(lambda w: w.frequency, syll1.phonoWords[phono_word1]))
                     base_words_ortho = list(map(lambda w: w.ortho, syll1.phonoWords[phono_word1]))
@@ -865,7 +887,7 @@ class SyllableCollection:
                     least_scores = sum(sorted(
                         [base_score1, base_score_short1, base_score_short2])[:-1])
                     score += least_scores
-                    # if (phoneme1, phoneme2) in [("p","l"), ("l","p")] and least_scores > 0.0 and pos == "onset":
+                    # if (phoneme1, phoneme2) in [("p","l"), ("l","p")] and least_scores > 0.0 and syllabicPart == "onset":
                     #     print("AMBIGUITY1,", ",".join(map(str,[phoneme1, phoneme2, syll1.name, phono_word1,
                     #         base_score1, base_words_ortho, base_score_short1, listOrthoOtherWords1, 
                     #         base_score_short2, listOrthoOtherWords2, "%.1f"%least_scores, "%.1f"%score, word.ortho
@@ -874,7 +896,7 @@ class SyllableCollection:
             else:
                 # Score is only defined by the 2 syllables that
                 # have 1 phoneme different
-                p1_to_p2 = syll1.replacePhonemeInPos(phoneme1, phoneme2, pos)
+                p1_to_p2 = syll1.replacePhonemeInSyllabicPart(phoneme1, phoneme2, syllabicPart)
                 for phono_word1 in syll1.phonoWords:
                     base_score1 = sum(map(lambda w: w.frequency, syll1.phonoWords[phono_word1]))
                     word = syll1.phonoWords[phono_word1][0]
@@ -886,7 +908,7 @@ class SyllableCollection:
                             base_score2: float = sum(map(lambda w: w.frequency, phono_words2[phono_word2]))
                             least_scores = min(base_score1, base_score2)
                             score += least_scores
-                            # if (phoneme1, phoneme2) in [("p","l"), ("l","p")] and least_scores > 0.0 and pos == "onset":
+                            # if (phoneme1, phoneme2) in [("p","l"), ("l","p")] and least_scores > 0.0 and syllabicPart == "onset":
                             #     print("AMBIGUITY2,", ",".join(map(str, [phoneme1, phoneme2, syll1.name, len(phono_word1), phono_word1,
                             #         base_score1, base_score2, 0.0, least_scores, score])))
         return score
@@ -897,11 +919,11 @@ class SyllableCollection:
         different phonemes and the other keypressess of the syllable will
         give enough context to resolve the right phonem of the syllable."""
 
-        def _getSyllabicAmbiguityScores(phonemes: str, pos: str):
+        def _getSyllabicAmbiguityScores(phonemes: str, syllabicPart: str):
             syllAmbiguity: dict[tuple[str,str], float] = {}
             for p1i, p1 in tqdm(list(enumerate(phonemes[:-1])), ascii=True, ncols=80, unit=" phonemes pairs"):
                 for p2 in phonemes[p1i + 1 :]:
-                    conflict = self.syllabicAmbiguityScore(p1, p2, pos)
+                    conflict = self.syllabicAmbiguityScore(p1, p2, syllabicPart)
                     syllAmbiguity[(p1, p2)] = conflict
             return {
                  (k1, k2): v for (k1, k2), v in sorted(syllAmbiguity.items(),
@@ -922,11 +944,11 @@ class SyllableCollection:
         different phonemes and the other keypressess of the syllable will
         give enough context to resolve the right phonem of the syllable."""
 
-        def _getSyllabicAmbiguityScores(phonemes: str, pos: str, send_end):
+        def _getSyllabicAmbiguityScores(phonemes: str, syllabicPart: str, send_end):
             syllAmbiguity: dict[tuple[str,str], float] = {}
             for p1i, p1 in tqdm(list(enumerate(phonemes[:-1])), ascii=True, ncols=80, unit=" phonemes pairs"):
                 for p2 in phonemes[p1i + 1 :]:
-                    conflict = self.syllabicAmbiguityScore(p1, p2, pos)
+                    conflict = self.syllabicAmbiguityScore(p1, p2, syllabicPart)
                     syllAmbiguity[(p1, p2)] = conflict
             # return {
             send_end.send({
@@ -967,11 +989,11 @@ class SyllableCollection:
         provide enough context to identify which of the multiple phonemes
         assgined to a keypress to choose."""
 
-        def _getLexicalAmbiguityScores(phonemes: str,  pos: str):
+        def _getLexicalAmbiguityScores(phonemes: str,  syllabicPart: str):
             lexicalAmbiguity: dict[tuple[str,str], float] = {}
             for p1i, p1 in tqdm(list(enumerate(phonemes[:-1])), ascii=True, ncols=80, unit=" phonemes pairs") :
                 for p2 in phonemes[p1i + 1 :]:
-                    conflict = self.lexicalAmbiguityScore(p1, p2, pos)
+                    conflict = self.lexicalAmbiguityScore(p1, p2, syllabicPart)
                     lexicalAmbiguity[(p1, p2)] = conflict
             return {
                 (k1, k2): v for (k1, k2), v in sorted(lexicalAmbiguity.items(),
@@ -994,11 +1016,11 @@ class SyllableCollection:
         provide enough context to identify which of the multiple phonemes
         assgined to a keypress to choose."""
 
-        def _getLexicalAmbiguityScores(phonemes: str,  pos: str, send_end):
+        def _getLexicalAmbiguityScores(phonemes: str,  syllabicPart: str, send_end):
             lexicalAmbiguity: dict[tuple[str,str], float] = {}
             for p1i, p1 in tqdm(list(enumerate(phonemes[:-1])), ascii=True, ncols=80, unit=" phonemes pairs") :
                 for p2 in phonemes[p1i + 1 :]:
-                    conflict = self.lexicalAmbiguityScore(p1, p2, pos)
+                    conflict = self.lexicalAmbiguityScore(p1, p2, syllabicPart)
                     lexicalAmbiguity[(p1, p2)] = conflict
             send_end.send({
                 (k1, k2): v for (k1, k2), v in sorted(lexicalAmbiguity.items(),

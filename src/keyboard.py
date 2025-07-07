@@ -1,5 +1,5 @@
 #!/bin/env python3
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 from math import log,ceil
 from abc  import ABC, abstractmethod
 from typing import override
@@ -12,6 +12,7 @@ class FingerWeights(object):
     pinky2keysVertOffHome: float = 2.00
     pinky2keysHorzBottom: float = 2.5
     pinky2keysHorzTop: float = 2.75
+    pinky4keys: float = 3.25
 
     ringMid1key: float = 1.25
     ringMid2keys: float= 1.75
@@ -44,6 +45,12 @@ class PositionWeights(object):
             list(self.leftThumb.items()) + list(self.rightThumb.items()) +
             list(self.rightIndex.items()) + list(self.rightMiddle.items()) +
             list(self.rightRing.items()) + list(self.rightPinky.items()))
+
+    def __iter__(self):
+        return (getattr(self, field.name) for field in fields(self))
+
+    def __getitem__(self, key: str) -> dict[tuple[int, ...], float]:
+        return getattr(self, key)
 
 class Keyboard(ABC):
     # One key keyboard template
@@ -81,7 +88,23 @@ class Keyboard(ABC):
         print("Total bits needed:", bitsNeeded)
 
     @abstractmethod
-    def getSingleKeys(self, syllabicParts : list[str]) -> tuple[list[int],...]:
+    def getSingleKeys(self, syllabicPart: str) -> list[int]:
+        ...
+
+    @abstractmethod
+    def getMultiKeys(self, syllabicPart: str, nbKeys: int) -> list[tuple[int, ...]]:
+        ...
+
+    @abstractmethod
+    def printLayout(self) -> None:
+        ...
+
+    @abstractmethod
+    def addToLayout(self, keyPress: tuple[int, ...], phonem: str) -> None:
+        ...
+
+    @abstractmethod
+    def clearLayout(self) -> None:
         ...
 
 
@@ -128,7 +151,7 @@ Fingers assignments :
             (1,):_fw.pinky1keyOffHome, (2,):_fw.pinky1keyHome,
             (3,):_fw.pinky1keyHome, (0, 1):_fw.pinky2keysVertOffHome,
             (2, 3):_fw.pinky2keysVertHome, (0, 2):_fw.pinky2keysHorzTop,
-            (1, 3):_fw.pinky2keysHorzBottom},
+            (1, 3):_fw.pinky2keysHorzBottom, (0,1,2,3):_fw.pinky4keys},
         leftRing={
             ():_fw.noPress, (4,):_fw.ringMid1key,
             (5,):_fw.ringMid1key, (4,5):_fw.ringMid2keys},
@@ -162,24 +185,25 @@ Fingers assignments :
             (23,):_fw.pinky1keyHome, (24,):_fw.pinky1keyOffHome,
             (25,):_fw.pinky1keyOffHome, (22, 23):_fw.pinky2keysVertHome,
             (24, 25):_fw.pinky2keysVertOffHome, (22, 24):_fw.pinky2keysHorzTop,
-            (23, 25):_fw.pinky2keysHorzBottom})
+            (23, 25):_fw.pinky2keysHorzBottom, (22,23,24,25):_fw.pinky4keys})
 
-    def __init__(self, phonemKeyPartition: tuple[tuple[str, int], ...] =
+    def __init__(self, nbKeysPerSyllabicPart: tuple[tuple[str, int], ...] =
                  (("onset", 8), ("nucleus", 4), ("coda", 10))) -> None:
         self.keypressPhonemMap: dict[tuple[int, ...], list[str]] = {}
         self.allowedKeys: list[int] = [k for k in self._possibleKeys if k not in self._reservedKeys]
 
         len1 = len(self.allowedKeys)
-        len2 = sum(map(lambda a: a[1], phonemKeyPartition))
+        len2 = sum(map(lambda a: a[1], nbKeysPerSyllabicPart))
         if len1 != len2 :
-            raise ValueError(f"Number of allowed keys {len1} does not match the number of phonem keys {len2} in the partitions {phonemKeyPartition}")
+            raise ValueError(f"Number of allowed keys {len1} does not match the number of phonem keys {len2} in the partitions {nbKeysPerSyllabicPart}")
 
         unassignedKeys: list[int] = self.allowedKeys[:]
-        self.phonemKeyIDPartition: dict[str, list[int]] = {}
-        for partitinonStr, partitionSize in phonemKeyPartition:
-            self.phonemKeyIDPartition[partitinonStr] = unassignedKeys[:partitionSize]
-            unassignedKeys = unassignedKeys[partitionSize:]
-
+        self.keyIDinSyllabicPart: dict[str, list[int]] = {}
+        for syllabicPart, partSize in nbKeysPerSyllabicPart:
+            self.keyIDinSyllabicPart[syllabicPart] = unassignedKeys[:partSize]
+            unassignedKeys = unassignedKeys[partSize:]
+#        print(self.keyIDinSyllabicPart)
+#        sys.exit(1)
 
         self.allowed1fingerKeypress: list[tuple[tuple[int, ...], float]] = list(
             filter(lambda k : len(k[0]) == len(list(
@@ -191,6 +215,7 @@ Fingers assignments :
         self.maxKeyPerFinger: int = max(list(map(len, flatKeypresses)))
         return
 
+    @override
     def printLayout(self) -> None:
         maxKeyPress = max(list(map(len, self.keypressPhonemMap.keys())))
         for i in range(1, maxKeyPress+1):
@@ -208,17 +233,62 @@ Fingers assignments :
 
         return
 
+    @override
     def clearLayout(self) -> None:
         self.keypressPhonemMap = {}
 
+    @override
     def addToLayout(self, keyPress: tuple[int, ...], phonem: str) -> None:
         existingKeypressPhonem = self.keypressPhonemMap.get(keyPress, [])
         existingKeypressPhonem.append(phonem)
         self.keypressPhonemMap[keyPress] = existingKeypressPhonem
     
     @override
-    def getSingleKeys(self, syllabicParts : list[str]) -> tuple[list[int],...]:
-        return tuple(map(lambda p: self.phonemKeyIDPartition[p], syllabicParts))
+    def getSingleKeys(self, syllabicPart: str) -> list[int]:
+        """ 
+        Return key IDs for keys that can be pressed alone to register a phoneme 
+        """
+        return self.keyIDinSyllabicPart[syllabicPart][:]
+
+    @override
+    def getMultiKeys(self, syllabicPart: str, nbKeys: int) -> list[tuple[int, ...]]:
+        """ 
+        Return key IDs for keys that can be pressed together to register a phoneme 
+        """
+        fingersInSyllabicPart: list[str] = []
+        for finger in self._possibleKeypress.__dict__:
+            for keyPress in self._possibleKeypress[finger]:
+                if 0 < len(list(filter(lambda k: k in self.keyIDinSyllabicPart[syllabicPart], keyPress))):
+                    fingersInSyllabicPart.append(finger)
+                    break
+
+        def _addKeypress(accumulator:list[tuple[int, ...]],
+                         fingers: list[str], nbKeysLeft: int,
+                         chord: list[int], syllabicPart: str) -> None:
+            if(len(fingers) == 0 or nbKeysLeft <= 0):
+                if len(chord) > 0 and nbKeysLeft == 0:
+                    accumulator.insert(0, tuple(chord))  #Chords are explored in reverse order, this reverses it
+                return
+
+            fingerKeypress = self._possibleKeypress[fingers[0]]
+            for keyPress in fingerKeypress:
+                # Case were we skip this finger in composing a chord (keypress = no press)
+                if len(keyPress) == 0 :
+                    _addKeypress(accumulator, fingers[1:], nbKeysLeft, chord, syllabicPart)
+
+                elif len(keyPress) <= nbKeysLeft:
+                    keysInPart = list(filter(lambda k: k in self.keyIDinSyllabicPart[syllabicPart], keyPress))
+                    if len(keysInPart) == len(keyPress):
+                        _addKeypress(accumulator, fingers[1:],
+                                     nbKeysLeft - len(keyPress),
+                                     chord + keysInPart , syllabicPart)
+            return
+
+
+
+        keypresses: list[tuple[int, ...]] = []
+        _addKeypress(keypresses, fingersInSyllabicPart, nbKeys, [], syllabicPart)
+        return keypresses[:]
 
     def setIrelandEnglishLayout(self) -> None:
         layout: list[tuple[tuple[int, ...], str]] = [
