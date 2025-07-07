@@ -139,17 +139,61 @@ class Dictionary:
         Generates a keymap of the differen phonemes by trying to minimize ambiguities and 
         maximize the number of keystrokes that are in the right order to spell the words phonetically.
         """
+        
+        def _greadyAssignKeymapPartition(keyboard: Keyboard, syllabicPart: str) -> list[str]:
+            phonemeCol = Syllable.phonemeCollectionByPart(syllabicPart)
+            biphonemeCol = Syllable.biphonemeCollectionByPart(syllabicPart)
+            singleKeys  = keyboard.getSingleKeys(syllabicPart)
+            nbSingleKeys = len(singleKeys)
+            sortedPhonemes = sorted(phonemeCol.phonemes, reverse=True)
+            singleKeyTopPhonemes = sortedPhonemes[:nbSingleKeys]
+            
+            # Assign single keys to the most frequent phonemes, in the order of the best permutation
+            for phoneme in biphonemeCol.bestPermutation:
+                if phoneme in singleKeyTopPhonemes:
+                    keyboard.addToLayout((singleKeys.pop(0), ), phoneme)
+
+
+            multiKeyTopPhonemes = sortedPhonemes[nbSingleKeys:]
+            multikeys = keyboard.getMultiKeys(syllabicPart, 2) + \
+                                keyboard.getMultiKeys(syllabicPart, 3) +  \
+                                keyboard.getMultiKeys(syllabicPart, 4)
+            
+            keyOveruse: dict[int, int] = {} # Try to prevent overusing some keys
+            MaxOveruse = 2  # Maximum number of times a key can be used for a phoneme in a multi-key assignment
+            unassignedPhonemes: list[str] = []
+            for phoneme in biphonemeCol.bestPermutation:
+                if phoneme in multiKeyTopPhonemes:
+                    assigned = False
+                    while len(multikeys) > 0:
+                        maxUse = max(list(map(lambda k : keyOveruse.get(k, 0), multikeys[0])))
+                        if maxUse >= MaxOveruse +2*(len(multikeys[0])-2):
+                            _ = multikeys.pop(0)
+                        else:
+                            for key in multikeys[0]:
+                                keyOveruse[key] = keyOveruse.get(key, 0) + 1
+                            #print("Assigning", phoneme, "to", multikeys[0])
+                            keyboard.addToLayout(multikeys.pop(0), phoneme)
+                            assigned = True
+                            break
+
+                    if not assigned:
+                        unassignedPhonemes.append(phoneme)
+            return unassignedPhonemes[:]
+
+
         # Start by assigning greedily the most frequent phonemes to the most accessible keys which
         # are the single keys per phoneme.
-        onsetSingleKeys, nucleusSingleKeys, codaSingleKeys = keyboard.getSingleKeys(["onset", "nucleus", "coda"])
-        sortedOnsetPhonems = sorted(Syllable.onsetPhonemeCol.phonemes, reverse=True)
-        topOnsetPhonems = sortedOnsetPhonems[:len(onsetSingleKeys)]
-        sortedNucleusPhonems = sorted(Syllable.nucleusPhonemeCol.phonemes, reverse=True)
-        topNucleusPhonems = sortedNucleusPhonems[:len(nucleusSingleKeys)]
-        sortedCodaPhonems = sorted(Syllable.codaPhonemeCol.phonemes, reverse=True)
-        topCodaPhonems = sortedCodaPhonems[:len(codaSingleKeys)]
+        for syllabicPart in ["onset", "nucleus", "coda"]:
+            unassigned = _greadyAssignKeymapPartition(keyboard, syllabicPart)
+            print("Unassigned phonemes in", syllabicPart, ":", unassigned)
+        
+        keyboard.printLayout()
+        
+
 
 if __name__ == "__main__":
+    starboard = Starboard()
     dictionary = Dictionary()
 
     dictionary.analyseSyllabification()
@@ -160,5 +204,4 @@ if __name__ == "__main__":
     dictionary.printSyllabificationStats()
 
 #   Create a default starboard keyboard and assign the keymap
-    starboard = Starboard()
     dictionary.generateKeymap(starboard)
