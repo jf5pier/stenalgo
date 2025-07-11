@@ -4,7 +4,26 @@ from math import log,ceil
 from abc  import ABC, abstractmethod
 from typing import override
 
+"""
+Nomenclature and concerns :
+- A key corresponds to a button pressed by a finger.
+-- Some fingers are more agile and cost (weight) less to use
+-- Key overuse may cause confusion, they should have a limited number of "task"
+
+- A keypress coressponds to one or more keys pressed by one finger.
+-- Keypresses of multiple keys are more tireing (weight) than simpler keypresses.
+
+- A stroke (chord) corresponds to one or more keypresses pressed by one or more fingers.
+-- Longer strokes are more tireing and prone to errors.
+-- Some strokes are more difficult to type (alternating lower and upper key rows). 
+--- TODO: add this weight function
+"""
+
+
 class FingerWeights(object):
+    """
+    Cost of using the different fingers in all their allowed keypresses on the keyboard.
+    """
     noPress: float = 0.0
     pinky1keyHome: float = 1.25
     pinky1keyOffHome: float = 1.50
@@ -87,25 +106,76 @@ class Keyboard(ABC):
             bitsNeeded += bit
         print("Total bits needed:", bitsNeeded)
 
-    @abstractmethod
-    def getSingleKeys(self, syllabicPart: str) -> list[int]:
-        ...
 
     @abstractmethod
-    def getMultiKeys(self, syllabicPart: str, nbKeys: int) -> list[tuple[int, ...]]:
-        ...
+    def getPossibleStrokes(self, syllabicPart: str, nbKeysInStroke: int) -> list[tuple[int, ...]]:
+        """
+        Get all permitted strokes in a syllabic part of a given number of keys
+        """
+        pass
 
     @abstractmethod
     def printLayout(self) -> None:
-        ...
+        pass
 
     @abstractmethod
-    def addToLayout(self, keyPress: tuple[int, ...], phonem: str) -> None:
-        ...
+    def addToLayout(self, stroke: tuple[int, ...], phonem: str) -> None:
+        """
+        Add a phoneme to the layout and assign it to a keypress.
+        """
+        pass
+
+    @abstractmethod
+    def removeFromLayout(self, stroke: tuple[int, ...], phoneme: str) -> None:
+        """
+        Remove a phoneme to the layout and assign it to a keypress.
+        """
+        pass
+
+    @abstractmethod
+    def getPhonemesOfStroke(self, stroke: tuple[int, ...]) -> list[str]:
+        pass
+
+    @abstractmethod
+    def getStrokesOfPhoneme(self, phoneme: str, syllabicPart: str) -> list[tuple[int, ...]]:
+        pass
+
+    @abstractmethod
+    def getStrokeOfSyllableByPart(self, phonemesByPart: dict[str, list[str]]) -> tuple[int]:
+        """
+        Get the stroke corresponding to a syllable with phonemes in each syllabic part.
+        """
+        pass
+
+    @abstractmethod
+    def strokesToString(self, strokes: tuple[tuple[int, ...], ...]) -> str:
+        pass
 
     @abstractmethod
     def clearLayout(self) -> None:
-        ...
+        pass
+
+    @staticmethod
+    def strokeIsLowerThen(stroke1: tuple[int, ...], stroke2: tuple[int, ...]) -> bool:
+        """ 
+        Helper function for sorting lists of strokes.
+        """
+        if stroke1 == () and not stroke2 == ():
+            return True #Empty stroke is always lower than a non-empty stroke
+        elif stroke2 == ():
+            return False
+        elif stroke1[0] < stroke2[0]:
+            return True #First key in a stroke is the most significant key
+        elif stroke1[0] > stroke2[0]:
+            return False
+        else : 
+            if stroke1[-1] < stroke2[-1]: #Last key is the second most significant
+                return True
+            elif stroke1[-1] > stroke2[-1]:
+                return False
+            else: #Begining and end are identical, strokes can only differ by their middle keys
+                return Keyboard.strokeIsLowerThen(stroke1[1:-1], stroke2[1:-1]) #Compare the rest of the stroke
+
 
 
 class Starboard(Keyboard):
@@ -189,106 +259,187 @@ Fingers assignments :
 
     def __init__(self, nbKeysPerSyllabicPart: tuple[tuple[str, int], ...] =
                  (("onset", 8), ("nucleus", 4), ("coda", 10))) -> None:
-        self.keypressPhonemMap: dict[tuple[int, ...], list[str]] = {}
+        self.phonemesAssignedToStroke: dict[tuple[int, ...], list[str]] = {}
         self.allowedKeys: list[int] = [k for k in self._possibleKeys if k not in self._reservedKeys]
 
         len1 = len(self.allowedKeys)
         len2 = sum(map(lambda a: a[1], nbKeysPerSyllabicPart))
         if len1 != len2 :
-            raise ValueError(f"Number of allowed keys {len1} does not match the number of phonem keys {len2} in the partitions {nbKeysPerSyllabicPart}")
+            raise ValueError(f"Number of allowed keys {len1} does not" +
+                f" match the number of phonem keys {len2} in the partitions {nbKeysPerSyllabicPart}")
 
         unassignedKeys: list[int] = self.allowedKeys[:]
         self.keyIDinSyllabicPart: dict[str, list[int]] = {}
         for syllabicPart, partSize in nbKeysPerSyllabicPart:
             self.keyIDinSyllabicPart[syllabicPart] = unassignedKeys[:partSize]
             unassignedKeys = unassignedKeys[partSize:]
-#        print(self.keyIDinSyllabicPart)
-#        sys.exit(1)
 
-        self.allowed1fingerKeypress: list[tuple[tuple[int, ...], float]] = list(
-            filter(lambda k : len(k[0]) == len(list(
-                filter(lambda x: x in self.allowedKeys, list(k[0])))), self._possibleKeypress.toList()))
+        #self.allowed1fingerKeypress: list[tuple[tuple[int, ...], float]] = list(
+        #    filter(lambda k : len(k[0]) == len(list(
+        #        filter(lambda x: x in self.allowedKeys, list(k[0])))), self._possibleKeypress.toList()))
+
         self.nbKeys: int = len(self._keyIndexes)
-        listKeypresses: list[list[tuple[int, ...]]] = list(
-            map(lambda f: list(f.keys()), self._possibleKeypress.__dict__.values()))
-        flatKeypresses: list[tuple[int, ...]] = [item for sublist in listKeypresses for item in sublist]
-        self.maxKeyPerFinger: int = max(list(map(len, flatKeypresses)))
+        
+        #listKeypresses: list[list[tuple[int, ...]]] = list(
+        #    map(lambda f: list(f.keys()), self._possibleKeypress.__dict__.values()))
+        #flatKeypresses: list[tuple[int, ...]] = [item for sublist in listKeypresses for item in sublist]
+        #self.maxKeyPerFinger: int = max(list(map(len, flatKeypresses)))
         return
 
     @override
     def printLayout(self) -> None:
-        maxKeyPress = max(list(map(len, self.keypressPhonemMap.keys())))
+        maxKeyPress = max(list(map(len, self.phonemesAssignedToStroke.keys())))
         for i in range(1, maxKeyPress+1):
             nbKeys = 0
-            phonemKeymapList = self.nbKeys * [""]
-            for (keyPress, phonem) in self.keypressPhonemMap.items():
+            phonemeKeymapList = self.nbKeys * [""]
+            for (keyPress, phoneme) in self.phonemesAssignedToStroke.items():
                 if i  == len(keyPress):
                     nbKeys += 1
                     for key in keyPress:
-                        for p in phonem:
-                            phonemKeymapList[key] = phonemKeymapList[key] +  p
+                        for p in phoneme:
+                            phonemeKeymapList[key] = phonemeKeymapList[key] +  p
             if nbKeys > 0:
                 print("Phonemes defined by " + (f"{i} keys pressed together" if i >1 else "1 key"))
-                print(self._keyboardTemplate.format(*phonemKeymapList))
+                print(self._keyboardTemplate.format(*phonemeKeymapList))
 
         return
 
     @override
     def clearLayout(self) -> None:
-        self.keypressPhonemMap = {}
+        self.phonemesAssignedToStroke = {}
 
     @override
-    def addToLayout(self, keyPress: tuple[int, ...], phonem: str) -> None:
-        existingKeypressPhonem = self.keypressPhonemMap.get(keyPress, [])
-        existingKeypressPhonem.append(phonem)
-        self.keypressPhonemMap[keyPress] = existingKeypressPhonem
+    def addToLayout(self, stroke: tuple[int, ...], phonem: str) -> None:
+        existingKeypressPhoneme = self.phonemesAssignedToStroke.get(stroke, [])
+        existingKeypressPhoneme.append(phonem)
+        self.phonemesAssignedToStroke[stroke] = existingKeypressPhoneme
     
     @override
-    def getSingleKeys(self, syllabicPart: str) -> list[int]:
+    def removeFromLayout(self, stroke: tuple[int, ...], phoneme: str) -> None:
+        if self.phonemesAssignedToStroke.get(stroke, None) is None:
+            raise KeyError(f"Keypress {stroke} not found in the layout")
+        if len(self.phonemesAssignedToStroke[stroke]) == 1 and self.phonemesAssignedToStroke[stroke][0] == phoneme:
+            del self.phonemesAssignedToStroke[stroke]  # Remove the keypress if it was the only phoneme assigned to it
+        elif phoneme in self.phonemesAssignedToStroke[stroke]:
+            index = self.phonemesAssignedToStroke[stroke].index(phoneme)
+            _ = self.phonemesAssignedToStroke[stroke].pop(index)  # Remove the phoneme from the keypress
+        else:
+            raise KeyError(f"Phoneme {phoneme} not found in keypress {stroke}")
+
+    @override
+    def getPhonemesOfStroke(self, stroke: tuple[int, ...]) -> list[str]:
+        """
+        Find all phonemes assigned to a given stroke
+        """
+        return self.phonemesAssignedToStroke.get(stroke, [])[:]
+
+    @override
+    def getStrokesOfPhoneme(self, phoneme: str, syllabicPart: str) -> list[tuple[int, ...]]:
+        """
+        Find all strokes in a syllabic part that results in a given phonem
+        """
+        assignedKeypress: list[tuple[int, ...]] = []
+#        print(f"Searching for phoneme {phoneme} in syllabic part {syllabicPart}")
+        for keypress, phonemes in self.phonemesAssignedToStroke.items():
+#            print(f"Checking keypress {keypress} with phonemes {phonemes}")
+            if keypress[0] in self.keyIDinSyllabicPart[syllabicPart] and phoneme in phonemes:
+                assignedKeypress.append(keypress)
+        return assignedKeypress[:]
+
+    def getSinglekeyKeypress(self, syllabicPart: str) -> list[tuple[int]]:
         """ 
         Return key IDs for keys that can be pressed alone to register a phoneme 
         """
-        return self.keyIDinSyllabicPart[syllabicPart][:]
+        return list(map(lambda k : (k,), self.keyIDinSyllabicPart[syllabicPart]))
 
-    @override
-    def getMultiKeys(self, syllabicPart: str, nbKeys: int) -> list[tuple[int, ...]]:
+    def getFingersInSyllabicPart(self, syllabicPart: str) -> list[str]:
         """ 
-        Return key IDs for keys that can be pressed together to register a phoneme 
+        Return the fingers that can be used to press keys in the given syllabic part
         """
-        fingersInSyllabicPart: list[str] = []
+        fingers: list[str] = []
         for finger in self._possibleKeypress.__dict__:
             for keyPress in self._possibleKeypress[finger]:
                 if 0 < len(list(filter(lambda k: k in self.keyIDinSyllabicPart[syllabicPart], keyPress))):
-                    fingersInSyllabicPart.append(finger)
+                    fingers.append(finger)
                     break
+        return fingers[:]
 
-        def _addKeypress(accumulator:list[tuple[int, ...]],
-                         fingers: list[str], nbKeysLeft: int,
-                         chord: list[int], syllabicPart: str) -> None:
-            if(len(fingers) == 0 or nbKeysLeft <= 0):
-                if len(chord) > 0 and nbKeysLeft == 0:
-                    accumulator.insert(0, tuple(chord))  #Chords are explored in reverse order, this reverses it
-                return
-
-            fingerKeypress = self._possibleKeypress[fingers[0]]
-            for keyPress in fingerKeypress:
-                # Case were we skip this finger in composing a chord (keypress = no press)
-                if len(keyPress) == 0 :
-                    _addKeypress(accumulator, fingers[1:], nbKeysLeft, chord, syllabicPart)
-
-                elif len(keyPress) <= nbKeysLeft:
-                    keysInPart = list(filter(lambda k: k in self.keyIDinSyllabicPart[syllabicPart], keyPress))
-                    if len(keysInPart) == len(keyPress):
-                        _addKeypress(accumulator, fingers[1:],
-                                     nbKeysLeft - len(keyPress),
-                                     chord + keysInPart , syllabicPart)
+    def buildStrokes(self, accumulator:list[tuple[int, ...]], fingers: list[str],
+                     nbKeysLeft: int, stroke: list[int], syllabicPart: str) -> None:
+        """
+        Recursively build all possible strokes using the given fingers and number of keys left to press.
+        """
+        if(len(fingers) == 0 or nbKeysLeft <= 0):
+            if len(stroke) > 0 and nbKeysLeft == 0:
+                accumulator.insert(0, tuple(stroke))  #Strokes are explored in reverse order, this reverses it
             return
 
+        fingerKeypress = self._possibleKeypress[fingers[0]]
+        for keyPress in fingerKeypress:
+            # Case were we skip this finger in composing a stroke (keypress = no press)
+            if len(keyPress) == 0 :
+                self.buildStrokes(accumulator, fingers[1:], nbKeysLeft, stroke, syllabicPart)
 
+            elif len(keyPress) <= nbKeysLeft:
+                keysInPart = list(filter(lambda k: k in self.keyIDinSyllabicPart[syllabicPart], keyPress))
+                if len(keysInPart) == len(keyPress): #Keypress doesnt mix between syllabic parts
+                    self.buildStrokes(accumulator, fingers[1:],
+                                        nbKeysLeft - len(keyPress),
+                                        stroke + keysInPart , syllabicPart)
+        return
 
-        keypresses: list[tuple[int, ...]] = []
-        _addKeypress(keypresses, fingersInSyllabicPart, nbKeys, [], syllabicPart)
-        return keypresses[:]
+    @override
+    def getPossibleStrokes(self, syllabicPart: str, nbKeysInStroke: int) -> list[tuple[int, ...]]:
+        """ 
+        Return key IDs for keys that can be pressed together to register a phoneme, 
+        forming strokes of a given number of keys.
+        """
+        if nbKeysInStroke == 1 :
+            return self.getSinglekeyKeypress(syllabicPart)
+
+        fingersInSyllabicPart: list[str] = self.getFingersInSyllabicPart(syllabicPart)
+
+        strokes: list[tuple[int, ...]] = []
+        self.buildStrokes(strokes, fingersInSyllabicPart, nbKeysInStroke, [], syllabicPart)
+        return strokes[:]
+
+    @override
+    def getStrokeOfSyllableByPart(self, phonemesByPart: dict[str, list[str]]) -> tuple[int, ...]:
+        """
+        Get the list of strokes that builds a syllable.
+        """
+        strokes: list[int] = []
+        try:
+            for syllabicPart, phonemes in phonemesByPart.items():
+                for phoneme in phonemes:
+                    strokesOfPhoneme = self.getStrokesOfPhoneme(phoneme, syllabicPart)
+                    for key in strokesOfPhoneme[0]:
+                        strokes.append(key)
+                #if len(strokes) == 0:
+                #    print("phonemesByPart", phonemesByPart)
+            return tuple(strokes)
+        except IndexError as e:
+            raise IndexError(f"Error while building stroke for syllable {phonemesByPart} with {strokesOfPhoneme}: {e}")
+
+    @override
+    def strokesToString(self, strokes: tuple[tuple[int, ...], ...]) -> str:
+        """
+        Convert a list of strokes to a string representation.
+        """
+        strokeString = ""
+        for stroke in strokes:
+            if not strokeString == "":
+                strokeString += "/"
+            syllableString ={"onset": "", "nucleus": "", "coda": ""}
+            for key in stroke:
+                syllabicPart = next((part for part, keys in self.keyIDinSyllabicPart.items() if key in keys), "")
+                phoneme = self.getPhonemesOfStroke((key,))[0]
+                syllableString[syllabicPart] += phoneme
+            if syllableString["nucleus"] == "" :
+                syllableString["nucleus"] = "-"
+            strokeString += f"{syllableString['onset']}{syllableString['nucleus']}{syllableString['coda']}"
+
+        return strokeString
 
     def setIrelandEnglishLayout(self) -> None:
         layout: list[tuple[tuple[int, ...], str]] = [

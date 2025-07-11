@@ -91,6 +91,8 @@ class Word:
             self.fix_e_n_en()
 
     def phonemesToSyllableNames(self, withSilent: bool=True, symbol: str="") -> list[str]:
+        # Format is [[syll1letter1, syll1letter2], [syll2letter1, ...]]
+        # Output is ["syll1letter1syll1letter2", "syll2letter1..."]
         if withSilent:
             return [symbol.join(syll) for syll in self.syllCV]
         else:
@@ -107,6 +109,7 @@ class Word:
 
     def parseOrthoSyll(self) ->list[list[str]]:
         # Format is "syll1letter1_syll1letter2|syll2letter1_..."
+        # Output is [[syll1letter1, syll1letter2], [syll2letter1, ...]]
         return list(map(
             lambda syll: syll.split("_"), self.rawOrthosyllCV.split("|")
         ))
