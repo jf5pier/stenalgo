@@ -141,7 +141,7 @@ class Keyboard(ABC):
         pass
 
     @abstractmethod
-    def getStrokeOfSyllableByPart(self, phonemesByPart: dict[str, list[str]]) -> tuple[int]:
+    def getStrokeOfSyllableByPart(self, phonemesByPart: dict[str, list[str]]) -> tuple[int, ...]:
         """
         Get the stroke corresponding to a syllable with phonemes in each syllabic part.
         """
@@ -409,17 +409,14 @@ Fingers assignments :
         Get the list of strokes that builds a syllable.
         """
         strokes: list[int] = []
-        try:
-            for syllabicPart, phonemes in phonemesByPart.items():
-                for phoneme in phonemes:
-                    strokesOfPhoneme = self.getStrokesOfPhoneme(phoneme, syllabicPart)
-                    for key in strokesOfPhoneme[0]:
-                        strokes.append(key)
-                #if len(strokes) == 0:
-                #    print("phonemesByPart", phonemesByPart)
-            return tuple(strokes)
-        except IndexError as e:
-            raise IndexError(f"Error while building stroke for syllable {phonemesByPart} with {strokesOfPhoneme}: {e}")
+        for syllabicPart, phonemes in phonemesByPart.items():
+            for phoneme in phonemes:
+                strokesOfPhoneme = self.getStrokesOfPhoneme(phoneme, syllabicPart)
+                for key in strokesOfPhoneme[0]:
+                    strokes.append(key)
+            #if len(strokes) == 0:
+            #    print("phonemesByPart", phonemesByPart)
+        return tuple(strokes)
 
     @override
     def strokesToString(self, strokes: tuple[tuple[int, ...], ...]) -> str:

@@ -20,6 +20,9 @@
 #  Behavior Research Methods. doi.org/10.3758/s13428-020-01396-2
 #
 import csv
+import os
+import pickle
+from pprint import PrettyPrinter
 from copy import deepcopy
 from src.grammar import Phoneme, Syllable, SyllableCollection
 from src.word import GramCat, Word
@@ -36,20 +39,27 @@ def printVerbose(word: str, msg: list[Any]):
 
 class Dictionary:
     words: list[Word]
-    wordsByOrtho: dict[str, list[Word]] = {}
-    frequentWords: list[str] = []
+    wordsByOrtho: dict[str, list[Word]]
+    frequentWords: list[str]
     nbFrequentWords: int = 200
     totalFrequencies: float = 0.0
     frequentWordsFrequencies: float = 0.0
     wordSource: str = "resources/LexiqueMixte.tsv"
     frequentWordsFile: str = "resources/top500_film.txt"
-    syllableCollection: SyllableCollection = SyllableCollection()
-    syllabicAmbiguity: dict[str, dict[tuple[str, str], float]] = {
-        "onset": {}, "nucleus": {}, "coda": {}}
-    lexicalAmbiguity: dict[str, dict[tuple[str, str], float]] = {
-        "onset": {}, "nucleus": {}, "coda": {}}
+    syllableCollection: SyllableCollection
+    syllabicAmbiguity: dict[str, dict[tuple[str, str], float]]
+    lexicalAmbiguity: dict[str, dict[tuple[str, str], float]]
 
     def __init__(self) -> None:
+        self.syllableCollection = SyllableCollection()
+        self.wordsByOrtho = {}
+        self.frequentWords = []
+        self.syllableClass: type = Syllable
+        self.syllabicAmbiguity = {
+        "onset": {}, "nucleus": {}, "coda": {}}
+        self.lexicalAmbiguity = {
+        "onset": {}, "nucleus": {}, "coda": {}}
+
         self.words = self.readCorpus()
 
     def readCorpus(self) -> list[Word]:
@@ -235,12 +245,37 @@ class Dictionary:
 
 if __name__ == "__main__":
     starboard = Starboard()
-    dictionary = Dictionary()
+    dictionary: Dictionary
 
-    dictionary.analyseSyllabification()
-    Syllable.optimizeBiphonemeOrder()
+    if os.path.exists("Dictionary.pickle"):
+        with open("Dictionary.pickle", "rb") as pfile:
+            dictionary = pickle.load(pfile)
+            Syllable.allPhonemeCol = pickle.load(pfile)
+            Syllable.phonemeColByPart = pickle.load(pfile)
+            Syllable.biphonemeColByPart = pickle.load(pfile)
+            dictionary: Dictionary = pickle.load(open("Dictionary.pickle", "rb"))
+#        dictionary.syllableCollection = pickle.load(open("Syllables.pickle", "rb"))
+        #del dictionary.words  # Remove the words to save memory
+        pp = PrettyPrinter(indent=4)
+        pp.pprint("Loaded dictionary from pickle file.")
+#        pp.pprint(dictionary.__dict__)
+        pp.pprint(dictionary.syllableCollection)
+    else :
+        dictionary = Dictionary()
 
-    dictionary.analyseAmbiguities()
+        dictionary.analyseSyllabification()
+        Syllable.optimizeBiphonemeOrder()
+
+        dictionary.analyseAmbiguities()
+        pp = PrettyPrinter(indent=4)
+        pp.pprint(dictionary.syllableCollection)
+        with open("Dictionary.pickle", "wb") as pfile:
+            pickle.dump(dictionary, pfile)
+            pickle.dump(Syllable.allPhonemeCol, pfile)
+            pickle.dump(Syllable.phonemeColByPart, pfile)
+            pickle.dump(Syllable.biphonemeColByPart, pfile)
+#        pickle.dump(dictionary.syllableCollection, open("Syllables.pickle", "wb"))
+
 #    sys.exit(1)
     dictionary.printSyllabificationStats()
 
