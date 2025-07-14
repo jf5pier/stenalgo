@@ -2,7 +2,7 @@
 # coding: utf-8
 #
 import sys
-from typing import ClassVar, Any
+from typing import ClassVar, Any, override
 from dataclasses import dataclass
 from itertools import permutations, chain
 from copy import deepcopy
@@ -704,8 +704,21 @@ class SyllableCollection:
     syllables : [Syllable]
     """
 
-    syllable_names: dict[str, Syllable] = {}
-    syllables: list[Syllable] = []
+    syllable_names: dict[str, Syllable]
+    syllables: list[Syllable]
+
+    def __init__(self) -> None:
+        self.syllable_names = {}
+        self.syllables = []
+
+
+    @override
+    def __str__(self) -> str:
+        return "SyllableCollection with %i syllables and %i syllable_names" %(len(self.syllables), len(self.syllable_names))
+
+    @override
+    def __repr__(self) -> str:
+        return self.__str__()
 
     def updateSyllable(self, syllable_name: str, spelling: str,
                        addedfrequency: float, word: Word | None = None,):
