@@ -12079,8 +12079,8 @@ balayais	balEjE	balayer	VER	VER			ind:imp:1s;ind:imp:2s;	b_a|l_Ej|E	b_a|l_ay|ais
 balayait	balEjE	balayer	VER	VER			ind:imp:3s;	b_a|l_Ej|E	b_a|l_ay|ait	5.07	0.28
 balayant	balEj@	balayer	VER	ADJ,VER			par:pre;	b_a|l_Ej|@	b_a|l_ay|ant	3.31	0.23
 balayant	balEj@	balayant	ADJ	ADJ,VER	m	s		b_a|l_Ej|@	b_a|l_ay|ant	0.07	0.0
-balaye	balEj	balayer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	b_a	b_a	1.35	1.03
-balayent	balEj	balayer	VER	VER			ind:pre:3p;	b_a	b_a	0.2	0.04
+balaye	balEj	balayer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	b_a|l_Ej_#	b_a|l_ay_e	1.35	1.03
+balayent	balEj	balayer	VER	VER			ind:pre:3p;	b_a|l_Ej_#	b_a|l_ay_ent	0.2	0.04
 balayer	baleje	balayer	VER	VER			inf;	b_a|l_e|j_e	b_a|l_a|y_er	7.23	3.4
 balayera	balEj°Ra	balayer	VER	VER			ind:fut:3s;	b_a|l_Ej|°|R_a	b_a|l_ay|e|r_a	0.0	0.08
 balayerai	balEj°RE	balayer	VER	VER			ind:fut:1s;	b_a|l_Ej|°|R_E	b_a|l_ay|e|r_ai	0.0	0.12
@@ -16744,6 +16744,8 @@ bravé	bRave	braver	VER	VER	m	s	par:pas;	b_R_a|v_e	b_r_a|v_é	0.2	0.45
 bravée	bRave	braver	VER	VER	f	s	par:pas;	b_R_a|v_e_#	b_r_a|v_é_e	0.07	0.0
 brayaient	bREjE	brayer	VER	VER			ind:imp:3p;	b_R_Ej|E	b_r_ay|aient	0.07	0.0
 brayait	bREjE	brayer	VER	VER			ind:imp:3s;	b_R_Ej|E	b_r_ay|ait	0.07	0.0
+braye	bREj	braye	NOM	NOM	f	s		b_R_Ej_#	b_r_ay_e	0.61	0.0
+brayes	bREj	brayer	VER	VER			ind:pre:2s;	b_R_Ej_#	b_r_ay_es	0.07	0.0
 brayons	bREj§	brayon	NOM	NOM	m	p		b_R_Ej|§_#	b_r_ay|on_s	0.07	0.0
 break	bREk	break	NOM	NOM	m	s		b_R_E_k	b_r_ea_k	1.96	6.91
 breakdance	bREkdEns	breakdance	NOM	NOM	f	s		b_R_E_k|d_E_n_s_#	b_r_ea_k|d_a_n_c_e	0.0	0.1
@@ -17904,6 +17906,7 @@ buvons	byv§	boire	VER	VER			imp:pre:1p;ind:pre:1p;	b_y|v_§	b_u|v_ons	3.04	13.6
 buée	b8e	buée	NOM	NOM	f	s		b_8_e_#	b_u_é_e	13.11	0.32
 buées	b8e	buée	NOM	NOM	f	p		b_8_e_#	b_u_é_es	0.41	0.0
 by	bi	by	NOM	NOM	m	s		b_i	b_y	0.68	12.49
+bye	baj	bye	ONO	ONO				b_aj_#	b_y_e	2.03	23.11
 byronien	biRonj5	byronien	ADJ	ADJ	m	s		b_i|R_o|n_j_5	b_y|r_o|n_i_en	0.07	0.0
 bytes	bit	byte	NOM	NOM	m	p		b_i_t_#	b_y_t_es	0.0	0.09
 bytures	bityR	byture	NOM	NOM	m	p		b_i|t_y_R_#	b_y|t_u_r_es	0.07	0.0
@@ -18155,7 +18158,7 @@ bégayantes	begej@t	bégayant	ADJ	ADJ	f	p		b_e|g_e|j_@_t_#	b_é|g_a|y_an_t_es	0.
 bégayants	begej@	bégayant	ADJ	ADJ	m	p		b_e|g_e|j_@_#	b_é|g_a|y_an_ts	0.07	0.0
 bégaye	begej	bégayer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	b_e|g_e_j_#	b_é|g_a_y_e	0.61	0.41
 bégayer	begeje	bégayer	VER	VER			inf;	b_e|g_e|j_e	b_é|g_a|y_er	1.01	0.64
-bégayes	begEj	bégayer	VER	VER			ind:pre:2s;	b_e	b_é	0.0	0.05
+bégayes	begEj	bégayer	VER	VER			ind:pre:2s;	b_e|g_Ej_#	b_é|g_ay_es	0.0	0.05
 bégayeur	begEj9R	bégayeur	ADJ	ADJ	m	s		b_e|g_Ej|9_R	b_é|g_ay|eu_r	0.14	0.0
 bégayez	begeje	bégayer	VER	VER			ind:pre:2p;	b_e|g_e|j_e	b_é|g_a|y_ez	0.07	0.15
 bégayé	begeje	bégayer	VER	VER	m	s	par:pas;	b_e|g_e|j_e	b_é|g_a|y_é	0.27	0.27
@@ -33382,7 +33385,7 @@ cèpe	sEp	cèpe	NOM	NOM	m	s		s_E_p_#	c_è_p_e	0.27	0.02
 cèpes	sEp	cèpe	NOM	NOM	m	p		s_E_p_#	c_è_p_es	0.88	0.75
 céans	se@	céans	ADV	ADV				s_e|@_#	c_é|an_s	0.34	0.32
 céara	seaRa	céara	NOM	NOM	m	s		s_e|a|R_a	c_é|a|r_a	0.0	0.14
-cécidomyies	sesidomij	cécidomyie	NOM	NOM	f	p		s_e|s_i|d_o	c_é|c_i|d_o	0.07	0.0
+cécidomyies	sesidomij	cécidomyie	NOM	NOM	f	p		s_e|s_i|d_o|m_ij_#	c_é|c_i|d_o|m_yi_es	0.07	0.0
 cécité	sesite	cécité	NOM	NOM	f	s		s_e|s_i|t_e	c_é|c_i|t_é	3.65	1.12
 céda	seda	céder	VER	VER			ind:pas:3s;	s_e|d_a	c_é|d_a	4.32	0.39
 cédai	sedE	céder	VER	VER			ind:pas:1s;	s_e|d_E	c_é|d_ai	0.68	0.0
@@ -45575,7 +45578,7 @@ effrayant	efREj@	effrayer	VER	ADJ,VER			par:pre;	e|f_R_Ej|@	e|ff_r_ay|ant	1.42	0
 effrayante	efREj@t	effrayant	ADJ	ADJ	f	s		e|f_R_Ej|@_t_#	e|ff_r_ay|an_t_e	7.16	2.86
 effrayantes	efREj@t	effrayant	ADJ	ADJ	f	p		e|f_R_Ej|@_t_#	e|ff_r_ay|an_t_es	1.42	0.69
 effrayants	efREj@	effrayant	ADJ	ADJ	m	p		e|f_R_Ej|@_#	e|ff_r_ay|an_ts	1.62	1.07
-effraye	efREj	effrayer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	e	e	0.61	1.1
+effraye	efREj	effrayer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	e|f_R_Ej_#	e|ff_r_ay_e	0.61	1.1
 effrayent	efRej	effrayer	VER	VER			ind:pre:3p;	e|f_R_e_j_#	e|ff_r_a_y_ent	0.2	0.25
 effrayer	efREje	effrayer	VER	VER			inf;;	e|f_R_Ej|e	e|ff_r_ay|er	4.73	9.43
 effrayerais	efREj°RE	effrayer	VER	VER			cnd:pre:1s;	e|f_R_Ej|°|R_E	e|ff_r_ay|e|r_ais	0.0	0.03
@@ -50801,7 +50804,7 @@ essayaient	esejE	essayer	VER	VER			ind:imp:3p;	e|s_e|j_E	e|ss_a|y_aient	6.08	2.7
 essayais	esejE	essayer	VER	VER			ind:imp:1s;ind:imp:2s;	e|s_e|j_E	e|ss_a|y_ais	15.27	18.67
 essayait	esejE	essayer	VER	VER			ind:imp:3s;	e|s_e|j_E	e|ss_a|y_ait	35.81	14.4
 essayant	esej@	essayer	VER	VER			par:pre;	e|s_e|j_@	e|ss_a|y_ant	22.57	8.96
-essaye	esEj	essayer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	e	e	10.47	56.84
+essaye	esEj	essayer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	e|s_Ej_#	e|ss_ay_e	10.47	56.84
 essayent	esej	essayer	VER	VER			ind:pre:3p;	e|s_e_j_#	e|ss_a_y_ent	1.69	4.07
 essayer	eseje	essayer	VER	VER			ind:pre:2p;inf;	e|s_e|j_e	e|ss_a|y_er	56.42	134.69
 essayera	esej°Ra	essayer	VER	VER			ind:fut:3s;	e|s_e|j_°|R_a	e|ss_a|y_e|r_a	0.2	1.03
@@ -50814,7 +50817,7 @@ essayerez	esej°Re	essayer	VER	VER			ind:fut:2p;	e|s_e|j_°|R_e	e|ss_a|y_e|r_ez	
 essayeriez	esEj°Rje	essayer	VER	VER			cnd:pre:2p;	e|s_Ej|°|R_j_e	e|ss_ay|e|r_i_ez	0.0	0.12
 essayerons	esej°R§	essayer	VER	VER			ind:fut:1p;	e|s_e|j_°|R_§	e|ss_a|y_e|r_ons	0.0	0.58
 essayeront	esej°R§	essayer	VER	VER			ind:fut:3p;	e|s_e|j_°|R_§	e|ss_a|y_e|r_ont	0.0	0.15
-essayes	esEj	essayer	VER	VER			ind:pre:2s;sub:pre:2s;	e	e	0.34	5.96
+essayes	esEj	essayer	VER	VER			ind:pre:2s;sub:pre:2s;	e|s_Ej_#	e|ss_ay_es	0.34	5.96
 essayeur	esEj9R	essayeur	NOM	NOM	m	s		e|s_Ej|9_R	e|ss_ay|eu_r	0.14	0.01
 essayeuses	esej2z	essayeur	NOM	NOM	f	p		e|s_e|j_2_z_#	e|ss_a|y_eu_s_es	0.07	0.0
 essayez	eseje	essayer	VER	VER			imp:pre:2p;ind:pre:2p;	e|s_e|j_e	e|ss_a|y_ez	6.96	54.14
@@ -58911,6 +58914,7 @@ gambilleurs	g@bij9R	gambilleur	NOM	NOM	m	p		g_@|b_i|j_9_R_#	g_am|b_i|ll_eu_r_s	0
 gambilleuses	g@bij2z	gambilleur	NOM	NOM	f	p		g_@|b_i|j_2_z_#	g_am|b_i|ll_eu_s_es	0.07	0.0
 gambillé	g@bije	gambiller	VER	VER	m	s	par:pas;	g_@|b_i|j_e	g_am|b_i|ll_é	0.07	0.0
 gambit	g@bi	gambit	NOM	NOM	m	s		g_@|b_i_#	g_am|b_i_t	0.0	0.04
+game	gEjm	game	NOM	NOM	m	s		g_E_#_#	g_a_m_e	0.14	0.64
 gamelan	gam°l@	gamelan	NOM	NOM	m	s		g_a|m_°|l_@	g_a|m_e|l_an	0.07	0.25
 gamelle	gamEl	gamelle	NOM	NOM	f	s		g_a|m_E_l_#	g_a|m_e_ll_e	8.45	1.29
 gamelles	gamEl	gamelle	NOM	NOM	f	p		g_a|m_E_l_#	g_a|m_e_ll_es	5.27	0.34
@@ -72932,6 +72936,7 @@ kraft	kRaft	kraft	NOM	NOM	m	s		k_R_a_f_t	k_r_a_f_t	0.95	0.8
 krak	kRak	krak	NOM	NOM	m	s		k_R_a_k	k_r_a_k	0.0	0.01
 kraken	kRakEn	kraken	NOM	NOM	m	s		k_R_a|k_E_n	k_r_a|k_e_n	0.0	0.14
 kremlin	kREml5	kremlin	NOM	NOM	m	s		k_R_E_m|l_5	k_r_e_m|l_in	0.07	0.0
+kreutzer	kROjts9R	kreutzer	NOM	NOM	m	s		k_R_#_O_#_#_#_#	k_r_e_u_t_z_e_r	0.07	0.0
 kriegspiel	kRikSpil	kriegspiel	NOM	NOM	m	s		k_R_i_#_k|S_p_i_#_l	k_r_i_e_g|s_p_i_e_l	0.14	0.0
 krill	kRil	krill	NOM	NOM	m	s		k_R_i_l	k_r_i_ll	0.0	0.17
 kriss	kRis	kriss	NOM	NOM	m			k_R_i_s	k_r_i_ss	0.0	0.09
@@ -83109,7 +83114,7 @@ mérovingiennes	meRov5ZjEn	mérovingien	ADJ	ADJ	f	p		m_e|R_o|v_5|Z_j_E_n_#	m_é|
 mésalliance	mezalj@s	mésalliance	NOM	NOM	f	s		m_e|z_a|l_j_@_s_#	m_é|s_a|ll_i_an_c_e	0.47	0.05
 mésalliances	mezalj@s	mésalliance	NOM	NOM	f	p		m_e|z_a|l_j_@_s_#	m_é|s_a|ll_i_an_c_es	0.07	0.0
 mésallieras	mezalijRa	mésallier	VER	VER			ind:fut:2s;	m_e|z_a|l_ij_#|R_a	m_é|s_a|ll_i_e|r_as	0.14	0.0
-mésallies	mezalij	mésallier	VER	VER			ind:pre:2s;	m_e|z_a	m_é|s_a	0.07	0.0
+mésallies	mezalij	mésallier	VER	VER			ind:pre:2s;	m_e|z_a|l_ij_#	m_é|s_a|ll_i_es	0.07	0.0
 mésalliés	mezalje	mésallier	VER	VER	m	p	par:pas;	m_e|z_a|l_j_e_#	m_é|s_a|ll_i_é_s	0.07	0.0
 mésange	mez@Z	mésange	NOM	NOM	f	s		m_e|z_@_Z	m_é|s_an_ge	6.89	0.19
 mésanges	mez@Z	mésange	NOM	NOM	f	p		m_e|z_@_Z_#	m_é|s_an_g_es	0.74	0.23
@@ -90226,6 +90231,8 @@ payantes	pEj@t	payant	ADJ	ADJ	f	p		p_Ej|@_t_#	p_ay|an_t_es	0.34	0.19
 payants	pEj@	payant	ADJ	ADJ	m	p		p_Ej|@_#	p_ay|an_ts	0.2	0.28
 payassent	pejas	payer	VER	VER			sub:imp:3p;	p_e|j_a_s_#	p_a|y_a_ss_ent	0.07	0.0
 payassiez	pejasje	payer	VER	VER			sub:imp:2p;	p_e|j_a|s_j_e	p_a|y_a|ss_i_ez	0.07	0.0
+paye	pEj	payer	VER	NOM,VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;sub:pre:1s;sub:pre:3s;	p_Ej_#	p_ay_e	10.34	29.91
+paye	pEj	paye	NOM	NOM,VER	f	s		p_Ej_#	p_ay_e	7.5	9.53
 payement	pEjm@	payement	NOM	NOM	m	s		p_Ej_#|m_@	p_ay_e|m_ent	0.34	0.03
 payements	pEjm@	payement	NOM	NOM	m	p		p_Ej_#|m_@_#	p_ay_e|m_en_ts	0.0	0.03
 payent	pej	payer	VER	VER			ind:pre:3p;	p_e_j_#	p_a_y_ent	1.35	4.3
@@ -106517,7 +106524,7 @@ repaver	R2pave	repaver	VER	VER			inf;	R_2|p_a|v_e	r_e|p_a|v_er	0.0	0.01
 repavé	R°pave	repaver	VER	VER	m	s	par:pas;	R_°|p_a|v_e	r_e|p_a|v_é	0.07	0.0
 repayais	R°pEjE	repayer	VER	VER			ind:imp:1s;	R_°|p_Ej|E	r_e|p_ay|ais	0.07	0.0
 repayait	R°pEjE	repayer	VER	VER			ind:imp:3s;	R_°|p_Ej|E	r_e|p_ay|ait	0.07	0.0
-repaye	R°pEj	repayer	VER	VER			ind:pre:1s;	R_°	r_e	0.07	0.0
+repaye	R°pEj	repayer	VER	VER			ind:pre:1s;	R_°|p_Ej_#	r_e|p_ay_e	0.07	0.0
 repayer	R°pEje	repayer	VER	VER			inf;;	R_°|p_Ej|e	r_e|p_ay|er	0.0	0.21
 repayé	R°pEje	repayer	VER	VER	m	s	par:pas;	R_°|p_Ej|e	r_e|p_ay|é	0.07	0.0
 repaît	R°pE	repaître	VER	VER			ind:pre:3s;	R_°|p_E_#	r_e|p_aî_t	0.07	0.12
@@ -111147,7 +111154,7 @@ réessaierai	ReesERE	réessayer	VER	VER			ind:fut:1s;	R_e|e|s_E_#|R_E	r_é|e|ss_
 réessaieras	ReesERa	réessayer	VER	VER			ind:fut:2s;	R_e|e|s_E_#|R_a	r_é|e|ss_ai_e|r_as	0.0	0.03
 réessaieront	ReesER§	réessayer	VER	VER			ind:fut:3p;	R_e|e|s_E_#|R_§	r_é|e|ss_ai_e|r_ont	0.0	0.03
 réessayant	Reesej@	réessayer	VER	VER			par:pre;	R_e|e|s_e|j_@	r_é|e|ss_a|y_ant	0.07	0.0
-réessaye	ReesEj	réessayer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	R_e|e	r_é|e	0.0	0.37
+réessaye	ReesEj	réessayer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	R_e|e|s_Ej_#	r_é|e|ss_ay_e	0.0	0.37
 réessayer	Reeseje	réessayer	VER	VER			inf;	R_e|e|s_e|j_e	r_é|e|ss_a|y_er	0.07	2.4
 réessayez	ReesEje	réessayer	VER	VER			imp:pre:2p;ind:pre:2p;	R_e|e|s_Ej|e	r_é|e|ss_ay|ez	0.0	0.61
 réessayiez	ReesEje	réessayer	VER	VER			ind:imp:2p;	R_e|e|s_Ej_#|e	r_é|e|ss_ay_i|ez	0.0	0.01
@@ -118590,6 +118597,7 @@ spoutniks	sputnik	spoutnik	NOM	NOM	m	p		s_p_u_t|n_i_k_#	s_p_ou_t|n_i_k_s	0.0	0.1
 sprat	spRat	sprat	NOM	NOM	m	s		s_p_R_a_t	s_p_r_a_t	0.0	0.18
 sprats	spRat	sprat	NOM	NOM	m	p		s_p_R_a_t_#	s_p_r_a_t_s	0.14	0.22
 spray	spREj	spray	NOM	NOM	m	s		s_p_R_Ej	s_p_r_ay	0.27	2.65
+sprays	spREj	spray	NOM	NOM	m	p		s_p_R_Ej_#	s_p_r_ay_s	0.0	0.06
 sprechgesang	SpReSgesaG	sprechgesang	NOM	NOM	m	s		S_p_R_e_S|g_e|s_a_G	s_p_r_e_ch|g_e|s_a_ng	0.07	0.0
 spring	spRiG	spring	NOM	NOM	m	s		s_p_R_i_G	s_p_r_i_ng	0.68	0.83
 springer	spRing9R	springer	NOM	NOM	m	s		s_p_R_i_n|g_9_R	s_p_r_i_n|g_e_r	0.0	0.59
@@ -118721,6 +118729,8 @@ squelette	sk°lEt	squelette	NOM	NOM	m	s		s_k_°|l_E_t_#	s_qu_e|l_e_tt_e	8.58	5.0
 squelettes	sk°lEt	squelette	NOM	NOM	m	p		s_k_°|l_E_t_#	s_qu_e|l_e_tt_es	3.11	1.65
 squelettique	sk°letik	squelettique	ADJ	ADJ		s		s_k_°|l_e|t_i_k_#	s_qu_e|l_e|tt_i_qu_e	2.09	0.29
 squelettiques	sk°letik	squelettique	ADJ	ADJ		p		s_k_°|l_e|t_i_k_#	s_qu_e|l_e|tt_i_qu_es	1.35	0.1
+squire	skwajR	squire	NOM	NOM	m	s		s_kw_aj_R_#	s_qu_i_r_e	0.07	0.01
+squires	skwajR	squire	NOM	NOM	m	p		s_kw_aj_R_#	s_qu_i_r_es	0.0	0.03
 stabilisa	stabiliza	stabiliser	VER	VER			ind:pas:3s;	s_t_a|b_i|l_i|z_a	s_t_a|b_i|l_i|s_a	0.0	0.01
 stabilisait	stabilizE	stabiliser	VER	VER			ind:imp:3s;	s_t_a|b_i|l_i|z_E	s_t_a|b_i|l_i|s_ait	0.14	0.0
 stabilisant	stabiliz@	stabilisant	NOM	NOM,VER	m	s		s_t_a|b_i|l_i|z_@	s_t_a|b_i|l_i|s_ant	0.0	0.02
@@ -118899,7 +118909,7 @@ statères	statER	statère	NOM	NOM	m	p		s_t_a|t_E_R_#	s_t_a|t_è_r_es	0.07	0.0
 stayer	stEj9R	stayer	NOM	NOM	m	s		s_t_Ej|9_R	s_t_ay|e_r	0.47	0.0
 steak	stEk	steak	NOM	NOM	m	s		s_t_E_k	s_t_ea_k	1.69	8.15
 steaks	stEk	steak	NOM	NOM	m	p		s_t_E_k_#	s_t_ea_k_s	0.88	2.61
-steamboat	stimbOwt	steamboat	NOM	NOM	m	s		s_t_i_m	s_t_ea_m	0.0	0.04
+steamboat	stimbOwt	steamboat	NOM	NOM	m	s		s_t_i_m|b_O_#	s_t_ea_m|b_oa_t	0.0	0.04
 steamer	stim9R	steamer	NOM	NOM	m	s		s_t_i|m_9_R	s_t_ea|m_e_r	0.2	0.05
 steamers	stim9R	steamer	NOM	NOM	m	p		s_t_i|m_9_R_#	s_t_ea|m_e_r_s	0.07	0.01
 steeple	stipl	steeple	NOM	NOM	m	s		s_t_i_p_l_#	s_t_ee_p_l_e	0.07	0.08
@@ -120896,7 +120906,7 @@ surpassées	syRpase	surpasser	VER	VER	f	p	par:pas;	s_y_R|p_a|s_e_#	s_u_r|p_a|ss_
 surpassés	syRpase	surpasser	VER	VER	m	p	par:pas;	s_y_R|p_a|s_e_#	s_u_r|p_a|ss_é_s	0.2	0.2
 surpatte	syRpat	surpatte	NOM	NOM	f	s		s_y_R|p_a_t_#	s_u_r|p_a_tt_e	0.14	0.0
 surpattes	syRpat	surpatte	NOM	NOM	f	p		s_y_R|p_a_t_#	s_u_r|p_a_tt_es	0.07	0.0
-surpaye	syRpEj	surpayer	VER	VER			ind:pre:3s;	s_y_R	s_u_r	0.0	0.01
+surpaye	syRpEj	surpayer	VER	VER			ind:pre:3s;	s_y_R|p_Ej_#	s_u_r|p_ay_e	0.0	0.01
 surpayé	syRpEje	surpayer	VER	VER	m	s	par:pas;	s_y_R|p_Ej|e	s_u_r|p_ay|é	0.0	0.13
 surpayés	syRpEje	surpayer	VER	VER	m	p	par:pas;	s_y_R|p_Ej|e_#	s_u_r|p_ay|é_s	0.0	0.08
 surpeuplement	syRp9pl°m@	surpeuplement	NOM	NOM	m	s		s_y_R|p_9|p_l_°|m_@	s_u_r|p_eu|p_l_e|m_ent	0.07	0.03
@@ -121367,7 +121377,7 @@ swahili	swaili	swahili	ADJ	ADJ,NOM	m	s		s_w_a_#|i|l_i	s_w_a_h|i|l_i	0.07	0.0
 swahili	swaili	swahili	NOM	ADJ,NOM	m	s		s_w_a_#|i|l_i	s_w_a_h|i|l_i	0.54	0.0
 sweater	swit9R	sweater	NOM	NOM	m	s		s_w_i|t_9_R	s_w_ea|t_e_r	0.74	0.0
 sweaters	swit9R	sweater	NOM	NOM	m	p		s_w_i|t_9_R_#	s_w_ea|t_e_r_s	0.27	0.0
-sweepstake	swipstEjk	sweepstake	NOM	NOM	m	s		s_w_i_p	s_w_ee_p	0.07	0.0
+sweepstake	swipstEjk	sweepstake	NOM	NOM	m	s		s_w_i_p|s_t_E_#_#	s_w_ee_p|s_t_a_k_e	0.07	0.0
 swiftiennes	swiftjEn	swiftien	ADJ	ADJ	f	p		s_w_i_f|t_j_E_n_#	s_w_i_f|t_i_e_nn_es	0.07	0.0
 swing	swiG	swing	NOM	NOM	m	s		s_w_i_G	s_w_i_ng	0.74	0.0
 swings	swiG	swing	NOM	NOM	m	p		s_w_i_G_#	s_w_i_ng_s	0.14	0.0
@@ -128870,7 +128880,7 @@ upanisads	ypanizad	upanisad	NOM	NOM	f	p		y|p_a|n_i|z_a_d_#	u|p_a|n_i|s_a_d_s	0.0
 upanishad	ypaniSa	upanishad	NOM	NOM	m			y|p_a|n_i|S_a_#	u|p_a|n_i|sh_a_d	0.07	0.02
 upas	ypas	upas	ADV	ADV,NOM				y|p_a_s	u|p_a_s	0.0	0.01
 upas	ypas	upas	NOM	ADV,NOM	m			y|p_a_s	u|p_a_s	0.07	0.0
-update	9pdajt	update	NOM	NOM	f	s		9_p	u_p	0.0	0.04
+update	9pdajt	update	NOM	NOM	f	s		9_p|d_a_#_#	u_p|d_a_t_e	0.0	0.04
 updater	9pdate	updater	VER	VER			inf;	9_p|d_a|t_e	u_p|d_a|t_er	0.0	0.01
 upgradée	9pgRade	upgrader	VER	VER	f	s	par:pas;	9_p|g_R_a|d_e_#	u_p|g_r_a|d_é_e	0.0	0.14
 uppercut	ypERkyt	uppercut	NOM	NOM	m	s		y|p_E_R|k_y_t	u|pp_e_r|c_u_t	0.95	0.28
@@ -134354,7 +134364,7 @@ zézettes	zezEt	zézette	NOM	NOM	f	p		z_e|z_E_t_#	z_é|z_e_tt_es	0.27	0.0
 égayait	egEjE	égayer	VER	VER			ind:imp:3s;	e|g_Ej|E	é|g_ay|ait	0.88	0.0
 égayant	egEj@	égayer	VER	VER			par:pre;	e|g_Ej|@	é|g_ay|ant	0.14	0.0
 égayante	egEj@t	égayant	ADJ	ADJ	f	s		e|g_Ej|@_t_#	é|g_ay|an_t_e	0.07	0.0
-égaye	egEj	égayer	VER	VER			imp:pre:2s;ind:pre:3s;	e	é	0.54	0.07
+égaye	egEj	égayer	VER	VER			imp:pre:2s;ind:pre:3s;	e|g_Ej_#	é|g_ay_e	0.54	0.07
 égayer	egeje	égayer	VER	VER			inf;	e|g_e|j_e	é|g_a|y_er	1.42	1.0
 égayerais	egEj°RE	égayer	VER	VER			cnd:pre:1s;	e|g_Ej|°|R_E	é|g_ay|e|r_ais	0.0	0.01
 égayez	egEje	égayer	VER	VER			imp:pre:2p;	e|g_Ej|e	é|g_ay|ez	0.0	0.01

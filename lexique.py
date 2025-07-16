@@ -27,6 +27,12 @@ from src.grammar import Syllable, SyllableCollection
 # from src.word import GramCat
 from typing import Any
 
+verboseList: list[str] = ['game', 'balaye', 'soleil', 'effraye','essaye','égaye']
+
+def printVerbose(word: str, msg: list[Any]) -> None:
+    if word in verboseList:  # ["soleil"] :
+        print(word, " :\n", " ".join(map(str, msg)))
+
 problemList = ["autocritiquer", "fjord", "carter", "cappuccino", "capucino",
                "capuccino", "cappuccinos",  "mamma", "voyouterie",
                "voyoucratie", "jungien", "jungiens", "mails", "fjords",
@@ -56,13 +62,6 @@ foreignList = ["ausweis", "beagle", "beagles", "bintje", "boghei", "borchtch",
                "whist", "whisky", "wildcat", "winchesters"]
 
 ignoredList = problemList + foreignList
-
-
-def printVerbose(word: str, msg: list[Any]) -> None:
-    # return
-    if word in [""]:  # ["soleil"] :
-        print(word, " :\n", " ".join(map(str, msg)))
-
 
 @dataclass
 class Word:
@@ -335,12 +334,16 @@ class Word:
 
                     if cv_phoneme == "Y":
                         while graph_phon_pairs[0][1] == "#":
-                            printVerbose(self.ortho, ["Pop # in Y"])
+                            printVerbose(self.ortho, ["Pop # in Y", graph_phon_pairs, syll_phon, syll_graph])
                             # admixtion a-a.d-d.m-m.i-i.x-ks.t-#.i-j.on-§
                             graph_phon = graph_phon_pairs.pop(0)
                             syll_phon.append(graph_phon[1])
                             syll_graph.append(("#", graph_phon[0]))
                             if len(graph_phon_pairs) == 0:
+                                printVerbose(
+                                    self.ortho, ["no more graph/phon"])
+                                self.syll_cv.append(syll_phon)
+                                self.orthosyll_cv.append(syll_graph)
                                 return
                         if graph_phon_pairs[0][0] not in [
                                 "i", "ll", "o", "y", "u", "ill",
@@ -518,7 +521,7 @@ class Lexique:
                         printVerbose(
                             word.ortho,
                             ["corpus_words found, phono:", word.phonology,
-                             asso_word["phono"]])
+                             asso_word["phono"], "CV", word.cv_cv])
                         if word.phonology == asso_word["phono"]:
                             foundInLexicon = True
                             word.breakdownSyllables(asso_word["assoc"])
@@ -610,12 +613,12 @@ class Lexique:
                 if syllable_names != Lexique.moveDualPhonem(
                         word.phonemesToSyllables(False)):
                     self.mismatchSyllableAssociation.append(
-                        [word.ortho, syllable_names, Lexique.moveDualPhonem(
+                        [word, syllable_names, Lexique.moveDualPhonem(
                             word.phonemesToSyllables(False)),
                          word.lettersToSyllables()])
                 else:
                     self.matchSyllableAssociation.append(
-                        [word.ortho, syllable_names,
+                        [word, syllable_names,
                          word.phonemesToSyllables()])
 
             else:
@@ -628,11 +631,23 @@ class Lexique:
         self.sylCol.printTopSyllables(5)
         print("Nb Mismatched syll/orthosyll",
               len(self.mismatchSyllableSpelling))
+        for m in self.mismatchSyllableSpelling:
+            printVerbose(m.ortho, ["syll/orthosyll not matching", m])
+
         print("Nb Mismatched syll/infrasyll",
               len(self.mismatchSyllableAssociation))
+        for m in self.mismatchSyllableAssociation:
+            printVerbose(m[0].ortho, ["syll/infrasyll not matching"])
+
         print("Nb Matched syll/infrasyll", len(self.matchSyllableAssociation))
-        print("Nb broken down", len(
-            list(filter(lambda w: w.orthosyll_cv != [], self.words))))
+        for m in self.matchSyllableAssociation:
+            printVerbose(m[0].ortho, ["syll/infrasyll matching"])
+
+        brokenDown = list(filter(lambda w: w.orthosyll_cv != [], self.words))
+        print("Nb broken down", len(brokenDown))
+        for m in brokenDown:
+            printVerbose(m.ortho, ["broken down", m])
+
         missing = [w.ortho for w in filter(
             lambda w: w.orthosyll_cv == [], self.words)]
         for m in missing:
@@ -670,4 +685,4 @@ class Lexique:
 
 lexique = Lexique()
 lexique.printSyllabificationStats()
-# lexique.outputMixedLexique("resources/LexiqueMixte.tsv")
+#lexique.outputMixedLexique("resources/LexiqueMixte.tsv")
