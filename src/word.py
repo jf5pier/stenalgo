@@ -122,9 +122,16 @@ class Word:
         phono = deepcopy(self.phonology)
         if syll_orig == syll_final :
             return phono
-        while (pos := phono.find(syll_orig)) != -1:
+        i = 0
+        n = 0 
+        while (pos := phono[i:].find(syll_orig)) != -1:
+            pos += i
             phono = phono[0:pos] + syll_final + phono[len(syll_orig) + pos :]
-            #print(phono, syll_orig, syll_final, pos)
+            i = pos + len(syll_final)
+            n += 1
+            if n>10 : 
+                print("\n\n\n", self.phonology, phono, syll_orig, syll_final, pos)
+                sys.exit(1)
         return phono
 
 

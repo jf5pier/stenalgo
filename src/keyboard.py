@@ -87,6 +87,12 @@ class Keyboard(ABC):
         {}, {},
         {}, {},
         {}, {})
+
+    keyIDinSyllabicPart: dict[str, list[int]]
+
+    #Constraints on the number of keys needed for a single phoneme.
+    maxKeysPerPhoneme: dict[str, int] = { }
+
     def printTemplate(self) -> None:
         print("Key indexes :")
         print(self._keyboardTemplate.format(*self._keyIndexes))
@@ -156,25 +162,25 @@ class Keyboard(ABC):
         pass
 
     @staticmethod
-    def strokeIsLowerThen(stroke1: tuple[int, ...], stroke2: tuple[int, ...]) -> bool:
+    def strokeIsLowerThen(stroke1: tuple[int, ...], stroke2: tuple[int, ...], recurse: int = 0) -> int:
         """ 
         Helper function for sorting lists of strokes.
         """
         if stroke1 == () and not stroke2 == ():
-            return True #Empty stroke is always lower than a non-empty stroke
+            return -1 #Empty stroke is always lower than a non-empty stroke
         elif stroke2 == ():
-            return False
+            return 1
         elif stroke1[0] < stroke2[0]:
-            return True #First key in a stroke is the most significant key
+            return -1 #First key in a stroke is the most significant key
         elif stroke1[0] > stroke2[0]:
-            return False
-        else : 
+            return 1
+        else :
             if stroke1[-1] < stroke2[-1]: #Last key is the second most significant
-                return True
+                return -1
             elif stroke1[-1] > stroke2[-1]:
-                return False
+                return 1
             else: #Begining and end are identical, strokes can only differ by their middle keys
-                return Keyboard.strokeIsLowerThen(stroke1[1:-1], stroke2[1:-1]) #Compare the rest of the stroke
+                return Keyboard.strokeIsLowerThen(stroke1[1:-1], stroke2[1:-1], recurse+1) #Compare the rest of the stroke
 
 
 
@@ -256,6 +262,11 @@ Fingers assignments :
             (25,):_fw.pinky1keyOffHome, (22, 23):_fw.pinky2keysVertHome,
             (24, 25):_fw.pinky2keysVertOffHome, (22, 24):_fw.pinky2keysHorzTop,
             (23, 25):_fw.pinky2keysHorzBottom, (22,23,24,25):_fw.pinky4keys})
+
+    #Constraints on the number of keys needed for a single phoneme.
+    maxKeysPerPhoneme: dict[str, int] = {
+        "onset": 5, "nucleus": 4, "coda": 5
+    }
 
     def __init__(self, nbKeysPerSyllabicPart: tuple[tuple[str, int], ...] =
                  (("onset", 8), ("nucleus", 4), ("coda", 10))) -> None:
