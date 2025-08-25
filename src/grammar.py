@@ -39,6 +39,11 @@ class Phoneme:
         "nucleus": nucleusPhonemes,
         "coda": consonantPhonemes + temporaryPhonemes
     }
+    phonemesLexicByPart: ClassVar[dict[str, str]]= {
+        "onset": consonantPhonemes + temporaryPhonemes,
+        "nucleus": nucleusPhonemes,
+        "coda": consonantPhonemes + temporaryPhonemes
+    }
 
     def __post_init__(self) -> None:
         # 7 phonemes is the max per syll
@@ -108,6 +113,40 @@ class Biphoneme:
 
     def __repr__(self) -> str:
         return self.pair[0] + self.pair[1] + ":" + "%.1f" % self.frequency
+
+@dataclass
+class Multiphoneme:
+    """
+    Ordered group of phonemes found together in a part (onset, nucleus, coda) of Syllable
+
+    phonemes : tuple[str, ...]
+        Group of phonemes
+    frequency :
+        Occurence frequency of the group of phoenemes
+    """
+
+    phonemes: tuple[str, ...]
+    frequency: float = 0.0
+
+    def increaseFrequency(self, frequency: float) -> None:
+        self.frequency += frequency
+
+    def __eq__(self, other) -> bool:
+        if isinstance(other, Multiphoneme):
+            return self.phonemes == other.phonemes
+        elif isinstance(other, set):
+            for element in other :
+                if not isinstance(element, str):
+                    return False
+            return self.phonemes == other
+        return False
+
+    def __lt__(self, other) -> bool:
+        return self.frequency < other.frequency
+
+
+    def __repr__(self) -> str:
+        return str(self.phonemes) + ":" + "%.1f" % self.frequency
 
 
 class PhonemeCollection:
@@ -206,7 +245,6 @@ class PhonemeCollection:
                 else:
                     toPrint += "="
             print(toPrint)
-
 
 
 class BiphonemeCollection:
@@ -376,6 +414,36 @@ class BiphonemeCollection:
 
                 self.pairwiseBiphonemeOrderScore[(phoneme1, phoneme2)] = right_score - left_score
 
+class MultiphonemeCollection:
+    """
+    Collection of ordered groups of phonemes found in a part of syllables
+
+    multiphonemesNames: {tuple(str,...):Multiphoneme}
+        Dict of tuples of phonemes serving as key to find the
+        corresponding Multiphoneme object
+    multiphonemes : list[Multiphoneme]
+        List of all Biphonemes found in this part of the syllables
+    """
+
+    def __init__(self, syllabicPart: str) -> None:
+        self.syllabicPart: str = syllabicPart
+        self.multiphonemeNames: dict[tuple[str, ...], Multiphoneme] = {}
+        self.multiphonemes: list[Multiphoneme] = []
+
+    def getMultiphonemes(self, multiphonemeNames: list[tuple[str, ...]]) -> list[Multiphoneme]:
+        """Get multiphonemes from collection, adding missing ones if needed"""
+        ret: list[Multiphoneme] = []
+        for multiphonemeName in multiphonemeNames:
+            if multiphonemeName not in self.multiphonemeNames:
+                mp = Multiphoneme(multiphonemeName)
+                self.multiphonemeNames[multiphonemeName] = mp
+                self.multiphonemes.append(mp)
+
+            ret.append(self.multiphonemeNames[multiphonemeName])
+        return ret
+
+    def getMultiphoneme(self, multiphonemeName: tuple[str, ...]) -> Multiphoneme:
+        return self.getMultiphonemes([multiphonemeName])[0]
 
 
 
@@ -389,7 +457,7 @@ class Syllable:
         Dict of orthographic spelling that sound the same Syllable
     frequency : float
         Frequency of occurence in the underlying lexicon/corpus
-    phonemeCol : PhonemeCollection
+    allPhonemeCol : PhonemeCollection
         Collection of Phonemes found in the underlying lexicon/corpus
     phonemeColByPart["onset"]: PhonemeCollection
         Collection of phonemes found before the vowels of a syllable
@@ -419,6 +487,11 @@ class Syllable:
         "nucleus": BiphonemeCollection("nucleus"),
         "coda": BiphonemeCollection("coda")
     }
+    multiphonemeColByPart: dict[str, MultiphonemeCollection] = {
+        "onset": MultiphonemeCollection("onset"),
+        "nucleus": MultiphonemeCollection("nucleus"),
+        "coda": MultiphonemeCollection("coda")
+    }
 
     def __init__(self, phoneme_names: str, spelling: str, frequency: float = 0.0) -> None:
         self.phonemes: list[Phoneme] = []
@@ -428,6 +501,9 @@ class Syllable:
         }
         self.biphonemesByPart: dict[str, list[Biphoneme]] = {
             "onset": [], "coda": [], "nucleus": []
+        }
+        self.multiphonemesByPart: dict[str, Multiphoneme] = {
+            "onset": None, "coda": None, "nucleus": None
         }
         self.spellings: dict[str, float] = {}
         self.phonoWords: dict[str, list[Word]] = {}
@@ -516,6 +592,12 @@ class Syllable:
         #      "vow",self.phonemes_nucleus, "bpre", self.biphonemes_onset, "bpost",
         #      self.biphonemes_coda, "bvow",self.biphonemes_nucleus)
         #
+        for part,phonemes in self.phonemesByPart.items():
+            if len(phonemes) > 0:
+                partPhonemes = tuple(map(lambda p: p.name, phonemes))
+                multiphoneme = Syllable.multiphonemeColByPart[part].getMultiphoneme(partPhonemes)
+                multiphoneme.increaseFrequency(frequency)
+                self.multiphonemesByPart[part] = multiphoneme
 
     def phonemeNamesByPart(self) -> dict[str, list[str]]:
         return {"onset": list(map(lambda p: p.name, self.phonemesByPart["onset"])),
@@ -609,6 +691,35 @@ class Syllable:
         Syllable.biphonemeColByPart["nucleus"].generateBiphonemeOrderMatrix()
 
     @staticmethod
+    def printOptimizedBiphonemeOrderScore() -> None:
+    
+        def _printCSV(phonemes, pairwiseScore) :
+            print(",".join(phonemes))
+            for i in phonemes :
+                printLine = i
+                for j in phonemes:
+                    score = "0.0"
+                    if (i, j) in pairwiseScore:
+                        score = "%.1f"%(pairwiseScore[(i, j)])
+                    printLine += "," + score
+                print(printLine)
+
+        print("Left hand (syllable onset) consonant optimization :")
+        _printCSV(Phoneme.consonantPhonemes,
+                  Syllable.biphonemeColByPart["onset"].pairwiseBiphonemeOrderScore)
+
+
+        print("Thumbs (syllable nucleus) vowel optimization :")
+        _printCSV(Phoneme.nucleusPhonemes,
+                  Syllable.biphonemeColByPart["nucleus"].pairwiseBiphonemeOrderScore)
+
+        print("Right hand (syllable coda) consonant optimization :")
+        _printCSV(Phoneme.consonantPhonemes,
+                  Syllable.biphonemeColByPart["coda"].pairwiseBiphonemeOrderScore)
+
+        print("")
+
+    @staticmethod
     def printOptimizedBiphonemeOrder() -> None:
         print("Left hand (syllable onset) consonant optimization :")
         left_hand_order = Syllable.biphonemeColByPart["onset"].bestPermutation
@@ -662,6 +773,33 @@ class Syllable:
         elif syllabicPart == "nucleus":
             nucleus= "".join(map(str, self.phonemesByPart["nucleus"]))
             nucleus = nucleus.replace(str(phoneme1), str(phoneme2))
+            return (
+                "".join(map(str, self.phonemesByPart["onset"]))
+                + nucleus
+                + "".join(map(str, self.phonemesByPart["coda"]))
+            )
+        else:
+            return "".join(map(str, self.phonemes))
+
+    def replaceMultiphonemeInSyllabicPart(self, multiphoneme: Multiphoneme|tuple[str, ...], syllabicPart: str):
+        """Replace a syllabic part by a group of phonemes in one of 3 positions in a syllable"""
+        multiphonemeStr = multiphoneme.phonemes if isinstance(multiphoneme, Multiphoneme) else multiphoneme
+        if syllabicPart == "onset":
+            onset= "".join(multiphonemeStr)
+            return (
+                onset 
+                + "".join(map(str, self.phonemesByPart["nucleus"]))
+                + "".join(map(str, self.phonemesByPart["coda"]))
+            )
+        elif syllabicPart == "coda":
+            coda= "".join(multiphonemeStr)
+            return (
+                "".join(map(str, self.phonemesByPart["onset"]))
+                + "".join(map(str, self.phonemesByPart["nucleus"]))
+                + coda 
+            )
+        elif syllabicPart == "nucleus":
+            nucleus= "".join(multiphonemeStr)
             return (
                 "".join(map(str, self.phonemesByPart["onset"]))
                 + nucleus
@@ -757,7 +895,7 @@ class SyllableCollection:
         else:
             # print("Found", name, self.syllable_names[name].frequency )
             return self.syllable_names[name].frequency
-
+    
     def syllabicAmbiguityScore(self, phoneme1: str, phoneme2: str, syllabicPart: str) -> float:
         """Ambiguity is defined by the existance of two syllables that are
         different by only one phoneme, or that contain a pair of phonemes.
@@ -800,7 +938,7 @@ class SyllableCollection:
         #                print("Score2",score)
         return score
 
-    def lexicalAmbiguityScore(self, phoneme1: str, phoneme2: str, syllabicPart: str) -> float:
+    def lexicalPhonemeAmbiguityScore(self, phoneme1: str, phoneme2: str, syllabicPart: str) -> float:
         """Ambiguity is defined by the existance of two words that are
         different by only one phoneme, or that contain a pair of phonemes.
         If a single key is assigned to those different single phonemes or
@@ -867,11 +1005,6 @@ class SyllableCollection:
                     least_scores = sum(sorted(
                         [base_score1, base_score_short1, base_score_short2])[:-1])
                     score += least_scores
-                    # if (phoneme1, phoneme2) in [("p","l"), ("l","p")] and least_scores > 0.0 and syllabicPart == "onset":
-                    #     print("AMBIGUITY1,", ",".join(map(str,[phoneme1, phoneme2, syll1.name, phono_word1,
-                    #         base_score1, base_words_ortho, base_score_short1, listOrthoOtherWords1, 
-                    #         base_score_short2, listOrthoOtherWords2, "%.1f"%least_scores, "%.1f"%score, word.ortho
-                    #         ])))
 
             else:
                 # Score is only defined by the 2 syllables that
@@ -880,20 +1013,49 @@ class SyllableCollection:
                 for phono_word1 in syll1.phonoWords:
                     base_score1 = sum(map(lambda w: w.frequency, syll1.phonoWords[phono_word1]))
                     word = syll1.phonoWords[phono_word1][0]
-                    phono_word2 = word.replaceSyllables(syll1.name, p1_to_p2)
+                    mutated_phono_word2 = word.replaceSyllables(syll1.name, p1_to_p2)
                     phono_syll2= self.getSyllable(p1_to_p2)
                     if phono_syll2 is not None :
                         phono_words2 = phono_syll2.phonoWords
-                        if phono_word2 in phono_words2:
-                            base_score2: float = sum(map(lambda w: w.frequency, phono_words2[phono_word2]))
+                        if mutated_phono_word2 in phono_words2:
+                            base_score2: float = sum(map(lambda w: w.frequency, phono_words2[mutated_phono_word2]))
                             least_scores = min(base_score1, base_score2)
                             score += least_scores
-                            # if (phoneme1, phoneme2) in [("p","l"), ("l","p")] and least_scores > 0.0 and syllabicPart == "onset":
-                            #     print("AMBIGUITY2,", ",".join(map(str, [phoneme1, phoneme2, syll1.name, len(phono_word1), phono_word1,
-                            #         base_score1, base_score2, 0.0, least_scores, score])))
         return score
 
-    def analysePhonemSyllabicAmbiguity_old(self):
+    def lexicalSyllabicPartAmbiguityScore(self, multiphoneme1: tuple[str, ...], multiphoneme2: tuple[str, ...], syllabicPart: str) -> float:
+        """Ambiguity is defined by the existance of two words that are
+        different by only one group of phonemes of one syllabic part.
+        If a single stroke is assigned to those two different groups of 
+        phonemes then using that stroke will be ambigous.
+        The score is defined by the frequnecy of the sum of least frequent
+        ambgious words."""
+
+        multiphoneme1_syllables = list(
+            filter(lambda syll: multiphoneme1 == (syll.multiphonemesByPart[syllabicPart].phonemes if syll.multiphonemesByPart[syllabicPart] != None else None), self.syllables)
+        )
+        score: float = 0.0
+        #print("m1",multiphoneme1, "m2", multiphoneme2,"syll", multiphoneme1_syllables) if len(multiphoneme1_syllables) > 0 else None
+        for syll1 in multiphoneme1_syllables:
+            # Score is only defined by the 2 syllables that
+            # have 1 group of phonemes in 1 syllabic part different
+            multip1_to_multip2 = syll1.replaceMultiphonemeInSyllabicPart(multiphoneme2, syllabicPart)
+            #print("syll1", syll1, syllabicPart, "multip1to2", multip1_to_multip2)
+            for phono_word1 in syll1.phonoWords:
+                base_score1 = sum(map(lambda w: w.frequency, syll1.phonoWords[phono_word1]))
+                word = syll1.phonoWords[phono_word1][0]
+                mutated_phono_word2 = word.replaceSyllables(syll1.name, multip1_to_multip2)
+                phono_syll2= self.getSyllable(multip1_to_multip2)
+                #print("syll1", syll1.name, "word", word.ortho, "mutated_phono_word2", mutated_phono_word2, "phono_syll2", phono_syll2.name if phono_syll2 is not None else None)
+                if phono_syll2 is not None :
+                    phono_words2 = phono_syll2.phonoWords
+                    if mutated_phono_word2 in phono_words2:
+                        base_score2: float = sum(map(lambda w: w.frequency, phono_words2[mutated_phono_word2]))
+                        least_scores = min(base_score1, base_score2)
+                        score += least_scores
+        return score
+
+    def analysePhonemSyllabicAmbiguity_serial(self):
         """Determines the ambiguity of assigning multiple phonemes to a
         single keypress. Low ambiguity mean a keypress can mean two
         different phonemes and the other keypressess of the syllable will
@@ -924,7 +1086,7 @@ class SyllableCollection:
         different phonemes and the other keypressess of the syllable will
         give enough context to resolve the right phonem of the syllable."""
 
-        def _getSyllabicAmbiguityScores(phonemes: str, syllabicPart: str, send_end) -> None:
+        def _getSyllabicAmbiguityScores(phonemes: str, syllabicPart: str, send_end: Connection) -> None:
             syllAmbiguity: dict[tuple[str,str], float] = {}
             for p1i, p1 in tqdm(list(enumerate(phonemes[:-1])), ascii=True, ncols=80, unit=" phonemes pairs"):
                 for p2 in phonemes[p1i + 1 :]:
@@ -957,7 +1119,7 @@ class SyllableCollection:
         print("")
         return(onset_recv.recv(), nucleus_recv.recv(), coda_recv.recv())
 
-    def analysePhonemLexicalAmbiguity_old(self):
+    def analysePhonemeLexicalAmbiguity_serial(self):
         """Similairly to the Syllabic Ambiguity, but over the whole lexicon:
         determines if a key assigned  to two phonemes will create
         ambiguities when typing a full word. Low ambiguity means that the
@@ -969,7 +1131,7 @@ class SyllableCollection:
             lexicalAmbiguity: dict[tuple[str,str], float] = {}
             for p1i, p1 in tqdm(list(enumerate(phonemes[:-1])), ascii=True, ncols=80, unit=" phonemes pairs") :
                 for p2 in phonemes[p1i + 1 :]:
-                    conflict = self.lexicalAmbiguityScore(p1, p2, syllabicPart)
+                    conflict = self.lexicalPhonemeAmbiguityScore(p1, p2, syllabicPart)
                     lexicalAmbiguity[(p1, p2)] = conflict
             return {
                 (k1, k2): v for (k1, k2), v in sorted(lexicalAmbiguity.items(),
@@ -984,7 +1146,7 @@ class SyllableCollection:
 
         return (onset_inter_syll_ambiguity, nucleus_inter_syll_ambiguity, coda_inter_syll_ambiguity)
 
-    def analysePhonemLexicalAmbiguity(self):
+    def analysePhonemeLexicalAmbiguity(self):
         """Similairly to the Syllabic Ambiguity, but over the whole lexicon:
         determines if a key assigned  to two phonemes will create
         ambiguities when typing a full word. Low ambiguity means that the
@@ -992,11 +1154,11 @@ class SyllableCollection:
         provide enough context to identify which of the multiple phonemes
         assgined to a keypress to choose."""
 
-        def _getLexicalAmbiguityScores(phonemes: str,  syllabicPart: str, send_end):
+        def _getLexicalAmbiguityScores(phonemes: str,  syllabicPart: str, send_end: Connection):
             lexicalAmbiguity: dict[tuple[str,str], float] = {}
             for p1i, p1 in tqdm(list(enumerate(phonemes[:-1])), ascii=True, ncols=80, unit=" phonemes pairs") :
                 for p2 in phonemes[p1i + 1 :]:
-                    conflict = self.lexicalAmbiguityScore(p1, p2, syllabicPart)
+                    conflict = self.lexicalPhonemeAmbiguityScore(p1, p2, syllabicPart)
                     lexicalAmbiguity[(p1, p2)] = conflict
             send_end.send({
                 (k1, k2): v for (k1, k2), v in sorted(lexicalAmbiguity.items(),
@@ -1024,6 +1186,86 @@ class SyllableCollection:
         return (onset_recv.recv(), nucleus_recv.recv(), coda_recv.recv())
         #return (onset_inter_syll_ambiguity, nucleus_inter_syll_ambiguity, coda_inter_syll_ambiguity)
 
+    def analyseMultiphonemeLexicalAmbiguity_serial(self):
+        """Similairly to the Syllabic Ambiguity, but over the whole lexicon:
+        determines if a stroke assigned to two groups of phonemes in a single
+        syllabic par will create ambiguities when typing a full word. Low
+        ambiguity means that the other keys/strokes in the syllable and the
+        other syllables of the word provide enough context to identify which
+        of the multiple groups of phonemes assgined to a keypress to choose."""
+
+        def _getLexicalAmbiguityScores(multiphonemes: list[tuple[str, ...]],  syllabicPart: str):
+            lexicalAmbiguity: dict[tuple[tuple[str, ...], tuple[str, ...]], float] = {}
+            for p1i, multip1 in tqdm(list(enumerate(multiphonemes[:-1])), ascii=True, ncols=80, unit=" multiphonemes pairs") :
+                for multip2 in multiphonemes[p1i + 1 :]:
+                    conflict = self.lexicalSyllabicPartAmbiguityScore(multip1, multip2, syllabicPart)
+                    lexicalAmbiguity[(multip1, multip2)] = conflict
+            return {
+                (k1, k2): v for (k1, k2), v in sorted(lexicalAmbiguity.items(),
+                                                      key=lambda item: item[1]) }
+
+        print("Left hand multiphonemes ambiguity optimization")
+        onset_ambiguity = _getLexicalAmbiguityScores(self.getMultiphonemeNames("onset"), "onset")
+
+        print("Middle keys multiphonemes ambiguity optimization")
+        nucleus_ambiguity = _getLexicalAmbiguityScores(self.getMultiphonemeNames("nucleus"), "nucleus")
+
+        print("Right hand multiphonemes ambiguity optimization")
+        coda_ambiguity = _getLexicalAmbiguityScores(self.getMultiphonemeNames("coda"), "coda")
+        return (onset_ambiguity, nucleus_ambiguity, coda_ambiguity)
+
+    def analyseMultiphonemeLexicalAmbiguity(self):
+        """Similairly to the Syllabic Ambiguity, but over the whole lexicon:
+        determines if a stroke assigned to two groups of phonemes in a single
+        syllabic par will create ambiguities when typing a full word. Low
+        ambiguity means that the other keys/strokes in the syllable and the
+        other syllables of the word provide enough context to identify which
+        of the multiple groups of phonemes assgined to a keypress to choose."""
+
+        def _getLexicalAmbiguityScores(multiphonemes: list[tuple[str, ...]],  syllabicPart: str, send_end: Connection):
+            lexicalAmbiguity: dict[tuple[tuple[str, ...], tuple[str, ...]], float] = {}
+            for p1i, multip1 in tqdm(list(enumerate(multiphonemes[:-1])), ascii=True, ncols=80, unit=" multiphonemes pairs") :
+                for multip2 in multiphonemes[p1i + 1 :]:
+                    conflict = self.lexicalSyllabicPartAmbiguityScore(multip1, multip2, syllabicPart)
+                    lexicalAmbiguity[(multip1, multip2)] = conflict
+            send_end.send({
+                (k1, k2): v for (k1, k2), v in sorted(lexicalAmbiguity.items(),
+                                                      key=lambda item: item[1]) })
+
+        print("Left hand multiphonemes ambiguity optimization")
+        onset_send, onset_recv = Pipe()
+        #onset_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.consonantPhonemes, "onset")
+        p1 = Process(target = _getLexicalAmbiguityScores, args = (self.getMultiphonemeNames("onset"), "onset", onset_send))
+        p1.start()
+        print("Middle keys multiphonemes ambiguity optimization")
+        nucleus_send, nucleus_recv = Pipe()
+        #nucleus_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.nucleusPhonemes, "nucleus")
+        p2 = Process(target = _getLexicalAmbiguityScores, args = (self.getMultiphonemeNames("nucleus"), "nucleus", nucleus_send))
+        p2.start()
+        print("Right hand multiphonemes ambiguity optimization")
+        coda_send, coda_recv = Pipe()
+        #coda_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.consonantPhonemes, "coda")
+        p3 = Process(target = _getLexicalAmbiguityScores, args = (self.getMultiphonemeNames("coda"), "coda", coda_send))
+        p3.start()
+        
+        p1.join()
+        p2.join()
+        p3.join()
+        return (onset_recv.recv(), nucleus_recv.recv(), coda_recv.recv())
+        #return (onset_inter_syll_ambiguity, nucleus_inter_syll_ambiguity, coda_inter_syll_ambiguity)
+
+    def getMultiphonemeNames(self, syllabicPart: str) -> list[tuple[str, ...]]:
+        """Returns all multiphonemes in a syllabic part"""
+        return list(Syllable.multiphonemeColByPart[syllabicPart].multiphonemeNames.keys())
+
+    def _richMultiphonemePrint(self, multiphonemeScores: dict[tuple[tuple[str, ...], tuple[str, ...]], float], quantization: int = 100, triangular: bool = False) -> None:
+        """ Flaten tuple[str, ...] to str for printing """
+        multiphonemeScoresStrPair = { ("".join(k[0]), "".join(k[1])): v for k, v in multiphonemeScores.items() }
+        for k,v in multiphonemeScoresStrPair.items():
+            if v > 0.0 :
+                print("Multiphonemes: ", k," score: ", v)
+        #self._richBiphonemePrint(multiphonemeScoresStrPair, quantization, triangular)
+
     def _richBiphonemePrint(self, biphonemeScores: dict[tuple[str,str], float], quantization: int = 100, triangular: bool = False) -> None:
         uniquePhonemes1 = list(set(map(lambda t: t[0], biphonemeScores.keys())))
         uniquePhonemes2 = list(set(map(lambda t: t[1], biphonemeScores.keys())))
@@ -1045,7 +1287,7 @@ class SyllableCollection:
                     maxScoreFloat: float = max(biphonemeScores.get((p1, p2), 0.0),
                                    biphonemeScores.get((p2, p1), 0.0) )
                     if quantization > 0:
-                        maxScoreInt: int = int(maxScoreFloat/maxTotalScore * quantization)
+                        maxScoreInt: int = int(maxScoreFloat/maxTotalScore * quantization if maxTotalScore > 0 else 0)
                         pScores.append(str(maxScoreInt))
                         pScoreSum += maxScoreInt
                     else:
@@ -1071,6 +1313,17 @@ class SyllableCollection:
 
         print(f"Right hand (coda) {ambiguityType} minimal-ambiguity phonemes pairs")
         self._richBiphonemePrint(sortedAmbiguities["coda"])
+
+    def printSyllabicAmbiguityStats(self, sortedAmbiguities: dict[str, dict[tuple[tuple[str, ...],tuple[str, ...]], float]], ambiguityType: str) -> None:
+
+        print(f"Left hand (onset) {ambiguityType} minimal-ambiguity multiphonemes pairs")
+        self._richMultiphonemePrint(sortedAmbiguities["onset"])
+
+        print(f"Thumb vowels (nucleus) {ambiguityType} minimal-ambiguity multiphonemes pairs")
+        self._richMultiphonemePrint(sortedAmbiguities["nucleus"])
+
+        print(f"Right hand (coda) {ambiguityType} minimal-ambiguity multiphonemes pairs")
+        self._richMultiphonemePrint(sortedAmbiguities["coda"])
 
     def printTopSyllables(self, nb: int = -1):
         self.syllables.sort(reverse=True)

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # coding: utf-8
 #
 # This class provides reads a converted Lexique version 383 [1,2] that has its
@@ -22,14 +22,14 @@
 import csv
 import os
 import pickle
-from pprint import PrettyPrinter
 from copy import deepcopy
+
 from src.grammar import Phoneme, Syllable, SyllableCollection
 from src.word import GramCat, Word
 from typing import Any
 from src.keyboard import Keyboard, Starboard
+from src.cpsatsolver import optimizeTheory
 from tqdm import tqdm
-import sys
 
 def printVerbose(word: str, msg: list[Any]):
     # return
@@ -49,6 +49,7 @@ class Dictionary:
     syllableCollection: SyllableCollection
     syllabicAmbiguity: dict[str, dict[tuple[str, str], float]]
     lexicalAmbiguity: dict[str, dict[tuple[str, str], float]]
+    syllabicPartAmbiguity: dict[str, dict[tuple[tuple[str, ...], tuple[str, ...]], float]]
 
     def __init__(self) -> None:
         self.syllableCollection = SyllableCollection()
@@ -58,6 +59,8 @@ class Dictionary:
         self.syllabicAmbiguity = {
         "onset": {}, "nucleus": {}, "coda": {}}
         self.lexicalAmbiguity = {
+        "onset": {}, "nucleus": {}, "coda": {}}
+        self.syllabicPartAmbiguity = {
         "onset": {}, "nucleus": {}, "coda": {}}
 
         self.words = self.readCorpus()
@@ -122,9 +125,14 @@ class Dictionary:
         print("Analyzing syllabic ambiguities...")
         self.syllabicAmbiguity["onset"], self.syllabicAmbiguity["nucleus"], self.syllabicAmbiguity["coda"] = \
             self.syllableCollection.analysePhonemSyllabicAmbiguity()
-        print("Analyzing lexical ambiguities...")
+
+        print("Analyzing lexical ambiguities at the phoneme level...")
         self.lexicalAmbiguity["onset"], self.lexicalAmbiguity["nucleus"], self.lexicalAmbiguity["coda"] = \
-            self.syllableCollection.analysePhonemLexicalAmbiguity()
+            self.syllableCollection.analysePhonemeLexicalAmbiguity()
+
+        print("Analyzing lexical ambiguities at the syllabic part level...")
+        self.syllabicPartAmbiguity["onset"], self.syllabicPartAmbiguity["nucleus"], self.syllabicPartAmbiguity["coda"] = \
+            self.syllableCollection.analyseMultiphonemeLexicalAmbiguity_serial()
 
     def printSyllabificationStats(self) -> None:
         Syllable.printTopPhonemes()
@@ -133,12 +141,15 @@ class Dictionary:
 #        Syllable.printTopPhonemesPerInvPosition()
         Syllable.printTopBiphonemes(5)
         Syllable.printOptimizedBiphonemeOrder()
+        Syllable.printOptimizedBiphonemeOrderScore()
+
         self.syllableCollection.printAmbiguityStats(self.syllabicAmbiguity, "Syllabic")
         self.syllableCollection.printAmbiguityStats(self.lexicalAmbiguity, "Lexical")
+        self.syllableCollection.printSyllabicAmbiguityStats(self.syllabicPartAmbiguity, "Lexical")
 
     def generateBaseKeymap(self, keyboard: Keyboard) -> None:
         """ 
-        Generates a keymap of the differen phonemes by trying to minimize ambiguities and 
+        Generates a keymap of the different phonemes by trying to minimize ambiguities and 
         maximize the number of keystrokes that are in the right order to spell the words phonetically.
         """
         
@@ -240,7 +251,80 @@ class Dictionary:
                 theory[syllableStrokes] = []
             theory[syllableStrokes].append(word)
         return theory
+
+    def writeTheory(self, theory: dict[tuple[tuple[int, ...], ...], list[Word]], filename: str) -> None:
+        with open(filename, "w") as f:
+            _ = f.write("strokes\twords\n")
+            maxAmbiguity = 0
+            maxAmbiguityWords = []
+            maxFrequencyAmbiguity = 0.0
+            maxFrequencyAmbiguityWords = []
+            maxFrequencyAmbiguityStrokes= ()
+            for syllableStrokes, words in theory.items():
+                strokeString = starboard.strokesToString(syllableStrokes)
+                wordOrthos = sorted(list(set(map(lambda w: w.ortho, words))))
+                sumFrequencies: float = sum(map(lambda w: w.frequency, words))
+                if len(wordOrthos) > maxAmbiguity:
+                    maxAmbiguity = len(wordOrthos)
+                    maxAmbiguityWords = wordOrthos
+                if sumFrequencies > maxFrequencyAmbiguity:
+                    maxFrequencyAmbiguity = sumFrequencies
+                    maxFrequencyAmbiguityWords = wordOrthos
+                    maxFrequencyAmbiguityStrokes = syllableStrokes
+                _ = f.write(f"{strokeString}\t{','.join(wordOrthos)}\n")
+            
+            print("Max nb word ambiguity:", maxAmbiguity, "for words", maxAmbiguityWords)
+            print("Max frequency ambiguity:", maxFrequencyAmbiguity, "for words", 
+                  maxFrequencyAmbiguityWords, "\n strokes: ", maxFrequencyAmbiguityStrokes)
+
+    def writeConstrainFiles(self, phonemesOrderFile = "phoneme_order.csv",
+                            multiPhonemeAmbiguityFile = "multi_phoneme_ambiguity.csv") -> None:
+
+        with open(phonemesOrderFile, "w") as f:
+            for phonemes, part in [(Phoneme.consonantPhonemes, "onset"),
+                                   (Phoneme.nucleusPhonemes, "nucleus"),
+                                   (Phoneme.consonantPhonemes, "coda")]:
+                pairwisescore = Syllable.biphonemeColByPart[part].pairwiseBiphonemeOrderScore
+                for p1 in phonemes:
+                    for p2 in phonemes:
+                        writeLine = ",".join([part, p1, p2, "%.1f"%pairwisescore.get((p1, p2), 0.0)])
+                        _ = f.write(writeLine + "\n")
         
+
+        with open(multiPhonemeAmbiguityFile, "w") as f:
+            for part in ["onset", "nucleus", "coda"]:
+                multiphonemes = self.syllableCollection.getMultiphonemeNames(part)
+                for m1i, m1 in enumerate(multiphonemes[:-1]):
+                    for m2 in multiphonemes[m1i + 1:]:
+                        conflict = self.syllabicPartAmbiguity[part].get((m1, m2),
+                                   self.syllabicPartAmbiguity[part].get((m2, m1), 0.0))
+                        writeLine = ",".join([part, "".join(m1), "".join(m2), "%.1f"%conflict])
+                        _ = f.write(writeLine + "\n")
+
+    def getAmbiguousMultiphonemes(self, theory: dict[tuple[tuple[int, ...], ...], list[Word]]) -> list[tuple[tuple[str, ...], float, list[Word]]]:
+        return []
+
+    def optimizeTheory_old(self, keyboard: Keyboard, theory: dict[tuple[tuple[int, ...], ...], list[Word]]) -> None:
+        """ 
+        Starting from the theory, tries to optimize the keymap to :
+            - minimize the number of ambiguities (strokes that generate more than one word)
+            - maximize the number of words that can be typed with the right order of strokes from left to right.
+            - minimize the strain of typing by assigning frequent phonemes to easier keys.
+            - find alternate strokes to differentiate homonymes
+        """
+
+        for i in range(100):
+            # Identify worst phoneme offenders by the sum frequency of the words they make ambiguous
+            ambiguousMultiphoneme: list[tuple[tuple[str, ...], float, list[Word]]]
+            ambiguousMultiphoneme = self.getAmbiguousMultiphonemes(theory)
+            for amp in ambiguousMultiphoneme:
+                for phoneme in amp[0]:
+                    bestStroke = self.findBestStrokeForPhoneme(amp, keyboard, theory)
+                    if bestStroke is not None:
+                        originalStroke = keyboard.getStrokesOfPhoneme(phoneme)
+                        keyboard.addToLayout(bestStroke, phoneme)
+                        keyboard.removeFromLayout(originalStroke, phoneme)
+                        #reassignedPhonemes += phoneme
 
 
 if __name__ == "__main__":
@@ -253,13 +337,9 @@ if __name__ == "__main__":
             Syllable.allPhonemeCol = pickle.load(pfile)
             Syllable.phonemeColByPart = pickle.load(pfile)
             Syllable.biphonemeColByPart = pickle.load(pfile)
-            dictionary: Dictionary = pickle.load(open("Dictionary.pickle", "rb"))
-#        dictionary.syllableCollection = pickle.load(open("Syllables.pickle", "rb"))
-        #del dictionary.words  # Remove the words to save memory
-        pp = PrettyPrinter(indent=4)
-        pp.pprint("Loaded dictionary from pickle file.")
-#        pp.pprint(dictionary.__dict__)
-        pp.pprint(dictionary.syllableCollection)
+            Syllable.multiphonemeColByPart = pickle.load(pfile)
+        print("Loaded dictionary from pickle file.")
+        print(dictionary.syllableCollection)
     else :
         dictionary = Dictionary()
 
@@ -267,35 +347,33 @@ if __name__ == "__main__":
         Syllable.optimizeBiphonemeOrder()
 
         dictionary.analyseAmbiguities()
-        pp = PrettyPrinter(indent=4)
-        pp.pprint(dictionary.syllableCollection)
         with open("Dictionary.pickle", "wb") as pfile:
             pickle.dump(dictionary, pfile)
             pickle.dump(Syllable.allPhonemeCol, pfile)
             pickle.dump(Syllable.phonemeColByPart, pfile)
             pickle.dump(Syllable.biphonemeColByPart, pfile)
+            pickle.dump(Syllable.multiphonemeColByPart, pfile)
 #        pickle.dump(dictionary.syllableCollection, open("Syllables.pickle", "wb"))
 
 #    sys.exit(1)
-    dictionary.printSyllabificationStats()
+
+    #dictionary.printSyllabificationStats()
 
 #   Create a default starboard keyboard and assign the keymap
     dictionary.generateBaseKeymap(starboard)
-    theory = dictionary.buildTheory(starboard)
-    with open("theory.tsv", "w") as f:
-        _ = f.write("strokes\twords\n")
-        maxAmbiguity = 0
-        maxAmbiguityWords = []
-        for syllableStrokes, words in theory.items():
-            strokeString = starboard.strokesToString(syllableStrokes)
-            wordOrthos = sorted(list(set(map(lambda w: w.ortho, words))))
-            if len(wordOrthos) > maxAmbiguity:
-                maxAmbiguity = len(wordOrthos)
-                maxAmbiguityWords = wordOrthos
-            _ = f.write(f"{strokeString}\t{','.join(wordOrthos)}\n")
-        
-        print("Max ambiguity:", maxAmbiguity, "for words", maxAmbiguityWords)
+
+    #theory = dictionary.buildTheory(starboard)
+
+    #dictionary.writeConstrainFiles()
+    #sys.exit(1)
+
+    #pprint.pprint(dictionary.wordsByOrtho["effraye"])
+    #dictionary.writeTheory(theory, "theory.tsv")
     #for syllableStrokes, words in theory.items():
     #    strokeString = starboard.strokesToString(syllableStrokes)
     #    print(strokeString, ":", list(map(lambda w: w.ortho, words)))
+    #dictionary.optimizeTheory(starboard, theory)
+
+    #dictionary.optimizeTheory(keyboard=starboard, theory=None)
+    optimizeTheory(starboard, dictionary.syllabicPartAmbiguity, ["coda"])
 
