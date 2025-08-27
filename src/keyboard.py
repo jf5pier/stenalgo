@@ -24,41 +24,44 @@ class FingerWeights(object):
     """
     Cost of using the different fingers in all their allowed keypresses on the keyboard.
     """
-    noPress: float = 0.0
-    pinky1keyHome: float = 1.25
-    pinky1keyOffHome: float = 1.50
-    pinky2keysVertHome: float = 1.75
-    pinky2keysVertOffHome: float = 2.00
-    pinky2keysHorzBottom: float = 2.5
-    pinky2keysHorzTop: float = 2.75
-    pinky4keys: float = 3.25
+    noPress: int = 0
+    pinky1keyHome: int = 125
+    pinky1keyOffHome: int = 150
+    pinky2keysVertHome: int = 175
+    pinky2keysVertOffHome: int = 200
+    pinky2keysHorzBottom: int = 250
+    pinky2keysHorzTop: int = 275
+    pinky4keys: int = 325
 
-    ringMid1key: float = 1.25
-    ringMid2keys: float= 1.75
+    ringMid1key: int = 125
+    ringMid2keys: int= 175
     
-    index1keyHome: float = 1.0
-    index1keyOffHome: float = 1.25
-    index2keysVert: float = 1.5
-    index2keysHorz: float = 1.75
-    index3keys: float = 2.0
+    index1keyHome: int = 100
+    index1keyOffHome: int = 125
+    index2keysVert: int = 150
+    index2keysHorz: int = 175
+    index3keys: int = 200
     
-    thumb1key: float = 1.0
-    thumb2keys: float = 1.5
+    thumb1key: int = 100
+    thumb2keys: int = 150
 
 @dataclass
 class PositionWeights(object):
-    leftPinky : dict[tuple[int, ...], float]
-    leftRing : dict[tuple[int, ...], float]
-    leftMiddle : dict[tuple[int, ...], float]
-    leftIndex : dict[tuple[int, ...], float]
-    leftThumb : dict[tuple[int, ...], float]
-    rightThumb : dict[tuple[int, ...], float]
-    rightIndex : dict[tuple[int, ...], float]
-    rightMiddle : dict[tuple[int, ...], float]
-    rightRing : dict[tuple[int, ...], float]
-    rightPinky : dict[tuple[int, ...], float]
+    leftPinky : dict[tuple[int, ...], int]
+    leftRing : dict[tuple[int, ...], int]
+    leftMiddle : dict[tuple[int, ...], int]
+    leftIndex : dict[tuple[int, ...], int]
+    leftThumb : dict[tuple[int, ...], int]
+    rightThumb : dict[tuple[int, ...], int]
+    rightIndex : dict[tuple[int, ...], int]
+    rightMiddle : dict[tuple[int, ...], int]
+    rightRing : dict[tuple[int, ...], int]
+    rightPinky : dict[tuple[int, ...], int]
+    fingers: tuple[str, ...] = ("leftPinky", "leftRing", "leftMiddle", "leftIndex",
+                          "leftThumb", "rightThumb", "rightIndex",
+                          "rightMiddle", "rightRing", "rightPinky")
 
-    def toList(self) -> list[tuple[tuple[int, ...], float]] :
+    def toList(self) -> list[tuple[tuple[int, ...], int]] :
         return (list(self.leftPinky.items())+ list(self.leftRing.items()) +
             list(self.leftMiddle.items()) + list(self.leftIndex.items()) +
             list(self.leftThumb.items()) + list(self.rightThumb.items()) +
@@ -66,9 +69,10 @@ class PositionWeights(object):
             list(self.rightRing.items()) + list(self.rightPinky.items()))
 
     def __iter__(self):
-        return (getattr(self, field.name) for field in fields(self))
+        return (getattr(self, field.name) 
+            for field in fields(self) if field.name != "fingers")
 
-    def __getitem__(self, key: str) -> dict[tuple[int, ...], float]:
+    def __getitem__(self, key: str) -> dict[tuple[int, ...], int]:
         return getattr(self, key)
 
 class Keyboard(ABC):
@@ -101,7 +105,7 @@ class Keyboard(ABC):
 
     def keypressBinaryEncodingSize(self) -> None:
         bitsNeeded = 0
-        fingerKeypressDict:dict[str, dict[tuple[int, ...], float]] = self._possibleKeypress.__dict__
+        fingerKeypressDict:dict[str, dict[tuple[int, ...], int]] = self._possibleKeypress.__dict__
         for finger in fingerKeypressDict:
             #print(finger, fingerKeypressDict[finger])
             if len(fingerKeypressDict[finger]) == 0:
@@ -117,6 +121,20 @@ class Keyboard(ABC):
     def getPossibleStrokes(self, syllabicPart: str, nbKeysInStroke: int) -> list[tuple[int, ...]]:
         """
         Get all permitted strokes in a syllabic part of a given number of keys
+        """
+        pass
+
+    @abstractmethod
+    def getPossibleStrokesInRange(self, syllabicPart: str, minNBKeysInStroke: int, maxNBKeysInStroke: int) -> list[tuple[int, ...]]:
+        """
+        Get all permitted strokes in a syllabic part of a range of number of keys
+        """
+        pass
+
+    @abstractmethod
+    def getStrokeCost(self, stroke: tuple[int, ...]) -> int:
+        """
+        Get the cost of pressing a stroke in a syllabic part
         """
         pass
 
@@ -285,7 +303,7 @@ Fingers assignments :
             self.keyIDinSyllabicPart[syllabicPart] = unassignedKeys[:partSize]
             unassignedKeys = unassignedKeys[partSize:]
 
-        #self.allowed1fingerKeypress: list[tuple[tuple[int, ...], float]] = list(
+        #self.allowed1fingerKeypress: list[tuple[tuple[int, ...], int]] = list(
         #    filter(lambda k : len(k[0]) == len(list(
         #        filter(lambda x: x in self.allowedKeys, list(k[0])))), self._possibleKeypress.toList()))
 
@@ -415,6 +433,33 @@ Fingers assignments :
         return strokes[:]
 
     @override
+    def getPossibleStrokesInRange(self, syllabicPart: str, minNBKeysInStroke: int, maxNBKeysInStroke: int) -> list[tuple[int, ...]]:
+        """ 
+        Return key IDs for keys that can be pressed together to register a phoneme, 
+        forming strokes of a range of number of keys.
+        """
+        strokesInRange: list[tuple[int, ...]] = []
+        for nb in range(minNBKeysInStroke, maxNBKeysInStroke+1):
+            strokesInRange += self.getPossibleStrokes(syllabicPart, nb)
+        return strokesInRange[:]
+
+    @override
+    def getStrokeCost(self, stroke: tuple[int, ...]) -> int:
+        """
+        Get the cost of pressing a stroke in a syllabic part defined by the sum of
+        costs associated to each finger used in the stroke.
+        """
+        keyFromFinger: dict[str, list[int]] = {f:[] for f in self._possibleKeypress.fingers}
+        cost: int = 0
+        for finger in self._possibleKeypress.fingers:
+            fingerKeypress = self._possibleKeypress[finger]
+            for key in stroke :
+                if (key,) in fingerKeypress.keys():
+                    keyFromFinger[finger].append(key)
+            cost += fingerKeypress[tuple(sorted(list(set(keyFromFinger[finger]))))]
+        return cost #* (len(stroke))
+
+    @override
     def getStrokeOfSyllableByPart(self, phonemesByPart: dict[str, list[str]]) -> tuple[int, ...]:
         """
         Get the list of strokes that builds a syllable.
@@ -472,3 +517,4 @@ if __name__ == "__main__":
     print("\nPhonetic rules of the english Ireland layout on the Starboard keyboard")
     sb.setIrelandEnglishLayout()
     sb.printLayout()  
+    sb.getStrokeCost((2,3))
