@@ -3,6 +3,8 @@ from dataclasses import dataclass, fields
 from math import log,ceil
 from abc  import ABC, abstractmethod
 from typing import override
+import json
+import ast
 
 """
 Nomenclature and concerns :
@@ -198,7 +200,70 @@ class Keyboard(ABC):
             elif stroke1[-1] > stroke2[-1]:
                 return 1
             else: #Begining and end are identical, strokes can only differ by their middle keys
-                return Keyboard.strokeIsLowerThen(stroke1[1:-1], stroke2[1:-1], recurse+1) #Compare the rest of the stroke
+                return Keyboard.strokeIsLowerThen(stroke1[1:-1],
+                                                  stroke2[1:-1],
+                                                  recurse+1) #Compare the rest of the stroke
+
+    def toJSON(self) -> str:
+        return json.dumps(
+            self,
+            default=lambda o: o.__dict__, 
+            sort_keys=True,
+            indent=4)
+
+    def toJSONFile(self, fileName:str) -> None:
+        def convert_keys_to_strings(obj):
+            if isinstance(obj, dict):
+                # Recursively call the function for nested dictionaries
+                return {
+                    str(k) if isinstance(k, tuple) else k: convert_keys_to_strings(v)
+                    for k, v in obj.items()
+                }
+            elif isinstance(obj, list):
+                # Recursively call the function for items in the list
+                return [convert_keys_to_strings(item) for item in obj]
+            else:
+                return obj
+
+        with open(fileName, "w", encoding="utf-8") as f:
+            json.dump(
+                convert_keys_to_strings(self.__dict__), # Call the conversion function on the object's dictionary
+                f,
+                indent=4
+            )
+
+    @classmethod
+    def fromJSONFile(cls, fileName: str):
+        """
+        Reads a JSON file and returns a new instance of the class.
+        It uses an object hook to convert string keys back to tuples.
+        """
+        def convert_keys_from_strings(dictionary):
+            """
+            Helper function for json.load's object_hook.
+            """
+            new_dict = {}
+            for key, value in dictionary.items():
+                try:
+                    # Safely evaluate the string to check if it's a tuple
+                    new_key = ast.literal_eval(key)
+                    if not isinstance(new_key, tuple):
+                        # If it's not a tuple after evaluation, use the original key
+                        new_key = key
+                except (ValueError, SyntaxError):
+                    # If evaluation fails, it's not a tuple string
+                    new_key = key
+
+                new_dict[new_key] = value
+            return new_dict
+
+        with open(fileName, "r", encoding="utf-8") as f:
+            data = json.load(f, object_hook=convert_keys_from_strings)
+        
+        # Return a new instance of the class with the deserialized data
+        instance = cls.__new__(cls)
+        instance.__dict__.update(data)
+        return instance #cls(data)
 
 
 
@@ -303,16 +368,8 @@ Fingers assignments :
             self.keyIDinSyllabicPart[syllabicPart] = unassignedKeys[:partSize]
             unassignedKeys = unassignedKeys[partSize:]
 
-        #self.allowed1fingerKeypress: list[tuple[tuple[int, ...], int]] = list(
-        #    filter(lambda k : len(k[0]) == len(list(
-        #        filter(lambda x: x in self.allowedKeys, list(k[0])))), self._possibleKeypress.toList()))
-
         self.nbKeys: int = len(self._keyIndexes)
         
-        #listKeypresses: list[list[tuple[int, ...]]] = list(
-        #    map(lambda f: list(f.keys()), self._possibleKeypress.__dict__.values()))
-        #flatKeypresses: list[tuple[int, ...]] = [item for sublist in listKeypresses for item in sublist]
-        #self.maxKeyPerFinger: int = max(list(map(len, flatKeypresses)))
         return
 
     @override
@@ -553,19 +610,19 @@ if __name__ == "__main__":
     sb.printTemplate()
     sb.keypressBinaryEncodingSize()
 
-    print("\nPhonetic rules of the english Ireland layout on the Starboard keyboard")
+    print("-----\nPhonetic rules of the english Ireland layout on the Starboard keyboard\n")
     sb.setIrelandEnglishLayout()
     sb.printLayout()  
-    sb.getStrokeCost((2,3), "onset")
 
-    strokes = sb.getPossibleStrokesInRange("onset", 1, 5)
-    from functools import cmp_to_key
-    strokes.sort(key=cmp_to_key(sb.strokeIsLowerThen))
-    for s in strokes :
-        if s[0] == 2:
-            print(s, sb.getStrokeShapeCost(s))
+    print("-----\nPhonetic rules of the Stenalgo French (1h optimization) Starboard keyboard\n")
+    sb = Starboard.fromJSONFile("starboard1h.json")
+    sb.printLayout()  
+    # strokes = sb.getPossibleStrokesInRange("onset", 1, 5)
+    # from functools import cmp_to_key
+    # strokes.sort(key=cmp_to_key(sb.strokeIsLowerThen))
+    # for s in strokes :
+    #     if s[0] == 2:
+    #         print(s, sb.getStrokeShapeCost(s))
     # for s in strokes :
     #     if s[0] == 3:
     #         print(s, sb.getStrokeShapeCost(s))
-    print("--")
-    print(sb.getStrokeShapeCost((2,5,6,9)))
