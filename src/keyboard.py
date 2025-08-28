@@ -132,7 +132,7 @@ class Keyboard(ABC):
         pass
 
     @abstractmethod
-    def getStrokeCost(self, stroke: tuple[int, ...]) -> int:
+    def getStrokeCost(self, stroke: tuple[int, ...], syllabicPart: str) -> int:
         """
         Get the cost of pressing a stroke in a syllabic part
         """
@@ -143,7 +143,7 @@ class Keyboard(ABC):
         pass
 
     @abstractmethod
-    def addToLayout(self, stroke: tuple[int, ...], phonem: str) -> None:
+    def addToLayout(self, stroke: tuple[int, ...], phoneme: str) -> None:
         """
         Add a phoneme to the layout and assign it to a keypress.
         """
@@ -205,13 +205,13 @@ class Keyboard(ABC):
 class Starboard(Keyboard):
     _keyboardTemplate: str = \
 """
-┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓       ┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓
-┃{0: ^4}┃{2: ^4}┃{4: ^4}┃{6: ^4}┃{8: ^4}┃    ┃       ┃    ┃{16: ^4}┃{18: ^4}┃{20: ^4}┃{22: ^4}┃{24: ^4}┃
-┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫{10: ^4}┃       ┃{15: ^4}┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫
-┃{1: ^4}┃{3: ^4}┃{5: ^4}┃{7: ^4}┃{9: ^4}┃    ┃       ┃    ┃{17: ^4}┃{19: ^4}┃{21: ^4}┃{23: ^4}┃{25: ^4}┃
-┗━━━━┻━━━━┻━━━━┻━━━━┻━━┳━┻━━┳━┻━━┓ ┏━━┻━┳━━┻━┳━━┻━━━━┻━━━━┻━━━━┻━━━━┛
-                       ┃{11: ^4}┃{12: ^4}┃ ┃{13: ^4}┃{14: ^4}┃
-                       ┗━━━━┻━━━━┛ ┗━━━━┻━━━━┛"""
+┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓         ┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓
+┃{0: ^5}┃{2: ^5}┃{4: ^5}┃{6: ^5}┃{8: ^5}┃     ┃         ┃     ┃{16: ^5}┃{18: ^5}┃{20: ^5}┃{22: ^5}┃{24: ^5}┃
+┣━━━━━╋━━━━━╋━━━━━╋━━━━━╋━━━━━┫{10: ^5}┃         ┃{15: ^5}┣━━━━━╋━━━━━╋━━━━━╋━━━━━╋━━━━━┫
+┃{1: ^5}┃{3: ^5}┃{5: ^5}┃{7: ^5}┃{9: ^5}┃     ┃         ┃     ┃{17: ^5}┃{19: ^5}┃{21: ^5}┃{23: ^5}┃{25: ^5}┃
+┗━━━━━┻━━━━━┻━━━━━┻━━━━━┻━━━┳━┻━━━┳━┻━━━┓ ┏━━━┻━┳━━━┻━┳━━━┻━━━━━┻━━━━━┻━━━━━┻━━━━━┛
+                            ┃{11: ^5}┃{12: ^5}┃ ┃{13: ^5}┃{14: ^5}┃
+                            ┗━━━━━┻━━━━━┛ ┗━━━━━┻━━━━━┛"""
 
     _printableKeyLayout: str = """
 Keys indexes :
@@ -317,7 +317,7 @@ Fingers assignments :
 
     @override
     def printLayout(self) -> None:
-        maxKeyPress = max(list(map(len, self.phonemesAssignedToStroke.keys())))
+        maxKeyPress = max(list(map(len, self.phonemesAssignedToStroke.keys()))+[0])
         for i in range(1, maxKeyPress+1):
             nbKeys = 0
             phonemeKeymapList = self.nbKeys * [""]
@@ -338,9 +338,9 @@ Fingers assignments :
         self.phonemesAssignedToStroke = {}
 
     @override
-    def addToLayout(self, stroke: tuple[int, ...], phonem: str) -> None:
+    def addToLayout(self, stroke: tuple[int, ...], phoneme: str) -> None:
         existingKeypressPhoneme = self.phonemesAssignedToStroke.get(stroke, [])
-        existingKeypressPhoneme.append(phonem)
+        existingKeypressPhoneme.append(phoneme)
         self.phonemesAssignedToStroke[stroke] = existingKeypressPhoneme
     
     @override
@@ -444,20 +444,59 @@ Fingers assignments :
         return strokesInRange[:]
 
     @override
-    def getStrokeCost(self, stroke: tuple[int, ...]) -> int:
+    def getStrokeCost(self, stroke: tuple[int, ...], syllabicPart: str) -> int:
         """
         Get the cost of pressing a stroke in a syllabic part defined by the sum of
         costs associated to each finger used in the stroke.
         """
         keyFromFinger: dict[str, list[int]] = {f:[] for f in self._possibleKeypress.fingers}
         cost: int = 0
+        fingerInUse: set[str] = set()
         for finger in self._possibleKeypress.fingers:
             fingerKeypress = self._possibleKeypress[finger]
             for key in stroke :
                 if (key,) in fingerKeypress.keys():
                     keyFromFinger[finger].append(key)
+                    fingerInUse.add(finger)
             cost += fingerKeypress[tuple(sorted(list(set(keyFromFinger[finger]))))]
-        return cost #* (len(stroke))
+        if syllabicPart in ["onset", "coda"]:
+            cost += self.getStrokeShapeCost(stroke)
+        return int(cost * 0.85 **len(fingerInUse)) #Discount for using multiple fingers
+
+    def _strokeZigZagCost(self, stroke: tuple[int, ...]) -> int:
+        s1, s2 = stroke
+        if (s1 % 2 == 0 and s2 % 2 == 1 and s2 - s1 == 3):
+            # Zig Zag : Keys on different sides of the keyboard
+            return 100
+        elif (s1 % 2 == 1 and s2 % 2 == 0 and s2 - s1 == 1):
+            return 100
+        return 0
+
+    def _strokeGapCost(self, stroke: tuple[int, ...]) -> int:
+        s1, s2 = stroke
+        if (s1 % 2 == 0 and s2 - s1 >= 4) or (s1 % 2 == 1 and s2 - s1 >= 3) :
+            # Gap : there is an empty row between the two keys
+            return 100
+        return 0
+
+    def getStrokeShapeCost(self, stroke: tuple[int, ...]) -> int:
+        cost = 0
+        if len(stroke) == 2 :
+            cost += self._strokeZigZagCost(stroke)
+            cost += self._strokeGapCost(stroke)
+        elif len(stroke) >= 3 :
+            cost += self.getStrokeShapeCost(stroke[0:2])
+            cost += self.getStrokeShapeCost(stroke[1:])
+            s1,s2,s3 = stroke[:3]
+            if( s1%2 == 0 and s3 - s1 == 2): # The 2,3,4 case
+                cost -= 50
+            elif( s1%2 == 0 and s3 - s1 == 3): # The 2,3,5 / 2,4,5 case
+                cost += 50
+            elif( s1%2 == 1 and s3 - s1 == 2): # The 3,4,5 case
+                cost += 50
+            if( len(stroke) >= 4 and s1%2 == 0 and stroke[3] - s1 == 3): # The 2,3,4,5 case
+                cost -= 100
+        return cost
 
     @override
     def getStrokeOfSyllableByPart(self, phonemesByPart: dict[str, list[str]]) -> tuple[int, ...]:
@@ -517,4 +556,16 @@ if __name__ == "__main__":
     print("\nPhonetic rules of the english Ireland layout on the Starboard keyboard")
     sb.setIrelandEnglishLayout()
     sb.printLayout()  
-    sb.getStrokeCost((2,3))
+    sb.getStrokeCost((2,3), "onset")
+
+    strokes = sb.getPossibleStrokesInRange("onset", 1, 5)
+    from functools import cmp_to_key
+    strokes.sort(key=cmp_to_key(sb.strokeIsLowerThen))
+    for s in strokes :
+        if s[0] == 2:
+            print(s, sb.getStrokeShapeCost(s))
+    # for s in strokes :
+    #     if s[0] == 3:
+    #         print(s, sb.getStrokeShapeCost(s))
+    print("--")
+    print(sb.getStrokeShapeCost((2,5,6,9)))
