@@ -13,6 +13,14 @@ def optimizeTheory(keyboard: Keyboard,
     """
     Using OR-tools, encode the optimisation rules and objectives to find the best keymap.
     """
+    PARTS: list[str] = syllabicParts
+    STROKE_ASSIGNMENT_PENALTY = 1
+    AMBIGUITY_PENALTY = 30000
+    ORDER_PENALTY= 500
+    SOLVER_TIME = 30.0  # seconds
+    SOLVER_LOG = False
+    MAX_MULTIPHONEMES: int = 3000
+
     class _SolutionPrinter(cp_model.CpSolverSolutionCallback):
         """Callback to print intermediate solutions."""
 
@@ -25,28 +33,29 @@ def optimizeTheory(keyboard: Keyboard,
             self.__last_print_time = self.__first_print_time
             self.__print_interval = print_interval_seconds
             self.__variables = [] if variables == None else variables
+            self.__print_count = 0
 
         def on_solution_callback(self) -> None:
             """Called by the solver when a new solution is found."""
             current_time = time.time()
             self.__solution_count += 1
+            self.__print_count += 1
+            nbLines = len(self.__variables) + 1
             elapsed_time = current_time - self.__first_print_time
-            if current_time - self.__last_print_time >= self.__print_interval:
+            if self.__solution_count == 1 \
+                    or current_time - self.__last_print_time >= self.__print_interval:
+                # Clear before printing
+                if self.__print_count > 3:
+                    for _ in range(nbLines):
+                        print("\033[1A", end="")
+                        print("\033[2K", end="")
                 print(f'Solution {self.__solution_count}:'
-                      + f' objective = {self.ObjectiveValue()}, elapsed = {elapsed_time:.2f} s')
-                print("Number of variables =", len(self.__variables))
+                    + f' objective = {self.ObjectiveValue():,}, elapsed = {elapsed_time:.2f} s')
                 for v in self.__variables:
-                    print(f'  {v.Name()} = {self.Value(v)}')
+                    print(f'  {v.Name():>32} = {self.Value(v):,}')
                 self.__last_print_time = current_time
 
     
-    PARTS: list[str] = syllabicParts
-    STROKE_ASSIGNMENT_PENALTY = 1
-    KEY_ASSIGNMENT_PENALTY = 1
-    OVERLAP_PENALTY = 3000
-    SOLVER_TIME = 60.0  # seconds
-    SOLVER_LOG = False
-    MAX_MULTIPHONEMES: int = 500
     
     phonemesByPart: dict[str, str] = {
         "onset": Phoneme.consonantPhonemes[:],
@@ -59,7 +68,7 @@ def optimizeTheory(keyboard: Keyboard,
 
     keysInPart: dict[str, list[int]] = {p: keyboard.keyIDinSyllabicPart[p][:] for p in PARTS}
 
-    # --- 2. Generate Symbol Groups ---
+    # Generate Symbol Groups
     # The groups are now all possible combinations of 1 to N phonemes found in syllabic part of words.
     multiphonemesInPart: dict[str, list[tuple[str, ...]]] = { }
     for part in PARTS:
@@ -69,17 +78,17 @@ def optimizeTheory(keyboard: Keyboard,
             multiphonemesInPart[part].append(mp2)
         multiphonemesInPart[part] = list(set(multiphonemesInPart[part]))
         
-    sortedMultiphonemeAmbiInPart: dict[str, list[tuple[tuple[tuple[str, ...], tuple[str, ...]], float]]] = {p:[] for p in PARTS}
+    sortedMultiphonemeAmbiguity: dict[str, list[tuple[tuple[tuple[str, ...], tuple[str, ...]], float]]] = {p:[] for p in PARTS}
     for part in PARTS:
         for mpi1,mp1 in enumerate(multiphonemesInPart[part][:-1]):
             for mp2 in multiphonemesInPart[part][mpi1+1:]:
                 ambiguity: float = syllabicPartAmbiguity[part].get((mp1,mp2), syllabicPartAmbiguity[part].get((mp2,mp1), 0.0))
-                sortedMultiphonemeAmbiInPart[part].append(((mp1,mp2), ambiguity))
-        sortedMultiphonemeAmbiInPart[part].sort(key=lambda mp : mp[1], reverse=True)
+                sortedMultiphonemeAmbiguity[part].append(((mp1,mp2), ambiguity))
+        sortedMultiphonemeAmbiguity[part].sort(key=lambda mp : mp[1], reverse=True) # Sort by ambiguity descending
 
     selectedMultiphonemesAmbiguity: dict[str, dict[tuple[tuple[str, ...], tuple[str, ...]], float]] = {}
     for part in PARTS:
-         selectedMultiphonemesAmbiguity[part] =  {mp:cost for mp, cost in sortedMultiphonemeAmbiInPart[part][:MAX_MULTIPHONEMES]}
+         selectedMultiphonemesAmbiguity[part] =  {mp:cost for mp, cost in sortedMultiphonemeAmbiguity[part][:MAX_MULTIPHONEMES]}
 
     strokesInPart: dict[str, list[tuple[int, ...]]] = {p: [] for p in PARTS}
     for part in PARTS:
@@ -107,7 +116,7 @@ def optimizeTheory(keyboard: Keyboard,
                 keyIsAssignedToPhoneme[part][(phoneme, key)] = \
                     model[part].NewBoolVar(f'k_{phoneme}_{key}')
             
-            # Constraint 1: Each symbol's key set size must be between 1 and maxKeysPerPhoneme.
+            # Each symbol's key set size must be between 1 and maxKeysPerPhoneme.
             _ = model[part].Add(sum(keyIsAssignedToPhoneme[part][phoneme, k]
                     for k in keysInPart[part]) >= 1)
 
@@ -141,6 +150,24 @@ def optimizeTheory(keyboard: Keyboard,
             # Force exactly one stroke to be assigned to the phoneme.
             _ = model[part].Add(sum(strokeIsAssignedToPhoneme[part][phoneme, s] for s in strokesInPart[part]) == 1)
             
+    ###
+    # Add hints based on the provided keyboard layout.
+    #
+    for part in PARTS:
+        for phoneme in phonemesByPart[part]:
+            keyboardStrokes = keyboard.getStrokesOfPhoneme(phoneme, part)
+            keyHintedPositive = {key:0 for key in keysInPart[part]}
+            for stroke in strokesInPart[part]:
+                if stroke in keyboardStrokes:
+                    _ = model[part].AddHint(strokeIsAssignedToPhoneme[part][(phoneme, stroke)], 1)
+                    for key in stroke:
+                        _ = model[part].AddHint(keyIsAssignedToPhoneme[part][(phoneme, key)], 1)
+                        keyHintedPositive[key] = 1
+                else :
+                    _ = model[part].AddHint(strokeIsAssignedToPhoneme[part][(phoneme, stroke)], 0)
+            for key in keysInPart[part]:
+                if keyHintedPositive[key] == 0:
+                    _ = model[part].AddHint(keyIsAssignedToPhoneme[part][(phoneme, key)], 0)
 
     # A boolean variable that is True if key 'k' is in the key set
     # of multiphoneme 'mp' (the union of keys from all phonemes in syllabiic part).
@@ -159,21 +186,19 @@ def optimizeTheory(keyboard: Keyboard,
         keysetsAreIdentical[part] = {}
         for mp1i,mp1 in enumerate(multiphonemesInPart[part][:-1]):
             for mp2 in multiphonemesInPart[part][mp1i+1:]:
-                mp1_str = "".join(mp1)
-                mp2_str = "".join(mp2)
                 keysetsAreIdentical[part][mp1, mp2] = \
-                    model[part].NewBoolVar(f'is_keyset_identical_{part[0]}_{mp1_str}_{mp2_str}')
+                    model[part].NewBoolVar(f'is_keyset_identical_{part[0]}_{mp1}_{mp2}')
 
 
-    # Constraint 2: Model the key set of a group of phonemes as the union of its phonemes' key sets.
+    # Model the key set of a group of phonemes as the union of its phonemes' key sets.
     # multiphonemesKeys[mp, k] is true if and only if key 'k' is assigned to at least one symbol in multiphoneme'mp'.
     for part in PARTS:
         for multiphoneme in multiphonemesInPart[part]:
             for k in keysInPart[part]:
                 # We need a boolean variable to represent the condition: "at least one phoneme in multiphoneme
                 # has key k assigned".
-                mp_str = "".join(multiphoneme)
-                atLeastOnePhonemeHasKey = model[part].NewBoolVar(f'keyset_has_key{part[0]}_{mp_str}_{k}')
+                atLeastOnePhonemeHasKey = \
+                    model[part].NewBoolVar(f'keyset_has_key{part[0]}_{multiphoneme}_{k}')
 
                 # Add constraints to define the meaning of at_least_one_symbol_has_key. First, one phoneme
                 # must be associated to the key.
@@ -204,9 +229,12 @@ def optimizeTheory(keyboard: Keyboard,
                 # _ = model[part].AddBoolOr(keyIsAssignedToPhoneme[part][phoneme, k].Not()
                 #         for phoneme in multiphoneme).OnlyEnforceIf(multiphonemeHasKey[part][multiphoneme, k].Not())
 
-    # Constraint 3: Model the identical key set relationship.
-    # `mp1` is identical to `mp2` if and only if multiphonemeKeys[mp1,k] is equal multiphonemeKeys[mp2,k] for all k.
-    mismatch_literals: dict[str, dict[tuple[tuple[str, ...], tuple[str, ...]], dict[int, IntVar]]] = {p:{} for p in PARTS}
+    # Model the identical keysets relationship:
+    #   `mp1`  keyset is identical to `mp2` keyset if and only
+    #   if multiphonemeKeys[mp1,k] is equal multiphonemeKeys[mp2,k] for all k.
+    mismatch_literals: dict[str, dict[tuple[tuple[str, ...], tuple[str, ...]], dict[int, IntVar]]] = {
+        p:{} for p in PARTS}
+
     for part in PARTS:
         for mp1i,mp1 in enumerate(multiphonemesInPart[part][:-1]):
             for mp2 in multiphonemesInPart[part][mp1i+1:]:
@@ -235,55 +263,98 @@ def optimizeTheory(keyboard: Keyboard,
                 #_ = model[part].AddBoolOr(mismatch_literals[part][mp1,mp2][k] 
                 #       for k in keysInPart[part]).OnlyEnforceIf(is_keyset_identical[part][mp1, mp2].Not())
 
+    # Model the left to right order of phonemes on the keyboard.
+    # Strokes are ordered by keyboard.strokeIsLowerThen(stroke1, stroke2), start by giving them an index.
+    strokeIndex: dict[str, dict[tuple[int, ...], int]] = {
+        part: {stroke: i for i, stroke in enumerate(strokesInPart[part])} for part in PARTS
+    }
 
+    # Add the relationship "phoneme1 is before phoneme2".
+    phonemePosition: dict[str, dict[str, IntVar]] = {p:{} for p in PARTS}
+    phoneme1IsBefore2: dict[str, dict[tuple[str, str], IntVar]] = {p:{} for p in PARTS}
+    phonemeSharePosition: dict[str, dict[tuple[str, str], IntVar]] = {p:{} for p in PARTS}
+    for part in PARTS:
+        for phoneme in phonemesByPart[part]:
+            # Establish a link between phonemes, strokes and index of stroke
+            phonemePosition[part][phoneme] = \
+                model[part].NewIntVar(0, len(strokesInPart[part])-1, f'position_{phoneme}_{part}')
+            for stroke in strokesInPart[part]:
+                _ = model[part].Add(
+                phonemePosition[part][phoneme] == strokeIndex[part][stroke]).OnlyEnforceIf(
+                    strokeIsAssignedToPhoneme[part][(phoneme, stroke)])
+                _ = model[part].Add(
+                phonemePosition[part][phoneme] != strokeIndex[part][stroke]).OnlyEnforceIf(
+                    strokeIsAssignedToPhoneme[part][(phoneme, stroke)].Not())
+
+        #_ = model[part].AddAllDifferent(list(phonemePosition[part].values()))
+
+        for p1i, p1 in enumerate(phonemesByPart[part][:-1]):
+            for p2 in phonemesByPart[part][p1i+1:]:
+
+                # Define the order relationship of variables
+                phoneme1IsBefore2[part][p1, p2] = model[part].NewBoolVar(f'pos_{p1}_before_{p2}_{part}')
+                phonemeSharePosition[part][p1, p2] = model[part].NewBoolVar(f'pos_shared_{p1}_{p2}_{part}')
+                
+                _ = model[part].Add(phonemePosition[part][p1] < phonemePosition[part][p2]).OnlyEnforceIf(
+                    phoneme1IsBefore2[part][p1, p2])
+                _ = model[part].Add(phonemePosition[part][p1] >= phonemePosition[part][p2]).OnlyEnforceIf(
+                    phoneme1IsBefore2[part][p1, p2].Not())
+
+                _ = model[part].Add(phonemePosition[part][p1] == phonemePosition[part][p2]).OnlyEnforceIf(
+                    phonemeSharePosition[part][p1, p2])
+                _ = model[part].Add(phonemePosition[part][p1] != phonemePosition[part][p2]).OnlyEnforceIf(
+                    phonemeSharePosition[part][p1, p2].Not())
+
+    ######
     # --- Define the Objective Function ---
     # The total cost is defined by 3 metrics :
     # - The amount of ambiguity of overlapping keyset representing multiphonemes that are ambiguous.
     # - The complexity/ergonomy of strokes assigned to each phoneme times their respecting frequency.
-    # - Todo: The order of phonemes on the keyboard respecting phoneme order in words.
+    # - The order of phonemes on the keyboard respecting phoneme order in words.
+    #
     maxAmbiguity: dict[str, int] = {}
     overlapCosts: dict[str, IntVar] = {}
     for part in PARTS:
-        maxAmbiguity[part] = int(sum(selectedMultiphonemesAmbiguity[part].values()) * OVERLAP_PENALTY )
-        overlapCosts[part] = model[part].NewIntVar(0, maxAmbiguity[part], 'overlap_cost_{part}')
+        maxAmbiguity[part] = int(sum(selectedMultiphonemesAmbiguity[part].values()) * AMBIGUITY_PENALTY )
+        overlapCosts[part] = model[part].NewIntVar(0, maxAmbiguity[part], f'multiphoneme_ambiguity_cost_{part}')
 
+    ###
     # Define multiphoneme overlap costs
-    multiphonemeOverlapCost: dict[str, dict[tuple[tuple[str, ...], tuple[str, ...]], IntVar ]] = {
+    #
+    multiphonemeAmbiguityCost: dict[str, dict[tuple[tuple[str, ...], tuple[str, ...]], IntVar ]] = {
             p:{} for p in PARTS}
     for part in PARTS:
-        for mp1i,mp1 in enumerate(multiphonemesInPart[part][:-1]):
-            for mp2 in multiphonemesInPart[part][mp1i+1:]:
-                if mp1 != mp2 and (mp1,mp2) in selectedMultiphonemesAmbiguity[part]:
-                    multiphonemeOverlapCost[part][mp1, mp2] = \
-                        model[part].NewIntVar(0, maxAmbiguity[part], 
-                                              f'multiphonemeOverlapCost_{part[0]}_{mp1}_{mp2}')
+        for (mp1,mp2) in selectedMultiphonemesAmbiguity[part]:
+            multiphonemeAmbiguityCost[part][mp1, mp2] = \
+                model[part].NewIntVar(0, maxAmbiguity[part], 
+                                        f'multiphoneme_overlap_cost_{part[0]}_{mp1}_{mp2}')
 
-                    # Define de Ovelap cost (ambiguity penalty) for each pair of multiphonemes
-                    _ = model[part].Add(multiphonemeOverlapCost[part][mp1, mp2]
-                                == int(selectedMultiphonemesAmbiguity[part][mp1, mp2])
-                                        * keysetsAreIdentical[part][mp1, mp2])
+            # Define de Ovelap cost (ambiguity penalty) for each pair of multiphonemes
+            _ = model[part].Add(multiphonemeAmbiguityCost[part][mp1, mp2]
+                        == int(selectedMultiphonemesAmbiguity[part][mp1, mp2]
+                                * AMBIGUITY_PENALTY)).OnlyEnforceIf(keysetsAreIdentical[part][mp1, mp2])
+            _ = model[part].Add(multiphonemeAmbiguityCost[part][mp1, mp2]
+                        == 0).OnlyEnforceIf(keysetsAreIdentical[part][mp1, mp2].Not())
         
         # Get the total overlap cost for the part
-        _ = model[part].Add(overlapCosts[part] == sum(multiphonemeOverlapCost[part][mp1, mp2]
-                    * OVERLAP_PENALTY for (mp1,mp2) in selectedMultiphonemesAmbiguity[part] ))
+        _ = model[part].Add(overlapCosts[part] == sum(multiphonemeAmbiguityCost[part][mp1, mp2]
+                     for (mp1,mp2) in selectedMultiphonemesAmbiguity[part] ))
 
+    ###
     # Define the stroke penalty cost based on stroke complexity and phoneme frequency.
-    strokeCosts: dict[tuple[int, ...], int] = {
-        stroke: int(keyboard.getStrokeCost(stroke)) for p in PARTS for stroke in strokesInPart[p]}
-    maxStrokeCost = max(strokeCosts.values())
+    #
+    strokeCosts: dict[str, dict[tuple[int, ...], int]] = {p: {
+        stroke: int(keyboard.getStrokeCost(stroke, p)) for stroke in strokesInPart[p]}
+        for p in PARTS}
+    maxStrokeCost = {part: max(strokeCosts[part].values()) for part in PARTS}
 
     phonemeFrequency: dict[str, dict[str, int]] = {part: {
         p: int(Syllable.phonemeColByPart[part].phonemeNames[p].frequency)
         for p in phonemesByPart[part]} for part in PARTS}
-    #print("Phoneme frequencies:", phonemeFrequency)
 
     maxStrokesPenalty: dict[str, int] = {
-        part: maxStrokeCost * sum(phonemeFrequency[part][p] for p in phonemesByPart[part])
+        part: maxStrokeCost[part] * sum(phonemeFrequency[part][p] for p in phonemesByPart[part])
             * STROKE_ASSIGNMENT_PENALTY for part in PARTS }
-
-    # for part in PARTS:
-    #     print(f'Phoneme frequencies: ', {p: phonemeFrequency[part][p]
-    #          for p in phonemesByPart[part]})
 
     allStrokesPenaltyCost: dict[str, IntVar] = {}
     strokePenaltyCost: dict[str, dict[tuple[int, ...], IntVar]] = {p:{} for p in PARTS}
@@ -293,115 +364,176 @@ def optimizeTheory(keyboard: Keyboard,
             strokePenaltyCost[part][stroke] = model[part].NewIntVar(0, maxStrokesPenalty[part], f'stroke_{stroke}_cost')
             _ = model[part].Add(strokePenaltyCost[part][stroke] == sum(
                 strokeIsAssignedToPhoneme[part][p, stroke] * STROKE_ASSIGNMENT_PENALTY
-                * phonemeFrequency[part][p] * strokeCosts[stroke] for p in phonemesByPart[part] ))
+                * phonemeFrequency[part][p] * strokeCosts[part][stroke] for p in phonemesByPart[part] ))
 
-        allStrokesPenaltyCost[part] = model[part].NewIntVar(0, maxStrokesPenalty[part], 'strokes_penalty_cost')
+        allStrokesPenaltyCost[part] = model[part].NewIntVar(0, maxStrokesPenalty[part], f'strokes_penalty_cost_{part}')
         _ = model[part].Add(allStrokesPenaltyCost[part] == sum(
             strokePenaltyCost[part][stroke] for stroke in strokesInPart[part]))
-        
-    # key_penalty_cost: dict[str, IntVar] = {}
-    # maxNbKeyPenalty: dict[str, int] = {}
-    # for part in PARTS:
-    #     maxNbKeyPenalty[part] = int( keyboard.maxKeysPerPhoneme[part] * KEY_ASSIGNMENT_PENALTY 
-    #         * sum(p.frequency for p in Syllable.phonemeColByPart[part].phonemes))
-    #     key_penalty_cost[part] = model[part].NewIntVar(0, maxNbKeyPenalty[part], 'key_penalty_cost')
-    #
-    #     # Define the penalty associated to the average number of keys assigned to each phoneme 
-    #     # Used to keep the keysets small.
-    #     _ = model[part].Add(key_penalty_cost[part] == sum(
-    #         keyIsAssignedToPhoneme[part][p, k] * KEY_ASSIGNMENT_PENALTY
-    #         * int(Syllable.phonemeColByPart[part].phonemeNames[p].frequency)
-    #         for p in phonemesByPart[part] for k in keysInPart[part]))
 
+    ###
+    # Define the phoneme pair order penalty cost based on phoneme order matrix.
+    #
+    phonemePairsOrderPenaltyCost: dict[str, dict[tuple[str, str], IntVar]] = {p:{} for p in PARTS}
+    allPhonemePairsOrderPenaltyCost: dict[str,  IntVar] = {}
+    minScore: dict[str, dict[str, int]] = {part:{p: 0 for p in phonemesByPart[part]} for part in PARTS}
+    maxScore: dict[str, dict[str, int]] = {part:{p: 0 for p in phonemesByPart[part]} for part in PARTS}
     for part in PARTS:
-        print("Max Multiphoneme Ambiguity:", maxAmbiguity[part], "Max Strokes penalty:", maxStrokesPenalty[part])
-        total_cost: IntVar = model[part].NewIntVar(0, maxAmbiguity[part] + maxStrokesPenalty[part] , 'total_cost')
+        pairwiseScore = {biphoneme: int(score) * ORDER_PENALTY
+            for biphoneme, score in Syllable.biphonemeColByPart[part].pairwiseBiphonemeOrderScore.items()}
+        for p1 in phonemesByPart[part]:
+            for p2 in phonemesByPart[part]:
+                if (p1, p2) not in pairwiseScore:
+                    pairwiseScore[p1, p2] = 0
+
+        for p1i, p1 in enumerate(phonemesByPart[part][:-1]):
+            for p2 in phonemesByPart[part][p1i+1:]:
+                minScore[part][p1] += min(pairwiseScore[p1, p2], pairwiseScore[p2, p1])
+                maxScore[part][p1] += max(pairwiseScore[p1, p2], pairwiseScore[p2, p1])
+                minScore[part][p2] += min(pairwiseScore[p1, p2], pairwiseScore[p2, p1])
+                maxScore[part][p2] += max(pairwiseScore[p1, p2], pairwiseScore[p2, p1])
+
+        for p1i, p1 in enumerate(phonemesByPart[part][:-1]):
+            for p2 in phonemesByPart[part][p1i+1:]:
+                # if not(pairwiseScore[p1, p2] == 0 and pairwiseScore[p2, p1] == 0):
+                #     print(f'Pairwise order score for {part} {p1},{p2}: {pairwiseScore[p1, p2]}, {p2},{p1}: {pairwiseScore[p2, p1]}')
+
+                phonemePairsOrderPenaltyCost[part][p1, p2] = \
+                    model[part].NewIntVar(minScore[part][p1], maxScore[part][p2],
+                                          f'order_penalty_{p1}_{p2}_{part}')
+
+                _ = model[part].Add(phonemePairsOrderPenaltyCost[part][p1, p2] == \
+                    pairwiseScore[p1, p2] * phoneme1IsBefore2[part][p1, p2] + \
+                    pairwiseScore[p2, p1] * phoneme1IsBefore2[part][p1, p2].Not()).OnlyEnforceIf(
+                    phonemeSharePosition[part][p1, p2].Not())
+
+                # If the phoneme are sharing a stroke, take half of the order penalty
+                _ = model[part].Add(phonemePairsOrderPenaltyCost[part][p1, p2] == \
+                    int((pairwiseScore[p1, p2] + pairwiseScore[p2, p1])/2)).OnlyEnforceIf(
+                    phonemeSharePosition[part][p1, p2])
+
+        allPhonemePairsOrderPenaltyCost[part] = model[part].NewIntVar(
+                sum(minScore[part].values()), sum(maxScore[part].values()), f'phoneme_order_penalty_cost_{part}')
+        _ = model[part].Add(allPhonemePairsOrderPenaltyCost[part] == \
+                            sum(phonemePairsOrderPenaltyCost[part].values()))
+
+    ###
+    # Define the total cost of all 3 constraints
+    #
+    total_cost: dict[str, IntVar] = {}
+    for part in PARTS:
+        print(f'Part {part}, Max Multiphoneme Ambiguity: {maxAmbiguity[part]:,},' +
+            f' Max Strokes penalty: {maxStrokesPenalty[part]:,}' +
+            f' Max order penalty: {sum(maxScore[part].values()):,}')
+        total_cost[part] = model[part].NewIntVar(sum(minScore[part].values()), 
+                                maxAmbiguity[part] + maxStrokesPenalty[part] + sum(maxScore[part].values()),
+                                'total_cost')
 
         # Define the total cost to optimize.
-        _ = model[part].Add(total_cost == (overlapCosts[part] + allStrokesPenaltyCost[part])  )
-        model[part].Minimize(total_cost)
+        _ = model[part].Add(total_cost[part] == \
+                            overlapCosts[part] + allStrokesPenaltyCost[part] \
+                            + allPhonemePairsOrderPenaltyCost[part])
+
+        model[part].Minimize(total_cost[part])
 
     # Solve
-    print("Solving the model...")
-    solver = cp_model.CpSolver()
-    solver.parameters.max_time_in_seconds = SOLVER_TIME
-    solver.parameters.log_search_progress = SOLVER_LOG
+    print("Solving the models...")
+    solver = {p: cp_model.CpSolver() for p in PARTS}
+    keyboard.clearLayout()
     for part in PARTS:
-        status = solver.Solve(model[part],
-                              _SolutionPrinter(model[part],
-                                               1.0,
-                                               [overlapCosts[part], allStrokesPenaltyCost[part]]))
+        solver[part].parameters.max_time_in_seconds = SOLVER_TIME
+        solver[part].parameters.log_search_progress = SOLVER_LOG
+        print(f"Solving for {part} model...")
+        status = solver[part].Solve(model[part],
+              _SolutionPrinter(model[part],
+              1.0,
+              [overlapCosts[part],
+              allStrokesPenaltyCost[part],
+              allPhonemePairsOrderPenaltyCost[part]]))
 
         # Output
         print(f"Status for {part}: {status}")
-        print(solver.StatusName(status))
+        print(solver[part].StatusName(status))
         if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
-            print(f'Total penalty = {solver.ObjectiveValue()}')
-            for part in PARTS:
-                strokesAssignedToPhoneme: dict[str, list[tuple[int, ...]]] = {p: [] for p in phonemesByPart[part]}
-                keysAssignedToPhoneme: dict[str, list[int]] = {p: [] for p in phonemesByPart[part]}
-                phonemesAssignedToStroke: dict[tuple[int, ...], list[str]] = {s: [] for s in strokesInPart[part]}
-                phonemesAssignesToKey: dict[int, list[str]] = {k: [] for k in keysInPart[part]}
+            print(f'Total penalty = {solver[part].ObjectiveValue():,}')
+            strokesAssignedToPhoneme: dict[str, list[tuple[int, ...]]] = {p: [] for p in phonemesByPart[part]}
+            keysAssignedToPhoneme: dict[str, list[int]] = {p: [] for p in phonemesByPart[part]}
+            phonemesAssignedToStroke: dict[tuple[int, ...], list[str]] = {s: [] for s in strokesInPart[part]}
+            phonemesAssignesToKey: dict[int, list[str]] = {k: [] for k in keysInPart[part]}
 
-                # Extract key-phoneme and stroke-phoneme associations from the solution
-                for stroke in strokesInPart[part]:
-                    for phoneme in phonemesByPart[part]:
-                        if solver.Value(strokeIsAssignedToPhoneme[part][(phoneme, stroke)]) == 1:
-                            strokesAssignedToPhoneme[phoneme].append(stroke)
-                            phonemesAssignedToStroke[stroke].append(phoneme)
-                for k in keysInPart[part]:
-                    for phoneme in phonemesByPart[part]:
-                        if solver.Value(keyIsAssignedToPhoneme[part][(phoneme, k)]) == 1:
-                            keysAssignedToPhoneme[phoneme].append(k)
-                            phonemesAssignesToKey[k].append(phoneme)
-
-                # Print the solution
-                print("Phonemes:")
+            # Extract key-phoneme and stroke-phoneme associations from the solution
+            for stroke in strokesInPart[part]:
                 for phoneme in phonemesByPart[part]:
-                    print(f' Part {part}, Phoneme {phoneme}: Strokes {strokesAssignedToPhoneme[phoneme]}, Keys {keysAssignedToPhoneme[phoneme]}')
-                print("Keys:")
-                for key in keysInPart[part]:
-                    print(f' Part {part}, Key {key}: Phonemes {phonemesAssignesToKey[key]}')
-                print("Strokes:")
-                for stroke in strokesInPart[part]:
-                    if len(phonemesAssignedToStroke[stroke]) > 0:
-                        print(f' Part {part}, Stroke: {stroke}, Phonemes: {phonemesAssignedToStroke[stroke]},'
-                            + f' stroke cost: {strokeCosts[stroke]} (frequency weighted cost: '
-                            + f' {solver.Value(strokePenaltyCost[part][stroke])})')
-                            # + f' expected : {strokeCosts[stroke] * sum(phonemeFrequency[part][p]
-                            #                  * STROKE_ASSIGNMENT_PENALTY for p in phonemesAssignedToStroke[stroke])})')
+                    if solver[part].Value(strokeIsAssignedToPhoneme[part][(phoneme, stroke)]) == 1:
+                        strokesAssignedToPhoneme[phoneme].append(stroke)
+                        phonemesAssignedToStroke[stroke].append(phoneme)
+                        keyboard.addToLayout(stroke, phoneme)
+            for k in keysInPart[part]:
+                for phoneme in phonemesByPart[part]:
+                    if solver[part].Value(keyIsAssignedToPhoneme[part][(phoneme, k)]) == 1:
+                        keysAssignedToPhoneme[phoneme].append(k)
+                        phonemesAssignesToKey[k].append(phoneme)
 
-                multiphonemesKeysAssigned:dict[tuple[str, ...], list[int]] = {}
-                for multiphoneme in multiphonemesInPart[part]:
-                    multiphonemesKeysAssigned[multiphoneme] = []
+            # Print the solution
+            print("Phonemes:")
+            orderedPhonemes = sorted(phonemesByPart[part], key=lambda p: solver[part].Value(phonemePosition[part][p]))
+            for phoneme in orderedPhonemes:
+                print(f' Part {part}, Phoneme {phoneme}: ' +
+                    f'Strokes {strokesAssignedToPhoneme[phoneme]}, ' +
+                    f'Keys {keysAssignedToPhoneme[phoneme]} ' +
+                    f'Order position: {solver[part].Value(phonemePosition[part][phoneme])}' +
+                    f''  )
+            print("Keys:")
+            for key in keysInPart[part]:
+                print(f' Part {part}, Key {key}: Phonemes {phonemesAssignesToKey[key]}')
+            print("Strokes:")
+            for stroke in strokesInPart[part]:
+                if len(phonemesAssignedToStroke[stroke]) > 0:
+                    print(f' Part {part}, Stroke: {stroke}, Phonemes: {phonemesAssignedToStroke[stroke]},'
+                        + f' stroke cost: {strokeCosts[part][stroke]} (frequency weighted cost: '
+                        + f' {solver[part].Value(strokePenaltyCost[part][stroke]):,})')
+
+            print("Multiphonemes ambiguity:")
+            multiphonemesKeysAssigned:dict[tuple[str, ...], list[int]] = {}
+            for multiphoneme in multiphonemesInPart[part]:
+                multiphonemesKeysAssigned[multiphoneme] = []
+                for k in keysInPart[part]:
+                    if solver[part].Value(multiphonemeHasKey[part][multiphoneme, k]) == 1:
+                        multiphonemesKeysAssigned[multiphoneme].append(k)
+
+            for mp1,mp2 in selectedMultiphonemesAmbiguity[part]:
+                if solver[part].Value(keysetsAreIdentical[part][mp1, mp2]) == 1 \
+                        and solver[part].Value(multiphonemeAmbiguityCost[part][(mp1, mp2)]) > 0:
+                    print(f'  Part {part}, Multiphonemes {mp1} and {mp2}' +
+                          f' share the same keys: {multiphonemesKeysAssigned[mp1]}'+
+                          f' cost {solver[part].Value(
+                        multiphonemeAmbiguityCost[part][(mp1, mp2)]):,} ')
+
+                elif sorted(multiphonemesKeysAssigned[mp1]) == sorted(multiphonemesKeysAssigned[mp2]) \
+                    and set(mp1) != set(mp2) \
+                    and (solver[part].Value(multiphonemeAmbiguityCost[part][(mp1, mp2)]) > 0 or \
+                         selectedMultiphonemesAmbiguity[part][mp1,mp2] > 0.0):
+                    # This should only happen if there is a bug, can probably be removed.
+                    print(f'** Bug ambiguity: **')
+                    print(f'  Part {part}, Multiphonemes {mp1} and {mp2} have keys : {multiphonemesKeysAssigned[mp1]}' +
+                          f' and : {multiphonemesKeysAssigned[mp2]} strokes: ')
+                    print(f'  {mp1} ambiguity to {mp2} cost {solver[part].Value(
+                          multiphonemeAmbiguityCost[part][(mp1, mp2)]):,}' +
+                          f' should be : {int(selectedMultiphonemesAmbiguity[part][mp1,mp2] * AMBIGUITY_PENALTY):,}')
+                    print(f'  keysetsAreIdentical[{part}][{mp1}, {mp2}] == {solver[part].Value(
+                          keysetsAreIdentical[part][mp1, mp2])}')
                     for k in keysInPart[part]:
-                        if solver.Value(multiphonemeHasKey[part][multiphoneme, k]) == 1:
-                            multiphonemesKeysAssigned[multiphoneme].append(k)
+                        if solver[part].Value(mismatch_literals[part][mp1,mp2][k]) == 1:
+                            print(f'  mismatch_literals[{part}][{mp1},{mp2}][{k}] is a mismatch '+
+                                    f'{k in multiphonemesKeysAssigned[mp1]} {k in multiphonemesKeysAssigned[mp2]}')
 
-                for mp1,mp2 in selectedMultiphonemesAmbiguity[part]:
-                    if solver.Value(keysetsAreIdentical[part][mp1, mp2]) == 1 :
-                        print(f'(1) Part {part}, Ambiguous Multiphonemes {mp1} and {mp2} share the same keys: {multiphonemesKeysAssigned[mp1]}')
-                        print(f'{mp1} ambiguity to {mp2} cost {solver.Value(multiphonemeOverlapCost[part][(mp1, mp2)]) * OVERLAP_PENALTY} ')
-
-                    elif sorted(multiphonemesKeysAssigned[mp1]) == sorted(multiphonemesKeysAssigned[mp2]) and set(mp1) != set(mp2):
-                        # This should only happen if there is a bug, can probably be removed.
-                        print(f'(2) Part {part}, Multiphonemes {mp1} and {mp2} have keys : {multiphonemesKeysAssigned[mp1]}' +
-                            f' and : {multiphonemesKeysAssigned[mp2]} strokes: ')
-                        print(f'{mp1} ambiguity to {mp2} cost {solver.Value(multiphonemeOverlapCost[part][(mp1, mp2)]) * OVERLAP_PENALTY}' +
-                            f' should be : {selectedMultiphonemesAmbiguity[part][mp1,mp2] * OVERLAP_PENALTY}')
-                        for k in keysInPart[part]:
-                            if k in multiphonemesKeysAssigned[mp1] and k in multiphonemesKeysAssigned[mp2]:
-                                print(f'Key {k} is shared')
-                            if solver.Value(mismatch_literals[part][mp1,mp2][k]) == 1:
-                                print(f'mismatch_literals[{part}][{mp1},{mp2}][{k}] is a mismatch '+
-                                        f'{k in multiphonemesKeysAssigned[mp1]} {k in multiphonemesKeysAssigned[mp2]}')
-                    elif len(mp1)+len(mp2) >= 2:
-                        if set(multiphonemesKeysAssigned[mp1]) == set(multiphonemesKeysAssigned[mp2]):
-                            if selectedMultiphonemesAmbiguity[part].get((mp1,mp2), selectedMultiphonemesAmbiguity[part].get((mp2,mp1), 0.0)) > 0.0: 
-                                print(f'(3) Part {part}, Multiphonemes {mp1} and {mp2} have keys : {multiphonemesKeysAssigned[mp1]}' +
-                                    f' and : {multiphonemesKeysAssigned[mp2]} strokes: ')
-                                print(f'{mp1} ambiguity to {mp2} cost {solver.Value(multiphonemeOverlapCost[part][(mp1, mp2)]) * OVERLAP_PENALTY }' +
-                                    f' should be : {selectedMultiphonemesAmbiguity[part][mp1,mp2] * OVERLAP_PENALTY}')
+                elif set(multiphonemesKeysAssigned[mp1]) == set(multiphonemesKeysAssigned[mp2]):
+                    if selectedMultiphonemesAmbiguity[part][mp1, mp2] > 0.0:
+                        print(f'Identical phoneme set ambiguity:')
+                        print(f'  Part {part}, Multiphonemes {mp1} and {mp2} have keys : {multiphonemesKeysAssigned[mp1]}' +
+                              f' and : {multiphonemesKeysAssigned[mp2]} strokes: ')
+                        print(f'  {mp1} ambiguity to {mp2} cost {solver[part].Value(
+                              multiphonemeAmbiguityCost[part][(mp1, mp2)]) * AMBIGUITY_PENALTY:,}' +
+                              f' should be : {int(selectedMultiphonemesAmbiguity[part][mp1,mp2] * AMBIGUITY_PENALTY):,}')
 
         else:
             print('No solution found.')
