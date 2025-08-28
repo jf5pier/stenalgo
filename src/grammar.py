@@ -393,7 +393,7 @@ class BiphonemeCollection:
         """
         bestPermut = list(self.bestPermutation)
         self.pairwiseBiphonemeOrder = {}
-        for p1 in range(len(bestPermut) -1):
+        for p1 in range(len(bestPermut)):
             phoneme1: str = bestPermut[p1]
             permut_without_phonem = bestPermut[:p1] + bestPermut[p1+1:]
             for p2 in range(len(permut_without_phonem)):
