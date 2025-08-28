@@ -362,18 +362,22 @@ if __name__ == "__main__":
 #   Create a default starboard keyboard and assign the keymap
     dictionary.generateBaseKeymap(starboard)
 
-    #theory = dictionary.buildTheory(starboard)
+    # theory = dictionary.buildTheory(starboard)
+    # dictionary.writeTheory(theory, "theory.tsv")
 
     #dictionary.writeConstrainFiles()
     #sys.exit(1)
 
     #pprint.pprint(dictionary.wordsByOrtho["effraye"])
-    #dictionary.writeTheory(theory, "theory.tsv")
     #for syllableStrokes, words in theory.items():
     #    strokeString = starboard.strokesToString(syllableStrokes)
     #    print(strokeString, ":", list(map(lambda w: w.ortho, words)))
-    #dictionary.optimizeTheory(starboard, theory)
 
     #dictionary.optimizeTheory(keyboard=starboard, theory=None)
-    optimizeTheory(starboard, dictionary.syllabicPartAmbiguity, ["coda"])
+    # Syllable.biphonemeColByPart["nucleus"].generateBiphonemeOrderMatrix()
+    optimizeTheory(starboard, dictionary.syllabicPartAmbiguity, ["onset", "nucleus" ,"coda"])
+    #optimizeTheory(starboard, dictionary.syllabicPartAmbiguity, ["onset"])
+    #optimizeTheory(starboard, dictionary.syllabicPartAmbiguity, ["nucleus"])
+    #optimizeTheory(starboard, dictionary.syllabicPartAmbiguity, ["coda"])
+    starboard.printLayout()
 
