@@ -2,9 +2,10 @@
 from dataclasses import dataclass, fields
 from math import log,ceil
 from abc  import ABC, abstractmethod
-from typing import override
+from typing import override, Any
 import json
 import ast
+import sys
 
 """
 Nomenclature and concerns :
@@ -204,15 +205,8 @@ class Keyboard(ABC):
                                                   stroke2[1:-1],
                                                   recurse+1) #Compare the rest of the stroke
 
-    def toJSON(self) -> str:
-        return json.dumps(
-            self,
-            default=lambda o: o.__dict__, 
-            sort_keys=True,
-            indent=4)
-
     def toJSONFile(self, fileName:str) -> None:
-        def convert_keys_to_strings(obj):
+        def convert_keys_to_strings(obj) -> Any :
             if isinstance(obj, dict):
                 # Recursively call the function for nested dictionaries
                 return {
@@ -269,14 +263,13 @@ class Keyboard(ABC):
 
 class Starboard(Keyboard):
     _keyboardTemplate: str = \
-"""
-┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓         ┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓
+"""┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓         ┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓
 ┃{0: ^5}┃{2: ^5}┃{4: ^5}┃{6: ^5}┃{8: ^5}┃     ┃         ┃     ┃{16: ^5}┃{18: ^5}┃{20: ^5}┃{22: ^5}┃{24: ^5}┃
 ┣━━━━━╋━━━━━╋━━━━━╋━━━━━╋━━━━━┫{10: ^5}┃         ┃{15: ^5}┣━━━━━╋━━━━━╋━━━━━╋━━━━━╋━━━━━┫
 ┃{1: ^5}┃{3: ^5}┃{5: ^5}┃{7: ^5}┃{9: ^5}┃     ┃         ┃     ┃{17: ^5}┃{19: ^5}┃{21: ^5}┃{23: ^5}┃{25: ^5}┃
 ┗━━━━━┻━━━━━┻━━━━━┻━━━━━┻━━━┳━┻━━━┳━┻━━━┓ ┏━━━┻━┳━━━┻━┳━━━┻━━━━━┻━━━━━┻━━━━━┻━━━━━┛
-                            ┃{11: ^5}┃{12: ^5}┃ ┃{13: ^5}┃{14: ^5}┃
-                            ┗━━━━━┻━━━━━┛ ┗━━━━━┻━━━━━┛"""
+  ┃  {26}-key phonemes layer   ┃{11: ^5}┃{12: ^5}┃ ┃{13: ^5}┃{14: ^5}┃
+  ┗━━                       ┗━━━━━┻━━━━━┛ ┗━━━━━┻━━━━━┛"""
 
     _printableKeyLayout: str = """
 Keys indexes :
@@ -385,7 +378,7 @@ Fingers assignments :
                         for p in phoneme:
                             phonemeKeymapList[key] = phonemeKeymapList[key] +  p
             if nbKeys > 0:
-                print("Phonemes defined by " + (f"{i} keys pressed together" if i >1 else "1 key"))
+                phonemeKeymapList.append(str(i)) #layer number
                 print(self._keyboardTemplate.format(*phonemeKeymapList))
 
         return
@@ -606,6 +599,13 @@ Fingers assignments :
             self.addToLayout(keyPress, phonem)
                                         
 if __name__ == "__main__":
+
+    if len(sys.argv) > 1:
+        print("Loading keyboard from", sys.argv[1])
+        sb = Starboard.fromJSONFile(sys.argv[1])
+        sb.printLayout()
+        sys.exit(0)
+
     sb = Starboard()
     sb.printTemplate()
     sb.keypressBinaryEncodingSize()
@@ -617,12 +617,3 @@ if __name__ == "__main__":
     print("-----\nPhonetic rules of the Stenalgo French (1h optimization) Starboard keyboard\n")
     sb = Starboard.fromJSONFile("starboard1h.json")
     sb.printLayout()  
-    # strokes = sb.getPossibleStrokesInRange("onset", 1, 5)
-    # from functools import cmp_to_key
-    # strokes.sort(key=cmp_to_key(sb.strokeIsLowerThen))
-    # for s in strokes :
-    #     if s[0] == 2:
-    #         print(s, sb.getStrokeShapeCost(s))
-    # for s in strokes :
-    #     if s[0] == 3:
-    #         print(s, sb.getStrokeShapeCost(s))
