@@ -4,10 +4,7 @@
 import sys
 from typing import ClassVar, Any, override
 from dataclasses import dataclass
-from itertools import permutations, chain
-from copy import deepcopy
 from src.word import Word
-import numpy as np
 from tqdm import tqdm
 from rich.table import Table
 from rich.console import Console
@@ -35,9 +32,9 @@ class Phoneme:
     consonantPhonemes: ClassVar[str] = "RtsplkmdvjnfbZwzSgNG"
     temporaryPhonemes: ClassVar[str] = "x"
     phonemesByPart: ClassVar[dict[str, str]]= {
-        "onset": consonantPhonemes + temporaryPhonemes,
+        "onset": consonantPhonemes,
         "nucleus": nucleusPhonemes,
-        "coda": consonantPhonemes + temporaryPhonemes
+        "coda": consonantPhonemes
     }
     phonemesLexicByPart: ClassVar[dict[str, str]]= {
         "onset": consonantPhonemes + temporaryPhonemes,
@@ -317,62 +314,36 @@ class BiphonemeCollection:
         self.bestPermutationScore = bestScore
         self.bestPermutationNegativeScore = bestNegScore
 
-    def optimizeOrder(self, send_end: Connection|None = None) -> None:
+    def optimizeOrder(self) -> None:
         """Optimize the order of the phonemes found in the biphonemes
         to reduce the frequency where two phonemes would be typed in
         the wrong order to produce a syllable."""
-        score = 0
-        phonemes = list(self.getPhonemesNames())
-        np.random.shuffle(phonemes)
-        bestPermutation = "".join(phonemes)
-        (bestScore, bestNegScore, _) = self.scorePermutation("".join(phonemes))
+        phonemes = list(self.getPhonemesNames())[:]
+        orderedPhonemes = phonemes[:]
+        (bestScore, bestNegScore, _) = self.scorePermutation("".join(orderedPhonemes))
+        for _ in range(len(phonemes)):
+            for phoneme in phonemes:
+                origPos = orderedPhonemes.index(phoneme)
+                bestPosition = origPos
+                bestScore = self.scorePermutation("".join(orderedPhonemes))[0]
 
-        # The algorithm moves a window over the phonem string and tests
-        # permutations in that window exclusively.  A window scan goes over
-        # every phonem substring left to right, then right to left.
-        windowSize = 4
-        windowScans = 400
-        maxShuffleSize = 7
-        randOrder = np.array(range(len(phonemes)))
-        print("Optimizing biphonemes order in syllabic part : " + self.syllabicPart)
-        for _ in tqdm(list(range(windowScans)), ascii=True, ncols=80, unit=" phoneme shuffle scans"):
-            np.random.shuffle(randOrder)
-            shuffleSize = np.random.randint(2, maxShuffleSize)
-            mutatedPermutationList: list[str] = list(deepcopy(bestPermutation))
-            tmp = bestPermutation[randOrder[0]]
-            for i in range(1, shuffleSize):
-                mutatedPermutationList[randOrder[i - 1]] = bestPermutation[randOrder[i]]
-            mutatedPermutationList[randOrder[shuffleSize - 1]] = tmp
-            mutatedPermutation: str = "".join(mutatedPermutationList)
-
-            for pos in chain(
-                range(len(phonemes) - windowSize),
-                range(len(phonemes) - windowSize, 0, -1),
-            ):
-                subPhonemes = mutatedPermutation[pos : pos + windowSize]
-                for permutation in permutations(subPhonemes):
-                    subp = "".join(permutation)
-                    p = (
-                        mutatedPermutation[:pos] + subp
-                        + mutatedPermutation[pos + windowSize :]
-                    )
-                    score, negScore, _ = self.scorePermutation(p)
-                    if score > bestScore:
+                phonemesMinusOne = orderedPhonemes[:origPos] + orderedPhonemes[origPos+1:]
+                for pos in range(len(phonemes)):
+                    permut = phonemesMinusOne[:pos] + [phoneme] + phonemesMinusOne[pos:]
+                    score, negScore, _ = self.scorePermutation("".join(permut))
+                    if  score > bestScore:
                         bestScore = score
-                        bestNegScore = negScore
-                        bestPermutation = p
-                        #bestBadOrder = badOrder
-        print(
-            "\nBest order (ordered score %0.1f, disordered score %0.1f):\n"
-            % (bestScore, bestNegScore),
-            bestPermutation, "\n"
-        )
+                        bestPosition = pos
+
+                orderedPhonemes = phonemesMinusOne[:bestPosition] + [phoneme] + phonemesMinusOne[bestPosition:]
+                (bestScore, bestNegScore, _) = self.scorePermutation("".join(orderedPhonemes))
+
+        bestPermutation = "".join(orderedPhonemes)
+        print( f" Part {self.syllabicPart} Best order (ordered score {bestScore:0.1f}," + 
+            f" disordered score {bestNegScore:0.1f}):\n", bestPermutation, "\n")
         self.registerBestPermutation(bestPermutation, bestScore, bestNegScore)
-        if send_end is not None :
-            send_end.send((bestPermutation, bestScore, bestNegScore))
 
-
-    def scorePermutation(self, permutation: str):
+    def scorePermutation(self, permutation: str) -> tuple[float, float, list[Biphoneme]]:
         score = 0.0
         negScore = 0.0
         badOrder: list[Biphoneme] = []
@@ -502,7 +473,7 @@ class Syllable:
         self.biphonemesByPart: dict[str, list[Biphoneme]] = {
             "onset": [], "coda": [], "nucleus": []
         }
-        self.multiphonemesByPart: dict[str, Multiphoneme] = {
+        self.multiphonemesByPart: dict[str, Multiphoneme | None] = {
             "onset": None, "coda": None, "nucleus": None
         }
         self.spellings: dict[str, float] = {}
@@ -587,11 +558,6 @@ class Syllable:
                         print("Vowel biphoneme", biphoneme)
                     self.biphonemesByPart["nucleus"].append(biphoneme)
 
-        # print("pho",self.phonemes, "pre",self.phonemes_onset,
-        # "post",self.phonemes_coda,
-        #      "vow",self.phonemes_nucleus, "bpre", self.biphonemes_onset, "bpost",
-        #      self.biphonemes_coda, "bvow",self.biphonemes_nucleus)
-        #
         for part,phonemes in self.phonemesByPart.items():
             if len(phonemes) > 0:
                 partPhonemes = tuple(map(lambda p: p.name, phonemes))
@@ -646,49 +612,21 @@ class Syllable:
     def printTopPhonemes(nb: int = -1):
         print("Whole words phonemes:")
         Syllable.allPhonemeCol.printTopPhonemes(nb)
-        print("Pre-vowel (onset) phonemes :")
-        Syllable.phonemeColByPart["onset"].printTopPhonemes(nb)
-        print("Vowel (nucleus) phonemes :")
-        Syllable.phonemeColByPart["nucleus"].printTopPhonemes(nb)
-        print("Post-vowel (coda) phonemes :")
-        Syllable.phonemeColByPart["coda"].printTopPhonemes(nb)
+        for part in ["onset", "coda", "nucleus"]:
+            print(f"Top {part} phonemes :")
+            Syllable.phonemeColByPart[part].printTopPhonemes(nb)
 
     @staticmethod
     def printTopBiphonemes(nb: int = -1):
-        print("Pre-vowels biphonemes")
-        Syllable.biphonemeColByPart["onset"].printTopBiphonemes(nb)
-        print("Vowel biphonemes")
-        Syllable.biphonemeColByPart["nucleus"].printTopBiphonemes(nb)
-        print("Post-vowels biphonemes")
-        Syllable.biphonemeColByPart["coda"].printTopBiphonemes(nb)
-
-    @staticmethod
-    def optimizeBiphonemeOrder_old() -> None:
-        Syllable.biphonemeColByPart["onset"].optimizeOrder()
-        Syllable.biphonemeColByPart["coda"].optimizeOrder()
-        Syllable.biphonemeColByPart["nucleus"].optimizeOrder()
+        for syllabicPart in ["onset", "coda", "nucleus"]:
+            print(f"{syllabicPart} biphonemes")
+            Syllable.biphonemeColByPart[syllabicPart].printTopBiphonemes(nb)
 
     @staticmethod
     def optimizeBiphonemeOrder() -> None:
-        send1, recv1 = Pipe()
-        p1 = Process(target = Syllable.biphonemeColByPart["onset"].optimizeOrder, args=(send1,))
-        p1.start()
-        send2, recv2 = Pipe()
-        p2 = Process(target = Syllable.biphonemeColByPart["coda"].optimizeOrder, args=(send2,))
-        p2.start()
-        send3, recv3 = Pipe()
-        p3 = Process(target = Syllable.biphonemeColByPart["nucleus"].optimizeOrder, args=(send3,))
-        p3.start()
-        p1.join()
-        p2.join()
-        p3.join()
-        Syllable.biphonemeColByPart["onset"].registerBestPermutation(*(recv1.recv()))
-        Syllable.biphonemeColByPart["coda"].registerBestPermutation(*(recv2.recv()))
-        Syllable.biphonemeColByPart["nucleus"].registerBestPermutation(*(recv3.recv()))
-
-        Syllable.biphonemeColByPart["onset"].generateBiphonemeOrderMatrix()
-        Syllable.biphonemeColByPart["coda"].generateBiphonemeOrderMatrix()
-        Syllable.biphonemeColByPart["nucleus"].generateBiphonemeOrderMatrix()
+        for syllabicPart in ["onset", "coda", "nucleus"]:
+            Syllable.biphonemeColByPart[syllabicPart].optimizeOrder()
+            Syllable.biphonemeColByPart[syllabicPart].generateBiphonemeOrderMatrix()
 
     @staticmethod
     def printOptimizedBiphonemeOrderScore() -> None:
@@ -721,27 +659,13 @@ class Syllable:
 
     @staticmethod
     def printOptimizedBiphonemeOrder() -> None:
-        print("Left hand (syllable onset) consonant optimization :")
-        left_hand_order = Syllable.biphonemeColByPart["onset"].bestPermutation
-        left_hand_pairwise_order = Syllable.biphonemeColByPart["onset"].pairwiseBiphonemeOrder
-        Syllable.phonemeColByPart["onset"].printBarchart(left_hand_order, 
-                                              left_hand_pairwise_order,
-                                              Phoneme.consonantPhonemes)
-
-        print("Thumbs (syllable nucleus) vowel optimization :")
-        nucleus_order = Syllable.biphonemeColByPart["nucleus"].bestPermutation
-        nucleus_pairwise_order = Syllable.biphonemeColByPart["nucleus"].pairwiseBiphonemeOrder
-        Syllable.phonemeColByPart["nucleus"].printBarchart(nucleus_order, 
-                                                nucleus_pairwise_order,
-                                                Phoneme.nucleusPhonemes)
-
-        print("Right hand (syllable coda) consonant optimization :")
-        right_hand_order = Syllable.biphonemeColByPart["coda"].bestPermutation
-        right_hand_pairwise_order = Syllable.biphonemeColByPart["coda"].pairwiseBiphonemeOrder
-        Syllable.phonemeColByPart["coda"].printBarchart(right_hand_order, 
-                                             right_hand_pairwise_order,
-                                             Phoneme.consonantPhonemes)
-
+        for syllabicPart in ["onset", "coda", "nucleus"]:
+            print(f"{syllabicPart} biphonemes optimization :")
+            phonemeOrder = Syllable.biphonemeColByPart[syllabicPart].bestPermutation
+            pairwisePhonemeOrder = Syllable.biphonemeColByPart[syllabicPart].pairwiseBiphonemeOrder
+            Syllable.phonemeColByPart[syllabicPart].printBarchart(phonemeOrder, 
+                                              pairwisePhonemeOrder,
+                                              Phoneme.phonemesByPart[syllabicPart])
         print("")
 
     @staticmethod
