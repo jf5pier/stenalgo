@@ -2,7 +2,7 @@
 from dataclasses import dataclass, fields
 from math import log,ceil
 from abc  import ABC, abstractmethod
-from typing import override, Any
+from typing import override, Any, Self
 import json
 import ast
 import sys
@@ -146,7 +146,7 @@ class Keyboard(ABC):
         pass
 
     @abstractmethod
-    def addToLayout(self, stroke: tuple[int, ...], phoneme: str) -> None:
+    def addToLayout(self, stroke: tuple[int, ...], phoneme: str, phonemeOrder: list[str]|None = None) -> None:
         """
         Add a phoneme to the layout and assign it to a keypress.
         """
@@ -227,7 +227,7 @@ class Keyboard(ABC):
             )
 
     @classmethod
-    def fromJSONFile(cls, fileName: str):
+    def fromJSONFile(cls, fileName: str)-> Self|None:
         """
         Reads a JSON file and returns a new instance of the class.
         It uses an object hook to convert string keys back to tuples.
@@ -251,13 +251,17 @@ class Keyboard(ABC):
                 new_dict[new_key] = value
             return new_dict
 
-        with open(fileName, "r", encoding="utf-8") as f:
-            data = json.load(f, object_hook=convert_keys_from_strings)
-        
-        # Return a new instance of the class with the deserialized data
-        instance = cls.__new__(cls)
-        instance.__dict__.update(data)
-        return instance #cls(data)
+        instance = None
+        try:
+            with open(fileName, "r", encoding="utf-8") as f:
+                data = json.load(f, object_hook=convert_keys_from_strings)
+            
+                # Return a new instance of the class with the deserialized data
+                instance = cls.__new__(cls)
+                instance.__dict__.update(data)
+        except FileNotFoundError:
+            print(f"File {fileName} not found.", file=sys.stderr)
+        return instance
 
 
 
@@ -388,10 +392,34 @@ Fingers assignments :
         self.phonemesAssignedToStroke = {}
 
     @override
-    def addToLayout(self, stroke: tuple[int, ...], phoneme: str) -> None:
+    def addToLayout(self, stroke: tuple[int, ...], phoneme: str, phonemeOrder: list[str]|None = None) -> None:
+        """
+        Add a phoneme to a stroke in a layout. Orders the phoneme insertion in list of the stroke
+        by reverse frequency if phonemeOrder is given.
+        """
         existingKeypressPhoneme = self.phonemesAssignedToStroke.get(stroke, [])
-        existingKeypressPhoneme.append(phoneme)
+        if phonemeOrder is None or phoneme not in phonemeOrder or existingKeypressPhoneme == []:
+            # No way of ordering this phoneme, just append it
+            existingKeypressPhoneme.append(phoneme)
+        else:
+            for i, existingPhoneme in enumerate(existingKeypressPhoneme):
+                if existingPhoneme not in phonemeOrder:
+                    # Unordered phonemes are at the end of the list,
+                    # if we find one, insert before it
+                    existingKeypressPhoneme.insert(i, phoneme)
+                    break
+                elif phonemeOrder.index(existingPhoneme) > phonemeOrder.index(phoneme):
+                    # must be inserted before existingPhoneme
+                    existingKeypressPhoneme.insert(i, phoneme)
+                    break
+                elif i == len(existingKeypressPhoneme) - 1:
+                    # last element, insert after it
+                    existingKeypressPhoneme.append(phoneme)
+                    break
         self.phonemesAssignedToStroke[stroke] = existingKeypressPhoneme
+        return
+            
+
     
     @override
     def removeFromLayout(self, stroke: tuple[int, ...], phoneme: str) -> None:
@@ -574,29 +602,40 @@ Fingers assignments :
                 strokeString += "/"
             syllableString ={"onset": "", "nucleus": "", "coda": ""}
             for key in stroke:
+                # Need to track phonemes by syllabic part to know if a "-" nucleus must be inserted
+                # next gives the first "part" for which key is found in keys.
                 syllabicPart = next((part for part, keys in self.keyIDinSyllabicPart.items() if key in keys), "")
                 phoneme = self.getPhonemesOfStroke((key,))[0]
-                syllableString[syllabicPart] += phoneme
-            if syllableString["nucleus"] == "" :
+                syllableString[syllabicPart] += phoneme 
+            if syllableString["nucleus"] == "" : # and syllabeString["coda"] != "" ???
                 syllableString["nucleus"] = "-"
             strokeString += f"{syllableString['onset']}{syllableString['nucleus']}{syllableString['coda']}"
 
         return strokeString
 
     def setIrelandEnglishLayout(self) -> None:
-        layout: list[tuple[tuple[int, ...], str]] = [
-            ((2,),"s"), ((3,),"s"), ((4,),"t"), ((5,),"k"), ((6,),"p"), ((7,),"w"), 
-            ((8,),"h"), ((9,),"r"), ((10,),"*"), ((11,),"a"), ((12,),"o"), ((13,),"e"), 
-            ((14,),"u"), ((15,),"*"), ((16,),"f"), ((16,),"v"), ((17,),"r"), ((18,),"p"), 
-            ((19,),"b"), ((20,),"l"), ((21,),"g"), ((22,),"t"), ((23,),"s"), ((24,),"d"), 
-            ((25,),"z"), ((2,4),"f"), ((3,4),"x"), ((3,5),"q"), ((3,9),"v"), ((4,5),"d"), 
-            ((5,9),"c"), ((6,7),"b"), ((6,8),"m"), ((8,9),"l"), ((13,14),"i"), ((18,19),"n"), 
-            ((18,20),"m"), ((19,21),"k"), ((4,6,8),"n"), ((5,7,9),"y"), ((19,21,23),"x"), 
-            ((3,5,7,9),"j"), ((4,5,6,7),"g"), ((18,19,20,21),"j"), ((3,4,5,6,7),"z")]
+        layout: dict[str, list[tuple[tuple[int, ...], str]]]={
+            "onset": [
+                ((2,),"s"), ((3,),"s"), ((4,),"t"), ((5,),"k"), ((6,),"p"), ((7,),"w"),
+                ((8,),"h"), ((9,),"r"), ((10,),"*"), ((2,4),"f"), ((3,4),"x"), ((3,5),"q"),
+                ((3,9),"v"), ((4,5),"d"), ((5,9),"c"), ((6,7),"b"), ((6,8),"m"), ((8,9),"l"),
+                ((4,6,8),"n"), ((5,7,9),"y"), ((3,5,7,9),"j"), ((4,5,6,7),"g"),
+                ((3,4,5,6,7),"z")
+            ],
+            "nucleus": [
+                ((11,),"a"), ((12,),"o"), ((13,),"e"), ((14,),"u"),((13,14),"i")
+            ],
+            "coda": [((15,),"*"), ((16,),"f"), ((16,),"v"), ((17,),"r"), ((18,),"p"),
+                ((19,),"b"), ((20,),"l"), ((21,),"g"), ((22,),"t"), ((23,),"s"), ((24,),"d"),
+                ((25,),"z"), ((18,19),"n"), ((18,20),"m"), ((19,21),"k"), ((19,21,23),"x"),
+                ((18,19,20,21),"j")
+            ]
+        }
 
         self.clearLayout()
-        for (keyPress, phonem) in layout:
-            self.addToLayout(keyPress, phonem)
+        for part in ["onset", "nucleus", "coda"]:
+            for (keyPress, phonem) in layout[part]:
+                self.addToLayout(keyPress, phonem)
                                         
 if __name__ == "__main__":
 

@@ -28,8 +28,10 @@ from src.grammar import Phoneme, Syllable, SyllableCollection
 from src.word import GramCat, Word
 from typing import Any
 from src.keyboard import Keyboard, Starboard
-from src.cpsatsolver import optimizeTheory
+from src.cpsatsolver import optimizeKeyboard
+from src.cpsatoptimizer import optimizeTheory
 from tqdm import tqdm
+import sys
 
 def printVerbose(word: str, msg: list[Any]):
     # return
@@ -40,6 +42,8 @@ def printVerbose(word: str, msg: list[Any]):
 class Dictionary:
     words: list[Word]
     wordsByOrtho: dict[str, list[Word]]
+    wordsByLemme: dict[str, list[Word]]
+    stemmOfLemme: dict[str, list[tuple[str, int]]]
     frequentWords: list[str]
     nbFrequentWords: int = 200
     totalFrequencies: float = 0.0
@@ -54,6 +58,8 @@ class Dictionary:
     def __init__(self) -> None:
         self.syllableCollection = SyllableCollection()
         self.wordsByOrtho = {}
+        self.wordsByLemme = {}
+        self.stemmOfLemme = {}
         self.frequentWords = []
         self.syllableClass: type = Syllable
         self.syllabicAmbiguity = {
@@ -81,27 +87,36 @@ class Dictionary:
             for corpusWord in tqdm(corpus, desc="Reading corpus", unit=" words"):
                 if corpusWord["ortho"] is not None \
                         and corpusWord["ortho"][0] != "#":
-                    word: Word = Word(ortho=corpusWord["ortho"],
-                                phonology=corpusWord["phon"],
-                                lemme=corpusWord["lemme"],
-                                gramCat=GramCat[corpusWord["cgram"]]
-                                    if corpusWord["cgram"] != '' else None,
-                                orthoGramCat=[GramCat[gc] for gc in
-                                    corpusWord["cgramortho"].split(",")],
-                                # gram_cat = corpus_word["cgram"],
-                                # ortho_gram_cat = corpus_word["cgramortho"],
-                                gender=corpusWord["genre"],
-                                number=corpusWord["nombre"],
-                                infoVerb=corpusWord["infover"],
-                                rawSyllCV=corpusWord["syll_cv"],
-                                rawOrthosyllCV=corpusWord["orthosyll_cv"],
-                                frequencyBook=float(corpusWord["freqlivres"]),
-                                frequencyFilm=float(corpusWord["freqfilms2"])
-                                )
+                    word: Word = Word(
+                        ortho = corpusWord["ortho"],
+                        phonology = corpusWord["phon"],
+                        lemme = corpusWord["lemme"],
+                        gramCat = GramCat[corpusWord["cgram"]],
+                            # if corpusWord["cgram"] != '' else None,
+                        orthoGramCat = [GramCat[gc] for gc in
+                            corpusWord["cgramortho"].split(",")],
+                        gender = corpusWord["genre"]
+                            if corpusWord["genre"] != '' else None,
+                        number = corpusWord["nombre"]
+                            if corpusWord["nombre"] != '' else None,
+                        infoVerb = [infoverb.split(":")
+                            for infoverb in corpusWord["infover"].split(";")
+                            if infoverb != '']
+                            if corpusWord["infover"] != '' else None,
+                        rawSyllCV = corpusWord["syll_cv"],
+                        rawOrthosyllCV = corpusWord["orthosyll_cv"],
+                        frequencyBook = float(corpusWord["freqlivres"]),
+                        frequencyFilm = float(corpusWord["freqfilms2"])
+                        )
                     words.append(word)
-                    same_ortho = self.wordsByOrtho.get(corpusWord["ortho"],
+
+                    lemmeGroup = self.wordsByLemme.get(word.lemme,
+                                                       deepcopy([])) + [word]
+                    self.wordsByLemme[word.lemme] = lemmeGroup
+
+                    sameOrtho = self.wordsByOrtho.get(corpusWord["ortho"],
                                                          deepcopy([])) + [word]
-                    self.wordsByOrtho[corpusWord["ortho"]] = same_ortho
+                    self.wordsByOrtho[corpusWord["ortho"]] = sameOrtho
         return words
 
     def analyseSyllabification(self) -> None:
@@ -170,7 +185,8 @@ class Dictionary:
             # Assign single keys to the most frequent phonemes, in the order of the best permutation
             for phoneme in biphonemeCol.bestPermutation + excludedPhonemes:
                 if phoneme in singleKeyTopPhonemes:
-                    keyboard.addToLayout(singleKeys.pop(0), phoneme)
+                    keyboard.addToLayout(singleKeys.pop(0), phoneme, Syllable.getSortedPhonemesNames(syllabicPart))
+                    #keyboard.addToLayout(singleKeys.pop(0), phoneme)
 
 
             # Keys not assigned to a single-key strope
@@ -187,13 +203,14 @@ class Dictionary:
                     assigned = False
                     while len(multikeys) > 0:
                         maxUse = max(list(map(lambda k : keyOveruse.get(k, 0), multikeys[0])))
-                        if maxUse >= MaxOveruse +2*(len(multikeys[0])-2): #NOTE: This makes it so that all thumb key pairs are not assignable
+                        if maxUse >= MaxOveruse +2*(len(multikeys[0])-2):
                             _ = multikeys.pop(0)
                         else:
                             for key in multikeys[0]:
                                 keyOveruse[key] = keyOveruse.get(key, 0) + 1
                             #print("Assigning", phoneme, "to", multikeys[0])
-                            keyboard.addToLayout(multikeys.pop(0), phoneme)
+                            keyboard.addToLayout(multikeys.pop(0), phoneme, Syllable.getSortedPhonemesNames(syllabicPart))
+                            #keyboard.addToLayout(multikeys.pop(0), phoneme)
                             assigned = True
                             break
 
@@ -206,7 +223,9 @@ class Dictionary:
         # are the single keys per phoneme.
         for syllabicPart in ["onset", "nucleus", "coda"]:
             unassigned = _greadyAssignKeymapPartition(keyboard, syllabicPart)
-            print("Unassigned phonemes in", syllabicPart, ":", unassigned)
+            if len(unassigned) > 0:
+                print(f"Unassigned phonemes in {syllabicPart= }:", "".join(unassigned))
+
             # get low ambiguity phonemes to pair with unassigned phonemes
             for phonemeName in unassigned:
                 lowAmbiguityPhonemes = self.getLowAmbiguityPhonemes(
@@ -240,19 +259,15 @@ class Dictionary:
         theory: dict[tuple[tuple[int, ...], ...], list[Word]] = {}
         for word in tqdm(self.words, desc="Building theory", unit=" words", ascii=True, ncols=80):
             syllableNames = word.phonemesToSyllableNames(withSilent=False)
-            try: 
-                syllableStrokes: tuple[tuple[int, ...], ...] = tuple(keyboard.getStrokeOfSyllableByPart(
-                    self.syllableCollection.syllable_names[syllableName].phonemeNamesByPart())
-                    for syllableName in syllableNames)
-            except IndexError as e:
-                print(f"{word.ortho} {syllableNames}", e)
-                raise IndexError(f"{word.ortho} {syllableNames}", e)
+            syllableStrokes: tuple[tuple[int, ...], ...] = tuple(keyboard.getStrokeOfSyllableByPart(
+                self.syllableCollection.syllable_names[syllableName].phonemeNamesByPart())
+                for syllableName in syllableNames)
             if syllableStrokes not in theory:
                 theory[syllableStrokes] = []
             theory[syllableStrokes].append(word)
         return theory
 
-    def writeTheory(self, theory: dict[tuple[tuple[int, ...], ...], list[Word]], filename: str) -> None:
+    def writeTheory(self, theory: dict[tuple[tuple[int, ...], ...], list[Word]], keyboard: Keyboard, filename: str) -> None:
         with open(filename, "w") as f:
             _ = f.write("strokes\twords\n")
             maxAmbiguity = 0
@@ -261,7 +276,7 @@ class Dictionary:
             maxFrequencyAmbiguityWords = []
             maxFrequencyAmbiguityStrokes= ()
             for syllableStrokes, words in theory.items():
-                strokeString = starboard.strokesToString(syllableStrokes)
+                strokeString = keyboard.strokesToString(syllableStrokes)
                 wordOrthos = sorted(list(set(map(lambda w: w.ortho, words))))
                 sumFrequencies: float = sum(map(lambda w: w.frequency, words))
                 if len(wordOrthos) > maxAmbiguity:
@@ -277,8 +292,8 @@ class Dictionary:
             print("Max frequency ambiguity:", maxFrequencyAmbiguity, "for words", 
                   maxFrequencyAmbiguityWords, "\n strokes: ", maxFrequencyAmbiguityStrokes)
 
-    def writeConstrainFiles(self, phonemesOrderFile = "phoneme_order.csv",
-                            multiPhonemeAmbiguityFile = "multi_phoneme_ambiguity.csv") -> None:
+    def writeConstrainFiles(self, phonemesOrderFile: str = "phoneme_order.csv",
+                            multiPhonemeAmbiguityFile: str = "multi_phoneme_ambiguity.csv") -> None:
 
         with open(phonemesOrderFile, "w") as f:
             for phonemes, part in [(Phoneme.consonantPhonemes, "onset"),
@@ -301,34 +316,8 @@ class Dictionary:
                         writeLine = ",".join([part, "".join(m1), "".join(m2), "%.1f"%conflict])
                         _ = f.write(writeLine + "\n")
 
-    def getAmbiguousMultiphonemes(self, theory: dict[tuple[tuple[int, ...], ...], list[Word]]) -> list[tuple[tuple[str, ...], float, list[Word]]]:
-        return []
-
-    def optimizeTheory_old(self, keyboard: Keyboard, theory: dict[tuple[tuple[int, ...], ...], list[Word]]) -> None:
-        """ 
-        Starting from the theory, tries to optimize the keymap to :
-            - minimize the number of ambiguities (strokes that generate more than one word)
-            - maximize the number of words that can be typed with the right order of strokes from left to right.
-            - minimize the strain of typing by assigning frequent phonemes to easier keys.
-            - find alternate strokes to differentiate homonymes
-        """
-
-        for i in range(100):
-            # Identify worst phoneme offenders by the sum frequency of the words they make ambiguous
-            ambiguousMultiphoneme: list[tuple[tuple[str, ...], float, list[Word]]]
-            ambiguousMultiphoneme = self.getAmbiguousMultiphonemes(theory)
-            for amp in ambiguousMultiphoneme:
-                for phoneme in amp[0]:
-                    bestStroke = self.findBestStrokeForPhoneme(amp, keyboard, theory)
-                    if bestStroke is not None:
-                        originalStroke = keyboard.getStrokesOfPhoneme(phoneme)
-                        keyboard.addToLayout(bestStroke, phoneme)
-                        keyboard.removeFromLayout(originalStroke, phoneme)
-                        #reassignedPhonemes += phoneme
-
 
 if __name__ == "__main__":
-    starboard = Starboard()
     dictionary: Dictionary
 
     if os.path.exists("Dictionary.pickle"):
@@ -355,29 +344,30 @@ if __name__ == "__main__":
             pickle.dump(Syllable.multiphonemeColByPart, pfile)
 #        pickle.dump(dictionary.syllableCollection, open("Syllables.pickle", "wb"))
 
+#    print(dictionary.words[0])
 #    sys.exit(1)
 
     #dictionary.printSyllabificationStats()
 
-#   Create a default starboard keyboard and assign the keymap
-    dictionary.generateBaseKeymap(starboard)
-
-    # theory = dictionary.buildTheory(starboard)
-    # dictionary.writeTheory(theory, "theory.tsv")
 
     #dictionary.writeConstrainFiles()
-    #sys.exit(1)
 
     #pprint.pprint(dictionary.wordsByOrtho["effraye"])
     #for syllableStrokes, words in theory.items():
     #    strokeString = starboard.strokesToString(syllableStrokes)
     #    print(strokeString, ":", list(map(lambda w: w.ortho, words)))
+    keyboardJSON = 'starboard3h.json'
+    starboard = Starboard.fromJSONFile(keyboardJSON)
+    if starboard is None :
+        print("Could not load keyboard from", keyboardJSON, "generating an initial keymap based on phoneme order")
+        starboard = Starboard()
+        dictionary.generateBaseKeymap(starboard)
 
-    #dictionary.optimizeTheory(keyboard=starboard, theory=None)
-    # Syllable.biphonemeColByPart["nucleus"].generateBiphonemeOrderMatrix()
-    optimizeTheory(starboard, dictionary.syllabicPartAmbiguity, ["onset", "nucleus" ,"coda"])
-    #optimizeTheory(starboard, dictionary.syllabicPartAmbiguity, ["onset"])
-    #optimizeTheory(starboard, dictionary.syllabicPartAmbiguity, ["nucleus"])
-    #optimizeTheory(starboard, dictionary.syllabicPartAmbiguity, ["coda"])
+    #optimizeKeyboard(starboard, dictionary.syllabicPartAmbiguity, ["onset", "nucleus" ,"coda"])
     starboard.printLayout()
+    #starboard.toJSONFile('starboard.json')
+    theory = dictionary.buildTheory(starboard)
+    dictionary.writeTheory(theory, starboard, "theory.tsv")
+    optimizeTheory(theory, starboard, ["onset", "nucleus" ,"coda"])
+
 

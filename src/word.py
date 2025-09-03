@@ -2,9 +2,11 @@
 # coding: utf-8
 #
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from copy import deepcopy
 from enum import Enum
+from typing import override
+from itertools import combinations
 
 GramCat = Enum(
     "GramCat",
@@ -33,11 +35,11 @@ class Word:
         Grammatical category
     cgramortho : [GramCat]
         All grammatical categories of the words sharing this orthograph
-    gender : str
+    gender : str | None
         Gender of the noun or adjectiv
-    number : str
+    number : str | None
         Number (singular or plural) of the noun or adjectiv
-    infoVerb : str
+    infoVerb : list[list[str]] | None
         Conjugaiton of the verb
     rawSyllCV : str
         Phonemes in syllables after analysis of Lexique383 and LexiqueInfra
@@ -50,7 +52,7 @@ class Word:
         Frequency of the word in the film corpus
     syllCV : [[str]]
         Parsed rawSyllCV
-    orthosyllCV : [[str]]
+    orthosyllCV : list[list[str]]
         Parsed rawOrthosyllCV
     frequency : float
         Chosen mix of the film and book frequencies
@@ -59,15 +61,19 @@ class Word:
     ortho: str
     phonology: str
     lemme: str
-    gramCat: GramCat | None
+    gramCat: GramCat
     orthoGramCat: list[GramCat]
-    gender: str
-    number: str
-    infoVerb: str
+    gender: str | None
+    number: str | None
+    infoVerb: list[list[str]] | None
     rawSyllCV: str
     rawOrthosyllCV: str
     frequencyBook: float
     frequencyFilm: float
+    orthosyllCV: list[list[str]] = field(init=False)
+    syllCV: list[list[str]] = field(init=False)
+    frequency: float = field(init=False)
+    _hash: str = field(init=False)
 
     def __post_init__(self) -> None:
         self.fix_e_n_en()
@@ -76,6 +82,33 @@ class Word:
         # Formula to be optimized following the need of the typist
         # self.frequency = 0.9*self.frequencyFilm + 0.1* self.frequencyBook
         self.frequency = self.frequencyFilm
+        self._hash = f"{self.ortho}{self.phonology}{self.lemme}{self.gramCat.name}{self.gender}{self.number}"
+ 
+
+    @override
+    def __hash__(self) -> int:
+        return hash(self._hash)
+
+    def __eq__(self, other):
+        if not isinstance(other, Word):
+            return NotImplemented
+        return self._hash == other._hash
+
+    def getFeatures(self) -> list[str]:
+        features: list[str] = []
+        features += [self.gramCat.name]
+        features += [self.gender] if self.gender != None else []
+        features += [self.number] if self.number != None else []
+        if self.infoVerb is not None:
+            for singleInfoVerb in self.infoVerb:
+                combos: list[str] = []
+                for comboSize in range(1, len(singleInfoVerb)+1):
+                    combos += list(combinations(singleInfoVerb, comboSize))
+                for combination in combos:
+                    combinationStr: str =":".join(combination)
+                    features += [combinationStr]
+        return features
+
 
     def fix_e_n_en(self) -> None:
         # enivre @nivR @|n_i_v_R_# e|n_i_v_r_e --> @|i_v_R_# en|i_v_r_e
@@ -133,6 +166,15 @@ class Word:
                 print("\n\n\n", self.phonology, phono, syll_orig, syll_final, pos)
                 sys.exit(1)
         return phono
+
+    @override
+    def __str__(self) -> str:
+        return f"Word(ortho={self.ortho}, phonology={self.phonology}, lemme={self.lemme}," + \
+            f" gramCat={self.gramCat}, gender={self.gender}, number={self.number}," + \
+            f" infoVerb={self.infoVerb}" #, rawSyllCV={self.rawSyllCV}," + \
+            # f" rawOrthosyllCV={self.rawOrthosyllCV}, frequencyBook={self.frequencyBook}," + \
+            # f" frequencyFilm={self.frequencyFilm}, syllCV={self.syllCV}," + \
+            # f" orthosyllCV={self.orthosyllCV}, frequency={self.frequency})"
 
 
 #    def writeOrthoSyll(self):

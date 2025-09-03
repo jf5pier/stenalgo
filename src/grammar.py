@@ -588,13 +588,30 @@ class Syllable:
         self.increaseFrequency(frequency)
 
     @staticmethod
-    def sortPhonemesCollections() -> None:
-        Syllable.allPhonemeCol.phonemes.sort(reverse=True)
-        for syllabicPart in ["onset", "nucleus", "coda"]:
+    def sortPhonemesCollections(syllabicParts: tuple[str, ...] = ("onset", "nucleus", "coda")) -> None:
+        """ 
+        Sort the phonemes and biphonemes collections. 
+        Sorting is by reverse frequency of occurence in the lexicon/corpus
+        """
+        if len(syllabicParts) == 3:
+            # Sort all 3 parts, so sort allPhonemeCollection too
+            Syllable.allPhonemeCol.phonemes.sort(reverse=True)
+        for syllabicPart in syllabicParts:
             Syllable.phonemeColByPart[syllabicPart].phonemes.sort(reverse=True)
             Syllable.biphonemeColByPart[syllabicPart].biphonemes.sort(reverse=True)
 
-    def trackWord(self, word: Word):
+    @staticmethod
+    def getSortedPhonemesNames(syllabicPart: str) -> list[str]:
+        """
+        Return a list of phoneme names sorted by reverse frequency of occurence
+        """
+        Syllable.phonemeColByPart[syllabicPart].phonemes.sort(reverse=True)
+        return [p.name for p in Syllable.phonemeColByPart[syllabicPart].phonemes]
+
+    def trackWord(self, word: Word) -> None:
+        """ 
+        Keep track of words using this syllable
+        """
         if word.phonology in self.phonoWords:
             self.phonoWords[word.phonology].append(word)
         else:
