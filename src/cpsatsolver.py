@@ -1,61 +1,33 @@
-
+#!/usr/bin/python
+# coding: utf-8
+#
 from ortools.sat.python.cp_model import IntVar
 from ortools.sat.python import cp_model
 import time
 from functools import cmp_to_key
 from src.keyboard import Keyboard
 from src.grammar import Phoneme, Syllable
+from src.cpsatprinter import SolutionPrinter
+from tqdm import tqdm
 
-
-def optimizeTheory(keyboard: Keyboard,
-                   syllabicPartAmbiguity: dict[str, dict[tuple[tuple[str, ...], tuple[str, ...]], float]], 
-                   syllabicParts: list[str]) -> None:
+def optimizeKeyboard(keyboard: Keyboard,
+                     syllabicPartAmbiguity: dict[str, dict[tuple[tuple[str, ...], tuple[str, ...]], float]], 
+                     syllabicParts: list[str]) -> None:
     """
     Using OR-tools, encode the optimisation rules and objectives to find the best keymap.
+    Starting from the theory, tries to optimize the keymap to :
+        - minimize the number of ambiguities (strokes that generate more than one word)
+        - minimize the strain of typing by assigning frequent phonemes to easier keys.
+        - maximize the number of words that can be typed with the right order of strokes from left to right.
+        - find alternate strokes to differentiate homonymes
     """
     PARTS: list[str] = syllabicParts
     STROKE_ASSIGNMENT_PENALTY = 1
     AMBIGUITY_PENALTY = 30000
     ORDER_PENALTY= 500
-    SOLVER_TIME = 30.0  # seconds
+    SOLVER_TIME = 90.0  # seconds
     SOLVER_LOG = False
-    MAX_MULTIPHONEMES: int = 3000
-
-    class _SolutionPrinter(cp_model.CpSolverSolutionCallback):
-        """Callback to print intermediate solutions."""
-
-        def __init__(self, model:cp_model.CpModel, print_interval_seconds:float=2.0,
-                     variables: list[cp_model.IntVar]|None = None) -> None:
-            cp_model.CpSolverSolutionCallback.__init__(self)
-            self.__model = model
-            self.__solution_count = 0
-            self.__first_print_time = time.time()
-            self.__last_print_time = self.__first_print_time
-            self.__print_interval = print_interval_seconds
-            self.__variables = [] if variables == None else variables
-            self.__print_count = 0
-
-        def on_solution_callback(self) -> None:
-            """Called by the solver when a new solution is found."""
-            current_time = time.time()
-            self.__solution_count += 1
-            self.__print_count += 1
-            nbLines = len(self.__variables) + 1
-            elapsed_time = current_time - self.__first_print_time
-            if self.__solution_count == 1 \
-                    or current_time - self.__last_print_time >= self.__print_interval:
-                # Clear before printing
-                if self.__print_count > 3:
-                    for _ in range(nbLines):
-                        print("\033[1A", end="")
-                        print("\033[2K", end="")
-                print(f'Solution {self.__solution_count}:'
-                    + f' objective = {self.ObjectiveValue():,}, elapsed = {elapsed_time:.2f} s')
-                for v in self.__variables:
-                    print(f'  {v.Name():>32} = {self.Value(v):,}')
-                self.__last_print_time = current_time
-
-    
+    MAX_MULTIPHONEMES: int = 2000
     
     phonemesByPart: dict[str, str] = {
         "onset": Phoneme.consonantPhonemes[:],
@@ -80,6 +52,7 @@ def optimizeTheory(keyboard: Keyboard,
         
     sortedMultiphonemeAmbiguity: dict[str, list[tuple[tuple[tuple[str, ...], tuple[str, ...]], float]]] = {p:[] for p in PARTS}
     for part in PARTS:
+
         for mpi1,mp1 in enumerate(multiphonemesInPart[part][:-1]):
             for mp2 in multiphonemesInPart[part][mpi1+1:]:
                 ambiguity: float = syllabicPartAmbiguity[part].get((mp1,mp2), syllabicPartAmbiguity[part].get((mp2,mp1), 0.0))
@@ -107,7 +80,8 @@ def optimizeTheory(keyboard: Keyboard,
     strokeIsAssignedToPhoneme: dict[str, dict[tuple[str, tuple[int, ...]], IntVar]]  = {p: {} for p in PARTS}
     keyIsAssignedToPhoneme: dict[str, dict[tuple[str, int], IntVar]]  = {p:{} for p in PARTS}
     for part in PARTS:
-        for phoneme in phonemesByPart[part]:
+        for phoneme in tqdm(phonemesByPart[part], desc="Linking phonemes to strokes",
+                            unit=" phonemes", ascii=True, ncols=100):
             for stroke in strokesInPart[part]:
                 strokeIsAssignedToPhoneme[part][(phoneme, stroke)] = \
                     model[part].NewBoolVar(f'x_{part[0]}_{phoneme}_{stroke}')
@@ -173,7 +147,9 @@ def optimizeTheory(keyboard: Keyboard,
     # of multiphoneme 'mp' (the union of keys from all phonemes in syllabiic part).
     multiphonemeHasKey: dict[str, dict[tuple[tuple[str, ...], int], IntVar]]  = {p:{} for p in PARTS}
     for part in PARTS:
-        for multiphoneme in multiphonemesInPart[part]:
+        for multiphoneme in tqdm(multiphonemesInPart[part], desc="Linking multiphonemes to strokes",
+                                 unit=" multiphonemes", ascii=True, ncols=100):
+
             mp_str = "".join(multiphoneme)
             for k in keysInPart[part]:
                 multiphonemeHasKey[part][multiphoneme, k] = \
@@ -193,7 +169,9 @@ def optimizeTheory(keyboard: Keyboard,
     # Model the key set of a group of phonemes as the union of its phonemes' key sets.
     # multiphonemesKeys[mp, k] is true if and only if key 'k' is assigned to at least one symbol in multiphoneme'mp'.
     for part in PARTS:
-        for multiphoneme in multiphonemesInPart[part]:
+        for multiphoneme in tqdm(multiphonemesInPart[part], desc="Linking multiphoneme to shared keys",
+                             unit=" multiphonemes", ascii=True, ncols=100):
+
             for k in keysInPart[part]:
                 # We need a boolean variable to represent the condition: "at least one phoneme in multiphoneme
                 # has key k assigned".
@@ -236,7 +214,9 @@ def optimizeTheory(keyboard: Keyboard,
         p:{} for p in PARTS}
 
     for part in PARTS:
-        for mp1i,mp1 in enumerate(multiphonemesInPart[part][:-1]):
+        for mp1i,mp1 in tqdm(list(enumerate(multiphonemesInPart[part][:-1])), desc="Linking multiphoneme to missing keys",
+                             unit=" multiphonemes", ascii=True, ncols=100):
+
             for mp2 in multiphonemesInPart[part][mp1i+1:]:
                 mismatch_literals[part][mp1,mp2] = {}
                 for k in keysInPart[part]:
@@ -443,18 +423,18 @@ def optimizeTheory(keyboard: Keyboard,
         solver[part].parameters.max_time_in_seconds = SOLVER_TIME
         solver[part].parameters.log_search_progress = SOLVER_LOG
         print(f"Solving for {part} model...")
+        printer = SolutionPrinter(model[part], 1.0,
+              [overlapCosts[part], allStrokesPenaltyCost[part],
+              allPhonemePairsOrderPenaltyCost[part]])
         status = solver[part].Solve(model[part],
-              _SolutionPrinter(model[part],
-              1.0,
-              [overlapCosts[part],
-              allStrokesPenaltyCost[part],
-              allPhonemePairsOrderPenaltyCost[part]]))
+              printer,)
 
         # Output
         print(f"Status for {part}: {status}")
         print(solver[part].StatusName(status))
         if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
             print(f'Total penalty = {solver[part].ObjectiveValue():,}')
+            printer.on_solution_callback()
             strokesAssignedToPhoneme: dict[str, list[tuple[int, ...]]] = {p: [] for p in phonemesByPart[part]}
             keysAssignedToPhoneme: dict[str, list[int]] = {p: [] for p in phonemesByPart[part]}
             phonemesAssignedToStroke: dict[tuple[int, ...], list[str]] = {s: [] for s in strokesInPart[part]}
@@ -466,7 +446,7 @@ def optimizeTheory(keyboard: Keyboard,
                     if solver[part].Value(strokeIsAssignedToPhoneme[part][(phoneme, stroke)]) == 1:
                         strokesAssignedToPhoneme[phoneme].append(stroke)
                         phonemesAssignedToStroke[stroke].append(phoneme)
-                        keyboard.addToLayout(stroke, phoneme)
+                        keyboard.addToLayout(stroke, phoneme, Syllable.getSortedPhonemesNames(part))
             for k in keysInPart[part]:
                 for phoneme in phonemesByPart[part]:
                     if solver[part].Value(keyIsAssignedToPhoneme[part][(phoneme, k)]) == 1:
