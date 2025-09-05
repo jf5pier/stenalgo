@@ -2,10 +2,11 @@
 from dataclasses import dataclass, fields
 from math import log,ceil
 from abc  import ABC, abstractmethod
-from typing import override, Any, Self
+from typing import override, Any, Self, TypeAlias
 import json
 import ast
 import sys
+
 
 """
 Nomenclature and concerns :
@@ -15,13 +16,16 @@ Nomenclature and concerns :
 
 - A keypress coressponds to one or more keys pressed by one finger.
 -- Keypresses of multiple keys are more tireing (weight) than simpler keypresses.
+-- They define what keys a finger can physically press together.
 
-- A stroke (chord) corresponds to one or more keypresses pressed by one or more fingers.
+- A stroke (chord) corresponds to one or more keys pressed by one or more fingers.
 -- Longer strokes are more tireing and prone to errors.
 -- Some strokes are more difficult to type (alternating lower and upper key rows). 
 --- TODO: add this weight function
 """
-
+Keypress: TypeAlias = tuple[int, ...]
+Stroke: TypeAlias = tuple[int, ...]
+Strokes: TypeAlias = tuple[Stroke, ...]
 
 class FingerWeights(object):
     """
@@ -50,21 +54,21 @@ class FingerWeights(object):
 
 @dataclass
 class PositionWeights(object):
-    leftPinky : dict[tuple[int, ...], int]
-    leftRing : dict[tuple[int, ...], int]
-    leftMiddle : dict[tuple[int, ...], int]
-    leftIndex : dict[tuple[int, ...], int]
-    leftThumb : dict[tuple[int, ...], int]
-    rightThumb : dict[tuple[int, ...], int]
-    rightIndex : dict[tuple[int, ...], int]
-    rightMiddle : dict[tuple[int, ...], int]
-    rightRing : dict[tuple[int, ...], int]
-    rightPinky : dict[tuple[int, ...], int]
+    leftPinky : dict[Keypress, int]
+    leftRing : dict[Keypress, int]
+    leftMiddle : dict[Keypress, int]
+    leftIndex : dict[Keypress, int]
+    leftThumb : dict[Keypress, int]
+    rightThumb : dict[Keypress, int]
+    rightIndex : dict[Keypress, int]
+    rightMiddle : dict[Keypress, int]
+    rightRing : dict[Keypress, int]
+    rightPinky : dict[Keypress, int]
     fingers: tuple[str, ...] = ("leftPinky", "leftRing", "leftMiddle", "leftIndex",
                           "leftThumb", "rightThumb", "rightIndex",
                           "rightMiddle", "rightRing", "rightPinky")
 
-    def toList(self) -> list[tuple[tuple[int, ...], int]] :
+    def toList(self) -> list[tuple[Keypress, int]] :
         return (list(self.leftPinky.items())+ list(self.leftRing.items()) +
             list(self.leftMiddle.items()) + list(self.leftIndex.items()) +
             list(self.leftThumb.items()) + list(self.rightThumb.items()) +
@@ -75,7 +79,7 @@ class PositionWeights(object):
         return (getattr(self, field.name) 
             for field in fields(self) if field.name != "fingers")
 
-    def __getitem__(self, key: str) -> dict[tuple[int, ...], int]:
+    def __getitem__(self, key: str) -> dict[Keypress, int]:
         return getattr(self, key)
 
 class Keyboard(ABC):
@@ -108,7 +112,7 @@ class Keyboard(ABC):
 
     def keypressBinaryEncodingSize(self) -> None:
         bitsNeeded = 0
-        fingerKeypressDict:dict[str, dict[tuple[int, ...], int]] = self._possibleKeypress.__dict__
+        fingerKeypressDict:dict[str, dict[Keypress, int]] = self._possibleKeypress.__dict__
         for finger in fingerKeypressDict:
             #print(finger, fingerKeypressDict[finger])
             if len(fingerKeypressDict[finger]) == 0:
@@ -121,21 +125,21 @@ class Keyboard(ABC):
 
 
     @abstractmethod
-    def getPossibleStrokes(self, syllabicPart: str, nbKeysInStroke: int) -> list[tuple[int, ...]]:
+    def getPossibleStrokes(self, syllabicPart: str, nbKeysInStroke: int) -> list[Stroke]:
         """
         Get all permitted strokes in a syllabic part of a given number of keys
         """
         pass
 
     @abstractmethod
-    def getPossibleStrokesInRange(self, syllabicPart: str, minNBKeysInStroke: int, maxNBKeysInStroke: int) -> list[tuple[int, ...]]:
+    def getPossibleStrokesInRange(self, syllabicPart: str, minNBKeysInStroke: int, maxNBKeysInStroke: int) -> list[Stroke]:
         """
         Get all permitted strokes in a syllabic part of a range of number of keys
         """
         pass
 
     @abstractmethod
-    def getStrokeCost(self, stroke: tuple[int, ...], syllabicPart: str) -> int:
+    def getStrokeCost(self, stroke: Stroke, syllabicPart: str) -> int:
         """
         Get the cost of pressing a stroke in a syllabic part
         """
@@ -146,36 +150,36 @@ class Keyboard(ABC):
         pass
 
     @abstractmethod
-    def addToLayout(self, stroke: tuple[int, ...], phoneme: str, phonemeOrder: list[str]|None = None) -> None:
+    def addToLayout(self, stroke: Stroke, phoneme: str, phonemeOrder: list[str]|None = None) -> None:
         """
         Add a phoneme to the layout and assign it to a keypress.
         """
         pass
 
     @abstractmethod
-    def removeFromLayout(self, stroke: tuple[int, ...], phoneme: str) -> None:
+    def removeFromLayout(self, stroke: Stroke, phoneme: str) -> None:
         """
         Remove a phoneme to the layout and assign it to a keypress.
         """
         pass
 
     @abstractmethod
-    def getPhonemesOfStroke(self, stroke: tuple[int, ...]) -> list[str]:
+    def getPhonemesOfStroke(self, stroke: Stroke) -> list[str]:
         pass
 
     @abstractmethod
-    def getStrokesOfPhoneme(self, phoneme: str, syllabicPart: str) -> list[tuple[int, ...]]:
+    def getStrokesOfPhoneme(self, phoneme: str, syllabicPart: str) -> list[Stroke]:
         pass
 
     @abstractmethod
-    def getStrokeOfSyllableByPart(self, phonemesByPart: dict[str, list[str]]) -> tuple[int, ...]:
+    def getStrokeOfSyllableByPart(self, phonemesByPart: dict[str, list[str]]) -> Stroke:
         """
         Get the stroke corresponding to a syllable with phonemes in each syllabic part.
         """
         pass
 
     @abstractmethod
-    def strokesToString(self, strokes: tuple[tuple[int, ...], ...]) -> str:
+    def strokesToString(self, strokes: Strokes) -> str:
         pass
 
     @abstractmethod
@@ -183,7 +187,7 @@ class Keyboard(ABC):
         pass
 
     @staticmethod
-    def strokeIsLowerThen(stroke1: tuple[int, ...], stroke2: tuple[int, ...], recurse: int = 0) -> int:
+    def strokeIsLowerThen(stroke1: Stroke, stroke2: Stroke, recurse: int = 0) -> int:
         """ 
         Helper function for sorting lists of strokes.
         """
@@ -350,7 +354,7 @@ Fingers assignments :
 
     def __init__(self, nbKeysPerSyllabicPart: tuple[tuple[str, int], ...] =
                  (("onset", 8), ("nucleus", 4), ("coda", 10))) -> None:
-        self.phonemesAssignedToStroke: dict[tuple[int, ...], list[str]] = {}
+        self.phonemesAssignedToStroke: dict[Stroke, list[str]] = {}
         self.allowedKeys: list[int] = [k for k in self._possibleKeys if k not in self._reservedKeys]
 
         len1 = len(self.allowedKeys)
@@ -392,7 +396,7 @@ Fingers assignments :
         self.phonemesAssignedToStroke = {}
 
     @override
-    def addToLayout(self, stroke: tuple[int, ...], phoneme: str, phonemeOrder: list[str]|None = None) -> None:
+    def addToLayout(self, stroke: Stroke, phoneme: str, phonemeOrder: list[str]|None = None) -> None:
         """
         Add a phoneme to a stroke in a layout. Orders the phoneme insertion in list of the stroke
         by reverse frequency if phonemeOrder is given.
@@ -422,7 +426,7 @@ Fingers assignments :
 
     
     @override
-    def removeFromLayout(self, stroke: tuple[int, ...], phoneme: str) -> None:
+    def removeFromLayout(self, stroke: Stroke, phoneme: str) -> None:
         if self.phonemesAssignedToStroke.get(stroke, None) is None:
             raise KeyError(f"Keypress {stroke} not found in the layout")
         if len(self.phonemesAssignedToStroke[stroke]) == 1 and self.phonemesAssignedToStroke[stroke][0] == phoneme:
@@ -434,18 +438,18 @@ Fingers assignments :
             raise KeyError(f"Phoneme {phoneme} not found in keypress {stroke}")
 
     @override
-    def getPhonemesOfStroke(self, stroke: tuple[int, ...]) -> list[str]:
+    def getPhonemesOfStroke(self, stroke: Stroke) -> list[str]:
         """
         Find all phonemes assigned to a given stroke
         """
         return self.phonemesAssignedToStroke.get(stroke, [])[:]
 
     @override
-    def getStrokesOfPhoneme(self, phoneme: str, syllabicPart: str) -> list[tuple[int, ...]]:
+    def getStrokesOfPhoneme(self, phoneme: str, syllabicPart: str) -> list[Stroke]:
         """
         Find all strokes in a syllabic part that results in a given phonem
         """
-        assignedKeypress: list[tuple[int, ...]] = []
+        assignedKeypress: list[Stroke] = []
 #        print(f"Searching for phoneme {phoneme} in syllabic part {syllabicPart}")
         for keypress, phonemes in self.phonemesAssignedToStroke.items():
 #            print(f"Checking keypress {keypress} with phonemes {phonemes}")
@@ -471,7 +475,7 @@ Fingers assignments :
                     break
         return fingers[:]
 
-    def buildStrokes(self, accumulator:list[tuple[int, ...]], fingers: list[str],
+    def buildStrokes(self, accumulator: list[Stroke], fingers: list[str],
                      nbKeysLeft: int, stroke: list[int], syllabicPart: str) -> None:
         """
         Recursively build all possible strokes using the given fingers and number of keys left to press.
@@ -496,7 +500,7 @@ Fingers assignments :
         return
 
     @override
-    def getPossibleStrokes(self, syllabicPart: str, nbKeysInStroke: int) -> list[tuple[int, ...]]:
+    def getPossibleStrokes(self, syllabicPart: str, nbKeysInStroke: int) -> list[Stroke]:
         """ 
         Return key IDs for keys that can be pressed together to register a phoneme, 
         forming strokes of a given number of keys.
@@ -506,23 +510,23 @@ Fingers assignments :
 
         fingersInSyllabicPart: list[str] = self.getFingersInSyllabicPart(syllabicPart)
 
-        strokes: list[tuple[int, ...]] = []
+        strokes: list[Stroke] = []
         self.buildStrokes(strokes, fingersInSyllabicPart, nbKeysInStroke, [], syllabicPart)
         return strokes[:]
 
     @override
-    def getPossibleStrokesInRange(self, syllabicPart: str, minNBKeysInStroke: int, maxNBKeysInStroke: int) -> list[tuple[int, ...]]:
+    def getPossibleStrokesInRange(self, syllabicPart: str, minNBKeysInStroke: int, maxNBKeysInStroke: int) -> list[Stroke]:
         """ 
         Return key IDs for keys that can be pressed together to register a phoneme, 
         forming strokes of a range of number of keys.
         """
-        strokesInRange: list[tuple[int, ...]] = []
+        strokesInRange: list[Stroke] = []
         for nb in range(minNBKeysInStroke, maxNBKeysInStroke+1):
             strokesInRange += self.getPossibleStrokes(syllabicPart, nb)
         return strokesInRange[:]
 
     @override
-    def getStrokeCost(self, stroke: tuple[int, ...], syllabicPart: str) -> int:
+    def getStrokeCost(self, stroke: Stroke, syllabicPart: str) -> int:
         """
         Get the cost of pressing a stroke in a syllabic part defined by the sum of
         costs associated to each finger used in the stroke.
@@ -541,7 +545,7 @@ Fingers assignments :
             cost += self.getStrokeShapeCost(stroke)
         return int(cost * 0.85 **len(fingerInUse)) #Discount for using multiple fingers
 
-    def _strokeZigZagCost(self, stroke: tuple[int, ...]) -> int:
+    def _strokeZigZagCost(self, stroke: Stroke) -> int:
         s1, s2 = stroke
         if (s1 % 2 == 0 and s2 % 2 == 1 and s2 - s1 == 3):
             # Zig Zag : Keys on different sides of the keyboard
@@ -550,14 +554,14 @@ Fingers assignments :
             return 100
         return 0
 
-    def _strokeGapCost(self, stroke: tuple[int, ...]) -> int:
+    def _strokeGapCost(self, stroke: Stroke) -> int:
         s1, s2 = stroke
         if (s1 % 2 == 0 and s2 - s1 >= 4) or (s1 % 2 == 1 and s2 - s1 >= 3) :
             # Gap : there is an empty row between the two keys
             return 100
         return 0
 
-    def getStrokeShapeCost(self, stroke: tuple[int, ...]) -> int:
+    def getStrokeShapeCost(self, stroke: Stroke) -> int:
         cost = 0
         if len(stroke) == 2 :
             cost += self._strokeZigZagCost(stroke)
@@ -577,7 +581,7 @@ Fingers assignments :
         return cost
 
     @override
-    def getStrokeOfSyllableByPart(self, phonemesByPart: dict[str, list[str]]) -> tuple[int, ...]:
+    def getStrokeOfSyllableByPart(self, phonemesByPart: dict[str, list[str]]) -> Stroke:
         """
         Get the list of strokes that builds a syllable.
         """
@@ -592,7 +596,7 @@ Fingers assignments :
         return tuple(strokes)
 
     @override
-    def strokesToString(self, strokes: tuple[tuple[int, ...], ...]) -> str:
+    def strokesToString(self, strokes: Strokes) -> str:
         """
         Convert a list of strokes to a string representation.
         """
@@ -614,7 +618,7 @@ Fingers assignments :
         return strokeString
 
     def setIrelandEnglishLayout(self) -> None:
-        layout: dict[str, list[tuple[tuple[int, ...], str]]]={
+        layout: dict[str, list[tuple[Stroke, str]]]={
             "onset": [
                 ((2,),"s"), ((3,),"s"), ((4,),"t"), ((5,),"k"), ((6,),"p"), ((7,),"w"),
                 ((8,),"h"), ((9,),"r"), ((10,),"*"), ((2,4),"f"), ((3,4),"x"), ((3,5),"q"),
