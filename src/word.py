@@ -65,7 +65,7 @@ class Word:
     orthoGramCat: list[GramCat]
     gender: str | None
     number: str | None
-    infoVerb: list[list[str]] | None
+    infoVerb: str | None
     rawSyllCV: str
     rawOrthosyllCV: str
     frequencyBook: float
@@ -74,6 +74,7 @@ class Word:
     syllCV: list[list[str]] = field(init=False)
     frequency: float = field(init=False)
     _hash: str = field(init=False)
+    _infoVerb: list[list[str]] | None = field(init=False)
 
     def __post_init__(self) -> None:
         self.fix_e_n_en()
@@ -83,7 +84,36 @@ class Word:
         # self.frequency = 0.9*self.frequencyFilm + 0.1* self.frequencyBook
         self.frequency = self.frequencyFilm
         self._hash = f"{self.ortho}{self.phonology}{self.lemme}{self.gramCat.name}{self.gender}{self.number}"
- 
+        self._infoVerb = [self.splitInfoVerb(infoVerb)
+                            for infoVerb in filter(lambda iv: iv != '', self.infoVerb.split(";"))
+                            ] if self.infoVerb is not None else None
+
+    def splitInfoVerb(self, infoVerb: str) -> list[str]:
+        """ Split string of the kind : "ind:pre:1p" into a list of features
+            ["indicatif", "présent", "pers_1", "nbr_p"]
+        """
+        iv = infoVerb.split(":")
+        ret: list[str] = []
+        if iv[0] == "inf":
+            return ["infinitif"]
+        else:
+            # Append verbe mode first
+            ret.append("indicatif") if iv[0] == "ind" else None
+            ret.append("impératif") if iv[0] == "imp" else None
+            ret.append("subjonctif") if iv[0] == "sub" else None
+            ret.append("participe") if iv[0] == "par" else None
+            ret.append("conditionnel") if iv[0] == "cnd" else None
+            # Append verbe tense second
+            ret.append("présent") if iv[1] == "pre" else None
+            ret.append("passé") if iv[1] == "pas" else None
+            # Participe are done parsing here
+            if "participe" != ret[0]:
+                ret.append("imparfait") if iv[1] == "imp" else None
+                ret.append("future") if iv[1] == "fut" else None
+                # All tenses except participe and infinitif also have person and number
+                ret.append("pers_%s"%iv[2][0])  #ex.: 1ier personne du pluriel = pers_1 nbr_p
+                ret.append("nbr_%s"%iv[2][1])
+        return ret
 
     @override
     def __hash__(self) -> int:
@@ -99,15 +129,19 @@ class Word:
         features += [self.gramCat.name]
         features += [self.gender] if self.gender != None else []
         features += [self.number] if self.number != None else []
-        if self.infoVerb is not None:
-            for singleInfoVerb in self.infoVerb:
-                combos: list[str] = []
-                for comboSize in range(1, len(singleInfoVerb)+1):
-                    combos += list(combinations(singleInfoVerb, comboSize))
-                for combination in combos:
-                    combinationStr: str =":".join(combination)
-                    features += [combinationStr]
-        return features
+        try: 
+            if self._infoVerb is not None:
+                for singleInfoVerb in self._infoVerb:
+                    combos: list[str] = []
+                    for comboSize in range(1, len(singleInfoVerb)+1):
+                        combos += list(combinations(singleInfoVerb, comboSize))
+                    for combination in combos:
+                        combinationStr: str =":".join(combination)
+                        features += [combinationStr]
+            return features
+        except TypeError as e:
+            print(self.ortho, self.infoVerb, self._infoVerb)
+            raise e
 
 
     def fix_e_n_en(self) -> None:
