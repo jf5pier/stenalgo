@@ -27,7 +27,7 @@ from copy import deepcopy
 from src.grammar import Phoneme, Syllable, SyllableCollection
 from src.word import GramCat, Word
 from typing import Any
-from src.keyboard import Keyboard, Starboard
+from src.keyboard import Keyboard, Starboard, Stroke, Strokes
 from src.cpsatsolver import optimizeKeyboard
 from src.cpsatoptimizer import optimizeTheory
 from tqdm import tqdm
@@ -99,9 +99,7 @@ class Dictionary:
                             if corpusWord["genre"] != '' else None,
                         number = corpusWord["nombre"]
                             if corpusWord["nombre"] != '' else None,
-                        infoVerb = [infoverb.split(":")
-                            for infoverb in corpusWord["infover"].split(";")
-                            if infoverb != '']
+                        infoVerb = corpusWord["infover"] 
                             if corpusWord["infover"] != '' else None,
                         rawSyllCV = corpusWord["syll_cv"],
                         rawOrthosyllCV = corpusWord["orthosyll_cv"],
@@ -255,7 +253,7 @@ class Dictionary:
                                           ambiguity[syllabicPart].items()))
         return sorted(biphonemeAmbiguity, key=lambda x: x[1], reverse=False)
 
-    def buildTheory(self, keyboard: Keyboard) -> dict[tuple[tuple[int, ...], ...], list[Word]]:
+    def buildTheory(self, keyboard: Keyboard) -> dict[Strokes, list[Word]]:
         theory: dict[tuple[tuple[int, ...], ...], list[Word]] = {}
         for word in tqdm(self.words, desc="Building theory", unit=" words", ascii=True, ncols=80):
             syllableNames = word.phonemesToSyllableNames(withSilent=False)
@@ -267,7 +265,7 @@ class Dictionary:
             theory[syllableStrokes].append(word)
         return theory
 
-    def writeTheory(self, theory: dict[tuple[tuple[int, ...], ...], list[Word]], keyboard: Keyboard, filename: str) -> None:
+    def writeTheory(self, theory: dict[Strokes, list[Word]], keyboard: Keyboard, filename: str) -> None:
         with open(filename, "w") as f:
             _ = f.write("strokes\twords\n")
             maxAmbiguity = 0
@@ -366,8 +364,61 @@ if __name__ == "__main__":
     #optimizeKeyboard(starboard, dictionary.syllabicPartAmbiguity, ["onset", "nucleus" ,"coda"])
     starboard.printLayout()
     #starboard.toJSONFile('starboard.json')
-    theory = dictionary.buildTheory(starboard)
-    dictionary.writeTheory(theory, starboard, "theory.tsv")
-    optimizeTheory(theory, starboard, ["onset", "nucleus" ,"coda"])
+    theory: dict[Strokes, list[Word]] = {}
+    if os.path.exists("FirstTheory.pickle"):
+        with open("FirstTheory.pickle", "rb") as pfile:
+            theory = pickle.load(pfile)
+    else:
+        theory = dictionary.buildTheory(starboard)
+        dictionary.writeTheory(theory, starboard, "theory.tsv")
+        with open("FirstTheory.pickle", "wb") as pfile:
+            pickle.dump(theory, pfile)
+
+
+    # lemmeOrthoWords: dict[tuple[str, str], list[Word]] = {}
+    # for stokes, words in theory.items():
+    #     for word in words:
+    #         lemmeOrthoWords[(word.lemme, word.ortho)] = lemmeOrthoWords.get((word.lemme, word.ortho), []) + [word]
+    # for (lemme, ortho), words in lemmeOrthoWords.items():
+    #     if len(words) > 1 :
+    #         print(f"Lemme {lemme} ortho {ortho} has {len(words)} words features: ", list(map(lambda w: (w.gramCat.name, w.gender, w.number, w.infoVerb), words)))
+    #
+    # infoVerbs = []
+    # for word in dictionary.words:
+    #     if  word.infoVerb is not None:
+    #         for iv in word.infoVerb:
+    #             if iv not in infoVerbs:
+    #                 print(iv)
+    #                 infoVerbs.append(iv)
+    # sys.exit(1)
+    augmentedTheory = {}
+    if os.path.exists("AugTheory.pickle"):
+        with open("AugTheory.pickle", "rb") as pfile:
+            augmentedTheory = pickle.load(pfile)
+    else :
+        augmentedTheory = optimizeTheory(theory, starboard)
+        with open("AugTheory.pickle", "wb") as pfile:
+            pickle.dump(augmentedTheory, pfile)
+
+    featureCount: dict[str, int] = {}
+    singleFeatureDiscrimator: dict[str, int] = {}
+    for strokes, lemmeDict in augmentedTheory.items():
+        for lemme, orthoDict in lemmeDict.items():
+            for ortho, wordsFeatures in orthoDict.items():
+                orthoFeatures: set[str] = set()
+                for word, features in wordsFeatures:
+                    for f in features:
+                        orthoFeatures.add(f)
+                        featureCount[f] = featureCount.get(f, 0) + 1
+                if len(orthoFeatures) == 1:
+                    f = list(orthoFeatures)[0]
+                    singleFeatureDiscrimator[f] = singleFeatureDiscrimator.get(f, 0) + 1
+                    if f in ['indicatif:pers_3:nbr_s','indicatif:présent:nbr_p','présent:nbr_p', 'indicatif:nbr_s'] :
+                        print(f"\nSingle feature discrimator '{f}' for {lemme} {ortho}: ", orthoDict.keys())
+                        for word, features in wordsFeatures:
+                            print("   ", word.ortho, ",".join(word.getFeatures())," discrim ", features)
+
+    print("Feature counts:", sorted(featureCount.items(), key=lambda x: x[1], reverse=True))
+    print("Single feature discrimator:", sorted(singleFeatureDiscrimator.items(), key=lambda x: x[1], reverse=True))
 
 
