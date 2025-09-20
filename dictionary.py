@@ -29,7 +29,8 @@ from src.word import GramCat, Word
 from typing import Any
 from src.keyboard import Keyboard, Starboard, Stroke, Strokes
 from src.cpsatsolver import optimizeKeyboard
-from src.cpsatoptimizer import optimizeTheory
+from src.greedyoptimizer import extractDiscriminatingFeatures, greedyOptimizeDiscriminator
+#from src.cpsatoptimizer import optimizeTheory
 from tqdm import tqdm
 import sys
 
@@ -392,13 +393,32 @@ if __name__ == "__main__":
     #                 infoVerbs.append(iv)
     # sys.exit(1)
     augmentedTheory = {}
-    if os.path.exists("AugTheory.pickle"):
-        with open("AugTheory.pickle", "rb") as pfile:
-            augmentedTheory = pickle.load(pfile)
-    else :
-        augmentedTheory = optimizeTheory(theory, starboard)
-        with open("AugTheory.pickle", "wb") as pfile:
-            pickle.dump(augmentedTheory, pfile)
+    # if os.path.exists("AugTheory.pickle"):
+    #     with open("AugTheory.pickle", "rb") as pfile:
+    #         augmentedTheory = pickle.load(pfile)
+    # else :
+    #     augmentedTheory = optimizeTheory(theory, starboard)
+    #     with open("AugTheory.pickle", "wb") as pfile:
+    #         pickle.dump(augmentedTheory, pfile)
+
+    
+    discrimFeatureWords: dict[str, set[str]] = {}
+    orderedFeatures: list[str] = []
+    if os.path.exists("FeatureDiscrimator.pickle"):
+        with open("FeatureDiscrimator.pickle", "rb") as pfile:
+            discrimFeatureWords = pickle.load(pfile)
+            orderedFeatures = pickle.load(pfile)
+    else:
+        discrimFeatureWords, orderedFeatures= \
+            extractDiscriminatingFeatures(theory)
+        with open("FeatureDiscrimator.pickle", "wb") as pfile:
+            pickle.dump(discrimFeatureWords, pfile)
+            pickle.dump(orderedFeatures, pfile)
+
+    augmentedTheory = \
+        greedyOptimizeDiscriminator(theory, 
+            discrimFeatureWords,
+            orderedFeatures, starboard)
 
     featureCount: dict[str, int] = {}
     singleFeatureDiscrimator: dict[str, int] = {}
