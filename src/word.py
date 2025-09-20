@@ -73,7 +73,7 @@ class Word:
     orthosyllCV: list[list[str]] = field(init=False)
     syllCV: list[list[str]] = field(init=False)
     frequency: float = field(init=False)
-    _hash: str = field(init=False)
+    _hash: int = field(init=False)
     _infoVerb: list[list[str]] | None = field(init=False)
 
     def __post_init__(self) -> None:
@@ -83,7 +83,7 @@ class Word:
         # Formula to be optimized following the need of the typist
         # self.frequency = 0.9*self.frequencyFilm + 0.1* self.frequencyBook
         self.frequency = self.frequencyFilm
-        self._hash = f"{self.ortho}{self.phonology}{self.lemme}{self.gramCat.name}{self.gender}{self.number}"
+        self._hash = hash(f"{self.ortho}{self.phonology}{self.lemme}{self.gramCat.name}{self.gender}{self.number}")
         self._infoVerb = [self.splitInfoVerb(infoVerb)
                             for infoVerb in filter(lambda iv: iv != '', self.infoVerb.split(";"))
                             ] if self.infoVerb is not None else None
@@ -117,7 +117,7 @@ class Word:
 
     @override
     def __hash__(self) -> int:
-        return hash(self._hash)
+        return self._hash
 
     def __eq__(self, other):
         if not isinstance(other, Word):
@@ -125,11 +125,20 @@ class Word:
         return self._hash == other._hash
 
     def getFeatures(self) -> list[str]:
+        """
+        Extract features from the word to help discriminate it from other words that are homophones.
+        Also adds some combined features that could be useful like "not-masculin-singular"
+        """
         features: list[str] = []
         features += [self.gramCat.name]
         features += [self.gender] if self.gender != None else []
         features += [self.number] if self.number != None else []
-        try: 
+        # Adding gender_number feature combo
+        if self.gender != None and self.number != None:
+            features += [f"{self.gender}_{self.number}"]
+            if features[-1] != "m_s":
+                features += ["not_m_s"]
+        try:
             if self._infoVerb is not None:
                 for singleInfoVerb in self._infoVerb:
                     combos: list[str] = []
