@@ -83391,9 +83391,9 @@ mûrit	myRi	mûrir	VER	VER			ind:pre:3s;ind:pas:3s;	m_y|R_i	m_û|r_it	1.15	0.3
 mûron	myR§	mûron	NOM	NOM	m	s		m_y|R_§	m_û|r_on	0.07	0.0
 mûrs	myR	mûr	ADJ	ADJ	m	p		m_y_R_#	m_û_r_s	3.92	1.27
 n'	n	ne	ADV	AUX,NOM,PRO:per,ADV				n_#	n_'	6084.12	8860.45
-n'	n	n'	PRO:per	AUX,NOM,PRO:per,ADV				n_#	n_'	0.0	0.18
-n'	n	n	NOM	AUX,NOM,PRO:per,ADV	m	s		n_#	n_'	0.0	0.14
-n'	n	avoir	AUX	AUX,NOM,PRO:per,ADV			ind:pre:3s;	n_#	n_'	0.0	0.01
+n'	n	ne	PRO:per	AUX,NOM,PRO:per,ADV				n_#	n_'	0.0	0.18
+n'	n	ne	NOM	AUX,NOM,PRO:per,ADV	m	s		n_#	n_'	0.0	0.14
+#n'	n	avoir	AUX	AUX,NOM,PRO:per,ADV			ind:pre:3s;	n_#	n_'	0.0	0.01
 na	na	na	ONO	NOM,ONO				n_a	n_a	0.81	5.66
 na	na	na	NOM	NOM,ONO	f	s		n_a	n_a	0.0	0.01
 nabab	nabab	nabab	NOM	NOM	m	s		n_a|b_a_b	n_a|b_a_b	0.54	0.55
