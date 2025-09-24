@@ -71700,7 +71700,7 @@ jambage	Z@baZ	jambage	NOM	NOM	m	s		Z_@|b_a_Z	j_am|b_a_ge	0.2	0.01
 jambages	Z@baZ	jambage	NOM	NOM	m	p		Z_@|b_a_Z_#	j_am|b_a_g_es	0.88	0.01
 jambart	Z@baR	jambart	NOM	NOM	m	s		Z_@|b_a_R_#	j_am|b_a_r_t	0.07	0.0
 jambe	Z@b	jambe	NOM	NOM	f	s		Z_@_b_#	j_am_b_e	49.93	46.31
-jambes	Z@b	jambe	NOM	NOM	f			Z_@_b_#	j_am_b_es	171.01	67.51
+jambes	Z@b	jambe	NOM	NOM	f	p		Z_@_b_#	j_am_b_es	171.01	67.51
 jambier	Z@bje	jambier	NOM	NOM	m	s		Z_@|b_j_e	j_am|b_i_er	0.0	0.01
 jambière	Z@bjER	jambière	NOM	NOM	f	s		Z_@|b_j_E_R_#	j_am|b_i_è_r_e	0.0	0.02
 jambières	Z@bjER	jambière	NOM	ADJ,NOM	f	p		Z_@|b_j_E_R_#	j_am|b_i_è_r_es	0.61	0.23
