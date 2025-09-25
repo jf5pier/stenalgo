@@ -73026,10 +73026,10 @@ kératoplastie	keRatoplasti	NOM	k.é.r.a.t.o.p.l.a.s.t.i.e	k-k.é-e.r-R.a-a.t-t.
 kératose	keRatoz	NOM	k.é.r.a.t.o.s.e	k-k.é-e.r-R.a-a.t-t.o-o.s-z.e-#	1.1.1.1.1.0.0.1.
 kérosène	keRozEn	NOM	k.é.r.o.s.è.n.e	k-k.é-e.r-R.o-o.s-z.è-E.n-n.e-#	1.1.1.0.0.1.1.1.
 kérosènes	keRozEn	NOM	k.é.r.o.s.è.n.es	k-k.é-e.r-R.o-o.s-z.è-E.n-n.es-#	1.1.1.0.0.1.1.1.
-l	l	ADJ:num	l	l-l	1
-l	l	ART:def	l	l-l	1
-l	l	NOM	l	l-l	1
-l	l	PRO:per	l	l-l	1
+l'	l	ADJ:num	l.'	l-l.'-#	1.1.
+#l	l	ART:def	l	l-l	1
+#l	l	NOM	l	l-l	1
+#l	l	PRO:per	l	l-l	1
 l'	l	NOM	l.'	l-l.'-#	1.1.
 l'	l	ART:def	l.'	l-l.'-#	1.1.
 l'	l	LIA	l.'	l-l.'-#	1.1.

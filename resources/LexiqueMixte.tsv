@@ -72975,14 +72975,14 @@ kératoplastie	keRatoplasti	kératoplastie	NOM	NOM	f	s		k_e|R_a|t_o|p_l_a_s|t_i_
 kératose	keRatoz	kératose	NOM	NOM	f	s		k_e|R_a|t_o_z_#	k_é|r_a|t_o_s_e	0.0	0.01
 kérosène	keRozEn	kérosène	NOM	NOM	m	s		k_e|R_o|z_E_n_#	k_é|r_o|s_è_n_e	0.14	0.91
 kérosènes	keRozEn	kérosène	NOM	NOM	m	p		k_e|R_o|z_E_n_#	k_é|r_o|s_è_n_es	0.07	0.0
-l	l	l	ART:def	ADJ:num,ART:def,NOM,PRO:per		s		l	l	3.92	78.26
-l	l	l	PRO:per	ADJ:num,ART:def,NOM,PRO:per		s		l	l	2.84	26.37
-l	l	l	NOM	ADJ:num,ART:def,NOM,PRO:per	m	s		l	l	0.14	4.94
-l	l	l	ADJ:num	ADJ:num,ART:def,NOM,PRO:per		s		l	l	0.68	2.55
-l'	l	l'	ART:def	NOM,ART:def,LIA,PRO:per	m	s		l_#	l_'	12746.76	8129.41
-l'	l	l'	PRO:per	NOM,ART:def,LIA,PRO:per		s		l_#	l_'	2575.41	3260.83
-l'	l	l	NOM	NOM,ART:def,LIA,PRO:per	m			l_#	l_'	0.41	0.5
-l'	l	l'	LIA	NOM,ART:def,LIA,PRO:per				l_#	l_'	412.57	0.0
+#l	l	l	ART:def	ADJ:num,ART:def,NOM,PRO:per		s		l	l	3.92	78.26
+#l	l	l	PRO:per	ADJ:num,ART:def,NOM,PRO:per		s		l	l	2.84	26.37
+#l	l	l	NOM	ADJ:num,ART:def,NOM,PRO:per	m	s		l	l	0.14	4.94
+l'	l	l'	ADJ:num	ADJ:num,NOM,ART:def,LIA,PRO:per		s		l_#	l_''	0.68	2.55
+l'	l	l'	ART:def	ADJ:num,NOM,ART:def,LIA,PRO:per	m	s		l_#	l_'	12746.76	8129.41
+l'	l	l'	PRO:per	ADJ:num,NOM,ART:def,LIA,PRO:per		s		l_#	l_'	2575.41	3260.83
+l'	l	l'	NOM	ADJ:num,NOM,ART:def,LIA,PRO:per	m			l_#	l_'	0.41	0.5
+l'	l	l'	LIA	ADJ:num,NOM,ART:def,LIA,PRO:per				l_#	l_'	412.57	0.0
 l'un	l1	l'un	PRO:ind	PRO:ind				l_#_1	l_'_un	208.92	127.72
 l'une	lyn	l'une	PRO:ind	ADV,PRO:ind	f			l_#_y_n_#	l_'_u_n_e	93.58	36.12
 l'une	lyn	l'une	ADV	ADV,PRO:ind				l_#_y_n_#	l_'_u_n_e	0.07	0.01
