@@ -122113,10 +122113,10 @@ sûreté	syR°te	sûreté	NOM	NOM	f	s		s_y|R_°|t_e	s_û|r_e|t_é	9.86	7.01
 sûretés	syR°te	sûreté	NOM	NOM	f	p		s_y|R_°|t_e_#	s_û|r_e|t_é_s	0.2	0.03
 sûrs	syR	sûr	ADJ	ADJ	m	p		s_y_R_#	s_û_r_s	10.0	17.43
 sût	sy	savoir	VER	VER			sub:imp:3s;	s_y	s_ût	6.62	0.08
-t	t	t	PRO:per	NOM,PRO:per		s		t	t	4.53	88.47
-t	t	t	NOM	NOM,PRO:per	m			t	t	4.93	30.95
+#t	t	t	PRO:per	NOM,PRO:per		s		t	t	4.53	88.47
+#t	t	t	NOM	NOM,PRO:per	m			t	t	4.93	30.95
 t'	t	t'	PRO:per	NOM,PRO:per		s		t_#	t_'	779.93	4344.23
-t'	t	t	NOM	NOM,PRO:per	m			t_#	t_'	0.14	0.01
+t'	t	t'	NOM	NOM,PRO:per	m			t_#	t_'	0.14	0.01
 ta	ta	ta	ADJ:pos	ADJ:pos				t_a	t_a	251.69	1265.97
 tab	tab	tab	ADJ	ADJ	m	s		t_a_b	t_a_b	0.0	0.23
 tabac	taba	tabac	NOM	NOM	m	s		t_a|b_a_#	t_a|b_a_c	41.28	15.7
