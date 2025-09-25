@@ -33612,9 +33612,9 @@ côtoyées	kotwaje	VER	c.ô.t.oy.é.es	c-k.ô-o.t-t.oy-waj.é-e.es-#	1.1.1.1.1.1
 côtoyés	kotwaje	VER	c.ô.t.oy.é.s	c-k.ô-o.t-t.oy-waj.é-e.s-#	1.1.1.1.1.1.
 côté	kote	NOM	c.ô.t.é	c-k.ô-o.t-t.é-e	1.1.1.1.
 côtés	kote	NOM	c.ô.t.é.s	c-k.ô-o.t-t.é-e.s-#	1.1.1.1.1.
-d	d	ADJ:num	d	d-d	1
-d	d	NOM	d	d-d	1
-d	d	PRE	d	d-d	1
+d'	d	ADJ:num	d.'	d-d.'-#	1.1.
+#d	d	NOM	d	d-d	1
+#d	d	PRE	d	d-d	1
 d'	d	NOM	d.'	d-d.'-#	1.1.
 d'	d	PRE	d.'	d-d.'-#	1.1.
 d'abord	dabOR	ADV	d.'.a.b.o.r.d	d-d.'-#.a-a.b-b.o-O.r-R.d-#	1.1.1.1.1.1.1.
