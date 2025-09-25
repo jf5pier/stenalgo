@@ -76164,6 +76164,9 @@ lézardés	lezaRde	lézarder	VER	VER,ADJ	m	p	par:pas;	l_e|z_a_R|d_e_#	l_é|z_a_r
 lézardés	lezaRde	lézardé	ADJ	VER,ADJ	m	p		l_e|z_a_R|d_e_#	l_é|z_a_r|d_é_s	0.27	0.0
 lûmes	lym	lire	VER	VER			ind:pas:1p;	l_y_m_#	l_û_m_es	0.2	0.01
 lût	ly	lire	VER	VER			sub:imp:3s;	l_y	l_ût	0.47	0.0
+m'	m	me	ADJ:num	ADJ:num,NOM,PRO:per				m_#	m_'	0.14	0.01
+m'	m	me	PRO:per	ADJ:num,NOM,PRO:per		s		m_#	m_'	779.93	4344.23
+m'	m	me	NOM	NOM,ADJ:num,PRO:per	m			m_#	m_'	0.14	0.01
 ma	ma	ma	ADJ:pos	ADJ:pos,NOM				m_a	m_a	1667.16	2346.9
 ma	ma	ma	NOM	ADJ:pos,NOM		s		m_a	m_a	0.0	0.19
 maboul	mabul	maboul	ADJ	ADJ,NOM	m	s		m_a|b_u_l	m_a|b_ou_l	0.68	0.61
