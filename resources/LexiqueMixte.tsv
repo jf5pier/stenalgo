@@ -6482,7 +6482,7 @@ antipathiques	@tipatik	antipathique	ADJ	ADJ		p		@|t_i|p_a|t_i_k_#	an|t_i|p_a|th_
 antipatriote	@tipatRijOt	antipatriote	ADJ	ADJ	m	s		@|t_i|p_a|t_R_ij|O_t_#	an|t_i|p_a|t_r_i|o_t_e	0.0	0.01
 antipatriotiques	@tipatRiotik	antipatriotique	ADJ	ADJ	f	p		@|t_i|p_a|t_R_i|o|t_i_k_#	an|t_i|p_a|t_r_i|o|t_i_qu_es	0.0	0.01
 antipelliculaire	@tipElikylER	antipelliculaire	ADJ	ADJ	m	s		@|t_i|p_E|l_i|k_y|l_E_R_#	an|t_i|p_e|ll_i|c_u|l_ai_r_e	0.0	0.01
-antipersonnel	@tipERsonEl	antipersonnel	ADJ	ADJ				@|t_i|p_E_R|s_o|n_E_l	an|t_i|p_e_r|s_o|nn_e_l	0.0	0.37
+antipersonnel	@tipERsonEl	antipersonnel	ADJ	ADJ	m	s		@|t_i|p_E_R|s_o|n_E_l	an|t_i|p_e_r|s_o|nn_e_l	0.0	0.37
 antipersonnelle	@tipERsonEl	antipersonnel	ADJ	ADJ	f	s		@|t_i|p_E_R|s_o|n_E_l_#	an|t_i|p_e_r|s_o|nn_e_ll_e	0.0	0.03
 antipersonnelles	@tipERsonEl	antipersonnel	ADJ	ADJ	f	p		@|t_i|p_E_R|s_o|n_E_l_#	an|t_i|p_e_r|s_o|nn_e_ll_es	0.0	0.01
 antiphonaires	@tifonER	antiphonaire	NOM	NOM	m	p		@|t_i|f_o|n_E_R_#	an|t_i|ph_o|n_ai_r_es	0.14	0.0
@@ -10331,7 +10331,7 @@ audience	odj@s	audience	NOM	NOM	f	s		o|d_j_@_s_#	au|d_i_en_c_e	7.84	13.51
 audiences	odj@s	audience	NOM	NOM	f	p		o|d_j_@_s_#	au|d_i_en_c_es	1.69	0.5
 audiencia	odj@sja	audiencia	NOM	NOM	f	s		o|d_j_@|s_j_a	au|d_i_en|c_i_a	0.07	0.0
 audienciers	odj@sje	audiencier	ADJ	ADJ	m	p		o|d_j_@|s_j_e_#	au|d_i_en|c_i_er_s	0.07	0.0
-audimat	odimat	audimat	NOM	NOM	m			o|d_i|m_a_t	au|d_i|m_a_t	0.0	1.37
+audimat	odimat	audimat	NOM	NOM	m	s		o|d_i|m_a_t	au|d_i|m_a_t	0.0	1.37
 audimats	odimat	audimat	NOM	NOM	m	p		o|d_i|m_a_t_#	au|d_i|m_a_t_s	0.0	0.03
 audio	odjo	audio	ADJ	ADJ				o|d_j_o	au|d_i_o	0.0	1.87
 audioconférence	odjok§feR@s	audioconférence	NOM	NOM	f	s		o|d_j_o|k_§|f_e|R_@_s_#	au|d_i_o|c_on|f_é|r_en_c_e	0.0	0.03
@@ -14568,7 +14568,7 @@ blettes	blEt	blet	ADJ	ADJ,NOM	f	p		b_l_E_t_#	b_l_e_tt_es	0.27	0.01
 blettir	bletiR	blettir	VER	VER			inf;	b_l_e|t_i_R	b_l_e|tt_i_r	0.07	0.0
 blettissait	blEtisE	blettir	VER	VER			ind:imp:3s;	b_l_E|t_i|s_E	b_l_e|tt_i|ss_ait	0.07	0.0
 blettissement	bletis°m@	blettissement	NOM	NOM	m	s		b_l_e|t_i|s_°|m_@	b_l_e|tt_i|ss_e|m_ent	0.14	0.0
-bleu	bl2	bleu	ADJ	ADJ,NOM				b_l_2	b_l_eu	100.41	31.24
+bleu	bl2	bleu	ADJ	ADJ,NOM	m	s		b_l_2	b_l_eu	100.41	31.24
 bleu	bl2	bleu	NOM	ADJ,NOM	m	s		b_l_2	b_l_eu	48.85	19.92
 bleubite	bl9bit	bleubite	NOM	NOM	m	s		b_l_9|b_i_t_#	b_l_eu|b_i_t_e	0.2	0.0
 bleubites	bl9bit	bleubite	NOM	NOM	m	p		b_l_9|b_i_t_#	b_l_eu|b_i_t_es	0.07	0.0
@@ -18553,7 +18553,7 @@ cachalot	kaSalo	cachalot	NOM	NOM	m	s		k_a|S_a|l_o_#	c_a|ch_a|l_o_t	0.88	0.7
 cachalots	kaSalo	cachalot	NOM	NOM	m	p		k_a|S_a|l_o_#	c_a|ch_a|l_o_ts	0.07	0.01
 cachant	kaS@	cacher	VER	VER			par:pre;	k_a|S_@	c_a|ch_ant	8.11	1.84
 cache	kaS	cacher	VER	NOM,VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;sub:pre:1s;sub:pre:3s;	k_a_S_#	c_a_ch_e	20.07	44.82
-cache	kaS	cache	NOM	NOM,VER				k_a_S_#	c_a_ch_e	2.97	3.88
+cache	kaS	cache	NOM	NOM,VER		s		k_a_S_#	c_a_ch_e	2.97	3.88
 cachectique	kaSEktik	cachectique	ADJ	ADJ	f	s		k_a|S_E_k|t_i_k_#	c_a|ch_e_c|t_i_qu_e	0.14	0.0
 cachectiques	kaSEktik	cachectique	ADJ	ADJ	m	p		k_a|S_E_k|t_i_k_#	c_a|ch_e_c|t_i_qu_es	0.07	0.0
 cachemire	kaS°miR	cachemire	NOM	NOM	m	s		k_a|S_°|m_i_R_#	c_a|ch_e|m_i_r_e	2.64	1.35
@@ -21372,10 +21372,10 @@ centime	s@tim	centime	NOM	NOM	m	s		s_@|t_i_m_#	c_en|t_i_m_e	1.49	3.25
 centimes	s@tim	centime	NOM	NOM	m	p		s_@|t_i_m_#	c_en|t_i_m_es	4.19	3.88
 centimètre	s@timEtR	centimètre	NOM	NOM	m	s		s_@|t_i|m_E_t_R_#	c_en|t_i|m_è_t_r_e	5.95	2.48
 centimètres	s@timEtR	centimètre	NOM	NOM	m	p		s_@|t_i|m_E_t_R_#	c_en|t_i|m_è_t_r_es	21.89	4.33
-centième	s@tjEm	centième	ADJ	ADJ,NOM	m			s_@|t_j_E_m_#	c_en|t_i_è_m_e	2.64	0.28
+centième	s@tjEm	centième	ADJ	ADJ,NOM		s		s_@|t_j_E_m_#	c_en|t_i_è_m_e	2.64	0.28
 centième	s@tjEm	centième	NOM	ADJ,NOM		s		s_@|t_j_E_m_#	c_en|t_i_è_m_e	1.28	0.28
 centièmes	s@tjEm	centième	NOM	ADJ,NOM		p		s_@|t_j_E_m_#	c_en|t_i_è_m_es	0.07	0.07
-centièmes	s@tjEm	centième	ADJ	ADJ,NOM	m			s_@|t_j_E_m_#	c_en|t_i_è_m_es	0.0	0.01
+centièmes	s@tjEm	centième	ADJ	ADJ,NOM		p		s_@|t_j_E_m_#	c_en|t_i_è_m_es	0.0	0.01
 centon	s@t§	centon	NOM	NOM	m	s		s_@|t_§	c_en|t_on	0.07	0.32
 centrafricain	s@tRafRik5	centrafricain	ADJ	ADJ	m	s		s_@|t_R_a|f_R_i|k_5	c_en|t_r_a|f_r_i|c_ain	0.0	0.01
 centrafricaine	s@tRafRikEn	centrafricain	ADJ	ADJ	f	s		s_@|t_R_a|f_R_i|k_E_n_#	c_en|t_r_a|f_r_i|c_ai_n_e	0.14	0.0
@@ -21530,7 +21530,7 @@ certifiés	sERtifje	certifié	ADJ	VER,ADJ	m	p		s_E_R|t_i|f_j_e_#	c_e_r|t_i|f_i_�
 certifs	sERtif	certif	NOM	NOM	m	p		s_E_R|t_i_f_#	c_e_r|t_i_f_s	0.07	0.11
 certitude	sERtityd	certitude	NOM	NOM	f	s		s_E_R|t_i|t_y_d_#	c_e_r|t_i|t_u_d_e	37.09	8.94
 certitudes	sERtityd	certitude	NOM	NOM	f	p		s_E_R|t_i|t_y_d_#	c_e_r|t_i|t_u_d_es	4.8	1.24
-cerveau	sERvo	cerveau	NOM	NOM	m			s_E_R|v_o	c_e_r|v_eau	28.92	57.67
+cerveau	sERvo	cerveau	NOM	NOM	m	s		s_E_R|v_o	c_e_r|v_eau	28.92	57.67
 cerveaux	sERvo	cerveau	NOM	NOM	m	p		s_E_R|v_o_#	c_e_r|v_eau_x	1.96	3.92
 cervelas	sERv°la	cervelas	NOM	NOM	m			s_E_R|v_°|l_a_#	c_e_r|v_e|l_a_s	0.27	0.03
 cervelet	sERv°lE	cervelet	NOM	NOM	m	s		s_E_R|v_°|l_E	c_e_r|v_e|l_et	0.47	0.85
@@ -22669,7 +22669,7 @@ chenus	S°ny	chenu	ADJ	ADJ	m	p		S_°|n_y_#	ch_e|n_u_s	0.2	0.0
 cheptel	SEptEl	cheptel	NOM	NOM	m	s		S_E_p|t_E_l	ch_e_p|t_e_l	1.35	0.09
 cher	SER	cher	ADJ	ADJ,ADV,NOM	m	s		S_E_R	ch_e_r	90.47	130.7
 cher	SER	cher	ADV	ADJ,ADV,NOM				S_E_R	ch_e_r	20.27	34.7
-cher	SER	cher	NOM	ADJ,ADV,NOM		s		S_E_R	ch_e_r	0.0	0.01
+cher	SER	cher	NOM	ADJ,ADV,NOM	m	s		S_E_R	ch_e_r	0.0	0.01
 chercha	SERSa	chercher	VER	VER			ind:pas:3s;	S_E_R|S_a	ch_e_r|ch_a	27.03	0.96
 cherchai	SERSE	chercher	VER	VER			ind:pas:1s;	S_E_R|S_E	ch_e_r|ch_ai	4.93	0.92
 cherchaient	SERSE	chercher	VER	VER			ind:imp:3p;	S_E_R|S_E	ch_e_r|ch_aient	11.76	4.01
@@ -23715,7 +23715,7 @@ chéneau	Seno	chéneau	NOM	NOM	m	s		S_e|n_o	ch_é|n_eau	0.47	0.0
 chéneaux	Seno	chéneau	NOM	NOM	m	p		S_e|n_o_#	ch_é|n_eau_x	0.34	0.0
 chéquier	Sekje	chéquier	NOM	NOM	m	s		S_e|k_j_e	ch_é|qu_i_er	0.61	1.72
 chéquiers	Sekje	chéquier	NOM	NOM	m	p		S_e|k_j_e_#	ch_é|qu_i_er_s	0.07	0.22
-chéri	SeRi	chéri	NOM	ADJ,NOM,VER		s		S_e|R_i	ch_é|r_i	17.03	69.08
+chéri	SeRi	chéri	NOM	ADJ,NOM,VER	m	s		S_e|R_i	ch_é|r_i	17.03	69.08
 chéri	SeRi	chéri	ADJ	ADJ,NOM,VER	m	s		S_e|R_i	ch_é|r_i	3.99	28.45
 chéri	SeRi	chérir	VER	ADJ,NOM,VER	m	s	par:pas;	S_e|R_i	ch_é|r_i	1.62	7.21
 chérie	SeRi	chéri	NOM	ADJ,NOM,VER	f	s		S_e|R_i_#	ch_é|r_i_e	17.64	98.95
@@ -23945,12 +23945,12 @@ cinquante	s5k@t	cinquante	NOM	ADJ:num,NOM	m			s_5|k_@_t_#	c_in|qu_an_t_e	7.7	3.2
 cinquantenaire	s5k@t°nER	cinquantenaire	NOM	NOM	m	s		s_5|k_@|t_°|n_E_R_#	c_in|qu_an|t_e|n_ai_r_e	0.14	0.18
 cinquantenaires	s5k@t°nER	cinquantenaire	NOM	NOM	m	p		s_5|k_@|t_°|n_E_R_#	c_in|qu_an|t_e|n_ai_r_es	0.0	0.02
 cinquantième	s5k@tjEm	cinquantième	NOM	ADJ,NOM		s		s_5|k_@|t_j_E_m_#	c_in|qu_an|t_i_è_m_e	0.68	0.04
-cinquantième	s5k@tjEm	cinquantième	ADJ	ADJ,NOM				s_5|k_@|t_j_E_m_#	c_in|qu_an|t_i_è_m_e	0.47	0.01
-cinquantièmes	s5k@tjEm	cinquantième	ADJ	ADJ				s_5|k_@|t_j_E_m_#	c_in|qu_an|t_i_è_m_es	0.07	0.0
-cinquième	s5kjEm	cinquième	ADJ	ADJ,NOM	m			s_5|k_j_E_m_#	c_in|qu_i_è_m_e	11.01	6.13
+cinquantième	s5k@tjEm	cinquantième	ADJ	ADJ,NOM		s		s_5|k_@|t_j_E_m_#	c_in|qu_an|t_i_è_m_e	0.47	0.01
+cinquantièmes	s5k@tjEm	cinquantième	ADJ	ADJ		p		s_5|k_@|t_j_E_m_#	c_in|qu_an|t_i_è_m_es	0.07	0.0
+cinquième	s5kjEm	cinquième	ADJ	ADJ,NOM		s		s_5|k_j_E_m_#	c_in|qu_i_è_m_e	11.01	6.13
 cinquième	s5kjEm	cinquième	NOM	ADJ,NOM		s		s_5|k_j_E_m_#	c_in|qu_i_è_m_e	7.36	5.16
 cinquièmement	s5kjEm°m@	cinquièmement	ADV	ADV				s_5|k_j_E|m_°|m_@	c_in|qu_i_è|m_e|m_ent	0.14	0.16
-cinquièmes	s5kjEm	cinquième	ADJ	ADJ,NOM	m			s_5|k_j_E_m_#	c_in|qu_i_è_m_es	0.14	0.01
+cinquièmes	s5kjEm	cinquième	ADJ	ADJ,NOM		p		s_5|k_j_E_m_#	c_in|qu_i_è_m_es	0.14	0.01
 cinquièmes	s5kjEm	cinquième	NOM	ADJ,NOM		p		s_5|k_j_E_m_#	c_in|qu_i_è_m_es	0.54	0.01
 cintra	s5tRa	cintrer	VER	VER			ind:pas:3s;	s_5|t_R_a	c_in|t_r_a	0.68	0.0
 cintrage	s5tRaZ	cintrage	NOM	NOM	m	s		s_5|t_R_a_Z	c_in|t_r_a_ge	0.0	0.01
@@ -30631,7 +30631,7 @@ cotent	kOt	coter	VER	VER			ind:pre:3p;	k_O_t_#	c_o_t_ent	0.07	0.02
 coter	kote	coter	VER	VER			inf;	k_o|t_e	c_o|t_er	0.2	0.02
 coterie	kOt°Ri	coterie	NOM	NOM	f	s		k_O|t_°|R_i_#	c_o|t_e|r_i_e	1.15	0.0
 coteries	kOt°Ri	coterie	NOM	NOM	f	p		k_O|t_°|R_i_#	c_o|t_e|r_i_es	0.41	0.14
-cotes	kOt	cote	NOM	NOM,VER				k_O_t_#	c_o_t_es	0.41	0.98
+cotes	kOt	cote	NOM	NOM,VER	f	p		k_O_t_#	c_o_t_es	0.41	0.98
 cotes	kOt	coter	VER	NOM,VER			sub:pre:2s;	k_O_t_#	c_o_t_es	0.0	0.14
 cothurne	kotyRn	cothurne	NOM	NOM	m	s		k_o|t_y_R_n_#	c_o|th_u_r_n_e	0.07	0.0
 cothurnes	kotyRn	cothurne	NOM	NOM	m	p		k_o|t_y_R_n_#	c_o|th_u_r_n_es	0.34	0.0
@@ -31392,7 +31392,7 @@ coûtant	kut@	coûtant	ADJ	ADJ,VER	m	s		k_u|t_@	c_oû|t_ant	0.07	0.11
 coûtant	kut@	coûter	VER	ADJ,VER			par:pre;	k_u|t_@	c_oû|t_ant	0.2	0.04
 coûte	kut	coûter	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	k_u_t_#	c_oû_t_e	20.41	38.84
 coûtent	kut	coûter	VER	VER			ind:pre:3p;	k_u_t_#	c_oû_t_ent	1.76	5.35
-coûter	kute	coûter	VER	VER			ind:pre:2p;inf;	k_u|t_e	c_oû|t_er	5.27	12.59
+coûter	kute	coûter	VER	VER			inf;	k_u|t_e	c_oû|t_er	5.27	12.59
 coûtera	kut°Ra	coûter	VER	VER			ind:fut:3s;	k_u|t_°|R_a	c_oû|t_e|r_a	1.82	7.11
 coûterai	kut°RE	coûter	VER	VER			ind:fut:1s;	k_u|t_°|R_E	c_oû|t_e|r_ai	0.07	0.02
 coûteraient	kut°RE	coûter	VER	VER			cnd:pre:3p;	k_u|t_°|R_E	c_oû|t_e|r_aient	0.07	0.06
@@ -34479,10 +34479,10 @@ deusio	d2zjo	deusio	ADV	ADV				d_2|z_j_o	d_eu|s_i_o	0.0	0.2
 deutérium	d2teRjOm	deutérium	NOM	NOM	m	s		d_2|t_e|R_j_O_m	d_eu|t_é|r_i_u_m	0.0	0.07
 deutéronome	d2teRonom	deutéronome	NOM	NOM	m	s		d_2|t_e|R_o|n_o_m_#	d_eu|t_é|r_o|n_o_m_e	0.2	0.23
 deux	d2	deux	ADJ:num	ADJ:num				d_2_#	d_eu_x	1557.91	1009.01
-deuxième	d2zjEm	deuxième	ADJ	ADJ,NOM				d_2|z_j_E_m_#	d_eu|x_i_è_m_e	58.58	43.77
+deuxième	d2zjEm	deuxième	ADJ	ADJ,NOM		s		d_2|z_j_E_m_#	d_eu|x_i_è_m_e	58.58	43.77
 deuxième	d2zjEm	deuxième	NOM	ADJ,NOM		s		d_2|z_j_E_m_#	d_eu|x_i_è_m_e	17.91	13.33
 deuxièmement	d2zjEm°m@	deuxièmement	ADV	ADV				d_2|z_j_E|m_°|m_@	d_eu|x_i_è|m_e|m_ent	0.88	4.58
-deuxièmes	d2zjEm	deuxième	ADJ	ADJ,NOM				d_2|z_j_E_m_#	d_eu|x_i_è_m_es	0.47	0.2
+deuxièmes	d2zjEm	deuxième	ADJ	ADJ,NOM		p		d_2|z_j_E_m_#	d_eu|x_i_è_m_es	0.47	0.2
 deuxièmes	d2zjEm	deuxième	NOM	ADJ,NOM		p		d_2|z_j_E_m_#	d_eu|x_i_è_m_es	0.0	0.01
 deuzio	d2zjo	deuzio	ADV	ADV				d_2|z_j_o	d_eu|z_i_o	0.2	0.89
 devaient	d°vE	devoir	VER	VER			ind:imp:3p;	d_°|v_E	d_e|v_aient	61.22	13.59
@@ -36432,11 +36432,11 @@ dix	dis	dix	ADJ:num	ADJ:num				d_i_s	d_i_x	209.86	118.29
 dixie	diksi	dixie	NOM	NOM	m	s		d_i|ks_i_#	d_i|x_i_e	0.0	1.4
 dixieland	diksil@d	dixieland	NOM	NOM	m	s		d_i|ks_i_#|l_@_d	d_i|x_i_e|l_an_d	0.0	0.14
 dixit	diksit	dixit	ADJ	ADJ	m	s		d_i|ks_i_t	d_i|x_i_t	0.68	0.54
-dixième	dizjEm	dixième	ADJ	ADJ,NOM				d_i|z_j_E_m_#	d_i|x_i_è_m_e	2.7	1.73
+dixième	dizjEm	dixième	ADJ	ADJ,NOM		s		d_i|z_j_E_m_#	d_i|x_i_è_m_e	2.7	1.73
 dixième	dizjEm	dixième	NOM	ADJ,NOM		s		d_i|z_j_E_m_#	d_i|x_i_è_m_e	3.04	1.37
 dixièmement	dizjEm°m@	dixièmement	ADV	ADV				d_i|z_j_E|m_°|m_@	d_i|x_i_è|m_e|m_ent	0.0	0.02
 dixièmes	dizjEm	dixième	NOM	ADJ,NOM		p		d_i|z_j_E_m_#	d_i|x_i_è_m_es	1.28	0.23
-dixièmes	dizjEm	dixième	ADJ	ADJ,NOM				d_i|z_j_E_m_#	d_i|x_i_è_m_es	0.07	0.02
+dixièmes	dizjEm	dixième	ADJ	ADJ,NOM		p		d_i|z_j_E_m_#	d_i|x_i_è_m_es	0.07	0.02
 dizain	diz5	dizain	NOM	NOM	m	s		d_i|z_5	d_i|z_ain	0.0	0.14
 dizaine	dizEn	dizaine	NOM	NOM	f	s		d_i|z_E_n_#	d_i|z_ai_n_e	26.55	5.87
 dizaines	dizEn	dizaine	NOM	NOM	f	p		d_i|z_E_n_#	d_i|z_ai_n_es	18.18	5.21
@@ -38617,7 +38617,7 @@ décelé	des°le	déceler	VER	VER	m	s	par:pas;	d_e|s_°|l_e	d_é|c_e|l_é	2.03	0
 décelée	des°le	déceler	VER	VER	f	s	par:pas;	d_e|s_°|l_e_#	d_é|c_e|l_é_e	0.2	0.03
 décelées	des°le	déceler	VER	VER	f	p	par:pas;	d_e|s_°|l_e_#	d_é|c_e|l_é_es	0.14	0.01
 décelés	des°le	déceler	VER	VER	m	p	par:pas;	d_e|s_°|l_e_#	d_é|c_e|l_é_s	0.07	0.0
-décembre	des@bR	décembre	NOM	NOM	m			d_e|s_@_b_R_#	d_é|c_em_b_r_e	31.15	8.55
+décembre	des@bR	décembre	NOM	NOM	m	s		d_e|s_@_b_R_#	d_é|c_em_b_r_e	31.15	8.55
 décembres	des@bR	décembre	NOM	NOM	m	p		d_e|s_@_b_R_#	d_é|c_em_b_r_es	0.07	0.0
 décembriste	des@bRist	décembriste	NOM	NOM		s		d_e|s_@|b_R_i_s_t_#	d_é|c_em|b_r_i_s_t_e	0.07	0.0
 décembristes	des@bRist	décembriste	NOM	NOM		p		d_e|s_@|b_R_i_s_t_#	d_é|c_em|b_r_i_s_t_es	0.14	0.0
@@ -40813,13 +40813,13 @@ dégoûtation	degutasj§	dégoûtation	NOM	NOM	f	s		d_e|g_u|t_a|s_j_§	d_é|g_o�
 dégoûtations	degutasj§	dégoûtation	NOM	NOM	f	p		d_e|g_u|t_a|s_j_§_#	d_é|g_oû|t_a|t_i_on_s	0.14	0.0
 dégoûte	degut	dégoûter	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	d_e|g_u_t_#	d_é|g_oû_t_e	4.66	8.73
 dégoûtent	degut	dégoûter	VER	VER			ind:pre:3p;	d_e|g_u_t_#	d_é|g_oû_t_ent	0.74	0.88
-dégoûter	degute	dégoûter	VER	VER			imp:pre:2p;ind:pre:2p;inf;	d_e|g_u|t_e	d_é|g_oû|t_er	2.91	0.66
+dégoûter	degute	dégoûter	VER	VER			inf;	d_e|g_u|t_e	d_é|g_oû|t_er	2.91	0.66
 dégoûtera	degut°Ra	dégoûter	VER	VER			ind:fut:3s;	d_e|g_u|t_°|R_a	d_é|g_oû|t_e|r_a	0.07	0.03
 dégoûteraient	degut°RE	dégoûter	VER	VER			cnd:pre:3p;	d_e|g_u|t_°|R_E	d_é|g_oû|t_e|r_aient	0.07	0.0
 dégoûterais	degut°RE	dégoûter	VER	VER			cnd:pre:1s;	d_e|g_u|t_°|R_E	d_é|g_oû|t_e|r_ais	0.07	0.0
 dégoûterait	degut°RE	dégoûter	VER	VER			cnd:pre:3s;	d_e|g_u|t_°|R_E	d_é|g_oû|t_e|r_ait	0.27	0.34
 dégoûtes	degut	dégoûter	VER	VER			ind:pre:2s;	d_e|g_u_t_#	d_é|g_oû_t_es	0.34	3.92
-dégoûtez	degute	dégoûter	VER	VER			ind:pre:2p;	d_e|g_u|t_e	d_é|g_oû|t_ez	0.27	0.96
+dégoûtez	degute	dégoûter	VER	VER			imp:pre:2p;ind:pre:2p;	d_e|g_u|t_e	d_é|g_oû|t_ez	0.27	0.96
 dégoûts	degu	dégoût	NOM	NOM	m	p		d_e|g_u_#	d_é|g_oû_ts	2.16	0.03
 dégoûtât	deguta	dégoûter	VER	VER			sub:imp:3s;	d_e|g_u|t_a	d_é|g_oû|t_ât	0.14	0.0
 dégoûtèrent	degutER	dégoûter	VER	VER			ind:pas:3p;	d_e|g_u|t_E_R_#	d_é|g_oû|t_è_r_ent	0.2	0.0
@@ -52531,7 +52531,7 @@ extorqués	EkstORke	extorquer	VER	VER	m	p	par:pas;	E|ks_t_O_R|k_e_#	e|x_t_o_r|qu
 extorsion	EkstORsj§	extorsion	NOM	NOM	f	s		E|ks_t_O_R|s_j_§	e|x_t_o_r|s_i_on	0.14	1.57
 extorsions	EkstORsj§	extorsion	NOM	NOM	f	p		E|ks_t_O_R|s_j_§_#	e|x_t_o_r|s_i_on_s	0.0	0.23
 extra	EkstRa	extra	ADJ	ADJ,NOM				E|ks_t_R_a	e|x_t_r_a	1.42	6.78
-extra	EkstRa	extra	NOM	ADJ,NOM	m			E|ks_t_R_a	e|x_t_r_a	0.88	3.88
+extra	EkstRa	extra	NOM	ADJ,NOM	m	s		E|ks_t_R_a	e|x_t_r_a	0.88	3.88
 extraconjugal	EkstRak§Zygal	extraconjugal	ADJ	ADJ	m	s		E|ks_t_R_a|k_§|Z_y|g_a_l	e|x_t_r_a|c_on|j_u|g_a_l	0.0	0.03
 extraconjugale	EkstRak§Zygal	extraconjugal	ADJ	ADJ	f	s		E|ks_t_R_a|k_§|Z_y|g_a_l_#	e|x_t_r_a|c_on|j_u|g_a_l_e	0.0	0.02
 extraconjugales	EkstRak§Zygal	extraconjugal	ADJ	ADJ	f	p		E|ks_t_R_a|k_§|Z_y|g_a_l_#	e|x_t_r_a|c_on|j_u|g_a_l_es	0.07	0.04
@@ -53007,13 +53007,13 @@ faille	faj	faille	NOM	NOM,VER	f	s		f_a_j_#	f_a_ill_e	7.43	3.85
 faille	faj	failler	VER	NOM,VER			sub:pre:3s;	f_a_j_#	f_a_ill_e	1.96	1.83
 failles	faj	faille	NOM	NOM	f	p		f_a_j_#	f_a_ill_es	2.16	0.86
 failli	faji	faillir	VER	ADJ,NOM,VER	m	s	par:pas;	f_a|j_i	f_a|ill_i	22.43	42.7
-failli	faji	failli	ADJ	ADJ,NOM,VER	m	p		f_a|j_i	f_a|ill_i	0.68	0.2
+failli	faji	failli	ADJ	ADJ,NOM,VER	m	s		f_a|j_i	f_a|ill_i	0.68	0.2
 failli	faji	failli	NOM	ADJ,NOM,VER	m	s		f_a|j_i	f_a|ill_i	0.0	0.11
 faillibilité	fajibilite	faillibilité	NOM	NOM	f	s		f_a|j_i|b_i|l_i|t_e	f_a|ill_i|b_i|l_i|t_é	0.0	0.01
 faillibilités	fajibilite	faillibilité	NOM	NOM	f	p		f_a|j_i|b_i|l_i|t_e_#	f_a|ill_i|b_i|l_i|t_é_s	0.07	0.0
 faillible	fajibl	faillible	ADJ	ADJ		s		f_a|j_i_b_l_#	f_a|ill_i_b_l_e	0.27	0.06
 faillibles	fajibl	faillible	ADJ	ADJ	m	p		f_a|j_i_b_l_#	f_a|ill_i_b_l_es	0.07	0.04
-faillie	faji	faillie	ADJ	ADJ	m	p		f_a|j_i_#	f_a|ill_i_e	0.0	0.1
+faillie	faji	faillie	ADJ	ADJ	m	s		f_a|j_i_#	f_a|ill_i_e	0.0	0.1
 faillies	faji	faillie	ADJ	ADJ	m	p		f_a|j_i_#	f_a|ill_i_es	0.07	0.0
 faillir	fajiR	faillir	VER	VER			inf;	f_a|j_i_R	f_a|ill_i_r	0.95	0.39
 faillirai	fajiRE	faillir	VER	VER			ind:fut:1s;	f_a|j_i|R_E	f_a|ill_i|r_ai	0.07	0.03
@@ -54127,7 +54127,7 @@ festoyez	fEstwaje	festoyer	VER	VER			imp:pre:2p;	f_E_s|t_wa_j|e	f_e_s|t_o_y|ez	0
 festoyé	fEstwaje	festoyer	VER	VER	m	s	par:pas;	f_E_s|t_wa_j|e	f_e_s|t_o_y|é	0.07	0.11
 feta	fEta	feta	NOM	NOM	f	s		f_E|t_a	f_e|t_a	0.0	0.09
 feu	f2	feu	NOM	ADJ,NOM	m	s		f_2	f_eu	199.39	215.87
-feu	f2	feu	ADJ	ADJ,NOM				f_2	f_eu	16.08	21.93
+feu	f2	feu	ADJ	ADJ,NOM	m	s		f_2	f_eu	16.08	21.93
 feudataire	f2datER	feudataire	NOM	NOM	m	s		f_2|d_a|t_E_R_#	f_eu|d_a|t_ai_r_e	0.07	0.0
 feue	f2	feu	ADJ	ADJ	f	s		f_2_#	f_eu_e	0.34	0.14
 feuillage	f9jaZ	feuillage	NOM	NOM	m	s		f_9|j_a_Z	f_eu|ill_a_ge	10.47	1.3
@@ -58566,7 +58566,7 @@ gaffé	gafe	gaffer	VER	VER	m	s	par:pas;	g_a|f_e	g_a|ff_é	0.61	0.35
 gaffée	gafe	gaffer	VER	VER	f	s	par:pas;	g_a|f_e_#	g_a|ff_é_e	0.14	0.0
 gaffés	gafe	gaffer	VER	VER	m	p	par:pas;	g_a|f_e_#	g_a|ff_é_s	0.07	0.0
 gag	gag	gag	NOM	NOM	m	s		g_a_g	g_a_g	1.08	2.41
-gaga	gaga	gaga	ADJ	ADJ,NOM				g_a|g_a	g_a|g_a	0.88	0.58
+gaga	gaga	gaga	ADJ	ADJ,NOM		s		g_a|g_a	g_a|g_a	0.88	0.58
 gaga	gaga	gaga	NOM	ADJ,NOM		s		g_a|g_a	g_a|g_a	0.14	0.2
 gagas	gaga	gaga	ADJ	ADJ,NOM		p		g_a|g_a_#	g_a|g_a_s	0.14	0.02
 gagas	gaga	gaga	NOM	ADJ,NOM		p		g_a|g_a_#	g_a|g_a_s	0.07	0.01
@@ -60044,7 +60044,7 @@ glapit	glapi	glapir	VER	VER			ind:pre:3s;ind:pas:3s;	g_l_a|p_i	g_l_a|p_it	3.11	0
 glaréole	glaReOl	glaréole	NOM	NOM	f	s		g_l_a|R_e|O_l_#	g_l_a|r_é|o_l_e	0.0	0.04
 glas	gla	glas	NOM	NOM	m			g_l_a_#	g_l_a_s	4.05	1.28
 glasnost	glasnOst	glasnost	NOM	NOM	f	s		g_l_a_s|n_O_s_t	g_l_a_s|n_o_s_t	0.0	0.03
-glass	glas	glass	NOM	NOM	m			g_l_a_s	g_l_a_ss	1.28	1.05
+glass	glas	glass	NOM	NOM	m	s		g_l_a_s	g_l_a_ss	1.28	1.05
 glasses	glas	glass	NOM	NOM	m	p		g_l_a_s_#	g_l_a_ss_es	0.0	0.17
 glaucome	glokom	glaucome	NOM	NOM	m	s		g_l_o|k_o_m_#	g_l_au|c_o_m_e	0.2	0.27
 glauque	glok	glauque	ADJ	ADJ		s		g_l_o_k_#	g_l_au_qu_e	6.82	1.12
@@ -60677,7 +60677,7 @@ goupillon	gupij§	goupillon	NOM	NOM	m	s		g_u|p_i|j_§	g_ou|p_i|ll_on	1.55	0.16
 goupillons	gupij§	goupillon	NOM	NOM	m	p		g_u|p_i|j_§_#	g_ou|p_i|ll_on_s	0.07	0.0
 goupillé	gupije	goupiller	VER	VER	m	s	par:pas;	g_u|p_i|j_e	g_ou|p_i|ll_é	0.47	0.04
 goupillée	gupije	goupiller	VER	VER	f	s	par:pas;	g_u|p_i|j_e_#	g_ou|p_i|ll_é_e	0.07	0.02
-gour	guR	gour	NOM	NOM	m			g_u_R	g_ou_r	0.54	0.01
+gour	guR	gour	NOM	NOM	m	s		g_u_R	g_ou_r	0.54	0.01
 goura	guRa	goura	NOM	NOM	m	s		g_u|R_a	g_ou|r_a	0.07	0.0
 gouraient	guRE	gourer	VER	VER			ind:imp:3p;	g_u|R_E	g_ou|r_aient	0.07	0.0
 gourais	guRE	gourer	VER	VER			ind:imp:1s;ind:imp:2s;	g_u|R_E	g_ou|r_ais	0.68	0.01
@@ -60928,7 +60928,7 @@ graffita	gRafita	graffiter	VER	VER			ind:pas:3s;	g_R_a|f_i|t_a	g_r_a|ff_i|t_a	0.
 graffiter	gRafite	graffiter	VER	VER			inf;	g_R_a|f_i|t_e	g_r_a|ff_i|t_er	0.07	0.01
 graffiteur	gRafit9R	graffiteur	NOM	NOM	m	s		g_R_a|f_i|t_9_R	g_r_a|ff_i|t_eu_r	0.0	0.02
 graffiteurs	gRafit9R	graffiteur	NOM	NOM	m	p		g_R_a|f_i|t_9_R_#	g_r_a|ff_i|t_eu_r_s	0.07	0.07
-graffiti	gRafiti	graffiti	NOM	NOM	m			g_R_a|f_i|t_i	g_r_a|ff_i|t_i	3.45	1.93
+graffiti	gRafiti	graffiti	NOM	NOM	m	s		g_R_a|f_i|t_i	g_r_a|ff_i|t_i	3.45	1.93
 graffitis	gRafiti	graffiti	NOM	NOM	m	p		g_R_a|f_i|t_i_#	g_r_a|ff_i|t_i_s	0.74	0.8
 graffito	gRafito	graffito	NOM	NOM	m	s		g_R_a|f_i|t_o	g_r_a|ff_i|t_o	0.2	0.0
 graffité	gRafite	graffiter	VER	VER	m	s	par:pas;	g_R_a|f_i|t_e	g_r_a|ff_i|t_é	0.14	0.0
@@ -67085,7 +67085,7 @@ inavoué	inavwe	inavoué	ADJ	ADJ	m	s		i|n_a|v_w_e	i|n_a|v_ou_é	0.81	0.13
 inavouée	inavwe	inavoué	ADJ	ADJ	f	s		i|n_a|v_w_e_#	i|n_a|v_ou_é_e	0.81	0.01
 inavouées	inavwe	inavoué	ADJ	ADJ	f	p		i|n_a|v_w_e_#	i|n_a|v_ou_é_es	0.34	0.0
 inavoués	inavwe	inavoué	ADJ	ADJ	m	p		i|n_a|v_w_e_#	i|n_a|v_ou_é_s	0.14	0.14
-inca	5ka	inca	ADJ	ADJ				5|k_a	in|c_a	0.34	0.37
+inca	5ka	inca	ADJ	ADJ		s		5|k_a	in|c_a	0.34	0.37
 incalculable	5kalkylabl	incalculable	ADJ	ADJ		s		5|k_a_l|k_y|l_a_b_l_#	in|c_a_l|c_u|l_a_b_l_e	1.55	0.77
 incalculables	5kalkylabl	incalculable	ADJ	ADJ		p		5|k_a_l|k_y|l_a_b_l_#	in|c_a_l|c_u|l_a_b_l_es	0.54	0.17
 incandescence	5k@des@s	incandescence	NOM	NOM	f	s		5|k_@|d_e|s_@_s_#	in|c_an|d_e|sc_en_c_e	1.01	0.06
@@ -72436,7 +72436,7 @@ juif	Z8if	juif	ADJ	ADJ,NOM	m	s		Z_8_i_f	j_u_i_f	19.86	17.23
 juif	Z8if	juif	NOM	ADJ,NOM	m	s		Z_8_i_f	j_u_i_f	19.39	14.59
 juifs	Z8if	juif	NOM	ADJ,NOM	m	p		Z_8_i_f_#	j_u_i_f_s	30.88	29.03
 juifs	Z8if	juif	ADJ	ADJ,NOM	m	p		Z_8_i_f_#	j_u_i_f_s	6.55	4.42
-juillet	Z8ijE	juillet	NOM	NOM	m			Z_8_i|j_E	j_u_i|ll_et	47.57	11.96
+juillet	Z8ijE	juillet	NOM	NOM	m	s		Z_8_i|j_E	j_u_i|ll_et	47.57	11.96
 juillets	Z8ijE	juillet	NOM	NOM	m	p		Z_8_i|j_E_#	j_u_i|ll_e_ts	0.0	0.01
 juin	Z85	juin	NOM	NOM	m			Z_8_5	j_u_in	51.28	13.4
 juive	Z8iv	juif	ADJ	ADJ,NOM	f	s		Z_8_i_v_#	j_u_i_v_e	8.99	8.43
@@ -74880,7 +74880,7 @@ livraison	livREz§	livraison	NOM	NOM	f	s		l_i|v_R_E|z_§	l_i|v_r_ai|s_on	5.47	10
 livraisons	livREz§	livraison	NOM	NOM	f	p		l_i|v_R_E|z_§_#	l_i|v_r_ai|s_on_s	3.11	2.98
 livrait	livRE	livrer	VER	VER			ind:imp:3s;	l_i|v_R_E	l_i|v_r_ait	7.91	0.74
 livrant	livR@	livrer	VER	VER			par:pre;	l_i|v_R_@	l_i|v_r_ant	3.65	0.98
-livre	livR	livre	NOM	NOM,VER				l_i_v_R_#	l_i_v_r_e	151.76	112.43
+livre	livR	livre	NOM	NOM,VER		s		l_i_v_R_#	l_i_v_r_e	151.76	112.43
 livre	livR	livrer	VER	NOM,VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;sub:pre:3s;	l_i_v_R_#	l_i_v_r_e	9.39	9.38
 livrent	livR	livrer	VER	VER			ind:pre:3p;	l_i_v_R_#	l_i_v_r_ent	2.84	1.44
 livrer	livRe	livrer	VER	VER			inf;;inf;;inf;;	l_i|v_R_e	l_i|v_r_er	25.2	21.42
@@ -76797,7 +76797,7 @@ malheurs	mal9R	malheur	NOM	NOM	m	p		m_a|l_#_9_R_#	m_a|l_h_eu_r_s	19.8	7.72
 malhonnête	malonEt	malhonnête	ADJ	ADJ,NOM		s		m_a|l_#_o|n_E_t_#	m_a|l_h_o|nn_ê_t_e	0.95	3.34
 malhonnête	malonEt	malhonnête	NOM	ADJ,NOM		s		m_a|l_#_o|n_E_t_#	m_a|l_h_o|nn_ê_t_e	0.14	0.69
 malhonnêtement	malonEt°m@	malhonnêtement	ADV	ADV				m_a|l_#_o|n_E|t_°|m_@	m_a|l_h_o|nn_ê|t_e|m_ent	0.27	0.22
-malhonnêtes	malonEt	malhonnête	ADJ	ADJ,NOM				m_a|l_#_o|n_E_t_#	m_a|l_h_o|nn_ê_t_es	0.88	0.97
+malhonnêtes	malonEt	malhonnête	ADJ	ADJ,NOM		p		m_a|l_#_o|n_E_t_#	m_a|l_h_o|nn_ê_t_es	0.88	0.97
 malhonnêtes	malonEt	malhonnête	NOM	ADJ,NOM		p		m_a|l_#_o|n_E_t_#	m_a|l_h_o|nn_ê_t_es	0.14	0.28
 malhonnêteté	malonEtte	malhonnêteté	NOM	NOM	f	s		m_a|l_#_o|n_E_t_#|t_e	m_a|l_h_o|nn_ê_t_e|t_é	1.82	0.5
 malhonnêtetés	malonEtte	malhonnêteté	NOM	NOM	f	p		m_a|l_#_o|n_E_t_#|t_e_#	m_a|l_h_o|nn_ê_t_e|t_é_s	0.07	0.0
@@ -79421,7 +79421,7 @@ microstructures	mikRostRyktyR	microstructure	NOM	NOM	f	p		m_i|k_R_o_s|t_R_y_k|t_
 microédition	mikRoedisj§	microédition	NOM	NOM	f	s		m_i|k_R_o|e|d_i|s_j_§	m_i|c_r_o|é|d_i|t_i_on	0.0	0.01
 miction	miksj§	miction	NOM	NOM	f	s		m_i_k|s_j_§	m_i_c|t_i_on	0.0	0.03
 mictions	miksj§	miction	NOM	NOM	f	p		m_i_k|s_j_§_#	m_i_c|t_i_on_s	0.07	0.01
-midi	midi	midi	NOM	ADJ:num,NOM	m			m_i|d_i	m_i|d_i	68.11	35.15
+midi	midi	midi	NOM	ADJ:num,NOM	m	s		m_i|d_i	m_i|d_i	68.11	35.15
 midi	midi	midi	ADJ:num	ADJ:num,NOM				m_i|d_i	m_i|d_i	0.07	0.0
 midinette	midinEt	midinette	NOM	NOM	f	s		m_i|d_i|n_E_t_#	m_i|d_i|n_e_tt_e	1.62	0.06
 midinettes	midinEt	midinette	NOM	NOM	f	p		m_i|d_i|n_E_t_#	m_i|d_i|n_e_tt_es	0.61	0.07
@@ -79586,7 +79586,7 @@ militons	milit§	militer	VER	VER			ind:pre:1p;	m_i|l_i|t_§	m_i|l_i|t_ons	0.0	0.
 militèrent	militER	militer	VER	VER			ind:pas:3p;	m_i|l_i|t_E_R_#	m_i|l_i|t_è_r_ent	0.07	0.0
 milité	milite	militer	VER	VER	m	s	par:pas;	m_i|l_i|t_e	m_i|l_i|t_é	0.95	0.15
 mille	mil	mille	ADJ:num	ADJ:num,NOM				m_i_l_#	m_i_ll_e	142.09	55.43
-mille	mil	mille	NOM	ADJ:num,NOM	m			m_i_l_#	m_i_ll_e	27.64	26.16
+mille	mil	mille	NOM	ADJ:num,NOM	m	s		m_i_l_#	m_i_ll_e	27.64	26.16
 millefeuille	mil°f9j	millefeuille	NOM	NOM		s		m_i|l_°|f_9_j_#	m_i|ll_e|f_eu_ill_e	0.34	0.09
 millefeuilles	mil°f9j	millefeuille	NOM	NOM		p		m_i|l_°|f_9_j_#	m_i|ll_e|f_eu_ill_es	0.2	0.01
 millenium	milenjOm	millenium	NOM	NOM	m	s		m_i|l_e|n_j_O_m	m_i|ll_e|n_i_u_m	0.07	0.08
@@ -79624,10 +79624,10 @@ millionnaires	miljonER	millionnaire	NOM	ADJ,NOM		p		m_i|l_j_o|n_E_R_#	m_i|ll_i_o
 millions	milj§	million	NOM	NOM	m	p		m_i|l_j_§_#	m_i|ll_i_on_s	46.22	87.92
 milliseconde	milis°g§d	milliseconde	NOM	NOM	f	s		m_i|l_i|s_°|g_§_d_#	m_i|ll_i|s_e|c_on_d_e	0.07	0.09
 millisecondes	milisg§d	milliseconde	NOM	NOM	f	p		m_i|l_i_s_#|g_§_d_#	m_i|ll_i_s_e|c_on_d_es	0.07	0.08
-millième	miljEm	millième	NOM	ADJ,NOM	m	s		m_i|l_j_E_m_#	m_i|ll_i_è_m_e	0.88	0.17
-millième	miljEm	millième	ADJ	ADJ,NOM				m_i|l_j_E_m_#	m_i|ll_i_è_m_e	1.15	0.14
-millièmes	miljEm	millième	NOM	ADJ,NOM	m	p		m_i|l_j_E_m_#	m_i|ll_i_è_m_es	0.07	0.12
-millièmes	miljEm	millième	ADJ	ADJ,NOM				m_i|l_j_E_m_#	m_i|ll_i_è_m_es	0.0	0.01
+millième	miljEm	millième	NOM	ADJ,NOM		s		m_i|l_j_E_m_#	m_i|ll_i_è_m_e	0.88	0.17
+millième	miljEm	millième	ADJ	ADJ,NOM		s		m_i|l_j_E_m_#	m_i|ll_i_è_m_e	1.15	0.14
+millièmes	miljEm	millième	NOM	ADJ,NOM		p		m_i|l_j_E_m_#	m_i|ll_i_è_m_es	0.07	0.12
+millièmes	miljEm	millième	ADJ	ADJ,NOM		p		m_i|l_j_E_m_#	m_i|ll_i_è_m_es	0.0	0.01
 millénaire	milenER	millénaire	NOM	ADJ,NOM	m	s		m_i|l_e|n_E_R_#	m_i|ll_é|n_ai_r_e	0.74	2.1
 millénaire	milenER	millénaire	ADJ	ADJ,NOM		s		m_i|l_e|n_E_R_#	m_i|ll_é|n_ai_r_e	3.24	0.66
 millénaires	milenER	millénaire	NOM	ADJ,NOM	m	p		m_i|l_e|n_E_R_#	m_i|ll_é|n_ai_r_es	4.66	1.36
@@ -81270,7 +81270,7 @@ mors	mOR	mors	NOM	NOM	m			m_O_R_#	m_o_r_s	1.89	0.64
 morse	mORs	morse	NOM	NOM	m	s		m_O_R_s_#	m_o_r_s_e	0.88	3.5
 morsure	mORsyR	morsure	NOM	NOM	f	s		m_O_R|s_y_R_#	m_o_r|s_u_r_e	4.26	3.9
 morsures	mORsyR	morsure	NOM	NOM	f	p		m_O_R|s_y_R_#	m_o_r|s_u_r_es	1.69	2.41
-mort	mOR	mort	NOM	ADJ,NOM,VER				m_O_R_#	m_o_r_t	373.99	372.07
+mort	mOR	mort	NOM	ADJ,NOM,VER	m	s		m_O_R_#	m_o_r_t	373.99	372.07
 mort	mOR	mourir	VER	ADJ,NOM,VER	m	s	par:pas;	m_O_R_#	m_o_r_t	93.65	318.84
 mort	mOR	mort	ADJ	ADJ,NOM,VER	m	s		m_O_R_#	m_o_r_t	41.28	54.19
 mortadelle	mORtadEl	mortadelle	NOM	NOM	f	s		m_O_R|t_a|d_E_l_#	m_o_r|t_a|d_e_ll_e	0.34	0.79
@@ -83996,7 +83996,7 @@ nettoyant	netwaj@	nettoyant	ADJ	ADJ,NOM,VER	m	s		n_e|t_wa_j|@	n_e|tt_o_y|ant	0.0
 nettoyante	netwaj@t	nettoyant	ADJ	ADJ	f	s		n_e|t_wa_j|@_t_#	n_e|tt_o_y|an_t_e	0.0	0.01
 nettoyants	netwaj@	nettoyant	NOM	ADJ,NOM	m	p		n_e|t_wa_j|@_#	n_e|tt_o_y|an_ts	0.07	0.02
 nettoyants	netwaj@	nettoyant	ADJ	ADJ,NOM	m	p		n_e|t_wa_j|@_#	n_e|tt_o_y|an_ts	0.0	0.01
-nettoyer	netwaje	nettoyer	VER	VER			imp:pre:2p;ind:pre:2p;inf;	n_e|t_wa_j|e	n_e|tt_o_y|er	10.95	30.28
+nettoyer	netwaje	nettoyer	VER	VER			inf;	n_e|t_wa_j|e	n_e|tt_o_y|er	10.95	30.28
 nettoyeur	netwaj9R	nettoyeur	NOM	NOM	m	s		n_e|t_wa_j|9_R	n_e|tt_o_y|eu_r	0.34	1.24
 nettoyeurs	netwaj9R	nettoyeur	NOM	NOM	m	p		n_e|t_wa_j|9_R_#	n_e|tt_o_y|eu_r_s	0.2	0.91
 nettoyeuse	netwaj2z	nettoyeur	NOM	NOM	f	s		n_e|t_wa_j|2_z_#	n_e|tt_o_y|eu_s_e	0.07	0.36
@@ -84102,10 +84102,10 @@ neuvaine	n9vEn	neuvaine	NOM	NOM	f	s		n_9|v_E_n_#	n_eu|v_ai_n_e	0.14	0.14
 neuvaines	n9vEn	neuvaine	NOM	NOM	f	p		n_9|v_E_n_#	n_eu|v_ai_n_es	0.47	0.25
 neuve	n9v	neuf	ADJ	ADJ	f	s		n_9_v_#	n_eu_v_e	22.43	10.3
 neuves	n9v	neuf	ADJ	ADJ	f	p		n_9_v_#	n_eu_v_es	8.72	5.02
-neuvième	n9vjEm	neuvième	ADJ	ADJ,NOM				n_9|v_j_E_m_#	n_eu|v_i_è_m_e	1.42	1.09
+neuvième	n9vjEm	neuvième	ADJ	ADJ,NOM		s		n_9|v_j_E_m_#	n_eu|v_i_è_m_e	1.42	1.09
 neuvième	n9vjEm	neuvième	NOM	ADJ,NOM		s		n_9|v_j_E_m_#	n_eu|v_i_è_m_e	1.08	0.54
 neuvièmes	n9vjEm	neuvième	NOM	ADJ,NOM		p		n_9|v_j_E_m_#	n_eu|v_i_è_m_es	0.0	0.01
-neuvièmes	n9vjEm	neuvième	ADJ	ADJ,NOM				n_9|v_j_E_m_#	n_eu|v_i_è_m_es	0.07	0.0
+neuvièmes	n9vjEm	neuvième	ADJ	ADJ,NOM		p		n_9|v_j_E_m_#	n_eu|v_i_è_m_es	0.07	0.0
 neveu	n°v2	neveu	NOM	NOM	m	s		n_°|v_2	n_e|v_eu	13.92	22.9
 neveux	n°v2	neveux	NOM	NOM	m	p		n_°|v_2_#	n_e|v_eu_x	3.72	2.13
 new	nju	new	ADJ	ADJ	m	s		n_ju	n_ew	3.51	0.74
@@ -84944,7 +84944,7 @@ nue	ny	nu	ADJ	ADJ,NOM,VER	f	s		n_y_#	n_u_e	43.85	15.23
 nue	ny	nu	NOM	ADJ,NOM,VER	f	s		n_y_#	n_u_e	6.69	5.45
 nue	ny	nu	VER	ADJ,NOM,VER			ind:pre:3s;	n_y_#	n_u_e	1.82	0.61
 nuer	n8e	nuer	VER	VER			inf;	n_8_e	n_u_er	0.0	0.01
-nues	ny	nu	ADJ	ADJ,NOM	f			n_y_#	n_u_es	21.42	6.46
+nues	ny	nu	ADJ	ADJ,NOM	f	p		n_y_#	n_u_es	21.42	6.46
 nues	ny	nu	NOM	ADJ,NOM	f	p		n_y_#	n_u_es	3.58	1.14
 nui	n8i	nuire	VER	VER	m	s	par:pas;	n_8_i	n_u_i	0.61	1.31
 nuira	n8iRa	nuire	VER	VER			ind:fut:3s;	n_8_i|R_a	n_u_i|r_a	0.14	0.59
@@ -87826,7 +87826,7 @@ ovin	ov5	ovin	ADJ	ADJ	m	s		o|v_5	o|v_in	0.0	0.01
 ovins	ov5	ovin	NOM	NOM	m	p		o|v_5_#	o|v_in_s	0.07	0.04
 ovipare	ovipaR	ovipare	ADJ	ADJ		s		o|v_i|p_a_R_#	o|v_i|p_a_r_e	0.0	0.01
 ovipares	ovipaR	ovipare	ADJ	ADJ		p		o|v_i|p_a_R_#	o|v_i|p_a_r_es	0.0	0.01
-ovni	Ovni	ovni	NOM	NOM	m			O_v|n_i	o_v|n_i	0.14	1.07
+ovni	Ovni	ovni	NOM	NOM	m	s		O_v|n_i	o_v|n_i	0.14	1.07
 ovnis	Ovni	ovni	NOM	NOM	m	p		O_v|n_i_#	o_v|n_i_s	0.14	1.91
 ovocyte	ovosit	ovocyte	NOM	NOM	m	s		o|v_o|s_i_t_#	o|v_o|c_y_t_e	0.14	0.0
 ovocytes	ovosit	ovocyte	NOM	NOM	m	p		o|v_o|s_i_t_#	o|v_o|c_y_t_es	0.27	0.03
@@ -88554,7 +88554,7 @@ papable	papabl	papable	ADJ	ADJ	m	s		p_a|p_a_b_l_#	p_a|p_a_b_l_e	0.07	0.0
 papal	papal	papal	ADJ	ADJ	m	s		p_a|p_a_l	p_a|p_a_l	0.27	0.02
 papale	papal	papal	ADJ	ADJ	f	s		p_a|p_a_l_#	p_a|p_a_l_e	0.41	0.37
 papamobile	papamObil	papamobile	NOM	NOM	f	s		p_a|p_a|m_O|b_i_l_#	p_a|p_a|m_o|b_i_l_e	0.0	0.14
-paparazzi	papaRadzi	paparazzi	NOM	NOM	m			p_a|p_a|R_a_d|z_i	p_a|p_a|r_a_z|z_i	0.34	0.67
+paparazzi	papaRadzi	paparazzi	NOM	NOM	m	s		p_a|p_a|R_a_d|z_i	p_a|p_a|r_a_z|z_i	0.34	0.67
 paparazzis	papaRadzi	paparazzi	NOM	NOM	m	p		p_a|p_a|R_a_d|z_i_#	p_a|p_a|r_a_z|z_i_s	0.0	0.79
 paparazzo	papaRadzo	paparazzo	NOM	NOM	m	s		p_a|p_a|R_a_d|z_o	p_a|p_a|r_a_z|z_o	0.07	0.03
 papas	papa	papas	NOM	NOM	m			p_a|p_a_#	p_a|p_a_s	1.08	1.25
@@ -88779,7 +88779,7 @@ parait	paRE	parait	VER	VER			inf;	p_a|R_E	p_a|r_ait	0.0	0.14
 parallaxe	paRalaks	parallaxe	NOM	NOM	f	s		p_a|R_a|l_a_ks_#	p_a|r_a|ll_a_x_e	0.0	0.02
 parallaxes	paRalaks	parallaxe	NOM	NOM	f	p		p_a|R_a|l_a_ks_#	p_a|r_a|ll_a_x_es	0.07	0.01
 parallèle	paRalEl	parallèle	ADJ	ADJ,NOM		s		p_a|R_a|l_E_l_#	p_a|r_a|ll_è_l_e	3.51	1.36
-parallèle	paRalEl	parallèle	NOM	ADJ,NOM				p_a|R_a|l_E_l_#	p_a|r_a|ll_è_l_e	2.03	0.81
+parallèle	paRalEl	parallèle	NOM	ADJ,NOM		s		p_a|R_a|l_E_l_#	p_a|r_a|ll_è_l_e	2.03	0.81
 parallèlement	paRalEl°m@	parallèlement	ADV	ADV				p_a|R_a|l_E|l_°|m_@	p_a|r_a|ll_è|l_e|m_ent	3.45	0.2
 parallèles	paRalEl	parallèle	ADJ	ADJ,NOM		p		p_a|R_a|l_E_l_#	p_a|r_a|ll_è_l_es	9.59	1.42
 parallèles	paRalEl	parallèle	NOM	ADJ,NOM		p		p_a|R_a|l_E_l_#	p_a|r_a|ll_è_l_es	0.95	0.07
@@ -92641,7 +92641,7 @@ piriforme	piRifORm	piriforme	ADJ	ADJ	m	s		p_i|R_i|f_O_R_m_#	p_i|r_i|f_o_r_m_e	0.
 piriformes	piRifORm	piriforme	ADJ	ADJ	f	p		p_i|R_i|f_O_R_m_#	p_i|r_i|f_o_r_m_es	0.14	0.0
 pirogue	piROg	pirogue	NOM	NOM	f	s		p_i|R_O_g_#	p_i|r_o_gu_e	2.5	0.65
 pirogues	piROg	pirogue	NOM	NOM	f	p		p_i|R_O_g_#	p_i|r_o_gu_es	2.23	0.11
-pirojki	piROSki	pirojki	NOM	NOM	m			p_i|R_O_S|k_i	p_i|r_o_j|k_i	0.14	0.0
+pirojki	piROSki	pirojki	NOM	NOM	m	s		p_i|R_O_S|k_i	p_i|r_o_j|k_i	0.14	0.0
 pirojkis	piROSki	pirojki	NOM	NOM	m	p		p_i|R_O_S|k_i_#	p_i|r_o_j|k_i_s	0.07	0.28
 pirolle	piROl	pirolle	NOM	NOM	f	s		p_i|R_O_l_#	p_i|r_o_ll_e	0.2	0.0
 pirouetta	piRwEta	pirouetter	VER	VER			ind:pas:3s;	p_i|R_w_E|t_a	p_i|r_ou_e|tt_a	0.2	0.0
@@ -98628,7 +98628,7 @@ prêtres	pREtR	prêtre	NOM	NOM	m	p		p_R_E_t_R_#	p_r_ê_t_r_es	14.66	11.31
 prêtresse	pREtREs	prêtre	NOM	NOM	f	s		p_R_E|t_R_E_s_#	p_r_ê|t_r_e_ss_e	0.88	1.52
 prêtresses	pREtREs	prêtre	NOM	NOM	f	p		p_R_E|t_R_E_s_#	p_r_ê|t_r_e_ss_es	0.34	0.49
 prêtrise	pRetRiz	prêtrise	NOM	NOM	f	s		p_R_e|t_R_i_z_#	p_r_ê|t_r_i_s_e	0.41	0.28
-prêts	pRE	prêt	ADJ	ADJ,NOM				p_R_E_#	p_r_ê_ts	24.93	67.39
+prêts	pRE	prêt	ADJ	ADJ,NOM	m	p		p_R_E_#	p_r_ê_ts	24.93	67.39
 prêts	pRE	prêt	NOM	ADJ,NOM	m	p		p_R_E_#	p_r_ê_ts	1.55	11.77
 prêtâmes	pREtam	prêter	VER	VER			ind:pas:1p;	p_R_E|t_a_m_#	p_r_ê|t_â_m_es	0.07	0.0
 prêtât	pREta	prêter	VER	VER			sub:imp:3s;	p_R_E|t_a	p_r_ê|t_ât	0.34	0.0
@@ -100445,7 +100445,7 @@ quittant	kit@	quitter	VER	VER			par:pre;	k_i|t_@	qu_i|tt_ant	18.38	3.6
 quittas	kita	quitter	VER	VER			ind:pas:2s;	k_i|t_a	qu_i|tt_as	0.07	0.0
 quittassent	kitas	quitter	VER	VER			sub:imp:3p;	k_i|t_a_s_#	qu_i|tt_a_ss_ent	0.07	0.0
 quitte	kit	quitter	VER	ADJ,VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;sub:pre:1s;sub:pre:3s;	k_i_t_#	qu_i_tt_e	32.03	49.07
-quitte	kit	quitte	ADJ	ADJ,VER				k_i_t_#	qu_i_tt_e	3.78	6.17
+quitte	kit	quitte	ADJ	ADJ,VER		s		k_i_t_#	qu_i_tt_e	3.78	6.17
 quittent	kit	quitter	VER	VER			ind:pre:3p;	k_i_t_#	qu_i_tt_ent	5.47	4.39
 quitter	kite	quitter	VER	VER			inf;;	k_i|t_e	qu_i|tt_er	85.95	88.02
 quittera	kit°Ra	quitter	VER	VER			ind:fut:3s;	k_i|t_°|R_a	qu_i|tt_e|r_a	2.09	4.62
@@ -102672,7 +102672,7 @@ raviné	Ravine	raviner	VER	VER	m	s	par:pas;	R_a|v_i|n_e	r_a|v_i|n_é	0.61	0.0
 ravinée	Ravine	raviner	VER	VER	f	s	par:pas;	R_a|v_i|n_e_#	r_a|v_i|n_é_e	0.54	0.01
 ravinées	Ravine	raviner	VER	VER	f	p	par:pas;	R_a|v_i|n_e_#	r_a|v_i|n_é_es	0.27	0.01
 ravinés	Ravine	raviner	VER	VER	m	p	par:pas;	R_a|v_i|n_e_#	r_a|v_i|n_é_s	0.54	0.01
-ravioli	Ravjoli	ravioli	NOM	NOM	m			R_a|v_j_o|l_i	r_a|v_i_o|l_i	0.88	0.95
+ravioli	Ravjoli	ravioli	NOM	NOM	m	s		R_a|v_j_o|l_i	r_a|v_i_o|l_i	0.88	0.95
 raviolis	Ravjoli	ravioli	NOM	NOM	m	p		R_a|v_j_o|l_i_#	r_a|v_i_o|l_i_s	0.34	1.76
 ravir	RaviR	ravir	VER	VER			inf;	R_a|v_i_R	r_a|v_i_r	3.45	2.08
 ravirait	RaviRE	ravir	VER	VER			cnd:pre:3s;	R_a|v_i|R_E	r_a|v_i|r_ait	0.2	0.13
@@ -113539,7 +113539,7 @@ saillissent	sajis	saillir	VER	VER			sub:imp:3p;	s_a|j_i_s_#	s_a|ill_i_ss_ent	0.0
 saillit	saji	saillir	VER	VER			ind:pas:3s;	s_a|j_i	s_a|ill_it	0.07	0.0
 sain	s5	sain	ADJ	ADJ	m	s		s_5	s_ain	8.58	13.89
 saindoux	s5du	saindoux	NOM	NOM	m			s_5|d_u_#	s_ain|d_ou_x	9.8	0.68
-saine	sEn	sain	ADJ	ADJ				s_E_n_#	s_ai_n_e	6.15	6.97
+saine	sEn	sain	ADJ	ADJ	f	s		s_E_n_#	s_ai_n_e	6.15	6.97
 sainement	sEn°m@	sainement	ADV	ADV				s_E|n_°|m_@	s_ai|n_e|m_ent	0.47	0.47
 saines	sEn	sain	ADJ	ADJ	f	p		s_E_n_#	s_ai_n_es	2.09	1.35
 sainfoin	s5fw5	sainfoin	NOM	NOM	m	s		s_5|f_w5	s_ain|f_oin	0.74	0.0
@@ -116647,11 +116647,11 @@ situés	sit8e	situé	ADJ	VER,ADJ	m	p		s_i|t_8_e_#	s_i|t_u_é_s	0.47	0.0
 sitôt	sito	sitôt	ADV	ADV				s_i|t_o_#	s_i|t_ô_t	19.12	3.59
 six	sis	six	ADJ:num	ADJ:num				s_i_s	s_i_x	156.22	117.37
 sixain	siks5	sixain	NOM	NOM	m	s		s_i|ks_5	s_i|x_ain	0.2	0.0
-sixième	sizjEm	sixième	ADJ	ADJ,NOM	m			s_i|z_j_E_m_#	s_i|x_i_è_m_e	7.16	3.76
+sixième	sizjEm	sixième	ADJ	ADJ,NOM		s		s_i|z_j_E_m_#	s_i|x_i_è_m_e	7.16	3.76
 sixième	sizjEm	sixième	NOM	ADJ,NOM		s		s_i|z_j_E_m_#	s_i|x_i_è_m_e	5.74	1.88
 sixièmement	sizjEm°m@	sixièmement	ADV	ADV				s_i|z_j_E|m_°|m_@	s_i|x_i_è|m_e|m_ent	0.0	0.01
 sixièmes	sizjEm	sixième	NOM	ADJ,NOM		p		s_i|z_j_E_m_#	s_i|x_i_è_m_es	0.27	0.23
-sixièmes	sizjEm	sixième	ADJ	ADJ,NOM	m			s_i|z_j_E_m_#	s_i|x_i_è_m_es	0.07	0.01
+sixièmes	sizjEm	sixième	ADJ	ADJ,NOM		p		s_i|z_j_E_m_#	s_i|x_i_è_m_es	0.07	0.01
 sixte	sikst	sixte	NOM	NOM	f	s		s_i_ks_t_#	s_i_x_t_e	0.14	0.02
 sixties	sikstiz	sixties	NOM	NOM		p		s_i|ks_t_i_#_z	s_i|x_t_i_e_s	0.2	0.4
 sixtus	sikstys	sixtus	NOM	NOM	m			s_i|ks_t_y_s	s_i|x_t_u_s	0.0	0.01
@@ -118123,7 +118123,7 @@ sournoises	suRnwaz	sournois	NOM	ADJ,NOM	f	p		s_u_R|n_wa_z_#	s_ou_r|n_oi_s_es	0.0
 sourîmes	suRim	sourire	VER	VER			ind:pas:1p;	s_u|R_i_m_#	s_ou|r_î_m_es	0.07	0.0
 sourît	suRi	sourire	VER	VER			sub:imp:3s;	s_u|R_i	s_ou|r_ît	0.2	0.0
 sous	su	sous	PRE	NOM,PRE				s_u_#	s_ou_s	1032.7	315.49
-sous	su	sou	NOM	NOM,PRE	m			s_u_#	s_ou_s	28.65	21.55
+sous	su	sou	NOM	NOM,PRE	m	p		s_u_#	s_ou_s	28.65	21.55
 souscripteur	suskRipt9R	souscripteur	NOM	NOM	m	s		s_u_s|k_R_i_p|t_9_R	s_ou_s|c_r_i_p|t_eu_r	0.0	0.01
 souscripteurs	suskRipt9R	souscripteur	NOM	NOM	m	p		s_u_s|k_R_i_p|t_9_R_#	s_ou_s|c_r_i_p|t_eu_r_s	0.2	0.01
 souscription	suskRipsj§	souscription	NOM	NOM	f	s		s_u_s|k_R_i_p|s_j_§	s_ou_s|c_r_i_p|t_i_on	0.27	0.14
@@ -127252,11 +127252,11 @@ trognes	tRON	trogne	NOM	NOM	f	p		t_R_O_N_#	t_r_o_gn_es	0.68	0.0
 trognon	tRoN§	trognon	NOM	NOM	m	s		t_R_o|N_§	t_r_o|gn_on	2.3	0.75
 trognons	tRoN§	trognon	NOM	NOM	m	p		t_R_o|N_§_#	t_r_o|gn_on_s	1.08	0.09
 trois	tRwa	trois	ADJ:num	ADJ:num				t_R_wa_#	t_r_oi_s	660.34	380.8
-troisième	tRwazjEm	troisième	ADJ	ADJ,NOM				t_R_wa|z_j_E_m_#	t_r_oi|s_i_è_m_e	57.23	30.47
+troisième	tRwazjEm	troisième	ADJ	ADJ,NOM		s		t_R_wa|z_j_E_m_#	t_r_oi|s_i_è_m_e	57.23	30.47
 troisième	tRwazjEm	troisième	NOM	ADJ,NOM		s		t_R_wa|z_j_E_m_#	t_r_oi|s_i_è_m_e	31.35	14.55
 troisièmement	tRwazjEm°m@	troisièmement	ADV	ADV				t_R_wa|z_j_E|m_°|m_@	t_r_oi|s_i_è|m_e|m_ent	0.54	1.38
 troisièmes	tRwazjEm	troisième	NOM	ADJ,NOM		p		t_R_wa|z_j_E_m_#	t_r_oi|s_i_è_m_es	0.2	0.05
-troisièmes	tRwazjEm	troisième	ADJ	ADJ,NOM				t_R_wa|z_j_E_m_#	t_r_oi|s_i_è_m_es	0.2	0.02
+troisièmes	tRwazjEm	troisième	ADJ	ADJ,NOM		p		t_R_wa|z_j_E_m_#	t_r_oi|s_i_è_m_es	0.2	0.02
 troll	tROl	troll	NOM	NOM	m	s		t_R_O_l	t_r_o_ll	0.2	0.96
 trolle	tROl	trolle	NOM	NOM	f	s		t_R_O_l_#	t_r_o_ll_e	0.07	0.0
 trolley	tRolE	trolley	NOM	NOM	m	s		t_R_o|l_E	t_r_o|ll_ey	0.47	0.48
@@ -130851,9 +130851,9 @@ vinez	vine	viner	VER	VER			imp:pre:2p;	v_i|n_e	v_i|n_ez	0.07	0.01
 vingt	v5	vingt	ADJ:num	ADJ:num				v_5_#	v_in_gt	154.59	29.47
 vingtaine	v5tEn	vingtaine	NOM	NOM	f	s		v_5_#|t_E_n_#	v_in_g|t_ai_n_e	15.34	4.11
 vingtaines	v5tEn	vingtaine	NOM	NOM	f	p		v_5_#|t_E_n_#	v_in_g|t_ai_n_es	0.14	0.0
-vingtième	v5tjEm	vingtième	ADJ	ADJ,NOM				v_5_#|t_j_E_m_#	v_in_g|t_i_è_m_e	3.18	0.34
+vingtième	v5tjEm	vingtième	ADJ	ADJ,NOM		s		v_5_#|t_j_E_m_#	v_in_g|t_i_è_m_e	3.18	0.34
 vingtième	v5tjEm	vingtième	NOM	ADJ,NOM		s		v_5_#|t_j_E_m_#	v_in_g|t_i_è_m_e	1.01	0.28
-vingtièmes	v5tjEm	vingtième	ADJ	ADJ				v_5_#|t_j_E_m_#	v_in_g|t_i_è_m_es	0.07	0.0
+vingtièmes	v5tjEm	vingtième	ADJ	ADJ		p		v_5_#|t_j_E_m_#	v_in_g|t_i_è_m_es	0.07	0.0
 vinicole	vinikOl	vinicole	ADJ	ADJ		s		v_i|n_i|k_O_l_#	v_i|n_i|c_o_l_e	0.0	0.04
 vinificatrice	vinifikatRis	vinificateur	NOM	NOM	f	s		v_i|n_i|f_i|k_a|t_R_i_s_#	v_i|n_i|f_i|c_a|t_r_i_c_e	0.0	0.01
 vinrent	v5R	venir	VER	VER			ind:pas:3p;	v_5_R_#	v_in_r_ent	10.54	1.53
@@ -130979,7 +130979,7 @@ vire	viR	vire	NOM	NOM,VER	f	s		v_i_R_#	v_i_r_e	0.07	0.33
 virement	viR°m@	virement	NOM	NOM	m	s		v_i|R_°|m_@	v_i|r_e|m_ent	0.14	1.48
 virements	viR°m@	virement	NOM	NOM	m	p		v_i|R_°|m_@_#	v_i|r_e|m_en_ts	0.2	0.27
 virent	viR	virer	VER	VER			ind:pre:3p;	v_i_R_#	v_i_r_ent	11.62	2.04
-virer	viRe	virer	VER	VER			imp:pre:2p;ind:pre:2p;inf;	v_i|R_e	v_i|r_er	6.76	25.74
+virer	viRe	virer	VER	VER			;inf;	v_i|R_e	v_i|r_er	6.76	25.74
 virera	viR°Ra	virer	VER	VER			ind:fut:3s;	v_i|R_°|R_a	v_i|r_e|r_a	0.07	0.44
 virerai	viR°RE	virer	VER	VER			ind:fut:1s;	v_i|R_°|R_E	v_i|r_e|r_ai	0.0	0.2
 virerais	viR°RE	virer	VER	VER			cnd:pre:1s;cnd:pre:2s;	v_i|R_°|R_E	v_i|r_e|r_ais	0.0	0.21
@@ -132520,7 +132520,7 @@ yéyés	jeje	yéyé	NOM	NOM		p		j_e|j_e_#	y_é|y_é_s	0.14	0.0
 zadé	zade	zader	VER	VER	m	s	par:pas;	z_a|d_e	z_a|d_é	0.47	0.0
 zaibatsu	zajbatsu	zaibatsu	NOM	NOM	m			z_a_j|b_a_t|s_u	z_a_i|b_a_t|s_u	0.0	0.01
 zain	z5	zain	ADJ	ADJ	m	s		z_5	z_ain	0.07	0.0
-zakouski	zakuski	zakouski	NOM	NOM	m			z_a|k_u_s|k_i	z_a|k_ou_s|k_i	0.07	0.62
+zakouski	zakuski	zakouski	NOM	NOM	m	s		z_a|k_u_s|k_i	z_a|k_ou_s|k_i	0.07	0.62
 zakouskis	zakuski	zakouski	NOM	NOM	m	p		z_a|k_u_s|k_i_#	z_a|k_ou_s|k_i_s	0.27	0.0
 zani	zani	zani	NOM	NOM	m	s		z_a|n_i	z_a|n_i	0.0	0.04
 zanimaux	zanimo	zanimaux	NOM	NOM	m	p		z_a|n_i|m_o_#	z_a|n_i|m_au_x	0.07	0.0
