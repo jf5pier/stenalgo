@@ -73170,7 +73170,7 @@ laissassent	lEsas	laisser	VER	VER			sub:imp:3p;	l_E|s_a_s_#	l_ai|ss_a_ss_ent	0.0
 laisse	lEs	laisser	VER	NOM,VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;sub:pre:1s;sub:pre:3s;	l_E_s_#	l_ai_ss_e	143.31	479.63
 laisse	lEs	laisse	NOM	NOM,VER	f	s		l_E_s_#	l_ai_ss_e	18.85	69.88
 laissent	lEs	laisser	VER	VER			ind:pre:3p;sub:pre:3p;	l_E_s_#	l_ai_ss_ent	22.3	15.24
-laisser	lese	laisser	VER	VER			inf;;inf;;inf;;inf;;inf;;inf;;	l_e|s_e	l_ai|ss_er	192.03	243.13
+laisser	lEse	laisser	VER	VER			inf;;inf;;inf;;inf;;inf;;inf;;	l_E|s_e	l_ai|ss_er	192.03	243.13
 laissera	lEs°Ra	laisser	VER	VER			ind:fut:3s;	l_E|s_°|R_a	l_ai|ss_e|r_a	6.62	13.78
 laisserai	lEs°RE	laisser	VER	VER			ind:fut:1s;	l_E|s_°|R_E	l_ai|ss_e|r_ai	5.81	28.33
 laisseraient	lEs°RE	laisser	VER	VER			cnd:pre:3p;	l_E|s_°|R_E	l_ai|ss_e|r_aient	2.09	1.23
@@ -73191,13 +73191,13 @@ laissons	lEs§	laisser	VER	VER			imp:pre:1p;ind:pre:1p;	l_E|s_§	l_ai|ss_ons	6.7
 laissâmes	lEsam	laisser	VER	VER			ind:pas:1p;	l_E|s_a_m_#	l_ai|ss_â_m_es	0.54	0.0
 laissât	lEsa	laisser	VER	VER			sub:imp:3s;	l_E|s_a	l_ai|ss_ât	2.97	0.01
 laissèrent	lEsER	laisser	VER	VER			ind:pas:3p;	l_E|s_E_R_#	l_ai|ss_è_r_ent	4.73	0.42
-laissé	lese	laisser	VER	VER,NOM	m	s	par:pas;par:pas;par:pas;par:pas;	l_e|s_e	l_ai|ss_é	117.57	139.96
-laissé	lese	laissé	NOM	VER,NOM	m	s		l_e|s_e	l_ai|ss_é	1.62	0.63
-laissée	lese	laisser	VER	VER	f	s	ind:imp:3p;par:pas;	l_e|s_e_#	l_ai|ss_é_e	20.47	20.9
-laissées	lese	laisser	VER	VER,NOM	f	p	par:pas;	l_e|s_e_#	l_ai|ss_é_es	6.01	3.47
-laissées	lese	laissée	NOM	VER,NOM	f	p		l_e|s_e_#	l_ai|ss_é_es	0.47	0.11
-laissés	lese	laisser	VER	VER,NOM	m	p	par:pas;	l_e|s_e_#	l_ai|ss_é_s	9.26	7.12
-laissés	lese	laissé	NOM	VER,NOM	m	p		l_e|s_e_#	l_ai|ss_é_s	0.14	0.19
+laissé	lEse	laisser	VER	VER,NOM	m	s	par:pas;par:pas;par:pas;par:pas;	l_E|s_e	l_ai|ss_é	117.57	139.96
+laissé	lEse	laissé	NOM	VER,NOM	m	s		l_E|s_e	l_ai|ss_é	1.62	0.63
+laissée	lEse	laisser	VER	VER	f	s	ind:imp:3p;par:pas;	l_E|s_e_#	l_ai|ss_é_e	20.47	20.9
+laissées	lEse	laisser	VER	VER,NOM	f	p	par:pas;	l_E|s_e_#	l_ai|ss_é_es	6.01	3.47
+laissées	lEse	laissée	NOM	VER,NOM	f	p		l_E|s_e_#	l_ai|ss_é_es	0.47	0.11
+laissés	lEse	laisser	VER	VER,NOM	m	p	par:pas;	l_E|s_e_#	l_ai|ss_é_s	9.26	7.12
+laissés	lEse	laissé	NOM	VER,NOM	m	p		l_E|s_e_#	l_ai|ss_é_s	0.14	0.19
 lait	lE	lait	NOM	NOM	m	s		l_E_#	l_ai_t	62.23	59.41
 laitage	lEtaZ	laitage	NOM	NOM	m	s		l_E|t_a_Z	l_ai|t_a_ge	0.54	0.22
 laitages	lEtaZ	laitage	NOM	NOM	m	p		l_E|t_a_Z_#	l_ai|t_a_g_es	0.34	0.2
