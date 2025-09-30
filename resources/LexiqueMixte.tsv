@@ -4459,8 +4459,8 @@ allergène	alERZEn	allergène	ADJ	ADJ,NOM	m	s		a|l_E_R|Z_E_n_#	a|ll_e_r|g_è_n_e
 allergènes	alERZEn	allergène	NOM	ADJ,NOM	m	p		a|l_E_R|Z_E_n_#	a|ll_e_r|g_è_n_es	0.0	0.04
 allergènes	alERZEn	allergène	ADJ	ADJ,NOM	f	p		a|l_E_R|Z_E_n_#	a|ll_e_r|g_è_n_es	0.07	0.0
 allers	ale	aller	NOM	NOM	m	p		a|l_e_#	a|ll_er_s	0.68	0.56
-allez	ale	aller	VER	NOM,VER			imp:pre:2p;ind:pre:2p;	a|l_e	a|ll_ez	155.54	1414.85
-allez	ale	aller	NOM	NOM,VER	f	s		a|l_e	a|ll_ez	0.07	0.0
+allez	ale	aller	VER	VER			imp:pre:2p;ind:pre:2p;	a|l_e	a|ll_ez	155.54	1414.85
+#allez	ale	aller	NOM	NOM,VER	f	s		a|l_e	a|ll_ez	0.07	0.0
 allia	alja	allier	VER	VER			ind:pas:3s;	a|l_j_a	a|ll_i_a	0.14	0.01
 alliacé	aljase	alliacé	ADJ	ADJ	m	s		a|l_j_a|s_e	a|ll_i_a|c_é	0.14	0.0
 alliage	aljaZ	alliage	NOM	NOM	m	s		a|l_j_a_Z	a|ll_i_a_ge	0.95	0.81
