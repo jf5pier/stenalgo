@@ -127928,7 +127928,7 @@ tueur	t89R	tueur	NOM	NOM	m	s		t_8_9_R	t_u_eu_r	7.3	52.42
 tueurs	t89R	tueur	NOM	NOM	m	p		t_8_9_R_#	t_u_eu_r_s	4.93	10.32
 tueuse	t82z	tueuse	NOM	NOM	f	s		t_8_2_z_#	t_u_eu_s_e	0.27	6.26
 tueuses	t82z	tueur	NOM	NOM	f	p		t_8_2_z_#	t_u_eu_s_es	0.2	1.31
-tuez	t8e	tuer	VER	VER			imp:pre:2p;ind:pre:2p;	t_8|e	t_u|ez	2.43	27.32
+tuez	t8e	tuer	VER	VER			imp:pre:2p;ind:pre:2p;	t_8_e	t_u_ez	2.43	27.32
 tuf	tyf	tuf	NOM	NOM	m	s		t_y_f	t_u_f	0.54	0.01
 tuffeau	tyfo	tuffeau	NOM	NOM	m	s		t_y|f_o	t_u|ff_eau	0.27	0.0
 tuffeaux	tyfo	tuffeau	NOM	NOM	m	p		t_y|f_o_#	t_u|ff_eau_x	0.07	0.0
