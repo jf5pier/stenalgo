@@ -29,7 +29,10 @@ from src.word import GramCat, Word
 from typing import Any
 from src.keyboard import Keyboard, Starboard, Stroke, Strokes
 from src.cpsatsolver import optimizeKeyboard
-from src.greedyoptimizer import extractDiscriminatingFeatures, greedyOptimizeDiscriminator
+from src.featureextractor import extractDiscriminatingFeatures
+from src.greedyoptimizer import greedyOptimizeDiscriminator
+
+
 #from src.cpsatoptimizer import optimizeTheory
 from tqdm import tqdm
 import sys
@@ -81,13 +84,19 @@ class Dictionary:
                 ls = line.strip().split("\t")
                 self.frequentWords.append(ls[0])
                 self.frequentWordsFrequencies += float(ls[1])
+        excludedWords: list[str] = []
+        if os.path.exists("excluded_words.txt"):
+            with open("excluded_words.txt") as ef:
+                excludedWords = [l.strip() for l in ef.readlines()
+                                            if l.strip() != '' and l.strip()[0] != '#']
 
         with open(self.wordSource) as f:
             corpus = csv.DictReader(f, delimiter='\t')
 
             for corpusWord in tqdm(corpus, desc="Reading corpus", unit=" words"):
                 if corpusWord["ortho"] is not None \
-                        and corpusWord["ortho"][0] != "#":
+                        and corpusWord["ortho"][0] != "#" \
+                        and corpusWord["ortho"] not in excludedWords :
                     word: Word = Word(
                         ortho = corpusWord["ortho"],
                         phonology = corpusWord["phon"],
@@ -402,7 +411,7 @@ if __name__ == "__main__":
     #         pickle.dump(augmentedTheory, pfile)
 
     
-    discrimFeatureWords: dict[str, set[str]] = {}
+    discrimFeatureWords: dict[str, set[Word]] = {}
     orderedFeatures: list[str] = []
     if os.path.exists("FeatureDiscrimator.pickle"):
         with open("FeatureDiscrimator.pickle", "rb") as pfile:
