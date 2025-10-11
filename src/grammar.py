@@ -10,6 +10,7 @@ from rich.table import Table
 from rich.console import Console
 from multiprocessing import Process, Pipe
 from multiprocessing.connection import Connection
+from functools import lru_cache
 
 @dataclass
 class Phoneme:
@@ -132,10 +133,10 @@ class Multiphoneme:
         if isinstance(other, Multiphoneme):
             return self.phonemes == other.phonemes
         elif isinstance(other, set):
-            for element in other :
-                if not isinstance(element, str):
-                    return False
-            return self.phonemes == other
+            # for element in other :
+            #     if not isinstance(element, str):
+            #         return False
+            return set(self.phonemes) == other
         return False
 
     def __lt__(self, other) -> bool:
@@ -964,7 +965,15 @@ class SyllableCollection:
                             score += least_scores
         return score
 
-    def lexicalSyllabicPartAmbiguityScore(self, multiphoneme1: tuple[str, ...], multiphoneme2: tuple[str, ...], syllabicPart: str) -> float:
+    @lru_cache
+    def _getSyllablesOfMultiphonemes(self, multiphoneme: tuple[str, ...], syllabicPart: str) -> list[Syllable]:
+        return list(
+            filter(lambda syll: multiphoneme == (syll.multiphonemesByPart[syllabicPart].phonemes
+                                                 if syll.multiphonemesByPart[syllabicPart] != None else None), self.syllables)
+        )
+
+    def lexicalSyllabicPartAmbiguityScore(self, multiphoneme1: tuple[str, ...],
+                                          multiphoneme2: tuple[str, ...], syllabicPart: str) -> float:
         """Ambiguity is defined by the existance of two words that are
         different by only one group of phonemes of one syllabic part.
         If a single stroke is assigned to those two different groups of 
@@ -972,9 +981,8 @@ class SyllableCollection:
         The score is defined by the frequnecy of the sum of least frequent
         ambgious words."""
 
-        multiphoneme1_syllables = list(
-            filter(lambda syll: multiphoneme1 == (syll.multiphonemesByPart[syllabicPart].phonemes if syll.multiphonemesByPart[syllabicPart] != None else None), self.syllables)
-        )
+        multiphoneme1_syllables = self._getSyllablesOfMultiphonemes(multiphoneme1, syllabicPart)
+
         score: float = 0.0
         #print("m1",multiphoneme1, "m2", multiphoneme2,"syll", multiphoneme1_syllables) if len(multiphoneme1_syllables) > 0 else None
         for syll1 in multiphoneme1_syllables:
@@ -1146,6 +1154,11 @@ class SyllableCollection:
                                                       key=lambda item: item[1]) }
 
         print("Left hand multiphonemes ambiguity optimization")
+        # import cProfile
+        # import os
+        # print("Profiling.....")
+        # onset_ambiguity = cProfile.runctx('_getLexicalAmbiguityScores(self.getMultiphonemeNames("onset"), "onset")',globals(), locals(), "./lexAmbiMultipStats")
+        # print("File written: ", os.path.exists("./lexAmbiMultipStats"))
         onset_ambiguity = _getLexicalAmbiguityScores(self.getMultiphonemeNames("onset"), "onset")
 
         print("Middle keys multiphonemes ambiguity optimization")
