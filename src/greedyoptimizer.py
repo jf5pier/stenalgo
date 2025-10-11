@@ -1,149 +1,17 @@
 #!/usr/bin/python
 # coding: utf-8
 #
-import atexit
-from ortools.sat.python.cp_model import IntVar
-from ortools.sat.python import cp_model
 from src.keyboard import Keyboard, Strokes
-from src.grammar import Phoneme, Syllable
-from src.word import Word, GramCat
-from src.cpsatprinter import SolutionPrinter
+from src.word import Word
 from tqdm import tqdm
-from itertools import combinations
-from copy import deepcopy
+from collections import defaultdict
 
-
-def getAmbiguousMultiphonemes(theory: dict[tuple[tuple[int, ...], ...], list[Word]],
-                              keyboard: Keyboard) -> dict[str, list[Word]]:
-
-    ambiguousMultiphonemes: dict[str, list[Word]]= {}
-    for strokes, words in theory.items():
-        if len(words) > 1:
-            phonemesPressed: str = keyboard.strokesToString(strokes)
-            ambiguousMultiphonemes[phonemesPressed] = words
-    return ambiguousMultiphonemes
-
-def extractDiscriminatingFeatures(theory: dict[Strokes, list[Word]]) \
-        -> tuple[dict[str, set[Word]], list[str]]:
-    """
-    """
-
-    wordFeatures: dict[Word, list[str]] = {}
-    lemmes: set[str] = set()
-    for lemme in tqdm([word.lemme for words in theory.values() for word in words],
-                      desc="Collecting lemmes", unit=" word", ascii=True, ncols=100):
-        lemmes.add(lemme)
-
-    allFeatures: set[str] = set()
-    for word in tqdm([word for words in theory.values() for word in words],
-                      desc="Collecting word features", unit=" word", ascii=True, ncols=100):
-        for selectedFeature in word.getFeatures():
-            allFeatures.add(selectedFeature)
-            wordFeatures[word] = wordFeatures.get(word, []) + [selectedFeature]
-
-    # Words for which the feature is present
-    wordsUsingFeature: dict[str, list[Word]] = {feature: [] for feature in list(allFeatures)}
-    # List (for each word) of list of features (str) for which each feature is a word 
-    # discriminator in the group of homophone words sharing the samme lemme
-    strokeLemmeDiscriminators: dict[tuple[Strokes, str], dict[Word, list[str]]] = {}
-    wordIsDiscrminatedByFeature: dict[str, set[Word]] = {feature: set() for feature in list(allFeatures)}
-    wordIsDiscrminatedFromByFeature: dict[str, set[Word]] = {feature: set() for feature in list(allFeatures)}
-
-    nbDiscriminatorsOfWord: dict[Word, int] = {word: 0 for words in theory.values() for word in words}
-    allWords: list[Word] = sorted(list(set(word for words in theory.values() for word in words)), key=lambda w: w.ortho)
-
-    strokeLemmeSingleWords: dict[tuple[Strokes, str], Word] = {}
-
-    for strokes, selectedWords in tqdm(theory.items(), desc="Scaning discriminating features",
-                               unit=" homophones", ascii=True, ncols=100):
-        # Split homophone word group by lemme
-        wordByLemme: dict[str, list[Word]] = {word.lemme:[] for word in selectedWords}
-        for word in selectedWords:
-            wordByLemme[word.lemme].append(word)
-
-        # Discriminate homophones words sharing the same lemme
-        for lemme, lemmeWords in wordByLemme.items():
-            lemmeWordFeatures = {
-                feature: list(filter(lambda w: feature in wordFeatures[w], lemmeWords)) 
-                for feature in allFeatures }
-            if len(lemmeWords) == 1:
-                strokeLemmeSingleWords[(strokes, lemme)] = lemmeWords[0]
-
-            strokeLemmeDiscriminators[(strokes,lemme)] = {}
-            for selectedFeature, wordsUsing in lemmeWordFeatures.items():
-                if len(wordsUsing) > 0:
-                    # Popularity of the feature
-                    wordsUsingFeature[selectedFeature] += wordsUsing
-                if len(wordsUsing) == 1:
-                    # This is a discriminating feature for this word
-                    wordsFeatureDict = strokeLemmeDiscriminators[(strokes, lemme)]
-                    wordFeatureDict = wordsFeatureDict.get(wordsUsing[0], [])
-                    wordFeatureDict += [selectedFeature]
-                    strokeLemmeDiscriminators[(strokes, lemme)][wordsUsing[0]] = wordFeatureDict
-                    # Popularity of the feature as a discriminator
-                    wordIsDiscrminatedByFeature[selectedFeature].add(wordsUsing[0])
-                    
-                    # Other words that are discriminated from this word by its feature
-                    otherWords = list(filter(lambda w: w != wordsUsing[0], lemmeWords))
-                    for w in otherWords:
-                        wordIsDiscrminatedFromByFeature[selectedFeature].add(w)
-
-
-    # Sort features by their popularity as discriminators
-    wordIsDiscrminatedByFeature = {
-        feature:words for feature, words in sorted(wordIsDiscrminatedByFeature.items(),
-                                                   key=lambda item: len(item[1]), reverse=True)
-    }
-
-    print("\nNumber of words without homphones sharing their lemme: %d / %d"%(len(strokeLemmeSingleWords), len(allWords)))
-    print("\nMost popular discriminating features:")
-    print("\n".join([f"{feature:>25}: discriminate {len(words)} words" +
-                     f" from {len(wordIsDiscrminatedFromByFeature[feature])} other words sharing the same lemme." +
-                     f" A total of {len(wordsUsingFeature[feature])} words have this feature"
-                        for feature, words in list(wordIsDiscrminatedByFeature.items())[:5]]))
-
-    # The greedy part : Go through the features from the currently more impactfull to the least.
-    orderedFeaturesSelected: list[str] = []
-    leftOverDiscriminatedFrom: dict[str, set[Word]] =  {f:set() for f in wordIsDiscrminatedFromByFeature} #deepcopy(wordIsDiscrminatedByFeature)
-    for fi in range(len(wordIsDiscrminatedByFeature)):
-        # Features not yet used to discriminate a word
-        leftOverFeatures = {
-            feature: words for feature, words in wordIsDiscrminatedByFeature.items()
-            if feature not in orderedFeaturesSelected
-        }
-        # Remove words that are already discriminated by a previously selected feature
-        for preselectedFeature in orderedFeaturesSelected:
-            leftOverFeatures = {
-                feature: words for feature, words in leftOverFeatures.items()
-                if feature is not preselectedFeature
-            }
-        sortedLeftOverFeatures= {
-            feature:words for feature, words in sorted(leftOverFeatures.items(),
-                                     key=lambda item: len(item[1]), reverse=True)
-        }
-        # Greedy pick the best feature
-        selectedFeature, selectedWords = list(sortedLeftOverFeatures.items())[0]
-        # Update stats of discriminated words
-        for preselectedFeature in [orderedFeaturesSelected[-1]] if len(orderedFeaturesSelected) > 0 else []:
-            for feature, words in leftOverDiscriminatedFrom.items():
-                                       # desc=f"Removing words already discriminated by {preselectedFeature}",
-                                       # unit=" features", ascii=True, ncols=100):
-
-                leftOverDiscriminatedFrom[feature] = set()
-                for word in words:
-                    leftOverDiscriminatedFrom[feature].add(word) if word not in wordIsDiscrminatedFromByFeature[preselectedFeature] else None
-
-        orderedFeaturesSelected.append(selectedFeature)
-        print(f"{fi+1}. Feature:{selectedFeature:>25}: discriminates {len(selectedWords):>4}" +
-              f" from {len(leftOverDiscriminatedFrom[selectedFeature])} other words sharing the same lemme." +
-              f" A total of {len(set(wordsUsingFeature[selectedFeature]))} words have this feature")
-
-    print(orderedFeaturesSelected)
-    return wordIsDiscrminatedByFeature, orderedFeaturesSelected
+verboseLemmes: list[str] = [] # ["fait", "faire"]
+verboseWords: list[str] = [] # ["fais", "fait", "faits", "faites"]
 
 def greedyOptimizeDiscriminator (
         theory: dict[Strokes, list[Word]],
-        wordIsDiscrminatedByFeature: dict[str, list[Word]],
+        wordIsDiscrminatedByFeature: dict[str, set[Word]],
         orderedFeaturesSelected: list[str], keyboard: Keyboard
     ) -> dict[Strokes, dict[str, dict[str, list[tuple[Word, list[str]]]]]]:
     """
@@ -152,12 +20,18 @@ def greedyOptimizeDiscriminator (
     for strokes, selectedWords in tqdm(theory.items(), desc="Grouping words by feature set",
                                unit=" homophones", ascii=True, ncols=100):
         # Split homophone word group by lemme
-        wordByLemme: dict[str, list[Word]] = {word.lemme:[] for word in selectedWords}
+        wordByLemme: dict[str, list[Word]] = {word.lemmeGramCat:[] for word in selectedWords}
         for word in selectedWords:
-            wordByLemme[word.lemme].append(word)
+            wordByLemme[word.lemmeGramCat].append(word)
 
         # Discriminate homophones words sharing the same lemme
         for lemme, lemmeWords in wordByLemme.items():
+            if lemme in verboseLemmes and lemmeWords[0].ortho in verboseWords:
+                print(strokes, "\n   ",  [w.ortho for w in selectedWords])
+                print("   ", [w.ortho for w in lemmeWords])
+                for w in selectedWords:
+                    print(w.ortho, "\n   ", w.getFeatures())
+                # sys.exit(1)
             # Only interested in discriminating features if there are multiple words for the same lemme
             if len(lemmeWords) > 1:
                 selectedFeatureWord: list[tuple[str, Word]] = []
@@ -169,6 +43,8 @@ def greedyOptimizeDiscriminator (
                         while(len(wordsToAssignToFeature) > 0):
                             word = wordsToAssignToFeature.pop(0)
                             selectedFeatureWord.append(("nofeature", word))
+                            if lemme in verboseLemmes and lemmeWords[0].ortho in verboseWords:
+                                print("   !No feature found for word", word.ortho)
                         continue
                     # Go through the features from the most popular to the least
                     feature = possibleFeatures.pop(0)
@@ -189,11 +65,28 @@ def greedyOptimizeDiscriminator (
         fs:ws for fs, ws in sorted(featuresetWords.items(), key=lambda item: len(item[1]),
                                    reverse=True)
     }
-    for f1, (featureset, words) in enumerate(featuresetWords.items()):
-        print(f"{f1}. Feature set is used to discriminate {len(words)} words:")
-        print(f"".join([f"{f:>15}" for f in featureset]))
-        for wordTuple in words[:2]:
-            print(f"".join([f"{word.ortho:>15}" for word in wordTuple]))
+    print(f"{len(featuresetWords)} different feature sets found.")
+    for f1, (featureset, words) in list(enumerate(featuresetWords.items()))[:20]:
+        if True: #"nofeature" in featureset:
+            print(f"{f1}. Feature set is used to discriminate {len(words)} words:")
+            print(f"".join([f"{f:>15} " for f in featureset]))
+            debugFeatureNb = 9
+            nbPrint = -1 if f1 == debugFeatureNb else 5
+            grepWords: list[str] = []
+            for wordTuple in words[:nbPrint]:
+                if f1 == 9 :
+                    grepWords += [wordTuple[-1].ortho]
+                    orthoER = wordTuple[-1].ortho
+                    orthoEZ = orthoER[:-1] + "z"
+                    print(f"untracked_src/copyLineFromTo.py resources/Lexique383.tsv 2 0 3 {orthoER} VER {orthoEZ} VER 6 1 17 22 23 24 26")
+                    print(f"untracked_src/copyLineFromTo.py resources/LexiqueInfraCorrespondance.tsv 2 0 2 {orthoER} VER {orthoEZ} VER 3 1 -4 5")
+                else :
+                    print(f"".join([f"{word.ortho:>15} " for word in wordTuple]))
+            #print("egrep \"" + "|".join([f"^{w[:-1]}[rz]\\b" for w in grepWords]) +'"')
+
+
+            #        "  ", 'egrep "' + "|".join([f"^{w.ortho}\\b" for w in wordTuple]) +'"')
+            # print('egrep "' + "|".join([f"^{w.ortho}\\b" for wordTuple in words for w in wordTuple]) +'"')
 
                     
 
