@@ -1,0 +1,42 @@
+####
+# Orthographe alternative existante au Lexique
+#
+alèze
+aprème
+balluchon
+brunchs
+conquistadors
+cuiller
+laponne
+lettone
+intoxe
+manipe
+mam'zelle
+matines
+patchs
+paye
+polaroid
+sanskrit
+senne
+sketchs
+trousseaux
+yoghourt
+####
+# d' préféré à d
+#
+d
+s
+t
+l
+####
+# Contractions
+#
+mat'
+champ'
+####
+# Mots dont la provenance est inconnue
+#
+fère
+####
+# Exclus pour débugging, mais devraient être réintégrés plus tard
+lieus
