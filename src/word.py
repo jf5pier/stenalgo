@@ -73,6 +73,7 @@ class Word:
     orthosyllCV: list[list[str]] = field(init=False)
     syllCV: list[list[str]] = field(init=False)
     frequency: float = field(init=False)
+    lemmeGramCat: str = field(init=False)
     _hash: int = field(init=False)
     _infoVerb: list[list[str]] | None = field(init=False)
 
@@ -87,6 +88,9 @@ class Word:
         self._infoVerb = [self.splitInfoVerb(infoVerb)
                             for infoVerb in filter(lambda iv: iv != '', self.infoVerb.split(";"))
                             ] if self.infoVerb is not None else None
+        # this is more precice than the lemme alone in identifying the family of a word
+        # ex.: rucher_NOM vs rucher_VER
+        self.lemmeGramCat = f"{self.lemme}_{self.gramCat.name}"
 
     def splitInfoVerb(self, infoVerb: str) -> list[str]:
         """ Split string of the kind : "ind:pre:1p" into a list of features
@@ -138,6 +142,10 @@ class Word:
             features += [f"{self.gender}_{self.number}"]
             if features[-1] != "m_s":
                 features += ["not_m_s"]
+        # Adding a VER_masculine/feminin_singular/plural combo for participe passé
+        if self.gramCat == GramCat.VER :
+            if self.gender != None and self.number != None:
+                features += [f"{self.gramCat.name}_{self.gender}_{self.number}"]
         try:
             if self._infoVerb is not None:
                 for singleInfoVerb in self._infoVerb:
@@ -195,19 +203,17 @@ class Word:
         return list(map(lambda syll: syll.split("_"), self.rawSyllCV.split("|")))
 
     def replaceSyllables(self, syll_orig: str, syll_final: str) -> str:
-        phono = deepcopy(self.phonology)
+        """
+        Replace all occurrences of syll_orig by syll_final in the phonology of the word
+        """
+        phono = self.phonology
         if syll_orig == syll_final :
             return phono
         i = 0
-        n = 0 
         while (pos := phono[i:].find(syll_orig)) != -1:
             pos += i
             phono = phono[0:pos] + syll_final + phono[len(syll_orig) + pos :]
             i = pos + len(syll_final)
-            n += 1
-            if n>10 : 
-                print("\n\n\n", self.phonology, phono, syll_orig, syll_final, pos)
-                sys.exit(1)
         return phono
 
     @override
