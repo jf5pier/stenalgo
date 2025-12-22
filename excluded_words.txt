@@ -37,6 +37,11 @@ champ'
 # Mots dont la provenance est inconnue
 #
 fère
+azulejo
+azulejos
+jerez
+juan
+rioja
 ####
 # Exclus pour débugging, mais devraient être réintégrés plus tard
 lieus
