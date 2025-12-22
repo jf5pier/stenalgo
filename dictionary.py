@@ -447,6 +447,7 @@ if __name__ == "__main__":
                         for word, features in wordsFeatures:
                             print("   ", word.ortho, ",".join(word.getFeatures())," discrim ", features)
 
+    print(len(featureCount), "features used in discrimation among", len(dictionary.words), "words.")
     print("Feature counts:", sorted(featureCount.items(), key=lambda x: x[1], reverse=True))
     print("Single feature discrimator:", sorted(singleFeatureDiscrimator.items(), key=lambda x: x[1], reverse=True))
 
