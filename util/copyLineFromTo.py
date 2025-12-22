@@ -34,24 +34,26 @@ def substituteMultipleValuesFromSourceToDest(argumentArray: list[str]) -> None:
         for lineNumber, line in enumerate(fi.readlines()):
             bufferedText.append(line)
             if matchKeys(keyColumns[0:1], sourceKeyValues, line) :
-                print(f"Found source {sourceKeyValues[0]}")
+                #print(f"Found source {sourceKeyValues[0]}")
                 if matchKeys(keyColumns, sourceKeyValues, line) :
                     sourceFound += [lineNumber]
-                    print(f"Found source line {len(sourceFound)} times at {lineNumber}")
+                    #print(f"Found source line {len(sourceFound)} times at {lineNumber}")
             if matchKeys(keyColumns[0:1], destKeyValues, line) :
-                print(f"Found dest {destKeyValues[0]}")
+                #print(f"Found dest {destKeyValues[0]}")
                 if matchKeys(keyColumns, destKeyValues, line) :
                     destFound += [lineNumber]
-                    print(f"Found dest line {len(destFound)} times at {lineNumber}")
+                    #print(f"Found dest line {len(destFound)} times at {lineNumber}")
 
     if len(sourceFound) != 1 or len(destFound) != 1:
-        print(f"Not substituting {sourceKeyValues} -> {destKeyValues}")
-        print(f"egrep \"^{sourceKeyValues[0]}\t|^{destKeyValues[0]}\t\"  {fileIn}")
+        #print(f"Not substituting {sourceKeyValues} -> {destKeyValues}")
+        #print(f"egrep \"^{sourceKeyValues[0]}\t|^{destKeyValues[0]}\t\"  {fileIn}")
         return
     else :
         modifiedDest = modifyLine(sourceFound[0], destFound[0], substitutionColumns, bufferedText)
         print("Source:\n", bufferedText[sourceFound[0]])
+        print(" NB Source: ", len(sourceFound))
         print("Dest:\n", bufferedText[destFound[0]])
+        print(" NB Dest: ", len(destFound))
         print("Modified dest:\n", modifiedDest)
         bufferedText[destFound[0]] = modifiedDest
 

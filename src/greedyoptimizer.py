@@ -2,7 +2,7 @@
 # coding: utf-8
 #
 from src.keyboard import Keyboard, Strokes
-from src.word import Word
+from src.word import Word, WordFeature, LemmeGramCat, WordOrtho
 from tqdm import tqdm
 from collections import defaultdict
 
@@ -11,16 +11,16 @@ verboseWords: list[str] = [] # ["fais", "fait", "faits", "faites"]
 
 def greedyOptimizeDiscriminator (
         theory: dict[Strokes, list[Word]],
-        wordIsDiscrminatedByFeature: dict[str, set[Word]],
-        orderedFeaturesSelected: list[str], keyboard: Keyboard
-    ) -> dict[Strokes, dict[str, dict[str, list[tuple[Word, list[str]]]]]]:
+        wordIsDiscrminatedByFeature: dict[WordFeature, set[Word]],
+        orderedFeaturesSelected: list[WordFeature]
+    ) -> dict[tuple[WordFeature, ...], list[tuple[Word, ...]]]:
     """
     """
-    featuresetWords: dict[tuple[str, ...], list[tuple[Word, ...]]] = {}
+    featuresetWords: dict[tuple[WordFeature, ...], list[tuple[Word, ...]]] = {}
     for strokes, selectedWords in tqdm(theory.items(), desc="Grouping words by feature set",
                                unit=" homophones", ascii=True, ncols=100):
         # Split homophone word group by lemme
-        wordByLemme: dict[str, list[Word]] = {word.lemmeGramCat:[] for word in selectedWords}
+        wordByLemme: dict[LemmeGramCat, list[Word]] = {word.lemmeGramCat:[] for word in selectedWords}
         for word in selectedWords:
             wordByLemme[word.lemmeGramCat].append(word)
 
@@ -34,7 +34,7 @@ def greedyOptimizeDiscriminator (
                 # sys.exit(1)
             # Only interested in discriminating features if there are multiple words for the same lemme
             if len(lemmeWords) > 1:
-                selectedFeatureWord: list[tuple[str, Word]] = []
+                selectedFeatureWord: list[tuple[WordFeature, Word]] = []
                 wordsToAssignToFeature: list[Word] = lemmeWords[:]
                 possibleFeatures = orderedFeaturesSelected[:]
                 while len(wordsToAssignToFeature) > 0:
@@ -57,7 +57,7 @@ def greedyOptimizeDiscriminator (
                             wordsToAssignToFeature = [w for w in wordsToAssignToFeature
                                 if w.ortho != word.ortho]
                             break
-                featureSet: tuple[str, ...] = tuple(fw[0] for fw in selectedFeatureWord)
+                featureSet: tuple[WordFeature, ...] = tuple(fw[0] for fw in selectedFeatureWord)
                 featuresetWords[featureSet] = featuresetWords.get(featureSet, []) \
                     + [tuple(fw[1] for fw in selectedFeatureWord)]
 
@@ -65,77 +65,31 @@ def greedyOptimizeDiscriminator (
         fs:ws for fs, ws in sorted(featuresetWords.items(), key=lambda item: len(item[1]),
                                    reverse=True)
     }
+    
     print(f"{len(featuresetWords)} different feature sets found.")
     for f1, (featureset, words) in list(enumerate(featuresetWords.items()))[:20]:
         if True: #"nofeature" in featureset:
             print(f"{f1}. Feature set is used to discriminate {len(words)} words:")
             print(f"".join([f"{f:>15} " for f in featureset]))
             debugFeatureNb = 9
-            nbPrint = -1 if f1 == debugFeatureNb else 5
+            #nbPrint = -1 if f1 == debugFeatureNb else 5
+            nbPrint = 5
             grepWords: list[str] = []
             for wordTuple in words[:nbPrint]:
                 if f1 == 9 :
                     grepWords += [wordTuple[-1].ortho]
                     orthoER = wordTuple[-1].ortho
-                    orthoEZ = orthoER[:-1] + "z"
-                    print(f"untracked_src/copyLineFromTo.py resources/Lexique383.tsv 2 0 3 {orthoER} VER {orthoEZ} VER 6 1 17 22 23 24 26")
-                    print(f"untracked_src/copyLineFromTo.py resources/LexiqueInfraCorrespondance.tsv 2 0 2 {orthoER} VER {orthoEZ} VER 3 1 -4 5")
-                else :
-                    print(f"".join([f"{word.ortho:>15} " for word in wordTuple]))
+                    orthoEZ: WordOrtho = orthoER[:-1] + "z"
+                    #print(f"untracked_src/copyLineFromTo.py resources/Lexique383.tsv 2 0 3 {orthoER} VER {orthoEZ} VER 6 1 17 22 23 24 26")
+                    #print(f"untracked_src/copyLineFromTo.py resources/LexiqueInfraCorrespondance.tsv 2 0 2 {orthoER} VER {orthoEZ} VER 3 1 -4 5")
+                #else :
+                print(f"".join([f"{word.ortho:>15} " for word in wordTuple]))
             #print("egrep \"" + "|".join([f"^{w[:-1]}[rz]\\b" for w in grepWords]) +'"')
-
 
             #        "  ", 'egrep "' + "|".join([f"^{w.ortho}\\b" for w in wordTuple]) +'"')
             # print('egrep "' + "|".join([f"^{w.ortho}\\b" for wordTuple in words for w in wordTuple]) +'"')
 
-                    
-
     # print("Most popular features:")
     # print("\n".join([f"{feature}: {len(words)} words" for feature, words in sorted(wordsUsingFeature.items(), key=lambda item: len(item[1]), reverse=True)]))
 
-
-    # print(f"Status : {status}")
-    # print(solver.StatusName(status))
-    # if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
-    #     print(f'Total penalty = {solver.ObjectiveValue():,}')
-    #     printer.on_solution_callback()
-    #     print("Feature discriminating")
-    #     selectedFeatures = []
-    #     for feature, boolVar in featuresBoolVar.items() :
-    #         if solver.Value(boolVar):
-    #             print(feature)
-    #             selectedFeatures.append(feature)
-    #     for feature, boolVar in featurePairsBoolVar.items() :
-    #         if solver.Value(boolVar):
-    #             print(feature)
-    #             selectedFeatures.append(feature)
-    #     augmentedTheory: dict[Strokes, dict[str, dict[str, list[tuple[Word, list[str]]]]]] = {}
-    #     for strokes, words in tqdm(theory.items(), desc="Scaning discriminating features",
-    #                             unit=" homophones", ascii=True, ncols=100):
-    #         # Split by lemme
-    #         wordByLemme: dict[str, list[Word]] = {word.lemme:[] for word in words}
-    #         for word in words:
-    #             wordByLemme[word.lemme].append(word)
-    #         phonemesPressed: str = keyboard.strokesToString(strokes)
-    #         augmentedTheory[strokes] = {}
-    #
-    #         # Discriminate homophones words sharing the same lemme
-    #         for lemme, lemmeWords in wordByLemme.items():
-    #             augmentedTheory[strokes][lemme] = {}
-    #             orthosOfLemme =list(set(word.ortho for word in lemmeWords))
-    #             if len(lemmeWords) == 1:
-    #                 print(f"{phonemesPressed}, {lemmeWords[0].ortho} -> (single word for lemme {lemme})")
-    #                 augmentedTheory[strokes][lemme][lemmeWords[0].ortho] = [(lemmeWords[0], [])]
-    #             else :
-    #                 for word in lemmeWords:
-    #                     discrimOfWord = list(filter(lambda feature: solver.Value(feature) == 1, wordDiscriminatedBy[word]))
-    #                     discrimOfWord = [var.Name().split("_discriminated_by_")[-1] for var in discrimOfWord]
-    #
-    #                     at = augmentedTheory[strokes][lemme].get(word.ortho, [])
-    #                     at.append((word, discrimOfWord))
-    #                     augmentedTheory[strokes][lemme][word.ortho] = at
-    #                     selectedDiscrim = list(filter(lambda feature: feature in selectedFeatures, discrimOfWord))
-    #                     print(f"{phonemesPressed}, {word.ortho} of lemme {lemme} -> discriminated by {discrimOfWord}, selected {selectedDiscrim}")
-    #     return augmentedTheory
-
-    return {}
+    return featuresetWords

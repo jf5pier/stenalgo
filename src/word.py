@@ -1,9 +1,7 @@
 #!/usr/bin/python
 # coding: utf-8
 #
-import sys
 from dataclasses import dataclass, field
-from copy import deepcopy
 from enum import Enum
 from typing import override
 from itertools import combinations
@@ -19,6 +17,11 @@ GramCat = Enum(
     ],
 )
 
+type WordFeature = str
+type Lemme = str
+type LemmeGramCat = str  #format : "lemme_GramCat"
+type WordOrtho = str
+type WordPhono = str
 
 @dataclass
 class Word:
@@ -58,9 +61,9 @@ class Word:
         Chosen mix of the film and book frequencies
     """
 
-    ortho: str
-    phonology: str
-    lemme: str
+    ortho: WordOrtho
+    phonology: WordPhono
+    lemme: Lemme
     gramCat: GramCat
     orthoGramCat: list[GramCat]
     gender: str | None
@@ -73,7 +76,7 @@ class Word:
     orthosyllCV: list[list[str]] = field(init=False)
     syllCV: list[list[str]] = field(init=False)
     frequency: float = field(init=False)
-    lemmeGramCat: str = field(init=False)
+    lemmeGramCat: LemmeGramCat = field(init=False)
     _hash: int = field(init=False)
     _infoVerb: list[list[str]] | None = field(init=False)
 
@@ -128,12 +131,12 @@ class Word:
             return NotImplemented
         return self._hash == other._hash
 
-    def getFeatures(self) -> list[str]:
+    def getFeatures(self) -> list[WordFeature]:
         """
         Extract features from the word to help discriminate it from other words that are homophones.
         Also adds some combined features that could be useful like "not-masculin-singular"
         """
-        features: list[str] = []
+        features: list[WordFeature] = []
         features += [self.gramCat.name]
         features += [self.gender] if self.gender != None else []
         features += [self.number] if self.number != None else []
@@ -149,11 +152,11 @@ class Word:
         try:
             if self._infoVerb is not None:
                 for singleInfoVerb in self._infoVerb:
-                    combos: list[str] = []
+                    combos: list[tuple[WordFeature, ...]] = []
                     for comboSize in range(1, len(singleInfoVerb)+1):
                         combos += list(combinations(singleInfoVerb, comboSize))
                     for combination in combos:
-                        combinationStr: str =":".join(combination)
+                        combinationStr: WordFeature = ":".join(combination)
                         features += [combinationStr]
             return features
         except TypeError as e:

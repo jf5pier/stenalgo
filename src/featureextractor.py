@@ -2,7 +2,7 @@
 # coding: utf-8
 #
 from src.keyboard import Keyboard, Strokes
-from src.word import Word
+from src.word import Word, WordFeature, LemmeGramCat, WordOrtho
 from tqdm import tqdm
 from collections import defaultdict
 
@@ -24,13 +24,13 @@ def extractDiscriminatingFeatures(theory: dict[Strokes, list[Word]]) \
     """
 
 
-    wordFeatures: dict[Word, list[str]] = {}
-    lemmes: set[str] = set()
+    wordFeatures: dict[Word, list[WordFeature]] = {}
+    lemmes: set[LemmeGramCat] = set()
     for lemme in tqdm([word.lemmeGramCat for words in theory.values() for word in words],
                       desc="Collecting lemmes", unit=" word", ascii=True, ncols=100):
         lemmes.add(lemme)
 
-    allFeatures: set[str] = set()
+    allFeatures: set[WordFeature] = set()
     for word in tqdm([word for words in theory.values() for word in words],
                       desc="Collecting word features", unit=" word", ascii=True, ncols=100):
         for selectedFeature in word.getFeatures():
@@ -38,23 +38,23 @@ def extractDiscriminatingFeatures(theory: dict[Strokes, list[Word]]) \
             wordFeatures[word] = wordFeatures.get(word, []) + [selectedFeature]
 
     # Words for which the feature is present
-    wordsUsingFeature: dict[str, list[Word]] = {feature: [] for feature in list(allFeatures)}
-    orthosUsingFeature: dict[str, dict[str, list[Word]]] = {feature: defaultdict(list) for feature in list(allFeatures)}
+    wordsUsingFeature: dict[WordFeature, list[Word]] = {feature: [] for feature in list(allFeatures)}
+    orthosUsingFeature: dict[WordFeature, dict[WordOrtho, list[Word]]] = {feature: defaultdict(list) for feature in list(allFeatures)}
     # List (for each word) of list of features (str) for which each feature is a word 
     # discriminator in the group of homophone words sharing the samme lemme
-    strokeLemmeDiscriminators: dict[tuple[Strokes, str], dict[Word, list[str]]] = defaultdict(lambda: defaultdict(list))
-    wordIsDiscrminatedByFeature: dict[str, set[Word]] = {feature: set() for feature in list(allFeatures)}
-    wordIsDiscrminatedFromByFeature: dict[str, set[Word]] = {feature: set() for feature in list(allFeatures)}
+    strokeLemmeDiscriminators: dict[tuple[Strokes, LemmeGramCat], dict[Word, list[WordFeature]]] = defaultdict(lambda: defaultdict(list))
+    wordIsDiscrminatedByFeature: dict[WordFeature, set[Word]] = {feature: set() for feature in list(allFeatures)}
+    wordIsDiscrminatedFromByFeature: dict[WordFeature, set[Word]] = {feature: set() for feature in list(allFeatures)}
 
     nbDiscriminatorsOfWord: dict[Word, int] = {word: 0 for words in theory.values() for word in words}
     allWords: list[Word] = sorted(list(set(word for words in theory.values() for word in words)), key=lambda w: w.ortho)
 
-    strokeLemmeSingleWords: dict[tuple[Strokes, str], Word] = {}
+    strokeLemmeSingleWords: dict[tuple[Strokes, LemmeGramCat], Word] = {}
 
     for strokes, selectedWords in tqdm(theory.items(), desc="Scaning discriminating features",
                                unit=" homophones", ascii=True, ncols=100):
         # Split homophone word group by lemme
-        wordByLemme: dict[str, list[Word]] = {word.lemmeGramCat:[] for word in selectedWords}
+        wordByLemme: dict[LemmeGramCat, list[Word]] = {word.lemmeGramCat:[] for word in selectedWords}
         for word in selectedWords:
             wordByLemme[word.lemmeGramCat].append(word)
 
@@ -66,13 +66,13 @@ def extractDiscriminatingFeatures(theory: dict[Strokes, list[Word]]) \
                 for feature in allFeatures }
 
             # List of Words that either have a certain feature, or a Word with the same orthograph does
-            lemmeOrthoWordFeatures: dict[str, list[Word]] = {
+            lemmeOrthoWordFeatures: dict[WordFeature, list[Word]] = {
                 feature: list(filter( lambda w: feature in wordFeatures[w] or
                     any((feature in wordFeatures[ow] and ow.ortho == w.ortho) for ow in lemmeWords),
                     lemmeWords)) for feature in allFeatures }
 
             # Dictionnary of word orthographs and their list of Words for which the feature is present
-            lemmeOrthoFeatures: dict[str, dict[str, list[Word]]] = {
+            lemmeOrthoFeatures: dict[WordFeature, dict[WordOrtho, list[Word]]] = {
                 feature: {
                     ortho: list(filter(lambda w: w.ortho == ortho, wordsUsing))
                     for ortho in set(w.ortho for w in wordsUsing)
@@ -131,8 +131,8 @@ def extractDiscriminatingFeatures(theory: dict[Strokes, list[Word]]) \
                         for feature, words in list(wordIsDiscrminatedByFeature.items())[:5]]))
 
     # The greedy part : Go through the features from the currently more impactfull to the least.
-    orderedFeaturesSelected: list[str] = []
-    leftOverDiscriminatedFrom: dict[str, set[Word]] =  {f:set() for f in wordIsDiscrminatedFromByFeature} #deepcopy(wordIsDiscrminatedByFeature)
+    orderedFeaturesSelected: list[WordFeature] = []
+    leftOverDiscriminatedFrom: dict[WordFeature, set[Word]] =  {f:set() for f in wordIsDiscrminatedFromByFeature} #deepcopy(wordIsDiscrminatedByFeature)
     for fi in range(len(wordIsDiscrminatedByFeature)):
         # Features not yet used to discriminate a word
         leftOverFeatures = {
