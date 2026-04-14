@@ -25,12 +25,12 @@ import pickle
 from copy import deepcopy
 
 from src.grammar import Phoneme, Syllable, SyllableCollection
-from src.word import GramCat, Word
+from src.word import GramCat, Word, WordFeature
 from typing import Any
 from src.keyboard import Keyboard, Starboard, Stroke, Strokes
 from src.cpsatsolver import optimizeKeyboard
 from src.featureextractor import extractDiscriminatingFeatures
-from src.greedyoptimizer import greedyOptimizeDiscriminator
+from src.greedyoptimizer import greedyOptimizeDiscriminator, assignDiscriminatorKeypresses
 
 
 #from src.cpsatoptimizer import optimizeTheory
@@ -429,26 +429,24 @@ if __name__ == "__main__":
             discrimFeatureWords,
             orderedFeatures, starboard)
 
-    featureCount: dict[str, int] = {}
+    featureCount: dict[WordFeature, int] = {}
     singleFeatureDiscrimator: dict[str, int] = {}
-    for strokes, lemmeDict in augmentedTheory.items():
-        for lemme, orthoDict in lemmeDict.items():
-            for ortho, wordsFeatures in orthoDict.items():
-                orthoFeatures: set[str] = set()
-                for word, features in wordsFeatures:
-                    for f in features:
-                        orthoFeatures.add(f)
-                        featureCount[f] = featureCount.get(f, 0) + 1
-                if len(orthoFeatures) == 1:
-                    f = list(orthoFeatures)[0]
-                    singleFeatureDiscrimator[f] = singleFeatureDiscrimator.get(f, 0) + 1
-                    if f in ['indicatif:pers_3:nbr_s','indicatif:présent:nbr_p','présent:nbr_p', 'indicatif:nbr_s'] :
-                        print(f"\nSingle feature discrimator '{f}' for {lemme} {ortho}: ", orthoDict.keys())
-                        for word, features in wordsFeatures:
-                            print("   ", word.ortho, ",".join(word.getFeatures())," discrim ", features)
+    for featureset, wordTuples in augmentedTheory.items():
+        for f in featureset:
+            featureCount[f] = featureCount.get(f, 0) + len(wordTuples)
+        if len(featureset) == 1:
+            f = featureset[0]
+            singleFeatureDiscrimator[f] = singleFeatureDiscrimator.get(f, 0) + len(wordTuples)
+            if f in ['indicatif:pers_3:nbr_s','indicatif:présent:nbr_p','présent:nbr_p', 'indicatif:nbr_s']:
+                print(f"\nSingle feature discrimator '{f}':")
+                for wordTuple in wordTuples:
+                    for word in wordTuple:
+                        print("   ", word.ortho, ",".join(word.getFeatures()))
 
     print(len(featureCount), "features used in discrimation among", len(dictionary.words), "words.")
     print("Feature counts:", sorted(featureCount.items(), key=lambda x: x[1], reverse=True))
     print("Single feature discrimator:", sorted(singleFeatureDiscrimator.items(), key=lambda x: x[1], reverse=True))
+
+    assignDiscriminatorKeypresses(augmentedTheory, starboard)
 
 

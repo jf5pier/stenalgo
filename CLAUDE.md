@@ -36,7 +36,9 @@ python dictionary.py
 2. **Dictionary Loading** (`dictionary.py`) — Indexes words by orthography, lemma, and frequency; identifies homophones; excludes words from `excluded_words.txt`
 3. **Feature Extraction** (`src/featureextractor.py`) — Analyzes homophones and extracts discriminating features (grammatical category, gender, number, etc.) for disambiguation
 4. **Optimization** (`src/cpsatsolver.py`, `src/cpsatoptimizer.py`) — CP-SAT constraint solver assigns phonemes to keys minimizing ambiguity, finger strain, and phoneme ordering violations
-5. **Greedy Disambiguation** (`src/greedyoptimizer.py`) — Assigns discriminating features to homophone groups
+5. **Greedy Disambiguation** (`src/greedyoptimizer.py`) — Two-phase process:
+   - `greedyOptimizeDiscriminator` assigns discriminating features to homophone groups, producing `dict[tuple[WordFeature,...], list[tuple[Word,...]]]`
+   - `assignDiscriminatorKeypresses` maps those features to physical modifier strokes on the Starboard reserved keys (`[0,1,10,15]`), using a `FEATURE_PRIORITY` table (French linguistic markedness) with corpus frequency as tiebreaker. The empty stroke `()` ("no stroke") is reserved for the most canonical/unmarked form in each group; remaining features share strokes when they never co-occur (graph coloring), with semantic consistency enforced via `_consistencyScore`
 
 ### Core Data Model
 
