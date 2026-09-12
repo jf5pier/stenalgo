@@ -1083,7 +1083,7 @@ accompagnerons	ak§paN°R§	accompagner	VER	VER			ind:fut:1p;	a|k_§|p_a|N_°|R_
 accompagneront	ak§paN°R§	accompagner	VER	VER			ind:fut:3p;	a|k_§|p_a|N_°|R_§	a|cc_om|p_a|gn_e|r_ont	0.14	0.52
 accompagnes	ak§paN	accompagner	VER	VER			ind:pre:2s;sub:pre:2s;	a|k_§|p_a_N_#	a|cc_om|p_a_gn_es	0.68	5.48
 accompagnez	ak§paNe	accompagner	VER	VER			imp:pre:2p;ind:pre:2p;	a|k_§|p_a|N_e	a|cc_om|p_a|gn_ez	0.95	4.41
-accompagniez	ak§paNe	accompagner	VER	VER			ind:imp:2p;sub:pre:2p;	a|k_§|p_a|N_#_e	a|cc_om|p_a|gn_i_ez	0.07	0.45
+accompagniez	ak§paNje	accompagner	VER	VER			ind:imp:2p;sub:pre:2p;	a|k_§|p_a|N_j_e	a|cc_om|p_a|gn_i_ez	0.07	0.45
 accompagnions	ak§paN§	accompagner	VER	VER			ind:imp:1p;	a|k_§|p_a|N_#_§	a|cc_om|p_a|gn_i_ons	0.0	0.02
 accompagnons	ak§paN§	accompagner	VER	VER			imp:pre:1p;ind:pre:1p;	a|k_§|p_a|N_§	a|cc_om|p_a|gn_ons	0.27	0.73
 accompagnâmes	ak§paNam	accompagner	VER	VER			ind:pas:1p;	a|k_§|p_a|N_a_m_#	a|cc_om|p_a|gn_â_m_es	0.14	0.0
@@ -31460,7 +31460,7 @@ craigne	kREN	craindre	VER	VER			sub:pre:1s;sub:pre:3s;	k_R_E_N_#	c_r_ai_gn_e	0.4
 craignent	kREN	craindre	VER	VER			ind:pre:3p;	k_R_E_N_#	c_r_ai_gn_ent	2.36	3.75
 craignes	kREN	craindre	VER	VER			sub:pre:2s;	k_R_E_N_#	c_r_ai_gn_es	0.0	0.14
 craignez	kRENe	craindre	VER	VER			imp:pre:2p;ind:pre:2p;	k_R_E|N_e	c_r_ai|gn_ez	3.38	9.27
-craigniez	kRENe	craindre	VER	VER			ind:imp:2p;	k_R_E|N_#_e	c_r_ai|gn_i_ez	0.2	0.38
+craigniez	kRENje	craindre	VER	VER			ind:imp:2p;	k_R_E|N_j_e	c_r_ai|gn_i_ez	0.2	0.38
 craignions	kREN§	craindre	VER	VER			ind:imp:1p;	k_R_E|N_#_§	c_r_ai|gn_i_ons	0.2	0.22
 craignirent	kRENiR	craindre	VER	VER			ind:pas:3p;	k_R_E|N_i_R_#	c_r_ai|gn_i_r_ent	0.07	0.0
 craignis	kRENi	craindre	VER	VER			ind:pas:1s;	k_R_E|N_i	c_r_ai|gn_is	0.54	0.14
@@ -48967,7 +48967,7 @@ enseignes	@sEN	enseigner	VER	NOM,VER			ind:pre:2s;	@|s_E_N_#	en|s_ei_gn_es	0.07	
 enseignes	@sEN	enseigne	NOM	NOM,VER	f	p		@|s_E_N_#	en|s_ei_gn_es	4.26	0.37
 enseigneur	@sEN9R	enseigneur	NOM	NOM	m	s		@|s_E|N_9_R	en|s_ei|gn_eu_r	0.0	0.01
 enseignez	@sENe	enseigner	VER	VER			imp:pre:2p;ind:pre:2p;	@|s_E|N_e	en|s_ei|gn_ez	0.54	1.61
-enseigniez	@sENe	enseigner	VER	VER			ind:imp:2p;	@|s_E|N_#_e	en|s_ei|gn_i_ez	0.07	0.17
+enseigniez	@sENje	enseigner	VER	VER			ind:imp:2p;	@|s_E|N_j_e	en|s_ei|gn_i_ez	0.07	0.17
 enseignons	@sEN§	enseigner	VER	VER			imp:pre:1p;ind:pre:1p;	@|s_E|N_§	en|s_ei|gn_ons	0.0	0.09
 enseignât	@sENa	enseigner	VER	VER			sub:imp:3s;	@|s_E|N_a	en|s_ei|gn_ât	0.07	0.0
 enseignèrent	@sENER	enseigner	VER	VER			ind:pas:3p;	@|s_E|N_E_R_#	en|s_ei|gn_è_r_ent	0.2	0.0
@@ -53666,7 +53666,7 @@ feignasses	fENas	feignasse	ADJ	ADJ,NOM	m	p		f_E|N_a_s_#	f_ei|gn_a_ss_es	0.07	0.0
 feigne	fEN	feindre	VER	VER			sub:pre:1s;	f_E_N_#	f_ei_gn_e	0.07	0.0
 feignent	fEN	feindre	VER	VER			ind:pre:3p;	f_E_N_#	f_ei_gn_ent	0.61	0.13
 feignez	fENe	feindre	VER	VER			imp:pre:2p;ind:pre:2p;	f_E|N_e	f_ei|gn_ez	0.0	0.52
-feigniez	fENe	feindre	VER	VER			ind:imp:2p;	f_E|N_#_e	f_ei|gn_i_ez	0.0	0.1
+feigniez	fENje	feindre	VER	VER			ind:imp:2p;	f_E|N_j_e	f_ei|gn_i_ez	0.0	0.1
 feignirent	fENiR	feindre	VER	VER			ind:pas:3p;	f_E|N_i_R_#	f_ei|gn_i_r_ent	0.2	0.0
 feignis	fENi	feindre	VER	VER			ind:pas:1s;	f_E|N_i	f_ei|gn_is	0.47	0.0
 feignit	fENi	feindre	VER	VER			ind:pas:3s;	f_E|N_i	f_ei|gn_it	1.62	0.1
@@ -58511,7 +58511,7 @@ gagneuse	gaN2z	gagneur	NOM	ADJ,NOM	f	s		g_a|N_2_z_#	g_a|gn_eu_s_e	0.54	0.67
 gagneuse	gaN2z	gagneur	ADJ	ADJ,NOM	f	s		g_a|N_2_z_#	g_a|gn_eu_s_e	0.0	0.01
 gagneuses	gaN2z	gagneur	NOM	NOM	f	p		g_a|N_2_z_#	g_a|gn_eu_s_es	0.14	0.02
 gagnez	gaNe	gagner	VER	VER			imp:pre:2p;ind:pre:2p;	g_a|N_e	g_a|gn_ez	0.41	7.04
-gagniez	gaNe	gagner	VER	VER			ind:imp:2p;	g_a|N_#_e	g_a|gn_i_ez	0.07	0.38
+gagniez	gaNje	gagner	VER	VER			ind:imp:2p;	g_a|N_j_e	g_a|gn_i_ez	0.07	0.38
 gagnions	gaN§	gagner	VER	VER			ind:imp:1p;	g_a|N_#_§	g_a|gn_i_ons	0.41	0.12
 gagnons	gaN§	gagner	VER	VER			imp:pre:1p;ind:pre:1p;	g_a|N_§	g_a|gn_ons	0.88	1.74
 gagnâmes	gaNam	gagner	VER	VER			ind:pas:1p;	g_a|N_a_m_#	g_a|gn_â_m_es	0.41	0.0
@@ -71929,7 +71929,7 @@ joigne	ZwaN	joindre	VER	VER			sub:pre:1s;sub:pre:3s;	Z_wa_N_#	j_oi_gn_e	0.2	0.72
 joignent	ZwaN	joindre	VER	VER			ind:pre:3p;	Z_wa_N_#	j_oi_gn_ent	0.61	0.69
 joignes	ZwaN	joindre	VER	VER			sub:pre:2s;	Z_wa_N_#	j_oi_gn_es	0.0	0.19
 joignez	ZwaNe	joindre	VER	VER			imp:pre:2p;ind:pre:2p;	Z_wa|N_e	j_oi|gn_ez	0.2	2.71
-joigniez	ZwaNe	joindre	VER	VER			ind:imp:2p;	Z_wa|N_#_e	j_oi|gn_i_ez	0.0	0.28
+joigniez	ZwaNje	joindre	VER	VER			ind:imp:2p;	Z_wa|N_j_e	j_oi|gn_i_ez	0.0	0.28
 joignions	ZwaN§	joindre	VER	VER			ind:imp:1p;	Z_wa|N_#_§	j_oi|gn_i_ons	0.07	0.15
 joignirent	ZwaNiR	joindre	VER	VER			ind:pas:3p;	Z_wa|N_i_R_#	j_oi|gn_i_r_ent	0.68	0.01
 joignis	ZwaNi	joindre	VER	VER			ind:pas:1s;	Z_wa|N_i	j_oi|gn_is	0.27	0.0
@@ -90222,7 +90222,7 @@ peignes	pEN	peigne	NOM	NOM,VER	m	p		p_E_N_#	p_ei_gn_es	1.96	0.74
 peignes	pEN	peigner	VER	NOM,VER			ind:pre:2s;	p_E_N_#	p_ei_gn_es	0.14	0.05
 peignez	pENe	peindre	VER	VER			imp:pre:2p;ind:pre:2p;	p_E|N_e	p_ei|gn_ez	0.2	0.57
 peignez	pENe	peigner	VER	VER			imp:pre:2p;ind:pre:2p;	p_E|N_e	p_ei|gn_ez	0.14	0.3
-peigniez	pENe	peigner	VER	VER			ind:imp:2p;	p_E|N_#_e	p_ei|gn_i_ez	0.0	0.03
+peigniez	pENje	peigner	VER	VER			ind:imp:2p;	p_E|N_j_e	p_ei|gn_i_ez	0.0	0.03
 peignions	pEN§	peigner	VER	VER			ind:imp:1p;	p_E|N_#_§	p_ei|gn_i_ons	0.2	0.0
 peignis	pENi	peindre	VER	VER			ind:pas:1s;	p_E|N_i	p_ei|gn_is	1.22	0.0
 peignit	pENi	peindre	VER	VER			ind:pas:3s;	p_E|N_i	p_ei|gn_it	1.82	0.14
@@ -92935,7 +92935,7 @@ plaigne	plEN	plaindre	VER	VER			sub:pre:1s;sub:pre:3s;	p_l_E_N_#	p_l_ai_gn_e	0.8
 plaignent	plEN	plaindre	VER	VER			ind:pre:3p;	p_l_E_N_#	p_l_ai_gn_ent	1.49	2.71
 plaignes	plEN	plaindre	VER	VER			sub:pre:2s;	p_l_E_N_#	p_l_ai_gn_es	0.0	0.04
 plaignez	plENe	plaindre	VER	VER			imp:pre:2p;ind:pre:2p;	p_l_E|N_e	p_l_ai|gn_ez	0.74	1.6
-plaigniez	plENe	plaindre	VER	VER			ind:imp:2p;	p_l_E|N_#_e	p_l_ai|gn_i_ez	0.0	0.05
+plaigniez	plENje	plaindre	VER	VER			ind:imp:2p;	p_l_E|N_j_e	p_l_ai|gn_i_ez	0.0	0.05
 plaignions	plEN§	plaindre	VER	VER			ind:imp:1p;	p_l_E|N_#_§	p_l_ai|gn_i_ons	0.2	0.02
 plaignirent	plENiR	plaindre	VER	VER			ind:pas:3p;	p_l_E|N_i_R_#	p_l_ai|gn_i_r_ent	0.27	0.01
 plaignis	plENi	plaindre	VER	VER			ind:pas:1s;	p_l_E|N_i	p_l_ai|gn_is	0.2	0.0
@@ -104406,7 +104406,7 @@ regagnerez	R°gaN°Re	regagner	VER	VER			ind:fut:2p;	R_°|g_a|N_°|R_e	r_e|g_a|g
 regagnerons	R°gaN°R§	regagner	VER	VER			ind:fut:1p;	R_°|g_a|N_°|R_§	r_e|g_a|gn_e|r_ons	0.27	0.02
 regagneront	R°gaN°R§	regagner	VER	VER			ind:fut:3p;	R_°|g_a|N_°|R_§	r_e|g_a|gn_e|r_ont	0.07	0.0
 regagnez	R°gaNe	regagner	VER	VER			imp:pre:2p;ind:pre:2p;	R_°|g_a|N_e	r_e|g_a|gn_ez	0.07	1.84
-regagniez	R°gaNe	regagner	VER	VER			ind:imp:2p;	R_°|g_a|N_#_e	r_e|g_a|gn_i_ez	0.07	0.02
+regagniez	R°gaNje	regagner	VER	VER			ind:imp:2p;	R_°|g_a|N_j_e	r_e|g_a|gn_i_ez	0.07	0.02
 regagnions	R°gaN§	regagner	VER	VER			ind:imp:1p;	R_°|g_a|N_#_§	r_e|g_a|gn_i_ons	0.41	0.01
 regagnons	R°gaN§	regagner	VER	VER			imp:pre:1p;ind:pre:1p;	R_°|g_a|N_§	r_e|g_a|gn_ons	0.95	0.5
 regagnâmes	R°gaNam	regagner	VER	VER			ind:pas:1p;	R_°|g_a|N_a_m_#	r_e|g_a|gn_â_m_es	0.47	0.14
@@ -104650,7 +104650,7 @@ rejoigne	R°ZwaN	rejoindre	VER	VER			sub:pre:1s;sub:pre:3s;	R_°|Z_wa_N_#	r_e|j_
 rejoignent	R°ZwaN	rejoindre	VER	VER			ind:pre:3p;	R_°|Z_wa_N_#	r_e|j_oi_gn_ent	5.07	1.69
 rejoignes	R°ZwaN	rejoindre	VER	VER			sub:pre:2s;	R_°|Z_wa_N_#	r_e|j_oi_gn_es	0.0	0.47
 rejoignez	R°ZwaNe	rejoindre	VER	VER			imp:pre:2p;ind:pre:2p;	R_°|Z_wa|N_e	r_e|j_oi|gn_ez	0.61	6.0
-rejoigniez	R°ZwaNe	rejoindre	VER	VER			ind:imp:2p;sub:pre:2p;	R_°|Z_wa|N_#_e	r_e|j_oi|gn_i_ez	0.07	0.15
+rejoigniez	R°ZwaNje	rejoindre	VER	VER			ind:imp:2p;sub:pre:2p;	R_°|Z_wa|N_j_e	r_e|j_oi|gn_i_ez	0.07	0.15
 rejoignions	R°ZwaN§	rejoindre	VER	VER			ind:imp:1p;	R_°|Z_wa|N_#_§	r_e|j_oi|gn_i_ons	0.2	0.13
 rejoignirent	R°ZwaNiR	rejoindre	VER	VER			ind:pas:3p;	R_°|Z_wa|N_i_R_#	r_e|j_oi|gn_i_r_ent	2.84	0.15
 rejoignis	R°ZwaNi	rejoindre	VER	VER			ind:pas:1s;	R_°|Z_wa|N_i	r_e|j_oi|gn_is	1.69	0.01
@@ -111972,7 +111972,7 @@ répugnerait	RepyN°RE	répugner	VER	VER			cnd:pre:3s;	R_e|p_y|N_°|R_E	r_é|p_u
 répugneront	RepyN°R§	répugner	VER	VER			ind:fut:3p;	R_e|p_y|N_°|R_§	r_é|p_u|gn_e|r_ont	0.07	0.0
 répugnes	RepyN	répugner	VER	VER			ind:pre:2s;	R_e|p_y_N_#	r_é|p_u_gn_es	0.0	0.22
 répugnez	RepyNe	répugner	VER	VER			imp:pre:2p;ind:pre:2p;	R_e|p_y|N_e	r_é|p_u|gn_ez	0.07	0.32
-répugniez	RepyNe	répugner	VER	VER			ind:imp:2p;	R_e|p_y|N_#_e	r_é|p_u|gn_i_ez	0.07	0.02
+répugniez	RepyNje	répugner	VER	VER			ind:imp:2p;	R_e|p_y|N_j_e	r_é|p_u|gn_i_ez	0.07	0.02
 répugnons	RepyN§	répugner	VER	VER			ind:pre:1p;	R_e|p_y|N_§	r_é|p_u|gn_ons	0.07	0.1
 répugnât	RepyNa	répugner	VER	VER			sub:imp:3s;	R_e|p_y|N_a	r_é|p_u|gn_ât	0.27	0.0
 répugné	RepyNe	répugner	VER	VER	m	s	par:pas;	R_e|p_y|N_e	r_é|p_u|gn_é	0.47	0.01
@@ -113358,7 +113358,7 @@ saigneront	sEN°R§	saigner	VER	VER			ind:fut:3p;	s_E|N_°|R_§	s_ai|gn_e|r_ont	
 saignes	sEN	saigner	VER	VER			ind:pre:2s;	s_E_N_#	s_ai_gn_es	0.34	3.23
 saigneur	sEN9R	saigneur	NOM	NOM	m	s		s_E|N_9_R	s_ai|gn_eu_r	0.07	0.02
 saignez	sENe	saigner	VER	VER			imp:pre:2p;ind:pre:2p;	s_E|N_e	s_ai|gn_ez	0.07	1.5
-saigniez	sENe	saigner	VER	VER			ind:imp:2p;	s_E|N_#_e	s_ai|gn_i_ez	0.0	0.07
+saigniez	sENje	saigner	VER	VER			ind:imp:2p;	s_E|N_j_e	s_ai|gn_i_ez	0.0	0.07
 saignons	sEN§	saigner	VER	VER			imp:pre:1p;ind:pre:1p;	s_E|N_§	s_ai|gn_ons	0.0	0.07
 saigné	sENe	saigner	VER	VER	m	s	par:pas;	s_E|N_e	s_ai|gn_é	2.09	2.87
 saignée	sENe	saigner	VER	VER,NOM	f	s	par:pas;	s_E|N_e_#	s_ai|gn_é_e	0.41	0.2
@@ -116089,7 +116089,7 @@ signes	siN	signer	VER	NOM,VER			ind:pre:2s;sub:pre:2s;	s_i_N_#	s_i_gn_es	0.34	2.
 signet	siNE	signet	NOM	NOM	m	s		s_i|N_E	s_i|gn_et	0.47	0.13
 signets	siNE	signet	NOM	NOM	m	p		s_i|N_E_#	s_i|gn_e_ts	0.27	0.02
 signez	siNe	signer	VER	VER			imp:pre:2p;ind:pre:2p;	s_i|N_e	s_i|gn_ez	0.68	13.62
-signiez	siNe	signer	VER	VER			ind:imp:2p;	s_i|N_#_e	s_i|gn_i_ez	0.14	0.34
+signiez	siNje	signer	VER	VER			ind:imp:2p;	s_i|N_j_e	s_i|gn_i_ez	0.14	0.34
 signifia	siNifja	signifier	VER	VER			ind:pas:3s;	s_i|N_i|f_j_a	s_i|gn_i|f_i_a	1.08	0.12
 signifiaient	siNifjE	signifier	VER	VER			ind:imp:3p;	s_i|N_i|f_j_E	s_i|gn_i|f_i_aient	2.7	0.08
 signifiais	siNifjE	signifier	VER	VER			ind:imp:1s;ind:imp:2s;	s_i|N_i|f_j_E	s_i|gn_i|f_i_ais	0.07	0.04
@@ -116803,7 +116803,7 @@ soigneusement	swaN2z°m@	soigneusement	ADV	ADV				s_wa|N_2|z_°|m_@	s_oi|gn_eu|s
 soigneuses	swaN2z	soigneux	ADJ	ADJ	f	p		s_wa|N_2_z_#	s_oi|gn_eu_s_es	0.2	0.0
 soigneux	swaN2	soigneux	ADJ	ADJ	m			s_wa|N_2_#	s_oi|gn_eu_x	2.3	0.56
 soignez	swaNe	soigner	VER	VER			imp:pre:2p;ind:pre:2p;	s_wa|N_e	s_oi|gn_ez	0.41	2.04
-soigniez	swaNe	soigner	VER	VER			ind:imp:2p;sub:pre:2p;	s_wa|N_#_e	s_oi|gn_i_ez	0.0	0.08
+soigniez	swaNje	soigner	VER	VER			ind:imp:2p;sub:pre:2p;	s_wa|N_j_e	s_oi|gn_i_ez	0.0	0.08
 soignons	swaN§	soigner	VER	VER			imp:pre:1p;ind:pre:1p;	s_wa|N_§	s_oi|gn_ons	0.0	0.18
 soignèrent	swaNER	soigner	VER	VER			ind:pas:3p;	s_wa|N_E_R_#	s_oi|gn_è_r_ent	0.27	0.0
 soigné	swaNe	soigner	VER	VER,ADJ	m	s	par:pas;	s_wa|N_e	s_oi|gn_é	6.35	5.42
@@ -117715,7 +117715,7 @@ soulignera	suliN°Ra	souligner	VER	VER			ind:fut:3s;	s_u|l_i|N_°|R_a	s_ou|l_i|g
 souligneraient	suliN°RE	souligner	VER	VER			cnd:pre:3p;	s_u|l_i|N_°|R_E	s_ou|l_i|gn_e|r_aient	0.07	0.0
 soulignerait	suliN°RE	souligner	VER	VER			cnd:pre:3s;	s_u|l_i|N_°|R_E	s_ou|l_i|gn_e|r_ait	0.07	0.0
 soulignez	suliNe	souligner	VER	VER			imp:pre:2p;	s_u|l_i|N_e	s_ou|l_i|gn_ez	0.07	0.04
-souligniez	suliNe	souligner	VER	VER			ind:imp:2p;	s_u|l_i|N_#_e	s_ou|l_i|gn_i_ez	0.0	0.01
+souligniez	suliNje	souligner	VER	VER			ind:imp:2p;	s_u|l_i|N_j_e	s_ou|l_i|gn_i_ez	0.0	0.01
 soulignions	suliN§	souligner	VER	VER			ind:imp:1p;	s_u|l_i|N_#_§	s_ou|l_i|gn_i_ons	0.07	0.0
 souligné	suliNe	souligner	VER	VER	m	s	par:pas;	s_u|l_i|N_e	s_ou|l_i|gn_é	2.91	1.41
 soulignée	suliNe	souligner	VER	VER	f	s	par:pas;	s_u|l_i|N_e_#	s_ou|l_i|gn_é_e	1.08	0.01
@@ -128359,7 +128359,7 @@ témoignerez	temwaN°Re	témoigner	VER	VER			ind:fut:2p;	t_e|m_wa|N_°|R_e	t_é|
 témoigneront	temwaN°R§	témoigner	VER	VER			ind:fut:3p;	t_e|m_wa|N_°|R_§	t_é|m_oi|gn_e|r_ont	0.07	0.18
 témoignes	temwaN	témoigner	VER	VER			ind:pre:2s;	t_e|m_wa_N_#	t_é|m_oi_gn_es	0.07	0.29
 témoignez	temwaNe	témoigner	VER	VER			imp:pre:2p;ind:pre:2p;	t_e|m_wa|N_e	t_é|m_oi|gn_ez	0.14	0.91
-témoigniez	temwaNe	témoigner	VER	VER			ind:imp:2p;	t_e|m_wa|N_#_e	t_é|m_oi|gn_i_ez	0.0	0.11
+témoigniez	temwaNje	témoigner	VER	VER			ind:imp:2p;	t_e|m_wa|N_j_e	t_é|m_oi|gn_i_ez	0.0	0.11
 témoignât	temwaNa	témoigner	VER	VER			sub:imp:3s;	t_e|m_wa|N_a	t_é|m_oi|gn_ât	0.07	0.0
 témoignèrent	temwaNER	témoigner	VER	VER			ind:pas:3p;	t_e|m_wa|N_E_R_#	t_é|m_oi|gn_è_r_ent	0.27	0.0
 témoigné	temwaNe	témoigner	VER	VER	m	s	par:pas;	t_e|m_wa|N_e	t_é|m_oi|gn_é	2.09	1.99
@@ -135387,7 +135387,7 @@ zézettes	zezEt	zézette	NOM	NOM	f	p		z_e|z_E_t_#	z_é|z_e_tt_es	0.27	0.0
 épargnes	epaRN	épargner	VER	NOM,VER			ind:pre:2s;	e|p_a_R_N_#	é|p_a_r_gn_es	0.07	0.1
 épargnes	epaRN	épargne	NOM	NOM,VER	f	p		e|p_a_R_N_#	é|p_a_r_gn_es	0.0	0.05
 épargnez	epaRNe	épargner	VER	VER			imp:pre:2p;ind:pre:2p;	e|p_a_R|N_e	é|p_a_r|gn_ez	0.74	2.78
-épargniez	epaRNe	épargner	VER	VER			ind:imp:2p;	e|p_a_R|N_#_e	é|p_a_r|gn_i_ez	0.0	0.04
+épargniez	epaRNje	épargner	VER	VER			ind:imp:2p;	e|p_a_R|N_j_e	é|p_a_r|gn_i_ez	0.0	0.04
 épargnions	epaRN§	épargner	VER	VER			ind:imp:1p;	e|p_a_R|N_#_§	é|p_a_r|gn_i_ons	0.14	0.0
 épargnons	epaRN§	épargner	VER	VER			imp:pre:1p;	e|p_a_R|N_§	é|p_a_r|gn_ons	0.0	0.02
 épargnât	epaRNa	épargner	VER	VER			sub:imp:3s;	e|p_a_R|N_a	é|p_a_r|gn_ât	0.27	0.0
