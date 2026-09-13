@@ -1,0 +1,113 @@
+# verbModelExceptions.tsv
+#
+# Human-curated table of VER lemmas found in resources/LexiqueMixte.tsv that are
+# NOT covered by resources/verbiste/verbs-fr.xml (i.e. absent from Verbiste's
+# ~7,000-verb -> conjugation-template mapping), together with a manually reviewed
+# conjugation-model assignment for each. See the "Undersampling-aware paradigm
+# completion for sparse verb homophone groups" design plan for context.
+#
+# This table is the single source of truth for these verbs: util/completeVerbParadigms.py
+# should look a verb up here (and fall back to Verbiste's own verbs-fr.xml lookup)
+# rather than re-deriving any of this via prefix-stripping, elision rules, or other
+# runtime heuristics -- those heuristics are deliberately NOT implemented in code
+# (see conversation): every entry here was worked out by hand and should be edited
+# by hand.
+#
+# STATUS remains scoped to what has been manually reviewed so far: the 18 -ir + 4
+# -oir + 12 -re verbs from the residual Verbiste gap (34 total), plus the entries
+# from that same gap review whose "lemma" looks like a LexiqueMixte lemma-extraction
+# bug rather than a genuine missing verb. NOT YET COVERED: the ~478 leftover -er
+# verbs (almost certainly regular, matchable by ending-pattern against Verbiste's
+# existing -er templates without needing an exception here) and the ~205
+# prefix-composition candidates (re+known-verb, dé+known-verb, etc. -- see
+# PROGRESS notes / conversation for that list) which still need individual
+# validation before being added here.
+#
+# Columns:
+#   lemme            - the VER lemma as it appears in LexiqueMixte.tsv
+#   template         - Verbiste template id (see resources/verbiste/conjugations-fr.xml
+#                      <template name="..."> ids) this lemma's paradigm should follow.
+#                      Blank if status is skip_artifact, or if status is defective/
+#                      needs_review and no template could be confidently assigned.
+#   model_sibling    - a real, well-attested Verbiste-covered verb that already uses
+#                      `template`, to use as the phonology/orthography splicing source
+#                      (Stage 4). Blank where not applicable.
+#   status           - one of:
+#       regular        confident this is a normal, fully-productive verb that simply
+#                      happens to be missing from Verbiste; template should be trusted.
+#       family_template confident based on a shared *irregular verb family* whose
+#                      final string (not a strippable prefix) determines the template
+#                      (e.g. reclure shares conclure/exclure's template even though
+#                      bare "clure" isn't itself a Verbiste entry).
+#       defective      genuinely defective/archaic verb: most of the paradigm does not
+#                      exist in real French. Do NOT synthesize a full paradigm for
+#                      these; only generate forms that are independently confirmed
+#                      attested (or none at all).
+#       needs_review   template guess is uncertain; needs a human linguist/native-
+#                      speaker check before trusting it for row generation.
+#       skip_artifact  this "lemma" is very likely a LexiqueMixte lemma-extraction bug
+#                      (an inflected form, participle, or unrelated word wrongly
+#                      stored as the lemma) rather than a real missing verb. Do not
+#                      generate rows; consider fixing the source lexicon instead.
+#   note             - free-text justification / uncertainty flag.
+lemme	template	model_sibling	status	note
+raidir	fin:ir	garnir	regular	Plain -ir/-iss- verb; surprising it's absent from Verbiste at all, double check spelling before trusting.
+bonnir	fin:ir	garnir	regular	Slang ("to say"); alt spelling of bonir, same template expected.
+bonir	fin:ir	garnir	regular	Alt spelling of bonnir, same template expected.
+cramoisir	fin:ir	garnir	regular	Plain -ir/-iss- verb ("to turn crimson").
+agonir	fin:ir	garnir	needs_review	Template matches "finir" per most references, but agonir is traditionally near-defective (mainly infinitive + "agonir d'injures"); cross-check against any attested corpus forms before generating a full paradigm.
+ressouvenir	t:enir	souvenir	family_template	re + souvenir with French re+s doubling (ressortir, resservir pattern); follows venir/souvenir's t:enir template exactly.
+férir			defective	Survives only in "sans coup férir" and participle "féru"; no real paradigm to generate.
+avenir			defective	Archaic variant of advenir; defective, only 3rd-person forms attested (il avient). Possible lemma collision with the noun "avenir" (the future) -- verify against LexiqueMixte context before treating as this verb.
+apâlir	fin:ir	pâlir	family_template	a + pâlir; pâlir itself should already be a Verbiste-covered fin:ir verb -- confirm pâlir's presence before relying on this.
+rechampir	fin:ir	garnir	needs_review	The original motivating example (see design plan). "champir" is not itself a Verbiste entry, so this is a direct fin:ir assignment rather than a base-verb derivation; corpus frequency is 0 for all forms today.
+brouir	fin:ir	garnir	needs_review	Rare/impersonal ("to scorch", of plants); plausible fin:ir but not verified against attested forms.
+grinchir	fin:ir	garnir	needs_review	Regional/dialectal; plausible fin:ir but not verified.
+amochir			skip_artifact	Likely a LexiqueMixte extraction bug: the real verb is probably "amocher" (-er), not "amochir".
+ébaudir	fin:ir	garnir	needs_review	Archaic ("s'ébaudir" = to be amused); alt spelling esbaudir.
+esbaudir	fin:ir	garnir	needs_review	Old-French spelling variant of ébaudir.
+accalmir	fin:ir	garnir	needs_review	Dubious back-formation from the noun "accalmie"; verify this is actually attested as a verb before generating rows.
+florir	fl:eurir	fleurir	family_template	Archaic variant of fleurir; confirms that florissait/florissaient (see skip_artifact entries below) are inflected forms of this same verb, not independent gaps.
+chevir			defective	Archaic/defective ("venir a chevir" = to manage/cope); no real full paradigm.
+ravoir		avoir	defective	NOT actually re+avoir by simple prefix-stripping (starts "ra-" not "re-"); standard grammars treat it as usable essentially only in the infinitive.
+entrapercevoir	dé:cevoir	apercevoir	family_template	entre + apercevoir with vowel elision (entre+apercevoir -> entrapercevoir); apercevoir/decevoir/concevoir all share Verbiste's dé:cevoir template.
+assavoir	s:avoir	savoir	needs_review	Archaic ("faire assavoir" = to make known); loosely tied to savoir's template but usage is limited to a few fixed forms.
+comparoir			defective	Archaic/legal ("to appear in court"); highly defective. Not simply comparaître's template (different verb shape) -- no confident template assignment.
+éperdre	ten:dre	perdre	needs_review	Possibly é + perdre (source of the adjective "éperdu"); perdre uses Verbiste's ten:dre template, so this would follow it too, but not fully certain this is a real independent verb rather than an adjective-only lemma.
+courre		courir	defective	Archaic infinitive of courir, survives only in "chasse a courre"; defective.
+portraire	extra:ire	traire	family_template	Archaic ("to portray", source of "portrait"); traire/extraire/distraire all share Verbiste's extra:ire template.
+accroire	cr:oire	croire	defective	Defective, only used as "faire accroire"; croire's cr:oire template applies to whatever limited forms exist.
+occire			needs_review	"To kill" (archaic/humorous); genuinely idiosyncratic conjugation (occis, occira, occise) not shared with any other Verbiste-covered verb family found so far -- needs its own hand-built template rather than reuse.
+rapprendre	pr:endre	apprendre	family_template	re + apprendre with vowel elision (re+apprendre -> rapprendre); apprendre uses Verbiste's pr:endre template.
+ardre			defective	Archaic ("to burn", source of "ardent"); effectively obsolete, no real modern paradigm.
+reclure	concl:ure	conclure	family_template	Shares the concl:ure template with conclure/exclure even though bare "clure" is not itself a Verbiste entry.
+entrebattre	bat:tre	battre	family_template	entre + battre (no elision, just missing from a naive hyphenated-prefix match); battre's bat:tre template applies directly.
+entreclore	cl:ore	clore	family_template	entre + clore; note éclore uses a different Verbiste template (éclo:re) than clore (cl:ore) -- this should follow clore's, not éclore's.
+adire			defective	Archaic/legal ("perdre par égarement", source of "adiré"); not actually derived from "dire" despite the surface resemblance -- its own defective verb, no confident template.
+ascendre	ten:dre	descendre	family_template	Parallel formation to descendre, which uses Verbiste's ten:dre template; only descendre/perdre-family members confirmed so far, treat with some caution.
+# --- lemma-extraction-bug candidates (from the broader gap review) ---
+# These are NOT genuine Verbiste coverage gaps: they look like inflected forms,
+# participles, or unrelated words stored as the VER lemma in LexiqueMixte.tsv.
+chaut	cha:loir	chaloir	skip_artifact	Confirmed: chaloir IS in Verbiste (template cha:loir). "chaut" is an inflected/archaic present-tense form, not a missing infinitive.
+appert	app:aroir	apparoir	skip_artifact	Confirmed: apparoir IS in Verbiste (template app:aroir). "appert" is an inflected form, not a missing infinitive.
+sourdait			skip_artifact	Looks like an imperfect-tense form of sourdre (Verbiste covers sourdre via template "s:ourdre"), not an infinitive.
+sourdaient			skip_artifact	Same as sourdait; imperfect-tense form of sourdre, plural.
+florissait	fl:eurir	fleurir	skip_artifact	Imperfect-tense form of florir/fleurir (see florir entry above), not an infinitive.
+florissaient	fl:eurir	fleurir	skip_artifact	Same as florissait, plural.
+découverte			skip_artifact	This is the feminine noun/past-participle "discovery", not an infinitive.
+bourrée			skip_artifact	Looks like a past-participle/noun form ("bourrée" = a dance / stuffed), not an infinitive.
+nu			skip_artifact	Not a French infinitive shape; likely a mis-lemmatized entry.
+forfait			skip_artifact	Looks like a noun/adjective ("forfait" = package deal / forfeit), not an infinitive.
+exit			skip_artifact	Latin/English loanword used as an interjection, not a French verb infinitive.
+suradapté			skip_artifact	Past-participle/adjective form, not an infinitive.
+débraillé			skip_artifact	Adjective ("disheveled"), not an infinitive.
+instruit			skip_artifact	Looks like a conjugated/participle form of instruire, not an infinitive.
+bouffi			skip_artifact	Adjective/past-participle ("puffy, bloated"), not an infinitive.
+choses			skip_artifact	Plural of the noun "chose" (thing), not a verb at all.
+y			skip_artifact	Single-letter pronoun/particle, not a verb infinitive.
+parait		paraître	skip_artifact	Looks like a conjugated form of paraître (missing its circumflex), not an infinitive.
+réélus		réélire	skip_artifact	Looks like a past-participle plural form of réélire, not an infinitive.
+connais		connaître	skip_artifact	Looks like a conjugated (1st person) form of connaître, not an infinitive.
+plus			skip_artifact	The adverb "plus" (more), not a verb.
+mentez		mentir	skip_artifact	Looks like a conjugated (2nd person plural imperative/present) form of mentir, not an infinitive.
+sais		savoir	skip_artifact	Looks like a conjugated (1st person) form of savoir, not an infinitive.
