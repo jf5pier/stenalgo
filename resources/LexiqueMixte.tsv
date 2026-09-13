@@ -45527,7 +45527,7 @@ effrayantes	efREj@t	effrayant	ADJ	ADJ	f	p		e|f_R_Ej|@_t_#	e|ff_r_ay|an_t_es	1.42
 effrayants	efREj@	effrayant	ADJ	ADJ	m	p		e|f_R_Ej|@_#	e|ff_r_ay|an_ts	1.62	1.07
 effraye	efREj	effrayer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	e|f_R_Ej_#	e|ff_r_ay_e	0.61	1.1
 effrayent	efRej	effrayer	VER	VER			ind:pre:3p;	e|f_R_e_j_#	e|ff_r_a_y_ent	0.2	0.25
-effrayer	efREje	effrayer	VER	VER			inf;;	e|f_R_Ej|e	e|ff_r_ay|er	4.73	9.43
+effrayer	efREje	effrayer	VER	VER			inf;;	e|f_R_E|j_e	e|ff_r_a|y_er	4.73	9.43
 effrayerais	efREj°RE	effrayer	VER	VER			cnd:pre:1s;	e|f_R_Ej|°|R_E	e|ff_r_ay|e|r_ais	0.0	0.03
 effrayerait	efREj°RE	effrayer	VER	VER			cnd:pre:3s;	e|f_R_Ej|°|R_E	e|ff_r_ay|e|r_ait	0.0	0.08
 effrayeras	efREj°Ra	effrayer	VER	VER			ind:fut:2s;	e|f_R_Ej|°|R_a	e|ff_r_ay|e|r_as	0.0	0.01
@@ -106381,7 +106381,7 @@ repavé	R°pave	repaver	VER	VER	m	s	par:pas;	R_°|p_a|v_e	r_e|p_a|v_é	0.07	0.0
 repayais	R°pEjE	repayer	VER	VER			ind:imp:1s;	R_°|p_Ej|E	r_e|p_ay|ais	0.07	0.0
 repayait	R°pEjE	repayer	VER	VER			ind:imp:3s;	R_°|p_Ej|E	r_e|p_ay|ait	0.07	0.0
 repaye	R°pEj	repayer	VER	VER			ind:pre:1s;	R_°|p_Ej_#	r_e|p_ay_e	0.07	0.0
-repayer	R°pEje	repayer	VER	VER			inf;;	R_°|p_Ej|e	r_e|p_ay|er	0.0	0.21
+repayer	R°pEje	repayer	VER	VER			inf;;	R_°|p_E|j_e	r_e|p_a|y_er	0.0	0.21
 repayé	R°pEje	repayer	VER	VER	m	s	par:pas;	R_°|p_Ej|e	r_e|p_ay|é	0.07	0.0
 repaît	R°pE	repaître	VER	VER			ind:pre:3s;	R_°|p_E_#	r_e|p_aî_t	0.07	0.12
 repaître	R°pEtR	repaître	VER	VER			inf;	R_°|p_E_t_R_#	r_e|p_aî_t_r_e	1.42	0.2
@@ -107164,7 +107164,7 @@ ressaut	R°so	ressaut	NOM	NOM	m	s		R_°|s_o_#	r_e|ss_au_t	0.74	0.01
 ressauter	R°sote	ressauter	VER	VER			inf;	R_°|s_o|t_e	r_e|ss_au|t_er	0.0	0.07
 ressauts	R°so	ressaut	NOM	NOM	m	p		R_°|s_o_#	r_e|ss_au_ts	0.41	0.0
 ressauté	R2sote	ressauter	VER	VER	m	s	par:pas;	R_2|s_o|t_e	r_e|ss_au|t_é	0.0	0.01
-ressayer	REsEje	ressayer	VER	VER			inf;	R_E|s_Ej|e	r_e|ss_ay|er	0.0	0.12
+ressayer	REsEje	ressayer	VER	VER			inf;	R_E|s_E|j_e	r_e|ss_a|y_er	0.0	0.12
 ressembla	R°s@bla	ressembler	VER	VER			ind:pas:3s;	R_°|s_@|b_l_a	r_e|ss_em|b_l_a	1.01	0.0
 ressemblaient	R°s@blE	ressembler	VER	VER			ind:imp:3p;	R_°|s_@|b_l_E	r_e|ss_em|b_l_aient	15.54	2.17
 ressemblais	R°s@blE	ressembler	VER	VER			ind:imp:1s;ind:imp:2s;	R_°|s_@|b_l_E	r_e|ss_em|b_l_ais	1.15	2.23
