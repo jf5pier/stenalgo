@@ -17,46 +17,40 @@ flagged by cross-checker"). Do NOT re-stage/re-commit that work; check `git log`
 `git status` for what's new since.
 
 Since that commit: `util/fixPayerDualFormGaps.py` was added and run with `--apply`,
-appending **53** generated pa:yer "i"/"y" counterpart rows (phon + syllable breakdown,
+appending generated pa:yer "i"/"y" counterpart rows (phon + syllable breakdown,
 `source=synthetic`) to `resources/LexiqueSynthetic.tsv`. Per the user's explicit direction,
-these went to `LexiqueSynthetic.tsv`, NOT `LexiqueMixte.tsv` — so
-**`util/validateLexiconAgainstVerbiste.py`'s WRONG_ENDING count for pa:yer will NOT drop**
-until `LexiqueSynthetic.tsv` is wired into `LexiqueMixte.tsv` (deliberately deferred, see
-`completeVerbParadigms.py`'s module docstring — do not do this wiring without explicit
-instruction, it's a separate scope decision). This latest change (the new script +
-`LexiqueSynthetic.tsv` append) is **uncommitted** — decide with the user whether/when to
-commit it, same practice as before.
+these went to `LexiqueSynthetic.tsv`, NOT `LexiqueMixte.tsv`.
+
+**DECIDED, permanent: `resources/LexiqueSynthetic.tsv` will NOT be wired into
+`resources/LexiqueMixte.tsv`.** This is no longer an open question — do not revisit it,
+do not do the wiring. Consequence: `util/validateLexiconAgainstVerbiste.py`'s
+WRONG_ENDING counts for pa:yer/ass:eoir will never drop by generating rows into
+`LexiqueSynthetic.tsv` alone; that's expected and fine, not a bug to chase.
 
 Remaining flags are two deferred architectural items (below) plus one non-issue kept only
 for documentation (`pouvoir`/"puis") — no more open judgment calls or unexplained flags.
 
-## Outstanding work
+## Outstanding work (both items below are now resolved — kept for history/context)
 
-- [ ] **`-ayer` verbs (pa:yer template family, 108 WRONG_ENDING flags)**: both the "i"-form
-  (balaie) and "y"-form (balaye) are phonologically distinct (/balɛ/ vs /balɛj/, confirmed
-  with the user) and both need correct lexicon rows (ortho + phon + syllable breakdown)
-  wherever missing — this is NOT a "pick the right spelling" template fix. Read-only
-  inventory: `util/inventoryPayerFormsCoverage.py` (dump written to
-  `/tmp/payer_inventory.tsv` — regenerate if that scratch file is gone): 34 lemmas × 21
-  dual-alternation slots = 714 combinations — 76 both present, 45 only-i-present (y
-  missing), 32 only-y-present (i missing), 561 neither present (normal corpus sparsity,
-  not a defect).
-  **Progress**: `util/fixPayerDualFormGaps.py` (dry-run/`--apply`, idempotent) derives
-  `phon`/`syll_cv`/`orthosyll_cv` endings per (slot, i/y-form) from every already-attested
-  donor lemma, requiring 100% agreement (`MIN_MATCH_RATE = 1.0`, same bar as
-  `completeVerbParadigms.py`) before generating a row, and appends results to
-  `resources/LexiqueSynthetic.tsv` (per user direction — NOT `LexiqueMixte.tsv`). Applied
-  once already: **53 rows generated and appended**. **65 remain skipped**: their
-  `syll_cv`/`orthosyll_cv` donor agreement is <100% because the syllable-boundary encoding
-  depends on the lemma's radical shape (number of trailing consonants before the vowel,
-  e.g. "pa-" vs "débr-" vs "expr-") — a real structural difference, not noise. **Next
-  step** (per user's own steer): improve the derivation by grouping donors by radical
-  consonant-cluster shape before computing the per-slot ending, then re-run
-  `util/fixPayerDualFormGaps.py --apply` for the remaining ~65. Re-running the script as-is
-  today is a safe no-op (idempotent — checks both `LexiqueMixte.tsv` and the current
-  `LexiqueSynthetic.tsv` before generating). Remember: even once all 118 are generated,
-  the validator's WRONG_ENDING count won't move until `LexiqueSynthetic.tsv` is wired into
-  `LexiqueMixte.tsv` (separate, deliberately out-of-scope decision — ask before doing it).
+- [x] **`-ayer` verbs (pa:yer template family) — effectively done.** 34 lemmas × 21
+  dual-alternation slots = 714 combinations: 76 both present, 45 only-i-present (y
+  missing), 32 only-y-present (i missing) = 77 gaps total, 561 legitimately absent
+  (normal corpus sparsity, not a defect). `util/fixPayerDualFormGaps.py` (dry-run/
+  `--apply`, idempotent) derives `phon`/`syll_cv`/`orthosyll_cv` per (slot, i/y-form)
+  from every already-attested donor lemma, requiring 100% agreement before generating,
+  appending to `resources/LexiqueSynthetic.tsv`.
+  **The "65 remain skipped" figure this file previously carried was stale** — this
+  session's unrelated `pa:yer` E/e vowel-quality fix (see the main session's lexicon
+  work: `fixAyGraphemeEjQuality.py`/`fixAyGraphemeInfraPhono.py`, done to unblock
+  `python lexique.py` regeneration, nothing to do with this dual-form-gap track)
+  happened to also fix the donor-agreement noise blocking most of these 65 as a side
+  effect. Re-verified from scratch: only **6** of the 77 gaps still needed anything.
+  3 were now confidently generatable (100% donor match, unlocked by the E/e fix) and
+  have been generated and applied: `effrayera`, `effrayerez`, `effrayeraient`. The
+  remaining 3 are genuinely stuck, not a to-do: `déblaye`(imp:pre:2s)/`effrayes`
+  (ind:pre:2s) hit the documented syllable-tokenization free variation
+  (`PAYER_SYLLCV_AUDIT.md` finding #4, no discoverable rule); `paies`(sub:pre:2s) has
+  zero donors anywhere in the lexicon for that spelling. 346 tests pass.
 - [x] **`ass:eoir` (asseoir/rasseoir, 25 WRONG_ENDING flags) — done, in the same
   not-yet-wired state as pa:yer above.** `surseoir` uses its own separate `surs:eoir`
   template and was never in scope. Unlike pa:yer's 26-lemma donor pool, only 2 lemmas
@@ -107,13 +101,9 @@ for documentation (`pouvoir`/"puis") — no more open judgment calls or unexplai
 1. Read this file fully first.
 2. Run `pytest src/test/` (expect 346 pass) and
    `python -m util.validateLexiconAgainstVerbiste` (expect 134 total flags: 108 pa:yer +
-   25 ass:eoir + 1 pouvoir/puis — both counts are frozen until LexiqueSynthetic.tsv gets
-   wired into LexiqueMixte.tsv, see above) to confirm the working tree still matches
-   this note.
-3. Decide with the user whether to commit the existing work before starting new fixes.
-4. Only pa:yer's remaining ~65 dual-form gaps are still open (ass:eoir is done, see
-   above). Pick up pa:yer using the exact same workflow as every prior batch: dry-run
-   script, present for approval, `--apply`, re-run tests + validator, confirm the
-   targeted flag count drops as expected before moving on. Otherwise, the next real
-   decision is whether to wire `LexiqueSynthetic.tsv` into `LexiqueMixte.tsv` at all —
-   ask the user first, it's explicitly out of scope until then.
+   25 ass:eoir + 1 pouvoir/puis — both counts are permanently frozen at these numbers,
+   since `LexiqueSynthetic.tsv` will NOT be wired into `LexiqueMixte.tsv`, see above) to
+   confirm the working tree still matches this note.
+3. Both `pa:yer` and `ass:eoir` dual-form-gap work is done (see above) — there is no
+   open item left on this lexicon-defect-triage track. If picking this file up again,
+   it's most likely to check for regressions, not to resume unfinished work.
