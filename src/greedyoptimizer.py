@@ -1,10 +1,82 @@
 #!/usr/bin/python
 # coding: utf-8
 #
-from src.keyboard import Keyboard, Strokes
+import re
+from itertools import combinations
+from src.keyboard import Keyboard, Stroke, Strokes
 from src.word import Word, WordFeature, LemmeGramCat, WordOrtho, groupWordsByLemme
 from tqdm import tqdm
 from collections import defaultdict
+
+# Tokens that conflict with each other (plural↔singular, masculine↔feminine).
+_TOKEN_CONFLICTS: dict[str, str] = {"p": "s", "s": "p", "m": "f", "f": "m"}
+
+# Linguistic markedness priority for no-stroke / simple-stroke assignment.
+# Higher value = more "unmarked" in French grammar = preferred for no-stroke.
+# Features absent from this table default to 0 (frequency breaks the tie).
+FEATURE_PRIORITY: dict[WordFeature, int] = {
+    # ── Gender / number ──────────────────────────────────────────────────────
+    # Masculine singular is the canonical citation form in French
+    "m_s":      95,
+    "m":        85,
+    "s":        80,
+    "nbr_s":    75,   # singular in verb context
+    "not_m_s":  30,   # negation of canonical → below average
+    "f_s":      45,
+    "f":        40,
+    "p":        20,
+    "nbr_p":    15,
+    "m_p":      10,
+    "f_p":       5,
+    # VER + gender/number combinations (participe passé agreement)
+    "VER_m_s":  90,
+    "VER_f_s":  40,
+    "VER_m_p":  15,
+    "VER_f_p":   5,
+    # ── Verb modes ────────────────────────────────────────────────────────────
+    "indicatif":    90,
+    "infinitif":    75,
+    "participe":    60,
+    "conditionnel": 35,
+    "subjonctif":   25,
+    "impératif":    20,
+    # ── Verb tenses ───────────────────────────────────────────────────────────
+    "présent":   85,
+    "passé":     50,
+    "imparfait": 40,
+    "future":    30,
+    # ── Verb person ───────────────────────────────────────────────────────────
+    "pers_3":    70,
+    "pers_1":    55,
+    "pers_2":    45,
+}
+
+
+def _featureTokens(f: WordFeature) -> frozenset[str]:
+    """Extract meaningful tokens from a feature string, stripping any 'not_' prefix."""
+    base = f[4:] if f.startswith("not_") else f
+    return frozenset(t for t in re.split(r'[_:]', base) if t)
+
+
+def _consistencyScore(
+    f: WordFeature,
+    stroke: Stroke,
+    keyToFeatures: dict[int, list[WordFeature]],
+    tokenCache: dict[WordFeature, frozenset[str]]
+) -> float:
+    """Score how semantically consistent assigning feature f to stroke is.
+    Shared tokens with features already on each key score positively;
+    conflicting tokens score negatively."""
+    fTok = tokenCache[f]
+    score = 0.0
+    for key in stroke:
+        for ef in keyToFeatures.get(key, []):
+            eTok = tokenCache[ef]
+            score += len(fTok & eTok) * 2.0
+            for t in fTok:
+                if _TOKEN_CONFLICTS.get(t) in eTok:
+                    score -= 3.0
+    return score
 
 verboseLemmes: list[str] = [] # ["fait", "faire"]
 verboseWords: list[str] = [] # ["fais", "fait", "faits", "faites"]
@@ -92,3 +164,220 @@ def greedyOptimizeDiscriminator (
     # print("\n".join([f"{feature}: {len(words)} words" for feature, words in sorted(wordsUsingFeature.items(), key=lambda item: len(item[1]), reverse=True)]))
 
     return featuresetWords
+
+
+def _buildStrokePool(keyboard: Keyboard) -> list[Stroke]:
+    """Return all subsets of reserved keys (including the empty 'no stroke'), cheapest-first.
+    The empty tuple () represents no modifier key and is always first (cost 0)."""
+    reservedKeys: list[int] = getattr(keyboard, '_reservedKeys', [0, 1, 10, 15])
+    pool: list[Stroke] = [()]  # "no stroke" is always the cheapest option
+    real: list[Stroke] = []
+    for n in range(1, len(reservedKeys) + 1):
+        for combo in combinations(sorted(reservedKeys), n):
+            real.append(combo)
+    real.sort(key=lambda s: keyboard.getStrokeCost(s, "onset"))
+    return pool + real
+
+
+def assignDiscriminatorKeypresses(
+    augmentedTheory: dict[tuple[WordFeature, ...], list[tuple[Word, ...]]],
+    keyboard: Keyboard
+) -> dict[Stroke, list[WordFeature]]:
+    """
+    Greedily assigns physical strokes to discriminating features.
+    A stroke may be shared by multiple non-co-occurring features.
+
+    The empty stroke () ("no stroke") is reserved for the most frequent features,
+    as an independent set in the co-occurrence graph — a feature always gets the
+    same stroke across all featuresets it appears in.
+
+    Stroke reuse prefers semantic consistency: keys already associated with "plural"
+    features will not be reused for "singular" features.
+
+    Returns a mapping stroke → [features it represents].
+    """
+    # ── Stroke pool ────────────────────────────────────────────────────────────
+    pool = _buildStrokePool(keyboard)
+    poolOrder: dict[Stroke, int] = {s: i for i, s in enumerate(pool)}
+
+    # ── Coverable featuresets (no "nofeature") ─────────────────────────────────
+    coverableFS: dict[tuple[WordFeature, ...], list[tuple[Word, ...]]] = {
+        fs: wts for fs, wts in augmentedTheory.items() if "nofeature" not in fs
+    }
+    totalWordGroups = sum(len(wts) for wts in coverableFS.values())
+
+    allFeatures: set[WordFeature] = set()
+    for fs in coverableFS:
+        allFeatures.update(fs)
+
+    # ── Phase 1: Greedy N-1 AND-set-cover feature selection ────────────────────
+    def marginal_gain(f: WordFeature, assignedSet: set[WordFeature]) -> int:
+        gain = 0
+        for fs, wts in coverableFS.items():
+            if f not in fs:
+                continue
+            N = len(fs)
+            others = sum(1 for x in fs if x != f and x in assignedSet)
+            if others == N - 2:   # adding f reaches the N-1 threshold
+                gain += len(wts)
+        return gain
+
+    def bootstrap_gain(f: WordFeature, assignedSet: set[WordFeature]) -> int:
+        """Secondary gain for N>=3 featuresets with no features assigned yet.
+        Selecting f enables future marginal gains from those featuresets."""
+        return sum(
+            len(wts) for fs, wts in coverableFS.items()
+            if f in fs
+            and len(fs) >= 3
+            and not any(x in assignedSet for x in fs)
+        )
+
+    assigned: list[WordFeature] = []
+    assignedSet: set[WordFeature] = set()
+    gainHistory: list[int] = []
+    cumulHistory: list[float] = []
+    cumul = 0
+
+    while True:
+        bestF: WordFeature | None = None
+        bestGain = 0
+        for f in allFeatures - assignedSet:
+            g = marginal_gain(f, assignedSet)
+            if g > bestGain:
+                bestGain = g
+                bestF = f
+        if bestGain == 0:
+            # Bootstrap: no immediate gain, but N>=3 featuresets may need priming.
+            for f in allFeatures - assignedSet:
+                g = bootstrap_gain(f, assignedSet)
+                if g > bestGain:
+                    bestGain = g
+                    bestF = f
+        if bestGain == 0 or bestF is None:
+            break
+        assigned.append(bestF)
+        assignedSet.add(bestF)
+        cumul += bestGain
+        gainHistory.append(bestGain)
+        cumulHistory.append(100.0 * cumul / totalWordGroups if totalWordGroups else 0.0)
+
+    # Phase 1 info per feature (for diagnostics)
+    phase1Round: dict[WordFeature, int] = {f: i + 1 for i, f in enumerate(assigned)}
+    gainByFeature: dict[WordFeature, int] = dict(zip(assigned, gainHistory))
+    cumulByFeature: dict[WordFeature, float] = dict(zip(assigned, cumulHistory))
+
+    # ── Build co-occurrence graph ──────────────────────────────────────────────
+    # Edge F1–F2 if they appear in the same featureset (they can't share a stroke).
+    coOccurs: dict[WordFeature, set[WordFeature]] = {f: set() for f in assigned}
+    for fs in coverableFS:
+        fsSelected = [f for f in fs if f in coOccurs]
+        for i, f1 in enumerate(fsSelected):
+            for f2 in fsSelected[i + 1:]:
+                coOccurs[f1].add(f2)
+                coOccurs[f2].add(f1)
+
+    # ── Phase 0: No-stroke identification ─────────────────────────────────────
+    # Compute global frequency score per feature using positional correspondence:
+    # feature at index i in featureset ↔ word at index i in each word tuple.
+    featureFreqScore: dict[WordFeature, float] = {f: 0.0 for f in assignedSet}
+    for fs, wordTuples in coverableFS.items():
+        for i, feat in enumerate(fs):
+            if feat in featureFreqScore:
+                for wordTuple in wordTuples:
+                    if i < len(wordTuple):
+                        featureFreqScore[feat] += wordTuple[i].frequency
+
+    def featureSortKey(f: WordFeature) -> tuple[int, float]:
+        """Primary: FEATURE_PRIORITY (linguistic markedness). Secondary: corpus frequency."""
+        return (FEATURE_PRIORITY.get(f, 0), featureFreqScore[f])
+
+    # Greedy independent-set: no two no-stroke features may co-occur in the same
+    # featureset (otherwise two words in that group would both map to "no stroke").
+    noStrokeFeatures: set[WordFeature] = set()
+    for f in sorted(assignedSet, key=featureSortKey, reverse=True):
+        if not any(other in noStrokeFeatures for other in coOccurs[f]):
+            noStrokeFeatures.add(f)
+
+    # ── Phase 2: Consistency-aware stroke assignment ────────────────────────────
+    # Process no-stroke features first (they get ()), then by markedness priority.
+    assignedSorted = sorted(
+        assigned,
+        key=lambda f: (f not in noStrokeFeatures, *(-x for x in featureSortKey(f)))
+    )
+
+    tokenCache: dict[WordFeature, frozenset[str]] = {f: _featureTokens(f) for f in assigned}
+    strokeToFeatures: dict[Stroke, list[WordFeature]] = {}
+    featureToStroke: dict[WordFeature, Stroke] = {}
+    keyToFeatures: dict[int, list[WordFeature]] = {}
+    allocatedStrokes: set[Stroke] = set()
+
+    for f in assignedSorted:
+        # Compatible existing strokes (graph-coloring constraint: no co-occurrence)
+        compatible: list[Stroke] = [
+            stroke for stroke, feats in strokeToFeatures.items()
+            if not any(ef in coOccurs[f] for ef in feats)
+        ]
+        # Also offer the cheapest not-yet-allocated stroke from the pool
+        for s in pool:
+            if s not in allocatedStrokes:
+                if s not in compatible:
+                    compatible.append(s)
+                break
+
+        if not compatible:
+            print(f'  WARNING: No more strokes in pool for feature "{f}"')
+            continue
+
+        # No-stroke features strongly prefer ()
+        if f in noStrokeFeatures and () in compatible:
+            chosen: Stroke = ()
+        else:
+            chosen = min(
+                compatible,
+                key=lambda s: (-_consistencyScore(f, s, keyToFeatures, tokenCache),
+                               poolOrder.get(s, len(pool)))
+            )
+
+        if chosen not in strokeToFeatures:
+            allocatedStrokes.add(chosen)
+            strokeToFeatures[chosen] = []
+
+        strokeToFeatures[chosen].append(f)
+        featureToStroke[f] = chosen
+        for key in chosen:
+            keyToFeatures.setdefault(key, []).append(f)
+
+    # ── Diagnostic output ──────────────────────────────────────────────────────
+    print("\nFeature keypress assignment (sorted by frequency, * = no-stroke feature):")
+    for f in assignedSorted:
+        stroke = featureToStroke.get(f)
+        strokeStr = str(stroke) if stroke is not None else "[unassigned]"
+        if stroke == ():
+            tag = "[no stroke]"
+        elif stroke is not None and stroke in strokeToFeatures:
+            tag = "[new]    " if strokeToFeatures[stroke][0] == f else "[reused] "
+        else:
+            tag = "[?]      "
+        p1 = phase1Round.get(f, -1)
+        gain = gainByFeature.get(f, 0)
+        cumPct = cumulByFeature.get(f, 0.0)
+        marker = "*" if f in noStrokeFeatures else " "
+        print(f'  P1-{p1:2d}{marker}: feature "{f:35s}" → {strokeStr:14s} {tag}  +{gain:6d}  cumul {cumPct:.1f}%')
+
+    print("\nFeatureset → stroke(s) example:")
+    for fs, wordTuples in augmentedTheory.items():
+        strokes = [featureToStroke.get(f) for f in fs if f in featureToStroke]
+        strokeStr = str(strokes) if strokes else "[none]"
+        exampleWords = tuple(w.ortho for w in wordTuples[0]) if wordTuples else ()
+        print(f'  {str(fs):60s} → {strokeStr:20s}  e.g. {exampleWords}')
+
+    nofeatureCount = sum(len(wts) for fs, wts in augmentedTheory.items() if "nofeature" in fs)
+    uncoveredCount = sum(
+        len(wts) for fs, wts in coverableFS.items()
+        if sum(1 for f in fs if f in assignedSet) < len(fs) - 1
+    )
+    print(f"\nDistinct strokes used: {len(strokeToFeatures)}")
+    print(f"No-stroke features ({len(noStrokeFeatures)}): {sorted(noStrokeFeatures)}")
+    print(f"Unresolved exceptions (nofeature or zero-gain): {nofeatureCount + uncoveredCount} word groups")
+
+    return strokeToFeatures

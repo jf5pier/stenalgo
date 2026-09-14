@@ -25,7 +25,7 @@ import pickle
 from copy import deepcopy
 
 from src.grammar import Phoneme, Syllable, SyllableCollection
-from src.word import GramCat, Word
+from src.word import GramCat, Word, WordFeature
 from typing import Any
 from src.keyboard import Keyboard, Starboard, Stroke, Strokes
 from src.cpsatsolver import optimizeKeyboard
@@ -440,7 +440,7 @@ if __name__ == "__main__":
             discrimFeatureWords,
             orderedFeatures, starboard)
 
-    featureCount: dict[str, int] = {}
+    featureCount: dict[WordFeature, int] = {}
     singleFeatureDiscrimator: dict[str, int] = {}
     for featureTuple, wordTuples in augmentedTheory.items():
         for feature in featureTuple:
