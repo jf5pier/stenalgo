@@ -52092,3 +52092,6 @@ rassoyaient	RaswajE	rasseoir	VER	VER			ind:imp:3p;	R_a|s_wa_j|E	r_a|ss_o_y|aient
 rasseyes	RasEj	rasseoir	VER	VER			sub:pre:2s;	R_a|s_E_j_#	r_a|ss_e_y_es	0.0	0.0	synthetic
 rasseye	RasEj	rasseoir	VER	VER			sub:pre:3s;	R_a|s_E_j_#	r_a|ss_e_y_e	0.0	0.0	synthetic
 rassois	Raswa	rasseoir	VER	VER			imp:pre:2s;	R_a|s_wa_#	r_a|ss_oi_s	0.0	0.0	synthetic
+effrayera	efREj°Ra	effrayer	VER	VER			ind:fut:3s;	e|f_R_E|j_°|R_a	e|ff_r_a|y_e|r_a	0.0	0.0	synthetic
+effrayerez	efREj°Re	effrayer	VER	VER			ind:fut:2p;	e|f_R_E|j_°|R_e	e|ff_r_a|y_e|r_ez	0.0	0.0	synthetic
+effrayeraient	efREj°RE	effrayer	VER	VER			cnd:pre:3p;	e|f_R_E|j_°|R_E	e|ff_r_a|y_e|r_aient	0.0	0.0	synthetic
