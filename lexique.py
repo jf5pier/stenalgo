@@ -192,6 +192,21 @@ class Word:
         # asseye a-a.ss-s.ey-Ej.e-# a-sEj
         graphem_phonem = Word.fixAssociation(
             graphem_phonem, "ey-Ej", "e-E.y-j")
+        # balayera b-b.a-a.l-l.ay-Ej.e-°.r-R.a-a (LexiqueInfraCorrespondance.tsv
+        # inconsistency: the pa:yer-template family's "ay" grapheme is split into two
+        # graphemes "a-E.y-j" for most conjugated forms -- e.g. this same lemma's own
+        # "balayerait" already has "a-e.y-j" -- but stays merged as one "ay-Ej" pair for
+        # some sibling forms of the identical futur/cnd paradigm slot (e.g.
+        # "balayera"/"balayerai"/...). The merged form makes the following "e-°"
+        # (schwa, the futur/cnd tense marker) collapse into the SAME syllable as the
+        # vowel+glide instead of starting its own syllable the way every other word in
+        # the lexicon with a glide-before-schwa environment does (confirmed: 0
+        # exceptions among 164 other lemmas, e.g. accueillir "j_°" is always its own
+        # syllable) -- splitting the grapheme here, matching the already-correct
+        # sibling forms, lets the existing Y-slot logic below place the glide in its
+        # own syllable naturally, no other code change needed.
+        graphem_phonem = Word.fixAssociation(
+            graphem_phonem, "ay-Ej.e-°", "a-E.y-j.e-°")
         # bienheureuse
         # b-b.i-j.en-5n.h-#.eu-2.r-R.eu-2.s-z.e-# bj5-n2-R2z CYV-CV-CVC
         graphem_phonem = Word.fixAssociation(
@@ -685,4 +700,4 @@ class Lexique:
 
 lexique = Lexique()
 lexique.printSyllabificationStats()
-#lexique.outputMixedLexique("resources/LexiqueMixte.tsv")
+lexique.outputMixedLexique("resources/LexiqueMixte.tsv")
