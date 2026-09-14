@@ -1,0 +1,139 @@
+# nomAdjModelExceptions.tsv
+#
+# Human-curated table of NOM/ADJ lemmas whose missing-form generation
+# (src/nomAdjParadigm.py, util/generateMissingNomAdjForms.py) should not be
+# left to the empirical donor-ending-class derivation: either because the
+# word is genuinely invariable/defective (status=invariable -- no form to
+# generate for the missing slot(s), full stop), or because its correct
+# inflected forms are known-irregular and should be given directly rather
+# than derived (status=irregular, override_ortho/override_phonology set).
+#
+# override_ortho / override_phonology are ";"-joined in ADJ_SLOTS order
+# (m_s;m_p;f_s;f_p) for ADJ, NOM_NUMBERS order (s;p) for NOM -- a slot left
+# blank between semicolons means "still absent, not covered by this row".
+#
+# This table is the single source of truth for these lemmas -- entries are
+# added by hand as util/validateLexiconAgainstNomAdjParadigms.py's
+# LOW_CONFIDENCE/SUSPECTED_INVARIABLE flags surface cases the donor-table
+# approach can't resolve confidently. Do not hand-encode the full set of
+# French plural/feminine irregularity rules here speculatively -- only add a
+# row once a flag actually surfaces it.
+#
+lemme	gramCat	status	override_ortho	override_phonology	note
+cheval	NOM	irregular	cheval;chevaux	S°val;S°vo	-al -> -aux, phon changes
+travail	NOM	irregular	travail;travaux	tRavaj;tRavo	-ail -> -aux, phon changes
+oeil	NOM	irregular	oeil;yeux	9j;jZ	fully suppletive plural
+ciel	NOM	irregular	ciel;cieux	sjEl;sjZ	fully suppletive plural (poetic/lexicalized plural)
+aieul	NOM	irregular	aieul;aieux	ajZl;ajZ	fully suppletive plural (ancestral sense)
+bras	NOM	invariable				already ends in s, identical spelling both numbers
+souris	NOM	invariable				already ends in s, identical spelling both numbers
+nez	NOM	invariable				already ends in z, identical spelling both numbers
+prix	NOM	invariable				already ends in x, identical spelling both numbers
+beau	ADJ	irregular	beau;beaux;belle;belles	bo;bo;bEl;bEl	suppletive feminine radical
+nouveau	ADJ	irregular	nouveau;nouveaux;nouvelle;nouvelles	nuvo;nuvo;nuvEl;nuvEl	suppletive feminine radical
+vieux	ADJ	irregular	vieux;vieux;vieille;vieilles	vjO;vjO;vjEj;vjEj	suppletive feminine radical
+fou	ADJ	irregular	fou;fous;folle;folles	fu;fu;fOl;fOl	suppletive feminine radical
+mou	ADJ	irregular	mou;mous;molle;molles	mu;mu;mOl;mOl	suppletive feminine radical
+favori	ADJ	irregular	favori;favoris;favorite;favorites	favoRi;favoRi;favoRit;favoRit	feminine -ite not -ie
+marron	ADJ	invariable				colour adjective from a noun, invariable in gender and number
+orange	ADJ	invariable				colour adjective from a noun, invariable in gender and number
+#
+# Everything below was found and confirmed by cross-checking
+# util/generateMissingNomAdjForms.py's candidates against Morphalou (ATILF,
+# LGPL-LR) -- see util/crossCheckNomAdjWithMorphalou.py and the conversation.
+#
+bunraku	NOM	invariable				Morphalou: no distinct plural spelling
+bushido	NOM	invariable				Morphalou: no distinct plural spelling
+candida	NOM	invariable				Morphalou: no distinct plural spelling
+chi	NOM	invariable				Morphalou: no distinct plural spelling
+raga	NOM	invariable				Morphalou: no distinct plural spelling
+tanka	NOM	invariable				Morphalou: no distinct plural spelling
+septante	NOM	invariable				Morphalou: no distinct plural spelling
+spéléo	NOM	invariable				Morphalou: no distinct plural spelling
+bijou	NOM	irregular	;bijoux		classic -ou -> -oux exception
+caillou	NOM	irregular	;cailloux		classic -ou -> -oux exception
+chou	NOM	irregular	;choux		classic -ou -> -oux exception
+genou	NOM	irregular	;genoux		classic -ou -> -oux exception
+hibou	NOM	irregular	;hiboux		classic -ou -> -oux exception
+joujou	NOM	irregular	;joujoux		classic -ou -> -oux exception
+pou	NOM	irregular	;poux		classic -ou -> -oux exception
+floréal	NOM	irregular	;floréals		regular -als plural, not -aux (confirmed via Morphalou)
+paranormal	NOM	irregular	;paranormals		regular -als plural, not -aux (confirmed via Morphalou)
+sisal	NOM	irregular	;sisals		regular -als plural, not -aux (confirmed via Morphalou)
+foutral	NOM	irregular	;foutrals		regular -als plural, not -aux (confirmed via Morphalou)
+foutral	ADJ	irregular	;foutrals;foutrale;foutrales		regular -als plural, not -aux (confirmed via Morphalou)
+intox	NOM	invariable				Morphalou: no distinct plural spelling
+arousal	NOM	irregular	;arousals		English-style plural, not -al -> -aux
+manip	NOM	irregular	;manips		regular +s, donor table wrongly added +es
+hosannah	NOM	irregular	;hosannas		drops trailing h before plural s
+hemlock	NOM	irregular	;hemlocs		drops trailing k before plural s
+comprador	NOM	irregular	;compradores		Spanish/Portuguese loanword plural
+grau	NOM	irregular	;graux		Occitan loanword, -au -> -aux like a regular -al family member
+leu	NOM	irregular	;leux		Romanian currency; Morphalou also allows "lei"
+vieil	ADJ	irregular	;vieux;;		liaison allomorph of "vieux", not a separate plural paradigm
+#
+# Second Morphalou pass: fixed a parser bug (Morphalou's own GENRE column
+# can say "invariable", not just masculine/feminine -- was being silently
+# read as "no gender info" and skipped). That fix newly exposed ~1000 more
+# checkable candidates, and the following individual mismatches among them.
+#
+alcoolo	ADJ	irregular	;;alcoolo;alcoolos		confirmed via Morphalou
+alpestre	ADJ	irregular	;;;alpestres		confirmed via Morphalou
+antipoison	ADJ	irregular	;;antipoison;antipoisons		confirmed via Morphalou
+canon	ADJ	irregular	;;canon;canons		confirmed via Morphalou
+capitane	ADJ	irregular	capitane;capitanes;;		confirmed via Morphalou
+chtimi	ADJ	irregular	;;chtimi;chtimis		confirmed via Morphalou
+guarani	ADJ	irregular	;;guarani;guaranis		confirmed via Morphalou
+hessois	ADJ	irregular	;hessoises;;		plural is "hessoises" for BOTH genders (confirmed via Morphalou)
+idolâtre	ADJ	irregular	;;;idolâtres		confirmed via Morphalou
+interarmes	ADJ	irregular	interarmes;;;		confirmed via Morphalou
+intestat	ADJ	irregular	;intestat;;intestat		confirmed via Morphalou
+lacustre	ADJ	irregular	;;;lacustres		confirmed via Morphalou
+ligure	ADJ	irregular	ligure;ligures;;		confirmed via Morphalou
+louf	ADJ	irregular	;louf;louf;louf		confirmed via Morphalou
+lourdingue	ADJ	irregular	lourdingue;;;		confirmed via Morphalou
+malabar	ADJ	irregular	;;malabar;		confirmed via Morphalou
+monoplan	ADJ	irregular	;;monoplan;monoplans		confirmed via Morphalou
+montparno	ADJ	irregular	;montparno;;		confirmed via Morphalou
+opiomane	ADJ	irregular	opiomane;opiomanes;;		confirmed via Morphalou
+orléanais	ADJ	irregular	;orléanaises;;		plural is "orléanaises" for BOTH genders (confirmed via Morphalou)
+pleutre	ADJ	irregular	;;pleutre;pleutres		confirmed via Morphalou
+rastafari	ADJ	irregular	;;rastafari;rastafaris		confirmed via Morphalou
+rouennais	ADJ	irregular	;rouennaises;;		plural is "rouennaises" for BOTH genders (confirmed via Morphalou)
+réglo	ADJ	irregular	;;réglo;réglos		confirmed via Morphalou
+shocking	ADJ	irregular	;shocking;;		confirmed via Morphalou
+souris	ADJ	irregular	;;;souris		confirmed via Morphalou
+suisse	ADJ	irregular	;;;suisses		confirmed via Morphalou
+transverse	ADJ	irregular	transverse;;;		confirmed via Morphalou
+tournois	ADJ	irregular	;;tournois;tournois		confirmed via Morphalou
+turinois	ADJ	irregular	;turinoises;;		plural is "turinoises" for BOTH genders (confirmed via Morphalou)
+véronais	ADJ	irregular	;véronaises;;		plural is "véronaises" for BOTH genders (confirmed via Morphalou)
+wurtembergeois	ADJ	irregular	;wurtembergeoises;;		plural is "wurtembergeoises" for BOTH genders (confirmed via Morphalou)
+zain	ADJ	irregular	;;zain;zains		confirmed via Morphalou
+
+targui	NOM	irregular	;touaregs		suppletive plural/ethnonym, see also targui ADJ
+targui	ADJ	irregular	;touareg;;touarègue		suppletive paradigm, see also targui NOM
+capon	ADJ	irregular	;;;caponnes		regular -on -> -onne doubling, donor table wrongly used single n
+fripon	ADJ	irregular	;;;friponnes		regular -on -> -onne doubling, donor table wrongly used single n
+jeunot	ADJ	irregular	;;jeunotte;jeunottes		-ot -> -otte doubling
+joliet	ADJ	irregular	;;joliette;joliettes		-et -> -ette doubling, no accent
+champi	ADJ	irregular	;;champisse;champisses		irregular regional feminine (Morphalou also allows champise/champises)
+foufou	ADJ	irregular	;;fofolle;fofolles		suppletive feminine, drops one "u"
+#
+# Third Morphalou pass: added a generateMissingForm bridge for
+# gender-invariant-suffix words needing BOTH axes at once (f_s -> m_p etc.),
+# which fixed several "-ide"/"-yste" cases but exposed these -- masculine
+# plurals that a direct feminine-source cross-axis donor lookup guesses
+# wrong (small, noisy donor pool for that specific cross-axis pair; these
+# words' masculine side isn't gender-invariant, so the bridge doesn't apply
+# either) -- confirmed via Morphalou.
+#
+clos	ADJ	irregular	;clos;;		masculine plural not derivable from feminine cross-axis
+dispos	ADJ	irregular	;dispos;;		masculine plural not derivable from feminine cross-axis
+déclos	ADJ	irregular	;déclos;;		masculine plural not derivable from feminine cross-axis
+indispos	ADJ	irregular	;indispos;;		masculine plural not derivable from feminine cross-axis
+ras	ADJ	irregular	;ras;;		masculine plural not derivable from feminine cross-axis
+ribaud	ADJ	irregular	;ribauds;;		masculine plural not derivable from feminine cross-axis
+sextil	ADJ	irregular	;sextils;;		masculine plural not derivable from feminine cross-axis
+éclos	ADJ	irregular	;éclos;;		masculine plural not derivable from feminine cross-axis
+
