@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.local_history
+
+# Regenerable caches (dictionary.py / lexique.py pipeline)
+Dictionary.pickle
+FeatureDiscrimator.pickle
+FirstTheory.pickle
+AugTheory.pickle*
+
+env/
