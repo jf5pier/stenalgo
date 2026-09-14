@@ -12,19 +12,20 @@ tests pass throughout, and `resources/LexiqueSynthetic.tsv` regenerates cleanly 
 orthosyll_cv/ortho mismatches across 51,963 rows, via
 `rm -f resources/LexiqueSynthetic.tsv && python -m util.completeVerbParadigms --apply`).
 
-Everything applied is **uncommitted** (working-tree only), matching this session's earlier
-established practice of holding commits for explicit instruction. Uncommitted tracked
-files: `dictionary.py`, `requirements.txt`, `resources/Lexique383.tsv`,
-`resources/LexiqueMixte.tsv`, `resources/verbiste/conjugations-fr.xml`,
-`resources/verbiste/verbs-fr.xml`, `src/featureextractor.py`, `src/grammar.py`,
-`src/greedyoptimizer.py`, `src/test/featureextractor_test.py`, `src/verbparadigm.py`,
-`src/word.py`, `util/completeVerbParadigms.py`. Also uncommitted/untracked: every
-`util/fix*.py` and `util/validateLexiconAgainstVerbiste.py` script written this session
-(all dry-run-by-default, idempotent, documented in their own module docstrings — see git
-diff / `ls util/fix*.py` for the full list, ~20 scripts). **Decide on committing** (this
-plan's fixes, the pre-existing verbparadigm.py fixes 7-9 from before an earlier context
-reset, and the regenerated LexiqueSynthetic.tsv) before doing much more work — the working
-tree is large and uncommitted.
+**All of the above was committed** in `e3b0358` ("Fix Verbiste template/lexicon defects
+flagged by cross-checker"). Do NOT re-stage/re-commit that work; check `git log` /
+`git status` for what's new since.
+
+Since that commit: `util/fixPayerDualFormGaps.py` was added and run with `--apply`,
+appending **53** generated pa:yer "i"/"y" counterpart rows (phon + syllable breakdown,
+`source=synthetic`) to `resources/LexiqueSynthetic.tsv`. Per the user's explicit direction,
+these went to `LexiqueSynthetic.tsv`, NOT `LexiqueMixte.tsv` — so
+**`util/validateLexiconAgainstVerbiste.py`'s WRONG_ENDING count for pa:yer will NOT drop**
+until `LexiqueSynthetic.tsv` is wired into `LexiqueMixte.tsv` (deliberately deferred, see
+`completeVerbParadigms.py`'s module docstring — do not do this wiring without explicit
+instruction, it's a separate scope decision). This latest change (the new script +
+`LexiqueSynthetic.tsv` append) is **uncommitted** — decide with the user whether/when to
+commit it, same practice as before.
 
 Remaining flags are two deferred architectural items (below) plus one non-issue kept only
 for documentation (`pouvoir`/"puis") — no more open judgment calls or unexplained flags.
@@ -35,13 +36,27 @@ for documentation (`pouvoir`/"puis") — no more open judgment calls or unexplai
   (balaie) and "y"-form (balaye) are phonologically distinct (/balɛ/ vs /balɛj/, confirmed
   with the user) and both need correct lexicon rows (ortho + phon + syllable breakdown)
   wherever missing — this is NOT a "pick the right spelling" template fix. Read-only
-  inventory done (`util/inventoryPayerFormsCoverage.py`, dump written to
+  inventory: `util/inventoryPayerFormsCoverage.py` (dump written to
   `/tmp/payer_inventory.tsv` — regenerate if that scratch file is gone): 34 lemmas × 21
   dual-alternation slots = 714 combinations — 76 both present, 45 only-i-present (y
   missing), 32 only-y-present (i missing), 561 neither present (normal corpus sparsity,
-  not a defect). **Next step**: generate the 77 missing counterpart rows (45+32),
-  computing correct `phon`/syllable data (not just `ortho`) — dry-run first for approval,
-  same workflow as every other fix this session.
+  not a defect).
+  **Progress**: `util/fixPayerDualFormGaps.py` (dry-run/`--apply`, idempotent) derives
+  `phon`/`syll_cv`/`orthosyll_cv` endings per (slot, i/y-form) from every already-attested
+  donor lemma, requiring 100% agreement (`MIN_MATCH_RATE = 1.0`, same bar as
+  `completeVerbParadigms.py`) before generating a row, and appends results to
+  `resources/LexiqueSynthetic.tsv` (per user direction — NOT `LexiqueMixte.tsv`). Applied
+  once already: **53 rows generated and appended**. **65 remain skipped**: their
+  `syll_cv`/`orthosyll_cv` donor agreement is <100% because the syllable-boundary encoding
+  depends on the lemma's radical shape (number of trailing consonants before the vowel,
+  e.g. "pa-" vs "débr-" vs "expr-") — a real structural difference, not noise. **Next
+  step** (per user's own steer): improve the derivation by grouping donors by radical
+  consonant-cluster shape before computing the per-slot ending, then re-run
+  `util/fixPayerDualFormGaps.py --apply` for the remaining ~65. Re-running the script as-is
+  today is a safe no-op (idempotent — checks both `LexiqueMixte.tsv` and the current
+  `LexiqueSynthetic.tsv` before generating). Remember: even once all 118 are generated,
+  the validator's WRONG_ENDING count won't move until `LexiqueSynthetic.tsv` is wired into
+  `LexiqueMixte.tsv` (separate, deliberately out-of-scope decision — ask before doing it).
 - [ ] **`ass:eoir` (asseoir/rasseoir/surseoir, 25 WRONG_ENDING flags)**: same situation as
   `-ayer` above. Both the "-oi-" model (assois/assoirai/assoie) and the "-ie-" model
   (assieds/assiérai/asseye) are already attested in `resources/LexiqueMixte.tsv` as
