@@ -32,25 +32,27 @@ for documentation (`pouvoir`/"puis") — no more open judgment calls or unexplai
 
 ## Outstanding work (both items below are now resolved — kept for history/context)
 
-- [x] **`-ayer` verbs (pa:yer template family) — effectively done.** 34 lemmas × 21
-  dual-alternation slots = 714 combinations: 76 both present, 45 only-i-present (y
-  missing), 32 only-y-present (i missing) = 77 gaps total, 561 legitimately absent
-  (normal corpus sparsity, not a defect). `util/fixPayerDualFormGaps.py` (dry-run/
-  `--apply`, idempotent) derives `phon`/`syll_cv`/`orthosyll_cv` per (slot, i/y-form)
-  from every already-attested donor lemma, requiring 100% agreement before generating,
-  appending to `resources/LexiqueSynthetic.tsv`.
-  **The "65 remain skipped" figure this file previously carried was stale** — this
-  session's unrelated `pa:yer` E/e vowel-quality fix (see the main session's lexicon
-  work: `fixAyGraphemeEjQuality.py`/`fixAyGraphemeInfraPhono.py`, done to unblock
-  `python lexique.py` regeneration, nothing to do with this dual-form-gap track)
-  happened to also fix the donor-agreement noise blocking most of these 65 as a side
-  effect. Re-verified from scratch: only **6** of the 77 gaps still needed anything.
-  3 were now confidently generatable (100% donor match, unlocked by the E/e fix) and
-  have been generated and applied: `effrayera`, `effrayerez`, `effrayeraient`. The
-  remaining 3 are genuinely stuck, not a to-do: `déblaye`(imp:pre:2s)/`effrayes`
-  (ind:pre:2s) hit the documented syllable-tokenization free variation
-  (`PAYER_SYLLCV_AUDIT.md` finding #4, no discoverable rule); `paies`(sub:pre:2s) has
-  zero donors anywhere in the lexicon for that spelling. 346 tests pass.
+- [x] **`-ayer` verbs (pa:yer template family) — fully done, all 77 gaps closed.** 34
+  lemmas × 21 dual-alternation slots = 714 combinations: 76 both present, 45 only-i,
+  32 only-y = 77 gaps, 561 legitimately absent (normal corpus sparsity, not a defect).
+  `util/fixPayerDualFormGaps.py` (dry-run/`--apply`, idempotent) derived 71 of the 77
+  by donor-borrowing (appending to `resources/LexiqueSynthetic.tsv`, requiring 100%
+  donor agreement) — the "65 remain skipped" figure this file previously carried was
+  stale, since this session's unrelated `pa:yer` E/e vowel-quality fix (done to unblock
+  `python lexique.py`'s `LexiqueMixte.tsv` regeneration, nothing to do with this
+  dual-form-gap track) happened to also fix most of the donor-agreement noise as a
+  side effect. The final **3** were resolved by hand, same technique as the ass:eoir
+  work: `paies` (payer, sub:pre:2s) turned out to be a tag-only gap (already existed
+  as an `ind:pre:2s;` row, just missing the tag its y-form sibling `payes` already
+  combined — fixed at the `Lexique383.tsv` level); `déblaye` (imp:pre:2s) and
+  `effrayes` (ind:pre:2s) hit the documented merged-vs-split syllable-tokenization
+  free variation (`PAYER_SYLLCV_AUDIT.md` finding #4) when averaged across all 11/6
+  donors, but resolve cleanly once matched against the ONE structurally closest
+  sibling instead of a blind majority vote (`déblaye` mirrors `délaye`, identical
+  single-consonant radical shape, already merged; `effrayes` mirrors `débrayes`/
+  `embrayes`, identical consonant-cluster-before-r radical shape, already split).
+  `util/fixPayerDualFormGaps.py` now reports 0 generated/0 skipped. 346 tests pass,
+  `python lexique.py` regenerates clean.
 - [x] **`ass:eoir` (asseoir/rasseoir, 25 WRONG_ENDING flags) — done, in the same
   not-yet-wired state as pa:yer above.** `surseoir` uses its own separate `surs:eoir`
   template and was never in scope. Unlike pa:yer's 26-lemma donor pool, only 2 lemmas

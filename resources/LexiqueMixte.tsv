@@ -88012,7 +88012,7 @@ paieriez	pERje	payer	VER	VER			cnd:pre:2p;	p_E_#|R_j_e	p_ai_e|r_i_ez	0.0	0.11
 paierions	pERj§	payer	VER	VER			cnd:pre:1p;	p_E_#|R_j_§	p_ai_e|r_i_ons	0.07	0.01
 paierons	pER§	payer	VER	VER			ind:fut:1p;	p_E_#|R_§	p_ai_e|r_ons	0.27	1.01
 paieront	pER§	payer	VER	VER			ind:fut:3p;	p_E_#|R_§	p_ai_e|r_ont	0.54	2.84
-paies	pE	payer	VER	NOM,VER			ind:pre:2s;	p_E_#	p_ai_es	0.74	8.97
+paies	pE	payer	VER	NOM,VER			ind:pre:2s;sub:pre:2s;	p_E_#	p_ai_es	0.74	8.97
 paies	pE	paie	NOM	NOM,VER	f	p		p_E_#	p_ai_es	0.14	0.31
 paillard	pajaR	paillard	ADJ	ADJ,NOM	m	s		p_a|j_a_R_#	p_a|ill_a_r_d	0.61	0.17
 paillard	pajaR	paillard	NOM	ADJ,NOM	m	s		p_a|j_a_R_#	p_a|ill_a_r_d	0.54	0.03
