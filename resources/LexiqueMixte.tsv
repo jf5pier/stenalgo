@@ -9174,7 +9174,7 @@ assoiffés	aswafe	assoiffé	ADJ	VER,ADJ	m	p		a|s_wa|f_e_#	a|ss_oi|ff_é_s	0.54	0
 assoira	aswaRa	asseoir	VER	VER			ind:fut:3s;	a|s_wa|R_a	a|ss_oi|r_a	0.0	0.25
 assoirai	aswaRe	asseoir	VER	VER			ind:fut:1s;	a|s_wa|R_e	a|ss_oi|r_ai	0.27	0.15
 assoiraient	aswaRE	asseoir	VER	VER			cnd:pre:3p;	a|s_wa|R_E	a|ss_oi|r_aient	0.07	0.0
-assoirais	aswaRE	asseoir	VER	VER			cnd:pre:1s;	a|s_wa|R_E	a|ss_oi|r_ais	0.0	0.14
+assoirais	aswaRE	asseoir	VER	VER			cnd:pre:1s;cnd:pre:2s;	a|s_wa|R_E	a|ss_oi|r_ais	0.0	0.14
 assoirait	aswaRE	asseoir	VER	VER			cnd:pre:3s;	a|s_wa|R_E	a|ss_oi|r_ait	0.14	0.01
 assoiras	aswaRa	asseoir	VER	VER			ind:fut:2s;	a|s_wa|R_a	a|ss_oi|r_as	0.0	0.14
 assoiront	aswaR§	asseoir	VER	VER			ind:fut:3p;	a|s_wa|R_§	a|ss_oi|r_ont	0.2	0.01
@@ -9323,7 +9323,7 @@ assouvissent	asuvis	assouvir	VER	VER			ind:pre:3p;	a|s_u|v_i_s_#	a|ss_ou|v_i_ss_
 assouvit	asuvi	assouvir	VER	VER			ind:pre:3s;ind:pas:3s;	a|s_u|v_i	a|ss_ou|v_it	0.34	0.02
 assoyait	aswajE	asseoir	VER	VER			ind:imp:3s;	a|s_wa_j|E	a|ss_o_y|ait	0.07	0.0
 assoyez	aswaje	asseoir	VER	VER			imp:pre:2p;ind:pre:2p;	a|s_wa_j|e	a|ss_o_y|ez	0.0	0.87
-assoyons	aswaj§	asseoir	VER	VER			ind:pre:1p;	a|s_wa_j|§	a|ss_o_y|ons	0.07	0.0
+assoyons	aswaj§	asseoir	VER	VER			imp:pre:1p;ind:pre:1p;	a|s_wa_j|§	a|ss_o_y|ons	0.07	0.0
 assujetti	asyZEti	assujettir	VER	ADJ,VER	m	s	par:pas;	a|s_y|Z_E|t_i	a|ss_u|j_e|tt_i	0.81	0.04
 assujetti	asyZEti	assujetti	ADJ	ADJ,VER	m	s		a|s_y|Z_E|t_i	a|ss_u|j_e|tt_i	0.07	0.02
 assujettie	asyZEti	assujettir	VER	VER	f	s	par:pas;	a|s_y|Z_E|t_i_#	a|ss_u|j_e|tt_i_e	0.2	0.03

@@ -57,16 +57,32 @@ for documentation (`pouvoir`/"puis") — no more open judgment calls or unexplai
   `LexiqueSynthetic.tsv` before generating). Remember: even once all 118 are generated,
   the validator's WRONG_ENDING count won't move until `LexiqueSynthetic.tsv` is wired into
   `LexiqueMixte.tsv` (separate, deliberately out-of-scope decision — ask before doing it).
-- [ ] **`ass:eoir` (asseoir/rasseoir/surseoir, 25 WRONG_ENDING flags)**: same situation as
-  `-ayer` above. Both the "-oi-" model (assois/assoirai/assoie) and the "-ie-" model
-  (assieds/assiérai/asseye) are already attested in `resources/LexiqueMixte.tsv` as
-  separate rows for the SAME slots (e.g. both "assois" and "assieds" tagged ind:pre:1s;
-  both "assoirai" and "assiérai" tagged ind:fut:1s) — phonologically distinct (/aswa/ vs
-  /asje/), not homophones, so both are genuinely valid and neither should be discarded.
-  Needs the same treatment as pa:yer: a read-only per-slot inventory (which of the two
-  models exists vs. is missing, per lemma) before generating any missing counterpart
-  rows. Breakdown of the 25 flags: ind:pre 9, sub:pre 5, ind:fut 4, cnd:pre 3, imp:pre 2,
-  ind:imp 2.
+- [x] **`ass:eoir` (asseoir/rasseoir, 25 WRONG_ENDING flags) — done, in the same
+  not-yet-wired state as pa:yer above.** `surseoir` uses its own separate `surs:eoir`
+  template and was never in scope. Unlike pa:yer's 26-lemma donor pool, only 2 lemmas
+  (`asseoir`, `rasseoir`) share `ass:eoir`, so `util/fixAsseoirDualFormGaps.py`'s
+  donor-borrowing approach (same technique as `fixPayerDualFormGaps.py`) found **0
+  confident donors for all 26 candidates** — most missing forms have no cross-lemma
+  attested sibling to borrow phon/syllables from at all, not a confidence-threshold
+  problem. `util/inventoryAsseoirFormsCoverage.py` is the read-only inventory
+  (generalizes `inventoryPayerFormsCoverage.py` to ass:eoir's 2-way AND 3-way "-oi-"/
+  "-ie-"/"-eye-" alternation — futur/cnd has 3 alternatives, not 2).
+  **Resolved by hand** (`util/fixAsseoirDualFormGapsManual.py`, applied): derived all 26
+  from (1) same-lemma sibling transformations already visible elsewhere in
+  asseoir/rasseoir's own paradigm, (2) the "-eye-" alternant being structurally identical
+  to pa:yer's own "y"-form futur/cnd (`Ej°R`+ending — same grapheme, same rule this
+  session already established for pa:yer), (3) cross-checking the "-oi-" imparfait
+  1p/2p against regular `-oyer` verbs elsewhere in the lexicon (employer/envoyer/
+  nettoyer) for how `oy`+`-ions`/`-iez` behaves. Split into 2 tag-only fixes to existing
+  `resources/LexiqueMixte.tsv` rows (a sibling alternant already carried a tag the other
+  was missing, e.g. `assoyons` lacked `imp:pre:1p;` that `asseyons` already had for the
+  identical homophonous form) and 21 new rows appended to
+  `resources/LexiqueSynthetic.tsv` (`source=synthetic`, same convention as pa:yer's 53
+  rows — every generated `orthosyll_cv` verified to flatten back to its own `ortho`).
+  346 tests pass, `python lexique.py` still runs clean. **Same caveat as pa:yer**:
+  `util/validateLexiconAgainstVerbiste.py`'s ass:eoir WRONG_ENDING count stays at 25
+  until `LexiqueSynthetic.tsv` is wired into `LexiqueMixte.tsv` — confirmed unchanged
+  after this fix, expected, not a bug.
 
 ## Resolved this session (context, not action items)
 
@@ -91,8 +107,13 @@ for documentation (`pouvoir`/"puis") — no more open judgment calls or unexplai
 1. Read this file fully first.
 2. Run `pytest src/test/` (expect 346 pass) and
    `python -m util.validateLexiconAgainstVerbiste` (expect 134 total flags: 108 pa:yer +
-   25 ass:eoir + 1 pouvoir/puis) to confirm the working tree still matches this note.
+   25 ass:eoir + 1 pouvoir/puis — both counts are frozen until LexiqueSynthetic.tsv gets
+   wired into LexiqueMixte.tsv, see above) to confirm the working tree still matches
+   this note.
 3. Decide with the user whether to commit the existing work before starting new fixes.
-4. Pick up pa:yer or ass:eoir using the exact same workflow as every prior batch: dry-run
+4. Only pa:yer's remaining ~65 dual-form gaps are still open (ass:eoir is done, see
+   above). Pick up pa:yer using the exact same workflow as every prior batch: dry-run
    script, present for approval, `--apply`, re-run tests + validator, confirm the
-   targeted flag count drops as expected before moving on.
+   targeted flag count drops as expected before moving on. Otherwise, the next real
+   decision is whether to wire `LexiqueSynthetic.tsv` into `LexiqueMixte.tsv` at all —
+   ask the user first, it's explicitly out of scope until then.
