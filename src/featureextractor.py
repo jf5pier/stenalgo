@@ -2,7 +2,7 @@
 # coding: utf-8
 #
 from src.keyboard import Keyboard, Strokes
-from src.word import Word, WordFeature, LemmeGramCat, WordOrtho
+from src.word import Word, WordFeature, LemmeGramCat, WordOrtho, groupWordsByLemme
 from tqdm import tqdm
 from collections import defaultdict
 
@@ -19,7 +19,7 @@ def getAmbiguousMultiphonemes(theory: dict[tuple[tuple[int, ...], ...], list[Wor
     return ambiguousMultiphonemes
 
 def extractDiscriminatingFeatures(theory: dict[Strokes, list[Word]]) \
-        -> tuple[dict[str, set[Word]], list[str]]:
+        -> tuple[dict[str, set[Word]], list[str], dict[tuple[Strokes, LemmeGramCat], dict[Word, list[WordFeature]]]]:
     """
     """
 
@@ -54,9 +54,7 @@ def extractDiscriminatingFeatures(theory: dict[Strokes, list[Word]]) \
     for strokes, selectedWords in tqdm(theory.items(), desc="Scaning discriminating features",
                                unit=" homophones", ascii=True, ncols=100):
         # Split homophone word group by lemme
-        wordByLemme: dict[LemmeGramCat, list[Word]] = {word.lemmeGramCat:[] for word in selectedWords}
-        for word in selectedWords:
-            wordByLemme[word.lemmeGramCat].append(word)
+        wordByLemme: dict[LemmeGramCat, list[Word]] = groupWordsByLemme(selectedWords)
 
         # Discriminate homophones words sharing the same lemme
         for lemme, lemmeWords in wordByLemme.items():
@@ -167,6 +165,74 @@ def extractDiscriminatingFeatures(theory: dict[Strokes, list[Word]]) \
               f" A total of {len(set(wordsUsingFeature[selectedFeature]))} words have this feature")
 
     #print(orderedFeaturesSelected)
-    return wordIsDiscrminatedByFeature, orderedFeaturesSelected
+    return wordIsDiscrminatedByFeature, orderedFeaturesSelected, strokeLemmeDiscriminators
+
+
+def buildFeasibleDiscriminatorOptions(
+        theory: dict[Strokes, list[Word]],
+        wordIsDiscrminatedByFeature: dict[WordFeature, set[Word]]
+    ) -> dict[tuple[Strokes, LemmeGramCat], dict[Word, set[WordFeature]]]:
+    """
+    For every homophone group that needs discrimination (multiple words sharing the same
+    lemme within a stroke), list every feature that can, on its own, discriminate each word
+    from the others sharing that lemme.
+
+    Unlike greedyOptimizeDiscriminator, which commits to a single feature-priority order and
+    therefore a single assignment, this returns the full feasible search space per group and
+    per word. A global optimizer (e.g. a set-cover style solver) can then pick one feasible
+    feature per word across all groups so as to minimize the total number of distinct features
+    used, instead of being locked into whichever feature happens to come first in a fixed order.
+
+    Cost is O(groups x words_per_group x features), not O(words_sharing_a_feature^2): no pair
+    of words is ever enumerated, so a feature shared by thousands of unrelated lemmes (e.g. a
+    plural marker) costs no more than a feature used by two.
+    """
+    groupFeasibleFeatures: dict[tuple[Strokes, LemmeGramCat], dict[Word, set[WordFeature]]] = {}
+    for strokes, selectedWords in theory.items():
+        wordByLemme: dict[LemmeGramCat, list[Word]] = groupWordsByLemme(selectedWords)
+        for lemme, lemmeWords in wordByLemme.items():
+            # Only interested in discriminating features if there are multiple words for the same lemme
+            if len(lemmeWords) <= 1:
+                continue
+            wordFeasibleFeatures: dict[Word, set[WordFeature]] = {
+                word: {
+                    feature for feature, discriminatedWords in wordIsDiscrminatedByFeature.items()
+                    if word in discriminatedWords
+                } for word in lemmeWords
+            }
+            groupFeasibleFeatures[(strokes, lemme)] = wordFeasibleFeatures
+    return groupFeasibleFeatures
+
+
+def selectFeaturesBySetCover(
+        groupFeasibleFeatures: dict[tuple[Strokes, LemmeGramCat], dict[Word, set[WordFeature]]]
+    ) -> tuple[dict[Word, WordFeature], set[Word]]:
+    """
+    Greedy set-cover over buildFeasibleDiscriminatorOptions's output: repeatedly picks the
+    feature that resolves the most still-unresolved words across all groups at once, so a
+    feature already justified for one lemma gets reused for another instead of a new one
+    being introduced. Words with no feasible feature are returned unresolved (mirrors
+    greedyOptimizeDiscriminator's "nofeature" fallback) instead of being silently dropped.
+    """
+    unresolved: dict[Word, set[WordFeature]] = {
+        word: set(features)
+        for wordFeasibleFeatures in groupFeasibleFeatures.values()
+        for word, features in wordFeasibleFeatures.items()
+    }
+    chosen: dict[Word, WordFeature] = {}
+    while True:
+        featureCounts: dict[WordFeature, int] = defaultdict(int)
+        for features in unresolved.values():
+            for feature in features:
+                featureCounts[feature] += 1
+        if not featureCounts:
+            break
+        # Tie-break deterministically on feature name among equally-popular features
+        bestFeature = max(sorted(featureCounts), key=lambda feature: featureCounts[feature])
+        resolvedWords = [word for word, features in unresolved.items() if bestFeature in features]
+        for word in resolvedWords:
+            chosen[word] = bestFeature
+            del unresolved[word]
+    return chosen, set(unresolved)
 
 

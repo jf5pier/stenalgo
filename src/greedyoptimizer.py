@@ -2,7 +2,7 @@
 # coding: utf-8
 #
 from src.keyboard import Keyboard, Strokes
-from src.word import Word, WordFeature, LemmeGramCat, WordOrtho
+from src.word import Word, WordFeature, LemmeGramCat, WordOrtho, groupWordsByLemme
 from tqdm import tqdm
 from collections import defaultdict
 
@@ -12,7 +12,8 @@ verboseWords: list[str] = [] # ["fais", "fait", "faits", "faites"]
 def greedyOptimizeDiscriminator (
         theory: dict[Strokes, list[Word]],
         wordIsDiscrminatedByFeature: dict[WordFeature, set[Word]],
-        orderedFeaturesSelected: list[WordFeature]
+        orderedFeaturesSelected: list[WordFeature],
+        keyboard: Keyboard
     ) -> dict[tuple[WordFeature, ...], list[tuple[Word, ...]]]:
     """
     """
@@ -20,9 +21,7 @@ def greedyOptimizeDiscriminator (
     for strokes, selectedWords in tqdm(theory.items(), desc="Grouping words by feature set",
                                unit=" homophones", ascii=True, ncols=100):
         # Split homophone word group by lemme
-        wordByLemme: dict[LemmeGramCat, list[Word]] = {word.lemmeGramCat:[] for word in selectedWords}
-        for word in selectedWords:
-            wordByLemme[word.lemmeGramCat].append(word)
+        wordByLemme: dict[LemmeGramCat, list[Word]] = groupWordsByLemme(selectedWords)
 
         # Discriminate homophones words sharing the same lemme
         for lemme, lemmeWords in wordByLemme.items():

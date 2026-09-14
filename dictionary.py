@@ -29,8 +29,13 @@ from src.word import GramCat, Word
 from typing import Any
 from src.keyboard import Keyboard, Starboard, Stroke, Strokes
 from src.cpsatsolver import optimizeKeyboard
-from src.featureextractor import extractDiscriminatingFeatures
+from src.featureextractor import (
+    extractDiscriminatingFeatures,
+    buildFeasibleDiscriminatorOptions,
+    selectFeaturesBySetCover,
+)
 from src.greedyoptimizer import greedyOptimizeDiscriminator
+from src.satoptimizer import satOptimizeDiscriminator, _computeFamilyCorrelations, polarityAssociations
 
 
 #from src.cpsatoptimizer import optimizeTheory
@@ -52,7 +57,10 @@ class Dictionary:
     nbFrequentWords: int = 200
     totalFrequencies: float = 0.0
     frequentWordsFrequencies: float = 0.0
-    wordSource: str = "resources/LexiqueMixte.tsv"
+    wordSources: list[str] = [
+        "resources/LexiqueMixte.tsv",
+        "resources/LexiqueSynthetic.tsv",
+    ]
     frequentWordsFile: str = "resources/top500_film.txt"
     syllableCollection: SyllableCollection
     syllabicAmbiguity: dict[str, dict[tuple[str, str], float]]
@@ -90,41 +98,44 @@ class Dictionary:
                 excludedWords = [l.strip() for l in ef.readlines()
                                             if l.strip() != '' and l.strip()[0] != '#']
 
-        with open(self.wordSource) as f:
-            corpus = csv.DictReader(f, delimiter='\t')
+        for wordSource in self.wordSources:
+            if not os.path.exists(wordSource):
+                continue
+            with open(wordSource) as f:
+                corpus = csv.DictReader(f, delimiter='\t')
 
-            for corpusWord in tqdm(corpus, desc="Reading corpus", unit=" words"):
-                if corpusWord["ortho"] is not None \
-                        and corpusWord["ortho"][0] != "#" \
-                        and corpusWord["ortho"] not in excludedWords :
-                    word: Word = Word(
-                        ortho = corpusWord["ortho"],
-                        phonology = corpusWord["phon"],
-                        lemme = corpusWord["lemme"],
-                        gramCat = GramCat[corpusWord["cgram"]],
-                            # if corpusWord["cgram"] != '' else None,
-                        orthoGramCat = [GramCat[gc] for gc in
-                            corpusWord["cgramortho"].split(",")],
-                        gender = corpusWord["genre"]
-                            if corpusWord["genre"] != '' else None,
-                        number = corpusWord["nombre"]
-                            if corpusWord["nombre"] != '' else None,
-                        infoVerb = corpusWord["infover"] 
-                            if corpusWord["infover"] != '' else None,
-                        rawSyllCV = corpusWord["syll_cv"],
-                        rawOrthosyllCV = corpusWord["orthosyll_cv"],
-                        frequencyBook = float(corpusWord["freqlivres"]),
-                        frequencyFilm = float(corpusWord["freqfilms2"])
-                        )
-                    words.append(word)
+                for corpusWord in tqdm(corpus, desc=f"Reading {wordSource}", unit=" words"):
+                    if corpusWord["ortho"] is not None \
+                            and corpusWord["ortho"][0] != "#" \
+                            and corpusWord["ortho"] not in excludedWords :
+                        word: Word = Word(
+                            ortho = corpusWord["ortho"],
+                            phonology = corpusWord["phon"],
+                            lemme = corpusWord["lemme"],
+                            gramCat = GramCat[corpusWord["cgram"]],
+                                # if corpusWord["cgram"] != '' else None,
+                            orthoGramCat = [GramCat[gc] for gc in
+                                corpusWord["cgramortho"].split(",")],
+                            gender = corpusWord["genre"]
+                                if corpusWord["genre"] != '' else None,
+                            number = corpusWord["nombre"]
+                                if corpusWord["nombre"] != '' else None,
+                            infoVerb = corpusWord["infover"]
+                                if corpusWord["infover"] != '' else None,
+                            rawSyllCV = corpusWord["syll_cv"],
+                            rawOrthosyllCV = corpusWord["orthosyll_cv"],
+                            frequencyBook = float(corpusWord["freqlivres"]),
+                            frequencyFilm = float(corpusWord["freqfilms2"])
+                            )
+                        words.append(word)
 
-                    lemmeGroup = self.wordsByLemme.get(word.lemme,
-                                                       deepcopy([])) + [word]
-                    self.wordsByLemme[word.lemme] = lemmeGroup
+                        lemmeGroup = self.wordsByLemme.get(word.lemme,
+                                                           deepcopy([])) + [word]
+                        self.wordsByLemme[word.lemme] = lemmeGroup
 
-                    sameOrtho = self.wordsByOrtho.get(corpusWord["ortho"],
-                                                         deepcopy([])) + [word]
-                    self.wordsByOrtho[corpusWord["ortho"]] = sameOrtho
+                        sameOrtho = self.wordsByOrtho.get(corpusWord["ortho"],
+                                                             deepcopy([])) + [word]
+                        self.wordsByOrtho[corpusWord["ortho"]] = sameOrtho
         return words
 
     def analyseSyllabification(self) -> None:
@@ -418,7 +429,7 @@ if __name__ == "__main__":
             discrimFeatureWords = pickle.load(pfile)
             orderedFeatures = pickle.load(pfile)
     else:
-        discrimFeatureWords, orderedFeatures= \
+        discrimFeatureWords, orderedFeatures, _strokeLemmeDiscriminators = \
             extractDiscriminatingFeatures(theory)
         with open("FeatureDiscrimator.pickle", "wb") as pfile:
             pickle.dump(discrimFeatureWords, pfile)
@@ -431,24 +442,61 @@ if __name__ == "__main__":
 
     featureCount: dict[str, int] = {}
     singleFeatureDiscrimator: dict[str, int] = {}
-    for strokes, lemmeDict in augmentedTheory.items():
-        for lemme, orthoDict in lemmeDict.items():
-            for ortho, wordsFeatures in orthoDict.items():
-                orthoFeatures: set[str] = set()
-                for word, features in wordsFeatures:
-                    for f in features:
-                        orthoFeatures.add(f)
-                        featureCount[f] = featureCount.get(f, 0) + 1
-                if len(orthoFeatures) == 1:
-                    f = list(orthoFeatures)[0]
-                    singleFeatureDiscrimator[f] = singleFeatureDiscrimator.get(f, 0) + 1
-                    if f in ['indicatif:pers_3:nbr_s','indicatif:présent:nbr_p','présent:nbr_p', 'indicatif:nbr_s'] :
-                        print(f"\nSingle feature discrimator '{f}' for {lemme} {ortho}: ", orthoDict.keys())
-                        for word, features in wordsFeatures:
-                            print("   ", word.ortho, ",".join(word.getFeatures())," discrim ", features)
+    for featureTuple, wordTuples in augmentedTheory.items():
+        for feature in featureTuple:
+            featureCount[feature] = featureCount.get(feature, 0) + len(wordTuples)
+        if len(featureTuple) == 1:
+            f = featureTuple[0]
+            singleFeatureDiscrimator[f] = singleFeatureDiscrimator.get(f, 0) + len(wordTuples)
+            if f in ['indicatif:pers_3:nbr_s','indicatif:présent:nbr_p','présent:nbr_p', 'indicatif:nbr_s'] :
+                for wordTuple in wordTuples:
+                    for word in wordTuple:
+                        print(f"\nSingle feature discrimator '{f}' for {word.lemme} {word.ortho}")
 
     print(len(featureCount), "features used in discrimation among", len(dictionary.words), "words.")
     print("Feature counts:", sorted(featureCount.items(), key=lambda x: x[1], reverse=True))
     print("Single feature discrimator:", sorted(singleFeatureDiscrimator.items(), key=lambda x: x[1], reverse=True))
+
+    # Comparison-only: how many distinct features a global set-cover selection would
+    # need versus greedyOptimizeDiscriminator's fixed-priority-order pick above. Does
+    # not replace augmentedTheory; purely informational until the numbers are reviewed.
+    groupFeasibleFeatures = buildFeasibleDiscriminatorOptions(theory, discrimFeatureWords)
+    setCoverChosen, setCoverUnresolved = selectFeaturesBySetCover(groupFeasibleFeatures)
+    print(f"\nselectFeaturesBySetCover: {len(set(setCoverChosen.values()))} distinct features used"
+          f" (vs {len(featureCount)} for greedyOptimizeDiscriminator),"
+          f" {len(setCoverUnresolved)} words unresolved.")
+
+    familyCorrelations = _computeFamilyCorrelations(list({word for words in theory.values() for word in words}))
+    associationTable = polarityAssociations(orderedFeatures, familyCorrelations)
+    # print("\nPolarity association table (corpus-grounded, [-1, 1]):")
+    # print("  Opposed (penalized):")
+    # for f1, f2, score in [a for a in associationTable if a[2] < 0]:
+    #     print(f"    {f1:>25} <-> {f2:<25} {score:+.3f}")
+    # print("  Associated (rewarded):")
+    # for f1, f2, score in [a for a in associationTable if a[2] > 0]:
+    #     print(f"    {f1:>25} <-> {f2:<25} {score:+.3f}")
+
+    numSpecialKeys, satPenalty, satProven, keyAssignment, conflictedFeatureSets = \
+        satOptimizeDiscriminator(theory, discrimFeatureWords, orderedFeatures, starboard,
+                                  numSpecialKeys=None)
+    print(f"\nsatOptimizeDiscriminator: {numSpecialKeys} special keys needed"
+          f" ({'proven optimal' if satProven else 'time limit hit'}),"
+          f" penalty {satPenalty}, {len(conflictedFeatureSets)} conflicting feature sets.")
+    for featureSet in conflictedFeatureSets:
+        print("   conflicting feature set:", featureSet)
+        featuresByKeyInSet: dict[int, list[str]] = {}
+        for feature in featureSet:
+            key = keyAssignment[feature]
+            featuresByKeyInSet[key] = featuresByKeyInSet.get(key, []) + [feature]
+        for key, features in sorted(featuresByKeyInSet.items()):
+            if len(features) > 1:
+                print(f"      colliding on key {key}: {', '.join(sorted(features))}")
+
+    featuresByKey: dict[int, list[str]] = {}
+    for feature, key in keyAssignment.items():
+        featuresByKey[key] = featuresByKey.get(key, []) + [feature]
+    print("\nSpecial key mapping:")
+    for key in sorted(featuresByKey):
+        print(f"  key {key}: {', '.join(sorted(featuresByKey[key]))}")
 
 
