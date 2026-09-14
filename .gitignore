@@ -9,3 +9,9 @@ FirstTheory.pickle
 AugTheory.pickle*
 
 env/
+
+# External reference lexicon for cross-checking generated NOM/ADJ forms
+# (util/crossCheckNomAdjWithMorphalou.py) -- large (>400MB of archives), not
+# a project resource, never committed. Point --morphalou at wherever it's
+# extracted locally.
+morphalou/
