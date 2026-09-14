@@ -141,7 +141,18 @@ def attestedFiniteFormsByLemme(
         for word in words:
             if word.gramCat != GramCat.VER or word.infoVerb is None:
                 continue
-            for tag in word.infoVerb.split(";"):
+            tags = word.infoVerb.split(";")
+            # A word whose infoVerb also carries "inf" is untrustworthy for its
+            # other tags too (see attestedInfinitiveWordByLemme's docstring):
+            # resources/LexiqueMixte.tsv has rows where a genuine infinitive
+            # (e.g. "aduler") is spuriously also tagged with a finite slot
+            # (e.g. "ind:pre:2p"). Trusting that here would make
+            # findStructuralCandidates believe the lemma's real "adulez" form
+            # is already attested -- pointing at the infinitive's own
+            # orthography -- and skip generating it.
+            if "inf" in tags:
+                continue
+            for tag in tags:
                 if not tag:
                     continue
                 parts = tag.split(":")

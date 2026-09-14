@@ -177,8 +177,10 @@ class ConjugationTemplate:
     # variation); forms["par:pas"] is a 4-element [m_s, m_p, f_s, f_p] list;
     # every other key ("ind:pre", "cnd:pre", "imp:pre", ...) is a 6-element list
     # in [1s, 2s, 3s, 1p, 2p, 3p] order, except "imp:pre" (Imperatif) which is a
-    # 3-element [2s, 1p, 2p] list.
-    forms: dict[str, list[str]]
+    # 3-element [2s, 1p, 2p] list. An entry is None when a defective/impersonal
+    # verb's template (e.g. "adv:enir") doesn't define that person at all --
+    # as opposed to "", a legitimate empty-string ending.
+    forms: dict[str, list[str | None]]
 
     @property
     def infinitiveSuffix(self) -> str:
@@ -205,10 +207,28 @@ def parseConjugationTemplates(xmlPath: str | Path) -> dict[str, ConjugationTempl
                 tenseCode = TENSE_TAG_TO_CODE.get(tenseElement.tag)
                 if tenseCode is None:
                     continue
-                endings = []
+                # Always append one entry per <p>, even when it has no <i>
+                # child (a defective/impersonal verb's template, e.g.
+                # "adv:enir" or "grêl:er", deliberately leaves most persons
+                # empty) -- None marks "no such form", as opposed to a
+                # legitimate empty-string ending. Skipping empty <p> entries
+                # entirely (as this used to) silently shifts every later
+                # person's index, so generateOrthoForm would look up the
+                # wrong ending (or find none, when one genuinely exists).
+                #
+                # A <p><i></i></p> (an <i> element that exists but has no
+                # text content, e.g. bat:tre/vêt:ir's 3s présent "il bat"/
+                # "il vêt", or nui:re's par:pas m_s "nui") means a genuine
+                # zero-length ending -- ElementTree gives back None for
+                # .text on such an element, same as a <p> with no <i> at
+                # all, so that case must be special-cased to "" rather than
+                # falling through to the "no such form" None.
+                endings: list[str | None] = []
                 for inflectionElement in tenseElement.findall("p"):
                     infinitiveElement = inflectionElement.find("i")
-                    if infinitiveElement is not None:
+                    if infinitiveElement is None:
+                        endings.append(None)
+                    else:
                         endings.append(infinitiveElement.text or "")
                 code = moodCode if moodCode == "inf" else f"{moodCode}:{tenseCode}"
                 forms[code] = endings
@@ -256,7 +276,7 @@ def generateOrthoForm(
         index = IMPERATIVE_PERSON_INDEX.get(personNumber) if personNumber else None
     else:
         index = FINITE_PERSON_INDEX.get(personNumber) if personNumber else None
-    if index is None or index >= len(endings):
+    if index is None or index >= len(endings) or endings[index] is None:
         return None
     return radical + endings[index]
 
@@ -392,7 +412,7 @@ def allFiniteSlots(template: ConjugationTemplate) -> list[tuple[str, str]]:
             continue
         personIndex = IMPERATIVE_PERSON_INDEX if code == "imp:pre" else FINITE_PERSON_INDEX
         for personNumber, index in personIndex.items():
-            if index < len(endings):
+            if index < len(endings) and endings[index] is not None:
                 slots.append((code, personNumber))
     return slots
 
@@ -504,6 +524,17 @@ def deriveConjugationEndingTables(
     for words in theory.values():
         for word in words:
             if word.gramCat != GramCat.VER:
+                continue
+            # A word whose infoVerb also carries an "inf" tag is untrustworthy for any
+            # *other* tag it carries too (see attestedInfinitiveWordByLemme's docstring):
+            # resources/LexiqueMixte.tsv has ~90 rows where "inf" is spuriously combined
+            # with a finite tag on a genuine infinitive row (e.g. "excuser" carrying
+            # "ind:pre:2p;inf;" despite ortho == lemme). Trusting that finite tag here
+            # would candidate the infinitive's own field value against itself, always
+            # yielding the template's infinitiveSuffix as the "ending" -- a degenerate,
+            # self-referential candidate that silently drags a slot's empirical match
+            # rate below 1.0 for the whole template.
+            if "inf" in _rawInfoVerbTags(word):
                 continue
             template = getTrustedTemplate(word.lemme, verbisteTemplates, exceptions)
             infinitiveWord = infinitiveByLemme.get(word.lemme)

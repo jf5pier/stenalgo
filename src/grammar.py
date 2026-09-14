@@ -8,7 +8,7 @@ from src.word import Word
 from tqdm import tqdm
 from rich.table import Table
 from rich.console import Console
-from multiprocessing import Process, Pipe
+from multiprocessing import get_context, Pipe
 from multiprocessing.connection import Connection
 from functools import lru_cache
 
@@ -1049,17 +1049,17 @@ class SyllableCollection:
 
         print("Left hand ambiguity optimization")
         onset_recv, onset_send = Pipe()
-        p1 = Process(target = _getSyllabicAmbiguityScores, args = (Phoneme.consonantPhonemes, "onset", onset_send))
+        p1 = get_context("fork").Process(target = _getSyllabicAmbiguityScores, args = (Phoneme.consonantPhonemes, "onset", onset_send))
         p1.start()
 
         print("Middle keys ambiguity optimization")
         nucleus_recv, nucleus_send = Pipe()
-        p2 = Process(target = _getSyllabicAmbiguityScores, args = (Phoneme.nucleusPhonemes, "nucleus", nucleus_send))
+        p2 = get_context("fork").Process(target = _getSyllabicAmbiguityScores, args = (Phoneme.nucleusPhonemes, "nucleus", nucleus_send))
         p2.start()
 
         print("Right hand ambiguity optimization")
         coda_recv, coda_send = Pipe()
-        p3 = Process(target = _getSyllabicAmbiguityScores, args = (Phoneme.consonantPhonemes, "coda", coda_send))
+        p3 = get_context("fork").Process(target = _getSyllabicAmbiguityScores, args = (Phoneme.consonantPhonemes, "coda", coda_send))
         p3.start()
 
         p1.join()
@@ -1116,17 +1116,17 @@ class SyllableCollection:
         print("Left hand ambiguity optimization")
         onset_send, onset_recv = Pipe()
         #onset_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.consonantPhonemes, "onset")
-        p1 = Process(target = _getLexicalAmbiguityScores, args = (Phoneme.consonantPhonemes, "onset", onset_send))
+        p1 = get_context("fork").Process(target = _getLexicalAmbiguityScores, args = (Phoneme.consonantPhonemes, "onset", onset_send))
         p1.start()
         print("Middle keys ambiguity optimization")
         nucleus_send, nucleus_recv = Pipe()
         #nucleus_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.nucleusPhonemes, "nucleus")
-        p2 = Process(target = _getLexicalAmbiguityScores, args = (Phoneme.nucleusPhonemes, "nucleus", nucleus_send))
+        p2 = get_context("fork").Process(target = _getLexicalAmbiguityScores, args = (Phoneme.nucleusPhonemes, "nucleus", nucleus_send))
         p2.start()
         print("Right hand ambiguity optimization")
         coda_send, coda_recv = Pipe()
         #coda_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.consonantPhonemes, "coda")
-        p3 = Process(target = _getLexicalAmbiguityScores, args = (Phoneme.consonantPhonemes, "coda", coda_send))
+        p3 = get_context("fork").Process(target = _getLexicalAmbiguityScores, args = (Phoneme.consonantPhonemes, "coda", coda_send))
         p3.start()
         
         p1.join()
@@ -1189,17 +1189,17 @@ class SyllableCollection:
         print("Left hand multiphonemes ambiguity optimization")
         onset_send, onset_recv = Pipe()
         #onset_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.consonantPhonemes, "onset")
-        p1 = Process(target = _getLexicalAmbiguityScores, args = (self.getMultiphonemeNames("onset"), "onset", onset_send))
+        p1 = get_context("fork").Process(target = _getLexicalAmbiguityScores, args = (self.getMultiphonemeNames("onset"), "onset", onset_send))
         p1.start()
         print("Middle keys multiphonemes ambiguity optimization")
         nucleus_send, nucleus_recv = Pipe()
         #nucleus_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.nucleusPhonemes, "nucleus")
-        p2 = Process(target = _getLexicalAmbiguityScores, args = (self.getMultiphonemeNames("nucleus"), "nucleus", nucleus_send))
+        p2 = get_context("fork").Process(target = _getLexicalAmbiguityScores, args = (self.getMultiphonemeNames("nucleus"), "nucleus", nucleus_send))
         p2.start()
         print("Right hand multiphonemes ambiguity optimization")
         coda_send, coda_recv = Pipe()
         #coda_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.consonantPhonemes, "coda")
-        p3 = Process(target = _getLexicalAmbiguityScores, args = (self.getMultiphonemeNames("coda"), "coda", coda_send))
+        p3 = get_context("fork").Process(target = _getLexicalAmbiguityScores, args = (self.getMultiphonemeNames("coda"), "coda", coda_send))
         p3.start()
         
         p1.join()

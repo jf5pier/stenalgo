@@ -236,3 +236,14 @@ class Word:
 #    def writePhonoSyll(self):
 #        # Format is "syll1phonem1_syll1phonem2|syll2phonem1_..."
 #        return "|".join(self.phonemesToSyllableNames(symbol="_"))
+
+
+def groupWordsByLemme(words: list[Word]) -> dict[LemmeGramCat, list[Word]]:
+    """
+    Split a group of homophone Words (sharing the same strokes) by lemme, preserving
+    the order in which each lemme's words first appear in words.
+    """
+    wordByLemme: dict[LemmeGramCat, list[Word]] = {word.lemmeGramCat: [] for word in words}
+    for word in words:
+        wordByLemme[word.lemmeGramCat].append(word)
+    return wordByLemme
