@@ -52095,3 +52095,5 @@ rassois	Raswa	rasseoir	VER	VER			imp:pre:2s;	R_a|s_wa_#	r_a|ss_oi_s	0.0	0.0	synt
 effrayera	efREj°Ra	effrayer	VER	VER			ind:fut:3s;	e|f_R_E|j_°|R_a	e|ff_r_a|y_e|r_a	0.0	0.0	synthetic
 effrayerez	efREj°Re	effrayer	VER	VER			ind:fut:2p;	e|f_R_E|j_°|R_e	e|ff_r_a|y_e|r_ez	0.0	0.0	synthetic
 effrayeraient	efREj°RE	effrayer	VER	VER			cnd:pre:3p;	e|f_R_E|j_°|R_E	e|ff_r_a|y_e|r_aient	0.0	0.0	synthetic
+déblaye	deblEj	déblayer	VER	VER			imp:pre:2s;	d_e|b_l_Ej_#	d_é|b_l_a_y_e	0.0	0.0	synthetic
+effrayes	efREj	effrayer	VER	VER			ind:pre:2s;	e|f_R_E_j_#	e|ff_r_a_y_es	0.0	0.0	synthetic
