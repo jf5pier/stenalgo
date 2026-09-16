@@ -1,0 +1,12 @@
+oldSpelling	newSpelling	category	appliesToLemmeNormalization	isException	note
+aiguë	aigüe	7	False	False	new spelling not present in Lexique383 corpus, no lemma clash possible
+ambiguïté	ambigüité	7	False	False	new spelling not present in Lexique383 corpus, no lemma clash possible
+arguer	argüer	7	False	False	new spelling not present in Lexique383 corpus, no lemma clash possible
+bringeure	bringeüre	7	False	False	neither spelling present in Lexique383 corpus
+chargeure	chargeüre	7	False	False	neither spelling present in Lexique383 corpus
+égrugeure	égrugeüre	7	False	False	neither spelling present in Lexique383 corpus
+gageure	gageüre	7	False	False	new spelling not present in Lexique383 corpus, no lemma clash possible
+mangeure	mangeüre	7	False	False	neither spelling present in Lexique383 corpus
+plingeure	plingeüre	7	False	False	neither spelling present in Lexique383 corpus
+rongeure	rongeüre	7	False	False	neither spelling present in Lexique383 corpus
+vergeure	vergeüre	7	False	False	neither spelling present in Lexique383 corpus

@@ -21,6 +21,8 @@
 #
 import sys
 import csv
+import re
+import xml.etree.ElementTree as ET
 from copy import deepcopy
 from dataclasses import dataclass
 from src.grammar import Syllable, SyllableCollection
@@ -62,6 +64,361 @@ foreignList = ["ausweis", "beagle", "beagles", "bintje", "boghei", "borchtch",
                "whist", "whisky", "wildcat", "winchesters"]
 
 ignoredList = problemList + foreignList
+
+# Spelling variants of the same lexeme that Lexique383 lists under distinct `lemme`
+# strings, collapsed to one canonical lemme so they don't compete for a separate
+# steno discriminator symbol. Verified against Larousse (2026-09-16):
+# https://www.larousse.fr/dictionnaires/francais/kasher/45376 -- "kascher" and
+# "cascher" are noted as "tombées en désuétude" (fallen out of use); "kasher",
+# "casher" and "cachère" are today's standard spellings of one loanword ("kosher").
+# île/ile is the 1990 orthographic-reform circumflex-dropping variant of "île".
+spellingVariantLemme: dict[str, str] = {
+    "kascher": "kasher",
+    "cascher": "casher",
+    "cachère": "kasher",
+    "casher": "kasher",
+    "ile": "île",
+}
+
+# Closed-class pronoun paradigms that Lexique383 gives a distinct `lemme` string per
+# number/gender form (unlike nouns/verbs, whose inflected forms share one lemme).
+# Normalized here -- keyed by (lemme, cgram) since e.g. "celle" is also a rare,
+# unrelated NOM sense (freq 0.02) that should NOT be folded in -- so number/gender
+# is handled by the same-lemma/suffix discrimination track instead of costing a
+# separate */# symbol slot.
+pronounParadigmLemme: dict[tuple[str, str], str] = {
+    ("ils", "PRO:per"): "il",
+    ("celle", "PRO:dem"): "celui",
+    ("celles", "PRO:dem"): "celui",
+    ("ceux", "PRO:dem"): "celui",
+}
+
+# Off by default: merging the full 1990-reform word list changes `lemme` values for
+# anyone who runs `python lexique.py`, so it's opt-in rather than baked into the
+# committed spellingVariantLemme table. Flip to True locally to regenerate
+# LexiqueMixte.tsv with the reform applied; see resources/reform1990.tsv and
+# scratch/reform1990/STATUS.md for scope (diacritic categories only, so far) and
+# sourcing.
+APPLY_1990_REFORM_LEMMES: bool = False
+
+
+def _readReform1990Rows(tsvPath: str) -> list[list[str]]:
+    """
+    Read resources/reform1990.tsv (comment lines starting with '#', a header row, then
+    tab-separated oldSpelling/newSpelling/category/appliesToLemmeNormalization/
+    appliesToOrthoRewrite/isException/note rows), padded to the fixed 7-column width.
+    """
+    with open(tsvPath, encoding="utf-8") as tsvFile:
+        rawRows = [line.rstrip("\n") for line in tsvFile if not line.startswith("#")]
+    rows = []
+    for row in rawRows[1:]:  # skip header
+        if not row.strip():
+            continue
+        fields = row.split("\t")
+        fields += [""] * (7 - len(fields))
+        rows.append(fields[:7])
+    return rows
+
+
+def loadReform1990Lemmes(tsvPath: str) -> dict[str, str]:
+    """
+    Parse resources/reform1990.tsv into an {oldSpelling: newSpelling} dict, keeping
+    only rows where appliesToLemmeNormalization is true and isException is false.
+    """
+    reformLemmes: dict[str, str] = {}
+    for oldSpelling, newSpelling, _category, appliesToLemmeNormalization, \
+            _appliesToOrthoRewrite, isException, _note in _readReform1990Rows(tsvPath):
+        if appliesToLemmeNormalization == "True" and isException == "False":
+            reformLemmes[oldSpelling] = newSpelling
+    return reformLemmes
+
+
+if APPLY_1990_REFORM_LEMMES:
+    spellingVariantLemme.update(loadReform1990Lemmes("resources/reform1990.tsv"))
+
+
+# Off by default, and independent of APPLY_1990_REFORM_LEMMES: this rewrites the actual
+# `ortho`/`orthosyll_cv` output columns to the new-norm spelling for every corpus row in
+# a reform-affected word's family (not just rows that already collide with an existing
+# new-spelling row, unlike the lemme-merge above) -- this is what makes LexiqueMixte.tsv
+# generative under the new norm rather than merely collision-free. See
+# resources/reform1990.tsv and scratch/reform1990/STATUS.md / the 2026-09-16 plan for
+# scope (diacritic categories only, so far) and the architectural reasoning (the rewrite
+# happens at output time in outputMixedLexique(), not on word.ortho itself, since
+# word.ortho must stay the original spelling for the LexiqueInfraCorrespondance
+# grapheme-phoneme lookup in breakdownSyllables() to keep working).
+APPLY_1990_REFORM_ORTHO: bool = False
+
+
+@dataclass(frozen=True)
+class OrthoRewriteRule:
+    position: int
+    oldPrefix: str
+    oldChar: str
+    newChar: str
+
+
+def computeSingleEditRule(oldSpelling: str, newSpelling: str) -> "OrthoRewriteRule":
+    """
+    Compute the single-character edit (substitution, deletion, OR insertion) that turns
+    oldSpelling into newSpelling: same length -> substitution at the one differing
+    position (e.g. "événement"/"évènement", é->è); oldSpelling one character longer ->
+    deletion (e.g. "quincaillier"/"quincailler", dropping the "i" before "er" -- newChar
+    is "" for a deletion); newSpelling one character longer -> insertion (e.g.
+    "chariot"/"charriot", inserting an "r" -- oldChar is "" for an insertion). Raises if
+    the two strings don't differ by exactly one such edit.
+    """
+    if len(oldSpelling) == len(newSpelling):
+        diffPositions = [i for i, (o, n) in enumerate(zip(oldSpelling, newSpelling)) if o != n]
+        if len(diffPositions) != 1:
+            raise ValueError(
+                f"reform1990.tsv: {oldSpelling!r}/{newSpelling!r} differ at "
+                f"{len(diffPositions)} positions, expected exactly 1")
+        position = diffPositions[0]
+        return OrthoRewriteRule(position, oldSpelling[:position],
+                                 oldSpelling[position], newSpelling[position])
+    if len(oldSpelling) == len(newSpelling) + 1:
+        for position in range(len(oldSpelling)):
+            if oldSpelling[:position] + oldSpelling[position + 1:] == newSpelling:
+                return OrthoRewriteRule(position, oldSpelling[:position],
+                                         oldSpelling[position], "")
+        raise ValueError(
+            f"reform1990.tsv: {oldSpelling!r} isn't newSpelling {newSpelling!r} plus one "
+            "inserted character, can't derive a single-character deletion")
+    if len(newSpelling) == len(oldSpelling) + 1:
+        for position in range(len(newSpelling)):
+            if newSpelling[:position] + newSpelling[position + 1:] == oldSpelling:
+                return OrthoRewriteRule(position, oldSpelling[:position],
+                                         "", newSpelling[position])
+        raise ValueError(
+            f"reform1990.tsv: {newSpelling!r} isn't oldSpelling {oldSpelling!r} plus one "
+            "inserted character, can't derive a single-character insertion")
+    raise ValueError(
+        f"reform1990.tsv: {oldSpelling!r}/{newSpelling!r} differ in length by more than "
+        "one character, can't derive a single-character ortho-rewrite rule")
+
+
+def loadReform1990OrthoRewrites(tsvPath: str) -> dict[str, "OrthoRewriteRule"]:
+    """
+    Parse resources/reform1990.tsv into a rewrite-rule dict keyed by BOTH the old and
+    new spelling of each appliesToOrthoRewrite=true row (so a word matches regardless of
+    whether APPLY_1990_REFORM_LEMMES already normalized its lemme). Each rule records the
+    single character position that distinguishes the old and new spelling --
+    orthoRewriteOccurrence()/applyOrthoRewrite() use it to scope the rewrite to a word's
+    own stem/prefix rather than a blind global character replace (e.g. "événement"'s
+    word-initial é must stay put; only the second é, before the mute e syllable, changes).
+    """
+    rewrites: dict[str, OrthoRewriteRule] = {}
+    for oldSpelling, newSpelling, _category, _appliesToLemmeNormalization, \
+            appliesToOrthoRewrite, isException, _note in _readReform1990Rows(tsvPath):
+        if appliesToOrthoRewrite != "True" or isException == "True":
+            continue
+        rule = computeSingleEditRule(oldSpelling, newSpelling)
+        rewrites[oldSpelling] = rule
+        rewrites[newSpelling] = rule
+    return rewrites
+
+
+def orthoRewriteOccurrence(ortho: str, rule: OrthoRewriteRule) -> int | None:
+    """
+    Return which occurrence (1-based) of the rule's anchor character in `ortho` is the
+    one this rule targets, or None if `ortho` doesn't belong to this rule's word family.
+
+    For a substitution/deletion, the anchor is rule.oldChar itself (the character being
+    replaced/removed) -- occurrence is which instance of it in `ortho` sits at
+    rule.position, checked via an exact prefix + character match (wrong stem, or the
+    character at that position doesn't already match, both return None -- e.g. an
+    unrelated word that merely shares a lemme string).
+
+    For an insertion (rule.oldChar == ""), there's no character to match at `position`
+    (nothing is there yet in the old spelling) -- instead anchor on the last character of
+    rule.oldPrefix (stable across a word family's inflected forms) and count its
+    occurrences up to and including `position`, so applyOrthoRewrite can find the same
+    spot to insert after. A rule with an empty oldPrefix inserts at the very start
+    (occurrence 0 is the sentinel for "before the first character").
+    """
+    if rule.oldChar == "":
+        if ortho[:rule.position] != rule.oldPrefix:
+            return None
+        if not rule.oldPrefix:
+            return 0
+        return ortho[:rule.position].count(rule.oldPrefix[-1])
+    if len(ortho) <= rule.position or ortho[:rule.position] != rule.oldPrefix \
+            or ortho[rule.position] != rule.oldChar:
+        return None
+    return ortho[:rule.position + 1].count(rule.oldChar)
+
+
+def applyOrthoRewrite(text: str, rule: OrthoRewriteRule, occurrence: int) -> str:
+    """
+    Apply rule's old->new edit to the `occurrence`-th targeted spot in `text`.
+    `occurrence` is computed once from the word's own `ortho` (orthoRewriteOccurrence)
+    and reused for both the flat ortho string and the syllable-separated orthosyll_cv
+    string, since separators never reorder the underlying letters.
+
+    For a deletion (rule.newChar == ""), also drops one adjacent syllable separator
+    ("_"/"|") if present, so orthosyll_cv doesn't end up with a dangling empty
+    letter-slot between two separators (e.g. "ll__er" instead of "ll_er"). `ortho` itself
+    never contains a separator, so this is a no-op there beyond the plain deletion.
+
+    For an insertion (rule.oldChar == ""), inserts rule.newChar directly adjacent to the
+    occurrence-th instance of rule.oldPrefix's last character, with no separator in
+    between -- this naturally produces a doubled-letter token like "rr" in orthosyll_cv
+    (matching the same digraph convention a deletion collapses in reverse, e.g. category
+    8's "ll"/"tt"), rather than a separately-separated letter-slot.
+    """
+    chars = list(text)
+    if rule.oldChar == "":
+        if not rule.oldPrefix:
+            chars.insert(0, rule.newChar)
+            return "".join(chars)
+        anchor = rule.oldPrefix[-1]
+        count = 0
+        for i, c in enumerate(chars):
+            if c == anchor:
+                count += 1
+                if count == occurrence:
+                    chars.insert(i + 1, rule.newChar)
+                    return "".join(chars)
+        return text
+    count = 0
+    targetIndex = None
+    for i, c in enumerate(chars):
+        if c == rule.oldChar:
+            count += 1
+            if count == occurrence:
+                targetIndex = i
+                break
+    if targetIndex is None:
+        return text
+    if rule.newChar:
+        chars[targetIndex] = rule.newChar
+        return "".join(chars)
+    del chars[targetIndex]
+    if targetIndex < len(chars) and chars[targetIndex] in "_|":
+        del chars[targetIndex]
+    elif targetIndex > 0 and chars[targetIndex - 1] in "_|":
+        del chars[targetIndex - 1]
+    return "".join(chars)
+
+
+_reform1990OrthoRewrites: dict[str, OrthoRewriteRule] = (
+    loadReform1990OrthoRewrites("resources/reform1990.tsv") if APPLY_1990_REFORM_ORTHO else {}
+)
+
+
+# 1990-reform rule 5 (-eler/-eter verbs): regularizes the doubled-consonant conjugation
+# convention (e.g. "amoncelle") to the single-consonant + grave-accent convention ("amoncèle").
+# This is a pure spelling-convention change, NOT a phonology change -- both spellings encode the
+# same open-e sound, confirmed by the official report's own wording ("L'emploi du e accent grave
+# pour noter le son `e ouvert`... est étendu à tous les verbes de ce type") -- so only
+# ortho/orthosyll_cv need rewriting, same as the other two reform mechanisms above.
+#
+# Exception list verified against the OFFICIAL Journal officiel report (fetched 2026-09-16 from
+# academie-francaise.fr/sites/academie-francaise.fr/files/rectifications.pdf), not just the
+# secondary Wiktionnaire annex used earlier this session -- this caught a real discrepancy: the
+# annex's summary table lists "appeler, rappeler, interpeler" as exceptions, but the official
+# report's own rule text says only "On ne fait exception que pour appeler (et rappeler) et jeter
+# (et les verbes de sa famille)" -- interpeler is NOT named, so it regularizes like any other
+# -eler verb (interpelle -> interpèle). "Jeter's family" isn't enumerated in the report either;
+# taken here as jeter plus every Verbiste-j:eter-tagged verb whose infinitive literally ends in
+# "-jeter" (déjeter, forjeter, interjeter, introjeter, projeter, rejeter, surjeter) -- the
+# etymologically natural reading, all sharing the "jet-" radical via prefixation.
+APPELER_EXCEPTIONS = frozenset({"appeler", "rappeler"})
+JETER_FAMILY_EXCEPTIONS = frozenset({
+    "jeter", "déjeter", "forjeter", "interjeter", "introjeter", "projeter", "rejeter", "surjeter",
+})
+
+# nounLemme -> verbLemme, for the "-ment" nouns/adverbs the reform's rule-5 text explicitly says
+# follow their verb's regularization ("Les noms en -ement dérivés de ces verbes suivront la même
+# orthographe: amoncèlement, bossèlement, ..."). The report names 18; only the 9 below are
+# actually attested in Lexique383 under their doubled-consonant lemme -- the rest either aren't
+# in the corpus at all, or (martèlement) the corpus already only has the reformed spelling as its
+# lemme, so there's nothing to rewrite.
+ELER_ETER_DERIVED_NOUN_VERBS: dict[str, str] = {
+    "amoncellement": "amonceler",
+    "bossellement": "bosseler",
+    "cliquettement": "cliqueter",
+    "ensorcellement": "ensorceler",
+    "étincellement": "étinceler",
+    "grommellement": "grommeler",
+    "morcellement": "morceler",
+    "nivellement": "niveler",
+    "ruissellement": "ruisseler",
+}
+
+APPLY_1990_REFORM_ELER_ETER: bool = False
+
+
+def loadElerEterQualifyingVerbs(verbisteXmlPath: str) -> dict[str, str]:
+    """
+    Return {lemme: targetConsonant} for every -eler/-eter verb Verbiste classifies under the
+    doubled-consonant template (app:eler or j:eter), excluding the reform's named exceptions.
+    """
+    qualifying: dict[str, str] = {}
+    root = ET.parse(verbisteXmlPath).getroot()
+    for verbElement in root.findall("v"):
+        infinitiveElement = verbElement.find("i")
+        templateElement = verbElement.find("t")
+        if infinitiveElement is None or templateElement is None:
+            continue
+        lemme, template = infinitiveElement.text, templateElement.text
+        if not lemme or not template:
+            continue
+        if template == "app:eler" and lemme not in APPELER_EXCEPTIONS:
+            qualifying[lemme] = "l"
+        elif template == "j:eter" and lemme not in JETER_FAMILY_EXCEPTIONS:
+            qualifying[lemme] = "t"
+    return qualifying
+
+
+def elerEterRadicalParts(verbLemme: str, consonant: str) -> tuple[str, str]:
+    """Return (stem, doubledPrefix) for `verbLemme` -- stem is the radical with its own
+    trailing consonant dropped (e.g. "amonceler" -> "amonce"), doubledPrefix is what the
+    doubled-consonant conjugated forms start with (e.g. "amoncell")."""
+    radical = verbLemme[:-2]  # strip infinitive "-er"
+    stem = radical[:-1]       # drop the radical's own trailing consonant
+    return stem, stem + consonant * 2
+
+
+def regularizeElerEterOrtho(ortho: str, verbLemme: str, consonant: str) -> str | None:
+    """
+    Rewrite `ortho` from the doubled-consonant -eler/-eter convention to the grave-accent
+    convention if it matches that pattern for `verbLemme`'s radical (e.g. "amoncelle" with
+    verbLemme="amonceler", consonant="l" -> "amoncèle"); returns None if `ortho` doesn't carry
+    the doubled form (infinitive, imparfait, participles, etc. are already unaffected -- the
+    doubling only ever shows up in the "e ouvert" stressed slots).
+    """
+    stem, doubledPrefix = elerEterRadicalParts(verbLemme, consonant)
+    if not ortho.startswith(doubledPrefix):
+        return None
+    newPrefix = stem[:-1] + "è" + consonant
+    return newPrefix + ortho[len(doubledPrefix):]
+
+
+def regularizeElerEterOrthosyll(orthosyllCv: str, consonant: str) -> str:
+    """
+    Apply the same rewrite to the syllable-separated orthosyll_cv string. The doubled consonant
+    is its own letter-unit there (e.g. "...c_e_ll_e...", one "ll" token, not two "l" letters),
+    and can straddle a syllable boundary ("_" or "|" separator) depending on the conjugated
+    form's syllabification (e.g. "...c_e|ll_e|r_aient..." for "amoncelleraient") -- match
+    boundary-agnostically rather than assuming a fixed separator.
+    """
+    pattern = re.compile("e([_|])" + re.escape(consonant * 2))
+    return pattern.sub(lambda m: "è" + m.group(1) + consonant, orthosyllCv, count=1)
+
+
+_elerEterQualifyingVerbs: dict[str, str] = (
+    loadElerEterQualifyingVerbs("resources/verbiste/verbs-fr.xml")
+    if APPLY_1990_REFORM_ELER_ETER else {}
+)
+
+
+def normalizeLemme(lemme: str, gram_cat: str) -> str:
+    canonical = pronounParadigmLemme.get((lemme, gram_cat))
+    if canonical is not None:
+        return canonical
+    return spellingVariantLemme.get(lemme, lemme)
 
 @dataclass
 class Word:
@@ -494,7 +851,8 @@ class Lexique:
                     printVerbose(corpus_word["ortho"], ["Creating word"])
                     word = Word(ortho=corpus_word["ortho"],                   # mangeait
                                 phonology=corpus_word["phon"],                      # m@ZE
-                                lemme=corpus_word["lemme"],                         # manger
+                                lemme=normalizeLemme(corpus_word["lemme"],
+                                                      corpus_word["cgram"]),        # manger
                                 # gram_cat = GramCat[corpus_word["cgram"]] if \
                                 #        corpus_word["cgram"] != '' else None,
                                 # ortho_gram_cat = [GramCat[gc] for gc in \
@@ -682,8 +1040,35 @@ class Lexique:
             for word in sorted(self.words, key=lambda w: w.ortho):
                 if word.orthosyll_cv != []:
                     printVerbose(word.ortho, ["Writing to", filename])
+                    orthoOut = word.ortho
+                    orthosyllOut = word.writeOrthoSyll()
+                    # Lookup by lemme covers regular words (nouns/verbs whose inflected
+                    # forms all share the affected spelling as their lemme, e.g.
+                    # "dessoûler"). It misses irregular participles like "mû", whose sole
+                    # corpus row has lemme="mouvoir" -- fall back to an exact ortho match
+                    # (safe: dict-key equality, not a prefix/substring test, so it can't
+                    # over-match an unrelated word like "mûr" that merely shares a prefix).
+                    rule = _reform1990OrthoRewrites.get(word.lemme) \
+                        or _reform1990OrthoRewrites.get(word.ortho)
+                    if rule is not None:
+                        occurrence = orthoRewriteOccurrence(word.ortho, rule)
+                        if occurrence is not None:
+                            orthoOut = applyOrthoRewrite(word.ortho, rule, occurrence)
+                            orthosyllOut = applyOrthoRewrite(orthosyllOut, rule, occurrence)
+                    # -eler/-eter verbs and their -ment-derived nouns (word.lemme may be either,
+                    # see ELER_ETER_DERIVED_NOUN_VERBS) -- independent of the rule above, since
+                    # it's a different sub-mechanism (a doubled-consonant->accent transform, not
+                    # a fixed-position character swap).
+                    verbLemme = word.lemme if word.lemme in _elerEterQualifyingVerbs \
+                        else ELER_ETER_DERIVED_NOUN_VERBS.get(word.lemme)
+                    if verbLemme is not None and verbLemme in _elerEterQualifyingVerbs:
+                        consonant = _elerEterQualifyingVerbs[verbLemme]
+                        rewrittenOrtho = regularizeElerEterOrtho(orthoOut, verbLemme, consonant)
+                        if rewrittenOrtho is not None:
+                            orthoOut = rewrittenOrtho
+                            orthosyllOut = regularizeElerEterOrthosyll(orthosyllOut, consonant)
                     corpus.writerow({
-                        "ortho": word.ortho,
+                        "ortho": orthoOut,
                         "phon": word.phonology,
                         "lemme": word.lemme,
                         "cgram": word.gram_cat,
@@ -692,7 +1077,7 @@ class Lexique:
                         "nombre": word.number,
                         "infover": word.info_verb,
                         "syll_cv": word.writePhonoSyll(),
-                        "orthosyll_cv": word.writeOrthoSyll(),
+                        "orthosyll_cv": orthosyllOut,
                         "freqlivres": word.frequency,
                         "freqfilms2": word.frequencyFilm
                     })

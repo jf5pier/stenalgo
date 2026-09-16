@@ -1,0 +1,18 @@
+oldSpelling	newSpelling	category	appliesToLemmeNormalization	isException	note
+boîte	boite	6	True	False	
+croît	croit	6	True	False	
+dessoûler	dessouler	6	True	False	
+faîne	faine	6	True	False	
+faîte	faite	6	False	True	homograph collision: 'faite' is the extremely common fem. past participle of faire
+fût	fut	6	False	True	homograph collision: 'fut' is the standard passé-simple of être ('il fut')
+île	ile	6	True	False	
+mû	mu	6	True	False	
+mûre	mure	6	False	True	homograph collision: 'mure' is a conjugated form of murer ('to wall up')
+soûl	soul	6	True	False	
+sûre	sure	6	False	True	documented Académie exception: circumflex is explicitly KEPT on sûr/sûrs/sûre/sûres because 'sure' already means something else (sour/tart)
+allégement	allègement	5	True	False	
+allégrement	allègrement	5	True	False	
+empiétement	empiètement	5	True	False	
+piétement	piètement	5	True	False	
+événement	évènement	5	True	False	
+événementiel	évènementiel	5	True	False	
