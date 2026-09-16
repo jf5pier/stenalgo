@@ -1,0 +1,543 @@
+{{Wikilien alternatif2|
+image=Wikipedia-logo.svg|
+lien=w:|
+couleur fond=#F4FEFE|
+texte=
+Voir «&nbsp;'''[[w:Rectifications orthographiques du français en 1990|Rectifications orthographiques du français en 1990]]'''&nbsp;» sur [[w:Wikipedia|Wikipédia]].}}
+{{Wikilien alternatif2|
+image=Wikisource-logo.svg|
+lien=s:|
+couleur fond=#F4FEFE|
+texte=
+Lire le «&nbsp;'''[[s:Rapport de 1990 sur les rectifications orthographiques/Complet|Rapport de 1990 sur les rectifications orthographiques]]'''&nbsp;» complet sur [[s:|Wikisource]].}}
+Les '''rectifications orthographiques''' ont pour origine un rapport du Conseil supérieur français de la langue française, approuvé par l’Académie française le 3 mai 1990 sur ses principes généraux {{incise|un nombre limité de rectifications d’incohérences ou d’anomalies graphiques}}, mais non sur le projet lui-même dont le texte était en cours d’élaboration. Ce n’est que lorsque le rapport du Conseil supérieur a été publié au journal officiel, le 6 décembre 1990, que les académiciens ont pu en prendre connaissance et en débattre. « Et le débat fut d’une grande vivacité. L’Académie dans son ensemble a marqué son désaccord avec ce texte », comme le rappelle son secrétaire perpétuel, Hélène Carrère d’Encausse{{R|Carrère d'Encausse|{{périodique|prénom=Hélène|nom=Carrère d’Encausse|nolien=|titre=Selon son secrétaire perpétuel, l’Académie Française n’a pas validé la réforme de l’orthographe que le ministère de l’éducation voulait appliquer à la rentrée|journal={{w|La Croix}}|date=13 février 2016|texte=http://www.la-croix.com/France/Politique/Helene-Carrere-Encausse-denonce-effondrement-education-nationale-2016-02-13-1200739786}}}}.
+
+Elles ont pour objectif de rectifier l’orthographe de certains mots, sans pour autant être une réforme. Elles veulent notamment permettre de lever l’ambigüité de la signification ou de la prononciation de certains mots (voir ''[[#Tréma|mangeüre]]'', ''[[#Tréma|ambigüité]]'', etc.).
+
+Vous trouverez sur cette page quelques précisions sur l’usage ou la portée des formes nouvelles, les [[#Rectifications|règles des rectifications]], suivies d’une [[#Liste de mots rectifiés|liste des mots réformés]] (liste de plus de {{unité|1300|mots}}). En [[#Liens externes|bas de page]], des liens externes vous permettront d’obtenir des renseignements plus détaillés.
+
+Pour désigner les orthographes encore autorisées qui ne tiennent pas compte des rectifications de 1990, le Wiktionnaire utilise la locution « orthographe traditionnelle ».
+
+== Usage de la rectification ==
+=== Dans la vie courante ===
+<div align="center" style="margin:1em 0">Il s’agit de '''recommandations''' ; ces rectifications ne sont pas '''imposées''', mais '''recommandées''' officiellement :</div>
+
+<div align="center" style="margin:1em 0;border:2px solid #999999;background:#FFFAA;padding:0.5em"><strong>'''En France, l’ancienne et la nouvelle orthographe sont officiellement ''toutes deux'' valables dans les examens officiels.'''</strong></div>
+
+La nouvelle orthographe a été adoptée comme la référence dans l’enseignement français et belge, mais en pratique, il est courant aujourd’hui en France que seule l’orthographe traditionnelle soit enseignée (en 2011). Les correcteurs des examens français doivent obligatoirement accepter les deux orthographes (traditionnelle et nouvelle) sauf pour le concours d’orthophoniste de Strasbourg où sont prises en compte les rectifications orthographiques du français de 1990. {{refnec|Il faut cependant noter que la connaissance de ces règles orthographiques rectifiées est actuellement limitée, y compris chez les correcteurs sans doute, et que les dictionnaires les prennent en compte de façon variable, car ils cherchent à privilégier le plus souvent l’usage effectif (le 17 janvier 1991, l’Académie a d’ailleurs souhaité que ces nouvelles recommandations soient « soumises à l’épreuve du temps »). L’utilisation dans les examens des nouvelles orthographes peut donc parfois être risquée.}}
+
+=== Dans le Wiktionnaire ===
+Les graphies « rectifiées » autant que les traditionnelles ont droit à un article. Voyez [[Convention:Variation orthographique|la page sur les différentes orthographes d’un même terme]] pour les détails.
+
+== Rectifications ==
+=== Numéraux composés ===
+Les [[numéral|numéraux]] [[composé]]s sont systématiquement unis par des [[trait d’union|traits d’union]] (alors qu’ils ne l’étaient auparavant que pour les nombres ou groupements de chiffres inférieurs à cent, comme trente-deux ou quatre-vingts).
+
+{|align="center" rules="all" cellspacing="0" cellpadding="2" style="border:1px solid #999999;text-align:center"
+|-bgcolor="#FFFFAA"
+! Ancienne orthographe
+! Nouvelle orthographe
+|-
+| cent vingt et un
+| cent-vingt-et-un
+|-
+| &nbsp;trois cent trente-deux mille cinq cent un&nbsp;
+| &nbsp;trois-cent-trente-deux-mille-cinq-cent-un&nbsp;
+|}
+
+==== Le cas des noms ====
+Pour ce qui est de ''million'', ''milliard'', etc., l’[[Académie française]] précise sur [https://www.academie-francaise.fr/questions-de-langue#73_strong-em-rectifications-de-l-orthographe-em-strong une page de leur site Internet] qu’étant des noms, ils ne sont pas plus concernés par cette rectification que le serait ''millier''. En outre, dans le [https://www.academie-francaise.fr/sites/academie-francaise.fr/files/rectifications_1990.pdf rapport présentant les rectifications de 1990], paru dans le ''{{w|Journal officiel de la République française}}'', il est précisé : « on lie par des traits d’union les numéraux formant un nombre complexe ». Les noms comme ''million'' ne semblent donc pas concernés, contrairement à ''mille'', qui est un adjectif numéral.
+
+Cependant, cette apparente ambigüité a donné lieu à une interprétation différente rendant possible l’ajout de traits d’union autour des noms composant un nombre complexe. Ainsi, de nombreuses sources influentes partent de ce principe, notamment l’{{w|Office québécois de la langue française}}<ref>https://vitrinelinguistique.oqlf.gouv.qc.ca/23494/la-typographie/nombres/ecriture-des-determinants-numeraux#c74484</ref> qui précise : « Les numéraux composés sont systématiquement reliés par des traits d’union, y compris ceux formés avec million, milliard, trillion, etc. (exemples : trente-et-un-mille-huit-cent-vingt-deux, deux-millions-sept-cent-mille, cent-deuxième, deux-cents quarts). »<ref>https://vitrinelinguistique.oqlf.gouv.qc.ca/23163/lorthographe/rectifications-de-lorthographe/rectifications-liees-au-trait-dunion-et-soudure/rectifications-liees-aux-numeraux-composes</ref>
+
+Enfin, de nombreuses sources préfèrent taire cette précision, pouvant rendre la règle difficile à définir clairement.
+
+{|align="center" rules="all" cellspacing="0" cellpadding="2" style="border:1px solid #999999;text-align:center"
+|-bgcolor="#FFFFAA"
+! Ancienne orthographe
+! Nouvelle orthographe<br>(Académie française)
+! Nouvelle orthographe<br>(Office québécois)
+|-
+| &nbsp;vingt et un millions quatre mille&nbsp;
+| &nbsp;vingt-et-un millions quatre-mille&nbsp;
+| &nbsp;vingt-et-un-millions-quatre-mille&nbsp;
+|}
+
+==== Note ====
+On distingue par exemple de cette manière :
+* quarante-et-un tiers <math>\frac{41}{3}</math>
+* quarante{{Surligné}}et{{Surligné}}un tiers <math>40+\frac{1}{3}</math>
+* soixante-et-onze demis <math>\frac{71}{2}</math>
+* soixante{{Surligné}}et{{Surligné}}onze demis <math>60+\frac{11}{2}</math>
+* quatre-vingt-deux-mille-cent{{Surligné}}vingt-septièmes <math>\frac{82~100}{27}</math>
+* quatre-vingt-deux-mille{{Surligné}}cent-vingt-septièmes <math>\frac{82~000}{127}</math>
+
+=== Pluriels de mots composés ===
+Dans les [[noms]] [[composés]] du type :
+* [[pèse-lettre]] (verbe + '''nom''', complément d’objet direct du verbe) ;
+* [[sans-abri]] (préposition + '''nom''').
+
+Le second élément prend la marque du [[pluriel]] lorsque le mot est au pluriel, ou la perd lorsqu’il est au singulier. L’orthographe traditionnelle a tendance à considérer ces mots comme invariables, bien que dans de nombreux cas il y ait hésitation entre le pluriel régulier et le pluriel invariable.
+
+{|align="center" rules="all" cellspacing="0" cellpadding="2" style="border:1px solid #999999;text-align:center"
+|-bgcolor="#FFFFAA"
+! Ancienne orthographe
+! Nouvelle orthographe
+|-
+| un(e) [[après-midi]],<br />des [[après-midi]] (invariable)
+| un(e) [[après-midi]],<br />des [[après-midis]]
+|-
+| un [[ramasse-miettes]],<br />des [[ramasse-miettes]] (invariable)
+| un [[ramasse-miette]],<br />des [[ramasse-miettes]]
+|-
+| un [[presse-étoffe]],<br />des [[presse-étoffe]] (invariable) ou<br />des [[presse-étoffes]] (régulier)
+| un [[presse-étoffe]],<br />des [[presse-étoffes]]
+|}
+
+Il y a quelques [[exceptions]], pour lesquelles le second terme contient un [[article]] (exemple : ''[[trompe-la-mort]]'') ou bien est un [[nom propre]] (exemple : ''[[prie-Dieu]]'').
+
+=== Mots empruntés à d’autres langues ===
+Les mots [[empruntés]] forment leur pluriel de la même manière que les mots français et sont [[accentués]] conformément aux [[règles]] qui s’appliquent aux mots français. Dans les deux cas, l’orthographe traditionnelle hésitait souvent, acceptant les deux formes ; la rectification tranche. Ceci n’est pas, à strictement parler, une réforme orthographique mais grammaticale (au moins dans les cas où les deux pluriels sont prononcés différemment).
+
+{|align="center" rules="all" cellspacing="0" cellpadding="2" style="border:1px solid #999999;text-align:center"
+|-bgcolor="#FFFFAA"
+! Ancienne orthographe
+! Nouvelle orthographe
+|-
+| un [[match]],<br />des [[matches]]
+| un [[match]],<br />des [[matchs]]
+|-
+| un [[allegro]],<br />des [[allegros]]
+| un [[allégro]],<br />des [[allégros]]
+|-
+| un [[pianissimo]],<br />des [[pianissimi]]
+| un [[pianissimo]],<br />des [[pianissimos]]
+|-
+| un [[maximum]],<br />des [[maxima]]
+| un [[maximum]],<br />des [[maximums]]
+|-
+| un [[scénario]]<ref name="scénario">Forme usuelle, pré-1990.</ref> / [[scenario]]<ref name="scenarii">Rare forme savante, pré-1990.</ref>,<br />des [[scénarios]]<ref name="scénario" /> / [[scenarii]]<ref name="scenarii"/>
+| un [[scénario]],<br />des [[scénarios]]
+|-
+| un [[rugbyman]],<br />des [[rugbymen]]
+| un [[rugbyman]],<br />des [[rugbymans]]
+|-
+| un [[shunga]],<br />des [[shunga]]
+| un [[shunga]],<br />des [[shungas]]
+|-
+| un [[land]],<br />des [[länder]]
+| un [[land]],<br />des [[lands]]
+|-
+| un [[lied]],<br />des [[lieder]]
+| un [[lied]],<br />des [[lieds]]
+|}
+
+=== Mots soudés ===
+Certains mots sont [[souder|soudés]] :
+* les mots constitués avec les [[préfixes]] ''{{lien|contre-|dif=contr(e)-|fr}}'', ''{{lien|entre-|dif=entr(e)-|fr}}, [[basse-]], [[haute-]],'' etc. ;
+* les [[onomatopées]] ;
+* les mots d’origine étrangère ;
+* les mots composés avec des éléments « [[savants]]{{préciser||fr}} », comme ''[[oxydoréduction]]'' (et non plus ''[[oxydo-réduction]]''). Ce sont des suffixes en ''{{lien|-o|fr}}'', qui peuvent souvent survenir plusieurs fois dans certains composés, comme par exemple ''[[otorhinolaryngologie]]''. <small>Conseil supérieur de la langue française, ''Les Rectifications de l’orthographe'' (1990) : Lorsque le mot composé contient un élément savant, il est généralement soudé (exemple : ''narcothérapie'') ou, moins souvent, il prend le trait d’union (exemple : ''narco-dollar''). Si les deux éléments<!-- original se lit « tous les éléments », mais ça contredit alors la note de fin de texte (qui commence par « Il y a risque de prononciation défectueuse quand … ») --> sont savants, la soudure est obligatoire (exemple : ''narcolepsie'').</small>
+
+Cette règle de soudure ne s’impose pas aux mots composés ''librement'' par une relation de [[coordination]] entre deux termes de nature similaire, tels que ceux composés à l’aide de préfixes [[toponymique]]s, [[glossonymique]]s ou [[ethnonymique]]s comme ''[[afro-]]'', ''[[anglo-]]'', ''[[américano-]]'', ''[[belgo-]]'', ''[[franco-]]'', ''[[indo-]]'', etc., avant un autre terme du même genre. Par exemple, ''les relations [[franco-]][[allemandes]]'' (relations bilatérales françaises et allemandes) ou ''les métaux [[cupro-]][[ferreux]]'' (métaux cuivreux ou ferreux). Mais on consacre l’usage de ''[[ferronickel]]'' (alliage composé des deux métaux, avec des propriétés spécifiques) et autres composés du genre.
+
+Cependant, on évitera les soudures mettant en présence deux lettres qui risqueraient de susciter des prononciations défectueuses ou des difficultés de lecture<!-- Verbatim : Conseil supérieur de la langue française, ''Les Rectifications de l’orthographe'' (1990) -->. Ce risque est présent avec les quatre paires de lettres {{graphie|o}} et {{graphie|i}} (''[[auto-immune]]''), {{graphie|a}} et {{graphie|i}} (''[[para-infectieux]]''), {{graphie|o}} et {{graphie|u}} (''[[génito-urinaire]]''), {{graphie|a}} et {{graphie|u}} (''[[extra-utérin]]''). La terminologie scientifique préfère parfois le tréma au trait d’union (''[[radioïsotope]]'', sur le modèle de ''[[coïncidence]]''). On peut conserver le trait d’union en cas de contact entre deux voyelles (''[[contre-attaque]]'' ou ''[[contrattaque]]'' avec élision comme dans ''[[contrordre]]''). Dans le cas de mots formés de plus de deux composants, le recours éventuel au trait d’union est possible.
+
+{|align="center" rules="all" cellspacing="0" cellpadding="2" style="border:1px solid #999999;text-align:center"
+|-bgcolor="#FFFFAA"
+! Ancienne orthographe
+! Nouvelle orthographe
+|-
+| [[contre-pied]]
+| [[contrepied]]
+|-
+| [[entre-temps]]
+| [[entretemps]]
+|-
+| [[tic-tac]]
+| [[tictac]]
+|-
+| [[week-end]]
+| [[weekend]]
+|-
+| [[agro-alimentaire]]
+| [[agroalimentaire]]
+|}
+
+=== Accent grave au lieu de l’accent aigu ===
+L’[[accent grave]] est utilisé à la place de l’[[accent aigu]] pour régulariser l’orthographe de certains mots, ainsi que pour le [[futur]] et le [[conditionnel]] des [[verbes]] qui suivent le modèle de conjugaison de ''[[céder]]''. Cette dernière décision ne fait que répéter celle de 1976 ([<!-- http://www.cslf.gouv.qc.ca/publications/PubD108/D108AnnF-K.html -->http://www.persee.fr/doc/mots_0243-6450_1991_num_28_1_2042 Arrêté Haby du 28 décembre 1976], ''Liste des tolérances grammaticales ou orthographiques'', ''Journal officiel'' du 9 février 1977), qui avait été rejetée par Grevisse et Hanse, mais adoptée par Séguin [http://opus.kobv.de/ubp/volltexte/2005/9/pdf/eggensp5.pdf].
+
+La règle est : devant une syllabe contenant un [[e muet]], on écrit {{graphie|è}} et non {{graphie|é}}.
+
+Exceptions : 
+* les préfixes ''[[dé-]]'' et ''[[pré-]]'' (''[[dégeler]]'', ''[[prévenir]]'', etc.) ;
+* les {{graphie|é}} initiaux (''[[échelon]]'', ''[[édredon]]'', ''[[élever]]'', etc.) ;
+* ''[[médecin]]'' et ''[[médecine]]'' ;
+* certains composés comme :
+** ''[[téléspectateur|télé/spectateur]]'' (contrairement à ''[[télescope|téles/cope]]''),
+** ''[[préscolaire|pré/scolaire]]'' (contrairement à ''[[prescrire|pres/crire]]''),
+** ''[[déstabiliser|dé/stabiliser]]'' (contrairement à ''[[destituer|des/tituer]]''),
+** etc.
+
+{|align="center" rules="all" cellspacing="0" cellpadding="2" style="border:1px solid #999999;text-align:center"
+|-bgcolor="#FFFFAA"
+! Ancienne orthographe
+! Nouvelle orthographe
+|-
+| [[événement]]
+| [[évènement]]
+|-
+| je [[céder|céderais]]
+| je [[céder|cèderais]]
+|-
+| [[réglementaire]]
+| [[règlementaire]]
+|}
+
+=== Accent circonflexe ===
+On ne met plus d’[[accent circonflexe]] sur {{graphie|i}} ni {{graphie|u}}. On le conserve cependant dans les terminaisons verbales du [[passé simple]] et du [[subjonctif]] ainsi qu’en cas d’[[ambigüité]]. On garde les accents circonflexes sur les {{graphie|a}}, les {{graphie|e}} et les {{graphie|o}} (par exemple : [[pâle]], [[pêle-mêle]], [[pôle]]).
+
+{|align="center" rules="all" cellspacing="0" cellpadding="2" style="border:1px solid #999999;text-align:center"
+|-bgcolor="#FFFFAA"
+! Ancienne orthographe
+! Nouvelle orthographe
+|-
+| [[abîme]]
+| [[abime]]
+|-
+| [[aîné]]
+| [[ainé]]
+|-
+| [[août]]
+| [[aout]]
+|-
+| [[boîte]]
+| [[boite]]
+|-
+| [[brûler]]
+| [[bruler]]
+|-
+| [[bûche]]
+| [[buche]]
+|-
+| [[goûter]]
+| [[gouter]]
+|-
+| [[maître]]
+| [[maitre]]
+|-
+| [[paraître]]
+| [[paraitre]]
+|-
+| [[piqûre]]
+| [[piqure]]
+|-
+| [[rafraîchissement]]
+| [[rafraichissement]]
+|}
+
+On garde : ''nous [[fûmes]]'', etc. (passé simple), ''qu’il [[fût]]'', etc. (subjonctif), ''[[dû]]'' (participe passé de ''devoir'') pour éviter la confusion avec ''[[du]]'', et ''[[jeûne]]'' pour éviter l’homographie avec ''[[jeune]]''.
+
+Autre exception : les noms propres et leurs adjectifs dérivés gardent leur accent circonflexe sur le {{graphie|i}} et le {{graphie|u}}. Exemples : ''[[Benoît]]'', ''[[Brûlain]]'', ''[[Brûlinois]]'', ''[[brûlinois]]'', ''[[Nîmes]]'', ''[[Nîmois]]'', ''[[nîmois]]'', [[Île-de-France]], Îles du Pacifique, etc.
+
+=== Tréma ===
+Dans les suites : ''-güe-'' et ''-güi-'', le [[tréma]] est déplacé sur le {{graphie|u}}. Il est en revanche ajouté dans quelques mots.
+
+Cette décision reprend les rectifications proposées par l’Académie française en 1975 puis retirées en 1987. L’Académie avait alors proposé de placer le tréma sur les voyelles {{graphie|a}}, {{graphie|i}}, {{graphie|u}}, « dont il commande la prononciation » : ''[[aigüe]]'', ''[[contigüe]]'', ''[[ambigüe]]'', ''[[ambigüité]]'', ''[[cigüe]]'', ''[[exigüe]]'', ''[[argüer]]'', ''[[gageüre]]'', ''[[mangeüre]]'', ''[[vergeüre]]''. La proposition est plus ancienne encore, comme en fait foi cette citation :
+{{Citation bloc|Le tréma, outre son usage actuel, figurera sur qu prononcé cou devant voyelle : ''éqüation, aqüatique,'' et sur u prononcé u après e muet : ''gageüre, vergeüre, mangeüre''. Il est préférable de mettre sur u le tréma de ''ciguë, exiguë, aiguë'' car c’est la lettre u, normalement muette dans cette graphie, qu’il s’agit de faire entendre ; et ë se prononce è dans Noël alors qu’il est muet ici : donc ''cigüe'', etc.|source={{ouvrage|titre=Cahiers pédagogiques|éditeur=Comité universitaire d’information pédagogique|année=1963}}}}
+La suggestion d’utiliser {{graphie|qü}} est intéressante mais est restée sans suite. Par le passé, on a cherché à utiliser le {{graphie|û}} de la même façon (déjà en usage pour des mots comme ''caqûre'', ''craqûre'', ''criqûre'', ''encoqûre'', ''piqûre'' et leurs dérivés), pour les mêmes raisons :
+{{Citation bloc|Quelquefois on met l’accent circonflexe sur ''u'' à la fin d’une syllabe, lorsqu’il est précédé d’un ''e'' ; mais alors il a le même son que dans ''brûle''. Ex. ''Vergeûre''. — Si, dans ce mot, je mets un ''u'' simple, le lecteur est porté à prononcer comme dans procu''reuse'', peu''reuse''. Mais, si je mets un ''û'' circonflexe (''vergeûre''), il prononce nécessairement ''verjûre'', et c’est la prononciation qu’il doit avoir. — Il en est de même de ''gageûre'', etc. Cette orthographe est d’autant mieux fondée, que beaucoup de personnes, et sur-tout les Gascons, ont la mauvaise habitude de prononcer ''eû'' dans ''gageûre'' et les mots qui ont cette terminaison, comme on prononce les mêmes lettres dans ''jeune, procureur, tuteur, voleur,'' etc.|source=Pierre-Marie-Sébastien Catineau-Laroche, ''Nouveau Dictionnaire de poche de la langue française'', Tardieu-Denesle, Libraire, Paris, 1821 (7{{e}} édition)}}
+
+{|align="center" rules="all" cellspacing="0" cellpadding="2" style="border:1px solid #999999;text-align:center"
+|-bgcolor="#FFFFAA"
+! Ancienne orthographe
+! Nouvelle orthographe
+! Prononciation
+|-
+| [[aiguë]]
+| [[aigüe]]
+| {{pron|ɛ.ɡy|e.ɡy|fr}}
+|-
+| [[ambiguïté]]
+| [[ambigüité]]
+| {{pron|ɑ̃.bi.ɡɥi.te|fr}}
+|}
+
+On ajoute le tréma dans les mots suivants (et leurs composés, dans le cas de ''[[vergeüre]]'') :
+
+{|align="center" rules="all" cellspacing="0" cellpadding="2" style="border:1px solid #999999;text-align:center"
+|-bgcolor="#FFFFAA"
+! Ancienne orthographe !! Nouvelle orthographe !! Prononciation
+|-
+| [[arguer]]
+| [[argüer]]
+| {{pron|aʁ.gɥe|fr}}
+|-
+| [[bringeure]]
+| [[bringeüre]]
+| {{pron|bʁɛ̃.ʒyʁ|fr}}
+|-
+| [[chargeure]]
+| [[chargeüre]]
+| {{pron|ʃaʁ.ʒyʁ|fr}}
+|-
+| [[égrugeure]]
+| [[égrugeüre]]
+| {{pron|e.gʁy.ʒyʁ|fr}}
+|-
+| [[gageure]]
+| [[gageüre]]
+| {{pron|ga.ʒyʁ|fr}}
+|-
+| [[mangeure]]
+| [[mangeüre]]
+| {{pron|mɑ̃.ʒyʁ|fr}}
+|-
+| [[plingeure]]
+| [[plingeüre]]
+| {{pron|plɛ̃.ʒyʁ|fr}}
+|-
+| [[rongeure]]
+| [[rongeüre]]
+| {{pron|ʁɔ̃.ʒyʁ|fr}}
+|-
+| [[vergeure]]
+| [[vergeüre]]
+| {{pron|vɛʁ.ʒyʁ|fr}}
+|}
+
+=== Verbes en ''-eler'' et ''-eter'' ===
+* Les verbes en ''-eler'' se conjuguent comme ''[[peler]]''.
+* Les verbes en ''-eter'' se conjuguent comme ''[[acheter]]''.
+Les [[adverbes]] et [[substantifs]] dérivés en ''-ment'' suivent les verbes correspondants.
+
+Exceptions :
+* [[appeler]], [[rappeler]], [[interpeler]] ;
+* [[jeter]] et les verbes de sa famille.
+
+Cette décision reprend à peu de choses près les rectifications proposées par l’Académie française en 1975 puis retirées en 1987. L’Académie avait alors proposé d’adopter l’accentuation de {{graphie|e}} du radical dans tous les cas : ''je [[ruissèle]]'', ''j’[[étiquète]]'', ''j’[[appèle]]'', ''je [[jète]]''. On constate qu’à la fin du {{siècle2|XIX}} siècle l’opinion de plusieurs grammairiens abondait dans le sens opposé :
+{{Citation bloc|Selon l’Académie, les verbes ''bourreler, celer, déceler, geler, harceler, peler,'' et quelques autres, ne prennent qu’une seule ''l'' devant l’''e'' muet : je ''bourrèle'', je ''cèle'', je ''décèle'', je ''gèle'', etc. Mais rien ne peut motiver cette exception, comme le font observer très-judicieusement MM. Noël et Chapsal. « Les verbes dont il s’agit, disent ces grammairiens, ayant une analogie complète avec les autres verbes en ''eler'', doivent être soumis à la même règle. » Occupée de travaux plus importants, l’Académie a passé légèrement sur cette question. Si, dans tous les verbes en ''eler'', elle n’eût mis partout qu’une seule ''l'', cette innovation aurait peut-être été un progrès ; mais créer une exception sans aucun but, c’est accroître les difficultés.|3=Verlac, ''Dictionnaire synoptique de tous les verbes de la langue française'', 1865|lien=http://books.google.ca/books?id=BFkrSqvjkPUC&pg=PA31&hl=fr}}
+
+Enfin, on remarquera aussi que cette décision obscurcit le lien étymologique entre certaines paires de verbes et de noms (par ex. ''[[aileter]]/[[ailette]]'', ''[[banqueter]]/[[banquette]]'', ''[[briqueter]]/[[briquette]]'', ''[[claqueter]]/[[claquette]]'', ''[[échiqueter]]/[[échiquette]]'', ''[[fleureter]]/[[fleurette]]'', ''[[galeter]]/[[galette]]'', ''[[langueter]]/[[languette]]'', ''[[moleter]]/[[molette]]'', ''[[pinceter]]/[[pincette]]'', ''[[sauveter]]/[[sauvette]]'', ''[[trompeter]]/[[trompette]]'', ''[[vigneter]]/[[vignette]]'', etc.).
+
+{|align="center" rules="all" cellspacing="0" cellpadding="2" style="border:1px solid #999999;text-align:center"
+|-bgcolor="#FFFFAA"
+! Ancienne orthographe
+! Nouvelle orthographe
+|-
+| 
+j’[[amonceler|amoncelle]]<br />tu amoncelles<br />il amoncelle<br />nous amoncelons<br />vous amoncelez<br />ils amoncellent
+|
+j’[[amonceler|amoncèle]]<br />tu amoncèles<br />il amoncèle<br />nous amoncelons<br />vous amoncelez<br />ils amoncèlent
+|-
+| [[amoncellement]]
+| [[amoncèlement]]
+|}
+
+=== Mots en ''-illier'' et en ''-illière'' ===
+Les mots anciennement en ''-illier'' et ''-illière'' perdent le {{graphie|i}} qui suit les deux {{graphie|l}} car il ne s’entend pas. Cependant, on conserve le suffixe ''-ier'' dans les noms d’arbres et de végétaux (ex. : ''[[cochenillier]]'', ''[[frutillier]]'', ''[[groseillier]]'', ''[[vanillier]]''), par analogie avec ''[[pommier]]'', ''[[prunier]]''{{R|CCDMD|[http://www.ccdmd.qc.ca/media/ortho_rect_13Rectific.pdf ''13. Autres Anomalies rectifiées''], Les Exercices de français du Centre collégial de développement de matériel didactique (CCDMD), Montréal (QC), Canada, 2013}}, etc.
+
+{|align="center" rules="all" cellspacing="0" cellpadding="2" style="border:1px solid #999999;text-align:center"
+|-bgcolor="#FFFFAA"
+! Ancienne orthographe
+! Nouvelle orthographe
+|-
+| [[joaillier]]
+| [[joailler]]
+|-
+| [[marguillier]]
+| [[marguiller]]
+|-
+| [[quincaillier]]
+| [[quincailler]]
+|-
+| [[serpillière]]
+| [[serpillère]]
+|}
+
+=== Mots en ''-olle'' et en ''-otter'' ===
+Les mots anciennement en ''-olle'' et les verbes anciennement en ''-otter'' s’écrivent avec une [[consonne]] simple. Les dérivés du verbe ont aussi une consonne simple.
+
+Exceptions : 
+* [[colle]]
+* [[folle]]
+* [[molle]]
+* et les mots de la même famille qu’un nom en ''-otte'' (comme ''[[botter]]'', de « [[botte]] »).
+
+{|align="center" rules="all" cellspacing="0" cellpadding="2" style="border:1px solid #999999;text-align:center"
+|-bgcolor="#FFFFAA"
+! Ancienne orthographe
+! Nouvelle orthographe
+|-
+| [[corolle]]
+| [[corole]]
+|-
+| [[frisotter]]
+| [[frisoter]]
+|-
+| [[mangeotter]]
+| [[mangeoter]]
+|}
+
+=== Participe passé de ''laisser'' suivi d’un infinitif ===
+Comme celui de ''[[faire]]'', le [[participe passé]] de ''[[laisser]]'' suivi d’un [[infinitif]] est [[invariable]].
+
+{|align="center" rules="all" cellspacing="0" cellpadding="2" style="border:1px solid #999999;text-align:center"
+|-bgcolor="#FFFFAA"
+! Ancienne orthographe
+! Nouvelle orthographe
+|-
+| elle [[laisser|s’est laissée]] [[maigrir]]
+| elle s’est laissé maigrir
+|-
+| je les ai laissés [[partir]]
+| je les ai laissé partir
+|}
+
+=== Autres rectifications ===
+D’autres rectifications ont été faites sur des mots dont la graphie est parfois aberrante, voire illogique. Par exemple : on écrivait ''[[battre]]'', ''[[combattre]]'', ''[[combattant]]'', mais ''[[combatif]]'' et ''[[combativité]]''. Les rectifications recommandent d’écrire ''[[combattif]]'' et ''[[combattivité]]''.
+
+L’Académie française avait proposé une série de rectifications semblables en 1975, retirées en 1987 :
+* Accent aigu : ''[[asséner]]'', ''[[bélître]]'', ''[[bésicles]]'', ''[[chébec]]'', ''[[démiurge]]'', ''[[gélinotte]]'', ''[[phylloxéra]]'', ''[[recépage]]'', ''[[recépée]]'', ''[[recéper]]'', ''[[sénescence]]'', ''[[sénestre]]''.
+* Accent grave : ''[[affèterie]]'', ''[[allègement]]'', ''[[allègrement]]'', ''[[empiètement]]'', ''[[évènement]]'', ''[[règlementaire]]'', ''[[règlementairement]]'', ''[[règlementation]]'', ''[[règlementer]]''.
+* Autres anomalies : ''[[appâts]]'' (dans tous les sens), ''[[bonhommie]]'', ''[[boursouffler]]'', ''[[boursoufflure]]'', ''[[cahutte]]'', ''[[charriot]]'', ''[[chausse-trappe]]'', ''[[combattif]]'', ''[[combattivité]]'', ''[[crâniologie]]'', ''[[cuisseau]]'' (au lieu de ''[[cuissot]]''), ''[[déciller]]'', ''[[dessoûler]]'', ''[[embattre]]'', ''[[encâblure]]'', ''[[encognure]]'', ''[[imbécilité]]'', ''[[innommé]]'', ''[[levreau]]'' (au lieu de ''[[levraut]]''), ''[[ognon]]'', ''[[persifflage]]'', ''[[persiffler]]'', ''[[persiffleur]]'', ''[[prud’hommie]]'', ''[[relai]]'', ''[[sottie]]'', ''[[ventail]]''.
+
+== Tableau récapitulatif ==
+{| rules="all" cellspacing="0" cellpadding="2" style="border: 1px solid #999; text-align: center;"
+|- style="background: #FFA; font-weight: bold; text-transform: uppercase;"
+| Objet
+| Nouvelles règles et exceptions
+| Ancienne orthographe
+| Nouvelle orthographe
+|-
+| [[numéral|Numéraux]] composés
+| Prennent un trait d’union entre tous les numéraux.
+| cent vingt et un, quatre cent trentièmes
+| '''cent-vingt-et-un''', '''quatre-cent-trentièmes''' (ou '''quatre cent-trentièmes''')
+|-
+| Mots soudés 
+| Sont soudés les mots formés avec des [[préfixe]]s (1), les [[onomatopée]]s (2), les mots d’origine [[latin]]e (3) ou étrangère (4), les mots composés avec des éléments [[savant]]s (5).
+| [[contre-pied]] (1), [[tic-tac]] (2), [[ex-voto]] (3), [[week-end]] (4), [[intra-oculaire]] (5)
+| '''[[contrepied]]''' (1), '''[[tictac]]''' (2), '''[[exvoto]]''' (3), '''[[weekend]]''' (4), '''[[intraoculaire]]''' (5)
+|-
+| Pluriel des noms composés avec trait d’union 
+| Dans ces noms composés : (verbe + nom, complément d’objet direct du verbe) et (préposition + nom), le second élément prend la marque du pluriel lorsque le mot est au pluriel, ou la perd lorsqu’il est au singulier. [[exceptions|Exceptions]] : le second terme contient un article (''[[trompe-la-mort]]'') ou est un nom propre (''[[prie-Dieu]]'').
+| des [[abat-jour]], des [[sans-abri]], un [[ramasse-miettes]]
+| des '''[[abat-jours]]''', des '''[[sans-abris]]''', un '''[[ramasse-miette]]'''
+|-
+| [[accent grave|Accent grave]] au lieu de l’[[accent aigu]]
+| Devant une syllabe contenant un {{graphie|[[e]]}} muet, on écrit {{graphie|[[è]]}} et non {{graphie|[[é]]}}, y compris dans les inversions interrogatives (''puissè-je''). [[exceptions|Exceptions]] : le {{graphie|[[é]]}} initial (''[[élever]]'', sauf ''[[ère]]''), les préfixes ''[[dé-]]'' et ''[[pré-]]'', ''[[médecin]]'' et ''[[médecine]]''. [[contrexception|Contrexception]]&nbsp;: ''[[èglefin]]''.
+| je [[céderais]], [[réglementation]], puissé-je
+| je '''[[cèderais]]''', '''[[règlementation]]''', '''puissè-je'''
+|-
+| [[accent circonflexe|Accent circonflexe]]
+| On ne met plus d’accent circonflexe sur {{graphie|[[i]]}} ni {{graphie|[[u]]}}. [[exceptions|Exceptions]] : terminaisons verbales du [[passé simple]] et du [[subjonctif]], en cas d’ambiguïté (''[[dû]]'' / ''[[du]]'', ''[[jeûne]]'' / ''[[jeune]]'') et noms propres et leurs adjectifs dérivés (''[[Nîmes]]'', ''[[nîmois]]'').
+| [[boîte]], [[bûche]]
+| '''[[boite]]''', '''[[buche]]'''
+|-
+| [[accent circonflexe|Accent circonflexe]] de '''mûr''' et '''sûr'''
+| Suivent maintenant la règle des participes passés (''[[dû]]'', ''[[mû]]'') et perdent le circonflexe aux genres et nombres autres que le masculin singulier.
+L’Académie française conserve le circonflexe à ''[[sûrs]]'', ''[[sûre]]'' et ''[[sûres]]'', car il existe l’adjectif ''[[sur#Adjectif|sur]]'' (qui a un gout acide et un peu aigre).
+| [[mûrs]], [[mûre]], [[mûres]]
+| '''[[murs]]''', '''[[mure]]''', '''[[mures]]'''
+|-
+| [[tréma|Tréma]]
+| Dans les suites '''''-guë-''''' et '''''-guï-''''', le tréma est déplacé sur le {{graphie|u}} ({{graphie|ü}}) (1) ; il est ajouté dans quelques mots (2).
+| [[aiguë]], [[ambiguïté]], [[arguer]], [[gageure]], [[rongeure]]
+| '''[[aigüe]]''', '''[[ambigüité]]''' (1) ; '''[[argüer]]''', '''[[gageüre]]''', '''[[rongeüre]]''' (2)
+|-
+| Verbes en '''''-eler''''' et '''''-eter'''''
+| Se conjuguent sur le modèle de ''[[peler]]'' et ''[[acheter]]'' (je ''[[pèle]]'', j’''[[achète]]'') ; les mots dérivant en '''''-ment''''' suivent la règle. [[exceptions|Exceptions]] : ''[[appeler]]'' et ''[[jeter]]'' (et verbes de la même famille).
+| il [[amoncelle]], [[amoncellement]]
+| il '''[[amoncèle]]''', '''[[amoncèlement]]'''
+|-
+| Mots en '''''-olle''''' et '''''-otter'''''
+| S’écrivent avec une consonne simple. [[exceptions|Exceptions]] : ''[[colle]]'', ''[[folle]]'', ''[[molle]]'' et mots de même famille qu’un nom en '''''-otte''''' (comme ''[[botter]]'', de ''[[botte]]'').
+| [[corolle]], [[frisotter]]
+| '''[[corole]]''', '''[[frisoter]]'''
+|-
+| Mots en '''''-illier''''' et '''''-illière'''''
+| Le {{graphie|i}} suivant {{graphie|ll}} ne s’entendant pas, il est supprimé dans ''[[joaillier]]'', ''[[marguillier]]'', ''[[quincaillier]]'' et ''[[serpillière]]''.
+| [[joaillier]], [[serpillière]]
+| '''[[joailler]]''', '''[[serpillère]]'''
+|-
+| '''Laissé''' suivi d’un infinitif
+| '''''Laissé''''' est invariable (comme '''''fait''''' suivi d’un infinitif).
+| elle s’est laissée aller, je les ai laissés partir
+| '''elle s’est laissé aller''', '''je les ai laissé partir'''
+|-
+| Pluriel de mots étrangers empruntés 
+| Pluriel « à la française ».
+| [[rugbymen]], [[lieder]], [[matches]], [[scenarii]]<ref name="scenarii"/>, [[maxima]]
+| '''[[rugbymans]]''', '''[[lieds]]''', '''[[matchs]]''', '''[[scénarios]]''', '''[[maximums]]'''
+|}
+
+== Liste de mots rectifiés ==
+Cette liste, qui se veut la plus complète possible, renvoie chaque mot à sa rectification :
+<ul style="margin:0.5em 1.6em;column-width:21em;-moz-column-width:21em;-webkit-column-width:21em;column-gap:2em;-moz-column-gap:2em;-webkit-column-gap:2em">
+<li>[1] [[#Numéraux composés|Numéraux composés]]</li>
+<li>[2] [[#Pluriels de mots composés|Pluriels de mots composés]]</li>
+<li>[3] [[#Mots empruntés à d’autres langues|Mots empruntés à d’autres langues]]</li>
+<li>[4] [[#Mots soudés|Mots soudés]]</li>
+<li>[5] [[#Accent grave au lieu de l’accent aigu|Accent grave au lieu de l’accent aigu]]</li>
+<li>[6] [[#Accent circonflexe|Accent circonflexe]]</li>
+<li>[7] [[#Tréma|Tréma]]</li>
+<li>[8] [[#Verbes en -eler et -eter|Verbes en -eler et -eter]]</li>
+<li>[9] [[#Mots en -illier et en -illière|Mots en -illier et en -illière]]</li>
+<li>[10] [[#Mots en -olle et en -otter|Mots en -olle et en -otter]]</li>
+<li>[11] [[#Participe passé de laisser suivi d’un infinitif|Participe passé de laisser suivi d’un infinitif]]</li>
+<li>[12] [[#Autres rectifications|Autres rectifications]]</li>
+</ul>
+{{note}} Certaines de ces graphies « nouvelles » (du pluriel des noms composés notamment) étaient déjà mentionnées dans des dictionnaires autres que ceux de l’Académie ou du TLF (par exemple ''Grollier'' ou ''Hachette''), avant cette réforme : cela ne change pas le fait que les « anciennes » graphies restent non fautives au regard de cette réforme.
+{{/A}}
+{{/B}}
+{{/C}}
+{{/D}}
+{{/E}}
+{{/F}}
+{{/G}}
+{{/H}}
+{{/I}}
+{{/J}}
+{{/K}}
+{{/L}}
+{{/M}}
+{{/N}}
+{{/O}}
+{{/P}}
+{{/Q}}
+{{/R}}
+{{/S}}
+{{/T}}
+{{/U}}
+{{/V}}
+{{/W}}
+{{/X}}
+{{/Y}}
+{{/Z}}
+
+== Références ==<!-- ne pas utiliser {{-réf-}} -->
+<references />
+* {{cit_réf|Grand vadémécum de l’orthographe moderne recommandée|2009|Chantal Contant}}
+
+== Voir aussi ==
+* {{Annexe|Réformes orthographiques du français}}
+* {{Annexe|Nombres en français}}
+
+== Liens externes ==
+* [http://www.academie-francaise.fr/sites/academie-francaise.fr/files/rectifications_1990.pdf Publication dans le Journal officiel du 6 décembre 1990]
+* [http://sweet.ua.pt/~fmart/aparo.htm Association pour l’application des recommandations orthographiques (APARO)]
+* [http://www.ccdmd.qc.ca/fr/recherche/?mc=orthographerectifiee Centre collégial de développement de matériel didactique : orthographe rectifiée]
+* [[w:Rectifications orthographiques du français|Article sur les rectifications orthographiques]] et sur le [[w:Rectifications orthographiques du français en 1990|rapport du Conseil supérieur de la langue française sur ces rectifications]] sur Wikipédia
+* [http://www.renouvo.org/index.php Réseau pour la nouvelle orthographe du français (RENOUVO)]
+* [http://www.renouvo.org/liste.php?t=3&lettre=a ''Mots concernés par les recommandations orthographiques'' (RENOUVO)]
+* <!-- http://users.skynet.be/Landroit/Renouvo/Liste05.pdf -->[https://csbj.qc.ca/my_uploads/2015/08/reference-vademecum-de-l-orthographe-recommandee.pdf ''Le Millepatte sur un nénufar : vadémécum de l’orthographe recommandée''], Réseau pour la nouvelle orthographe du français, 2005
+* Airoé : Association pour l’information et la recherche sur les orthographes et les systèmes d’écriture, <!-- [http://airoe.org/spip.php?rubrique20 -->''Les projets de réforme du {{siècle2|XX}} siècle'' (lien défunt)
+* <!-- http://www.academie-francaise.fr/langue/orthographe.html -->Orthographes recommandées par le Conseil supérieur de la langue française (lien défunt)
+* [http://www.orthographe-recommandee.info/ orthographe-recommandee.info]
+
+[[Catégorie:Annexes en français|rectifications orthographiques francaises de 1990]]
+[[Catégorie:Rectifications orthographiques du français en 1990|*]]
+
+[[el:Annexe:Rectifications orthographiques du français en 1990]]
+[[en:Appendix:French spelling reforms of 1990]]
