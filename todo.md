@@ -1,9 +1,136 @@
 # Todo
 
-Written to survive a `/clear` — read this file first in a fresh session before doing
-anything else on the lexicon-defect triage work. Branch: `cl_test_coverage`.
+Written to survive a `/clear` — read this file first in a fresh session.
 
-## Session status as of this note
+## Most recent session (2026-09-17/18): ambiguity-cluster manual review + ignore-list infra
+
+Separate thread from reform1990 (see `scratch/reform1990/RESUME_2026-09-16.md`/`STATUS.md` for
+that one) and from most of the "roadmap" homophone-theory work already dirty in the working
+tree before this session (`dictionary.py`, `src/word.py`, `src/greedyoptimizer.py` — not
+touched this session). This session used `src/ambiguitychecker.py` (itself part of that roadmap
+work, pre-existing untracked) to manually walk every n>=5 lemma-homophone overflow cluster with
+the user and build a reusable ignore-list mechanism; also added a short progress note to
+`ROADMAP.md`'s Phase 0 section (the only edit made to that file this session). **Nothing this
+session has been committed** — everything below is still local-only, on top of the
+already-uncommitted state described in the reform1990 RESUME file.
+
+### Done this session
+
+- **`resources/ambiguityIgnoreList.tsv`** (new file) — 79 hand-reviewed lemmas to exclude from
+  ambiguity-cluster *counting* (not from the lexicon/theory — words stay fully typable), tagged
+  with a `reason` column (`archaic` / `anglicism_loan` / `unpopular_spelling` / `sociolect` /
+  `data_artifact`) and a short note each. `src/ambiguitychecker.py` gained
+  `loadIgnoredLemmas()` + a `classifyTheory(theory, ignoredLemmas=...)` filter param, wired into
+  its `__main__`. Verified effect: the n>=5 overflow cluster count drops from 58 to 20 (max
+  cluster size 8 → 7) once applied. 413 tests pass throughout.
+- **`resources/lexiconExclusions.tsv`** (new file) + `lexique.py` refactor — moved the two
+  hardcoded `problemList`/`foreignList` Python literals (124 words total, no per-word reason
+  ever recorded) into this tsv with a best-effort `reason` column (`foreign_word` /
+  `unsupported_phoneme` / `unpopular_spelling` / `data_defect`) and a `loadLexiconExclusions()`
+  loader; `ignoredList` is now a `frozenset` built from it. **This is functionally a different
+  mechanism from `ambiguityIgnoreList.tsv`** — these words are dropped from the lexicon
+  entirely (never reach `LexiqueMixte.tsv`), not just from the ambiguity metric. Verified
+  byte-identical `LexiqueMixte.tsv` regeneration (md5sum match) against the pre-refactor file,
+  including with all six 1990-reform flags currently on. `problemList`'s reasons are honestly
+  flagged as "unverified legacy entry" in the tsv where the original per-word reasoning was
+  never recorded anywhere in git history — provisional, not authoritative, said so in the
+  file's own header.
+- Confirmed `resources/LexiqueSynthetic.tsv` is unaffected and independently regenerable:
+  none of the 7 scripts that write it reference `problemList`/`foreignList`/`ignoredList`, the
+  file itself is currently clean (matches HEAD), and `python -m util.completeVerbParadigms
+  [--apply]` (documented below and in the "Earlier resolved track" section) is a working
+  dry-run/apply CLI — confirmed the CLI works; a full dry-run wasn't run to completion (it's a
+  multi-minute whole-corpus cross-check, same order of magnitude as the ~90s CP-SAT solver step)
+  since nothing about it was actually at risk from this session's changes.
+
+### Still open from this session (small, well-scoped, not started)
+
+- **`baux`'s lemme is the raw Lexique383 string `"bail,bau"`** (comma-joined dual-lemma
+  notation Lexique383 uses when a wordform is ambiguous between two lemmas). Should just be
+  `"bail"` — `baux` is the irregular plural of `bail` (a lease); the separate rare noun `bau`
+  (ship's crossbeam) doesn't actually pluralize as `baux`. Need to find where `lexique.py`
+  reads `corpus_word["lemme"]` and handle/strip the comma-joined case (at least for this row;
+  worth checking if other rows in `Lexique383.tsv` have the same comma convention).
+- **`baud`'s phonology is wrong for the sense actually in use.** Lexique383 has TWO distinct
+  French words spelled `baud`: an obsolete hunting term for a scent-hound (pronounced `[bo]`,
+  silent d, genuine homophone of `beau`/`bau`) and the modern telecom/metrology unit
+  (pronounced `[bod]`, d pronounced, NOT a homophone of `beau`). `LexiqueMixte.tsv`'s `baud`
+  row uses the hunting-dog pronunciation (`phon=bo`) for what's almost certainly always the
+  telecom sense in any real corpus text — should be `bod`. Fixing this would also pull `baud`
+  out of the `beau`/bau/bot/"bail,bau" ambiguity cluster entirely.
+- **Suspected "ghost lemma" artifacts**, currently just tagged `data_artifact` in
+  `ambiguityIgnoreList.tsv` (so they don't inflate the ambiguity metric) but NOT actually fixed
+  at the data level: `pars` (tagged NOM, freq 15.78 — almost certainly the mistagged common verb
+  form "je pars/tu pars" of `partir`), `sert` (same pattern, negligible freq), plus `bute`,
+  `mar`, `lack`, `fy` (near-zero-frequency, unclear real-word status) and `mise`/`vins`
+  (near-duplicate ADJ rows). Worth a broader check for other cases where a common verb
+  conjugation got filed under a spurious NOM lemma in Lexique383's own tagging.
+- `problemList`'s 27 migrated entries in `resources/lexiconExclusions.tsv` mostly have
+  guessed/unverified reasons (see file header) — worth revisiting per-word if anyone has time,
+  not urgent since behavior is unchanged from before the migration.
+
+## Current status (most recent *committed-work* session — predates the above)
+
+Branch: `main` (the old `cl_test_coverage` branch was merged into `main` and deleted
+locally this session — `origin/cl_test_coverage` may still exist remotely, unpruned).
+362 tests pass (`pytest src/test/`). `python lexique.py` and `python dictionary.py`
+both run clean against the current lexicon.
+
+**Working tree is clean, but `main` is 1 commit ahead of `origin/main` and has NOT
+been pushed** (`2eab659`, "Remove bogus male/males duplicate of mâle/mâles") — push it
+next session unless there's a reason not to.
+
+This session: reconciled a long divergence between `cl_test_coverage` and `origin`
+(merged in `assignDiscriminatorKeypresses`/`conftest.py`/`starboard3h.json` from
+origin, resolving 2 real conflicts in `dictionary.py`/`src/greedyoptimizer.py` — kept
+`satOptimizeDiscriminator` as the active pipeline step per explicit direction, NOT
+`assignDiscriminatorKeypresses`, which still exists in `src/greedyoptimizer.py` and is
+tested but unused in `dictionary.py`'s `__main__`); committed the previously-orphaned
+`src/satoptimizer.py` (verified end-to-end: 10 special keys, proven optimal, 0
+conflicts, up from the 8 keys an older, smaller lexicon needed); added `.gitignore` and
+deleted a pile of stale scratch/backup cruft (`PROGRESS.md`, `PAYER_SYLLCV_AUDIT.md`,
+`bkp/`-`bkp4/`, pickles, etc. — all safe, all regenerable or superseded); fixed a real
+lexicon data bug (`male`/`males`, a garbled unaccented duplicate of `mâle`/`mâles`
+under the wrong lemme `mal`).
+
+### One open item: `"p"` vs `"f_p"`/`"m_p"` feature-selection fusion (not started, scoped only)
+
+Found while investigating why `dictionary.py`'s discriminator-feature printout showed
+odd groupings (e.g. feature-set using bare `m_s`/`p`/`f_s` instead of the fully
+gender-qualified `m_s`/`f_s`/`m_p`/`f_p` feature-set that 2269 other words already
+use). Root cause, concretely: `src/word.py:134`'s `Word.getFeatures()` always offers
+BOTH the bare `"p"`/`"m"`/`"f"` AND the gender-qualified combo (`"f_p"`, `"m_p"`, ...)
+as candidate discriminating features whenever a word's gender+number are both known.
+`src/greedyoptimizer.py`'s `greedyOptimizeDiscriminator` picks whichever candidate
+ranks higher in `orderedFeaturesSelected` (sorted by how many words a feature
+discriminates **lexicon-wide**) — so the generic `"p"` (huge global count, since it
+matches every plural word regardless of gender) wins over the more specific `"f_p"`
+even in homophone groups where they'd be equally sufficient locally. Net effect: the
+same semantic distinction ("this is the feminine plural") ends up encoded as two
+different, non-reusable features (`"p"` in some groups, `"f_p"` in others) — feature
+proliferation that forces the downstream `satOptimizeDiscriminator` special-key
+allocator to spend an extra key/stroke on `"p"` instead of reusing the key already
+assigned to `"f_p"`.
+
+Why this specific case surfaced: words like `général`/`générale`/`générales` have no
+homophonous masculine-plural competitor in their stroke cluster (`généraux` is
+pronounced `ZeneRo`, not `ZeneRal` — phonetically distinct, never enters the group),
+so nothing forces the algorithm to pick the gender-qualified feature; `cher`'s NOUN
+reading (as opposed to its ADJECTIVE reading, a separate `(lemme, cgram)` group) has
+no attested masculine-plural noun row at all, same effect. Neither is a data bug —
+verified against `Lexique383.tsv`/`LexiqueMixte.tsv` directly, the underlying words and
+tags are all correct. (Also checked along the way: `mal`/`male`/`males` — the `male`
+rows WERE a real bug, already fixed and committed this session, see above. `marri`/
+`marris`/`marrie` — a legitimate, if very rare, adjective paradigm, not a bug.)
+
+**Not yet decided or implemented**: whether/how to make the greedy selector (or the
+`orderedFeaturesSelected` priority order it consumes) prefer the gender/number-
+qualified combo over the bare gender-or-number feature whenever both would
+sufficiently discriminate within the current group, without breaking cases where the
+bare feature is actually needed (e.g. gender known but number unknown, or vice versa).
+Scope this with the user before touching `src/word.py` or `src/greedyoptimizer.py`.
+
+## Earlier resolved track (lexicon-defect triage — kept for history, no action items)
 
 The lexicon/Verbiste-template defect triage (see `util/validateLexiconAgainstVerbiste.py`,
 a read-only cross-checker never touched by any fix script) is functionally complete for
@@ -98,14 +225,17 @@ for documentation (`pouvoir`/"puis") — no more open judgment calls or unexplai
   `util/fixCroitreMouvoirAccents.py` + `util/fixOuirConditionnelOrder.py` (the latter for
   a leftover `o:uïr` conditionnel-ordering issue found along the way).
 
-## If resuming from scratch (no memory of this session)
+## If resuming from scratch (no memory of any session)
 
-1. Read this file fully first.
-2. Run `pytest src/test/` (expect 346 pass) and
-   `python -m util.validateLexiconAgainstVerbiste` (expect 134 total flags: 108 pa:yer +
-   25 ass:eoir + 1 pouvoir/puis — both counts are permanently frozen at these numbers,
-   since `LexiqueSynthetic.tsv` will NOT be wired into `LexiqueMixte.tsv`, see above) to
-   confirm the working tree still matches this note.
-3. Both `pa:yer` and `ass:eoir` dual-form-gap work is done (see above) — there is no
-   open item left on this lexicon-defect-triage track. If picking this file up again,
-   it's most likely to check for regressions, not to resume unfinished work.
+1. Read this file fully first, starting from "Current status" at the top — that's the
+   live section. Everything below "Earlier resolved track" is historical context only.
+2. Run `pytest src/test/` (expect 362 pass, not the 346 an older note in this file
+   mentions — 16 more were added merging in `src/test/greedyoptimizer_test.py`) and
+   `python -m util.validateLexiconAgainstVerbiste` (expect 136 total flags now, not
+   134 — adding 2 tags to ass:eoir's `assoyons`/`assoirais` rows during that track
+   incidentally made the validator flag those rows too, against its single-canonical-
+   spelling assumption; same known non-issue class as the rest of ass:eoir/pa:yer, not
+   a regression). Both counts are otherwise frozen, since `LexiqueSynthetic.tsv` will
+   NOT be wired into `LexiqueMixte.tsv` (permanent decision, see above).
+3. Only open item: the `"p"` vs `"f_p"`/`"m_p"` feature-fusion task above. Everything
+   else in this file is done.

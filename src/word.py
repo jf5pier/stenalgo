@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # coding: utf-8
 #
+import re
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import override
@@ -238,12 +239,36 @@ class Word:
 #        return "|".join(self.phonemesToSyllableNames(symbol="_"))
 
 
+# Tokens that conflict with each other (plural↔singular, masculine↔feminine).
+TOKEN_CONFLICTS: dict[str, str] = {"p": "s", "s": "p", "m": "f", "f": "m"}
+
+
+def featureTokens(f: WordFeature) -> frozenset[str]:
+    """Extract meaningful tokens from a feature string, stripping any 'not_' prefix."""
+    base = f[4:] if f.startswith("not_") else f
+    return frozenset(t for t in re.split(r'[_:]', base) if t)
+
+
 def groupWordsByLemme(words: list[Word]) -> dict[LemmeGramCat, list[Word]]:
     """
-    Split a group of homophone Words (sharing the same strokes) by lemme, preserving
-    the order in which each lemme's words first appear in words.
+    Split a group of homophone Words (sharing the same strokes) by lemme+gramCat, preserving
+    the order in which each lemmeGramCat's words first appear in words.
     """
     wordByLemme: dict[LemmeGramCat, list[Word]] = {word.lemmeGramCat: [] for word in words}
     for word in words:
         wordByLemme[word.lemmeGramCat].append(word)
+    return wordByLemme
+
+
+def groupWordsByBareLemme(words: list[Word]) -> dict[Lemme, list[Word]]:
+    """
+    Split a group of homophone Words (sharing the same strokes) by bare lemme (ignoring
+    gramCat), preserving the order in which each lemme's words first appear in words. Unlike
+    groupWordsByLemme, this collapses different grammatical uses of the same lemma (e.g.
+    être_VER vs être_AUX) into one group, since they are not distinct lemmas competing for a
+    discriminating symbol.
+    """
+    wordByLemme: dict[Lemme, list[Word]] = {word.lemme: [] for word in words}
+    for word in words:
+        wordByLemme[word.lemme].append(word)
     return wordByLemme

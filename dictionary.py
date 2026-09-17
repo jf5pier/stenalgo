@@ -22,6 +22,7 @@
 import csv
 import os
 import pickle
+import shutil
 from copy import deepcopy
 
 from src.grammar import Phoneme, Syllable, SyllableCollection
@@ -492,11 +493,79 @@ if __name__ == "__main__":
             if len(features) > 1:
                 print(f"      colliding on key {key}: {', '.join(sorted(features))}")
 
-    featuresByKey: dict[int, list[str]] = {}
-    for feature, key in keyAssignment.items():
-        featuresByKey[key] = featuresByKey.get(key, []) + [feature]
+    # Built lemma-first, not feature-first: for every homophone cluster
+    # augmentedTheory actually resolved, record each of its member words under
+    # its OWN (lemme, gramCat) and the exact feature that discriminates IT.
+    # Keyed by lemmeGramCat, not bare lemme: the same lemma string can have
+    # unrelated VER/NOM/ADJ readings (e.g. "aller" the verb vs "aller" the
+    # noun, "un aller simple"), each with their OWN homophone clusters that
+    # can independently pick the same feature name as their discriminator --
+    # keying by lemme alone let one reading silently overwrite the other's
+    # cell (e.g. "va" never appearing because "aller" the noun's own "s"-
+    # tagged form won that slot instead -- see the conversation).
+    lemmaFeatureWord: dict[str, dict[str, Word]] = {}
+    for featureTuple, wordTuples in augmentedTheory.items():
+        for wordTuple in wordTuples:
+            for feature, word in zip(featureTuple, wordTuple):
+                if feature in keyAssignment:
+                    lemmaFeatureWord.setdefault(word.lemmeGramCat, {}).setdefault(feature, word)
+
+    # Columns: the richest example lemmas -- the ones whose own paradigm spans
+    # the most special-key features -- but skip a candidate whose populated
+    # features exactly match an already-chosen lemma's (e.g. "accourir"/
+    # "parcourir"/... are the same conjugation template as "courir" and would
+    # otherwise fill most of the table with near-duplicate columns).
+    numCandidateLemmas = 16
+    candidateLemmas: list[str] = []
+    seenSignatures: set[frozenset[str]] = set()
+    for lemmeGramCat in sorted(lemmaFeatureWord, key=lambda lgc: -len(lemmaFeatureWord[lgc])):
+        signature = frozenset(lemmaFeatureWord[lemmeGramCat])
+        if signature in seenSignatures:
+            continue
+        seenSignatures.add(signature)
+        candidateLemmas.append(lemmeGramCat)
+        if len(candidateLemmas) >= numCandidateLemmas:
+            break
+
+    rows = sorted(keyAssignment, key=lambda f: (keyAssignment[f], f))
+
+    keyWidth = 5
+    featureWidth = max((len(f) for f in rows), default=10) + 2
+    terminalWidth = shutil.get_terminal_size(fallback=(100, 24)).columns
+
     print("\nSpecial key mapping:")
-    for key in sorted(featuresByKey):
-        print(f"  key {key}: {', '.join(sorted(featuresByKey[key]))}")
+    print("(each column is one example lemma; its forms land on the rows/keys that discriminate them)")
+
+    # Paginate lemmas into consecutive tables that each fit the terminal width,
+    # instead of one giant table.
+    remainingLemmas = candidateLemmas[:]
+    while remainingLemmas:
+        pageLemmas: list[str] = []
+        pageWordWidths: list[int] = []
+        width = keyWidth + featureWidth
+        for lemmeGramCat in remainingLemmas:
+            wordWidth = max([len(lemmeGramCat)] + [
+                len(word.ortho) for word in lemmaFeatureWord.get(lemmeGramCat, {}).values()
+            ]) + 2
+            if pageLemmas and width + wordWidth > terminalWidth:
+                break
+            pageLemmas.append(lemmeGramCat)
+            pageWordWidths.append(wordWidth)
+            width += wordWidth
+        remainingLemmas = remainingLemmas[len(pageLemmas):]
+
+        header = f"{'Key':<{keyWidth}}{'Feature':<{featureWidth}}"
+        for lemmeGramCat, wordWidth in zip(pageLemmas, pageWordWidths):
+            header += f"{lemmeGramCat:<{wordWidth}}"
+        print()
+        print(header)
+        print("-" * len(header))
+        for feature in rows:
+            line = f"{keyAssignment[feature]:<{keyWidth}}{feature:<{featureWidth}}"
+            for lemmeGramCat, wordWidth in zip(pageLemmas, pageWordWidths):
+                cellWord = lemmaFeatureWord.get(lemmeGramCat, {}).get(feature)
+                cellOrtho = cellWord.ortho if cellWord is not None else ""
+                line += f"{cellOrtho:<{wordWidth}}"
+            print(line)
 
 
