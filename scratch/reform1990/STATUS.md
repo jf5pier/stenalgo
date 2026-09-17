@@ -703,6 +703,42 @@ byte-identical to session start, 413 tests pass, mypy unchanged (same 9 pre-exis
 `isException=True` to a note pointing at the new dedicated mechanism; repartie/repartir's notes
 rewritten to state the sense-restriction finding, `isException=True` unchanged).
 
+## `dictionary.py`/`ambiguitychecker` crash (from earlier in this file) -- root-caused and fixed
+
+Root-caused by temporarily instrumenting `Dictionary.buildTheory` (try/except around the crash
+site, printing the failing word before re-raising, reverted after) and rerunning with the reform
+flags that had reproduced it: the crash is `azulejo` (Spanish/Portuguese loanword, "glazed
+tile"), phon `azulexo` -- Lexique383 transcribes its "j" as X-SAMPA `x` (Spanish *jota* /x/), a
+phoneme outside the Starboard keyboard's phoneme-to-key mapping (the standard 23
+consonants + 16 vowels documented in CLAUDE.md). `getStrokesOfPhoneme('x', 'onset')` returns an
+empty list, and `getStrokeOfSyllableByPart` (`src/keyboard.py:592`) indexes `strokesOfPhoneme[0]`
+without checking for that, crashing with an unhelpful bare `IndexError`.
+
+Confirmed this word/phoneme has **always** been in `LexiqueMixte.tsv`, completely independent of
+any reform1990 flag (present identically in the flag-off committed baseline) -- it only surfaced
+during reform-flag testing because that's when `Dictionary.pickle`/`FirstTheory.pickle` happened
+to get rebuilt from scratch (both files cache `buildTheory`'s output and are silently reused
+otherwise, the same caching gotcha already documented in Phase 1's ambiguitychecker section of
+this file); with a stale pickle around, the crash simply doesn't get hit again.
+
+**Fix**: added `azulejo`/`azulejos` (both corpus rows) to `lexique.py`'s existing `foreignList`,
+per the user's direction -- this is exactly the pre-existing mechanism `read_corpus()` already
+uses to exclude words entirely from `LexiqueMixte.tsv` (list of "foreign" loanwords whose
+phonology or spelling isn't supported by this pipeline). Verified: `LexiqueMixte.tsv`'s only
+diff from before is the two `azulejo`/`azulejos` rows disappearing; 413 tests pass; mypy
+unchanged; `dictionary.py` with freshly-deleted pickles now completes end-to-end cleanly
+(`satOptimizeDiscriminator: 0 special keys needed`). Also updated this session's own `azulejo`
+row in `reform1990.tsv` (`mots_empruntes_accent`, `azulejo`->`azuléjo`) from
+`appliesToOrthoRewrite=True` to `False` with a note, since the word no longer appears in the
+output at all for the rewrite mechanism to touch.
+
+Root cause and fix live entirely in `lexique.py`/`reform1990.tsv` (this project's own files, not
+the separate uncommitted roadmap work) -- `getStrokeOfSyllableByPart`'s unguarded
+`strokesOfPhoneme[0]` in `src/keyboard.py` is still there and would crash the same way for any
+*other* corpus word whose phonology uses a phoneme outside the keyboard's coverage; not fixed
+this session (the user's fix was scoped to excluding this one specific word), so worth keeping in
+mind if a similar crash resurfaces on a different word in the future.
+
 ## If resuming: what's genuinely still open
 
 - **Category 8's lemme-merge companion** (so `cliquettement`/`cliquètement`-style family
