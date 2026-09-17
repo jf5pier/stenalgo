@@ -35,35 +35,25 @@ def printVerbose(word: str, msg: list[Any]) -> None:
     if word in verboseList:  # ["soleil"] :
         print(word, " :\n", " ".join(map(str, msg)))
 
-problemList = ["autocritiquer", "fjord", "carter", "cappuccino", "capucino",
-               "capuccino", "cappuccinos",  "mamma", "voyouterie",
-               "voyoucratie", "jungien", "jungiens", "mails", "fjords",
-               "sprinteur", "sprinteurs", "pierreries", "quidams",
-               "voyoutisme", "fettucine", "requiems",  "suppliât", "niquait",
-               "télétexte", "tangerine", "réattaquait", "chopper",
-               "tangerine", "mail"]
+def loadLexiconExclusions(tsvPath: str = "resources/lexiconExclusions.tsv") -> dict[str, str]:
+    """
+    Parse resources/lexiconExclusions.tsv into a {word: reason} dict -- corpus
+    `ortho` strings to drop entirely from the generated lexicon (see that file's
+    header for the reason vocabulary). Replaces the old hardcoded
+    `problemList`/`foreignList` Python literals.
+    """
+    with open(tsvPath, encoding="utf-8") as tsvFile:
+        rawRows = [line.rstrip("\n") for line in tsvFile if not line.startswith("#")]
+    exclusions: dict[str, str] = {}
+    for row in rawRows[1:]:  # skip header
+        if not row.strip():
+            continue
+        word, reason, _note = row.split("\t", 2)
+        exclusions[word] = reason
+    return exclusions
 
-foreignList = ["ausweis", "azulejo", "azulejos", "beagle", "beagles", "bintje", "boghei", "borchtch",
-               "brainstorming", "breitschwanz", "catgut", "catguts",
-               "challenge", "challengers", "cheeseburgers", "chippendale",
-               "chippendales", "chorizos", "cinzano", "coache", "coaches",
-               "coachs", "conjungo", "conjungos", "crumble", "curant",
-               "duces", "foil", "gun", "highlander", "hydrofoil", "guns",
-               "highlanders", "interviewer", "jingle", "jingles", "jodler",
-               "jonkheer", "kandjar", "kierkegaardienne", "kommandantur",
-               "lazzis", "lunches", "lychees", "mailing", "mile", "muchas",
-               "nikkei", "palmer", "panzer", "panzers", "people", "pickles",
-               "pschent", "quattrocento", "quite", "ranch", "rancher",
-               "ranchs", "ranches", "roadster", "rock'n'roll", "sandjak",
-               "sandwiches", "sandwichs", "schampooing", "schampooiner",
-               "shampooiner", "shampooing", "shampooings", "puzzle",
-               "puzzles", "rinforzando", "rough", "rhythm'n'blues", "single",
-               "shogun", "shôgun", "skinhead", "skinheads", "smiley",
-               "teenager", "training", "trecento", "valpolicella", "wharf",
-               "whig", "whigs", "whipcord", "whiskey", "whiskies", "whiskys",
-               "whist", "whisky", "wildcat", "winchesters"]
 
-ignoredList = problemList + foreignList
+ignoredList = frozenset(loadLexiconExclusions())
 
 # Spelling variants of the same lexeme that Lexique383 lists under distinct `lemme`
 # strings, collapsed to one canonical lemme so they don't compete for a separate
@@ -74,7 +64,7 @@ ignoredList = problemList + foreignList
 # île/ile is the 1990 orthographic-reform circumflex-dropping variant of "île".
 spellingVariantLemme: dict[str, str] = {
     "kascher": "kasher",
-    "cascher": "casher",
+    "cascher": "kasher",
     "cachère": "kasher",
     "casher": "kasher",
     "ile": "île",
@@ -99,7 +89,7 @@ pronounParadigmLemme: dict[tuple[str, str], str] = {
 # LexiqueMixte.tsv with the reform applied; see resources/reform1990.tsv and
 # scratch/reform1990/STATUS.md for scope (diacritic categories only, so far) and
 # sourcing.
-APPLY_1990_REFORM_LEMMES: bool = False
+APPLY_1990_REFORM_LEMMES: bool = True
 
 
 def _readReform1990Rows(tsvPath: str) -> list[list[str]]:
@@ -149,7 +139,7 @@ if APPLY_1990_REFORM_LEMMES:
 # happens at output time in outputMixedLexique(), not on word.ortho itself, since
 # word.ortho must stay the original spelling for the LexiqueInfraCorrespondance
 # grapheme-phoneme lookup in breakdownSyllables() to keep working).
-APPLY_1990_REFORM_ORTHO: bool = False
+APPLY_1990_REFORM_ORTHO: bool = True
 
 
 @dataclass(frozen=True)
@@ -218,7 +208,18 @@ def loadReform1990OrthoRewrites(tsvPath: str) -> dict[str, "OrthoRewriteRule"]:
             continue
         rule = computeSingleEditRule(oldSpelling, newSpelling)
         rewrites[oldSpelling] = rule
-        rewrites[newSpelling] = rule
+        # Only a same-length substitution is safe to also key under newSpelling: its
+        # occurrence check (ortho[position] == oldChar) naturally fails once the text
+        # already reads newChar there, so re-matching an already-reformed word is a
+        # harmless no-op. An insertion/deletion rule has no such guard -- e.g. deleting
+        # one letter of a double ("grolle"->"grole") leaves a single letter that still
+        # matches the same anchor, and re-running the rule against the *already*
+        # single-lettered "grole" deletes again, producing "groe". Keying those only
+        # under oldSpelling is enough: the word.lemme fallback lookup in
+        # outputMixedLexique still finds this rule whenever word.ortho itself is the
+        # one that actually still needs rewriting.
+        if rule.oldChar != "" and rule.newChar != "":
+            rewrites[newSpelling] = rule
     return rewrites
 
 
@@ -319,7 +320,7 @@ _reform1990OrthoRewrites: dict[str, OrthoRewriteRule] = (
 # scratch/reform1990/STATUS.md for sourcing (only pairs where Lexique383 already attests
 # BOTH the sourced regular plural and some other, differing plural spelling under the
 # same lemme are included -- that differing spelling is the row this rewrites).
-APPLY_1990_REFORM_EMPRUNT_PLURIEL: bool = False
+APPLY_1990_REFORM_EMPRUNT_PLURIEL: bool = True
 
 
 def loadReform1990PluralRewrites(tsvPath: str) -> dict[str, str]:
@@ -413,7 +414,7 @@ ELER_ETER_DERIVED_NOUN_VERBS: dict[str, str] = {
     "ruissellement": "ruisseler",
 }
 
-APPLY_1990_REFORM_ELER_ETER: bool = False
+APPLY_1990_REFORM_ELER_ETER: bool = True
 
 
 def loadElerEterQualifyingVerbs(verbisteXmlPath: str) -> dict[str, str]:
@@ -498,7 +499,7 @@ _elerEterQualifyingVerbs: dict[str, str] = (
 # the futur/conditionnel forms built on that same stressed radical (interpellerai-style), which
 # keep the double consonant unchanged, matching the traditional appeler/rappeler exception
 # pattern rather than the regular -eler accent regularization.
-APPLY_1990_REFORM_INTERPELER: bool = False
+APPLY_1990_REFORM_INTERPELER: bool = True
 
 _interpelerRule = computeSingleEditRule("interpeller", "interpeler")
 
@@ -527,7 +528,7 @@ INTERPELER_FIXED_FORMS = frozenset({
 # no sourced basis for guessing whether "dissous" ADJ (plural) should become "dissouts" or stay
 # "dissous", or whether "absous" ADJ (the same spelling, singular) is really the same participial
 # adjective as the VER row or a distinct headword -- left for future research, not guessed here.
-APPLY_1990_REFORM_ABSOUS_DISSOUS: bool = False
+APPLY_1990_REFORM_ABSOUS_DISSOUS: bool = True
 
 _absousRule = computeSingleEditRule("absous", "absout")
 _dissousRule = computeSingleEditRule("dissous", "dissout")

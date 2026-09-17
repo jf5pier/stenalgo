@@ -1,0 +1,165 @@
+# lexiconExclusions.tsv
+#
+# Words dropped entirely from the generated lexicon (never reach LexiqueMixte.tsv /
+# Dictionary at all) -- unlike resources/ambiguityIgnoreList.tsv, which only affects
+# the ambiguity *metric* and leaves the word typable. Historically these lived as
+# two hardcoded Python lists in lexique.py (`problemList`, `foreignList`, no
+# per-word reason recorded anywhere) -- moved here 2026-09-18 for consistency with
+# the rest of this project's tsv-based exception tables (reform1990.tsv,
+# verbModelExceptions.tsv, ambiguityIgnoreList.tsv).
+#
+# Columns:
+#   word    -- the corpus `ortho` string to exclude (exact match)
+#   reason  -- one of:
+#                foreign_word       -- a loanword/foreign term, generally excluded
+#                                      for phonology/orthography reasons never
+#                                      individually documented at the time
+#                unsupported_phoneme -- confirmed to use a phoneme outside the
+#                                      Starboard keyboard's mapping (see CLAUDE.md);
+#                                      verified case: azulejo/azulejos use X-SAMPA
+#                                      "x" (Spanish/Portuguese jota), see todo.md
+#                unpopular_spelling -- a misspelling or much-rarer variant of a
+#                                      word already present under its normal
+#                                      spelling
+#                data_defect        -- suspected Lexique383 data problem (a
+#                                      malformed/synthetic-looking conjugated
+#                                      form, an odd derived-noun entry, etc.)
+#   note    -- short justification; "unverified legacy entry" where the original
+#              per-word reasoning was never recorded and hasn't been re-derived
+#
+# `reason` here is a best-effort reconstruction from the word list alone (the
+# original lists predate any commit message explaining individual entries) --
+# treat as provisional, not authoritative; happy to be corrected per-word.
+word	reason	note
+autocritiquer	data_defect	unverified legacy entry, possibly a malformed synthetic conjugation
+fjord	foreign_word	Norwegian loanword
+fjords	foreign_word	Norwegian loanword, plural
+carter	foreign_word	unverified legacy entry (engine-housing term / English surname homograph)
+cappuccino	foreign_word	Italian loanword
+capucino	unpopular_spelling	misspelling of "cappuccino"
+capuccino	unpopular_spelling	misspelling of "cappuccino"
+cappuccinos	foreign_word	Italian loanword, plural
+mamma	foreign_word	Italian loanword
+voyouterie	data_defect	unverified legacy entry
+voyoucratie	data_defect	unverified legacy entry
+voyoutisme	data_defect	unverified legacy entry
+jungien	data_defect	unverified legacy entry (adjective derived from "Jung", proper-noun-derived)
+jungiens	data_defect	unverified legacy entry, plural
+mails	foreign_word	English loanword ("email"), collides with native French "mail" (tree-lined walk / croquet-like game)
+mail	foreign_word	English loanword ("email"), collides with native French "mail" (tree-lined walk / croquet-like game)
+sprinteur	unpopular_spelling	unverified legacy entry, possibly rarer variant of "sprinter"
+sprinteurs	unpopular_spelling	unverified legacy entry, plural
+pierreries	data_defect	unverified legacy entry
+quidams	data_defect	unverified legacy entry
+fettucine	foreign_word	Italian loanword
+requiems	foreign_word	Latin loanword, plural
+suppliât	data_defect	unverified legacy entry, possibly a malformed synthetic conjugation
+niquait	data_defect	unverified legacy entry, possibly a malformed synthetic conjugation
+télétexte	data_defect	unverified legacy entry
+tangerine	foreign_word	English loanword (fruit name)
+réattaquait	data_defect	unverified legacy entry, possibly a malformed synthetic conjugation
+chopper	foreign_word	unverified legacy entry (English "chopper" / French slang verb homograph)
+ausweis	foreign_word	German loanword (occupation-era travel permit)
+azulejo	unsupported_phoneme	Spanish/Portuguese "j" -> X-SAMPA "x", outside Starboard's phoneme set
+azulejos	unsupported_phoneme	Spanish/Portuguese "j" -> X-SAMPA "x", outside Starboard's phoneme set
+beagle	foreign_word	English loanword (dog breed)
+beagles	foreign_word	English loanword, plural
+bintje	foreign_word	Dutch loanword (potato variety)
+boghei	foreign_word	loanword (light carriage)
+borchtch	foreign_word	Slavic loanword (soup)
+brainstorming	foreign_word	English loanword
+breitschwanz	foreign_word	German loanword (fur type)
+catgut	foreign_word	English loanword (surgical suture material)
+catguts	foreign_word	English loanword, plural
+challenge	foreign_word	English loanword
+challengers	foreign_word	English loanword, plural
+cheeseburgers	foreign_word	English loanword, plural
+chippendale	foreign_word	English loanword (furniture style)
+chippendales	foreign_word	English loanword, plural
+chorizos	foreign_word	Spanish loanword, plural
+cinzano	foreign_word	Italian brand-derived loanword
+coache	unpopular_spelling	unverified legacy entry, likely mis-inflected form of "coach"
+coaches	foreign_word	English loanword, plural
+coachs	foreign_word	English loanword, plural
+conjungo	foreign_word	loanword (informal "marriage")
+conjungos	foreign_word	loanword, plural
+crumble	foreign_word	English loanword
+curant	data_defect	unverified legacy entry
+duces	data_defect	unverified legacy entry (possibly Italian "duce" plural)
+foil	foreign_word	English loanword
+gun	foreign_word	English loanword
+guns	foreign_word	English loanword, plural
+highlander	foreign_word	English loanword
+highlanders	foreign_word	English loanword, plural
+hydrofoil	foreign_word	English loanword
+interviewer	foreign_word	English-derived verb
+jingle	foreign_word	English loanword
+jingles	foreign_word	English loanword, plural
+jodler	foreign_word	German-derived loanword (yodeling)
+jonkheer	foreign_word	Dutch loanword (nobility title)
+kandjar	foreign_word	loanword (dagger)
+kierkegaardienne	foreign_word	adjective derived from "Kierkegaard", proper-noun-derived
+kommandantur	foreign_word	German loanword
+lazzis	foreign_word	Italian loanword, plural
+lunches	foreign_word	English loanword, plural
+lychees	foreign_word	Chinese-derived loanword, plural
+mailing	foreign_word	English loanword
+mile	foreign_word	English loanword
+muchas	foreign_word	Spanish loanword
+nikkei	foreign_word	Japanese loanword (stock index)
+palmer	foreign_word	unverified legacy entry (English surname / measuring-tool eponym)
+panzer	foreign_word	German loanword
+panzers	foreign_word	German loanword, plural
+people	foreign_word	English loanword
+pickles	foreign_word	English loanword, plural
+pschent	foreign_word	Egyptian-derived loanword (pharaonic crown)
+quattrocento	foreign_word	Italian loanword
+quite	foreign_word	English loanword (unverified legacy entry)
+ranch	foreign_word	English loanword
+rancher	foreign_word	English loanword
+ranchs	foreign_word	English loanword, plural
+ranches	foreign_word	English loanword, plural
+roadster	foreign_word	English loanword
+rock'n'roll	foreign_word	English loanword
+sandjak	foreign_word	Ottoman Turkish loanword (administrative division)
+sandwiches	foreign_word	English loanword, plural
+sandwichs	foreign_word	English loanword, plural
+schampooing	unpopular_spelling	misspelling of "shampooing"
+schampooiner	unpopular_spelling	misspelling of "shampooiner"
+shampooiner	foreign_word	English-derived verb
+shampooing	foreign_word	English loanword
+shampooings	foreign_word	English loanword, plural
+puzzle	foreign_word	English loanword
+puzzles	foreign_word	English loanword, plural
+rinforzando	foreign_word	Italian loanword (musical term)
+rough	foreign_word	English loanword
+rhythm'n'blues	foreign_word	English loanword
+single	foreign_word	English loanword
+shogun	foreign_word	Japanese loanword
+shôgun	unpopular_spelling	alternate transliteration of "shogun"
+skinhead	foreign_word	English loanword
+skinheads	foreign_word	English loanword, plural
+smiley	foreign_word	English loanword
+teenager	foreign_word	English loanword
+training	foreign_word	English loanword
+trecento	foreign_word	Italian loanword
+valpolicella	foreign_word	Italian loanword (wine)
+wharf	foreign_word	English loanword
+whig	foreign_word	English loanword
+whigs	foreign_word	English loanword, plural
+whipcord	foreign_word	English loanword
+whiskey	foreign_word	English/Irish loanword
+whiskies	foreign_word	English loanword, plural
+whiskys	unpopular_spelling	non-standard plural of "whisky"
+whist	foreign_word	English loanword (card game)
+whisky	foreign_word	English loanword
+wildcat	foreign_word	English loanword
+winchesters	foreign_word	English loanword, plural (rifle brand)
+kascher	unpopular_spelling	per Larousse, "tombée en désuétude" (obsolete) spelling of "kasher"; see lexique.py spellingVariantLemme
+cascher	unpopular_spelling	per Larousse, "tombée en désuétude" (obsolete) spelling of "kasher"; see lexique.py spellingVariantLemme
+cacahuètes	unpopular_spelling	pre-1990-reform spelling of "cacahouètes" (see resources/reform1990.tsv, autres_rectifications); dropped as a homophone-ambiguity duplicate of the modern spelling
+dégotte	unpopular_spelling	pre-1990-reform spelling of "dégote" (see resources/reform1990.tsv, olle_otter); dropped as a homophone-ambiguity duplicate of the modern spelling
+dégotté	unpopular_spelling	pre-1990-reform spelling of "dégoté" (see resources/reform1990.tsv, olle_otter); dropped as a homophone-ambiguity duplicate of the modern spelling
+grolles	unpopular_spelling	pre-1990-reform spelling of "groles" (see resources/reform1990.tsv, olle_otter); dropped as a homophone-ambiguity duplicate of the modern spelling
+guibolles	unpopular_spelling	pre-1990-reform spelling of "guiboles" (see resources/reform1990.tsv, olle_otter); dropped as a homophone-ambiguity duplicate of the modern spelling
+mariolles	unpopular_spelling	pre-1990-reform spelling of "marioles" (see resources/reform1990.tsv, olle_otter); dropped as a homophone-ambiguity duplicate of the modern spelling
