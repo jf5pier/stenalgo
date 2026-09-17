@@ -8,6 +8,16 @@ from collections import defaultdict
 
 verboseLemmes: list[str] = [] # ["fait", "faire"]
 verboseWords: list[str] = [] # ["fais", "fait", "faits", "faites"]
+
+def _featureComplexity(feature: WordFeature) -> tuple[int, int]:
+    """Lower is simpler. Primary: number of ':'-separated verb-tense components
+    (e.g. "conditionnel:nbr_p" has 1, "conditionnel" has 0). Secondary: total number
+    of components once also splitting gender/number tags on '_' (e.g. "nbr_p" -> 2,
+    "conditionnel:nbr_p" -> 3, "conditionnel" -> 1)."""
+    colonParts = feature.split(":")
+    numColons = len(colonParts) - 1
+    totalParts = sum(len(part.split("_")) for part in colonParts)
+    return (numColons, totalParts)
 def getAmbiguousMultiphonemes(theory: dict[tuple[tuple[int, ...], ...], list[Word]],
                               keyboard: Keyboard) -> dict[str, list[Word]]:
 
@@ -97,18 +107,23 @@ def extractDiscriminatingFeatures(theory: dict[Strokes, list[Word]]) \
                         orthosUsingFeature[selectedFeature][ortho] += wordsUsing
                     # if len(wordsUsing) == 1:
                     if len(orthoWords) == 1:
-                        # This is a discriminating feature for this word orthograph
-                        # wordsFeatureDict = strokeLemmeDiscriminators[(strokes, lemme)]
-                        # wordFeatureDict = wordsFeatureDict.get(wordsUsing[0], [])
-                        # wordFeatureDict += [selectedFeature]
-                        strokeLemmeDiscriminators[(strokes, lemme)][wordsUsing[0]] += [selectedFeature]
+                        # This is a discriminating feature for this word orthograph.
+                        # wordsUsing may contain several distinct Words that share this
+                        # ortho (a true homograph): only the one(s) that actually carry
+                        # the feature natively should get credit, not just the first in
+                        # list order -- otherwise a feature exclusive to the *second*
+                        # homograph gets misattributed to the first, leaving the real
+                        # owner with no usable discriminator at all.
+                        owner = next((w for w in wordsUsing if selectedFeature in wordFeatures[w]),
+                                     wordsUsing[0])
+                        strokeLemmeDiscriminators[(strokes, lemme)][owner] += [selectedFeature]
                         # Popularity of the feature as a discriminator
-                        wordIsDiscrminatedByFeature[selectedFeature].add(wordsUsing[0])
+                        wordIsDiscrminatedByFeature[selectedFeature].add(owner)
                         # if lemme in verboseLemmes and lemmeWords[0].ortho in verboseWords:
-                        #     print(f"Word {wordsUsing[0].ortho} of lemme {lemme} is discriminated by feature {selectedFeature}")
-                        
+                        #     print(f"Word {owner.ortho} of lemme {lemme} is discriminated by feature {selectedFeature}")
+
                         # Other words that are discriminated from this word by its feature
-                        otherWords = list(filter(lambda w: w != wordsUsing[0], lemmeWords))
+                        otherWords = list(filter(lambda w: w != owner, lemmeWords))
                         for w in otherWords:
                             wordIsDiscrminatedFromByFeature[selectedFeature].add(w)
                             # if w.lemme in verboseLemmes and lemmeWords[0].ortho in verboseWords:
@@ -145,7 +160,7 @@ def extractDiscriminatingFeatures(theory: dict[Strokes, list[Word]]) \
             }
         sortedLeftOverFeatures= {
             feature:words for feature, words in sorted(leftOverFeatures.items(),
-                                     key=lambda item: len(item[1]), reverse=True)
+                                     key=lambda item: (_featureComplexity(item[0]), -len(item[1])))
         }
         # Greedy pick the best feature
         selectedFeature, selectedWords = list(sortedLeftOverFeatures.items())[0]
@@ -227,8 +242,10 @@ def selectFeaturesBySetCover(
                 featureCounts[feature] += 1
         if not featureCounts:
             break
-        # Tie-break deterministically on feature name among equally-popular features
-        bestFeature = max(sorted(featureCounts), key=lambda feature: featureCounts[feature])
+        # Prefer the simplest feature (fewest ':'/'_' components) among those still needed;
+        # break ties by how many still-unresolved words it covers, then by name.
+        bestFeature = min(sorted(featureCounts),
+                           key=lambda feature: (_featureComplexity(feature), -featureCounts[feature]))
         resolvedWords = [word for word, features in unresolved.items() if bestFeature in features]
         for word in resolvedWords:
             chosen[word] = bestFeature
