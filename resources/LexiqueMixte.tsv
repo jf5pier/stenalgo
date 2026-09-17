@@ -11398,8 +11398,6 @@ aztèque	astEk	aztèque	ADJ	ADJ,NOM		s		a_s|t_E_k_#	a_z|t_è_qu_e	0.27	0.51
 aztèque	astEk	aztèque	NOM	ADJ,NOM		s		a_s|t_E_k_#	a_z|t_è_qu_e	0.0	0.14
 aztèques	astEk	aztèque	ADJ	ADJ,NOM		p		a_s|t_E_k_#	a_z|t_è_qu_es	0.47	0.09
 aztèques	astEk	aztèque	NOM	ADJ,NOM		p		a_s|t_E_k_#	a_z|t_è_qu_es	0.07	0.01
-azulejo	azulexo	azulejo	NOM	NOM	m	s		a|z_u|l_e|x_o	a|z_u|l_e|j_o	0.0	0.1
-azulejos	azulexOs	azulejo	NOM	NOM	m	p		a|z_u|l_e|x_O_s	a|z_u|l_e|j_o_s	0.54	0.0
 azur	azyR	azur	NOM	ADJ,NOM	m	s		a|z_y_R	a|z_u_r	9.39	2.98
 azur	azyR	azur	ADJ	ADJ,NOM				a|z_y_R	a|z_u_r	1.62	0.3
 azurs	azyR	azur	NOM	NOM	m	p		a|z_y_R_#	a|z_u_r_s	0.14	0.0
@@ -18609,7 +18607,7 @@ cachou	kaSu	cachou	NOM	ADJ,NOM	m	s		k_a|S_u	c_a|ch_ou	0.27	0.17
 cachou	kaSu	cachou	ADJ	ADJ,NOM		s		k_a|S_u	c_a|ch_ou	0.41	0.0
 cachous	kaSu	cachou	NOM	NOM	m	p		k_a|S_u_#	c_a|ch_ou_s	0.41	0.05
 cachât	kaSa	cacher	VER	VER			sub:imp:3s;	k_a|S_a	c_a|ch_ât	0.61	0.0
-cachère	kaSER	cachère	ADJ	ADJ				k_a|S_E_R_#	c_a|ch_è_r_e	0.0	0.01
+cachère	kaSER	kasher	ADJ	ADJ				k_a|S_E_R_#	c_a|ch_è_r_e	0.0	0.01
 cachèrent	kaSER	cacher	VER	VER			ind:pas:3p;	k_a|S_E_R_#	c_a|ch_è_r_ent	0.61	0.09
 caché	kaSe	cacher	VER	VER,ADJ	m	s	par:pas;	k_a|S_e	c_a|ch_é	25.81	32.13
 caché	kaSe	caché	ADJ	VER,ADJ	m	s		k_a|S_e	c_a|ch_é	7.43	4.27
@@ -20693,7 +20691,7 @@ cascadé	kaskade	cascader	VER	VER	m	s	par:pas;	k_a_s|k_a|d_e	c_a_s|c_a|d_é	0.07
 cascara	kaskaRa	cascara	NOM	NOM	f	s		k_a_s|k_a|R_a	c_a_s|c_a|r_a	0.0	0.04
 cascatelle	kaskatEl	cascatelle	NOM	NOM	f	s		k_a_s|k_a|t_E_l_#	c_a_s|c_a|t_e_ll_e	0.07	0.0
 cascatelles	kaskatEl	cascatelle	NOM	NOM	f	p		k_a_s|k_a|t_E_l_#	c_a_s|c_a|t_e_ll_es	0.07	0.0
-cascher	kaSER	cascher	ADJ	ADJ				k_a|S_E_R	c_a|sch_e_r	0.0	0.03
+cascher	kaSER	casher	ADJ	ADJ				k_a|S_E_R	c_a|sch_e_r	0.0	0.03
 case	kaz	case	NOM	NOM,VER	f	s		k_a_z_#	c_a_s_e	9.46	4.41
 case	kaz	caser	VER	NOM,VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	k_a_z_#	c_a_s_e	0.61	0.35
 casemate	kaz°mat	casemate	NOM	NOM	f	s		k_a|z_°|m_a_t_#	c_a|s_e|m_a_t_e	1.55	0.0
@@ -20716,7 +20714,7 @@ casette	kazEt	casette	NOM	NOM	f	s		k_a|z_E_t_#	c_a|s_e_tt_e	0.0	0.05
 casettes	kazEt	casette	NOM	NOM	f	p		k_a|z_E_t_#	c_a|s_e_tt_es	0.0	0.01
 cash	kaS	cash	ADV	ADV,NOM				k_a_S	c_a_sh	0.61	7.25
 cash	kaS	cash	NOM	ADV,NOM	m			k_a_S	c_a_sh	0.07	0.98
-casher	kaSER	casher	ADJ	ADJ		s		k_a|S_E_R	c_a|sh_e_r	0.07	0.53
+casher	kaSER	kasher	ADJ	ADJ		s		k_a|S_E_R	c_a|sh_e_r	0.07	0.53
 cashmere	kaSmER	cashmere	NOM	NOM	m	s		k_a_S|m_E_R_#	c_a_sh|m_e_r_e	0.34	0.46
 casier	kazje	casier	NOM	NOM	m	s		k_a|z_j_e	c_a|s_i_er	4.46	15.82
 casiers	kazje	casier	NOM	NOM	m	p		k_a|z_j_e_#	c_a|s_i_er_s	3.65	1.98
@@ -21271,9 +21269,9 @@ cela	s°la	cela	NOM	NOM,PRO:dem	m	s		s_°|l_a	c_e|l_a	0.0	0.3
 celait	selE	celer	VER	VER			ind:imp:3s;	s_e|l_E	c_e|l_ait	0.07	0.0
 celer	sele	celer	VER	VER			inf;	s_e|l_e	c_e|l_er	0.2	0.4
 cella	sEla	cella	NOM	NOM	f	s		s_E|l_a	c_e|ll_a	0.81	0.28
-celle	sEl	celle	PRO:dem	NOM,PRO:dem	f	s		s_E_l_#	c_e_ll_e	299.46	141.28
+celle	sEl	celui	PRO:dem	NOM,PRO:dem	f	s		s_E_l_#	c_e_ll_e	299.46	141.28
 celle	sEl	celle	NOM	NOM,PRO:dem		s		s_E_l_#	c_e_ll_e	0.0	0.02
-celles	sEl	celles	PRO:dem	PRO:dem	f	p		s_E_l_#	c_e_ll_es	107.97	34.73
+celles	sEl	celui	PRO:dem	PRO:dem	f	p		s_E_l_#	c_e_ll_es	107.97	34.73
 cellier	selje	cellier	NOM	NOM	m	s		s_e|l_j_e	c_e|ll_i_er	2.97	1.01
 celliers	selje	cellier	NOM	NOM	m	p		s_e|l_j_e_#	c_e|ll_i_er_s	0.68	0.1
 cellophane	selofan	cellophane	NOM	NOM	f	s		s_e|l_o|f_a_n_#	c_e|ll_o|ph_a_n_e	2.43	0.39
@@ -21583,7 +21581,7 @@ cessée	sEse	cesser	VER	VER	f	s	par:pas;	s_E|s_e_#	c_e|ss_é_e	0.0	0.02
 ceste	sEst	ceste	NOM	NOM	m	s		s_E_s_t_#	c_e_s_t_e	0.07	0.0
 cet	sEt	cet	ADJ:dem	ADJ:dem	m	s		s_E_t	c_e_t	497.5	499.91
 cette	sEt	cette	ADJ:dem	ADJ:dem	f	s		s_E_t_#	c_e_tt_e	2320.68	1902.27
-ceux	s2	ceux	PRO:dem	PRO:dem	m	p		s_2_#	c_eu_x	309.86	202.02
+ceux	s2	celui	PRO:dem	PRO:dem	m	p		s_2_#	c_eu_x	309.86	202.02
 ch'timi	Stimi	ch'timi	ADJ	ADJ,NOM		s		S_#_t_i|m_i	ch_'_t_i|m_i	0.0	0.27
 ch'timi	Stimi	ch'timi	NOM	ADJ,NOM		s		S_#_t_i|m_i	ch_'_t_i|m_i	0.14	0.14
 ch'timis	Stimi	ch'timi	ADJ	ADJ,NOM		p		S_#_t_i|m_i_#	ch_'_t_i|m_i_s	0.07	0.0
@@ -65714,7 +65712,7 @@ ikebana	ikebana	ikebana	NOM	NOM	m	s		i|k_e|b_a|n_a	i|k_e|b_a|n_a	0.07	0.02
 il	il	il	PRO:per	ADJ:num,ADV,PRO:per	m	s		i_l	i_l	15832.09	13222.93
 il	il	il	ADJ:num	ADJ:num,ADV,PRO:per				i_l	i_l	0.07	0.4
 il	il	il	ADV	ADJ:num,ADV,PRO:per				i_l	i_l	0.0	0.01
-iles	il	ile	NOM	NOM	m	p		i_l_#	i_l_es	0.2	1.25
+iles	il	île	NOM	NOM	m	p		i_l_#	i_l_es	0.2	1.25
 iliaque	iljak	iliaque	ADJ	ADJ	f	s		i|l_j_a_k_#	i|l_i_a_qu_e	0.07	0.14
 iliaques	iljak	iliaque	ADJ	ADJ	f	p		i|l_j_a_k_#	i|l_i_a_qu_es	0.14	0.01
 ilium	iljOm	ilium	NOM	NOM	m	s		i|l_j_O_m	i|l_i_u_m	0.0	0.01
@@ -65826,7 +65824,7 @@ illégitimité	ileZitimite	illégitimité	NOM	NOM	f	s		i|l_e|Z_i|t_i|m_i|t_e	i|l
 ilote	ilOt	ilote	NOM	NOM	m	s		i|l_O_t_#	i|l_o_t_e	0.27	0.0
 ilotes	ilOt	ilote	NOM	NOM	m	p		i|l_O_t_#	i|l_o_t_es	0.34	0.0
 ilotisme	ilOtism	ilotisme	NOM	NOM	m	s		i|l_O|t_i_s_m_#	i|l_o|t_i_s_m_e	0.0	0.14
-ils	il	ils	PRO:per	PRO:per	m	p		i_l_#	i_l_s	2809.53	3075.07
+ils	il	il	PRO:per	PRO:per	m	p		i_l_#	i_l_s	2809.53	3075.07
 iléaux	ileo	iléal	ADJ	ADJ	m	p		i|l_e|o_#	i|l_é|au_x	0.0	0.01
 iléus	ileys	iléus	NOM	NOM	m			i|l_e|y_s	i|l_é|u_s	0.0	0.03
 image	imaZ	image	NOM	NOM,VER	f	s		i|m_a_Z	i|m_a_ge	119.39	51.34
@@ -72712,7 +72710,7 @@ karmique	kaRmik	karmique	ADJ	ADJ		s		k_a_R|m_i_k_#	k_a_r|m_i_qu_e	0.0	0.16
 kart	kaRt	kart	NOM	NOM	m	s		k_a_R_t	k_a_r_t	0.0	0.3
 karting	kaRtiG	karting	NOM	NOM	m	s		k_a_R|t_i_G	k_a_r|t_i_ng	0.0	0.34
 kasbah	kasba	kasbah	NOM	NOM	f			k_a_s|b_a_#	k_a_s|b_a_h	0.27	0.0
-kascher	kaSER	kascher	ADJ	ADJ		s		k_a|S_E_R	k_a|sch_e_r	0.27	0.13
+kascher	kaSER	kasher	ADJ	ADJ		s		k_a|S_E_R	k_a|sch_e_r	0.27	0.13
 kasher	kaSER	kasher	ADJ	ADJ				k_a|S_E_R	k_a|sh_e_r	0.41	0.63
 kastro	kastRo	kastro	NOM	NOM	m	s		k_a_s|t_R_o	k_a_s|t_r_o	0.47	0.0
 kastros	kastRo	kastro	NOM	NOM	m	p		k_a_s|t_R_o_#	k_a_s|t_r_o_s	0.07	0.0
