@@ -260,7 +260,7 @@ interpeller	interpeler	autres_rectifications	True	False	False	False	handled by a
 allegretto	allégretto	mots_empruntes_accent	False	True	False	False	
 allegro	allégro	mots_empruntes_accent	False	True	False	False	
 arboretum	arborétum	mots_empruntes_accent	False	True	False	False	
-azulejo	azuléjo	mots_empruntes_accent	False	True	False	False	
+azulejo	azuléjo	mots_empruntes_accent	False	False	False	False	azulejo/azulejos are now on lexique.py's foreignList (2026-09-16) and excluded from LexiqueMixte.tsv entirely -- Lexique383 transcribes their "j" as X-SAMPA "x" (Spanish jota /x/), a phoneme outside the Starboard keyboard's phoneme-to-key mapping, which crashed dictionary.py's buildTheory (unguarded empty-list index in src/keyboard.py's getStrokeOfSyllableByPart) when this row's ortho got rewritten and surfaced during testing. Nothing to rewrite now that the word never appears in the output.	
 beluga	béluga	mots_empruntes_accent	False	True	False	False	
 bolchevique	bolchévique	mots_empruntes_accent	False	True	False	False	
 bolchevisme	bolchévisme	mots_empruntes_accent	False	True	False	False	

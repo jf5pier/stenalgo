@@ -43,7 +43,7 @@ problemList = ["autocritiquer", "fjord", "carter", "cappuccino", "capucino",
                "télétexte", "tangerine", "réattaquait", "chopper",
                "tangerine", "mail"]
 
-foreignList = ["ausweis", "beagle", "beagles", "bintje", "boghei", "borchtch",
+foreignList = ["ausweis", "azulejo", "azulejos", "beagle", "beagles", "bintje", "boghei", "borchtch",
                "brainstorming", "breitschwanz", "catgut", "catguts",
                "challenge", "challengers", "cheeseburgers", "chippendale",
                "chippendales", "chorizos", "cinzano", "coache", "coaches",
