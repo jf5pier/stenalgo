@@ -1,0 +1,115 @@
+# ambiguityIgnoreList.tsv
+#
+# Lemmas that src/ambiguitychecker.py should drop from a stroke cluster's words
+# before classifying it as lemma-homophone-ambiguous. Reviewed by hand against the
+# n>=5 "overflow" lemma-homophone clusters (2026-09-17/18 session, homophone/theory
+# roadmap work -- see ROADMAP.md, unrelated to the separate reform1990 thread). Each
+# entry is a word too rare, archaic, foreign, or otherwise unlikely to ever compete
+# for its own steno discriminator symbol -- dropping it shrinks or removes the
+# cluster it was inflating, without touching the actual lexicon/theory (the word
+# stays typable; this file only affects the ambiguity *metric*).
+#
+# Columns:
+#   lemme   -- the Word.lemme string this entry matches (exact, case-sensitive).
+#              Where a lemme string is shared by two unrelated senses (rare, but
+#              see reform1990.tsv's own comma-joined-lemme problem), this list
+#              can't distinguish them -- none of the current entries hit that case.
+#   reason  -- one of:
+#                archaic            -- old/literary/technical register, essentially
+#                                      unused in ordinary modern French
+#                anglicism_loan     -- borrowed from another language (not always
+#                                      English -- includes e.g. Romanian/Chinese/
+#                                      Arabic loans), used loosely for "loanword"
+#                unpopular_spelling -- a real, still-used word, but this spelling
+#                                      of it is markedly less common than another
+#                                      coexisting spelling
+#                sociolect          -- live modern slang/sociolectal register, not
+#                                      archaic and not a loanword
+#                data_artifact      -- suspected Lexique383 tagging error rather
+#                                      than a genuine distinct word (e.g. a common
+#                                      verb conjugation mistagged as a rare noun,
+#                                      or a near-zero-frequency near-duplicate row)
+#                                      -- kept distinct from the other reasons since
+#                                      it flags a potential upstream data bug, not
+#                                      a word to simply deprioritize; see todo.md
+#   note    -- short human-readable justification
+lemme	reason	note
+aulx	archaic	irregular plural of "ail" (garlic), essentially unused
+ers	archaic	bitter-vetch legume, rare
+haire	archaic	hairshirt/cilice
+hère	archaic	"pauvre hère" (poor wretch)
+erre	archaic	nautical "way"/momentum ("avoir de l'erre")
+lai	archaic	medieval poetic form / "frère lai"
+care	archaic	obsolete 100m² area unit
+carre	archaic	edge/corner (skate, blade)
+carrer	archaic	"se carrer" (to settle firmly)
+quarre	archaic	squared timber (carpentry)
+quarte	archaic	fencing/medical term
+celle	archaic	NOM sense: small monastery/abbey dependency (distinct from the PRO:dem "celle" already merged into "celui")
+ais	archaic	old word for "planche" (plank)
+sis	archaic	legal/administrative "sis à" (located at)
+ceint	archaic	adjectival past-participle of "ceindre", archaic register
+seing	archaic	legal "seing privé" (private signature)
+arrhe	archaic	singular of "arrhes" (deposit)
+ars	archaic	equine anatomy term
+hare	archaic	interjection used to spur horses
+hart	archaic	archaic word for a hangman's rope
+baille	archaic	tub / nautical slang for "the sea"
+bailler	archaic	archaic "to give" ("vous me la baillez belle")
+bayer	archaic	"bayer aux corneilles" (to stand gawping)
+matte	archaic	metallurgy term (impure smelted metal)
+mâter	archaic	nautical "to mast" a ship
+krak	archaic	Crusader-era hilltop fortress term
+hai	archaic	rare interjection, uncertain origin
+tain	archaic	mirror backing (metal foil)
+tin	archaic	shipbuilding: wood block supporting a keel
+maie	archaic	old wooden kneading trough
+tan	archaic	tanning bark/tannin material
+vair	archaic	heraldic fur ("pantoufle de vair")
+faîte	archaic	roof ridge -- rare/technical register, not archaic in the strict sense but no better bucket fits
+bau	archaic	nautical: ship's crossbeam
+bot	archaic	"pied bot" (club foot)
+fonts	archaic	"fonts baptismaux" (baptismal font)
+courre	archaic	old hunting-with-hounds term ("chasse à courre")
+ord	archaic	Old French "sale, dégoûtant" (dirty, foul)
+ore	archaic	Old French "maintenant" (now), survives only in "d'ores et déjà"
+ort	archaic	Old French "fragment, reste"
+cène	archaic	"la Cène" (the Last Supper), religious register
+seine	archaic	a type of fishing net
+butter	archaic	French gardening verb "to earth up" -- false friend, NOT the English word
+lacs	archaic	archaic snare/noose term; NOTE -- distrust this lemma's corpus frequency, likely inflated by "lac" plural mistagging (see todo.md)
+balais	archaic	fixed-expression colour adjective ("gris balais")
+ber	archaic	shipyard cradle/frame supporting a hull
+lice	archaic	jousting field / hunting bitch (female hound)
+soule	archaic	medieval ball game, ancestor of football (Lexique383 also conflates this lemme with a "drunk" fem. adjective sense)
+rai	archaic	poetic "a ray of light"
+raire	archaic	verb for a stag's rutting call
+rets	archaic	literary word for a net/snare ("tomber dans les rets")
+hale	archaic	near-zero corpus frequency, unclear real-word status in this sense
+haler	archaic	nautical "to haul/tow"
+let	anglicism_loan	tennis term (a serve replayed after clipping the net)
+lei	anglicism_loan	Romanian currency unit (plural of "leu")
+parr	anglicism_loan	young salmon (English loanword)
+tell	anglicism_loan	archaeological mound (borrowed from Arabic "tall")
+beat	anglicism_loan	English loanword (music/counterculture "beat")
+biter	anglicism_loan	French argot "to understand" -- etymology disputed (English "to bite" or Arabic), filed as loan per this review
+li	anglicism_loan	traditional Chinese unit of distance
+sen	anglicism_loan	Asian currency subunit (yen/rupiah)
+boer	anglicism_loan	Dutch/Afrikaans-descended South African settler (via English usage)
+carry	anglicism_loan	English-mediated spelling of "curry" (cari/kari also attested)
+lez	unpopular_spelling	archaic preposition "near", survives only in place names (Villeneuve-lez-Avignon)
+lès	unpopular_spelling	same preposition as "lez", rarer of the two coexisting spellings
+tél	unpopular_spelling	clipped abbreviation of "téléphone", not a full word
+saoul	unpopular_spelling	coexisting pre-1990 spelling of "soûl"/"soul", less standard today
+saouler	unpopular_spelling	verb form of "saoul", same coexisting-spelling situation
+gaul	unpopular_spelling	near-zero-frequency variant/duplicate of "gaule"
+gaulle	unpopular_spelling	near-zero-frequency variant/duplicate of "gaule" (possibly stray "de Gaulle" capitalization leakage)
+beur	sociolect	live modern slang/verlan term (French-born person of North African descent), not archaic or a loanword
+pars	data_artifact	suspected mistagged verb form ("je pars"/"tu pars" of "partir") filed as a spurious NOM lemma
+sert	data_artifact	suspected mistagged verb form ("il sert" of "servir") filed as a spurious NOM lemma
+mise	data_artifact	near-zero-frequency near-duplicate ADJ row of "mis"
+vins	data_artifact	near-zero-frequency near-duplicate ADJ row of "vin"
+bute	data_artifact	near-zero frequency, unclear real-word status
+mar	data_artifact	near-zero frequency, unclear real-word status
+lack	data_artifact	near-zero frequency, unclear real-word status (possibly a stray anglicism or corpus artifact)
+fy	data_artifact	near-zero frequency, unclear real-word status

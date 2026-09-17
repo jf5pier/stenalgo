@@ -8,6 +8,13 @@ FeatureDiscrimator.pickle
 FirstTheory.pickle
 AugTheory.pickle*
 
+# Regenerable reports (src/ambiguitychecker.py)
+ambiguity_report.tsv
+anchor_feasibility.tsv
+
+# Regenerable pipeline output (dictionary.py)
+theory.tsv
+
 env/
 
 # External reference lexicon for cross-checking generated NOM/ADJ forms

@@ -1,15 +1,14 @@
 #!/usr/bin/python
 # coding: utf-8
 #
-import re
 from itertools import combinations
 from src.keyboard import Keyboard, Stroke, Strokes
-from src.word import Word, WordFeature, LemmeGramCat, WordOrtho, groupWordsByLemme
+from src.word import (
+    Word, WordFeature, LemmeGramCat, WordOrtho, groupWordsByLemme,
+    featureTokens, TOKEN_CONFLICTS,
+)
 from tqdm import tqdm
 from collections import defaultdict
-
-# Tokens that conflict with each other (plural↔singular, masculine↔feminine).
-_TOKEN_CONFLICTS: dict[str, str] = {"p": "s", "s": "p", "m": "f", "f": "m"}
 
 # Linguistic markedness priority for no-stroke / simple-stroke assignment.
 # Higher value = more "unmarked" in French grammar = preferred for no-stroke.
@@ -52,12 +51,6 @@ FEATURE_PRIORITY: dict[WordFeature, int] = {
 }
 
 
-def _featureTokens(f: WordFeature) -> frozenset[str]:
-    """Extract meaningful tokens from a feature string, stripping any 'not_' prefix."""
-    base = f[4:] if f.startswith("not_") else f
-    return frozenset(t for t in re.split(r'[_:]', base) if t)
-
-
 def _consistencyScore(
     f: WordFeature,
     stroke: Stroke,
@@ -74,7 +67,7 @@ def _consistencyScore(
             eTok = tokenCache[ef]
             score += len(fTok & eTok) * 2.0
             for t in fTok:
-                if _TOKEN_CONFLICTS.get(t) in eTok:
+                if TOKEN_CONFLICTS.get(t) in eTok:
                     score -= 3.0
     return score
 
@@ -305,7 +298,7 @@ def assignDiscriminatorKeypresses(
         key=lambda f: (f not in noStrokeFeatures, *(-x for x in featureSortKey(f)))
     )
 
-    tokenCache: dict[WordFeature, frozenset[str]] = {f: _featureTokens(f) for f in assigned}
+    tokenCache: dict[WordFeature, frozenset[str]] = {f: featureTokens(f) for f in assigned}
     strokeToFeatures: dict[Stroke, list[WordFeature]] = {}
     featureToStroke: dict[WordFeature, Stroke] = {}
     keyToFeatures: dict[int, list[WordFeature]] = {}

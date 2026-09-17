@@ -213,19 +213,27 @@ Some phonemes need more than a single keypress to be registered. For instance, h
                        ┗━━━━┻━━━━┛ ┗━━━━┻━━━━┛
 ```
 
-#### Mapping of the phonemes to the physical keys [ ]
-This is the last step to obtain an optimal phonetic keyboard. The most popular keys must be easily accessible. Phonemes that require key combos
-must not cause conflicts with other words that use the same keys to represent other phonemes.
+#### Mapping of the phonemes to the physical keys [x]
+A working phoneme-to-key mapping is committed (`starboard3h.json`), covering the keyboard's 22 non-reserved keys, with the most popular keys
+assigned to the most accessible positions and phonemes requiring key combos chosen to avoid conflicts. Re-validating it against lexicon growth,
+and deciding when to freeze it for learners, is ongoing — see `ROADMAP.md`.
 
-#### Identifying homophones and define treatment rules [ ]
-Typically, homophones have "alternative spelling" where extra phonemes or the * key are added to distinguish the different orthographical
-spellings. A system must be devised to make the treatment of these exceptions so that it is intuitive
+#### Identifying homophones and defining treatment rules [ ]
+Homophones split into two different problems needing two different mechanisms: words that share a lemma but differ in inflection (a conjugation
+problem, solved with phoneme-key chords) and words whose lemmas differ entirely, e.g. ver/vert/verre/vers/vair (a spelling problem, solved with
+the keyboard's two guaranteed special keys, `*`/`#`). Feature-discrimination code for the first case already exists
+(`greedyOptimizeDiscriminator`, `satOptimizeDiscriminator`, `assignDiscriminatorKeypresses`), but isn't yet fully wired into a persisted theory,
+and the second case is still unaddressed. Full detail and open questions are tracked in `ROADMAP.md`.
 
 #### Treatment of verbs, prefixes, suffixes [ ]
-French verbs have multiple conjugations suffixes per tense, some of which are homophones (je mange - m@Ze, tu manges - m@Ze). A system based 
-on the function of the verb may simplify the selection of verb homophones.
+French verbs have multiple conjugations suffixes per tense, some of which are homophones (je mange - m@Ze, tu manges - m@Ze). Paradigm-table
+machinery for this already exists (`verbparadigm.py`, `nomAdjParadigm.py`), used today to fill gaps in the source lexicon; hooking it into theory
+generation itself, so one dictionary entry can point at a shared conjugation table instead of one entry per surface form, is planned but not
+done.
 
-Other common prefixes and suffixes should have consistent phoneme-keymap associations to reduce the cognitive load to learn exceptions.
+Prefixes (re-, dé-, co-…) are a related, separate goal: composing a prefix stroke with a base word's outline instead of enumerating every
+prefixed form. Both should end up sharing consistent phoneme-keymap associations to reduce the cognitive load to learn exceptions. Full detail
+in `ROADMAP.md`.
 
 ## References
 <a id="1">[1]</a> 
