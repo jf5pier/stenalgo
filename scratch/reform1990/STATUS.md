@@ -501,21 +501,187 @@ family collisions matching my own classification, the rest already-known Phase-1
 collisions) -- no new danger signs. 413 tests pass, mypy clean of new errors, all-flags-combined
 run completes cleanly, flag-off byte-identical to session-start baseline confirmed.
 
+## Category 3 (mots empruntés/loanwords) -- done, new session, continued further
+
+Extracted all 521 category-[3]-tagged bullet lines across the 26 Wiktionnaire letter-subpages
+(`scratch/reform1990/cat3_extract.py`). 499 are single-token (22 multi-word/hyphenated, moot for
+the same structural reason as categories 2/4). Category 3 splits into two independent axes, since
+a loanword can need either, both, or neither:
+
+**`mots_empruntes_accent`** (65 rows, 59 accepted + 6 excluded) -- mechanically identical to the
+existing diacritic categories (single-character substitution/insertion via
+`computeSingleEditRule`/`appliesToOrthoRewrite`, e.g. `arboretum`->`arborétum`). Old spellings
+for the 58 words with no explicit "au lieu de" in the source were found by trying every
+accent-stripping of the sourced new spelling and checking Lexique383 attestation (same "corpus
+already has both spellings" discipline as before). One homograph danger caught by the same
+multi-lemma check established in Phase 1: `limes`->`limès` excluded because Lexique383's `limes`
+row is ambiguous between the plural of `lime` (nail file/fruit) and a conjugated form of `limer`
+("to file"), unrelated to the Latin loanword this pair targets. `ciao`->`tchao` excluded as a
+multi-character/multi-position edit, not automatable by the single-edit mechanism (same treatment
+as `nénuphar`/`nénufar` etc. in `autres_rectifications`).
+
+**`mots_empruntes_pluriel`** (35 rows, 33 accepted + 2 excluded) -- a genuinely new mechanism,
+since the reform here regularizes an irregular/foreign plural to a plain French "-s"
+(e.g. `barmen`->`barmans`, `curricula`->`curriculums`) without touching the singular at all --
+not a fixed-position character edit like every other category. Pairs were only accepted where
+Lexique383 already attests BOTH the reform's stated regular plural (from the Wiktionnaire
+subpage) AND some other, differing plural spelling under the same lemme+`nombre="p"` (that
+differing spelling is the corpus's actual attested irregular plural, not guessed) -- 35 such
+pairs found by cross-referencing all 281 "plural-shown" category-3 candidates against
+`LexiqueMixte.tsv` grouped by lemme. A gramCat/gender check (same discipline as the
+`croît`/`absous`/`dissous` exclusions) caught two genuine dangers and excluded them:
+`bêtasses`->`bêtas` (bêtasses is the feminine plural of the ADJ sense of "bêta", a distinct
+paradigm from the NOM "Greek letter" sense this pair targets -- rewriting would destroy a real
+gender-marked form) and `nues`->`nus` (lemme `nu` covers the Greek letter, the adjective "naked",
+AND an unrelated archaic noun "nue" = cloud, whose plural is "nues" -- too ambiguous).
+
+**Implementation** (`lexique.py`): `resources/reform1990.tsv` gained an `appliesToPluralRewrite`
+boolean column (between `appliesToOrthoRewrite` and `isException`) -- required rewriting the
+whole file from the git-committed version since a first attempt at inserting the column via
+string-splicing miscounted the insertion index and silently shifted every row's
+`appliesToOrthoRewrite`/`isException` values by one position; caught immediately by spot-checking
+`boîte`'s row after the edit (it read `appliesToOrthoRewrite=False` when it should be `True`) and
+fixed by rebuilding from `git show HEAD:resources/reform1990.tsv` rather than patching in place.
+New `APPLY_1990_REFORM_EMPRUNT_PLURIEL` flag (off by default, independent of the other three),
+`loadReform1990PluralRewrites()` (same parsing style as the others), and
+`rewriteOrthosyllSuffix()` -- a new helper distinct from `applyOrthoRewrite()` since this is a
+literal whole-plural swap keyed by the word's own exact `ortho` (never a lemme, since that's the
+singular) rather than a family-generalizing single-position edit. It finds the syllable-string
+index right after the old/new spelling's shared prefix (counting only letters, so separators and
+multi-letter graphemes like "ch" are handled transparently just by iterating characters one at a
+time) and appends the new suffix's letters directly, mirroring the existing
+trailing-digraph-without-separator convention from insertions. Verified by hand against 4 real
+corpus rows spanning different suffix-length deltas and digraph/syllable-boundary shapes
+(`barmen`->`barmans`, `brunches`->`brunchs`, `curricula`->`curriculums`,
+`scénarii`->`scénarios`) before wiring into `outputMixedLexique()`, where it's applied only to
+`word.number == "p"` rows, independent of (and after) the other three mechanisms.
+
+**Verification**: flag-off byte-identical to session start (confirmed via diff after every
+edit). 413 tests pass throughout. mypy: same 9 pre-existing errors, nothing new. All four flags
+on: spot-checked every accepted accent pair rewrites correctly across its whole family (e.g.
+`allégro`'s ADV and NOM rows both correctly rewritten; `artéfact`/`artéfacts` singular+plural both
+correct); spot-checked all 4 hand-verified plural pairs plus several more in the actual generated
+output, all correct; confirmed `bêta`/`bêtasses`, `nu`/`nues`, and `limes` are untouched as
+intended. New-collision scan (comparing `(ortho,phon)`->lemme-set before/after category 3's
+additions specifically) found 17 changed keys, all traced to the same two already-established,
+acceptable classes: 7 are the expected "old bare loanword form merges into an already-attested
+accented row" pattern (`artéfact`, `béluga`, `caméraman`, `imprésario`, `média`, `sélect`,
+`vélum` -- exactly the `new_attested=True` set flagged during classification), the rest are
+pre-existing Phase-1/2-era family collisions already understood as acceptable, unaffected by this
+session's additions. No new dangers.
+
+**A `dictionary.py`/`ambiguitychecker` run with all four flags on hit a crash unrelated to this
+session's work**: `IndexError: list index out of range` in `src/keyboard.py:592`
+(`getStrokeOfSyllableByPart`), consistently at the same word index (~62189/196028) during
+`Dictionary.buildTheory`. Isolated by testing flag combinations individually: reproduces
+identically with just the ORIGINAL three flags (`LEMMES`+`ORTHO`+`ELER_ETER`, no plural
+mechanism) at the exact same word index, and does NOT reproduce with `EMPRUNT_PLURIEL` alone
+(clean run, `satOptimizeDiscriminator: 0 special keys needed`). So this is a pre-existing bug in
+the *separate, uncommitted* `dictionary.py`/`src/word.py` roadmap rewrite already sitting in the
+working tree this session started from (not part of this git history -- STATUS.md's earlier Phase
+1-3 verifications used the old, still-committed `dictionary.py` and succeeded), not something
+introduced by category 3 or any reform1990 mechanism. Out of scope for this thread to fix; flagged
+here so it isn't mistaken for a reform1990 regression later. `dictionary.py` with all reform flags
+off (today's committed-default state) still runs cleanly end-to-end.
+
+Working tree is back in the flag-off, committed-default state as of the end of this session too
+(`resources/LexiqueMixte.tsv`'s diff from HEAD is unchanged from what it was at session start --
+that diff belongs to the separate uncommitted roadmap work, not to anything done here).
+
+## `interpeller`/`interpeler` -- done, new session, continued further
+
+What looked like a small alias fix (add "interpeler" to category 8's qualifying-verb dict)
+turned out to need real linguistic research, since two authoritative-looking sources disagreed:
+the primary Journal officiel report text (checked in Phase 2) doesn't name `interpeler` as a
+doubling exception, implying it should regularize like any regular `-eler` verb
+(`interpelle`->`interpèle`) -- but the Académie française's own official conjugator
+(dictionnaire-academie.fr, fetched this session) lists "interpeler" with présent-tense forms
+STILL doubled (`j'interpelle`, `ils interpellent`), matching the traditional `appeler`/`rappeler`
+exception pattern instead. Neither reading matches Lexique383's own data cleanly either (its
+`interpeller` rows show double-l in literally every form, including imparfait/participle, which
+matches neither a regular `-eler` verb nor a normal `appeler`-style exception).
+
+Resolved by consulting the OQLF's *Banque de dépannage linguistique* alphabetical list of
+1990-reform-affected words (vitrinelinguistique.oqlf.gouv.qc.ca, fetched and parsed this
+session -- see below), which has a dedicated per-word note settling it authoritatively:
+"Consonne simple après *e* prononcé [ə] : *interpelons*, *interpelait* (mais *interpelle*).
+Présent, imparfait, passé simple, subjonctif, impératif et participes aussi touchés." Reading:
+every form loses one "l" EXCEPT the je/tu/il/ils présent-tense forms (`interpelle`/
+`interpellent`) and the futur/conditionnel forms built on the same stressed radical
+(`interpellerait`-style), which keep the double consonant -- i.e. exactly the `appeler`/`rappeler`
+exception pattern, not the grave-accent regularization the primary source's rule text alone
+would suggest.
+
+**Implementation** (`lexique.py`): since this is a one-off (Lexique383's "always double-l"
+`interpeller` data doesn't match any general -eler pattern this project's existing mechanisms
+handle), built a dedicated small mechanism rather than extending the general ones:
+`APPLY_1990_REFORM_INTERPELER` flag (off by default, independent of the other four), a
+`computeSingleEditRule("interpeller", "interpeler")`-derived rule reused via the EXISTING
+`orthoRewriteOccurrence`/`applyOrthoRewrite` primitives (no new ortho-editing code needed), and
+an explicit `INTERPELER_FIXED_FORMS` frozenset of the exact Lexique383 ortho spellings needing
+the fix -- everything except `interpelle`/`interpellent`/`interpellerait`, which are deliberately
+absent from the set so they're left untouched. `resources/reform1990.tsv`'s `interpeller` row
+flipped from `isException=True` to `appliesToLemmeNormalization=True` (safe/independent, merges
+the lemme once both spellings coexist) with a note pointing at the new mechanism.
+
+**A real bug caught during verification**: the first implementation checked
+`word.lemme == "interpeller"`, which silently never matched whenever
+`APPLY_1990_REFORM_LEMMES` was also on -- that flag normalizes `word.lemme` from "interpeller" to
+"interpeler" at word-construction time (before `outputMixedLexique` ever runs), so the ortho fix
+was a no-op exactly when tested together with the lemme merge. Fixed by checking
+`word.lemme in ("interpeller", "interpeler")`, the same both-spellings-checked pattern already
+used elsewhere in the file (`_reform1990OrthoRewrites.get(word.lemme) or .get(word.ortho)`).
+
+**Verification**: with both `APPLY_1990_REFORM_LEMMES` and `APPLY_1990_REFORM_INTERPELER` on,
+spot-checked all 13 rewritten forms letter-by-letter against `orthosyll_cv`
+(`interpella`->`interpela`, `interpeller`->`interpeler`, `interpellez`->`interpelez`,
+`interpellé(e)(s)`->`interpelé(e)(s)`, etc.) and confirmed `interpelle`/`interpellent`/
+`interpellerait` stay double-l unchanged, and the unrelated derived nouns `interpellateur`/
+`interpellation` (different lemma) are untouched. Flag-off byte-identical to session start,
+413 tests pass, mypy unchanged (same 9 pre-existing errors).
+
+## OQLF cross-validation of the whole reform1990.tsv word list -- done, same session
+
+Per the user's request, fetched and parsed the OQLF's full alphabetical list (2708 table rows,
+~3500 headwords once split) as a second, independent authoritative source, then cross-checked
+every one of `reform1990.tsv`'s 270 data rows' `newSpelling` against it (`grep`/regex over the
+raw HTML table structure, not the AI-summarized version -- the summarizer's excerpt was
+misleadingly truncated and its plain-text tag-stripping had cell-concatenation bugs that produced
+false negatives at first, e.g. "aigüe" appearing glued to an adjacent cell's "adj. m." -- fixed by
+parsing actual `<tr><td>` structure and by inserting whitespace between adjacent HTML tags before
+stripping them, rather than trusting either the summarizer or a naive tag-strip).
+
+**Result: broadly confirmatory, no errors found.** 234/270 rows matched directly. Of the
+remaining 36: `sûre` (an isException row -- expected to be absent, that's the point of the row);
+4 tréma words already marked `appliesToOrthoRewrite=False` for "neither spelling attested" (a
+documentation-completeness gap only, no behavior depends on it); and the rest are legitimate,
+independently-corpus-attested words (loanword accent additions, `-men`/`-y` English plurals,
+`boutillier`/`ballottine`/`féeriquement`, etc.) that simply don't appear ANYWHERE in the OQLF
+page (verified directly -- e.g. "hobby", "clergyman", "jazzman", "pénalty", "béluga",
+"cameraman", "boutillier" don't occur even as substrings) alongside already-accepted words like
+`barman` that DO appear (`barman, n. m. / Au pluriel : barmans, barmaids`). Since OQLF's list is
+demonstrably non-exhaustive for rarer or foreign-derived words (proven by `barman` being present
+while structurally identical `clergyman` is entirely absent), and category 3's underlying rule is
+an explicit, general grammatical principle in the reform text itself ("les mots empruntés forment
+leur pluriel de la même manière que les mots français"), absence from OQLF is inconclusive rather
+than contradictory for these -- no changes made to any of them.
+
 ## If resuming: what's genuinely still open
 
-- **Category 3** (mots empruntés/loanwords, ~521 words) is the only sourced-list category left
-  entirely unstarted -- needs new transformation logic (pluralization-suffix regularization,
-  e.g. `matches`->`matchs`, `maxima`->`maximums`; not a simple character edit like the categories
-  done so far) not yet designed.
 - **Category 8's lemme-merge companion** (so `cliquettement`/`cliquètement`-style family
   collisions resolve the same way the diacritic categories' do) -- small, well-scoped follow-up.
-- **`interpeller`/`interpeler`** (see above) -- needs an alias fix in category 8's matching, not
-  a `reform1990.tsv` row.
 - **`absous`/`dissous`/`repartie`/`repartir`** (see above) -- excluded pending dedicated
   gramCat-aware handling (absous/dissous) or manual linguistic research (repartie/repartir) not
   done this session.
 - Categories 1, 2, 4, 11 are conclusively out of scope for this pipeline (phrase-level rules or
   100%-hyphenated word lists that never survive into `LexiqueMixte.tsv`) -- nothing more to do
   there, this isn't a "come back later" item.
-- Nothing here is blocking; this file plus the plan file are a complete record if the thread needs
-  to be picked back up later.
+- **The `dictionary.py`/`ambiguitychecker` crash described above** (pre-existing, in the
+  uncommitted roadmap rewrite, not reform1990) means this session could NOT re-run the aggregate
+  ambiguity-mass verification that earlier phases did (lemma-homophone cluster counts, overflow
+  frequency mass) -- that check needs either the crash fixed first or a temporary stash of the
+  uncommitted `dictionary.py`/`src/word.py` changes to fall back to the last-known-good version.
+- All 12 sourced word-list categories (1-12) have now been investigated, and both other
+  originally-open items (category 3, `interpeller`/`interpeler`) are done. Only
+  `absous`/`dissous`/`repartie`/`repartir` remains genuinely open. Nothing here is blocking; this
+  file plus the plan file are a complete record if the thread needs to be picked back up later.

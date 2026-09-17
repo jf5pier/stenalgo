@@ -106,7 +106,8 @@ def _readReform1990Rows(tsvPath: str) -> list[list[str]]:
     """
     Read resources/reform1990.tsv (comment lines starting with '#', a header row, then
     tab-separated oldSpelling/newSpelling/category/appliesToLemmeNormalization/
-    appliesToOrthoRewrite/isException/note rows), padded to the fixed 7-column width.
+    appliesToOrthoRewrite/appliesToPluralRewrite/isException/note rows), padded to the
+    fixed 8-column width.
     """
     with open(tsvPath, encoding="utf-8") as tsvFile:
         rawRows = [line.rstrip("\n") for line in tsvFile if not line.startswith("#")]
@@ -115,8 +116,8 @@ def _readReform1990Rows(tsvPath: str) -> list[list[str]]:
         if not row.strip():
             continue
         fields = row.split("\t")
-        fields += [""] * (7 - len(fields))
-        rows.append(fields[:7])
+        fields += [""] * (8 - len(fields))
+        rows.append(fields[:8])
     return rows
 
 
@@ -127,7 +128,8 @@ def loadReform1990Lemmes(tsvPath: str) -> dict[str, str]:
     """
     reformLemmes: dict[str, str] = {}
     for oldSpelling, newSpelling, _category, appliesToLemmeNormalization, \
-            _appliesToOrthoRewrite, isException, _note in _readReform1990Rows(tsvPath):
+            _appliesToOrthoRewrite, _appliesToPluralRewrite, isException, _note \
+            in _readReform1990Rows(tsvPath):
         if appliesToLemmeNormalization == "True" and isException == "False":
             reformLemmes[oldSpelling] = newSpelling
     return reformLemmes
@@ -210,7 +212,8 @@ def loadReform1990OrthoRewrites(tsvPath: str) -> dict[str, "OrthoRewriteRule"]:
     """
     rewrites: dict[str, OrthoRewriteRule] = {}
     for oldSpelling, newSpelling, _category, _appliesToLemmeNormalization, \
-            appliesToOrthoRewrite, isException, _note in _readReform1990Rows(tsvPath):
+            appliesToOrthoRewrite, _appliesToPluralRewrite, isException, _note \
+            in _readReform1990Rows(tsvPath):
         if appliesToOrthoRewrite != "True" or isException == "True":
             continue
         rule = computeSingleEditRule(oldSpelling, newSpelling)
@@ -304,6 +307,69 @@ def applyOrthoRewrite(text: str, rule: OrthoRewriteRule, occurrence: int) -> str
 
 _reform1990OrthoRewrites: dict[str, OrthoRewriteRule] = (
     loadReform1990OrthoRewrites("resources/reform1990.tsv") if APPLY_1990_REFORM_ORTHO else {}
+)
+
+
+# Off by default, and independent of the other three reform flags: category 3's
+# "mots empruntés" plural-regularization (e.g. "des barmen" -> "des barmans"). Unlike
+# the diacritic categories above, this is a literal whole-plural swap, not a single
+# fixed-position character edit -- it never touches the singular row, and the reform1990.tsv
+# oldSpelling/newSpelling here ARE the full irregular/regularized plural spellings (not a
+# lemme). See resources/reform1990.tsv's "mots_empruntes_pluriel" rows and
+# scratch/reform1990/STATUS.md for sourcing (only pairs where Lexique383 already attests
+# BOTH the sourced regular plural and some other, differing plural spelling under the
+# same lemme are included -- that differing spelling is the row this rewrites).
+APPLY_1990_REFORM_EMPRUNT_PLURIEL: bool = False
+
+
+def loadReform1990PluralRewrites(tsvPath: str) -> dict[str, str]:
+    """
+    Parse resources/reform1990.tsv into an {oldPlural: newPlural} dict, keeping only
+    rows where appliesToPluralRewrite is true and isException is false.
+    """
+    pluralRewrites: dict[str, str] = {}
+    for oldSpelling, newSpelling, _category, _appliesToLemmeNormalization, \
+            _appliesToOrthoRewrite, appliesToPluralRewrite, isException, _note \
+            in _readReform1990Rows(tsvPath):
+        if appliesToPluralRewrite == "True" and isException == "False":
+            pluralRewrites[oldSpelling] = newSpelling
+    return pluralRewrites
+
+
+def rewriteOrthosyllSuffix(orthosyllCv: str, oldOrtho: str, newOrtho: str) -> str:
+    """
+    Rewrite orthosyllCv's trailing letters to match newOrtho, given that oldOrtho and
+    newOrtho share a common prefix (e.g. "barmen"/"barmans" share "barm") and differ only
+    in their suffix. Finds the syllable-string index right after the shared prefix's last
+    letter (counting only letters, so separators "_"/"|" and multi-letter graphemes like
+    "ch" are handled transparently -- iterating characters one at a time naturally counts
+    both letters of a digraph token), keeps everything up to there, and appends the new
+    suffix's letters directly (no separator), the same trailing-digraph convention already
+    used by applyOrthoRewrite's insertion case. Verified letter-by-letter against real
+    corpus rows for barmen->barmans, brunches->brunchs, curricula->curriculums, and
+    scénarii->scénarios (see scratch/reform1990/STATUS.md).
+    """
+    prefixLen = 0
+    for o, n in zip(oldOrtho, newOrtho):
+        if o != n:
+            break
+        prefixLen += 1
+    newSuffix = newOrtho[prefixLen:]
+    letterCount = 0
+    cutIndex = len(orthosyllCv)
+    for i, ch in enumerate(orthosyllCv):
+        if ch in "_|":
+            continue
+        letterCount += 1
+        if letterCount == prefixLen:
+            cutIndex = i + 1
+            break
+    return orthosyllCv[:cutIndex] + newSuffix
+
+
+_reform1990PluralRewrites: dict[str, str] = (
+    loadReform1990PluralRewrites("resources/reform1990.tsv")
+    if APPLY_1990_REFORM_EMPRUNT_PLURIEL else {}
 )
 
 
@@ -412,6 +478,38 @@ _elerEterQualifyingVerbs: dict[str, str] = (
     loadElerEterQualifyingVerbs("resources/verbiste/verbs-fr.xml")
     if APPLY_1990_REFORM_ELER_ETER else {}
 )
+
+
+# interpeller/interpeler is a one-off, NOT covered by the general -eler mechanism above.
+# Verbiste's own template tags reflect the traditional infinitive spelling ("interpeller",
+# double-l) matching neither app:eler (single-l infinitive) nor any other verb this project's
+# category-8 mechanism handles, so it never qualifies via loadElerEterQualifyingVerbs() at all.
+# More importantly, Lexique383's actual "interpeller" rows show the double consonant in EVERY
+# form -- infinitive, imparfait, participles, passé simple -- not just the "e ouvert" stressed
+# slots the way every other -eler verb (regular or appeler/jeter-exception) does; a plain
+# family-wide single-edit deletion (like categories 9/10/12 use) would incorrectly touch the
+# stressed forms too, and the doubled-consonant->accent regularizer above would incorrectly
+# also match the infinitive (which, unlike every regular -eler verb, literally starts with the
+# doubled-consonant prefix). Resolved by consulting the OQLF's Banque de dépannage linguistique
+# (authoritative, dedicated per-word note, fetched 2026-09-16):
+# "Consonne simple après e prononcé [ə] : interpelons, interpelait (mais interpelle). Présent,
+# imparfait, passé simple, subjonctif, impératif et participes aussi touchés" -- i.e. every form
+# loses one 'l' EXCEPT the je/tu/il/ils présent-tense-family forms (interpelle/interpellent) and
+# the futur/conditionnel forms built on that same stressed radical (interpellerai-style), which
+# keep the double consonant unchanged, matching the traditional appeler/rappeler exception
+# pattern rather than the regular -eler accent regularization.
+APPLY_1990_REFORM_INTERPELER: bool = False
+
+_interpelerRule = computeSingleEditRule("interpeller", "interpeler")
+
+# The exact Lexique383 "interpeller"-lemme ortho spellings needing the single-l fix (every
+# attested row except the présent/subjonctif/impératif stressed forms and futur/conditionnel
+# forms, which correctly keep their double consonant and are deliberately absent from this set).
+INTERPELER_FIXED_FORMS = frozenset({
+    "interpeller", "interpella", "interpellai", "interpellaient", "interpellais",
+    "interpellait", "interpellant", "interpellez", "interpellèrent", "interpellé",
+    "interpellée", "interpellées", "interpellés",
+})
 
 
 def normalizeLemme(lemme: str, gram_cat: str) -> str:
@@ -1067,6 +1165,25 @@ class Lexique:
                         if rewrittenOrtho is not None:
                             orthoOut = rewrittenOrtho
                             orthosyllOut = regularizeElerEterOrthosyll(orthosyllOut, consonant)
+                    # Category 3 loanword plural regularization (e.g. barmen -> barmans) --
+                    # a literal whole-plural swap, restricted to number=="p" rows, keyed by
+                    # the word's own original ortho (never its lemme, since that's the
+                    # singular).
+                    if word.number == "p":
+                        newPlural = _reform1990PluralRewrites.get(word.ortho)
+                        if newPlural is not None:
+                            orthosyllOut = rewriteOrthosyllSuffix(orthosyllOut, word.ortho, newPlural)
+                            orthoOut = newPlural
+                    # interpeller/interpeler: one-off per-form fix, see INTERPELER_FIXED_FORMS.
+                    # Checked against both spellings since APPLY_1990_REFORM_LEMMES (if also on)
+                    # already normalizes word.lemme from "interpeller" to "interpeler" at
+                    # word-construction time, before this output step ever runs.
+                    if APPLY_1990_REFORM_INTERPELER and word.lemme in ("interpeller", "interpeler") \
+                            and word.ortho in INTERPELER_FIXED_FORMS:
+                        occurrence = orthoRewriteOccurrence(word.ortho, _interpelerRule)
+                        if occurrence is not None:
+                            orthoOut = applyOrthoRewrite(orthoOut, _interpelerRule, occurrence)
+                            orthosyllOut = applyOrthoRewrite(orthosyllOut, _interpelerRule, occurrence)
                     corpus.writerow({
                         "ortho": orthoOut,
                         "phon": word.phonology,
