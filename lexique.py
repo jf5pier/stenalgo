@@ -512,6 +512,27 @@ INTERPELER_FIXED_FORMS = frozenset({
 })
 
 
+# absous/absout, dissous/dissout: the masculine singular past participle of absoudre/dissoudre
+# is spelled with an irregular final "s" (unlike the feminine "absoute"/"dissoute"); the reform
+# corrects it to match the feminine's "t" -- confirmed minimal and unconditional by the OQLF's
+# Banque de dépannage linguistique (fetched 2026-09-16): "absout, p. p. -- Du verbe absoudre" /
+# "dissout, p. p. -- Du verbe dissoudre", no further note or caveat.
+#
+# Lexique383 also carries a SEPARATE ADJ-tagged row at the exact same spelling for each --
+# "absous" ADJ (m, s, freq 0.02) alongside the VER row, and "dissous" ADJ (m, PLURAL, freq 0.27)
+# alongside the VER row (singular). Gated on gram_cat=="VER" here since the generic
+# lemme/ortho-keyed ortho-rewrite mechanism above can't otherwise distinguish rows sharing a
+# lemme or ortho by gramCat -- and the ADJ rows are deliberately left untouched: OQLF's own
+# entries only address the participle, with no plural form or ADJ-homograph caveat, so there's
+# no sourced basis for guessing whether "dissous" ADJ (plural) should become "dissouts" or stay
+# "dissous", or whether "absous" ADJ (the same spelling, singular) is really the same participial
+# adjective as the VER row or a distinct headword -- left for future research, not guessed here.
+APPLY_1990_REFORM_ABSOUS_DISSOUS: bool = False
+
+_absousRule = computeSingleEditRule("absous", "absout")
+_dissousRule = computeSingleEditRule("dissous", "dissout")
+
+
 def normalizeLemme(lemme: str, gram_cat: str) -> str:
     canonical = pronounParadigmLemme.get((lemme, gram_cat))
     if canonical is not None:
@@ -1184,6 +1205,16 @@ class Lexique:
                         if occurrence is not None:
                             orthoOut = applyOrthoRewrite(orthoOut, _interpelerRule, occurrence)
                             orthosyllOut = applyOrthoRewrite(orthosyllOut, _interpelerRule, occurrence)
+                    # absous/absout, dissous/dissout: gated on gram_cat=="VER" so the separate
+                    # ADJ-tagged homograph rows (see comment above APPLY_1990_REFORM_ABSOUS_DISSOUS)
+                    # are deliberately left untouched.
+                    if APPLY_1990_REFORM_ABSOUS_DISSOUS and word.gram_cat == "VER" \
+                            and word.ortho in ("absous", "dissous"):
+                        rule = _absousRule if word.ortho == "absous" else _dissousRule
+                        occurrence = orthoRewriteOccurrence(word.ortho, rule)
+                        if occurrence is not None:
+                            orthoOut = applyOrthoRewrite(orthoOut, rule, occurrence)
+                            orthosyllOut = applyOrthoRewrite(orthosyllOut, rule, occurrence)
                     corpus.writerow({
                         "ortho": orthoOut,
                         "phon": word.phonology,

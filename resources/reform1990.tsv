@@ -164,7 +164,7 @@ mangeotter	mangeoter	olle_otter	False	False	False	False	neither spelling present
 moucherolle	moucherole	olle_otter	False	False	False	False	neither spelling present in Lexique383 corpus
 tavaïolle	tavaïole	olle_otter	False	False	False	False	neither spelling present in Lexique383 corpus
 yoyotter	yoyoter	olle_otter	False	False	False	False	neither spelling present in Lexique383 corpus
-absous	absout	autres_rectifications	False	False	False	True	excluded: "absous" is also a separate ADJ lemma ("acquitted"), distinct from the VER past-participle sense this pair targets -- ambiguous to rewrite safely without touching the unrelated ADJ
+absous	absout	autres_rectifications	False	False	False	False	handled by a dedicated gram_cat=="VER"-gated mechanism in lexique.py (APPLY_1990_REFORM_ABSOUS_DISSOUS), not the generic ortho-rewrite mechanism, since "absous" is also a separate ADJ-tagged row at the same spelling -- see lexique.py's comment above that flag. Confirmed minimal/unconditional by the OQLF's Banque de dépannage linguistique: "absout, p. p. -- Du verbe absoudre", no caveat. The ADJ row itself is deliberately left untouched (no sourced basis to rewrite it).
 acupuncture	acuponcture	autres_rectifications	True	True	False	False	
 allô	allo	autres_rectifications	True	True	False	False	
 appas	appâts	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
@@ -192,7 +192,7 @@ cuissot	cuisseau	autres_rectifications	False	False	False	False	needs a multi-cha
 dessiller	déciller	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
 dentelière	dentelier	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
 disaccharide	disaccaride	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
-dissous	dissout	autres_rectifications	False	False	False	True	excluded: "dissous" is also a separate ADJ lemma, same ambiguity as absous/absout
+dissous	dissout	autres_rectifications	False	False	False	False	handled by the same gram_cat=="VER"-gated mechanism as absous/absout (APPLY_1990_REFORM_ABSOUS_DISSOUS) -- see that row's note. Confirmed minimal/unconditional by OQLF: "dissout, p. p. -- Du verbe dissoudre". Lexique383's separate ADJ-tagged "dissous" row is masculine PLURAL (not singular like absous's ADJ row) -- deliberately left untouched, since neither OQLF nor any source consulted confirms whether the correct reformed plural is "dissouts" or unchanged "dissous".
 douceâtre	douçâtre	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
 embatre	embattre	autres_rectifications	False	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
 eczéma	exéma	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
@@ -239,8 +239,8 @@ receleur	recéleur	autres_rectifications	False	True	False	False
 recepage	recépage	autres_rectifications	False	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
 recepée	recépée	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
 relais	relai	autres_rectifications	False	True	False	False	
-repartie	répartie	autres_rectifications	False	False	False	True	excluded: "repartie" is a 3-way homograph (NOM "a witty retort", VER fem. participle of repartir "left again") -- too ambiguous to rewrite safely without dedicated per-gramCat handling not done this session
-repartir	répartir	autres_rectifications	False	False	False	True	excluded: "repartir" (to leave again) and "répartir" (to distribute) are established, unrelated verbs in modern French, not clearly a reform spelling-variant pair -- needs manual research not done this session
+repartie	répartie	autres_rectifications	False	False	False	True	excluded, confirmed permanently out of scope (not just unresearched): the OQLF's Banque de dépannage linguistique (fetched 2026-09-16) confirms this pair is SENSE-RESTRICTED -- "répartie, n. f. -- Au sens de «réplique, réponse orale» -- Ou selon la prononciation : repartie" -- i.e. only the rare "witty retort" sense of répartie is affected, not the (unrelated) feminine past participle of repartir ("left again") that happens to share the same spelling. Lexique383 has no sense-level tagging (only ortho/lemme/gramCat), so there's no way to tell which corpus occurrences are eligible; excluded on principle, not for lack of research time.
+repartir	répartir	autres_rectifications	False	False	False	True	excluded, confirmed permanently out of scope (not just unresearched): OQLF confirms the same sense restriction as répartie/repartie above -- "répartir, v. -- Au sens de «répliquer» -- Tous les temps du verbe aussi touchés -- Ou selon la prononciation : repartir" -- i.e. only the rare, archaic "to retort" sense of répartir is affected, NOT its common "to distribute" sense, and NOT the unrelated verb repartir ("to leave again"). Lexique383 has no sense-level tagging to distinguish which "répartir" corpus rows (overwhelmingly the "distribute" sense) would be eligible; excluded on principle.
 robinetier	robinétier	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
 sorgho	sorgo	autres_rectifications	False	True	False	False	
 sotie	sottie	autres_rectifications	False	True	False	False	
