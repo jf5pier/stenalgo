@@ -666,22 +666,60 @@ an explicit, general grammatical principle in the reform text itself ("les mots 
 leur pluriel de la même manière que les mots français"), absence from OQLF is inconclusive rather
 than contradictory for these -- no changes made to any of them.
 
+## `absous`/`dissous`/`repartie`/`repartir` -- done, same session, continued further
+
+**`absous`/`dissous`: done.** The OQLF's per-word entries turned out to be minimal and
+unconditional -- "absout, p. p. -- Du verbe absoudre" / "dissout, p. p. -- Du verbe dissoudre",
+no caveat about the ADJ homograph or the plural form the earlier session's exclusion note worried
+about. Implemented the same way as `interpeller`/`interpeler`: a dedicated small mechanism
+(`APPLY_1990_REFORM_ABSOUS_DISSOUS`, off by default) rather than the generic lemme/ortho-keyed
+ortho-rewrite mechanism, since that mechanism can't distinguish rows sharing a lemme/ortho by
+gramCat and both words have a same-spelling ADJ-tagged row Lexique383 carries alongside the VER
+row (`absous` ADJ is masculine singular, same number as the VER row; `dissous` ADJ is masculine
+PLURAL, a different number from its singular VER row). Gated on `word.gram_cat == "VER"` so only
+the true past-participle row is touched in each case -- verified in the generated output:
+`absous`(VER)->`absout`, `dissous`(VER)->`dissout`, while `absous`(ADJ) and `dissous`(ADJ,
+plural) are correctly left untouched, and the already-`t`-spelled `absoute(s)`/`dissoute(s)`
+family rows are unaffected. The ADJ rows remain deliberately unhandled: OQLF gives no basis for
+guessing whether `dissous` ADJ's correct reformed plural is `dissouts` or unchanged `dissous`, or
+whether `absous` ADJ is really the same participial adjective as the VER row or a distinct
+headword -- left open for future research if it ever matters, not guessed here.
+
+**`repartie`/`repartir`: confirmed permanently out of scope, not just unresearched.** The OQLF
+entries reveal this is a SENSE-RESTRICTED rule, which the earlier session's framing ("needs
+manual research") didn't anticipate: "répartie, n. f. -- Au sens de «réplique, réponse orale» --
+Ou selon la prononciation : repartie" and "répartir, v. -- Au sens de «répliquer» -- Tous les
+temps du verbe aussi touchés -- Ou selon la prononciation : repartir". I.e. the reform only
+touches the RARE "witty retort"/"to retort" sense of répartie/répartir -- not répartie's common
+"distributed" (fem. past participle) sense, and not répartir's overwhelmingly common "to
+distribute" sense (nor the unrelated verb `repartir` = "to leave again"). Lexique383 has no
+sense-level tagging (only ortho/lemme/gramCat), so there is structurally no way to identify which
+corpus rows would even be eligible -- this is excluded on principle now, a permanent pipeline
+limitation rather than a "come back and research it later" item.
+
+**Verification** (both new findings, `absous`/`dissous` mechanism specifically): flag-off
+byte-identical to session start, 413 tests pass, mypy unchanged (same 9 pre-existing errors).
+`reform1990.tsv`'s four rows updated with the sourced findings (absous/dissous flipped from
+`isException=True` to a note pointing at the new dedicated mechanism; repartie/repartir's notes
+rewritten to state the sense-restriction finding, `isException=True` unchanged).
+
 ## If resuming: what's genuinely still open
 
 - **Category 8's lemme-merge companion** (so `cliquettement`/`cliquètement`-style family
-  collisions resolve the same way the diacritic categories' do) -- small, well-scoped follow-up.
-- **`absous`/`dissous`/`repartie`/`repartir`** (see above) -- excluded pending dedicated
-  gramCat-aware handling (absous/dissous) or manual linguistic research (repartie/repartir) not
-  done this session.
+  collisions resolve the same way the diacritic categories' do) -- small, well-scoped follow-up,
+  the only thing left that's a genuine "come back later" item.
 - Categories 1, 2, 4, 11 are conclusively out of scope for this pipeline (phrase-level rules or
-  100%-hyphenated word lists that never survive into `LexiqueMixte.tsv`) -- nothing more to do
-  there, this isn't a "come back later" item.
-- **The `dictionary.py`/`ambiguitychecker` crash described above** (pre-existing, in the
+  100%-hyphenated word lists that never survive into `LexiqueMixte.tsv`), and `repartie`/
+  `repartir` are now similarly conclusively out of scope (sense-restricted, no corpus hook) --
+  none of these are "come back later" items.
+- `dissous` ADJ's plural form and `absous` ADJ's relationship to the VER row (see above) are
+  small, well-scoped follow-ups if ever worth the research; low priority given their rarity.
+- **The `dictionary.py`/`ambiguitychecker` crash described earlier** (pre-existing, in the
   uncommitted roadmap rewrite, not reform1990) means this session could NOT re-run the aggregate
   ambiguity-mass verification that earlier phases did (lemma-homophone cluster counts, overflow
   frequency mass) -- that check needs either the crash fixed first or a temporary stash of the
   uncommitted `dictionary.py`/`src/word.py` changes to fall back to the last-known-good version.
-- All 12 sourced word-list categories (1-12) have now been investigated, and both other
-  originally-open items (category 3, `interpeller`/`interpeler`) are done. Only
-  `absous`/`dissous`/`repartie`/`repartir` remains genuinely open. Nothing here is blocking; this
-  file plus the plan file are a complete record if the thread needs to be picked back up later.
+- All 12 sourced word-list categories (1-12), `interpeller`/`interpeler`, and
+  `absous`/`dissous`/`repartie`/`repartir` have all now been resolved (implemented or
+  conclusively excluded). This thread is essentially complete; this file plus the plan file are
+  a full record if it needs to be picked back up later.
