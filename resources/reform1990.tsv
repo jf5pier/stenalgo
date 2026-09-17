@@ -19,17 +19,36 @@
 # conjugation data rather than needing each conjugated form listed individually; see
 # scratch/reform1990/STATUS.md for that mechanism's sourcing and validation, including a
 # known gap (interpeller/interpeler, documented as an exception row below).
-# Categories 2/3/4 (pluriels de mots composés, mots empruntés, mots soudés) are NOT yet
-# represented. Categories 2 and 4 turned out to be entirely moot for this pipeline --
-# ALL of their target words are hyphenated compounds, and hyphenated words never survive
+# Categories 2/4 (pluriels de mots composés, mots soudés) are NOT represented: ALL of
+# their target words are hyphenated compounds, and hyphenated words never survive
 # lexique.py's syllable-breakdown filter into LexiqueMixte.tsv at all (confirmed: 0
 # hyphenated rows in the committed output), so there is nothing for an ortho-rewrite
-# mechanism to touch even if built. Category 3 (loanwords) remains open -- its target
-# words aren't hyphenated, so it isn't structurally moot the same way, but needs its own
-# transformation logic (pluralization-suffix regularization, not a simple character edit)
-# not yet designed. Two categories (numéraux composés, participe passé de "laisser") are
-# phrase/syntax-level rules with no row-level hook in a word lexicon at all -- see the
-# two placeholder rows at the end, kept for completeness of this reference file only.
+# mechanism to touch even if built. Two categories (numéraux composés, participe passé de
+# "laisser") are phrase/syntax-level rules with no row-level hook in a word lexicon at
+# all -- see the two placeholder rows at the end, kept for completeness only.
+#
+# Category 3 (mots empruntés/loanwords) splits into two independent sub-categories,
+# since a loanword can need either, both, or neither:
+#   - "mots_empruntes_accent" -- the reform adds a French accent to a bare loanword
+#     letter (e.g. arboretum -> arborétum). Mechanically identical to the other
+#     accent-diacritic categories above: a single-character substitution/insertion,
+#     appliesToOrthoRewrite=true, generalizes across the word's whole family exactly
+#     like circonflexe/accent_grave/trema. Old spellings were found by trying every
+#     accent-stripping of the sourced new spelling and checking corpus attestation
+#     (scratch/reform1990/cat3_extract.py), same "corpus already has both spellings"
+#     philosophy as the other categories.
+#   - "mots_empruntes_pluriel" -- the reform regularizes an irregular/foreign plural to
+#     a plain French "-s" (e.g. un match, des matches -> des matchs). This is NOT a
+#     single-character edit (barmen -> barmans, curricula -> curriculums are whole-suffix
+#     replacements) and does NOT touch the singular row at all -- appliesToPluralRewrite
+#     is a separate boolean/mechanism (lexique.py's loadReform1990PluralRewrites()) that
+#     does a literal ortho match-and-replace restricted to number=="p" rows. Pairs were
+#     only accepted where Lexique383 already has BOTH the reform's stated new plural
+#     (from the Wiktionnaire subpage) AND some other, differing plural spelling under the
+#     same lemme+number="p" (that differing spelling is the corpus's actual irregular
+#     plural, not guessed) -- same "both independently attested" discipline as the rest
+#     of this file, plus a gramCat/gender check per pair (see bêtasses/nues below for the
+#     two danger cases that check caught).
 #
 # appliesToOrthoRewrite's transform is a single-character edit (substitution, deletion,
 # OR insertion -- see lexique.py's computeSingleEditRule()) applied to a word's whole
@@ -55,6 +74,10 @@
 # updated to the new spelling, not just rows that already collide with an
 # existing new-spelling row. This is what makes LexiqueMixte.tsv generative
 # under the new norm instead of merely collision-free.
+# appliesToPluralRewrite=true rows are the ones lexique.py's optional
+# APPLY_1990_REFORM_EMPRUNT_PLURIEL pass rewrites -- a literal ortho match-and-replace
+# on number=="p" rows only (oldSpelling here IS the full irregular plural form, not a
+# lemme or a singular). Independent of the other three flags.
 # isException=true rows must NOT be merged or rewritten -- either a
 # documented reform exception (sûr/sûre keeps its circumflex) or a homograph
 # collision with an unrelated, more common word (mûre/mure, fût/fut,
@@ -63,174 +86,274 @@
 # genuine pairs as false positives -- see scratch/reform1990/STATUS.md for
 # the full comparison).
 #
-oldSpelling	newSpelling	category	appliesToLemmeNormalization	appliesToOrthoRewrite	isException	note
-boîte	boite	circonflexe	True	True	False
-croît	croit	circonflexe	False	False	True	homograph collision found during ortho-rewrite verification: Lexique383 has two distinct-lemma rows both spelled "croît" (NOM "le croît" = growth/increase, and VER 3rd-pers. présent of croître = "it grows"); rewriting only the NOM row to "croit" would newly collide with the far more common "croit" (VER, croire = believes) while leaving "il croît" untouched -- same class of issue as fût/faîte/mûre, and "croît" NOM is essentially unused (freq ~0) so nothing is lost by excepting it
-dessoûler	dessouler	circonflexe	True	True	False
-faîne	faine	circonflexe	True	True	False
-faîte	faite	circonflexe	False	False	True	homograph collision: "faite" is the extremely common fem. past participle of faire
-fût	fut	circonflexe	False	False	True	homograph collision: "fut" is the standard passé-simple of être ("il fut")
-île	ile	circonflexe	False	False	True	already handled by lexique.py's existing spellingVariantLemme entry ("ile" -> "île", opposite direction, frequency-driven -- excluded here to avoid a directional conflict
-mû	mu	circonflexe	True	True	False
-mûre	mure	circonflexe	False	False	True	homograph collision: "mure" is a conjugated form of murer ("to wall up")
-soûl	soul	circonflexe	True	True	False
-sûre	sure	circonflexe	False	False	True	documented Académie exception: circumflex is explicitly kept on sûr/sûrs/sûre/sûres because "sure" already means something else (sour/tart)
-allégement	allègement	accent_grave	True	True	False
-allégrement	allègrement	accent_grave	True	True	False
-empiétement	empiètement	accent_grave	True	True	False
-piétement	piètement	accent_grave	True	True	False
-événement	évènement	accent_grave	True	True	False
-événementiel	évènementiel	accent_grave	True	True	False
-aiguë	aigüe	trema	False	False	False	new spelling not present in Lexique383 corpus, no lemma clash possible
-ambiguïté	ambigüité	trema	False	False	False	new spelling not present in Lexique383 corpus, no lemma clash possible
-arguer	argüer	trema	False	False	False	new spelling not present in Lexique383 corpus, no lemma clash possible
-bringeure	bringeüre	trema	False	False	False	neither spelling present in Lexique383 corpus
-chargeure	chargeüre	trema	False	False	False	neither spelling present in Lexique383 corpus
-égrugeure	égrugeüre	trema	False	False	False	neither spelling present in Lexique383 corpus
-gageure	gageüre	trema	False	False	False	new spelling not present in Lexique383 corpus, no lemma clash possible
-mangeure	mangeüre	trema	False	False	False	neither spelling present in Lexique383 corpus
-plingeure	plingeüre	trema	False	False	False	neither spelling present in Lexique383 corpus
-rongeure	rongeüre	trema	False	False	False	neither spelling present in Lexique383 corpus
-vergeure	vergeüre	trema	False	False	False	neither spelling present in Lexique383 corpus
-boutillier	boutiller	illier_illiere	True	True	False
-joaillier	joailler	illier_illiere	True	True	False
-quincaillier	quincailler	illier_illiere	True	True	False
-serpillière	serpillère	illier_illiere	True	True	False
-abeillier	abeiller	illier_illiere	False	False	False	neither spelling present in Lexique383 corpus
-bouteillier	bouteiller	illier_illiere	False	False	False	neither spelling present in Lexique383 corpus
-ouillière	ouillère	illier_illiere	False	False	False	neither spelling present in Lexique383 corpus
-aiguillier	aiguiller	illier_illiere	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
-quillier	quiller	illier_illiere	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
-cocotter	cocoter	olle_otter	True	True	False
-dansotter	dansoter	olle_otter	True	True	False
-dégotter	dégoter	olle_otter	True	True	False
-fayotter	fayoter	olle_otter	True	True	False
-grolle	grole	olle_otter	True	True	False
-guibolle	guibole	olle_otter	True	True	False
-margotter	margoter	olle_otter	True	True	False
-mariolle	mariole	olle_otter	True	True	False
-ballottage	ballotage	olle_otter	True	True	False
-ballottement	ballotement	olle_otter	True	True	False
-ballotter	balloter	olle_otter	True	True	False
-ballottine	ballotine	olle_otter	True	True	False
-barcarolle	barcarole	olle_otter	True	True	False
-boulotter	bouloter	olle_otter	True	True	False
-cachotterie	cachoterie	olle_otter	True	True	False
-cachottier	cachotier	olle_otter	True	True	False
-corollaire	corolaire	olle_otter	True	True	False
-corolle	corole	olle_otter	True	True	False
-frisotter	frisoter	olle_otter	True	True	False
-frisottis	frisotis	olle_otter	True	True	False
-fumerolle	fumerole	olle_otter	True	True	False
-garrotter	garroter	olle_otter	True	True	False
-girolle	girole	olle_otter	True	True	False
-grelottement	grelotement	olle_otter	True	True	False
-grelotter	greloter	olle_otter	True	True	False
-muserolle	muserole	olle_otter	True	True	False
-roulotter	rouloter	olle_otter	True	True	False
-rousserolle	rousserole	olle_otter	True	True	False
-tartignolle	tartignole	olle_otter	True	True	False
-trolle	trole	olle_otter	True	True	False
-arolle	arole	olle_otter	False	False	False	neither spelling present in Lexique383 corpus
-barquerolle	barquerole	olle_otter	False	False	False	neither spelling present in Lexique383 corpus
-bouterolle	bouterole	olle_otter	False	False	False	neither spelling present in Lexique383 corpus
-fusarolle	fusarole	olle_otter	False	False	False	neither spelling present in Lexique383 corpus
-garrottage	garrotage	olle_otter	False	False	False	neither spelling present in Lexique383 corpus
-lignerolle	lignerole	olle_otter	False	False	False	neither spelling present in Lexique383 corpus
-mangeotter	mangeoter	olle_otter	False	False	False	neither spelling present in Lexique383 corpus
-moucherolle	moucherole	olle_otter	False	False	False	neither spelling present in Lexique383 corpus
-tavaïolle	tavaïole	olle_otter	False	False	False	neither spelling present in Lexique383 corpus
-yoyotter	yoyoter	olle_otter	False	False	False	neither spelling present in Lexique383 corpus
-absous	absout	autres_rectifications	False	False	True	excluded: "absous" is also a separate ADJ lemma ("acquitted"), distinct from the VER past-participle sense this pair targets -- ambiguous to rewrite safely without touching the unrelated ADJ
-acupuncture	acuponcture	autres_rectifications	True	True	False	
-allô	allo	autres_rectifications	True	True	False	
-appas	appâts	autres_rectifications	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
-asseoir	assoir	autres_rectifications	False	True	False	
-besicles	bésicles	autres_rectifications	True	True	False	
-billeterie	billèterie	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-bizuth	bizut	autres_rectifications	True	True	False	
-bonhomie	bonhommie	autres_rectifications	False	True	False	
-bonneterie	bonnèterie	autres_rectifications	False	True	False	
-boursouflage	boursoufflage	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-boursouflement	boursoufflement	autres_rectifications	False	True	False	
-boursoufler	boursouffler	autres_rectifications	False	True	False	
-boursouflure	boursoufflure	autres_rectifications	False	True	False	
-briqueterie	briquèterie	autres_rectifications	False	True	False	
-buffleterie	bufflèterie	autres_rectifications	False	True	False	
-cacahuète	cacahouète	autres_rectifications	True	True	False	
-cahute	cahutte	autres_rectifications	False	True	False	
-chariot	charriot	autres_rectifications	False	True	False	
-chariotage	charriotage	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-chariotée	charriotée	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-charioter	charrioter	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-combatif	combattif	autres_rectifications	False	True	False	
-combativité	combattivité	autres_rectifications	False	True	False	
-cuissot	cuisseau	autres_rectifications	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
-dessiller	déciller	autres_rectifications	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
-dentelière	dentelier	autres_rectifications	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
-disaccharide	disaccaride	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-dissous	dissout	autres_rectifications	False	False	True	excluded: "dissous" is also a separate ADJ lemma, same ambiguity as absous/absout
-douceâtre	douçâtre	autres_rectifications	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
-embatre	embattre	autres_rectifications	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
-eczéma	exéma	autres_rectifications	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
-eczémateux	exémateux	autres_rectifications	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
-féerie	féérie	autres_rectifications	False	True	False	
-féerique	féérique	autres_rectifications	False	True	False	
-féeriquement	féériquement	autres_rectifications	False	True	False	
-fjord	fiord	autres_rectifications	True	True	False	
-gailleterie	gaillèterie	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-ghilde	guilde	autres_rectifications	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
-gangréneuse	gangréneux	autres_rectifications	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
-gelinotte	gélinotte	autres_rectifications	True	True	False	
-gobeleterie	gobelèterie	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-graineterie	grainèterie	autres_rectifications	False	True	False	
-guillemeter	guilleméter	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-homœo-	homéo-	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-imbécillité	imbécilité	autres_rectifications	False	True	False	
-innomé	innommé	autres_rectifications	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
-levraut	levreau	autres_rectifications	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
-lunettier	lunetier	autres_rectifications	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
-mah-jong	majong	autres_rectifications	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
-marqueterie	marquèterie	autres_rectifications	False	True	False	
-messeoir	messoir	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-monosaccharide	monosaccaride	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-mousqueterie	mousquèterie	autres_rectifications	False	True	False	
-nénuphar	nénufar	autres_rectifications	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
-oignon	ognon	autres_rectifications	True	True	False	
-oignonade	ognonade	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-oignonière	ognonière	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-oléosaccharure	oléosaccarure	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-paneterie	panèterie	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-papeterie	papèterie	autres_rectifications	False	True	False	
-parqueterie	parquèterie	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-persiflage	persifflage	autres_rectifications	False	True	False	
-persifler	persiffler	autres_rectifications	False	True	False	
-persifleur	persiffleur	autres_rectifications	False	True	False	
-phœnix	phénix	autres_rectifications	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
-polysaccharide	polysaccaride	autres_rectifications	False	True	False	
-prunellier	prunelier	autres_rectifications	False	True	False	
-punch	ponch	autres_rectifications	False	True	False	
-québecois	québécois	autres_rectifications	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
-rasseoir	rassoir	autres_rectifications	False	True	False	
-receleur	recéleur	autres_rectifications	False	True	False	
-recepage	recépage	autres_rectifications	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
-recepée	recépée	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-relais	relai	autres_rectifications	False	True	False	
-repartie	répartie	autres_rectifications	False	False	True	excluded: "repartie" is a 3-way homograph (NOM "a witty retort", VER fem. participle of repartir "left again") -- too ambiguous to rewrite safely without dedicated per-gramCat handling not done this session
-repartir	répartir	autres_rectifications	False	False	True	excluded: "repartir" (to leave again) and "répartir" (to distribute) are established, unrelated verbs in modern French, not clearly a reform spelling-variant pair -- needs manual research not done this session
-robinetier	robinétier	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-sorgho	sorgo	autres_rectifications	False	True	False	
-sotie	sottie	autres_rectifications	False	True	False	
-surseoir	sursoir	autres_rectifications	False	True	False	
-téocali	téocalli	autres_rectifications	False	False	False	neither spelling present in Lexique383 corpus
-toquade	tocade	autres_rectifications	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
-toquante	tocante	autres_rectifications	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
-toquard	tocard	autres_rectifications	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
-trompeter	trompéter	autres_rectifications	False	True	False	
-vantail	ventail	autres_rectifications	True	True	False	
-vilenie	vilénie	autres_rectifications	False	True	False	
-saccharine	saccarine	autres_rectifications	False	True	False	
-saccharose	saccarose	autres_rectifications	False	True	False	
-interpeller	interpeler	autres_rectifications	False	False	True	excluded from automation: Lexique383's own lemme spelling for this verb is "interpeller" (double-l), mismatching Verbiste's "interpeler" (single-l) infinitive -- category 8's programmatic -eler/-eter mechanism never matches this verb's rows because of that lemme-spelling mismatch (a gap, not an intentional exclusion; confirmed interpeler is NOT a reform exception per the primary-source rule text). A simple single-edit ortho-rewrite here would incorrectly touch the stressed conjugated forms too (e.g. interpelle would become interpele, missing the required grave accent interpèle) since those need category 8's radical+accent regeneration, not a plain deletion. Needs a dedicated fix to category 8's matching (e.g. an alias table) rather than a reform1990.tsv row, not done this session.
-(n/a)	(n/a)	numeraux_composes	False	False	False	phrase-level rule (hyphenates multi-word number phrases, e.g. "cent vingt et un" -> "cent-vingt-et-un") -- no single-lexicon-entry hook, out of scope for lexique.py
-(n/a)	(n/a)	participe_passe_laisser	False	False	False	sentence-level grammatical agreement rule ("laissé" invariable before an infinitive) -- not a spelling variant of any lexicon entry, out of scope for lexique.py
+oldSpelling	newSpelling	category	appliesToLemmeNormalization	appliesToOrthoRewrite	appliesToPluralRewrite	isException	note
+boîte	boite	circonflexe	True	True	False	False	
+croît	croit	circonflexe	False	False	False	True	homograph collision found during ortho-rewrite verification: Lexique383 has two distinct-lemma rows both spelled "croît" (NOM "le croît" = growth/increase, and VER 3rd-pers. présent of croître = "it grows"); rewriting only the NOM row to "croit" would newly collide with the far more common "croit" (VER, croire = believes) while leaving "il croît" untouched -- same class of issue as fût/faîte/mûre, and "croît" NOM is essentially unused (freq ~0) so nothing is lost by excepting it
+dessoûler	dessouler	circonflexe	True	True	False	False	
+faîne	faine	circonflexe	True	True	False	False	
+faîte	faite	circonflexe	False	False	False	True	homograph collision: "faite" is the extremely common fem. past participle of faire
+fût	fut	circonflexe	False	False	False	True	homograph collision: "fut" is the standard passé-simple of être ("il fut")
+île	ile	circonflexe	False	False	False	True	already handled by lexique.py's existing spellingVariantLemme entry ("ile" -> "île", opposite direction, frequency-driven -- excluded here to avoid a directional conflict
+mû	mu	circonflexe	True	True	False	False	
+mûre	mure	circonflexe	False	False	False	True	homograph collision: "mure" is a conjugated form of murer ("to wall up")
+soûl	soul	circonflexe	True	True	False	False	
+sûre	sure	circonflexe	False	False	False	True	documented Académie exception: circumflex is explicitly kept on sûr/sûrs/sûre/sûres because "sure" already means something else (sour/tart)
+allégement	allègement	accent_grave	True	True	False	False	
+allégrement	allègrement	accent_grave	True	True	False	False	
+empiétement	empiètement	accent_grave	True	True	False	False	
+piétement	piètement	accent_grave	True	True	False	False	
+événement	évènement	accent_grave	True	True	False	False	
+événementiel	évènementiel	accent_grave	True	True	False	False	
+aiguë	aigüe	trema	False	False	False	False	new spelling not present in Lexique383 corpus, no lemma clash possible
+ambiguïté	ambigüité	trema	False	False	False	False	new spelling not present in Lexique383 corpus, no lemma clash possible
+arguer	argüer	trema	False	False	False	False	new spelling not present in Lexique383 corpus, no lemma clash possible
+bringeure	bringeüre	trema	False	False	False	False	neither spelling present in Lexique383 corpus
+chargeure	chargeüre	trema	False	False	False	False	neither spelling present in Lexique383 corpus
+égrugeure	égrugeüre	trema	False	False	False	False	neither spelling present in Lexique383 corpus
+gageure	gageüre	trema	False	False	False	False	new spelling not present in Lexique383 corpus, no lemma clash possible
+mangeure	mangeüre	trema	False	False	False	False	neither spelling present in Lexique383 corpus
+plingeure	plingeüre	trema	False	False	False	False	neither spelling present in Lexique383 corpus
+rongeure	rongeüre	trema	False	False	False	False	neither spelling present in Lexique383 corpus
+vergeure	vergeüre	trema	False	False	False	False	neither spelling present in Lexique383 corpus
+boutillier	boutiller	illier_illiere	True	True	False	False	
+joaillier	joailler	illier_illiere	True	True	False	False	
+quincaillier	quincailler	illier_illiere	True	True	False	False	
+serpillière	serpillère	illier_illiere	True	True	False	False	
+abeillier	abeiller	illier_illiere	False	False	False	False	neither spelling present in Lexique383 corpus
+bouteillier	bouteiller	illier_illiere	False	False	False	False	neither spelling present in Lexique383 corpus
+ouillière	ouillère	illier_illiere	False	False	False	False	neither spelling present in Lexique383 corpus
+aiguillier	aiguiller	illier_illiere	False	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
+quillier	quiller	illier_illiere	False	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
+cocotter	cocoter	olle_otter	True	True	False	False	
+dansotter	dansoter	olle_otter	True	True	False	False	
+dégotter	dégoter	olle_otter	True	True	False	False	
+fayotter	fayoter	olle_otter	True	True	False	False	
+grolle	grole	olle_otter	True	True	False	False	
+guibolle	guibole	olle_otter	True	True	False	False	
+margotter	margoter	olle_otter	True	True	False	False	
+mariolle	mariole	olle_otter	True	True	False	False	
+ballottage	ballotage	olle_otter	True	True	False	False	
+ballottement	ballotement	olle_otter	True	True	False	False	
+ballotter	balloter	olle_otter	True	True	False	False	
+ballottine	ballotine	olle_otter	True	True	False	False	
+barcarolle	barcarole	olle_otter	True	True	False	False	
+boulotter	bouloter	olle_otter	True	True	False	False	
+cachotterie	cachoterie	olle_otter	True	True	False	False	
+cachottier	cachotier	olle_otter	True	True	False	False	
+corollaire	corolaire	olle_otter	True	True	False	False	
+corolle	corole	olle_otter	True	True	False	False	
+frisotter	frisoter	olle_otter	True	True	False	False	
+frisottis	frisotis	olle_otter	True	True	False	False	
+fumerolle	fumerole	olle_otter	True	True	False	False	
+garrotter	garroter	olle_otter	True	True	False	False	
+girolle	girole	olle_otter	True	True	False	False	
+grelottement	grelotement	olle_otter	True	True	False	False	
+grelotter	greloter	olle_otter	True	True	False	False	
+muserolle	muserole	olle_otter	True	True	False	False	
+roulotter	rouloter	olle_otter	True	True	False	False	
+rousserolle	rousserole	olle_otter	True	True	False	False	
+tartignolle	tartignole	olle_otter	True	True	False	False	
+trolle	trole	olle_otter	True	True	False	False	
+arolle	arole	olle_otter	False	False	False	False	neither spelling present in Lexique383 corpus
+barquerolle	barquerole	olle_otter	False	False	False	False	neither spelling present in Lexique383 corpus
+bouterolle	bouterole	olle_otter	False	False	False	False	neither spelling present in Lexique383 corpus
+fusarolle	fusarole	olle_otter	False	False	False	False	neither spelling present in Lexique383 corpus
+garrottage	garrotage	olle_otter	False	False	False	False	neither spelling present in Lexique383 corpus
+lignerolle	lignerole	olle_otter	False	False	False	False	neither spelling present in Lexique383 corpus
+mangeotter	mangeoter	olle_otter	False	False	False	False	neither spelling present in Lexique383 corpus
+moucherolle	moucherole	olle_otter	False	False	False	False	neither spelling present in Lexique383 corpus
+tavaïolle	tavaïole	olle_otter	False	False	False	False	neither spelling present in Lexique383 corpus
+yoyotter	yoyoter	olle_otter	False	False	False	False	neither spelling present in Lexique383 corpus
+absous	absout	autres_rectifications	False	False	False	True	excluded: "absous" is also a separate ADJ lemma ("acquitted"), distinct from the VER past-participle sense this pair targets -- ambiguous to rewrite safely without touching the unrelated ADJ
+acupuncture	acuponcture	autres_rectifications	True	True	False	False	
+allô	allo	autres_rectifications	True	True	False	False	
+appas	appâts	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
+asseoir	assoir	autres_rectifications	False	True	False	False	
+besicles	bésicles	autres_rectifications	True	True	False	False	
+billeterie	billèterie	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+bizuth	bizut	autres_rectifications	True	True	False	False	
+bonhomie	bonhommie	autres_rectifications	False	True	False	False	
+bonneterie	bonnèterie	autres_rectifications	False	True	False	False	
+boursouflage	boursoufflage	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+boursouflement	boursoufflement	autres_rectifications	False	True	False	False	
+boursoufler	boursouffler	autres_rectifications	False	True	False	False	
+boursouflure	boursoufflure	autres_rectifications	False	True	False	False	
+briqueterie	briquèterie	autres_rectifications	False	True	False	False	
+buffleterie	bufflèterie	autres_rectifications	False	True	False	False	
+cacahuète	cacahouète	autres_rectifications	True	True	False	False	
+cahute	cahutte	autres_rectifications	False	True	False	False	
+chariot	charriot	autres_rectifications	False	True	False	False	
+chariotage	charriotage	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+chariotée	charriotée	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+charioter	charrioter	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+combatif	combattif	autres_rectifications	False	True	False	False	
+combativité	combattivité	autres_rectifications	False	True	False	False	
+cuissot	cuisseau	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
+dessiller	déciller	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
+dentelière	dentelier	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
+disaccharide	disaccaride	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+dissous	dissout	autres_rectifications	False	False	False	True	excluded: "dissous" is also a separate ADJ lemma, same ambiguity as absous/absout
+douceâtre	douçâtre	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
+embatre	embattre	autres_rectifications	False	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
+eczéma	exéma	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
+eczémateux	exémateux	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
+féerie	féérie	autres_rectifications	False	True	False	False	
+féerique	féérique	autres_rectifications	False	True	False	False	
+féeriquement	féériquement	autres_rectifications	False	True	False	False	
+fjord	fiord	autres_rectifications	True	True	False	False	
+gailleterie	gaillèterie	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+ghilde	guilde	autres_rectifications	False	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
+gangréneuse	gangréneux	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
+gelinotte	gélinotte	autres_rectifications	True	True	False	False	
+gobeleterie	gobelèterie	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+graineterie	grainèterie	autres_rectifications	False	True	False	False	
+guillemeter	guilleméter	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+homœo-	homéo-	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+imbécillité	imbécilité	autres_rectifications	False	True	False	False	
+innomé	innommé	autres_rectifications	False	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
+levraut	levreau	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
+lunettier	lunetier	autres_rectifications	False	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
+mah-jong	majong	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
+marqueterie	marquèterie	autres_rectifications	False	True	False	False	
+messeoir	messoir	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+monosaccharide	monosaccaride	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+mousqueterie	mousquèterie	autres_rectifications	False	True	False	False	
+nénuphar	nénufar	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
+oignon	ognon	autres_rectifications	True	True	False	False	
+oignonade	ognonade	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+oignonière	ognonière	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+oléosaccharure	oléosaccarure	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+paneterie	panèterie	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+papeterie	papèterie	autres_rectifications	False	True	False	False	
+parqueterie	parquèterie	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+persiflage	persifflage	autres_rectifications	False	True	False	False	
+persifler	persiffler	autres_rectifications	False	True	False	False	
+persifleur	persiffleur	autres_rectifications	False	True	False	False	
+phœnix	phénix	autres_rectifications	False	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
+polysaccharide	polysaccaride	autres_rectifications	False	True	False	False	
+prunellier	prunelier	autres_rectifications	False	True	False	False	
+punch	ponch	autres_rectifications	False	True	False	False	
+québecois	québécois	autres_rectifications	False	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
+rasseoir	rassoir	autres_rectifications	False	True	False	False	
+receleur	recéleur	autres_rectifications	False	True	False	False	
+recepage	recépage	autres_rectifications	False	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
+recepée	recépée	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+relais	relai	autres_rectifications	False	True	False	False	
+repartie	répartie	autres_rectifications	False	False	False	True	excluded: "repartie" is a 3-way homograph (NOM "a witty retort", VER fem. participle of repartir "left again") -- too ambiguous to rewrite safely without dedicated per-gramCat handling not done this session
+repartir	répartir	autres_rectifications	False	False	False	True	excluded: "repartir" (to leave again) and "répartir" (to distribute) are established, unrelated verbs in modern French, not clearly a reform spelling-variant pair -- needs manual research not done this session
+robinetier	robinétier	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+sorgho	sorgo	autres_rectifications	False	True	False	False	
+sotie	sottie	autres_rectifications	False	True	False	False	
+surseoir	sursoir	autres_rectifications	False	True	False	False	
+téocali	téocalli	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
+toquade	tocade	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
+toquante	tocante	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
+toquard	tocard	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
+trompeter	trompéter	autres_rectifications	False	True	False	False	
+vantail	ventail	autres_rectifications	True	True	False	False	
+vilenie	vilénie	autres_rectifications	False	True	False	False	
+saccharine	saccarine	autres_rectifications	False	True	False	False	
+saccharose	saccarose	autres_rectifications	False	True	False	False	
+interpeller	interpeler	autres_rectifications	True	False	False	False	handled by a dedicated one-off mechanism in lexique.py (APPLY_1990_REFORM_INTERPELER/INTERPELER_FIXED_FORMS), not the generic single-edit ortho-rewrite or category-8 -eler mechanisms -- see lexique.py's comment above that flag for the full reasoning. Confirmed against the OQLF's Banque de dépannage linguistique (authoritative per-word note): every form loses one "l" except the présent/subjonctif/impératif stressed forms (interpelle/interpellent) and futur/conditionnel forms built on them, which keep the double consonant (appeler-style exception), not the grave-accent regularization the primary JO report text alone would suggest. appliesToLemmeNormalization=True is safe and independent (merges the lemme once both spellings coexist, same as every other row).
+(n/a)	(n/a)	numeraux_composes	False	False	False	False	phrase-level rule (hyphenates multi-word number phrases, e.g. "cent vingt et un" -> "cent-vingt-et-un") -- no single-lexicon-entry hook, out of scope for lexique.py
+(n/a)	(n/a)	participe_passe_laisser	False	False	False	False	sentence-level grammatical agreement rule ("laissé" invariable before an infinitive) -- not a spelling variant of any lexicon entry, out of scope for lexique.py
+allegretto	allégretto	mots_empruntes_accent	False	True	False	False	
+allegro	allégro	mots_empruntes_accent	False	True	False	False	
+arboretum	arborétum	mots_empruntes_accent	False	True	False	False	
+azulejo	azuléjo	mots_empruntes_accent	False	True	False	False	
+beluga	béluga	mots_empruntes_accent	False	True	False	False	
+bolchevique	bolchévique	mots_empruntes_accent	False	True	False	False	
+bolchevisme	bolchévisme	mots_empruntes_accent	False	True	False	False	
+bolcheviste	bolchéviste	mots_empruntes_accent	False	True	False	False	
+brasero	braséro	mots_empruntes_accent	False	True	False	False	
+cameraman	caméraman	mots_empruntes_accent	False	True	False	False	
+chistera	chistéra	mots_empruntes_accent	False	True	False	False	
+condottiere	condottière	mots_empruntes_accent	False	True	False	False	
+credo	crédo	mots_empruntes_accent	False	True	False	False	
+decrescendo	décrescendo	mots_empruntes_accent	False	True	False	False	
+desperado	despérado	mots_empruntes_accent	False	True	False	False	
+diesel	diésel	mots_empruntes_accent	False	True	False	False	
+djebel	djébel	mots_empruntes_accent	False	True	False	False	
+ego	égo	mots_empruntes_accent	False	True	False	False	
+exeat	exéat	mots_empruntes_accent	False	True	False	False	
+exequatur	exéquatur	mots_empruntes_accent	False	True	False	False	
+favela	favéla	mots_empruntes_accent	False	True	False	False	
+fedayin	fédayin	mots_empruntes_accent	False	True	False	False	
+ganaderia	ganadéria	mots_empruntes_accent	False	True	False	False	
+guérillero	guérilléro	mots_empruntes_accent	False	True	False	False	
+impedimenta	impédimenta	mots_empruntes_accent	False	True	False	False	
+imperium	impérium	mots_empruntes_accent	False	True	False	False	
+impresario	imprésario	mots_empruntes_accent	False	True	False	False	
+jamboree	jamborée	mots_empruntes_accent	False	True	False	False	
+legato	légato	mots_empruntes_accent	False	True	False	False	
+marketing	markéting	mots_empruntes_accent	False	True	False	False	
+media	média	mots_empruntes_accent	False	True	False	False	
+mesa	mésa	mots_empruntes_accent	False	True	False	False	
+moderato	modérato	mots_empruntes_accent	False	True	False	False	
+muleta	muléta	mots_empruntes_accent	False	True	False	False	
+paseo	paséo	mots_empruntes_accent	False	True	False	False	
+penalty	pénalty	mots_empruntes_accent	False	True	False	False	
+perestroïka	pérestroïka	mots_empruntes_accent	False	True	False	False	
+peso	péso	mots_empruntes_accent	False	True	False	False	
+phylloxera	phylloxéra	mots_empruntes_accent	False	True	False	False	
+pizzeria	pizzéria	mots_empruntes_accent	False	True	False	False	
+placebo	placébo	mots_empruntes_accent	False	True	False	False	
+proscenium	proscénium	mots_empruntes_accent	False	True	False	False	
+reflex	réflex	mots_empruntes_accent	False	True	False	False	
+revolver	révolver	mots_empruntes_accent	False	True	False	False	
+romancero	romancéro	mots_empruntes_accent	False	True	False	False	
+satisfecit	satisfécit	mots_empruntes_accent	False	True	False	False	
+select	sélect	mots_empruntes_accent	False	True	False	False	
+senior	sénior	mots_empruntes_accent	False	True	False	False	
+sombrero	sombréro	mots_empruntes_accent	False	True	False	False	
+sostenuto	sosténuto	mots_empruntes_accent	False	True	False	False	
+spermaceti	spermacéti	mots_empruntes_accent	False	True	False	False	
+tepidarium	tépidarium	mots_empruntes_accent	False	True	False	False	
+tequila	téquila	mots_empruntes_accent	False	True	False	False	
+torero	toréro	mots_empruntes_accent	False	True	False	False	
+vaquero	vaquéro	mots_empruntes_accent	False	True	False	False	
+velum	vélum	mots_empruntes_accent	False	True	False	False	
+veto	véto	mots_empruntes_accent	False	True	False	False	
+artefact	artéfact	mots_empruntes_accent	False	True	False	False	
+edelweiss	édelweiss	mots_empruntes_accent	False	True	False	False	
+limes	limès	mots_empruntes_accent	False	False	False	False	homograph collision: Lexique383's "limes" row is ambiguous between the plural of "lime" (nail file/citrus fruit) and a conjugated form of "limer" ("to file") -- unrelated to the Latin loanword "limes" (border wall) this pair targets
+chebec	chébec	mots_empruntes_accent	False	False	False	False	neither spelling present in Lexique383 corpus (chébek variant also unattested)
+chechia	chéchia	mots_empruntes_accent	False	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
+cicerone	cicérone	mots_empruntes_accent	False	False	False	False	old spelling not present in Lexique383 corpus, nothing to rewrite (new spelling already the only one attested)
+nouraghe	nuraghe	mots_empruntes_accent	False	False	False	False	neither spelling present in Lexique383 corpus
+ciao	tchao	mots_empruntes_accent	False	False	False	False	needs a multi-character/multi-position edit (not a single insertion/deletion/substitution), not automated by the single-edit ortho-rewrite mechanism
+barmen	barmans	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: barman)
+brunches	brunchs	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: brunch)
+chlamydiae	chlamydias	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: chlamydia)
+clergymen	clergymans	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: clergyman)
+conquistadores	conquistadors	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: conquistador)
+curricula	curriculums	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: curriculum)
+errata	erratums	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: erratum)
+ferries	ferrys	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: ferry)
+gentlemen	gentlemans	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: gentleman)
+hobbies	hobbys	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: hobby)
+jazzmen	jazzmans	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: jazzman)
+lieder	lieds	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: lied)
+mafiosi	mafiosos	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: mafioso)
+maxima	maximums	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: maximum)
+minima	minimums	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: minimum)
+moudjahidine	moudjahidines	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: moudjahidine)
+optima	optimums	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: optimum)
+policemen	policemans	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: policeman)
+putti	puttos	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: putto)
+quanta	quantums	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: quantum)
+recordmen	recordmans	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: recordman)
+rugbymen	rugbymans	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: rugbyman)
+rushes	rushs	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: rush)
+scampi	scampis	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: scampi)
+scénarii	scénarios	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: scénario)
+sketches	sketchs	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: sketch)
+soli	solos	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: solo)
+sportsmen	sportsmans	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: sportsman)
+supermen	supermans	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: superman)
+tempi	tempos	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: tempo)
+tennismen	tennismans	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: tennisman)
+varia	varias	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: varia)
+yachtmen	yachtmans	mots_empruntes_pluriel	False	False	True	False	irregular loanword plural, regularized to French -s (lemme: yachtman)
+bêtasses	bêtas	mots_empruntes_pluriel	False	False	False	True	excluded: "bêtasses" is the feminine plural of the ADJ sense of "bêta" (colloquial "silly", masc. bêta/fem. bêtasse), a distinct paradigm from the NOM "bêta" (Greek letter) this pair targets -- rewriting would destroy a real gender-marked form
+nues	nus	mots_empruntes_pluriel	False	False	False	True	excluded: lemme "nu" covers the Greek letter (NOM), the adjective "naked" (ADJ), AND an unrelated archaic noun "nue" (cloud) whose plural is "nues" -- too ambiguous to rewrite safely
