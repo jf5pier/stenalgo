@@ -57,16 +57,18 @@ ignoredList = frozenset(loadLexiconExclusions())
 
 # Spelling variants of the same lexeme that Lexique383 lists under distinct `lemme`
 # strings, collapsed to one canonical lemme so they don't compete for a separate
-# steno discriminator symbol. Verified against Larousse (2026-09-16):
-# https://www.larousse.fr/dictionnaires/francais/kasher/45376 -- "kascher" and
-# "cascher" are noted as "tombées en désuétude" (fallen out of use); "kasher",
-# "casher" and "cachère" are today's standard spellings of one loanword ("kosher").
+# steno discriminator symbol.
+#
+# 2026-09-17: superseded the kasher-family entries this table used to carry
+# (kascher/cascher/cachère/casher all -> "kasher", per Larousse). "casher" is now
+# the canonical spelling with its own full 1990-reform inflection (casher/cashers/
+# cashère/cashères, resources/Lexique383.tsv), rather than a variant folded under
+# "kasher" -- kasher/cachère (and kascher/cascher, already inert) are now dropped
+# entirely via resources/lexiconExclusions.tsv instead of lemme-normalized, since
+# they were causing an unresolvable spelling-ambiguity in the discriminator
+# selection (see SHARED_DISCRIMINATOR_REWIRE_PLAN.md-adjacent session notes / RESUME_2026-09-17.md).
 # île/ile is the 1990 orthographic-reform circumflex-dropping variant of "île".
 spellingVariantLemme: dict[str, str] = {
-    "kascher": "kasher",
-    "cascher": "kasher",
-    "cachère": "kasher",
-    "casher": "kasher",
     "ile": "île",
 }
 

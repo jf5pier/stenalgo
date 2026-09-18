@@ -18606,7 +18606,6 @@ cachou	kaSu	cachou	NOM	ADJ,NOM	m	s		k_a|S_u	c_a|ch_ou	0.27	0.17
 cachou	kaSu	cachou	ADJ	ADJ,NOM		s		k_a|S_u	c_a|ch_ou	0.41	0.0
 cachous	kaSu	cachou	NOM	NOM	m	p		k_a|S_u_#	c_a|ch_ou_s	0.41	0.05
 cachât	kaSa	cacher	VER	VER			sub:imp:3s;	k_a|S_a	c_a|ch_ât	0.61	0.0
-cachère	kaSER	kasher	ADJ	ADJ				k_a|S_E_R_#	c_a|ch_è_r_e	0.0	0.01
 cachèrent	kaSER	cacher	VER	VER			ind:pas:3p;	k_a|S_E_R_#	c_a|ch_è_r_ent	0.61	0.09
 caché	kaSe	cacher	VER	VER,ADJ	m	s	par:pas;	k_a|S_e	c_a|ch_é	25.81	32.13
 caché	kaSe	caché	ADJ	VER,ADJ	m	s		k_a|S_e	c_a|ch_é	7.43	4.27
@@ -20712,8 +20711,11 @@ casette	kazEt	casette	NOM	NOM	f	s		k_a|z_E_t_#	c_a|s_e_tt_e	0.0	0.05
 casettes	kazEt	casette	NOM	NOM	f	p		k_a|z_E_t_#	c_a|s_e_tt_es	0.0	0.01
 cash	kaS	cash	ADV	ADV,NOM				k_a_S	c_a_sh	0.61	7.25
 cash	kaS	cash	NOM	ADV,NOM	m			k_a_S	c_a_sh	0.07	0.98
-casher	kaSER	kasher	ADJ	ADJ		s		k_a|S_E_R	c_a|sh_e_r	0.07	0.53
+casher	kaSER	casher	ADJ	ADJ	m	s		k_a|S_E_R	c_a|sh_e_r	0.07	0.53
+cashers	kaSER	casher	ADJ	ADJ	m	p		k_a|S_E_R_#	c_a|sh_e_r_s	0.0	0.0
 cashmere	kaSmER	cashmere	NOM	NOM	m	s		k_a_S|m_E_R_#	c_a_sh|m_e_r_e	0.34	0.46
+cashère	kaSER	casher	ADJ	ADJ	f	s		k_a|S_E_R_#	c_a|sh_è_r_e	0.0	0.0
+cashères	kaSER	casher	ADJ	ADJ	f	p		k_a|S_E_R_#	c_a|sh_è_r_es	0.0	0.0
 casier	kazje	casier	NOM	NOM	m	s		k_a|z_j_e	c_a|s_i_er	4.46	15.82
 casiers	kazje	casier	NOM	NOM	m	p		k_a|z_j_e_#	c_a|s_i_er_s	3.65	1.98
 casimir	kazimiR	casimir	NOM	NOM	m	s		k_a|z_i|m_i_R	c_a|s_i|m_i_r	0.27	0.01
@@ -40936,7 +40938,7 @@ déguerpissez	degERpise	déguerpir	VER	VER			imp:pre:2p;ind:pre:2p;	d_e|g_E_R|p_
 déguerpissiez	degERpisje	déguerpir	VER	VER			ind:imp:2p;	d_e|g_E_R|p_i|s_j_e	d_é|gu_e_r|p_i|ss_i_ez	0.0	0.01
 déguerpissons	degERpis§	déguerpir	VER	VER			imp:pre:1p;	d_e|g_E_R|p_i|s_§	d_é|gu_e_r|p_i|ss_ons	0.0	0.03
 déguerpit	degERpi	déguerpir	VER	VER			ind:pre:3s;ind:pas:3s;	d_e|g_E_R|p_i	d_é|gu_e_r|p_it	0.14	0.04
-dégueu	deg2	dégueu	ADJ	ADJ		s		d_e|g_2	d_é|gu_eu	0.81	3.1
+dégueu	deg2	dégueu	ADJ	ADJ	m	s		d_e|g_2	d_é|gu_eu	0.81	3.1
 dégueula	deg2la	dégueuler	VER	VER			ind:pas:3s;	d_e|g_2|l_a	d_é|gu_eu|l_a	0.07	0.0
 dégueulais	deg2lE	dégueuler	VER	VER			ind:imp:1s;ind:imp:2s;	d_e|g_2|l_E	d_é|gu_eu|l_ais	0.0	0.02
 dégueulait	deg2lE	dégueuler	VER	VER			ind:imp:3s;	d_e|g_2|l_E	d_é|gu_eu|l_ait	0.2	0.03
@@ -41091,7 +41093,7 @@ déjantent	deZ@t	déjanter	VER	VER			ind:pre:3p;	d_e|Z_@_t_#	d_é|j_an_t_ent	0.0
 déjanter	deZ@te	déjanter	VER	VER			inf;	d_e|Z_@|t_e	d_é|j_an|t_er	0.14	0.09
 déjanterais	deZ@t°RE	déjanter	VER	VER			cnd:pre:1s;	d_e|Z_@|t_°|R_E	d_é|j_an|t_e|r_ais	0.0	0.01
 déjantes	deZ@t	déjanter	VER	VER			ind:pre:2s;	d_e|Z_@_t_#	d_é|j_an_t_es	0.07	0.2
-déjanté	deZ@te	déjanté	ADJ	VER,ADJ		s		d_e|Z_@|t_e	d_é|j_an|t_é	0.2	0.43
+déjanté	deZ@te	déjanté	ADJ	VER,ADJ	m	s		d_e|Z_@|t_e	d_é|j_an|t_é	0.2	0.43
 déjanté	deZ@te	déjanter	VER	VER,ADJ	m	s	par:pas;	d_e|Z_@|t_e	d_é|j_an|t_é	0.0	0.2
 déjantée	deZ@te	déjanter	VER	VER	f	s	par:pas;	d_e|Z_@|t_e_#	d_é|j_an|t_é_e	0.07	0.21
 déjantés	deZ@te	déjanté	ADJ	VER,ADJ	m	p		d_e|Z_@|t_e_#	d_é|j_an|t_é_s	0.0	0.15
@@ -72704,7 +72706,6 @@ karmique	kaRmik	karmique	ADJ	ADJ		s		k_a_R|m_i_k_#	k_a_r|m_i_qu_e	0.0	0.16
 kart	kaRt	kart	NOM	NOM	m	s		k_a_R_t	k_a_r_t	0.0	0.3
 karting	kaRtiG	karting	NOM	NOM	m	s		k_a_R|t_i_G	k_a_r|t_i_ng	0.0	0.34
 kasbah	kasba	kasbah	NOM	NOM	f			k_a_s|b_a_#	k_a_s|b_a_h	0.27	0.0
-kasher	kaSER	kasher	ADJ	ADJ				k_a|S_E_R	k_a|sh_e_r	0.41	0.63
 kastro	kastRo	kastro	NOM	NOM	m	s		k_a_s|t_R_o	k_a_s|t_r_o	0.47	0.0
 kastros	kastRo	kastro	NOM	NOM	m	p		k_a_s|t_R_o_#	k_a_s|t_r_o_s	0.07	0.0
 kata	kata	kata	NOM	NOM	m	s		k_a|t_a	k_a|t_a	0.0	0.01
@@ -84913,7 +84914,7 @@ nue	ny	nu	ADJ	ADJ,NOM,VER	f	s		n_y_#	n_u_e	43.85	15.23
 nue	ny	nu	NOM	ADJ,NOM,VER	f	s		n_y_#	n_u_e	6.69	5.45
 nue	ny	nu	VER	ADJ,NOM,VER			ind:pre:3s;	n_y_#	n_u_e	1.82	0.61
 nuer	n8e	nuer	VER	VER			inf;	n_8_e	n_u_er	0.0	0.01
-nues	ny	nu	ADJ	ADJ,NOM	f			n_y_#	n_u_es	21.42	6.46
+nues	ny	nu	ADJ	ADJ,NOM	f	p		n_y_#	n_u_es	21.42	6.46
 nues	ny	nu	NOM	ADJ,NOM	f	p		n_y_#	n_u_es	3.58	1.14
 nui	n8i	nuire	VER	VER	m	s	par:pas;	n_8_i	n_u_i	0.61	1.31
 nuira	n8iRa	nuire	VER	VER			ind:fut:3s;	n_8_i|R_a	n_u_i|r_a	0.14	0.59
@@ -132475,7 +132476,7 @@ yéyés	jeje	yéyé	NOM	NOM		p		j_e|j_e_#	y_é|y_é_s	0.14	0.0
 zadé	zade	zader	VER	VER	m	s	par:pas;	z_a|d_e	z_a|d_é	0.47	0.0
 zaibatsu	zajbatsu	zaibatsu	NOM	NOM	m			z_a_j|b_a_t|s_u	z_a_i|b_a_t|s_u	0.0	0.01
 zain	z5	zain	ADJ	ADJ	m	s		z_5	z_ain	0.07	0.0
-zakouski	zakuski	zakouski	NOM	NOM	m			z_a|k_u_s|k_i	z_a|k_ou_s|k_i	0.07	0.62
+zakouski	zakuski	zakouski	NOM	NOM	m	s		z_a|k_u_s|k_i	z_a|k_ou_s|k_i	0.07	0.62
 zakouskis	zakuski	zakouski	NOM	NOM	m	p		z_a|k_u_s|k_i_#	z_a|k_ou_s|k_i_s	0.27	0.0
 zani	zani	zani	NOM	NOM	m	s		z_a|n_i	z_a|n_i	0.0	0.04
 zanimaux	zanimo	zanimaux	NOM	NOM	m	p		z_a|n_i|m_o_#	z_a|n_i|m_au_x	0.07	0.0
