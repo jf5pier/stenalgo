@@ -155,8 +155,10 @@ whist	foreign_word	English loanword (card game)
 whisky	foreign_word	English loanword
 wildcat	foreign_word	English loanword
 winchesters	foreign_word	English loanword, plural (rifle brand)
-kascher	unpopular_spelling	per Larousse, "tombée en désuétude" (obsolete) spelling of "kasher"; see lexique.py spellingVariantLemme
-cascher	unpopular_spelling	per Larousse, "tombée en désuétude" (obsolete) spelling of "kasher"; see lexique.py spellingVariantLemme
+kascher	unpopular_spelling	per Larousse, "tombée en désuétude" (obsolete) spelling of the "casher" loanword adjective (kosher)
+cascher	unpopular_spelling	per Larousse, "tombée en désuétude" (obsolete) spelling of the "casher" loanword adjective (kosher)
+kasher	unpopular_spelling	superseded 2026-09-17 by "casher", now the lexicon's canonical spelling of this loanword adjective with its own full 1990-reform inflection (casher/cashers/cashère/cashères); was colliding with "cachère" as an indistinguishable spelling-variant pair in the discriminator selection (both grammatically identical, no feature could ever tell them apart)
+cachère	unpopular_spelling	superseded 2026-09-17 by "casher" -- see the "kasher" row above, same reasoning
 cacahuètes	unpopular_spelling	pre-1990-reform spelling of "cacahouètes" (see resources/reform1990.tsv, autres_rectifications); dropped as a homophone-ambiguity duplicate of the modern spelling
 dégotte	unpopular_spelling	pre-1990-reform spelling of "dégote" (see resources/reform1990.tsv, olle_otter); dropped as a homophone-ambiguity duplicate of the modern spelling
 dégotté	unpopular_spelling	pre-1990-reform spelling of "dégoté" (see resources/reform1990.tsv, olle_otter); dropped as a homophone-ambiguity duplicate of the modern spelling
