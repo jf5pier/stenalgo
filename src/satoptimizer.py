@@ -4,71 +4,80 @@
 import math
 from ortools.sat.python.cp_model import IntVar
 from ortools.sat.python import cp_model
-from src.keyboard import Keyboard, Strokes
+from src.keyboard import Strokes
 from src.word import Word, WordFeature, GramCat
-from src.greedyoptimizer import greedyOptimizeDiscriminator
 
 NO_FEATURE = "nofeature"
 
-# Grammatical "families" a feature token can belong to: two tokens are only ever
-# compared for polarity if they belong to the same family (e.g. "s" and "nbr_p" are
-# both about grammatical number, "indicatif" and "pers_1" belong to no family and
+# Grammatical "families" an atomic feature can belong to: two atomic features are only
+# ever compared for polarity if they belong to the same family (e.g. "s" and "nbr_p" are
+# both about grammatical number, "indicatif" and "présent" belong to no family and
 # are always neutral toward everything).
 FEATURE_FAMILIES: dict[str, str] = {
     "s": "number", "p": "number", "nbr_s": "number", "nbr_p": "number",
     "m": "gender", "f": "gender",
     "m_s": "gender_number", "f_s": "gender_number",
     "m_p": "gender_number", "f_p": "gender_number", "not_m_s": "gender_number",
+    "pers_1": "person", "pers_2": "person", "pers_3": "person",
 }
 
-# Canonical value per token, used only as a fallback (see _computeFamilyCorrelations)
-# for token pairs encoded through different fields of Word (e.g. "s"/"p" come from
-# the generic gender/number fields, "nbr_s"/"nbr_p" from parsing infoVerb) — real
-# co-occurrence data can't say anything meaningful about such pairs, so the fallback
-# encodes the hand-authored semantic identity ("s" and "nbr_s" both mean singular).
+# Canonical value per atomic feature, used only as a fallback (see
+# _computeFamilyCorrelations) for atomic-feature pairs encoded through different fields
+# of Word (e.g. "s"/"p" come from the generic gender/number fields, "nbr_s"/"nbr_p" from
+# parsing infoVerb) — real co-occurrence data can't say anything meaningful about such
+# pairs, so the fallback encodes the hand-authored semantic identity ("s" and "nbr_s"
+# both mean singular).
 _VALUE_TABLES: dict[str, dict[str, str]] = {
     "number": {"s": "sing", "p": "plur", "nbr_s": "sing", "nbr_p": "plur"},
     "gender": {"m": "masc", "f": "fem"},
 }
 
-# Which field of Word each token is actually read off of. Correlation is only
-# computed between tokens sharing a notation — cross-notation presence/absence is
-# dominated by which field happened to be populated for that row (e.g. most VER
+# Which field of Word each atomic feature is actually read off of. Correlation is only
+# computed between atomic features sharing a notation — cross-notation presence/absence
+# is dominated by which field happened to be populated for that row (e.g. most VER
 # words are either a pure participle, populating gender/number, or a pure finite
 # form, populating infoVerb, but rarely both), a structural artifact unrelated to
 # the grammatical value itself, so it would swamp any real signal.
-_TOKEN_NOTATION: dict[str, str] = {
+_ATOMIC_FEATURE_NOTATION: dict[str, str] = {
     "s": "gender_number_field", "p": "gender_number_field",
     "m": "gender_number_field", "f": "gender_number_field",
     "m_s": "gender_number_combo", "f_s": "gender_number_combo",
     "m_p": "gender_number_combo", "f_p": "gender_number_combo",
     "not_m_s": "gender_number_combo",
     "nbr_s": "verb_conjugation", "nbr_p": "verb_conjugation",
+    "pers_1": "verb_conjugation", "pers_2": "verb_conjugation", "pers_3": "verb_conjugation",
 }
 
 
-def _familyToken(feature: WordFeature) -> str | None:
-    """ The (at most one) family-bearing token inside a possibly compound feature. """
+def _familyAtomicFeatures(feature: WordFeature) -> dict[str, str]:
+    """
+    Every family-bearing atomic feature inside a possibly compound feature, keyed by
+    family. A compound like "indicatif:pers_3:nbr_s" carries atoms from two families
+    at once (person and number) since word.py combines mode/tense/person/number into
+    a single ":"-joined feature.
+    """
+    result: dict[str, str] = {}
     for part in feature.split(":"):
         normalized = part[len("VER_"):] if part.startswith("VER_") else part
-        if normalized in FEATURE_FAMILIES:
-            return normalized
-    return None
+        family = FEATURE_FAMILIES.get(normalized)
+        if family is not None:
+            result[family] = normalized
+    return result
 
 
 def _computeFamilyCorrelations(words: list[Word]) -> dict[frozenset[str], float]:
     """
-    Matthews correlation coefficient between every pair of tokens belonging to the
-    same family, computed over words eligible for that family (i.e. carrying any
-    token from it) — this avoids spurious correlation between tokens that simply
-    never apply to the same grammatical category (e.g. a noun-only vs a verb-only
-    token) rather than being truly semantically opposed.
+    Matthews correlation coefficient between every pair of atomic features belonging to
+    the same family, computed over words eligible for that family (i.e. carrying any
+    atomic feature from it) — this avoids spurious correlation between atomic features
+    that simply never apply to the same grammatical category (e.g. a noun-only vs a
+    verb-only atomic feature) rather than being truly semantically opposed.
 
-    Correlation is only computed between tokens that share the same _TOKEN_NOTATION
-    (they're read off the same field of Word, e.g. "m_s"/"f_s" both come from the
-    generic gender_number combo) — restricted further to the gramCats where they
-    can both actually appear, since e.g. "s"/"p" also occur on NOM/ADJ in addition
-    to VER. Cross-notation pairs (e.g. "s" vs "nbr_s": one from the generic
+    Correlation is only computed between atomic features that share the same
+    _ATOMIC_FEATURE_NOTATION (they're read off the same field of Word, e.g. "m_s"/"f_s"
+    both come from the generic gender_number combo) — restricted further to the gramCats
+    where they can both actually appear, since e.g. "s"/"p" also occur on NOM/ADJ in
+    addition to VER. Cross-notation pairs (e.g. "s" vs "nbr_s": one from the generic
     gender/number fields, the other parsed out of infoVerb) fall back to the
     hand-authored canonical value table instead — real presence/absence there is
     dominated by which field happened to be populated for that word (most VER words
@@ -76,37 +85,37 @@ def _computeFamilyCorrelations(words: list[Word]) -> dict[frozenset[str], float]
     artifact unrelated to the grammatical value itself, so it would swamp any
     genuine signal rather than reveal one.
     """
-    tokensByFamily: dict[str, list[str]] = {}
-    for token, family in FEATURE_FAMILIES.items():
-        tokensByFamily[family] = tokensByFamily.get(family, []) + [token]
+    atomicFeaturesByFamily: dict[str, list[str]] = {}
+    for atomicFeature, family in FEATURE_FAMILIES.items():
+        atomicFeaturesByFamily[family] = atomicFeaturesByFamily.get(family, []) + [atomicFeature]
 
-    wordTokens: list[set[str]] = [set(word.getFeatures()) for word in words]
+    wordAtomicFeatures: list[set[str]] = [set(word.getFeatures()) for word in words]
     wordCats: list[GramCat] = [word.gramCat for word in words]
     hostCats: dict[str, set[GramCat]] = {
-        token: {cat for cat, wt in zip(wordCats, wordTokens) if token in wt}
-        for token in FEATURE_FAMILIES
+        atomicFeature: {cat for cat, wt in zip(wordCats, wordAtomicFeatures) if atomicFeature in wt}
+        for atomicFeature in FEATURE_FAMILIES
     }
 
     correlations: dict[frozenset[str], float] = {}
-    for family, tokens in tokensByFamily.items():
+    for family, familyAtoms in atomicFeaturesByFamily.items():
         valueTable = _VALUE_TABLES.get(family, {})
-        for i, t1 in enumerate(tokens):
-            for t2 in tokens[i:]:
-                key = frozenset({t1, t2})
-                sharedCats = hostCats[t1] & hostCats[t2]
-                sameNotation = _TOKEN_NOTATION.get(t1) == _TOKEN_NOTATION.get(t2)
-                if t1 == t2:
+        for i, a1 in enumerate(familyAtoms):
+            for a2 in familyAtoms[i:]:
+                key = frozenset({a1, a2})
+                sharedCats = hostCats[a1] & hostCats[a2]
+                sameNotation = _ATOMIC_FEATURE_NOTATION.get(a1) == _ATOMIC_FEATURE_NOTATION.get(a2)
+                if a1 == a2:
                     correlations[key] = 1.0
                 elif sameNotation and sharedCats:
-                    restricted = [wt for wt, cat in zip(wordTokens, wordCats) if cat in sharedCats]
-                    n11 = sum(1 for wt in restricted if t1 in wt and t2 in wt)
-                    n10 = sum(1 for wt in restricted if t1 in wt and t2 not in wt)
-                    n01 = sum(1 for wt in restricted if t1 not in wt and t2 in wt)
-                    n00 = sum(1 for wt in restricted if t1 not in wt and t2 not in wt)
+                    restricted = [wt for wt, cat in zip(wordAtomicFeatures, wordCats) if cat in sharedCats]
+                    n11 = sum(1 for wt in restricted if a1 in wt and a2 in wt)
+                    n10 = sum(1 for wt in restricted if a1 in wt and a2 not in wt)
+                    n01 = sum(1 for wt in restricted if a1 not in wt and a2 in wt)
+                    n00 = sum(1 for wt in restricted if a1 not in wt and a2 not in wt)
                     denom = math.sqrt((n11 + n10) * (n11 + n01) * (n00 + n10) * (n00 + n01))
                     correlations[key] = (n11 * n00 - n10 * n01) / denom if denom > 0 else 0.0
-                elif t1 in valueTable and t2 in valueTable:
-                    correlations[key] = 1.0 if valueTable[t1] == valueTable[t2] else -1.0
+                elif a1 in valueTable and a2 in valueTable:
+                    correlations[key] = 1.0 if valueTable[a1] == valueTable[a2] else -1.0
                 else:
                     correlations[key] = 0.0
     return correlations
@@ -119,12 +128,18 @@ def associationScore(
     ) -> float:
     """
     +1.0 fully associated (same polarity), -1.0 fully opposed, 0.0 unrelated (no
-    shared family, e.g. mode/tense/person tokens, or gramCat names).
+    shared family, e.g. mode/tense atomic features, or gramCat names). When the two
+    features share more than one family (e.g. "pers_3:nbr_s" vs "pers_3:nbr_p" share
+    both person and number), the most opposed per-family score wins: disagreement on
+    any shared dimension is enough to prefer keeping the pair apart, even if another
+    shared dimension agrees.
     """
-    t1, t2 = _familyToken(f1), _familyToken(f2)
-    if t1 is None or t2 is None or FEATURE_FAMILIES[t1] != FEATURE_FAMILIES[t2]:
+    atoms1, atoms2 = _familyAtomicFeatures(f1), _familyAtomicFeatures(f2)
+    sharedFamilies = atoms1.keys() & atoms2.keys()
+    if not sharedFamilies:
         return 0.0
-    return familyCorrelations.get(frozenset({t1, t2}), 0.0)
+    return min(familyCorrelations.get(frozenset({atoms1[family], atoms2[family]}), 0.0)
+                for family in sharedFamilies)
 
 
 def polarityAssociations(
@@ -152,7 +167,7 @@ def _colorFeatures(
         log: bool = False
     ) -> tuple[int, bool, dict[WordFeature, int], list[int]]:
     """
-    Assign every feature one of `numKeys` special keys. A feature set containing two
+    Assign every feature one of `numKeys` special keypresses. A feature set containing two
     features that share a key is flagged; flagged sets cost their penalty, and at most
     `conflictBudget` sets may be flagged. `polarityCoefficients` adds, for each pair of
     features, `coefficient * (do they end up on the same key)` to the objective
@@ -249,7 +264,7 @@ def _colorFeatures(
     return total, status == cp_model.OPTIMAL, keys, conflicted
 
 
-def _minSpecialKeysNeeded(
+def _minSpecialKeypressesNeeded(
         featureSets: list[set[WordFeature]],
         polarityCoefficients: dict[frozenset[WordFeature], int] | None = None,
         timeLimitS: float = 30.0,
@@ -270,30 +285,27 @@ def _minSpecialKeysNeeded(
 
 
 def satOptimizeDiscriminator(
+        featuresetWords: dict[tuple[WordFeature, ...], list[tuple[Word, ...]]],
         theory: dict[Strokes, list[Word]],
-        wordIsDiscrminatedByFeature: dict[WordFeature, set[Word]],
-        orderedFeaturesSelected: list[WordFeature],
-        keyboard: Keyboard,
-        numSpecialKeys: int | None = None,
+        numSpecialKeypresses: int | None = None,
         timeLimitS: float = 30.0,
         log: bool = False
     ) -> tuple[int, float, bool, dict[WordFeature, int], list[tuple[WordFeature, ...]]]:
     """
-    Using the feature sets already grouped by greedyOptimizeDiscriminator, find the
-    smallest subset of special keys that lets every feature set be fully distinguished
-    (zero conflicts), or, when numSpecialKeys is given, minimize the total cost of
-    unavoidable homophone conflicts and polarity clashes. The cost of a conflicting
+    Given feature sets already grouped per homophone cluster (by greedyOptimizeDiscriminator
+    or the shared adaptive selection, src/featureextractor.py's buildDiscriminatorSelection),
+    find the smallest subset of special keypresses that lets every feature set be fully
+    distinguished (zero conflicts), or, when numSpecialKeypresses is given, minimize the total cost
+    of unavoidable homophone conflicts and polarity clashes. The cost of a conflicting
     feature set is the sum of the frequencies of the words it was grouped for; the
     cost of two opposite-polarity features sharing a key is a large fixed penalty
     (and two same-polarity features sharing a key earns a small reward), scaled by
-    associationScore (see polarityAssociations).
+    associationScore (see polarityAssociations). `theory` is only used to compute
+    family correlations for the polarity terms.
     """
     FREQUENCY_SCALE = 1_000_000
     POLARITY_PENALTY_SCALE = 1_000_000_000
-    POLARITY_REWARD_SCALE = 1_000
-
-    featuresetWords = greedyOptimizeDiscriminator(
-        theory, wordIsDiscrminatedByFeature, orderedFeaturesSelected, keyboard)
+    POLARITY_REWARD_SCALE = 10_000
 
     featureSets: list[set[WordFeature]] = []
     penalties: list[int] = []
@@ -323,8 +335,8 @@ def satOptimizeDiscriminator(
             if coefficient != 0:
                 polarityCoefficients[frozenset({f1, f2})] = coefficient
 
-    if numSpecialKeys is None:
-        numSpecialKeys = _minSpecialKeysNeeded(
+    if numSpecialKeypresses is None:
+        numSpecialKeypresses = _minSpecialKeypressesNeeded(
             featureSets, polarityCoefficients=polarityCoefficients,
             timeLimitS=timeLimitS, log=log)
         conflictBudget = 0
@@ -332,10 +344,10 @@ def satOptimizeDiscriminator(
         conflictBudget = len(featureSets)
 
     total, proven, keyAssignment, conflicted = _colorFeatures(
-        featureSets, penalties, numSpecialKeys, conflictBudget,
+        featureSets, penalties, numSpecialKeypresses, conflictBudget,
         polarityCoefficients=polarityCoefficients, timeLimitS=timeLimitS, log=log)
 
     totalPenalty = total / FREQUENCY_SCALE
     conflictedFeatureSets = [tuple(sorted(featureSets[si])) for si in conflicted]
 
-    return numSpecialKeys, totalPenalty, proven, keyAssignment, conflictedFeatureSets
+    return numSpecialKeypresses, totalPenalty, proven, keyAssignment, conflictedFeatureSets

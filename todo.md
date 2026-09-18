@@ -86,7 +86,7 @@ origin, resolving 2 real conflicts in `dictionary.py`/`src/greedyoptimizer.py` �
 `satOptimizeDiscriminator` as the active pipeline step per explicit direction, NOT
 `assignDiscriminatorKeypresses`, which still exists in `src/greedyoptimizer.py` and is
 tested but unused in `dictionary.py`'s `__main__`); committed the previously-orphaned
-`src/satoptimizer.py` (verified end-to-end: 10 special keys, proven optimal, 0
+`src/satoptimizer.py` (verified end-to-end: 10 special keypresses, proven optimal, 0
 conflicts, up from the 8 keys an older, smaller lexicon needed); added `.gitignore` and
 deleted a pile of stale scratch/backup cruft (`PROGRESS.md`, `PAYER_SYLLCV_AUDIT.md`,
 `bkp/`-`bkp4/`, pickles, etc. — all safe, all regenerable or superseded); fixed a real
@@ -108,7 +108,7 @@ matches every plural word regardless of gender) wins over the more specific `"f_
 even in homophone groups where they'd be equally sufficient locally. Net effect: the
 same semantic distinction ("this is the feminine plural") ends up encoded as two
 different, non-reusable features (`"p"` in some groups, `"f_p"` in others) — feature
-proliferation that forces the downstream `satOptimizeDiscriminator` special-key
+proliferation that forces the downstream `satOptimizeDiscriminator` special-keypress
 allocator to spend an extra key/stroke on `"p"` instead of reusing the key already
 assigned to `"f_p"`.
 

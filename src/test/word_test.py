@@ -153,6 +153,47 @@ class TestSplitInfoVerb:
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# mergeInfoVerb
+# ═══════════════════════════════════════════════════════════════════════════════
+
+class TestMergeInfoVerb:
+
+    def test_appends_to_existing_infoVerb(self):
+        """Result matches Lexique383's own multi-tag row convention (";"-separated,
+        trailing ";"), the same format "parle" already carries natively."""
+        w = _make_word(gramCat=GramCat.VER, infoVerb="ind:pre:3s")
+        w.mergeInfoVerb("sub:pre:3s")
+        assert w.infoVerb == "ind:pre:3s;sub:pre:3s;"
+
+    def test_strips_each_side_s_own_trailing_semicolon(self):
+        """Both the raw LexiqueMixte and LexiqueSynthetic infover columns already end in
+        ";" -- merging must not produce a stray ";;" in the middle."""
+        w = _make_word(gramCat=GramCat.VER, infoVerb="ind:pre:3s;")
+        w.mergeInfoVerb("sub:pre:3s;")
+        assert w.infoVerb == "ind:pre:3s;sub:pre:3s;"
+
+    def test_sets_infoVerb_when_previously_none(self):
+        w = _make_word(gramCat=GramCat.VER, infoVerb=None)
+        w.mergeInfoVerb("sub:pre:3s")
+        assert w.infoVerb == "sub:pre:3s;"
+
+    def test_parsed_features_include_both_readings(self):
+        """Mirrors how Lexique383 natively packs several readings of a common verb
+        (e.g. "parle") into one row -- after merging, getFeatures() must see both,
+        exactly as if they had arrived together in a single ";"-separated infoVerb."""
+        w = _make_word(gramCat=GramCat.VER, infoVerb="ind:pre:3s")
+        w.mergeInfoVerb("sub:pre:3s")
+        features = w.getFeatures()
+        assert "indicatif" in features
+        assert "subjonctif" in features
+
+    def test_duplicate_tag_not_added_twice(self):
+        w = _make_word(gramCat=GramCat.VER, infoVerb="ind:pre:3s;")
+        w.mergeInfoVerb("ind:pre:3s;")
+        assert w.infoVerb == "ind:pre:3s;"
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # __hash__ / __eq__
 # ═══════════════════════════════════════════════════════════════════════════════
 

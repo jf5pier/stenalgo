@@ -3,7 +3,7 @@
 """
 Phase 0 ambiguity checker (see ROADMAP.md): measures where frequency-weighted stroke
 ambiguity lives in a `theory` (as built by `Dictionary.buildTheory`), before any physical
-special-key or phoneme-chord assignment is committed to.
+special-keypress or phoneme-chord assignment is committed to.
 
 Two independently-classified kinds of ambiguity coexist in one stroke cluster:
 - same-lemma ambiguity (inflected forms of one lemma, e.g. dors/dort) — the conjugation track.
@@ -15,8 +15,8 @@ dictionary.py:496-505): two different-gramCat, differently-spelled readings of o
 that each land in their own singleton same-lemma group and so never trip the existing
 `len(lemmeWords) > 1` discrimination trigger.
 
-Part 2 (token-level phoneme-anchor search) discovers, rather than assumes, which physical
-coda-phoneme keys are usable as a reusable "meaning anchor" per atomic grammatical token
+Part 2 (atomic-feature phoneme-keypress search) discovers, rather than assumes, which physical
+coda-phoneme keys are usable as a reusable "feature keypress" per atomic grammatical feature
 (person, number, gender, ...) across the whole lexicon, answering ROADMAP.md's open question 6
 instead of guessing at it.
 """
@@ -30,10 +30,10 @@ from itertools import combinations
 from src.grammar import Phoneme
 from src.keyboard import Keyboard, Stroke, Strokes
 from src.word import (
-    Lemme, LemmeGramCat, Word, WordFeature, featureTokens, groupWordsByBareLemme, groupWordsByLemme,
+    Lemme, LemmeGramCat, Word, WordFeature, atomicFeatures, groupWordsByBareLemme, groupWordsByLemme,
 )
-from src.featureextractor import extractDiscriminatingFeatures
-from src.greedyoptimizer import FEATURE_PRIORITY, greedyOptimizeDiscriminator
+from src.featureextractor import buildDiscriminatorSelection
+from src.greedyoptimizer import FEATURE_PRIORITY
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -181,7 +181,7 @@ def computeOverflowFrequencyMass(
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# Part 2 — token-level phoneme-anchor search (keyboard-needing)
+# Part 2 — atomic-feature phoneme-keypress search (keyboard-needing)
 # ═══════════════════════════════════════════════════════════════════════════
 
 def buildWordToStrokes(theory: dict[Strokes, list[Word]]) -> dict[Word, Strokes]:
@@ -191,7 +191,7 @@ def buildWordToStrokes(theory: dict[Strokes, list[Word]]) -> dict[Word, Strokes]
 def _selectCanonicalIndex(featureSet: tuple[WordFeature, ...], wordTuples: list[tuple[Word, ...]]) -> int:
     """Mirrors assignDiscriminatorKeypresses' no-stroke pick: the member whose feature is
     most linguistically unmarked (FEATURE_PRIORITY), tie-broken by corpus frequency, needs no
-    added anchor phoneme at all."""
+    added feature-keypress phoneme at all."""
     freqByIndex = [0.0] * len(featureSet)
     for wordTuple in wordTuples:
         for i, word in enumerate(wordTuple):
@@ -199,17 +199,17 @@ def _selectCanonicalIndex(featureSet: tuple[WordFeature, ...], wordTuples: list[
     return max(range(len(featureSet)), key=lambda i: (FEATURE_PRIORITY.get(featureSet[i], 0), freqByIndex[i]))
 
 
-def buildTokenToWords(
+def buildAtomicFeatureToWords(
     augmentedTheory: dict[tuple[WordFeature, ...], list[tuple[Word, ...]]]
 ) -> dict[str, list[tuple[Word, WordFeature]]]:
     """
     For every non-canonical (word, feature) pair in augmentedTheory (skipping the "nofeature"
     sentinel and single-member featuresets, which have no canonical/non-canonical split),
-    tokenize the feature via featureTokens and record which words carry each atomic token.
-    A word whose feature is a multi-token combo ("pers_3:nbr_p") appears under each of its
-    tokens.
+    split the feature into atomic features via atomicFeatures and record which words carry
+    each one. A word whose feature is a multi-atomic-feature combo ("pers_3:nbr_p") appears
+    under each of its atomic features.
     """
-    tokenToWords: dict[str, list[tuple[Word, WordFeature]]] = defaultdict(list)
+    atomicFeatureToWords: dict[str, list[tuple[Word, WordFeature]]] = defaultdict(list)
     for featureSet, wordTuples in augmentedTheory.items():
         if "nofeature" in featureSet or len(featureSet) < 2:
             continue
@@ -219,9 +219,9 @@ def buildTokenToWords(
                 continue
             for wordTuple in wordTuples:
                 word = wordTuple[i]
-                for token in featureTokens(feature):
-                    tokenToWords[token].append((word, feature))
-    return dict(tokenToWords)
+                for atomicFeature in atomicFeatures(feature):
+                    atomicFeatureToWords[atomicFeature].append((word, feature))
+    return dict(atomicFeatureToWords)
 
 
 def _appendCodaAddition(strokes: Strokes, additionKeys: tuple[int, ...]) -> Strokes:
@@ -244,8 +244,8 @@ def _isFeasibleAddition(
 
 
 @dataclass
-class TokenAnchorFeasibility:
-    token: str
+class FeatureKeypressFeasibility:
+    atomicFeature: str
     feasibleSingleKeyPhonemes: list[str] = field(default_factory=list)
     feasibleComboPhonemes: list[tuple[str, str]] = field(default_factory=list)
 
@@ -254,16 +254,16 @@ class TokenAnchorFeasibility:
         return not self.feasibleSingleKeyPhonemes and not self.feasibleComboPhonemes
 
 
-def findTokenAnchors(
-    tokenToWords: dict[str, list[tuple[Word, WordFeature]]],
+def findFeatureKeypresses(
+    atomicFeatureToWords: dict[str, list[tuple[Word, WordFeature]]],
     theory: dict[Strokes, list[Word]],
     keyboard: Keyboard,
     comboSize: int = 2,
-) -> dict[str, TokenAnchorFeasibility]:
+) -> dict[str, FeatureKeypressFeasibility]:
     """
-    For each atomic token, scan candidate right-hand coda phonemes:
-    - Round 1: every individual coda phoneme. Feasible for the token if, applied to every
-      word carrying that token (appended to the word's last-syllable coda), the resulting
+    For each atomic feature, scan candidate right-hand coda phonemes:
+    - Round 1: every individual coda phoneme. Feasible for the atomic feature if, applied to
+      every word carrying it (appended to the word's last-syllable coda), the resulting
       Strokes never collides with another word/cluster's existing stroke, and isn't a no-op.
     - Round 2 (only if round 1 found nothing): 2-key combos of coda phonemes, capped at
       comboSize=2 -- no further escalation in Phase 0.
@@ -275,8 +275,8 @@ def findTokenAnchors(
         strokesForPhoneme = keyboard.getStrokesOfPhoneme(phoneme, "coda")
         codaKeysOf[phoneme] = strokesForPhoneme[0] if strokesForPhoneme else ()
 
-    results: dict[str, TokenAnchorFeasibility] = {}
-    for token, wordFeaturePairs in tokenToWords.items():
+    results: dict[str, FeatureKeypressFeasibility] = {}
+    for atomicFeature, wordFeaturePairs in atomicFeatureToWords.items():
         words = [word for word, _ in wordFeaturePairs]
         feasibleSingle = [
             phoneme for phoneme, keys in codaKeysOf.items()
@@ -288,8 +288,8 @@ def findTokenAnchors(
                 keys = tuple(sorted(set(codaKeysOf.get(p1, ())) | set(codaKeysOf.get(p2, ()))))
                 if keys and all(_isFeasibleAddition(wordToStrokes[word], keys, theory) for word in words):
                     feasibleCombo.append((p1, p2))
-        results[token] = TokenAnchorFeasibility(
-            token=token, feasibleSingleKeyPhonemes=feasibleSingle, feasibleComboPhonemes=feasibleCombo,
+        results[atomicFeature] = FeatureKeypressFeasibility(
+            atomicFeature=atomicFeature, feasibleSingleKeyPhonemes=feasibleSingle, feasibleComboPhonemes=feasibleCombo,
         )
     return results
 
@@ -301,34 +301,35 @@ class ComposedChordReport:
 
 
 def checkComposedChords(
-    tokenAnchors: dict[str, TokenAnchorFeasibility],
-    tokenToWords: dict[str, list[tuple[Word, WordFeature]]],
+    featureKeypresses: dict[str, FeatureKeypressFeasibility],
+    atomicFeatureToWords: dict[str, list[tuple[Word, WordFeature]]],
     theory: dict[Strokes, list[Word]],
     keyboard: Keyboard,
 ) -> ComposedChordReport:
     """
-    For words needing >1 token (e.g. pers_3 + nbr_p), compose the candidate chord as the union
-    of each token's chosen anchor key(s) and verify the composed stroke is still collision-free:
-    a token-pair can each be individually fine and still collide once unioned on one word, or
-    collide with a same-cluster sibling. Prefers a composed multi-token chord over an arbitrary
-    combo -- this is the "3rd-person-plural = 3rd-person key + plural key" preference.
+    For words needing >1 atomic feature (e.g. pers_3 + nbr_p), compose the candidate chord as
+    the union of each atomic feature's chosen keypress key(s) and verify the composed stroke
+    is still collision-free: an atomic-feature pair can each be individually fine and still
+    collide once unioned on one word, or collide with a same-cluster sibling. Prefers a
+    composed multi-atomic-feature chord over an arbitrary combo -- this is the
+    "3rd-person-plural = 3rd-person key + plural key" preference.
     """
     wordToStrokes = buildWordToStrokes(theory)
-    wordFeatureTokens: dict[Word, frozenset[str]] = {}
-    for pairs in tokenToWords.values():
+    wordAtomicFeatures: dict[Word, frozenset[str]] = {}
+    for pairs in atomicFeatureToWords.values():
         for word, feature in pairs:
-            wordFeatureTokens[word] = featureTokens(feature)
+            wordAtomicFeatures[word] = atomicFeatures(feature)
 
     report = ComposedChordReport()
-    for word, tokens in wordFeatureTokens.items():
-        if len(tokens) <= 1:
-            continue  # single-token features are covered directly by findTokenAnchors
-        anchorKeys: set[int] = set()
-        allTokensAnchored = True
-        for token in tokens:
-            feasibility = tokenAnchors.get(token)
+    for word, wordAtoms in wordAtomicFeatures.items():
+        if len(wordAtoms) <= 1:
+            continue  # single-atomic-feature features are covered directly by findFeatureKeypresses
+        keypressKeys: set[int] = set()
+        allAtomicFeaturesFeasible = True
+        for atomicFeature in wordAtoms:
+            feasibility = featureKeypresses.get(atomicFeature)
             if feasibility is None or feasibility.infeasible:
-                allTokensAnchored = False
+                allAtomicFeaturesFeasible = False
                 break
             chosenPhoneme = (
                 feasibility.feasibleSingleKeyPhonemes[0] if feasibility.feasibleSingleKeyPhonemes
@@ -336,8 +337,9 @@ def checkComposedChords(
             )
             keys = keyboard.getStrokesOfPhoneme(chosenPhoneme, "coda")
             if keys:
-                anchorKeys.update(keys[0])
-        if not allTokensAnchored or not _isFeasibleAddition(wordToStrokes[word], tuple(sorted(anchorKeys)), theory):
+                keypressKeys.update(keys[0])
+        if (not allAtomicFeaturesFeasible
+                or not _isFeasibleAddition(wordToStrokes[word], tuple(sorted(keypressKeys)), theory)):
             report.infeasibleWords.append(word)
         else:
             report.feasibleWords.append(word)
@@ -407,27 +409,26 @@ if __name__ == "__main__":
             _ = f.write(f"{strokeString}\t{len(r.words)}\t{orthos}\t{r.sameLemmaAmbiguous}\t"
                          f"{r.lemmaHomophoneLemmaCount}\t{r.crossCategoryClash}\t{r.totalFrequency}\n")
 
-    discrimFeatureWords, orderedFeatures, _strokeLemmeDiscriminators = extractDiscriminatingFeatures(theory)
-    augmentedTheory = greedyOptimizeDiscriminator(theory, discrimFeatureWords, orderedFeatures, starboard)
+    augmentedTheory = buildDiscriminatorSelection(theory)
 
-    tokenToWords = buildTokenToWords(augmentedTheory)
-    tokenAnchors = findTokenAnchors(tokenToWords, theory, starboard)
-    composedReport = checkComposedChords(tokenAnchors, tokenToWords, theory, starboard)
+    atomicFeatureToWords = buildAtomicFeatureToWords(augmentedTheory)
+    featureKeypresses = findFeatureKeypresses(atomicFeatureToWords, theory, starboard)
+    composedReport = checkComposedChords(featureKeypresses, atomicFeatureToWords, theory, starboard)
 
-    print("\n=== Per-token phoneme-anchor feasibility ===")
-    for token, feasibility in sorted(tokenAnchors.items()):
+    print("\n=== Per-atomic-feature phoneme-keypress feasibility ===")
+    for atomicFeature, feasibility in sorted(featureKeypresses.items()):
         if feasibility.feasibleSingleKeyPhonemes:
-            print(f"  {token:>10}: single-key anchors {feasibility.feasibleSingleKeyPhonemes}")
+            print(f"  {atomicFeature:>10}: single-key candidates {feasibility.feasibleSingleKeyPhonemes}")
         elif feasibility.feasibleComboPhonemes:
-            print(f"  {token:>10}: combo anchors {feasibility.feasibleComboPhonemes[:5]}")
+            print(f"  {atomicFeature:>10}: combo candidates {feasibility.feasibleComboPhonemes[:5]}")
         else:
-            print(f"  {token:>10}: INFEASIBLE even at combo size 2")
-    print(f"\nComposed multi-token chords: {len(composedReport.feasibleWords)} feasible,"
+            print(f"  {atomicFeature:>10}: INFEASIBLE even at combo size 2")
+    print(f"\nComposed multi-atomic-feature chords: {len(composedReport.feasibleWords)} feasible,"
           f" {len(composedReport.infeasibleWords)} infeasible")
 
-    with open("anchor_feasibility.tsv", "w") as f:
-        _ = f.write("token\tfeasibleSingleKeys\tfeasibleCombos\tinfeasible\n")
-        for token, feasibility in sorted(tokenAnchors.items()):
-            _ = f.write(f"{token}\t{','.join(feasibility.feasibleSingleKeyPhonemes)}\t"
+    with open("feature_keypress_feasibility.tsv", "w") as f:
+        _ = f.write("atomicFeature\tfeasibleSingleKeys\tfeasibleCombos\tinfeasible\n")
+        for atomicFeature, feasibility in sorted(featureKeypresses.items()):
+            _ = f.write(f"{atomicFeature}\t{','.join(feasibility.feasibleSingleKeyPhonemes)}\t"
                          f"{','.join('+'.join(c) for c in feasibility.feasibleComboPhonemes)}\t"
                          f"{feasibility.infeasible}\n")

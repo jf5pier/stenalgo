@@ -4,9 +4,10 @@
 
 from unittest.mock import MagicMock
 from src.word import Word, GramCat
+from src.greedyoptimizer import greedyOptimizeDiscriminator
 from src.satoptimizer import (
     _colorFeatures,
-    _minSpecialKeysNeeded,
+    _minSpecialKeypressesNeeded,
     _computeFamilyCorrelations,
     associationScore,
     polarityAssociations,
@@ -79,7 +80,7 @@ class TestFamilyCorrelations:
             _make_verb("faites", "2p", rawOrthosyllCV="f_a_i_t_e_s"),
         ]
 
-    def test_opposite_number_tokens_negative(self):
+    def test_opposite_number_atomic_features_negative(self):
         corr = _computeFamilyCorrelations(self._number_words())
         assert associationScore("s", "p", corr) < 0
         assert associationScore("nbr_s", "nbr_p", corr) < 0
@@ -115,18 +116,36 @@ class TestFamilyCorrelations:
 
     def test_unrelated_families_neutral(self):
         corr = _computeFamilyCorrelations(self._number_words())
-        assert associationScore("pers_1", "pers_2", corr) == 0.0
         assert associationScore("indicatif", "subjonctif", corr) == 0.0
         assert associationScore("s", "pers_1", corr) == 0.0
 
-    def test_compound_features_extract_family_token(self):
+    def test_opposite_person_atomic_features_negative(self):
+        """Different persons are opposed, discovered empirically like number."""
         corr = _computeFamilyCorrelations(self._number_words())
+        assert associationScore("pers_1", "pers_2", corr) < 0
+        assert associationScore("pers_1", "pers_3", corr) < 0
+
+    def test_same_person_across_tenses_fully_associated(self):
+        """indicatif:pers_1 and imparfait:pers_1 both reduce to the same atomic
+        feature pers_1 -- guaranteed +1.0 regardless of corpus data, same as any
+        other identical-atom comparison."""
+        corr = _computeFamilyCorrelations(self._number_words())
+        assert associationScore("indicatif:pers_1", "imparfait:pers_1", corr) == 1.0
+
+    def test_compound_features_extract_family_atomic_feature(self):
+        corr = _computeFamilyCorrelations(self._number_words())
+        # same person (pers_3), opposite number -- most-opposed-wins picks the number
+        # family's negative score over the person family's +1.0 self-match.
         assert associationScore(
             "indicatif:pers_3:nbr_s", "indicatif:pers_3:nbr_p", corr) < 0
+        # different persons (pers_1 vs pers_3) -- opposed, not neutral, now that
+        # person is a tracked family.
         assert associationScore(
-            "indicatif:pers_1", "indicatif:pers_3:nbr_s", corr) == 0.0
+            "indicatif:pers_1", "indicatif:pers_3:nbr_s", corr) < 0
+        # no shared family at all (mode only) -- still neutral.
+        assert associationScore("indicatif", "subjonctif:pers_3:nbr_s", corr) == 0.0
 
-    def test_identical_token_fully_associated(self):
+    def test_identical_atomic_feature_fully_associated(self):
         corr = _computeFamilyCorrelations(self._number_words())
         assert associationScore("s", "s", corr) == 1.0
 
@@ -179,21 +198,21 @@ class TestColorFeatures:
 
 
 # ---------------------------------------------------------------------------
-# _minSpecialKeysNeeded
+# _minSpecialKeypressesNeeded
 # ---------------------------------------------------------------------------
 
-class TestMinSpecialKeysNeeded:
+class TestMinSpecialKeypressesNeeded:
 
     def test_triangle_needs_three(self):
         sets = [{"a", "b", "c"}]
-        assert _minSpecialKeysNeeded(sets) == 3
+        assert _minSpecialKeypressesNeeded(sets) == 3
 
     def test_disjoint_pairs_need_two(self):
         sets = [{"a", "b"}, {"c", "d"}]
-        assert _minSpecialKeysNeeded(sets) == 2
+        assert _minSpecialKeypressesNeeded(sets) == 2
 
     def test_empty_needs_none(self):
-        assert _minSpecialKeysNeeded([]) == 0
+        assert _minSpecialKeypressesNeeded([]) == 0
 
 
 # ---------------------------------------------------------------------------
@@ -231,8 +250,7 @@ class TestPolarityInColorFeatures:
 class TestSatOptimizeDiscriminator:
 
     def test_empty_theory(self):
-        numKeys, penalty, proven, keys, conflicted = satOptimizeDiscriminator(
-            {}, {}, [], _mock_keyboard())
+        numKeys, penalty, proven, keys, conflicted = satOptimizeDiscriminator({}, {})
         assert numKeys == 0
         assert penalty == 0.0
         assert proven
@@ -248,9 +266,10 @@ class TestSatOptimizeDiscriminator:
         theory = {((1, 2),): [w1, w2, w3]}
         from src.featureextractor import extractDiscriminatingFeatures
         discBy, ordered, _ = extractDiscriminatingFeatures(theory)
+        featuresetWords = greedyOptimizeDiscriminator(theory, discBy, ordered, _mock_keyboard())
 
         numKeys, penalty, proven, keys, conflicted = satOptimizeDiscriminator(
-            theory, discBy, ordered, _mock_keyboard())
+            featuresetWords, theory)
 
         assert conflicted == []
         assert penalty == 0.0
@@ -265,14 +284,14 @@ class TestSatOptimizeDiscriminator:
         theory = {((1, 2),): [w1, w2, w3]}
         from src.featureextractor import extractDiscriminatingFeatures
         discBy, ordered, _ = extractDiscriminatingFeatures(theory)
+        featuresetWords = greedyOptimizeDiscriminator(theory, discBy, ordered, _mock_keyboard())
 
-        minKeys, _, _, _, _ = satOptimizeDiscriminator(
-            theory, discBy, ordered, _mock_keyboard())
+        minKeys, _, _, _, _ = satOptimizeDiscriminator(featuresetWords, theory)
         if minKeys < 2:
             return  # nothing to force a conflict with
 
         numKeys, penalty, proven, keys, conflicted = satOptimizeDiscriminator(
-            theory, discBy, ordered, _mock_keyboard(), numSpecialKeys=minKeys - 1)
+            featuresetWords, theory, numSpecialKeypresses=minKeys - 1)
 
         assert numKeys == minKeys - 1
         assert len(conflicted) >= 1

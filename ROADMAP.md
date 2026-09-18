@@ -51,7 +51,7 @@ separate problem, solved by a separate mechanism (conjugation chords, not reserv
 - `Dictionary.buildTheory` groups words into homophone clusters **by the stroke sequence their
   phonology resolves to** under the current keyboard. `theory.tsv` (untracked) is the raw,
   unresolved table this produces: stroke → comma-joined list of homophone orthographies. It
-  does not yet encode any special-key disambiguation — this is "theory 1."
+  does not yet encode any special-keypress disambiguation — this is "theory 1."
 
 **Same-lemma homophones ("theory 2," in progress)**
 - `extractDiscriminatingFeatures` → `greedyOptimizeDiscriminator` (`src/greedyoptimizer.py`)
@@ -59,7 +59,7 @@ separate problem, solved by a separate mechanism (conjugation chords, not reserv
   see the cross-category gap below) and greedily assign a discriminating `WordFeature` to each
   word in a >1 sub-group. Output: `augmentedTheory: dict[tuple[WordFeature,...],
   list[tuple[Word,...]]]`.
-- Two mechanisms exist to turn those abstract features into physical special-key strokes, and
+- Two mechanisms exist to turn those abstract features into physical special keypresses, and
   only one is wired in:
   - **`satOptimizeDiscriminator`** (`src/satoptimizer.py`) — CP-SAT graph coloring, computes
     the minimum number of abstract key-indices needed for zero conflicts (currently **10**, up
@@ -85,10 +85,10 @@ separate problem, solved by a separate mechanism (conjugation chords, not reserv
   differently-spelled readings of the same lemma can pass through undiscriminated. Found and
   fixed once in the diagnostic table, not in the discrimination logic itself.
 
-**Known, already-scoped bug affecting special-key count**
+**Known, already-scoped bug affecting special-keypress count**
 - Per `todo.md`: `Word.getFeatures()` offers both a bare feature (`"p"`) and a gender-qualified
   one (`"f_p"`/`"m_p"`) for the same distinction; the greedy selector picks by lexicon-wide
-  popularity rather than reusability, sometimes costing a whole extra special key. Explicitly
+  popularity rather than reusability, sometimes costing a whole extra special keypress. Explicitly
   deferred, scope with the user first.
 
 **Lemma-homophones (cross-lemma, don't share a lemma at all)**
@@ -125,7 +125,7 @@ separate problem, solved by a separate mechanism (conjugation chords, not reserv
 
 Recorded here so they survive a `/clear` and aren't re-litigated each session.
 
-1. **Special-key budget is 2 keys, not 4.** Of the Starboard's 4 reserved keys, only `*` and
+1. **Reserved-key budget is 2 keys, not 4.** Of the Starboard's 4 reserved keys, only `*` and
    `#` are guaranteed to remain available long-term (one more than a traditional Ireland layout
    effectively offers, whose only free non-phoneme key is `*` — its `#` is the number bar). The
    other two reserved keys exist today but cannot be counted on.
@@ -212,7 +212,7 @@ problems resolved by their own mechanism, then persist it.
 - Both tracks are CP-SAT-shaped and can share one model with common conflict variables, though
   they no longer share a reserved-key budget.
 - Persist the result: a real "theory 2" output file (replacing or supplementing `theory.tsv`)
-  with one row per word, its phonetic stroke, and its resolved special-key/chord stroke.
+  with one row per word, its phonetic stroke, and its resolved special-keypress/chord stroke.
 - Gate: Phase 0's checker goes green against the persisted output.
 
 ### Phase 3 — Re-validate and version the phoneme layer
@@ -222,12 +222,12 @@ freeze/versioning policy before the theory reaches real learners.
   against today's lexicon changes the layout at all.
 - Persist solver parameters + a lexicon hash next to the output going forward, so the layout is
   reproducible — there is currently no record of how `starboard3h.json` was generated.
-- Decide when to freeze the phoneme layout and the special-key physical layout for learnability
+- Decide when to freeze the phoneme layout and the special-keypress physical layout for learnability
   — a shifting layout is a real cost, distinct from "can we still improve it," and matters more
   now that a microcontroller target is confirmed (firmware/hardware users tolerate drift even
   less than a Plover dictionary file does).
 - Decide brief scope (Phase 5) before freezing — briefs interact with the stroke budget.
-- Watch special-key headroom: 4 reserved keys give 16 possible strokes; the lexicon already grew
+- Watch special-keypress headroom: 4 reserved keys give 16 possible strokes; the lexicon already grew
   from needing 8 to 10 abstract keys for the conjugation track alone. Worth a threshold/
   monitoring approach now.
 
@@ -353,7 +353,7 @@ the base theory (distinct from Phase 5's automatic, corpus-driven briefs).
    against custom sets. Make it user-configurable now, or revisit once the feature set
    stabilizes?
 3. **Layout freeze** — is there a target point (e.g. "once Phase 0–2 land") to lock the phoneme
-   + special-key physical layout for real learners, separate from continuing lexicon curation
+   + special-keypress physical layout for real learners, separate from continuing lexicon curation
    indefinitely?
 4. **`theory.tsv` fate** — should the new resolved theory output replace `theory.tsv`, or live
    alongside it as a raw/debug view?

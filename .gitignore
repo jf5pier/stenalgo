@@ -10,7 +10,7 @@ AugTheory.pickle*
 
 # Regenerable reports (src/ambiguitychecker.py)
 ambiguity_report.tsv
-anchor_feasibility.tsv
+feature_keypress_feasibility.tsv
 
 # Regenerable pipeline output (dictionary.py)
 theory.tsv
