@@ -9,7 +9,7 @@ from src.featureextractor import (
     getAmbiguousMultiphonemes,
     extractDiscriminatingFeatures,
     buildFeasibleDiscriminatorOptions,
-    selectFeaturesBySetCover,
+    selectSharedDiscriminators,
 )
 
 
@@ -324,19 +324,19 @@ class TestBuildFeasibleDiscriminatorOptions:
 
 
 # ---------------------------------------------------------------------------
-# selectFeaturesBySetCover
+# selectSharedDiscriminators
 # ---------------------------------------------------------------------------
 
-class TestSelectFeaturesBySetCover:
+class TestSelectSharedDiscriminators:
 
     def test_empty_input(self):
-        chosen, unresolved = selectFeaturesBySetCover({})
+        chosen, unresolved = selectSharedDiscriminators({})
         assert chosen == {}
         assert unresolved == set()
 
     def test_feature_shared_across_unrelated_groups_gets_reused(self):
         """If the same feature can resolve words in two unrelated lemme
-        groups, set-cover should pick it once and reuse it for both, rather
+        groups, the selection should pick it once and reuse it for both, rather
         than needing two different features."""
         w1 = _make_word(ortho="a1", lemme="a")
         w2 = _make_word(ortho="a2", lemme="a")
@@ -346,7 +346,7 @@ class TestSelectFeaturesBySetCover:
             (((1,),), "a"): {w1: {"shared"}, w2: {"other_a"}},
             (((2,),), "b"): {w3: {"shared"}, w4: {"other_b"}},
         }
-        chosen, unresolved = selectFeaturesBySetCover(groupFeasibleFeatures)
+        chosen, unresolved = selectSharedDiscriminators(groupFeasibleFeatures)
         assert unresolved == set()
         assert chosen[w1] == "shared"
         assert chosen[w3] == "shared"
@@ -359,9 +359,42 @@ class TestSelectFeaturesBySetCover:
         groupFeasibleFeatures = {
             (((1,),), "a"): {w1: {"f1"}, w2: set()},
         }
-        chosen, unresolved = selectFeaturesBySetCover(groupFeasibleFeatures)
+        chosen, unresolved = selectSharedDiscriminators(groupFeasibleFeatures)
         assert chosen == {w1: "f1"}
         assert unresolved == {w2}
+
+    def test_same_ortho_homographs_collapse_to_one_owner(self):
+        """Two Word objects sharing an ortho (true homographs, e.g. an epicene noun's
+        masculine and feminine reading) inside the same group must resolve as a single
+        unit: whichever feasible feature the selection picks for the homograph group is attributed
+        only to its owner (the member whose own feasible set contains it); the sibling
+        gets neither a chosen feature nor an unresolved slot, mirroring
+        greedyOptimizeDiscriminator's same-ortho collapse."""
+        wA = _make_word(ortho="élève", lemme="élève", gender="m")
+        wB = _make_word(ortho="élève", lemme="élève", gender="f",
+                        rawOrthosyllCV="e_l_e_v_e_bis")
+        groupFeasibleFeatures = {
+            (((1,),), "élève_NOM"): {wA: {"only_a"}, wB: {"only_b"}},
+        }
+        chosen, unresolved = selectSharedDiscriminators(groupFeasibleFeatures)
+        assert unresolved == set()
+        assert len(chosen) == 1
+        ((owner, feature),) = chosen.items()
+        assert owner in (wA, wB)
+        assert feature in groupFeasibleFeatures[(((1,),), "élève_NOM")][owner]
+
+    def test_same_ortho_homograph_group_with_empty_union_is_fully_unresolved(self):
+        """When neither member of a same-ortho homograph group has any feasible feature, both
+        must be reported unresolved (not just one representative)."""
+        wA = _make_word(ortho="fayotte", lemme="fayotte", gender="m")
+        wB = _make_word(ortho="fayotte", lemme="fayotte", gender="f",
+                        rawOrthosyllCV="f_a_y_o_t_t_e_bis")
+        groupFeasibleFeatures = {
+            (((1,),), "fayotte_NOM"): {wA: set(), wB: set()},
+        }
+        chosen, unresolved = selectSharedDiscriminators(groupFeasibleFeatures)
+        assert chosen == {}
+        assert unresolved == {wA, wB}
 
     def test_tie_break_is_deterministic(self):
         """When two features resolve the same number of words (a genuine tie),
@@ -375,8 +408,8 @@ class TestSelectFeaturesBySetCover:
                 (((1,),), "a"): {w1: {"zeta"}, w2: {"alpha"}, w3: set(featureOrderW3)},
             }
 
-        resultA = selectFeaturesBySetCover(build(["zeta", "alpha"]))
-        resultB = selectFeaturesBySetCover(build(["alpha", "zeta"]))
+        resultA = selectSharedDiscriminators(build(["zeta", "alpha"]))
+        resultB = selectSharedDiscriminators(build(["alpha", "zeta"]))
         assert resultA == resultB
         # Alphabetically-first feature among the tied pair ("alpha") wins for w3
         chosen, unresolved = resultA

@@ -221,7 +221,7 @@ and deciding when to freeze it for learners, is ongoing — see `ROADMAP.md`.
 #### Identifying homophones and defining treatment rules [ ]
 Homophones split into two different problems needing two different mechanisms: words that share a lemma but differ in inflection (a conjugation
 problem, solved with phoneme-key chords) and words whose lemmas differ entirely, e.g. ver/vert/verre/vers/vair (a spelling problem, solved with
-the keyboard's two guaranteed special keys, `*`/`#`). Feature-discrimination code for the first case already exists
+the keyboard's two guaranteed reserved keys, `*`/`#`). Feature-discrimination code for the first case already exists
 (`greedyOptimizeDiscriminator`, `satOptimizeDiscriminator`, `assignDiscriminatorKeypresses`), but isn't yet fully wired into a persisted theory,
 and the second case is still unaddressed. Full detail and open questions are tracked in `ROADMAP.md`.
 

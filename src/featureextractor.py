@@ -194,7 +194,7 @@ def buildFeasibleDiscriminatorOptions(
 
     Unlike greedyOptimizeDiscriminator, which commits to a single feature-priority order and
     therefore a single assignment, this returns the full feasible search space per group and
-    per word. A global optimizer (e.g. a set-cover style solver) can then pick one feasible
+    per word. A global optimizer (`selectSharedDiscriminators`, below) can then pick one feasible
     feature per word across all groups so as to minimize the total number of distinct features
     used, instead of being locked into whichever feature happens to come first in a fixed order.
 
@@ -219,21 +219,39 @@ def buildFeasibleDiscriminatorOptions(
     return groupFeasibleFeatures
 
 
-def selectFeaturesBySetCover(
+def selectSharedDiscriminators(
         groupFeasibleFeatures: dict[tuple[Strokes, LemmeGramCat], dict[Word, set[WordFeature]]]
     ) -> tuple[dict[Word, WordFeature], set[Word]]:
     """
-    Greedy set-cover over buildFeasibleDiscriminatorOptions's output: repeatedly picks the
+    Shared-discriminator selection (a greedy set-cover) over buildFeasibleDiscriminatorOptions's output: repeatedly picks the
     feature that resolves the most still-unresolved words across all groups at once, so a
     feature already justified for one lemma gets reused for another instead of a new one
     being introduced. Words with no feasible feature are returned unresolved (mirrors
     greedyOptimizeDiscriminator's "nofeature" fallback) instead of being silently dropped.
+
+    Within each group, words sharing an orthography (true homographs, or a same-lemma form
+    that simply writes the same as another) are collected into a homograph group before
+    covering: they write identical text, so only one of them needs to actually own a
+    discriminating stroke. This mirrors greedyOptimizeDiscriminator's same-ortho collapse (it
+    drops the other words sharing an ortho once one of them is assigned a feature). A homograph
+    group's feasible set is the union of its members'; once a feature is chosen for the group,
+    it's attributed to whichever member natively carries it in its own feasible set (its
+    "owner" -- unique per homograph group by construction, see extractDiscriminatingFeatures's
+    owner-picking logic) and the other members get nothing. A homograph group whose union is
+    empty leaves *all* its members unresolved.
     """
-    unresolved: dict[Word, set[WordFeature]] = {
-        word: set(features)
-        for wordFeasibleFeatures in groupFeasibleFeatures.values()
-        for word, features in wordFeasibleFeatures.items()
-    }
+    homographGroupFeasible: dict[tuple[tuple[Strokes, LemmeGramCat], WordOrtho], set[WordFeature]] = {}
+    homographGroupMembers: dict[tuple[tuple[Strokes, LemmeGramCat], WordOrtho], list[Word]] = {}
+    for groupKey, wordFeasibleFeatures in groupFeasibleFeatures.items():
+        homographGroups: dict[WordOrtho, list[Word]] = defaultdict(list)
+        for word in wordFeasibleFeatures:
+            homographGroups[word.ortho].append(word)
+        for ortho, members in homographGroups.items():
+            homographGroupKey = (groupKey, ortho)
+            homographGroupMembers[homographGroupKey] = members
+            homographGroupFeasible[homographGroupKey] = set().union(*(wordFeasibleFeatures[m] for m in members))
+
+    unresolved: dict[tuple[tuple[Strokes, LemmeGramCat], WordOrtho], set[WordFeature]] = dict(homographGroupFeasible)
     chosen: dict[Word, WordFeature] = {}
     while True:
         featureCounts: dict[WordFeature, int] = defaultdict(int)
@@ -242,14 +260,68 @@ def selectFeaturesBySetCover(
                 featureCounts[feature] += 1
         if not featureCounts:
             break
-        # Prefer the simplest feature (fewest ':'/'_' components) among those still needed;
-        # break ties by how many still-unresolved words it covers, then by name.
+        # Prefer the feature covering the most still-unresolved homograph groups (a true
+        # greedy set-cover, per SHARED_DISCRIMINATOR_REWIRE_PLAN.md §7's A/B); break ties by simplicity
+        # (fewest ':'/'_' components), then by name.
         bestFeature = min(sorted(featureCounts),
-                           key=lambda feature: (_featureComplexity(feature), -featureCounts[feature]))
-        resolvedWords = [word for word, features in unresolved.items() if bestFeature in features]
-        for word in resolvedWords:
-            chosen[word] = bestFeature
-            del unresolved[word]
-    return chosen, set(unresolved)
+                           key=lambda feature: (-featureCounts[feature], _featureComplexity(feature)))
+        resolvedHomographGroups = [
+            homographGroupKey for homographGroupKey, features in unresolved.items() if bestFeature in features
+        ]
+        for homographGroupKey in resolvedHomographGroups:
+            groupKey, _ortho = homographGroupKey
+            owner = next(m for m in homographGroupMembers[homographGroupKey]
+                         if bestFeature in groupFeasibleFeatures[groupKey][m])
+            chosen[owner] = bestFeature
+            del unresolved[homographGroupKey]
+
+    unresolvedWords: set[Word] = {
+        word for homographGroupKey in unresolved for word in homographGroupMembers[homographGroupKey]
+    }
+    return chosen, unresolvedWords
+
+
+def buildDiscriminatorSelection(
+        theory: dict[Strokes, list[Word]],
+        wordIsDiscrminatedByFeature: dict[WordFeature, set[Word]] | None = None,
+    ) -> dict[tuple[WordFeature, ...], list[tuple[Word, ...]]]:
+    """
+    Single entry point for the adaptive, redundancy-free discriminator selection
+    (buildFeasibleDiscriminatorOptions + selectSharedDiscriminators), reshaped into the same
+    dict[tuple[WordFeature, ...], list[tuple[Word, ...]]] shape greedyOptimizeDiscriminator
+    produces, so every downstream consumer (satOptimizeDiscriminator, dictionary.py's Special
+    keypress mapping table, the ambiguity checker, the verb-paradigm tooling) shares one selection
+    instead of each re-deriving its own (see SHARED_DISCRIMINATOR_REWIRE_PLAN.md).
+
+    Pass an already-computed wordIsDiscrminatedByFeature (extractDiscriminatingFeatures's
+    first return value) when the caller already has one, to avoid a redundant full-corpus
+    re-scan; otherwise it's computed here.
+    """
+    if wordIsDiscrminatedByFeature is None:
+        wordIsDiscrminatedByFeature, _orderedFeatures, _strokeLemmeDiscriminators = \
+            extractDiscriminatingFeatures(theory)
+
+    groupFeasibleFeatures = buildFeasibleDiscriminatorOptions(theory, wordIsDiscrminatedByFeature)
+    sharedChosen, sharedUnresolved = selectSharedDiscriminators(groupFeasibleFeatures)
+
+    featuresetWords: dict[tuple[WordFeature, ...], list[tuple[Word, ...]]] = {}
+    for wordFeasibleFeatures in groupFeasibleFeatures.values():
+        selectedFeatureWord: list[tuple[WordFeature, Word]] = []
+        for word in wordFeasibleFeatures:
+            if word in sharedChosen:
+                selectedFeatureWord.append((sharedChosen[word], word))
+            elif word in sharedUnresolved:
+                selectedFeatureWord.append(("nofeature", word))
+            # else: a same-ortho sibling collapsed into its homograph group's owner -- write
+            # nothing, mirroring greedyOptimizeDiscriminator's same-ortho collapse.
+        if not selectedFeatureWord:
+            continue
+        featureSet = tuple(fw[0] for fw in selectedFeatureWord)
+        featuresetWords[featureSet] = featuresetWords.get(featureSet, []) + \
+            [tuple(fw[1] for fw in selectedFeatureWord)]
+
+    return {
+        fs: ws for fs, ws in sorted(featuresetWords.items(), key=lambda item: len(item[1]), reverse=True)
+    }
 
 

@@ -618,9 +618,11 @@ def crossLemmaFeatureSetCollisions(
 ) -> dict[tuple[WordFeature, ...], set[LemmeGramCat]]:
     """
     The literal "conflicting feature set" bug motivating this whole design
-    plan: a discriminator feature-set greedyOptimizeDiscriminator chose for
-    one lemma's homophone group is only returned here when it was
-    independently chosen for at least one *other*, unrelated lemma too (e.g.
+    plan: a discriminator feature-set chosen for one lemma's homophone group
+    (by the shared adaptive selection, src/featureextractor.py's
+    buildDiscriminatorSelection, or by greedyOptimizeDiscriminator) is only
+    returned here when it was independently chosen for at least one *other*,
+    unrelated lemma too (e.g.
     both rechampir and regarnir landing on the exact same minimal
     discriminator ('p', 'indicatif')). This is a real-homophone-collision
     check in the sense the design plan means it -- not a raw keystroke

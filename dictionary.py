@@ -22,7 +22,6 @@
 import csv
 import os
 import pickle
-import shutil
 from copy import deepcopy
 
 from src.grammar import Phoneme, Syllable, SyllableCollection
@@ -32,10 +31,8 @@ from src.keyboard import Keyboard, Starboard, Stroke, Strokes
 from src.cpsatsolver import optimizeKeyboard
 from src.featureextractor import (
     extractDiscriminatingFeatures,
-    buildFeasibleDiscriminatorOptions,
-    selectFeaturesBySetCover,
+    buildDiscriminatorSelection,
 )
-from src.greedyoptimizer import greedyOptimizeDiscriminator
 from src.satoptimizer import satOptimizeDiscriminator, _computeFamilyCorrelations, polarityAssociations
 
 
@@ -99,6 +96,15 @@ class Dictionary:
                 excludedWords = [l.strip() for l in ef.readlines()
                                             if l.strip() != '' and l.strip()[0] != '#']
 
+        # Same identity as Word.__post_init__'s _hash (ortho, phonology, lemme, gramCat,
+        # gender, number): a later source row (e.g. a LexiqueSynthetic paradigm-completion
+        # row) matching an already-loaded Word is the SAME homograph, just with a reading
+        # the earlier source's row didn't have -- it gets folded into that Word's infoVerb
+        # (Word.mergeInfoVerb) instead of becoming a second, separate Word instance, exactly
+        # how Lexique383 already represents a common verb's several readings in one row.
+        wordByIdentity: dict[tuple[str, str, str, str, str | None, str | None], Word] = {}
+        mergeCount = 0
+
         for wordSource in self.wordSources:
             if not os.path.exists(wordSource):
                 continue
@@ -109,6 +115,19 @@ class Dictionary:
                     if corpusWord["ortho"] is not None \
                             and corpusWord["ortho"][0] != "#" \
                             and corpusWord["ortho"] not in excludedWords :
+                        gender = corpusWord["genre"] if corpusWord["genre"] != '' else None
+                        number = corpusWord["nombre"] if corpusWord["nombre"] != '' else None
+                        infoVerb = corpusWord["infover"] if corpusWord["infover"] != '' else None
+
+                        identity = (corpusWord["ortho"], corpusWord["phon"], corpusWord["lemme"],
+                                    corpusWord["cgram"], gender, number)
+                        existingWord = wordByIdentity.get(identity)
+                        if existingWord is not None:
+                            if infoVerb is not None:
+                                existingWord.mergeInfoVerb(infoVerb)
+                                mergeCount += 1
+                            continue
+
                         word: Word = Word(
                             ortho = corpusWord["ortho"],
                             phonology = corpusWord["phon"],
@@ -117,18 +136,16 @@ class Dictionary:
                                 # if corpusWord["cgram"] != '' else None,
                             orthoGramCat = [GramCat[gc] for gc in
                                 corpusWord["cgramortho"].split(",")],
-                            gender = corpusWord["genre"]
-                                if corpusWord["genre"] != '' else None,
-                            number = corpusWord["nombre"]
-                                if corpusWord["nombre"] != '' else None,
-                            infoVerb = corpusWord["infover"]
-                                if corpusWord["infover"] != '' else None,
+                            gender = gender,
+                            number = number,
+                            infoVerb = infoVerb,
                             rawSyllCV = corpusWord["syll_cv"],
                             rawOrthosyllCV = corpusWord["orthosyll_cv"],
                             frequencyBook = float(corpusWord["freqlivres"]),
                             frequencyFilm = float(corpusWord["freqfilms2"])
                             )
                         words.append(word)
+                        wordByIdentity[identity] = word
 
                         lemmeGroup = self.wordsByLemme.get(word.lemme,
                                                            deepcopy([])) + [word]
@@ -137,6 +154,8 @@ class Dictionary:
                         sameOrtho = self.wordsByOrtho.get(corpusWord["ortho"],
                                                              deepcopy([])) + [word]
                         self.wordsByOrtho[corpusWord["ortho"]] = sameOrtho
+        print(f"readCorpus: {mergeCount} infoVerb merges fired (identity-dedup, "
+              f"Word.mergeInfoVerb) across {len(words)} distinct Word instances.")
         return words
 
     def analyseSyllabification(self) -> None:
@@ -436,10 +455,12 @@ if __name__ == "__main__":
             pickle.dump(discrimFeatureWords, pfile)
             pickle.dump(orderedFeatures, pfile)
 
-    augmentedTheory = \
-        greedyOptimizeDiscriminator(theory, 
-            discrimFeatureWords,
-            orderedFeatures, starboard)
+    # Shared-discriminator selection (src/featureextractor.py's buildDiscriminatorSelection),
+    # computed once here and reused for every downstream consumer -- the feature-count
+    # diagnostics below, the Special keypress mapping table (lemmaFeatureWord), and
+    # satOptimizeDiscriminator -- so none of them can silently diverge from each other
+    # (see SHARED_DISCRIMINATOR_REWIRE_PLAN.md §1).
+    augmentedTheory = buildDiscriminatorSelection(theory, discrimFeatureWords)
 
     featureCount: dict[WordFeature, int] = {}
     singleFeatureDiscrimator: dict[str, int] = {}
@@ -458,14 +479,9 @@ if __name__ == "__main__":
     print("Feature counts:", sorted(featureCount.items(), key=lambda x: x[1], reverse=True))
     print("Single feature discrimator:", sorted(singleFeatureDiscrimator.items(), key=lambda x: x[1], reverse=True))
 
-    # Comparison-only: how many distinct features a global set-cover selection would
-    # need versus greedyOptimizeDiscriminator's fixed-priority-order pick above. Does
-    # not replace augmentedTheory; purely informational until the numbers are reviewed.
-    groupFeasibleFeatures = buildFeasibleDiscriminatorOptions(theory, discrimFeatureWords)
-    setCoverChosen, setCoverUnresolved = selectFeaturesBySetCover(groupFeasibleFeatures)
-    print(f"\nselectFeaturesBySetCover: {len(set(setCoverChosen.values()))} distinct features used"
-          f" (vs {len(featureCount)} for greedyOptimizeDiscriminator),"
-          f" {len(setCoverUnresolved)} words unresolved.")
+    unresolvedCount = featureCount.get("nofeature", 0)
+    print(f"\nShared-discriminator selection: {len(featureCount) - (1 if unresolvedCount else 0)}"
+          f" distinct features used, {unresolvedCount} words unresolved.")
 
     familyCorrelations = _computeFamilyCorrelations(list({word for words in theory.values() for word in words}))
     associationTable = polarityAssociations(orderedFeatures, familyCorrelations)
@@ -477,10 +493,9 @@ if __name__ == "__main__":
     # for f1, f2, score in [a for a in associationTable if a[2] > 0]:
     #     print(f"    {f1:>25} <-> {f2:<25} {score:+.3f}")
 
-    numSpecialKeys, satPenalty, satProven, keyAssignment, conflictedFeatureSets = \
-        satOptimizeDiscriminator(theory, discrimFeatureWords, orderedFeatures, starboard,
-                                  numSpecialKeys=None)
-    print(f"\nsatOptimizeDiscriminator: {numSpecialKeys} special keys needed"
+    numSpecialKeypresses, satPenalty, satProven, keyAssignment, conflictedFeatureSets = \
+        satOptimizeDiscriminator(augmentedTheory, theory, numSpecialKeypresses=None)
+    print(f"\nsatOptimizeDiscriminator: {numSpecialKeypresses} special keypresses needed"
           f" ({'proven optimal' if satProven else 'time limit hit'}),"
           f" penalty {satPenalty}, {len(conflictedFeatureSets)} conflicting feature sets.")
     for featureSet in conflictedFeatureSets:
@@ -493,79 +508,38 @@ if __name__ == "__main__":
             if len(features) > 1:
                 print(f"      colliding on key {key}: {', '.join(sorted(features))}")
 
-    # Built lemma-first, not feature-first: for every homophone cluster
-    # augmentedTheory actually resolved, record each of its member words under
-    # its OWN (lemme, gramCat) and the exact feature that discriminates IT.
-    # Keyed by lemmeGramCat, not bare lemme: the same lemma string can have
-    # unrelated VER/NOM/ADJ readings (e.g. "aller" the verb vs "aller" the
-    # noun, "un aller simple"), each with their OWN homophone clusters that
-    # can independently pick the same feature name as their discriminator --
-    # keying by lemme alone let one reading silently overwrite the other's
-    # cell (e.g. "va" never appearing because "aller" the noun's own "s"-
-    # tagged form won that slot instead -- see the conversation).
-    lemmaFeatureWord: dict[str, dict[str, Word]] = {}
+    # Every word discriminated by each feature, feature-first (not lemma-first, and
+    # not deduplicated per lemma the way the old example table was) -- the exhaustive
+    # membership behind featureCount's totals above.
+    featureWords: dict[WordFeature, list[Word]] = {}
     for featureTuple, wordTuples in augmentedTheory.items():
         for wordTuple in wordTuples:
             for feature, word in zip(featureTuple, wordTuple):
                 if feature in keyAssignment:
-                    lemmaFeatureWord.setdefault(word.lemmeGramCat, {}).setdefault(feature, word)
-
-    # Columns: the richest example lemmas -- the ones whose own paradigm spans
-    # the most special-key features -- but skip a candidate whose populated
-    # features exactly match an already-chosen lemma's (e.g. "accourir"/
-    # "parcourir"/... are the same conjugation template as "courir" and would
-    # otherwise fill most of the table with near-duplicate columns).
-    numCandidateLemmas = 16
-    candidateLemmas: list[str] = []
-    seenSignatures: set[frozenset[str]] = set()
-    for lemmeGramCat in sorted(lemmaFeatureWord, key=lambda lgc: -len(lemmaFeatureWord[lgc])):
-        signature = frozenset(lemmaFeatureWord[lemmeGramCat])
-        if signature in seenSignatures:
-            continue
-        seenSignatures.add(signature)
-        candidateLemmas.append(lemmeGramCat)
-        if len(candidateLemmas) >= numCandidateLemmas:
-            break
+                    featureWords.setdefault(feature, []).append(word)
 
     rows = sorted(keyAssignment, key=lambda f: (keyAssignment[f], f))
 
+    LOW_COUNT_THRESHOLD = 30
     keyWidth = 5
     featureWidth = max((len(f) for f in rows), default=10) + 2
-    terminalWidth = shutil.get_terminal_size(fallback=(100, 24)).columns
+    countWidth = max((len(str(featureCount.get(f, 0))) for f in rows), default=1) + 2
 
-    print("\nSpecial key mapping:")
-    print("(each column is one example lemma; its forms land on the rows/keys that discriminate them)")
+    print("\nSpecial keypress mapping:")
+    print("(# Words is the exhaustive count of words that feature discriminates)")
+    print(f"(Words lists every one of them when # Words < {LOW_COUNT_THRESHOLD}, since above that")
+    print(" the list stops being a useful thing to read at a glance)")
 
-    # Paginate lemmas into consecutive tables that each fit the terminal width,
-    # instead of one giant table.
-    remainingLemmas = candidateLemmas[:]
-    while remainingLemmas:
-        pageLemmas: list[str] = []
-        pageWordWidths: list[int] = []
-        width = keyWidth + featureWidth
-        for lemmeGramCat in remainingLemmas:
-            wordWidth = max([len(lemmeGramCat)] + [
-                len(word.ortho) for word in lemmaFeatureWord.get(lemmeGramCat, {}).values()
-            ]) + 2
-            if pageLemmas and width + wordWidth > terminalWidth:
-                break
-            pageLemmas.append(lemmeGramCat)
-            pageWordWidths.append(wordWidth)
-            width += wordWidth
-        remainingLemmas = remainingLemmas[len(pageLemmas):]
-
-        header = f"{'Key':<{keyWidth}}{'Feature':<{featureWidth}}"
-        for lemmeGramCat, wordWidth in zip(pageLemmas, pageWordWidths):
-            header += f"{lemmeGramCat:<{wordWidth}}"
-        print()
-        print(header)
-        print("-" * len(header))
-        for feature in rows:
-            line = f"{keyAssignment[feature]:<{keyWidth}}{feature:<{featureWidth}}"
-            for lemmeGramCat, wordWidth in zip(pageLemmas, pageWordWidths):
-                cellWord = lemmaFeatureWord.get(lemmeGramCat, {}).get(feature)
-                cellOrtho = cellWord.ortho if cellWord is not None else ""
-                line += f"{cellOrtho:<{wordWidth}}"
-            print(line)
+    header = f"{'Key':<{keyWidth}}{'Feature':<{featureWidth}}{'# Words':<{countWidth}}Words"
+    print()
+    print(header)
+    print("-" * len(header))
+    for feature in rows:
+        count = featureCount.get(feature, 0)
+        words = ", ".join(sorted(word.ortho for word in featureWords.get(feature, []))) \
+            if count < LOW_COUNT_THRESHOLD else ""
+        line = (f"{keyAssignment[feature]:<{keyWidth}}{feature:<{featureWidth}}"
+                f"{count:<{countWidth}}{words}")
+        print(line)
 
 

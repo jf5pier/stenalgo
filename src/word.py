@@ -123,6 +123,31 @@ class Word:
                 ret.append("nbr_%s"%iv[2][1])
         return ret
 
+    def mergeInfoVerb(self, infoVerb: str) -> None:
+        """
+        Fold in another ";"-separated infoVerb tag for this same homograph (same ortho,
+        phonology, lemme, gramCat, gender and number -- i.e. same Word identity, see
+        __post_init__'s _hash), exactly as if Lexique383 had listed it natively in the
+        same row to begin with (that's how it already represents a common verb's several
+        readings, e.g. "parle" carries "imp:pre:2s;ind:pre:1s;ind:pre:3s;sub:pre:1s;
+        sub:pre:3s;" as one row). Used when a second source row for the same orthography
+        (e.g. a LexiqueSynthetic paradigm-completion row) supplies a reading the first
+        source's row was missing, so it doesn't become a second, separate Word instance
+        that downstream code would have to reconcile as a same-spelling homograph.
+        """
+        # Both this Word's own infoVerb and the incoming tag may already carry Lexique383's
+        # trailing ";" (its own row-ending convention) -- strip before rejoining so a merge
+        # never produces a stray "";"" in the middle, keeping the native multi-tag format.
+        newTag = infoVerb.strip(";")
+        if newTag == "":
+            return
+        existingTags = [iv for iv in (self.infoVerb or "").split(";") if iv != ""]
+        if newTag in existingTags:
+            return
+        self.infoVerb = ";".join(existingTags + [newTag]) + ";"
+        self._infoVerb = [self.splitInfoVerb(iv)
+                            for iv in filter(lambda iv: iv != '', self.infoVerb.split(";"))]
+
     @override
     def __hash__(self) -> int:
         return self._hash
@@ -239,12 +264,13 @@ class Word:
 #        return "|".join(self.phonemesToSyllableNames(symbol="_"))
 
 
-# Tokens that conflict with each other (plural↔singular, masculine↔feminine).
-TOKEN_CONFLICTS: dict[str, str] = {"p": "s", "s": "p", "m": "f", "f": "m"}
+# Atomic features that conflict with each other (plural↔singular, masculine↔feminine).
+ATOMIC_FEATURE_CONFLICTS: dict[str, str] = {"p": "s", "s": "p", "m": "f", "f": "m"}
 
 
-def featureTokens(f: WordFeature) -> frozenset[str]:
-    """Extract meaningful tokens from a feature string, stripping any 'not_' prefix."""
+def atomicFeatures(f: WordFeature) -> frozenset[str]:
+    """Split a (possibly compound) feature string into its atomic features, stripping any
+    'not_' prefix."""
     base = f[4:] if f.startswith("not_") else f
     return frozenset(t for t in re.split(r'[_:]', base) if t)
 

@@ -7,13 +7,13 @@ from unittest.mock import MagicMock
 from src.word import Word, GramCat
 from src.ambiguitychecker import (
     StrokeClusterReport,
-    TokenAnchorFeasibility,
+    FeatureKeypressFeasibility,
     classifyStrokeCluster,
     detectCrossCategoryClash,
     computeClusterSizeDistribution,
     computeOverflowFrequencyMass,
-    buildTokenToWords,
-    findTokenAnchors,
+    buildAtomicFeatureToWords,
+    findFeatureKeypresses,
     checkComposedChords,
 )
 
@@ -34,7 +34,7 @@ def _make_word(**overrides) -> Word:
     return Word(**defaults)
 
 
-def _mock_keyboard_for_anchors(codaMap: dict[str, tuple[int, ...]]) -> MagicMock:
+def _mock_keyboard_for_keypresses(codaMap: dict[str, tuple[int, ...]]) -> MagicMock:
     """Mock keyboard: only phonemes present in codaMap resolve to a coda stroke."""
     kb = MagicMock()
     kb.getStrokesOfPhoneme.side_effect = (
@@ -181,10 +181,10 @@ class TestComputeClusterSizeDistribution:
 
 
 # ---------------------------------------------------------------------------
-# buildTokenToWords
+# buildAtomicFeatureToWords
 # ---------------------------------------------------------------------------
 
-class TestBuildTokenToWords:
+class TestBuildAtomicFeatureToWords:
 
     def test_nofeature_and_singleton_filtered(self):
         w = _make_word()
@@ -192,34 +192,34 @@ class TestBuildTokenToWords:
             ("nofeature",): [(w,)],
             ("s",): [(w,)],  # len < 2, no canonical/non-canonical split
         }
-        assert buildTokenToWords(augmentedTheory) == {}
+        assert buildAtomicFeatureToWords(augmentedTheory) == {}
 
-    def test_canonical_excluded_noncanonical_tokenized(self):
-        """pers_3 (priority 70) beats pers_1 (priority 55): pers_3 is canonical (no anchor
-        needed), pers_1 is the one that needs a token anchor."""
+    def test_canonical_excluded_noncanonical_split_into_atomic_features(self):
+        """pers_3 (priority 70) beats pers_1 (priority 55): pers_3 is canonical (no keypress
+        needed), pers_1 is the one that needs a feature keypress."""
         w3 = _make_word(ortho="w3")
         w1 = _make_word(ortho="w1")
         augmentedTheory = {("pers_3", "pers_1"): [(w3, w1)]}
-        tokenToWords = buildTokenToWords(augmentedTheory)
-        assert set(tokenToWords.keys()) == {"pers", "1"}
-        assert tokenToWords["pers"] == [(w1, "pers_1")]
-        assert tokenToWords["1"] == [(w1, "pers_1")]
+        atomicFeatureToWords = buildAtomicFeatureToWords(augmentedTheory)
+        assert set(atomicFeatureToWords.keys()) == {"pers", "1"}
+        assert atomicFeatureToWords["pers"] == [(w1, "pers_1")]
+        assert atomicFeatureToWords["1"] == [(w1, "pers_1")]
 
 
 # ---------------------------------------------------------------------------
-# findTokenAnchors
+# findFeatureKeypresses
 # ---------------------------------------------------------------------------
 
-class TestFindTokenAnchors:
+class TestFindFeatureKeypresses:
 
-    def test_clean_single_key_anchor(self):
+    def test_clean_single_key_keypress(self):
         w = _make_word()
         theory = {((1,),): [w]}
-        tokenToWords = {"tokA": [(w, "someFeature")]}
-        kb = _mock_keyboard_for_anchors({"t": (2,)})
-        result = findTokenAnchors(tokenToWords, theory, kb)
-        assert result["tokA"].feasibleSingleKeyPhonemes == ["t"]
-        assert not result["tokA"].infeasible
+        atomicFeatureToWords = {"atomA": [(w, "someFeature")]}
+        kb = _mock_keyboard_for_keypresses({"t": (2,)})
+        result = findFeatureKeypresses(atomicFeatureToWords, theory, kb)
+        assert result["atomA"].feasibleSingleKeyPhonemes == ["t"]
+        assert not result["atomA"].infeasible
 
     def test_escalates_to_combo_when_singles_collide(self):
         w = _make_word()
@@ -228,20 +228,20 @@ class TestFindTokenAnchors:
             ((1, 2),): [_make_word(ortho="other1")],
             ((1, 3),): [_make_word(ortho="other2")],
         }
-        tokenToWords = {"tokA": [(w, "someFeature")]}
-        kb = _mock_keyboard_for_anchors({"t": (2,), "s": (3,)})
-        result = findTokenAnchors(tokenToWords, theory, kb)
-        assert result["tokA"].feasibleSingleKeyPhonemes == []
-        assert ("t", "s") in result["tokA"].feasibleComboPhonemes
-        assert not result["tokA"].infeasible
+        atomicFeatureToWords = {"atomA": [(w, "someFeature")]}
+        kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
+        result = findFeatureKeypresses(atomicFeatureToWords, theory, kb)
+        assert result["atomA"].feasibleSingleKeyPhonemes == []
+        assert ("t", "s") in result["atomA"].feasibleComboPhonemes
+        assert not result["atomA"].infeasible
 
     def test_infeasible_even_with_combo(self):
         w = _make_word()
         theory = {((1,),): [w], ((1, 2),): [_make_word(ortho="other1")]}
-        tokenToWords = {"tokA": [(w, "someFeature")]}
-        kb = _mock_keyboard_for_anchors({"t": (2,)})
-        result = findTokenAnchors(tokenToWords, theory, kb)
-        assert result["tokA"].infeasible
+        atomicFeatureToWords = {"atomA": [(w, "someFeature")]}
+        kb = _mock_keyboard_for_keypresses({"t": (2,)})
+        result = findFeatureKeypresses(atomicFeatureToWords, theory, kb)
+        assert result["atomA"].infeasible
 
 
 # ---------------------------------------------------------------------------
@@ -253,39 +253,39 @@ class TestCheckComposedChords:
     def test_composed_chord_feasible(self):
         w = _make_word()
         theory = {((1,),): [w]}
-        tokenToWords = {
+        atomicFeatureToWords = {
             "pers": [(w, "pers_3")],
             "3": [(w, "pers_3")],
         }
-        tokenAnchors = {
-            "pers": TokenAnchorFeasibility(token="pers", feasibleSingleKeyPhonemes=["t"]),
-            "3": TokenAnchorFeasibility(token="3", feasibleSingleKeyPhonemes=["s"]),
+        featureKeypresses = {
+            "pers": FeatureKeypressFeasibility(atomicFeature="pers", feasibleSingleKeyPhonemes=["t"]),
+            "3": FeatureKeypressFeasibility(atomicFeature="3", feasibleSingleKeyPhonemes=["s"]),
         }
-        kb = _mock_keyboard_for_anchors({"t": (2,), "s": (3,)})
-        report = checkComposedChords(tokenAnchors, tokenToWords, theory, kb)
+        kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
+        report = checkComposedChords(featureKeypresses, atomicFeatureToWords, theory, kb)
         assert w in report.feasibleWords
         assert w not in report.infeasibleWords
 
     def test_composed_chord_collides(self):
         w = _make_word()
         theory = {((1,),): [w], ((1, 2, 3),): [_make_word(ortho="other")]}
-        tokenToWords = {"pers": [(w, "pers_3")], "3": [(w, "pers_3")]}
-        tokenAnchors = {
-            "pers": TokenAnchorFeasibility(token="pers", feasibleSingleKeyPhonemes=["t"]),
-            "3": TokenAnchorFeasibility(token="3", feasibleSingleKeyPhonemes=["s"]),
+        atomicFeatureToWords = {"pers": [(w, "pers_3")], "3": [(w, "pers_3")]}
+        featureKeypresses = {
+            "pers": FeatureKeypressFeasibility(atomicFeature="pers", feasibleSingleKeyPhonemes=["t"]),
+            "3": FeatureKeypressFeasibility(atomicFeature="3", feasibleSingleKeyPhonemes=["s"]),
         }
-        kb = _mock_keyboard_for_anchors({"t": (2,), "s": (3,)})
-        report = checkComposedChords(tokenAnchors, tokenToWords, theory, kb)
+        kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
+        report = checkComposedChords(featureKeypresses, atomicFeatureToWords, theory, kb)
         assert w in report.infeasibleWords
 
-    def test_missing_anchor_marks_infeasible(self):
+    def test_missing_keypress_marks_infeasible(self):
         w = _make_word()
         theory = {((1,),): [w]}
-        tokenToWords = {"pers": [(w, "pers_3")], "3": [(w, "pers_3")]}
-        tokenAnchors = {
-            "pers": TokenAnchorFeasibility(token="pers"),  # no feasible anchors at all
-            "3": TokenAnchorFeasibility(token="3", feasibleSingleKeyPhonemes=["s"]),
+        atomicFeatureToWords = {"pers": [(w, "pers_3")], "3": [(w, "pers_3")]}
+        featureKeypresses = {
+            "pers": FeatureKeypressFeasibility(atomicFeature="pers"),  # no feasible keypress at all
+            "3": FeatureKeypressFeasibility(atomicFeature="3", feasibleSingleKeyPhonemes=["s"]),
         }
-        kb = _mock_keyboard_for_anchors({"s": (3,)})
-        report = checkComposedChords(tokenAnchors, tokenToWords, theory, kb)
+        kb = _mock_keyboard_for_keypresses({"s": (3,)})
+        report = checkComposedChords(featureKeypresses, atomicFeatureToWords, theory, kb)
         assert w in report.infeasibleWords

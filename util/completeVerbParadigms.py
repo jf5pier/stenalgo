@@ -37,8 +37,7 @@ import resource
 from contextlib import contextmanager
 from typing import Iterator
 
-from src.featureextractor import extractDiscriminatingFeatures
-from src.greedyoptimizer import greedyOptimizeDiscriminator
+from src.featureextractor import buildDiscriminatorSelection, extractDiscriminatingFeatures
 from src.keyboard import Starboard, Strokes
 from src.verbparadigm import (
     ConjugationEndingTables,
@@ -267,7 +266,6 @@ def temporarilyAugmented(
 def confirmCandidates(
     candidates: list[Candidate],
     theory: dict[Strokes, list[Word]],
-    starboard: Starboard,
     baselineFeaturesetWords: dict,
 ) -> tuple[list[Candidate], list[tuple[Lemme, str]]]:
     """
@@ -279,9 +277,9 @@ def confirmCandidates(
         return [], []
 
     with temporarilyAugmented(theory, candidates):
-        augmentedDiscBy, augmentedOrdered, _ = extractDiscriminatingFeatures(theory)
-        augmentedFeaturesetWords = greedyOptimizeDiscriminator(theory, augmentedDiscBy, augmentedOrdered, starboard)
-        del augmentedDiscBy, augmentedOrdered
+        augmentedDiscBy, _augmentedOrdered, _ = extractDiscriminatingFeatures(theory)
+        augmentedFeaturesetWords = buildDiscriminatorSelection(theory, augmentedDiscBy)
+        del augmentedDiscBy
         gc.collect()
 
     newlyColliding = newlyCollidingLemmas(baselineFeaturesetWords, augmentedFeaturesetWords)
@@ -364,7 +362,7 @@ def main() -> None:
     args = parser.parse_args()
 
     print("Loading theory (uses FirstTheory.pickle if present)...")
-    theory, starboard = loadTheoryAndKeyboard()
+    theory, _starboard = loadTheoryAndKeyboard()
 
     verbisteTemplates = loadVerbisteTemplates(VERBISTE_VERBS_PATH)
     exceptions = loadVerbModelExceptions(EXCEPTIONS_PATH)
@@ -382,12 +380,12 @@ def main() -> None:
     # the full-corpus extraction results before the augmented pass builds its
     # own copy of them -- never hold two of these at once (see
     # temporarilyAugmented's docstring for why this matters).
-    baselineFeaturesetWords = greedyOptimizeDiscriminator(theory, baselineDiscBy, baselineOrdered, starboard)
+    baselineFeaturesetWords = buildDiscriminatorSelection(theory, baselineDiscBy)
     del baselineDiscBy, baselineOrdered, strokeLemmeDiscriminators
     gc.collect()
 
     confirmedCandidates, collisionSkipped = confirmCandidates(
-        structuralCandidates, theory, starboard, baselineFeaturesetWords
+        structuralCandidates, theory, baselineFeaturesetWords
     )
     skipped = structuralSkipped + collisionSkipped
 

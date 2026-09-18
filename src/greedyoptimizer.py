@@ -5,7 +5,7 @@ from itertools import combinations
 from src.keyboard import Keyboard, Stroke, Strokes
 from src.word import (
     Word, WordFeature, LemmeGramCat, WordOrtho, groupWordsByLemme,
-    featureTokens, TOKEN_CONFLICTS,
+    atomicFeatures, ATOMIC_FEATURE_CONFLICTS,
 )
 from tqdm import tqdm
 from collections import defaultdict
@@ -55,19 +55,19 @@ def _consistencyScore(
     f: WordFeature,
     stroke: Stroke,
     keyToFeatures: dict[int, list[WordFeature]],
-    tokenCache: dict[WordFeature, frozenset[str]]
+    atomicFeatureCache: dict[WordFeature, frozenset[str]]
 ) -> float:
     """Score how semantically consistent assigning feature f to stroke is.
-    Shared tokens with features already on each key score positively;
-    conflicting tokens score negatively."""
-    fTok = tokenCache[f]
+    Shared atomic features with features already on each key score positively;
+    conflicting atomic features score negatively."""
+    fAtoms = atomicFeatureCache[f]
     score = 0.0
     for key in stroke:
         for ef in keyToFeatures.get(key, []):
-            eTok = tokenCache[ef]
-            score += len(fTok & eTok) * 2.0
-            for t in fTok:
-                if TOKEN_CONFLICTS.get(t) in eTok:
+            eAtoms = atomicFeatureCache[ef]
+            score += len(fAtoms & eAtoms) * 2.0
+            for atom in fAtoms:
+                if ATOMIC_FEATURE_CONFLICTS.get(atom) in eAtoms:
                     score -= 3.0
     return score
 
@@ -298,7 +298,7 @@ def assignDiscriminatorKeypresses(
         key=lambda f: (f not in noStrokeFeatures, *(-x for x in featureSortKey(f)))
     )
 
-    tokenCache: dict[WordFeature, frozenset[str]] = {f: featureTokens(f) for f in assigned}
+    atomicFeatureCache: dict[WordFeature, frozenset[str]] = {f: atomicFeatures(f) for f in assigned}
     strokeToFeatures: dict[Stroke, list[WordFeature]] = {}
     featureToStroke: dict[WordFeature, Stroke] = {}
     keyToFeatures: dict[int, list[WordFeature]] = {}
@@ -327,7 +327,7 @@ def assignDiscriminatorKeypresses(
         else:
             chosen = min(
                 compatible,
-                key=lambda s: (-_consistencyScore(f, s, keyToFeatures, tokenCache),
+                key=lambda s: (-_consistencyScore(f, s, keyToFeatures, atomicFeatureCache),
                                poolOrder.get(s, len(pool)))
             )
 
