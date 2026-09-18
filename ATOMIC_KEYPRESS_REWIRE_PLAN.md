@@ -1,124 +1,270 @@
-# Plan: wire Part 2's atomic-feature keypress search into a real joint solver
+# Plan: same-lemma homophone discrimination via elicited atomic-feature keypresses
 
-Written 2026-09-18, following a design discussion about why the live same-lemma
-discriminator mechanism (`satOptimizeDiscriminator`) can't produce a learnable, consistent
-mapping no matter how it's tuned, and a code audit confirming `src/ambiguitychecker.py`'s
-"Part 2" already prototypes the alternative but stops at a feasibility report. Written in
-the style of `SHARED_DISCRIMINATOR_REWIRE_PLAN.md` (same convention: grounded in a code
-audit, not aspiration; numbered proposed changes; open decisions recorded rather than
-silently picked).
+Originally written 2026-09-18 as "wire Part 2's atomic-feature keypress search into a real
+joint solver"; **amended later the same day after two further design sessions — this version
+is authoritative.** It absorbs `RESUME_2026-09-18.md`'s review decisions (that file stays as
+the record of the review session; its old "where they conflict, this file wins" rule is now
+**inverted** — the plan wins) and adds the session-2 pivot described next. Conventions
+unchanged: grounded in code audit, phased changes, open decisions recorded rather than
+silently picked.
 
-## Context
+## The session-2 pivot: elicitation before optimization
 
-See `CLAUDE.md` for the overall pipeline; this plan concerns the same-lemma
-("conjugation") half of homophone discrimination, not the lemma-homophone (`*`/`#`) half.
+The original plan (like the pipeline it set out to fix) let the solver pick each word's
+discriminating features, then tried to make the outcome learnable by shaping constraints
+around it. Session 2 inverted this: **the user's own writing reflexes are the spec.** The
+mapping must follow how the brain works, so the user is asked — pair by pair — how they
+would discriminate the homophones; only what remains (grouping markers onto keypresses) is
+optimized, afterwards, over that data.
 
-`ROADMAP.md`'s 2026-09-15 design decisions (§3 there) already settled the direction:
-same-lemma homophones are a conjugation problem, solved with **meaningful phoneme-key
-chords**, not the 4 reserved keys — those are reserved exclusively for lemma-homophones
-(`*`/`#`, up to 4 lemmas per cluster). That decision was never implemented: the live
-pipeline (`satOptimizeDiscriminator`, `src/satoptimizer.py`) still colors same-lemma
-`WordFeature`s onto the reserved-key space today — **11** abstract special keypresses as
-of the coverage-first switch (`PLAN_2026-09-18_low_value_discriminators.md`), the inverse
-of the decision.
+The parler walkthrough that settled it:
 
-The design discussion that motivated this plan (same session, immediately prior) named
-the concrete symptom: `_colorFeatures`'s graph coloring lets any two features share a key
-whenever nothing flags them as opposed (`associationScore` returns `0.0` for any pair with
-no shared `FEATURE_FAMILIES` entry — mode/tense atoms like `indicatif`/`conditionnel`
-aren't in that table at all). A key's meaning is therefore whatever the solver found
-cheapest that run, not a fixed, learnable slot — coloring-for-conflict-avoidance cannot
-produce "strong polarity" by construction, no matter how the objective is tuned.
+- "je parle" — phonology only; indicatif présent is the default expectation (typed bare).
+- "tu parles" — press `pers_2` (the written *-s* is what the writer is conscious of).
+- "ils parlent" — press `pers_3:nbr_p`: `pers_3` alone may not discriminate (it also
+  matches "il parle") even though `nbr_p` alone might. **Over-specific presses happen and
+  must still produce the right spelling.**
+- "que je parle" — possibly press `subjonctif` defensively, even though it is spelled the
+  same as the default form.
+- "parlé" (noun and participe passé) — `m:s`, or nothing; `parler` / `parlai` / `parlez` —
+  `infinitif` / `passé` / `pers_2:nbr_p` or just `nbr_p`.
 
-`src/ambiguitychecker.py`'s "Part 2" (`buildAtomicFeatureToWords`, `findFeatureKeypresses`,
-`checkComposedChords`, added for `ROADMAP.md`'s open question 6) already prototypes the
-fix: give each **atomic** grammatical feature — not each compound `WordFeature` — its own
-dedicated coda-phoneme keypress, checked for collision-freedom against the whole `theory`.
-A compound feature (`pers_3:nbr_p`) is then the **union** of its atoms' keypresses, pressed
-as one chord. This is an assignment, not a coloring: once built, a key's meaning is fixed
-forever, so "polarity" becomes a structural guarantee instead of a soft objective — the
-`FEATURE_FAMILIES`/`associationScore`/`POLARITY_REWARD_SCALE` machinery in
-`satoptimizer.py` becomes unnecessary for this track entirely.
+Consequences adopted below: the input artifact is **elicited** rather than taken from
+`buildDiscriminatorSelection`; the default (∅) form of each cluster comes from the same
+data (`FEATURE_PRIORITY` has no role left on this track); ambiguity handling is a
+**calibratable strict/lenient mix** (open decision §E); the abstract solver shrinks to
+grouping (Phase G).
 
-Today Part 2 is diagnostic-only. Run via `python -m src.ambiguitychecker`, it prints a
-feasibility report and writes `feature_keypress_feasibility.tsv`; nothing downstream reads
-either. `dictionary.py`'s live theory build never calls it.
+## Vocabulary (fixed by the user; used throughout)
 
-## What Part 2 does today, and its 3 gaps
+- **Cluster** — homophones sharing one lemma, e.g. {parle, parles, parlent} ([paʁl]). All
+  members share one sound-stroke; only markers can separate them. **Marker chords compete
+  only inside a cluster**: different sound-strokes never collide — parlent [paʁl] and
+  parlez [paʁle] are different clusters, and no press can ever conflict across them.
+- **Marker** (the code's atom / atomic feature) — one grammatical value: `pers_2`,
+  `nbr_p`, `subjonctif`, `m`, …
+- **Reading** — one grammatical analysis of a spelling. Homographs that are also
+  homophones give one cluster member several readings ("parle" = ind-prés-1s /
+  ind-prés-3s / subj-prés-1s / subj-prés-3s). Readings of the same spelling never
+  conflict with each other — they produce the same output text.
+- **Keypress** (chord) — the abstract unit a marker maps to; physical keys are Phase P.
+  **∅** — no extra press: a cluster's default form is typed with the bare sound-stroke.
+- **Press** — the marker-set the writer actually presses for a word. May be
+  over-specific; decoding is superset-tolerant: pressed markers + sound-stroke must
+  identify exactly one spelling (or the §E fallback), extra true markers are ignored.
+- **No-conflict rule** (the earlier docs' "union-injectivity") — no press may be
+  compatible with readings of two different spellings of the same cluster.
 
-- `buildAtomicFeatureToWords` (`src/ambiguitychecker.py:202-224`) walks the live
-  discriminator selection (`buildDiscriminatorSelection`'s output), splits every
-  non-canonical `(word, feature)` pair into atomic features via `atomicFeatures()`
-  (`src/word.py:271-275`), and records which words carry each atom.
-- `findFeatureKeypresses` (`:257-294`) scans candidate coda phonemes per atomic feature:
-  single-key first, 2-key combos only if no single key works, feasible if appending the
-  candidate key(s) to every carrying word's stroke never collides with an existing entry
-  in `theory` (`_isFeasibleAddition`, `:235-243`).
-- `checkComposedChords` (`:303-346`) handles words needing >1 atom at once: unions each
-  atom's *first* candidate keypress and re-checks collision-freedom for the composed
-  stroke.
+## Running examples
 
-Three gaps, found while grounding the design discussion in the actual code:
+[paʁl]:
 
-1. **Independent per-atom scan, not joint.** `findFeatureKeypresses` evaluates every
-   atomic feature in isolation; nothing guarantees the choices made for *different* atoms
-   stay jointly collision-free once composed. `checkComposedChords` only audits this after
-   the fact, per word, with no repair — an infeasible composition is reported, not
-   resolved by trying a different candidate for one of the atoms involved.
-2. **`comboSize` hardcoded to 2** (`findFeatureKeypresses(..., comboSize: int = 2)`,
-   `:261`), and `checkComposedChords` never escalates beyond whatever single phoneme each
-   atom's feasibility check happened to pick. A real compound feature can need **up to 4**
-   simultaneous atoms — confirmed live: `PLAN_2026-09-18_low_value_discriminators.md`
-   documents `rudoie` resolved by `subjonctif:présent:pers_3:nbr_s`, a genuine 4-atom
-   compound chosen by the real selection algorithm on the full lexicon, not a synthetic
-   edge case.
-3. **Not cost-aware.** `findFeatureKeypresses` iterates `Phoneme.consonantPhonemes`
-   (`src/grammar.py:33`, fixed enumeration order `"RtsplkmdvjnfbZwzSgNG"`) and
-   `checkComposedChords` always takes candidate `[0]` — first feasible, not cheapest.
-   Neither consults `keyboard.getStrokeCost` (`src/keyboard.py:142`), the same
-   biomechanical cost model `_buildStrokePool` (`src/greedyoptimizer.py:162-172`) and
-   `_colorFeatures`'s warm start already use. A physically awkward combo can beat a cheap
-   one purely by phoneme-alphabet-order luck.
+| spelling | readings |
+|---|---|
+| parle | ind prés 1s/3s, subj prés 1s/3s (homograph) |
+| parles | ind prés 2s, subj prés 2s |
+| parlent | ind prés 3p |
 
-## A prerequisite correctness bug: two incompatible "atomic feature" tokenizers
+[paʁle]:
 
-Found while checking gap 2 above. Two different functions both claim to split a compound
-`WordFeature` into "atomic features," and they disagree:
+| spelling | readings |
+|---|---|
+| parler | infinitif |
+| parlai | passé simple 1s |
+| parlé / parlée / parlés / parlées | participe m:s / f:s / m:p / f:p (parlé also: noun) |
+| parlez | ind prés 2p, impératif 2p |
 
-- `src/word.py:271-275`'s `atomicFeatures()` — used by Part 2 — splits on **both** `_` and
-  `:` (`re.split(r'[_:]', base)`). `"subjonctif:présent:pers_3:nbr_s"` becomes 6 fragments:
-  `{"subjonctif", "présent", "pers", "3", "nbr", "s"}`.
-- `src/satoptimizer.py:52-65`'s `_familyAtomicFeatures()` splits **only** on `:`, treating
-  `pers_3`, `nbr_s`, `m_s`, etc. as single tokens — the linguistically correct grain, and
-  the one `FEATURE_FAMILIES` (`:16-22`) is keyed by.
+The real under-specific cases (what §E calibrates): `pers_3` alone for *parlent* also
+matches *parle*; `nbr_p` alone for *parlez* also matches *parlés* / *parlées*.
 
-Building the joint solver on top of `atomicFeatures()` as-is would silently bind a
-dedicated keypress to the bare string `"3"` (shared by every `pers_3`-bearing word, no
-linguistic meaning on its own) and to `"pers"` (shared by `pers_1`/`pers_2`/`pers_3` at
-once — three *mutually exclusive* values that should never end up needing the same key
-pressed together). This is a correctness bug, not a style nit — it would quietly corrupt
-whatever the joint solver assigns.
+## Context (condensed from the original, corrected)
 
-**Must fix before §3 below.** Two options, need to pick one:
-- (a) Change `atomicFeatures()` itself to split only on `:`. Check other callers first —
-  it's also used by `ATOMIC_FEATURE_CONFLICTS`-adjacent logic; confirm nothing depends on
-  the finer split.
-- (b) Give Part 2 its own correctly-scoped tokenizer, separate from `word.py`'s, and leave
-  `atomicFeatures()` alone in case something else genuinely needs the finer grain.
+- `ROADMAP.md`'s 2026-09-15 decisions: the 4 reserved keys `[0,1,10,15]` belong
+  exclusively to the lemma-homophone (`*`/`#`) track (different lemmas, same sound; up
+  to 4 lemmas per cluster); same-lemma conjugation discrimination uses meaningful
+  phoneme-key chords. Never implemented — `satOptimizeDiscriminator`
+  (`src/satoptimizer.py`) still colors same-lemma `WordFeature`s onto the reserved-key
+  space (11 abstract special keypresses as of the coverage-first switch,
+  `PLAN_2026-09-18_low_value_discriminators.md`).
+- The symptom that motivated all this: `_colorFeatures`' coloring lets any two features
+  share a key whenever nothing flags them opposed, so a key's meaning is whatever was
+  cheapest that run — not a fixed, learnable slot. Corrected framing after the pivot: a
+  keypress means **a set of markers the writer never presses separately**; learnability
+  comes from the elicited data, not from an objective term.
+- `src/ambiguitychecker.py`'s Part 2 (`buildAtomicFeatureToWords` `:202-224`,
+  `findFeatureKeypresses` `:257-294`, `checkComposedChords` `:303-346`) stays
+  diagnostic-only for now and becomes the Phase P seed. Its three audited gaps
+  (independent per-atom scan; `comboSize` hardcoded 2; not cost-aware) are
+  physical-layer concerns.
 
-Either way, add a regression test: `pers_3` must split to `{"pers_3"}`, not
-`{"pers", "3"}`.
+## Status of the original plan's sections
 
-## Goal
+| Old § | Disposition |
+|---|---|
+| 0 baseline commit | Still pending; now includes this amendment + the resume |
+| 1 tokenizer fix | **DONE** (commit `29da8d2`) — record below |
+| 2 granularity (open decision A) | Superseded — elicitation + grouping resolve it; A marked resolved |
+| 3 joint model | Superseded — Phase G (abstract) + Phase P (physical) replace it |
+| 4 N-way cap | ≤4 is structurally safe (`splitInfoVerb`); E3 confirms cheaply |
+| 5 two-stroke fallback | Deferred to Phase P (open decision B with it) |
+| 6 wiring/persistence | Deferred to Phase P |
+| 7 consumers | Split: Phase E tool + tests now; `dictionary.py` wiring deferred |
+| 8 re-run/compare | Reinterpreted — E3 scale report + Phase G report now; old §8 checks move to Phase P |
+| A | Resolved — the sharing mechanism (Phase G constraints) does what family-codes were after |
+| B, C | Deferred to Phase P |
+| D | Corrected: `FEATURE_PRIORITY` is **live** in Part 2 (import `src/ambiguitychecker.py:36`, used by `_selectCanonicalIndex` `:191-199`), not orphaned. Elicitation's default-form answers eliminate its job on this track; retiring `src/greedyoptimizer.py` means rehoming it |
 
-Route same-lemma conjugation discrimination through a real joint solver over atomic
-grammatical features and coda-phoneme keypresses, wired into `dictionary.py`'s live theory
-output — fulfilling the 2026-09-15 decision that the reserved keys belong to
-lemma-homophones only. `satOptimizeDiscriminator`/`_colorFeatures` demotes to a
-feasibility monitor for the `*`/`#` track, matching `ROADMAP.md` Phase 2's own framing
-("`_colorFeatures` demotes to a feasibility monitor rather than the driving mechanism").
+## Prerequisite fix — DONE (commit `29da8d2`)
 
-## Call graph today (the gap)
+`atomicFeatures()` (`src/word.py`) now splits only on `:` so `pers_3` stays one token.
+Fixing it surfaced the same bug in `Word.getFeatures()`' gender/number combos, now
+`:`-joined (`m:s`, `VER:m:s`); `not_m_s` is the one deliberate exception (a standalone
+canonical-form flag, not a compound). `FEATURE_FAMILIES`' obsolete combo entries and the
+`VER_`-prefix special case removed. Regression tests added
+(`src/test/word_test.py::TestAtomicFeatures`, `TestGetFeatures`); 428 tests green; no new
+mypy errors.
+
+## Phase E — elicitation (new; comes first)
+
+**E0. Baseline commit.** This amendment + the resume note. Delete stale
+`anchor_feasibility.tsv` (generated pre-`29da8d2`; current code writes
+`feature_keypress_feasibility.tsv`). Move `callgraph` to scratch/ or delete.
+
+**E1. Rebuild caches.** Delete **all three** pickles (`Dictionary.pickle`,
+`FirstTheory.pickle`, `FeatureDiscrimator.pickle`) before building anything: selection
+data derives from `Word.getFeatures()`, which `29da8d2` changed (three-pickle gotcha,
+`RESUME_2026-09-17.md`).
+
+**E2. Enumerate.** From the rebuilt data: every same-sound cluster; every spelling pair
+within each cluster × every reading combination — the homograph repetition, so the
+sampling is exhaustive.
+
+**E3. Report scale.** Cluster count; total pair count; **distinct feature oppositions**
+(the actual number of questions the user would face); max compound size (expect ≤4);
+which markers ever get pressed together (Phase G's co-occurrence input); greedy-coloring
+lower bound on K computed with and without the pressed-together rule, so its price is
+known up front.
+
+**E4. Questionnaire.** One question per **distinct opposition**, illustrated with a real
+example pair; the answer propagates automatically to every pair sharing that opposition,
+across all lexemes and models. Homophony is per **model** — French has 100+ verb models
+and the same case is homophonous in one model and not another (parler/parlé homophones;
+finir/fini not) — so enumeration comes from lexicon data, never from ending patterns.
+Format open — §F.
+
+**E5. Validate.** Per cluster under the §E calibration: every press implied by the data
+lands on exactly one spelling (lenient: a well-defined fallback). Conflicts are re-asked
+with the full cluster in view ("you said `nbr_p` alone for *parlez*; *parlés* /
+*parlées* also match — settle it").
+
+**E6. Persist the elicitation artifact.** Per-opposition answers + per-cluster resolved
+press-sets. This — not `buildDiscriminatorSelection` output — feeds Phase G.
+
+## Phase G — grouping (the reduced abstract solver)
+
+- A marker gets a keypress **iff some elicited press contains it**. Markers no press ever
+  contains are unpressable by construction — "no keypress = unmarked default" falls out
+  of the data mechanically (e.g. mode markers wherever mode never changes spelling, as
+  with "que je parle" typed bare).
+- Constraints: (a) markers pressed together somewhere never share a keypress; (b) sharing
+  must not break any cluster's no-conflict property, checked mechanically against the
+  elicited press-sets. Competition alone does **not** forbid sharing: in [paʁl], `pers_2`
+  (parles) and `nbr_p` (inside parlent's `pers_3:nbr_p`) may share a keypress **iff**
+  parlent is never pressed with `nbr_p` alone — validation decides from the data, case by
+  case. (This resolves the resume's proposed "share only if neither compete nor
+  co-occur" rule in a narrower form: its compete clause, read graph-coloring-style, would
+  have forbidden exactly this share.)
+- Objective: minimize K (number of keypresses); report frequency-weighted chord sizes —
+  full cost optimization is Phase P.
+- Implementation seed: the `_colorFeatures` schema + `_minSpecialKeypressesNeeded`
+  feasibility loop (`src/satoptimizer.py:155-259`, `:262-279`), with per-cluster
+  set-distinctness constraints over press-sets instead of coloring edges. Synthetic tests
+  mirroring `src/test/satoptimizer_test.py`, plus a new test module for the Phase E tool
+  (enumeration, opposition dedup, validator).
+- Report: K, the keypress → markers table, the unpressable-marker list.
+
+## Phase P — physical realization (deferred; kept so nothing is lost)
+
+- Cross-cluster new-vs-new collisions: `_isFeasibleAddition`
+  (`src/ambiguitychecker.py:243`) misses collisions between two newly composed chords —
+  final stroke (12,16)+{18} and (12,18)+{16} both land on (12,16,18). The `*`/`#`
+  reserved-key modifications also create strokes absent from `theory`; the composition
+  order of the two tracks is undefined and interacts.
+- Pressability filtering: `getStrokeCost` (`src/keyboard.py:529-546`) KeyErrors on
+  illegal per-finger unions (coda m=(25,) + n=(22,) → right pinky {22,25}, not in
+  `_possibleKeypress.rightPinky` `:343-348`); the stale `anchor_feasibility.tsv` listed
+  `m+n` as feasible — evidence impossible candidates already slip through. Also
+  `checkComposedChords:336` takes `feasibleComboPhonemes[0][0]` — half of a 2-phoneme
+  combo.
+- Cost object = the full merged final stroke (base ∪ additions), not just the added
+  keys; two-stroke fallback lives in stroke-SEQUENCE space (`theory` keys are `Strokes`
+  tuples, multi-stroke entries already exist).
+- Part 2's three gaps (independent scan / comboSize 2 / not cost-aware) get fixed here by
+  the joint physical model, over the Phase G output.
+- Wiring + persistence: call from `dictionary.py` `__main__` (alongside
+  `buildDiscriminatorSelection`'s existing call at `:463`), fed by the E6 artifact;
+  persist stroke→word output (finally resolving `ROADMAP.md` open question 4 on
+  `theory.tsv`'s fate); restrict `satOptimizeDiscriminator` to the `*`/`#` track — its
+  input today is same-lemma only, so "restrict" really means "build a new input source",
+  and that track may not need CP-SAT at all (frequency-rank within each cluster
+  independently).
+- Old §B (two-stroke cutoff rule) and §C (onset phonemes as candidates) land here.
+- Old §8 checks land here: reserved-key special-keypress count drops to what the `*`/`#
+  track alone needs (from today's 11); spot-check family polarity by hand; no word
+  becomes newly unresolved without an explicit accept (Category-C exception-list
+  precedent).
+- Mechanical invariants: stroke→word injectivity from persisted output; one keyset per
+  keypress; every delivered stroke per-finger pressable.
+
+## Open decisions
+
+- **§E — strict/lenient calibration (decided in principle, mechanism open).** Session 2
+  decided: a **mix, calibratable** between the extremes. Proposed mechanism: an ambiguous
+  press resolves to the most frequent matching spelling only when it outranks every other
+  match by a configurable margin; the margin runs from 1 (any lead suffices = fully
+  lenient) to ∞ (strict). Open: where the margin lives (global constant / per gramCat /
+  per cluster) and its default.
+- **§F — questionnaire format.** CLI, or an interactive web page (storage lets the user
+  answer from anywhere and resume; could be hosted as an artifact page). Needed before E4
+  is built.
+- **§G — noun homophones inside verb clusters.** The [paʁle] walkthrough includes noun
+  *parlé* (its own lemma) among the verb forms, marked `m:s` on the normal track. Under
+  the strict same-lemma cluster definition it would fall to the `*`/`#` track instead.
+  Check how the lexicon clustering treats it today; the user's reflex says the marker
+  track. Whichever way, record it in the cluster definition.
+- Deferred: §B two-stroke cutoff, §C onset candidates (Phase P).
+
+## Established facts (carried from the review session)
+
+- **Atom inventory ≈ 19-20**: pers_1/2/3, nbr_s, nbr_p, s, p, m, f, indicatif,
+  subjonctif, conditionnel, impératif, infinitif, présent, imparfait, future, passé, VER
+  (+ participe, not_m_s if ever selected). `future` (not `futur`) is `splitInfoVerb`'s
+  spelling (`src/word.py:119`) — internally consistent, cosmetic only.
+- **Max compound size ≤ 4 structurally** (`splitInfoVerb`, `src/word.py:98-123`); the
+  `rudoie` 4-atom precedent (`subjonctif:présent:pers_3:nbr_s`) is the ceiling.
+- **s/p vs nbr_s/nbr_p dissolves at the abstract layer** — grouping merges the notation
+  pair whenever the data permits; only a naming choice remains. `_VALUE_TABLES`
+  (`src/satoptimizer.py:28-31`) already encodes the identity.
+- **`FEATURE_PRIORITY` is live** (`src/ambiguitychecker.py:36` → `_selectCanonicalIndex`);
+  the plan's original "orphaned" claim was wrong.
+- **`anchor_feasibility.tsv` is stale** (pre-`29da8d2`, over-split tokens); E0 deletes it.
+- **Expected K ≈ 4-8** (hypothesis): person trio + number pair + gender pair are the
+  obvious cliques; mode values rarely compete in French same-lemma homophony. E3's lower
+  bounds make this measurable before Phase G runs.
+- **Three-pickle staleness gotcha** documented in `RESUME_2026-09-17.md`.
+
+## Non-goals (updated)
+
+- No changes to the `*`/`#` lemma-homophone track's own logic beyond confirming its sole
+  claim to the 4 reserved keys (Phase P).
+- No re-optimization of the phoneme→key layout (`starboard3h.json`,
+  `cpsatsolver.py::optimizeKeyboard`, still commented out per `ROADMAP.md`).
+- No prefix-formation work (`ROADMAP.md` Phase 6) — same machinery family, out of scope.
+- `FEATURE_FAMILIES` / `associationScore` / polarity machinery: no job left on this track
+  once elicitation + grouping land; separate cleanup, not blocking.
+- The physical layer (Phase P) stays out of scope until E and G report.
+
+## Call graph today (kept for the Phase P wiring)
 
 ```
 dictionary.py (__main__)
@@ -144,194 +290,3 @@ src.ambiguitychecker (__main__, run separately, never called from dictionary.py)
 └─ prints a feasibility report + feature_keypress_feasibility.tsv
      -- DEAD END: nothing consumes this. dictionary.py never calls it.
 ```
-
-## Proposed changes
-
-### 0. Baseline commit
-
-The working tree already carries several uncommitted, stacked threads (the
-shared-discriminator rewire, lexicon data fixes, the special-keypress/set-cover
-terminology rename). Get to a clean, committed baseline before starting this plan's
-implementation, so its own diff is legible and revertable on its own — same reasoning as
-`SHARED_DISCRIMINATOR_REWIRE_PLAN.md` §0.
-
-### 1. Fix atomic-feature tokenization
-
-Resolve the prerequisite bug above (pick option (a) or (b)), add the regression test, run
-`pytest src/test/` to confirm nothing downstream of `atomicFeatures()` silently depended on
-the over-split behavior.
-
-### 2. Decide assignment granularity — open design decision, see below
-
-Before building the solver: does every **distinct** atomic feature string get its own
-permanently-dedicated keypress (what Part 2 does today — simple, but spends scarce coda-key
-budget on values that are mutually exclusive and could share encoding room), or does each
-**family** (person, number, gender, mode, tense — the groupings `FEATURE_FAMILIES` already
-names) get a small internal code, since a word only ever carries one value per family at
-once? This changes the shape of §3's model, so it needs deciding first — see "Open design
-decisions" §A.
-
-### 3. Build the joint feasibility + cost model
-
-Replace `findFeatureKeypresses` + `checkComposedChords`'s two-pass independent-then-audit
-approach with one CP-SAT model, shaped like `_colorFeatures`
-(`src/satoptimizer.py:160-264`) but with a structurally different constraint:
-
-- **Decision variables**: one boolean per (atomic feature or family-value, per §2's
-  decision) × candidate key-set, `exactly-one` per atom.
-- **Hard disjointness constraint** — the key structural difference from `_colorFeatures`:
-  no two atoms' assigned key-sets may share a physical key, ever. (`_colorFeatures` allows
-  sharing unless flagged, because reserved-key coloring is trying to *reuse* a scarce
-  4-key space across non-conflicting features. Here, disjointness is what makes a
-  composed chord decodable — press keys {16} and {17} together and the reader must be
-  able to tell both atoms are "on," which only works if no other atom is *also* {16} or
-  {17}.)
-- **Per-word joint feasibility** — for every word needing an atom or a union of atoms,
-  the composed addition to its stroke must not collide with any existing `theory` entry or
-  same-cluster sibling. Precompute this as a lookup (same `_isFeasibleAddition` logic,
-  `:235-243`) rather than trying to express "not a member of a large arbitrary forbidden
-  set" as a linear constraint directly — feed it into the model as a per-atom-combination
-  feasibility table the solver's candidate-set restriction respects, mirroring how
-  `buildFeasibleDiscriminatorOptions` precomputes feasibility before
-  `selectSharedDiscriminators` optimizes over it.
-- **Objective**: minimize total frequency-weighted `keyboard.getStrokeCost`
-  (`src/keyboard.py:142`) across all composed chords actually used — same `FREQUENCY_SCALE`
-  pattern `satOptimizeDiscriminator` already uses (`src/satoptimizer.py:306,317-318`).
-- **Candidate pool per atom**: single coda phonemes first, then N-way combos — see §4 for
-  how large N needs to be.
-
-### 4. Generalize N-way composition
-
-Measure real demand before picking a cap: walk the live `buildDiscriminatorSelection`
-output and count the max number of `:`-separated atoms (post-§1-fix) in any selected
-compound feature across the full lexicon. Expect ≤4 (the `rudoie` precedent), confirm
-rather than assume. `checkComposedChords`'s union logic (`:317-346`) is already
-N-way-agnostic — it unions `wordAtoms` of any size — the actual gap is candidate
-generation (§3's model needs combo candidates up to the measured N, not hardcoded at 2)
-and joint search across atoms (§3 also fixes this).
-
-### 5. Two-stroke fallback for infeasible or expensive compositions
-
-Not everything will fit in one stroke's coda room. The coda role has exactly **10**
-physical keys in the live layout (`starboard3h.json`: `keyIDinSyllabicPart.coda = [16..25]`),
-already densely packed with real phonology — `findFeatureKeypresses`'s own
-"INFEASIBLE even at combo size 2" output today is evidence this scarcity is real, not
-hypothetical. When a word's needed atom-union has no single-stroke feasible solution (or
-only a biomechanically severe one), fall back to a second stroke — same precedent
-`ROADMAP.md` design decision #3 already names (English theories fuse common suffixes into
-the final chord, e.g. `-S`/`-G`, but fall back to a separate stroke for rarer
-modifications). Cutoff rule is an open decision — see "Open design decisions" §B.
-
-### 6. Wire into `dictionary.py`'s live theory + persisted output
-
-- Call the new solver from `dictionary.py`'s `__main__`, feeding it
-  `buildDiscriminatorSelection`'s output (already computed once there, `:463`) the same
-  way `satOptimizeDiscriminator` is fed today.
-- Persist the result — today nothing captures a resolved same-lemma theory to a file
-  (`ROADMAP.md` open question 4, re: `theory.tsv`'s fate); this plan's output (atomic
-  feature → keys, composed per word) should be the thing that finally gets persisted,
-  since it's the first mechanism actually meant to be the real, permanent theory rather
-  than a diagnostic table.
-- Decide `satOptimizeDiscriminator`'s remaining scope: restrict it to the `*`/`#`
-  lemma-homophone track only (2 keys, 4 modifier values by frequency rank within a
-  cluster — `ROADMAP.md` design decision #2). Note that track may not need CP-SAT coloring
-  at all — it's a frequency-rank assignment within each cluster independently, not a
-  shared-key graph-coloring problem across the whole lexicon. Flag as a possible
-  follow-on simplification; out of scope for this plan to implement, just don't design
-  §3's model in a way that blocks it later.
-
-### 7. Consumers to update
-
-- `src/ambiguitychecker.py` — Part 2 stops being diagnostic-only; its functions become (or
-  are wrapped by) the real solver `dictionary.py` calls.
-- `dictionary.py` `__main__` — new call + persisted output, per §6.
-- Tests — a new `src/test/` module for the joint solver (mirror `satoptimizer_test.py`'s
-  pattern: small synthetic cases for the CP-SAT model directly, plus a shape/contract test
-  for the `dictionary.py` wiring). Existing `src/test/ambiguitychecker_test.py` coverage
-  of Part 1 (classification) is untouched; Part 2's current tests, if any, need review
-  once its functions' contracts change.
-
-### 8. Re-run and compare
-
-```bash
-pytest src/test/
-python dictionary.py
-python -m src.ambiguitychecker
-```
-- Confirm the reserved-key special-keypress count drops to (at most) what the `*`/`#`
-  track alone needs — should shrink dramatically from today's 11, since same-lemma
-  features no longer compete for that space at all.
-- Confirm every atomic feature's assigned keypress is unique and fixed across the whole
-  printed/persisted output (the actual "polarity" property this plan exists to deliver) —
-  spot-check a few families (person, number, gender) by hand.
-- Confirm no regression in total unresolved-word count relative to today's
-  `satOptimizeDiscriminator` path (some words may move from "resolved via reserved key" to
-  "resolved via phoneme chord" or "resolved via two-stroke fallback," but none should
-  become newly unresolved without an explicit decision to accept that, e.g. via the
-  Category-C exception-list precedent from `PLAN_2026-09-18_low_value_discriminators.md`).
-
-## Open design decisions
-
-### A. Per-distinct-feature vs per-family-with-internal-code granularity (§2)
-
-Part 2 today gives every distinct atomic feature string its own permanent keypress
-(`pers_1`, `pers_2`, `pers_3` each get their own). Since a word only ever carries one
-value per family, a family-level code (e.g. no stroke = the most common/unmarked value,
-one dedicated key = a second value, a second key or that key's combo = a third) would
-spend far less of the scarce 10-key coda budget — but changes what "one key = one fixed
-meaning" means: a key's meaning becomes "this family's non-default value," not a single
-global constant, and reintroduces a small amount of the "which meaning does this key have
-right now" burden this whole plan exists to eliminate, unless the family boundary itself
-is made obvious some other way (e.g. gramCat is usually unambiguous from the word's own
-orthography, so the same physical key *could* safely mean "feminine" for an adjective and
-"2nd person" for a verb — a word is never both). Recommend the family-with-code approach
-for budget reasons, but this is a real mnemonic-clarity/resource-efficiency trade-off that
-needs the user's steer, not a unilateral call — decide before §3 since it changes the
-model's variable shape.
-
-### B. Two-stroke fallback cutoff (§5)
-
-Cost-based (a `getStrokeCost` threshold, mirroring how `_buildStrokePool` sorts by cost),
-frequency-based (only fall back for low-frequency words, mirroring
-`LOW_COUNT_THRESHOLD`/the Category-C exception-list convention), or a fixed rule (any
-composition needing more than N atoms automatically two-strokes, independent of cost)?
-Needs a decision before §5 is implementable, though §3's model can be built without
-committing to this — the fallback is a post-solve decision about what to do with words the
-model reports infeasible or expensive.
-
-### C. Onset phonemes as candidates?
-
-`findFeatureKeypresses`'s docstring says "candidate **right-hand coda** phonemes" — Part 2
-only ever searched coda. Should onset (left-hand) phonemes also be eligible candidates for
-some families, e.g. once coda room runs out for a given word? Or is onset reserved for the
-word's own base phonology by convention, keeping grammatical marking conventionally
-right-hand/coda-side (arguably more learnable on its own — mirrors English theories'
-suffix-key convention)? Needs a decision; mechanically easy to add to §3's candidate pool
-once decided.
-
-### D. Fate of `assignDiscriminatorKeypresses`/`FEATURE_PRIORITY` (`src/greedyoptimizer.py`)
-
-Currently orphaned (tested, not called from `dictionary.py`), operating on the
-reserved-key space via graph-coloring + a hand-authored markedness table — the same genre
-of mechanism `satOptimizeDiscriminator` implements more rigorously, not something this
-plan's phoneme-keypress mechanism directly supersedes (different physical key space).
-Likely candidate for retirement once §6 restricts `satOptimizeDiscriminator` to the
-`*`/`#` track only (no more use case for "the greedy alternative to reserved-key
-coloring"), but confirm rather than assume — flag for a follow-on cleanup, not in scope
-here.
-
-## Non-goals / out of scope
-
-- No changes to the lemma-homophone (`*`/`#`) track's own logic, beyond confirming it
-  keeps sole claim to the 4 reserved keys once §6 lands.
-- No re-optimization of the phoneme→key layout itself (`starboard3h.json`,
-  `cpsatsolver.py::optimizeKeyboard`, still commented out per `ROADMAP.md`) — this plan
-  only adds a second consumer of the existing coda-key space, layered after the base
-  phonology assignment it already encodes.
-- No changes to `FEATURE_FAMILIES`/`associationScore`/polarity-coefficient machinery in
-  `satoptimizer.py` for the same-lemma track — once every atom has a guaranteed-unique
-  keypress, polarity is structural and that machinery has no remaining job for this track.
-  Don't extend it with mode/tense entries; it becomes dead code for this purpose once §6
-  lands (separate cleanup, not blocking this plan).
-- No prefix-formation work (`ROADMAP.md` Phase 6) — same machinery family, explicitly
-  out of scope here.
