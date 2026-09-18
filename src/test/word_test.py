@@ -1,5 +1,5 @@
 import pytest
-from ..word import Word, GramCat
+from ..word import Word, GramCat, atomicFeatures
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -258,7 +258,7 @@ class TestGetFeatures:
         assert "NOM" in features
         assert "m" in features
         assert "s" in features
-        assert "m_s" in features
+        assert "m:s" in features
         assert "not_m_s" not in features
 
     def test_nom_feminin_pluriel(self):
@@ -267,13 +267,13 @@ class TestGetFeatures:
         assert "NOM" in features
         assert "f" in features
         assert "p" in features
-        assert "f_p" in features
+        assert "f:p" in features
         assert "not_m_s" in features
 
     def test_adj_masculin_pluriel_has_not_m_s(self):
         w = _make_word(gramCat=GramCat.ADJ, gender="m", number="p")
         features = w.getFeatures()
-        assert "m_p" in features
+        assert "m:p" in features
         assert "not_m_s" in features
 
     def test_gender_none_number_none(self):
@@ -284,15 +284,15 @@ class TestGetFeatures:
         assert "m" not in features
         assert "s" not in features
         # No gender_number combo
-        assert not any("_" in f and f.count("_") == 1 and f[0] in "mf"
+        assert not any(":" in f and f.count(":") == 1 and f[0] in "mf"
                        for f in features)
 
     def test_ver_with_gender_number_has_combo(self):
-        """VER with gender/number adds VER_gender_number feature."""
+        """VER with gender/number adds VER:gender:number feature."""
         w = _make_word(gramCat=GramCat.VER, gender="m", number="s",
                        infoVerb="par:pas")
         features = w.getFeatures()
-        assert "VER_m_s" in features
+        assert "VER:m:s" in features
 
     def test_ver_without_gender_no_combo(self):
         w = _make_word(gramCat=GramCat.VER, gender=None, number=None,
@@ -347,8 +347,8 @@ class TestGetFeatures:
         features = w.getFeatures()
         # Empty strings are truthy for != None, so they get added
         assert "" in features
-        # The combo is "_" (empty_empty)
-        assert "_" in features
+        # The combo is ":" (empty:empty)
+        assert ":" in features
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -526,6 +526,35 @@ class TestReplaceSyllables:
         w = _make_word(phonology="aaa")
         result = w.replaceSyllables("aa", "b")
         assert result == "ba"
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# atomicFeatures
+# ═══════════════════════════════════════════════════════════════════════════════
+
+class TestAtomicFeatures:
+
+    def test_single_atom_with_internal_underscore_stays_whole(self):
+        """'_' is internal to one atom's own name -- pers_3 must split to
+        {"pers_3"}, not {"pers", "3"}."""
+        assert atomicFeatures("pers_3") == frozenset({"pers_3"})
+
+    def test_gender_number_combo_splits_on_colon(self):
+        """'m:s' is a genuine compound of two independent atoms, ':'-joined."""
+        assert atomicFeatures("m:s") == frozenset({"m", "s"})
+
+    def test_compound_splits_only_on_colon(self):
+        assert atomicFeatures("subjonctif:présent:pers_3:nbr_s") == frozenset(
+            {"subjonctif", "présent", "pers_3", "nbr_s"}
+        )
+
+    def test_not_prefix_stripped_before_split(self):
+        assert atomicFeatures("not_pers_3:nbr_s") == frozenset({"pers_3", "nbr_s"})
+
+    def test_not_m_s_is_its_own_indivisible_atom(self):
+        """"not_m_s" is a standalone flag ("not the canonical masc-singular form"), not
+        a ':'-joined compound -- stripping "not_" leaves "m_s" with no colon to split."""
+        assert atomicFeatures("not_m_s") == frozenset({"m_s"})
 
 
 if __name__ == "__main__":

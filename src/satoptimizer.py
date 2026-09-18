@@ -16,8 +16,6 @@ NO_FEATURE = "nofeature"
 FEATURE_FAMILIES: dict[str, str] = {
     "s": "number", "p": "number", "nbr_s": "number", "nbr_p": "number",
     "m": "gender", "f": "gender",
-    "m_s": "gender_number", "f_s": "gender_number",
-    "m_p": "gender_number", "f_p": "gender_number", "not_m_s": "gender_number",
     "pers_1": "person", "pers_2": "person", "pers_3": "person",
 }
 
@@ -41,9 +39,6 @@ _VALUE_TABLES: dict[str, dict[str, str]] = {
 _ATOMIC_FEATURE_NOTATION: dict[str, str] = {
     "s": "gender_number_field", "p": "gender_number_field",
     "m": "gender_number_field", "f": "gender_number_field",
-    "m_s": "gender_number_combo", "f_s": "gender_number_combo",
-    "m_p": "gender_number_combo", "f_p": "gender_number_combo",
-    "not_m_s": "gender_number_combo",
     "nbr_s": "verb_conjugation", "nbr_p": "verb_conjugation",
     "pers_1": "verb_conjugation", "pers_2": "verb_conjugation", "pers_3": "verb_conjugation",
 }
@@ -54,14 +49,14 @@ def _familyAtomicFeatures(feature: WordFeature) -> dict[str, str]:
     Every family-bearing atomic feature inside a possibly compound feature, keyed by
     family. A compound like "indicatif:pers_3:nbr_s" carries atoms from two families
     at once (person and number) since word.py combines mode/tense/person/number into
-    a single ":"-joined feature.
+    a single ":"-joined feature. "VER:m:s" likewise splits into "VER"/"m"/"s" --
+    "VER" has no family entry, "m"/"s" hit the "gender"/"number" families directly.
     """
     result: dict[str, str] = {}
     for part in feature.split(":"):
-        normalized = part[len("VER_"):] if part.startswith("VER_") else part
-        family = FEATURE_FAMILIES.get(normalized)
+        family = FEATURE_FAMILIES.get(part)
         if family is not None:
-            result[family] = normalized
+            result[family] = part
     return result
 
 
@@ -74,8 +69,8 @@ def _computeFamilyCorrelations(words: list[Word]) -> dict[frozenset[str], float]
     verb-only atomic feature) rather than being truly semantically opposed.
 
     Correlation is only computed between atomic features that share the same
-    _ATOMIC_FEATURE_NOTATION (they're read off the same field of Word, e.g. "m_s"/"f_s"
-    both come from the generic gender_number combo) — restricted further to the gramCats
+    _ATOMIC_FEATURE_NOTATION (they're read off the same field of Word, e.g. "m"/"f"
+    both come from the generic gender field) — restricted further to the gramCats
     where they can both actually appear, since e.g. "s"/"p" also occur on NOM/ADJ in
     addition to VER. Cross-notation pairs (e.g. "s" vs "nbr_s": one from the generic
     gender/number fields, the other parsed out of infoVerb) fall back to the

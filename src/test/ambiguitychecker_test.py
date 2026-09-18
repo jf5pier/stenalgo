@@ -196,14 +196,14 @@ class TestBuildAtomicFeatureToWords:
 
     def test_canonical_excluded_noncanonical_split_into_atomic_features(self):
         """pers_3 (priority 70) beats pers_1 (priority 55): pers_3 is canonical (no keypress
-        needed), pers_1 is the one that needs a feature keypress."""
+        needed), pers_1 is the one that needs a feature keypress. atomicFeatures() splits
+        only on ':', so "pers_1" stays one atom -- not {"pers", "1"}."""
         w3 = _make_word(ortho="w3")
         w1 = _make_word(ortho="w1")
         augmentedTheory = {("pers_3", "pers_1"): [(w3, w1)]}
         atomicFeatureToWords = buildAtomicFeatureToWords(augmentedTheory)
-        assert set(atomicFeatureToWords.keys()) == {"pers", "1"}
-        assert atomicFeatureToWords["pers"] == [(w1, "pers_1")]
-        assert atomicFeatureToWords["1"] == [(w1, "pers_1")]
+        assert set(atomicFeatureToWords.keys()) == {"pers_1"}
+        assert atomicFeatureToWords["pers_1"] == [(w1, "pers_1")]
 
 
 # ---------------------------------------------------------------------------
@@ -254,12 +254,12 @@ class TestCheckComposedChords:
         w = _make_word()
         theory = {((1,),): [w]}
         atomicFeatureToWords = {
-            "pers": [(w, "pers_3")],
-            "3": [(w, "pers_3")],
+            "pers_3": [(w, "pers_3:nbr_s")],
+            "nbr_s": [(w, "pers_3:nbr_s")],
         }
         featureKeypresses = {
-            "pers": FeatureKeypressFeasibility(atomicFeature="pers", feasibleSingleKeyPhonemes=["t"]),
-            "3": FeatureKeypressFeasibility(atomicFeature="3", feasibleSingleKeyPhonemes=["s"]),
+            "pers_3": FeatureKeypressFeasibility(atomicFeature="pers_3", feasibleSingleKeyPhonemes=["t"]),
+            "nbr_s": FeatureKeypressFeasibility(atomicFeature="nbr_s", feasibleSingleKeyPhonemes=["s"]),
         }
         kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
         report = checkComposedChords(featureKeypresses, atomicFeatureToWords, theory, kb)
@@ -269,10 +269,13 @@ class TestCheckComposedChords:
     def test_composed_chord_collides(self):
         w = _make_word()
         theory = {((1,),): [w], ((1, 2, 3),): [_make_word(ortho="other")]}
-        atomicFeatureToWords = {"pers": [(w, "pers_3")], "3": [(w, "pers_3")]}
+        atomicFeatureToWords = {
+            "pers_3": [(w, "pers_3:nbr_s")],
+            "nbr_s": [(w, "pers_3:nbr_s")],
+        }
         featureKeypresses = {
-            "pers": FeatureKeypressFeasibility(atomicFeature="pers", feasibleSingleKeyPhonemes=["t"]),
-            "3": FeatureKeypressFeasibility(atomicFeature="3", feasibleSingleKeyPhonemes=["s"]),
+            "pers_3": FeatureKeypressFeasibility(atomicFeature="pers_3", feasibleSingleKeyPhonemes=["t"]),
+            "nbr_s": FeatureKeypressFeasibility(atomicFeature="nbr_s", feasibleSingleKeyPhonemes=["s"]),
         }
         kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
         report = checkComposedChords(featureKeypresses, atomicFeatureToWords, theory, kb)
@@ -281,10 +284,13 @@ class TestCheckComposedChords:
     def test_missing_keypress_marks_infeasible(self):
         w = _make_word()
         theory = {((1,),): [w]}
-        atomicFeatureToWords = {"pers": [(w, "pers_3")], "3": [(w, "pers_3")]}
+        atomicFeatureToWords = {
+            "pers_3": [(w, "pers_3:nbr_s")],
+            "nbr_s": [(w, "pers_3:nbr_s")],
+        }
         featureKeypresses = {
-            "pers": FeatureKeypressFeasibility(atomicFeature="pers"),  # no feasible keypress at all
-            "3": FeatureKeypressFeasibility(atomicFeature="3", feasibleSingleKeyPhonemes=["s"]),
+            "pers_3": FeatureKeypressFeasibility(atomicFeature="pers_3"),  # no feasible keypress at all
+            "nbr_s": FeatureKeypressFeasibility(atomicFeature="nbr_s", feasibleSingleKeyPhonemes=["s"]),
         }
         kb = _mock_keyboard_for_keypresses({"s": (3,)})
         report = checkComposedChords(featureKeypresses, atomicFeatureToWords, theory, kb)

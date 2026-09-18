@@ -97,7 +97,11 @@ class TestFamilyCorrelations:
         assert associationScore("s", "nbr_p", corr) == -1.0
         assert associationScore("p", "nbr_s", corr) == -1.0
 
-    def test_gender_number_combos_use_real_correlation(self):
+    def test_gender_number_atomic_features_use_real_correlation(self):
+        """Gender ("m"/"f") and number ("s"/"p") are independent atomic features --
+        word.py joins every compound with ':' ("m:s", "VER:m:s"), so their opposition
+        is carried entirely by the existing "gender"/"number" families; there's no
+        separate "gender_number" compound family to test."""
         words = [
             _make_adj("petit1", "m", "s"),
             _make_adj("petit2", "m", "s"),
@@ -106,13 +110,19 @@ class TestFamilyCorrelations:
             _make_adj("petites", "f", "p"),
         ]
         corr = _computeFamilyCorrelations(words)
-        # not_m_s is the complement of m_s: perfectly opposed to m_s...
-        assert associationScore("not_m_s", "m_s", corr) == -1.0
-        # ...and positively correlated with every combo it co-occurs with (each is
-        # a subset of "not m_s"), discovered empirically, not hand-asserted.
-        assert associationScore("not_m_s", "f_s", corr) > 0
-        assert associationScore("not_m_s", "m_p", corr) > 0
-        assert associationScore("not_m_s", "f_p", corr) > 0
+        assert associationScore("m", "f", corr) < 0
+
+    def test_not_m_s_is_a_standalone_indivisible_flag(self):
+        """"not_m_s" is the one exception that keeps its '_' -- it's not a ':'-joined
+        compound of independent atoms, so it carries no family and stays neutral
+        toward everything, like a mode/tense atom."""
+        words = [
+            _make_adj("petit1", "m", "s"),
+            _make_adj("petite", "f", "s"),
+        ]
+        corr = _computeFamilyCorrelations(words)
+        assert associationScore("not_m_s", "m", corr) == 0.0
+        assert associationScore("not_m_s", "f", corr) == 0.0
 
     def test_unrelated_families_neutral(self):
         corr = _computeFamilyCorrelations(self._number_words())
