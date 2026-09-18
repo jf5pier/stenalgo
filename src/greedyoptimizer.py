@@ -16,22 +16,22 @@ from collections import defaultdict
 FEATURE_PRIORITY: dict[WordFeature, int] = {
     # ── Gender / number ──────────────────────────────────────────────────────
     # Masculine singular is the canonical citation form in French
-    "m_s":      95,
+    "m:s":      95,
     "m":        85,
     "s":        80,
     "nbr_s":    75,   # singular in verb context
     "not_m_s":  30,   # negation of canonical → below average
-    "f_s":      45,
+    "f:s":      45,
     "f":        40,
     "p":        20,
     "nbr_p":    15,
-    "m_p":      10,
-    "f_p":       5,
+    "m:p":      10,
+    "f:p":       5,
     # VER + gender/number combinations (participe passé agreement)
-    "VER_m_s":  90,
-    "VER_f_s":  40,
-    "VER_m_p":  15,
-    "VER_f_p":   5,
+    "VER:m:s":  90,
+    "VER:f:s":  40,
+    "VER:m:p":  15,
+    "VER:f:p":   5,
     # ── Verb modes ────────────────────────────────────────────────────────────
     "indicatif":    90,
     "infinitif":    75,

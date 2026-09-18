@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # coding: utf-8
 #
-import re
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import override
@@ -166,15 +165,21 @@ class Word:
         features += [self.gramCat.name]
         features += [self.gender] if self.gender != None else []
         features += [self.number] if self.number != None else []
-        # Adding gender_number feature combo
+        # Adding gender_number feature combo. Gender and number are independent atomic
+        # features, so they're ':'-joined (like every other compound feature) rather than
+        # '_'-joined -- atomicFeatures() must split this back into {"m"/"f", "s"/"p"}, not
+        # treat "m_s" as one indivisible token. "not_m_s" is its own indivisible flag
+        # ("not the canonical masculine-singular form"), not a gender+number compound, so
+        # it keeps its '_' -- there's no "not_m"/"not_s" to decompose it into.
         if self.gender != None and self.number != None:
-            features += [f"{self.gender}_{self.number}"]
-            if features[-1] != "m_s":
+            features += [f"{self.gender}:{self.number}"]
+            if features[-1] != "m:s":
                 features += ["not_m_s"]
-        # Adding a VER_masculine/feminin_singular/plural combo for participe passé
+        # Adding a VER:masculine/feminin:singular/plural combo for participe passé --
+        # gramCat, gender and number are 3 independent atoms, so they're ':'-joined.
         if self.gramCat == GramCat.VER :
             if self.gender != None and self.number != None:
-                features += [f"{self.gramCat.name}_{self.gender}_{self.number}"]
+                features += [f"{self.gramCat.name}:{self.gender}:{self.number}"]
         try:
             if self._infoVerb is not None:
                 for singleInfoVerb in self._infoVerb:
@@ -270,9 +275,10 @@ ATOMIC_FEATURE_CONFLICTS: dict[str, str] = {"p": "s", "s": "p", "m": "f", "f": "
 
 def atomicFeatures(f: WordFeature) -> frozenset[str]:
     """Split a (possibly compound) feature string into its atomic features, stripping any
-    'not_' prefix."""
+    'not_' prefix. Splits only on ':' -- '_' is internal to a single atom's own name
+    (e.g. "pers_3" is one atom, "person = 3", not two)."""
     base = f[4:] if f.startswith("not_") else f
-    return frozenset(t for t in re.split(r'[_:]', base) if t)
+    return frozenset(t for t in base.split(':') if t)
 
 
 def groupWordsByLemme(words: list[Word]) -> dict[LemmeGramCat, list[Word]]:
