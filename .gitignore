@@ -18,7 +18,7 @@ theory.tsv
 # Regenerable Phase E outputs (src/elicitation.py, util/build_questionnaire_page.py)
 questionnaire.json
 elicitation_questionnaire.html
-resolved_press_sets.json
+resolved_press_sets*.json
 
 env/
 
