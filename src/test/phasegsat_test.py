@@ -5,7 +5,15 @@
 import pytest
 
 from ..phaseg import verifyKeypressAssignment
-from ..phasegsat import groupSignatures, minKeypressesSat, minKeypressesSatPreferring, serializeAssignment
+from ..phasegsat import (
+    ExclusiveGroupPreference,
+    SameKeyPreference,
+    groupSignatures,
+    minKeypressesSat,
+    minKeypressesSatPreferring,
+    minKeypressesSatWithPriorities,
+    serializeAssignment,
+)
 
 
 def _parler_press_sets() -> dict[str, dict[str, frozenset[str]]]:
@@ -261,4 +269,63 @@ def test_minKeypressesSatPreferring_combines_hard_structural_constraints_with_so
     # SAME pair -- they can never both be satisfied, so the preference goes unhonored.
     assert colorOf["pers_2"] != colorOf["nbr_p"]
     assert satisfied == 0
+    assert verifyKeypressAssignment(pressSetsByGroup, colorOf) == []
+
+
+# ── minKeypressesSatWithPriorities (lexicographic multi-tier soft preferences) ───────
+
+def test_minKeypressesSatWithPriorities_single_tier_matches_minKeypressesSatPreferring():
+    pressSetsByGroup = _safe_sharing_press_sets()
+    numKeysA, colorOfA, satisfiedA = minKeypressesSatPreferring(
+        pressSetsByGroup, preferSameKey=frozenset({frozenset({"pers_2", "nbr_p"})})
+    )
+    numKeysB, colorOfB, achievedB = minKeypressesSatWithPriorities(
+        pressSetsByGroup, [SameKeyPreference(frozenset({frozenset({"pers_2", "nbr_p"})}))]
+    )
+    assert numKeysB == numKeysA
+    assert achievedB == [satisfiedA]
+    # key LABELS are arbitrary between independent solves -- only check each result's
+    # own internal consistency (pers_2/nbr_p sharing within itself), not cross-solve.
+    assert colorOfA["pers_2"] == colorOfA["nbr_p"]
+    assert colorOfB["pers_2"] == colorOfB["nbr_p"]
+
+
+def test_minKeypressesSatWithPriorities_higher_tier_never_sacrificed_for_lower():
+    """a can only ever match ONE of b/c's key (b and c are hard-forced apart) -- tier 0
+    (prefer a~b) must win over tier 1 (prefer a~c), never partially compromised for it."""
+    pressSetsByGroup = {
+        "g1": {"w1": frozenset(), "w2": frozenset({"a"})},
+        "g2": {"w3": frozenset(), "w4": frozenset({"b"})},
+        "g3": {"w5": frozenset(), "w6": frozenset({"c"})},
+    }
+    mustDifferGroups = frozenset({frozenset({"b", "c"})})
+    preferences = [
+        SameKeyPreference(frozenset({frozenset({"a", "b"})})),
+        SameKeyPreference(frozenset({frozenset({"a", "c"})})),
+    ]
+    numKeys, colorOf, achieved = minKeypressesSatWithPriorities(
+        pressSetsByGroup, preferences, mustDifferGroups=mustDifferGroups
+    )
+    assert achieved == [1, 0]  # tier 0 fully satisfied; tier 1 necessarily not
+    assert colorOf["a"] == colorOf["b"]
+    assert colorOf["a"] != colorOf["c"]
+    assert verifyKeypressAssignment(pressSetsByGroup, colorOf) == []
+
+
+def test_minKeypressesSatWithPriorities_exclusiveGroupPreference_keeps_outsiders_away():
+    """d is completely free to land anywhere at the free-optimal K -- with an
+    ExclusiveGroupPreference on {pers_2, nbr_p}, it should be steered away from their
+    keypress rather than sharing it (which the solver might otherwise do arbitrarily)."""
+    pressSetsByGroup = dict(_safe_sharing_press_sets())
+    pressSetsByGroup["free_NOM"] = {"w1": frozenset(), "w2": frozenset({"d"})}
+    numKeys, colorOf, achieved = minKeypressesSatWithPriorities(
+        pressSetsByGroup,
+        [
+            SameKeyPreference(frozenset({frozenset({"pers_2", "nbr_p"})})),
+            ExclusiveGroupPreference(frozenset({"pers_2", "nbr_p"})),
+        ],
+    )
+    assert achieved[0] == 1  # pers_2/nbr_p still share
+    assert achieved[1] == 0  # and nothing else intrudes on their keypress
+    assert colorOf["d"] != colorOf["pers_2"]
     assert verifyKeypressAssignment(pressSetsByGroup, colorOf) == []
