@@ -21,6 +21,8 @@ this to ~200 distinct problems (see `groupSignatures`), making an exact CP-SAT
 formulation tractable.
 """
 
+from itertools import combinations
+
 from ortools.sat.python import cp_model
 from ortools.sat.python.cp_model import IntVar
 
@@ -89,28 +91,63 @@ def _buildDistinctnessModel(
     return model, x
 
 
+def _addMustDifferPairs(
+    model: cp_model.CpModel, x: dict[tuple[str, int], IntVar], numKeys: int, pairs: set[tuple[str, str]]
+) -> None:
+    """Force each (m1, m2) pair onto DIFFERENT keypresses: for every keypress, at most
+    one of the two may sit there -- since each marker occupies exactly one keypress
+    (`_buildDistinctnessModel`'s AddExactlyOne), this is enough to prevent them ever
+    landing on the same one."""
+    for m1, m2 in pairs:
+        for k in range(numKeys):
+            _ = model.Add(x[m1, k] + x[m2, k] <= 1)
+
+
+def _aloneAndMustDifferPairs(
+    markers: list[str], aloneKeys: frozenset[str], mustDifferGroups: frozenset[frozenset[str]]
+) -> set[tuple[str, str]]:
+    """Expand `aloneKeys` (each marker must share its keypress with no one) and
+    `mustDifferGroups` (every pair WITHIN a group must land on different keypresses --
+    not a hard requirement that they differ from markers outside the group) into the
+    flat set of (m1, m2) pairs `_addMustDifferPairs` needs."""
+    pairs: set[tuple[str, str]] = set()
+    for m in aloneKeys:
+        for other in markers:
+            if other != m:
+                pairs.add(tuple(sorted((m, other))))
+    for group in mustDifferGroups:
+        for m1, m2 in combinations(sorted(group), 2):
+            pairs.add((m1, m2))
+    return pairs
+
+
 def _feasibleAssignment(
     markers: list[str],
     signatures: list[GroupSignature],
     numKeys: int,
     timeLimitS: float,
     mustShareKey: frozenset[frozenset[str]] = frozenset(),
+    aloneKeys: frozenset[str] = frozenset(),
+    mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
 ) -> tuple[bool, dict[str, int] | None]:
     """
     Try to color `markers` onto `numKeys` abstract keypresses (see `_buildDistinctnessModel`).
     `mustShareKey` additionally pins each given marker pair onto the SAME keypress (e.g.
     for exploring a specific bundling decision, not merely letting the solver find one on
-    its own) -- a HARD constraint: infeasible under it is reported as such, not silently
-    dropped (see `_bestAssignmentPreferring` for a soft version that never fails this
-    way). Returns (provenFeasible, colorOf); when infeasible, colorOf is None; on a
-    solver timeout without a proof either way, raises (a "no" answer must be a proof, not
-    a guess -- see `minKeypressesSat`).
+    its own); `aloneKeys` forces each given marker to share its keypress with nothing else;
+    `mustDifferGroups` forces every pair within a group onto DIFFERENT keypresses. All
+    three are HARD constraints: infeasible under them is reported as such, not silently
+    dropped (see `_bestAssignmentPreferring` for a soft version of same-key preferences
+    that never fails this way). Returns (provenFeasible, colorOf); when infeasible,
+    colorOf is None; on a solver timeout without a proof either way, raises (a "no"
+    answer must be a proof, not a guess -- see `minKeypressesSat`).
     """
     model, x = _buildDistinctnessModel(markers, signatures, numKeys)
     for pair in mustShareKey:
         m1, m2 = tuple(pair)
         for k in range(numKeys):
             _ = model.Add(x[m1, k] == x[m2, k])
+    _addMustDifferPairs(model, x, numKeys, _aloneAndMustDifferPairs(markers, aloneKeys, mustDifferGroups))
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = timeLimitS
@@ -132,15 +169,20 @@ def _bestAssignmentPreferring(
     numKeys: int,
     preferSameKey: frozenset[frozenset[str]],
     timeLimitS: float,
+    aloneKeys: frozenset[str] = frozenset(),
+    mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
 ) -> tuple[dict[str, int], int]:
     """
     Among all valid colorings at this (already known feasible) `numKeys`, find one
     maximizing how many `preferSameKey` pairs land on the same keypress -- a SOFT
     tiebreaker, unlike `_feasibleAssignment`'s `mustShareKey`: a pair that genuinely
     can't share safely at this K is simply left apart rather than making the whole
-    search infeasible. Returns (colorOf, howManyPreferencesSatisfied).
+    search infeasible. `aloneKeys`/`mustDifferGroups` (see `_feasibleAssignment`) are
+    still HARD constraints even here -- only the same-key preference is soft. Returns
+    (colorOf, howManyPreferencesSatisfied).
     """
     model, x = _buildDistinctnessModel(markers, signatures, numKeys)
+    _addMustDifferPairs(model, x, numKeys, _aloneAndMustDifferPairs(markers, aloneKeys, mustDifferGroups))
 
     sameKeyVars: list[IntVar] = []
     for pair in preferSameKey:
@@ -177,6 +219,8 @@ def minKeypressesSat(
     maxK: int = 20,
     timeLimitS: float = 30.0,
     mustShareKey: frozenset[frozenset[str]] = frozenset(),
+    aloneKeys: frozenset[str] = frozenset(),
+    mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
 ) -> tuple[int, dict[str, int]]:
     """
     The provably smallest number of keypresses onto which every live marker can be
@@ -184,18 +228,22 @@ def minKeypressesSat(
     numKeys = 1, 2, ... and returns the first CP-SAT proves feasible, so the result is
     a proof of minimality (every smaller numKeys was proven infeasible), not a greedy
     upper bound like `phaseg.runPhaseG`'s. `mustShareKey` (see `_feasibleAssignment`)
-    pins specific marker pairs onto the same keypress throughout the scan, for exploring
-    "what's the minimum K if I insist on bundling X with Y" rather than letting the
-    solver choose bundlings freely.
+    pins specific marker pairs onto the same keypress throughout the scan; `aloneKeys`
+    forces a marker to share its keypress with nothing else; `mustDifferGroups` forces
+    every pair within a group onto different keypresses -- all HARD constraints applied
+    throughout the scan (so they can inflate K, or make it infeasible outright, unlike a
+    soft preference -- see `minKeypressesSatPreferring`).
     """
     markers = sorted(liveMarkers(pressSetsByGroup))
     signatures = groupSignatures(pressSetsByGroup)
     for numKeys in range(1, maxK + 1):
-        feasible, colorOf = _feasibleAssignment(markers, signatures, numKeys, timeLimitS, mustShareKey)
+        feasible, colorOf = _feasibleAssignment(
+            markers, signatures, numKeys, timeLimitS, mustShareKey, aloneKeys, mustDifferGroups
+        )
         if feasible:
             assert colorOf is not None
             return numKeys, colorOf
-    raise RuntimeError(f"no feasible assignment found up to maxK={maxK} under the given mustShareKey constraints")
+    raise RuntimeError(f"no feasible assignment found up to maxK={maxK} under the given hard constraints")
 
 
 def minKeypressesSatPreferring(
@@ -203,22 +251,28 @@ def minKeypressesSatPreferring(
     preferSameKey: frozenset[frozenset[str]] = frozenset(),
     maxK: int = 20,
     timeLimitS: float = 30.0,
+    aloneKeys: frozenset[str] = frozenset(),
+    mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
 ) -> tuple[int, dict[str, int], int]:
     """
     Two-phase search: first find the TRUE minimum K exactly as `minKeypressesSat` does
-    (unconstrained by any preference, so a soft preference can never inflate K -- unlike
-    passing the same pair as `minKeypressesSat`'s `mustShareKey`, which could force a
-    larger K, or fail outright, if the pair can't safely share at the true minimum).
-    Then, AT that fixed minimum K, re-solve maximizing how many `preferSameKey` pairs
-    end up sharing a keypress -- a tiebreaker among the (possibly many) equally-minimal
-    colorings, not a requirement. Returns (numKeys, colorOf, preferencesSatisfied);
-    `preferencesSatisfied` lets a caller tell "got it for free" (== len(preferSameKey))
-    apart from "couldn't fit it in at this K" (< len(preferSameKey)).
+    -- unconstrained by the SOFT `preferSameKey` (so it can never inflate K), but still
+    subject to any HARD `aloneKeys`/`mustDifferGroups` (those apply throughout, same as
+    in `minKeypressesSat`, since they're requirements, not preferences). Then, AT that
+    fixed minimum K, re-solve maximizing how many `preferSameKey` pairs end up sharing a
+    keypress -- a tiebreaker among the (possibly many) equally-minimal colorings, not a
+    requirement. Returns (numKeys, colorOf, preferencesSatisfied); `preferencesSatisfied`
+    lets a caller tell "got it for free" (== len(preferSameKey)) apart from "couldn't fit
+    it in at this K" (< len(preferSameKey)).
     """
     markers = sorted(liveMarkers(pressSetsByGroup))
     signatures = groupSignatures(pressSetsByGroup)
-    numKeys, _ = minKeypressesSat(pressSetsByGroup, maxK=maxK, timeLimitS=timeLimitS)
-    colorOf, satisfied = _bestAssignmentPreferring(markers, signatures, numKeys, preferSameKey, timeLimitS)
+    numKeys, _ = minKeypressesSat(
+        pressSetsByGroup, maxK=maxK, timeLimitS=timeLimitS, aloneKeys=aloneKeys, mustDifferGroups=mustDifferGroups
+    )
+    colorOf, satisfied = _bestAssignmentPreferring(
+        markers, signatures, numKeys, preferSameKey, timeLimitS, aloneKeys, mustDifferGroups
+    )
     return numKeys, colorOf, satisfied
 
 
@@ -230,11 +284,13 @@ def serializeAssignment(
     weightByKeypress: dict[int, float],
     preferSameKey: frozenset[frozenset[str]] = frozenset(),
     preferencesSatisfied: int = 0,
+    aloneKeys: frozenset[str] = frozenset(),
+    mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
 ) -> dict:
     """The persisted, adopted Phase G artifact -- a specific CP-SAT-proven assignment
     (not the search machinery itself), JSON-serializable for `util/build_phase_g_assignment.py`.
-    `mustShareKey` records bundling decisions that were HARD-forced (`minKeypressesSat`);
-    `preferSameKey`/`preferencesSatisfied` record ones that were only a SOFT tiebreaker
+    `mustShareKey`/`aloneKeys`/`mustDifferGroups` record HARD-forced decisions
+    (`minKeypressesSat`); `preferSameKey`/`preferencesSatisfied` record a SOFT tiebreaker
     (`minKeypressesSatPreferring`) -- distinct provenance, since the latter never risked
     inflating K to get its bundling, the former could have."""
     markersByKeypress: dict[int, list[str]] = {k: [] for k in range(numKeys)}
@@ -244,6 +300,8 @@ def serializeAssignment(
         "keypressCount": numKeys,
         "markersByKeypress": {str(k): sorted(ms) for k, ms in markersByKeypress.items()},
         "mustShareKey": [sorted(pair) for pair in sorted(mustShareKey, key=sorted)],
+        "aloneKeys": sorted(aloneKeys),
+        "mustDifferGroups": [sorted(group) for group in sorted(mustDifferGroups, key=sorted)],
         "preferSameKey": [sorted(pair) for pair in sorted(preferSameKey, key=sorted)],
         "preferencesSatisfied": f"{preferencesSatisfied}/{len(preferSameKey)}",
         "unpressableMarkers": sorted(unpressableMarkers),
