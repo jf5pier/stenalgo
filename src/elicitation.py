@@ -376,21 +376,42 @@ def validateElicitation(
     return conflicts, unresolvedOppositions
 
 
+def buildFrequencyByGroupOrtho(
+    homophoneGroups: dict[LemmaHomophoneGroupKey, list[Word]]
+) -> dict[LemmaHomophoneGroupKey, dict[WordOrtho, float]]:
+    """Per group, each spelling's corpus frequency (max over its Word rows sharing that
+    ortho -- same convention as `buildQuestionnaireItems`'s `freqByOrtho`). Feeds Phase
+    G's frequency-weighted chord-size report; resolution/validation don't need this."""
+    return {
+        key: {ortho: max((w.frequency for w in words if w.ortho == ortho), default=0.0)
+              for ortho in {w.ortho for w in words}}
+        for key, words in homophoneGroups.items()
+    }
+
+
 def serializeResolvedPressSets(
-    pressSetsByGroup: dict[LemmaHomophoneGroupKey, dict[WordOrtho, frozenset[str]]]
+    pressSetsByGroup: dict[LemmaHomophoneGroupKey, dict[WordOrtho, frozenset[str]]],
+    frequencyByGroupOrtho: dict[LemmaHomophoneGroupKey, dict[WordOrtho, float]] | None = None,
 ) -> list[dict]:
     """
     E6: the persisted elicitation artifact that feeds Phase G (not `buildDiscriminatorSelection`'s
     output). One entry per validated (conflict-free -- callers should pass `validateElicitation`'s
-    clean groups, or filter out its conflicting ones first) homophone group: its stroke/lemma key
-    and every spelling's resolved press-set, JSON-serializable (Strokes is already
+    clean groups, or filter out its conflicting ones first) homophone group: its stroke/lemma key,
+    every spelling's resolved press-set, and (when `frequencyByGroupOrtho` is given, see
+    `buildFrequencyByGroupOrtho`) each spelling's corpus frequency, for Phase G's
+    frequency-weighted chord-size report. JSON-serializable (Strokes is already
     tuple[tuple[int, ...], ...], trivially nested lists; press-sets sorted for stable diffs).
     """
+    frequencyByGroupOrtho = frequencyByGroupOrtho or {}
     return [
         {
             "strokes": [list(stroke) for stroke in strokes],
             "lemmeGramCat": lemmeGramCat,
             "pressSets": {ortho: sorted(pressSet) for ortho, pressSet in pressSetByOrtho.items()},
+            "frequencies": {
+                ortho: frequencyByGroupOrtho.get((strokes, lemmeGramCat), {}).get(ortho, 0.0)
+                for ortho in pressSetByOrtho
+            },
         }
         for (strokes, lemmeGramCat), pressSetByOrtho in sorted(
             pressSetsByGroup.items(), key=lambda kv: kv[0][1]
@@ -486,7 +507,8 @@ if __name__ == "__main__":
             key: pressSetByOrtho for key, pressSetByOrtho in pressSetsByGroup.items()
             if key not in conflictedGroupKeys
         }
-        resolvedArtifact = serializeResolvedPressSets(cleanPressSetsByGroup)
+        frequencyByGroupOrtho = buildFrequencyByGroupOrtho(homophoneGroups)
+        resolvedArtifact = serializeResolvedPressSets(cleanPressSetsByGroup, frequencyByGroupOrtho)
         with open("resolved_press_sets.json", "w", encoding="utf-8") as rf:
             json.dump(resolvedArtifact, rf, ensure_ascii=False, indent=1)
         print(f"\nWrote resolved_press_sets.json: {len(resolvedArtifact)} validated groups "

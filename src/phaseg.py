@@ -21,6 +21,9 @@ from itertools import combinations
 # only needs the press-sets themselves, not the stroke/lemma identity behind them.
 PressSetsByGroup = dict[str, dict[str, frozenset[str]]]
 
+# Same group id, each spelling's corpus frequency (see `elicitation.buildFrequencyByGroupOrtho`).
+FrequencyByGroup = dict[str, dict[str, float]]
+
 
 def loadResolvedPressSets(path: str = "resolved_press_sets.json") -> PressSetsByGroup:
     """Reload E6's persisted artifact (see `src.elicitation.serializeResolvedPressSets`)."""
@@ -32,6 +35,21 @@ def loadResolvedPressSets(path: str = "resolved_press_sets.json") -> PressSetsBy
         groupId = f"{entry['lemmeGramCat']}@{strokesKey}"
         pressSetsByGroup[groupId] = {ortho: frozenset(atoms) for ortho, atoms in entry["pressSets"].items()}
     return pressSetsByGroup
+
+
+def loadGroupOrthoFrequencies(path: str = "resolved_press_sets.json") -> FrequencyByGroup:
+    """Reload each spelling's corpus frequency from the same E6 artifact, keyed the same
+    way as `loadResolvedPressSets`. Older artifacts written before frequency-weighted
+    chord-size reporting existed simply have no "frequencies" field -- absent entries
+    read back as 0.0 (see `frequencyWeightedChordSizes`)."""
+    with open(path, encoding="utf-8") as f:
+        entries = json.load(f)
+    frequencyByGroup: FrequencyByGroup = {}
+    for entry in entries:
+        strokesKey = "|".join(",".join(map(str, stroke)) for stroke in entry["strokes"])
+        groupId = f"{entry['lemmeGramCat']}@{strokesKey}"
+        frequencyByGroup[groupId] = dict(entry.get("frequencies", {}))
+    return frequencyByGroup
 
 
 def liveMarkers(pressSetsByGroup: PressSetsByGroup) -> set[str]:
@@ -149,12 +167,36 @@ def verifyKeypressAssignment(
     return conflicts
 
 
+def frequencyWeightedChordSizes(
+    pressSetsByGroup: PressSetsByGroup, frequencyByGroup: FrequencyByGroup, colorOf: dict[str, int]
+) -> dict[int, float]:
+    """
+    Per the plan's Phase G objective ("minimize K; report frequency-weighted chord
+    sizes -- full cost optimization is Phase P"): for each keypress, the total corpus
+    frequency of every spelling whose TRUE (elicited, not induced) press-set touches it
+    -- i.e. how often that keypress actually gets struck in real writing. This is a
+    Phase P input (a busy keypress should land on an easy physical key/finger), not
+    something Phase G optimizes against; Phase G only reports it. A group missing from
+    `frequencyByGroup` (e.g. an older artifact written before frequencies were tracked)
+    contributes 0.0, not an error.
+    """
+    weightByKeypress: dict[int, float] = defaultdict(float)
+    for groupId, pressSetByOrtho in pressSetsByGroup.items():
+        frequencyByOrtho = frequencyByGroup.get(groupId, {})
+        for ortho, trueMarkers in pressSetByOrtho.items():
+            frequency = frequencyByOrtho.get(ortho, 0.0)
+            for keypress in {colorOf[marker] for marker in trueMarkers}:
+                weightByKeypress[keypress] += frequency
+    return dict(weightByKeypress)
+
+
 @dataclass
 class PhaseGResult:
     keypressCount: int
     markersByKeypress: dict[int, frozenset[str]]
     unpressableMarkers: frozenset[str]
     conflicts: list[KeypressConflict]
+    frequencyWeightedChordSizes: dict[int, float]
 
 
 def _findSharedKeypressPair(
@@ -179,7 +221,10 @@ def _findSharedKeypressPair(
 
 
 def runPhaseG(
-    pressSetsByGroup: PressSetsByGroup, allAtoms: set[str] = frozenset(), maxRepairPasses: int = 50
+    pressSetsByGroup: PressSetsByGroup,
+    allAtoms: set[str] = frozenset(),
+    maxRepairPasses: int = 50,
+    frequencyByGroup: FrequencyByGroup | None = None,
 ) -> PhaseGResult:
     """
     Build the must-differ graph (hard co-occurrence + would-collide-if-merged), greedily
@@ -218,6 +263,7 @@ def runPhaseG(
         markersByKeypress={k: frozenset(ms) for k, ms in markersByKeypress.items()},
         unpressableMarkers=frozenset(allAtoms - markers),
         conflicts=conflicts,
+        frequencyWeightedChordSizes=frequencyWeightedChordSizes(pressSetsByGroup, frequencyByGroup or {}, colorOf),
     )
 
 
@@ -228,6 +274,7 @@ if __name__ == "__main__":
         raise RuntimeError("Run `python -m src.elicitation` first to build resolved_press_sets.json.")
 
     pressSetsByGroup = loadResolvedPressSets()
+    frequencyByGroup = loadGroupOrthoFrequencies()
 
     allAtoms: set[str] = set()
     if os.path.exists("questionnaire.json"):
@@ -236,7 +283,7 @@ if __name__ == "__main__":
                 allAtoms.update(item["atomsA"])
                 allAtoms.update(item["atomsB"])
 
-    result = runPhaseG(pressSetsByGroup, allAtoms)
+    result = runPhaseG(pressSetsByGroup, allAtoms, frequencyByGroup=frequencyByGroup)
 
     print("=== Phase G grouping report ===")
     print(f"Homophone groups considered:  {len(pressSetsByGroup)}")
@@ -245,9 +292,13 @@ if __name__ == "__main__":
     print(f"Keypresses (K), greedy:       {result.keypressCount}")
     print(f"Verification conflicts:       {len(result.conflicts)}")
 
-    print("\nKeypress -> markers:")
+    totalWeight = sum(result.frequencyWeightedChordSizes.values()) or 1.0
+    print("\nKeypress -> markers (frequency-weighted usage; Phase P input, not optimized here):")
     for keypress in sorted(result.markersByKeypress):
-        print(f"  {keypress}: {sorted(result.markersByKeypress[keypress])}")
+        weight = result.frequencyWeightedChordSizes.get(keypress, 0.0)
+        share = 100.0 * weight / totalWeight
+        print(f"  {keypress}: {sorted(result.markersByKeypress[keypress])}  "
+              f"(usage weight {weight:.1f}, {share:.1f}%)")
 
     if result.conflicts:
         print("\nConflicts found (greedy coloring was unsafe -- needs investigation):")

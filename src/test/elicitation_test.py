@@ -3,6 +3,7 @@ import pytest
 from ..elicitation import (
     AnsweredOpposition,
     buildAnswersByOpposition,
+    buildFrequencyByGroupOrtho,
     buildLemmaHomophoneGroups,
     enumerateOppositionSamples,
     featureCombinationsByOrtho,
@@ -255,5 +256,23 @@ def test_serializeResolvedPressSets_is_json_ready(parler_group):
     assert entry["lemmeGramCat"] == "parler_VER"
     assert entry["strokes"] == [["K1"]]
     assert entry["pressSets"] == {"parle": ["pers_1"], "parles": ["pers_2"], "parlent": ["nbr_p"]}
+    assert entry["frequencies"] == {"parle": 0.0, "parles": 0.0, "parlent": 0.0}  # no frequencies passed
     import json
     json.dumps(serialized)  # must not raise -- the whole point of serializing
+
+
+def test_buildFrequencyByGroupOrtho_reads_each_spellings_corpus_frequency(parler_group):
+    homophoneGroups = buildLemmaHomophoneGroups(parler_group)
+    frequencyByGroupOrtho = buildFrequencyByGroupOrtho(homophoneGroups)
+    ((key, freqByOrtho),) = frequencyByGroupOrtho.items()
+    # _make_word's default frequencyFilm=2.0 -> Word.frequency, shared by all three spellings here
+    assert freqByOrtho == {"parle": 2.0, "parles": 2.0, "parlent": 2.0}
+
+
+def test_serializeResolvedPressSets_carries_frequency_when_given(parler_group):
+    homophoneGroups = buildLemmaHomophoneGroups(parler_group)
+    pressSetsByGroup, _ = resolveGroupPressSets(homophoneGroups, _opposition_answers(parler_group))
+    frequencyByGroupOrtho = buildFrequencyByGroupOrtho(homophoneGroups)
+    serialized = serializeResolvedPressSets(pressSetsByGroup, frequencyByGroupOrtho)
+    entry = serialized[0]
+    assert entry["frequencies"] == {"parle": 2.0, "parles": 2.0, "parlent": 2.0}
