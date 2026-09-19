@@ -7,6 +7,8 @@ from ..elicitation import (
     enumerateOppositionSamples,
     featureCombinationsByOrtho,
     reportScale,
+    resolveGroupPressSets,
+    serializeResolvedPressSets,
     validateElicitation,
     wordFeatureCombinations,
 )
@@ -226,3 +228,32 @@ def test_validateElicitation_skips_group_with_an_unresolved_opposition(parler_gr
     conflicts, unresolved = validateElicitation(homophoneGroups, answers)
     assert conflicts == []
     assert unresolved == [missingKey]
+
+
+# ── E6: resolveGroupPressSets / serializeResolvedPressSets ───────────────────
+
+def test_resolveGroupPressSets_matches_validateElicitations_own_resolution(parler_group):
+    """resolveGroupPressSets is the factored-out step validateElicitation itself uses --
+    its output must be exactly what validateElicitation checked for conflicts against."""
+    homophoneGroups = buildLemmaHomophoneGroups(parler_group)
+    pressSetsByGroup, unresolved = resolveGroupPressSets(homophoneGroups, _opposition_answers(parler_group))
+    assert unresolved == []
+    ((_key, pressSetByOrtho),) = pressSetsByGroup.items()
+    assert pressSetByOrtho == {
+        "parle": frozenset({"pers_1"}),
+        "parles": frozenset({"pers_2"}),
+        "parlent": frozenset({"nbr_p"}),
+    }
+
+
+def test_serializeResolvedPressSets_is_json_ready(parler_group):
+    homophoneGroups = buildLemmaHomophoneGroups(parler_group)
+    pressSetsByGroup, _ = resolveGroupPressSets(homophoneGroups, _opposition_answers(parler_group))
+    serialized = serializeResolvedPressSets(pressSetsByGroup)
+    assert len(serialized) == 1
+    entry = serialized[0]
+    assert entry["lemmeGramCat"] == "parler_VER"
+    assert entry["strokes"] == [["K1"]]
+    assert entry["pressSets"] == {"parle": ["pers_1"], "parles": ["pers_2"], "parlent": ["nbr_p"]}
+    import json
+    json.dumps(serialized)  # must not raise -- the whole point of serializing
