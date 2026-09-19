@@ -41,15 +41,23 @@ def groupSignatures(pressSetsByGroup: PressSetsByGroup) -> list[GroupSignature]:
 
 
 def _feasibleAssignment(
-    markers: list[str], signatures: list[GroupSignature], numKeys: int, timeLimitS: float
+    markers: list[str],
+    signatures: list[GroupSignature],
+    numKeys: int,
+    timeLimitS: float,
+    mustShareKey: frozenset[frozenset[str]] = frozenset(),
 ) -> tuple[bool, dict[str, int] | None]:
     """
     Try to color `markers` onto `numKeys` abstract keypresses such that, within every
     signature, every pair of its press-sets induces a distinct touched-keypress set --
     the exact ground truth `phaseg.verifyKeypressAssignment` checks, not a pairwise
-    approximation of it. Returns (provenFeasible, colorOf); when infeasible, colorOf is
-    None; on a solver timeout without a proof either way, raises (a "no" answer must be
-    a proof, not a guess -- see `minKeypressesSat`).
+    approximation of it. `mustShareKey` additionally pins each given marker pair onto
+    the SAME keypress (e.g. for exploring a specific bundling decision, not merely
+    letting the solver find one on its own) -- a constraint, not a hint: infeasible
+    under it is reported as such, not silently dropped. Returns (provenFeasible,
+    colorOf); when infeasible, colorOf is None; on a solver timeout without a proof
+    either way, raises (a "no" answer must be a proof, not a guess -- see
+    `minKeypressesSat`).
     """
     model = cp_model.CpModel()
     x: dict[tuple[str, int], IntVar] = {
@@ -57,6 +65,10 @@ def _feasibleAssignment(
     }
     for m in markers:
         _ = model.AddExactlyOne(x[m, k] for k in range(numKeys))
+    for pair in mustShareKey:
+        m1, m2 = tuple(pair)
+        for k in range(numKeys):
+            _ = model.Add(x[m1, k] == x[m2, k])
 
     for sigIdx, signature in enumerate(signatures):
         presses = sorted(signature, key=sorted)
@@ -100,40 +112,55 @@ def _feasibleAssignment(
 
 
 def minKeypressesSat(
-    pressSetsByGroup: PressSetsByGroup, maxK: int = 20, timeLimitS: float = 30.0
+    pressSetsByGroup: PressSetsByGroup,
+    maxK: int = 20,
+    timeLimitS: float = 30.0,
+    mustShareKey: frozenset[frozenset[str]] = frozenset(),
 ) -> tuple[int, dict[str, int]]:
     """
     The provably smallest number of keypresses onto which every live marker can be
     assigned without any homophone group's induced press-sets colliding -- scans
     numKeys = 1, 2, ... and returns the first CP-SAT proves feasible, so the result is
     a proof of minimality (every smaller numKeys was proven infeasible), not a greedy
-    upper bound like `phaseg.runPhaseG`'s.
+    upper bound like `phaseg.runPhaseG`'s. `mustShareKey` (see `_feasibleAssignment`)
+    pins specific marker pairs onto the same keypress throughout the scan, for exploring
+    "what's the minimum K if I insist on bundling X with Y" rather than letting the
+    solver choose bundlings freely.
     """
     markers = sorted(liveMarkers(pressSetsByGroup))
     signatures = groupSignatures(pressSetsByGroup)
     for numKeys in range(1, maxK + 1):
-        feasible, colorOf = _feasibleAssignment(markers, signatures, numKeys, timeLimitS)
+        feasible, colorOf = _feasibleAssignment(markers, signatures, numKeys, timeLimitS, mustShareKey)
         if feasible:
             assert colorOf is not None
             return numKeys, colorOf
-    raise RuntimeError(f"no feasible assignment found up to maxK={maxK}")
+    raise RuntimeError(f"no feasible assignment found up to maxK={maxK} under the given mustShareKey constraints")
 
 
 if __name__ == "__main__":
     import os
+    import sys
 
     from .phaseg import loadResolvedPressSets
 
     if not os.path.exists("resolved_press_sets.json"):
         raise RuntimeError("Run `python -m src.elicitation` first to build resolved_press_sets.json.")
 
+    # Optional: python -m src.phasegsat marker1:marker2 marker3:marker4 -- force each
+    # given pair onto the same keypress throughout the search (see `mustShareKey`).
+    mustShareKey = frozenset(
+        frozenset(arg.split(":")) for arg in sys.argv[1:]
+    )
+
     pressSetsByGroup = loadResolvedPressSets()
     signatures = groupSignatures(pressSetsByGroup)
     print("=== Phase G CP-SAT optimality search ===")
     print(f"Homophone groups considered:    {len(pressSetsByGroup)}")
     print(f"Distinct group signatures:      {len(signatures)}")
+    if mustShareKey:
+        print(f"Forced same-keypress pairs:     {[sorted(p) for p in mustShareKey]}")
 
-    numKeys, colorOf = minKeypressesSat(pressSetsByGroup)
+    numKeys, colorOf = minKeypressesSat(pressSetsByGroup, mustShareKey=mustShareKey)
     print(f"\nProven minimum K:               {numKeys}")
 
     markersByKeypress: dict[int, list[str]] = {k: [] for k in range(numKeys)}

@@ -2,6 +2,8 @@
 # coding: utf-8
 """Tests for src/phasegsat.py"""
 
+import pytest
+
 from ..phaseg import verifyKeypressAssignment
 from ..phasegsat import groupSignatures, minKeypressesSat
 
@@ -66,6 +68,37 @@ def test_minKeypressesSat_solves_the_two_marker_bundle_collision_pairwise_checks
     numKeys, colorOf = minKeypressesSat(pressSetsByGroup)
     assert numKeys == 2
     assert verifyKeypressAssignment(pressSetsByGroup, colorOf) == []
+
+
+def test_minKeypressesSat_mustShareKey_forces_a_safe_pair_together():
+    """The plan's own worked example (pers_2/nbr_p may share, since nbr_p is never
+    pressed alone) -- forcing it explicitly should still land on K=2, matching what the
+    solver already chooses freely (test_minKeypressesSat_allows_sharing_when_safe)."""
+    pressSetsByGroup = {
+        "parler_VER": {
+            "parle": frozenset(),
+            "parles": frozenset({"pers_2"}),
+            "parlent": frozenset({"pers_3", "nbr_p"}),
+        }
+    }
+    numKeys, colorOf = minKeypressesSat(
+        pressSetsByGroup, mustShareKey=frozenset({frozenset({"pers_2", "nbr_p"})})
+    )
+    assert colorOf["pers_2"] == colorOf["nbr_p"]
+    assert colorOf["pers_3"] != colorOf["pers_2"]  # pers_3/nbr_p co-occur -- must stay apart
+    assert numKeys == 2
+    assert verifyKeypressAssignment(pressSetsByGroup, colorOf) == []
+
+
+def test_minKeypressesSat_mustShareKey_infeasible_when_the_pair_cannot_safely_share():
+    """parle needs pers_1 alone and parles needs pers_2 alone with nothing else in the
+    group -- forcing pers_1/pers_2 onto the same keypress makes both spellings induce
+    the identical set, an unresolvable collision at any K."""
+    pressSetsByGroup = {
+        "parler_VER": {"parle": frozenset({"pers_1"}), "parles": frozenset({"pers_2"})}
+    }
+    with pytest.raises(RuntimeError):
+        minKeypressesSat(pressSetsByGroup, maxK=4, mustShareKey=frozenset({frozenset({"pers_1", "pers_2"})}))
 
 
 def test_minKeypressesSat_result_is_a_valid_assignment_for_a_combined_lexicon_slice():
