@@ -269,6 +269,15 @@ def test_buildFrequencyByGroupOrtho_reads_each_spellings_corpus_frequency(parler
     assert freqByOrtho == {"parle": 2.0, "parles": 2.0, "parlent": 2.0}
 
 
+def test_buildFrequencyByGroupOrtho_zeroes_out_frequent_words(parler_group):
+    # "parle" is a brief candidate (top-200 word) -- typed as a whole-word shortcut, not
+    # via its phonemic keypresses, so it must not count toward keypress usage load.
+    homophoneGroups = buildLemmaHomophoneGroups(parler_group)
+    frequencyByGroupOrtho = buildFrequencyByGroupOrtho(homophoneGroups, frozenset({"parle"}))
+    ((key, freqByOrtho),) = frequencyByGroupOrtho.items()
+    assert freqByOrtho == {"parle": 0.0, "parles": 2.0, "parlent": 2.0}
+
+
 def test_serializeResolvedPressSets_carries_frequency_when_given(parler_group):
     homophoneGroups = buildLemmaHomophoneGroups(parler_group)
     pressSetsByGroup, _ = resolveGroupPressSets(homophoneGroups, _opposition_answers(parler_group))

@@ -377,13 +377,22 @@ def validateElicitation(
 
 
 def buildFrequencyByGroupOrtho(
-    homophoneGroups: dict[LemmaHomophoneGroupKey, list[Word]]
+    homophoneGroups: dict[LemmaHomophoneGroupKey, list[Word]],
+    frequentWords: frozenset[str] = frozenset(),
 ) -> dict[LemmaHomophoneGroupKey, dict[WordOrtho, float]]:
     """Per group, each spelling's corpus frequency (max over its Word rows sharing that
     ortho -- same convention as `buildQuestionnaireItems`'s `freqByOrtho`). Feeds Phase
-    G's frequency-weighted chord-size report; resolution/validation don't need this."""
+    G's frequency-weighted chord-size report; resolution/validation don't need this.
+
+    `frequentWords` (pass `Dictionary.frequentWords`, the top-200 brief-candidate list)
+    is zeroed out here for the same reason `dictionary.py`'s `analyseSyllabification`
+    excludes it from syllable frequency stats: a top-200 word is a brief candidate --
+    typed as a single whole-word shortcut stroke, not via its phonemic keypresses -- so
+    it shouldn't inflate a keypress's apparent real-writing load (e.g. `ai`/`va`/`sais`,
+    all top-200, would otherwise dominate the pers_1/impératif keypress's usage share)."""
     return {
-        key: {ortho: max((w.frequency for w in words if w.ortho == ortho), default=0.0)
+        key: {ortho: (0.0 if ortho in frequentWords else
+                      max((w.frequency for w in words if w.ortho == ortho), default=0.0))
               for ortho in {w.ortho for w in words}}
         for key, words in homophoneGroups.items()
     }
@@ -507,7 +516,7 @@ if __name__ == "__main__":
             key: pressSetByOrtho for key, pressSetByOrtho in pressSetsByGroup.items()
             if key not in conflictedGroupKeys
         }
-        frequencyByGroupOrtho = buildFrequencyByGroupOrtho(homophoneGroups)
+        frequencyByGroupOrtho = buildFrequencyByGroupOrtho(homophoneGroups, frozenset(_dictionary.frequentWords))
         resolvedArtifact = serializeResolvedPressSets(cleanPressSetsByGroup, frequencyByGroupOrtho)
         with open("resolved_press_sets.json", "w", encoding="utf-8") as rf:
             json.dump(resolvedArtifact, rf, ensure_ascii=False, indent=1)
