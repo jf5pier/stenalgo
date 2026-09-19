@@ -1,4 +1,5 @@
 from ..phaseg import (
+    _findSharedKeypressPair,
     coOccurrencePairs,
     greedyColorMarkers,
     inducedPressSet,
@@ -144,3 +145,47 @@ def test_runPhaseG_allows_sharing_when_safe():
     # a keypress with either one (which one is an unspecified tie-break) -- 2 keypresses
     # suffice either way, confirmed conflict-free by the verification step above.
     assert result.keypressCount == 2
+
+
+def test_runPhaseG_repairs_a_two_marker_bundle_collision_no_pairwise_check_catches():
+    """Real failure found comparing two elicitation calibrations (abaisser_VER):
+    'abaisseraient' needs {pers_3, nbr_p}, 'abaisserais' needs {pers_2, pers_1}. The hard
+    co-occurrence rule forbids pers_3+nbr_p sharing and pers_1+pers_2 sharing (each pair
+    IS pressed together), but says nothing about the CROSS pairing -- pers_3+pers_2 and
+    nbr_p+pers_1 -- which `wouldCollideIfMergedPairs` also clears (neither press-set
+    differs from another by swapping just one marker). Yet coloring pers_3/pers_2 onto
+    one keypress and nbr_p/pers_1 onto another makes both words touch the same two
+    keypresses and induce the identical union. Only a real verify-and-repair loop (not
+    pairwise pre-filtering) catches this."""
+    pressSetsByGroup = {
+        "abaisser_VER": {
+            "abaisseraient": frozenset({"pers_3", "nbr_p"}),
+            "abaisserais": frozenset({"pers_2", "pers_1"}),
+            "abaisserait": frozenset(),
+        }
+    }
+    # Confirm the failure mode is real: the CROSS pairs are cleared by both pairwise checks.
+    assert frozenset({"pers_3", "pers_2"}) not in wouldCollideIfMergedPairs(pressSetsByGroup)
+    assert frozenset({"nbr_p", "pers_1"}) not in wouldCollideIfMergedPairs(pressSetsByGroup)
+
+    result = runPhaseG(pressSetsByGroup)
+    assert result.conflicts == []
+
+
+def test_findSharedKeypressPair_locates_the_colliding_marker_pair():
+    from ..phaseg import KeypressConflict
+
+    pressSetsByGroup = {
+        "abaisser_VER": {
+            "abaisseraient": frozenset({"pers_3", "nbr_p"}),
+            "abaisserais": frozenset({"pers_2", "pers_1"}),
+        }
+    }
+    colorOf = {"pers_3": 0, "pers_2": 0, "nbr_p": 1, "pers_1": 1}
+    conflict = KeypressConflict(
+        groupId="abaisser_VER",
+        inducedPressSet=frozenset({"pers_3", "pers_2", "nbr_p", "pers_1"}),
+        orthos=("abaisseraient", "abaisserais"),
+    )
+    pair = _findSharedKeypressPair(conflict, pressSetsByGroup, colorOf)
+    assert pair in ({"pers_3", "pers_2"}, {"nbr_p", "pers_1"})
