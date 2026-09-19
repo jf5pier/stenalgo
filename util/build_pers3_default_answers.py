@@ -1,9 +1,13 @@
 """
-One-off transform (2026-09-19): derive a second elicitation answer set from the live one
-(elicitation_answers.json), swapping the discrimination-order default from pers_1 (the
-model actually answered on the artifact -- see pers_1PreferedOver_pers_3KeyAssignation)
-to pers_3 (nbr_s): wherever a pers_3 (singular) reading appears in a homophone group, it
-becomes the silent (empty press) default instead of pers_1/pers_2/participe.
+One-off transform (2026-09-19), updated after model 2 was adopted as primary
+(2026-09-19): derive the pers_3-default elicitation answer set from the originally
+answered one (elicitation_answers_pers1default.json, the model actually answered on the
+artifact -- see pers_1PreferedOver_pers_3KeyAssignation), swapping the discrimination-
+order default from pers_1 to pers_3 (nbr_s): wherever a pers_3 (singular) reading
+appears in a homophone group, it becomes the silent (empty press) default instead of
+pers_1/pers_2/participe. The output, elicitation_answers.json, is now the PRIMARY
+answer set consumed by `python -m src.elicitation` / Phase G -- model 2 (K=6) beat
+model 1 (K=7) with the same 13 live markers, and the user chose to adopt it.
 
 Mechanical rule (confirmed with the user before running):
 1. Strip the 'pers_3' atom from every checked press that has it (covers both the plain
@@ -164,15 +168,15 @@ def main() -> None:
         theory = pickle.load(pfile)
     homophoneGroups = buildLemmaHomophoneGroups(theory)
 
-    with open("elicitation_answers.json", encoding="utf-8") as f:
+    with open("elicitation_answers_pers1default.json", encoding="utf-8") as f:
         records = json.load(f)
 
     transformed = transform(records)
     repaired = repairConflicts(transformed, homophoneGroups)
 
-    with open("elicitation_answers_pers3default.json", "w", encoding="utf-8") as f:
+    with open("elicitation_answers.json", "w", encoding="utf-8") as f:
         json.dump(repaired, f, ensure_ascii=False, indent=1)
-    print(f"Wrote elicitation_answers_pers3default.json ({len(repaired)} entries)")
+    print(f"Wrote elicitation_answers.json ({len(repaired)} entries, now primary)")
 
 
 if __name__ == "__main__":
