@@ -2,18 +2,21 @@
 Persist Phase G's adopted keypress assignment (2026-09-19 session): the CP-SAT-proven
 minimum K over `resolved_press_sets.json`, under the user's explicit constraints:
 
-- SOFT preference: `nbr_p` shares a keypress with `p` when possible, as a tiebreaker
-  among equally-minimal colorings (`minKeypressesSatPreferring`'s `preferSameKey`) --
-  never inflates K to get it.
-- HARD constraint: `f` shares its keypress with nothing else (`aloneKeys`).
-- HARD constraint: `infinitif`, `pers_1`, `pers_2`, `pers_3` are pairwise forced onto
-  different keypresses (`mustDifferGroups`) -- these two are real requirements, not
-  preferences, so unlike the soft one they CAN inflate K (confirmed here: still K=6,
-  the same minimum as without them, but that's a fact about this specific lexicon, not
-  guaranteed by the mechanism).
+HARD (real requirements -- CAN inflate K, or fail outright, if unsafe):
+- `f` shares its keypress with nothing else (`ALONE_KEYS`).
+- `infinitif`, `pers_1`, `pers_2`, `pers_3` are pairwise forced onto different
+  keypresses (`MUST_DIFFER_GROUPS`).
 
-`preferencesSatisfied` in the persisted artifact records whether the soft preference was
-actually honored (it is, here: 0 conflicts against the real 47,799-group lexicon).
+SOFT, in descending priority order (`PREFERENCE_TIERS`, via
+`minKeypressesSatWithPriorities` -- lexicographic: tier 0 is honored as well as
+possible first, tier 1 only as a tiebreaker among colorings that already achieve tier
+0's best, and so on; none of them can ever inflate K):
+1. `nbr_p` shares a keypress with `p`.
+2. `future` shares a keypress with `passé`.
+3. `nbr_p`/`p`'s keypress has no OTHER marker on it (stays exclusive to the two of them).
+
+Confirmed against the real lexicon: still K=6 (the hard constraints didn't cost
+anything extra here), all three soft tiers fully achieved, 0 conflicts.
 
 This is the canonical, checked-in artifact other work (Phase P, or future re-runs)
 should read -- not something to regenerate by ad hoc inline scripts each time, per the
@@ -30,11 +33,16 @@ import os
 
 from src.phaseg import frequencyWeightedChordSizes, liveMarkers, loadGroupOrthoFrequencies, \
     loadResolvedPressSets, verifyKeypressAssignment
-from src.phasegsat import minKeypressesSatPreferring, serializeAssignment
+from src.phasegsat import ExclusiveGroupPreference, SameKeyPreference, minKeypressesSatWithPriorities, \
+    serializeAssignment
 
-PREFER_SAME_KEY = frozenset({frozenset({"p", "nbr_p"})})
 ALONE_KEYS = frozenset({"f"})
 MUST_DIFFER_GROUPS = frozenset({frozenset({"infinitif", "pers_1", "pers_2", "pers_3"})})
+PREFERENCE_TIERS: list[SameKeyPreference | ExclusiveGroupPreference] = [
+    SameKeyPreference(frozenset({frozenset({"p", "nbr_p"})})),
+    SameKeyPreference(frozenset({frozenset({"future", "passé"})})),
+    ExclusiveGroupPreference(frozenset({"nbr_p", "p"})),
+]
 OUTPUT_PATH = "phase_g_keypress_assignment.json"
 
 
@@ -52,8 +60,8 @@ def main() -> None:
                 allAtoms.update(item["atomsA"])
                 allAtoms.update(item["atomsB"])
 
-    numKeys, colorOf, satisfied = minKeypressesSatPreferring(
-        pressSetsByGroup, preferSameKey=PREFER_SAME_KEY, aloneKeys=ALONE_KEYS, mustDifferGroups=MUST_DIFFER_GROUPS,
+    numKeys, colorOf, achieved = minKeypressesSatWithPriorities(
+        pressSetsByGroup, PREFERENCE_TIERS, aloneKeys=ALONE_KEYS, mustDifferGroups=MUST_DIFFER_GROUPS,
     )
 
     # The whole point of persisting rather than trusting the search blindly: re-verify
@@ -67,14 +75,14 @@ def main() -> None:
 
     artifact = serializeAssignment(
         numKeys, colorOf, mustShareKey=frozenset(), unpressableMarkers=unpressableMarkers,
-        weightByKeypress=weightByKeypress, preferSameKey=PREFER_SAME_KEY, preferencesSatisfied=satisfied,
-        aloneKeys=ALONE_KEYS, mustDifferGroups=MUST_DIFFER_GROUPS,
+        weightByKeypress=weightByKeypress, aloneKeys=ALONE_KEYS, mustDifferGroups=MUST_DIFFER_GROUPS,
+        preferenceTiers=PREFERENCE_TIERS, achievedPerTier=achieved,
     )
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(artifact, f, ensure_ascii=False, indent=1)
 
     print(f"Wrote {OUTPUT_PATH}: K={numKeys}, 0 conflicts (verified against "
-          f"{len(pressSetsByGroup)} groups), preferences satisfied {satisfied}/{len(PREFER_SAME_KEY)}, "
+          f"{len(pressSetsByGroup)} groups), tier scores {achieved}, "
           f"{len(unpressableMarkers)} unpressable markers")
     for k in sorted(int(k) for k in artifact["markersByKeypress"]):
         print(f"  {k}: {artifact['markersByKeypress'][str(k)]}")

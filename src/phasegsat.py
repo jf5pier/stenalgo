@@ -21,6 +21,7 @@ this to ~200 distinct problems (see `groupSignatures`), making an exact CP-SAT
 formulation tractable.
 """
 
+from dataclasses import dataclass
 from itertools import combinations
 
 from ortools.sat.python import cp_model
@@ -114,7 +115,8 @@ def _aloneAndMustDifferPairs(
     for m in aloneKeys:
         for other in markers:
             if other != m:
-                pairs.add(tuple(sorted((m, other))))
+                m1, m2 = sorted((m, other))
+                pairs.add((m1, m2))
     for group in mustDifferGroups:
         for m1, m2 in combinations(sorted(group), 2):
             pairs.add((m1, m2))
@@ -214,6 +216,127 @@ def _bestAssignmentPreferring(
     return colorOf, satisfied
 
 
+@dataclass(frozen=True)
+class SameKeyPreference:
+    """Prefer each given marker pair sharing a keypress -- scored by how many pairs
+    actually do, in a lexicographic tier (see `minKeypressesSatWithPriorities`)."""
+    pairs: frozenset[frozenset[str]]
+
+
+@dataclass(frozen=True)
+class ExclusiveGroupPreference:
+    """Prefer that no marker outside `group` ever shares a keypress with a member of
+    `group` -- i.e. `group`'s keypress(es) stay "pure". Scored by minimizing how many
+    outside markers intrude, in a lexicographic tier (see `minKeypressesSatWithPriorities`)."""
+    group: frozenset[str]
+
+
+PreferenceTier = SameKeyPreference | ExclusiveGroupPreference
+
+
+def _sameKeyScoreExpr(model: cp_model.CpModel, x: dict[tuple[str, int], IntVar], numKeys: int,
+                       pairs: frozenset[frozenset[str]]) -> tuple[IntVar, list[IntVar]]:
+    """`sum(pairVars)` (to Maximize) plus the individual pair-vars, for `SameKeyPreference`."""
+    pairVars: list[IntVar] = []
+    for pair in pairs:
+        m1, m2 = tuple(pair)
+        same = model.NewBoolVar(f"pref_{m1}_{m2}")
+        perKeyAnd: list[IntVar] = []
+        for k in range(numKeys):
+            y = model.NewBoolVar(f"prefAt_{m1}_{m2}_{k}")
+            _ = model.Add(y <= x[m1, k])
+            _ = model.Add(y <= x[m2, k])
+            _ = model.Add(y >= x[m1, k] + x[m2, k] - 1)
+            perKeyAnd.append(y)
+        _ = model.Add(same == sum(perKeyAnd))
+        pairVars.append(same)
+    total = model.NewIntVar(0, len(pairVars), "sameKeyTotal")
+    _ = model.Add(total == sum(pairVars)) if pairVars else model.Add(total == 0)
+    return total, pairVars
+
+
+def _exclusiveGroupExtraCountExpr(
+    model: cp_model.CpModel, x: dict[tuple[str, int], IntVar], numKeys: int, markers: list[str], group: frozenset[str]
+) -> IntVar:
+    """`sum(intrudesVars)` (to Minimize) -- how many markers OUTSIDE `group` end up
+    sharing a keypress with some member of `group`, for `ExclusiveGroupPreference`."""
+    groupHereAtKey: list[IntVar] = []
+    for k in range(numKeys):
+        h = model.NewBoolVar(f"groupHere_{k}")
+        _ = model.AddMaxEquality(h, [x[g, k] for g in group])
+        groupHereAtKey.append(h)
+    intrudesVars: list[IntVar] = []
+    for m in markers:
+        if m in group:
+            continue
+        intrudes = model.NewBoolVar(f"intrudes_{m}")
+        perKeyAnd: list[IntVar] = []
+        for k in range(numKeys):
+            y = model.NewBoolVar(f"intrudesAt_{m}_{k}")
+            _ = model.Add(y <= x[m, k])
+            _ = model.Add(y <= groupHereAtKey[k])
+            _ = model.Add(y >= x[m, k] + groupHereAtKey[k] - 1)
+            perKeyAnd.append(y)
+        _ = model.AddMaxEquality(intrudes, perKeyAnd)
+        intrudesVars.append(intrudes)
+    extraCount = model.NewIntVar(0, len(intrudesVars), "extraCount")
+    _ = model.Add(extraCount == sum(intrudesVars)) if intrudesVars else model.Add(extraCount == 0)
+    return extraCount
+
+
+def _bestAssignmentWithPriorities(
+    markers: list[str],
+    signatures: list[GroupSignature],
+    numKeys: int,
+    preferences: list[PreferenceTier],
+    timeLimitS: float,
+    aloneKeys: frozenset[str] = frozenset(),
+    mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
+) -> tuple[dict[str, int], list[int]]:
+    """
+    Lexicographic multi-tier soft preference search: `preferences[0]` is optimized
+    first; its achieved optimum is then FIXED (as an equality constraint) before
+    optimizing `preferences[1]` among only the colorings that still achieve tier 0's
+    best score, and so on. This is how "prefer A, and failing a tie, prefer B" (lower
+    priority never sacrifices a higher one) is expressed -- a single combined objective
+    (e.g. summing both scores) would let a big win on the low-priority tier outweigh a
+    small loss on the high-priority one, which is not what "lower priority" means here.
+    Returns (colorOf, achievedScorePerTier).
+    """
+    model, x = _buildDistinctnessModel(markers, signatures, numKeys)
+    _addMustDifferPairs(model, x, numKeys, _aloneAndMustDifferPairs(markers, aloneKeys, mustDifferGroups))
+
+    solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = timeLimitS
+    achieved: list[int] = []
+    colorOf: dict[str, int] = {}
+
+    for tierIdx, tier in enumerate(preferences):
+        if isinstance(tier, SameKeyPreference):
+            score, _pairVars = _sameKeyScoreExpr(model, x, numKeys, tier.pairs)
+            model.Maximize(score)
+        else:
+            score = _exclusiveGroupExtraCountExpr(model, x, numKeys, markers, tier.group)
+            model.Minimize(score)
+
+        status = solver.Solve(model)
+        if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+            raise RuntimeError(
+                f"CP-SAT could not optimize preference tier {tierIdx} within {timeLimitS}s at "
+                f"numKeys={numKeys} -- this numKeys was already proven feasible, so raise timeLimitS."
+            )
+        value = solver.Value(score)
+        achieved.append(value)
+        _ = model.Add(score == value)  # lock this tier in before moving to the next
+        colorOf = {m: next(k for k in range(numKeys) if solver.BooleanValue(x[m, k])) for m in markers}
+
+    if not preferences:
+        status = solver.Solve(model)
+        colorOf = {m: next(k for k in range(numKeys) if solver.BooleanValue(x[m, k])) for m in markers}
+
+    return colorOf, achieved
+
+
 def minKeypressesSat(
     pressSetsByGroup: PressSetsByGroup,
     maxK: int = 20,
@@ -276,6 +399,40 @@ def minKeypressesSatPreferring(
     return numKeys, colorOf, satisfied
 
 
+def minKeypressesSatWithPriorities(
+    pressSetsByGroup: PressSetsByGroup,
+    preferences: list[PreferenceTier],
+    maxK: int = 20,
+    timeLimitS: float = 30.0,
+    aloneKeys: frozenset[str] = frozenset(),
+    mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
+) -> tuple[int, dict[str, int], list[int]]:
+    """
+    Like `minKeypressesSatPreferring`, but for an ORDERED list of soft preference tiers
+    (`SameKeyPreference` or `ExclusiveGroupPreference`) instead of a single same-key
+    preference: `preferences[0]` is honored as well as possible first, `preferences[1]`
+    only as a tiebreaker among colorings that already achieve `preferences[0]`'s best,
+    and so on (see `_bestAssignmentWithPriorities`). None of them can inflate K -- the
+    minimum is found first, unconstrained by any of them, subject only to the HARD
+    `aloneKeys`/`mustDifferGroups`. Returns (numKeys, colorOf, achievedScorePerTier).
+    """
+    markers = sorted(liveMarkers(pressSetsByGroup))
+    signatures = groupSignatures(pressSetsByGroup)
+    numKeys, _ = minKeypressesSat(
+        pressSetsByGroup, maxK=maxK, timeLimitS=timeLimitS, aloneKeys=aloneKeys, mustDifferGroups=mustDifferGroups
+    )
+    colorOf, achieved = _bestAssignmentWithPriorities(
+        markers, signatures, numKeys, preferences, timeLimitS, aloneKeys, mustDifferGroups
+    )
+    return numKeys, colorOf, achieved
+
+
+def _serializeTier(tier: PreferenceTier, achieved: int) -> dict:
+    if isinstance(tier, SameKeyPreference):
+        return {"type": "sameKey", "pairs": [sorted(p) for p in sorted(tier.pairs, key=sorted)], "achieved": achieved}
+    return {"type": "exclusiveGroup", "group": sorted(tier.group), "achieved": achieved}
+
+
 def serializeAssignment(
     numKeys: int,
     colorOf: dict[str, int],
@@ -286,13 +443,17 @@ def serializeAssignment(
     preferencesSatisfied: int = 0,
     aloneKeys: frozenset[str] = frozenset(),
     mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
+    preferenceTiers: list[PreferenceTier] | None = None,
+    achievedPerTier: list[int] | None = None,
 ) -> dict:
     """The persisted, adopted Phase G artifact -- a specific CP-SAT-proven assignment
     (not the search machinery itself), JSON-serializable for `util/build_phase_g_assignment.py`.
     `mustShareKey`/`aloneKeys`/`mustDifferGroups` record HARD-forced decisions
-    (`minKeypressesSat`); `preferSameKey`/`preferencesSatisfied` record a SOFT tiebreaker
-    (`minKeypressesSatPreferring`) -- distinct provenance, since the latter never risked
-    inflating K to get its bundling, the former could have."""
+    (`minKeypressesSat`); `preferSameKey`/`preferencesSatisfied` record a single SOFT
+    tiebreaker (`minKeypressesSatPreferring`); `preferenceTiers`/`achievedPerTier` (with
+    `minKeypressesSatWithPriorities`) record an ORDERED list of soft tiers, each with the
+    score it achieved -- distinct provenance from the hard fields, since none of these
+    three ever risked inflating K to get their bundling, unlike mustShareKey."""
     markersByKeypress: dict[int, list[str]] = {k: [] for k in range(numKeys)}
     for marker, k in colorOf.items():
         markersByKeypress[k].append(marker)
@@ -304,6 +465,9 @@ def serializeAssignment(
         "mustDifferGroups": [sorted(group) for group in sorted(mustDifferGroups, key=sorted)],
         "preferSameKey": [sorted(pair) for pair in sorted(preferSameKey, key=sorted)],
         "preferencesSatisfied": f"{preferencesSatisfied}/{len(preferSameKey)}",
+        "preferenceTiers": [
+            _serializeTier(tier, achieved) for tier, achieved in zip(preferenceTiers or [], achievedPerTier or [])
+        ],
         "unpressableMarkers": sorted(unpressableMarkers),
         "frequencyWeightedChordSizes": {str(k): weightByKeypress.get(k, 0.0) for k in range(numKeys)},
     }
