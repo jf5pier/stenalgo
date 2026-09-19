@@ -5,7 +5,7 @@
 import pytest
 
 from ..phaseg import verifyKeypressAssignment
-from ..phasegsat import groupSignatures, minKeypressesSat
+from ..phasegsat import groupSignatures, minKeypressesSat, serializeAssignment
 
 
 def _parler_press_sets() -> dict[str, dict[str, frozenset[str]]]:
@@ -116,3 +116,31 @@ def test_minKeypressesSat_result_is_a_valid_assignment_for_a_combined_lexicon_sl
     numKeys, colorOf = minKeypressesSat(pressSetsByGroup)
     assert verifyKeypressAssignment(pressSetsByGroup, colorOf) == []
     assert numKeys >= 3  # parler_VER alone already forces 3 distinct keypresses
+
+
+# ── serializeAssignment ────────────────────────────────────────────────────────
+
+def test_serializeAssignment_is_json_ready_and_groups_markers_by_keypress():
+    colorOf = {"pers_1": 0, "pers_2": 1, "nbr_p": 1}
+    artifact = serializeAssignment(
+        numKeys=2,
+        colorOf=colorOf,
+        mustShareKey=frozenset({frozenset({"pers_2", "nbr_p"})}),
+        unpressableMarkers=frozenset({"subjonctif"}),
+        weightByKeypress={0: 5.0, 1: 3.0},
+    )
+    assert artifact["keypressCount"] == 2
+    assert artifact["markersByKeypress"] == {"0": ["pers_1"], "1": ["nbr_p", "pers_2"]}
+    assert artifact["mustShareKey"] == [["nbr_p", "pers_2"]]
+    assert artifact["unpressableMarkers"] == ["subjonctif"]
+    assert artifact["frequencyWeightedChordSizes"] == {"0": 5.0, "1": 3.0}
+    import json
+    json.dumps(artifact)  # must not raise
+
+
+def test_serializeAssignment_defaults_missing_weight_to_zero():
+    artifact = serializeAssignment(
+        numKeys=2, colorOf={"pers_1": 0, "pers_2": 1},
+        mustShareKey=frozenset(), unpressableMarkers=frozenset(), weightByKeypress={0: 4.0},
+    )
+    assert artifact["frequencyWeightedChordSizes"] == {"0": 4.0, "1": 0.0}

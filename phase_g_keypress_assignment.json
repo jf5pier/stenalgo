@@ -1,0 +1,50 @@
+{
+ "keypressCount": 5,
+ "markersByKeypress": {
+  "0": [
+   "nbr_p",
+   "p"
+  ],
+  "1": [
+   "passé",
+   "subjonctif"
+  ],
+  "2": [
+   "impératif",
+   "infinitif",
+   "pers_1",
+   "pers_3"
+  ],
+  "3": [
+   "imparfait",
+   "pers_2"
+  ],
+  "4": [
+   "conditionnel",
+   "f",
+   "future"
+  ]
+ },
+ "mustShareKey": [
+  [
+   "nbr_p",
+   "p"
+  ]
+ ],
+ "unpressableMarkers": [
+  "VER",
+  "indicatif",
+  "m",
+  "nbr_s",
+  "participe",
+  "présent",
+  "s"
+ ],
+ "frequencyWeightedChordSizes": {
+  "0": 46450.51999999936,
+  "1": 29528.179999999742,
+  "2": 87977.20999999833,
+  "3": 51230.9499999996,
+  "4": 9869.160000000433
+ }
+}

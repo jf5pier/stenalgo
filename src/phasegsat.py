@@ -24,7 +24,7 @@ formulation tractable.
 from ortools.sat.python import cp_model
 from ortools.sat.python.cp_model import IntVar
 
-from .phaseg import PressSetsByGroup, liveMarkers
+from .phaseg import FrequencyByGroup, PressSetsByGroup, frequencyWeightedChordSizes, liveMarkers
 
 # One homophone group's shape, stripped of orthography/stroke identity: the set of
 # distinct true press-sets its spellings hold. Two groups with the same signature pose
@@ -135,6 +135,28 @@ def minKeypressesSat(
             assert colorOf is not None
             return numKeys, colorOf
     raise RuntimeError(f"no feasible assignment found up to maxK={maxK} under the given mustShareKey constraints")
+
+
+def serializeAssignment(
+    numKeys: int,
+    colorOf: dict[str, int],
+    mustShareKey: frozenset[frozenset[str]],
+    unpressableMarkers: frozenset[str],
+    weightByKeypress: dict[int, float],
+) -> dict:
+    """The persisted, adopted Phase G artifact -- a specific CP-SAT-proven assignment
+    (not the search machinery itself), JSON-serializable for `util/build_phase_g_assignment.py`.
+    `mustShareKey` records which bundling decisions were forced, for provenance."""
+    markersByKeypress: dict[int, list[str]] = {k: [] for k in range(numKeys)}
+    for marker, k in colorOf.items():
+        markersByKeypress[k].append(marker)
+    return {
+        "keypressCount": numKeys,
+        "markersByKeypress": {str(k): sorted(ms) for k, ms in markersByKeypress.items()},
+        "mustShareKey": [sorted(pair) for pair in sorted(mustShareKey, key=sorted)],
+        "unpressableMarkers": sorted(unpressableMarkers),
+        "frequencyWeightedChordSizes": {str(k): weightByKeypress.get(k, 0.0) for k in range(numKeys)},
+    }
 
 
 if __name__ == "__main__":
