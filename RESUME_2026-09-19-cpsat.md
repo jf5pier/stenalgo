@@ -218,6 +218,45 @@ disambiguated it.
    requires pressing `impératif` alone. This is a real, complete proof over the actual
    data, not an inference from the sample.
 
+## Addendum (2026-09-19, later same day): frequency-weighted chord report — top-200-word exclusion
+
+Reviewing `frequencyWeightedChordSizes` (see "Still open" #6 below) surfaced two data
+issues, one real fix applied, one investigated and found to be a non-issue:
+
+- **Investigated and NOT a bug**: whether same-lemme forms share one frequency in
+  `LexiqueMixte`. They mostly don't — Lexique383's *attested* per-form rows (`ai`, `va`,
+  `mangea`, `mangerai`, ...) each carry their own real, independently-varying
+  `freqlivres`; only the ~52k/58k `LexiqueSynthetic` paradigm-gap-filler rows (mostly
+  verb forms with a true corpus count of zero, e.g. `nous mangeassions`) are flat `0.0`.
+  Checked whether `freqlemlivres` (the lemma-total column) holds hidden mass to
+  redistribute onto those zero rows: it doesn't — summed across all 6,391 verb lemmas,
+  `sum(freqlivres over attested forms) - freqlemlivres` nets to -69.29 out of 150,281
+  total (rounding noise), so `freqlemlivres` is already just the sum of what Lexique383
+  observed. There's no recoverable frequency budget; the missing forms are genuinely
+  below the books-corpus's detection floor (a real Good-Turing/zero-frequency problem,
+  not a merge bug) — no French-specific quantitative paradigm-cell-frequency table
+  exists in the literature to fill it precisely, and the report doesn't need one (see
+  next point, which dominates far more than this ever would).
+- **Real fix applied**: `frequencyWeightedChordSizes` was letting a handful of
+  extremely-high-frequency *irregular* verb forms (`ai`, `va`, `sais`, `veux`, `suis`,
+  `peux`, `allez`, `fais`, `dis` — all inside `top500_film.txt`'s first 200 lines)
+  dominate keypress usage share (keypress `{impératif, pers_1}` read 31.3% vs. `{f}`'s
+  3.9%, almost entirely from these ~10 words). **This is exactly the same top-200
+  "brief candidate" population `dictionary.py:166`'s `analyseSyllabification` already
+  excludes from syllable-frequency stats** ("Remove the frequent words from syllable
+  frequency statistics" — a top-200 word gets a whole-word brief stroke, bypassing
+  normal phonemic keypresses entirely, so it must not inflate a keypress's apparent
+  real-writing load either). Applied the identical exclusion to
+  `buildFrequencyByGroupOrtho` (`src/elicitation.py`): now takes an optional
+  `frequentWords: frozenset[str]` (pass `Dictionary.frequentWords`) and zeroes any
+  matching ortho's frequency. Wired into `elicitation.py`'s `__main__` via
+  `_dictionary.frequentWords`. One test added
+  (`test_buildFrequencyByGroupOrtho_zeroes_out_frequent_words`), 21/21
+  `elicitation_test.py` passing. **Not yet regenerated**: `resolved_press_sets.json` and
+  `phase_g_keypress_assignment.json` still hold the old (pre-exclusion) frequency
+  numbers — rerun `python -m src.elicitation` then `python -m util.build_phase_g_assignment`
+  to refresh them before trusting the report for Phase P.
+
 ## Still open / not yet done
 
 1. **PR not opened.** Branch `phase-g-grouping` is pushed to `origin` (this session) but
@@ -245,11 +284,39 @@ disambiguated it.
 5. Two harmless untracked files, unchanged from the prior session, still unaddressed:
    `scratch/callgraph` (old pasted transcript) and `sameLemmeHomophoneResolution.txt`
    (a one-line stray note, never explained).
-6. **No frequency-weighted chord-size analysis has been done on the FINAL adopted K=6
-   assignment specifically** — the report exists (`phase_g_keypress_assignment.json`'s
-   `frequencyWeightedChordSizes` field) but hasn't been reviewed/discussed for what it
-   implies about Phase P's physical key placement (busy keypresses should get easy
-   fingers — this is exactly the kind of input Phase P needs and now has available).
+6. **Frequency-weighted chord-size analysis on the FINAL adopted K=6 assignment was
+   reviewed this addendum session** and cross-referenced against `Starboard`'s reserved-
+   key stroke costs (cheapest strokes: `(10,)`/`(15,)` single index keys at 106, then
+   `(0,)`/`(1,)` single pinky keys at 127, then `(0,1)` pinky pair at 170, then
+   `(10,15)` cross-hand index pair at 252 — exactly 6 strokes cheap enough to precede
+   any cross-hand pinky+index combo, matching K=6). Proposed pairing (busiest group →
+   cheapest stroke) using the **pre-fix** numbers gave `{impératif, pers_1}` the top
+   spot (31.3%, almost entirely from ~9 top-200 words like `ai`/`va`/`sais`). **Recomputed
+   after regenerating `resolved_press_sets.json` and `phase_g_keypress_assignment.json`
+   with the top-200-word exclusion applied** (`python -m src.elicitation && python -m
+   util.build_phase_g_assignment`, both rerun this addendum session) — the ranking
+   changed materially, confirming the exclusion was not cosmetic:
+
+   | rank | group | share (post-fix) | share (pre-fix) |
+   |---|---|---|---|
+   | 1 | `{conditionnel, infinitif, subjonctif}` | 26.8% | 20.8% |
+   | 2 | `{impératif, pers_1}` | 24.4% | 31.3% (was #1) |
+   | 3 | `{nbr_p, p}` | 24.2% | 19.3% |
+   | 4 | `{imparfait, pers_2}` | 14.7% | 19.9% |
+   | 5 | `{f}` | 5.4% | 3.9% |
+   | 6 | `{future, passé, pers_3}` | 4.6% | 4.9% |
+
+   Total weight dropped 208,591 → 150,866 (the removed ~58k ≈ the top-200 words'
+   contribution). Updated stroke pairing (busiest → cheapest, unchanged cost table:
+   `(10,)`/`(15,)`=106, `(0,)`/`(1,)`=127, `(0,1)`=170, `(10,15)`=252):
+   `{conditionnel, infinitif, subjonctif}`→`(10,)`, `{impératif, pers_1}`→`(15,)`,
+   `{nbr_p, p}`→`(0,)`, `{imparfait, pers_2}`→`(1,)`, `{f}`→`(0,1)`,
+   `{future, passé, pers_3}`→`(10,15)`. Top 3 groups are now close (24–27%) rather than
+   one dominating — the two cheapest single-key strokes and the two pinky-single strokes
+   all go to genuinely comparable-load groups; only the bottom two (`{f}`,
+   `{future, passé, pers_3}`) are clearly lighter. This pairing has NOT been discussed
+   with or confirmed by the user yet — it's a mechanical re-derivation, not an adopted
+   decision.
 
 ## How to regenerate everything from scratch
 
