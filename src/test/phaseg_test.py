@@ -1,6 +1,7 @@
 from ..phaseg import (
     _findSharedKeypressPair,
     coOccurrencePairs,
+    frequencyWeightedChordSizes,
     greedyColorMarkers,
     inducedPressSet,
     liveMarkers,
@@ -129,6 +130,47 @@ def test_runPhaseG_finds_a_conflict_free_assignment_for_the_parler_cluster():
 def test_runPhaseG_reports_unpressable_markers():
     result = runPhaseG(_parler_press_sets(), allAtoms={"pers_1", "pers_2", "nbr_p", "subjonctif"})
     assert result.unpressableMarkers == frozenset({"subjonctif"})
+
+
+# ── frequencyWeightedChordSizes ───────────────────────────────────────────────
+
+def test_frequencyWeightedChordSizes_sums_true_press_frequency_per_keypress():
+    """Each spelling's frequency is added to every keypress its TRUE press-set touches
+    (not the induced one) -- parle (freq 5) only touches pers_1's keypress, parlent
+    (freq 2) only nbr_p's."""
+    pressSetsByGroup = _parler_press_sets()
+    frequencyByGroup = {"parler_VER": {"parle": 5.0, "parles": 3.0, "parlent": 2.0}}
+    colorOf = {"pers_1": 0, "pers_2": 1, "nbr_p": 2}
+    assert frequencyWeightedChordSizes(pressSetsByGroup, frequencyByGroup, colorOf) == {0: 5.0, 1: 3.0, 2: 2.0}
+
+
+def test_frequencyWeightedChordSizes_adds_frequency_to_every_touched_keypress():
+    """A press-set spanning two keypresses contributes its full frequency to both --
+    'abaisseraient' needing {pers_3, nbr_p} on separate keypresses touches both."""
+    pressSetsByGroup = {"abaisser_VER": {"abaisseraient": frozenset({"pers_3", "nbr_p"})}}
+    frequencyByGroup = {"abaisser_VER": {"abaisseraient": 4.0}}
+    colorOf = {"pers_3": 0, "nbr_p": 1}
+    assert frequencyWeightedChordSizes(pressSetsByGroup, frequencyByGroup, colorOf) == {0: 4.0, 1: 4.0}
+
+
+def test_frequencyWeightedChordSizes_defaults_missing_frequency_to_zero():
+    """A group or ortho absent from frequencyByGroup (e.g. an older artifact) contributes
+    0.0 rather than raising."""
+    pressSetsByGroup = _parler_press_sets()
+    colorOf = {"pers_1": 0, "pers_2": 1, "nbr_p": 2}
+    assert frequencyWeightedChordSizes(pressSetsByGroup, {}, colorOf) == {0: 0.0, 1: 0.0, 2: 0.0}
+
+
+def test_runPhaseG_threads_frequency_weighting_through():
+    frequencyByGroup = {"parler_VER": {"parle": 5.0, "parles": 3.0, "parlent": 2.0}}
+    result = runPhaseG(_parler_press_sets(), frequencyByGroup=frequencyByGroup)
+    assert sum(result.frequencyWeightedChordSizes.values()) == 10.0
+    assert set(result.frequencyWeightedChordSizes) == set(result.markersByKeypress)
+
+
+def test_runPhaseG_frequency_weighting_defaults_to_zero_when_unset():
+    result = runPhaseG(_parler_press_sets())
+    assert set(result.frequencyWeightedChordSizes.values()) == {0.0}
 
 
 def test_runPhaseG_allows_sharing_when_safe():
