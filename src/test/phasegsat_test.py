@@ -5,7 +5,7 @@
 import pytest
 
 from ..phaseg import verifyKeypressAssignment
-from ..phasegsat import groupSignatures, minKeypressesSat, serializeAssignment
+from ..phasegsat import groupSignatures, minKeypressesSat, minKeypressesSatPreferring, serializeAssignment
 
 
 def _parler_press_sets() -> dict[str, dict[str, frozenset[str]]]:
@@ -132,10 +132,23 @@ def test_serializeAssignment_is_json_ready_and_groups_markers_by_keypress():
     assert artifact["keypressCount"] == 2
     assert artifact["markersByKeypress"] == {"0": ["pers_1"], "1": ["nbr_p", "pers_2"]}
     assert artifact["mustShareKey"] == [["nbr_p", "pers_2"]]
+    assert artifact["preferSameKey"] == []  # not given -- defaults empty, distinct from mustShareKey
+    assert artifact["preferencesSatisfied"] == "0/0"
     assert artifact["unpressableMarkers"] == ["subjonctif"]
     assert artifact["frequencyWeightedChordSizes"] == {"0": 5.0, "1": 3.0}
     import json
     json.dumps(artifact)  # must not raise
+
+
+def test_serializeAssignment_records_soft_preference_provenance_separately_from_mustShareKey():
+    artifact = serializeAssignment(
+        numKeys=2, colorOf={"pers_1": 0, "pers_2": 1},
+        mustShareKey=frozenset(), unpressableMarkers=frozenset(), weightByKeypress={},
+        preferSameKey=frozenset({frozenset({"pers_1", "pers_2"})}), preferencesSatisfied=0,
+    )
+    assert artifact["mustShareKey"] == []
+    assert artifact["preferSameKey"] == [["pers_1", "pers_2"]]
+    assert artifact["preferencesSatisfied"] == "0/1"
 
 
 def test_serializeAssignment_defaults_missing_weight_to_zero():
@@ -144,3 +157,49 @@ def test_serializeAssignment_defaults_missing_weight_to_zero():
         mustShareKey=frozenset(), unpressableMarkers=frozenset(), weightByKeypress={0: 4.0},
     )
     assert artifact["frequencyWeightedChordSizes"] == {"0": 4.0, "1": 0.0}
+
+
+# ── minKeypressesSatPreferring (soft preference, vs. mustShareKey's hard one) ────────
+
+def test_minKeypressesSatPreferring_never_inflates_K_and_satisfies_a_free_preference():
+    """The plan's own safe-sharing example (pers_2/nbr_p can share without cost) --
+    preferring it should still land on the true minimum K=2, with the preference
+    actually honored since it costs nothing here."""
+    pressSetsByGroup = {
+        "parler_VER": {
+            "parle": frozenset(),
+            "parles": frozenset({"pers_2"}),
+            "parlent": frozenset({"pers_3", "nbr_p"}),
+        }
+    }
+    numKeys, colorOf, satisfied = minKeypressesSatPreferring(
+        pressSetsByGroup, preferSameKey=frozenset({frozenset({"pers_2", "nbr_p"})})
+    )
+    assert numKeys == 2
+    assert satisfied == 1
+    assert colorOf["pers_2"] == colorOf["nbr_p"]
+    assert verifyKeypressAssignment(pressSetsByGroup, colorOf) == []
+
+
+def test_minKeypressesSatPreferring_leaves_an_unsafe_preference_unsatisfied_rather_than_failing():
+    """pers_1 and pers_2 can NEVER safely share in this fixture (test_minKeypressesSat_
+    mustShareKey_infeasible_when_the_pair_cannot_safely_share's underlying case) --
+    the soft version must still return a valid, conflict-free assignment (unlike
+    mustShareKey, which would raise), just without honoring the preference."""
+    pressSetsByGroup = {
+        "parler_VER": {"parle": frozenset({"pers_1"}), "parles": frozenset({"pers_2"})}
+    }
+    numKeys, colorOf, satisfied = minKeypressesSatPreferring(
+        pressSetsByGroup, preferSameKey=frozenset({frozenset({"pers_1", "pers_2"})})
+    )
+    assert satisfied == 0
+    assert colorOf["pers_1"] != colorOf["pers_2"]
+    assert verifyKeypressAssignment(pressSetsByGroup, colorOf) == []
+
+
+def test_minKeypressesSatPreferring_matches_minKeypressesSat_when_no_preference_given():
+    numKeysPlain, _ = minKeypressesSat(_parler_press_sets())
+    numKeysPreferring, colorOf, satisfied = minKeypressesSatPreferring(_parler_press_sets())
+    assert numKeysPreferring == numKeysPlain
+    assert satisfied == 0
+    assert verifyKeypressAssignment(_parler_press_sets(), colorOf) == []
