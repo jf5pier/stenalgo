@@ -10445,8 +10445,8 @@ auquel	okEl	PRO:rel	au.qu.e.l	au-o.qu-k.e-E.l-l	1.1.1.1.
 aura	oRa	NOM	au.r.a	au-o.r-R.a-a	1.1.1.
 aura	oRa	AUX	au.r.a	au-o.r-R.a-a	1.1.1.
 aura	oRa	VER	au.r.a	au-o.r-R.a-a	1.1.1.
-aurai	oRE	AUX	au.r.ai	au-o.r-R.ai-E	1.1.1.
-aurai	oRE	AUX	au.r.ai	au-o.r-R.ai-E	1.1.1.
+aurai	oRe	AUX	au.r.ai	au-o.r-R.ai-e	1.1.1.
+aurai	oRe	AUX	au.r.ai	au-o.r-R.ai-e	1.1.1.
 aurai	oRe	VER	au.r.ai	au-o.r-R.ai-e	1.1.1.
 auraient	oRE	AUX	au.r.aient	au-o.r-R.aient-E	1.1.1.
 auraient	oRE	VER	au.r.aient	au-o.r-R.aient-E	1.1.1.
@@ -48047,7 +48047,7 @@ enfoncés	@f§se	VER	en.f.on.c.é.s	en-@.f-f.on-§.c-s.é-e.s-#	1.1.1.1.1.1.
 enfoncés	@f§se	ADJ	en.f.on.c.é.s	en-@.f-f.on-§.c-s.é-e.s-#	1.1.1.1.1.1.
 enfonça	@f§sa	VER	en.f.on.ç.a	en-@.f-f.on-§.ç-s.a-a	1.1.1.1.1.
 enfonçage	@f§saZ	NOM	en.f.on.ç.a.ge	en-@.f-f.on-§.ç-s.a-a.ge-Z	1.1.1.1.1.1.
-enfonçai	@f§se	VER	en.f.on.ç.ai	en-@.f-f.on-§.ç-s.ai-E	1.1.1.1.1.
+enfonçai	@f§se	VER	en.f.on.ç.ai	en-@.f-f.on-§.ç-s.ai-e	1.1.1.1.1.
 enfonçaient	@f§se	VER	en.f.on.ç.aient	en-@.f-f.on-§.ç-s.aient-E	1.1.1.1.1.
 enfonçais	@f§se	VER	en.f.on.ç.ais	en-@.f-f.on-§.ç-s.ais-E	1.1.1.1.1.
 enfonçait	@f§se	VER	en.f.on.ç.ait	en-@.f-f.on-§.ç-s.ait-E	1.1.1.1.1.
@@ -50126,7 +50126,7 @@ envenimés	@v°nimE	VER	en.v.e.n.i.m.é.s	en-@.v-v.e-°.n-n.i-i.m-m.é-e.s-#	1.1
 envergure	@vERgyR	NOM	en.v.e.r.g.u.r.e	en-@.v-v.e-E.r-R.g-g.u-y.r-R.e-#	1.1.1.1.0.1.1.1.
 enverguée	@vERge	VER	en.v.e.r.gu.é.e	en-@.v-v.e-E.r-R.gu-g.é-e.e-#	1.1.1.1.1.1.1.
 enverra	@vERa	VER	en.v.e.rr.a	en-@.v-v.e-E.rr-R.a-a	1.1.1.1.1.
-enverrai	@vERe	VER	en.v.e.rr.ai	en-@.v-v.e-E.rr-R.ai-E	1.1.1.1.1.
+enverrai	@vERe	VER	en.v.e.rr.ai	en-@.v-v.e-E.rr-R.ai-e	1.1.1.1.1.
 enverraient	@vERE	VER	en.v.e.rr.aient	en-@.v-v.e-E.rr-R.aient-E	1.1.1.1.1.
 enverrais	@vERE	VER	en.v.e.rr.ais	en-@.v-v.e-E.rr-R.ais-E	1.1.1.1.1.
 enverrait	@vERE	VER	en.v.e.rr.ait	en-@.v-v.e-E.rr-R.ait-E	1.1.1.1.1.
@@ -79781,7 +79781,7 @@ mine	min	VER	m.i.n.e	m-m.i-i.n-n.e-#	1.1.1.1.
 minent	min	VER	m.i.n.ent	m-m.i-i.n-n.ent-#	1.1.1.0.
 miner	mine	VER	m.i.n.er	m-m.i-i.n-n.er-e	1.1.1.1.
 minera	min°Ra	VER	m.i.n.e.r.a	m-m.i-i.n-n.e-°.r-R.a-a	1.1.1.0.1.1.
-minerai	min°RE	VER	m.i.n.e.r.ai	m-m.i-i.n-n.e-°.r-R.ai-E	1.1.1.0.1.1.
+minerai	min°Re	VER	m.i.n.e.r.ai	m-m.i-i.n-n.e-°.r-R.ai-e	1.1.1.0.1.1.
 minerai	min°RE	NOM	m.i.n.e.r.ai	m-m.i-i.n-n.e-°.r-R.ai-E	1.1.1.0.1.1.
 minerais	min°RE	NOM	m.i.n.e.r.ai.s	m-m.i-i.n-n.e-°.r-R.ai-E.s-#	1.1.1.0.1.1.1.
 minerval	minERval	NOM	m.i.n.e.r.v.a.l	m-m.i-i.n-n.e-E.r-R.v-v.a-a.l-l	1.1.1.1.1.1.1.1.
@@ -107203,7 +107203,7 @@ resapent	R°sap	VER	r.e.s.a.p.ent	r-R.e-°.s-s.a-a.p-p.ent-#	1.0.0.1.1.0.
 resapée	R°sape	VER	r.e.s.a.p.é.e	r-R.e-°.s-s.a-a.p-p.é-e.e-#	1.0.0.1.1.1.1.
 resapés	R°sape	VER	r.e.s.a.p.é.s	r-R.e-°.s-s.a-a.p-p.é-e.s-#	1.0.0.1.1.1.1.
 rescaper	REskape	VER	r.e.s.c.a.p.er	r-R.e-E.s-s.c-k.a-a.p-p.er-e	1.1.0.0.1.1.1.
-rescapes	REskape	VER	r.e.s.c.a.p.e.s	r-R.e-E.s-s.c-k.a-a.p-p.e-e.s-#	1.1.0.0.1.1.0.1.
+rescapes	REskap	VER	r.e.s.c.a.p.e.s	r-R.e-E.s-s.c-k.a-a.p-p.e-#.s-#	1.1.0.0.1.1.0.1.
 rescapé	REskape	VER	r.e.s.c.a.p.é	r-R.e-E.s-s.c-k.a-a.p-p.é-e	1.1.0.0.1.1.1.
 rescapé	REskape	ADJ	r.e.s.c.a.p.é	r-R.e-E.s-s.c-k.a-a.p-p.é-e	1.1.0.0.1.1.1.
 rescapé	REskape	NOM	r.e.s.c.a.p.é	r-R.e-E.s-s.c-k.a-a.p-p.é-e	1.1.0.0.1.1.1.
@@ -115707,7 +115707,7 @@ sequin	s°k5	NOM	s.e.qu.in	s-s.e-°.qu-k.in-5	1.0.1.1.
 sequins	s°k5	NOM	s.e.qu.in.s	s-s.e-°.qu-k.in-5.s-#	1.0.1.1.1.
 sera	s°Ra	AUX	s.e.r.a	s-s.e-°.r-R.a-a	1.0.1.1.
 sera	s°Ra	VER	s.e.r.a	s-s.e-°.r-R.a-a	1.0.1.1.
-serai	s°RE	AUX	s.e.r.ai	s-s.e-°.r-R.ai-E	1.0.1.1.
+serai	s°Re	AUX	s.e.r.ai	s-s.e-°.r-R.ai-e	1.0.1.1.
 serai	s°Re	VER	s.e.r.ai	s-s.e-°.r-R.ai-e	1.0.1.1.
 seraient	s°RE	AUX	s.e.r.aient	s-s.e-°.r-R.aient-E	1.0.1.1.
 seraient	s°RE	VER	s.e.r.aient	s-s.e-°.r-R.aient-E	1.0.1.1.
@@ -122756,7 +122756,7 @@ tapant	tap@	VER	t.a.p.ant	t-t.a-a.p-p.ant-@	1.1.1.1.
 tapante	tap@t	ADJ	t.a.p.an.t.e	t-t.a-a.p-p.an-@.t-t.e-#	1.1.1.1.1.1.
 tapantes	tap@t	ADJ	t.a.p.an.t.es	t-t.a-a.p-p.an-@.t-t.es-#	1.1.1.1.1.1.
 tapas	tapas	NOM	t.a.p.a.s	t-t.a-a.p-p.a-a.s-s	1.1.1.1.0.
-tapas	tapas	VER	t.a.p.as	t-t.a-a.p-p.as-a	1.1.1.1.
+tapas	tapa	VER	t.a.p.as	t-t.a-a.p-p.as-a	1.1.1.1.
 tape	tap	NOM	t.a.p.e	t-t.a-a.p-p.e-#	1.1.1.1.
 tape	tap	NOM	t.a.p.e	t-t.a-a.p-p.e-#	1.1.1.1.
 tape	tap	VER	t.a.p.e	t-t.a-a.p-p.e-#	1.1.1.1.

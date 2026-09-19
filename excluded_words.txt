@@ -7,6 +7,7 @@ balluchon
 brunchs
 conquistadors
 cuiller
+fayotte
 laponne
 lettone
 intoxe
@@ -45,3 +46,27 @@ rioja
 ####
 # Exclus pour débugging, mais devraient être réintégrés plus tard
 lieus
+####
+# Paradigme verbal synthétique généré avec une phonologie erronée (toutes les
+# formes de "bitter" dans LexiqueSynthetic.tsv partagent la même phon "bitE",
+# ce qui est faux pour bittez/bittent/bittait; "bitte" est aussi exclu bien
+# qu'il existe un nom "bitte" légitime, très rare, pour éviter l'homographe
+# bogué -- à corriger dans le générateur de paradigme plutôt qu'ici si le nom
+# doit être réintégré)
+#
+bitte
+bitter
+bittez
+bittent
+bittait
+####
+# Même bogue de paradigme synthétique que "bitter" ci-dessus: "strippe",
+# "strippez", "strippent" et "strippait" partagent tous la même phon "stRip9"
+# dans LexiqueSynthetic.tsv, alors qu'ils ne riment pas (présent, 2p présent
+# et imparfait devraient différer)
+#
+strippe
+stripper
+strippez
+strippent
+strippait
