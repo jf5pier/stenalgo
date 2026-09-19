@@ -57,13 +57,29 @@ def transform(records: list[dict]) -> list[dict]:
     return out
 
 
+def _findRecordForOpposition(records: list[dict], oppKey: frozenset) -> dict | None:
+    """The one record (of the 194 distinct oppositions) whose {atomsA, atomsB} pair
+    matches this exact opposition key, if any."""
+    for r in records:
+        if frozenset({frozenset(r["atomsA"]), frozenset(r["atomsB"])}) == oppKey:
+            return r
+    return None
+
+
 def repairConflicts(records: list[dict], homophoneGroups: dict, maxPasses: int = 10) -> list[dict]:
-    """Iteratively re-validate against the real lexicon and restore atoms needed to
-    break any homophone-group conflict the mechanical transform introduced. For each
-    colliding spelling, find an atom unique to its own reading(s) versus the other
-    colliding spellings' readings, and add it wherever that exact reading is answered
-    against anything (safe even if broader than the minimal single opposition
-    responsible -- over-specific presses are explicitly tolerated by the plan)."""
+    """
+    Iteratively re-validate against the real lexicon and restore atoms needed to break
+    any homophone-group conflict the mechanical transform introduced -- minimally: for
+    each colliding spelling, find an atom unique to its own reading(s) versus the other
+    colliding spellings' readings, and add it ONLY to the specific answered-opposition
+    record connecting this spelling's reading to each other colliding spelling's
+    reading (the one distinct opposition actually responsible), never to unrelated
+    oppositions that merely happen to mention the same reading elsewhere. The same
+    conflict pattern recurring across many lemmas (e.g. every regular -ir verb's
+    participe vs. indicatif-présent-3s) is fixed once, since it is answered once and
+    the fix -- via the elicitation model's own propagation rule -- applies everywhere
+    that opposition recurs.
+    """
     log: list[str] = []
 
     for passNum in range(maxPasses):
@@ -85,6 +101,7 @@ def repairConflicts(records: list[dict], homophoneGroups: dict, maxPasses: int =
 
         print(f"Pass {passNum}: {len(conflicts)} conflicts -- repairing...")
         anyFix = False
+        seenOppositions: set[frozenset] = set()
         for conflict in conflicts:
             words = homophoneGroups[conflict.homophoneGroupKey]
             readingsByOrtho = featureCombinationsByOrtho(words)
@@ -104,16 +121,26 @@ def repairConflicts(records: list[dict], homophoneGroups: dict, maxPasses: int =
                     continue  # a genuine tie -- can't be fixed by any marker
                 atomToAdd = sorted(uniqueAtoms)[0]
                 for reading in readingsByOrtho[ortho]:
-                    for r in records:
-                        for atomsKey, checkedKey in (("atomsA", "checkedA"), ("atomsB", "checkedB")):
-                            if frozenset(r[atomsKey]) == reading and atomToAdd not in r[checkedKey]:
+                    for otherOrtho in otherOrthos:
+                        for otherReading in readingsByOrtho.get(otherOrtho, []):
+                            if reading == otherReading:
+                                continue
+                            oppKey = frozenset({reading, otherReading})
+                            if oppKey in seenOppositions:
+                                continue
+                            r = _findRecordForOpposition(records, oppKey)
+                            if r is None:
+                                continue  # this pairwise opposition isn't one of the 194 -- nothing to edit
+                            checkedKey = "checkedA" if frozenset(r["atomsA"]) == reading else "checkedB"
+                            if atomToAdd not in r[checkedKey]:
                                 r[checkedKey] = r[checkedKey] + [atomToAdd]
                                 log.append(
                                     f"pass {passNum}: group {conflict.homophoneGroupKey[1]} conflict on "
                                     f"press {sorted(conflict.pressSet)} ({conflict.orthos}) -- added "
-                                    f"'{atomToAdd}' to {r['id']} side matching reading of '{ortho}'"
+                                    f"'{atomToAdd}' to {r['id']} ({r['orthoA']}/{r['orthoB']})"
                                 )
                                 anyFix = True
+                            seenOppositions.add(oppKey)
         if not anyFix:
             print("Could not auto-repair remaining conflicts -- stopping.")
             break
