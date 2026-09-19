@@ -1,10 +1,13 @@
 import pytest
 
 from ..elicitation import (
+    AnsweredOpposition,
+    buildAnswersByOpposition,
     buildLemmaHomophoneGroups,
     enumerateOppositionSamples,
     featureCombinationsByOrtho,
     reportScale,
+    validateElicitation,
     wordFeatureCombinations,
 )
 from ..word import GramCat, Word
@@ -122,3 +125,104 @@ def test_tie_opposition_flagged_when_two_spellings_share_a_combination():
     report = reportScale(homophoneGroups)
     assert len(report.tieOppositions) == 1
     assert report.distinctOppositionCount == 0
+
+
+# ── E5: buildAnswersByOpposition / validateElicitation ───────────────────────
+
+def test_buildAnswersByOpposition_merges_consistent_answers():
+    combinationA = frozenset({"pers_2"})
+    combinationB = frozenset({"pers_3"})
+    # The same opposition (A vs B) recurring across two different lexemes with the same
+    # answer is expected and fine -- E4's "the answer propagates ... across all lexemes".
+    answers = [
+        AnsweredOpposition(combinationA, frozenset({"pers_2"}), combinationB, frozenset()),
+        AnsweredOpposition(combinationA, frozenset({"pers_2"}), combinationB, frozenset()),
+    ]
+    answersByOpposition, duplicates = buildAnswersByOpposition(answers)
+    key = frozenset({combinationA, combinationB})
+    assert answersByOpposition[key] == {combinationA: frozenset({"pers_2"}), combinationB: frozenset()}
+    assert duplicates == []
+
+
+def test_buildAnswersByOpposition_allows_same_combination_different_press_against_different_partners():
+    """A single reading legitimately needs a different press depending on which OTHER
+    reading it is opposed to -- this must NOT be flagged, unlike a real duplicate
+    (same exact pair, disagreeing answers)."""
+    combinationA = frozenset({"pers_2"})
+    combinationB = frozenset({"pers_3"})
+    combinationC = frozenset({"pers_1"})
+    answers = [
+        AnsweredOpposition(combinationA, frozenset({"pers_2"}), combinationB, frozenset()),
+        AnsweredOpposition(combinationA, frozenset(), combinationC, frozenset({"pers_1"})),
+    ]
+    answersByOpposition, duplicates = buildAnswersByOpposition(answers)
+    assert answersByOpposition[frozenset({combinationA, combinationB})][combinationA] == frozenset({"pers_2"})
+    assert answersByOpposition[frozenset({combinationA, combinationC})][combinationA] == frozenset()
+    assert duplicates == []
+
+
+def test_buildAnswersByOpposition_flags_duplicate_disagreeing_answers():
+    combinationA = frozenset({"pers_2"})
+    combinationB = frozenset({"pers_3"})
+    key = frozenset({combinationA, combinationB})
+    answers = [
+        AnsweredOpposition(combinationA, frozenset({"pers_2"}), combinationB, frozenset()),
+        # The EXACT same pair, answered differently the second time.
+        AnsweredOpposition(combinationA, frozenset(), combinationB, frozenset({"pers_3"})),
+    ]
+    answersByOpposition, duplicates = buildAnswersByOpposition(answers)
+    assert key not in answersByOpposition
+    assert duplicates == [key]
+
+
+def _opposition_answers(parler_group) -> dict:
+    """The 5 pairwise oppositions the parler_group fixture actually needs (see
+    test_enumerate_samples_covers_every_cross_spelling_combination_pair), each answered
+    consistently: parle needs `pers_1`, parles needs `pers_2`, parlent needs `nbr_p`."""
+    pers1 = frozenset({"indicatif", "présent", "pers_1", "nbr_s"})
+    pers3s = frozenset({"indicatif", "présent", "pers_3", "nbr_s"})
+    pers2 = frozenset({"indicatif", "présent", "pers_2", "nbr_s"})
+    pers3p = frozenset({"indicatif", "présent", "pers_3", "nbr_p"})
+    return {
+        frozenset({pers1, pers3p}): {pers1: frozenset({"pers_1"}), pers3p: frozenset({"nbr_p"})},
+        frozenset({pers3s, pers3p}): {pers3s: frozenset(), pers3p: frozenset({"nbr_p"})},
+        frozenset({pers1, pers2}): {pers1: frozenset({"pers_1"}), pers2: frozenset({"pers_2"})},
+        frozenset({pers3s, pers2}): {pers3s: frozenset(), pers2: frozenset({"pers_2"})},
+        frozenset({pers3p, pers2}): {pers3p: frozenset({"nbr_p"}), pers2: frozenset({"pers_2"})},
+    }
+
+
+def test_validateElicitation_finds_no_conflict_when_press_sets_are_distinct(parler_group):
+    homophoneGroups = buildLemmaHomophoneGroups(parler_group)
+    conflicts, unresolved = validateElicitation(homophoneGroups, _opposition_answers(parler_group))
+    assert conflicts == []
+    assert unresolved == []
+
+
+def test_validateElicitation_flags_two_spellings_sharing_a_press_set(parler_group):
+    homophoneGroups = buildLemmaHomophoneGroups(parler_group)
+    answers = _opposition_answers(parler_group)
+    pers1 = frozenset({"indicatif", "présent", "pers_1", "nbr_s"})
+    pers2 = frozenset({"indicatif", "présent", "pers_2", "nbr_s"})
+    pers3p = frozenset({"indicatif", "présent", "pers_3", "nbr_p"})
+    # Change every answer touching pers1 so it ends up implying {"pers_2"} -- the same
+    # press-set parles already implies -- a real conflict.
+    answers[frozenset({pers1, pers3p})][pers1] = frozenset({"pers_2"})
+    answers[frozenset({pers1, pers2})][pers1] = frozenset({"pers_2"})
+    conflicts, unresolved = validateElicitation(homophoneGroups, answers)
+    assert unresolved == []
+    assert len(conflicts) == 1
+    assert conflicts[0].pressSet == frozenset({"pers_2"})
+    assert set(conflicts[0].orthos) == {"parle", "parles"}
+
+
+def test_validateElicitation_skips_group_with_an_unresolved_opposition(parler_group):
+    homophoneGroups = buildLemmaHomophoneGroups(parler_group)
+    answers = _opposition_answers(parler_group)
+    pers3p = frozenset({"indicatif", "présent", "pers_3", "nbr_p"})
+    pers2 = frozenset({"indicatif", "présent", "pers_2", "nbr_s"})
+    missingKey = frozenset({pers3p, pers2})
+    del answers[missingKey]
+    conflicts, unresolved = validateElicitation(homophoneGroups, answers)
+    assert conflicts == []
+    assert unresolved == [missingKey]

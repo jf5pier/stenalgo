@@ -249,6 +249,116 @@ def buildQuestionnaireItems(
     ]
 
 
+@dataclass
+class AnsweredOpposition:
+    """One answered questionnaire item, as press-sets (Preferred synonym for the
+    plan's "signature": Press-set) rather than the raw checkbox lists the artifact
+    stores -- see GLOSSARY.md."""
+    combinationA: FeatureCombination
+    pressA: frozenset[str]
+    combinationB: FeatureCombination
+    pressB: frozenset[str]
+
+
+AnswerByOpposition = dict[frozenset[FeatureCombination], dict[FeatureCombination, frozenset[str]]]
+
+
+def buildAnswersByOpposition(
+    answeredOppositions: list[AnsweredOpposition],
+) -> tuple[AnswerByOpposition, list[frozenset[FeatureCombination]]]:
+    """
+    E5 step 1: index answered oppositions by the pair they were asked about -- not by
+    either side alone. The same single combination legitimately needs a different press
+    against different partners (e.g. a reading opposed only to one other combination
+    somewhere may need no marker at all, yet need one when opposed to a third
+    combination elsewhere); only an opposition key answered more than once with
+    different press-sets is a genuine data inconsistency.
+
+    Returns (answersByOpposition, duplicateOppositions). `duplicateOppositions` lists
+    any opposition key that was answered more than once with disagreeing press-sets --
+    E4's per-opposition dedup should make this impossible, but nothing enforces it
+    upstream, so it is checked here rather than assumed.
+    """
+    entriesByKey: dict[frozenset[FeatureCombination], list[dict[FeatureCombination, frozenset[str]]]] = defaultdict(list)
+    for answer in answeredOppositions:
+        key = frozenset({answer.combinationA, answer.combinationB})
+        entriesByKey[key].append({answer.combinationA: answer.pressA, answer.combinationB: answer.pressB})
+    answersByOpposition: AnswerByOpposition = {}
+    duplicateOppositions: list[frozenset[FeatureCombination]] = []
+    for key, entries in entriesByKey.items():
+        if all(entry == entries[0] for entry in entries):
+            answersByOpposition[key] = entries[0]
+        else:
+            duplicateOppositions.append(key)
+    return answersByOpposition, duplicateOppositions
+
+
+@dataclass
+class GroupConflict:
+    """E5 finding: within one homophone group, two or more distinct spellings whose
+    resolved press-sets (the union of their combinations' press-sets) are identical --
+    pressing that press-set would not tell you which spelling to produce."""
+    homophoneGroupKey: LemmaHomophoneGroupKey
+    pressSet: frozenset[str]
+    orthos: tuple[WordOrtho, ...]
+
+
+def validateElicitation(
+    homophoneGroups: dict[LemmaHomophoneGroupKey, list[Word]],
+    answersByOpposition: AnswerByOpposition,
+) -> tuple[list[GroupConflict], list[frozenset[FeatureCombination]]]:
+    """
+    E5 step 2: per homophone group, and for every pair of distinct combinations actually
+    co-present in that group, look up that specific opposition's answer and union it into
+    each side's running per-spelling press-set. A spelling's full press-set within a group
+    is the union of what it takes to tell it apart from every *other spelling in that
+    same group* -- scoped to the group, not a single universal press for the reading,
+    since what a reading needs to contrast against varies group to group (the same
+    reading can need no marker against one partner and a marker against another,
+    perfectly legitimately). Then check that no two distinct spellings in the group land
+    on the identical press-set (the plan's "every press implied by the data lands on
+    exactly one spelling").
+
+    A group needing an opposition missing from `answersByOpposition` (unanswered, or a
+    duplicate -- see `buildAnswersByOpposition`) cannot be validated and is skipped
+    rather than risking a false conflict/false clear; the missing oppositions are
+    collected in the second return value so the caller can re-ask.
+
+    Returns (conflicts, unresolvedOppositions).
+    """
+    conflicts: list[GroupConflict] = []
+    unresolvedOppositions: list[frozenset[FeatureCombination]] = []
+    for homophoneGroupKey, words in homophoneGroups.items():
+        combinationsByOrtho = featureCombinationsByOrtho(words)
+        orthos = sorted(combinationsByOrtho)
+        if len(orthos) < 2:
+            continue
+        pressSetByOrtho: dict[WordOrtho, set[str]] = {ortho: set() for ortho in orthos}
+        groupIsResolvable = True
+        for orthoA, orthoB in combinations(orthos, 2):
+            for combinationA in combinationsByOrtho[orthoA]:
+                for combinationB in combinationsByOrtho[orthoB]:
+                    if combinationA == combinationB:
+                        continue  # a genuine tie is unresolvable by any marker -- E3's concern, not E5's
+                    oppositionKey = frozenset({combinationA, combinationB})
+                    pressByCombination = answersByOpposition.get(oppositionKey)
+                    if pressByCombination is None:
+                        unresolvedOppositions.append(oppositionKey)
+                        groupIsResolvable = False
+                        continue
+                    pressSetByOrtho[orthoA] |= pressByCombination[combinationA]
+                    pressSetByOrtho[orthoB] |= pressByCombination[combinationB]
+        if not groupIsResolvable:
+            continue
+        orthosByPressSet: dict[frozenset[str], list[WordOrtho]] = defaultdict(list)
+        for ortho, pressSet in pressSetByOrtho.items():
+            orthosByPressSet[frozenset(pressSet)].append(ortho)
+        for pressSet, orthosSharingIt in orthosByPressSet.items():
+            if len(orthosSharingIt) > 1:
+                conflicts.append(GroupConflict(homophoneGroupKey, pressSet, tuple(sorted(orthosSharingIt))))
+    return conflicts, unresolvedOppositions
+
+
 if __name__ == "__main__":
     import os
     import pickle
@@ -296,4 +406,37 @@ if __name__ == "__main__":
     print(f"\nQuestionnaire items: {len(items)} ({sum(1 for i in items if not i.clean)} not fully clean)")
     with open("questionnaire.json", "w", encoding="utf-8") as jf:
         json.dump([i.__dict__ for i in items], jf, ensure_ascii=False, indent=1)
+
+    if os.path.exists("elicitation_answers.json"):
+        with open("elicitation_answers.json", encoding="utf-8") as af:
+            answerRecords = json.load(af)
+        answeredOppositions = [
+            AnsweredOpposition(
+                combinationA=frozenset(rec["atomsA"]), pressA=frozenset(rec["checkedA"]),
+                combinationB=frozenset(rec["atomsB"]), pressB=frozenset(rec["checkedB"]),
+            )
+            for rec in answerRecords
+        ]
+        answersByOpposition, duplicateOppositions = buildAnswersByOpposition(answeredOppositions)
+        conflicts, unresolvedOppositions = validateElicitation(homophoneGroups, answersByOpposition)
+
+        print("\n=== Phase E5 validation report ===")
+        print(f"Answered oppositions loaded:            {len(answeredOppositions)}")
+        print(f"Duplicate oppositions (disagreeing answers for the same pair): {len(duplicateOppositions)}")
+        print(f"Distinct unresolved oppositions encountered (groups containing them are skipped): "
+              f"{len({tuple(sorted(k, key=sorted)) for k in unresolvedOppositions})}")
+        print(f"Groups with a press-set conflict:                           {len(conflicts)}")
+
+        if duplicateOppositions:
+            print("\nDuplicate oppositions (same pair, disagreeing answers):")
+            for key in sorted(duplicateOppositions, key=lambda k: sorted(sorted(c) for c in k))[:10]:
+                print("  ", [sorted(c) for c in key])
+
+        if conflicts:
+            print("\nGroup conflicts (two spellings implying the identical press-set):")
+            for conflict in conflicts[:10]:
+                print(f"   press {sorted(conflict.pressSet) or '∅'} -> {conflict.orthos}"
+                      f"  (group {conflict.homophoneGroupKey[1]})")
+    else:
+        print("\n(no elicitation_answers.json found -- skipping Phase E5 validation)")
     print("Wrote questionnaire.json")
