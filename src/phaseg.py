@@ -157,13 +157,57 @@ class PhaseGResult:
     conflicts: list[KeypressConflict]
 
 
-def runPhaseG(pressSetsByGroup: PressSetsByGroup, allAtoms: set[str] = frozenset()) -> PhaseGResult:
-    """Build the must-differ graph (hard co-occurrence + would-collide-if-merged),
-    greedily color it, and verify the result against every group's actual press-sets."""
+def _findSharedKeypressPair(
+    conflict: KeypressConflict, pressSetsByGroup: PressSetsByGroup, colorOf: dict[str, int]
+) -> frozenset[str] | None:
+    """For a verified conflict, find one pair of markers -- one from each of two
+    colliding spellings' TRUE (not induced) press-sets -- that currently share a
+    keypress. Forcing them apart is guaranteed to change at least one of the colliding
+    spellings' induced set, since inducing pulls in whatever keypress each true marker
+    sits on: two spellings can induce the identical union even with completely disjoint
+    true press-sets, if each one's markers happen to land on the same PAIR of keypresses
+    as the other's (see e.g. {pers_3, nbr_p} vs {pers_2, pers_1} both touching the same
+    two keypresses) -- a failure mode no pairwise pre-check catches."""
+    trueSets = [pressSetsByGroup[conflict.groupId][ortho] for ortho in conflict.orthos]
+    for i in range(len(trueSets)):
+        for j in range(i + 1, len(trueSets)):
+            for markerA in trueSets[i]:
+                for markerB in trueSets[j]:
+                    if markerA != markerB and colorOf[markerA] == colorOf[markerB]:
+                        return frozenset({markerA, markerB})
+    return None
+
+
+def runPhaseG(
+    pressSetsByGroup: PressSetsByGroup, allAtoms: set[str] = frozenset(), maxRepairPasses: int = 50
+) -> PhaseGResult:
+    """
+    Build the must-differ graph (hard co-occurrence + would-collide-if-merged), greedily
+    color it, and verify the result against every group's actual press-sets. Pairwise
+    pre-checks alone are not sufficient (two spellings can induce the same union via two
+    *different* marker pairs landing on the same two keypresses without either pair ever
+    being individually unsafe -- see `_findSharedKeypressPair`), so any conflict found by
+    verification triggers forcing one implicated marker pair apart and re-coloring,
+    repeating until clean or no further progress is possible (residual conflicts are
+    returned rather than hidden).
+    """
     markers = liveMarkers(pressSetsByGroup)
-    mustDifferEdges = coOccurrencePairs(pressSetsByGroup) | wouldCollideIfMergedPairs(pressSetsByGroup)
+    mustDifferEdges = set(coOccurrencePairs(pressSetsByGroup) | wouldCollideIfMergedPairs(pressSetsByGroup))
+
     colorOf = greedyColorMarkers(markers, mustDifferEdges)
     conflicts = verifyKeypressAssignment(pressSetsByGroup, colorOf)
+    for _ in range(maxRepairPasses):
+        if not conflicts:
+            break
+        newEdges = {
+            edge for conflict in conflicts
+            if (edge := _findSharedKeypressPair(conflict, pressSetsByGroup, colorOf)) is not None
+        }
+        if not newEdges - mustDifferEdges:
+            break  # no progress possible; report the residual conflicts honestly
+        mustDifferEdges |= newEdges
+        colorOf = greedyColorMarkers(markers, mustDifferEdges)
+        conflicts = verifyKeypressAssignment(pressSetsByGroup, colorOf)
 
     markersByKeypress: dict[int, set[str]] = defaultdict(set)
     for marker, keypress in colorOf.items():
