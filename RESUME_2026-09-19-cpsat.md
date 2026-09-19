@@ -284,7 +284,26 @@ issues, one real fix applied, one investigated and found to be a non-issue:
 5. Two harmless untracked files, unchanged from the prior session, still unaddressed:
    `scratch/callgraph` (old pasted transcript) and `sameLemmeHomophoneResolution.txt`
    (a one-line stray note, never explained).
-6. **Frequency-weighted chord-size analysis on the FINAL adopted K=6 assignment was
+6. **CORRECTION (later same addendum): the stroke-pairing analysis below is invalid as
+   written — built on the wrong physical keys.** It paired Phase G's keypress groups
+   against the 4 *reserved* keys `[0,1,10,15]`. Per `RESUME_2026-09-18.md`'s authoritative
+   design decision #1 (ROADMAP 2026-09-15, unchanged since): those 4 reserved keys are
+   exclusive to the lemma-homophone (`*`/`#`) track — a *different* disambiguation track
+   (different lemmas, same sound) from Phase G's same-lemma conjugation markers
+   (`impératif`, `pers_1`, `f`, `nbr_p`, ...). Phase G's markers are meant to be realized
+   from the **coda bank** instead (`starboard3h.json`'s `coda: [16..25]`, all 10 keys on
+   the right hand: right index minus reserved 15, right middle, right ring, right
+   pinky) — never the reserved keys. That same 2026-09-18 session also explicitly
+   scoped this physical assignment **out for now**, because unlike the (always-idle)
+   reserved keys, coda keys already carry real consonant-phoneme chords: a marker
+   keypress realized there needs a finger/key-combo that's collision-free against every
+   coda-phoneme chord actually used by words needing that marker — a real
+   collision-feasibility problem against the live theory, not a plain cost-sort. The
+   frequency-weighted usage numbers below (post top-200-word-fix) are still valid and
+   useful as Phase P input; the reserved-key stroke table paired against them is not and
+   should not be used. Left in place below for the record, marked invalid.
+7. **[INVALID, see item 6 above — used the wrong physical keys, kept for the record only]**
+   Frequency-weighted chord-size analysis on the FINAL adopted K=6 assignment was
    reviewed this addendum session** and cross-referenced against `Starboard`'s reserved-
    key stroke costs (cheapest strokes: `(10,)`/`(15,)` single index keys at 106, then
    `(0,)`/`(1,)` single pinky keys at 127, then `(0,1)` pinky pair at 170, then
