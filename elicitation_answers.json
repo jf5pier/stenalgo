@@ -3357,8 +3357,7 @@
   ],
   "checkedB": [
    "conditionnel",
-   "pers_3",
-   "nbr_s"
+   "pers_3"
   ],
   "reviewed": true,
   "clean": true
@@ -3930,7 +3929,6 @@
   ],
   "checkedA": [
    "subjonctif",
-   "présent",
    "pers_2"
   ],
   "orthoB": "exclus",
