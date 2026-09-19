@@ -293,40 +293,29 @@ def buildAnswersByOpposition(
     return answersByOpposition, duplicateOppositions
 
 
-@dataclass
-class GroupConflict:
-    """E5 finding: within one homophone group, two or more distinct spellings whose
-    resolved press-sets (the union of their combinations' press-sets) are identical --
-    pressing that press-set would not tell you which spelling to produce."""
-    homophoneGroupKey: LemmaHomophoneGroupKey
-    pressSet: frozenset[str]
-    orthos: tuple[WordOrtho, ...]
-
-
-def validateElicitation(
+def resolveGroupPressSets(
     homophoneGroups: dict[LemmaHomophoneGroupKey, list[Word]],
     answersByOpposition: AnswerByOpposition,
-) -> tuple[list[GroupConflict], list[frozenset[FeatureCombination]]]:
+) -> tuple[dict[LemmaHomophoneGroupKey, dict[WordOrtho, frozenset[str]]], list[frozenset[FeatureCombination]]]:
     """
-    E5 step 2: per homophone group, and for every pair of distinct combinations actually
-    co-present in that group, look up that specific opposition's answer and union it into
-    each side's running per-spelling press-set. A spelling's full press-set within a group
-    is the union of what it takes to tell it apart from every *other spelling in that
-    same group* -- scoped to the group, not a single universal press for the reading,
-    since what a reading needs to contrast against varies group to group (the same
-    reading can need no marker against one partner and a marker against another,
-    perfectly legitimately). Then check that no two distinct spellings in the group land
-    on the identical press-set (the plan's "every press implied by the data lands on
-    exactly one spelling").
+    Shared resolution step behind both E5 (validate) and E6 (persist): per homophone
+    group, and for every pair of distinct combinations actually co-present in that
+    group, look up that specific opposition's answer and union it into each side's
+    running per-spelling press-set. A spelling's full press-set within a group is the
+    union of what it takes to tell it apart from every *other spelling in that same
+    group* -- scoped to the group, not a single universal press for the reading, since
+    what a reading needs to contrast against varies group to group (the same reading
+    can need no marker against one partner and a marker against another, perfectly
+    legitimately).
 
     A group needing an opposition missing from `answersByOpposition` (unanswered, or a
-    duplicate -- see `buildAnswersByOpposition`) cannot be validated and is skipped
-    rather than risking a false conflict/false clear; the missing oppositions are
+    duplicate -- see `buildAnswersByOpposition`) cannot be resolved and is left out of
+    the first return value rather than risking a guess; its missing oppositions are
     collected in the second return value so the caller can re-ask.
 
-    Returns (conflicts, unresolvedOppositions).
+    Returns (pressSetsByGroup, unresolvedOppositions).
     """
-    conflicts: list[GroupConflict] = []
+    pressSetsByGroup: dict[LemmaHomophoneGroupKey, dict[WordOrtho, frozenset[str]]] = {}
     unresolvedOppositions: list[frozenset[FeatureCombination]] = []
     for homophoneGroupKey, words in homophoneGroups.items():
         combinationsByOrtho = featureCombinationsByOrtho(words)
@@ -350,13 +339,63 @@ def validateElicitation(
                     pressSetByOrtho[orthoB] |= pressByCombination[combinationB]
         if not groupIsResolvable:
             continue
+        pressSetsByGroup[homophoneGroupKey] = {ortho: frozenset(s) for ortho, s in pressSetByOrtho.items()}
+    return pressSetsByGroup, unresolvedOppositions
+
+
+@dataclass
+class GroupConflict:
+    """E5 finding: within one homophone group, two or more distinct spellings whose
+    resolved press-sets (the union of their combinations' press-sets) are identical --
+    pressing that press-set would not tell you which spelling to produce."""
+    homophoneGroupKey: LemmaHomophoneGroupKey
+    pressSet: frozenset[str]
+    orthos: tuple[WordOrtho, ...]
+
+
+def validateElicitation(
+    homophoneGroups: dict[LemmaHomophoneGroupKey, list[Word]],
+    answersByOpposition: AnswerByOpposition,
+) -> tuple[list[GroupConflict], list[frozenset[FeatureCombination]]]:
+    """
+    E5: resolve every group's per-spelling press-sets (`resolveGroupPressSets`) and check
+    that no two distinct spellings in the same group land on the identical press-set (the
+    plan's "every press implied by the data lands on exactly one spelling").
+
+    Returns (conflicts, unresolvedOppositions).
+    """
+    pressSetsByGroup, unresolvedOppositions = resolveGroupPressSets(homophoneGroups, answersByOpposition)
+    conflicts: list[GroupConflict] = []
+    for homophoneGroupKey, pressSetByOrtho in pressSetsByGroup.items():
         orthosByPressSet: dict[frozenset[str], list[WordOrtho]] = defaultdict(list)
         for ortho, pressSet in pressSetByOrtho.items():
-            orthosByPressSet[frozenset(pressSet)].append(ortho)
+            orthosByPressSet[pressSet].append(ortho)
         for pressSet, orthosSharingIt in orthosByPressSet.items():
             if len(orthosSharingIt) > 1:
                 conflicts.append(GroupConflict(homophoneGroupKey, pressSet, tuple(sorted(orthosSharingIt))))
     return conflicts, unresolvedOppositions
+
+
+def serializeResolvedPressSets(
+    pressSetsByGroup: dict[LemmaHomophoneGroupKey, dict[WordOrtho, frozenset[str]]]
+) -> list[dict]:
+    """
+    E6: the persisted elicitation artifact that feeds Phase G (not `buildDiscriminatorSelection`'s
+    output). One entry per validated (conflict-free -- callers should pass `validateElicitation`'s
+    clean groups, or filter out its conflicting ones first) homophone group: its stroke/lemma key
+    and every spelling's resolved press-set, JSON-serializable (Strokes is already
+    tuple[tuple[int, ...], ...], trivially nested lists; press-sets sorted for stable diffs).
+    """
+    return [
+        {
+            "strokes": [list(stroke) for stroke in strokes],
+            "lemmeGramCat": lemmeGramCat,
+            "pressSets": {ortho: sorted(pressSet) for ortho, pressSet in pressSetByOrtho.items()},
+        }
+        for (strokes, lemmeGramCat), pressSetByOrtho in sorted(
+            pressSetsByGroup.items(), key=lambda kv: kv[0][1]
+        )
+    ]
 
 
 if __name__ == "__main__":
@@ -418,7 +457,9 @@ if __name__ == "__main__":
             for rec in answerRecords
         ]
         answersByOpposition, duplicateOppositions = buildAnswersByOpposition(answeredOppositions)
-        conflicts, unresolvedOppositions = validateElicitation(homophoneGroups, answersByOpposition)
+        pressSetsByGroup, unresolvedOppositions = resolveGroupPressSets(homophoneGroups, answersByOpposition)
+        conflicts, _ = validateElicitation(homophoneGroups, answersByOpposition)
+        conflictedGroupKeys = {conflict.homophoneGroupKey for conflict in conflicts}
 
         print("\n=== Phase E5 validation report ===")
         print(f"Answered oppositions loaded:            {len(answeredOppositions)}")
@@ -437,6 +478,19 @@ if __name__ == "__main__":
             for conflict in conflicts[:10]:
                 print(f"   press {sorted(conflict.pressSet) or '∅'} -> {conflict.orthos}"
                       f"  (group {conflict.homophoneGroupKey[1]})")
+
+        # E6: persist the conflict-free, fully-resolved groups -- Phase G's actual input,
+        # not buildDiscriminatorSelection's output. Conflicted/unresolved groups are left
+        # out entirely rather than persisted half-wrong; they need re-asking first.
+        cleanPressSetsByGroup = {
+            key: pressSetByOrtho for key, pressSetByOrtho in pressSetsByGroup.items()
+            if key not in conflictedGroupKeys
+        }
+        resolvedArtifact = serializeResolvedPressSets(cleanPressSetsByGroup)
+        with open("resolved_press_sets.json", "w", encoding="utf-8") as rf:
+            json.dump(resolvedArtifact, rf, ensure_ascii=False, indent=1)
+        print(f"\nWrote resolved_press_sets.json: {len(resolvedArtifact)} validated groups "
+              f"(of {len(pressSetsByGroup)} resolved, {len(conflictedGroupKeys)} held back as conflicted)")
     else:
-        print("\n(no elicitation_answers.json found -- skipping Phase E5 validation)")
+        print("\n(no elicitation_answers.json found -- skipping Phase E5 validation and E6 persistence)")
     print("Wrote questionnaire.json")
