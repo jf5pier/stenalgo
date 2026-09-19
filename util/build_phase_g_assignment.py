@@ -1,16 +1,19 @@
 """
 Persist Phase G's adopted keypress assignment (2026-09-19 session): the CP-SAT-proven
-minimum K over `resolved_press_sets.json`, with `nbr_p` sharing a keypress with `p` per
-the user's explicit preference.
+minimum K over `resolved_press_sets.json`, under the user's explicit constraints:
 
-Uses `minKeypressesSatPreferring` (SOFT preference), not `minKeypressesSat` with
-`mustShareKey` (HARD constraint): the soft search finds the true minimum K first,
-unconstrained, then only prefers the p/nbr_p bundling as a tiebreaker among equally-
-minimal colorings -- so it can never inflate K to honor the preference, unlike the hard
-version (which happened to also find K=5 here, confirmed by an earlier exploration, but
-that was a fact about this specific pair, not a property of the mechanism used to get
-it). `preferencesSatisfied` in the persisted artifact records whether it was actually
-honored (it is, here: still K=5, 0 conflicts against the real 47,799-group lexicon).
+- SOFT preference: `nbr_p` shares a keypress with `p` when possible, as a tiebreaker
+  among equally-minimal colorings (`minKeypressesSatPreferring`'s `preferSameKey`) --
+  never inflates K to get it.
+- HARD constraint: `f` shares its keypress with nothing else (`aloneKeys`).
+- HARD constraint: `infinitif`, `pers_1`, `pers_2`, `pers_3` are pairwise forced onto
+  different keypresses (`mustDifferGroups`) -- these two are real requirements, not
+  preferences, so unlike the soft one they CAN inflate K (confirmed here: still K=6,
+  the same minimum as without them, but that's a fact about this specific lexicon, not
+  guaranteed by the mechanism).
+
+`preferencesSatisfied` in the persisted artifact records whether the soft preference was
+actually honored (it is, here: 0 conflicts against the real 47,799-group lexicon).
 
 This is the canonical, checked-in artifact other work (Phase P, or future re-runs)
 should read -- not something to regenerate by ad hoc inline scripts each time, per the
@@ -30,6 +33,8 @@ from src.phaseg import frequencyWeightedChordSizes, liveMarkers, loadGroupOrthoF
 from src.phasegsat import minKeypressesSatPreferring, serializeAssignment
 
 PREFER_SAME_KEY = frozenset({frozenset({"p", "nbr_p"})})
+ALONE_KEYS = frozenset({"f"})
+MUST_DIFFER_GROUPS = frozenset({frozenset({"infinitif", "pers_1", "pers_2", "pers_3"})})
 OUTPUT_PATH = "phase_g_keypress_assignment.json"
 
 
@@ -47,7 +52,9 @@ def main() -> None:
                 allAtoms.update(item["atomsA"])
                 allAtoms.update(item["atomsB"])
 
-    numKeys, colorOf, satisfied = minKeypressesSatPreferring(pressSetsByGroup, preferSameKey=PREFER_SAME_KEY)
+    numKeys, colorOf, satisfied = minKeypressesSatPreferring(
+        pressSetsByGroup, preferSameKey=PREFER_SAME_KEY, aloneKeys=ALONE_KEYS, mustDifferGroups=MUST_DIFFER_GROUPS,
+    )
 
     # The whole point of persisting rather than trusting the search blindly: re-verify
     # against the real ground truth before writing anything out.
@@ -61,6 +68,7 @@ def main() -> None:
     artifact = serializeAssignment(
         numKeys, colorOf, mustShareKey=frozenset(), unpressableMarkers=unpressableMarkers,
         weightByKeypress=weightByKeypress, preferSameKey=PREFER_SAME_KEY, preferencesSatisfied=satisfied,
+        aloneKeys=ALONE_KEYS, mustDifferGroups=MUST_DIFFER_GROUPS,
     )
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(artifact, f, ensure_ascii=False, indent=1)

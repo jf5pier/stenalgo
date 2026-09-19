@@ -2,25 +2,25 @@
  "keypressCount": 6,
  "markersByKeypress": {
   "0": [
-   "future",
-   "passé"
-  ],
-  "1": [
-   "infinitif",
-   "pers_1",
+   "passé",
    "pers_3"
   ],
-  "2": [
-   "conditionnel",
-   "f",
-   "subjonctif"
-  ],
-  "3": [
+  "1": [
    "imparfait",
    "pers_2"
   ],
+  "2": [
+   "impératif",
+   "pers_1"
+  ],
+  "3": [
+   "f"
+  ],
   "4": [
-   "impératif"
+   "conditionnel",
+   "future",
+   "infinitif",
+   "subjonctif"
   ],
   "5": [
    "nbr_p",
@@ -28,6 +28,17 @@
   ]
  },
  "mustShareKey": [],
+ "aloneKeys": [
+  "f"
+ ],
+ "mustDifferGroups": [
+  [
+   "infinitif",
+   "pers_1",
+   "pers_2",
+   "pers_3"
+  ]
+ ],
  "preferSameKey": [
   [
    "nbr_p",
@@ -45,11 +56,11 @@
   "s"
  ],
  "frequencyWeightedChordSizes": {
-  "0": 5922.520000000074,
-  "1": 76857.93999999866,
-  "2": 33469.169999999234,
-  "3": 41452.31999999953,
-  "4": 43940.79999999988,
+  "0": 8416.360000000357,
+  "1": 41452.31999999953,
+  "2": 65331.88999999968,
+  "3": 8150.740000000354,
+  "4": 44994.68999999987,
   "5": 40249.02999999907
  }
 }

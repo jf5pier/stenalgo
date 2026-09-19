@@ -203,3 +203,62 @@ def test_minKeypressesSatPreferring_matches_minKeypressesSat_when_no_preference_
     assert numKeysPreferring == numKeysPlain
     assert satisfied == 0
     assert verifyKeypressAssignment(_parler_press_sets(), colorOf) == []
+
+
+# ── aloneKeys / mustDifferGroups (hard structural constraints) ───────────────────────
+
+def _safe_sharing_press_sets() -> dict[str, dict[str, frozenset[str]]]:
+    """The plan's own worked example: pers_2 and nbr_p CAN safely share a keypress
+    (nbr_p is never pressed alone) -- free minimum is K=2."""
+    return {
+        "parler_VER": {
+            "parle": frozenset(),
+            "parles": frozenset({"pers_2"}),
+            "parlent": frozenset({"pers_3", "nbr_p"}),
+        }
+    }
+
+
+def test_aloneKeys_forces_the_marker_to_share_with_nothing():
+    pressSetsByGroup = _safe_sharing_press_sets()
+    numKeys, colorOf = minKeypressesSat(pressSetsByGroup, aloneKeys=frozenset({"nbr_p"}))
+    assert all(m == "nbr_p" or colorOf[m] != colorOf["nbr_p"] for m in colorOf)
+    assert verifyKeypressAssignment(pressSetsByGroup, colorOf) == []
+
+
+def test_mustDifferGroups_forces_every_pair_in_the_group_onto_different_keys():
+    pressSetsByGroup = _safe_sharing_press_sets()
+    group = frozenset({"pers_2", "pers_3", "nbr_p"})
+    numKeys, colorOf = minKeypressesSat(pressSetsByGroup, mustDifferGroups=frozenset({group}))
+    assert len({colorOf[m] for m in group}) == 3  # all three pairwise distinct
+    assert numKeys == 3  # up from the free minimum of 2, since pers_2/nbr_p can no longer share
+    assert verifyKeypressAssignment(pressSetsByGroup, colorOf) == []
+
+
+def test_mustDifferGroups_does_not_constrain_markers_outside_the_group():
+    """A mustDifferGroups pair only forces THOSE markers apart from EACH OTHER -- it
+    says nothing about a marker outside the group, which remains free to share with
+    either of them if otherwise safe."""
+    pressSetsByGroup = _safe_sharing_press_sets()
+    numKeys, colorOf = minKeypressesSat(
+        pressSetsByGroup, mustDifferGroups=frozenset({frozenset({"pers_2", "nbr_p"})})
+    )
+    assert colorOf["pers_2"] != colorOf["nbr_p"]
+    assert numKeys == 2  # pers_3 remains free to share with either -- no forced inflation
+    assert verifyKeypressAssignment(pressSetsByGroup, colorOf) == []
+
+
+def test_minKeypressesSatPreferring_combines_hard_structural_constraints_with_soft_preference():
+    """aloneKeys/mustDifferGroups remain HARD even inside the preferring search -- only
+    preferSameKey is a tiebreaker."""
+    pressSetsByGroup = _safe_sharing_press_sets()
+    numKeys, colorOf, satisfied = minKeypressesSatPreferring(
+        pressSetsByGroup,
+        preferSameKey=frozenset({frozenset({"pers_2", "nbr_p"})}),
+        mustDifferGroups=frozenset({frozenset({"pers_2", "nbr_p"})}),
+    )
+    # the hard mustDifferGroups constraint always wins over the soft preference for the
+    # SAME pair -- they can never both be satisfied, so the preference goes unhonored.
+    assert colorOf["pers_2"] != colorOf["nbr_p"]
+    assert satisfied == 0
+    assert verifyKeypressAssignment(pressSetsByGroup, colorOf) == []
