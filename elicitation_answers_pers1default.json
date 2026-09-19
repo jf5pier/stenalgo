@@ -129,7 +129,7 @@
    "présent"
   ],
   "checkedA": [
-   "pers_2"
+   "impératif"
   ],
   "orthoB": "dit",
   "atomsB": [
@@ -1223,7 +1223,9 @@
    "pers_2",
    "présent"
   ],
-  "checkedB": [],
+  "checkedB": [
+   "impératif"
+  ],
   "reviewed": true,
   "clean": false
  },
@@ -1266,8 +1268,7 @@
    "présent"
   ],
   "checkedA": [
-   "pers_2",
-   "nbr_p"
+   "impératif"
   ],
   "orthoB": "désolé",
   "atomsB": [
@@ -2608,7 +2609,7 @@
    "présent"
   ],
   "checkedA": [
-   "pers_2"
+   "impératif"
   ],
   "orthoB": "courrai",
   "atomsB": [
@@ -2878,7 +2879,7 @@
    "présent"
   ],
   "checkedB": [
-   "pers_2"
+   "impératif"
   ],
   "reviewed": true,
   "clean": true
@@ -4175,7 +4176,7 @@
    "présent"
   ],
   "checkedB": [
-   "pers_2"
+   "impératif"
   ],
   "reviewed": true,
   "clean": true
@@ -4813,7 +4814,7 @@
    "présent"
   ],
   "checkedB": [
-   "pers_2"
+   "impératif"
   ],
   "reviewed": true,
   "clean": true
