@@ -15,6 +15,10 @@ feature_keypress_feasibility.tsv
 # Regenerable pipeline output (dictionary.py)
 theory.tsv
 
+# Regenerable Phase E outputs (src/elicitation.py, util/build_questionnaire_page.py)
+questionnaire.json
+elicitation_questionnaire.html
+
 env/
 
 # External reference lexicon for cross-checking generated NOM/ADJ forms

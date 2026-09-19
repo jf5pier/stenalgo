@@ -1,0 +1,5030 @@
+[
+ {
+  "id": "q0",
+  "lemma": "il",
+  "orthoA": "il",
+  "atomsA": [
+   "m",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "ils",
+  "atomsB": [
+   "m",
+   "p"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q1",
+  "lemma": "avoir",
+  "orthoA": "a",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedA": [],
+  "orthoB": "as",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q2",
+  "lemma": "avoir",
+  "orthoA": "ai",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedA": [],
+  "orthoB": "aie",
+  "atomsB": [
+   "nbr_s",
+   "pers_1",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "subjonctif"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q3",
+  "lemma": "avoir",
+  "orthoA": "ai",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedA": [],
+  "orthoB": "aies",
+  "atomsB": [
+   "nbr_s",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "subjonctif",
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q4",
+  "lemma": "avoir",
+  "orthoA": "ai",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedA": [],
+  "orthoB": "aient",
+  "atomsB": [
+   "nbr_p",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "subjonctif",
+   "pers_3",
+   "nbr_p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q5",
+  "lemma": "dire",
+  "orthoA": "dis",
+  "atomsA": [
+   "impératif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "dit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3",
+   "passé"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q6",
+  "lemma": "avoir",
+  "orthoA": "ai",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedA": [],
+  "orthoB": "ait",
+  "atomsB": [
+   "nbr_s",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "pers_3",
+   "subjonctif"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q7",
+  "lemma": "être",
+  "orthoA": "étaient",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_3"
+  ],
+  "checkedA": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "orthoB": "était",
+  "atomsB": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q8",
+  "lemma": "chose",
+  "orthoA": "chose",
+  "atomsA": [
+   "f",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "choses",
+  "atomsB": [
+   "f",
+   "p"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q9",
+  "lemma": "dire",
+  "orthoA": "dire",
+  "atomsA": [
+   "infinitif"
+  ],
+  "checkedA": [],
+  "orthoB": "dirent",
+  "atomsB": [
+   "indicatif",
+   "nbr_p",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "passé"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q10",
+  "lemma": "faire",
+  "orthoA": "fais",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "faits",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q11",
+  "lemma": "voir",
+  "orthoA": "vu",
+  "atomsA": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "vue",
+  "atomsB": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedB": [
+   "f"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q12",
+  "lemma": "parler",
+  "orthoA": "parler",
+  "atomsA": [
+   "infinitif"
+  ],
+  "checkedA": [
+   "infinitif"
+  ],
+  "orthoB": "parlé",
+  "atomsB": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedB": [],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q13",
+  "lemma": "voir",
+  "orthoA": "vu",
+  "atomsA": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "vus",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q14",
+  "lemma": "sûr",
+  "orthoA": "sûr",
+  "atomsA": [
+   "m",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "sûre",
+  "atomsB": [
+   "f",
+   "s"
+  ],
+  "checkedB": [
+   "f"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q15",
+  "lemma": "voir",
+  "orthoA": "vu",
+  "atomsA": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "vues",
+  "atomsB": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "f",
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q16",
+  "lemma": "croire",
+  "orthoA": "croies",
+  "atomsA": [
+   "nbr_s",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif",
+   "pers_2"
+  ],
+  "orthoB": "crois",
+  "atomsB": [
+   "impératif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "impératif"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q17",
+  "lemma": "croire",
+  "orthoA": "croies",
+  "atomsA": [
+   "nbr_s",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif",
+   "pers_2"
+  ],
+  "orthoB": "crois",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q18",
+  "lemma": "aller",
+  "orthoA": "aller",
+  "atomsA": [
+   "infinitif"
+  ],
+  "checkedA": [
+   "infinitif"
+  ],
+  "orthoB": "allée",
+  "atomsB": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedB": [
+   "f"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q19",
+  "lemma": "aller",
+  "orthoA": "aller",
+  "atomsA": [
+   "infinitif"
+  ],
+  "checkedA": [
+   "infinitif"
+  ],
+  "orthoB": "allés",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q20",
+  "lemma": "aller",
+  "orthoA": "aller",
+  "atomsA": [
+   "infinitif"
+  ],
+  "checkedA": [
+   "infinitif"
+  ],
+  "orthoB": "allées",
+  "atomsB": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "f",
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q21",
+  "lemma": "aller",
+  "orthoA": "allai",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_1"
+  ],
+  "checkedA": [
+   "passé"
+  ],
+  "orthoB": "aller",
+  "atomsB": [
+   "infinitif"
+  ],
+  "checkedB": [
+   "infinitif"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q22",
+  "lemma": "avoir",
+  "orthoA": "avais",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_2"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "avait",
+  "atomsB": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q23",
+  "lemma": "sûr",
+  "orthoA": "sûr",
+  "atomsA": [
+   "m",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "sûres",
+  "atomsB": [
+   "f",
+   "p"
+  ],
+  "checkedB": [
+   "f",
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q24",
+  "lemma": "autre",
+  "orthoA": "autre",
+  "atomsA": [
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "autres",
+  "atomsB": [
+   "p"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q25",
+  "lemma": "enfant",
+  "orthoA": "enfant",
+  "atomsA": [
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "enfants",
+  "atomsB": [
+   "m",
+   "p"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q26",
+  "lemma": "avoir",
+  "orthoA": "eu",
+  "atomsA": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "eut",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "passé",
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q27",
+  "lemma": "avoir",
+  "orthoA": "aurais",
+  "atomsA": [
+   "conditionnel",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "aurait",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q28",
+  "lemma": "regarder",
+  "orthoA": "regarde",
+  "atomsA": [
+   "nbr_s",
+   "pers_1",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif"
+  ],
+  "orthoB": "regardent",
+  "atomsB": [
+   "indicatif",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q29",
+  "lemma": "maison",
+  "orthoA": "maison",
+  "atomsA": [
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "maisons",
+  "atomsB": [
+   "f",
+   "p"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q30",
+  "lemma": "être",
+  "orthoA": "sera",
+  "atomsA": [
+   "future",
+   "indicatif",
+   "nbr_s",
+   "pers_3"
+  ],
+  "checkedA": [
+   "pers_3"
+  ],
+  "orthoB": "seras",
+  "atomsB": [
+   "future",
+   "indicatif",
+   "nbr_s",
+   "pers_2"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q31",
+  "lemma": "être",
+  "orthoA": "sois",
+  "atomsA": [
+   "impératif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "impératif"
+  ],
+  "orthoB": "soit",
+  "atomsB": [
+   "nbr_s",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "subjonctif",
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q32",
+  "lemma": "être",
+  "orthoA": "sois",
+  "atomsA": [
+   "nbr_s",
+   "pers_1",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif"
+  ],
+  "orthoB": "soit",
+  "atomsB": [
+   "nbr_s",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "subjonctif",
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q33",
+  "lemma": "avoir",
+  "orthoA": "avaient",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_3"
+  ],
+  "checkedA": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "orthoB": "avais",
+  "atomsB": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_2"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q34",
+  "lemma": "amour",
+  "orthoA": "amour",
+  "atomsA": [
+   "m",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "amours",
+  "atomsB": [
+   "p"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q35",
+  "lemma": "seul",
+  "orthoA": "seule",
+  "atomsA": [
+   "f",
+   "s"
+  ],
+  "checkedA": [
+   "f"
+  ],
+  "orthoB": "seuls",
+  "atomsB": [
+   "m",
+   "p"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q36",
+  "lemma": "avoir",
+  "orthoA": "auraient",
+  "atomsA": [
+   "conditionnel",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "orthoB": "aurais",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q37",
+  "lemma": "pouvoir",
+  "orthoA": "pu",
+  "atomsA": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "pus",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_2"
+  ],
+  "checkedB": [
+   "passé",
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q38",
+  "lemma": "être",
+  "orthoA": "soient",
+  "atomsA": [
+   "nbr_p",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "nbr_p",
+   "pers_3",
+   "subjonctif"
+  ],
+  "orthoB": "soit",
+  "atomsB": [
+   "nbr_s",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "subjonctif",
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q39",
+  "lemma": "pouvoir",
+  "orthoA": "pourraient",
+  "atomsA": [
+   "conditionnel",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedA": [
+   "nbr_p",
+   "pers_3"
+  ],
+  "orthoB": "pourrait",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q40",
+  "lemma": "trouver",
+  "orthoA": "trouvai",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_1"
+  ],
+  "checkedA": [
+   "passé"
+  ],
+  "orthoB": "trouvé",
+  "atomsB": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedB": [],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q41",
+  "lemma": "dire",
+  "orthoA": "dites",
+  "atomsA": [
+   "impératif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "impératif"
+  ],
+  "orthoB": "dîtes",
+  "atomsB": [
+   "indicatif",
+   "nbr_p",
+   "passé",
+   "pers_2"
+  ],
+  "checkedB": [
+   "passé"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q42",
+  "lemma": "dire",
+  "orthoA": "dites",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [],
+  "orthoB": "dîtes",
+  "atomsB": [
+   "indicatif",
+   "nbr_p",
+   "passé",
+   "pers_2"
+  ],
+  "checkedB": [
+   "passé"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q43",
+  "lemma": "dire",
+  "orthoA": "dites",
+  "atomsA": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedA": [
+   "p",
+   "f"
+  ],
+  "orthoB": "dîtes",
+  "atomsB": [
+   "indicatif",
+   "nbr_p",
+   "passé",
+   "pers_2"
+  ],
+  "checkedB": [
+   "passé"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q44",
+  "lemma": "finir",
+  "orthoA": "fini",
+  "atomsA": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "finis",
+  "atomsB": [
+   "impératif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "impératif"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q45",
+  "lemma": "finir",
+  "orthoA": "fini",
+  "atomsA": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "finis",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_1"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q46",
+  "lemma": "ami",
+  "orthoA": "amies",
+  "atomsA": [
+   "f",
+   "p"
+  ],
+  "checkedA": [
+   "f",
+   "p"
+  ],
+  "orthoB": "amis",
+  "atomsB": [
+   "m",
+   "p"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q47",
+  "lemma": "prier",
+  "orthoA": "prie",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedA": [],
+  "orthoB": "pries",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q48",
+  "lemma": "prier",
+  "orthoA": "prie",
+  "atomsA": [
+   "nbr_s",
+   "pers_1",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif"
+  ],
+  "orthoB": "pries",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q49",
+  "lemma": "être",
+  "orthoA": "soient",
+  "atomsA": [
+   "nbr_p",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "nbr_p",
+   "pers_3",
+   "subjonctif"
+  ],
+  "orthoB": "sois",
+  "atomsB": [
+   "impératif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q50",
+  "lemma": "voir",
+  "orthoA": "voient",
+  "atomsA": [
+   "nbr_p",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "pers_3",
+   "subjonctif",
+   "nbr_p"
+  ],
+  "orthoB": "voit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q51",
+  "lemma": "désoler",
+  "orthoA": "désolez",
+  "atomsA": [
+   "impératif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_2",
+   "nbr_p"
+  ],
+  "orthoB": "désolé",
+  "atomsB": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedB": [],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q52",
+  "lemma": "être",
+  "orthoA": "serai",
+  "atomsA": [
+   "future",
+   "indicatif",
+   "nbr_s",
+   "pers_1"
+  ],
+  "checkedA": [
+   "future"
+  ],
+  "orthoB": "serez",
+  "atomsB": [
+   "future",
+   "indicatif",
+   "nbr_p",
+   "pers_2"
+  ],
+  "checkedB": [],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q53",
+  "lemma": "voir",
+  "orthoA": "voies",
+  "atomsA": [
+   "nbr_s",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif",
+   "pers_2"
+  ],
+  "orthoB": "voit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q54",
+  "lemma": "rue",
+  "orthoA": "rue",
+  "atomsA": [
+   "f",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "rues",
+  "atomsB": [
+   "p"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q55",
+  "lemma": "voir",
+  "orthoA": "vue",
+  "atomsA": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [
+   "f"
+  ],
+  "orthoB": "vus",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q56",
+  "lemma": "croire",
+  "orthoA": "croyez",
+  "atomsA": [
+   "impératif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "impératif"
+  ],
+  "orthoB": "croyiez",
+  "atomsB": [
+   "nbr_p",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "subjonctif"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q57",
+  "lemma": "croire",
+  "orthoA": "croyez",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [],
+  "orthoB": "croyiez",
+  "atomsB": [
+   "nbr_p",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "subjonctif"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q58",
+  "lemma": "oublier",
+  "orthoA": "oubliiez",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_2"
+  ],
+  "checkedA": [
+   "imparfait"
+  ],
+  "orthoB": "oublié",
+  "atomsB": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedB": [],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q59",
+  "lemma": "être",
+  "orthoA": "sois",
+  "atomsA": [
+   "nbr_s",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "pers_2",
+   "subjonctif"
+  ],
+  "orthoB": "soit",
+  "atomsB": [
+   "nbr_s",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "pers_3",
+   "subjonctif"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q60",
+  "lemma": "adorer",
+  "orthoA": "adore",
+  "atomsA": [
+   "nbr_s",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif",
+   "pers_3"
+  ],
+  "orthoB": "adores",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q61",
+  "lemma": "voir",
+  "orthoA": "vue",
+  "atomsA": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [
+   "f"
+  ],
+  "orthoB": "vues",
+  "atomsB": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "f",
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q62",
+  "lemma": "désoler",
+  "orthoA": "désolez",
+  "atomsA": [
+   "impératif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "impératif"
+  ],
+  "orthoB": "désolée",
+  "atomsB": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedB": [
+   "f"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q63",
+  "lemma": "désoler",
+  "orthoA": "désolai",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_1"
+  ],
+  "checkedA": [
+   "passé"
+  ],
+  "orthoB": "désolée",
+  "atomsB": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedB": [
+   "f"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q64",
+  "lemma": "croire",
+  "orthoA": "croient",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedA": [
+   "nbr_p",
+   "pers_3"
+  ],
+  "orthoB": "croit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q65",
+  "lemma": "oublier",
+  "orthoA": "oublier",
+  "atomsA": [
+   "infinitif"
+  ],
+  "checkedA": [
+   "infinitif"
+  ],
+  "orthoB": "oubliiez",
+  "atomsB": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_2"
+  ],
+  "checkedB": [
+   "imparfait"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q66",
+  "lemma": "être",
+  "orthoA": "serons",
+  "atomsA": [
+   "future",
+   "indicatif",
+   "nbr_p",
+   "pers_1"
+  ],
+  "checkedA": [],
+  "orthoB": "seront",
+  "atomsB": [
+   "future",
+   "indicatif",
+   "nbr_p",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q67",
+  "lemma": "partir",
+  "orthoA": "partie",
+  "atomsA": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [
+   "f"
+  ],
+  "orthoB": "partit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q68",
+  "lemma": "asseoir",
+  "orthoA": "assyez",
+  "atomsA": [
+   "impératif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "impératif"
+  ],
+  "orthoB": "assyiez",
+  "atomsB": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_2"
+  ],
+  "checkedB": [
+   "imparfait"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q69",
+  "lemma": "asseoir",
+  "orthoA": "assyez",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [],
+  "orthoB": "assyiez",
+  "atomsB": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_2"
+  ],
+  "checkedB": [
+   "imparfait"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q70",
+  "lemma": "être",
+  "orthoA": "soient",
+  "atomsA": [
+   "nbr_p",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif",
+   "pers_3",
+   "nbr_p"
+  ],
+  "orthoB": "sois",
+  "atomsB": [
+   "nbr_s",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "pers_2",
+   "subjonctif"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q71",
+  "lemma": "venir",
+  "orthoA": "venues",
+  "atomsA": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedA": [
+   "f",
+   "p"
+  ],
+  "orthoB": "venus",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q72",
+  "lemma": "avoir",
+  "orthoA": "aie",
+  "atomsA": [
+   "nbr_s",
+   "pers_1",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif"
+  ],
+  "orthoB": "aies",
+  "atomsB": [
+   "nbr_s",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "subjonctif",
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q73",
+  "lemma": "finir",
+  "orthoA": "finie",
+  "atomsA": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [
+   "f"
+  ],
+  "orthoB": "finis",
+  "atomsB": [
+   "impératif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "impératif"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q74",
+  "lemma": "finir",
+  "orthoA": "finie",
+  "atomsA": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [
+   "f"
+  ],
+  "orthoB": "finis",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q75",
+  "lemma": "avoir",
+  "orthoA": "aie",
+  "atomsA": [
+   "nbr_s",
+   "pers_1",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif"
+  ],
+  "orthoB": "aient",
+  "atomsB": [
+   "nbr_p",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "subjonctif",
+   "pers_3",
+   "nbr_p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q76",
+  "lemma": "être",
+  "orthoA": "fus",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_2"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "fut",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q77",
+  "lemma": "arriver",
+  "orthoA": "arrivai",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_1"
+  ],
+  "checkedA": [
+   "passé"
+  ],
+  "orthoB": "arrivés",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q78",
+  "lemma": "prendre",
+  "orthoA": "prennent",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedA": [
+   "nbr_p",
+   "pers_3"
+  ],
+  "orthoB": "prennes",
+  "atomsB": [
+   "nbr_s",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "pers_2",
+   "subjonctif"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q79",
+  "lemma": "préférer",
+  "orthoA": "préfèrent",
+  "atomsA": [
+   "nbr_p",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif",
+   "pers_3",
+   "nbr_p"
+  ],
+  "orthoB": "préfères",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q80",
+  "lemma": "finir",
+  "orthoA": "finies",
+  "atomsA": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedA": [
+   "f",
+   "p"
+  ],
+  "orthoB": "finis",
+  "atomsB": [
+   "impératif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "impératif"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q81",
+  "lemma": "finir",
+  "orthoA": "finies",
+  "atomsA": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedA": [
+   "f",
+   "p"
+  ],
+  "orthoB": "finis",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q82",
+  "lemma": "enfuir",
+  "orthoA": "enfui",
+  "atomsA": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "enfuie",
+  "atomsB": [
+   "nbr_s",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "subjonctif",
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q83",
+  "lemma": "rire",
+  "orthoA": "rient",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedA": [
+   "nbr_p",
+   "pers_3"
+  ],
+  "orthoB": "rit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "passé",
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q84",
+  "lemma": "avoir",
+  "orthoA": "eu",
+  "atomsA": [
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "eut",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3",
+   "passé"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q85",
+  "lemma": "avoir",
+  "orthoA": "eu",
+  "atomsA": [
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "eus",
+  "atomsB": [
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q86",
+  "lemma": "avoir",
+  "orthoA": "eu",
+  "atomsA": [
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "eue",
+  "atomsB": [
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedB": [
+   "f"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q87",
+  "lemma": "rire",
+  "orthoA": "rie",
+  "atomsA": [
+   "nbr_s",
+   "pers_1",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif"
+  ],
+  "orthoB": "rit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3",
+   "passé"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q88",
+  "lemma": "avoir",
+  "orthoA": "eu",
+  "atomsA": [
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "eues",
+  "atomsB": [
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "f",
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q89",
+  "lemma": "rire",
+  "orthoA": "ries",
+  "atomsA": [
+   "nbr_s",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif",
+   "pers_2"
+  ],
+  "orthoB": "rit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3",
+   "passé"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q90",
+  "lemma": "enfuir",
+  "orthoA": "enfui",
+  "atomsA": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "enfuient",
+  "atomsB": [
+   "indicatif",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q91",
+  "lemma": "avoir",
+  "orthoA": "eues",
+  "atomsA": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedA": [
+   "p"
+  ],
+  "orthoB": "eut",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3",
+   "passé"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q92",
+  "lemma": "réveiller",
+  "orthoA": "réveilliez",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_2"
+  ],
+  "checkedA": [
+   "imparfait"
+  ],
+  "orthoB": "réveillée",
+  "atomsB": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedB": [
+   "f"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q93",
+  "lemma": "enfuir",
+  "orthoA": "enfui",
+  "atomsA": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "enfuies",
+  "atomsB": [
+   "nbr_s",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "pers_2",
+   "subjonctif"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q94",
+  "lemma": "enfuir",
+  "orthoA": "enfuie",
+  "atomsA": [
+   "nbr_s",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "pers_3",
+   "subjonctif"
+  ],
+  "orthoB": "enfuit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3",
+   "passé"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q95",
+  "lemma": "dire",
+  "orthoA": "dite",
+  "atomsA": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [
+   "f"
+  ],
+  "orthoB": "dîtes",
+  "atomsB": [
+   "indicatif",
+   "nbr_p",
+   "passé",
+   "pers_2"
+  ],
+  "checkedB": [
+   "passé"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q96",
+  "lemma": "coûter",
+  "orthoA": "coûtez",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "coûté",
+  "atomsB": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedB": [],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q97",
+  "lemma": "conclure",
+  "orthoA": "conclu",
+  "atomsA": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "conclue",
+  "atomsB": [
+   "nbr_s",
+   "pers_1",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "subjonctif"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q98",
+  "lemma": "courir",
+  "orthoA": "courez",
+  "atomsA": [
+   "impératif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "impératif"
+  ],
+  "orthoB": "courrez",
+  "atomsB": [
+   "future",
+   "indicatif",
+   "nbr_p",
+   "pers_2"
+  ],
+  "checkedB": [
+   "future",
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q99",
+  "lemma": "courir",
+  "orthoA": "courez",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "courrez",
+  "atomsB": [
+   "future",
+   "indicatif",
+   "nbr_p",
+   "pers_2"
+  ],
+  "checkedB": [
+   "future",
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q100",
+  "lemma": "coûter",
+  "orthoA": "coûter",
+  "atomsA": [
+   "infinitif"
+  ],
+  "checkedA": [
+   "infinitif"
+  ],
+  "orthoB": "coûtez",
+  "atomsB": [
+   "indicatif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q101",
+  "lemma": "subir",
+  "orthoA": "subi",
+  "atomsA": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "subit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q102",
+  "lemma": "courir",
+  "orthoA": "courez",
+  "atomsA": [
+   "impératif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "courrai",
+  "atomsB": [
+   "future",
+   "indicatif",
+   "nbr_s",
+   "pers_1"
+  ],
+  "checkedB": [
+   "future"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q103",
+  "lemma": "courir",
+  "orthoA": "courez",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "courrai",
+  "atomsB": [
+   "future",
+   "indicatif",
+   "nbr_s",
+   "pers_1"
+  ],
+  "checkedB": [
+   "future"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q104",
+  "lemma": "enfuir",
+  "orthoA": "enfuie",
+  "atomsA": [
+   "nbr_s",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif",
+   "pers_3"
+  ],
+  "orthoB": "enfuient",
+  "atomsB": [
+   "indicatif",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q105",
+  "lemma": "étonner",
+  "orthoA": "étonnerais",
+  "atomsA": [
+   "conditionnel",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedA": [],
+  "orthoB": "étonnerait",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q106",
+  "lemma": "mener",
+  "orthoA": "mènent",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedA": [
+   "nbr_p",
+   "pers_3"
+  ],
+  "orthoB": "mènes",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q107",
+  "lemma": "envoyer",
+  "orthoA": "envoyiez",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_2"
+  ],
+  "checkedA": [
+   "imparfait"
+  ],
+  "orthoB": "envoyés",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q108",
+  "lemma": "passer",
+  "orthoA": "passai",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_1"
+  ],
+  "checkedA": [
+   "passé"
+  ],
+  "orthoB": "passées",
+  "atomsB": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p",
+   "f"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q109",
+  "lemma": "devenir",
+  "orthoA": "devins",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_1"
+  ],
+  "checkedA": [],
+  "orthoB": "devint",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q110",
+  "lemma": "mourir",
+  "orthoA": "mourait",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_3"
+  ],
+  "checkedA": [
+   "pers_3"
+  ],
+  "orthoB": "mourrais",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q111",
+  "lemma": "mourir",
+  "orthoA": "mourait",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_3"
+  ],
+  "checkedA": [
+   "pers_3"
+  ],
+  "orthoB": "mourrais",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel",
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q112",
+  "lemma": "consoler",
+  "orthoA": "consoler",
+  "atomsA": [
+   "infinitif"
+  ],
+  "checkedA": [
+   "infinitif"
+  ],
+  "orthoB": "consolez",
+  "atomsB": [
+   "impératif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q113",
+  "lemma": "bonnir",
+  "orthoA": "bonnie",
+  "atomsA": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [
+   "f"
+  ],
+  "orthoB": "bonnit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q114",
+  "lemma": "suffire",
+  "orthoA": "suffisais",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_1"
+  ],
+  "checkedA": [],
+  "orthoB": "suffisait",
+  "atomsB": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q115",
+  "lemma": "mourir",
+  "orthoA": "mourais",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_1"
+  ],
+  "checkedA": [],
+  "orthoB": "mourrais",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q116",
+  "lemma": "mourir",
+  "orthoA": "mourais",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_1"
+  ],
+  "checkedA": [],
+  "orthoB": "mourrais",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel",
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q117",
+  "lemma": "mourir",
+  "orthoA": "mourais",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_2"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "mourrais",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q118",
+  "lemma": "mourir",
+  "orthoA": "mourais",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_2"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "mourrais",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel",
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q119",
+  "lemma": "mourir",
+  "orthoA": "mourait",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_3"
+  ],
+  "checkedA": [
+   "pers_3"
+  ],
+  "orthoB": "mourrait",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel",
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q120",
+  "lemma": "navrer",
+  "orthoA": "navrez",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "navrée",
+  "atomsB": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedB": [
+   "f"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q121",
+  "lemma": "mourir",
+  "orthoA": "mourais",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_1"
+  ],
+  "checkedA": [],
+  "orthoB": "mourrait",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel",
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q122",
+  "lemma": "mourir",
+  "orthoA": "mourais",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_2"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "mourrait",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel",
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q123",
+  "lemma": "mourir",
+  "orthoA": "mouraient",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_3"
+  ],
+  "checkedA": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "orthoB": "mourrais",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q124",
+  "lemma": "mourir",
+  "orthoA": "mouraient",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_3"
+  ],
+  "checkedA": [
+   "nbr_p",
+   "pers_3"
+  ],
+  "orthoB": "mourrais",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2",
+   "conditionnel"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q125",
+  "lemma": "mourir",
+  "orthoA": "mourons",
+  "atomsA": [
+   "impératif",
+   "nbr_p",
+   "pers_1",
+   "présent"
+  ],
+  "checkedA": [
+   "impératif"
+  ],
+  "orthoB": "mourront",
+  "atomsB": [
+   "future",
+   "indicatif",
+   "nbr_p",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3",
+   "future",
+   "nbr_p"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q126",
+  "lemma": "mourir",
+  "orthoA": "mourons",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_1",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_1"
+  ],
+  "orthoB": "mourront",
+  "atomsB": [
+   "future",
+   "indicatif",
+   "nbr_p",
+   "pers_3"
+  ],
+  "checkedB": [
+   "future",
+   "nbr_p",
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q127",
+  "lemma": "distraire",
+  "orthoA": "distraient",
+  "atomsA": [
+   "nbr_p",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "pers_3",
+   "nbr_p",
+   "subjonctif"
+  ],
+  "orthoB": "distrait",
+  "atomsB": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedB": [],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q128",
+  "lemma": "mourir",
+  "orthoA": "mourons",
+  "atomsA": [
+   "impératif",
+   "nbr_p",
+   "pers_1",
+   "présent"
+  ],
+  "checkedA": [
+   "impératif"
+  ],
+  "orthoB": "mourrons",
+  "atomsB": [
+   "future",
+   "indicatif",
+   "nbr_p",
+   "pers_1"
+  ],
+  "checkedB": [
+   "pers_1",
+   "future"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q129",
+  "lemma": "mourir",
+  "orthoA": "mourons",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_1",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_1"
+  ],
+  "orthoB": "mourrons",
+  "atomsB": [
+   "future",
+   "indicatif",
+   "nbr_p",
+   "pers_1"
+  ],
+  "checkedB": [
+   "future",
+   "pers_1"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q130",
+  "lemma": "mourir",
+  "orthoA": "mouraient",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_3"
+  ],
+  "checkedA": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "orthoB": "mourrait",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel",
+   "pers_3",
+   "nbr_s"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q131",
+  "lemma": "mourir",
+  "orthoA": "mourait",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_3"
+  ],
+  "checkedA": [
+   "pers_3"
+  ],
+  "orthoB": "mourraient",
+  "atomsB": [
+   "conditionnel",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel",
+   "nbr_p",
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q132",
+  "lemma": "mourir",
+  "orthoA": "mourais",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_1"
+  ],
+  "checkedA": [],
+  "orthoB": "mourraient",
+  "atomsB": [
+   "conditionnel",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "nbr_p",
+   "pers_3",
+   "conditionnel"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q133",
+  "lemma": "mourir",
+  "orthoA": "mourais",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_2"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "mourraient",
+  "atomsB": [
+   "conditionnel",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel",
+   "nbr_p",
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q134",
+  "lemma": "requérir",
+  "orthoA": "requiers",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedA": [],
+  "orthoB": "requiert",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q135",
+  "lemma": "avoir",
+  "orthoA": "eus",
+  "atomsA": [
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedA": [
+   "p"
+  ],
+  "orthoB": "eut",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q136",
+  "lemma": "désoler",
+  "orthoA": "désolez",
+  "atomsA": [
+   "impératif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "impératif"
+  ],
+  "orthoB": "désolés",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q137",
+  "lemma": "mourir",
+  "orthoA": "mouraient",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_3"
+  ],
+  "checkedA": [
+   "nbr_p",
+   "pers_3"
+  ],
+  "orthoB": "mourraient",
+  "atomsB": [
+   "conditionnel",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel",
+   "pers_3",
+   "nbr_p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q138",
+  "lemma": "envoyer",
+  "orthoA": "envoyiez",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_2"
+  ],
+  "checkedA": [
+   "imparfait"
+  ],
+  "orthoB": "envoyées",
+  "atomsB": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p",
+   "f"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q139",
+  "lemma": "subir",
+  "orthoA": "subies",
+  "atomsA": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedA": [
+   "f",
+   "p"
+  ],
+  "orthoB": "subit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q140",
+  "lemma": "requérir",
+  "orthoA": "requiert",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_3"
+  ],
+  "orthoB": "requière",
+  "atomsB": [
+   "nbr_s",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "subjonctif",
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q141",
+  "lemma": "avoir",
+  "orthoA": "eue",
+  "atomsA": [
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [
+   "f"
+  ],
+  "orthoB": "eut",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q142",
+  "lemma": "clore",
+  "orthoA": "close",
+  "atomsA": [
+   "nbr_s",
+   "pers_1",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif"
+  ],
+  "orthoB": "closes",
+  "atomsB": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p",
+   "f"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q143",
+  "lemma": "clore",
+  "orthoA": "close",
+  "atomsA": [
+   "nbr_s",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif",
+   "pers_3"
+  ],
+  "orthoB": "closes",
+  "atomsB": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p",
+   "f"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q144",
+  "lemma": "destiner",
+  "orthoA": "destinez",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "destinés",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q145",
+  "lemma": "exclure",
+  "orthoA": "exclue",
+  "atomsA": [
+   "nbr_s",
+   "pers_1",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif"
+  ],
+  "orthoB": "exclus",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_2"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q146",
+  "lemma": "exclure",
+  "orthoA": "exclue",
+  "atomsA": [
+   "nbr_s",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif",
+   "pers_3"
+  ],
+  "orthoB": "exclus",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_2"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q147",
+  "lemma": "avoir",
+  "orthoA": "eues",
+  "atomsA": [
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedA": [
+   "p",
+   "f"
+  ],
+  "orthoB": "eut",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q148",
+  "lemma": "métis",
+  "orthoA": "métis",
+  "atomsA": [
+   "m"
+  ],
+  "checkedA": [],
+  "orthoB": "métisse",
+  "atomsB": [
+   "f",
+   "s"
+  ],
+  "checkedB": [
+   "f"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q149",
+  "lemma": "métis",
+  "orthoA": "métis",
+  "atomsA": [
+   "m"
+  ],
+  "checkedA": [],
+  "orthoB": "métisses",
+  "atomsB": [
+   "f",
+   "p"
+  ],
+  "checkedB": [
+   "f",
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q150",
+  "lemma": "conclure",
+  "orthoA": "conclue",
+  "atomsA": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [
+   "f"
+  ],
+  "orthoB": "conclues",
+  "atomsB": [
+   "nbr_s",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "subjonctif",
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q151",
+  "lemma": "exclure",
+  "orthoA": "excluent",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "orthoB": "exclus",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_2"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q152",
+  "lemma": "exclure",
+  "orthoA": "exclues",
+  "atomsA": [
+   "nbr_s",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif",
+   "présent",
+   "pers_2"
+  ],
+  "orthoB": "exclus",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_2"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q153",
+  "lemma": "destiner",
+  "orthoA": "destinez",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "destinées",
+  "atomsB": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p",
+   "f"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q154",
+  "lemma": "ouïr",
+  "orthoA": "oie",
+  "atomsA": [
+   "nbr_s",
+   "pers_1",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif"
+  ],
+  "orthoB": "ois",
+  "atomsB": [
+   "impératif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "impératif"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q155",
+  "lemma": "mourir",
+  "orthoA": "mouriez",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_2"
+  ],
+  "checkedA": [
+   "imparfait"
+  ],
+  "orthoB": "mourriez",
+  "atomsB": [
+   "conditionnel",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q156",
+  "lemma": "sceller",
+  "orthoA": "scellez",
+  "atomsA": [
+   "impératif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "impératif"
+  ],
+  "orthoB": "scellées",
+  "atomsB": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p",
+   "f"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q157",
+  "lemma": "requérir",
+  "orthoA": "requiers",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedA": [],
+  "orthoB": "requièrent",
+  "atomsB": [
+   "indicatif",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q158",
+  "lemma": "avoir",
+  "orthoA": "eue",
+  "atomsA": [
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [
+   "f"
+  ],
+  "orthoB": "eus",
+  "atomsB": [
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q159",
+  "lemma": "envoyer",
+  "orthoA": "envoyai",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_1"
+  ],
+  "checkedA": [
+   "passé"
+  ],
+  "orthoB": "envoyiez",
+  "atomsB": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_2"
+  ],
+  "checkedB": [
+   "imparfait"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q160",
+  "lemma": "pratiquer",
+  "orthoA": "pratiquaient",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_3"
+  ],
+  "checkedA": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "orthoB": "pratiquais",
+  "atomsB": [
+   "imparfait",
+   "indicatif",
+   "nbr_s",
+   "pers_1"
+  ],
+  "checkedB": [],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q161",
+  "lemma": "abréger",
+  "orthoA": "abrégeai",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_1"
+  ],
+  "checkedA": [
+   "passé"
+  ],
+  "orthoB": "abrégez",
+  "atomsB": [
+   "impératif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q162",
+  "lemma": "avoir",
+  "orthoA": "eues",
+  "atomsA": [
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedA": [
+   "p",
+   "f"
+  ],
+  "orthoB": "eus",
+  "atomsB": [
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q163",
+  "lemma": "distraire",
+  "orthoA": "distraient",
+  "atomsA": [
+   "nbr_p",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "pers_3",
+   "subjonctif",
+   "nbr_p"
+  ],
+  "orthoB": "distraits",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q164",
+  "lemma": "suffire",
+  "orthoA": "suffiraient",
+  "atomsA": [
+   "conditionnel",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "orthoB": "suffirais",
+  "atomsB": [
+   "conditionnel",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedB": [],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q165",
+  "lemma": "mourir",
+  "orthoA": "mourions",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_1"
+  ],
+  "checkedA": [],
+  "orthoB": "mourrions",
+  "atomsB": [
+   "conditionnel",
+   "nbr_p",
+   "pers_1",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q166",
+  "lemma": "extraire",
+  "orthoA": "extraient",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "orthoB": "extraits",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q167",
+  "lemma": "élire",
+  "orthoA": "élus",
+  "atomsA": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedA": [
+   "p"
+  ],
+  "orthoB": "élut",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q168",
+  "lemma": "traire",
+  "orthoA": "traie",
+  "atomsA": [
+   "nbr_s",
+   "pers_1",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif"
+  ],
+  "orthoB": "traits",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q169",
+  "lemma": "distraire",
+  "orthoA": "distraie",
+  "atomsA": [
+   "nbr_s",
+   "pers_3",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "pers_3",
+   "subjonctif"
+  ],
+  "orthoB": "distraits",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q170",
+  "lemma": "distraire",
+  "orthoA": "distraies",
+  "atomsA": [
+   "nbr_s",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif",
+   "pers_2"
+  ],
+  "orthoB": "distraits",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q171",
+  "lemma": "avoir",
+  "orthoA": "eue",
+  "atomsA": [
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [
+   "f"
+  ],
+  "orthoB": "eues",
+  "atomsB": [
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "f",
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q172",
+  "lemma": "courir",
+  "orthoA": "couriez",
+  "atomsA": [
+   "nbr_p",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif"
+  ],
+  "orthoB": "courriez",
+  "atomsB": [
+   "conditionnel",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "conditionnel"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q173",
+  "lemma": "régner",
+  "orthoA": "régnions",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_1"
+  ],
+  "checkedA": [
+   "imparfait"
+  ],
+  "orthoB": "régnons",
+  "atomsB": [
+   "indicatif",
+   "nbr_p",
+   "pers_1",
+   "présent"
+  ],
+  "checkedB": [],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q174",
+  "lemma": "ouïr",
+  "orthoA": "oie",
+  "atomsA": [
+   "nbr_s",
+   "pers_1",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif"
+  ],
+  "orthoB": "oit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q175",
+  "lemma": "entêter",
+  "orthoA": "entêtai",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_1"
+  ],
+  "checkedA": [
+   "passé"
+  ],
+  "orthoB": "entêtez",
+  "atomsB": [
+   "indicatif",
+   "nbr_p",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q176",
+  "lemma": "clore",
+  "orthoA": "closent",
+  "atomsA": [
+   "indicatif",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "orthoB": "closes",
+  "atomsB": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q177",
+  "lemma": "ceindre",
+  "orthoA": "ceins",
+  "atomsA": [
+   "impératif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "impératif"
+  ],
+  "orthoB": "ceints",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q178",
+  "lemma": "bleuir",
+  "orthoA": "bleuies",
+  "atomsA": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedA": [
+   "f",
+   "p"
+  ],
+  "orthoB": "bleuis",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_2"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q179",
+  "lemma": "dégourdir",
+  "orthoA": "dégourdis",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedA": [],
+  "orthoB": "dégourdit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q180",
+  "lemma": "décrépir",
+  "orthoA": "décrépis",
+  "atomsA": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedA": [
+   "p"
+  ],
+  "orthoB": "décrépit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q181",
+  "lemma": "circoncire",
+  "orthoA": "circoncise",
+  "atomsA": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [
+   "f"
+  ],
+  "orthoB": "circoncisent",
+  "atomsB": [
+   "indicatif",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q182",
+  "lemma": "reluire",
+  "orthoA": "relui",
+  "atomsA": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [],
+  "orthoB": "reluis",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q183",
+  "lemma": "circonscrire",
+  "orthoA": "circonscris",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_1"
+  ],
+  "orthoB": "circonscrits",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q184",
+  "lemma": "épargner",
+  "orthoA": "épargnions",
+  "atomsA": [
+   "imparfait",
+   "indicatif",
+   "nbr_p",
+   "pers_1"
+  ],
+  "checkedA": [
+   "imparfait"
+  ],
+  "orthoB": "épargnons",
+  "atomsB": [
+   "impératif",
+   "nbr_p",
+   "pers_1",
+   "présent"
+  ],
+  "checkedB": [
+   "impératif"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q185",
+  "lemma": "refondre",
+  "orthoA": "refond",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_3"
+  ],
+  "orthoB": "refonds",
+  "atomsB": [
+   "impératif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q186",
+  "lemma": "rancir",
+  "orthoA": "rancis",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "rancit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_3"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q187",
+  "lemma": "retranscrire",
+  "orthoA": "retranscris",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedA": [],
+  "orthoB": "retranscrite",
+  "atomsB": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedB": [
+   "f"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q188",
+  "lemma": "retranscrire",
+  "orthoA": "retranscris",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "pers_1",
+   "présent"
+  ],
+  "checkedA": [],
+  "orthoB": "retranscrites",
+  "atomsB": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "f",
+   "p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q189",
+  "lemma": "déceler",
+  "orthoA": "décèle",
+  "atomsA": [
+   "impératif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "impératif"
+  ],
+  "orthoB": "décèlent",
+  "atomsB": [
+   "indicatif",
+   "nbr_p",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3",
+   "nbr_p"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q190",
+  "lemma": "défringuer",
+  "orthoA": "défringue",
+  "atomsA": [
+   "impératif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedA": [
+   "impératif"
+  ],
+  "orthoB": "défringues",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_2",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q191",
+  "lemma": "brouir",
+  "orthoA": "brouis",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_1"
+  ],
+  "checkedA": [],
+  "orthoB": "brouit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q192",
+  "lemma": "bleuir",
+  "orthoA": "bleuie",
+  "atomsA": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedA": [
+   "f"
+  ],
+  "orthoB": "bleuis",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_2"
+  ],
+  "checkedB": [
+   "pers_2"
+  ],
+  "reviewed": true,
+  "clean": true
+ },
+ {
+  "id": "q193",
+  "lemma": "clapir",
+  "orthoA": "clapis",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_2"
+  ],
+  "checkedA": [
+   "pers_2"
+  ],
+  "orthoB": "clapit",
+  "atomsB": [
+   "indicatif",
+   "nbr_s",
+   "pers_3",
+   "présent"
+  ],
+  "checkedB": [
+   "pers_3"
+  ],
+  "reviewed": true,
+  "clean": true
+ }
+]

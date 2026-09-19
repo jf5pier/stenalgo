@@ -10447,8 +10447,8 @@ aura	oRa	avoir	VER	NOM,AUX,VER			ind:fut:3s;	o|R_a	au|r_a	75.14	187.56
 aura	oRa	avoir	AUX	NOM,AUX,VER			ind:fut:3s;	o|R_a	au|r_a	39.86	39.72
 aura	oRa	aura	NOM	NOM,AUX,VER	f	s		o|R_a	au|r_a	7.16	12.16
 aurai	oRe	avoir	VER	AUX,VER			ind:fut:1s;	o|R_e	au|r_ai	32.36	78.85
-aurai	oRE	avoir	AUX	AUX,VER			ind:fut:1s;	o|R_E	au|r_ai	15.54	32.96
-aurai	oRE	aurai	AUX	AUX,VER			inf;	o|R_E	au|r_ai	0.0	0.01
+aurai	oRe	avoir	AUX	AUX,VER			ind:fut:1s;	o|R_e	au|r_ai	15.54	32.96
+aurai	oRe	aurai	AUX	AUX,VER			inf;	o|R_e	au|r_ai	0.0	0.01
 auraient	oRE	avoir	AUX	AUX,VER			cnd:pre:3p;	o|R_E	au|r_aient	69.53	34.48
 auraient	oRE	avoir	VER	AUX,VER			cnd:pre:3p;	o|R_E	au|r_aient	14.32	6.81
 aurais	oRE	avoir	AUX	AUX,VER			cnd:pre:2s;	o|R_E	au|r_ais	236.35	354.36
@@ -47999,7 +47999,7 @@ enfoncés	@f§se	enfoncer	VER	VER,ADJ	m	p	par:pas;	@|f_§|s_e_#	en|f_on|c_é_s	4
 enfoncés	@f§se	enfoncé	ADJ	VER,ADJ	m	p		@|f_§|s_e_#	en|f_on|c_é_s	1.28	0.22
 enfonça	@f§sa	enfoncer	VER	VER			ind:pas:3s;	@|f_§|s_a	en|f_on|ç_a	9.19	0.15
 enfonçage	@f§saZ	enfonçage	NOM	NOM	m	s		@|f_§|s_a_Z	en|f_on|ç_a_ge	0.07	0.0
-enfonçai	@f§se	enfoncer	VER	VER			ind:pas:1s;	@|f_§|s_E	en|f_on|ç_ai	1.49	0.01
+enfonçai	@f§se	enfoncer	VER	VER			ind:pas:1s;	@|f_§|s_e	en|f_on|ç_ai	1.49	0.01
 enfonçaient	@f§sE	enfoncer	VER	VER			ind:imp:3p;	@|f_§|s_E	en|f_on|ç_aient	4.39	0.04
 enfonçais	@f§sE	enfoncer	VER	VER			ind:imp:1s;	@|f_§|s_E	en|f_on|ç_ais	1.89	0.34
 enfonçait	@f§sE	enfoncer	VER	VER			ind:imp:3s;	@|f_§|s_E	en|f_on|ç_ait	11.76	0.4
@@ -50077,7 +50077,7 @@ envenimés	@v°nime	envenimer	VER	VER	m	p	par:pas;	@|v_°|n_i|m_e_#	en|v_e|n_i|m
 envergure	@vERgyR	envergure	NOM	NOM	f	s		@|v_E_R|g_y_R_#	en|v_e_r|g_u_r_e	5.34	1.66
 enverguée	@vERge	enverguer	VER	VER	f	s	par:pas;	@|v_E_R|g_e_#	en|v_e_r|gu_é_e	0.07	0.0
 enverra	@vERa	envoyer	VER	VER			ind:fut:3s;	@|v_E|R_a	en|v_e|rr_a	2.03	5.89
-enverrai	@vERe	envoyer	VER	VER			ind:fut:1s;	@|v_E|R_E	en|v_e|rr_ai	2.7	10.43
+enverrai	@vERe	envoyer	VER	VER			ind:fut:1s;	@|v_E|R_e	en|v_e|rr_ai	2.7	10.43
 enverraient	@vERE	envoyer	VER	VER			cnd:pre:3p;	@|v_E|R_E	en|v_e|rr_aient	0.34	0.2
 enverrais	@vERE	envoyer	VER	VER			cnd:pre:1s;cnd:pre:2s;	@|v_E|R_E	en|v_e|rr_ais	0.41	1.68
 enverrait	@vERE	envoyer	VER	VER			cnd:pre:3s;	@|v_E|R_E	en|v_e|rr_ait	2.77	1.77
@@ -79697,7 +79697,7 @@ minent	min	miner	VER	VER			ind:pre:3p;	m_i_n_#	m_i_n_ent	0.2	0.02
 miner	mine	miner	VER	VER			inf;	m_i|n_e	m_i|n_er	1.35	0.58
 minera	min°Ra	miner	VER	VER			ind:fut:3s;	m_i|n_°|R_a	m_i|n_e|r_a	0.0	0.02
 minerai	min°RE	minerai	NOM	VER,NOM	m	s		m_i|n_°|R_E	m_i|n_e|r_ai	0.95	1.21
-minerai	min°RE	miner	VER	VER,NOM			ind:fut:1s;	m_i|n_°|R_E	m_i|n_e|r_ai	0.0	0.03
+minerai	min°Re	miner	VER	VER,NOM			ind:fut:1s;	m_i|n_°|R_e	m_i|n_e|r_ai	0.0	0.03
 minerais	min°RE	minerai	NOM	NOM	m	p		m_i|n_°|R_E_#	m_i|n_e|r_ai_s	0.07	0.17
 minerval	minERval	minerval	NOM	NOM	m	s		m_i|n_E_R|v_a_l	m_i|n_e_r|v_a_l	0.0	0.01
 minerve	minERv	minerve	NOM	NOM	f	s		m_i|n_E_R_v_#	m_i|n_e_r_v_e	0.07	0.69
@@ -107090,7 +107090,7 @@ resapent	R°sap	resaper	VER	VER			ind:pre:3p;	R_°|s_a_p_#	r_e|s_a_p_ent	0.07	0.
 resapée	R°sape	resaper	VER	VER	f	s	par:pas;	R_°|s_a|p_e_#	r_e|s_a|p_é_e	0.14	0.0
 resapés	R°sape	resaper	VER	VER	m	p	par:pas;	R_°|s_a|p_e_#	r_e|s_a|p_é_s	0.07	0.0
 rescaper	REskape	rescaper	VER	VER			inf;	R_E_s|k_a|p_e	r_e_s|c_a|p_er	0.07	0.0
-rescapes	REskape	rescaper	VER	VER			ind:pre:2s;	R_E_s|k_a|p_e_#	r_e_s|c_a|p_e_s	0.0	0.03
+rescapes	REskap	rescaper	VER	VER			ind:pre:2s;	R_E_s|k_a_p_#_#	r_e_s|c_a_p_e_s	0.0	0.03
 rescapé	REskape	rescapé	NOM	VER,ADJ,NOM	m	s		R_E_s|k_a|p_e	r_e_s|c_a|p_é	1.69	0.89
 rescapé	REskape	rescaper	VER	VER,ADJ,NOM	m	s	par:pas;	R_E_s|k_a|p_e	r_e_s|c_a|p_é	1.08	0.23
 rescapé	REskape	rescapé	ADJ	VER,ADJ,NOM	m	s		R_E_s|k_a|p_e	r_e_s|c_a|p_é	0.34	0.05
@@ -115582,7 +115582,7 @@ sequins	s°k5	sequin	NOM	NOM	m	p		s_°|k_5_#	s_e|qu_in_s	0.2	0.28
 sera	s°Ra	être	VER	AUX,VER			ind:fut:3s;	s_°|R_a	s_e|r_a	161.82	478.03
 sera	s°Ra	être	AUX	AUX,VER			ind:fut:3s;	s_°|R_a	s_e|r_a	66.69	159.41
 serai	s°Re	être	VER	AUX,VER			ind:fut:1s;	s_°|R_e	s_e|r_ai	39.46	140.69
-serai	s°RE	être	AUX	AUX,VER			ind:fut:1s;	s_°|R_E	s_e|r_ai	10.2	28.15
+serai	s°Re	être	AUX	AUX,VER			ind:fut:1s;	s_°|R_e	s_e|r_ai	10.2	28.15
 seraient	s°RE	être	VER	AUX,VER			cnd:pre:3p;	s_°|R_E	s_e|r_aient	28.72	15.68
 seraient	s°RE	être	AUX	AUX,VER			cnd:pre:3p;	s_°|R_E	s_e|r_aient	30.81	10.47
 serais	s°RE	être	VER	AUX,VER			cnd:pre:1s;cnd:pre:2s;	s_°|R_E	s_e|r_ais	39.59	86.94
@@ -122610,7 +122610,7 @@ tapant	tap@	tapant	ADJ	ADJ,VER	m	s		t_a|p_@	t_a|p_ant	0.41	0.06
 tapante	tap@t	tapant	ADJ	ADJ	f	s		t_a|p_@_t_#	t_a|p_an_t_e	0.0	0.02
 tapantes	tap@t	tapant	ADJ	ADJ	f	p		t_a|p_@_t_#	t_a|p_an_t_es	0.27	0.49
 tapas	tapas	tapa	NOM	NOM,VER	m	p		t_a|p_a_s	t_a|p_a_s	0.0	0.15
-tapas	tapas	taper	VER	NOM,VER			ind:pas:2s;	t_a|p_a_s	t_a|p_a_s	0.0	0.01
+tapas	tapa	taper	VER	NOM,VER			ind:pas:2s;	t_a|p_a	t_a|p_as	0.0	0.01
 tape	tap	taper	VER	NOM,VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;sub:pre:1s;sub:pre:3s;	t_a_p_#	t_a_p_e	11.89	18.45
 tape	tap	tape	NOM	NOM,VER	f	s		t_a_p_#	t_a_p_e	0.14	2.31
 tape	tap	tap	NOM	NOM,VER	f	s		t_a_p_#	t_a_p_e	5.74	1.37

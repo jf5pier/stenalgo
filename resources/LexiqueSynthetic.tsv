@@ -50914,8 +50914,8 @@ surprissent	syRpRis	surprendre	VER	VER			sub:imp:3p;	s_y_R|p_R_i_s_#	s_u_r|p_r_i
 attraits	atRE	attraire	VER	VER	m	p	par:pas;	a|t_R_E	a|tt_r_ait_s	0.0	0.0	synthetic
 attraite	atRE	attraire	VER	VER	f	s	par:pas;	a|t_R_E	a|tt_r_ait_e	0.0	0.0	synthetic
 attraites	atRE	attraire	VER	VER	f	p	par:pas;	a|t_R_E	a|tt_r_ait_es	0.0	0.0	synthetic
-portraite	pORtRE	portraire	VER	VER	f	s	par:pas;	p_O_R|t_R_E	p_o_r|t_r_ait_e	0.0	0.0	synthetic
-portraites	pORtRE	portraire	VER	VER	f	p	par:pas;	p_O_R|t_R_E	p_o_r|t_r_ait_es	0.0	0.0	synthetic
+portraite	pORtREt	portraire	VER	VER	f	s	par:pas;	p_O_R|t_R_E_t_#	p_o_r|t_r_ai_t_e	0.0	0.0	synthetic
+portraites	pORtREt	portraire	VER	VER	f	p	par:pas;	p_O_R|t_R_E_t_#	p_o_r|t_r_ai_t_es	0.0	0.0	synthetic
 portrais	pORtRE	portraire	VER	VER			ind:pre:1s;	p_O_R|t_R_E	p_o_r|t_r_ais	0.0	0.0	synthetic
 portrais	pORtRE	portraire	VER	VER			ind:pre:2s;	p_O_R|t_R_E	p_o_r|t_r_ais	0.0	0.0	synthetic
 portrayons	pORtREj§	portraire	VER	VER			ind:pre:1p;	p_O_R|t_R_Ej|§	p_o_r|t_r_ay|ons	0.0	0.0	synthetic
