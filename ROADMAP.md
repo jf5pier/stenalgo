@@ -27,6 +27,116 @@ guaranteed to stay available long-term.
 A third, smaller problem is new to this document: **prefix formation** (re-, dé-, co-…), which
 has no code and no roadmap slot yet.
 
+## Status update (2026-09-20)
+
+Written to keep this file honest without a full rewrite: the "Current state" audit and
+"Roadmap" sections below are dated 2026-09-15/17/18 and describe the plan **as originally
+conceived**; a lot has since shipped, pivoted, or been discarded. `ATOMIC_KEYPRESS_REWIRE_PLAN.md`
+is the authoritative, currently-maintained plan for the same-lemma and lemma-homophone tracks —
+this section summarizes where things actually stand and points there for detail.
+
+### What was done
+
+- **Phase 0 (measure)** — `src/ambiguitychecker.py` built; walked every n≥5 lemma-homophone
+  overflow cluster by hand with the user, producing `resources/ambiguityIgnoreList.tsv` (79
+  curated exclusions: archaic/loanword/unpopular-spelling/sociolect/data-artifact). Overflow
+  clusters dropped 58 → 20 (max size 8 → 7).
+- **Phase 1 (cross-category clash)** — `detectCrossCategoryClash` implemented and tested; the
+  `aller` NOM/VER-style gap is now caught mechanically.
+- **Elicitation-first pivot (2026-09-18)** — see "tried and discarded" below: the original
+  Phase 2 plan (solver picks features, then shape constraints to make it learnable) was
+  replaced with **Phase E** (elicit the user's own marker choices pair-by-pair) → **Phase G**
+  (group elicited markers onto abstract keypresses) → **Phase P** (physical realization).
+  `ATOMIC_KEYPRESS_REWIRE_PLAN.md` is the authoritative record.
+- **Phase E (elicitation)** — E0-E6 complete: questionnaire built, published as a web
+  Artifact, fully answered by the user (several revisions as lexicon bugs were found and
+  fixed live), validated, persisted as `resolved_press_sets.json`.
+- **Phase G (grouping)** — abstract keypress grouping solved for the same-lemma track;
+  greedy result later proven exactly optimal via an exact CP-SAT solver
+  (`src/phasegsat.py`); model 2 (`pers_3` default) adopted after a two-model comparison.
+- **Phase P milestone 1 (physical realization, same-lemma track)** —
+  `realizeKeypressGroupsAsExtraStroke` (`src/ambiguitychecker.py`): all 6 Phase G groups now
+  have a real physical coda-bank key, **zero same-`lemmeGramCat` collisions left**, verified
+  against the full ~136k-word/47,799-group lexicon. Output artifact:
+  `phase_p_keypress_realization.json`.
+- **The `*`/`#` lemma-homophone track** (bucket 2 cross-category clash + bucket 3 cross-lemma
+  collision) — designed and fully implemented 2026-09-20, closing out this roadmap's original
+  Phase 2/4 lemma-homophone goals:
+  - `decideStarHashMark` — pairwise marking decision (homograph exemption → spelling-doublet
+    exemption → per-pair overrides → 10x frequency-ratio exemption → same-`gramCat`
+    per-pair-optimal → `GRAMCAT_PRIORITY` categorical rule), within **0.2–0.5% of the
+    theoretical optimum** keystroke cost.
+  - N-ary generalization (`rankHomophoneCluster`/`assignStarHashMarks`/`assignStarHashCombos`)
+    — resolves the "clusters with ≥5 members" open question (§7 below): escalates past the
+    4-reading single-stroke budget with repeated `*#`/`*#` extra syllables, unbounded.
+  - Physical realization on the Starboard's reserved keys: `*` = key 10, `#` = key 15
+    (`STAR_KEY`/`HASH_KEY`), validated against the live lexicon (biggest real cluster: 7
+    readings, the `au`/`eau`/`oh`/`haut`/`ho`/`ô`/`aux` set).
+  - Composition with Phase P's own extra stroke
+    (`groupHomophonesByReservedStroke`/`composeReservedKeyStrokes`) — the two tracks
+    concatenate safely (structurally disjoint key ranges); validated zero-collision against
+    1079 real groups in the elicited population.
+  - Rule 3 (spelling-doublet exemption), correctly sourced from `resources/reform1990.tsv`
+    (`loadReform1990DoubletPairs`) rather than the disproven heuristic.
+
+### What was tried and discarded
+
+- **The original Phase 2 plan itself** — CP-SAT/greedy solver (`satOptimizeDiscriminator`/
+  `assignDiscriminatorKeypresses`) picks each word's discriminating features, then shape
+  constraints around the outcome to make it learnable. Discarded 2026-09-18: a keypress's
+  meaning under that coloring was "whatever was cheapest that run," not a fixed, learnable
+  slot. Replaced by elicitation-first (the user's own reflexes are the spec; only the
+  grouping of elicited markers is optimized afterward).
+- **`assignDiscriminatorKeypresses`** (`src/greedyoptimizer.py`) — fully implemented,
+  unit-tested, but orphaned (never wired into `dictionary.py`); superseded by elicitation for
+  the same-lemma track (elicitation's default-form answers replace `FEATURE_PRIORITY`'s job
+  there). Not fully dead: `FEATURE_PRIORITY` still does live work in
+  `_selectCanonicalIndex`/the `*`/`#` track's own no-stroke pick.
+  `GRAMCAT_PRIORITY` (new, same file) mirrors its convention for the lemma-homophone track.
+- **The original `findKeypressGroupRealizations`** — merged a discriminator into a word's
+  *last existing* stroke and tested each Phase G group in isolation. Discarded during Phase P
+  execution: produced false collisions and false non-collisions once a word needed more than
+  one group at once. Replaced by `realizeKeypressGroupsAsExtraStroke` (brand-new trailing
+  stroke, per-word multi-group composition).
+- **Rule 3 v1 — "many collisions in one lemma pair ⇒ probably a spelling-reform doublet."**
+  Tested against real Google Books Ngram data on the 5 largest examples of the pattern found;
+  only 2 of 5 were genuine doublets (the other 3 are distinct lexemes that happen to be
+  near-total homophones). Disproven and discarded 2026-09-20, replaced by directly
+  cross-referencing `resources/reform1990.tsv` (a real, already-sourced list already in-repo).
+- **An early "mark NOM" conclusion for the NOM/VER category-pair type** — fit on bucket-3-alone
+  raw data, dominated by easy/extreme-ratio pairs. Reversed once the ratio-10x exemption
+  isolated the actual hard residual: the regret-optimal direction is "mark VER." Superseded;
+  discard if seen in older notes.
+- **30x/100x thresholds for the ratio exemption** — tested as alternatives to 10x. Both worse
+  on every metric measured (higher total gap%, and both produce the same 3-cycle in the
+  `GramCat` ranking that 10x avoids). 10x confirmed as the correct choice, not a compromise.
+
+### What's left to do
+
+- **Wire the `*`/`#` pipeline into `dictionary.py`'s actual persisted output.** Everything from
+  `decideStarHashMark` through `composeReservedKeyStrokes` is a validated pure-function
+  pipeline, exercised only by unit tests and ad hoc scripts — not yet called from
+  `dictionary.py`. This is what finally resolves open question 4 (`theory.tsv`'s fate) below.
+  Bigger than a small follow-up; previously deferred for this reason.
+- Regenerate `MARKING_OVERRIDES` (the ~51-pair per-pair override list) from a single canonical
+  run purely at the 10x threshold — currently built from a top-10-by-regret cross-check
+  against 30x/100x, not one clean run.
+- Confirm (not just assume) that bucket 2 and bucket 3 share one physical marking mechanism —
+  implemented that way, but the underlying design question was never explicitly re-confirmed.
+- The `-er`/`-ers` noun wishlist item (reuse `Infinitif`/`Infinitif:p` atomic markers instead of
+  a generic `*`/`#` mark for a whole NOM/VER homophone sub-class) — raised, not sized or
+  verified against real data.
+- **Phase 3** (re-validate/version the phoneme layer, layout freeze) — not started.
+- **Phase 5** (automatic theory-level briefs) — not started.
+- **Phase 6** (dictionary densification: paradigm tables, compositional generation, prefixes,
+  dual-target Plover/Javelin architecture) — not started.
+- **Phase 7** (personal theory layer / user briefs) — not started.
+- Still-deferred data-quality items from Phase 0's manual review (comma-joined dual-lemma rows,
+  a mispronounced entry, suspected mistagged-verb "ghost lemmas") — flagged, not fixed.
+- The `"p"`/`"f_p"`/`"m_p"` feature-fusion bug (design decision 4) — still deferred.
+- No tests yet for `cpsatsolver.py`/`cpsatoptimizer.py`'s ambiguity math (still true, see
+  "Ongoing" below).
+
 ## Terminology
 
 **"Lemma-homophones"** (this document's term) = a set of homophone words whose **lemmas
@@ -36,6 +146,10 @@ Do not confuse this with **same-lemma homophones** (inflected forms of *one* lem
 separate problem, solved by a separate mechanism (conjugation chords, not reserved keys).
 
 ## Current state, grounded in the code (audit)
+
+*Dated 2026-09-15/17/18 — describes the plan as originally conceived. The phoneme-layer audit
+below still holds; the same-lemma/lemma-homophone audit does not (see "Status update" above and
+`ATOMIC_KEYPRESS_REWIRE_PLAN.md` for what actually shipped).*
 
 **Phoneme layer**
 - `Starboard` (`src/keyboard.py`): 26 keys, 4 reserved (`[0,1,10,15]`), 22 allowed for
@@ -158,6 +272,8 @@ Resequenced 2026-09-15 to measure before committing to physical assignment, and 
 sequencing by implementation dependency alone once measured user value points elsewhere.
 
 ### Phase 0 — Measure: ambiguity checker + cluster statistics
+**Status: DONE** — see "Status update" above.
+
 Goal: know where the frequency-weighted ambiguity actually lives before building physical
 assignment for either homophone track.
 - Write the end-to-end zero-ambiguity checker now, rather than treating it as a Phase 1/2
@@ -186,6 +302,8 @@ suspected mistagged-verb "ghost lemmas" like `pars`/`sert`) — see `todo.md` fo
 none fixed yet.
 
 ### Phase 1 — Fix the cross-grammatical-category clash
+**Status: DONE** (`detectCrossCategoryClash`) — see "Status update" above.
+
 Goal: close the gap where two different-category readings of the same lemma can be mutually
 homophonous, differently spelled, and go undiscriminated.
 - Extend the collision check to look across `lemmeGramCat` groups sharing the same lemma (or
@@ -195,6 +313,14 @@ homophonous, differently spelled, and go undiscriminated.
 - This is small once Phase 0's checker exists — it's the thing the checker will catch first.
 
 ### Phase 2 — Conjugation-chord assignment + lemma-homophone rank assignment
+**Status: PIVOTED + DONE, not as originally planned.** The "conjugation track" below (solver
+picks a meaning-anchor chord, e.g. 2ps → final `/s/`) was discarded 2026-09-18 for
+elicitation-first (Phase E/G/P in `ATOMIC_KEYPRESS_REWIRE_PLAN.md`) and is now DONE that way —
+Phase P milestone 1. The "lemma-homophone track" below is now DONE as the `*`/`#` track
+(`decideStarHashMark` and friends) — see "Status update" above; it ended up needing no CP-SAT at
+all (frequency-rank + a categorical rule, exactly as this section anticipated as a fallback).
+Persistence (this section's last bullet) is the one piece still not done — see "what's left."
+
 Goal: produce theory 2 — every word resolves to a unique stroke — with the two homophone
 problems resolved by their own mechanism, then persist it.
 - **Conjugation track**: assign each same-lemma feature a phoneme-key chord drawn from its
@@ -216,6 +342,8 @@ problems resolved by their own mechanism, then persist it.
 - Gate: Phase 0's checker goes green against the persisted output.
 
 ### Phase 3 — Re-validate and version the phoneme layer
+**Status: NOT STARTED.**
+
 Goal: confirm `starboard3h.json` is still optimal against the current lexicon, and decide a
 freeze/versioning policy before the theory reaches real learners.
 - Re-enable and test `cpsatsolver.py::optimizeKeyboard` enough to confirm whether re-solving
@@ -232,6 +360,13 @@ freeze/versioning policy before the theory reaches real learners.
   monitoring approach now.
 
 ### Phase 4 — Lemma-homophone strategy at scale
+**Status: DONE, though building blocks 2/3 below weren't literally built as described.** The
+actually-shipped design (`decideStarHashMark`'s rule stack — ratio exemption, spelling-doublet
+exemption, per-pair overrides, `GRAMCAT_PRIORITY` categorical rule) supersedes this section's
+"generalized spelling-rule-based key clusters" and "grammatical category as a free
+discriminator" building blocks with an equivalent (arguably stronger — 0.2–0.5% from the
+theoretical optimum, measured) approach. See "Status update" above.
+
 Goal: a full strategy for homophones that don't share a lemma, informed by Phase 0's measured
 frequency mass rather than assumed.
 **Prioritized building blocks** — star-key/rank marker and spelling-rule clusters first;
@@ -249,6 +384,8 @@ the real prize and Phases 1–2's payoff is smaller than their earlier position 
 suggested — that's the point of measuring first.
 
 ### Phase 5 — Theory-level briefs
+**Status: NOT STARTED.**
+
 Goal: automatic, corpus-driven shortcuts for the most frequent words and 2–3 word phrases —
 distinct from Phase 7's user-personal briefs.
 - Every mature theory hand-tunes a brief table; it is the single biggest WPM and learnability
@@ -261,6 +398,8 @@ distinct from Phase 7's user-personal briefs.
 - Interacts with the Phase 3 layout freeze and the stroke budget — decide scope before freezing.
 
 ### Phase 6 — Dictionary densification: conjugation tables, compositional generation, prefixes
+**Status: NOT STARTED.**
+
 Goal: one entry per homophone-per-lemma pointing at a shared conjugation/paradigm table, plus
 the ability to compose a base word's phonology + a grammatical-feature key into an
 unrelated-sounding inflected form (généraux from général + m_p) — and the mirror-image problem,
@@ -285,6 +424,8 @@ form as flat entries.
   homophone spelling clusters (Phase 4).
 
 ### Phase 7 — Personal theory layer
+**Status: NOT STARTED.**
+
 Goal: user-added shortcuts/briefs for common words and 2-3 word expressions, layered on top of
 the base theory (distinct from Phase 5's automatic, corpus-driven briefs).
 - Needs its own conflict-resolution against the base theory's stroke space (can't silently
@@ -345,30 +486,30 @@ the base theory (distinct from Phase 5's automatic, corpus-driven briefs).
 
 ## Open questions
 
-1. **Javelin as prior art** — is there a specific fork/version of Javelin in mind, or specific
-   features from it already known to be worth mirroring (rule syntax, on-device conjugation
-   table storage, memory constraints)?
-2. **Reserved-key set flexibility** — `_reservedKeys` is a hardcoded `Starboard` class
-   attribute, though the assignment algorithms already read it dynamically and are tested
-   against custom sets. Make it user-configurable now, or revisit once the feature set
-   stabilizes?
-3. **Layout freeze** — is there a target point (e.g. "once Phase 0–2 land") to lock the phoneme
-   + special-keypress physical layout for real learners, separate from continuing lexicon curation
-   indefinitely?
-4. **`theory.tsv` fate** — should the new resolved theory output replace `theory.tsv`, or live
-   alongside it as a raw/debug view?
-5. **Conjugation modifier form** — fused into the word's final chord (English `-S`/`-G` style —
-   faster, but the base chord must have that key free in its zone) vs. a separate modifier
-   stroke (slower, cleaner conflict model)?
-6. **The anchor table** — which phoneme/orthographic anchor per feature (2ps → `/s/`, 3ps →
-   `/t|d/`; do nominal plurals also take `/s/`? feminine — the silent final -e has no phoneme,
-   is schwa `@` the anchor?).
-7. **Lemma-homophone clusters with >4 members** — sequential `*`/`#` chords vs. curated
-   exceptions, once Phase 0 measures the frequency mass at stake.
+1. **Javelin as prior art** — still open. Is there a specific fork/version of Javelin in mind,
+   or specific features from it already known to be worth mirroring (rule syntax, on-device
+   conjugation table storage, memory constraints)?
+2. **Reserved-key set flexibility** — **de facto resolved, not revisited as a design choice**:
+   `STAR_KEY=10`/`HASH_KEY=15` are hardcoded module constants in `src/ambiguitychecker.py`, not
+   user-configurable. Keys 0/1 (left pinky, also reserved) are unassigned, held for a possible
+   future 3rd logical mark.
+3. **Layout freeze** — still open; no target point decided yet.
+4. **`theory.tsv` fate** — still open, and now the concrete next step: wire the `*`/`#`
+   pipeline and Phase P's own output into `dictionary.py`'s persisted output (see "Status
+   update" above). Not yet decided whether this replaces `theory.tsv` or lives alongside it.
+5. **Conjugation modifier form** — **resolved by Phase P's implementation**: a brand-new
+   trailing stroke (extra "syllable"), never merged into the word's last existing chord — the
+   separate-modifier-stroke option, not the fused English `-S`/`-G` style.
+6. **The anchor table** — **moot, resolved by the elicitation pivot**: there is no
+   phoneme/orthographic anchor table to design: the user's own elicited press-per-opposition
+   answers (Phase E) directly are the mapping, replacing the need to guess anchors a priori.
+7. **Lemma-homophone clusters with >4 members** — **resolved**: `assignStarHashCombos`
+   escalates past the 4-reading single-stroke budget with repeated `*#`/`*#` extra syllables,
+   unbounded (see "Status update" above). No curated-exception fallback was needed.
 8. **Where prefix strokes live** (phoneme-layer pseudo-phonemes?) and their cost against the
-   22-key phoneme budget.
+   22-key phoneme budget — still open; Phase 6 not started.
 9. **One shared runtime rule engine** (Plover python-dict + Javelin) vs. two exporters of a
-   shared table format, for Phase 6.
+   shared table format, for Phase 6 — still open; Phase 6 not started.
 
 ## Verification approach (once implementation starts on any phase)
 
