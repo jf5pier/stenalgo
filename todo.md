@@ -2,19 +2,21 @@
 
 Written to survive a `/clear` — read this file first in a fresh session.
 
-## Most recent session (2026-09-17/18): ambiguity-cluster manual review + ignore-list infra
+## Live status (2026-09-20)
 
-Separate thread from reform1990 (see `scratch/reform1990/RESUME_2026-09-16.md`/`STATUS.md` for
-that one) and from most of the "roadmap" homophone-theory work already dirty in the working
-tree before this session (`dictionary.py`, `src/word.py`, `src/greedyoptimizer.py` — not
-touched this session). This session used `src/ambiguitychecker.py` (itself part of that roadmap
-work, pre-existing untracked) to manually walk every n>=5 lemma-homophone overflow cluster with
-the user and build a reusable ignore-list mechanism; also added a short progress note to
-`ROADMAP.md`'s Phase 0 section (the only edit made to that file this session). **Nothing this
-session has been committed** — everything below is still local-only, on top of the
-already-uncommitted state described in the reform1990 RESUME file.
+For the homophone-theory work (Phase 0 through Phase P milestone 1 and the `*`/`#`
+lemma-homophone track), **`ROADMAP.md`'s "Status update (2026-09-20)" section and
+`ATOMIC_KEYPRESS_REWIRE_PLAN.md` are authoritative** — do not reconstruct state from the
+session notes below. The only still-open items tracked in THIS file are the lexicon
+data-quality bullets in "Still open" below and the `"p"` vs `"f_p"`/`"m_p"` feature-fusion
+scoping (ROADMAP design decision 4); everything else here is history.
 
-### Done this session
+Branch: `phase-g-grouping` (drifted well past Phase G — also carries Phase P and the
+`*`/`#` track; merge to `main` when convenient, nothing depends on the name). 549 tests
+pass (`pytest src/test/`). The reform1990 thread lives in
+`scratch/reform1990/RESUME_2026-09-16.md`/`STATUS.md`.
+
+### Done this session (2026-09-17/18 — history)
 
 - **`resources/ambiguityIgnoreList.tsv`** (new file) — 79 hand-reviewed lemmas to exclude from
   ambiguity-cluster *counting* (not from the lexicon/theory — words stay fully typable), tagged
@@ -43,7 +45,7 @@ already-uncommitted state described in the reform1990 RESUME file.
   multi-minute whole-corpus cross-check, same order of magnitude as the ~90s CP-SAT solver step)
   since nothing about it was actually at risk from this session's changes.
 
-### Still open from this session (small, well-scoped, not started)
+### Still open from this session (small, well-scoped, not started) — LIVE
 
 - **`baux`'s lemme is the raw Lexique383 string `"bail,bau"`** (comma-joined dual-lemma
   notation Lexique383 uses when a wordform is ambiguous between two lemmas). Should just be
@@ -69,29 +71,17 @@ already-uncommitted state described in the reform1990 RESUME file.
   guessed/unverified reasons (see file header) — worth revisiting per-word if anyone has time,
   not urgent since behavior is unchanged from before the migration.
 
-## Current status (most recent *committed-work* session — predates the above)
+## History — superseded status snapshots (nothing live below this line)
 
-Branch: `main` (the old `cl_test_coverage` branch was merged into `main` and deleted
-locally this session — `origin/cl_test_coverage` may still exist remotely, unpruned).
-362 tests pass (`pytest src/test/`). `python lexique.py` and `python dictionary.py`
-both run clean against the current lexicon.
-
-**Working tree is clean, but `main` is 1 commit ahead of `origin/main` and has NOT
-been pushed** (`2eab659`, "Remove bogus male/males duplicate of mâle/mâles") — push it
-next session unless there's a reason not to.
-
-This session: reconciled a long divergence between `cl_test_coverage` and `origin`
-(merged in `assignDiscriminatorKeypresses`/`conftest.py`/`starboard3h.json` from
-origin, resolving 2 real conflicts in `dictionary.py`/`src/greedyoptimizer.py` — kept
-`satOptimizeDiscriminator` as the active pipeline step per explicit direction, NOT
-`assignDiscriminatorKeypresses`, which still exists in `src/greedyoptimizer.py` and is
-tested but unused in `dictionary.py`'s `__main__`); committed the previously-orphaned
-`src/satoptimizer.py` (verified end-to-end: 10 special keypresses, proven optimal, 0
-conflicts, up from the 8 keys an older, smaller lexicon needed); added `.gitignore` and
-deleted a pile of stale scratch/backup cruft (`PROGRESS.md`, `PAYER_SYLLCV_AUDIT.md`,
-`bkp/`-`bkp4/`, pickles, etc. — all safe, all regenerable or superseded); fixed a real
-lexicon data bug (`male`/`males`, a garbled unaccented duplicate of `mâle`/`mâles`
-under the wrong lemme `mal`).
+- The old `cl_test_coverage` branch was merged into `main` and deleted locally;
+  `origin/cl_test_coverage` may still exist remotely, unpruned.
+- Earlier still: the origin/`cl_test_coverage` reconciliation kept
+  `satOptimizeDiscriminator` (not `assignDiscriminatorKeypresses`) as
+  `dictionary.py`'s active pipeline step; committed the then-orphaned
+  `src/satoptimizer.py`; added `.gitignore` and deleted stale scratch/backup cruft;
+  fixed the `male`/`males` lexicon bug (`2eab659`, long since pushed). All committed —
+  see git history for detail; any test/keypress counts quoted in those old notes are
+  stale.
 
 ### One open item: `"p"` vs `"f_p"`/`"m_p"` feature-selection fusion (not started, scoped only)
 
@@ -227,10 +217,10 @@ for documentation (`pouvoir`/"puis") — no more open judgment calls or unexplai
 
 ## If resuming from scratch (no memory of any session)
 
-1. Read this file fully first, starting from "Current status" at the top — that's the
+1. Read this file fully first, starting from "Live status" at the top — that's the
    live section. Everything below "Earlier resolved track" is historical context only.
-2. Run `pytest src/test/` (expect 362 pass, not the 346 an older note in this file
-   mentions — 16 more were added merging in `src/test/greedyoptimizer_test.py`) and
+2. Run `pytest src/test/` (expect 549 pass as of 2026-09-20; older notes in this file
+   quote smaller historical counts) and
    `python -m util.validateLexiconAgainstVerbiste` (expect 136 total flags now, not
    134 — adding 2 tags to ass:eoir's `assoyons`/`assoirais` rows during that track
    incidentally made the validator flag those rows too, against its single-canonical-

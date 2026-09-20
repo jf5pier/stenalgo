@@ -26,19 +26,31 @@ python lexique.py
 
 # Run dictionary processing and optimization pipeline
 python dictionary.py
+
+# Rebuild the Phase P physical-realization artifact
+python -m util.build_phase_p_realization
 ```
 
 ## Architecture
 
 ### Processing Pipeline
 
+The two homophone problems have separate mechanisms, decided by the 2026-09-18
+elicitation-first pivot. **Authoritative status docs: `ROADMAP.md`'s "Status update"
+section and `ATOMIC_KEYPRESS_REWIRE_PLAN.md`** — read those before touching the
+disambiguation layers; older notes describing a solver-picks-features design are
+superseded.
+
 1. **Lexicon Building** (`lexique.py`) — Merges Lexique383 and LexiqueInfra into `resources/LexiqueMixte.tsv` (136k French words with frequencies, phoneme and grapheme syllable breakdowns)
 2. **Dictionary Loading** (`dictionary.py`) — Indexes words by orthography, lemma, and frequency; identifies homophones; excludes words from `excluded_words.txt`
-3. **Feature Extraction** (`src/featureextractor.py`) — Analyzes homophones and extracts discriminating features (grammatical category, gender, number, etc.) for disambiguation
-4. **Optimization** (`src/cpsatsolver.py`, `src/cpsatoptimizer.py`) — CP-SAT constraint solver assigns phonemes to keys minimizing ambiguity, finger strain, and phoneme ordering violations
-5. **Greedy Disambiguation** (`src/greedyoptimizer.py`) — Two-phase process:
-   - `greedyOptimizeDiscriminator` assigns discriminating features to homophone groups, producing `dict[tuple[WordFeature,...], list[tuple[Word,...]]]`
-   - `assignDiscriminatorKeypresses` maps those features to physical modifier strokes on the Starboard reserved keys (`[0,1,10,15]`), using a `FEATURE_PRIORITY` table (French linguistic markedness) with corpus frequency as tiebreaker. The empty stroke `()` ("no stroke") is reserved for the most canonical/unmarked form in each group; remaining features share strokes when they never co-occur (graph coloring), with semantic consistency enforced via `_consistencyScore`
+3. **Feature Extraction** (`src/featureextractor.py`) — Analyzes homophones and extracts discriminating features (grammatical category, gender, number, etc.); feeds the legacy path below
+4. **Phoneme layout (solved, static)** — `src/cpsatsolver.py::optimizeKeyboard` (CP-SAT minimizing ambiguity/ergonomics/order violations) is real but its call is commented out; the live pipeline loads the committed `starboard3h.json` instead
+5. **Same-lemma homophones (elicit → group → realize)**:
+   - **Phase E** (`src/elicitation.py`) — the user's own marker presses, elicited pair-by-pair via a web questionnaire (`elicitation_answers.json` tracked; `resolved_press_sets*.json` gitignored, regenerable)
+   - **Phase G** (`src/phaseg.py` greedy, `src/phasegsat.py` exact CP-SAT) — groups elicited markers onto abstract keypresses (K=5, proven optimal; adopted output `phase_g_keypress_assignment.json`)
+   - **Phase P** (`src/ambiguitychecker.py::realizeKeypressGroupsAsExtraStroke`) — realizes each group as a physical coda-bank extra trailing stroke; canonical build `python -m util.build_phase_p_realization` → `phase_p_keypress_realization.json`. The must-stay-green regression: 0 residual same-`lemmeGramCat` collisions
+6. **Lemma-homophones (`*`/`#` track)** (`src/ambiguitychecker.py`) — `decideStarHashMark` rule stack (homograph exemption → 1990-reform doublet → per-pair `MARKING_OVERRIDES` → 10x frequency-ratio exemption → same-`gramCat` → `GRAMCAT_PRIORITY`) → `rankHomophoneCluster`/`assignStarHashMarks` (N-ary, escalates with extra `*#` syllables) → `assignStarHashPhysicalStrokes`/`composeReservedKeyStrokes` (`STAR_KEY`=10, `HASH_KEY`=15, keys 0/1 held for a possible 3rd mark). Validated pure-function pipeline, **not yet wired into `dictionary.py`'s persisted output**
+7. **Legacy path still live in `dictionary.py` `__main__` (superseded, retirement pending)** — `buildDiscriminatorSelection` + `satOptimizeDiscriminator` color solver-chosen same-lemma features onto the reserved keys and only print; `src/greedyoptimizer.py`'s `assignDiscriminatorKeypresses` is orphaned (implemented, tested, never called). `FEATURE_PRIORITY`/`GRAMCAT_PRIORITY` in `src/greedyoptimizer.py` still do live work (canonical-form picks)
 
 ### Core Data Model
 
