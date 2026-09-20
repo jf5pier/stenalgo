@@ -50,6 +50,24 @@ FEATURE_PRIORITY: dict[WordFeature, int] = {
     "pers_2":    45,
 }
 
+# Grammatical-category priority for the `*`/`#` cross-lemma/cross-category marking
+# rule (see RESUME_2026-09-20-starhash-priority.md's regret-minimization design).
+# Higher value = more canonical/unmarked, same convention as FEATURE_PRIORITY above.
+# Fitted on the residual population left after that design's ratio-10x exemption and
+# homograph exclusion are applied -- a single consistent linear order (`ADV > PRO:pos
+# > NOM > VER > ADJ > ADJ:pos`) that reproduces every observed category-pair-type's
+# regret-optimal marking direction. Categories absent here weren't observed in that
+# residual; src/ambiguitychecker.py's decideStarHashMark falls back to per-pair
+# frequency when either side is missing from this table.
+GRAMCAT_PRIORITY: dict[str, int] = {
+    "ADV":     50,
+    "PRO:pos": 40,
+    "NOM":     30,
+    "VER":     20,
+    "ADJ":     10,
+    "ADJ:pos":  0,
+}
+
 
 def _consistencyScore(
     f: WordFeature,
@@ -168,7 +186,10 @@ def _buildStrokePool(keyboard: Keyboard) -> list[Stroke]:
     for n in range(1, len(reservedKeys) + 1):
         for combo in combinations(sorted(reservedKeys), n):
             real.append(combo)
-    real.sort(key=lambda s: keyboard.getStrokeCost(s, "onset"))
+    costOf: dict[Stroke, int] = {
+        s: cost for s in real if (cost := keyboard.getStrokeCost(s, "onset")) is not None
+    }
+    real = sorted(costOf, key=lambda s: costOf[s])
     return pool + real
 
 
