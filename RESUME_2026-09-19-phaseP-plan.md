@@ -6,9 +6,16 @@ lines 186-218), `RESUME_2026-09-18.md` (design decision #1: reserved keys `[0,1,
 belong exclusively to the lemma-homophone `*`/`#` track; same-lemma conjugation atoms —
 what Phase G/Phase P are about — get keypresses realized from the **coda** bank
 `[16..25]`), and `RESUME_2026-09-19-cpsat.md` (Phase G's adopted output this milestone
-consumes). **This file was written by a plan-mode session and has NOT been executed yet**
-— no code has been changed for Phase P. The instruction was: write the plan, then execute
-after a `/clear`.
+consumes).
+
+**EXECUTED as of this session — see `RESUME_2026-09-19-phaseP.md` for the final,
+verified state.** What actually got built diverged from this plan in two load-bearing
+ways the plan didn't anticipate (both driven by user review, not pre-planned): the
+discriminator is realized as a brand-new trailing coda stroke, not merged into the
+word's last existing stroke (§below); and per-word markers needing several Phase G
+groups at once are composed into ONE shared extra stroke, checked jointly, not each
+group tested in isolation. Read the new file first; this one is kept for historical
+context on the original (superseded) design sketch below.
 
 ## Context
 

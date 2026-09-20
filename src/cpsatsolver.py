@@ -324,7 +324,8 @@ def optimizeKeyboard(keyboard: Keyboard,
     # Define the stroke penalty cost based on stroke complexity and phoneme frequency.
     #
     strokeCosts: dict[str, dict[tuple[int, ...], int]] = {p: {
-        stroke: int(keyboard.getStrokeCost(stroke, p)) for stroke in strokesInPart[p]}
+        stroke: cost for stroke in strokesInPart[p]
+        if (cost := keyboard.getStrokeCost(stroke, p)) is not None}
         for p in PARTS}
     maxStrokeCost = {part: max(strokeCosts[part].values()) for part in PARTS}
 

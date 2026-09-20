@@ -139,9 +139,10 @@ class Keyboard(ABC):
         pass
 
     @abstractmethod
-    def getStrokeCost(self, stroke: Stroke, syllabicPart: str) -> int:
+    def getStrokeCost(self, stroke: Stroke, syllabicPart: str) -> int | None:
         """
-        Get the cost of pressing a stroke in a syllabic part
+        Get the cost of pressing a stroke in a syllabic part. Returns None if the
+        stroke is not a legal key combination (no finger can press it).
         """
         pass
 
@@ -526,10 +527,12 @@ Fingers assignments :
         return strokesInRange[:]
 
     @override
-    def getStrokeCost(self, stroke: Stroke, syllabicPart: str) -> int:
+    def getStrokeCost(self, stroke: Stroke, syllabicPart: str) -> int | None:
         """
         Get the cost of pressing a stroke in a syllabic part defined by the sum of
-        costs associated to each finger used in the stroke.
+        costs associated to each finger used in the stroke. Returns None if some
+        finger's key union isn't a legal keypress per `_possibleKeypress` -- the
+        whole stroke is then infeasible, not just expensive.
         """
         keyFromFinger: dict[str, list[int]] = {f:[] for f in self._possibleKeypress.fingers}
         cost: int = 0
@@ -540,7 +543,10 @@ Fingers assignments :
                 if (key,) in fingerKeypress.keys():
                     keyFromFinger[finger].append(key)
                     fingerInUse.add(finger)
-            cost += fingerKeypress[tuple(sorted(list(set(keyFromFinger[finger]))))]
+            fingerKeyCombo = tuple(sorted(set(keyFromFinger[finger])))
+            if fingerKeyCombo not in fingerKeypress:
+                return None
+            cost += fingerKeypress[fingerKeyCombo]
         if syllabicPart in ["onset", "coda"]:
             cost += self.getStrokeShapeCost(stroke)
         return int(cost * 0.85 **len(fingerInUse)) #Discount for using multiple fingers
