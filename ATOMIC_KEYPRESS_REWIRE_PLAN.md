@@ -183,7 +183,106 @@ press-sets. This — not `buildDiscriminatorSelection` output — feeds Phase G.
   (enumeration, opposition dedup, validator).
 - Report: K, the keypress → markers table, the unpressable-marker list.
 
-## Phase P — physical realization (deferred; kept so nothing is lost)
+## Phase P — physical realization (milestone 1 DONE -- see `RESUME_2026-09-19-phaseP.md`)
+
+Milestone 1 is complete and verified against the real lexicon: all 6 Phase G groups
+have a physical coda key, 0 same-lemmeGramCat collisions left. The bullets below are
+the original planning notes, kept for historical context; two design points changed
+during execution (extra trailing stroke, not merged into the last one; per-word
+multi-group composition, not each group tested in isolation) -- see the resume file
+for what actually got built and why. Still-open items from this list: the `*`/`#`
+track itself (the "restrict `satOptimizeDiscriminator`" bullet) and the
+`theory.tsv`-replacement wiring (ROADMAP.md open question 4) remain deferred.
+
+**Wishlist for the `*`/`#` track (not scoped yet):** nouns ending in `-er` that take
+the plural `-ers` (French verbal nouns derived from an infinitive, e.g. `dîner`/
+`dîners`) could be disambiguated from their VER/infinitif homophone reading by reusing
+the existing `Infinitif` / `Infinitif:p`(pluriel) atomic-feature markers instead of a
+generic `*`/`#` mark -- a derivational-pattern rule that resolves a whole NOM/VER
+homophone sub-class at once rather than needing per-pair marking. Raised
+2026-09-20 during the cross-category/cross-lemma regret analysis; not sized or
+verified against real data yet.
+
+**The `*`/`#` track's marking rule is now designed AND implemented** (design
+2026-09-20, implementation 2026-09-20 -- see `RESUME_2026-09-20-starhash-priority.md`
+for the full design derivation). `src/ambiguitychecker.py`'s `decideStarHashMark(wordA,
+wordB) -> Word | None` decides which side of a bucket-2/bucket-3 colliding pair gets
+the mark: homograph exemption → per-pair `MARKING_OVERRIDES` (the ~51 known aggregate-
+rule misfires) → frequency-ratio exemption (≥10x rarer ⇒ mark it, `RATIO_EXEMPTION_
+THRESHOLD`) → same-`gramCat` per-pair-optimal → `GRAMCAT_PRIORITY` (`src/
+greedyoptimizer.py`, `ADV > PRO:pos > NOM > VER > ADJ > ADJ:pos`) → frequency fallback
+for any category pair outside that table. Gets within 0.526% of the theoretical best
+possible keystroke cost across both bucket 2 and bucket 3 (0.499% re-verified on a
+freshly rebuilt `Dictionary.pickle`/`FirstTheory.pickle`, and 0.208% spot-checked
+against live bucket-3 `crossLemmaCollisions` data directly through the new function).
+Tests: `src/test/ambiguitychecker_test.py::TestDecideStarHashMark`.
+
+The 2026-09-20 discrepancy (bucket 2's real population is 74 pairs, not the 29
+documented above) is **resolved, not a bug**: reconciled against a freshly rebuilt
+`Dictionary.pickle` the same day -- still 74 pairs, 0 NOM/VER pairs, confirming it was
+stale documentation, not a stale-pickle artifact. The 29-pair count above is outdated.
+
+**The N-ary case (clusters of >2 colliding lemmas) and the physical realization are
+now also implemented** (same 2026-09-20 follow-up session). `rankHomophoneCluster`
+orders a whole cluster canonical-first using `decideStarHashMark` pairwise as a total-
+order comparator; `assignStarHashCombos(groupSize)` returns the marking codes
+`(), (*,), (#,), (*#,)` for up to 4 readings, escalating to `(*#,*#)`, `(*#,*#,*#)`, ...
+(one more whole extra syllable per reading) beyond that; `assignStarHashMarks`
+collapses homograph readings to one slot first so they don't force needless
+escalation. Physical realization: `*` = key 10 (left index, off-home), `#` = key 15
+(right index, off-home) — both in `Keyboard._reservedKeys` and a legal cross-hand
+chord together (`*#`) — via `starHashCodeToStrokes` / `assignStarHashPhysicalStrokes`.
+Validated against the live lexicon: the biggest real cluster (after homograph
+collapse) is 7 distinct readings (the classic `au`/`eau`/`oh`/`haut`/`ho`/`ô`/`aux` set),
+needing at most 4 extra `*#` syllables anywhere in the whole lexicon — nothing
+pathological. Keys 0/1 (left pinky, also reserved) remain unassigned, held for a
+possible future 3rd logical mark.
+
+**Composition with Phase P is now also implemented** (same 2026-09-20 follow-up
+session). Investigation first: checked how often a word needs both mechanisms at once
+by looking at `assignment.crossLemmaCollisions`/`crossCategoryClashCollisions`
+directly -- turns out it's the norm, not an edge case, for the currently-elicited
+population: **100%** of those pairs involve a word that already carries its own Phase P
+extra stroke, because those two fields are computed from Phase P's own `finalInduced`
+in the first place. The two mechanisms compose by simple concatenation (Phase P's
+stroke first, then */# after it) and can never create a NEW cross-cluster collision:
+Phase P only ever picks coda-phoneme keys, structurally disjoint from the 2 dedicated
+reserved keys (`STAR_KEY`=10/`HASH_KEY`=15 are excluded from `Keyboard.allowedKeys`),
+so appending after an already-different prefix keeps the whole `Strokes` tuple
+different. Implementation: `groupHomophonesByReservedStroke(finalInduced)` groups
+words by shared post-Phase-P stroke, keeping only genuine distinct-`lemmeGramCat`/
+distinct-`ortho` groups (excludes Phase P's own same-paradigm residuals and all-
+homograph groups); `composeReservedKeyStrokes(finalInduced)` appends
+`assignStarHashPhysicalStrokes`'s extra syllable(s) on top. Validated against the live
+lexicon: 1079 genuine */# groups found inside Phase P's own elicited population, 0
+accidental collisions with existing theory strokes, and 0 genuine (distinct-spelling)
+collisions left anywhere after composition. Tests:
+`TestGroupHomophonesByReservedStroke`, `TestComposeReservedKeyStrokes`.
+
+**Rule 3 (the spelling-doublet exemption) is now also implemented**, this time
+correctly sourced (same 2026-09-20 follow-up session). `loadReform1990DoubletPairs()`
+parses `resources/reform1990.tsv` into `{oldSpelling, newSpelling}` pairs (excluding
+`isException=True` rows -- the file's own documented cases like `fût`/`fut` that
+collide with a genuinely distinct word despite being a reform pair). `decideStarHashMark`,
+`rankHomophoneCluster`, `assignStarHashMarks`, `assignStarHashPhysicalStrokes`, and
+`composeReservedKeyStrokes` all take an optional `doubletPairs` parameter (default
+`frozenset()`, opt-in, no behavior change unless passed) checked right after the
+homograph exemption: `frozenset({wordA.lemme, wordB.lemme}) in doubletPairs` → no mark
+needed. `assignStarHashMarks` also collapses doublet-pair readings to one representative
+(union-find over `orthoGroups`, same treatment as homograph collapsing) so they don't
+consume a cluster slot or force needless escalation. Validated against the live
+lexicon: of 259 loaded doublet pairs, 11 bucket-3 pairs are genuinely exempted this way
+(`dessoûler`/`dessouler`, `tocard`/`toquard`, `béluga`/`beluga`, `dégoter`/`dégotter`,
+...), saving 13 real words an unnecessary `*`/`#` stroke, with zero regressions
+elsewhere in the composed output. Tests: `TestLoadReform1990DoubletPairs`, plus doublet
+cases added to `TestDecideStarHashMark`/`TestAssignStarHashMarks`.
+
+**Still open:** none of this (`decideStarHashMark` through `composeReservedKeyStrokes`)
+is wired into an actual `theory.tsv`-replacement / persisted output yet -- it's a pure
+function pipeline validated by ad hoc scripts, not yet the thing `dictionary.py`'s
+pipeline actually calls. That's the one remaining piece from this whole `*`/`#` design
+thread, and it's a bigger, previously-deferred question (ROADMAP.md open question 4)
+rather than a small follow-up.
 
 - Cross-cluster new-vs-new collisions: `_isFeasibleAddition`
   (`src/ambiguitychecker.py:243`) misses collisions between two newly composed chords —
