@@ -289,11 +289,13 @@ rather than a small follow-up.
   final stroke (12,16)+{18} and (12,18)+{16} both land on (12,16,18). The `*`/`#`
   reserved-key modifications also create strokes absent from `theory`; the composition
   order of the two tracks is undefined and interacts.
-- Pressability filtering: `getStrokeCost` (`src/keyboard.py:529-546`) KeyErrors on
-  illegal per-finger unions (coda m=(25,) + n=(22,) → right pinky {22,25}, not in
-  `_possibleKeypress.rightPinky` `:343-348`); the stale `anchor_feasibility.tsv` listed
-  `m+n` as feasible — evidence impossible candidates already slip through. Also
-  `checkComposedChords:336` takes `feasibleComboPhonemes[0][0]` — half of a 2-phoneme
+- Pressability filtering: **the KeyError half is FIXED** (landed with Phase P
+  milestone 1, commit `31b3a3c`) — `getStrokeCost` (`src/keyboard.py`) now returns
+  `None` for illegal per-finger unions (coda m=(25,) + n=(22,) → right pinky {22,25},
+  not in `_possibleKeypress.rightPinky`) instead of raising, and both callers
+  (`cpsatsolver.py`, `greedyoptimizer.py::_buildStrokePool`) drop `None`-cost strokes;
+  covered by `keyboard_test.py::TestGetStrokeCost`. Still open from this bullet:
+  `checkComposedChords` takes `feasibleComboPhonemes[0][0]` — half of a 2-phoneme
   combo.
 - Cost object = the full merged final stroke (base ∪ additions), not just the added
   keys; two-stroke fallback lives in stroke-SEQUENCE space (`theory` keys are `Strokes`

@@ -64,11 +64,12 @@ this section summarizes where things actually stand and points there for detail.
   Phase 2/4 lemma-homophone goals:
   - `decideStarHashMark` — pairwise marking decision (homograph exemption → spelling-doublet
     exemption → per-pair overrides → 10x frequency-ratio exemption → same-`gramCat`
-    per-pair-optimal → `GRAMCAT_PRIORITY` categorical rule), within **0.2–0.5% of the
-    theoretical optimum** keystroke cost.
+    per-pair-optimal → `GRAMCAT_PRIORITY` categorical rule), within **0.53%** of the
+    theoretical optimum keystroke cost (0.208–0.526% across three independent measurements).
   - N-ary generalization (`rankHomophoneCluster`/`assignStarHashMarks`/`assignStarHashCombos`)
     — resolves the "clusters with ≥5 members" open question (§7 below): escalates past the
-    4-reading single-stroke budget with repeated `*#`/`*#` extra syllables, unbounded.
+    4-reading single-stroke budget by giving each further reading one more whole `*#` extra
+    syllable (`(*#,*#)`, `(*#,*#,*#)`, …), unbounded.
   - Physical realization on the Starboard's reserved keys: `*` = key 10, `#` = key 15
     (`STAR_KEY`/`HASH_KEY`), validated against the live lexicon (biggest real cluster: 7
     readings, the `au`/`eau`/`oh`/`haut`/`ho`/`ô`/`aux` set).
@@ -118,6 +119,11 @@ this section summarizes where things actually stand and points there for detail.
   pipeline, exercised only by unit tests and ad hoc scripts — not yet called from
   `dictionary.py`. This is what finally resolves open question 4 (`theory.tsv`'s fate) below.
   Bigger than a small follow-up; previously deferred for this reason.
+- Retire or redirect `dictionary.py`'s superseded same-lemma step — `buildDiscriminatorSelection`
+  + `satOptimizeDiscriminator` still color solver-chosen same-lemma features onto the reserved
+  keys in `__main__` (console-only; its conflict count reported **0** on 2026-09-20, so the
+  metric itself has gone vestigial). Its job now belongs to Phase E/G/P; decide its fate as
+  part of the wiring item above rather than leaving two live theories of the same problem.
 - Regenerate `MARKING_OVERRIDES` (the ~51-pair per-pair override list) from a single canonical
   run purely at the 10x threshold — currently built from a top-10-by-regret cross-check
   against 30x/100x, not one clean run.
@@ -134,6 +140,16 @@ this section summarizes where things actually stand and points there for detail.
 - Still-deferred data-quality items from Phase 0's manual review (comma-joined dual-lemma rows,
   a mispronounced entry, suspected mistagged-verb "ghost lemmas") — flagged, not fixed.
 - The `"p"`/`"f_p"`/`"m_p"` feature-fusion bug (design decision 4) — still deferred.
+- Open decisions carried from `ATOMIC_KEYPRESS_REWIRE_PLAN.md` (both still open there despite
+  Phase E being "done"): §E's strict/lenient margin mechanism (where the margin lives — global /
+  per-gramCat / per-cluster — and its default), and §G's cluster-scoping for noun homophones
+  inside verb clusters (noun `parlé` in the [paʁle] cluster: marker track vs `*`/`#` track).
+- Cleanup once wiring lands: `FEATURE_FAMILIES`/`associationScore`/polarity machinery has no
+  job left on the elicitation track; plus two known diagnostic-path bugs in
+  `src/ambiguitychecker.py` (`_isFeasibleAddition` misses new-vs-new composed-chord
+  collisions; `checkComposedChords` reads `feasibleComboPhonemes[0][0]`, half of a 2-phoneme
+  combo).
+- Housekeeping: merge `phase-g-grouping` (which long outgrew Phase G) to `main`.
 - No tests yet for `cpsatsolver.py`/`cpsatoptimizer.py`'s ambiguity math (still true, see
   "Ongoing" below).
 
@@ -176,8 +192,11 @@ below still holds; the same-lemma/lemma-homophone audit does not (see "Status up
 - Two mechanisms exist to turn those abstract features into physical special keypresses, and
   only one is wired in:
   - **`satOptimizeDiscriminator`** (`src/satoptimizer.py`) — CP-SAT graph coloring, computes
-    the minimum number of abstract key-indices needed for zero conflicts (currently **10**, up
-    from 8 as the lexicon grew). **Active pipeline step**, but its output is an abstract color
+    the minimum number of abstract key-indices needed for zero conflicts (**10** at this
+    audit's date, **11** after the 2026-09-18 coverage-first switch, up from 8 as the lexicon
+    grew; a fresh 2026-09-20 run reports **0** conflicting feature-sets — the figure has
+    stopped being meaningful, see the retirement item in "What's left to do"). **Active
+    pipeline step**, but its output is an abstract color
     index — it never produces a physical `Stroke`.
   - **`assignDiscriminatorKeypresses`** (`src/greedyoptimizer.py`) — greedy, *does* produce
     physical strokes on the 4 reserved keys, using a hand-authored `FEATURE_PRIORITY` table
@@ -355,16 +374,19 @@ freeze/versioning policy before the theory reaches real learners.
   now that a microcontroller target is confirmed (firmware/hardware users tolerate drift even
   less than a Plover dictionary file does).
 - Decide brief scope (Phase 5) before freezing — briefs interact with the stroke budget.
-- Watch special-keypress headroom: 4 reserved keys give 16 possible strokes; the lexicon already grew
-  from needing 8 to 10 abstract keys for the conjugation track alone. Worth a threshold/
-  monitoring approach now.
+- Watch special-keypress headroom — **reframed by the pivot**: same-lemma discrimination no
+  longer touches the reserved keys at all (Phase P realized its 6 groups on the coda bank),
+  so the old "8→10 abstract keys for the conjugation track" watch-item is moot. What remains
+  is the `*`/`#` track's 2 guaranteed keys (`STAR_KEY`/`HASH_KEY`, keys 0/1 held for a
+  possible 3rd mark), whose escalation is unbounded by design. Re-check headroom at freeze
+  time.
 
 ### Phase 4 — Lemma-homophone strategy at scale
 **Status: DONE, though building blocks 2/3 below weren't literally built as described.** The
 actually-shipped design (`decideStarHashMark`'s rule stack — ratio exemption, spelling-doublet
 exemption, per-pair overrides, `GRAMCAT_PRIORITY` categorical rule) supersedes this section's
 "generalized spelling-rule-based key clusters" and "grammatical category as a free
-discriminator" building blocks with an equivalent (arguably stronger — 0.2–0.5% from the
+discriminator" building blocks with an equivalent (arguably stronger — within 0.53% of the
 theoretical optimum, measured) approach. See "Status update" above.
 
 Goal: a full strategy for homophones that don't share a lemma, informed by Phase 0's measured
@@ -437,7 +459,9 @@ the base theory (distinct from Phase 5's automatic, corpus-driven briefs).
   phase lands, not deferred to the end.
 - `README.md`'s roadmap checklist predates and only partially reflects the current
   `greedyoptimizer.py`/`satoptimizer.py`/`verbparadigm.py` machinery — worth a pass to reconcile
-  once Phases 0–2 land, so the README stops undercounting what's already built.
+  once Phases 0–2 land, so the README stops undercounting what's already built. (CLAUDE.md's
+  pipeline section was reconciled 2026-09-20; `todo.md`'s live status too. README is the
+  remaining one.)
 
 ## Prior art (researched 2026-09-15)
 
@@ -504,8 +528,9 @@ the base theory (distinct from Phase 5's automatic, corpus-driven briefs).
    phoneme/orthographic anchor table to design: the user's own elicited press-per-opposition
    answers (Phase E) directly are the mapping, replacing the need to guess anchors a priori.
 7. **Lemma-homophone clusters with >4 members** — **resolved**: `assignStarHashCombos`
-   escalates past the 4-reading single-stroke budget with repeated `*#`/`*#` extra syllables,
-   unbounded (see "Status update" above). No curated-exception fallback was needed.
+   escalates past the 4-reading single-stroke budget by giving each further reading one more
+   whole `*#` extra syllable (`(*#,*#)`, `(*#,*#,*#)`, …), unbounded (see "Status update"
+   above). No curated-exception fallback was needed.
 8. **Where prefix strokes live** (phoneme-layer pseudo-phonemes?) and their cost against the
    22-key phoneme budget — still open; Phase 6 not started.
 9. **One shared runtime rule engine** (Plover python-dict + Javelin) vs. two exporters of a
