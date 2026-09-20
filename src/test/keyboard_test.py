@@ -337,7 +337,7 @@ class TestGetStrokeCost:
         """Any single-key stroke should have a positive cost."""
         for key_id in starboard.keyIDinSyllabicPart["onset"]:
             cost = starboard.getStrokeCost((key_id,), "onset")
-            assert cost > 0
+            assert cost is not None and cost > 0
 
     def test_multi_key_more_expensive(self, starboard: Starboard):
         """A two-key stroke should generally cost more than any single key
@@ -345,13 +345,23 @@ class TestGetStrokeCost:
         # leftRing: keys 4,5 — single key is 125, both is 175
         cost_single = starboard.getStrokeCost((4,), "onset")
         cost_double = starboard.getStrokeCost((4, 5), "onset")
+        assert cost_single is not None and cost_double is not None
         assert cost_double > cost_single
 
     def test_nucleus_no_shape_cost(self, starboard: Starboard):
         """Nucleus strokes don't get shape cost added."""
         nucleus_keys = starboard.keyIDinSyllabicPart["nucleus"]
         cost = starboard.getStrokeCost((nucleus_keys[0],), "nucleus")
-        assert cost > 0
+        assert cost is not None and cost > 0
+
+    def test_illegal_key_combo_returns_none(self, starboard: Starboard):
+        """(22, 25) isn't in rightPinky's _possibleKeypress table (only (22,23)/(24,25)/
+        (22,24)/(23,25) are) -- infeasible, not a crash."""
+        assert starboard.getStrokeCost((22, 25), "coda") is None
+        assert starboard.getStrokeCost((23, 24), "coda") is None
+
+    def test_legal_key_combo_still_returns_int(self, starboard: Starboard):
+        assert isinstance(starboard.getStrokeCost((22, 23), "coda"), int)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
