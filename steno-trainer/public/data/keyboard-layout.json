@@ -374,5 +374,299 @@
   1,
   10,
   15
+ ],
+ "phonemeLayers": [
+  {
+   "keyCount": 2,
+   "phonemesByKey": {
+    "2": "gf",
+    "3": "gb",
+    "4": "fdS",
+    "5": "bdZ",
+    "6": "Sln",
+    "7": "Zlz",
+    "8": "nj",
+    "9": "zj",
+    "11": "°8yu",
+    "12": "°8§o",
+    "13": "y§E",
+    "14": "uoE",
+    "16": "vp",
+    "17": "vf",
+    "18": "pg",
+    "19": "fg",
+    "20": "N",
+    "22": "Nz",
+    "23": "z",
+    "24": "S",
+    "25": "S"
+   },
+   "strokes": [
+    {
+     "keys": [
+      2,
+      3
+     ],
+     "phonemes": "g"
+    },
+    {
+     "keys": [
+      2,
+      4
+     ],
+     "phonemes": "f"
+    },
+    {
+     "keys": [
+      3,
+      5
+     ],
+     "phonemes": "b"
+    },
+    {
+     "keys": [
+      4,
+      5
+     ],
+     "phonemes": "d"
+    },
+    {
+     "keys": [
+      4,
+      6
+     ],
+     "phonemes": "S"
+    },
+    {
+     "keys": [
+      5,
+      7
+     ],
+     "phonemes": "Z"
+    },
+    {
+     "keys": [
+      6,
+      7
+     ],
+     "phonemes": "l"
+    },
+    {
+     "keys": [
+      6,
+      8
+     ],
+     "phonemes": "n"
+    },
+    {
+     "keys": [
+      7,
+      9
+     ],
+     "phonemes": "z"
+    },
+    {
+     "keys": [
+      8,
+      9
+     ],
+     "phonemes": "j"
+    },
+    {
+     "keys": [
+      11,
+      12
+     ],
+     "phonemes": "°8"
+    },
+    {
+     "keys": [
+      11,
+      13
+     ],
+     "phonemes": "y"
+    },
+    {
+     "keys": [
+      11,
+      14
+     ],
+     "phonemes": "u"
+    },
+    {
+     "keys": [
+      12,
+      13
+     ],
+     "phonemes": "§"
+    },
+    {
+     "keys": [
+      12,
+      14
+     ],
+     "phonemes": "o"
+    },
+    {
+     "keys": [
+      13,
+      14
+     ],
+     "phonemes": "E"
+    },
+    {
+     "keys": [
+      16,
+      17
+     ],
+     "phonemes": "v"
+    },
+    {
+     "keys": [
+      16,
+      18
+     ],
+     "phonemes": "p"
+    },
+    {
+     "keys": [
+      17,
+      19
+     ],
+     "phonemes": "f"
+    },
+    {
+     "keys": [
+      18,
+      19
+     ],
+     "phonemes": "g"
+    },
+    {
+     "keys": [
+      20,
+      22
+     ],
+     "phonemes": "N"
+    },
+    {
+     "keys": [
+      22,
+      23
+     ],
+     "phonemes": "z"
+    },
+    {
+     "keys": [
+      24,
+      25
+     ],
+     "phonemes": "S"
+    }
+   ]
+  },
+  {
+   "keyCount": 3,
+   "phonemesByKey": {
+    "11": "2",
+    "13": "25",
+    "14": "25",
+    "12": "5"
+   },
+   "strokes": [
+    {
+     "keys": [
+      11,
+      13,
+      14
+     ],
+     "phonemes": "2"
+    },
+    {
+     "keys": [
+      12,
+      13,
+      14
+     ],
+     "phonemes": "5"
+    }
+   ]
+  },
+  {
+   "keyCount": 4,
+   "phonemesByKey": {
+    "11": "1",
+    "12": "1",
+    "13": "1",
+    "14": "1"
+   },
+   "strokes": [
+    {
+     "keys": [
+      11,
+      12,
+      13,
+      14
+     ],
+     "phonemes": "1"
+    }
+   ]
+  }
+ ],
+ "conjugationMarkers": [
+  {
+   "keys": [
+    16
+   ],
+   "keyNames": [
+    "-j"
+   ],
+   "label": "féminin"
+  },
+  {
+   "keys": [
+    17
+   ],
+   "keyNames": [
+    "-s"
+   ],
+   "label": "pluriel"
+  },
+  {
+   "keys": [
+    18
+   ],
+   "keyNames": [
+    "-k"
+   ],
+   "label": "impératif, 1re personne"
+  },
+  {
+   "keys": [
+    19
+   ],
+   "keyNames": [
+    "-d"
+   ],
+   "label": "futur, passé, 3e personne"
+  },
+  {
+   "keys": [
+    20
+   ],
+   "keyNames": [
+    "-t"
+   ],
+   "label": "imparfait, 2e personne"
+  },
+  {
+   "keys": [
+    21
+   ],
+   "keyNames": [
+    "-R"
+   ],
+   "label": "conditionnel, infinitif, subjonctif"
+  }
  ]
 }
