@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # coding: utf-8
 #
+import re
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import override
@@ -82,6 +83,9 @@ class Word:
 
     def __post_init__(self) -> None:
         self.fix_e_n_en()
+        self.fix_rdre_coda_syllable_break()
+        self.fix_ayer_conditionnel_onset_glide()
+        self.fix_glide_low_vowel_syllable_break()
         self.orthosyllCV = self.parseOrthoSyll()
         self.syllCV = self.parsePhonoSyll()
         # Formula to be optimized following the need of the typist
@@ -207,6 +211,132 @@ class Word:
                 self.rawOrthosyllCV[:pos] + "en|" + self.rawOrthosyllCV[pos + 4 :]
             )
             self.fix_e_n_en()
+
+    def fix_rdre_coda_syllable_break(self) -> None:
+        """
+        Steno-encoding exception, not a claim about spoken syllable count: -rdre verbs
+        (perdre, mordre, tordre, ...) encode their infinitive's "-dre" tail as a single
+        syllable whose coda repeats /R/ (e.g. perdre = p_E_R_d_R_#, the second /R/
+        standing in for the syllabic "-re"). Starboard maps coda /R/ here to one
+        dedicated key, so the repeated /R/ collapses to a single keypress under
+        `canonicalizeStrokes` and the infinitive becomes physically indistinguishable
+        from perdent/perde/perdes (single /R/). Restricted to conjugated verb forms
+        (infoVerb is not None) -- NOM homographs of this shape (ordre, désordre,
+        contrordre) have no competing paradigm form to collide with, so splitting them
+        would only cost a keystroke for no disambiguation benefit.
+
+        Splits the coda at the same point perdez/perdons already split at
+        (p_E_R|d_e, p_E_R|d_§), giving the infinitive its own extra stroke instead of
+        silently losing the second /R/.
+        """
+        if self.infoVerb is None:
+            return
+        segments = self.rawSyllCV.split("|")
+        last = segments[-1]
+        if last.endswith("_R_d_R_#"):
+            segments[-1] = last[: -len("_d_R_#")]
+            segments.append("d_R_#")
+            self.rawSyllCV = "|".join(segments)
+
+        orthoSegments = self.rawOrthosyllCV.split("|")
+        orthoLast = orthoSegments[-1]
+        if orthoLast.endswith("_r_d_r_e"):
+            orthoSegments[-1] = orthoLast[: -len("_d_r_e")]
+            orthoSegments.append("d_r_e")
+            self.rawOrthosyllCV = "|".join(orthoSegments)
+
+    def fix_ayer_conditionnel_onset_glide(self) -> None:
+        """
+        Steno-encoding exception, not a claim about spoken syllable count: -ayer
+        verbs' conditionnel 1p/2p forms (paieriez, paierions, essaieriez,
+        balaierions, ...) append the future/conditional /R/ directly onto the
+        radical's bare /E/, then the "-iez"/"-ions" ending's onset /j/ glide, all
+        within one syllable (paieriez = p_E_#|R_j_e). Starboard's onset /R/ (one key)
+        is a subset of onset /j/'s 2-key digraph, so /R/+/j/ collapses to the same
+        chord as /j/ alone -- paieriez collapses onto payer/payez/payé/... (no /R/,
+        e.g. payez = p_E_#|j_e), which is wrong: per Wiktionnaire's IPA, paieriez
+        [pɛʁje] genuinely has the /ʁ/ that payez [pɛje] lacks (verified 2026-09-21,
+        see ROADMAP.md).
+
+        A first attempt re-keyed the ending's /j/ as nucleus /i/+/e/ instead of onset
+        /j/ (nucleus /i/ has its own dedicated key, unlike onset /R/'s subset
+        relationship to onset /j/) -- but Starboard's nucleus /i/+/e/ 2-key chord
+        turned out to be the SAME chord already dedicated to the single phoneme /E/,
+        so paieriez collapsed onto paierais/paierait/paieraient instead (same
+        subsumption bug, new pair). No available phoneme substitution is collision-free
+        here, so this uses the same syllable-break approach as
+        fix_rdre_coda_syllable_break/fix_glide_low_vowel_syllable_break instead:
+        split /R/ into its own bare-onset syllable, so it's never in the same stroke
+        as /j/ at all. p_E_#|R_j_e -> p_E_#|R|j_e: onset /R/ alone can't be swallowed
+        by a /j/ that's now a different stroke.
+
+        Restricted to the exact -ayer conditionnel shape (a segment ending "_E_#"
+        immediately followed by one starting "R_j_") -- the same "R_j" substring
+        appears constantly elsewhere in French (rien, hier, pierre, marier, riez...)
+        with no competing form to collide with, so a blanket split would cost those
+        words a keystroke for no benefit.
+        """
+        if self.infoVerb is None:
+            return
+        segments = self.rawSyllCV.split("|")
+        for i in range(len(segments) - 1):
+            if segments[i].endswith("_E_#") and segments[i + 1].startswith("R_j_"):
+                rest = segments[i + 1][len("R_j_"):]
+                segments[i + 1 : i + 2] = ["R", "j_" + rest]
+                self.rawSyllCV = "|".join(segments)
+
+                orthoSegments = self.rawOrthosyllCV.split("|")
+                for j in range(len(orthoSegments)):
+                    m = re.match(r"^r_i_(ez|ons)$", orthoSegments[j])
+                    if m:
+                        orthoSegments[j : j + 1] = ["r", "i_" + m.group(1)]
+                        self.rawOrthosyllCV = "|".join(orthoSegments)
+                        break
+                return
+
+    def fix_glide_low_vowel_syllable_break(self) -> None:
+        """
+        Steno-encoding exception, not a claim about spoken syllable count: -uer verbs'
+        passé-simple/participe-présent/subjonctif-imparfait forms (tua, tuant, continua,
+        continuant, ...) end their final syllable with the /8/ (\\u0265, "u"-glide)
+        immediately followed by bare /a/ or nasal /@/ (tua = t_8_a, tuant = t_8_@).
+        Starboard's /8/ key is a 2-key digraph whose keys are a superset of /a/'s and
+        /@/'s own dedicated single keys, so /8/+/a/ or /8/+/@/ collapses to the same
+        chord as /8/ alone under `canonicalizeStrokes` -- tua and tuant collapse
+        together, and both onto any other lemma sharing the bare /8/ ending. Restricted
+        to the word's OWN final syllable (a mid-word "_8_a"/"_8_@" like situation's
+        "si-tua-tion" or persuader's "per-sua-der" is not this ambiguity -- nothing else
+        in the word collapses along with it, so splitting it would only cost a
+        keystroke for no benefit).
+
+        Splits the vowel into its own syllable -- t_8|a, t_8|@ -- mirroring
+        fix_rdre_coda_syllable_break's approach. Restricted to conjugated verb forms
+        (infoVerb is not None), same reasoning as fix_rdre_coda_syllable_break: this
+        also catches -uas forms (tuas, remuas, ...), since their phonology is
+        identical to the -ua form (tua) they share a stroke with. Deliberately NOT
+        applied to ADJ/NOM homographs of a verb's participe présent (tuant the
+        adjective, gargantua, diluant the solvent, ...) -- those never had a
+        competing paradigm form to collide with in the first place (a homograph of an
+        unsplit VER reading just means two valid strokes for the same text, which is
+        harmless), and most of them (unlike the participles) aren't tied to any verb
+        at all, so splitting them would only cost a keystroke for no benefit.
+        """
+        if self.infoVerb is None:
+            return
+        segments = self.rawSyllCV.split("|")
+        last = segments[-1]
+        if last.endswith("_8_a") or last.endswith("_8_@"):
+            segments[-1], vowel = last[:-2], last[-1]
+            segments.append(vowel)
+            self.rawSyllCV = "|".join(segments)
+
+        orthoSegments = self.rawOrthosyllCV.split("|")
+        orthoLast = orthoSegments[-1]
+        orthoMatch = re.search(r"^(.*_u)_(ant|as|ât|a)$", orthoLast)
+        if orthoMatch:
+            orthoSegments[-1] = orthoMatch.group(1)
+            orthoSegments.append(orthoMatch.group(2))
+            self.rawOrthosyllCV = "|".join(orthoSegments)
 
     def phonemesToSyllableNames(self, withSilent: bool=True, symbol: str="") -> list[str]:
         # Format is [[syll1letter1, syll1letter2], [syll2letter1, ...]]

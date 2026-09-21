@@ -27,6 +27,101 @@ guaranteed to stay available long-term.
 A third, smaller problem is new to this document: **prefix formation** (re-, dé-, co-…), which
 has no code and no roadmap slot yet.
 
+## Status update (2026-09-21)
+
+Follow-up to `RESUME_2026-09-21-collision-residual.md`'s open task (investigate the ~52-pair
+non-exempt residual left in the `*`/`#`-marked lexicon). Root cause and fix, in three parts:
+
+- **Root cause (found)**: `theory`'s raw `Strokes` tuples preserve per-phoneme insertion order
+  and can repeat a key (one phoneme's dedicated key already covered by another phoneme's
+  multi-key digraph in the same syllable) — fine for `strokesToString`'s human-readable
+  rendering, but every collision-detection consumer (`groupHomophonesByReservedStroke`,
+  `buildLemmaHomophoneGroups`) compared/hashed that raw tuple directly, while the actually
+  *typed* stroke (`Starboard.strokesToRTFCRE`) is `sorted(set(stroke))` — order- and
+  repeat-insensitive, since a stroke is a simultaneous chord. Pairs like `quatre`/`carte`
+  (same keys, different phoneme order) or `ski`/`gui` (the `sk` cluster's keys happen to equal
+  `g`'s 2-key digraph) were physically colliding but invisible to both the `*`/`#` grouping
+  *and* Phase E's elicitation-cluster discovery, so they silently collided at render time,
+  never reaching `decideStarHashMark` or the questionnaire at all.
+- **Fix 1 (code)**: `src/keyboard.py` gained `canonicalizeStrokes()` (sort+dedupe per stroke);
+  `groupHomophonesByReservedStroke` (`src/ambiguitychecker.py`) and `buildLemmaHomophoneGroups`
+  (`src/elicitation.py`) now compare canonical strokes. `dictionary.py::buildTheory` and
+  `strokesToString` are untouched — this only changes collision-detection identity, not stored
+  data. Fixed ~46 cross-lemma pairs automatically (no new elicitation needed, `decideStarHashMark`
+  is deterministic) and surfaced 82 previously-invisible same-lemma clusters needing new
+  elicitation answers (small: 29, then 10, then 6 residual oppositions after the phonology
+  fixes below removed the rest).
+- **Fix 2 (phonology/syllabification exceptions, `src/word.py`)**: three of the surfaced
+  clusters turned out to be genuine base-keyboard-layout ambiguities (a real phoneme silently
+  swallowed by an adjacent digraph sharing one of its keys), not decideStarHashMark issues, and
+  not fixable by *marking* at all in one case — same phenomenon, three shapes:
+  - `fix_rdre_coda_syllable_break` — `-rdre` verbs (perdre, mordre, tordre, ...): infinitive's
+    coda repeats /R/ onto one dedicated key (`perdre` = `p_E_R_d_R_#`), collapsing onto
+    `perdent`/`perde`/`perdes` (single /R/). Splits the coda at the same point
+    `perdez`/`perdons` already split at.
+  - `fix_glide_low_vowel_syllable_break` — `-uer` verbs' passé-simple/participe-présent/
+    subjonctif-imparfait forms (tua, tuant, continua, ...): /ɥ/'s 2-key digraph is a superset
+    of bare /a/'s and /@/'s own keys, so `tua`/`tuant`/`continua`/`continuant`/... all
+    collapsed onto each other. Splits the vowel into its own syllable.
+  - `fix_ayer_conditionnel_onset_glide` — `-ayer` verbs' conditionnel 1p/2p (paieriez,
+    paierions, essaieriez, ...): onset /R/ (one key) is a subset of onset /j/'s 2-key digraph,
+    so `paieriez` collapsed onto `payer`/`payez`/... — verified via Wiktionnaire's IPA
+    (`paieriez` [pɛʁje] genuinely has /ʁ/, `payez` [pɛje] doesn't: not a phonology bug in the
+    data, a keyboard-layout one). A first attempt re-keyed the ending's /j/ as nucleus /i/+/e/
+    instead of onset /j/, but Starboard's nucleus /i/+/e/ chord turned out to already be
+    dedicated to the single phoneme /E/, so `paieriez` just collapsed onto `paierais`/
+    `paierait`/`paieraient` instead — same bug, relocated. Settled on the same syllable-break
+    approach as the other two instead. All three restricted to conjugated verb forms
+    (`infoVerb is not None`) and/or the word's own final syllable, verified against the actual
+    lexicon before implementing — an earlier unrestricted attempt at the `-uer` fix would have
+    also split unrelated high-frequency words (`situation`, `persuader`, ...) that happen to
+    contain the same phoneme shape mid-word with nothing colliding.
+  - Recompute chain after these: `python dictionary.py` (~2.5 min, deletes and rebuilds
+    `Dictionary.pickle`/`FirstTheory.pickle`) → `python -m src.elicitation` → re-answer any
+    newly-surfaced oppositions → `python -m util.build_phase_p_realization`.
+- **Fix 3 (elicitation)**: the `renvoyer` (infinitif/subjonctif-imparfait vs participle forms)
+  and `-oyons`/`-oyions`-family clusters (`croyons`/`croyions`, `voyons`/`voyions`, ...,
+  previously invisible for the same reason as fix 1) needed real new elicitation answers, not a
+  phonology fix — answered directly by the user, no new questionnaire round needed for those.
+- **Result**: non-exempt residual collision count **52 → 2**. Both remaining are unrelated to
+  this fix: `tocard`/`toquard` (a genuine spelling-variant collision, pre-existing, out of
+  scope) and `suffi`/`suffît` (same-lemma, phonology already identical before this session —
+  a pre-existing elicitation gap, not a canonicalization artifact; flagged for a future
+  session, not chased down here).
+- **`tocard`/`toquard`**: added `toquard` (lemme-keyed, covers NOM+ADJ, singular+plural) to
+  `resources/ambiguityIgnoreList.tsv` as `unpopular_spelling` (~10x rarer than `tocard`).
+  Note this file is read only by `src/ambiguitychecker.py`'s own standalone `classifyTheory`
+  report (`loadIgnoredLemmas`, called from that file's own `__main__` only) — verified via
+  grep that `lexique.py`, `dictionary.py` and every `util/export_*.py` script never touch it.
+  It stops the pair from being counted as an outstanding ambiguity in that report; it does
+  **not** change the actual typed theory (`toquard` still physically collides with `tocard`
+  in the real Plover dictionary — a genuine `*`/`#` mark would be needed for that).
+- **Subjonctif imparfait removed from the corpus entirely (2026-09-21)**: the `suffi`/`suffît`
+  investigation above led to auditing this tense more broadly — `src/elicitation.py` had
+  already excluded it from ever getting a discriminator since 2026-09-19 (archaic/literary,
+  "not worth a keypress"), but the words themselves were still in the lexicon, silently
+  colliding with whatever else shared their stroke (not just `suffi`/`suffît` — the audit
+  found this was a significant, previously-uncounted source of the residual: real-ambiguous
+  collision count dropped **4,983 → 134** once these were gone, since a lot of coincidental
+  cross-lemma collisions involved a `sub:imp` form on one side).
+  - `lexique.py::Lexique.stripSubjonctifImparfait` (called from `outputMixedLexique`) strips
+    `sub:imp:*` tags from a row's `infover` before writing `LexiqueMixte.tsv`, dropping the row
+    entirely if that was its only reading (a verb's other in-scope readings sharing the same
+    corpus row, e.g. `sub:imp:1s;sub:pre:3s;`, are kept). Regenerating dropped 1,199 of 137,656
+    rows.
+    `resources/LexiqueSynthetic.tsv` (hand-completed paradigm gaps, not wired into `lexique.py`,
+    see `util/completeVerbParadigms.py`'s own header note) was filtered the same way directly
+    (16,170 of 58,395 rows dropped, all `sub:imp`-only — no mixed rows needed stripping).
+  - `src/verbparadigm.py::FINITE_SLOT_EXCLUDED_CODES` gained `"sub:imp"`, so
+    `util/completeVerbParadigms.py --apply` won't regenerate these slots into
+    `LexiqueSynthetic.tsv` in a future paradigm-completion run.
+  - Corpus size: 184,524 → 167,639 words. `src/elicitation.py`'s
+    `{"subjonctif", "imparfait"} <= c` filter (2026-09-19) is now provably unreachable (no such
+    combination exists anymore) but was left in place rather than removed as part of this
+    change — harmless, and out of this session's scope.
+  - Recompute chain (same as fix 2 above): `python lexique.py` → `python dictionary.py` →
+    `python -m src.elicitation` → `python -m util.build_phase_p_realization`.
+
 ## Status update (2026-09-20)
 
 Written to keep this file honest without a full rewrite: the "Current state" audit and

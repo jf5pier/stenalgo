@@ -4990,5 +4990,163 @@
   "checkedB": [],
   "reviewed": true,
   "clean": true
+ },
+ {
+  "id": "q98",
+  "lemma": "renvoyer",
+  "orthoA": "renvoyer",
+  "atomsA": [
+   "infinitif"
+  ],
+  "checkedA": [
+   "infinitif"
+  ],
+  "orthoB": "renvoyiez",
+  "atomsB": [
+   "nbr_p",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "subjonctif"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q113",
+  "lemma": "renvoyer",
+  "orthoA": "renvoyiez",
+  "atomsA": [
+   "nbr_p",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif"
+  ],
+  "orthoB": "renvoyé",
+  "atomsB": [
+   "VER",
+   "m",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedB": [
+   "m"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q141",
+  "lemma": "renvoyer",
+  "orthoA": "renvoyiez",
+  "atomsA": [
+   "nbr_p",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif"
+  ],
+  "orthoB": "renvoyée",
+  "atomsB": [
+   "VER",
+   "f",
+   "participe",
+   "passé",
+   "s"
+  ],
+  "checkedB": [
+   "f"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q163",
+  "lemma": "renvoyer",
+  "orthoA": "renvoyiez",
+  "atomsA": [
+   "nbr_p",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif"
+  ],
+  "orthoB": "renvoyés",
+  "atomsB": [
+   "VER",
+   "m",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "p"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q184",
+  "lemma": "renvoyer",
+  "orthoA": "renvoyiez",
+  "atomsA": [
+   "nbr_p",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedA": [
+   "subjonctif"
+  ],
+  "orthoB": "renvoyées",
+  "atomsB": [
+   "VER",
+   "f",
+   "p",
+   "participe",
+   "passé"
+  ],
+  "checkedB": [
+   "f",
+   "p"
+  ],
+  "reviewed": true,
+  "clean": false
+ },
+ {
+  "id": "q206",
+  "lemma": "renvoyer",
+  "orthoA": "renvoyai",
+  "atomsA": [
+   "indicatif",
+   "nbr_s",
+   "passé",
+   "pers_1"
+  ],
+  "checkedA": [
+   "passé"
+  ],
+  "orthoB": "renvoyiez",
+  "atomsB": [
+   "nbr_p",
+   "pers_2",
+   "présent",
+   "subjonctif"
+  ],
+  "checkedB": [
+   "subjonctif"
+  ],
+  "reviewed": true,
+  "clean": false
  }
 ]

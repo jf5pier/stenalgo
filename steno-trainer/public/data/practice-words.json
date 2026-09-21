@@ -6315,7 +6315,7 @@
  },
  {
   "ortho": "voyez",
-  "steno": "vwaj/e",
+  "steno": "vwaj/e/-kt",
   "strokes": [
    [
     5,
@@ -6325,6 +6325,10 @@
    ],
    [
     14
+   ],
+   [
+    18,
+    20
    ]
   ],
   "frequency": 191.63
@@ -9103,14 +9107,18 @@
  },
  {
   "ortho": "perdre",
-  "steno": "piedR",
+  "steno": "pieR/pvR-",
   "strokes": [
    [
     4,
     13,
     14,
-    19,
     21
+   ],
+   [
+    4,
+    5,
+    8
    ]
   ],
   "frequency": 131.47
@@ -9246,7 +9254,7 @@
  },
  {
   "ortho": "voyons",
-  "steno": "vwaj/ai",
+  "steno": "vwaj/ai/-k",
   "strokes": [
    [
     5,
@@ -9257,6 +9265,9 @@
    [
     12,
     13
+   ],
+   [
+    18
    ]
   ],
   "frequency": 127.93
@@ -11986,13 +11997,16 @@
  },
  {
   "ortho": "carte",
-  "steno": "katR",
+  "steno": "katR/*",
   "strokes": [
    [
     2,
     12,
     20,
     21
+   ],
+   [
+    10
    ]
   ],
   "frequency": 96.11
@@ -74473,13 +74487,16 @@
  },
  {
   "ortho": "tsar",
-  "steno": "staR",
+  "steno": "staR/*",
   "strokes": [
    [
     3,
     7,
     12,
     21
+   ],
+   [
+    10
    ]
   ],
   "frequency": 11.65
@@ -85700,7 +85717,7 @@
  },
  {
   "ortho": "fixe",
-  "steno": "kpisk",
+  "steno": "kpisk/*",
   "strokes": [
    [
     2,
@@ -85708,6 +85725,9 @@
     13,
     17,
     18
+   ],
+   [
+    10
    ]
   ],
   "frequency": 9.83
@@ -92783,13 +92803,17 @@
  },
  {
   "ortho": "mordre",
-  "steno": "medR",
+  "steno": "meR/pvR-",
   "strokes": [
    [
     6,
     14,
-    19,
     21
+   ],
+   [
+    4,
+    5,
+    8
    ]
   ],
   "frequency": 8.83
@@ -106536,7 +106560,7 @@
  },
  {
   "ortho": "nie",
-  "steno": "mRi/-k",
+  "steno": "mRi/-kR",
   "strokes": [
    [
     6,
@@ -106544,7 +106568,8 @@
     13
    ],
    [
-    18
+    18,
+    21
    ]
   ],
   "frequency": 7.37
@@ -119084,12 +119109,15 @@
  },
  {
   "ortho": "tuant",
-  "steno": "t@a",
+  "steno": "t@a/@",
   "strokes": [
    [
     7,
     11,
     12
+   ],
+   [
+    11
    ]
   ],
   "frequency": 6.42
@@ -119538,20 +119566,6 @@
    ]
   ],
   "frequency": 6.39
- },
- {
-  "ortho": "eût",
-  "steno": "@i/*",
-  "strokes": [
-   [
-    11,
-    13
-   ],
-   [
-    10
-   ]
-  ],
-  "frequency": 6.38
  },
  {
   "ortho": "botte",
@@ -126505,13 +126519,16 @@
  },
  {
   "ortho": "max",
-  "steno": "mask",
+  "steno": "mask/*",
   "strokes": [
    [
     6,
     12,
     17,
     18
+   ],
+   [
+    10
    ]
   ],
   "frequency": 5.94
@@ -132511,22 +132528,6 @@
    ]
   ],
   "frequency": 5.58
- },
- {
-  "ortho": "fût",
-  "steno": "kp@i/*",
-  "strokes": [
-   [
-    2,
-    4,
-    11,
-    13
-   ],
-   [
-    10
-   ]
-  ],
-  "frequency": 5.57
  },
  {
   "ortho": "entreprises",
@@ -152745,7 +152746,7 @@
  },
  {
   "ortho": "croyons",
-  "steno": "kRwaj/ai",
+  "steno": "kRwaj/ai/-k",
   "strokes": [
    [
     2,
@@ -152757,6 +152758,9 @@
    [
     12,
     13
+   ],
+   [
+    18
    ]
   ],
   "frequency": 4.54
@@ -154295,7 +154299,7 @@
  },
  {
   "ortho": "voyiez",
-  "steno": "vwaj/e",
+  "steno": "vwaj/e/-tR",
   "strokes": [
    [
     5,
@@ -154305,6 +154309,10 @@
    ],
    [
     14
+   ],
+   [
+    20,
+    21
    ]
   ],
   "frequency": 4.47
@@ -155646,7 +155654,7 @@
  },
  {
   "ortho": "rejette",
-  "steno": "R@a/vtiet/-k",
+  "steno": "R@a/vtiet/-kR",
   "strokes": [
    [
     8,
@@ -155661,7 +155669,8 @@
     20
    ],
    [
-    18
+    18,
+    21
    ]
   ],
   "frequency": 4.43
@@ -160491,7 +160500,7 @@
  },
  {
   "ortho": "septième",
-  "steno": "sie/tRwiem",
+  "steno": "sie/tRwiem/*",
   "strokes": [
    [
     3,
@@ -160505,6 +160514,9 @@
     13,
     14,
     25
+   ],
+   [
+    10
    ]
   ],
   "frequency": 4.25
@@ -179650,7 +179662,7 @@
  },
  {
   "ortho": "paries",
-  "steno": "pa/Ri/-t",
+  "steno": "pa/Ri/-tR",
   "strokes": [
    [
     4,
@@ -179661,7 +179673,8 @@
     13
    ],
    [
-    20
+    20,
+    21
    ]
   ],
   "frequency": 3.61
@@ -190081,13 +190094,16 @@
  },
  {
   "ortho": "riait",
-  "steno": "Rwie",
+  "steno": "Rwie/*",
   "strokes": [
    [
     8,
     9,
     13,
     14
+   ],
+   [
+    10
    ]
   ],
   "frequency": 3.34
@@ -197788,6 +197804,54 @@
     9,
     12,
     13
+   ],
+   [
+    17
+   ]
+  ],
+  "frequency": 3.15
+ },
+ {
+  "ortho": "craintes",
+  "steno": "kRaiet/-s",
+  "strokes": [
+   [
+    2,
+    8,
+    12,
+    13,
+    14,
+    20
+   ],
+   [
+    17
+   ]
+  ],
+  "frequency": 3.15
+ },
+ {
+  "ortho": "célibataires",
+  "steno": "se/mti/sva/tieR/-s",
+  "strokes": [
+   [
+    3,
+    14
+   ],
+   [
+    6,
+    7,
+    13
+   ],
+   [
+    3,
+    5,
+    12
+   ],
+   [
+    7,
+    13,
+    14,
+    21
    ],
    [
     17

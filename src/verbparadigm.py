@@ -394,7 +394,13 @@ def generateMissingParticiple(
     )
 
 
-FINITE_SLOT_EXCLUDED_CODES = {"inf", "par:pre", "par:pas"}
+FINITE_SLOT_EXCLUDED_CODES = {
+    "inf", "par:pre", "par:pas",
+    # Subjonctif imparfait declared out of scope for the theory 2026-09-21 (see
+    # ROADMAP.md, and src/elicitation.py's matching exclusion since 2026-09-19):
+    # archaic/literary tense, not worth generating synthetic completions for.
+    "sub:imp",
+}
 CONJUGATION_STRING_FIELDS = ("phonology", "rawSyllCV", "rawOrthosyllCV")
 
 

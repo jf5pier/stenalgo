@@ -114,3 +114,4 @@ mar	data_artifact	near-zero frequency, unclear real-word status
 lack	data_artifact	near-zero frequency, unclear real-word status (possibly a stray anglicism or corpus artifact)
 fy	data_artifact	near-zero frequency, unclear real-word status
 fayoter	unpopular_spelling	rare double-t "fayotte" spelling collides with the far more common "fayote" for the exact same ind. présent 3s slot, so it can never get its own discriminator
+toquard	unpopular_spelling	coexisting "qu" spelling of "tocard" (NOM+ADJ, singular+plural all collide identically), ~10x rarer (freq ~0.1 vs ~1.2 combined)
