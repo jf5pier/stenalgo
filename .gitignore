@@ -29,3 +29,8 @@ env/
 # a project resource, never committed. Point --morphalou at wherever it's
 # extracted locally.
 morphalou/
+
+# steno-trainer: compiled by `elm make` locally or in CI (deploy-steno-trainer.yml),
+# never committed. public/data/*.json ARE committed -- see steno-trainer/README.md.
+steno-trainer/main.js
+steno-trainer/elm-stuff/
