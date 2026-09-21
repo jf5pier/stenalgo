@@ -20,20 +20,25 @@
 #  Behavior Research Methods. doi.org/10.3758/s13428-020-01396-2
 #
 import csv
+import json
 import os
 import pickle
 from copy import deepcopy
 
 from src.grammar import Phoneme, Syllable, SyllableCollection
-from src.word import GramCat, Word, WordFeature
+from src.word import GramCat, Word
 from typing import Any
 from src.keyboard import Keyboard, Starboard, Stroke, Strokes
 from src.cpsatsolver import optimizeKeyboard
-from src.featureextractor import (
-    extractDiscriminatingFeatures,
-    buildDiscriminatorSelection,
+from src.ambiguitychecker import (
+    buildFinalInducedStrokes,
+    buildKeypressGroupToWords,
+    buildWordsByOrthoLemme,
+    buildWordToStrokes,
+    composeReservedKeyStrokes,
+    loadReform1990DoubletPairs,
+    realizeKeypressGroupsAsExtraStroke,
 )
-from src.satoptimizer import satOptimizeDiscriminator, _computeFamilyCorrelations, polarityAssociations
 
 
 #from src.cpsatoptimizer import optimizeTheory
@@ -328,8 +333,59 @@ class Dictionary:
                 _ = f.write(f"{strokeString}\t{','.join(wordOrthos)}\n")
             
             print("Max nb word ambiguity:", maxAmbiguity, "for words", maxAmbiguityWords)
-            print("Max frequency ambiguity:", maxFrequencyAmbiguity, "for words", 
+            print("Max frequency ambiguity:", maxFrequencyAmbiguity, "for words",
                   maxFrequencyAmbiguityWords, "\n strokes: ", maxFrequencyAmbiguityStrokes)
+
+    def buildFinalTheory(
+        self, theory: dict[Strokes, list[Word]], keyboard: Keyboard,
+        phaseGPath: str = "phase_g_keypress_assignment.json",
+        resolvedPressSetsPath: str = "resolved_press_sets.json",
+    ) -> dict[Word, Strokes]:
+        """
+        Theory 2: every word's final resolved Strokes, composing theory 1 (buildTheory)
+        with Phase P's same-lemma coda-bank realization
+        (src.ambiguitychecker.realizeKeypressGroupsAsExtraStroke) and the `*`/`#`
+        lemma-homophone reserved-key track
+        (src.ambiguitychecker.composeReservedKeyStrokes) on top. Requires `phaseGPath`
+        (Phase G, `python -m util.build_phase_g_assignment`) and
+        `resolvedPressSetsPath` (Phase E, `python -m src.elicitation`) to already exist.
+        """
+        with open(phaseGPath, encoding="utf-8") as f:
+            phaseG = json.load(f)
+        markersByKeypress = {
+            int(groupId): frozenset(markers) for groupId, markers in phaseG["markersByKeypress"].items()
+        }
+        with open(resolvedPressSetsPath, encoding="utf-8") as f:
+            resolvedGroups = json.load(f)
+
+        wordToStrokes = buildWordToStrokes(theory)
+        wordsByOrthoLemme = buildWordsByOrthoLemme(theory)
+        groupToWords = buildKeypressGroupToWords(resolvedGroups, markersByKeypress, wordToStrokes, wordsByOrthoLemme)
+        assignment = realizeKeypressGroupsAsExtraStroke(groupToWords, theory, keyboard)
+        finalInduced = buildFinalInducedStrokes(theory, groupToWords, assignment)
+        return composeReservedKeyStrokes(finalInduced, loadReform1990DoubletPairs())
+
+    def writeFinalTheory(
+        self, theory: dict[Strokes, list[Word]], finalTheory: dict[Word, Strokes],
+        keyboard: Keyboard, filename: str,
+    ) -> None:
+        """
+        Writes `filename`: one row per word, its phonetic (theory 1) stroke and any
+        extra strokes Phase P/the */# track appended after it. Those extra strokes use
+        coda-bank and reserved (STAR_KEY/HASH_KEY) keys that carry no single assigned
+        phoneme, so `strokesToString` (phoneme-layer only) can't render them -- they're
+        written as raw key-index tuples instead, same as `build_phase_p_realization.py`
+        already reports `chosenKeys`.
+        """
+        wordToStrokes = buildWordToStrokes(theory)
+        with open(filename, "w") as f:
+            _ = f.write("ortho\tlemme\tgramCat\tstrokes\textraStrokes\n")
+            for word in sorted(finalTheory, key=lambda w: (w.lemme, w.gramCat.name, w.ortho)):
+                baseStrokes = wordToStrokes[word]
+                strokeString = keyboard.strokesToString(baseStrokes)
+                extraStrokes = finalTheory[word][len(baseStrokes):]
+                extraString = "/".join(",".join(str(key) for key in stroke) for stroke in extraStrokes)
+                _ = f.write(f"{word.ortho}\t{word.lemme}\t{word.gramCat.name}\t{strokeString}\t{extraString}\n")
 
     def writeConstrainFiles(self, phonemesOrderFile: str = "phoneme_order.csv",
                             multiPhonemeAmbiguityFile: str = "multi_phoneme_ambiguity.csv") -> None:
@@ -432,114 +488,21 @@ if __name__ == "__main__":
     #                 print(iv)
     #                 infoVerbs.append(iv)
     # sys.exit(1)
-    augmentedTheory = {}
-    # if os.path.exists("AugTheory.pickle"):
-    #     with open("AugTheory.pickle", "rb") as pfile:
-    #         augmentedTheory = pickle.load(pfile)
-    # else :
-    #     augmentedTheory = optimizeTheory(theory, starboard)
-    #     with open("AugTheory.pickle", "wb") as pfile:
-    #         pickle.dump(augmentedTheory, pfile)
-
-    
-    discrimFeatureWords: dict[str, set[Word]] = {}
-    orderedFeatures: list[str] = []
-    if os.path.exists("FeatureDiscrimator.pickle"):
-        with open("FeatureDiscrimator.pickle", "rb") as pfile:
-            discrimFeatureWords = pickle.load(pfile)
-            orderedFeatures = pickle.load(pfile)
+    # Theory 2: Phase P's same-lemma coda-bank realization + the */# lemma-homophone
+    # reserved-key track, composed on top of theory 1 (see ROADMAP.md's "What's left to
+    # do" -- this retires the superseded solver-picks-features path that used to run
+    # here, whose satOptimizeDiscriminator conflict count had gone vestigial).
+    phaseGPath = "phase_g_keypress_assignment.json"
+    resolvedPressSetsPath = "resolved_press_sets.json"
+    finalTheoryPath = "theory2.tsv"
+    if os.path.exists(phaseGPath) and os.path.exists(resolvedPressSetsPath):
+        finalTheory = dictionary.buildFinalTheory(theory, starboard, phaseGPath, resolvedPressSetsPath)
+        dictionary.writeFinalTheory(theory, finalTheory, starboard, finalTheoryPath)
+        print(f"\nWrote {finalTheoryPath}: {len(finalTheory)} words with theory 2"
+              f" (Phase P + */# track) strokes.")
     else:
-        discrimFeatureWords, orderedFeatures, _strokeLemmeDiscriminators = \
-            extractDiscriminatingFeatures(theory)
-        with open("FeatureDiscrimator.pickle", "wb") as pfile:
-            pickle.dump(discrimFeatureWords, pfile)
-            pickle.dump(orderedFeatures, pfile)
-
-    # Shared-discriminator selection (src/featureextractor.py's buildDiscriminatorSelection),
-    # computed once here and reused for every downstream consumer -- the feature-count
-    # diagnostics below, the Special keypress mapping table (lemmaFeatureWord), and
-    # satOptimizeDiscriminator -- so none of them can silently diverge from each other
-    # (see SHARED_DISCRIMINATOR_REWIRE_PLAN.md §1).
-    augmentedTheory = buildDiscriminatorSelection(theory, discrimFeatureWords)
-
-    featureCount: dict[WordFeature, int] = {}
-    singleFeatureDiscrimator: dict[str, int] = {}
-    for featureTuple, wordTuples in augmentedTheory.items():
-        for feature in featureTuple:
-            featureCount[feature] = featureCount.get(feature, 0) + len(wordTuples)
-        if len(featureTuple) == 1:
-            f = featureTuple[0]
-            singleFeatureDiscrimator[f] = singleFeatureDiscrimator.get(f, 0) + len(wordTuples)
-            if f in ['indicatif:pers_3:nbr_s','indicatif:présent:nbr_p','présent:nbr_p', 'indicatif:nbr_s'] :
-                for wordTuple in wordTuples:
-                    for word in wordTuple:
-                        print(f"\nSingle feature discrimator '{f}' for {word.lemme} {word.ortho}")
-
-    print(len(featureCount), "features used in discrimation among", len(dictionary.words), "words.")
-    print("Feature counts:", sorted(featureCount.items(), key=lambda x: x[1], reverse=True))
-    print("Single feature discrimator:", sorted(singleFeatureDiscrimator.items(), key=lambda x: x[1], reverse=True))
-
-    unresolvedCount = featureCount.get("nofeature", 0)
-    print(f"\nShared-discriminator selection: {len(featureCount) - (1 if unresolvedCount else 0)}"
-          f" distinct features used, {unresolvedCount} words unresolved.")
-
-    familyCorrelations = _computeFamilyCorrelations(list({word for words in theory.values() for word in words}))
-    associationTable = polarityAssociations(orderedFeatures, familyCorrelations)
-    # print("\nPolarity association table (corpus-grounded, [-1, 1]):")
-    # print("  Opposed (penalized):")
-    # for f1, f2, score in [a for a in associationTable if a[2] < 0]:
-    #     print(f"    {f1:>25} <-> {f2:<25} {score:+.3f}")
-    # print("  Associated (rewarded):")
-    # for f1, f2, score in [a for a in associationTable if a[2] > 0]:
-    #     print(f"    {f1:>25} <-> {f2:<25} {score:+.3f}")
-
-    numSpecialKeypresses, satPenalty, satProven, keyAssignment, conflictedFeatureSets = \
-        satOptimizeDiscriminator(augmentedTheory, theory, numSpecialKeypresses=None)
-    print(f"\nsatOptimizeDiscriminator: {numSpecialKeypresses} special keypresses needed"
-          f" ({'proven optimal' if satProven else 'time limit hit'}),"
-          f" penalty {satPenalty}, {len(conflictedFeatureSets)} conflicting feature sets.")
-    for featureSet in conflictedFeatureSets:
-        print("   conflicting feature set:", featureSet)
-        featuresByKeyInSet: dict[int, list[str]] = {}
-        for feature in featureSet:
-            key = keyAssignment[feature]
-            featuresByKeyInSet[key] = featuresByKeyInSet.get(key, []) + [feature]
-        for key, features in sorted(featuresByKeyInSet.items()):
-            if len(features) > 1:
-                print(f"      colliding on key {key}: {', '.join(sorted(features))}")
-
-    # Every word discriminated by each feature, feature-first (not lemma-first, and
-    # not deduplicated per lemma the way the old example table was) -- the exhaustive
-    # membership behind featureCount's totals above.
-    featureWords: dict[WordFeature, list[Word]] = {}
-    for featureTuple, wordTuples in augmentedTheory.items():
-        for wordTuple in wordTuples:
-            for feature, word in zip(featureTuple, wordTuple):
-                if feature in keyAssignment:
-                    featureWords.setdefault(feature, []).append(word)
-
-    rows = sorted(keyAssignment, key=lambda f: (keyAssignment[f], f))
-
-    LOW_COUNT_THRESHOLD = 30
-    keyWidth = 5
-    featureWidth = max((len(f) for f in rows), default=10) + 2
-    countWidth = max((len(str(featureCount.get(f, 0))) for f in rows), default=1) + 2
-
-    print("\nSpecial keypress mapping:")
-    print("(# Words is the exhaustive count of words that feature discriminates)")
-    print(f"(Words lists every one of them when # Words < {LOW_COUNT_THRESHOLD}, since above that")
-    print(" the list stops being a useful thing to read at a glance)")
-
-    header = f"{'Key':<{keyWidth}}{'Feature':<{featureWidth}}{'# Words':<{countWidth}}Words"
-    print()
-    print(header)
-    print("-" * len(header))
-    for feature in rows:
-        count = featureCount.get(feature, 0)
-        words = ", ".join(sorted(word.ortho for word in featureWords.get(feature, []))) \
-            if count < LOW_COUNT_THRESHOLD else ""
-        line = (f"{keyAssignment[feature]:<{keyWidth}}{feature:<{featureWidth}}"
-                f"{count:<{countWidth}}{words}")
-        print(line)
+        print(f"\nSkipping theory 2 (Phase P + */# track): {phaseGPath} and/or"
+              f" {resolvedPressSetsPath} not found. Run `python -m util.build_phase_g_assignment`"
+              f" and `python -m src.elicitation` first, then re-run `python dictionary.py`.")
 
 

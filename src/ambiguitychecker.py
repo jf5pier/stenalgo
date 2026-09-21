@@ -1083,6 +1083,33 @@ def realizeKeypressGroupsAsExtraStroke(
     return assignment
 
 
+def buildFinalInducedStrokes(
+    theory: dict[Strokes, list[Word]],
+    groupToWords: dict[int, list[Word]],
+    assignment: KeypressGroupPhysicalAssignment,
+) -> dict[Word, Strokes]:
+    """
+    Phase P's final stroke for EVERY word in `theory` -- not just the ones
+    `realizeKeypressGroupsAsExtraStroke` had to consider (its own `allWords` is only the
+    words touched by some Phase G group). `composeReservedKeyStrokes` needs the whole
+    lexicon, since a */# homophone cluster can include words Phase P never touched at
+    all. A word touched by no Phase G group keeps its theory-1 stroke unchanged; a word
+    needing one or more groups gets `assignment.chosenKeysByGroup`'s keys for each,
+    unioned into one shared extra coda stroke -- the same reconstruction
+    `realizeKeypressGroupsAsExtraStroke` already does internally for its own
+    verification pass, generalized here to the full lexicon.
+    """
+    wordToStrokes = buildWordToStrokes(theory)
+    wordToGroups = buildWordToGroups(groupToWords)
+    finalInduced: dict[Word, Strokes] = {}
+    for word, strokes in wordToStrokes.items():
+        keys: set[int] = set()
+        for groupId in wordToGroups.get(word, frozenset()):
+            keys.update(assignment.chosenKeysByGroup.get(groupId, ()))
+        finalInduced[word] = _appendCodaExtraStroke(strokes, tuple(sorted(keys))) if keys else strokes
+    return finalInduced
+
+
 # ═══════════════════════════════════════════════════════════════════════════
 # CLI
 # ═══════════════════════════════════════════════════════════════════════════
