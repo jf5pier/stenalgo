@@ -623,6 +623,81 @@ Fingers assignments :
 
         return strokeString
 
+    # Cosmetic per-key display names for external tools (Plover's raw-steno paper
+    # tape, dictionary export) -- independent of `phonemesAssignedToStroke`'s
+    # solver-optimized ambiguity data, which some single keys legitimately share
+    # more than one phoneme with (context-disambiguated by the theory, not by key
+    # identity). Reserved keys 10/15 reuse the "*"/"#" strings `src.ambiguitychecker`
+    # (STAR_KEY/HASH_KEY) already marks them with; 0/1 are still unassigned (a
+    # possible 3rd mark) and get placeholder names. Plover's `plover_stroke`
+    # requires every key name to be a single character, optionally with one
+    # leading or trailing hyphen -- so, like "*"/"#", these stay bare symbols.
+    _reservedKeyDisplayNames: dict[int, str] = {0: "&", 1: "%", 10: "*", 15: "#"}
+
+    def keyDisplayName(self, keyIndex: int) -> str:
+        """
+        A stable, human-readable name for a physical key, derived from the
+        highest-priority phoneme this (loaded) layout assigns to that key pressed
+        alone. Onset keys get a trailing "-", coda keys a leading "-" (mirroring
+        English steno's S-/-S convention): several phonemes are reused between
+        the left and right hand (e.g. "k" onset vs. "k" coda), so the hyphen
+        placement -- not the letter -- is what keeps every key's name unique.
+        """
+        if keyIndex in self._reservedKeyDisplayNames:
+            return self._reservedKeyDisplayNames[keyIndex]
+        phonemes = self.phonemesAssignedToStroke.get((keyIndex,))
+        if not phonemes:
+            raise KeyError(f"Key {keyIndex} has no single-key phoneme to name it with")
+        label = phonemes[0]
+        if keyIndex in self.keyIDinSyllabicPart.get("coda", []):
+            return f"-{label}"
+        if keyIndex in self.keyIDinSyllabicPart.get("onset", []):
+            return f"{label}-"
+        # Nucleus: left-thumb keys precede the vowel gap, right-thumb keys follow it,
+        # same split English steno uses for A-/O- vs. -E/-U.
+        if self._fingerAssignments[keyIndex] == "rt":
+            return f"-{label}"
+        return f"{label}-"
+
+    def keyDisplayNames(self) -> list[str]:
+        """All 26 key display names, in physical key-index order (0-25)."""
+        return [self.keyDisplayName(i) for i in range(self.nbKeys)]
+
+    def strokesToRTFCRE(self, strokes: Strokes) -> str:
+        """
+        Render strokes using `keyDisplayName`s instead of raw phonemes -- the
+        Plover-dictionary-facing counterpart to `strokesToString`. Only meaningful
+        for base (onset/nucleus/coda) strokes: extra strokes on the reserved keys
+        (star/hash marks) carry no syllabic part and aren't handled here.
+
+        A physical key can only be pressed once per stroke, but some syllables'
+        phoneme lists resolve to overlapping key-tuples (e.g. onset "R" alone is
+        key 8, while onset "j" is the chord (8, 9) -- a syllable containing both
+        legitimately produces key 8 twice via `getStrokeOfSyllableByPart`'s naive
+        concatenation). Deduplicated here so every stroke stays a valid,
+        Plover-parseable steno string; the strokes themselves are left untouched.
+
+        Also sorted by key index: Plover's RTFCRE parser requires each stroke's
+        letters to appear in the system's canonical `KEYS` order (ascending key
+        index, same order `keyDisplayNames` uses) -- some multi-key phoneme
+        combinations resolve their keys out of order (e.g. coda key 21 "-R" before
+        key 20 "-t"), which `strokesToString`'s plain phoneme rendering tolerates
+        but Plover's stricter steno-string parser rejects.
+        """
+        strokeString = ""
+        for stroke in strokes:
+            if not strokeString == "":
+                strokeString += "/"
+            syllableString = {"onset": "", "nucleus": "", "coda": ""}
+            for key in sorted(set(stroke)):
+                syllabicPart = next(
+                    (part for part, keys in self.keyIDinSyllabicPart.items() if key in keys), "")
+                syllableString[syllabicPart] += self.keyDisplayName(key).strip("-")
+            if syllableString["nucleus"] == "":
+                syllableString["nucleus"] = "-"
+            strokeString += f"{syllableString['onset']}{syllableString['nucleus']}{syllableString['coda']}"
+        return strokeString
+
     def setIrelandEnglishLayout(self) -> None:
         layout: dict[str, list[tuple[Stroke, str]]]={
             "onset": [

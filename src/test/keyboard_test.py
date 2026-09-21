@@ -496,6 +496,67 @@ class TestStrokesToString:
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# Plover integration: keyDisplayName / strokesToRTFCRE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+class TestKeyDisplayName:
+
+    def test_reserved_keys_use_fixed_symbols(self, starboard: Starboard):
+        assert starboard.keyDisplayName(10) == "*"
+        assert starboard.keyDisplayName(15) == "#"
+
+    def test_onset_key_gets_trailing_hyphen(self, starboard_with_layout: Starboard):
+        # setIrelandEnglishLayout assigns "s" to onset key (2,)
+        assert starboard_with_layout.keyDisplayName(2) == "s-"
+
+    def test_coda_key_gets_leading_hyphen(self, starboard_with_layout: Starboard):
+        # setIrelandEnglishLayout assigns ["f", "v"] to coda key (16,); first wins.
+        assert starboard_with_layout.keyDisplayName(16) == "-f"
+
+    def test_nucleus_left_thumb_gets_trailing_hyphen(self, starboard_with_layout: Starboard):
+        # (11,) -> "a", left thumb
+        assert starboard_with_layout.keyDisplayName(11) == "a-"
+
+    def test_nucleus_right_thumb_gets_leading_hyphen(self, starboard_with_layout: Starboard):
+        # (13,) -> "e", right thumb
+        assert starboard_with_layout.keyDisplayName(13) == "-e"
+
+    def test_missing_single_key_phoneme_raises(self, starboard: Starboard):
+        with pytest.raises(KeyError):
+            starboard.keyDisplayName(2)  # empty layout, no phoneme assigned yet
+
+    def test_all_26_names_are_unique(self):
+        sb = Starboard.fromJSONFile("starboard3h.json")
+        assert sb is not None
+        names = sb.keyDisplayNames()
+        assert len(names) == 26
+        assert len(set(names)) == 26
+
+
+class TestStrokesToRTFCRE:
+
+    def test_matches_strokes_to_string_shape(self, starboard_with_layout: Starboard):
+        sb = starboard_with_layout
+        stroke = sb.getStrokeOfSyllableByPart({"onset": ["s"], "nucleus": ["a"], "coda": ["t"]})
+        result = sb.strokesToRTFCRE((stroke,))
+        assert result == "sat"
+
+    def test_no_nucleus_inserts_dash(self, starboard_with_layout: Starboard):
+        sb = starboard_with_layout
+        onset_key = sb.keyIDinSyllabicPart["onset"][0]
+        coda_key = sb.keyIDinSyllabicPart["coda"][0]
+        result = sb.strokesToRTFCRE(((onset_key, coda_key),))
+        assert "-" in result
+
+    def test_multiple_strokes_separated_by_slash(self, starboard_with_layout: Starboard):
+        sb = starboard_with_layout
+        stroke1 = sb.getStrokeOfSyllableByPart({"onset": ["s"], "nucleus": ["a"], "coda": []})
+        stroke2 = sb.getStrokeOfSyllableByPart({"onset": [], "nucleus": ["e"], "coda": ["t"]})
+        result = sb.strokesToRTFCRE((stroke1, stroke2))
+        assert "/" in result
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # JSON serialization
 # ═══════════════════════════════════════════════════════════════════════════════
 
