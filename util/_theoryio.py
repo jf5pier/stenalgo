@@ -10,11 +10,11 @@ import pickle
 import sys
 
 from src.grammar import Syllable
-from src.keyboard import Strokes
+from src.keyboard import Keyboard, Strokes
 from src.word import Word
 
 
-def loadFirstTheory() -> dict[Strokes, list[Word]]:
+def _loadDictionaryAndFirstTheory():  # type: ignore[no-untyped-def]
     from dictionary import Dictionary
     # Dictionary.pickle was written while `dictionary.py` ran as __main__, so pickle
     # recorded the class under the "__main__" module -- alias it here so unpickling
@@ -25,7 +25,7 @@ def loadFirstTheory() -> dict[Strokes, list[Word]]:
     if not os.path.exists("Dictionary.pickle"):
         raise RuntimeError("Run `python dictionary.py` first to generate Dictionary.pickle.")
     with open("Dictionary.pickle", "rb") as pfile:
-        pickle.load(pfile)  # the Dictionary itself, unused here
+        dictionary = pickle.load(pfile)
         Syllable.allPhonemeCol = pickle.load(pfile)
         Syllable.phonemeColByPart = pickle.load(pfile)
         Syllable.biphonemeColByPart = pickle.load(pfile)
@@ -34,4 +34,36 @@ def loadFirstTheory() -> dict[Strokes, list[Word]]:
     if not os.path.exists("FirstTheory.pickle"):
         raise RuntimeError("Run `python dictionary.py` first to generate FirstTheory.pickle.")
     with open("FirstTheory.pickle", "rb") as pfile:
-        return pickle.load(pfile)
+        theory: dict[Strokes, list[Word]] = pickle.load(pfile)
+
+    return dictionary, theory
+
+
+def loadFirstTheory() -> dict[Strokes, list[Word]]:
+    """Theory 1: base (onset/nucleus/coda) strokes only, no homophone marks."""
+    _dictionary, theory = _loadDictionaryAndFirstTheory()
+    return theory
+
+
+def loadFinalTheory(
+    keyboard: Keyboard,
+    phaseGPath: str = "phase_g_keypress_assignment.json",
+    resolvedPressSetsPath: str = "resolved_press_sets.json",
+) -> dict[Word, Strokes]:
+    """
+    Theory 2: every word's final resolved Strokes -- theory 1 composed with Phase P's
+    same-lemma coda-bank marks and the `*`/`#` lemma-homophone track (see
+    `Dictionary.buildFinalTheory`, `ROADMAP.md`'s "Status update"). This is what
+    actually disambiguates homophones like "a"/"as"/"à" -- `loadFirstTheory` alone
+    does not.
+
+    Requires `phaseGPath` (`python -m util.build_phase_g_assignment`) and
+    `resolvedPressSetsPath` (`python -m src.elicitation`) to already exist.
+    """
+    if not os.path.exists(phaseGPath):
+        raise RuntimeError(f"Run `python -m util.build_phase_g_assignment` first to generate {phaseGPath}.")
+    if not os.path.exists(resolvedPressSetsPath):
+        raise RuntimeError(f"Run `python -m src.elicitation` first to generate {resolvedPressSetsPath}.")
+
+    dictionary, theory = _loadDictionaryAndFirstTheory()
+    return dictionary.buildFinalTheory(theory, keyboard, phaseGPath, resolvedPressSetsPath)

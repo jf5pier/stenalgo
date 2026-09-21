@@ -1,41 +1,48 @@
 """
 Export a real Plover JSON dictionary (steno string -> French word) from
-`dictionary.py`'s theory, using `Starboard.strokesToRTFCRE` (Stenalgo's own key
-names, matching `plover_stenalgo`'s system plugin) instead of the phoneme-letter
+theory 2 (base strokes + Phase P's same-lemma marks + the `*`/`#` lemma-homophone
+track -- see `util._theoryio.loadFinalTheory`), rendered via
+`util._stenorender.renderFinalStrokesToRTFCRE` (Stenalgo's own key names,
+matching `plover_stenalgo`'s system plugin) instead of the phoneme-letter
 rendering `writeTheory`/`theory.tsv` uses.
 
-This is base strokes only (theory 1, `FirstTheory.pickle`): Phase P's star/hash
-marks aren't wired into a persisted `dict[Word, Strokes]` output yet (see
-CLAUDE.md/ROADMAP.md), so words that only the roadmap's still-pending
-homophone-marking work would distinguish collide onto the same steno string
-here -- expected, not a regression. The most frequent word of each colliding
-group is kept; the rest are reported, same as `writeTheory`'s existing
-ambiguity reporting.
+Until 2026-09-21 this only used theory 1 (`FirstTheory.pickle`), so homophones
+the marking pipeline is specifically built to distinguish (e.g. "a"/"as"/"à")
+collided onto the same steno string in the real dictionary. Any collision
+remaining now is either an intentional exemption (homograph, 1990-reform
+doublet, one word >10x rarer than the other) or a real gap in the marking
+pipeline, not something this exporter can fix -- the most frequent word of
+each colliding group is kept; the rest are reported, same as `writeTheory`'s
+existing ambiguity reporting.
 
 Run: python -m util.export_plover_dictionary
-Requires FirstTheory.pickle/Dictionary.pickle (`python dictionary.py` first).
+Requires FirstTheory.pickle/Dictionary.pickle (`python dictionary.py` first),
+phase_g_keypress_assignment.json (`python -m util.build_phase_g_assignment`) and
+resolved_press_sets.json (`python -m src.elicitation`).
 """
 import json
 from collections import defaultdict
 
 from src.keyboard import Starboard
 from src.word import Word
-from util._theoryio import loadFirstTheory
+from util._stenorender import renderFinalStrokesToRTFCRE
+from util._theoryio import loadFinalTheory
 
 KEYBOARD_JSON = "starboard3h.json"
 OUTPUT_PATH = "plover_stenalgo_dictionary.json"
 
 
 def main() -> None:
-    theory = loadFirstTheory()
     starboard = Starboard.fromJSONFile(KEYBOARD_JSON)
     if starboard is None:
         raise RuntimeError(f"{KEYBOARD_JSON} not found; run dictionary.py once first to generate it.")
 
+    finalTheory = loadFinalTheory(starboard)
+
     stenoToWords: dict[str, list[Word]] = defaultdict(list)
-    for strokes, words in theory.items():
-        steno = starboard.strokesToRTFCRE(strokes)
-        stenoToWords[steno].extend(words)
+    for word, strokes in finalTheory.items():
+        steno = renderFinalStrokesToRTFCRE(starboard, strokes)
+        stenoToWords[steno].append(word)
 
     stenoDict: dict[str, str] = {}
     collisions: list[tuple[str, list[str]]] = []
@@ -49,8 +56,8 @@ def main() -> None:
         json.dump(stenoDict, f, ensure_ascii=False, indent=1, sort_keys=True)
 
     print(f"Wrote {OUTPUT_PATH}: {len(stenoDict)} strokes"
-          f" ({len(collisions)} same-steno collisions -- expected, the pending"
-          f" homophone-marking work's job, not this exporter's).")
+          f" ({len(collisions)} same-steno collisions -- expected for homograph/exempted"
+          f" pairs, not a regression).")
     for steno, orthos in sorted(collisions, key=lambda c: -len(c[1]))[:10]:
         print(f"  {steno!r}: {orthos} -> kept {stenoDict[steno]!r}")
 
