@@ -12,15 +12,33 @@ is hand-encoded here from `Starboard._printableKeyLayout`'s known ASCII shape
 physical key count/shape ever changes.
 
 Run: python -m util.export_keyboard_layout
-Requires `starboard3h.json` (`python dictionary.py` generates it).
+Requires `starboard3h.json` (`python dictionary.py` generates it) and, for the
+conjugation-marker legend, `phase_p_keypress_realization.json`
+(`python -m util.build_phase_p_realization`) -- optional, skipped if missing.
 """
 import json
+import os
 
 from src.keyboard import Starboard
 from util.export_plover_system import GEMINI_PR_LABELS
 
 KEYBOARD_JSON = "starboard3h.json"
+PHASE_P_REALIZATION_JSON = "phase_p_keypress_realization.json"
 OUTPUT_PATH = "steno-trainer/public/data/keyboard-layout.json"
+
+# French display labels for the atomic grammatical-feature markers Phase P groups onto
+# a keypress (`src.word.atomicFeatures`/`src.satoptimizer`'s vocabulary). Only used for
+# the trainer's legend text -- purely cosmetic, has no bearing on the assignment itself.
+MARKER_LABELS: dict[str, str] = {
+    "s": "singulier", "nbr_s": "singulier",
+    "p": "pluriel", "nbr_p": "pluriel",
+    "m": "masculin", "f": "féminin",
+    "pers_1": "1re personne", "pers_2": "2e personne", "pers_3": "3e personne",
+    "indicatif": "indicatif", "présent": "présent", "imparfait": "imparfait",
+    "future": "futur", "passé": "passé", "conditionnel": "conditionnel",
+    "subjonctif": "subjonctif", "impératif": "impératif", "infinitif": "infinitif",
+    "participe": "participe",
+}
 
 LEFT_BANK_KEYS = [[0, 2, 4, 6, 8], [1, 3, 5, 7, 9]]
 RIGHT_BANK_KEYS = [[16, 18, 20, 22, 24], [17, 19, 21, 23, 25]]
@@ -60,6 +78,73 @@ def _handAndGridPosition(keyIndex: int) -> tuple[str, int, int]:
     raise ValueError(f"Key {keyIndex} not placed in any bank/thumb-cluster/off-home slot")
 
 
+def _phonemeLayers(starboard: Starboard) -> list[dict]:
+    """
+    Chords of 2+ keys, grouped by chord size -- the same grouping
+    `Starboard.printLayout` draws as its "N-key phonemes layer" ASCII boards.
+    Layer 1 (single-key chords) is already `keyDisplayNames()` (the `name`
+    field on each key above), so it's skipped here.
+
+    Emits both `phonemesByKey` (per-key overlay text, for drawing a keyboard
+    grid the way `printLayout` does -- a key touched by several chords shows
+    all of them concatenated) and `strokes` (the underlying chords themselves,
+    unambiguous even where several land on the same key -- for a plain-text
+    legend instead of a grid, which reads better once a layer's chords are too
+    sparse to fill a whole board, e.g. the 3-/4-key thumb-only layers here).
+    """
+    maxKeyPress = max((len(stroke) for stroke in starboard.phonemesAssignedToStroke), default=1)
+    layers = []
+    for keyCount in range(2, maxKeyPress + 1):
+        strokesAtSize = [
+            (sorted(stroke), "".join(phonemes))
+            for stroke, phonemes in starboard.phonemesAssignedToStroke.items()
+            if len(stroke) == keyCount
+        ]
+        if not strokesAtSize:
+            continue
+        phonemesByKey: dict[int, str] = {}
+        for keys, phonemes in strokesAtSize:
+            for key in keys:
+                phonemesByKey[key] = phonemesByKey.get(key, "") + phonemes
+        layers.append({
+            "keyCount": keyCount,
+            "phonemesByKey": {str(k): v for k, v in phonemesByKey.items()},
+            "strokes": [{"keys": keys, "phonemes": phonemes} for keys, phonemes in strokesAtSize],
+        })
+    return layers
+
+
+def _conjugationMarkers(starboard: Starboard) -> list[dict]:
+    """
+    The same-lemma/conjugation track's key -> meaning legend (Phase P; see
+    `src/ambiguitychecker.py`'s module docstring for why this is a *distinct*
+    mechanism from the `*`/`#` lemma-homophone track below) -- one entry per
+    `phase_p_keypress_realization.json` keypress group, giving the physical
+    key(s) chosen for it and a French label for the grammatical features it
+    disambiguates (e.g. "impératif, 1re personne" on key "-k").
+    """
+    if not os.path.exists(PHASE_P_REALIZATION_JSON):
+        return []
+    with open(PHASE_P_REALIZATION_JSON, encoding="utf-8") as f:
+        realization = json.load(f)
+
+    markers = []
+    for group in realization.get("keypressGroups", {}).values():
+        keys: list[int] = group["chosenKeys"]
+        labels: list[str] = []
+        for marker in group["markers"]:
+            label = MARKER_LABELS.get(marker, marker)
+            if label not in labels:
+                labels.append(label)
+        markers.append({
+            "keys": keys,
+            "keyNames": [starboard.keyDisplayName(k) for k in keys],
+            "label": ", ".join(labels),
+        })
+    markers.sort(key=lambda m: m["keys"])
+    return markers
+
+
 def main() -> None:
     starboard = Starboard.fromJSONFile(KEYBOARD_JSON)
     if starboard is None:
@@ -96,6 +181,8 @@ def main() -> None:
         },
         "syllabicParts": starboard.keyIDinSyllabicPart,
         "reservedKeys": starboard._reservedKeys,
+        "phonemeLayers": _phonemeLayers(starboard),
+        "conjugationMarkers": _conjugationMarkers(starboard),
     }
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:

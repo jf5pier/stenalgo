@@ -9,7 +9,7 @@ import Html.Attributes exposing (class, disabled)
 import Html.Events exposing (onClick)
 import Http
 import Json.Decode as D
-import Keyboard exposing (KeyInfo)
+import Keyboard exposing (KeyInfo, Layout)
 import Ports
 import Set
 
@@ -28,7 +28,7 @@ type SerialStatus
 
 
 type alias Model =
-    { layout : LoadState (List KeyInfo)
+    { layout : LoadState Layout
     , words : LoadState (List PracticeWord)
     , drill : Maybe Drill.State
     , keymap : Dict String Int
@@ -37,7 +37,7 @@ type alias Model =
 
 
 type Msg
-    = GotLayout (Result Http.Error (List KeyInfo))
+    = GotLayout (Result Http.Error Layout)
     | GotWords (Result Http.Error (List PracticeWord))
     | ClickConnect
     | SerialStatusChanged String
@@ -67,8 +67,8 @@ init _ =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        GotLayout (Ok keys) ->
-            ( { model | layout = Loaded keys, keymap = Keyboard.geminiKeymap keys }, Cmd.none )
+        GotLayout (Ok layout) ->
+            ( { model | layout = Loaded layout, keymap = Keyboard.geminiKeymap layout.keys }, Cmd.none )
 
         GotLayout (Err err) ->
             ( { model | layout = Failed (httpErrorToString err) }, Cmd.none )
@@ -144,18 +144,35 @@ subscriptions _ =
         ]
 
 
+{-| Two columns: a narrow left sidebar carrying the title and the two
+plain-text legends (too easy to lose below the tall keyboards otherwise), and
+the actual trainer -- connect button, drill, interactive keyboard, second
+chord-layer keyboard -- to its right.
+-}
 view : Model -> Html Msg
 view model =
     div [ class "app" ]
-        [ h1 [] [ text "Stenalgo practice" ]
-        , case model.serial of
-            Unsupported ->
-                p [ class "unsupported" ]
-                    [ text "This browser doesn't support the Web Serial API. Use Chrome or Edge to practice with real hardware." ]
+        [ div [ class "sidebar" ] (h1 [] [ text "Stenalgo practice" ] :: viewSidebarLegends model)
+        , div [ class "main" ]
+            [ case model.serial of
+                Unsupported ->
+                    p [ class "unsupported" ]
+                        [ text "This browser doesn't support the Web Serial API. Use Chrome or Edge to practice with real hardware." ]
 
-            _ ->
-                viewTrainer model
+                _ ->
+                    viewTrainer model
+            ]
         ]
+
+
+viewSidebarLegends : Model -> List (Html Msg)
+viewSidebarLegends model =
+    case model.layout of
+        Loaded layout ->
+            [ Keyboard.viewLegends layout ]
+
+        _ ->
+            []
 
 
 viewTrainer : Model -> Html Msg
@@ -187,22 +204,64 @@ viewTrainer model =
             Loading ->
                 p [] [ text "Loading keyboard layout..." ]
 
-            Loaded keys ->
-                Keyboard.view
-                    { highlighted = model.drill |> Maybe.andThen Drill.expectedStroke |> Maybe.withDefault Set.empty
-                    , correct = model.drill |> Maybe.andThen .feedback
-                    }
-                    keys
+            Loaded layout ->
+                div []
+                    [ Keyboard.view
+                        { highlighted = model.drill |> Maybe.andThen Drill.expectedStroke |> Maybe.withDefault Set.empty
+                        , correct = model.drill |> Maybe.andThen .feedback
+                        }
+                        layout.keys
+                    , Keyboard.viewChordBoard layout
+                    ]
         ]
 
 
+{-| Reserved keys (`*`, `#`, and the two still-unassigned ones) never carry a
+phoneme -- a stroke made up only of those is the `*`/`#` track's trailing
+mark, which picks which *lemma* you mean among homophones of different words
+(`src/ambiguitychecker.py`'s "lemma-homophone ambiguity", e.g. a/à/as), not a
+conjugated form of one lemma (that's Phase P's separate mechanism, an extra
+stroke of ordinary coda keys -- see the sidebar's "Conjugation markers"
+legend). Split onto its own line under the word, always rendered (even
+empty) so a word that has one doesn't shift the layout of the one after it.
+-}
 viewDrill : Model -> Html Msg
 viewDrill model =
     case model.drill |> Maybe.andThen Drill.currentWord of
         Just word ->
+            let
+                reservedKeys =
+                    case model.layout of
+                        Loaded layout ->
+                            layout.keys |> List.filter .reserved |> List.map .index |> Set.fromList
+
+                        _ ->
+                            Set.empty
+
+                isMarkStroke stroke =
+                    not (List.isEmpty stroke) && List.all (\k -> Set.member k reservedKeys) stroke
+
+                strokeParts =
+                    List.map2 Tuple.pair (String.split "/" word.steno) word.strokes
+
+                basePart =
+                    strokeParts |> List.filter (\( _, stroke ) -> not (isMarkStroke stroke)) |> List.map Tuple.first |> String.join "/"
+
+                markPart =
+                    strokeParts |> List.filter (\( _, stroke ) -> isMarkStroke stroke) |> List.map Tuple.first |> String.join "/"
+            in
             div [ class "drill" ]
                 [ p [ class "target-word" ] [ text word.ortho ]
-                , p [ class "target-steno" ] [ text word.steno ]
+                , p [ class "target-steno" ] [ text basePart ]
+                , p [ class "target-mark" ]
+                    [ text
+                        (if String.isEmpty markPart then
+                            "\u{00A0}"
+
+                         else
+                            markPart
+                        )
+                    ]
                 ]
 
         Nothing ->
