@@ -18,7 +18,7 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from itertools import combinations
 
-from src.keyboard import Strokes
+from src.keyboard import Strokes, canonicalizeStrokes
 from src.word import GramCat, Lemme, LemmeGramCat, Word, WordOrtho, groupWordsByLemme
 
 LemmaHomophoneGroupKey = tuple[Strokes, LemmeGramCat]
@@ -61,9 +61,22 @@ def wordFeatureCombinations(word: Word) -> list[FeatureCombination]:
 def buildLemmaHomophoneGroups(theory: dict[Strokes, list[Word]]) -> dict[LemmaHomophoneGroupKey, list[Word]]:
     """Every same-lemma (lemme+gramCat) homophone group of size > 1, across all strokes.
     Lemma-homophone (cross-lemma) grouping is a separate, unrelated track (the `*`/`#`
-    reserved keys) and is not built here."""
-    groups: dict[LemmaHomophoneGroupKey, list[Word]] = {}
+    reserved keys) and is not built here.
+
+    `theory`'s own dict keys are the raw, order/repeat-preserving Strokes tuples
+    `Dictionary.buildTheory` builds per word (useful for `strokesToString`'s
+    human-readable rendering), not the physically-realized chord -- two words can
+    collide on the same physical stroke while landing in different `theory` entries
+    (differing key order, or one phoneme's dedicated key already covered by another
+    phoneme's multi-key digraph). Regroup by the canonical (sorted, deduped) stroke
+    first so those collisions are found here rather than staying invisible to
+    elicitation."""
+    byCanonicalStroke: dict[Strokes, list[Word]] = defaultdict(list)
     for strokes, words in theory.items():
+        byCanonicalStroke[canonicalizeStrokes(strokes)].extend(words)
+
+    groups: dict[LemmaHomophoneGroupKey, list[Word]] = {}
+    for strokes, words in byCanonicalStroke.items():
         for lemme, lemmeWords in groupWordsByLemme(words).items():
             if len(lemmeWords) > 1:
                 groups[(strokes, lemme)] = lemmeWords
