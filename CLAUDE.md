@@ -29,6 +29,10 @@ python dictionary.py
 
 # Rebuild the Phase P physical-realization artifact
 python -m util.build_phase_p_realization
+
+# Regenerate steno-trainer's data exports (run after starboard3h.json or the lexicon changes)
+python -m util.export_keyboard_layout
+python -m util.export_practice_words
 ```
 
 ## Architecture

@@ -22,42 +22,16 @@ resolved_press_sets.json (`python -m src.elicitation`).
 """
 import json
 import os
-import pickle
 
 from src.ambiguitychecker import (
     buildKeypressGroupToWords, buildWordsByOrthoLemme, buildWordToStrokes, realizeKeypressGroupsAsExtraStroke,
 )
-from src.grammar import Syllable
 from src.keyboard import Starboard
+from util._theoryio import loadFirstTheory
 
 PHASE_G_PATH = "phase_g_keypress_assignment.json"
 RESOLVED_PRESS_SETS_PATH = "resolved_press_sets.json"
 OUTPUT_PATH = "phase_p_keypress_realization.json"
-
-
-def _loadTheory() -> dict:
-    import sys
-
-    from dictionary import Dictionary
-    # Dictionary.pickle was written while `dictionary.py` ran as __main__, so pickle
-    # recorded the class under the "__main__" module -- alias it here so unpickling
-    # finds it, same trick `src/ambiguitychecker.py`'s own __main__ relies on when run
-    # directly (`python -m src.ambiguitychecker` doesn't need this; a plain util script does).
-    sys.modules["__main__"].Dictionary = Dictionary  # type: ignore[attr-defined]
-
-    if not os.path.exists("Dictionary.pickle"):
-        raise RuntimeError("Run `python dictionary.py` first to generate Dictionary.pickle.")
-    with open("Dictionary.pickle", "rb") as pfile:
-        _dictionary = pickle.load(pfile)
-        Syllable.allPhonemeCol = pickle.load(pfile)
-        Syllable.phonemeColByPart = pickle.load(pfile)
-        Syllable.biphonemeColByPart = pickle.load(pfile)
-        Syllable.multiphonemeColByPart = pickle.load(pfile)
-
-    if not os.path.exists("FirstTheory.pickle"):
-        raise RuntimeError("Run `python dictionary.py` first to generate FirstTheory.pickle.")
-    with open("FirstTheory.pickle", "rb") as pfile:
-        return pickle.load(pfile)
 
 
 def main() -> None:
@@ -66,7 +40,7 @@ def main() -> None:
     if not os.path.exists(RESOLVED_PRESS_SETS_PATH):
         raise RuntimeError(f"Run `python -m src.elicitation` first to generate {RESOLVED_PRESS_SETS_PATH}.")
 
-    theory = _loadTheory()
+    theory = loadFirstTheory()
     starboard = Starboard.fromJSONFile("starboard3h.json")
     if starboard is None:
         raise RuntimeError("starboard3h.json not found; run dictionary.py once first to generate it.")

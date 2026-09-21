@@ -16,42 +16,18 @@ Run: python -m util.export_plover_dictionary
 Requires FirstTheory.pickle/Dictionary.pickle (`python dictionary.py` first).
 """
 import json
-import os
-import pickle
-import sys
 from collections import defaultdict
 
-from src.grammar import Syllable
-from src.keyboard import Starboard, Strokes
+from src.keyboard import Starboard
 from src.word import Word
+from util._theoryio import loadFirstTheory
 
 KEYBOARD_JSON = "starboard3h.json"
 OUTPUT_PATH = "plover_stenalgo_dictionary.json"
 
 
-def _loadTheory() -> dict[Strokes, list[Word]]:
-    from dictionary import Dictionary
-    # Same __main__-aliasing trick util/build_phase_p_realization.py uses: Dictionary
-    # was pickled while dictionary.py ran as __main__.
-    sys.modules["__main__"].Dictionary = Dictionary  # type: ignore[attr-defined]
-
-    if not os.path.exists("Dictionary.pickle"):
-        raise RuntimeError("Run `python dictionary.py` first to generate Dictionary.pickle.")
-    with open("Dictionary.pickle", "rb") as pfile:
-        pickle.load(pfile)  # the Dictionary itself, unused here
-        Syllable.allPhonemeCol = pickle.load(pfile)
-        Syllable.phonemeColByPart = pickle.load(pfile)
-        Syllable.biphonemeColByPart = pickle.load(pfile)
-        Syllable.multiphonemeColByPart = pickle.load(pfile)
-
-    if not os.path.exists("FirstTheory.pickle"):
-        raise RuntimeError("Run `python dictionary.py` first to generate FirstTheory.pickle.")
-    with open("FirstTheory.pickle", "rb") as pfile:
-        return pickle.load(pfile)
-
-
 def main() -> None:
-    theory = _loadTheory()
+    theory = loadFirstTheory()
     starboard = Starboard.fromJSONFile(KEYBOARD_JSON)
     if starboard is None:
         raise RuntimeError(f"{KEYBOARD_JSON} not found; run dictionary.py once first to generate it.")
