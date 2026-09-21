@@ -1150,6 +1150,26 @@ class Lexique:
         print("Nb missing", len(missing))
         print("\n".join(map(str, self.mismatchSyllableAssociation)))
 
+    @staticmethod
+    def stripSubjonctifImparfait(infoVerb: str) -> str | None:
+        """
+        Strip any "sub:imp:*" (subjonctif imparfait) tags from an infover string,
+        returning None if that was the word's ONLY reading -- the caller should then
+        drop the row entirely. Declared out of scope for the theory 2026-09-21 (see
+        ROADMAP.md): src/elicitation.py already excluded this combination from ever
+        getting a discriminator (2026-09-19, archaic/literary tense, not worth a
+        keypress), which just left it silently colliding with whatever else shared
+        its stroke (e.g. "suffît" onto "suffi") instead of actually being unreachable.
+        Removing it from the corpus makes that explicit: the tense is no longer part
+        of the typable theory at all, rather than present-but-permanently-colliding.
+        A verb's other, in-scope readings sharing the same row (e.g. "sub:imp:1s;
+        sub:pre:3s;") are kept -- only the sub:imp tag itself is dropped.
+        """
+        if not infoVerb:
+            return infoVerb
+        kept = [tag for tag in infoVerb.split(";") if tag and not tag.startswith("sub:imp")]
+        return ";".join(kept) + ";" if kept else None
+
     def outputMixedLexique(self, filename: str) -> None:
         with open(filename, "w") as f:
             fieldnames = ["ortho", "phon", "lemme", "cgram", "cgramortho",
@@ -1161,6 +1181,9 @@ class Lexique:
 
             for word in sorted(self.words, key=lambda w: w.ortho):
                 if word.orthosyll_cv != []:
+                    infoVerbOut = self.stripSubjonctifImparfait(word.info_verb)
+                    if infoVerbOut is None:
+                        continue
                     printVerbose(word.ortho, ["Writing to", filename])
                     orthoOut = word.ortho
                     orthosyllOut = word.writeOrthoSyll()
@@ -1226,7 +1249,7 @@ class Lexique:
                         "cgramortho": word.ortho_gram_cat,
                         "genre": word.gender,
                         "nombre": word.number,
-                        "infover": word.info_verb,
+                        "infover": infoVerbOut,
                         "syll_cv": word.writePhonoSyll(),
                         "orthosyll_cv": orthosyllOut,
                         "freqlivres": word.frequency,
