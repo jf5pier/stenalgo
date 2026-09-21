@@ -29,7 +29,7 @@ from functools import cmp_to_key
 from itertools import combinations
 
 from src.grammar import Phoneme
-from src.keyboard import Keyboard, Stroke, Strokes
+from src.keyboard import Keyboard, Stroke, Strokes, canonicalizeStrokes
 from src.word import (
     Lemme, LemmeGramCat, Word, WordFeature, atomicFeatures, groupWordsByBareLemme, groupWordsByLemme,
 )
@@ -392,7 +392,7 @@ def groupHomophonesByReservedStroke(finalInduced: dict[Word, Strokes]) -> dict[S
     """
     byStroke: dict[Strokes, list[Word]] = defaultdict(list)
     for word, stroke in finalInduced.items():
-        byStroke[stroke].append(word)
+        byStroke[canonicalizeStrokes(stroke)].append(word)
 
     groups: dict[Strokes, list[Word]] = {}
     for stroke, words in byStroke.items():
