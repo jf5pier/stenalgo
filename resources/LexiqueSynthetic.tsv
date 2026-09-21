@@ -20892,9 +20892,9 @@ chouinasses	Swinas	chouiner	VER	VER			sub:imp:2s;	S_w_i|n_a_s_#	ch_ou_i|n_a_ss_e
 chouinassions	Swinasj§	chouiner	VER	VER			sub:imp:1p;	S_w_i|n_a|s_j_§	ch_ou_i|n_a|ss_i_ons	0.0	0.0	synthetic
 chouinassent	Swinas	chouiner	VER	VER			sub:imp:3p;	S_w_i|n_a_s_#	ch_ou_i|n_a_ss_ent	0.0	0.0	synthetic
 évasâtes	evazat	évaser	VER	VER			ind:pas:2p;	e|v_a|z_a_t_#	é|v_a|s_â_t_es	0.0	0.0	synthetic
-évase	evaz	évaser	VER	VER			sub:pre:1s;	e|v_a|z_#	é|v_a|s_e	0.0	0.0	synthetic
-évases	evaz	évaser	VER	VER			sub:pre:2s;	e|v_a|z_#	é|v_a|s_es	0.0	0.0	synthetic
-évase	evaz	évaser	VER	VER			sub:pre:3s;	e|v_a|z_#	é|v_a|s_e	0.0	0.0	synthetic
+évase	evaz	évaser	VER	VER			sub:pre:1s;	e|v_a_z_#	é|v_a_s_e	0.0	0.0	synthetic
+évases	evaz	évaser	VER	VER			sub:pre:2s;	e|v_a_z_#	é|v_a_s_es	0.0	0.0	synthetic
+évase	evaz	évaser	VER	VER			sub:pre:3s;	e|v_a_z_#	é|v_a_s_e	0.0	0.0	synthetic
 évasasse	evazas	évaser	VER	VER			sub:imp:1s;	e|v_a|z_a_s_#	é|v_a|s_a_ss_e	0.0	0.0	synthetic
 évasasses	evazas	évaser	VER	VER			sub:imp:2s;	e|v_a|z_a_s_#	é|v_a|s_a_ss_es	0.0	0.0	synthetic
 évasassions	evazasj§	évaser	VER	VER			sub:imp:1p;	e|v_a|z_a|s_j_§	é|v_a|s_a|ss_i_ons	0.0	0.0	synthetic

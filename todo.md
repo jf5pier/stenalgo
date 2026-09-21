@@ -7,7 +7,9 @@ Written to survive a `/clear` — read this file first in a fresh session.
 For the homophone-theory work (Phase 0 through Phase P milestone 1 and the `*`/`#`
 lemma-homophone track), **`ROADMAP.md`'s "Status update (2026-09-20)" section and
 `ATOMIC_KEYPRESS_REWIRE_PLAN.md` are authoritative** — do not reconstruct state from the
-session notes below. The only still-open items tracked in THIS file are the lexicon
+session notes below. Before touching `resources/Lexique383.tsv`, `LexiqueInfraCorrespondance.tsv`,
+`LexiqueMixte.tsv`, or `LexiqueSynthetic.tsv`, read `LEXICON_RECOMPUTE_PIPELINE.md` — the
+recompute chain has manual, order-dependent steps and two silent-failure traps. The only still-open items tracked in THIS file are the lexicon
 data-quality bullets in "Still open" below and the `"p"` vs `"f_p"`/`"m_p"` feature-fusion
 scoping (ROADMAP design decision 4); everything else here is history.
 
@@ -70,6 +72,15 @@ pass (`pytest src/test/`). The reform1990 thread lives in
 - `problemList`'s 27 migrated entries in `resources/lexiconExclusions.tsv` mostly have
   guessed/unverified reasons (see file header) — worth revisiting per-word if anyone has time,
   not urgent since behavior is unchanged from before the migration.
+- **A round of lexicon re-validation for anomaly classes beyond what Phase 0's manual review
+  already caught** — raised while chasing the `évaser` syllabification bug (2026-09-20, see
+  `LEXICON_RECOMPUTE_PIPELINE.md`). At minimum:
+  - words that lose their gender when moving from singular to plural, or the reverse
+  - words that lose their number when moving from masculine to feminine, or the reverse
+  - same-lemme words whose phonology varies inconsistently when a silent suffix letter is
+    added (the `évaser` bug's own class — real corpus-sourced sibling forms disagreed with
+    synthetically-generated ones on where a stem-final consonant syllabifies)
+  - likely more checks worth designing once this one is scoped; not started.
 
 ## History — superseded status snapshots (nothing live below this line)
 

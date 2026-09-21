@@ -50909,8 +50909,8 @@ essuyé	es8ije	essuyer	VER	VER	m	s	par:pas;	e|s_8_ij|e	e|ss_u_y|é	5.0	1.68
 essuyée	es8ije	essuyer	VER	VER	f	s	par:pas;	e|s_8_ij|e_#	e|ss_u_y|é_e	0.61	0.04
 essuyées	es8ije	essuyer	VER	VER	f	p	par:pas;	e|s_8_ij|e_#	e|ss_u_y|é_es	0.34	0.02
 essuyés	es8ije	essuyer	VER	VER	m	p	par:pas;	e|s_8_ij|e_#	e|ss_u_y|é_s	0.07	0.03
-est	e	être	VER	ADJ,NOM,AUX,VER			ind:pre:3s;	e_#_#	e_s_t	6331.76	19417.69
-est	e	être	AUX	ADJ,NOM,AUX,VER			ind:pre:3s;	e_#_#	e_s_t	1600.27	3318.95
+est	E	être	VER	ADJ,NOM,AUX,VER			ind:pre:3s;	E_#_#	e_s_t	6331.76	19417.69
+est	E	être	AUX	ADJ,NOM,AUX,VER			ind:pre:3s;	E_#_#	e_s_t	1600.27	3318.95
 est	Est	est	NOM	ADJ,NOM,AUX,VER	m	s		E_s_t	e_s_t	49.73	81.74
 est	Est	est	ADJ	ADJ,NOM,AUX,VER				E_s_t	e_s_t	2.36	4.87
 establishment	EstabliSmEnt	establishment	NOM	NOM	m	s		E_s|t_a|b_l_i_S|m_E_n_t	e_s|t_a|b_l_i_sh|m_e_n_t	0.2	0.26
