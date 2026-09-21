@@ -14,6 +14,7 @@ feature_keypress_feasibility.tsv
 
 # Regenerable pipeline output (dictionary.py)
 theory.tsv
+theory2.tsv
 
 # Regenerable Phase E outputs (src/elicitation.py, util/build_questionnaire_page.py)
 questionnaire.json

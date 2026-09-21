@@ -79,6 +79,21 @@ this section summarizes where things actually stand and points there for detail.
     1079 real groups in the elicited population.
   - Rule 3 (spelling-doublet exemption), correctly sourced from `resources/reform1990.tsv`
     (`loadReform1990DoubletPairs`) rather than the disproven heuristic.
+- **The `*`/`#` pipeline wired into `dictionary.py`'s persisted output (2026-09-20)** —
+  `Dictionary.buildFinalTheory`/`writeFinalTheory` compose theory 1 with Phase P
+  (`realizeKeypressGroupsAsExtraStroke`, generalized to the whole lexicon via the new
+  `buildFinalInducedStrokes`) and the `*`/`#` track (`composeReservedKeyStrokes`) into one
+  per-word final-stroke table, persisted as `theory2.tsv` (gitignored, regenerable) when
+  `phase_g_keypress_assignment.json` and `resolved_press_sets.json` are present. Resolves
+  open question 4 (`theory.tsv`'s fate) below. Verified **zero residual real collisions**
+  (184,524 words) after excluding `reform1990.tsv` spelling-doublet pairs, which are
+  correctly left unmarked by design (Rule 2). This also retires the superseded
+  solver-picks-features step that used to run in `dictionary.py`'s `__main__`
+  (`buildDiscriminatorSelection` + `satOptimizeDiscriminator`, console-print-only, vestigial
+  conflict count) — removed rather than redirected, since Phase E/G/P + the `*`/`#` track
+  now own this job end to end. `satOptimizeDiscriminator`'s own `FEATURE_FAMILIES`/polarity
+  machinery (`src/satoptimizer.py`) is now only self-referential (no external caller left);
+  cleanup still tracked below.
 
 ### What was tried and discarded
 
@@ -114,16 +129,6 @@ this section summarizes where things actually stand and points there for detail.
 
 ### What's left to do
 
-- **Wire the `*`/`#` pipeline into `dictionary.py`'s actual persisted output.** Everything from
-  `decideStarHashMark` through `composeReservedKeyStrokes` is a validated pure-function
-  pipeline, exercised only by unit tests and ad hoc scripts — not yet called from
-  `dictionary.py`. This is what finally resolves open question 4 (`theory.tsv`'s fate) below.
-  Bigger than a small follow-up; previously deferred for this reason.
-- Retire or redirect `dictionary.py`'s superseded same-lemma step — `buildDiscriminatorSelection`
-  + `satOptimizeDiscriminator` still color solver-chosen same-lemma features onto the reserved
-  keys in `__main__` (console-only; its conflict count reported **0** on 2026-09-20, so the
-  metric itself has gone vestigial). Its job now belongs to Phase E/G/P; decide its fate as
-  part of the wiring item above rather than leaving two live theories of the same problem.
 - Regenerate `MARKING_OVERRIDES` (the ~51-pair per-pair override list) from a single canonical
   run purely at the 10x threshold — currently built from a top-10-by-regret cross-check
   against 30x/100x, not one clean run.
@@ -144,14 +149,23 @@ this section summarizes where things actually stand and points there for detail.
   Phase E being "done"): §E's strict/lenient margin mechanism (where the margin lives — global /
   per-gramCat / per-cluster — and its default), and §G's cluster-scoping for noun homophones
   inside verb clusters (noun `parlé` in the [paʁle] cluster: marker track vs `*`/`#` track).
-- Cleanup once wiring lands: `FEATURE_FAMILIES`/`associationScore`/polarity machinery has no
-  job left on the elicitation track; plus two known diagnostic-path bugs in
-  `src/ambiguitychecker.py` (`_isFeasibleAddition` misses new-vs-new composed-chord
-  collisions; `checkComposedChords` reads `feasibleComboPhonemes[0][0]`, half of a 2-phoneme
-  combo).
+- Now that wiring has landed: `FEATURE_FAMILIES`/`associationScore`/polarity machinery
+  (`src/satoptimizer.py`) has no external caller left (only self-referential within
+  `satOptimizeDiscriminator`, itself no longer called from `dictionary.py`) — decide whether
+  to delete it outright; plus two known diagnostic-path bugs in `src/ambiguitychecker.py`
+  (`_isFeasibleAddition` misses new-vs-new composed-chord collisions; `checkComposedChords`
+  reads `feasibleComboPhonemes[0][0]`, half of a 2-phoneme combo).
 - Housekeeping: merge `phase-g-grouping` (which long outgrew Phase G) to `main`.
 - No tests yet for `cpsatsolver.py`/`cpsatoptimizer.py`'s ambiguity math (still true, see
   "Ongoing" below).
+- **Integrate the pipeline steps currently sitting in separate helper scripts/functions
+  outside `dictionary.py`** (`lexique.py`, `util/completeVerbParadigms.py`,
+  `src/elicitation.py`, `util/build_phase_g_assignment.py`,
+  `util/build_phase_p_realization.py`) into one orchestrated entrypoint, so a lexicon
+  change can't leave part of the chain silently stale. See `LEXICON_RECOMPUTE_PIPELINE.md`
+  for the full dependency table and the two silent-failure traps (stale
+  `Dictionary.pickle`/`FirstTheory.pickle` cache; `phase_p_keypress_realization.json`
+  going stale independently of `theory2.tsv`) that motivated this.
 
 ## Terminology
 
