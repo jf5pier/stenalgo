@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plover-stenalgo"
+version = "0.1.0"
+description = "Plover system plugin for Stenalgo's French Starboard steno theory"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.entry-points."plover.system"]
+"Stenalgo French" = "plover_stenalgo.system"
+
+[tool.setuptools.packages.find]
+include = ["plover_stenalgo*"]
