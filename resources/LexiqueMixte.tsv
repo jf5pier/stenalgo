@@ -21058,8 +21058,8 @@ caïmans	kaim@	caïman	NOM	NOM	m	p		k_a|i|m_@_#	c_a|ï|m_an_s	0.2	0.13
 caïque	kaik	caïque	NOM	NOM	m	s		k_a|i_k_#	c_a|ï_qu_e	3.24	0.0
 caïques	kaik	caïque	NOM	NOM	m	p		k_a|i_k_#	c_a|ï_qu_es	2.23	0.0
 cañon	kaNOn	cañon	NOM	NOM	m	s		k_a|N_O_n	c_a|ñ_o_n	0.0	0.07
-ce	s2	ce	PRO:dem	ADJ:dem,PRO:dem	m	s		s_2	c_e	2958.58	5219.1
-ce	s2	ce	ADJ:dem	ADJ:dem,PRO:dem	m	s		s_2	c_e	2436.55	2739.25
+ce	s°	ce	PRO:dem	ADJ:dem,PRO:dem	m	s		s_°	c_e	2958.58	5219.1
+ce	s°	ce	ADJ:dem	ADJ:dem,PRO:dem	m	s		s_°	c_e	2436.55	2739.25
 ceci	s°si	ceci	PRO:dem	PRO:dem		s		s_°|s_i	c_e|c_i	53.78	133.07
 ceignait	sENE	ceindre	VER	VER			ind:imp:3s;	s_E|N_E	c_ei|gn_ait	0.41	0.0
 ceignant	sEN@	ceindre	VER	VER			par:pre;	s_E|N_@	c_ei|gn_ant	0.27	0.01
@@ -45231,7 +45231,7 @@ eldorado	EldoRado	eldorado	NOM	NOM	m	s		E_l|d_o|R_a|d_o	e_l|d_o|r_a|d_o	0.0	0.04
 elfe	Elf	elfe	NOM	NOM	m	s		E_l_f_#	e_l_f_e	0.54	1.39
 elfes	Elf	elfe	NOM	NOM	m	p		E_l_f_#	e_l_f_es	0.88	1.87
 elle	El	elle	PRO:per	PRO:per	f	s		E_l_#	e_ll_e	6991.49	4520.53
-elles	El	elles	PRO:per	PRO:per	f	p		E_l_#	e_ll_es	605.14	420.51
+elles	El	elle	PRO:per	PRO:per	f	p		E_l_#	e_ll_es	605.14	420.51
 ellipse	elips	ellipse	NOM	NOM	f	s		e|l_i_p_s_#	e|ll_i_p_s_e	0.95	0.42
 ellipses	elips	ellipse	NOM	NOM	f	p		e|l_i_p_s_#	e|ll_i_p_s_es	0.47	0.02
 ellipsoïde	elipsoid	ellipsoïde	ADJ	ADJ		s		e|l_i_p|s_o|i_d_#	e|ll_i_p|s_o|ï_d_e	0.07	0.0
