@@ -905,6 +905,10 @@ class KeypressGroupPhysicalAssignment:
     # `detectCrossCategoryClash`), a separate issue class from both of the above and
     # NOT this function's job either (see `_isInScopeCollision`'s docstring).
     crossCategoryClashCollisions: list[tuple[Word, Word]] = field(default_factory=list)
+    # Which of `preferredKeysByGroup`'s requests were actually honored (True) vs. left
+    # unhonored because the requested physical key was infeasible for that group's real
+    # population (False) -- a group absent here had no preference requested at all.
+    preferredKeyHonoredByGroup: dict[int, bool] = field(default_factory=dict)
 
 
 def _isInScopeCollision(word1: Word, word2: Word) -> bool:
@@ -932,6 +936,7 @@ def realizeKeypressGroupsAsExtraStroke(
     keyboard: Keyboard,
     comboSize: int = 2,
     extraGroupSetsByWord: dict[Word, list[frozenset[int]]] | None = None,
+    preferredKeysByGroup: dict[int, tuple[int, ...]] | None = None,
 ) -> KeypressGroupPhysicalAssignment:
     """
     Corrected successor to the earlier (flawed) findKeypressGroupRealizations: that
@@ -966,6 +971,15 @@ def realizeKeypressGroupsAsExtraStroke(
     additional physical extra stroke reusing whatever key its groups already got. Two
     readings of the SAME word colliding with each other is never flagged (`_isInScopeCollision`
     requires different orthography) -- only a collision against some OTHER word is real.
+
+    `preferredKeysByGroup` (human preference, e.g. a mnemonic like "pers_3 on -t since
+    many pers_3 forms end in a written t") requests a SPECIFIC physical key-combo for a
+    given group id, tried before the normal cost-ranked search: honored outright if
+    `_feasible` for that group's real population (skipping the cost comparison entirely --
+    a human preference overrides the cheapest-composed-chord ranking, not just nudges it),
+    left unhonored (falling back to the normal search, silently trying the next-cheapest
+    candidate) if it would collide with anything. `assignment.preferredKeyHonoredByGroup`
+    reports which requests actually won.
     """
     wordToStrokes = buildWordToStrokes(theory)
     wordToGroups = buildWordToGroups(groupToWords)
@@ -1122,6 +1136,16 @@ def realizeKeypressGroupsAsExtraStroke(
                 seenKeys.add(keys)
                 ranked.append((keys, _candidateCost(words, groupId, keys)))
         ranked.sort(key=lambda kc: kc[1])
+        preferred = (preferredKeysByGroup or {}).get(groupId)
+        if preferred is not None:
+            if preferred in seenKeys:
+                assignment.preferredKeyHonoredByGroup[groupId] = True
+                ranked.sort(key=lambda kc: kc[0] != preferred)  # stable: keeps cost order among the rest
+            elif _feasible(words, groupId, preferred):
+                assignment.preferredKeyHonoredByGroup[groupId] = True
+                ranked.insert(0, (preferred, _candidateCost(words, groupId, preferred)))
+            else:
+                assignment.preferredKeyHonoredByGroup[groupId] = False
         return ranked
 
     for groupId in sorted(groupToWords, key=lambda g: -len(groupToWords[g])):

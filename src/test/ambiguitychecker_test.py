@@ -848,6 +848,36 @@ class TestRealizeKeypressGroupsAsExtraStroke:
         assert assignment.costByGroup[1] == 150
         assert assignment.alternatesByGroup[1] == [((24,), 300)]
 
+    def test_preferred_key_overrides_cheaper_candidate_when_feasible(self):
+        """A human preference (e.g. "pers_3 on -t, mnemonic for its written t ending")
+        wins outright over a cheaper candidate, not just as a tiebreaker."""
+        w = _make_word()
+        theory = {((1,),): [w]}
+        groupToWords = {0: [w]}
+        kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
+        kb.getStrokeCost.side_effect = lambda stroke, part: {(2,): 5, (3,): 2}.get(stroke)
+        assignment = realizeKeypressGroupsAsExtraStroke(
+            groupToWords, theory, kb, preferredKeysByGroup={0: (2,)}
+        )
+        assert assignment.chosenKeysByGroup[0] == (2,)
+        assert assignment.costByGroup[0] == 5
+        assert assignment.preferredKeyHonoredByGroup == {0: True}
+
+    def test_preferred_key_falls_back_when_infeasible(self):
+        """A preference that would collide (here: the requested key is already a real
+        stroke elsewhere in the theory) is left unhonored -- the normal cost-ranked
+        search still finds a safe candidate instead of failing the group outright."""
+        w = _make_word()
+        theory = {((1,),): [w], ((1,), (2,)): [_make_word(ortho="other")]}
+        groupToWords = {0: [w]}
+        kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
+        kb.getStrokeCost.side_effect = lambda stroke, part: 1
+        assignment = realizeKeypressGroupsAsExtraStroke(
+            groupToWords, theory, kb, preferredKeysByGroup={0: (2,)}
+        )
+        assert assignment.chosenKeysByGroup[0] == (3,)
+        assert assignment.preferredKeyHonoredByGroup == {0: False}
+
     def test_out_of_scope_collision_does_not_block_candidate(self):
         """A cross-lemma homophone collision (different lemma, different spelling) must
         not prevent a candidate from being chosen -- that's the */# reserved-key track's

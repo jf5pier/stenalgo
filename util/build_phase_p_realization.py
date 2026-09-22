@@ -34,6 +34,17 @@ PHASE_G_PATH = "phase_g_keypress_assignment.json"
 RESOLVED_PRESS_SETS_PATH = "resolved_press_sets.json"
 OUTPUT_PATH = "phase_p_keypress_realization.json"
 
+# Human preference (2026-09-22 session), keyed by MARKER rather than Phase G's own group
+# id, since which markers Phase G bundles together (and under what id) can shift between
+# reruns -- whichever group ends up holding this marker gets steered toward this physical
+# key. `pers_3` on -t: mnemonic, many pers_3 verb forms end in a written "t". `impératif`
+# on -k and `pers_2` on -d: kept in that physical order, both ahead of pers_3's -t.
+PREFERRED_KEYS_BY_MARKER: dict[str, tuple[int, ...]] = {
+    "impératif": (18,),  # -k
+    "pers_2": (19,),     # -d
+    "pers_3": (20,),     # -t
+}
+
 
 def main() -> None:
     if not os.path.exists(PHASE_G_PATH):
@@ -65,8 +76,14 @@ def main() -> None:
     extraGroupSetsByWord = buildKeypressGroupExtraAlternates(
         resolvedGroups, markersByKeypress, wordToStrokes, wordsByOrthoLemme
     )
+    preferredKeysByGroup: dict[int, tuple[int, ...]] = {}
+    for marker, keys in PREFERRED_KEYS_BY_MARKER.items():
+        groupId = next((gid for gid, markers in markersByKeypress.items() if marker in markers), None)
+        if groupId is not None:
+            preferredKeysByGroup[groupId] = keys
     assignment = realizeKeypressGroupsAsExtraStroke(
-        groupToWords, theory, starboard, extraGroupSetsByWord=extraGroupSetsByWord
+        groupToWords, theory, starboard,
+        extraGroupSetsByWord=extraGroupSetsByWord, preferredKeysByGroup=preferredKeysByGroup,
     )
 
     artifact = {}
@@ -114,6 +131,14 @@ def main() -> None:
     print(f"Self-homograph spellings with extra reading(s) beyond their primary "
           f"(e.g. \"calmez\"): {len(extraGroupSetsByWord)} words, "
           f"{extraAlternateStrokeCount} extra strokes realized.")
+    for marker, keys in PREFERRED_KEYS_BY_MARKER.items():
+        groupId = preferredKeysByGroup and next(
+            (gid for gid, k in preferredKeysByGroup.items() if k == keys), None
+        )
+        honored = assignment.preferredKeyHonoredByGroup.get(groupId) if groupId is not None else None
+        status = "honored" if honored else ("NOT honored -- fell back to normal search" if honored is not None
+                                             else "marker not live, no group to steer")
+        print(f"Preferred key {list(keys)} for marker {marker!r}: {status}")
     print(f"Wrote {OUTPUT_PATH}: {feasibleCount}/{len(markersByKeypress)} keypress groups realized"
           f" ({len(theoryCollisionOrthos)} residual theory collisions,"
           f" {len(sameLemmeGramCatCollisionOrthos)} residual same-lemmeGramCat collisions [Phase P's own job],"
