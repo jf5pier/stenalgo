@@ -235,15 +235,18 @@ def test_validateElicitation_skips_group_with_an_unresolved_opposition(parler_gr
 
 def test_resolveGroupPressSets_matches_validateElicitations_own_resolution(parler_group):
     """resolveGroupPressSets is the factored-out step validateElicitation itself uses --
-    its output must be exactly what validateElicitation checked for conflicts against."""
+    its output must be exactly what validateElicitation checked for conflicts against.
+    "parle" carries two readings (ind-pres-1s needing `pers_1`, ind-pres-3s needing
+    nothing against either sibling) -- both are kept as separate alternates rather than
+    unioned, since either alone already identifies the spelling "parle"."""
     homophoneGroups = buildLemmaHomophoneGroups(parler_group)
     pressSetsByGroup, unresolved = resolveGroupPressSets(homophoneGroups, _opposition_answers(parler_group))
     assert unresolved == []
     ((_key, pressSetByOrtho),) = pressSetsByGroup.items()
     assert pressSetByOrtho == {
-        "parle": frozenset({"pers_1"}),
-        "parles": frozenset({"pers_2"}),
-        "parlent": frozenset({"nbr_p"}),
+        "parle": [frozenset(), frozenset({"pers_1"})],
+        "parles": [frozenset({"pers_2"})],
+        "parlent": [frozenset({"nbr_p"})],
     }
 
 
@@ -255,7 +258,7 @@ def test_serializeResolvedPressSets_is_json_ready(parler_group):
     entry = serialized[0]
     assert entry["lemmeGramCat"] == "parler_VER"
     assert entry["strokes"] == [["K1"]]
-    assert entry["pressSets"] == {"parle": ["pers_1"], "parles": ["pers_2"], "parlent": ["nbr_p"]}
+    assert entry["pressSets"] == {"parle": [[], ["pers_1"]], "parles": [["pers_2"]], "parlent": [["nbr_p"]]}
     assert entry["frequencies"] == {"parle": 0.0, "parles": 0.0, "parlent": 0.0}  # no frequencies passed
     import json
     json.dumps(serialized)  # must not raise -- the whole point of serializing
@@ -285,3 +288,55 @@ def test_serializeResolvedPressSets_carries_frequency_when_given(parler_group):
     serialized = serializeResolvedPressSets(pressSetsByGroup, frequencyByGroupOrtho)
     entry = serialized[0]
     assert entry["frequencies"] == {"parle": 2.0, "parles": 2.0, "parlent": 2.0}
+
+
+# ── Regression: the real "calmez" over-marking bug (RESUME_2026-09-21-steno-trainer.md) ──
+
+@pytest.fixture
+def calmer_group() -> dict[str, list[Word]]:
+    """A trimmed slice of the real "calmer_VER" homophone group: "calmez" is itself a
+    homograph (impératif 2p vs indicatif présent 2p, both spelled/pronounced identically),
+    "calmer" is the infinitif, "calmé" the participe passé m:s -- same shape that produced
+    the "-kt" over-marking bug (impératif's own marker unioned with pers_2's)."""
+    strokes = (("K1",),)
+    calmez = _make_word(ortho="calmez", lemme="calmer", gramCat=GramCat.VER, gender="", number="",
+                         infoVerb="imp:pre:2p;ind:pre:2p;")
+    calmer = _make_word(ortho="calmer", lemme="calmer", gramCat=GramCat.VER, gender="", number="",
+                         infoVerb="inf")
+    calme_participe = _make_word(ortho="calmé", lemme="calmer", gramCat=GramCat.VER, gender="m", number="s",
+                                  infoVerb="par:pas")
+    return {strokes: [calmez, calmer, calme_participe]}
+
+
+def test_calmez_keeps_its_two_readings_as_separate_alternates_instead_of_unioning(calmer_group):
+    """The real bug: `impératif` alone (against every sibling) and `pers_2` alone
+    (against every sibling) were each independently sufficient to identify "calmez" --
+    unioning them into one required `{impératif, pers_2}` press ("-kt") was over-specific.
+    Each reading's press must survive as its own alternate."""
+    homophoneGroups = buildLemmaHomophoneGroups(calmer_group)
+    impératifCombo = frozenset({"impératif", "présent", "pers_2", "nbr_p"})
+    indicatifCombo = frozenset({"indicatif", "présent", "pers_2", "nbr_p"})
+    infinitifCombo = frozenset({"infinitif"})
+    participeCombo = frozenset({"participe", "passé", "VER", "m", "s"})
+    answers = {
+        frozenset({impératifCombo, infinitifCombo}):
+            {impératifCombo: frozenset({"impératif"}), infinitifCombo: frozenset({"infinitif"})},
+        frozenset({indicatifCombo, infinitifCombo}):
+            {indicatifCombo: frozenset({"pers_2"}), infinitifCombo: frozenset({"infinitif"})},
+        frozenset({impératifCombo, participeCombo}):
+            {impératifCombo: frozenset({"impératif"}), participeCombo: frozenset()},
+        frozenset({indicatifCombo, participeCombo}):
+            {indicatifCombo: frozenset({"pers_2"}), participeCombo: frozenset()},
+        frozenset({infinitifCombo, participeCombo}):
+            {infinitifCombo: frozenset({"infinitif"}), participeCombo: frozenset()},
+    }
+    pressSetsByGroup, unresolved = resolveGroupPressSets(homophoneGroups, answers)
+    assert unresolved == []
+    ((_key, pressSetByOrtho),) = pressSetsByGroup.items()
+    assert pressSetByOrtho["calmez"] == [frozenset({"impératif"}), frozenset({"pers_2"})]
+    assert frozenset({"impératif", "pers_2"}) not in pressSetByOrtho["calmez"]
+    assert pressSetByOrtho["calmer"] == [frozenset({"infinitif"})]
+    assert pressSetByOrtho["calmé"] == [frozenset()]
+
+    conflicts, _ = validateElicitation(homophoneGroups, answers)
+    assert conflicts == []

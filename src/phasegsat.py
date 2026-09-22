@@ -30,16 +30,21 @@ from ortools.sat.python.cp_model import IntVar
 from .phaseg import FrequencyByGroup, PressSetsByGroup, frequencyWeightedChordSizes, liveMarkers
 
 # One homophone group's shape, stripped of orthography/stroke identity: the set of
-# distinct true press-sets its spellings hold. Two groups with the same signature pose
-# the identical coloring problem.
-GroupSignature = frozenset[frozenset[str]]
+# distinct spellings it holds, each spelling itself the set of its distinct alternate
+# press-sets (see `src.elicitation.resolveGroupPressSets` -- more than one alternate
+# only for a spelling that is itself a homograph reading of itself, e.g. "calmez"). Two
+# groups with the same signature pose the identical coloring problem.
+GroupSignature = frozenset[frozenset[frozenset[str]]]
 
 
 def groupSignatures(pressSetsByGroup: PressSetsByGroup) -> list[GroupSignature]:
     """Deduplicate groups down to their distinct signatures (see module docstring)."""
     return sorted(
-        {frozenset(pressSetByOrtho.values()) for pressSetByOrtho in pressSetsByGroup.values()},
-        key=lambda sig: (len(sig), sorted(tuple(sorted(p)) for p in sig)),
+        {
+            frozenset(frozenset(alternates) for alternates in pressSetByOrtho.values())
+            for pressSetByOrtho in pressSetsByGroup.values()
+        },
+        key=lambda sig: (len(sig), sorted(tuple(sorted(tuple(sorted(p)) for p in bucket)) for bucket in sig)),
     )
 
 
@@ -48,12 +53,16 @@ def _buildDistinctnessModel(
 ) -> tuple[cp_model.CpModel, dict[tuple[str, int], IntVar]]:
     """
     The shared core of every Phase G CP-SAT search: each marker gets exactly one of
-    `numKeys` keypresses, and within every signature, every pair of its press-sets must
-    induce a distinct touched-keypress set -- the exact ground truth
-    `phaseg.verifyKeypressAssignment` checks, not a pairwise approximation of it.
-    Callers (`_feasibleAssignment` for a hard mustShareKey search,
-    `_bestAssignmentPreferring` for a soft preference search) add their own extra
-    constraints/objective on top of this model and `x`.
+    `numKeys` keypresses, and within every signature, every pair of press-sets belonging
+    to two DIFFERENT spellings must induce a distinct touched-keypress set -- the exact
+    ground truth `phaseg.verifyKeypressAssignment` checks, not a pairwise approximation
+    of it. Alternates of the SAME spelling are deliberately exempt from this requirement:
+    they already produce the same output text (see `src.elicitation.resolveGroupPressSets`),
+    so there is nothing to keep distinguishable between them -- forcing them apart would
+    reintroduce the very over-marking this alternates design exists to avoid. Callers
+    (`_feasibleAssignment` for a hard mustShareKey search, `_bestAssignmentPreferring` for
+    a soft preference search) add their own extra constraints/objective on top of this
+    model and `x`.
     """
     model = cp_model.CpModel()
     x: dict[tuple[str, int], IntVar] = {
@@ -63,31 +72,35 @@ def _buildDistinctnessModel(
         _ = model.AddExactlyOne(x[m, k] for k in range(numKeys))
 
     for sigIdx, signature in enumerate(signatures):
-        presses = sorted(signature, key=sorted)
-        touches: dict[tuple[int, int], IntVar] = {}
-        for pressIdx, press in enumerate(presses):
-            for k in range(numKeys):
-                t = model.NewBoolVar(f"t_{sigIdx}_{pressIdx}_{k}")
-                relevant = [x[m, k] for m in press]
-                if relevant:
-                    _ = model.AddMaxEquality(t, relevant)
-                else:
-                    _ = model.Add(t == 0)
-                touches[(pressIdx, k)] = t
-        for i in range(len(presses)):
-            for j in range(i + 1, len(presses)):
-                differsAt: list[IntVar] = []
+        buckets = sorted(signature, key=lambda bucket: sorted(tuple(sorted(p)) for p in bucket))
+        pressesByBucket = [sorted(bucket, key=sorted) for bucket in buckets]
+        touches: dict[tuple[int, int, int], IntVar] = {}
+        for bucketIdx, presses in enumerate(pressesByBucket):
+            for pressIdx, press in enumerate(presses):
                 for k in range(numKeys):
-                    a, b = touches[(i, k)], touches[(j, k)]
-                    d = model.NewBoolVar(f"d_{sigIdx}_{i}_{j}_{k}")
-                    # Exact XOR linearization -- d must be FORCED to 0 when touches agree,
-                    # or the solver could satisfy "differs somewhere" without truly differing.
-                    _ = model.Add(d <= a + b)
-                    _ = model.Add(d <= 2 - a - b)
-                    _ = model.Add(d >= a - b)
-                    _ = model.Add(d >= b - a)
-                    differsAt.append(d)
-                _ = model.Add(sum(differsAt) >= 1)
+                    t = model.NewBoolVar(f"t_{sigIdx}_{bucketIdx}_{pressIdx}_{k}")
+                    relevant = [x[m, k] for m in press]
+                    if relevant:
+                        _ = model.AddMaxEquality(t, relevant)
+                    else:
+                        _ = model.Add(t == 0)
+                    touches[(bucketIdx, pressIdx, k)] = t
+        for bi in range(len(buckets)):
+            for bj in range(bi + 1, len(buckets)):
+                for pi in range(len(pressesByBucket[bi])):
+                    for pj in range(len(pressesByBucket[bj])):
+                        differsAt: list[IntVar] = []
+                        for k in range(numKeys):
+                            a, b = touches[(bi, pi, k)], touches[(bj, pj, k)]
+                            d = model.NewBoolVar(f"d_{sigIdx}_{bi}_{pi}_{bj}_{pj}_{k}")
+                            # Exact XOR linearization -- d must be FORCED to 0 when touches agree,
+                            # or the solver could satisfy "differs somewhere" without truly differing.
+                            _ = model.Add(d <= a + b)
+                            _ = model.Add(d <= 2 - a - b)
+                            _ = model.Add(d >= a - b)
+                            _ = model.Add(d >= b - a)
+                            differsAt.append(d)
+                        _ = model.Add(sum(differsAt) >= 1)
 
     return model, x
 

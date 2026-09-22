@@ -28,6 +28,7 @@ from src.ambiguitychecker import (
     computeClusterSizeDistribution,
     computeOverflowFrequencyMass,
     buildAtomicFeatureToWords,
+    buildKeypressGroupExtraAlternates,
     buildKeypressGroupToWords,
     buildWordsByOrthoLemme,
     buildWordToGroups,
@@ -634,7 +635,9 @@ class TestBuildKeypressGroupToWords:
     def test_canonical_member_excluded_marked_member_included(self):
         """abaca/abacas share one base Strokes (true homophones); abaca's press-set is
         empty (canonical, no keypress group touches it), abacas' 'p' marker routes it
-        into keypress group 0."""
+        into keypress group 0. Each ortho's press-sets is a LIST of alternates (see
+        `src.elicitation.resolveGroupPressSets`); this function drives the search off
+        the PRIMARY (first) alternate only."""
         wAbaca = _make_word(ortho="abaca", lemme="abaca", gramCat=GramCat.NOM)
         wAbacas = _make_word(ortho="abacas", lemme="abaca", gramCat=GramCat.NOM)
         sharedStrokes = ((12,), (3, 5, 12))
@@ -644,7 +647,7 @@ class TestBuildKeypressGroupToWords:
         }
         entry = {
             "strokes": [[12], [3, 5, 12]], "lemmeGramCat": "abaca_NOM",
-            "pressSets": {"abaca": [], "abacas": ["p"]},
+            "pressSets": {"abaca": [[]], "abacas": [["p"]]},
         }
         markersByKeypress = {0: frozenset({"p", "nbr_p"})}
         groupToWords = buildKeypressGroupToWords([entry], markersByKeypress, wordToStrokes, wordsByOrthoLemme)
@@ -661,11 +664,57 @@ class TestBuildKeypressGroupToWords:
         wordsByOrthoLemme = {("abacas", "abaca_NOM"): [wWrong, wRight]}
         entry = {
             "strokes": [[12], [3, 5, 12]], "lemmeGramCat": "abaca_NOM",
-            "pressSets": {"abacas": ["p"]},
+            "pressSets": {"abacas": [["p"]]},
         }
         markersByKeypress = {0: frozenset({"p"})}
         groupToWords = buildKeypressGroupToWords([entry], markersByKeypress, wordToStrokes, wordsByOrthoLemme)
         assert groupToWords == {0: [wRight]}
+
+    def test_only_the_primary_alternate_feeds_the_search(self):
+        """"calmez"-shaped entry: two alternates, `impératif` (primary) and `pers_2`
+        (extra). Only `impératif`'s group is populated here -- `pers_2`'s is the job of
+        `buildKeypressGroupExtraAlternates`, not this function."""
+        wCalmez = _make_word(ortho="calmez", lemme="calmer", gramCat=GramCat.VER)
+        sharedStrokes = ((12,),)
+        wordToStrokes = {wCalmez: sharedStrokes}
+        wordsByOrthoLemme = {("calmez", "calmer_VER"): [wCalmez]}
+        entry = {
+            "strokes": [[12]], "lemmeGramCat": "calmer_VER",
+            "pressSets": {"calmez": [["impératif"], ["pers_2"]]},
+        }
+        markersByKeypress = {0: frozenset({"impératif"}), 1: frozenset({"pers_2"})}
+        groupToWords = buildKeypressGroupToWords([entry], markersByKeypress, wordToStrokes, wordsByOrthoLemme)
+        assert groupToWords == {0: [wCalmez]}
+
+
+class TestBuildKeypressGroupExtraAlternates:
+
+    def test_ignores_orthos_with_only_one_alternate(self):
+        wAbacas = _make_word(ortho="abacas", lemme="abaca", gramCat=GramCat.NOM)
+        wordToStrokes = {wAbacas: ((12,),)}
+        wordsByOrthoLemme = {("abacas", "abaca_NOM"): [wAbacas]}
+        entry = {
+            "strokes": [[12]], "lemmeGramCat": "abaca_NOM",
+            "pressSets": {"abacas": [["p"]]},
+        }
+        markersByKeypress = {0: frozenset({"p"})}
+        assert buildKeypressGroupExtraAlternates(
+            [entry], markersByKeypress, wordToStrokes, wordsByOrthoLemme
+        ) == {}
+
+    def test_returns_every_non_primary_alternates_group_set(self):
+        """"calmez" = impératif (primary, consumed by buildKeypressGroupToWords) or
+        pers_2 (extra) -- this function surfaces the extra one's own group-set."""
+        wCalmez = _make_word(ortho="calmez", lemme="calmer", gramCat=GramCat.VER)
+        wordToStrokes = {wCalmez: ((12,),)}
+        wordsByOrthoLemme = {("calmez", "calmer_VER"): [wCalmez]}
+        entry = {
+            "strokes": [[12]], "lemmeGramCat": "calmer_VER",
+            "pressSets": {"calmez": [["impératif"], ["pers_2"]]},
+        }
+        markersByKeypress = {0: frozenset({"impératif"}), 1: frozenset({"pers_2"})}
+        extras = buildKeypressGroupExtraAlternates([entry], markersByKeypress, wordToStrokes, wordsByOrthoLemme)
+        assert extras == {wCalmez: [frozenset({1})]}
 
 
 # ---------------------------------------------------------------------------
@@ -919,3 +968,48 @@ class TestRealizeKeypressGroupsAsExtraStroke:
         assert 1 in assignment.unassignedGroups
         collidingPairs = [frozenset(pair) for pair in assignment.residualCollisions]
         assert frozenset({w1, w2}) in collidingPairs
+
+
+class TestRealizeKeypressGroupsAsExtraStrokeWithExtraAlternates:
+    """The real "calmez" regression (RESUME_2026-09-21-steno-trainer.md item 2): a
+    self-homograph spelling's OTHER readings (`extraGroupSetsByWord`) must be realized
+    as their own additional strokes -- checked against every OTHER word, but never
+    flagged against the SAME word's own primary reading."""
+
+    def test_extra_alternate_realized_without_a_spurious_self_collision(self):
+        """"calmez" needs group 0 as its primary reading and group 1 as an extra
+        (alternate) reading -- padding words populate both groups so each gets a real
+        physical key. calmez's two readings landing on two DIFFERENT physical strokes is
+        expected and must not be reported as a collision (same word, same output text)."""
+        wCalmez = _make_word(ortho="calmez", lemme="calmer", gramCat=GramCat.VER)
+        wPad0 = _make_word(ortho="pad0", lemme="pad0")
+        wPad1 = _make_word(ortho="pad1", lemme="pad1")
+        theory = {((1,),): [wCalmez], ((5,),): [wPad0], ((6,),): [wPad1]}
+        groupToWords = {0: [wCalmez, wPad0], 1: [wPad1]}
+        kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
+        kb.getStrokeCost.side_effect = lambda stroke, part: 1
+        assignment = realizeKeypressGroupsAsExtraStroke(
+            groupToWords, theory, kb, extraGroupSetsByWord={wCalmez: [frozenset({1})]}
+        )
+        assert 0 in assignment.chosenKeysByGroup
+        assert 1 in assignment.chosenKeysByGroup
+        assert assignment.residualCollisions == []
+
+    def test_extra_alternate_colliding_with_another_word_is_caught(self):
+        """calmez's EXTRA reading (group 1) composes to the same physical stroke as
+        "calmiez" (a same-lemmeGramCat sibling sharing calmez's base stroke, needing
+        group 1 as ITS primary reading) -- a real in-scope collision the main search
+        never sees (calmez isn't part of group 1's population at all; only its extra
+        alternate touches it), so only the final verification pass catches it."""
+        wCalmez = _make_word(ortho="calmez", lemme="calmer", gramCat=GramCat.VER)
+        wOther = _make_word(ortho="calmiez", lemme="calmer", gramCat=GramCat.VER)
+        sharedBase = ((1,),)
+        theory = {sharedBase: [wCalmez, wOther]}
+        groupToWords = {0: [wCalmez], 1: [wOther]}
+        kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
+        kb.getStrokeCost.side_effect = lambda stroke, part: 1
+        assignment = realizeKeypressGroupsAsExtraStroke(
+            groupToWords, theory, kb, extraGroupSetsByWord={wCalmez: [frozenset({1})]}
+        )
+        collidingPairs = [frozenset(pair) for pair in assignment.residualCollisions]
+        assert frozenset({wCalmez, wOther}) in collidingPairs

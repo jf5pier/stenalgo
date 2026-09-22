@@ -16,26 +16,47 @@ from ..phasegsat import (
 )
 
 
-def _parler_press_sets() -> dict[str, dict[str, frozenset[str]]]:
+def _parler_press_sets() -> dict[str, dict[str, list[frozenset[str]]]]:
     """Same fixture as phaseg_test.py's: three mutually singleton, mutually distinct
     markers -- must land on 3 separate keypresses no matter how cleverly colored."""
     return {
         "parler_VER": {
-            "parle": frozenset({"pers_1"}),
-            "parles": frozenset({"pers_2"}),
-            "parlent": frozenset({"nbr_p"}),
+            "parle": [frozenset({"pers_1"})],
+            "parles": [frozenset({"pers_2"})],
+            "parlent": [frozenset({"nbr_p"})],
         }
     }
 
 
 def test_groupSignatures_dedups_orthography_and_stroke_identity():
-    """Two different groups sharing the identical multiset of press-sets collapse to one
-    signature -- orthography/stroke identity is irrelevant to the coloring problem."""
+    """Two different groups sharing the identical multiset of per-spelling alternates
+    collapse to one signature -- orthography/stroke identity is irrelevant to the
+    coloring problem."""
     pressSetsByGroup = {
-        "parler_VER@(K1,)": {"parle": frozenset({"pers_1"}), "parles": frozenset({"pers_2"})},
-        "chanter_VER@(K2,)": {"chante": frozenset({"pers_1"}), "chantes": frozenset({"pers_2"})},
+        "parler_VER@(K1,)": {"parle": [frozenset({"pers_1"})], "parles": [frozenset({"pers_2"})]},
+        "chanter_VER@(K2,)": {"chante": [frozenset({"pers_1"})], "chantes": [frozenset({"pers_2"})]},
     }
-    assert groupSignatures(pressSetsByGroup) == [frozenset({frozenset({"pers_1"}), frozenset({"pers_2"})})]
+    assert groupSignatures(pressSetsByGroup) == [
+        frozenset({frozenset({frozenset({"pers_1"})}), frozenset({frozenset({"pers_2"})})})
+    ]
+
+
+def test_groupSignatures_keeps_a_spellings_several_alternates_in_one_bucket():
+    """A self-homograph spelling's alternates ("calmez" = impératif reading or pers_2
+    reading) stay together in one per-spelling bucket, distinct from other spellings'
+    buckets -- this is what lets `_buildDistinctnessModel` exempt them from having to
+    differ from each other while still requiring they differ from other spellings."""
+    pressSetsByGroup = {
+        "calmer_VER": {
+            "calmez": [frozenset({"impératif"}), frozenset({"pers_2"})],
+            "calmer": [frozenset({"infinitif"})],
+        }
+    }
+    signatures = groupSignatures(pressSetsByGroup)
+    assert len(signatures) == 1
+    signature = signatures[0]
+    assert frozenset({frozenset({"impératif"}), frozenset({"pers_2"})}) in signature
+    assert frozenset({frozenset({"infinitif"})}) in signature
 
 
 def test_minKeypressesSat_finds_the_true_minimum_for_three_mutually_distinct_markers():
@@ -44,15 +65,33 @@ def test_minKeypressesSat_finds_the_true_minimum_for_three_mutually_distinct_mar
     assert len({colorOf["pers_1"], colorOf["pers_2"], colorOf["nbr_p"]}) == 3
 
 
+def test_minKeypressesSat_lets_a_self_homographs_alternates_share_the_same_keypress():
+    """The real "calmez" regression, proven at the exact CP-SAT level: calmez's two
+    alternates (`impératif`, `pers_2`) may share ONE keypress with each other (nothing
+    needs to keep a spelling's own readings apart), while still needing to differ from
+    "calmer"'s `infinitif` -- so the true minimum here is K=2, not K=3."""
+    pressSetsByGroup = {
+        "calmer_VER": {
+            "calmez": [frozenset({"impératif"}), frozenset({"pers_2"})],
+            "calmer": [frozenset({"infinitif"})],
+        }
+    }
+    numKeys, colorOf = minKeypressesSat(pressSetsByGroup)
+    assert numKeys == 2
+    assert colorOf["impératif"] == colorOf["pers_2"]
+    assert colorOf["infinitif"] != colorOf["impératif"]
+    assert verifyKeypressAssignment(pressSetsByGroup, colorOf) == []
+
+
 def test_minKeypressesSat_allows_sharing_when_safe():
     """The plan's own worked example: pers_2 and nbr_p may share a keypress because
     nbr_p is never pressed alone -- CP-SAT should find K=2, matching the greedy result
     (phaseg_test.py's test_runPhaseG_allows_sharing_when_safe)."""
     pressSetsByGroup = {
         "parler_VER": {
-            "parle": frozenset(),
-            "parles": frozenset({"pers_2"}),
-            "parlent": frozenset({"pers_3", "nbr_p"}),
+            "parle": [frozenset()],
+            "parles": [frozenset({"pers_2"})],
+            "parlent": [frozenset({"pers_3", "nbr_p"})],
         }
     }
     numKeys, colorOf = minKeypressesSat(pressSetsByGroup)
@@ -68,9 +107,9 @@ def test_minKeypressesSat_solves_the_two_marker_bundle_collision_pairwise_checks
     (pers_3 alone, {pers_1, pers_2, nbr_p} bundled) -- better than greedy's 3."""
     pressSetsByGroup = {
         "abaisser_VER": {
-            "abaisseraient": frozenset({"pers_3", "nbr_p"}),
-            "abaisserais": frozenset({"pers_2", "pers_1"}),
-            "abaisserait": frozenset(),
+            "abaisseraient": [frozenset({"pers_3", "nbr_p"})],
+            "abaisserais": [frozenset({"pers_2", "pers_1"})],
+            "abaisserait": [frozenset()],
         }
     }
     numKeys, colorOf = minKeypressesSat(pressSetsByGroup)
@@ -84,9 +123,9 @@ def test_minKeypressesSat_mustShareKey_forces_a_safe_pair_together():
     solver already chooses freely (test_minKeypressesSat_allows_sharing_when_safe)."""
     pressSetsByGroup = {
         "parler_VER": {
-            "parle": frozenset(),
-            "parles": frozenset({"pers_2"}),
-            "parlent": frozenset({"pers_3", "nbr_p"}),
+            "parle": [frozenset()],
+            "parles": [frozenset({"pers_2"})],
+            "parlent": [frozenset({"pers_3", "nbr_p"})],
         }
     }
     numKeys, colorOf = minKeypressesSat(
@@ -103,7 +142,7 @@ def test_minKeypressesSat_mustShareKey_infeasible_when_the_pair_cannot_safely_sh
     group -- forcing pers_1/pers_2 onto the same keypress makes both spellings induce
     the identical set, an unresolvable collision at any K."""
     pressSetsByGroup = {
-        "parler_VER": {"parle": frozenset({"pers_1"}), "parles": frozenset({"pers_2"})}
+        "parler_VER": {"parle": [frozenset({"pers_1"})], "parles": [frozenset({"pers_2"})]}
     }
     with pytest.raises(RuntimeError):
         minKeypressesSat(pressSetsByGroup, maxK=4, mustShareKey=frozenset({frozenset({"pers_1", "pers_2"})}))
@@ -116,9 +155,9 @@ def test_minKeypressesSat_result_is_a_valid_assignment_for_a_combined_lexicon_sl
     pressSetsByGroup = {
         "parler_VER": _parler_press_sets()["parler_VER"],
         "abaisser_VER": {
-            "abaisseraient": frozenset({"pers_3", "nbr_p"}),
-            "abaisserais": frozenset({"pers_2", "pers_1"}),
-            "abaisserait": frozenset(),
+            "abaisseraient": [frozenset({"pers_3", "nbr_p"})],
+            "abaisserais": [frozenset({"pers_2", "pers_1"})],
+            "abaisserait": [frozenset()],
         },
     }
     numKeys, colorOf = minKeypressesSat(pressSetsByGroup)
@@ -175,9 +214,9 @@ def test_minKeypressesSatPreferring_never_inflates_K_and_satisfies_a_free_prefer
     actually honored since it costs nothing here."""
     pressSetsByGroup = {
         "parler_VER": {
-            "parle": frozenset(),
-            "parles": frozenset({"pers_2"}),
-            "parlent": frozenset({"pers_3", "nbr_p"}),
+            "parle": [frozenset()],
+            "parles": [frozenset({"pers_2"})],
+            "parlent": [frozenset({"pers_3", "nbr_p"})],
         }
     }
     numKeys, colorOf, satisfied = minKeypressesSatPreferring(
@@ -195,7 +234,7 @@ def test_minKeypressesSatPreferring_leaves_an_unsafe_preference_unsatisfied_rath
     the soft version must still return a valid, conflict-free assignment (unlike
     mustShareKey, which would raise), just without honoring the preference."""
     pressSetsByGroup = {
-        "parler_VER": {"parle": frozenset({"pers_1"}), "parles": frozenset({"pers_2"})}
+        "parler_VER": {"parle": [frozenset({"pers_1"})], "parles": [frozenset({"pers_2"})]}
     }
     numKeys, colorOf, satisfied = minKeypressesSatPreferring(
         pressSetsByGroup, preferSameKey=frozenset({frozenset({"pers_1", "pers_2"})})
@@ -220,9 +259,9 @@ def _safe_sharing_press_sets() -> dict[str, dict[str, frozenset[str]]]:
     (nbr_p is never pressed alone) -- free minimum is K=2."""
     return {
         "parler_VER": {
-            "parle": frozenset(),
-            "parles": frozenset({"pers_2"}),
-            "parlent": frozenset({"pers_3", "nbr_p"}),
+            "parle": [frozenset()],
+            "parles": [frozenset({"pers_2"})],
+            "parlent": [frozenset({"pers_3", "nbr_p"})],
         }
     }
 
@@ -294,9 +333,9 @@ def test_minKeypressesSatWithPriorities_higher_tier_never_sacrificed_for_lower()
     """a can only ever match ONE of b/c's key (b and c are hard-forced apart) -- tier 0
     (prefer a~b) must win over tier 1 (prefer a~c), never partially compromised for it."""
     pressSetsByGroup = {
-        "g1": {"w1": frozenset(), "w2": frozenset({"a"})},
-        "g2": {"w3": frozenset(), "w4": frozenset({"b"})},
-        "g3": {"w5": frozenset(), "w6": frozenset({"c"})},
+        "g1": {"w1": [frozenset()], "w2": [frozenset({"a"})]},
+        "g2": {"w3": [frozenset()], "w4": [frozenset({"b"})]},
+        "g3": {"w5": [frozenset()], "w6": [frozenset({"c"})]},
     }
     mustDifferGroups = frozenset({frozenset({"b", "c"})})
     preferences = [
@@ -317,7 +356,7 @@ def test_minKeypressesSatWithPriorities_exclusiveGroupPreference_keeps_outsiders
     ExclusiveGroupPreference on {pers_2, nbr_p}, it should be steered away from their
     keypress rather than sharing it (which the solver might otherwise do arbitrarily)."""
     pressSetsByGroup = dict(_safe_sharing_press_sets())
-    pressSetsByGroup["free_NOM"] = {"w1": frozenset(), "w2": frozenset({"d"})}
+    pressSetsByGroup["free_NOM"] = {"w1": [frozenset()], "w2": [frozenset({"d"})]}
     numKeys, colorOf, achieved = minKeypressesSatWithPriorities(
         pressSetsByGroup,
         [

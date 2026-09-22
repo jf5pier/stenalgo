@@ -117,9 +117,8 @@
    "subjonctif"
   ],
   "checkedB": [
-   "subjonctif",
-   "pers_3",
-   "nbr_p"
+   "nbr_p",
+   "subjonctif"
   ],
   "reviewed": true,
   "clean": true
@@ -926,7 +925,6 @@
   ],
   "checkedA": [
    "nbr_p",
-   "pers_3",
    "subjonctif"
   ],
   "orthoB": "soit",
@@ -1209,7 +1207,6 @@
   ],
   "checkedA": [
    "nbr_p",
-   "pers_3",
    "subjonctif"
   ],
   "orthoB": "sois",
@@ -1236,9 +1233,8 @@
    "subjonctif"
   ],
   "checkedA": [
-   "pers_3",
-   "subjonctif",
-   "nbr_p"
+   "nbr_p",
+   "subjonctif"
   ],
   "orthoB": "voit",
   "atomsB": [
@@ -1750,9 +1746,8 @@
    "subjonctif"
   ],
   "checkedA": [
-   "subjonctif",
-   "pers_3",
-   "nbr_p"
+   "nbr_p",
+   "subjonctif"
   ],
   "orthoB": "sois",
   "atomsB": [
@@ -1899,9 +1894,8 @@
    "subjonctif"
   ],
   "checkedB": [
-   "subjonctif",
-   "pers_3",
-   "nbr_p"
+   "nbr_p",
+   "subjonctif"
   ],
   "reviewed": true,
   "clean": true
@@ -1996,9 +1990,8 @@
    "subjonctif"
   ],
   "checkedA": [
-   "subjonctif",
-   "pers_3",
-   "nbr_p"
+   "nbr_p",
+   "subjonctif"
   ],
   "orthoB": "préfères",
   "atomsB": [
@@ -3243,7 +3236,6 @@
    "subjonctif"
   ],
   "checkedA": [
-   "pers_3",
    "nbr_p",
    "subjonctif"
   ],
@@ -4187,9 +4179,8 @@
    "subjonctif"
   ],
   "checkedA": [
-   "pers_3",
-   "subjonctif",
-   "nbr_p"
+   "nbr_p",
+   "subjonctif"
   ],
   "orthoB": "distraits",
   "atomsB": [
@@ -4992,7 +4983,7 @@
   "clean": true
  },
  {
-  "id": "q98",
+  "id": "q200",
   "lemma": "renvoyer",
   "orthoA": "renvoyer",
   "atomsA": [
@@ -5015,7 +5006,7 @@
   "clean": false
  },
  {
-  "id": "q113",
+  "id": "q201",
   "lemma": "renvoyer",
   "orthoA": "renvoyiez",
   "atomsA": [
@@ -5035,14 +5026,12 @@
    "passé",
    "s"
   ],
-  "checkedB": [
-   "m"
-  ],
+  "checkedB": [],
   "reviewed": true,
   "clean": false
  },
  {
-  "id": "q141",
+  "id": "q202",
   "lemma": "renvoyer",
   "orthoA": "renvoyiez",
   "atomsA": [
@@ -5069,7 +5058,7 @@
   "clean": false
  },
  {
-  "id": "q163",
+  "id": "q203",
   "lemma": "renvoyer",
   "orthoA": "renvoyiez",
   "atomsA": [
@@ -5096,7 +5085,7 @@
   "clean": false
  },
  {
-  "id": "q184",
+  "id": "q204",
   "lemma": "renvoyer",
   "orthoA": "renvoyiez",
   "atomsA": [

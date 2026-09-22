@@ -24,7 +24,8 @@ import json
 import os
 
 from src.ambiguitychecker import (
-    buildKeypressGroupToWords, buildWordsByOrthoLemme, buildWordToStrokes, realizeKeypressGroupsAsExtraStroke,
+    buildKeypressGroupExtraAlternates, buildKeypressGroupToWords, buildWordsByOrthoLemme, buildWordToStrokes,
+    realizeKeypressGroupsAsExtraStroke,
 )
 from src.keyboard import Starboard
 from util._theoryio import loadFirstTheory
@@ -57,7 +58,16 @@ def main() -> None:
     wordToStrokes = buildWordToStrokes(theory)
     wordsByOrthoLemme = buildWordsByOrthoLemme(theory)
     groupToWords = buildKeypressGroupToWords(resolvedGroups, markersByKeypress, wordToStrokes, wordsByOrthoLemme)
-    assignment = realizeKeypressGroupsAsExtraStroke(groupToWords, theory, starboard)
+    # A self-homograph spelling's OTHER readings (e.g. "calmez" = impératif or pers_2 --
+    # see src.elicitation.resolveGroupPressSets) beyond the primary one groupToWords
+    # already carries -- realized as their own additional strokes, never forced together
+    # with the primary reading (the "-kt" over-marking bug this whole design fixes).
+    extraGroupSetsByWord = buildKeypressGroupExtraAlternates(
+        resolvedGroups, markersByKeypress, wordToStrokes, wordsByOrthoLemme
+    )
+    assignment = realizeKeypressGroupsAsExtraStroke(
+        groupToWords, theory, starboard, extraGroupSetsByWord=extraGroupSetsByWord
+    )
 
     artifact = {}
     for groupId in sorted(markersByKeypress):
@@ -100,6 +110,10 @@ def main() -> None:
         }, f, ensure_ascii=False, indent=1)
 
     feasibleCount = len(assignment.chosenKeysByGroup)
+    extraAlternateStrokeCount = sum(len(alts) for alts in extraGroupSetsByWord.values())
+    print(f"Self-homograph spellings with extra reading(s) beyond their primary "
+          f"(e.g. \"calmez\"): {len(extraGroupSetsByWord)} words, "
+          f"{extraAlternateStrokeCount} extra strokes realized.")
     print(f"Wrote {OUTPUT_PATH}: {feasibleCount}/{len(markersByKeypress)} keypress groups realized"
           f" ({len(theoryCollisionOrthos)} residual theory collisions,"
           f" {len(sameLemmeGramCatCollisionOrthos)} residual same-lemmeGramCat collisions [Phase P's own job],"

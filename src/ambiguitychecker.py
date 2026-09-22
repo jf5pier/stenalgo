@@ -27,6 +27,7 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from functools import cmp_to_key
 from itertools import combinations
+from typing import TypeVar
 
 from src.grammar import Phoneme
 from src.keyboard import Keyboard, Stroke, Strokes, canonicalizeStrokes
@@ -706,22 +707,29 @@ def checkComposedChords(
 # Phase P — physical realization of Phase G's abstract keypress groups
 # ═══════════════════════════════════════════════════════════════════════════
 
-def findCollidingInducedStrokes(inducedStrokeOf: dict[Word, Strokes]) -> list[tuple[Word, Word]]:
+_K = TypeVar("_K")
+
+
+def findCollidingInducedStrokes(inducedStrokeOf: dict[_K, Strokes]) -> list[tuple[_K, _K]]:
     """
-    Given each word's already-computed induced (candidate) stroke, find every pair that
+    Given each entry's already-computed induced (candidate) stroke, find every pair that
     collides by landing on the same stroke. Generic over how the induced stroke was
     computed -- unlike findCollidingNewAdditions, doesn't assume every word got the same
     `additionKeys` (needed once different words can need different subsets of Phase G's
-    keypress groups composed into their own induced stroke).
+    keypress groups composed into their own induced stroke). Generic over the key type
+    (`_K`): usually a `Word`, but `realizeKeypressGroupsAsExtraStroke`'s final
+    verification pass keys by `(Word, readingIndex)` instead, so a self-homograph
+    spelling's several readings (see `src.elicitation.resolveGroupPressSets`) are checked
+    against every OTHER word without also being checked against each other.
     """
-    seenByInducedStroke: dict[Strokes, Word] = {}
-    collisions: list[tuple[Word, Word]] = []
-    for word, inducedStroke in inducedStrokeOf.items():
-        earlierWord = seenByInducedStroke.get(inducedStroke)
-        if earlierWord is not None and earlierWord != word:
-            collisions.append((earlierWord, word))
+    seenByInducedStroke: dict[Strokes, _K] = {}
+    collisions: list[tuple[_K, _K]] = []
+    for key, inducedStroke in inducedStrokeOf.items():
+        earlierKey = seenByInducedStroke.get(inducedStroke)
+        if earlierKey is not None and earlierKey != key:
+            collisions.append((earlierKey, key))
         else:
-            seenByInducedStroke[inducedStroke] = word
+            seenByInducedStroke[inducedStroke] = key
     return collisions
 
 
@@ -751,6 +759,23 @@ def buildWordsByOrthoLemme(theory: dict[Strokes, list[Word]]) -> dict[tuple[str,
     return dict(wordsByOrthoLemme)
 
 
+def _resolveEntryWord(
+    entry: dict, ortho: str,
+    wordToStrokes: dict[Word, Strokes],
+    wordsByOrthoLemme: dict[tuple[str, str], list[Word]],
+) -> Word | None:
+    """Find the real `Word` a `resolved_press_sets.json` entry's (ortho, lemmeGramCat) +
+    existing "strokes" field identifies -- there can be more than one `Word` sharing an
+    (ortho, lemmeGramCat) key, disambiguated by which one actually carries that entry's
+    existing stroke in `theory`. Shared by `buildKeypressGroupToWords` and
+    `buildKeypressGroupExtraAlternates`."""
+    lemmeGramCat = entry["lemmeGramCat"]
+    entryStrokes: Strokes = tuple(tuple(stroke) for stroke in entry["strokes"])
+    candidates = wordsByOrthoLemme.get((ortho, lemmeGramCat), [])
+    word = next((w for w in candidates if wordToStrokes.get(w) == entryStrokes), None)
+    return word if word is not None else (candidates[0] if candidates else None)
+
+
 def buildKeypressGroupToWords(
     resolvedGroups: list[dict],
     markersByKeypress: dict[int, frozenset[str]],
@@ -765,25 +790,69 @@ def buildKeypressGroupToWords(
     `resolved_press_sets.json` list; each entry's own "strokes" field disambiguates
     which `Word` (there can be more than one sharing an (ortho, lemmeGramCat) key) is
     the one actually carrying that entry's existing stroke in `theory`.
+
+    Each ortho's press-sets is now a LIST of alternates (see
+    `src.elicitation.resolveGroupPressSets` -- more than one only for a spelling that is
+    itself a self-homograph, e.g. "calmez"). This function drives Phase P's group-by-group
+    physical key SEARCH off each spelling's PRIMARY (first, smallest) alternate only, so
+    the search/collision machinery below is unaffected by alternates. Any further
+    alternates are realized separately, once every group already has a physical key, via
+    `buildKeypressGroupExtraAlternates` + `realizeKeypressGroupsAsExtraStroke`'s
+    `extraGroupSetsByWord` parameter (see DESIGN_alternate_press_sets.md section 4).
     """
     groupToWords: dict[int, list[Word]] = defaultdict(list)
     for entry in resolvedGroups:
-        lemmeGramCat = entry["lemmeGramCat"]
-        entryStrokes: Strokes = tuple(tuple(stroke) for stroke in entry["strokes"])
-        for ortho, markers in entry["pressSets"].items():
-            markerSet = frozenset(markers)
+        for ortho, alternates in entry["pressSets"].items():
+            if not alternates:
+                continue
+            markerSet = frozenset(alternates[0])
             if not markerSet:
                 continue
-            candidates = wordsByOrthoLemme.get((ortho, lemmeGramCat), [])
-            word = next((w for w in candidates if wordToStrokes.get(w) == entryStrokes), None)
-            if word is None:
-                word = candidates[0] if candidates else None
+            word = _resolveEntryWord(entry, ortho, wordToStrokes, wordsByOrthoLemme)
             if word is None:
                 continue
             for groupId, groupMarkers in markersByKeypress.items():
                 if markerSet & groupMarkers:
                     groupToWords[groupId].append(word)
     return dict(groupToWords)
+
+
+def buildKeypressGroupExtraAlternates(
+    resolvedGroups: list[dict],
+    markersByKeypress: dict[int, frozenset[str]],
+    wordToStrokes: dict[Word, Strokes],
+    wordsByOrthoLemme: dict[tuple[str, str], list[Word]],
+) -> dict[Word, list[frozenset[int]]]:
+    """
+    Every OTHER (non-primary) alternate press-set a self-homograph spelling holds -- e.g.
+    "calmez"'s indicatif reading (`pers_2`), once its impératif reading (`impératif`)
+    already drives the primary population `buildKeypressGroupToWords` builds -- as the set
+    of Phase G keypress groups THAT alternate's markers touch. Feeds
+    `realizeKeypressGroupsAsExtraStroke`'s `extraGroupSetsByWord` so each such reading gets
+    realized as its own additional physical extra stroke once every group's key is
+    decided, rather than silently dropped: per
+    `src.elicitation.resolveGroupPressSets`/`ATOMIC_KEYPRESS_REWIRE_PLAN.md`'s vocabulary,
+    readings of the same spelling never conflict with each other, so each is
+    independently a valid way to write that spelling.
+    """
+    extraGroupSetsByWord: dict[Word, list[frozenset[int]]] = defaultdict(list)
+    for entry in resolvedGroups:
+        for ortho, alternates in entry["pressSets"].items():
+            if len(alternates) < 2:
+                continue
+            word = _resolveEntryWord(entry, ortho, wordToStrokes, wordsByOrthoLemme)
+            if word is None:
+                continue
+            for markers in alternates[1:]:
+                markerSet = frozenset(markers)
+                if not markerSet:
+                    continue
+                groupIds = frozenset(
+                    groupId for groupId, groupMarkers in markersByKeypress.items() if markerSet & groupMarkers
+                )
+                if groupIds:
+                    extraGroupSetsByWord[word].append(groupIds)
+    return dict(extraGroupSetsByWord)
 
 
 def buildWordToGroups(groupToWords: dict[int, list[Word]]) -> dict[Word, frozenset[int]]:
@@ -862,6 +931,7 @@ def realizeKeypressGroupsAsExtraStroke(
     theory: dict[Strokes, list[Word]],
     keyboard: Keyboard,
     comboSize: int = 2,
+    extraGroupSetsByWord: dict[Word, list[frozenset[int]]] | None = None,
 ) -> KeypressGroupPhysicalAssignment:
     """
     Corrected successor to the earlier (flawed) findKeypressGroupRealizations: that
@@ -886,6 +956,16 @@ def realizeKeypressGroupsAsExtraStroke(
     real composition is what lets a candidate landing in the same column as a frequently
     co-occurring group's key earn that discount, instead of every candidate being judged
     solely on its own in isolation.
+
+    `extraGroupSetsByWord` (see `buildKeypressGroupExtraAlternates`) lists, for a spelling
+    that is itself a self-homograph (more than one valid reading, e.g. "calmez" -- see
+    `src.elicitation.resolveGroupPressSets`), each of its OTHER readings' own group-set --
+    every group in `groupToWords`/`wordToGroups` is still decided using only each word's
+    PRIMARY reading, so this never influences the search/ranking above; it only adds
+    those extra readings to the FINAL verification pass below, each realized as its own
+    additional physical extra stroke reusing whatever key its groups already got. Two
+    readings of the SAME word colliding with each other is never flagged (`_isInScopeCollision`
+    requires different orthography) -- only a collision against some OTHER word is real.
     """
     wordToStrokes = buildWordToStrokes(theory)
     wordToGroups = buildWordToGroups(groupToWords)
@@ -1057,28 +1137,45 @@ def realizeKeypressGroupsAsExtraStroke(
         _finalizeReadyWords()
 
     # Final full-assignment verification: compose EVERY needed group's final choice per
-    # word (not just what was known while that word's groups were being decided).
-    finalInduced: dict[Word, Strokes] = {}
+    # word (not just what was known while that word's groups were being decided) -- and,
+    # for a self-homograph word, every OTHER reading's own group-set too
+    # (`extraGroupSetsByWord`), each as its own additional stroke. Keyed by (word,
+    # readingIndex) rather than just `word` so two readings of the SAME word landing on
+    # the identical composed stroke is never itself flagged as a collision (see
+    # `findCollidingInducedStrokes`'s docstring) -- reading 0 is always the word's primary
+    # (the one the search above used); readings 1+ are its extra alternates, in order.
+    extraGroupSetsByWord = extraGroupSetsByWord or {}
+    finalInduced: dict[tuple[Word, int], Strokes] = {}
     for word in allWords:
         keys: set[int] = set()
         for groupId in wordToGroups[word]:
             keys.update(assignment.chosenKeysByGroup.get(groupId, ()))
-        finalInduced[word] = _appendCodaExtraStroke(wordToStrokes[word], tuple(sorted(keys))) if keys else wordToStrokes[word]
+        finalInduced[(word, 0)] = (
+            _appendCodaExtraStroke(wordToStrokes[word], tuple(sorted(keys))) if keys else wordToStrokes[word]
+        )
+        for readingIndex, groupSet in enumerate(extraGroupSetsByWord.get(word, ()), start=1):
+            altKeys: set[int] = set()
+            for groupId in groupSet:
+                altKeys.update(assignment.chosenKeysByGroup.get(groupId, ()))
+            finalInduced[(word, readingIndex)] = (
+                _appendCodaExtraStroke(wordToStrokes[word], tuple(sorted(altKeys)))
+                if altKeys else wordToStrokes[word]
+            )
 
-    assignment.residualTheoryCollisions = [
-        word for word, stroke in finalInduced.items()
+    assignment.residualTheoryCollisions = sorted({
+        word for (word, _readingIndex), stroke in finalInduced.items()
         if stroke != wordToStrokes[word] and stroke in theory
-    ]
+    }, key=lambda w: w.ortho)
     allFinalCollisions = findCollidingInducedStrokes(finalInduced)
     assignment.residualCollisions = [
-        (w1, w2) for w1, w2 in allFinalCollisions if _isInScopeCollision(w1, w2)
+        (w1, w2) for (w1, _i1), (w2, _i2) in allFinalCollisions if _isInScopeCollision(w1, w2)
     ]
     assignment.crossCategoryClashCollisions = [
-        (w1, w2) for w1, w2 in allFinalCollisions
+        (w1, w2) for (w1, _i1), (w2, _i2) in allFinalCollisions
         if w1.ortho != w2.ortho and w1.lemme == w2.lemme and w1.lemmeGramCat != w2.lemmeGramCat
     ]
     assignment.crossLemmaCollisions = [
-        (w1, w2) for w1, w2 in allFinalCollisions if w1.ortho != w2.ortho and w1.lemme != w2.lemme
+        (w1, w2) for (w1, _i1), (w2, _i2) in allFinalCollisions if w1.ortho != w2.ortho and w1.lemme != w2.lemme
     ]
     return assignment
 
