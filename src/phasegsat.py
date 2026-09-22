@@ -136,6 +136,50 @@ def _aloneAndMustDifferPairs(
     return pairs
 
 
+def _newDeterministicSolver(timeLimitS: float) -> cp_model.CpSolver:
+    """A `CpSolver` pinned to single-threaded, fixed-seed search: OR-tools' default
+    parallel portfolio search can return a different one of several EQUALLY-optimal
+    solutions across repeated runs of the identical model, which
+    `_breakTiesAlphabetically` alone can't fix if the solver itself never
+    deterministically reaches the same search state twice. Every solver this module
+    creates goes through here so all of them get this."""
+    solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = timeLimitS
+    solver.parameters.num_search_workers = 1
+    solver.parameters.random_seed = 0
+    return solver
+
+
+def _breakTiesAlphabetically(
+    model: cp_model.CpModel, x: dict[tuple[str, int], IntVar], solver: cp_model.CpSolver,
+    markers: list[str], numKeys: int, timeLimitS: float,
+) -> dict[str, int]:
+    """
+    Deterministic, lowest-priority tie-break, applied AFTER every real hard constraint
+    and soft preference is already locked into `model`: for each marker in alphabetical
+    order, minimize its own keypress index and lock the result before moving to the
+    next marker. This can never override or inflate anything decided earlier -- it only
+    picks among colorings that already achieve everything real that was asked for --
+    but it collapses whatever ties remain down to one reproducible, human-predictable
+    choice (alphabetically-earlier markers land on the lowest-numbered keypress they
+    can) instead of leaving it to whatever CP-SAT's search happens to return.
+    """
+    colorOf: dict[str, int] = {}
+    for marker in sorted(markers):
+        keyIndexExpr = sum(k * x[marker, k] for k in range(numKeys))
+        model.Minimize(keyIndexExpr)
+        status = solver.Solve(model)
+        if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+            raise RuntimeError(
+                f"CP-SAT could not break ties for marker {marker!r} within {timeLimitS}s -- "
+                "this assignment was already proven feasible/optimal, so raise timeLimitS."
+            )
+        value = solver.Value(keyIndexExpr)
+        _ = model.Add(keyIndexExpr == value)
+        colorOf = {m: next(k for k in range(numKeys) if solver.BooleanValue(x[m, k])) for m in markers}
+    return colorOf
+
+
 def _feasibleAssignment(
     markers: list[str],
     signatures: list[GroupSignature],
@@ -144,6 +188,7 @@ def _feasibleAssignment(
     mustShareKey: frozenset[frozenset[str]] = frozenset(),
     aloneKeys: frozenset[str] = frozenset(),
     mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
+    breakTiesAlphabetically: bool = False,
 ) -> tuple[bool, dict[str, int] | None]:
     """
     Try to color `markers` onto `numKeys` abstract keypresses (see `_buildDistinctnessModel`).
@@ -153,9 +198,13 @@ def _feasibleAssignment(
     `mustDifferGroups` forces every pair within a group onto DIFFERENT keypresses. All
     three are HARD constraints: infeasible under them is reported as such, not silently
     dropped (see `_bestAssignmentPreferring` for a soft version of same-key preferences
-    that never fails this way). Returns (provenFeasible, colorOf); when infeasible,
-    colorOf is None; on a solver timeout without a proof either way, raises (a "no"
-    answer must be a proof, not a guess -- see `minKeypressesSat`).
+    that never fails this way). `breakTiesAlphabetically` (see `_breakTiesAlphabetically`)
+    is off by default here -- `minKeypressesSat`'s own scan calls this at every candidate
+    numKeys, most of which turn out infeasible or non-final, so paying for the tie-break
+    on every call would be wasted work; it applies its own tie-break once, only at the
+    true minimum, after the scan finishes. Returns (provenFeasible, colorOf); when
+    infeasible, colorOf is None; on a solver timeout without a proof either way, raises
+    (a "no" answer must be a proof, not a guess -- see `minKeypressesSat`).
     """
     model, x = _buildDistinctnessModel(markers, signatures, numKeys)
     for pair in mustShareKey:
@@ -164,11 +213,13 @@ def _feasibleAssignment(
             _ = model.Add(x[m1, k] == x[m2, k])
     _addMustDifferPairs(model, x, numKeys, _aloneAndMustDifferPairs(markers, aloneKeys, mustDifferGroups))
 
-    solver = cp_model.CpSolver()
-    solver.parameters.max_time_in_seconds = timeLimitS
+    solver = _newDeterministicSolver(timeLimitS)
     status = solver.Solve(model)
     if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
-        colorOf = {m: next(k for k in range(numKeys) if solver.BooleanValue(x[m, k])) for m in markers}
+        if breakTiesAlphabetically:
+            colorOf = _breakTiesAlphabetically(model, x, solver, markers, numKeys, timeLimitS)
+        else:
+            colorOf = {m: next(k for k in range(numKeys) if solver.BooleanValue(x[m, k])) for m in markers}
         return True, colorOf
     if status == cp_model.INFEASIBLE:
         return False, None
@@ -186,6 +237,7 @@ def _bestAssignmentPreferring(
     timeLimitS: float,
     aloneKeys: frozenset[str] = frozenset(),
     mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
+    breakTiesAlphabetically: bool = True,
 ) -> tuple[dict[str, int], int]:
     """
     Among all valid colorings at this (already known feasible) `numKeys`, find one
@@ -193,7 +245,9 @@ def _bestAssignmentPreferring(
     tiebreaker, unlike `_feasibleAssignment`'s `mustShareKey`: a pair that genuinely
     can't share safely at this K is simply left apart rather than making the whole
     search infeasible. `aloneKeys`/`mustDifferGroups` (see `_feasibleAssignment`) are
-    still HARD constraints even here -- only the same-key preference is soft. Returns
+    still HARD constraints even here -- only the same-key preference is soft.
+    `breakTiesAlphabetically` (see `_breakTiesAlphabetically`) then picks one
+    reproducible, canonical coloring among whatever still ties for best. Returns
     (colorOf, howManyPreferencesSatisfied).
     """
     model, x = _buildDistinctnessModel(markers, signatures, numKeys)
@@ -215,8 +269,7 @@ def _bestAssignmentPreferring(
     if sameKeyVars:
         model.Maximize(sum(sameKeyVars))
 
-    solver = cp_model.CpSolver()
-    solver.parameters.max_time_in_seconds = timeLimitS
+    solver = _newDeterministicSolver(timeLimitS)
     status = solver.Solve(model)
     if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
         raise RuntimeError(
@@ -224,8 +277,13 @@ def _bestAssignmentPreferring(
             "-- this numKeys was already proven feasible elsewhere, so a timeout here means "
             "raise timeLimitS, not that no solution exists."
         )
-    colorOf = {m: next(k for k in range(numKeys) if solver.BooleanValue(x[m, k])) for m in markers}
     satisfied = sum(1 for v in sameKeyVars if solver.BooleanValue(v))
+    if sameKeyVars:
+        _ = model.Add(sum(sameKeyVars) == satisfied)  # lock the achieved score before tie-breaking
+    if breakTiesAlphabetically:
+        colorOf = _breakTiesAlphabetically(model, x, solver, markers, numKeys, timeLimitS)
+    else:
+        colorOf = {m: next(k for k in range(numKeys) if solver.BooleanValue(x[m, k])) for m in markers}
     return colorOf, satisfied
 
 
@@ -305,6 +363,7 @@ def _bestAssignmentWithPriorities(
     timeLimitS: float,
     aloneKeys: frozenset[str] = frozenset(),
     mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
+    breakTiesAlphabetically: bool = True,
 ) -> tuple[dict[str, int], list[int]]:
     """
     Lexicographic multi-tier soft preference search: `preferences[0]` is optimized
@@ -314,13 +373,16 @@ def _bestAssignmentWithPriorities(
     priority never sacrifices a higher one) is expressed -- a single combined objective
     (e.g. summing both scores) would let a big win on the low-priority tier outweigh a
     small loss on the high-priority one, which is not what "lower priority" means here.
-    Returns (colorOf, achievedScorePerTier).
+    `breakTiesAlphabetically` (see `_breakTiesAlphabetically`) runs as one FINAL,
+    lower-priority-than-everything tier: it can never touch what `preferences` already
+    decided, only pick a single reproducible, canonical coloring among whatever still
+    ties for best after every real tier is locked in. Returns
+    (colorOf, achievedScorePerTier).
     """
     model, x = _buildDistinctnessModel(markers, signatures, numKeys)
     _addMustDifferPairs(model, x, numKeys, _aloneAndMustDifferPairs(markers, aloneKeys, mustDifferGroups))
 
-    solver = cp_model.CpSolver()
-    solver.parameters.max_time_in_seconds = timeLimitS
+    solver = _newDeterministicSolver(timeLimitS)
     achieved: list[int] = []
     colorOf: dict[str, int] = {}
 
@@ -343,7 +405,9 @@ def _bestAssignmentWithPriorities(
         _ = model.Add(score == value)  # lock this tier in before moving to the next
         colorOf = {m: next(k for k in range(numKeys) if solver.BooleanValue(x[m, k])) for m in markers}
 
-    if not preferences:
+    if breakTiesAlphabetically:
+        colorOf = _breakTiesAlphabetically(model, x, solver, markers, numKeys, timeLimitS)
+    elif not preferences:
         status = solver.Solve(model)
         colorOf = {m: next(k for k in range(numKeys) if solver.BooleanValue(x[m, k])) for m in markers}
 
@@ -357,6 +421,7 @@ def minKeypressesSat(
     mustShareKey: frozenset[frozenset[str]] = frozenset(),
     aloneKeys: frozenset[str] = frozenset(),
     mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
+    breakTiesAlphabetically: bool = True,
 ) -> tuple[int, dict[str, int]]:
     """
     The provably smallest number of keypresses onto which every live marker can be
@@ -368,13 +433,18 @@ def minKeypressesSat(
     forces a marker to share its keypress with nothing else; `mustDifferGroups` forces
     every pair within a group onto different keypresses -- all HARD constraints applied
     throughout the scan (so they can inflate K, or make it infeasible outright, unlike a
-    soft preference -- see `minKeypressesSatPreferring`).
+    soft preference -- see `minKeypressesSatPreferring`). `breakTiesAlphabetically` (see
+    `_breakTiesAlphabetically`) only ever fires on the ONE numKeys the scan returns
+    (every smaller candidate is infeasible and never reaches it) -- pass False when only
+    `numKeys` matters and `colorOf` will be discarded (as `minKeypressesSatPreferring`/
+    `minKeypressesSatWithPriorities` do), to skip paying for it.
     """
     markers = sorted(liveMarkers(pressSetsByGroup))
     signatures = groupSignatures(pressSetsByGroup)
     for numKeys in range(1, maxK + 1):
         feasible, colorOf = _feasibleAssignment(
-            markers, signatures, numKeys, timeLimitS, mustShareKey, aloneKeys, mustDifferGroups
+            markers, signatures, numKeys, timeLimitS, mustShareKey, aloneKeys, mustDifferGroups,
+            breakTiesAlphabetically=breakTiesAlphabetically,
         )
         if feasible:
             assert colorOf is not None
@@ -389,6 +459,7 @@ def minKeypressesSatPreferring(
     timeLimitS: float = 30.0,
     aloneKeys: frozenset[str] = frozenset(),
     mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
+    breakTiesAlphabetically: bool = True,
 ) -> tuple[int, dict[str, int], int]:
     """
     Two-phase search: first find the TRUE minimum K exactly as `minKeypressesSat` does
@@ -397,17 +468,21 @@ def minKeypressesSatPreferring(
     in `minKeypressesSat`, since they're requirements, not preferences). Then, AT that
     fixed minimum K, re-solve maximizing how many `preferSameKey` pairs end up sharing a
     keypress -- a tiebreaker among the (possibly many) equally-minimal colorings, not a
-    requirement. Returns (numKeys, colorOf, preferencesSatisfied); `preferencesSatisfied`
-    lets a caller tell "got it for free" (== len(preferSameKey)) apart from "couldn't fit
-    it in at this K" (< len(preferSameKey)).
+    requirement -- and, if `breakTiesAlphabetically`, one final canonicalization pass
+    (see `_breakTiesAlphabetically`) among whatever still ties for best after that.
+    Returns (numKeys, colorOf, preferencesSatisfied); `preferencesSatisfied` lets a
+    caller tell "got it for free" (== len(preferSameKey)) apart from "couldn't fit it in
+    at this K" (< len(preferSameKey)).
     """
     markers = sorted(liveMarkers(pressSetsByGroup))
     signatures = groupSignatures(pressSetsByGroup)
     numKeys, _ = minKeypressesSat(
-        pressSetsByGroup, maxK=maxK, timeLimitS=timeLimitS, aloneKeys=aloneKeys, mustDifferGroups=mustDifferGroups
+        pressSetsByGroup, maxK=maxK, timeLimitS=timeLimitS, aloneKeys=aloneKeys, mustDifferGroups=mustDifferGroups,
+        breakTiesAlphabetically=False,
     )
     colorOf, satisfied = _bestAssignmentPreferring(
-        markers, signatures, numKeys, preferSameKey, timeLimitS, aloneKeys, mustDifferGroups
+        markers, signatures, numKeys, preferSameKey, timeLimitS, aloneKeys, mustDifferGroups,
+        breakTiesAlphabetically=breakTiesAlphabetically,
     )
     return numKeys, colorOf, satisfied
 
@@ -419,6 +494,7 @@ def minKeypressesSatWithPriorities(
     timeLimitS: float = 30.0,
     aloneKeys: frozenset[str] = frozenset(),
     mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
+    breakTiesAlphabetically: bool = True,
 ) -> tuple[int, dict[str, int], list[int]]:
     """
     Like `minKeypressesSatPreferring`, but for an ORDERED list of soft preference tiers
@@ -427,15 +503,20 @@ def minKeypressesSatWithPriorities(
     only as a tiebreaker among colorings that already achieve `preferences[0]`'s best,
     and so on (see `_bestAssignmentWithPriorities`). None of them can inflate K -- the
     minimum is found first, unconstrained by any of them, subject only to the HARD
-    `aloneKeys`/`mustDifferGroups`. Returns (numKeys, colorOf, achievedScorePerTier).
+    `aloneKeys`/`mustDifferGroups`. `breakTiesAlphabetically` (default on) then runs as
+    one final, lower-priority-than-everything-in-`preferences` canonicalization pass
+    (see `_breakTiesAlphabetically`), so re-running this on unchanged input always
+    returns the exact same `colorOf`. Returns (numKeys, colorOf, achievedScorePerTier).
     """
     markers = sorted(liveMarkers(pressSetsByGroup))
     signatures = groupSignatures(pressSetsByGroup)
     numKeys, _ = minKeypressesSat(
-        pressSetsByGroup, maxK=maxK, timeLimitS=timeLimitS, aloneKeys=aloneKeys, mustDifferGroups=mustDifferGroups
+        pressSetsByGroup, maxK=maxK, timeLimitS=timeLimitS, aloneKeys=aloneKeys, mustDifferGroups=mustDifferGroups,
+        breakTiesAlphabetically=False,
     )
     colorOf, achieved = _bestAssignmentWithPriorities(
-        markers, signatures, numKeys, preferences, timeLimitS, aloneKeys, mustDifferGroups
+        markers, signatures, numKeys, preferences, timeLimitS, aloneKeys, mustDifferGroups,
+        breakTiesAlphabetically=breakTiesAlphabetically,
     )
     return numKeys, colorOf, achieved
 
