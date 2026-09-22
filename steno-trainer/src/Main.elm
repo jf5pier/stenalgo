@@ -11,6 +11,7 @@ import Http
 import Json.Decode as D
 import Keyboard exposing (KeyInfo, Layout)
 import Ports
+import Random
 import Set
 
 
@@ -39,6 +40,7 @@ type alias Model =
 type Msg
     = GotLayout (Result Http.Error Layout)
     | GotWords (Result Http.Error (List PracticeWord))
+    | ShuffledWords (List PracticeWord)
     | ClickConnect
     | SerialStatusChanged String
     | IncomingBytes (List Int)
@@ -74,10 +76,25 @@ update msg model =
             ( { model | layout = Failed (httpErrorToString err) }, Cmd.none )
 
         GotWords (Ok words) ->
-            ( { model | words = Loaded words, drill = Just (Drill.init words) }, Cmd.none )
+            ( { model | words = Loaded words }, Random.generate ShuffledWords (shuffleGenerator words) )
 
         GotWords (Err err) ->
             ( { model | words = Failed (httpErrorToString err) }, Cmd.none )
+
+        ShuffledWords words ->
+            -- The first shuffle (right after `GotWords`) has no drill yet, so
+            -- it starts one; every later one is a pass boundary reshuffling
+            -- the existing drill in place (see `IncomingBytes` below).
+            let
+                newDrill =
+                    case model.drill of
+                        Just drill ->
+                            Drill.reshuffle words drill
+
+                        Nothing ->
+                            Drill.init words
+            in
+            ( { model | drill = Just newDrill }, Cmd.none )
 
         ClickConnect ->
             ( model, Ports.requestConnect () )
@@ -93,12 +110,41 @@ update msg model =
                             labels
                                 |> List.filterMap (\label -> Dict.get label model.keymap)
                                 |> Set.fromList
+
+                        ( newDrill, passCompleted ) =
+                            Drill.applyStroke observed drill
+
+                        shuffleCmd =
+                            if passCompleted then
+                                case model.words of
+                                    Loaded words ->
+                                        Random.generate ShuffledWords (shuffleGenerator words)
+
+                                    _ ->
+                                        Cmd.none
+
+                            else
+                                Cmd.none
                     in
-                    ( { model | drill = Just (Drill.applyStroke observed drill) }, Cmd.none )
+                    ( { model | drill = Just newDrill }, shuffleCmd )
 
                 _ ->
                     -- Malformed packet, or the word list hasn't loaded yet -- ignore.
                     ( model, Cmd.none )
+
+
+{-| A plain shuffle-by-random-key: pair each word with an independent random
+float and sort by that key. Good enough for a practice-order shuffle without
+pulling in a dedicated shuffle package for one function. -}
+shuffleGenerator : List a -> Random.Generator (List a)
+shuffleGenerator list =
+    Random.list (List.length list) (Random.float 0 1)
+        |> Random.map
+            (\keys ->
+                List.map2 Tuple.pair keys list
+                    |> List.sortBy Tuple.first
+                    |> List.map Tuple.second
+            )
 
 
 parseSerialStatus : String -> SerialStatus
@@ -249,18 +295,26 @@ viewDrill model =
 
                 markPart =
                     strokeParts |> List.filter (\( _, stroke ) -> isMarkStroke stroke) |> List.map Tuple.first |> String.join "/"
+
+                nextOrtho =
+                    model.drill |> Maybe.andThen Drill.nextWord |> Maybe.map .ortho |> Maybe.withDefault "\u{00A0}"
             in
             div [ class "drill" ]
-                [ p [ class "target-word" ] [ text word.ortho ]
-                , p [ class "target-steno" ] [ text basePart ]
-                , p [ class "target-mark" ]
-                    [ text
-                        (if String.isEmpty markPart then
-                            "\u{00A0}"
+                [ div [ class "drill-words" ]
+                    [ div [ class "current-word" ]
+                        [ p [ class "target-word" ] [ text word.ortho ]
+                        , p [ class "target-steno" ] [ text basePart ]
+                        , p [ class "target-mark" ]
+                            [ text
+                                (if String.isEmpty markPart then
+                                    "\u{00A0}"
 
-                         else
-                            markPart
-                        )
+                                 else
+                                    markPart
+                                )
+                            ]
+                        ]
+                    , p [ class "next-word" ] [ text nextOrtho ]
                     ]
                 ]
 

@@ -1,9 +1,14 @@
-module Drill exposing (PracticeWord, State, applyStroke, currentWord, decoder, expectedStroke, init)
+module Drill exposing (PracticeWord, State, applyStroke, currentWord, decoder, expectedStroke, init, nextWord, reshuffle)
 
-{-| The bare-minimum drill engine: a sequential walk through the
-frequency-ordered word list (already sorted by `util/export_practice_words.py`),
-wrapping at the end. No persistence, no timing, no adaptive ordering -- refreshing
-the page always restarts at word 0, by design (see the plan's MVP scope).
+{-| The drill engine: a shuffled walk through the word list (loaded already
+frequency-ordered by `util/export_practice_words.py`, but drilled in a
+random pass order instead), with no repeats until every word in the list has
+come up once, then reshuffled for the next pass. No persistence, no timing,
+no adaptive ordering -- refreshing the page always restarts at word 0 of a
+fresh shuffle, by design (see the plan's MVP scope). The shuffle itself
+needs `Cmd`/`Random`, which this module deliberately has no access to (kept
+pure, like the rest of the state machine) -- `Main.elm` generates the
+shuffled order and hands it to `init`/`reshuffle`.
 -}
 
 import Array exposing (Array)
@@ -50,9 +55,35 @@ init words =
     }
 
 
+{-| Swap in a freshly-shuffled word order (a new pass), restarting at word 0.
+`Main.elm` calls this once at load (after `GotWords`/`ShuffledWords`) and
+again each time `applyStroke`'s `passCompleted` flag comes back `True`. -}
+reshuffle : List PracticeWord -> State -> State
+reshuffle words state =
+    { state
+        | words = Array.fromList words
+        , currentWordIndex = 0
+        , currentStrokeIndex = 0
+    }
+
+
 currentWord : State -> Maybe PracticeWord
 currentWord state =
     Array.get state.currentWordIndex state.words
+
+
+{-| The word that will become current after this one, wrapping to the start
+of the (current) pass -- purely a preview; advancing the drill itself is
+still `applyStroke`'s job, and a pass boundary reshuffles before this word is
+ever reached. -}
+nextWord : State -> Maybe PracticeWord
+nextWord state =
+    Array.get (wrappedIndex state (state.currentWordIndex + 1)) state.words
+
+
+wrappedIndex : State -> Int -> Int
+wrappedIndex state index =
+    modBy (max 1 (Array.length state.words)) index
 
 
 expectedStroke : State -> Maybe (Set Int)
@@ -66,27 +97,40 @@ expectedStroke state =
 next stroke (or the next word, wrapping, if that was the word's last stroke);
 no match -> flash incorrect, retry the same word/stroke. No counter, no
 penalty, no lockout -- deliberately bare minimum.
+
+Returns whether this stroke completed the last word of the current pass (the
+index wrapped back to 0), so `Main.elm` knows to generate a new shuffle --
+this module has no `Cmd`/`Random` access of its own, so it only reports the
+boundary rather than acting on it.
 -}
-applyStroke : Set Int -> State -> State
+applyStroke : Set Int -> State -> ( State, Bool )
 applyStroke observed state =
     case ( currentWord state, expectedStroke state ) of
         ( Just word, Just expected ) ->
             if observed == expected then
                 if state.currentStrokeIndex + 1 >= List.length word.strokes then
-                    { state
-                        | currentWordIndex = modBy (max 1 (Array.length state.words)) (state.currentWordIndex + 1)
+                    let
+                        newIndex =
+                            wrappedIndex state (state.currentWordIndex + 1)
+                    in
+                    ( { state
+                        | currentWordIndex = newIndex
                         , currentStrokeIndex = 0
                         , feedback = Just True
-                    }
+                      }
+                    , newIndex == 0
+                    )
 
                 else
-                    { state
+                    ( { state
                         | currentStrokeIndex = state.currentStrokeIndex + 1
                         , feedback = Just True
-                    }
+                      }
+                    , False
+                    )
 
             else
-                { state | feedback = Just False }
+                ( { state | feedback = Just False }, False )
 
         _ ->
-            state
+            ( state, False )
