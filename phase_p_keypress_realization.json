@@ -291,30 +291,36 @@
     "imparfait",
     "subjonctif"
    ],
-   "affectedWords": 3880,
+   "affectedWords": 3882,
    "chosenKeys": [
     23
    ],
-   "cost": 141,
+   "cost": 137,
    "alternates": [
     {
      "keys": [
       22
      ],
-     "cost": 141
+     "cost": 137
+    },
+    {
+     "keys": [
+      25
+     ],
+     "cost": 157
+    },
+    {
+     "keys": [
+      24
+     ],
+     "cost": 157
     },
     {
      "keys": [
       18,
       19
      ],
-     "cost": 156
-    },
-    {
-     "keys": [
-      25
-     ],
-     "cost": 162
+     "cost": 158
     },
     {
      "keys": [
@@ -325,37 +331,31 @@
     },
     {
      "keys": [
-      24
+      22,
+      23
      ],
-     "cost": 162
+     "cost": 177
     },
     {
      "keys": [
       16,
       18
      ],
-     "cost": 180
-    },
-    {
-     "keys": [
-      22,
-      23
-     ],
-     "cost": 182
+     "cost": 178
     },
     {
      "keys": [
       24,
       25
      ],
-     "cost": 203
+     "cost": 199
     },
     {
      "keys": [
       20,
       22
      ],
-     "cost": 207
+     "cost": 203
     }
    ]
   },
@@ -364,7 +364,7 @@
     "impératif",
     "pers_1"
    ],
-   "affectedWords": 7333,
+   "affectedWords": 7334,
    "chosenKeys": [
     18
    ],
@@ -455,7 +455,7 @@
     "nbr_p",
     "p"
    ],
-   "affectedWords": 48722,
+   "affectedWords": 48723,
    "chosenKeys": [
     17
    ],
