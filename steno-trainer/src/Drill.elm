@@ -23,6 +23,7 @@ reading(s) that item's chord writes (see `util/export_practice_words.py`). -}
 type alias PracticeWord =
     { ortho : String
     , label : String
+    , phonology : String
     , steno : String
     , strokes : List (List Int)
     , frequency : Float
@@ -31,9 +32,10 @@ type alias PracticeWord =
 
 wordDecoder : D.Decoder PracticeWord
 wordDecoder =
-    D.map5 PracticeWord
+    D.map6 PracticeWord
         (D.field "ortho" D.string)
         (D.field "label" D.string)
+        (D.field "phonology" D.string)
         (D.field "steno" D.string)
         (D.field "strokes" (D.list (D.list D.int)))
         (D.field "frequency" D.float)

@@ -198,10 +198,7 @@ viewChordBoard : Layout -> Html msg
 viewChordBoard layout =
     case List.filter (\l -> l.keyCount == 2) layout.phonemeLayers of
         layer :: _ ->
-            div [ class "phoneme-layer" ]
-                [ h3 [] [ text "Second keyboard: 2-key stroke phonemes" ]
-                , viewChordGrid layout.keys layer.strokes
-                ]
+            div [ class "phoneme-layer" ] [ viewChordGrid layout.keys layer.strokes ]
 
         [] ->
             text ""

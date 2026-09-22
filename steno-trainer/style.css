@@ -28,7 +28,7 @@ body {
 
 .drill {
   text-align: center;
-  margin: 2rem 0;
+  margin: 0 0 2rem;
 }
 
 .drill-words {
@@ -45,6 +45,7 @@ body {
 
 .target-word {
   font-size: 2.5rem;
+  margin-top: 0;
   margin-bottom: 0.25rem;
 }
 
@@ -53,6 +54,20 @@ body {
   color: #666;
   font-size: 0.9rem;
   margin-top: -0.25rem;
+}
+
+.target-phonology {
+  color: #666;
+  font-size: 0.95rem;
+  margin-top: -0.25rem;
+}
+
+.connect-button {
+  margin-bottom: 0.5rem;
+}
+
+.notation-toggle {
+  font-size: 0.9rem;
 }
 
 .target-steno {
@@ -114,12 +129,6 @@ body {
 
 .phoneme-layer {
   margin-top: 2.5rem;
-}
-
-.phoneme-layer h3 {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  text-align: center;
 }
 
 .keyboard-reference .key {
