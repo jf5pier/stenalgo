@@ -14,6 +14,9 @@ lemma+gramCat, or an intentionally-exempted pair -- 1990-reform doublets, or one
 word >10x rarer than the other) is expected, not a bug in this exporter; the
 most frequent variant is kept.
 
+Each record also carries the word's X-SAMPA `phonology`, syllabified (see
+`formatPhonology`); the trainer can show it in IPA instead (`Notation.elm`).
+
 Emits both a display steno string and the raw key-index strokes, so the browser
 never needs a steno-notation parser -- it just compares sets of key indices
 against a decoded Gemini PR packet.
@@ -100,6 +103,13 @@ def formatReadingsLabel(gramCat: GramCat, readings: list[Reading]) -> str:
     )
 
 
+def formatPhonology(word: Word) -> str:
+    """The word's X-SAMPA pronunciation, syllables dot-separated the way the steno
+    splits them into strokes (`Word.syllCV`, after its steno-encoding syllable-break
+    fixes), e.g. "kal.me". "#" is `syllCV`'s empty-slot placeholder, not a phoneme."""
+    return ".".join("".join(part for part in syllable if part != "#") for syllable in word.syllCV)
+
+
 def buildReadingsByWord(
     resolvedGroups: list[dict], theory: dict[Strokes, list[Word]],
 ) -> dict[Word, list[list[Reading]]]:
@@ -159,7 +169,7 @@ def main() -> None:
                 existing["frequency"] = max(existing["frequency"], round(word.frequency, 3))
                 continue
             byOrthoSteno[(word.ortho, steno)] = {
-                "ortho": word.ortho, "label": label, "steno": steno,
+                "ortho": word.ortho, "label": label, "phonology": formatPhonology(word), "steno": steno,
                 "strokes": [sorted(set(stroke)) for stroke in strokes],
                 "frequency": round(word.frequency, 3),
             }

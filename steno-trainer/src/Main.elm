@@ -10,6 +10,7 @@ import Html.Events exposing (onClick)
 import Http
 import Json.Decode as D
 import Keyboard exposing (KeyInfo, Layout)
+import Notation exposing (Notation)
 import Ports
 import Random
 import Set
@@ -34,6 +35,7 @@ type alias Model =
     , drill : Maybe Drill.State
     , keymap : Dict String Int
     , serial : SerialStatus
+    , notation : Notation
     }
 
 
@@ -44,6 +46,7 @@ type Msg
     | ClickConnect
     | SerialStatusChanged String
     | IncomingBytes (List Int)
+    | ToggleNotation
 
 
 main : Program () Model Msg
@@ -58,6 +61,7 @@ init _ =
       , drill = Nothing
       , keymap = Dict.empty
       , serial = CheckingSupport
+      , notation = Notation.XSampa
       }
     , Cmd.batch
         [ Http.get { url = "public/data/keyboard-layout.json", expect = Http.expectJson GotLayout Keyboard.decoder }
@@ -95,6 +99,9 @@ update msg model =
                             Drill.init words
             in
             ( { model | drill = Just newDrill }, Cmd.none )
+
+        ToggleNotation ->
+            ( { model | notation = Notation.toggle model.notation }, Cmd.none )
 
         ClickConnect ->
             ( model, Ports.requestConnect () )
@@ -190,15 +197,21 @@ subscriptions _ =
         ]
 
 
-{-| Two columns: a narrow left sidebar carrying the title and the two
-plain-text legends (too easy to lose below the tall keyboards otherwise), and
-the actual trainer -- connect button, drill, interactive keyboard, second
-chord-layer keyboard -- to its right.
+{-| Two columns: a narrow left sidebar carrying the title, the connect
+button, the notation toggle and the two plain-text legends (too easy to lose
+below the tall keyboards otherwise), and the actual trainer -- drill,
+interactive keyboard, second chord-layer keyboard -- to its right, starting
+at the top of the page.
 -}
 view : Model -> Html Msg
 view model =
     div [ class "app" ]
-        [ div [ class "sidebar" ] (h1 [] [ text "Stenalgo practice" ] :: viewSidebarLegends model)
+        [ div [ class "sidebar" ]
+            (h1 [] [ text "Stenalgo practice" ]
+                :: viewConnectButton model.serial
+                :: viewNotationToggle model.notation
+                :: viewSidebarLegends model
+            )
         , div [ class "main" ]
             [ case model.serial of
                 Unsupported ->
@@ -211,11 +224,42 @@ view model =
         ]
 
 
+{-| Nothing on a browser without Web Serial -- the main column says why instead. -}
+viewConnectButton : SerialStatus -> Html Msg
+viewConnectButton serial =
+    case serial of
+        Unsupported ->
+            text ""
+
+        _ ->
+            button
+                [ class "connect-button", onClick ClickConnect, disabled (serial == Connected) ]
+                [ text
+                    (if serial == Connected then
+                        "Connected"
+
+                     else
+                        "Connect steno machine"
+                    )
+                ]
+
+
+{-| Switches every phoneme on the page -- keys, chord board, legends, the
+drill's steno and phonology -- between X-SAMPA (what the dictionary is
+written in) and IPA. See `Notation`. -}
+viewNotationToggle : Notation -> Html Msg
+viewNotationToggle notation =
+    p [ class "notation-toggle" ]
+        [ text ("Phonemes: " ++ Notation.label notation ++ " ")
+        , button [ onClick ToggleNotation ] [ text ("Show " ++ Notation.label (Notation.toggle notation)) ]
+        ]
+
+
 viewSidebarLegends : Model -> List (Html Msg)
 viewSidebarLegends model =
     case model.layout of
         Loaded layout ->
-            [ Keyboard.viewLegends layout ]
+            [ Keyboard.viewLegends (Notation.layout model.notation layout) ]
 
         _ ->
             []
@@ -224,17 +268,7 @@ viewSidebarLegends model =
 viewTrainer : Model -> Html Msg
 viewTrainer model =
     div []
-        [ button
-            [ onClick ClickConnect, disabled (model.serial == Connected) ]
-            [ text
-                (if model.serial == Connected then
-                    "Connected"
-
-                 else
-                    "Connect steno machine"
-                )
-            ]
-        , case model.words of
+        [ case model.words of
             Failed message ->
                 p [ class "error" ] [ text ("Couldn't load practice words: " ++ message) ]
 
@@ -250,7 +284,11 @@ viewTrainer model =
             Loading ->
                 p [] [ text "Loading keyboard layout..." ]
 
-            Loaded layout ->
+            Loaded loadedLayout ->
+                let
+                    layout =
+                        Notation.layout model.notation loadedLayout
+                in
                 div []
                     [ Keyboard.view
                         { highlighted = model.drill |> Maybe.andThen Drill.expectedStroke |> Maybe.withDefault Set.empty
@@ -304,7 +342,8 @@ viewDrill model =
                     [ div [ class "current-word" ]
                         [ p [ class "target-word" ] [ text word.ortho ]
                         , p [ class "target-label" ] [ text word.label ]
-                        , p [ class "target-steno" ] [ text basePart ]
+                        , p [ class "target-phonology" ] [ text ("/" ++ Notation.render model.notation word.phonology ++ "/") ]
+                        , p [ class "target-steno" ] [ text (Notation.render model.notation basePart) ]
                         , p [ class "target-mark" ]
                             [ text
                                 (if String.isEmpty markPart then
