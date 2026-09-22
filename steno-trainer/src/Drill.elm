@@ -16,8 +16,13 @@ import Json.Decode as D
 import Set exposing (Set)
 
 
+{-| One drill item: a word's spelling plus ONE of its chords. A self-homograph
+spelling ("calmez" = impératif / indicatif présent) has several independently
+valid chords and so several items, told apart by `label` -- the grammatical
+reading(s) that item's chord writes (see `util/export_practice_words.py`). -}
 type alias PracticeWord =
     { ortho : String
+    , label : String
     , steno : String
     , strokes : List (List Int)
     , frequency : Float
@@ -26,8 +31,9 @@ type alias PracticeWord =
 
 wordDecoder : D.Decoder PracticeWord
 wordDecoder =
-    D.map4 PracticeWord
+    D.map5 PracticeWord
         (D.field "ortho" D.string)
+        (D.field "label" D.string)
         (D.field "steno" D.string)
         (D.field "strokes" (D.list (D.list D.int)))
         (D.field "frequency" D.float)

@@ -303,6 +303,7 @@ viewDrill model =
                 [ div [ class "drill-words" ]
                     [ div [ class "current-word" ]
                         [ p [ class "target-word" ] [ text word.ortho ]
+                        , p [ class "target-label" ] [ text word.label ]
                         , p [ class "target-steno" ] [ text basePart ]
                         , p [ class "target-mark" ]
                             [ text

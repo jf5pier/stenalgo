@@ -61,10 +61,22 @@ def loadFinalTheory(
     Requires `phaseGPath` (`python -m util.build_phase_g_assignment`) and
     `resolvedPressSetsPath` (`python -m src.elicitation`) to already exist.
     """
+    _theory, finalTheory = loadFirstAndFinalTheory(keyboard, phaseGPath, resolvedPressSetsPath)
+    return finalTheory
+
+
+def loadFirstAndFinalTheory(
+    keyboard: Keyboard,
+    phaseGPath: str = "phase_g_keypress_assignment.json",
+    resolvedPressSetsPath: str = "resolved_press_sets.json",
+) -> tuple[dict[Strokes, list[Word]], dict[Word, list[Strokes]]]:
+    """`loadFirstTheory` and `loadFinalTheory` together, unpickling only once -- for a
+    caller that needs theory 1 alongside theory 2 (e.g. to map `resolved_press_sets.json`
+    entries back onto real `Word`s, which is keyed by theory-1 strokes)."""
     if not os.path.exists(phaseGPath):
         raise RuntimeError(f"Run `python -m util.build_phase_g_assignment` first to generate {phaseGPath}.")
     if not os.path.exists(resolvedPressSetsPath):
         raise RuntimeError(f"Run `python -m src.elicitation` first to generate {resolvedPressSetsPath}.")
 
     dictionary, theory = _loadDictionaryAndFirstTheory()
-    return dictionary.buildFinalTheory(theory, keyboard, phaseGPath, resolvedPressSetsPath)
+    return theory, dictionary.buildFinalTheory(theory, keyboard, phaseGPath, resolvedPressSetsPath)

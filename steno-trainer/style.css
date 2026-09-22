@@ -48,6 +48,13 @@ body {
   margin-bottom: 0.25rem;
 }
 
+.target-label {
+  font-style: italic;
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: -0.25rem;
+}
+
 .target-steno {
   font-family: monospace;
   color: #666;
