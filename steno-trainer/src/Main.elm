@@ -1,12 +1,13 @@
 module Main exposing (main)
 
 import Browser
+import Definitions exposing (Definitions)
 import Dict exposing (Dict)
 import Drill exposing (PracticeWord)
 import GeminiPr
-import Html exposing (Html, button, div, h1, p, text)
-import Html.Attributes exposing (class, disabled)
-import Html.Events exposing (onClick)
+import Html exposing (Html, button, div, h1, input, p, text)
+import Html.Attributes exposing (autofocus, class, disabled, placeholder, type_, value)
+import Html.Events exposing (onClick, onInput)
 import Http
 import Json.Decode as D
 import Keyboard exposing (KeyInfo, Layout)
@@ -25,10 +26,23 @@ type LoadState a
 {-| Words drill single words (`practice-words.json`); sentences drill short
 common sentences word by word (`practice-sentences.json`, see
 `util/export_practice_sentences.py`). Both run through the same `Drill`
-state machine -- a sentence is just one long multi-stroke item. -}
+state machine -- a sentence is just one long multi-stroke item. Definitions
+is a lookup, not a drill: type a spelling, see its homophones (see
+`Definitions`). -}
 type Mode
     = WordMode
     | SentenceMode
+    | DefinitionMode
+
+
+{-| The strokes correctly typed so far for the current target word (a
+sentence's current word), as steno text, shown in place of the chord when
+hints are off. `complete` once the word's last stroke is in: it stays on
+screen (the drill has already moved on) until the next word's first stroke. -}
+type alias TypedStrokes =
+    { strokes : List String
+    , complete : Bool
+    }
 
 
 type SerialStatus
@@ -47,6 +61,11 @@ type alias Model =
     , keymap : Dict String Int
     , serial : SerialStatus
     , notation : Notation
+    , definitions : Maybe (LoadState Definitions)
+    , query : String
+    , hints : Bool
+    , lastStroke : Set.Set Int
+    , typed : TypedStrokes
     }
 
 
@@ -60,6 +79,9 @@ type Msg
     | SerialStatusChanged String
     | IncomingBytes (List Int)
     | ToggleNotation
+    | GotDefinitions (Result Http.Error Definitions)
+    | QueryChanged String
+    | ToggleHints
 
 
 main : Program () Model Msg
@@ -77,6 +99,11 @@ init _ =
       , keymap = Dict.empty
       , serial = CheckingSupport
       , notation = Notation.XSampa
+      , definitions = Nothing
+      , query = ""
+      , hints = True
+      , lastStroke = Set.empty
+      , typed = noTypedStrokes
       }
     , Cmd.batch
         [ Http.get { url = "public/data/keyboard-layout.json", expect = Http.expectJson GotLayout Keyboard.decoder }
@@ -111,8 +138,25 @@ update msg model =
             if mode == model.mode then
                 ( model, Cmd.none )
 
+            else if mode == DefinitionMode && model.definitions == Nothing then
+                ( { model | mode = mode, drill = Nothing, typed = noTypedStrokes, definitions = Just Loading }
+                , Http.get { url = "public/data/definitions.json", expect = Http.expectJson GotDefinitions Definitions.decoder }
+                )
+
             else
-                startDrillIfIdle { model | mode = mode, drill = Nothing }
+                startDrillIfIdle { model | mode = mode, drill = Nothing, typed = noTypedStrokes }
+
+        GotDefinitions (Ok definitions) ->
+            ( { model | definitions = Just (Loaded definitions) }, Cmd.none )
+
+        GotDefinitions (Err err) ->
+            ( { model | definitions = Just (Failed (httpErrorToString err)) }, Cmd.none )
+
+        QueryChanged query ->
+            ( { model | query = query }, Cmd.none )
+
+        ToggleHints ->
+            ( { model | hints = not model.hints }, Cmd.none )
 
         ShuffledWords words ->
             -- The first shuffle of a mode (after its list loads, or on
@@ -140,44 +184,110 @@ update msg model =
             ( { model | serial = parseSerialStatus status }, Cmd.none )
 
         IncomingBytes bytes ->
-            case ( GeminiPr.decodePacket bytes, model.drill ) of
-                ( Ok labels, Just drill ) ->
+            case GeminiPr.decodePacket bytes of
+                Ok labels ->
                     let
                         observed =
                             labels
                                 |> List.filterMap (\label -> Dict.get label model.keymap)
                                 |> Set.fromList
-
-                        ( newDrill, passCompleted ) =
-                            Drill.applyStroke observed drill
-
-                        shuffleCmd =
-                            if passCompleted then
-                                case activeItems model of
-                                    Loaded words ->
-                                        Random.generate ShuffledWords (shuffleGenerator words)
-
-                                    _ ->
-                                        Cmd.none
-
-                            else
-                                Cmd.none
                     in
-                    ( { model | drill = Just newDrill }, shuffleCmd )
+                    case model.drill of
+                        Just drill ->
+                            let
+                                ( newDrill, passCompleted ) =
+                                    Drill.applyStroke observed drill
 
-                _ ->
-                    -- Malformed packet, or the word list hasn't loaded yet -- ignore.
+                                shuffleCmd =
+                                    if passCompleted then
+                                        case activeItems model of
+                                            Just (Loaded words) ->
+                                                Random.generate ShuffledWords (shuffleGenerator words)
+
+                                            _ ->
+                                                Cmd.none
+
+                                    else
+                                        Cmd.none
+                            in
+                            ( { model
+                                | drill = Just newDrill
+                                , lastStroke = observed
+                                , typed =
+                                    if newDrill.feedback == Just True then
+                                        recordTypedStroke drill model.typed
+
+                                    else
+                                        model.typed
+                              }
+                            , shuffleCmd
+                            )
+
+                        Nothing ->
+                            ( { model | lastStroke = observed }, Cmd.none )
+
+                Err _ ->
+                    -- Malformed packet -- ignore.
                     ( model, Cmd.none )
 
 
-activeItems : Model -> LoadState (List PracticeWord)
+noTypedStrokes : TypedStrokes
+noTypedStrokes =
+    { strokes = [], complete = False }
+
+
+{-| Add the stroke `drill` was expecting (just matched) to the typed-strokes
+line: a new line after a completed word, otherwise appended. A stroke
+completes the word when it's the last of the item, or of the current
+sentence word. -}
+recordTypedStroke : Drill.State -> TypedStrokes -> TypedStrokes
+recordTypedStroke drill typed =
+    case Drill.currentWord drill of
+        Just word ->
+            let
+                index =
+                    drill.currentStrokeIndex
+
+                stroke =
+                    String.words word.steno
+                        |> List.concatMap (String.split "/")
+                        |> List.drop index
+                        |> List.head
+                        |> Maybe.withDefault ""
+
+                wordEnds =
+                    if List.isEmpty word.segments then
+                        [ List.length word.strokes ]
+
+                    else
+                        word.segments
+                            |> List.foldl (\segment ends -> (segment.strokeCount + (List.head ends |> Maybe.withDefault 0)) :: ends) []
+
+                complete =
+                    List.member (index + 1) wordEnds
+            in
+            if typed.complete then
+                { strokes = [ stroke ], complete = complete }
+
+            else
+                { strokes = typed.strokes ++ [ stroke ], complete = complete }
+
+        Nothing ->
+            typed
+
+
+{-| The current drill mode's list; `Nothing` in definition mode (no drill). -}
+activeItems : Model -> Maybe (LoadState (List PracticeWord))
 activeItems model =
     case model.mode of
         WordMode ->
-            model.words
+            Just model.words
 
         SentenceMode ->
-            model.sentences
+            Just model.sentences
+
+        DefinitionMode ->
+            Nothing
 
 
 {-| Shuffle the current mode's list into a fresh drill, once it has loaded
@@ -185,7 +295,7 @@ and unless a drill is already running. -}
 startDrillIfIdle : Model -> ( Model, Cmd Msg )
 startDrillIfIdle model =
     case ( model.drill, activeItems model ) of
-        ( Nothing, Loaded items ) ->
+        ( Nothing, Just (Loaded items) ) ->
             ( model, Random.generate ShuffledWords (shuffleGenerator items) )
 
         _ ->
@@ -262,6 +372,7 @@ view model =
             (h1 [] [ text "Stenalgo practice" ]
                 :: viewConnectButton model.serial
                 :: viewModeSwitch model.mode
+                :: viewHintsToggle model
                 :: viewNotationToggle model.notation
                 :: viewSidebarLegends model
             )
@@ -303,7 +414,42 @@ viewModeSwitch mode =
         modeButton target name =
             button [ onClick (SwitchMode target), disabled (mode == target) ] [ text name ]
     in
-    p [ class "mode-switch" ] [ modeButton WordMode "Words", text " ", modeButton SentenceMode "Sentences" ]
+    p [ class "mode-switch" ]
+        [ modeButton WordMode "Words"
+        , text " "
+        , modeButton SentenceMode "Sentences"
+        , text " "
+        , modeButton DefinitionMode "Definitions"
+        ]
+
+
+{-| Hints on: the keyboard lights up the keys of the expected stroke and the
+drill shows its chord. Off: the keyboard shows only the keys you typed, and
+the chord line becomes the strokes typed so far (see `TypedStrokes`). -}
+viewHintsToggle : Model -> Html Msg
+viewHintsToggle model =
+    if model.mode == DefinitionMode then
+        text ""
+
+    else
+        p [ class "hints-toggle" ]
+            [ text
+                (if model.hints then
+                    "Hints: on "
+
+                 else
+                    "Hints: off "
+                )
+            , button [ onClick ToggleHints ]
+                [ text
+                    (if model.hints then
+                        "Hide hints"
+
+                     else
+                        "Show hints"
+                    )
+                ]
+            ]
 
 
 {-| Switches every phoneme on the page -- keys, chord board, legends, the
@@ -330,15 +476,18 @@ viewSidebarLegends model =
 viewTrainer : Model -> Html Msg
 viewTrainer model =
     div []
-        [ case activeItems model of
-            Failed message ->
+        [ case ( model.mode, activeItems model ) of
+            ( DefinitionMode, _ ) ->
+                viewDefinitions model
+
+            ( _, Just (Failed message) ) ->
                 p [ class "error" ] [ text ("Couldn't load practice " ++ modeNoun model.mode ++ ": " ++ message) ]
 
-            Loading ->
-                p [] [ text ("Loading practice " ++ modeNoun model.mode ++ "...") ]
-
-            Loaded _ ->
+            ( _, Just (Loaded _) ) ->
                 viewDrill model
+
+            _ ->
+                p [] [ text ("Loading practice " ++ modeNoun model.mode ++ "...") ]
         , case model.layout of
             Failed message ->
                 p [ class "error" ] [ text ("Couldn't load keyboard layout: " ++ message) ]
@@ -353,9 +502,16 @@ viewTrainer model =
                 in
                 div []
                     [ Keyboard.view
-                        { highlighted = model.drill |> Maybe.andThen Drill.expectedStroke |> Maybe.withDefault Set.empty
-                        , correct = model.drill |> Maybe.andThen .feedback
-                        }
+                        (if model.hints && model.mode /= DefinitionMode then
+                            { highlighted = model.drill |> Maybe.andThen Drill.expectedStroke |> Maybe.withDefault Set.empty
+                            , correct = model.drill |> Maybe.andThen .feedback
+                            }
+
+                         else
+                            { highlighted = model.lastStroke
+                            , correct = model.drill |> Maybe.andThen .feedback
+                            }
+                        )
                         layout.keys
                     , Keyboard.viewChordBoard layout
                     ]
@@ -371,6 +527,33 @@ modeNoun mode =
         SentenceMode ->
             "sentences"
 
+        DefinitionMode ->
+            "definitions"
+
+
+viewDefinitions : Model -> Html Msg
+viewDefinitions model =
+    div [ class "definitions" ]
+        [ input
+            [ type_ "search"
+            , class "definition-query"
+            , placeholder "Spelling, e.g. est"
+            , value model.query
+            , onInput QueryChanged
+            , autofocus True
+            ]
+            []
+        , case model.definitions of
+            Just (Loaded definitions) ->
+                Definitions.view (Notation.render model.notation) model.query definitions
+
+            Just (Failed message) ->
+                p [ class "error" ] [ text ("Couldn't load definitions: " ++ message) ]
+
+            _ ->
+                p [] [ text "Loading definitions..." ]
+        ]
+
 
 viewDrill : Model -> Html Msg
 viewDrill model =
@@ -384,22 +567,29 @@ viewDrill model =
 
                         _ ->
                             Set.empty
+
+                chordDisplay =
+                    if model.hints then
+                        ShowChord model.notation reservedKeys
+
+                    else
+                        ShowTyped model.notation model.typed
             in
             case model.mode of
-                WordMode ->
+                SentenceMode ->
+                    viewSentence chordDisplay (Drill.currentSegmentIndex drill) word
+
+                _ ->
                     div [ class "drill" ]
                         [ div [ class "drill-words" ]
                             [ div [ class "current-word" ]
                                 (p [ class "target-word" ] (viewInContext word)
-                                    :: viewReading model.notation reservedKeys word.label word.phonology word.steno word.strokes
+                                    :: viewReading chordDisplay word.label word.phonology word.steno word.strokes
                                 )
                             , p [ class "next-word" ]
                                 (Drill.nextWord drill |> Maybe.map viewInContext |> Maybe.withDefault [ text "\u{00A0}" ])
                             ]
                         ]
-
-                SentenceMode ->
-                    viewSentence model.notation reservedKeys (Drill.currentSegmentIndex drill) word
 
         _ ->
             p [] [ text "Nothing to practice." ]
@@ -438,8 +628,8 @@ viewInContext word =
 dimmed), and that word's reading/phonology/chord underneath -- the whole
 sentence's chords at once would be unreadable. `phonology` holds one
 space-separated transcription per word, parallel to `segments`. -}
-viewSentence : Notation -> Set.Set Int -> Int -> PracticeWord -> Html Msg
-viewSentence notation reservedKeys currentIndex sentence =
+viewSentence : ChordDisplay -> Int -> PracticeWord -> Html Msg
+viewSentence chordDisplay currentIndex sentence =
     let
         segmentStart index =
             sentence.segments |> List.take index |> List.map .strokeCount |> List.sum
@@ -503,8 +693,7 @@ viewSentence notation reservedKeys currentIndex sentence =
                 )
                 :: (case List.drop currentIndex sentence.segments |> List.head of
                         Just segment ->
-                            viewReading notation
-                                reservedKeys
+                            viewReading chordDisplay
                                 segment.label
                                 (String.split " " sentence.phonology |> List.drop currentIndex |> List.head |> Maybe.withDefault "")
                                 segment.steno
@@ -517,7 +706,16 @@ viewSentence notation reservedKeys currentIndex sentence =
         ]
 
 
-{-| One word's reading label, phonology and chord. Reserved keys (`*`, `#`,
+{-| How a drilled word's chord line is shown: the chord itself (hints on,
+with the reserved keys to split its bare mark strokes off), or the strokes
+typed so far (hints off). -}
+type ChordDisplay
+    = ShowChord Notation (Set.Set Int)
+    | ShowTyped Notation TypedStrokes
+
+
+{-| One word's reading label, phonology and chord (or, hints off, the
+strokes typed so far -- see `ChordDisplay`). Reserved keys (`*`, `#`,
 and the two still-unassigned ones) never carry a phoneme: they're the `*`/`#`
 track's mark, which picks which *lemma* you mean among homophones of
 different words (`src/ambiguitychecker.py`'s "lemma-homophone ambiguity",
@@ -529,31 +727,52 @@ homophone cluster's further symbols are strokes of their own, split onto
 their own line under the chord -- always rendered (even empty) so a word that
 has one doesn't shift the layout of the one after it.
 -}
-viewReading : Notation -> Set.Set Int -> String -> String -> String -> List (List Int) -> List (Html Msg)
-viewReading notation reservedKeys label phonology steno strokes =
+viewReading : ChordDisplay -> String -> String -> String -> List (List Int) -> List (Html Msg)
+viewReading chordDisplay label phonology steno strokes =
     let
-        isMarkStroke stroke =
-            not (List.isEmpty stroke) && List.all (\k -> Set.member k reservedKeys) stroke
-
-        strokeParts =
-            List.map2 Tuple.pair (String.split "/" steno) strokes
-
-        basePart =
-            strokeParts |> List.filter (\( _, stroke ) -> not (isMarkStroke stroke)) |> List.map Tuple.first |> String.join "/"
-
-        markPart =
-            strokeParts |> List.filter (\( _, stroke ) -> isMarkStroke stroke) |> List.map Tuple.first |> String.join "/"
-    in
-    [ p [ class "target-label" ] [ text label ]
-    , p [ class "target-phonology" ] [ text ("/" ++ Notation.render notation phonology ++ "/") ]
-    , p [ class "target-steno" ] [ text (Notation.render notation basePart) ]
-    , p [ class "target-mark" ]
-        [ text
-            (if String.isEmpty markPart then
+        orSpace string =
+            if String.isEmpty string then
                 "\u{00A0}"
 
-             else
-                markPart
-            )
-        ]
-    ]
+            else
+                string
+    in
+    case chordDisplay of
+        ShowChord notation reservedKeys ->
+            let
+                isMarkStroke stroke =
+                    not (List.isEmpty stroke) && List.all (\k -> Set.member k reservedKeys) stroke
+
+                strokeParts =
+                    List.map2 Tuple.pair (String.split "/" steno) strokes
+
+                basePart =
+                    strokeParts |> List.filter (\( _, stroke ) -> not (isMarkStroke stroke)) |> List.map Tuple.first |> String.join "/"
+
+                markPart =
+                    strokeParts |> List.filter (\( _, stroke ) -> isMarkStroke stroke) |> List.map Tuple.first |> String.join "/"
+            in
+            [ p [ class "target-label" ] [ text label ]
+            , p [ class "target-phonology" ] [ text ("/" ++ Notation.render notation phonology ++ "/") ]
+            , p [ class "target-steno" ] [ text (Notation.render notation basePart) ]
+            , p [ class "target-mark" ] [ text (orSpace markPart) ]
+            ]
+
+        ShowTyped notation typed ->
+            [ p [ class "target-label" ] [ text label ]
+            , p [ class "target-phonology" ] [ text ("/" ++ Notation.render notation phonology ++ "/") ]
+            , p [ class "target-steno typed-strokes" ]
+                [ text
+                    (orSpace
+                        (Notation.render notation (String.join "/" typed.strokes)
+                            ++ (if typed.complete then
+                                    " \u{2713}"
+
+                                else
+                                    ""
+                               )
+                        )
+                    )
+                ]
+            , p [ class "target-mark" ] [ text "\u{00A0}" ]
+            ]
