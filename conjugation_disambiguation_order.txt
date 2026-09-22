@@ -1,0 +1,61 @@
+Exhaustive list of the conjugation feature (markers) that may be used to discriminate two homophones
+$and their preseance order : Conjugation hier on the list are the one that should requiers less
+features to discriminate
+
+m 
+m s 
+f 
+f s 
+m p 
+f p 
+indicatif présent pers_3 nbr_s
+indicatif présent pers_1 nbr_s
+indicatif présent pers_2 nbr_s
+indicatif présent pers_3 nbr_p
+indicatif présent pers_1 nbr_p
+indicatif présent pers_2 nbr_p
+indicatif imparfait pers_3 nbr_s
+indicatif imparfait pers_1 nbr_s
+indicatif imparfait pers_2 nbr_s
+indicatif imparfait pers_3 nbr_p
+indicatif imparfait pers_1 nbr_p
+indicatif imparfait pers_2 nbr_p
+indicatif future simple pers_3 nbr_s
+indicatif future simple pers_1 nbr_s
+indicatif future simple pers_2 nbr_s
+indicatif future simple pers_3 nbr_p
+indicatif future simple pers_1 nbr_p
+indicatif future simple pers_2 nbr_p
+imperatif présent pers_2 nbr_s
+imperatif présent pers_1 nbr_p
+imperatif présent pers_2 nbr_p
+indicatif passé simple pers_3 nbr_s
+indicatif passé simple pers_1 nbr_s
+indicatif passé simple pers_2 nbr_s
+indicatif passé simple pers_3 nbr_p
+indicatif passé simple pers_1 nbr_p
+indicatif passé simple pers_2 nbr_p
+conditionnel présent pers_3 nbr_s
+conditionnel présent pers_1 nbr_s
+conditionnel présent pers_2 nbr_s
+conditionnel présent pers_3 nbr_p
+conditionnel présent pers_1 nbr_p
+conditionnel présent pers_2 nbr_p
+subjonctif présent pers_3 nbr_s
+subjonctif présent pers_1 nbr_s
+subjonctif présent pers_2 nbr_s
+subjonctif présent pers_3 nbr_p
+subjonctif présent pers_1 nbr_p
+subjonctif présent pers_2 nbr_p
+infinitif
+
+
+------------- 
+Special rules :
+imperatif 3 conjugation never conflict phonologically between eachother, so they should always be identifiable only with the "imperatif" marker 
+it is mandatory
+infinitif is also never phonologically ambiguous with itself, so -- like imperatif -- it should always be identifiable only with the "infinitif" marker alone
+subjonctif marker is also always mandatory, but may be clarified by a single pers_ or nbr_ marker when subjonctif alone is not enough
+
+
+

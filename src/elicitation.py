@@ -306,36 +306,49 @@ def buildAnswersByOpposition(
     return answersByOpposition, duplicateOppositions
 
 
-def resolveGroupPressSets(
+PressByOrthoCombination = dict[tuple[WordOrtho, FeatureCombination], frozenset[str]]
+
+
+def resolvePressByCombination(
     homophoneGroups: dict[LemmaHomophoneGroupKey, list[Word]],
     answersByOpposition: AnswerByOpposition,
-) -> tuple[dict[LemmaHomophoneGroupKey, dict[WordOrtho, frozenset[str]]], list[frozenset[FeatureCombination]]]:
+) -> tuple[dict[LemmaHomophoneGroupKey, PressByOrthoCombination], list[frozenset[FeatureCombination]]]:
     """
-    Shared resolution step behind both E5 (validate) and E6 (persist): per homophone
-    group, and for every pair of distinct combinations actually co-present in that
-    group, look up that specific opposition's answer and union it into each side's
-    running per-spelling press-set. A spelling's full press-set within a group is the
-    union of what it takes to tell it apart from every *other spelling in that same
-    group* -- scoped to the group, not a single universal press for the reading, since
-    what a reading needs to contrast against varies group to group (the same reading
-    can need no marker against one partner and a marker against another, perfectly
-    legitimately).
+    E5/E6's shared resolution core, at COMBINATION granularity (one entry per
+    (spelling, reading), not yet collapsed to a per-spelling list -- see
+    `resolveGroupPressSets`, which is this plus the final per-spelling dedup, and
+    `util/check_conjugation_disambiguation_order.py`, which needs this finer grain to
+    check a specific READING's press against `conjugation_disambiguation_order.txt`'s
+    per-combination rules (e.g. "a masculine reading's press must be empty", which a
+    deduped per-spelling alternate list can't distinguish from an unrelated reading of
+    the same spelling that happens to share the same press value).
+
+    For every pair of distinct combinations actually co-present in a group, looks up
+    that specific opposition's answer and unions it into each side's running
+    per-(spelling, combination) press-set: a reading's full press-set within a group is
+    the union of what it takes to tell its OWN combination apart from every *other
+    spelling's* combinations in that same group -- scoped to the group, not a single
+    universal press for the reading, since what a reading needs to contrast against
+    varies group to group.
 
     A group needing an opposition missing from `answersByOpposition` (unanswered, or a
     duplicate -- see `buildAnswersByOpposition`) cannot be resolved and is left out of
     the first return value rather than risking a guess; its missing oppositions are
     collected in the second return value so the caller can re-ask.
 
-    Returns (pressSetsByGroup, unresolvedOppositions).
+    Returns (pressByOrthoCombinationByGroup, unresolvedOppositions).
     """
-    pressSetsByGroup: dict[LemmaHomophoneGroupKey, dict[WordOrtho, frozenset[str]]] = {}
+    pressByOrthoCombinationByGroup: dict[LemmaHomophoneGroupKey, PressByOrthoCombination] = {}
     unresolvedOppositions: list[frozenset[FeatureCombination]] = []
     for homophoneGroupKey, words in homophoneGroups.items():
         combinationsByOrtho = featureCombinationsByOrtho(words)
         orthos = sorted(combinationsByOrtho)
         if len(orthos) < 2:
             continue
-        pressSetByOrtho: dict[WordOrtho, set[str]] = {ortho: set() for ortho in orthos}
+        pressByOrthoCombination: dict[tuple[WordOrtho, FeatureCombination], set[str]] = {
+            (ortho, combination): set()
+            for ortho in orthos for combination in combinationsByOrtho[ortho]
+        }
         groupIsResolvable = True
         for orthoA, orthoB in combinations(orthos, 2):
             for combinationA in combinationsByOrtho[orthoA]:
@@ -348,19 +361,62 @@ def resolveGroupPressSets(
                         unresolvedOppositions.append(oppositionKey)
                         groupIsResolvable = False
                         continue
-                    pressSetByOrtho[orthoA] |= pressByCombination[combinationA]
-                    pressSetByOrtho[orthoB] |= pressByCombination[combinationB]
+                    pressByOrthoCombination[(orthoA, combinationA)] |= pressByCombination[combinationA]
+                    pressByOrthoCombination[(orthoB, combinationB)] |= pressByCombination[combinationB]
         if not groupIsResolvable:
             continue
-        pressSetsByGroup[homophoneGroupKey] = {ortho: frozenset(s) for ortho, s in pressSetByOrtho.items()}
+        pressByOrthoCombinationByGroup[homophoneGroupKey] = {
+            key: frozenset(press) for key, press in pressByOrthoCombination.items()
+        }
+    return pressByOrthoCombinationByGroup, unresolvedOppositions
+
+
+def resolveGroupPressSets(
+    homophoneGroups: dict[LemmaHomophoneGroupKey, list[Word]],
+    answersByOpposition: AnswerByOpposition,
+) -> tuple[dict[LemmaHomophoneGroupKey, dict[WordOrtho, list[frozenset[str]]]], list[frozenset[FeatureCombination]]]:
+    """
+    E6: `resolvePressByCombination` collapsed to one spelling -> its distinct
+    alternates. A spelling with several combinations (a homograph reading of itself,
+    e.g. "calmez" = impératif 2p / indicatif présent 2p) keeps each combination's press
+    separately rather than unioning them together: readings of the same spelling never
+    conflict with each other (they produce the same output text -- see
+    ATOMIC_KEYPRESS_REWIRE_PLAN.md's vocabulary section), so any ONE of them is
+    independently sufficient to identify the spelling. Forcing the union would make the
+    press over-specific (the calmez/`-kt` bug: `impératif` alone or `pers_2` alone each
+    already separates "calmez" from every sibling spelling; requiring both is
+    unnecessary). A spelling's resolved value is therefore the deduplicated LIST of its
+    distinct per-combination press-sets -- almost always a single element, but with more
+    than one when the spelling is itself a homograph.
+
+    Returns (pressSetsByGroup, unresolvedOppositions).
+    """
+    pressByOrthoCombinationByGroup, unresolvedOppositions = resolvePressByCombination(
+        homophoneGroups, answersByOpposition
+    )
+    pressSetsByGroup: dict[LemmaHomophoneGroupKey, dict[WordOrtho, list[frozenset[str]]]] = {}
+    for homophoneGroupKey, words in homophoneGroups.items():
+        pressByOrthoCombination = pressByOrthoCombinationByGroup.get(homophoneGroupKey)
+        if pressByOrthoCombination is None:
+            continue
+        combinationsByOrtho = featureCombinationsByOrtho(words)
+        pressSetsByGroup[homophoneGroupKey] = {
+            ortho: sorted(
+                {pressByOrthoCombination[(ortho, combination)] for combination in combinationsByOrtho[ortho]},
+                key=lambda pressSet: (len(pressSet), sorted(pressSet)),
+            )
+            for ortho in sorted(combinationsByOrtho)
+        }
     return pressSetsByGroup, unresolvedOppositions
 
 
 @dataclass
 class GroupConflict:
-    """E5 finding: within one homophone group, two or more distinct spellings whose
-    resolved press-sets (the union of their combinations' press-sets) are identical --
-    pressing that press-set would not tell you which spelling to produce."""
+    """E5 finding: within one homophone group, two or more distinct spellings with an
+    identical press-set among their (possibly several, one per reading) alternates --
+    pressing that press-set would not tell you which spelling to produce. Two
+    alternates of the SAME spelling landing on the same value is not a conflict (they
+    already produce the same output text -- see `resolveGroupPressSets`)."""
     homophoneGroupKey: LemmaHomophoneGroupKey
     pressSet: frozenset[str]
     orthos: tuple[WordOrtho, ...]
@@ -372,7 +428,7 @@ def validateElicitation(
 ) -> tuple[list[GroupConflict], list[frozenset[FeatureCombination]]]:
     """
     E5: resolve every group's per-spelling press-sets (`resolveGroupPressSets`) and check
-    that no two distinct spellings in the same group land on the identical press-set (the
+    that no two DIFFERENT spellings in the same group land on the identical press-set (the
     plan's "every press implied by the data lands on exactly one spelling").
 
     Returns (conflicts, unresolvedOppositions).
@@ -380,9 +436,10 @@ def validateElicitation(
     pressSetsByGroup, unresolvedOppositions = resolveGroupPressSets(homophoneGroups, answersByOpposition)
     conflicts: list[GroupConflict] = []
     for homophoneGroupKey, pressSetByOrtho in pressSetsByGroup.items():
-        orthosByPressSet: dict[frozenset[str], list[WordOrtho]] = defaultdict(list)
-        for ortho, pressSet in pressSetByOrtho.items():
-            orthosByPressSet[pressSet].append(ortho)
+        orthosByPressSet: dict[frozenset[str], set[WordOrtho]] = defaultdict(set)
+        for ortho, alternates in pressSetByOrtho.items():
+            for pressSet in alternates:
+                orthosByPressSet[pressSet].add(ortho)
         for pressSet, orthosSharingIt in orthosByPressSet.items():
             if len(orthosSharingIt) > 1:
                 conflicts.append(GroupConflict(homophoneGroupKey, pressSet, tuple(sorted(orthosSharingIt))))
@@ -412,24 +469,28 @@ def buildFrequencyByGroupOrtho(
 
 
 def serializeResolvedPressSets(
-    pressSetsByGroup: dict[LemmaHomophoneGroupKey, dict[WordOrtho, frozenset[str]]],
+    pressSetsByGroup: dict[LemmaHomophoneGroupKey, dict[WordOrtho, list[frozenset[str]]]],
     frequencyByGroupOrtho: dict[LemmaHomophoneGroupKey, dict[WordOrtho, float]] | None = None,
 ) -> list[dict]:
     """
     E6: the persisted elicitation artifact that feeds Phase G (not `buildDiscriminatorSelection`'s
     output). One entry per validated (conflict-free -- callers should pass `validateElicitation`'s
     clean groups, or filter out its conflicting ones first) homophone group: its stroke/lemma key,
-    every spelling's resolved press-set, and (when `frequencyByGroupOrtho` is given, see
-    `buildFrequencyByGroupOrtho`) each spelling's corpus frequency, for Phase G's
-    frequency-weighted chord-size report. JSON-serializable (Strokes is already
-    tuple[tuple[int, ...], ...], trivially nested lists; press-sets sorted for stable diffs).
+    every spelling's resolved press-sets (a list of alternates -- almost always one, more than one
+    only for a spelling that is itself a homograph, see `resolveGroupPressSets`), and (when
+    `frequencyByGroupOrtho` is given, see `buildFrequencyByGroupOrtho`) each spelling's corpus
+    frequency, for Phase G's frequency-weighted chord-size report. JSON-serializable (Strokes is
+    already tuple[tuple[int, ...], ...], trivially nested lists; press-sets sorted for stable diffs).
     """
     frequencyByGroupOrtho = frequencyByGroupOrtho or {}
     return [
         {
             "strokes": [list(stroke) for stroke in strokes],
             "lemmeGramCat": lemmeGramCat,
-            "pressSets": {ortho: sorted(pressSet) for ortho, pressSet in pressSetByOrtho.items()},
+            "pressSets": {
+                ortho: [sorted(pressSet) for pressSet in alternates]
+                for ortho, alternates in pressSetByOrtho.items()
+            },
             "frequencies": {
                 ortho: frequencyByGroupOrtho.get((strokes, lemmeGramCat), {}).get(ortho, 0.0)
                 for ortho in pressSetByOrtho

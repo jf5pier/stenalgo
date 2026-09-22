@@ -22,6 +22,9 @@ elicitation_questionnaire.html
 elicitation_questionnaire_pers3default.html
 resolved_press_sets*.json
 
+# Regenerable report (util/check_conjugation_disambiguation_order.py)
+conjugation_disambiguation_report.json
+
 env/
 
 # External reference lexicon for cross-checking generated NOM/ADJ forms

@@ -11,16 +11,17 @@ from ..phaseg import (
 )
 
 
-def _parler_press_sets() -> dict[str, dict[str, frozenset[str]]]:
+def _parler_press_sets() -> dict[str, dict[str, list[frozenset[str]]]]:
     """The parler cluster's resolved press-sets (see elicitation_test.py's
     `_opposition_answers`): parle needs pers_1, parles needs pers_2, parlent needs
     nbr_p -- all three singleton and mutually distinct, so all three markers must end
-    up on separate keypresses (any pairwise merge collapses two of them together)."""
+    up on separate keypresses (any pairwise merge collapses two of them together).
+    Every spelling here has exactly one alternate -- the common case."""
     return {
         "parler_VER": {
-            "parle": frozenset({"pers_1"}),
-            "parles": frozenset({"pers_2"}),
-            "parlent": frozenset({"nbr_p"}),
+            "parle": [frozenset({"pers_1"})],
+            "parles": [frozenset({"pers_2"})],
+            "parlent": [frozenset({"nbr_p"})],
         }
     }
 
@@ -34,7 +35,7 @@ def test_liveMarkers_is_the_union_of_every_press():
 
 def test_coOccurrencePairs_finds_markers_pressed_together():
     pressSetsByGroup = {
-        "g1": {"parlent": frozenset({"pers_3", "nbr_p"}), "parle": frozenset()},
+        "g1": {"parlent": [frozenset({"pers_3", "nbr_p"})], "parle": [frozenset()]},
     }
     assert coOccurrencePairs(pressSetsByGroup) == {frozenset({"pers_3", "nbr_p"})}
 
@@ -58,9 +59,9 @@ def test_wouldCollideIfMergedPairs_allows_the_plans_own_worked_example():
     T-matching pair (T union {pers_2} vs T union {nbr_p}) exists."""
     pressSetsByGroup = {
         "parler_VER": {
-            "parle": frozenset(),
-            "parles": frozenset({"pers_2"}),
-            "parlent": frozenset({"pers_3", "nbr_p"}),
+            "parle": [frozenset()],
+            "parles": [frozenset({"pers_2"})],
+            "parlent": [frozenset({"pers_3", "nbr_p"})],
         }
     }
     pairs = wouldCollideIfMergedPairs(pressSetsByGroup)
@@ -72,10 +73,25 @@ def test_wouldCollideIfMergedPairs_only_compares_within_the_same_group():
     marker chords only ever compete inside one cluster (different sound-strokes never
     collide, per the plan's vocabulary)."""
     pressSetsByGroup = {
-        "g1": {"a": frozenset({"m1"})},
-        "g2": {"b": frozenset({"m2"})},
+        "g1": {"a": [frozenset({"m1"})]},
+        "g2": {"b": [frozenset({"m2"})]},
     }
     assert wouldCollideIfMergedPairs(pressSetsByGroup) == set()
+
+
+def test_wouldCollideIfMergedPairs_allows_alternates_of_the_same_spelling_to_collide():
+    """A self-homograph spelling's own alternates (e.g. "calmez" = impératif reading
+    needing `impératif`, indicatif reading needing `pers_2`) must NEVER be flagged
+    against each other -- they already produce the same output text, so merging their
+    markers onto one keypress is harmless."""
+    pressSetsByGroup = {
+        "calmer_VER": {
+            "calmez": [frozenset({"impératif"}), frozenset({"pers_2"})],
+            "calmer": [frozenset({"infinitif"})],
+        }
+    }
+    pairs = wouldCollideIfMergedPairs(pressSetsByGroup)
+    assert frozenset({"impératif", "pers_2"}) not in pairs
 
 
 # ── greedyColorMarkers / inducedPressSet / verifyKeypressAssignment ──────────
@@ -118,6 +134,20 @@ def test_verifyKeypressAssignment_clean_when_every_marker_gets_its_own_keypress(
     assert verifyKeypressAssignment(pressSetsByGroup, colorOf) == []
 
 
+def test_verifyKeypressAssignment_allows_a_self_homographs_alternates_to_collide():
+    """"calmez"'s own two alternates ({impératif}, {pers_2}) inducing the same value
+    (both bundled onto the same keypress) is not a conflict -- only a DIFFERENT
+    spelling reaching that same induced value would be."""
+    pressSetsByGroup = {
+        "calmer_VER": {
+            "calmez": [frozenset({"impératif"}), frozenset({"pers_2"})],
+            "calmer": [frozenset({"infinitif"})],
+        }
+    }
+    colorOf = {"impératif": 0, "pers_2": 0, "infinitif": 1}
+    assert verifyKeypressAssignment(pressSetsByGroup, colorOf) == []
+
+
 # ── runPhaseG (integration) ───────────────────────────────────────────────────
 
 def test_runPhaseG_finds_a_conflict_free_assignment_for_the_parler_cluster():
@@ -147,10 +177,22 @@ def test_frequencyWeightedChordSizes_sums_true_press_frequency_per_keypress():
 def test_frequencyWeightedChordSizes_adds_frequency_to_every_touched_keypress():
     """A press-set spanning two keypresses contributes its full frequency to both --
     'abaisseraient' needing {pers_3, nbr_p} on separate keypresses touches both."""
-    pressSetsByGroup = {"abaisser_VER": {"abaisseraient": frozenset({"pers_3", "nbr_p"})}}
+    pressSetsByGroup = {"abaisser_VER": {"abaisseraient": [frozenset({"pers_3", "nbr_p"})]}}
     frequencyByGroup = {"abaisser_VER": {"abaisseraient": 4.0}}
     colorOf = {"pers_3": 0, "nbr_p": 1}
     assert frequencyWeightedChordSizes(pressSetsByGroup, frequencyByGroup, colorOf) == {0: 4.0, 1: 4.0}
+
+
+def test_frequencyWeightedChordSizes_counts_a_spellings_frequency_once_per_keypress_across_alternates():
+    """A self-homograph spelling's frequency is attributed to every keypress touched by
+    ANY of its alternates, but only once per keypress even if more than one alternate
+    touches it."""
+    pressSetsByGroup = {
+        "calmer_VER": {"calmez": [frozenset({"impératif"}), frozenset({"pers_2"})]},
+    }
+    frequencyByGroup = {"calmer_VER": {"calmez": 6.0}}
+    colorOf = {"impératif": 0, "pers_2": 0}
+    assert frequencyWeightedChordSizes(pressSetsByGroup, frequencyByGroup, colorOf) == {0: 6.0}
 
 
 def test_frequencyWeightedChordSizes_defaults_missing_frequency_to_zero():
@@ -173,12 +215,29 @@ def test_runPhaseG_frequency_weighting_defaults_to_zero_when_unset():
     assert set(result.frequencyWeightedChordSizes.values()) == {0.0}
 
 
+def test_runPhaseG_lets_a_self_homographs_alternates_share_one_keypress():
+    """The real "calmez" regression, at Phase G: `impératif` and `pers_2` are calmez's
+    two alternates and "calmer" needs `infinitif` -- since calmez's alternates never
+    need to be told apart from EACH OTHER, they can safely bundle onto the SAME
+    keypress as each other, giving K=2 total rather than K=3 (which forcing them apart,
+    the pre-fix union behavior's effective outcome, would have required)."""
+    pressSetsByGroup = {
+        "calmer_VER": {
+            "calmez": [frozenset({"impératif"}), frozenset({"pers_2"})],
+            "calmer": [frozenset({"infinitif"})],
+        }
+    }
+    result = runPhaseG(pressSetsByGroup)
+    assert result.conflicts == []
+    assert result.keypressCount == 2
+
+
 def test_runPhaseG_allows_sharing_when_safe():
     pressSetsByGroup = {
         "parler_VER": {
-            "parle": frozenset(),
-            "parles": frozenset({"pers_2"}),
-            "parlent": frozenset({"pers_3", "nbr_p"}),
+            "parle": [frozenset()],
+            "parles": [frozenset({"pers_2"})],
+            "parlent": [frozenset({"pers_3", "nbr_p"})],
         }
     }
     result = runPhaseG(pressSetsByGroup)
@@ -201,9 +260,9 @@ def test_runPhaseG_repairs_a_two_marker_bundle_collision_no_pairwise_check_catch
     pairwise pre-filtering) catches this."""
     pressSetsByGroup = {
         "abaisser_VER": {
-            "abaisseraient": frozenset({"pers_3", "nbr_p"}),
-            "abaisserais": frozenset({"pers_2", "pers_1"}),
-            "abaisserait": frozenset(),
+            "abaisseraient": [frozenset({"pers_3", "nbr_p"})],
+            "abaisserais": [frozenset({"pers_2", "pers_1"})],
+            "abaisserait": [frozenset()],
         }
     }
     # Confirm the failure mode is real: the CROSS pairs are cleared by both pairwise checks.
@@ -219,8 +278,8 @@ def test_findSharedKeypressPair_locates_the_colliding_marker_pair():
 
     pressSetsByGroup = {
         "abaisser_VER": {
-            "abaisseraient": frozenset({"pers_3", "nbr_p"}),
-            "abaisserais": frozenset({"pers_2", "pers_1"}),
+            "abaisseraient": [frozenset({"pers_3", "nbr_p"})],
+            "abaisserais": [frozenset({"pers_2", "pers_1"})],
         }
     }
     colorOf = {"pers_3": 0, "pers_2": 0, "nbr_p": 1, "pers_1": 1}

@@ -18,8 +18,13 @@ from itertools import combinations
 
 # One homophone group's per-spelling press-sets, keyed by an opaque group id (see
 # `loadResolvedPressSets`) rather than elicitation.py's LemmaHomophoneGroupKey -- Phase G
-# only needs the press-sets themselves, not the stroke/lemma identity behind them.
-PressSetsByGroup = dict[str, dict[str, frozenset[str]]]
+# only needs the press-sets themselves, not the stroke/lemma identity behind them. Each
+# spelling maps to a LIST of alternate press-sets (almost always length 1) -- more than
+# one only when the spelling is itself a homograph reading of itself (see
+# `src.elicitation.resolveGroupPressSets`); alternates of the SAME spelling are allowed
+# to collide with each other (same output text), only alternates belonging to
+# *different* spellings must never induce the same keypress set.
+PressSetsByGroup = dict[str, dict[str, list[frozenset[str]]]]
 
 # Same group id, each spelling's corpus frequency (see `elicitation.buildFrequencyByGroupOrtho`).
 FrequencyByGroup = dict[str, dict[str, float]]
@@ -33,7 +38,10 @@ def loadResolvedPressSets(path: str = "resolved_press_sets.json") -> PressSetsBy
     for entry in entries:
         strokesKey = "|".join(",".join(map(str, stroke)) for stroke in entry["strokes"])
         groupId = f"{entry['lemmeGramCat']}@{strokesKey}"
-        pressSetsByGroup[groupId] = {ortho: frozenset(atoms) for ortho, atoms in entry["pressSets"].items()}
+        pressSetsByGroup[groupId] = {
+            ortho: [frozenset(alt) for alt in alternates]
+            for ortho, alternates in entry["pressSets"].items()
+        }
     return pressSetsByGroup
 
 
@@ -58,21 +66,23 @@ def liveMarkers(pressSetsByGroup: PressSetsByGroup) -> set[str]:
     return {
         atom
         for pressSetByOrtho in pressSetsByGroup.values()
-        for pressSet in pressSetByOrtho.values()
+        for alternates in pressSetByOrtho.values()
+        for pressSet in alternates
         for atom in pressSet
     }
 
 
 def coOccurrencePairs(pressSetsByGroup: PressSetsByGroup) -> set[frozenset[str]]:
-    """Pairs of markers ever pressed together in the same spelling's resolved press-set.
+    """Pairs of markers ever pressed together in the same reading's resolved press-set.
     These can never share a keypress: a keypress can't be pressed "halfway", so merging
     two markers that are sometimes needed together would make it impossible to ever
     press one without the other -- destroying the very distinction they exist to make."""
     pairs: set[frozenset[str]] = set()
     for pressSetByOrtho in pressSetsByGroup.values():
-        for pressSet in pressSetByOrtho.values():
-            for a, b in combinations(sorted(pressSet), 2):
-                pairs.add(frozenset({a, b}))
+        for alternates in pressSetByOrtho.values():
+            for pressSet in alternates:
+                for a, b in combinations(sorted(pressSet), 2):
+                    pairs.add(frozenset({a, b}))
     return pairs
 
 
@@ -81,20 +91,26 @@ def wouldCollideIfMergedPairs(pressSetsByGroup: PressSetsByGroup) -> set[frozens
     Pairs of markers that never co-occur but would still be unsafe to bundle onto one
     keypress. Merging m1 and m2 means pressing either one asserts BOTH (a keypress
     can't be pressed "halfway"): if some spelling's press-set is exactly T union {m1}
-    and another spelling *in the same group* is exactly T union {m2} (identical except
+    and ANOTHER SPELLING's *in the same group* is exactly T union {m2} (identical except
     one has m1 where the other has m2), merging makes both induce T union {m1, m2} --
     indistinguishable. This is the plan's own worked example: pers_2 and nbr_p may
     share a keypress "iff parlent is never pressed with nbr_p alone" -- i.e. iff no
     such T-matching pair exists.
+
+    Only compares press-sets belonging to DIFFERENT spellings: two alternates of the
+    SAME spelling (a self-homograph reading, e.g. "calmez"'s impératif/indicatif
+    readings) are allowed to look mergeable -- they already produce the same output
+    text, so there is nothing to keep distinguishable between them.
     """
     unsafe: set[frozenset[str]] = set()
     for pressSetByOrtho in pressSetsByGroup.values():
-        pressSets = list(pressSetByOrtho.values())
-        for setA, setB in combinations(pressSets, 2):
-            onlyInA, onlyInB = setA - setB, setB - setA
-            if len(onlyInA) == 1 and len(onlyInB) == 1:
-                (markerA,), (markerB,) = onlyInA, onlyInB
-                unsafe.add(frozenset({markerA, markerB}))
+        orthos = sorted(pressSetByOrtho)
+        for orthoA, orthoB in combinations(orthos, 2):
+            for setA, setB in ((a, b) for a in pressSetByOrtho[orthoA] for b in pressSetByOrtho[orthoB]):
+                onlyInA, onlyInB = setA - setB, setB - setA
+                if len(onlyInA) == 1 and len(onlyInB) == 1:
+                    (markerA,), (markerB,) = onlyInA, onlyInB
+                    unsafe.add(frozenset({markerA, markerB}))
     return unsafe
 
 
@@ -133,7 +149,9 @@ def inducedPressSet(
 @dataclass
 class KeypressConflict:
     """A keypress assignment's own E5-style finding: within one group, two or more
-    spellings whose INDUCED press-sets (after keypress bundling) are identical."""
+    DIFFERENT spellings whose INDUCED press-sets (after keypress bundling) are
+    identical. Two alternates of the same spelling inducing the same value is not a
+    conflict (see `wouldCollideIfMergedPairs`)."""
     groupId: str
     inducedPressSet: frozenset[str]
     orthos: tuple[str, ...]
@@ -143,12 +161,12 @@ def verifyKeypressAssignment(
     pressSetsByGroup: PressSetsByGroup, colorOf: dict[str, int]
 ) -> list[KeypressConflict]:
     """
-    Full (not merely pairwise) safety check: for every group, recompute each spelling's
-    induced press-set under this keypress assignment and confirm no two spellings
-    collide. `coOccurrencePairs`/`wouldCollideIfMergedPairs` are a pairwise
-    characterization of what makes a coloring safe; this is the ground-truth simulation
-    that would also catch any residual multi-marker-bundle interaction a pairwise
-    analysis alone might miss.
+    Full (not merely pairwise) safety check: for every group, recompute every spelling's
+    (every alternate's) induced press-set under this keypress assignment and confirm no
+    two DIFFERENT spellings collide. `coOccurrencePairs`/`wouldCollideIfMergedPairs` are a
+    pairwise characterization of what makes a coloring safe; this is the ground-truth
+    simulation that would also catch any residual multi-marker-bundle interaction a
+    pairwise analysis alone might miss.
     """
     markersByKeypress: dict[int, set[str]] = defaultdict(set)
     for marker, keypress in colorOf.items():
@@ -157,10 +175,11 @@ def verifyKeypressAssignment(
 
     conflicts: list[KeypressConflict] = []
     for groupId, pressSetByOrtho in pressSetsByGroup.items():
-        orthosByInduced: dict[frozenset[str], list[str]] = defaultdict(list)
-        for ortho, trueMarkers in pressSetByOrtho.items():
-            induced = inducedPressSet(trueMarkers, colorOf, frozenMarkersByKeypress)
-            orthosByInduced[induced].append(ortho)
+        orthosByInduced: dict[frozenset[str], set[str]] = defaultdict(set)
+        for ortho, alternates in pressSetByOrtho.items():
+            for trueMarkers in alternates:
+                induced = inducedPressSet(trueMarkers, colorOf, frozenMarkersByKeypress)
+                orthosByInduced[induced].add(ortho)
         for induced, orthos in orthosByInduced.items():
             if len(orthos) > 1:
                 conflicts.append(KeypressConflict(groupId, induced, tuple(sorted(orthos))))
@@ -183,9 +202,10 @@ def frequencyWeightedChordSizes(
     weightByKeypress: dict[int, float] = defaultdict(float)
     for groupId, pressSetByOrtho in pressSetsByGroup.items():
         frequencyByOrtho = frequencyByGroup.get(groupId, {})
-        for ortho, trueMarkers in pressSetByOrtho.items():
+        for ortho, alternates in pressSetByOrtho.items():
             frequency = frequencyByOrtho.get(ortho, 0.0)
-            for keypress in {colorOf[marker] for marker in trueMarkers}:
+            touchedKeypresses = {colorOf[marker] for trueMarkers in alternates for marker in trueMarkers}
+            for keypress in touchedKeypresses:
                 weightByKeypress[keypress] += frequency
     return dict(weightByKeypress)
 
@@ -209,14 +229,18 @@ def _findSharedKeypressPair(
     sits on: two spellings can induce the identical union even with completely disjoint
     true press-sets, if each one's markers happen to land on the same PAIR of keypresses
     as the other's (see e.g. {pers_3, nbr_p} vs {pers_2, pers_1} both touching the same
-    two keypresses) -- a failure mode no pairwise pre-check catches."""
-    trueSets = [pressSetsByGroup[conflict.groupId][ortho] for ortho in conflict.orthos]
-    for i in range(len(trueSets)):
-        for j in range(i + 1, len(trueSets)):
-            for markerA in trueSets[i]:
-                for markerB in trueSets[j]:
-                    if markerA != markerB and colorOf[markerA] == colorOf[markerB]:
-                        return frozenset({markerA, markerB})
+    two keypresses) -- a failure mode no pairwise pre-check catches. Each colliding
+    spelling may have several alternates (self-homograph readings); any alternate of one
+    colliding spelling paired with any alternate of the other is a valid pair to search."""
+    alternatesByOrtho = [pressSetsByGroup[conflict.groupId][ortho] for ortho in conflict.orthos]
+    for i in range(len(alternatesByOrtho)):
+        for j in range(i + 1, len(alternatesByOrtho)):
+            for trueSetA in alternatesByOrtho[i]:
+                for trueSetB in alternatesByOrtho[j]:
+                    for markerA in trueSetA:
+                        for markerB in trueSetB:
+                            if markerA != markerB and colorOf[markerA] == colorOf[markerB]:
+                                return frozenset({markerA, markerB})
     return None
 
 
