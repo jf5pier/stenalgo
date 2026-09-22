@@ -108,6 +108,44 @@ body {
   font-size: 0.85rem;
 }
 
+.chord-board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 3rem) 1.5rem repeat(6, 3rem);
+  grid-auto-rows: 3rem;
+  gap: 4px;
+  width: fit-content;
+  margin: 2rem auto 0;
+}
+
+.chord-connector {
+  position: absolute;
+  height: 2px;
+  background: #999;
+  transform-origin: 0 50%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.chord-overlay {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 0.8rem;
+  background: #fff;
+  color: #000;
+  border: 1px solid #999;
+  border-radius: 50%;
+  z-index: 2;
+  pointer-events: none;
+}
+
 .legend-block {
   margin-top: 1.5rem;
 }
