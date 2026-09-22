@@ -34,6 +34,7 @@ python -m util.build_phase_p_realization
 python -m util.export_keyboard_layout
 python -m util.export_practice_words
 python -m util.export_practice_sentences
+python -m util.export_definitions
 ```
 
 ## Architecture

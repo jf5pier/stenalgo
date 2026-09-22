@@ -214,3 +214,57 @@ body {
 .legend li {
   padding: 0.15rem 0;
 }
+
+.hints-toggle {
+  font-size: 0.9rem;
+}
+
+.typed-strokes {
+  color: #2a7a2a;
+}
+
+.definition-query {
+  font-size: 1.2rem;
+  padding: 0.3rem 0.5rem;
+  width: 100%;
+  max-width: 20rem;
+  margin-bottom: 1rem;
+}
+
+.definition-hint {
+  color: #666;
+}
+
+.definition-group h3 {
+  font-size: 1rem;
+  margin: 1rem 0 0.4rem;
+}
+
+.definition-table {
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.definition-table th,
+.definition-table td {
+  text-align: left;
+  padding: 0.15rem 0.8rem 0.15rem 0;
+}
+
+.definition-table th {
+  font-size: 0.85rem;
+  color: #666;
+  border-bottom: 1px solid #ccc;
+}
+
+.definition-steno {
+  font-family: monospace;
+}
+
+.definition-table tr.searched td:first-child {
+  font-weight: bold;
+}
+
+.definition-table tr.near-homophone {
+  color: #888;
+}
