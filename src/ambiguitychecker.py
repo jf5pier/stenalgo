@@ -768,11 +768,21 @@ def _resolveEntryWord(
     existing "strokes" field identifies -- there can be more than one `Word` sharing an
     (ortho, lemmeGramCat) key, disambiguated by which one actually carries that entry's
     existing stroke in `theory`. Shared by `buildKeypressGroupToWords` and
-    `buildKeypressGroupExtraAlternates`."""
+    `buildKeypressGroupExtraAlternates`.
+
+    The entry's "strokes" are CANONICAL (sorted, deduped -- `buildLemmaHomophoneGroups`
+    regroups by `canonicalizeStrokes`), while `wordToStrokes` holds theory 1's raw,
+    repeat-preserving strokes, so the comparison canonicalizes first. Comparing raw
+    against canonical silently missed every word whose raw stroke repeats a key (e.g.
+    "nie" /nj/, raw ((6, 8, 8, 9),)) and fell back to `candidates[0]` -- a DIFFERENT
+    same-spelling Word ("nie" /ni/), which then got the other one's marks."""
     lemmeGramCat = entry["lemmeGramCat"]
     entryStrokes: Strokes = tuple(tuple(stroke) for stroke in entry["strokes"])
     candidates = wordsByOrthoLemme.get((ortho, lemmeGramCat), [])
-    word = next((w for w in candidates if wordToStrokes.get(w) == entryStrokes), None)
+    word = next(
+        (w for w in candidates if w in wordToStrokes and canonicalizeStrokes(wordToStrokes[w]) == entryStrokes),
+        None,
+    )
     return word if word is not None else (candidates[0] if candidates else None)
 
 
