@@ -408,26 +408,40 @@ def groupHomophonesByReservedStroke(finalInduced: dict[Word, Strokes]) -> dict[S
 
 
 def composeReservedKeyStrokes(
-    finalInduced: dict[Word, Strokes], doubletPairs: frozenset[frozenset[str]] = frozenset()
+    finalInduced: dict[Word, Strokes], doubletPairs: frozenset[frozenset[str]] = frozenset(),
+    phonemeStrokeCounts: dict[Word, int] | None = None,
 ) -> dict[Word, Strokes]:
     """
     Final realized Strokes for every word touched by the */# reserved-key track: Phase
-    P's own `finalInduced` stroke, with the */# mark's extra syllable(s) appended after
-    it. The two mechanisms compose safely by simple concatenation -- Phase P only ever
-    picks coda-phoneme keys, which are structurally disjoint from the 2 dedicated
-    reserved keys (`STAR_KEY`/`HASH_KEY` are excluded from `Keyboard.allowedKeys`), so
-    appending can never re-introduce a collision between two different clusters: their
-    `finalInduced` prefixes already differ, and appending more elements after a
-    differing prefix keeps the whole Strokes tuple different. Words with no */# mark
-    needed (the canonical member of their group, a spelling-doublet of it, or not part
-    of any group at all) keep their `finalInduced` stroke unchanged. Pass `doubletPairs`
-    (loadReform1990DoubletPairs) to also apply Rule 3's spelling-doublet exemption.
+    P's own `finalInduced` stroke plus the */# mark. Given `phonemeStrokeCounts` (each
+    word's theory-1 stroke count), the mark's FIRST symbol is pressed together with the
+    word's last phoneme stroke -- "a*", not "a/*" -- and only an escalated code's further
+    symbols become extra trailing strokes; without it, every symbol is its own trailing
+    stroke (the original, all-appended form).
+
+    Either way this can never re-introduce a collision: Phase P only ever picks
+    coda-phoneme keys, structurally disjoint from the 2 dedicated reserved keys
+    (`STAR_KEY`/`HASH_KEY` are excluded from `Keyboard.allowedKeys`), so stripping the
+    reserved keys back out of a composed Strokes (and dropping its reserved-only trailing
+    strokes -- Phase P's own trailing strokes are never reserved-only) recovers
+    `finalInduced` exactly. Two different clusters' `finalInduced` already differ, so
+    their composed forms do too; within one cluster, the marking codes differ. Words with
+    no */# mark needed (the canonical member of their group, a spelling-doublet of it, or
+    not part of any group at all) keep their `finalInduced` stroke unchanged. Pass
+    `doubletPairs` (loadReform1990DoubletPairs) to also apply Rule 3's spelling-doublet
+    exemption.
     """
     composed = dict(finalInduced)
     for stroke, words in groupHomophonesByReservedStroke(finalInduced).items():
         for word, extra in assignStarHashPhysicalStrokes(words, doubletPairs).items():
-            if extra:
-                composed[word] = finalInduced[word] + extra
+            if not extra:
+                continue
+            strokes = finalInduced[word]
+            if phonemeStrokeCounts is None:
+                composed[word] = strokes + extra
+            else:
+                last = phonemeStrokeCounts[word] - 1
+                composed[word] = strokes[:last] + (strokes[last] + extra[0],) + strokes[last + 1:] + extra[1:]
     return composed
 
 

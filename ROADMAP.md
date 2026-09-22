@@ -27,6 +27,20 @@ guaranteed to stay available long-term.
 A third, smaller problem is new to this document: **prefix formation** (re-, dé-, co-…), which
 has no code and no roadmap slot yet.
 
+## Status update (2026-09-22): `*`/`#` mark merged into the last phoneme stroke
+
+`composeReservedKeyStrokes` now presses a `*`/`#` mark's FIRST symbol together with the
+word's last theory-1 (phoneme) stroke -- `a` "avoir" is `*a`, not `a/*`; `soie` is `swa#` --
+instead of appending it as its own stroke after Phase P's. Only an escalated code's further
+symbols (clusters past the 4-code budget) stay separate trailing strokes: 79 bare mark
+strokes left in the Plover dictionary vs 5139 merged. Collision-safety is unchanged
+(stripping the reserved keys recovers Phase P's `finalInduced` exactly); verified 0
+collisions after Plover's own `plover_stroke` normalization, every entry parseable.
+`util/_stenorender.py` renders merged strokes with Plover's hyphen rule (`*iel`, `pvR-#`).
+Same day, two lexicon fixes: `ce` /s2/ -> /s°/ (`util/fixCeSchwa.py`) and `elles` folded
+into lemma `elle` (`lexique.py`'s `pronounParadigmLemme`, like `ils` -> `il`), so
+`elles` is `iel/-s` (plural marker) instead of a `*`-marked different lemma.
+
 ## Status update (2026-09-21)
 
 Follow-up to `RESUME_2026-09-21-collision-residual.md`'s open task (investigate the ~52-pair

@@ -352,7 +352,8 @@ class Dictionary:
         always the word's PRIMARY stroke: theory 1 (buildTheory) composed with Phase P's
         same-lemma coda-bank realization (src.ambiguitychecker.realizeKeypressGroupsAsExtraStroke)
         and the `*`/`#` lemma-homophone reserved-key track
-        (src.ambiguitychecker.composeReservedKeyStrokes) on top. Any further entries are
+        (src.ambiguitychecker.composeReservedKeyStrokes) on top, its first mark key
+        pressed together with the word's last phoneme stroke. Any further entries are
         the word's OTHER readings (src.ambiguitychecker.buildExtraInducedStrokes),
         reusing whatever physical keys the primary pass already decided -- NOT run
         through the `*`/`#` track (that track isn't wired into a self-homograph's
@@ -381,7 +382,10 @@ class Dictionary:
             extraGroupSetsByWord=extraGroupSetsByWord, preferredKeysByGroup=preferredKeysByGroup,
         )
         finalInduced = buildFinalInducedStrokes(theory, groupToWords, assignment)
-        primaryComposed = composeReservedKeyStrokes(finalInduced, loadReform1990DoubletPairs())
+        primaryComposed = composeReservedKeyStrokes(
+            finalInduced, loadReform1990DoubletPairs(),
+            phonemeStrokeCounts={word: len(strokes) for word, strokes in wordToStrokes.items()},
+        )
         extraByWord = buildExtraInducedStrokes(theory, assignment, extraGroupSetsByWord)
         return {word: [strokes] + extraByWord.get(word, []) for word, strokes in primaryComposed.items()}
 
@@ -406,8 +410,14 @@ class Dictionary:
                 baseStrokes = wordToStrokes[word]
                 strokeString = keyboard.strokesToString(baseStrokes)
                 for fullStrokes in finalTheory[word]:
+                    # A */# mark's first symbol is pressed with the last phoneme stroke
+                    # (composeReservedKeyStrokes): written as a leading "+keys" element.
+                    mergedKeys = sorted(set(fullStrokes[len(baseStrokes) - 1]) - set(baseStrokes[-1]))
                     extraStrokes = fullStrokes[len(baseStrokes):]
-                    extraString = "/".join(",".join(str(key) for key in stroke) for stroke in extraStrokes)
+                    extraString = "/".join(
+                        ([f"+{','.join(str(key) for key in mergedKeys)}"] if mergedKeys else [])
+                        + [",".join(str(key) for key in stroke) for stroke in extraStrokes]
+                    )
                     _ = f.write(f"{word.ortho}\t{word.lemme}\t{word.gramCat.name}\t{strokeString}\t{extraString}\n")
 
     def writeConstrainFiles(self, phonemesOrderFile: str = "phoneme_order.csv",

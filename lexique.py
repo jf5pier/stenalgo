@@ -80,6 +80,7 @@ spellingVariantLemme: dict[str, str] = {
 # separate */# symbol slot.
 pronounParadigmLemme: dict[tuple[str, str], str] = {
     ("ils", "PRO:per"): "il",
+    ("elles", "PRO:per"): "elle",
     ("celle", "PRO:dem"): "celui",
     ("celles", "PRO:dem"): "celui",
     ("ceux", "PRO:dem"): "celui",

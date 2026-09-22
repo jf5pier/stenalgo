@@ -394,6 +394,28 @@ class TestComposeReservedKeyStrokes:
         assert composed[nom] == ((1, 2), (16,))
         assert composed[ver] == ((1, 2), (16,), (10,))
 
+    def test_first_mark_merges_into_last_phoneme_stroke(self):
+        # Phonemes in strokes (1, 2)/(3,), then Phase P's own trailing (16,): the */#
+        # mark joins (3,) -- the last PHONEME stroke, not Phase P's.
+        nom = _make_word(ortho="entrée", gramCat=GramCat.NOM, frequencyFilm=4.0)
+        ver = _make_word(ortho="entré", gramCat=GramCat.VER, frequencyFilm=8.0)
+        finalInduced = {nom: ((1, 2), (3,), (16,)), ver: ((1, 2), (3,), (16,))}
+        composed = composeReservedKeyStrokes(finalInduced, phonemeStrokeCounts={nom: 2, ver: 2})
+        assert composed[nom] == ((1, 2), (3,), (16,))
+        assert composed[ver] == ((1, 2), (3, 10), (16,))
+
+    def test_escalated_mark_keeps_further_symbols_as_trailing_strokes(self):
+        # 6 readings exceed the 4-code single-stroke budget: the 6th gets a 2-symbol code.
+        words = [_make_word(ortho=f"w{i}", lemme=f"w{i}", frequencyFilm=float(10 - i)) for i in range(6)]
+        finalInduced = {w: ((1,),) for w in words}
+        appended = composeReservedKeyStrokes(finalInduced)
+        merged = composeReservedKeyStrokes(finalInduced, phonemeStrokeCounts={w: 1 for w in words})
+        for w in words:
+            code = appended[w][1:]
+            assert merged[w] == (((1,) + code[0],) + code[1:] if code else ((1,),))
+        assert len(set(merged.values())) == 6
+        assert any(len(strokes) == 2 for strokes in merged.values())
+
     def test_words_outside_any_group_are_unchanged(self):
         solo = _make_word(ortho="chat")
         finalInduced = {solo: ((1,), (16,))}
