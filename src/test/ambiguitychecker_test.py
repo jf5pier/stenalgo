@@ -671,6 +671,23 @@ class TestBuildKeypressGroupToWords:
         groupToWords = buildKeypressGroupToWords([entry], markersByKeypress, wordToStrokes, wordsByOrthoLemme)
         assert groupToWords == {0: [wRight]}
 
+    def test_matches_raw_strokes_with_a_repeated_key_against_canonical_entry_strokes(self):
+        """Real "nie" regression: "nie" /nj/ (subjonctif) has raw theory-1 strokes
+        ((6, 8, 8, 9),) but its entry's strokes are canonical [[6, 8, 9]]. It must still be
+        found, not silently replaced by the fallback -- "nie" /ni/, a different Word of the
+        same spelling and lemma, which would then wrongly carry the subjonctif mark."""
+        wNi = _make_word(ortho="nie", phonology="ni", lemme="nier", gramCat=GramCat.VER)
+        wNj = _make_word(ortho="nie", phonology="nj", lemme="nier", gramCat=GramCat.VER)
+        wordToStrokes = {wNi: ((6, 8, 13),), wNj: ((6, 8, 8, 9),)}
+        wordsByOrthoLemme = {("nie", "nier_VER"): [wNi, wNj]}
+        entry = {
+            "strokes": [[6, 8, 9]], "lemmeGramCat": "nier_VER",
+            "pressSets": {"nie": [["subjonctif"]]},
+        }
+        markersByKeypress = {0: frozenset({"subjonctif"})}
+        groupToWords = buildKeypressGroupToWords([entry], markersByKeypress, wordToStrokes, wordsByOrthoLemme)
+        assert groupToWords == {0: [wNj]}
+
     def test_only_the_primary_alternate_feeds_the_search(self):
         """"calmez"-shaped entry: two alternates, `impératif` (primary) and `pers_2`
         (extra). Only `impératif`'s group is populated here -- `pers_2`'s is the job of
