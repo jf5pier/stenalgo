@@ -471,6 +471,7 @@ def buildFrequencyByGroupOrtho(
 def serializeResolvedPressSets(
     pressSetsByGroup: dict[LemmaHomophoneGroupKey, dict[WordOrtho, list[frozenset[str]]]],
     frequencyByGroupOrtho: dict[LemmaHomophoneGroupKey, dict[WordOrtho, float]] | None = None,
+    pressByOrthoCombinationByGroup: dict[LemmaHomophoneGroupKey, PressByOrthoCombination] | None = None,
 ) -> list[dict]:
     """
     E6: the persisted elicitation artifact that feeds Phase G (not `buildDiscriminatorSelection`'s
@@ -481,8 +482,25 @@ def serializeResolvedPressSets(
     `frequencyByGroupOrtho` is given, see `buildFrequencyByGroupOrtho`) each spelling's corpus
     frequency, for Phase G's frequency-weighted chord-size report. JSON-serializable (Strokes is
     already tuple[tuple[int, ...], ...], trivially nested lists; press-sets sorted for stable diffs).
+
+    When `pressByOrthoCombinationByGroup` (`resolvePressByCombination`'s first return value) is
+    given, each entry also carries "readings": per spelling, a list PARALLEL to its "pressSets"
+    alternates, each element the feature combinations (grammatical readings, as sorted atom
+    lists) that resolved to that alternate's press -- e.g. "calmez"'s `["impératif"]` alternate
+    lists the impératif-présent-2p reading. Nothing in the Phase G/P pipeline reads it; it's
+    there so `util/export_practice_words.py` can label each alternate stroke with the reading
+    it's for.
     """
     frequencyByGroupOrtho = frequencyByGroupOrtho or {}
+    pressByOrthoCombinationByGroup = pressByOrthoCombinationByGroup or {}
+
+    def readingsOf(groupKey: LemmaHomophoneGroupKey, ortho: WordOrtho, pressSet: frozenset[str]) -> list[list[str]]:
+        pressByOrthoCombination = pressByOrthoCombinationByGroup.get(groupKey, {})
+        return sorted(
+            sorted(combination) for (o, combination), press in pressByOrthoCombination.items()
+            if o == ortho and press == pressSet
+        )
+
     return [
         {
             "strokes": [list(stroke) for stroke in strokes],
@@ -495,6 +513,10 @@ def serializeResolvedPressSets(
                 ortho: frequencyByGroupOrtho.get((strokes, lemmeGramCat), {}).get(ortho, 0.0)
                 for ortho in pressSetByOrtho
             },
+            **({"readings": {
+                ortho: [readingsOf((strokes, lemmeGramCat), ortho, pressSet) for pressSet in alternates]
+                for ortho, alternates in pressSetByOrtho.items()
+            }} if (strokes, lemmeGramCat) in pressByOrthoCombinationByGroup else {}),
         }
         for (strokes, lemmeGramCat), pressSetByOrtho in sorted(
             pressSetsByGroup.items(), key=lambda kv: kv[0][1]
@@ -591,7 +613,10 @@ if __name__ == "__main__":
             if key not in conflictedGroupKeys
         }
         frequencyByGroupOrtho = buildFrequencyByGroupOrtho(homophoneGroups, frozenset(_dictionary.frequentWords))
-        resolvedArtifact = serializeResolvedPressSets(cleanPressSetsByGroup, frequencyByGroupOrtho)
+        pressByOrthoCombinationByGroup, _ = resolvePressByCombination(homophoneGroups, answersByOpposition)
+        resolvedArtifact = serializeResolvedPressSets(
+            cleanPressSetsByGroup, frequencyByGroupOrtho, pressByOrthoCombinationByGroup
+        )
         with open("resolved_press_sets.json", "w", encoding="utf-8") as rf:
             json.dump(resolvedArtifact, rf, ensure_ascii=False, indent=1)
         print(f"\nWrote resolved_press_sets.json: {len(resolvedArtifact)} validated groups "

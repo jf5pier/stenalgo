@@ -8,6 +8,7 @@ from ..elicitation import (
     enumerateOppositionSamples,
     featureCombinationsByOrtho,
     reportScale,
+    resolvePressByCombination,
     resolveGroupPressSets,
     serializeResolvedPressSets,
     validateElicitation,
@@ -288,6 +289,20 @@ def test_serializeResolvedPressSets_carries_frequency_when_given(parler_group):
     serialized = serializeResolvedPressSets(pressSetsByGroup, frequencyByGroupOrtho)
     entry = serialized[0]
     assert entry["frequencies"] == {"parle": 2.0, "parles": 2.0, "parlent": 2.0}
+
+
+def test_serializeResolvedPressSets_carries_readings_parallel_to_alternates(parler_group):
+    homophoneGroups = buildLemmaHomophoneGroups(parler_group)
+    answers = _opposition_answers(parler_group)
+    pressSetsByGroup, _ = resolveGroupPressSets(homophoneGroups, answers)
+    pressByOrthoCombinationByGroup, _ = resolvePressByCombination(homophoneGroups, answers)
+    entry = serializeResolvedPressSets(pressSetsByGroup, None, pressByOrthoCombinationByGroup)[0]
+    # "parle"'s ∅ alternate is its 3s reading, its ["pers_1"] alternate its 1s reading.
+    assert entry["readings"]["parle"] == [
+        [sorted(["indicatif", "présent", "pers_3", "nbr_s"])],
+        [sorted(["indicatif", "présent", "pers_1", "nbr_s"])],
+    ]
+    assert "readings" not in serializeResolvedPressSets(pressSetsByGroup)[0]
 
 
 # ── Regression: the real "calmez" over-marking bug (RESUME_2026-09-21-steno-trainer.md) ──

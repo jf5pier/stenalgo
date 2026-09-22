@@ -18,6 +18,15 @@ Emits both a display steno string and the raw key-index strokes, so the browser
 never needs a steno-notation parser -- it just compares sets of key indices
 against a decoded Gemini PR packet.
 
+Each record also carries a human-readable French grammatical `label` (e.g.
+"impératif présent, 2e pl.", "nom, f. pl."), so a drill can say WHICH reading a
+chord is for. A self-homograph word (e.g. "calmez", see `loadFinalTheory`) gets
+one record per independently-valid stroke, each labelled with only the
+reading(s) that stroke is for -- taken from `resolved_press_sets.json`'s
+"readings" field (`src.elicitation.serializeResolvedPressSets`), which is
+parallel to that spelling's press-set alternates, and therefore to
+`loadFinalTheory`'s per-word stroke list.
+
 Run: python -m util.export_practice_words [--limit N]
 Requires FirstTheory.pickle/Dictionary.pickle (`python dictionary.py` first),
 phase_g_keypress_assignment.json (`python -m util.build_phase_g_assignment`) and
@@ -26,14 +35,88 @@ resolved_press_sets.json (`python -m src.elicitation`).
 import argparse
 import json
 
-from src.keyboard import Starboard
-from src.word import Word
+from src.ambiguitychecker import _resolveEntryWord, buildWordsByOrthoLemme, buildWordToStrokes
+from src.elicitation import wordFeatureCombinations
+from src.keyboard import Starboard, Strokes
+from src.word import GramCat, Word
 from util._stenorender import renderFinalStrokesToRTFCRE
-from util._theoryio import loadFinalTheory
+from util._theoryio import loadFirstAndFinalTheory
 
 KEYBOARD_JSON = "starboard3h.json"
+RESOLVED_PRESS_SETS_PATH = "resolved_press_sets.json"
 OUTPUT_PATH = "steno-trainer/public/data/practice-words.json"
 DEFAULT_LIMIT = 10000
+
+GRAMCAT_LABELS = {
+    "ADJ": "adjectif", "ADJ:dem": "adjectif démonstratif", "ADJ:ind": "adjectif indéfini",
+    "ADJ:int": "adjectif interrogatif", "ADJ:num": "adjectif numéral", "ADJ:pos": "adjectif possessif",
+    "ADV": "adverbe", "ART:def": "article défini", "ART:ind": "article indéfini", "AUX": "auxiliaire",
+    "CON": "conjonction", "LIA": "liaison", "NOM": "nom", "ONO": "onomatopée", "PRE": "préposition",
+    "PRO:dem": "pronom démonstratif", "PRO:ind": "pronom indéfini", "PRO:int": "pronom interrogatif",
+    "PRO:per": "pronom personnel", "PRO:pos": "pronom possessif", "PRO:rel": "pronom relatif",
+    "VER": "verbe",
+}
+MOODS = ["infinitif", "indicatif", "impératif", "subjonctif", "conditionnel", "participe"]
+TENSE_LABELS = {"présent": "présent", "passé": "passé", "imparfait": "imparfait", "future": "futur"}
+PERSON_LABELS = {"pers_1": "1re", "pers_2": "2e", "pers_3": "3e"}
+VERB_NUMBER_LABELS = {"nbr_s": "sg.", "nbr_p": "pl."}
+GENDER_LABELS = {"m": "m.", "f": "f."}
+NUMBER_LABELS = {"s": "sg.", "p": "pl."}
+
+type Reading = frozenset[str]
+
+
+def _readingHeadAndDetail(gramCat: GramCat, reading: Reading) -> tuple[str, str]:
+    """One reading (a `src.elicitation` feature combination) split into its
+    "what" (mood + tense, or the part of speech) and its person/gender/number detail,
+    so several readings sharing a head can be written once: "indicatif présent, 1re sg. / 3e sg."."""
+    mood = next((m for m in MOODS if m in reading), None)
+    if mood is not None:
+        head = " ".join([mood] + [label for tense, label in TENSE_LABELS.items() if tense in reading])
+    else:
+        head = GRAMCAT_LABELS.get(gramCat.name, gramCat.name)
+    detail = " ".join(
+        [PERSON_LABELS[a] for a in PERSON_LABELS if a in reading]
+        + [VERB_NUMBER_LABELS[a] for a in VERB_NUMBER_LABELS if a in reading]
+        + [GENDER_LABELS[a] for a in GENDER_LABELS if a in reading]
+        + [NUMBER_LABELS[a] for a in NUMBER_LABELS if a in reading]
+    )
+    return head, detail
+
+
+def formatReadingsLabel(gramCat: GramCat, readings: list[Reading]) -> str:
+    """Human-readable French label for the reading(s) one stroke writes, e.g.
+    "impératif présent, 2e pl.", "participe passé, f. pl.", "nom, m. sg."."""
+    if not readings:
+        return GRAMCAT_LABELS.get(gramCat.name, gramCat.name)
+    detailsByHead: dict[str, list[str]] = {}
+    for reading in readings:
+        head, detail = _readingHeadAndDetail(gramCat, reading)
+        details = detailsByHead.setdefault(head, [])
+        if detail and detail not in details:
+            details.append(detail)
+    return " · ".join(
+        f"{head}, {' / '.join(details)}" if details else head for head, details in detailsByHead.items()
+    )
+
+
+def buildReadingsByWord(
+    resolvedGroups: list[dict], theory: dict[Strokes, list[Word]],
+) -> dict[Word, list[list[Reading]]]:
+    """Every word covered by `resolved_press_sets.json` -> its readings per press-set
+    alternate (parallel to its `loadFinalTheory` stroke list), matched to the real `Word`
+    the same way the Phase P pipeline does (`_resolveEntryWord`)."""
+    wordToStrokes = buildWordToStrokes(theory)
+    wordsByOrthoLemme = buildWordsByOrthoLemme(theory)
+    readingsByWord: dict[Word, list[list[Reading]]] = {}
+    for entry in resolvedGroups:
+        for ortho, readingsPerAlternate in entry.get("readings", {}).items():
+            word = _resolveEntryWord(entry, ortho, wordToStrokes, wordsByOrthoLemme)
+            if word is not None:
+                readingsByWord[word] = [
+                    [frozenset(reading) for reading in readings] for readings in readingsPerAlternate
+                ]
+    return readingsByWord
 
 
 def main() -> None:
@@ -46,41 +129,50 @@ def main() -> None:
     if starboard is None:
         raise RuntimeError(f"{KEYBOARD_JSON} not found; run dictionary.py once first to generate it.")
 
-    finalTheory = loadFinalTheory(starboard)
+    theory, finalTheory = loadFirstAndFinalTheory(starboard)
+    with open(RESOLVED_PRESS_SETS_PATH, encoding="utf-8") as f:
+        readingsByWord = buildReadingsByWord(json.load(f), theory)
 
-    byOrtho: dict[str, tuple[str, list[list[int]], Word]] = {}
-    orthoCollisions = 0
+    # Keyed by (ortho, steno), not ortho alone: a self-homograph's alternate strokes, and
+    # two different words sharing a spelling but not a chord ("est" = être / nom), are
+    # each their own drill item now that every item says which reading it's for.
+    byOrthoSteno: dict[tuple[str, str], dict] = {}
+    misalignedWords = 0
     for word, strokesList in finalTheory.items():
-        # A self-homograph word (see loadFinalTheory) has more than one independently
-        # valid stroke; the trainer has no way yet to show WHICH grammatical reading a
-        # drill expects (RESUME_2026-09-21-steno-trainer.md item 1), so only the
-        # primary reading is exported here for now -- exposing the others would just
-        # make that existing ambiguity worse, not better.
-        strokes = strokesList[0]
-        steno = renderFinalStrokesToRTFCRE(starboard, strokes)
-        keyIndexStrokes = [sorted(set(stroke)) for stroke in strokes]
+        readingsPerStroke = readingsByWord.get(word)
+        if readingsPerStroke is not None and len(readingsPerStroke) != len(strokesList):
+            misalignedWords += 1
+            readingsPerStroke = None
+        if readingsPerStroke is None:
+            # Not a same-lemma homophone (or misaligned): every stroke writes every reading.
+            readingsPerStroke = [wordFeatureCombinations(word)] * len(strokesList)
 
-        existing = byOrtho.get(word.ortho)
-        if existing is not None:
-            orthoCollisions += 1
-            if word.frequency <= existing[2].frequency:
+        for strokes, readings in zip(strokesList, readingsPerStroke):
+            steno = renderFinalStrokesToRTFCRE(starboard, strokes)
+            label = formatReadingsLabel(word.gramCat, readings)
+            existing = byOrthoSteno.get((word.ortho, steno))
+            if existing is not None:
+                # Same spelling AND same chord from two Words (an exempted homograph pair):
+                # one drill item, labelled with both.
+                if label not in existing["label"].split(" · "):
+                    existing["label"] += f" · {label}"
+                existing["frequency"] = max(existing["frequency"], round(word.frequency, 3))
                 continue
-        byOrtho[word.ortho] = (steno, keyIndexStrokes, word)
+            byOrthoSteno[(word.ortho, steno)] = {
+                "ortho": word.ortho, "label": label, "steno": steno,
+                "strokes": [sorted(set(stroke)) for stroke in strokes],
+                "frequency": round(word.frequency, 3),
+            }
 
-    records = [
-        {"ortho": ortho, "steno": steno, "strokes": strokes, "frequency": round(w.frequency, 3)}
-        for ortho, (steno, strokes, w) in byOrtho.items()
-    ]
-    records.sort(key=lambda r: -r["frequency"])
+    records = sorted(byOrthoSteno.values(), key=lambda r: (-r["frequency"], r["ortho"], r["steno"]))
     records = records[:args.limit]
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(records, f, ensure_ascii=False, indent=1)
 
-    print(f"Wrote {OUTPUT_PATH}: {len(records)} words"
-          f" ({orthoCollisions} same-ortho collisions -- expected for homograph/exempted"
-          f" pairs, not a bug in this exporter; kept the most frequent variant of each).")
-
+    print(f"Wrote {OUTPUT_PATH}: {len(records)} drill items"
+          f" ({misalignedWords} words whose resolved readings didn't line up with their strokes"
+          f" -- labelled with all of the word's readings instead).")
 
 if __name__ == "__main__":
     main()
