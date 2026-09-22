@@ -92,7 +92,7 @@ layout notation original =
                     render notation
             in
             { original
-                | keys = List.map (\key -> { key | name = r key.name }) original.keys
+                | keys = List.map (\key -> { key | name = r key.name, phonemes = r key.phonemes }) original.keys
                 , phonemeLayers =
                     List.map
                         (\layer ->

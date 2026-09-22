@@ -21,6 +21,7 @@ import Set exposing (Set)
 type alias KeyInfo =
     { index : Int
     , name : String
+    , phonemes : String
     , hand : String
     , finger : String
     , row : Int
@@ -36,6 +37,7 @@ keyInfoDecoder =
     D.succeed KeyInfo
         |> required "index" D.int
         |> required "name" D.string
+        |> required "phonemes" D.string
         |> required "hand" D.string
         |> required "finger" D.string
         |> required "row" D.int
@@ -145,19 +147,19 @@ view { highlighted, correct } keys =
         ]
 
 
-{-| `key.name` carries a leading/trailing "-" for onset/coda keys (needed
-there to disambiguate a letter reused between hands, e.g. "k-" onset vs
-"-k" coda), but that same convention on a nucleus key is borrowed purely
-from English steno's A-/-E layout convention and isn't disambiguating
-anything here -- confusing on this board, so it's stripped for display.
+{-| Every phoneme the key writes pressed alone ("wNG", "eO") -- the 1-key
+phonemes layer of `Starboard.printLayout`, without `key.name`'s "k-"/"-k"
+hand hyphen (the board's left/right halves already say which hand). Keys
+with no phoneme of their own (`*`, `#` and the two unassigned reserved keys)
+show their name.
 -}
 keyDisplayName : KeyInfo -> String
 keyDisplayName key =
-    if key.part == Just "nucleus" then
-        String.filter (\c -> c /= '-') key.name
+    if String.isEmpty key.phonemes then
+        key.name
 
     else
-        key.name
+        key.phonemes
 
 
 keyView : Set Int -> Maybe Bool -> KeyInfo -> Html msg

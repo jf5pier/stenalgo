@@ -390,11 +390,11 @@ viewDrill model =
                     div [ class "drill" ]
                         [ div [ class "drill-words" ]
                             [ div [ class "current-word" ]
-                                (p [ class "target-word" ] [ text word.ortho ]
+                                (p [ class "target-word" ] (viewInContext word)
                                     :: viewReading model.notation reservedKeys word.label word.phonology word.steno word.strokes
                                 )
                             , p [ class "next-word" ]
-                                [ text (Drill.nextWord drill |> Maybe.map .ortho |> Maybe.withDefault "\u{00A0}") ]
+                                (Drill.nextWord drill |> Maybe.map viewInContext |> Maybe.withDefault [ text "\u{00A0}" ])
                             ]
                         ]
 
@@ -403,6 +403,35 @@ viewDrill model =
 
         _ ->
             p [] [ text "Nothing to practice." ]
+
+
+{-| A drilled word between its de-emphasized context words ("la maison",
+"que tu viennes", "parle !"), joined without a space after an elision ("l'",
+"j'", "qu'il"). -}
+viewInContext : PracticeWord -> List (Html Msg)
+viewInContext word =
+    let
+        context string =
+            Html.span [ class "context-word" ] [ text string ]
+
+        beforePart =
+            if String.isEmpty word.before then
+                []
+
+            else if String.endsWith "'" word.before then
+                [ context word.before ]
+
+            else
+                [ context (word.before ++ " ") ]
+
+        afterPart =
+            if String.isEmpty word.after then
+                []
+
+            else
+                [ context (" " ++ word.after) ]
+    in
+    beforePart ++ [ text word.ortho ] ++ afterPart
 
 
 {-| A sentence with its current word highlighted (words already written
@@ -489,14 +518,16 @@ viewSentence notation reservedKeys currentIndex sentence =
 
 
 {-| One word's reading label, phonology and chord. Reserved keys (`*`, `#`,
-and the two still-unassigned ones) never carry a phoneme -- a stroke made up
-only of those is the `*`/`#` track's trailing mark, which picks which *lemma*
-you mean among homophones of different words (`src/ambiguitychecker.py`'s
-"lemma-homophone ambiguity", e.g. a/à/as), not a conjugated form of one lemma
-(that's Phase P's separate mechanism, an extra stroke of ordinary coda keys --
-see the sidebar's "Conjugation markers" legend). Split onto its own line
-under the chord, always rendered (even empty) so a word that has one doesn't
-shift the layout of the one after it.
+and the two still-unassigned ones) never carry a phoneme: they're the `*`/`#`
+track's mark, which picks which *lemma* you mean among homophones of
+different words (`src/ambiguitychecker.py`'s "lemma-homophone ambiguity",
+e.g. a/à/as), not a conjugated form of one lemma (that's Phase P's separate
+mechanism, an extra stroke of ordinary coda keys -- see the sidebar's
+"Conjugation markers" legend). The mark's first symbol is pressed with the
+word's last phoneme stroke ("a*"), so it stays in the chord; only a large
+homophone cluster's further symbols are strokes of their own, split onto
+their own line under the chord -- always rendered (even empty) so a word that
+has one doesn't shift the layout of the one after it.
 -}
 viewReading : Notation -> Set.Set Int -> String -> String -> String -> List (List Int) -> List (Html Msg)
 viewReading notation reservedKeys label phonology steno strokes =
