@@ -1,4 +1,4 @@
-module Drill exposing (PracticeWord, State, applyStroke, currentWord, decoder, expectedStroke, init, nextWord, reshuffle)
+module Drill exposing (PracticeWord, Segment, State, applyStroke, currentSegmentIndex, currentWord, decoder, expectedStroke, init, nextWord, reshuffle, sentenceDecoder)
 
 {-| The drill engine: a shuffled walk through the word list (loaded already
 frequency-ordered by `util/export_practice_words.py`, but drilled in a
@@ -19,14 +19,30 @@ import Set exposing (Set)
 {-| One drill item: a word's spelling plus ONE of its chords. A self-homograph
 spelling ("calmez" = impératif / indicatif présent) has several independently
 valid chords and so several items, told apart by `label` -- the grammatical
-reading(s) that item's chord writes (see `util/export_practice_words.py`). -}
+reading(s) that item's chord writes (see `util/export_practice_words.py`).
+
+A practice sentence is the same shape -- `ortho` its text, `strokes` all its
+words' strokes in order -- plus one `Segment` per word, so the view can say
+which word the next stroke belongs to (see `sentenceDecoder`). A single
+word has no segments. -}
 type alias PracticeWord =
     { ortho : String
     , label : String
     , phonology : String
     , steno : String
     , strokes : List (List Int)
-    , frequency : Float
+    , segments : List Segment
+    }
+
+
+{-| One word of a practice sentence: its text as written there, the reading
+it has in context, its chord, and how many of the sentence's strokes it takes
+(see `util/export_practice_sentences.py`). -}
+type alias Segment =
+    { text : String
+    , label : String
+    , steno : String
+    , strokeCount : Int
     }
 
 
@@ -38,12 +54,34 @@ wordDecoder =
         (D.field "phonology" D.string)
         (D.field "steno" D.string)
         (D.field "strokes" (D.list (D.list D.int)))
-        (D.field "frequency" D.float)
+        (D.succeed [])
 
 
 decoder : D.Decoder (List PracticeWord)
 decoder =
     D.list wordDecoder
+
+
+segmentDecoder : D.Decoder Segment
+segmentDecoder =
+    D.map4 Segment
+        (D.field "text" D.string)
+        (D.field "label" D.string)
+        (D.field "steno" D.string)
+        (D.field "strokeCount" D.int)
+
+
+sentenceDecoder : D.Decoder (List PracticeWord)
+sentenceDecoder =
+    D.list
+        (D.map6 PracticeWord
+            (D.field "text" D.string)
+            (D.succeed "")
+            (D.field "phonology" D.string)
+            (D.field "steno" D.string)
+            (D.field "strokes" (D.list (D.list D.int)))
+            (D.field "words" (D.list segmentDecoder))
+        )
 
 
 type alias State =
@@ -92,6 +130,33 @@ nextWord state =
 wrappedIndex : State -> Int -> Int
 wrappedIndex state index =
     modBy (max 1 (Array.length state.words)) index
+
+
+{-| Which of the current sentence's words the next expected stroke belongs to
+(0 for a single word, which has no segments). -}
+currentSegmentIndex : State -> Int
+currentSegmentIndex state =
+    currentWord state
+        |> Maybe.map
+            (\word ->
+                word.segments
+                    |> List.foldl
+                        (\segment ( index, strokesBefore, found ) ->
+                            case found of
+                                Just _ ->
+                                    ( index, strokesBefore, found )
+
+                                Nothing ->
+                                    if state.currentStrokeIndex < strokesBefore + segment.strokeCount then
+                                        ( index, strokesBefore, Just index )
+
+                                    else
+                                        ( index + 1, strokesBefore + segment.strokeCount, Nothing )
+                        )
+                        ( 0, 0, Nothing )
+                    |> (\( _, _, found ) -> Maybe.withDefault 0 found)
+            )
+        |> Maybe.withDefault 0
 
 
 expectedStroke : State -> Maybe (Set Int)
