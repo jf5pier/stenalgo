@@ -3,6 +3,7 @@
   {
    "index": 0,
    "name": "&",
+   "phonemes": "",
    "hand": "left",
    "finger": "lp",
    "row": 0,
@@ -14,6 +15,7 @@
   {
    "index": 1,
    "name": "%",
+   "phonemes": "",
    "hand": "left",
    "finger": "lp",
    "row": 1,
@@ -25,6 +27,7 @@
   {
    "index": 2,
    "name": "k-",
+   "phonemes": "k",
    "hand": "left",
    "finger": "lp",
    "row": 0,
@@ -36,6 +39,7 @@
   {
    "index": 3,
    "name": "s-",
+   "phonemes": "s",
    "hand": "left",
    "finger": "lp",
    "row": 1,
@@ -47,6 +51,7 @@
   {
    "index": 4,
    "name": "p-",
+   "phonemes": "p",
    "hand": "left",
    "finger": "lr",
    "row": 0,
@@ -58,6 +63,7 @@
   {
    "index": 5,
    "name": "v-",
+   "phonemes": "v",
    "hand": "left",
    "finger": "lr",
    "row": 1,
@@ -69,6 +75,7 @@
   {
    "index": 6,
    "name": "m-",
+   "phonemes": "m",
    "hand": "left",
    "finger": "lm",
    "row": 0,
@@ -80,6 +87,7 @@
   {
    "index": 7,
    "name": "t-",
+   "phonemes": "t",
    "hand": "left",
    "finger": "lm",
    "row": 1,
@@ -91,6 +99,7 @@
   {
    "index": 8,
    "name": "R-",
+   "phonemes": "R",
    "hand": "left",
    "finger": "li",
    "row": 0,
@@ -102,6 +111,7 @@
   {
    "index": 9,
    "name": "w-",
+   "phonemes": "wNG",
    "hand": "left",
    "finger": "li",
    "row": 1,
@@ -113,6 +123,7 @@
   {
    "index": 10,
    "name": "*",
+   "phonemes": "",
    "hand": "left",
    "finger": "li",
    "row": 0,
@@ -124,6 +135,7 @@
   {
    "index": 11,
    "name": "@-",
+   "phonemes": "@9",
    "hand": "left",
    "finger": "lt",
    "row": 2,
@@ -135,6 +147,7 @@
   {
    "index": 12,
    "name": "a-",
+   "phonemes": "a",
    "hand": "left",
    "finger": "lt",
    "row": 2,
@@ -146,6 +159,7 @@
   {
    "index": 13,
    "name": "-i",
+   "phonemes": "i",
    "hand": "right",
    "finger": "rt",
    "row": 2,
@@ -157,6 +171,7 @@
   {
    "index": 14,
    "name": "-e",
+   "phonemes": "eO",
    "hand": "right",
    "finger": "rt",
    "row": 2,
@@ -168,6 +183,7 @@
   {
    "index": 15,
    "name": "#",
+   "phonemes": "",
    "hand": "right",
    "finger": "ri",
    "row": 0,
@@ -179,6 +195,7 @@
   {
    "index": 16,
    "name": "-j",
+   "phonemes": "jbw",
    "hand": "right",
    "finger": "ri",
    "row": 0,
@@ -190,6 +207,7 @@
   {
    "index": 17,
    "name": "-s",
+   "phonemes": "s",
    "hand": "right",
    "finger": "ri",
    "row": 1,
@@ -201,6 +219,7 @@
   {
    "index": 18,
    "name": "-k",
+   "phonemes": "k",
    "hand": "right",
    "finger": "rm",
    "row": 0,
@@ -212,6 +231,7 @@
   {
    "index": 19,
    "name": "-d",
+   "phonemes": "d",
    "hand": "right",
    "finger": "rm",
    "row": 1,
@@ -223,6 +243,7 @@
   {
    "index": 20,
    "name": "-t",
+   "phonemes": "t",
    "hand": "right",
    "finger": "rr",
    "row": 0,
@@ -234,6 +255,7 @@
   {
    "index": 21,
    "name": "-R",
+   "phonemes": "R",
    "hand": "right",
    "finger": "rr",
    "row": 1,
@@ -245,6 +267,7 @@
   {
    "index": 22,
    "name": "-n",
+   "phonemes": "n",
    "hand": "right",
    "finger": "rp",
    "row": 0,
@@ -256,6 +279,7 @@
   {
    "index": 23,
    "name": "-l",
+   "phonemes": "l",
    "hand": "right",
    "finger": "rp",
    "row": 1,
@@ -267,6 +291,7 @@
   {
    "index": 24,
    "name": "-Z",
+   "phonemes": "ZG",
    "hand": "right",
    "finger": "rp",
    "row": 0,
@@ -278,6 +303,7 @@
   {
    "index": 25,
    "name": "-m",
+   "phonemes": "m",
    "hand": "right",
    "finger": "rp",
    "row": 1,

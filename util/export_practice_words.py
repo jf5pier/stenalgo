@@ -14,7 +14,8 @@ lemma+gramCat, or an intentionally-exempted pair -- 1990-reform doublets, or one
 word >10x rarer than the other) is expected, not a bug in this exporter; the
 most frequent variant is kept.
 
-Each record also carries the word's X-SAMPA `phonology`, syllabified (see
+Each record also carries context words to show around it (`before`/`after`, never
+typed -- see `formatContext`), and the word's X-SAMPA `phonology`, syllabified (see
 `formatPhonology`); the trainer can show it in IPA instead (`Notation.elm`).
 
 Emits both a display steno string and the raw key-index strokes, so the browser
@@ -68,6 +69,27 @@ NUMBER_LABELS = {"s": "sg.", "p": "pl."}
 
 type Reading = frozenset[str]
 
+# Context words shown around a drilled word (never typed), so a bare form reads as the
+# reading its chord writes: "la maison", "je parle", "que tu viennes", "parle !".
+PRONOUNS = {
+    ("pers_1", "nbr_s"): "je", ("pers_2", "nbr_s"): "tu", ("pers_3", "nbr_s"): "il",
+    ("pers_1", "nbr_p"): "nous", ("pers_2", "nbr_p"): "vous", ("pers_3", "nbr_p"): "ils",
+}
+# Which of a chord's readings to give context for when it writes several (e.g. "fais" =
+# indicatif 1s/2s and impératif 2s): the plainest one.
+CONTEXT_MOOD_PRIORITY = ["indicatif", "conditionnel", "subjonctif", "impératif"]
+VOWEL_INITIALS = frozenset("aàâäeéèêëiîïoôöuùûüyœæ")
+# Common h-aspiré lemmas: no elision before them ("le haricot", "je hais"). Every other
+# h-initial word is treated as h muet ("l'homme", "j'habite").
+H_ASPIRE_LEMMAS = frozenset({
+    "hache", "hacher", "haie", "haillon", "haine", "haïr", "hall", "halle", "halte", "hamac",
+    "hameau", "hamster", "hanche", "handicap", "hangar", "hanter", "harceler", "hardi",
+    "hareng", "haricot", "harnais", "harpe", "hasard", "hâte", "hâter", "hausse", "hausser",
+    "haut", "hauteur", "hennir", "hérisser", "hérisson", "hernie", "héros", "hêtre", "heurter",
+    "hibou", "hiérarchie", "hisser", "hockey", "homard", "honte", "honteux", "hoquet", "hors",
+    "hotte", "housse", "hublot", "huer", "huit", "huitième", "hurlement", "hurler", "hutte",
+})
+
 
 def _readingHeadAndDetail(gramCat: GramCat, reading: Reading) -> tuple[str, str]:
     """One reading (a `src.elicitation` feature combination) split into its
@@ -101,6 +123,46 @@ def formatReadingsLabel(gramCat: GramCat, readings: list[Reading]) -> str:
     return " · ".join(
         f"{head}, {' / '.join(details)}" if details else head for head, details in detailsByHead.items()
     )
+
+
+def _elides(word: Word) -> bool:
+    first = word.ortho[:1].lower()
+    return first in VOWEL_INITIALS or (first == "h" and word.lemme not in H_ASPIRE_LEMMAS)
+
+
+def formatContext(word: Word, readings: list[Reading]) -> tuple[str, str]:
+    """The context word(s) to show before and after `word` for the reading its chord
+    writes: an article for a noun/adjective ("le"/"la"/"l'"/"les"), a subject pronoun
+    for a conjugated verb ("je"/"j'", "que tu", "qu'ils"), "!" after an impératif.
+    ("", "") when nothing fits (infinitif, participe, other categories)."""
+    if word.gramCat in (GramCat.NOM, GramCat.ADJ):
+        reading = readings[0] if readings else frozenset()
+        if "p" in reading:
+            return "les", ""
+        if "s" in reading and _elides(word):
+            return "l'", ""
+        if "s" in reading and "m" in reading:
+            return "le", ""
+        if "s" in reading and "f" in reading:
+            return "la", ""
+        return "", ""
+    if word.gramCat not in (GramCat.VER, GramCat.AUX):
+        return "", ""
+
+    conjugated = [r for r in readings if any(mood in r for mood in CONTEXT_MOOD_PRIORITY)]
+    if not conjugated:
+        return "", ""
+    reading = min(conjugated, key=lambda r: next(i for i, m in enumerate(CONTEXT_MOOD_PRIORITY) if m in r))
+    if "impératif" in reading:
+        return "", "!"
+    pronoun = next((p for (person, number), p in PRONOUNS.items() if person in reading and number in reading), None)
+    if pronoun is None:
+        return "", ""
+    if pronoun == "je" and _elides(word):
+        pronoun = "j'"
+    if "subjonctif" in reading:
+        return ("qu'" + pronoun if pronoun.startswith("i") else "que " + pronoun), ""
+    return pronoun, ""
 
 
 def formatPhonology(word: Word) -> str:
@@ -174,10 +236,17 @@ def main() -> None:
                 # one drill item, labelled with both.
                 if label not in existing["label"].split(" · "):
                     existing["label"] += f" · {label}"
+                # Keep the plainer context: any over none, a subject pronoun over "!".
+                before, after = formatContext(word, readings)
+                if (before or after) and (existing["after"] == "!" or not (existing["before"] or existing["after"])) \
+                        and after != "!":
+                    existing["before"], existing["after"] = before, after
                 existing["frequency"] = max(existing["frequency"], round(word.frequency, 3))
                 continue
+            before, after = formatContext(word, readings)
             byOrthoSteno[(word.ortho, steno)] = {
-                "ortho": word.ortho, "label": label, "phonology": formatPhonology(word), "steno": steno,
+                "ortho": word.ortho, "before": before, "after": after,
+                "label": label, "phonology": formatPhonology(word), "steno": steno,
                 "strokes": [sorted(set(stroke)) for stroke in strokes],
                 "frequency": round(word.frequency, 3),
             }

@@ -162,6 +162,9 @@ def main() -> None:
         keys.append({
             "index": index,
             "name": names[index],
+            # Every phoneme this key writes pressed alone (the "1-key phonemes layer"), in
+            # layout priority order -- `name` only carries the first one.
+            "phonemes": "".join(starboard.phonemesAssignedToStroke.get((index,), [])),
             "hand": hand,
             "finger": starboard._fingerAssignments[index],
             "row": row,

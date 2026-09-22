@@ -49,6 +49,10 @@ body {
   margin-bottom: 0.25rem;
 }
 
+.context-word {
+  opacity: 0.45;
+}
+
 .target-label {
   font-style: italic;
   color: #666;

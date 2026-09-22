@@ -160,7 +160,7 @@
  {
   "text": "Elle boit du café.",
   "phonology": "El bwa dy ka.fe",
-  "steno": "iel svwa/* pv@i ka/kpe",
+  "steno": "iel svw*a pv@i ka/kpe",
   "strokes": [
    [
     13,
@@ -171,10 +171,8 @@
     3,
     5,
     9,
+    10,
     12
-   ],
-   [
-    10
    ],
    [
     4,
@@ -202,8 +200,8 @@
    {
     "text": "boit",
     "label": "indicatif présent, 3e sg.",
-    "steno": "svwa/*",
-    "strokeCount": 2
+    "steno": "svw*a",
+    "strokeCount": 1
    },
    {
     "text": "du",
@@ -433,7 +431,7 @@
  {
   "text": "Elles dansent à la fête.",
   "phonology": "El d@s a la fEt",
-  "steno": "iel/* pv@s/-st a mta kpiet",
+  "steno": "iel/-s pv@s/-st a mta kpiet",
   "strokes": [
    [
     13,
@@ -441,7 +439,7 @@
     23
    ],
    [
-    10
+    17
    ],
    [
     4,
@@ -473,7 +471,7 @@
    {
     "text": "elles",
     "label": "pronom personnel, f. pl.",
-    "steno": "iel/*",
+    "steno": "iel/-s",
     "strokeCount": 2
    },
    {
@@ -726,7 +724,7 @@
  {
   "text": "Elle a mangé hier.",
   "phonology": "El a m@.Ze jER",
-  "steno": "iel a/* m@/vte RwieR",
+  "steno": "iel *a m@/vte RwieR",
   "strokes": [
    [
     13,
@@ -734,10 +732,8 @@
     23
    ],
    [
+    10,
     12
-   ],
-   [
-    10
    ],
    [
     6,
@@ -766,8 +762,8 @@
    {
     "text": "a",
     "label": "indicatif présent, 3e sg.",
-    "steno": "a/*",
-    "strokeCount": 2
+    "steno": "*a",
+    "strokeCount": 1
    },
    {
     "text": "mangé",
@@ -786,7 +782,7 @@
  {
   "text": "On est allé au cinéma.",
   "phonology": "§ E a.le o si.ne.ma",
-  "steno": "ai ie a/mte/* ae si/mRe/ma",
+  "steno": "ai ie a/mt*e ae si/mRe/ma",
   "strokes": [
    [
     12,
@@ -802,10 +798,8 @@
    [
     6,
     7,
+    10,
     14
-   ],
-   [
-    10
    ],
    [
     12,
@@ -841,8 +835,8 @@
    {
     "text": "allé",
     "label": "participe passé, m. sg.",
-    "steno": "a/mte/*",
-    "strokeCount": 3
+    "steno": "a/mt*e",
+    "strokeCount": 2
    },
    {
     "text": "au",
@@ -1010,7 +1004,7 @@
  {
   "text": "Ils ont joué au parc.",
   "phonology": "il § Zwe o paRk",
-  "steno": "il/-s ai/* vtwe ae pakR",
+  "steno": "il/-s *ai vtwe ae pakR",
   "strokes": [
    [
     13,
@@ -1020,11 +1014,9 @@
     17
    ],
    [
+    10,
     12,
     13
-   ],
-   [
-    10
    ],
    [
     5,
@@ -1053,8 +1045,8 @@
    {
     "text": "ont",
     "label": "indicatif présent, 3e pl.",
-    "steno": "ai/*",
-    "strokeCount": 2
+    "steno": "*ai",
+    "strokeCount": 1
    },
    {
     "text": "joué",
@@ -1079,7 +1071,7 @@
  {
   "text": "Elles sont parties tôt.",
   "phonology": "El s§ paR.ti to",
-  "steno": "iel/* sai paR/ti/-js tae",
+  "steno": "iel/-s sai paR/ti/-js tae",
   "strokes": [
    [
     13,
@@ -1087,7 +1079,7 @@
     23
    ],
    [
-    10
+    17
    ],
    [
     3,
@@ -1117,7 +1109,7 @@
    {
     "text": "elles",
     "label": "pronom personnel, f. pl.",
-    "steno": "iel/*",
+    "steno": "iel/-s",
     "strokeCount": 2
    },
    {
@@ -1653,7 +1645,7 @@
  {
   "text": "Elles savent la réponse.",
   "phonology": "El sav la Re.p§s",
-  "steno": "iel/* sajs mta Re/pais",
+  "steno": "iel/-s sajs mta Re/pais",
   "strokes": [
    [
     13,
@@ -1661,7 +1653,7 @@
     23
    ],
    [
-    10
+    17
    ],
    [
     3,
@@ -1689,7 +1681,7 @@
    {
     "text": "elles",
     "label": "pronom personnel, f. pl.",
-    "steno": "iel/*",
+    "steno": "iel/-s",
     "strokeCount": 2
    },
    {
@@ -1786,8 +1778,8 @@
  },
  {
   "text": "Tu entends ce bruit.",
-  "phonology": "ty @.t@ s2 bR8i",
-  "steno": "t@i @/t@/-d s@ie svR@ai",
+  "phonology": "ty @.t@ s° bR8i",
+  "steno": "t@i @/t@/-d s@a svR@ai",
   "strokes": [
    [
     7,
@@ -1807,8 +1799,7 @@
    [
     3,
     11,
-    13,
-    14
+    12
    ],
    [
     3,
@@ -1835,7 +1826,7 @@
    {
     "text": "ce",
     "label": "adjectif démonstratif, m. sg.",
-    "steno": "s@ie",
+    "steno": "s@a",
     "strokeCount": 1
    },
    {
@@ -1849,7 +1840,7 @@
  {
   "text": "Il demande un verre d'eau.",
   "phonology": "il d°.m@d 1 vER d o",
-  "steno": "il pv@a/m@d @aie vieR/* pv- ae/*#",
+  "steno": "il pv@a/m@d @aie v*ieR pv- *ae#",
   "strokes": [
    [
     13,
@@ -1874,23 +1865,19 @@
    ],
    [
     5,
+    10,
     13,
     14,
     21
-   ],
-   [
-    10
    ],
    [
     4,
     5
    ],
    [
-    12,
-    14
-   ],
-   [
     10,
+    12,
+    14,
     15
    ]
   ],
@@ -1916,8 +1903,8 @@
    {
     "text": "verre",
     "label": "nom, m. sg.",
-    "steno": "vieR/*",
-    "strokeCount": 2
+    "steno": "v*ieR",
+    "strokeCount": 1
    },
    {
     "text": "d'",
@@ -1928,15 +1915,15 @@
    {
     "text": "eau",
     "label": "nom, f. sg.",
-    "steno": "ae/*#",
-    "strokeCount": 2
+    "steno": "*ae#",
+    "strokeCount": 1
    }
   ]
  },
  {
   "text": "Elle met son manteau.",
   "phonology": "El mE s§ m@.to",
-  "steno": "iel mie/*# sai/* m@/tae",
+  "steno": "iel m*ie# s*ai m@/tae",
   "strokes": [
    [
     13,
@@ -1945,20 +1932,16 @@
    ],
    [
     6,
-    13,
-    14
-   ],
-   [
     10,
+    13,
+    14,
     15
    ],
    [
     3,
+    10,
     12,
     13
-   ],
-   [
-    10
    ],
    [
     6,
@@ -1980,14 +1963,14 @@
    {
     "text": "met",
     "label": "indicatif présent, 3e sg.",
-    "steno": "mie/*#",
-    "strokeCount": 2
+    "steno": "m*ie#",
+    "strokeCount": 1
    },
    {
     "text": "son",
     "label": "adjectif possessif",
-    "steno": "sai/*",
-    "strokeCount": 2
+    "steno": "s*ai",
+    "strokeCount": 1
    },
    {
     "text": "manteau",
@@ -2070,7 +2053,7 @@
  {
   "text": "Ils travaillent dur.",
   "phonology": "il tRa.vaj dyR",
-  "steno": "il/-s tRa/vaj/-st pv@iR/*",
+  "steno": "il/-s tRa/vaj/-st pv*@iR",
   "strokes": [
    [
     13,
@@ -2096,12 +2079,10 @@
    [
     4,
     5,
+    10,
     11,
     13,
     21
-   ],
-   [
-    10
    ]
   ],
   "words": [
@@ -2120,15 +2101,15 @@
    {
     "text": "dur",
     "label": "adverbe",
-    "steno": "pv@iR/*",
-    "strokeCount": 2
+    "steno": "pv*@iR",
+    "strokeCount": 1
    }
   ]
  },
  {
   "text": "Elles marchent vite maintenant.",
   "phonology": "El maRS vit m5.t°.n@",
-  "steno": "iel/* maRZm/-st vit maie/t@a/mR@",
+  "steno": "iel/-s maRZm/-st vit maie/t@a/mR@",
   "strokes": [
    [
     13,
@@ -2136,7 +2117,7 @@
     23
    ],
    [
-    10
+    17
    ],
    [
     6,
@@ -2175,7 +2156,7 @@
    {
     "text": "elles",
     "label": "pronom personnel, f. pl.",
-    "steno": "iel/*",
+    "steno": "iel/-s",
     "strokeCount": 2
    },
    {
@@ -2354,7 +2335,7 @@
  {
   "text": "Il pensait à sa mère.",
   "phonology": "il p@.sE a sa mER",
-  "steno": "il p@/sie a sa/* mieR",
+  "steno": "il p@/sie a s*a mieR",
   "strokes": [
    [
     13,
@@ -2374,10 +2355,8 @@
    ],
    [
     3,
+    10,
     12
-   ],
-   [
-    10
    ],
    [
     6,
@@ -2408,8 +2387,8 @@
    {
     "text": "sa",
     "label": "adjectif possessif",
-    "steno": "sa/*",
-    "strokeCount": 2
+    "steno": "s*a",
+    "strokeCount": 1
    },
    {
     "text": "mère",
@@ -2422,7 +2401,7 @@
  {
   "text": "Elle habitait près d'ici.",
   "phonology": "El a.bi.tE pRE d i.si",
-  "steno": "iel a/svi/tie pRie/* pv- i/si",
+  "steno": "iel a/svi/tie pR*ie pv- i/si",
   "strokes": [
    [
     13,
@@ -2445,11 +2424,9 @@
    [
     4,
     8,
+    10,
     13,
     14
-   ],
-   [
-    10
    ],
    [
     4,
@@ -2479,8 +2456,8 @@
    {
     "text": "près",
     "label": "adverbe",
-    "steno": "pRie/*",
-    "strokeCount": 2
+    "steno": "pR*ie",
+    "strokeCount": 1
    },
    {
     "text": "d'",
@@ -2643,7 +2620,7 @@
  {
   "text": "Vous aviez faim hier soir.",
   "phonology": "vu a.vje f5 jER swaR",
-  "steno": "v@e a/vRwe kpaie/* RwieR swaR",
+  "steno": "v@e a/vRwe kp*aie RwieR swaR",
   "strokes": [
    [
     5,
@@ -2662,12 +2639,10 @@
    [
     2,
     4,
+    10,
     12,
     13,
     14
-   ],
-   [
-    10
    ],
    [
     8,
@@ -2699,8 +2674,8 @@
    {
     "text": "faim",
     "label": "nom, f. sg.",
-    "steno": "kpaie/*",
-    "strokeCount": 2
+    "steno": "kp*aie",
+    "strokeCount": 1
    },
    {
     "text": "hier",
@@ -2949,7 +2924,7 @@
  {
   "text": "Elle fera son devoir.",
   "phonology": "El f°.Ra s§ d°.vwaR",
-  "steno": "iel kp@a/Ra sai/* pv@a/vwaR",
+  "steno": "iel kp@a/Ra s*ai pv@a/vwaR",
   "strokes": [
    [
     13,
@@ -2968,11 +2943,9 @@
    ],
    [
     3,
+    10,
     12,
     13
-   ],
-   [
-    10
    ],
    [
     4,
@@ -3003,8 +2976,8 @@
    {
     "text": "son",
     "label": "adjectif possessif",
-    "steno": "sai/*",
-    "strokeCount": 2
+    "steno": "s*ai",
+    "strokeCount": 1
    },
    {
     "text": "devoir",
@@ -3279,7 +3252,7 @@
  {
   "text": "Elles sauront la vérité.",
   "phonology": "El so.R§ la ve.Ri.te",
-  "steno": "iel/* sae/Rai/-st mta ve/Ri/te",
+  "steno": "iel/-s sae/Rai/-st mta ve/Ri/te",
   "strokes": [
    [
     13,
@@ -3287,7 +3260,7 @@
     23
    ],
    [
-    10
+    17
    ],
    [
     3,
@@ -3325,7 +3298,7 @@
    {
     "text": "elles",
     "label": "pronom personnel, f. pl.",
-    "steno": "iel/*",
+    "steno": "iel/-s",
     "strokeCount": 2
    },
    {
@@ -5216,17 +5189,15 @@
  {
   "text": "Il a du talent.",
   "phonology": "il a dy ta.l@",
-  "steno": "il a/* pv@i ta/mt@",
+  "steno": "il *a pv@i ta/mt@",
   "strokes": [
    [
     13,
     23
    ],
    [
+    10,
     12
-   ],
-   [
-    10
    ],
    [
     4,
@@ -5254,8 +5225,8 @@
    {
     "text": "a",
     "label": "indicatif présent, 3e sg.",
-    "steno": "a/*",
-    "strokeCount": 2
+    "steno": "*a",
+    "strokeCount": 1
    },
    {
     "text": "du",
@@ -5274,17 +5245,15 @@
  {
   "text": "On a des nouvelles.",
   "phonology": "§ a de nu.vEl",
-  "steno": "ai a/* pve mR@e/viel/-s",
+  "steno": "ai *a pve mR@e/viel/-s",
   "strokes": [
    [
     12,
     13
    ],
    [
+    10,
     12
-   ],
-   [
-    10
    ],
    [
     4,
@@ -5317,8 +5286,8 @@
    {
     "text": "a",
     "label": "indicatif présent, 3e sg.",
-    "steno": "a/*",
-    "strokeCount": 2
+    "steno": "*a",
+    "strokeCount": 1
    },
    {
     "text": "des",
@@ -5445,7 +5414,7 @@
  {
   "text": "Ils ont froid.",
   "phonology": "il § fRwa",
-  "steno": "il/-s ai/* kpRwa",
+  "steno": "il/-s *ai kpRwa",
   "strokes": [
    [
     13,
@@ -5455,11 +5424,9 @@
     17
    ],
    [
+    10,
     12,
     13
-   ],
-   [
-    10
    ],
    [
     2,
@@ -5479,8 +5446,8 @@
    {
     "text": "ont",
     "label": "indicatif présent, 3e pl.",
-    "steno": "ai/*",
-    "strokeCount": 2
+    "steno": "*ai",
+    "strokeCount": 1
    },
    {
     "text": "froid",
@@ -5493,7 +5460,7 @@
  {
   "text": "Elles ont fait un travail.",
   "phonology": "El § fE 1 tRa.vaj",
-  "steno": "iel/* ai/* kpie @aie tRa/vaj",
+  "steno": "iel/-s *ai kpie @aie tRa/vaj",
   "strokes": [
    [
     13,
@@ -5501,14 +5468,12 @@
     23
    ],
    [
-    10
+    17
    ],
    [
+    10,
     12,
     13
-   ],
-   [
-    10
    ],
    [
     2,
@@ -5537,14 +5502,14 @@
    {
     "text": "elles",
     "label": "pronom personnel, f. pl.",
-    "steno": "iel/*",
+    "steno": "iel/-s",
     "strokeCount": 2
    },
    {
     "text": "ont",
     "label": "indicatif présent, 3e pl.",
-    "steno": "ai/*",
-    "strokeCount": 2
+    "steno": "*ai",
+    "strokeCount": 1
    },
    {
     "text": "fait",
@@ -6123,7 +6088,7 @@
  {
   "text": "Elle n'a jamais dormi.",
   "phonology": "El n a Za.mE dOR.mi",
-  "steno": "iel mR- a/* vta/mie pveR/mi",
+  "steno": "iel mR- *a vta/mie pveR/mi",
   "strokes": [
    [
     13,
@@ -6135,10 +6100,8 @@
     8
    ],
    [
+    10,
     12
-   ],
-   [
-    10
    ],
    [
     5,
@@ -6177,8 +6140,8 @@
    {
     "text": "a",
     "label": "indicatif présent, 3e sg.",
-    "steno": "a/*",
-    "strokeCount": 2
+    "steno": "*a",
+    "strokeCount": 1
    },
    {
     "text": "jamais",
@@ -6197,7 +6160,7 @@
  {
   "text": "On ne peut pas attendre.",
   "phonology": "§ n° p2 pa a.t@dR",
-  "steno": "ai mR@a p@ie/* pa a/t@dR",
+  "steno": "ai mR@a p*@ie pa a/t@dR",
   "strokes": [
    [
     12,
@@ -6211,12 +6174,10 @@
    ],
    [
     4,
+    10,
     11,
     13,
     14
-   ],
-   [
-    10
    ],
    [
     4,
@@ -6248,8 +6209,8 @@
    {
     "text": "peut",
     "label": "indicatif présent, 3e sg.",
-    "steno": "p@ie/*",
-    "strokeCount": 2
+    "steno": "p*@ie",
+    "strokeCount": 1
    },
    {
     "text": "pas",
@@ -6475,8 +6436,8 @@
  },
  {
   "text": "Est-ce que tu viens ?",
-  "phonology": "E s2 k° ty vj5",
-  "steno": "ie s@ie k@a t@i vRwaie/-d",
+  "phonology": "E s° k° ty vj5",
+  "steno": "ie s@a k@a t@i vRwaie/-d",
   "strokes": [
    [
     13,
@@ -6485,8 +6446,7 @@
    [
     3,
     11,
-    13,
-    14
+    12
    ],
    [
     2,
@@ -6520,7 +6480,7 @@
    {
     "text": "-ce",
     "label": "pronom démonstratif, m. sg.",
-    "steno": "s@ie",
+    "steno": "s@a",
     "strokeCount": 1
    },
    {
@@ -6609,14 +6569,12 @@
  {
   "text": "Où allez-vous demain ?",
   "phonology": "u a.le vu d°.m5",
-  "steno": "@e/* a/mte/-d v@e pv@a/maie",
+  "steno": "*@e a/mte/-d v@e pv@a/maie",
   "strokes": [
    [
+    10,
     11,
     14
-   ],
-   [
-    10
    ],
    [
     12
@@ -6651,8 +6609,8 @@
    {
     "text": "où",
     "label": "pronom relatif",
-    "steno": "@e/*",
-    "strokeCount": 2
+    "steno": "*@e",
+    "strokeCount": 1
    },
    {
     "text": "allez",
@@ -6804,8 +6762,8 @@
  },
  {
   "text": "Combien coûte ce livre ?",
-  "phonology": "k§.bj5 kut s2 livR",
-  "steno": "kai/svRwaie k@et s@ie mtijsR",
+  "phonology": "k§.bj5 kut s° livR",
+  "steno": "kai/svRwaie k@et s@a mtijsR",
   "strokes": [
    [
     2,
@@ -6830,8 +6788,7 @@
    [
     3,
     11,
-    13,
-    14
+    12
    ],
    [
     6,
@@ -6858,7 +6815,7 @@
    {
     "text": "ce",
     "label": "adjectif démonstratif, m. sg.",
-    "steno": "s@ie",
+    "steno": "s@a",
     "strokeCount": 1
    },
    {
@@ -6872,7 +6829,7 @@
  {
   "text": "Quel est ton nom ?",
   "phonology": "kEl E t§ n§",
-  "steno": "kiel ie tai mRai/*",
+  "steno": "kiel ie tai mR*ai",
   "strokes": [
    [
     2,
@@ -6892,11 +6849,9 @@
    [
     6,
     8,
+    10,
     12,
     13
-   ],
-   [
-    10
    ]
   ],
   "words": [
@@ -6921,15 +6876,15 @@
    {
     "text": "nom",
     "label": "nom, m. sg.",
-    "steno": "mRai/*",
-    "strokeCount": 2
+    "steno": "mR*ai",
+    "strokeCount": 1
    }
   ]
  },
  {
   "text": "Qui t'a parlé ?",
   "phonology": "ki t a paR.le",
-  "steno": "ki t- a/* paR/mte",
+  "steno": "ki t- *a paR/mte",
   "strokes": [
    [
     2,
@@ -6939,10 +6894,8 @@
     7
    ],
    [
+    10,
     12
-   ],
-   [
-    10
    ],
    [
     4,
@@ -6971,8 +6924,8 @@
    {
     "text": "a",
     "label": "indicatif présent, 3e sg.",
-    "steno": "a/*",
-    "strokeCount": 2
+    "steno": "*a",
+    "strokeCount": 1
    },
    {
     "text": "parlé",
@@ -7065,12 +7018,10 @@
  {
   "text": "C'est très difficile.",
   "phonology": "s E tRE di.fi.sil",
-  "steno": "s-/* ie tRie pvi/kpi/sil",
+  "steno": "s* ie tRie pvi/kpi/sil",
   "strokes": [
    [
-    3
-   ],
-   [
+    3,
     10
    ],
    [
@@ -7103,8 +7054,8 @@
    {
     "text": "c'",
     "label": "pronom démonstratif",
-    "steno": "s-/*",
-    "strokeCount": 2
+    "steno": "s*",
+    "strokeCount": 1
    },
    {
     "text": "est",
@@ -7128,14 +7079,13 @@
  },
  {
   "text": "Ce n'est pas possible.",
-  "phonology": "s2 n E pa po.sibl",
-  "steno": "s@ie mR- ie pa pae/sijl",
+  "phonology": "s° n E pa po.sibl",
+  "steno": "s@a mR- ie pa pae/sijl",
   "strokes": [
    [
     3,
     11,
-    13,
-    14
+    12
    ],
    [
     6,
@@ -7165,7 +7115,7 @@
    {
     "text": "ce",
     "label": "pronom démonstratif, m. sg.",
-    "steno": "s@ie",
+    "steno": "s@a",
     "strokeCount": 1
    },
    {
@@ -7197,7 +7147,7 @@
  {
   "text": "Il y a un problème.",
   "phonology": "il i a 1 pRo.blEm",
-  "steno": "il i a/* @aie pRae/svmtiem",
+  "steno": "il i *a @aie pRae/svmtiem",
   "strokes": [
    [
     13,
@@ -7207,10 +7157,8 @@
     13
    ],
    [
+    10,
     12
-   ],
-   [
-    10
    ],
    [
     11,
@@ -7250,8 +7198,8 @@
    {
     "text": "a",
     "label": "indicatif présent, 3e sg.",
-    "steno": "a/*",
-    "strokeCount": 2
+    "steno": "*a",
+    "strokeCount": 1
    },
    {
     "text": "un",
@@ -7365,8 +7313,8 @@
  },
  {
   "text": "Regarde ce que j'ai fait.",
-  "phonology": "R°.gaRd s2 k° Z E fE",
-  "steno": "R@a/ksadR/-k s@ie k@a vt- ie/-k kpie",
+  "phonology": "R°.gaRd s° k° Z E fE",
+  "steno": "R@a/ksadR/-k s@a k@a vt- ie/-k kpie",
   "strokes": [
    [
     8,
@@ -7386,8 +7334,7 @@
    [
     3,
     11,
-    13,
-    14
+    12
    ],
    [
     2,
@@ -7422,7 +7369,7 @@
    {
     "text": "ce",
     "label": "pronom démonstratif, m. sg.",
-    "steno": "s@ie",
+    "steno": "s@a",
     "strokeCount": 1
    },
    {
@@ -7454,12 +7401,10 @@
  {
   "text": "C'est celui qui parle bien.",
   "phonology": "s E s°.l8i ki paRl bj5",
-  "steno": "s-/* ie s@a/mt@ai ki paRl svRwaie",
+  "steno": "s* ie s@a/mt@ai ki paRl svRwaie",
   "strokes": [
    [
-    3
-   ],
-   [
+    3,
     10
    ],
    [
@@ -7502,8 +7447,8 @@
    {
     "text": "c'",
     "label": "pronom démonstratif",
-    "steno": "s-/*",
-    "strokeCount": 2
+    "steno": "s*",
+    "strokeCount": 1
    },
    {
     "text": "est",
@@ -7539,8 +7484,8 @@
  },
  {
   "text": "Je sais ce que tu veux.",
-  "phonology": "Z° sE s2 k° ty v2",
-  "steno": "vt@a sie/-k s@ie k@a t@i v@ie/-d",
+  "phonology": "Z° sE s° k° ty v2",
+  "steno": "vt@a sie/-k s@a k@a t@i v@ie/-d",
   "strokes": [
    [
     5,
@@ -7559,8 +7504,7 @@
    [
     3,
     11,
-    13,
-    14
+    12
    ],
    [
     2,
@@ -7598,7 +7542,7 @@
    {
     "text": "ce",
     "label": "pronom démonstratif, m. sg.",
-    "steno": "s@ie",
+    "steno": "s@a",
     "strokeCount": 1
    },
    {
@@ -7623,8 +7567,8 @@
  },
  {
   "text": "Elle a trouvé ce qu'elle cherchait.",
-  "phonology": "El a tRu.ve s2 k El SER.SE",
-  "steno": "iel a/* tR@e/ve s@ie k- iel pmieR/pmie",
+  "phonology": "El a tRu.ve s° k El SER.SE",
+  "steno": "iel *a tR@e/ve s@a k- iel pmieR/pmie",
   "strokes": [
    [
     13,
@@ -7632,10 +7576,8 @@
     23
    ],
    [
+    10,
     12
-   ],
-   [
-    10
    ],
    [
     7,
@@ -7650,8 +7592,7 @@
    [
     3,
     11,
-    13,
-    14
+    12
    ],
    [
     2
@@ -7685,8 +7626,8 @@
    {
     "text": "a",
     "label": "indicatif présent, 3e sg.",
-    "steno": "a/*",
-    "strokeCount": 2
+    "steno": "*a",
+    "strokeCount": 1
    },
    {
     "text": "trouvé",
@@ -7697,7 +7638,7 @@
    {
     "text": "ce",
     "label": "pronom démonstratif, m. sg.",
-    "steno": "s@ie",
+    "steno": "s@a",
     "strokeCount": 1
    },
    {
@@ -7722,8 +7663,8 @@
  },
  {
   "text": "Nous avons ce dont tu as besoin.",
-  "phonology": "nu a.v§ s2 d§ ty a b°.zw5",
-  "steno": "mR@e a/vai s@ie pvai t@i a/-d sv@a/twaie",
+  "phonology": "nu a.v§ s° d§ ty a b°.zw5",
+  "steno": "mR@e a/vai s@a pvai t@i a/-d sv@a/twaie",
   "strokes": [
    [
     6,
@@ -7742,8 +7683,7 @@
    [
     3,
     11,
-    13,
-    14
+    12
    ],
    [
     4,
@@ -7792,7 +7732,7 @@
    {
     "text": "ce",
     "label": "pronom démonstratif, m. sg.",
-    "steno": "s@ie",
+    "steno": "s@a",
     "strokeCount": 1
    },
    {
@@ -7959,16 +7899,14 @@
  {
   "text": "Cet arbre est très vieux.",
   "phonology": "sEt aRbR E tRE vj2",
-  "steno": "siet/* ajR ie tRie vRw@ie",
+  "steno": "s*iet ajR ie tRie vRw@ie",
   "strokes": [
    [
     3,
+    10,
     13,
     14,
     20
-   ],
-   [
-    10
    ],
    [
     12,
@@ -7998,8 +7936,8 @@
    {
     "text": "cet",
     "label": "adjectif démonstratif, m. sg.",
-    "steno": "siet/*",
-    "strokeCount": 2
+    "steno": "s*iet",
+    "strokeCount": 1
    },
    {
     "text": "arbre",
@@ -8030,7 +7968,7 @@
  {
   "text": "Celle-ci est ma préférée.",
   "phonology": "sEl si E ma pRe.fe.Re",
-  "steno": "siel si/* ie ma pRe/kpe/Re/-j",
+  "steno": "siel s*i ie ma pRe/kpe/Re/-j",
   "strokes": [
    [
     3,
@@ -8040,10 +7978,8 @@
    ],
    [
     3,
+    10,
     13
-   ],
-   [
-    10
    ],
    [
     13,
@@ -8081,8 +8017,8 @@
    {
     "text": "-ci",
     "label": "adverbe",
-    "steno": "si/*",
-    "strokeCount": 2
+    "steno": "s*i",
+    "strokeCount": 1
    },
    {
     "text": "est",
@@ -8107,7 +8043,7 @@
  {
   "text": "Celui-là appartient à mon père.",
   "phonology": "s°.l8i la a.paR.tj5 a m§ pER",
-  "steno": "s@a/mt@ai mta/* a/paR/tRwaie a mai pieR",
+  "steno": "s@a/mt@ai mt*a a/paR/tRwaie a mai pieR",
   "strokes": [
    [
     3,
@@ -8124,10 +8060,8 @@
    [
     6,
     7,
+    10,
     12
-   ],
-   [
-    10
    ],
    [
     12
@@ -8170,8 +8104,8 @@
    {
     "text": "-là",
     "label": "adverbe",
-    "steno": "mta/*",
-    "strokeCount": 2
+    "steno": "mt*a",
+    "strokeCount": 1
    },
    {
     "text": "appartient",
@@ -8544,7 +8478,7 @@
  {
   "text": "On dîne dehors.",
   "phonology": "§ din d2.OR",
-  "steno": "ai pvin/* pv@ie/eR",
+  "steno": "ai pv*in pv@ie/eR",
   "strokes": [
    [
     12,
@@ -8553,11 +8487,9 @@
    [
     4,
     5,
+    10,
     13,
     22
-   ],
-   [
-    10
    ],
    [
     4,
@@ -8581,8 +8513,8 @@
    {
     "text": "dîne",
     "label": "indicatif présent, 3e sg.",
-    "steno": "pvin/*",
-    "strokeCount": 2
+    "steno": "pv*in",
+    "strokeCount": 1
    },
    {
     "text": "dehors",
@@ -8705,7 +8637,7 @@
  {
   "text": "Elles montent là-haut.",
   "phonology": "El m§t la o",
-  "steno": "iel/* mait/-st mta/* ae/*#/*#",
+  "steno": "iel/-s mait/-st mt*a *ae#/*#",
   "strokes": [
    [
     13,
@@ -8713,7 +8645,7 @@
     23
    ],
    [
-    10
+    17
    ],
    [
     6,
@@ -8728,17 +8660,13 @@
    [
     6,
     7,
+    10,
     12
    ],
    [
-    10
-   ],
-   [
-    12,
-    14
-   ],
-   [
     10,
+    12,
+    14,
     15
    ],
    [
@@ -8750,7 +8678,7 @@
    {
     "text": "elles",
     "label": "pronom personnel, f. pl.",
-    "steno": "iel/*",
+    "steno": "iel/-s",
     "strokeCount": 2
    },
    {
@@ -8762,14 +8690,14 @@
    {
     "text": "là",
     "label": "adverbe",
-    "steno": "mta/*",
-    "strokeCount": 2
+    "steno": "mt*a",
+    "strokeCount": 1
    },
    {
     "text": "-haut",
     "label": "adverbe",
-    "steno": "ae/*#/*#",
-    "strokeCount": 3
+    "steno": "*ae#/*#",
+    "strokeCount": 2
    }
   ]
  },
@@ -9010,7 +8938,7 @@
  {
   "text": "On se repose l'après-midi.",
   "phonology": "§ s° R°.poz l a.pRE mi.di",
-  "steno": "ai s@a R@a/paenl mt- a/pRie mi/pvi",
+  "steno": "ai s*@a R@a/paenl mt- a/pRie mi/pvi",
   "strokes": [
    [
     12,
@@ -9018,6 +8946,7 @@
    ],
    [
     3,
+    10,
     11,
     12
    ],
@@ -9066,7 +8995,7 @@
    {
     "text": "se",
     "label": "pronom personnel",
-    "steno": "s@a",
+    "steno": "s*@a",
     "strokeCount": 1
    },
    {
@@ -9272,7 +9201,7 @@
  {
   "text": "Elles dansent toujours.",
   "phonology": "El d@s tu.ZuR",
-  "steno": "iel/* pv@s/-st t@e/vt@eR",
+  "steno": "iel/-s pv@s/-st t@e/vt@eR",
   "strokes": [
    [
     13,
@@ -9280,7 +9209,7 @@
     23
    ],
    [
-    10
+    17
    ],
    [
     4,
@@ -9309,7 +9238,7 @@
    {
     "text": "elles",
     "label": "pronom personnel, f. pl.",
-    "steno": "iel/*",
+    "steno": "iel/-s",
     "strokeCount": 2
    },
    {
@@ -9876,7 +9805,7 @@
  {
   "text": "Elles écoutent encore.",
   "phonology": "El e.kut @.kOR",
-  "steno": "iel/* e/k@et/-st @/keR",
+  "steno": "iel/-s e/k@et/-st @/keR",
   "strokes": [
    [
     13,
@@ -9884,7 +9813,7 @@
     23
    ],
    [
-    10
+    17
    ],
    [
     14
@@ -9912,7 +9841,7 @@
    {
     "text": "elles",
     "label": "pronom personnel, f. pl.",
-    "steno": "iel/*",
+    "steno": "iel/-s",
     "strokeCount": 2
    },
    {
@@ -10119,7 +10048,7 @@
  {
   "text": "Il peut aller à la gare.",
   "phonology": "il p2 a.le a la gaR",
-  "steno": "il p@ie/* a/mte/-R a mta ksaR",
+  "steno": "il p*@ie a/mte/-R a mta ksaR",
   "strokes": [
    [
     13,
@@ -10127,12 +10056,10 @@
    ],
    [
     4,
+    10,
     11,
     13,
     14
-   ],
-   [
-    10
    ],
    [
     12
@@ -10170,8 +10097,8 @@
    {
     "text": "peut",
     "label": "indicatif présent, 3e sg.",
-    "steno": "p@ie/*",
-    "strokeCount": 2
+    "steno": "p*@ie",
+    "strokeCount": 1
    },
    {
     "text": "aller",
@@ -11042,7 +10969,7 @@
  {
   "text": "Elles préfèrent rester ici.",
   "phonology": "El pRe.fER REs.te i.si",
-  "steno": "iel/* pRe/kpieR/-st Ries/te/-R i/si",
+  "steno": "iel/-s pRe/kpieR/-st Ries/te/-R i/si",
   "strokes": [
    [
     13,
@@ -11050,7 +10977,7 @@
     23
    ],
    [
-    10
+    17
    ],
    [
     4,
@@ -11093,7 +11020,7 @@
    {
     "text": "elles",
     "label": "pronom personnel, f. pl.",
-    "steno": "iel/*",
+    "steno": "iel/-s",
     "strokeCount": 2
    },
    {
@@ -11213,7 +11140,7 @@
  {
   "text": "Tu crois que c'est possible.",
   "phonology": "ty kRwa k° s E po.sibl",
-  "steno": "t@i kRwa/-d k@a s-/* ie pae/sijl",
+  "steno": "t@i kRwa/-d k@a s* ie pae/sijl",
   "strokes": [
    [
     7,
@@ -11235,9 +11162,7 @@
     12
    ],
    [
-    3
-   ],
-   [
+    3,
     10
    ],
    [
@@ -11278,8 +11203,8 @@
    {
     "text": "c'",
     "label": "pronom démonstratif",
-    "steno": "s-/*",
-    "strokeCount": 2
+    "steno": "s*",
+    "strokeCount": 1
    },
    {
     "text": "est",
@@ -11540,7 +11465,7 @@
  {
   "text": "Nous savons qu'ils viendront.",
   "phonology": "nu sa.v§ k il vj5.dR§",
-  "steno": "mR@e sa/vai/* k- il/-s vRwaie/pvRai/-st",
+  "steno": "mR@e sa/v*ai k- il/-s vRwaie/pvRai/-st",
   "strokes": [
    [
     6,
@@ -11554,11 +11479,9 @@
    ],
    [
     5,
+    10,
     12,
     13
-   ],
-   [
-    10
    ],
    [
     2
@@ -11600,8 +11523,8 @@
    {
     "text": "savons",
     "label": "indicatif présent, 1re pl.",
-    "steno": "sa/vai/*",
-    "strokeCount": 3
+    "steno": "sa/v*ai",
+    "strokeCount": 2
    },
    {
     "text": "qu'",
@@ -11717,7 +11640,7 @@
  {
   "text": "Elles pensent que nous avons oublié.",
   "phonology": "El p@s k° nu a.v§ u.blij.e",
-  "steno": "iel/* p@s/-st k@a mR@e a/vai @e/svmtij/e",
+  "steno": "iel/-s p@s/-st k@a mR@e a/vai @e/svmtij/e",
   "strokes": [
    [
     13,
@@ -11725,7 +11648,7 @@
     23
    ],
    [
-    10
+    17
    ],
    [
     4,
@@ -11775,7 +11698,7 @@
    {
     "text": "elles",
     "label": "pronom personnel, f. pl.",
-    "steno": "iel/*",
+    "steno": "iel/-s",
     "strokeCount": 2
    },
    {
@@ -11948,7 +11871,7 @@
  {
   "text": "Il nous a trouvés.",
   "phonology": "il nu a tRu.ve",
-  "steno": "il mR@e a/* tR@e/ve/-s",
+  "steno": "il mR@e *a tR@e/ve/-s",
   "strokes": [
    [
     13,
@@ -11961,10 +11884,8 @@
     14
    ],
    [
+    10,
     12
-   ],
-   [
-    10
    ],
    [
     7,
@@ -11996,8 +11917,8 @@
    {
     "text": "a",
     "label": "indicatif présent, 3e sg.",
-    "steno": "a/*",
-    "strokeCount": 2
+    "steno": "*a",
+    "strokeCount": 1
    },
    {
     "text": "trouvés",
@@ -12197,7 +12118,7 @@
  {
   "text": "Ils les ont vus hier.",
   "phonology": "il le § vy jER",
-  "steno": "il/-s mte ai/* v@i/-s RwieR",
+  "steno": "il/-s mte *ai v@i/-s RwieR",
   "strokes": [
    [
     13,
@@ -12212,11 +12133,9 @@
     14
    ],
    [
+    10,
     12,
     13
-   ],
-   [
-    10
    ],
    [
     5,
@@ -12250,8 +12169,8 @@
    {
     "text": "ont",
     "label": "indicatif présent, 3e pl.",
-    "steno": "ai/*",
-    "strokeCount": 2
+    "steno": "*ai",
+    "strokeCount": 1
    },
    {
     "text": "vus",
@@ -12423,8 +12342,8 @@
  },
  {
   "text": "Il veut sortir ce soir.",
-  "phonology": "il v2 sOR.tiR s2 swaR",
-  "steno": "il v@ie seR/tiR s@ie swaR",
+  "phonology": "il v2 sOR.tiR s° swaR",
+  "steno": "il v@ie seR/tiR s@a swaR",
   "strokes": [
    [
     13,
@@ -12449,8 +12368,7 @@
    [
     3,
     11,
-    13,
-    14
+    12
    ],
    [
     3,
@@ -12481,7 +12399,7 @@
    {
     "text": "ce",
     "label": "adjectif démonstratif, m. sg.",
-    "steno": "s@ie",
+    "steno": "s@a",
     "strokeCount": 1
    },
    {
@@ -12495,7 +12413,7 @@
  {
   "text": "Elle peut parler anglais.",
   "phonology": "El p2 paR.le @.glE",
-  "steno": "iel p@ie/* paR/mte/-R @/ksmtie",
+  "steno": "iel p*@ie paR/mte/-R @/ksmtie",
   "strokes": [
    [
     13,
@@ -12504,12 +12422,10 @@
    ],
    [
     4,
+    10,
     11,
     13,
     14
-   ],
-   [
-    10
    ],
    [
     4,
@@ -12546,8 +12462,8 @@
    {
     "text": "peut",
     "label": "indicatif présent, 3e sg.",
-    "steno": "p@ie/*",
-    "strokeCount": 2
+    "steno": "p*@ie",
+    "strokeCount": 1
    },
    {
     "text": "parler",
@@ -12845,7 +12761,7 @@
  {
   "text": "Elles doivent venir bientôt.",
   "phonology": "El dwav v°.niR bj5.to",
-  "steno": "iel/* pvwajs/-st v@a/mRiR svRwaie/tae",
+  "steno": "iel/-s pvwajs/-st v@a/mRiR svRwaie/tae",
   "strokes": [
    [
     13,
@@ -12853,7 +12769,7 @@
     23
    ],
    [
-    10
+    17
    ],
    [
     4,
@@ -12897,7 +12813,7 @@
    {
     "text": "elles",
     "label": "pronom personnel, f. pl.",
-    "steno": "iel/*",
+    "steno": "iel/-s",
     "strokeCount": 2
    },
    {
@@ -12923,7 +12839,7 @@
  {
   "text": "Je suis allé au marché.",
   "phonology": "Z° s8i a.le o maR.Se",
-  "steno": "vt@a s@ai a/mte/* ae maR/pme",
+  "steno": "vt@a s@ai a/mt*e ae maR/pme",
   "strokes": [
    [
     5,
@@ -12943,10 +12859,8 @@
    [
     6,
     7,
+    10,
     14
-   ],
-   [
-    10
    ],
    [
     12,
@@ -12979,8 +12893,8 @@
    {
     "text": "allé",
     "label": "participe passé, m. sg.",
-    "steno": "a/mte/*",
-    "strokeCount": 3
+    "steno": "a/mt*e",
+    "strokeCount": 2
    },
    {
     "text": "au",
@@ -13064,7 +12978,7 @@
  {
   "text": "Il est parti hier matin.",
   "phonology": "il E paR.ti jER ma.t5",
-  "steno": "il ie paR/ti/* RwieR ma/taie",
+  "steno": "il ie paR/t*i RwieR ma/taie",
   "strokes": [
    [
     13,
@@ -13081,10 +12995,8 @@
    ],
    [
     7,
+    10,
     13
-   ],
-   [
-    10
    ],
    [
     8,
@@ -13120,8 +13032,8 @@
    {
     "text": "parti",
     "label": "participe passé, m. sg.",
-    "steno": "paR/ti/*",
-    "strokeCount": 3
+    "steno": "paR/t*i",
+    "strokeCount": 2
    },
    {
     "text": "hier",
@@ -13271,7 +13183,7 @@
  {
   "text": "Nous sommes allés à la mer.",
   "phonology": "nu sOm a.le a la mER",
-  "steno": "mR@e sem a/mte/-s a mta mieR/*",
+  "steno": "mR@e sem a/mte/-s a mta m*ieR",
   "strokes": [
    [
     6,
@@ -13305,12 +13217,10 @@
    ],
    [
     6,
+    10,
     13,
     14,
     21
-   ],
-   [
-    10
    ]
   ],
   "words": [
@@ -13347,15 +13257,15 @@
    {
     "text": "mer",
     "label": "nom, f. sg.",
-    "steno": "mieR/*",
-    "strokeCount": 2
+    "steno": "m*ieR",
+    "strokeCount": 1
    }
   ]
  },
  {
   "text": "Vous êtes partis trop tôt.",
   "phonology": "vu Et paR.ti tRo to",
-  "steno": "v@e iet paR/ti/-s/* tRae tae",
+  "steno": "v@e iet paR/t*i/-s tRae tae",
   "strokes": [
    [
     5,
@@ -13374,13 +13284,11 @@
    ],
    [
     7,
+    10,
     13
    ],
    [
     17
-   ],
-   [
-    10
    ],
    [
     7,
@@ -13410,8 +13318,8 @@
    {
     "text": "partis",
     "label": "participe passé, m. pl.",
-    "steno": "paR/ti/-s/*",
-    "strokeCount": 4
+    "steno": "paR/t*i/-s",
+    "strokeCount": 3
    },
    {
     "text": "trop",
@@ -13510,7 +13418,7 @@
  {
   "text": "Elles sont venues seules.",
   "phonology": "El s§ v°.ny s9l",
-  "steno": "iel/* sai v@a/mR@i/-js s@l/-js",
+  "steno": "iel/-s sai v@a/mR@i/-js s@l/-js",
   "strokes": [
    [
     13,
@@ -13518,7 +13426,7 @@
     23
    ],
    [
-    10
+    17
    ],
    [
     3,
@@ -13554,7 +13462,7 @@
    {
     "text": "elles",
     "label": "pronom personnel, f. pl.",
-    "steno": "iel/*",
+    "steno": "iel/-s",
     "strokeCount": 2
    },
    {
@@ -13726,7 +13634,7 @@
  {
   "text": "Il se peigne les cheveux.",
   "phonology": "il s° pEN le S°.v2",
-  "steno": "il s@a pietn mte pm@a/v@ie/-s",
+  "steno": "il s*@a pietn mte pm@a/v@ie/-s",
   "strokes": [
    [
     13,
@@ -13734,6 +13642,7 @@
    ],
    [
     3,
+    10,
     11,
     12
    ],
@@ -13775,7 +13684,7 @@
    {
     "text": "se",
     "label": "pronom personnel",
-    "steno": "s@a",
+    "steno": "s*@a",
     "strokeCount": 1
    },
    {
@@ -13801,7 +13710,7 @@
  {
   "text": "Elle se lave les mains.",
   "phonology": "El s° lav le m5",
-  "steno": "iel s@a mtajs mte maie/-s",
+  "steno": "iel s*@a mtajs mte maie/-s",
   "strokes": [
    [
     13,
@@ -13810,6 +13719,7 @@
    ],
    [
     3,
+    10,
     11,
     12
    ],
@@ -13845,7 +13755,7 @@
    {
     "text": "se",
     "label": "pronom personnel",
-    "steno": "s@a",
+    "steno": "s*@a",
     "strokeCount": 1
    },
    {
@@ -14229,8 +14139,8 @@
  },
  {
   "text": "On dormira bien ce soir.",
-  "phonology": "§ dOR.mi.Ra bj5 s2 swaR",
-  "steno": "ai pveR/mi/Ra svRwaie s@ie swaR",
+  "phonology": "§ dOR.mi.Ra bj5 s° swaR",
+  "steno": "ai pveR/mi/Ra svRwaie s@a swaR",
   "strokes": [
    [
     12,
@@ -14262,8 +14172,7 @@
    [
     3,
     11,
-    13,
-    14
+    12
    ],
    [
     3,
@@ -14294,7 +14203,7 @@
    {
     "text": "ce",
     "label": "adjectif démonstratif, m. sg.",
-    "steno": "s@ie",
+    "steno": "s@a",
     "strokeCount": 1
    },
    {
@@ -14734,7 +14643,7 @@
  {
   "text": "Elle vous appelle demain.",
   "phonology": "El vu a.pEl d°.m5",
-  "steno": "iel v@e a/piel/* pv@a/maie",
+  "steno": "iel v@e a/p*iel pv@a/maie",
   "strokes": [
    [
     13,
@@ -14751,12 +14660,10 @@
    ],
    [
     4,
+    10,
     13,
     14,
     23
-   ],
-   [
-    10
    ],
    [
     4,
@@ -14787,8 +14694,8 @@
    {
     "text": "appelle",
     "label": "indicatif présent, 3e sg.",
-    "steno": "a/piel/*",
-    "strokeCount": 3
+    "steno": "a/p*iel",
+    "strokeCount": 2
    },
    {
     "text": "demain",
@@ -15079,7 +14986,7 @@
  {
   "text": "Elles arriveront à l'heure.",
   "phonology": "El a.Ri.v°.R§ a l 9R",
-  "steno": "iel/* a/Ri/v@a/Rai/-st a mt- @R",
+  "steno": "iel/-s a/Ri/v@a/Rai/-st a mt- @R",
   "strokes": [
    [
     13,
@@ -15087,7 +14994,7 @@
     23
    ],
    [
-    10
+    17
    ],
    [
     12
@@ -15126,7 +15033,7 @@
    {
     "text": "elles",
     "label": "pronom personnel, f. pl.",
-    "steno": "iel/*",
+    "steno": "iel/-s",
     "strokeCount": 2
    },
    {

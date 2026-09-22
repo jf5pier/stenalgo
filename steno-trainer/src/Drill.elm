@@ -19,7 +19,9 @@ import Set exposing (Set)
 {-| One drill item: a word's spelling plus ONE of its chords. A self-homograph
 spelling ("calmez" = impératif / indicatif présent) has several independently
 valid chords and so several items, told apart by `label` -- the grammatical
-reading(s) that item's chord writes (see `util/export_practice_words.py`).
+reading(s) that item's chord writes (see `util/export_practice_words.py`),
+and `before`/`after` the context words shown around it for that reading
+("la", "que tu", "!") -- display only, never typed.
 
 A practice sentence is the same shape -- `ortho` its text, `strokes` all its
 words' strokes in order -- plus one `Segment` per word, so the view can say
@@ -27,6 +29,8 @@ which word the next stroke belongs to (see `sentenceDecoder`). A single
 word has no segments. -}
 type alias PracticeWord =
     { ortho : String
+    , before : String
+    , after : String
     , label : String
     , phonology : String
     , steno : String
@@ -48,8 +52,10 @@ type alias Segment =
 
 wordDecoder : D.Decoder PracticeWord
 wordDecoder =
-    D.map6 PracticeWord
+    D.map8 PracticeWord
         (D.field "ortho" D.string)
+        (D.field "before" D.string)
+        (D.field "after" D.string)
         (D.field "label" D.string)
         (D.field "phonology" D.string)
         (D.field "steno" D.string)
@@ -74,8 +80,10 @@ segmentDecoder =
 sentenceDecoder : D.Decoder (List PracticeWord)
 sentenceDecoder =
     D.list
-        (D.map6 PracticeWord
+        (D.map8 PracticeWord
             (D.field "text" D.string)
+            (D.succeed "")
+            (D.succeed "")
             (D.succeed "")
             (D.field "phonology" D.string)
             (D.field "steno" D.string)
