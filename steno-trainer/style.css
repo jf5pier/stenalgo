@@ -66,6 +66,22 @@ body {
   margin-bottom: 0.5rem;
 }
 
+.target-sentence {
+  font-size: 1.8rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.sentence-word.done {
+  opacity: 0.4;
+}
+
+.sentence-word.current {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.mode-switch,
 .notation-toggle {
   font-size: 0.9rem;
 }

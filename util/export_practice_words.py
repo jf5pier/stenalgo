@@ -129,6 +129,20 @@ def buildReadingsByWord(
     return readingsByWord
 
 
+def chordsWithReadings(
+    word: Word, strokesList: list[Strokes], readingsByWord: dict[Word, list[list[Reading]]],
+) -> tuple[list[tuple[Strokes, list[Reading]]], bool]:
+    """Each of `word`'s final strokes paired with the reading(s) it writes, and whether
+    `buildReadingsByWord`'s readings lined up with the strokes. A word that isn't a
+    same-lemma homophone (or is misaligned) writes every one of its readings with every
+    stroke."""
+    readingsPerStroke = readingsByWord.get(word)
+    aligned = readingsPerStroke is None or len(readingsPerStroke) == len(strokesList)
+    if readingsPerStroke is None or not aligned:
+        readingsPerStroke = [wordFeatureCombinations(word)] * len(strokesList)
+    return list(zip(strokesList, readingsPerStroke)), aligned
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=DEFAULT_LIMIT,
@@ -149,15 +163,9 @@ def main() -> None:
     byOrthoSteno: dict[tuple[str, str], dict] = {}
     misalignedWords = 0
     for word, strokesList in finalTheory.items():
-        readingsPerStroke = readingsByWord.get(word)
-        if readingsPerStroke is not None and len(readingsPerStroke) != len(strokesList):
-            misalignedWords += 1
-            readingsPerStroke = None
-        if readingsPerStroke is None:
-            # Not a same-lemma homophone (or misaligned): every stroke writes every reading.
-            readingsPerStroke = [wordFeatureCombinations(word)] * len(strokesList)
-
-        for strokes, readings in zip(strokesList, readingsPerStroke):
+        chords, aligned = chordsWithReadings(word, strokesList, readingsByWord)
+        misalignedWords += not aligned
+        for strokes, readings in chords:
             steno = renderFinalStrokesToRTFCRE(starboard, strokes)
             label = formatReadingsLabel(word.gramCat, readings)
             existing = byOrthoSteno.get((word.ortho, steno))
