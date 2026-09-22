@@ -24,8 +24,8 @@ import json
 import os
 
 from src.ambiguitychecker import (
-    buildKeypressGroupExtraAlternates, buildKeypressGroupToWords, buildWordsByOrthoLemme, buildWordToStrokes,
-    realizeKeypressGroupsAsExtraStroke,
+    PREFERRED_KEYS_BY_MARKER, buildKeypressGroupExtraAlternates, buildKeypressGroupToWords, buildWordsByOrthoLemme,
+    buildWordToStrokes, realizeKeypressGroupsAsExtraStroke, resolvePreferredKeysByGroup,
 )
 from src.keyboard import Starboard
 from util._theoryio import loadFirstTheory
@@ -33,17 +33,6 @@ from util._theoryio import loadFirstTheory
 PHASE_G_PATH = "phase_g_keypress_assignment.json"
 RESOLVED_PRESS_SETS_PATH = "resolved_press_sets.json"
 OUTPUT_PATH = "phase_p_keypress_realization.json"
-
-# Human preference (2026-09-22 session), keyed by MARKER rather than Phase G's own group
-# id, since which markers Phase G bundles together (and under what id) can shift between
-# reruns -- whichever group ends up holding this marker gets steered toward this physical
-# key. `pers_3` on -t: mnemonic, many pers_3 verb forms end in a written "t". `impératif`
-# on -k and `pers_2` on -d: kept in that physical order, both ahead of pers_3's -t.
-PREFERRED_KEYS_BY_MARKER: dict[str, tuple[int, ...]] = {
-    "impératif": (18,),  # -k
-    "pers_2": (19,),     # -d
-    "pers_3": (20,),     # -t
-}
 
 
 def main() -> None:
@@ -76,11 +65,7 @@ def main() -> None:
     extraGroupSetsByWord = buildKeypressGroupExtraAlternates(
         resolvedGroups, markersByKeypress, wordToStrokes, wordsByOrthoLemme
     )
-    preferredKeysByGroup: dict[int, tuple[int, ...]] = {}
-    for marker, keys in PREFERRED_KEYS_BY_MARKER.items():
-        groupId = next((gid for gid, markers in markersByKeypress.items() if marker in markers), None)
-        if groupId is not None:
-            preferredKeysByGroup[groupId] = keys
+    preferredKeysByGroup = resolvePreferredKeysByGroup(markersByKeypress)
     assignment = realizeKeypressGroupsAsExtraStroke(
         groupToWords, theory, starboard,
         extraGroupSetsByWord=extraGroupSetsByWord, preferredKeysByGroup=preferredKeysByGroup,

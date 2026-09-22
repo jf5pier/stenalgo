@@ -911,6 +911,36 @@ class KeypressGroupPhysicalAssignment:
     preferredKeyHonoredByGroup: dict[int, bool] = field(default_factory=dict)
 
 
+# Human preference (2026-09-22 session) for Phase P's physical coda-bank key choice,
+# keyed by MARKER rather than a Phase G group id (which can shift between reruns as
+# bundling changes) -- shared by `util/build_phase_p_realization.py`'s diagnostic
+# artifact and `Dictionary.buildFinalTheory`'s real export, so both land on the same
+# physical keys. `pers_3` on -t: mnemonic, many pers_3 verb forms end in a written "t".
+# `impératif` on -k and `pers_2` on -d: kept in that physical order, both ahead of
+# pers_3's -t.
+PREFERRED_KEYS_BY_MARKER: dict[str, tuple[int, ...]] = {
+    "impératif": (18,),  # -k
+    "pers_2": (19,),     # -d
+    "pers_3": (20,),     # -t
+}
+
+
+def resolvePreferredKeysByGroup(
+    markersByKeypress: dict[int, frozenset[str]],
+    preferredKeysByMarker: dict[str, tuple[int, ...]] = PREFERRED_KEYS_BY_MARKER,
+) -> dict[int, tuple[int, ...]]:
+    """Resolve `preferredKeysByMarker`'s per-marker requests to whichever Phase G group
+    id actually holds that marker in THIS run (see `realizeKeypressGroupsAsExtraStroke`'s
+    `preferredKeysByGroup` parameter) -- a marker absent from `markersByKeypress`
+    (unpressable this run) is silently skipped."""
+    preferredKeysByGroup: dict[int, tuple[int, ...]] = {}
+    for marker, keys in preferredKeysByMarker.items():
+        groupId = next((gid for gid, markers in markersByKeypress.items() if marker in markers), None)
+        if groupId is not None:
+            preferredKeysByGroup[groupId] = keys
+    return preferredKeysByGroup
+
+
 def _isInScopeCollision(word1: Word, word2: Word) -> bool:
     """
     True only for a genuine same-lemmeGramCat collision -- two inflected forms of the
@@ -1229,6 +1259,40 @@ def buildFinalInducedStrokes(
             keys.update(assignment.chosenKeysByGroup.get(groupId, ()))
         finalInduced[word] = _appendCodaExtraStroke(strokes, tuple(sorted(keys))) if keys else strokes
     return finalInduced
+
+
+def buildExtraInducedStrokes(
+    theory: dict[Strokes, list[Word]],
+    assignment: KeypressGroupPhysicalAssignment,
+    extraGroupSetsByWord: dict[Word, list[frozenset[int]]],
+) -> dict[Word, list[Strokes]]:
+    """
+    A self-homograph word's OTHER readings (see `buildKeypressGroupExtraAlternates`,
+    `src.elicitation.resolveGroupPressSets` -- e.g. "calmez"'s indicatif reading, once
+    its impératif reading already drives `buildFinalInducedStrokes`' one stroke per
+    word), each composed into its own additional Strokes the same way
+    `buildFinalInducedStrokes` composes a word's primary stroke: its theory-1 base plus
+    that reading's own group-set's already-decided physical keys.
+
+    Deliberately NOT run through `composeReservedKeyStrokes` (the `*`/`#` cross-lemma
+    track): that track isn't wired into a self-homograph's alternates yet, matching
+    CLAUDE.md's own note that the cross-lemma track isn't yet wired into `dictionary.py`'s
+    persisted output at all -- an alternate stroke colliding with an unrelated lemma's
+    stroke is a pre-existing class of gap this function doesn't newly introduce.
+    """
+    wordToStrokes = buildWordToStrokes(theory)
+    extraByWord: dict[Word, list[Strokes]] = {}
+    for word, groupSets in extraGroupSetsByWord.items():
+        strokes: list[Strokes] = []
+        for groupSet in groupSets:
+            keys: set[int] = set()
+            for groupId in groupSet:
+                keys.update(assignment.chosenKeysByGroup.get(groupId, ()))
+            if keys:
+                strokes.append(_appendCodaExtraStroke(wordToStrokes[word], tuple(sorted(keys))))
+        if strokes:
+            extraByWord[word] = strokes
+    return extraByWord
 
 
 # ═══════════════════════════════════════════════════════════════════════════

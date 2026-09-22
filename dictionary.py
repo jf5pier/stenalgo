@@ -31,13 +31,16 @@ from typing import Any
 from src.keyboard import Keyboard, Starboard, Stroke, Strokes
 from src.cpsatsolver import optimizeKeyboard
 from src.ambiguitychecker import (
+    buildExtraInducedStrokes,
     buildFinalInducedStrokes,
+    buildKeypressGroupExtraAlternates,
     buildKeypressGroupToWords,
     buildWordsByOrthoLemme,
     buildWordToStrokes,
     composeReservedKeyStrokes,
     loadReform1990DoubletPairs,
     realizeKeypressGroupsAsExtraStroke,
+    resolvePreferredKeysByGroup,
 )
 
 
@@ -340,15 +343,23 @@ class Dictionary:
         self, theory: dict[Strokes, list[Word]], keyboard: Keyboard,
         phaseGPath: str = "phase_g_keypress_assignment.json",
         resolvedPressSetsPath: str = "resolved_press_sets.json",
-    ) -> dict[Word, Strokes]:
+    ) -> dict[Word, list[Strokes]]:
         """
-        Theory 2: every word's final resolved Strokes, composing theory 1 (buildTheory)
-        with Phase P's same-lemma coda-bank realization
-        (src.ambiguitychecker.realizeKeypressGroupsAsExtraStroke) and the `*`/`#`
-        lemma-homophone reserved-key track
-        (src.ambiguitychecker.composeReservedKeyStrokes) on top. Requires `phaseGPath`
-        (Phase G, `python -m util.build_phase_g_assignment`) and
-        `resolvedPressSetsPath` (Phase E, `python -m src.elicitation`) to already exist.
+        Theory 2: every word's final resolved Strokes -- a LIST, since a self-homograph
+        spelling (more than one valid reading, e.g. "calmez" = impératif or indicatif
+        présent -- see src.elicitation.resolveGroupPressSets) has more than one
+        independently-valid stroke, each identifying it without the others. Index 0 is
+        always the word's PRIMARY stroke: theory 1 (buildTheory) composed with Phase P's
+        same-lemma coda-bank realization (src.ambiguitychecker.realizeKeypressGroupsAsExtraStroke)
+        and the `*`/`#` lemma-homophone reserved-key track
+        (src.ambiguitychecker.composeReservedKeyStrokes) on top. Any further entries are
+        the word's OTHER readings (src.ambiguitychecker.buildExtraInducedStrokes),
+        reusing whatever physical keys the primary pass already decided -- NOT run
+        through the `*`/`#` track (that track isn't wired into a self-homograph's
+        alternates yet, the same scope boundary ROADMAP.md already notes for the
+        cross-lemma track generally). Requires `phaseGPath` (Phase G,
+        `python -m util.build_phase_g_assignment`) and `resolvedPressSetsPath` (Phase E,
+        `python -m src.elicitation`) to already exist.
         """
         with open(phaseGPath, encoding="utf-8") as f:
             phaseG = json.load(f)
@@ -361,21 +372,32 @@ class Dictionary:
         wordToStrokes = buildWordToStrokes(theory)
         wordsByOrthoLemme = buildWordsByOrthoLemme(theory)
         groupToWords = buildKeypressGroupToWords(resolvedGroups, markersByKeypress, wordToStrokes, wordsByOrthoLemme)
-        assignment = realizeKeypressGroupsAsExtraStroke(groupToWords, theory, keyboard)
+        extraGroupSetsByWord = buildKeypressGroupExtraAlternates(
+            resolvedGroups, markersByKeypress, wordToStrokes, wordsByOrthoLemme
+        )
+        preferredKeysByGroup = resolvePreferredKeysByGroup(markersByKeypress)
+        assignment = realizeKeypressGroupsAsExtraStroke(
+            groupToWords, theory, keyboard,
+            extraGroupSetsByWord=extraGroupSetsByWord, preferredKeysByGroup=preferredKeysByGroup,
+        )
         finalInduced = buildFinalInducedStrokes(theory, groupToWords, assignment)
-        return composeReservedKeyStrokes(finalInduced, loadReform1990DoubletPairs())
+        primaryComposed = composeReservedKeyStrokes(finalInduced, loadReform1990DoubletPairs())
+        extraByWord = buildExtraInducedStrokes(theory, assignment, extraGroupSetsByWord)
+        return {word: [strokes] + extraByWord.get(word, []) for word, strokes in primaryComposed.items()}
 
     def writeFinalTheory(
-        self, theory: dict[Strokes, list[Word]], finalTheory: dict[Word, Strokes],
+        self, theory: dict[Strokes, list[Word]], finalTheory: dict[Word, list[Strokes]],
         keyboard: Keyboard, filename: str,
     ) -> None:
         """
-        Writes `filename`: one row per word, its phonetic (theory 1) stroke and any
-        extra strokes Phase P/the */# track appended after it. Those extra strokes use
-        coda-bank and reserved (STAR_KEY/HASH_KEY) keys that carry no single assigned
-        phoneme, so `strokesToString` (phoneme-layer only) can't render them -- they're
-        written as raw key-index tuples instead, same as `build_phase_p_realization.py`
-        already reports `chosenKeys`.
+        Writes `filename`: one row per (word, reading) -- a self-homograph word (see
+        `buildFinalTheory`) gets one row per independently-valid stroke, all sharing the
+        same ortho/lemme/gramCat/base-strokes columns and differing only in
+        `extraStrokes`. Those extra strokes use coda-bank and reserved
+        (STAR_KEY/HASH_KEY) keys that carry no single assigned phoneme, so
+        `strokesToString` (phoneme-layer only) can't render them -- they're written as
+        raw key-index tuples instead, same as `build_phase_p_realization.py` already
+        reports `chosenKeys`.
         """
         wordToStrokes = buildWordToStrokes(theory)
         with open(filename, "w") as f:
@@ -383,9 +405,10 @@ class Dictionary:
             for word in sorted(finalTheory, key=lambda w: (w.lemme, w.gramCat.name, w.ortho)):
                 baseStrokes = wordToStrokes[word]
                 strokeString = keyboard.strokesToString(baseStrokes)
-                extraStrokes = finalTheory[word][len(baseStrokes):]
-                extraString = "/".join(",".join(str(key) for key in stroke) for stroke in extraStrokes)
-                _ = f.write(f"{word.ortho}\t{word.lemme}\t{word.gramCat.name}\t{strokeString}\t{extraString}\n")
+                for fullStrokes in finalTheory[word]:
+                    extraStrokes = fullStrokes[len(baseStrokes):]
+                    extraString = "/".join(",".join(str(key) for key in stroke) for stroke in extraStrokes)
+                    _ = f.write(f"{word.ortho}\t{word.lemme}\t{word.gramCat.name}\t{strokeString}\t{extraString}\n")
 
     def writeConstrainFiles(self, phonemesOrderFile: str = "phoneme_order.csv",
                             multiPhonemeAmbiguityFile: str = "multi_phoneme_ambiguity.csv") -> None:

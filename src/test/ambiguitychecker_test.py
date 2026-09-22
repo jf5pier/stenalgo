@@ -28,6 +28,7 @@ from src.ambiguitychecker import (
     computeClusterSizeDistribution,
     computeOverflowFrequencyMass,
     buildAtomicFeatureToWords,
+    buildExtraInducedStrokes,
     buildKeypressGroupExtraAlternates,
     buildKeypressGroupToWords,
     buildWordsByOrthoLemme,
@@ -1043,3 +1044,26 @@ class TestRealizeKeypressGroupsAsExtraStrokeWithExtraAlternates:
         )
         collidingPairs = [frozenset(pair) for pair in assignment.residualCollisions]
         assert frozenset({wCalmez, wOther}) in collidingPairs
+
+
+class TestBuildExtraInducedStrokes:
+
+    def test_composes_each_extra_alternate_using_already_decided_keys(self):
+        wCalmez = _make_word(ortho="calmez", lemme="calmer", gramCat=GramCat.VER)
+        theory = {((1,),): [wCalmez]}
+        assignment = KeypressGroupPhysicalAssignment(chosenKeysByGroup={0: (2,), 1: (3,)})
+        extraGroupSetsByWord = {wCalmez: [frozenset({1})]}
+        result = buildExtraInducedStrokes(theory, assignment, extraGroupSetsByWord)
+        assert result == {wCalmez: [((1,), (3,))]}
+
+    def test_words_with_no_extra_alternates_are_absent(self):
+        assert buildExtraInducedStrokes({}, KeypressGroupPhysicalAssignment(), {}) == {}
+
+    def test_skips_an_alternate_whose_group_never_got_a_key(self):
+        """A group left unassigned (see `KeypressGroupPhysicalAssignment.unassignedGroups`)
+        contributes no keys -- an alternate needing only that group is silently skipped
+        rather than producing a bare (unmarked) stroke identical to the word's own base."""
+        w = _make_word()
+        theory = {((1,),): [w]}
+        assignment = KeypressGroupPhysicalAssignment(chosenKeysByGroup={})
+        assert buildExtraInducedStrokes(theory, assignment, {w: [frozenset({0})]}) == {}
