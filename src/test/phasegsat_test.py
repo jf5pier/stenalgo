@@ -368,3 +368,63 @@ def test_minKeypressesSatWithPriorities_exclusiveGroupPreference_keeps_outsiders
     assert achieved[1] == 0  # and nothing else intrudes on their keypress
     assert colorOf["d"] != colorOf["pers_2"]
     assert verifyKeypressAssignment(pressSetsByGroup, colorOf) == []
+
+
+# ── breakTiesAlphabetically (deterministic canonicalization among remaining ties) ────
+
+def test_breakTiesAlphabetically_picks_alphabetical_order_onto_ascending_keys():
+    """Three markers forced pairwise apart, with nothing else distinguishing WHICH gets
+    which keypress (fully symmetric otherwise) -- the tie-break should deterministically
+    land the alphabetically-earliest marker on keypress 0, the next on 1, and so on."""
+    pressSetsByGroup = {
+        "g1": {"w1": [frozenset()], "w2": [frozenset({"z"})]},
+        "g2": {"w3": [frozenset()], "w4": [frozenset({"y"})]},
+        "g3": {"w5": [frozenset()], "w6": [frozenset({"x"})]},
+    }
+    mustDifferGroups = frozenset({frozenset({"x", "y", "z"})})
+    numKeys, colorOf, _achieved = minKeypressesSatWithPriorities(
+        pressSetsByGroup, [], mustDifferGroups=mustDifferGroups
+    )
+    assert numKeys == 3
+    assert colorOf == {"x": 0, "y": 1, "z": 2}
+
+
+def test_breakTiesAlphabetically_is_reproducible_across_repeated_calls():
+    pressSetsByGroup = {
+        "g1": {"w1": [frozenset()], "w2": [frozenset({"z"})]},
+        "g2": {"w3": [frozenset()], "w4": [frozenset({"y"})]},
+        "g3": {"w5": [frozenset()], "w6": [frozenset({"x"})]},
+    }
+    mustDifferGroups = frozenset({frozenset({"x", "y", "z"})})
+    results = [
+        minKeypressesSatWithPriorities(pressSetsByGroup, [], mustDifferGroups=mustDifferGroups)
+        for _ in range(5)
+    ]
+    assert len({tuple(sorted(colorOf.items())) for _numKeys, colorOf, _achieved in results}) == 1
+
+
+def test_breakTiesAlphabetically_never_overrides_a_real_preference():
+    """The tie-break is strictly lower priority than every real preference tier: 'a'
+    prefers to share with 'b' (an explicit SameKeyPreference) even though alphabetical
+    order alone would put 'a' before 'b' on separate ascending keys."""
+    pressSetsByGroup = {
+        "g1": {"w1": [frozenset()], "w2": [frozenset({"a"})]},
+        "g2": {"w3": [frozenset()], "w4": [frozenset({"b"})]},
+    }
+    numKeys, colorOf, achieved = minKeypressesSatWithPriorities(
+        pressSetsByGroup, [SameKeyPreference(frozenset({frozenset({"a", "b"})}))]
+    )
+    assert achieved == [1]
+    assert colorOf["a"] == colorOf["b"]
+
+
+def test_breakTiesAlphabetically_can_be_disabled():
+    pressSetsByGroup = {
+        "g1": {"w1": [frozenset()], "w2": [frozenset({"z"})]},
+        "g2": {"w3": [frozenset()], "w4": [frozenset({"y"})]},
+    }
+    mustDifferGroups = frozenset({frozenset({"y", "z"})})
+    numKeys, colorOf, _achieved = minKeypressesSatWithPriorities(
+        pressSetsByGroup, [], mustDifferGroups=mustDifferGroups, breakTiesAlphabetically=False
+    )
+    assert colorOf["y"] != colorOf["z"]  # still a valid assignment, just not canonicalized
