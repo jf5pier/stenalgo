@@ -648,7 +648,7 @@
    "keyNames": [
     "-d"
    ],
-   "label": "futur, passé, 3e personne"
+   "label": "2e personne"
   },
   {
    "keys": [
@@ -657,7 +657,7 @@
    "keyNames": [
     "-t"
    ],
-   "label": "imparfait, 2e personne"
+   "label": "futur, passé, 3e personne"
   },
   {
    "keys": [
@@ -666,7 +666,16 @@
    "keyNames": [
     "-R"
    ],
-   "label": "conditionnel, infinitif, subjonctif"
+   "label": "conditionnel, infinitif"
+  },
+  {
+   "keys": [
+    23
+   ],
+   "keyNames": [
+    "-l"
+   ],
+   "label": "imparfait, subjonctif"
   }
  ]
 }

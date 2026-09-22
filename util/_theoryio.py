@@ -49,13 +49,14 @@ def loadFinalTheory(
     keyboard: Keyboard,
     phaseGPath: str = "phase_g_keypress_assignment.json",
     resolvedPressSetsPath: str = "resolved_press_sets.json",
-) -> dict[Word, Strokes]:
+) -> dict[Word, list[Strokes]]:
     """
-    Theory 2: every word's final resolved Strokes -- theory 1 composed with Phase P's
-    same-lemma coda-bank marks and the `*`/`#` lemma-homophone track (see
-    `Dictionary.buildFinalTheory`, `ROADMAP.md`'s "Status update"). This is what
-    actually disambiguates homophones like "a"/"as"/"à" -- `loadFirstTheory` alone
-    does not.
+    Theory 2: every word's final resolved Strokes -- a LIST, since a self-homograph
+    spelling (e.g. "calmez") has more than one independently-valid stroke; index 0 is
+    always the primary one. Theory 1 composed with Phase P's same-lemma coda-bank marks
+    and the `*`/`#` lemma-homophone track (see `Dictionary.buildFinalTheory`,
+    `ROADMAP.md`'s "Status update"). This is what actually disambiguates homophones like
+    "a"/"as"/"à" -- `loadFirstTheory` alone does not.
 
     Requires `phaseGPath` (`python -m util.build_phase_g_assignment`) and
     `resolvedPressSetsPath` (`python -m src.elicitation`) to already exist.

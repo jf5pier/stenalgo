@@ -40,9 +40,15 @@ def main() -> None:
     finalTheory = loadFinalTheory(starboard)
 
     stenoToWords: dict[str, list[Word]] = defaultdict(list)
-    for word, strokes in finalTheory.items():
-        steno = renderFinalStrokesToRTFCRE(starboard, strokes)
-        stenoToWords[steno].append(word)
+    for word, strokesList in finalTheory.items():
+        for strokes in strokesList:
+            steno = renderFinalStrokesToRTFCRE(starboard, strokes)
+            # A self-homograph word's own several strokes (see loadFinalTheory) should
+            # always render distinct steno strings -- guard against counting the same
+            # word twice under one steno as a spurious 1-word "collision" if they ever
+            # coincide.
+            if word not in stenoToWords[steno]:
+                stenoToWords[steno].append(word)
 
     stenoDict: dict[str, str] = {}
     collisions: list[tuple[str, list[str]]] = []

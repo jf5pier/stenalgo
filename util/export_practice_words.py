@@ -50,7 +50,13 @@ def main() -> None:
 
     byOrtho: dict[str, tuple[str, list[list[int]], Word]] = {}
     orthoCollisions = 0
-    for word, strokes in finalTheory.items():
+    for word, strokesList in finalTheory.items():
+        # A self-homograph word (see loadFinalTheory) has more than one independently
+        # valid stroke; the trainer has no way yet to show WHICH grammatical reading a
+        # drill expects (RESUME_2026-09-21-steno-trainer.md item 1), so only the
+        # primary reading is exported here for now -- exposing the others would just
+        # make that existing ambiguity worse, not better.
+        strokes = strokesList[0]
         steno = renderFinalStrokesToRTFCRE(starboard, strokes)
         keyIndexStrokes = [sorted(set(stroke)) for stroke in strokes]
 
