@@ -4,15 +4,14 @@
 Discriminating-Feature Grouping (Grouping Phase) — CP-SAT exact minimum-K search (see
 ATOMIC_KEYPRESS_REWIRE_PLAN.md's Phase G section: "Phase G is only greedy-optimal, not
 proven-minimal... reusing _colorFeatures/_minSpecialKeypressesNeeded's scaffolding... to
-search for something smaller than K=6/7"). `src/featuregrouping.py`'s `greedyColorMarkers`
-finds *a* feasible K but gives no guarantee it's the smallest possible; this module proves the
+search for something smaller than K=6/7"). The earlier greedy coloring (removed) found *a*
+feasible K but gave no guarantee it was the smallest possible; this module proves the
 minimum exactly (or proves a candidate K infeasible), by direct search rather than by reusing
 `_colorFeatures` itself -- that scaffolding's "conflict" semantics (at most one member
 of a feature SET may share a key) is the wrong shape for the Grouping Phase's actual constraint,
 which is per-cluster set-DISTINCTNESS over induced press-sets (see module docstring
 below and `featuregrouping.verifyKeypressAssignment`, the ground truth this mirrors exactly --
-not the pairwise `coOccurrencePairs`/`wouldCollideIfMergedPairs` pre-checks, which are
-a greedy-only optimization, not part of the real constraint).
+not a pairwise pre-check, which was a greedy-only optimization, not part of the real constraint).
 
 Scaling: the real lexicon has 47,799 homophone groups, but only their *signature* --
 the set of distinct true press-sets held by their spellings -- matters to the coloring
@@ -428,7 +427,7 @@ def minKeypressesSat(
     assigned without any homophone group's induced press-sets colliding -- scans
     numKeys = 1, 2, ... and returns the first CP-SAT proves feasible, so the result is
     a proof of minimality (every smaller numKeys was proven infeasible), not a greedy
-    upper bound like `featuregrouping.runFeatureGrouping`'s. `mustShareKey` (see `_feasibleAssignment`)
+    upper bound. `mustShareKey` (see `_feasibleAssignment`)
     pins specific marker pairs onto the same keypress throughout the scan; `aloneKeys`
     forces a marker to share its keypress with nothing else; `mustDifferGroups` forces
     every pair within a group onto different keypresses -- all HARD constraints applied
