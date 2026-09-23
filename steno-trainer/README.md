@@ -8,9 +8,12 @@ real-time correct/incorrect feedback per stroke -- with or without the chord
 shown as a hint. A definition mode looks up any spelling's homophones, with
 their readings, pronunciations and chords.
 
-MVP scope, deliberately: no progress tracking/persistence, no lesson
-curation, no WPM stats. Reloading the page always restarts at the most
-frequent word.
+Modes: **Words** (the 10000 most frequent drill items, shuffled, each shown
+with context words -- "la maison", "que tu viennes", "parle !"), **Sentences**
+(217 short sentences, word by word) and **Definitions** (look up a spelling's
+homophones). A hints toggle hides the expected chord and keys; an X-SAMPA/IPA
+toggle switches every phoneme on the page. Deliberately no progress
+tracking/persistence and no WPM stats: reloading starts a fresh shuffle.
 
 ## Stack
 
