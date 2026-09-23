@@ -113,3 +113,25 @@ Interactive Triage (Pass 4) complete 2026-09-23.
 - p5-10 | execution | **main thread**, one commit per group, pytest after each, full md5 rebuild at end.
 - p5-11 | greedyOptimizeDiscriminator + _consistencyScore (no caller at all) | **Remove** with p5-2; greedyoptimizer.py keeps only GRAMCAT_PRIORITY (not moved).
 - p5-3 (revised) | Phase 0 diagnostic scope | **Part 2 only** (atomic-feature search: _selectCanonicalIndex, buildAtomicFeatureToWords, _appendCodaAddition, _isFeasibleAddition, FeatureKeypressFeasibility, findFeatureKeypresses, ComposedChordReport, checkComposedChords, findCollidingNewAdditions, __main__ Part 2, FEATURE_PRIORITY, B39/B40). Part 1 metric + ambiguityIgnoreList.tsv kept; PIPELINE documents it as a hand-run check after S5 (its 'overflow' = old 4-slot */# budget).
+
+## Doc Rewrite (Pass 6) launch decisions (2026-09-23)
+- p6-1 | execution | **2 agents**: one writes docs/ARCHITECTURE.md, one writes README.md + docs/PRIOR_ART.md; ROADMAP.md, TODO.md, CLAUDE.md and all surgical PIPELINE/GLOSSARY/spec edits in the main thread.
+- p6-2 | leftovers | **Delete** scratch/lemma_pair_exemption.py (result shipped in loadReform1990DoubletPairs), old_feature_discrimination (stale satOptimizeDiscriminator dump, missed by inventory D), feature_keypress_feasibility.tsv (writer removed in Pass 5). steno-trainer/user.json + user_fr.json: **keep as-is, untracked, no gitignore** (user declined).
+- p6-3 | proof script | **git add scratch/combined_regret.py**; docstring states what it reproduces + links star-hash-marking.md §2 (t-d2 open detail closed).
+- p6-4 | .py comment repoints | **apply all 18** (comment-only): REWIRE_PLAN/RESUME cites → docs/specs/* or docs/GLOSSARY.md, or cite dropped with the fact kept (lexique.py:69, featureextractor.py:264/:294, build_keypress_groups.py:26).
+- p6-5 | design decision #4 | fusion-bug item dies everywhere (host code removed in Pass 5, t-t2); not carried into the new ROADMAP (interpretation of t-m3's "#4 deferred").
+- p6-6 | root GLOSSARY.md | git rm (its own header: superseded by docs/GLOSSARY.md, kept only until Interactive Triage (Pass 4), which is done).
+- p6-7 | keymap diagrams | **Main-thread correction of t-r2/t-r3's premise:** inventory A's "Matches `starboard3h.json`'s committed layout" was wrong — the old README diagrams are the traditional English (Ireland) reference keymap, not the project layout. ARCHITECTURE.md and the README now carry the **true** render, generated from `starboard3h.json` by `Starboard.printLayout` (src/keyboard.py:395); the Ireland diagram is dropped.
+- p6-8 | Morphalou path | corrected to the code default `morphalou/Morphalou3.1_CSV.csv` (README agent finding; both the file and the `--morphalou` default agree; the `5/` subfolder only holds the download archives). PIPELINE and ARCHITECTURE updated to match; source: [Ortolang repository](https://repository.ortolang.fr).
+- p6-9 | call-id gap | S6.Elicitation.7 removed with its script; ids 8-12 kept stable (44 citations) with a stability note in PIPELINE's "How to read it".
+- p6-10 | 19th repoint | link check found one more cite the inventory missed (`DESIGN_alternate_press_sets.md §4` at src/ambiguitychecker.py:654) — repointed with the approved batch.
+- p6-11 | ROADMAP open questions | renumbered 1-4 (old 1/3/8/9 per t-m5); old #4 (theory.tsv fate) treated as resolved-by-shipping alongside theory2.tsv; fusion bug (#4 of the design decisions) dead per p6-5.
+
+## Doc Rewrite (Pass 6) close (2026-09-23)
+- Written: docs/ARCHITECTURE.md (new), docs/PRIOR_ART.md (new), README.md (86 lines), ROADMAP.md
+  (forward-only, 4 phases + open decisions/questions + ideas), TODO.md (new; todo.md git rm'd),
+  CLAUDE.md (compact stages + verification), PIPELINE.md ("Recomputing after a fix" section,
+  removed-code entries dropped, coverage-first + Morphalou lines, ambiguity-report note),
+  GLOSSARY.md (Regret entry, stale-note drops), both specs (regret=gap, buckets-2/3 caveat,
+  17.6 % figure). 19 comment-only .py repoints (AST-verified code-identical; pytest 522).
+  All approved deletions executed; scratch/combined_regret.py tracked.
