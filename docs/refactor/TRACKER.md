@@ -69,5 +69,5 @@ Put these false-positive traps in its prompt, and spot-check its "dead" verdicts
 - Doc Rewrite (Pass 6) link check: `src/ambiguitychecker.py` still cites
   `RESUME_2026-09-20-starhash-priority.md` (:86, :99); point those at `docs/specs/star-hash-marking.md`
   if the RESUME file is deleted.
-- Doc Rewrite (Pass 6) overrides from triage: **no docs/RECOMPUTE.md** (merge into PIPELINE, t-c3);
+- Doc Rewrite (Pass 6): do NOT file B39/B40 (their code was removed in Pass 5, p5-3). Overrides from triage: **no docs/RECOMPUTE.md** (merge into PIPELINE, t-c3);
   new **docs/PRIOR_ART.md** (t-m4); todo.md gets B36–B42 (t-t1, t-b2, t-x2, t-x3); define "regret" (t-d2).
