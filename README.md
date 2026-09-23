@@ -1,258 +1,86 @@
 ![Stenalgo](images/Stenalgo.png)
-Stenotype keyboard layout and theory generator
 
+Stenotype keyboards offer a limited keyset where several keys are pressed at once, forming
+a stroke; a software layer implementing a *theory* translates strokes into words. Cheap
+programmable keyboards now exist, so a hobbyist has little reason to learn a century-old
+layout if a better one can be generated ([Open Steno Project](https://openstenoproject.org)).
+Stenalgo is such a generator for French, built with constraint programming (Google OR-Tools
+CP-SAT) and targeting the 26-key Starboard keyboard: it generates the keymap and the
+matching theory together, for a lexicon of 167,639 words merged from a 136,456-row mixed
+lexicon built out of Lexique383 [[1]](#1) and LexiqueInfra [[3]](#3).
 
-## Objective
+## Status
+- **Layout mapped** — `starboard3h.json`, a committed working phoneme-to-key mapping (22 non-reserved keys).
+- **Theory 1 built** — one phonetic stroke per syllable; homophones share one raw stroke sequence.
+- **Same-lemma homophones done** — Homophone Groups (same lemma and category, `dors`/`dort`) get
+  feature discriminating strokes from the elicited feature sets ([spec](docs/specs/discriminating-features.md)).
+- **Different-lemma homophones done** — lemma-homophones (`ver`/`vert`/`verre`) get star/hash
+  marks on the reserved keys ([spec](docs/specs/star-hash-marking.md)).
+- **Not done yet** — dictionary densification (conjugation tables, prefixes) and the personal
+  theory layer; see [ROADMAP.md](ROADMAP.md).
 
-Using some optimization algorithms, evolve a stenograph keymap layout that minimize complexity of the theory for a given language. 
+## Design goals
+Minimize finger strain — keystrokes per stroke and per word, weighted per finger and key
+position — and mental strain: phoneme-ordered strokes, few ambiguities and exceptions. Full
+rationale and phoneme-order/keymap tables: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
-## Context
-
-Stenograph keyboards present a limited keyset where multiple keys are pressed at the same time, forming a stroke that represent
-one or more phoneme / syllable in a word. Steno machines were once proprietary and expensive, but cheaper options are now available
-through custom keyboards using popular mechanical keyboards parts and software or firmware interpreter. Those new keyboards are
-programmable, so it is not needed to stick to the original century-old phoneme-keymap layout.
-
-Visit the [Open Steno Project](https://openstenoproject.org) for an in depth introduction to the subject.
-
-For hobbists, there is little added benefit to learning a traditional steno layout if better layouts can be generated. Steno keyboards
-are not common and it is unlikely that one will need to use a steno keyboard that is not his own. 
-
-This project aims at generating keymaps and theories for any keyboard layout (number and arrangement of key switches) based on some
-keyboard constrains (prefered keys) and using a multi-dimensional optimization approach. 
-
-## Introduction
-
-Stenotyping is done on custom (minimal keys) keyboards. The user simultaneously presses multiple keys to form syllables or groups of syllables.
-The fingers move as little as possible, but each can press multiple keys situated on the same column, or adjacent columns to the pinky or
-index fingers.
-
-Those keypresses (or stroke) are interpreted by a software layer implementing a Theory. The theory translate the stroke or group of strokes into
-one or multiple words.
-
-The theory must closely match the syllable(s) pressed to the typed word(s), otherwise learning and remebering the corresponding keypress will
-be difficult. It must also distinguish between words that have the same pronunciation, but different spellings (homophones). 
-
-The best theory for a lexicon is as easy to learn and easy to use.
-
-## Minimizing complexity
-
-The algorithm will generate multiple keymap and theory pairs for a given keyboard layout, physiognomical constrains and lexicon. Those
-keymap-theory will be scored based on the strain and complexity in the following ways :
-
-### Finger strain 
-
-The average number of keystroke must be minimized :
-- Strokes containing less keystrokes are preferable
-- Words containing less strokes are preferable
-- Common words should contain less strokes than rarely used words
-- Movement of fingers should be minimized
-- Pressing fewer keys per finger is preferable
-
-### Mental strain
-
-The mapping of keys to the sound they represent must be coherent :
-- Phonemes must have a maximum of one canonical representation on the keyboard, one key-set of a stroke (todo: validate)
-- Syllables must have the minimum number of stroke representation (variations) on the keyboard to distinguish between the different spellings
-- Rules (stroke variations) to distinguish between spelling of a syllable must be consistent across a maximum of words sharing that syllable
-- As much as possible, the order in wich phonemes are typed must match the order they occure in the syllable
-
-Words that do not respect an established rule are deemed an exception
-- The number of exceptions must be minimized
-
-### Steps and progress
-#### A suitable lexicon must be built. [x]
-The French language Lexique version 383 was used as a base [[1]](#1) [[2]](#2). This lexicon version provides Word orthograph, phonology, 
-Consonant-Vowel breakdow and phonological syllable breakdown (ex.: Manger - To eat, m@Ze, CV-CV, m@-Ze). Most importantly, it offers the 
-words frequency extracted from 2 differnt corpus : Written French books and French movies subtitle.  It is however incomplete in regards to 
-the grapheme (spelling) breakdown of syllable with only 2/3 of the words providing a breakdown allowing to map phonetic syllables to written 
-syllables.
-
-A second lexicon, LexiqueInfra [[3]](#3), was used to build graphem representations of the syllable (ex.: Manger, man-ger). This lexicon provides phoneme-grapheme 
-associations for 137k of the 142k words of Lexique383. The final lexicon [`resources/LexiqueMixte.tsv`](resources/LexiqueMixte.tsv) was built by [`lexique.py`](lexique.py) and contains 
-136,348 French words with corpus frequencies and both phoneme and grapheme syllable breakdowns. 
-
-
-#### Phoneme and biphoneme frequencies must be extracted [x]
-Typically, the order of the phonemes (from left to right) typed to form a stroke must ressemble the order of the phonemes in the syllable.
-Ordered biphoneme frequencies informs on the order the phonemes should be placed on the keymap. For this example, we assumed that the typical
-order of the keys on the keymap would be the 3 groups of phonemes : Left-consonants -> Vowels -> Right-consonants.  In linquistic parlance, 
-these phoneme groups are called the Onset, Nucleus and Coda components of a [syllable](https://en.wikipedia.org/wiki/Syllable#Grouping_of_components).
-
-While pairs of phonemes (biphonemes) frequencies inform on the order of the phonemes, single-phoneme frequencies inform on the importance of the phoneme. 
-Here is a representation of a phoneme order for all 3 groups of phonemes that minimize the frequency of strokes where the phones are in the wrong order. 
-Bar charts represent the frequency of the individual phonemes in each of the 3 groups.
-
-
-##### Example of optimal phonemes order for the left hand (Onset), thumb vowels (Nucleus) and right hand (Coda)
+## Optimized single-key phoneme keymap
+Generated from `starboard3h.json` and may drift from it; the 2-keypress layer and the full
+tables live in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Blank keys are reserved
+(`*`/`#` carry the star/hash marks; 0/1 are held for a possible third mark).
 
 ```
-Left hand optimization :
-
-Best order (ordered score 91215.1, disordered score -1400.5):
- dksptSgNxvZmzfnblRwj
-
-Left hand (syllable onset) consonant optimization :
-┃                  R   ┃   ┃
-┃                  R   ┃   ┃
-┃                  R   ┃   ┃
-┃     t            R   ┃   ┃
-┃   spt            R   ┃   ┃
-┃   spt      m     R   ┃   ┃
-┃ dkspt    v m    lR   ┃   ┃
-┃ dkspt    v m    lR j ┃   ┃
-┃ dkspt    v m fnblR j ┃   ┃
-┃ dksptSg  vZmzfnblRwj ┃   ┃
-┃ dksptSgNxvZmzfnblRwj ┃ G ┃
-┗━━━━━━━━━━━━━━━━━━━━━━╋━━━┛
-               ordered ┃ floating 
-
-Right hand optimization :
-
-Best order (ordered score 15522.8, disordered score -5759.7):
- wjbpfvdsktgRlzNmnSZ
-
-┃            R        ┃   ┃
-┃            R        ┃   ┃
-┃            R        ┃   ┃
-┃            R        ┃   ┃
-┃            R        ┃   ┃
-┃            R        ┃   ┃
-┃            R        ┃   ┃
-┃        s t R        ┃   ┃
-┃        s t Rl       ┃   ┃
-┃  j    dskt Rl       ┃   ┃
-┃ wjbpfvdsktgRlzNmnSZ ┃ G ┃
-┗━━━━━━━━━━━━━━━━━━━━━╋━━━┛
-              ordered ┃ floating 
-
-Vowel optimization :
-
-Best order (ordered score 6599.0, disordered score 0.0):
- 8§i5ea9o2@OE
-
-┃      a       ┃      ┃
-┃      a       ┃      ┃
-┃     ea       ┃      ┃
-┃   i ea     E ┃      ┃
-┃   i ea     E ┃      ┃
-┃   i ea     E ┃      ┃
-┃   i ea   @ E ┃      ┃
-┃   i ea o @ E ┃      ┃
-┃  §i ea o @ E ┃ °uy  ┃
-┃  §i5ea o @OE ┃ °uy  ┃
-┃ 8§i5ea9o2@OE ┃ °uy1 ┃
-┗━━━━━━━━━━━━━━╋━━━━━━┛
-       ordered ┃ floating 
+┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓         ┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓
+┃     ┃  k  ┃  p  ┃  m  ┃  R  ┃     ┃         ┃     ┃ jbw ┃  k  ┃  t  ┃  n  ┃ ZG  ┃
+┣━━━━━╋━━━━━╋━━━━━╋━━━━━╋━━━━━┫     ┃         ┃     ┣━━━━━╋━━━━━╋━━━━━╋━━━━━╋━━━━━┫
+┃     ┃  s  ┃  v  ┃  t  ┃ wNG ┃     ┃         ┃     ┃  s  ┃  d  ┃  R  ┃  l  ┃  m  ┃
+┗━━━━━┻━━━━━┻━━━━━┻━━━━━┻━━━┳━┻━━━┳━┻━━━┓ ┏━━━┻━┳━━━┻━┳━━━┻━━━━━┻━━━━━┻━━━━━┻━━━━━┛
+  ┃  1-key phonemes layer   ┃ @9  ┃  a  ┃ ┃  i  ┃ eO  ┃
+  ┗━━                       ┗━━━━━┻━━━━━┛ ┗━━━━━┻━━━━━┛
 ```
-
-Negative (disordered) score represent the sum of frequencies of biphonemes that would be in the wrong order. In the case of the right hand
-consonants, the 25% disorded to 75% orderded ratio is mainly due to the "R" biphonemes where "R" can be before or after other consonant 
-phonemes:
-- "tR" frequency: 4110 (ex.: montre)
-- "Rt" frequency: 1822 (ex.: forte)
-- "dR" frequency: 2265 (ex.: tondre) 
-- "Rd" frequency: 1339 (ex.: horde)
-
-The algorithm choose the least penalizing option, placing "R" after "t" and "d".
-
-There is not a single best order for phoneme arrangement. The final order offers some flexibility since some of the phonemes do not appear together in syllables. 
-For example in the pairwise order preferences for the left hand phonemes shown below, the "v" phoneme line indicates that "v" can be placed in any position after 
-the "k" and "s" phonemes and anywhere before the "l", "R", "w", "j" phonemes, indicated by the "<<" and ">>>>" symbols respectively.
+## Quickstart
+```bash
+pip install -r requirements.txt             # install dependencies
+pytest src/test/                            # run tests
+mypy src/                                   # type checking
+python lexique.py                           # build the mixed lexicon (LexiqueMixte.tsv)
+python dictionary.py                        # dictionary processing and optimization pipeline
+python -m src.elicitation                   # resolve the discriminating feature sets
+python -m util.build_keypress_groups        # group atomic features onto Keypress Groups
+python -m util.build_realization_report     # rebuild the realization report
+python -m util.export_plover_dictionary     # export the Plover dictionary
+python -m util.export_plover_system         # export the Plover key table
+python -m util.export_keyboard_layout       # steno-trainer exports; regenerate after
+python -m util.export_practice_words        # starboard3h.json or lexicon changes
+python -m util.export_practice_sentences
+python -m util.export_definitions
 ```
-   ↓↓             ↓↓↓↓
- ┃dksptSgNxvZmzfnblRwjG
-━╋━━━━━━━━━━━━━━━━━━━━━
-d┃=>>><=====>>=====>>>=
-k┃<=>>><===><>>>>=>>>>=
-s┃<<=>><>==>=>=>>>>>>>=
-p┃<<<=><=======>>=>>>>=
-t┃><<<=>>====>>><>>>>>=
-S┃=>>><======>==>=>>>>=
-g┃==<=<======>>=>=>>>>=
-N┃==================>==
-x┃==================>==
-v┃=<<=============>>>>=  ←←
-Z┃<>================>>=
-m┃<<<=<<<=======>===>>=
-z┃=<==<=<=========>>>>=
-f┃=<<<<===========>>>>=
-n┃=<<<><<====<===>>>>>=
-b┃==<=<=========<=>>>>=
-l┃=<<<<<<==<==<<<<==>>=
-R┃<<<<<<<==<==<<<<==>>=
-w┃<<<<<<<<<<<<<<<<<<===
-j┃<<<<<<<==<<<<<<<<<===
-G┃=====================
-```
+The NOM/ADJ cross-checkers additionally need the external Morphalou 3.1 corpus, extracted
+under `morphalou/` (gitignored, ~670 MB; CSV at `morphalou/Morphalou3.1_CSV.csv`). After any
+lexicon or layout change, delete `Dictionary.pickle`/`FirstTheory.pickle` — the caches are
+never checked for staleness (see [docs/PIPELINE.md](docs/PIPELINE.md)).
 
-#### Physical keyboard representation must be used [x]
-The file [`keyboard.py`](src/keyboard.py) provides a description of the [Starboard keyboard](https://www.stenograpy.store). The different
-keypresses are assigned to fingers and penalty scores loosely corresponding to the strain they induce. Here is the Irland english keymap on the Starboard :
-
-```
-┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓       ┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓
-┃    ┃ s  ┃ t  ┃ p  ┃ h  ┃    ┃       ┃    ┃ fv ┃ p  ┃ l  ┃ t  ┃ d  ┃
-┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫ *  ┃       ┃ *  ┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫
-┃    ┃ s  ┃ k  ┃ w  ┃ r  ┃    ┃       ┃    ┃ r  ┃ b  ┃ g  ┃ s  ┃ z  ┃
-┗━━━━┻━━━━┻━━━━┻━━━━┻━━┳━┻━━┳━┻━━┓ ┏━━┻━┳━━┻━┳━━┻━━━━┻━━━━┻━━━━┻━━━━┛
-                       ┃ a  ┃ o  ┃ ┃ e  ┃ u  ┃
-                       ┗━━━━┻━━━━┛ ┗━━━━┻━━━━┛
-Single keypress characters keymap
-```
-
-Some phonemes need more than a single keypress to be registered. For instance, here is the map of the phonemes requireing 2 keypresses to be registered.
-
-```
-┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓       ┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓
-┃    ┃ f  ┃fxd ┃ bm ┃ ml ┃    ┃       ┃    ┃    ┃ nm ┃ m  ┃    ┃    ┃
-┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫    ┃       ┃    ┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫
-┃    ┃xqv ┃qdc ┃ b  ┃vcl ┃    ┃       ┃    ┃    ┃ nk ┃ k  ┃    ┃    ┃
-┗━━━━┻━━━━┻━━━━┻━━━━┻━━┳━┻━━┳━┻━━┓ ┏━━┻━┳━━┻━┳━━┻━━━━┻━━━━┻━━━━┻━━━━┛
-                       ┃    ┃    ┃ ┃ i  ┃ i  ┃
-                       ┗━━━━┻━━━━┛ ┗━━━━┻━━━━┛
-```
-
-#### Mapping of the phonemes to the physical keys [x]
-A working phoneme-to-key mapping is committed (`starboard3h.json`), covering the keyboard's 22 non-reserved keys, with the most popular keys
-assigned to the most accessible positions and phonemes requiring key combos chosen to avoid conflicts. Re-validating it against lexicon growth,
-and deciding when to freeze it for learners, is ongoing — see `ROADMAP.md`.
-
-#### Identifying homophones and defining treatment rules [ ]
-Homophones split into two different problems needing two different mechanisms: words that share a lemma and grammatical category but differ
-in inflection (a conjugation problem, handled by Same-Lemma and Grammatical-Category Disambiguation (S6) with feature discriminating strokes
-built from the user's elicited discriminating feature sets) and words whose lemmas or categories differ, e.g. ver/vert/verre/vers/vair (a
-spelling problem, handled by Different-Lemma or Grammatical-Category Disambiguation (S7) with star/hash marks on the keyboard's two guaranteed
-reserved keys, `*`/`#`). Both are wired into theory 2 and the Plover dictionary; see [`docs/PIPELINE.md`](docs/PIPELINE.md). Open questions
-are tracked in `ROADMAP.md`.
-
-#### Treatment of verbs, prefixes, suffixes [ ]
-French verbs have multiple conjugations suffixes per tense, some of which are homophones (je mange - m@Ze, tu manges - m@Ze). Paradigm-table
-machinery for this already exists (`verbparadigm.py`, `nomAdjParadigm.py`), used today to fill gaps in the source lexicon; hooking it into theory
-generation itself, so one dictionary entry can point at a shared conjugation table instead of one entry per surface form, is planned but not
-done.
-
-Prefixes (re-, dé-, co-…) are a related, separate goal: composing a prefix stroke with a base word's outline instead of enumerating every
-prefixed form. Both should end up sharing consistent phoneme-keymap associations to reduce the cognitive load to learn exceptions. Full detail
-in `ROADMAP.md`.
+## Documentation
+- [docs/PIPELINE.md](docs/PIPELINE.md) — the full pipeline, call by call, with rebuild order
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — design rationale, phoneme-order and keymap tables
+- [docs/GLOSSARY.md](docs/GLOSSARY.md) — canonical vocabulary for code and docs
+- [docs/specs/star-hash-marking.md](docs/specs/star-hash-marking.md) — spec of the star/hash marks
+- [docs/specs/discriminating-features.md](docs/specs/discriminating-features.md) — spec of the elicited features
+- [docs/PRIOR_ART.md](docs/PRIOR_ART.md) — survey of existing theories and systems
+- [ROADMAP.md](ROADMAP.md) — the forward-looking plan: unbuilt phases, open decisions and questions
+- [TODO.md](TODO.md) — suspected bugs and queued follow-ups
+- [CLAUDE.md](CLAUDE.md) — guidance for Claude Code
 
 ## References
-<a id="1">[1]</a> 
-New, B., Pallier, C., Brysbaert, M., Ferrand, L. (2004) 
-Lexique 2 : A New French Lexical Database.
-Behavior Research Methods, Instruments, & Computers, 36 (3), 516-524.
+<a id="1">[1]</a> New, B., Pallier, C., Brysbaert, M., Ferrand, L. (2004) Lexique 2 : A New
+French Lexical Database. Behavior Research Methods, Instruments, & Computers, 36 (3), 516-524.
 [doi](https://doi.org/10.3758/BF03195598)
 
-<a id="2">[2]</a> 
-New, B., Brysbaert, M., Veronis, J., & Pallier, C. (2007). 
-The use of film subtitles to estimate word frequencies. 
-Applied Psycholinguistics, 28(4), 661-677.
+<a id="2">[2]</a> New, B., Brysbaert, M., Veronis, J., & Pallier, C. (2007). The use of film
+subtitles to estimate word frequencies. Applied Psycholinguistics, 28(4), 661-677.
 [doi](https://doi.org/10.1017/S014271640707035X)
 
-<a id="3">[3]</a> 
-Gimenes, M., Perret, C., & New, B. (2020). 
-Lexique-Infra: grapheme-phoneme, phoneme-grapheme regularity, consistency, 
-and other sublexical statistics for 137,717 polysyllabic French words. 
-Behavior Research Methods. 
+<a id="3">[3]</a> Gimenes, M., Perret, C., & New, B. (2020). Lexique-Infra: grapheme-phoneme,
+phoneme-grapheme regularity, consistency, and other sublexical statistics for 137,717
+polysyllabic French words. Behavior Research Methods.
 [doi](https://doi.org/10.3758/s13428-020-01396-2)
-

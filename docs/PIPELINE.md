@@ -13,7 +13,8 @@ How to read it:
   Phase)"). Calls are numbered in execution order inside their stage ("Theory 1 construction
   (S5.3)"); in Same-Lemma and Grammatical-Category Disambiguation (S6) the ids carry the
   phase (`S6.Elicitation.n`, `S6.Grouping.n`, `S6.Realization.n`). A number always follows a
-  descriptive name.
+  descriptive name. Ids are stable citations, so gaps exist where a call was removed
+  (`S6.Elicitation.7` was the deleted one-off pers_3-default rewrite script).
 - Terms in **bold** (at first use) and every dataset-state name are defined in
   [GLOSSARY.md](GLOSSARY.md), in this folder. The glossary also maps older names (letter
   phase codes, "press-set", "marker", "cluster", the old stage numbers) to the ones used here.
@@ -23,15 +24,16 @@ How to read it:
 - `file:line` anchors were checked on branch `docs-refactor` at 5ae0118. Counts come from
   read-only probes of the pickles and JSON files rebuilt on 2026-09-22; a later rebuild can
   shift them slightly.
-- Suspected defects are only pointed to here ("see todo.md § Suspected bugs, item B1").
+- Suspected defects are only pointed to here ("see TODO.md § Suspected bugs, item B1").
   They are described in full in the findings list of this refactor.
 
 ---
 
 ## How to run a full rebuild
 
-The real dependency order. `docs/refactor/rebuild_and_hash.sh` runs steps 2 to 9 with
-`PYTHONHASHSEED=0`. It does not run steps 0 and 1 or the human loop 4h.
+The real dependency order. Run the steps that write the pickles with `PYTHONHASHSEED=0`
+pinned when byte-reproducible tracked outputs matter (fact 3 below). Steps 0 and 1 and the
+human loop 4h are run by hand, not by any script.
 
 | # | Command | Stage | Needed when | Notes |
 |---|---|---|---|---|
@@ -69,7 +71,7 @@ Five facts that the command list does not show:
    reorders those lists in `realization_report.json`. With the same pickles, four
    different seeds gave identical `theory2.tsv`, realization report and Plover dictionary;
    fresh pickles changed only the report's residual lists. Pin `PYTHONHASHSEED` for the run
-   that writes the pickles when the tracked report must be reproducible. See todo.md
+   that writes the pickles when the tracked report must be reproducible. See TODO.md
    § Suspected bugs, item B11.
 4. **The realization report is read by one exporter.** `export_keyboard_layout.py:128`
    takes the conjugation-feature legend from the tracked `realization_report.json`,
@@ -80,6 +82,50 @@ Five facts that the command list does not show:
    real stage, but its solver call and the layout write are commented out
    (dictionary.py:494, :496). Eight error messages say "run dictionary.py once first to
    generate it"; `dictionary.py` only reads it.
+
+## Recomputing after a fix
+
+Read this before changing any of `resources/Lexique383.tsv`,
+`resources/LexiqueInfraCorrespondance.tsv`, `resources/LexiqueMixte.tsv` or
+`resources/LexiqueSynthetic.tsv`. The rebuild table above is the general chain; this
+section is the fix-specific ordering. The two silent-failure traps are facts 2 and 4 above
+(the pickle cache; the separately-tracked realization report).
+
+Motivating incident (2026-09-20, the `évaser` fix): fixing `évaser`'s word-final-z
+syllabification in `LexiqueSynthetic.tsv` changed which words collide in theory 1
+(`évases` then correctly collided with `évase`/`évasent`). Rebuilding
+`Dictionary.pickle`/`FirstTheory.pickle`/`theory2.tsv` alone was **not** enough —
+`resolved_press_sets.json` stayed stale, so `évases` silently came out unmarked
+(indistinguishable from "canonical") instead of getting the `pers_2` feature the elicited
+answers said it should. Nothing errored; it was caught only because the outcome contradicted
+the pers_3-default design rule.
+
+**What is usually safe to skip:** the Grouping Phase groups the fixed vocabulary of ~194
+atomic features (`pers_2`, `subjonctif`, …), not specific words — a lexicon fix essentially
+never adds or removes atomic features, so `python -m util.build_keypress_groups` rarely needs
+a rerun. Confirmed directly for the `évaser` case (both needed features already existed in
+`keypress_groups.json`), not assumed. Skip it unless a fix introduces a genuinely new feature
+requirement to a previously-unseen opposition — vanishingly unlikely for an ordinary
+phonology or syllabification correction.
+
+**Checklist for a fix that changes theory-1 collisions:**
+
+1. Apply the fix (typically a scoped `util/fix*.py` dry-run + `--apply` script, patching the
+   exact source file(s) plus `LexiqueMixte.tsv` directly rather than re-running `lexique.py`
+   wholesale, to keep the diff scoped; a full `lexique.py` rerun is the safer check).
+2. `rm -f Dictionary.pickle FirstTheory.pickle`
+3. `python dictionary.py` — rebuilds theory 1; writes `theory2.tsv` from whatever Elicitation
+   and Grouping Phase outputs currently exist (possibly stale at this point — expected).
+4. `python -m src.elicitation` — re-derives `resolved_press_sets.json` against the fixed
+   theory 1.
+5. `python -m util.build_realization_report` — refreshes the tracked realization report
+   (`realization_report.json`).
+6. `python dictionary.py` again — rebuilds `theory2.tsv` against the now-fresh Elicitation
+   Phase data (the pickles exist from step 3, so this run is fast).
+7. Verify: `pytest src/test/`, plus a targeted collision check for the specific word(s) or
+   lemma(s) the fix touched: group theory-2 output (loaded via `util/_theoryio.py`, not
+   `theory2.tsv`) by final stroke and flag any group with ≥ 2 distinct `ortho` and ≥ 2
+   distinct `lemmeGramCat`, excluding `reform1990.tsv` spelling-doublet pairs.
 
 ---
 
@@ -342,7 +388,7 @@ identity (24 cases, item B9). `borough` has an `orthosyll_cv` that does not spel
 - **Strip subjonctif imparfait — stripSubjonctifImparfait (S1.9.2)** lexique.py:1155 —
   removes every `sub:imp*` tag from `infover`; returns `None` if nothing is left and the row
   is dropped. 1,199 rows dropped (`suffît`), 237 keep other tags. Out of scope since
-  2026-09-21 (ROADMAP.md).
+  2026-09-21.
 - **Apply reform ortho rewrite — orthoRewriteOccurrence / applyOrthoRewrite (S1.9.3)**
   lexique.py:1197-1203 — `rule = rewrites.get(word.lemme) or rewrites.get(word.ortho)`;
   `orthoRewriteOccurrence` (:229) finds which occurrence of the anchor to edit (or `None`
@@ -416,9 +462,9 @@ later companion script.
 | copyLineFromTo.py | `<file>.out` | no | n/a | generic column substitution helper |
 
 A Mixte-only patch can still be lost by a later `python lexique.py` if a future script
-patches Mixte without its source, or matches Mixte by the pre-reform ortho.
-LEXICON_RECOMPUTE_PIPELINE.md:56-58 still recommends patching Mixte directly; a full rerun is
-now the safer check.
+patches Mixte without its source, or matches Mixte by the pre-reform ortho. The "Recomputing
+after a fix" section below still recommends patching Mixte directly alongside the source (to
+keep diffs scoped); a full `lexique.py` rerun is the safer check.
 
 ---
 ## Synthetic Lexicon Building (S2)
@@ -435,6 +481,12 @@ frequencies 0.0, no duplicates, no `sub:imp` rows (removed in fd7e242 by an unre
 6,759 rows share an identity with a mixed-lexicon row and only merge their `infover`; 31,252
 become new Words.
 
+The NOM/ADJ side optionally cross-checks against **Morphalou 3.1** (ATILF/CNRS,
+LGPL-LR), an external download from the
+[Ortolang repository](https://repository.ortolang.fr) — extract the CSV to
+`morphalou/Morphalou3.1_CSV.csv` (gitignored; the code default path); `--morphalou PATH`
+overrides and `--no-morphalou` disables it.
+
 ### Verb paradigm completion — completeVerbParadigms.main (S2.1)   util/completeVerbParadigms.py:350
 Called by: a person, `python -m util.completeVerbParadigms [--apply]`.
 Input state: theory 1 (mixed lexicon + current synthetic rows), Verbiste XML, `resources/verbModelExceptions.tsv`.
@@ -445,7 +497,9 @@ Transformation: caps its address space at 4 GiB (`_capMemory` :343); loads templ
 synthetic rows (S2.1.5).
 Result: VER synthetic rows (participle gender/number forms and finite forms).
 Artifacts: reads `FirstTheory.pickle`, `starboard3h.json`, Verbiste, `verbModelExceptions.tsv`; appends to `LexiqueSynthetic.tsv`.
-Notes: its gating depends on the retired solver-picks-features design. Not idempotent (item B13).
+Notes: its gating depends on the retired solver-picks-features design; the selection it
+gates on (`selectSharedDiscriminators` src/featureextractor.py:222) is coverage-first, with a
+feature-complexity tie-break. Not idempotent (item B13).
 
 - **Load theory 1 — loadTheoryAndKeyboard (S2.1.1)** :91 — unpickles `FirstTheory.pickle`,
   or builds a `Dictionary` and theory 1 in memory without writing. A stale pickle hides rows
@@ -551,10 +605,9 @@ construction (S3.2), Syllable inventory (S3.3), the layout statistics (S4.1, S4.
 Dictionary cache write (S3.4). No staleness check.
 Result: Word list + syllable statistics + layout statistics, restored.
 Artifacts: reads `Dictionary.pickle`.
-Notes: five downstream loaders repeat this five-object read (util/_theoryio.py:26-30,
+Notes: four downstream loaders repeat this five-object read (util/_theoryio.py:26-30,
 src/elicitation.py:540-543, util/check_conjugation_disambiguation_order.py:141-144,
-util/build_pers3_default_answers.py:163-166, src/ambiguitychecker.py:1334-1337); none uses
-the class state. Cache trap: item B15.
+src/ambiguitychecker.py:1334-1337); none uses the class state. Cache trap: item B15.
 
 ### Dictionary construction — Dictionary.__init__ (S3.2)   dictionary.py:76
 Called by: Dictionary cache check (S3.1), on a miss.
@@ -665,7 +718,7 @@ run on **every fresh rebuild** (a `Dictionary.pickle` miss, dictionary.py:464-46
 the slowest step) and are the solver's inputs (src/cpsatsolver.py:14, :48
 `syllabicPartAmbiguity`; :363 `pairwiseBiphonemeOrderScore`). The solver call itself is
 **commented out** at dictionary.py:494, and so is the layout write at :496: **today no
-command regenerates `starboard3h.json` without editing code** (todo.md § Queued follow-ups).
+command regenerates `starboard3h.json` without editing code** (TODO.md § Queued follow-ups).
 
 **The objective in plain words.** The solver solves one independent model per syllabic
 part (onset, nucleus, coda), because each part has its own key bank. It gives every phoneme
@@ -869,7 +922,6 @@ Discriminating-Feature Elicitation (Elicitation Phase) — python -m src.elicita
  Answer Collection (human loop, side tools)
   S6.Elicitation.5 Questionnaire page — util/build_questionnaire_page.py main (:521)
   S6.Elicitation.6 Precedence-spec check — util/check_conjugation_disambiguation_order.py main (:130)
-  S6.Elicitation.7 pers_3-default answer rewrite — util/build_pers3_default_answers.py main (:160)  [history]
  Press-Set Resolution
   S6.Elicitation.8 Answer indexing — buildAnswersByOpposition (:279)
   S6.Elicitation.9 Discriminating feature set resolution — resolveGroupPressSets (:374)
@@ -949,7 +1001,7 @@ Grammatical-Category Disambiguation (S7).
 Result: homophone groups, `dict[(canonical Strokes, LemmeGramCat), list[Word]]`, 47,830, in
 theory-1 order.
 Notes: the key type is named `LemmaHomophoneGroupKey` (:24) although it is keyed by
-`lemmeGramCat`; a rename is queued (todo.md § Queued follow-ups).
+`lemmeGramCat`; a rename is queued (TODO.md § Queued follow-ups).
 
 ##### Feature combination enumeration — wordFeatureCombinations / featureCombinationsByOrtho (S6.Elicitation.2)   src/elicitation.py:30, :86
 Called by: every step that walks a group (Scale report (S6.Elicitation.3), Questionnaire item
@@ -1013,13 +1065,6 @@ Result: console summary; never rewrites answers.
 Artifacts: reads the spec, `elicitation_answers.json`, pickles; writes `conjugation_disambiguation_report.json`.
 Notes: coverage gaps: item B12.
 
-##### pers_3-default answer rewrite — build_pers3_default_answers.main (S6.Elicitation.7)   util/build_pers3_default_answers.py:160
-Called by: nobody (one-off, 2026-09-19).
-Transformation: removed `pers_3` from every checked set of
-`elicitation_answers_pers1default.json`, gave empty opposite sides their own
-`pers_1`/`pers_2`, auto-repaired discriminating feature set conflicts and **overwrote**
-`elicitation_answers.json` (:177-178).
-Notes: history only; a rerun would undo later hand fixes (4e73533, 688c74d, 3b22e0f).
 
 #### Press-Set Resolution
 
@@ -1156,9 +1201,11 @@ pers_2}, hard/soft provenance, 7 unpressable features, usage weights.
 Artifacts: writes `keypress_groups.json`.
 Notes: **K history** from git: K=5 at 8330b8e and 0fa69af; K=6 from 4e73533 (impératif
 answer fix); **K=7 from 688c74d** (per-combination alternates) to HEAD. The claim that the
-hard constraints cost nothing extra was checked at K=6 only. The greedy `src/featuregrouping.py` path
-is not live; only its loaders, `liveMarkers`, `verifyKeypressAssignment`, `inducedPressSet`
-and `frequencyWeightedChordSizes` are.
+hard constraints cost nothing extra was checked at K=6 only. The greedy grouping path is
+gone (removed as dead code; the CP-SAT solver is the only one); `src/featuregrouping.py`
+now holds only the loaders and verifiers (`loadResolvedPressSets`,
+`loadGroupOrthoFrequencies`, `liveMarkers`, `inducedPressSet`, `KeypressConflict`,
+`verifyKeypressAssignment`, `frequencyWeightedChordSizes`).
 
 ### Discriminating-Feature Stroke Realization (Realization Phase)
 
@@ -1167,7 +1214,7 @@ One sequence of calls, two code paths. The **inline path** runs inside
 (util/_theoryio.py:82). The **report build** is `util/build_realization_report.py` main
 (:58-72) and writes the **realization report**. Both read `keypress_groups.json`
 and `resolved_press_sets.json`. Only the trainer keyboard legend reads the report, so the two
-can drift (item B18, todo.md § Queued follow-ups).
+can drift (item B18, TODO.md § Queued follow-ups).
 
 **The realization rule.** Each keypress group gets one physical **key-set**. **Candidate
 key-sets** are the coda-bank keys of the 20 consonants: single keys 16-25 and the digraphs
@@ -1202,7 +1249,7 @@ canonical base strokes equal the entry's canonical `strokes`; if none, falls bac
 `candidates[0]` (:800).
 Result: exactly one Word per spelling.
 Notes: when a spelling has several matching Words (spelling twins, 262 spellings in the
-current resolved sets), only the first gets its feature discriminating stroke. See todo.md § Suspected bugs, item B1
+current resolved sets), only the first gets its feature discriminating stroke. See TODO.md § Suspected bugs, item B1
 (fallback: item B20).
 
 #### Extra alternate population — buildKeypressGroupExtraAlternates (S6.Realization.3)   src/ambiguitychecker.py:844
@@ -1507,11 +1554,17 @@ Artifacts: writes `theory2.tsv`.
 Notes: a terminal human view; nothing reads it.
 
 ### Cross-category clash detector — detectCrossCategoryClash (S7.16, off-pipeline)   src/ambiguitychecker.py:59
-Called by: `classifyStrokeCluster` :448 ← `classifyTheory` :483 ← `ambiguitychecker`
-`__main__` :1355 (the "Phase 0 ambiguity report" diagnostic) and tests.
+Called by: `classifyStrokeCluster` :452 ← `classifyTheory` ← `ambiguitychecker`
+`__main__` :1161 (the hand-run ambiguity report) and tests.
 Transformation: flags a bare lemma with ≥2 singleton `lemmeGramCat` sub-groups of different spellings.
 Notes: in the pipeline, cross-category clashes are handled implicitly by the ≥2
-`lemmeGramCat` filter of Lemma-homophone group detection (S7.5).
+`lemmeGramCat` filter of Lemma-homophone group detection (S7.5). The `__main__` itself is a
+hand-run check after Phonetic Theory Building (S5) (its console title still says "Phase 0
+Ambiguity Report" — legacy wording, queued follow-up): it classifies every theory-1 stroke
+cluster, honours `resources/ambiguityIgnoreList.tsv` (manually-triaged lemmas with reasons)
+and writes `ambiguity_report.tsv`. Its "overflow" metric counts lemma-homophone clusters of
+≥5 lemmas — beyond the old 4-slot `*`/`#` budget (no stroke, `*`, `#`, `*#`) that N-ary
+escalation has since superseded — and reports their frequency mass; kept as a drift signal.
 
 ### Worked examples (2026-09-22 data)
 

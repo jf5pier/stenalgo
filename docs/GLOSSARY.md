@@ -13,9 +13,9 @@ refactor (`docs/refactor/DECISIONS.md`, ids a1-a12 and b1-b9).
 
 ## Legacy names
 
-Older prose (RESUME/NOTES/PLAN notes, ROADMAP.md history, commit messages, the
-`docs/refactor/callgraph/` drafts) uses letter phase codes, older stage names and older
-terms. They map as follows.
+Older prose (the RESUME/NOTES/PLAN session notes and ROADMAP history, all now only in git
+history, plus commit messages and the `docs/refactor/callgraph/` drafts) uses letter phase
+codes, older stage names and older terms. They map as follows.
 
 | Legacy name | Current name |
 |---|---|
@@ -55,8 +55,8 @@ messages before it keep the old names.
 | `util/build_phase_p_realization.py` | `util/build_realization_report.py` |
 | `phase_g_keypress_assignment.json` | `keypress_groups.json` |
 | `phase_p_keypress_realization.json` | `realization_report.json` |
-| `runPhaseG` (identifier) | `runFeatureGrouping` |
-| `PhaseGResult` (identifier) | `FeatureGroupingResult` |
+| `runPhaseG` (identifier) | `runFeatureGrouping` (both since removed — the greedy path is gone) |
+| `PhaseGResult` (identifier) | `FeatureGroupingResult` (both since removed) |
 
 ---
 
@@ -169,8 +169,8 @@ canonicalization.
 
 ### Chord
 Avoid. It was used for a physical stroke (src/keyboard.py:21, Realization Phase
-docstrings), an abstract keypress group (ATOMIC_KEYPRESS_REWIRE_PLAN.md:49) and a trainer
-record (`Chord`, util/export_practice_sentences.py:50). Code names such as
+docstrings), an abstract keypress group (pre-elicitation-pivot plan, git history) and a
+trainer record (`Chord`, util/export_practice_sentences.py:50). Code names such as
 `frequencyWeightedChordSizes`, `chordsWithReadings`, `chordsByOrtho` stay.
 - Preferred synonym: **Stroke** for keys pressed together; **key-set** for part of a
   stroke; **Keypress Group** for the abstract unit; **Drill item** for the trainer record;
@@ -395,7 +395,7 @@ Keys 0, 1, 2 and 10 are sent as number-bar bits; key 15 (`#`) is the only star b
 - First used in: Theory Export (S8).
 
 ### GramCat
-The grammatical category enum: 22 values such as `NOM`, `VER`, `ADJ:pos` (CLAUDE.md says 21).
+The grammatical category enum: 22 values such as `NOM`, `VER`, `ADJ:pos`.
 - Code: src/word.py:10.
 - First used in: Dictionary Loading (S3).
 
@@ -427,7 +427,7 @@ group ("calmez": impératif or indicatif 2p); it gets one alternate per combinat
 Words with the same `LemmeGramCat` and the same canonical Strokes: forms of one paradigm
 that sound alike (dors/dort). The unit of Same-Lemma and Grammatical-Category Disambiguation
 (S6); the dataset state "homophone groups" holds all 47,830 of them.
-- Code: `buildLemmaHomophoneGroups` src/elicitation.py:61; `LemmaHomophoneGroupKey` :24 (named "lemma" but keyed by LemmeGramCat; rename to `HomophoneGroupKey` queued in todo.md).
+- Code: `buildLemmaHomophoneGroups` src/elicitation.py:61; `LemmaHomophoneGroupKey` :24 (named "lemma" but keyed by LemmeGramCat; rename to `HomophoneGroupKey` queued in TODO.md).
 - Avoid "cluster" and "same-lemma homophone group" (redundant).
 - First used in: Discriminating-Feature Elicitation (Elicitation Phase).
 
@@ -505,7 +505,7 @@ The stage that produces `starboard3h.json`: the layout statistics (Phoneme order
 (S4.4, ambiguity ×30,000 + ergonomics ×1 + phoneme order ×500 per syllabic part, 90 s each).
 A real, rarely run and costly stage, **not dead code** (decision b5). The statistics run on
 every fresh rebuild; the solver call is commented out at dictionary.py:494, so no command
-regenerates the layout today (queued in todo.md).
+regenerates the layout today (queued in TODO.md).
 - Code: `optimizeKeyboard` src/cpsatsolver.py:13; dictionary.py:464-466, :489-496.
 - Avoid "Keyboard Layout Optimization (S2b)", "not run" as a description of the stage.
 - First used in: Keyboard Layout Optimization (S4).
@@ -579,7 +579,7 @@ Legacy stage name. Use **Different-Lemma or Grammatical-Category Disambiguation 
 ### Lemme / LemmeGramCat
 The lemma string, and the key `"lemme_GramCat"` (`rucher_NOM`) that almost every "same-lemma"
 test actually uses. `groupWordsByLemme` groups by LemmeGramCat (rename to
-`groupWordsByLemmeGramCat` queued in todo.md); `groupWordsByBareLemme` groups by bare lemme.
+`groupWordsByLemmeGramCat` queued in TODO.md); `groupWordsByBareLemme` groups by bare lemme.
 - Code: src/word.py:22-23, :100, :414, :425.
 - First used in: Lexicon Building (S1).
 
@@ -769,6 +769,21 @@ normalization** changes only `lemme`, at read time.
 - Code: lexique.py:1197-1244; `normalizeLemme` lexique.py:540.
 - First used in: Lexicon Building (S1).
 
+### Regret (gap)
+For a clashing lemma-homophone pair A/B with film frequencies `fA`/`fB`: the cost of the
+chosen star/hash assignment is the frequency of the Word it marks (one extra key per
+occurrence); the per-pair optimum is `min(fA, fB)` (mark the rarer); the **gap** —
+equivalently the **regret** of the choice — is `cost − optimum`. Summed over all clashing
+pairs and divided by their total mass it becomes **gap%**, the headline quality metric of
+the star/hash rules (about 0.5 %; [specs/star-hash-marking.md §2](specs/star-hash-marking.md)).
+Regret is the reason the frequency-ratio rule (R4) exists (≥ 10× pairs: marking the rarer
+word is near-free, so the ratio is its own mnemonic) and why the same-category (R5) and
+category-priority (R6) rules take that specific linear order: it matches every observed
+category pair's regret-optimal direction.
+- Code: `decideStarHashMark` src/ambiguitychecker.py:183; the design-time numbers are
+  reproduced by `scratch/combined_regret.py`.
+- Avoid contrasting "regret" and "gap": the same quantity.
+
 ### Reserved keys
 Starboard keys 0, 1, 10 and 15, excluded from phonemes. 10 (`*`) and 15 (`#`) carry star/hash
 marks; 0 and 1 are held for a possible third mark. They are not "control" keys.
@@ -861,8 +876,9 @@ frequency-ratio rule (R4), same-category rule (R5), category-priority rule (R6),
 fallback (R7). The first match decides. Numbers follow code order; always cite a rule by
 name with its number, e.g. "frequency-ratio rule (R4)".
 - Code: `decideStarHashMark` src/ambiguitychecker.py:183-232.
-- Avoid "marking rule stack". Comments at :392/:431 and RESUME_2026-09-20-starhash-priority.md
-  use another numbering (ratio = Rule 1, homograph = Rule 2, doublet = Rule 3).
+- Avoid "marking rule stack". Older design notes (git history,
+  `RESUME_2026-09-20-starhash-priority.md`) use another numbering (ratio = Rule 1,
+  homograph = Rule 2, doublet = Rule 3).
 - First used in: Different-Lemma or Grammatical-Category Disambiguation (S7).
 
 ### Starboard
