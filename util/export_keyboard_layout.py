@@ -27,7 +27,7 @@ PHASE_P_REALIZATION_JSON = "realization_report.json"
 OUTPUT_PATH = "steno-trainer/public/data/keyboard-layout.json"
 
 # French display labels for the atomic grammatical-feature markers the Realization Phase
-# groups onto a keypress (`src.word.atomicFeatures`/`src.satoptimizer`'s vocabulary).
+# groups onto a keypress (`src.word.atomicFeatures`'s vocabulary).
 # Only used for the trainer's legend text -- purely cosmetic, has no bearing on the assignment itself.
 MARKER_LABELS: dict[str, str] = {
     "s": "singulier", "nbr_s": "singulier",
