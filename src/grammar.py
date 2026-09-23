@@ -1004,31 +1004,6 @@ class SyllableCollection:
                         score += least_scores
         return score
 
-    def analysePhonemSyllabicAmbiguity_serial(self):
-        """Determines the ambiguity of assigning multiple phonemes to a
-        single keypress. Low ambiguity mean a keypress can mean two
-        different phonemes and the other keypressess of the syllable will
-        give enough context to resolve the right phonem of the syllable."""
-
-        def _getSyllabicAmbiguityScores(phonemes: str, syllabicPart: str):
-            syllAmbiguity: dict[tuple[str,str], float] = {}
-            for p1i, p1 in tqdm(list(enumerate(phonemes[:-1])), ascii=True, ncols=80, unit=" phonemes pairs"):
-                for p2 in phonemes[p1i + 1 :]:
-                    conflict = self.syllabicAmbiguityScore(p1, p2, syllabicPart)
-                    syllAmbiguity[(p1, p2)] = conflict
-            return {
-                 (k1, k2): v for (k1, k2), v in sorted(syllAmbiguity.items(),
-                 key=lambda item: item[1]) }
-
-        print("Left hand ambiguity optimization")
-        onset_inter_syll_ambiguity = _getSyllabicAmbiguityScores(Phoneme.consonantPhonemes, "onset")
-        print("Middle keys ambiguity optimization")
-        nucleus_inter_syll_ambiguity = _getSyllabicAmbiguityScores(Phoneme.nucleusPhonemes, "nucleus")
-        print("Right hand ambiguity optimization")
-        coda_inter_syll_ambiguity = _getSyllabicAmbiguityScores(Phoneme.consonantPhonemes, "coda")
-        print("")
-        return (onset_inter_syll_ambiguity, nucleus_inter_syll_ambiguity, coda_inter_syll_ambiguity)
-
     def analysePhonemSyllabicAmbiguity(self):
         """Determines the ambiguity of assigning multiple phonemes to a
         single keypress. Low ambiguity mean a keypress can mean two
@@ -1067,33 +1042,6 @@ class SyllableCollection:
         p3.join()
         print("")
         return(onset_recv.recv(), nucleus_recv.recv(), coda_recv.recv())
-
-    def analysePhonemeLexicalAmbiguity_serial(self):
-        """Similairly to the Syllabic Ambiguity, but over the whole lexicon:
-        determines if a key assigned  to two phonemes will create
-        ambiguities when typing a full word. Low ambiguity means that the
-        other keys in the syllable and the other syllables of the word
-        provide enough context to identify which of the multiple phonemes
-        assgined to a keypress to choose."""
-
-        def _getLexicalAmbiguityScores(phonemes: str,  syllabicPart: str):
-            lexicalAmbiguity: dict[tuple[str,str], float] = {}
-            for p1i, p1 in tqdm(list(enumerate(phonemes[:-1])), ascii=True, ncols=80, unit=" phonemes pairs") :
-                for p2 in phonemes[p1i + 1 :]:
-                    conflict = self.lexicalPhonemeAmbiguityScore(p1, p2, syllabicPart)
-                    lexicalAmbiguity[(p1, p2)] = conflict
-            return {
-                (k1, k2): v for (k1, k2), v in sorted(lexicalAmbiguity.items(),
-                                                      key=lambda item: item[1]) }
-
-        print("Left hand ambiguity optimization")
-        onset_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.consonantPhonemes, "onset")
-        print("Middle keys ambiguity optimization")
-        nucleus_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.nucleusPhonemes, "nucleus")
-        print("Right hand ambiguity optimization")
-        coda_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.consonantPhonemes, "coda")
-
-        return (onset_inter_syll_ambiguity, nucleus_inter_syll_ambiguity, coda_inter_syll_ambiguity)
 
     def analysePhonemeLexicalAmbiguity(self):
         """Similairly to the Syllabic Ambiguity, but over the whole lexicon:
@@ -1168,44 +1116,6 @@ class SyllableCollection:
         coda_ambiguity = _getLexicalAmbiguityScores(self.getMultiphonemeNames("coda"), "coda")
         return (onset_ambiguity, nucleus_ambiguity, coda_ambiguity)
 
-    def analyseMultiphonemeLexicalAmbiguity(self):
-        """Similairly to the Syllabic Ambiguity, but over the whole lexicon:
-        determines if a stroke assigned to two groups of phonemes in a single
-        syllabic par will create ambiguities when typing a full word. Low
-        ambiguity means that the other keys/strokes in the syllable and the
-        other syllables of the word provide enough context to identify which
-        of the multiple groups of phonemes assgined to a keypress to choose."""
-
-        def _getLexicalAmbiguityScores(multiphonemes: list[tuple[str, ...]],  syllabicPart: str, send_end: Connection):
-            lexicalAmbiguity: dict[tuple[tuple[str, ...], tuple[str, ...]], float] = {}
-            for p1i, multip1 in tqdm(list(enumerate(multiphonemes[:-1])), ascii=True, ncols=80, unit=" multiphonemes pairs") :
-                for multip2 in multiphonemes[p1i + 1 :]:
-                    conflict = self.lexicalSyllabicPartAmbiguityScore(multip1, multip2, syllabicPart)
-                    lexicalAmbiguity[(multip1, multip2)] = conflict
-            send_end.send({
-                (k1, k2): v for (k1, k2), v in sorted(lexicalAmbiguity.items(),
-                                                      key=lambda item: item[1]) })
-
-        print("Left hand multiphonemes ambiguity optimization")
-        onset_send, onset_recv = Pipe()
-        #onset_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.consonantPhonemes, "onset")
-        p1 = get_context("fork").Process(target = _getLexicalAmbiguityScores, args = (self.getMultiphonemeNames("onset"), "onset", onset_send))
-        p1.start()
-        print("Middle keys multiphonemes ambiguity optimization")
-        nucleus_send, nucleus_recv = Pipe()
-        #nucleus_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.nucleusPhonemes, "nucleus")
-        p2 = get_context("fork").Process(target = _getLexicalAmbiguityScores, args = (self.getMultiphonemeNames("nucleus"), "nucleus", nucleus_send))
-        p2.start()
-        print("Right hand multiphonemes ambiguity optimization")
-        coda_send, coda_recv = Pipe()
-        #coda_inter_syll_ambiguity = _getLexicalAmbiguityScores(Phoneme.consonantPhonemes, "coda")
-        p3 = get_context("fork").Process(target = _getLexicalAmbiguityScores, args = (self.getMultiphonemeNames("coda"), "coda", coda_send))
-        p3.start()
-        
-        p1.join()
-        p2.join()
-        p3.join()
-        return (onset_recv.recv(), nucleus_recv.recv(), coda_recv.recv())
         #return (onset_inter_syll_ambiguity, nucleus_inter_syll_ambiguity, coda_inter_syll_ambiguity)
 
     def getMultiphonemeNames(self, syllabicPart: str) -> list[tuple[str, ...]]:
