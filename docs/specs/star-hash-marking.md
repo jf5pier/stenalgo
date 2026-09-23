@@ -41,7 +41,8 @@ film-subtitle frequency):
 - the cost of marking A is `fA`, one extra key per occurrence;
 - the unreachable optimum is `min(fA, fB)`, which marks whichever word is rarer on its own
   but needs one memorized decision per pair;
-- the **gap** is `cost − optimum`, and **gap%** is `gap / (fA + fB)` summed over all pairs.
+- the **gap** is `cost − optimum` — the **regret** of the chosen assignment; "regret" and
+  "gap" name the same quantity — and **gap%** is `gap / (fA + fB)` summed over all pairs.
 
 A category rule (always mark category X against Y) costs some gap in return for being
 memorable. The adopted design lands at about **0.5 % gap** from the per-pair optimum (0.526 %
@@ -175,7 +176,7 @@ Plover strokes are from `plover_stenalgo_dictionary.json`, 2026-09-22 data.
 - Keys 0 and 1 are never emitted.
 - Canonical members' strokes are unchanged from the Realization Phase output.
 
-## 8. Known gaps (tracked in `todo.md`, "Suspected bugs")
+## 8. Known gaps (tracked in `TODO.md`, "Suspected bugs")
 
 - **B5**: on equal frequency, R4, R5 and R7 mark the first argument, so the comparator is not
   antisymmetric and the result depends on input order (`pas`/`pâts`, both 0.0). Shuffling the
@@ -189,3 +190,8 @@ Plover strokes are from `plover_stenalgo_dictionary.json`, 2026-09-22 data.
 - **B1**: spelling twins (Words sharing a spelling and a `lemmeGramCat`) are not fully
   separated by the Realization Phase, and the one-`lemmeGramCat` filter keeps them out of this
   stage: 99 pairs in 98 strokes reach theory 2 unmarked.
+
+One design caveat without a bug number: bucket 2 (different-gramCat, same lemma) and
+bucket 3 (cross-lemma) pairs are pooled through one physical marking mechanism
+(`decideStarHashMark` treats both identically). That pooling was an implementation
+convenience and was never explicitly re-confirmed as a design decision.

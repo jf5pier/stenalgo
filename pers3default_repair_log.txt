@@ -1,1 +1,0 @@
-pass 0: group nuire_VER conflict on press [] (('nui', 'nuit')) -- added 'pers_3' to q101 (subi/subit) -- hand-overridden from auto-repair's alphabetical pick of 'VER', which needlessly isolates a brand-new marker (K=8) instead of reusing already-live pers_3 (K=6), confirmed by direct comparison
