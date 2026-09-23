@@ -29,7 +29,7 @@ deleted in Final Check and Cleanup (Pass 7).
 | Spec Extraction (Pass 2) | done | docs/specs/star-hash-marking.md, docs/specs/discriminating-features.md; comment-only docstring fixes (DECISIONS p2-q1) |
 | Doc and Data Inventory (Pass 3) | done | leaner run (2 Sonnet agents); `inventory/{A,B,C,D}.md`; main-thread spot-check corrections appended in A.md (GramCat count) and C.md (9 `.py` RESUME links) |
 | Interactive Triage (Pass 4) | done | 6 rounds in DECISIONS.md (t-r, t-m, t-t, t-c, t-b, t-x, t-d); new bugs B36–B42 to file in Pass 6 |
-| Dead-Code Removal (Pass 5) | todo | `deadcode.md` |
+| Dead-Code Removal (Pass 5) | in progress | discovery agent (Sonnet) launched 2026-09-23 → `deadcode.md`; next: spot-check, approval rounds |
 | Doc Rewrite (Pass 6) | todo | |
 | Final Check and Cleanup (Pass 7) | todo | |
 
