@@ -290,7 +290,7 @@ def buildDiscriminatorSelection(
     (buildFeasibleDiscriminatorOptions + selectSharedDiscriminators), reshaped into the same
     dict[tuple[WordFeature, ...], list[tuple[Word, ...]]] shape greedyOptimizeDiscriminator
     produces, so every downstream consumer (dictionary.py's Special
-    keypress mapping table, the ambiguity checker, the verb-paradigm tooling) shares one selection
+    keypress mapping table, the verb-paradigm tooling) shares one selection
     instead of each re-deriving its own (see SHARED_DISCRIMINATOR_REWIRE_PLAN.md).
 
     Pass an already-computed wordIsDiscrminatedByFeature (extractDiscriminatingFeatures's

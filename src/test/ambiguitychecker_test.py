@@ -7,7 +7,6 @@ from unittest.mock import MagicMock
 from src.word import Word, GramCat
 from src.ambiguitychecker import (
     StrokeClusterReport,
-    FeatureKeypressFeasibility,
     KeypressGroupPhysicalAssignment,
     STAR,
     HASH,
@@ -27,18 +26,14 @@ from src.ambiguitychecker import (
     starHashCodeToStrokes,
     computeClusterSizeDistribution,
     computeOverflowFrequencyMass,
-    buildAtomicFeatureToWords,
     buildExtraInducedStrokes,
     buildKeypressGroupExtraAlternates,
     buildKeypressGroupToWords,
     buildWordsByOrthoLemme,
     buildWordToGroups,
-    findFeatureKeypresses,
-    findCollidingNewAdditions,
     findCollidingInducedStrokes,
     realizeKeypressGroupsAsExtraStroke,
     _isInScopeCollision,
-    checkComposedChords,
 )
 
 
@@ -481,173 +476,6 @@ class TestComputeClusterSizeDistribution:
         assert dist.sameLemmaGroupSizeFrequency[2] == w1.frequency + w2.frequency
         assert dist.lemmaHomophoneCountCounts == {3: 1}
         assert dist.lemmaHomophoneCountFrequency == {3: 20.0}
-
-
-# ---------------------------------------------------------------------------
-# buildAtomicFeatureToWords
-# ---------------------------------------------------------------------------
-
-class TestBuildAtomicFeatureToWords:
-
-    def test_nofeature_and_singleton_filtered(self):
-        w = _make_word()
-        augmentedTheory = {
-            ("nofeature",): [(w,)],
-            ("s",): [(w,)],  # len < 2, no canonical/non-canonical split
-        }
-        assert buildAtomicFeatureToWords(augmentedTheory) == {}
-
-    def test_canonical_excluded_noncanonical_split_into_atomic_features(self):
-        """pers_3 (priority 70) beats pers_1 (priority 55): pers_3 is canonical (no keypress
-        needed), pers_1 is the one that needs a feature keypress. atomicFeatures() splits
-        only on ':', so "pers_1" stays one atom -- not {"pers", "1"}."""
-        w3 = _make_word(ortho="w3")
-        w1 = _make_word(ortho="w1")
-        augmentedTheory = {("pers_3", "pers_1"): [(w3, w1)]}
-        atomicFeatureToWords = buildAtomicFeatureToWords(augmentedTheory)
-        assert set(atomicFeatureToWords.keys()) == {"pers_1"}
-        assert atomicFeatureToWords["pers_1"] == [(w1, "pers_1")]
-
-
-# ---------------------------------------------------------------------------
-# findFeatureKeypresses
-# ---------------------------------------------------------------------------
-
-class TestFindFeatureKeypresses:
-
-    def test_clean_single_key_keypress(self):
-        w = _make_word()
-        theory = {((1,),): [w]}
-        atomicFeatureToWords = {"atomA": [(w, "someFeature")]}
-        kb = _mock_keyboard_for_keypresses({"t": (2,)})
-        result = findFeatureKeypresses(atomicFeatureToWords, theory, kb)
-        assert result["atomA"].feasibleSingleKeyPhonemes == ["t"]
-        assert not result["atomA"].infeasible
-
-    def test_escalates_to_combo_when_singles_collide(self):
-        w = _make_word()
-        theory = {
-            ((1,),): [w],
-            ((1, 2),): [_make_word(ortho="other1")],
-            ((1, 3),): [_make_word(ortho="other2")],
-        }
-        atomicFeatureToWords = {"atomA": [(w, "someFeature")]}
-        kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
-        result = findFeatureKeypresses(atomicFeatureToWords, theory, kb)
-        assert result["atomA"].feasibleSingleKeyPhonemes == []
-        assert ("t", "s") in result["atomA"].feasibleComboPhonemes
-        assert not result["atomA"].infeasible
-
-    def test_infeasible_even_with_combo(self):
-        w = _make_word()
-        theory = {((1,),): [w], ((1, 2),): [_make_word(ortho="other1")]}
-        atomicFeatureToWords = {"atomA": [(w, "someFeature")]}
-        kb = _mock_keyboard_for_keypresses({"t": (2,)})
-        result = findFeatureKeypresses(atomicFeatureToWords, theory, kb)
-        assert result["atomA"].infeasible
-
-
-# ---------------------------------------------------------------------------
-# checkComposedChords
-# ---------------------------------------------------------------------------
-
-class TestCheckComposedChords:
-
-    def test_composed_chord_feasible(self):
-        w = _make_word()
-        theory = {((1,),): [w]}
-        atomicFeatureToWords = {
-            "pers_3": [(w, "pers_3:nbr_s")],
-            "nbr_s": [(w, "pers_3:nbr_s")],
-        }
-        featureKeypresses = {
-            "pers_3": FeatureKeypressFeasibility(atomicFeature="pers_3", feasibleSingleKeyPhonemes=["t"]),
-            "nbr_s": FeatureKeypressFeasibility(atomicFeature="nbr_s", feasibleSingleKeyPhonemes=["s"]),
-        }
-        kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
-        report = checkComposedChords(featureKeypresses, atomicFeatureToWords, theory, kb)
-        assert w in report.feasibleWords
-        assert w not in report.infeasibleWords
-
-    def test_composed_chord_collides(self):
-        w = _make_word()
-        theory = {((1,),): [w], ((1, 2, 3),): [_make_word(ortho="other")]}
-        atomicFeatureToWords = {
-            "pers_3": [(w, "pers_3:nbr_s")],
-            "nbr_s": [(w, "pers_3:nbr_s")],
-        }
-        featureKeypresses = {
-            "pers_3": FeatureKeypressFeasibility(atomicFeature="pers_3", feasibleSingleKeyPhonemes=["t"]),
-            "nbr_s": FeatureKeypressFeasibility(atomicFeature="nbr_s", feasibleSingleKeyPhonemes=["s"]),
-        }
-        kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
-        report = checkComposedChords(featureKeypresses, atomicFeatureToWords, theory, kb)
-        assert w in report.infeasibleWords
-
-    def test_missing_keypress_marks_infeasible(self):
-        w = _make_word()
-        theory = {((1,),): [w]}
-        atomicFeatureToWords = {
-            "pers_3": [(w, "pers_3:nbr_s")],
-            "nbr_s": [(w, "pers_3:nbr_s")],
-        }
-        featureKeypresses = {
-            "pers_3": FeatureKeypressFeasibility(atomicFeature="pers_3"),  # no feasible keypress at all
-            "nbr_s": FeatureKeypressFeasibility(atomicFeature="nbr_s", feasibleSingleKeyPhonemes=["s"]),
-        }
-        kb = _mock_keyboard_for_keypresses({"s": (3,)})
-        report = checkComposedChords(featureKeypresses, atomicFeatureToWords, theory, kb)
-        assert w in report.infeasibleWords
-
-    def test_combo_union_uses_both_phonemes_keys(self):
-        """Regression test for the half-combo bug: when the chosen feasibility for an
-        atomic feature is a *combo* (not a single key), both phonemes' keys must be
-        unioned into the composed chord, not just the first's."""
-        w = _make_word()
-        # If only p1's key ((2,)) were unioned in (the bug), the composed chord for this
-        # word would be ((1, 2),), which is NOT in theory -- the bug would wrongly call
-        # this feasible. With both phonemes' keys unioned, the composed chord is
-        # ((1, 2, 3),), which IS already in theory as another word's stroke -- correctly
-        # infeasible.
-        theory = {((1,),): [w], ((1, 2, 3),): [_make_word(ortho="other")]}
-        atomicFeatureToWords = {
-            "pers_3": [(w, "pers_3:nbr_s")],
-            "nbr_s": [(w, "pers_3:nbr_s")],
-        }
-        featureKeypresses = {
-            "pers_3": FeatureKeypressFeasibility(atomicFeature="pers_3", feasibleComboPhonemes=[("t", "s")]),
-            "nbr_s": FeatureKeypressFeasibility(atomicFeature="nbr_s", feasibleComboPhonemes=[("t", "s")]),
-        }
-        kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
-        report = checkComposedChords(featureKeypresses, atomicFeatureToWords, theory, kb)
-        assert w in report.infeasibleWords
-        assert w not in report.feasibleWords
-
-
-# ---------------------------------------------------------------------------
-# findCollidingNewAdditions
-# ---------------------------------------------------------------------------
-
-class TestFindCollidingNewAdditions:
-
-    def test_two_words_collide_on_same_induced_stroke(self):
-        w1 = _make_word(ortho="w1")
-        w2 = _make_word(ortho="w2")
-        wordToStrokes = {w1: ((5,),), w2: ((6,),)}
-        collisions = findCollidingNewAdditions([w1, w2], (5, 6), wordToStrokes)
-        assert collisions == [(w1, w2)]
-
-    def test_no_collision_when_induced_strokes_differ(self):
-        w1 = _make_word(ortho="w1")
-        w2 = _make_word(ortho="w2")
-        wordToStrokes = {w1: ((5,),), w2: ((7,),)}
-        collisions = findCollidingNewAdditions([w1, w2], (6,), wordToStrokes)
-        assert collisions == []
-
-    def test_single_word_never_collides(self):
-        w1 = _make_word(ortho="w1")
-        wordToStrokes = {w1: ((5,),)}
-        assert findCollidingNewAdditions([w1], (6,), wordToStrokes) == []
 
 
 # ---------------------------------------------------------------------------

@@ -111,3 +111,5 @@ Interactive Triage (Pass 4) complete 2026-09-23.
 - p5-8 | util/build_pers3_default_answers.py | **Delete** (git rm; hazardous to rerun).
 - p5-9 | ~41 one-shot util/fix*/validate*/inventory*/split*/copy* scripts | **Keep as-is**; PIPELINE lists them as one-shot.
 - p5-10 | execution | **main thread**, one commit per group, pytest after each, full md5 rebuild at end.
+- p5-11 | greedyOptimizeDiscriminator + _consistencyScore (no caller at all) | **Remove** with p5-2; greedyoptimizer.py keeps only GRAMCAT_PRIORITY (not moved).
+- p5-3 (revised) | Phase 0 diagnostic scope | **Part 2 only** (atomic-feature search: _selectCanonicalIndex, buildAtomicFeatureToWords, _appendCodaAddition, _isFeasibleAddition, FeatureKeypressFeasibility, findFeatureKeypresses, ComposedChordReport, checkComposedChords, findCollidingNewAdditions, __main__ Part 2, FEATURE_PRIORITY, B39/B40). Part 1 metric + ambiguityIgnoreList.tsv kept; PIPELINE documents it as a hand-run check after S5 (its 'overflow' = old 4-slot */# budget).
