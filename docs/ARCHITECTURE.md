@@ -78,7 +78,8 @@ exceptions must be minimized.
 make, with penalty scores loosely corresponding to the strain they induce. The layers below
 are the 1-keypress and 2-keypress phoneme assignments of the current layout, generated from
 `starboard3h.json` by `Starboard.printLayout` (src/keyboard.py:395) — regenerate them after
-any layout change. (The 3-keypress and 4-keypress layers hold only rare multi-key presses:
+any layout change with `python -m src.keyboard starboard3h.json`. (The 3-keypress and
+4-keypress layers hold only rare multi-key presses:
 `2 5 / 25 25` in layer 3, `1 1 / 1 1` in layer 4.)
 
 ```

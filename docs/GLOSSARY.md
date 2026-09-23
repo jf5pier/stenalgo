@@ -479,9 +479,16 @@ reads the report while Plover recomputes inline, so the two can drift (item B18)
 - Code: dictionary.py:373-389; util/build_realization_report.py:38.
 - First used in: Discriminating-Feature Stroke Realization (Realization Phase).
 
+### Four-code budget
+The four star/hash codes `()`, `*`, `#`, `*#` — every combination of the two reserved mark
+keys 10 and 15. Codes past it are escalated star/hash codes.
+- Code: `assignStarHashCombos` src/ambiguitychecker.py:284-288.
+- Avoid "two-key budget", "base budget", "4-slot budget".
+- First used in: Different-Lemma or Grammatical-Category Disambiguation (S7).
+
 ### K
 The number of keypress groups found by the Grouping Phase: the smallest number that is
-feasible under the hard grouping rules. Currently 7 (CLAUDE.md still says 5).
+feasible under the hard grouping rules. Currently 7.
 - Code: `keypressCount` in `keypress_groups.json`; `minKeypressesSat` src/featuregroupingsat.py:417.
 - First used in: Discriminating-Feature Grouping (Grouping Phase).
 

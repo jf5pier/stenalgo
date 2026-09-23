@@ -90,7 +90,7 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`FirstTheory.pickle` whenev
   pre-change baseline — they must be identical.
 - The hand-run ambiguity report (`python src/ambiguitychecker.py`, after Phonetic Theory
   Building (S5)) is the drift signal for homophone scope; its "overflow" metric counts
-  lemma-homophone clusters beyond the old 4-slot `*`/`#` budget.
+  lemma-homophone groups beyond the four-code budget.
 
 ## Conventions
 

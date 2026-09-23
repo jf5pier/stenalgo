@@ -110,7 +110,8 @@ Details:
    |---|---|---|---|---|---|---|---|
    | code | `()` | `*` | `#` | `*#` | `*# *#` | `*# *# *#` | one more `*#` per rank |
 
-   The first four are the **two-key budget** (none, `*`, `#`, both). Past it come
+   The first four are the **four-code budget** (none, `*`, `#`, both — every combination
+   of the two reserved mark keys). Past it come
    **escalated codes**: rank r ≥ 4 is `*#` repeated r − 2 times. There is no upper bound.
 5. Every Word of a merged set gets its representative's code, so homographs and doublets
    share one code. A group made only of doublets ends with a single code, `()`, and those
