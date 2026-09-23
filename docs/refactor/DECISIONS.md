@@ -44,3 +44,8 @@ Format: `block-id | source file:lines | decision | destination | note`
 - code scope | **Files + identifiers + comments**: runPhaseG → runFeatureGrouping, PhaseGResult → FeatureGroupingResult, "Phase E/G/P" in comments/docstrings reworded to the new names. Behaviour-neutral, verified by rebuild check.
 - md scope | user: "Update all md files" to the new terminology.
 - spec name (2026-09-23) | `docs/specs/same-lemma-markers.md` → **`docs/specs/discriminating-features.md`** (user: "ok for the rename").
+
+## Spec Extraction (Pass 2) — 2026-09-23
+- specs | written `docs/specs/star-hash-marking.md` and `docs/specs/discriminating-features.md` in the main thread (no agent). Code = source of truth; prose mismatches found were all already superseded (append-after-Realization-stroke → merged mark 2026-09-22; ROADMAP "no stroke to the most frequent lemma" → rule stack; plan's FEATURE_PRIORITY canonical choice / K=5 → answers decide / K=7; RESUME's design-order Rule 1/2/3 numbering → R1–R7). No new code bugs; precedence-order enforcement gap already B12.
+- p2-q1 | stale .py docstrings | **Fix now** (comment-only): `util/build_keypress_groups.py` K=6 note dated + K=7; `src/ambiguitychecker.py` "Rule 1/2/3" → rule names with R1–R7 ids. pytest 593 passed.
+- `conjugation_disambiguation_order.txt` stays at the repo root (plan default; linked from the spec, not copied).
