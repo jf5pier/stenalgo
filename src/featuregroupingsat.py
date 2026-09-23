@@ -60,7 +60,7 @@ def _buildDistinctnessModel(
     `src.elicitation.resolveGroupPressSets`), so there is nothing to keep distinguishable
     between them -- forcing them apart would reintroduce the very over-marking this alternates
     design exists to avoid. Callers (`_feasibleAssignment` for a hard mustShareKey search,
-    `_bestAssignmentPreferring` for a soft preference search) add their own extra
+    `_bestAssignmentWithPriorities` for soft preference tiers) add their own extra
     constraints/objective on top of this model and `x`.
     """
     model = cp_model.CpModel()
@@ -196,8 +196,8 @@ def _feasibleAssignment(
     its own); `aloneKeys` forces each given marker to share its keypress with nothing else;
     `mustDifferGroups` forces every pair within a group onto DIFFERENT keypresses. All
     three are HARD constraints: infeasible under them is reported as such, not silently
-    dropped (see `_bestAssignmentPreferring` for a soft version of same-key preferences
-    that never fails this way). `breakTiesAlphabetically` (see `_breakTiesAlphabetically`)
+    dropped (see `_bestAssignmentWithPriorities` for soft same-key preferences
+    that never fail this way). `breakTiesAlphabetically` (see `_breakTiesAlphabetically`)
     is off by default here -- `minKeypressesSat`'s own scan calls this at every candidate
     numKeys, most of which turn out infeasible or non-final, so paying for the tie-break
     on every call would be wasted work; it applies its own tie-break once, only at the
@@ -226,64 +226,6 @@ def _feasibleAssignment(
         f"CP-SAT could not prove numKeys={numKeys} feasible or infeasible within {timeLimitS}s "
         "(status UNKNOWN) -- raise timeLimitS rather than trusting a guess."
     )
-
-
-def _bestAssignmentPreferring(
-    markers: list[str],
-    signatures: list[GroupSignature],
-    numKeys: int,
-    preferSameKey: frozenset[frozenset[str]],
-    timeLimitS: float,
-    aloneKeys: frozenset[str] = frozenset(),
-    mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
-    breakTiesAlphabetically: bool = True,
-) -> tuple[dict[str, int], int]:
-    """
-    Among all valid colorings at this (already known feasible) `numKeys`, find one
-    maximizing how many `preferSameKey` pairs land on the same keypress -- a SOFT
-    tiebreaker, unlike `_feasibleAssignment`'s `mustShareKey`: a pair that genuinely
-    can't share safely at this K is simply left apart rather than making the whole
-    search infeasible. `aloneKeys`/`mustDifferGroups` (see `_feasibleAssignment`) are
-    still HARD constraints even here -- only the same-key preference is soft.
-    `breakTiesAlphabetically` (see `_breakTiesAlphabetically`) then picks one
-    reproducible, canonical coloring among whatever still ties for best. Returns
-    (colorOf, howManyPreferencesSatisfied).
-    """
-    model, x = _buildDistinctnessModel(markers, signatures, numKeys)
-    _addMustDifferPairs(model, x, numKeys, _aloneAndMustDifferPairs(markers, aloneKeys, mustDifferGroups))
-
-    sameKeyVars: list[IntVar] = []
-    for pair in preferSameKey:
-        m1, m2 = tuple(pair)
-        same = model.NewBoolVar(f"pref_{m1}_{m2}")
-        perKeyAnd: list[IntVar] = []
-        for k in range(numKeys):
-            y = model.NewBoolVar(f"prefAt_{m1}_{m2}_{k}")
-            _ = model.Add(y <= x[m1, k])
-            _ = model.Add(y <= x[m2, k])
-            _ = model.Add(y >= x[m1, k] + x[m2, k] - 1)
-            perKeyAnd.append(y)
-        _ = model.Add(same == sum(perKeyAnd))
-        sameKeyVars.append(same)
-    if sameKeyVars:
-        model.Maximize(sum(sameKeyVars))
-
-    solver = _newDeterministicSolver(timeLimitS)
-    status = solver.Solve(model)
-    if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
-        raise RuntimeError(
-            f"CP-SAT could not find/optimize a numKeys={numKeys} assignment within {timeLimitS}s "
-            "-- this numKeys was already proven feasible elsewhere, so a timeout here means "
-            "raise timeLimitS, not that no solution exists."
-        )
-    satisfied = sum(1 for v in sameKeyVars if solver.BooleanValue(v))
-    if sameKeyVars:
-        _ = model.Add(sum(sameKeyVars) == satisfied)  # lock the achieved score before tie-breaking
-    if breakTiesAlphabetically:
-        colorOf = _breakTiesAlphabetically(model, x, solver, markers, numKeys, timeLimitS)
-    else:
-        colorOf = {m: next(k for k in range(numKeys) if solver.BooleanValue(x[m, k])) for m in markers}
-    return colorOf, satisfied
 
 
 @dataclass(frozen=True)
@@ -432,11 +374,11 @@ def minKeypressesSat(
     forces a marker to share its keypress with nothing else; `mustDifferGroups` forces
     every pair within a group onto different keypresses -- all HARD constraints applied
     throughout the scan (so they can inflate K, or make it infeasible outright, unlike a
-    soft preference -- see `minKeypressesSatPreferring`). `breakTiesAlphabetically` (see
+    soft preference -- see `minKeypressesSatWithPriorities`). `breakTiesAlphabetically` (see
     `_breakTiesAlphabetically`) only ever fires on the ONE numKeys the scan returns
     (every smaller candidate is infeasible and never reaches it) -- pass False when only
-    `numKeys` matters and `colorOf` will be discarded (as `minKeypressesSatPreferring`/
-    `minKeypressesSatWithPriorities` do), to skip paying for it.
+    `numKeys` matters and `colorOf` will be discarded (as
+    `minKeypressesSatWithPriorities` does), to skip paying for it.
     """
     markers = sorted(liveMarkers(pressSetsByGroup))
     signatures = groupSignatures(pressSetsByGroup)
@@ -451,41 +393,6 @@ def minKeypressesSat(
     raise RuntimeError(f"no feasible assignment found up to maxK={maxK} under the given hard constraints")
 
 
-def minKeypressesSatPreferring(
-    pressSetsByGroup: PressSetsByGroup,
-    preferSameKey: frozenset[frozenset[str]] = frozenset(),
-    maxK: int = 20,
-    timeLimitS: float = 30.0,
-    aloneKeys: frozenset[str] = frozenset(),
-    mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
-    breakTiesAlphabetically: bool = True,
-) -> tuple[int, dict[str, int], int]:
-    """
-    Two-phase search: first find the TRUE minimum K exactly as `minKeypressesSat` does
-    -- unconstrained by the SOFT `preferSameKey` (so it can never inflate K), but still
-    subject to any HARD `aloneKeys`/`mustDifferGroups` (those apply throughout, same as
-    in `minKeypressesSat`, since they're requirements, not preferences). Then, AT that
-    fixed minimum K, re-solve maximizing how many `preferSameKey` pairs end up sharing a
-    keypress -- a tiebreaker among the (possibly many) equally-minimal colorings, not a
-    requirement -- and, if `breakTiesAlphabetically`, one final canonicalization pass
-    (see `_breakTiesAlphabetically`) among whatever still ties for best after that.
-    Returns (numKeys, colorOf, preferencesSatisfied); `preferencesSatisfied` lets a
-    caller tell "got it for free" (== len(preferSameKey)) apart from "couldn't fit it in
-    at this K" (< len(preferSameKey)).
-    """
-    markers = sorted(liveMarkers(pressSetsByGroup))
-    signatures = groupSignatures(pressSetsByGroup)
-    numKeys, _ = minKeypressesSat(
-        pressSetsByGroup, maxK=maxK, timeLimitS=timeLimitS, aloneKeys=aloneKeys, mustDifferGroups=mustDifferGroups,
-        breakTiesAlphabetically=False,
-    )
-    colorOf, satisfied = _bestAssignmentPreferring(
-        markers, signatures, numKeys, preferSameKey, timeLimitS, aloneKeys, mustDifferGroups,
-        breakTiesAlphabetically=breakTiesAlphabetically,
-    )
-    return numKeys, colorOf, satisfied
-
-
 def minKeypressesSatWithPriorities(
     pressSetsByGroup: PressSetsByGroup,
     preferences: list[PreferenceTier],
@@ -496,9 +403,8 @@ def minKeypressesSatWithPriorities(
     breakTiesAlphabetically: bool = True,
 ) -> tuple[int, dict[str, int], list[int]]:
     """
-    Like `minKeypressesSatPreferring`, but for an ORDERED list of soft preference tiers
-    (`SameKeyPreference` or `ExclusiveGroupPreference`) instead of a single same-key
-    preference: `preferences[0]` is honored as well as possible first, `preferences[1]`
+    Two-phase search over an ORDERED list of soft preference tiers
+    (`SameKeyPreference` or `ExclusiveGroupPreference`): `preferences[0]` is honored as well as possible first, `preferences[1]`
     only as a tiebreaker among colorings that already achieve `preferences[0]`'s best,
     and so on (see `_bestAssignmentWithPriorities`). None of them can inflate K -- the
     minimum is found first, unconstrained by any of them, subject only to the HARD
@@ -544,7 +450,7 @@ def serializeAssignment(
     (not the search machinery itself), JSON-serializable for `util/build_keypress_groups.py`.
     `mustShareKey`/`aloneKeys`/`mustDifferGroups` record HARD-forced decisions
     (`minKeypressesSat`); `preferSameKey`/`preferencesSatisfied` record a single SOFT
-    tiebreaker (`minKeypressesSatPreferring`); `preferenceTiers`/`achievedPerTier` (with
+    tiebreaker (a single `SameKeyPreference` tier); `preferenceTiers`/`achievedPerTier` (with
     `minKeypressesSatWithPriorities`) record an ORDERED list of soft tiers, each with the
     score it achieved -- distinct provenance from the hard fields, since none of these
     three ever risked inflating K to get their bundling, unlike mustShareKey."""
@@ -581,7 +487,7 @@ if __name__ == "__main__":
     #   if the pair can't safely share at the true minimum).
     # python -m src.featuregroupingsat marker1~marker2 -- SOFT: find the TRUE minimum K first,
     #   then prefer this pair sharing a keypress only as a tiebreaker among equally-
-    #   minimal colorings (`minKeypressesSatPreferring`; never inflates K).
+    #   minimal colorings (a one-tier `minKeypressesSatWithPriorities`; never inflates K).
     mustShareKey = frozenset(frozenset(arg.split(":")) for arg in sys.argv[1:] if ":" in arg)
     preferSameKey = frozenset(frozenset(arg.split("~")) for arg in sys.argv[1:] if "~" in arg)
 
@@ -596,7 +502,7 @@ if __name__ == "__main__":
         print(f"Preferred (soft) same-keypress pairs: {[sorted(p) for p in preferSameKey]}")
 
     if preferSameKey:
-        numKeys, colorOf, satisfied = minKeypressesSatPreferring(pressSetsByGroup, preferSameKey=preferSameKey)
+        numKeys, colorOf, (satisfied,) = minKeypressesSatWithPriorities(pressSetsByGroup, [SameKeyPreference(preferSameKey)])
         print(f"Preferences satisfied:          {satisfied}/{len(preferSameKey)}")
     else:
         numKeys, colorOf = minKeypressesSat(pressSetsByGroup, mustShareKey=mustShareKey)
