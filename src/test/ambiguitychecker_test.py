@@ -355,7 +355,7 @@ class TestGroupHomophonesByReservedStroke:
         groups = groupHomophonesByReservedStroke(finalInduced)
         assert groups == {((1, 2),): [a, b]}
 
-    def test_same_lemmeGramCat_pair_is_excluded_as_phase_p_residual(self):
+    def test_same_lemmeGramCat_pair_is_excluded_as_realization_residual(self):
         # Same lemme AND same gramCat -> Phase P's own job, not a */# case, even
         # though they still coincidentally share a final stroke here.
         a = _make_word(ortho="dors", lemme="dormir", gramCat=GramCat.VER, frequencyFilm=1.0)
@@ -386,7 +386,7 @@ class TestGroupHomophonesByReservedStroke:
 
 class TestComposeReservedKeyStrokes:
 
-    def test_appends_star_hash_extra_stroke_after_phase_p_stroke(self):
+    def test_appends_star_hash_extra_stroke_after_feature_discriminating_stroke(self):
         nom = _make_word(ortho="entrée", gramCat=GramCat.NOM, frequencyFilm=4.0)
         ver = _make_word(ortho="entré", gramCat=GramCat.VER, frequencyFilm=8.0)
         finalInduced = {nom: ((1, 2), (16,)), ver: ((1, 2), (16,))}

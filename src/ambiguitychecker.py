@@ -937,7 +937,7 @@ class KeypressGroupPhysicalAssignment:
 
 # Human preference (2026-09-22 session) for Phase P's physical coda-bank key choice,
 # keyed by MARKER rather than a Phase G group id (which can shift between reruns as
-# bundling changes) -- shared by `util/build_phase_p_realization.py`'s diagnostic
+# bundling changes) -- shared by `util/build_realization_report.py`'s diagnostic
 # artifact and `Dictionary.buildFinalTheory`'s real export, so both land on the same
 # physical keys. `pers_3` on -t: mnemonic, many pers_3 verb forms end in a written "t".
 # `impératif` on -k and `pers_2` on -d: kept in that physical order, both ahead of

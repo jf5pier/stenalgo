@@ -1,6 +1,6 @@
 """
 Shared `FirstTheory.pickle`/`Dictionary.pickle` loading, factored out of
-`util/export_plover_dictionary.py` and `util/build_phase_p_realization.py`,
+`util/export_plover_dictionary.py` and `util/build_realization_report.py`,
 which both duplicated this exact block.
 
 Requires Dictionary.pickle/FirstTheory.pickle (`python dictionary.py` first).
@@ -47,7 +47,7 @@ def loadFirstTheory() -> dict[Strokes, list[Word]]:
 
 def loadFinalTheory(
     keyboard: Keyboard,
-    phaseGPath: str = "phase_g_keypress_assignment.json",
+    keypressGroupsPath: str = "keypress_groups.json",
     resolvedPressSetsPath: str = "resolved_press_sets.json",
 ) -> dict[Word, list[Strokes]]:
     """
@@ -58,25 +58,25 @@ def loadFinalTheory(
     `ROADMAP.md`'s "Status update"). This is what actually disambiguates homophones like
     "a"/"as"/"à" -- `loadFirstTheory` alone does not.
 
-    Requires `phaseGPath` (`python -m util.build_phase_g_assignment`) and
+    Requires `keypressGroupsPath` (`python -m util.build_keypress_groups`) and
     `resolvedPressSetsPath` (`python -m src.elicitation`) to already exist.
     """
-    _theory, finalTheory = loadFirstAndFinalTheory(keyboard, phaseGPath, resolvedPressSetsPath)
+    _theory, finalTheory = loadFirstAndFinalTheory(keyboard, keypressGroupsPath, resolvedPressSetsPath)
     return finalTheory
 
 
 def loadFirstAndFinalTheory(
     keyboard: Keyboard,
-    phaseGPath: str = "phase_g_keypress_assignment.json",
+    keypressGroupsPath: str = "keypress_groups.json",
     resolvedPressSetsPath: str = "resolved_press_sets.json",
 ) -> tuple[dict[Strokes, list[Word]], dict[Word, list[Strokes]]]:
     """`loadFirstTheory` and `loadFinalTheory` together, unpickling only once -- for a
     caller that needs theory 1 alongside theory 2 (e.g. to map `resolved_press_sets.json`
     entries back onto real `Word`s, which is keyed by theory-1 strokes)."""
-    if not os.path.exists(phaseGPath):
-        raise RuntimeError(f"Run `python -m util.build_phase_g_assignment` first to generate {phaseGPath}.")
+    if not os.path.exists(keypressGroupsPath):
+        raise RuntimeError(f"Run `python -m util.build_keypress_groups` first to generate {keypressGroupsPath}.")
     if not os.path.exists(resolvedPressSetsPath):
         raise RuntimeError(f"Run `python -m src.elicitation` first to generate {resolvedPressSetsPath}.")
 
     dictionary, theory = _loadDictionaryAndFirstTheory()
-    return theory, dictionary.buildFinalTheory(theory, keyboard, phaseGPath, resolvedPressSetsPath)
+    return theory, dictionary.buildFinalTheory(theory, keyboard, keypressGroupsPath, resolvedPressSetsPath)
