@@ -99,3 +99,15 @@ Inventory run: leaner option (2 Sonnet agents) chosen by user.
 - inventory defaults accepted without a question (all "keep, already documented"): conjugation_disambiguation_order.txt, elicitation_answers.json, excluded_words.txt, keypress_groups.json, plover_stenalgo_dictionary.json, realization_report.json, requirements.txt, starboard3h.json, images/, gitignored caches.
 
 Interactive Triage (Pass 4) complete 2026-09-23.
+
+## Dead-Code Removal (Pass 5) approvals (2026-09-23)
+- p5-1 | legacy SAT/CP-SAT discriminator solvers (satoptimizer.py, cpsatoptimizer.py, satoptimizer_test.py 22 tests, dictionary.py:47 commented import) | **Remove**.
+- p5-2 | legacy greedy discriminator assignment (assignDiscriminatorKeypresses, _buildStrokePool, greedyoptimizer_test.py 16 tests; FEATURE_PRIORITY only if Phase 0 goes) | **Remove**. GRAMCAT_PRIORITY stays.
+- p5-3 | Phase 0 ambiguity-report diagnostic (ambiguitychecker __main__, buildAtomicFeatureToWords, findFeatureKeypresses, checkComposedChords, _isFeasibleAddition, _appendCodaAddition, findCollidingNewAdditions, _selectCanonicalIndex, classifyTheory, classifyStrokeCluster; 17 tests; FEATURE_PRIORITY; drop B39/B40) | **Remove** (after confirming no rebuild-chain caller). detectCrossCategoryClash is live — stays.
+- p5-4 | greedy feature grouping (runFeatureGrouping, greedyColorMarkers, coOccurrencePairs, wouldCollideIfMergedPairs, _findSharedKeypressPair, FeatureGroupingResult, __main__) | **Remove** (after confirming CP-SAT scans K independently; preferences hard-coded in build_keypress_groups.py). Loaders/verifiers stay.
+- p5-5 | featuregroupingsat Preferring API (minKeypressesSatPreferring, _bestAssignmentPreferring, __main__ use; 5 tests) | **Remove**. aloneKeys/mustDifferGroups/mustShareKey stay.
+- p5-6 | grammar.py scorer twins (analysePhonemSyllabicAmbiguity_serial, analysePhonemeLexicalAmbiguity_serial, analyseMultiphonemeLexicalAmbiguity plain) | **Remove**.
+- p5-7 | lexique.py helpers, Dictionary write-only fields, dictionary.py __main__ comments, keyboard.py __main__ | **Keep** (not selected).
+- p5-8 | util/build_pers3_default_answers.py | **Delete** (git rm; hazardous to rerun).
+- p5-9 | ~41 one-shot util/fix*/validate*/inventory*/split*/copy* scripts | **Keep as-is**; PIPELINE lists them as one-shot.
+- p5-10 | execution | **main thread**, one commit per group, pytest after each, full md5 rebuild at end.
