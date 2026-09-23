@@ -1135,7 +1135,7 @@
  {
   "text": "Je vais manger du pain.",
   "phonology": "Z° vE m@.Ze dy p5",
-  "steno": "vt@a vie m@/vte/-R pv@i paie",
+  "steno": "vt@a vie m@/vte/-l pv@i paie",
   "strokes": [
    [
     5,
@@ -1158,7 +1158,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     4,
@@ -1189,7 +1189,7 @@
    {
     "text": "manger",
     "label": "infinitif",
-    "steno": "m@/vte/-R",
+    "steno": "m@/vte/-l",
     "strokeCount": 3
    },
    {
@@ -3399,7 +3399,7 @@
  {
   "text": "Tu devrais étudier plus.",
   "phonology": "ty d°.vRE e.ty.dje ply",
-  "steno": "t@i pv@a/vRie/-d e/t@i/pvRwe/-R pmt@i",
+  "steno": "t@i pv@a/vRie/-d e/t@i/pvRwe/-l pmt@i",
   "strokes": [
    [
     7,
@@ -3437,7 +3437,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     4,
@@ -3463,7 +3463,7 @@
    {
     "text": "étudier",
     "label": "infinitif",
-    "steno": "e/t@i/pvRwe/-R",
+    "steno": "e/t@i/pvRwe/-l",
     "strokeCount": 4
    },
    {
@@ -3987,7 +3987,7 @@
  {
   "text": "Allez chercher du pain.",
   "phonology": "a.le SER.Se dy p5",
-  "steno": "a/mte/-k pmieR/pme/-R pv@i paie",
+  "steno": "a/mte/-k pmieR/pme/-l pv@i paie",
   "strokes": [
    [
     12
@@ -4013,7 +4013,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     4,
@@ -4038,7 +4038,7 @@
    {
     "text": "chercher",
     "label": "infinitif",
-    "steno": "pmieR/pme/-R",
+    "steno": "pmieR/pme/-l",
     "strokeCount": 3
    },
    {
@@ -9861,7 +9861,7 @@
  {
   "text": "Je dois aller à l'église.",
   "phonology": "Z° dwa a.le a l e.gliz",
-  "steno": "vt@a pvwa/-k a/mte/-R a mt- e/ksmtinl",
+  "steno": "vt@a pvwa/-k a/mte/-l a mt- e/ksmtinl",
   "strokes": [
    [
     5,
@@ -9887,7 +9887,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     12
@@ -9925,7 +9925,7 @@
    {
     "text": "aller",
     "label": "infinitif",
-    "steno": "a/mte/-R",
+    "steno": "a/mte/-l",
     "strokeCount": 3
    },
    {
@@ -9951,7 +9951,7 @@
  {
   "text": "Tu veux visiter la bibliothèque.",
   "phonology": "ty v2 vi.zi.te la bi.blij.o.tEk",
-  "steno": "t@i v@ie/-d vi/twi/te/-R mta svi/svmtij/ae/tiek",
+  "steno": "t@i v@ie/-d vi/twi/te/-l mta svi/svmtij/ae/tiek",
   "strokes": [
    [
     7,
@@ -9981,7 +9981,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     6,
@@ -10028,7 +10028,7 @@
    {
     "text": "visiter",
     "label": "infinitif",
-    "steno": "vi/twi/te/-R",
+    "steno": "vi/twi/te/-l",
     "strokeCount": 4
    },
    {
@@ -10048,7 +10048,7 @@
  {
   "text": "Il peut aller à la gare.",
   "phonology": "il p2 a.le a la gaR",
-  "steno": "il p*@ie a/mte/-R a mta ksaR",
+  "steno": "il p*@ie a/mte/-l a mta ksaR",
   "strokes": [
    [
     13,
@@ -10070,7 +10070,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     12
@@ -10103,7 +10103,7 @@
    {
     "text": "aller",
     "label": "infinitif",
-    "steno": "a/mte/-R",
+    "steno": "a/mte/-l",
     "strokeCount": 3
    },
    {
@@ -10129,7 +10129,7 @@
  {
   "text": "Elle aime aller à la plage.",
   "phonology": "El Em a.le a la plaZ",
-  "steno": "iel iem a/mte/-R a mta pmtaZ",
+  "steno": "iel iem a/mte/-l a mta pmtaZ",
   "strokes": [
    [
     13,
@@ -10150,7 +10150,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     12
@@ -10184,7 +10184,7 @@
    {
     "text": "aller",
     "label": "infinitif",
-    "steno": "a/mte/-R",
+    "steno": "a/mte/-l",
     "strokeCount": 3
    },
    {
@@ -10210,7 +10210,7 @@
  {
   "text": "On adore aller au cinéma.",
   "phonology": "§ a.dOR a.le o si.ne.ma",
-  "steno": "ai a/pveR a/mte/-R ae si/mRe/ma",
+  "steno": "ai a/pveR a/mte/-l ae si/mRe/ma",
   "strokes": [
    [
     12,
@@ -10234,7 +10234,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     12,
@@ -10270,7 +10270,7 @@
    {
     "text": "aller",
     "label": "infinitif",
-    "steno": "a/mte/-R",
+    "steno": "a/mte/-l",
     "strokeCount": 3
    },
    {
@@ -10290,7 +10290,7 @@
  {
   "text": "Nous souhaitons aller en vacances.",
   "phonology": "nu swE.t§ a.le @ va.k@s",
-  "steno": "mR@e swie/tai a/mte/-R @ va/k@s/-s",
+  "steno": "mR@e swie/tai a/mte/-l @ va/k@s/-s",
   "strokes": [
    [
     6,
@@ -10318,7 +10318,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     11
@@ -10352,7 +10352,7 @@
    {
     "text": "aller",
     "label": "infinitif",
-    "steno": "a/mte/-R",
+    "steno": "a/mte/-l",
     "strokeCount": 3
    },
    {
@@ -10372,7 +10372,7 @@
  {
   "text": "Ils refusent d'aller à l'école.",
   "phonology": "il R°.fyz d a.le a l e.kOl",
-  "steno": "il/-s R@a/kp@inl/-st pv- a/mte/-R a mt- e/kel",
+  "steno": "il/-s R@a/kp@inl/-st pv- a/mte/-l a mt- e/kel",
   "strokes": [
    [
     13,
@@ -10411,7 +10411,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     12
@@ -10451,7 +10451,7 @@
    {
     "text": "aller",
     "label": "infinitif",
-    "steno": "a/mte/-R",
+    "steno": "a/mte/-l",
     "strokeCount": 3
    },
    {
@@ -10633,7 +10633,7 @@
  {
   "text": "Il continue de travailler.",
   "phonology": "il k§.ti.ny d° tRa.va.je",
-  "steno": "il kai/ti/mR@i pv@a tRa/va/Rwe/-R",
+  "steno": "il kai/ti/mR@i pv@a tRa/va/Rwe/-l",
   "strokes": [
    [
     13,
@@ -10675,7 +10675,7 @@
     14
    ],
    [
-    21
+    23
    ]
   ],
   "words": [
@@ -10700,7 +10700,7 @@
    {
     "text": "travailler",
     "label": "infinitif",
-    "steno": "tRa/va/Rwe/-R",
+    "steno": "tRa/va/Rwe/-l",
     "strokeCount": 4
    }
   ]
@@ -10797,7 +10797,7 @@
  {
   "text": "On réussit à trouver la solution.",
   "phonology": "§ Re.y.si a tRu.ve la so.ly.sj§",
-  "steno": "ai Re/@i/si/-t a tR@e/ve/-R mta sae/mt@i/sRwai",
+  "steno": "ai Re/@i/si/-t a tR@e/ve/-l mta sae/mt@i/sRwai",
   "strokes": [
    [
     12,
@@ -10832,7 +10832,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     6,
@@ -10880,7 +10880,7 @@
    {
     "text": "trouver",
     "label": "infinitif",
-    "steno": "tR@e/ve/-R",
+    "steno": "tR@e/ve/-l",
     "strokeCount": 3
    },
    {
@@ -10900,7 +10900,7 @@
  {
   "text": "Vous commencez à danser.",
   "phonology": "vu ko.m@.se a d@.se",
-  "steno": "v@e kae/m@/se/-d a pv@/se/-R",
+  "steno": "v@e kae/m@/se/-d a pv@/se/-l",
   "strokes": [
    [
     5,
@@ -10936,7 +10936,7 @@
     14
    ],
    [
-    21
+    23
    ]
   ],
   "words": [
@@ -10961,7 +10961,7 @@
    {
     "text": "danser",
     "label": "infinitif",
-    "steno": "pv@/se/-R",
+    "steno": "pv@/se/-l",
     "strokeCount": 3
    }
   ]
@@ -10969,7 +10969,7 @@
  {
   "text": "Elles préfèrent rester ici.",
   "phonology": "El pRe.fER REs.te i.si",
-  "steno": "iel/-s pRe/kpieR/-st Ries/te/-R i/si",
+  "steno": "iel/-s pRe/kpieR/-st Ries/te/-l i/si",
   "strokes": [
    [
     13,
@@ -11006,7 +11006,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     13
@@ -11032,7 +11032,7 @@
    {
     "text": "rester",
     "label": "infinitif",
-    "steno": "Ries/te/-R",
+    "steno": "Ries/te/-l",
     "strokeCount": 3
    },
    {
@@ -11931,7 +11931,7 @@
  {
   "text": "Elle vous invite à dîner.",
   "phonology": "El vu 5.vit a di.ne",
-  "steno": "iel v@e aie/vit a pvi/mRe/-R",
+  "steno": "iel v@e aie/vit a pvi/mRe/-l",
   "strokes": [
    [
     13,
@@ -11967,7 +11967,7 @@
     14
    ],
    [
-    21
+    23
    ]
   ],
   "words": [
@@ -11998,7 +11998,7 @@
    {
     "text": "dîner",
     "label": "infinitif",
-    "steno": "pvi/mRe/-R",
+    "steno": "pvi/mRe/-l",
     "strokeCount": 3
    }
   ]
@@ -12189,7 +12189,7 @@
  {
   "text": "Je dois rester ici.",
   "phonology": "Z° dwa REs.te i.si",
-  "steno": "vt@a pvwa/-k Ries/te/-R i/si",
+  "steno": "vt@a pvwa/-k Ries/te/-l i/si",
   "strokes": [
    [
     5,
@@ -12217,7 +12217,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     13
@@ -12243,7 +12243,7 @@
    {
     "text": "rester",
     "label": "infinitif",
-    "steno": "Ries/te/-R",
+    "steno": "Ries/te/-l",
     "strokeCount": 3
    },
    {
@@ -12257,7 +12257,7 @@
  {
   "text": "Tu peux m'aider aujourd'hui.",
   "phonology": "ty p2 m E.de o.ZuR.d8i",
-  "steno": "t@i p@ie/-d m- ie/pve/-R ae/vt@eR/pv@ai",
+  "steno": "t@i p@ie/-d m- ie/pve/-l ae/vt@eR/pv@ai",
   "strokes": [
    [
     7,
@@ -12286,7 +12286,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     12,
@@ -12329,7 +12329,7 @@
    {
     "text": "aider",
     "label": "infinitif",
-    "steno": "ie/pve/-R",
+    "steno": "ie/pve/-l",
     "strokeCount": 3
    },
    {
@@ -12413,7 +12413,7 @@
  {
   "text": "Elle peut parler anglais.",
   "phonology": "El p2 paR.le @.glE",
-  "steno": "iel p*@ie paR/mte/-R @/ksmtie",
+  "steno": "iel p*@ie paR/mte/-l @/ksmtie",
   "strokes": [
    [
     13,
@@ -12438,7 +12438,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     11
@@ -12468,7 +12468,7 @@
    {
     "text": "parler",
     "label": "infinitif",
-    "steno": "paR/mte/-R",
+    "steno": "paR/mte/-l",
     "strokeCount": 3
    },
    {
@@ -12546,7 +12546,7 @@
  {
   "text": "Nous voulons manger maintenant.",
   "phonology": "nu vu.l§ m@.Ze m5.t°.n@",
-  "steno": "mR@e v@e/mtai m@/vte/-R maie/t@a/mR@",
+  "steno": "mR@e v@e/mtai m@/vte/-l maie/t@a/mR@",
   "strokes": [
    [
     6,
@@ -12575,7 +12575,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     6,
@@ -12610,7 +12610,7 @@
    {
     "text": "manger",
     "label": "infinitif",
-    "steno": "m@/vte/-R",
+    "steno": "m@/vte/-l",
     "strokeCount": 3
    },
    {
@@ -12624,7 +12624,7 @@
  {
   "text": "Vous pouvez appeler demain.",
   "phonology": "vu pu.ve a.p°.le d°.m5",
-  "steno": "v@e p@e/ve a/p@a/mte/-R pv@a/maie",
+  "steno": "v@e p@e/ve a/p@a/mte/-l pv@a/maie",
   "strokes": [
    [
     5,
@@ -12654,7 +12654,7 @@
     14
    ],
    [
-    21
+    23
    ],
    [
     4,
@@ -12685,7 +12685,7 @@
    {
     "text": "appeler",
     "label": "infinitif",
-    "steno": "a/p@a/mte/-R",
+    "steno": "a/p@a/mte/-l",
     "strokeCount": 4
    },
    {
