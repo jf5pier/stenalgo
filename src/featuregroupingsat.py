@@ -2,12 +2,10 @@
 # coding: utf-8
 """
 Discriminating-Feature Grouping (Grouping Phase) — CP-SAT exact minimum-K search (see
-ATOMIC_KEYPRESS_REWIRE_PLAN.md's Phase G section: "Phase G is only greedy-optimal, not
-proven-minimal... reusing _colorFeatures/_minSpecialKeypressesNeeded's scaffolding... to
-search for something smaller than K=6/7"). The earlier greedy coloring (removed) found *a*
-feasible K but gave no guarantee it was the smallest possible; this module proves the
+docs/specs/discriminating-features.md §3: the earlier greedy coloring found *a*
+feasible K but gave no guarantee it was the smallest possible). This module proves the
 minimum exactly (or proves a candidate K infeasible), by direct search rather than by reusing
-`_colorFeatures` itself -- that scaffolding's "conflict" semantics (at most one member
+the greedy scaffolding -- its "conflict" semantics (at most one member
 of a feature SET may share a key) is the wrong shape for the Grouping Phase's actual constraint,
 which is per-cluster set-DISTINCTNESS over induced press-sets (see module docstring
 below and `featuregrouping.verifyKeypressAssignment`, the ground truth this mirrors exactly --

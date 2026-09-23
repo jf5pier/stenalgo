@@ -305,7 +305,7 @@ def test_serializeResolvedPressSets_carries_readings_parallel_to_alternates(parl
     assert "readings" not in serializeResolvedPressSets(pressSetsByGroup)[0]
 
 
-# ── Regression: the real "calmez" over-marking bug (RESUME_2026-09-21-steno-trainer.md) ──
+# ── Regression: the real "calmez" over-marking bug (docs/specs/discriminating-features.md §2.4) ──
 
 @pytest.fixture
 def calmer_group() -> dict[str, list[Word]]:

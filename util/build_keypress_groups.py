@@ -22,10 +22,9 @@ per-combination alternates (688c74d); all three soft tiers still achieved.
 
 This is the canonical, checked-in artifact other work (Discriminating-Feature Stroke
 Realization (Realization Phase), or future re-runs)
-should read -- not something to regenerate by ad hoc inline scripts each time, per the
-plan's own note that this was previously missing (see RESUME_2026-09-19-phaseG.md's
-"Still open" item 2, now addressed for the CP-SAT path the same way it was for the
-elicitation-model regeneration path).
+should read -- not something to regenerate by ad hoc inline scripts each time (that
+mistake was made once, before this script existed, and is documented in git history
+around the Grouping Phase work).
 
 Run: python -m util.build_keypress_groups
 Requires resolved_press_sets.json (`python -m src.elicitation` first) and

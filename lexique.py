@@ -66,7 +66,7 @@ ignoredList = frozenset(loadLexiconExclusions())
 # "kasher" -- kasher/cachère (and kascher/cascher, already inert) are now dropped
 # entirely via resources/lexiconExclusions.tsv instead of lemme-normalized, since
 # they were causing an unresolvable spelling-ambiguity in the discriminator
-# selection (see SHARED_DISCRIMINATOR_REWIRE_PLAN.md-adjacent session notes / RESUME_2026-09-17.md).
+# selection (see docs/PIPELINE.md, Lexicon Building (S1)).
 # île/ile is the 1990 orthographic-reform circumflex-dropping variant of "île".
 spellingVariantLemme: dict[str, str] = {
     "ile": "île",

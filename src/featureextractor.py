@@ -261,7 +261,7 @@ def selectSharedDiscriminators(
         if not featureCounts:
             break
         # Prefer the feature covering the most still-unresolved homograph groups (a true
-        # greedy set-cover, per SHARED_DISCRIMINATOR_REWIRE_PLAN.md §7's A/B); break ties by simplicity
+        # greedy set-cover, coverage-first); break ties by simplicity
         # (fewest ':'/'_' components), then by name.
         bestFeature = min(sorted(featureCounts),
                            key=lambda feature: (-featureCounts[feature], _featureComplexity(feature)))
@@ -288,10 +288,9 @@ def buildDiscriminatorSelection(
     """
     Single entry point for the adaptive, redundancy-free discriminator selection
     (buildFeasibleDiscriminatorOptions + selectSharedDiscriminators), reshaped into the same
-    dict[tuple[WordFeature, ...], list[tuple[Word, ...]]] shape greedyOptimizeDiscriminator
-    produces, so every downstream consumer (dictionary.py's Special
-    keypress mapping table, the verb-paradigm tooling) shares one selection
-    instead of each re-deriving its own (see SHARED_DISCRIMINATOR_REWIRE_PLAN.md).
+    dict[tuple[WordFeature, ...], list[tuple[Word, ...]]] shape the retired greedy
+    discriminator optimizer produced, so every downstream consumer (the verb-paradigm
+    tooling) shares one selection instead of each re-deriving its own.
 
     Pass an already-computed wordIsDiscrminatedByFeature (extractDiscriminatingFeatures's
     first return value) when the caller already has one, to avoid a redundant full-corpus

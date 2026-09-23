@@ -1,9 +1,8 @@
 """
-Discriminating-Feature Elicitation (Elicitation Phase) step E4 tool: renders
+Discriminating-Feature Elicitation (Elicitation Phase) questionnaire-page tool: renders
 questionnaire.json (written by `python -m src.elicitation`) into the elicitation
-questionnaire's HTML/JS, ready to publish as an Artifact (see ATOMIC_KEYPRESS_REWIRE_PLAN.md's
-open decision §F -- resolved to a web page with checkboxes and a save button backed by the
-Artifact `db` capability).
+questionnaire's HTML/JS, ready to publish as an Artifact (a web page with checkboxes and a
+save button backed by the Artifact `db` capability).
 """
 import json
 import os

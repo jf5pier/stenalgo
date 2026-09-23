@@ -1,6 +1,6 @@
 """
-Persist the milestone-1 output of Discriminating-Feature Stroke Realization (Realization
-Phase) (see RESUME_2026-09-19-phaseP-plan.md): for each of the abstract keypress groups of
+Persist the report-build output of Discriminating-Feature Stroke Realization (Realization
+Phase) (see docs/specs/discriminating-features.md §4): for each of the abstract keypress groups of
 Discriminating-Feature Grouping (Grouping Phase) (`keypress_groups.json`), search for a
 physical right-hand coda key-combo (`starboard3h.json`'s keys `[16..25]`) that realizes it
 as a brand-new trailing stroke appended after a word's own strokes (an extra "syllable"),
@@ -8,9 +8,9 @@ without colliding with any word's existing stroke in the live `theory`, or with 
 affected word's own newly-composed stroke -- composing ALL of a word's needed groups
 into that one shared extra stroke, not just the group currently being decided.
 
-This is milestone 1's concrete deliverable -- it does NOT yet rewrite `theory`/persist a
-final stroke-per-word table (that's the deferred `theory.tsv`-replacement work described in
-the plan). It writes `realization_report.json`: per keypress group, the chosen
+This is the report-build call site -- it does NOT rewrite `theory` or persist a
+final stroke-per-word table; theory 2 is computed inline by `Dictionary.buildFinalTheory`
+(the inline path) on every exporter run. It writes `realization_report.json`: per keypress group, the chosen
 coda key-combo (or null if left unassigned), its cost, the alternate candidates considered,
 and any residual collisions the greedy group-by-group search still missed (see
 `realizeKeypressGroupsAsExtraStroke`'s own docstring for why those can happen and why a
