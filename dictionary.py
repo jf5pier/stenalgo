@@ -44,7 +44,6 @@ from src.ambiguitychecker import (
 )
 
 
-#from src.cpsatoptimizer import optimizeTheory
 from tqdm import tqdm
 import sys
 
