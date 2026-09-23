@@ -8,18 +8,16 @@ FeatureDiscrimator.pickle
 FirstTheory.pickle
 AugTheory.pickle*
 
-# Regenerable reports (src/ambiguitychecker.py)
+# Regenerable report (src/ambiguitychecker.py __main__, hand-run diagnostic)
 ambiguity_report.tsv
-feature_keypress_feasibility.tsv
 
 # Regenerable pipeline output (dictionary.py)
 theory.tsv
 theory2.tsv
 
-# Regenerable Phase E outputs (src/elicitation.py, util/build_questionnaire_page.py)
+# Regenerable Elicitation Phase outputs (src/elicitation.py, util/build_questionnaire_page.py)
 questionnaire.json
 elicitation_questionnaire.html
-elicitation_questionnaire_pers3default.html
 resolved_press_sets*.json
 
 # Regenerable report (util/check_conjugation_disambiguation_order.py)
