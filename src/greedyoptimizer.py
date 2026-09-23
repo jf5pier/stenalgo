@@ -3,7 +3,7 @@
 #
 
 # Grammatical-category priority for the `*`/`#` cross-lemma/cross-category marking
-# rule (see RESUME_2026-09-20-starhash-priority.md's regret-minimization design).
+# rule (see docs/specs/star-hash-marking.md §2's regret-minimization design).
 # Higher value = more canonical/unmarked.
 # Fitted on the residual population left after that design's ratio-10x exemption and
 # homograph exclusion are applied -- a single consistent linear order (`ADV > PRO:pos

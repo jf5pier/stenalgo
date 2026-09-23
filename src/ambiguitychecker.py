@@ -80,7 +80,7 @@ def detectCrossCategoryClash(words: list[Word]) -> list[Lemme]:
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# `*`/`#` marking rule (see RESUME_2026-09-20-starhash-priority.md) -- decides,
+# `*`/`#` marking rule (see docs/specs/star-hash-marking.md) -- decides,
 # for a clashing pair (bucket 2's crossCategoryClashCollisions or bucket 3's
 # crossLemmaCollisions, both produced by realizeKeypressGroupsAsExtraStroke),
 # which side needs the extra disambiguating stroke.
@@ -93,8 +93,8 @@ def loadReform1990DoubletPairs(tsvPath: str = "resources/reform1990.tsv") -> fro
     """
     Parses resources/reform1990.tsv into a set of {oldSpelling, newSpelling} pairs --
     genuine same-word pre/post-1990-reform spelling doublets, not real lexical
-    ambiguity (decideStarHashMark's reform-doublet exemption (R2); "Rule 3" in
-    RESUME_2026-09-20-starhash-priority.md: the earlier
+    ambiguity (decideStarHashMark's reform-doublet exemption (R2); in the design
+    notes (git history, RESUME_2026-09-20-starhash-priority.md) the earlier
     collision-count heuristic version of this rule was tested and disproven against
     real Google Ngram data; this cross-references the file's own sourced, OQLF- and
     Journal-officiel-verified pair list instead). Rows flagged `isException=True` are
@@ -651,7 +651,8 @@ def buildKeypressGroupToWords(
     the search/collision machinery below is unaffected by alternates. Any further
     alternates are realized separately, once every group already has a physical key, via
     `buildKeypressGroupExtraAlternates` + `realizeKeypressGroupsAsExtraStroke`'s
-    `extraGroupSetsByWord` parameter (see DESIGN_alternate_press_sets.md section 4).
+    `extraGroupSetsByWord` parameter (see docs/specs/discriminating-features.md §4,
+    "Alternate entries").
     """
     groupToWords: dict[int, list[Word]] = defaultdict(list)
     for entry in resolvedGroups:
@@ -684,7 +685,7 @@ def buildKeypressGroupExtraAlternates(
     `realizeKeypressGroupsAsExtraStroke`'s `extraGroupSetsByWord` so each such reading gets
     realized as its own additional physical extra stroke once every group's key is
     decided, rather than silently dropped: per
-    `src.elicitation.resolveGroupPressSets`/`ATOMIC_KEYPRESS_REWIRE_PLAN.md`'s vocabulary,
+    `src.elicitation.resolveGroupPressSets` (see docs/GLOSSARY.md, "Feature Combination"),
     readings of the same spelling never conflict with each other, so each is
     independently a valid way to write that spelling.
     """
@@ -810,8 +811,8 @@ def _isInScopeCollision(word1: Word, word2: Word) -> bool:
       already-documented "aller"-style cross-category clash (`detectCrossCategoryClash`),
       a separate, pre-existing issue class;
     - different lemma entirely (e.g. "abymes"/"abîmes") is cross-lemma homophone
-      disambiguation, the reserved `*`/`#` keys' job (RESUME_2026-09-18's design
-      decision #1), not yet applied to the live `theory` this runs against.
+      disambiguation, the reserved `*`/`#` keys' job (docs/specs/star-hash-marking.md
+      §1, "Two reserved keys only"), not yet applied to the live `theory` this runs against.
     """
     return word1.ortho != word2.ortho and word1.lemmeGramCat == word2.lemmeGramCat
 

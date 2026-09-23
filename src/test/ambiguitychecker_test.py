@@ -871,7 +871,8 @@ class TestRealizeKeypressGroupsAsExtraStroke:
 
 
 class TestRealizeKeypressGroupsAsExtraStrokeWithExtraAlternates:
-    """The real "calmez" regression (RESUME_2026-09-21-steno-trainer.md item 2): a
+    """The real "calmez" regression (docs/specs/discriminating-features.md §2.4,
+    "self-homograph"): a
     self-homograph spelling's OTHER readings (`extraGroupSetsByWord`) must be realized
     as their own additional strokes -- checked against every OTHER word, but never
     flagged against the SAME word's own primary reading."""

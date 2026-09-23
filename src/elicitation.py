@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # coding: utf-8
 """
-Discriminating-Feature Elicitation (Elicitation Phase) (see ATOMIC_KEYPRESS_REWIRE_PLAN.md)
+Discriminating-Feature Elicitation (Elicitation Phase) (see
+docs/specs/discriminating-features.md)
 — elicitation before optimization.
 
 E2/E3: enumerate every same-lemma homophone group (words sharing a lemma+gramCat that
@@ -384,8 +385,8 @@ def resolveGroupPressSets(
     alternates. A spelling with several combinations (a homograph reading of itself,
     e.g. "calmez" = impératif 2p / indicatif présent 2p) keeps each combination's press
     separately rather than unioning them together: readings of the same spelling never
-    conflict with each other (they produce the same output text -- see
-    ATOMIC_KEYPRESS_REWIRE_PLAN.md's vocabulary section), so any ONE of them is
+    conflict with each other (they produce the same output text -- see docs/GLOSSARY.md,
+    "Feature Combination"), so any ONE of them is
     independently sufficient to identify the spelling. Forcing the union would make the
     press over-specific (the calmez/`-kt` bug: `impératif` alone or `pers_2` alone each
     already separates "calmez" from every sibling spelling; requiring both is

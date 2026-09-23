@@ -1,11 +1,13 @@
 #!/usr/bin/python
 # coding: utf-8
 """
-Discriminating-Feature Grouping (Grouping Phase) (see ATOMIC_KEYPRESS_REWIRE_PLAN.md's
-Phase G section): assign every live marker to an abstract keypress, minimizing K, without
-breaking any homophone group's no-conflict property. Input is `resolved_press_sets.json`
-(the persisted artifact of Discriminating-Feature Elicitation (Elicitation Phase) step E6) --
-NOT `src/featureextractor.py`'s `buildDiscriminatorSelection` output.
+Discriminating-Feature Grouping (Grouping Phase) loaders and verifiers (the spec is
+docs/specs/discriminating-features.md; the exact CP-SAT solver is
+src/featuregroupingsat.py): assign every live atomic feature to an abstract keypress group,
+minimizing K, without breaking any homophone group's no-conflict property. Input is
+`resolved_press_sets.json`
+(the persisted artifact of the Elicitation Phase's Press-Set Resolution) --
+NOT `src/featureextractor.py`'s discriminator-selection output.
 
 Vocabulary (GLOSSARY.md / the plan's own fixed vocabulary): Marker (atomic feature),
 Press (the marker-set a writer presses for one word), Keypress (the abstract unit a
