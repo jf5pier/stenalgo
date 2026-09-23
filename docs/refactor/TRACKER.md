@@ -27,7 +27,7 @@ deleted in Final Check and Cleanup (Pass 7).
 | Setup and Baseline (Pass 0) | done | snapshot commit 5ae0118; `baseline.md5` (PYTHONHASHSEED=0, reproduced twice) |
 | Pipeline Call Graph and Glossary (Pass 1) | done | docs/PIPELINE.md, docs/GLOSSARY.md, callgraph/90-findings.md; todo.md "Suspected bugs" (B1–B35) and "Queued follow-ups"; new terminology in all Markdown and in `.py` comments/docstrings; file renames (below) |
 | Spec Extraction (Pass 2) | done | docs/specs/star-hash-marking.md, docs/specs/discriminating-features.md; comment-only docstring fixes (DECISIONS p2-q1) |
-| Doc and Data Inventory (Pass 3) | todo | outputs in `inventory/` |
+| Doc and Data Inventory (Pass 3) | done | leaner run (2 Sonnet agents); `inventory/{A,B,C,D}.md`; main-thread spot-check corrections appended in A.md (GramCat count) and C.md (9 `.py` RESUME links) |
 | Interactive Triage (Pass 4) | todo | log in `DECISIONS.md` |
 | Dead-Code Removal (Pass 5) | todo | `deadcode.md` |
 | Doc Rewrite (Pass 6) | todo | |
@@ -48,11 +48,11 @@ deleted in Final Check and Cleanup (Pass 7).
   after the renames (identical hashes, new file names).
 
 ## Next action
-**Doc and Data Inventory (Pass 3)** — read-only, 4 agents in parallel (bundles A–D in the plan),
-outputs `docs/refactor/inventory/<bundle>.md`, one row per block (source lines, summary,
-category, recommended action/destination, reason). Blocks already covered by
-docs/PIPELINE.md or docs/specs/ are categorised "already covered". Offer the user a leaner
-option (cheaper model / fewer agents) before launching.
+**Interactive Triage (Pass 4)** — AskUserQuestion rounds of up to 4 blocks, order: README → ROADMAP →
+todo.md → CLAUDE.md → plan/design docs (inventory/B.md) → RESUME files (inventory/C.md, only the
+blocks with unique facts: RESUME_2026-09-22-trainer-features.md's 4 open items) → data files and
+scratch (inventory/D.md). Source of questions: each inventory file's "Questions for triage" list.
+Log every answer in DECISIONS.md immediately. No doc edits during this pass.
 
 ## Notes for later passes
 - Dead-Code Removal (Pass 5): Keyboard Layout Optimization (S4) is **not** dead code (decision
