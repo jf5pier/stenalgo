@@ -53,8 +53,8 @@ new terms:
 - `docs/specs/star-hash-marking.md`: the `decideStarHashMark` rule stack (homograph exemption (R1)
   … frequency fallback (R7)), ranking/escalation and physical composition, from docs/PIPELINE.md
   §Different-Lemma or Grammatical-Category Disambiguation (S7).
-- The plan's `docs/specs/same-lemma-markers.md` needs a name that fits the new terms (e.g.
-  `docs/specs/discriminating-features.md`) — **confirm the name with the user** first.
+- `docs/specs/discriminating-features.md` (the plan's `same-lemma-markers.md`; name confirmed by
+  the user 2026-09-23): Elicitation, Grouping and Realization Phases of S6.
 
 ## Notes for later passes
 - Dead-Code Removal (Pass 5): Keyboard Layout Optimization (S4) is **not** dead code (decision
