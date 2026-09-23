@@ -29,7 +29,7 @@ deleted in Final Check and Cleanup (Pass 7).
 | Spec Extraction (Pass 2) | done | docs/specs/star-hash-marking.md, docs/specs/discriminating-features.md; comment-only docstring fixes (DECISIONS p2-q1) |
 | Doc and Data Inventory (Pass 3) | done | leaner run (2 Sonnet agents); `inventory/{A,B,C,D}.md`; main-thread spot-check corrections appended in A.md (GramCat count) and C.md (9 `.py` RESUME links) |
 | Interactive Triage (Pass 4) | done | 6 rounds in DECISIONS.md (t-r, t-m, t-t, t-c, t-b, t-x, t-d); new bugs B36–B42 to file in Pass 6 |
-| Dead-Code Removal (Pass 5) | in progress | discovery agent (Sonnet) launched 2026-09-23 → `deadcode.md`; next: spot-check, approval rounds |
+| Dead-Code Removal (Pass 5) | done | full rebuild md5 IDENTICAL to baseline (`pass5.md5`); `deadcode.md` (+ spot-check); decisions p5-1…p5-11; 7 commits a0ea7aa…647595a; pytest 593 → 522 (−71 removed on purpose: 22+12+16+16+5) |
 | Doc Rewrite (Pass 6) | todo | |
 | Final Check and Cleanup (Pass 7) | todo | |
 
@@ -48,20 +48,8 @@ deleted in Final Check and Cleanup (Pass 7).
   after the renames (identical hashes, new file names).
 
 ## Next action
-**Dead-Code Removal (Pass 5)** — discovery agent writes `docs/refactor/deadcode.md` (static
-reachability from the real entry points; see plan). Extra candidates from triage:
-`util/build_pers3_default_answers.py` (t-d1); `_isFeasibleAddition`/`checkComposedChords`
-(diagnostic-only, now B39/B40 — if removed, drop B39/B40 too); legacy
-`greedyOptimizeDiscriminator` selector (t-t2). Keep `selectSharedDiscriminators` /
-`buildDiscriminatorSelection` (live via S2 gating).
-**User chose: 1 Sonnet agent** (2026-09-23; est. 300k–600k tokens) — launch directly, no need to ask again.
-Put these false-positive traps in its prompt, and spot-check its "dead" verdicts afterwards:
-- pickle loading relies on `sys.modules["__main__"].Dictionary = Dictionary` (util/_theoryio.py,
-  util/build_*, scratch) — classes reachable only via unpickling are live;
-- tag separately: test-only, diagnostic-`__main__`-only (e.g. ambiguitychecker `__main__` :1394–1420),
-  S2-gating-only (util/completeVerbParadigms.py → featureextractor), one-shot util/fix*/validate* scripts;
-- `cpsatsolver.optimizeKeyboard` + `optimizeBiphonemeOrder`/`analyseAmbiguities` = kept deliberately (b5);
-- `GRAMCAT_PRIORITY` in greedyoptimizer.py is live (R6); the plover plugin (`plover_stenalgo/`) is an entry point.
+Start
+**Doc Rewrite (Pass 6)** (see plan + DECISIONS.md overrides + the Pass 5 notes below). Offer a "wrap up leaner" option before launching its per-file agents.
 
 ## Notes for later passes
 - Dead-Code Removal (Pass 5): Keyboard Layout Optimization (S4) is **not** dead code (decision
@@ -71,3 +59,11 @@ Put these false-positive traps in its prompt, and spot-check its "dead" verdicts
   if the RESUME file is deleted.
 - Doc Rewrite (Pass 6): do NOT file B39/B40 (their code was removed in Pass 5, p5-3). Overrides from triage: **no docs/RECOMPUTE.md** (merge into PIPELINE, t-c3);
   new **docs/PRIOR_ART.md** (t-m4); todo.md gets B36–B42 (t-t1, t-b2, t-x2, t-x3); define "regret" (t-d2).
+- Doc Rewrite (Pass 6), from Dead-Code Removal (Pass 5): PIPELINE/GLOSSARY/callgraph entries for removed code
+  must go or be marked removed: satoptimizer/cpsatoptimizer, greedyoptimizer (now GRAMCAT_PRIORITY only),
+  ambiguitychecker Part 2 (atomic-feature search, `feature_keypress_feasibility.tsv`), featuregrouping greedy
+  path, `minKeypressesSatPreferring`, grammar.py `_serial` twins, `build_pers3_default_answers.py`
+  (PIPELINE.md:556/:872/:1016). Document the ambiguitychecker `__main__` Part 1 metric as a hand-run check after
+  S5 (reads `ambiguityIgnoreList.tsv`; its "overflow" = old 4-slot */# budget). Kept but noted: lexique.py
+  unused helpers, Dictionary write-only fields, dictionary.py/keyboard.py `__main__` leftovers (p5-7).
+  90-findings.md item 6 is wrong: `Syllable.phonoWords` is live (S4 statistics).
