@@ -82,9 +82,8 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`FirstTheory.pickle` whenev
 ## Verification approach
 
 - `pytest src/test/` must pass after any `.py` change (522 tests at the time of writing).
-- Behaviour-preserving changes are proven by a full rebuild: `bash docs/refactor/rebuild_and_hash.sh`
-  (while that script exists; afterwards follow the rebuild table in `docs/PIPELINE.md`) with
-  `PYTHONHASHSEED=0`, comparing the md5s of `theory.tsv`, `theory2.tsv`,
+- Behaviour-preserving changes are proven by a full rebuild following the rebuild table in
+  `docs/PIPELINE.md` with `PYTHONHASHSEED=0`, comparing the md5s of `theory.tsv`, `theory2.tsv`,
   `resolved_press_sets.json`, `keypress_groups.json`, `realization_report.json`,
   `plover_stenalgo_dictionary.json` and `steno-trainer/public/data/*.json` against a
   pre-change baseline — they must be identical.

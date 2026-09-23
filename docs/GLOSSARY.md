@@ -9,13 +9,13 @@ Each entry gives a plain definition, a code anchor, preferred/avoid notes where 
 and the pipeline stage where the term first matters. Stages and phases are always cited by
 descriptive name with the code in parentheses, for example "Discriminating-Feature Grouping
 (Grouping Phase)". The terminology was settled in the Glossary Review (Pass 1d) of the docs
-refactor (`docs/refactor/DECISIONS.md`, ids a1-a12 and b1-b9).
+refactor (decision log in git history: `docs/refactor/DECISIONS.md`, ids a1-a12 and b1-b9).
 
 ## Legacy names
 
-Older prose (the RESUME/NOTES/PLAN session notes and ROADMAP history, all now only in git
-history, plus commit messages and the `docs/refactor/callgraph/` drafts) uses letter phase
-codes, older stage names and older terms. They map as follows.
+Older prose (the RESUME/NOTES/PLAN session notes and ROADMAP history, the docs-refactor
+decision log and callgraph drafts, and commit messages — all only in git history) uses letter
+phase codes, older stage names and older terms. They map as follows.
 
 | Legacy name | Current name |
 |---|---|
