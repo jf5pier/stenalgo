@@ -96,7 +96,8 @@ def loadReform1990DoubletPairs(tsvPath: str = "resources/reform1990.tsv") -> fro
     """
     Parses resources/reform1990.tsv into a set of {oldSpelling, newSpelling} pairs --
     genuine same-word pre/post-1990-reform spelling doublets, not real lexical
-    ambiguity (Rule 3 from RESUME_2026-09-20-starhash-priority.md: the earlier
+    ambiguity (decideStarHashMark's reform-doublet exemption (R2); "Rule 3" in
+    RESUME_2026-09-20-starhash-priority.md: the earlier
     collision-count heuristic version of this rule was tested and disproven against
     real Google Ngram data; this cross-references the file's own sourced, OQLF- and
     Journal-officiel-verified pair list instead). Rows flagged `isException=True` are
@@ -206,7 +207,9 @@ def decideStarHashMark(
       6. GRAMCAT_PRIORITY for the remaining cross-category residual -- the
          lower-priority (more marked) category is marked. A category pair outside
          this 6-entry table (not observed in the design session's residual) falls
-         back to per-pair frequency.
+         back to per-pair frequency (the frequency fallback (R7)).
+    Rules 1-6 are the homograph exemption (R1) ... category-priority rule (R6) of
+    docs/specs/star-hash-marking.md.
     Returns the Word to mark, or None if no mark is needed.
     """
     if wordA.ortho == wordB.ortho:
@@ -245,7 +248,7 @@ def _starHashCompare(
 ) -> int:
     """Comparator for ranking a cluster canonical-first (least marked first): -1 if a
     is more canonical than b, +1 if b is. Delegates to decideStarHashMark for the real
-    decision; a None result (Rule 1 homograph or Rule 2 spelling-doublet exemption) has
+    decision; a None result (homograph exemption (R1) or reform-doublet exemption (R2)) has
     no ordering signal of its own, so it falls back to frequency then ortho purely to
     keep sort() stable and deterministic -- it does not imply one is "more canonical"
     than the other."""
@@ -299,9 +302,9 @@ def assignStarHashMarks(
     collapse to ONE representative -- their merged group's highest-frequency member --
     before ranking, keeping the cluster from consuming extra slots or escalating to an
     extra syllable it doesn't actually need:
-      - identical `ortho` (decideStarHashMark's Rule 1: same typed output regardless of
+      - identical `ortho` (decideStarHashMark's homograph exemption (R1): same typed output regardless of
         intended reading);
-      - lemmes forming a `doubletPairs` entry (Rule 2: genuinely the same word under
+      - lemmes forming a `doubletPairs` entry (reform-doublet exemption (R2): genuinely the same word under
         two 1990-reform spelling conventions, see loadReform1990DoubletPairs).
     Every word in a merged group then gets its representative's code.
     """
@@ -392,7 +395,7 @@ def groupHomophonesByReservedStroke(finalInduced: dict[Word, Strokes]) -> dict[S
         already separated those onto different strokes);
       - >= 2 distinct `ortho` values -- an all-homograph group types identically
         regardless of which reading was meant, so it was never a real ambiguity
-        (decideStarHashMark's Rule 2).
+        (decideStarHashMark's homograph exemption (R1)).
     """
     byStroke: dict[Strokes, list[Word]] = defaultdict(list)
     for word, stroke in finalInduced.items():
@@ -432,7 +435,7 @@ def composeReservedKeyStrokes(
     their composed forms do too; within one cluster, the marking codes differ. Words with
     no star/hash mark needed (the canonical member of their group, a spelling-doublet of it, or
     not part of any group at all) keep their `finalInduced` stroke unchanged. Pass
-    `doubletPairs` (loadReform1990DoubletPairs) to also apply Rule 3's spelling-doublet
+    `doubletPairs` (loadReform1990DoubletPairs) to also apply the reform-doublet exemption (R2)'s spelling-doublet
     exemption.
     """
     composed = dict(finalInduced)

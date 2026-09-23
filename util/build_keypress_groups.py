@@ -16,8 +16,9 @@ possible first, tier 1 only as a tiebreaker among colorings that already achieve
 2. `future` shares a keypress with `passé`.
 3. `nbr_p`/`p`'s keypress has no OTHER marker on it (stays exclusive to the two of them).
 
-Confirmed against the real lexicon: still K=6 (the hard constraints didn't cost
-anything extra here), all three soft tiers fully achieved, 0 conflicts.
+Confirmed against the real lexicon on 2026-09-19: still K=6 (the hard constraints didn't cost
+anything extra there), all three soft tiers fully achieved, 0 conflicts. K=7 since the
+per-combination alternates (688c74d); all three soft tiers still achieved.
 
 This is the canonical, checked-in artifact other work (Discriminating-Feature Stroke
 Realization (Realization Phase), or future re-runs)

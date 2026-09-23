@@ -26,7 +26,7 @@ deleted in Final Check and Cleanup (Pass 7).
 |---|---|---|
 | Setup and Baseline (Pass 0) | done | snapshot commit 5ae0118; `baseline.md5` (PYTHONHASHSEED=0, reproduced twice) |
 | Pipeline Call Graph and Glossary (Pass 1) | done | docs/PIPELINE.md, docs/GLOSSARY.md, callgraph/90-findings.md; todo.md "Suspected bugs" (B1–B35) and "Queued follow-ups"; new terminology in all Markdown and in `.py` comments/docstrings; file renames (below) |
-| Spec Extraction (Pass 2) | todo | |
+| Spec Extraction (Pass 2) | done | docs/specs/star-hash-marking.md, docs/specs/discriminating-features.md; comment-only docstring fixes (DECISIONS p2-q1) |
 | Doc and Data Inventory (Pass 3) | todo | outputs in `inventory/` |
 | Interactive Triage (Pass 4) | todo | log in `DECISIONS.md` |
 | Dead-Code Removal (Pass 5) | todo | `deadcode.md` |
@@ -48,14 +48,15 @@ deleted in Final Check and Cleanup (Pass 7).
   after the renames (identical hashes, new file names).
 
 ## Next action
-**Spec Extraction (Pass 2)** — plan: `~/.claude/plans/i-want-to-do-greedy-blum.md`. Write with the
-new terms:
-- `docs/specs/star-hash-marking.md`: the `decideStarHashMark` rule stack (homograph exemption (R1)
-  … frequency fallback (R7)), ranking/escalation and physical composition, from docs/PIPELINE.md
-  §Different-Lemma or Grammatical-Category Disambiguation (S7).
-- `docs/specs/discriminating-features.md` (the plan's `same-lemma-markers.md`; name confirmed by
-  the user 2026-09-23): Elicitation, Grouping and Realization Phases of S6.
+**Doc and Data Inventory (Pass 3)** — read-only, 4 agents in parallel (bundles A–D in the plan),
+outputs `docs/refactor/inventory/<bundle>.md`, one row per block (source lines, summary,
+category, recommended action/destination, reason). Blocks already covered by
+docs/PIPELINE.md or docs/specs/ are categorised "already covered". Offer the user a leaner
+option (cheaper model / fewer agents) before launching.
 
 ## Notes for later passes
 - Dead-Code Removal (Pass 5): Keyboard Layout Optimization (S4) is **not** dead code (decision
   b5). The greedy `src/featuregrouping.py` path is test-only — a removal candidate.
+- Doc Rewrite (Pass 6) link check: `src/ambiguitychecker.py` still cites
+  `RESUME_2026-09-20-starhash-priority.md` (:86, :99); point those at `docs/specs/star-hash-marking.md`
+  if the RESUME file is deleted.
