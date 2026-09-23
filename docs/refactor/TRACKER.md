@@ -53,7 +53,15 @@ reachability from the real entry points; see plan). Extra candidates from triage
 `util/build_pers3_default_answers.py` (t-d1); `_isFeasibleAddition`/`checkComposedChords`
 (diagnostic-only, now B39/B40 — if removed, drop B39/B40 too); legacy
 `greedyOptimizeDiscriminator` selector (t-t2). Keep `selectSharedDiscriminators` /
-`buildDiscriminatorSelection` (live via S2 gating). Offer a leaner option before launching.
+`buildDiscriminatorSelection` (live via S2 gating).
+**User chose: 1 Sonnet agent** (2026-09-23; est. 300k–600k tokens) — launch directly, no need to ask again.
+Put these false-positive traps in its prompt, and spot-check its "dead" verdicts afterwards:
+- pickle loading relies on `sys.modules["__main__"].Dictionary = Dictionary` (util/_theoryio.py,
+  util/build_*, scratch) — classes reachable only via unpickling are live;
+- tag separately: test-only, diagnostic-`__main__`-only (e.g. ambiguitychecker `__main__` :1394–1420),
+  S2-gating-only (util/completeVerbParadigms.py → featureextractor), one-shot util/fix*/validate* scripts;
+- `cpsatsolver.optimizeKeyboard` + `optimizeBiphonemeOrder`/`analyseAmbiguities` = kept deliberately (b5);
+- `GRAMCAT_PRIORITY` in greedyoptimizer.py is live (R6); the plover plugin (`plover_stenalgo/`) is an entry point.
 
 ## Notes for later passes
 - Dead-Code Removal (Pass 5): Keyboard Layout Optimization (S4) is **not** dead code (decision
