@@ -52,6 +52,22 @@ human loop 4h are run by hand, not by any script.
 | 9 | `python -m util.export_keyboard_layout` (after step 6), `python -m util.export_practice_words`, **then** `python -m util.export_practice_sentences`, then `python -m util.export_definitions` | Theory Export (S8), trainer branch | steno-trainer | `export_practice_sentences` reads `practice-words.json` (export_practice_sentences.py:157). |
 | opt | `python -m util.check_conjugation_disambiguation_order` | Elicitation Phase: Answer Collection, validator | checking answers | Writes `conjugation_disambiguation_report.json` (gitignored). |
 
+**The orchestrated entrypoint.** `python dictionary.py` (no arguments) runs the whole chain
+itself: table steps 3-9 plus the four steady-state Synthetic Lexicon Building (S2) appenders
+(`util.completeVerbParadigms`, `util.generateMissingNomAdjForms`, `util.fixPayerDualFormGaps`,
+`util.fixAsseoirDualFormGaps`, all with `--apply`), in dependency order — step 3, the
+appenders, step 3 again whenever they changed `resources/LexiqueSynthetic.tsv`, step 4,
+step 5, the theory-2 refresh of step 7, step 6, then the step 8-9 exports. The internal
+build phases are self-invocations (`python dictionary.py --internal-build-only`, a private
+flag): the Dictionary must never be built twice in one process, because `Syllable`'s
+class-level phoneme collections (src/grammar.py:451-466) accumulate frequencies across
+builds. Steps 0 (one-off hand fix scripts), 1 (`lexique.py`) and 4h (the human
+questionnaire loop) stay manual. Two orderings differ cosmetically from the table (both
+output-equivalent): the orchestrator refreshes `theory2.tsv` before building the realization
+report, and a mid-run `theory2.tsv` written by step 3 from possibly stale JSONs is
+transient — overwritten later in the same run. After a genuine lexicon change, one
+orchestrated run may not fully converge the appenders (second-order gaps); a second run does.
+
 Five facts that the command list does not show:
 
 1. **Nothing reads `theory2.tsv`.** It is a gitignored human view. Every exporter that
@@ -108,6 +124,12 @@ a rerun. Confirmed directly for the `évaser` case (both needed features already
 `keypress_groups.json`), not assumed. Skip it unless a fix introduces a genuinely new feature
 requirement to a previously-unseen opposition — vanishingly unlikely for an ordinary
 phonology or syllabification correction.
+
+**With the orchestrated entrypoint** the checklist below collapses to: step 1's fix, then
+`rm -f Dictionary.pickle FirstTheory.pickle`, then (for a Mixte-level fix) `python
+lexique.py`, then a single `python dictionary.py`; re-run it once more if the appenders'
+reports show they appended rows (second-order gaps). The numbered checklist remains as the
+manual fallback and as the explanation of what the orchestrator does internally.
 
 **Checklist for a fix that changes theory-1 collisions:**
 
