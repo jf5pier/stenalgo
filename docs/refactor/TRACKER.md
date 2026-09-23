@@ -28,7 +28,7 @@ deleted in Final Check and Cleanup (Pass 7).
 | Pipeline Call Graph and Glossary (Pass 1) | done | docs/PIPELINE.md, docs/GLOSSARY.md, callgraph/90-findings.md; todo.md "Suspected bugs" (B1–B35) and "Queued follow-ups"; new terminology in all Markdown and in `.py` comments/docstrings; file renames (below) |
 | Spec Extraction (Pass 2) | done | docs/specs/star-hash-marking.md, docs/specs/discriminating-features.md; comment-only docstring fixes (DECISIONS p2-q1) |
 | Doc and Data Inventory (Pass 3) | done | leaner run (2 Sonnet agents); `inventory/{A,B,C,D}.md`; main-thread spot-check corrections appended in A.md (GramCat count) and C.md (9 `.py` RESUME links) |
-| Interactive Triage (Pass 4) | todo | log in `DECISIONS.md` |
+| Interactive Triage (Pass 4) | done | 6 rounds in DECISIONS.md (t-r, t-m, t-t, t-c, t-b, t-x, t-d); new bugs B36–B42 to file in Pass 6 |
 | Dead-Code Removal (Pass 5) | todo | `deadcode.md` |
 | Doc Rewrite (Pass 6) | todo | |
 | Final Check and Cleanup (Pass 7) | todo | |
@@ -48,11 +48,12 @@ deleted in Final Check and Cleanup (Pass 7).
   after the renames (identical hashes, new file names).
 
 ## Next action
-**Interactive Triage (Pass 4)** — AskUserQuestion rounds of up to 4 blocks, order: README → ROADMAP →
-todo.md → CLAUDE.md → plan/design docs (inventory/B.md) → RESUME files (inventory/C.md, only the
-blocks with unique facts: RESUME_2026-09-22-trainer-features.md's 4 open items) → data files and
-scratch (inventory/D.md). Source of questions: each inventory file's "Questions for triage" list.
-Log every answer in DECISIONS.md immediately. No doc edits during this pass.
+**Dead-Code Removal (Pass 5)** — discovery agent writes `docs/refactor/deadcode.md` (static
+reachability from the real entry points; see plan). Extra candidates from triage:
+`util/build_pers3_default_answers.py` (t-d1); `_isFeasibleAddition`/`checkComposedChords`
+(diagnostic-only, now B39/B40 — if removed, drop B39/B40 too); legacy
+`greedyOptimizeDiscriminator` selector (t-t2). Keep `selectSharedDiscriminators` /
+`buildDiscriminatorSelection` (live via S2 gating). Offer a leaner option before launching.
 
 ## Notes for later passes
 - Dead-Code Removal (Pass 5): Keyboard Layout Optimization (S4) is **not** dead code (decision
@@ -60,3 +61,5 @@ Log every answer in DECISIONS.md immediately. No doc edits during this pass.
 - Doc Rewrite (Pass 6) link check: `src/ambiguitychecker.py` still cites
   `RESUME_2026-09-20-starhash-priority.md` (:86, :99); point those at `docs/specs/star-hash-marking.md`
   if the RESUME file is deleted.
+- Doc Rewrite (Pass 6) overrides from triage: **no docs/RECOMPUTE.md** (merge into PIPELINE, t-c3);
+  new **docs/PRIOR_ART.md** (t-m4); todo.md gets B36–B42 (t-t1, t-b2, t-x2, t-x3); define "regret" (t-d2).

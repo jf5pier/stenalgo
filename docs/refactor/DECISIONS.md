@@ -49,3 +49,53 @@ Format: `block-id | source file:lines | decision | destination | note`
 - specs | written `docs/specs/star-hash-marking.md` and `docs/specs/discriminating-features.md` in the main thread (no agent). Code = source of truth; prose mismatches found were all already superseded (append-after-Realization-stroke → merged mark 2026-09-22; ROADMAP "no stroke to the most frequent lemma" → rule stack; plan's FEATURE_PRIORITY canonical choice / K=5 → answers decide / K=7; RESUME's design-order Rule 1/2/3 numbering → R1–R7). No new code bugs; precedence-order enforcement gap already B12.
 - p2-q1 | stale .py docstrings | **Fix now** (comment-only): `util/build_keypress_groups.py` K=6 note dated + K=7; `src/ambiguitychecker.py` "Rule 1/2/3" → rule names with R1–R7 ids. pytest 593 passed.
 - `conjugation_disambiguation_order.txt` stays at the repo root (plan default; linked from the spec, not copied).
+
+## Interactive Triage (Pass 4) — 2026-09-23
+Inventory run: leaner option (2 Sonnet agents) chosen by user.
+
+### README round
+- t-r1 | README 38–62 strain criteria | **Both**: 3–4 line summary in README, full text in docs/ARCHITECTURE.md design rationale.
+- t-r2 | README 76–187 phoneme order tables | **ARCHITECTURE, labeled** as a worked example from one Keyboard Layout Optimization (S4) run, not current output.
+- t-r3 | README 189–214 keymap diagrams | user: **keep the first layer in README**, labeled "optimized single-key phoneme keymap"; **copy both layers to ARCHITECTURE**.
+- t-r4 | README 229–237 verbs/prefixes/suffixes | user: **prefixes** are in ROADMAP — keep there, plus a stub in ARCHITECTURE. **Suffixes are solved** (feature strokes, i.e. the discriminating feature strokes of S6): state so and describe it in ARCHITECTURE.
+
+### ROADMAP round
+- t-m1 | ROADMAP history (30–383, done Phases 0/1/2/4) | **Delete**; git keeps it. New ROADMAP is forward-looking only.
+- t-m2 | "what's left to do" (240–279: MARKING_OVERRIDES regeneration, -er/-ers nouns, satoptimizer cleanup, one orchestrated entrypoint, …) | **TODO.md**.
+- t-m3 | Design decisions 1–6 | #1 reserved-key budget, #2 */# scope, #6 dual-target/Javelin → ARCHITECTURE design rationale; #4 fusion bug deferred, #5 prefix goal → ROADMAP; **#3 (conjugation as phoneme keys) kept in ARCHITECTURE as a one-line "rejected approach" note** (why elicitation replaced it).
+- t-m4 | prior-art survey (594–637) | **new docs/PRIOR_ART.md**, linked from README doc map and ARCHITECTURE.
+- t-m5 | ROADMAP remainder | open questions 1/3/8/9 stay in ROADMAP, resolved 2/4/5/6/7 deleted; "Ongoing" (untested cpsatsolver ambiguity math) → TODO.md; "Verification approach" → CLAUDE.md (near pytest/rebuild).
+
+### todo.md round
+- t-t1 | todo.md 194–213 lexicon data bugs (verified still present 2026-09-23: `baux` lemme "bail,bau", `baud` phon=bo) + ghost lemmas | **B36–B38** in TODO.md "Suspected bugs"; not fixed in this refactor.
+- t-t2 | "p"/"f_p"/"m_p" fusion bug (239–275, legacy greedyoptimizer selector) | **Delete the entry**; the selector's fate is decided in Dead-Code Removal (Pass 5).
+- t-t3 | todo.md history sections (146–238 except the data bugs, 276–384) | **Delete all**; TODO.md = suspected bugs + queued follow-ups + live items.
+- t-t4 | todo.md B1–B35 + queued follow-ups (5–144) | keep as-is (inventory default).
+
+### CLAUDE.md / recompute round
+- t-c1 | CLAUDE.md pipeline summary (42–58) | **Compact list + link**: 8 one-line stages (name, entry point, output) + Pitfalls paragraph + link to PIPELINE.md (~15 lines).
+- t-c2 | CLAUDE.md Core Data Model + Key Constants | **Both places**: short versions stay in CLAUDE.md; ARCHITECTURE gets the fuller data model and constant rationale.
+- t-c3 | LEXICON_RECOMPUTE_PIPELINE.md | **Merge into PIPELINE.md** as a "Recomputing after a fix" section (évaser example, "safe to skip" Grouping Phase note, 7-step theory-1-collision checklist); then git rm. **No docs/RECOMPUTE.md** (overrides the plan).
+- t-c4 | GLOSSARY.md:398 "(CLAUDE.md says 21)" | stale note (CLAUDE.md says 22) — drop in Doc Rewrite (Pass 6). (Main-thread fact, no question needed.)
+- t-c5 | steno-trainer/README.md | keep unchanged (inventory: current, self-contained).
+
+### Plan/design docs round (inventory/B.md)
+- main-thread checks: `selectSharedDiscriminators` (src/featureextractor.py:266) is coverage-first with complexity tie-break and is live via `buildDiscriminatorSelection` (S2 paradigm-completion gating, util/completeVerbParadigms.py:281/:383; ambiguitychecker diagnostic :1403). `_isFeasibleAddition` / `checkComposedChords` are reached only from ambiguitychecker `__main__` (:1407) and tests.
+- t-b1 | Bundle B (ATOMIC_KEYPRESS_REWIRE_PLAN, SHARED_DISCRIMINATOR_REWIRE_PLAN, DESIGN_alternate_press_sets, NOTES_2026-09-17_…, PLAN_2026-09-18_…) | **git rm all five + 3 extracts**: (1) parler-walkthrough rationale (why elicitation beat solver-picks-features), one paragraph → ARCHITECTURE; (2) "selection is coverage-first, complexity tie-break" one line → PIPELINE Synthetic Lexicon Building (S2); (3) 17.6% (8,413/47,827 groups) self-homograph scale figure → docs/specs/discriminating-features.md.
+- t-b2 | design-phase bugs | **B39/B40 now** in TODO.md, marked "diagnostic path only": B39 `_isFeasibleAddition` (src/ambiguitychecker.py:608) misses new-vs-new composed-chord collisions; B40 `checkComposedChords` (:676) uses only `feasibleComboPhonemes[0]` (:712), half of a 2-phoneme combo.
+- -er/-ers wishlist: single surviving copy = TODO.md (per t-m2).
+
+### RESUME files round (inventory/C.md)
+- main-thread checks: `régnions` and `régnons` both `ReN§` in the lexicon (no yod on -ions) and both still in questionnaire.json/elicitation_answers.json; `entêtai`/`entêtez` both `@tEte` (genuine homophones, no action).
+- t-x1 | RESUME files | **git rm the 13 root RESUME_*.md; keep `scratch/reform1990/`** (RESUME_2026-09-16.md + STATUS.md) as the research trail behind resources/reform1990.tsv — final placement decided with Bundle D. The 9 `.py` comment references (inventory/C.md correction) are repointed/dropped in Doc Rewrite (Pass 6), proposed to the user first.
+- t-x2 | trainer-features open items | (a) 182 ungendered nouns → **B41**; (b) definition search exact-spelling only, (c) hyphenated compounds drilled as two chords → **TODO.md** trainer follow-ups; (d) marker strokes as a Plover macro plugin → **ROADMAP**.
+- t-x3 | single-copy facts, all kept: `régnions` false homophone (ReN§, no yod; possibly broader -ions/-iez after [N]) → **B42**; firmware button rewire for keys 2/10 → **ROADMAP** open question; `plover_stenalgo/` ↔ github.com/jf5pier/stenalgo-plover hand-sync → **ARCHITECTURE** one line; buckets 2/3 pooling never re-confirmed → **star-hash-marking.md "Known gaps"** one line.
+
+### Data files and scratch round (inventory/D.md)
+- t-d1 | pers-default comparison leftovers | **Delete all 5**: git rm elicitation_answers_pers1default.json, pers3default_repair_log.txt, pers_1PreferedOver_pers_3KeyAssignation; delete gitignored elicitation_questionnaire_pers3default.html, resolved_press_sets_pers3default.json. `util/build_pers3_default_answers.py` → Dead-Code Removal (Pass 5) candidate.
+- t-d2 | scratch/ | **Keep scratch/reform1990/ and scratch/combined_regret.py** (proof script for the 10× / ~0.5 % gap headline); delete the other 4 regret scripts, scratch/sameLemmeHomophoneResolution.txt, scratch/callgraph. User addition: **"regret" needs a definition and its relevance explained** → Doc Rewrite (Pass 6): GLOSSARY entry "Regret (gap)" (cost of the chosen mark minus the per-pair optimum min(fA, fB), summed as gap%; why it drives R4–R6), star-hash-marking.md §2 states regret = gap explicitly, and combined_regret.py's docstring says what it reproduces and links spec §2. Open detail for Pass 6: combined_regret.py is untracked — `git add` it if it's meant to survive.
+- t-d3 | morphalou/ | download URL + expected path (morphalou/5/Morphalou3.1_CSV.csv) in **PIPELINE Synthetic Lexicon Building (S2)** + one line in the **README quickstart**.
+- t-d4 | ARCHITECTURE artifact table | **tracked files + key gitignored caches** (pickles, resolved_press_sets.json, questionnaire.json, theory*.tsv) with rebuild commands; diagnostics (ambiguity_report.tsv, feature_keypress_feasibility.tsv) as a footnote.
+- inventory defaults accepted without a question (all "keep, already documented"): conjugation_disambiguation_order.txt, elicitation_answers.json, excluded_words.txt, keypress_groups.json, plover_stenalgo_dictionary.json, realization_report.json, requirements.txt, starboard3h.json, images/, gitignored caches.
+
+Interactive Triage (Pass 4) complete 2026-09-23.
