@@ -25,7 +25,8 @@ How to read it:
   read-only probes of the pickles and JSON files rebuilt on 2026-09-22; a later rebuild can
   shift them slightly.
 - Suspected defects are only pointed to here ("see TODO.md § Suspected bugs, item B1").
-  They are described in full in the findings list of this refactor.
+  They are described in full in TODO.md's "Suspected bugs" section; the refactor's evidence
+  write-ups live in git history (docs/refactor/callgraph/90-findings.md).
 
 ---
 
@@ -126,6 +127,10 @@ phonology or syllabification correction.
    lemma(s) the fix touched: group theory-2 output (loaded via `util/_theoryio.py`, not
    `theory2.tsv`) by final stroke and flag any group with ≥ 2 distinct `ortho` and ≥ 2
    distinct `lemmeGramCat`, excluding `reform1990.tsv` spelling-doublet pairs.
+8. Then the exports — rebuild-table steps 8-9 (`util.export_plover_dictionary` /
+   `util.export_plover_system`, then the four steno-trainer exports) — so
+   `plover_stenalgo_dictionary.json` and `steno-trainer/public/data/*.json` match the fixed
+   theory.
 
 ---
 
@@ -744,7 +749,7 @@ order), starting from `set` order (so it depends on the hash seed, item B30). Th
 difference of p1-before-p2 vs after (`pairwiseBiphonemeOrderScore`, :387).
 Result: layout statistics: **best permutation** and **pairwise order matrix** per part.
 Today: onset `dZksvptgzSmnbflNRwj`, coda `bjgpfwsktdvRNzlmnSZ`, nucleus `8ieE§5Oao92@`.
-README.md:92-146 shows these.
+docs/ARCHITECTURE.md ("Phoneme order: a worked example") shows these.
 Notes: read by Fallback keymap (S4.3) and the order term of Layout solve (S4.4) (cpsatsolver.py:363),
 plus `writeConstrainFiles` (call commented :481) and `printBarchart`. Nothing in
 Phonetic Theory Building (S5) reads it.
@@ -1512,9 +1517,9 @@ use another numbering.
 
 ### Star/hash code sequence — assignStarHashCombos (S7.11)   src/ambiguitychecker.py:272
 Called by: Star/hash code assignment (S7.7), :334.
-Transformation: base budget `[(), ('*',), ('#',), ('*#',)]`, then `('*#',) * n` for n = 2, 3,
-… (:284-288), truncated to the rank count. Codes beyond the base budget are **escalated
-codes**.
+Transformation: four-code budget `[(), ('*',), ('#',), ('*#',)]`, then `('*#',) * n` for n =
+2, 3, … (:284-288), truncated to the rank count. Codes beyond the four-code budget are
+**escalated codes**.
 Result: rank 0 `()`, 1 `*`, 2 `#`, 3 `*#`, 4 `*# *#`, … No upper bound; live maximum `(*#)×5` (8 representatives).
 
 ### Star/hash code realization — starHashCodeToStrokes (S7.12)   src/ambiguitychecker.py:361
@@ -1560,10 +1565,10 @@ Transformation: flags a bare lemma with ≥2 singleton `lemmeGramCat` sub-groups
 Notes: in the pipeline, cross-category clashes are handled implicitly by the ≥2
 `lemmeGramCat` filter of Lemma-homophone group detection (S7.5). The `__main__` itself is a
 hand-run check after Phonetic Theory Building (S5) (its console title still says "Phase 0
-Ambiguity Report" — legacy wording, queued follow-up): it classifies every theory-1 stroke
-cluster, honours `resources/ambiguityIgnoreList.tsv` (manually-triaged lemmas with reasons)
-and writes `ambiguity_report.tsv`. Its "overflow" metric counts lemma-homophone clusters of
-≥5 lemmas — beyond the old 4-slot `*`/`#` budget (no stroke, `*`, `#`, `*#`) that N-ary
+Ambiguity Report" — legacy wording, queued follow-up): it classifies every theory-1
+collision, honours `resources/ambiguityIgnoreList.tsv` (manually-triaged lemmas with reasons)
+and writes `ambiguity_report.tsv`. Its "overflow" metric counts lemma-homophone groups of
+≥5 lemmas — beyond the old four-code budget (no stroke, `*`, `#`, `*#`) that N-ary
 escalation has since superseded — and reports their frequency mass; kept as a drift signal.
 
 ### Worked examples (2026-09-22 data)
