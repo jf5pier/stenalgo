@@ -341,7 +341,7 @@ class Dictionary:
 
     def buildFinalTheory(
         self, theory: dict[Strokes, list[Word]], keyboard: Keyboard,
-        phaseGPath: str = "phase_g_keypress_assignment.json",
+        keypressGroupsPath: str = "keypress_groups.json",
         resolvedPressSetsPath: str = "resolved_press_sets.json",
     ) -> dict[Word, list[Strokes]]:
         """
@@ -358,14 +358,14 @@ class Dictionary:
         reusing whatever physical keys the primary pass already decided -- NOT run
         through the `*`/`#` track (that track isn't wired into a self-homograph's
         alternates yet, the same scope boundary ROADMAP.md already notes for the
-        cross-lemma track generally). Requires `phaseGPath` (Phase G,
-        `python -m util.build_phase_g_assignment`) and `resolvedPressSetsPath` (Phase E,
+        cross-lemma track generally). Requires `keypressGroupsPath` (Phase G,
+        `python -m util.build_keypress_groups`) and `resolvedPressSetsPath` (Phase E,
         `python -m src.elicitation`) to already exist.
         """
-        with open(phaseGPath, encoding="utf-8") as f:
-            phaseG = json.load(f)
+        with open(keypressGroupsPath, encoding="utf-8") as f:
+            keypressGroups = json.load(f)
         markersByKeypress = {
-            int(groupId): frozenset(markers) for groupId, markers in phaseG["markersByKeypress"].items()
+            int(groupId): frozenset(markers) for groupId, markers in keypressGroups["markersByKeypress"].items()
         }
         with open(resolvedPressSetsPath, encoding="utf-8") as f:
             resolvedGroups = json.load(f)
@@ -400,7 +400,7 @@ class Dictionary:
         `extraStrokes`. Those extra strokes use coda-bank and reserved
         (STAR_KEY/HASH_KEY) keys that carry no single assigned phoneme, so
         `strokesToString` (phoneme-layer only) can't render them -- they're written as
-        raw key-index tuples instead, same as `build_phase_p_realization.py` already
+        raw key-index tuples instead, same as `build_realization_report.py` already
         reports `chosenKeys`.
         """
         wordToStrokes = buildWordToStrokes(theory)
@@ -525,17 +525,17 @@ if __name__ == "__main__":
     # reserved-key track, composed on top of theory 1 (see ROADMAP.md's "What's left to
     # do" -- this retires the superseded solver-picks-features path that used to run
     # here, whose satOptimizeDiscriminator conflict count had gone vestigial).
-    phaseGPath = "phase_g_keypress_assignment.json"
+    keypressGroupsPath = "keypress_groups.json"
     resolvedPressSetsPath = "resolved_press_sets.json"
     finalTheoryPath = "theory2.tsv"
-    if os.path.exists(phaseGPath) and os.path.exists(resolvedPressSetsPath):
-        finalTheory = dictionary.buildFinalTheory(theory, starboard, phaseGPath, resolvedPressSetsPath)
+    if os.path.exists(keypressGroupsPath) and os.path.exists(resolvedPressSetsPath):
+        finalTheory = dictionary.buildFinalTheory(theory, starboard, keypressGroupsPath, resolvedPressSetsPath)
         dictionary.writeFinalTheory(theory, finalTheory, starboard, finalTheoryPath)
         print(f"\nWrote {finalTheoryPath}: {len(finalTheory)} words with theory 2"
               f" (Phase P + */# track) strokes.")
     else:
-        print(f"\nSkipping theory 2 (Phase P + */# track): {phaseGPath} and/or"
-              f" {resolvedPressSetsPath} not found. Run `python -m util.build_phase_g_assignment`"
+        print(f"\nSkipping theory 2 (Phase P + */# track): {keypressGroupsPath} and/or"
+              f" {resolvedPressSetsPath} not found. Run `python -m util.build_keypress_groups`"
               f" and `python -m src.elicitation` first, then re-run `python dictionary.py`.")
 
 

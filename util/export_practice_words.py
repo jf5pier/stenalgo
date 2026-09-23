@@ -33,7 +33,7 @@ parallel to that spelling's press-set alternates, and therefore to
 
 Run: python -m util.export_practice_words [--limit N]
 Requires FirstTheory.pickle/Dictionary.pickle (`python dictionary.py` first),
-phase_g_keypress_assignment.json (`python -m util.build_phase_g_assignment`) and
+keypress_groups.json (`python -m util.build_keypress_groups`) and
 resolved_press_sets.json (`python -m src.elicitation`).
 """
 import argparse

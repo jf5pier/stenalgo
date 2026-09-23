@@ -1,6 +1,6 @@
 """
 Persist Phase P's milestone-1 output (see RESUME_2026-09-19-phaseP-plan.md): for each of
-Phase G's abstract keypress groups (`phase_g_keypress_assignment.json`), search for a
+Phase G's abstract keypress groups (`keypress_groups.json`), search for a
 physical right-hand coda key-combo (`starboard3h.json`'s keys `[16..25]`) that realizes it
 as a brand-new trailing stroke appended after a word's own strokes (an extra "syllable"),
 without colliding with any word's existing stroke in the live `theory`, or with any other
@@ -9,15 +9,15 @@ into that one shared extra stroke, not just the group currently being decided.
 
 This is milestone 1's concrete deliverable -- it does NOT yet rewrite `theory`/persist a
 final stroke-per-word table (that's the deferred `theory.tsv`-replacement work described in
-the plan). It writes `phase_p_keypress_realization.json`: per keypress group, the chosen
+the plan). It writes `realization_report.json`: per keypress group, the chosen
 coda key-combo (or null if left unassigned), its cost, the alternate candidates considered,
 and any residual collisions the greedy group-by-group search still missed (see
 `realizeKeypressGroupsAsExtraStroke`'s own docstring for why those can happen and why a
 final full-assignment verification pass is needed to catch them).
 
-Run: python -m util.build_phase_p_realization
+Run: python -m util.build_realization_report
 Requires Dictionary.pickle/FirstTheory.pickle (`python dictionary.py` first),
-phase_g_keypress_assignment.json (`python -m util.build_phase_g_assignment`) and
+keypress_groups.json (`python -m util.build_keypress_groups`) and
 resolved_press_sets.json (`python -m src.elicitation`).
 """
 import json
@@ -30,14 +30,14 @@ from src.ambiguitychecker import (
 from src.keyboard import Starboard
 from util._theoryio import loadFirstTheory
 
-PHASE_G_PATH = "phase_g_keypress_assignment.json"
+PHASE_G_PATH = "keypress_groups.json"
 RESOLVED_PRESS_SETS_PATH = "resolved_press_sets.json"
-OUTPUT_PATH = "phase_p_keypress_realization.json"
+OUTPUT_PATH = "realization_report.json"
 
 
 def main() -> None:
     if not os.path.exists(PHASE_G_PATH):
-        raise RuntimeError(f"Run `python -m util.build_phase_g_assignment` first to generate {PHASE_G_PATH}.")
+        raise RuntimeError(f"Run `python -m util.build_keypress_groups` first to generate {PHASE_G_PATH}.")
     if not os.path.exists(RESOLVED_PRESS_SETS_PATH):
         raise RuntimeError(f"Run `python -m src.elicitation` first to generate {RESOLVED_PRESS_SETS_PATH}.")
 
@@ -47,9 +47,9 @@ def main() -> None:
         raise RuntimeError("starboard3h.json not found; run dictionary.py once first to generate it.")
 
     with open(PHASE_G_PATH, encoding="utf-8") as f:
-        phaseG = json.load(f)
+        keypressGroups = json.load(f)
     markersByKeypress = {
-        int(groupId): frozenset(markers) for groupId, markers in phaseG["markersByKeypress"].items()
+        int(groupId): frozenset(markers) for groupId, markers in keypressGroups["markersByKeypress"].items()
     }
 
     with open(RESOLVED_PRESS_SETS_PATH, encoding="utf-8") as f:

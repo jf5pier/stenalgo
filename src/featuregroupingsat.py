@@ -4,13 +4,13 @@
 Phase G — CP-SAT exact minimum-K search (see ATOMIC_KEYPRESS_REWIRE_PLAN.md's Phase G
 section: "Phase G is only greedy-optimal, not proven-minimal... reusing
 _colorFeatures/_minSpecialKeypressesNeeded's scaffolding... to search for something
-smaller than K=6/7"). `src/phaseg.py`'s `greedyColorMarkers` finds *a* feasible K but
+smaller than K=6/7"). `src/featuregrouping.py`'s `greedyColorMarkers` finds *a* feasible K but
 gives no guarantee it's the smallest possible; this module proves the minimum exactly
 (or proves a candidate K infeasible), by direct search rather than by reusing
 `_colorFeatures` itself -- that scaffolding's "conflict" semantics (at most one member
 of a feature SET may share a key) is the wrong shape for Phase G's actual constraint,
 which is per-cluster set-DISTINCTNESS over induced press-sets (see module docstring
-below and `phaseg.verifyKeypressAssignment`, the ground truth this mirrors exactly --
+below and `featuregrouping.verifyKeypressAssignment`, the ground truth this mirrors exactly --
 not the pairwise `coOccurrencePairs`/`wouldCollideIfMergedPairs` pre-checks, which are
 a greedy-only optimization, not part of the real constraint).
 
@@ -27,7 +27,7 @@ from itertools import combinations
 from ortools.sat.python import cp_model
 from ortools.sat.python.cp_model import IntVar
 
-from .phaseg import FrequencyByGroup, PressSetsByGroup, frequencyWeightedChordSizes, liveMarkers
+from .featuregrouping import FrequencyByGroup, PressSetsByGroup, frequencyWeightedChordSizes, liveMarkers
 
 # One homophone group's shape, stripped of orthography/stroke identity: the set of
 # distinct spellings it holds, each spelling itself the set of its distinct alternate
@@ -55,7 +55,7 @@ def _buildDistinctnessModel(
     The shared core of every Phase G CP-SAT search: each marker gets exactly one of
     `numKeys` keypresses, and within every signature, every pair of press-sets belonging
     to two DIFFERENT spellings must induce a distinct touched-keypress set -- the exact
-    ground truth `phaseg.verifyKeypressAssignment` checks, not a pairwise approximation
+    ground truth `featuregrouping.verifyKeypressAssignment` checks, not a pairwise approximation
     of it. Alternates of the SAME spelling are deliberately exempt from this requirement:
     they already produce the same output text (see `src.elicitation.resolveGroupPressSets`),
     so there is nothing to keep distinguishable between them -- forcing them apart would
@@ -428,7 +428,7 @@ def minKeypressesSat(
     assigned without any homophone group's induced press-sets colliding -- scans
     numKeys = 1, 2, ... and returns the first CP-SAT proves feasible, so the result is
     a proof of minimality (every smaller numKeys was proven infeasible), not a greedy
-    upper bound like `phaseg.runPhaseG`'s. `mustShareKey` (see `_feasibleAssignment`)
+    upper bound like `featuregrouping.runFeatureGrouping`'s. `mustShareKey` (see `_feasibleAssignment`)
     pins specific marker pairs onto the same keypress throughout the scan; `aloneKeys`
     forces a marker to share its keypress with nothing else; `mustDifferGroups` forces
     every pair within a group onto different keypresses -- all HARD constraints applied
@@ -541,7 +541,7 @@ def serializeAssignment(
     achievedPerTier: list[int] | None = None,
 ) -> dict:
     """The persisted, adopted Phase G artifact -- a specific CP-SAT-proven assignment
-    (not the search machinery itself), JSON-serializable for `util/build_phase_g_assignment.py`.
+    (not the search machinery itself), JSON-serializable for `util/build_keypress_groups.py`.
     `mustShareKey`/`aloneKeys`/`mustDifferGroups` record HARD-forced decisions
     (`minKeypressesSat`); `preferSameKey`/`preferencesSatisfied` record a single SOFT
     tiebreaker (`minKeypressesSatPreferring`); `preferenceTiers`/`achievedPerTier` (with
@@ -571,15 +571,15 @@ if __name__ == "__main__":
     import os
     import sys
 
-    from .phaseg import loadResolvedPressSets
+    from .featuregrouping import loadResolvedPressSets
 
     if not os.path.exists("resolved_press_sets.json"):
         raise RuntimeError("Run `python -m src.elicitation` first to build resolved_press_sets.json.")
 
-    # python -m src.phasegsat marker1:marker2 -- HARD: force this pair onto the same
+    # python -m src.featuregroupingsat marker1:marker2 -- HARD: force this pair onto the same
     #   keypress throughout the K-scan (`mustShareKey`; can inflate K, or fail outright,
     #   if the pair can't safely share at the true minimum).
-    # python -m src.phasegsat marker1~marker2 -- SOFT: find the TRUE minimum K first,
+    # python -m src.featuregroupingsat marker1~marker2 -- SOFT: find the TRUE minimum K first,
     #   then prefer this pair sharing a keypress only as a tiebreaker among equally-
     #   minimal colorings (`minKeypressesSatPreferring`; never inflates K).
     mustShareKey = frozenset(frozenset(arg.split(":")) for arg in sys.argv[1:] if ":" in arg)

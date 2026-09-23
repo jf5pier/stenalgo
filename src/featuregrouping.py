@@ -211,7 +211,7 @@ def frequencyWeightedChordSizes(
 
 
 @dataclass
-class PhaseGResult:
+class FeatureGroupingResult:
     keypressCount: int
     markersByKeypress: dict[int, frozenset[str]]
     unpressableMarkers: frozenset[str]
@@ -244,12 +244,12 @@ def _findSharedKeypressPair(
     return None
 
 
-def runPhaseG(
+def runFeatureGrouping(
     pressSetsByGroup: PressSetsByGroup,
     allAtoms: set[str] = frozenset(),
     maxRepairPasses: int = 50,
     frequencyByGroup: FrequencyByGroup | None = None,
-) -> PhaseGResult:
+) -> FeatureGroupingResult:
     """
     Build the must-differ graph (hard co-occurrence + would-collide-if-merged), greedily
     color it, and verify the result against every group's actual press-sets. Pairwise
@@ -282,7 +282,7 @@ def runPhaseG(
     for marker, keypress in colorOf.items():
         markersByKeypress[keypress].add(marker)
 
-    return PhaseGResult(
+    return FeatureGroupingResult(
         keypressCount=len(markersByKeypress),
         markersByKeypress={k: frozenset(ms) for k, ms in markersByKeypress.items()},
         unpressableMarkers=frozenset(allAtoms - markers),
@@ -307,7 +307,7 @@ if __name__ == "__main__":
                 allAtoms.update(item["atomsA"])
                 allAtoms.update(item["atomsB"])
 
-    result = runPhaseG(pressSetsByGroup, allAtoms, frequencyByGroup=frequencyByGroup)
+    result = runFeatureGrouping(pressSetsByGroup, allAtoms, frequencyByGroup=frequencyByGroup)
 
     print("=== Phase G grouping report ===")
     print(f"Homophone groups considered:  {len(pressSetsByGroup)}")

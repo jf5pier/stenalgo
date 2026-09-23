@@ -24,16 +24,16 @@ plan's own note that this was previously missing (see RESUME_2026-09-19-phaseG.m
 "Still open" item 2, now addressed for the CP-SAT path the same way it was for the
 elicitation-model regeneration path).
 
-Run: python -m util.build_phase_g_assignment
+Run: python -m util.build_keypress_groups
 Requires resolved_press_sets.json (`python -m src.elicitation` first) and
 questionnaire.json (same command) for the full atom inventory (unpressable markers).
 """
 import json
 import os
 
-from src.phaseg import frequencyWeightedChordSizes, liveMarkers, loadGroupOrthoFrequencies, \
+from src.featuregrouping import frequencyWeightedChordSizes, liveMarkers, loadGroupOrthoFrequencies, \
     loadResolvedPressSets, verifyKeypressAssignment
-from src.phasegsat import ExclusiveGroupPreference, SameKeyPreference, minKeypressesSatWithPriorities, \
+from src.featuregroupingsat import ExclusiveGroupPreference, SameKeyPreference, minKeypressesSatWithPriorities, \
     serializeAssignment
 
 ALONE_KEYS = frozenset({"f"})
@@ -43,7 +43,7 @@ PREFERENCE_TIERS: list[SameKeyPreference | ExclusiveGroupPreference] = [
     SameKeyPreference(frozenset({frozenset({"future", "passé"})})),
     ExclusiveGroupPreference(frozenset({"nbr_p", "p"})),
 ]
-OUTPUT_PATH = "phase_g_keypress_assignment.json"
+OUTPUT_PATH = "keypress_groups.json"
 
 
 def main() -> None:

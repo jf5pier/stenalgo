@@ -1,11 +1,11 @@
 #!/usr/bin/python
 # coding: utf-8
-"""Tests for src/phasegsat.py"""
+"""Tests for src/featuregroupingsat.py"""
 
 import pytest
 
-from ..phaseg import verifyKeypressAssignment
-from ..phasegsat import (
+from ..featuregrouping import verifyKeypressAssignment
+from ..featuregroupingsat import (
     ExclusiveGroupPreference,
     SameKeyPreference,
     groupSignatures,
@@ -17,7 +17,7 @@ from ..phasegsat import (
 
 
 def _parler_press_sets() -> dict[str, dict[str, list[frozenset[str]]]]:
-    """Same fixture as phaseg_test.py's: three mutually singleton, mutually distinct
+    """Same fixture as featuregrouping_test.py's: three mutually singleton, mutually distinct
     markers -- must land on 3 separate keypresses no matter how cleverly colored."""
     return {
         "parler_VER": {
@@ -86,7 +86,7 @@ def test_minKeypressesSat_lets_a_self_homographs_alternates_share_the_same_keypr
 def test_minKeypressesSat_allows_sharing_when_safe():
     """The plan's own worked example: pers_2 and nbr_p may share a keypress because
     nbr_p is never pressed alone -- CP-SAT should find K=2, matching the greedy result
-    (phaseg_test.py's test_runPhaseG_allows_sharing_when_safe)."""
+    (featuregrouping_test.py's test_runFeatureGrouping_allows_sharing_when_safe)."""
     pressSetsByGroup = {
         "parler_VER": {
             "parle": [frozenset()],
@@ -100,8 +100,8 @@ def test_minKeypressesSat_allows_sharing_when_safe():
 
 
 def test_minKeypressesSat_solves_the_two_marker_bundle_collision_pairwise_checks_miss():
-    """Same abaisser_VER regression as phaseg_test.py's
-    test_runPhaseG_repairs_a_two_marker_bundle_collision_no_pairwise_check_catches --
+    """Same abaisser_VER regression as featuregrouping_test.py's
+    test_runFeatureGrouping_repairs_a_two_marker_bundle_collision_no_pairwise_check_catches --
     CP-SAT's exact per-signature distinctness constraint should get this right in one
     shot, with no repair loop needed, and should find it's colorable with only 2 keys
     (pers_3 alone, {pers_1, pers_2, nbr_p} bundled) -- better than greedy's 3."""

@@ -13,8 +13,8 @@ physical key count/shape ever changes.
 
 Run: python -m util.export_keyboard_layout
 Requires `starboard3h.json` (`python dictionary.py` generates it) and, for the
-conjugation-marker legend, `phase_p_keypress_realization.json`
-(`python -m util.build_phase_p_realization`) -- optional, skipped if missing.
+conjugation-marker legend, `realization_report.json`
+(`python -m util.build_realization_report`) -- optional, skipped if missing.
 """
 import json
 import os
@@ -23,7 +23,7 @@ from src.keyboard import Starboard
 from util.export_plover_system import GEMINI_PR_LABELS
 
 KEYBOARD_JSON = "starboard3h.json"
-PHASE_P_REALIZATION_JSON = "phase_p_keypress_realization.json"
+PHASE_P_REALIZATION_JSON = "realization_report.json"
 OUTPUT_PATH = "steno-trainer/public/data/keyboard-layout.json"
 
 # French display labels for the atomic grammatical-feature markers Phase P groups onto
@@ -119,7 +119,7 @@ def _conjugationMarkers(starboard: Starboard) -> list[dict]:
     The same-lemma/conjugation track's key -> meaning legend (Phase P; see
     `src/ambiguitychecker.py`'s module docstring for why this is a *distinct*
     mechanism from the `*`/`#` lemma-homophone track below) -- one entry per
-    `phase_p_keypress_realization.json` keypress group, giving the physical
+    `realization_report.json` keypress group, giving the physical
     key(s) chosen for it and a French label for the grammatical features it
     disambiguates (e.g. "impératif, 1re personne" on key "-k").
     """
