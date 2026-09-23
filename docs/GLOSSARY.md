@@ -13,28 +13,50 @@ refactor (`docs/refactor/DECISIONS.md`, ids a1-a12 and b1-b9).
 
 ## Legacy names
 
-Older prose uses a different stage numbering, letter phase codes and older call ids. They map
-as follows.
+Older prose (RESUME/NOTES/PLAN notes, ROADMAP.md history, commit messages, the
+`docs/refactor/callgraph/` drafts) uses letter phase codes, older stage names and older
+terms. They map as follows.
 
 | Legacy name | Current name |
 |---|---|
-| Lexicon Building (S1) | Lexicon Building (S1) |
-| Synthetic Paradigm Completion (S1b), calls S1b.n | Synthetic Lexicon Building (S2), calls S2.n (S1b.5 → Lexicon reading and identity merge (S3.2.1)) |
-| Phonetic Theory Building (S2), calls S2.1-S2.3, S2.6 | Dictionary Loading (S3): S2.1 → S3.1, S2.2 → S3.2, S2.3 → S3.3, S2.6 → S3.4 |
-| Phoneme order search (S2.4), Ambiguity statistics (S2.5), Fallback keymap (S2.8), Keyboard Layout Optimization (S2b) / optimizeKeyboard (S2.9) | Keyboard Layout Optimization (S4): S4.1, S4.2, S4.3, S4.4 |
-| Phonetic Theory Building (S2), calls S2.7, S2.10-S2.13 | Phonetic Theory Building (S5): S5.1, S5.2-S5.5 |
-| Same-Lemma Disambiguation (S3) | Same-Lemma and Grammatical-Category Disambiguation (S6) |
-| Marker Elicitation (Phase E), calls S3.E.n | Discriminating-Feature Elicitation (Elicitation Phase), calls S6.Elicitation.n: E.1-E.4 → 1-4, E.10 → 5, E.11 → 6, E.12 → 7, E.5 → 8, E.6 → 9, E.6.1 → 9.1, E.7 → 10, E.8 → 11, E.9 → 12 |
-| Marker Grouping (Phase G), calls S3.G.n | Discriminating-Feature Grouping (Grouping Phase), calls S6.Grouping.n (same n) |
-| Marker Stroke Realization (Phase P), calls S3.P.n | Discriminating-Feature Stroke Realization (Realization Phase), calls S6.Realization.n (same n) |
-| Lemma-Homophone Marking (S4), calls S4.n | Different-Lemma or Grammatical-Category Disambiguation (S7), calls S7.n (same n) |
-| Theory Export (S5), calls S5.n | Theory Export (S8), calls S8.n (same n) |
+| Phase E, Marker Elicitation | Discriminating-Feature Elicitation (Elicitation Phase) |
+| Phase G, Marker Grouping | Discriminating-Feature Grouping (Grouping Phase) |
+| Phase P, Marker Stroke Realization | Discriminating-Feature Stroke Realization (Realization Phase) |
+| Same-lemma homophones track, Same-Lemma Disambiguation (S3) | Same-Lemma and Grammatical-Category Disambiguation (S6) |
+| Lemma-homophones track, the `*`/`#` track, Lemma-Homophone Marking (S4) | Different-Lemma or Grammatical-Category Disambiguation (S7) |
+| Synthetic Paradigm Completion (S1b) | Synthetic Lexicon Building (S2) |
+| Theory Export (S5) | Theory Export (S8) |
+| Phase 0 | the older ambiguity-report diagnostic (`src/ambiguitychecker.py` `__main__`) |
+| marker, atom, discriminator (a grammatical value) | **Atomic feature** / **Feature** |
+| press-set, signature (what is pressed) | **Discriminating feature set** |
+| signature (`GroupSignature`) | **Homophone group set of feature sets** |
+| cluster | **Homophone Group**, **Theory-1 collision** or **Lemma-homophone group** (see Cluster) |
+| reading | **Feature Combination** |
+| keypress (the abstract unit) | **Keypress Group** |
+| chord | **Stroke** (see Chord for the other senses) |
+| mark, marker (for `*`/`#`) | **star/hash mark**, **star/hash code** |
+| marker stroke, Phase P stroke, coda extra stroke, trailing stroke | **Feature discriminating stroke** |
+| bare mark stroke | **\*/# marker stroke** |
+| 10x rule, frequency-ratio exemption | **frequency-ratio rule (R4)** |
+| in-scope collision | **Same-lemmeGramCat collision** |
 
-File names keep the letter codes (`phase_g_keypress_assignment.json`,
-`phase_p_keypress_realization.json`, `util/build_phase_g_assignment.py`,
-`util/build_phase_p_realization.py`, `src/phaseg.py`, `src/phasegsat.py`), as do commit
-messages. "Phase 0" is the name of an older ambiguity-report diagnostic
-(`src/ambiguitychecker.py` `__main__`).
+### Renamed files
+
+The files and identifiers carrying the letter codes were renamed in commit df71a24. Commit
+messages before it keep the old names.
+
+| Old path | New path |
+|---|---|
+| `src/phaseg.py` | `src/featuregrouping.py` |
+| `src/phasegsat.py` | `src/featuregroupingsat.py` |
+| `src/test/phaseg_test.py` | `src/test/featuregrouping_test.py` |
+| `src/test/phasegsat_test.py` | `src/test/featuregroupingsat_test.py` |
+| `util/build_phase_g_assignment.py` | `util/build_keypress_groups.py` |
+| `util/build_phase_p_realization.py` | `util/build_realization_report.py` |
+| `phase_g_keypress_assignment.json` | `keypress_groups.json` |
+| `phase_p_keypress_realization.json` | `realization_report.json` |
+| `runPhaseG` (identifier) | `runFeatureGrouping` |
+| `PhaseGResult` (identifier) | `FeatureGroupingResult` |
 
 ---
 
@@ -173,7 +195,7 @@ consonants in the onset.
 ### Coda bank
 The right-hand keys 16-25, which type coda consonants. The Realization Phase chooses
 feature keys only from this bank.
-- Code: `keyIDinSyllabicPart` in `starboard3h.json`; util/build_phase_p_realization.py:4.
+- Code: `keyIDinSyllabicPart` in `starboard3h.json`; util/build_realization_report.py:4.
 - First used in: Phonetic Theory Building (S5).
 
 ### Conjugation-feature legend
@@ -247,7 +269,7 @@ and resolves the stored answers into the resolved discriminating feature sets.
 The second phase of Same-Lemma and Grammatical-Category Disambiguation (S6): packs the live
 features into the minimum number K of keypress groups so no two spellings of a homophone
 group induce the same thing.
-- Code: util/build_phase_g_assignment.py:49; `minKeypressesSatWithPriorities` src/phasegsat.py:490; call ids S6.Grouping.n.
+- Code: util/build_keypress_groups.py:49; `minKeypressesSatWithPriorities` src/featuregroupingsat.py:490; call ids S6.Grouping.n.
 - Avoid "Marker Grouping (Phase G)", "Phase G".
 - First used in: Discriminating-Feature Grouping (Grouping Phase).
 
@@ -391,7 +413,7 @@ Legacy provisional name. Use **Homophone group set of feature sets**.
 ### Hard grouping rule / soft preference tier
 Grouping Phase constraints that may raise K (`ALONE_KEYS`, `MUST_DIFFER_GROUPS`) versus
 lexicographic preferences applied at the fixed minimum K (`PREFERENCE_TIERS`).
-- Code: util/build_phase_g_assignment.py:39-45.
+- Code: util/build_keypress_groups.py:39-45.
 - First used in: Discriminating-Feature Grouping (Grouping Phase).
 
 ### Homograph / Self-homograph
@@ -413,7 +435,7 @@ that sound alike (dors/dort). The unit of Same-Lemma and Grammatical-Category Di
 A homophone group reduced to its set of per-spelling alternate sets (each a set of
 discriminating feature sets), with spellings, strokes and lemmas removed. Groups with the
 same set of feature sets pose the same grouping problem (294 distinct ones for 47,828 groups).
-- Code: `GroupSignature` src/phasegsat.py:37; `groupSignatures` :40.
+- Code: `GroupSignature` src/featuregroupingsat.py:37; `groupSignatures` :40.
 - Avoid "signature", "group signature", "group shape".
 - First used in: Discriminating-Feature Grouping (Grouping Phase).
 
@@ -445,22 +467,22 @@ Code-only name for a same-lemmeGramCat collision.
 ### Induced discriminating feature set
 Every atomic feature asserted when a spelling's features are pressed through their keypress
 groups: the union of all features of the groups touched.
-- Code: `inducedPressSet` src/phaseg.py:135.
+- Code: `inducedPressSet` src/featuregrouping.py:135.
 - Avoid "induced press-set".
 - First used in: Discriminating-Feature Grouping (Grouping Phase).
 
 ### Inline path / report build
 The two call sites of the Realization Phase. The **inline path** runs inside
 `Dictionary.buildFinalTheory` and feeds theory 2 and all exports; the **report build**
-(`util/build_phase_p_realization.py`) writes only the realization report. The trainer legend
+(`util/build_realization_report.py`) writes only the realization report. The trainer legend
 reads the report while Plover recomputes inline, so the two can drift (item B18).
-- Code: dictionary.py:373-389; util/build_phase_p_realization.py:38.
+- Code: dictionary.py:373-389; util/build_realization_report.py:38.
 - First used in: Discriminating-Feature Stroke Realization (Realization Phase).
 
 ### K
 The number of keypress groups found by the Grouping Phase: the smallest number that is
 feasible under the hard grouping rules. Currently 7 (CLAUDE.md still says 5).
-- Code: `keypressCount` in `phase_g_keypress_assignment.json`; `minKeypressesSat` src/phasegsat.py:417.
+- Code: `keypressCount` in `keypress_groups.json`; `minKeypressesSat` src/featuregroupingsat.py:417.
 - First used in: Discriminating-Feature Grouping (Grouping Phase).
 
 ### Key-set
@@ -499,14 +521,14 @@ Phase docstrings also used it for the abstract unit; say **Keypress Group** for 
 One output unit of the Grouping Phase: an integer id and the atomic features it carries;
 pressing it asserts all of them. The Realization Phase gives each one physical coda keys.
 The dataset state "keypress groups" holds all K of them.
-- Code: `markersByKeypress` in `phase_g_keypress_assignment.json`; `KeypressGroupPhysicalAssignment` src/ambiguitychecker.py:904.
+- Code: `markersByKeypress` in `keypress_groups.json`; `KeypressGroupPhysicalAssignment` src/ambiguitychecker.py:904.
 - Preferred over "keypress", "marker group" and "chord" for the abstract unit.
 - First used in: Discriminating-Feature Grouping (Grouping Phase).
 
 ### Keypress group conflict
 Two different spellings of one homophone group that induce the same set of keypress groups
 after features are bundled. Any conflict aborts the Grouping Phase's write.
-- Code: `KeypressConflict` src/phaseg.py:150.
+- Code: `KeypressConflict` src/featuregrouping.py:150.
 - Avoid "keypress conflict" in prose.
 - First used in: Discriminating-Feature Grouping (Grouping Phase).
 
@@ -577,7 +599,7 @@ only); avoid calling any of them "the exclusion list".
 ### Live feature / unpressable feature
 An atomic feature that appears in at least one resolved discriminating feature set (13
 today), versus one that never does (7) and is left out of the Grouping Phase.
-- Code: `liveMarkers` src/phaseg.py:63.
+- Code: `liveMarkers` src/featuregrouping.py:63.
 - Avoid "live marker", "unpressable marker".
 - First used in: Discriminating-Feature Grouping (Grouping Phase).
 
@@ -600,8 +622,8 @@ survives in code names (`markersByKeypress`, `liveMarkers`, `PREFERRED_KEYS_BY_M
 ### Marker Elicitation / Marker Grouping / Marker Stroke Realization (Phase E / G / P)
 Legacy phase names. Use **Discriminating-Feature Elicitation (Elicitation Phase)**,
 **Discriminating-Feature Grouping (Grouping Phase)** and **Discriminating-Feature Stroke
-Realization (Realization Phase)**. The letter codes stay only in file names
-(`phase_g_*`, `phase_p_*`, `src/phaseg*.py`) and commit history.
+Realization (Realization Phase)**. The letter codes survive only in commit history and in
+the old file names listed under Renamed files.
 - First used in: Same-Lemma and Grammatical-Category Disambiguation (S6).
 
 ### Marker stroke
@@ -733,10 +755,10 @@ trainer type `Reading` keep the word as code names.
 - First used in: Dictionary Loading (S3).
 
 ### Realization report
-`phase_p_keypress_realization.json`: the tracked output of the Realization Phase's report
+`realization_report.json`: the tracked output of the Realization Phase's report
 build (chosen keys, costs, alternates, residual buckets). Read only by the trainer keyboard
 legend, which can therefore drift from the inline path.
-- Code: util/build_phase_p_realization.py:38.
+- Code: util/build_realization_report.py:38.
 - Avoid "Phase P report", "reference artifact".
 - First used in: Discriminating-Feature Stroke Realization (Realization Phase).
 
@@ -764,7 +786,7 @@ clash, or cross-lemma collision.
 A dataset state: for every homophone group, each spelling's list of alternate discriminating
 feature sets, plus frequencies and feature combinations (47,828 groups;
 `resolved_press_sets.json`, gitignored).
-- Code: `resolveGroupPressSets` src/elicitation.py:374; `serializeResolvedPressSets` :471; `PressSetsByGroup` src/phaseg.py:27.
+- Code: `resolveGroupPressSets` src/elicitation.py:374; `serializeResolvedPressSets` :471; `PressSetsByGroup` src/featuregrouping.py:27.
 - Avoid "resolved press-sets".
 - First used in: Discriminating-Feature Elicitation (Elicitation Phase).
 

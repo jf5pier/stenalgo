@@ -1,7 +1,8 @@
 """
-Shared safe RTFCRE rendering for theory 2 (base strokes + Phase P's same-lemma
-marks + the `*`/`#` lemma-homophone track), used by `util/export_plover_dictionary.py`
-and the steno-trainer exporters.
+Shared safe RTFCRE rendering for theory 2 (base strokes + the same-lemma marks of
+Discriminating-Feature Stroke Realization (Realization Phase) + the star/hash marks of
+Different-Lemma or Grammatical-Category Disambiguation (S7)), used by
+`util/export_plover_dictionary.py` and the steno-trainer exporters.
 
 `Starboard.strokesToRTFCRE` only handles base (onset/nucleus/coda) strokes: a
 stroke containing STAR_KEY/HASH_KEY (10/15) carries no syllabic part, which

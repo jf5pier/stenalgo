@@ -24,7 +24,7 @@ could load. This session designed and shipped a first cut:
   (KEYS, IMPLICIT_HYPHEN_KEYS, the Gemini PR keymap) from `starboard3h.json`, by key
   *position* not name, so it survives future re-optimization.
 - **`util/export_plover_dictionary.py`**: reads `FirstTheory.pickle` (base strokes
-  only — Phase P's star/hash marks aren't wired into a persisted per-word output yet)
+  only — Realization Phase's star/hash marks aren't wired into a persisted per-word output yet)
   and writes a real Plover JSON dictionary (`plover_stenalgo_dictionary.json`, 87.8k
   strokes, ~47.4k same-steno collisions — expected, see "What's genuinely still open").
 - New unit tests in `src/test/keyboard_test.py` for the three new `Starboard` methods.
@@ -226,7 +226,7 @@ alone, physically) well outside this session's Plover-integration scope.
   sync by hand.
 - `plover_stenalgo_dictionary.json` (new, committed — 87,506 strokes, same
   convention as this repo's other committed generated artifacts like
-  `starboard3h.json`/`phase_p_keypress_realization.json`).
+  `starboard3h.json`/`realization_report.json`).
 - Diagnostic-only, not part of the repo: `~/gemini_raw_probe.py` and
   `~/gemini_raw_probe.ps1` in the user's home directory (kept there in case more
   keys ever need re-verification after a firmware change); a throwaway
@@ -236,7 +236,7 @@ alone, physically) well outside this session's Plover-integration scope.
 ## What's genuinely still open
 
 - **The ~47.4k same-steno collisions** in `plover_stenalgo_dictionary.json` are
-  expected — Phase P's star/hash marking (`src/ambiguitychecker.py`) isn't wired into
+  expected — Realization Phase's star/hash marking (`src/ambiguitychecker.py`) isn't wired into
   `dictionary.py`'s persisted per-word output yet (tracked separately in
   `ROADMAP.md`/`CLAUDE.md`'s pipeline section, item 6). Re-running the exporter once
   that lands should resolve most of them.

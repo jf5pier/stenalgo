@@ -1,6 +1,7 @@
 """
-Persist Phase P's milestone-1 output (see RESUME_2026-09-19-phaseP-plan.md): for each of
-Phase G's abstract keypress groups (`keypress_groups.json`), search for a
+Persist the milestone-1 output of Discriminating-Feature Stroke Realization (Realization
+Phase) (see RESUME_2026-09-19-phaseP-plan.md): for each of the abstract keypress groups of
+Discriminating-Feature Grouping (Grouping Phase) (`keypress_groups.json`), search for a
 physical right-hand coda key-combo (`starboard3h.json`'s keys `[16..25]`) that realizes it
 as a brand-new trailing stroke appended after a word's own strokes (an extra "syllable"),
 without colliding with any word's existing stroke in the live `theory`, or with any other
@@ -85,17 +86,19 @@ def main() -> None:
         }
 
     theoryCollisionOrthos: list[str] = [w.ortho for w in assignment.residualTheoryCollisions]
-    # In-scope (same-lemmeGramCat) collisions Phase P itself failed to prevent -- the real bar.
+    # In-scope (same-lemmeGramCat) collisions the Realization Phase itself failed to prevent
+    # -- the real bar.
     sameLemmeGramCatCollisionOrthos: list[tuple[str, str]] = [
         (w1.ortho, w2.ortho) for w1, w2 in assignment.residualCollisions
     ]
     # Same bare lemma, different gramCat -- the already-documented "aller"-style
-    # cross-category clash (detectCrossCategoryClash), a separate issue, not Phase P's job.
+    # cross-category clash (detectCrossCategoryClash), a separate issue, not the
+    # Realization Phase's job.
     crossCategoryClashOrthos: list[tuple[str, str]] = [
         (w1.ortho, w2.ortho) for w1, w2 in assignment.crossCategoryClashCollisions
     ]
-    # Different lemma entirely -- the reserved */# keys' job, not yet applied to this
-    # `theory`; reported for visibility only, not a Phase P defect.
+    # Different lemma entirely -- the star/hash mark track's job, not yet applied to this
+    # `theory`; reported for visibility only, not a Realization Phase defect.
     crossLemmaCollisionOrthos: list[tuple[str, str]] = [
         (w1.ortho, w2.ortho) for w1, w2 in assignment.crossLemmaCollisions
     ]

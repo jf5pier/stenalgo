@@ -2,10 +2,10 @@
 
 Written so a fresh (cleared-context) session can pick up without re-deriving context.
 **Status as of end of day 2026-09-20: fully designed AND implemented, including the
-N-ary/multi-reading case, physical key realization, composition with Phase P, and a
+N-ary/multi-reading case, physical key realization, composition with Realization Phase, and a
 correctly-sourced Rule 3.** See "What's genuinely still open" at the bottom for the
 one piece that remains (wiring into `dictionary.py`'s actual persisted output) and
-`ATOMIC_KEYPRESS_REWIRE_PLAN.md`'s Phase P section for the condensed, currently-true
+`ATOMIC_KEYPRESS_REWIRE_PLAN.md`'s Realization Phase section for the condensed, currently-true
 summary of what landed where. This file itself still reads as the original design
 session's narrative (rationale, data, threshold sensitivity) — that reasoning is still
 accurate; only "still open" items below have been struck through as they were closed
@@ -17,7 +17,7 @@ on).
 
 Designed and implemented a systematic rule for which reading gets the extra `*`/`#`
 stroke when two homophone readings clash by grammatical category, covering both
-Phase P's bucket 2 (cross-category clash, same lemme different `gramCat`,
+Realization Phase's bucket 2 (cross-category clash, same lemme different `gramCat`,
 `detectCrossCategoryClash`) and bucket 3 (cross-lemma collision, different lemme,
 `crossLemmaCollisions`). The design: frequency-ratio exemption + homograph exemption +
 a correctly-sourced spelling-doublet exemption (Rule 3, see below) + a 6-entry
@@ -83,7 +83,7 @@ so higher isn't "more conservative," it's just worse on every axis tested.
 
 If `orthoA == orthoB`, no mark is needed — identical spelling means identical typed
 output regardless of which reading was meant, so it was never a real ambiguity. This
-exclusion already existed in Phase P's `_isInScopeCollision` for the stroke-collision
+exclusion already existed in Realization Phase's `_isInScopeCollision` for the stroke-collision
 buckets, and bucket 3's `crossLemmaCollisions` already excludes identical-ortho pairs
 upstream (0 pairs dropped when re-checked). Bucket 2 dropped exactly 1 of 74 pairs
 (27.5 volume) — small effect, but free and correct. (Caveat: the bucket-2 check used
@@ -222,7 +222,7 @@ Nouns ending in `-er` with plural `-ers` (French verbal nouns derived from an
 infinitive, e.g. `dîner`/`dîners`) could reuse the existing `Infinitif`/`Infinitif:p`
 atomic-feature markers instead of a generic `*`/`#` mark — a derivational-pattern
 rule resolving a whole NOM/VER sub-class at once. Not sized or verified against real
-data. See `ATOMIC_KEYPRESS_REWIRE_PLAN.md`'s Phase P section for the exact note; this
+data. See `ATOMIC_KEYPRESS_REWIRE_PLAN.md`'s Realization Phase section for the exact note; this
 file is the analysis session that raised it.
 
 ## What's genuinely still open
@@ -251,16 +251,16 @@ in the same-day follow-up session (all in `src/ambiguitychecker.py` unless noted
   mapping, `starHashCodeToStrokes`/`assignStarHashPhysicalStrokes`. Validated against
   the live lexicon: biggest real cluster is 7 readings (the `au`/`eau`/`oh`/`haut`/
   `ho`/`ô`/`aux` set), max escalation depth 4 anywhere in the whole lexicon.
-- ~~Composition with Phase P's own extra-stroke mechanism.~~ **Done.** Investigated
+- ~~Composition with Realization Phase's own extra-stroke mechanism.~~ **Done.** Investigated
   first: 100% of currently-known bucket-2/3 collisions involve a word that already
-  has its own Phase P extra stroke (by construction — those collision fields are
-  computed from Phase P's `finalInduced`). The two mechanisms compose by simple
-  concatenation (Phase P's stroke, then `*`/`#` after it) and can't create new
+  has its own Realization Phase extra stroke (by construction — those collision fields are
+  computed from Realization Phase's `finalInduced`). The two mechanisms compose by simple
+  concatenation (Realization Phase's stroke, then `*`/`#` after it) and can't create new
   cross-cluster collisions (structurally disjoint key ranges: `STAR_KEY`/`HASH_KEY`
   are excluded from `Keyboard.allowedKeys`). Implementation:
-  `groupHomophonesByReservedStroke` (groups by shared post-Phase-P stroke, filters to
+  `groupHomophonesByReservedStroke` (groups by shared post-Realization-Phase stroke, filters to
   genuine distinct-`lemmeGramCat`/distinct-`ortho` groups) and
-  `composeReservedKeyStrokes`. Validated: 1079 genuine groups found in Phase P's own
+  `composeReservedKeyStrokes`. Validated: 1079 genuine groups found in Realization Phase's own
   elicited population, 0 accidental collisions with existing theory strokes, 0 genuine
   (distinct-spelling) collisions left anywhere after composition.
 - ~~Cross-reference the 1,085 distinct lemma pairs against `resources/reform1990.tsv`
@@ -291,7 +291,7 @@ in the same-day follow-up session (all in `src/ambiguitychecker.py` unless noted
 
 ## Script inventory (all in `scratch/`, throwaway/untracked, read-only analyses —
 none of this is built for reuse; would need a proper `util/` script, mirroring
-`util/build_phase_p_realization.py`'s role, if this design gets implemented)
+`util/build_realization_report.py`'s role, if this design gets implemented)
 
 - `cross_category_regret.py` — bucket 2 alone, raw (no rules).
 - `cross_lemma_regret.py` — bucket 3 alone, raw (no rules), same-category vs
@@ -304,9 +304,9 @@ none of this is built for reuse; would need a proper `util/` script, mirroring
   per-threshold exemption counts.
 
 All of these load `Dictionary.pickle`/`FirstTheory.pickle` (same
-`sys.modules["__main__"].Dictionary` alias trick as `util/build_phase_p_realization.py`
+`sys.modules["__main__"].Dictionary` alias trick as `util/build_realization_report.py`
 — see that script's `_loadTheory` for the pattern) and, for bucket 3, the ortho pairs
-in `phase_p_keypress_realization.json`.
+in `realization_report.json`.
 
 ## Verification commands for a fresh session
 

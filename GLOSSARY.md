@@ -1,5 +1,7 @@
 # Glossary
 
+> **Superseded by [`docs/GLOSSARY.md`](docs/GLOSSARY.md)** (2026-09-22 docs refactor); kept only until Interactive Triage (Pass 4).
+
 Canonical vocabulary for this codebase. When a term below has a preferred synonym,
 use the preferred synonym in new code, comments, and docs — the entry is kept only so
 older prose (commit messages, past planning docs) stays decipherable.
@@ -33,9 +35,9 @@ vocabulary already used by `Word.getFeatures()` in `src/word.py`. Built per-word
 The set of markers (atoms) whose press is implied for a given spelling, once you union
 the checked atoms across all of that spelling's readings within a homophone group. Two
 different spellings in the same group ending up with the same signature is a conflict
-(the chord no longer tells you which spelling to produce) — this is what Phase E5
+(the chord no longer tells you which spelling to produce) — this is what the Elicitation Phase's step E5
 (validate) checks for.
 
 **Preferred synonym: Press-set** — the term the plan document itself already uses
-(`ATOMIC_KEYPRESS_REWIRE_PLAN.md`, Phase E5/E6: "every press implied by the data",
+(`ATOMIC_KEYPRESS_REWIRE_PLAN.md`, Elicitation Phase steps E5/E6: "every press implied by the data",
 "per-cluster resolved press-sets").

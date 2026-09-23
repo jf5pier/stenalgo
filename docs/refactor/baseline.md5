@@ -2,8 +2,8 @@
 139e7e56439e50a341bb3e5371d49c6d  theory2.tsv
 4d215162853f64264e4b1420b4e18ddf  resolved_press_sets.json
 3480e9101e71508c9a0d8effdb22cac8  questionnaire.json
-c1cd579c148e894fe886313f80946d74  phase_g_keypress_assignment.json
-662e12d34d2a417eb0a1c0580fa1b878  phase_p_keypress_realization.json
+c1cd579c148e894fe886313f80946d74  keypress_groups.json
+662e12d34d2a417eb0a1c0580fa1b878  realization_report.json
 40456cf5cc16a8040249d2126d3780ca  plover_stenalgo_dictionary.json
 bfeac3f9d9b6639b82cd279cbf5b66a6  plover_stenalgo/plover_stenalgo/_generated_keys.py
 a403157522a7ffa0b41b5e76b5021279  steno-trainer/public/data/definitions.json

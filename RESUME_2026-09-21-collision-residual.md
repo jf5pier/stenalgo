@@ -17,7 +17,7 @@ steno chord in both the practice trainer and the real Plover dictionary.
 `util/export_practice_words.py` both read `FirstTheory.pickle` (theory 1 -- base
 onset/nucleus/coda strokes only, no homophone marks) instead of theory 2
 (`Dictionary.buildFinalTheory`, `dictionary.py:339-366` -- composes theory 1 with
-Phase P's same-lemma coda-bank marks and the `*`/`#` lemma-homophone track). Neither
+Realization Phase's same-lemma coda-bank marks and the `*`/`#` lemma-homophone track). Neither
 exporter was wrong about what `FirstTheory.pickle` contains; they were just never
 updated once theory 2 started existing (`ROADMAP.md`'s "Status update" section,
 2026-09-20 entry, "The `*`/`#` pipeline wired into `dictionary.py`'s persisted output").
@@ -29,7 +29,7 @@ updated once theory 2 started existing (`ROADMAP.md`'s "Status update" section,
 - `util/_stenorender.py` (new): `renderFinalStrokesToRTFCRE(starboard, strokes)` --
   `Starboard.strokesToRTFCRE` alone crashes (`KeyError`) on any stroke containing
   `STAR_KEY`/`HASH_KEY` (10/15, `src/ambiguitychecker.py:350-351`), since those keys
-  carry no syllabic part and aren't in `keyIDinSyllabicPart`. Phase P's coda marks and
+  carry no syllabic part and aren't in `keyIDinSyllabicPart`. Realization Phase's coda marks and
   the `*`/`#` track's marks are always concatenated as separate whole strokes, never
   merged into one (`composeReservedKeyStrokes`, `src/ambiguitychecker.py:409-430`), so
   a stroke is always either "normal" (render via the existing method) or "bare
@@ -37,7 +37,7 @@ updated once theory 2 started existing (`ROADMAP.md`'s "Status update" section,
 - Both exporters now call `loadFinalTheory` + `renderFinalStrokesToRTFCRE`.
 - Result: `plover_stenalgo_dictionary.json` went from 87,506 strokes/47,370 collisions
   to 160,716 strokes/18,802 collisions. `à`->`a`, `a`(avoir)->`a/*`, `as`(avoir)->`a/-t`
-  (the `pers_2` Phase P mark) are now distinct, verified.
+  (the `pers_2` Realization Phase mark) are now distinct, verified.
 
 ## Lexicon-size tangent (answered, no action needed)
 
@@ -87,7 +87,7 @@ fresh session can investigate without this session's now-long context.**
 ## Next session: what to actually do
 
 1. **Reproduce the residual list** (script below, run from repo root with the venv
-   active -- `Dictionary.pickle`/`FirstTheory.pickle`/`phase_g_keypress_assignment.json`/
+   active -- `Dictionary.pickle`/`FirstTheory.pickle`/`keypress_groups.json`/
    `resolved_press_sets.json` all already exist, no rebuild needed):
 
    ```python
@@ -110,7 +110,7 @@ fresh session can investigate without this session's now-long context.**
 
    starboard = Starboard.fromJSONFile('starboard3h.json')
    finalTheory = dictionary.buildFinalTheory(
-       theory, starboard, 'phase_g_keypress_assignment.json', 'resolved_press_sets.json')
+       theory, starboard, 'keypress_groups.json', 'resolved_press_sets.json')
 
    stenoToWords = defaultdict(list)
    for word, strokes in finalTheory.items():
@@ -139,14 +139,14 @@ fresh session can investigate without this session's now-long context.**
      1990-reform-doublet check first -- `quatre`/`carte` and `star`/`tsar` are not
      doublets of each other, so this would be a bug if it's firing).
    - `groupHomophonesByReservedStroke` (`src/ambiguitychecker.py:379`) might be
-     grouping by the wrong stroke identity (e.g. pre- vs post-Phase-P), causing these
+     grouping by the wrong stroke identity (e.g. pre- vs post-Realization-Phase), causing these
      pairs to never even reach `decideStarHashMark` as a pair to consider.
    - For the SAME-LEMMA cases (`croyons`/`croyions`, `entendiez`/`entendriez`,
      `jouiez`/`joueriez`, `tueriez`/`tuiez`, `revoyons`/`revoyions`) -- these are
      present-vs-imparfait or conditionnel-vs-imparfait person/tense collisions within
-     one lemma, i.e. Phase P's job, not the `*`/`#` track's. Check whether
-     `imparfait`'s Phase G group (group 1, `['imparfait','pers_2']`,
-     `phase_g_keypress_assignment.json`) actually covers the specific person
+     one lemma, i.e. Realization Phase's job, not the `*`/`#` track's. Check whether
+     `imparfait`'s Grouping Phase group (group 1, `['imparfait','pers_2']`,
+     `keypress_groups.json`) actually covers the specific person
      combinations these pairs need, or whether the elicited marker set has a real
      coverage gap here (never elicited a distinguishing choice for this specific
      tense/person combination) rather than a marking-logic bug. This is a different

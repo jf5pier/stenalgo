@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # coding: utf-8
 """
-Phase E (see ATOMIC_KEYPRESS_REWIRE_PLAN.md) — elicitation before optimization.
+Discriminating-Feature Elicitation (Elicitation Phase) (see ATOMIC_KEYPRESS_REWIRE_PLAN.md)
+— elicitation before optimization.
 
 E2/E3: enumerate every same-lemma homophone group (words sharing a lemma+gramCat that
 also share a pronunciation, i.e. a stroke), every cross-spelling feature-combination pair
@@ -10,8 +11,9 @@ oppositions -- the actual number of questions a questionnaire would ask -- max c
 size, which markers are ever pressed together, and a greedy-coloring lower bound on K
 computed with and without the co-occurrence ("pressed-together") requirement).
 
-Nothing here touches the questionnaire itself (Phase E4, format open -- plan's open
-decision §F) or the abstract grouping solver (Phase G). This module only measures.
+Nothing here touches the questionnaire itself (Elicitation Phase step E4, format open --
+plan's open decision §F) or the abstract grouping solver (Discriminating-Feature Grouping
+(Grouping Phase)). This module only measures.
 """
 
 from collections import defaultdict
@@ -126,7 +128,8 @@ def enumerateOppositionSamples(
 def _greedyColorCount(nodes: set[str], edges: set[frozenset[str]]) -> int:
     """Welsh-Powell greedy coloring (largest-degree-first). Gives an upper bound on the
     true chromatic number in general, used here as a cheap, honest "at least roughly this
-    many keypresses" estimate -- not a proof of optimality (that's Phase G's CP-SAT job)."""
+    many keypresses" estimate -- not a proof of optimality (that's the CP-SAT job of
+    Discriminating-Feature Grouping (Grouping Phase))."""
     if not nodes:
         return 0
     adjacency: dict[str, set[str]] = {n: set() for n in nodes}
@@ -162,8 +165,8 @@ class ScaleReport:
 
 
 def reportScale(homophoneGroups: dict[LemmaHomophoneGroupKey, list[Word]]) -> ScaleReport:
-    """E3: the numbers that decide whether Phase E4's questionnaire is a short exchange
-    or a serious undertaking, computed before any of it is built."""
+    """E3: the numbers that decide whether Elicitation Phase step E4's questionnaire is a
+    short exchange or a serious undertaking, computed before any of it is built."""
     samples = enumerateOppositionSamples(homophoneGroups)
     multiSpellingGroups = {
         key for key, words in homophoneGroups.items() if len(featureCombinationsByOrtho(words)) > 1
@@ -221,10 +224,11 @@ def buildQuestionnaireItems(
     homophoneGroups: dict[LemmaHomophoneGroupKey, list[Word]]
 ) -> list[QuestionnaireItem]:
     """
-    Phase E4 input: one example pair per distinct opposition, chosen to avoid contaminating
-    a combination's shown atoms with an unrelated combination of a same-lemma homograph
-    (prefer a spelling that has only this one combination in its group) and, among equally
-    clean candidates, the highest-frequency pair (most recognizable to answer against).
+    Elicitation Phase step E4 input: one example pair per distinct opposition, chosen to avoid
+    contaminating a combination's shown atoms with an unrelated combination of a same-lemma
+    homograph (prefer a spelling that has only this one combination in its group) and, among
+    equally clean candidates, the highest-frequency pair (most recognizable to answer
+    against).
     """
     best: dict[
         frozenset[FeatureCombination],
@@ -474,20 +478,23 @@ def serializeResolvedPressSets(
     pressByOrthoCombinationByGroup: dict[LemmaHomophoneGroupKey, PressByOrthoCombination] | None = None,
 ) -> list[dict]:
     """
-    E6: the persisted elicitation artifact that feeds Phase G (not `buildDiscriminatorSelection`'s
-    output). One entry per validated (conflict-free -- callers should pass `validateElicitation`'s
-    clean groups, or filter out its conflicting ones first) homophone group: its stroke/lemma key,
-    every spelling's resolved press-sets (a list of alternates -- almost always one, more than one
-    only for a spelling that is itself a homograph, see `resolveGroupPressSets`), and (when
+    E6: the persisted elicitation artifact that feeds Discriminating-Feature Grouping
+    (Grouping Phase) (not `buildDiscriminatorSelection`'s output). One entry per validated
+    (conflict-free -- callers should pass `validateElicitation`'s clean groups, or filter out
+    its conflicting ones first) homophone group: its stroke/lemma key, every spelling's
+    resolved press-sets (a list of alternates -- almost always one, more than one only for a
+    spelling that is itself a homograph, see `resolveGroupPressSets`), and (when
     `frequencyByGroupOrtho` is given, see `buildFrequencyByGroupOrtho`) each spelling's corpus
-    frequency, for Phase G's frequency-weighted chord-size report. JSON-serializable (Strokes is
-    already tuple[tuple[int, ...], ...], trivially nested lists; press-sets sorted for stable diffs).
+    frequency, for the Grouping Phase's frequency-weighted chord-size report. JSON-serializable
+    (Strokes is already tuple[tuple[int, ...], ...], trivially nested lists; press-sets sorted
+    for stable diffs).
 
     When `pressByOrthoCombinationByGroup` (`resolvePressByCombination`'s first return value) is
     given, each entry also carries "readings": per spelling, a list PARALLEL to its "pressSets"
     alternates, each element the feature combinations (grammatical readings, as sorted atom
     lists) that resolved to that alternate's press -- e.g. "calmez"'s `["impératif"]` alternate
-    lists the impératif-présent-2p reading. Nothing in the Phase G/P pipeline reads it; it's
+    lists the impératif-présent-2p reading. Nothing in the Grouping Phase/Discriminating-Feature
+    Stroke Realization (Realization Phase) pipeline reads it; it's
     there so `util/export_practice_words.py` can label each alternate stroke with the reading
     it's for.
     """
@@ -605,7 +612,7 @@ if __name__ == "__main__":
                 print(f"   press {sorted(conflict.pressSet) or '∅'} -> {conflict.orthos}"
                       f"  (group {conflict.homophoneGroupKey[1]})")
 
-        # E6: persist the conflict-free, fully-resolved groups -- Phase G's actual input,
+        # E6: persist the conflict-free, fully-resolved groups -- the Grouping Phase's actual input,
         # not buildDiscriminatorSelection's output. Conflicted/unresolved groups are left
         # out entirely rather than persisted half-wrong; they need re-asking first.
         cleanPressSetsByGroup = {

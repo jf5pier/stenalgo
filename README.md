@@ -8,7 +8,7 @@ Using some optimization algorithms, evolve a stenograph keymap layout that minim
 
 ## Context
 
-Stenograph keyboards present a limited keyset where multiple keys are pressed at the same time, forming a chord that represent
+Stenograph keyboards present a limited keyset where multiple keys are pressed at the same time, forming a stroke that represent
 one or more phoneme / syllable in a word. Steno machines were once proprietary and expensive, but cheaper options are now available
 through custom keyboards using popular mechanical keyboards parts and software or firmware interpreter. Those new keyboards are
 programmable, so it is not needed to stick to the original century-old phoneme-keymap layout.
@@ -27,7 +27,7 @@ Stenotyping is done on custom (minimal keys) keyboards. The user simultaneously 
 The fingers move as little as possible, but each can press multiple keys situated on the same column, or adjacent columns to the pinky or
 index fingers.
 
-Those keypresses (or chord) are interpreted by a software layer implementing a Theory. The theory translate the chord or group of chords into
+Those keypresses (or stroke) are interpreted by a software layer implementing a Theory. The theory translate the stroke or group of strokes into
 one or multiple words.
 
 The theory must closely match the syllable(s) pressed to the typed word(s), otherwise learning and remebering the corresponding keypress will
@@ -43,8 +43,8 @@ keymap-theory will be scored based on the strain and complexity in the following
 ### Finger strain 
 
 The average number of keystroke must be minimized :
-- Chords containing less keystrokes are preferable
-- Words containing less Chords are preferable
+- Strokes containing less keystrokes are preferable
+- Words containing less strokes are preferable
 - Common words should contain less strokes than rarely used words
 - Movement of fingers should be minimized
 - Pressing fewer keys per finger is preferable
@@ -52,9 +52,9 @@ The average number of keystroke must be minimized :
 ### Mental strain
 
 The mapping of keys to the sound they represent must be coherent :
-- Phonemes must have a maximum of one canonical representation on the keyboard, one portion of a chord (todo: validate)
-- Syllables must have the minimum number of chord representation (variations) on the keyboard to distinguish between the different spellings
-- Rules (chord variations) to distinguish between spelling of a syllable must be consistent across a maximum of words sharing that syllable
+- Phonemes must have a maximum of one canonical representation on the keyboard, one key-set of a stroke (todo: validate)
+- Syllables must have the minimum number of stroke representation (variations) on the keyboard to distinguish between the different spellings
+- Rules (stroke variations) to distinguish between spelling of a syllable must be consistent across a maximum of words sharing that syllable
 - As much as possible, the order in wich phonemes are typed must match the order they occure in the syllable
 
 Words that do not respect an established rule are deemed an exception
@@ -74,13 +74,13 @@ associations for 137k of the 142k words of Lexique383. The final lexicon [`resou
 
 
 #### Phoneme and biphoneme frequencies must be extracted [x]
-Typically, the order of the phonemes (from left to right) typed to form a chord must ressemble the order of the phonemes in the syllable.
+Typically, the order of the phonemes (from left to right) typed to form a stroke must ressemble the order of the phonemes in the syllable.
 Ordered biphoneme frequencies informs on the order the phonemes should be placed on the keymap. For this example, we assumed that the typical
 order of the keys on the keymap would be the 3 groups of phonemes : Left-consonants -> Vowels -> Right-consonants.  In linquistic parlance, 
 these phoneme groups are called the Onset, Nucleus and Coda components of a [syllable](https://en.wikipedia.org/wiki/Syllable#Grouping_of_components).
 
 While pairs of phonemes (biphonemes) frequencies inform on the order of the phonemes, single-phoneme frequencies inform on the importance of the phoneme. 
-Here is a representation of a phoneme order for all 3 groups of phonemes that minimize the frequency of chords where the phones are in the wrong order. 
+Here is a representation of a phoneme order for all 3 groups of phonemes that minimize the frequency of strokes where the phones are in the wrong order. 
 Bar charts represent the frequency of the individual phonemes in each of the 3 groups.
 
 
@@ -219,11 +219,12 @@ assigned to the most accessible positions and phonemes requiring key combos chos
 and deciding when to freeze it for learners, is ongoing — see `ROADMAP.md`.
 
 #### Identifying homophones and defining treatment rules [ ]
-Homophones split into two different problems needing two different mechanisms: words that share a lemma but differ in inflection (a conjugation
-problem, solved with phoneme-key chords) and words whose lemmas differ entirely, e.g. ver/vert/verre/vers/vair (a spelling problem, solved with
-the keyboard's two guaranteed reserved keys, `*`/`#`). Feature-discrimination code for the first case already exists
-(`greedyOptimizeDiscriminator`, `satOptimizeDiscriminator`, `assignDiscriminatorKeypresses`), but isn't yet fully wired into a persisted theory,
-and the second case is still unaddressed. Full detail and open questions are tracked in `ROADMAP.md`.
+Homophones split into two different problems needing two different mechanisms: words that share a lemma and grammatical category but differ
+in inflection (a conjugation problem, handled by Same-Lemma and Grammatical-Category Disambiguation (S6) with feature discriminating strokes
+built from the user's elicited discriminating feature sets) and words whose lemmas or categories differ, e.g. ver/vert/verre/vers/vair (a
+spelling problem, handled by Different-Lemma or Grammatical-Category Disambiguation (S7) with star/hash marks on the keyboard's two guaranteed
+reserved keys, `*`/`#`). Both are wired into theory 2 and the Plover dictionary; see [`docs/PIPELINE.md`](docs/PIPELINE.md). Open questions
+are tracked in `ROADMAP.md`.
 
 #### Treatment of verbs, prefixes, suffixes [ ]
 French verbs have multiple conjugations suffixes per tense, some of which are homophones (je mange - m@Ze, tu manges - m@Ze). Paradigm-table

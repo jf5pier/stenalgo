@@ -5,7 +5,7 @@ Merged and de-duplicated from `01-lexicon-building.md`, `02-phonetic-theory-buil
 `00-skeleton.md`, plus read-only re-measurements made during the merge (pickles rebuilt
 2026-09-22 20:31 with `PYTHONHASHSEED=0`). Nothing here has been fixed.
 
-Sections: **Suspected bugs** (to `TODO.md § Suspected bugs`), **Dead-code observations**
+Sections: **Suspected bugs** (to `todo.md § Suspected bugs`), **Dead-code observations**
 (raw material for Dead-Code Removal (Pass 5)), **Doc drift** (raw material for Interactive
 Triage (Pass 4)).
 
@@ -25,23 +25,20 @@ tier 2 changes reports or tracked artifacts other than the Plover output; tier 3
 - Defect: when several Words share (ortho, `lemmeGramCat`) and the entry's canonical strokes,
   `next(...)` returns the first; the others keep bare base strokes.
 - Scenario: "agis" has a participle m:p Word and a finite Word; its primary press is
-  {impératif}; only one gets the `-k` marker stroke, the other stays on `a/vti`, the stroke of
+  {impératif}; only one gets the `-k` feature discriminating stroke, the other stays on `a/vti`, the stroke of
   the canonical member "agi".
-- Impact (reconciled, see note): 262 twin spellings in the current resolved press-sets; **230
+- Impact (reconciled, see note): 262 twin spellings in the current resolved discriminating feature sets; **230
   same-lemmeGramCat collision pairs in the final induced strokes, all involving a twin**. Of
-  these, 131 pairs sit in strokes that also hold another `lemmeGramCat`, so Lemma-Homophone
-  Marking (S4) ranks them and marks the rarer one (e.g. `kpi/mR*i` → "finis"). The other **99
-  pairs in 98 strokes** have a single `lemmeGramCat` and are dropped by Lemma-homophone cluster
-  detection (S4.5); they reach theory 2 unmarked and the Plover export keeps the more frequent
+  these, 131 pairs sit in strokes that also hold another `lemmeGramCat`, so Different-Lemma or Grammatical-Category Disambiguation (S7) ranks them and marks the rarer one (e.g. `kpi/mR*i` → "finis"). The other **99
+  pairs in 98 strokes** have a single `lemmeGramCat` and are dropped by Lemma-homophone group detection (S7.5); they reach theory 2 unmarked and the Plover export keeps the more frequent
   Word. All 98 losing spellings are still reachable through another Word's stroke today.
   Invisible to the "0 residual same-lemmeGramCat collisions" invariant (the unchosen twin is
   not in `allWords`).
 - Reconciliation of 229 vs 98: both stage files were right and measured different things.
   `03-same-lemma-disambiguation.md` counted all same-lemmeGramCat, different-ortho pairs on
-  canonical final induced strokes over the whole lexicon (**before** Lemma-Homophone Marking
-  (S4)): 229 on the pickles of about 20:13, 230 on the 20:31 rebuild. `04-marking-and-export.md`
+  canonical final induced strokes over the whole lexicon (**before** Different-Lemma or Grammatical-Category Disambiguation (S7)): 229 on the pickles of about 20:13, 230 on the 20:31 rebuild. `04-marking-and-export.md`
   counted canonical-stroke buckets with ≥2 spellings but a single `lemmeGramCat` (the ones the filter of
-  Lemma-homophone cluster detection (S4.5) at :402 drops), i.e. what survives **after** marking: 98 buckets = 99 pairs. 230 − 131
+  Lemma-homophone group detection (S7.5) at :402 drops), i.e. what survives **after** marking: 98 buckets = 99 pairs. 230 − 131
   resolved by marking = 99. The 230/262 vs 03's 229/230 drift comes from the rebuild.
 - Confidence: high. Reported by: 03 (twins, 229/230), 04 (98 buckets), skeleton (fallback, see B20).
 
@@ -68,12 +65,12 @@ tier 2 changes reports or tracked artifacts other than the Plover output; tier 3
   through the ending tables.
 - Confidence: high (data). Reported by: 01 (#2).
 
-**B4. Unmarked self-homograph alternates take unrelated words' only stroke.**
+**B4. Unmarked alternate entries of self-homographs take unrelated words' only stroke.**
 - Where: src/ambiguitychecker.py:1288 (`buildExtraInducedStrokes`), dictionary.py:389.
-- Defect: alternate strokes skip Lemma-Homophone Marking (S4), so an alternate can equal the
+- Defect: alternate entry strokes skip Different-Lemma or Grammatical-Category Disambiguation (S7), so an alternate entry can equal the
   only stroke of a word of another lemma.
 - Scenario: `subits` (ADJ, `s@i/svi/-s`) loses to `subis`'s participle-plural alternate; `pais`
-  (`pie/-k`) loses to `paie`; `amplis` to `emplis`.
+  (`pie/-k`) loses to `paie`'s; `amplis` to `emplis`.
 - Impact: **9 spellings with no Plover entry** (subits, pais, amplis, bénits, brandys,
   bégaies, baillez, baryes, repais). Known, documented scope gap, now with measured cost.
 - Confidence: high. Reported by: 04; skeleton (scope gap).
@@ -81,11 +78,11 @@ tier 2 changes reports or tracked artifacts other than the Plover output; tier 3
 **B5. Frequency ties make marking depend on input order (`_starHashCompare` not antisymmetric).**
 - Where: src/ambiguitychecker.py:224-225, :232 (tie → first argument marked), used through
   `_starHashCompare` :242-258 and `rankHomophoneCluster` :261.
-- Defect: on equal frequency under R4/R5/R7, `compare(a,b) == compare(b,a) == +1`, so the
-  ranking depends on cluster member order.
+- Defect: on equal frequency under the frequency-ratio rule (R4), the same-category rule (R5) or the frequency fallback (R7), `compare(a,b) == compare(b,a) == +1`, so the
+  ranking depends on lemma-homophone group member order.
 - Scenario: `pas`/`pâts` (both 0.0): input `[pas, pâts]` marks `pâts`; `[pâts, pas]` marks `pas`.
-- Impact: 648 tied representative pairs in 618 of 4,450 clusters; shuffling cluster input
-  changes marks in **619 clusters (14%)**, almost all zero-frequency words. Deterministic run to
+- Impact: 648 tied representative pairs in 618 of 4,450 lemma-homophone groups; shuffling group input
+  changes marks in **619 groups (14%)**, almost all zero-frequency words. Deterministic run to
   run (order comes from lexicon row order, not hashing), but any lexicon row move, new synthetic
   row or theory-1 regrouping can flip marks. The `aile/ailes/elles/hèle` change of a1d0fb5 is
   **not** such a flip (fully explained by folding `elles` into lemma `elle`). The comparator's
@@ -153,7 +150,7 @@ tier 2 changes reports or tracked artifacts other than the Plover output; tier 3
   Word per stroke, so pairs are reversed (('affidées','affidés') ↔ ('affidés','affidées')) and
   bucket membership changes (A1, A2 same ortho + B: A1 first → one cross-lemma pair; B first →
   two).
-- Impact: `phase_p_keypress_realization.json` cross-category clashes seen as 34, 40 and 38 and
+- Impact: `realization_report.json` cross-category clashes seen as 34, 40 and 38 and
   cross-lemma collisions as 1,283 and 1,292 on different rebuilds. Confirmed empirically: with
   the same pickles, four different `PYTHONHASHSEED`s gave identical `theory2.tsv`, realization
   report and Plover dictionary; fresh pickles changed only the report's residual lists. Chosen
@@ -166,9 +163,9 @@ tier 2 changes reports or tracked artifacts other than the Plover output; tier 3
 **B12. The precedence-spec checker covers much less than the spec.**
 - Where: util/check_conjugation_disambiguation_order.py:69-77, :100-126.
 - Defect: "masculine must be free" is checked for participles only (ADJ/NOM gender and finite
-  indicatif readings never); impératif/subjonctif are "mandatory" in the spec
-  (conjugation_disambiguation_order.txt:55-58) but an empty press passes; the line order is never checked.
-- Scenario: an answer leaving an impératif reading as the `∅` default produces no violation.
+  indicatif Feature Combinations never); impératif/subjonctif are "mandatory" in the spec
+  (conjugation_disambiguation_order.txt:55-58) but an empty discriminating feature set passes; the line order is never checked.
+- Scenario: an answer leaving an impératif Feature Combination as the `∅` default produces no violation.
 - Impact: the validation report can be clean while answers contradict the spec.
 - Confidence: medium. Reported by: 03.
 
@@ -182,7 +179,7 @@ tier 2 changes reports or tracked artifacts other than the Plover output; tier 3
 
 **B14. Human views go stale with the caches.**
 - Where: dictionary.py:498-505 (`theory.tsv` written only on a `FirstTheory.pickle` miss);
-  dictionary.py:531 (first run writes `theory2.tsv` from possibly stale press-sets).
+  dictionary.py:531 (first run writes `theory2.tsv` from possibly stale discriminating feature sets).
 - Impact: low; both files are gitignored human views that nothing reads.
 - Confidence: high. Reported by: skeleton.
 
@@ -203,13 +200,13 @@ first, only (Y,X) and (Y,Z) are reported (cross-lemma) and the real pair (X,Z) n
 Confidence: high (mechanism). Reported by: 03.
 
 **B17. `buildFinalTheory` ignores unassigned groups and residuals.** dictionary.py:380-389.
-If a keypress group cannot be realized, its Words silently lose that marker in theory 2 and the
+If a keypress group cannot be realized, its Words silently lose that feature discriminating stroke in theory 2 and the
 Plover dictionary; only the separate report build would show it. Not triggered (all 7 groups
 have keys). Confidence: medium. Reported by: 03.
 
 **B18. Trainer legend can disagree with the dictionary.** util/export_keyboard_layout.py:128.
 The legend reads the tracked realization report; the dictionary recomputes keys inline; nothing
-compares them. Scenario: rerun Marker Grouping (Phase G) without rebuilding the report → legend
+compares them. Scenario: rerun Discriminating-Feature Grouping (Grouping Phase) without rebuilding the report → legend
 shows old keys. They agree today (verified). Confidence: medium. Reported by: skeleton, 04.
 
 **B19. Null `chosenKeys` crashes the trainer legend.** util/export_keyboard_layout.py:133-141,
@@ -217,8 +214,8 @@ shows old keys. They agree today (verified). Confidence: medium. Reported by: sk
 Not triggered. Confidence: high; likelihood low. Reported by: skeleton, 04.
 
 **B20. `_resolveEntryWord` silently falls back to the first candidate.**
-src/ambiguitychecker.py:800. When an entry's strokes match no theory-1 Word (stale press-sets
-after a lexicon fix without rerunning Marker Elicitation (Phase E)), `candidates[0]` gets the
+src/ambiguitychecker.py:800. When an entry's strokes match no theory-1 Word (stale resolved discriminating feature sets
+after a lexicon fix without rerunning Discriminating-Feature Elicitation (Elicitation Phase)), `candidates[0]` gets the
 marks instead of failing. Confidence: medium. Reported by: skeleton.
 
 **B21. Extra alternates of empty-primary spellings are never verified.**
@@ -232,15 +229,15 @@ cross-lemma shadowing that does happen). Confidence: medium (gap). Reported by: 
 although collisions are physical (canonical). 0 cases today (read-only canonical check).
 Confidence: medium (mechanism). Reported by: 03.
 
-**B23. Non-live hard-rule marker raises `KeyError`.** src/phasegsat.py:117 with :128-135. If a
-marker in `ALONE_KEYS`/`MUST_DIFFER_GROUPS` stops being live (e.g. nobody checks `infinitif`),
+**B23. Non-live hard-rule feature raises `KeyError`.** src/featuregroupingsat.py:117 with :128-135. If a
+feature in `ALONE_KEYS`/`MUST_DIFFER_GROUPS` stops being live (e.g. nobody checks `infinitif`),
 `x[m1, k]` raises instead of a clear error. Confidence: high; likelihood low. Reported by: 03.
 
-**B24. A solver timeout can lock a non-optimal result.** src/phasegsat.py:172, :274, :398
+**B24. A solver timeout can lock a non-optimal result.** src/featuregroupingsat.py:172, :274, :398
 (locks at :178, :282, :405). FEASIBLE is accepted and locked, so a timeout makes the tier score
 or tie-break neither proven nor reproducible. Confidence: low. Reported by: 03.
 
-**B25. R4 and R6 can form a cycle.** src/ambiguitychecker.py:224 vs :229. A ADV f=1, B NOM f=2,
+**B25. The frequency-ratio rule (R4) and the category-priority rule (R6) can form a cycle.** src/ambiguitychecker.py:224 vs :229. A ADV f=1, B NOM f=2,
 C VER f=10: A<B (R6), B<C (R6), C<A (R4) → order-dependent sort. 0 cycles among live
 representatives. Confidence: high (possible); low impact. Reported by: 04.
 
@@ -295,16 +292,19 @@ rejected. Confidence: medium; impact low. Reported by: 04.
 Each item: what, evidence, stage source. Raw material for Dead-Code Removal (Pass 5); nothing is
 removed without per-item approval.
 
-1. **`optimizeKeyboard` import** — dictionary.py:32; its only call (:494) is commented out;
+1. **NOT DEAD — Keyboard Layout Optimization (S4), user decision b5.** **`optimizeKeyboard`
+   import** (`cpsatsolver.optimizeKeyboard`, dictionary.py:32) — only unused because the S4 call
+   is commented out at dictionary.py:494; do not remove without deciding how S4 is invoked.
    `src.cpsatoptimizer` import commented at :47. The import still loads OR-Tools on every
    `import dictionary`, including every exporter through util/_theoryio.py:18. (02, skeleton)
-2. **Phoneme order search and Ambiguity statistics** — `Syllable.optimizeBiphonemeOrder`
+2. **NOT DEAD — Keyboard Layout Optimization (S4), user decision b5.** Layout statistics:
+   **Phoneme order search and Ambiguity statistics** — `Syllable.optimizeBiphonemeOrder`
    (src/grammar.py:644) and `Dictionary.analyseAmbiguities` (dictionary.py:183), called at
    dictionary.py:464-466 on every fresh rebuild (the slowest step). Verified: outputs reach only
-   `generateBaseKeymap`, `optimizeKeyboard` (not called), `writeConstrainFiles` (call commented
-   :481), `printSyllabificationStats` (call commented :478), `printBarchart`. (02, skeleton)
-3. **Fallback keymap** — `Dictionary.generateBaseKeymap` dictionary.py:212 and
-   `getLowAmbiguityPhonemes` :296: reachable only when `starboard3h.json` is missing; the layout
+   `generateBaseKeymap`, `cpsatsolver.optimizeKeyboard` (call commented out),
+   `writeConstrainFiles` (call commented :481), `printSyllabificationStats` (call commented :478), `printBarchart`. (02, skeleton)
+3. **NOT DEAD — Keyboard Layout Optimization (S4), user decision b5.** **Fallback keymap** —
+   `Dictionary.generateBaseKeymap` dictionary.py:212 and `getLowAmbiguityPhonemes` :296: reachable only when `starboard3h.json` is missing; the layout
    is never saved and exporters would fail anyway. (02)
 4. **Unused scorer twins** — `analysePhonemSyllabicAmbiguity_serial` src/grammar.py:1007,
    `analysePhonemeLexicalAmbiguity_serial` :1071, forked `analyseMultiphonemeLexicalAmbiguity`
@@ -330,15 +330,15 @@ removed without per-item approval.
     :284) is imported only by util/completeVerbParadigms.py (`confirmCandidates` :266,
     `detectUndersampledLemmas` verbparadigm.py:681, `newlyCollidingLemmas` :646) and the
     diagnostic `src/ambiguitychecker.py` `__main__`. Retiring it requires re-gating or retiring
-    Verb paradigm completion (S1b.1). (01, skeleton)
-14. **Greedy Marker Grouping (Phase G)** — src/phaseg.py `runPhaseG` :247, `greedyColorMarkers`
+    Verb paradigm completion (S2.1). (01, skeleton)
+14. **Greedy Discriminating-Feature Grouping (Grouping Phase)** — src/featuregrouping.py `runFeatureGrouping` :247, `greedyColorMarkers`
     :117 (also set-order dependent), `coOccurrencePairs` :75, `wouldCollideIfMergedPairs` :89,
-    `_findSharedKeypressPair` :222, `PhaseGResult` :214, `__main__` :294: called only by
-    src/test/phaseg_test.py and its own `__main__`. The live path uses only phaseg's loaders,
+    `_findSharedKeypressPair` :222, `FeatureGroupingResult` :214, `__main__` :294: called only by
+    src/test/featuregrouping_test.py and its own `__main__`. The live path uses only featuregrouping's loaders,
     `liveMarkers`, `verifyKeypressAssignment`, `inducedPressSet`, `frequencyWeightedChordSizes`. (03, skeleton)
-15. **"Preferring" grouping path** — src/phasegsat.py `minKeypressesSatPreferring` :455,
+15. **"Preferring" grouping path** — src/featuregroupingsat.py `minKeypressesSatPreferring` :455,
     `_bestAssignmentPreferring` :232 and the `mustShareKey` branch of `_feasibleAssignment`:
-    reached only from phasegsat `__main__` :570 and tests. (03)
+    reached only from featuregroupingsat `__main__` :570 and tests. (03)
 16. **"Phase 0 ambiguity report" diagnostic** — src/ambiguitychecker.py `__main__` :1326 and
     what only it reaches: `_selectCanonicalIndex` :557, `buildAtomicFeatureToWords` :568,
     `findFeatureKeypresses` :623, `checkComposedChords` :669, `_appendCodaAddition` :593,
@@ -357,17 +357,17 @@ removed without per-item approval.
     `resolvePressByCombination` three times per run (identical results). Not dead; redundant. (03)
 21. **One-shot answer rewriter** — util/build_pers3_default_answers.py:177 overwrites
     `elicitation_answers.json`; rerunning undoes hand fixes 4e73533, 688c74d, 3b22e0f. Hazardous. (03, skeleton)
-22. **Unreachable marking branches** — `decideStarHashMark` R1 (:211) and R2 (:214) and
+22. **Unreachable marking branches** — `decideStarHashMark` homograph exemption (R1) (:211) and reform-doublet exemption (R2) (:214) and
     `_starHashCompare`'s `None` fallback (:254-257) cannot fire in the pipeline because
     `assignStarHashMarks` merges homographs and doublets first; kept for the pairwise API and tests. (04)
 23. **Unreached `MARKING_OVERRIDES` entries** — {new, news}, {réaux, réal}, {dévonien,
-    dévonienne}, {stabilisant, stabilisante} are in no lemma-homophone cluster today (45 of 49
+    dévonienne}, {stabilisant, stabilisante} are in no lemma-homophone group today (45 of 49
     entries are reached). (04)
 24. **Appended mode of `composeReservedKeyStrokes`** — `phonemeStrokeCounts is None`
     (src/ambiguitychecker.py:440-441) is used only by tests (src/test/ambiguitychecker_test.py:393,
     :411, :422, :430). (04)
 25. **Thin theory loaders** — util/_theoryio.py `loadFirstTheory` :42 (one caller,
-    build_phase_p_realization.py:44) and `loadFinalTheory` :48 (one caller, export_plover_dictionary):
+    build_realization_report.py:44) and `loadFinalTheory` :48 (one caller, export_plover_dictionary):
     live, but could fold into `loadFirstAndFinalTheory`. (04)
 26. **`buildFinalTheory` as a method** — dictionary.py:342 never uses `self`; exporters unpickle
     the whole `Dictionary` just to call it. Refactor candidate, not dead. (04)
@@ -379,19 +379,19 @@ removed without per-item approval.
 Format: where — what the doc says; what the code does. Grouped by document.
 
 ### CLAUDE.md
-1. CLAUDE.md:56 — Marker Grouping (Phase G) "K=5, proven optimal"; the artifact has K=7 since
+1. CLAUDE.md:56 — Discriminating-Feature Grouping (Grouping Phase) "K=5, proven optimal"; the artifact has K=7 since
    688c74d (K=5 at 8330b8e/0fa69af, K=6 from 4e73533).
-2. CLAUDE.md:56 — lists "`src/phaseg.py` greedy" as part of Marker Grouping (Phase G); the
+2. CLAUDE.md:56 — lists "`src/featuregrouping.py` greedy" as part of Discriminating-Feature Grouping (Grouping Phase); the
    greedy path is not live (dead-code item 14).
 3. CLAUDE.md:59 (item 7) — "Legacy path still live in `dictionary.py` `__main__`";
    `buildDiscriminatorSelection`/`satOptimizeDiscriminator` are no longer called there
    (dictionary.py:521-527 says the path was retired); `satOptimizeDiscriminator` is test-only.
 4. CLAUDE.md:59 — "`FEATURE_PRIORITY`/`GRAMCAT_PRIORITY` … still do live work (canonical-form
-   picks)"; only `GRAMCAT_PRIORITY` is live (rule R6 of Lemma-Homophone Marking (S4),
+   picks)"; only `GRAMCAT_PRIORITY` is live (category-priority rule (R6) of Different-Lemma or Grammatical-Category Disambiguation (S7),
    ambiguitychecker.py:227); the canonical member of a homophone group comes from the
    elicitation answers.
 5. CLAUDE.md:52 (item 3) — Feature Extraction "feeds the legacy path below"; it now feeds only
-   Synthetic Paradigm Completion (S1b)'s gating and the ambiguitychecker diagnostic.
+   Synthetic Lexicon Building (S2)'s gating and the ambiguitychecker diagnostic.
 6. CLAUDE.md:51 — "Dictionary Loading … Indexes words by … frequency; identifies homophones";
    there is no frequency index (the list is sorted by frequency) and homophones appear only as
    theory-1 entries in `buildTheory`; it also omits `LexiqueSynthetic.tsv` (42k rows,
@@ -413,13 +413,13 @@ Format: where — what the doc says; what the code does. Grouped by document.
     `LexiqueMixte.tsv` has 136,456 rows.
 14. README.md:92-146 — best-permutation figures depend on the per-process hash seed (B30).
 15. README.md:221-226 — the `*`/`#` case is "still unaddressed" and names the retired
-    discriminator functions; Lemma-Homophone Marking (S4) is live.
+    discriminator functions; Different-Lemma or Grammatical-Category Disambiguation (S7) is live.
 
 ### ROADMAP.md, LEXICON_RECOMPUTE_PIPELINE.md, design notes, root GLOSSARY.md
-16. ROADMAP.md:175 and src/ambiguitychecker.py:200 — R4 called a "frequency-ratio exemption";
+16. ROADMAP.md:175 and src/ambiguitychecker.py:200 — the frequency-ratio rule (R4) called a "frequency-ratio exemption";
     the rarer word is still marked.
 17. ROADMAP.md:183-184 — "biggest real cluster: 7 readings (au/eau/oh/haut/ho/ô/aux)"; that
-    cluster has 8 representatives (plus `aulx`); the largest clusters have 11 Words.
+    lemma-homophone group has 8 representatives (plus `aulx`); the largest groups have 11 Words.
 18. LEXICON_RECOMPUTE_PIPELINE.md:22 — lists only Lexique383 and Infra as `lexique.py` inputs;
     it also reads `lexiconExclusions.tsv`, `reform1990.tsv`, `verbs-fr.xml`.
 19. LEXICON_RECOMPUTE_PIPELINE.md:23 — paradigm completion "reads `Lexique383.tsv`"; it reads
@@ -427,7 +427,7 @@ Format: where — what the doc says; what the code does. Grouped by document.
     (`generateMissingNomAdjForms` also Morphalou and `nomAdjModelExceptions.tsv`).
 20. LEXICON_RECOMPUTE_PIPELINE.md:56-58 — advises patching `LexiqueMixte.tsv` directly to avoid
     "unrelated full-file regen diffs"; a regeneration is byte-identical today.
-21. LEXICON_RECOMPUTE_PIPELINE.md — calls `phase_p_keypress_realization.json` a "reference
+21. LEXICON_RECOMPUTE_PIPELINE.md — calls `realization_report.json` a "reference
     artifact"; export_keyboard_layout.py:128 consumes it.
 22. DESIGN_alternate_press_sets.md §4 — lists realizing each alternate through the full
     composition search as option (a); alternates only reuse the primary search's keys and are
@@ -435,11 +435,11 @@ Format: where — what the doc says; what the code does. Grouped by document.
 23. RESUME_2026-09-20-starhash-priority.md — numbers the marking rules ratio = 1, homograph =
     2, doublet = 3; the code docstring numbers homograph = R1, doublet = R2 (see item 33).
 24. GLOSSARY.md (root) "Signature" — describes a union across readings; superseded by
-    per-reading alternates (elicitation.py:374).
+    per-Feature-Combination alternates (elicitation.py:374).
 25. GLOSSARY.md (root) "Reading" — prefers "Feature Combination"; the plan, the JSON field and
-    the trainer use "Reading" (pending question a2).
+    the trainer use "Reading" (decision a2: use "Feature Combination").
 
-### Code comments and docstrings — Lexicon Building (S1) and Synthetic Paradigm Completion (S1b)
+### Code comments and docstrings — Lexicon Building (S1) and Synthetic Lexicon Building (S2)
 26. lexique.py:89-94, :135-145, :317 — reform flags "Off by default"/"opt-in"; all five
     `APPLY_1990_REFORM_*` flags are `True` (:95, :145, :326, :420, :505, :534).
 27. lexique.py:220-223 — the lemma fallback "finds deletion rules whenever word.ortho … still
@@ -449,13 +449,13 @@ Format: where — what the doc says; what the code does. Grouped by document.
 29. src/nomAdjParadigm.py:28-30 — `newlyCollidingLemmas` reused as the NOM/ADJ collision
     check; `generateMissingNomAdjForms.py` runs none.
 
-### Code comments and docstrings — Phonetic Theory Building (S2)
+### Code comments and docstrings — Dictionary Loading (S3) and Phonetic Theory Building (S5)
 30. src/word.py:62 — `frequency` is a "chosen mix of the film and book frequencies"; film only (:93).
 31. src/grammar.py:32 — comment lists `G` and `N` among nucleus symbols; they are consonants (:33).
 32. src/keyboard.py:193-196 — `getStrokeOfSyllableByPart` docstring "Get the list of strokes";
     it returns one stroke.
 
-### Code comments and docstrings — Same-Lemma Disambiguation (S3) and Lemma-Homophone Marking (S4)
+### Code comments and docstrings — Same-Lemma and Grammatical-Category Disambiguation (S6) and Different-Lemma or Grammatical-Category Disambiguation (S7)
 33. src/ambiguitychecker.py:392 ("Rule 2", homograph) and :431 ("Rule 3", doublet) — RESUME
     numbering; the docstring calls them R1/R2.
 34. src/ambiguitychecker.py:14, :65 — cite a stale anchor "dictionary.py:496-505".
@@ -463,15 +463,15 @@ Format: where — what the doc says; what the code does. Grouped by document.
 36. src/ambiguitychecker.py:1303 (`buildExtraInducedStrokes` docstring) — the `*`/`#` track
     "isn't yet wired into dictionary.py's persisted output"; it is (dictionary.py:385).
 37. src/ambiguitychecker.py:206-208 — category pairs outside the table "not observed"; 93
-    representative pairs use the fallback R7 (`aux`/`oh`, `à`/`a`).
+    representative pairs use the frequency fallback (R7) (`aux`/`oh`, `à`/`a`).
 38. src/ambiguitychecker.py:245-250 (`_starHashCompare` docstring) — the frequency/ortho
     fallback keeps the sort "stable and deterministic"; that branch never runs, and real ties
     have no tie-break (B5).
-39. dictionary.py:357-360 (`buildFinalTheory` docstring) — accurate that alternates skip the
-    `*`/`#` track, but silent on alternates now taking unrelated words' only stroke (B4).
-40. src/phasegsat.py:7 "K=6/7"; util/build_phase_g_assignment.py:18-19 "still K=6 … all three
+39. dictionary.py:357-360 (`buildFinalTheory` docstring) — accurate that alternate entries skip the
+    star/hash marks, but silent on alternates now taking unrelated words' only stroke (B4).
+40. src/featuregroupingsat.py:7 "K=6/7"; util/build_keypress_groups.py:18-19 "still K=6 … all three
     soft tiers fully achieved" (tiers still achieved, K is 7); util/build_pers3_default_answers.py:9 "model 2 (K=6)".
-41. src/phasegsat.py:17-20 — "47,799 homophone groups … ~200 distinct problems"; 47,828 and 294.
+41. src/featuregroupingsat.py:17-20 — "47,799 homophone groups … ~200 distinct problems"; 47,828 and 294.
 42. src/elicitation.py:3-15 — module "only measures"; it builds questionnaire items, resolves
     answers and writes `resolved_press_sets.json`.
 43. src/elicitation.py:560-561 — prints "K lower bound" for a greedy coloring (an upper bound,
@@ -480,21 +480,21 @@ Format: where — what the doc says; what the code does. Grouped by document.
     {"subjonctif"}"; the code (:116-126) and the spec allow one `pers_*`/`nbr_*` clarifier.
 45. util/check_conjugation_disambiguation_order.py:3-4 — calls the spec an ordered precedence
     vocabulary; the order is parsed but unused.
-46. util/build_phase_p_realization.py:10-12 — "does NOT yet rewrite theory"; theory 2 now
+46. util/build_realization_report.py:10-12 — "does NOT yet rewrite theory"; theory 2 now
     exists via `buildFinalTheory`.
 
-### Code comments and docstrings — Theory Export (S5)
+### Code comments and docstrings — Theory Export (S8)
 47. util/export_plover_dictionary.py:12-14; util/export_practice_words.py:13-15 — collisions
-    remain for "one word >10x rarer"; R4 marks the rarer word. Remaining collisions are
+    remain for "one word >10x rarer"; the frequency-ratio rule (R4) marks the rarer word. Remaining collisions are
     homographs, doublets, same-lemmeGramCat residuals (B1) and alternate shadowing (B4).
 48. util/export_practice_words.py:4-6 — deduplicated "on `ortho` … keeping the
     highest-frequency one"; keyed by (ortho, steno) with merged labels (:225).
-49. util/_theoryio.py:1-4 — factored out of `build_phase_p_realization.py`, which "duplicated
+49. util/_theoryio.py:1-4 — factored out of `build_realization_report.py`, which "duplicated
     this exact block"; that script now uses only `loadFirstTheory`.
 50. util/export_keyboard_layout.py:15-17 — the realization report is "optional"; without it the
     legend is silently empty.
 51. "run dictionary.py once first to generate it" (for `starboard3h.json`) at
-    build_phase_p_realization.py:47, export_plover_dictionary.py:38, export_plover_system.py:41,
+    build_realization_report.py:47, export_plover_dictionary.py:38, export_plover_system.py:41,
     export_keyboard_layout.py:151, export_practice_words.py:216, export_practice_sentences.py:153,
     export_definitions.py:49, ambiguitychecker.py:1346 — `dictionary.py` never writes it
     (`toJSONFile` commented at :496).

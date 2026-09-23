@@ -38,12 +38,12 @@ The real dependency order. `docs/refactor/rebuild_and_hash.sh` runs steps 2 to 9
 | 0 | `python -m util.fix<Name> --apply`, `python -m util.completeVerbParadigms --apply`, `python -m util.generateMissingNomAdjForms --apply`, … | Lexicon Building (S1), Synthetic Lexicon Building (S2) | only after a lexicon correction | Patch `Lexique383.tsv`, `LexiqueInfraCorrespondance.tsv`, Verbiste XML and/or `LexiqueMixte.tsv`, or append rows to `LexiqueSynthetic.tsv`. Run by hand, one fix at a time. |
 | 1 | `python lexique.py` | Lexicon Building (S1) | a full regeneration of `LexiqueMixte.tsv` | Everything runs at import time (no `__main__` guard, lexique.py:1261-1263). A rerun today is byte-identical to the committed file. |
 | 2 | `rm -f Dictionary.pickle FirstTheory.pickle` | — | **any** lexicon or layout change | The pickle-cache trap: see below. |
-| 3 | `python dictionary.py` (first run) | Dictionary Loading (S3), Keyboard Layout Optimization (S4) statistics, Phonetic Theory Building (S5) | everything downstream | Writes theory 1 and both pickles. If `phase_g_keypress_assignment.json` and `resolved_press_sets.json` already exist (dictionary.py:531), it also writes `theory2.tsv` from those possibly stale inputs. On a fresh clone `resolved_press_sets.json` is absent (gitignored), so theory 2 is skipped. |
+| 3 | `python dictionary.py` (first run) | Dictionary Loading (S3), Keyboard Layout Optimization (S4) statistics, Phonetic Theory Building (S5) | everything downstream | Writes theory 1 and both pickles. If `keypress_groups.json` and `resolved_press_sets.json` already exist (dictionary.py:531), it also writes `theory2.tsv` from those possibly stale inputs. On a fresh clone `resolved_press_sets.json` is absent (gitignored), so theory 2 is skipped. |
 | — | (no command) | Keyboard Layout Optimization (S4), solver | only to regenerate `starboard3h.json` | Rare and costly. The solver call (dictionary.py:494) and the layout write (:496) are commented out, so today it needs a code edit (see that stage). |
 | 4 | `python -m src.elicitation` | Discriminating-Feature Elicitation (Elicitation Phase): Questionnaire Generation, Press-Set Resolution | everything after it | Rebuilds the resolved discriminating feature sets from the stored `elicitation_answers.json`. Asks no questions. |
 | 4h | `python -m util.build_questionnaire_page` → publish → answer → copy answers into `elicitation_answers.json` → rerun step 4 | Elicitation Phase: Answer Collection | only when step 4 reports "unresolved oppositions" | The human-in-the-loop part. |
-| 5 | `python -m util.build_phase_g_assignment` | Discriminating-Feature Grouping (Grouping Phase) | when the live features or discriminating feature sets change | The tracked output rarely changes after a lexicon fix. |
-| 6 | `python -m util.build_phase_p_realization` | Discriminating-Feature Stroke Realization (Realization Phase), report build | before step 9's keyboard legend | Writes the realization report only. It does not feed theory 2 or the Plover dictionary. |
+| 5 | `python -m util.build_keypress_groups` | Discriminating-Feature Grouping (Grouping Phase) | when the live features or discriminating feature sets change | The tracked output rarely changes after a lexicon fix. |
+| 6 | `python -m util.build_realization_report` | Discriminating-Feature Stroke Realization (Realization Phase), report build | before step 9's keyboard legend | Writes the realization report only. It does not feed theory 2 or the Plover dictionary. |
 | 7 | `python dictionary.py` (second run) | Phonetic Theory Building (S5) → Different-Lemma or Grammatical-Category Disambiguation (S7) | only to refresh `theory2.tsv` | Fast (pickles exist). |
 | 8 | `python -m util.export_plover_dictionary`, `python -m util.export_plover_system` | Theory Export (S8), Plover branch | Plover | Either order. |
 | 9 | `python -m util.export_keyboard_layout` (after step 6), `python -m util.export_practice_words`, **then** `python -m util.export_practice_sentences`, then `python -m util.export_definitions` | Theory Export (S8), trainer branch | steno-trainer | `export_practice_sentences` reads `practice-words.json` (export_practice_sentences.py:157). |
@@ -66,13 +66,13 @@ Five facts that the command list does not show:
    src/word.py:94) is Python's per-process salted `hash()` of its fields, computed when the
    Word is built and stored in the pickles. The Realization Phase iterates a `set` of Words
    when it lists residual collisions, so a clean rebuild (new pickles, new hash values)
-   reorders those lists in `phase_p_keypress_realization.json`. With the same pickles, four
+   reorders those lists in `realization_report.json`. With the same pickles, four
    different seeds gave identical `theory2.tsv`, realization report and Plover dictionary;
    fresh pickles changed only the report's residual lists. Pin `PYTHONHASHSEED` for the run
    that writes the pickles when the tracked report must be reproducible. See todo.md
    § Suspected bugs, item B11.
 4. **The realization report is read by one exporter.** `export_keyboard_layout.py:128`
-   takes the conjugation-feature legend from the tracked `phase_p_keypress_realization.json`,
+   takes the conjugation-feature legend from the tracked `realization_report.json`,
    while the Plover dictionary and drills use the keys recomputed on the inline path. Skip
    step 6 after a change of keypress groups and the legend disagrees with the dictionary
    (item B18).
@@ -102,9 +102,9 @@ The names below are used in every "Input state" and "Result" line.
 | **questionnaire items** | `list[QuestionnaireItem]`, one per distinct opposition; 200 | `buildQuestionnaireItems` elicitation.py:220 | `questionnaire.json` (gitignored) |
 | **elicitation answers** | JSON list of `{atomsA, checkedA, atomsB, checkedB, …}`; 200 | a person, through the questionnaire page | `elicitation_answers.json` (tracked) |
 | **resolved discriminating feature sets** | in memory `dict[LemmaHomophoneGroupKey, dict[WordOrtho, list[frozenset[str]]]]`; on disk a list of `{strokes, lemmeGramCat, pressSets, frequencies, readings}`; reloaded as `PressSetsByGroup` (group id `lemmeGramCat@strokes`); 47,828 groups | `resolveGroupPressSets` elicitation.py:374, `serializeResolvedPressSets` :471 | `resolved_press_sets.json` (gitignored) |
-| **keypress groups** | `markersByKeypress: dict[int, frozenset[str]]` (K=7) + metadata | `minKeypressesSatWithPriorities` phasegsat.py:490, `serializeAssignment` :530 | `phase_g_keypress_assignment.json` (tracked) |
+| **keypress groups** | `markersByKeypress: dict[int, frozenset[str]]` (K=7) + metadata | `minKeypressesSatWithPriorities` featuregroupingsat.py:490, `serializeAssignment` :530 | `keypress_groups.json` (tracked) |
 | **keypress group population** | `groupToWords: dict[int, list[Word]]` + `extraGroupSetsByWord: dict[Word, list[frozenset[int]]]` | ambiguitychecker.py:803, :844 | no |
-| **physical keypress group assignment** | `KeypressGroupPhysicalAssignment` (`chosenKeysByGroup`, cost, alternates, residual buckets) | `realizeKeypressGroupsAsExtraStroke` ambiguitychecker.py:987 | report build only: `phase_p_keypress_realization.json` (tracked) |
+| **physical keypress group assignment** | `KeypressGroupPhysicalAssignment` (`chosenKeysByGroup`, cost, alternates, residual buckets) | `realizeKeypressGroupsAsExtraStroke` ambiguitychecker.py:987 | report build only: `realization_report.json` (tracked) |
 | **final induced strokes** | `dict[Word, Strokes]`: base strokes plus at most one feature discriminating stroke | `buildFinalInducedStrokes` ambiguitychecker.py:1261 | no |
 | **theory 2** | `dict[Word, list[Strokes]]`: index 0 primary (with its star/hash mark), then alternate entries | `Dictionary.buildFinalTheory` dictionary.py:342 | `theory2.tsv` (gitignored, read by nothing) |
 | **Plover dictionary** | `dict[str, str]` (RTFCRE steno → spelling); 163,238 entries | `export_plover_dictionary.main` | `plover_stenalgo_dictionary.json` (tracked) |
@@ -153,14 +153,14 @@ Same-Lemma and Grammatical-Category Disambiguation (S6)
 │  └─ Press-Set Resolution
 │     ├─ Discriminating feature set resolution — resolveGroupPressSets  S6.Elicitation.9
 │     └─ Serialization ............................................ S6.Elicitation.12 → resolved_press_sets.json
-├─ Discriminating-Feature Grouping (Grouping Phase) .......... python -m util.build_phase_g_assignment
+├─ Discriminating-Feature Grouping (Grouping Phase) .......... python -m util.build_keypress_groups
 │  ├─ Exact minimum-K grouping — minKeypressesSatWithPriorities ... S6.Grouping.2
-│  └─ Assignment serialization .................................... S6.Grouping.5 → phase_g_keypress_assignment.json
+│  └─ Assignment serialization .................................... S6.Grouping.5 → keypress_groups.json
 └─ Discriminating-Feature Stroke Realization (Realization Phase)  inline path in buildFinalTheory, and report build
    ├─ Keypress group population — buildKeypressGroupToWords ....... S6.Realization.2
    ├─ Coda key search — realizeKeypressGroupsAsExtraStroke ........ S6.Realization.5
    ├─ Final induced strokes (inline path) — buildFinalInducedStrokes  S6.Realization.6
-   └─ Report serialization (report build) ......................... S6.Realization.8 → phase_p_keypress_realization.json
+   └─ Report serialization (report build) ......................... S6.Realization.8 → realization_report.json
 
 Different-Lemma or Grammatical-Category Disambiguation (S7) .. inside Dictionary.buildFinalTheory (S7.1)
 ├─ Lemma-homophone group detection — groupHomophonesByReservedStroke  S7.5
@@ -878,21 +878,21 @@ Discriminating-Feature Elicitation (Elicitation Phase) — python -m src.elicita
   S6.Elicitation.11 Per-spelling frequency table — buildFrequencyByGroupOrtho (:449)
   S6.Elicitation.12 Serialization — serializeResolvedPressSets (:471)
 
-Discriminating-Feature Grouping (Grouping Phase) — python -m util.build_phase_g_assignment (util/build_phase_g_assignment.py:49)
-S6.Grouping.1 Discriminating feature set reload — loadResolvedPressSets / loadGroupOrthoFrequencies (src/phaseg.py:33, :48)
-S6.Grouping.2 Exact minimum-K grouping — minKeypressesSatWithPriorities (src/phasegsat.py:490)
+Discriminating-Feature Grouping (Grouping Phase) — python -m util.build_keypress_groups (util/build_keypress_groups.py:49)
+S6.Grouping.1 Discriminating feature set reload — loadResolvedPressSets / loadGroupOrthoFrequencies (src/featuregrouping.py:33, :48)
+S6.Grouping.2 Exact minimum-K grouping — minKeypressesSatWithPriorities (src/featuregroupingsat.py:490)
   S6.Grouping.2.1 Set-of-feature-sets dedup — groupSignatures (:40)
   S6.Grouping.2.2 Minimum-K scan — minKeypressesSat → _feasibleAssignment (:417, :183)
   S6.Grouping.2.3 Distinctness model — _buildDistinctnessModel (:51)
   S6.Grouping.2.4 Hard constraints — _aloneAndMustDifferPairs / _addMustDifferPairs (:120, :108)
   S6.Grouping.2.5 Soft preference tiers — _bestAssignmentWithPriorities (:358)
   S6.Grouping.2.6 Alphabetical tie-break — _breakTiesAlphabetically (:153)
-S6.Grouping.3 Ground-truth verification — verifyKeypressAssignment (src/phaseg.py:160)
-S6.Grouping.4 Usage weights — frequencyWeightedChordSizes (src/phaseg.py:189)          [report only]
-S6.Grouping.5 Assignment serialization — serializeAssignment (src/phasegsat.py:530)
+S6.Grouping.3 Ground-truth verification — verifyKeypressAssignment (src/featuregrouping.py:160)
+S6.Grouping.4 Usage weights — frequencyWeightedChordSizes (src/featuregrouping.py:189)          [report only]
+S6.Grouping.5 Assignment serialization — serializeAssignment (src/featuregroupingsat.py:530)
 
 Discriminating-Feature Stroke Realization (Realization Phase) — inline path in Dictionary.buildFinalTheory (dictionary.py:373-389)
-                                      and report build util/build_phase_p_realization.py main (:38)
+                                      and report build util/build_realization_report.py main (:38)
 S6.Realization.1 Word lookup indexes — buildWordToStrokes / buildWordsByOrthoLemme (src/ambiguitychecker.py:553, :766)
 S6.Realization.2 Keypress group population — buildKeypressGroupToWords (:803)
   S6.Realization.2.1 Entry-to-Word resolution — _resolveEntryWord (:776)
@@ -906,7 +906,7 @@ S6.Realization.5 Coda key search — realizeKeypressGroupsAsExtraStroke (:987)
   S6.Realization.5.5 Final verification and residual buckets — (:1219-1258)
 S6.Realization.6 Final induced strokes (inline path) — buildFinalInducedStrokes (:1261)
 S6.Realization.7 Alternate entry strokes (inline path) — buildExtraInducedStrokes (:1288)
-S6.Realization.8 Report serialization (report build) — build_phase_p_realization.main (:74-112)
+S6.Realization.8 Report serialization (report build) — build_realization_report.main (:74-112)
 ```
 
 Theory 1 cannot tell apart the inflected forms of one paradigm (dors/dort, finis/finit); their
@@ -1086,14 +1086,14 @@ Notes: `readings` is read only by the trainer exporters.
 
 ### Discriminating-Feature Grouping (Grouping Phase)
 
-Entry: `python -m util.build_phase_g_assignment`, `main` at :49. An atomic feature is
+Entry: `python -m util.build_keypress_groups`, `main` at :49. An atomic feature is
 **live** if some resolved discriminating feature set contains it (13 today). The other 7
 questionnaire features (`VER`, `indicatif`, `m`, `nbr_s`, `participe`, `présent`, `s`) are
 **unpressable**: nobody checked them. Pressing a keypress group asserts every feature it
-carries. A **keypress group conflict** (`KeypressConflict` phaseg.py:150) is two spellings of one
+carries. A **keypress group conflict** (`KeypressConflict` featuregrouping.py:150) is two spellings of one
 group inducing the same set of keypress groups.
 
-#### Discriminating feature set reload — loadResolvedPressSets / loadGroupOrthoFrequencies (S6.Grouping.1)   src/phaseg.py:33, :48
+#### Discriminating feature set reload — loadResolvedPressSets / loadGroupOrthoFrequencies (S6.Grouping.1)   src/featuregrouping.py:33, :48
 Called by: Grouping Phase entry (:53-54).
 Transformation: re-keys each entry by `lemmeGramCat@strokes`, alternates as frozensets,
 frequencies in a parallel map. Also reads `questionnaire.json` (optional, :57-61) for the full
@@ -1101,10 +1101,10 @@ feature inventory.
 Result: `PressSetsByGroup` (47,828 groups) + `FrequencyByGroup`.
 Artifacts: reads `resolved_press_sets.json`, `questionnaire.json`.
 
-#### Exact minimum-K grouping — minKeypressesSatWithPriorities (S6.Grouping.2)   src/phasegsat.py:490
+#### Exact minimum-K grouping — minKeypressesSatWithPriorities (S6.Grouping.2)   src/featuregroupingsat.py:490
 Called by: Grouping Phase entry (:63-65) with `ALONE_KEYS`={f},
 `MUST_DIFFER_GROUPS`={{infinitif, pers_1, pers_2, pers_3}} and `PREFERENCE_TIERS`
-(build_phase_g_assignment.py:39-45).
+(build_keypress_groups.py:39-45).
 Transformation: sorts live features alphabetically (:511); reduces groups to their sets of
 feature sets; finds the minimum K under **hard grouping rules** only; applies the **soft
 preference tiers** at that K; then the alphabetical tie-break.
@@ -1135,7 +1135,7 @@ Result: `(numKeys=7, colorOf: feature → keypress group id, achieved=[1, 1, 0])
   seed 0 (`_newDeterministicSolver` :139). Unique lexicographic minimum, provided every solve
   is OPTIMAL (item B24).
 
-#### Ground-truth verification — verifyKeypressAssignment (S6.Grouping.3)   src/phaseg.py:160
+#### Ground-truth verification — verifyKeypressAssignment (S6.Grouping.3)   src/featuregrouping.py:160
 Called by: Grouping Phase entry (:69); also tests.
 Transformation: for every alternate, computes the **induced discriminating feature set**
 (`inducedPressSet` :135, the union of the features of every keypress group touched) and
@@ -1143,20 +1143,20 @@ reports a keypress group conflict when two spellings induce the same set. Any co
 write (:70-71).
 Result: `[]`.
 
-#### Usage weights — frequencyWeightedChordSizes (S6.Grouping.4)   src/phaseg.py:189
+#### Usage weights — frequencyWeightedChordSizes (S6.Grouping.4)   src/featuregrouping.py:189
 Called by: Grouping Phase entry (:74).
 Transformation: per keypress group, sums the frequency of every spelling whose alternates touch it.
 Result: reported only; the Realization Phase computes its own costs.
 
-#### Assignment serialization — serializeAssignment (S6.Grouping.5)   src/phasegsat.py:530
+#### Assignment serialization — serializeAssignment (S6.Grouping.5)   src/featuregroupingsat.py:530
 Called by: Grouping Phase entry (:76-82).
 Result: keypress groups: `keypressCount` 7, `markersByKeypress` {0: conditionnel+infinitif,
 1: f, 2: future+passé+pers_3, 3: imparfait+subjonctif, 4: impératif+pers_1, 5: nbr_p+p, 6:
 pers_2}, hard/soft provenance, 7 unpressable features, usage weights.
-Artifacts: writes `phase_g_keypress_assignment.json`.
+Artifacts: writes `keypress_groups.json`.
 Notes: **K history** from git: K=5 at 8330b8e and 0fa69af; K=6 from 4e73533 (impératif
 answer fix); **K=7 from 688c74d** (per-combination alternates) to HEAD. The claim that the
-hard constraints cost nothing extra was checked at K=6 only. The greedy `src/phaseg.py` path
+hard constraints cost nothing extra was checked at K=6 only. The greedy `src/featuregrouping.py` path
 is not live; only its loaders, `liveMarkers`, `verifyKeypressAssignment`, `inducedPressSet`
 and `frequencyWeightedChordSizes` are.
 
@@ -1164,8 +1164,8 @@ and `frequencyWeightedChordSizes` are.
 
 One sequence of calls, two code paths. The **inline path** runs inside
 `Dictionary.buildFinalTheory` (dictionary.py:373-389) and feeds theory 2 and every exporter
-(util/_theoryio.py:82). The **report build** is `util/build_phase_p_realization.py` main
-(:58-72) and writes the **realization report**. Both read `phase_g_keypress_assignment.json`
+(util/_theoryio.py:82). The **report build** is `util/build_realization_report.py` main
+(:58-72) and writes the **realization report**. Both read `keypress_groups.json`
 and `resolved_press_sets.json`. Only the trainer keyboard legend reads the report, so the two
 can drift (item B18, todo.md § Queued follow-ups).
 
@@ -1181,11 +1181,11 @@ feature (`PREFERRED_KEYS_BY_MARKER` :945: impératif → 18 `-k`, pers_2 → 19 
 `-t`) wins whenever feasible.
 
 #### Word lookup indexes — buildWordToStrokes / buildWordsByOrthoLemme (S6.Realization.1)   src/ambiguitychecker.py:553, :766
-Called by: both paths (dictionary.py:373-374; build_phase_p_realization.py:58-59).
+Called by: both paths (dictionary.py:373-374; build_realization_report.py:58-59).
 Result: `Word → raw base strokes` and `(ortho, lemmeGramCat) → [Word]`, in theory-1 order.
 
 #### Keypress group population — buildKeypressGroupToWords (S6.Realization.2)   src/ambiguitychecker.py:803
-Called by: both paths (dictionary.py:375; build_phase_p_realization.py:60).
+Called by: both paths (dictionary.py:375; build_realization_report.py:60).
 Input state: resolved discriminating feature sets (JSON list) + `markersByKeypress`.
 Transformation: per spelling, uses only the primary alternate `alternates[0]` (:832); skips
 an empty one (canonical member); resolves the spelling to one Word (Entry-to-Word resolution
@@ -1206,19 +1206,19 @@ current resolved sets), only the first gets its feature discriminating stroke. S
 (fallback: item B20).
 
 #### Extra alternate population — buildKeypressGroupExtraAlternates (S6.Realization.3)   src/ambiguitychecker.py:844
-Called by: both paths (dictionary.py:376-378; build_phase_p_realization.py:65-67).
+Called by: both paths (dictionary.py:376-378; build_realization_report.py:65-67).
 Transformation: for spellings with ≥2 alternates, maps each non-primary, non-empty
 alternate to the set of keypress groups it touches.
 Result: `extraGroupSetsByWord: Word → [frozenset[group id]]` (second half of the keypress group population).
 
 #### Preferred key resolution — resolvePreferredKeysByGroup (S6.Realization.4)   src/ambiguitychecker.py:952
-Called by: both paths (dictionary.py:379; build_phase_p_realization.py:68).
+Called by: both paths (dictionary.py:379; build_realization_report.py:68).
 Transformation: maps each preferred feature to its keypress group in this run (group ids
 change between runs of the Grouping Phase); features that are not live are skipped.
 Result: {4: (18,), 6: (19,), 2: (20,)}.
 
 #### Coda key search — realizeKeypressGroupsAsExtraStroke (S6.Realization.5)   src/ambiguitychecker.py:987
-Called by: both paths (dictionary.py:380-383; build_phase_p_realization.py:69-72).
+Called by: both paths (dictionary.py:380-383; build_realization_report.py:69-72).
 Input state: keypress group population + theory 1 + keyboard layout + preferred keys.
 Transformation: builds `wordToGroups` (:882), the per-phoneme coda candidates (`codaKeysOf`,
 in `Phoneme.consonantPhonemes` order) and `allWords`, the **set** of every Word in any group
@@ -1262,7 +1262,7 @@ Helpers not expanded: `_composedInduced` (:1077), `_isRedundantForAnyWord` (:108
   about 1,290 **cross-lemma collisions** (the lists vary between clean rebuilds, item B11).
   **The "0 residual same-lemmeGramCat collisions" invariant** is
   `len(assignment.residualCollisions) == 0`, printed and persisted only by the report build
-  (build_phase_p_realization.py:89-91, :108, :129) and asserted by unit tests on fixtures
+  (build_realization_report.py:89-91, :108, :129) and asserted by unit tests on fixtures
   (src/test/ambiguitychecker_test.py:844). `buildFinalTheory` discards the residuals and
   `unassignedGroups` (item B17). The check sees only `allWords` (not canonical members,
   unchosen spelling twins or dropped groups) and only first-seen pairs (item B16). An
@@ -1285,13 +1285,13 @@ Result: `dict[Word, list[Strokes]]`, the **alternate entries**, appended after i
 theory 2. They skip Different-Lemma or Grammatical-Category Disambiguation (S7) (item B4) and
 are never collision-checked when the primary is empty (item B21).
 
-#### Report serialization — build_phase_p_realization.main (S6.Realization.8)   util/build_phase_p_realization.py:38
+#### Report serialization — build_realization_report.main (S6.Realization.8)   util/build_realization_report.py:38
 Called by: a person (rebuild step 6).
 Transformation: per group in id order: features, `affectedWords`, `chosenKeys`, `cost`, ranked
 `alternates`; then the four residual buckets as ortho pairs, in the order produced by Final
 verification and residual buckets (S6.Realization.5.5).
 Artifacts: reads pickles, `starboard3h.json`, keypress groups, resolved discriminating
-feature sets; writes `phase_p_keypress_realization.json`.
+feature sets; writes `realization_report.json`.
 Notes: its only pipeline reader is export_keyboard_layout.py:128 (uses `keypressGroups` only).
 
 ### Where the canonical member comes from
@@ -1325,7 +1325,7 @@ Scale: 4,450 lemma-homophone groups. Sizes (Words): 2: 2,947; 3: 989; 4: 341; 5:
 
 ### Theory 2 assembly — Dictionary.buildFinalTheory (S7.1)   dictionary.py:342
 Called by: `python dictionary.py` `__main__` (dictionary.py:532, only when both
-`phase_g_keypress_assignment.json` and `resolved_press_sets.json` exist, :531) and every
+`keypress_groups.json` and `resolved_press_sets.json` exist, :531) and every
 Theory Export (S8) exporter through Theory 2 loading (S8.1).
 Input state: theory 1 (80,725 keys / 167,639 Words), keyboard layout, the two JSON paths.
 Transformation: (1) loads `markersByKeypress` (:365-369) and the resolved discriminating

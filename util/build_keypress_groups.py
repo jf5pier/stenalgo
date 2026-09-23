@@ -1,5 +1,6 @@
 """
-Persist Phase G's adopted keypress assignment (2026-09-19 session): the CP-SAT-proven
+Persist the adopted keypress assignment of Discriminating-Feature Grouping (Grouping
+Phase) (2026-09-19 session): the CP-SAT-proven
 minimum K over `resolved_press_sets.json`, under the user's explicit constraints:
 
 HARD (real requirements -- CAN inflate K, or fail outright, if unsafe):
@@ -18,7 +19,8 @@ possible first, tier 1 only as a tiebreaker among colorings that already achieve
 Confirmed against the real lexicon: still K=6 (the hard constraints didn't cost
 anything extra here), all three soft tiers fully achieved, 0 conflicts.
 
-This is the canonical, checked-in artifact other work (Phase P, or future re-runs)
+This is the canonical, checked-in artifact other work (Discriminating-Feature Stroke
+Realization (Realization Phase), or future re-runs)
 should read -- not something to regenerate by ad hoc inline scripts each time, per the
 plan's own note that this was previously missing (see RESUME_2026-09-19-phaseG.md's
 "Still open" item 2, now addressed for the CP-SAT path the same way it was for the

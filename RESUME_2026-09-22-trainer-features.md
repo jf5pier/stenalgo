@@ -21,7 +21,7 @@ committed and pushed to `origin/main` (live at https://jf5pier.github.io/stenalg
    no hyphenated inversions (`-tu` looked up as `tu`).
 3. `a1d0fb5` — **`*`/`#` first mark merged into the last phoneme stroke**
    (`composeReservedKeyStrokes(..., phonemeStrokeCounts=...)`): `a` avoir = `*a` (was `a/*`),
-   `soie` = `swa#`, `partis` = `paR/t*i/-s` (mark on the last PHONEME stroke, before Phase P's
+   `soie` = `swa#`, `partis` = `paR/t*i/-s` (mark on the last PHONEME stroke, before Realization Phase's
    marker stroke). Escalated codes keep further bare-mark strokes (79 left vs 5139 merged).
    `util/_stenorender.py` renders merged strokes with Plover's own hyphen rule (`*iel`, `pvR-#`)
    — verified against real `plover_stroke` in a throwaway venv: 0 parse errors, 0 collisions after
@@ -58,7 +58,7 @@ Then `git gc` (local `.git` 386 MB → 43 MB). Packed repo ≈ 20 MiB; `definiti
    u=`@e`, b=`sv`, O=`e`, key 14 shared by /e/ and /O/); user never said what looked wrong.
 6. **Plover question discussed, not built**: conjugation marker strokes could be a Plover
    *macro* plugin ("replace previous word with its <marker> form", from a (word, marker) → form
-   table the Phase E/G data already implies) instead of ~48k static entries — mainly worth it
+   table the Elicitation/Grouping Phases data already implies) instead of ~48k static entries — mainly worth it
    for the onboard Javelin target (flash size). Plover's `ORTHOGRAPHY_RULES` can't do it (French
    forms aren't derivable from spelling). Javelin's equivalent capability not yet checked in
    `~/javelin-steno`. See memory `dual_target_architecture`.
@@ -70,6 +70,6 @@ Then `git gc` (local `.git` 386 MB → 43 MB). Packed repo ≈ 20 MiB; `definiti
 ## Recompute chain (unchanged shape, one more export)
 
 See memory `lexicon_fix_recompute_order`: `dictionary.py` (delete pickles first) →
-`src.elicitation` → `util.build_phase_g_assignment` → `util.build_phase_p_realization` →
+`src.elicitation` → `util.build_keypress_groups` → `util.build_realization_report` →
 `export_plover_dictionary`, `export_keyboard_layout`, `export_practice_words` →
 `export_practice_sentences` (needs practice-words first) and `export_definitions`.

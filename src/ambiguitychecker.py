@@ -6,9 +6,10 @@ ambiguity lives in a `theory` (as built by `Dictionary.buildTheory`), before any
 special-keypress or phoneme-chord assignment is committed to.
 
 Two independently-classified kinds of ambiguity coexist in one stroke cluster:
-- same-lemma ambiguity (inflected forms of one lemma, e.g. dors/dort) — the conjugation track.
-- lemma-homophone ambiguity (distinct lemmas sharing a stroke, e.g. ver/vert/verre) — the
-  `*`/`#` track.
+- same-lemma ambiguity (inflected forms of one lemma, e.g. dors/dort) — Same-Lemma and
+  Grammatical-Category Disambiguation (S6).
+- lemma-homophone ambiguity (distinct lemmas sharing a stroke, e.g. ver/vert/verre) —
+  Different-Lemma or Grammatical-Category Disambiguation (S7), the star/hash mark track.
 
 Also detects the known `aller` NOM/VER cross-grammatical-category gap (see
 dictionary.py:496-505): two different-gramCat, differently-spelled readings of one bare lemma
@@ -379,14 +380,16 @@ def assignStarHashPhysicalStrokes(
 
 def groupHomophonesByReservedStroke(finalInduced: dict[Word, Strokes]) -> dict[Strokes, list[Word]]:
     """
-    Groups words by their shared post-Phase-P final stroke (`finalInduced`, as computed
-    by `realizeKeypressGroupsAsExtraStroke`), keeping only genuine distinct-lemma/
-    `gramCat` homophone groups -- the population the */# reserved-key track (not Phase
-    P) is responsible for disambiguating. A group is kept only if it has:
+    Groups words by their shared final stroke after Discriminating-Feature Stroke
+    Realization (Realization Phase) (`finalInduced`, as computed by
+    `realizeKeypressGroupsAsExtraStroke`), keeping only genuine distinct-lemma/
+    `gramCat` homophone groups -- the population Different-Lemma or Grammatical-Category
+    Disambiguation (S7) (not the Realization Phase) is responsible for disambiguating.
+    A group is kept only if it has:
       - >= 2 distinct `lemmeGramCat` values -- a group with just one `lemmeGramCat`
-        sharing one stroke here is an unresolved Phase P same-paradigm residual
-        collision, not a */# case (Phase P's own job is to have already separated
-        those onto different strokes);
+        sharing one stroke here is an unresolved Realization Phase same-paradigm residual
+        collision, not a star/hash mark case (the Realization Phase's own job is to have
+        already separated those onto different strokes);
       - >= 2 distinct `ortho` values -- an all-homograph group types identically
         regardless of which reading was meant, so it was never a real ambiguity
         (decideStarHashMark's Rule 2).
@@ -412,21 +415,22 @@ def composeReservedKeyStrokes(
     phonemeStrokeCounts: dict[Word, int] | None = None,
 ) -> dict[Word, Strokes]:
     """
-    Final realized Strokes for every word touched by the */# reserved-key track: Phase
-    P's own `finalInduced` stroke plus the */# mark. Given `phonemeStrokeCounts` (each
-    word's theory-1 stroke count), the mark's FIRST symbol is pressed together with the
-    word's last phoneme stroke -- "a*", not "a/*" -- and only an escalated code's further
-    symbols become extra trailing strokes; without it, every symbol is its own trailing
-    stroke (the original, all-appended form).
+    Final realized Strokes for every word touched by Different-Lemma or
+    Grammatical-Category Disambiguation (S7): the `finalInduced` stroke of
+    Discriminating-Feature Stroke Realization (Realization Phase) plus the star/hash mark.
+    Given `phonemeStrokeCounts` (each word's theory-1 stroke count), the mark's FIRST symbol
+    is pressed together with the word's last phoneme stroke -- "a*", not "a/*" -- and only an
+    escalated code's further symbols become extra trailing strokes; without it, every symbol
+    is its own trailing stroke (the original, all-appended form).
 
-    Either way this can never re-introduce a collision: Phase P only ever picks
+    Either way this can never re-introduce a collision: the Realization Phase only picks
     coda-phoneme keys, structurally disjoint from the 2 dedicated reserved keys
     (`STAR_KEY`/`HASH_KEY` are excluded from `Keyboard.allowedKeys`), so stripping the
     reserved keys back out of a composed Strokes (and dropping its reserved-only trailing
-    strokes -- Phase P's own trailing strokes are never reserved-only) recovers
+    strokes -- the feature discriminating strokes are never reserved-only) recovers
     `finalInduced` exactly. Two different clusters' `finalInduced` already differ, so
     their composed forms do too; within one cluster, the marking codes differ. Words with
-    no */# mark needed (the canonical member of their group, a spelling-doublet of it, or
+    no star/hash mark needed (the canonical member of their group, a spelling-doublet of it, or
     not part of any group at all) keep their `finalInduced` stroke unchanged. Pass
     `doubletPairs` (loadReform1990DoubletPairs) to also apply Rule 3's spelling-doublet
     exemption.
@@ -718,7 +722,8 @@ def checkComposedChords(
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# Phase P — physical realization of Phase G's abstract keypress groups
+# Discriminating-Feature Stroke Realization (Realization Phase) — physical realization
+# of the Grouping Phase's abstract keypress groups
 # ═══════════════════════════════════════════════════════════════════════════
 
 _K = TypeVar("_K")
@@ -729,8 +734,9 @@ def findCollidingInducedStrokes(inducedStrokeOf: dict[_K, Strokes]) -> list[tupl
     Given each entry's already-computed induced (candidate) stroke, find every pair that
     collides by landing on the same stroke. Generic over how the induced stroke was
     computed -- unlike findCollidingNewAdditions, doesn't assume every word got the same
-    `additionKeys` (needed once different words can need different subsets of Phase G's
-    keypress groups composed into their own induced stroke). Generic over the key type
+    `additionKeys` (needed once different words can need different subsets of the keypress
+    groups of Discriminating-Feature Grouping (Grouping Phase) composed into their own
+    induced stroke). Generic over the key type
     (`_K`): usually a `Word`, but `realizeKeypressGroupsAsExtraStroke`'s final
     verification pass keys by `(Word, readingIndex)` instead, so a self-homograph
     spelling's several readings (see `src.elicitation.resolveGroupPressSets`) are checked
@@ -807,7 +813,8 @@ def buildKeypressGroupToWords(
     wordsByOrthoLemme: dict[tuple[str, str], list[Word]],
 ) -> dict[int, list[Word]]:
     """
-    Replaces buildAtomicFeatureToWords's role for Phase P: maps each Phase G keypress
+    Replaces buildAtomicFeatureToWords's role for Discriminating-Feature Stroke Realization
+    (Realization Phase): maps each Discriminating-Feature Grouping (Grouping Phase) keypress
     group id to every real `Word` whose elicited press-set (`resolved_press_sets.json`)
     touches a marker in that group -- the population `findKeypressGroupRealizations`
     must check feasibility against. `resolvedGroups` is the parsed
@@ -817,7 +824,8 @@ def buildKeypressGroupToWords(
 
     Each ortho's press-sets is now a LIST of alternates (see
     `src.elicitation.resolveGroupPressSets` -- more than one only for a spelling that is
-    itself a self-homograph, e.g. "calmez"). This function drives Phase P's group-by-group
+    itself a self-homograph, e.g. "calmez"). This function drives the Realization Phase's
+    group-by-group
     physical key SEARCH off each spelling's PRIMARY (first, smallest) alternate only, so
     the search/collision machinery below is unaffected by alternates. Any further
     alternates are realized separately, once every group already has a physical key, via
@@ -851,7 +859,7 @@ def buildKeypressGroupExtraAlternates(
     Every OTHER (non-primary) alternate press-set a self-homograph spelling holds -- e.g.
     "calmez"'s indicatif reading (`pers_2`), once its impératif reading (`impératif`)
     already drives the primary population `buildKeypressGroupToWords` builds -- as the set
-    of Phase G keypress groups THAT alternate's markers touch. Feeds
+    of Grouping Phase keypress groups THAT alternate's markers touch. Feeds
     `realizeKeypressGroupsAsExtraStroke`'s `extraGroupSetsByWord` so each such reading gets
     realized as its own additional physical extra stroke once every group's key is
     decided, rather than silently dropped: per
@@ -880,7 +888,7 @@ def buildKeypressGroupExtraAlternates(
 
 
 def buildWordToGroups(groupToWords: dict[int, list[Word]]) -> dict[Word, frozenset[int]]:
-    """Invert groupToWords: every Word -> the set of Phase G keypress groups it needs
+    """Invert groupToWords: every Word -> the set of Grouping Phase keypress groups it needs
     (a word needing e.g. both the "f" and "p" groups gets both group ids)."""
     wordToGroups: dict[Word, set[int]] = defaultdict(set)
     for groupId, words in groupToWords.items():
@@ -894,8 +902,9 @@ def _appendCodaExtraStroke(strokes: Strokes, additionKeys: tuple[int, ...]) -> S
     Realizes a discriminator as a brand-new trailing stroke -- an extra "syllable"
     pressed after the word's own strokes -- rather than merging into the last existing
     stroke's chord (`_appendCodaAddition`, used by the older atomic-feature diagnostic
-    path only). A word needing several Phase G groups at once gets ONE shared extra
-    stroke unioning all of them, not one extra stroke per group.
+    path only). A word needing several Discriminating-Feature Grouping (Grouping Phase)
+    groups at once gets ONE shared extra stroke unioning all of them, not one extra
+    stroke per group.
     """
     return strokes + (tuple(sorted(additionKeys)),)
 
@@ -903,13 +912,14 @@ def _appendCodaExtraStroke(strokes: Strokes, additionKeys: tuple[int, ...]) -> S
 @dataclass
 class KeypressGroupPhysicalAssignment:
     """
-    Milestone-1 Phase P output: a greedy, most-constrained-group-first physical key
-    assignment for every Phase G keypress group, realized as one shared extra coda
-    stroke per word (see `_appendCodaExtraStroke`). Each group's candidate search
+    Milestone-1 output of Discriminating-Feature Stroke Realization (Realization Phase): a
+    greedy, most-constrained-group-first physical key assignment for every
+    Discriminating-Feature Grouping (Grouping Phase) keypress group, realized as one
+    shared extra coda stroke per word (see `_appendCodaExtraStroke`). Each group's candidate search
     composes with whatever's ALREADY been decided for a word's OTHER needed groups at
     that point -- groups not yet processed can't be accounted for yet, so
     `residualCollisions`/`residualTheoryCollisions` (from a final full-assignment
-    verification pass, mirroring Phase G's own `verifyKeypressAssignment` habit of
+    verification pass, mirroring the Grouping Phase's own `verifyKeypressAssignment` habit of
     re-checking a greedy result against ground truth) report anything that slips
     through this greedy ordering rather than silently hiding it.
     """
@@ -920,7 +930,7 @@ class KeypressGroupPhysicalAssignment:
     residualCollisions: list[tuple[Word, Word]] = field(default_factory=list)
     residualTheoryCollisions: list[Word] = field(default_factory=list)
     # Different-lemma homophone pairs that still collide -- NOT this function's job to
-    # prevent (see `_isInScopeCollision`'s docstring: that's the reserved */# keys'
+    # prevent (see `_isInScopeCollision`'s docstring: that's the star/hash mark
     # track), reported here only for visibility into how much of the remaining ambiguity
     # is actually someone else's job vs. genuinely unresolved same-lemma work.
     crossLemmaCollisions: list[tuple[Word, Word]] = field(default_factory=list)
@@ -935,8 +945,8 @@ class KeypressGroupPhysicalAssignment:
     preferredKeyHonoredByGroup: dict[int, bool] = field(default_factory=dict)
 
 
-# Human preference (2026-09-22 session) for Phase P's physical coda-bank key choice,
-# keyed by MARKER rather than a Phase G group id (which can shift between reruns as
+# Human preference (2026-09-22 session) for the Realization Phase's physical coda-bank key
+# choice, keyed by MARKER rather than a Grouping Phase group id (which can shift between reruns as
 # bundling changes) -- shared by `util/build_realization_report.py`'s diagnostic
 # artifact and `Dictionary.buildFinalTheory`'s real export, so both land on the same
 # physical keys. `pers_3` on -t: mnemonic, many pers_3 verb forms end in a written "t".
@@ -953,10 +963,10 @@ def resolvePreferredKeysByGroup(
     markersByKeypress: dict[int, frozenset[str]],
     preferredKeysByMarker: dict[str, tuple[int, ...]] = PREFERRED_KEYS_BY_MARKER,
 ) -> dict[int, tuple[int, ...]]:
-    """Resolve `preferredKeysByMarker`'s per-marker requests to whichever Phase G group
-    id actually holds that marker in THIS run (see `realizeKeypressGroupsAsExtraStroke`'s
-    `preferredKeysByGroup` parameter) -- a marker absent from `markersByKeypress`
-    (unpressable this run) is silently skipped."""
+    """Resolve `preferredKeysByMarker`'s per-marker requests to whichever
+    Discriminating-Feature Grouping (Grouping Phase) group id actually holds that marker in
+    THIS run (see `realizeKeypressGroupsAsExtraStroke`'s `preferredKeysByGroup` parameter) --
+    a marker absent from `markersByKeypress` (unpressable this run) is silently skipped."""
     preferredKeysByGroup: dict[int, tuple[int, ...]] = {}
     for marker, keys in preferredKeysByMarker.items():
         groupId = next((gid for gid, markers in markersByKeypress.items() if marker in markers), None)
@@ -968,9 +978,11 @@ def resolvePreferredKeysByGroup(
 def _isInScopeCollision(word1: Word, word2: Word) -> bool:
     """
     True only for a genuine same-lemmeGramCat collision -- two inflected forms of the
-    exact same lemma+gramCat paradigm (e.g. "dors"/"dort") -- the one thing Phase G/P's
-    coda-bank keypress groups are meant to prevent. Two other patterns that can produce
-    an identical composed stroke are each somebody else's job, not scored here:
+    exact same lemma+gramCat paradigm (e.g. "dors"/"dort") -- the one thing the
+    coda-bank keypress groups of Discriminating-Feature Grouping (Grouping Phase) and
+    Discriminating-Feature Stroke Realization (Realization Phase) are meant to prevent. Two
+    other patterns that can produce an identical composed stroke are each somebody else's job,
+    not scored here:
     - identical orthography (e.g. a VER-participle vs ADJ homograph reading of one
       written word) produces the same typed output regardless of which grammatical
       reading was meant, so it was never a real ambiguity to begin with;
@@ -995,7 +1007,8 @@ def realizeKeypressGroupsAsExtraStroke(
     """
     Corrected successor to the earlier (flawed) findKeypressGroupRealizations: that
     version (a) merged each group's candidate into the word's LAST existing stroke, and
-    (b) tested each of Phase G's 6 groups in isolation, so a word needing two groups at
+    (b) tested each of the 6 groups of Discriminating-Feature Grouping (Grouping Phase)
+    in isolation, so a word needing two groups at
     once (e.g. "abaissées" needing both the "f" and "p" groups) was checked as if it
     only got one of them -- producing false collisions between words that don't
     actually collide once both of their needed groups' keys are composed together.
@@ -1046,9 +1059,9 @@ def realizeKeypressGroupsAsExtraStroke(
     assignment = KeypressGroupPhysicalAssignment()
     allWords = {word for words in groupToWords.values() for word in words}
 
-    # A word is "finalized" once every Phase G group it needs has been processed
+    # A word is "finalized" once every Grouping Phase group it needs has been processed
     # (assigned a key or given up on) -- its own composed stroke can never change again.
-    # Phase G's own verification (`verifyKeypressAssignment`) only proves the 6 groups
+    # The Grouping Phase's own verification (`verifyKeypressAssignment`) only proves the 6 groups
     # are pairwise distinguishable in the ABSTRACT (no two spellings in one homophone
     # entry induce the same set of abstract keypress ids); it says nothing about the
     # PHYSICAL result. Two different groups' key-sets being pairwise distinct is NOT
@@ -1114,7 +1127,7 @@ def realizeKeypressGroupsAsExtraStroke(
         if any(stroke in theory for stroke in induced.values()):
             return False
         # Only compare pairwise collisions among words that need the exact same FULL set
-        # of Phase G groups -- their eventual composed stroke is guaranteed identical
+        # of Grouping Phase groups -- their eventual composed stroke is guaranteed identical
         # regardless of processing order, so a collision here is real. Two words needing
         # a *different* remaining group may still be told apart once that not-yet-decided
         # group gets a real key -- checking them against each other now, while that other
@@ -1264,15 +1277,16 @@ def buildFinalInducedStrokes(
     assignment: KeypressGroupPhysicalAssignment,
 ) -> dict[Word, Strokes]:
     """
-    Phase P's final stroke for EVERY word in `theory` -- not just the ones
-    `realizeKeypressGroupsAsExtraStroke` had to consider (its own `allWords` is only the
-    words touched by some Phase G group). `composeReservedKeyStrokes` needs the whole
-    lexicon, since a */# homophone cluster can include words Phase P never touched at
-    all. A word touched by no Phase G group keeps its theory-1 stroke unchanged; a word
-    needing one or more groups gets `assignment.chosenKeysByGroup`'s keys for each,
-    unioned into one shared extra coda stroke -- the same reconstruction
-    `realizeKeypressGroupsAsExtraStroke` already does internally for its own
-    verification pass, generalized here to the full lexicon.
+    The final stroke of Discriminating-Feature Stroke Realization (Realization Phase) for
+    EVERY word in `theory` -- not just the ones `realizeKeypressGroupsAsExtraStroke` had
+    to consider (its own `allWords` is only the words touched by some
+    Discriminating-Feature Grouping (Grouping Phase) group). `composeReservedKeyStrokes`
+    needs the whole lexicon, since a star/hash mark homophone cluster can include words
+    the Realization Phase never touched at all. A word touched by no Grouping Phase group
+    keeps its theory-1 stroke unchanged; a word needing one or more groups gets
+    `assignment.chosenKeysByGroup`'s keys for each, unioned into one shared extra coda stroke
+    -- the same reconstruction `realizeKeypressGroupsAsExtraStroke` already does internally
+    for its own verification pass, generalized here to the full lexicon.
     """
     wordToStrokes = buildWordToStrokes(theory)
     wordToGroups = buildWordToGroups(groupToWords)
@@ -1298,9 +1312,10 @@ def buildExtraInducedStrokes(
     `buildFinalInducedStrokes` composes a word's primary stroke: its theory-1 base plus
     that reading's own group-set's already-decided physical keys.
 
-    Deliberately NOT run through `composeReservedKeyStrokes` (the `*`/`#` cross-lemma
-    track): that track isn't wired into a self-homograph's alternates yet, matching
-    CLAUDE.md's own note that the cross-lemma track isn't yet wired into `dictionary.py`'s
+    Deliberately NOT run through `composeReservedKeyStrokes` (Different-Lemma or
+    Grammatical-Category Disambiguation (S7)): that stage isn't wired into a
+    self-homograph's alternates yet, matching CLAUDE.md's own note that the star/hash
+    mark track isn't yet wired into `dictionary.py`'s
     persisted output at all -- an alternate stroke colliding with an unrelated lemma's
     stroke is a pre-existing class of gap this function doesn't newly introduce.
     """

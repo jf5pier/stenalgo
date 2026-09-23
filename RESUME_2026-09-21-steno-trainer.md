@@ -64,23 +64,23 @@ Two problems, reported by the user:
 
 1. **UI bug**: the drill gives no indication of *which* grammatical reading is intended —
    "calmez" is ambiguous between "indicatif présent, 2e personne du pluriel" and "impératif, 2e
-   personne du pluriel" (same-lemma homophones, Phase P's problem — see `ROADMAP.md`'s
+   personne du pluriel" (same-lemma homophones, Realization Phase's problem — see `ROADMAP.md`'s
    same-lemma-homophones section). The trainer currently only shows `ortho`/`steno`/marks, with
    no grammatical-category/mood/person label, so a user drilling this word has no way to know
    which reading's chord they're supposed to produce. Would need `util/export_practice_words.py`
    to export something like a human-readable grammatical label per word (from `Word.gramCat`/
    `Word.infoVerb`) and `Drill.elm`/`Main.elm`'s `viewDrill` to display it.
 
-2. **Dictionary/theory bug** (the more important one — a real Phase P over-marking bug, not just
+2. **Dictionary/theory bug** (the more important one — a real Realization Phase over-marking bug, not just
    a display gap): the stroke `-kt` marks the word with **both** the "impératif" conjugation
    marker (`-k`, per the sidebar's "Conjugation markers" legend, generated from
-   `phase_p_keypress_realization.json`/`phase_g_keypress_assignment.json`) **and** the "pers_2"
+   `realization_report.json`/`keypress_groups.json`) **and** the "pers_2"
    (2nd person) marker (`-t`) simultaneously. The user's diagnosis: only **one** of the two
    candidate readings needs marking to disambiguate this specific homograph pair — either
    `kal/me/-k` (marking just "impératif," leaving the unmarked/other form as indicatif) or
    `kal/me/-t` (marking just "pers_2") should be sufficient to separate the two readings; the
-   combined `kal/me/-kt` is over-precise and shouldn't be required. This suggests Phase G's
-   keypress-assignment (`src/phaseg.py`/`src/phasegsat.py`) or Phase P's realization
+   combined `kal/me/-kt` is over-precise and shouldn't be required. This suggests Grouping Phase's
+   keypress-assignment (`src/featuregrouping.py`/`src/featuregroupingsat.py`) or Realization Phase's realization
    (`src/ambiguitychecker.py::realizeKeypressGroupsAsExtraStroke`) is choosing to mark *both*
    grammatical features elicited for this pair instead of recognizing that either one alone
    already discriminates the two words needing separation — worth investigating whether this is
@@ -93,7 +93,7 @@ Two problems, reported by the user:
 **Not fixed yet** — user asked to stop and write this note instead, for continuation after
 `/clear`. Next session should: (a) commit the Phase 2 changes above, (b) decide whether to fix
 the UI ambiguity (item 1) as part of Phase 3/4 work or standalone, (c) investigate the
-over-marking bug (item 2) starting from `elicitation_answers.json` and `phase_g_keypress_assignment.json`
+over-marking bug (item 2) starting from `elicitation_answers.json` and `keypress_groups.json`
 for the "calmez"/kal-me lemma pair, cross-referencing `ROADMAP.md`'s and
 `ATOMIC_KEYPRESS_REWIRE_PLAN.md`'s authoritative status sections per root `CLAUDE.md`'s
 instructions.

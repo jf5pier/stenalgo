@@ -1,7 +1,8 @@
 """
 Export a real Plover JSON dictionary (steno string -> French word) from
-theory 2 (base strokes + Phase P's same-lemma marks + the `*`/`#` lemma-homophone
-track -- see `util._theoryio.loadFinalTheory`), rendered via
+theory 2 (base strokes + the same-lemma marks of Discriminating-Feature Stroke
+Realization (Realization Phase) + the star/hash marks of Different-Lemma or
+Grammatical-Category Disambiguation (S7) -- see `util._theoryio.loadFinalTheory`), rendered via
 `util._stenorender.renderFinalStrokesToRTFCRE` (Stenalgo's own key names,
 matching `plover_stenalgo`'s system plugin) instead of the phoneme-letter
 rendering `writeTheory`/`theory.tsv` uses.

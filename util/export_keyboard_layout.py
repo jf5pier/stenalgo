@@ -26,9 +26,9 @@ KEYBOARD_JSON = "starboard3h.json"
 PHASE_P_REALIZATION_JSON = "realization_report.json"
 OUTPUT_PATH = "steno-trainer/public/data/keyboard-layout.json"
 
-# French display labels for the atomic grammatical-feature markers Phase P groups onto
-# a keypress (`src.word.atomicFeatures`/`src.satoptimizer`'s vocabulary). Only used for
-# the trainer's legend text -- purely cosmetic, has no bearing on the assignment itself.
+# French display labels for the atomic grammatical-feature markers the Realization Phase
+# groups onto a keypress (`src.word.atomicFeatures`/`src.satoptimizer`'s vocabulary).
+# Only used for the trainer's legend text -- purely cosmetic, has no bearing on the assignment itself.
 MARKER_LABELS: dict[str, str] = {
     "s": "singulier", "nbr_s": "singulier",
     "p": "pluriel", "nbr_p": "pluriel",
@@ -116,9 +116,10 @@ def _phonemeLayers(starboard: Starboard) -> list[dict]:
 
 def _conjugationMarkers(starboard: Starboard) -> list[dict]:
     """
-    The same-lemma/conjugation track's key -> meaning legend (Phase P; see
-    `src/ambiguitychecker.py`'s module docstring for why this is a *distinct*
-    mechanism from the `*`/`#` lemma-homophone track below) -- one entry per
+    The key -> meaning legend of Same-Lemma and Grammatical-Category Disambiguation (S6)
+    (Discriminating-Feature Stroke Realization (Realization Phase); see
+    `src/ambiguitychecker.py`'s module docstring for why this is a *distinct* mechanism
+    from Different-Lemma or Grammatical-Category Disambiguation (S7) below) -- one entry per
     `realization_report.json` keypress group, giving the physical
     key(s) chosen for it and a French label for the grammatical features it
     disambiguates (e.g. "impératif, 1re personne" on key "-k").

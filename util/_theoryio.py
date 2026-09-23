@@ -53,10 +53,11 @@ def loadFinalTheory(
     """
     Theory 2: every word's final resolved Strokes -- a LIST, since a self-homograph
     spelling (e.g. "calmez") has more than one independently-valid stroke; index 0 is
-    always the primary one. Theory 1 composed with Phase P's same-lemma coda-bank marks
-    and the `*`/`#` lemma-homophone track (see `Dictionary.buildFinalTheory`,
-    `ROADMAP.md`'s "Status update"). This is what actually disambiguates homophones like
-    "a"/"as"/"à" -- `loadFirstTheory` alone does not.
+    always the primary one. Theory 1 composed with the same-lemma coda-bank marks of
+    Discriminating-Feature Stroke Realization (Realization Phase) and the star/hash marks
+    of Different-Lemma or Grammatical-Category Disambiguation (S7) (see
+    `Dictionary.buildFinalTheory`, `ROADMAP.md`'s "Status update"). This is what actually
+    disambiguates homophones like "a"/"as"/"à" -- `loadFirstTheory` alone does not.
 
     Requires `keypressGroupsPath` (`python -m util.build_keypress_groups`) and
     `resolvedPressSetsPath` (`python -m src.elicitation`) to already exist.

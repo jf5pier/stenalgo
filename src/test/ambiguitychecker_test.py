@@ -100,8 +100,8 @@ class TestClassifyStrokeCluster:
 
     def test_same_bare_lemma_different_gramcat_not_lemma_homophone(self):
         """être_VER vs être_AUX ('est' as copula vs auxiliary): same bare lemma, different
-        gramCat -- not a distinct-lemma clash for the */# track, even though lemmeGramCat
-        differs."""
+        gramCat -- not a distinct-lemma clash for the star/hash mark track, even though
+        lemmeGramCat differs."""
         ver = _make_word(ortho="est", lemme="être", gramCat=GramCat.VER)
         aux = _make_word(ortho="est", lemme="être", gramCat=GramCat.AUX)
         report = classifyStrokeCluster((( 1,),), [ver, aux])
@@ -356,8 +356,8 @@ class TestGroupHomophonesByReservedStroke:
         assert groups == {((1, 2),): [a, b]}
 
     def test_same_lemmeGramCat_pair_is_excluded_as_realization_residual(self):
-        # Same lemme AND same gramCat -> Phase P's own job, not a */# case, even
-        # though they still coincidentally share a final stroke here.
+        # Same lemme AND same gramCat -> the Realization Phase's own job, not a star/hash mark
+        # case, even though they still coincidentally share a final stroke here.
         a = _make_word(ortho="dors", lemme="dormir", gramCat=GramCat.VER, frequencyFilm=1.0)
         b = _make_word(ortho="dort", lemme="dormir", gramCat=GramCat.VER, frequencyFilm=1.0)
         finalInduced = {a: ((1,),), b: ((1,),)}
@@ -395,8 +395,9 @@ class TestComposeReservedKeyStrokes:
         assert composed[ver] == ((1, 2), (16,), (10,))
 
     def test_first_mark_merges_into_last_phoneme_stroke(self):
-        # Phonemes in strokes (1, 2)/(3,), then Phase P's own trailing (16,): the */#
-        # mark joins (3,) -- the last PHONEME stroke, not Phase P's.
+        # Phonemes in strokes (1, 2)/(3,), then the feature discriminating stroke (16,):
+        # the star/hash mark joins (3,) -- the last PHONEME stroke, not the feature
+        # discriminating stroke.
         nom = _make_word(ortho="entrée", gramCat=GramCat.NOM, frequencyFilm=4.0)
         ver = _make_word(ortho="entré", gramCat=GramCat.VER, frequencyFilm=8.0)
         finalInduced = {nom: ((1, 2), (3,), (16,)), ver: ((1, 2), (3,), (16,))}
@@ -795,8 +796,8 @@ class TestIsInScopeCollision:
         assert _isInScopeCollision(w1, w2)
 
     def test_different_lemma_is_out_of_scope(self):
-        """Cross-lemma homophones (e.g. abymes/abîmes) are the reserved */# keys' job,
-        not Phase G/P's coda-bank groups."""
+        """Cross-lemma homophones (e.g. abymes/abîmes) are the star/hash mark track's job,
+        not the Grouping Phase/Realization Phase coda-bank groups."""
         w1 = _make_word(ortho="abymes", lemme="abyme")
         w2 = _make_word(ortho="abîmes", lemme="abîme")
         assert not _isInScopeCollision(w1, w2)
@@ -804,7 +805,8 @@ class TestIsInScopeCollision:
     def test_same_bare_lemme_different_gramcat_is_out_of_scope(self):
         """Same bare lemma, different gramCat (e.g. "dîner" the NOM vs "dîner" the VER)
         is the already-documented "aller"-style cross-category clash
-        (detectCrossCategoryClash), a separate issue class -- not Phase G/P's job."""
+        (detectCrossCategoryClash), a separate issue class -- not the Grouping Phase's or
+        the Realization Phase's job."""
         w1 = _make_word(ortho="dîners", lemme="dîner", gramCat=GramCat.NOM)
         w2 = _make_word(ortho="dînés", lemme="dîner", gramCat=GramCat.VER)
         assert not _isInScopeCollision(w1, w2)
@@ -821,10 +823,10 @@ class TestIsInScopeCollision:
 class TestRealizeKeypressGroupsAsExtraStroke:
 
     def test_two_groups_never_reuse_a_key_that_would_reunite_a_homophone_pair(self):
-        """Regression test for the 'honnit'/'honnie' bug: Phase G already proved group 0
-        and group 1 are distinct in the ABSTRACT (a word needing only group 0 induces a
-        different abstract keypress set than a word needing only group 1) -- but if Phase
-        P hands both groups the exact same PHYSICAL key, two words that share a base
+        """Regression test for the 'honnit'/'honnie' bug: the Grouping Phase already proved
+        group 0 and group 1 are distinct in the ABSTRACT (a word needing only group 0 induces
+        a different abstract keypress set than a word needing only group 1) -- but if the
+        Realization Phase hands both groups the exact same PHYSICAL key, two words that share a base
         stroke (already homophones) and were relying on landing in different groups end
         up reunited. w3/w3b need only group 0 (padding so it's processed first); w5
         shares w3's base stroke and lemmeGramCat but needs only group 1. Group 1 must NOT
@@ -920,9 +922,9 @@ class TestRealizeKeypressGroupsAsExtraStroke:
 
     def test_out_of_scope_collision_does_not_block_candidate(self):
         """A cross-lemma homophone collision (different lemma, different spelling) must
-        not prevent a candidate from being chosen -- that's the */# reserved-key track's
-        job, not this function's, and blocking on it would make Phase P's own coda-group
-        search fail for reasons entirely outside its scope."""
+        not prevent a candidate from being chosen -- that's the star/hash mark track's
+        job, not this function's, and blocking on it would make the Realization Phase's own
+        coda-group search fail for reasons entirely outside its scope."""
         w1 = _make_word(ortho="abymes", lemme="abyme")
         w2 = _make_word(ortho="abîmes", lemme="abîme")
         theory = {((1,),): [w1, w2]}
@@ -937,7 +939,7 @@ class TestRealizeKeypressGroupsAsExtraStroke:
 
     def test_cross_category_clash_does_not_block_candidate(self):
         """Same bare lemma, different gramCat (dîner NOM vs dîner VER) is the
-        already-documented "aller"-style cross-category clash, not Phase P's job."""
+        already-documented "aller"-style cross-category clash, not the Realization Phase's job."""
         w1 = _make_word(ortho="dîners", lemme="dîner", gramCat=GramCat.NOM)
         w2 = _make_word(ortho="dînés", lemme="dîner", gramCat=GramCat.VER)
         theory = {((1,),): [w1, w2]}
