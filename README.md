@@ -43,8 +43,16 @@ tables live in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Blank keys are rese
 pip install -r requirements.txt             # install dependencies
 pytest src/test/                            # run tests
 mypy src/                                   # type checking
-python lexique.py                           # build the mixed lexicon (LexiqueMixte.tsv)
-python dictionary.py                        # dictionary processing and optimization pipeline
+
+# The whole pipeline in two commands, run from the repo root (prefix both with
+# PYTHONHASHSEED=0 when the tracked outputs must be byte-reproducible):
+python lexique.py                           # Lexicon Building (S1) -> LexiqueMixte.tsv
+python dictionary.py                        # everything else: the four Synthetic Lexicon
+                                            # Building (S2) appenders (--apply), theory 1,
+                                            # Elicitation/Grouping/Realization, theory 2,
+                                            # and every Plover + steno-trainer export
+
+# Individual steps (still work standalone):
 python -m src.elicitation                   # resolve the discriminating feature sets
 python -m util.build_keypress_groups        # group atomic features onto Keypress Groups
 python -m util.build_realization_report     # rebuild the realization report
@@ -55,10 +63,14 @@ python -m util.export_practice_words        # starboard3h.json or lexicon change
 python -m util.export_practice_sentences
 python -m util.export_definitions
 ```
-The NOM/ADJ cross-checkers additionally need the external Morphalou 3.1 corpus, extracted
-under `morphalou/` (gitignored, ~670 MB; CSV at `morphalou/Morphalou3.1_CSV.csv`). After any
-lexicon or layout change, delete `Dictionary.pickle`/`FirstTheory.pickle` — the caches are
-never checked for staleness (see [docs/PIPELINE.md](docs/PIPELINE.md)).
+`python dictionary.py` aborts on the first failing step and re-runs cleanly; it deletes and
+rebuilds `Dictionary.pickle`/`FirstTheory.pickle` itself when its own appenders added rows
+during the run. The NOM/ADJ cross-checkers additionally need the external Morphalou 3.1
+corpus, extracted under `morphalou/` (gitignored, ~670 MB; CSV at
+`morphalou/Morphalou3.1_CSV.csv`) — without it the NOM/ADJ appender generates
+donor-table-only rows. After any hand-made lexicon or layout change, still delete
+`Dictionary.pickle`/`FirstTheory.pickle` before running — the caches are never checked for
+staleness (see [docs/PIPELINE.md](docs/PIPELINE.md)).
 
 ## Documentation
 - [docs/PIPELINE.md](docs/PIPELINE.md) — the full pipeline, call by call, with rebuild order

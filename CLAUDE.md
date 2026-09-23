@@ -21,11 +21,13 @@ pytest src/test/word_test.py::TestWord::test_method_name
 # Type checking
 mypy src/
 
-# Build the combined lexicon (LexiqueMixte.tsv)
-python lexique.py
+# Full pipeline in two commands, run from the repo root: dictionary.py orchestrates the
+# four Synthetic Lexicon Building (S2) appenders (--apply), theory 1, the Elicitation/
+# Grouping/Realization phases, theory 2 and every export, aborting on the first failure
+python lexique.py                           # Lexicon Building (S1) -> LexiqueMixte.tsv
+python dictionary.py                        # everything from S2 to the exports
 
-# Run dictionary processing and optimization pipeline
-python dictionary.py
+# Individual steps (still work standalone)
 
 # Resolve the discriminating feature sets from elicitation_answers.json (Elicitation Phase)
 python -m src.elicitation
@@ -54,7 +56,7 @@ python -m util.export_definitions
 Architecture and design rationale: `docs/ARCHITECTURE.md`. The eight stages:
 
 1. **Lexicon Building (S1)** — `python lexique.py` → `resources/LexiqueMixte.tsv` (136,456 rows)
-2. **Synthetic Lexicon Building (S2)** — `util/completeVerbParadigms.py` etc., run by hand → `resources/LexiqueSynthetic.tsv`
+2. **Synthetic Lexicon Building (S2)** — `util/completeVerbParadigms.py` etc., run by the `python dictionary.py` orchestrator → `resources/LexiqueSynthetic.tsv`
 3. **Dictionary Loading (S3)** — inside `python dictionary.py` → 167,639 Words, syllable inventory (cached in `Dictionary.pickle`)
 4. **Keyboard Layout Optimization (S4)** — CP-SAT layout solve; rare, costly, solver call commented out (loads committed `starboard3h.json`)
 5. **Phonetic Theory Building (S5)** — `Dictionary.buildTheory` → theory 1 (`FirstTheory.pickle`)
@@ -62,7 +64,7 @@ Architecture and design rationale: `docs/ARCHITECTURE.md`. The eight stages:
 7. **Different-Lemma or Grammatical-Category Disambiguation (S7)** — star/hash marks (`decideStarHashMark` rule stack) → theory 2
 8. **Theory Export (S8)** — Plover (`util/export_plover_*`) and steno-trainer (`util/export_*`) branches; nothing reads `theory2.tsv`, every exporter recomputes theory 2 via `util/_theoryio.py`
 
-Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`FirstTheory.pickle` whenever they exist and never checks them against the lexicon or layout (`rm -f *.pickle` after any lexicon or layout change); pin `PYTHONHASHSEED=0` when the tracked realization report must be reproducible; the NOM/ADJ cross-checkers need the external Morphalou 3.1 CSV (see `docs/PIPELINE.md` Synthetic Lexicon Building (S2)). The legacy discriminator path (`buildDiscriminatorSelection`, `satOptimizeDiscriminator`, `assignDiscriminatorKeypresses`) no longer runs: those functions are gone; `src/featureextractor.py` feeds only Synthetic Lexicon Building (S2)'s gating and the `ambiguitychecker` diagnostic, and of `src/greedyoptimizer.py` only `GRAMCAT_PRIORITY` is live (category-priority rule (R6)). Suspected bugs are listed in `TODO.md` ("Suspected bugs").
+Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`FirstTheory.pickle` whenever they exist and never checks them against the lexicon or layout (`rm -f *.pickle` after any lexicon or layout change — `python dictionary.py` now orchestrates the full chain but rebuilds the pickles itself only for rows its own S2 appenders add during the run, and aborts on the first failing step); pin `PYTHONHASHSEED=0` when the tracked realization report must be reproducible; the NOM/ADJ cross-checkers need the external Morphalou 3.1 CSV (see `docs/PIPELINE.md` Synthetic Lexicon Building (S2)). The legacy discriminator path (`buildDiscriminatorSelection`, `satOptimizeDiscriminator`, `assignDiscriminatorKeypresses`) no longer runs: those functions are gone; `src/featureextractor.py` feeds only Synthetic Lexicon Building (S2)'s gating and the `ambiguitychecker` diagnostic, and of `src/greedyoptimizer.py` only `GRAMCAT_PRIORITY` is live (category-priority rule (R6)). Suspected bugs are listed in `TODO.md` ("Suspected bugs").
 
 ### Core Data Model
 

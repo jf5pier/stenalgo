@@ -171,11 +171,11 @@ was removed in Dead-Code Removal (Pass 5).
 - **The `-er`/`-ers` noun wishlist** — reuse the `Infinitif`/`Infinitif:p` atomic features instead
   of a generic star/hash mark for a whole NOM/VER homophone sub-class (raised, not sized or
   verified against real data).
-- **Integrate the pipeline steps into one orchestrated entrypoint** — `lexique.py`,
-  `util/completeVerbParadigms.py`, `src.elicitation`, `util.build_keypress_groups`,
-  `util.build_realization_report` all run separately from `dictionary.py`, so a lexicon change can
-  leave part of the chain silently stale (see `docs/PIPELINE.md` "Recomputing after a fix" for the
-  dependency table and the two silent-failure traps).
+- **Done — Integrate the pipeline steps into one orchestrated entrypoint** — `python
+  dictionary.py` now runs the four steady-state S2 appenders (`--apply`), the Elicitation,
+  Grouping and Realization phases, the theory-2 refresh and every export, rebuilding the
+  pickles itself when its appenders appended rows; the manual-`rm` staleness trap is
+  intentionally preserved (see `docs/PIPELINE.md` "How to run a full rebuild").
 - **No tests for `cpsatsolver.py`'s ambiguity math** — the layout solver's cost model is untested
   (low urgency while the layout is frozen).
 - **Housekeeping: merge or delete the `phase-g-grouping` branch** — it long outgrew the Grouping
