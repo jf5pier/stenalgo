@@ -30,7 +30,7 @@ deleted in Final Check and Cleanup (Pass 7).
 | Doc and Data Inventory (Pass 3) | done | leaner run (2 Sonnet agents); `inventory/{A,B,C,D}.md`; main-thread spot-check corrections appended in A.md (GramCat count) and C.md (9 `.py` RESUME links) |
 | Interactive Triage (Pass 4) | done | 6 rounds in DECISIONS.md (t-r, t-m, t-t, t-c, t-b, t-x, t-d); new bugs B36–B42 to file in Pass 6 |
 | Dead-Code Removal (Pass 5) | done | full rebuild md5 IDENTICAL to baseline (`pass5.md5`); `deadcode.md` (+ spot-check); decisions p5-1…p5-11; 7 commits a0ea7aa…647595a; pytest 593 → 522 (−71 removed on purpose: 22+12+16+16+5) |
-| Doc Rewrite (Pass 6) | todo | |
+| Doc Rewrite (Pass 6) | done | 2 agents (ARCHITECTURE; README+PRIOR_ART) + main thread; decisions p6-1…p6-11; keymap-diagram premise corrected (true `printLayout` render); 19 comment-only repoints (AST-verified); deletions executed; full rebuild **md5 identical to baseline** (`pass6.md5`); pytest 522; commits 3ca9e3f, cef60bd, 05660f9, e4e3ed1 |
 | Final Check and Cleanup (Pass 7) | todo | |
 
 ## Baseline notes
@@ -48,8 +48,11 @@ deleted in Final Check and Cleanup (Pass 7).
   after the renames (identical hashes, new file names).
 
 ## Next action
-Start
-**Doc Rewrite (Pass 6)** (see plan + DECISIONS.md overrides + the Pass 5 notes below). Offer a "wrap up leaner" option before launching its per-file agents.
+Start **Final Check and Cleanup (Pass 7)**: a fresh agent reads only README → ARCHITECTURE →
+PIPELINE → specs and answers the fixed quiz ("Who gets `#` in a 3-word cluster?", "What do I
+rerun after fixing a lexicon row?", "What is a discriminating feature set?", …); fix any gap
+it hits. Then update the memory files that point at ROADMAP's old sections, the RESUME files
+or LEXICON_RECOMPUTE_PIPELINE; delete `docs/refactor/`; ask before opening a PR or merging.
 
 ## Notes for later passes
 - Dead-Code Removal (Pass 5): Keyboard Layout Optimization (S4) is **not** dead code (decision
