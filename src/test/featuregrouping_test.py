@@ -216,7 +216,7 @@ def test_runFeatureGrouping_frequency_weighting_defaults_to_zero_when_unset():
 
 
 def test_runFeatureGrouping_lets_a_self_homographs_alternates_share_one_keypress():
-    """The real "calmez" regression, at Phase G: `impératif` and `pers_2` are calmez's
+    """The real "calmez" regression, at the Grouping Phase: `impératif` and `pers_2` are calmez's
     two alternates and "calmer" needs `infinitif` -- since calmez's alternates never
     need to be told apart from EACH OTHER, they can safely bundle onto the SAME
     keypress as each other, giving K=2 total rather than K=3 (which forcing them apart,

@@ -1,35 +1,35 @@
-# Phase P (physical realization) — Milestone 1 plan
+# Realization Phase (physical realization) — Milestone 1 plan
 
 Written so a fresh (cleared-context) session can pick up and execute without re-deriving
-context. Read together with `ATOMIC_KEYPRESS_REWIRE_PLAN.md` (its "Phase P" section,
+context. Read together with `ATOMIC_KEYPRESS_REWIRE_PLAN.md` (its "Realization Phase" section,
 lines 186-218), `RESUME_2026-09-18.md` (design decision #1: reserved keys `[0,1,10,15]`
 belong exclusively to the lemma-homophone `*`/`#` track; same-lemma conjugation atoms —
-what Phase G/Phase P are about — get keypresses realized from the **coda** bank
-`[16..25]`), and `RESUME_2026-09-19-cpsat.md` (Phase G's adopted output this milestone
+what Grouping Phase/Realization Phase are about — get keypresses realized from the **coda** bank
+`[16..25]`), and `RESUME_2026-09-19-cpsat.md` (Grouping Phase's adopted output this milestone
 consumes).
 
 **EXECUTED as of this session — see `RESUME_2026-09-19-phaseP.md` for the final,
 verified state.** What actually got built diverged from this plan in two load-bearing
 ways the plan didn't anticipate (both driven by user review, not pre-planned): the
 discriminator is realized as a brand-new trailing coda stroke, not merged into the
-word's last existing stroke (§below); and per-word markers needing several Phase G
+word's last existing stroke (§below); and per-word markers needing several Grouping Phase
 groups at once are composed into ONE shared extra stroke, checked jointly, not each
 group tested in isolation. Read the new file first; this one is kept for historical
 context on the original (superseded) design sketch below.
 
 ## Context
 
-Phase G (`src/phasegsat.py`, adopted output in `phase_g_keypress_assignment.json`)
+Grouping Phase (`src/featuregroupingsat.py`, adopted output in `keypress_groups.json`)
 settled the **abstract** layer: 6 keypress groups bundling 13 grammatical markers
 (`{f}`, `{impératif,pers_1}`, `{imparfait,pers_2}`, `{conditionnel,infinitif,subjonctif}`,
 `{future,passé,pers_3}`, `{nbr_p,p}`), proven minimal (K=6) and exhaustively validated
 against all 47,799 homophone groups. It never touched real keyboard keys.
 
-Phase P is the next phase per `ATOMIC_KEYPRESS_REWIRE_PLAN.md`'s own "Phase P" section:
+Realization Phase is the next phase per `ATOMIC_KEYPRESS_REWIRE_PLAN.md`'s own "Realization Phase" section:
 decide which **physical coda keys** (`starboard3h.json`'s `[16..25]`, all right-hand —
 the 4 dedicated `[0,1,10,15]` reserved keys belong to the *different* lemma-homophone
 `*`/`#` track, confirmed by `RESUME_2026-09-18.md`'s design decision #1) realize each of
-Phase G's 6 keypress groups, without colliding with any word's existing stroke in the
+Grouping Phase's 6 keypress groups, without colliding with any word's existing stroke in the
 live `theory`.
 
 `src/ambiguitychecker.py`'s "Part 2" (`buildAtomicFeatureToWords`, `_isFeasibleAddition`,
@@ -37,7 +37,7 @@ live `theory`.
 diagnostic-only, fed by the now-superseded `buildDiscriminatorSelection`/`augmentedTheory`
 path (confirmed: its only two callers, `dictionary.py:463` diagnostic prints and its own
 `__main__`, never persist anything), and has three known correctness gaps documented in
-the plan. This milestone turns it into the real thing: bug-fixed, fed by Phase G's actual
+the plan. This milestone turns it into the real thing: bug-fixed, fed by Grouping Phase's actual
 output, cost-aware, and persisted.
 
 **Explicitly out of scope for this milestone** (left for a follow-up): rewriting
@@ -52,23 +52,23 @@ all bigger, separable efforts the plan already calls out on their own.
   (its only two callers repo-wide are this diagnostic print path and
   `ambiguitychecker.py:412`'s own `__main__`); `satOptimizeDiscriminator` called `:496`.
   **Nothing past `FeatureDiscrimator.pickle` is persisted** — everything from
-  `augmentedTheory` onward is recomputed and only printed each run. New Phase P code
+  `augmentedTheory` onward is recomputed and only printed each run. New Realization Phase code
   should be wired in independently, right after `theory`/`FirstTheory.pickle` is
   available (~`:416`), NOT by extending `augmentedTheory`/`satOptimizeDiscriminator` —
-  those two are the *old*, now-superseded same-lemma path Phase G/elicitation replaced,
+  those two are the *old*, now-superseded same-lemma path Grouping Phase/elicitation replaced,
   and per the plan should eventually be narrowed to the `*`/`#` track only (separate,
   deferred work).
 - `buildDiscriminatorSelection` (`src/featureextractor.py:284-325`) returns
   `dict[tuple[WordFeature,...], list[tuple[Word,...]]]` — same-lemma-homophone
   discriminator selection via combinatorial `Word.getFeatures()` scanning. **Confirmed
-  obsolete as Phase P's input** — Phase G/elicitation (`resolved_press_sets.json`,
-  `phase_g_keypress_assignment.json`) already supersedes it as the source of truth for
+  obsolete as Realization Phase's input** — Grouping Phase/elicitation (`resolved_press_sets.json`,
+  `keypress_groups.json`) already supersedes it as the source of truth for
   atomic-feature-to-keypress grouping.
 - `getStrokeCost` (`src/keyboard.py:527-546`) DOES have real production callers (correct
   this if previously stated otherwise): `src/cpsatsolver.py:327` (per-part stroke-cost
   dict for the main phoneme-key optimizer) and `src/greedyoptimizer.py:171`
   (`_buildStrokePool`'s sort key for the 4 reserved-key stroke pool). The KeyError bug is
-  real and live-reachable in principle, not just a Phase P concern, though the reserved-
+  real and live-reachable in principle, not just a Realization Phase concern, though the reserved-
   key pool likely avoids it in practice (its combos mostly span different fingers).
   `src/test/keyboard_test.py:331-353` already has some `getStrokeCost` coverage — extend
   it, don't create a parallel file.
@@ -79,7 +79,7 @@ all bigger, separable efforts the plan already calls out on their own.
 - `ATOMIC_FEATURE_CONFLICTS` (`src/word.py:273`, `{"p":"s","s":"p","m":"f","f":"m"}`) IS
   already used, in `src/greedyoptimizer.py:70` — correct a prior claim that it was
   unused. Still not used anywhere in `ambiguitychecker.py`; may be worth consulting for
-  Phase P's own conflict logic but not required by this milestone.
+  Realization Phase's own conflict logic but not required by this milestone.
 - `Phoneme.consonantPhonemes` (`src/grammar.py:33`) = `"RtsplkmdvjnfbZwzSgNG"`, 20
   phonemes, shared by both onset and coda in `Phoneme.phonemesByPart` — confirmed the
   full consonant inventory, not narrowed.
@@ -88,7 +88,7 @@ all bigger, separable efforts the plan already calls out on their own.
   new `Word`-keyed lookup from `resolved_press_sets.json` + `theory`.
 - ROADMAP.md open question 4 (`:358-359`): should a new resolved-theory output replace
   `theory.tsv` or live alongside it? Left genuinely open by this milestone (only the
-  smaller `phase_p_keypress_realization.json` artifact below is produced now); the
+  smaller `realization_report.json` artifact below is produced now); the
   full "theory 2" replacement is the deferred, larger wiring work.
 
 ## Changes
@@ -107,7 +107,7 @@ anyway) and update every existing caller:
 - `src/greedyoptimizer.py:171` (`_buildStrokePool`'s sort key) — filter out `None`-cost
   strokes before sorting, defensively (the 4-reserved-key pool likely never hits this,
   but don't leave a latent crash).
-- New Phase P code (below) must treat `None` as "this key-combo candidate is out."
+- New Realization Phase code (below) must treat `None` as "this key-combo candidate is out."
 
 ### 2. Fix `checkComposedChords`'s half-combo bug (`src/ambiguitychecker.py:334-337`)
 
@@ -140,16 +140,16 @@ def findCollidingNewAdditions(
 that computes every candidate word's induced new stroke under a given `additionKeys` and
 returns any pair that collides with each other (in addition to the existing check against
 `theory`). Fold this into `findFeatureKeypresses`'s per-candidate feasibility test — a
-candidate key-combo is feasible for a Phase G group only if (a) every affected word's new
+candidate key-combo is feasible for a Grouping Phase group only if (a) every affected word's new
 stroke is absent from `theory`, AND (b) no two affected words' new strokes coincide with
 each other. Reuse `_appendCodaAddition` for the induced-stroke computation (already
 correct), just extend the acceptance criterion.
 
-### 4. Rewire the input from `augmentedTheory` to Phase G's real output
+### 4. Rewire the input from `augmentedTheory` to Grouping Phase's real output
 
 Replace `buildAtomicFeatureToWords`'s consumption of `buildDiscriminatorSelection`'s
 `augmentedTheory` with the actual adopted artifacts:
-- `phase_g_keypress_assignment.json` — `markersByKeypress: dict[int, list[str]]`, the 6
+- `keypress_groups.json` — `markersByKeypress: dict[int, list[str]]`, the 6
   groups to physically realize.
 - `resolved_press_sets.json` — per homophone group: `strokes` (the shared base `Strokes`
   for every spelling in the group), `pressSets: dict[ortho, list[marker]]` (which markers
@@ -159,18 +159,18 @@ New function, replacing `buildAtomicFeatureToWords`'s role:
 ```python
 def buildKeypressGroupToWords(
     resolvedGroups: list[dict],  # parsed resolved_press_sets.json
-    markersByKeypress: dict[int, frozenset[str]],  # parsed phase_g_keypress_assignment.json
+    markersByKeypress: dict[int, frozenset[str]],  # parsed keypress_groups.json
     wordsByOrthoLemme: ...,  # map (ortho, lemmeGramCat) -> Word, to resolve real Word objects
 ) -> dict[int, list[Word]]
 ```
-mapping each Phase G keypress group id → every `Word` whose press-set touches a marker in
+mapping each Grouping Phase keypress group id → every `Word` whose press-set touches a marker in
 that group (i.e. the real-word population `findFeatureKeypresses` needs to check
-feasibility against, replacing the atomic-feature-string keys with Phase G's 6 integer
+feasibility against, replacing the atomic-feature-string keys with Grouping Phase's 6 integer
 group ids). `atomicFeatures`/`_selectCanonicalIndex`/`FEATURE_PRIORITY` machinery is no
-longer needed for this path (Phase G already decided the canonical/no-stroke member via
+longer needed for this path (Grouping Phase already decided the canonical/no-stroke member via
 the elicitation data), so `buildAtomicFeatureToWords` and `_selectCanonicalIndex` can be
 left in place (still used by the diagnostic `__main__`/legacy path) but are not called
-from the new Phase P entry point.
+from the new Realization Phase entry point.
 
 Need to resolve `Word` objects: `resolved_press_sets.json` only has orthography + lemma
 key + markers, not full `Word` objects. Build a lookup from the loaded `theory`
@@ -187,17 +187,17 @@ or combo, in whatever order `Phoneme.consonantPhonemes` iterates. Change to: col
 `keyboard.getStrokeCost(keys, "coda")` (skip `None`-cost candidates per fix #1), and keep
 the full ranked list (cheapest first) rather than just one, e.g.
 `feasibleSingleKeyPhonemes: list[tuple[str, int]]` (phoneme, cost) sorted ascending. This
-gives Phase P (and any future joint solver) a real preference order instead of an
+gives Realization Phase (and any future joint solver) a real preference order instead of an
 arbitrary one, and directly answers the plan's "not cost-aware" gap.
 
-### 6. Persist a real Phase P output artifact
+### 6. Persist a real Realization Phase output artifact
 
 Currently nothing downstream of `FeatureDiscrimator.pickle` is persisted — everything is
 recomputed and printed each run (`dictionary.py`'s whole `__main__` tail). Add a new
-canonical build script mirroring `util/build_phase_g_assignment.py`'s role:
-`util/build_phase_p_realization.py` — loads `Dictionary.pickle`/`FirstTheory.pickle`,
-`phase_g_keypress_assignment.json`, `resolved_press_sets.json`; runs the fixed
-feasibility/cost search; writes `phase_p_keypress_realization.json`: per keypress group,
+canonical build script mirroring `util/build_keypress_groups.py`'s role:
+`util/build_realization_report.py` — loads `Dictionary.pickle`/`FirstTheory.pickle`,
+`keypress_groups.json`, `resolved_press_sets.json`; runs the fixed
+feasibility/cost search; writes `realization_report.json`: per keypress group,
 the chosen coda key-combo (or `null` if infeasible even at combo size 2), its cost,
 alternate candidates considered, and any residual collisions found. This is milestone 1's
 concrete deliverable — it does **not** yet rewrite `theory`/persist a final
@@ -213,17 +213,17 @@ stroke-per-word table (that's the deferred `theory.tsv`-replacement work).
   - new tests for `findCollidingNewAdditions` (two synthetic words' induced strokes
     colliding with each other, not with `theory`).
   - new tests for `buildKeypressGroupToWords` against a small literal
-    `resolved_press_sets`-shaped fixture + `phase_g_keypress_assignment`-shaped fixture.
+    `resolved_press_sets`-shaped fixture + `keypress_groups`-shaped fixture.
   - new tests for cost-aware ranking (candidates returned cheapest-first, `None`-cost
     ones excluded).
 
 ## Verification
 
 - `pytest src/test/` — all existing + new tests green (490 existing must stay green).
-- `python -m util.build_phase_p_realization` — run against the real, checked-in
-  `phase_g_keypress_assignment.json`/`resolved_press_sets.json`/pickles; inspect the
+- `python -m util.build_realization_report` — run against the real, checked-in
+  `keypress_groups.json`/`resolved_press_sets.json`/pickles; inspect the
   printed summary (feasible vs infeasible groups, chosen keys, costs) and confirm
-  `phase_p_keypress_realization.json` is written.
+  `realization_report.json` is written.
 - Manually sanity-check at least one group's chosen coda key against `starboard3h.json`
   (key really is in `[16..25]`, really unused by that group's affected words' existing
   strokes).

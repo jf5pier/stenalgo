@@ -1,14 +1,14 @@
 #!/usr/bin/python
 # coding: utf-8
 """
-Phase G — CP-SAT exact minimum-K search (see ATOMIC_KEYPRESS_REWIRE_PLAN.md's Phase G
-section: "Phase G is only greedy-optimal, not proven-minimal... reusing
-_colorFeatures/_minSpecialKeypressesNeeded's scaffolding... to search for something
-smaller than K=6/7"). `src/featuregrouping.py`'s `greedyColorMarkers` finds *a* feasible K but
-gives no guarantee it's the smallest possible; this module proves the minimum exactly
-(or proves a candidate K infeasible), by direct search rather than by reusing
+Discriminating-Feature Grouping (Grouping Phase) — CP-SAT exact minimum-K search (see
+ATOMIC_KEYPRESS_REWIRE_PLAN.md's Phase G section: "Phase G is only greedy-optimal, not
+proven-minimal... reusing _colorFeatures/_minSpecialKeypressesNeeded's scaffolding... to
+search for something smaller than K=6/7"). `src/featuregrouping.py`'s `greedyColorMarkers`
+finds *a* feasible K but gives no guarantee it's the smallest possible; this module proves the
+minimum exactly (or proves a candidate K infeasible), by direct search rather than by reusing
 `_colorFeatures` itself -- that scaffolding's "conflict" semantics (at most one member
-of a feature SET may share a key) is the wrong shape for Phase G's actual constraint,
+of a feature SET may share a key) is the wrong shape for the Grouping Phase's actual constraint,
 which is per-cluster set-DISTINCTNESS over induced press-sets (see module docstring
 below and `featuregrouping.verifyKeypressAssignment`, the ground truth this mirrors exactly --
 not the pairwise `coOccurrencePairs`/`wouldCollideIfMergedPairs` pre-checks, which are
@@ -52,17 +52,17 @@ def _buildDistinctnessModel(
     markers: list[str], signatures: list[GroupSignature], numKeys: int
 ) -> tuple[cp_model.CpModel, dict[tuple[str, int], IntVar]]:
     """
-    The shared core of every Phase G CP-SAT search: each marker gets exactly one of
-    `numKeys` keypresses, and within every signature, every pair of press-sets belonging
-    to two DIFFERENT spellings must induce a distinct touched-keypress set -- the exact
-    ground truth `featuregrouping.verifyKeypressAssignment` checks, not a pairwise approximation
-    of it. Alternates of the SAME spelling are deliberately exempt from this requirement:
-    they already produce the same output text (see `src.elicitation.resolveGroupPressSets`),
-    so there is nothing to keep distinguishable between them -- forcing them apart would
-    reintroduce the very over-marking this alternates design exists to avoid. Callers
-    (`_feasibleAssignment` for a hard mustShareKey search, `_bestAssignmentPreferring` for
-    a soft preference search) add their own extra constraints/objective on top of this
-    model and `x`.
+    The shared core of every Discriminating-Feature Grouping (Grouping Phase) CP-SAT search:
+    each marker gets exactly one of `numKeys` keypresses, and within every signature, every
+    pair of press-sets belonging to two DIFFERENT spellings must induce a distinct
+    touched-keypress set -- the exact ground truth `featuregrouping.verifyKeypressAssignment`
+    checks, not a pairwise approximation of it. Alternates of the SAME spelling are
+    deliberately exempt from this requirement: they already produce the same output text (see
+    `src.elicitation.resolveGroupPressSets`), so there is nothing to keep distinguishable
+    between them -- forcing them apart would reintroduce the very over-marking this alternates
+    design exists to avoid. Callers (`_feasibleAssignment` for a hard mustShareKey search,
+    `_bestAssignmentPreferring` for a soft preference search) add their own extra
+    constraints/objective on top of this model and `x`.
     """
     model = cp_model.CpModel()
     x: dict[tuple[str, int], IntVar] = {
@@ -540,7 +540,8 @@ def serializeAssignment(
     preferenceTiers: list[PreferenceTier] | None = None,
     achievedPerTier: list[int] | None = None,
 ) -> dict:
-    """The persisted, adopted Phase G artifact -- a specific CP-SAT-proven assignment
+    """The persisted, adopted Discriminating-Feature Grouping (Grouping Phase) artifact --
+    a specific CP-SAT-proven assignment
     (not the search machinery itself), JSON-serializable for `util/build_keypress_groups.py`.
     `mustShareKey`/`aloneKeys`/`mustDifferGroups` record HARD-forced decisions
     (`minKeypressesSat`); `preferSameKey`/`preferencesSatisfied` record a single SOFT

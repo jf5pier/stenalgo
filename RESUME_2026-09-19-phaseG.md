@@ -1,4 +1,4 @@
-# Resume point — 2026-09-19, branch `phase-g-grouping` (E5/E6/Phase G done, model comparison in progress)
+# Resume point — 2026-09-19, branch `phase-g-grouping` (E5/E6/Grouping Phase done, model comparison in progress)
 
 Written so a fresh (cleared-context) session can pick up without re-deriving context.
 Read together with `ATOMIC_KEYPRESS_REWIRE_PLAN.md` (authoritative plan),
@@ -10,11 +10,11 @@ now with both models' numbers).
 ## Where things stand, in one paragraph
 
 Starting from a fully-answered 194-question questionnaire (previous session), this
-session implemented **E5 (validate)**, **E6 (persist)**, and **Phase G (grouping)** —
-the whole rest of the plan except Phase P. All three are working, tested, and
+session implemented **E5 (validate)**, **E6 (persist)**, and **Grouping Phase (grouping)** —
+the whole rest of the plan except Realization Phase. All three are working, tested, and
 verified against the real 47,799-group lexicon. Along the way, two real bugs were
 found and fixed (a group-scoping bug in E5's first draft, and a greedy-coloring
-correctness gap in Phase G that only pairwise pre-checks couldn't catch). The user
+correctness gap in Grouping Phase that only pairwise pre-checks couldn't catch). The user
 then asked to compare two elicitation calibrations — the one actually answered
 (pers_1 preferred as silent default) versus a hypothetical one (pers_3 preferred as
 default) — which is now done and **model 2 (pers_3 default) wins**: same 13 live
@@ -27,7 +27,7 @@ not yet merged to `main`.
 ## File inventory (everything needed to continue)
 
 **Planning docs (read first, in this order):**
-- `ATOMIC_KEYPRESS_REWIRE_PLAN.md` — the authoritative plan (Phase E/G/P).
+- `ATOMIC_KEYPRESS_REWIRE_PLAN.md` — the authoritative plan (Elicitation/Grouping/Realization Phases).
 - `RESUME_2026-09-19.md` — same-day earlier session (E4 done, lexicon fixes).
 - `RESUME_2026-09-19-phaseG.md` — this file.
 - `pers_1PreferedOver_pers_3KeyAssignation` — the two-model comparison finding, most
@@ -35,7 +35,7 @@ not yet merged to `main`.
 - `GLOSSARY.md` — vocabulary reference (Cluster, Reading, Signature/Press-set).
 
 **Code (all committed on `phase-g-grouping`):**
-- `src/elicitation.py` — Phase E toolkit, now including:
+- `src/elicitation.py` — Elicitation Phase toolkit, now including:
   - `resolveGroupPressSets()` (E5/E6 shared step): per homophone group, unions each
     spelling's press-set from the specific pairwise-opposition answers relevant to
     that group. **Important correctness note**: this is scoped PER GROUP, not
@@ -51,28 +51,28 @@ not yet merged to `main`.
     different partners (that's normal, not an error).
   - `serializeResolvedPressSets()` (E6): the persisted artifact.
   - `AnsweredOpposition`, `GroupConflict` dataclasses.
-- `src/phaseg.py` — Phase G, new this session:
+- `src/featuregrouping.py` — Grouping Phase, new this session:
   - `loadResolvedPressSets()`, `liveMarkers()`, `coOccurrencePairs()` (hard: markers
     ever pressed together can't share a keypress), `wouldCollideIfMergedPairs()`
     (derived: markers that never co-occur but would still collide if merged, via a
     clean "T∪{m1} vs T∪{m2}" set-comparison — the plan's own worked example).
   - `greedyColorMarkers()` (Welsh-Powell), `inducedPressSet()`, `verifyKeypressAssignment()`
     (ground-truth simulation), `_findSharedKeypressPair()` (repair-loop helper).
-  - `runPhaseG()`: colors, verifies, and on any conflict repeatedly forces apart one
+  - `runFeatureGrouping()`: colors, verifies, and on any conflict repeatedly forces apart one
     implicated marker pair and re-colors, until clean or no progress possible.
     **Important correctness note**: the pairwise pre-checks (`coOccurrencePairs`,
     `wouldCollideIfMergedPairs`) are NOT sufficient alone — found a real case
     (`abaisseraient` needs `{pers_3,nbr_p}`, `abaisserais` needs `{pers_2,pers_1}`,
     neither pair individually unsafe, but both spellings end up touching the same two
     keypresses) that only the verify-and-repair loop catches. Fixed in commit
-    `d0c7ffb`. **Do not trust a "0 conflicts" Phase G report from a version of this
+    `d0c7ffb`. **Do not trust a "0 conflicts" Grouping Phase report from a version of this
     file older than that commit.**
 - `util/build_pers3_default_answers.py` — one-off model-2 generator: `transform()`
   (strip pers_3, give pers_1/pers_2 self-markers where they were silently default),
   `repairConflicts()` (minimal, single-atom, single-opposition-record fix per
   distinct conflict pattern — corrected in commit `023cca1` after an earlier version
   over-broadcast fixes to every unrelated opposition mentioning the same reading).
-- Tests: `src/test/elicitation_test.py` (18 tests), `src/test/phaseg_test.py` (16
+- Tests: `src/test/elicitation_test.py` (18 tests), `src/test/featuregrouping_test.py` (16
   tests, including the `abaisser_VER` regression). 462 tests total, all passing.
 
 **Data files (git-tracked, real data not build artifacts):**
@@ -138,18 +138,18 @@ live/unpressable sets are stable.)
    that the mapping must follow how the user's brain actually works, not just
    minimize K).
 2. **No proper `__main__`/script exists yet for regenerating model 2's
-   `resolved_press_sets_pers3default.json` or re-running Phase G on it** — this
+   `resolved_press_sets_pers3default.json` or re-running Grouping Phase on it** — this
    session did it via ad hoc inline Python each time. If model 2 is adopted, this
    should become a real reusable script (extend `util/build_pers3_default_answers.py`
    or add a `--model` flag somewhere) rather than repeating inline snippets.
-3. **Phase G is only greedy-optimal, not proven-minimal.** The plan's own suggested
+3. **Grouping Phase is only greedy-optimal, not proven-minimal.** The plan's own suggested
    next step is a CP-SAT formulation reusing `_colorFeatures`/
    `_minSpecialKeypressesNeeded`'s scaffolding (`src/satoptimizer.py:155-259,262-279`)
    to search for something smaller than K=6/7. Not started.
-4. **Phase G's "report frequency-weighted chord sizes" requirement** (from the plan)
-   is not implemented — `runPhaseG` reports K and the keypress table but not
+4. **Grouping Phase's "report frequency-weighted chord sizes" requirement** (from the plan)
+   is not implemented — `runFeatureGrouping` reports K and the keypress table but not
    frequency weighting.
-5. **Phase P (physical realization)** is explicitly deferred per the plan; nothing
+5. **Realization Phase (physical realization)** is explicitly deferred per the plan; nothing
    done, nothing expected yet.
 6. Two harmless untracked files sit in the repo root: `scratch/callgraph` (old pasted
    transcript, keep-or-delete-freely per earlier session) and
@@ -157,7 +157,7 @@ live/unpressable sets are stable.)
    worth asking the user about, or just leaving alone).
 7. Branch `phase-g-grouping` has not been merged to `main` and not pushed to
    `origin`. The user asked for this branch specifically anticipating profound
-   `dictionary.py` changes (for Phase P, presumably) — nothing has touched
+   `dictionary.py` changes (for Realization Phase, presumably) — nothing has touched
    `dictionary.py` yet in this branch.
 
 ## How to regenerate model 2's derived files (until a real script exists)
@@ -170,7 +170,7 @@ from src.elicitation import (
     AnsweredOpposition, buildAnswersByOpposition, buildLemmaHomophoneGroups,
     resolveGroupPressSets, serializeResolvedPressSets,
 )
-from src.phaseg import runPhaseG, liveMarkers
+from src.featuregrouping import runFeatureGrouping, liveMarkers
 
 with open("Dictionary.pickle", "rb") as pfile:
     _d = pickle.load(pfile)
@@ -197,7 +197,7 @@ pgSets = {f"{e['lemmeGramCat']}@{'|'.join(','.join(map(str,s)) for s in e['strok
           {o: frozenset(p) for o, p in e["pressSets"].items()} for e in serialized}
 allAtoms = {a for item in json.load(open("questionnaire.json"))
             for a in item["atomsA"] + item["atomsB"]}
-result = runPhaseG(pgSets, allAtoms)
+result = runFeatureGrouping(pgSets, allAtoms)
 print("K:", result.keypressCount, "live:", len(liveMarkers(pgSets)), "conflicts:", len(result.conflicts))
 ```
 

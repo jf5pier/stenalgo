@@ -33,7 +33,7 @@ Consequences adopted below: the input artifact is **elicited** rather than taken
 `buildDiscriminatorSelection`; the default (∅) form of each cluster comes from the same
 data (`FEATURE_PRIORITY` has no role left on this track); ambiguity handling is a
 **calibratable strict/lenient mix** (open decision §E); the abstract solver shrinks to
-grouping (Phase G).
+grouping (Grouping Phase).
 
 ## Vocabulary (fixed by the user; used throughout)
 
@@ -47,7 +47,7 @@ grouping (Phase G).
   homophones give one cluster member several readings ("parle" = ind-prés-1s /
   ind-prés-3s / subj-prés-1s / subj-prés-3s). Readings of the same spelling never
   conflict with each other — they produce the same output text.
-- **Keypress** (chord) — the abstract unit a marker maps to; physical keys are Phase P.
+- **Keypress** (chord) — the abstract unit a marker maps to; physical keys are Realization Phase.
   **∅** — no extra press: a cluster's default form is typed with the bare sound-stroke.
 - **Press** — the marker-set the writer actually presses for a word. May be
   over-specific; decoding is superset-tolerant: pressed markers + sound-stroke must
@@ -93,7 +93,7 @@ matches *parle*; `nbr_p` alone for *parlez* also matches *parlés* / *parlées*.
   comes from the elicited data, not from an objective term.
 - `src/ambiguitychecker.py`'s Part 2 (`buildAtomicFeatureToWords` `:202-224`,
   `findFeatureKeypresses` `:257-294`, `checkComposedChords` `:303-346`) stays
-  diagnostic-only for now and becomes the Phase P seed. Its three audited gaps
+  diagnostic-only for now and becomes the Realization Phase seed. Its three audited gaps
   (independent per-atom scan; `comboSize` hardcoded 2; not cost-aware) are
   physical-layer concerns.
 
@@ -104,14 +104,14 @@ matches *parle*; `nbr_p` alone for *parlez* also matches *parlés* / *parlées*.
 | 0 baseline commit | Still pending; now includes this amendment + the resume |
 | 1 tokenizer fix | **DONE** (commit `29da8d2`) — record below |
 | 2 granularity (open decision A) | Superseded — elicitation + grouping resolve it; A marked resolved |
-| 3 joint model | Superseded — Phase G (abstract) + Phase P (physical) replace it |
+| 3 joint model | Superseded — Grouping Phase (abstract) + Realization Phase (physical) replace it |
 | 4 N-way cap | ≤4 is structurally safe (`splitInfoVerb`); E3 confirms cheaply |
-| 5 two-stroke fallback | Deferred to Phase P (open decision B with it) |
-| 6 wiring/persistence | Deferred to Phase P |
-| 7 consumers | Split: Phase E tool + tests now; `dictionary.py` wiring deferred |
-| 8 re-run/compare | Reinterpreted — E3 scale report + Phase G report now; old §8 checks move to Phase P |
-| A | Resolved — the sharing mechanism (Phase G constraints) does what family-codes were after |
-| B, C | Deferred to Phase P |
+| 5 two-stroke fallback | Deferred to Realization Phase (open decision B with it) |
+| 6 wiring/persistence | Deferred to Realization Phase |
+| 7 consumers | Split: Elicitation Phase tool + tests now; `dictionary.py` wiring deferred |
+| 8 re-run/compare | Reinterpreted — E3 scale report + Grouping Phase report now; old §8 checks move to Realization Phase |
+| A | Resolved — the sharing mechanism (Grouping Phase constraints) does what family-codes were after |
+| B, C | Deferred to Realization Phase |
 | D | Corrected: `FEATURE_PRIORITY` is **live** in Part 2 (import `src/ambiguitychecker.py:36`, used by `_selectCanonicalIndex` `:191-199`), not orphaned. Elicitation's default-form answers eliminate its job on this track; retiring `src/greedyoptimizer.py` means rehoming it |
 
 ## Prerequisite fix — DONE (commit `29da8d2`)
@@ -124,7 +124,7 @@ canonical-form flag, not a compound). `FEATURE_FAMILIES`' obsolete combo entries
 (`src/test/word_test.py::TestAtomicFeatures`, `TestGetFeatures`); 428 tests green; no new
 mypy errors.
 
-## Phase E — elicitation (new; comes first)
+## Elicitation Phase — elicitation (new; comes first)
 
 **E0. Baseline commit.** This amendment + the resume note. Delete stale
 `anchor_feasibility.tsv` (generated pre-`29da8d2`; current code writes
@@ -141,7 +141,7 @@ sampling is exhaustive.
 
 **E3. Report scale.** Cluster count; total pair count; **distinct feature oppositions**
 (the actual number of questions the user would face); max compound size (expect ≤4);
-which markers ever get pressed together (Phase G's co-occurrence input); greedy-coloring
+which markers ever get pressed together (Grouping Phase's co-occurrence input); greedy-coloring
 lower bound on K computed with and without the pressed-together rule, so its price is
 known up front.
 
@@ -158,9 +158,9 @@ with the full cluster in view ("you said `nbr_p` alone for *parlez*; *parlés* /
 *parlées* also match — settle it").
 
 **E6. Persist the elicitation artifact.** Per-opposition answers + per-cluster resolved
-press-sets. This — not `buildDiscriminatorSelection` output — feeds Phase G.
+press-sets. This — not `buildDiscriminatorSelection` output — feeds Grouping Phase.
 
-## Phase G — grouping (the reduced abstract solver)
+## Grouping Phase — grouping (the reduced abstract solver)
 
 - A marker gets a keypress **iff some elicited press contains it**. Markers no press ever
   contains are unpressable by construction — "no keypress = unmarked default" falls out
@@ -175,17 +175,17 @@ press-sets. This — not `buildDiscriminatorSelection` output — feeds Phase G.
   co-occur" rule in a narrower form: its compete clause, read graph-coloring-style, would
   have forbidden exactly this share.)
 - Objective: minimize K (number of keypresses); report frequency-weighted chord sizes —
-  full cost optimization is Phase P.
+  full cost optimization is Realization Phase.
 - Implementation seed: the `_colorFeatures` schema + `_minSpecialKeypressesNeeded`
   feasibility loop (`src/satoptimizer.py:155-259`, `:262-279`), with per-cluster
   set-distinctness constraints over press-sets instead of coloring edges. Synthetic tests
-  mirroring `src/test/satoptimizer_test.py`, plus a new test module for the Phase E tool
+  mirroring `src/test/satoptimizer_test.py`, plus a new test module for the Elicitation Phase tool
   (enumeration, opposition dedup, validator).
 - Report: K, the keypress → markers table, the unpressable-marker list.
 
-## Phase P — physical realization (milestone 1 DONE -- see `RESUME_2026-09-19-phaseP.md`)
+## Realization Phase — physical realization (milestone 1 DONE -- see `RESUME_2026-09-19-phaseP.md`)
 
-Milestone 1 is complete and verified against the real lexicon: all 6 Phase G groups
+Milestone 1 is complete and verified against the real lexicon: all 6 Grouping Phase groups
 have a physical coda key, 0 same-lemmeGramCat collisions left. The bullets below are
 the original planning notes, kept for historical context; two design points changed
 during execution (extra trailing stroke, not merged into the last one; per-word
@@ -238,23 +238,23 @@ needing at most 4 extra `*#` syllables anywhere in the whole lexicon — nothing
 pathological. Keys 0/1 (left pinky, also reserved) remain unassigned, held for a
 possible future 3rd logical mark.
 
-**Composition with Phase P is now also implemented** (same 2026-09-20 follow-up
+**Composition with Realization Phase is now also implemented** (same 2026-09-20 follow-up
 session). Investigation first: checked how often a word needs both mechanisms at once
 by looking at `assignment.crossLemmaCollisions`/`crossCategoryClashCollisions`
 directly -- turns out it's the norm, not an edge case, for the currently-elicited
-population: **100%** of those pairs involve a word that already carries its own Phase P
-extra stroke, because those two fields are computed from Phase P's own `finalInduced`
-in the first place. The two mechanisms compose by simple concatenation (Phase P's
+population: **100%** of those pairs involve a word that already carries its own Realization Phase
+extra stroke, because those two fields are computed from Realization Phase's own `finalInduced`
+in the first place. The two mechanisms compose by simple concatenation (Realization Phase's
 stroke first, then */# after it) and can never create a NEW cross-cluster collision:
-Phase P only ever picks coda-phoneme keys, structurally disjoint from the 2 dedicated
+Realization Phase only ever picks coda-phoneme keys, structurally disjoint from the 2 dedicated
 reserved keys (`STAR_KEY`=10/`HASH_KEY`=15 are excluded from `Keyboard.allowedKeys`),
 so appending after an already-different prefix keeps the whole `Strokes` tuple
 different. Implementation: `groupHomophonesByReservedStroke(finalInduced)` groups
-words by shared post-Phase-P stroke, keeping only genuine distinct-`lemmeGramCat`/
-distinct-`ortho` groups (excludes Phase P's own same-paradigm residuals and all-
+words by shared post-Realization-Phase stroke, keeping only genuine distinct-`lemmeGramCat`/
+distinct-`ortho` groups (excludes Realization Phase's own same-paradigm residuals and all-
 homograph groups); `composeReservedKeyStrokes(finalInduced)` appends
 `assignStarHashPhysicalStrokes`'s extra syllable(s) on top. Validated against the live
-lexicon: 1079 genuine */# groups found inside Phase P's own elicited population, 0
+lexicon: 1079 genuine */# groups found inside Realization Phase's own elicited population, 0
 accidental collisions with existing theory strokes, and 0 genuine (distinct-spelling)
 collisions left anywhere after composition. Tests:
 `TestGroupHomophonesByReservedStroke`, `TestComposeReservedKeyStrokes`.
@@ -289,7 +289,7 @@ rather than a small follow-up.
   final stroke (12,16)+{18} and (12,18)+{16} both land on (12,16,18). The `*`/`#`
   reserved-key modifications also create strokes absent from `theory`; the composition
   order of the two tracks is undefined and interacts.
-- Pressability filtering: **the KeyError half is FIXED** (landed with Phase P
+- Pressability filtering: **the KeyError half is FIXED** (landed with Realization Phase
   milestone 1, commit `31b3a3c`) — `getStrokeCost` (`src/keyboard.py`) now returns
   `None` for illegal per-finger unions (coda m=(25,) + n=(22,) → right pinky {22,25},
   not in `_possibleKeypress.rightPinky`) instead of raising, and both callers
@@ -301,7 +301,7 @@ rather than a small follow-up.
   keys; two-stroke fallback lives in stroke-SEQUENCE space (`theory` keys are `Strokes`
   tuples, multi-stroke entries already exist).
 - Part 2's three gaps (independent scan / comboSize 2 / not cost-aware) get fixed here by
-  the joint physical model, over the Phase G output.
+  the joint physical model, over the Grouping Phase output.
 - Wiring + persistence: call from `dictionary.py` `__main__` (alongside
   `buildDiscriminatorSelection`'s existing call at `:463`), fed by the E6 artifact;
   persist stroke→word output (finally resolving `ROADMAP.md` open question 4 on
@@ -333,7 +333,7 @@ rather than a small follow-up.
   the strict same-lemma cluster definition it would fall to the `*`/`#` track instead.
   Check how the lexicon clustering treats it today; the user's reflex says the marker
   track. Whichever way, record it in the cluster definition.
-- Deferred: §B two-stroke cutoff, §C onset candidates (Phase P).
+- Deferred: §B two-stroke cutoff, §C onset candidates (Realization Phase).
 
 ## Established facts (carried from the review session)
 
@@ -351,21 +351,21 @@ rather than a small follow-up.
 - **`anchor_feasibility.tsv` is stale** (pre-`29da8d2`, over-split tokens); E0 deletes it.
 - **Expected K ≈ 4-8** (hypothesis): person trio + number pair + gender pair are the
   obvious cliques; mode values rarely compete in French same-lemma homophony. E3's lower
-  bounds make this measurable before Phase G runs.
+  bounds make this measurable before Grouping Phase runs.
 - **Three-pickle staleness gotcha** documented in `RESUME_2026-09-17.md`.
 
 ## Non-goals (updated)
 
 - No changes to the `*`/`#` lemma-homophone track's own logic beyond confirming its sole
-  claim to the 4 reserved keys (Phase P).
+  claim to the 4 reserved keys (Realization Phase).
 - No re-optimization of the phoneme→key layout (`starboard3h.json`,
   `cpsatsolver.py::optimizeKeyboard`, still commented out per `ROADMAP.md`).
 - No prefix-formation work (`ROADMAP.md` Phase 6) — same machinery family, out of scope.
 - `FEATURE_FAMILIES` / `associationScore` / polarity machinery: no job left on this track
   once elicitation + grouping land; separate cleanup, not blocking.
-- The physical layer (Phase P) stays out of scope until E and G report.
+- The physical layer (Realization Phase) stays out of scope until E and G report.
 
-## Call graph today (kept for the Phase P wiring)
+## Call graph today (kept for the Realization Phase wiring)
 
 ```
 dictionary.py (__main__)

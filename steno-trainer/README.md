@@ -3,15 +3,15 @@
 A minimal, from-scratch web app for drilling Stenalgo's generated French steno
 theory on the real Starboard hardware (or any other Gemini-PR-compatible
 board). Shows a virtual keyboard, drills common words or short sentences
-(each word labelled with the grammatical reading its chord writes), and gives
-real-time correct/incorrect feedback per stroke -- with or without the chord
+(each word labelled with the Feature Combination its strokes write), and gives
+real-time correct/incorrect feedback per stroke -- with or without the strokes
 shown as a hint. A definition mode looks up any spelling's homophones, with
-their readings, pronunciations and chords.
+their Feature Combinations, pronunciations and strokes.
 
 Modes: **Words** (the 10000 most frequent drill items, shuffled, each shown
 with context words -- "la maison", "que tu viennes", "parle !"), **Sentences**
 (217 short sentences, word by word) and **Definitions** (look up a spelling's
-homophones). A hints toggle hides the expected chord and keys; an X-SAMPA/IPA
+homophones). A hints toggle hides the expected strokes and keys; an X-SAMPA/IPA
 toggle switches every phoneme on the page. Deliberately no progress
 tracking/persistence and no WPM stats: reloading starts a fresh shuffle.
 
@@ -47,9 +47,9 @@ python -m util.export_definitions          # definition mode's whole-lexicon loo
 
 The sentences themselves come from `util/candidate_sentences.jsonl`, written
 once by an LLM with a per-token lemma/category/conjugation annotation (which
-picks the right chord for context-dependent spellings, e.g. "sais" after
+picks the right strokes for context-dependent spellings, e.g. "sais" after
 "je" vs "tu"); `export_practice_sentences` rejects any sentence whose
-annotation doesn't resolve every word to exactly one drilled chord.
+annotation doesn't resolve every word to exactly one drill item.
 
 ## Local development
 
@@ -73,9 +73,9 @@ server is needed even though there's no backend.
 - **Connect requires a real click.** `requestPort()` must be triggered by a
   direct user gesture; there's no auto-connect on page load.
 - **Feedback is per-stroke, not per-keypress.** Gemini PR reports one packet
-  per *completed* chord (the machine's firmware already assembles it), not
+  per *completed* stroke (the machine's firmware already assembles it), not
   individual key-down/key-up events -- so the app can't animate which keys
-  are currently held mid-chord, only flash correct/incorrect once a full
+  are currently held mid-stroke, only flash correct/incorrect once a full
   stroke is released. This is a hardware-protocol constraint, not a shortcut.
 - **The Gemini PR keymap is verified for the user's own Starboard only.**
   Other "Gemini-PR-compatible" boards implement the same wire *format* but

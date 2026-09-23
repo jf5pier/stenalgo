@@ -2,10 +2,152 @@
 
 Written to survive a `/clear` — read this file first in a fresh session.
 
+## Suspected bugs (from docs refactor, 2026-09-22)
+
+Found while writing `docs/PIPELINE.md` (full write-ups, evidence and confidence in
+`docs/refactor/callgraph/90-findings.md`, same B-numbers). **Not yet reviewed by the user;
+nothing has been fixed.** Tier 1 changes the Plover dictionary (or other exported output)
+today; tier 2 changes reports or tracked artifacts; tier 3 is latent (no measured impact).
+
+### Tier 1 — affects the Plover output today
+
+- **B1** Spelling twins: only the first Word of a spelling gets its feature discriminating stroke —
+  src/ambiguitychecker.py:797-800 (`_resolveEntryWord`) — Words sharing (ortho, `lemmeGramCat`) and
+  strokes: `next(...)` marks one ("agis" participle vs finite). 230 same-lemmeGramCat collision pairs;
+  99 pairs in 98 strokes reach theory 2 unmarked. Invisible to the 0-residual invariant.
+- **B2** Synthetic verb forms get a vowel-less trailing syllable — src/verbparadigm.py:561, :611 —
+  radical cut by character count keeps the infinitive's syllable boundary (`cannes` sub:pre:2s: 2
+  strokes vs NOM 1). 3,843 new Words carry an extra stroke and miss their real homophones.
+- **B3** Breakdown built from a LexiqueInfra association that disagrees with the phonology —
+  lexique.py:1021, :1033 (with :770-883) — match uses Infra `phono`, `syll_cv` comes from `assoc`
+  (`embêter` typed with closed `e`). 132 mixed-lexicon rows; 175 VER synthetic rows inherit it.
+- **B4** Alternate entries of self-homographs take unrelated words' only stroke —
+  src/ambiguitychecker.py:1288 (`buildExtraInducedStrokes`), dictionary.py:389 — alternate entry
+  strokes skip the star/hash marks (`subits` loses to `subis`). 9 spellings have no Plover entry.
+- **B5** Frequency ties make star/hash marks depend on input order — src/ambiguitychecker.py:224-232,
+  `_starHashCompare` :242-258 — not antisymmetric on equal frequency (`pas`/`pâts`). Shuffling input
+  changes marks in 619 of 4,450 lemma-homophone groups (14%); any lexicon row move can flip them.
+- **B6** 1990-reform deletion/insertion rules miss inflected forms after lemma normalization —
+  lexique.py:224-225 with :1197-1198 — rules keyed under `oldSpelling`, lemma already normalized
+  (`balloter` beside `ballottait`). 67 rows over 24 lemmas keep pre-reform spellings in Plover.
+- **B7** NOM/ADJ exception override keeps the source word's syllabification —
+  util/generateMissingNomAdjForms.py:88, :94 — ortho/phon from the exception table, `syll_cv` from the
+  source (`molle(s)` typed like `mou`). Among 12 NOM/ADJ synthetic rows with `syll_cv` ≠ `phon`.
+- **B8** Phonetic stroke rule never checks that a stroke is pressable — src/keyboard.py:607-620 with
+  dictionary.py:305 — no check against `_possibleKeypress` (`traumatisme` coda `zm` → 3-key
+  right-pinky press). 529 Words, 39 distinct illegal strokes in the Plover output.
+- **B9** Identity merge discards the later row's frequency and syllabification —
+  dictionary.py:113-137 (`readCorpus`) — frequencies not summed, differing `syll_cv` dropped (24
+  reform-rewrite identities: `gélinotte`, …). Undercounted frequency feeds the frequency-ratio rule
+  (R4) and the Plover "most frequent" pick.
+- **B10** Plover export breaks frequency ties by theory-1 order — util/export_plover_dictionary.py:56
+  — `max(key=frequency)` keeps the first Word (`dégotés`/`dégottés`, both 0.0). Low impact;
+  order-dependent like B5.
+
+### Tier 2 — affects reports or tracked artifacts (not the Plover output)
+
+- **B11** Residual-collision lists in the realization report change between clean rebuilds —
+  src/word.py:94, :155; src/ambiguitychecker.py:739-747, :1248-1257 — salted `hash()` stored in the
+  pickles sets `allWords` order and first-seen pairing. Cross-category clashes 34/40/38, cross-lemma
+  1,283/1,292 across rebuilds; theory 2 and Plover unaffected (`PYTHONHASHSEED=0` workaround).
+- **B12** The precedence-spec checker covers much less than the spec —
+  util/check_conjugation_disambiguation_order.py:69-77, :100-126 — "masculine must be free" checked
+  for participles only; mandatory impératif/subjonctif and line order unchecked. The validation
+  report can be clean while answers contradict the spec.
+- **B13** Verb paradigm completion is not idempotent — util/completeVerbParadigms.py:95-97 with
+  :324-340 — `--apply` twice without deleting the pickles appends the same rows again to the tracked
+  `LexiqueSynthetic.tsv` (duplicates merge by identity; only the file grows).
+- **B14** Human views go stale with the caches — dictionary.py:498-505, :531 — `theory.tsv` is
+  written only on a `FirstTheory.pickle` miss; `theory2.tsv` from possibly stale discriminating
+  feature sets. Low: both gitignored and read by nothing.
+
+### Tier 3 — latent (no measured current impact)
+
+- **B15** Pickle caches are never invalidated — dictionary.py:451, :498 — not checked against the
+  lexicon TSVs, `excluded_words.txt` or `starboard3h.json`; editing the layout without
+  `rm -f *.pickle` yields a silently wrong Plover dictionary. Likelihood low while the layout is frozen.
+- **B16** First-seen pairing can hide same-lemmeGramCat collisions — src/ambiguitychecker.py:739-747
+  with :1248-1250 — X, Z (same `lemmeGramCat`) and Y on one stroke: if Y is seen first, (X,Z) never
+  reaches `residualCollisions`. No instance observed.
+- **B17** `buildFinalTheory` ignores unassigned Keypress Groups and residuals — dictionary.py:380-389
+  — an unrealizable group's Words silently lose their feature discriminating stroke in theory 2 and
+  Plover. Not triggered (all 7 groups have keys).
+- **B18** Trainer legend can disagree with the dictionary — util/export_keyboard_layout.py:128 —
+  legend reads the tracked realization report, the dictionary recomputes keys inline; rerunning
+  Discriminating-Feature Grouping (Grouping Phase) without the report build shows old keys. Agree today.
+- **B19** Null `chosenKeys` crashes the trainer legend — util/export_keyboard_layout.py:133-141, :144
+  — an unassigned group raises `TypeError`. Not triggered.
+- **B20** `_resolveEntryWord` silently falls back to the first candidate — src/ambiguitychecker.py:800
+  — stale resolved discriminating feature sets (lexicon fix without rerunning Discriminating-Feature
+  Elicitation (Elicitation Phase)) mark `candidates[0]` instead of failing.
+- **B21** Extra alternates of empty-primary spellings are never verified —
+  src/ambiguitychecker.py:1227-1241 — only Words in `allWords` get alternates checked; 2,749
+  spellings have an empty primary ("abaisse"). 0 collisions with theory 1 today.
+- **B22** Collision tests compare raw strokes — src/ambiguitychecker.py:1114, :1142, :1243-1247 —
+  collisions are physical (canonical) but raw Strokes are compared. 0 cases today.
+- **B23** Non-live hard-rule feature raises `KeyError` — src/featuregroupingsat.py:117 with :128-135
+  — a feature in `ALONE_KEYS`/`MUST_DIFFER_GROUPS` that stops being live gives `KeyError` instead of
+  a clear error.
+- **B24** A solver timeout can lock a non-optimal result — src/featuregroupingsat.py:172, :274, :398
+  — FEASIBLE is accepted and locked, so tier score/tie-break are neither proven nor reproducible.
+- **B25** The frequency-ratio rule (R4) and the category-priority rule (R6) can form a cycle —
+  src/ambiguitychecker.py:224 vs :229 — A<B (R6), B<C (R6), C<A (R4) → order-dependent sort. 0
+  cycles among live representatives.
+- **B26** Doublet merge checks only the representative's lemma — src/ambiguitychecker.py:321-326 —
+  a rarer homograph carrying the reform-pair lemma makes the doublet look like a real ambiguity. 0
+  instances.
+- **B27** Word identity is fragile — src/word.py:94, :161 — separator-free `_hash` concatenation and
+  `__eq__` on `_hash` only: Words from pickles of different processes never compare equal. Root
+  cause of B11.
+- **B28** `zip` truncation can leave a syllable unregistered — dictionary.py:177 — 99 Words have
+  phonetic/orthographic syllable lists of different lengths; a unique extra syllable would make
+  `buildTheory` (:310) raise `KeyError`. Not triggered.
+- **B29** `lexicalPhonemeAmbiguityScore` looks up a word phonology as a syllable name —
+  src/grammar.py:913, :931 — `getSyllable("apodiR")` → `None`, the branch adds 0 for polysyllabic
+  words. Affects the fallback keymap only.
+- **B30** `optimizeOrder` starts from set order — src/grammar.py:307-320 — the best permutation (and
+  README.md's figures) can change with the hash seed. Fallback keymap only.
+- **B31** Multiphoneme frequencies are always 0 — src/grammar.py:566, :574-584 — all 353 values are
+  0.0; no reader.
+- **B32** The layout solver wipes the layout before solving — src/cpsatsolver.py:422 (not run) —
+  an infeasible or timed-out part leaves its bank empty and the next `buildTheory` raises `IndexError`.
+- **B33** `lexique.py` rebuilds on import — lexique.py:1261-1263 — no `__main__` guard: importing it
+  overwrites `LexiqueMixte.tsv`. No importers today.
+- **B34** `Lexique` keeps its rows in class-level lists — lexique.py:957-958 — a second `Lexique()`
+  in one process doubles every row. Not triggered.
+- **B35** The sentence exporter's drill-item gate depends on another process —
+  util/export_practice_sentences.py:158 — compares against `practice-words.json` from a separate
+  theory-2 recompute; changed inputs between the runs reject valid sentences.
+
+## Queued follow-ups (from docs refactor)
+
+- **Code renames for "lemma" names that mean lemma + category** (decision a12; no code change
+  yet): `LemmaHomophoneGroupKey` (src/elicitation.py:24) → `HomophoneGroupKey`; `groupWordsByLemme`
+  (src/word.py:414) → `groupWordsByLemmeGramCat` (`groupWordsByBareLemme` is correctly named).
+  Same pattern, also worth renaming: `buildLemmaHomophoneGroups` (src/elicitation.py:61) and
+  `buildWordsByOrthoLemme` (src/ambiguitychecker.py:772, keyed by (ortho, `lemmeGramCat`)).
+- **No command regenerates `starboard3h.json`** — the `optimizeKeyboard` call is commented out at
+  dictionary.py:494 (and `toJSONFile` at :496). Add an explicit entry point for Keyboard Layout
+  Optimization (S4) (decision b5: a real, rarely-run, costly step, not dead code).
+- **Realization report vs inline path drift** — the trainer keyboard legend reads the tracked
+  `realization_report.json`, while theory 2 and the Plover dictionary recompute the
+  Discriminating-Feature Stroke Realization (Realization Phase) inline; nothing compares them
+  (B18, B19). Decide in Dead-Code Removal (Pass 5).
+- **`.claude/settings.local.json` still allow-lists the old `build_phase_p_realization`
+  commands** — user to update to `util.build_realization_report`.
+- **Runtime strings still say "Phase G/P"** — ask the user before changing them (it is a code
+  change, not a comment edit): print messages and report keys at dictionary.py:537/539,
+  src/featuregrouping.py:316/324, src/featuregroupingsat.py:591, util/build_realization_report.py:111/132,
+  and the French questionnaire HTML at util/build_questionnaire_page.py:312. Renaming a report key
+  changes the tracked `realization_report.json`. Also: the module docstrings of src/featuregrouping.py:5
+  and src/featuregroupingsat.py:5 still cite "ATOMIC_KEYPRESS_REWIRE_PLAN.md's Phase G section", which
+  that plan now titles "Grouping Phase".
+
 ## Live status (2026-09-20)
 
-For the homophone-theory work (Phase 0 through Phase P milestone 1 and the `*`/`#`
-lemma-homophone track), **`ROADMAP.md`'s "Status update (2026-09-20)" section and
+For the homophone-theory work (Phase 0 through Discriminating-Feature Stroke Realization
+(Realization Phase) milestone 1 and the star/hash marks of Different-Lemma or
+Grammatical-Category Disambiguation (S7)), **`ROADMAP.md`'s "Status update (2026-09-20)" section and
 `ATOMIC_KEYPRESS_REWIRE_PLAN.md` are authoritative** — do not reconstruct state from the
 session notes below. Before touching `resources/Lexique383.tsv`, `LexiqueInfraCorrespondance.tsv`,
 `LexiqueMixte.tsv`, or `LexiqueSynthetic.tsv`, read `LEXICON_RECOMPUTE_PIPELINE.md` — the
@@ -13,20 +155,20 @@ recompute chain has manual, order-dependent steps and two silent-failure traps. 
 data-quality bullets in "Still open" below and the `"p"` vs `"f_p"`/`"m_p"` feature-fusion
 scoping (ROADMAP design decision 4); everything else here is history.
 
-Branch: `phase-g-grouping` (drifted well past Phase G — also carries Phase P and the
-`*`/`#` track; merge to `main` when convenient, nothing depends on the name). 549 tests
+Branch: `phase-g-grouping` (drifted well past the Grouping Phase — also carries the Realization
+Phase and the star/hash marks; merge to `main` when convenient, nothing depends on the name). 549 tests
 pass (`pytest src/test/`). The reform1990 thread lives in
 `scratch/reform1990/RESUME_2026-09-16.md`/`STATUS.md`.
 
 ### Done this session (2026-09-17/18 — history)
 
 - **`resources/ambiguityIgnoreList.tsv`** (new file) — 79 hand-reviewed lemmas to exclude from
-  ambiguity-cluster *counting* (not from the lexicon/theory — words stay fully typable), tagged
+  ambiguity *counting* (lemma-homophone groups) (not from the lexicon/theory — words stay fully typable), tagged
   with a `reason` column (`archaic` / `anglicism_loan` / `unpopular_spelling` / `sociolect` /
   `data_artifact`) and a short note each. `src/ambiguitychecker.py` gained
   `loadIgnoredLemmas()` + a `classifyTheory(theory, ignoredLemmas=...)` filter param, wired into
-  its `__main__`. Verified effect: the n>=5 overflow cluster count drops from 58 to 20 (max
-  cluster size 8 → 7) once applied. 413 tests pass throughout.
+  its `__main__`. Verified effect: the n>=5 lemma-homophone overflow group count drops from 58 to 20
+  (max group size 8 → 7) once applied. 413 tests pass throughout.
 - **`resources/lexiconExclusions.tsv`** (new file) + `lexique.py` refactor — moved the two
   hardcoded `problemList`/`foreignList` Python literals (124 words total, no per-word reason
   ever recorded) into this tsv with a best-effort `reason` column (`foreign_word` /
@@ -61,7 +203,7 @@ pass (`pytest src/test/`). The reform1990 thread lives in
   (pronounced `[bod]`, d pronounced, NOT a homophone of `beau`). `LexiqueMixte.tsv`'s `baud`
   row uses the hunting-dog pronunciation (`phon=bo`) for what's almost certainly always the
   telecom sense in any real corpus text — should be `bod`. Fixing this would also pull `baud`
-  out of the `beau`/bau/bot/"bail,bau" ambiguity cluster entirely.
+  out of the `beau`/bau/bot/"bail,bau" Theory-1 collision entirely.
 - **Suspected "ghost lemma" artifacts**, currently just tagged `data_artifact` in
   `ambiguityIgnoreList.tsv` (so they don't inflate the ambiguity metric) but NOT actually fixed
   at the data level: `pars` (tagged NOM, freq 15.78 — almost certainly the mistagged common verb
@@ -114,10 +256,10 @@ allocator to spend an extra key/stroke on `"p"` instead of reusing the key alrea
 assigned to `"f_p"`.
 
 Why this specific case surfaced: words like `général`/`générale`/`générales` have no
-homophonous masculine-plural competitor in their stroke cluster (`généraux` is
+homophonous masculine-plural competitor in their Homophone Group (`généraux` is
 pronounced `ZeneRo`, not `ZeneRal` — phonetically distinct, never enters the group),
 so nothing forces the algorithm to pick the gender-qualified feature; `cher`'s NOUN
-reading (as opposed to its ADJECTIVE reading, a separate `(lemme, cgram)` group) has
+lemmeGramCat (as opposed to its ADJECTIVE one, a separate `(lemme, cgram)` group) has
 no attested masculine-plural noun row at all, same effect. Neither is a data bug —
 verified against `Lexique383.tsv`/`LexiqueMixte.tsv` directly, the underlying words and
 tags are all correct. (Also checked along the way: `mal`/`male`/`males` — the `male`
@@ -178,7 +320,7 @@ for documentation (`pouvoir`/"puis") — no more open judgment calls or unexplai
   donors, but resolve cleanly once matched against the ONE structurally closest
   sibling instead of a blind majority vote (`déblaye` mirrors `délaye`, identical
   single-consonant radical shape, already merged; `effrayes` mirrors `débrayes`/
-  `embrayes`, identical consonant-cluster-before-r radical shape, already split).
+  `embrayes`, identical consonant-sequence-before-r radical shape, already split).
   `util/fixPayerDualFormGaps.py` now reports 0 generated/0 skipped. 346 tests pass,
   `python lexique.py` regenerates clean.
 - [x] **`ass:eoir` (asseoir/rasseoir, 25 WRONG_ENDING flags) — done, in the same

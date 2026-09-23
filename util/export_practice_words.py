@@ -5,10 +5,11 @@ drill from, keyed by orthography (not by steno string, the way
 for this word," never the reverse, so it dedupes on `ortho` instead of `steno`
 when a word appears under more than one entry, keeping the highest-frequency one.
 
-Uses `util._theoryio.loadFinalTheory` (theory 2: base strokes + Phase P's
-same-lemma marks + the `*`/`#` lemma-homophone track), not the raw unmarked
+Uses `util._theoryio.loadFinalTheory` (theory 2: base strokes + the same-lemma marks
+of Discriminating-Feature Stroke Realization (Realization Phase) + the star/hash marks
+of Different-Lemma or Grammatical-Category Disambiguation (S7)), not the raw unmarked
 theory 1 -- this is what actually disambiguates homophones like "a"/"as"/"à"
-(same base phonology, different final chords once Phase P/the */# track are
+(same base phonology, different final chords once the Realization Phase/S7 are
 applied). A word whose final chord still collides with another word's (the same
 lemma+gramCat, or an intentionally-exempted pair -- 1990-reform doublets, or one
 word >10x rarer than the other) is expected, not a bug in this exporter; the
@@ -177,7 +178,8 @@ def buildReadingsByWord(
 ) -> dict[Word, list[list[Reading]]]:
     """Every word covered by `resolved_press_sets.json` -> its readings per press-set
     alternate (parallel to its `loadFinalTheory` stroke list), matched to the real `Word`
-    the same way the Phase P pipeline does (`_resolveEntryWord`)."""
+    the same way the Discriminating-Feature Stroke Realization (Realization Phase)
+    pipeline does (`_resolveEntryWord`)."""
     wordToStrokes = buildWordToStrokes(theory)
     wordsByOrthoLemme = buildWordsByOrthoLemme(theory)
     readingsByWord: dict[Word, list[list[Reading]]] = {}

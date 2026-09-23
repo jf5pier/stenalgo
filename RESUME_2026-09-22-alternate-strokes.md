@@ -10,7 +10,7 @@ doc's items 1 and 2 are now **resolved** — this doc supersedes it for those; i
 1. `688c74d` — **Root fix**: same-spelling homograph readings (e.g. "calmez" = impératif or
    indicatif présent) no longer get their discriminator marks unioned together.
    `src/elicitation.py::resolveGroupPressSets`/`resolvePressByCombination` now keep each
-   reading's press as a separate alternate; `src/phaseg.py`/`src/phasegsat.py`'s
+   reading's press as a separate alternate; `src/featuregrouping.py`/`src/featuregroupingsat.py`'s
    distinctness constraints exempt a spelling's own alternates from needing to differ from
    each other. Also fixed 3 real `elicitation_answers.json` mistakes this surfaced (see
    below) and added `conjugation_disambiguation_order.txt` (user-authored spec) +
@@ -23,12 +23,12 @@ doc's items 1 and 2 are now **resolved** — this doc supersedes it for those; i
    `Dictionary.buildFinalTheory` now returns `dict[Word, list[Strokes]]` (index 0 primary,
    further entries a self-homograph's other readings) and shares `PREFERRED_KEYS_BY_MARKER`
    with the diagnostic script via `ambiguitychecker.resolvePreferredKeysByGroup`. Before this
-   commit, the fix only showed up in `phase_p_keypress_realization.json`'s bookkeeping, not
+   commit, the fix only showed up in `realization_report.json`'s bookkeeping, not
    in the actual `plover_stenalgo_dictionary.json`/steno-trainer exports — that gap is closed.
-4. `b1e02ed` — Made Phase G's CP-SAT search deterministic: `_newDeterministicSolver`
+4. `b1e02ed` — Made Grouping Phase's CP-SAT search deterministic: `_newDeterministicSolver`
    (`num_search_workers=1`, fixed `random_seed`) + `_breakTiesAlphabetically` (a final,
    lowest-priority tie-break tier). Two consecutive real builds of
-   `phase_g_keypress_assignment.json` are now byte-identical.
+   `keypress_groups.json` are now byte-identical.
 
 ## Current keyboard state (K=7)
 
@@ -57,12 +57,12 @@ and `kal/me/-d` (pers_2/indicatif) — either one alone is sufficient, matching 
    later-appended `renvoyer` batch) renumbered to `q200`–`q204` — cosmetic, no functional
    effect (lookups match by content, not id).
 
-## Follow-up session (same day): reading labels + a Phase P matching bug — DONE, pushed
+## Follow-up session (same day): reading labels + a Realization Phase matching bug — DONE, pushed
 
 `RESUME_2026-09-21-steno-trainer.md` item 1 (the drill can't say which reading a chord is
 for) is now **resolved**. Two commits, both pushed to `origin/main`:
 
-5. `cc86d98` — **Phase P bug fix**: `src/ambiguitychecker.py::_resolveEntryWord` compared
+5. `cc86d98` — **Realization Phase bug fix**: `src/ambiguitychecker.py::_resolveEntryWord` compared
    theory 1's RAW strokes against `resolved_press_sets.json`'s CANONICAL entry strokes, so
    any word whose raw stroke repeats a key (e.g. "nie" /nj/, `((6,8,8,9),)` vs `[[6,8,9]]`)
    never matched and fell back to `candidates[0]` — a different same-spelling Word ("nie"
@@ -74,7 +74,7 @@ for) is now **resolved**. Two commits, both pushed to `origin/main`:
 6. `b9537de` — **Reading labels in steno-trainer**:
    - `src/elicitation.py::serializeResolvedPressSets` now writes a `readings` field per
      entry: per spelling, a list PARALLEL to its `pressSets` alternates, each the feature
-     combinations that resolved to that press. Unused by Phase G/P (verified: the file is
+     combinations that resolved to that press. Unused by Grouping/Realization Phases (verified: the file is
      otherwise byte-identical in content).
    - `util/export_practice_words.py` emits one drill item per (word, stroke) with a French
      `label` (e.g. "impératif présent, 2e pl.", "subjonctif présent, 1re sg. / 3e sg.",
@@ -88,10 +88,10 @@ for) is now **resolved**. Two commits, both pushed to `origin/main`:
 7. `3b22e0f` — **`être` conflict fixed** (pushed): `elicitation_answers.json`
    `q32` (`sois` sub-pres-1s vs `soit` sub-pres-3s) — `sois` side's `checkedA` was
    `["subjonctif"]`, identical to `soit`'s, so E5 held back the whole `être_VER` group (no
-   Phase P marks on any être form). User's call: `sois` needs `subjonctif` + `pers_1`. Dry
+   Realization Phase marks on any être form). User's call: `sois` needs `subjonctif` + `pers_1`. Dry
    run first (conflict 1 → 0, violations 0 → 0, only `être_VER` changed), then applied and
    full chain rerun: 0 groups held back, 0 violations, 0 residual same-`lemmeGramCat`
-   collisions; Phase G grouping + Phase P keys unchanged (only Phase G usage-frequency
+   collisions; Grouping Phase grouping + Realization Phase keys unchanged (only Grouping Phase usage-frequency
    numbers moved). Result: `swa` soit (ind), `swa/-l` soit (sub 3s), `swa/-k` sois (imp),
    `swa/-kl` sois (sub 1s), `swa/-dl` sois (sub 2s), `swa/-sl` soient; side effect `soi`
    `swa/*#` → `swa/*`, `soie` `swa/*#/*#` → `swa/#`. `q32`'s `"clean": false` flag was left
@@ -119,7 +119,7 @@ over there. Kept for history.
 
 See the `[[lexicon_fix_recompute_order]]` memory (auto-memory system) for the full 5-step
 chain — it's now longer than "dictionary.py → elicitation → dictionary.py": add
-`util.build_phase_g_assignment` → `util.build_phase_p_realization` → the 3 export scripts.
+`util.build_keypress_groups` → `util.build_realization_report` → the 3 export scripts.
 Verify with `python -m util.check_conjugation_disambiguation_order` (expect 0 violations) and
 by grepping the actual word in `plover_stenalgo_dictionary.json`, not just the intermediate
-`phase_p_keypress_realization.json`.
+`realization_report.json`.

@@ -5,16 +5,16 @@ Status: **implemented** (sections 1-4, option (a) for section 4). Companion to
 floated there in favor of keeping every valid reading's press as its own theory line.
 
 Implemented in: `src/elicitation.py` (`resolveGroupPressSets`/`serializeResolvedPressSets`/
-`validateElicitation`), `src/phaseg.py` (all constraint/verification functions), `src/phasegsat.py`
+`validateElicitation`), `src/featuregrouping.py` (all constraint/verification functions), `src/featuregroupingsat.py`
 (`GroupSignature`/`groupSignatures`/`_buildDistinctnessModel`), `src/ambiguitychecker.py`
 (`buildKeypressGroupToWords` now consumes only the primary alternate; new
 `buildKeypressGroupExtraAlternates` + `realizeKeypressGroupsAsExtraStroke`'s new
 `extraGroupSetsByWord` parameter realize every other alternate as its own additional physical
 stroke, checked against every other word but never against the same word's own other readings),
-and `util/build_phase_p_realization.py` (wires the new function through). All touched test
+and `util/build_realization_report.py` (wires the new function through). All touched test
 suites updated and passing (571 tests); mypy error count on touched files unchanged from
 baseline. Not yet done: regenerating the actual committed `resolved_press_sets.json` /
-`phase_g_keypress_assignment.json` / `phase_p_keypress_realization.json` artifacts against the
+`keypress_groups.json` / `realization_report.json` artifacts against the
 real lexicon (steps 4 and 6 of the suggested order below) — that's a real pipeline run, left for
 a deliberate follow-up rather than folded into this implementation session.
 
@@ -119,7 +119,7 @@ from `frozenset({"pers_1"})` / `["pers_1"]` to `[frozenset({"pers_1"}), frozense
 `[["pers_1"], []]` — this is a nice existing example showing "parle" can be typed either
 `pers_1`-marked or fully bare.
 
-## 2. `src/phaseg.py` (greedy Phase G)
+## 2. `src/featuregrouping.py` (greedy Grouping Phase)
 
 `PressSetsByGroup = dict[str, dict[str, list[frozenset[str]]]]`; `loadResolvedPressSets` parses
 the nested list.
@@ -141,9 +141,9 @@ the nested list.
   alternate's true markers as today.
 - **`frequencyWeightedChordSizes`**: attribute the ortho's full frequency to every keypress
   touched by **any** of its alternates (a mild over-count when an ortho has >1 live alternate —
-  acceptable given this was already flagged as Phase P input, not something Phase G optimizes).
+  acceptable given this was already flagged as Realization Phase input, not something Grouping Phase optimizes).
 
-## 3. `src/phasegsat.py` (exact CP-SAT Phase G) — the harder half
+## 3. `src/featuregroupingsat.py` (exact CP-SAT Grouping Phase) — the harder half
 
 Today, `GroupSignature = frozenset[frozenset[str]]` is just "the set of distinct press-sets held
 by a group's spellings," and `_buildDistinctnessModel` forces **every pair within a signature**
@@ -171,16 +171,16 @@ cross-bucket pairs instead of all pairs. Model size grows mildly (most spellings
 exactly one alternate), stays tractable at the ~200-distinct-signature scale the module already
 banks on.
 
-## 4. `src/ambiguitychecker.py::realizeKeypressGroupsAsExtraStroke` (Phase P) — open question
+## 4. `src/ambiguitychecker.py::realizeKeypressGroupsAsExtraStroke` (Realization Phase) — open question
 
 This is the part I have **not** fully worked out and want your read on before implementing.
 
 Today the whole function is built around `wordToGroups: dict[Word, frozenset[int]]` — **one**
-fixed set of Phase-G group ids per `Word`, used to compose that word's one physical extra
+fixed set of Grouping-Phase group ids per `Word`, used to compose that word's one physical extra
 stroke, with heavy machinery (`_finalizeReadyWords`, composed-cost ranking, the full
 finalized-word collision re-check) all assuming that 1:1 shape.
 
-With alternates, a `Word` (well, really a `(word, combination)` reading — but Phase P works at
+With alternates, a `Word` (well, really a `(word, combination)` reading — but Realization Phase works at
 the ortho/Word level, not per-combination) can need **either of two different group-sets** to be
 uniquely identified — e.g. "calmez" needs `{group(impératif)}` *or* `{group(pers_2)}`, not both.
 That turns `wordToGroups` into a 1:many relation, and every downstream piece that composes a
@@ -196,11 +196,11 @@ Two ways to go:
   mapping through `buildWordToGroups`, `_finalizeReadyWords`, the composed-cost ranking, and the
   final full-assignment verification pass (which currently checks one composed stroke per word;
   needs to check one per alternate instead).
-- **(b) Only physically realize alternates that are actually *distinct* after the Phase-G
+- **(b) Only physically realize alternates that are actually *distinct* after the Grouping-Phase
   keypress bundling** (some alternates may induce the *same* physical keys once bundled onto
   keypresses, in which case there's only one real stroke to realize, not two) — a
   dedup-after-induction step before handing groups to the composer, which could simplify (a)
-  by shrinking the list Phase P has to realize per word.
+  by shrinking the list Realization Phase has to realize per word.
 
 I'd lean toward (a) with the (b) dedup as an optimization on top, but this is the piece most
 likely to hide a subtlety I haven't hit yet (e.g. interaction with the "biggest, most-constrained
@@ -210,11 +210,11 @@ tests against `ambiguitychecker_test.py`'s existing fixtures — before committi
 
 ## 5. Downstream consumers (not yet audited in detail)
 
-- `util/build_phase_p_realization.py` — canonical build entrypoint; needs to iterate realized
-  alternates per word instead of one stroke per word when writing `phase_p_keypress_realization.json`.
+- `util/build_realization_report.py` — canonical build entrypoint; needs to iterate realized
+  alternates per word instead of one stroke per word when writing `realization_report.json`.
 - Plover dictionary / theory export (`dictionary.py`'s theory writer, `util/export_plover_dictionary.py`) —
   structurally fine with multiple stroke keys mapping to the same output text (that's already how
-  Plover dictionaries work), just needs to actually emit both entries once Phase P produces them.
+  Plover dictionaries work), just needs to actually emit both entries once Realization Phase produces them.
 - `util/export_practice_words.py` / steno-trainer — a UX question for later, not a data-model one:
   does drilling "calmez" show/accept either stroke, or pick one canonically for the drill? Related
   to `RESUME_2026-09-21-steno-trainer.md` item 1 (the trainer already has no way to show *which*
@@ -224,13 +224,13 @@ tests against `ambiguitychecker_test.py`'s existing fixtures — before committi
 
 1. `src/elicitation.py` + its tests (self-contained, no other file depends on the old shape
    except through `resolved_press_sets.json`'s schema).
-2. `src/phaseg.py` + its tests.
-3. `src/phasegsat.py` + its tests (the CP-SAT model change).
+2. `src/featuregrouping.py` + its tests.
+3. `src/featuregroupingsat.py` + its tests (the CP-SAT model change).
 4. Regenerate `resolved_press_sets.json` (`python -m src.elicitation` or whatever the E6 CLI
-   entrypoint is) and re-run Phase G to produce a new `phase_g_keypress_assignment.json`,
+   entrypoint is) and re-run Grouping Phase to produce a new `keypress_groups.json`,
    diffing keypress counts/marker groupings against today's committed artifact.
-5. Scope and implement `ambiguitychecker.py`'s Phase P change (section 4) once 1-3 are solid and
+5. Scope and implement `ambiguitychecker.py`'s Realization Phase change (section 4) once 1-3 are solid and
    we've picked (a) vs (a)+(b) above.
-6. Rebuild `phase_p_keypress_realization.json` (`python -m util.build_phase_p_realization`),
+6. Rebuild `realization_report.json` (`python -m util.build_realization_report`),
    confirm the 0-residual-same-lemma-collision regression still holds, and check the "calmez"
    case now round-trips through `util/export_practice_words.py` as two strokes.

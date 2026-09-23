@@ -6,7 +6,8 @@ artifact -- see pers_1PreferedOver_pers_3KeyAssignation), swapping the discrimin
 order default from pers_1 to pers_3 (nbr_s): wherever a pers_3 (singular) reading
 appears in a homophone group, it becomes the silent (empty press) default instead of
 pers_1/pers_2/participe. The output, elicitation_answers.json, is now the PRIMARY
-answer set consumed by `python -m src.elicitation` / Phase G -- model 2 (K=6) beat
+answer set consumed by `python -m src.elicitation` / Discriminating-Feature Grouping
+(Grouping Phase) -- model 2 (K=6) beat
 model 1 (K=7) with the same 13 live markers, and the user chose to adopt it.
 
 Mechanical rule (confirmed with the user before running):

@@ -1,14 +1,16 @@
 #!/usr/bin/python
 # coding: utf-8
 """
-Phase G — grouping (see ATOMIC_KEYPRESS_REWIRE_PLAN.md's Phase G section): assign every
-live marker to an abstract keypress, minimizing K, without breaking any homophone
-group's no-conflict property. Input is `resolved_press_sets.json` (Phase E6's persisted
-artifact) -- NOT `src/featureextractor.py`'s `buildDiscriminatorSelection` output.
+Discriminating-Feature Grouping (Grouping Phase) (see ATOMIC_KEYPRESS_REWIRE_PLAN.md's
+Phase G section): assign every live marker to an abstract keypress, minimizing K, without
+breaking any homophone group's no-conflict property. Input is `resolved_press_sets.json`
+(the persisted artifact of Discriminating-Feature Elicitation (Elicitation Phase) step E6) --
+NOT `src/featureextractor.py`'s `buildDiscriminatorSelection` output.
 
 Vocabulary (GLOSSARY.md / the plan's own fixed vocabulary): Marker (atomic feature),
 Press (the marker-set a writer presses for one word), Keypress (the abstract unit a
-group of markers maps to -- physical key assignment is Phase P).
+group of markers maps to -- physical key assignment is Discriminating-Feature Stroke
+Realization (Realization Phase)).
 """
 
 import json
@@ -17,7 +19,7 @@ from dataclasses import dataclass
 from itertools import combinations
 
 # One homophone group's per-spelling press-sets, keyed by an opaque group id (see
-# `loadResolvedPressSets`) rather than elicitation.py's LemmaHomophoneGroupKey -- Phase G
+# `loadResolvedPressSets`) rather than elicitation.py's LemmaHomophoneGroupKey -- the Grouping Phase
 # only needs the press-sets themselves, not the stroke/lemma identity behind them. Each
 # spelling maps to a LIST of alternate press-sets (almost always length 1) -- more than
 # one only when the spelling is itself a homograph reading of itself (see
@@ -190,14 +192,16 @@ def frequencyWeightedChordSizes(
     pressSetsByGroup: PressSetsByGroup, frequencyByGroup: FrequencyByGroup, colorOf: dict[str, int]
 ) -> dict[int, float]:
     """
-    Per the plan's Phase G objective ("minimize K; report frequency-weighted chord
-    sizes -- full cost optimization is Phase P"): for each keypress, the total corpus
+    Per the plan's Phase G objective for Discriminating-Feature Grouping (Grouping Phase)
+    ("minimize K; report frequency-weighted chord sizes -- full cost optimization is
+    Phase P", i.e. Discriminating-Feature Stroke Realization (Realization Phase)): for
+    each keypress, the total corpus
     frequency of every spelling whose TRUE (elicited, not induced) press-set touches it
     -- i.e. how often that keypress actually gets struck in real writing. This is a
-    Phase P input (a busy keypress should land on an easy physical key/finger), not
-    something Phase G optimizes against; Phase G only reports it. A group missing from
-    `frequencyByGroup` (e.g. an older artifact written before frequencies were tracked)
-    contributes 0.0, not an error.
+    Realization Phase input (a busy keypress should land on an easy physical key/finger),
+    not something the Grouping Phase optimizes against; the Grouping Phase only reports it. A
+    group missing from `frequencyByGroup` (e.g. an older artifact written before frequencies
+    were tracked) contributes 0.0, not an error.
     """
     weightByKeypress: dict[int, float] = defaultdict(float)
     for groupId, pressSetByOrtho in pressSetsByGroup.items():

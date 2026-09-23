@@ -1,9 +1,9 @@
-# Resume point — 2026-09-19, branch `phase-g-grouping` (CP-SAT exact optimization of Phase G)
+# Resume point — 2026-09-19, branch `phase-g-grouping` (CP-SAT exact optimization of Grouping Phase)
 
 Written so a fresh (cleared-context) session can pick up without re-deriving context.
 Read together with `ATOMIC_KEYPRESS_REWIRE_PLAN.md` (authoritative plan) and
 `RESUME_2026-09-19-phaseG.md` (the earlier same-day session this one continues directly
-from — E5/E6/Phase G implementation, the two-elicitation-model comparison, and the
+from — E5/E6/Grouping Phase implementation, the two-elicitation-model comparison, and the
 decision to adopt model 2). This file picks up exactly where that one's "Still open"
 list left off.
 
@@ -12,7 +12,7 @@ list left off.
 Starting from `RESUME_2026-09-19-phaseG.md`'s open items, this session: (1) adopted
 model 2 (pers_3 default) as the primary elicitation calibration, (2) implemented Phase
 G's missing frequency-weighted chord-size reporting, (3) built an exact CP-SAT solver
-(`src/phasegsat.py`) that **proved Phase G's greedy coloring was leaving a keypress on
+(`src/featuregroupingsat.py`) that **proved Grouping Phase's greedy coloring was leaving a keypress on
 the table** — greedy found K=6/7, CP-SAT proved K=5 achievable, later K=6 again after a
 real data-correctness fix (see below) — and (4) spent most of the session iteratively
 refining that CP-SAT solver's constraint vocabulary in direct response to a sequence of
@@ -22,7 +22,7 @@ constraint system (`mustShareKey`, `aloneKeys`, `mustDifferGroups`, `SameKeyPref
 elicitation-data bug was found and fixed: 7 of 26 `impératif`-marking answers had used
 `pers_2` instead of `impératif` itself, which (once corrected) raised the true minimum K
 from 5 to 6 — a genuine, now-understood tradeoff, not a regression. The final adopted
-Phase G output is persisted in `phase_g_keypress_assignment.json` and was **exhaustively
+Grouping Phase output is persisted in `keypress_groups.json` and was **exhaustively
 validated** (all 52,373 homophone groups, all 4,363 `impératif` readings, all 15,999
 oppositions they participate in) to confirm every imperative reading is discriminable by
 pressing its keypress alone, with 0 exceptions. Branch `phase-g-grouping` is pushed to
@@ -32,7 +32,7 @@ in progress or half-done.
 ## File inventory (everything needed to continue)
 
 **Planning docs (read first, in this order):**
-- `ATOMIC_KEYPRESS_REWIRE_PLAN.md` — the authoritative plan (Phase E/G/P sections).
+- `ATOMIC_KEYPRESS_REWIRE_PLAN.md` — the authoritative plan (Elicitation/Grouping/Realization Phases sections).
 - `RESUME_2026-09-19-phaseG.md` — the immediately-preceding same-day session.
 - `RESUME_2026-09-19-cpsat.md` — this file.
 - `GLOSSARY.md` — vocabulary reference (Cluster, Reading, Signature/Press-set).
@@ -40,18 +40,18 @@ in progress or half-done.
 **Code (all committed on `phase-g-grouping`):**
 - `src/elicitation.py` — unchanged in structure from the prior session, but:
   - `buildFrequencyByGroupOrtho()` (new): per-group, per-spelling corpus frequency
-    (max over that spelling's Word rows), feeding Phase G's frequency-weighted report.
+    (max over that spelling's Word rows), feeding Grouping Phase's frequency-weighted report.
   - `serializeResolvedPressSets()`: now takes an optional `frequencyByGroupOrtho` and
     writes a `"frequencies"` field into the persisted artifact.
-- `src/phaseg.py` — Phase G (greedy), extended this session:
+- `src/featuregrouping.py` — Grouping Phase (greedy), extended this session:
   - `FrequencyByGroup` type alias, `loadGroupOrthoFrequencies()`,
-    `frequencyWeightedChordSizes()` — per-keypress real-corpus usage weight, a Phase P
+    `frequencyWeightedChordSizes()` — per-keypress real-corpus usage weight, a Realization Phase
     input the plan calls for but that was never implemented until now. Threaded through
-    `runPhaseG`/`PhaseGResult` and the `__main__` report.
+    `runFeatureGrouping`/`FeatureGroupingResult` and the `__main__` report.
   - Everything else (greedy coloring, verify-and-repair loop) is unchanged from the
     prior session — **still greedy, not proven-minimal**; superseded in practice by
-    `phasegsat.py` for the actual adopted result, but kept as the fast/cheap path.
-- `src/phasegsat.py` — **new module this session**, the CP-SAT exact solver. This is
+    `featuregroupingsat.py` for the actual adopted result, but kept as the fast/cheap path.
+- `src/featuregroupingsat.py` — **new module this session**, the CP-SAT exact solver. This is
   where almost all the session's design work landed. Key pieces, roughly in the order
   they were built (see the module's own docstrings for full detail on each):
   - `groupSignatures()` — dedups the 47,799 real homophone groups down to 218 distinct
@@ -59,8 +59,8 @@ in progress or half-done.
     not orthography/stroke identity) — this is what makes exact CP-SAT tractable at all.
   - `_buildDistinctnessModel()` — the shared core: one keypress per marker, and within
     every signature, every pair of press-sets must induce a distinct touched-keypress
-    set (the *exact* ground truth `phaseg.verifyKeypressAssignment` checks — not
-    `phaseg.py`'s pairwise `coOccurrencePairs`/`wouldCollideIfMergedPairs`
+    set (the *exact* ground truth `featuregrouping.verifyKeypressAssignment` checks — not
+    `featuregrouping.py`'s pairwise `coOccurrencePairs`/`wouldCollideIfMergedPairs`
     pre-checks, which are a greedy-only approximation).
   - `minKeypressesSat(pressSetsByGroup, mustShareKey=..., aloneKeys=..., mustDifferGroups=...)`
     — scans K=1,2,... and returns the first CP-SAT *proves* feasible (so a "no" at each
@@ -81,17 +81,17 @@ in progress or half-done.
     small loss on a high-priority one — not what "lower priority" means. Built in
     direct response to the user's final request in this session (see "Key
     decisions" below).
-  - `serializeAssignment()` / `groupSignatures()` / CLI (`python -m src.phasegsat
+  - `serializeAssignment()` / `groupSignatures()` / CLI (`python -m src.featuregroupingsat
     marker1:marker2` for hard, `marker1~marker2` for soft) — see the module for exact
-    argument shapes; the CLI is exploratory, `util/build_phase_g_assignment.py` is the
+    argument shapes; the CLI is exploratory, `util/build_keypress_groups.py` is the
     canonical persistence path.
-- `util/build_phase_g_assignment.py` — **new this session**, the canonical build script
+- `util/build_keypress_groups.py` — **new this session**, the canonical build script
   (mirrors `util/build_pers3_default_answers.py`'s role for the elicitation side).
   Currently configured with the FULL adopted constraint set (see "Current adopted
   configuration" below); re-verifies 0 conflicts against the real lexicon before
-  writing, refuses to persist otherwise. Run: `python -m util.build_phase_g_assignment`.
-- Tests: `src/test/phasegsat_test.py` (25 tests, all synthetic fixtures — fast, no
-  pickle-loading needed), plus `src/test/elicitation_test.py`/`phaseg_test.py` extended
+  writing, refuses to persist otherwise. Run: `python -m util.build_keypress_groups`.
+- Tests: `src/test/featuregroupingsat_test.py` (25 tests, all synthetic fixtures — fast, no
+  pickle-loading needed), plus `src/test/elicitation_test.py`/`featuregrouping_test.py` extended
   with a handful of frequency-weighting tests. 489 tests total, all passing.
 
 **Data files (git-tracked, real data not build artifacts):**
@@ -100,7 +100,7 @@ in progress or half-done.
   answers use `impératif` alone, none use `pers_2` as a substitute.
 - `elicitation_answers_pers1default.json` — archived model 1, same `impératif` fix
   applied for consistency, but not otherwise used by the active pipeline.
-- `phase_g_keypress_assignment.json` — **the canonical Phase G output**, git-tracked
+- `keypress_groups.json` — **the canonical Grouping Phase output**, git-tracked
   (unlike `resolved_press_sets.json`, which is gitignored/regenerable — this one encodes
   real decisions, not a mechanical rebuild). Current content: K=6, 0 conflicts, full
   constraint provenance (`mustShareKey`, `aloneKeys`, `mustDifferGroups`,
@@ -126,7 +126,7 @@ in progress or half-done.
   questionnaire page) — cosmetic only, since the local JSON is the source of truth for
   the pipeline, but worth knowing if the artifacts are ever reopened for further editing.
 
-## Current adopted configuration (as persisted in `phase_g_keypress_assignment.json`)
+## Current adopted configuration (as persisted in `keypress_groups.json`)
 
 **Hard constraints:**
 - `f` shares its keypress with nothing else.
@@ -140,7 +140,7 @@ next is optimized):**
 
 **Result: K=6, 0 conflicts (verified against all 47,799 groups), all 3 soft tiers fully
 achieved.** Keypress table (labels are arbitrary/solver-chosen — re-running
-`build_phase_g_assignment` can permute which integer maps to which group, but the
+`build_keypress_groups` can permute which integer maps to which group, but the
 *groupings* themselves are what's been decided):
 - `{f}`
 - `{impératif, pers_1}`
@@ -171,7 +171,7 @@ disambiguated it.
    greedy coloring tractable), not the real constraint. The real constraint (every
    group's induced press-sets pairwise distinct) is directly encodable in CP-SAT and,
    with only 218 distinct signatures, tractable to solve exactly (~3s). First proof
-   found K=5 (before the `impératif` fix below); this is the origin of `phasegsat.py`.
+   found K=5 (before the `impératif` fix below); this is the origin of `featuregroupingsat.py`.
 3. **`nbr_p`/`p` colocation was investigated as hard-vs-soft** — the user asked "can
    this be favorized rather than forced"; led to building
    `minKeypressesSatPreferring` (find true min K unconstrained, then prefer as
@@ -188,10 +188,10 @@ disambiguated it.
    true minimum K rose from 5 to 6, because `impératif` can no longer share a keypress
    with anything (with the fix, sharing would mean pressing it also silently asserts
    whatever it's bundled with — breaking auto-definition). This is a real, structural
-   cost of the fix, not a bug in Phase G. **Final exhaustive check** (see below)
+   cost of the fix, not a bug in Grouping Phase. **Final exhaustive check** (see below)
    confirms the fixed property holds universally, not just for the 194 sampled
    oppositions.
-5. **"Auto-defining" clarified as a Phase E (data) property, not a Phase G (keypress
+5. **"Auto-defining" clarified as a Elicitation Phase (data) property, not a Grouping Phase (keypress
    assignment) property.** The user's later precision — "the key CAN be shared for
    other features, just not comboed with another key when discriminating impératif" —
    led to realizing `impératif` does NOT need to be isolated on its own keypress; it
@@ -253,9 +253,9 @@ issues, one real fix applied, one investigated and found to be a non-issue:
   `_dictionary.frequentWords`. One test added
   (`test_buildFrequencyByGroupOrtho_zeroes_out_frequent_words`), 21/21
   `elicitation_test.py` passing. **Not yet regenerated**: `resolved_press_sets.json` and
-  `phase_g_keypress_assignment.json` still hold the old (pre-exclusion) frequency
-  numbers — rerun `python -m src.elicitation` then `python -m util.build_phase_g_assignment`
-  to refresh them before trusting the report for Phase P.
+  `keypress_groups.json` still hold the old (pre-exclusion) frequency
+  numbers — rerun `python -m src.elicitation` then `python -m util.build_keypress_groups`
+  to refresh them before trusting the report for Realization Phase.
 
 ## Still open / not yet done
 
@@ -263,8 +263,8 @@ issues, one real fix applied, one investigated and found to be a non-issue:
    not merged to `main`, and no PR has been created — GitHub offered
    `https://github.com/jf5pier/stenalgo/pull/new/phase-g-grouping`. User has not yet
    said whether/when to open it.
-2. **Phase P (physical realization) — still not started.** This is now the natural next
-   phase per the plan, with the abstract Phase G output finally settled. The plan
+2. **Realization Phase (physical realization) — still not started.** This is now the natural next
+   phase per the plan, with the abstract Grouping Phase output finally settled. The plan
    already documents known real bugs waiting there (not yet investigated this session):
    - `_isFeasibleAddition` (`src/ambiguitychecker.py:243`) misses cross-cluster
      new-vs-new collisions between two newly composed chords.
@@ -275,22 +275,22 @@ issues, one real fix applied, one investigated and found to be a non-issue:
      (`feasibleComboPhonemes[0][0]`).
    - Wiring/persistence: call from `dictionary.py`'s `__main__`, fed by the E6 artifact;
      persist stroke→word output.
-3. **`greedyColorMarkers`/`runPhaseG` in `phaseg.py` is now superseded in practice** by
-   `phasegsat.py` for the actual adopted result, but was NOT removed or deprecated —
+3. **`greedyColorMarkers`/`runFeatureGrouping` in `featuregrouping.py` is now superseded in practice** by
+   `featuregroupingsat.py` for the actual adopted result, but was NOT removed or deprecated —
    still useful as a fast/cheap sanity check or fallback. No decision made about
-   whether to keep both long-term or fold the CP-SAT path into `phaseg.py` itself.
+   whether to keep both long-term or fold the CP-SAT path into `featuregrouping.py` itself.
 4. **`resolved_press_sets_pers3default.json` is now a stale, meaningless filename**
    (harmless since gitignored) — could be cleaned up but wasn't.
 5. Two harmless untracked files, unchanged from the prior session, still unaddressed:
    `scratch/callgraph` (old pasted transcript) and `sameLemmeHomophoneResolution.txt`
    (a one-line stray note, never explained).
 6. **CORRECTION (later same addendum): the stroke-pairing analysis below is invalid as
-   written — built on the wrong physical keys.** It paired Phase G's keypress groups
+   written — built on the wrong physical keys.** It paired Grouping Phase's keypress groups
    against the 4 *reserved* keys `[0,1,10,15]`. Per `RESUME_2026-09-18.md`'s authoritative
    design decision #1 (ROADMAP 2026-09-15, unchanged since): those 4 reserved keys are
    exclusive to the lemma-homophone (`*`/`#`) track — a *different* disambiguation track
-   (different lemmas, same sound) from Phase G's same-lemma conjugation markers
-   (`impératif`, `pers_1`, `f`, `nbr_p`, ...). Phase G's markers are meant to be realized
+   (different lemmas, same sound) from Grouping Phase's same-lemma conjugation markers
+   (`impératif`, `pers_1`, `f`, `nbr_p`, ...). Grouping Phase's markers are meant to be realized
    from the **coda bank** instead (`starboard3h.json`'s `coda: [16..25]`, all 10 keys on
    the right hand: right index minus reserved 15, right middle, right ring, right
    pinky) — never the reserved keys. That same 2026-09-18 session also explicitly
@@ -300,7 +300,7 @@ issues, one real fix applied, one investigated and found to be a non-issue:
    coda-phoneme chord actually used by words needing that marker — a real
    collision-feasibility problem against the live theory, not a plain cost-sort. The
    frequency-weighted usage numbers below (post top-200-word-fix) are still valid and
-   useful as Phase P input; the reserved-key stroke table paired against them is not and
+   useful as Realization Phase input; the reserved-key stroke table paired against them is not and
    should not be used. Left in place below for the record, marked invalid.
 7. **[INVALID, see item 6 above — used the wrong physical keys, kept for the record only]**
    Frequency-weighted chord-size analysis on the FINAL adopted K=6 assignment was
@@ -311,9 +311,9 @@ issues, one real fix applied, one investigated and found to be a non-issue:
    any cross-hand pinky+index combo, matching K=6). Proposed pairing (busiest group →
    cheapest stroke) using the **pre-fix** numbers gave `{impératif, pers_1}` the top
    spot (31.3%, almost entirely from ~9 top-200 words like `ai`/`va`/`sais`). **Recomputed
-   after regenerating `resolved_press_sets.json` and `phase_g_keypress_assignment.json`
+   after regenerating `resolved_press_sets.json` and `keypress_groups.json`
    with the top-200-word exclusion applied** (`python -m src.elicitation && python -m
-   util.build_phase_g_assignment`, both rerun this addendum session) — the ranking
+   util.build_keypress_groups`, both rerun this addendum session) — the ranking
    changed materially, confirming the exclusion was not cosmetic:
 
    | rank | group | share (post-fix) | share (pre-fix) |
@@ -341,20 +341,20 @@ issues, one real fix applied, one investigated and found to be a non-issue:
 
 ```bash
 python -m src.elicitation                    # resolved_press_sets.json, questionnaire.json
-python -m src.phaseg                          # greedy baseline (K=6, NOT proven-minimal)
-python -m src.phasegsat                       # CP-SAT proof of true minimum (no preferences)
-python -m util.build_phase_g_assignment       # THE canonical adopted assignment (all constraints)
+python -m src.featuregrouping                          # greedy baseline (K=6, NOT proven-minimal)
+python -m src.featuregroupingsat                       # CP-SAT proof of true minimum (no preferences)
+python -m util.build_keypress_groups       # THE canonical adopted assignment (all constraints)
 pytest src/test/                              # 489 tests, all synthetic fixtures except
-                                               # elicitation_test.py/phaseg_test.py's real-data
+                                               # elicitation_test.py/featuregrouping_test.py's real-data
                                                # __main__ paths (not exercised by pytest)
 ```
 
-To explore a different bundling decision without committing to it, use `phasegsat.py`'s
+To explore a different bundling decision without committing to it, use `featuregroupingsat.py`'s
 functions directly (see module docstrings) or the CLI:
 ```bash
-python -m src.phasegsat marker1:marker2      # HARD: force together (can fail/inflate K)
-python -m src.phasegsat marker1~marker2      # SOFT: prefer together (never inflates K)
+python -m src.featuregroupingsat marker1:marker2      # HARD: force together (can fail/inflate K)
+python -m src.featuregroupingsat marker1~marker2      # SOFT: prefer together (never inflates K)
 ```
 For hard `aloneKeys`/`mustDifferGroups` or the multi-tier priority system, there's no
 CLI surface yet — call `minKeypressesSat`/`minKeypressesSatWithPriorities` directly (see
-`util/build_phase_g_assignment.py` for a worked example).
+`util/build_keypress_groups.py` for a worked example).

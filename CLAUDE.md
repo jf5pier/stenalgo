@@ -27,8 +27,18 @@ python lexique.py
 # Run dictionary processing and optimization pipeline
 python dictionary.py
 
-# Rebuild the Phase P physical-realization artifact
-python -m util.build_phase_p_realization
+# Resolve the discriminating feature sets from elicitation_answers.json (Elicitation Phase)
+python -m src.elicitation
+
+# Group the atomic features onto Keypress Groups (Grouping Phase) -> keypress_groups.json
+python -m util.build_keypress_groups
+
+# Rebuild the realization report (Realization Phase, report build) -> realization_report.json
+python -m util.build_realization_report
+
+# Export the Plover dictionary and key table
+python -m util.export_plover_dictionary
+python -m util.export_plover_system
 
 # Regenerate steno-trainer's data exports (run after starboard3h.json or the lexicon changes)
 python -m util.export_keyboard_layout
@@ -41,27 +51,32 @@ python -m util.export_definitions
 
 ### Processing Pipeline
 
-The two homophone problems have separate mechanisms, decided by the 2026-09-18
-elicitation-first pivot. **Authoritative status docs: `ROADMAP.md`'s "Status update"
-section and `ATOMIC_KEYPRESS_REWIRE_PLAN.md`** — read those before touching the
-disambiguation layers; older notes describing a solver-picks-features design are
-superseded.
+**Full reference: `docs/PIPELINE.md`** (call graph, rebuild order, dataset states) and
+**`docs/GLOSSARY.md`** (canonical vocabulary; maps legacy names such as "Phase G",
+"press-set", "marker", "cluster" to current ones). Stages and phases are cited by
+descriptive name with the code in parentheses. The two homophone problems have separate
+mechanisms, decided by the 2026-09-18 elicitation-first pivot; older notes describing a
+solver-picks-features design are superseded. Current status and open decisions:
+`ROADMAP.md`'s "Status update" section and `todo.md`.
 
-1. **Lexicon Building** (`lexique.py`) — Merges Lexique383 and LexiqueInfra into `resources/LexiqueMixte.tsv` (136k French words with frequencies, phoneme and grapheme syllable breakdowns)
-2. **Dictionary Loading** (`dictionary.py`) — Indexes words by orthography, lemma, and frequency; identifies homophones; excludes words from `excluded_words.txt`
-3. **Feature Extraction** (`src/featureextractor.py`) — Analyzes homophones and extracts discriminating features (grammatical category, gender, number, etc.); feeds the legacy path below
-4. **Phoneme layout (solved, static)** — `src/cpsatsolver.py::optimizeKeyboard` (CP-SAT minimizing ambiguity/ergonomics/order violations) is real but its call is commented out; the live pipeline loads the committed `starboard3h.json` instead
-5. **Same-lemma homophones (elicit → group → realize)**:
-   - **Phase E** (`src/elicitation.py`) — the user's own marker presses, elicited pair-by-pair via a web questionnaire (`elicitation_answers.json` tracked; `resolved_press_sets*.json` gitignored, regenerable)
-   - **Phase G** (`src/phaseg.py` greedy, `src/phasegsat.py` exact CP-SAT) — groups elicited markers onto abstract keypresses (K=5, proven optimal; adopted output `phase_g_keypress_assignment.json`)
-   - **Phase P** (`src/ambiguitychecker.py::realizeKeypressGroupsAsExtraStroke`) — realizes each group as a physical coda-bank extra trailing stroke; canonical build `python -m util.build_phase_p_realization` → `phase_p_keypress_realization.json`. The must-stay-green regression: 0 residual same-`lemmeGramCat` collisions
-6. **Lemma-homophones (`*`/`#` track)** (`src/ambiguitychecker.py`) — `decideStarHashMark` rule stack (homograph exemption → 1990-reform doublet → per-pair `MARKING_OVERRIDES` → 10x frequency-ratio exemption → same-`gramCat` → `GRAMCAT_PRIORITY`) → `rankHomophoneCluster`/`assignStarHashMarks` (N-ary, escalates with extra `*#` syllables) → `assignStarHashPhysicalStrokes`/`composeReservedKeyStrokes` (`STAR_KEY`=10, `HASH_KEY`=15, keys 0/1 held for a possible 3rd mark). Wired into `Dictionary.buildFinalTheory` (theory 2 → `theory2.tsv`, the Plover dictionary and the steno-trainer exports); the mark's first symbol is pressed with the word's last phoneme stroke (`*a`, `swa#`), only escalated codes add bare-mark strokes (`util/_stenorender.py` renders them the way Plover writes them)
-7. **Legacy path still live in `dictionary.py` `__main__` (superseded, retirement pending)** — `buildDiscriminatorSelection` + `satOptimizeDiscriminator` color solver-chosen same-lemma features onto the reserved keys and only print; `src/greedyoptimizer.py`'s `assignDiscriminatorKeypresses` is orphaned (implemented, tested, never called). `FEATURE_PRIORITY`/`GRAMCAT_PRIORITY` in `src/greedyoptimizer.py` still do live work (canonical-form picks)
+1. **Lexicon Building (S1)** (`lexique.py`) — Merges Lexique383 and LexiqueInfra into `resources/LexiqueMixte.tsv` (136,456 rows with frequencies, phoneme and grapheme syllable breakdowns); applies `lexiconExclusions.tsv` and the 1990-reform rewrites
+2. **Synthetic Lexicon Building (S2)** (`util/completeVerbParadigms.py`, `util/generateMissingNomAdjForms.py`, `util/fix*.py`, run by hand) — appends missing paradigm forms to `resources/LexiqueSynthetic.tsv` (42k rows); the verb completion is gated by the legacy feature extraction (`src/featureextractor.py`)
+3. **Dictionary Loading (S3)** (`dictionary.py`) — Reads `LexiqueMixte.tsv` + `LexiqueSynthetic.tsv` into 167,639 Words (identity merge), indexes them by orthography and lemma, excludes words from `excluded_words.txt`, builds the syllable inventory; cached in `Dictionary.pickle`
+4. **Keyboard Layout Optimization (S4)** (`src/cpsatsolver.py::optimizeKeyboard`, CP-SAT minimizing ambiguity/ergonomics/order violations, fed by the layout statistics `optimizeBiphonemeOrder`/`analyseAmbiguities`) — a real, rare and costly stage whose solver call is commented out (dictionary.py:494); the live pipeline loads the committed `starboard3h.json`, and no command regenerates it today
+5. **Phonetic Theory Building (S5)** (`Dictionary.buildTheory`) — theory 1: phonetic strokes per Word, homophones sharing one raw stroke sequence; cached in `FirstTheory.pickle`, human view `theory.tsv`
+6. **Same-Lemma and Grammatical-Category Disambiguation (S6)** — separates the Homophone Groups (same `lemmeGramCat`, same canonical strokes) in three phases:
+   - **Discriminating-Feature Elicitation (Elicitation Phase)** (`src/elicitation.py`, `python -m src.elicitation`) — Questionnaire Generation, Answer Collection (the user's own feature presses, pair by pair via a web questionnaire; `elicitation_answers.json` tracked) and Press-Set Resolution (`resolved_press_sets*.json`, gitignored, regenerable)
+   - **Discriminating-Feature Grouping (Grouping Phase)** (`src/featuregroupingsat.py` exact CP-SAT, `python -m util.build_keypress_groups`) — groups the atomic features onto Keypress Groups (K=7, proven optimal; tracked output `keypress_groups.json`). The greedy `src/featuregrouping.py` path is not live; only its loaders and verifiers are used
+   - **Discriminating-Feature Stroke Realization (Realization Phase)** (`src/ambiguitychecker.py::realizeKeypressGroupsAsExtraStroke`) — realizes each Keypress Group as a coda-bank feature discriminating stroke. Two call sites: the **inline path** (inside `Dictionary.buildFinalTheory`, feeds theory 2 and every export) and the **report build** (`python -m util.build_realization_report` → the tracked realization report `realization_report.json`, read only by the trainer keyboard legend). The must-stay-green regression: 0 residual same-lemmeGramCat collisions
+7. **Different-Lemma or Grammatical-Category Disambiguation (S7)** (`src/ambiguitychecker.py`) — star/hash marks for lemma-homophone groups. `decideStarHashMark` rule stack (homograph exemption (R1) → reform-doublet exemption (R2) → per-pair override (R3, `MARKING_OVERRIDES`) → frequency-ratio rule (R4, 10x) → same-category rule (R5) → category-priority rule (R6, `GRAMCAT_PRIORITY`) → frequency fallback (R7)) → `rankHomophoneCluster`/`assignStarHashMarks` (N-ary, escalates with extra `*#` syllables) → `assignStarHashPhysicalStrokes`/`composeReservedKeyStrokes` (`STAR_KEY`=10, `HASH_KEY`=15, keys 0/1 held for a possible third mark). Wired into `Dictionary.buildFinalTheory` (theory 2); the mark's first symbol is pressed with the word's last phoneme stroke (`*a`, `swa#`), only escalated codes add \*/# marker strokes (`util/_stenorender.py` renders them the way Plover writes them)
+8. **Theory Export (S8)** — two branches, Plover (`util/export_plover_dictionary.py`, `util/export_plover_system.py`) and steno-trainer (`util/export_keyboard_layout.py`, `export_practice_words.py`, `export_practice_sentences.py`, `export_definitions.py`). **Nothing reads `theory2.tsv`** (a gitignored human view written by `python dictionary.py`): every exporter recomputes theory 2 through `util/_theoryio.py` (`loadFirstAndFinalTheory` → `Dictionary.buildFinalTheory`)
+
+Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`FirstTheory.pickle` whenever they exist and never checks them against the lexicon or layout (`rm -f *.pickle` after any lexicon or layout change); pin `PYTHONHASHSEED=0` when the tracked realization report must be reproducible. The legacy discriminator path (`buildDiscriminatorSelection`, `satOptimizeDiscriminator`, `assignDiscriminatorKeypresses`) no longer runs in `dictionary.py` `__main__`: `satOptimizeDiscriminator` and `assignDiscriminatorKeypresses` are test-only, `src/featureextractor.py` feeds only Synthetic Lexicon Building (S2)'s gating and the `ambiguitychecker` diagnostic, and of `FEATURE_PRIORITY`/`GRAMCAT_PRIORITY` in `src/greedyoptimizer.py` only `GRAMCAT_PRIORITY` is live (category-priority rule (R6)). Suspected bugs found during the docs refactor are listed in `todo.md`.
 
 ### Core Data Model
 
-- **`src/grammar.py`** — Phonology primitives: `Phoneme`, `Biphoneme`, `Multiphoneme`, `Syllable` and their collection classes. French uses 23 consonants + 16 vowels in X-SAMPA notation (single ASCII characters).
-- **`src/word.py`** — `Word` dataclass with orthography, phonology, lemma, `GramCat` enum (21 grammatical categories), gender/number, verb conjugation info, corpus frequencies (books + film subtitles).
+- **`src/grammar.py`** — Phonology primitives: `Phoneme`, `Biphoneme`, `Multiphoneme`, `Syllable` and their collection classes. French uses 20 consonants + 16 vowels (nucleus phonemes) in X-SAMPA notation (single ASCII characters).
+- **`src/word.py`** — `Word` dataclass with orthography, phonology, lemma, `GramCat` enum (22 grammatical categories), gender/number, verb conjugation info, corpus frequencies (books + film subtitles).
 - **`src/keyboard.py`** — Abstract `Keyboard` base class; `Starboard` implementation with `FingerWeights`/`PositionWeights` cost models. Key type aliases: `Stroke`, `Strokes`, `Keypress`.
 
 ### Key Constants (cpsatsolver.py)
@@ -74,7 +89,7 @@ superseded.
 ## Conventions
 
 - Phonemes use X-SAMPA notation (single ASCII chars, e.g., `@` for schwa, `R` for French R)
-- Syllables decompose into Onset (consonants) → Nucleus (vowels) → Coda (consonants)
+- Syllables decompose into Onset (consonants) → Nucleus (vowels) → Coda (consonants); `8` (ɥ) is a nucleus phoneme, `j`/`w` are consonants, all consonants after the first vowel go to the coda, and a vowel-less syllable goes entirely to the onset
 - TSV files use tab separators; recent commits fixed spaces-vs-tabs issues
-- `starboard3h.json` contains the pre-optimized keyboard mapping (26 keys, 4 reserved for control)
+- `starboard3h.json` contains the pre-optimized keyboard mapping (26 keys: 22 phoneme keys + 4 reserved keys, 10 `*` and 15 `#` for the star/hash marks, 0/1 held for a possible third mark)
 - Resource lexicon files in `resources/` are large (10-25MB TSV); `top500_books.txt` and `top500_film.txt` define frequent words

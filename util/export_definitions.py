@@ -1,7 +1,9 @@
 """
 Export the steno-trainer's definition-mode lookup table: every word of the final
 theory, grouped by the base (theory-1) chord it shares with its homophones -- the
-words Phase P's conjugation marks and the `*`/`#` track have to tell apart -- each
+words the conjugation marks of Discriminating-Feature Stroke Realization (Realization
+Phase) and the star/hash marks of Different-Lemma or Grammatical-Category
+Disambiguation (S7) have to tell apart -- each
 with its readings, phonology and final chord(s).
 
 Grouping is by physically-realized base chord (`canonicalizeStrokes`), not by

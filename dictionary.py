@@ -349,17 +349,19 @@ class Dictionary:
         spelling (more than one valid reading, e.g. "calmez" = impératif or indicatif
         présent -- see src.elicitation.resolveGroupPressSets) has more than one
         independently-valid stroke, each identifying it without the others. Index 0 is
-        always the word's PRIMARY stroke: theory 1 (buildTheory) composed with Phase P's
-        same-lemma coda-bank realization (src.ambiguitychecker.realizeKeypressGroupsAsExtraStroke)
-        and the `*`/`#` lemma-homophone reserved-key track
-        (src.ambiguitychecker.composeReservedKeyStrokes) on top, its first mark key
-        pressed together with the word's last phoneme stroke. Any further entries are
-        the word's OTHER readings (src.ambiguitychecker.buildExtraInducedStrokes),
+        always the word's PRIMARY stroke: theory 1 (buildTheory) composed with the
+        same-lemma coda-bank realization of Discriminating-Feature Stroke Realization
+        (Realization Phase) (src.ambiguitychecker.realizeKeypressGroupsAsExtraStroke)
+        and the star/hash mark reserved keys of Different-Lemma or Grammatical-Category
+        Disambiguation (S7) (src.ambiguitychecker.composeReservedKeyStrokes) on top, its
+        first mark key pressed together with the word's last phoneme stroke. Any further
+        entries are the word's OTHER readings (src.ambiguitychecker.buildExtraInducedStrokes),
         reusing whatever physical keys the primary pass already decided -- NOT run
-        through the `*`/`#` track (that track isn't wired into a self-homograph's
-        alternates yet, the same scope boundary ROADMAP.md already notes for the
-        cross-lemma track generally). Requires `keypressGroupsPath` (Phase G,
-        `python -m util.build_keypress_groups`) and `resolvedPressSetsPath` (Phase E,
+        through S7 (that stage isn't wired into a self-homograph's alternates yet, the
+        same scope boundary ROADMAP.md already notes for the star/hash mark track
+        generally). Requires `keypressGroupsPath` (Discriminating-Feature Grouping
+        (Grouping Phase), `python -m util.build_keypress_groups`) and
+        `resolvedPressSetsPath` (Discriminating-Feature Elicitation (Elicitation Phase),
         `python -m src.elicitation`) to already exist.
         """
         with open(keypressGroupsPath, encoding="utf-8") as f:
@@ -521,8 +523,8 @@ if __name__ == "__main__":
     #                 print(iv)
     #                 infoVerbs.append(iv)
     # sys.exit(1)
-    # Theory 2: Phase P's same-lemma coda-bank realization + the */# lemma-homophone
-    # reserved-key track, composed on top of theory 1 (see ROADMAP.md's "What's left to
+    # Theory 2: the Realization Phase's same-lemma coda-bank realization + the star/hash
+    # mark track's reserved keys, composed on top of theory 1 (see ROADMAP.md's "What's left to
     # do" -- this retires the superseded solver-picks-features path that used to run
     # here, whose satOptimizeDiscriminator conflict count had gone vestigial).
     keypressGroupsPath = "keypress_groups.json"
