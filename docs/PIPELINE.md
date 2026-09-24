@@ -32,9 +32,7 @@ How to read it:
 
 ## How to run a full rebuild
 
-The real dependency order. Run the steps that write the pickles with `PYTHONHASHSEED=0`
-pinned when byte-reproducible tracked outputs matter (fact 3 below). Steps 0 and 1 and the
-human loop 4h are run by hand, not by any script.
+The real dependency order. Steps 0 and 1 and the human loop 4h are run by hand, not by any script.
 
 | # | Command | Stage | Needed when | Notes |
 |---|---|---|---|---|
@@ -73,7 +71,7 @@ wall time — plus the heavyweight phases inside `util.build_phonetic_theory` an
 `util.build_disambiguated_theory` — is appended to the gitignored
 `pipeline_timings.log` (util/_timing.py).
 
-Five facts that the command list does not show:
+Four facts that the command list does not show:
 
 1. **Nothing reads `disambiguated_theory.tsv`.** It is a gitignored human view. Every exporter that
    needs the disambiguated theory recomputes it (`util/_theoryio.loadPhoneticAndDisambiguatedTheory` →
@@ -86,21 +84,12 @@ Five facts that the command list does not show:
    lexicon or layout change without step 2, every later step silently works on the old
    Word list and old strokes. `phonetic_theory.tsv` is rewritten on every run (2026-09-24,
    TODO.md B14 fixed), so it always matches the cached theory the run used — stale or not.
-3. **`PYTHONHASHSEED` changes pickle contents.** Each Word's identity hash (`Word._hash`,
-   src/word.py:94) is Python's per-process salted `hash()` of its fields, computed when the
-   Word is built and stored in the pickles. The Realization Phase iterates a `set` of Words
-   when it lists residual collisions, so a clean rebuild (new pickles, new hash values)
-   reorders those lists in `realization_report.json`. With the same pickles, four
-   different seeds gave identical `disambiguated_theory.tsv`, realization report and Plover dictionary;
-   fresh pickles changed only the report's residual lists. Pin `PYTHONHASHSEED` for the run
-   that writes the pickles when the tracked report must be reproducible. See TODO.md
-   § Suspected bugs, item B11.
-4. **The realization report is read by one exporter.** `export_keyboard_layout.py:128`
+3. **The realization report is read by one exporter.** `export_keyboard_layout.py:128`
    takes the conjugation-feature legend from the tracked `realization_report.json`,
    while the Plover dictionary and drills use the keys recomputed on the inline path. Skip
    step 6 after a change of keypress groups and the legend disagrees with the dictionary
    (item B18).
-5. **`starboard3h.json` is regenerated only deliberately.** Keyboard Layout Optimization
+4. **`starboard3h.json` is regenerated only deliberately.** Keyboard Layout Optimization
    (S4) is a real stage with its own command, `python -m util.optimize_keyboard`, which
    writes `starboard3h_optimized.json` by default (`--output starboard3h.json` targets the
    seed explicitly); `util.build_phonetic_theory` itself only reads the layout.

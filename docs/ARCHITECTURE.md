@@ -386,8 +386,7 @@ the pickle caches are never checked for staleness.
 
 Diagnostics, also gitignored: `ambiguity_report.tsv` is written by hand-running
 `python src/ambiguitychecker.py` after Phonetic Theory Building (S5) — it is not part of
-any rebuild. Pin `PYTHONHASHSEED=0` when a reproducible tracked report matters (Word hashes
-are salted per process; see PIPELINE.md §How to run a full rebuild).
+any rebuild.
 
 ## Deployment notes
 
