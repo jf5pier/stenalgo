@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # coding: utf-8
 #
+import hashlib
 import re
 from dataclasses import dataclass, field
 from enum import Enum
@@ -91,7 +92,13 @@ class Word:
         # Formula to be optimized following the need of the typist
         # self.frequency = 0.9*self.frequencyFilm + 0.1* self.frequencyBook
         self.frequency = self.frequencyFilm
-        self._hash = hash(f"{self.ortho}{self.phonology}{self.lemme}{self.gramCat.name}{self.gender}{self.number}")
+        # Stable across processes (unlike the salted builtin hash()), so a pickled Word and a
+        # freshly built one agree, and set[Word] iteration order no longer follows
+        # PYTHONHASHSEED (B43, B27).
+        self._hash = int.from_bytes(
+            hashlib.blake2b("\x1f".join(map(str, self.identity())).encode(),
+                            digest_size=8).digest(),
+            "big", signed=True)
         self._infoVerb = [self.splitInfoVerb(infoVerb)
                             for infoVerb in filter(lambda iv: iv != '', self.infoVerb.split(";"))
                             ] if self.infoVerb is not None else None
@@ -151,6 +158,11 @@ class Word:
         self._infoVerb = [self.splitInfoVerb(iv)
                             for iv in filter(lambda iv: iv != '', self.infoVerb.split(";"))]
 
+    def identity(self) -> tuple[str, str, str, str, str | None, str | None]:
+        """ The fields that make two Words the same homograph (see mergeInfoVerb). """
+        return (self.ortho, self.phonology, self.lemme, self.gramCat.name,
+                self.gender, self.number)
+
     @override
     def __hash__(self) -> int:
         return self._hash
@@ -158,7 +170,7 @@ class Word:
     def __eq__(self, other):
         if not isinstance(other, Word):
             return NotImplemented
-        return self._hash == other._hash
+        return self._hash == other._hash and self.identity() == other.identity()
 
     def getFeatures(self) -> list[WordFeature]:
         """

@@ -232,6 +232,21 @@ class TestHashAndEq:
         assert w.__eq__(42) is NotImplemented
         assert w.__eq__(None) is NotImplemented
 
+    def test_hash_independent_of_pythonhashseed(self):
+        """B43: the hash is pickled with the Word, so it must not follow the salted
+        builtin hash() -- two processes with different seeds must agree."""
+        import subprocess, sys, os
+        code = ("from src.test.word_test import _make_word; print(hash(_make_word()))")
+        outs = {subprocess.run([sys.executable, "-c", code], capture_output=True, text=True,
+                               check=True, env={**os.environ, "PYTHONHASHSEED": seed}).stdout
+                for seed in ("0", "1", "12345")}
+        assert len(outs) == 1
+
+    def test_field_boundaries_do_not_collide(self):
+        w1 = _make_word(ortho="ab", phonology="c")
+        w2 = _make_word(ortho="a", phonology="bc")
+        assert w1 != w2
+
     def test_usable_in_set(self):
         w1 = _make_word()
         w2 = _make_word()
