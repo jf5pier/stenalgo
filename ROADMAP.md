@@ -88,7 +88,7 @@ briefs).
 - **Elicitation margin mechanism** — where a strict/lenient margin would live (global,
   per-gramCat, or per-Homophone Group) and its default. Carried from the pre-pivot design;
   still undecided.
-- **Noun homophones inside verb theory-1 collisions** — a noun sharing a verb's theory-1
+- **Noun homophones inside verb phonetic-theory collisions** — a noun sharing a verb's phonetic-theory
   stroke (noun `parlé` in the [paʁle] collision): feature discriminating stroke (Same-Lemma
   and Grammatical-Category Disambiguation (S6)) or star/hash mark (Different-Lemma or
   Grammatical-Category Disambiguation (S7))? Still undecided.

@@ -71,7 +71,7 @@ def buildLemmaHomophoneGroups(theory: dict[Strokes, list[Word]]) -> dict[LemmaHo
     reserved keys) and is not built here.
 
     `theory`'s own dict keys are the raw, order/repeat-preserving Strokes tuples
-    `Dictionary.buildTheory` builds per word (useful for `strokesToString`'s
+    `Dictionary.buildPhoneticTheory` builds per word (useful for `strokesToString`'s
     human-readable rendering), not the physically-realized chord -- two words can
     collide on the same physical stroke while landing in different `theory` entries
     (differing key order, or one phoneme's dedicated key already covered by another
@@ -652,15 +652,18 @@ if __name__ == "__main__":
     import pickle
 
     from src.grammar import Syllable
-    from dictionary import Dictionary  # must stay at the guard's top level: the name has
-    # to land in __main__'s globals so unpickling finds __main__.Dictionary (the same
-    # trick src/ambiguitychecker.py's __main__ relies on; util/_theoryio.py aliases it).
+    from dictionary import Dictionary  # must stay at the guard's top level: pickles
+    # written by dictionary.py's old buildOnly (removed 2026-09-24) recorded the class
+    # as __main__.Dictionary, so the name has to land in __main__'s globals for them
+    # (the same trick src/ambiguitychecker.py's __main__ relies on; util/_theoryio.py
+    # aliases it) -- pickles written by util.build_phonetic_theory record
+    # dictionary.Dictionary and resolve through this import regardless.
     from src.keyboard import Starboard
 
     args = parseArgs(sys.argv[1:])
 
-    if not os.path.exists("Dictionary.pickle") or not os.path.exists("FirstTheory.pickle"):
-        raise RuntimeError("Run `python dictionary.py` first to build Dictionary.pickle / FirstTheory.pickle.")
+    if not os.path.exists("Dictionary.pickle") or not os.path.exists("PhoneticTheory.pickle"):
+        raise RuntimeError("Run `python -m util.build_phonetic_theory` first to build Dictionary.pickle / PhoneticTheory.pickle.")
 
     with open("Dictionary.pickle", "rb") as pfile:
         _dictionary = pickle.load(pfile)
@@ -669,7 +672,7 @@ if __name__ == "__main__":
         Syllable.biphonemeColByPart = pickle.load(pfile)
         Syllable.multiphonemeColByPart = pickle.load(pfile)
 
-    with open("FirstTheory.pickle", "rb") as pfile:
+    with open("PhoneticTheory.pickle", "rb") as pfile:
         theory: dict[Strokes, list[Word]] = pickle.load(pfile)
 
     homophoneGroups = buildLemmaHomophoneGroups(theory)

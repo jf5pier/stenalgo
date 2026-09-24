@@ -54,7 +54,7 @@ OLD_TEMPLATE = "aim:er"
 NEW_TEMPLATE = "étudi:er"
 
 # The 48 "aim:er" donors whose rawOrthosyllCV is vowel-final/hiatus
-# (doesn't end in "_er"), confirmed via FirstTheory.pickle this session --
+# (doesn't end in "_er"), confirmed via PhoneticTheory.pickle this session --
 # excludes the 4 anglicism outliers (see module docstring).
 VOWEL_FINAL_LEMMAS = (
     "affluer", "agréer", "approprier", "clouer", "crier", "créer",

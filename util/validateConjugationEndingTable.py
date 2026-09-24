@@ -45,7 +45,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    print("Loading theory (uses FirstTheory.pickle if present)...")
+    print("Loading theory (uses PhoneticTheory.pickle if present)...")
     theory, _starboard = loadTheoryAndKeyboard()
     verbisteTemplates = loadVerbisteTemplates(VERBISTE_VERBS_PATH)
     exceptions = loadVerbModelExceptions(EXCEPTIONS_PATH)

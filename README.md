@@ -57,16 +57,16 @@ python -m util.build_synthetic_lexicon      # S2, converged -> LexiqueSynthetic.
 python -m util.optimize_keyboard            # S4, rare/costly -> starboard3h_optimized.json
 # Prerequisites: pickles or lexicons, starboard3h.json. Outputs: starboard3h_optimized.json
 # (--output to choose; never overwrites starboard3h.json silently).
-python dictionary.py --build-only           # S3+S5 -> pickles, theory.tsv (+ theory2.tsv)
+python -m util.build_phonetic_theory        # S3+S5 -> pickles, phonetic_theory.tsv
 # Prerequisites: lexicons + starboard3h.json; rm -f the pickles after any lexicon/layout change.
-# Outputs: Dictionary.pickle, FirstTheory.pickle, theory.tsv, theory2.tsv.
+# Outputs: Dictionary.pickle, PhoneticTheory.pickle, phonetic_theory.tsv.
 python -m src.elicitation --ask             # questionnaire -> questionnaire.json + HTML page
 # Prerequisites: both pickles. Outputs: questionnaire.json, elicitation_questionnaire.html.
 #   ... answer the page, copy the answers into elicitation_answers.json ...
 python -m src.elicitation --resolve         # resolve + group + report
 # Prerequisites: pickles + elicitation_answers.json. Outputs: resolved_press_sets.json,
 # keypress_groups.json, realization_report.json.
-python dictionary.py --build-only           # again -> refreshes theory2.tsv (S7)
+python -m util.build_disambiguated_theory   # S7 -> refreshes disambiguated_theory.tsv
 python -m util.export_plover_dictionary     # S8 Plover -> plover_stenalgo_dictionary.json
 python -m util.export_plover_system         # S8 Plover -> _generated_keys.py
 python -m util.export_keyboard_layout       # S8 trainer -> keyboard-layout.json
@@ -75,6 +75,8 @@ python -m util.export_practice_sentences    # S8 trainer -> practice-sentences.j
                                             # previous step's practice-words.json)
 python -m util.export_definitions           # S8 trainer -> definitions.json
 python dictionary.py                        # the orchestrator over everything from S2 to S8
+                                            # (per-step wall times in pipeline_timings.log,
+                                            #  gitignored)
 ```
 `python dictionary.py` aborts on the first failing step and re-runs cleanly; its Synthetic
 Lexicon Building (S2) wrapper loops the appenders to convergence and deletes/rebuilds the
@@ -82,7 +84,7 @@ pickles itself whenever they added rows. The NOM/ADJ cross-checkers additionally
 external Morphalou 3.1 corpus, extracted under `morphalou/` (gitignored, ~670 MB; CSV at
 `morphalou/Morphalou3.1_CSV.csv`) — without it the NOM/ADJ appender generates
 donor-table-only rows. After any hand-made lexicon or layout change, still delete
-`Dictionary.pickle`/`FirstTheory.pickle` before running — the caches are never checked for
+`Dictionary.pickle`/`PhoneticTheory.pickle` before running — the caches are never checked for
 staleness (see [docs/PIPELINE.md](docs/PIPELINE.md)).
 
 ## Documentation

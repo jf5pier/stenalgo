@@ -26,7 +26,7 @@ NUMBERS: dict[str, str] = {}
 UNDO_STROKE_STENO = "*"
 
 # Stenalgo strokes already resolve to exact spellings computationally (see
-# dictionary.py/writeFinalTheory); there's no English-style suffix-stacking
+# dictionary.py/writeDisambiguatedTheory); there's no English-style suffix-stacking
 # orthography to correct after the fact.
 ORTHOGRAPHY_RULES: list[tuple[str, str]] = []
 ORTHOGRAPHY_RULES_ALIASES: dict[str, str] = {}

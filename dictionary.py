@@ -22,15 +22,14 @@
 import csv
 import json
 import os
-import pickle
 import subprocess
+import time
 from copy import deepcopy
 
 from src.grammar import Phoneme, Syllable, SyllableCollection
 from src.word import GramCat, Word
-from typing import Any
-from src.keyboard import Keyboard, Starboard, Stroke, Strokes
-from src.cpsatsolver import optimizeKeyboard
+from typing import Any, Callable
+from src.keyboard import Keyboard, Strokes
 from src.ambiguitychecker import (
     buildExtraInducedStrokes,
     buildFinalInducedStrokes,
@@ -47,6 +46,9 @@ from src.ambiguitychecker import (
 
 from tqdm import tqdm
 import sys
+
+from util._timing import recordTiming
+
 
 def printVerbose(word: str, msg: list[Any]):
     # return
@@ -302,19 +304,19 @@ class Dictionary:
                                           ambiguity[syllabicPart].items()))
         return sorted(biphonemeAmbiguity, key=lambda x: x[1], reverse=False)
 
-    def buildTheory(self, keyboard: Keyboard) -> dict[Strokes, list[Word]]:
-        theory: dict[tuple[tuple[int, ...], ...], list[Word]] = {}
-        for word in tqdm(self.words, desc="Building theory", unit=" words", ascii=True, ncols=80):
+    def buildPhoneticTheory(self, keyboard: Keyboard) -> dict[Strokes, list[Word]]:
+        phoneticTheory: dict[tuple[tuple[int, ...], ...], list[Word]] = {}
+        for word in tqdm(self.words, desc="Building the phonetic theory", unit=" words", ascii=True, ncols=80):
             syllableNames = word.phonemesToSyllableNames(withSilent=False)
             syllableStrokes: tuple[tuple[int, ...], ...] = tuple(keyboard.getStrokeOfSyllableByPart(
                 self.syllableCollection.syllable_names[syllableName].phonemeNamesByPart())
                 for syllableName in syllableNames)
-            if syllableStrokes not in theory:
-                theory[syllableStrokes] = []
-            theory[syllableStrokes].append(word)
-        return theory
+            if syllableStrokes not in phoneticTheory:
+                phoneticTheory[syllableStrokes] = []
+            phoneticTheory[syllableStrokes].append(word)
+        return phoneticTheory
 
-    def writeTheory(self, theory: dict[Strokes, list[Word]], keyboard: Keyboard, filename: str) -> None:
+    def writePhoneticTheory(self, phoneticTheory: dict[Strokes, list[Word]], keyboard: Keyboard, filename: str) -> None:
         with open(filename, "w") as f:
             _ = f.write("strokes\twords\n")
             maxAmbiguity = 0
@@ -322,7 +324,7 @@ class Dictionary:
             maxFrequencyAmbiguity = 0.0
             maxFrequencyAmbiguityWords = []
             maxFrequencyAmbiguityStrokes= ()
-            for syllableStrokes, words in theory.items():
+            for syllableStrokes, words in phoneticTheory.items():
                 strokeString = keyboard.strokesToString(syllableStrokes)
                 wordOrthos = sorted(list(set(map(lambda w: w.ortho, words))))
                 sumFrequencies: float = sum(map(lambda w: w.frequency, words))
@@ -339,17 +341,18 @@ class Dictionary:
             print("Max frequency ambiguity:", maxFrequencyAmbiguity, "for words",
                   maxFrequencyAmbiguityWords, "\n strokes: ", maxFrequencyAmbiguityStrokes)
 
-    def buildFinalTheory(
-        self, theory: dict[Strokes, list[Word]], keyboard: Keyboard,
+    def buildDisambiguatedTheory(
+        self, phoneticTheory: dict[Strokes, list[Word]], keyboard: Keyboard,
         keypressGroupsPath: str = "keypress_groups.json",
         resolvedPressSetsPath: str = "resolved_press_sets.json",
     ) -> dict[Word, list[Strokes]]:
         """
-        Theory 2: every word's final resolved Strokes -- a LIST, since a self-homograph
-        spelling (more than one valid reading, e.g. "calmez" = impératif or indicatif
-        présent -- see src.elicitation.resolveGroupPressSets) has more than one
-        independently-valid stroke, each identifying it without the others. Index 0 is
-        always the word's PRIMARY stroke: theory 1 (buildTheory) composed with the
+        The disambiguated theory: every word's final resolved Strokes -- a LIST, since
+        a self-homograph spelling (more than one valid reading, e.g. "calmez" =
+        impératif or indicatif présent -- see src.elicitation.resolveGroupPressSets)
+        has more than one independently-valid stroke, each identifying it without the
+        others. Index 0 is always the word's PRIMARY stroke: the phonetic theory
+        (buildPhoneticTheory) composed with the
         same-lemma coda-bank realization of Discriminating-Feature Stroke Realization
         (Realization Phase) (src.ambiguitychecker.realizeKeypressGroupsAsExtraStroke)
         and the star/hash mark reserved keys of Different-Lemma or Grammatical-Category
@@ -372,32 +375,32 @@ class Dictionary:
         with open(resolvedPressSetsPath, encoding="utf-8") as f:
             resolvedGroups = json.load(f)
 
-        wordToStrokes = buildWordToStrokes(theory)
-        wordsByOrthoLemme = buildWordsByOrthoLemme(theory)
+        wordToStrokes = buildWordToStrokes(phoneticTheory)
+        wordsByOrthoLemme = buildWordsByOrthoLemme(phoneticTheory)
         groupToWords = buildKeypressGroupToWords(resolvedGroups, markersByKeypress, wordToStrokes, wordsByOrthoLemme)
         extraGroupSetsByWord = buildKeypressGroupExtraAlternates(
             resolvedGroups, markersByKeypress, wordToStrokes, wordsByOrthoLemme
         )
         preferredKeysByGroup = resolvePreferredKeysByGroup(markersByKeypress)
         assignment = realizeKeypressGroupsAsExtraStroke(
-            groupToWords, theory, keyboard,
+            groupToWords, phoneticTheory, keyboard,
             extraGroupSetsByWord=extraGroupSetsByWord, preferredKeysByGroup=preferredKeysByGroup,
         )
-        finalInduced = buildFinalInducedStrokes(theory, groupToWords, assignment)
+        finalInduced = buildFinalInducedStrokes(phoneticTheory, groupToWords, assignment)
         primaryComposed = composeReservedKeyStrokes(
             finalInduced, loadReform1990DoubletPairs(),
             phonemeStrokeCounts={word: len(strokes) for word, strokes in wordToStrokes.items()},
         )
-        extraByWord = buildExtraInducedStrokes(theory, assignment, extraGroupSetsByWord)
+        extraByWord = buildExtraInducedStrokes(phoneticTheory, assignment, extraGroupSetsByWord)
         return {word: [strokes] + extraByWord.get(word, []) for word, strokes in primaryComposed.items()}
 
-    def writeFinalTheory(
-        self, theory: dict[Strokes, list[Word]], finalTheory: dict[Word, list[Strokes]],
+    def writeDisambiguatedTheory(
+        self, phoneticTheory: dict[Strokes, list[Word]], disambiguatedTheory: dict[Word, list[Strokes]],
         keyboard: Keyboard, filename: str,
     ) -> None:
         """
         Writes `filename`: one row per (word, reading) -- a self-homograph word (see
-        `buildFinalTheory`) gets one row per independently-valid stroke, all sharing the
+        `buildDisambiguatedTheory`) gets one row per independently-valid stroke, all sharing the
         same ortho/lemme/gramCat/base-strokes columns and differing only in
         `extraStrokes`. Those extra strokes use coda-bank and reserved
         (STAR_KEY/HASH_KEY) keys that carry no single assigned phoneme, so
@@ -405,13 +408,13 @@ class Dictionary:
         raw key-index tuples instead, same as `build_realization_report.py` already
         reports `chosenKeys`.
         """
-        wordToStrokes = buildWordToStrokes(theory)
+        wordToStrokes = buildWordToStrokes(phoneticTheory)
         with open(filename, "w") as f:
             _ = f.write("ortho\tlemme\tgramCat\tstrokes\textraStrokes\n")
-            for word in sorted(finalTheory, key=lambda w: (w.lemme, w.gramCat.name, w.ortho)):
+            for word in sorted(disambiguatedTheory, key=lambda w: (w.lemme, w.gramCat.name, w.ortho)):
                 baseStrokes = wordToStrokes[word]
                 strokeString = keyboard.strokesToString(baseStrokes)
-                for fullStrokes in finalTheory[word]:
+                for fullStrokes in disambiguatedTheory[word]:
                     # A */# mark's first symbol is pressed with the last phoneme stroke
                     # (composeReservedKeyStrokes): written as a leading "+keys" element.
                     mergedKeys = sorted(set(fullStrokes[len(baseStrokes) - 1]) - set(baseStrokes[-1]))
@@ -452,10 +455,15 @@ def runStep(description: str, args: list[str]) -> None:
 
     Stdio is inherited (the step's output streams live) and the environment passes
     through unchanged, so a PYTHONHASHSEED pinned by the caller reaches every child.
-    Requires the repo root as cwd (runPipeline chdirs there first).
+    Requires the repo root as cwd (runPipeline chdirs there first). Each step's wall
+    time is appended to pipeline_timings.log (util/_timing.py).
     """
     print(f"\n=== stenalgo pipeline: {description} ===\n$ {' '.join(args)}", flush=True)
+    start = time.monotonic()
     completed = subprocess.run(args)
+    seconds = time.monotonic() - start
+    recordTiming("step", description, seconds,
+                 "ok" if completed.returncode == 0 else f"exit {completed.returncode}")
     if completed.returncode != 0:
         print(f"\nPipeline step FAILED: {description}\n  command: {' '.join(args)}\n"
               f"  exit code: {completed.returncode}\n"
@@ -469,26 +477,34 @@ def runPipeline() -> None:
     """Orchestrate the whole chain in one `python dictionary.py` execution.
 
     Synthetic Lexicon Building (S2) (converged, via util/build_synthetic_lexicon.py),
-    theory 1, the Elicitation, Grouping and Realization phases, the theory-2 refresh,
-    and every Plover + steno-trainer export, in dependency order. Every phase runs as
-    a subprocess; the build phases re-invoke this file with --internal-build-only
-    because the Dictionary must never be built twice in one process: Syllable's
-    class-level phoneme collections (src/grammar.py) accumulate frequencies across
-    builds.
+    the phonetic theory, the Elicitation, Grouping and Realization phases, the
+    disambiguated-theory refresh, and every Plover + steno-trainer export, in
+    dependency order. Every phase runs as a subprocess (`python -m ...`), because the
+    Dictionary must never be built twice in one process: Syllable's class-level
+    phoneme collections (src/grammar.py) accumulate frequencies across builds -- which
+    is also why the S3+S5 build lives in its own module (util.build_phonetic_theory),
+    not as a function of this file. The run's and every step's wall times are
+    appended to pipeline_timings.log (util/_timing.py).
     """
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    selfInvoke = [sys.executable, os.path.abspath(__file__)]
-
-    def build(label: str) -> None:
-        runStep(label, [*selfInvoke, "--internal-build-only"])
+    startedAt = time.monotonic()
 
     def module(label: str, mod: str) -> None:
         runStep(label, [sys.executable, "-m", mod])
 
-    # Pass 1: today's plain `python dictionary.py` run. The pickle cache is trusted
-    # (manual-rm policy); a theory2.tsv it writes here from pre-existing JSONs is
-    # transient -- the refresh step below rewrites it.
-    build("Dictionary loading + theory 1 (S3-S5), pass 1")
+    try:
+        _runSteps(module)
+    finally:
+        recordTiming("pipeline", "orchestrated run",
+                     time.monotonic() - startedAt)
+
+
+def _runSteps(module: "Callable[[str, str], None]") -> None:
+    """The step sequence itself, in dependency order (runPipeline's `module` helper)."""
+
+    # Pass 1: the plain `python dictionary.py` run's first half. The pickle cache is
+    # trusted (manual-rm policy); this step writes the phonetic theory only.
+    module("Dictionary loading + phonetic theory (S3-S5), pass 1", "util.build_phonetic_theory")
 
     # Synthetic Lexicon Building (S2), converged: the wrapper reruns the four
     # steady-state appenders (--apply) until a full round appends nothing, and after
@@ -517,9 +533,10 @@ def runPipeline() -> None:
 
     module("Discriminating-Feature Grouping (Grouping Phase)", "util.build_keypress_groups")
 
-    # Theory 2 refresh (today's \"second run\"). Nothing reads theory2.tsv, but the
-    # tracked-output verification protocol compares it.
-    build("Theory 2 refresh (S7 -> theory2.tsv)")
+    # Disambiguated-theory refresh (S7). Nothing reads disambiguated_theory.tsv, but
+    # the tracked-output verification protocol compares it.
+    module("Disambiguated theory refresh (S7 -> disambiguated_theory.tsv)",
+           "util.build_disambiguated_theory")
 
     module("Realization Phase report build", "util.build_realization_report")
 
@@ -530,118 +547,13 @@ def runPipeline() -> None:
     module("Theory Export (S8): trainer sentences", "util.export_practice_sentences")
     module("Theory Export (S8): trainer definitions", "util.export_definitions")
 
-    print("\nstenalgo pipeline complete: theory 1 (pickles + theory.tsv), "
+    print("\nstenalgo pipeline complete: phonetic theory (pickles + phonetic_theory.tsv), "
           "LexiqueSynthetic.tsv, resolved_press_sets.json, keypress_groups.json, "
-          "realization_report.json, theory2.tsv, the Plover outputs and the four "
-          "steno-trainer exports are up to date.", flush=True)
-
-
-def buildOnly() -> None:
-    """Today's plain `python dictionary.py` semantics, verbatim: Dictionary Loading
-    (S3), layout statistics on a pickle miss, keyboard load, Phonetic Theory
-    Building (S5, writes theory.tsv + FirstTheory.pickle on a miss), and theory 2
-    (S7) when keypress_groups.json and resolved_press_sets.json both exist. Run as
-    `python dictionary.py --internal-build-only` by runPipeline() and the S2 wrapper
-    (util/build_synthetic_lexicon.py), and directly as the public
-    `python dictionary.py --build-only`; the pickle classes must stay recorded as
-    __main__.Dictionary (util/_theoryio.py and src/elicitation.py unpickling rely on
-    it), so this file stays the entrypoint.
-    """
-    if os.path.exists("Dictionary.pickle"):
-        with open("Dictionary.pickle", "rb") as pfile:
-            dictionary = pickle.load(pfile)
-            Syllable.allPhonemeCol = pickle.load(pfile)
-            Syllable.phonemeColByPart = pickle.load(pfile)
-            Syllable.biphonemeColByPart = pickle.load(pfile)
-            Syllable.multiphonemeColByPart = pickle.load(pfile)
-        print("Loaded dictionary from pickle file.")
-        print(dictionary.syllableCollection)
-    else :
-        dictionary = Dictionary()
-
-        dictionary.analyseSyllabification()
-        Syllable.optimizeBiphonemeOrder()
-
-        dictionary.analyseAmbiguities()
-        with open("Dictionary.pickle", "wb") as pfile:
-            pickle.dump(dictionary, pfile)
-            pickle.dump(Syllable.allPhonemeCol, pfile)
-            pickle.dump(Syllable.phonemeColByPart, pfile)
-            pickle.dump(Syllable.biphonemeColByPart, pfile)
-            pickle.dump(Syllable.multiphonemeColByPart, pfile)
-#        pickle.dump(dictionary.syllableCollection, open("Syllables.pickle", "wb"))
-
-#    print(dictionary.words[0])
-#    sys.exit(1)
-
-    #dictionary.printSyllabificationStats()
-
-
-    #dictionary.writeConstrainFiles()
-
-    #pprint.pprint(dictionary.wordsByOrtho["effraye"])
-    #for syllableStrokes, words in theory.items():
-    #    strokeString = starboard.strokesToString(syllableStrokes)
-    #    print(strokeString, ":", list(map(lambda w: w.ortho, words)))
-    keyboardJSON = 'starboard3h.json'
-    starboard = Starboard.fromJSONFile(keyboardJSON)
-    if starboard is None :
-        print("Could not load keyboard from", keyboardJSON, "generating an initial keymap based on phoneme order")
-        starboard = Starboard()
-        dictionary.generateBaseKeymap(starboard)
-
-    #optimizeKeyboard(starboard, dictionary.syllabicPartAmbiguity, ["onset", "nucleus" ,"coda"])
-    starboard.printLayout()
-    #starboard.toJSONFile('starboard.json')
-    theory: dict[Strokes, list[Word]] = {}
-    if os.path.exists("FirstTheory.pickle"):
-        with open("FirstTheory.pickle", "rb") as pfile:
-            theory = pickle.load(pfile)
-    else:
-        theory = dictionary.buildTheory(starboard)
-        dictionary.writeTheory(theory, starboard, "theory.tsv")
-        with open("FirstTheory.pickle", "wb") as pfile:
-            pickle.dump(theory, pfile)
-
-
-    # lemmeOrthoWords: dict[tuple[str, str], list[Word]] = {}
-    # for stokes, words in theory.items():
-    #     for word in words:
-    #         lemmeOrthoWords[(word.lemme, word.ortho)] = lemmeOrthoWords.get((word.lemme, word.ortho), []) + [word]
-    # for (lemme, ortho), words in lemmeOrthoWords.items():
-    #     if len(words) > 1 :
-    #         print(f"Lemme {lemme} ortho {ortho} has {len(words)} words features: ", list(map(lambda w: (w.gramCat.name, w.gender, w.number, w.infoVerb), words)))
-    #
-    # infoVerbs = []
-    # for word in dictionary.words:
-    #     if  word.infoVerb is not None:
-    #         for iv in word.infoVerb:
-    #             if iv not in infoVerbs:
-    #                 print(iv)
-    #                 infoVerbs.append(iv)
-    # sys.exit(1)
-    # Theory 2: the Realization Phase's same-lemma coda-bank realization + the star/hash
-    # mark track's reserved keys, composed on top of theory 1 (see ROADMAP.md's "What's left to
-    # do" -- this retires the superseded solver-picks-features path that used to run
-    # here, whose satOptimizeDiscriminator conflict count had gone vestigial).
-    keypressGroupsPath = "keypress_groups.json"
-    resolvedPressSetsPath = "resolved_press_sets.json"
-    finalTheoryPath = "theory2.tsv"
-    if os.path.exists(keypressGroupsPath) and os.path.exists(resolvedPressSetsPath):
-        finalTheory = dictionary.buildFinalTheory(theory, starboard, keypressGroupsPath, resolvedPressSetsPath)
-        dictionary.writeFinalTheory(theory, finalTheory, starboard, finalTheoryPath)
-        print(f"\nWrote {finalTheoryPath}: {len(finalTheory)} words with theory 2"
-              f" (Phase P + */# track) strokes.")
-    else:
-        print(f"\nSkipping theory 2 (Phase P + */# track): {keypressGroupsPath} and/or"
-              f" {resolvedPressSetsPath} not found. Run `python -m util.build_keypress_groups`"
-              f" and `python -m src.elicitation` first, then re-run `python dictionary.py`.")
+          "realization_report.json, disambiguated_theory.tsv, the Plover outputs and "
+          "the four steno-trainer exports are up to date.", flush=True)
 
 
 if __name__ == "__main__":
-    if "--internal-build-only" in sys.argv[1:] or "--build-only" in sys.argv[1:]:
-        buildOnly()
-    else:
-        runPipeline()
+    runPipeline()
 
 

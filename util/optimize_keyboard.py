@@ -1,7 +1,6 @@
 """
 Keyboard Layout Optimization (S4) as a command: the CP-SAT phoneme-to-key
-layout solve, runnable without editing code (the same call is still visible,
-commented, inside dictionary.py's buildOnly).
+layout solve, runnable without editing code.
 
 Run: python -m util.optimize_keyboard [--output PATH]   (from the repo root)
 Seeds from starboard3h.json (the solver uses the committed layout only as CP-SAT
@@ -15,9 +14,9 @@ Rare and costly: ~90 s per syllabic part (the solver's own SOLVER_TIME constant)
 plus model building. Requires Dictionary.pickle (or the lexicons, for an
 in-memory build that is never persisted) and starboard3h.json.
 
-After adopting a new layout: rm -f Dictionary.pickle FirstTheory.pickle and
-`python dictionary.py --build-only` (theory 1 depends on the layout; every
-exporter recomputes theory 2 on its next run).
+After adopting a new layout: rm -f Dictionary.pickle PhoneticTheory.pickle and
+`python -m util.build_phonetic_theory` (the phonetic theory depends on the
+layout; every exporter recomputes the disambiguated theory on its next run).
 Exit codes: 0 wrote the layout; 1 seed missing or the solver produced no layout.
 """
 import argparse
@@ -76,8 +75,9 @@ def main(argv: list[str] | None = None) -> None:
     print(f"\nWrote the optimized layout to {args.output}.")
     if not overwritingSeed:
         print(f"To adopt it: cp {args.output} {SEED_PATH} (deliberate), then:")
-    print("  rm -f Dictionary.pickle FirstTheory.pickle && python dictionary.py --build-only\n"
-          "  (theory 1 depends on the layout; every exporter recomputes theory 2 on its next run).")
+    print("  rm -f Dictionary.pickle PhoneticTheory.pickle && python -m util.build_phonetic_theory\n"
+          "  (the phonetic theory depends on the layout; every exporter recomputes the"
+          " disambiguated theory on its next run).")
 
 
 if __name__ == "__main__":

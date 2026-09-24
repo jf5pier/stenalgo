@@ -7,8 +7,8 @@ Convergence rule: a full round over the four appenders that leaves
 resources/LexiqueSynthetic.tsv byte-identical (md5) has appended nothing --
 Synthetic Lexicon Building (S2) is done. After any round that DID append rows,
 the pickles are stale, so this module deletes Dictionary.pickle /
-FirstTheory.pickle and reruns the Dictionary Loading (S3) + Phonetic Theory
-Building (S5) build itself (`python dictionary.py --internal-build-only`); the
+PhoneticTheory.pickle and reruns the Dictionary Loading (S3) + Phonetic Theory
+Building (S5) build itself (`python -m util.build_phonetic_theory`); the
 next round's appenders then see fresh theory, exactly like today's "run it a
 second time" convergence. On an already-converged tree nothing is deleted and
 no rebuild runs.
@@ -18,7 +18,7 @@ TODO.md item B13): if it trips, investigate the appenders' reports instead of
 raising the cap.
 
 Run: python -m util.build_synthetic_lexicon   (from the repo root; it chdirs there)
-Requires resources/LexiqueMixte.tsv; S2.1 additionally wants FirstTheory.pickle
+Requires resources/LexiqueMixte.tsv; S2.1 additionally wants PhoneticTheory.pickle
 (it rebuilds theory in memory when absent, without persisting).
 Exit codes: 0 converged; 1 an appender or rebuild failed, or MAX_ROUNDS tripped.
 """
@@ -28,7 +28,7 @@ import subprocess
 import sys
 
 SYNTHETIC_TSV_PATH = "resources/LexiqueSynthetic.tsv"
-PICKLE_CACHE_PATHS = ("Dictionary.pickle", "FirstTheory.pickle")
+PICKLE_CACHE_PATHS = ("Dictionary.pickle", "PhoneticTheory.pickle")
 
 # The steady-state Synthetic Lexicon Building (S2) appenders, run with --apply (their
 # dry-run mode is for a human checking a diff first). The one-shot fix scripts stay
@@ -105,21 +105,21 @@ def main() -> None:
             raise SystemExit(1)
         changed = True
         print("\nLexiqueSynthetic.tsv changed -- deleting the pickles and rebuilding "
-              "Dictionary/theory 1...", flush=True)
+              "Dictionary/phonetic theory...", flush=True)
         for picklePath in PICKLE_CACHE_PATHS:
             if os.path.exists(picklePath):
                 os.remove(picklePath)
-        _runStep("Dictionary loading + theory 1 (S3-S5), post-append rebuild",
-                 [sys.executable, "dictionary.py", "--internal-build-only"])
+        _runStep("Dictionary loading + phonetic theory (S3-S5), post-append rebuild",
+                 [sys.executable, "-m", "util.build_phonetic_theory"])
 
     if changed:
         print("Next: `python -m src.elicitation --resolve` (after any re-elicitation), then "
-              "`python dictionary.py --build-only` to refresh theory2.tsv, then the exports.",
+              "`python -m util.build_disambiguated_theory` to refresh disambiguated_theory.tsv, then the exports.",
               flush=True)
     else:
         print("\nLexiqueSynthetic.tsv unchanged -- keeping the existing pickles "
               "(if you edited the lexicons or layout since they were written, "
-              "`rm -f Dictionary.pickle FirstTheory.pickle` and re-run).", flush=True)
+              "`rm -f Dictionary.pickle PhoneticTheory.pickle` and re-run).", flush=True)
 
 
 if __name__ == "__main__":

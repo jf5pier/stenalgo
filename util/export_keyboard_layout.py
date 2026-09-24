@@ -12,7 +12,7 @@ is hand-encoded here from `Starboard._printableKeyLayout`'s known ASCII shape
 physical key count/shape ever changes.
 
 Run: python -m util.export_keyboard_layout
-Requires `starboard3h.json` (`python dictionary.py` generates it) and, for the
+Requires `starboard3h.json` (a committed input) and, for the
 conjugation-marker legend, `realization_report.json`
 (`python -m util.build_realization_report`) -- optional, skipped if missing.
 """

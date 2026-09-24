@@ -19,28 +19,29 @@ every transformation, threshold and dataset state — is in [PIPELINE.md](PIPELI
    syllable breakdowns); applies `lexiconExclusions.tsv` and the 1990-reform rewrites.
 2. **Synthetic Lexicon Building (S2)** (hand-run `--apply` scripts) — appends missing verb,
    noun and adjective paradigm forms to `resources/LexiqueSynthetic.tsv` (42,225 rows).
-3. **Dictionary Loading (S3)** (first part of `python dictionary.py`) — reads both lexicons
+3. **Dictionary Loading (S3)** (first half of `python -m util.build_phonetic_theory`) — reads both lexicons
    into 167,639 `Word`s (identity merge), indexes them by spelling and lemma, builds the
    syllable inventory; cached in `Dictionary.pickle`.
 4. **Keyboard Layout Optimization (S4)** — CP-SAT solve that assigns phonemes to keys per
    syllabic bank, producing `starboard3h.json`. Real but rarely run: the layout statistics
-   recompute on every fresh rebuild, while the solver call is commented out, so no command
-   regenerates the layout today.
-5. **Phonetic Theory Building (S5)** (second part of `python dictionary.py`) — theory 1:
+   recompute on every fresh rebuild, and the solver itself runs only through
+   `python -m util.optimize_keyboard`.
+5. **Phonetic Theory Building (S5)** (second half of `python -m util.build_phonetic_theory`) — the phonetic theory:
    one phonetic stroke sequence per syllable chain, so homophones share raw stroke
-   sequences; cached in `FirstTheory.pickle`.
+   sequences; cached in `PhoneticTheory.pickle`.
 6. **Same-Lemma and Grammatical-Category Disambiguation (S6)** — separates the Homophone
    Groups (same `lemmeGramCat`, same canonical strokes) in three phases:
    Discriminating-Feature Elicitation (Elicitation Phase), Discriminating-Feature Grouping
    (Grouping Phase) and Discriminating-Feature Stroke Realization (Realization Phase). Each
    Keypress Group becomes one coda-bank feature discriminating stroke. Must-stay-green
    regression: 0 residual same-lemmeGramCat collisions.
-7. **Different-Lemma or Grammatical-Category Disambiguation (S7)** (`Dictionary.buildFinalTheory`)
+7. **Different-Lemma or Grammatical-Category Disambiguation (S7)**
+   (`python -m util.build_disambiguated_theory`, `Dictionary.buildDisambiguatedTheory`)
    — star/hash marks on the reserved `*`/`#` keys for lemma-homophone groups
-   (ver/vert/verre, appel/appelle), producing theory 2.
+   (ver/vert/verre, appel/appelle), producing the disambiguated theory.
 8. **Theory Export (S8)** (`python -m util.export_*`) — two branches: Plover (dictionary,
    key table, system plugin) and steno-trainer (keyboard legend, word drill, sentences,
-   definitions). Nothing reads `theory2.tsv`; every exporter recomputes theory 2.
+   definitions). Nothing reads `disambiguated_theory.tsv`; every exporter recomputes the disambiguated theory.
 
 ## Design rationale
 
@@ -285,7 +286,7 @@ atomic features onto Keypress Groups — is optimized afterwards.
   after the first vowel to the coda; a vowel-less syllable puts all its consonants in the
   onset. Carries class-level collections (`allPhonemeCol`, `phonemeColByPart`,
   `biphonemeColByPart`, `multiphonemeColByPart`) that accumulate the corpus-wide syllable
-  statistics, plus `SyllableCollection`, the inventory `buildTheory` looks syllables up in.
+  statistics, plus `SyllableCollection`, the inventory `buildPhoneticTheory` looks syllables up in.
 
 ### The Word (`src/word.py`)
 
@@ -349,7 +350,7 @@ order gain — the three weights encode "ambiguity first, then order, then ergon
 
 What each root-level data file is, whether it is tracked in git, and the command that
 rebuilds it (full rebuild order in [PIPELINE.md](PIPELINE.md) §How to run a full rebuild).
-After any lexicon or layout change, first `rm -f Dictionary.pickle FirstTheory.pickle` —
+After any lexicon or layout change, first `rm -f Dictionary.pickle PhoneticTheory.pickle` —
 the pickle caches are never checked for staleness.
 
 ### Tracked outputs and inputs
@@ -358,7 +359,7 @@ the pickle caches are never checked for staleness.
 |---|---|---|
 | `resources/LexiqueMixte.tsv` | Mixed lexicon: 136,456 rows × 12 columns (frequencies, phoneme + grapheme syllable breakdowns) | `python lexique.py` (Lexicon Building (S1)) |
 | `resources/LexiqueSynthetic.tsv` | Synthetic rows: 42,225 generated paradigm forms | hand-run `python -m util.completeVerbParadigms --apply`, `python -m util.generateMissingNomAdjForms --apply`, `util/fix*.py` (Synthetic Lexicon Building (S2)) |
-| `starboard3h.json` | The keyboard layout (26 keys, 48 layout entries) | nothing today — the solver call is commented out (dictionary.py:494); see PIPELINE.md, Keyboard Layout Optimization (S4) |
+| `starboard3h.json` | The keyboard layout (26 keys, 48 layout entries) | rarely: `python -m util.optimize_keyboard` writes `starboard3h_optimized.json`; adopting it into the seed is deliberate; see PIPELINE.md, Keyboard Layout Optimization (S4) |
 | `elicitation_answers.json` | The elicitation answers (200 oppositions): the only hand-authored input of Same-Lemma and Grammatical-Category Disambiguation (S6) | by hand, through the questionnaire page (Answer Collection) |
 | `conjugation_disambiguation_order.txt` | The precedence spec: intended feature-press precedence | hand-authored; checked by `python -m util.check_conjugation_disambiguation_order` |
 | `keypress_groups.json` | The Keypress Groups (K=7, proven minimal) and their features | `python -m util.build_keypress_groups` (Grouping Phase) |
@@ -373,13 +374,13 @@ the pickle caches are never checked for staleness.
 
 | File | What it is | Rebuilt by |
 |---|---|---|
-| `Dictionary.pickle` | Word list + indexes + syllable and layout statistics (57.8 MB) | `python dictionary.py` on a cache miss (Dictionary Loading (S3) + the layout statistics) |
-| `FirstTheory.pickle` | Theory 1 (52 MB) | `python dictionary.py` on a cache miss (Phonetic Theory Building (S5)) |
+| `Dictionary.pickle` | Word list + indexes + syllable and layout statistics (57.8 MB) | `python -m util.build_phonetic_theory` on a cache miss (Dictionary Loading (S3) + the layout statistics) |
+| `PhoneticTheory.pickle` | The phonetic theory (52 MB) | `python -m util.build_phonetic_theory` on a cache miss (Phonetic Theory Building (S5)) |
 | `questionnaire.json` | Questionnaire items (200) | `python -m src.elicitation` (Questionnaire Generation) |
 | `resolved_press_sets.json` | Resolved discriminating feature sets (47,828 groups, ~32 MB) | `python -m src.elicitation` (Press-Set Resolution) |
 | `elicitation_questionnaire.html` | The Answer Collection questionnaire page | `python -m util.build_questionnaire_page` |
-| `theory.tsv` | Human view of theory 1 | written by `python dictionary.py` on a `FirstTheory.pickle` miss |
-| `theory2.tsv` | Human view of theory 2 (read by nothing — every exporter recomputes theory 2) | second `python dictionary.py` run (Different-Lemma or Grammatical-Category Disambiguation (S7)) |
+| `phonetic_theory.tsv` | Human view of the phonetic theory | written by `python -m util.build_phonetic_theory` on every run (pickle hit or miss) |
+| `disambiguated_theory.tsv` | Human view of the disambiguated theory (read by nothing — every exporter recomputes it) | `python -m util.build_disambiguated_theory` (Different-Lemma or Grammatical-Category Disambiguation (S7)) |
 | `conjugation_disambiguation_report.json` | Precedence-spec check report | `python -m util.check_conjugation_disambiguation_order` |
 | `morphalou/Morphalou3.1_CSV.csv` | External Morphalou 3.1 download (not in git; [Ortolang repository](https://repository.ortolang.fr)), used optionally by NOM/ADJ gap generation | download by hand; `python -m util.generateMissingNomAdjForms --morphalou PATH` |
 

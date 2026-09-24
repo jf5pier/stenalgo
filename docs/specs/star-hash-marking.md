@@ -125,7 +125,7 @@ The **canonical member** (rank 0, code `()`) keeps its final induced strokes unc
 stroke. `composeReservedKeyStrokes` then combines these with the Word's final induced strokes:
 
 - The **first** symbol is pressed together with the word's **last phoneme stroke** (the last
-  of its theory-1 base strokes), not with a feature discriminating stroke that follows it.
+  of its phonetic-theory base strokes), not with a feature discriminating stroke that follows it.
   This is a **merged star/hash mark**.
 - Each further symbol of an escalated code becomes its own trailing **\*/# marker stroke**.
 
@@ -158,7 +158,7 @@ Plover strokes are from `plover_stenalgo_dictionary.json`, 2026-09-22 data.
 3. **Five readings, one escalation.** Group /vɛʁ/: `vers` (PRE/NOM) `()` → `vieR`; `verre`
    `*` → `v*ieR`; `ver` `#` → `vie#R`; `vert` `*#` → `v*ie#R`; `vair` `*# *#` → `v*ie#R/*#`.
    Inflected forms whose feature discriminating stroke follows keep the merged mark on the
-   phoneme stroke: `verts` → `+10/17`, `vairs` → `+15/17` in `theory2.tsv`.
+   phoneme stroke: `verts` → `+10/17`, `vairs` → `+15/17` in `disambiguated_theory.tsv`.
 4. **Deep escalation.** Group /o/ (11 Words, 8 representatives): `au` `ae`, `oh` `*ae`,
    `aux` `ae#`, `eau` `*ae#`, `haut` `*ae#/*#`, `ho` `*ae#/*#/*#`, `ô` `*ae#/*#/*#/*#`,
    `aulx` `*ae#/*#/*#/*#/*#`.
@@ -190,7 +190,7 @@ Plover strokes are from `plover_stenalgo_dictionary.json`, 2026-09-22 data.
   `amplis`/`emplis`).
 - **B1**: spelling twins (Words sharing a spelling and a `lemmeGramCat`) are not fully
   separated by the Realization Phase, and the one-`lemmeGramCat` filter keeps them out of this
-  stage: 99 pairs in 98 strokes reach theory 2 unmarked.
+  stage: 99 pairs in 98 strokes reach the disambiguated theory unmarked.
 
 One design caveat without a bug number: bucket 2 (different-gramCat, same lemma) and
 bucket 3 (cross-lemma) pairs are pooled through one physical marking mechanism

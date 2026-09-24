@@ -1,5 +1,5 @@
 """
-Shared safe RTFCRE rendering for theory 2 (base strokes + the same-lemma marks of
+Shared safe RTFCRE rendering for the disambiguated theory (base strokes + the same-lemma marks of
 Discriminating-Feature Stroke Realization (Realization Phase) + the star/hash marks of
 Different-Lemma or Grammatical-Category Disambiguation (S7)), used by
 `util/export_plover_dictionary.py` and the steno-trainer exporters.
@@ -7,7 +7,7 @@ Different-Lemma or Grammatical-Category Disambiguation (S7)), used by
 `Starboard.strokesToRTFCRE` only handles base (onset/nucleus/coda) strokes: a
 stroke containing STAR_KEY/HASH_KEY (10/15) carries no syllabic part, which
 crashes its per-key bucketing (see that method's own docstring, and
-`Dictionary.writeFinalTheory`'s, for why). Two shapes of stroke carry them:
+`Dictionary.writeDisambiguatedTheory`'s, for why). Two shapes of stroke carry them:
 
 - a bare mark stroke (only reserved keys: an escalated `*`/`#` code's further
   symbols), rendered as a plain concatenation of key display names;

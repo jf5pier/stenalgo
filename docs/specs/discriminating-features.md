@@ -1,7 +1,7 @@
 # Spec: discriminating features
 
 Scope: Same-Lemma and Grammatical-Category Disambiguation (S6). This stage separates the
-inflected forms of one paradigm that theory 1 types identically (`dors`/`dort`,
+inflected forms of one paradigm that the phonetic theory types identically (`dors`/`dort`,
 `chante`/`chantes`/`chantent`, `il`/`ils`). It works in three phases:
 
 1. **Discriminating-Feature Elicitation (Elicitation Phase)** records which grammatical
@@ -32,7 +32,7 @@ categories are out of scope here: they are handled by the star/hash marks
 - **Meaningful keys where possible.** Some features have a preferred key: impératif → `-k`,
   pers_2 → `-d`, pers_3 → `-t`.
 - **Scope = one `lemmeGramCat`.** A **homophone group** is the set of Words with the same
-  `lemmeGramCat` and the same canonical theory-1 Strokes. There are 47,830 groups.
+  `lemmeGramCat` and the same canonical phonetic-theory Strokes. There are 47,830 groups.
 
 ## 2. Elicitation Phase
 
@@ -67,7 +67,7 @@ Rules an answer set must respect:
   applied. An opposition between identical combinations (a **tie opposition**) is skipped: no
   feature could separate those two spellings.
 - A missing answer (an **unresolved opposition**) drops the whole group, which keeps its bare
-  theory-1 strokes. The Elicitation Phase reports these. Today there are 0.
+  phonetic-theory strokes. The Elicitation Phase reports these. Today there are 0.
 
 ### 2.3 Precedence spec
 
@@ -100,7 +100,7 @@ For each group, and for each (spelling, feature combination):
   (2026-09-22 measurement).
 
 **Canonical member.** A spelling whose primary alternate is empty (`∅`) needs no feature. It
-keeps its theory-1 strokes and is the group's canonical member. This choice comes **only from
+keeps its phonetic-theory strokes and is the group's canonical member. This choice comes **only from
 the answers**: no code computes a default, and `FEATURE_PRIORITY` plays no part. 4,858 groups
 have no `∅` member, so every spelling in them gets a feature discriminating stroke.
 
@@ -179,7 +179,7 @@ population order. A candidate is **feasible** unless:
 - (a) it equals a key-set already chosen;
 - (b) it is empty or redundant for some Word;
 - (c) some composed feature discriminating stroke is illegal;
-- (d) some composed Strokes equals an existing theory-1 key;
+- (d) some composed Strokes equals an existing phonetic-theory key;
 - (e) it creates a **same-lemmeGramCat collision** (different spelling, same `lemmeGramCat`)
   among Words needing the same group set;
 - (f) it creates one against an already finalized Word.
@@ -195,7 +195,7 @@ dictionary entry: the base strokes plus that alternate's feature discriminating 
 (`calmez` → `kal/me/-d` and `kal/me/-k`). Alternate entries are not extra strokes of the
 primary. They are second entries for the same spelling.
 
-**Two call sites.** The **inline path** (inside `Dictionary.buildFinalTheory`) feeds theory
+**Two call sites.** The **inline path** (inside `Dictionary.buildDisambiguatedTheory`) feeds theory
 2 and every export. The **report build** (`python -m util.build_realization_report`) writes the
 tracked **realization report** `realization_report.json`, which only the trainer keyboard legend
 reads. The two can drift if the report is not rebuilt (B18).
