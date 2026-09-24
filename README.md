@@ -47,8 +47,7 @@ pytest src/test/                            # run tests
 mypy src/                                   # type checking
 # Prerequisites: dependencies. Outputs: console report only.
 
-# The pipeline in dependency order, run from the repo root (prefix PYTHONHASHSEED=0 when
-# the tracked outputs must be byte-reproducible); python dictionary.py orchestrates all of it:
+# The pipeline in dependency order, run from the repo root; python dictionary.py orchestrates all of it:
 python lexique.py                           # S1 -> resources/LexiqueMixte.tsv
 # Prerequisites: source lexicons + Verbiste XML. Outputs: resources/LexiqueMixte.tsv.
 python -m util.build_synthetic_lexicon      # S2, converged -> LexiqueSynthetic.tsv

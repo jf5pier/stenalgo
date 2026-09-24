@@ -454,9 +454,8 @@ def runStep(description: str, args: list[str]) -> None:
     """Run one pipeline step as a subprocess; abort the pipeline on failure.
 
     Stdio is inherited (the step's output streams live) and the environment passes
-    through unchanged, so a PYTHONHASHSEED pinned by the caller reaches every child.
-    Requires the repo root as cwd (runPipeline chdirs there first). Each step's wall
-    time is appended to pipeline_timings.log (util/_timing.py).
+    through unchanged. Requires the repo root as cwd (runPipeline chdirs there first).
+    Each step's wall time is appended to pipeline_timings.log (util/_timing.py).
     """
     print(f"\n=== stenalgo pipeline: {description} ===\n$ {' '.join(args)}", flush=True)
     start = time.monotonic()
