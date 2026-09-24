@@ -47,6 +47,8 @@ def extractDiscriminatingFeatures(theory: dict[Strokes, list[Word]]) \
             allFeatures.add(selectedFeature)
             wordFeatures[word] = wordFeatures.get(word, []) + [selectedFeature]
 
+    wordFeatureSets: dict[Word, set[WordFeature]] = {w: set(fs) for w, fs in wordFeatures.items()}
+
     # Words for which the feature is present
     wordsUsingFeature: dict[WordFeature, list[Word]] = {feature: [] for feature in list(allFeatures)}
     orthosUsingFeature: dict[WordFeature, dict[WordOrtho, list[Word]]] = {feature: defaultdict(list) for feature in list(allFeatures)}
@@ -68,29 +70,28 @@ def extractDiscriminatingFeatures(theory: dict[Strokes, list[Word]]) \
 
         # Discriminate homophones words sharing the same lemme
         for lemme, lemmeWords in wordByLemme.items():
-            # List of Words that have a certain feature
-            lemmeWordFeatures = {
-                feature: list(filter(lambda w: feature in wordFeatures[w], lemmeWords)) 
-                for feature in allFeatures }
-
-            # List of Words that either have a certain feature, or a Word with the same orthograph does
-            lemmeOrthoWordFeatures: dict[WordFeature, list[Word]] = {
-                feature: list(filter( lambda w: feature in wordFeatures[w] or
-                    any((feature in wordFeatures[ow] and ow.ortho == w.ortho) for ow in lemmeWords),
-                    lemmeWords)) for feature in allFeatures }
-
-            # Dictionnary of word orthographs and their list of Words for which the feature is present
-            lemmeOrthoFeatures: dict[WordFeature, dict[WordOrtho, list[Word]]] = {
-                feature: {
+            # Dictionnary of word orthographs and their list of Words for which the feature is
+            # present on the Word, or on a Word of the group with the same orthograph. Only the
+            # features some Word of the group carries are visited (an absent feature yields no
+            # ortho and contributes nothing below), in allFeatures order so every downstream
+            # list and dict keeps its insertion order.
+            groupFeatures: set[WordFeature] = set().union(*(wordFeatureSets[w] for w in lemmeWords))
+            lemmeOrthoFeatures: dict[WordFeature, dict[WordOrtho, list[Word]]] = {}
+            for feature in allFeatures:
+                if feature not in groupFeatures:
+                    continue
+                orthosWithFeature = {w.ortho for w in lemmeWords if feature in wordFeatureSets[w]}
+                wordsUsing = [w for w in lemmeWords
+                              if feature in wordFeatureSets[w] or w.ortho in orthosWithFeature]
+                lemmeOrthoFeatures[feature] = {
                     ortho: list(filter(lambda w: w.ortho == ortho, wordsUsing))
                     for ortho in set(w.ortho for w in wordsUsing)
-                } for feature, wordsUsing in lemmeOrthoWordFeatures.items()
-            }
+                }
 
             if lemme in verboseLemmes and lemmeWords[0].ortho in verboseWords:
                 print("Extract strokes", strokes, " lemme ", lemme, [w.ortho for w in lemmeWords])
-                print("lemmeWordFeatures: ",list(filter(lambda x: x[1]>0, [(f,len(lemmeWordFeatures[f])) for f in lemmeWordFeatures])))
-                print("lemmeOrthoWordFeatures: ",list(filter(lambda x: x[1]>0,  [(f,len(lemmeOrthoWordFeatures[f])) for f in lemmeWordFeatures])))
+                print("lemmeOrthoFeatures: ", [(f, sum(map(len, orthoWords.values())))
+                                               for f, orthoWords in lemmeOrthoFeatures.items()])
 
             if len(lemmeWords) == 1:
                 strokeLemmeSingleWords[(strokes, lemme)] = lemmeWords[0]

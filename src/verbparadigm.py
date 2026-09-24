@@ -713,21 +713,34 @@ def detectUndersampledLemmas(
     for lemmeGramCat, template in templateByLemmeGramCat.items():
         lemmeGramCatsByTemplate.setdefault(template, []).append(lemmeGramCat)
 
+    # fullFeatureSpace for every templated lemmeGramCat in one pass over
+    # strokeLemmeDiscriminators (calling it per lemma rescans the whole dict each time).
     featureSpaceByLemmeGramCat: dict[LemmeGramCat, set[WordFeature]] = {
-        lemmeGramCat: fullFeatureSpace(strokeLemmeDiscriminators, lemmeGramCat)
-        for lemmeGramCat in templateByLemmeGramCat
+        lemmeGramCat: set() for lemmeGramCat in templateByLemmeGramCat
     }
+    for (_strokes, groupLemme), wordFeatures in strokeLemmeDiscriminators.items():
+        space = featureSpaceByLemmeGramCat.get(groupLemme)
+        if space is not None:
+            for features in wordFeatures.values():
+                space.update(features)
 
     undersampled: dict[LemmeGramCat, UndersampledLemma] = {}
     for template, siblingGroup in lemmeGramCatsByTemplate.items():
+        # Leave-one-out union of the siblings' spaces from per-template feature counts
+        # (a feature is in the others' union iff some sibling other than this one has it),
+        # instead of re-unioning every other sibling for each lemma.
+        featureCounts: Counter[WordFeature] = Counter()
+        for lemmeGramCat in siblingGroup:
+            featureCounts.update(featureSpaceByLemmeGramCat[lemmeGramCat])
         for lemmeGramCat in siblingGroup:
             others = [other for other in siblingGroup if other != lemmeGramCat]
             if not others:
                 continue
-            canonicalSpace: set[WordFeature] = set()
-            for other in others:
-                canonicalSpace.update(featureSpaceByLemmeGramCat[other])
             ownSpace = featureSpaceByLemmeGramCat[lemmeGramCat]
+            canonicalSpace: set[WordFeature] = {
+                feature for feature, count in featureCounts.items()
+                if count - (feature in ownSpace) > 0
+            }
             if ownSpace < canonicalSpace:
                 undersampled[lemmeGramCat] = UndersampledLemma(
                     lemmeGramCat=lemmeGramCat,

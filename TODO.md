@@ -64,9 +64,43 @@ was removed in Dead-Code Removal (Pass 5).
   converged tree and identical pickles, `python -m util.completeVerbParadigms` (dry run) reports
   0 flagged lemmas / 0 candidate rows under `PYTHONHASHSEED=0` but 10 / 84 unpinned, so an
   unpinned `python dictionary.py` (or S2 wrapper) appends 84 rows to the tracked
-  `LexiqueSynthetic.tsv` a pinned run wouldn't — and then cascades a pickle rebuild. Same
-  salted-`hash()` family as B11/B27 (some set/dict iteration feeds the collision confirmation).
+  `LexiqueSynthetic.tsv` a pinned run wouldn't — and then cascades a pickle rebuild (~95 s)
+  plus a full extra S2 round (~330 s at the time): the 726 s S2 step was mostly this cascade.
+  (Since the 2026-09-24 S2.1 speedup — `extractDiscriminatingFeatures` 75 s → 14 s,
+  `detectUndersampledLemmas` 127 s → 4 s — a pinned S2 step takes ~67 s, so the extra round
+  is much cheaper, but the 84 unwanted rows remain.)
+  Mechanism (confirmed 2026-09-24 with digest-instrumented dry runs, `scratch/b43_probe.py`
+  and `scratch/b43_probe2.py`): every stage through candidate generation is content-identical
+  across seeds (same 1,817 structural candidates, identical baseline selection and
+  collisions). The seed does NOT enter through candidate order (an earlier hypothesis): the
+  augmented pass fed seed-1-ordered candidates under seed 0 gives byte-identical feasible
+  options, chosen discriminators and feature-set keys as seed-0 order, once the generated
+  Words' cached `_hash` is recomputed. The only seed channel is `Word._hash` itself
+  (`src/word.py:94`, a salted `hash()` of an f-string, cached at construction and pickled
+  with the Word): `extractDiscriminatingFeatures` returns `dict[WordFeature, set[Word]]`, and
+  `set[Word]` iteration order follows those hash values into `buildFeasibleDiscriminatorOptions`
+  / `selectSharedDiscriminators` tie-breaks, and from there into `buildDiscriminatorSelection`'s
+  word-order feature-set tuples (e.g. `('s','p')` 20,902 lemmas vs `('p','s')` 3,125 are
+  distinct keys) that `crossLemmaFeatureSetCollisions` compares literally. Theory Words carry
+  the hashes of whatever process built `PhoneticTheory.pickle`; freshly generated candidate
+  Words get the current process's — under an unpinned run the two regimes are mixed.
+  Related latent bug (unverified impact): `Word.__eq__` (`src/word.py:158`) compares only
+  `_hash`, so a pickled Word and an identical freshly constructed Word compare unequal (and
+  miss in dict/set lookups) whenever the pickle was built under a different seed. Amplifier: the confirm pass re-runs the global
+  shared-discriminator selection on the augmented theory, reshuffling ~2,000 uninvolved
+  lemmas' tuples (1,994 flagged under seed 0, 2,004 unpinned) — the gate mostly measures
+  set-cover reshuffle noise, and the seed decides whether a candidate lemma lands in it
+  (seed 0: none → 0 rows; two independent unpinned draws: 10 → the same 84 rows, so random
+  seeds agree and PYTHONHASHSEED=0 is the outlier). Same salted-`hash()` family as B11/B27.
   Workaround: always pin `PYTHONHASHSEED=0` for anything that can run the appenders.
+  Candidate fixes: make `Word._hash` seed-independent (e.g. a `hashlib.blake2b` digest of the
+  same fields) and `__eq__` compare the fields — removes the whole salted-Word-hash family
+  (likely B11/B27 too) but changes every `set[Word]` iteration order, so it needs a
+  LexiqueSynthetic.tsv re-convergence and new output baselines; alternatively (or also) make
+  the feature-set key order-insensitive (sorted (feature, word) pairs or frozenset — changes
+  which collisions are detected, same re-convergence); restricting the augmented
+  selection to the receiving stroke groups would also remove the ~2,000-lemma noise and the
+  second full-corpus extraction pass.
 - **B14** RESOLVED 2026-09-24 (the theory-build extraction into `util.build_phonetic_theory` /
   `util.build_disambiguated_theory`): `phonetic_theory.tsv` is now written on every run (pickle
   hit or miss; a pickle round-trip preserves dict order, so the bytes are stable), and
