@@ -41,32 +41,45 @@ tables live in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Blank keys are rese
 ## Quickstart
 ```bash
 pip install -r requirements.txt             # install dependencies
+# Prerequisites: Python 3.12+. Outputs: installed packages only.
 pytest src/test/                            # run tests
+# Prerequisites: dependencies. Outputs: console report only.
 mypy src/                                   # type checking
+# Prerequisites: dependencies. Outputs: console report only.
 
-# The whole pipeline in two commands, run from the repo root (prefix both with
-# PYTHONHASHSEED=0 when the tracked outputs must be byte-reproducible):
-python lexique.py                           # Lexicon Building (S1) -> LexiqueMixte.tsv
-python dictionary.py                        # everything else: the four Synthetic Lexicon
-                                            # Building (S2) appenders (--apply), theory 1,
-                                            # Elicitation/Grouping/Realization, theory 2,
-                                            # and every Plover + steno-trainer export
-
-# Individual steps (still work standalone):
-python -m src.elicitation                   # resolve the discriminating feature sets
-python -m util.build_keypress_groups        # group atomic features onto Keypress Groups
-python -m util.build_realization_report     # rebuild the realization report
-python -m util.export_plover_dictionary     # export the Plover dictionary
-python -m util.export_plover_system         # export the Plover key table
-python -m util.export_keyboard_layout       # steno-trainer exports; regenerate after
-python -m util.export_practice_words        # starboard3h.json or lexicon changes
-python -m util.export_practice_sentences
-python -m util.export_definitions
+# The pipeline in dependency order, run from the repo root (prefix PYTHONHASHSEED=0 when
+# the tracked outputs must be byte-reproducible); python dictionary.py orchestrates all of it:
+python lexique.py                           # S1 -> resources/LexiqueMixte.tsv
+# Prerequisites: source lexicons + Verbiste XML. Outputs: resources/LexiqueMixte.tsv.
+python -m util.build_synthetic_lexicon      # S2, converged -> LexiqueSynthetic.tsv
+# Prerequisites: LexiqueMixte.tsv. Outputs: appends to LexiqueSynthetic.tsv; on change deletes
+# the pickles and reruns the S3-S5 build.
+python -m util.optimize_keyboard            # S4, rare/costly -> starboard3h_optimized.json
+# Prerequisites: pickles or lexicons, starboard3h.json. Outputs: starboard3h_optimized.json
+# (--output to choose; never overwrites starboard3h.json silently).
+python dictionary.py --build-only           # S3+S5 -> pickles, theory.tsv (+ theory2.tsv)
+# Prerequisites: lexicons + starboard3h.json; rm -f the pickles after any lexicon/layout change.
+# Outputs: Dictionary.pickle, FirstTheory.pickle, theory.tsv, theory2.tsv.
+python -m src.elicitation --ask             # questionnaire -> questionnaire.json + HTML page
+# Prerequisites: both pickles. Outputs: questionnaire.json, elicitation_questionnaire.html.
+#   ... answer the page, copy the answers into elicitation_answers.json ...
+python -m src.elicitation --resolve         # resolve + group + report
+# Prerequisites: pickles + elicitation_answers.json. Outputs: resolved_press_sets.json,
+# keypress_groups.json, realization_report.json.
+python dictionary.py --build-only           # again -> refreshes theory2.tsv (S7)
+python -m util.export_plover_dictionary     # S8 Plover -> plover_stenalgo_dictionary.json
+python -m util.export_plover_system         # S8 Plover -> _generated_keys.py
+python -m util.export_keyboard_layout       # S8 trainer -> keyboard-layout.json
+python -m util.export_practice_words        # S8 trainer -> practice-words.json
+python -m util.export_practice_sentences    # S8 trainer -> practice-sentences.json (needs the
+                                            # previous step's practice-words.json)
+python -m util.export_definitions           # S8 trainer -> definitions.json
+python dictionary.py                        # the orchestrator over everything from S2 to S8
 ```
-`python dictionary.py` aborts on the first failing step and re-runs cleanly; it deletes and
-rebuilds `Dictionary.pickle`/`FirstTheory.pickle` itself when its own appenders added rows
-during the run. The NOM/ADJ cross-checkers additionally need the external Morphalou 3.1
-corpus, extracted under `morphalou/` (gitignored, ~670 MB; CSV at
+`python dictionary.py` aborts on the first failing step and re-runs cleanly; its Synthetic
+Lexicon Building (S2) wrapper loops the appenders to convergence and deletes/rebuilds the
+pickles itself whenever they added rows. The NOM/ADJ cross-checkers additionally need the
+external Morphalou 3.1 corpus, extracted under `morphalou/` (gitignored, ~670 MB; CSV at
 `morphalou/Morphalou3.1_CSV.csv`) — without it the NOM/ADJ appender generates
 donor-table-only rows. After any hand-made lexicon or layout change, still delete
 `Dictionary.pickle`/`FirstTheory.pickle` before running — the caches are never checked for

@@ -9,8 +9,10 @@ import os
 
 _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-with open(os.path.join(_REPO_ROOT, "questionnaire.json"), encoding="utf-8") as f:
-    items = json.load(f)
+
+def loadItems(path: str) -> list[dict]:
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
 
 LABELS = {
     "pers_1": "1re pers.", "pers_2": "2e pers.", "pers_3": "3e pers.",
@@ -519,6 +521,9 @@ document.getElementById("saveBtn").addEventListener("click", async () => {
 
 
 def main() -> None:
+    # questionnaire.json is read here in main(), not at module scope, so importing
+    # this module never requires the file to exist.
+    items = loadItems(os.path.join(_REPO_ROOT, "questionnaire.json"))
     for i, item in enumerate(items):
         item["numLabel"] = f"Q{i + 1}/{len(items)}"
     html = HTML_TEMPLATE.replace("__QUESTIONS_JSON__", json.dumps(items, ensure_ascii=False))

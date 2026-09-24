@@ -14,7 +14,10 @@ from src.keyboard import Keyboard, Strokes
 from src.word import Word
 
 
-def _loadDictionaryAndFirstTheory():  # type: ignore[no-untyped-def]
+def loadDictionary():  # type: ignore[no-untyped-def]
+    """Dictionary.pickle plus its four trailing Syllable-collection pickles, WITHOUT
+    FirstTheory.pickle -- for callers needing only the Dictionary and its layout
+    statistics (Keyboard Layout Optimization (S4), util/optimize_keyboard.py)."""
     from dictionary import Dictionary
     # Dictionary.pickle was written while `dictionary.py` ran as __main__, so pickle
     # recorded the class under the "__main__" module -- alias it here so unpickling
@@ -30,6 +33,11 @@ def _loadDictionaryAndFirstTheory():  # type: ignore[no-untyped-def]
         Syllable.phonemeColByPart = pickle.load(pfile)
         Syllable.biphonemeColByPart = pickle.load(pfile)
         Syllable.multiphonemeColByPart = pickle.load(pfile)
+    return dictionary
+
+
+def _loadDictionaryAndFirstTheory():  # type: ignore[no-untyped-def]
+    dictionary = loadDictionary()
 
     if not os.path.exists("FirstTheory.pickle"):
         raise RuntimeError("Run `python dictionary.py` first to generate FirstTheory.pickle.")

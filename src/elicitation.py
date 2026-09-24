@@ -20,6 +20,10 @@ plan's open decision §F) or the abstract grouping solver (Discriminating-Featur
 from collections import defaultdict
 from dataclasses import dataclass, field
 from itertools import combinations
+import argparse
+import json
+import subprocess
+import sys
 
 from src.keyboard import Strokes, canonicalizeStrokes
 from src.word import GramCat, Lemme, LemmeGramCat, Word, WordOrtho, groupWordsByLemme
@@ -532,28 +536,36 @@ def serializeResolvedPressSets(
     ]
 
 
-if __name__ == "__main__":
-    import os
-    import pickle
+def parseArgs(argv: list[str] | None = None) -> argparse.Namespace:
+    """The --ask / --resolve CLI split; no flag runs both steps (what the orchestrator
+    and the plain `python -m src.elicitation` use)."""
+    parser = argparse.ArgumentParser(
+        prog="python -m src.elicitation",
+        description="Discriminating-Feature Elicitation (Elicitation Phase): questionnaire "
+                    "generation and/or press-set resolution.")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--ask", action="store_true",
+                      help="Questionnaire Generation only: questionnaire.json + the "
+                           "elicitation_questionnaire.html page.")
+    mode.add_argument("--resolve", action="store_true",
+                      help="Press-Set Resolution only: resolved_press_sets.json, then the "
+                           "Grouping Phase (util.build_keypress_groups) and the realization "
+                           "report (util.build_realization_report). Requires "
+                           "elicitation_answers.json.")
+    args = parser.parse_args(argv)
+    args.mode = "ask" if args.ask else "resolve" if args.resolve else "both"
+    return args
 
-    from src.grammar import Syllable
-    from dictionary import Dictionary
-    from src.keyboard import Starboard
 
-    if not os.path.exists("Dictionary.pickle") or not os.path.exists("FirstTheory.pickle"):
-        raise RuntimeError("Run `python dictionary.py` first to build Dictionary.pickle / FirstTheory.pickle.")
+def _runStep(description: str, command: list[str]) -> None:
+    """Run one step as a subprocess; abort on failure (dictionary.runPipeline's idiom)."""
+    print(f"\n=== {description} ===\n$ {' '.join(command)}", flush=True)
+    completed = subprocess.run(command)
+    if completed.returncode != 0:
+        raise SystemExit(completed.returncode or 1)
 
-    with open("Dictionary.pickle", "rb") as pfile:
-        _dictionary = pickle.load(pfile)
-        Syllable.allPhonemeCol = pickle.load(pfile)
-        Syllable.phonemeColByPart = pickle.load(pfile)
-        Syllable.biphonemeColByPart = pickle.load(pfile)
-        Syllable.multiphonemeColByPart = pickle.load(pfile)
 
-    with open("FirstTheory.pickle", "rb") as pfile:
-        theory: dict[Strokes, list[Word]] = pickle.load(pfile)
-
-    homophoneGroups = buildLemmaHomophoneGroups(theory)
+def printScaleReport(homophoneGroups: dict[LemmaHomophoneGroupKey, list[Word]]) -> None:
     report = reportScale(homophoneGroups)
 
     print("=== Phase E3 scale report ===")
@@ -573,62 +585,115 @@ if __name__ == "__main__":
         for tie in sorted(report.tieOppositions, key=lambda t: sorted(t[0]))[:10]:
             print("  ", sorted(tie[0]))
 
-    import json
 
+def writeQuestionnaire(homophoneGroups: dict[LemmaHomophoneGroupKey, list[Word]]) -> None:
     items = buildQuestionnaireItems(homophoneGroups)
     print(f"\nQuestionnaire items: {len(items)} ({sum(1 for i in items if not i.clean)} not fully clean)")
     with open("questionnaire.json", "w", encoding="utf-8") as jf:
         json.dump([i.__dict__ for i in items], jf, ensure_ascii=False, indent=1)
 
-    if os.path.exists("elicitation_answers.json"):
-        with open("elicitation_answers.json", encoding="utf-8") as af:
-            answerRecords = json.load(af)
-        answeredOppositions = [
-            AnsweredOpposition(
-                combinationA=frozenset(rec["atomsA"]), pressA=frozenset(rec["checkedA"]),
-                combinationB=frozenset(rec["atomsB"]), pressB=frozenset(rec["checkedB"]),
-            )
-            for rec in answerRecords
-        ]
-        answersByOpposition, duplicateOppositions = buildAnswersByOpposition(answeredOppositions)
-        pressSetsByGroup, unresolvedOppositions = resolveGroupPressSets(homophoneGroups, answersByOpposition)
-        conflicts, _ = validateElicitation(homophoneGroups, answersByOpposition)
-        conflictedGroupKeys = {conflict.homophoneGroupKey for conflict in conflicts}
 
-        print("\n=== Phase E5 validation report ===")
-        print(f"Answered oppositions loaded:            {len(answeredOppositions)}")
-        print(f"Duplicate oppositions (disagreeing answers for the same pair): {len(duplicateOppositions)}")
-        print(f"Distinct unresolved oppositions encountered (groups containing them are skipped): "
-              f"{len({tuple(sorted(k, key=sorted)) for k in unresolvedOppositions})}")
-        print(f"Groups with a press-set conflict:                           {len(conflicts)}")
-
-        if duplicateOppositions:
-            print("\nDuplicate oppositions (same pair, disagreeing answers):")
-            for key in sorted(duplicateOppositions, key=lambda k: sorted(sorted(c) for c in k))[:10]:
-                print("  ", [sorted(c) for c in key])
-
-        if conflicts:
-            print("\nGroup conflicts (two spellings implying the identical press-set):")
-            for conflict in conflicts[:10]:
-                print(f"   press {sorted(conflict.pressSet) or '∅'} -> {conflict.orthos}"
-                      f"  (group {conflict.homophoneGroupKey[1]})")
-
-        # E6: persist the conflict-free, fully-resolved groups -- the Grouping Phase's actual input,
-        # not buildDiscriminatorSelection's output. Conflicted/unresolved groups are left
-        # out entirely rather than persisted half-wrong; they need re-asking first.
-        cleanPressSetsByGroup = {
-            key: pressSetByOrtho for key, pressSetByOrtho in pressSetsByGroup.items()
-            if key not in conflictedGroupKeys
-        }
-        frequencyByGroupOrtho = buildFrequencyByGroupOrtho(homophoneGroups, frozenset(_dictionary.frequentWords))
-        pressByOrthoCombinationByGroup, _ = resolvePressByCombination(homophoneGroups, answersByOpposition)
-        resolvedArtifact = serializeResolvedPressSets(
-            cleanPressSetsByGroup, frequencyByGroupOrtho, pressByOrthoCombinationByGroup
+def resolveAndWritePressSets(
+    homophoneGroups: dict[LemmaHomophoneGroupKey, list[Word]],
+    frequentWords: frozenset[str],
+) -> None:
+    with open("elicitation_answers.json", encoding="utf-8") as af:
+        answerRecords = json.load(af)
+    answeredOppositions = [
+        AnsweredOpposition(
+            combinationA=frozenset(rec["atomsA"]), pressA=frozenset(rec["checkedA"]),
+            combinationB=frozenset(rec["atomsB"]), pressB=frozenset(rec["checkedB"]),
         )
-        with open("resolved_press_sets.json", "w", encoding="utf-8") as rf:
-            json.dump(resolvedArtifact, rf, ensure_ascii=False, indent=1)
-        print(f"\nWrote resolved_press_sets.json: {len(resolvedArtifact)} validated groups "
-              f"(of {len(pressSetsByGroup)} resolved, {len(conflictedGroupKeys)} held back as conflicted)")
-    else:
-        print("\n(no elicitation_answers.json found -- skipping Phase E5 validation and E6 persistence)")
-    print("Wrote questionnaire.json")
+        for rec in answerRecords
+    ]
+    answersByOpposition, duplicateOppositions = buildAnswersByOpposition(answeredOppositions)
+    pressSetsByGroup, unresolvedOppositions = resolveGroupPressSets(homophoneGroups, answersByOpposition)
+    conflicts, _ = validateElicitation(homophoneGroups, answersByOpposition)
+    conflictedGroupKeys = {conflict.homophoneGroupKey for conflict in conflicts}
+
+    print("\n=== Phase E5 validation report ===")
+    print(f"Answered oppositions loaded:            {len(answeredOppositions)}")
+    print(f"Duplicate oppositions (disagreeing answers for the same pair): {len(duplicateOppositions)}")
+    print(f"Distinct unresolved oppositions encountered (groups containing them are skipped): "
+          f"{len({tuple(sorted(k, key=sorted)) for k in unresolvedOppositions})}")
+    print(f"Groups with a press-set conflict:                           {len(conflicts)}")
+
+    if duplicateOppositions:
+        print("\nDuplicate oppositions (same pair, disagreeing answers):")
+        for key in sorted(duplicateOppositions, key=lambda k: sorted(sorted(c) for c in k))[:10]:
+            print("  ", [sorted(c) for c in key])
+
+    if conflicts:
+        print("\nGroup conflicts (two spellings implying the identical press-set):")
+        for conflict in conflicts[:10]:
+            print(f"   press {sorted(conflict.pressSet) or '∅'} -> {conflict.orthos}"
+                  f"  (group {conflict.homophoneGroupKey[1]})")
+
+    # E6: persist the conflict-free, fully-resolved groups -- the Grouping Phase's actual input,
+    # not buildDiscriminatorSelection's output. Conflicted/unresolved groups are left
+    # out entirely rather than persisted half-wrong; they need re-asking first.
+    cleanPressSetsByGroup = {
+        key: pressSetByOrtho for key, pressSetByOrtho in pressSetsByGroup.items()
+        if key not in conflictedGroupKeys
+    }
+    frequencyByGroupOrtho = buildFrequencyByGroupOrtho(homophoneGroups, frequentWords)
+    pressByOrthoCombinationByGroup, _ = resolvePressByCombination(homophoneGroups, answersByOpposition)
+    resolvedArtifact = serializeResolvedPressSets(
+        cleanPressSetsByGroup, frequencyByGroupOrtho, pressByOrthoCombinationByGroup
+    )
+    with open("resolved_press_sets.json", "w", encoding="utf-8") as rf:
+        json.dump(resolvedArtifact, rf, ensure_ascii=False, indent=1)
+    print(f"\nWrote resolved_press_sets.json: {len(resolvedArtifact)} validated groups "
+          f"(of {len(pressSetsByGroup)} resolved, {len(conflictedGroupKeys)} held back as conflicted)")
+
+
+if __name__ == "__main__":
+    import os
+    import pickle
+
+    from src.grammar import Syllable
+    from dictionary import Dictionary  # must stay at the guard's top level: the name has
+    # to land in __main__'s globals so unpickling finds __main__.Dictionary (the same
+    # trick src/ambiguitychecker.py's __main__ relies on; util/_theoryio.py aliases it).
+    from src.keyboard import Starboard
+
+    args = parseArgs(sys.argv[1:])
+
+    if not os.path.exists("Dictionary.pickle") or not os.path.exists("FirstTheory.pickle"):
+        raise RuntimeError("Run `python dictionary.py` first to build Dictionary.pickle / FirstTheory.pickle.")
+
+    with open("Dictionary.pickle", "rb") as pfile:
+        _dictionary = pickle.load(pfile)
+        Syllable.allPhonemeCol = pickle.load(pfile)
+        Syllable.phonemeColByPart = pickle.load(pfile)
+        Syllable.biphonemeColByPart = pickle.load(pfile)
+        Syllable.multiphonemeColByPart = pickle.load(pfile)
+
+    with open("FirstTheory.pickle", "rb") as pfile:
+        theory: dict[Strokes, list[Word]] = pickle.load(pfile)
+
+    homophoneGroups = buildLemmaHomophoneGroups(theory)
+
+    if args.mode in ("both", "ask"):
+        printScaleReport(homophoneGroups)
+        writeQuestionnaire(homophoneGroups)
+        if args.mode == "ask":
+            _runStep("Elicitation Phase: questionnaire page render",
+                     [sys.executable, "-m", "util.build_questionnaire_page"])
+    if args.mode in ("both", "resolve"):
+        if not os.path.exists("elicitation_answers.json"):
+            if args.mode == "resolve":
+                raise SystemExit(
+                    "src.elicitation --resolve requires elicitation_answers.json: answer the "
+                    "questionnaire (elicitation_questionnaire.html, rendered by --ask) and copy "
+                    "the answers into elicitation_answers.json first.")
+            print("\n(no elicitation_answers.json found -- skipping Phase E5 validation and E6 persistence)")
+        else:
+            resolveAndWritePressSets(homophoneGroups, frozenset(_dictionary.frequentWords))
+            if args.mode == "resolve":
+                _runStep("Discriminating-Feature Grouping (Grouping Phase)",
+                         [sys.executable, "-m", "util.build_keypress_groups"])
+                _runStep("Realization Phase report build",
+                         [sys.executable, "-m", "util.build_realization_report"])
+    if args.mode in ("both", "ask"):
+        print("Wrote questionnaire.json")
