@@ -7,6 +7,7 @@ from ..elicitation import (
     buildLemmaHomophoneGroups,
     enumerateOppositionSamples,
     featureCombinationsByOrtho,
+    parseArgs,
     reportScale,
     resolvePressByCombination,
     resolveGroupPressSets,
@@ -355,3 +356,23 @@ def test_calmez_keeps_its_two_readings_as_separate_alternates_instead_of_unionin
 
     conflicts, _ = validateElicitation(homophoneGroups, answers)
     assert conflicts == []
+
+
+# ── parseArgs (the --ask / --resolve CLI split) ─────────────────────────────
+
+def test_no_flags_runs_both_steps():
+    assert parseArgs([]).mode == "both"
+
+
+def test_ask_flag_selects_questionnaire_generation():
+    assert parseArgs(["--ask"]).mode == "ask"
+
+
+def test_resolve_flag_selects_answer_analysis():
+    assert parseArgs(["--resolve"]).mode == "resolve"
+
+
+def test_ask_and_resolve_are_mutually_exclusive():
+    with pytest.raises(SystemExit) as excinfo:
+        parseArgs(["--ask", "--resolve"])
+    assert excinfo.value.code == 2

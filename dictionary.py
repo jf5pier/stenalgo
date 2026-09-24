@@ -20,7 +20,6 @@
 #  Behavior Research Methods. doi.org/10.3758/s13428-020-01396-2
 #
 import csv
-import hashlib
 import json
 import os
 import pickle
@@ -448,31 +447,6 @@ class Dictionary:
                         _ = f.write(writeLine + "\n")
 
 
-SYNTHETIC_TSV_PATH = "resources/LexiqueSynthetic.tsv"
-PICKLE_CACHE_PATHS = ("Dictionary.pickle", "FirstTheory.pickle")
-
-# The steady-state Synthetic Lexicon Building (S2) appenders, run with --apply (their
-# dry-run mode is for a human checking a diff first). The one-shot fix scripts stay
-# hand-run; see docs/PIPELINE.md Synthetic Lexicon Building (S2).
-S2_APPENDERS: list[tuple[str, list[str]]] = [
-    ("Synthetic Lexicon Building (S2.1): verb paradigm completion",
-     ["-m", "util.completeVerbParadigms", "--apply"]),
-    ("Synthetic Lexicon Building (S2.2): NOM/ADJ gap generation",
-     ["-m", "util.generateMissingNomAdjForms", "--apply"]),
-    ("Synthetic Lexicon Building (S2.3): pa:yer dual-form gaps",
-     ["-m", "util.fixPayerDualFormGaps", "--apply"]),
-    ("Synthetic Lexicon Building (S2.3): ass:eoir dual-form gaps",
-     ["-m", "util.fixAsseoirDualFormGaps", "--apply"]),
-]
-
-
-def _md5(path: str) -> str | None:
-    if not os.path.exists(path):
-        return None
-    with open(path, "rb") as f:
-        return hashlib.md5(f.read()).hexdigest()
-
-
 def runStep(description: str, args: list[str]) -> None:
     """Run one pipeline step as a subprocess; abort the pipeline on failure.
 
@@ -494,12 +468,13 @@ def runStep(description: str, args: list[str]) -> None:
 def runPipeline() -> None:
     """Orchestrate the whole chain in one `python dictionary.py` execution.
 
-    The four steady-state S2 appenders (--apply), theory 1, the Elicitation, Grouping
-    and Realization phases, the theory-2 refresh, and every Plover + steno-trainer
-    export, in dependency order. Every phase runs as a subprocess; the build phases
-    re-invoke this file with --internal-build-only because the Dictionary must never
-    be built twice in one process: Syllable's class-level phoneme collections
-    (src/grammar.py) accumulate frequencies across builds.
+    Synthetic Lexicon Building (S2) (converged, via util/build_synthetic_lexicon.py),
+    theory 1, the Elicitation, Grouping and Realization phases, the theory-2 refresh,
+    and every Plover + steno-trainer export, in dependency order. Every phase runs as
+    a subprocess; the build phases re-invoke this file with --internal-build-only
+    because the Dictionary must never be built twice in one process: Syllable's
+    class-level phoneme collections (src/grammar.py) accumulate frequencies across
+    builds.
     """
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     selfInvoke = [sys.executable, os.path.abspath(__file__)]
@@ -515,27 +490,13 @@ def runPipeline() -> None:
     # transient -- the refresh step below rewrites it.
     build("Dictionary loading + theory 1 (S3-S5), pass 1")
 
-    # The four steady-state S2 appenders. They converge to appending nothing on an
-    # up-to-date LexiqueSynthetic.tsv.
-    syntheticBefore = _md5(SYNTHETIC_TSV_PATH)
-    for label, modArgs in S2_APPENDERS:
-        runStep(label, [sys.executable, *modArgs])
-
-    # Internal invalidation only: rows appended during THIS run must enter the
-    # pickles before the Elicitation Phase reads them. Hand-made lexicon or layout
-    # edits outside this run remain the caller's responsibility: rm -f the pickles
-    # first (the cache is never checked for staleness).
-    if _md5(SYNTHETIC_TSV_PATH) != syntheticBefore:
-        print("\nLexiqueSynthetic.tsv changed -- deleting the pickles and rebuilding "
-              "Dictionary/theory 1...", flush=True)
-        for picklePath in PICKLE_CACHE_PATHS:
-            if os.path.exists(picklePath):
-                os.remove(picklePath)
-        build("Dictionary loading + theory 1 (S3-S5), pass 2 (post-append rebuild)")
-    else:
-        print("\nLexiqueSynthetic.tsv unchanged -- keeping the existing pickles "
-              "(if you edited the lexicons or layout since they were written, "
-              "`rm -f Dictionary.pickle FirstTheory.pickle` and re-run).", flush=True)
+    # Synthetic Lexicon Building (S2), converged: the wrapper reruns the four
+    # steady-state appenders (--apply) until a full round appends nothing, and after
+    # any round that appended rows it deletes the pickles and reruns the build above
+    # itself. Hand-made lexicon or layout edits outside this run remain the caller's
+    # responsibility: rm -f the pickles first (the cache is never checked for
+    # staleness).
+    module("Synthetic Lexicon Building (S2), converged", "util.build_synthetic_lexicon")
 
     # Elicitation Phase: non-interactive; unresolved oppositions warn and continue
     # (watch the output -- the docs/PIPELINE.md rebuild step 4h human loop fixes
@@ -580,9 +541,11 @@ def buildOnly() -> None:
     (S3), layout statistics on a pickle miss, keyboard load, Phonetic Theory
     Building (S5, writes theory.tsv + FirstTheory.pickle on a miss), and theory 2
     (S7) when keypress_groups.json and resolved_press_sets.json both exist. Run as
-    `python dictionary.py --internal-build-only` by runPipeline(); the pickle
-    classes must stay recorded as __main__.Dictionary (util/_theoryio.py and
-    src/elicitation.py unpickling rely on it), so this file stays the entrypoint.
+    `python dictionary.py --internal-build-only` by runPipeline() and the S2 wrapper
+    (util/build_synthetic_lexicon.py), and directly as the public
+    `python dictionary.py --build-only`; the pickle classes must stay recorded as
+    __main__.Dictionary (util/_theoryio.py and src/elicitation.py unpickling rely on
+    it), so this file stays the entrypoint.
     """
     if os.path.exists("Dictionary.pickle"):
         with open("Dictionary.pickle", "rb") as pfile:
@@ -676,7 +639,7 @@ def buildOnly() -> None:
 
 
 if __name__ == "__main__":
-    if "--internal-build-only" in sys.argv[1:]:
+    if "--internal-build-only" in sys.argv[1:] or "--build-only" in sys.argv[1:]:
         buildOnly()
     else:
         runPipeline()

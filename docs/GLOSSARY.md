@@ -501,8 +501,8 @@ Realization Phase or the keys chosen for one keypress group.
 
 ### Keyboard layout
 A dataset state: the `Starboard` loaded from `starboard3h.json`, mapping phonemes to key
-tuples per syllabic bank. Produced by Keyboard Layout Optimization (S4); no current command
-rewrites it.
+tuples per syllabic bank. Produced by Keyboard Layout Optimization (S4); rewritten only
+deliberately (`util.optimize_keyboard --output starboard3h.json`).
 - Code: `Keyboard.fromJSONFile` src/keyboard.py:252.
 - First used in: Keyboard Layout Optimization (S4).
 
@@ -511,9 +511,9 @@ The stage that produces `starboard3h.json`: the layout statistics (Phoneme order
 (S4.1), Ambiguity statistics (S4.2)), the fallback keymap (S4.3) and the CP-SAT layout solve
 (S4.4, ambiguity ×30,000 + ergonomics ×1 + phoneme order ×500 per syllabic part, 90 s each).
 A real, rarely run and costly stage, **not dead code** (decision b5). The statistics run on
-every fresh rebuild; the solver call is commented out at dictionary.py:494, so no command
-regenerates the layout today (queued in TODO.md).
-- Code: `optimizeKeyboard` src/cpsatsolver.py:13; dictionary.py:464-466, :489-496.
+every fresh rebuild; the solve is `python -m util.optimize_keyboard`, which seeds from the
+committed `starboard3h.json` and writes `starboard3h_optimized.json` by default.
+- Code: `optimizeKeyboard` src/cpsatsolver.py:13; `main` util/optimize_keyboard.py.
 - Avoid "Keyboard Layout Optimization (S2b)", "not run" as a description of the stage.
 - First used in: Keyboard Layout Optimization (S4).
 

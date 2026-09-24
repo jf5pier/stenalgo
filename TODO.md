@@ -145,9 +145,10 @@ was removed in Dead-Code Removal (Pass 5).
   (src/word.py:414) → `groupWordsByLemmeGramCat` (`groupWordsByBareLemme` is correctly named).
   Same pattern, also worth renaming: `buildLemmaHomophoneGroups` (src/elicitation.py:61) and
   `buildWordsByOrthoLemme` (src/ambiguitychecker.py:772, keyed by (ortho, `lemmeGramCat`)).
-- **No command regenerates `starboard3h.json`** — the `optimizeKeyboard` call is commented out at
-  dictionary.py:494 (and `toJSONFile` at :496). Add an explicit entry point for Keyboard Layout
-  Optimization (S4) (decision b5: a real, rarely-run, costly step, not dead code).
+- ~~**No command regenerates `starboard3h.json`**~~ — done (2026-09-23): `python -m
+  util.optimize_keyboard` runs the CP-SAT layout solve, seeds from the committed
+  `starboard3h.json` and writes `starboard3h_optimized.json` by default (`--output
+  starboard3h.json` to replace the seed deliberately).
 - **Realization report vs inline path drift** — the trainer keyboard legend reads the tracked
   `realization_report.json`, while theory 2 and the Plover dictionary recompute the
   Discriminating-Feature Stroke Realization (Realization Phase) inline; nothing compares them

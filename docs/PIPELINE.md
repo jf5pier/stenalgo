@@ -38,16 +38,16 @@ human loop 4h are run by hand, not by any script.
 
 | # | Command | Stage | Needed when | Notes |
 |---|---|---|---|---|
-| 0 | `python -m util.fix<Name> --apply`, `python -m util.completeVerbParadigms --apply`, `python -m util.generateMissingNomAdjForms --apply`, … | Lexicon Building (S1), Synthetic Lexicon Building (S2) | only after a lexicon correction | Patch `Lexique383.tsv`, `LexiqueInfraCorrespondance.tsv`, Verbiste XML and/or `LexiqueMixte.tsv`, or append rows to `LexiqueSynthetic.tsv`. Run by hand, one fix at a time. |
+| 0 | `python -m util.fix<Name> --apply`, `python -m util.completeVerbParadigms --apply`, `python -m util.generateMissingNomAdjForms --apply`, … | Lexicon Building (S1), Synthetic Lexicon Building (S2) | only after a lexicon correction | Patch `Lexique383.tsv`, `LexiqueInfraCorrespondance.tsv`, Verbiste XML and/or `LexiqueMixte.tsv`, or append rows to `LexiqueSynthetic.tsv`. Run by hand, one fix at a time. The four steady-state appenders are also run, converged, by `python -m util.build_synthetic_lexicon` (see Synthetic Lexicon Building (S2)). |
 | 1 | `python lexique.py` | Lexicon Building (S1) | a full regeneration of `LexiqueMixte.tsv` | Everything runs at import time (no `__main__` guard, lexique.py:1261-1263). A rerun today is byte-identical to the committed file. |
 | 2 | `rm -f Dictionary.pickle FirstTheory.pickle` | — | **any** lexicon or layout change | The pickle-cache trap: see below. |
-| 3 | `python dictionary.py` (first run) | Dictionary Loading (S3), Keyboard Layout Optimization (S4) statistics, Phonetic Theory Building (S5) | everything downstream | Writes theory 1 and both pickles. If `keypress_groups.json` and `resolved_press_sets.json` already exist (dictionary.py:531), it also writes `theory2.tsv` from those possibly stale inputs. On a fresh clone `resolved_press_sets.json` is absent (gitignored), so theory 2 is skipped. |
-| — | (no command) | Keyboard Layout Optimization (S4), solver | only to regenerate `starboard3h.json` | Rare and costly. The solver call (dictionary.py:494) and the layout write (:496) are commented out, so today it needs a code edit (see that stage). |
-| 4 | `python -m src.elicitation` | Discriminating-Feature Elicitation (Elicitation Phase): Questionnaire Generation, Press-Set Resolution | everything after it | Rebuilds the resolved discriminating feature sets from the stored `elicitation_answers.json`. Asks no questions. |
-| 4h | `python -m util.build_questionnaire_page` → publish → answer → copy answers into `elicitation_answers.json` → rerun step 4 | Elicitation Phase: Answer Collection | only when step 4 reports "unresolved oppositions" | The human-in-the-loop part. |
+| 3 | `python dictionary.py --build-only` (first run) | Dictionary Loading (S3), Keyboard Layout Optimization (S4) statistics, Phonetic Theory Building (S5) | everything downstream | Writes theory 1 and both pickles. If `keypress_groups.json` and `resolved_press_sets.json` already exist (dictionary.py:667), it also writes `theory2.tsv` from those possibly stale inputs. On a fresh clone `resolved_press_sets.json` is absent (gitignored), so theory 2 is skipped. `--build-only` is the public alias of the orchestrator's private `--internal-build-only` self-invocation. |
+| — | `python -m util.optimize_keyboard` | Keyboard Layout Optimization (S4), solver | only to regenerate `starboard3h.json` | Rare and costly (90 s per syllabic part + model build). Seeds from `starboard3h.json`, writes `starboard3h_optimized.json` by default; `--output starboard3h.json` overwrites the seed deliberately. Then `rm -f Dictionary.pickle FirstTheory.pickle` and rerun the build. |
+| 4 | `python -m src.elicitation` (`--ask` / `--resolve`) | Discriminating-Feature Elicitation (Elicitation Phase): Questionnaire Generation, Press-Set Resolution | everything after it | Rebuilds the resolved discriminating feature sets from the stored `elicitation_answers.json`. Asks no questions. `--ask` = Questionnaire Generation + the HTML page; `--resolve` = Press-Set Resolution + the Grouping Phase + the realization report (requires `elicitation_answers.json`, exit 1 without it); no flags = both steps, which is what the orchestrator runs. |
+| 4h | `python -m util.build_questionnaire_page` → publish → answer → copy answers into `elicitation_answers.json` → rerun step 4 (`--resolve`) | Elicitation Phase: Answer Collection | only when step 4 reports "unresolved oppositions" | The human-in-the-loop part. The page is also rendered by `--ask` (standalone `python -m util.build_questionnaire_page` still works). |
 | 5 | `python -m util.build_keypress_groups` | Discriminating-Feature Grouping (Grouping Phase) | when the live features or discriminating feature sets change | The tracked output rarely changes after a lexicon fix. |
 | 6 | `python -m util.build_realization_report` | Discriminating-Feature Stroke Realization (Realization Phase), report build | before step 9's keyboard legend | Writes the realization report only. It does not feed theory 2 or the Plover dictionary. |
-| 7 | `python dictionary.py` (second run) | Phonetic Theory Building (S5) → Different-Lemma or Grammatical-Category Disambiguation (S7) | only to refresh `theory2.tsv` | Fast (pickles exist). |
+| 7 | `python dictionary.py --build-only` (second run) | Phonetic Theory Building (S5) → Different-Lemma or Grammatical-Category Disambiguation (S7) | only to refresh `theory2.tsv` | Fast (pickles exist). |
 | 8 | `python -m util.export_plover_dictionary`, `python -m util.export_plover_system` | Theory Export (S8), Plover branch | Plover | Either order. |
 | 9 | `python -m util.export_keyboard_layout` (after step 6), `python -m util.export_practice_words`, **then** `python -m util.export_practice_sentences`, then `python -m util.export_definitions` | Theory Export (S8), trainer branch | steno-trainer | `export_practice_sentences` reads `practice-words.json` (export_practice_sentences.py:157). |
 | opt | `python -m util.check_conjugation_disambiguation_order` | Elicitation Phase: Answer Collection, validator | checking answers | Writes `conjugation_disambiguation_report.json` (gitignored). |
@@ -55,18 +55,20 @@ human loop 4h are run by hand, not by any script.
 **The orchestrated entrypoint.** `python dictionary.py` (no arguments) runs the whole chain
 itself: table steps 3-9 plus the four steady-state Synthetic Lexicon Building (S2) appenders
 (`util.completeVerbParadigms`, `util.generateMissingNomAdjForms`, `util.fixPayerDualFormGaps`,
-`util.fixAsseoirDualFormGaps`, all with `--apply`), in dependency order — step 3, the
-appenders, step 3 again whenever they changed `resources/LexiqueSynthetic.tsv`, step 4,
-step 5, the theory-2 refresh of step 7, step 6, then the step 8-9 exports. The internal
-build phases are self-invocations (`python dictionary.py --internal-build-only`, a private
-flag): the Dictionary must never be built twice in one process, because `Syllable`'s
-class-level phoneme collections (src/grammar.py:451-466) accumulate frequencies across
-builds. Steps 0 (one-off hand fix scripts), 1 (`lexique.py`) and 4h (the human
-questionnaire loop) stay manual. Two orderings differ cosmetically from the table (both
-output-equivalent): the orchestrator refreshes `theory2.tsv` before building the realization
-report, and a mid-run `theory2.tsv` written by step 3 from possibly stale JSONs is
-transient — overwritten later in the same run. After a genuine lexicon change, one
-orchestrated run may not fully converge the appenders (second-order gaps); a second run does.
+`util.fixAsseoirDualFormGaps`, all with `--apply`) through `python -m
+util.build_synthetic_lexicon`, in dependency order — step 3, the appenders (looped to
+convergence by the wrapper, which itself deletes the pickles and reruns the internal build
+after any round that appended rows), step 4, step 5, the theory-2 refresh of step 7, step 6,
+then the step 8-9 exports. The internal build phases are self-invocations (`python
+dictionary.py --internal-build-only`, a private flag with the public alias `--build-only`):
+the Dictionary must never be built twice in one process, because `Syllable`'s class-level
+phoneme collections (src/grammar.py:451-466) accumulate frequencies across builds. Steps 0
+(one-off hand fix scripts), 1 (`lexique.py`) and 4h (the human questionnaire loop) stay
+manual. Two orderings differ cosmetically from the table (both output-equivalent): the
+orchestrator refreshes `theory2.tsv` before building the realization report, and a mid-run
+`theory2.tsv` written by step 3 from possibly stale JSONs is transient — overwritten later in
+the same run. The S2 wrapper loops the appenders until a full round appends nothing, so a
+single orchestrated run converges even after a genuine lexicon change.
 
 Five facts that the command list does not show:
 
@@ -95,10 +97,11 @@ Five facts that the command list does not show:
    while the Plover dictionary and drills use the keys recomputed on the inline path. Skip
    step 6 after a change of keypress groups and the legend disagrees with the dictionary
    (item B18).
-5. **No command regenerates `starboard3h.json`.** Keyboard Layout Optimization (S4) is a
-   real stage, but its solver call and the layout write are commented out
-   (dictionary.py:494, :496). Eight error messages say "run dictionary.py once first to
-   generate it"; `dictionary.py` only reads it.
+5. **`starboard3h.json` is regenerated only deliberately.** Keyboard Layout Optimization
+   (S4) is a real stage with its own command, `python -m util.optimize_keyboard`, which
+   writes `starboard3h_optimized.json` by default (`--output starboard3h.json` targets the
+   seed explicitly). The same solve is still visible, commented, at dictionary.py:630, :632;
+   `dictionary.py` itself only reads the layout.
 
 ## Recomputing after a fix
 
@@ -127,8 +130,8 @@ phonology or syllabification correction.
 
 **With the orchestrated entrypoint** the checklist below collapses to: step 1's fix, then
 `rm -f Dictionary.pickle FirstTheory.pickle`, then (for a Mixte-level fix) `python
-lexique.py`, then a single `python dictionary.py`; re-run it once more if the appenders'
-reports show they appended rows (second-order gaps). The numbered checklist remains as the
+lexique.py`, then a single `python dictionary.py` — its Synthetic Lexicon Building (S2)
+wrapper loops the appenders to convergence by itself. The numbered checklist remains as the
 manual fallback and as the explanation of what the orchestrator does internally.
 
 **Checklist for a fix that changes theory-1 collisions:**
@@ -137,13 +140,13 @@ manual fallback and as the explanation of what the orchestrator does internally.
    exact source file(s) plus `LexiqueMixte.tsv` directly rather than re-running `lexique.py`
    wholesale, to keep the diff scoped; a full `lexique.py` rerun is the safer check).
 2. `rm -f Dictionary.pickle FirstTheory.pickle`
-3. `python dictionary.py` — rebuilds theory 1; writes `theory2.tsv` from whatever Elicitation
+3. `python dictionary.py --build-only` — rebuilds theory 1; writes `theory2.tsv` from whatever Elicitation
    and Grouping Phase outputs currently exist (possibly stale at this point — expected).
 4. `python -m src.elicitation` — re-derives `resolved_press_sets.json` against the fixed
    theory 1.
 5. `python -m util.build_realization_report` — refreshes the tracked realization report
    (`realization_report.json`).
-6. `python dictionary.py` again — rebuilds `theory2.tsv` against the now-fresh Elicitation
+6. `python dictionary.py --build-only` again — rebuilds `theory2.tsv` against the now-fresh Elicitation
    Phase data (the pickles exist from step 3, so this run is fast).
 7. Verify: `pytest src/test/`, plus a targeted collision check for the specific word(s) or
    lemma(s) the fix touched: group theory-2 output (loaded via `util/_theoryio.py`, not
@@ -169,7 +172,7 @@ The names below are used in every "Input state" and "Result" line.
 | **Word list** | `list[src.word.Word]`, deduplicated by identity (`ortho, phonology, lemme, gramCat, gender, number`); 167,639 Words | `Dictionary.readCorpus` dictionary.py:92 | inside `Dictionary.pickle` (gitignored) |
 | **syllable statistics** | `SyllableCollection` + `Syllable.*ColByPart` class state | `analyseSyllabification` dictionary.py:169 | `Dictionary.pickle` (objects 1-5) |
 | **layout statistics** | best permutation, pairwise order matrix (`pairwiseBiphonemeOrderScore`) and `syllabicPartAmbiguity`, per syllabic part | `optimizeBiphonemeOrder` grammar.py:644, `analyseAmbiguities` dictionary.py:183 | `Dictionary.pickle` |
-| **keyboard layout** | `Starboard` (26 keys; reserved keys 0, 1, 10, 15) | Keyboard Layout Optimization (S4), last run before 37fdc4e; loaded by `Keyboard.fromJSONFile` keyboard.py:252 | `starboard3h.json` (tracked, never rewritten by today's commands) |
+| **keyboard layout** | `Starboard` (26 keys; reserved keys 0, 1, 10, 15) | Keyboard Layout Optimization (S4), last run before 37fdc4e; loaded by `Keyboard.fromJSONFile` keyboard.py:252 | `starboard3h.json` (tracked; rewritten only deliberately — `util.optimize_keyboard --output starboard3h.json`; the solver's default output is `starboard3h_optimized.json`) |
 | **theory 1** | `dict[Strokes, list[Word]]` keyed by raw Strokes; 80,725 entries | `Dictionary.buildTheory` dictionary.py:305 | `FirstTheory.pickle` (gitignored); human view `theory.tsv` |
 | **homophone groups** | `dict[LemmaHomophoneGroupKey, list[Word]]`, key = (canonical Strokes, LemmeGramCat); 47,830 | `buildLemmaHomophoneGroups` elicitation.py:61 | no |
 | **questionnaire items** | `list[QuestionnaireItem]`, one per distinct opposition; 200 | `buildQuestionnaireItems` elicitation.py:220 | `questionnaire.json` (gitignored) |
@@ -196,7 +199,7 @@ Lexicon Building (S1) ............................ python lexique.py
 ├─ Syllabification stats (and row reorder) ........................ S1.8
 └─ Write the mixed lexicon — outputMixedLexique ................... S1.9  → LexiqueMixte.tsv
 
-Synthetic Lexicon Building (S2) .................. manual --apply scripts  → LexiqueSynthetic.tsv
+Synthetic Lexicon Building (S2) .................. python -m util.build_synthetic_lexicon → LexiqueSynthetic.tsv
 ├─ Verb paradigm completion — completeVerbParadigms ............... S2.1
 ├─ NOM/ADJ gap generation — generateMissingNomAdjForms ............ S2.2
 └─ Dual-form gap fillers, in-place repair ......................... S2.3, S2.4
@@ -207,18 +210,18 @@ Dictionary Loading (S3) .......................... python dictionary.py (first p
 ├─ Syllable inventory — analyseSyllabification .................... S3.3  (syllable statistics)
 └─ Dictionary cache write (after S4.1, S4.2) ...................... S3.4  → Dictionary.pickle
 
-Keyboard Layout Optimization (S4) ................ rare, costly; solver call commented out
+Keyboard Layout Optimization (S4) ................ rare, costly; python -m util.optimize_keyboard
 ├─ Phoneme order search — optimizeBiphonemeOrder .................. S4.1  (layout statistics, every fresh rebuild)
 ├─ Ambiguity statistics — analyseAmbiguities ...................... S4.2  (layout statistics, every fresh rebuild)
 ├─ Fallback keymap — generateBaseKeymap ........................... S4.3  (only if starboard3h.json is missing)
-└─ Layout solve — optimizeKeyboard (CP-SAT) ....................... S4.4  → starboard3h.json (no command today)
+└─ Layout solve — optimizeKeyboard (CP-SAT) ....................... S4.4  → starboard3h_optimized.json (--output starboard3h.json to replace the seed deliberately)
 
 Phonetic Theory Building (S5) .................... python dictionary.py (second part)
 ├─ Keyboard layout loading — Starboard.fromJSONFile ............... S5.1  ← starboard3h.json
 └─ Theory 1 construction — buildTheory ............................ S5.3  → FirstTheory.pickle, theory.tsv
 
 Same-Lemma and Grammatical-Category Disambiguation (S6)
-├─ Discriminating-Feature Elicitation (Elicitation Phase) .... python -m src.elicitation
+├─ Discriminating-Feature Elicitation (Elicitation Phase) .... python -m src.elicitation (--ask / --resolve)
 │  ├─ Questionnaire Generation
 │  │  ├─ Homophone group building — buildLemmaHomophoneGroups .... S6.Elicitation.1
 │  │  └─ Questionnaire item selection — buildQuestionnaireItems .. S6.Elicitation.4 → questionnaire.json
@@ -501,7 +504,9 @@ forms, missing NOM/ADJ gender or number forms, dual spellings) and appends the g
 to `resources/LexiqueSynthetic.tsv`. It is its own stage, not part of Lexicon Building (S1):
 its scripts read theory 1 or the lexicon TSVs, write a different file, and are run by hand.
 
-None of these runs in a rebuild. Each is a dry run unless given `--apply`. `lexique.py`
+The four steady-state appenders run in every orchestrated rebuild through `python -m
+util.build_synthetic_lexicon` (always `--apply`, looped to convergence); the one-shot fix
+scripts stay hand-run. Each is a dry run unless given `--apply`. `lexique.py`
 never reads or writes `resources/LexiqueSynthetic.tsv`: 42,225 **synthetic rows** (35,928
 VER, 3,896 NOM, 2,401 ADJ), mixed-lexicon columns plus `source` (always `synthetic`), all
 frequencies 0.0, no duplicates, no `sub:imp` rows (removed in fd7e242 by an unrecorded edit).
@@ -515,7 +520,7 @@ LGPL-LR), an external download from the
 overrides and `--no-morphalou` disables it.
 
 ### Verb paradigm completion — completeVerbParadigms.main (S2.1)   util/completeVerbParadigms.py:350
-Called by: a person, `python -m util.completeVerbParadigms [--apply]`.
+Called by: a person, `python -m util.completeVerbParadigms [--apply]`, and `python -m util.build_synthetic_lexicon` (with `--apply`).
 Input state: theory 1 (mixed lexicon + current synthetic rows), Verbiste XML, `resources/verbModelExceptions.tsv`.
 Transformation: caps its address space at 4 GiB (`_capMemory` :343); loads templates
 (`loadVerbisteTemplates` verbparadigm.py:48, `loadVerbModelExceptions` :67,
@@ -565,7 +570,7 @@ feature-complexity tie-break. Not idempotent (item B13).
   confirmed candidate; no deduplication against the file.
 
 ### NOM/ADJ gap generation — generateMissingNomAdjForms.main (S2.2)   util/generateMissingNomAdjForms.py:99
-Called by: a person, `python -m util.generateMissingNomAdjForms [--apply] [--morphalou PATH | --no-morphalou]`.
+Called by: a person, `python -m util.generateMissingNomAdjForms [--apply] [--morphalou PATH | --no-morphalou]`, and `python -m util.build_synthetic_lexicon` (with `--apply`).
 Input state: mixed lexicon + synthetic rows (`loadWords` nomAdjParadigm.py:415, minus
 `excluded_words.txt`), `resources/nomAdjModelExceptions.tsv` (:76), optionally
 `morphalou/Morphalou3.1_CSV.csv` (:477, **untracked**; without it only the ending tables are used).
@@ -601,6 +606,9 @@ Artifacts: appends to `LexiqueSynthetic.tsv` (:191).
   verbs (`balaie`/`balaye`) from a per-(slot, form type) ending table (match rate 1.0).
 - `util/fixAsseoirDualFormGaps.py` main :103 — same method for the 2- and 3-way ass:eoir
   alternations (`ié`/`eye`/`oi`).
+
+Both dual-form fillers are also called by `python -m util.build_synthetic_lexicon`
+(with `--apply`), like the S2.1 and S2.2 appenders above.
 - `util/fixAsseoirDualFormGapsManual.py` main :204 — 26 hand rows (`NEW_SYNTHETIC_ROWS`,
   `(ortho, lemme)` dedup :173) plus `TAG_ONLY_FIXES` written into `Lexique383.tsv`
   (:142-163). Its header (:34-43) records an earlier fix lost by patching `LexiqueMixte.tsv` only.
@@ -741,11 +749,13 @@ costly (several CP-SAT solves), not dead code. Its layout was last produced by a
 uncommitted run and committed in 37fdc4e (2026-09-13); every later stage reads that file.
 
 The two **layout statistics**, Phoneme order search (S4.1) and Ambiguity statistics (S4.2),
-run on **every fresh rebuild** (a `Dictionary.pickle` miss, dictionary.py:464-466; S4.2 is
+run on **every fresh rebuild** (a `Dictionary.pickle` miss inside `buildOnly`; S4.2 is
 the slowest step) and are the solver's inputs (src/cpsatsolver.py:14, :48
 `syllabicPartAmbiguity`; :363 `pairwiseBiphonemeOrderScore`). The solver call itself is
-**commented out** at dictionary.py:494, and so is the layout write at :496: **today no
-command regenerates `starboard3h.json` without editing code** (TODO.md § Queued follow-ups).
+**commented out** at dictionary.py:630, and so is the layout write at :632: it lives behind
+`python -m util.optimize_keyboard`, which regenerates a layout into
+`starboard3h_optimized.json` — overwriting the seed `starboard3h.json` requires an explicit
+`--output starboard3h.json` (TODO.md § Queued follow-ups).
 
 **The objective in plain words.** The solver solves one independent model per syllabic
 part (onset, nucleus, coda), because each part has its own key bank. It gives every phoneme
@@ -806,8 +816,10 @@ Result: an in-memory starting layout, never saved; every exporter would still fa
 Helpers not expanded: `Starboard.addToLayout` keyboard.py:417, `getStrokesOfPhoneme` :466.
 
 ### Layout solve — optimizeKeyboard (S4.4)   src/cpsatsolver.py:13
-Called by: nothing today (dictionary.py:494, commented out:
-`optimizeKeyboard(starboard, dictionary.syllabicPartAmbiguity, ["onset", "nucleus", "coda"])`).
+Called by: `python -m util.optimize_keyboard` (`util/optimize_keyboard.py` `main`), which
+seeds from `starboard3h.json` and passes `dictionary.syllabicPartAmbiguity` and
+`["onset", "nucleus", "coda"]` — the same call still visible, commented, at
+dictionary.py:630 — then writes the solved layout with `toJSONFile`.
 The import at dictionary.py:32 still loads OR-Tools on every `import dictionary`.
 Input state: keyboard layout (as hints), layout statistics, syllable statistics.
 Transformation: one CP-SAT model per syllabic part, the objective described above:
@@ -940,7 +952,7 @@ under Different-Lemma or Grammatical-Category Disambiguation (S7).
 ## Same-Lemma and Grammatical-Category Disambiguation (S6)
 
 ```
-Discriminating-Feature Elicitation (Elicitation Phase) — python -m src.elicitation (src/elicitation.py:527)
+Discriminating-Feature Elicitation (Elicitation Phase) — python -m src.elicitation --ask / --resolve (src/elicitation.py:535)
  Questionnaire Generation
   S6.Elicitation.1 Homophone group building — buildLemmaHomophoneGroups (src/elicitation.py:61)
   S6.Elicitation.2 Feature combination enumeration — wordFeatureCombinations / featureCombinationsByOrtho (:30, :86)
@@ -1007,10 +1019,15 @@ grammatical category). It has three phases:
 
 ### Discriminating-Feature Elicitation (Elicitation Phase)
 
-Entry: `python -m src.elicitation`, `__main__` at src/elicitation.py:527. Loads
-`Dictionary.pickle` (restoring the class state, :538-543) and `FirstTheory.pickle`
-(:545-546). Of its three named sub-steps, the command runs **Questionnaire Generation** and
-**Press-Set Resolution** and asks nothing. **Answer Collection** is the human loop between
+Entry: `python -m src.elicitation [--ask | --resolve]`, `__main__` at src/elicitation.py:535.
+Loads `Dictionary.pickle` (restoring the class state) and `FirstTheory.pickle`. Of its three
+named sub-steps, the plain command runs **Questionnaire Generation** and **Press-Set
+Resolution** and asks nothing — that both-steps form is what the orchestrator runs. `--ask`
+runs Questionnaire Generation only, then renders the questionnaire page (`python -m
+util.build_questionnaire_page`); `--resolve` runs Press-Set Resolution only and requires
+`elicitation_answers.json` (clean exit 1 without it), then also runs the Grouping Phase
+(`util.build_keypress_groups`) and the realization report (`util.build_realization_report`).
+**Answer Collection** is the human loop between
 them (rebuild step 4h): a person checks, per opposition, which atomic features to press for
 each side, producing the elicitation answers. It is needed only when Press-Set Resolution
 reports unresolved oppositions.
@@ -1068,8 +1085,8 @@ Notes: ids are renumbered every run. Answers store `id`, `orthoA/B`, `lemma`, `r
 #### Answer Collection (human loop)
 
 ##### Questionnaire page — build_questionnaire_page.main (S6.Elicitation.5)   util/build_questionnaire_page.py:521
-Called by: a person (rebuild step 4h).
-Transformation: reads `questionnaire.json` at import (:12), injects items and French feature
+Called by: a person (rebuild step 4h) and `python -m src.elicitation --ask`.
+Transformation: loads `questionnaire.json` in `main()` (moved out of module scope), injects items and French feature
 labels (`LABELS` :15) into an HTML/JS page with two spellings and their feature checkboxes per
 item. Answers go to the Artifact `db` document `progress/answers` (:478, :511); a person
 copies them into `elicitation_answers.json` by hand. No code reads the `db` document back.
@@ -1158,7 +1175,8 @@ Notes: `readings` is read only by the trainer exporters.
 
 ### Discriminating-Feature Grouping (Grouping Phase)
 
-Entry: `python -m util.build_keypress_groups`, `main` at :49. An atomic feature is
+Entry: `python -m util.build_keypress_groups`, `main` at :49; also run by `python -m
+src.elicitation --resolve` (after Press-Set Resolution). An atomic feature is
 **live** if some resolved discriminating feature set contains it (13 today). The other 7
 questionnaire features (`VER`, `indicatif`, `m`, `nbr_s`, `participe`, `présent`, `s`) are
 **unpressable**: nobody checked them. Pressing a keypress group asserts every feature it
@@ -1360,7 +1378,7 @@ theory 2. They skip Different-Lemma or Grammatical-Category Disambiguation (S7) 
 are never collision-checked when the primary is empty (item B21).
 
 #### Report serialization — build_realization_report.main (S6.Realization.8)   util/build_realization_report.py:38
-Called by: a person (rebuild step 6).
+Called by: a person (rebuild step 6) and `python -m src.elicitation --resolve`.
 Transformation: per group in id order: features, `affectedWords`, `chosenKeys`, `cost`, ranked
 `alternates`; then the four residual buckets as ortho pairs, in the order produced by Final
 verification and residual buckets (S6.Realization.5.5).
