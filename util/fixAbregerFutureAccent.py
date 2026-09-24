@@ -6,7 +6,7 @@
 # "<p><i>ègerai</i></p>"), while every attested corpus form for this
 # template's own donor lemmas uses "é" instead (abrégerai, allégera,
 # protégerai, protégera, siégerai, siégera, piégerai -- confirmed against
-# FirstTheory.pickle this session, zero "è" spellings attested in the
+# PhoneticTheory.pickle this session, zero "è" spellings attested in the
 # future/conditional for any abr:éger lemma).
 #
 # This matches standard French orthography: "é_consonant+er" verbs (céder,

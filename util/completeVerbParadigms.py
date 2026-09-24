@@ -18,7 +18,7 @@
 # space, not in raw keystroke (Strokes) collisions.
 #
 # Dry-run by default: only reads resources/LexiqueMixte.tsv (via the cached
-# FirstTheory.pickle when present), resources/verbiste/*, and
+# PhoneticTheory.pickle when present), resources/verbiste/*, and
 # resources/verbModelExceptions.tsv, and prints a report of what it would
 # generate. --apply additionally appends the confirmed candidate rows to
 # resources/LexiqueSynthetic.tsv (created with a header if it doesn't exist
@@ -60,7 +60,7 @@ VERBISTE_VERBS_PATH = "resources/verbiste/verbs-fr.xml"
 VERBISTE_CONJUGATIONS_PATH = "resources/verbiste/conjugations-fr.xml"
 EXCEPTIONS_PATH = "resources/verbModelExceptions.tsv"
 SYNTHETIC_PATH = "resources/LexiqueSynthetic.tsv"
-THEORY_CACHE_PATH = "FirstTheory.pickle"
+THEORY_CACHE_PATH = "PhoneticTheory.pickle"
 KEYBOARD_JSON_PATH = "starboard3h.json"
 
 GENDER_NUMBER_SLOTS = [("m", "s"), ("m", "p"), ("f", "s"), ("f", "p")]
@@ -98,15 +98,15 @@ def loadTheoryAndKeyboard() -> tuple[dict[Strokes, list[Word]], Starboard]:
     import dictionary as dictionary_module
     from src.grammar import Syllable
     dictionary = dictionary_module.Dictionary()
-    # buildTheory reads dictionary.syllableCollection, which only
+    # buildPhoneticTheory reads dictionary.syllableCollection, which only
     # analyseSyllabification() populates -- dictionary.py's own __main__
     # always runs it (or unpickles the post-analysis state) before ever
-    # calling buildTheory. Skipping it here reproduces a KeyError in
-    # buildTheory (self.syllableCollection.syllable_names[syllableName]) the
-    # first time this runs without a cached FirstTheory.pickle.
+    # calling buildPhoneticTheory. Skipping it here reproduces a KeyError in
+    # buildPhoneticTheory (self.syllableCollection.syllable_names[syllableName]) the
+    # first time this runs without a cached PhoneticTheory.pickle.
     dictionary.analyseSyllabification()
     Syllable.optimizeBiphonemeOrder()
-    return dictionary.buildTheory(starboard), starboard
+    return dictionary.buildPhoneticTheory(starboard), starboard
 
 
 def attestedParticipleFormsByLemme(
@@ -361,7 +361,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    print("Loading theory (uses FirstTheory.pickle if present)...")
+    print("Loading theory (uses PhoneticTheory.pickle if present)...")
     theory, _starboard = loadTheoryAndKeyboard()
 
     verbisteTemplates = loadVerbisteTemplates(VERBISTE_VERBS_PATH)

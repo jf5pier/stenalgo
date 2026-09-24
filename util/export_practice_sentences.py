@@ -34,7 +34,7 @@ from dataclasses import dataclass
 from src.keyboard import Starboard, Strokes
 from src.word import Word
 from util._stenorender import renderFinalStrokesToRTFCRE
-from util._theoryio import loadFirstAndFinalTheory
+from util._theoryio import loadPhoneticAndDisambiguatedTheory
 from util.export_practice_words import (
     KEYBOARD_JSON, OUTPUT_PATH as PRACTICE_WORDS_PATH, RESOLVED_PRESS_SETS_PATH, Reading,
     buildReadingsByWord, chordsWithReadings, formatPhonology, formatReadingsLabel,
@@ -150,15 +150,15 @@ def main() -> None:
 
     starboard = Starboard.fromJSONFile(KEYBOARD_JSON)
     if starboard is None:
-        raise RuntimeError(f"{KEYBOARD_JSON} not found; run dictionary.py once first to generate it.")
-    theory, finalTheory = loadFirstAndFinalTheory(starboard)
+        raise RuntimeError(f"{KEYBOARD_JSON} not found; it is a committed input -- run from the repo root.")
+    theory, disambiguatedTheory = loadPhoneticAndDisambiguatedTheory(starboard)
     with open(RESOLVED_PRESS_SETS_PATH, encoding="utf-8") as f:
         readingsByWord = buildReadingsByWord(json.load(f), theory)
     with open(PRACTICE_WORDS_PATH, encoding="utf-8") as f:
         drillItems = {(item["ortho"], item["steno"]) for item in json.load(f)}
 
     chordsByOrtho: dict[str, list[Chord]] = {}
-    for word, strokesList in finalTheory.items():
+    for word, strokesList in disambiguatedTheory.items():
         chords, _aligned = chordsWithReadings(word, strokesList, readingsByWord)
         chordsByOrtho.setdefault(word.ortho, []).extend(
             Chord(word, strokes, renderFinalStrokesToRTFCRE(starboard, strokes), readings)

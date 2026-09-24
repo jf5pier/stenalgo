@@ -523,7 +523,7 @@ class TestBuildKeypressGroupToWords:
         assert groupToWords == {0: [wRight]}
 
     def test_matches_raw_strokes_with_a_repeated_key_against_canonical_entry_strokes(self):
-        """Real "nie" regression: "nie" /nj/ (subjonctif) has raw theory-1 strokes
+        """Real "nie" regression: "nie" /nj/ (subjonctif) has raw phonetic-theory strokes
         ((6, 8, 8, 9),) but its entry's strokes are canonical [[6, 8, 9]]. It must still be
         found, not silently replaced by the fallback -- "nie" /ni/, a different Word of the
         same spelling and lemma, which would then wrongly carry the subjonctif mark."""

@@ -44,7 +44,7 @@ NEW_TEMPLATE = "squatt:er"
 
 # The 4 remaining "aim:er" donors whose rawOrthosyllCV is "...X_e_r"
 # (doubled-consonant anglicism, neither the regular "...X_er" shape nor the
-# "étudi:er" vowel-final/hiatus shape), confirmed via FirstTheory.pickle
+# "étudi:er" vowel-final/hiatus shape), confirmed via PhoneticTheory.pickle
 # this session.
 ANGLICISM_LEMMAS = ("reprogrammer", "squatter", "bitter", "stripper")
 

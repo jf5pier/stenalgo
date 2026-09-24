@@ -9,7 +9,7 @@ affected word's own newly-composed stroke -- composing ALL of a word's needed gr
 into that one shared extra stroke, not just the group currently being decided.
 
 This is the report-build call site -- it does NOT rewrite `theory` or persist a
-final stroke-per-word table; theory 2 is computed inline by `Dictionary.buildFinalTheory`
+final stroke-per-word table; the disambiguated theory is computed inline by `Dictionary.buildDisambiguatedTheory`
 (the inline path) on every exporter run. It writes `realization_report.json`: per keypress group, the chosen
 coda key-combo (or null if left unassigned), its cost, the alternate candidates considered,
 and any residual collisions the greedy group-by-group search still missed (see
@@ -17,7 +17,7 @@ and any residual collisions the greedy group-by-group search still missed (see
 final full-assignment verification pass is needed to catch them).
 
 Run: python -m util.build_realization_report
-Requires Dictionary.pickle/FirstTheory.pickle (`python dictionary.py` first),
+Requires Dictionary.pickle/PhoneticTheory.pickle (`python -m util.build_phonetic_theory` first),
 keypress_groups.json (`python -m util.build_keypress_groups`) and
 resolved_press_sets.json (`python -m src.elicitation`).
 """
@@ -29,7 +29,7 @@ from src.ambiguitychecker import (
     buildWordToStrokes, realizeKeypressGroupsAsExtraStroke, resolvePreferredKeysByGroup,
 )
 from src.keyboard import Starboard
-from util._theoryio import loadFirstTheory
+from util._theoryio import loadPhoneticTheory
 
 PHASE_G_PATH = "keypress_groups.json"
 RESOLVED_PRESS_SETS_PATH = "resolved_press_sets.json"
@@ -42,10 +42,10 @@ def main() -> None:
     if not os.path.exists(RESOLVED_PRESS_SETS_PATH):
         raise RuntimeError(f"Run `python -m src.elicitation` first to generate {RESOLVED_PRESS_SETS_PATH}.")
 
-    theory = loadFirstTheory()
+    theory = loadPhoneticTheory()
     starboard = Starboard.fromJSONFile("starboard3h.json")
     if starboard is None:
-        raise RuntimeError("starboard3h.json not found; run dictionary.py once first to generate it.")
+        raise RuntimeError("starboard3h.json not found; it is a committed input -- run from the repo root.")
 
     with open(PHASE_G_PATH, encoding="utf-8") as f:
         keypressGroups = json.load(f)

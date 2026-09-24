@@ -33,26 +33,24 @@ python lexique.py                            # Lexicon Building (S1)
 # Outputs: resources/LexiqueMixte.tsv.
 
 python -m util.build_synthetic_lexicon       # Synthetic Lexicon Building (S2), converged
-# Prerequisites: LexiqueMixte.tsv (and FirstTheory.pickle for S2.1; rebuilt in memory if absent).
+# Prerequisites: LexiqueMixte.tsv (and PhoneticTheory.pickle for S2.1; rebuilt in memory if absent).
 # Outputs: appends to resources/LexiqueSynthetic.tsv; if any round appended rows, deletes
-# Dictionary.pickle/FirstTheory.pickle and reruns the S3-S5 build.
+# Dictionary.pickle/PhoneticTheory.pickle and reruns the S3-S5 build.
 
 python -m util.optimize_keyboard             # Keyboard Layout Optimization (S4); rare, costly
 # Prerequisites: Dictionary.pickle (or the lexicons, for an in-memory build), starboard3h.json.
 # Outputs: starboard3h_optimized.json (--output PATH to choose; starboard3h.json is overwritten
 # only by an explicit --output starboard3h.json). ~90 s per syllabic part, plus model building.
-# After adopting a layout: rm -f Dictionary.pickle FirstTheory.pickle, then rebuild.
+# After adopting a layout: rm -f Dictionary.pickle PhoneticTheory.pickle, then rebuild.
 
-python dictionary.py --build-only            # Dictionary Loading (S3) + Phonetic Theory
-                                             # Building (S5); theory 2 (S7) too when
-                                             # keypress_groups.json + resolved_press_sets.json
-                                             # exist
-# Prerequisites: the lexicons and starboard3h.json; rm -f Dictionary.pickle FirstTheory.pickle
+python -m util.build_phonetic_theory        # Dictionary Loading (S3) + Phonetic Theory
+                                             # Building (S5)
+# Prerequisites: the lexicons and starboard3h.json; rm -f Dictionary.pickle PhoneticTheory.pickle
 # after ANY lexicon or layout change (the cache is never checked for staleness).
-# Outputs: Dictionary.pickle, FirstTheory.pickle, theory.tsv, theory2.tsv.
+# Outputs: Dictionary.pickle, PhoneticTheory.pickle, phonetic_theory.tsv.
 
 python -m src.elicitation --ask              # Elicitation Phase: Questionnaire Generation
-# Prerequisites: Dictionary.pickle + FirstTheory.pickle.
+# Prerequisites: Dictionary.pickle + PhoneticTheory.pickle.
 # Outputs: questionnaire.json, elicitation_questionnaire.html.
 # Then answer the page and copy the answers into elicitation_answers.json (human step).
 
@@ -61,7 +59,9 @@ python -m src.elicitation --resolve          # Press-Set Resolution, then the Gr
 # Prerequisites: both pickles, elicitation_answers.json.
 # Outputs: resolved_press_sets.json, keypress_groups.json, realization_report.json.
 
-python dictionary.py --build-only            # again (same command): refreshes theory2.tsv (S7)
+python -m util.build_disambiguated_theory   # Different-Lemma or Grammatical-Category
+                                             # Disambiguation (S7): refreshes
+                                             # disambiguated_theory.tsv
 
 python -m util.export_plover_dictionary      # Theory Export (S8), Plover branch
 # Prerequisites: both pickles, starboard3h.json, keypress_groups.json,
@@ -89,7 +89,8 @@ python -m util.export_definitions
 
 python dictionary.py                         # the orchestrator over everything from S2 to S8
 # Prerequisites: as above (skips nothing; aborts on the first failing step).
-# Outputs: all of the S2-S8 outputs above, in dependency order.
+# Outputs: all of the S2-S8 outputs above, in dependency order; per-step wall times
+# appended to pipeline_timings.log (gitignored).
 ```
 
 (Diagnostics, hand-run, stay out of the list above: `python -m src.ambiguitychecker`,
@@ -104,14 +105,14 @@ Architecture and design rationale: `docs/ARCHITECTURE.md`. The eight stages:
 
 1. **Lexicon Building (S1)** — `python lexique.py` → `resources/LexiqueMixte.tsv` (136,456 rows)
 2. **Synthetic Lexicon Building (S2)** — `util/completeVerbParadigms.py` etc., run converged by `python -m util.build_synthetic_lexicon` (which the `python dictionary.py` orchestrator calls) → `resources/LexiqueSynthetic.tsv`
-3. **Dictionary Loading (S3)** — inside `python dictionary.py --build-only` → 167,639 Words, syllable inventory (cached in `Dictionary.pickle`)
+3. **Dictionary Loading (S3)** — inside `python -m util.build_phonetic_theory` → 167,639 Words, syllable inventory (cached in `Dictionary.pickle`)
 4. **Keyboard Layout Optimization (S4)** — CP-SAT layout solve; rare and costly — `python -m util.optimize_keyboard` (seeds from the committed `starboard3h.json`, writes `starboard3h_optimized.json`)
-5. **Phonetic Theory Building (S5)** — `Dictionary.buildTheory` → theory 1 (`FirstTheory.pickle`)
-6. **Same-Lemma and Grammatical-Category Disambiguation (S6)** — three phases: Elicitation (`python -m src.elicitation --ask` / `--resolve`), Grouping (`python -m util.build_keypress_groups`), Realization (feature discriminating strokes; inline in `Dictionary.buildFinalTheory` + `python -m util.build_realization_report`)
-7. **Different-Lemma or Grammatical-Category Disambiguation (S7)** — star/hash marks (`decideStarHashMark` rule stack) → theory 2
-8. **Theory Export (S8)** — Plover (`util/export_plover_*`) and steno-trainer (`util/export_*`) branches; nothing reads `theory2.tsv`, every exporter recomputes theory 2 via `util/_theoryio.py`
+5. **Phonetic Theory Building (S5)** — `Dictionary.buildPhoneticTheory` → the phonetic theory (`PhoneticTheory.pickle` + `phonetic_theory.tsv`; base strokes only, no homophone marks)
+6. **Same-Lemma and Grammatical-Category Disambiguation (S6)** — three phases: Elicitation (`python -m src.elicitation --ask` / `--resolve`), Grouping (`python -m util.build_keypress_groups`), Realization (feature discriminating strokes; inline in `Dictionary.buildDisambiguatedTheory` + `python -m util.build_realization_report`)
+7. **Different-Lemma or Grammatical-Category Disambiguation (S7)** — star/hash marks (`decideStarHashMark` rule stack), composed on the phonetic theory by `python -m util.build_disambiguated_theory` → the disambiguated theory (`disambiguated_theory.tsv`)
+8. **Theory Export (S8)** — Plover (`util/export_plover_*`) and steno-trainer (`util/export_*`) branches; nothing reads `disambiguated_theory.tsv`, every exporter recomputes the disambiguated theory via `util/_theoryio.py`
 
-Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`FirstTheory.pickle` whenever they exist and never checks them against the lexicon or layout (`rm -f *.pickle` after any lexicon or layout change — the Synthetic Lexicon Building (S2) wrapper deletes and rebuilds the pickles itself for rows its appenders add, but hand-made lexicon or layout edits remain the caller's responsibility; the orchestrator aborts on the first failing step); pin `PYTHONHASHSEED=0` when the tracked realization report must be reproducible; the NOM/ADJ cross-checkers need the external Morphalou 3.1 CSV (see `docs/PIPELINE.md` Synthetic Lexicon Building (S2)). The legacy discriminator path (`buildDiscriminatorSelection`, `satOptimizeDiscriminator`, `assignDiscriminatorKeypresses`) no longer runs: those functions are gone; `src/featureextractor.py` feeds only Synthetic Lexicon Building (S2)'s gating and the `ambiguitychecker` diagnostic, and of `src/greedyoptimizer.py` only `GRAMCAT_PRIORITY` is live (category-priority rule (R6)). Suspected bugs are listed in `TODO.md` ("Suspected bugs").
+Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whenever they exist and never checks them against the lexicon or layout (`rm -f *.pickle` after any lexicon or layout change — the Synthetic Lexicon Building (S2) wrapper deletes and rebuilds the pickles itself for rows its appenders add, but hand-made lexicon or layout edits remain the caller's responsibility; the orchestrator aborts on the first failing step); pin `PYTHONHASHSEED=0` when the tracked realization report must be reproducible; the NOM/ADJ cross-checkers need the external Morphalou 3.1 CSV (see `docs/PIPELINE.md` Synthetic Lexicon Building (S2)). The legacy discriminator path (`buildDiscriminatorSelection`, `satOptimizeDiscriminator`, `assignDiscriminatorKeypresses`) no longer runs: those functions are gone; `src/featureextractor.py` feeds only Synthetic Lexicon Building (S2)'s gating and the `ambiguitychecker` diagnostic, and of `src/greedyoptimizer.py` only `GRAMCAT_PRIORITY` is live (category-priority rule (R6)). Suspected bugs are listed in `TODO.md` ("Suspected bugs").
 
 ### Core Data Model
 
@@ -130,9 +131,9 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`FirstTheory.pickle` whenev
 
 ## Verification approach
 
-- `pytest src/test/` must pass after any `.py` change (522 tests at the time of writing).
+- `pytest src/test/` must pass after any `.py` change (538 tests at the time of writing).
 - Behaviour-preserving changes are proven by a full rebuild following the rebuild table in
-  `docs/PIPELINE.md` with `PYTHONHASHSEED=0`, comparing the md5s of `theory.tsv`, `theory2.tsv`,
+  `docs/PIPELINE.md` with `PYTHONHASHSEED=0`, comparing the md5s of `phonetic_theory.tsv`, `disambiguated_theory.tsv`,
   `resolved_press_sets.json`, `keypress_groups.json`, `realization_report.json`,
   `plover_stenalgo_dictionary.json` and `steno-trainer/public/data/*.json` against a
   pre-change baseline — they must be identical.

@@ -10,7 +10,7 @@ How to read it:
 
 - Eight stages, S1 to S8, one top-level section each. Stages and phases are cited by
   descriptive name with the code in parentheses ("Discriminating-Feature Grouping (Grouping
-  Phase)"). Calls are numbered in execution order inside their stage ("Theory 1 construction
+  Phase)"). Calls are numbered in execution order inside their stage ("Phonetic-theory construction
   (S5.3)"); in Same-Lemma and Grammatical-Category Disambiguation (S6) the ids carry the
   phase (`S6.Elicitation.n`, `S6.Grouping.n`, `S6.Realization.n`). A number always follows a
   descriptive name. Ids are stable citations, so gaps exist where a call was removed
@@ -40,14 +40,14 @@ human loop 4h are run by hand, not by any script.
 |---|---|---|---|---|
 | 0 | `python -m util.fix<Name> --apply`, `python -m util.completeVerbParadigms --apply`, `python -m util.generateMissingNomAdjForms --apply`, … | Lexicon Building (S1), Synthetic Lexicon Building (S2) | only after a lexicon correction | Patch `Lexique383.tsv`, `LexiqueInfraCorrespondance.tsv`, Verbiste XML and/or `LexiqueMixte.tsv`, or append rows to `LexiqueSynthetic.tsv`. Run by hand, one fix at a time. The four steady-state appenders are also run, converged, by `python -m util.build_synthetic_lexicon` (see Synthetic Lexicon Building (S2)). |
 | 1 | `python lexique.py` | Lexicon Building (S1) | a full regeneration of `LexiqueMixte.tsv` | Everything runs at import time (no `__main__` guard, lexique.py:1261-1263). A rerun today is byte-identical to the committed file. |
-| 2 | `rm -f Dictionary.pickle FirstTheory.pickle` | — | **any** lexicon or layout change | The pickle-cache trap: see below. |
-| 3 | `python dictionary.py --build-only` (first run) | Dictionary Loading (S3), Keyboard Layout Optimization (S4) statistics, Phonetic Theory Building (S5) | everything downstream | Writes theory 1 and both pickles. If `keypress_groups.json` and `resolved_press_sets.json` already exist (dictionary.py:667), it also writes `theory2.tsv` from those possibly stale inputs. On a fresh clone `resolved_press_sets.json` is absent (gitignored), so theory 2 is skipped. `--build-only` is the public alias of the orchestrator's private `--internal-build-only` self-invocation. |
-| — | `python -m util.optimize_keyboard` | Keyboard Layout Optimization (S4), solver | only to regenerate `starboard3h.json` | Rare and costly (90 s per syllabic part + model build). Seeds from `starboard3h.json`, writes `starboard3h_optimized.json` by default; `--output starboard3h.json` overwrites the seed deliberately. Then `rm -f Dictionary.pickle FirstTheory.pickle` and rerun the build. |
+| 2 | `rm -f Dictionary.pickle PhoneticTheory.pickle` | — | **any** lexicon or layout change | The pickle-cache trap: see below. |
+| 3 | `python -m util.build_phonetic_theory` | Dictionary Loading (S3), Keyboard Layout Optimization (S4) statistics, Phonetic Theory Building (S5) | everything downstream | Writes the phonetic theory and both pickles, always refreshing `phonetic_theory.tsv` (pickle hit or miss; the bytes are deterministic). Never touches the disambiguated theory — that is step 7's job, so no transient output is ever written from stale JSONs here. |
+| — | `python -m util.optimize_keyboard` | Keyboard Layout Optimization (S4), solver | only to regenerate `starboard3h.json` | Rare and costly (90 s per syllabic part + model build). Seeds from `starboard3h.json`, writes `starboard3h_optimized.json` by default; `--output starboard3h.json` overwrites the seed deliberately. Then `rm -f Dictionary.pickle PhoneticTheory.pickle` and rerun the build. |
 | 4 | `python -m src.elicitation` (`--ask` / `--resolve`) | Discriminating-Feature Elicitation (Elicitation Phase): Questionnaire Generation, Press-Set Resolution | everything after it | Rebuilds the resolved discriminating feature sets from the stored `elicitation_answers.json`. Asks no questions. `--ask` = Questionnaire Generation + the HTML page; `--resolve` = Press-Set Resolution + the Grouping Phase + the realization report (requires `elicitation_answers.json`, exit 1 without it); no flags = both steps, which is what the orchestrator runs. |
 | 4h | `python -m util.build_questionnaire_page` → publish → answer → copy answers into `elicitation_answers.json` → rerun step 4 (`--resolve`) | Elicitation Phase: Answer Collection | only when step 4 reports "unresolved oppositions" | The human-in-the-loop part. The page is also rendered by `--ask` (standalone `python -m util.build_questionnaire_page` still works). |
 | 5 | `python -m util.build_keypress_groups` | Discriminating-Feature Grouping (Grouping Phase) | when the live features or discriminating feature sets change | The tracked output rarely changes after a lexicon fix. |
-| 6 | `python -m util.build_realization_report` | Discriminating-Feature Stroke Realization (Realization Phase), report build | before step 9's keyboard legend | Writes the realization report only. It does not feed theory 2 or the Plover dictionary. |
-| 7 | `python dictionary.py --build-only` (second run) | Phonetic Theory Building (S5) → Different-Lemma or Grammatical-Category Disambiguation (S7) | only to refresh `theory2.tsv` | Fast (pickles exist). |
+| 6 | `python -m util.build_realization_report` | Discriminating-Feature Stroke Realization (Realization Phase), report build | before step 9's keyboard legend | Writes the realization report only. It does not feed the disambiguated theory or the Plover dictionary. |
+| 7 | `python -m util.build_disambiguated_theory` | Different-Lemma or Grammatical-Category Disambiguation (S7) | only to refresh `disambiguated_theory.tsv` | Fast (pickles exist); hard-errors naming the exact prerequisite commands when the pickles or JSONs are missing. |
 | 8 | `python -m util.export_plover_dictionary`, `python -m util.export_plover_system` | Theory Export (S8), Plover branch | Plover | Either order. |
 | 9 | `python -m util.export_keyboard_layout` (after step 6), `python -m util.export_practice_words`, **then** `python -m util.export_practice_sentences`, then `python -m util.export_definitions` | Theory Export (S8), trainer branch | steno-trainer | `export_practice_sentences` reads `practice-words.json` (export_practice_sentences.py:157). |
 | opt | `python -m util.check_conjugation_disambiguation_order` | Elicitation Phase: Answer Collection, validator | checking answers | Writes `conjugation_disambiguation_report.json` (gitignored). |
@@ -57,38 +57,41 @@ itself: table steps 3-9 plus the four steady-state Synthetic Lexicon Building (S
 (`util.completeVerbParadigms`, `util.generateMissingNomAdjForms`, `util.fixPayerDualFormGaps`,
 `util.fixAsseoirDualFormGaps`, all with `--apply`) through `python -m
 util.build_synthetic_lexicon`, in dependency order — step 3, the appenders (looped to
-convergence by the wrapper, which itself deletes the pickles and reruns the internal build
-after any round that appended rows), step 4, step 5, the theory-2 refresh of step 7, step 6,
-then the step 8-9 exports. The internal build phases are self-invocations (`python
-dictionary.py --internal-build-only`, a private flag with the public alias `--build-only`):
-the Dictionary must never be built twice in one process, because `Syllable`'s class-level
-phoneme collections (src/grammar.py:451-466) accumulate frequencies across builds. Steps 0
+convergence by the wrapper, which itself deletes the pickles and reruns the step-3 build
+after any round that appended rows), step 4, step 5, the disambiguated-theory refresh of step 7, step 6,
+then the step 8-9 exports. Every phase runs as its own `python -m` subprocess, because the
+Dictionary must never be built twice in one process: `Syllable`'s class-level
+phoneme collections (src/grammar.py:451-466) accumulate frequencies across builds — which
+is also why the step-3 and step-7 builds live in `util.build_phonetic_theory` /
+`util.build_disambiguated_theory` rather than as functions of `dictionary.py`. Steps 0
 (one-off hand fix scripts), 1 (`lexique.py`) and 4h (the human questionnaire loop) stay
-manual. Two orderings differ cosmetically from the table (both output-equivalent): the
-orchestrator refreshes `theory2.tsv` before building the realization report, and a mid-run
-`theory2.tsv` written by step 3 from possibly stale JSONs is transient — overwritten later in
-the same run. The S2 wrapper loops the appenders until a full round appends nothing, so a
-single orchestrated run converges even after a genuine lexicon change.
+manual. One ordering differs cosmetically from the table (output-equivalent): the
+orchestrator refreshes `disambiguated_theory.tsv` before building the realization report. The S2
+wrapper loops the appenders until a full round appends nothing, so a
+single orchestrated run converges even after a genuine lexicon change. Every step's
+wall time — plus the heavyweight phases inside `util.build_phonetic_theory` and
+`util.build_disambiguated_theory` — is appended to the gitignored
+`pipeline_timings.log` (util/_timing.py).
 
 Five facts that the command list does not show:
 
-1. **Nothing reads `theory2.tsv`.** It is a gitignored human view. Every exporter that
-   needs theory 2 recomputes it (`util/_theoryio.loadFirstAndFinalTheory` →
-   `Dictionary.buildFinalTheory`, util/_theoryio.py:82), rerunning the Realization Phase and
+1. **Nothing reads `disambiguated_theory.tsv`.** It is a gitignored human view. Every exporter that
+   needs the disambiguated theory recomputes it (`util/_theoryio.loadPhoneticAndDisambiguatedTheory` →
+   `Dictionary.buildDisambiguatedTheory`, util/_theoryio.py:82), rerunning the Realization Phase and
    Different-Lemma or Grammatical-Category Disambiguation (S7), four times in a full export.
-   Step 7 only refreshes `theory2.tsv`; the Plover dictionary needs steps 4 and 5.
-2. **The pickle-cache trap.** `dictionary.py` reuses `Dictionary.pickle` and
-   `FirstTheory.pickle` whenever they exist (dictionary.py:451, :498). Neither cache is
+   Step 7 only refreshes `disambiguated_theory.tsv`; the Plover dictionary needs steps 4 and 5.
+2. **The pickle-cache trap.** `util.build_phonetic_theory` reuses `Dictionary.pickle` and
+   `PhoneticTheory.pickle` whenever they exist (util/build_phonetic_theory.py). Neither cache is
    checked against the lexicon TSVs, `excluded_words.txt` or `starboard3h.json`. After a
    lexicon or layout change without step 2, every later step silently works on the old
-   Word list and old strokes. `theory.tsv` is only written on a `FirstTheory.pickle` miss,
-   so it goes stale with the cache.
+   Word list and old strokes. `phonetic_theory.tsv` is rewritten on every run (2026-09-24,
+   TODO.md B14 fixed), so it always matches the cached theory the run used — stale or not.
 3. **`PYTHONHASHSEED` changes pickle contents.** Each Word's identity hash (`Word._hash`,
    src/word.py:94) is Python's per-process salted `hash()` of its fields, computed when the
    Word is built and stored in the pickles. The Realization Phase iterates a `set` of Words
    when it lists residual collisions, so a clean rebuild (new pickles, new hash values)
    reorders those lists in `realization_report.json`. With the same pickles, four
-   different seeds gave identical `theory2.tsv`, realization report and Plover dictionary;
+   different seeds gave identical `disambiguated_theory.tsv`, realization report and Plover dictionary;
    fresh pickles changed only the report's residual lists. Pin `PYTHONHASHSEED` for the run
    that writes the pickles when the tracked report must be reproducible. See TODO.md
    § Suspected bugs, item B11.
@@ -100,8 +103,7 @@ Five facts that the command list does not show:
 5. **`starboard3h.json` is regenerated only deliberately.** Keyboard Layout Optimization
    (S4) is a real stage with its own command, `python -m util.optimize_keyboard`, which
    writes `starboard3h_optimized.json` by default (`--output starboard3h.json` targets the
-   seed explicitly). The same solve is still visible, commented, at dictionary.py:630, :632;
-   `dictionary.py` itself only reads the layout.
+   seed explicitly); `util.build_phonetic_theory` itself only reads the layout.
 
 ## Recomputing after a fix
 
@@ -112,9 +114,9 @@ section is the fix-specific ordering. The two silent-failure traps are facts 2 a
 (the pickle cache; the separately-tracked realization report).
 
 Motivating incident (2026-09-20, the `évaser` fix): fixing `évaser`'s word-final-z
-syllabification in `LexiqueSynthetic.tsv` changed which words collide in theory 1
+syllabification in `LexiqueSynthetic.tsv` changed which words collide in the phonetic theory
 (`évases` then correctly collided with `évase`/`évasent`). Rebuilding
-`Dictionary.pickle`/`FirstTheory.pickle`/`theory2.tsv` alone was **not** enough —
+`Dictionary.pickle`/`PhoneticTheory.pickle`/`disambiguated_theory.tsv` alone was **not** enough —
 `resolved_press_sets.json` stayed stale, so `évases` silently came out unmarked
 (indistinguishable from "canonical") instead of getting the `pers_2` feature the elicited
 answers said it should. Nothing errored; it was caught only because the outcome contradicted
@@ -129,28 +131,29 @@ requirement to a previously-unseen opposition — vanishingly unlikely for an or
 phonology or syllabification correction.
 
 **With the orchestrated entrypoint** the checklist below collapses to: step 1's fix, then
-`rm -f Dictionary.pickle FirstTheory.pickle`, then (for a Mixte-level fix) `python
+`rm -f Dictionary.pickle PhoneticTheory.pickle`, then (for a Mixte-level fix) `python
 lexique.py`, then a single `python dictionary.py` — its Synthetic Lexicon Building (S2)
 wrapper loops the appenders to convergence by itself. The numbered checklist remains as the
 manual fallback and as the explanation of what the orchestrator does internally.
 
-**Checklist for a fix that changes theory-1 collisions:**
+**Checklist for a fix that changes phonetic-theory collisions:**
 
 1. Apply the fix (typically a scoped `util/fix*.py` dry-run + `--apply` script, patching the
    exact source file(s) plus `LexiqueMixte.tsv` directly rather than re-running `lexique.py`
    wholesale, to keep the diff scoped; a full `lexique.py` rerun is the safer check).
-2. `rm -f Dictionary.pickle FirstTheory.pickle`
-3. `python dictionary.py --build-only` — rebuilds theory 1; writes `theory2.tsv` from whatever Elicitation
-   and Grouping Phase outputs currently exist (possibly stale at this point — expected).
+2. `rm -f Dictionary.pickle PhoneticTheory.pickle`
+3. `python -m util.build_phonetic_theory` — rebuilds the phonetic theory. It writes no
+   disambiguated-theory output (step 6's job), so stale Elicitation/Grouping JSONs are
+   simply not consumed yet.
 4. `python -m src.elicitation` — re-derives `resolved_press_sets.json` against the fixed
-   theory 1.
+   the phonetic theory.
 5. `python -m util.build_realization_report` — refreshes the tracked realization report
    (`realization_report.json`).
-6. `python dictionary.py --build-only` again — rebuilds `theory2.tsv` against the now-fresh Elicitation
+6. `python -m util.build_disambiguated_theory` — rebuilds `disambiguated_theory.tsv` against the now-fresh Elicitation
    Phase data (the pickles exist from step 3, so this run is fast).
 7. Verify: `pytest src/test/`, plus a targeted collision check for the specific word(s) or
-   lemma(s) the fix touched: group theory-2 output (loaded via `util/_theoryio.py`, not
-   `theory2.tsv`) by final stroke and flag any group with ≥ 2 distinct `ortho` and ≥ 2
+   lemma(s) the fix touched: group disambiguated-theory output (loaded via `util/_theoryio.py`, not
+   `disambiguated_theory.tsv`) by final stroke and flag any group with ≥ 2 distinct `ortho` and ≥ 2
    distinct `lemmeGramCat`, excluding `reform1990.tsv` spelling-doublet pairs.
 8. Then the exports — rebuild-table steps 8-9 (`util.export_plover_dictionary` /
    `util.export_plover_system`, then the four steno-trainer exports) — so
@@ -173,7 +176,7 @@ The names below are used in every "Input state" and "Result" line.
 | **syllable statistics** | `SyllableCollection` + `Syllable.*ColByPart` class state | `analyseSyllabification` dictionary.py:169 | `Dictionary.pickle` (objects 1-5) |
 | **layout statistics** | best permutation, pairwise order matrix (`pairwiseBiphonemeOrderScore`) and `syllabicPartAmbiguity`, per syllabic part | `optimizeBiphonemeOrder` grammar.py:644, `analyseAmbiguities` dictionary.py:183 | `Dictionary.pickle` |
 | **keyboard layout** | `Starboard` (26 keys; reserved keys 0, 1, 10, 15) | Keyboard Layout Optimization (S4), last run before 37fdc4e; loaded by `Keyboard.fromJSONFile` keyboard.py:252 | `starboard3h.json` (tracked; rewritten only deliberately — `util.optimize_keyboard --output starboard3h.json`; the solver's default output is `starboard3h_optimized.json`) |
-| **theory 1** | `dict[Strokes, list[Word]]` keyed by raw Strokes; 80,725 entries | `Dictionary.buildTheory` dictionary.py:305 | `FirstTheory.pickle` (gitignored); human view `theory.tsv` |
+| **phonetic theory** | `dict[Strokes, list[Word]]` keyed by raw Strokes; 80,725 entries | `Dictionary.buildPhoneticTheory` dictionary.py:305 | `PhoneticTheory.pickle` (gitignored); human view `phonetic_theory.tsv` |
 | **homophone groups** | `dict[LemmaHomophoneGroupKey, list[Word]]`, key = (canonical Strokes, LemmeGramCat); 47,830 | `buildLemmaHomophoneGroups` elicitation.py:61 | no |
 | **questionnaire items** | `list[QuestionnaireItem]`, one per distinct opposition; 200 | `buildQuestionnaireItems` elicitation.py:220 | `questionnaire.json` (gitignored) |
 | **elicitation answers** | JSON list of `{atomsA, checkedA, atomsB, checkedB, …}`; 200 | a person, through the questionnaire page | `elicitation_answers.json` (tracked) |
@@ -182,7 +185,7 @@ The names below are used in every "Input state" and "Result" line.
 | **keypress group population** | `groupToWords: dict[int, list[Word]]` + `extraGroupSetsByWord: dict[Word, list[frozenset[int]]]` | ambiguitychecker.py:803, :844 | no |
 | **physical keypress group assignment** | `KeypressGroupPhysicalAssignment` (`chosenKeysByGroup`, cost, alternates, residual buckets) | `realizeKeypressGroupsAsExtraStroke` ambiguitychecker.py:987 | report build only: `realization_report.json` (tracked) |
 | **final induced strokes** | `dict[Word, Strokes]`: base strokes plus at most one feature discriminating stroke | `buildFinalInducedStrokes` ambiguitychecker.py:1261 | no |
-| **theory 2** | `dict[Word, list[Strokes]]`: index 0 primary (with its star/hash mark), then alternate entries | `Dictionary.buildFinalTheory` dictionary.py:342 | `theory2.tsv` (gitignored, read by nothing) |
+| **disambiguated theory** | `dict[Word, list[Strokes]]`: index 0 primary (with its star/hash mark), then alternate entries | `Dictionary.buildDisambiguatedTheory` dictionary.py:342 | `disambiguated_theory.tsv` (gitignored, read by nothing) |
 | **Plover dictionary** | `dict[str, str]` (RTFCRE steno → spelling); 163,238 entries | `export_plover_dictionary.main` | `plover_stenalgo_dictionary.json` (tracked) |
 | **Plover key table** | module with `KEYS`, `IMPLICIT_HYPHEN_KEYS`, `GEMINI_PR_KEYMAP` | `export_plover_system.main` | `plover_stenalgo/plover_stenalgo/_generated_keys.py` (tracked) |
 | **trainer data** | JSON: `keyboard-layout`, `practice-words`, `practice-sentences`, `definitions` | trainer exporters | `steno-trainer/public/data/*.json` (tracked) |
@@ -204,7 +207,7 @@ Synthetic Lexicon Building (S2) .................. python -m util.build_syntheti
 ├─ NOM/ADJ gap generation — generateMissingNomAdjForms ............ S2.2
 └─ Dual-form gap fillers, in-place repair ......................... S2.3, S2.4
 
-Dictionary Loading (S3) .......................... python dictionary.py (first part)
+Dictionary Loading (S3) .......................... python -m util.build_phonetic_theory (first half)
 ├─ Dictionary cache check ......................................... S3.1  ← Dictionary.pickle
 ├─ Lexicon reading and identity merge — readCorpus ................ S3.2.1  (Word list)
 ├─ Syllable inventory — analyseSyllabification .................... S3.3  (syllable statistics)
@@ -216,9 +219,9 @@ Keyboard Layout Optimization (S4) ................ rare, costly; python -m util.
 ├─ Fallback keymap — generateBaseKeymap ........................... S4.3  (only if starboard3h.json is missing)
 └─ Layout solve — optimizeKeyboard (CP-SAT) ....................... S4.4  → starboard3h_optimized.json (--output starboard3h.json to replace the seed deliberately)
 
-Phonetic Theory Building (S5) .................... python dictionary.py (second part)
+Phonetic Theory Building (S5) .................... python -m util.build_phonetic_theory (second half)
 ├─ Keyboard layout loading — Starboard.fromJSONFile ............... S5.1  ← starboard3h.json
-└─ Theory 1 construction — buildTheory ............................ S5.3  → FirstTheory.pickle, theory.tsv
+└─ Phonetic-theory construction — buildPhoneticTheory ............................ S5.3  → PhoneticTheory.pickle, phonetic_theory.tsv
 
 Same-Lemma and Grammatical-Category Disambiguation (S6)
 ├─ Discriminating-Feature Elicitation (Elicitation Phase) .... python -m src.elicitation (--ask / --resolve)
@@ -232,20 +235,20 @@ Same-Lemma and Grammatical-Category Disambiguation (S6)
 ├─ Discriminating-Feature Grouping (Grouping Phase) .......... python -m util.build_keypress_groups
 │  ├─ Exact minimum-K grouping — minKeypressesSatWithPriorities ... S6.Grouping.2
 │  └─ Assignment serialization .................................... S6.Grouping.5 → keypress_groups.json
-└─ Discriminating-Feature Stroke Realization (Realization Phase)  inline path in buildFinalTheory, and report build
+└─ Discriminating-Feature Stroke Realization (Realization Phase)  inline path in buildDisambiguatedTheory, and report build
    ├─ Keypress group population — buildKeypressGroupToWords ....... S6.Realization.2
    ├─ Coda key search — realizeKeypressGroupsAsExtraStroke ........ S6.Realization.5
    ├─ Final induced strokes (inline path) — buildFinalInducedStrokes  S6.Realization.6
    └─ Report serialization (report build) ......................... S6.Realization.8 → realization_report.json
 
-Different-Lemma or Grammatical-Category Disambiguation (S7) .. inside Dictionary.buildFinalTheory (S7.1)
+Different-Lemma or Grammatical-Category Disambiguation (S7) .. python -m util.build_disambiguated_theory (Dictionary.buildDisambiguatedTheory, S7.1)
 ├─ Lemma-homophone group detection — groupHomophonesByReservedStroke  S7.5
 ├─ Star/hash code assignment + star/hash rule stack (R1-R7) ....... S7.7-S7.11
 ├─ Star/hash mark merge into the last phoneme stroke .............. S7.13
-└─ Theory 2 report — writeFinalTheory ............................. S7.15 → theory2.tsv
+└─ Disambiguated-theory report — writeDisambiguatedTheory ............................. S7.15 → disambiguated_theory.tsv
 
 Theory Export (S8) ............................... python -m util.export_*
-├─ Theory 2 loading (recomputes theory 2) — loadFirstAndFinalTheory  S8.1
+├─ Disambiguated-theory loading (recomputes the disambiguated theory) — loadPhoneticAndDisambiguatedTheory  S8.1
 ├─ Plover branch: dictionary, key table, plugin ................... S8.3-S8.5 → plover_stenalgo_dictionary.json, _generated_keys.py
 └─ Trainer branch: legend, word drill, sentences, definitions ..... S8.6-S8.9 → steno-trainer/public/data/*.json
 ```
@@ -258,7 +261,7 @@ categories that still sound alike (ver/vert/verre, appel/appelle) are separated 
 Different-Lemma or Grammatical-Category Disambiguation (S7), using **star/hash marks** on the
 `*` and `#` keys. The two kinds of **extra stroke** are the feature discriminating stroke and
 the **\*/# marker stroke** (the bare `*#` stroke of an escalated star/hash code). An
-**alternate entry** (a second theory-2 stroke for a self-homograph) is a separate concept,
+**alternate entry** (a second disambiguated-theory stroke for a self-homograph) is a separate concept,
 not an extra stroke.
 
 ---
@@ -502,7 +505,7 @@ keep diffs scoped); a full `lexique.py` rerun is the safer check.
 Synthetic Lexicon Building (S2) fills gaps in the paradigms of the mixed lexicon (missing verb
 forms, missing NOM/ADJ gender or number forms, dual spellings) and appends the generated rows
 to `resources/LexiqueSynthetic.tsv`. It is its own stage, not part of Lexicon Building (S1):
-its scripts read theory 1 or the lexicon TSVs, write a different file, and are run by hand.
+its scripts read the phonetic theory or the lexicon TSVs, write a different file, and are run by hand.
 
 The four steady-state appenders run in every orchestrated rebuild through `python -m
 util.build_synthetic_lexicon` (always `--apply`, looped to convergence); the one-shot fix
@@ -521,20 +524,20 @@ overrides and `--no-morphalou` disables it.
 
 ### Verb paradigm completion — completeVerbParadigms.main (S2.1)   util/completeVerbParadigms.py:350
 Called by: a person, `python -m util.completeVerbParadigms [--apply]`, and `python -m util.build_synthetic_lexicon` (with `--apply`).
-Input state: theory 1 (mixed lexicon + current synthetic rows), Verbiste XML, `resources/verbModelExceptions.tsv`.
+Input state: the phonetic theory (mixed lexicon + current synthetic rows), Verbiste XML, `resources/verbModelExceptions.tsv`.
 Transformation: caps its address space at 4 GiB (`_capMemory` :343); loads templates
 (`loadVerbisteTemplates` verbparadigm.py:48, `loadVerbModelExceptions` :67,
 `parseConjugationTemplates` :190); runs the **legacy** `extractDiscriminatingFeatures`
-(src/featureextractor.py:31); then the five steps below, Load theory 1 (S2.1.1) to Append
+(src/featureextractor.py:31); then the five steps below, Load the phonetic theory (S2.1.1) to Append
 synthetic rows (S2.1.5).
 Result: VER synthetic rows (participle gender/number forms and finite forms).
-Artifacts: reads `FirstTheory.pickle`, `starboard3h.json`, Verbiste, `verbModelExceptions.tsv`; appends to `LexiqueSynthetic.tsv`.
+Artifacts: reads `PhoneticTheory.pickle`, `starboard3h.json`, Verbiste, `verbModelExceptions.tsv`; appends to `LexiqueSynthetic.tsv`.
 Notes: its gating depends on the retired solver-picks-features design; the selection it
 gates on (`selectSharedDiscriminators` src/featureextractor.py:222) is coverage-first, with a
 feature-complexity tie-break. Not idempotent (item B13).
 
-- **Load theory 1 — loadTheoryAndKeyboard (S2.1.1)** :91 — unpickles `FirstTheory.pickle`,
-  or builds a `Dictionary` and theory 1 in memory without writing. A stale pickle hides rows
+- **Load the phonetic theory — loadTheoryAndKeyboard (S2.1.1)** :91 — unpickles `PhoneticTheory.pickle`,
+  or builds a `Dictionary` and the phonetic theory in memory without writing. A stale pickle hides rows
   appended since the last rebuild.
 - **Derive conjugation ending tables — deriveConjugationEndingTables (S2.1.2)**
   verbparadigm.py:493 — donors are VER Words with a trusted template (`getTrustedTemplate`
@@ -562,7 +565,7 @@ feature-complexity tie-break. Not idempotent (item B13).
     each phonological field = infinitive value truncated by the suffix length + the table
     ending (:611); `None` below the match rate.
 - **Confirm by legacy collision check — confirmCandidates (S2.1.4)** :266 —
-  temporarily adds each candidate to its reference word's theory-1 entry
+  temporarily adds each candidate to its reference word's phonetic-theory entry
   (`temporarilyAugmented` :238), reruns `extractDiscriminatingFeatures` and
   `buildDiscriminatorSelection` (featureextractor.py:284) and keeps only lemmas in
   `newlyCollidingLemmas` (verbparadigm.py:646). Others are "irrelevant to disambiguation today".
@@ -627,15 +630,16 @@ other readers are generators and validators (`validateLexiconAgainstNomAdjParadi
 Dictionary Loading (S3) reads the mixed lexicon (136,456 rows) and the synthetic lexicon rows
 (42,225) into the Word list (167,639 Words, by descending film frequency): it drops excluded
 words, merges identical identities, indexes Words by spelling and lemma and registers every
-syllable (5,866) in the syllable statistics. It is the first part of `python dictionary.py`
-(`__main__` :448), cached in `Dictionary.pickle`; on a cache miss the layout statistics (S4.1,
-S4.2) run between Syllable inventory (S3.3) and Dictionary cache write (S3.4).
+syllable (5,866) in the syllable statistics. It is the first half of `python -m
+util.build_phonetic_theory` (loadOrBuildDictionary), cached in `Dictionary.pickle`; on a cache
+miss the layout statistics (S4.1, S4.2) run between Syllable inventory (S3.3) and Dictionary
+cache write (S3.4).
 
-### Dictionary cache check — __main__ (S3.1)   dictionary.py:451
-Called by: `python dictionary.py` (`__main__` :448).
+### Dictionary cache check — loadOrBuildDictionary (S3.1)   util/build_phonetic_theory.py:33
+Called by: `python -m util.build_phonetic_theory` (`main` util/build_phonetic_theory.py:86).
 Transformation: if `Dictionary.pickle` exists, loads five objects (the `Dictionary`, then
 `Syllable.allPhonemeCol`, `phonemeColByPart`, `biphonemeColByPart`,
-`multiphonemeColByPart`, assigned back onto the class, :453-457) and skips Dictionary
+`multiphonemeColByPart`, assigned back onto the class, util/build_phonetic_theory.py:40-44) and skips Dictionary
 construction (S3.2), Syllable inventory (S3.3), the layout statistics (S4.1, S4.2) and
 Dictionary cache write (S3.4). No staleness check.
 Result: Word list + syllable statistics + layout statistics, restored.
@@ -707,17 +711,17 @@ not compared.
 ### Syllable inventory — Dictionary.analyseSyllabification (S3.3)   dictionary.py:169
 Called by: `__main__` (:463), after Dictionary construction (S3.2).
 Transformation: sorts `self.words` **in place** by descending frequency (:171) — this order
-persists into `Dictionary.pickle` and into every theory-1 entry's list. For each Word, zips
+persists into `Dictionary.pickle` and into every phonetic-theory entry's list. For each Word, zips
 phonetic syllable names with orthographic syllables (:177) and registers each pair
 (Syllable registration (S3.3.1)) with weight `frequency`, or 0 for the 200 frequent words (:174).
 Result: syllable statistics: 5,866 `Syllable` objects + class-level phoneme, biphoneme and
-multiphoneme collections. The syllable lookup feeds Theory 1 construction (S5.3); the
+multiphoneme collections. The syllable lookup feeds Phonetic-theory construction (S5.3); the
 frequencies feed the layout statistics (S4.1, S4.2).
 Notes: `zip` truncates for the 99 Words whose two syllable lists differ in length (item B28).
 
 - **Syllable registration — updateSyllable (S3.3.1)** grammar.py:803 — creates
   `Syllable(name, spelling)` on first sight, adds frequency (Frequency accumulation
-  (S3.3.1.2)), records the Word in `phonoWords[phonology]` (`trackWord` :612). `buildTheory`
+  (S3.3.1.2)), records the Word in `phonoWords[phonology]` (`trackWord` :612). `buildPhoneticTheory`
   later looks syllables up here.
 - **Onset/nucleus/coda decomposition — Syllable.__init__ (S3.3.1.1)** grammar.py:468 —
   resolves each character to a shared `Phoneme` (`ValueError` for anything outside the 16
@@ -733,8 +737,8 @@ Notes: `zip` truncates for the 99 Words whose two syllable lists differ in lengt
 - **Collection sorting — sortPhonemesCollections (S3.3.2)** grammar.py:592 — sorts
   phonemes and biphonemes by frequency (read by Fallback keymap (S4.3) and Layout solve (S4.4)).
 
-### Dictionary cache write — pickle.dump ×5 (S3.4)   dictionary.py:467-472
-Called by: `__main__`, on a cache miss, after Phoneme order search (S4.1) and Ambiguity
+### Dictionary cache write — pickle.dump ×5 (S3.4)   util/build_phonetic_theory.py:55
+Called by: `loadOrBuildDictionary`, on a cache miss, after Phoneme order search (S4.1) and Ambiguity
 statistics (S4.2).
 Result: `Dictionary.pickle` (57.8 MB): Word list, indexes, syllable collection (with
 `phonoWords` Word references), ambiguity dicts, then the four `Syllable` class collections.
@@ -749,10 +753,10 @@ costly (several CP-SAT solves), not dead code. Its layout was last produced by a
 uncommitted run and committed in 37fdc4e (2026-09-13); every later stage reads that file.
 
 The two **layout statistics**, Phoneme order search (S4.1) and Ambiguity statistics (S4.2),
-run on **every fresh rebuild** (a `Dictionary.pickle` miss inside `buildOnly`; S4.2 is
+run on **every fresh rebuild** (a `Dictionary.pickle` miss inside
+`util.build_phonetic_theory`; S4.2 is
 the slowest step) and are the solver's inputs (src/cpsatsolver.py:14, :48
-`syllabicPartAmbiguity`; :363 `pairwiseBiphonemeOrderScore`). The solver call itself is
-**commented out** at dictionary.py:630, and so is the layout write at :632: it lives behind
+`syllabicPartAmbiguity`; :363 `pairwiseBiphonemeOrderScore`). The solver call lives behind
 `python -m util.optimize_keyboard`, which regenerates a layout into
 `starboard3h_optimized.json` — overwriting the seed `starboard3h.json` requires an explicit
 `--output starboard3h.json` (TODO.md § Queued follow-ups).
@@ -771,7 +775,7 @@ Each part is solved for at most 90 s. Because frequencies are per million, one a
 pair outweighs almost any ergonomic or order gain.
 
 ### Phoneme order search — Syllable.optimizeBiphonemeOrder (S4.1)   src/grammar.py:644
-Called by: `__main__` (dictionary.py:464), on a `Dictionary.pickle` miss.
+Called by: `loadOrBuildDictionary` (util/build_phonetic_theory.py:53), on a `Dictionary.pickle` miss.
 Input state: syllable statistics.
 Transformation: for each part, runs a greedy local search (`BiphonemeCollection.optimizeOrder`
 :318): n passes, each moving every phoneme to the insertion point that maximizes
@@ -783,11 +787,12 @@ Result: layout statistics: **best permutation** and **pairwise order matrix** pe
 Today: onset `dZksvptgzSmnbflNRwj`, coda `bjgpfwsktdvRNzlmnSZ`, nucleus `8ieE§5Oao92@`.
 docs/ARCHITECTURE.md ("Phoneme order: a worked example") shows these.
 Notes: read by Fallback keymap (S4.3) and the order term of Layout solve (S4.4) (cpsatsolver.py:363),
-plus `writeConstrainFiles` (call commented :481) and `printBarchart`. Nothing in
+plus `writeConstrainFiles` (hand-run only; its commented call site was removed with
+dictionary.py's `buildOnly`, 2026-09-24) and `printBarchart`. Nothing in
 Phonetic Theory Building (S5) reads it.
 
 ### Ambiguity statistics — Dictionary.analyseAmbiguities (S4.2)   dictionary.py:183
-Called by: `__main__` (dictionary.py:466), on a `Dictionary.pickle` miss.
+Called by: `loadOrBuildDictionary` (util/build_phonetic_theory.py:54), on a `Dictionary.pickle` miss.
 Input state: Word list + syllable statistics.
 Transformation: three scorers:
 - `analysePhonemSyllabicAmbiguity` (grammar.py:1032, 3 forked processes,
@@ -818,9 +823,9 @@ Helpers not expanded: `Starboard.addToLayout` keyboard.py:417, `getStrokesOfPhon
 ### Layout solve — optimizeKeyboard (S4.4)   src/cpsatsolver.py:13
 Called by: `python -m util.optimize_keyboard` (`util/optimize_keyboard.py` `main`), which
 seeds from `starboard3h.json` and passes `dictionary.syllabicPartAmbiguity` and
-`["onset", "nucleus", "coda"]` — the same call still visible, commented, at
-dictionary.py:630 — then writes the solved layout with `toJSONFile`.
-The import at dictionary.py:32 still loads OR-Tools on every `import dictionary`.
+`["onset", "nucleus", "coda"]`, then writes the solved layout with `toJSONFile`.
+(`dictionary.py` no longer imports the solver, 2026-09-24; only `util.optimize_keyboard`
+loads OR-Tools.)
 Input state: keyboard layout (as hints), layout statistics, syllable statistics.
 Transformation: one CP-SAT model per syllabic part, the objective described above:
 - *Decision:* each phoneme gets one stroke among the legal 1-4-key strokes of its bank
@@ -836,7 +841,7 @@ Transformation: one CP-SAT model per syllabic part, the objective described abov
 - *Order term:* `pairwise order score × ORDER_PENALTY` (500), signed by which stroke is
   further left; a shared stroke pays half. `SOLVER_TIME` = 90 s per part.
 Result (if run): `keyboard.clearLayout()` (:422) then the solved strokes; destructive (item
-B32). The write (`toJSONFile`, dictionary.py:496) is commented out too.
+B32). The write goes through `util.optimize_keyboard`'s explicit `--output`.
 Notes: consistent with the committed layout sharing entries only among rare phonemes (`N`,
 `G`, `9`, `O`, `w`). See also `src/cpsatprinter.py`.
 
@@ -844,10 +849,10 @@ Notes: consistent with the committed layout sharing entries only among rare phon
 ## Phonetic Theory Building (S5)
 
 Phonetic Theory Building (S5) loads the committed keyboard layout and maps every Word to its
-**base strokes**, one stroke per syllable. The result is theory 1, `dict[Strokes, list[Word]]`
-with 80,725 entries. Words with the same raw Strokes land in the same **theory-1 entry**;
-this is where homophones first appear. Everything later starts from theory 1. It is the
-second part of `python dictionary.py` (dictionary.py:487-505), cached in `FirstTheory.pickle`.
+**base strokes**, one stroke per syllable. The result is the phonetic theory, `dict[Strokes, list[Word]]`
+with 80,725 entries. Words with the same raw Strokes land in the same **phonetic-theory entry**;
+this is where homophones first appear. Everything later starts from the phonetic theory. It is the
+second half of `python -m util.build_phonetic_theory`, cached in `PhoneticTheory.pickle`.
 
 ### The phonetic stroke rule
 
@@ -864,27 +869,27 @@ second part of `python dictionary.py` (dictionary.py:487-505), cached in `FirstT
    rule (S5.3.1)), concatenated onset → nucleus → coda in spoken order, kept whole: no sort, no
    deduplication. This is the **raw Stroke**.
 4. **A word's Strokes** is the tuple of its syllables' raw Strokes: 1 to 9 strokes, mostly 2-4.
-5. **Theory 1 keys on the raw Strokes** (dictionary.py:312). Two Words share an entry when
+5. **Phonetic-theory keys on the raw Strokes** (dictionary.py:312). Two Words share an entry when
    they have the same syllable count and, syllable by syllable, the same key sequence:
    - same phonemes and breaks: true homophones and paradigm forms. 41,640 entries hold ≥2
-     spellings (**theory-1 collisions**), 951 more hold only homographs; the largest has 18
+     spellings (**phonetic-theory collisions**), 951 more hold only homographs; the largest has 18
      spellings (`aller`/`allez`/`allé`/`haler`/`hâlé`…);
    - different phonemes in one **shared layout entry**: onset key 9 = `w`/`N`/`G`, nucleus 11
      = `@`/`9`, nucleus (11,12) = `°`/`8`, nucleus 14 = `e`/`O`, coda 16 = `j`/`b`/`w`, coda 24
      = `Z`/`G`;
    - differences in silent letters only.
-6. **Theory 1 misses collisions that differ only in key order or repeats.** A stroke is
+6. **The phonetic theory misses collisions that differ only in key order or repeats.** A stroke is
    physically a set of keys. Raw Strokes with the same **canonical form**
    (`canonicalizeStrokes`, src/keyboard.py:31) type identically but sit in different entries,
    through **digraph subsumption** (coda `k`=18 + `d`=19 = `g`=(18,19)) or order (`@tR` "entre"
    vs `@Rt` "heurte"). 233 canonical Strokes merge 2+ raw entries (**canonical-only
    collisions**), all with different spellings; 4,535 raw Strokes repeat a key. Later stages
-   canonicalize before testing collisions; `theory.tsv` and raw-key counts under-report.
+   canonicalize before testing collisions; `phonetic_theory.tsv` and raw-key counts under-report.
 7. Different syllable breaks give different Strokes for equal phonemes (`ka/n` vs `kan`),
    which is why item B2 matters.
 
 ### Keyboard layout loading — Keyboard.fromJSONFile (S5.1)   src/keyboard.py:252
-Called by: `__main__` (dictionary.py:488).
+Called by: `loadKeyboard` (util/build_phonetic_theory.py:63).
 Input state: `starboard3h.json` (tracked, 211 lines).
 Transformation: `json.load` with an `object_hook` that `ast.literal_eval`s tuple-like keys;
 builds a `Starboard` via `cls.__new__` + `__dict__.update`, **bypassing `__init__`**. Only
@@ -903,27 +908,27 @@ Helpers not expanded: `Starboard.printLayout` keyboard.py:395.
 Notes: produced by Keyboard Layout Optimization (S4). "3h" is apparently solve time
 (keyboard.py:758-759 names a missing `starboard1h.json` "1h optimization").
 
-### Theory-1 cache check — __main__ (S5.2)   dictionary.py:498
-Called by: `__main__`.
-Transformation: loads `FirstTheory.pickle` if present and skips Theory 1 construction (S5.3)
-through Theory-1 cache write (S5.5). Not keyed on `Dictionary.pickle` or `starboard3h.json`
+### Phonetic-theory cache check — loadOrBuildPhoneticTheory (S5.2)   util/build_phonetic_theory.py:75
+Called by: `main` (util/build_phonetic_theory.py:88).
+Transformation: loads `PhoneticTheory.pickle` if present and skips Phonetic-theory construction (S5.3)
+through Phonetic-theory cache write (S5.5). Not keyed on `Dictionary.pickle` or `starboard3h.json`
 (item B15).
-Result: theory 1.
+Result: the phonetic theory.
 
-### Theory 1 construction — Dictionary.buildTheory (S5.3)   dictionary.py:305
-Called by: Theory-1 cache check (S5.2) on a miss; also `util/completeVerbParadigms.py:109`.
+### Phonetic-theory construction — Dictionary.buildPhoneticTheory (S5.3)   dictionary.py:305
+Called by: Phonetic-theory cache check (S5.2) on a miss; also `util/completeVerbParadigms.py:109`.
 Input state: Word list (frequency-descending), syllable statistics, keyboard layout.
 Transformation: for each Word, looks up each syllable in `syllableCollection.syllable_names`
 (`KeyError` if missing), turns it into a stroke (Phonetic stroke rule (S5.3.1)) and appends the Word to
 `theory[raw Strokes]`.
-Result: theory 1: 80,725 entries covering 167,639 Words; 42,591 entries with ≥2 Words
+Result: the phonetic theory: 80,725 entries covering 167,639 Words; 42,591 entries with ≥2 Words
 (129,505 Words), 41,640 with ≥2 spellings. Strokes per entry: 1 → 3,111; 2 → 20,701; 3 →
 33,534; 4 → 18,069; 5+ → 5,310. Every entry's list is frequency-descending.
 Notes: legality of the whole stroke is never checked: 529 Words (39 canonical strokes, mostly
 "-isme", coda `z`(22,23)+`m`(25)) contain an **illegal stroke** (item B8).
 
 #### Phonetic stroke rule — Starboard.getStrokeOfSyllableByPart (S5.3.1)   src/keyboard.py:607
-Called by: Theory 1 construction (S5.3).
+Called by: Phonetic-theory construction (S5.3).
 Transformation: for each part in onset → nucleus → coda order and each phoneme in spoken
 order, `getStrokesOfPhoneme(phoneme, part)` (:466) returns the layout entries whose first
 key is in the part's bank and which list the phoneme; the first (JSON order) is used and its
@@ -931,22 +936,24 @@ keys appended as-is. No sort, dedupe or legality check. No entry → `IndexError
 all 36 phonemes are covered).
 Result: one raw Stroke per syllable: `plyR` → `(4, 6,7, 11,13, 21)`; `ce` (`s°`) → `(3, 11,12)`.
 
-### Theory-1 report — Dictionary.writeTheory (S5.4)   dictionary.py:317
-Called by: Theory-1 cache check (S5.2), on a miss.
-Transformation: one line per theory-1 entry: `strokesToString(strokes)` (:622) + sorted
+### Phonetic-theory report — Dictionary.writePhoneticTheory (S5.4)   dictionary.py:317
+Called by: `main` (util/build_phonetic_theory.py:94), always — pickle hit or miss (item B14
+fixed 2026-09-24).
+Transformation: one line per phonetic-theory entry: `strokesToString(strokes)` (:622) + sorted
 spellings; prints the entry with most spellings and the one with highest summed frequency.
-Result: `theory.tsv` (80,726 lines with header).
-Artifacts: writes `theory.tsv`.
+Result: `phonetic_theory.tsv` (80,726 lines with header).
+Artifacts: writes `phonetic_theory.tsv`.
 Notes: `strokesToString` spells each key by the first phoneme of its single-key entry, so
 "aller" shows as `a/mte` (`l` = keys 6,7 = "m"+"t"): a key spelling, not a transcription, and
 not RTFCRE.
 
-### Theory-1 cache write — pickle.dump (S5.5)   dictionary.py:504
-Result: `FirstTheory.pickle` (52 MB). Its Words are copies of the Word list and compare equal
+### Phonetic-theory cache write — pickle.dump (S5.5)   util/build_phonetic_theory.py:82
+Result: `PhoneticTheory.pickle` (52 MB). Its Words are copies of the Word list and compare equal
 only through the stored `_hash`.
-Artifacts: writes `FirstTheory.pickle`.
-Notes: control then reaches the `buildFinalTheory` block (dictionary.py:521-541), described
-under Different-Lemma or Grammatical-Category Disambiguation (S7).
+Artifacts: writes `PhoneticTheory.pickle`.
+Notes: in the same `main`, control then always writes the Phonetic-theory report (S5.4); the
+disambiguated theory is a separate command (`python -m util.build_disambiguated_theory`),
+described under Different-Lemma or Grammatical-Category Disambiguation (S7).
 
 ---
 ## Same-Lemma and Grammatical-Category Disambiguation (S6)
@@ -982,7 +989,7 @@ S6.Grouping.3 Ground-truth verification — verifyKeypressAssignment (src/featur
 S6.Grouping.4 Usage weights — frequencyWeightedChordSizes (src/featuregrouping.py:189)          [report only]
 S6.Grouping.5 Assignment serialization — serializeAssignment (src/featuregroupingsat.py:530)
 
-Discriminating-Feature Stroke Realization (Realization Phase) — inline path in Dictionary.buildFinalTheory (dictionary.py:373-389)
+Discriminating-Feature Stroke Realization (Realization Phase) — inline path in Dictionary.buildDisambiguatedTheory (dictionary.py:373-389)
                                       and report build util/build_realization_report.py main (:38)
 S6.Realization.1 Word lookup indexes — buildWordToStrokes / buildWordsByOrthoLemme (src/ambiguitychecker.py:553, :766)
 S6.Realization.2 Keypress group population — buildKeypressGroupToWords (:803)
@@ -1000,10 +1007,10 @@ S6.Realization.7 Alternate entry strokes (inline path) — buildExtraInducedStro
 S6.Realization.8 Report serialization (report build) — build_realization_report.main (:74-112)
 ```
 
-Theory 1 cannot tell apart the inflected forms of one paradigm (dors/dort, finis/finit); their
+The phonetic theory cannot tell apart the inflected forms of one paradigm (dors/dort, finis/finit); their
 `lemmeGramCat` is the same, so Different-Lemma or Grammatical-Category Disambiguation (S7)
 does not handle them either. Same-Lemma and Grammatical-Category Disambiguation (S6) takes
-theory 1 and the hand-made elicitation answers and produces the final induced strokes: each
+the phonetic theory and the hand-made elicitation answers and produces the final induced strokes: each
 Word's base strokes plus, when the Word needs grammatical **features**, one extra coda-bank
 **feature discriminating stroke**. "Same lemma" here always means same `lemmeGramCat` (lemma +
 grammatical category). It has three phases:
@@ -1020,7 +1027,7 @@ grammatical category). It has three phases:
 ### Discriminating-Feature Elicitation (Elicitation Phase)
 
 Entry: `python -m src.elicitation [--ask | --resolve]`, `__main__` at src/elicitation.py:535.
-Loads `Dictionary.pickle` (restoring the class state) and `FirstTheory.pickle`. Of its three
+Loads `Dictionary.pickle` (restoring the class state) and `PhoneticTheory.pickle`. Of its three
 named sub-steps, the plain command runs **Questionnaire Generation** and **Press-Set
 Resolution** and asks nothing — that both-steps form is what the orchestrator runs. `--ask`
 runs Questionnaire Generation only, then renders the questionnaire page (`python -m
@@ -1037,13 +1044,13 @@ reports unresolved oppositions.
 ##### Homophone group building — buildLemmaHomophoneGroups (S6.Elicitation.1)   src/elicitation.py:61
 Called by: Elicitation Phase entry (:548); also the precedence-spec check (:148) and the
 pers_3 rewrite (:169).
-Input state: theory 1, 80,725 raw-Strokes keys, 167,639 Words.
-Transformation: re-keys theory 1 by canonical form (`canonicalizeStrokes` keyboard.py:31),
+Input state: the phonetic theory, 80,725 raw-Strokes keys, 167,639 Words.
+Transformation: re-keys the phonetic theory by canonical form (`canonicalizeStrokes` keyboard.py:31),
 splits each bucket by `lemmeGramCat` (`groupWordsByLemme` word.py:414) and keeps sub-groups
 with more than one Word. Different-`lemmeGramCat` homophones are left to Different-Lemma or
 Grammatical-Category Disambiguation (S7).
 Result: homophone groups, `dict[(canonical Strokes, LemmeGramCat), list[Word]]`, 47,830, in
-theory-1 order.
+phonetic-theory order.
 Notes: the key type is named `LemmaHomophoneGroupKey` (:24) although it is keyed by
 `lemmeGramCat`; a rename is queued (TODO.md § Queued follow-ups).
 
@@ -1094,7 +1101,7 @@ Artifacts: reads `questionnaire.json`; writes `elicitation_questionnaire.html`.
 
 ##### Precedence-spec check — check_conjugation_disambiguation_order.main (S6.Elicitation.6)   util/check_conjugation_disambiguation_order.py:130
 Called by: a person (optional).
-Input state: theory 1 + elicitation answers; recomputes Homophone group building
+Input state: the phonetic theory + elicitation answers; recomputes Homophone group building
 (S6.Elicitation.1), Answer indexing (S6.Elicitation.8) and Per-combination resolution
 (S6.Elicitation.9.1) itself.
 Transformation: `parsePrecedenceOrder` (:43) reads the **precedence spec**
@@ -1255,7 +1262,7 @@ now holds only the loaders and verifiers (`loadResolvedPressSets`,
 ### Discriminating-Feature Stroke Realization (Realization Phase)
 
 One sequence of calls, two code paths. The **inline path** runs inside
-`Dictionary.buildFinalTheory` (dictionary.py:373-389) and feeds theory 2 and every exporter
+`Dictionary.buildDisambiguatedTheory` (dictionary.py:373-389) and feeds the disambiguated theory and every exporter
 (util/_theoryio.py:82). The **report build** is `util/build_realization_report.py` main
 (:58-72) and writes the **realization report**. Both read `keypress_groups.json`
 and `resolved_press_sets.json`. Only the trainer keyboard legend reads the report, so the two
@@ -1274,7 +1281,7 @@ feature (`PREFERRED_KEYS_BY_MARKER` :945: impératif → 18 `-k`, pers_2 → 19 
 
 #### Word lookup indexes — buildWordToStrokes / buildWordsByOrthoLemme (S6.Realization.1)   src/ambiguitychecker.py:553, :766
 Called by: both paths (dictionary.py:373-374; build_realization_report.py:58-59).
-Result: `Word → raw base strokes` and `(ortho, lemmeGramCat) → [Word]`, in theory-1 order.
+Result: `Word → raw base strokes` and `(ortho, lemmeGramCat) → [Word]`, in phonetic-theory order.
 
 #### Keypress group population — buildKeypressGroupToWords (S6.Realization.2)   src/ambiguitychecker.py:803
 Called by: both paths (dictionary.py:375; build_realization_report.py:60).
@@ -1311,7 +1318,7 @@ Result: {4: (18,), 6: (19,), 2: (20,)}.
 
 #### Coda key search — realizeKeypressGroupsAsExtraStroke (S6.Realization.5)   src/ambiguitychecker.py:987
 Called by: both paths (dictionary.py:380-383; build_realization_report.py:69-72).
-Input state: keypress group population + theory 1 + keyboard layout + preferred keys.
+Input state: keypress group population + the phonetic theory + keyboard layout + preferred keys.
 Transformation: builds `wordToGroups` (:882), the per-phoneme coda candidates (`codaKeysOf`,
 in `Phoneme.consonantPhonemes` order) and `allWords`, the **set** of every Word in any group
 (:1047). Decides groups in descending population order (:1205): takes the first candidate
@@ -1331,7 +1338,7 @@ Helpers not expanded: `_composedInduced` (:1077), `_isRedundantForAnyWord` (:108
 - **Candidate feasibility — _feasible (S6.Realization.5.2)** :1099 — rejects a candidate when:
   (a) it equals an already chosen key-set (:1104); (b) it is empty or redundant for some Word;
   (c) some Word's composed feature discriminating stroke is an illegal stroke
-  (`getStrokeCost` → None, :1112); (d) some composed Strokes is an existing theory-1 key (raw
+  (`getStrokeCost` → None, :1112); (d) some composed Strokes is an existing phonetic-theory key (raw
   comparison, :1114); (e) a **same-lemmeGramCat collision** (`_isInScopeCollision` :968:
   different ortho, same `lemmeGramCat`) among Words needing the same full group set
   (:1125-1133); (f) such a collision with an already finalized Word (:1140-1144).
@@ -1346,7 +1353,7 @@ Helpers not expanded: `_composedInduced` (:1077), `_isRedundantForAnyWord` (:108
 - **Final verification and residual buckets (S6.Realization.5.5)** :1219-1258 — for each
   Word in `allWords` (set iteration, :1227), composes the primary stroke and one per extra
   alternate (:1232-1241). `residualTheoryCollisions` = Words with a feature discriminating stroke whose composed stroke is
-  a theory-1 key (raw, sorted by ortho, :1243). `findCollidingInducedStrokes` (:727) pairs
+  a phonetic-theory key (raw, sorted by ortho, :1243). `findCollidingInducedStrokes` (:727) pairs
   each key with the **first key seen** on the same stroke; each pair goes to
   `residualCollisions` (same-lemmeGramCat, :1248), `crossCategoryClashCollisions` (same bare
   lemme, different `lemmeGramCat`, :1251) or `crossLemmaCollisions` (:1255); same-ortho pairs
@@ -1355,26 +1362,26 @@ Helpers not expanded: `_composedInduced` (:1077), `_isRedundantForAnyWord` (:108
   **The "0 residual same-lemmeGramCat collisions" invariant** is
   `len(assignment.residualCollisions) == 0`, printed and persisted only by the report build
   (build_realization_report.py:89-91, :108, :129) and asserted by unit tests on fixtures
-  (src/test/ambiguitychecker_test.py:844). `buildFinalTheory` discards the residuals and
+  (src/test/ambiguitychecker_test.py:844). `buildDisambiguatedTheory` discards the residuals and
   `unassignedGroups` (item B17). The check sees only `allWords` (not canonical members,
   unchosen spelling twins or dropped groups) and only first-seen pairs (item B16). An
   all-pairs canonical check over the whole lexicon finds 230 same-lemmeGramCat pairs in the
   final induced strokes, all from spelling twins (item B1).
 
 #### Final induced strokes — buildFinalInducedStrokes (S6.Realization.6)   src/ambiguitychecker.py:1261
-Called by: `Dictionary.buildFinalTheory` only (dictionary.py:384).
-Transformation: for **every** theory-1 Word (dict order, deterministic): a Word that needs
+Called by: `Dictionary.buildDisambiguatedTheory` only (dictionary.py:384).
+Transformation: for **every** phonetic-theory Word (dict order, deterministic): a Word that needs
 groups gets one feature discriminating stroke with the union of their chosen keys; others
 keep their base strokes. Unassigned groups add nothing, silently.
 Result: final induced strokes, 167,639 Words, 79,449 with a feature discriminating stroke.
 Handed to Reserved-key composition (S7.4).
 
 #### Alternate entry strokes — buildExtraInducedStrokes (S6.Realization.7)   src/ambiguitychecker.py:1288
-Called by: `Dictionary.buildFinalTheory` only (dictionary.py:389).
+Called by: `Dictionary.buildDisambiguatedTheory` only (dictionary.py:389).
 Transformation: for each extra alternate of a self-homograph, base strokes plus one feature
 discriminating stroke with that alternate's union of chosen keys (empty key-sets skipped).
 Result: `dict[Word, list[Strokes]]`, the **alternate entries**, appended after index 0 in
-theory 2. They skip Different-Lemma or Grammatical-Category Disambiguation (S7) (item B4) and
+the disambiguated theory. They skip Different-Lemma or Grammatical-Category Disambiguation (S7) (item B4) and
 are never collision-checked when the primary is empty (item B21).
 
 #### Report serialization — build_realization_report.main (S6.Realization.8)   util/build_realization_report.py:38
@@ -1409,30 +1416,31 @@ induced strokes, finds every set of Words that share one canonical stroke **and*
 **star/hash rule stack**, and gives each rank a **star/hash code**: `()`, `*`, `#`, `*#`, then
 escalated `*#` codes. The first symbol is pressed with the word's **last phoneme stroke** (a
 **merged star/hash mark**); further symbols become **\*/# marker strokes**. The result is
-theory 2, in memory, plus the human view `theory2.tsv`.
+the disambiguated theory, in memory, plus the human view `disambiguated_theory.tsv`.
 
 Scale: 4,450 lemma-homophone groups. Sizes (Words): 2: 2,947; 3: 989; 4: 341; 5: 104; 6:
 40; 7: 19; 8: 7; 10: 1; 11: 2. Codes: `()` 5,530, `*` 4,886, `#` 579, `*#` 146, `(*#,*#)` 51,
 `(*#)×3` 9, `(*#)×4` 3, `(*#)×5` 2 — 5,676 marked Words, 86 \*/# marker strokes.
 
-### Theory 2 assembly — Dictionary.buildFinalTheory (S7.1)   dictionary.py:342
-Called by: `python dictionary.py` `__main__` (dictionary.py:532, only when both
-`keypress_groups.json` and `resolved_press_sets.json` exist, :531) and every
-Theory Export (S8) exporter through Theory 2 loading (S8.1).
-Input state: theory 1 (80,725 keys / 167,639 Words), keyboard layout, the two JSON paths.
+### Disambiguated-theory assembly — Dictionary.buildDisambiguatedTheory (S7.1)   dictionary.py:342
+Called by: `python -m util.build_disambiguated_theory` (`main`
+util/build_disambiguated_theory.py:49, after checking both
+`keypress_groups.json` and `resolved_press_sets.json` exist, :37-40) and every
+Theory Export (S8) exporter through Disambiguated-theory loading (S8.1).
+Input state: the phonetic theory (80,725 keys / 167,639 Words), keyboard layout, the two JSON paths.
 Transformation: (1) loads `markersByKeypress` (:365-369) and the resolved discriminating
 feature sets (:370-371); (2) runs the Realization Phase on its inline path (S7.2) → final
 induced strokes; (3) calls Reserved-key composition (S7.4) with Reform-doublet loading (S7.3)
 and `phonemeStrokeCounts` = each Word's base stroke count, which turns on the merge; (4)
 calls Alternate entry strokes (S7.14); (5) returns `{word: [primaryComposed[word]] +
 extraByWord.get(word, [])}` (:390).
-Result: theory 2, 167,639 Words in theory-1 order; `theory2.tsv` has 181,869 rows, so 14,230
+Result: the disambiguated theory, 167,639 Words in phonetic-theory order; `disambiguated_theory.tsv` has 181,869 rows, so 14,230
 alternate entries.
 Artifacts: reads both JSON files and `resources/reform1990.tsv` (path relative to the working directory).
 Notes: never uses `self`, so exporters unpickle the whole `Dictionary` just to call it (refactor candidate).
 
 ### Realization Phase, inline path (S7.2)   dictionary.py:373-384
-Called by: Theory 2 assembly (S7.1).
+Called by: Disambiguated-theory assembly (S7.1).
 Transformation: Word lookup indexes (S6.Realization.1) → Keypress group population
 (S6.Realization.2) → Extra alternate population (S6.Realization.3) → Preferred key
 resolution (S6.Realization.4) → Coda key search (S6.Realization.5) → Final induced strokes
@@ -1442,7 +1450,7 @@ Result: final induced strokes + physical keypress group assignment (0→21, 1→
 5→17, 6→19, identical to the realization report).
 
 ### Reform-doublet loading — loadReform1990DoubletPairs (S7.3)   src/ambiguitychecker.py:94
-Called by: Theory 2 assembly (S7.1), dictionary.py:386.
+Called by: Disambiguated-theory assembly (S7.1), dictionary.py:386.
 Transformation: every `reform1990.tsv` row whose `isException` is not `"True"` gives
 `frozenset({oldSpelling, newSpelling})`. Exception rows (`fût`/`fut`, `croît`/`croit`) collide
 with unrelated words and are left out.
@@ -1451,7 +1459,7 @@ Notes: some pairs exist only at verb-lemma level (`boursoufler/boursouffler`), s
 adjective doublet `boursouflée/boursoufflée` needs a `MARKING_OVERRIDES` entry.
 
 ### Reserved-key composition — composeReservedKeyStrokes (S7.4)   src/ambiguitychecker.py:410
-Called by: Theory 2 assembly (S7.1), dictionary.py:385.
+Called by: Disambiguated-theory assembly (S7.1), dictionary.py:385.
 Input state: final induced strokes, doublet pairs, `phonemeStrokeCounts`.
 Transformation: `composed = dict(finalInduced)` (:434); for each lemma-homophone group from
 Lemma-homophone group detection (S7.5), gets each member's star/hash strokes from Physical
@@ -1466,10 +1474,10 @@ primary strokes only, not alternate entries.
 Called by: Reserved-key composition (S7.4), :435.
 Transformation: buckets Words by `canonicalizeStrokes(finalInduced[word])` (:396); keeps a
 bucket with ≥2 Words (:400), ≥2 distinct `lemmeGramCat` (:402) and ≥2 distinct `ortho`
-(:404). Members keep theory-1 order.
+(:404). Members keep phonetic-theory order.
 Result: 4,450 lemma-homophone groups.
 Notes: a bucket with one `lemmeGramCat` and several spellings is dropped on purpose (a code
-comment leaves it to the Realization Phase): 98 such buckets survive into theory 2, all from
+comment leaves it to the Realization Phase): 98 such buckets survive into the disambiguated theory, all from
 spelling twins (item B1). Same-lemma cross-category clashes ("appel" NOM / "appelle" VER)
 are in scope because their `lemmeGramCat`s differ.
 
@@ -1481,7 +1489,7 @@ Result: `dict[Word, Strokes]` of star/hash strokes; `()` = no star/hash mark.
 
 ### Star/hash code assignment — assignStarHashMarks (S7.7)   src/ambiguitychecker.py:292
 Called by: Physical star/hash assignment (S7.6), :376.
-Input state: one lemma-homophone group in theory-1 order.
+Input state: one lemma-homophone group in phonetic-theory order.
 Transformation:
 1. **Homograph merge** (:307-311): group by `ortho` (first-seen order); representative =
    `max(group, key=frequency)`, first wins ties.
@@ -1582,20 +1590,20 @@ Result: `pâts` `((4,12),(17,))` + `*` → `((4,12,10),(17,))` = `p*a/-s`; `aulx
 `(*#)×5` → `*ae#/*#/*#/*#/*#`.
 
 ### Alternate entry strokes (S7.14)   src/ambiguitychecker.py:1288
-Called by: Theory 2 assembly (S7.1), dictionary.py:389. Described as Alternate entry strokes
+Called by: Disambiguated-theory assembly (S7.1), dictionary.py:389. Described as Alternate entry strokes
 (S6.Realization.7).
 Notes: scope gap with a measured cost: an alternate entry carries no star/hash mark and can
 take an unrelated word's only stroke (`subits` loses to `subis`'s alternate entry, `pais`
 to `paie`, `amplis` to `emplis`): 9 spellings without a Plover entry (item B4).
 
-### Theory 2 report — Dictionary.writeFinalTheory (S7.15)   dictionary.py:392
-Called by: `__main__` dictionary.py:533, right after Theory 2 assembly (S7.1).
+### Disambiguated-theory report — Dictionary.writeDisambiguatedTheory (S7.15)   dictionary.py:392
+Called by: `python -m util.build_disambiguated_theory` (`main` util/build_disambiguated_theory.py:51), right after Disambiguated-theory assembly (S7.1).
 Transformation: header `ortho lemme gramCat strokes extraStrokes`; Words sorted by (lemme,
 gramCat, ortho), one row per stroke. `strokes` = base strokes as key spelling
 (`strokesToString`); `extraStrokes` = `+k,…` for keys merged into the last phoneme stroke,
 then extra strokes as key-index lists joined by `/`.
-Result: `theory2.tsv`, 181,869 rows (`aile … iel +10`, `ailes … iel +10/17`, `hèle … iel +15`, `elles … iel 17`).
-Artifacts: writes `theory2.tsv`.
+Result: `disambiguated_theory.tsv`, 181,869 rows (`aile … iel +10`, `ailes … iel +10/17`, `hèle … iel +15`, `elles … iel 17`).
+Artifacts: writes `disambiguated_theory.tsv`.
 Notes: a terminal human view; nothing reads it.
 
 ### Cross-category clash detector — detectCrossCategoryClash (S7.16, off-pipeline)   src/ambiguitychecker.py:59
@@ -1605,7 +1613,7 @@ Transformation: flags a bare lemma with ≥2 singleton `lemmeGramCat` sub-groups
 Notes: in the pipeline, cross-category clashes are handled implicitly by the ≥2
 `lemmeGramCat` filter of Lemma-homophone group detection (S7.5). The `__main__` itself is a
 hand-run check after Phonetic Theory Building (S5) (its console title still says "Phase 0
-Ambiguity Report" — legacy wording, queued follow-up): it classifies every theory-1
+Ambiguity Report" — legacy wording, queued follow-up): it classifies every phonetic-theory
 collision, honours `resources/ambiguityIgnoreList.tsv` (manually-triaged lemmas with reasons)
 and writes `ambiguity_report.tsv`. Its "overflow" metric counts lemma-homophone groups of
 ≥5 lemmas — beyond the old four-code budget (no stroke, `*`, `#`, `*#`) that N-ary
@@ -1631,30 +1639,32 @@ escalation has since superseded — and reports their frequency mass; kept as a 
    bizut/bizuth, a reform pair) are merged and both get `()`; Plover keeps `bizut`.
 5. **Tie decided by input order.** `pas` NOM 0.0 vs `pâts` NOM 0.0: the frequency-ratio rule
    (R4) (lo = 0) marks the first argument; the insertion sort calls `compare(later,
-   earlier)`, so the later Word in theory-1 order is marked (`pâts` → `p*a/-s`); reversed
+   earlier)`, so the later Word in phonetic-theory order is marked (`pâts` → `p*a/-s`); reversed
    input marks `pas` (item B5).
 
 ---
 
 ## Theory Export (S8)
 
-Theory Export (S8) turns theory 2 into the files people use: the **Plover branch**
+Theory Export (S8) turns the disambiguated theory into the files people use: the **Plover branch**
 (dictionary, key table, plugin) and the **trainer branch** (four JSON files), plus two shared
-calls. Every exporter that needs theory 2 recomputes it in its own process; none reads
-`theory2.tsv`. The key table (S8.4) and the trainer legend (S8.6) read only `starboard3h.json`,
+calls. Every exporter that needs the disambiguated theory recomputes it in its own process; none reads
+`disambiguated_theory.tsv`. The key table (S8.4) and the trainer legend (S8.6) read only `starboard3h.json`,
 and the legend also reads the realization report.
 
 ### Shared calls
 
-#### Theory 2 loading — loadFirstAndFinalTheory / loadFinalTheory (S8.1)   util/_theoryio.py:68, :48
-Called by: Plover dictionary export (S8.3) via `loadFinalTheory`; Trainer word drill (S8.7),
-Trainer sentences (S8.8) and Trainer definitions (S8.9) via `loadFirstAndFinalTheory`. The
-report build of the Realization Phase uses only `loadFirstTheory` (:42).
-Transformation: raises unless both JSON inputs exist (:76-79); `_loadDictionaryAndFirstTheory`
-(:17) aliases `__main__.Dictionary` (the pickle was written from `dictionary.py` as `__main__`),
-unpickles the five `Dictionary.pickle` objects and theory 1, then calls
-`dictionary.buildFinalTheory(...)` (:82).
-Result: (theory 1, theory 2); `loadFinalTheory` drops theory 1.
+#### Disambiguated-theory loading — loadPhoneticAndDisambiguatedTheory / loadDisambiguatedTheory (S8.1)   util/_theoryio.py:82, :58
+Called by: Plover dictionary export (S8.3) via `loadDisambiguatedTheory`; Trainer word drill (S8.7),
+Trainer sentences (S8.8) and Trainer definitions (S8.9) via `loadPhoneticAndDisambiguatedTheory`. The
+report build of the Realization Phase uses only `loadPhoneticTheory` (:52).
+Transformation: raises unless both JSON inputs exist (:92-94); `_loadDictionaryAndPhoneticTheory`
+(:41) aliases `__main__.Dictionary` (pickles written by dictionary.py's old buildOnly recorded
+the class as `__main__`; new ones written by `util.build_phonetic_theory` record
+`dictionary.Dictionary` and need no alias),
+unpickles the five `Dictionary.pickle` objects and the phonetic theory, then calls
+`dictionary.buildDisambiguatedTheory(...)` (:96).
+Result: (the phonetic theory, the disambiguated theory); `loadDisambiguatedTheory` drops the phonetic theory.
 Artifacts: reads both pickles, both JSON inputs, `resources/reform1990.tsv`.
 
 #### Stroke rendering — renderFinalStrokesToRTFCRE (S8.2)   util/_stenorender.py:39
@@ -1678,7 +1688,7 @@ Helpers not expanded: `Starboard.keyDisplayName` keyboard.py:654 (reserved names
 Called by: `python -m util.export_plover_dictionary`.
 Transformation: renders every stroke of every Word into `stenoToWords[steno]` (exact
 duplicate Words skipped, :50); per steno keeps `max(words, key=frequency)` (:56), first in
-theory-1 order on a tie (item B10); prints the top 10 collisions.
+phonetic-theory order on a tie (item B10); prints the top 10 collisions.
 Result: Plover dictionary, 163,238 entries (`sort_keys=True`, `indent=1`); 5,139 contain
 `*`/`#`; 58 end in a \*/# marker stroke. 29 spellings have no entry: 20 reform-doublet or
 near-doublet losers (`bizuths`, `dégottés`, `toquade`, `cuissot`, …) and 9 spellings shadowed
@@ -1713,7 +1723,7 @@ Transformation: per key: index, display name, 1-key phonemes, hand/row/col
 (`_handAndGridPosition` :51), finger, syllabic part, reserved flag, Gemini label; multi-key
 phoneme layers (`_phonemeLayers` :81); the **conjugation-feature legend**
 (`_conjugationMarkers` :117) from the realization report (:128): per keypress group,
-`chosenKeys`, key names and French feature labels. Does not call `buildFinalTheory`.
+`chosenKeys`, key names and French feature labels. Does not call `buildDisambiguatedTheory`.
 Result: `steno-trainer/public/data/keyboard-layout.json`.
 Notes: inline-path and report keys agree today (0→21 … 6→19); nothing detects a mismatch
 (item B18). A null `chosenKeys` would crash (item B19).
@@ -1722,7 +1732,7 @@ Notes: inline-path and report keys agree today (0→21 … 6→19); nothing dete
 Called by: `python -m util.export_practice_words [--limit N]`.
 Transformation: `buildReadingsByWord` (:175) maps each resolved entry's `readings` (feature
 combinations) to a Word through `_resolveEntryWord`; `chordsWithReadings` (:194) pairs each
-theory-2 stroke with its feature combinations (on a count mismatch, every stroke gets all
+disambiguated-theory stroke with its feature combinations (on a count mismatch, every stroke gets all
 combinations and the Word counts as "misaligned"). **Drill items** are keyed by (ortho,
 steno); a second Word with the same key merges label and context (:233-245). Each carries
 context words (`formatContext` :133), a French label (`formatReadingsLabel` :112), dotted
@@ -1732,7 +1742,7 @@ Result: `steno-trainer/public/data/practice-words.json`.
 
 #### Trainer sentences — export_practice_sentences.main (S8.8)   util/export_practice_sentences.py:145
 Called by: `python -m util.export_practice_sentences`, after Trainer word drill (S8.7).
-Transformation: builds `chordsByOrtho` from theory 2; for each LLM-annotated candidate in
+Transformation: builds `chordsByOrtho` from the disambiguated theory; for each LLM-annotated candidate in
 `util/candidate_sentences.jsonl` (276 lines), `resolveToken` (:74) narrows by lemma, category,
 verb tag and gender/number; rejects `sub:`/`ind:pas` tags, unknown forms, ambiguous stenos, and
 tokens that are not a drill item (`practice-words.json`, :158).
@@ -1741,8 +1751,8 @@ Notes: the drill-item gate compares against another process's recompute (item B3
 
 #### Trainer definitions — export_definitions.main (S8.9)   util/export_definitions.py:46
 Called by: `python -m util.export_definitions`.
-Transformation: groups every theory-1 Word by canonical base steno (`canonicalizeStrokes` +
+Transformation: groups every phonetic-theory Word by canonical base steno (`canonicalizeStrokes` +
 `strokesToRTFCRE`); per Word lists spelling, phonology, frequency and `[steno, label index]`
-per theory-2 stroke; merges identical rows (`_mergeIdenticalRows` :35); sorts by
+per disambiguated-theory stroke; merges identical rows (`_mergeIdenticalRows` :35); sorts by
 (−frequency, ortho); writes compact positional JSON with a shared label table.
 Result: `steno-trainer/public/data/definitions.json` (whole lexicon).

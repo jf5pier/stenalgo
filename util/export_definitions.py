@@ -1,6 +1,6 @@
 """
-Export the steno-trainer's definition-mode lookup table: every word of the final
-theory, grouped by the base (theory-1) chord it shares with its homophones -- the
+Export the steno-trainer's definition-mode lookup table: every word of the
+disambiguated theory, grouped by the base (phonetic-theory) chord it shares with its homophones -- the
 words the conjugation marks of Discriminating-Feature Stroke Realization (Realization
 Phase) and the star/hash marks of Different-Lemma or Grammatical-Category
 Disambiguation (S7) have to tell apart -- each
@@ -16,7 +16,7 @@ Compact positional JSON, since this covers the whole lexicon (not just the drill
   {"labels": [label, ...],
    "groups": [[base steno, [[ortho, phonology, frequency, [[steno, label index], ...]], ...]], ...]}
 Words within a group are most frequent first; a word's chords are its primary one
-first, then a self-homograph's alternates (see `loadFinalTheory`).
+first, then a self-homograph's alternates (see `loadDisambiguatedTheory`).
 
 Run: python -m util.export_definitions
 Requires the same inputs as `util.export_practice_words`.
@@ -25,7 +25,7 @@ import json
 
 from src.keyboard import Starboard, canonicalizeStrokes
 from util._stenorender import renderFinalStrokesToRTFCRE
-from util._theoryio import loadFirstAndFinalTheory
+from util._theoryio import loadPhoneticAndDisambiguatedTheory
 from util.export_practice_words import (
     KEYBOARD_JSON, RESOLVED_PRESS_SETS_PATH, buildReadingsByWord, chordsWithReadings,
     formatPhonology, formatReadingsLabel,
@@ -49,7 +49,7 @@ def main() -> None:
     starboard = Starboard.fromJSONFile(KEYBOARD_JSON)
     if starboard is None:
         raise RuntimeError(f"{KEYBOARD_JSON} not found; run dictionary.py once first to generate it.")
-    theory, finalTheory = loadFirstAndFinalTheory(starboard)
+    theory, disambiguatedTheory = loadPhoneticAndDisambiguatedTheory(starboard)
     with open(RESOLVED_PRESS_SETS_PATH, encoding="utf-8") as f:
         readingsByWord = buildReadingsByWord(json.load(f), theory)
 
@@ -59,9 +59,9 @@ def main() -> None:
         base = starboard.strokesToRTFCRE(canonicalizeStrokes(baseStrokes))
         group = wordsByBase.setdefault(base, [])
         for word in words:
-            if word not in finalTheory:
+            if word not in disambiguatedTheory:
                 continue
-            chords, _aligned = chordsWithReadings(word, finalTheory[word], readingsByWord)
+            chords, _aligned = chordsWithReadings(word, disambiguatedTheory[word], readingsByWord)
             group.append([
                 word.ortho, formatPhonology(word), round(word.frequency, 2),
                 [[renderFinalStrokesToRTFCRE(starboard, strokes),

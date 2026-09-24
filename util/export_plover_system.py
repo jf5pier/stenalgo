@@ -9,7 +9,7 @@ if `starboard3h.json` is re-optimized and a key's phoneme label changes -- only
 its position in `keyIDinSyllabicPart`/`_reservedKeyDisplayNames` matters.
 
 Run: python -m util.export_plover_system
-Requires `starboard3h.json` (`python dictionary.py` generates it).
+Requires `starboard3h.json` (a committed input).
 """
 from src.keyboard import Starboard
 

@@ -30,7 +30,7 @@ phase codes, older stage names and older terms. They map as follows.
 | marker, atom, discriminator (a grammatical value) | **Atomic feature** / **Feature** |
 | press-set, signature (what is pressed) | **Discriminating feature set** |
 | signature (`GroupSignature`) | **Homophone group set of feature sets** |
-| cluster | **Homophone Group**, **Theory-1 collision** or **Lemma-homophone group** (see Cluster) |
+| cluster | **Homophone Group**, **Phonetic-theory collision** or **Lemma-homophone group** (see Cluster) |
 | reading | **Feature Combination** |
 | keypress (the abstract unit) | **Keypress Group** |
 | chord | **Stroke** (see Chord for the other senses) |
@@ -39,6 +39,8 @@ phase codes, older stage names and older terms. They map as follows.
 | bare mark stroke | **\*/# marker stroke** |
 | 10x rule, frequency-ratio exemption | **frequency-ratio rule (R4)** |
 | in-scope collision | **Same-lemmeGramCat collision** |
+| theory 1, first theory, `FirstTheory.pickle`, `theory.tsv` | **phonetic theory** (renamed 2026-09-24) |
+| theory 2, final theory, `theory2.tsv` | **disambiguated theory** (renamed 2026-09-24) |
 
 ### Renamed files
 
@@ -73,11 +75,11 @@ One of several discriminating feature sets that each identify the same self-homo
 spelling, one per distinct feature combination; pressing any one of them is enough. Index 0
 is the primary alternate; the others become alternate entries.
 - Code: `resolveGroupPressSets` src/elicitation.py:374; `buildKeypressGroupExtraAlternates` src/ambiguitychecker.py:844.
-- Avoid "press-set alternate". Not the same as an **alternate entry** (the theory-2 stroke it produces).
+- Avoid "press-set alternate". Not the same as an **alternate entry** (the disambiguated-theory stroke it produces).
 - First used in: Discriminating-Feature Elicitation (Elicitation Phase).
 
 ### Alternate entry
-A theory-2 stroke after index 0: a self-homograph's second dictionary entry, built from a
+A disambiguated-theory stroke after index 0: a self-homograph's second dictionary entry, built from a
 non-primary alternate (base strokes plus that alternate's feature discriminating stroke).
 It is a separate concept, **not** an extra stroke. Alternate entries skip the star/hash
 marks (item B4).
@@ -112,9 +114,9 @@ Legacy name. Use **\*/# marker stroke**.
 - First used in: Different-Lemma or Grammatical-Category Disambiguation (S7).
 
 ### Base strokes
-A word's theory-1 Strokes: one stroke per syllable, no extra strokes or star/hash marks.
-- Code: `buildWordToStrokes` src/ambiguitychecker.py:553; `strokes` column of `theory2.tsv`.
-- Preferred synonym for "phoneme strokes" and "theory-1 strokes". Keep "last phoneme
+A word's phonetic-theory Strokes: one stroke per syllable, no extra strokes or star/hash marks.
+- Code: `buildWordToStrokes` src/ambiguitychecker.py:553; `strokes` column of `disambiguated_theory.tsv`.
+- Preferred synonym for "phoneme strokes" and "phonetic-theory strokes". Keep "last phoneme
   stroke" for the specific stroke that receives a merged star/hash mark.
 - First used in: Phonetic Theory Building (S5).
 
@@ -161,7 +163,7 @@ chosen by the elicitation answers, never computed.
 - First used in: Discriminating-Feature Elicitation (Elicitation Phase).
 
 ### Canonical-only collision
-Words in different theory-1 entries whose raw Strokes have the same canonical form, so they
+Words in different phonetic-theory entries whose raw Strokes have the same canonical form, so they
 type identically (233 canonical Strokes today, e.g. entre/heurte). Visible only after
 canonicalization.
 - Code: `canonicalizeStrokes` src/keyboard.py:31.
@@ -180,7 +182,7 @@ trainer record (`Chord`, util/export_practice_sentences.py:50). Code names such 
 ### Cluster
 Avoid entirely, including qualified forms. It had three meanings, now: **Homophone Group**
 (same `lemmeGramCat`, same canonical stroke), **Theory-1 collision** (all words on one
-theory-1 stroke; `StrokeClusterReport` src/ambiguitychecker.py:46) and **Lemma-homophone
+phonetic-theory stroke; `StrokeClusterReport` src/ambiguitychecker.py:46) and **Lemma-homophone
 group** (the unit of the star/hash marks; `rankHomophoneCluster` :261). Code names keep
 "cluster". A phonetic consonant cluster is called a consonant sequence or multiphoneme.
 - First used in: Phonetic Theory Building (S5).
@@ -227,11 +229,20 @@ of `python dictionary.py`.
 - Avoid calling it part of "Phonetic Theory Building (S2)" (legacy scope).
 - First used in: Dictionary Loading (S3).
 
+### Disambiguated theory
+Every Word's final Strokes list after Same-Lemma and Grammatical-Category Disambiguation (S6)
+and Different-Lemma or Grammatical-Category Disambiguation (S7): index 0 is the primary
+stroke (with its star/hash mark), then alternate entries. Recomputed by every exporter;
+`disambiguated_theory.tsv` is a human view that nothing reads.
+- Code: `Dictionary.buildDisambiguatedTheory` dictionary.py:342.
+- Preferred over "theory 2", "final theory" (code name `disambiguatedTheory` only).
+- First used in: Different-Lemma or Grammatical-Category Disambiguation (S7).
+
 ### Different-Lemma or Grammatical-Category Disambiguation (S7)
 The stage that adds star/hash marks to words that still collide after the Realization Phase
 with a different `lemmeGramCat` (different lemma, or same lemma in another category),
-producing theory 2. Its rule stack is the star/hash rule stack (R1-R7).
-- Code: `composeReservedKeyStrokes` src/ambiguitychecker.py:410, called from `Dictionary.buildFinalTheory` dictionary.py:385.
+producing the disambiguated theory. Its rule stack is the star/hash rule stack (R1-R7).
+- Code: `composeReservedKeyStrokes` src/ambiguitychecker.py:410, called from `Dictionary.buildDisambiguatedTheory` dictionary.py:385.
 - Avoid "Lemma-Homophone Marking (S4)", "`*`/`#` track", "cross-lemma track", "reserved-key track".
 - First used in: Different-Lemma or Grammatical-Category Disambiguation (S7).
 
@@ -473,7 +484,7 @@ groups: the union of all features of the groups touched.
 
 ### Inline path / report build
 The two call sites of the Realization Phase. The **inline path** runs inside
-`Dictionary.buildFinalTheory` and feeds theory 2 and all exports; the **report build**
+`Dictionary.buildDisambiguatedTheory` and feeds the disambiguated theory and all exports; the **report build**
 (`util/build_realization_report.py`) writes only the realization report. The trainer legend
 reads the report while Plover recomputes inline, so the two can drift (item B18).
 - Code: dictionary.py:373-389; util/build_realization_report.py:38.
@@ -669,12 +680,31 @@ onset → nucleus → coda in spoken order, kept raw.
 - Code: `Starboard.getStrokeOfSyllableByPart` src/keyboard.py:607.
 - First used in: Phonetic Theory Building (S5).
 
+### Phonetic theory
+Every Word's base strokes, grouped by raw Strokes (`dict[Strokes, list[Word]]`, 80,725
+entries), with no disambiguation. Persisted as `PhoneticTheory.pickle`; human view `phonetic_theory.tsv`.
+- Code: `Dictionary.buildPhoneticTheory` dictionary.py:305.
+- Preferred over "theory 1", "first theory".
+- First used in: Phonetic Theory Building (S5).
+
 ### Phonetic Theory Building (S5)
 The stage that loads `starboard3h.json` and maps each Word to its base strokes, producing
-theory 1 (`buildTheory`, `writeTheory`, `FirstTheory.pickle`). Second part of
-`python dictionary.py`. Its legacy code (S2) also covered Dictionary Loading (S3) and the
-layout statistics.
-- Code: dictionary.py:487-505; `Dictionary.buildTheory` :305.
+the phonetic theory (`buildPhoneticTheory`, `writePhoneticTheory`, `PhoneticTheory.pickle`).
+Second half of `python -m util.build_phonetic_theory`. Its legacy code (S2) also covered
+Dictionary Loading (S3) and the layout statistics.
+- Code: util/build_phonetic_theory.py; `Dictionary.buildPhoneticTheory` dictionary.py:305.
+- First used in: Phonetic Theory Building (S5).
+
+### Phonetic-theory collision
+A phonetic-theory entry holding two or more distinct spellings (41,640 today): the raw-key meaning of
+"homophones" in Phonetic Theory Building (S5).
+- Code: `StrokeClusterReport` src/ambiguitychecker.py:46 (diagnostic).
+- Avoid "stroke cluster".
+- First used in: Phonetic Theory Building (S5).
+
+### Phonetic-theory entry
+One (raw Strokes, list[Word]) item of the phonetic theory; its list is frequency-descending.
+- Code: dictionary.py:312.
 - First used in: Phonetic Theory Building (S5).
 
 ### Physical keypress group assignment
@@ -750,10 +780,10 @@ A dataset state: `list[lexique.Word]` read from Lexique383 (a different dataclas
 - First used in: Lexicon Building (S1).
 
 ### Raw Strokes
-The theory-1 key form: per syllable, each phoneme's full layout key tuple concatenated in
+The phonetic-theory key form: per syllable, each phoneme's full layout key tuple concatenated in
 onset → nucleus → coda and spoken order, repeats kept. Theory 1 is keyed on it.
 - Code: `getStrokeOfSyllableByPart` src/keyboard.py:607.
-- Contrast: **Canonical form**. Say "raw" whenever a count or equality is taken on theory-1 keys.
+- Contrast: **Canonical form**. Say "raw" whenever a count or equality is taken on phonetic-theory keys.
 - First used in: Phonetic Theory Building (S5).
 
 ### Reading
@@ -799,7 +829,7 @@ marks; 0 and 1 are held for a possible third mark. They are not "control" keys.
 
 ### Residual collision
 Two different words still sharing a final stroke after the Realization Phase, in one of four
-buckets: theory (a composed stroke equals a theory-1 key), same-lemmeGramCat, cross-category
+buckets: theory (a composed stroke equals a phonetic-theory key), same-lemmeGramCat, cross-category
 clash, or cross-lemma collision.
 - Code: `KeypressGroupPhysicalAssignment` src/ambiguitychecker.py:904; :1219-1258.
 - First used in: Discriminating-Feature Stroke Realization (Realization Phase).
@@ -921,7 +951,7 @@ phonology (e+n repair, -rdre, -ayer conditionnel, -uer glide).
 
 ### Syllable statistics
 A dataset state: the `SyllableCollection` and the `Syllable` class-level phoneme, biphoneme
-and multiphoneme collections. The syllable lookup feeds theory 1; the frequencies feed the
+and multiphoneme collections. The syllable lookup feeds the phonetic theory; the frequencies feed the
 layout statistics.
 - Code: `analyseSyllabification` dictionary.py:169.
 - First used in: Dictionary Loading (S3).
@@ -944,36 +974,8 @@ A generated lexicon row in `resources/LexiqueSynthetic.tsv` (`source=synthetic`,
 - Code: `writeSynthetic` util/completeVerbParadigms.py:324; dictionary.py:66-69.
 - First used in: Synthetic Lexicon Building (S2).
 
-### Theory 1
-Every Word's base strokes, grouped by raw Strokes (`dict[Strokes, list[Word]]`, 80,725
-entries), with no disambiguation. Persisted as `FirstTheory.pickle`; human view `theory.tsv`.
-- Code: `Dictionary.buildTheory` dictionary.py:305.
-- Preferred over "first theory".
-- First used in: Phonetic Theory Building (S5).
-
-### Theory-1 collision
-A theory-1 entry holding two or more distinct spellings (41,640 today): the raw-key meaning of
-"homophones" in Phonetic Theory Building (S5).
-- Code: `StrokeClusterReport` src/ambiguitychecker.py:46 (diagnostic).
-- Avoid "stroke cluster".
-- First used in: Phonetic Theory Building (S5).
-
-### Theory-1 entry
-One (raw Strokes, list[Word]) item of theory 1; its list is frequency-descending.
-- Code: dictionary.py:312.
-- First used in: Phonetic Theory Building (S5).
-
-### Theory 2
-Every Word's final Strokes list after Same-Lemma and Grammatical-Category Disambiguation (S6)
-and Different-Lemma or Grammatical-Category Disambiguation (S7): index 0 is the primary
-stroke (with its star/hash mark), then alternate entries. Recomputed by every exporter;
-`theory2.tsv` is a human view that nothing reads.
-- Code: `Dictionary.buildFinalTheory` dictionary.py:342.
-- Preferred over "final theory" (code name `finalTheory` only).
-- First used in: Different-Lemma or Grammatical-Category Disambiguation (S7).
-
 ### Theory Export (S8)
-The stage that renders theory 2 for its users, in two branches: the **Plover branch**
+The stage that renders the disambiguated theory for its users, in two branches: the **Plover branch**
 (Plover dictionary, key table, system plugin) and the **trainer branch** (keyboard legend,
 word drill, sentences, definitions).
 - Code: util/export_plover_dictionary.py, util/export_plover_system.py, util/export_keyboard_layout.py, util/export_practice_words.py, util/export_practice_sentences.py, util/export_definitions.py.

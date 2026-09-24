@@ -5,10 +5,10 @@ drill from, keyed by orthography (not by steno string, the way
 for this word," never the reverse, so it dedupes on `ortho` instead of `steno`
 when a word appears under more than one entry, keeping the highest-frequency one.
 
-Uses `util._theoryio.loadFinalTheory` (theory 2: base strokes + the same-lemma marks
+Uses `util._theoryio.loadDisambiguatedTheory` (the disambiguated theory: base strokes + the same-lemma marks
 of Discriminating-Feature Stroke Realization (Realization Phase) + the star/hash marks
 of Different-Lemma or Grammatical-Category Disambiguation (S7)), not the raw unmarked
-theory 1 -- this is what actually disambiguates homophones like "a"/"as"/"à"
+phonetic theory -- this is what actually disambiguates homophones like "a"/"as"/"à"
 (same base phonology, different final chords once the Realization Phase/S7 are
 applied). A word whose final chord still collides with another word's (the same
 lemma+gramCat, or an intentionally-exempted pair -- 1990-reform doublets, or one
@@ -25,15 +25,15 @@ against a decoded Gemini PR packet.
 
 Each record also carries a human-readable French grammatical `label` (e.g.
 "impératif présent, 2e pl.", "nom, f. pl."), so a drill can say WHICH reading a
-chord is for. A self-homograph word (e.g. "calmez", see `loadFinalTheory`) gets
+chord is for. A self-homograph word (e.g. "calmez", see `loadDisambiguatedTheory`) gets
 one record per independently-valid stroke, each labelled with only the
 reading(s) that stroke is for -- taken from `resolved_press_sets.json`'s
 "readings" field (`src.elicitation.serializeResolvedPressSets`), which is
 parallel to that spelling's press-set alternates, and therefore to
-`loadFinalTheory`'s per-word stroke list.
+`loadDisambiguatedTheory`'s per-word stroke list.
 
 Run: python -m util.export_practice_words [--limit N]
-Requires FirstTheory.pickle/Dictionary.pickle (`python dictionary.py` first),
+Requires PhoneticTheory.pickle/Dictionary.pickle (`python -m util.build_phonetic_theory` first),
 keypress_groups.json (`python -m util.build_keypress_groups`) and
 resolved_press_sets.json (`python -m src.elicitation`).
 """
@@ -45,7 +45,7 @@ from src.elicitation import wordFeatureCombinations
 from src.keyboard import Starboard, Strokes
 from src.word import GramCat, Word
 from util._stenorender import renderFinalStrokesToRTFCRE
-from util._theoryio import loadFirstAndFinalTheory
+from util._theoryio import loadPhoneticAndDisambiguatedTheory
 
 KEYBOARD_JSON = "starboard3h.json"
 RESOLVED_PRESS_SETS_PATH = "resolved_press_sets.json"
@@ -177,7 +177,7 @@ def buildReadingsByWord(
     resolvedGroups: list[dict], theory: dict[Strokes, list[Word]],
 ) -> dict[Word, list[list[Reading]]]:
     """Every word covered by `resolved_press_sets.json` -> its readings per press-set
-    alternate (parallel to its `loadFinalTheory` stroke list), matched to the real `Word`
+    alternate (parallel to its `loadDisambiguatedTheory` stroke list), matched to the real `Word`
     the same way the Discriminating-Feature Stroke Realization (Realization Phase)
     pipeline does (`_resolveEntryWord`)."""
     wordToStrokes = buildWordToStrokes(theory)
@@ -217,7 +217,7 @@ def main() -> None:
     if starboard is None:
         raise RuntimeError(f"{KEYBOARD_JSON} not found; run dictionary.py once first to generate it.")
 
-    theory, finalTheory = loadFirstAndFinalTheory(starboard)
+    theory, disambiguatedTheory = loadPhoneticAndDisambiguatedTheory(starboard)
     with open(RESOLVED_PRESS_SETS_PATH, encoding="utf-8") as f:
         readingsByWord = buildReadingsByWord(json.load(f), theory)
 
@@ -226,7 +226,7 @@ def main() -> None:
     # each their own drill item now that every item says which reading it's for.
     byOrthoSteno: dict[tuple[str, str], dict] = {}
     misalignedWords = 0
-    for word, strokesList in finalTheory.items():
+    for word, strokesList in disambiguatedTheory.items():
         chords, aligned = chordsWithReadings(word, strokesList, readingsByWord)
         misalignedWords += not aligned
         for strokes, readings in chords:

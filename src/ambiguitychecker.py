@@ -2,7 +2,7 @@
 # coding: utf-8
 """
 Phase 0 ambiguity checker (see ROADMAP.md): measures where frequency-weighted stroke
-ambiguity lives in a `theory` (as built by `Dictionary.buildTheory`), before any physical
+ambiguity lives in a `theory` (as built by `Dictionary.buildPhoneticTheory`), before any physical
 special-keypress or phoneme-chord assignment is committed to.
 
 Two independently-classified kinds of ambiguity coexist in one stroke cluster:
@@ -123,7 +123,7 @@ def loadReform1990DoubletPairs(tsvPath: str = "resources/reform1990.tsv") -> fro
 # pair (this granularity matches how the design session itself lists these pairs);
 # value is the ortho that gets marked. Built from a top-10-by-regret list combining
 # the 10x and 100x thresholds' top lists, cross-checked against a full regeneration
-# at the finally-chosen 10x threshold on freshly rebuilt Dictionary/FirstTheory
+# at the finally-chosen 10x threshold on freshly rebuilt Dictionary/PhoneticTheory
 # pickles (2026-09-20) -- not yet re-verified against a canonical single run beyond
 # that.
 MARKING_OVERRIDES: dict[frozenset[str], str] = {
@@ -418,7 +418,7 @@ def composeReservedKeyStrokes(
     Final realized Strokes for every word touched by Different-Lemma or
     Grammatical-Category Disambiguation (S7): the `finalInduced` stroke of
     Discriminating-Feature Stroke Realization (Realization Phase) plus the star/hash mark.
-    Given `phonemeStrokeCounts` (each word's theory-1 stroke count), the mark's FIRST symbol
+    Given `phonemeStrokeCounts` (each word's phonetic-theory stroke count), the mark's FIRST symbol
     is pressed together with the word's last phoneme stroke -- "a*", not "a/*" -- and only an
     escalated code's further symbols become extra trailing strokes; without it, every symbol
     is its own trailing stroke (the original, all-appended form).
@@ -612,7 +612,7 @@ def _resolveEntryWord(
     `buildKeypressGroupExtraAlternates`.
 
     The entry's "strokes" are CANONICAL (sorted, deduped -- `buildLemmaHomophoneGroups`
-    regroups by `canonicalizeStrokes`), while `wordToStrokes` holds theory 1's raw,
+    regroups by `canonicalizeStrokes`), while `wordToStrokes` holds the phonetic theory's raw,
     repeat-preserving strokes, so the comparison canonicalizes first. Comparing raw
     against canonical silently missed every word whose raw stroke repeats a key (e.g.
     "nie" /nj/, raw ((6, 8, 8, 9),)) and fell back to `candidates[0]` -- a DIFFERENT
@@ -769,7 +769,7 @@ class KeypressGroupPhysicalAssignment:
 # Human preference (2026-09-22 session) for the Realization Phase's physical coda-bank key
 # choice, keyed by MARKER rather than a Grouping Phase group id (which can shift between reruns as
 # bundling changes) -- shared by `util/build_realization_report.py`'s diagnostic
-# artifact and `Dictionary.buildFinalTheory`'s real export, so both land on the same
+# artifact and `Dictionary.buildDisambiguatedTheory`'s real export, so both land on the same
 # physical keys. `pers_3` on -t: mnemonic, many pers_3 verb forms end in a written "t".
 # `impératif` on -k and `pers_2` on -d: kept in that physical order, both ahead of
 # pers_3's -t.
@@ -1104,7 +1104,7 @@ def buildFinalInducedStrokes(
     Discriminating-Feature Grouping (Grouping Phase) group). `composeReservedKeyStrokes`
     needs the whole lexicon, since a star/hash mark homophone cluster can include words
     the Realization Phase never touched at all. A word touched by no Grouping Phase group
-    keeps its theory-1 stroke unchanged; a word needing one or more groups gets
+    keeps its phonetic-theory stroke unchanged; a word needing one or more groups gets
     `assignment.chosenKeysByGroup`'s keys for each, unioned into one shared extra coda stroke
     -- the same reconstruction `realizeKeypressGroupsAsExtraStroke` already does internally
     for its own verification pass, generalized here to the full lexicon.
@@ -1130,7 +1130,7 @@ def buildExtraInducedStrokes(
     `src.elicitation.resolveGroupPressSets` -- e.g. "calmez"'s indicatif reading, once
     its impératif reading already drives `buildFinalInducedStrokes`' one stroke per
     word), each composed into its own additional Strokes the same way
-    `buildFinalInducedStrokes` composes a word's primary stroke: its theory-1 base plus
+    `buildFinalInducedStrokes` composes a word's primary stroke: its phonetic-theory base plus
     that reading's own group-set's already-decided physical keys.
 
     Deliberately NOT run through `composeReservedKeyStrokes` (Different-Lemma or
@@ -1179,13 +1179,13 @@ if __name__ == "__main__":
 
     starboard = Starboard.fromJSONFile("starboard3h.json")
     if starboard is None:
-        raise RuntimeError("starboard3h.json not found; run dictionary.py once first to generate it.")
+        raise RuntimeError("starboard3h.json not found; it is a committed input -- run from the repo root.")
 
-    if os.path.exists("FirstTheory.pickle"):
-        with open("FirstTheory.pickle", "rb") as pfile:
+    if os.path.exists("PhoneticTheory.pickle"):
+        with open("PhoneticTheory.pickle", "rb") as pfile:
             theory = pickle.load(pfile)
     else:
-        theory = dictionary.buildTheory(starboard)
+        theory = dictionary.buildPhoneticTheory(starboard)
 
     ignoredLemmas = loadIgnoredLemmas()
     reports = classifyTheory(theory, ignoredLemmas=frozenset(ignoredLemmas))

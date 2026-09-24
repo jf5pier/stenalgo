@@ -17,7 +17,7 @@ underlying elicitation answer (or, rarer, the lexicon itself) needs a human look
 that this script should silently override it.
 
 Run: python -m util.check_conjugation_disambiguation_order
-Requires Dictionary.pickle/FirstTheory.pickle (`python dictionary.py` first) and
+Requires Dictionary.pickle/PhoneticTheory.pickle (`python -m util.build_phonetic_theory` first) and
 elicitation_answers.json.
 """
 import json
@@ -26,6 +26,7 @@ import pickle
 from dataclasses import dataclass
 
 from dictionary import Dictionary  # noqa: F401 -- needed to unpickle Dictionary.pickle
+# (old pickles record the class as __main__.Dictionary, new ones as dictionary.Dictionary)
 from src.elicitation import (
     AnsweredOpposition, buildAnswersByOpposition, buildLemmaHomophoneGroups,
     featureCombinationsByOrtho, resolvePressByCombination,
@@ -128,8 +129,8 @@ def checkPressByOrthoCombination(
 
 
 def main() -> None:
-    if not os.path.exists("Dictionary.pickle") or not os.path.exists("FirstTheory.pickle"):
-        raise RuntimeError("Run `python dictionary.py` first to build Dictionary.pickle / FirstTheory.pickle.")
+    if not os.path.exists("Dictionary.pickle") or not os.path.exists("PhoneticTheory.pickle"):
+        raise RuntimeError("Run `python -m util.build_phonetic_theory` first to build Dictionary.pickle / PhoneticTheory.pickle.")
     if not os.path.exists("elicitation_answers.json"):
         raise RuntimeError("elicitation_answers.json not found -- nothing to validate.")
 
@@ -142,7 +143,7 @@ def main() -> None:
         Syllable.phonemeColByPart = pickle.load(pfile)
         Syllable.biphonemeColByPart = pickle.load(pfile)
         Syllable.multiphonemeColByPart = pickle.load(pfile)
-    with open("FirstTheory.pickle", "rb") as pfile:
+    with open("PhoneticTheory.pickle", "rb") as pfile:
         theory = pickle.load(pfile)
 
     homophoneGroups = buildLemmaHomophoneGroups(theory)

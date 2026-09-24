@@ -2,18 +2,21 @@ __pycache__/
 *.pyc
 .local_history
 
-# Regenerable caches (dictionary.py / lexique.py pipeline)
+# Regenerable caches (dictionary.py pipeline; util.build_phonetic_theory)
 Dictionary.pickle
 FeatureDiscrimator.pickle
-FirstTheory.pickle
+PhoneticTheory.pickle
 AugTheory.pickle*
+
+# Local pipeline step timings (util/_timing.py, appended per run)
+pipeline_timings.log
 
 # Regenerable report (src/ambiguitychecker.py __main__, hand-run diagnostic)
 ambiguity_report.tsv
 
-# Regenerable pipeline output (dictionary.py)
-theory.tsv
-theory2.tsv
+# Regenerable pipeline output (util.build_phonetic_theory / util.build_disambiguated_theory)
+phonetic_theory.tsv
+disambiguated_theory.tsv
 
 # Regenerable Elicitation Phase outputs (src/elicitation.py, util/build_questionnaire_page.py)
 questionnaire.json

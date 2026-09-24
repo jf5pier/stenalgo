@@ -56,5 +56,5 @@ def test_every_appender_runs_with_apply():
 
 def test_moved_constants_keep_their_values():
     # These moved from dictionary.py; pin them so the move cannot silently drift.
-    assert PICKLE_CACHE_PATHS == ("Dictionary.pickle", "FirstTheory.pickle")
+    assert PICKLE_CACHE_PATHS == ("Dictionary.pickle", "PhoneticTheory.pickle")
     assert SYNTHETIC_TSV_PATH == "resources/LexiqueSynthetic.tsv"

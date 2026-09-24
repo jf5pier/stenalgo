@@ -16,7 +16,7 @@ was removed in Dead-Code Removal (Pass 5).
 - **B1** Spelling twins: only the first Word of a spelling gets its feature discriminating stroke —
   src/ambiguitychecker.py:797-800 (`_resolveEntryWord`) — Words sharing (ortho, `lemmeGramCat`) and
   strokes: `next(...)` marks one ("agis" participle vs finite). 230 same-lemmeGramCat collision pairs;
-  99 pairs in 98 strokes reach theory 2 unmarked. Invisible to the 0-residual invariant.
+  99 pairs in 98 strokes reach the disambiguated theory unmarked. Invisible to the 0-residual invariant.
 - **B2** Synthetic verb forms get a vowel-less trailing syllable — src/verbparadigm.py:561, :611 —
   radical cut by character count keeps the infinitive's syllable boundary (`cannes` sub:pre:2s: 2
   strokes vs NOM 1). 3,843 new Words carry an extra stroke and miss their real homophones.
@@ -42,7 +42,7 @@ was removed in Dead-Code Removal (Pass 5).
   dictionary.py:113-137 (`readCorpus`) — frequencies not summed, differing `syll_cv` dropped (24
   reform-rewrite identities: `gélinotte`, …). Undercounted frequency feeds the frequency-ratio rule
   (R4) and the Plover "most frequent" pick.
-- **B10** Plover export breaks frequency ties by theory-1 order — util/export_plover_dictionary.py:56
+- **B10** Plover export breaks frequency ties by phonetic-theory order — util/export_plover_dictionary.py:56
   — `max(key=frequency)` keeps the first Word (`dégotés`/`dégottés`, both 0.0). Low impact;
   order-dependent like B5.
 
@@ -51,7 +51,7 @@ was removed in Dead-Code Removal (Pass 5).
 - **B11** Residual-collision lists in the realization report change between clean rebuilds —
   src/word.py:94, :155; src/ambiguitychecker.py:739-747, :1248-1257 — salted `hash()` stored in the
   pickles sets `allWords` order and first-seen pairing. Cross-category clashes 34/40/38, cross-lemma
-  1,283/1,292 across rebuilds; theory 2 and Plover unaffected (`PYTHONHASHSEED=0` workaround).
+  1,283/1,292 across rebuilds; the disambiguated theory and Plover unaffected (`PYTHONHASHSEED=0` workaround).
 - **B12** The precedence-spec checker covers much less than the spec —
   util/check_conjugation_disambiguation_order.py:69-77, :100-126 — "masculine must be free" checked
   for participles only; mandatory impératif/subjonctif and line order unchecked. The validation
@@ -59,9 +59,19 @@ was removed in Dead-Code Removal (Pass 5).
 - **B13** Verb paradigm completion is not idempotent — util/completeVerbParadigms.py:95-97 with
   :324-340 — `--apply` twice without deleting the pickles appends the same rows again to the tracked
   `LexiqueSynthetic.tsv` (duplicates merge by identity; only the file grows).
-- **B14** Human views go stale with the caches — dictionary.py:498-505, :531 — `theory.tsv` is
-  written only on a `FirstTheory.pickle` miss; `theory2.tsv` from possibly stale discriminating
-  feature sets. Low: both gitignored and read by nothing.
+- **B43** The S2.1 appender's "confirmed to cause a new discriminator collision" gating is
+  PYTHONHASHSEED-sensitive (found 2026-09-24 via the pipeline-timing test run): on the same
+  converged tree and identical pickles, `python -m util.completeVerbParadigms` (dry run) reports
+  0 flagged lemmas / 0 candidate rows under `PYTHONHASHSEED=0` but 10 / 84 unpinned, so an
+  unpinned `python dictionary.py` (or S2 wrapper) appends 84 rows to the tracked
+  `LexiqueSynthetic.tsv` a pinned run wouldn't — and then cascades a pickle rebuild. Same
+  salted-`hash()` family as B11/B27 (some set/dict iteration feeds the collision confirmation).
+  Workaround: always pin `PYTHONHASHSEED=0` for anything that can run the appenders.
+- **B14** RESOLVED 2026-09-24 (the theory-build extraction into `util.build_phonetic_theory` /
+  `util.build_disambiguated_theory`): `phonetic_theory.tsv` is now written on every run (pickle
+  hit or miss; a pickle round-trip preserves dict order, so the bytes are stable), and
+  `disambiguated_theory.tsv` is only ever written by its own command from the JSONs that exist
+  at that moment — the old buildOnly could emit it from stale inputs mid-run.
 
 ### Tier 3 — latent (no measured current impact)
 
@@ -71,8 +81,8 @@ was removed in Dead-Code Removal (Pass 5).
 - **B16** First-seen pairing can hide same-lemmeGramCat collisions — src/ambiguitychecker.py:739-747
   with :1248-1250 — X, Z (same `lemmeGramCat`) and Y on one stroke: if Y is seen first, (X,Z) never
   reaches `residualCollisions`. No instance observed.
-- **B17** `buildFinalTheory` ignores unassigned Keypress Groups and residuals — dictionary.py:380-389
-  — an unrealizable group's Words silently lose their feature discriminating stroke in theory 2 and
+- **B17** `buildDisambiguatedTheory` ignores unassigned Keypress Groups and residuals — dictionary.py:380-389
+  — an unrealizable group's Words silently lose their feature discriminating stroke in the disambiguated theory and
   Plover. Not triggered (all 7 groups have keys).
 - **B18** Trainer legend can disagree with the dictionary — util/export_keyboard_layout.py:128 —
   legend reads the tracked realization report, the dictionary recomputes keys inline; rerunning
@@ -84,7 +94,7 @@ was removed in Dead-Code Removal (Pass 5).
   Elicitation (Elicitation Phase)) mark `candidates[0]` instead of failing.
 - **B21** Extra alternates of empty-primary spellings are never verified —
   src/ambiguitychecker.py:1227-1241 — only Words in `allWords` get alternates checked; 2,749
-  spellings have an empty primary ("abaisse"). 0 collisions with theory 1 today.
+  spellings have an empty primary ("abaisse"). 0 collisions with the phonetic theory today.
 - **B22** Collision tests compare raw strokes — src/ambiguitychecker.py:1114, :1142, :1243-1247 —
   collisions are physical (canonical) but raw Strokes are compared. 0 cases today.
 - **B23** Non-live hard-rule feature raises `KeyError` — src/featuregroupingsat.py:117 with :128-135
@@ -103,7 +113,7 @@ was removed in Dead-Code Removal (Pass 5).
   cause of B11.
 - **B28** `zip` truncation can leave a syllable unregistered — dictionary.py:177 — 99 Words have
   phonetic/orthographic syllable lists of different lengths; a unique extra syllable would make
-  `buildTheory` (:310) raise `KeyError`. Not triggered.
+  `buildPhoneticTheory` (:310) raise `KeyError`. Not triggered.
 - **B29** `lexicalPhonemeAmbiguityScore` looks up a word phonology as a syllable name —
   src/grammar.py:913, :931 — `getSyllable("apodiR")` → `None`, the branch adds 0 for polysyllabic
   words. Affects the fallback keymap only.
@@ -113,14 +123,14 @@ was removed in Dead-Code Removal (Pass 5).
 - **B31** Multiphoneme frequencies are always 0 — src/grammar.py:566, :574-584 — all 353 values are
   0.0; no reader.
 - **B32** The layout solver wipes the layout before solving — src/cpsatsolver.py:422 (not run) —
-  an infeasible or timed-out part leaves its bank empty and the next `buildTheory` raises `IndexError`.
+  an infeasible or timed-out part leaves its bank empty and the next `buildPhoneticTheory` raises `IndexError`.
 - **B33** `lexique.py` rebuilds on import — lexique.py:1261-1263 — no `__main__` guard: importing it
   overwrites `LexiqueMixte.tsv`. No importers today.
 - **B34** `Lexique` keeps its rows in class-level lists — lexique.py:957-958 — a second `Lexique()`
   in one process doubles every row. Not triggered.
 - **B35** The sentence exporter's drill-item gate depends on another process —
   util/export_practice_sentences.py:158 — compares against `practice-words.json` from a separate
-  theory-2 recompute; changed inputs between the runs reject valid sentences.
+  disambiguated-theory recompute; changed inputs between the runs reject valid sentences.
 
 ### Added at Interactive Triage (2026-09-23)
 
@@ -150,7 +160,7 @@ was removed in Dead-Code Removal (Pass 5).
   `starboard3h.json` and writes `starboard3h_optimized.json` by default (`--output
   starboard3h.json` to replace the seed deliberately).
 - **Realization report vs inline path drift** — the trainer keyboard legend reads the tracked
-  `realization_report.json`, while theory 2 and the Plover dictionary recompute the
+  `realization_report.json`, while the disambiguated theory and the Plover dictionary recompute the
   Discriminating-Feature Stroke Realization (Realization Phase) inline; nothing compares them
   (B18, B19).
 - **`.claude/settings.local.json` still allow-lists the old `build_phase_p_realization`
@@ -174,7 +184,7 @@ was removed in Dead-Code Removal (Pass 5).
   verified against real data).
 - **Done — Integrate the pipeline steps into one orchestrated entrypoint** — `python
   dictionary.py` now runs the four steady-state S2 appenders (`--apply`), the Elicitation,
-  Grouping and Realization phases, the theory-2 refresh and every export, rebuilding the
+  Grouping and Realization phases, the disambiguated-theory refresh and every export, rebuilding the
   pickles itself when its appenders appended rows; the manual-`rm` staleness trap is
   intentionally preserved (see `docs/PIPELINE.md` "How to run a full rebuild").
 - **No tests for `cpsatsolver.py`'s ambiguity math** — the layout solver's cost model is untested
