@@ -48,7 +48,7 @@ was removed in Dead-Code Removal (Pass 5).
 
 ### Tier 2 — affects reports or tracked artifacts (not the Plover output)
 
-- **B11** Residual-collision lists in the realization report change between clean rebuilds —
+- **B11** RESOLVED 2026-09-24 (`Word._hash` is now a blake2b digest of `Word.identity()`, `__eq__` compares the identity fields; a clean unpinned `python dictionary.py` rebuild is byte-identical to a `PYTHONHASHSEED=0` one on all 11 tracked outputs). The realization report is identical under seeds 0, 1 and unset (37 cross-category, 1,326 cross-lemma). Original entry: Residual-collision lists in the realization report change between clean rebuilds —
   src/word.py:94, :155; src/ambiguitychecker.py:739-747, :1248-1257 — salted `hash()` stored in the
   pickles sets `allWords` order and first-seen pairing. Cross-category clashes 34/40/38, cross-lemma
   1,283/1,292 across rebuilds; the disambiguated theory and Plover unaffected (`PYTHONHASHSEED=0` workaround).
@@ -59,7 +59,7 @@ was removed in Dead-Code Removal (Pass 5).
 - **B13** Verb paradigm completion is not idempotent — util/completeVerbParadigms.py:95-97 with
   :324-340 — `--apply` twice without deleting the pickles appends the same rows again to the tracked
   `LexiqueSynthetic.tsv` (duplicates merge by identity; only the file grows).
-- **B43** The S2.1 appender's "confirmed to cause a new discriminator collision" gating is
+- **B43** RESOLVED 2026-09-24 (`Word._hash` is now a blake2b digest of `Word.identity()`, `__eq__` compares the identity fields; a clean unpinned `python dictionary.py` rebuild is byte-identical to a `PYTHONHASHSEED=0` one on all 11 tracked outputs). The S2.1 dry run now confirms 0 rows under seeds 0, 1 and unset. Kept for the record; the order-insensitive feature-set key / receiving-group restriction below remain optional cleanups. Original entry: The S2.1 appender's "confirmed to cause a new discriminator collision" gating is
   PYTHONHASHSEED-sensitive (found 2026-09-24 via the pipeline-timing test run): on the same
   converged tree and identical pickles, `python -m util.completeVerbParadigms` (dry run) reports
   0 flagged lemmas / 0 candidate rows under `PYTHONHASHSEED=0` but 10 / 84 unpinned, so an
@@ -142,7 +142,7 @@ was removed in Dead-Code Removal (Pass 5).
 - **B26** Doublet merge checks only the representative's lemma — src/ambiguitychecker.py:321-326 —
   a rarer homograph carrying the reform-pair lemma makes the doublet look like a real ambiguity. 0
   instances.
-- **B27** Word identity is fragile — src/word.py:94, :161 — separator-free `_hash` concatenation and
+- **B27** RESOLVED 2026-09-24 (`Word._hash` is now a blake2b digest of `Word.identity()`, `__eq__` compares the identity fields; a clean unpinned `python dictionary.py` rebuild is byte-identical to a `PYTHONHASHSEED=0` one on all 11 tracked outputs). Word identity is fragile — src/word.py:94, :161 — separator-free `_hash` concatenation and
   `__eq__` on `_hash` only: Words from pickles of different processes never compare equal. Root
   cause of B11.
 - **B28** `zip` truncation can leave a syllable unregistered — dictionary.py:177 — 99 Words have
