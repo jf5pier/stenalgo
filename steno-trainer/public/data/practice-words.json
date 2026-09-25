@@ -14182,9 +14182,9 @@
  },
  {
   "ortho": "joue",
-  "before": "qu'il",
+  "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "Zu",
   "steno": "vt@e/-R",
   "strokes": [
@@ -14395,9 +14395,9 @@
  },
  {
   "ortho": "adore",
-  "before": "qu'il",
+  "before": "que j'",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "a.dOR",
   "steno": "a/pveR/-R",
   "strokes": [
@@ -22328,9 +22328,9 @@
  },
  {
   "ortho": "emmène",
-  "before": "qu'il",
+  "before": "que j'",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "@.mEn",
   "steno": "@/mien/-R",
   "strokes": [
@@ -22718,9 +22718,9 @@
  },
  {
   "ortho": "ignore",
-  "before": "que j'",
+  "before": "qu'il",
   "after": "",
-  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "label": "subjonctif présent, 3e sg.",
   "phonology": "i.NoR",
   "steno": "i/waeR/-R",
   "strokes": [
@@ -22854,9 +22854,9 @@
  },
  {
   "ortho": "continue",
-  "before": "qu'il",
+  "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "k§.ti.ny",
   "steno": "kai/ti/mR@i/-R",
   "strokes": [
@@ -27613,9 +27613,9 @@
  },
  {
   "ortho": "pleure",
-  "before": "qu'il",
+  "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "pl9R",
   "steno": "pmt@R/-R",
   "strokes": [
@@ -29320,6 +29320,33 @@
     2,
     4,
     13
+   ]
+  ],
+  "frequency": 56.66
+ },
+ {
+  "ortho": "signifie",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "si.Ni.fi",
+  "steno": "si/wi/kpi/-R",
+  "strokes": [
+   [
+    3,
+    13
+   ],
+   [
+    9,
+    13
+   ],
+   [
+    2,
+    4,
+    13
+   ],
+   [
+    21
    ]
   ],
   "frequency": 56.66
@@ -31130,7 +31157,7 @@
   "ortho": "pardonne",
   "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 1re sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "paR.dOn",
   "steno": "paR/pven/-R",
   "strokes": [
@@ -31375,7 +31402,7 @@
   "ortho": "parie",
   "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 1re sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "pa.Ri",
   "steno": "pa/Ri/-R",
   "strokes": [
@@ -32169,7 +32196,7 @@
   "ortho": "image",
   "before": "l'",
   "after": "",
-  "label": "nom, f. sg. · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "i.maZ",
   "steno": "i/maZ",
   "strokes": [
@@ -36513,7 +36540,7 @@
   "ortho": "approche",
   "before": "que j'",
   "after": "",
-  "label": "subjonctif présent, 1re sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "a.pROS",
   "steno": "a/pReZm/-R",
   "strokes": [
@@ -37210,7 +37237,7 @@
   "ortho": "usine",
   "before": "l'",
   "after": "",
-  "label": "nom, f. sg. · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "y.zin",
   "steno": "@i/twin",
   "strokes": [
@@ -43531,9 +43558,9 @@
  },
  {
   "ortho": "vole",
-  "before": "qu'il",
+  "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "vOl",
   "steno": "vel/-R",
   "strokes": [
@@ -46849,6 +46876,32 @@
  },
  {
   "ortho": "apprécie",
+  "before": "que j'",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "a.pRe.si",
+  "steno": "a/pRe/si/-R",
+  "strokes": [
+   [
+    12
+   ],
+   [
+    4,
+    8,
+    14
+   ],
+   [
+    3,
+    13
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 32.23
+ },
+ {
+  "ortho": "apprécie",
   "before": "j'",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -47297,9 +47350,9 @@
  },
  {
   "ortho": "mène",
-  "before": "qu'il",
+  "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "mEn",
   "steno": "mien/-R",
   "strokes": [
@@ -47476,6 +47529,25 @@
     3,
     14,
     22
+   ]
+  ],
+  "frequency": 31.69
+ },
+ {
+  "ortho": "sonne",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "sOn",
+  "steno": "sen/-R",
+  "strokes": [
+   [
+    3,
+    14,
+    22
+   ],
+   [
+    21
    ]
   ],
   "frequency": 31.69
@@ -48507,7 +48579,7 @@
   "ortho": "style",
   "before": "le",
   "after": "",
-  "label": "nom, m. sg. · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, m. sg. · indicatif présent, 3e sg.",
   "phonology": "stil",
   "steno": "stil",
   "strokes": [
@@ -51114,7 +51186,7 @@
   "ortho": "supporte",
   "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 1re sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "sy.pORt",
   "steno": "s@i/petR/-R",
   "strokes": [
@@ -55896,7 +55968,7 @@
   "ortho": "bague",
   "before": "la",
   "after": "",
-  "label": "nom, f. sg. · indicatif présent, 1re sg. / 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "bag",
   "steno": "svakd",
   "strokes": [
@@ -56483,7 +56555,7 @@
   "ortho": "moque",
   "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 1re sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "mOk",
   "steno": "mek/-R",
   "strokes": [
@@ -58802,6 +58874,28 @@
  },
  {
   "ortho": "avoue",
+  "before": "que j'",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "a.vu",
+  "steno": "a/v@e/-R",
+  "strokes": [
+   [
+    12
+   ],
+   [
+    5,
+    11,
+    14
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 24.48
+ },
+ {
+  "ortho": "avoue",
   "before": "j'",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -59649,9 +59743,9 @@
  },
  {
   "ortho": "abandonne",
-  "before": "qu'il",
+  "before": "que j'",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "a.b@.dOn",
   "steno": "a/sv@/pven/-R",
   "strokes": [
@@ -60189,6 +60283,25 @@
  },
  {
   "ortho": "pue",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "py",
+  "steno": "p@i/-R",
+  "strokes": [
+   [
+    4,
+    11,
+    13
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 23.8
+ },
+ {
+  "ortho": "pue",
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -60249,6 +60362,34 @@
     9,
     14,
     22
+   ]
+  ],
+  "frequency": 23.76
+ },
+ {
+  "ortho": "fonctionne",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "f§k.sjOn",
+  "steno": "kpaik/sRwen/-R",
+  "strokes": [
+   [
+    2,
+    4,
+    12,
+    13,
+    18
+   ],
+   [
+    3,
+    8,
+    9,
+    14,
+    22
+   ],
+   [
+    21
    ]
   ],
   "frequency": 23.76
@@ -61917,7 +62058,7 @@
   "ortho": "sable",
   "before": "le",
   "after": "",
-  "label": "nom, m. sg. · adjectif · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, m. sg. · adjectif · indicatif présent, 3e sg.",
   "phonology": "sabl",
   "steno": "sajl",
   "strokes": [
@@ -62810,7 +62951,7 @@
   "ortho": "attente",
   "before": "l'",
   "after": "",
-  "label": "nom, f. sg. · indicatif présent, 1re sg. / 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "a.t@t",
   "steno": "a/t@t",
   "strokes": [
@@ -64796,9 +64937,9 @@
  },
  {
   "ortho": "marie",
-  "before": "qu'il",
+  "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "ma.Ri",
   "steno": "ma/Ri/-R",
   "strokes": [
@@ -64929,6 +65070,26 @@
     10,
     14,
     17
+   ]
+  ],
+  "frequency": 21.92
+ },
+ {
+  "ortho": "bosse",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "bOs",
+  "steno": "sves/-R",
+  "strokes": [
+   [
+    3,
+    5,
+    14,
+    17
+   ],
+   [
+    21
    ]
   ],
   "frequency": 21.92
@@ -68069,7 +68230,7 @@
   "ortho": "vente",
   "before": "la",
   "after": "",
-  "label": "nom, f. sg. · impératif présent, 2e sg. · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "v@t",
   "steno": "v@t",
   "strokes": [
@@ -69139,9 +69300,9 @@
  },
  {
   "ortho": "vérifie",
-  "before": "qu'il",
+  "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "ve.Ri.fi",
   "steno": "ve/Ri/kpi/-R",
   "strokes": [
@@ -75320,7 +75481,7 @@
   "ortho": "rose",
   "before": "il",
   "after": "",
-  "label": "adjectif, sg. · nom, sg. · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "adjectif, sg. · nom, sg. · indicatif présent, 3e sg.",
   "phonology": "Roz",
   "steno": "Raenl",
   "strokes": [
@@ -75590,9 +75751,9 @@
  },
  {
   "ortho": "colle",
-  "before": "qu'il",
+  "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "kOl",
   "steno": "kel/-R",
   "strokes": [
@@ -78270,6 +78431,30 @@
  },
  {
   "ortho": "salue",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "sa.ly",
+  "steno": "sa/mt@i/-R",
+  "strokes": [
+   [
+    3,
+    12
+   ],
+   [
+    6,
+    7,
+    11,
+    13
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 17.53
+ },
+ {
+  "ortho": "salue",
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -80318,6 +80503,28 @@
   "frequency": 17.0
  },
  {
+  "ortho": "pleures",
+  "before": "que tu",
+  "after": "",
+  "label": "subjonctif présent, 2e sg.",
+  "phonology": "pl9R",
+  "steno": "pmt@R/-dR",
+  "strokes": [
+   [
+    4,
+    6,
+    7,
+    11,
+    21
+   ],
+   [
+    19,
+    21
+   ]
+  ],
+  "frequency": 17.0
+ },
+ {
   "ortho": "biens",
   "before": "les",
   "after": "",
@@ -81447,6 +81654,30 @@
  },
  {
   "ortho": "ordonne",
+  "before": "que j'",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "OR.dOn",
+  "steno": "eR/pven/-R",
+  "strokes": [
+   [
+    14,
+    21
+   ],
+   [
+    4,
+    5,
+    14,
+    22
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 16.69
+ },
+ {
+  "ortho": "ordonne",
   "before": "j'",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -82548,6 +82779,27 @@
  },
  {
   "ortho": "jouent",
+  "before": "qu'ils",
+  "after": "",
+  "label": "subjonctif présent, 3e pl.",
+  "phonology": "Zu",
+  "steno": "vt@e/-sR",
+  "strokes": [
+   [
+    5,
+    7,
+    11,
+    14
+   ],
+   [
+    17,
+    21
+   ]
+  ],
+  "frequency": 16.41
+ },
+ {
+  "ortho": "jouent",
   "before": "ils",
   "after": "",
   "label": "indicatif présent, 3e pl.",
@@ -82654,6 +82906,30 @@
     14,
     24,
     25
+   ]
+  ],
+  "frequency": 16.39
+ },
+ {
+  "ortho": "accroche",
+  "before": "que j'",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "a.kROS",
+  "steno": "a/kReZm/-R",
+  "strokes": [
+   [
+    12
+   ],
+   [
+    2,
+    8,
+    14,
+    24,
+    25
+   ],
+   [
+    21
    ]
   ],
   "frequency": 16.39
@@ -86795,7 +87071,7 @@
   "ortho": "luxe",
   "before": "le",
   "after": "",
-  "label": "nom, m. sg. · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, m. sg. · indicatif présent, 3e sg.",
   "phonology": "lyks",
   "steno": "mt@isk",
   "strokes": [
@@ -93039,6 +93315,26 @@
  },
  {
   "ortho": "tuent",
+  "before": "qu'ils",
+  "after": "",
+  "label": "subjonctif présent, 3e pl.",
+  "phonology": "ty",
+  "steno": "t@i/-sR",
+  "strokes": [
+   [
+    7,
+    11,
+    13
+   ],
+   [
+    17,
+    21
+   ]
+  ],
+  "frequency": 14.08
+ },
+ {
+  "ortho": "tuent",
   "before": "ils",
   "after": "",
   "label": "indicatif présent, 3e pl.",
@@ -97434,6 +97730,30 @@
  },
  {
   "ortho": "déconne",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "de.kOn",
+  "steno": "pve/ken/-R",
+  "strokes": [
+   [
+    4,
+    5,
+    14
+   ],
+   [
+    2,
+    14,
+    22
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 13.38
+ },
+ {
+  "ortho": "déconne",
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -97641,7 +97961,7 @@
   "ortho": "câble",
   "before": "le",
   "after": "",
-  "label": "nom, m. sg. · indicatif présent, 1re sg. / 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, m. sg. · indicatif présent, 3e sg.",
   "phonology": "kabl",
   "steno": "kajl",
   "strokes": [
@@ -100566,7 +100886,7 @@
   "ortho": "plastique",
   "before": "il",
   "after": "",
-  "label": "nom, sg. · adjectif, sg. · impératif présent, 2e sg. · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, sg. · adjectif, sg. · indicatif présent, 3e sg.",
   "phonology": "plas.tik",
   "steno": "pmtas/tik",
   "strokes": [
@@ -102816,6 +103136,27 @@
  },
  {
   "ortho": "envie",
+  "before": "que j'",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "@.vi",
+  "steno": "@/vi/-R",
+  "strokes": [
+   [
+    11
+   ],
+   [
+    5,
+    13
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 12.5
+ },
+ {
+  "ortho": "envie",
   "before": "j'",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -103506,7 +103847,7 @@
   "ortho": "dalle",
   "before": "la",
   "after": "",
-  "label": "nom, f. sg. · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "dal",
   "steno": "pval",
   "strokes": [
@@ -105066,6 +105407,30 @@
     3,
     14,
     23
+   ]
+  ],
+  "frequency": 12.08
+ },
+ {
+  "ortho": "rigole",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "Ri.gOl",
+  "steno": "Ri/ksel/-R",
+  "strokes": [
+   [
+    8,
+    13
+   ],
+   [
+    2,
+    3,
+    14,
+    23
+   ],
+   [
+    21
    ]
   ],
   "frequency": 12.08
@@ -110639,6 +111004,33 @@
     4,
     5,
     13
+   ]
+  ],
+  "frequency": 11.42
+ },
+ {
+  "ortho": "étudie",
+  "before": "que j'",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "e.ty.di",
+  "steno": "e/t@i/pvi/-R",
+  "strokes": [
+   [
+    14
+   ],
+   [
+    7,
+    11,
+    13
+   ],
+   [
+    4,
+    5,
+    13
+   ],
+   [
+    21
    ]
   ],
   "frequency": 11.42
@@ -117906,7 +118298,7 @@
   "ortho": "raccroche",
   "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 1re sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "Ra.kROS",
   "steno": "Ra/kReZm/-R",
   "strokes": [
@@ -121318,7 +121710,7 @@
   "ortho": "canne",
   "before": "la",
   "after": "",
-  "label": "nom, f. sg. · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "kan",
   "steno": "kan",
   "strokes": [
@@ -123590,6 +123982,32 @@
  },
  {
   "ortho": "décroche",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "de.kROS",
+  "steno": "pve/kReZm/-R",
+  "strokes": [
+   [
+    4,
+    5,
+    14
+   ],
+   [
+    2,
+    8,
+    14,
+    24,
+    25
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 9.95
+ },
+ {
+  "ortho": "décroche",
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -125249,9 +125667,9 @@
  },
  {
   "ortho": "rapproche",
-  "before": "qu'il",
+  "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "Ra.pROS",
   "steno": "Ra/pReZm/-R",
   "strokes": [
@@ -127152,6 +127570,26 @@
  },
  {
   "ortho": "volent",
+  "before": "qu'ils",
+  "after": "",
+  "label": "subjonctif présent, 3e pl.",
+  "phonology": "vOl",
+  "steno": "vel/-sR",
+  "strokes": [
+   [
+    5,
+    14,
+    23
+   ],
+   [
+    17,
+    21
+   ]
+  ],
+  "frequency": 9.53
+ },
+ {
+  "ortho": "volent",
   "before": "ils",
   "after": "",
   "label": "indicatif présent, 3e pl.",
@@ -127686,6 +128124,35 @@
  },
  {
   "ortho": "téléphone",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "te.le.fOn",
+  "steno": "te/mte/kpen/-R",
+  "strokes": [
+   [
+    7,
+    14
+   ],
+   [
+    6,
+    7,
+    14
+   ],
+   [
+    2,
+    4,
+    14,
+    22
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 9.44
+ },
+ {
+  "ortho": "téléphone",
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -127873,9 +128340,9 @@
  },
  {
   "ortho": "nomme",
-  "before": "qu'il",
+  "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "nOm",
   "steno": "mRem/-R",
   "strokes": [
@@ -131453,7 +131920,7 @@
   "ortho": "intime",
   "before": "l'",
   "after": "",
-  "label": "adjectif, sg. · nom, sg. · impératif présent, 2e sg. · indicatif présent, 1re sg. / 3e sg. · subjonctif présent, 3e sg. / 1re sg.",
+  "label": "adjectif, sg. · nom, sg. · indicatif présent, 3e sg.",
   "phonology": "5.tim",
   "steno": "aie/tim",
   "strokes": [
@@ -133844,7 +134311,7 @@
   "ortho": "interne",
   "before": "l'",
   "after": "",
-  "label": "adjectif, sg. · nom, sg. · indicatif présent, 3e sg. · subjonctif présent, 3e sg. / 1re sg.",
+  "label": "adjectif, sg. · nom, sg. · indicatif présent, 3e sg.",
   "phonology": "5.tERn",
   "steno": "aie/tieRn",
   "strokes": [
@@ -136198,6 +136665,27 @@
     14,
     16,
     17
+   ]
+  ],
+  "frequency": 8.64
+ },
+ {
+  "ortho": "love",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "lOv",
+  "steno": "mtejs/-R",
+  "strokes": [
+   [
+    6,
+    7,
+    14,
+    16,
+    17
+   ],
+   [
+    21
    ]
   ],
   "frequency": 8.64
@@ -139282,9 +139770,9 @@
  },
  {
   "ortho": "interroge",
-  "before": "qu'il",
+  "before": "que j'",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "5.tE.ROZ",
   "steno": "aie/tie/ReZ/-R",
   "strokes": [
@@ -140472,6 +140960,30 @@
  },
  {
   "ortho": "remue",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "R°.my",
+  "steno": "R@a/m@i/-R",
+  "strokes": [
+   [
+    8,
+    11,
+    12
+   ],
+   [
+    6,
+    11,
+    13
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 8.3
+ },
+ {
+  "ortho": "remue",
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -140565,6 +141077,30 @@
     2,
     4,
     13
+   ]
+  ],
+  "frequency": 8.29
+ },
+ {
+  "ortho": "confie",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "k§.fi",
+  "steno": "kai/kpi/-R",
+  "strokes": [
+   [
+    2,
+    12,
+    13
+   ],
+   [
+    2,
+    4,
+    13
+   ],
+   [
+    21
    ]
   ],
   "frequency": 8.29
@@ -142545,7 +143081,7 @@
   "ortho": "dynamite",
   "before": "la",
   "after": "",
-  "label": "nom, f. sg. · indicatif présent, 1re sg. / 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "di.na.mit",
   "steno": "pvi/mRa/mit",
   "strokes": [
@@ -143012,7 +143548,7 @@
   "ortho": "lessive",
   "before": "la",
   "after": "",
-  "label": "nom, f. sg. · impératif présent, 2e sg. · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "le.siv",
   "steno": "mte/sijs",
   "strokes": [
@@ -144012,7 +144548,7 @@
   "ortho": "grippe",
   "before": "la",
   "after": "",
-  "label": "nom, f. sg. · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "gRip",
   "steno": "ksRijk",
   "strokes": [
@@ -149563,6 +150099,36 @@
  },
  {
   "ortho": "continuent",
+  "before": "qu'ils",
+  "after": "",
+  "label": "subjonctif présent, 3e pl.",
+  "phonology": "k§.ti.ny",
+  "steno": "kai/ti/mR@i/-sR",
+  "strokes": [
+   [
+    2,
+    12,
+    13
+   ],
+   [
+    7,
+    13
+   ],
+   [
+    6,
+    8,
+    11,
+    13
+   ],
+   [
+    17,
+    21
+   ]
+  ],
+  "frequency": 7.61
+ },
+ {
+  "ortho": "continuent",
   "before": "ils",
   "after": "",
   "label": "indicatif présent, 3e pl.",
@@ -149773,6 +150339,31 @@
    ],
    [
     17
+   ]
+  ],
+  "frequency": 7.6
+ },
+ {
+  "ortho": "élève",
+  "before": "que j'",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "e.lEv",
+  "steno": "e/mtiejs/-R",
+  "strokes": [
+   [
+    14
+   ],
+   [
+    6,
+    7,
+    13,
+    14,
+    16,
+    17
+   ],
+   [
+    21
    ]
   ],
   "frequency": 7.6
@@ -152901,6 +153492,28 @@
  },
  {
   "ortho": "cloche",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "klOS",
+  "steno": "kmteZm/-R",
+  "strokes": [
+   [
+    2,
+    6,
+    7,
+    14,
+    24,
+    25
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 7.42
+ },
+ {
+  "ortho": "cloche",
   "before": "",
   "after": "!",
   "label": "impératif présent, 2e sg.",
@@ -154005,6 +154618,25 @@
  },
  {
   "ortho": "nie",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "ni",
+  "steno": "mRi/-R",
+  "strokes": [
+   [
+    6,
+    8,
+    13
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 7.37
+ },
+ {
+  "ortho": "nie",
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -154106,9 +154738,9 @@
  },
  {
   "ortho": "cogne",
-  "before": "qu'il",
+  "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "kON",
   "steno": "ketn/-R",
   "strokes": [
@@ -158319,6 +158951,31 @@
  },
  {
   "ortho": "provoque",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "pRo.vOk",
+  "steno": "pRae/vek/-R",
+  "strokes": [
+   [
+    4,
+    8,
+    12,
+    14
+   ],
+   [
+    5,
+    14,
+    18
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 7.12
+ },
+ {
+  "ortho": "provoque",
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -159445,7 +160102,7 @@
   "ortho": "enthousiasme",
   "before": "l'",
   "after": "",
-  "label": "nom, m. sg. · indicatif présent, 1re sg. / 3e sg. · subjonctif présent, 3e sg. / 1re sg.",
+  "label": "nom, m. sg. · indicatif présent, 3e sg.",
   "phonology": "@.tu.zjasm",
   "steno": "@/t@e/tRwasm",
   "strokes": [
@@ -160220,6 +160877,29 @@
     3,
     10,
     13
+   ]
+  ],
+  "frequency": 7.01
+ },
+ {
+  "ortho": "soucie",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "su.si",
+  "steno": "s@e/si/-R",
+  "strokes": [
+   [
+    3,
+    11,
+    14
+   ],
+   [
+    3,
+    13
+   ],
+   [
+    21
    ]
   ],
   "frequency": 7.01
@@ -161170,6 +161850,27 @@
    ],
    [
     19
+   ]
+  ],
+  "frequency": 6.95
+ },
+ {
+  "ortho": "bosses",
+  "before": "que tu",
+  "after": "",
+  "label": "subjonctif présent, 2e sg.",
+  "phonology": "bOs",
+  "steno": "sves/-dR",
+  "strokes": [
+   [
+    3,
+    5,
+    14,
+    17
+   ],
+   [
+    19,
+    21
    ]
   ],
   "frequency": 6.95
@@ -164091,7 +164792,7 @@
   "ortho": "moyenne",
   "before": "la",
   "after": "",
-  "label": "nom, f. sg. · adjectif, f. sg. · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, f. sg. · adjectif, f. sg. · indicatif présent, 3e sg.",
   "phonology": "mwaj.En",
   "steno": "mwaj/ien",
   "strokes": [
@@ -167376,7 +168077,7 @@
   "ortho": "calibre",
   "before": "le",
   "after": "",
-  "label": "nom, m. sg. · indicatif présent, 1re sg. / 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, m. sg. · indicatif présent, 3e sg.",
   "phonology": "ka.libR",
   "steno": "ka/mtijR",
   "strokes": [
@@ -170627,7 +171328,7 @@
   "ortho": "encre",
   "before": "l'",
   "after": "",
-  "label": "nom, f. sg. · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "@kR",
   "steno": "@kR",
   "strokes": [
@@ -171902,6 +172603,27 @@
     4,
     6,
     14
+   ]
+  ],
+  "frequency": 6.42
+ },
+ {
+  "ortho": "mènent",
+  "before": "qu'ils",
+  "after": "",
+  "label": "subjonctif présent, 3e pl.",
+  "phonology": "mEn",
+  "steno": "mien/-sR",
+  "strokes": [
+   [
+    6,
+    13,
+    14,
+    22
+   ],
+   [
+    17,
+    21
    ]
   ],
   "frequency": 6.42
@@ -173397,9 +174119,9 @@
  },
  {
   "ortho": "présume",
-  "before": "je",
+  "before": "il",
   "after": "",
-  "label": "impératif présent, 2e sg. · indicatif présent, 1re sg. / 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "indicatif présent, 3e sg.",
   "phonology": "pRe.zym",
   "steno": "pRe/tw@im",
   "strokes": [
@@ -173414,6 +174136,58 @@
     11,
     13,
     25
+   ]
+  ],
+  "frequency": 6.36
+ },
+ {
+  "ortho": "présume",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "pRe.zym",
+  "steno": "pRe/tw@im/-R",
+  "strokes": [
+   [
+    4,
+    8,
+    14
+   ],
+   [
+    7,
+    9,
+    11,
+    13,
+    25
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 6.36
+ },
+ {
+  "ortho": "présume",
+  "before": "je",
+  "after": "",
+  "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
+  "phonology": "pRe.zym",
+  "steno": "pRe/tw@im/-k",
+  "strokes": [
+   [
+    4,
+    8,
+    14
+   ],
+   [
+    7,
+    9,
+    11,
+    13,
+    25
+   ],
+   [
+    18
    ]
   ],
   "frequency": 6.36
@@ -175746,6 +176520,32 @@
     3,
     14,
     22
+   ]
+  ],
+  "frequency": 6.25
+ },
+ {
+  "ortho": "soupçonne",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "sup.sOn",
+  "steno": "s@ejk/sen/-R",
+  "strokes": [
+   [
+    3,
+    11,
+    14,
+    16,
+    18
+   ],
+   [
+    3,
+    14,
+    22
+   ],
+   [
+    21
    ]
   ],
   "frequency": 6.25
@@ -180388,7 +181188,7 @@
   "ortho": "rive",
   "before": "la",
   "after": "",
-  "label": "nom, f. sg. · impératif présent, 2e sg. · indicatif présent, 1re sg. / 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "Riv",
   "steno": "Rijs",
   "strokes": [
@@ -180801,9 +181601,9 @@
  },
  {
   "ortho": "loue",
-  "before": "qu'il",
+  "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "lu",
   "steno": "mt@e/-R",
   "strokes": [
@@ -182998,9 +183798,9 @@
  },
  {
   "ortho": "bloque",
-  "before": "qu'il",
+  "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "blOk",
   "steno": "svmtek/-R",
   "strokes": [
@@ -183717,7 +184517,7 @@
   "ortho": "marine",
   "before": "la",
   "after": "",
-  "label": "adjectif, sg. · nom, f. sg. · indicatif présent, 1re sg. / 3e sg. · subjonctif présent, 3e sg. / 1re sg. · adjectif, f. sg.",
+  "label": "adjectif, sg. · nom, f. sg. · indicatif présent, 3e sg. · adjectif, f. sg.",
   "phonology": "ma.Rin",
   "steno": "ma/Rin",
   "strokes": [
@@ -183878,6 +184678,30 @@
  },
  {
   "ortho": "décolle",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "de.kOl",
+  "steno": "pve/kel/-R",
+  "strokes": [
+   [
+    4,
+    5,
+    14
+   ],
+   [
+    2,
+    14,
+    23
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 5.89
+ },
+ {
+  "ortho": "décolle",
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -183952,9 +184776,9 @@
   "ortho": "ignores",
   "before": "tu",
   "after": "",
-  "label": "indicatif présent, 2e sg. · subjonctif présent, 2e sg.",
+  "label": "indicatif présent, 2e sg.",
   "phonology": "i.NOR",
-  "steno": "i/weR",
+  "steno": "i/weR/-d",
   "strokes": [
    [
     13
@@ -183962,6 +184786,32 @@
    [
     9,
     14,
+    21
+   ],
+   [
+    19
+   ]
+  ],
+  "frequency": 5.89
+ },
+ {
+  "ortho": "ignores",
+  "before": "que tu",
+  "after": "",
+  "label": "subjonctif présent, 2e sg.",
+  "phonology": "i.NOR",
+  "steno": "i/weR/-dR",
+  "strokes": [
+   [
+    13
+   ],
+   [
+    9,
+    14,
+    21
+   ],
+   [
+    19,
     21
    ]
   ],
@@ -184299,6 +185149,32 @@
     6,
     7,
     14,
+    21
+   ]
+  ],
+  "frequency": 5.87
+ },
+ {
+  "ortho": "implore",
+  "before": "que j'",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "5.plOR",
+  "steno": "aie/pmteR/-R",
+  "strokes": [
+   [
+    12,
+    13,
+    14
+   ],
+   [
+    4,
+    6,
+    7,
+    14,
+    21
+   ],
+   [
     21
    ]
   ],
@@ -188719,6 +189595,31 @@
  },
  {
   "ortho": "approchent",
+  "before": "qu'ils",
+  "after": "",
+  "label": "subjonctif présent, 3e pl.",
+  "phonology": "a.pROS",
+  "steno": "a/pReZm/-sR",
+  "strokes": [
+   [
+    12
+   ],
+   [
+    4,
+    8,
+    14,
+    24,
+    25
+   ],
+   [
+    17,
+    21
+   ]
+  ],
+  "frequency": 5.66
+ },
+ {
+  "ortho": "approchent",
   "before": "ils",
   "after": "",
   "label": "indicatif présent, 3e pl.",
@@ -188834,6 +189735,26 @@
    ],
    [
     19
+   ]
+  ],
+  "frequency": 5.66
+ },
+ {
+  "ortho": "pues",
+  "before": "que tu",
+  "after": "",
+  "label": "subjonctif présent, 2e sg.",
+  "phonology": "py",
+  "steno": "p@i/-dR",
+  "strokes": [
+   [
+    4,
+    11,
+    13
+   ],
+   [
+    19,
+    21
    ]
   ],
   "frequency": 5.66
@@ -194451,7 +195372,7 @@
   "ortho": "étiquette",
   "before": "l'",
   "after": "",
-  "label": "nom, f. sg.",
+  "label": "nom, f. sg. · subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "e.ti.kEt",
   "steno": "e/ti/kiet",
   "strokes": [
@@ -196105,6 +197026,26 @@
  },
  {
   "ortho": "note",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "nOt",
+  "steno": "mRet/-R",
+  "strokes": [
+   [
+    6,
+    8,
+    14,
+    20
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 5.37
+ },
+ {
+  "ortho": "note",
   "before": "je",
   "after": "",
   "label": "indicatif présent, 1re sg.",
@@ -196274,6 +197215,30 @@
  },
  {
   "ortho": "défie",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "de.fi",
+  "steno": "pve/kpi/-R",
+  "strokes": [
+   [
+    4,
+    5,
+    14
+   ],
+   [
+    2,
+    4,
+    13
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 5.36
+ },
+ {
+  "ortho": "défie",
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -196342,9 +197307,9 @@
  },
  {
   "ortho": "habitue",
-  "before": "qu'il",
+  "before": "que j'",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "a.bi.ty",
   "steno": "a/svi/t@i/-R",
   "strokes": [
@@ -198062,6 +199027,35 @@
  },
  {
   "ortho": "fonctionnent",
+  "before": "qu'ils",
+  "after": "",
+  "label": "subjonctif présent, 3e pl.",
+  "phonology": "f§k.sjOn",
+  "steno": "kpaik/sRwen/-sR",
+  "strokes": [
+   [
+    2,
+    4,
+    12,
+    13,
+    18
+   ],
+   [
+    3,
+    8,
+    9,
+    14,
+    22
+   ],
+   [
+    17,
+    21
+   ]
+  ],
+  "frequency": 5.29
+ },
+ {
+  "ortho": "fonctionnent",
   "before": "ils",
   "after": "",
   "label": "indicatif présent, 3e pl.",
@@ -198395,6 +199389,36 @@
  },
  {
   "ortho": "démissionne",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "de.mi.sjOn",
+  "steno": "pve/mi/sRwen/-R",
+  "strokes": [
+   [
+    4,
+    5,
+    14
+   ],
+   [
+    6,
+    13
+   ],
+   [
+    3,
+    8,
+    9,
+    14,
+    22
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 5.28
+ },
+ {
+  "ortho": "démissionne",
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -198502,7 +199526,7 @@
   "ortho": "fraise",
   "before": "la",
   "after": "",
-  "label": "nom, f. sg. · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "fREz",
   "steno": "kpRienl",
   "strokes": [
@@ -201464,7 +202488,7 @@
   "ortho": "violente",
   "before": "la",
   "after": "",
-  "label": "adjectif, f. sg. · impératif présent, 2e sg. · indicatif présent, 1re sg. / 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "adjectif, f. sg. · indicatif présent, 3e sg.",
   "phonology": "vjo.l@t",
   "steno": "vRwae/mt@t",
   "strokes": [
@@ -202852,30 +203876,6 @@
  },
  {
   "ortho": "ignorent",
-  "before": "qu'ils",
-  "after": "",
-  "label": "subjonctif présent, 3e pl.",
-  "phonology": "i.NoR",
-  "steno": "i/waeR/-sR",
-  "strokes": [
-   [
-    13
-   ],
-   [
-    9,
-    12,
-    14,
-    21
-   ],
-   [
-    17,
-    21
-   ]
-  ],
-  "frequency": 5.09
- },
- {
-  "ortho": "ignorent",
   "before": "ils",
   "after": "",
   "label": "indicatif présent, 3e pl.",
@@ -204240,9 +205240,9 @@
  },
  {
   "ortho": "reproche",
-  "before": "qu'il",
+  "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "R°.pROS",
   "steno": "R@a/pReZm/-R",
   "strokes": [
@@ -204983,9 +205983,9 @@
  },
  {
   "ortho": "conjure",
-  "before": "je",
+  "before": "il",
   "after": "",
-  "label": "impératif présent, 2e sg. · indicatif présent, 1re sg. / 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "indicatif présent, 3e sg.",
   "phonology": "k§.ZyR",
   "steno": "kai/vt@iR",
   "strokes": [
@@ -205000,6 +206000,58 @@
     11,
     13,
     21
+   ]
+  ],
+  "frequency": 5.01
+ },
+ {
+  "ortho": "conjure",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "k§.ZyR",
+  "steno": "kai/vt@iR/-R",
+  "strokes": [
+   [
+    2,
+    12,
+    13
+   ],
+   [
+    5,
+    7,
+    11,
+    13,
+    21
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 5.01
+ },
+ {
+  "ortho": "conjure",
+  "before": "je",
+  "after": "",
+  "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
+  "phonology": "k§.ZyR",
+  "steno": "kai/vt@iR/-k",
+  "strokes": [
+   [
+    2,
+    12,
+    13
+   ],
+   [
+    5,
+    7,
+    11,
+    13,
+    21
+   ],
+   [
+    18
    ]
   ],
   "frequency": 5.01
@@ -211215,6 +212267,30 @@
  },
  {
   "ortho": "secoue",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "s°.ku",
+  "steno": "s@a/k@e/-R",
+  "strokes": [
+   [
+    3,
+    11,
+    12
+   ],
+   [
+    2,
+    11,
+    14
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 4.77
+ },
+ {
+  "ortho": "secoue",
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -211772,6 +212848,35 @@
     8,
     9,
     14,
+    21
+   ]
+  ],
+  "frequency": 4.75
+ },
+ {
+  "ortho": "améliore",
+  "before": "que j'",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "a.me.ljOR",
+  "steno": "a/me/mtRweR/-R",
+  "strokes": [
+   [
+    12
+   ],
+   [
+    6,
+    14
+   ],
+   [
+    6,
+    7,
+    8,
+    9,
+    14,
+    21
+   ],
+   [
     21
    ]
   ],
@@ -212993,7 +214098,7 @@
   "ortho": "ouvrage",
   "before": "l'",
   "after": "",
-  "label": "nom, m. sg. · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, m. sg. · indicatif présent, 3e sg.",
   "phonology": "u.vRaZ",
   "steno": "@e/vRaZ",
   "strokes": [
@@ -216501,6 +217606,29 @@
  },
  {
   "ortho": "échoue",
+  "before": "que j'",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "e.Su",
+  "steno": "e/pm@e/-R",
+  "strokes": [
+   [
+    14
+   ],
+   [
+    4,
+    6,
+    11,
+    14
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 4.62
+ },
+ {
+  "ortho": "échoue",
   "before": "j'",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -217868,7 +218996,7 @@
   "ortho": "domestique",
   "before": "il",
   "after": "",
-  "label": "nom, sg. · adjectif, sg. · indicatif présent, 3e sg. · subjonctif présent, 3e sg. / 1re sg.",
+  "label": "nom, sg. · adjectif, sg. · indicatif présent, 3e sg.",
   "phonology": "do.mEs.tik",
   "steno": "pvae/mies/tik",
   "strokes": [
@@ -220524,6 +221652,30 @@
  },
  {
   "ortho": "dévore",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "de.vOR",
+  "steno": "pve/veR/-R",
+  "strokes": [
+   [
+    4,
+    5,
+    14
+   ],
+   [
+    5,
+    14,
+    21
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 4.48
+ },
+ {
+  "ortho": "dévore",
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -220852,6 +222004,29 @@
    ]
   ],
   "frequency": 4.48
+ },
+ {
+  "ortho": "envolent",
+  "before": "qu'ils",
+  "after": "",
+  "label": "subjonctif présent, 3e pl.",
+  "phonology": "@.vOl",
+  "steno": "@/vel/-sR",
+  "strokes": [
+   [
+    11
+   ],
+   [
+    5,
+    14,
+    23
+   ],
+   [
+    17,
+    21
+   ]
+  ],
+  "frequency": 4.47
  },
  {
   "ortho": "envolent",
@@ -223729,6 +224904,30 @@
  },
  {
   "ortho": "honore",
+  "before": "que j'",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "o.nOR",
+  "steno": "ae/mReR/-R",
+  "strokes": [
+   [
+    12,
+    14
+   ],
+   [
+    6,
+    8,
+    14,
+    21
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 4.41
+ },
+ {
+  "ortho": "honore",
   "before": "j'",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -225240,6 +226439,30 @@
    ],
    [
     19
+   ]
+  ],
+  "frequency": 4.37
+ },
+ {
+  "ortho": "adores",
+  "before": "que tu",
+  "after": "",
+  "label": "subjonctif présent, 2e sg.",
+  "phonology": "a.dOR",
+  "steno": "a/pveR/-dR",
+  "strokes": [
+   [
+    12
+   ],
+   [
+    4,
+    5,
+    14,
+    21
+   ],
+   [
+    19,
+    21
    ]
   ],
   "frequency": 4.37
@@ -227171,7 +228394,7 @@
   "ortho": "chie",
   "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 1re sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "Si",
   "steno": "pmi/-R",
   "strokes": [
@@ -227387,6 +228610,25 @@
     7,
     11,
     14,
+    21
+   ]
+  ],
+  "frequency": 4.31
+ },
+ {
+  "ortho": "vote",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "vOt",
+  "steno": "vet/-R",
+  "strokes": [
+   [
+    5,
+    14,
+    20
+   ],
+   [
     21
    ]
   ],
@@ -227857,6 +229099,29 @@
    ],
    [
     19
+   ]
+  ],
+  "frequency": 4.3
+ },
+ {
+  "ortho": "étonnes",
+  "before": "que tu",
+  "after": "",
+  "label": "subjonctif présent, 2e sg.",
+  "phonology": "e.tOn",
+  "steno": "e/ten/-dR",
+  "strokes": [
+   [
+    14
+   ],
+   [
+    7,
+    14,
+    22
+   ],
+   [
+    19,
+    21
    ]
   ],
   "frequency": 4.3
@@ -230669,7 +231934,7 @@
   "ortho": "ferraille",
   "before": "la",
   "after": "",
-  "label": "nom, f. sg. · indicatif présent, 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "fE.Raj",
   "steno": "kpie/Raj",
   "strokes": [
@@ -230962,1291 +232227,5 @@
    ]
   ],
   "frequency": 4.21
- },
- {
-  "ortho": "fonder",
-  "before": "",
-  "after": "",
-  "label": "infinitif",
-  "phonology": "f§.de",
-  "steno": "kpai/pve/-l",
-  "strokes": [
-   [
-    2,
-    4,
-    12,
-    13
-   ],
-   [
-    4,
-    5,
-    14
-   ],
-   [
-    23
-   ]
-  ],
-  "frequency": 4.21
- },
- {
-  "ortho": "fourni",
-  "before": "le",
-  "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. sg.",
-  "phonology": "fuR.ni",
-  "steno": "kp@eR/mRi",
-  "strokes": [
-   [
-    2,
-    4,
-    11,
-    14,
-    21
-   ],
-   [
-    6,
-    8,
-    13
-   ]
-  ],
-  "frequency": 4.21
- },
- {
-  "ortho": "funèbre",
-  "before": "",
-  "after": "",
-  "label": "adjectif, sg.",
-  "phonology": "fy.nEbR",
-  "steno": "kp@i/mRiejR",
-  "strokes": [
-   [
-    2,
-    4,
-    11,
-    13
-   ],
-   [
-    6,
-    8,
-    13,
-    14,
-    16,
-    21
-   ]
-  ],
-  "frequency": 4.21
- },
- {
-  "ortho": "impériale",
-  "before": "l'",
-  "after": "",
-  "label": "adjectif, f. sg.",
-  "phonology": "5.pe.Rjal",
-  "steno": "aie/pe/Rwal/-j",
-  "strokes": [
-   [
-    12,
-    13,
-    14
-   ],
-   [
-    4,
-    14
-   ],
-   [
-    8,
-    9,
-    12,
-    23
-   ],
-   [
-    16
-   ]
-  ],
-  "frequency": 4.21
- },
- {
-  "ortho": "inoubliable",
-  "before": "l'",
-  "after": "",
-  "label": "adjectif, sg.",
-  "phonology": "i.nu.blij.abl",
-  "steno": "i/mR@e/svmtij/ajl",
-  "strokes": [
-   [
-    13
-   ],
-   [
-    6,
-    8,
-    11,
-    14
-   ],
-   [
-    3,
-    5,
-    6,
-    7,
-    13,
-    16
-   ],
-   [
-    12,
-    16,
-    23
-   ]
-  ],
-  "frequency": 4.21
- },
- {
-  "ortho": "moelle",
-  "before": "la",
-  "after": "",
-  "label": "nom, f. sg.",
-  "phonology": "mwal",
-  "steno": "mwal",
-  "strokes": [
-   [
-    6,
-    9,
-    12,
-    23
-   ]
-  ],
-  "frequency": 4.21
- },
- {
-  "ortho": "reviendrons",
-  "before": "nous",
-  "after": "",
-  "label": "indicatif futur, 1re pl.",
-  "phonology": "R°.vj5.dR§",
-  "steno": "R@a/vRwaie/pvRai/-k",
-  "strokes": [
-   [
-    8,
-    11,
-    12
-   ],
-   [
-    5,
-    8,
-    9,
-    12,
-    13,
-    14
-   ],
-   [
-    4,
-    5,
-    8,
-    12,
-    13
-   ],
-   [
-    18
-   ]
-  ],
-  "frequency": 4.21
- },
- {
-  "ortho": "réciter",
-  "before": "",
-  "after": "",
-  "label": "infinitif",
-  "phonology": "Re.si.te",
-  "steno": "Re/si/te/-l",
-  "strokes": [
-   [
-    8,
-    14
-   ],
-   [
-    3,
-    13
-   ],
-   [
-    7,
-    14
-   ],
-   [
-    23
-   ]
-  ],
-  "frequency": 4.21
- },
- {
-  "ortho": "suivrai",
-  "before": "je",
-  "after": "",
-  "label": "indicatif futur, 1re sg.",
-  "phonology": "s8i.vRe",
-  "steno": "s@ai/vRe/-t",
-  "strokes": [
-   [
-    3,
-    11,
-    12,
-    13
-   ],
-   [
-    5,
-    8,
-    14
-   ],
-   [
-    20
-   ]
-  ],
-  "frequency": 4.21
- },
- {
-  "ortho": "taro",
-  "before": "le",
-  "after": "",
-  "label": "nom, m. sg.",
-  "phonology": "ta.Ro",
-  "steno": "ta/Rae",
-  "strokes": [
-   [
-    7,
-    12
-   ],
-   [
-    8,
-    12,
-    14
-   ]
-  ],
-  "frequency": 4.21
- },
- {
-  "ortho": "agissez",
-  "before": "vous",
-  "after": "",
-  "label": "impératif présent, 2e pl. · indicatif présent, 2e pl.",
-  "phonology": "a.Zi.se",
-  "steno": "a/vti/se",
-  "strokes": [
-   [
-    12
-   ],
-   [
-    5,
-    7,
-    13
-   ],
-   [
-    3,
-    14
-   ]
-  ],
-  "frequency": 4.2
- },
- {
-  "ortho": "choux",
-  "before": "les",
-  "after": "",
-  "label": "nom, m. pl.",
-  "phonology": "Su",
-  "steno": "pm@e/-s",
-  "strokes": [
-   [
-    4,
-    6,
-    11,
-    14
-   ],
-   [
-    17
-   ]
-  ],
-  "frequency": 4.2
- },
- {
-  "ortho": "contactez",
-  "before": "vous",
-  "after": "",
-  "label": "indicatif présent, 2e pl.",
-  "phonology": "k§.tak.te",
-  "steno": "kai/tak/te/-d",
-  "strokes": [
-   [
-    2,
-    12,
-    13
-   ],
-   [
-    7,
-    12,
-    18
-   ],
-   [
-    7,
-    14
-   ],
-   [
-    19
-   ]
-  ],
-  "frequency": 4.2
- },
- {
-  "ortho": "contactez",
-  "before": "",
-  "after": "!",
-  "label": "impératif présent, 2e pl.",
-  "phonology": "k§.tak.te",
-  "steno": "kai/tak/te/-k",
-  "strokes": [
-   [
-    2,
-    12,
-    13
-   ],
-   [
-    7,
-    12,
-    18
-   ],
-   [
-    7,
-    14
-   ],
-   [
-    18
-   ]
-  ],
-  "frequency": 4.2
- },
- {
-  "ortho": "instable",
-  "before": "l'",
-  "after": "",
-  "label": "adjectif, sg. · nom, sg.",
-  "phonology": "5s.tabl",
-  "steno": "aies/tajl",
-  "strokes": [
-   [
-    12,
-    13,
-    14,
-    17
-   ],
-   [
-    7,
-    12,
-    16,
-    23
-   ]
-  ],
-  "frequency": 4.2
- },
- {
-  "ortho": "largué",
-  "before": "le",
-  "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. sg.",
-  "phonology": "laR.ge",
-  "steno": "mtaR/kse",
-  "strokes": [
-   [
-    6,
-    7,
-    12,
-    21
-   ],
-   [
-    2,
-    3,
-    14
-   ]
-  ],
-  "frequency": 4.2
- },
- {
-  "ortho": "naze",
-  "before": "le",
-  "after": "",
-  "label": "adjectif, sg. · nom, m. sg.",
-  "phonology": "naz",
-  "steno": "mRanl",
-  "strokes": [
-   [
-    6,
-    8,
-    12,
-    22,
-    23
-   ]
-  ],
-  "frequency": 4.2
- },
- {
-  "ortho": "pâtisserie",
-  "before": "la",
-  "after": "",
-  "label": "nom, f. sg.",
-  "phonology": "pa.ti.s°.Ri",
-  "steno": "pa/ti/s@a/Ri",
-  "strokes": [
-   [
-    4,
-    12
-   ],
-   [
-    7,
-    13
-   ],
-   [
-    3,
-    11,
-    12
-   ],
-   [
-    8,
-    13
-   ]
-  ],
-  "frequency": 4.2
- },
- {
-  "ortho": "semence",
-  "before": "la",
-  "after": "",
-  "label": "nom, f. sg.",
-  "phonology": "s°.m@s",
-  "steno": "s@a/m@s",
-  "strokes": [
-   [
-    3,
-    11,
-    12
-   ],
-   [
-    6,
-    11,
-    17
-   ]
-  ],
-  "frequency": 4.2
- },
- {
-  "ortho": "suggérer",
-  "before": "",
-  "after": "",
-  "label": "infinitif",
-  "phonology": "syg.Ze.Re",
-  "steno": "s@ikd/vte/Re/-l",
-  "strokes": [
-   [
-    3,
-    11,
-    13,
-    18,
-    19
-   ],
-   [
-    5,
-    7,
-    14
-   ],
-   [
-    8,
-    14
-   ],
-   [
-    23
-   ]
-  ],
-  "frequency": 4.2
- },
- {
-  "ortho": "symboles",
-  "before": "les",
-  "after": "",
-  "label": "nom, m. pl.",
-  "phonology": "s5.bOl",
-  "steno": "saie/svel/-s",
-  "strokes": [
-   [
-    3,
-    12,
-    13,
-    14
-   ],
-   [
-    3,
-    5,
-    14,
-    23
-   ],
-   [
-    17
-   ]
-  ],
-  "frequency": 4.2
- },
- {
-  "ortho": "textes",
-  "before": "les",
-  "after": "",
-  "label": "nom, m. pl.",
-  "phonology": "tEkst",
-  "steno": "tieskt/-s",
-  "strokes": [
-   [
-    7,
-    13,
-    14,
-    17,
-    18,
-    20
-   ],
-   [
-    17
-   ]
-  ],
-  "frequency": 4.2
- },
- {
-  "ortho": "abbé",
-  "before": "l'",
-  "after": "",
-  "label": "nom, m. sg.",
-  "phonology": "a.be",
-  "steno": "a/sve",
-  "strokes": [
-   [
-    12
-   ],
-   [
-    3,
-    5,
-    14
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "bagues",
-  "before": "les",
-  "after": "",
-  "label": "nom, f. pl.",
-  "phonology": "bag",
-  "steno": "svakd/-s",
-  "strokes": [
-   [
-    3,
-    5,
-    12,
-    18,
-    19
-   ],
-   [
-    17
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "bossu",
-  "before": "le",
-  "after": "",
-  "label": "nom, m. sg. · adjectif, m. sg.",
-  "phonology": "bo.sy",
-  "steno": "svae/s@i",
-  "strokes": [
-   [
-    3,
-    5,
-    12,
-    14
-   ],
-   [
-    3,
-    11,
-    13
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "bougre",
-  "before": "le",
-  "after": "",
-  "label": "nom, m. sg. · onomatopée",
-  "phonology": "bugR",
-  "steno": "sv@ekdR",
-  "strokes": [
-   [
-    3,
-    5,
-    11,
-    14,
-    18,
-    19,
-    21
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "boulevard",
-  "before": "le",
-  "after": "",
-  "label": "nom, m. sg.",
-  "phonology": "bu.l°.vaR",
-  "steno": "sv@e/mt@a/vaR",
-  "strokes": [
-   [
-    3,
-    5,
-    11,
-    14
-   ],
-   [
-    6,
-    7,
-    11,
-    12
-   ],
-   [
-    5,
-    12,
-    21
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "coupures",
-  "before": "les",
-  "after": "",
-  "label": "nom, f. pl.",
-  "phonology": "ku.pyR",
-  "steno": "k@e/p@iR/-s",
-  "strokes": [
-   [
-    2,
-    11,
-    14
-   ],
-   [
-    4,
-    11,
-    13,
-    21
-   ],
-   [
-    17
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "espères",
-  "before": "tu",
-  "after": "",
-  "label": "indicatif présent, 2e sg.",
-  "phonology": "Es.pER",
-  "steno": "ies/pieR/-d",
-  "strokes": [
-   [
-    13,
-    14,
-    17
-   ],
-   [
-    4,
-    13,
-    14,
-    21
-   ],
-   [
-    19
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "espères",
-  "before": "que tu",
-  "after": "",
-  "label": "subjonctif présent, 2e sg.",
-  "phonology": "Es.pER",
-  "steno": "ies/pieR/-dR",
-  "strokes": [
-   [
-    13,
-    14,
-    17
-   ],
-   [
-    4,
-    13,
-    14,
-    21
-   ],
-   [
-    19,
-    21
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "façade",
-  "before": "la",
-  "after": "",
-  "label": "nom, f. sg.",
-  "phonology": "fa.sad",
-  "steno": "kpa/sad",
-  "strokes": [
-   [
-    2,
-    4,
-    12
-   ],
-   [
-    3,
-    12,
-    19
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "géants",
-  "before": "les",
-  "after": "",
-  "label": "nom, m. pl. · adjectif, m. pl.",
-  "phonology": "Ze.@",
-  "steno": "vte/@/-s",
-  "strokes": [
-   [
-    5,
-    7,
-    14
-   ],
-   [
-    11
-   ],
-   [
-    17
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "immédiate",
-  "before": "l'",
-  "after": "",
-  "label": "adjectif, f. sg.",
-  "phonology": "i.me.djat",
-  "steno": "i/me/pvRwat",
-  "strokes": [
-   [
-    13
-   ],
-   [
-    6,
-    14
-   ],
-   [
-    4,
-    5,
-    8,
-    9,
-    12,
-    20
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "priver",
-  "before": "",
-  "after": "",
-  "label": "infinitif",
-  "phonology": "pRi.ve",
-  "steno": "pRi/ve/-l",
-  "strokes": [
-   [
-    4,
-    8,
-    13
-   ],
-   [
-    5,
-    14
-   ],
-   [
-    23
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "supplémentaire",
-  "before": "",
-  "after": "",
-  "label": "adjectif, sg.",
-  "phonology": "sy.ple.m@.tER",
-  "steno": "s@i/pmte/m@/tieR",
-  "strokes": [
-   [
-    3,
-    11,
-    13
-   ],
-   [
-    4,
-    6,
-    7,
-    14
-   ],
-   [
-    6,
-    11
-   ],
-   [
-    7,
-    13,
-    14,
-    21
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "vicieux",
-  "before": "",
-  "after": "",
-  "label": "adjectif, m. · nom, m.",
-  "phonology": "vi.sj2",
-  "steno": "vi/sRw@ie",
-  "strokes": [
-   [
-    5,
-    13
-   ],
-   [
-    3,
-    8,
-    9,
-    11,
-    13,
-    14
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "visite",
-  "before": "que je",
-  "after": "",
-  "label": "subjonctif présent, 1re sg. / 3e sg.",
-  "phonology": "vi.zit",
-  "steno": "vi/twit/-R",
-  "strokes": [
-   [
-    5,
-    13
-   ],
-   [
-    7,
-    9,
-    13,
-    20
-   ],
-   [
-    21
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "visite",
-  "before": "je",
-  "after": "",
-  "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
-  "phonology": "vi.zit",
-  "steno": "vi/twit/-k",
-  "strokes": [
-   [
-    5,
-    13
-   ],
-   [
-    7,
-    9,
-    13,
-    20
-   ],
-   [
-    18
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "yuans",
-  "before": "les",
-  "after": "",
-  "label": "nom, m. pl.",
-  "phonology": "jy.an",
-  "steno": "Rw@i/an/-s",
-  "strokes": [
-   [
-    8,
-    9,
-    11,
-    13
-   ],
-   [
-    12,
-    22
-   ],
-   [
-    17
-   ]
-  ],
-  "frequency": 4.19
- },
- {
-  "ortho": "aides",
-  "before": "les",
-  "after": "",
-  "label": "nom, pl.",
-  "phonology": "Ed",
-  "steno": "ied/-s",
-  "strokes": [
-   [
-    13,
-    14,
-    19
-   ],
-   [
-    17
-   ]
-  ],
-  "frequency": 4.18
- },
- {
-  "ortho": "anarchie",
-  "before": "l'",
-  "after": "",
-  "label": "nom, f. sg.",
-  "phonology": "a.naR.Si",
-  "steno": "a/mRaR/pmi",
-  "strokes": [
-   [
-    12
-   ],
-   [
-    6,
-    8,
-    12,
-    21
-   ],
-   [
-    4,
-    6,
-    13
-   ]
-  ],
-  "frequency": 4.18
- },
- {
-  "ortho": "antibiotiques",
-  "before": "les",
-  "after": "",
-  "label": "nom, m. pl. · adjectif, pl.",
-  "phonology": "@.ti.bjo.tik",
-  "steno": "@/ti/svRwae/tik/-s",
-  "strokes": [
-   [
-    11
-   ],
-   [
-    7,
-    13
-   ],
-   [
-    3,
-    5,
-    8,
-    9,
-    12,
-    14
-   ],
-   [
-    7,
-    13,
-    18
-   ],
-   [
-    17
-   ]
-  ],
-  "frequency": 4.18
- },
- {
-  "ortho": "armées",
-  "before": "les",
-  "after": "",
-  "label": "adjectif, f. pl. · participe passé, f. pl.",
-  "phonology": "aR.me",
-  "steno": "aR/me/-js",
-  "strokes": [
-   [
-    12,
-    21
-   ],
-   [
-    6,
-    14
-   ],
-   [
-    16,
-    17
-   ]
-  ],
-  "frequency": 4.18
- },
- {
-  "ortho": "bouillie",
-  "before": "la",
-  "after": "",
-  "label": "nom, f. sg.",
-  "phonology": "bu.ji",
-  "steno": "sv@e/Rwi",
-  "strokes": [
-   [
-    3,
-    5,
-    11,
-    14
-   ],
-   [
-    8,
-    9,
-    13
-   ]
-  ],
-  "frequency": 4.18
- },
- {
-  "ortho": "canyon",
-  "before": "le",
-  "after": "",
-  "label": "nom, m. sg.",
-  "phonology": "ka.njOn",
-  "steno": "ka/mRwen",
-  "strokes": [
-   [
-    2,
-    12
-   ],
-   [
-    6,
-    8,
-    9,
-    14,
-    22
-   ]
-  ],
-  "frequency": 4.18
- },
- {
-  "ortho": "cargo",
-  "before": "le",
-  "after": "",
-  "label": "nom, m. sg.",
-  "phonology": "kaR.go",
-  "steno": "kaR/ksae",
-  "strokes": [
-   [
-    2,
-    12,
-    21
-   ],
-   [
-    2,
-    3,
-    12,
-    14
-   ]
-  ],
-  "frequency": 4.18
- },
- {
-  "ortho": "exploiter",
-  "before": "",
-  "after": "",
-  "label": "infinitif",
-  "phonology": "E.ksplwa.te",
-  "steno": "ie/kspmtwa/te/-l",
-  "strokes": [
-   [
-    13,
-    14
-   ],
-   [
-    2,
-    3,
-    4,
-    6,
-    7,
-    9,
-    12
-   ],
-   [
-    7,
-    14
-   ],
-   [
-    23
-   ]
-  ],
-  "frequency": 4.18
- },
- {
-  "ortho": "gène",
-  "before": "le",
-  "after": "",
-  "label": "nom, m. sg.",
-  "phonology": "ZEn",
-  "steno": "vtien",
-  "strokes": [
-   [
-    5,
-    7,
-    13,
-    14,
-    22
-   ]
-  ],
-  "frequency": 4.18
- },
- {
-  "ortho": "gémissements",
-  "before": "les",
-  "after": "",
-  "label": "nom, m. pl.",
-  "phonology": "Ze.mi.s°.m@",
-  "steno": "vte/mi/s@a/m@/-s",
-  "strokes": [
-   [
-    5,
-    7,
-    14
-   ],
-   [
-    6,
-    13
-   ],
-   [
-    3,
-    11,
-    12
-   ],
-   [
-    6,
-    11
-   ],
-   [
-    17
-   ]
-  ],
-  "frequency": 4.18
- },
- {
-  "ortho": "introduit",
-  "before": "il",
-  "after": "",
-  "label": "participe passé, m. sg. · indicatif présent, 3e sg.",
-  "phonology": "5.tRo.d8i",
-  "steno": "aie/tRae/pv@ai",
-  "strokes": [
-   [
-    12,
-    13,
-    14
-   ],
-   [
-    7,
-    8,
-    12,
-    14
-   ],
-   [
-    4,
-    5,
-    11,
-    12,
-    13
-   ]
-  ],
-  "frequency": 4.18
- },
- {
-  "ortho": "jeep",
-  "before": "la",
-  "after": "",
-  "label": "nom, f. sg.",
-  "phonology": "dZip",
-  "steno": "pvtijk",
-  "strokes": [
-   [
-    4,
-    5,
-    7,
-    13,
-    16,
-    18
-   ]
-  ],
-  "frequency": 4.18
- },
- {
-  "ortho": "moquent",
-  "before": "ils",
-  "after": "",
-  "label": "indicatif présent, 3e pl.",
-  "phonology": "mOk",
-  "steno": "mek/-st",
-  "strokes": [
-   [
-    6,
-    14,
-    18
-   ],
-   [
-    17,
-    20
-   ]
-  ],
-  "frequency": 4.18
- },
- {
-  "ortho": "pioche",
-  "before": "la",
-  "after": "",
-  "label": "nom, f. sg. · indicatif présent, 3e sg.",
-  "phonology": "pjOS",
-  "steno": "pRweZm",
-  "strokes": [
-   [
-    4,
-    8,
-    9,
-    14,
-    24,
-    25
-   ]
-  ],
-  "frequency": 4.18
  }
 ]

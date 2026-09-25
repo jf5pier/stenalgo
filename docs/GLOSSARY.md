@@ -325,7 +325,7 @@ resolved Word, plus `a/svae/mt*i` on its unresolved passé-simple Word.
 The attested words of a verb template or NOM/ADJ ending class (donors), and the suffix
 transformation learned from them by majority, with match rate and donor count, then spliced
 onto a missing form.
-- Code: `deriveConjugationEndingTables` src/verbparadigm.py:493; `deriveNomAdjEndingTables` src/nomAdjParadigm.py:250.
+- Code: `deriveConjugationEndingTables` src/verbparadigm.py:703; `deriveNomAdjEndingTables` src/nomAdjParadigm.py:250.
 - First used in: Synthetic Lexicon Building (S2).
 
 ### Doublet (1990-reform spelling doublet)
@@ -1024,7 +1024,7 @@ trainer branch.
 ### Undersampled lemma
 A verb LemmeGramCat whose legacy discriminating-feature space is a strict subset of its
 template siblings'; the trigger for verb paradigm completion.
-- Code: `detectUndersampledLemmas` src/verbparadigm.py:681.
+- Code: `detectUndersampledLemmas` src/verbparadigm.py:902.
 - First used in: Synthetic Lexicon Building (S2).
 
 ### Word

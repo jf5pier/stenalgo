@@ -476,6 +476,7 @@ later companion script.
 | fixResidualRowErrors | Lexique383, Mixte | yes | yes | 4 row fixes (`lamer` → `inf;`) |
 | fixSourdreDefectiveGaps | conjugations-fr.xml, Lexique383, Mixte | yes | yes | sourdre slots |
 | fixSpuriousDuplicateVerbRows | Lexique383, Mixte | yes | yes | duplicate VER/AUX rows |
+| fixSplicedVerbBreakdowns | Synthetic (in place) | no | n/a | spliced finite forms re-normalized, item B2 (S2.4) |
 | fixXlfnSingleCorruption | Infra | no | yes | `_xlfn.SINGLE(...)` (Excel) |
 | completeVerbParadigms | Synthetic (append) | no | n/a | Verb paradigm completion (S2.1) |
 | generateMissingNomAdjForms | Synthetic (append) | no | n/a | NOM/ADJ gap generation (S2.2) |
@@ -515,8 +516,8 @@ overrides and `--no-morphalou` disables it.
 Called by: a person, `python -m util.completeVerbParadigms [--apply]`, and `python -m util.build_synthetic_lexicon` (with `--apply`).
 Input state: the phonetic theory (mixed lexicon + current synthetic rows), Verbiste XML, `resources/verbModelExceptions.tsv`.
 Transformation: caps its address space at 4 GiB (`_capMemory` :343); loads templates
-(`loadVerbisteTemplates` verbparadigm.py:48, `loadVerbModelExceptions` :67,
-`parseConjugationTemplates` :190); runs the **legacy** `extractDiscriminatingFeatures`
+(`loadVerbisteTemplates` verbparadigm.py:49, `loadVerbModelExceptions` :68,
+`parseConjugationTemplates` :191); runs the **legacy** `extractDiscriminatingFeatures`
 (src/featureextractor.py:31); then the five steps below, Load the phonetic theory (S2.1.1) to Append
 synthetic rows (S2.1.5).
 Result: VER synthetic rows (participle gender/number forms and finite forms).
@@ -529,35 +530,43 @@ feature-complexity tie-break. Not idempotent (item B13).
   or builds a `Dictionary` and the phonetic theory in memory without writing. A stale pickle hides rows
   appended since the last rebuild.
 - **Derive conjugation ending tables — deriveConjugationEndingTables (S2.1.2)**
-  verbparadigm.py:493 — donors are VER Words with a trusted template (`getTrustedTemplate`
-  :88: Verbiste, or an exception with status `regular`/`family_template`) and an attested
-  infinitive (`ortho == lemme`, :433). Per template and field (`phonology`, `rawSyllCV`,
+  verbparadigm.py:703 — donors are VER Words with a trusted template (`getTrustedTemplate`
+  :89: Verbiste, or an exception with status `regular`/`family_template`) and an attested
+  infinitive (`ortho == lemme`, :434). Per template and field (`phonology`, `rawSyllCV`,
   `rawOrthosyllCV`): infinitive suffix = longest common suffix of donor infinitives; for each
-  attested finite tag, ending = slot value minus an infinitive-length radical (:561); keeps
-  the most common ending with match rate and donor count. Result: `ConjugationEndingTables`
-  (:467). The radical is cut by character count on the raw `|`/`_` string (item B2).
+  attested finite tag, ending = slot value minus an infinitive-length radical (:771); keeps
+  the most common ending with match rate and donor count. Also learns, from the theory's
+  corpus (nonzero-frequency) Words only, where a syllable boundary falls in each run of units
+  between two nuclei (`deriveSyllableSplitTable` :500) and which mid vowel a spelling calls
+  for, in any syllable or a closed final one (`deriveMidVowelTable` :554). Result:
+  `ConjugationEndingTables` (:670).
 - **Find structural candidates — findStructuralCandidates (S2.1.3)** :165 — for each
   **undersampled lemma** found by Detect undersampled lemmas (S2.1.3.1), fills missing
   participle gender/number slots with Generate missing participles (S2.1.3.2) and missing
-  finite slots of `allFiniteSlots` (:407, which excludes `inf`, `par:pre`, `par:pas`,
-  `sub:imp`, `FINITE_SLOT_EXCLUDED_CODES` :397) with Generate missing finite forms
+  finite slots of `allFiniteSlots` (:408, which excludes `inf`, `par:pre`, `par:pas`,
+  `sub:imp`, `FINITE_SLOT_EXCLUDED_CODES` :398) with Generate missing finite forms
   (S2.1.3.3), gated by `MIN_FINITE_MATCH_RATE = 1.0` (:73). Result: (lemmeGramCat, info,
   generated Word, reference Word) candidates.
-  - *Detect undersampled lemmas (S2.1.3.1)* verbparadigm.py:681 — per trusted template, a
-    lemma whose legacy feature space (`fullFeatureSpace` :119) is a strict subset of the union
+  - *Detect undersampled lemmas (S2.1.3.1)* verbparadigm.py:902 — per trusted template, a
+    lemma whose legacy feature space (`fullFeatureSpace` :120) is a strict subset of the union
     of its siblings'. Lemmas without siblings are skipped.
-  - *Generate missing participles (S2.1.3.2)* :367 — ortho from the Verbiste `par:pas`
-    ending (`infinitiveRadical` :239, `generateOrthoForm` :252); phon and `syll_cv` copied
-    from the donor participle (`spliceParticiplePhon` :296); `orthosyll_cv` = donor radical +
-    `""/s/e/es` (:344); `infover = "par:pas;"`.
-  - *Generate missing finite forms (S2.1.3.3)* :577 — ortho = Verbiste radical + ending;
+  - *Generate missing participles (S2.1.3.2)* :368 — ortho from the Verbiste `par:pas`
+    ending (`infinitiveRadical` :240, `generateOrthoForm` :253); phon and `syll_cv` copied
+    from the donor participle (`spliceParticiplePhon` :297); `orthosyll_cv` = donor radical +
+    `""/s/e/es` (:345); `infover = "par:pas;"`.
+  - *Generate missing finite forms (S2.1.3.3)* :794 — ortho = Verbiste radical + ending;
     each phonological field = infinitive value truncated by the suffix length + the table
-    ending (:611); `None` below the match rate.
+    ending (:828); `None` below the match rate. The cut keeps the infinitive's syllable
+    boundaries and vowel quality, so `normalizeSplicedBreakdown` (:589) then vocalizes a
+    word-final glide after a consonant (`denj` → `deni`), re-places every boundary from the
+    split table (`k_a|n_#` → `k_a_n_#`, `a|t_@_d_e` → `a|t_@|d_e`), gives the orthographic
+    breakdown the same boundaries when it has as many units, and sets mid vowels from the
+    mid-vowel table (`abon` → `abOn`, `aS°tRa` → `aSEtRa`) (item B2, resolved).
 - **Confirm by legacy collision check — confirmCandidates (S2.1.4)** :266 —
   temporarily adds each candidate to its reference word's phonetic-theory entry
   (`temporarilyAugmented` :238), reruns `extractDiscriminatingFeatures` and
   `buildDiscriminatorSelection` (featureextractor.py:284) and keeps only lemmas in
-  `newlyCollidingLemmas` (verbparadigm.py:646). Others are "irrelevant to disambiguation today".
+  `newlyCollidingLemmas` (verbparadigm.py:867). Others are "irrelevant to disambiguation today".
 - **Append synthetic rows — writeSynthetic (S2.1.5)** :324 — appends one line per
   confirmed candidate; no deduplication against the file.
 
@@ -605,8 +614,13 @@ Both dual-form fillers are also called by `python -m util.build_synthetic_lexico
   `(ortho, lemme)` dedup :173) plus `TAG_ONLY_FIXES` written into `Lexique383.tsv`
   (:142-163). Its header (:34-43) records an earlier fix lost by patching `LexiqueMixte.tsv` only.
 - `util/fixEvaserWordFinalZSyllabification.py` main :109 — rewrites the `évaser` rows with
-  phon `evaz` so the word-final `z` is a coda (`|z_#` → `_z_#`); the only script editing
-  synthetic rows in place. The defect is systemic (item B2).
+  phon `evaz` so the word-final `z` is a coda (`|z_#` → `_z_#`). One lemma of item B2,
+  kept for the record.
+- `util/fixSplicedVerbBreakdowns.py` main — applies `normalizeSplicedBreakdown`, with the
+  tables `deriveConjugationEndingTables` derives from the phonetic theory, to every synthetic
+  VER row whose tags are all finite slots (pa:yer and -seoir rows excepted: their fillers
+  above use their own endings); corrected the 14,926 rows spliced before the fix (item B2).
+  One-off, not called by `util.build_synthetic_lexicon`.
 
 ### Consumption
 `LexiqueSynthetic.tsv` is consumed only by Lexicon reading and identity merge (S3.2.1); its
