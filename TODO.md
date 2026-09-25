@@ -50,15 +50,18 @@ losing a tie, 0 hiding another spelling). B2, B4, B11, B14, B27, B43 and B44 hav
   `scratch/b45-before/`, `scratch/b45-plover-diff.txt`. Original entry: synthetic past
   participles copied another gender's phonology — 33 masculine rows carried the feminine's `/z/`
   (`enclos` `@kloz` outranked `enclose` on `@/kmtaenl`), and feminine rows lacked it.
-- **B46** Synthetic past participles have a `syll_cv` one unit short of their `orthosyll_cv` —
-  src/verbparadigm.py:297 (`spliceParticiplePhon`) with :345 (`generateParticipeOrthosyll`) — the
-  phonemic breakdown is copied from the donor participle, while the orthographic one gets the
-  gender/number suffix as an extra unit, with no silent `#` to match it (synthetic `discriminées`
-  `…m_i|n_e` / `…m_i|n_é_es`, attested `aimées` `E|m_e_#` / `ai|m_é_es`). 4,910 of 5,227 synthetic
-  participle rows (4,785 one unit short, 125 two), predating the B2 fix. Unmeasured: whether it
-  changes any stroke (`#` is silent), but every unit-aligned reader skips these rows — the B2
-  tables' learning and `normalizeSplicedBreakdown`'s boundary copy. Same splice as B45 (resolved): add
-  `_#` per extra orthographic unit, repair the rows in place, rebuild.
+- **B46** RESOLVED 2026-09-25 (`_padSilentUnits`, src/verbparadigm.py, applied by
+  `generateMissingParticiple`: appends one silent trailing `_#` per orthographic unit the phonemic
+  breakdown is short of, matching the attested convention — `garnis` `g_a_R|n_i_#` beside
+  `g_a_r|n_i_s`; `util/fixParticipleSilentUnits.py --apply` repaired the 4,920 existing synthetic
+  rows in place — 4,829 one unit short, 91 two (the silent `h` of `inhumées` is its own ortho
+  unit), 294 already aligned, 0 errors). Measured at last: the missing `#` never changed any
+  stroke — after `rm -f *.pickle` + a full `python dictionary.py` rebuild (S2 converged, 0 rows
+  appended), all 10 tracked outputs are byte-identical to the pre-change baseline
+  (`scratch/b46-before-md5s.txt`); the fix only makes the rows usable by unit-aligned readers
+  (deriveSyllableSplitTable, deriveMidVowelTable, `normalizeSplicedBreakdown`'s boundary copy).
+  Original entry: synthetic `discriminées` `…m_i|n_e` / `…m_i|n_é_es`, attested `aimées`
+  `E|m_e_#` / `ai|m_é_es`; 4,910 of 5,227 synthetic participle rows, predating the B2 fix.
 - **B2** RESOLVED 2026-09-24 (`normalizeSplicedBreakdown`, src/verbparadigm.py:589, applied by
   `generateMissingConjugatedForm`: re-places every syllable boundary from a split table learned from
   the corpus Words, vocalizes a word-final glide after a consonant, and sets mid vowels from their

@@ -392,10 +392,11 @@ class TestParticipleSplicing:
         finIr = templates["fin:ir"]
         garni = _make_participle(*self.GARNI)
         for expected in (self.GARNIE, self.GARNIS, self.GARNIES):
-            ortho, phon, lemme, gender, number, _rawSyllCV, rawOrthosyllCV = expected
+            ortho, phon, lemme, gender, number, rawSyllCV, rawOrthosyllCV = expected
             generated = generateMissingParticiple("garnir", finIr, garni, gender, number)
             assert generated.ortho == ortho
             assert generated.phonology == phon
+            assert generated.rawSyllCV == rawSyllCV
             assert generated.rawOrthosyllCV == rawOrthosyllCV
             assert generated.frequencyBook == 0.0
             assert generated.frequencyFilm == 0.0
@@ -412,15 +413,36 @@ class TestParticipleSplicing:
         m_s = generateMissingParticiple("rechampir", finIr, rechampis, "m", "s")
         assert m_s.ortho == "rechampi"
         assert m_s.phonology == "R°S@pi"
+        assert m_s.rawSyllCV == "R_°|S_@|p_i"
         assert m_s.rawOrthosyllCV == "r_e|ch_am|p_i"
 
         f_s = generateMissingParticiple("rechampir", finIr, rechampis, "f", "s")
         assert f_s.ortho == "rechampie"
+        assert f_s.rawSyllCV == "R_°|S_@|p_i_#"
         assert f_s.rawOrthosyllCV == "r_e|ch_am|p_i_e"
 
         f_p = generateMissingParticiple("rechampir", finIr, rechampis, "f", "p")
         assert f_p.ortho == "rechampies"
+        assert f_p.rawSyllCV == "R_°|S_@|p_i_#"
         assert f_p.rawOrthosyllCV == "r_e|ch_am|p_i_es"
+
+    def test_generate_missing_participle_pads_silent_suffix_units(self):
+        """Item B46: each orthographic unit the phonemic breakdown lacks gets a
+        silent trailing '#' (garnis g_a_R|n_i_# beside g_a_r|n_i_s), so the two
+        breakdowns align unit for unit like attested rows. The count depends on
+        the donor's segmentation: promise's radical keeps "i_s" as two units, so
+        its masculine plural gains a '#', while promis's own "is" unit already
+        matches the feminine's extra "es"."""
+        templates = parseConjugationTemplates("resources/verbiste/conjugations-fr.xml")
+        mEttre = templates["m:ettre"]
+        promise = _make_participle(*self.PROMISE)
+        generated = generateMissingParticiple("promettre", mEttre, promise, "m", "p")
+        assert generated.rawSyllCV == "p_R_o|m_i_#"
+        assert generated.rawOrthosyllCV == "p_r_o|m_i_s"
+        promis = _make_participle(*self.PROMIS)
+        generated = generateMissingParticiple("promettre", mEttre, promis, "f", "p")
+        assert generated.rawSyllCV == "p_R_o|m_i_z"
+        assert generated.rawOrthosyllCV == "p_r_o|m_is_es"
 
     def test_derive_radical_rejects_mismatched_suffix(self):
         badWord = _make_participle("garnie", "gaRni", "garnir", "f", "s", "g_a_R|n_i", "g_a_r|n_x")

@@ -416,6 +416,28 @@ def generateParticipeOrthosyll(attestedParticiple: Word, gender: str, number: st
     return f"{radicalOrthosyll}_{suffix}" if suffix else radicalOrthosyll
 
 
+def _padSilentUnits(rawSyllCV: str, rawOrthosyllCV: str) -> str:
+    """
+    Append one silent '#' unit per orthographic unit the phonemic breakdown is
+    short of (item B46): the gender/number suffix adds an orthographic unit
+    ("garnis" g_a_r|n_i_s) whose phonemic counterpart is silent, and attested
+    rows mark it as a trailing '#' in the last syllable ("garnis" g_a_R|n_i_#,
+    "garnie" g_a_R|n_i_#). Attested participle rows align unit for unit, and
+    every unit-aligned reader (deriveSyllableSplitTable, deriveMidVowelTable,
+    normalizeSplicedBreakdown's orthographic copy) skips a row that doesn't.
+    """
+    missing = _unitCount(rawOrthosyllCV) - _unitCount(rawSyllCV)
+    if missing < 0:
+        raise ValueError(
+            f"syll_cv {rawSyllCV!r} has more units than its orthosyll_cv {rawOrthosyllCV!r}"
+        )
+    return rawSyllCV + "_#" * missing
+
+
+def _unitCount(rawBreakdown: str) -> int:
+    return len(rawBreakdown.replace("|", "_").split("_"))
+
+
 def generateMissingParticiple(
     lemme: Lemme,
     template: ConjugationTemplate,
@@ -437,6 +459,7 @@ def generateMissingParticiple(
         raise ValueError(f"template {template.name!r} has no par:pas form for {gender}_{number}")
     phon, rawSyllCV = spliceParticiplePhon(attestedParticiple, gender, ortho)
     rawOrthosyllCV = generateParticipeOrthosyll(attestedParticiple, gender, number)
+    rawSyllCV = _padSilentUnits(rawSyllCV, rawOrthosyllCV)
     return Word(
         ortho=ortho, phonology=phon, lemme=lemme,
         gramCat=GramCat.VER, orthoGramCat=[GramCat.VER],
