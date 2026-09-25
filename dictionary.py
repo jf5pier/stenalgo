@@ -39,6 +39,7 @@ from src.ambiguitychecker import (
     buildWordsByOrthoLemme,
     buildWordToStrokes,
     composeReservedKeyStrokesForEntries,
+    findSpellingTwinWords,
     loadReform1990DoubletPairs,
     realizeKeypressGroupsAsExtraStroke,
     resolvePreferredKeysByGroup,
@@ -388,7 +389,10 @@ class Dictionary:
         further entries are the word's OTHER readings
         (src.ambiguitychecker.buildExtraInducedStrokes), reusing whatever physical keys the
         primary pass already decided, each run through S7 on its own final stroke (B44:
-        before 2026-09-24 they skipped it, and "panse"'s `p@s/-k` output "pense"). Requires `keypressGroupsPath` (Discriminating-Feature Grouping
+        before 2026-09-24 they skipped it, and "panse"'s `p@s/-k` output "pense"). A
+        spelling twin (another reading of a spelling its resolved press-set entry already
+        covers, `src.ambiguitychecker.findSpellingTwinWords`) gets NO entry at all: the
+        bare placement belongs to the group's default reading only (B47). Requires `keypressGroupsPath` (Discriminating-Feature Grouping
         (Grouping Phase), `python -m util.build_keypress_groups`) and
         `resolvedPressSetsPath` (Discriminating-Feature Elicitation (Elicitation Phase),
         `python -m src.elicitation`) to already exist.
@@ -414,8 +418,15 @@ class Dictionary:
         )
         finalInduced = buildFinalInducedStrokes(phoneticTheory, groupToWords, assignment)
         extraByWord = buildExtraInducedStrokes(phoneticTheory, assignment, extraGroupSetsByWord)
+        # Spelling twins (another reading of a spelling its resolved press-set entry
+        # already covers, see findSpellingTwinWords) get NO entry of their own: their
+        # readings are the resolved Word's primary/alternate entries, and the residual
+        # bare stroke buildFinalInducedStrokes would leave them shadows the group's
+        # default reading (B47).
+        spellingTwins = findSpellingTwinWords(resolvedGroups, wordToStrokes, wordsByOrthoLemme)
         return composeReservedKeyStrokesForEntries(
-            {word: [strokes] + extraByWord.get(word, []) for word, strokes in finalInduced.items()},
+            {word: [strokes] + extraByWord.get(word, [])
+             for word, strokes in finalInduced.items() if word not in spellingTwins},
             loadReform1990DoubletPairs(),
             phonemeStrokeCounts={word: len(strokes) for word, strokes in wordToStrokes.items()},
         )

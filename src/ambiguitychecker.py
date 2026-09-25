@@ -782,6 +782,41 @@ def buildKeypressGroupExtraAlternates(
     return dict(extraGroupSetsByWord)
 
 
+def findSpellingTwinWords(
+    resolvedGroups: list[dict],
+    wordToStrokes: dict[Word, Strokes],
+    wordsByOrthoLemme: dict[tuple[str, str], list[Word]],
+) -> set[Word]:
+    """
+    Every spelling twin (docs/GLOSSARY.md): a real `Word` covered by a
+    `resolved_press_sets.json` entry's spelling (same ortho, same `lemmeGramCat`, same
+    CANONICAL base stroke -- another reading of that spelling inside the same Elicitation
+    Phase homophone group, e.g. "affadis" participe passé m. pl. beside "affadis"
+    indicatif passé 2e sg.) without being that entry's resolved Word
+    (`_resolveEntryWord`), which picks one Word per spelling. The entry's press-set
+    alternates already realize every reading of the spelling on the resolved Word (one
+    independently-valid stroke per alternate, labeled by the parallel "readings" field),
+    so a twin must NOT get its own entry on top: `buildFinalInducedStrokes` would give it
+    a residual bare primary stroke (B47) shadowing the group's default reading
+    ("affadis" indicatif passé 2e sg. on the bare chord that belongs to "affadi"), and in
+    a star/hash cluster it would even consume a */# slot for a spelling that is already
+    reachable through its feature strokes. `Dictionary.buildDisambiguatedTheory` drops
+    these Words from the disambiguated theory entirely.
+    """
+    twins: set[Word] = set()
+    for entry in resolvedGroups:
+        for ortho in entry["pressSets"]:
+            word = _resolveEntryWord(entry, ortho, wordToStrokes, wordsByOrthoLemme)
+            if word is None:
+                continue
+            entryStrokes = tuple(tuple(stroke) for stroke in entry["strokes"])
+            for candidate in wordsByOrthoLemme.get((ortho, entry["lemmeGramCat"]), []):
+                if candidate is not word and candidate in wordToStrokes \
+                        and canonicalizeStrokes(wordToStrokes[candidate]) == entryStrokes:
+                    twins.add(candidate)
+    return twins
+
+
 def buildWordToGroups(groupToWords: dict[int, list[Word]]) -> dict[Word, frozenset[int]]:
     """Invert groupToWords: every Word -> the set of Grouping Phase keypress groups it needs
     (a word needing e.g. both the "f" and "p" groups gets both group ids)."""

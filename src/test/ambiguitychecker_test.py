@@ -32,6 +32,7 @@ from src.ambiguitychecker import (
     buildKeypressGroupExtraAlternates,
     buildKeypressGroupToWords,
     buildWordsByOrthoLemme,
+    findSpellingTwinWords,
     buildWordToGroups,
     findCollidingInducedStrokes,
     realizeKeypressGroupsAsExtraStroke,
@@ -654,6 +655,49 @@ class TestBuildKeypressGroupExtraAlternates:
         markersByKeypress = {0: frozenset({"impératif"}), 1: frozenset({"pers_2"})}
         extras = buildKeypressGroupExtraAlternates([entry], markersByKeypress, wordToStrokes, wordsByOrthoLemme)
         assert extras == {wCalmez: [frozenset({1})]}
+
+
+class TestFindSpellingTwinWords:
+
+    def test_same_stroke_reading_of_a_covered_spelling_is_a_twin(self):
+        """B47, "affadis" shape: two Words share the entry's ortho, lemmeGramCat and
+        canonical base stroke; _resolveEntryWord picks one, the other is a spelling twin
+        whose readings the entry's alternates already cover."""
+        wParticipe = _make_word(ortho="affadis", lemme="affadir", gramCat=GramCat.VER, gender="m", number="p")
+        wPasse = _make_word(ortho="affadis", lemme="affadir", gramCat=GramCat.VER, gender=None, number=None)
+        sharedStrokes = ((12,), (2, 4, 12), (4, 5, 13))
+        wordToStrokes = {wParticipe: sharedStrokes, wPasse: sharedStrokes}
+        wordsByOrthoLemme = {("affadis", "affadir_VER"): [wParticipe, wPasse]}
+        entry = {
+            "strokes": [[12], [2, 4, 12], [4, 5, 13]], "lemmeGramCat": "affadir_VER",
+            "pressSets": {"affadis": [["p"], ["passé", "pers_2"]]},
+        }
+        twins = findSpellingTwinWords([entry], wordToStrokes, wordsByOrthoLemme)
+        assert twins == {wPasse}
+
+    def test_word_on_another_stroke_is_not_a_twin(self):
+        """A same-spelling same-paradigm Word carrying a DIFFERENT stroke (a different
+        homophone group, or _resolveEntryWord's fallback candidate) keeps its own
+        entry."""
+        wRight = _make_word(ortho="abacas", lemme="abaca", gramCat=GramCat.NOM)
+        wElsewhere = _make_word(ortho="abacas", lemme="abaca", gramCat=GramCat.NOM, gender="f")
+        wordToStrokes = {wRight: ((12,),), wElsewhere: ((99,),)}
+        wordsByOrthoLemme = {("abacas", "abaca_NOM"): [wElsewhere, wRight]}
+        entry = {
+            "strokes": [[12]], "lemmeGramCat": "abaca_NOM",
+            "pressSets": {"abacas": [["p"]]},
+        }
+        assert findSpellingTwinWords([entry], wordToStrokes, wordsByOrthoLemme) == set()
+
+    def test_resolved_word_itself_is_never_a_twin(self):
+        wOnly = _make_word(ortho="abacas", lemme="abaca", gramCat=GramCat.NOM)
+        wordToStrokes = {wOnly: ((12,),)}
+        wordsByOrthoLemme = {("abacas", "abaca_NOM"): [wOnly]}
+        entry = {
+            "strokes": [[12]], "lemmeGramCat": "abaca_NOM",
+            "pressSets": {"abacas": [["p"]]},
+        }
+        assert findSpellingTwinWords([entry], wordToStrokes, wordsByOrthoLemme) == set()
 
 
 # ---------------------------------------------------------------------------

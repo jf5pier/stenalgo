@@ -12,32 +12,43 @@ tracked artifacts; tier 3 is latent (no measured impact). B39/B40 were dropped: 
 was removed in Dead-Code Removal (Pass 5). B1 was dropped 2026-09-24: every reading of a
 spelling is already an alternate press-set on the resolved Word, so the unresolved "twin" Word
 only adds a redundant route (269 twins: 133 alone on their stroke, 38 on a resolved stroke, 98
-losing a tie, 0 hiding another spelling). B2, B4, B11, B14, B27, B43 and B44 have since been fixed.
+losing a tie, 0 hiding another spelling — B47 later removed those redundant routes). B2, B4,
+B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
 
 ### Tier 1 — affects the Plover output today
 
-- **B47** Same-lemma disambiguation leaves a residual BARE entry for readings that already have a
-  feature stroke — e.g. `affadir_VER`: the disambiguated theory (disambiguated_theory.tsv) holds
-  THREE `affadis` rows on the same base stroke `a/kpa/pvi`: `a/kpa/pvi` + extraStrokes `17`
-  (participe passé m. pl., realized as the `-s` suffix), `a/kpa/pvi` + extraStrokes `19,20`
-  (realized as the `-dt` suffix), and `a/kpa/pvi` with EMPTY extraStrokes — a residual unmarked
-  entry for the indicatif passé 2e sg. reading, shadowed by `affadi` (which owns the bare chord:
-  `a/kpa/pvi` → `affadi` in plover_stenalgo_dictionary.json; `affadis`'s real entries are
-  `a/kpa/pvi/-dt` and `a/kpa/pvi/-s`). Expected behavior: once the Realization Phase assigns a
-  reading its feature-discriminating stroke, that reading should have NO other entry — the bare
-  placement belongs to the group's default reading only. The stray row is invisible in Plover
-  (the exporter's entry resolution drops it) but surfaces in the trainer Definitions page
-  (export_definitions iterates the phonetic-theory homophone group), where `affadis` shows as
-  "indicatif passé, 2e sg." on BOTH the bare chord and the `-dt` chord. This is the same
-  population as the 104 sameLemmaGramCat residual collisions (98 "unresolved twin" groups;
-  `PYTHONPATH=. env/bin/python scratch/b44_residuals.py`, full list in
-  `scratch/sameLemmaGramCat-104-list.txt`): mostly `-ir` participle-vs-passé-simple-2s pairs,
-  5 `-u` participles (`apparu/apparus`…), 6 `-eler/-eter` groups where a spelling is fully
-  unreachable in Plover. GOAL: investigate what causes the residual entry to survive (why the
-  bare placement is not removed when the feature stroke is assigned — Realization Phase
-  composition in `Dictionary.buildDisambiguatedTheory` / `composeReservedKeyStrokesForEntries`,
-  src/ambiguitychecker.py), then decide whether the fix is dropping the bare row for marked
-  readings or an accepted-documented default.
+- **B47** RESOLVED 2026-09-25 (`findSpellingTwinWords`, src/ambiguitychecker.py:785, dropped by
+  `Dictionary.buildDisambiguatedTheory` at dictionary.py:426): the residual bare entry belonged
+  to a spelling twin — another Word with the same ortho, `lemmeGramCat` and canonical base
+  stroke as the one `_resolveEntryWord` picked for the spelling's resolved press-set entry
+  (`affadis` participe m. pl. beside `affadis` indicatif passé 2e sg.). The press-set's
+  alternates already realize every reading of the spelling on the resolved Word (the entry's
+  parallel "readings" field), but `buildFinalInducedStrokes` still gave the twin its own bare
+  primary stroke, since it iterates every theory Word and the twin is in no keypress group.
+  The fix drops the 272 twin Words (259 spellings) from the disambiguated theory entirely:
+  disambiguated_theory.tsv −272 rows (`affadis` keeps only `a/kpa/pvi/-s` and `a/kpa/pvi/-dt`),
+  same-lemma residual collisions 104 → 6 (the six survivors are the `-eter`/`-eler` variant
+  conjugations `caquette`/`caquète`…, the spelling-variant follow-up), cross-lemma 0, reform
+  doublet 0. Plover: −130 stenos (the twins' phantom bare/star-marked chords), 0 added, 0 owner
+  changes, 0 spellings lost (each spelling stays reachable through its resolved Word's
+  entries). Trainer: definitions.json −272 stray rows (`affadis` now shows each reading on its
+  own chord only); practice-words/practice-sentences unchanged (the phantom chords were outside
+  the top-10,000 drill set). In a star/hash cluster a twin even consumed a */# slot for a
+  spelling already reachable through its feature strokes — those 138 marked phantoms are gone
+  too. Before/after in `scratch/b47-before/`. Original entry: Same-lemma disambiguation leaves a
+  residual BARE entry for readings that already have a feature stroke — e.g. `affadir_VER`: the
+  disambiguated theory (disambiguated_theory.tsv) held THREE `affadis` rows on the same base
+  stroke `a/kpa/pvi`: `a/kpa/pvi` + extraStrokes `17` (participe passé m. pl., realized as the
+  `-s` suffix), `a/kpa/pvi` + extraStrokes `19,20` (realized as the `-dt` suffix), and
+  `a/kpa/pvi` with EMPTY extraStrokes — a residual unmarked entry for the indicatif passé 2e sg.
+  reading, shadowed by `affadi` (which owns the bare chord: `a/kpa/pvi` → `affadi` in
+  plover_stenalgo_dictionary.json; `affadis`'s real entries are `a/kpa/pvi/-dt` and
+  `a/kpa/pvi/-s`). Expected behavior: once the Realization Phase assigns a reading its
+  feature-discriminating stroke, that reading should have NO other entry — the bare placement
+  belongs to the group's default reading only. The stray row was invisible in Plover (the
+  exporter's entry resolution dropped it) but surfaced in the trainer Definitions page
+  (export_definitions iterates the phonetic-theory homophone group), where `affadis` showed as
+  "indicatif passé, 2e sg." on BOTH the bare chord and the `-dt` chord.
 - **B44** RESOLVED 2026-09-24 (`composeReservedKeyStrokesForEntries`, src/ambiguitychecker.py:424:
   Different-Lemma or Grammatical-Category Disambiguation (S7) now clusters and marks every entry,
   primary and alternate, on its own final stroke; `panse` → `p*@s`, `p*@s/-k`, `p*@s/-R`). Plover:
