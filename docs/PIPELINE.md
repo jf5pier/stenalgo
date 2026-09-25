@@ -37,8 +37,9 @@ The real dependency order. Steps 0 and 1 and the human loop 4h are run by hand, 
 | # | Command | Stage | Needed when | Notes |
 |---|---|---|---|---|
 | 0 | `python -m util.fix<Name> --apply`, `python -m util.completeVerbParadigms --apply`, `python -m util.generateMissingNomAdjForms --apply`, … | Lexicon Building (S1), Synthetic Lexicon Building (S2) | only after a lexicon correction | Patch `Lexique383.tsv`, `LexiqueInfraCorrespondance.tsv`, Verbiste XML and/or `LexiqueMixte.tsv`, or append rows to `LexiqueSynthetic.tsv`. Run by hand, one fix at a time. The four steady-state appenders are also run, converged, by `python -m util.build_synthetic_lexicon` (see Synthetic Lexicon Building (S2)). |
-| 1 | `python lexique.py` | Lexicon Building (S1) | a full regeneration of `LexiqueMixte.tsv` | Everything runs at import time (no `__main__` guard, lexique.py:1261-1263). A rerun today is byte-identical to the committed file. |
-| 2 | `rm -f Dictionary.pickle PhoneticTheory.pickle` | — | **any** lexicon or layout change | The pickle-cache trap: see below. |
+| 1 | `python lexique.py` | Lexicon Building (S1) | a full regeneration of `LexiqueMixte.tsv` | Everything runs at import time (no `__main__` guard, lexique.py:1261-1263). A rerun today is byte-identical to the committed file. Also the enforcement point for `resources/spellingVariants.tsv`: `read_corpus` reconciles every lemme through `reconcileLemme` (a canonical on the OLD side of a reform pair suppresses the lemme normalization instead of being dropped by it), and `outputMixedLexique` runs every output spelling through `reconcileOutputOrtho` after the whole 1990-reform rewrite chain — the canonical may sit on either side of a reform pair, so the rewrite is overridable in both directions from one place. |
+| 1b | `python -m util.prune_spelling_variants --apply` | Lexicon Building (S1), hygiene | after editing `resources/spellingVariants.tsv` | Rewrites `LexiqueSynthetic.tsv` in place, dropping stale rows of dropped spellings (dry-run by default). Then step 2 and the full chain. |
+| 2 | `rm -f Dictionary.pickle PhoneticTheory.pickle` | — | **any** lexicon or layout change | The pickle-cache trap: see below. Editing `resources/spellingVariants.tsv` or `resources/reform1990.tsv` counts as a lexicon change. |
 | 3 | `python -m util.build_phonetic_theory` | Dictionary Loading (S3), Keyboard Layout Optimization (S4) statistics, Phonetic Theory Building (S5) | everything downstream | Writes the phonetic theory and both pickles, always refreshing `phonetic_theory.tsv` (pickle hit or miss; the bytes are deterministic). Never touches the disambiguated theory — that is step 7's job, so no transient output is ever written from stale JSONs here. |
 | — | `python -m util.optimize_keyboard` | Keyboard Layout Optimization (S4), solver | only to regenerate `starboard3h.json` | Rare and costly (90 s per syllabic part + model build). Seeds from `starboard3h.json`, writes `starboard3h_optimized.json` by default; `--output starboard3h.json` overwrites the seed deliberately. Then `rm -f Dictionary.pickle PhoneticTheory.pickle` and rerun the build. |
 | 4 | `python -m src.elicitation` (`--ask` / `--resolve`) | Discriminating-Feature Elicitation (Elicitation Phase): Questionnaire Generation, Press-Set Resolution | everything after it | Rebuilds the resolved discriminating feature sets from the stored `elicitation_answers.json`. Asks no questions. `--ask` = Questionnaire Generation + the HTML page; `--resolve` = Press-Set Resolution + the Grouping Phase + the realization report (requires `elicitation_answers.json`, exit 1 without it); no flags = both steps, which is what the orchestrator runs. |
@@ -97,8 +98,10 @@ Four facts that the command list does not show:
 ## Recomputing after a fix
 
 Read this before changing any of `resources/Lexique383.tsv`,
-`resources/LexiqueInfraCorrespondance.tsv`, `resources/LexiqueMixte.tsv` or
-`resources/LexiqueSynthetic.tsv`. The rebuild table above is the general chain; this
+`resources/LexiqueInfraCorrespondance.tsv`, `resources/LexiqueMixte.tsv`,
+`resources/LexiqueSynthetic.tsv`, `resources/spellingVariants.tsv` (then also
+`python -m util.prune_spelling_variants --apply` before the rebuild) or
+`resources/reform1990.tsv`. The rebuild table above is the general chain; this
 section is the fix-specific ordering. The two silent-failure traps are facts 2 and 4 above
 (the pickle cache; the separately-tracked realization report).
 
@@ -159,9 +162,9 @@ The names below are used in every "Input state" and "Result" line.
 |---|---|---|---|
 | **source lexicons** | TSV/XML files | external, patched by fix scripts | `resources/Lexique383.tsv`, `LexiqueInfraCorrespondance.tsv`, `reform1990.tsv`, `lexiconExclusions.tsv`, `verbiste/*.xml` (tracked) |
 | **raw lexicon rows** | `list[lexique.Word]` (a different dataclass from `src.word.Word`, lexique.py:547) | `Lexique.read_corpus` lexique.py:966 | no |
-| **mixed lexicon** | TSV, 12 columns: `ortho phon lemme cgram cgramortho genre nombre infover syll_cv orthosyll_cv freqlivres freqfilms2`; 136,456 rows | `outputMixedLexique` lexique.py:1174 | `resources/LexiqueMixte.tsv` (tracked) |
-| **synthetic lexicon rows** | same TSV plus a `source` column; 42,225 rows | Synthetic Lexicon Building (S2) scripts | `resources/LexiqueSynthetic.tsv` (tracked) |
-| **Word list** | `list[src.word.Word]`, deduplicated by identity (`ortho, phonology, lemme, gramCat, gender, number`); 167,639 Words | `Dictionary.readCorpus` dictionary.py:92 | inside `Dictionary.pickle` (gitignored) |
+| **mixed lexicon** | TSV, 12 columns: `ortho phon lemme cgram cgramortho genre nombre infover syll_cv orthosyll_cv freqlivres freqfilms2`; 136,202 rows | `outputMixedLexique` lexique.py:1174 | `resources/LexiqueMixte.tsv` (tracked) |
+| **synthetic lexicon rows** | same TSV plus a `source` column; 46,022 rows | Synthetic Lexicon Building (S2) scripts | `resources/LexiqueSynthetic.tsv` (tracked) |
+| **Word list** | `list[src.word.Word]`, deduplicated by identity (`ortho, phonology, lemme, gramCat, gender, number`); 168,189 Words | `Dictionary.readCorpus` dictionary.py:92 | inside `Dictionary.pickle` (gitignored) |
 | **syllable statistics** | `SyllableCollection` + `Syllable.*ColByPart` class state | `analyseSyllabification` dictionary.py:169 | `Dictionary.pickle` (objects 1-5) |
 | **layout statistics** | best permutation, pairwise order matrix (`pairwiseBiphonemeOrderScore`) and `syllabicPartAmbiguity`, per syllabic part | `optimizeBiphonemeOrder` grammar.py:644, `analyseAmbiguities` dictionary.py:183 | `Dictionary.pickle` |
 | **keyboard layout** | `Starboard` (26 keys; reserved keys 0, 1, 10, 15) | Keyboard Layout Optimization (S4), last run before 37fdc4e; loaded by `Keyboard.fromJSONFile` keyboard.py:252 | `starboard3h.json` (tracked; rewritten only deliberately — `util.optimize_keyboard --output starboard3h.json`; the solver's default output is `starboard3h_optimized.json`) |
@@ -187,9 +190,11 @@ The names below are used in every "Input state" and "Result" line.
 Lexicon Building (S1) ............................ python lexique.py
 ├─ module load: exclusions, 1990-reform tables, -eler/-eter verbs ... S1.1-S1.6
 ├─ Read and filter Lexique383 — read_corpus ...................... S1.7
+│  └─ spelling-variant lemme reconcile — reconcileLemme ........... S1.7.1  (src/spellingvariants.py)
 │  └─ Attach grapheme-phoneme breakdowns — breakdownSyllables ..... S1.7.3
 ├─ Syllabification stats (and row reorder) ........................ S1.8
 └─ Write the mixed lexicon — outputMixedLexique ................... S1.9  → LexiqueMixte.tsv
+   └─ reform rewrite chain, then spelling-variant ortho reconcile .. S1.9.x  (reconcileOutputOrtho)
 
 Synthetic Lexicon Building (S2) .................. python -m util.build_synthetic_lexicon → LexiqueSynthetic.tsv
 ├─ Verb paradigm completion — completeVerbParadigms ............... S2.1
@@ -265,7 +270,7 @@ LexiqueInfra supplies the grapheme-phoneme alignment. The stage reads
 `Lexique383.tsv` (142,669 rows), drops 145 excluded and 17 `#`-prefixed rows, fixes lemmas,
 attaches a syllable **breakdown** from `LexiqueInfraCorrespondance.tsv` (137,822 rows), then
 drops the 4,852 **breakdown orphans** and 1,199 subjonctif-imparfait-only rows and applies
-the 1990 spelling reform. Output: `resources/LexiqueMixte.tsv`, 136,456 rows, 12 columns.
+the 1990 spelling reform. Output: `resources/LexiqueMixte.tsv`, 136,202 rows, 12 columns.
 Everything runs at module level: `lexique = Lexique()` (:1261),
 `printSyllabificationStats()` (:1262), `outputMixedLexique(...)` (:1263).
 
@@ -401,7 +406,7 @@ Transformation: iterates rows sorted by **original** `ortho` (:1183), runs the s
 below in order, from Drop breakdown orphans (S1.9.1) to absous/dissous → absout/dissout (S1.9.7), then writes 12 columns: `ortho` (rewritten), `phon` (unchanged), `lemme` (normalized),
 `cgram`, `cgramortho`, `genre`, `nombre`, `infover` (stripped), `syll_cv`, `orthosyll_cv`
 (rewritten), `freqlivres`, `freqfilms2`.
-Result: mixed lexicon, 136,456 rows (142,507 − 4,852 − 1,199).
+Result: mixed lexicon, 136,202 rows (142,507 − 4,852 − 1,199 − 254 spelling-variant drops).
 Artifacts: writes `resources/LexiqueMixte.tsv`.
 Notes: `cgramortho` is not recomputed after a rewrite; rewritten rows sit at their old sort
 position (`acuponcture` where `acupuncture` was). Rewriting can duplicate an existing
@@ -503,11 +508,11 @@ its scripts read the phonetic theory or the lexicon TSVs, write a different file
 The four steady-state appenders run in every orchestrated rebuild through `python -m
 util.build_synthetic_lexicon` (always `--apply`, looped to convergence); the one-shot fix
 scripts stay hand-run. Each is a dry run unless given `--apply`. `lexique.py`
-never reads or writes `resources/LexiqueSynthetic.tsv`: 42,225 **synthetic rows** (35,928
-VER, 3,896 NOM, 2,401 ADJ), mixed-lexicon columns plus `source` (always `synthetic`), all
+never reads or writes `resources/LexiqueSynthetic.tsv`: 46,022 **synthetic rows** (39,756
+VER, 3,868 NOM, 2,398 ADJ), mixed-lexicon columns plus `source` (always `synthetic`), all
 frequencies 0.0, no duplicates, no `sub:imp` rows (removed in fd7e242 by an unrecorded edit).
-6,759 rows share an identity with a mixed-lexicon row and only merge their `infover`; 31,252
-become new Words.
+13,970 rows share an identity with an earlier row and only merge their `infover` (readCorpus's
+identity-dedup print); the rest become new Words.
 
 The NOM/ADJ side optionally cross-checks against **Morphalou 3.1** (ATILF/CNRS,
 LGPL-LR), an external download from the
@@ -641,9 +646,13 @@ other readers are generators and validators (`validateLexiconAgainstNomAdjParadi
 ---
 ## Dictionary Loading (S3)
 
-Dictionary Loading (S3) reads the mixed lexicon (136,456 rows) and the synthetic lexicon rows
-(42,225) into the Word list (167,639 Words, by descending film frequency): it drops excluded
-words, merges identical identities, indexes Words by spelling and lemma and registers every
+Dictionary Loading (S3) reads the mixed lexicon (136,202 rows) and the synthetic lexicon rows
+(46,022) into the Word list (168,189 Words, by descending film frequency): it drops excluded
+words, drops spelling-variant rows (`isDroppedOrthoRow`/`isDroppedLemme` — the single choke
+point through which the S2 appenders also read, so stale synthetic rows are invisible and
+dropped forms cannot be regenerated; a dropped spelling that coincides with a conjugated form
+of a kept verb, like `boite`/`boiter`, is exempt unless its lemme carries the set's canonical),
+merges identical identities, indexes Words by spelling and lemma and registers every
 syllable (5,866) in the syllable statistics. It is the first half of `python -m
 util.build_phonetic_theory` (loadOrBuildDictionary), cached in `Dictionary.pickle`; on a cache
 miss the layout statistics (S4.1, S4.2) run between Syllable inventory (S3.3) and Dictionary
@@ -685,7 +694,8 @@ Transformation:
   folded rows had another `syll_cv`, 6,028 another film frequency (item B9).
 - Otherwise builds a `Word` (Word construction (S3.2.1.1)) and indexes it in
   `wordsByLemme[lemme]` (bare lemma) and `wordsByOrtho[ortho]`.
-Result: Word list, 167,639 Words in load order (136,456 + 42,225 − 52 − 10,990);
+Result: Word list, 168,189 Words in load order (136,202 + 46,022 rows, minus 13,970 identity
+merges and the excluded/syllable-less rows);
 `wordsByOrtho` 147,732 spellings, `wordsByLemme` 43,111 lemmas.
 Artifacts: reads `resources/LexiqueMixte.tsv`, `resources/LexiqueSynthetic.tsv`, `resources/top500_film.txt`, `excluded_words.txt`.
 Helpers not expanded: `GramCat[...]` lookup (src/word.py:10).
@@ -935,7 +945,7 @@ Input state: Word list (frequency-descending), syllable statistics, keyboard lay
 Transformation: for each Word, looks up each syllable in `syllableCollection.syllable_names`
 (`KeyError` if missing), turns it into a stroke (Phonetic stroke rule (S5.3.1)) and appends the Word to
 `theory[raw Strokes]`.
-Result: the phonetic theory: 80,725 entries covering 167,639 Words; 42,591 entries with ≥2 Words
+Result: the phonetic theory: 80,725 entries covering 168,189 Words; 42,591 entries with ≥2 Words
 (129,505 Words), 41,640 with ≥2 spellings. Strokes per entry: 1 → 3,111; 2 → 20,701; 3 →
 33,534; 4 → 18,069; 5+ → 5,310. Every entry's list is frequency-descending.
 Notes: legality of the whole stroke is never checked: 529 Words (39 canonical strokes, mostly
@@ -1058,7 +1068,7 @@ reports unresolved oppositions.
 ##### Homophone group building — buildLemmaHomophoneGroups (S6.Elicitation.1)   src/elicitation.py:61
 Called by: Elicitation Phase entry (:548); also the precedence-spec check (:148) and the
 pers_3 rewrite (:169).
-Input state: the phonetic theory, 80,725 raw-Strokes keys, 167,639 Words.
+Input state: the phonetic theory, 80,725 raw-Strokes keys, 168,189 Words.
 Transformation: re-keys the phonetic theory by canonical form (`canonicalizeStrokes` keyboard.py:31),
 splits each bucket by `lemmeGramCat` (`groupWordsByLemme` word.py:414) and keeps sub-groups
 with more than one Word. Different-`lemmeGramCat` homophones are left to Different-Lemma or
@@ -1387,7 +1397,7 @@ Called by: `Dictionary.buildDisambiguatedTheory` only (dictionary.py:384).
 Transformation: for **every** phonetic-theory Word (dict order, deterministic): a Word that needs
 groups gets one feature discriminating stroke with the union of their chosen keys; others
 keep their base strokes. Unassigned groups add nothing, silently.
-Result: final induced strokes, 167,639 Words, 79,449 with a feature discriminating stroke.
+Result: final induced strokes, 168,189 Words, 79,449 with a feature discriminating stroke.
 Handed to Reserved-key composition (S7.4).
 
 #### Alternate entry strokes — buildExtraInducedStrokes (S6.Realization.7)   src/ambiguitychecker.py:1196
@@ -1444,7 +1454,7 @@ Called by: `python -m util.build_disambiguated_theory` (`main`
 util/build_disambiguated_theory.py:49, after checking both
 `keypress_groups.json` and `resolved_press_sets.json` exist, :37-40) and every
 Theory Export (S8) exporter through Disambiguated-theory loading (S8.1).
-Input state: the phonetic theory (80,725 keys / 167,639 Words), keyboard layout, the two JSON paths.
+Input state: the phonetic theory (80,725 keys / 168,189 Words), keyboard layout, the two JSON paths.
 Transformation: (1) loads `markersByKeypress` (:371-373) and the resolved discriminating
 feature sets (:374-375); (2) runs the Realization Phase on its inline path (S7.2) → final
 induced strokes; (3) calls Alternate entry strokes (S7.14) (:389) for the unmarked alternate
@@ -1453,7 +1463,7 @@ alternates}` for every word, with Reform-doublet loading (S7.3) and `phonemeStro
 each Word's base stroke count (turns on the merge) — since the B44 fix (2026-09-24) this marks
 every entry, not just the primary (`composeReservedKeyStrokesForEntries` clusters each entry
 on its own final stroke).
-Result: the disambiguated theory, 167,639 Words in phonetic-theory order; `disambiguated_theory.tsv` has 181,869 rows, so 14,230
+Result: the disambiguated theory, 168,189 Words in phonetic-theory order; `disambiguated_theory.tsv` has 186,298 rows, so 18,109
 alternate entries.
 Artifacts: reads both JSON files and `resources/reform1990.tsv` (path relative to the working directory).
 Notes: never uses `self`, so exporters unpickle the whole `Dictionary` just to call it (refactor candidate).

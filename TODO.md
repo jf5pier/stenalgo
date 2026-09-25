@@ -16,6 +16,28 @@ losing a tie, 0 hiding another spelling). B2, B4, B11, B14, B27, B43 and B44 hav
 
 ### Tier 1 — affects the Plover output today
 
+- **B47** Same-lemma disambiguation leaves a residual BARE entry for readings that already have a
+  feature stroke — e.g. `affadir_VER`: the disambiguated theory (disambiguated_theory.tsv) holds
+  THREE `affadis` rows on the same base stroke `a/kpa/pvi`: `a/kpa/pvi` + extraStrokes `17`
+  (participe passé m. pl., realized as the `-s` suffix), `a/kpa/pvi` + extraStrokes `19,20`
+  (realized as the `-dt` suffix), and `a/kpa/pvi` with EMPTY extraStrokes — a residual unmarked
+  entry for the indicatif passé 2e sg. reading, shadowed by `affadi` (which owns the bare chord:
+  `a/kpa/pvi` → `affadi` in plover_stenalgo_dictionary.json; `affadis`'s real entries are
+  `a/kpa/pvi/-dt` and `a/kpa/pvi/-s`). Expected behavior: once the Realization Phase assigns a
+  reading its feature-discriminating stroke, that reading should have NO other entry — the bare
+  placement belongs to the group's default reading only. The stray row is invisible in Plover
+  (the exporter's entry resolution drops it) but surfaces in the trainer Definitions page
+  (export_definitions iterates the phonetic-theory homophone group), where `affadis` shows as
+  "indicatif passé, 2e sg." on BOTH the bare chord and the `-dt` chord. This is the same
+  population as the 104 sameLemmaGramCat residual collisions (98 "unresolved twin" groups;
+  `PYTHONPATH=. env/bin/python scratch/b44_residuals.py`, full list in
+  `scratch/sameLemmaGramCat-104-list.txt`): mostly `-ir` participle-vs-passé-simple-2s pairs,
+  5 `-u` participles (`apparu/apparus`…), 6 `-eler/-eter` groups where a spelling is fully
+  unreachable in Plover. GOAL: investigate what causes the residual entry to survive (why the
+  bare placement is not removed when the feature stroke is assigned — Realization Phase
+  composition in `Dictionary.buildDisambiguatedTheory` / `composeReservedKeyStrokesForEntries`,
+  src/ambiguitychecker.py), then decide whether the fix is dropping the bare row for marked
+  readings or an accepted-documented default.
 - **B44** RESOLVED 2026-09-24 (`composeReservedKeyStrokesForEntries`, src/ambiguitychecker.py:424:
   Different-Lemma or Grammatical-Category Disambiguation (S7) now clusters and marks every entry,
   primary and alternate, on its own final stroke; `panse` → `p*@s`, `p*@s/-k`, `p*@s/-R`). Plover:
@@ -287,17 +309,18 @@ losing a tie, 0 hiding another spelling). B2, B4, B11, B14, B27, B43 and B44 hav
   in Definitions mode.
 - **Trainer: hyphenated compounds are drilled as two chords** (`celle-ci`, `là-haut`) in sentence
   mode, while Plover would output them as two words.
-- **Remove spelling variants from the lexicon, keeping only the most frequent one** — every set of
-  spellings of the same word (1990-reform pairs from `resources/reform1990.tsv`, plus the
-  non-reform variants seen in B44: `trimbaler`/`trimballer`, `dessoûler`/`dessouler`/`dessaouler`/
-  `saouler`/`soûler`, `toquade`/`tocade`, `toquard`/`tocard`, `dégoter`/`dégotter`,
-  `zieuter`/`zyeuter`, `chlinguer`/`schlinguer`, `évènementiel`/`événementiel`,
-  `béluga`/`beluga`, …) keeps one spelling: the more frequent in the Google Books Ngram French
-  corpus (not Lexique's own frequencies, which are near zero for most rare variants). Needs: a
-  source list of variant sets beyond reform1990.tsv, an Ngram frequency lookup (recent years,
-  summed over inflected forms), a removal step in Lexicon Building (S1) or S2, then a full rebuild.
-  Afterwards the reform-doublet exemption (R2, `doubletPairs`) and the variant half of B44 should
-  have nothing left to handle.
+- **DONE (2026-09-25): Remove spelling variants from the lexicon** — `resources/spellingVariants.tsv`
+  (422 sets: 374 active / 48 veto, human-reviewed against Google Books Ngram 2010–2019 counts in
+  `resources/LexiqueGoogleNgram.tsv`) is enforced by `src/spellingvariants.py` at Lexicon Building
+  (S1) and the `dictionary.py` load choke point; `util/prune_spelling_variants.py` keeps
+  `LexiqueSynthetic.tsv` clean. The canonical may sit on either side of a reform pair (the
+  reconcile-back rule), and a dropped spelling that coincides with a conjugated form of a kept verb
+  (`boite`/`boiter`, `fritte`/`fritter`) is exempt unless its lemme carries the set's canonical
+  (`absout`/`absoudre` drops). Rebuild verified: reform doublets (R2) 28 → 0, cross-lemma 0 → 0.
+  Follow-ups: (a) R2/doublet machinery (`doubletPairs`, the reform-doublet exemption in S7) now has
+  nothing to handle and can be removed; (b) neologism patch from a future
+  `LexiqueGoogleNgramAdditions.tsv` (`python -m util.ngram_data extract-additions`, calibrate the
+  threshold on the distribution first).
 - **Audit the 2% of attested finite verb forms the B2 generator does not reproduce** —
   `PYTHONPATH=. env/bin/python scratch/b2_backtest.py` regenerates every `LexiqueMixte.tsv` finite
   VER form the generator can rebuild from its infinitive (13,461 at the B2 fix) and compares

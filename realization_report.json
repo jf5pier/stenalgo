@@ -5,7 +5,7 @@
     "conditionnel",
     "infinitif"
    ],
-   "affectedWords": 3921,
+   "affectedWords": 3913,
    "chosenKeys": [
     23
    ],
@@ -77,7 +77,7 @@
    "markers": [
     "f"
    ],
-   "affectedWords": 15320,
+   "affectedWords": 15288,
    "chosenKeys": [
     16
    ],
@@ -188,7 +188,7 @@
     "passé",
     "pers_3"
    ],
-   "affectedWords": 11921,
+   "affectedWords": 11907,
    "chosenKeys": [
     20
    ],
@@ -285,7 +285,7 @@
     "imparfait",
     "subjonctif"
    ],
-   "affectedWords": 5839,
+   "affectedWords": 5800,
    "chosenKeys": [
     21
    ],
@@ -364,7 +364,7 @@
     "impératif",
     "pers_1"
    ],
-   "affectedWords": 7398,
+   "affectedWords": 7393,
    "chosenKeys": [
     18
    ],
@@ -449,7 +449,7 @@
     "nbr_p",
     "p"
    ],
-   "affectedWords": 50299,
+   "affectedWords": 50183,
    "chosenKeys": [
     17
    ],
@@ -564,7 +564,7 @@
    "markers": [
     "pers_2"
    ],
-   "affectedWords": 7829,
+   "affectedWords": 7803,
    "chosenKeys": [
     19
    ],
@@ -814,10 +814,6 @@
     "marcs"
    ],
    [
-    "roys",
-    "yas"
-   ],
-   [
     "penses",
     "panses"
    ],
@@ -910,24 +906,12 @@
     "perçants"
    ],
    [
-    "papis",
-    "papys"
-   ],
-   [
-    "dégottes",
-    "dégotes"
-   ],
-   [
     "capots",
     "capos"
    ],
    [
     "chahs",
     "shahs"
-   ],
-   [
-    "saouler",
-    "soûler"
    ],
    [
     "rentrés",
@@ -1042,20 +1026,12 @@
     "choppes"
    ],
    [
-    "yodle",
-    "iodle"
-   ],
-   [
     "maharadjahs",
     "maharajahs"
    ],
    [
     "flambés",
     "flambées"
-   ],
-   [
-    "pannés",
-    "panés"
    ],
    [
     "épissés",
@@ -1124,10 +1100,6 @@
    [
     "cadis",
     "caddies"
-   ],
-   [
-    "saducéens",
-    "sadducéens"
    ],
    [
     "brizes",
@@ -1210,10 +1182,6 @@
     "pogroms"
    ],
    [
-    "schlinguent",
-    "chlinguent"
-   ],
-   [
     "décries",
     "décris"
    ],
@@ -1254,10 +1222,6 @@
     "faites"
    ],
    [
-    "suifés",
-    "suiffés"
-   ],
-   [
     "fumées",
     "fumés"
    ],
@@ -1294,10 +1258,6 @@
     "problocs"
    ],
    [
-    "connasses",
-    "conasses"
-   ],
-   [
     "cannes",
     "canes"
    ],
@@ -1316,10 +1276,6 @@
    [
     "battus",
     "battues"
-   ],
-   [
-    "grills",
-    "grils"
    ],
    [
     "allés",
@@ -1356,10 +1312,6 @@
    [
     "perchés",
     "perchées"
-   ],
-   [
-    "barbottes",
-    "barbotes"
    ],
    [
     "choeurs",
@@ -1430,10 +1382,6 @@
     "attelles"
    ],
    [
-    "brinqueballées",
-    "brinquebalées"
-   ],
-   [
     "plaints",
     "pleins"
    ],
@@ -1498,10 +1446,6 @@
     "sacqués"
    ],
    [
-    "tannins",
-    "tanins"
-   ],
-   [
     "paraphes",
     "parafes"
    ],
@@ -1552,10 +1496,6 @@
    [
     "chorals",
     "corrals"
-   ],
-   [
-    "évènementiels",
-    "événementiels"
    ],
    [
     "matures",
@@ -1614,10 +1554,6 @@
     "corrompus"
    ],
    [
-    "clapes",
-    "clappes"
-   ],
-   [
     "vins",
     "vains"
    ],
@@ -1662,10 +1598,6 @@
     "sots"
    ],
    [
-    "zieutes",
-    "zyeutes"
-   ],
-   [
     "mamelouks",
     "mameluks"
    ],
@@ -1686,10 +1618,6 @@
     "horrifiée"
    ],
    [
-    "nonnettes",
-    "nonettes"
-   ],
-   [
     "poêlées",
     "poilées"
    ],
@@ -1704,10 +1632,6 @@
    [
     "crues",
     "crus"
-   ],
-   [
-    "soûles",
-    "saoules"
    ],
    [
     "battes",
@@ -1794,10 +1718,6 @@
     "évaporées"
    ],
    [
-    "zyeute",
-    "zieute"
-   ],
-   [
     "maris",
     "marris"
    ],
@@ -1828,10 +1748,6 @@
    [
     "crachée",
     "crashée"
-   ],
-   [
-    "dessaoulées",
-    "dessoulées"
    ],
    [
     "soutras",
@@ -1974,10 +1890,6 @@
     "rans"
    ],
    [
-    "oies",
-    "oyes"
-   ],
-   [
     "héros",
     "hérauts"
    ],
@@ -1998,24 +1910,12 @@
     "bégaient"
    ],
    [
-    "resurgie",
-    "ressurgie"
-   ],
-   [
-    "dessaoulées",
-    "dessoûlées"
-   ],
-   [
     "sensées",
     "censées"
    ],
    [
     "contrés",
     "contrées"
-   ],
-   [
-    "suifée",
-    "suiffée"
    ],
    [
     "lisses",
@@ -2118,10 +2018,6 @@
     "descellées"
    ],
    [
-    "chouyas",
-    "chouias"
-   ],
-   [
     "nazes",
     "nases"
    ],
@@ -2188,10 +2084,6 @@
    [
     "dragues",
     "drags"
-   ],
-   [
-    "ressurgissaient",
-    "resurgissaient"
    ],
    [
     "descellée",
@@ -2274,16 +2166,8 @@
     "cylindrées"
    ],
    [
-    "pannent",
-    "panent"
-   ],
-   [
     "flans",
     "flancs"
-   ],
-   [
-    "soues",
-    "saouls"
    ],
    [
     "chênes",
@@ -2308,10 +2192,6 @@
    [
     "desselles",
     "descelles"
-   ],
-   [
-    "soûlées",
-    "saoulées"
    ],
    [
     "palliés",
@@ -2406,16 +2286,8 @@
     "tachée"
    ],
    [
-    "tocards",
-    "toquards"
-   ],
-   [
     "ceints",
     "seins"
-   ],
-   [
-    "équarisseurs",
-    "équarrisseurs"
    ],
    [
     "prévenus",
@@ -2490,10 +2362,6 @@
     "trics"
    ],
    [
-    "trimballaient",
-    "trimbalaient"
-   ],
-   [
     "pales",
     "pals"
    ],
@@ -2534,10 +2402,6 @@
     "models"
    ],
    [
-    "nones",
-    "nonnes"
-   ],
-   [
     "boucs",
     "books"
    ],
@@ -2556,14 +2420,6 @@
    [
     "daïquiris",
     "daiquiris"
-   ],
-   [
-    "trimbalais",
-    "trimballais"
-   ],
-   [
-    "trimbalais",
-    "trimballais"
    ],
    [
     "ramés",
@@ -2600,10 +2456,6 @@
    [
     "toniques",
     "tonics"
-   ],
-   [
-    "gnoles",
-    "gnôles"
    ],
    [
     "chauds",
@@ -2662,10 +2514,6 @@
     "horrifiée"
    ],
    [
-    "canettes",
-    "cannettes"
-   ],
-   [
     "dorées",
     "dorés"
    ],
@@ -2682,10 +2530,6 @@
     "gorgées"
    ],
    [
-    "schnoufs",
-    "chnoufs"
-   ],
-   [
     "roques",
     "rocks"
    ],
@@ -2696,10 +2540,6 @@
    [
     "pâtées",
     "pâtés"
-   ],
-   [
-    "dessouler",
-    "dessaouler"
    ],
    [
     "cadis",
@@ -2728,10 +2568,6 @@
    [
     "contée",
     "comptée"
-   ],
-   [
-    "caris",
-    "carries"
    ],
    [
     "encrent",
@@ -2850,10 +2686,6 @@
     "ouzos"
    ],
    [
-    "trimbalez",
-    "trimballez"
-   ],
-   [
     "orangers",
     "orangés"
    ],
@@ -2926,14 +2758,6 @@
     "maques"
    ],
    [
-    "pifes",
-    "piffes"
-   ],
-   [
-    "brinquebalée",
-    "brinqueballée"
-   ],
-   [
     "luttée",
     "lutée"
    ],
@@ -2944,14 +2768,6 @@
    [
     "remontés",
     "remontées"
-   ],
-   [
-    "parlottes",
-    "parlotes"
-   ],
-   [
-    "maronne",
-    "marronne"
    ],
    [
     "gourds",
@@ -3006,18 +2822,6 @@
     "trimmers"
    ],
    [
-    "loupiotes",
-    "loupiottes"
-   ],
-   [
-    "soûlez",
-    "saoulez"
-   ],
-   [
-    "soûlez",
-    "saoulez"
-   ],
-   [
     "serfs",
     "serres"
    ],
@@ -3044,10 +2848,6 @@
    [
     "épicer",
     "épisser"
-   ],
-   [
-    "resurgirons",
-    "ressurgirons"
    ],
    [
     "bifs",
@@ -3102,20 +2902,12 @@
     "fondues"
    ],
    [
-    "trimbalée",
-    "trimballée"
-   ],
-   [
     "hululent",
     "ululent"
    ],
    [
     "allés",
     "hâlés"
-   ],
-   [
-    "frippes",
-    "fripes"
    ],
    [
     "murs",
@@ -3154,16 +2946,8 @@
     "contai"
    ],
    [
-    "quarres",
-    "cares"
-   ],
-   [
     "proses",
     "prozes"
-   ],
-   [
-    "maronnent",
-    "marronnent"
    ],
    [
     "heurts",
@@ -3214,18 +2998,6 @@
     "pêchés"
    ],
    [
-    "trimballes",
-    "trimbales"
-   ],
-   [
-    "trimballes",
-    "trimbales"
-   ],
-   [
-    "resurgit",
-    "ressurgit"
-   ],
-   [
     "plombées",
     "plombés"
    ],
@@ -3252,10 +3024,6 @@
    [
     "tics",
     "tiques"
-   ],
-   [
-    "tocards",
-    "toquards"
    ],
    [
     "vantés",
@@ -3362,14 +3130,6 @@
     "égrènes"
    ],
    [
-    "cranes",
-    "crânes"
-   ],
-   [
-    "connards",
-    "conards"
-   ],
-   [
     "crins",
     "craints"
    ],
@@ -3380,14 +3140,6 @@
    [
     "tantouses",
     "tantouzes"
-   ],
-   [
-    "yodles",
-    "iodles"
-   ],
-   [
-    "zyeutes",
-    "zieutes"
    ],
    [
     "jouasses",
@@ -3404,10 +3156,6 @@
    [
     "sitars",
     "cithares"
-   ],
-   [
-    "yodlent",
-    "iodlent"
    ],
    [
     "tranchées",
@@ -3462,14 +3210,6 @@
     "mâles"
    ],
    [
-    "maronnées",
-    "marronnées"
-   ],
-   [
-    "aryens",
-    "ariens"
-   ],
-   [
     "restoroutes",
     "restauroutes"
    ],
@@ -3484,10 +3224,6 @@
    [
     "rambours",
     "rembours"
-   ],
-   [
-    "resurgissent",
-    "ressurgissent"
    ],
    [
     "heurts",
@@ -3520,10 +3256,6 @@
    [
     "développées",
     "développés"
-   ],
-   [
-    "nirvânas",
-    "nirvanas"
    ],
    [
     "saines",
@@ -3582,7 +3314,7 @@
     "socs"
    ],
    [
-    "roys",
+    "yas",
     "rois"
    ],
    [
@@ -3638,10 +3370,6 @@
     "enjambés"
    ],
    [
-    "ressurgisses",
-    "resurgisses"
-   ],
-   [
     "coupées",
     "coupés"
    ],
@@ -3680,10 +3408,6 @@
    [
     "allaites",
     "halètes"
-   ],
-   [
-    "maronnés",
-    "marronnés"
    ],
    [
     "virés",
@@ -3742,14 +3466,6 @@
     "houaris"
    ],
    [
-    "suifées",
-    "suiffées"
-   ],
-   [
-    "dégotée",
-    "dégottée"
-   ],
-   [
     "noyés",
     "noyers"
    ],
@@ -3772,10 +3488,6 @@
    [
     "plants",
     "plans"
-   ],
-   [
-    "cranes",
-    "crânes"
    ],
    [
     "aires",
@@ -3830,14 +3542,6 @@
     "bauds"
    ],
    [
-    "resurgis",
-    "ressurgis"
-   ],
-   [
-    "resurgis",
-    "ressurgis"
-   ],
-   [
     "trucs",
     "trucks"
    ],
@@ -3868,10 +3572,6 @@
    [
     "chasses",
     "châsses"
-   ],
-   [
-    "marronner",
-    "maronner"
    ],
    [
     "hôtels",
@@ -3922,10 +3622,6 @@
     "épices"
    ],
    [
-    "aryens",
-    "ariens"
-   ],
-   [
     "relevés",
     "relevées"
    ],
@@ -3962,20 +3658,8 @@
     "bouillis"
    ],
    [
-    "cheiks",
-    "scheiks"
-   ],
-   [
     "kiosques",
     "kiosks"
-   ],
-   [
-    "schlingues",
-    "chlingues"
-   ],
-   [
-    "schlingues",
-    "chlingues"
    ],
    [
     "rangées",
@@ -4014,10 +3698,6 @@
     "rués"
    ],
    [
-    "maronnée",
-    "marronnée"
-   ],
-   [
     "poussés",
     "poussées"
    ],
@@ -4038,10 +3718,6 @@
     "exaucées"
    ],
    [
-    "espionites",
-    "espionnites"
-   ],
-   [
     "vantées",
     "ventées"
    ],
@@ -4052,10 +3728,6 @@
    [
     "bolcheviks",
     "bolchéviques"
-   ],
-   [
-    "picolos",
-    "piccolos"
    ],
    [
     "forêts",
@@ -4074,24 +3746,12 @@
     "lacerez"
    ],
    [
-    "resurgissais",
-    "ressurgissais"
-   ],
-   [
-    "resurgissais",
-    "ressurgissais"
-   ],
-   [
     "dégelées",
     "dégelés"
    ],
    [
     "poêles",
     "poils"
-   ],
-   [
-    "ressurgirent",
-    "resurgirent"
    ],
    [
     "chaumée",
@@ -4114,10 +3774,6 @@
     "coordonnés"
    ],
    [
-    "bals",
-    "bales"
-   ],
-   [
     "shamans",
     "chamans"
    ],
@@ -4138,10 +3794,6 @@
     "reinettes"
    ],
    [
-    "resurgies",
-    "ressurgies"
-   ],
-   [
     "rennes",
     "rênes"
    ],
@@ -4156,10 +3808,6 @@
    [
     "barjos",
     "barjots"
-   ],
-   [
-    "nones",
-    "nonnes"
    ],
    [
     "mâtes",
@@ -4194,10 +3842,6 @@
     "brassées"
    ],
    [
-    "dessaoules",
-    "dessoûles"
-   ],
-   [
     "kondos",
     "condos"
    ],
@@ -4212,14 +3856,6 @@
    [
     "mater",
     "mâter"
-   ],
-   [
-    "soûlée",
-    "saoulée"
-   ],
-   [
-    "mafieuses",
-    "maffieuses"
    ],
    [
     "schillings",
@@ -4268,10 +3904,6 @@
    [
     "thunes",
     "tunes"
-   ],
-   [
-    "toquades",
-    "tocades"
    ],
    [
     "diagnostics",
@@ -4370,24 +4002,12 @@
     "canner"
    ],
    [
-    "trimballer",
-    "trimbaler"
-   ],
-   [
     "gratinés",
     "gratinées"
    ],
    [
     "couvés",
     "couvées"
-   ],
-   [
-    "saoulent",
-    "soûlent"
-   ],
-   [
-    "saoulent",
-    "soûlent"
    ],
    [
     "farauds",
@@ -4420,10 +4040,6 @@
    [
     "juchées",
     "juchés"
-   ],
-   [
-    "shrapnels",
-    "shrapnells"
    ],
    [
     "fourchés",
@@ -4514,10 +4130,6 @@
     "toques"
    ],
    [
-    "trimbalés",
-    "trimballés"
-   ],
-   [
     "tales",
     "talles"
    ],
@@ -4532,10 +4144,6 @@
    [
     "costards",
     "costars"
-   ],
-   [
-    "bonniches",
-    "boniches"
    ],
    [
     "fois",
@@ -4556,14 +4164,6 @@
    [
     "mères",
     "mers"
-   ],
-   [
-    "dessaoulent",
-    "dessoulent"
-   ],
-   [
-    "dessaoulent",
-    "dessoulent"
    ],
    [
     "ouates",
@@ -4706,16 +4306,8 @@
     "cartés"
    ],
    [
-    "busards",
-    "buttoirs"
-   ],
-   [
     "métempsychoses",
     "métempsycoses"
-   ],
-   [
-    "ages",
-    "âges"
    ],
    [
     "irakiens",
@@ -4740,10 +4332,6 @@
    [
     "rôdées",
     "rodées"
-   ],
-   [
-    "dessoûlée",
-    "dessaoulée"
    ],
    [
     "tarots",
@@ -4794,10 +4382,6 @@
     "faillies"
    ],
    [
-    "événementielles",
-    "évènementielles"
-   ],
-   [
     "muphtis",
     "muftis"
    ],
@@ -4834,10 +4418,6 @@
     "haches"
    ],
    [
-    "piffe",
-    "pife"
-   ],
-   [
     "camélias",
     "camellias"
    ],
@@ -4846,20 +4426,12 @@
     "butoirs"
    ],
    [
-    "trimbalées",
-    "trimballées"
-   ],
-   [
     "plongées",
     "plongés"
    ],
    [
     "randonnés",
     "randonnées"
-   ],
-   [
-    "jerricans",
-    "jerrycans"
    ],
    [
     "différends",
@@ -4914,14 +4486,6 @@
     "luts"
    ],
    [
-    "trimballent",
-    "trimbalent"
-   ],
-   [
-    "trimballent",
-    "trimbalent"
-   ],
-   [
     "thermites",
     "termites"
    ],
@@ -4970,10 +4534,6 @@
     "seccos"
    ],
    [
-    "zyeutent",
-    "zieutent"
-   ],
-   [
     "tsiganes",
     "tziganes"
    ],
@@ -4996,10 +4556,6 @@
    [
     "cotes",
     "cottes"
-   ],
-   [
-    "dégotées",
-    "dégottées"
    ],
    [
     "avenues",
@@ -5030,10 +4586,6 @@
     "glasses"
    ],
    [
-    "bélugas",
-    "belugas"
-   ],
-   [
     "sacquée",
     "saquée"
    ],
@@ -5046,24 +4598,12 @@
     "gniards"
    ],
    [
-    "pannées",
-    "panées"
-   ],
-   [
     "amplis",
     "emplis"
    ],
    [
-    "bonardes",
-    "bonnardes"
-   ],
-   [
     "germaines",
     "germens"
-   ],
-   [
-    "schnocks",
-    "schnoques"
    ],
    [
     "égrainent",
@@ -5174,10 +4714,6 @@
     "tantes"
    ],
    [
-    "mafias",
-    "maffias"
-   ],
-   [
     "desseller",
     "desceller"
    ],
@@ -5250,10 +4786,6 @@
     "coirs"
    ],
    [
-    "grizzlys",
-    "grizzlis"
-   ],
-   [
     "pâlots",
     "palots"
    ],
@@ -5318,14 +4850,6 @@
     "bours"
    ],
    [
-    "resurgirais",
-    "ressurgirais"
-   ],
-   [
-    "resurgirais",
-    "ressurgirais"
-   ],
-   [
     "lobs",
     "lobes"
    ],
@@ -5340,10 +4864,6 @@
    [
     "asséner",
     "assener"
-   ],
-   [
-    "dals",
-    "dales"
    ],
    [
     "homosexuels",
@@ -5408,10 +4928,6 @@
    [
     "paumée",
     "pommée"
-   ],
-   [
-    "toquardes",
-    "tocardes"
    ],
    [
     "rues",
@@ -5484,14 +5000,6 @@
    [
     "comtés",
     "contés"
-   ],
-   [
-    "pouffiasses",
-    "poufiasses"
-   ],
-   [
-    "paner",
-    "panner"
    ],
    [
     "remplies",
@@ -5568,10 +5076,6 @@
    [
     "jamaïquains",
     "jamaïcains"
-   ],
-   [
-    "lapper",
-    "laper"
    ],
    [
     "rais",
@@ -5654,10 +5158,6 @@
     "scellez"
    ],
    [
-    "molasses",
-    "mollasses"
-   ],
-   [
     "rencardés",
     "rancardés"
    ],
@@ -5730,16 +5230,8 @@
     "tripotés"
    ],
    [
-    "kipas",
-    "kippas"
-   ],
-   [
     "chants",
     "champs"
-   ],
-   [
-    "pifent",
-    "piffent"
    ],
    [
     "grimpées",
@@ -5756,10 +5248,6 @@
    [
     "miros",
     "mirauds"
-   ],
-   [
-    "dessoûlée",
-    "dessoulée"
    ],
    [
     "pansées",
@@ -5854,10 +5342,6 @@
     "caouas"
    ],
    [
-    "dégotés",
-    "dégottés"
-   ],
-   [
     "plaints",
     "plains"
    ],
@@ -5894,10 +5378,6 @@
     "dégouttent"
    ],
    [
-    "dessaoules",
-    "dessoules"
-   ],
-   [
     "fricassées",
     "fricassés"
    ],
@@ -5918,24 +5398,8 @@
     "raids"
    ],
    [
-    "maronnes",
-    "marronnes"
-   ],
-   [
-    "ressurgisse",
-    "resurgisse"
-   ],
-   [
     "tons",
     "thons"
-   ],
-   [
-    "soûlés",
-    "saoulés"
-   ],
-   [
-    "ressurgiraient",
-    "resurgiraient"
    ],
    [
     "panos",
@@ -5944,10 +5408,6 @@
    [
     "comptaient",
     "contaient"
-   ],
-   [
-    "dessoulés",
-    "dessoûlés"
    ],
    [
     "dégoûtants",
@@ -6010,10 +5470,6 @@
     "bâiller"
    ],
    [
-    "clapent",
-    "clappent"
-   ],
-   [
     "ombrés",
     "ombrées"
    ],
@@ -6046,10 +5502,6 @@
     "matés"
    ],
    [
-    "chahs",
-    "schahs"
-   ],
-   [
     "pattes",
     "pâtes"
    ],
@@ -6080,18 +5532,6 @@
    [
     "matins",
     "mâtins"
-   ],
-   [
-    "dessoulés",
-    "dessaoulés"
-   ],
-   [
-    "frapadingues",
-    "frappadingues"
-   ],
-   [
-    "ressurgiront",
-    "resurgiront"
    ],
    [
     "sales",
@@ -6134,10 +5574,6 @@
     "exauces"
    ],
    [
-    "resurgiras",
-    "ressurgiras"
-   ],
-   [
     "biques",
     "bics"
    ],
@@ -6164,10 +5600,6 @@
    [
     "carriers",
     "cariés"
-   ],
-   [
-    "brinqueballés",
-    "brinquebalés"
    ],
    [
     "golfes",
@@ -6204,10 +5636,6 @@
    [
     "quarres",
     "carres"
-   ],
-   [
-    "bonnards",
-    "bonards"
    ],
    [
     "fanes",
@@ -6280,10 +5708,6 @@
    [
     "pais",
     "paies"
-   ],
-   [
-    "pannes",
-    "panes"
    ],
    [
     "ondées",
