@@ -378,6 +378,16 @@ def assignStarHashPhysicalStrokes(
     }
 
 
+def _isStarHashCluster(words: list[Word]) -> bool:
+    """Whether words sharing one final stroke form a star/hash mark case (see
+    groupHomophonesByReservedStroke)."""
+    return (
+        len(words) >= 2
+        and len({w.lemmeGramCat for w in words}) >= 2
+        and len({w.ortho for w in words}) >= 2
+    )
+
+
 def groupHomophonesByReservedStroke(finalInduced: dict[Word, Strokes]) -> dict[Strokes, list[Word]]:
     """
     Groups words by their shared final stroke after Discriminating-Feature Stroke
@@ -397,56 +407,119 @@ def groupHomophonesByReservedStroke(finalInduced: dict[Word, Strokes]) -> dict[S
     byStroke: dict[Strokes, list[Word]] = defaultdict(list)
     for word, stroke in finalInduced.items():
         byStroke[canonicalizeStrokes(stroke)].append(word)
-
-    groups: dict[Strokes, list[Word]] = {}
-    for stroke, words in byStroke.items():
-        if len(words) < 2:
-            continue
-        if len({w.lemmeGramCat for w in words}) < 2:
-            continue
-        if len({w.ortho for w in words}) < 2:
-            continue
-        groups[stroke] = words
-    return groups
+    return {stroke: words for stroke, words in byStroke.items() if _isStarHashCluster(words)}
 
 
 def composeReservedKeyStrokes(
     finalInduced: dict[Word, Strokes], doubletPairs: frozenset[frozenset[str]] = frozenset(),
     phonemeStrokeCounts: dict[Word, int] | None = None,
 ) -> dict[Word, Strokes]:
+    """composeReservedKeyStrokesForEntries for words with one entry each (their primary
+    stroke only)."""
+    composed = composeReservedKeyStrokesForEntries(
+        {word: [strokes] for word, strokes in finalInduced.items()}, doubletPairs, phonemeStrokeCounts)
+    return {word: entries[0] for word, entries in composed.items()}
+
+
+def composeReservedKeyStrokesForEntries(
+    entriesByWord: dict[Word, list[Strokes]], doubletPairs: frozenset[frozenset[str]] = frozenset(),
+    phonemeStrokeCounts: dict[Word, int] | None = None,
+) -> dict[Word, list[Strokes]]:
     """
-    Final realized Strokes for every word touched by Different-Lemma or
-    Grammatical-Category Disambiguation (S7): the `finalInduced` stroke of
-    Discriminating-Feature Stroke Realization (Realization Phase) plus the star/hash mark.
-    Given `phonemeStrokeCounts` (each word's phonetic-theory stroke count), the mark's FIRST symbol
-    is pressed together with the word's last phoneme stroke -- "a*", not "a/*" -- and only an
-    escalated code's further symbols become extra trailing strokes; without it, every symbol
-    is its own trailing stroke (the original, all-appended form).
+    Final realized Strokes for every entry touched by Different-Lemma or
+    Grammatical-Category Disambiguation (S7): each entry of `entriesByWord` (a word's
+    primary stroke of Discriminating-Feature Stroke Realization (Realization Phase),
+    `buildFinalInducedStrokes`, then its alternate readings' strokes,
+    `buildExtraInducedStrokes`) plus its star/hash mark. Every entry is clustered on its
+    own final stroke, so an alternate reading gets the mark its OWN cluster needs:
+    "panse"'s alternate `p@s/-k` shares a cluster with "pense"'s alternate, not with
+    either word's primary stroke (B44). Entries keep their positions, which consumers
+    line up with the press-set alternates (util/export_practice_words.py); two entries of
+    one word on the same stroke (two readings realized alike) get the same mark. Given `phonemeStrokeCounts` (each word's phonetic-theory
+    stroke count), the mark's FIRST symbol is pressed together with the word's last
+    phoneme stroke -- "a*", not "a/*" -- and only an escalated code's further symbols
+    become extra trailing strokes; without it, every symbol is its own trailing stroke
+    (the original, all-appended form).
 
     Either way this can never re-introduce a collision: the Realization Phase only picks
     coda-phoneme keys, structurally disjoint from the 2 dedicated reserved keys
     (`STAR_KEY`/`HASH_KEY` are excluded from `Keyboard.allowedKeys`), so stripping the
     reserved keys back out of a composed Strokes (and dropping its reserved-only trailing
-    strokes -- the feature discriminating strokes are never reserved-only) recovers
-    `finalInduced` exactly. Two different clusters' `finalInduced` already differ, so
-    their composed forms do too; within one cluster, the marking codes differ. Words with
-    no star/hash mark needed (the canonical member of their group, a spelling-doublet of it, or
-    not part of any group at all) keep their `finalInduced` stroke unchanged. Pass
-    `doubletPairs` (loadReform1990DoubletPairs) to also apply the reform-doublet exemption (R2)'s spelling-doublet
-    exemption.
+    strokes -- the feature discriminating strokes are never reserved-only) recovers the
+    entry's unmarked stroke exactly. Two different clusters' unmarked strokes already
+    differ, so their composed forms do too; within one cluster, the marking codes
+    differ. Entries with no star/hash mark needed (the canonical member of their
+    cluster, a spelling-doublet of it, or not part of any cluster at all) keep their
+    unmarked stroke. Pass `doubletPairs` (loadReform1990DoubletPairs) to also apply the
+    reform-doublet exemption (R2).
     """
-    composed = dict(finalInduced)
-    for stroke, words in groupHomophonesByReservedStroke(finalInduced).items():
-        for word, extra in assignStarHashPhysicalStrokes(words, doubletPairs).items():
+    composed = {word: list(entries) for word, entries in entriesByWord.items()}
+    byStroke: dict[Strokes, list[tuple[Word, int]]] = defaultdict(list)
+    for word, entries in entriesByWord.items():
+        for index, strokes in enumerate(entries):
+            byStroke[canonicalizeStrokes(strokes)].append((word, index))
+
+    for members in byStroke.values():
+        words = list(dict.fromkeys(word for word, _ in members))
+        if not _isStarHashCluster(words):
+            continue
+        extraByWord = assignStarHashPhysicalStrokes(words, doubletPairs)
+        for word, index in members:
+            extra = extraByWord[word]
             if not extra:
                 continue
-            strokes = finalInduced[word]
+            strokes = composed[word][index]
             if phonemeStrokeCounts is None:
-                composed[word] = strokes + extra
+                composed[word][index] = strokes + extra
             else:
                 last = phonemeStrokeCounts[word] - 1
-                composed[word] = strokes[:last] + (strokes[last] + extra[0],) + strokes[last + 1:] + extra[1:]
+                composed[word][index] = strokes[:last] + (strokes[last] + extra[0],) + strokes[last + 1:] + extra[1:]
     return composed
+
+
+@dataclass
+class FinalCollisionReport:
+    """Final strokes carrying more than one spelling in the disambiguated theory (see
+    findFinalCollisions), one list of words per shared canonical stroke, by cause."""
+    crossLemma: dict[Strokes, list[Word]] = field(default_factory=dict)
+    sameLemmeGramCat: dict[Strokes, list[Word]] = field(default_factory=dict)
+    reformDoublet: dict[Strokes, list[Word]] = field(default_factory=dict)
+
+
+def findFinalCollisions(
+    disambiguatedTheory: dict[Word, list[Strokes]], doubletPairs: frozenset[frozenset[str]] = frozenset(),
+) -> FinalCollisionReport:
+    """
+    Every final stroke (any entry, primary or alternate) that two DIFFERENT spellings
+    share -- a collision (docs/GLOSSARY.md); the same spelling twice is a same-stroke
+    homograph, never counted. Each collision is filed under its cause:
+      - `reformDoublet`: every differently-spelled pair is a reform-doublet exemption
+        (R2) pair, left unmarked on purpose;
+      - `sameLemmeGramCat`: every differently-spelled pair not exempted that way shares
+        one `lemmeGramCat` -- a Realization Phase residual, outside S7's scope;
+      - `crossLemma`: any other -- a pair S7 should have marked apart. Always empty
+        unless the marking itself is broken.
+    """
+    byStroke: dict[Strokes, list[Word]] = defaultdict(list)
+    for word, entries in disambiguatedTheory.items():
+        for strokes in entries:
+            members = byStroke[canonicalizeStrokes(strokes)]
+            if word not in members:
+                members.append(word)
+
+    report = FinalCollisionReport()
+    for stroke, words in byStroke.items():
+        if len({w.ortho for w in words}) < 2:
+            continue
+        pairs = [(a, b) for a, b in combinations(words, 2) if a.ortho != b.ortho]
+        undoubled = [(a, b) for a, b in pairs if frozenset({a.lemme, b.lemme}) not in doubletPairs]
+        if not undoubled:
+            report.reformDoublet[stroke] = words
+        elif all(a.lemmeGramCat == b.lemmeGramCat for a, b in undoubled):
+            report.sameLemmeGramCat[stroke] = words
+        else:
+            report.crossLemma[stroke] = words
+    return report
 
 
 def classifyStrokeCluster(strokes: Strokes, words: list[Word]) -> StrokeClusterReport:
@@ -1133,12 +1206,9 @@ def buildExtraInducedStrokes(
     `buildFinalInducedStrokes` composes a word's primary stroke: its phonetic-theory base plus
     that reading's own group-set's already-decided physical keys.
 
-    Deliberately NOT run through `composeReservedKeyStrokes` (Different-Lemma or
-    Grammatical-Category Disambiguation (S7)): that stage isn't wired into a
-    self-homograph's alternates yet, matching CLAUDE.md's own note that the star/hash
-    mark track isn't yet wired into `dictionary.py`'s
-    persisted output at all -- an alternate stroke colliding with an unrelated lemma's
-    stroke is a pre-existing class of gap this function doesn't newly introduce.
+    Unmarked: Different-Lemma or Grammatical-Category Disambiguation (S7)
+    (`composeReservedKeyStrokesForEntries`) adds each alternate's star/hash mark
+    afterwards, from the cluster its own stroke falls in.
     """
     wordToStrokes = buildWordToStrokes(theory)
     extraByWord: dict[Word, list[Strokes]] = {}

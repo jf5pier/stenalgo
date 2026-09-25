@@ -12,10 +12,19 @@ Requires Dictionary.pickle/PhoneticTheory.pickle (`python -m util.build_phonetic
 first), keypress_groups.json (`python -m util.build_keypress_groups`) and
 resolved_press_sets.json (`python -m src.elicitation`).
 Outputs: disambiguated_theory.tsv.
+
+Fails (exit 1, after writing the TSV) when two differently-spelled words of different
+lemmas or categories share a final stroke -- a collision S7 should have marked apart
+(src.ambiguitychecker.findFinalCollisions). The Realization Phase's same-lemma residuals
+and the reform-doublet exemption (R2) pairs are reported, not failed on.
 """
 import os
+import sys
 
+from src.ambiguitychecker import FinalCollisionReport, findFinalCollisions, loadReform1990DoubletPairs
 from src.keyboard import Starboard
+from src.word import Word
+from util._stenorender import renderFinalStrokesToRTFCRE
 from util._theoryio import _loadDictionaryAndPhoneticTheory
 from util._timing import timedCall
 
@@ -25,6 +34,25 @@ RESOLVED_PRESS_SETS_PATH = "resolved_press_sets.json"
 OUTPUT_PATH = "disambiguated_theory.tsv"
 DICTIONARY_PICKLE_PATH = "Dictionary.pickle"
 PHONETIC_THEORY_PICKLE_PATH = "PhoneticTheory.pickle"
+
+
+def reportFinalCollisions(report: FinalCollisionReport, keyboard: Starboard) -> None:
+    """Print the final-stroke collision summary; exit 1 on any cross-lemma collision."""
+    def describe(words: list[Word]) -> str:
+        return ", ".join(sorted(f"{w.ortho} ({w.lemmeGramCat})" for w in words))
+
+    print(f"Final-stroke collisions: {len(report.crossLemma)} cross-lemma,"
+          f" {len(report.sameLemmeGramCat)} same-lemma residual (Realization Phase),"
+          f" {len(report.reformDoublet)} reform doublet (R2, exempted).")
+    for stroke, words in sorted(report.sameLemmeGramCat.items(), key=lambda item: describe(item[1]))[:10]:
+        print(f"  same-lemma residual {renderFinalStrokesToRTFCRE(keyboard, stroke)!r}: {describe(words)}")
+    if report.crossLemma:
+        for stroke, words in sorted(report.crossLemma.items(), key=lambda item: describe(item[1])):
+            print(f"  CROSS-LEMMA {renderFinalStrokesToRTFCRE(keyboard, stroke)!r}: {describe(words)}", file=sys.stderr)
+        print(f"FAILED: {len(report.crossLemma)} final strokes output a different lemma's spelling"
+              " (Different-Lemma or Grammatical-Category Disambiguation (S7) left them unmarked).",
+              file=sys.stderr)
+        raise SystemExit(1)
 
 
 def main() -> None:
@@ -55,6 +83,7 @@ def main() -> None:
         dictionary.writeDisambiguatedTheory(phoneticTheory, disambiguatedTheory, starboard, OUTPUT_PATH)
     print(f"\nWrote {OUTPUT_PATH}: {len(disambiguatedTheory)} words with disambiguated-theory"
           f" (Phase P + */# track) strokes.")
+    reportFinalCollisions(findFinalCollisions(disambiguatedTheory, loadReform1990DoubletPairs()), starboard)
 
 
 if __name__ == "__main__":

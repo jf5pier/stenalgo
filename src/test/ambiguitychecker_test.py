@@ -18,6 +18,8 @@ from src.ambiguitychecker import (
     assignStarHashPhysicalStrokes,
     classifyStrokeCluster,
     composeReservedKeyStrokes,
+    composeReservedKeyStrokesForEntries,
+    findFinalCollisions,
     decideStarHashMark,
     detectCrossCategoryClash,
     groupHomophonesByReservedStroke,
@@ -426,6 +428,74 @@ class TestComposeReservedKeyStrokes:
         composed = composeReservedKeyStrokes(finalInduced)
         assert len(set(composed.values())) == 4
 
+
+
+class TestComposeReservedKeyStrokesForEntries:
+
+    def test_alternate_entries_are_marked_in_their_own_cluster(self):
+        # B44: "panse"/"pense" share both their primary stroke and an alternate
+        # reading's stroke; the rarer "panse" must be marked on both, not only on its
+        # primary.
+        panse = _make_word(ortho="panse", lemme="panser", gramCat=GramCat.VER, frequencyFilm=0.1)
+        pense = _make_word(ortho="pense", lemme="penser", gramCat=GramCat.VER, frequencyFilm=500.0)
+        entries = {panse: [((1,),), ((1,), (16,))], pense: [((1,),), ((1,), (16,))]}
+        composed = composeReservedKeyStrokesForEntries(entries, phonemeStrokeCounts={panse: 1, pense: 1})
+        assert composed[pense] == [((1,),), ((1,), (16,))]
+        assert composed[panse] == [((1, 10),), ((1, 10), (16,))]
+
+    def test_alternate_colliding_with_another_words_primary_is_marked(self):
+        # "a"'s alternate lands on "b"'s primary stroke: a cluster neither primary
+        # stroke alone reveals.
+        a = _make_word(ortho="aa", lemme="aa", frequencyFilm=1.0)
+        b = _make_word(ortho="bb", lemme="bb", frequencyFilm=5.0)
+        entries = {a: [((1,),), ((1,), (16,))], b: [((1,), (16,))]}
+        composed = composeReservedKeyStrokesForEntries(entries)
+        assert composed[b] == [((1,), (16,))]
+        assert composed[a] == [((1,),), ((1,), (16,), (10,))]
+
+    def test_duplicate_entries_of_one_word_are_kept_and_marked_alike(self):
+        # Entry positions stay parallel to the press-set alternates.
+        a = _make_word(ortho="aa", lemme="aa", frequencyFilm=1.0)
+        b = _make_word(ortho="bb", lemme="bb", frequencyFilm=5.0)
+        entries = {a: [((1,),), ((1,), (16,)), ((1,), (16,))], b: [((1,), (16,))]}
+        composed = composeReservedKeyStrokesForEntries(entries)
+        assert composed[a] == [((1,),), ((1,), (16,), (10,)), ((1,), (16,), (10,))]
+
+    def test_all_composed_entries_are_distinct(self):
+        words = [_make_word(ortho=f"w{i}", lemme=f"w{i}", frequencyFilm=float(10 - i)) for i in range(5)]
+        entries = {w: [((1,),), ((1,), (16,))] for w in words}
+        composed = composeReservedKeyStrokesForEntries(entries, phonemeStrokeCounts={w: 1 for w in words})
+        allStrokes = [s for strokesList in composed.values() for s in strokesList]
+        assert len(set(allStrokes)) == len(allStrokes) == 10
+
+
+class TestFindFinalCollisions:
+
+    def test_cross_lemma_collision_on_an_alternate_is_reported(self):
+        a = _make_word(ortho="panse", lemme="panser", gramCat=GramCat.VER)
+        b = _make_word(ortho="pense", lemme="penser", gramCat=GramCat.VER)
+        report = findFinalCollisions({a: [((1, 10),), ((1,), (16,))], b: [((1,),), ((1,), (16,))]})
+        assert report.crossLemma == {((1,), (16,)): [a, b]}
+        assert report.sameLemmeGramCat == {} and report.reformDoublet == {}
+
+    def test_same_stroke_homograph_is_not_a_collision(self):
+        a = _make_word(ortho="dîner", lemme="dîner", gramCat=GramCat.NOM)
+        b = _make_word(ortho="dîner", lemme="dîner", gramCat=GramCat.VER)
+        report = findFinalCollisions({a: [((1,),)], b: [((1,),)]})
+        assert (report.crossLemma, report.sameLemmeGramCat, report.reformDoublet) == ({}, {}, {})
+
+    def test_same_lemma_residual_and_reform_doublet_are_filed_apart(self):
+        agi = _make_word(ortho="agi", lemme="agir", gramCat=GramCat.VER)
+        agis = _make_word(ortho="agis", lemme="agir", gramCat=GramCat.VER)
+        old = _make_word(ortho="dégotté", lemme="dégotter", gramCat=GramCat.VER)
+        new = _make_word(ortho="dégoté", lemme="dégoter", gramCat=GramCat.VER)
+        report = findFinalCollisions(
+            {agi: [((1,),)], agis: [((1,),)], old: [((2,),)], new: [((2,),)]},
+            doubletPairs=frozenset({frozenset({"dégotter", "dégoter"})}),
+        )
+        assert report.crossLemma == {}
+        assert report.sameLemmeGramCat == {((1,),): [agi, agis]}
+        assert report.reformDoublet == {((2,),): [old, new]}
 
 # ---------------------------------------------------------------------------
 # computeClusterSizeDistribution / computeOverflowFrequencyMass

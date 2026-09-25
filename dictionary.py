@@ -37,7 +37,7 @@ from src.ambiguitychecker import (
     buildKeypressGroupToWords,
     buildWordsByOrthoLemme,
     buildWordToStrokes,
-    composeReservedKeyStrokes,
+    composeReservedKeyStrokesForEntries,
     loadReform1990DoubletPairs,
     realizeKeypressGroupsAsExtraStroke,
     resolvePreferredKeysByGroup,
@@ -356,13 +356,12 @@ class Dictionary:
         same-lemma coda-bank realization of Discriminating-Feature Stroke Realization
         (Realization Phase) (src.ambiguitychecker.realizeKeypressGroupsAsExtraStroke)
         and the star/hash mark reserved keys of Different-Lemma or Grammatical-Category
-        Disambiguation (S7) (src.ambiguitychecker.composeReservedKeyStrokes) on top, its
-        first mark key pressed together with the word's last phoneme stroke. Any further
-        entries are the word's OTHER readings (src.ambiguitychecker.buildExtraInducedStrokes),
-        reusing whatever physical keys the primary pass already decided -- NOT run
-        through S7 (that stage isn't wired into a self-homograph's alternates yet, the
-        same scope boundary ROADMAP.md already notes for the star/hash mark track
-        generally). Requires `keypressGroupsPath` (Discriminating-Feature Grouping
+        Disambiguation (S7) (src.ambiguitychecker.composeReservedKeyStrokesForEntries) on
+        top, its first mark key pressed together with the word's last phoneme stroke. Any
+        further entries are the word's OTHER readings
+        (src.ambiguitychecker.buildExtraInducedStrokes), reusing whatever physical keys the
+        primary pass already decided, each run through S7 on its own final stroke (B44:
+        before 2026-09-24 they skipped it, and "panse"'s `p@s/-k` output "pense"). Requires `keypressGroupsPath` (Discriminating-Feature Grouping
         (Grouping Phase), `python -m util.build_keypress_groups`) and
         `resolvedPressSetsPath` (Discriminating-Feature Elicitation (Elicitation Phase),
         `python -m src.elicitation`) to already exist.
@@ -387,12 +386,12 @@ class Dictionary:
             extraGroupSetsByWord=extraGroupSetsByWord, preferredKeysByGroup=preferredKeysByGroup,
         )
         finalInduced = buildFinalInducedStrokes(phoneticTheory, groupToWords, assignment)
-        primaryComposed = composeReservedKeyStrokes(
-            finalInduced, loadReform1990DoubletPairs(),
+        extraByWord = buildExtraInducedStrokes(phoneticTheory, assignment, extraGroupSetsByWord)
+        return composeReservedKeyStrokesForEntries(
+            {word: [strokes] + extraByWord.get(word, []) for word, strokes in finalInduced.items()},
+            loadReform1990DoubletPairs(),
             phonemeStrokeCounts={word: len(strokes) for word, strokes in wordToStrokes.items()},
         )
-        extraByWord = buildExtraInducedStrokes(phoneticTheory, assignment, extraGroupSetsByWord)
-        return {word: [strokes] + extraByWord.get(word, []) for word, strokes in primaryComposed.items()}
 
     def writeDisambiguatedTheory(
         self, phoneticTheory: dict[Strokes, list[Word]], disambiguatedTheory: dict[Word, list[Strokes]],

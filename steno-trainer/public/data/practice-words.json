@@ -7527,6 +7527,26 @@
  },
  {
   "ortho": "prie",
+  "before": "je",
+  "after": "",
+  "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
+  "phonology": "pRi",
+  "steno": "pR*i/-k",
+  "strokes": [
+   [
+    4,
+    8,
+    10,
+    13
+   ],
+   [
+    18
+   ]
+  ],
+  "frequency": 247.29
+ },
+ {
+  "ortho": "prie",
   "before": "il",
   "after": "",
   "label": "indicatif présent, 3e sg.",
@@ -7557,25 +7577,6 @@
    ],
    [
     21
-   ]
-  ],
-  "frequency": 247.29
- },
- {
-  "ortho": "prie",
-  "before": "je",
-  "after": "",
-  "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
-  "phonology": "pRi",
-  "steno": "pRi/-k",
-  "strokes": [
-   [
-    4,
-    8,
-    13
-   ],
-   [
-    18
    ]
   ],
   "frequency": 247.29
@@ -48416,32 +48417,14 @@
  },
  {
   "ortho": "hais",
-  "before": "",
-  "after": "!",
-  "label": "impératif présent, 2e sg.",
-  "phonology": "E",
-  "steno": "ie#/-k",
-  "strokes": [
-   [
-    13,
-    14,
-    15
-   ],
-   [
-    18
-   ]
-  ],
-  "frequency": 31.21
- },
- {
-  "ortho": "hais",
   "before": "tu",
   "after": "",
   "label": "indicatif présent, 2e sg.",
   "phonology": "E",
-  "steno": "ie/-d",
+  "steno": "*ie/-d",
   "strokes": [
    [
+    10,
     13,
     14
    ],
@@ -48455,13 +48438,14 @@
   "ortho": "hais",
   "before": "je",
   "after": "",
-  "label": "indicatif présent, 1re sg.",
+  "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "E",
-  "steno": "ie/-k",
+  "steno": "ie#/-k",
   "strokes": [
    [
     13,
-    14
+    14,
+    15
    ],
    [
     18
@@ -140366,6 +140350,30 @@
  },
  {
   "ortho": "saisis",
+  "before": "les",
+  "after": "",
+  "label": "participe passé, m. pl. · adjectif, m. pl.",
+  "phonology": "se.zi",
+  "steno": "se/tw*i/-s",
+  "strokes": [
+   [
+    3,
+    14
+   ],
+   [
+    7,
+    9,
+    10,
+    13
+   ],
+   [
+    17
+   ]
+  ],
+  "frequency": 8.34
+ },
+ {
+  "ortho": "saisis",
   "before": "tu",
   "after": "",
   "label": "indicatif présent, 2e sg.",
@@ -140430,29 +140438,6 @@
    ],
    [
     18
-   ]
-  ],
-  "frequency": 8.34
- },
- {
-  "ortho": "saisis",
-  "before": "",
-  "after": "",
-  "label": "participe passé, m. pl.",
-  "phonology": "se.zi",
-  "steno": "se/twi/-s",
-  "strokes": [
-   [
-    3,
-    14
-   ],
-   [
-    7,
-    9,
-    13
-   ],
-   [
-    17
    ]
   ],
   "frequency": 8.34
@@ -158237,6 +158222,34 @@
  },
  {
   "ortho": "garantis",
+  "before": "les",
+  "after": "",
+  "label": "participe passé, m. pl. · adjectif, m. pl.",
+  "phonology": "ga.R@.ti",
+  "steno": "ksa/R@/t*i/-s",
+  "strokes": [
+   [
+    2,
+    3,
+    12
+   ],
+   [
+    8,
+    11
+   ],
+   [
+    7,
+    10,
+    13
+   ],
+   [
+    17
+   ]
+  ],
+  "frequency": 7.15
+ },
+ {
+  "ortho": "garantis",
   "before": "tu",
   "after": "",
   "label": "indicatif présent, 2e sg.",
@@ -158313,33 +158326,6 @@
    ],
    [
     18
-   ]
-  ],
-  "frequency": 7.15
- },
- {
-  "ortho": "garantis",
-  "before": "",
-  "after": "",
-  "label": "participe passé, m. pl.",
-  "phonology": "ga.R@.ti",
-  "steno": "ksa/R@/ti/-s",
-  "strokes": [
-   [
-    2,
-    3,
-    12
-   ],
-   [
-    8,
-    11
-   ],
-   [
-    7,
-    13
-   ],
-   [
-    17
    ]
   ],
   "frequency": 7.15
@@ -171802,6 +171788,28 @@
  },
  {
   "ortho": "fête",
+  "before": "je",
+  "after": "",
+  "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
+  "phonology": "fEt",
+  "steno": "kp*iet/-k",
+  "strokes": [
+   [
+    2,
+    4,
+    10,
+    13,
+    14,
+    20
+   ],
+   [
+    18
+   ]
+  ],
+  "frequency": 6.46
+ },
+ {
+  "ortho": "fête",
   "before": "que je",
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
@@ -171817,27 +171825,6 @@
    ],
    [
     21
-   ]
-  ],
-  "frequency": 6.46
- },
- {
-  "ortho": "fête",
-  "before": "je",
-  "after": "",
-  "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
-  "phonology": "fEt",
-  "steno": "kpiet/-k",
-  "strokes": [
-   [
-    2,
-    4,
-    13,
-    14,
-    20
-   ],
-   [
-    18
    ]
   ],
   "frequency": 6.46
@@ -232224,6 +232211,31 @@
    ],
    [
     17
+   ]
+  ],
+  "frequency": 4.21
+ },
+ {
+  "ortho": "fonder",
+  "before": "",
+  "after": "",
+  "label": "infinitif",
+  "phonology": "f§.de",
+  "steno": "kpai/pve/-l",
+  "strokes": [
+   [
+    2,
+    4,
+    12,
+    13
+   ],
+   [
+    4,
+    5,
+    14
+   ],
+   [
+    23
    ]
   ],
   "frequency": 4.21

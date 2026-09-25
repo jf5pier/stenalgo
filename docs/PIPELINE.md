@@ -173,7 +173,7 @@ The names below are used in every "Input state" and "Result" line.
 | **keypress groups** | `markersByKeypress: dict[int, frozenset[str]]` (K=7) + metadata | `minKeypressesSatWithPriorities` featuregroupingsat.py:490, `serializeAssignment` :530 | `keypress_groups.json` (tracked) |
 | **keypress group population** | `groupToWords: dict[int, list[Word]]` + `extraGroupSetsByWord: dict[Word, list[frozenset[int]]]` | ambiguitychecker.py:803, :844 | no |
 | **physical keypress group assignment** | `KeypressGroupPhysicalAssignment` (`chosenKeysByGroup`, cost, alternates, residual buckets) | `realizeKeypressGroupsAsExtraStroke` ambiguitychecker.py:987 | report build only: `realization_report.json` (tracked) |
-| **final induced strokes** | `dict[Word, Strokes]`: base strokes plus at most one feature discriminating stroke | `buildFinalInducedStrokes` ambiguitychecker.py:1261 | no |
+| **final induced strokes** | `dict[Word, Strokes]`: base strokes plus at most one feature discriminating stroke | `buildFinalInducedStrokes` ambiguitychecker.py:1168 | no |
 | **disambiguated theory** | `dict[Word, list[Strokes]]`: index 0 primary (with its star/hash mark), then alternate entries | `Dictionary.buildDisambiguatedTheory` dictionary.py:342 | `disambiguated_theory.tsv` (gitignored, read by nothing) |
 | **Plover dictionary** | `dict[str, str]` (RTFCRE steno → spelling); 163,238 entries | `export_plover_dictionary.main` | `plover_stenalgo_dictionary.json` (tracked) |
 | **Plover key table** | module with `KEYS`, `IMPLICIT_HYPHEN_KEYS`, `GEMINI_PR_KEYMAP` | `export_plover_system.main` | `plover_stenalgo/plover_stenalgo/_generated_keys.py` (tracked) |
@@ -231,10 +231,12 @@ Same-Lemma and Grammatical-Category Disambiguation (S6)
    └─ Report serialization (report build) ......................... S6.Realization.8 → realization_report.json
 
 Different-Lemma or Grammatical-Category Disambiguation (S7) .. python -m util.build_disambiguated_theory (Dictionary.buildDisambiguatedTheory, S7.1)
-├─ Lemma-homophone group detection — groupHomophonesByReservedStroke  S7.5
+├─ Alternate entry strokes — buildExtraInducedStrokes (unmarked) .. S7.14
+├─ Reserved-key composition — composeReservedKeyStrokesForEntries, per-entry clustering  S7.4
 ├─ Star/hash code assignment + star/hash rule stack (R1-R7) ....... S7.7-S7.11
 ├─ Star/hash mark merge into the last phoneme stroke .............. S7.13
-└─ Disambiguated-theory report — writeDisambiguatedTheory ............................. S7.15 → disambiguated_theory.tsv
+├─ Disambiguated-theory report — writeDisambiguatedTheory ............................. S7.15 → disambiguated_theory.tsv
+└─ Final-collision check — findFinalCollisions (fails on any cross-lemma collision) ..... S7.17
 
 Theory Export (S8) ............................... python -m util.export_*
 ├─ Disambiguated-theory loading (recomputes the disambiguated theory) — loadPhoneticAndDisambiguatedTheory  S8.1
@@ -1005,8 +1007,8 @@ S6.Realization.5 Coda key search — realizeKeypressGroupsAsExtraStroke (:987)
   S6.Realization.5.3 Candidate cost — _candidateCost (:1147)
   S6.Realization.5.4 Word finalization — _finalizeReadyWords (:1066)
   S6.Realization.5.5 Final verification and residual buckets — (:1219-1258)
-S6.Realization.6 Final induced strokes (inline path) — buildFinalInducedStrokes (:1261)
-S6.Realization.7 Alternate entry strokes (inline path) — buildExtraInducedStrokes (:1288)
+S6.Realization.6 Final induced strokes (inline path) — buildFinalInducedStrokes (:1168)
+S6.Realization.7 Alternate entry strokes (inline path) — buildExtraInducedStrokes (:1196)
 S6.Realization.8 Report serialization (report build) — build_realization_report.main (:74-112)
 ```
 
@@ -1371,7 +1373,7 @@ Helpers not expanded: `_composedInduced` (:1077), `_isRedundantForAnyWord` (:108
   all-pairs canonical check over the whole lexicon finds 230 same-lemmeGramCat pairs in the
   final induced strokes, all from spelling twins (item B1).
 
-#### Final induced strokes — buildFinalInducedStrokes (S6.Realization.6)   src/ambiguitychecker.py:1261
+#### Final induced strokes — buildFinalInducedStrokes (S6.Realization.6)   src/ambiguitychecker.py:1168
 Called by: `Dictionary.buildDisambiguatedTheory` only (dictionary.py:384).
 Transformation: for **every** phonetic-theory Word (dict order, deterministic): a Word that needs
 groups gets one feature discriminating stroke with the union of their chosen keys; others
@@ -1379,13 +1381,16 @@ keep their base strokes. Unassigned groups add nothing, silently.
 Result: final induced strokes, 167,639 Words, 79,449 with a feature discriminating stroke.
 Handed to Reserved-key composition (S7.4).
 
-#### Alternate entry strokes — buildExtraInducedStrokes (S6.Realization.7)   src/ambiguitychecker.py:1288
+#### Alternate entry strokes — buildExtraInducedStrokes (S6.Realization.7)   src/ambiguitychecker.py:1196
 Called by: `Dictionary.buildDisambiguatedTheory` only (dictionary.py:389).
 Transformation: for each extra alternate of a self-homograph, base strokes plus one feature
 discriminating stroke with that alternate's union of chosen keys (empty key-sets skipped).
 Result: `dict[Word, list[Strokes]]`, the **alternate entries**, appended after index 0 in
-the disambiguated theory. They skip Different-Lemma or Grammatical-Category Disambiguation (S7) (item B4) and
-are never collision-checked when the primary is empty (item B21).
+the disambiguated theory, unmarked. Disambiguated-theory assembly (S7.1) passes them into
+Reserved-key composition (S7.4) alongside the primary stroke, so each gets its own star/hash
+mark from its own final-stroke cluster (item B4, fixed 2026-09-24 as B44). They are never
+collision-checked at THIS call when the primary is empty (item B21) — Reserved-key
+composition (S7.4)'s final check runs later, over the whole disambiguated theory.
 
 #### Report serialization — build_realization_report.main (S6.Realization.8)   util/build_realization_report.py:38
 Called by: a person (rebuild step 6) and `python -m src.elicitation --resolve`.
@@ -1431,12 +1436,14 @@ util/build_disambiguated_theory.py:49, after checking both
 `keypress_groups.json` and `resolved_press_sets.json` exist, :37-40) and every
 Theory Export (S8) exporter through Disambiguated-theory loading (S8.1).
 Input state: the phonetic theory (80,725 keys / 167,639 Words), keyboard layout, the two JSON paths.
-Transformation: (1) loads `markersByKeypress` (:365-369) and the resolved discriminating
-feature sets (:370-371); (2) runs the Realization Phase on its inline path (S7.2) → final
-induced strokes; (3) calls Reserved-key composition (S7.4) with Reform-doublet loading (S7.3)
-and `phonemeStrokeCounts` = each Word's base stroke count, which turns on the merge; (4)
-calls Alternate entry strokes (S7.14); (5) returns `{word: [primaryComposed[word]] +
-extraByWord.get(word, [])}` (:390).
+Transformation: (1) loads `markersByKeypress` (:371-373) and the resolved discriminating
+feature sets (:374-375); (2) runs the Realization Phase on its inline path (S7.2) → final
+induced strokes; (3) calls Alternate entry strokes (S7.14) (:389) for the unmarked alternate
+entries; (4) calls Reserved-key composition (S7.4) (:390-394) once, over `{word: [primary] +
+alternates}` for every word, with Reform-doublet loading (S7.3) and `phonemeStrokeCounts` =
+each Word's base stroke count (turns on the merge) — since the B44 fix (2026-09-24) this marks
+every entry, not just the primary (`composeReservedKeyStrokesForEntries` clusters each entry
+on its own final stroke).
 Result: the disambiguated theory, 167,639 Words in phonetic-theory order; `disambiguated_theory.tsv` has 181,869 rows, so 14,230
 alternate entries.
 Artifacts: reads both JSON files and `resources/reform1990.tsv` (path relative to the working directory).
@@ -1453,7 +1460,7 @@ Result: final induced strokes + physical keypress group assignment (0→21, 1→
 5→17, 6→19, identical to the realization report).
 
 ### Reform-doublet loading — loadReform1990DoubletPairs (S7.3)   src/ambiguitychecker.py:94
-Called by: Disambiguated-theory assembly (S7.1), dictionary.py:386.
+Called by: Disambiguated-theory assembly (S7.1), dictionary.py:392.
 Transformation: every `reform1990.tsv` row whose `isException` is not `"True"` gives
 `frozenset({oldSpelling, newSpelling})`. Exception rows (`fût`/`fut`, `croît`/`croit`) collide
 with unrelated words and are left out.
@@ -1461,31 +1468,44 @@ Result: 259 pairs — **lemma spellings**, compared against `Word.lemme`, not `o
 Notes: some pairs exist only at verb-lemma level (`boursoufler/boursouffler`), so the
 adjective doublet `boursouflée/boursoufflée` needs a `MARKING_OVERRIDES` entry.
 
-### Reserved-key composition — composeReservedKeyStrokes (S7.4)   src/ambiguitychecker.py:410
-Called by: Disambiguated-theory assembly (S7.1), dictionary.py:385.
-Input state: final induced strokes, doublet pairs, `phonemeStrokeCounts`.
-Transformation: `composed = dict(finalInduced)` (:434); for each lemma-homophone group from
-Lemma-homophone group detection (S7.5), gets each member's star/hash strokes from Physical
-star/hash assignment (S7.6); Words with code `()` keep their strokes, the others go through
+### Reserved-key composition — composeReservedKeyStrokesForEntries (S7.4)   src/ambiguitychecker.py:424
+Called by: Disambiguated-theory assembly (S7.1), dictionary.py:390. `composeReservedKeyStrokes`
+(:413) is now a thin one-entry-per-word wrapper around it, kept for its own callers/tests.
+Input state: `entriesByWord` — every word's primary final induced stroke plus its alternate
+entries (Alternate entry strokes, S7.14) — doublet pairs, `phonemeStrokeCounts`.
+Transformation: buckets every entry (primary or alternate, any word) by
+`canonicalizeStrokes` — the per-entry generalization of
+what Lemma-homophone group detection (S7.5) does for primary strokes only. Each bucket with
+≥2 entries, ≥2 distinct `lemmeGramCat` and ≥2 distinct `ortho` (`_isStarHashCluster`, :381-390)
+is a star/hash cluster: gets each member's star/hash strokes from Physical star/hash
+assignment (S7.6); entries with code `()` keep their unmarked stroke, the others go through
 Star/hash mark merge into the last phoneme stroke (S7.13).
-Result: `dict[Word, Strokes]`: marked Words carry reserved keys 10/15, others unchanged.
-Notes: safety argument (docstring :422-429): keys 10/15 are never in `allowedKeys`
-(keyboard.py:376), so removing them gives back the final induced strokes exactly. It covers
-primary strokes only, not alternate entries.
+Result: `dict[Word, list[Strokes]]`: marked entries carry reserved keys 10/15, others
+unchanged; every entry keeps its position (index 0 the primary), since Trainer words export
+(util/export_practice_words.py) lines entries up with the press-set alternates by index. Two
+entries of one word on the same stroke (2,633 words today, e.g. `joue` impératif and
+indicatif 1s both on `vt@e/-k`) count once in the cluster and get the same mark.
+Notes: safety argument (docstring :443-452): keys 10/15 are never in `allowedKeys`
+(keyboard.py:376), so removing them (and reserved-only trailing strokes) gives back the
+entry's unmarked stroke exactly. Since the B44 fix (2026-09-24) this covers every entry,
+primary and alternate — previously only primary strokes were clustered and marked, so an
+alternate identical to an unrelated word's alternate went out unmarked (item B4).
 
-### Lemma-homophone group detection — groupHomophonesByReservedStroke (S7.5)   src/ambiguitychecker.py:380
-Called by: Reserved-key composition (S7.4), :435.
-Transformation: buckets Words by `canonicalizeStrokes(finalInduced[word])` (:396); keeps a
-bucket with ≥2 Words (:400), ≥2 distinct `lemmeGramCat` (:402) and ≥2 distinct `ortho`
-(:404). Members keep phonetic-theory order.
-Result: 4,450 lemma-homophone groups.
+### Lemma-homophone group detection — groupHomophonesByReservedStroke (S7.5)   src/ambiguitychecker.py:391
+Called by: nothing in the pipeline since the B44 fix (2026-09-24) — Reserved-key composition
+(S7.4) now inlines the equivalent per-entry bucketing itself. Kept as a standalone helper,
+exercised directly by `src/test/ambiguitychecker_test.py`.
+Transformation: buckets Words by `canonicalizeStrokes(finalInduced[word])` (:406-408); keeps a
+bucket that is a star/hash cluster (`_isStarHashCluster`, :381-390: ≥2 Words, ≥2 distinct
+`lemmeGramCat`, ≥2 distinct `ortho`). Members keep phonetic-theory order.
+Result: primary-stroke-only lemma-homophone groups (4,450 at last measurement).
 Notes: a bucket with one `lemmeGramCat` and several spellings is dropped on purpose (a code
 comment leaves it to the Realization Phase): 98 such buckets survive into the disambiguated theory, all from
 spelling twins (item B1). Same-lemma cross-category clashes ("appel" NOM / "appelle" VER)
 are in scope because their `lemmeGramCat`s differ.
 
-### Physical star/hash assignment — assignStarHashPhysicalStrokes (S7.6)   src/ambiguitychecker.py:369
-Called by: Reserved-key composition (S7.4), :436.
+### Physical star/hash assignment — assignStarHashPhysicalStrokes (S7.6)   src/ambiguitychecker.py:370
+Called by: Reserved-key composition (S7.4).
 Transformation: `{word: starHashCodeToStrokes(code)}` over Star/hash code assignment (S7.7)
 and Star/hash code realization (S7.12).
 Result: `dict[Word, Strokes]` of star/hash strokes; `()` = no star/hash mark.
@@ -1573,16 +1593,16 @@ Transformation: four-code budget `[(), ('*',), ('#',), ('*#',)]`, then `('*#',) 
 **escalated codes**.
 Result: rank 0 `()`, 1 `*`, 2 `#`, 3 `*#`, 4 `*# *#`, … No upper bound; live maximum `(*#)×5` (8 representatives).
 
-### Star/hash code realization — starHashCodeToStrokes (S7.12)   src/ambiguitychecker.py:361
+### Star/hash code realization — starHashCodeToStrokes (S7.12)   src/ambiguitychecker.py:362
 Called by: Physical star/hash assignment (S7.6).
 Transformation: `_STAR_HASH_KEYS` (:354): `*` → `(10,)`, `#` → `(15,)`, `*#` → `(10, 15)`;
 `STAR_KEY` = 10 (:351), `HASH_KEY` = 15 (:352). Keys 0/1 (left pinky) are held for a
 possible third star/hash mark and never used.
 Result: reserved-only strokes; `()` for the canonical member.
 
-### Star/hash mark merge into the last phoneme stroke (S7.13)   src/ambiguitychecker.py:437-444
-Called by: Reserved-key composition (S7.4).
-Input state: a marked Word's final induced strokes `s` (base strokes, then maybe its feature
+### Star/hash mark merge into the last phoneme stroke (S7.13)   src/ambiguitychecker.py:475-476
+Called by: Reserved-key composition (S7.4), for every marked entry (primary or alternate).
+Input state: a marked entry's strokes `s` (base strokes, then maybe its feature
 discriminating stroke) and its star/hash strokes `extra`.
 Transformation: with `phonemeStrokeCounts` (always, in the pipeline), `last =
 phonemeStrokeCounts[word] - 1` and the result is `s[:last] + (s[last] + extra[0],) +
@@ -1592,15 +1612,19 @@ counts (tests only) it appends `s + extra`.
 Result: `pâts` `((4,12),(17,))` + `*` → `((4,12,10),(17,))` = `p*a/-s`; `aulx` `((12,14),)` +
 `(*#)×5` → `*ae#/*#/*#/*#/*#`.
 
-### Alternate entry strokes (S7.14)   src/ambiguitychecker.py:1288
-Called by: Disambiguated-theory assembly (S7.1), dictionary.py:389. Described as Alternate entry strokes
-(S6.Realization.7).
-Notes: scope gap with a measured cost: an alternate entry carries no star/hash mark and can
-take an unrelated word's only stroke (`subits` loses to `subis`'s alternate entry, `pais`
-to `paie`, `amplis` to `emplis`): 9 spellings without a Plover entry (item B4).
+### Alternate entry strokes (S7.14)   src/ambiguitychecker.py:1203
+Called by: Disambiguated-theory assembly (S7.1), dictionary.py:389, BEFORE Reserved-key
+composition (S7.4) now (it feeds that call's `entriesByWord`). Described as Alternate entry
+strokes (S6.Realization.7).
+Notes: builds each alternate unmarked; Reserved-key composition (S7.4) marks it afterwards,
+from its own final-stroke cluster. Before the B44 fix (2026-09-24), alternate entries were
+never clustered or marked at all and could take an unrelated word's only stroke (`subits`
+lost to `subis`'s alternate entry, `pais` to `paie`, `amplis` to `emplis`: 9 spellings
+without a Plover entry, item B4) — `findFinalCollisions` now catches a regression of this
+kind (`crossLemma` bucket) and `util.build_disambiguated_theory` fails on it.
 
-### Disambiguated-theory report — Dictionary.writeDisambiguatedTheory (S7.15)   dictionary.py:392
-Called by: `python -m util.build_disambiguated_theory` (`main` util/build_disambiguated_theory.py:51), right after Disambiguated-theory assembly (S7.1).
+### Disambiguated-theory report — Dictionary.writeDisambiguatedTheory (S7.15)   dictionary.py:396
+Called by: `python -m util.build_disambiguated_theory` (`main` util/build_disambiguated_theory.py:82), right after Disambiguated-theory assembly (S7.1).
 Transformation: header `ortho lemme gramCat strokes extraStrokes`; Words sorted by (lemme,
 gramCat, ortho), one row per stroke. `strokes` = base strokes as key spelling
 (`strokesToString`); `extraStrokes` = `+k,…` for keys merged into the last phoneme stroke,
@@ -1622,12 +1646,36 @@ and writes `ambiguity_report.tsv`. Its "overflow" metric counts lemma-homophone 
 ≥5 lemmas — beyond the old four-code budget (no stroke, `*`, `#`, `*#`) that N-ary
 escalation has since superseded — and reports their frequency mass; kept as a drift signal.
 
+### Final-collision check — findFinalCollisions (S7.17)   src/ambiguitychecker.py:489
+Called by: `python -m util.build_disambiguated_theory` (`main`, via `reportFinalCollisions`
+util/build_disambiguated_theory.py:39-56, called :86), right after Disambiguated-theory report
+(S7.15); also `export_plover_dictionary.main` (util/export_plover_dictionary.py), which prints
+the same three counts instead of the old undifferentiated "same-steno collisions".
+Input state: the disambiguated theory (every Word's full entry list), doublet pairs.
+Transformation: for every final stroke reached by ≥2 differently-spelled entries (any entry,
+primary or alternate — a **collision**, GLOSSARY.md; same spelling twice is a same-stroke
+homograph, never counted), files it under one cause: `reformDoublet` if every differently-spelled
+pair is a reform-doublet exemption (R2) pair; else `sameLemmeGramCat` if every remaining pair
+shares one `lemmeGramCat` (a Realization Phase residual, out of S7's scope); else `crossLemma`
+(a pair S7 should have marked apart — the marking-bug bucket, empty unless the marking itself
+regresses).
+Result: `FinalCollisionReport` (`crossLemma`, `sameLemmeGramCat`, `reformDoublet`, each
+canonical Strokes → `list[Word]`). Measured after the B44 fix (2026-09-24): 0 cross-lemma, 104
+same-lemma residual (e.g. `agi`/`agis` on `a/vti` — past participle vs plural, both on the
+primary stroke), 28 reform-doublet (exempted).
+Notes: `reportFinalCollisions` (util/build_disambiguated_theory.py:39) prints the three counts,
+the first 10 same-lemma residuals, and `raise SystemExit(1)` on any `crossLemma` collision —
+after the TSV is already written — so `python dictionary.py` aborts at this step on a marking
+regression.
+
 ### Worked examples (2026-09-22 data)
 
 1. **Category-priority rule (R6).** Group `((12,), (4,13,14,23))`: `appel` NOM 80.88,
    `appelle` VER 485.77. Ratio 6.0 < 10, categories differ, NOM 30 > VER 20 → `appelle` is
-   marked although 6× more frequent. Plover: `a/piel` → appel, `a/p*iel` → appelle; its
-   alternate entries `a/piel/-k`, `a/piel/-l` carry no star/hash mark.
+   marked although 6× more frequent. Plover: `a/piel` → appel, `a/p*iel` → appelle; since the
+   B44 fix (2026-09-24) its alternate entries `a/piel/-k`, `a/piel/-l` are marked too, each from
+   its own final-stroke cluster (whichever other word's alternate lands on the same stroke),
+   not left unmarked as before.
 2. **Homograph merge, frequency-ratio rule (R4) and frequency fallback (R7).** Group
    `((12,),)`: `à` PRE 12,190.4; `a` AUX 6,350.91 / VER 5,498.34 / NOM 81.36 (representative
    AUX); `ah` ONO 576.53; `ha` ONO 21.54 / NOM 2.94. à vs a: ratio 1.9, PRE not in the table →
@@ -1691,11 +1739,17 @@ Helpers not expanded: `Starboard.keyDisplayName` keyboard.py:654 (reserved names
 Called by: `python -m util.export_plover_dictionary`.
 Transformation: renders every stroke of every Word into `stenoToWords[steno]` (exact
 duplicate Words skipped, :50); per steno keeps `max(words, key=frequency)` (:56), first in
-phonetic-theory order on a tie (item B10); prints the top 10 collisions.
-Result: Plover dictionary, 163,238 entries (`sort_keys=True`, `indent=1`); 5,139 contain
-`*`/`#`; 58 end in a \*/# marker stroke. 29 spellings have no entry: 20 reform-doublet or
-near-doublet losers (`bizuths`, `dégottés`, `toquade`, `cuissot`, …) and 9 spellings shadowed
-by an alternate entry (item B4).
+phonetic-theory order on a tie (item B10); then runs Final-collision check (S7.17)
+(`findFinalCollisions`) over the disambiguated theory and prints its three counts plus up to
+10 `crossLemma` entries (no longer the pre-B44 "same-steno collisions" figure, which lumped
+same-stroke homographs in with real collisions).
+Result: Plover dictionary, 163,238 entries at last measurement (`sort_keys=True`,
+`indent=1`); 5,139 contain `*`/`#`; 58 end in a \*/# marker stroke. Since the B44 fix
+(2026-09-24), losing an output to a cross-lemma collision (formerly item B4: 9 spellings
+shadowed by an unmarked alternate entry, e.g. `subits`/`subis`) should no longer happen; a
+spelling can still lose to a reform-doublet or near-doublet winner (`bizuths`,
+`dégottés`, `toquade`, `cuissot`, …, the `reformDoublet` bucket, exempted by design) or, more
+rarely, a same-lemma residual the Realization Phase left unmarked.
 Artifacts: writes `plover_stenalgo_dictionary.json`.
 
 #### Plover key table export — export_plover_system.main (S8.4)   util/export_plover_system.py:38

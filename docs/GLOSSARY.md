@@ -67,7 +67,7 @@ messages before it keep the old names.
 An extra stroke that holds only the reserved star/hash keys (rendered `*#`). Only escalated
 star/hash codes produce one, for their second and later symbols; the first symbol is always
 merged into the last phoneme stroke. One of the two kinds of extra stroke.
-- Code: `composeReservedKeyStrokes` src/ambiguitychecker.py:444; util/_stenorender.py:43-44.
+- Code: `composeReservedKeyStrokesForEntries` src/ambiguitychecker.py:424; util/_stenorender.py:43-44.
 - Avoid "bare mark stroke", "bare `*#` stroke".
 - First used in: Different-Lemma or Grammatical-Category Disambiguation (S7).
 
@@ -82,9 +82,12 @@ is the primary alternate; the others become alternate entries.
 ### Alternate entry
 A disambiguated-theory stroke after index 0: a self-homograph's second dictionary entry, built from a
 non-primary alternate (base strokes plus that alternate's feature discriminating stroke).
-It is a separate concept, **not** an extra stroke. Alternate entries skip the star/hash
-marks (item B4).
-- Code: `buildExtraInducedStrokes` src/ambiguitychecker.py:1288; dictionary.py:389.
+It is a separate concept, **not** an extra stroke. `buildExtraInducedStrokes` builds it
+unmarked; Different-Lemma or Grammatical-Category Disambiguation (S7)
+(`composeReservedKeyStrokesForEntries`) then marks it from its own final-stroke cluster, same
+as a primary stroke (item B4, fixed 2026-09-24 as B44).
+- Code: `buildExtraInducedStrokes` src/ambiguitychecker.py:1196; `composeReservedKeyStrokesForEntries`
+  :424; dictionary.py:389-391.
 - Avoid "alternate stroke", "alternates" (for the entry).
 - First used in: Discriminating-Feature Stroke Realization (Realization Phase).
 
@@ -207,9 +210,13 @@ disambiguated theory): Plover can output only one, so the other spelling loses t
 Words with the same spelling never collide — see **Same-stroke homograph** and
 **Distinct-stroke homograph**. The narrower kinds are named by where they are measured:
 phonetic-theory collision (before any marks), and the residual-collision buckets of the
-Realization Phase (same-lemmeGramCat collision, cross-category clash, cross-lemma collision).
-- Code: no final check exists yet (TODO.md B44); `export_plover_dictionary` counts
-  "same-steno collisions", which also include same-stroke homographs.
+Realization Phase (same-lemmeGramCat collision, cross-category clash, cross-lemma collision);
+also the final-collision buckets of `findFinalCollisions` (`crossLemma`, `sameLemmeGramCat`,
+`reformDoublet`), checked after Different-Lemma or Grammatical-Category Disambiguation (S7),
+over every entry (primary and alternate) — item B44, fixed 2026-09-24.
+- Code: `findFinalCollisions` src/ambiguitychecker.py:489, called by
+  `util/build_disambiguated_theory.py` (exits 1 on any `crossLemma` collision) and
+  `export_plover_dictionary.main`.
 - Avoid "collision" for two Words of one spelling.
 - First used in: Theory Export (S8).
 
@@ -229,7 +236,9 @@ Different-Lemma or Grammatical-Category Disambiguation (S7) gives them star/hash
 
 ### Cross-lemma collision
 Two colliding words with different bare lemmas (ver/vert/verre). Left to Different-Lemma or
-Grammatical-Category Disambiguation (S7).
+Grammatical-Category Disambiguation (S7). Not the same as `findFinalCollisions`'
+`crossLemma` bucket (Collision), which checks S7's own output, after marking, for the same
+name of failure recurring.
 - Code: `crossLemmaCollisions` src/ambiguitychecker.py:1255.
 - First used in: Discriminating-Feature Stroke Realization (Realization Phase).
 
@@ -254,8 +263,9 @@ stroke (with its star/hash mark), then alternate entries. Recomputed by every ex
 ### Different-Lemma or Grammatical-Category Disambiguation (S7)
 The stage that adds star/hash marks to words that still collide after the Realization Phase
 with a different `lemmeGramCat` (different lemma, or same lemma in another category),
-producing the disambiguated theory. Its rule stack is the star/hash rule stack (R1-R7).
-- Code: `composeReservedKeyStrokes` src/ambiguitychecker.py:410, called from `Dictionary.buildDisambiguatedTheory` dictionary.py:385.
+producing the disambiguated theory. Its rule stack is the star/hash rule stack (R1-R7);
+it marks every entry (primary and alternate), each on its own final-stroke cluster.
+- Code: `composeReservedKeyStrokesForEntries` src/ambiguitychecker.py:424, called from `Dictionary.buildDisambiguatedTheory` dictionary.py:390.
 - Avoid "Lemma-Homophone Marking (S4)", "`*`/`#` track", "cross-lemma track", "reserved-key track".
 - First used in: Different-Lemma or Grammatical-Category Disambiguation (S7).
 
@@ -364,7 +374,7 @@ Umbrella word for a stroke appended to a word's base strokes. Exactly two kinds 
 **feature discriminating stroke** (Realization Phase) and the **\*/# marker stroke**
 (escalated star/hash code). An alternate entry is not an extra stroke, and neither is the
 merged star/hash mark (it joins an existing stroke).
-- Code: `_appendCodaExtraStroke` src/ambiguitychecker.py:892; `composeReservedKeyStrokes` :444.
+- Code: `_appendCodaExtraStroke` src/ambiguitychecker.py:802; `composeReservedKeyStrokesForEntries` :424.
 - Say which kind when it matters. Avoid "trailing stroke", "coda stroke".
 - First used in: Discriminating-Feature Stroke Realization (Realization Phase).
 
@@ -380,7 +390,7 @@ one combination {gender, number}.
 The single extra coda-bank stroke that the Realization Phase appends after a word's base
 strokes: the union of the chosen keys of every keypress group the word needs. One of the two
 kinds of extra stroke.
-- Code: `_appendCodaExtraStroke` src/ambiguitychecker.py:892; `buildFinalInducedStrokes` :1261.
+- Code: `_appendCodaExtraStroke` src/ambiguitychecker.py:892; `buildFinalInducedStrokes` :1168.
 - Avoid "marker stroke", "Phase P stroke", "coda extra stroke", "trailing stroke".
 - First used in: Discriminating-Feature Stroke Realization (Realization Phase).
 
@@ -393,7 +403,7 @@ read but never used. It drives every frequency rule and every "keep the most fre
 ### Final induced strokes
 A dataset state: every Word's base strokes plus at most one feature discriminating stroke,
 before the star/hash marks. `dict[Word, Strokes]`.
-- Code: `buildFinalInducedStrokes` src/ambiguitychecker.py:1261.
+- Code: `buildFinalInducedStrokes` src/ambiguitychecker.py:1168.
 - Avoid "finalInduced" in prose.
 - First used in: Discriminating-Feature Stroke Realization (Realization Phase).
 
@@ -584,7 +594,7 @@ plus each self-homograph Word's extra alternate group sets.
 ### Last phoneme stroke
 The last of a word's base strokes. The first symbol of its star/hash code is pressed together
 with it (a merged star/hash mark), even when a feature discriminating stroke follows.
-- Code: `composeReservedKeyStrokes` src/ambiguitychecker.py:437-444.
+- Code: `composeReservedKeyStrokesForEntries` src/ambiguitychecker.py:475-476.
 - First used in: Different-Lemma or Grammatical-Category Disambiguation (S7).
 
 ### Layout entry / shared layout entry
@@ -605,13 +615,13 @@ lexical ambiguity tables (Ambiguity statistics (S4.2)). They run on every fresh 
 
 ### Lemma-homophone
 Homophones whose `lemmeGramCat` differs (different lemma, or same lemma in another category).
-- Code: the "≥2 distinct `lemmeGramCat`" filter, src/ambiguitychecker.py:402.
+- Code: the "≥2 distinct `lemmeGramCat`" filter, `_isStarHashCluster` src/ambiguitychecker.py:381.
 - First used in: Different-Lemma or Grammatical-Category Disambiguation (S7).
 
 ### Lemma-homophone group
 The unit of Different-Lemma or Grammatical-Category Disambiguation (S7): Words sharing one
 canonical final induced stroke, with at least 2 `lemmeGramCat`s and 2 spellings (4,450 today).
-- Code: `groupHomophonesByReservedStroke` src/ambiguitychecker.py:380; `rankHomophoneCluster` :261 (code name keeps "cluster").
+- Code: `groupHomophonesByReservedStroke` src/ambiguitychecker.py:391; `rankHomophoneCluster` :261 (code name keeps "cluster").
 - Avoid "lemma-homophone cluster", and "homophone group" for it (that is the same-`lemmeGramCat` unit).
 - First used in: Different-Lemma or Grammatical-Category Disambiguation (S7).
 
