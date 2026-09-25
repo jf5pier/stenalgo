@@ -39,6 +39,7 @@ phase codes, older stage names and older terms. They map as follows.
 | bare mark stroke | **\*/# marker stroke** |
 | 10x rule, frequency-ratio exemption | **frequency-ratio rule (R4)** |
 | in-scope collision | **Same-lemmeGramCat collision** |
+| same-steno collision (exporter output, same spelling) | **Same-stroke homograph** (not a **Collision**) |
 | theory 1, first theory, `FirstTheory.pickle`, `theory.tsv` | **phonetic theory** (renamed 2026-09-24) |
 | theory 2, final theory, `theory2.tsv` | **disambiguated theory** (renamed 2026-09-24) |
 
@@ -200,6 +201,18 @@ feature keys only from this bank.
 - Code: `keyIDinSyllabicPart` in `starboard3h.json`; util/build_realization_report.py:4.
 - First used in: Phonetic Theory Building (S5).
 
+### Collision
+Two Words with **different spellings** on the same final stroke (the same steno string in the
+disambiguated theory): Plover can output only one, so the other spelling loses that stroke.
+Words with the same spelling never collide — see **Same-stroke homograph** and
+**Distinct-stroke homograph**. The narrower kinds are named by where they are measured:
+phonetic-theory collision (before any marks), and the residual-collision buckets of the
+Realization Phase (same-lemmeGramCat collision, cross-category clash, cross-lemma collision).
+- Code: no final check exists yet (TODO.md B44); `export_plover_dictionary` counts
+  "same-steno collisions", which also include same-stroke homographs.
+- Avoid "collision" for two Words of one spelling.
+- First used in: Theory Export (S8).
+
 ### Conjugation-feature legend
 The trainer's table from keypress group to physical keys and French feature labels, read
 from the realization report (not from the inline path).
@@ -297,6 +310,16 @@ Pre-2026-09-18 name for a solver-chosen feature that separates homophones. Survi
 function names (`buildDiscriminatorSelection`) and in Synthetic Lexicon Building (S2)'s gating.
 - Preferred synonym: **Atomic feature** (the value) or **Discriminating feature set** (what is pressed). Avoid.
 - First used in: Synthetic Lexicon Building (S2).
+
+### Distinct-stroke homograph
+One spelling reached through two or more different final strokes: several Words of that
+spelling (or one Word's primary stroke and its alternate entries) end on different steno
+strings, each typing the same text. Harmless for output (every route types the right word)
+but each extra route uses up a stroke. Example: "abolis" — `a/svae/mti/-s`, `-k`, `-dt` on the
+resolved Word, plus `a/svae/mt*i` on its unresolved passé-simple Word.
+- Code: `loadDisambiguatedTheory` (a Word's list of strokes) util/_theoryio.py:58.
+- Not a collision. Contrast **Same-stroke homograph**.
+- First used in: Discriminating-Feature Stroke Realization (Realization Phase).
 
 ### Donor / ending table
 The attested words of a verb template or NOM/ADJ ending class (donors), and the suffix
@@ -432,6 +455,8 @@ Two Words with the same spelling; they type the same text, so they are never sep
 **self-homograph** is one spelling with several feature combinations inside one homophone
 group ("calmez": impératif or indicatif 2p); it gets one alternate per combination.
 - Code: `decideStarHashMark` homograph exemption (R1) src/ambiguitychecker.py:211; `resolveGroupPressSets` src/elicitation.py:374.
+- By final strokes, homographs are either **same-stroke homographs** or **distinct-stroke
+  homographs**; neither is a collision.
 - First used in: Discriminating-Feature Elicitation (Elicitation Phase).
 
 ### Homophone Group
@@ -868,6 +893,14 @@ Realization (Realization Phase).
 ### Same-Lemma Disambiguation (S3)
 Legacy stage name. Use **Same-Lemma and Grammatical-Category Disambiguation (S6)**.
 - First used in: Same-Lemma and Grammatical-Category Disambiguation (S6).
+
+### Same-stroke homograph
+Two or more Words with the same spelling on the same final stroke (for example a VER
+participle and its ADJ reading). They type the same text whichever Word Plover keeps, so
+this is never an ambiguity.
+- Code: the homograph exemption (R1) in `decideStarHashMark` src/ambiguitychecker.py:211.
+- Not a collision. Contrast **Distinct-stroke homograph**.
+- First used in: Phonetic Theory Building (S5).
 
 ### Signature
 Avoid. It named both a discriminating feature set (the root GLOSSARY.md's old sense, with a
