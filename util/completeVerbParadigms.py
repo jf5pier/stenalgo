@@ -198,10 +198,15 @@ def findStructuralCandidates(
 
         attestedSlots = participleForms.get(lemme, {})
         if attestedSlots:
-            referenceWord = next(iter(attestedSlots.values()))
             for gender, number in GENDER_NUMBER_SLOTS:
                 if (gender, number) in attestedSlots:
                     continue
+                # A same-gender participle shares the slot's phon outright; only
+                # a cross-gender one needs spliceParticiplePhon's consonant rule.
+                referenceWord = next(
+                    (word for (wordGender, _n), word in attestedSlots.items() if wordGender == gender),
+                    next(iter(attestedSlots.values())),
+                )
                 try:
                     generated = generateMissingParticiple(lemme, template, referenceWord, gender, number)
                 except ValueError as error:
@@ -240,9 +245,10 @@ def temporarilyAugmented(
 ) -> Iterator[dict[Strokes, list[Word]]]:
     """
     Temporarily appends each candidate's generated Word into its reference
-    word's existing stroke group (every candidate's phon is spliced verbatim
-    from an already-attested word of the same lemma, so that word's stroke
-    group always already exists -- never a brand new key), then removes them
+    word's existing stroke group (an approximation: the reference word is an
+    already-attested word of the same lemma, so its stroke group always
+    already exists -- never a brand new key -- but a finite form's or a
+    cross-gender participle's own phon can differ from it), then removes them
     again on exit. Avoids a full shallow copy of `theory` (tens of thousands
     of stroke-group lists), which combined with holding two full
     extractDiscriminatingFeatures results at once is what caused this script

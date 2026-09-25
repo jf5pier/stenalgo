@@ -20820,7 +20820,7 @@
   "ortho": "promis",
   "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · nom, m. · adjectif, m.",
+  "label": "participe passé, m. sg. · nom, m. · adjectif, m. · participe passé, m. pl.",
   "phonology": "pRo.mi",
   "steno": "pRae/mi",
   "strokes": [
@@ -20881,6 +20881,30 @@
    ],
    [
     18
+   ]
+  ],
+  "frequency": 82.83
+ },
+ {
+  "ortho": "promis",
+  "before": "",
+  "after": "",
+  "label": "participe passé, m. pl.",
+  "phonology": "pRo.mi",
+  "steno": "pRae/mi/-s",
+  "strokes": [
+   [
+    4,
+    8,
+    12,
+    14
+   ],
+   [
+    6,
+    13
+   ],
+   [
+    17
    ]
   ],
   "frequency": 82.83
@@ -52490,7 +52514,7 @@
   "ortho": "permis",
   "before": "tu",
   "after": "",
-  "label": "participe passé, m. sg. · nom, m. · adjectif, m. · indicatif passé, 2e sg.",
+  "label": "participe passé, m. sg. · nom, m. · adjectif, m. · participe passé, m. pl. · indicatif passé, 2e sg.",
   "phonology": "pER.mi",
   "steno": "pieR/mi",
   "strokes": [
@@ -52551,6 +52575,30 @@
    ],
    [
     18
+   ]
+  ],
+  "frequency": 28.04
+ },
+ {
+  "ortho": "permis",
+  "before": "",
+  "after": "",
+  "label": "participe passé, m. pl.",
+  "phonology": "pER.mi",
+  "steno": "pieR/mi/-s",
+  "strokes": [
+   [
+    4,
+    13,
+    14,
+    21
+   ],
+   [
+    6,
+    13
+   ],
+   [
+    17
    ]
   ],
   "frequency": 28.04
@@ -52672,7 +52720,7 @@
   "ortho": "commis",
   "before": "tu",
   "after": "",
-  "label": "participe passé, m. sg. · nom, m. · indicatif passé, 2e sg.",
+  "label": "participe passé, m. sg. · nom, m. · participe passé, m. pl. · indicatif passé, 2e sg.",
   "phonology": "ko.mi",
   "steno": "kae/mi",
   "strokes": [
@@ -52730,6 +52778,29 @@
    ],
    [
     18
+   ]
+  ],
+  "frequency": 27.91
+ },
+ {
+  "ortho": "commis",
+  "before": "",
+  "after": "",
+  "label": "participe passé, m. pl.",
+  "phonology": "ko.mi",
+  "steno": "kae/mi/-s",
+  "strokes": [
+   [
+    2,
+    12,
+    14
+   ],
+   [
+    6,
+    13
+   ],
+   [
+    17
    ]
   ],
   "frequency": 27.91
@@ -58494,7 +58565,7 @@
   "ortho": "surpris",
   "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m.",
+  "label": "participe passé, m. sg. · adjectif, m. · participe passé, m. pl.",
   "phonology": "syR.pRi",
   "steno": "s@iR/pRi",
   "strokes": [
@@ -58558,6 +58629,31 @@
    ],
    [
     18
+   ]
+  ],
+  "frequency": 24.64
+ },
+ {
+  "ortho": "surpris",
+  "before": "",
+  "after": "",
+  "label": "participe passé, m. pl.",
+  "phonology": "syR.pRi",
+  "steno": "s@iR/pRi/-s",
+  "strokes": [
+   [
+    3,
+    11,
+    13,
+    21
+   ],
+   [
+    4,
+    8,
+    13
+   ],
+   [
+    17
    ]
   ],
   "frequency": 24.64
@@ -81809,7 +81905,7 @@
   "ortho": "repris",
   "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · nom, m. · adjectif, m.",
+  "label": "participe passé, m. sg. · nom, m. · adjectif, m. · participe passé, m. pl.",
   "phonology": "R°.pRi",
   "steno": "R@a/pRi",
   "strokes": [
@@ -81870,6 +81966,30 @@
    ],
    [
     18
+   ]
+  ],
+  "frequency": 16.65
+ },
+ {
+  "ortho": "repris",
+  "before": "",
+  "after": "",
+  "label": "participe passé, m. pl.",
+  "phonology": "R°.pRi",
+  "steno": "R@a/pRi/-s",
+  "strokes": [
+   [
+    8,
+    11,
+    12
+   ],
+   [
+    4,
+    8,
+    13
+   ],
+   [
+    17
    ]
   ],
   "frequency": 16.65
@@ -165934,7 +166054,7 @@
   "ortho": "admis",
   "before": "tu",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. · nom, m. · indicatif passé, 2e sg.",
+  "label": "participe passé, m. sg. · adjectif, m. · nom, m. · participe passé, m. pl. · indicatif passé, 2e sg.",
   "phonology": "ad.mi",
   "steno": "ad/mi",
   "strokes": [
@@ -165989,6 +166109,28 @@
    ],
    [
     18
+   ]
+  ],
+  "frequency": 6.74
+ },
+ {
+  "ortho": "admis",
+  "before": "",
+  "after": "",
+  "label": "participe passé, m. pl.",
+  "phonology": "ad.mi",
+  "steno": "ad/mi/-s",
+  "strokes": [
+   [
+    12,
+    19
+   ],
+   [
+    6,
+    13
+   ],
+   [
+    17
    ]
   ],
   "frequency": 6.74
@@ -176058,7 +176200,7 @@
   "ortho": "compromis",
   "before": "je",
   "after": "",
-  "label": "nom, m. · participe passé, m. sg. · indicatif passé, 1re sg.",
+  "label": "nom, m. · participe passé, m. sg. · participe passé, m. pl. · indicatif passé, 1re sg.",
   "phonology": "k§.pRo.mi",
   "steno": "kai/pRae/mi",
   "strokes": [
@@ -200266,7 +200408,7 @@
   "ortho": "transmis",
   "before": "le",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. sg. · indicatif passé, 1re sg. / 2e sg.",
+  "label": "participe passé, m. sg. · adjectif, m. sg. · participe passé, m. pl. · indicatif passé, 1re sg. / 2e sg.",
   "phonology": "tR@s.mi",
   "steno": "tR@s/mi",
   "strokes": [
@@ -200327,6 +200469,30 @@
    ],
    [
     18
+   ]
+  ],
+  "frequency": 5.25
+ },
+ {
+  "ortho": "transmis",
+  "before": "",
+  "after": "",
+  "label": "participe passé, m. pl.",
+  "phonology": "tR@s.mi",
+  "steno": "tR@s/mi/-s",
+  "strokes": [
+   [
+    7,
+    8,
+    11,
+    17
+   ],
+   [
+    6,
+    13
+   ],
+   [
+    17
    ]
   ],
   "frequency": 5.25
@@ -200927,7 +201093,7 @@
   "ortho": "soumis",
   "before": "tu",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. · indicatif passé, 2e sg.",
+  "label": "participe passé, m. sg. · adjectif, m. · participe passé, m. pl. · indicatif passé, 2e sg.",
   "phonology": "su.mi",
   "steno": "s@e/mi",
   "strokes": [
@@ -200985,6 +201151,29 @@
    ],
    [
     18
+   ]
+  ],
+  "frequency": 5.22
+ },
+ {
+  "ortho": "soumis",
+  "before": "",
+  "after": "",
+  "label": "participe passé, m. pl.",
+  "phonology": "su.mi",
+  "steno": "s@e/mi/-s",
+  "strokes": [
+   [
+    3,
+    11,
+    14
+   ],
+   [
+    6,
+    13
+   ],
+   [
+    17
    ]
   ],
   "frequency": 5.22
@@ -232058,186 +232247,5 @@
    ]
   ],
   "frequency": 4.22
- },
- {
-  "ortho": "nuls",
-  "before": "les",
-  "after": "",
-  "label": "adjectif, m. pl. · nom, m. pl.",
-  "phonology": "nyl",
-  "steno": "mR@il/-s",
-  "strokes": [
-   [
-    6,
-    8,
-    11,
-    13,
-    23
-   ],
-   [
-    17
-   ]
-  ],
-  "frequency": 4.22
- },
- {
-  "ortho": "active",
-  "before": "l'",
-  "after": "",
-  "label": "adjectif, f. sg. · indicatif présent, 3e sg.",
-  "phonology": "ak.tiv",
-  "steno": "ak/tijs",
-  "strokes": [
-   [
-    12,
-    18
-   ],
-   [
-    7,
-    13,
-    16,
-    17
-   ]
-  ],
-  "frequency": 4.21
- },
- {
-  "ortho": "apparue",
-  "before": "",
-  "after": "",
-  "label": "participe passé, f. sg.",
-  "phonology": "a.pa.Ry",
-  "steno": "a/pa/R@i/-j",
-  "strokes": [
-   [
-    12
-   ],
-   [
-    4,
-    12
-   ],
-   [
-    8,
-    11,
-    13
-   ],
-   [
-    16
-   ]
-  ],
-  "frequency": 4.21
- },
- {
-  "ortho": "assiste",
-  "before": "il",
-  "after": "",
-  "label": "indicatif présent, 3e sg.",
-  "phonology": "a.sist",
-  "steno": "a/sist",
-  "strokes": [
-   [
-    12
-   ],
-   [
-    3,
-    13,
-    17,
-    20
-   ]
-  ],
-  "frequency": 4.21
- },
- {
-  "ortho": "assiste",
-  "before": "que j'",
-  "after": "",
-  "label": "subjonctif présent, 1re sg. / 3e sg.",
-  "phonology": "a.sist",
-  "steno": "a/sist/-R",
-  "strokes": [
-   [
-    12
-   ],
-   [
-    3,
-    13,
-    17,
-    20
-   ],
-   [
-    21
-   ]
-  ],
-  "frequency": 4.21
- },
- {
-  "ortho": "assiste",
-  "before": "j'",
-  "after": "",
-  "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
-  "phonology": "a.sist",
-  "steno": "a/sist/-k",
-  "strokes": [
-   [
-    12
-   ],
-   [
-    3,
-    13,
-    17,
-    20
-   ],
-   [
-    18
-   ]
-  ],
-  "frequency": 4.21
- },
- {
-  "ortho": "doses",
-  "before": "les",
-  "after": "",
-  "label": "nom, f. pl.",
-  "phonology": "doz",
-  "steno": "pvaenl/-s",
-  "strokes": [
-   [
-    4,
-    5,
-    12,
-    14,
-    22,
-    23
-   ],
-   [
-    17
-   ]
-  ],
-  "frequency": 4.21
- },
- {
-  "ortho": "fonder",
-  "before": "",
-  "after": "",
-  "label": "infinitif",
-  "phonology": "f§.de",
-  "steno": "kpai/pve/-l",
-  "strokes": [
-   [
-    2,
-    4,
-    12,
-    13
-   ],
-   [
-    4,
-    5,
-    14
-   ],
-   [
-    23
-   ]
-  ],
-  "frequency": 4.21
  }
 ]

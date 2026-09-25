@@ -479,6 +479,7 @@ later companion script.
 | fixSourdreDefectiveGaps | conjugations-fr.xml, Lexique383, Mixte | yes | yes | sourdre slots |
 | fixSpuriousDuplicateVerbRows | Lexique383, Mixte | yes | yes | duplicate VER/AUX rows |
 | fixSplicedVerbBreakdowns | Synthetic (in place) | no | n/a | spliced finite forms re-normalized, item B2 (S2.4) |
+| fixParticipleGenderPhon | Synthetic (in place) | no | n/a | synthetic participles' feminine-stem consonant added/dropped, item B45 (S2.4) |
 | fixXlfnSingleCorruption | Infra | no | yes | `_xlfn.SINGLE(...)` (Excel) |
 | completeVerbParadigms | Synthetic (append) | no | n/a | Verb paradigm completion (S2.1) |
 | generateMissingNomAdjForms | Synthetic (append) | no | n/a | NOM/ADJ gap generation (S2.2) |
@@ -553,9 +554,10 @@ feature-complexity tie-break. Not idempotent (item B13).
     lemma whose legacy feature space (`fullFeatureSpace` :120) is a strict subset of the union
     of its siblings'. Lemmas without siblings are skipped.
   - *Generate missing participles (S2.1.3.2)* :368 — ortho from the Verbiste `par:pas`
-    ending (`infinitiveRadical` :240, `generateOrthoForm` :253); phon and `syll_cv` copied
-    from the donor participle (`spliceParticiplePhon` :297); `orthosyll_cv` = donor radical +
-    `""/s/e/es` (:345); `infover = "par:pas;"`.
+    ending (`infinitiveRadical` :240, `generateOrthoForm` :253); phon and `syll_cv` from
+    the donor participle, with the gender consonant of a consonant-final feminine stem
+    added for feminine or dropped for masculine (`spliceParticiplePhon` :326); number never
+    changes it; `orthosyll_cv` = donor radical + `""/s/e/es` (:345); `infover = "par:pas;"`.
   - *Generate missing finite forms (S2.1.3.3)* :794 — ortho = Verbiste radical + ending;
     each phonological field = infinitive value truncated by the suffix length + the table
     ending (:828); `None` below the match rate. The cut keeps the infinitive's syllable
@@ -623,6 +625,13 @@ Both dual-form fillers are also called by `python -m util.build_synthetic_lexico
   VER row whose tags are all finite slots (pa:yer and -seoir rows excepted: their fillers
   above use their own endings); corrected the 14,926 rows spliced before the fix (item B2).
   One-off, not called by `util.build_synthetic_lexicon`.
+- `util/fixParticipleGenderPhon.py` main — row-local: each synthetic past-participle row
+  keeps its own phon and only gains (feminine) or loses (masculine) its lemma's
+  feminine-stem consonant, via `spliceParticiplePhon` with the row as a donor of the other
+  gender; deletes the synthetic participle rows that duplicate an attested `LexiqueMixte`
+  row (same ortho, lemma, gender, number), stale since e3b0358 filled those rows'
+  gender/number. Corrected 62 rows and deleted 17 (item B45). One-off, not called by
+  `util.build_synthetic_lexicon`.
 
 ### Consumption
 `LexiqueSynthetic.tsv` is consumed only by Lexicon reading and identity merge (S3.2.1); its

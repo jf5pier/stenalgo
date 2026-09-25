@@ -18,8 +18,9 @@ Stage 4: generate the orthographic form for a missing conjugation slot by
 applying a Verbiste conjugation template to a lemma's radical
 (parseConjugationTemplates, generateOrthoForm). Phonology/syllable-breakdown
 generation has two paths: past-participle gender/number forms reuse phonology
-verbatim (spliceParticiplePhon, generateMissingParticiple), since gender/number
-doesn't change a participle's pronunciation; finite conjugation slots (mood,
+(spliceParticiplePhon, generateMissingParticiple), since number doesn't change a
+participle's pronunciation and gender only adds or drops the consonant of a
+consonant-final feminine stem ("promis"/"promise"); finite conjugation slots (mood,
 tense, person/number) genuinely change pronunciation, so those are generated
 from an empirically-derived per-template ending table instead
 (deriveConjugationEndingTables, generateMissingConjugatedForm).
@@ -294,21 +295,71 @@ PARTICIPE_PASSE_ORTHOSYLL_SUFFIX = {
 }
 
 
-def spliceParticiplePhon(attestedParticiple: Word) -> tuple[str, str]:
+# The consonant letter a feminine past participle's stem ends in, when it has
+# one, is silent in the masculine and pronounced in the feminine ("promis"
+# /pRomi/, "promise" /pRomiz/; "écrit" /ekRi/, "écrite" /ekRit/; "clos" /klo/,
+# "close" /kloz/). A single intervocalic "s" is voiced; "ss" is not.
+FEMININE_PARTICIPLE_CONSONANT = {"s": "z", "ss": "s", "t": "t"}
+PARTICIPLE_VOWEL_LETTERS = set("aeiouyàâäéèêëîïôöùûüÿœæ")
+
+
+def feminineParticipleConsonant(feminineOrtho: str) -> str | None:
+    """
+    The phoneme a feminine past participle pronounces and its masculine does
+    not: None for a vowel-final stem ("garnie", "aimées", "vue"), else the
+    stem's final consonant letter, voiced as spoken ("promises" -> "z",
+    "éconduite" -> "t").
+    """
+    stem = feminineOrtho.removesuffix("s")
+    if not stem.endswith("e"):
+        raise ValueError(f"{feminineOrtho!r} is not a feminine past-participle spelling")
+    stem = stem[:-1]
+    if not stem or stem[-1] in PARTICIPLE_VOWEL_LETTERS:
+        return None
+    letters = "ss" if stem.endswith("ss") else stem[-1]
+    consonant = FEMININE_PARTICIPLE_CONSONANT.get(letters)
+    if consonant is None:
+        raise ValueError(f"no feminine consonant rule for the participle stem of {feminineOrtho!r}")
+    return consonant
+
+
+def spliceParticiplePhon(attestedParticiple: Word, gender: str, ortho: str) -> tuple[str, str]:
     """
     Given one attested past-participle Word of a lemma (any gender/number),
-    return (phon, rawSyllCV) to reuse verbatim for any *other* gender/number
-    slot of that same lemma's past participle.
+    return (phon, rawSyllCV) for the `gender` slot spelled `ortho` of that
+    same lemma's past participle.
 
     Validated empirically across ~200 fin:ir-style verbs in LexiqueMixte.tsv:
-    a regular participle's phon does not vary by gender/number (~98% exact;
-    the residual is vowel-transcription allophone noise, not a real
-    phonological effect) -- only the written ending differs. Any trailing '#'
-    in rawSyllCV is dropped: it's a silent-grapheme bookkeeping artifact of
-    the source alignment data (see lexique.py), not a phonological signal --
+    a regular participle's phon does not vary by number, nor by gender when
+    its stem ends in a vowel (~98% exact; the residual is vowel-transcription
+    allophone noise, not a real phonological effect) -- only the written
+    ending differs. Across genders, a consonant-final feminine stem adds its
+    consonant (feminineParticipleConsonant) to the masculine's phon, as a coda
+    of the last syllable, and the masculine drops it (item B45: "promis" had
+    been given the /z/ of "promise"). Any trailing '#' in rawSyllCV is
+    dropped: it's a silent-grapheme bookkeeping artifact of the source
+    alignment data (see lexique.py), not a phonological signal --
     src/word.py already strips it before building the plain phoneme string.
     """
-    return attestedParticiple.phonology, attestedParticiple.rawSyllCV.replace("_#", "").replace("#", "")
+    phon = attestedParticiple.phonology
+    rawSyllCV = attestedParticiple.rawSyllCV.replace("_#", "").replace("#", "")
+    if gender == attestedParticiple.gender:
+        return phon, rawSyllCV
+    feminineOrtho = ortho if gender == "f" else attestedParticiple.ortho
+    consonant = feminineParticipleConsonant(feminineOrtho)
+    if consonant is None:
+        return phon, rawSyllCV
+    if gender == "f":
+        if phon.endswith(consonant):
+            return phon, rawSyllCV
+        return phon + consonant, f"{rawSyllCV}_{consonant}"
+    if not phon.endswith(consonant):
+        return phon, rawSyllCV
+    if rawSyllCV[-2:] not in (f"_{consonant}", f"|{consonant}"):
+        raise ValueError(
+            f"syll_cv {rawSyllCV!r} of {attestedParticiple.ortho!r} does not end with its phon's {consonant!r}"
+        )
+    return phon[:-1], rawSyllCV[:-2]
 
 
 def deriveParticipeRadicalOrthosyll(attestedParticiple: Word) -> str:
@@ -384,7 +435,7 @@ def generateMissingParticiple(
     ortho = generateOrthoForm(radical, template, "par:pas", gender=gender, number=number)
     if ortho is None:
         raise ValueError(f"template {template.name!r} has no par:pas form for {gender}_{number}")
-    phon, rawSyllCV = spliceParticiplePhon(attestedParticiple)
+    phon, rawSyllCV = spliceParticiplePhon(attestedParticiple, gender, ortho)
     rawOrthosyllCV = generateParticipeOrthosyll(attestedParticiple, gender, number)
     return Word(
         ortho=ortho, phonology=phon, lemme=lemme,
