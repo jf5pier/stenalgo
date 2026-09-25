@@ -12,26 +12,30 @@ tracked artifacts; tier 3 is latent (no measured impact). B39/B40 were dropped: 
 was removed in Dead-Code Removal (Pass 5). B1 was dropped 2026-09-24: every reading of a
 spelling is already an alternate press-set on the resolved Word, so the unresolved "twin" Word
 only adds a redundant route (269 twins: 133 alone on their stroke, 38 on a resolved stroke, 98
-losing a tie, 0 hiding another spelling). B2, B11, B14, B27 and B43 have since been fixed.
+losing a tie, 0 hiding another spelling). B2, B4, B11, B14, B27, B43 and B44 have since been fixed.
 
 ### Tier 1 — affects the Plover output today
 
-- **B44** Feature discriminating strokes output a different word in Plover (the full scope of B4) — 213 strokes
-  after the B2 fix (141 strokes in 122 spellings before it; 2026-09-24 build; list in `scratch/b44-lost-feature-strokes.txt`, probe `scratch/b44_probe.py`: every resolved Word's final strokes vs
-  `plover_stenalgo_dictionary.json`). Mechanism seen on `panse`/`pense`, `conte`/`compte`,
-  `lie`/`lis`: Different-Lemma or Grammatical-Category Disambiguation (S7) puts its `*`/`#` mark on
-  the primary (base) stroke only (`panse` → `p*@s`), while the alternate feature strokes are built on
-  the unmarked phonetic stroke (`p@s/-k`, `p@s/-R`), identical to the more frequent homophone's, so
-  Plover keeps `pense`. Other groups: 1990-reform/variant spellings (`trimbale`/`trimballe`,
-  `dessoûlé`/`dessoulé`, `toquade`/`tocade`, `évènementiel`/`événementiel` — to be removed by
-  the spelling-variant follow-up below), NOM/ADJ plurals vs verb forms (`garanties` → `garantis`), and the
-  9 B45 participles (`promis` `p` → `promises`). To do: (1) fix it — carry the S7 mark onto every
-  alternate stroke or rank alternates as their own homophone clusters; (2) find why no tool flagged
-  it: the Realization Phase files these under "cross-lemma collisions (out of scope — */# track's
-  job)", S7 never re-checks the final composed strokes, and `export_plover_dictionary` prints
-  its 14,739 "same-steno collisions" as "expected for homograph/exempted pairs", lumping
-  same-stroke homographs (not collisions, see docs/GLOSSARY.md) with real collisions — add a final check (different spelling on one final
-  steno) that fails loudly.
+- **B44** RESOLVED 2026-09-24 (`composeReservedKeyStrokesForEntries`, src/ambiguitychecker.py:424:
+  Different-Lemma or Grammatical-Category Disambiguation (S7) now clusters and marks every entry,
+  primary and alternate, on its own final stroke; `panse` → `p*@s`, `p*@s/-k`, `p*@s/-R`). Plover:
+  +183 stenos, 0 removed, 50 spellings newly reachable (`subits`, `amplis`, `garanties`, `buttent`…),
+  none lost; 5 stenos change owner (`ksa/R@/ti/-s` `garantis` → `garanties`, the VER reading moving
+  to `ksa/R@/t*i/-s`). Why no tool flagged it: the Realization Phase files these under
+  "cross-lemma collisions (out of scope — */# track's job)", S7 never re-checked the final strokes,
+  and `export_plover_dictionary` printed its 14,739 "same-steno collisions" as expected, lumping
+  same-stroke homographs with real collisions. New final check `findFinalCollisions`: `python -m
+  util.build_disambiguated_theory` (so `python dictionary.py`) exits 1 on any cross-lemma collision
+  (191 before the fix, 0 after); it reports, without failing, 104 same-lemma residuals and 28
+  reform-doublet (R2) collisions. Of the 104, 98 are an unresolved synthetic twin Word on its
+  unmarked base stroke (`agis` ind:pas:2s, freq 0, beside `agi` on `a/vti`) — harmless while the
+  twin is the rarer, since the attested Word reaches the spelling — and 6 make spellings unreachable
+  (`caquette`/`caquète`, `dételle`/`détèle`, `nivelle`/`nivèle`… `-eter`/`-eler` variant
+  conjugations of one lemma, for the spelling-variant follow-up); the 28 R2 collisions all hide a
+  variant spelling on purpose. Probes: `scratch/b44_collisions.py`, `scratch/b44_residuals.py`;
+  pre-fix outputs in `scratch/b44-before/`, diff in `scratch/b44-plover-diff.txt`. The 9 B45
+  participles (`promis` → `promises`) and the variant spellings were separate causes of the old
+  list: re-check them with the probe after B45 and the spelling-variant removal.
 - **B45** Synthetic past participles copy another gender's phonology — src/verbparadigm.py:296
   (`spliceParticiplePhon`) assumes a participle's phon is invariant across gender/number, false
   when the masculine ends in a silent consonant. 33 masculine rows in `LexiqueSynthetic.tsv` carry
@@ -67,10 +71,10 @@ losing a tie, 0 hiding another spelling). B2, B11, B14, B27 and B43 have since b
 - **B3** Breakdown built from a LexiqueInfra association that disagrees with the phonology —
   lexique.py:1021, :1033 (with :770-883) — match uses Infra `phono`, `syll_cv` comes from `assoc`
   (`embêter` typed with closed `e`). 132 mixed-lexicon rows; 175 VER synthetic rows inherit it.
-- **B4** Alternate entries of self-homographs take unrelated words' only stroke —
-  src/ambiguitychecker.py:1288 (`buildExtraInducedStrokes`), dictionary.py:389 — alternate entry
-  strokes skip the star/hash marks (`subits` loses to `subis`). 9 spellings have no Plover entry.
-  Measured more widely as B44 (141 strokes, 122 spellings); fix them together.
+- **B4** RESOLVED 2026-09-24 with B44 (alternate entries now carry their own star/hash mark; `subits`
+  is reachable as `s@i/sv*i/-s`). Original entry: alternate entries of self-homographs take
+  unrelated words' only stroke — src/ambiguitychecker.py:1288 (`buildExtraInducedStrokes`),
+  dictionary.py:389 — alternate entry strokes skip the star/hash marks (`subits` loses to `subis`).
 - **B5** Frequency ties make star/hash marks depend on input order — src/ambiguitychecker.py:224-232,
   `_starHashCompare` :242-258 — not antisymmetric on equal frequency (`pas`/`pâts`). Shuffling input
   changes marks in 619 of 4,450 lemma-homophone groups (14%); any lexicon row move can flip them.

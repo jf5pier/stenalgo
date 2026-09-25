@@ -5,7 +5,7 @@ member of a lemma-homophone group is typed plainly and which get a star/hash mar
 `*#`, or an escalated code), and how that mark becomes physical keys.
 
 The code is the source of truth: `src/ambiguitychecker.py` (`decideStarHashMark` →
-`composeReservedKeyStrokes`) and `GRAMCAT_PRIORITY` in `src/greedyoptimizer.py`. For the
+`composeReservedKeyStrokesForEntries`) and `GRAMCAT_PRIORITY` in `src/greedyoptimizer.py`. For the
 per-call walkthrough (line numbers, data volumes, dataset state before and after each call),
 see [PIPELINE.md §Different-Lemma or Grammatical-Category Disambiguation (S7)](../PIPELINE.md#different-lemma-or-grammatical-category-disambiguation-s7).
 Terms are defined in [GLOSSARY.md](../GLOSSARY.md).
@@ -122,7 +122,10 @@ The **canonical member** (rank 0, code `()`) keeps its final induced strokes unc
 ## 5. Physical strokes
 
 `starHashCodeToStrokes` maps `*` → key 10, `#` → key 15 and `*#` → keys 10 and 15 in one
-stroke. `composeReservedKeyStrokes` then combines these with the Word's final induced strokes:
+stroke. `composeReservedKeyStrokesForEntries` then combines these with each entry's strokes
+(a word's primary final induced stroke, and separately each of its alternate entries — item
+B44, fixed 2026-09-24: an alternate is clustered and marked on its own final stroke, not on
+the word's primary cluster):
 
 - The **first** symbol is pressed together with the word's **last phoneme stroke** (the last
   of its phonetic-theory base strokes), not with a feature discriminating stroke that follows it.
@@ -137,10 +140,14 @@ base stroke count − 1:
 
 **Collision safety.** The Realization Phase picks only coda phoneme keys, and keys 10 and 15
 are never in `Keyboard.allowedKeys`. Removing the reserved keys, and the reserved-only
-trailing strokes, gives back the final induced strokes exactly. So two groups cannot collide
-after composition, and inside a group every code is distinct. This covers **primary** strokes
-only: alternate entries (Alternate entry strokes, S6.Realization.7) carry no star/hash mark
-(see Known gaps).
+trailing strokes, gives back the entry's unmarked stroke exactly. So two groups cannot collide
+after composition, and inside a group every code is distinct. Since the B44 fix this covers
+**every** entry, primary and alternate: each is clustered on its own final stroke
+(`groupHomophonesByReservedStroke`'s per-entry generalization inside
+`composeReservedKeyStrokesForEntries`), so an alternate reading gets the mark its own cluster
+needs, not its word's primary cluster's. Two entries of one word on the same stroke (two
+readings realized alike) count once in the cluster and get the same mark; both are kept, so
+entry positions stay parallel to the press-set alternates.
 
 ## 6. Worked examples
 
@@ -176,6 +183,8 @@ Plover strokes are from `plover_stenalgo_dictionary.json`, 2026-09-22 data.
   final induced strokes exactly.
 - Keys 0 and 1 are never emitted.
 - Canonical members' strokes are unchanged from the Realization Phase output.
+- Since the B44 fix, every entry (primary or alternate) is marked from its own final-stroke
+  cluster, not just a word's primary stroke.
 
 ## 8. Known gaps (tracked in `TODO.md`, "Suspected bugs")
 
@@ -185,9 +194,11 @@ Plover strokes are from `plover_stenalgo_dictionary.json`, 2026-09-22 data.
 - **B25**: R4 and R6 can form a cycle (A < B by R6, B < C by R6, C < A by R4), which again
   makes the order depend on input. There are 0 such cycles among live representatives.
 - **B26**: the doublet merge checks only the representatives' lemmas (0 live instances).
-- **B4**: alternate entries carry no star/hash mark and can take another word's only stroke.
-  9 spellings have no Plover entry as a result (`subits`/`subis`, `pais`/`paie`,
-  `amplis`/`emplis`).
+- **B4** (fixed 2026-09-24 as B44): alternate entries used to carry no star/hash mark and
+  could take another word's only stroke (`subits`/`subis`, `pais`/`paie`, `amplis`/`emplis`).
+  `composeReservedKeyStrokesForEntries` now clusters and marks every entry on its own final
+  stroke; `python -m util.build_disambiguated_theory` fails loudly
+  (`src.ambiguitychecker.findFinalCollisions`, cross-lemma bucket) if this regresses.
 - **B1**: spelling twins (Words sharing a spelling and a `lemmeGramCat`) are not fully
   separated by the Realization Phase, and the one-`lemmeGramCat` filter keeps them out of this
   stage: 99 pairs in 98 strokes reach the disambiguated theory unmarked.

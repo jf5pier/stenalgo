@@ -9,12 +9,11 @@ rendering `writePhoneticTheory`/`phonetic_theory.tsv` uses.
 
 Until 2026-09-21 this only used the phonetic theory (`PhoneticTheory.pickle`), so homophones
 the marking pipeline is specifically built to distinguish (e.g. "a"/"as"/"à")
-collided onto the same steno string in the real dictionary. Any collision
-remaining now is either an intentional exemption (homograph, 1990-reform
-doublet, one word >10x rarer than the other) or a real gap in the marking
-pipeline, not something this exporter can fix -- the most frequent word of
-each colliding group is kept; the rest are reported, same as `writePhoneticTheory`'s
-existing ambiguity reporting.
+collided onto the same steno string in the real dictionary. The most frequent word
+of each steno is kept. Collisions (different spellings on one steno) are counted by
+cause (src.ambiguitychecker.findFinalCollisions): a reform-doublet exemption (R2) pair,
+a Realization Phase same-lemma residual, or a cross-lemma one -- the last a marking
+bug, which `python -m util.build_disambiguated_theory` fails on.
 
 Run: python -m util.export_plover_dictionary
 Requires PhoneticTheory.pickle/Dictionary.pickle (`python -m util.build_phonetic_theory` first),
@@ -24,6 +23,7 @@ resolved_press_sets.json (`python -m src.elicitation`).
 import json
 from collections import defaultdict
 
+from src.ambiguitychecker import findFinalCollisions, loadReform1990DoubletPairs
 from src.keyboard import Starboard
 from src.word import Word
 from util._stenorender import renderFinalStrokesToRTFCRE
@@ -52,21 +52,21 @@ def main() -> None:
                 stenoToWords[steno].append(word)
 
     stenoDict: dict[str, str] = {}
-    collisions: list[tuple[str, list[str]]] = []
     for steno, words in stenoToWords.items():
-        chosen = max(words, key=lambda w: w.frequency)
-        stenoDict[steno] = chosen.ortho
-        if len(words) > 1:
-            collisions.append((steno, sorted({w.ortho for w in words})))
+        stenoDict[steno] = max(words, key=lambda w: w.frequency).ortho
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(stenoDict, f, ensure_ascii=False, indent=1, sort_keys=True)
 
-    print(f"Wrote {OUTPUT_PATH}: {len(stenoDict)} strokes"
-          f" ({len(collisions)} same-steno collisions -- expected for homograph/exempted"
-          f" pairs, not a regression).")
-    for steno, orthos in sorted(collisions, key=lambda c: -len(c[1]))[:10]:
-        print(f"  {steno!r}: {orthos} -> kept {stenoDict[steno]!r}")
+    # Same-stroke homographs (one spelling, several readings) are not collisions
+    # (docs/GLOSSARY.md); only different spellings on one steno lose an output.
+    report = findFinalCollisions(disambiguatedTheory, loadReform1990DoubletPairs())
+    print(f"Wrote {OUTPUT_PATH}: {len(stenoDict)} strokes. Collisions (different spellings"
+          f" on one steno, the most frequent kept): {len(report.crossLemma)} cross-lemma,"
+          f" {len(report.sameLemmeGramCat)} same-lemma residual,"
+          f" {len(report.reformDoublet)} reform doublet (R2).")
+    for words in list(report.crossLemma.values())[:10]:
+        print(f"  CROSS-LEMMA: {sorted({w.ortho for w in words})}")
 
 
 if __name__ == "__main__":
