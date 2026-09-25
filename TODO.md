@@ -331,7 +331,23 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
   Follow-ups: (a) R2/doublet machinery (`doubletPairs`, the reform-doublet exemption in S7) now has
   nothing to handle and can be removed; (b) neologism patch from a future
   `LexiqueGoogleNgramAdditions.tsv` (`python -m util.ngram_data extract-additions`, calibrate the
-  threshold on the distribution first).
+  threshold on the distribution first); (c) RESOLVED 2026-09-25 (`util/fixRectifiedEConjugations.py`,
+  working tree): the 6 residual same-lemma collisions after B47 were the `-eter`/`-eler`
+  variant-conjugation doublets — attested rectified forms (`caquète` ind.) beside synthetic
+  traditional-doubling subjonctif/future rows (`caquette` subj) from Verbiste's `j:eter`/
+  `app:eler` templates; the subjonctif-vs-indicatif cross-spelling opposition was never asked,
+  so the Elicitation Phase skipped the whole group and NO reading got a feature stroke. Fix:
+  the script remapped the 49 verbs whose LexiqueMixte forms attest the `è` convention
+  (caqueter, atteler, renouveler, étiqueter…; only the appeler/jeter family keeps doubling)
+  to `ach:eter`/`p:eler` in `resources/verbiste/verbs-fr.xml` and pruned the 330 doubled
+  LexiqueSynthetic.tsv rows; S2 regenerated 507 rows with rectified spellings (converged in
+  3 rounds). Final-stroke collisions now 0/0/0 (cross-lemma / same-lemma / reform doublet),
+  resolved press-set groups 47,838 → 47,911, subjonctif readings live as same-spelling
+  alternates (B47 machinery). Plover: +489/−261 stenos, 57 owner changes; the 240 lost
+  spellings are ALL doubled spellings (wrong convention per their verb's own lexicon) — 171
+  have their `è` counterpart reachable, 69 rare readings (2s futures, 3p forms of ~25
+  freq-0 verbs) are unwritable until their regenerated row passes the S2 collision gate.
+  Before/after in `scratch/b48-before/`, rebuild log `scratch/b48-rebuild.log`.
 - **Audit the 2% of attested finite verb forms the B2 generator does not reproduce** —
   `PYTHONPATH=. env/bin/python scratch/b2_backtest.py` regenerates every `LexiqueMixte.tsv` finite
   VER form the generator can rebuild from its infinitive (13,461 at the B2 fix) and compares

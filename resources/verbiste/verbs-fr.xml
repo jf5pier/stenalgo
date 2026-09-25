@@ -307,7 +307,7 @@
 <v><i>amodier</i><t>aim:er</t><en>amodier</en></v>
 <v><i>amoindrir</i><t>fin:ir</t><en>lessen</en></v>
 <v><i>amollir</i><t>fin:ir</t><en>soften</en></v>
-<v><i>amonceler</i><t>app:eler</t><en>pile</en></v>
+<v><i>amonceler</i><t>p:eler</t><en>pile</en></v>
 <v><i>amorcer</i><t>pla:cer</t><en>initiate</en></v>
 <v><i>amordancer</i><t>pla:cer</t><en>amordancer</en></v>
 <v><i>amortir</i><t>fin:ir</t><en>cushion</en></v>
@@ -484,7 +484,7 @@
 <v><i>attaquer</i><t>aim:er</t><en>attack</en></v>
 <v><i>attarder</i><t>aim:er</t><en>linger</en></v>
 <v><i>atteindre</i><t>crai:ndre</t><en>achieve</en></v>
-<v><i>atteler</i><t>app:eler</t><en>harness</en></v>
+<v><i>atteler</i><t>p:eler</t><en>harness</en></v>
 <v><i>attendre</i><t>ten:dre</t><en>expect</en></v>
 <v><i>attendrir</i><t>fin:ir</t><en>tender</en></v>
 <v><i>attenter</i><t>aim:er</t><en>attempt</en></v>
@@ -637,7 +637,7 @@
 <v><i>bêcheveter</i><t>j:eter</t><en>bêcheveter</en></v>
 <v><i>bécoter</i><t>aim:er</t><en>smooch</en></v>
 <v><i>becquer</i><t>aim:er</t><en>becquer</en></v>
-<v><i>becqueter</i><t>j:eter</t><en>peck</en></v>
+<v><i>becqueter</i><t>ach:eter</t><en>peck</en></v>
 <v><i>becter</i><t>aim:er</t><en>becter</en></v>
 <v><i>bedonner</i><t>aim:er</t><en>bedonner</en></v>
 <v><i>bégayer</i><t>pa:yer</t><en>stutter</en></v>
@@ -741,7 +741,7 @@
 <v><i>bossuer</i><t>aim:er</t><en>bossuer</en></v>
 <v><i>bostonner</i><t>aim:er</t><en>bostonner</en></v>
 <v><i>botaniser</i><t>aim:er</t><en>botanise</en></v>
-<v><i>botteler</i><t>app:eler</t><en>bunch</en></v>
+<v><i>botteler</i><t>p:eler</t><en>bunch</en></v>
 <v><i>botter</i><t>aim:er</t><en>kick</en></v>
 <v><i>boubouler</i><t>aim:er</t><en>boubouler</en></v>
 <v><i>boucaner</i><t>aim:er</t><en>boucaner</en></v>
@@ -885,7 +885,7 @@
 <v><i>cacaber</i><t>aim:er</t><en>cacaber</en></v>
 <v><i>cacarder</i><t>aim:er</t><en>gaggle</en></v>
 <v><i>cacher</i><t>aim:er</t><en>hide</en></v>
-<v><i>cacheter</i><t>j:eter</t><en>seal</en></v>
+<v><i>cacheter</i><t>ach:eter</t><en>seal</en></v>
 <v><i>cachetonner</i><t>aim:er</t><en>cachetonner</en></v>
 <v><i>cadancher</i><t>aim:er</t><en>cadancher</en></v>
 <v><i>cadastrer</i><t>aim:er</t><en>cadastered</en></v>
@@ -969,7 +969,7 @@
 <v><i>capturer</i><t>aim:er</t><en>capture</en></v>
 <v><i>capuchonner</i><t>aim:er</t><en>recap</en></v>
 <v><i>caquer</i><t>aim:er</t><en>caquer</en></v>
-<v><i>caqueter</i><t>j:eter</t><en>cackle</en></v>
+<v><i>caqueter</i><t>ach:eter</t><en>cackle</en></v>
 <v><i>caracoler</i><t>aim:er</t><en>prance</en></v>
 <v><i>caractériser</i><t>aim:er</t><en>characterize</en></v>
 <v><i>caramboler</i><t>aim:er</t><en>carom</en></v>
@@ -1058,7 +1058,7 @@
 <v><i>champagniser</i><t>aim:er</t><en>champagniser</en></v>
 <v><i>champignonner</i><t>aim:er</t><en>champignonner</en></v>
 <v><i>champlever</i><t>l:ever</t><en>champlever</en></v>
-<v><i>chanceler</i><t>app:eler</t><en>totter</en></v>
+<v><i>chanceler</i><t>p:eler</t><en>totter</en></v>
 <v><i>chancir</i><t>fin:ir</t><en>chancir</en></v>
 <v><i>chanfreiner</i><t>aim:er</t><en>chamfer</en></v>
 <v><i>changer</i><t>man:ger</t><en>change</en></v>
@@ -1200,7 +1200,7 @@
 <v><i>clignoter</i><t>aim:er</t><en>flash</en></v>
 <v><i>climatiser</i><t>aim:er</t><en>cool</en></v>
 <v><i>cliquer</i><t>aim:er</t><en>click</en></v>
-<v><i>cliqueter</i><t>j:eter</t><en>click</en></v>
+<v><i>cliqueter</i><t>ach:eter</t><en>click</en></v>
 <v><i>clisser</i><t>aim:er</t><en>clisser</en></v>
 <v><i>cliver</i><t>aim:er</t><en>cleave</en></v>
 <v><i>clochardiser</i><t>aim:er</t><en>tramps</en></v>
@@ -1248,7 +1248,7 @@
 <v><i>collectionner</i><t>aim:er</t><en>collect</en></v>
 <v><i>collectiviser</i><t>aim:er</t><en>collectivize</en></v>
 <v><i>coller</i><t>aim:er</t><en>paste</en></v>
-<v><i>colleter</i><t>j:eter</t><en>collar</en></v>
+<v><i>colleter</i><t>ach:eter</t><en>collar</en></v>
 <v><i>colliger</i><t>man:ger</t><en>collect</en></v>
 <v><i>colloquer</i><t>aim:er</t><en>collocate</en></v>
 <v><i>colmater</i><t>aim:er</t><en>plug</en></v>
@@ -1539,9 +1539,9 @@
 <v><i>crapahuter</i><t>aim:er</t><en>trudge</en></v>
 <v><i>crapaüter</i><t>aim:er</t><en>crapaüter</en></v>
 <v><i>crapuler</i><t>aim:er</t><en>crapuler</en></v>
-<v><i>craqueler</i><t>app:eler</t><en>crack</en></v>
+<v><i>craqueler</i><t>p:eler</t><en>crack</en></v>
 <v><i>craquer</i><t>aim:er</t><en>crack</en></v>
-<v><i>craqueter</i><t>j:eter</t><en>craqueter</en></v>
+<v><i>craqueter</i><t>ach:eter</t><en>craqueter</en></v>
 <v><i>crasser</i><t>aim:er</t><en>crasser</en></v>
 <v><i>cravacher</i><t>aim:er</t><en>whip</en></v>
 <v><i>cravater</i><t>aim:er</t><en>cravater</en></v>
@@ -1697,7 +1697,7 @@
 <v><i>débureaucratiser</i><t>aim:er</t><en>debureaucratize</en></v>
 <v><i>débusquer</i><t>aim:er</t><en>flush</en></v>
 <v><i>débuter</i><t>aim:er</t><en>start</en></v>
-<v><i>décacheter</i><t>j:eter</t><en>unseal</en></v>
+<v><i>décacheter</i><t>ach:eter</t><en>unseal</en></v>
 <v><i>décadenasser</i><t>aim:er</t><en>décadenasser</en></v>
 <v><i>décaféiner</i><t>aim:er</t><en>decaffeinate</en></v>
 <v><i>décaisser</i><t>aim:er</t><en>disburse</en></v>
@@ -1734,7 +1734,7 @@
 <v><i>décercler</i><t>aim:er</t><en>décercler</en></v>
 <v><i>décérébrer</i><t>cél:ébrer</t><en>décérébrer</en></v>
 <v><i>décerner</i><t>aim:er</t><en>award</en></v>
-<v><i>décerveler</i><t>app:eler</t><en>brainwash</en></v>
+<v><i>décerveler</i><t>p:eler</t><en>brainwash</en></v>
 <v><i>décesser</i><t>aim:er</t><en>décesser</en></v>
 <v><i>décevoir</i><t>dé:cevoir</t><en>disappoint</en></v>
 <v><i>déchagriner</i><t>aim:er</t><en>déchagriner</en></v>
@@ -1750,7 +1750,7 @@
 <v><i>décheviller</i><t>aim:er</t><en>décheviller</en></v>
 <v><i>déchiffonner</i><t>aim:er</t><en>déchiffonner</en></v>
 <v><i>déchiffrer</i><t>aim:er</t><en>read</en></v>
-<v><i>déchiqueter</i><t>j:eter</t><en>shred</en></v>
+<v><i>déchiqueter</i><t>ach:eter</t><en>shred</en></v>
 <v><i>déchirer</i><t>aim:er</t><en>tear</en></v>
 <v><i>déchlorurer</i><t>aim:er</t><en>dechlorinate</en></v>
 <v><i>déchoir</i><t>déch:oir</t><en>deprive</en></v>
@@ -1876,7 +1876,7 @@
 <v><i>défeuiller</i><t>aim:er</t><en>défeuiller</en></v>
 <v><i>défeutrer</i><t>aim:er</t><en>dethatch</en></v>
 <v><i>défibrer</i><t>aim:er</t><en>pulping</en></v>
-<v><i>déficeler</i><t>app:eler</t><en>untie</en></v>
+<v><i>déficeler</i><t>p:eler</t><en>untie</en></v>
 <v><i>défier</i><t>aim:er</t><en>challenge</en></v>
 <v><i>défiger</i><t>man:ger</t><en>unfreeze</en></v>
 <v><i>défigurer</i><t>aim:er</t><en>disfigure</en></v>
@@ -2165,7 +2165,7 @@
 <v><i>déprogrammer</i><t>aim:er</t><en>deprogram</en></v>
 <v><i>déprolétariser</i><t>aim:er</t><en>déprolétariser</en></v>
 <v><i>dépropaniser</i><t>aim:er</t><en>dépropaniser</en></v>
-<v><i>dépuceler</i><t>app:eler</t><en>deflowered</en></v>
+<v><i>dépuceler</i><t>p:eler</t><en>deflowered</en></v>
 <v><i>dépulper</i><t>aim:er</t><en>pulping</en></v>
 <v><i>dépurer</i><t>aim:er</t><en>purify</en></v>
 <v><i>députer</i><t>aim:er</t><en>depute</en></v>
@@ -2375,7 +2375,7 @@
 <v><i>détaxer</i><t>aim:er</t><en>zero-rate</en></v>
 <v><i>détecter</i><t>aim:er</t><en>detect</en></v>
 <v><i>déteindre</i><t>crai:ndre</t><en>rub</en></v>
-<v><i>dételer</i><t>app:eler</t><en>uncouple</en></v>
+<v><i>dételer</i><t>p:eler</t><en>uncouple</en></v>
 <v><i>détendre</i><t>ten:dre</t><en>loosen</en></v>
 <v><i>détenir</i><t>t:enir</t><en>hold</en></v>
 <v><i>déterger</i><t>man:ger</t><en>deterging</en></v>
@@ -2833,7 +2833,7 @@
 <v><i>empanacher</i><t>aim:er</t><en>empanacher</en></v>
 <v><i>empanner</i><t>aim:er</t><en>jibe</en></v>
 <v><i>empapilloter</i><t>aim:er</t><en>empapilloter</en></v>
-<v><i>empaqueter</i><t>j:eter</t><en>pack</en></v>
+<v><i>empaqueter</i><t>ach:eter</t><en>pack</en></v>
 <v><i>emparer</i><t>aim:er</t><en>seize</en></v>
 <v><i>emparquer</i><t>aim:er</t><en>emparquer</en></v>
 <v><i>empâter</i><t>aim:er</t><en>masticate</en></v>
@@ -3057,7 +3057,7 @@
 <v><i>ensevelir</i><t>fin:ir</t><en>bury</en></v>
 <v><i>ensiler</i><t>aim:er</t><en>ensile</en></v>
 <v><i>ensoleiller</i><t>aim:er</t><en>sunshine</en></v>
-<v><i>ensorceler</i><t>app:eler</t><en>bewitch</en></v>
+<v><i>ensorceler</i><t>p:eler</t><en>bewitch</en></v>
 <v><i>ensoufrer</i><t>aim:er</t><en>ensoufrer</en></v>
 <v><i>ensoutaner</i><t>aim:er</t><en>ensoutaner</en></v>
 <v><i>ensuivre</i><t>sui:vre</t><en>follow</en></v>
@@ -3142,7 +3142,7 @@
 <v><i>épater</i><t>aim:er</t><en>wow</en></v>
 <v><i>épaufrer</i><t>aim:er</t><en>spall</en></v>
 <v><i>épauler</i><t>aim:er</t><en>support</en></v>
-<v><i>épeler</i><t>app:eler</t><en>spell</en></v>
+<v><i>épeler</i><t>p:eler</t><en>spell</en></v>
 <v><i>épépiner</i><t>aim:er</t><en>seed</en></v>
 <v><i>éperonner</i><t>aim:er</t><en>spur</en></v>
 <v><i>épeuler</i><t>aim:er</t><en>épeuler</en></v>
@@ -3166,7 +3166,7 @@
 <v><i>épouiller</i><t>aim:er</t><en>delouse</en></v>
 <v><i>époumoner</i><t>aim:er</t><en>hoarse</en></v>
 <v><i>épouser</i><t>aim:er</t><en>marry</en></v>
-<v><i>épousseter</i><t>j:eter</t><en>dust</en></v>
+<v><i>épousseter</i><t>ach:eter</t><en>dust</en></v>
 <v><i>époustoufler</i><t>aim:er</t><en>flabbergast</en></v>
 <v><i>époutier</i><t>aim:er</t><en>époutier</en></v>
 <v><i>époutir</i><t>fin:ir</t><en>époutir</en></v>
@@ -3261,9 +3261,9 @@
 <v><i>étêter</i><t>aim:er</t><en>pollard</en></v>
 <v><i>éthérifier</i><t>aim:er</t><en>etherify</en></v>
 <v><i>éthériser</i><t>aim:er</t><en>etherize</en></v>
-<v><i>étinceler</i><t>app:eler</t><en>sparkle</en></v>
+<v><i>étinceler</i><t>p:eler</t><en>sparkle</en></v>
 <v><i>étioler</i><t>aim:er</t><en>etiolate</en></v>
-<v><i>étiqueter</i><t>j:eter</t><en>label</en></v>
+<v><i>étiqueter</i><t>ach:eter</t><en>label</en></v>
 <v><i>étirer</i><t>aim:er</t><en>stretch</en></v>
 <v><i>étoffer</i><t>aim:er</t><en>enrich</en></v>
 <v><i>étoiler</i><t>aim:er</t><en>étoiler</en></v>
@@ -3447,11 +3447,11 @@
 <v><i>fêter</i><t>aim:er</t><en>celebrate</en></v>
 <v><i>fétichiser</i><t>aim:er</t><en>fetishize</en></v>
 <v><i>feuiller</i><t>aim:er</t><en>feuiller</en></v>
-<v><i>feuilleter</i><t>j:eter</t><en>browse</en></v>
+<v><i>feuilleter</i><t>ach:eter</t><en>browse</en></v>
 <v><i>feuler</i><t>aim:er</t><en>feuler</en></v>
 <v><i>feutrer</i><t>aim:er</t><en>felt</en></v>
 <v><i>fiancer</i><t>pla:cer</t><en>betroth</en></v>
-<v><i>ficeler</i><t>app:eler</t><en>tie up</en></v>
+<v><i>ficeler</i><t>p:eler</t><en>tie up</en></v>
 <v><i>ficher</i><t>aim:er</t><en>file</en></v>
 <v><i>fidéliser</i><t>aim:er</t><en>loyalty</en></v>
 <v><i>fieffer</i><t>aim:er</t><en>fieffer</en></v>
@@ -3714,7 +3714,7 @@
 <v><i>glycériner</i><t>aim:er</t><en>glycériner</en></v>
 <v><i>goberger</i><t>man:ger</t><en>goberger</en></v>
 <v><i>gober</i><t>aim:er</t><en>swallow</en></v>
-<v><i>gobeter</i><t>j:eter</t><en>gobeter</en></v>
+<v><i>gobeter</i><t>ach:eter</t><en>gobeter</en></v>
 <v><i>gobichonner</i><t>aim:er</t><en>gobichonner</en></v>
 <v><i>godailler</i><t>aim:er</t><en>godailler</en></v>
 <v><i>goder</i><t>aim:er</t><en>pucker</en></v>
@@ -3768,7 +3768,7 @@
 <v><i>grêler</i><t>grêl:er</t><en>hail</en></v>
 <v><i>grelotter</i><t>aim:er</t><en>shivering</en></v>
 <v><i>grenailler</i><t>aim:er</t><en>peening</en></v>
-<v><i>greneler</i><t>app:eler</t><en>greneler</en></v>
+<v><i>greneler</i><t>p:eler</t><en>greneler</en></v>
 <v><i>grener</i><t>m:ener</t><en>graining</en></v>
 <v><i>grenouiller</i><t>aim:er</t><en>connive</en></v>
 <v><i>grésiller</i><t>aim:er</t><en>sizzle</en></v>
@@ -3792,11 +3792,11 @@
 <v><i>grisoler</i><t>aim:er</t><en>grisoler</en></v>
 <v><i>grisoller</i><t>aim:er</t><en>grisoller</en></v>
 <v><i>grisonner</i><t>aim:er</t><en>go gray</en></v>
-<v><i>griveler</i><t>app:eler</t><en>eat without paying</en></v>
+<v><i>griveler</i><t>p:eler</t><en>eat without paying</en></v>
 <v><i>grognasser</i><t>aim:er</t><en>grognasser</en></v>
 <v><i>grogner</i><t>aim:er</t><en>grunt</en></v>
 <v><i>grognonner</i><t>aim:er</t><en>grognonner</en></v>
-<v><i>grommeler</i><t>app:eler</t><en>grumble</en></v>
+<v><i>grommeler</i><t>p:eler</t><en>grumble</en></v>
 <v><i>gronder</i><t>aim:er</t><en>scold</en></v>
 <v><i>grossir</i><t>fin:ir</t><en>enlarge</en></v>
 <v><i>grossoyer</i><t>netto:yer</t><en>engross</en></v>
@@ -3883,7 +3883,7 @@
 <v><i>hongroyer</i><t>netto:yer</t> <aspirate-h /> <en>hongroyer</en></v>
 <v><i>honnir</i><t>fin:ir</t> <aspirate-h /> <en>honnir</en></v>
 <v><i>honorer</i><t>aim:er</t><en>honor</en></v>
-<v><i>hoqueter</i><t>j:eter</t> <aspirate-h /> <en>hiccup</en></v>
+<v><i>hoqueter</i><t>ach:eter</t> <aspirate-h /> <en>hiccup</en></v>
 <v><i>hormoner</i><t>aim:er</t><en>hormoner</en></v>
 <v><i>horrifier</i><t>aim:er</t><en>horrify</en></v>
 <v><i>horripiler</i><t>aim:er</t><en>horripilate</en></v>
@@ -4184,7 +4184,7 @@
 <v><i>juger</i><t>man:ger</t><en>judge</en></v>
 <v><i>juguler</i><t>aim:er</t><en>halt</en></v>
 <v><i>jumboïser</i><t>aim:er</t><en>jumboïser</en></v>
-<v><i>jumeler</i><t>app:eler</t><en>twin</en></v>
+<v><i>jumeler</i><t>p:eler</t><en>twin</en></v>
 <v><i>jumper</i><t>aim:er</t><en>jumper</en></v>
 <v><i>juponner</i><t>aim:er</t><en>juponner</en></v>
 <v><i>jurer</i><t>aim:er</t><en>swear</en></v>
@@ -4411,7 +4411,7 @@
 <v><i>maroquiner</i><t>aim:er</t><en>LEATHER GOODS</en></v>
 <v><i>maroufler</i><t>aim:er</t><en>rub</en></v>
 <v><i>marquer</i><t>aim:er</t><en>mark</en></v>
-<v><i>marqueter</i><t>j:eter</t><en>inlay</en></v>
+<v><i>marqueter</i><t>ach:eter</t><en>inlay</en></v>
 <v><i>marrer</i><t>aim:er</t><en>laugh</en></v>
 <v><i>marronner</i><t>aim:er</t><en>marronner</en></v>
 <v><i>marsouiner</i><t>aim:er</t><en>porpoise</en></v>
@@ -4562,7 +4562,7 @@
 <v><i>moquer</i><t>aim:er</t><en>mock</en></v>
 <v><i>moquetter</i><t>aim:er</t><en>moquetter</en></v>
 <v><i>moraliser</i><t>aim:er</t><en>moralize</en></v>
-<v><i>morceler</i><t>app:eler</t><en>break up</en></v>
+<v><i>morceler</i><t>p:eler</t><en>break up</en></v>
 <v><i>mordancer</i><t>pla:cer</t><en>etch</en></v>
 <v><i>mordiller</i><t>aim:er</t><en>nibble</en></v>
 <v><i>mordorer</i><t>aim:er</t><en>mordorer</en></v>
@@ -4581,7 +4581,7 @@
 <v><i>moucharder</i><t>aim:er</t><en>snitch</en></v>
 <v><i>moucher</i><t>aim:er</t><en>snuff</en></v>
 <v><i>moucheronner</i><t>aim:er</t><en>moucheronner</en></v>
-<v><i>moucheter</i><t>j:eter</t><en>speckle</en></v>
+<v><i>moucheter</i><t>ach:eter</t><en>speckle</en></v>
 <v><i>moudre</i><t>mou:dre</t><en>grind</en></v>
 <v><i>mouetter</i><t>aim:er</t><en>mouetter</en></v>
 <v><i>moufter</i><t>aim:er</t><en>moufter</en></v>
@@ -4600,7 +4600,7 @@
 <v><i>mucher</i><t>aim:er</t><en>mucher</en></v>
 <v><i>muer</i><t>aim:er</t><en>moult</en></v>
 <v><i>mugir</i><t>fin:ir</t><en>roar</en></v>
-<v><i>mugueter</i><t>j:eter</t><en>mugueter</en></v>
+<v><i>mugueter</i><t>ach:eter</t><en>mugueter</en></v>
 <v><i>muloter</i><t>aim:er</t><en>muloter</en></v>
 <v><i>multiplexer</i><t>aim:er</t><en>multiplex</en></v>
 <v><i>multiplier</i><t>étudi:er</t><en>multiply</en></v>
@@ -4613,7 +4613,7 @@
 <v><i>murmurer</i><t>aim:er</t><en>murmur</en></v>
 <v><i>musarder</i><t>aim:er</t><en>loiter</en></v>
 <v><i>muscler</i><t>aim:er</t><en>muscle</en></v>
-<v><i>museler</i><t>app:eler</t><en>muzzle</en></v>
+<v><i>museler</i><t>p:eler</t><en>muzzle</en></v>
 <v><i>muser</i><t>aim:er</t><en>muser</en></v>
 <v><i>musiquer</i><t>aim:er</t><en>musiquer</en></v>
 <v><i>musquer</i><t>aim:er</t><en>musquer</en></v>
@@ -4649,7 +4649,7 @@
 <v><i>neutraliser</i><t>aim:er</t><en>neutralize</en></v>
 <v><i>niaiser</i><t>aim:er</t><en>fooling</en></v>
 <v><i>nicher</i><t>aim:er</t><en>nest</en></v>
-<v><i>nickeler</i><t>app:eler</t><en>nickel</en></v>
+<v><i>nickeler</i><t>p:eler</t><en>nickel</en></v>
 <v><i>nicotiniser</i><t>aim:er</t><en>nicotiniser</en></v>
 <v><i>nidifier</i><t>aim:er</t><en>nest</en></v>
 <v><i>nieller</i><t>aim:er</t><en>blight</en></v>
@@ -4660,7 +4660,7 @@
 <v><i>nitrer</i><t>aim:er</t><en>nitrating</en></v>
 <v><i>nitrifier</i><t>aim:er</t><en>nitrify</en></v>
 <v><i>nitrurer</i><t>aim:er</t><en>nitriding</en></v>
-<v><i>niveler</i><t>app:eler</t><en>level</en></v>
+<v><i>niveler</i><t>p:eler</t><en>level</en></v>
 <v><i>noircir</i><t>fin:ir</t><en>black</en></v>
 <v><i>noliser</i><t>aim:er</t><en>charter</en></v>
 <v><i>nomadiser</i><t>aim:er</t><en>live as nomads</en></v>
@@ -4787,7 +4787,7 @@
 <v><i>paillarder</i><t>aim:er</t><en>paillarder</en></v>
 <v><i>paillassonner</i><t>aim:er</t><en>paillassonner</en></v>
 <v><i>pailler</i><t>aim:er</t><en>mulch</en></v>
-<v><i>pailleter</i><t>j:eter</t><en>spangle</en></v>
+<v><i>pailleter</i><t>ach:eter</t><en>spangle</en></v>
 <v><i>paillonner</i><t>aim:er</t><en>paillonner</en></v>
 <v><i>paisseler</i><t>app:eler</t><en>paisseler</en></v>
 <v><i>paître</i><t>p:aître</t><en>graze</en></v>
@@ -4818,13 +4818,13 @@
 <v><i>panner</i><t>aim:er</t><en>panner</en></v>
 <v><i>panoramiquer</i><t>aim:er</t><en>pan</en></v>
 <v><i>panser</i><t>aim:er</t><en>dress</en></v>
-<v><i>panteler</i><t>app:eler</t><en>panteler</en></v>
+<v><i>panteler</i><t>p:eler</t><en>panteler</en></v>
 <v><i>pantoufler</i><t>aim:er</t><en>pantoufler</en></v>
 <v><i>papillonner</i><t>aim:er</t><en>flutter</en></v>
 <v><i>papilloter</i><t>aim:er</t><en>flicker</en></v>
 <v><i>papoter</i><t>aim:er</t><en>chatter</en></v>
 <v><i>papouiller</i><t>aim:er</t><en>papouiller</en></v>
-<v><i>paqueter</i><t>j:eter</t><en>Baling</en></v>
+<v><i>paqueter</i><t>ach:eter</t><en>Baling</en></v>
 <v><i>parachever</i><t>l:ever</t><en>complete</en></v>
 <v><i>parachuter</i><t>aim:er</t><en>parachute</en></v>
 <v><i>parader</i><t>aim:er</t><en>parade</en></v>
@@ -4912,7 +4912,7 @@
 <v><i>peinturer</i><t>aim:er</t><en>paint</en></v>
 <v><i>peinturlurer</i><t>aim:er</t><en>daub with</en></v>
 <v><i>peler</i><t>p:eler</t><en>peel</en></v>
-<v><i>pelleter</i><t>j:eter</t><en>shovel</en></v>
+<v><i>pelleter</i><t>ach:eter</t><en>shovel</en></v>
 <v><i>peloter</i><t>aim:er</t><en>grope</en></v>
 <v><i>pelotonner</i><t>aim:er</t><en>curl</en></v>
 <v><i>pelucher</i><t>aim:er</t><en>fluff</en></v>
@@ -5764,7 +5764,7 @@
 <v><i>remoudre</i><t>mou:dre</t><en>remoudre</en></v>
 <v><i>remouiller</i><t>aim:er</t><en>rewetting</en></v>
 <v><i>rempailler</i><t>aim:er</t><en>rempailler</en></v>
-<v><i>rempaqueter</i><t>j:eter</t><en>repack</en></v>
+<v><i>rempaqueter</i><t>ach:eter</t><en>repack</en></v>
 <v><i>remparer</i><t>aim:er</t><en>remparer</en></v>
 <v><i>rempiéter</i><t>décr:éter</t><en>rempiéter</en></v>
 <v><i>rempiler</i><t>aim:er</t><en>re-up</en></v>
@@ -5816,7 +5816,7 @@
 <v><i>renommer</i><t>aim:er</t><en>reappoint</en></v>
 <v><i>renoncer</i><t>pla:cer</t><en>renounce</en></v>
 <v><i>renouer</i><t>aim:er</t><en>return</en></v>
-<v><i>renouveler</i><t>app:eler</t><en>renew</en></v>
+<v><i>renouveler</i><t>p:eler</t><en>renew</en></v>
 <v><i>rénover</i><t>aim:er</t><en>renovate</en></v>
 <v><i>renquiller</i><t>aim:er</t><en>renquiller</en></v>
 <v><i>renseigner</i><t>aim:er</t><en>inform</en></v>
@@ -5927,7 +5927,7 @@
 <v><i>ressauter</i><t>aim:er</t><en>ressauter</en></v>
 <v><i>ressayer</i><t>pa:yer</t><en>try again</en></v>
 <v><i>ressembler</i><t>aim:er</t><en>like</en></v>
-<v><i>ressemeler</i><t>app:eler</t><en>resole</en></v>
+<v><i>ressemeler</i><t>p:eler</t><en>resole</en></v>
 <v><i>ressemer</i><t>s:emer</t><en>sow</en></v>
 <v><i>ressentir</i><t>men:tir</t><en>feel</en></v>
 <v><i>resserrer</i><t>aim:er</t><en>tighten</en></v>
@@ -6055,7 +6055,7 @@
 <v><i>ritualiser</i><t>aim:er</t><en>ritualize</en></v>
 <v><i>rivaliser</i><t>aim:er</t><en>compete</en></v>
 <v><i>river</i><t>aim:er</t><en>rivet</en></v>
-<v><i>riveter</i><t>j:eter</t><en>rivet</en></v>
+<v><i>riveter</i><t>ach:eter</t><en>rivet</en></v>
 <v><i>rober</i><t>aim:er</t><en>rober</en></v>
 <v><i>robotiser</i><t>aim:er</t><en>robotize</en></v>
 <v><i>rocher</i><t>aim:er</t><en>rock</en></v>
@@ -6109,7 +6109,7 @@
 <v><i>rugir</i><t>fin:ir</t><en>roar</en></v>
 <v><i>ruiler</i><t>aim:er</t><en>ruiler</en></v>
 <v><i>ruiner</i><t>aim:er</t><en>ruin</en></v>
-<v><i>ruisseler</i><t>app:eler</t><en>stream</en></v>
+<v><i>ruisseler</i><t>p:eler</t><en>stream</en></v>
 <v><i>ruminer</i><t>aim:er</t><en>ruminate</en></v>
 <v><i>rupiner</i><t>aim:er</t><en>rupiner</en></v>
 <v><i>ruser</i><t>aim:er</t><en>use cunning</en></v>
@@ -6312,7 +6312,7 @@
 <v><i>souder</i><t>aim:er</t><en>weld</en></v>
 <v><i>soudoyer</i><t>netto:yer</t><en>bribe</en></v>
 <v><i>souffler</i><t>aim:er</t><en>breathe</en></v>
-<v><i>souffleter</i><t>j:eter</t><en>buffet</en></v>
+<v><i>souffleter</i><t>ach:eter</t><en>buffet</en></v>
 <v><i>souffrir</i><t>ouv:rir</t><en>suffer</en></v>
 <v><i>soufrer</i><t>aim:er</t><en>sulphurize</en></v>
 <v><i>souhaiter</i><t>aim:er</t><en>wish</en></v>
@@ -7001,7 +7001,7 @@
 <v><i>volatiliser</i><t>aim:er</t><en>volatilize</en></v>
 <v><i>volcaniser</i><t>aim:er</t><en>volcaniser</en></v>
 <v><i>voler</i><t>aim:er</t><en>fly</en></v>
-<v><i>voleter</i><t>j:eter</t><en>flutter</en></v>
+<v><i>voleter</i><t>ach:eter</t><en>flutter</en></v>
 <v><i>voliger</i><t>man:ger</t><en>install voliges (thin boards, on which lay roofing tiles)</en></v>
 <v><i>volleyer</i><t>aim:er</t><en>volley (to strike, a tennis ball for example, before it touches the ground)</en></v>
 <v><i>volter</i><t>aim:er</t><en>move to avoid the blows of the enemy (fencing); to twist, roll</en></v>
