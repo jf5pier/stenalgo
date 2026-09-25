@@ -163,12 +163,12 @@ The names below are used in every "Input state" and "Result" line.
 | **source lexicons** | TSV/XML files | external, patched by fix scripts | `resources/Lexique383.tsv`, `LexiqueInfraCorrespondance.tsv`, `reform1990.tsv`, `lexiconExclusions.tsv`, `verbiste/*.xml` (tracked) |
 | **raw lexicon rows** | `list[lexique.Word]` (a different dataclass from `src.word.Word`, lexique.py:547) | `Lexique.read_corpus` lexique.py:966 | no |
 | **mixed lexicon** | TSV, 12 columns: `ortho phon lemme cgram cgramortho genre nombre infover syll_cv orthosyll_cv freqlivres freqfilms2`; 136,202 rows | `outputMixedLexique` lexique.py:1174 | `resources/LexiqueMixte.tsv` (tracked) |
-| **synthetic lexicon rows** | same TSV plus a `source` column; 46,022 rows | Synthetic Lexicon Building (S2) scripts | `resources/LexiqueSynthetic.tsv` (tracked) |
-| **Word list** | `list[src.word.Word]`, deduplicated by identity (`ortho, phonology, lemme, gramCat, gender, number`); 168,189 Words | `Dictionary.readCorpus` dictionary.py:92 | inside `Dictionary.pickle` (gitignored) |
+| **synthetic lexicon rows** | same TSV plus a `source` column; 46,199 rows | Synthetic Lexicon Building (S2) scripts | `resources/LexiqueSynthetic.tsv` (tracked) |
+| **Word list** | `list[src.word.Word]`, deduplicated by identity (`ortho, phonology, lemme, gramCat, gender, number`); 168,314 Words | `Dictionary.readCorpus` dictionary.py:92 | inside `Dictionary.pickle` (gitignored) |
 | **syllable statistics** | `SyllableCollection` + `Syllable.*ColByPart` class state | `analyseSyllabification` dictionary.py:169 | `Dictionary.pickle` (objects 1-5) |
 | **layout statistics** | best permutation, pairwise order matrix (`pairwiseBiphonemeOrderScore`) and `syllabicPartAmbiguity`, per syllabic part | `optimizeBiphonemeOrder` grammar.py:644, `analyseAmbiguities` dictionary.py:183 | `Dictionary.pickle` |
 | **keyboard layout** | `Starboard` (26 keys; reserved keys 0, 1, 10, 15) | Keyboard Layout Optimization (S4), last run before 37fdc4e; loaded by `Keyboard.fromJSONFile` keyboard.py:252 | `starboard3h.json` (tracked; rewritten only deliberately — `util.optimize_keyboard --output starboard3h.json`; the solver's default output is `starboard3h_optimized.json`) |
-| **phonetic theory** | `dict[Strokes, list[Word]]` keyed by raw Strokes; 80,725 entries | `Dictionary.buildPhoneticTheory` dictionary.py:305 | `PhoneticTheory.pickle` (gitignored); human view `phonetic_theory.tsv` |
+| **phonetic theory** | `dict[Strokes, list[Word]]` keyed by raw Strokes; 78,680 entries | `Dictionary.buildPhoneticTheory` dictionary.py:305 | `PhoneticTheory.pickle` (gitignored); human view `phonetic_theory.tsv` |
 | **homophone groups** | `dict[LemmaHomophoneGroupKey, list[Word]]`, key = (canonical Strokes, LemmeGramCat); 47,830 | `buildLemmaHomophoneGroups` elicitation.py:61 | no |
 | **questionnaire items** | `list[QuestionnaireItem]`, one per distinct opposition; 200 | `buildQuestionnaireItems` elicitation.py:220 | `questionnaire.json` (gitignored) |
 | **elicitation answers** | JSON list of `{atomsA, checkedA, atomsB, checkedB, …}`; 200 | a person, through the questionnaire page | `elicitation_answers.json` (tracked) |
@@ -178,7 +178,7 @@ The names below are used in every "Input state" and "Result" line.
 | **physical keypress group assignment** | `KeypressGroupPhysicalAssignment` (`chosenKeysByGroup`, cost, alternates, residual buckets) | `realizeKeypressGroupsAsExtraStroke` ambiguitychecker.py:987 | report build only: `realization_report.json` (tracked) |
 | **final induced strokes** | `dict[Word, Strokes]`: base strokes plus at most one feature discriminating stroke | `buildFinalInducedStrokes` ambiguitychecker.py:1168 | no |
 | **disambiguated theory** | `dict[Word, list[Strokes]]`: index 0 primary (with its star/hash mark), then alternate entries | `Dictionary.buildDisambiguatedTheory` dictionary.py:342 | `disambiguated_theory.tsv` (gitignored, read by nothing) |
-| **Plover dictionary** | `dict[str, str]` (RTFCRE steno → spelling); 167,491 entries | `export_plover_dictionary.main` | `plover_stenalgo_dictionary.json` (tracked) |
+| **Plover dictionary** | `dict[str, str]` (RTFCRE steno → spelling); 167,719 entries | `export_plover_dictionary.main` | `plover_stenalgo_dictionary.json` (tracked) |
 | **Plover key table** | module with `KEYS`, `IMPLICIT_HYPHEN_KEYS`, `GEMINI_PR_KEYMAP` | `export_plover_system.main` | `plover_stenalgo/plover_stenalgo/_generated_keys.py` (tracked) |
 | **trainer data** | JSON: `keyboard-layout`, `practice-words`, `practice-sentences`, `definitions` | trainer exporters | `steno-trainer/public/data/*.json` (tracked) |
 
@@ -479,6 +479,7 @@ later companion script.
 | fixPayerAyGrapheme | Infra, Mixte | yes | yes | split `ay-Ej` in 3 infinitives |
 | fixPayerDualFormGaps | Synthetic (append) | no | n/a | pa:yer i/y twins (S2.3) |
 | fixPayerNonfuturVowelQuality | Lexique383, Mixte | yes | yes† | pa:yer présent vowel = E |
+| fixRectifiedEConjugations | verbs-fr.xml, Synthetic (prune) | no | n/a | 49 -eter/-eler verbs → ach:eter/p:eler |
 | fixResidualConjugationTemplates | conjugations-fr.xml | no | n/a | dép:ecer etc. primary alternative |
 | fixResidualRowErrors | Lexique383, Mixte | yes | yes | 4 row fixes (`lamer` → `inf;`) |
 | fixSourdreDefectiveGaps | conjugations-fr.xml, Lexique383, Mixte | yes | yes | sourdre slots |
@@ -508,7 +509,7 @@ its scripts read the phonetic theory or the lexicon TSVs, write a different file
 The four steady-state appenders run in every orchestrated rebuild through `python -m
 util.build_synthetic_lexicon` (always `--apply`, looped to convergence); the one-shot fix
 scripts stay hand-run. Each is a dry run unless given `--apply`. `lexique.py`
-never reads or writes `resources/LexiqueSynthetic.tsv`: 46,022 **synthetic rows** (39,756
+never reads or writes `resources/LexiqueSynthetic.tsv`: 46,199 **synthetic rows** (39,933
 VER, 3,868 NOM, 2,398 ADJ), mixed-lexicon columns plus `source` (always `synthetic`), all
 frequencies 0.0, no duplicates, no `sub:imp` rows (removed in fd7e242 by an unrecorded edit).
 13,970 rows share an identity with an earlier row and only merge their `infover` (readCorpus's
@@ -532,7 +533,14 @@ Result: VER synthetic rows (participle gender/number forms and finite forms).
 Artifacts: reads `PhoneticTheory.pickle`, `starboard3h.json`, Verbiste, `verbModelExceptions.tsv`; appends to `LexiqueSynthetic.tsv`.
 Notes: its gating depends on the retired solver-picks-features design; the selection it
 gates on (`selectSharedDiscriminators` src/featureextractor.py:222) is coverage-first, with a
-feature-complexity tie-break. Not idempotent (item B13).
+feature-complexity tie-break. Not idempotent (item B13). Template note (2026-09-25): which
+-eter/-eler convention a verb follows is per-verb lexicon data — `verbs-fr.xml` maps the 49
+verbs whose LexiqueMixte forms attest the rectified `è` spelling (caqueter, atteler,
+renouveler, …) to the accent-grave templates `ach:eter`/`p:eler`, not the consonant-doubling
+`j:eter`/`app:eler` (only the appeler/jeter family keeps doubling); `util/fixRectifiedEConjugations.py`
+performs and prunes for that remap, so S2 never generates a doubled spelling
+(`caquette`) beside a verb's attested rectified one (`caquète`) — the homophone doublet that
+used to leave 6 unresolvable same-lemma collisions.
 
 - **Load the phonetic theory — loadTheoryAndKeyboard (S2.1.1)** :91 — unpickles `PhoneticTheory.pickle`,
   or builds a `Dictionary` and the phonetic theory in memory without writing. A stale pickle hides rows
@@ -647,7 +655,7 @@ other readers are generators and validators (`validateLexiconAgainstNomAdjParadi
 ## Dictionary Loading (S3)
 
 Dictionary Loading (S3) reads the mixed lexicon (136,202 rows) and the synthetic lexicon rows
-(46,022) into the Word list (168,189 Words, by descending film frequency): it drops excluded
+(46,199) into the Word list (168,314 Words, by descending film frequency): it drops excluded
 words, drops spelling-variant rows (`isDroppedOrthoRow`/`isDroppedLemme` — the single choke
 point through which the S2 appenders also read, so stale synthetic rows are invisible and
 dropped forms cannot be regenerated; a dropped spelling that coincides with a conjugated form
@@ -694,7 +702,7 @@ Transformation:
   folded rows had another `syll_cv`, 6,028 another film frequency (item B9).
 - Otherwise builds a `Word` (Word construction (S3.2.1.1)) and indexes it in
   `wordsByLemme[lemme]` (bare lemma) and `wordsByOrtho[ortho]`.
-Result: Word list, 168,189 Words in load order (136,202 + 46,022 rows, minus 13,970 identity
+Result: Word list, 168,314 Words in load order (136,202 + 46,199 rows, minus 14,087 identity
 merges and the excluded/syllable-less rows);
 `wordsByOrtho` 147,732 spellings, `wordsByLemme` 43,111 lemmas.
 Artifacts: reads `resources/LexiqueMixte.tsv`, `resources/LexiqueSynthetic.tsv`, `resources/top500_film.txt`, `excluded_words.txt`.
@@ -874,7 +882,7 @@ Notes: consistent with the committed layout sharing entries only among rare phon
 
 Phonetic Theory Building (S5) loads the committed keyboard layout and maps every Word to its
 **base strokes**, one stroke per syllable. The result is the phonetic theory, `dict[Strokes, list[Word]]`
-with 80,725 entries. Words with the same raw Strokes land in the same **phonetic-theory entry**;
+with 78,680 entries. Words with the same raw Strokes land in the same **phonetic-theory entry**;
 this is where homophones first appear. Everything later starts from the phonetic theory. It is the
 second half of `python -m util.build_phonetic_theory`, cached in `PhoneticTheory.pickle`.
 
@@ -945,7 +953,7 @@ Input state: Word list (frequency-descending), syllable statistics, keyboard lay
 Transformation: for each Word, looks up each syllable in `syllableCollection.syllable_names`
 (`KeyError` if missing), turns it into a stroke (Phonetic stroke rule (S5.3.1)) and appends the Word to
 `theory[raw Strokes]`.
-Result: the phonetic theory: 80,725 entries covering 168,189 Words; 42,591 entries with ≥2 Words
+Result: the phonetic theory: 78,680 entries covering 168,314 Words; 42,312 entries with ≥2 Words
 (129,505 Words), 41,640 with ≥2 spellings. Strokes per entry: 1 → 3,111; 2 → 20,701; 3 →
 33,534; 4 → 18,069; 5+ → 5,310. Every entry's list is frequency-descending.
 Notes: legality of the whole stroke is never checked: 529 Words (39 canonical strokes, mostly
@@ -1068,7 +1076,7 @@ reports unresolved oppositions.
 ##### Homophone group building — buildLemmaHomophoneGroups (S6.Elicitation.1)   src/elicitation.py:61
 Called by: Elicitation Phase entry (:548); also the precedence-spec check (:148) and the
 pers_3 rewrite (:169).
-Input state: the phonetic theory, 80,725 raw-Strokes keys, 168,189 Words.
+Input state: the phonetic theory, 78,680 raw-Strokes keys, 168,314 Words.
 Transformation: re-keys the phonetic theory by canonical form (`canonicalizeStrokes` keyboard.py:31),
 splits each bucket by `lemmeGramCat` (`groupWordsByLemme` word.py:414) and keeps sub-groups
 with more than one Word. Different-`lemmeGramCat` homophones are left to Different-Lemma or
@@ -1413,7 +1421,7 @@ Called by: `Dictionary.buildDisambiguatedTheory` only (dictionary.py:384).
 Transformation: for **every** phonetic-theory Word (dict order, deterministic): a Word that needs
 groups gets one feature discriminating stroke with the union of their chosen keys; others
 keep their base strokes. Unassigned groups add nothing, silently.
-Result: final induced strokes, 168,189 Words, 79,449 with a feature discriminating stroke.
+Result: final induced strokes, 168,314 Words, 81,684 with a feature discriminating stroke.
 Handed to Reserved-key composition (S7.4).
 
 #### Alternate entry strokes — buildExtraInducedStrokes (S6.Realization.7)   src/ambiguitychecker.py:1196
@@ -1470,7 +1478,7 @@ Called by: `python -m util.build_disambiguated_theory` (`main`
 util/build_disambiguated_theory.py:49, after checking both
 `keypress_groups.json` and `resolved_press_sets.json` exist, :37-40) and every
 Theory Export (S8) exporter through Disambiguated-theory loading (S8.1).
-Input state: the phonetic theory (80,725 keys / 168,189 Words), keyboard layout, the two JSON paths.
+Input state: the phonetic theory (78,680 keys / 168,314 Words), keyboard layout, the two JSON paths.
 Transformation: (1) loads `markersByKeypress` (:371-373) and the resolved discriminating
 feature sets (:374-375); (2) runs the Realization Phase on its inline path (S7.2) → final
 induced strokes; (3) calls Alternate entry strokes (S7.14) (:420) for the unmarked alternate
@@ -1482,7 +1490,7 @@ alternates}` for every remaining word, with Reform-doublet loading (S7.3) and `p
 each Word's base stroke count (turns on the merge) — since the B44 fix (2026-09-24) this marks
 every entry, not just the primary (`composeReservedKeyStrokesForEntries` clusters each entry
 on its own final stroke).
-Result: the disambiguated theory, 167,917 Words in phonetic-theory order; `disambiguated_theory.tsv` has 186,026 data rows, so 18,109
+Result: the disambiguated theory, 168,042 Words in phonetic-theory order; `disambiguated_theory.tsv` has 186,234 data rows, so 18,192
 alternate entries.
 Artifacts: reads both JSON files and `resources/reform1990.tsv` (path relative to the working directory).
 Notes: never uses `self`, so exporters unpickle the whole `Dictionary` just to call it (refactor candidate).
@@ -1538,10 +1546,11 @@ bucket that is a star/hash cluster (`_isStarHashCluster`, :381-390: ≥2 Words, 
 `lemmeGramCat`, ≥2 distinct `ortho`). Members keep phonetic-theory order.
 Result: primary-stroke-only lemma-homophone groups (4,450 at last measurement).
 Notes: a bucket with one `lemmeGramCat` and several spellings is dropped on purpose (a code
-comment leaves it to the Realization Phase): 6 such buckets survive into the disambiguated
-theory (the `-eter`/`-eler` variant conjugations, `caquette`/`caquète`… — the
-spelling-variant follow-up); the spelling-twin ones (item B1) are dropped at
-Disambiguated-theory assembly (S7.1) since item B47. Same-lemma cross-category clashes ("appel" NOM / "appelle" VER)
+comment leaves it to the Realization Phase): 0 such buckets survive into the disambiguated
+theory (the `-eter`/`-eler` variant conjugations, `caquette`/`caquète`…, were fixed by the
+rectified-è template remap — see Synthetic Lexicon Building (S2.1)'s template note); the
+spelling-twin ones (item B1) are dropped at Disambiguated-theory assembly (S7.1) since item
+B47. Same-lemma cross-category clashes ("appel" NOM / "appelle" VER)
 are in scope because their `lemmeGramCat`s differ.
 
 ### Physical star/hash assignment — assignStarHashPhysicalStrokes (S7.6)   src/ambiguitychecker.py:370
@@ -1700,10 +1709,10 @@ shares one `lemmeGramCat` (a Realization Phase residual, out of S7's scope); els
 (a pair S7 should have marked apart — the marking-bug bucket, empty unless the marking itself
 regresses).
 Result: `FinalCollisionReport` (`crossLemma`, `sameLemmeGramCat`, `reformDoublet`, each
-canonical Strokes → `list[Word]`). Measured after the B47 fix (2026-09-25): 0 cross-lemma, 6
-same-lemma residual (the `-eter`/`-eler` variant conjugations, `caquette`/`caquète`… — the
-spelling-variant follow-up; the spelling-twin ones, 104 before B47, are dropped at
-Disambiguated-theory assembly (S7.1)), 0 reform-doublet.
+canonical Strokes → `list[Word]`). Measured after the B47 fix + the rectified-è template
+remap (2026-09-25): 0 cross-lemma, 0 same-lemma residual (104 before B47 — the spelling
+twins, dropped at Disambiguated-theory assembly (S7.1) — and 6 `-eter`/`-eler` variant
+conjugations, gone with the remap), 0 reform-doublet.
 Notes: `reportFinalCollisions` (util/build_disambiguated_theory.py:39) prints the three counts,
 the first 10 same-lemma residuals, and `raise SystemExit(1)` on any `crossLemma` collision —
 after the TSV is already written — so `python dictionary.py` aborts at this step on a marking
@@ -1784,8 +1793,8 @@ phonetic-theory order on a tie (item B10); then runs Final-collision check (S7.1
 (`findFinalCollisions`) over the disambiguated theory and prints its three counts plus up to
 10 `crossLemma` entries (no longer the pre-B44 "same-steno collisions" figure, which lumped
 same-stroke homographs in with real collisions).
-Result: Plover dictionary, 167,491 entries at last measurement (`sort_keys=True`,
-`indent=1`); 4,867 contain `*`/`#`; 53 end in a \*/# marker stroke. Since the B44 fix
+Result: Plover dictionary, 167,719 entries at last measurement (`sort_keys=True`,
+`indent=1`); 4,859 contain `*`/`#`; 49 end in a \*/# marker stroke. Since the B44 fix
 (2026-09-24), losing an output to a cross-lemma collision (formerly item B4: 9 spellings
 shadowed by an unmarked alternate entry, e.g. `subits`/`subis`) should no longer happen; a
 spelling can still lose to a reform-doublet or near-doublet winner (`bizuths`,

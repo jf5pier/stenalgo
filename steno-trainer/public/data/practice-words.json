@@ -39762,6 +39762,30 @@
  },
  {
   "ortho": "achète",
+  "before": "qu'il",
+  "after": "",
+  "label": "subjonctif présent, 3e sg.",
+  "phonology": "a.SEt",
+  "steno": "a/pmiet/-R",
+  "strokes": [
+   [
+    12
+   ],
+   [
+    4,
+    6,
+    13,
+    14,
+    20
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 39.82
+ },
+ {
+  "ortho": "achète",
   "before": "j'",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -169986,6 +170010,27 @@
  },
  {
   "ortho": "gèle",
+  "before": "qu'il",
+  "after": "",
+  "label": "subjonctif présent, 3e sg.",
+  "phonology": "ZEl",
+  "steno": "vtiel/-R",
+  "strokes": [
+   [
+    5,
+    7,
+    13,
+    14,
+    23
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 6.57
+ },
+ {
+  "ortho": "gèle",
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -195543,7 +195588,7 @@
   "ortho": "étiquette",
   "before": "l'",
   "after": "",
-  "label": "nom, f. sg. · subjonctif présent, 1re sg. / 3e sg.",
+  "label": "nom, f. sg.",
   "phonology": "e.ti.kEt",
   "steno": "e/ti/kiet",
   "strokes": [
@@ -232215,56 +232260,6 @@
    ],
    [
     20
-   ]
-  ],
-  "frequency": 4.22
- },
- {
-  "ortho": "mourrais",
-  "before": "tu",
-  "after": "",
-  "label": "conditionnel présent, 2e sg.",
-  "phonology": "mu.RE",
-  "steno": "m@e/Rie/-dl",
-  "strokes": [
-   [
-    6,
-    11,
-    14
-   ],
-   [
-    8,
-    13,
-    14
-   ],
-   [
-    19,
-    23
-   ]
-  ],
-  "frequency": 4.22
- },
- {
-  "ortho": "mourrais",
-  "before": "je",
-  "after": "",
-  "label": "conditionnel présent, 1re sg.",
-  "phonology": "mu.RE",
-  "steno": "m@e/Rie/-kl",
-  "strokes": [
-   [
-    6,
-    11,
-    14
-   ],
-   [
-    8,
-    13,
-    14
-   ],
-   [
-    18,
-    23
    ]
   ],
   "frequency": 4.22
