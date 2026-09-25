@@ -35,15 +35,21 @@ losing a tie, 0 hiding another spelling). B2, B4, B11, B14, B27, B43 and B44 hav
   variant spelling on purpose. Probes: `scratch/b44_collisions.py`, `scratch/b44_residuals.py`;
   pre-fix outputs in `scratch/b44-before/`, diff in `scratch/b44-plover-diff.txt`. The 9 B45
   participles (`promis` → `promises`) and the variant spellings were separate causes of the old
-  list: re-check them with the probe after B45 and the spelling-variant removal.
-- **B45** Synthetic past participles copy another gender's phonology — src/verbparadigm.py:296
-  (`spliceParticiplePhon`) assumes a participle's phon is invariant across gender/number, false
-  when the masculine ends in a silent consonant. 33 masculine rows in `LexiqueSynthetic.tsv` carry
-  the feminine's `/z/` (`admis`, `commis`, `compromis`, `démis`, `émis`, `enclos`, `entremis`,
-  `entrepris`, `épris`, `omis`, `permis`, `promis`, `repris`, `retransmis`, `soumis`, `surpris`,
-  `transmis`; e.g. `enclos` `@kloz`, which then outranks `enclose` on `@/kmtaenl`), and 5 feminine
-  rows lack it (`méprise(s)`, `désapprise(s)` `…pRi`, `éconduites` `ek§d8i`). Fix the splice to
-  add/drop the final consonant by gender, then delete the bad rows and re-converge S2.
+  list: the B45 ones are gone since the B45 fix (probe rerun 2026-09-24); re-check the variant
+  spellings after the spelling-variant removal.
+- **B45** RESOLVED 2026-09-24 (`spliceParticiplePhon`, src/verbparadigm.py:326, now adds the
+  consonant of a consonant-final feminine stem for a feminine slot and drops it for a masculine
+  one, `feminineParticipleConsonant` :306; util/completeVerbParadigms.py prefers a same-gender
+  donor; `util/fixParticipleGenderPhon.py --apply` added the consonant to 45 feminine rows
+  (`découverte`, `cuite`, `feinte`, `jointe`, `méprise`…), dropped it from 17 masculine plurals
+  and deleted 17 synthetic rows duplicating an attested one (`promis` m_s, stale since e3b0358)).
+  Backtest over 22,168 attested cross-gender pairs: 96.7% → 99.5% exact phon, no regression.
+  Rebuild: S2 appended 82 rows (`recuire`, `romancer`, `introduire`), Plover +60 entries
+  (`enclos` `@/kmtae` / `enclose` `@/kmtaenl`; `promis` loses its star-marked stroke), no
+  spelling lost; clusters 6,703 → 6,707, overflow 8.32% unchanged. Before/after in
+  `scratch/b45-before/`, `scratch/b45-plover-diff.txt`. Original entry: synthetic past
+  participles copied another gender's phonology — 33 masculine rows carried the feminine's `/z/`
+  (`enclos` `@kloz` outranked `enclose` on `@/kmtaenl`), and feminine rows lacked it.
 - **B46** Synthetic past participles have a `syll_cv` one unit short of their `orthosyll_cv` —
   src/verbparadigm.py:297 (`spliceParticiplePhon`) with :345 (`generateParticipeOrthosyll`) — the
   phonemic breakdown is copied from the donor participle, while the orthographic one gets the
@@ -51,7 +57,7 @@ losing a tie, 0 hiding another spelling). B2, B4, B11, B14, B27, B43 and B44 hav
   `…m_i|n_e` / `…m_i|n_é_es`, attested `aimées` `E|m_e_#` / `ai|m_é_es`). 4,910 of 5,227 synthetic
   participle rows (4,785 one unit short, 125 two), predating the B2 fix. Unmeasured: whether it
   changes any stroke (`#` is silent), but every unit-aligned reader skips these rows — the B2
-  tables' learning and `normalizeSplicedBreakdown`'s boundary copy. Fix with B45 (same splice): add
+  tables' learning and `normalizeSplicedBreakdown`'s boundary copy. Same splice as B45 (resolved): add
   `_#` per extra orthographic unit, repair the rows in place, rebuild.
 - **B2** RESOLVED 2026-09-24 (`normalizeSplicedBreakdown`, src/verbparadigm.py:589, applied by
   `generateMissingConjugatedForm`: re-places every syllable boundary from a split table learned from

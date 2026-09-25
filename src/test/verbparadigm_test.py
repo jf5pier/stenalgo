@@ -15,6 +15,7 @@ from src.verbparadigm import (
     deriveParticipeRadicalOrthosyll,
     deriveSyllableSplitTable,
     detectUndersampledLemmas,
+    feminineParticipleConsonant,
     fullFeatureSpace,
     generateMissingConjugatedForm,
     generateMissingParticiple,
@@ -323,15 +324,48 @@ class TestParticipleSplicing:
 
     def test_splice_phon_reuses_verbatim_and_strips_hash(self):
         garni = _make_participle(*self.GARNI)
-        phon, rawSyllCV = spliceParticiplePhon(garni)
+        phon, rawSyllCV = spliceParticiplePhon(garni, "f", "garnie")
         assert phon == "gaRni"
         assert rawSyllCV == "g_a_R|n_i"
 
         garnie = _make_participle(*self.GARNIE)
-        phon, rawSyllCV = spliceParticiplePhon(garnie)
+        phon, rawSyllCV = spliceParticiplePhon(garnie, "m", "garni")
         assert phon == "gaRni"
         assert "#" not in rawSyllCV
         assert rawSyllCV == "g_a_R|n_i"  # '#' stripped
+
+    # Real attested LexiqueMixte.tsv rows for promettre's and éconduire's past
+    # participles: a consonant-final feminine stem pronounces its consonant.
+    PROMIS = ("promis", "pRomi", "promettre", "m", "s", "p_R_o|m_i", "p_r_o|m_is")
+    PROMISE = ("promise", "pRomiz", "promettre", "f", "s", "p_R_o|m_i_z_#", "p_r_o|m_i_s_e")
+    ECONDUITE = ("éconduite", "ek§d8it", "éconduire", "f", "s", "e|k_§|d_8_i_t_#", "é|c_on|d_u_i_t_e")
+
+    def test_splice_phon_adds_or_drops_the_feminine_consonant(self):
+        """Item B45: the masculine of a consonant-final feminine stem drops its
+        consonant, the feminine adds it; same-gender splices stay verbatim."""
+        promis = _make_participle(*self.PROMIS)
+        promise = _make_participle(*self.PROMISE)
+        assert spliceParticiplePhon(promise, "m", "promis") == ("pRomi", "p_R_o|m_i")
+        assert spliceParticiplePhon(promis, "f", "promises") == ("pRomiz", "p_R_o|m_i_z")
+        assert spliceParticiplePhon(promise, "f", "promises") == ("pRomiz", "p_R_o|m_i_z")
+        econduite = _make_participle(*self.ECONDUITE)
+        assert spliceParticiplePhon(econduite, "m", "éconduits") == ("ek§d8i", "e|k_§|d_8_i")
+
+    def test_feminine_participle_consonant(self):
+        assert feminineParticipleConsonant("garnies") is None
+        assert feminineParticipleConsonant("aimée") is None
+        assert feminineParticipleConsonant("promises") == "z"
+        assert feminineParticipleConsonant("éconduite") == "t"
+        assert feminineParticipleConsonant("absoute") == "t"
+        with pytest.raises(ValueError):
+            feminineParticipleConsonant("promis")
+
+    def test_generate_missing_participle_crosses_gender(self):
+        templates = parseConjugationTemplates("resources/verbiste/conjugations-fr.xml")
+        mEttre = templates["m:ettre"]
+        promise = _make_participle(*self.PROMISE)
+        generated = generateMissingParticiple("promettre", mEttre, promise, "m", "p")
+        assert (generated.ortho, generated.phonology) == ("promis", "pRomi")
 
     def test_derive_radical_orthosyll_from_any_gender_number(self):
         assert deriveParticipeRadicalOrthosyll(_make_participle(*self.GARNI)) == "g_a_r|n_i"

@@ -77,7 +77,7 @@
    "markers": [
     "f"
    ],
-   "affectedWords": 15312,
+   "affectedWords": 15320,
    "chosenKeys": [
     16
    ],
@@ -188,7 +188,7 @@
     "passé",
     "pers_3"
    ],
-   "affectedWords": 11909,
+   "affectedWords": 11921,
    "chosenKeys": [
     20
    ],
@@ -285,7 +285,7 @@
     "imparfait",
     "subjonctif"
    ],
-   "affectedWords": 5836,
+   "affectedWords": 5839,
    "chosenKeys": [
     21
    ],
@@ -364,7 +364,7 @@
     "impératif",
     "pers_1"
    ],
-   "affectedWords": 7388,
+   "affectedWords": 7398,
    "chosenKeys": [
     18
    ],
@@ -449,7 +449,7 @@
     "nbr_p",
     "p"
    ],
-   "affectedWords": 50288,
+   "affectedWords": 50299,
    "chosenKeys": [
     17
    ],
@@ -564,7 +564,7 @@
    "markers": [
     "pers_2"
    ],
-   "affectedWords": 7820,
+   "affectedWords": 7829,
    "chosenKeys": [
     19
    ],
@@ -3652,10 +3652,6 @@
    [
     "batées",
     "bâtés"
-   ],
-   [
-    "entremises",
-    "entremis"
    ],
    [
     "alaises",
