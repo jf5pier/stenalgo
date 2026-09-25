@@ -12,12 +12,12 @@ tracked artifacts; tier 3 is latent (no measured impact). B39/B40 were dropped: 
 was removed in Dead-Code Removal (Pass 5). B1 was dropped 2026-09-24: every reading of a
 spelling is already an alternate press-set on the resolved Word, so the unresolved "twin" Word
 only adds a redundant route (269 twins: 133 alone on their stroke, 38 on a resolved stroke, 98
-losing a tie, 0 hiding another spelling). B11, B14, B27 and B43 have since been fixed.
+losing a tie, 0 hiding another spelling). B2, B11, B14, B27 and B43 have since been fixed.
 
 ### Tier 1 — affects the Plover output today
 
-- **B44** Feature discriminating strokes output a different word in Plover (the full scope of B4) — 141 strokes in 122
-  spellings (2026-09-24 build; list in `scratch/b44-lost-feature-strokes.txt`, probe `scratch/b44_probe.py`: every resolved Word's final strokes vs
+- **B44** Feature discriminating strokes output a different word in Plover (the full scope of B4) — 213 strokes
+  after the B2 fix (141 strokes in 122 spellings before it; 2026-09-24 build; list in `scratch/b44-lost-feature-strokes.txt`, probe `scratch/b44_probe.py`: every resolved Word's final strokes vs
   `plover_stenalgo_dictionary.json`). Mechanism seen on `panse`/`pense`, `conte`/`compte`,
   `lie`/`lis`: Different-Lemma or Grammatical-Category Disambiguation (S7) puts its `*`/`#` mark on
   the primary (base) stroke only (`panse` → `p*@s`), while the alternate feature strokes are built on
@@ -40,7 +40,26 @@ losing a tie, 0 hiding another spelling). B11, B14, B27 and B43 have since been 
   `transmis`; e.g. `enclos` `@kloz`, which then outranks `enclose` on `@/kmtaenl`), and 5 feminine
   rows lack it (`méprise(s)`, `désapprise(s)` `…pRi`, `éconduites` `ek§d8i`). Fix the splice to
   add/drop the final consonant by gender, then delete the bad rows and re-converge S2.
-- **B2** Synthetic verb forms get a vowel-less trailing syllable — src/verbparadigm.py:561, :611 —
+- **B46** Synthetic past participles have a `syll_cv` one unit short of their `orthosyll_cv` —
+  src/verbparadigm.py:297 (`spliceParticiplePhon`) with :345 (`generateParticipeOrthosyll`) — the
+  phonemic breakdown is copied from the donor participle, while the orthographic one gets the
+  gender/number suffix as an extra unit, with no silent `#` to match it (synthetic `discriminées`
+  `…m_i|n_e` / `…m_i|n_é_es`, attested `aimées` `E|m_e_#` / `ai|m_é_es`). 4,910 of 5,227 synthetic
+  participle rows (4,785 one unit short, 125 two), predating the B2 fix. Unmeasured: whether it
+  changes any stroke (`#` is silent), but every unit-aligned reader skips these rows — the B2
+  tables' learning and `normalizeSplicedBreakdown`'s boundary copy. Fix with B45 (same splice): add
+  `_#` per extra orthographic unit, repair the rows in place, rebuild.
+- **B2** RESOLVED 2026-09-24 (`normalizeSplicedBreakdown`, src/verbparadigm.py:589, applied by
+  `generateMissingConjugatedForm`: re-places every syllable boundary from a split table learned from
+  the corpus Words, vocalizes a word-final glide after a consonant, and sets mid vowels from their
+  spelling; `util/fixSplicedVerbBreakdowns.py --apply` corrected the 14,926 rows spliced before). A
+  backtest regenerating the 13,461 attested finite forms the generator can rebuild went from 83.5% to
+  98.0% exact on phon/`syll_cv`/`orthosyll_cv` (residue: Lexique's own `e`/`E`, `u`/`w` variation).
+  Rebuild: 3,587 spellings got a shorter shortest stroke (none longer), S2 added 167 `sub:pre:3p` rows,
+  lemma-homophone clusters 6,552 → 6,703, overflow 8.03% → 8.32%. 64 Plover spellings were reachable
+  only through their wrong extra stroke and now lose to a real homophone (`buttent` → `butent`,
+  `caquette` → `caquète`): B44 (unmarked feature strokes) and the spelling-variant follow-up. Original
+  entry: Synthetic verb forms get a vowel-less trailing syllable — src/verbparadigm.py:561, :611 —
   radical cut by character count keeps the infinitive's syllable boundary (`cannes` sub:pre:2s: 2
   strokes vs NOM 1). 3,843 new Words carry an extra stroke and miss their real homophones.
   The cut also keeps the infinitive's vowel quality: `abonne` sub:pre is `abon` `a|b_o|n_#` (closed
@@ -266,3 +285,15 @@ losing a tie, 0 hiding another spelling). B11, B14, B27 and B43 have since been 
   summed over inflected forms), a removal step in Lexicon Building (S1) or S2, then a full rebuild.
   Afterwards the reform-doublet exemption (R2, `doubletPairs`) and the variant half of B44 should
   have nothing left to handle.
+- **Audit the 2% of attested finite verb forms the B2 generator does not reproduce** —
+  `PYTHONPATH=. env/bin/python scratch/b2_backtest.py` regenerates every `LexiqueMixte.tsv` finite
+  VER form the generator can rebuild from its infinitive (13,461 at the B2 fix) and compares
+  phon/`syll_cv`/`orthosyll_cv`: 266 mismatches, grouped by diff (2026-09-24): `e`↔`E` in non-final
+  syllables (~290 incl. reverse, `affaiblira`, `décela`), `o`→`O` in a closed non-final syllable
+  (24, `délogera`), `°`→`E` (13, `appellerais`), `u`↔`w` (18, `évanouira`/`réjouirai` — the lexicon
+  splits both ways within one lemma), `2`/`9`/`°` (≈10, `bleuira`, `pesèrent`), malformed units
+  (3, `oublierions` `ij#`), a dropped `n` (5, `enorgueillir`), and 1-offs. For each group decide
+  lexicon error (attested row inconsistent with its own lemma's other forms or with the spelling)
+  vs. generator gap; write a fix script for the lexicon errors (Lexique383/Mixte, both halves like
+  the other `fix*` scripts), and extend `deriveMidVowelTable`/`normalizeSplicedBreakdown` only for
+  real generator gaps. Rebuild afterwards.

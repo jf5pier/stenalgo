@@ -11,7 +11,9 @@ from src.verbparadigm import (
     attestedInfinitiveWordByLemme,
     crossLemmaFeatureSetCollisions,
     deriveConjugationEndingTables,
+    deriveMidVowelTable,
     deriveParticipeRadicalOrthosyll,
+    deriveSyllableSplitTable,
     detectUndersampledLemmas,
     fullFeatureSpace,
     generateMissingConjugatedForm,
@@ -24,6 +26,7 @@ from src.verbparadigm import (
     loadVerbisteTemplates,
     loadVerbModelExceptions,
     newlyCollidingLemmas,
+    normalizeSplicedBreakdown,
     parseConjugationTemplates,
     spliceParticiplePhon,
 )
@@ -547,6 +550,134 @@ class TestDeriveConjugationEndingTablesAndGenerate:
         tables = deriveConjugationEndingTables(theory, verbisteTemplates={}, exceptions={})
         assert tables.infinitiveSuffixByKey == {}
         assert tables.slotEndingByKey == {}
+
+
+def _make_corpus_word(ortho, phon, rawSyllCV, rawOrthosyllCV):
+    return Word(
+        ortho=ortho, phonology=phon, lemme=ortho,
+        gramCat=GramCat.NOM, orthoGramCat=[GramCat.NOM],
+        gender="f", number="s", infoVerb=None,
+        rawSyllCV=rawSyllCV, rawOrthosyllCV=rawOrthosyllCV,
+        frequencyBook=1.0, frequencyFilm=1.0,
+    )
+
+
+# Split positions of Lexique's commonest runs: a lone consonant starts the next
+# syllable, "R_t" splits in the middle, adjacent "8_a" does not split.
+_SPLITS = {("", "n"): 0, ("", "d"): 0, ("", "t"): 0, ("", "R", "t"): 1, ("8", "a"): None}
+
+
+class TestNormalizeSplicedBreakdown:
+
+    def test_vowelless_final_syllable_merges_into_previous(self):
+        # canner "k_a|n_e" cut to cannes: the attested canne is "k_a_n_#".
+        assert normalizeSplicedBreakdown("kan", "k_a|n_#", "c_a|nn_es", _SPLITS, {}) == (
+            "kan", "k_a_n_#", "c_a_nn_es"
+        )
+
+    def test_vowel_initial_ending_gets_its_onset(self):
+        # attendre "a|t_@_d_R_#" cut to attendez: the attested form is "a|t_@|d_e".
+        assert normalizeSplicedBreakdown("at@de", "a|t_@_d_e", "a|tt_en_d_ez", _SPLITS, {}) == (
+            "at@de", "a|t_@|d_e", "a|tt_en|d_ez"
+        )
+
+    def test_orthographic_breakdown_follows_phonemic_boundaries(self):
+        assert normalizeSplicedBreakdown("plas", "p_l_a_s_#", "p_l_a|c_e", _SPLITS, {}) == (
+            "plas", "p_l_a_s_#", "p_l_a_c_e"
+        )
+
+    def test_unseen_run_keeps_spliced_boundary(self):
+        assert normalizeSplicedBreakdown("apsa", "a_p|s_a", "a_b|s_a", _SPLITS, {}) == (
+            "apsa", "a_p|s_a", "a_b|s_a"
+        )
+
+    def test_word_final_glide_after_consonant_is_vocalized(self):
+        assert normalizeSplicedBreakdown("Satj", "S_a|t_j_#", "ch_â|t_i_es", _SPLITS, {}) == (
+            "Sati", "S_a|t_i_#", "ch_â|t_i_es"
+        )
+
+    def test_word_final_glide_after_vowel_stays(self):
+        assert normalizeSplicedBreakdown("kaj", "k_a|j_#", "c_a|ill_e", _SPLITS, {}) == (
+            "kaj", "k_a_j_#", "c_a_ill_e"
+        )
+
+    def test_closed_final_mid_vowel_takes_quality_from_spelling(self):
+        vowels = {("o", "closed"): "O", ("o", "closed before z"): "o"}
+        assert normalizeSplicedBreakdown("don", "d_o|n_#", "d_o|nn_e", _SPLITS, vowels) == (
+            "dOn", "d_O_n_#", "d_o_nn_e"
+        )
+        assert normalizeSplicedBreakdown("poz", "p_o|z_#", "p_o|s_e", {("", "z"): 0}, vowels) == (
+            "poz", "p_o_z_#", "p_o_s_e"
+        )
+
+    def test_any_syllable_mid_vowel_takes_quality_from_spelling(self):
+        vowels = {("è", "any"): "E"}
+        assert normalizeSplicedBreakdown("aS°tRa", "a|S_°|t_R_a", "a|ch_è|t_r_a", {}, vowels) == (
+            "aSEtRa", "a|S_E|t_R_a", "a|ch_è|t_r_a"
+        )
+
+    def test_phonology_not_spelled_by_breakdown_is_left_alone(self):
+        # B3's rows: the breakdown's "e" is the phonology's "E"; only boundaries move.
+        vowels = {("ê", "any"): "E"}
+        assert normalizeSplicedBreakdown("@bEt", "@|b_e|t_#", "em|b_ê|t_e", _SPLITS, vowels) == (
+            "@bEt", "@|b_e_t_#", "em|b_ê_t_e"
+        )
+
+    def test_misaligned_orthographic_breakdown_is_returned_unchanged(self):
+        assert normalizeSplicedBreakdown("kan", "k_a|n_#", "c_a|n_n_es", _SPLITS, {}) == (
+            "kan", "k_a_n_#", "c_a|n_n_es"
+        )
+
+
+class TestDeriveSyllableSplitTable:
+
+    def test_mode_position_per_run_with_and_without_nuclei(self):
+        words = [_make_corpus_word("porte", "pORt", "p_O_R|t_e", "p_o_r|t_e")] * 5 + [
+            _make_corpus_word("canne", "kane", "k_a|n_e", "c_a|nn_e")
+        ]
+        table = deriveSyllableSplitTable(words)
+        assert table[("", "R", "t")] == 1
+        assert table[("O", "R", "t", "e")] == 1
+        assert table[("", "n")] == 0
+        assert ("a", "n", "e") not in table  # context seen once only
+
+    def test_adjacent_nuclei_keyed_by_their_vowels_only(self):
+        table = deriveSyllableSplitTable([_make_corpus_word("tua", "t8a", "t_8_a", "t_u_a")] * 5)
+        assert table == {("8", "a"): None}
+
+    def test_unseen_adjacent_nuclei_keep_spliced_boundary(self):
+        table = {("e", "e"): 0}
+        assert normalizeSplicedBreakdown("es8i", "e|s_8_i#", "e|ss_ui_e", table, {}) == (
+            "es8i", "e|s_8_i#", "e|ss_ui_e"
+        )
+
+    def test_context_overrides_bare_run(self):
+        # "j" starts the next syllable (payer) except after "wa" (voyez "v_wa_j|e").
+        words = [_make_corpus_word("payer", "pEje", "p_E|j_e", "p_a|y_er")] * 6 + [
+            _make_corpus_word("voyez", "vwaje", "v_wa_j|e", "v_o_y|ez")
+        ] * 5
+        table = deriveSyllableSplitTable(words)
+        assert table[("", "j")] == 0
+        assert table[("wa", "j", "e")] == 1
+        assert normalizeSplicedBreakdown("vwaje", "v_wa|j_e", "v_o|y_ez", table, {}) == (
+            "vwaje", "v_wa_j|e", "v_o_y|ez"
+        )
+
+
+class TestDeriveMidVowelTable:
+
+    def test_closed_final_and_any_syllable_rules(self):
+        words = [_make_corpus_word("donne", "dOn", "d_O_n_#", "d_o_nn_e")] * 20 + [
+            _make_corpus_word("pose", "poz", "p_o_z_#", "p_o_s_e")
+        ] * 20
+        table = deriveMidVowelTable(words)
+        assert table[("o", "closed")] == "O"
+        assert table[("o", "closed before z")] == "o"
+        assert ("o", "any") not in table  # O and o at 50% each
+
+    def test_rare_spelling_is_dropped(self):
+        words = [_make_corpus_word("donne", "dOn", "d_O_n_#", "d_o_nn_e")] * 19
+        assert deriveMidVowelTable(words) == {}
 
 
 class TestCrossLemmaFeatureSetCollisions:

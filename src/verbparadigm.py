@@ -30,6 +30,7 @@ from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 
+from src.grammar import Phoneme
 from src.keyboard import Strokes
 from src.word import GramCat, Lemme, LemmeGramCat, Word, WordFeature
 
@@ -452,6 +453,208 @@ def attestedInfinitiveWordByLemme(theory: dict[Strokes, list[Word]]) -> dict[Lem
     return result
 
 
+# A word-final glide after a consonant is pronounced as its vowel: dénier's radical
+# "denj" gives "dénie" /deni/, jouer's "Zw" gives "joue" /Zu/, tuer's "t8" gives "tue"
+# /ty/. After a vowel the glide stays (couraille /kuRaj/).
+FINAL_GLIDE_VOWEL = {"j": "i", "w": "u", "8": "y"}
+
+
+def _hasNucleus(unit: str) -> bool:
+    return any(phoneme in Phoneme.nucleusPhonemes for phoneme in unit)
+
+
+def _unitsAndBoundaries(rawBreakdown: str) -> tuple[list[str], set[int]]:
+    """Flat units of a "|"/"_" breakdown, and the unit indexes a new syllable starts at."""
+    units: list[str] = []
+    boundaries: set[int] = set()
+    for syllable in rawBreakdown.split("|"):
+        if units:
+            boundaries.add(len(units))
+        units += syllable.split("_")
+    return units, boundaries
+
+
+def _joinBreakdown(units: list[str], boundaries: set[int]) -> str:
+    return "".join(("|" if i in boundaries else "_" if i else "") + unit for i, unit in enumerate(units))
+
+
+ClusterKey = tuple[str, ...]
+
+# A run between two given nuclei must be seen this often before its own boundary
+# position overrides the one of the bare run (deriveSyllableSplitTable).
+MIN_CONTEXT_SPLIT_COUNT = 5
+
+
+def _clusterKeys(units: list[str], before: int, after: int) -> tuple[ClusterKey, ...]:
+    """
+    The units between the nucleus units at `before` and `after`, with and without the two
+    nuclei around them: "j" splits after "wa" (voyez "v_wa_j|e") but before most vowels
+    (payer "p_E|j_e"). Adjacent nuclei get the first key only: the vowels are all there
+    is to go on ("8_i" never splits, "e|e" does).
+    """
+    run = tuple(units[before + 1:after])
+    withNuclei = (units[before], *run, units[after])
+    return (withNuclei, ("", *run)) if run else (withNuclei,)
+
+
+def deriveSyllableSplitTable(words: list[Word]) -> dict[ClusterKey, int | None]:
+    """
+    For every run of units between two nucleus units in `words`' phonemic breakdowns
+    (_clusterKeys), the most common syllable-boundary position: the number of units of
+    the run that stay in the first syllable ("R_t" -> 1, "p_o_R|t_e"; "t_R" -> 0,
+    "a|t_R_a"), or None when no boundary falls in it ("t_8_a"). Runs holding more than
+    one boundary are not counted. Keyed both with the two nuclei around the run (kept
+    when seen MIN_CONTEXT_SPLIT_COUNT times) and, for a non-empty run, without them.
+    """
+    positionsByKey: dict[ClusterKey, Counter[int | None]] = defaultdict(Counter)
+    for word in words:
+        units, boundaries = _unitsAndBoundaries(word.rawSyllCV)
+        nuclei = [i for i, unit in enumerate(units) if _hasNucleus(unit)]
+        for before, after in zip(nuclei, nuclei[1:]):
+            inside = [i for i in boundaries if before < i <= after]
+            if len(inside) <= 1:
+                position = inside[0] - before - 1 if inside else None
+                for key in _clusterKeys(units, before, after):
+                    positionsByKey[key][position] += 1
+    return {
+        key: positions.most_common(1)[0][0]
+        for key, positions in positionsByKey.items()
+        if key[0] == "" or positions.total() >= MIN_CONTEXT_SPLIT_COUNT
+    }
+
+
+# Mid vowels whose quality the spelling decides, in any syllable (achètera /aSEtRa/
+# beside acheter /aS°te/) or in a closed final one (abonne /abOn/ beside abonner
+# /abone/), and how settled the spelling must leave it for deriveMidVowelTable to keep
+# the rule.
+MID_VOWELS = set("eE°29oO")
+MIN_MID_VOWEL_COUNT = 20
+MIN_ANY_SYLLABLE_VOWEL_SHARE = 0.99
+MIN_CLOSED_FINAL_VOWEL_SHARE = 0.9
+
+# (orthographic unit, context): "any" syllable, or a closed final one before /z/ or not.
+MidVowelKey = tuple[str, str]
+ANY_SYLLABLE, CLOSED_FINAL, CLOSED_FINAL_BEFORE_Z = "any", "closed", "closed before z"
+
+
+def _midVowelContexts(units: list[str]) -> dict[int, str]:
+    """
+    The closed-final context of the word's last nucleus, when a sounded consonant
+    follows it (a closed final syllable).
+    """
+    nuclei = [i for i, unit in enumerate(units) if _hasNucleus(unit)]
+    if not nuclei:
+        return {}
+    coda = [unit for unit in units[nuclei[-1] + 1:] if unit != "#"]
+    if not coda:
+        return {}
+    return {nuclei[-1]: CLOSED_FINAL_BEFORE_Z if coda[0] == "z" else CLOSED_FINAL}
+
+
+def deriveMidVowelTable(words: list[Word]) -> dict[MidVowelKey, str]:
+    """
+    The mid vowel (MID_VOWELS) a nucleus gets from its orthographic unit: in any syllable
+    ("è" -> E, "é" -> e, "au" -> o), kept at a MIN_ANY_SYLLABLE_VOWEL_SHARE share of the
+    most common vowel; and in a closed final syllable, before /z/ or not ("o" -> O, "o"
+    before /z/ -> o, "eu" before /z/ -> 2), kept at MIN_CLOSED_FINAL_VOWEL_SHARE. Both
+    need MIN_MID_VOWEL_COUNT occurrences. Only words whose breakdowns align unit for
+    unit and spell out their phonology count.
+    """
+    vowelsByKey: dict[MidVowelKey, Counter[str]] = defaultdict(Counter)
+    for word in words:
+        units, _ = _unitsAndBoundaries(word.rawSyllCV)
+        orthoUnits, _ = _unitsAndBoundaries(word.rawOrthosyllCV)
+        if len(units) != len(orthoUnits) or _joinPhonology(units) != word.phonology:
+            continue
+        contexts = _midVowelContexts(units)
+        for i, unit in enumerate(units):
+            if _hasNucleus(unit):
+                vowelsByKey[(orthoUnits[i], ANY_SYLLABLE)][unit] += 1
+                if i in contexts:
+                    vowelsByKey[(orthoUnits[i], contexts[i])][unit] += 1
+    table: dict[MidVowelKey, str] = {}
+    for key, vowels in vowelsByKey.items():
+        vowel, count = vowels.most_common(1)[0]
+        total = vowels.total()
+        minShare = MIN_ANY_SYLLABLE_VOWEL_SHARE if key[1] == ANY_SYLLABLE else MIN_CLOSED_FINAL_VOWEL_SHARE
+        if vowel in MID_VOWELS and total >= MIN_MID_VOWEL_COUNT and count / total >= minShare:
+            table[key] = vowel
+    return table
+
+
+def _joinPhonology(units: list[str]) -> str:
+    return "".join(unit for unit in units if unit != "#")
+
+
+def normalizeSplicedBreakdown(
+        phonology: str,
+        rawSyllCV: str,
+        rawOrthosyllCV: str,
+        syllableSplitByCluster: dict[ClusterKey, int | None],
+        midVowelByOrtho: dict[MidVowelKey, str],
+    ) -> tuple[str, str, str]:
+    """
+    Repair the phonology and syllable breakdowns that generateMissingConjugatedForm
+    builds by cutting the infinitive at a fixed character count (item B2). The cut keeps
+    the infinitive's syllable boundaries, which move once the ending changes: a
+    word-final form gets a vowel-less last syllable (canner "k_a|n_e" -> cannes "k_a|n_#",
+    where the attested canne is "k_a_n_#") and a vowel-initial ending misses its onset
+    (attendre "a|t_@_d_R_#" -> attendez "a|t_@_d_e", attested "a|t_@|d_e"). It also cuts
+    each field on its own, so the two breakdowns drift apart (place "p_l_a_s_#" beside
+    "p_l_a|c_e").
+
+    The cut also keeps the infinitive's vowel quality where the finite form changes it
+    (abonner /abone/ -> abonne "abon", attested /abOn/; acheter /aS°te/ -> achètera
+    "aS°tRa", attested /aSEtRa/).
+
+    Re-places every syllable boundary: one per run of units between two nuclei, where
+    `syllableSplitByCluster` (deriveSyllableSplitTable) puts it, or where the spliced
+    breakdowns had one for a run the table has never seen. The orthographic breakdown
+    gets the same boundaries when it has as many units as the phonemic one (attested rows
+    keep them aligned unit for unit), and is returned unchanged otherwise. When the
+    phonology spells out the phonemic breakdown's units (all but B3's rows do), it also
+    vocalizes a word-final glide after a consonant (FINAL_GLIDE_VOWEL) and, when the
+    breakdowns are aligned, gives every mid vowel the quality its spelling calls for
+    (`midVowelByOrtho`, deriveMidVowelTable: the closed-final-syllable rule first, then
+    the any-syllable one), in the phonology and the phonemic breakdown alike.
+    """
+    units, boundaries = _unitsAndBoundaries(rawSyllCV)
+    orthoUnits, orthoBoundaries = _unitsAndBoundaries(rawOrthosyllCV)
+    aligned = len(units) == len(orthoUnits)
+    if aligned:
+        boundaries |= orthoBoundaries
+
+    sounded = [i for i, unit in enumerate(units) if unit != "#"]
+    if sounded and _joinPhonology(units) == phonology:
+        vowel = FINAL_GLIDE_VOWEL.get(units[sounded[-1]])
+        afterConsonant = len(sounded) == 1 or not _hasNucleus(units[sounded[-2]])
+        if vowel is not None and afterConsonant:
+            units[sounded[-1]] = vowel
+        if aligned:
+            contexts = _midVowelContexts(units)
+            for i, unit in enumerate(units):
+                if unit in MID_VOWELS:
+                    keys = [(orthoUnits[i], context) for context in (contexts.get(i, ANY_SYLLABLE), ANY_SYLLABLE)]
+                    units[i] = next((midVowelByOrtho[key] for key in keys if key in midVowelByOrtho), unit)
+        phonology = _joinPhonology(units)
+
+    nuclei = [i for i, unit in enumerate(units) if _hasNucleus(unit)]
+    newBoundaries: set[int] = set()
+    for before, after in zip(nuclei, nuclei[1:]):
+        key = next((k for k in _clusterKeys(units, before, after) if k in syllableSplitByCluster), None)
+        if key is not None:
+            position = syllableSplitByCluster[key]
+            if position is not None:
+                newBoundaries.add(before + 1 + position)
+        else:
+            newBoundaries.update(i for i in boundaries if before < i <= after)
+
+    rawSyllCV = _joinBreakdown(units, newBoundaries)
+    if aligned:
+        rawOrthosyllCV = _joinBreakdown(orthoUnits, newBoundaries)
+    return phonology, rawSyllCV, rawOrthosyllCV
+
+
 def _longestCommonSuffix(strings: list[str]) -> str:
     if not strings:
         return ""
@@ -483,11 +686,18 @@ class ConjugationEndingTables:
       donor lemmas contributed to that slot's match rate -- a rate of 1.0 from a single
       donor is far less trustworthy than 1.0 from fifty, so callers reporting confidence
       should look at both.
+    - syllableSplitByCluster: where a syllable boundary falls between two nuclei, over
+      the theory's corpus (nonzero-frequency) Words (deriveSyllableSplitTable); a generated form's
+      breakdowns get their boundaries from it (normalizeSplicedBreakdown).
+    - midVowelByOrtho: the mid vowel a nucleus gets from its spelling, over the same
+      Words (deriveMidVowelTable).
     """
     infinitiveSuffixByKey: dict[tuple[str, str], str]
     slotEndingByKey: dict[tuple[str, str, str, str], str]
     slotMatchRateByKey: dict[tuple[str, str, str, str], float]
     slotDonorCountByKey: dict[tuple[str, str, str, str], int]
+    syllableSplitByCluster: dict[ClusterKey, int | None]
+    midVowelByOrtho: dict[MidVowelKey, str]
 
 
 def deriveConjugationEndingTables(
@@ -569,8 +779,15 @@ def deriveConjugationEndingTables(
         slotMatchRateByKey[key] = modeCount / len(candidates)
         slotDonorCountByKey[key] = len(candidates)
 
+    # Corpus Words only: synthetic rows (all zero-frequency, like 3 of LexiqueMixte's
+    # 136k) carry the very breakdowns these tables repair.
+    corpusWords = [
+        word for words in theory.values() for word in words
+        if word.frequencyBook > 0 or word.frequencyFilm > 0
+    ]
     return ConjugationEndingTables(
-        infinitiveSuffixByKey, slotEndingByKey, slotMatchRateByKey, slotDonorCountByKey
+        infinitiveSuffixByKey, slotEndingByKey, slotMatchRateByKey, slotDonorCountByKey,
+        deriveSyllableSplitTable(corpusWords), deriveMidVowelTable(corpusWords),
     )
 
 
@@ -610,11 +827,15 @@ def generateMissingConjugatedForm(
             return None
         fieldValues[field] = infinitiveValue[:radicalLen] + ending
 
+    phonology, rawSyllCV, rawOrthosyllCV = normalizeSplicedBreakdown(
+        fieldValues["phonology"], fieldValues["rawSyllCV"], fieldValues["rawOrthosyllCV"],
+        endingTables.syllableSplitByCluster, endingTables.midVowelByOrtho,
+    )
     return Word(
-        ortho=ortho, phonology=fieldValues["phonology"], lemme=lemme,
+        ortho=ortho, phonology=phonology, lemme=lemme,
         gramCat=GramCat.VER, orthoGramCat=[GramCat.VER],
         gender=None, number=None, infoVerb=f"{code}:{personNumber};",
-        rawSyllCV=fieldValues["rawSyllCV"], rawOrthosyllCV=fieldValues["rawOrthosyllCV"],
+        rawSyllCV=rawSyllCV, rawOrthosyllCV=rawOrthosyllCV,
         frequencyBook=0.0, frequencyFilm=0.0,
     )
 
