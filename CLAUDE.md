@@ -76,12 +76,12 @@ python -m util.export_keyboard_layout        # Theory Export (S8), trainer branc
 
 python -m util.export_practice_words
 # Prerequisites: both pickles, starboard3h.json, keypress_groups.json,
-# resolved_press_sets.json. Outputs: steno-trainer/public/data/practice-words.json
-# (+ practice-words.json intermediate at the repo root).
+# resolved_press_sets.json. Outputs: steno-trainer/public/data/practice-words.json.
 
 python -m util.export_practice_sentences
-# Prerequisites: practice-words.json (from export_practice_words), starboard3h.json,
-# util/candidate_sentences.jsonl. Outputs: steno-trainer/public/data/practice-sentences.json.
+# Prerequisites: steno-trainer/public/data/practice-words.json (from export_practice_words),
+# starboard3h.json, util/candidate_sentences.jsonl.
+# Outputs: steno-trainer/public/data/practice-sentences.json.
 
 python -m util.export_definitions
 # Prerequisites: the export_practice_words inputs. Outputs: steno-trainer/public/data/definitions.json.
