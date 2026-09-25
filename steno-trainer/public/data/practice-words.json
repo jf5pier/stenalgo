@@ -5106,7 +5106,7 @@
   "ortho": "pris",
   "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. · participe passé, m. pl.",
+  "label": "participe passé, m. sg. · adjectif, m.",
   "phonology": "pRi",
   "steno": "pR*i",
   "strokes": [
@@ -8038,7 +8038,7 @@
   "ortho": "mis",
   "before": "les",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. · adjectif, m. pl. · participe passé, m. pl.",
+  "label": "participe passé, m. sg. · adjectif, m. · adjectif, m. pl.",
   "phonology": "mi",
   "steno": "mi",
   "strokes": [
@@ -9141,7 +9141,7 @@
   "ortho": "compris",
   "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. · participe passé, m. pl.",
+  "label": "participe passé, m. sg. · adjectif, m.",
   "phonology": "k§.pRi",
   "steno": "kai/pRi",
   "strokes": [
@@ -14461,7 +14461,7 @@
   "ortho": "appris",
   "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. · participe passé, m. pl.",
+  "label": "participe passé, m. sg. · adjectif, m.",
   "phonology": "a.pRi",
   "steno": "a/pRi",
   "strokes": [
@@ -20840,7 +20840,7 @@
   "ortho": "promis",
   "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · nom, m. · adjectif, m. · participe passé, m. pl.",
+  "label": "participe passé, m. sg. · nom, m. · adjectif, m.",
   "phonology": "pRo.mi",
   "steno": "pRae/mi",
   "strokes": [
@@ -52512,9 +52512,9 @@
  },
  {
   "ortho": "permis",
-  "before": "tu",
+  "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · nom, m. · adjectif, m. · participe passé, m. pl. · indicatif passé, 2e sg.",
+  "label": "participe passé, m. sg. · nom, m. · adjectif, m.",
   "phonology": "pER.mi",
   "steno": "pieR/mi",
   "strokes": [
@@ -52718,9 +52718,9 @@
  },
  {
   "ortho": "commis",
-  "before": "tu",
+  "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · nom, m. · participe passé, m. pl. · indicatif passé, 2e sg.",
+  "label": "participe passé, m. sg. · nom, m.",
   "phonology": "ko.mi",
   "steno": "kae/mi",
   "strokes": [
@@ -58565,7 +58565,7 @@
   "ortho": "surpris",
   "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. · participe passé, m. pl.",
+  "label": "participe passé, m. sg. · adjectif, m.",
   "phonology": "syR.pRi",
   "steno": "s@iR/pRi",
   "strokes": [
@@ -70305,9 +70305,9 @@
  },
  {
   "ortho": "tapis",
-  "before": "tu",
+  "before": "",
   "after": "",
-  "label": "nom, m. · indicatif passé, 2e sg.",
+  "label": "nom, m.",
   "phonology": "ta.pi",
   "steno": "ta/pi",
   "strokes": [
@@ -81905,7 +81905,7 @@
   "ortho": "repris",
   "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · nom, m. · adjectif, m. · participe passé, m. pl.",
+  "label": "participe passé, m. sg. · nom, m. · adjectif, m.",
   "phonology": "R°.pRi",
   "steno": "R@a/pRi",
   "strokes": [
@@ -154498,9 +154498,9 @@
  },
  {
   "ortho": "mépris",
-  "before": "tu",
+  "before": "",
   "after": "",
-  "label": "nom, m. · participe passé, m. sg. · indicatif passé, 2e sg. · participe passé, m. pl.",
+  "label": "nom, m. · participe passé, m. sg.",
   "phonology": "me.pRi",
   "steno": "me/pRi",
   "strokes": [
@@ -166094,9 +166094,9 @@
  },
  {
   "ortho": "admis",
-  "before": "tu",
+  "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. · nom, m. · participe passé, m. pl. · indicatif passé, 2e sg.",
+  "label": "participe passé, m. sg. · adjectif, m. · nom, m.",
   "phonology": "ad.mi",
   "steno": "ad/mi",
   "strokes": [
@@ -176240,9 +176240,9 @@
  },
  {
   "ortho": "compromis",
-  "before": "je",
+  "before": "",
   "after": "",
-  "label": "nom, m. · participe passé, m. sg. · participe passé, m. pl. · indicatif passé, 1re sg.",
+  "label": "nom, m. · participe passé, m. sg.",
   "phonology": "k§.pRo.mi",
   "steno": "kai/pRae/mi",
   "strokes": [
@@ -200450,7 +200450,7 @@
   "ortho": "transmis",
   "before": "le",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. sg. · participe passé, m. pl. · indicatif passé, 1re sg. / 2e sg.",
+  "label": "participe passé, m. sg. · adjectif, m. sg.",
   "phonology": "tR@s.mi",
   "steno": "tR@s/mi",
   "strokes": [
@@ -201133,9 +201133,9 @@
  },
  {
   "ortho": "soumis",
-  "before": "tu",
+  "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. · participe passé, m. pl. · indicatif passé, 2e sg.",
+  "label": "participe passé, m. sg. · adjectif, m.",
   "phonology": "su.mi",
   "steno": "s@e/mi",
   "strokes": [

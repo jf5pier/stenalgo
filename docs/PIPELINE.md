@@ -178,7 +178,7 @@ The names below are used in every "Input state" and "Result" line.
 | **physical keypress group assignment** | `KeypressGroupPhysicalAssignment` (`chosenKeysByGroup`, cost, alternates, residual buckets) | `realizeKeypressGroupsAsExtraStroke` ambiguitychecker.py:987 | report build only: `realization_report.json` (tracked) |
 | **final induced strokes** | `dict[Word, Strokes]`: base strokes plus at most one feature discriminating stroke | `buildFinalInducedStrokes` ambiguitychecker.py:1168 | no |
 | **disambiguated theory** | `dict[Word, list[Strokes]]`: index 0 primary (with its star/hash mark), then alternate entries | `Dictionary.buildDisambiguatedTheory` dictionary.py:342 | `disambiguated_theory.tsv` (gitignored, read by nothing) |
-| **Plover dictionary** | `dict[str, str]` (RTFCRE steno → spelling); 163,238 entries | `export_plover_dictionary.main` | `plover_stenalgo_dictionary.json` (tracked) |
+| **Plover dictionary** | `dict[str, str]` (RTFCRE steno → spelling); 167,491 entries | `export_plover_dictionary.main` | `plover_stenalgo_dictionary.json` (tracked) |
 | **Plover key table** | module with `KEYS`, `IMPLICIT_HYPHEN_KEYS`, `GEMINI_PR_KEYMAP` | `export_plover_system.main` | `plover_stenalgo/plover_stenalgo/_generated_keys.py` (tracked) |
 | **trainer data** | JSON: `keyboard-layout`, `practice-words`, `practice-sentences`, `definitions` | trainer exporters | `steno-trainer/public/data/*.json` (tracked) |
 
@@ -1091,7 +1091,8 @@ pers_1, nbr_p}. Only participle combinations also get the Word's gender and numb
 Result: `dict[WordOrtho, list[FeatureCombination]]` per group; a feature combination is a
 `frozenset[str]` of atomic features.
 Notes: from here on, the Elicitation Phase reasons per spelling; the Realization Phase must
-map a spelling back to one Word (**spelling twins**, item B1).
+map a spelling back to one Word (**spelling twins**, items B1/B47 — every reading is realized
+on that one Word, and the twin Words get no entry of their own).
 
 ##### Scale report — reportScale (S6.Elicitation.3)   src/elicitation.py:164
 Called by: Elicitation Phase entry (:549).
@@ -1317,16 +1318,30 @@ primary set.
 Result: keypress group population `groupToWords` (Words per group: g5 48,724; g1 15,295; g2
 11,735; g4 7,334; g6 6,707; g0 3,922; g3 3,882).
 
-##### Entry-to-Word resolution — _resolveEntryWord (S6.Realization.2.1)   src/ambiguitychecker.py:776
-Called by: Keypress group population (S6.Realization.2) and Extra alternate population
-(S6.Realization.3).
+##### Entry-to-Word resolution — _resolveEntryWord (S6.Realization.2.1)   src/ambiguitychecker.py:676
+Called by: Keypress group population (S6.Realization.2), Extra alternate population
+(S6.Realization.3) and Spelling-twin population (S6.Realization.3.1).
 Transformation: among the Words with this (ortho, lemmeGramCat), returns the **first** whose
 canonical base strokes equal the entry's canonical `strokes`; if none, falls back to
-`candidates[0]` (:800).
+`candidates[0]` (:700).
 Result: exactly one Word per spelling.
-Notes: when a spelling has several matching Words (spelling twins, 262 spellings in the
-current resolved sets), only the first gets its feature discriminating stroke. See TODO.md § Suspected bugs, item B1
-(fallback: item B20).
+Notes: when a spelling has several matching Words (**spelling twins**, 259 spellings in the
+current resolved sets), the alternates realize every reading on the resolved Word and the
+twin Words get no entry of their own (Spelling-twin population, S6.Realization.3.1; item
+B47, fixed 2026-09-25). Fallback: item B20.
+
+#### Spelling-twin population — findSpellingTwinWords (S6.Realization.3.1)   src/ambiguitychecker.py:785
+Called by: Disambiguated-theory assembly (S7.1) only (dictionary.py:426).
+Transformation: per spelling of every resolved entry, every OTHER Word with the same ortho,
+`lemmeGramCat` and canonical base stroke (another reading of the same spelling in the same
+Elicitation Phase homophone group — the entry's alternates already cover its readings, see
+`featureCombinationsByOrtho`).
+Result: the twin Word set (272 Words over 259 spellings at last measurement), which
+Disambiguated-theory assembly (S7.1) drops from the disambiguated theory entirely.
+Notes: before item B47 (fixed 2026-09-25) each twin kept a residual bare primary stroke from
+Final induced strokes (S6.Realization.6), shadowing the group's default reading
+(`affadis` indicatif passé 2e sg. on `affadi`'s bare chord) and, in a star/hash cluster,
+consuming a */# slot for a spelling already reachable through its feature strokes.
 
 #### Extra alternate population — buildKeypressGroupExtraAlternates (S6.Realization.3)   src/ambiguitychecker.py:844
 Called by: both paths (dictionary.py:376-378; build_realization_report.py:65-67).
@@ -1390,7 +1405,8 @@ Helpers not expanded: `_composedInduced` (:1077), `_isRedundantForAnyWord` (:108
   `unassignedGroups` (item B17). The check sees only `allWords` (not canonical members,
   unchosen spelling twins or dropped groups) and only first-seen pairs (item B16). An
   all-pairs canonical check over the whole lexicon finds 230 same-lemmeGramCat pairs in the
-  final induced strokes, all from spelling twins (item B1).
+  final induced strokes, all from spelling twins (item B1) — which Disambiguated-theory
+  assembly (S7.1) then drops from the disambiguated theory (item B47).
 
 #### Final induced strokes — buildFinalInducedStrokes (S6.Realization.6)   src/ambiguitychecker.py:1168
 Called by: `Dictionary.buildDisambiguatedTheory` only (dictionary.py:384).
@@ -1457,13 +1473,16 @@ Theory Export (S8) exporter through Disambiguated-theory loading (S8.1).
 Input state: the phonetic theory (80,725 keys / 168,189 Words), keyboard layout, the two JSON paths.
 Transformation: (1) loads `markersByKeypress` (:371-373) and the resolved discriminating
 feature sets (:374-375); (2) runs the Realization Phase on its inline path (S7.2) → final
-induced strokes; (3) calls Alternate entry strokes (S7.14) (:389) for the unmarked alternate
-entries; (4) calls Reserved-key composition (S7.4) (:390-394) once, over `{word: [primary] +
-alternates}` for every word, with Reform-doublet loading (S7.3) and `phonemeStrokeCounts` =
+induced strokes; (3) calls Alternate entry strokes (S7.14) (:420) for the unmarked alternate
+entries; (4) drops the spelling twins (Spelling-twin population, S6.Realization.3.1, :426)
+— every reading of their spellings is already an alternate on the resolved Word, and the
+residual bare stroke they would keep shadows the group's default reading (item B47); (5)
+calls Reserved-key composition (S7.4) once, over `{word: [primary] +
+alternates}` for every remaining word, with Reform-doublet loading (S7.3) and `phonemeStrokeCounts` =
 each Word's base stroke count (turns on the merge) — since the B44 fix (2026-09-24) this marks
 every entry, not just the primary (`composeReservedKeyStrokesForEntries` clusters each entry
 on its own final stroke).
-Result: the disambiguated theory, 168,189 Words in phonetic-theory order; `disambiguated_theory.tsv` has 186,298 rows, so 18,109
+Result: the disambiguated theory, 167,917 Words in phonetic-theory order; `disambiguated_theory.tsv` has 186,026 data rows, so 18,109
 alternate entries.
 Artifacts: reads both JSON files and `resources/reform1990.tsv` (path relative to the working directory).
 Notes: never uses `self`, so exporters unpickle the whole `Dictionary` just to call it (refactor candidate).
@@ -1519,8 +1538,10 @@ bucket that is a star/hash cluster (`_isStarHashCluster`, :381-390: ≥2 Words, 
 `lemmeGramCat`, ≥2 distinct `ortho`). Members keep phonetic-theory order.
 Result: primary-stroke-only lemma-homophone groups (4,450 at last measurement).
 Notes: a bucket with one `lemmeGramCat` and several spellings is dropped on purpose (a code
-comment leaves it to the Realization Phase): 98 such buckets survive into the disambiguated theory, all from
-spelling twins (item B1). Same-lemma cross-category clashes ("appel" NOM / "appelle" VER)
+comment leaves it to the Realization Phase): 6 such buckets survive into the disambiguated
+theory (the `-eter`/`-eler` variant conjugations, `caquette`/`caquète`… — the
+spelling-variant follow-up); the spelling-twin ones (item B1) are dropped at
+Disambiguated-theory assembly (S7.1) since item B47. Same-lemma cross-category clashes ("appel" NOM / "appelle" VER)
 are in scope because their `lemmeGramCat`s differ.
 
 ### Physical star/hash assignment — assignStarHashPhysicalStrokes (S7.6)   src/ambiguitychecker.py:370
@@ -1679,9 +1700,10 @@ shares one `lemmeGramCat` (a Realization Phase residual, out of S7's scope); els
 (a pair S7 should have marked apart — the marking-bug bucket, empty unless the marking itself
 regresses).
 Result: `FinalCollisionReport` (`crossLemma`, `sameLemmeGramCat`, `reformDoublet`, each
-canonical Strokes → `list[Word]`). Measured after the B44 fix (2026-09-24): 0 cross-lemma, 104
-same-lemma residual (e.g. `agi`/`agis` on `a/vti` — past participle vs plural, both on the
-primary stroke), 28 reform-doublet (exempted).
+canonical Strokes → `list[Word]`). Measured after the B47 fix (2026-09-25): 0 cross-lemma, 6
+same-lemma residual (the `-eter`/`-eler` variant conjugations, `caquette`/`caquète`… — the
+spelling-variant follow-up; the spelling-twin ones, 104 before B47, are dropped at
+Disambiguated-theory assembly (S7.1)), 0 reform-doublet.
 Notes: `reportFinalCollisions` (util/build_disambiguated_theory.py:39) prints the three counts,
 the first 10 same-lemma residuals, and `raise SystemExit(1)` on any `crossLemma` collision —
 after the TSV is already written — so `python dictionary.py` aborts at this step on a marking
@@ -1762,8 +1784,8 @@ phonetic-theory order on a tie (item B10); then runs Final-collision check (S7.1
 (`findFinalCollisions`) over the disambiguated theory and prints its three counts plus up to
 10 `crossLemma` entries (no longer the pre-B44 "same-steno collisions" figure, which lumped
 same-stroke homographs in with real collisions).
-Result: Plover dictionary, 163,238 entries at last measurement (`sort_keys=True`,
-`indent=1`); 5,139 contain `*`/`#`; 58 end in a \*/# marker stroke. Since the B44 fix
+Result: Plover dictionary, 167,491 entries at last measurement (`sort_keys=True`,
+`indent=1`); 4,867 contain `*`/`#`; 53 end in a \*/# marker stroke. Since the B44 fix
 (2026-09-24), losing an output to a cross-lemma collision (formerly item B4: 9 spellings
 shadowed by an unmarked alternate entry, e.g. `subits`/`subis`) should no longer happen; a
 spelling can still lose to a reform-doublet or near-doublet winner (`bizuths`,

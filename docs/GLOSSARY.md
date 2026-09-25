@@ -926,9 +926,10 @@ A dataset state: the external input files `Lexique383.tsv`, `LexiqueInfraCorresp
 ### Spelling twins
 Two or more Words in one homophone group with the same spelling and `lemmeGramCat` but a
 different identity ("finis" participle m:p and "finis" finite form). The Elicitation Phase
-merges them into one spelling; the Realization Phase gives only the first a feature
-discriminating stroke (item B1).
-- Code: `_resolveEntryWord` src/ambiguitychecker.py:776.
+merges them into one spelling; every reading is realized as one of the resolved Word's
+primary/alternate entries, and the twin Words get no entry of their own — the bare
+placement belongs to the group's default reading only (items B1, B47).
+- Code: `findSpellingTwinWords` src/ambiguitychecker.py:785; `_resolveEntryWord` :676.
 - First used in: Discriminating-Feature Elicitation (Elicitation Phase).
 
 ### Star/hash code / merged star/hash mark
