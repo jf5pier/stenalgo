@@ -94,7 +94,12 @@ python dictionary.py                         # the orchestrator over everything 
 
 (Diagnostics, hand-run, stay out of the list above: `python -m src.ambiguitychecker`,
 `python -m util.check_conjugation_disambiguation_order`, the featuregroupingsat K-scan
-(`python src/featuregroupingsat.py`), the layout dumper (`python -m src.keyboard`).)
+(`python src/featuregroupingsat.py`), the layout dumper (`python -m src.keyboard`),
+the Ngram toolbox (`python -m util.ngram_data download|extract-lexique|scan|query|purge`
+— purge is manual-only by policy; the ~5 GB v3 shards live in gitignored
+`googlebooks-fre-1grams/`), the variant-set builder (`python -m util.build_spelling_variants`
+— emits the draft `resources/spellingVariants.tsv`; discovered sets never auto-activate),
+and the Synthetic pruner (`python -m util.prune_spelling_variants`, dry-run by default).)
 
 ## Architecture
 
@@ -102,7 +107,7 @@ python dictionary.py                         # the orchestrator over everything 
 "Recomputing after a fix" checklist) and **`docs/GLOSSARY.md`** (canonical vocabulary).
 Architecture and design rationale: `docs/ARCHITECTURE.md`. The eight stages:
 
-1. **Lexicon Building (S1)** — `python lexique.py` → `resources/LexiqueMixte.tsv` (136,456 rows)
+1. **Lexicon Building (S1)** — `python lexique.py` → `resources/LexiqueMixte.tsv` (136,203 rows); enforces `resources/spellingVariants.tsv` (one canonical spelling per variant set; `src/spellingvariants.py` hooks reconcile both the lemme normalization and the 1990-reform ortho rewrites, so the canonical may sit on either side of a reform pair)
 2. **Synthetic Lexicon Building (S2)** — `util/completeVerbParadigms.py` etc., run converged by `python -m util.build_synthetic_lexicon` (which the `python dictionary.py` orchestrator calls) → `resources/LexiqueSynthetic.tsv`
 3. **Dictionary Loading (S3)** — inside `python -m util.build_phonetic_theory` → 167,639 Words, syllable inventory (cached in `Dictionary.pickle`)
 4. **Keyboard Layout Optimization (S4)** — CP-SAT layout solve; rare and costly — `python -m util.optimize_keyboard` (seeds from the committed `starboard3h.json`, writes `starboard3h_optimized.json`)
@@ -111,7 +116,7 @@ Architecture and design rationale: `docs/ARCHITECTURE.md`. The eight stages:
 7. **Different-Lemma or Grammatical-Category Disambiguation (S7)** — star/hash marks (`decideStarHashMark` rule stack), composed on the phonetic theory by `python -m util.build_disambiguated_theory` → the disambiguated theory (`disambiguated_theory.tsv`)
 8. **Theory Export (S8)** — Plover (`util/export_plover_*`) and steno-trainer (`util/export_*`) branches; nothing reads `disambiguated_theory.tsv`, every exporter recomputes the disambiguated theory via `util/_theoryio.py`
 
-Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whenever they exist and never checks them against the lexicon or layout (`rm -f *.pickle` after any lexicon or layout change — the Synthetic Lexicon Building (S2) wrapper deletes and rebuilds the pickles itself for rows its appenders add, but hand-made lexicon or layout edits remain the caller's responsibility; the orchestrator aborts on the first failing step). The NOM/ADJ cross-checkers need the external Morphalou 3.1 CSV (see `docs/PIPELINE.md` Synthetic Lexicon Building (S2)). The legacy discriminator path (`buildDiscriminatorSelection`, `satOptimizeDiscriminator`, `assignDiscriminatorKeypresses`) no longer runs: those functions are gone; `src/featureextractor.py` feeds only Synthetic Lexicon Building (S2)'s gating and the `ambiguitychecker` diagnostic, and of `src/greedyoptimizer.py` only `GRAMCAT_PRIORITY` is live (category-priority rule (R6)). Suspected bugs are listed in `TODO.md` ("Suspected bugs").
+Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whenever they exist and never checks them against the lexicon or layout (`rm -f *.pickle` after any lexicon or layout change — the Synthetic Lexicon Building (S2) wrapper deletes and rebuilds the pickles itself for rows its appenders add, but hand-made lexicon or layout edits remain the caller's responsibility; the orchestrator aborts on the first failing step). Editing `resources/spellingVariants.tsv` or `resources/reform1990.tsv` counts as a lexicon change: rerun `python lexique.py`, prune the Synthetic file (`python -m util.prune_spelling_variants --apply`), then rebuild (the dropped spellings must not survive in `LexiqueSynthetic.tsv`; the S2 appenders read through the same choke point, so a dropped spelling that coincides with a conjugated form of a kept verb — `boite`/`boiter` — stays exempt, see `isDroppedOrthoRow`). The NOM/ADJ cross-checkers need the external Morphalou 3.1 CSV (see `docs/PIPELINE.md` Synthetic Lexicon Building (S2)). The legacy discriminator path (`buildDiscriminatorSelection`, `satOptimizeDiscriminator`, `assignDiscriminatorKeypresses`) no longer runs: those functions are gone; `src/featureextractor.py` feeds only Synthetic Lexicon Building (S2)'s gating and the `ambiguitychecker` diagnostic, and of `src/greedyoptimizer.py` only `GRAMCAT_PRIORITY` is live (category-priority rule (R6)). Suspected bugs are listed in `TODO.md` ("Suspected bugs").
 
 ### Core Data Model
 

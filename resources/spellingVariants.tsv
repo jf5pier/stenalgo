@@ -1,0 +1,428 @@
+# Variant-spelling sets of the SAME word; ONE canonical spelling is kept, the others are dropped from the whole
+# pipeline (src/spellingvariants.py). Canonical = highest Google Books Ngram 2010-2019 count
+# (resources/LexiqueGoogleNgram.tsv). status: 'active' = enforced; 'review' = a human must set it to 'active' (possibly
+# editing canonical) or 'veto' (genuinely distinct words -- row kept, nothing enforced).
+# Discovered rows carry a session suggestion in the note (suggest ACTIVE / suggest VETO / UNDECIDED).
+setId	canonical	dropLemmes	dropOrthos	status	source	ngramCanonical	ngramDropped	note
+abatage	abattage	abatage	abatage	active	discovered	124917	3683	suggest ACTIVE -- true variant (abattage standard) -- user ruling 2026-09-25
+abatis	abattis	abatis	abatis	active	discovered	22283	7150	suggest ACTIVE -- true variant (abattis standard) -- user ruling 2026-09-25
+abeiller	abeiller	abeillier	abeillier	active	reform1990	110	0	
+absous	absous	absout	absout	active	reform1990	34659	14783	
+acuponcture	acupuncture	acuponcture	acuponcture	active	reform1990	107997	4137	
+age	âge	age	age	active	discovered	11062105	734325	suggest ACTIVE -- true variant (âge standard; unaccented is English) -- user ruling 2026-09-25
+aiguiller	aiguiller	aiguillier	aiguillier	active	reform1990	1220074	295	
+aiguë	aiguë	aigüe	aigüe	active	reform1990	687739	20810	
+allegretto	allegretto	allégretto	allégretto	active	reform1990	8262	123	
+allegro	allegro	allégro	allégro	active	reform1990	48865	1494	
+allo	allô	allo	allo	active	reform1990	278703	90533	
+allègement	allègement	allégement	allégement	active	reform1990	64812	59657	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+allègrement	allègrement	allégrement	allégrement	active	reform1990	129907	42319	
+ambiguïté	ambiguïté	ambigüité	ambigüité	active	reform1990	777403	24809	
+appas	appâts	appas	appas	active	reform1990	42589	37812	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+arboretum	arboretum	arborétum	arborétum	active	reform1990	23138	165	
+arguer	arguer	argüer	argüer	active	reform1990	238112	339	
+arien	aryen	arien	arien	active	discovered	124324	47092	suggest ACTIVE -- true variant (aryen standard) -- user ruling 2026-09-25
+arole	arole	arolle	arolle	active	reform1990	3021	913	
+artefact	artefact	artéfact	artéfact	active	reform1990	120000	33771	
+asseoir	asseoir	assoir	assoir	active	reform1990	8325403	10000	
+azulejo	azulejo	azuléjo	azuléjo	active	reform1990	3352	0	
+babi	baby	babi	babi	active	discovered	374880	17589	suggest ACTIVE -- true variant (baby standard loan) -- user ruling 2026-09-25
+bagoter	bagotter	bagoter	bagoter	active	discovered	117	104	suggest ACTIVE -- true variant (bagotter standard) -- user ruling 2026-09-25
+bailler	bâiller	bailler	bailler	veto	discovered	297184	108039	suggest VETO -- distinct: bailler (archaic, grant) vs bâiller (yawn) -- user ruling 2026-09-25
+balade	balade	ballade	ballade	veto	discovered	915059	210441	suggest VETO -- distinct: balade (outing) vs ballade (poem/song) -- user ruling 2026-09-25
+bale	balle	bale	bale	active	discovered	2222021	23043	suggest VETO -- bale is the English word; balle the French one -- user ruling 2026-09-25
+ballotage	ballottage	ballotage	ballotage	active	reform1990	10570	2221	
+ballotement	ballottement	ballotement	ballotement	active	reform1990	4695	466	
+balloter	balloter	ballotter	ballotter	active	reform1990	144132	20469	
+ballotine	ballotine	ballottine	ballottine	active	reform1990	2171	1869	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+balluchon	baluchon	balluchon	balluchon	active	discovered	55830	15833	suggest ACTIVE -- true variant (baluchon standard) -- user ruling 2026-09-25
+balluchonnage	baluchonnage	balluchonnage	balluchonnage	active	discovered	254	0	suggest ACTIVE -- true variant -- user ruling 2026-09-25
+balluchonner	baluchonner	balluchonner	balluchonner	active	discovered	139	0	suggest ACTIVE -- true variant -- user ruling 2026-09-25
+barbote	barbote	barbotte	barbotte	active	discovered	7757	2816	suggest ACTIVE -- true variant -- user ruling 2026-09-25
+barcarole	barcarolle	barcarole	barcarole	active	reform1990	6136	1456	
+barmans	barmen	barmans	barmans	active	reform1990	14541	5000	
+baronet	baronnet	baronet	baronet	active	discovered	32346	5814	suggest ACTIVE -- true variant (baronnet standard; baronet is the English word) -- user ruling 2026-09-25
+barquerole	barquerolle	barquerole	barquerole	active	reform1990	82	8	
+beluga	beluga	béluga	béluga	active	seed	8367	7948	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+besicles	bésicles	besicles	besicles	active	reform1990	10427	8330	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+bi	by	bi	bi	veto	discovered	1457930	853756	suggest VETO -- distinct: bi- prefix vs by (English) -- user ruling 2026-09-25
+bignole	bignole	bignolle	bignolle	active	discovered	2051	543	suggest ACTIVE -- true variant (bignole standard) -- user ruling 2026-09-25
+billeterie	billeterie	billèterie	billèterie	active	reform1990	4355	0	
+bite	bite	bitte byte	bitte byte	veto	discovered	242181	20932 15835	suggest VETO -- distinct: bite vs bitte (mooring bit) vs byte (computing) -- user ruling 2026-09-25
+biter	bitter	biter	biter	veto	discovered	40862	1676	suggest VETO -- bitter is the English word (beer) -- user ruling 2026-09-25
+biture	biture	byture	byture	active	discovered	7828	22	suggest ACTIVE -- true variant (biture standard) -- user ruling 2026-09-25
+bizut	bizut	bizuth	bizuth	active	reform1990	3818	3130	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+boite	boîte	boite	boite	active	reform1990	2976897	206305	
+bolchevique	bolchevique	bolchévique	bolchévique	active	reform1990	92845	12344	
+bolchevisme	bolchevisme	bolchévisme	bolchévisme	active	reform1990	62117	6558	
+bolcheviste	bolcheviste	bolchéviste	bolchéviste	active	reform1990	7566	687	
+bonard	bonnard	bonard	bonard	active	discovered	71323	17748	suggest ACTIVE -- true variant (bonnard standard) -- user ruling 2026-09-25
+bonhomie	bonhomie	bonhommie	bonhommie	active	reform1990	111197	5426	
+boniche	bonniche	boniche	boniche	active	discovered	12485	8157	suggest ACTIVE -- true variant (bonniche/boniche both attested) -- user ruling 2026-09-25
+bonir	bonnir	bonir	bonir	active	discovered	141109	975	suggest ACTIVE -- true variant (bonnir standard) -- user ruling 2026-09-25
+bonneterie	bonneterie	bonnèterie	bonnèterie	active	reform1990	15863	24	
+bortch	bortsch	bortch	bortch	active	discovered	7398	1028	suggest ACTIVE -- true variant (bortsch has several accepted spellings) -- user ruling 2026-09-25
+boule	boule	boulle	boulle	veto	discovered	1641448	15434	suggest VETO -- boulle is a proper noun (marqueterie Boulle) -- user ruling 2026-09-25
+bouloter	bouloter	boulotter	boulotter	active	reform1990	32182	24613	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+boursoufflage	boursouflage	boursoufflage	boursoufflage	active	reform1990	138	4	
+boursoufflement	boursouflement	boursoufflement	boursoufflement	active	reform1990	627	72	
+boursouffler	boursoufler	boursouffler	boursouffler	active	reform1990	10677	325	
+boursoufflure	boursouflure	boursoufflure	boursoufflure	active	reform1990	14213	532	
+bouteiller	bouteiller	bouteillier	bouteillier	active	reform1990	17318	704	
+bouterole	bouterolle	bouterole	bouterole	active	reform1990	761	22	
+boutiller	boutillier	boutiller	boutiller	active	reform1990	9194	372	
+brasero	brasero	braséro	braséro	active	reform1990	40392	1450	
+brifer	briffer	brifer	brifer	active	discovered	2075	86	suggest ACTIVE -- true variant (briffer standard) -- user ruling 2026-09-25
+bringeure	bringeure	bringeüre	bringeüre	active	reform1990	16	0	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+brinquebaler	brinquebaler	brinqueballer	brinqueballer	active	discovered	9484	1144	suggest ACTIVE -- true variant (brinquebaler standard) -- user ruling 2026-09-25
+briqueterie	briqueterie	briquèterie	briquèterie	active	reform1990	12896	76	
+brunches	brunchs	brunches	brunches	active	reform1990	13555	751	
+buffleterie	buffleterie	bufflèterie	bufflèterie	active	reform1990	1035	6	
+bute	butte	bute	bute	veto	discovered	341940	90185	suggest VETO -- bute belongs to buter's paradigm; butte is a distinct noun -- user ruling 2026-09-25
+buter	buter	butter	butter	veto	discovered	489391	367737	suggest VETO -- distinct: buter (stumble) vs butter (butter/mound up) -- user ruling 2026-09-25
+buteur	buteur	butteur	butteur	active	discovered	18047	313	suggest ACTIVE -- true variant (buteur standard) -- user ruling 2026-09-25
+butoir	butoir	buttoir	buttoir	active	discovered	40563	1150	suggest ACTIVE -- true variant (butoir standard) -- user ruling 2026-09-25
+cacahouète	cacahuète	cacahouète	cacahouète	active	reform1990	46599	14208	
+cachoterie	cachoterie	cachotterie	cachotterie	active	reform1990	32209	5499	
+cachotier	cachotier	cachottier	cachottier	active	reform1990	13856	12268	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+cahute	cahute	cahutte	cahutte	active	reform1990	34867	672	
+caler	caler	caller	caller	veto	discovered	1248986	440047	suggest VETO -- caller is a Canadianism for 'to call', not a spelling of caler -- user ruling 2026-09-25
+cameraman	cameraman	caméraman	caméraman	active	reform1990	53136	23009	
+caner	canner	caner	caner	veto	discovered	1138856	827679	suggest VETO -- distinct: caner (slang, chicken out) vs canner (put in cans) -- user ruling 2026-09-25
+canette	canette	cannette	cannette	active	discovered	165939	41193	suggest ACTIVE -- true variant (canette standard) -- user ruling 2026-09-25
+care	carre	care	care	active	discovered	288842	30871	suggest VETO -- care is the English word -- user ruling 2026-09-25
+cari	cari	carry cary	carry cary	active	discovered	55449	41908 41903	suggest ACTIVE -- true variant (cari/carry/cary curry-family spellings) -- user ruling 2026-09-25
+cariatide	cariatide	caryatide	caryatide	active	discovered	24488	5529	suggest ACTIVE -- true variant (cariatide standard) -- user ruling 2026-09-25
+chah	chah	schah	schah	active	discovered	46572	5872	suggest ACTIVE -- true variant (chah/schah/shah) -- user ruling 2026-09-25
+chape	chape	chappe	chappe	active	discovered	113632	13343	suggest ACTIVE -- true variant (chape standard) -- user ruling 2026-09-25
+chargeure	chargeüre	chargeure	chargeure	active	reform1990	18	0	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+chariot	chariot	charriot	charriot	active	reform1990	463110	5017	
+chariotage	chariotage	charriotage	charriotage	active	reform1990	371	0	
+charioter	charioter	charrioter	charrioter	active	reform1990	225	14	
+chariotée	charriotée	chariotée	chariotée	active	reform1990	3	0	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+chasse	chasse	châsse	châsse	veto	discovered	2728541	51022	suggest VETO -- distinct: chasse (hunt) vs châsse (reliquary) -- user ruling 2026-09-25
+chebec	chébec	chebec	chebec	active	reform1990	1749	1203	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+chechia	chéchia	chechia	chechia	active	reform1990	14022	1129	
+cheik	cheik	scheik	scheik	active	discovered	53515	4744	suggest ACTIVE -- true variant (cheik standard) -- user ruling 2026-09-25
+chile	chile	chyle	chyle	veto	discovered	52355	7392	suggest VETO -- distinct: chile (chili spelling) vs chyme... chyle (lymph) -- user ruling 2026-09-25
+chistera	chistera	chistéra	chistéra	active	reform1990	4399	36	
+chlamydiae	chlamydiae	chlamydias	chlamydias	active	reform1990	3961	390	
+chlass	schlass	chlass	chlass	active	discovered	2530	227	suggest ACTIVE -- true variant (schlass standard) -- user ruling 2026-09-25
+chlinguer	schlinguer	chlinguer	chlinguer	active	seed	6618	1298	
+chnoque	chnoque	schnoque	schnoque	active	discovered	2511	1858	suggest ACTIVE -- true variant (schnoque standard) -- user ruling 2026-09-25
+chnouf	chnouf	schnouf schnouff	schnouf schnouff	active	discovered	1090	640 279	suggest ACTIVE -- true variant (chnouf standard) -- user ruling 2026-09-25
+chouia	chouia	chouya	chouya	active	discovered	6194	546	suggest ACTIVE -- true variant (chouia standard) -- user ruling 2026-09-25
+ciao	ciao	tchao	tchao	active	reform1990	43858	14919	
+cicerone	cicérone	cicerone	cicerone	active	reform1990	12821	11979	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+cime	cime	cyme	cyme	veto	discovered	386617	4470	suggest VETO -- distinct: cime (summit) vs cyme (botany) -- user ruling 2026-09-25
+claper	claper	clapper	clapper	active	discovered	10540	4777	suggest ACTIVE -- true variant (rare dialectal pair) -- user ruling 2026-09-25
+clergymans	clergymen	clergymans	clergymans	active	reform1990	1964	17	
+cocoter	cocoter	cocotter	cocotter	active	reform1990	209596	262	
+colon	colon	côlon	côlon	veto	discovered	726219	117594	suggest VETO -- homograph collision: colon (settler) vs côlon (bowel) -- isException class -- user ruling 2026-09-25
+comandant	commandant	comandant	comandant	active	discovered	2333826	984	suggest ACTIVE -- misspelling variant (commandant standard) -- user ruling 2026-09-25
+combatif	combatif	combattif	combattif	active	reform1990	51294	2249	
+combativité	combativité	combattivité	combattivité	active	reform1990	54808	954	
+conard	connard	conard	conard	active	discovered	345732	7411	suggest ACTIVE -- true variant (connard standard) -- user ruling 2026-09-25
+conasse	connasse	conasse	conasse	active	discovered	39995	2341	suggest ACTIVE -- true variant (connasse standard) -- user ruling 2026-09-25
+condottiere	condottiere	condottière	condottière	active	reform1990	23246	1962	
+conquistadores	conquistadors	conquistadores	conquistadores	active	reform1990	27207	19796	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+corolaire	corollaire	corolaire	corolaire	active	reform1990	225499	37375	
+corole	corole	corolle	corolle	active	reform1990	61831	32156	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+cote	cote	cotte	cotte	veto	discovered	404853	115974	suggest VETO -- distinct: cote (rating) vs cotte (armor/skirt) -- user ruling 2026-09-25
+crane	crâne	crane	crane	active	discovered	1894185	50169	suggest ACTIVE -- true variant (crâne standard) -- user ruling 2026-09-25
+credo	credo	crédo	crédo	active	reform1990	204243	9593	
+cuisseau	cuissot	cuisseau	cuisseau	active	reform1990	11210	1501	
+curricula	curriculums	curricula	curricula	active	reform1990	15107	7844	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+dale	dalle	dale	dale	active	discovered	547893	98384	suggest ACTIVE -- true variant (dalle standard; dale accepted) -- user ruling 2026-09-25
+dansoter	dansoter	dansotter	dansotter	active	reform1990	675	276	
+date	date	datte	datte	veto	discovered	6566349	133094	suggest VETO -- distinct: date vs datte (fig) -- user ruling 2026-09-25
+decrescendo	decrescendo	décrescendo	décrescendo	active	reform1990	9061	195	
+dentelier	dentelière	dentelier	dentelier	active	reform1990	779	114	
+desperado	desperado	despérado	despérado	active	reform1990	5145	76	
+dessaouler	dessouler	dessaouler dessoûler	dessaouler dessoûler	active	seed	12569	9092 1486	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+dessiller	dessiller	déciller	déciller	active	reform1990	21527	1155	
+diesel	diesel	diésel	diésel	active	reform1990	115188	1338	
+diffracter	diffracter	difracter	difracter	active	discovered	17785	50	suggest ACTIVE -- true variant (diffracter standard) -- user ruling 2026-09-25
+dine	dine	dyne	dyne	veto	discovered	32690	1251	suggest VETO -- dyne is a physics unit; dine is a verb form -- user ruling 2026-09-25
+disaccaride	disaccharide	disaccaride	disaccaride	active	reform1990	1773	0	
+disfonctionnement	dysfonctionnement	disfonctionnement	disfonctionnement	active	discovered	376805	4199	suggest ACTIVE -- misspelling variant (dysfonctionnement standard) -- user ruling 2026-09-25
+dissous	dissout	dissous	dissous	active	reform1990	162758	141869	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+djebel	djebel	djébel	djébel	active	reform1990	66324	1320	
+douceâtre	douceâtre	douçâtre	douçâtre	active	reform1990	38060	1693	
+dribbler	dribbler	dribler	dribler	active	discovered	23822	1085	suggest ACTIVE -- true variant (dribbler standard) -- user ruling 2026-09-25
+droper	dropper	droper	droper	active	discovered	1323	756	suggest ACTIVE -- true variant (dropper standard slang) -- user ruling 2026-09-25
+dégoter	dégoter	dégotter	dégotter	active	seed	76342	28757	
+détoner	détonner	détoner	détoner	veto	discovered	77535	10815	suggest VETO -- distinct: détoner (detonate) vs détonner (be off-key) -- user ruling 2026-09-25
+eczéma	eczéma	exéma	exéma	active	reform1990	85478	182	
+eczémateux	eczémateux	exémateux	exémateux	active	reform1990	2974	7	
+edelweiss	edelweiss	édelweiss	édelweiss	active	reform1990	16578	415	
+ego	ego	égo	égo	active	reform1990	726206	39704	
+embatre	embattre	embatre	embatre	active	reform1990	228	160	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+empiètement	empiètement	empiétement	empiétement	active	reform1990	23693	22242	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+errata	errata	erratums	erratums	active	reform1990	8662	67	
+espionite	espionnite	espionite	espionite	active	discovered	2664	347	suggest ACTIVE -- true variant (espionnite standard) -- user ruling 2026-09-25
+exeat	exeat	exéat	exéat	active	reform1990	3081	121	
+exequatur	exequatur	exéquatur	exéquatur	active	reform1990	47795	773	
+faine	faine	faîne	faîne	active	reform1990	4040	884	
+favela	favela	favéla	favéla	active	reform1990	28823	0	
+fayoter	fayoter	fayotter	fayotter	active	reform1990	3545	80	
+fedayin	fedayin	fédayin	fédayin	active	reform1990	5753	160	
+ferries	ferries	ferrys	ferrys	active	reform1990	100739	16644	
+fiord	fjord	fiord	fiord	active	reform1990	65760	2790	
+folingue	folingue	follingue	follingue	active	discovered	359	276	suggest ACTIVE -- true variant (folingue standard) -- user ruling 2026-09-25
+foret	forêt	foret	foret	veto	discovered	5029873	38939	suggest VETO -- distinct: forêt (forest) vs foret (drill bit) -- user ruling 2026-09-25
+frapadingue	frappadingue	frapadingue	frapadingue	active	discovered	4310	589	suggest ACTIVE -- true variant (frapadingue/frappadingue both attested) -- user ruling 2026-09-25
+fripe	fripe	frippe	frippe	active	discovered	19582	895	suggest ACTIVE -- true variant (fripe/frippe both attested) -- user ruling 2026-09-25
+frisoter	frisoter	frisotter	frisotter	active	reform1990	11177	1815	
+frisotis	frisottis	frisotis	frisotis	active	reform1990	3972	262	
+frite	frite	fritte	fritte	active	discovered	405361	3252	suggest ACTIVE -- true variant (frite standard; fritte accepted) -- user ruling 2026-09-25
+fumerole	fumerole	fumerolle	fumerolle	active	reform1990	19153	2146	
+fusarole	fusarole	fusarolle	fusarolle	active	reform1990	5	1	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+féerie	féerie	féérie	féérie	active	reform1990	95276	8808	
+féerique	féerique	féérique	féérique	active	reform1990	127834	18374	
+féeriquement	féeriquement	féériquement	féériquement	active	reform1990	791	96	
+gabare	gabare	gabarre	gabarre	active	discovered	15826	10189	suggest ACTIVE -- true variant (gabare/gabarre both attested) -- user ruling 2026-09-25
+gageure	gageure	gageüre	gageüre	active	reform1990	84392	307	
+gai	gai	gay	gay	veto	discovered	785552	540908	suggest VETO -- distinct in modern usage: gai (cheerful) vs gay (homosexual) -- user ruling 2026-09-25
+gailleterie	gaillèterie	gailleterie	gailleterie	active	reform1990	28	0	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+gale	galle	gale	gale	veto	discovered	254564	88747	UNDECIDED -- galle is both the old spelling of gale and a distinct word (burlap); counts muddy -- user ruling 2026-09-25
+gallon	galon	gallon	gallon	veto	discovered	139966	25959	suggest VETO -- distinct: gallon (unit) vs galon (braid) -- user ruling 2026-09-25
+ganaderia	ganaderia	ganadéria	ganadéria	active	reform1990	1314	0	
+gangréneuse	gangréneuse	gangréneux	gangréneux	veto	reform1990	1329	927	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+gapette	gapette	gâpette	gâpette	active	discovered	1007	435	suggest ACTIVE -- true variant (gâpette/gapette both attested) -- user ruling 2026-09-25
+garrotage	garrottage	garrotage	garrotage	active	reform1990	414	86	
+garroter	garroter	garrotter	garrotter	active	reform1990	32365	27647	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+gaule	gaulle	gaule	gaule	veto	discovered	1435259	426920	suggest VETO -- gaulle count inflated by the proper noun (De Gaulle) -- user ruling 2026-09-25
+gelinotte	gélinotte	gelinotte	gelinotte	active	reform1990	4207	1516	
+gentlemans	gentlemen	gentlemans	gentlemans	active	reform1990	100311	839	
+ghilde	guilde	ghilde	ghilde	active	reform1990	143616	1104	
+girole	girole	girolle	girolle	active	reform1990	33072	3953	
+glavioter	glavioter	glaviotter	glaviotter	active	discovered	1029	22	suggest ACTIVE -- true variant (glavioter standard) -- user ruling 2026-09-25
+gnognote	gnognotte	gnognote	gnognote	active	discovered	3025	1686	suggest ACTIVE -- true variant (gnognotte standard) -- user ruling 2026-09-25
+gnole	gnôle	gnole	gnole	active	discovered	27979	7641	suggest ACTIVE -- true variant (gnôle standard) -- user ruling 2026-09-25
+gobeleterie	gobeleterie	gobelèterie	gobelèterie	active	reform1990	586	17	
+graineterie	graineterie	grainèterie	grainèterie	active	reform1990	1694	0	
+gratouiller	gratouiller	grattouiller	grattouiller	active	discovered	10076	4631	suggest ACTIVE -- true variant (gratouiller standard) -- user ruling 2026-09-25
+gratouillis	gratouillis	grattouillis	grattouillis	active	discovered	1277	505	suggest ACTIVE -- true variant (gratouillis standard) -- user ruling 2026-09-25
+grelotement	grelottement	grelotement	grelotement	active	reform1990	3301	1499	
+greloter	greloter	grelotter	grelotter	active	reform1990	137834	57597	
+griffton	griffon	griffton grifton	griffton grifton	active	discovered	58	0	suggest ACTIVE -- misspelling variant (both are griffon spellings) -- user ruling 2026-09-25
+gril	grill	gril	gril	active	discovered	97242	91289	suggest ACTIVE -- true variant (gril is the old spelling of grill) -- user ruling 2026-09-25
+grizzli	grizzly	grizzli	grizzli	active	discovered	30820	20884	suggest ACTIVE -- true variant (grizzli/grizzly both accepted) -- user ruling 2026-09-25
+grole	grole	grolle	grolle	active	reform1990	2658	1507	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+guibole	guibole	guibolle	guibolle	active	reform1990	9165	1459	
+guillemeter	guillemeter	guilleméter	guilleméter	active	reform1990	161	0	
+guérillero	guérillero	guérilléro	guérilléro	active	reform1990	16769	584	
+hachisch	haschisch	hachisch haschich	hachisch haschich	active	discovered	30900	5475 28384	suggest ACTIVE -- true variant (haschisch/hachisch/haschich) -- user ruling 2026-09-25
+hale	halle	hale hâle	hale hâle	veto	discovered	433131	52897 29920	suggest VETO -- three distinct words: halle (market) / hale (haler) / hâle (tan) -- user ruling 2026-09-25
+haler	hâler	haler	haler	veto	discovered	107534	99248	suggest VETO -- distinct: haler (tow) vs hâler (tan/redden) -- user ruling 2026-09-25
+harpie	harpie	harpye	harpye	active	discovered	70809	2047	suggest ACTIVE -- true variant (harpie standard; harpye archaic) -- user ruling 2026-09-25
+hobbies	hobbies	hobbys	hobbys	active	reform1990	20975	1891	
+homéo-	homéo-	homœo-	homœo-	active	reform1990	0	0	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+imbitable	imbitable	imbittable	imbittable	active	discovered	1030	0	suggest ACTIVE -- true variant (imbitable standard) -- user ruling 2026-09-25
+imbécilité	imbécillité	imbécilité	imbécilité	active	reform1990	47616	3162	
+impedimenta	impedimenta	impédimenta	impédimenta	active	reform1990	6223	170	
+imperium	imperium	impérium	impérium	active	reform1990	56460	2260	
+impresario	imprésario		impresario	active	reform1990	41365	24541	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+innommé	innommé	innomé	innomé	active	reform1990	20513	2722	
+interpeler	interpeller	interpeler	interpeler	active	reform1990	316459	6488	
+iodler	yodler	iodler	iodler	active	discovered	947	171	suggest ACTIVE -- true variant (yodler standard) -- user ruling 2026-09-25
+jamboree	jamboree	jamborée	jamborée	active	reform1990	3766	99	
+jazzmans	jazzmen	jazzmans	jazzmans	active	reform1990	10361	145	
+jerrican	jerrican	jerrycan	jerrycan	active	discovered	13396	10379	suggest ACTIVE -- true variant (jerrican/jerrycan both accepted) -- user ruling 2026-09-25
+joailler	joaillier	joailler	joailler	active	reform1990	44674	21431	
+kipa	kippa	kipa	kipa	active	discovered	18110	1817	suggest ACTIVE -- true variant (kippa standard) -- user ruling 2026-09-25
+kitch	kitsch	kitch	kitch	active	discovered	98382	13166	suggest ACTIVE -- true variant (kitsch standard) -- user ruling 2026-09-25
+laper	laper	lapper	lapper	active	discovered	41635	1141	suggest ACTIVE -- true variant (laper/lapper same sense, both attested) -- user ruling 2026-09-25
+legato	legato	légato	légato	active	reform1990	9240	38	
+levraut	levraut	levreau	levreau	active	reform1990	3821	1215	
+lieder	lieder	lieds	lieds	active	reform1990	37617	1588	
+lignerole	lignerolle	lignerole	lignerole	active	reform1990	185	20	
+limes	limes	limès	limès	active	reform1990	37769	392	
+lire	lire	lyre	lyre	veto	discovered	23710179	153260	suggest VETO -- distinct: lire (currency/read) vs lyre (instrument) -- user ruling 2026-09-25
+lis	lis	lys	lys	active	discovered	717628	289122	suggest ACTIVE -- true variant (lis/lys both accepted) -- user ruling 2026-09-25
+lise	lise	lyse	lyse	veto	discovered	432241	44990	suggest VETO -- lyse (lysis) is distinct; lise is a verb form -- user ruling 2026-09-25
+louloute	louloute	louloutte	louloutte	active	discovered	3359	618	suggest ACTIVE -- true variant (louloute standard) -- user ruling 2026-09-25
+loupiote	loupiote	loupiotte	loupiotte	active	discovered	16288	1842	suggest ACTIVE -- true variant (loupiote standard) -- user ruling 2026-09-25
+lunetier	lunetier	lunettier	lunettier	active	reform1990	2235	380	
+luter	lutter	luter	luter	veto	discovered	7187659	5497	suggest VETO -- distinct: lutter (wrestle) vs luter (lute a joint) -- user ruling 2026-09-25
+maffia	mafia	maffia	maffia	active	discovered	214468	7819	suggest ACTIVE -- true variant (mafia standard; maffia accepted) -- user ruling 2026-09-25
+maffieux	mafieux	maffieux	maffieux	active	discovered	124168	6285	suggest ACTIVE -- true variant (mafieux standard) -- user ruling 2026-09-25
+maffioso	mafioso	maffioso	maffioso	active	discovered	8188	1105	suggest ACTIVE -- true variant (mafioso standard) -- user ruling 2026-09-25
+mafiosi	mafiosi	mafiosos	mafiosos	active	reform1990	5751	517	
+mah-jong	majong	mah-jong	mah-jong	active	reform1990	423	0	
+mammy	mamy	mammy	mammy	active	discovered	42529	4843	suggest ACTIVE -- true variant (mamy/mammy both nonstandard of mamie) -- user ruling 2026-09-25
+mangeoter	mangeoter	mangeotter	mangeotter	active	reform1990	115	68	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+mangeure	mangeure	mangeüre	mangeüre	active	reform1990	107	0	
+margoter	margoter	margotter	margotter	active	reform1990	1530	68	
+mari	mari	mary	mary	active	discovered	7077284	1263594	suggest VETO -- mary is the English name -- user ruling 2026-09-25
+mariole	mariole	mariolle	mariolle	active	reform1990	12205	11597	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+marketing	marketing	markéting	markéting	active	reform1990	1174464	352	
+maronner	marronner	maronner	maronner	active	discovered	7797	3394	suggest ACTIVE -- true variant (marronner standard) -- user ruling 2026-09-25
+marqueterie	marqueterie	marquèterie	marquèterie	active	reform1990	36048	157	
+mater	mater	matter mâter	matter mâter	veto	discovered	512270	73594 8071	suggest VETO -- distinct: mater (stare down) vs mâter (mast) vs matter -- user ruling 2026-09-25
+matin	matin	mâtin	mâtin	veto	discovered	11502131	19830	suggest VETO -- distinct: matin (morning) vs mâtin (mastiff) -- user ruling 2026-09-25
+maxima	maxima	maximums	maximums	active	reform1990	54480	11067	
+media	média		media	active	reform1990	2342035	537705	
+mesa	mesa	mésa	mésa	active	reform1990	45287	2665	
+messeoir	messeoir	messoir	messoir	active	reform1990	334	0	
+milord	milord	mylord	mylord	active	discovered	238619	29167	suggest ACTIVE -- true variant (milord standard; mylord accepted) -- user ruling 2026-09-25
+minima	minima	minimums	minimums	active	reform1990	159030	20650	
+mirmidon	myrmidon	mirmidon	mirmidon	active	discovered	7954	574	suggest ACTIVE -- true variant (myrmidon standard) -- user ruling 2026-09-25
+moderato	moderato	modérato	modérato	active	reform1990	15363	28	
+molasse	molasse	mollasse	mollasse	active	discovered	6851	5791	suggest ACTIVE -- true variant (molasse standard) -- user ruling 2026-09-25
+momerie	momerie	mômerie	mômerie	active	discovered	5433	3038	suggest ACTIVE -- true variant (momerie standard) -- user ruling 2026-09-25
+monosaccaride	monosaccharide	monosaccaride	monosaccaride	active	reform1990	919	0	
+moucherole	moucherolle	moucherole	moucherole	active	reform1990	765	9	
+moudjahiddine	moudjahidine	moudjahiddine moudjahidines	moudjahiddine moudjahidines	active	discovered	21627	1145 13710	suggest ACTIVE -- true variant (moudjahidine standard; several spellings) -- user ruling 2026-09-25
+moufette	mouffette	moufette	moufette	active	discovered	4592	3316	suggest ACTIVE -- true variant (mouffette standard) -- user ruling 2026-09-25
+mousqueterie	mousqueterie	mousquèterie	mousquèterie	active	reform1990	15815	21	
+mu	mu	mû	mû	active	reform1990	483963	119446	
+muleta	muleta	muléta	muléta	active	reform1990	9650	0	
+mur	mur	mûr	mûr	veto	discovered	9137636	778483	suggest VETO -- distinct: mur (wall) vs mûr (ripe) -- user ruling 2026-09-25
+muserole	muserolle	muserole	muserole	active	reform1990	3485	54	
+nirvana	nirvana	nirvâna	nirvâna	active	discovered	76119	15525	suggest ACTIVE -- true variant (nirvana standard) -- user ruling 2026-09-25
+none	nonne	none	none	active	discovered	148487	61621	suggest ACTIVE -- true variant (nonne standard; none archaic) -- user ruling 2026-09-25
+nonette	nonnette	nonette	nonette	active	discovered	5850	4599	suggest ACTIVE -- true variant (nonnette standard) -- user ruling 2026-09-25
+nouraghe	nuraghe	nouraghe	nouraghe	active	reform1990	4443	17	
+nénufar	nénuphar	nénufar	nénufar	active	reform1990	73357	1685	
+ognon	oignon	ognon	ognon	active	reform1990	528330	433108	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+ognonade	oignonade	ognonade	ognonade	active	reform1990	74	0	
+ognonière	oignonière	ognonière	ognonière	active	reform1990	14	0	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+oie	oie	oye	oye	active	discovered	400701	16234	suggest ACTIVE -- true variant (oie standard; oye archaic) -- user ruling 2026-09-25
+oléosaccarure	oléosaccarure	oléosaccharure	oléosaccharure	active	reform1990	0	0	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+optima	optima	optimums	optimums	active	reform1990	6976	2845	
+ouillière	ouillère	ouillière	ouillière	active	reform1990	76	20	
+paner	panner	paner	paner	active	discovered	541909	84321	suggest ACTIVE -- true variant (paner standard) -- user ruling 2026-09-25
+paneterie	paneterie	panèterie	panèterie	active	reform1990	1502	14	
+panné	pané	panné	panné	veto	discovered	46370	3096	suggest VETO -- distinct: pané (breaded) vs panné (down-and-out) -- user ruling 2026-09-25
+papeterie	papeterie	papèterie	papèterie	active	reform1990	69482	604	
+papi	papy	papi	papi	active	discovered	138362	86166	suggest ACTIVE -- true variant (papy standard) -- user ruling 2026-09-25
+par	par	parr	parr	active	discovered	313698937	14306	suggest VETO -- parr (young salmon) is a distinct word -- user ruling 2026-09-25
+parlote	parlote	parlotte	parlotte	active	discovered	8576	7968	suggest ACTIVE -- true variant (parlote/parlotte both attested) -- user ruling 2026-09-25
+parqueterie	parqueterie	parquèterie	parquèterie	active	reform1990	412	0	
+parti	parti	party	party	veto	discovered	43283089	219714	suggest VETO -- party is the English loan -- user ruling 2026-09-25
+paseo	paseo	paséo	paséo	active	reform1990	60935	281	
+pchitt	pschitt	pchitt	pchitt	active	discovered	9757	290	suggest ACTIVE -- true variant (pschitt standard) -- user ruling 2026-09-25
+penalty	penalty	pénalty	pénalty	active	reform1990	26194	2279	
+perestroïka	perestroïka	pérestroïka	pérestroïka	active	reform1990	33886	1506	
+persifflage	persiflage	persifflage	persifflage	active	reform1990	21012	529	
+persiffler	persifler	persiffler	persiffler	active	reform1990	18559	288	
+persiffleur	persifleur	persiffleur	persiffleur	active	reform1990	8935	210	
+peso	peso	péso	péso	active	reform1990	28805	56	
+phylloxera	phylloxéra		phylloxera	active	reform1990	27913	20707	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+phénix	phénix	phœnix	phœnix	active	reform1990	126385	26883	
+piccolo	piccolo	picolo	picolo	active	discovered	22702	1568	suggest ACTIVE -- true variant (piccolo standard) -- user ruling 2026-09-25
+pifer	piffer	pifer	pifer	active	discovered	2443	454	suggest ACTIVE -- true variant (piffer standard) -- user ruling 2026-09-25
+pizzeria	pizzeria	pizzéria	pizzéria	active	reform1990	114424	6623	
+piètement	piètement	piétement	piétement	active	reform1990	2431	2213	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+placebo	placebo	placébo	placébo	active	reform1990	110569	2724	
+plingeure	plingeüre	plingeure	plingeure	active	reform1990	0	0	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+poli	poli	poly	poly	veto	discovered	896492	45636	suggest VETO -- distinct: poli (polished) vs poly- (prefix) -- user ruling 2026-09-25
+policemans	policemen	policemans	policemans	active	reform1990	9705	102	
+pollope	polope	pollope	pollope	active	discovered	158	0	suggest ACTIVE -- true variant (rare slang pair) -- user ruling 2026-09-25
+polysaccaride	polysaccharide	polysaccaride	polysaccaride	active	reform1990	4190	0	
+ponch	punch	ponch	ponch	active	reform1990	121591	427	
+pouffiasse	pouffiasse	poufiasse	poufiasse	active	discovered	14535	5477	suggest ACTIVE -- true variant (pouffiasse standard) -- user ruling 2026-09-25
+proscenium	proscenium	proscénium	proscénium	active	reform1990	3980	426	
+prunelier	prunellier	prunelier	prunelier	active	reform1990	4391	442	
+psi	psy	psi	psi	veto	discovered	533890	56277	suggest VETO -- distinct: psi (Greek letter) vs psy (psychiatry) -- user ruling 2026-09-25
+putti	putti	puttos	puttos	active	reform1990	7854	20	
+quanta	quanta	quantums	quantums	active	reform1990	35418	389	
+quiller	quiller	quillier	quillier	active	reform1990	123029	1026	
+quincailler	quincaillier	quincailler	quincailler	active	reform1990	11323	4676	
+québecois	québécois	québecois	québecois	active	reform1990	542197	2186	
+rasseoir	rasseoir	rassoir	rassoir	active	reform1990	412362	2520	
+rate	rate	ratte	ratte	veto	discovered	355646	4950	suggest VETO -- ratte is a potato variety, a distinct word -- user ruling 2026-09-25
+receleur	receleur	recéleur	recéleur	active	reform1990	22552	2258	
+recepage	recépage	recepage	recepage	active	reform1990	1415	138	
+recepée	recépée	recepée	recepée	active	reform1990	66	36	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+recordmans	recordmen	recordmans	recordmans	active	reform1990	794	71	
+reflex	reflex	réflex	réflex	active	reform1990	52466	2594	
+relai	relais	relai	relai	active	reform1990	1052003	24002	
+ressurgir	resurgir	ressurgir	ressurgir	active	discovered	194240	144211	suggest ACTIVE -- true variant (resurgir/ressurgir both accepted) -- user ruling 2026-09-25
+revolver	revolver	révolver	révolver	active	reform1990	498859	18670	
+rho	rho	rhô	rhô	active	discovered	10533	2859	suggest ACTIVE -- true variant (rho standard) -- user ruling 2026-09-25
+rif	rif	riff	riff	veto	discovered	44773	34176	suggest VETO -- rif (Rif mountains) vs riff (music) are different things -- user ruling 2026-09-25
+robinetier	robinetier	robinétier	robinétier	active	reform1990	77	0	
+roder	rôder	roder	roder	veto	discovered	415699	115053	suggest VETO -- distinct: rôder (prowl) vs roder (break in an engine) -- user ruling 2026-09-25
+roi	roi	roy	roy	active	discovered	15918211	846513	suggest ACTIVE -- true variant (roi standard; roy archaic) -- user ruling 2026-09-25
+romancero	romancero	romancéro	romancéro	active	reform1990	9018	80	
+rongeure	rongeure	rongeüre	rongeüre	active	reform1990	130	0	
+rot	rot	rôt	rôt	veto	discovered	59219	8026	suggest VETO -- distinct: rot (burp) vs rôt (roast) -- user ruling 2026-09-25
+rouloter	roulotter	rouloter	rouloter	active	reform1990	177	60	
+rousserole	rousserolle	rousserole	rousserole	active	reform1990	1615	291	
+ruffian	ruffian	rufian	rufian	active	discovered	13385	890	suggest ACTIVE -- true variant (ruffian standard) -- user ruling 2026-09-25
+rugbymans	rugbymen	rugbymans	rugbymans	active	reform1990	11427	445	
+rushes	rushes	rushs	rushs	active	reform1990	15237	4109	
+saccarine	saccharine	saccarine	saccarine	active	reform1990	7231	73	
+saccarose	saccharose	saccarose	saccarose	active	reform1990	28671	52	
+sadducéen	sadducéen	saducéen	saducéen	active	discovered	26927	3174	suggest ACTIVE -- true variant (sadducéen standard) -- user ruling 2026-09-25
+saoul	soul	soûl saoul	soûl saoul	active	discovered	180256	152469 78014	suggest ACTIVE -- true variant (saoul/soul/soûl are all spellings of one word) -- user ruling 2026-09-25
+saoulard	soulard	saoulard soûlard	saoulard soûlard	active	discovered	10886	711	suggest ACTIVE -- true variant (saoulard/soûlard both attested) -- user ruling 2026-09-25
+saouler	souler	soûler saouler	soûler saouler	active	seed	134532	91239	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+saoulerie	soulerie	saoulerie soûlerie	saoulerie soûlerie	active	discovered	5076	3747	suggest ACTIVE -- true variant (saoulerie/soûlerie both attested) -- user ruling 2026-09-25
+satire	satire	satyre	satyre	veto	discovered	217216	84224	suggest VETO -- distinct: satire vs satyre (satyr) -- user ruling 2026-09-25
+satirique	satirique	satyrique	satyrique	veto	discovered	166048	10736	suggest VETO -- distinct: satirique (satire) vs satyrique (satyr plays) -- user ruling 2026-09-25
+satisfecit	satisfecit	satisfécit	satisfécit	active	reform1990	11843	222	
+scampi	scampi	scampis	scampis	active	reform1990	9891	3099	
+scénarii	scénarios	scénarii	scénarii	active	reform1990	424470	18796	
+select	select	sélect	sélect	active	reform1990	113994	28763	
+senior	senior	sénior	sénior	active	reform1990	156411	5121	
+sensas	sensass	sensas	sensas	active	discovered	3098	2484	suggest ACTIVE -- true variant (sensas/sensass slang) -- user ruling 2026-09-25
+serpillière	serpillière	serpillère	serpillère	active	reform1990	53051	14053	
+shrapnel	shrapnel	shrapnell	shrapnell	active	discovered	12872	5046	suggest ACTIVE -- true variant (shrapnel standard) -- user ruling 2026-09-25
+silvaner	sylvaner	silvaner	silvaner	active	discovered	6882	162	suggest ACTIVE -- true variant (sylvaner standard) -- user ruling 2026-09-25
+sketches	sketches	sketchs	sketchs	active	reform1990	31185	13502	
+snif	snif	sniff	sniff	active	discovered	7926	7112	suggest ACTIVE -- true variant (snif/sniff both used) -- user ruling 2026-09-25
+snifer	sniffer	snifer	snifer	active	discovered	29584	292	suggest ACTIVE -- true variant (sniffer standard) -- user ruling 2026-09-25
+soli	solos	soli	soli	active	reform1990	29180	28867	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+sombrero	sombrero	sombréro	sombréro	active	reform1990	14606	150	
+sorgho	sorgho	sorgo	sorgo	active	reform1990	65318	1491	
+sostenuto	sostenuto	sosténuto	sosténuto	active	reform1990	3043	0	
+sotie	sottie		sotie	active	reform1990	7571	4283	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+spermaceti	spermaceti	spermacéti	spermacéti	active	reform1990	1757	57	
+sportsmans	sportsmen	sportsmans	sportsmans	active	reform1990	4333	10	
+suifer	suiffer	suifer	suifer	active	discovered	1109	490	suggest ACTIVE -- true variant (suiffer standard) -- user ruling 2026-09-25
+supermans	supermen	supermans	supermans	active	reform1990	1076	204	
+sur	sur	sûr	sûr	veto	discovered	299499412	16471496	suggest VETO -- distinct: sur (on) vs sûr (sure) -- isException class -- user ruling 2026-09-25
+surseoir	surseoir	sursoir	sursoir	active	reform1990	376292	1081	
+tache	tâche	tache	tache	veto	discovered	4855964	1451182	suggest VETO -- distinct: tache (stain) vs tâche (task) -- user ruling 2026-09-25
+tacher	tâcher	tacher	tacher	veto	discovered	5660557	1798067	suggest VETO -- distinct: tacher (stain) vs tâcher (task) -- user ruling 2026-09-25
+taler	taler	taller	taller	veto	discovered	3143850	17469	suggest VETO -- unclear pair; taler's huge count looks like a proper noun -- leave both -- user ruling 2026-09-25
+tanin	tanin	tannin	tannin	active	discovered	107334	18044	suggest ACTIVE -- true variant (tanin standard) -- user ruling 2026-09-25
+tartignole	tartignole	tartignolle	tartignolle	active	reform1990	672	385	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+tartufe	tartuffe	tartufe	tartufe	active	discovered	75009	19682	suggest ACTIVE -- true variant (tartuffe/tartufe both accepted) -- user ruling 2026-09-25
+tartuferie	tartuferie	tartufferie	tartufferie	active	discovered	4475	3753	suggest ACTIVE -- true variant (tartuferie/tartufferie) -- user ruling 2026-09-25
+tavaïole	tavaïolle	tavaïole	tavaïole	active	reform1990	105	19	
+tempi	tempos	tempi	tempi	active	reform1990	12885	10757	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+tennismans	tennismen	tennismans	tennismans	active	reform1990	2998	79	
+tepidarium	tepidarium	tépidarium	tépidarium	active	reform1990	3699	149	
+tequila	tequila	téquila	téquila	active	reform1990	63266	4706	
+tiper	typer	tiper	tiper	veto	discovered	14330037	1084	suggest VETO -- tiper is the 'to tip' loan, not a spelling of typer -- user ruling 2026-09-25
+tocade	toquade	tocade	tocade	active	seed	12675	5952	
+tocante	tocante	toquante	toquante	active	reform1990	2796	1455	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+tocard	tocard	toquard	toquard	active	seed	16557	2259	
+tome	tome	tomme	tomme	veto	discovered	1566035	30931	suggest VETO -- distinct: tome (volume) vs tomme (cheese) -- user ruling 2026-09-25
+tomette	tomette	tommette	tommette	active	discovered	18277	7040	suggest ACTIVE -- true variant (tomette standard) -- user ruling 2026-09-25
+torero	torero	toréro	toréro	active	reform1990	38796	1333	
+trimbaler	trimballer	trimbaler	trimbaler	active	seed	75301	47548	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+trole	trolle	trole	trole	active	reform1990	3400	818	
+trompeter	trompeter	trompéter	trompéter	active	reform1990	225432	60	
+trotskiste	trotskiste	trotskyste	trotskyste	active	discovered	49374	14264	suggest ACTIVE -- true variant (trotskiste standard) -- user ruling 2026-09-25
+téocali	téocalli	téocali	téocali	active	reform1990	206	145	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+vantail	vantail	ventail	ventail	active	reform1990	25740	4072	
+vaquero	vaquero	vaquéro	vaquéro	active	reform1990	4636	0	
+varia	varia	varias	varias	active	reform1990	40452	5973	
+velum	vélum		velum	active	reform1990	8429	4423	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+vergeure	vergeure	vergeüre	vergeüre	active	reform1990	138	0	
+veto	veto	véto	véto	active	reform1990	173047	27552	
+vilenie	vilenie	vilénie	vilénie	active	reform1990	27692	2235	
+vousoyer	voussoyer	vousoyer	vousoyer	active	discovered	1243	69	suggest ACTIVE -- true variant (voussoyer standard) -- user ruling 2026-09-25
+yachtmans	yachtmen	yachtmans	yachtmans	active	reform1990	955	0	
+yoyoter	yoyoter	yoyotter	yoyotter	active	reform1990	251	0	
+zieuter	zieuter	zyeuter	zyeuter	active	seed	8887	5569	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+égrugeure	égrugeüre	égrugeure	égrugeure	active	reform1990	0	0	close call or sparse data -- human settles canonical -- user ruling 2026-09-25
+équarisseur	équarrisseur	équarisseur	équarisseur	active	discovered	9018	1842	suggest ACTIVE -- true variant (équarrisseur standard) -- user ruling 2026-09-25
+évènement	événement	évènement	évènement	active	reform1990	3268043	838107	
+évènementiel	événementiel	évènementiel	évènementiel	active	seed	75073	10716	

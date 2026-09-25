@@ -26,6 +26,10 @@ import xml.etree.ElementTree as ET
 from copy import deepcopy
 from dataclasses import dataclass
 from src.grammar import Syllable, SyllableCollection
+from src.spellingvariants import (
+    loadSpellingVariantDrops,
+    reconcileOutputOrtho,
+)
 # from src.word import GramCat
 from typing import Any
 
@@ -54,6 +58,11 @@ def loadLexiconExclusions(tsvPath: str = "resources/lexiconExclusions.tsv") -> d
 
 
 ignoredList = frozenset(loadLexiconExclusions())
+
+# Non-canonical spellings of the ACTIVE sets of resources/spellingVariants.tsv,
+# dropped from the whole pipeline (see src/spellingvariants.py's header for the
+# three enforcement points).
+variantDrops = loadSpellingVariantDrops()
 
 # Spelling variants of the same lexeme that Lexique383 lists under distinct `lemme`
 # strings, collapsed to one canonical lemme so they don't compete for a separate
@@ -193,7 +202,7 @@ def computeSingleEditRule(oldSpelling: str, newSpelling: str) -> "OrthoRewriteRu
         "one character, can't derive a single-character ortho-rewrite rule")
 
 
-def loadReform1990OrthoRewrites(tsvPath: str) -> dict[str, "OrthoRewriteRule"]:
+def loadReform1990OrthoRewrites(tsvPath: str) -> dict[str, tuple["OrthoRewriteRule", ...]]:
     """
     Parse resources/reform1990.tsv into a rewrite-rule dict keyed by BOTH the old and
     new spelling of each appliesToOrthoRewrite=true row (so a word matches regardless of
@@ -202,28 +211,37 @@ def loadReform1990OrthoRewrites(tsvPath: str) -> dict[str, "OrthoRewriteRule"]:
     orthoRewriteOccurrence()/applyOrthoRewrite() use it to scope the rewrite to a word's
     own stem/prefix rather than a blind global character replace (e.g. "événement"'s
     word-initial é must stay put; only the second é, before the mute e syllable, changes).
+    A key may hold several rules: doublet spellings that share one reformed target
+    (saoulera/soûlera -> soulera) reach their respective rules through the same
+    normalized lemme.
     """
-    rewrites: dict[str, OrthoRewriteRule] = {}
+    rewrites: dict[str, list[OrthoRewriteRule]] = {}
     for oldSpelling, newSpelling, _category, _appliesToLemmeNormalization, \
             appliesToOrthoRewrite, _appliesToPluralRewrite, isException, _note \
             in _readReform1990Rows(tsvPath):
         if appliesToOrthoRewrite != "True" or isException == "True":
             continue
         rule = computeSingleEditRule(oldSpelling, newSpelling)
-        rewrites[oldSpelling] = rule
+        rewrites.setdefault(oldSpelling, []).append(rule)
         # Only a same-length substitution is safe to also key under newSpelling: its
         # occurrence check (ortho[position] == oldChar) naturally fails once the text
         # already reads newChar there, so re-matching an already-reformed word is a
-        # harmless no-op. An insertion/deletion rule has no such guard -- e.g. deleting
-        # one letter of a double ("grolle"->"grole") leaves a single letter that still
-        # matches the same anchor, and re-running the rule against the *already*
-        # single-lettered "grole" deletes again, producing "groe". Keying those only
-        # under oldSpelling is enough: the word.lemme fallback lookup in
-        # outputMixedLexique still finds this rule whenever word.ortho itself is the
-        # one that actually still needs rewriting.
-        if rule.oldChar != "" and rule.newChar != "":
-            rewrites[newSpelling] = rule
-    return rewrites
+        # harmless no-op. A deletion is equally safe WHEN the character that slips
+        # into the deleted position differs from the deleted one ("saoul" -> "soul":
+        # already-reformed "soul" has 'o', not 'a', at position 1, so the occurrence
+        # check fails) -- but deleting one letter of a double ("grolle"->"grole")
+        # leaves a single letter that still matches the same anchor, and re-running
+        # the rule against the *already* single-lettered "grole" deletes again,
+        # producing "groe". Insertions have no position guard at all. Keying those
+        # latter two only under oldSpelling is enough: the word.lemme fallback lookup
+        # in outputMixedLexique still finds this rule whenever word.ortho itself is
+        # the one that actually still needs rewriting.
+        guarded = (rule.oldChar != "" and rule.newChar != "") or (
+            rule.oldChar != "" and rule.newChar == ""
+            and newSpelling[rule.position:rule.position + 1] != rule.oldChar)
+        if guarded:
+            rewrites.setdefault(newSpelling, []).append(rule)
+    return {key: tuple(rules) for key, rules in rewrites.items()}
 
 
 def orthoRewriteOccurrence(ortho: str, rule: OrthoRewriteRule) -> int | None:
@@ -309,7 +327,7 @@ def applyOrthoRewrite(text: str, rule: OrthoRewriteRule, occurrence: int) -> str
     return "".join(chars)
 
 
-_reform1990OrthoRewrites: dict[str, OrthoRewriteRule] = (
+_reform1990OrthoRewrites: dict[str, tuple[OrthoRewriteRule, ...]] = (
     loadReform1990OrthoRewrites("resources/reform1990.tsv") if APPLY_1990_REFORM_ORTHO else {}
 )
 
@@ -971,11 +989,21 @@ class Lexique:
                 if (corpus_word["ortho"] is not None
                     and corpus_word["ortho"][0] != "#"
                         and corpus_word["ortho"] not in ignoredList):
+                    # Reconcile the 1990-reform lemme normalization against the
+                    # spelling-variant drops: None drops the row (a non-canonical
+                    # paradigm), a return of the raw lemme suppresses the
+                    # normalization (a canonical on the old side of a reform pair,
+                    # e.g. "oignon").
+                    lemme = variantDrops.reconcileLemme(
+                        corpus_word["lemme"],
+                        normalizeLemme(corpus_word["lemme"],
+                                       corpus_word["cgram"]))
+                    if lemme is None:
+                        continue
                     printVerbose(corpus_word["ortho"], ["Creating word"])
                     word = Word(ortho=corpus_word["ortho"],                   # mangeait
                                 phonology=corpus_word["phon"],                      # m@ZE
-                                lemme=normalizeLemme(corpus_word["lemme"],
-                                                      corpus_word["cgram"]),        # manger
+                                lemme=lemme,                                        # manger
                                 # gram_cat = GramCat[corpus_word["cgram"]] if \
                                 #        corpus_word["cgram"] != '' else None,
                                 # ortho_gram_cat = [GramCat[gc] for gc in \
@@ -1010,7 +1038,11 @@ class Lexique:
             for asso_word in graph_phon_asso:
                 printVerbose(asso_word["item"], ["BreakdownSyllables"])
                 if (asso_word["item"][0] != "#"
-                        and asso_word["item"] not in ignoredList):
+                        and asso_word["item"] not in ignoredList
+                        and asso_word["item"] in self.words_by_ortho):
+                    # The last guard: spelling-variant drops (and any other
+                    # read_corpus filter) may have removed this item's words
+                    # entirely, leaving nothing to break down.
                     corpus_words = self.words_by_ortho[asso_word["item"]]
                     foundInLexicon = False
                     for word in corpus_words:
@@ -1172,6 +1204,15 @@ class Lexique:
         return ";".join(kept) + ";" if kept else None
 
     def outputMixedLexique(self, filename: str) -> None:
+        # Canonical -> lemmes of raw corpus rows spelled with it: the corpus,
+        # not the TSV, knows that "absous" is a form of lemme "absoudre"
+        # (same-paradigm variant, drops) while "boite" under lemme "boiter"
+        # is a different, kept verb (exempt).
+        carriers: dict[str, set[str]] = {}
+        for word in self.words:
+            carriers.setdefault(word.ortho, set()).add(word.lemme)
+        drops = variantDrops.withCanonicalCarriers(
+            {ortho: frozenset(lemmes) for ortho, lemmes in carriers.items()})
         with open(filename, "w") as f:
             fieldnames = ["ortho", "phon", "lemme", "cgram", "cgramortho",
                           "genre", "nombre", "infover", "syll_cv",
@@ -1194,13 +1235,15 @@ class Lexique:
                     # corpus row has lemme="mouvoir" -- fall back to an exact ortho match
                     # (safe: dict-key equality, not a prefix/substring test, so it can't
                     # over-match an unrelated word like "mûr" that merely shares a prefix).
-                    rule = _reform1990OrthoRewrites.get(word.lemme) \
-                        or _reform1990OrthoRewrites.get(word.ortho)
-                    if rule is not None:
+                    # A key may hold several rules (doublet spellings sharing one
+                    # reformed target); the first whose occurrence check fires wins.
+                    for rule in (_reform1990OrthoRewrites.get(word.lemme, ())
+                                 + _reform1990OrthoRewrites.get(word.ortho, ())):
                         occurrence = orthoRewriteOccurrence(word.ortho, rule)
                         if occurrence is not None:
                             orthoOut = applyOrthoRewrite(word.ortho, rule, occurrence)
                             orthosyllOut = applyOrthoRewrite(orthosyllOut, rule, occurrence)
+                            break
                     # -eler/-eter verbs and their -ment-derived nouns (word.lemme may be either,
                     # see ELER_ETER_DERIVED_NOUN_VERBS) -- independent of the rule above, since
                     # it's a different sub-mechanism (a doubled-consonant->accent transform, not
@@ -1242,6 +1285,20 @@ class Lexique:
                         if occurrence is not None:
                             orthoOut = applyOrthoRewrite(orthoOut, rule, occurrence)
                             orthosyllOut = applyOrthoRewrite(orthosyllOut, rule, occurrence)
+                    # Reconcile the whole rewrite chain (reform rules, -eler/-eter,
+                    # plural and one-off fixes above) against the spelling-variant
+                    # drops: a dropped post spelling with a kept pre spelling
+                    # suppresses the rewrite (canonical on the old side of a pair,
+                    # e.g. "oignon"/"événement"); both dropped removes the row.
+                    preSnapshot = (word.ortho, word.writeOrthoSyll())
+                    reconciled = reconcileOutputOrtho(word.ortho, orthoOut,
+                                                      drops,
+                                                      word.lemme,
+                                                      word.gram_cat)
+                    if reconciled is None:
+                        continue
+                    if not reconciled[1]:
+                        orthoOut, orthosyllOut = preSnapshot
                     corpus.writerow({
                         "ortho": orthoOut,
                         "phon": word.phonology,

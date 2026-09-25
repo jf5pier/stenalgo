@@ -214,10 +214,6 @@ enflammâtes	@flamat	enflammer	VER	VER			ind:pas:2p;	@|f_l_a|m_a_t_#	en|f_l_a|mm
 enflamme	@flam	enflammer	VER	VER			sub:pre:1s;	@|f_l_a_m_#	en|f_l_a_mm_e	0.0	0.0	synthetic
 enflammes	@flam	enflammer	VER	VER			sub:pre:2s;	@|f_l_a_m_#	en|f_l_a_mm_es	0.0	0.0	synthetic
 enflamme	@flam	enflammer	VER	VER			sub:pre:3s;	@|f_l_a_m_#	en|f_l_a_mm_e	0.0	0.0	synthetic
-iodlâtes	jOdlat	iodler	VER	VER			ind:pas:2p;	j_O_d|l_a_t_#	i_o_d|l_â_t_es	0.0	0.0	synthetic
-iodle	jOdl	iodler	VER	VER			sub:pre:1s;	j_O_d_l_#	i_o_d_l_e	0.0	0.0	synthetic
-iodles	jOdl	iodler	VER	VER			sub:pre:2s;	j_O_d_l_#	i_o_d_l_es	0.0	0.0	synthetic
-iodle	jOdl	iodler	VER	VER			sub:pre:3s;	j_O_d_l_#	i_o_d_l_e	0.0	0.0	synthetic
 vacillés	vasije	vaciller	VER	VER	m	p	par:pas;	v_a|s_i|j_e_#	v_a|c_i|ll_é_s	0.0	0.0	synthetic
 vacillée	vasije	vaciller	VER	VER	f	s	par:pas;	v_a|s_i|j_e_#	v_a|c_i|ll_é_e	0.0	0.0	synthetic
 vacillées	vasije	vaciller	VER	VER	f	p	par:pas;	v_a|s_i|j_e_#	v_a|c_i|ll_é_es	0.0	0.0	synthetic
@@ -964,10 +960,6 @@ dessinâtes	desinat	dessiner	VER	VER			ind:pas:2p;	d_e|s_i|n_a_t_#	d_e|ss_i|n_â
 dessine	desin	dessiner	VER	VER			sub:pre:1s;	d_e|s_i_n_#	d_e|ss_i_n_e	0.0	0.0	synthetic
 dessines	desin	dessiner	VER	VER			sub:pre:2s;	d_e|s_i_n_#	d_e|ss_i_n_es	0.0	0.0	synthetic
 dessine	desin	dessiner	VER	VER			sub:pre:3s;	d_e|s_i_n_#	d_e|ss_i_n_e	0.0	0.0	synthetic
-frisottâtes	fRizotat	frisotter	VER	VER			ind:pas:2p;	f_R_i|z_o|t_a_t_#	f_r_i|s_o|tt_â_t_es	0.0	0.0	synthetic
-frisotte	fRizOt	frisotter	VER	VER			sub:pre:1s;	f_R_i|z_O_t_#	f_r_i|s_o_tt_e	0.0	0.0	synthetic
-frisottes	fRizOt	frisotter	VER	VER			sub:pre:2s;	f_R_i|z_O_t_#	f_r_i|s_o_tt_es	0.0	0.0	synthetic
-frisotte	fRizOt	frisotter	VER	VER			sub:pre:3s;	f_R_i|z_O_t_#	f_r_i|s_o_tt_e	0.0	0.0	synthetic
 concordâtes	k§kORdat	concorder	VER	VER			ind:pas:2p;	k_§|k_O_R|d_a_t_#	c_on|c_o_r|d_â_t_es	0.0	0.0	synthetic
 concorde	k§kORd	concorder	VER	VER			sub:pre:1s;	k_§|k_O_R_d_#	c_on|c_o_r_d_e	0.0	0.0	synthetic
 concordes	k§kORd	concorder	VER	VER			sub:pre:2s;	k_§|k_O_R_d_#	c_on|c_o_r_d_es	0.0	0.0	synthetic
@@ -1443,13 +1435,6 @@ tannâtes	tanat	tanner	VER	VER			ind:pas:2p;	t_a|n_a_t_#	t_a|nn_â_t_es	0.0	0.0	
 tanne	tan	tanner	VER	VER			sub:pre:1s;	t_a_n_#	t_a_nn_e	0.0	0.0	synthetic
 tannes	tan	tanner	VER	VER			sub:pre:2s;	t_a_n_#	t_a_nn_es	0.0	0.0	synthetic
 tanne	tan	tanner	VER	VER			sub:pre:3s;	t_a_n_#	t_a_nn_e	0.0	0.0	synthetic
-maronnés	maRone	maronner	VER	VER	m	p	par:pas;	m_a|R_o|n_e_#	m_a|r_o|nn_é_s	0.0	0.0	synthetic
-maronnée	maRone	maronner	VER	VER	f	s	par:pas;	m_a|R_o|n_e_#	m_a|r_o|nn_é_e	0.0	0.0	synthetic
-maronnées	maRone	maronner	VER	VER	f	p	par:pas;	m_a|R_o|n_e_#	m_a|r_o|nn_é_es	0.0	0.0	synthetic
-maronnâtes	maRonat	maronner	VER	VER			ind:pas:2p;	m_a|R_o|n_a_t_#	m_a|r_o|nn_â_t_es	0.0	0.0	synthetic
-maronne	maROn	maronner	VER	VER			sub:pre:1s;	m_a|R_O_n_#	m_a|r_o_nn_e	0.0	0.0	synthetic
-maronnes	maROn	maronner	VER	VER			sub:pre:2s;	m_a|R_O_n_#	m_a|r_o_nn_es	0.0	0.0	synthetic
-maronne	maROn	maronner	VER	VER			sub:pre:3s;	m_a|R_O_n_#	m_a|r_o_nn_e	0.0	0.0	synthetic
 débridâtes	debRidat	débrider	VER	VER			ind:pas:2p;	d_e|b_R_i|d_a_t_#	d_é|b_r_i|d_â_t_es	0.0	0.0	synthetic
 débride	debRid	débrider	VER	VER			sub:pre:1s;	d_e|b_R_i_d_#	d_é|b_r_i_d_e	0.0	0.0	synthetic
 débrides	debRid	débrider	VER	VER			sub:pre:2s;	d_e|b_R_i_d_#	d_é|b_r_i_d_es	0.0	0.0	synthetic
@@ -2473,13 +2458,6 @@ tallâtes	talat	taller	VER	VER			ind:pas:2p;	t_a|l_a_t_#	t_a|ll_â_t_es	0.0	0.0	
 talle	tal	taller	VER	VER			sub:pre:1s;	t_a_l_#	t_a_ll_e	0.0	0.0	synthetic
 talles	tal	taller	VER	VER			sub:pre:2s;	t_a_l_#	t_a_ll_es	0.0	0.0	synthetic
 talle	tal	taller	VER	VER			sub:pre:3s;	t_a_l_#	t_a_ll_e	0.0	0.0	synthetic
-dégottés	degote	dégotter	VER	VER	m	p	par:pas;	d_e|g_o|t_e_#	d_é|g_o|tt_é_s	0.0	0.0	synthetic
-dégottée	degote	dégotter	VER	VER	f	s	par:pas;	d_e|g_o|t_e_#	d_é|g_o|tt_é_e	0.0	0.0	synthetic
-dégottées	degote	dégotter	VER	VER	f	p	par:pas;	d_e|g_o|t_e_#	d_é|g_o|tt_é_es	0.0	0.0	synthetic
-dégottâtes	degotat	dégotter	VER	VER			ind:pas:2p;	d_e|g_o|t_a_t_#	d_é|g_o|tt_â_t_es	0.0	0.0	synthetic
-dégotte	degOt	dégotter	VER	VER			sub:pre:1s;	d_e|g_O_t_#	d_é|g_o_tt_e	0.0	0.0	synthetic
-dégottes	degOt	dégotter	VER	VER			sub:pre:2s;	d_e|g_O_t_#	d_é|g_o_tt_es	0.0	0.0	synthetic
-dégotte	degOt	dégotter	VER	VER			sub:pre:3s;	d_e|g_O_t_#	d_é|g_o_tt_e	0.0	0.0	synthetic
 frappâtes	fRapat	frapper	VER	VER			ind:pas:2p;	f_R_a|p_a_t_#	f_r_a|pp_â_t_es	0.0	0.0	synthetic
 frappe	fRap	frapper	VER	VER			sub:pre:3s;	f_R_a_p_#	f_r_a_pp_e	0.0	0.0	synthetic
 claustré	klostRe	claustrer	VER	VER	m	s	par:pas;	k_l_o_s|t_R_e	c_l_au_s|t_r_é	0.0	0.0	synthetic
@@ -4646,12 +4624,6 @@ vinâtes	vinat	viner	VER	VER			ind:pas:2p;	v_i|n_a_t_#	v_i|n_â_t_es	0.0	0.0	syn
 vine	vin	viner	VER	VER			sub:pre:1s;	v_i_n_#	v_i_n_e	0.0	0.0	synthetic
 vines	vin	viner	VER	VER			sub:pre:2s;	v_i_n_#	v_i_n_es	0.0	0.0	synthetic
 vine	vin	viner	VER	VER			sub:pre:3s;	v_i_n_#	v_i_n_e	0.0	0.0	synthetic
-grelottés	gR°lote	grelotter	VER	VER	m	p	par:pas;	g_R_°|l_o|t_e_#	g_r_e|l_o|tt_é_s	0.0	0.0	synthetic
-grelottées	gR°lote	grelotter	VER	VER	f	p	par:pas;	g_R_°|l_o|t_e_#	g_r_e|l_o|tt_é_es	0.0	0.0	synthetic
-grelottâtes	gR°lotat	grelotter	VER	VER			ind:pas:2p;	g_R_°|l_o|t_a_t_#	g_r_e|l_o|tt_â_t_es	0.0	0.0	synthetic
-grelotte	gR°lOt	grelotter	VER	VER			sub:pre:1s;	g_R_°|l_O_t_#	g_r_e|l_o_tt_e	0.0	0.0	synthetic
-grelottes	gR°lOt	grelotter	VER	VER			sub:pre:2s;	g_R_°|l_O_t_#	g_r_e|l_o_tt_es	0.0	0.0	synthetic
-grelotte	gR°lOt	grelotter	VER	VER			sub:pre:3s;	g_R_°|l_O_t_#	g_r_e|l_o_tt_e	0.0	0.0	synthetic
 licenciées	lis@sje	licencier	VER	VER	f	p	par:pas;	l_i|s_@|s_j_e_#	l_i|c_en|c_i_é_es	0.0	0.0	synthetic
 licenciâtes	lis@sjat	licencier	VER	VER			ind:pas:2p;	l_i|s_@|s_j_a_t_#	l_i|c_en|c_i_â_t_es	0.0	0.0	synthetic
 licencie	lis@si	licencier	VER	VER			sub:pre:1s;	l_i|s_@|s_i_#	l_i|c_en|c_i_e	0.0	0.0	synthetic
@@ -5733,10 +5705,6 @@ détériorâtes	deteRjoRat	détériorer	VER	VER			ind:pas:2p;	d_e|t_e|R_j_o|R_a_
 détériore	deteRjOR	détériorer	VER	VER			sub:pre:1s;	d_e|t_e|R_j_O_R_#	d_é|t_é|r_i_o_r_e	0.0	0.0	synthetic
 détériores	deteRjOR	détériorer	VER	VER			sub:pre:2s;	d_e|t_e|R_j_O_R_#	d_é|t_é|r_i_o_r_es	0.0	0.0	synthetic
 détériore	deteRjOR	détériorer	VER	VER			sub:pre:3s;	d_e|t_e|R_j_O_R_#	d_é|t_é|r_i_o_r_e	0.0	0.0	synthetic
-panâtes	panat	paner	VER	VER			ind:pas:2p;	p_a|n_a_t_#	p_a|n_â_t_es	0.0	0.0	synthetic
-pane	pan	paner	VER	VER			sub:pre:1s;	p_a_n_#	p_a_n_e	0.0	0.0	synthetic
-panes	pan	paner	VER	VER			sub:pre:2s;	p_a_n_#	p_a_n_es	0.0	0.0	synthetic
-pane	pan	paner	VER	VER			sub:pre:3s;	p_a_n_#	p_a_n_e	0.0	0.0	synthetic
 monopolisée	monopolize	monopoliser	VER	VER	f	s	par:pas;	m_o|n_o|p_o|l_i|z_e_#	m_o|n_o|p_o|l_i|s_é_e	0.0	0.0	synthetic
 monopolisées	monopolize	monopoliser	VER	VER	f	p	par:pas;	m_o|n_o|p_o|l_i|z_e_#	m_o|n_o|p_o|l_i|s_é_es	0.0	0.0	synthetic
 monopolisâtes	monopolizat	monopoliser	VER	VER			ind:pas:2p;	m_o|n_o|p_o|l_i|z_a_t_#	m_o|n_o|p_o|l_i|s_â_t_es	0.0	0.0	synthetic
@@ -5882,13 +5850,6 @@ manie	mani	manier	VER	VER			sub:pre:3s;	m_a|n_i_#	m_a|n_i_e	0.0	0.0	synthetic
 fouillâtes	fujat	fouiller	VER	VER			ind:pas:2p;	f_u|j_a_t_#	f_ou|ill_â_t_es	0.0	0.0	synthetic
 fouille	fuj	fouiller	VER	VER			sub:pre:1s;	f_u_j_#	f_ou_ill_e	0.0	0.0	synthetic
 fouilles	fuj	fouiller	VER	VER			sub:pre:2s;	f_u_j_#	f_ou_ill_es	0.0	0.0	synthetic
-zyeutés	zi2te	zyeuter	VER	VER	m	p	par:pas;	z_i|2|t_e_#	z_y|eu|t_é_s	0.0	0.0	synthetic
-zyeutée	zi2te	zyeuter	VER	VER	f	s	par:pas;	z_i|2|t_e_#	z_y|eu|t_é_e	0.0	0.0	synthetic
-zyeutées	zi2te	zyeuter	VER	VER	f	p	par:pas;	z_i|2|t_e_#	z_y|eu|t_é_es	0.0	0.0	synthetic
-zyeutâtes	zj2tat	zyeuter	VER	VER			ind:pas:2p;	z_j_2|t_a_t_#	z_y_eu|t_â_t_es	0.0	0.0	synthetic
-zyeute	zj9t	zyeuter	VER	VER			sub:pre:1s;	z_j_9_t_#	z_y_eu_t_e	0.0	0.0	synthetic
-zyeutes	zj9t	zyeuter	VER	VER			sub:pre:2s;	z_j_9_t_#	z_y_eu_t_es	0.0	0.0	synthetic
-zyeute	zj9t	zyeuter	VER	VER			sub:pre:3s;	z_j_9_t_#	z_y_eu_t_e	0.0	0.0	synthetic
 professés	pRofEse	professer	VER	VER	m	p	par:pas;	p_R_o|f_E|s_e_#	p_r_o|f_e|ss_é_s	0.0	0.0	synthetic
 professée	pRofEse	professer	VER	VER	f	s	par:pas;	p_R_o|f_E|s_e_#	p_r_o|f_e|ss_é_e	0.0	0.0	synthetic
 professâtes	pRofEsat	professer	VER	VER			ind:pas:2p;	p_R_o|f_E|s_a_t_#	p_r_o|f_e|ss_â_t_es	0.0	0.0	synthetic
@@ -6808,10 +6769,6 @@ synchronisâtes	s5kRonizat	synchroniser	VER	VER			ind:pas:2p;	s_5|k_R_o|n_i|z_a_
 synchronise	s5kRoniz	synchroniser	VER	VER			sub:pre:1s;	s_5|k_R_o|n_i_z_#	s_yn|ch_r_o|n_i_s_e	0.0	0.0	synthetic
 synchronises	s5kRoniz	synchroniser	VER	VER			sub:pre:2s;	s_5|k_R_o|n_i_z_#	s_yn|ch_r_o|n_i_s_es	0.0	0.0	synthetic
 synchronise	s5kRoniz	synchroniser	VER	VER			sub:pre:3s;	s_5|k_R_o|n_i_z_#	s_yn|ch_r_o|n_i_s_e	0.0	0.0	synthetic
-dansottâtes	d@sotat	dansotter	VER	VER			ind:pas:2p;	d_@|s_o|t_a_t_#	d_an|s_o|tt_â_t_es	0.0	0.0	synthetic
-dansotte	d@sOt	dansotter	VER	VER			sub:pre:1s;	d_@|s_O_t_#	d_an|s_o_tt_e	0.0	0.0	synthetic
-dansottes	d@sOt	dansotter	VER	VER			sub:pre:2s;	d_@|s_O_t_#	d_an|s_o_tt_es	0.0	0.0	synthetic
-dansotte	d@sOt	dansotter	VER	VER			sub:pre:3s;	d_@|s_O_t_#	d_an|s_o_tt_e	0.0	0.0	synthetic
 touillée	tuje	touiller	VER	VER	f	s	par:pas;	t_u|j_e_#	t_ou|ill_é_e	0.0	0.0	synthetic
 touillâtes	tujat	touiller	VER	VER			ind:pas:2p;	t_u|j_a_t_#	t_ou|ill_â_t_es	0.0	0.0	synthetic
 touille	tuj	touiller	VER	VER			sub:pre:1s;	t_u_j_#	t_ou_ill_e	0.0	0.0	synthetic
@@ -7205,10 +7162,6 @@ agrafâtes	agRafat	agrafer	VER	VER			ind:pas:2p;	a|g_R_a|f_a_t_#	a|g_r_a|f_â_t_
 agrafe	agRaf	agrafer	VER	VER			sub:pre:1s;	a|g_R_a_f_#	a|g_r_a_f_e	0.0	0.0	synthetic
 agrafes	agRaf	agrafer	VER	VER			sub:pre:2s;	a|g_R_a_f_#	a|g_r_a_f_es	0.0	0.0	synthetic
 agrafe	agRaf	agrafer	VER	VER			sub:pre:3s;	a|g_R_a_f_#	a|g_r_a_f_e	0.0	0.0	synthetic
-ballottâtes	balotat	ballotter	VER	VER			ind:pas:2p;	b_a|l_o|t_a_t_#	b_a|ll_o|tt_â_t_es	0.0	0.0	synthetic
-ballotte	balOt	ballotter	VER	VER			sub:pre:1s;	b_a|l_O_t_#	b_a|ll_o_tt_e	0.0	0.0	synthetic
-ballottes	balOt	ballotter	VER	VER			sub:pre:2s;	b_a|l_O_t_#	b_a|ll_o_tt_es	0.0	0.0	synthetic
-ballotte	balOt	ballotter	VER	VER			sub:pre:3s;	b_a|l_O_t_#	b_a|ll_o_tt_e	0.0	0.0	synthetic
 démaillé	demaje	démailler	VER	VER	m	s	par:pas;	d_e|m_a|j_e	d_é|m_a|ill_é	0.0	0.0	synthetic
 démaillés	demaje	démailler	VER	VER	m	p	par:pas;	d_e|m_a|j_e_#	d_é|m_a|ill_é_s	0.0	0.0	synthetic
 démaillées	demaje	démailler	VER	VER	f	p	par:pas;	d_e|m_a|j_e_#	d_é|m_a|ill_é_es	0.0	0.0	synthetic
@@ -8090,11 +8043,6 @@ ovationnâtes	ovasjonat	ovationner	VER	VER			ind:pas:2p;	o|v_a|s_j_o|n_a_t_#	o|v
 ovationne	ovasjOn	ovationner	VER	VER			sub:pre:1s;	o|v_a|s_j_O_n_#	o|v_a|t_i_o_nn_e	0.0	0.0	synthetic
 ovationnes	ovasjOn	ovationner	VER	VER			sub:pre:2s;	o|v_a|s_j_O_n_#	o|v_a|t_i_o_nn_es	0.0	0.0	synthetic
 ovationne	ovasjOn	ovationner	VER	VER			sub:pre:3s;	o|v_a|s_j_O_n_#	o|v_a|t_i_o_nn_e	0.0	0.0	synthetic
-garrottées	gaRote	garrotter	VER	VER	f	p	par:pas;	g_a|R_o|t_e_#	g_a|rr_o|tt_é_es	0.0	0.0	synthetic
-garrottâtes	gaRotat	garrotter	VER	VER			ind:pas:2p;	g_a|R_o|t_a_t_#	g_a|rr_o|tt_â_t_es	0.0	0.0	synthetic
-garrotte	gaROt	garrotter	VER	VER			sub:pre:1s;	g_a|R_O_t_#	g_a|rr_o_tt_e	0.0	0.0	synthetic
-garrottes	gaROt	garrotter	VER	VER			sub:pre:2s;	g_a|R_O_t_#	g_a|rr_o_tt_es	0.0	0.0	synthetic
-garrotte	gaROt	garrotter	VER	VER			sub:pre:3s;	g_a|R_O_t_#	g_a|rr_o_tt_e	0.0	0.0	synthetic
 facturâtes	faktyRat	facturer	VER	VER			ind:pas:2p;	f_a_k|t_y|R_a_t_#	f_a_c|t_u|r_â_t_es	0.0	0.0	synthetic
 facture	faktyR	facturer	VER	VER			sub:pre:1s;	f_a_k|t_y_R_#	f_a_c|t_u_r_e	0.0	0.0	synthetic
 factures	faktyR	facturer	VER	VER			sub:pre:2s;	f_a_k|t_y_R_#	f_a_c|t_u_r_es	0.0	0.0	synthetic
@@ -8187,10 +8135,6 @@ récriminâtes	RekRiminat	récriminer	VER	VER			ind:pas:2p;	R_e|k_R_i|m_i|n_a_t_
 récrimine	RekRimin	récriminer	VER	VER			sub:pre:1s;	R_e|k_R_i|m_i_n_#	r_é|c_r_i|m_i_n_e	0.0	0.0	synthetic
 récrimines	RekRimin	récriminer	VER	VER			sub:pre:2s;	R_e|k_R_i|m_i_n_#	r_é|c_r_i|m_i_n_es	0.0	0.0	synthetic
 récrimine	RekRimin	récriminer	VER	VER			sub:pre:3s;	R_e|k_R_i|m_i_n_#	r_é|c_r_i|m_i_n_e	0.0	0.0	synthetic
-clappâtes	klapat	clapper	VER	VER			ind:pas:2p;	k_l_a|p_a_t_#	c_l_a|pp_â_t_es	0.0	0.0	synthetic
-clappe	klap	clapper	VER	VER			sub:pre:1s;	k_l_a_p_#	c_l_a_pp_e	0.0	0.0	synthetic
-clappes	klap	clapper	VER	VER			sub:pre:2s;	k_l_a_p_#	c_l_a_pp_es	0.0	0.0	synthetic
-clappe	klap	clapper	VER	VER			sub:pre:3s;	k_l_a_p_#	c_l_a_pp_e	0.0	0.0	synthetic
 cogités	koZite	cogiter	VER	VER	m	p	par:pas;	k_o|Z_i|t_e_#	c_o|g_i|t_é_s	0.0	0.0	synthetic
 cogitée	koZite	cogiter	VER	VER	f	s	par:pas;	k_o|Z_i|t_e_#	c_o|g_i|t_é_e	0.0	0.0	synthetic
 cogitées	koZite	cogiter	VER	VER	f	p	par:pas;	k_o|Z_i|t_e_#	c_o|g_i|t_é_es	0.0	0.0	synthetic
@@ -8216,12 +8160,6 @@ sécurises	sekyRiz	sécuriser	VER	VER			sub:pre:2s;	s_e|k_y|R_i_z_#	s_é|c_u|r_i
 sécurise	sekyRiz	sécuriser	VER	VER			sub:pre:3s;	s_e|k_y|R_i_z_#	s_é|c_u|r_i_s_e	0.0	0.0	synthetic
 moquâtes	mokat	moquer	VER	VER			ind:pas:2p;	m_o|k_a_t_#	m_o|qu_â_t_es	0.0	0.0	synthetic
 moque	mOk	moquer	VER	VER			sub:pre:3s;	m_O_k_#	m_o_qu_e	0.0	0.0	synthetic
-dessoûlés	desule	dessoûler	VER	VER	m	p	par:pas;	d_e|s_u|l_e_#	d_e|ss_oû|l_é_s	0.0	0.0	synthetic
-dessoûlées	desule	dessoûler	VER	VER	f	p	par:pas;	d_e|s_u|l_e_#	d_e|ss_oû|l_é_es	0.0	0.0	synthetic
-dessoûlâtes	desulat	dessoûler	VER	VER			ind:pas:2p;	d_e|s_u|l_a_t_#	d_e|ss_oû|l_â_t_es	0.0	0.0	synthetic
-dessoûle	desul	dessoûler	VER	VER			sub:pre:1s;	d_e|s_u_l_#	d_e|ss_oû_l_e	0.0	0.0	synthetic
-dessoûles	desul	dessoûler	VER	VER			sub:pre:2s;	d_e|s_u_l_#	d_e|ss_oû_l_es	0.0	0.0	synthetic
-dessoûle	desul	dessoûler	VER	VER			sub:pre:3s;	d_e|s_u_l_#	d_e|ss_oû_l_e	0.0	0.0	synthetic
 instaurâtes	5stoRat	instaurer	VER	VER			ind:pas:2p;	5_s|t_o|R_a_t_#	in_s|t_au|r_â_t_es	0.0	0.0	synthetic
 instaure	5stoR	instaurer	VER	VER			sub:pre:1s;	5_s|t_o_R_#	in_s|t_au_r_e	0.0	0.0	synthetic
 instaures	5stoR	instaurer	VER	VER			sub:pre:2s;	5_s|t_o_R_#	in_s|t_au_r_es	0.0	0.0	synthetic
@@ -9374,13 +9312,6 @@ rebellâtes	R°bElat	rebeller	VER	VER			ind:pas:2p;	R_°|b_E|l_a_t_#	r_e|b_e|ll_
 rebelle	R°bEl	rebeller	VER	VER			sub:pre:1s;	R_°|b_E_l_#	r_e|b_e_ll_e	0.0	0.0	synthetic
 rebelles	R°bEl	rebeller	VER	VER			sub:pre:2s;	R_°|b_E_l_#	r_e|b_e_ll_es	0.0	0.0	synthetic
 écoutâtes	ekutat	écouter	VER	VER			ind:pas:2p;	e|k_u|t_a_t_#	é|c_ou|t_â_t_es	0.0	0.0	synthetic
-boulotté	bulote	boulotter	VER	VER	m	s	par:pas;	b_u|l_o|t_e	b_ou|l_o|tt_é	0.0	0.0	synthetic
-boulottés	bulote	boulotter	VER	VER	m	p	par:pas;	b_u|l_o|t_e_#	b_ou|l_o|tt_é_s	0.0	0.0	synthetic
-boulottée	bulote	boulotter	VER	VER	f	s	par:pas;	b_u|l_o|t_e_#	b_ou|l_o|tt_é_e	0.0	0.0	synthetic
-boulottâtes	bulotat	boulotter	VER	VER			ind:pas:2p;	b_u|l_o|t_a_t_#	b_ou|l_o|tt_â_t_es	0.0	0.0	synthetic
-boulotte	bulOt	boulotter	VER	VER			sub:pre:1s;	b_u|l_O_t_#	b_ou|l_o_tt_e	0.0	0.0	synthetic
-boulottes	bulOt	boulotter	VER	VER			sub:pre:2s;	b_u|l_O_t_#	b_ou|l_o_tt_es	0.0	0.0	synthetic
-boulotte	bulOt	boulotter	VER	VER			sub:pre:3s;	b_u|l_O_t_#	b_ou|l_o_tt_e	0.0	0.0	synthetic
 couchaillâtes	kuSajat	couchailler	VER	VER			ind:pas:2p;	k_u|S_a|j_a_t_#	c_ou|ch_a|ill_â_t_es	0.0	0.0	synthetic
 couchaille	kuSaj	couchailler	VER	VER			sub:pre:1s;	k_u|S_a_j_#	c_ou|ch_a_ill_e	0.0	0.0	synthetic
 couchailles	kuSaj	couchailler	VER	VER			sub:pre:2s;	k_u|S_a_j_#	c_ou|ch_a_ill_es	0.0	0.0	synthetic
@@ -9932,8 +9863,6 @@ bouleversâtes	bul°vERsat	bouleverser	VER	VER			ind:pas:2p;	b_u|l_°|v_E_R|s_a_
 bouleverse	bul°vERs	bouleverser	VER	VER			sub:pre:1s;	b_u|l_°|v_E_R_s_#	b_ou|l_e|v_e_r_s_e	0.0	0.0	synthetic
 bouleverses	bul°vERs	bouleverser	VER	VER			sub:pre:2s;	b_u|l_°|v_E_R_s_#	b_ou|l_e|v_e_r_s_es	0.0	0.0	synthetic
 bouleverse	bul°vERs	bouleverser	VER	VER			sub:pre:3s;	b_u|l_°|v_E_R_s_#	b_ou|l_e|v_e_r_s_e	0.0	0.0	synthetic
-brinqueballée	bR5k°bale	brinqueballer	VER	VER	f	s	par:pas;	b_R_5|k_°|b_a|l_e_#	b_r_in|qu_e|b_a|ll_é_e	0.0	0.0	synthetic
-brinqueballées	bR5k°bale	brinqueballer	VER	VER	f	p	par:pas;	b_R_5|k_°|b_a|l_e_#	b_r_in|qu_e|b_a|ll_é_es	0.0	0.0	synthetic
 coassâtes	koasat	coasser	VER	VER			ind:pas:2p;	k_o|a|s_a_t_#	c_o|a|ss_â_t_es	0.0	0.0	synthetic
 coasse	koas	coasser	VER	VER			sub:pre:1s;	k_o|a_s_#	c_o|a_ss_e	0.0	0.0	synthetic
 coasses	koas	coasser	VER	VER			sub:pre:2s;	k_o|a_s_#	c_o|a_ss_es	0.0	0.0	synthetic
@@ -12107,9 +12036,6 @@ tamponnâtes	t@ponat	tamponner	VER	VER			ind:pas:2p;	t_@|p_o|n_a_t_#	t_am|p_o|nn
 tamponne	t@pOn	tamponner	VER	VER			sub:pre:1s;	t_@|p_O_n_#	t_am|p_o_nn_e	0.0	0.0	synthetic
 tamponnes	t@pOn	tamponner	VER	VER			sub:pre:2s;	t_@|p_O_n_#	t_am|p_o_nn_es	0.0	0.0	synthetic
 tamponne	t@pOn	tamponner	VER	VER			sub:pre:3s;	t_@|p_O_n_#	t_am|p_o_nn_e	0.0	0.0	synthetic
-dropés	dRope	droper	VER	VER	m	p	par:pas;	d_R_o|p_e_#	d_r_o|p_é_s	0.0	0.0	synthetic
-dropée	dRope	droper	VER	VER	f	s	par:pas;	d_R_o|p_e_#	d_r_o|p_é_e	0.0	0.0	synthetic
-dropées	dRope	droper	VER	VER	f	p	par:pas;	d_R_o|p_e_#	d_r_o|p_é_es	0.0	0.0	synthetic
 rempaillé	R@paje	rempailler	VER	VER	m	s	par:pas;	R_@|p_a|j_e	r_em|p_a|ill_é	0.0	0.0	synthetic
 rempaillés	R@paje	rempailler	VER	VER	m	p	par:pas;	R_@|p_a|j_e_#	r_em|p_a|ill_é_s	0.0	0.0	synthetic
 rempaillées	R@paje	rempailler	VER	VER	f	p	par:pas;	R_@|p_a|j_e_#	r_em|p_a|ill_é_es	0.0	0.0	synthetic
@@ -12760,11 +12686,6 @@ targuâtes	taRgat	targuer	VER	VER			ind:pas:2p;	t_a_R|g_a_t_#	t_a_r|gu_â_t_es	0
 targue	taRg	targuer	VER	VER			sub:pre:1s;	t_a_R_g_#	t_a_r_gu_e	0.0	0.0	synthetic
 targues	taRg	targuer	VER	VER			sub:pre:2s;	t_a_R_g_#	t_a_r_gu_es	0.0	0.0	synthetic
 targue	taRg	targuer	VER	VER			sub:pre:3s;	t_a_R_g_#	t_a_r_gu_e	0.0	0.0	synthetic
-dessaoulées	desule	dessaouler	VER	VER	f	p	par:pas;	d_e|s_u|l_e_#_#	d_e|ss_a_ou|l_é_es	0.0	0.0	synthetic
-dessaoulâtes	desulat	dessaouler	VER	VER			ind:pas:2p;	d_e|s_#_u|l_a_t_#	d_e|ss_a_ou|l_â_t_es	0.0	0.0	synthetic
-dessaoule	desul	dessaouler	VER	VER			sub:pre:1s;	d_e|s_#_u_l_#	d_e|ss_a_ou_l_e	0.0	0.0	synthetic
-dessaoules	desul	dessaouler	VER	VER			sub:pre:2s;	d_e|s_#_u_l_#	d_e|ss_a_ou_l_es	0.0	0.0	synthetic
-dessaoule	desul	dessaouler	VER	VER			sub:pre:3s;	d_e|s_#_u_l_#	d_e|ss_a_ou_l_e	0.0	0.0	synthetic
 désenchaînâtes	dez@SEnat	désenchaîner	VER	VER			ind:pas:2p;	d_e|z_@|S_E|n_a_t_#	d_é|s_en|ch_aî|n_â_t_es	0.0	0.0	synthetic
 désenchaîne	dez@SEn	désenchaîner	VER	VER			sub:pre:1s;	d_e|z_@|S_E_n_#	d_é|s_en|ch_aî_n_e	0.0	0.0	synthetic
 désenchaînes	dez@SEn	désenchaîner	VER	VER			sub:pre:2s;	d_e|z_@|S_E_n_#	d_é|s_en|ch_aî_n_es	0.0	0.0	synthetic
@@ -13384,10 +13305,6 @@ aboulâtes	abulat	abouler	VER	VER			ind:pas:2p;	a|b_u|l_a_t_#	a|b_ou|l_â_t_es	0
 aboule	abul	abouler	VER	VER			sub:pre:1s;	a|b_u_l_#	a|b_ou_l_e	0.0	0.0	synthetic
 aboules	abul	abouler	VER	VER			sub:pre:2s;	a|b_u_l_#	a|b_ou_l_es	0.0	0.0	synthetic
 aboule	abul	abouler	VER	VER			sub:pre:3s;	a|b_u_l_#	a|b_ou_l_e	0.0	0.0	synthetic
-chlinguâtes	Sl5gat	chlinguer	VER	VER			ind:pas:2p;	S_l_5|g_a_t_#	ch_l_in|gu_â_t_es	0.0	0.0	synthetic
-chlingue	Sl5g	chlinguer	VER	VER			sub:pre:1s;	S_l_5_g_#	ch_l_in_gu_e	0.0	0.0	synthetic
-chlingues	Sl5g	chlinguer	VER	VER			sub:pre:2s;	S_l_5_g_#	ch_l_in_gu_es	0.0	0.0	synthetic
-chlingue	Sl5g	chlinguer	VER	VER			sub:pre:3s;	S_l_5_g_#	ch_l_in_gu_e	0.0	0.0	synthetic
 fessâtes	fEsat	fesser	VER	VER			ind:pas:2p;	f_E|s_a_t_#	f_e|ss_â_t_es	0.0	0.0	synthetic
 fesse	fEs	fesser	VER	VER			sub:pre:1s;	f_E_s_#	f_e_ss_e	0.0	0.0	synthetic
 fesse	fEs	fesser	VER	VER			sub:pre:3s;	f_E_s_#	f_e_ss_e	0.0	0.0	synthetic
@@ -13401,10 +13318,6 @@ métissâtes	metisat	métisser	VER	VER			ind:pas:2p;	m_e|t_i|s_a_t_#	m_é|t_i|ss
 métisse	metis	métisser	VER	VER			sub:pre:1s;	m_e|t_i_s_#	m_é|t_i_ss_e	0.0	0.0	synthetic
 métisses	metis	métisser	VER	VER			sub:pre:2s;	m_e|t_i_s_#	m_é|t_i_ss_es	0.0	0.0	synthetic
 métisse	metis	métisser	VER	VER			sub:pre:3s;	m_e|t_i_s_#	m_é|t_i_ss_e	0.0	0.0	synthetic
-soûlâtes	sulat	soûler	VER	VER			ind:pas:2p;	s_u|l_a_t_#	s_oû|l_â_t_es	0.0	0.0	synthetic
-soûle	sul	soûler	VER	VER			sub:pre:1s;	s_u_l_#	s_oû_l_e	0.0	0.0	synthetic
-soûles	sul	soûler	VER	VER			sub:pre:2s;	s_u_l_#	s_oû_l_es	0.0	0.0	synthetic
-soûle	sul	soûler	VER	VER			sub:pre:3s;	s_u_l_#	s_oû_l_e	0.0	0.0	synthetic
 échelonnâtes	eS°lonat	échelonner	VER	VER			ind:pas:2p;	e|S_°|l_o|n_a_t_#	é|ch_e|l_o|nn_â_t_es	0.0	0.0	synthetic
 échelonne	eS°lOn	échelonner	VER	VER			sub:pre:1s;	e|S_°|l_O_n_#	é|ch_e|l_o_nn_e	0.0	0.0	synthetic
 échelonnes	eS°lOn	échelonner	VER	VER			sub:pre:2s;	e|S_°|l_O_n_#	é|ch_e|l_o_nn_es	0.0	0.0	synthetic
@@ -13944,10 +13857,6 @@ maroufle	maRufl	maroufler	VER	VER			sub:pre:1s;	m_a|R_u_f_l_#	m_a|r_ou_f_l_e	0.0
 maroufles	maRufl	maroufler	VER	VER			sub:pre:2s;	m_a|R_u_f_l_#	m_a|r_ou_f_l_es	0.0	0.0	synthetic
 maroufle	maRufl	maroufler	VER	VER			sub:pre:3s;	m_a|R_u_f_l_#	m_a|r_ou_f_l_e	0.0	0.0	synthetic
 vampirisés	v@piRize	vampiriser	VER	VER	m	p	par:pas;	v_@|p_i|R_i|z_e_#	v_am|p_i|r_i|s_é_s	0.0	0.0	synthetic
-pifâtes	pifat	pifer	VER	VER			ind:pas:2p;	p_i|f_a_t_#	p_i|f_â_t_es	0.0	0.0	synthetic
-pife	pif	pifer	VER	VER			sub:pre:1s;	p_i_f_#	p_i_f_e	0.0	0.0	synthetic
-pifes	pif	pifer	VER	VER			sub:pre:2s;	p_i_f_#	p_i_f_es	0.0	0.0	synthetic
-pife	pif	pifer	VER	VER			sub:pre:3s;	p_i_f_#	p_i_f_e	0.0	0.0	synthetic
 redemandés	R°d°m@de	redemander	VER	VER	m	p	par:pas;	R_°|d_°|m_@|d_e_#	r_e|d_e|m_an|d_é_s	0.0	0.0	synthetic
 redemandée	R°d°m@de	redemander	VER	VER	f	s	par:pas;	R_°|d_°|m_@|d_e_#	r_e|d_e|m_an|d_é_e	0.0	0.0	synthetic
 redemandées	R°d°m@de	redemander	VER	VER	f	p	par:pas;	R_°|d_°|m_@|d_e_#	r_e|d_e|m_an|d_é_es	0.0	0.0	synthetic
@@ -15436,13 +15345,6 @@ modifiâtes	modifjat	modifier	VER	VER			ind:pas:2p;	m_o|d_i|f_j_a_t_#	m_o|d_i|f_
 modifie	modifi	modifier	VER	VER			sub:pre:1s;	m_o|d_i|f_i_#	m_o|d_i|f_i_e	0.0	0.0	synthetic
 modifies	modifi	modifier	VER	VER			sub:pre:2s;	m_o|d_i|f_i_#	m_o|d_i|f_i_es	0.0	0.0	synthetic
 modifie	modifi	modifier	VER	VER			sub:pre:3s;	m_o|d_i|f_i_#	m_o|d_i|f_i_e	0.0	0.0	synthetic
-suifé	s8ife	suifer	VER	VER	m	s	par:pas;	s_8_i|f_e	s_u_i|f_é	0.0	0.0	synthetic
-suifée	s8ife	suifer	VER	VER	f	s	par:pas;	s_8_i|f_e_#	s_u_i|f_é_e	0.0	0.0	synthetic
-suifées	s8ife	suifer	VER	VER	f	p	par:pas;	s_8_i|f_e_#	s_u_i|f_é_es	0.0	0.0	synthetic
-suifâtes	s8ifat	suifer	VER	VER			ind:pas:2p;	s_8_i|f_a_t_#	s_u_i|f_â_t_es	0.0	0.0	synthetic
-suife	s8if	suifer	VER	VER			sub:pre:1s;	s_8_i_f_#	s_u_i_f_e	0.0	0.0	synthetic
-suifes	s8if	suifer	VER	VER			sub:pre:2s;	s_8_i_f_#	s_u_i_f_es	0.0	0.0	synthetic
-suife	s8if	suifer	VER	VER			sub:pre:3s;	s_8_i_f_#	s_u_i_f_e	0.0	0.0	synthetic
 flûté	flyte	flûter	VER	VER	m	s	par:pas;	f_l_y|t_e	f_l_û|t_é	0.0	0.0	synthetic
 flûtés	flyte	flûter	VER	VER	m	p	par:pas;	f_l_y|t_e_#	f_l_û|t_é_s	0.0	0.0	synthetic
 flûtées	flyte	flûter	VER	VER	f	p	par:pas;	f_l_y|t_e_#	f_l_û|t_é_es	0.0	0.0	synthetic
@@ -15968,9 +15870,6 @@ sodomisâtes	sodomizat	sodomiser	VER	VER			ind:pas:2p;	s_o|d_o|m_i|z_a_t_#	s_o|d
 sodomise	sodomiz	sodomiser	VER	VER			sub:pre:1s;	s_o|d_o|m_i_z_#	s_o|d_o|m_i_s_e	0.0	0.0	synthetic
 sodomises	sodomiz	sodomiser	VER	VER			sub:pre:2s;	s_o|d_o|m_i_z_#	s_o|d_o|m_i_s_es	0.0	0.0	synthetic
 sodomise	sodomiz	sodomiser	VER	VER			sub:pre:3s;	s_o|d_o|m_i_z_#	s_o|d_o|m_i_s_e	0.0	0.0	synthetic
-saoulâtes	sulat	saouler	VER	VER			ind:pas:2p;	s_#_u|l_a_t_#	s_a_ou|l_â_t_es	0.0	0.0	synthetic
-saoule	sul	saouler	VER	VER			sub:pre:1s;	s_#_u_l_#	s_a_ou_l_e	0.0	0.0	synthetic
-saoules	sul	saouler	VER	VER			sub:pre:2s;	s_#_u_l_#	s_a_ou_l_es	0.0	0.0	synthetic
 appontâtes	ap§tat	apponter	VER	VER			ind:pas:2p;	a|p_§|t_a_t_#	a|pp_on|t_â_t_es	0.0	0.0	synthetic
 apponte	ap§t	apponter	VER	VER			sub:pre:1s;	a|p_§_t_#	a|pp_on_t_e	0.0	0.0	synthetic
 appontes	ap§t	apponter	VER	VER			sub:pre:2s;	a|p_§_t_#	a|pp_on_t_es	0.0	0.0	synthetic
@@ -17123,10 +17022,6 @@ déquilles	dekij	déquiller	VER	VER			sub:pre:2s;	d_e|k_i_j_#	d_é|qu_i_ll_es	0.
 déquille	dekij	déquiller	VER	VER			sub:pre:3s;	d_e|k_i_j_#	d_é|qu_i_ll_e	0.0	0.0	synthetic
 signâtes	siNat	signer	VER	VER			ind:pas:2p;	s_i|N_a_t_#	s_i|gn_â_t_es	0.0	0.0	synthetic
 signe	siN	signer	VER	VER			sub:pre:1s;	s_i_N_#	s_i_gn_e	0.0	0.0	synthetic
-trimbalées	tR5bale	trimbaler	VER	VER	f	p	par:pas;	t_R_5|b_a|l_e_#	t_r_im|b_a|l_é_es	0.0	0.0	synthetic
-trimbalâtes	tR5balat	trimbaler	VER	VER			ind:pas:2p;	t_R_5|b_a|l_a_t_#	t_r_im|b_a|l_â_t_es	0.0	0.0	synthetic
-trimbale	tR5bal	trimbaler	VER	VER			sub:pre:1s;	t_R_5|b_a_l_#	t_r_im|b_a_l_e	0.0	0.0	synthetic
-trimbales	tR5bal	trimbaler	VER	VER			sub:pre:2s;	t_R_5|b_a_l_#	t_r_im|b_a_l_es	0.0	0.0	synthetic
 respectâtes	REspEktat	respecter	VER	VER			ind:pas:2p;	R_E_s|p_E_k|t_a_t_#	r_e_s|p_e_c|t_â_t_es	0.0	0.0	synthetic
 respectes	REspEkt	respecter	VER	VER			sub:pre:2s;	R_E_s|p_E_k_t_#	r_e_s|p_e_c_t_es	0.0	0.0	synthetic
 endiguées	@dige	endiguer	VER	VER	f	p	par:pas;	@|d_i|g_e_#	en|d_i|gu_é_es	0.0	0.0	synthetic
@@ -24714,34 +24609,6 @@ blondisse	bl§dis	blondir	VER	VER			sub:pre:3s;	b_l_§|d_i_s_#	b_l_on|d_i_ss_e	0
 blondissiez	bl§disje	blondir	VER	VER			sub:pre:2p;	b_l_§|d_i|s_j_e	b_l_on|d_i|ss_i_ez	0.0	0.0	synthetic
 blondissons	bl§dis§	blondir	VER	VER			imp:pre:1p;	b_l_§|d_i|s_§	b_l_on|d_i|ss_ons	0.0	0.0	synthetic
 blondissez	bl§dise	blondir	VER	VER			imp:pre:2p;	b_l_§|d_i|s_e	b_l_on|d_i|ss_ez	0.0	0.0	synthetic
-ressurgis	R°syRZi	ressurgir	VER	VER	m	p	par:pas;	R_°|s_y_R|Z_i_#	r_e|ss_u_r|g_i_s	0.0	0.0	synthetic
-ressurgies	R°syRZi	ressurgir	VER	VER	f	p	par:pas;	R_°|s_y_R|Z_i_#	r_e|ss_u_r|g_i_es	0.0	0.0	synthetic
-ressurgissons	R°syRZis§	ressurgir	VER	VER			ind:pre:1p;	R_°|s_y_R|Z_i|s_§	r_e|ss_u_r|g_i|ss_ons	0.0	0.0	synthetic
-ressurgissez	R°syRZise	ressurgir	VER	VER			ind:pre:2p;	R_°|s_y_R|Z_i|s_e	r_e|ss_u_r|g_i|ss_ez	0.0	0.0	synthetic
-ressurgissais	R°syRZisE	ressurgir	VER	VER			ind:imp:1s;	R_°|s_y_R|Z_i|s_E	r_e|ss_u_r|g_i|ss_ais	0.0	0.0	synthetic
-ressurgissais	R°syRZisE	ressurgir	VER	VER			ind:imp:2s;	R_°|s_y_R|Z_i|s_E	r_e|ss_u_r|g_i|ss_ais	0.0	0.0	synthetic
-ressurgissions	R°syRZisj§	ressurgir	VER	VER			ind:imp:1p;	R_°|s_y_R|Z_i|s_j_§	r_e|ss_u_r|g_i|ss_i_ons	0.0	0.0	synthetic
-ressurgissiez	R°syRZisje	ressurgir	VER	VER			ind:imp:2p;	R_°|s_y_R|Z_i|s_j_e	r_e|ss_u_r|g_i|ss_i_ez	0.0	0.0	synthetic
-ressurgissaient	R°syRZisE	ressurgir	VER	VER			ind:imp:3p;	R_°|s_y_R|Z_i|s_E	r_e|ss_u_r|g_i|ss_aient	0.0	0.0	synthetic
-ressurgirai	R°syRZiRe	ressurgir	VER	VER			ind:fut:1s;	R_°|s_y_R|Z_i|R_e	r_e|ss_u_r|g_i|r_ai	0.0	0.0	synthetic
-ressurgiras	R°syRZiRa	ressurgir	VER	VER			ind:fut:2s;	R_°|s_y_R|Z_i|R_a	r_e|ss_u_r|g_i|r_as	0.0	0.0	synthetic
-ressurgira	R°syRZiRa	ressurgir	VER	VER			ind:fut:3s;	R_°|s_y_R|Z_i|R_a	r_e|ss_u_r|g_i|r_a	0.0	0.0	synthetic
-ressurgirons	R°syRZiR§	ressurgir	VER	VER			ind:fut:1p;	R_°|s_y_R|Z_i|R_§	r_e|ss_u_r|g_i|r_ons	0.0	0.0	synthetic
-ressurgirez	R°syRZiRe	ressurgir	VER	VER			ind:fut:2p;	R_°|s_y_R|Z_i|R_e	r_e|ss_u_r|g_i|r_ez	0.0	0.0	synthetic
-ressurgis	R°syRZi	ressurgir	VER	VER			ind:pas:2s;	R_°|s_y_R|Z_i	r_e|ss_u_r|g_is	0.0	0.0	synthetic
-ressurgîmes	R°syRZim	ressurgir	VER	VER			ind:pas:1p;	R_°|s_y_R|Z_i_m_#	r_e|ss_u_r|g_î_m_es	0.0	0.0	synthetic
-ressurgîtes	R°syRZit	ressurgir	VER	VER			ind:pas:2p;	R_°|s_y_R|Z_i_t_#	r_e|ss_u_r|g_î_t_es	0.0	0.0	synthetic
-ressurgirais	R°syRZiRE	ressurgir	VER	VER			cnd:pre:1s;	R_°|s_y_R|Z_i|R_E	r_e|ss_u_r|g_i|r_ais	0.0	0.0	synthetic
-ressurgirais	R°syRZiRE	ressurgir	VER	VER			cnd:pre:2s;	R_°|s_y_R|Z_i|R_E	r_e|ss_u_r|g_i|r_ais	0.0	0.0	synthetic
-ressurgirions	R°syRZiRj§	ressurgir	VER	VER			cnd:pre:1p;	R_°|s_y_R|Z_i|R_j_§	r_e|ss_u_r|g_i|r_i_ons	0.0	0.0	synthetic
-ressurgiriez	R°syRZiRje	ressurgir	VER	VER			cnd:pre:2p;	R_°|s_y_R|Z_i|R_j_e	r_e|ss_u_r|g_i|r_i_ez	0.0	0.0	synthetic
-ressurgiraient	R°syRZiRE	ressurgir	VER	VER			cnd:pre:3p;	R_°|s_y_R|Z_i|R_E	r_e|ss_u_r|g_i|r_aient	0.0	0.0	synthetic
-ressurgisse	R°syRZis	ressurgir	VER	VER			sub:pre:1s;	R_°|s_y_R|Z_i_s_#	r_e|ss_u_r|g_i_ss_e	0.0	0.0	synthetic
-ressurgisses	R°syRZis	ressurgir	VER	VER			sub:pre:2s;	R_°|s_y_R|Z_i_s_#	r_e|ss_u_r|g_i_ss_es	0.0	0.0	synthetic
-ressurgisse	R°syRZis	ressurgir	VER	VER			sub:pre:3s;	R_°|s_y_R|Z_i_s_#	r_e|ss_u_r|g_i_ss_e	0.0	0.0	synthetic
-ressurgissiez	R°syRZisje	ressurgir	VER	VER			sub:pre:2p;	R_°|s_y_R|Z_i|s_j_e	r_e|ss_u_r|g_i|ss_i_ez	0.0	0.0	synthetic
-ressurgissons	R°syRZis§	ressurgir	VER	VER			imp:pre:1p;	R_°|s_y_R|Z_i|s_§	r_e|ss_u_r|g_i|ss_ons	0.0	0.0	synthetic
-ressurgissez	R°syRZise	ressurgir	VER	VER			imp:pre:2p;	R_°|s_y_R|Z_i|s_e	r_e|ss_u_r|g_i|ss_ez	0.0	0.0	synthetic
 réussis	Reysi	réussir	VER	VER			ind:pas:2s;	R_e|y|s_i	r_é|u|ss_is	0.0	0.0	synthetic
 réussîtes	Reysit	réussir	VER	VER			ind:pas:2p;	R_e|y|s_i_t_#	r_é|u|ss_î_t_es	0.0	0.0	synthetic
 réussissiez	Reysisje	réussir	VER	VER			sub:pre:2p;	R_e|y|s_i|s_j_e	r_é|u|ss_i|ss_i_ez	0.0	0.0	synthetic
@@ -36328,7 +36195,6 @@ articulets	aRtikylE	articulet	NOM	NOM	m	p		a_R|t_i|k_y|l_E_#	a_r|t_i|c_u|l_e_ts	
 artificialités	aRtifisjalite	artificialité	NOM	NOM	f	p		a_R|t_i|f_i|s_j_a|l_i|t_e_#	a_r|t_i|f_i|c_i_a|l_i|t_é_s	0.0	0.0	synthetic
 artimons	aRtim§	artimon	NOM	NOM	m	p		a_R|t_i|m_§_#	a_r|t_i|m_on_s	0.0	0.0	synthetic
 artisanats	aRtizana	artisanat	NOM	NOM	m	p		a_R|t_i|z_a|n_a_#	a_r|t_i|s_a|n_a_ts	0.0	0.0	synthetic
-artéfacts	aRtefakt	artéfact	NOM	NOM	m	p		a_R|t_e|f_a_k_t_#	a_r|t_é|f_a_c_t_s	0.0	0.0	synthetic
 artériectomies	aRteRjEktomi	artériectomie	NOM	NOM	f	p		a_R|t_e|R_j_E_k|t_o|m_i_#	a_r|t_é|r_i_e_c|t_o|m_i_es	0.0	0.0	synthetic
 artériels	aRteRjEl	artériel	ADJ	ADJ	m	p		a_R|t_e|R_j_E_l_#	a_r|t_é|r_i_e_l_s	0.0	0.0	synthetic
 artériographies	aRteRjOgRafi	artériographie	NOM	NOM	f	p		a_R|t_e|R_j_O|g_R_a|f_i_#	a_r|t_é|r_i_o|g_r_a|ph_i_es	0.0	0.0	synthetic
@@ -36457,7 +36323,6 @@ aïkidos	ajkido	aïkido	NOM	NOM	m	p		a_j|k_i|d_o_#	a_ï|k_i|d_o_s	0.0	0.0	synthe
 aïolis	ajoli	aïoli	NOM	NOM	m	p		a|j_o|l_i_#	a|ï_o|l_i_s	0.0	0.0	synthetic
 babels	babEl	babel	NOM	NOM	m	p		b_a|b_E_l_#	b_a|b_e_l_s	0.0	0.0	synthetic
 babeurres	bab9R	babeurre	NOM	NOM	m	p		b_a|b_9_R_#	b_a|b_eu_rr_es	0.0	0.0	synthetic
-babis	babi	babi	NOM	NOM	m	p		b_a|b_i_#	b_a|b_i_s	0.0	0.0	synthetic
 babillards	babijaR	babillard	ADJ	ADJ,NOM	m	p		b_a|b_i|j_a_R_#	b_a|b_i|ll_a_r_ds	0.0	0.0	synthetic
 babiroussas	babiRusa	babiroussa	NOM	NOM	m	p		b_a|b_i|R_u|s_a_#	b_a|b_i|r_ou|ss_a_s	0.0	0.0	synthetic
 baccalauréats	bakaloRea	baccalauréat	NOM	NOM	m	p		b_a|k_a|l_o|R_e|a_#	b_a|cc_a|l_au|r_é|a_ts	0.0	0.0	synthetic
@@ -36610,7 +36475,6 @@ bistré	bistRe	bistré	ADJ	VER,ADJ	m	s		b_i_s|t_R_e	b_i_s|t_r_é	0.0	0.0	synthet
 bizards	bizaR	bizarde	ADJ	ADJ	m	p		b_i|z_a_R_#	b_i|z_a_r_ds	0.0	0.0	synthetic
 bizard	bizaR	bizarde	ADJ	ADJ	m	s		b_i|z_a_R_#	b_i|z_a_r_d	0.0	0.0	synthetic
 bizous	bizu	bizou	NOM	NOM	m	p		b_i|z_u_#	b_i|z_ou_s	0.0	0.0	synthetic
-bizuths	bizy	bizuth	NOM	NOM	m	p		b_i|z_y_#_#	b_i|z_u_th_s	0.0	0.0	synthetic
 blanchets	bl@SE	blanchet	NOM	NOM	m	p		b_l_@|S_E_#	b_l_an|ch_e_ts	0.0	0.0	synthetic
 blanques	bl@k	blanque	NOM	NOM	f	p		b_l_@_k_#	b_l_an_qu_es	0.0	0.0	synthetic
 bliauts	blijo	bliaut	NOM	NOM	m	p		b_l_ij|o_#	b_l_i|au_ts	0.0	0.0	synthetic
@@ -36635,8 +36499,6 @@ bolges	bOlZ	bolge	NOM	NOM	f	p		b_O_l_Z_#	b_o_l_g_es	0.0	0.0	synthetic
 bolivars	bolivaR	bolivar	NOM	NOM	m	p		b_o|l_i|v_a_R_#	b_o|l_i|v_a_r_s	0.0	0.0	synthetic
 bolonaises	bolonEz	bolonais	ADJ	ADJ,NOM	f	p		b_o|l_o|n_E_z_#	b_o|l_o|n_ai_s_es	0.0	0.0	synthetic
 bolonais	bolonE	bolonais	ADJ	ADJ,NOM	m	p		b_o|l_o|n_E_#	b_o|l_o|n_ai_s	0.0	0.0	synthetic
-bonarde	bonaRd	bonard	ADJ	ADJ	f	s		b_o|n_a_R_d_#	b_o|n_a_r_d_e	0.0	0.0	synthetic
-bonards	bonaR	bonard	ADJ	ADJ	m	p		b_o|n_a_R_#	b_o|n_a_r_ds	0.0	0.0	synthetic
 bondrées	b§dRe	bondrée	NOM	NOM	f	p		b_§|d_R_e_#	b_on|d_r_é_es	0.0	0.0	synthetic
 bonhomies	bonomi	bonhomie	NOM	NOM	f	p		b_o|n_#_o|m_i_#	b_o|n_h_o|m_i_es	0.0	0.0	synthetic
 boomers	bum9R	boomer	NOM	NOM	m	p		b_u|m_9_R_#	b_oo|m_e_r_s	0.0	0.0	synthetic
@@ -36647,7 +36509,6 @@ bordée	bORde	bordé	ADJ	VER,ADJ,NOM	f	s		b_O_R|d_e_#	b_o_r|d_é_e	0.0	0.0	synth
 bordés	bORde	bordée	ADJ	VER,ADJ,NOM	m	p		b_O_R|d_e_#	b_o_r|d_é_s	0.0	0.0	synthetic
 bordé	bORde	bordée	ADJ	VER,ADJ,NOM	m	s		b_O_R|d_e	b_o_r|d_é	0.0	0.0	synthetic
 bores	bOR	bore	NOM	NOM	m	p		b_O_R_#	b_o_r_es	0.0	0.0	synthetic
-bortchs	bORtS	bortch	NOM	NOM	m	p		b_O_R_t_S_#	b_o_r_t_ch_s	0.0	0.0	synthetic
 boréaux	boReo	boréal	ADJ	ADJ	m	p		b_o|R_e|o_#	b_o|r_é|au_x	0.0	0.0	synthetic
 borées	bORe	borée	NOM	NOM	f	p		b_O|R_e_#	b_o|r_é_es	0.0	0.0	synthetic
 boscos	bOsko	bosco	NOM	NOM	m	p		b_O_s|k_o_#	b_o_s|c_o_s	0.0	0.0	synthetic
@@ -36751,7 +36612,6 @@ busqués	byske	busqué	ADJ	VER,ADJ	m	p		b_y_s|k_e_#	b_u_s|qu_é_s	0.0	0.0	synthe
 butadiènes	bytadjEn	butadiène	NOM	NOM	m	p		b_y|t_a|d_j_E_n_#	b_u|t_a|d_i_è_n_es	0.0	0.0	synthetic
 butanes	bytan	butane	NOM	NOM	m	p		b_y|t_a_n_#	b_u|t_a_n_es	0.0	0.0	synthetic
 butes	byt	bute	NOM	NOM,VER	m	p		b_y_t_#	b_u_t_es	0.0	0.0	synthetic
-buttoirs	bytwaR	buttoir	NOM	NOM	m	p		b_y|t_wa_R_#	b_u|tt_oi_r_s	0.0	0.0	synthetic
 butées	byte	butée	NOM	VER,ADJ,NOM	f	p		b_y|t_e_#	b_u|t_é_es	0.0	0.0	synthetic
 buvarde	byvaRd	buvard	ADJ	ADJ,NOM	f	s		b_y|v_a_R_d_#	b_u|v_a_r_d_e	0.0	0.0	synthetic
 bâtées	bate	bâté	ADJ	VER,ADJ	f	p		b_a|t_e_#	b_â|t_é_es	0.0	0.0	synthetic
@@ -36769,7 +36629,6 @@ béhèmes	beEm	béhème	NOM	NOM	f	p		b_e_#|E_m_#	b_é_h|è_m_es	0.0	0.0	syntheti
 béhémoths	beemOt	béhémoth	NOM	NOM	m	p		b_e_#|e|m_O_t	b_é_h|é|m_o_ths	0.0	0.0	synthetic
 béjaunes	beZon	béjaune	NOM	NOM	m	p		b_e|Z_o_n_#	b_é|j_au_n_es	0.0	0.0	synthetic
 bélougas	beluga	bélouga	NOM	NOM	m	p		b_e|l_u|g_a_#	b_é|l_ou|g_a_s	0.0	0.0	synthetic
-bélugas	belyga	béluga	NOM	NOM	m	p		b_e|l_y|g_a_#	b_é|l_u|g_a_s	0.0	0.0	synthetic
 bénignités	beniNite	bénignité	NOM	NOM	f	p		b_e|n_i|N_i|t_e_#	b_é|n_i|gn_i|t_é_s	0.0	0.0	synthetic
 béninoises	beninwaz	béninois	ADJ	ADJ	f	p		b_e|n_i|n_wa_z_#	b_é|n_i|n_oi_s_es	0.0	0.0	synthetic
 béninoise	beninwaz	béninois	ADJ	ADJ	f	s		b_e|n_i|n_wa_z_#	b_é|n_i|n_oi_s_e	0.0	0.0	synthetic
@@ -36878,7 +36737,6 @@ cardiographies	kaRdjogRafi	cardiographie	NOM	NOM	f	p		k_a_R|d_j_o|g_R_a|f_i_#	c_
 cardiomyopathies	kaRdjomjopati	cardiomyopathie	NOM	NOM	f	p		k_a_R|d_j_o|m_j_o|p_a|t_i_#	c_a_r|d_i_o|m_y_o|p_a|th_i_es	0.0	0.0	synthetic
 cardiomégalies	kaRdjOmegali	cardiomégalie	NOM	NOM	f	p		k_a_R|d_j_O|m_e|g_a|l_i_#	c_a_r|d_i_o|m_é|g_a|l_i_es	0.0	0.0	synthetic
 cardites	kaRdit	cardite	NOM	NOM	f	p		k_a_R|d_i_t_#	c_a_r|d_i_t_es	0.0	0.0	synthetic
-cares	kaR	care	NOM	NOM	f	p		k_a_R_#	c_a_r_es	0.0	0.0	synthetic
 carets	kaRE	caret	NOM	NOM	m	p		k_a|R_E_#	c_a|r_e_ts	0.0	0.0	synthetic
 cariocas	kaRjoka	carioca	NOM	ADJ,NOM	m	p		k_a|R_j_o|k_a_#	c_a|r_i_o|c_a_s	0.0	0.0	synthetic
 carmels	kaRmEl	carmel	NOM	NOM	m	p		k_a_R|m_E_l_#	c_a_r|m_e_l_s	0.0	0.0	synthetic
@@ -36892,7 +36750,6 @@ carpée	kaRpe	carpé	ADJ	ADJ	f	s		k_a_R|p_e_#	c_a_r|p_é_e	0.0	0.0	synthetic
 carpés	kaRpe	carpé	ADJ	ADJ	m	p		k_a_R|p_e_#	c_a_r|p_é_s	0.0	0.0	synthetic
 carrares	kaRaR	carrare	NOM	NOM	m	p		k_a|R_a_R_#	c_a|rr_a_r_es	0.0	0.0	synthetic
 carricks	kaRik	carrick	NOM	NOM	m	p		k_a|R_i_k_#	c_a|rr_i_ck_s	0.0	0.0	synthetic
-carries	kaRi	carry	NOM	NOM	m	p		k_a|R_i_#	c_a|rr_i_es	0.0	0.0	synthetic
 carthaginoises	kaRtaZinwaz	carthaginois	ADJ	ADJ,NOM	f	p		k_a_R|t_a|Z_i|n_wa_z_#	c_a_r|th_a|g_i|n_oi_s_es	0.0	0.0	synthetic
 carthames	kaRtam	carthame	NOM	NOM	m	p		k_a_R|t_a_m_#	c_a_r|th_a_m_es	0.0	0.0	synthetic
 cartographies	kaRtogRafi	cartographie	NOM	NOM	f	p		k_a_R|t_o|g_R_a|f_i_#	c_a_r|t_o|g_r_a|ph_i_es	0.0	0.0	synthetic
@@ -37038,7 +36895,6 @@ cholédoques	koledOk	cholédoque	ADJ	ADJ	f	p		k_o|l_e|d_O_k_#	ch_o|l_é|d_o_qu_e
 chorizos	tSoRizo	chorizo	NOM	NOM	m	p		tS_o|R_i|z_o_#	ch_o|r_i|z_o_s	0.0	0.0	synthetic
 chorées	koRe	chorée	NOM	NOM	f	p		k_o|R_e_#	ch_o|r_é_es	0.0	0.0	synthetic
 chouias	Suja	chouia	NOM	NOM	m	p		S_u|j_a_#	ch_ou|i_a_s	0.0	0.0	synthetic
-chouyas	Suja	chouya	NOM	NOM	m	p		S_u|j_a_#	ch_ou|y_a_s	0.0	0.0	synthetic
 christianias	kRistjanja	christiania	NOM	NOM	m	p		k_R_i_s|t_j_a|n_j_a_#	ch_r_i_s|t_i_a|n_i_a_s	0.0	0.0	synthetic
 chromatographies	kROmatOgRafi	chromatographie	NOM	NOM	f	p		k_R_O|m_a|t_O|g_R_a|f_i_#	ch_r_o|m_a|t_o|g_r_a|ph_i_es	0.0	0.0	synthetic
 chronographes	kRonogRaf	chronographe	NOM	NOM	m	p		k_R_o|n_o|g_R_a_f_#	ch_r_o|n_o|g_r_a_ph_es	0.0	0.0	synthetic
@@ -37342,7 +37198,6 @@ couvies	kuvi	couvi	ADJ	ADJ	f	p		k_u|v_i_#	c_ou|v_i_es	0.0	0.0	synthetic
 couvie	kuvi	couvi	ADJ	ADJ	f	s		k_u|v_i_#	c_ou|v_i_e	0.0	0.0	synthetic
 cracs	kRak	crac	NOM	NOM	m	p		k_R_a_k_#	c_r_a_c_s	0.0	0.0	synthetic
 crachées	kRaSe	craché	ADJ	VER,ADJ	f	p		k_R_a|S_e_#	c_r_a|ch_é_es	0.0	0.0	synthetic
-cranes	kRan	crane	NOM	NOM	m	p		k_R_a_n_#	c_r_a_n_es	0.0	0.0	synthetic
 craniotomies	kRanjotomi	craniotomie	NOM	NOM	f	p		k_R_a|n_j_o|t_o|m_i_#	c_r_a|n_i_o|t_o|m_i_es	0.0	0.0	synthetic
 craquées	kRake	craquée	NOM	VER,NOM	f	p		k_R_a|k_e_#	c_r_a|qu_é_es	0.0	0.0	synthetic
 crases	kRaz	crase	NOM	NOM	f	p		k_R_a_z_#	c_r_a_s_es	0.0	0.0	synthetic
@@ -37446,7 +37301,6 @@ dakins	dak5	dakin	NOM	NOM	m	p		d_a|k_5_#	d_a|k_in_s	0.0	0.0	synthetic
 dakotasses	dakotas	dakota	ADJ	ADJ,NOM	f	p		d_a|k_o|t_a_s_#	d_a|k_o|t_a_ss_es	0.0	0.0	synthetic
 dakotasse	dakotas	dakota	ADJ	ADJ,NOM	f	s		d_a|k_o|t_a_s_#	d_a|k_o|t_a_ss_e	0.0	0.0	synthetic
 dals	dal	dal	NOM	NOM	m	p		d_a_l_#	d_a_l_s	0.0	0.0	synthetic
-dales	dal	dale	NOM	NOM	m	p		d_a_l_#	d_a_l_es	0.0	0.0	synthetic
 damasquinées	damaskine	damasquiné	ADJ	ADJ	f	p		d_a|m_a_s|k_i|n_e_#	d_a|m_a_s|qu_i|n_é_es	0.0	0.0	synthetic
 damerets	dam°RE	dameret	NOM	NOM	m	p		d_a|m_°|R_E_#	d_a|m_e|r_e_ts	0.0	0.0	synthetic
 dans	dan	dan	NOM	NOM	m	p		d_a_n_#	d_a_n_s	0.0	0.0	synthetic
@@ -37855,7 +37709,6 @@ escomptes	Esk§t	escompte	NOM	NOM,VER	m	p		E_s|k_§_#_t_#	e_s|c_om_p_t_es	0.0	0.
 escots	Esko	escot	NOM	NOM	m	p		E_s|k_o_#	e_s|c_o_ts	0.0	0.0	synthetic
 escrimes	EskRim	escrime	NOM	NOM,VER	f	p		E_s|k_R_i_m_#	e_s|c_r_i_m_es	0.0	0.0	synthetic
 espars	EspaR	espar	NOM	NOM	m	p		E_s|p_a_R_#	e_s|p_a_r_s	0.0	0.0	synthetic
-espionites	Espjonit	espionite	NOM	NOM	f	p		E_s|p_j_o|n_i_t_#	e_s|p_i_o|n_i_t_es	0.0	0.0	synthetic
 espionnites	Espjonit	espionnite	NOM	NOM	f	p		E_s|p_j_o|n_i_t_#	e_s|p_i_o|nn_i_t_es	0.0	0.0	synthetic
 esquintées	Esk5te	esquinté	ADJ	VER,ADJ	f	p		E_s|k_5|t_e_#	e_s|qu_in|t_é_es	0.0	0.0	synthetic
 esquires	EskiR	esquire	NOM	NOM	m	p		E_s|k_i_R_#	e_s|qu_i_r_es	0.0	0.0	synthetic
@@ -38099,7 +37952,6 @@ frigorigènes	fRigORiZEn	frigorigène	ADJ	ADJ,NOM	f	p		f_R_i|g_O|R_i|Z_E_n_#	f_r
 frilosités	fRilozite	frilosité	NOM	NOM	f	p		f_R_i|l_o|z_i|t_e_#	f_r_i|l_o|s_i|t_é_s	0.0	0.0	synthetic
 frimaires	fRimER	frimaire	NOM	NOM	m	p		f_R_i|m_E_R_#	f_r_i|m_ai_r_es	0.0	0.0	synthetic
 fringillidés	fR5Zilide	fringillidé	NOM	NOM	m	p		f_R_5|Z_i|l_i|d_e_#	f_r_in|g_i|ll_i|d_é_s	0.0	0.0	synthetic
-frippes	fRip	frippe	NOM	NOM	f	p		f_R_i_p_#	f_r_i_pp_es	0.0	0.0	synthetic
 frisottées	fRizote	frisotté	ADJ	VER,ADJ	f	p		f_R_i|z_o|t_e_#	f_r_i|s_o|tt_é_es	0.0	0.0	synthetic
 frisottés	fRizote	frisotté	ADJ	VER,ADJ	m	p		f_R_i|z_o|t_e_#	f_r_i|s_o|tt_é_s	0.0	0.0	synthetic
 frisquets	fRiskE	frisquet	ADJ	ADJ	m	p		f_R_i_s|k_E_#	f_r_i_s|qu_e_ts	0.0	0.0	synthetic
@@ -38245,8 +38097,6 @@ glycémies	glisemi	glycémie	NOM	NOM	f	p		g_l_i|s_e|m_i_#	g_l_y|c_é|m_i_es	0.0	
 glycérols	gliseROl	glycérol	NOM	NOM	m	p		g_l_i|s_e|R_O_l_#	g_l_y|c_é|r_o_l_s	0.0	0.0	synthetic
 glènes	glEn	glène	NOM	NOM	f	p		g_l_E_n_#	g_l_è_n_es	0.0	0.0	synthetic
 gnioufs	Nuf	gniouf	NOM	NOM	f	p		N_#_u_f_#	gn_i_ou_f_s	0.0	0.0	synthetic
-gnognotes	NoNOt	gnognote	NOM	NOM	f	p		N_o|N_O_t_#	gn_o|gn_o_t_es	0.0	0.0	synthetic
-gnoles	Nol	gnole	NOM	NOM	f	p		N_o_l_#	gn_o_l_es	0.0	0.0	synthetic
 gnoses	gnoz	gnose	NOM	NOM	f	p		g_n_o_z_#	g_n_o_s_es	0.0	0.0	synthetic
 gnoufs	Nuf	gnouf	NOM	NOM	m	p		N_u_f_#	gn_ou_f_s	0.0	0.0	synthetic
 gnôles	Nol	gnôle	NOM	NOM	f	p		N_o_l_#	gn_ô_l_es	0.0	0.0	synthetic
@@ -38418,7 +38268,6 @@ harpins	aRp5	harpin	NOM	NOM	m	p		#_a_R|p_5_#	h_a_r|p_in_s	0.0	0.0	synthetic
 hasardées	azaRde	hasardé	ADJ	VER,ADJ	f	p		#_a|z_a_R|d_e_#	h_a|s_a_r|d_é_es	0.0	0.0	synthetic
 hasardés	azaRde	hasardé	ADJ	VER,ADJ	m	p		#_a|z_a_R|d_e_#	h_a|s_a_r|d_é_s	0.0	0.0	synthetic
 hasardé	azaRde	hasardé	ADJ	VER,ADJ	m	s		#_a|z_a_R|d_e	h_a|s_a_r|d_é	0.0	0.0	synthetic
-haschichs	aSiS	haschich	NOM	NOM	m	p		#_a|S_i_S_#	h_a|sch_i_ch_s	0.0	0.0	synthetic
 hauberts	obER	haubert	NOM	NOM	m	p		#_o|b_E_R_#	h_au|b_e_r_ts	0.0	0.0	synthetic
 haussiers	osje	haussier	ADJ	ADJ	m	p		#_o|s_j_e_#	h_au|ss_i_er_s	0.0	0.0	synthetic
 hautes	ot	haute	NOM	ADJ,NOM	f	p		#_o_t_#	h_au_t_es	0.0	0.0	synthetic
@@ -39032,7 +38881,6 @@ kinases	kinaz	kinase	NOM	NOM	f	p		k_i|n_a_z_#	k_i|n_a_s_es	0.0	0.0	synthetic
 kinesthésies	kinEstezi	kinesthésie	NOM	NOM	f	p		k_i|n_E_s|t_e|z_i_#	k_i|n_e_s|th_é|s_i_es	0.0	0.0	synthetic
 kinnors	kinOR	kinnor	NOM	NOM	m	p		k_i|n_O_R_#	k_i|nn_o_r_s	0.0	0.0	synthetic
 kinésithérapies	kineziteRapi	kinésithérapie	NOM	NOM	f	p		k_i|n_e|z_i|t_e|R_a|p_i_#	k_i|n_é|s_i|th_é|r_a|p_i_es	0.0	0.0	synthetic
-kipas	kipa	kipa	NOM	NOM	f	p		k_i|p_a_#	k_i|p_a_s	0.0	0.0	synthetic
 kippas	kipa	kippa	NOM	NOM	f	p		k_i|p_a_#	k_i|pp_a_s	0.0	0.0	synthetic
 kivas	kiva	kiva	NOM	NOM	f	p		k_i|v_a_#	k_i|v_a_s	0.0	0.0	synthetic
 kleptomanies	klEptomani	kleptomanie	NOM	NOM	f	p		k_l_E_p|t_o|m_a|n_i_#	k_l_e_p|t_o|m_a|n_i_es	0.0	0.0	synthetic
@@ -39275,10 +39123,6 @@ madrées	madRe	madré	ADJ	ADJ	f	p		m_a|d_R_e_#	m_a|d_r_é_es	0.0	0.0	synthetic
 maelstroms	malstROm	maelstrom	NOM	NOM	m	p		m_a_#_l|s_t_R_O_m_#	m_a_e_l|s_t_r_o_m_s	0.0	0.0	synthetic
 maestrias	maEstRija	maestria	NOM	NOM	f	p		m_a|E_s|t_R_ij|a_#	m_a|e_s|t_r_i|a_s	0.0	0.0	synthetic
 maestros	maEstRo	maestro	NOM	NOM	m	p		m_a|E_s|t_R_o_#	m_a|e_s|t_r_o_s	0.0	0.0	synthetic
-maffias	mafja	maffia	NOM	NOM	f	p		m_a|f_j_a_#	m_a|ff_i_a_s	0.0	0.0	synthetic
-maffieuses	mafj2z	maffieux	ADJ	ADJ,NOM	f	p		m_a|f_j_2_z_#	m_a|ff_i_eu_s_es	0.0	0.0	synthetic
-maffieuse	mafj2z	maffieux	ADJ	ADJ,NOM	f	s		m_a|f_j_2_z_#	m_a|ff_i_eu_s_e	0.0	0.0	synthetic
-maffioso	mafjozo	maffioso	NOM	NOM	m	s		m_a|f_j_o|z_o	m_a|ff_i_o|s_o	0.0	0.0	synthetic
 mafflues	mafly	mafflu	ADJ	ADJ	f	p		m_a|f_l_y_#	m_a|ff_l_u_es	0.0	0.0	synthetic
 magentas	maZ@ta	magenta	NOM	ADJ,NOM	m	p		m_a|Z_@|t_a_#	m_a|g_en|t_a_s	0.0	0.0	synthetic
 maghzens	makzEn	maghzen	NOM	NOM	m	p		m_a_k_#|z_E_n_#	m_a_g_h|z_e_n_s	0.0	0.0	synthetic
@@ -39568,7 +39412,6 @@ motoneurones	moton2ROn	motoneurone	NOM	NOM	m	p		m_o|t_o|n_2|R_O_n_#	m_o|t_o|n_eu
 motricités	motRisite	motricité	NOM	NOM	f	p		m_o|t_R_i|s_i|t_e_#	m_o|t_r_i|c_i|t_é_s	0.0	0.0	synthetic
 molles	mOl	mou	ADJ	ADJ,NOM	f	p		m_u	m_ou	0.0	0.0	synthetic
 molle	mOl	mou	ADJ	ADJ,NOM	f	s		m_u	m_ou	0.0	0.0	synthetic
-moudjahiddines	mudZaidin	moudjahiddine	NOM	NOM	m	p		m_u|d_Z_a_#|i|d_i_n_#	m_ou|d_j_a_h|i|dd_i_n_es	0.0	0.0	synthetic
 mouises	mwiz	mouise	NOM	NOM	f	p		m_w_i_z_#	m_ou_i_s_es	0.0	0.0	synthetic
 mouroirs	muRwaR	mouroir	NOM	NOM	m	p		m_u|R_wa_R_#	m_ou|r_oi_r_s	0.0	0.0	synthetic
 mourres	muR	mourre	NOM	NOM	f	p		m_u_R_#	m_ou_rr_es	0.0	0.0	synthetic
@@ -39744,7 +39587,6 @@ nimbées	n5be	nimbé	ADJ	VER,ADJ,NOM	f	p		n_5|b_e_#	n_im|b_é_es	0.0	0.0	synthet
 nimbés	n5be	nimbé	ADJ	VER,ADJ,NOM	m	p		n_5|b_e_#	n_im|b_é_s	0.0	0.0	synthetic
 niolos	nijolo	niolo	NOM	NOM	m	p		n_ij|o|l_o_#	n_i|o|l_o_s	0.0	0.0	synthetic
 niques	nik	nique	NOM	NOM,VER	f	p		n_i_k_#	n_i_qu_es	0.0	0.0	synthetic
-nirvânas	niRvana	nirvâna	NOM	NOM	m	p		n_i_R|v_a|n_a_#	n_i_r|v_â|n_a_s	0.0	0.0	synthetic
 nitreuses	nitR2z	nitreux	ADJ	ADJ	f	p		n_i|t_R_2_z_#	n_i|t_r_eu_s_es	0.0	0.0	synthetic
 nitrogènes	nitRoZEn	nitrogène	NOM	NOM	m	p		n_i|t_R_o|Z_E_n_#	n_i|t_r_o|g_è_n_es	0.0	0.0	synthetic
 nitrées	nitRe	nitré	ADJ	ADJ	f	p		n_i|t_R_e_#	n_i|t_r_é_es	0.0	0.0	synthetic
@@ -40174,7 +40016,6 @@ piayes	pjaj	piaye	NOM	NOM	m	p		p_j_a_j_#	p_i_a_y_es	0.0	0.0	synthetic
 piazzas	pjadza	piazza	NOM	NOM	f	p		p_j_a_d|z_a_#	p_i_a_z|z_a_s	0.0	0.0	synthetic
 picas	pika	pica	NOM	NOM	m	p		p_i|k_a_#	p_i|c_a_s	0.0	0.0	synthetic
 picaros	pikaRo	picaro	NOM	NOM	m	p		p_i|k_a|R_o_#	p_i|c_a|r_o_s	0.0	0.0	synthetic
-picolos	pikolo	picolo	NOM	NOM	m	p		p_i|k_o|l_o_#	p_i|c_o|l_o_s	0.0	0.0	synthetic
 picorées	pikoRe	picorée	NOM	VER,NOM	f	p		p_i|k_o|R_e_#	p_i|c_o|r_é_es	0.0	0.0	synthetic
 picotes	pikOt	picote	NOM	NOM,VER	f	p		p_i|k_O_t_#	p_i|c_o_t_es	0.0	0.0	synthetic
 picsous	piksu	picsou	NOM	NOM	m	p		p_i_k|s_u_#	p_i_c|s_ou_s	0.0	0.0	synthetic
@@ -40922,7 +40763,6 @@ sacrets	sakRE	sacret	NOM	NOM	m	p		s_a|k_R_E_#	s_a|c_r_e_ts	0.0	0.0	synthetic
 sacrificielles	sakRifisjEl	sacrificiel	ADJ	ADJ	f	p		s_a|k_R_i|f_i|s_j_E_l_#	s_a|c_r_i|f_i|c_i_e_ll_es	0.0	0.0	synthetic
 sacrums	sakROm	sacrum	NOM	NOM	m	p		s_a|k_R_O_m_#	s_a|c_r_u_m_s	0.0	0.0	synthetic
 sadducéens	sadyse5	sadducéen	NOM	NOM	m	p		s_a|d_y|s_e|5_#	s_a|dd_u|c_é|en_s	0.0	0.0	synthetic
-saducéens	sadyse5	saducéen	NOM	NOM	m	p		s_a|d_y|s_e|5_#	s_a|d_u|c_é|en_s	0.0	0.0	synthetic
 safrans	safR@	safran	NOM	ADJ,NOM	m	p		s_a|f_R_@_#	s_a|f_r_an_s	0.0	0.0	synthetic
 safranées	safRane	safrané	ADJ	ADJ	f	p		s_a|f_R_a|n_e_#	s_a|f_r_a|n_é_es	0.0	0.0	synthetic
 safranée	safRane	safrané	ADJ	ADJ	f	s		s_a|f_R_a|n_e_#	s_a|f_r_a|n_é_e	0.0	0.0	synthetic
@@ -41006,9 +40846,7 @@ scarlatins	skaRlat5	scarlatine	ADJ	ADJ	m	p		s_k_a_R|l_a|t_5_#	s_c_a_r|l_a|t_in_s
 scats	skat	scat	NOM	NOM	m	p		s_k_a_t	s_c_a_ts	0.0	0.0	synthetic
 scatologues	skatOlOg	scatologue	NOM	NOM	m	p		s_k_a|t_O|l_O_g_#	s_c_a|t_o|l_o_gu_es	0.0	0.0	synthetic
 scatophile	skatofil	scatophile	ADJ	ADJ	f	s		s_k_a|t_o|f_i_l_#	s_c_a|t_o|ph_i_l_e	0.0	0.0	synthetic
-schahs	Sa	schah	NOM	NOM	m	p		S_a_#	sch_a_hs	0.0	0.0	synthetic
 schakos	Sako	schako	NOM	NOM	m	p		S_a|k_o_#	sch_a|k_o_s	0.0	0.0	synthetic
-scheiks	SEk	scheik	NOM	NOM	m	p		S_E_k_#	sch_ei_k_s	0.0	0.0	synthetic
 schizophasies	skizofazi	schizophasie	NOM	NOM	f	p		s_k_i|z_o|f_a|z_i_#	s_ch_i|z_o|ph_a|s_i_es	0.0	0.0	synthetic
 schizophrénies	skizofReni	schizophrénie	NOM	NOM	f	p		s_k_i|z_o|f_R_e|n_i_#	s_ch_i|z_o|ph_r_é|n_i_es	0.0	0.0	synthetic
 schlagues	Slag	schlague	NOM	NOM	f	p		S_l_a_g_#	sch_l_a_gu_es	0.0	0.0	synthetic
@@ -41019,7 +40857,6 @@ schleus	Sl2	schleu	ADJ	ADJ,NOM	m	p		S_l_2_#	sch_l_eu_s	0.0	0.0	synthetic
 schnauzers	Snawz9R	schnauzer	NOM	NOM	m	p		S_n_a_w|z_9_R_#	sch_n_a_u|z_e_r_s	0.0	0.0	synthetic
 schnicks	Snik	schnick	NOM	NOM	m	p		S_n_i_k_#	sch_n_i_ck_s	0.0	0.0	synthetic
 schnitzels	SnitzEl	schnitzel	NOM	NOM	m	p		S_n_i_t|z_E_l_#	sch_n_i_t|z_e_l_s	0.0	0.0	synthetic
-schnoufs	Snuf	schnouf	NOM	NOM	f	p		S_n_u_f_#	sch_n_ou_f_s	0.0	0.0	synthetic
 schpiles	Spil	schpile	NOM	NOM	m	p		S_p_i_l_#	sch_p_i_l_es	0.0	0.0	synthetic
 schproums	spRum	schproum	NOM	NOM	m	p		s_#_p_R_u_m_#	sc_h_p_r_ou_m_s	0.0	0.0	synthetic
 scientificités	sj@tifisite	scientificité	NOM	NOM	f	p		s_j_@|t_i|f_i|s_i|t_e_#	sc_i_en|t_i|f_i|c_i|t_é_s	0.0	0.0	synthetic
@@ -41467,7 +41304,6 @@ tangues	t@g	tangue	NOM	NOM,VER	f	p		t_@_g_#	t_an_gu_es	0.0	0.0	synthetic
 tangéroises	t@ZeRwaz	tangérois	ADJ	ADJ	f	p		t_@|Z_e|R_wa_z_#	t_an|g_é|r_oi_s_es	0.0	0.0	synthetic
 tangéroise	t@ZeRwaz	tangérois	ADJ	ADJ	f	s		t_@|Z_e|R_wa_z_#	t_an|g_é|r_oi_s_e	0.0	0.0	synthetic
 tanins	tan5	tanin	NOM	NOM	m	p		t_a|n_5_#	t_a|n_in_s	0.0	0.0	synthetic
-tannins	tan5	tannin	NOM	NOM	m	p		t_a|n_5_#	t_a|nn_in_s	0.0	0.0	synthetic
 tanrecs	t@REk	tanrec	NOM	NOM	m	p		t_@|R_E_k_#	t_an|r_e_c_s	0.0	0.0	synthetic
 tansads	t@sad	tansad	NOM	NOM	m	p		t_@|s_a_d_#	t_an|s_a_d_s	0.0	0.0	synthetic
 tantras	t@tRa	tantra	NOM	NOM	m	p		t_@|t_R_a_#	t_an|t_r_a_s	0.0	0.0	synthetic
@@ -41491,7 +41327,6 @@ taros	taRo	taro	NOM	NOM	m	p		t_a|R_o_#	t_a|r_o_s	0.0	0.0	synthetic
 tarpés	taRpe	tarpé	NOM	NOM	m	p		t_a_R|p_e_#	t_a_r|p_é_s	0.0	0.0	synthetic
 tartanes	taRtan	tartan	NOM	NOM	f	p		t_a_R|t_a_n_#	t_a_r|t_a_n_es	0.0	0.0	synthetic
 tartans	taRt@	tartan	NOM	NOM	m	p		t_a_R|t_@_#	t_a_r|t_an_s	0.0	0.0	synthetic
-tartufes	taRtyf	tartufe	NOM	NOM	m	p		t_a_R|t_y_f_#	t_a_r|t_u_f_es	0.0	0.0	synthetic
 tassilis	tasilis	tassili	NOM	NOM	m	p		t_a|s_i|l_i_s	t_a|ss_i|l_i_s	0.0	0.0	synthetic
 tatare	tataR	tatar	ADJ	ADJ,NOM	f	s		t_a|t_a_R_#	t_a|t_a_r_e	0.0	0.0	synthetic
 tatins	tat5	tatin	NOM	NOM	f	p		t_a|t_5_#	t_a|t_in_s	0.0	0.0	synthetic
@@ -41576,7 +41411,6 @@ tiramisus	tiRamizy	tiramisu	NOM	NOM	m	p		t_i|R_a|m_i|z_y_#	t_i|r_a|m_i|s_u_s	0.0
 tisonnées	tizone	tisonné	ADJ	VER,ADJ	f	p		t_i|z_o|n_e_#	t_i|s_o|nn_é_es	0.0	0.0	synthetic
 tisserandes	tis°R@d	tisserand	NOM	NOM	f	p		t_i|s_°|R_@_d_#	t_i|ss_e|r_an_d_es	0.0	0.0	synthetic
 titanes	titan	titane	NOM	NOM	m	p		t_i|t_a_n_#	t_i|t_a_n_es	0.0	0.0	synthetic
-tocades	tokad	tocade	NOM	NOM	f	p		t_o|k_a_d_#	t_o|c_a_d_es	0.0	0.0	synthetic
 toccatas	tokata	toccata	NOM	NOM	f	p		t_o|k_a|t_a_#	t_o|cc_a|t_a_s	0.0	0.0	synthetic
 tokamaks	tOkamak	tokamak	NOM	NOM	m	p		t_O|k_a|m_a_k_#	t_o|k_a|m_a_k_s	0.0	0.0	synthetic
 tolars	tolaR	tolar	NOM	NOM	m	p		t_o|l_a_R_#	t_o|l_a_r_s	0.0	0.0	synthetic
@@ -42181,7 +42015,6 @@ pétrées	petRe	pétré	ADJ	ADJ	f	p		p_e|t_R_e_#	p_é|t_r_é_es	0.0	0.0	syntheti
 pétrés	petRe	pétré	ADJ	ADJ	m	p		p_e|t_R_e_#	p_é|t_r_é_s	0.0	0.0	synthetic
 quinoas	kinOa	quinoa	NOM	NOM	m	p		k_i|n_O|a_#	qu_i|n_o|a_s	0.0	0.0	synthetic
 redécouvert	R°dekuvER	redécouvert	ADJ	ADJ	m	s		R_°|d_e|k_u|v_E_R_#	r_e|d_é|c_ou|v_e_r_t	0.0	0.0	synthetic
-roys	Rwa	roy	NOM	NOM	m	p		R_wa_#	r_oy_s	0.0	0.0	synthetic
 rébeccas	Rebeka	rébecca	NOM	NOM	f	p		R_e|b_e|k_a_#	r_é|b_e|cc_a_s	0.0	0.0	synthetic
 solognotes	soloNo	solognot	ADJ	ADJ	f	p		s_o|l_o|N_o_#	s_o|l_o|gn_o_t	0.0	0.0	synthetic
 somali	somali	somali	ADJ	ADJ	m	s		s_o|m_a|l_i	s_o|m_a|l_i	0.0	0.0	synthetic
@@ -42204,7 +42037,6 @@ slovènes	slovEn	slovène	ADJ	ADJ	m	p		s_l_o|v_E_n_#	s_l_o|v_è_n_e	0.0	0.0	synt
 baryes	baRi	barye	NOM	NOM	f	p		b_a|R_i_#	b_a|r_y_es	0.0	0.0	synthetic
 brayes	bREj	braye	NOM	NOM	f	p		b_R_Ej_#	b_r_ay_es	0.0	0.0	synthetic
 gadjos	gadZo	gadjo	NOM	NOM	m	p		g_a|d_Z_o_#	g_a|d_j_o_s	0.0	0.0	synthetic
-oyes	wa	oye	NOM	NOM	f	p		wa_#	oy_es	0.0	0.0	synthetic
 pagayes	pagaj	pagaye	NOM	NOM,VER	f	p		p_a|g_a_j_#	p_a|g_a_y_es	0.0	0.0	synthetic
 rimayes	Rimaj	rimaye	NOM	NOM	f	p		R_i|m_a_j_#	r_i|m_a_y_es	0.0	0.0	synthetic
 commandent	kom@d	commander	VER	VER			sub:pre:3p;	k_o|m_@_d_#	c_o|mm_an_d_ent	0.0	0.0	synthetic
@@ -42635,7 +42467,6 @@ sérient	seRi	sérier	VER	VER			sub:pre:3p;	s_e|R_i_#	s_é|r_i_ent	0.0	0.0	synth
 flânent	flan	flâner	VER	VER			sub:pre:3p;	f_l_a_n_#	f_l_â_n_ent	0.0	0.0	synthetic
 syncopent	s5kOp	syncoper	VER	VER			sub:pre:3p;	s_5|k_O_p_#	s_yn|c_o_p_ent	0.0	0.0	synthetic
 alpaguent	alpag	alpaguer	VER	VER			sub:pre:3p;	a_l|p_a_g_#	a_l|p_a_gu_ent	0.0	0.0	synthetic
-suifent	s8if	suifer	VER	VER			sub:pre:3p;	s_8_i_f_#	s_u_i_f_ent	0.0	0.0	synthetic
 surveillent	syRvEj	surveiller	VER	VER			sub:pre:3p;	s_y_R|v_E_j_#	s_u_r|v_ei_ll_ent	0.0	0.0	synthetic
 eschent	ES	escher	VER	VER			sub:pre:3p;	E_S_#	e_sch_ent	0.0	0.0	synthetic
 officialisent	ofisjaliz	officialiser	VER	VER			sub:pre:3p;	o|f_i|s_j_a|l_i_z_#	o|ff_i|c_i_a|l_i_s_ent	0.0	0.0	synthetic
@@ -42772,7 +42603,6 @@ dotent	dOt	doter	VER	VER			sub:pre:3p;	d_O_t_#	d_o_t_ent	0.0	0.0	synthetic
 acoquinent	akokin	acoquiner	VER	VER			sub:pre:3p;	a|k_o|k_i_n_#	a|c_o|qu_i_n_ent	0.0	0.0	synthetic
 marmonnent	maRmOn	marmonner	VER	VER			sub:pre:3p;	m_a_R|m_O_n_#	m_a_r|m_o_nn_ent	0.0	0.0	synthetic
 mitonnent	mitOn	mitonner	VER	VER			sub:pre:3p;	m_i|t_O_n_#	m_i|t_o_nn_ent	0.0	0.0	synthetic
-boulottées	bulote	boulotter	VER	VER	f	p	par:pas;	b_u|l_o|t_e_#	b_ou|l_o|tt_é_es	0.0	0.0	synthetic
 cambent	k@b	camber	VER	VER			sub:pre:3p;	k_@_b_#	c_am_b_ent	0.0	0.0	synthetic
 enfantent	@f@t	enfanter	VER	VER			sub:pre:3p;	@|f_@_t_#	en|f_an_t_ent	0.0	0.0	synthetic
 transfusent	tR@sfyz	transfuser	VER	VER			sub:pre:3p;	t_R_@_s|f_y_z_#	t_r_an_s|f_u_s_ent	0.0	0.0	synthetic
@@ -43408,7 +43238,6 @@ captivent	kaptiv	captiver	VER	VER			sub:pre:3p;	k_a_p|t_i_v_#	c_a_p|t_i_v_ent	0.
 gagnent	gaN	gagner	VER	VER			sub:pre:3p;	g_a_N_#	g_a_gn_ent	0.0	0.0	synthetic
 barattent	baRat	baratter	VER	VER			sub:pre:3p;	b_a|R_a_t_#	b_a|r_a_tt_ent	0.0	0.0	synthetic
 destituent	destity	destituer	VER	VER			sub:pre:3p;	d_e_s|t_i|t_y_#	d_e_s|t_i|t_u_ent	0.0	0.0	synthetic
-saoulent	sul	saouler	VER	VER			sub:pre:3p;	s_#_u_l_#	s_a_ou_l_ent	0.0	0.0	synthetic
 pleuvinent	pl2vin	pleuviner	VER	VER			sub:pre:3p;	p_l_2|v_i_n_#	p_l_eu|v_i_n_ent	0.0	0.0	synthetic
 introspectent	5tROspEkt	introspecter	VER	VER			sub:pre:3p;	5|t_R_O_s|p_E_k_t_#	in|t_r_o_s|p_e_c_t_ent	0.0	0.0	synthetic
 enflent	@fl	enfler	VER	VER			sub:pre:3p;	@_f_l_#	en_f_l_ent	0.0	0.0	synthetic
@@ -43422,8 +43251,6 @@ clampent	kl@p	clamper	VER	VER			sub:pre:3p;	k_l_@_p_#	c_l_am_p_ent	0.0	0.0	synth
 tapissent	tapis	tapisser	VER	VER			sub:pre:3p;	t_a|p_i_s_#	t_a|p_i_ss_ent	0.0	0.0	synthetic
 chuchotent	SySOt	chuchoter	VER	VER			sub:pre:3p;	S_y|S_O_t_#	ch_u|ch_o_t_ent	0.0	0.0	synthetic
 traînassent	tREnas	traînasser	VER	VER			sub:pre:3p;	t_R_E|n_a_s_#	t_r_aî|n_a_ss_ent	0.0	0.0	synthetic
-dessoûlé	desule	dessoûler	VER	VER	m	s	par:pas;	d_e|s_u|l_e	d_e|ss_oû|l_é	0.0	0.0	synthetic
-dessoûlée	desule	dessoûler	VER	VER	f	s	par:pas;	d_e|s_u|l_e_#	d_e|ss_oû|l_é_e	0.0	0.0	synthetic
 abîment	abim	abîmer	VER	VER			sub:pre:3p;	a|b_i_m_#	a|b_î_m_ent	0.0	0.0	synthetic
 conservent	k§sERv	conserver	VER	VER			sub:pre:3p;	k_§|s_E_R_v_#	c_on|s_e_r_v_ent	0.0	0.0	synthetic
 bourdonnent	buRdOn	bourdonner	VER	VER			sub:pre:3p;	b_u_R|d_O_n_#	b_ou_r|d_o_nn_ent	0.0	0.0	synthetic
@@ -43615,7 +43442,6 @@ grisent	gRiz	griser	VER	VER			sub:pre:3p;	g_R_i_z_#	g_r_i_s_ent	0.0	0.0	syntheti
 tranchent	tR@S	trancher	VER	VER			sub:pre:3p;	t_R_@_S_#	t_r_an_ch_ent	0.0	0.0	synthetic
 développent	dev°lOp	développer	VER	VER			sub:pre:3p;	d_e|v_°|l_O_p_#	d_é|v_e|l_o_pp_ent	0.0	0.0	synthetic
 subliment	syblim	sublimer	VER	VER			sub:pre:3p;	s_y|b_l_i_m_#	s_u|b_l_i_m_ent	0.0	0.0	synthetic
-maronnent	maROn	maronner	VER	VER			sub:pre:3p;	m_a|R_O_n_#	m_a|r_o_nn_ent	0.0	0.0	synthetic
 rempilent	R@pil	rempiler	VER	VER			sub:pre:3p;	R_@|p_i_l_#	r_em|p_i_l_ent	0.0	0.0	synthetic
 écoulent	ekul	écouler	VER	VER			sub:pre:3p;	e|k_u_l_#	é|c_ou_l_ent	0.0	0.0	synthetic
 suicident	s8isid	suicider	VER	VER			sub:pre:3p;	s_8_i|s_i_d_#	s_u_i|c_i_d_ent	0.0	0.0	synthetic
@@ -43791,7 +43617,6 @@ cahotent	kaOt	cahoter	VER	VER			sub:pre:3p;	k_a_#|O_t_#	c_a_h|o_t_ent	0.0	0.0	sy
 cirent	siR	cirer	VER	VER			sub:pre:3p;	s_i_R_#	c_i_r_ent	0.0	0.0	synthetic
 compissent	k§pis	compisser	VER	VER			sub:pre:3p;	k_§|p_i_s_#	c_om|p_i_ss_ent	0.0	0.0	synthetic
 pionnent	pjOn	pionner	VER	VER			sub:pre:3p;	p_j_O_n_#	p_i_o_nn_ent	0.0	0.0	synthetic
-chlinguent	Sl5g	chlinguer	VER	VER			sub:pre:3p;	S_l_5_g_#	ch_l_in_gu_ent	0.0	0.0	synthetic
 fomentent	fom@t	fomenter	VER	VER			sub:pre:3p;	f_o|m_@_t_#	f_o|m_en_t_ent	0.0	0.0	synthetic
 vicient	visi	vicier	VER	VER			sub:pre:3p;	v_i|s_i_#	v_i|c_i_ent	0.0	0.0	synthetic
 casernent	kazERn	caserner	VER	VER			sub:pre:3p;	k_a|z_E_R_n_#	c_a|s_e_r_n_ent	0.0	0.0	synthetic
@@ -43900,7 +43725,6 @@ patrouillent	patRuj	patrouiller	VER	VER			sub:pre:3p;	p_a|t_R_u_j_#	p_a|t_r_ou_i
 brodent	bROd	broder	VER	VER			sub:pre:3p;	b_R_O_d_#	b_r_o_d_ent	0.0	0.0	synthetic
 sursautent	syRsot	sursauter	VER	VER			sub:pre:3p;	s_y_R|s_o_t_#	s_u_r|s_au_t_ent	0.0	0.0	synthetic
 subodorent	sybodOR	subodorer	VER	VER			sub:pre:3p;	s_y|b_o|d_O_R_#	s_u|b_o|d_o_r_ent	0.0	0.0	synthetic
-soûlent	sul	soûler	VER	VER			sub:pre:3p;	s_u_l_#	s_oû_l_ent	0.0	0.0	synthetic
 brillent	bRij	briller	VER	VER			sub:pre:3p;	b_R_i_j_#	b_r_i_ll_ent	0.0	0.0	synthetic
 autorisent	otoRiz	autoriser	VER	VER			sub:pre:3p;	o|t_o|R_i_z_#	au|t_o|r_i_s_ent	0.0	0.0	synthetic
 augmentent	ogm@t	augmenter	VER	VER			sub:pre:3p;	o_g|m_@_t_#	au_g|m_en_t_ent	0.0	0.0	synthetic
@@ -44129,7 +43953,6 @@ infantilisent	5f@tiliz	infantiliser	VER	VER			sub:pre:3p;	5|f_@|t_i|l_i_z_#	in|f
 sillonnent	sijOn	sillonner	VER	VER			sub:pre:3p;	s_i|j_O_n_#	s_i|ll_o_nn_ent	0.0	0.0	synthetic
 incitent	5sit	inciter	VER	VER			sub:pre:3p;	5|s_i_t_#	in|c_i_t_ent	0.0	0.0	synthetic
 échouent	eSu	échouer	VER	VER			sub:pre:3p;	e|S_u_#	é|ch_ou_ent	0.0	0.0	synthetic
-dégotté	degote	dégotter	VER	VER	m	s	par:pas;	d_e|g_o|t_e	d_é|g_o|tt_é	0.0	0.0	synthetic
 frigorifient	fRigoRifi	frigorifier	VER	VER			sub:pre:3p;	f_R_i|g_o|R_i|f_i_#	f_r_i|g_o|r_i|f_i_ent	0.0	0.0	synthetic
 démaillent	demaj	démailler	VER	VER			sub:pre:3p;	d_e|m_a_j_#	d_é|m_a_ill_ent	0.0	0.0	synthetic
 déboisent	debwaz	déboiser	VER	VER			sub:pre:3p;	d_e|b_wa_z_#	d_é|b_oi_s_ent	0.0	0.0	synthetic
@@ -44637,9 +44460,6 @@ bougonnent	bugOn	bougonner	VER	VER			sub:pre:3p;	b_u|g_O_n_#	b_ou|g_o_nn_ent	0.0
 gueuletonnent	g9l°tOn	gueuletonner	VER	VER			sub:pre:3p;	g_9|l_°|t_O_n_#	gu_eu|l_e|t_o_nn_ent	0.0	0.0	synthetic
 gourmandent	guRm@d	gourmander	VER	VER			sub:pre:3p;	g_u_R|m_@_d_#	g_ou_r|m_an_d_ent	0.0	0.0	synthetic
 dépatouillent	depatuj	dépatouiller	VER	VER			sub:pre:3p;	d_e|p_a|t_u_j_#	d_é|p_a|t_ou_ill_ent	0.0	0.0	synthetic
-garrotté	gaRote	garrotter	VER	VER	m	s	par:pas;	g_a|R_o|t_e	g_a|rr_o|tt_é	0.0	0.0	synthetic
-garrottés	gaRote	garrotter	VER	VER	m	p	par:pas;	g_a|R_o|t_e_#	g_a|rr_o|tt_é_s	0.0	0.0	synthetic
-garrottée	gaRote	garrotter	VER	VER	f	s	par:pas;	g_a|R_o|t_e_#	g_a|rr_o|tt_é_e	0.0	0.0	synthetic
 dynamisent	dinamiz	dynamiser	VER	VER			sub:pre:3p;	d_i|n_a|m_i_z_#	d_y|n_a|m_i_s_ent	0.0	0.0	synthetic
 flagellent	flaZEl	flageller	VER	VER			sub:pre:3p;	f_l_a|Z_E_l_#	f_l_a|g_e_ll_ent	0.0	0.0	synthetic
 amenuisent	am2n8iz	amenuiser	VER	VER			sub:pre:3p;	a|m_2|n_8_i_z_#	a|m_e|n_u_i_s_ent	0.0	0.0	synthetic
@@ -44667,7 +44487,6 @@ empêtrent	@pEtR	empêtrer	VER	VER			sub:pre:3p;	@|p_E_t_R_#	em|p_ê_t_r_ent	0.0
 ornementent	ORn°m@t	ornementer	VER	VER			sub:pre:3p;	O_R|n_°|m_@_t_#	o_r|n_e|m_en_t_ent	0.0	0.0	synthetic
 décrochent	dekROS	décrocher	VER	VER			sub:pre:3p;	d_e|k_R_O_S_#	d_é|c_r_o_ch_ent	0.0	0.0	synthetic
 obvient	Obvi	obvier	VER	VER			sub:pre:3p;	O_b|v_i_#	o_b|v_i_ent	0.0	0.0	synthetic
-iodlent	jOdl	iodler	VER	VER			sub:pre:3p;	j_O_d_l_#	i_o_d_l_ent	0.0	0.0	synthetic
 affirment	afiRm	affirmer	VER	VER			sub:pre:3p;	a|f_i_R_m_#	a|ff_i_r_m_ent	0.0	0.0	synthetic
 approchent	apROS	approcher	VER	VER			sub:pre:3p;	a|p_R_O_S_#	a|pp_r_o_ch_ent	0.0	0.0	synthetic
 recreusent	R°kR2z	recreuser	VER	VER			sub:pre:3p;	R_°|k_R_2_z_#	r_e|c_r_eu_s_ent	0.0	0.0	synthetic
@@ -44778,7 +44597,6 @@ déconstipent	dek§stip	déconstiper	VER	VER			sub:pre:3p;	d_e|k_§_s|t_i_p_#	d_
 éliminent	elimin	éliminer	VER	VER			sub:pre:3p;	e|l_i|m_i_n_#	é|l_i|m_i_n_ent	0.0	0.0	synthetic
 fabriquent	fabRik	fabriquer	VER	VER			sub:pre:3p;	f_a|b_R_i_k_#	f_a|b_r_i_qu_ent	0.0	0.0	synthetic
 orbitent	ORbit	orbiter	VER	VER			sub:pre:3p;	O_R|b_i_t_#	o_r|b_i_t_ent	0.0	0.0	synthetic
-dessaoulent	desul	dessaouler	VER	VER			sub:pre:3p;	d_e|s_#_u_l_#	d_e|ss_a_ou_l_ent	0.0	0.0	synthetic
 plébiscitent	plebisit	plébisciter	VER	VER			sub:pre:3p;	p_l_e|b_i|s_i_t_#	p_l_é|b_i|sc_i_t_ent	0.0	0.0	synthetic
 individualisent	5divid8aliz	individualiser	VER	VER			sub:pre:3p;	5|d_i|v_i|d_8_a|l_i_z_#	in|d_i|v_i|d_u_a|l_i_s_ent	0.0	0.0	synthetic
 attardent	ataRd	attarder	VER	VER			sub:pre:3p;	a|t_a_R_d_#	a|tt_a_r_d_ent	0.0	0.0	synthetic
@@ -45158,7 +44976,6 @@ réaniment	Reanim	réanimer	VER	VER			sub:pre:3p;	R_e|a|n_i_m_#	r_é|a|n_i_m_ent
 préoccupent	pReokyp	préoccuper	VER	VER			sub:pre:3p;	p_R_e|o|k_y_p_#	p_r_é|o|cc_u_p_ent	0.0	0.0	synthetic
 désodorisent	dezodoRiz	désodoriser	VER	VER			sub:pre:3p;	d_e|z_o|d_o|R_i_z_#	d_é|s_o|d_o|r_i_s_ent	0.0	0.0	synthetic
 enclenchent	@kl@S	enclencher	VER	VER			sub:pre:3p;	@|k_l_@_S_#	en|c_l_en_ch_ent	0.0	0.0	synthetic
-zyeutent	zj9t	zyeuter	VER	VER			sub:pre:3p;	z_j_9_t_#	z_y_eu_t_ent	0.0	0.0	synthetic
 raccommodent	RakomOd	raccommoder	VER	VER			sub:pre:3p;	R_a|k_o|m_O_d_#	r_a|cc_o|mm_o_d_ent	0.0	0.0	synthetic
 désaccoutument	dezakutym	désaccoutumer	VER	VER			sub:pre:3p;	d_e|z_a|k_u|t_y_m_#	d_é|s_a|cc_ou|t_u_m_ent	0.0	0.0	synthetic
 décalquent	dekalk	décalquer	VER	VER			sub:pre:3p;	d_e|k_a_l_k_#	d_é|c_a_l_qu_ent	0.0	0.0	synthetic
@@ -45176,7 +44993,6 @@ perturbent	pERtyRb	perturber	VER	VER			sub:pre:3p;	p_E_R|t_y_R_b_#	p_e_r|t_u_r_b
 enserrent	@sER	enserrer	VER	VER			sub:pre:3p;	@|s_e_R_#	en|s_e_rr_ent	0.0	0.0	synthetic
 droguent	dROg	droguer	VER	VER			sub:pre:3p;	d_R_O_g_#	d_r_o_gu_ent	0.0	0.0	synthetic
 réinfectent	Re5fEkt	réinfecter	VER	VER			sub:pre:3p;	R_e|5|f_E_k_t_#	r_é|in|f_e_c_t_ent	0.0	0.0	synthetic
-clappent	klap	clapper	VER	VER			sub:pre:3p;	k_l_a_p_#	c_l_a_pp_ent	0.0	0.0	synthetic
 récitent	Resit	réciter	VER	VER			sub:pre:3p;	R_e|s_i_t_#	r_é|c_i_t_ent	0.0	0.0	synthetic
 disloquent	dislOk	disloquer	VER	VER			sub:pre:3p;	d_i|s_l_O_k_#	d_i|s_l_o_qu_ent	0.0	0.0	synthetic
 dépitent	depit	dépiter	VER	VER			sub:pre:3p;	d_e|p_i_t_#	d_é|p_i_t_ent	0.0	0.0	synthetic
@@ -45219,7 +45035,6 @@ enfournent	@fuRn	enfourner	VER	VER			sub:pre:3p;	@|f_u_R_n_#	en|f_ou_r_n_ent	0.0
 pirouettent	piRwEt	pirouetter	VER	VER			sub:pre:3p;	p_i|R_w_E_t_#	p_i|r_ou_e_tt_ent	0.0	0.0	synthetic
 tambourinent	t@buRin	tambouriner	VER	VER			sub:pre:3p;	t_@|b_u|R_i_n_#	t_am|b_ou|r_i_n_ent	0.0	0.0	synthetic
 éternisent	etERniz	éterniser	VER	VER			sub:pre:3p;	e|t_E_R|n_i_z_#	é|t_e_r|n_i_s_ent	0.0	0.0	synthetic
-trimbalent	tR5bal	trimbaler	VER	VER			sub:pre:3p;	t_R_5|b_a_l_#	t_r_im|b_a_l_ent	0.0	0.0	synthetic
 déboîtent	debwat	déboîter	VER	VER			sub:pre:3p;	d_e|b_wa_t_#	d_é|b_oî_t_ent	0.0	0.0	synthetic
 bouleversent	bul°vERs	bouleverser	VER	VER			sub:pre:3p;	b_u|l_°|v_E_R_s_#	b_ou|l_e|v_e_r_s_ent	0.0	0.0	synthetic
 zieutent	zj9t	zieuter	VER	VER			sub:pre:3p;	z_j_9_t_#	z_i_eu_t_ent	0.0	0.0	synthetic
@@ -45277,8 +45092,6 @@ dansote	d@sot	dansoter	VER	VER			sub:pre:3s;	d_@|s_o_t_#	d_an|s_ot_e	0.0	0.0	syn
 dansotent	d@sot	dansoter	VER	VER			sub:pre:3p;	d_@|s_o_t_#	d_an|s_ot_ent	0.0	0.0	synthetic
 assimilent	asimil	assimiler	VER	VER			sub:pre:3p;	a|s_i|m_i_l_#	a|ss_i|m_i_l_ent	0.0	0.0	synthetic
 damnent	dan	damner	VER	VER			sub:pre:3p;	d_a_#_n_#	d_a_m_n_ent	0.0	0.0	synthetic
-grelotté	gR°lote	grelotter	VER	VER	m	s	par:pas;	g_R_°|l_o|t_e	g_r_e|l_o|tt_é	0.0	0.0	synthetic
-grelottée	gR°lote	grelotter	VER	VER	f	s	par:pas;	g_R_°|l_o|t_e_#	g_r_e|l_o|tt_é_e	0.0	0.0	synthetic
 repeuplent	R°p9pl	repeupler	VER	VER			sub:pre:3p;	R_°|p_9_p_l_#	r_e|p_eu_p_l_ent	0.0	0.0	synthetic
 ancrent	@kR	ancrer	VER	VER			sub:pre:3p;	@_k_R_#	an_c_r_ent	0.0	0.0	synthetic
 épuisent	ep8iz	épuiser	VER	VER			sub:pre:3p;	e|p_8_i_z_#	é|p_u_i_s_ent	0.0	0.0	synthetic
@@ -45367,7 +45180,6 @@ cuitent	k8it	cuiter	VER	VER			sub:pre:3p;	k_8_i_t_#	c_u_i_t_ent	0.0	0.0	syntheti
 approuvent	apRuv	approuver	VER	VER			sub:pre:3p;	a|p_R_u_v_#	a|pp_r_ou_v_ent	0.0	0.0	synthetic
 culpabilisent	kylpabiliz	culpabiliser	VER	VER			sub:pre:3p;	k_y_l|p_a|b_i|l_i_z_#	c_u_l|p_a|b_i|l_i_s_ent	0.0	0.0	synthetic
 regrimpent	R°gR5p	regrimper	VER	VER			sub:pre:3p;	R_°|g_R_5_p_#	r_e|g_r_im_p_ent	0.0	0.0	synthetic
-pifent	pif	pifer	VER	VER			sub:pre:3p;	p_i_f_#	p_i_f_ent	0.0	0.0	synthetic
 implémentent	5plem@t	implémenter	VER	VER			sub:pre:3p;	5|p_l_e|m_@_t_#	im|p_l_é|m_en_t_ent	0.0	0.0	synthetic
 pannent	pan	panner	VER	VER			sub:pre:3p;	p_a_n_#	p_a_nn_ent	0.0	0.0	synthetic
 vantent	v@t	vanter	VER	VER			sub:pre:3p;	v_@_t_#	v_an_t_ent	0.0	0.0	synthetic
@@ -45398,7 +45210,6 @@ rivent	Riv	river	VER	VER			sub:pre:3p;	R_i_v_#	r_i_v_ent	0.0	0.0	synthetic
 phagocytent	fagosit	phagocyter	VER	VER			sub:pre:3p;	f_a|g_o|s_i_t_#	ph_a|g_o|c_y_t_ent	0.0	0.0	synthetic
 réhydratent	ReidRat	réhydrater	VER	VER			sub:pre:3p;	R_e_#|i|d_R_a_t_#	r_é_h|y|d_r_a_t_ent	0.0	0.0	synthetic
 discontinuent	disk§tiny	discontinuer	VER	VER			sub:pre:3p;	d_i_s|k_§|t_i|n_y_#	d_i_s|c_on|t_i|n_u_ent	0.0	0.0	synthetic
-panent	pan	paner	VER	VER			sub:pre:3p;	p_a_n_#	p_a_n_ent	0.0	0.0	synthetic
 réhabituent	Reabity	réhabituer	VER	VER			sub:pre:3p;	R_e_#|a|b_i|t_y_#	r_é_h|a|b_i|t_u_ent	0.0	0.0	synthetic
 ajointent	aZw5t	ajointer	VER	VER			sub:pre:3p;	a|Z_w5_t_#	a|j_oin_t_ent	0.0	0.0	synthetic
 finalisent	finaliz	finaliser	VER	VER			sub:pre:3p;	f_i|n_a|l_i_z_#	f_i|n_a|l_i_s_ent	0.0	0.0	synthetic
@@ -45954,9 +45765,6 @@ mènes	mEn	mener	VER	VER			sub:pre:2s;	m_E_n_#	m_è_n_es	0.0	0.0	synthetic
 mènent	mEn	mener	VER	VER			sub:pre:3p;	m_E_n_#	m_è_n_ent	0.0	0.0	synthetic
 déjantées	deZ@te	déjanté	ADJ	VER,ADJ	f	p		d_e|Z_@|t_e_#	d_é|j_an|t_é_es	0.0	0.0	synthetic
 paseos	paseo	paseo	NOM	NOM	m	p		p_a|s_e|o_#	p_a|s_é|o_s	0.0	0.0	synthetic
-quincaillères	k5kajER	quincailler	NOM	NOM	f	p		k_5|k_a|j_#_E_R_#	qu_in|c_a|ill_è_r_es	0.0	0.0	synthetic
-évènementielles	even°m@sjEl	évènementiel	ADJ	ADJ	f	p		e|v_e|n_°|m_@|s_j_E_l_#	é|v_è|n_e|m_en|t_i_e_ll_es	0.0	0.0	synthetic
-évènementiels	even°m@sjEl	évènementiel	ADJ	ADJ	m	p		e|v_e|n_°|m_@|s_j_E_l_#	é|v_è|n_e|m_en|t_i_e_l_s	0.0	0.0	synthetic
 décryptent	dekRipt	décrypter	VER	VER			sub:pre:3p;	d_e|k_R_i_p_t_#	d_é|c_r_y_p_t_ent	0.0	0.0	synthetic
 carbonisent	kaRboniz	carboniser	VER	VER			sub:pre:3p;	k_a_R|b_o|n_i_z_#	c_a_r|b_o|n_i_s_ent	0.0	0.0	synthetic
 toquent	tOk	toquer	VER	VER			sub:pre:3p;	t_O_k_#	t_o_qu_ent	0.0	0.0	synthetic
@@ -46208,3 +46016,8 @@ introduirais	5tRod8iRE	introduire	VER	VER			cnd:pre:2s;	5|t_R_o|d_8_i|R_E	in|t_r
 introduiriez	5tRod8iRje	introduire	VER	VER			cnd:pre:2p;	5|t_R_o|d_8_i|R_j_e	in|t_r_o|d_u_i|r_i_ez	0.0	0.0	synthetic
 introduises	5tRod8iz	introduire	VER	VER			sub:pre:2s;	5|t_R_o|d_8_i_z_#	in|t_r_o|d_u_i_s_es	0.0	0.0	synthetic
 clos	klo	clore	VER	VER	m	p	par:pas;	k_l_o_#	c_l_o_s	0.0	0.0	synthetic
+boursouflent	buRsufl	boursoufler	VER	VER			sub:pre:3p;	b_u_R|s_u_f_l_#	b_ou_r|s_ou_f_l_ent	0.0	0.0	synthetic
+interpellent	5tERpEl	interpeller	VER	VER			sub:pre:3p;	5|t_E_R|p_E_l_#	in|t_e_r|p_e_ll_ent	0.0	0.0	synthetic
+persiflent	pERsifl	persifler	VER	VER			sub:pre:3p;	p_E_R|s_i_f_l_#	p_e_r|s_i_f_l_ent	0.0	0.0	synthetic
+cacahuètes	kakawEt	cacahuète	NOM	NOM	f	p		k_a|k_a_#|w_E_t_#	c_a|c_a_h|u_è_t_es	0.0	0.0	synthetic
+summums	s9ma	summum	NOM	NOM	m	p		s_9|m_a	s_u|mm_a	0.0	0.0	synthetic

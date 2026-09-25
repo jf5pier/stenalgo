@@ -96,7 +96,10 @@ fût	fut	circonflexe	False	False	False	True	homograph collision: "fut" is the st
 île	ile	circonflexe	False	False	False	True	already handled by lexique.py's existing spellingVariantLemme entry ("ile" -> "île", opposite direction, frequency-driven -- excluded here to avoid a directional conflict
 mû	mu	circonflexe	True	True	False	False	
 mûre	mure	circonflexe	False	False	False	True	homograph collision: "mure" is a conjugated form of murer ("to wall up")
-soûl	soul	circonflexe	True	True	False	False	
+soûl	soul	circonflexe	True	True	False	False
+soûlard	soulard	circonflexe	True	True	False	False	extends soûl->soul to the noun; user ruling 2026-09-25 (spelling-variant review)
+soûler	souler	circonflexe	True	True	False	False	extends soûl->soul to the verb; user ruling 2026-09-25 (spelling-variant review)
+soûlerie	soulerie	circonflexe	True	True	False	False	extends soûl->soul to the noun; user ruling 2026-09-25 (spelling-variant review)
 sûre	sure	circonflexe	False	False	False	True	documented Académie exception: circumflex is explicitly kept on sûr/sûrs/sûre/sûres because "sure" already means something else (sour/tart)
 allégement	allègement	accent_grave	True	True	False	False	
 allégrement	allègrement	accent_grave	True	True	False	False	
@@ -190,6 +193,11 @@ combatif	combattif	autres_rectifications	False	True	False	False
 combativité	combattivité	autres_rectifications	False	True	False	False	
 cuissot	cuisseau	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
 dessiller	déciller	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
+dessaouler	dessouler	autres_rectifications	True	True	False	False	saoul-family doublet of dessoûler->dessouler; user ruling 2026-09-25 (spelling-variant review)
+saoul	soul	autres_rectifications	True	True	False	False	saoul/soûl are doublet spellings; normalizing both to the reformed "soul" (cf. soûl->soul, circonflexe); user ruling 2026-09-25 (spelling-variant review)
+saoulard	soulard	autres_rectifications	True	True	False	False	saoul-family doublet; user ruling 2026-09-25 (spelling-variant review)
+saouler	souler	autres_rectifications	True	True	False	False	saoul-family doublet of soûler->souler; user ruling 2026-09-25 (spelling-variant review)
+saoulerie	soulerie	autres_rectifications	True	True	False	False	saoul-family doublet; user ruling 2026-09-25 (spelling-variant review)
 dentelière	dentelier	autres_rectifications	False	False	False	False	needs a multi-character edit, not automated by the single-edit ortho-rewrite mechanism
 disaccharide	disaccaride	autres_rectifications	False	False	False	False	neither spelling present in Lexique383 corpus
 dissous	dissout	autres_rectifications	False	False	False	False	handled by the same gram_cat=="VER"-gated mechanism as absous/absout (APPLY_1990_REFORM_ABSOUS_DISSOUS) -- see that row's note. Confirmed minimal/unconditional by OQLF: "dissout, p. p. -- Du verbe dissoudre". Lexique383's separate ADJ-tagged "dissous" row is masculine PLURAL (not singular like absous's ADJ row) -- deliberately left untouched, since neither OQLF nor any source consulted confirms whether the correct reformed plural is "dissouts" or unchanged "dissous".

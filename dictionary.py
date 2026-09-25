@@ -27,6 +27,7 @@ import time
 from copy import deepcopy
 
 from src.grammar import Phoneme, Syllable, SyllableCollection
+from src.spellingvariants import loadSpellingVariantDrops
 from src.word import GramCat, Word
 from typing import Any, Callable
 from src.keyboard import Keyboard, Strokes
@@ -48,6 +49,12 @@ from tqdm import tqdm
 import sys
 
 from util._timing import recordTiming
+
+# Non-canonical spellings of the ACTIVE sets of resources/spellingVariants.tsv,
+# dropped at this single load choke point for LexiqueMixte.tsv AND
+# LexiqueSynthetic.tsv (through which the S2 appenders also read), so stale
+# synthetic rows are invisible and dropped forms cannot be regenerated.
+variantDrops = loadSpellingVariantDrops()
 
 
 def printVerbose(word: str, msg: list[Any]):
@@ -115,6 +122,22 @@ class Dictionary:
         wordByIdentity: dict[tuple[str, str, str, str, str | None, str | None], Word] = {}
         mergeCount = 0
 
+        # Canonical -> lemmes of corpus rows spelled with it (pre-pass over
+        # the same sources the main loop reads): the corpus, not the TSV,
+        # knows that "absous" is a form of lemme "absoudre" (same-paradigm
+        # variant, drops) while "boite" under lemme "boiter" is a different,
+        # kept verb (exempt).
+        carriers: dict[str, set[str]] = {}
+        for wordSource in self.wordSources:
+            if not os.path.exists(wordSource):
+                continue
+            with open(wordSource) as f:
+                for row in csv.DictReader(f, delimiter='\t'):
+                    if row["ortho"] is not None and row["ortho"][0] != "#":
+                        carriers.setdefault(row["ortho"], set()).add(row["lemme"])
+        drops = variantDrops.withCanonicalCarriers(
+            {ortho: frozenset(lemmes) for ortho, lemmes in carriers.items()})
+
         for wordSource in self.wordSources:
             if not os.path.exists(wordSource):
                 continue
@@ -124,7 +147,11 @@ class Dictionary:
                 for corpusWord in tqdm(corpus, desc=f"Reading {wordSource}", unit=" words"):
                     if corpusWord["ortho"] is not None \
                             and corpusWord["ortho"][0] != "#" \
-                            and corpusWord["ortho"] not in excludedWords :
+                            and corpusWord["ortho"] not in excludedWords \
+                            and not drops.isDroppedOrthoRow(
+                                corpusWord["ortho"], corpusWord["lemme"],
+                                corpusWord["cgram"]) \
+                            and not drops.isDroppedLemme(corpusWord["lemme"]):
                         gender = corpusWord["genre"] if corpusWord["genre"] != '' else None
                         number = corpusWord["nombre"] if corpusWord["nombre"] != '' else None
                         infoVerb = corpusWord["infover"] if corpusWord["infover"] != '' else None

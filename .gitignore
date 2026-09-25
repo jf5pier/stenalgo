@@ -34,6 +34,12 @@ env/
 # extracted locally.
 morphalou/
 
+# Raw Google Books French 1-gram shards (util/ngram_data.py download), ~5 GB
+# compressed, never committed. Kept on disk until LexiqueGoogleNgram.tsv and
+# LexiqueGoogleNgramAdditions.tsv are final and committed, then deleted by the
+# manual `python -m util.ngram_data purge`.
+googlebooks-fre-1grams/
+
 # steno-trainer: compiled by `elm make` locally or in CI (deploy-steno-trainer.yml),
 # never committed. public/data/*.json ARE committed -- see steno-trainer/README.md.
 steno-trainer/main.js
