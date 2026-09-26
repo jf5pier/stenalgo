@@ -349,14 +349,58 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
   freq-0 verbs) are unwritable until their regenerated row passes the S2 collision gate.
   Before/after in `scratch/b48-before/`, rebuild log `scratch/b48-rebuild.log`.
 - **Audit the 2% of attested finite verb forms the B2 generator does not reproduce** —
-  `PYTHONPATH=. env/bin/python scratch/b2_backtest.py` regenerates every `LexiqueMixte.tsv` finite
-  VER form the generator can rebuild from its infinitive (13,461 at the B2 fix) and compares
-  phon/`syll_cv`/`orthosyll_cv`: 266 mismatches, grouped by diff (2026-09-24): `e`↔`E` in non-final
-  syllables (~290 incl. reverse, `affaiblira`, `décela`), `o`→`O` in a closed non-final syllable
-  (24, `délogera`), `°`→`E` (13, `appellerais`), `u`↔`w` (18, `évanouira`/`réjouirai` — the lexicon
-  splits both ways within one lemma), `2`/`9`/`°` (≈10, `bleuira`, `pesèrent`), malformed units
-  (3, `oublierions` `ij#`), a dropped `n` (5, `enorgueillir`), and 1-offs. For each group decide
-  lexicon error (attested row inconsistent with its own lemma's other forms or with the spelling)
-  vs. generator gap; write a fix script for the lexicon errors (Lexique383/Mixte, both halves like
-  the other `fix*` scripts), and extend `deriveMidVowelTable`/`normalizeSplicedBreakdown` only for
-  real generator gaps. Rebuild afterwards.
+  GENERATOR SIDE RESOLVED 2026-09-25 (non-final-syllable vowel laxing in
+  `normalizeSplicedBreakdown`/`deriveMidVowelTable`/`_midVowelContexts`, src/verbparadigm.py: the
+  new `nonfinal-closed`/`nonfinal-open` contexts are learned and applied after the boundary
+  re-placement, only the coarse `e`/`o` units are rewritten — a committed `°`/`E`/`O`/`2`/`9` never
+  changes (`devriez` keeps its schwa, `bottèlent` its `O`) — and in the learning the coarse
+  counterpart of a lax winner abstains, as do non-mid nuclei like `wa`; the existing 26 rules were
+  unchanged, 26 added; `util/fixSplicedVerbBreakdowns.py --apply` corrected the 531 stored synthetic
+  rows). Backtest 13,007 → 13,027 exact of 13,269: the `ai`/`ei`/`aî`/`ê`→`E` classes and the
+  closed-syllable `e`→`E`/`o`→`O` ones are gone (`affaiblira`, `vieillira`, `fraîchira`,
+  `portâtes`); the new `E`→`e`/`O`→`o` entries (66) are the generator being finer than coarse
+  attested rows (`aigrirent`), not regressions. Residue, classified per the audit's rule:
+  plain-`e` non-final-open (96, `aguerrira` /ɛ/ vs `descend` /e/) is undecidable from spelling or
+  the coarse infinitive — a within-lemma lexicon inconsistency, fix-script material (upgrade coarse
+  infinitive vowels from the lemma's own committed finite rows); `o` non-final-open (24,
+  `délogera` O vs `posera` o) is LexiqueInfra-internal inconsistency — no rule learnable at 89.5%
+  share; `u`↔`w` (18) splits within lemmas (`évanouir` w vs `réjouir` u) — lexicon errors;
+  `°`↔`E` (6, `jetterez`) needs rewriting a committed schwa in doubling stems — left open;
+  `2`/`9`/`°` (≈10), the dropped `n` (5, `enorgueillir`), the malformed `ij#` (3,
+  `oublierions`), and the boundary/1-offs stay as noise or small splice bugs. Rebuild verified:
+  S2 converged appending 0 rows; final collisions 0/0/0; phonetic theory 446 spellings' stroke
+  sets changed, none shorter/longer/gone/new; Plover 167,719 → 167,708 (−478/+467, 6 re-pointed),
+  0 spellings lost or gained; definitions.json regrouped (−4 net), practice-words 3,784 rows carry
+  the corrected chords, practice-sentences and keyboard-layout byte-identical; lemma-homophone
+  clusters 6,551 → 6,555, overflow 8.32% → 8.31%. Before/after `scratch/b2r-before/`, rebuild log
+  `scratch/b2r-rebuild.log`, ambiguity log `scratch/b2r-ambiguity.log`, classifier
+  `scratch/b2_audit.py`. Follow-ups: the coarse-infinitive vowel upgrade script and the `u`↔`w`
+  normalization script (both lexicon halves, like the other `fix*` scripts).
+- **Close the B2 residue the audit classified but left open** — the continuation of the entry above,
+  now that the generator side is done:
+  - the 96 plain-`e` non-final-open rows (`aguerrira` /E/ vs `descend` /e/, undecidable from the
+    coarse infinitive alone): try the French doubling heuristic — an `e` before a doubled consonant
+    reads E (`aguerrir` rr, `assujettir` tt, `pressentir` ss), counting `sc` as a double `s`. It
+    needs the orthographic unit AFTER the vowel, so the mid-vowel table key would grow a
+    following-unit dimension (MidVowelKey in src/verbparadigm.py), or the same signal feeds the
+    lexicon-side coarse-infinitive upgrade script. Known counterexamples to handle: the `es-`/
+    `eff-` prefix vowels stay tense despite the doubling (`essuyer` /e.sy.je/, `effacer` /e.fa.se/
+    — both attested coarse `e`). Backtest the split before committing (`scratch/b2_backtest.py`,
+    `scratch/b2_doubling_probe.py`); same heuristic may also fix the 6 `jetterez` rows (the
+    doubled-consonant stem marks the E the committed `°` hides).
+  - `u`↔`w` (18 rows): LexiqueInfra splits within lemmas (`évanouir` attests `w_i`, `réjouir`
+    `u|i`; phonologically `w` is right for both) — a fix script normalizing the `u`-attesting rows
+    in both lexicon halves.
+  - the two small splice bugs: the dropped `n` in `enorgueillir`'s cut (5 rows) and the malformed
+    `ij#` unit in `oublierions`/`publierions`/`supplieriez` (3 rows).
+  - accepted noise, no action: `o` non-final-open (Infra contradicts itself, `posera` `o` vs
+    `délogera` `O`), `2`/`9`/`°` variation (~10 rows), the boundary 1-offs.
+- **Pluvier-style TAO prefix/suffix shortcut scan** — go through Pluvier's dictionary rules
+  (docs/PRIOR_ART.md; the TAO strokes that emit a whole multi-syllable prefix or suffix from
+  one special keystroke), and for each rule measure the payoff in OUR lexicon: the sum of
+  word frequencies of Words whose current stroke sequence would be shortened by having that
+  shortcut stroke (a positively-affected word is one whose orthography starts/ends with the
+  rule's target affix and whose stroke count would drop). Store the scored rules in
+  descending order of usefulness in a tracked scratch file (e.g.
+  `scratch/pluvier-affix-shortcuts.tsv`) for later human evaluation — do NOT wire any of
+  them into the theory; this is measurement only.

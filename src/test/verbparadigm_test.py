@@ -31,6 +31,7 @@ from src.verbparadigm import (
     parseConjugationTemplates,
     spliceParticiplePhon,
 )
+from src.verbparadigm import NON_FINAL_CLOSED, NON_FINAL_OPEN
 from src.word import GramCat, Word
 
 
@@ -684,6 +685,36 @@ class TestNormalizeSplicedBreakdown:
             "kan", "k_a_n_#", "c_a|n_n_es"
         )
 
+    def test_nonfinal_open_syllable_laxes_coarse_vowel(self):
+        # affaiblir /afebliR/ cut to affaiblira /afEblira/: "ai" in a non-final open
+        # syllable takes the lax E.
+        vowels = {("ai", NON_FINAL_OPEN): "E"}
+        assert normalizeSplicedBreakdown("afebliRa", "a|f_e|b_l_i|R_a", "a|ff_ai|b_l_i|r_a", {}, vowels) == (
+            "afEbliRa", "a|f_E|b_l_i|R_a", "a|ff_ai|b_l_i|r_a"
+        )
+
+    def test_nonfinal_closed_syllable_laxes_coarse_vowel(self):
+        # aguerrir /ageriR/ cut to a form closing the syllable: "e" -> E.
+        vowels = {("e", NON_FINAL_CLOSED): "E"}
+        assert normalizeSplicedBreakdown("ageRiR", "a|g_e_R|i_R", "a|gu_e_rr|i_r", _SPLITS, vowels) == (
+            "agERiR", "a|g_E_R|i_R", "a|gu_e_rr|i_r"
+        )
+
+    def test_nonfinal_rule_never_rewrites_the_schwa(self):
+        # The schwa is a different phoneme, not a coarse quality of the same one
+        # (devriez /d°vRje/ keeps its ° where affaiblira gets E).
+        vowels = {("e", NON_FINAL_CLOSED): "E"}
+        assert normalizeSplicedBreakdown("s°kRe", "s_°_k|R_e", "s_e_c|r_é", _SPLITS, vowels) == (
+            "s°kRe", "s_°_k|R_e", "s_e_c|r_é"
+        )
+
+    def test_nonfinal_rule_never_rewrites_a_committed_vowel(self):
+        # bottèlent /bOtEl/: the O from the infinitive is committed, not coarse.
+        vowels = {("o", NON_FINAL_CLOSED): "O"}
+        assert normalizeSplicedBreakdown("bOtEl", "b_O|t_e_l_#", "b_o|t_è_l_ent", _SPLITS, vowels) == (
+            "bOtEl", "b_O|t_e_l_#", "b_o|t_è_l_ent"
+        )
+
 
 class TestDeriveSyllableSplitTable:
 
@@ -734,6 +765,27 @@ class TestDeriveMidVowelTable:
     def test_rare_spelling_is_dropped(self):
         words = [_make_corpus_word("donne", "dOn", "d_O_n_#", "d_o_nn_e")] * 19
         assert deriveMidVowelTable(words) == {}
+
+    def test_nonfinal_closed_and_open_contexts_are_learned(self):
+        # affaiblira /afEblira/: "ai" in a non-final open syllable.
+        words = [_make_corpus_word("affaiblira", "afEbliRa", "a|f_E|b_l_i|R_a", "a|ff_ai|b_l_i|r_a")] * 20
+        table = deriveMidVowelTable(words)
+        assert table[("ai", NON_FINAL_OPEN)] == "E"
+
+    def test_coarse_counterpart_abstains_in_nonfinal_keys(self):
+        # 20 committed E rows against 15 coarse "e" rows: the coarse ones never
+        # committed to a quality, so they cannot outvote the committed reading.
+        committed = [_make_corpus_word("affaiblira", "afEbliRa", "a|f_E|b_l_i|R_a", "a|ff_ai|b_l_i|r_a")] * 20
+        coarse = [_make_corpus_word("aigrit", "agRi", "a|g_e|R_i", "ai|g_r_i_t")] * 15
+        table = deriveMidVowelTable(committed + coarse)
+        assert table[("ai", NON_FINAL_OPEN)] == "E"
+
+    def test_nonfinal_open_plain_e_stays_schwa_territory(self):
+        # "e" in a non-final open syllable is the schwa's home (26k corpus rows); the
+        # lax readings never let one quality settle, so no rule is learned.
+        words = ([_make_corpus_word("menace", "m°nas", "m_°|n_a_s", "m_e|n_a_ce")] * 30
+                 + [_make_corpus_word("aguerrit", "agERi", "a|g_E|R_i", "a|gu_e|rr_i")] * 5)
+        assert ("e", NON_FINAL_OPEN) not in deriveMidVowelTable(words)
 
 
 class TestCrossLemmaFeatureSetCollisions:

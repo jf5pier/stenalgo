@@ -140604,30 +140604,6 @@
  },
  {
   "ortho": "saisis",
-  "before": "tu",
-  "after": "",
-  "label": "indicatif passé, 2e sg.",
-  "phonology": "se.zi",
-  "steno": "se/twi/-dt",
-  "strokes": [
-   [
-    3,
-    14
-   ],
-   [
-    7,
-    9,
-    13
-   ],
-   [
-    19,
-    20
-   ]
-  ],
-  "frequency": 8.34
- },
- {
-  "ortho": "saisis",
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
@@ -232260,6 +232236,31 @@
    ],
    [
     20
+   ]
+  ],
+  "frequency": 4.22
+ },
+ {
+  "ortho": "mourrais",
+  "before": "tu",
+  "after": "",
+  "label": "conditionnel présent, 2e sg.",
+  "phonology": "mu.RE",
+  "steno": "m@e/Rie/-dl",
+  "strokes": [
+   [
+    6,
+    11,
+    14
+   ],
+   [
+    8,
+    13,
+    14
+   ],
+   [
+    19,
+    23
    ]
   ],
   "frequency": 4.22
