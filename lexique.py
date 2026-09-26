@@ -440,8 +440,12 @@ APPLY_1990_REFORM_ELER_ETER: bool = True
 
 def loadElerEterQualifyingVerbs(verbisteXmlPath: str) -> dict[str, str]:
     """
-    Return {lemme: targetConsonant} for every -eler/-eter verb Verbiste classifies under the
-    doubled-consonant template (app:eler or j:eter), excluding the reform's named exceptions.
+    Return {lemme: targetConsonant} for every -eler/-eter verb Verbiste classifies under a
+    doubled-consonant template (app:eler or j:eter) or under the rectified-è one (p:eler or
+    ach:eter, where util/fixRectifiedEConjugations.py remapped the verbs whose attested forms
+    use the è convention), excluding the reform's named exceptions. The rewrite only fires on a
+    form that still carries the doubled prefix, so the regular è verbs (acheter, peler) are
+    untouched by being listed; the remapped ones keep their Lexique383 doubled rows regularized.
     """
     qualifying: dict[str, str] = {}
     root = ET.parse(verbisteXmlPath).getroot()
@@ -453,9 +457,9 @@ def loadElerEterQualifyingVerbs(verbisteXmlPath: str) -> dict[str, str]:
         lemme, template = infinitiveElement.text, templateElement.text
         if not lemme or not template:
             continue
-        if template == "app:eler" and lemme not in APPELER_EXCEPTIONS:
+        if template in ("app:eler", "p:eler") and lemme not in APPELER_EXCEPTIONS:
             qualifying[lemme] = "l"
-        elif template == "j:eter" and lemme not in JETER_FAMILY_EXCEPTIONS:
+        elif template in ("j:eter", "ach:eter") and lemme not in JETER_FAMILY_EXCEPTIONS:
             qualifying[lemme] = "t"
     return qualifying
 
