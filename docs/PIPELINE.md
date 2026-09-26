@@ -311,7 +311,7 @@ Transformation and result, one bullet per call (rows with `isException` are alwa
 - **Load 1990-reform plural rewrites — loadReform1990PluralRewrites (S1.4)** :329, bound
   :374-377 — whole-word `{oldPlural: newPlural}`: 33 entries (`barmen→barmans`, `lieder→lieds`).
 - **Load -eler/-eter qualifying verbs — loadElerEterQualifyingVerbs (S1.5)** :423, bound
-  :481-484 — Verbiste template `app:eler` → `{lemme: "l"}`, `j:eter` → `{lemme: "t"}`, minus
+  :481-484 — Verbiste template `app:eler` → `{lemme: "l"}`, `j:eter` → `{lemme: "t"}` (and, since 2026-09-26, the rectified-è templates `p:eler`/`ach:eter` too, so the remapped verbs' doubled Lexique383 rows are still regularized), minus
   `APPELER_EXCEPTIONS` (:397) and `JETER_FAMILY_EXCEPTIONS` (:398, jeter + 7 compounds): 124
   verbs; plus `ELER_ETER_DERIVED_NOUN_VERBS` (:408), 9 `-ellement`/`-ettement` nouns.
 - **Build one-off reform rules — computeSingleEditRule (S1.6)** :507, :536-537 — three rules:
@@ -485,6 +485,8 @@ later companion script.
 | fixSourdreDefectiveGaps | conjugations-fr.xml, Lexique383, Mixte | yes | yes | sourdre slots |
 | fixSpuriousDuplicateVerbRows | Lexique383, Mixte | yes | yes | duplicate VER/AUX rows |
 | fixSplicedVerbBreakdowns | Synthetic (in place) | no | n/a | spliced finite forms re-normalized, item B2 (S2.4) |
+| fixOuGlideConsistency | Lexique383, Infra, Mixte, Synthetic | yes | yes | `ou`+vowel /u/ hiatus → glide /w/ in the 25 lemmas that mix both (jouez, évanouir…) |
+| fixMalformedSyntheticSplices | Synthetic (in place) | no | n/a | repairs empty/fused `u#` units, lost R (`kluj§`), lost `n` unit; deletes the rest (S2.4) |
 | fixParticipleGenderPhon | Synthetic (in place) | no | n/a | synthetic participles' feminine-stem consonant added/dropped, item B45 (S2.4) |
 | fixXlfnSingleCorruption | Infra | no | yes | `_xlfn.SINGLE(...)` (Excel) |
 | completeVerbParadigms | Synthetic (append) | no | n/a | Verb paradigm completion (S2.1) |
