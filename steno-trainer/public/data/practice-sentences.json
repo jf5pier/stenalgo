@@ -9093,8 +9093,8 @@
  },
  {
   "text": "Vous jouez souvent.",
-  "phonology": "vu Zu.e su.v@",
-  "steno": "v@e vt@e/e s@e/v@",
+  "phonology": "vu Zwe su.v@",
+  "steno": "v@e vtwe/-d s@e/v@",
   "strokes": [
    [
     5,
@@ -9104,11 +9104,11 @@
    [
     5,
     7,
-    11,
+    9,
     14
    ],
    [
-    14
+    19
    ],
    [
     3,
@@ -9130,7 +9130,7 @@
    {
     "text": "jouez",
     "label": "indicatif présent, 2e pl.",
-    "steno": "vt@e/e",
+    "steno": "vtwe/-d",
     "strokeCount": 2
    },
    {

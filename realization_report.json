@@ -77,7 +77,7 @@
    "markers": [
     "f"
    ],
-   "affectedWords": 15286,
+   "affectedWords": 15292,
    "chosenKeys": [
     16
    ],
@@ -188,7 +188,7 @@
     "passé",
     "pers_3"
    ],
-   "affectedWords": 11967,
+   "affectedWords": 11979,
    "chosenKeys": [
     20
    ],
@@ -285,7 +285,7 @@
     "imparfait",
     "subjonctif"
    ],
-   "affectedWords": 5795,
+   "affectedWords": 5797,
    "chosenKeys": [
     21
    ],
@@ -364,7 +364,7 @@
     "impératif",
     "pers_1"
    ],
-   "affectedWords": 7455,
+   "affectedWords": 7488,
    "chosenKeys": [
     18
    ],
@@ -449,7 +449,7 @@
     "nbr_p",
     "p"
    ],
-   "affectedWords": 50252,
+   "affectedWords": 50265,
    "chosenKeys": [
     17
    ],
@@ -564,7 +564,7 @@
    "markers": [
     "pers_2"
    ],
-   "affectedWords": 7819,
+   "affectedWords": 7816,
    "chosenKeys": [
     19
    ],
@@ -5076,6 +5076,10 @@
    [
     "paysagés",
     "paysagers"
+   ],
+   [
+    "nouas",
+    "noies"
    ],
    [
     "percées",
