@@ -58551,18 +58551,38 @@
   "ortho": "jouez",
   "before": "vous",
   "after": "",
-  "label": "impératif présent, 2e pl. · indicatif présent, 2e pl.",
-  "phonology": "Zu.e",
-  "steno": "vt@e/e",
+  "label": "indicatif présent, 2e pl.",
+  "phonology": "Zwe",
+  "steno": "vtwe/-d",
   "strokes": [
    [
     5,
     7,
-    11,
+    9,
     14
    ],
    [
+    19
+   ]
+  ],
+  "frequency": 24.66
+ },
+ {
+  "ortho": "jouez",
+  "before": "",
+  "after": "!",
+  "label": "impératif présent, 2e pl.",
+  "phonology": "Zwe",
+  "steno": "vtwe/-k",
+  "strokes": [
+   [
+    5,
+    7,
+    9,
     14
+   ],
+   [
+    18
    ]
   ],
   "frequency": 24.66
@@ -225710,8 +225730,8 @@
   "before": "",
   "after": "",
   "label": "infinitif",
-  "phonology": "e.va.nu.iR",
-  "steno": "e/va/mR@e/iR",
+  "phonology": "e.va.nwiR",
+  "steno": "e/va/mRwiR",
   "strokes": [
    [
     14
@@ -225723,10 +225743,7 @@
    [
     6,
     8,
-    11,
-    14
-   ],
-   [
+    9,
     13,
     21
    ]
@@ -232236,31 +232253,6 @@
    ],
    [
     20
-   ]
-  ],
-  "frequency": 4.22
- },
- {
-  "ortho": "mourrais",
-  "before": "tu",
-  "after": "",
-  "label": "conditionnel présent, 2e sg.",
-  "phonology": "mu.RE",
-  "steno": "m@e/Rie/-dl",
-  "strokes": [
-   [
-    6,
-    11,
-    14
-   ],
-   [
-    8,
-    13,
-    14
-   ],
-   [
-    19,
-    23
    ]
   ],
   "frequency": 4.22

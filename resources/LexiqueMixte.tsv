@@ -4805,7 +4805,7 @@ amadouant	amadw@	amadouer	VER	VER			par:pre;	a|m_a|d_w_@	a|m_a|d_ou_ant	0.14	0.0
 amadoue	amadu	amadouer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	a|m_a|d_u_#	a|m_a|d_ou_e	0.07	0.22
 amadouer	amadwe	amadouer	VER	VER			inf;	a|m_a|d_w_e	a|m_a|d_ou_er	2.7	1.01
 amadoueras	amaduRa	amadouer	VER	VER			ind:fut:2s;	a|m_a|d_u_#|R_a	a|m_a|d_ou_e|r_as	0.0	0.01
-amadouez	amadue	amadouer	VER	VER			ind:pre:2p;	a|m_a|d_u|e	a|m_a|d_ou|ez	0.0	0.01
+amadouez	amadwe	amadouer	VER	VER			ind:pre:2p;	a|m_a|d_w_e	a|m_a|d_ou_ez	0.0	0.01
 amadoué	amadwe	amadouer	VER	VER	m	s	par:pas;	a|m_a|d_w_e	a|m_a|d_ou_é	0.27	0.23
 amaigri	amegRi	amaigrir	VER	ADJ,VER	m	s	par:pas;	a|m_e|g_R_i	a|m_ai|g_r_i	0.54	0.03
 amaigri	amegRi	amaigri	ADJ	ADJ,VER	m	s		a|m_e|g_R_i	a|m_ai|g_r_i	1.08	0.02
@@ -11150,7 +11150,7 @@ avoueriez	avuRje	avouer	VER	VER			cnd:pre:2p;	a|v_u_#|R_j_e	a|v_ou_e|r_i_ez	0.07
 avouerions	avuRj§	avouer	VER	VER			cnd:pre:1p;	a|v_u_#|R_j_§	a|v_ou_e|r_i_ons	0.07	0.0
 avoueront	avuR§	avouer	VER	VER			ind:fut:3p;	a|v_u_#|R_§	a|v_ou_e|r_ont	0.07	0.01
 avoues	avu	avouer	VER	VER			ind:pre:2s;	a|v_u_#	a|v_ou_es	0.68	1.23
-avouez	avue	avouer	VER	VER			imp:pre:2p;ind:pre:2p;	a|v_u|e	a|v_ou|ez	3.72	4.07
+avouez	avwe	avouer	VER	VER			imp:pre:2p;ind:pre:2p;	a|v_w_e	a|v_ou_ez	3.72	4.07
 avouiez	avuje	avouer	VER	VER			ind:imp:2p;	a|v_u|j_e	a|v_ou|i_ez	0.07	0.03
 avouions	avuj§	avouer	VER	VER			ind:imp:1p;	a|v_u|j_§	a|v_ou|i_ons	0.07	0.0
 avouons	avw§	avouer	VER	VER			imp:pre:1p;ind:pre:1p;	a|v_w_§	a|v_ou_ons	1.42	0.39
@@ -11527,7 +11527,7 @@ bafoue	bafu	bafouer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	b_a|f_u_#	b_a|f_
 bafouent	bafu	bafouer	VER	VER			ind:pre:3p;	b_a|f_u_#	b_a|f_ou_ent	0.14	0.17
 bafouer	bafwe	bafouer	VER	VER			inf;	b_a|f_w_e	b_a|f_ou_er	0.68	0.54
 bafoues	bafu	bafouer	VER	VER			ind:pre:2s;	b_a|f_u_#	b_a|f_ou_es	0.14	0.25
-bafouez	bafue	bafouer	VER	VER			imp:pre:2p;ind:pre:2p;	b_a|f_u|e	b_a|f_ou|ez	0.0	0.32
+bafouez	bafwe	bafouer	VER	VER			imp:pre:2p;ind:pre:2p;	b_a|f_w_e	b_a|f_ou_ez	0.0	0.32
 bafouilla	bafuja	bafouiller	VER	VER			ind:pas:3s;	b_a|f_u|j_a	b_a|f_ou|ill_a	2.23	0.01
 bafouillage	bafujaZ	bafouillage	NOM	NOM	m	s		b_a|f_u|j_a_Z	b_a|f_ou|ill_a_ge	0.27	0.01
 bafouillages	bafujaZ	bafouillage	NOM	NOM	m	p		b_a|f_u|j_a_Z_#	b_a|f_ou|ill_a_g_es	0.2	0.0
@@ -14155,8 +14155,8 @@ bivouaquait	bivwakE	bivouaquer	VER	VER			ind:imp:3s;	b_i|v_w_a|k_E	b_i|v_ou_a|qu
 bivouaque	bivwak	bivouaquer	VER	VER			ind:pre:3s;	b_i|v_w_a_k_#	b_i|v_ou_a_qu_e	0.0	0.25
 bivouaquent	bivwak	bivouaquer	VER	VER			ind:pre:3p;	b_i|v_w_a_k_#	b_i|v_ou_a_qu_ent	0.2	0.11
 bivouaquer	bivwake	bivouaquer	VER	VER			inf;	b_i|v_w_a|k_e	b_i|v_ou_a|qu_er	0.0	0.09
-bivouaquerons	bivuak°R§	bivouaquer	VER	VER			ind:fut:1p;	b_i|v_u|a|k_°|R_§	b_i|v_ou|a|qu_e|r_ons	0.0	0.16
-bivouaquons	bivuak§	bivouaquer	VER	VER			imp:pre:1p;	b_i|v_u|a|k_§	b_i|v_ou|a|qu_ons	0.0	0.02
+bivouaquerons	bivwak°R§	bivouaquer	VER	VER			ind:fut:1p;	b_i|v_w_a|k_°|R_§	b_i|v_ou_a|qu_e|r_ons	0.0	0.16
+bivouaquons	bivwak§	bivouaquer	VER	VER			imp:pre:1p;	b_i|v_w_a|k_§	b_i|v_ou_a|qu_ons	0.0	0.02
 bivouaqué	bivwake	bivouaquer	VER	VER	m	s	par:pas;	b_i|v_w_a|k_e	b_i|v_ou_a|qu_é	0.07	0.13
 bivouaquée	bivwake	bivouaquer	VER	VER	f	s	par:pas;	b_i|v_w_a|k_e_#	b_i|v_ou_a|qu_é_e	0.07	0.0
 bizarde	bizaRd	bizarde	ADJ	ADJ	f	s		b_i|z_a_R_d_#	b_i|z_a_r_d_e	0.27	0.0
@@ -40701,8 +40701,8 @@ déjouer	deZwe	déjouer	VER	VER			inf;	d_e|Z_w_e	d_é|j_ou_er	2.36	1.8
 déjouerai	deZuRe	déjouer	VER	VER			ind:fut:1s;	d_e|Z_u_#|R_e	d_é|j_ou_e|r_ai	0.0	0.02
 déjouerez	deZuRe	déjouer	VER	VER			ind:fut:2p;	d_e|Z_u_#|R_e	d_é|j_ou_e|r_ez	0.0	0.01
 déjouerions	deZuRj§	déjouer	VER	VER			cnd:pre:1p;	d_e|Z_u_#|R_j_§	d_é|j_ou_e|r_i_ons	0.07	0.0
-déjouez	deZue	déjouer	VER	VER			imp:pre:2p;ind:pre:2p;	d_e|Z_u|e	d_é|j_ou|ez	0.07	0.01
-déjouons	deZu§	déjouer	VER	VER			imp:pre:1p;	d_e|Z_u|§	d_é|j_ou|ons	0.0	0.1
+déjouez	deZwe	déjouer	VER	VER			imp:pre:2p;ind:pre:2p;	d_e|Z_w_e	d_é|j_ou_ez	0.07	0.01
+déjouons	deZw§	déjouer	VER	VER			imp:pre:1p;	d_e|Z_w_§	d_é|j_ou_ons	0.0	0.1
 déjoué	deZwe	déjouer	VER	VER	m	s	par:pas;	d_e|Z_w_e	d_é|j_ou_é	0.61	0.99
 déjouée	deZwe	déjouer	VER	VER	f	s	par:pas;	d_e|Z_w_e_#	d_é|j_ou_é_e	0.2	0.03
 déjouées	deZwe	déjouer	VER	VER	f	p	par:pas;	d_e|Z_w_e_#	d_é|j_ou_é_es	0.2	0.0
@@ -43102,7 +43102,7 @@ désavouent	dezavu	désavouer	VER	VER			ind:pre:3p;	d_e|z_a|v_u_#	d_é|s_a|v_ou_
 désavouer	dezavwe	désavouer	VER	VER			inf;	d_e|z_a|v_w_e	d_é|s_a|v_ou_er	0.74	0.2
 désavoueraient	dezavuRE	désavouer	VER	VER			cnd:pre:3p;	d_e|z_a|v_u_#|R_E	d_é|s_a|v_ou_e|r_aient	0.14	0.0
 désavouerons	dezavuR§	désavouer	VER	VER			ind:fut:1p;	d_e|z_a|v_u_#|R_§	d_é|s_a|v_ou_e|r_ons	0.14	0.0
-désavouez	dezavue	désavouer	VER	VER			imp:pre:2p;ind:pre:2p;	d_e|z_a|v_u|e	d_é|s_a|v_ou|ez	0.07	0.01
+désavouez	dezavwe	désavouer	VER	VER			imp:pre:2p;ind:pre:2p;	d_e|z_a|v_w_e	d_é|s_a|v_ou_ez	0.07	0.01
 désavoué	dezavwe	désavouer	VER	VER	m	s	par:pas;	d_e|z_a|v_w_e	d_é|s_a|v_ou_é	0.68	0.22
 désavouée	dezavwe	désavouer	VER	VER	f	s	par:pas;	d_e|z_a|v_w_e_#	d_é|s_a|v_ou_é_e	0.34	0.03
 désavoués	dezavwe	désavouer	VER	VER	m	p	par:pas;	d_e|z_a|v_w_e_#	d_é|s_a|v_ou_é_s	0.2	0.01
@@ -44641,7 +44641,7 @@ dévouer	devwe	dévouer	VER	VER			inf;	d_e|v_w_e	d_é|v_ou_er	1.55	0.38
 dévouera	devuRa	dévouer	VER	VER			ind:fut:3s;	d_e|v_u_#|R_a	d_é|v_ou_e|r_a	0.07	0.02
 dévouerais	devuRE	dévouer	VER	VER			cnd:pre:2s;	d_e|v_u_#|R_E	d_é|v_ou_e|r_ais	0.0	0.01
 dévoues	devu	dévouer	VER	VER			ind:pre:2s;	d_e|v_u_#	d_é|v_ou_es	0.07	0.04
-dévouez	devue	dévouer	VER	VER			imp:pre:2p;	d_e|v_u|e	d_é|v_ou|ez	0.0	0.14
+dévouez	devwe	dévouer	VER	VER			imp:pre:2p;	d_e|v_w_e	d_é|v_ou_ez	0.0	0.14
 dévoué	devwe	dévoué	ADJ	VER,ADJ	m	s		d_e|v_w_e	d_é|v_ou_é	1.69	2.6
 dévoué	devwe	dévouer	VER	VER,ADJ	m	s	par:pas;	d_e|v_w_e	d_é|v_ou_é	1.15	1.96
 dévouée	devwe	dévoué	ADJ	VER,ADJ	f	s		d_e|v_w_e_#	d_é|v_ou_é_e	1.08	1.28
@@ -55692,7 +55692,7 @@ fouetterai	fwEt°Re	fouetter	VER	VER			ind:fut:1s;	f_w_E|t_°|R_e	f_ou_e|tt_e|r_
 fouetterait	fwEt°RE	fouetter	VER	VER			cnd:pre:3s;	f_w_E|t_°|R_E	f_ou_e|tt_e|r_ait	0.07	0.03
 fouetteront	fwEt°R§	fouetter	VER	VER			ind:fut:3p;	f_w_E|t_°|R_§	f_ou_e|tt_e|r_ont	0.07	0.02
 fouettes	fwEt	fouetter	VER	VER			ind:pre:2s;	f_w_E_t_#	f_ou_e_tt_es	0.07	0.12
-fouetteur	fuEt9R	fouetteur	NOM	NOM	m	s		f_u|E|t_9_R	f_ou|e|tt_eu_r	0.0	0.02
+fouetteur	fwEt9R	fouetteur	NOM	NOM	m	s		f_w_E|t_9_R	f_ou_e|tt_eu_r	0.0	0.02
 fouetteurs	fwEt9R	fouetteur	ADJ	ADJ,NOM	m	p		f_w_E|t_9_R_#	f_ou_e|tt_eu_r_s	0.0	0.14
 fouetteurs	fwEt9R	fouetteur	NOM	ADJ,NOM	m	p		f_w_E|t_9_R_#	f_ou_e|tt_eu_r_s	0.07	0.14
 fouetteuse	fwEt2z	fouetteur	NOM	NOM	f	s		f_w_E|t_2_z_#	f_ou_e|tt_eu_s_e	0.34	0.0
@@ -71426,7 +71426,7 @@ joueuse	Zw2z	joueur	NOM	ADJ,NOM	f	s		Z_w_2_z_#	j_ou_eu_s_e	0.74	1.15
 joueuse	Zw2z	joueur	ADJ	ADJ,NOM	f	s		Z_w_2_z_#	j_ou_eu_s_e	0.74	0.25
 joueuses	Zw2z	joueur	NOM	ADJ,NOM	f	p		Z_w_2_z_#	j_ou_eu_s_es	0.54	0.14
 joueuses	Zw2z	joueur	ADJ	ADJ,NOM	f	p		Z_w_2_z_#	j_ou_eu_s_es	0.54	0.01
-jouez	Zue	jouer	VER	VER			imp:pre:2p;ind:pre:2p;	Z_u|e	j_ou|ez	3.18	24.66
+jouez	Zwe	jouer	VER	VER			imp:pre:2p;ind:pre:2p;	Z_w_e	j_ou_ez	3.18	24.66
 joufflu	Zufly	joufflu	NOM	ADJ,NOM	m	s		Z_u|f_l_y	j_ou|ff_l_u	0.2	0.46
 joufflu	Zufly	joufflu	ADJ	ADJ,NOM	m	s		Z_u|f_l_y	j_ou|ff_l_u	1.42	0.12
 joufflue	Zufly	joufflu	ADJ	ADJ	f	s		Z_u|f_l_y_#	j_ou|ff_l_u_e	0.34	0.16
@@ -74571,7 +74571,7 @@ loues	lu	louer	VER	VER			ind:pre:2s;	l_u_#	l_ou_es	0.07	0.58
 loueur	lw9R	loueur	NOM	NOM	m	s		l_w_9_R	l_ou_eu_r	1.49	0.41
 loueurs	lw9R	loueur	NOM	NOM	m	p		l_w_9_R_#	l_ou_eu_r_s	0.07	0.23
 loueuse	lw2z	loueur	NOM	NOM	f	s		l_w_2_z_#	l_ou_eu_s_e	0.07	0.01
-louez	lue	louer	VER	VER			imp:pre:2p;ind:pre:2p;	l_u|e	l_ou|ez	0.2	1.96
+louez	lwe	louer	VER	VER			imp:pre:2p;ind:pre:2p;	l_w_e	l_ou_ez	0.2	1.96
 louf	luf	louf	ADJ	ADJ	m	s		l_u_f	l_ou_f	1.55	0.47
 loufer	lufe	loufer	VER	VER			inf;	l_u|f_e	l_ou|f_er	0.07	0.0
 loufes	luf	loufer	VER	VER			ind:pre:2s;	l_u_f_#	l_ou_f_es	0.14	0.0
@@ -83836,7 +83836,7 @@ nouaient	nwE	nouer	VER	VER			ind:imp:3p;	n_w_E	n_ou_aient	1.49	0.02
 nouais	nwE	nouer	VER	VER			ind:imp:1s;	n_w_E	n_ou_ais	0.27	0.0
 nouait	nwE	nouer	VER	VER			ind:imp:3s;	n_w_E	n_ou_ait	3.85	0.03
 nouant	nw@	nouer	VER	VER			par:pre;	n_w_@	n_ou_ant	1.01	0.01
-nouas	nua	nouer	VER	VER			ind:pas:2s;	n_u|a	n_ou|as	0.0	0.01
+nouas	nwa	nouer	VER	VER			ind:pas:2s;	n_w_a	n_ou_as	0.0	0.01
 nouba	nuba	nouba	NOM	NOM	f	s		n_u|b_a	n_ou|b_a	0.74	0.95
 noubas	nuba	nouba	NOM	NOM	f	p		n_u|b_a_#	n_ou|b_a_s	0.14	0.04
 noue	nu	nouer	VER	NOM,VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	n_u_#	n_ou_e	1.62	0.52
@@ -83851,7 +83851,7 @@ noueront	nuR§	nouer	VER	VER			ind:fut:3p;	n_u_#|R_§	n_ou_e|r_ont	0.07	0.0
 noueuse	nw2z	noueux	ADJ	ADJ	f	s		n_w_2_z_#	n_ou_eu_s_e	0.74	0.0
 noueuses	nw2z	noueux	ADJ	ADJ	f	p		n_w_2_z_#	n_ou_eu_s_es	1.62	0.0
 noueux	nw2	noueux	ADJ	ADJ	m			n_w_2_#	n_ou_eu_x	2.77	0.22
-nouez	nue	nouer	VER	VER			imp:pre:2p;ind:pre:2p;	n_u|e	n_ou|ez	0.0	0.18
+nouez	nwe	nouer	VER	VER			imp:pre:2p;ind:pre:2p;	n_w_e	n_ou_ez	0.0	0.18
 nougat	nuga	nougat	NOM	NOM	m	s		n_u|g_a_#	n_ou|g_a_t	1.49	0.89
 nougatine	nugatin	nougatine	NOM	NOM	f	s		n_u|g_a|t_i_n_#	n_ou|g_a|t_i_n_e	0.41	0.03
 nougatines	nugatin	nougatine	NOM	NOM	f	p		n_u|g_a|t_i_n_#	n_ou|g_a|t_i_n_es	0.07	0.01
@@ -86885,7 +86885,7 @@ ouïe	wi	ouïr	VER	NOM,VER	f	s	par:pas;	w_i_#	ou_ï_e	0.41	1.0
 ouïes	wi	ouïe	NOM	NOM	f	p		w_i_#	ou_ï_es	1.08	0.16
 ouïgour	uiguR	ouïgour	NOM	NOM		s		u|i|g_u_R	ou|ï|g_ou_r	0.07	0.0
 ouïr	wiR	ouïr	VER	VER			inf;	w_i_R	ou_ï_r	1.22	0.77
-ouïrais	uiRE	ouïr	VER	VER			cnd:pre:1s;	u|i|R_E	ou|ï|r_ais	0.07	0.0
+ouïrais	wiRE	ouïr	VER	VER			cnd:pre:1s;	w_i|R_E	ou_ï|r_ais	0.07	0.0
 ouïs	wi	ouïr	VER	VER	m	p	ind:pas:1s;par:pas;	w_i_#	ou_ï_s	0.47	0.02
 ouït	wi	ouïr	VER	VER			ind:pas:3s;	w_i_#	ou_ï_t	0.41	0.0
 ovaire	ovER	ovaire	NOM	NOM	m	s		o|v_E_R_#	o|v_ai_r_e	0.14	0.49
@@ -103730,7 +103730,7 @@ rejointoyés	R°Zw5twaje	rejointoyer	VER	VER	m	p	par:pas;	R_°|Z_w5|t_wa_j|e_#	r
 rejoints	R°Zw5	rejoindre	VER	VER,ADJ	m	p	par:pas;	R_°|Z_w5_#	r_e|j_oin_ts	3.78	1.19
 rejoints	R°Zw5	rejoint	ADJ	VER,ADJ	m	p		R_°|Z_w5_#	r_e|j_oin_ts	0.07	0.1
 rejoua	R°Zwa	rejouer	VER	VER			ind:pas:3s;	R_°|Z_w_a	r_e|j_ou_a	0.2	0.0
-rejouaient	R°ZuE	rejouer	VER	VER			ind:imp:3p;	R_°|Z_u|E	r_e|j_ou|aient	0.0	0.02
+rejouaient	R°ZwE	rejouer	VER	VER			ind:imp:3p;	R_°|Z_w_E	r_e|j_ou_aient	0.0	0.02
 rejouais	R°ZwE	rejouer	VER	VER			ind:imp:1s;	R_°|Z_w_E	r_e|j_ou_ais	0.07	0.02
 rejouant	R°Zw@	rejouer	VER	VER			par:pre;	R_°|Z_w_@	r_e|j_ou_ant	0.14	0.02
 rejoue	R°Zu	rejouer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	R_°|Z_u_#	r_e|j_ou_e	0.0	1.18
@@ -103741,8 +103741,8 @@ rejoueras	R°ZuRa	rejouer	VER	VER			ind:fut:2s;	R_°|Z_u_#|R_a	r_e|j_ou_e|r_as	0
 rejouerez	R°ZuRe	rejouer	VER	VER			ind:fut:2p;	R_°|Z_u_#|R_e	r_e|j_ou_e|r_ez	0.07	0.16
 rejouerons	R°ZuR§	rejouer	VER	VER			ind:fut:1p;	R_°|Z_u_#|R_§	r_e|j_ou_e|r_ons	0.07	0.0
 rejoues	R°Zu	rejouer	VER	VER			ind:pre:2s;	R_°|Z_u_#	r_e|j_ou_es	0.0	0.04
-rejouez	R°Zue	rejouer	VER	VER			imp:pre:2p;ind:pre:2p;	R_°|Z_u|e	r_e|j_ou|ez	0.0	0.1
-rejouons	R°Zu§	rejouer	VER	VER			imp:pre:1p;	R_°|Z_u|§	r_e|j_ou|ons	0.0	0.03
+rejouez	R°Zwe	rejouer	VER	VER			imp:pre:2p;ind:pre:2p;	R_°|Z_w_e	r_e|j_ou_ez	0.0	0.1
+rejouons	R°Zw§	rejouer	VER	VER			imp:pre:1p;	R_°|Z_w_§	r_e|j_ou_ons	0.0	0.03
 rejoué	R°Zwe	rejouer	VER	VER	m	s	par:pas;	R_°|Z_w_e	r_e|j_ou_é	0.14	0.19
 rejuger	R°ZyZe	rejuger	VER	VER			inf;	R_°|Z_y|Z_e	r_e|j_u|g_er	0.07	0.07
 rejugez	R°ZyZe	rejuger	VER	VER			imp:pre:2p;	R_°|Z_y|Z_e	r_e|j_u|g_ez	0.0	0.02
@@ -103975,7 +103975,7 @@ relookerai	R°luk°Re	relooker	VER	VER			ind:fut:1s;	R_°|l_u|k_°|R_e	r_e|l_oo|
 relooké	R°luke	relooker	VER	VER	m	s	par:pas;	R_°|l_u|k_e	r_e|l_oo|k_é	0.0	0.06
 relookée	R°luke	relooker	VER	VER	f	s	par:pas;	R_°|l_u|k_e_#	r_e|l_oo|k_é_e	0.0	0.03
 reloquer	R°loke	reloquer	VER	VER			inf;	R_°|l_o|k_e	r_e|l_o|qu_er	0.07	0.0
-relouer	R°lue	relouer	VER	VER			inf;	R_°|l_u|e	r_e|l_ou|er	0.0	0.04
+relouer	R°lwe	relouer	VER	VER			inf;	R_°|l_w_e	r_e|l_ou_er	0.0	0.04
 relouerons	R°luR§	relouer	VER	VER			ind:fut:1p;	R_°|l_u_#|R_§	r_e|l_ou_e|r_ons	0.07	0.0
 relourde	R°luRd	relourder	VER	VER			ind:pre:3s;	R_°|l_u_R_d_#	r_e|l_ou_r_d_e	0.07	0.0
 relourder	R°luRde	relourder	VER	VER			inf;	R_°|l_u_R|d_e	r_e|l_ou_r|d_er	0.07	0.0
@@ -108384,7 +108384,7 @@ roua	Rwa	rouer	VER	VER			ind:pas:3s;	R_w_a	r_ou_a	0.07	0.0
 rouage	RwaZ	rouage	NOM	NOM	m	s		R_w_a_Z	r_ou_a_ge	0.47	0.3
 rouages	RwaZ	rouage	NOM	NOM	m	p		R_w_a_Z_#	r_ou_a_g_es	3.58	0.88
 rouaient	RwE	rouer	VER	VER			ind:imp:3p;	R_w_E	r_ou_aient	0.07	0.01
-rouais	RuE	rouer	VER	VER			ind:imp:2s;	R_u|E	r_ou|ais	0.0	0.02
+rouais	RwE	rouer	VER	VER			ind:imp:2s;	R_w_E	r_ou_ais	0.0	0.02
 rouait	RwE	rouer	VER	VER			ind:imp:3s;	R_w_E	r_ou_ait	0.14	0.13
 rouan	Rw@	rouan	NOM	ADJ,NOM	m	s		R_w_@	r_ou_an	0.2	0.16
 rouan	Rw@	rouan	ADJ	ADJ,NOM	m	s		R_w_@	r_ou_an	0.07	0.03
@@ -110560,12 +110560,12 @@ réjouies	ReZwi	réjoui	ADJ	ADJ,VER	f	p		R_e|Z_w_i_#	r_é|j_ou_i_es	0.2	0.02
 réjouies	ReZwi	réjouir	VER	ADJ,VER	f	p	par:pas;	R_e|Z_w_i_#	r_é|j_ou_i_es	0.07	0.0
 réjouir	ReZwiR	réjouir	VER	VER			inf;	R_e|Z_w_i_R	r_é|j_ou_i_r	6.15	3.96
 réjouira	ReZwiRa	réjouir	VER	VER			ind:fut:3s;	R_e|Z_w_i|R_a	r_é|j_ou_i|r_a	0.07	0.38
-réjouirai	ReZuiRe	réjouir	VER	VER			ind:fut:1s;	R_e|Z_u|i|R_e	r_é|j_ou|i|r_ai	0.0	0.05
+réjouirai	ReZwiRe	réjouir	VER	VER			ind:fut:1s;	R_e|Z_w_i|R_e	r_é|j_ou_i|r_ai	0.0	0.05
 réjouirais	ReZwiRE	réjouir	VER	VER			cnd:pre:1s;cnd:pre:2s;	R_e|Z_w_i|R_E	r_é|j_ou_i|r_ais	0.14	0.02
 réjouirait	ReZwiRE	réjouir	VER	VER			cnd:pre:3s;	R_e|Z_w_i|R_E	r_é|j_ou_i|r_ait	0.34	0.1
 réjouirent	ReZwiR	réjouir	VER	VER			ind:pas:3p;	R_e|Z_w_i_R_#	r_é|j_ou_i_r_ent	0.14	0.01
 réjouirez	ReZwiRe	réjouir	VER	VER			ind:fut:2p;	R_e|Z_w_i|R_e	r_é|j_ou_i|r_ez	0.07	0.0
-réjouirons	ReZuiR§	réjouir	VER	VER			ind:fut:1p;	R_e|Z_u|i|R_§	r_é|j_ou|i|r_ons	0.0	0.04
+réjouirons	ReZwiR§	réjouir	VER	VER			ind:fut:1p;	R_e|Z_w_i|R_§	r_é|j_ou_i|r_ons	0.0	0.04
 réjouiront	ReZwiR§	réjouir	VER	VER			ind:fut:3p;	R_e|Z_w_i|R_§	r_é|j_ou_i|r_ont	0.14	0.64
 réjouis	ReZwi	réjouir	VER	ADJ,VER	m	p	imp:pre:2s;ind:pre:1s;ind:pre:2s;par:pas;	R_e|Z_w_i_#	r_é|j_ou_i_s	2.36	8.42
 réjouis	ReZwi	réjoui	ADJ	ADJ,VER	m	p		R_e|Z_w_i_#	r_é|j_ou_i_s	0.47	0.1
@@ -110582,7 +110582,7 @@ réjouissants	ReZwis@	réjouissant	ADJ	ADJ	m	p		R_e|Z_w_i|s_@_#	r_é|j_ou_i|ss_a
 réjouisse	ReZwis	réjouir	VER	VER			sub:pre:1s;sub:pre:3s;	R_e|Z_w_i_s_#	r_é|j_ou_i_ss_e	0.41	0.37
 réjouissent	ReZwis	réjouir	VER	VER			ind:pre:3p;	R_e|Z_w_i_s_#	r_é|j_ou_i_ss_ent	0.61	0.74
 réjouissez	ReZwise	réjouir	VER	VER			imp:pre:2p;ind:pre:2p;	R_e|Z_w_i|s_e	r_é|j_ou_i|ss_ez	0.27	1.15
-réjouissiez	ReZuisje	réjouir	VER	VER			ind:imp:2p;	R_e|Z_u|i|s_j_e	r_é|j_ou|i|ss_i_ez	0.0	0.01
+réjouissiez	ReZwisje	réjouir	VER	VER			ind:imp:2p;	R_e|Z_w_i|s_j_e	r_é|j_ou_i|ss_i_ez	0.0	0.01
 réjouissions	ReZwisj§	réjouir	VER	VER			ind:imp:1p;	R_e|Z_w_i|s_j_§	r_é|j_ou_i|ss_i_ons	0.07	0.01
 réjouissons	ReZwis§	réjouir	VER	VER			imp:pre:1p;ind:pre:1p;	R_e|Z_w_i|s_§	r_é|j_ou_i|ss_ons	0.27	0.65
 réjouit	ReZwi	réjouir	VER	VER			ind:pre:3s;ind:pas:3s;	R_e|Z_w_i	r_é|j_ou_it	4.32	2.75
@@ -113999,8 +113999,8 @@ secouerez	s°kuRe	secouer	VER	VER			ind:fut:2p;	s_°|k_u_#|R_e	s_e|c_ou_e|r_ez	0
 secoueront	s°kuR§	secouer	VER	VER			ind:fut:3p;	s_°|k_u_#|R_§	s_e|c_ou_e|r_ont	0.07	0.01
 secoues	s°ku	secouer	VER	VER			ind:pre:2s;	s_°|k_u_#	s_e|c_ou_es	0.2	0.56
 secoueur	s°kw9R	secoueur	NOM	NOM	m	s		s_°|k_w_9_R	s_e|c_ou_eu_r	0.07	0.02
-secoueurs	s°ku9R	secoueur	NOM	NOM	m	p		s_°|k_u|9_R_#	s_e|c_ou|eu_r_s	0.0	0.06
-secouez	s°kue	secouer	VER	VER			imp:pre:2p;ind:pre:2p;	s_°|k_u|e	s_e|c_ou|ez	0.61	1.24
+secoueurs	s°kw9R	secoueur	NOM	NOM	m	p		s_°|k_w_9_R_#	s_e|c_ou_eu_r_s	0.0	0.06
+secouez	s°kwe	secouer	VER	VER			imp:pre:2p;ind:pre:2p;	s_°|k_w_e	s_e|c_ou_ez	0.61	1.24
 secouions	s°kuj§	secouer	VER	VER			ind:imp:1p;	s_°|k_u|j_§	s_e|c_ou|i_ons	0.14	0.0
 secouons	s°kw§	secouer	VER	VER			imp:pre:1p;ind:pre:1p;	s_°|k_w_§	s_e|c_ou_ons	0.14	0.04
 secourable	s°kuRabl	secourable	ADJ	ADJ		s		s_°|k_u|R_a_b_l_#	s_e|c_ou|r_a_b_l_e	1.22	0.66
@@ -119324,8 +119324,8 @@ surdosage	syRdozaZ	surdosage	NOM	NOM	m	s		s_y_R|d_o|z_a_Z	s_u_r|d_o|s_a_ge	0.0	0
 surdose	syRdoz	surdose	NOM	NOM	f	s		s_y_R|d_o_z_#	s_u_r|d_o_s_e	0.0	0.27
 surdoué	syRdwe	surdoué	ADJ	ADJ,NOM	m	s		s_y_R|d_w_e	s_u_r|d_ou_é	0.2	0.23
 surdoué	syRdwe	surdoué	NOM	ADJ,NOM	m	s		s_y_R|d_w_e	s_u_r|d_ou_é	0.47	0.23
-surdouée	syRdue	surdoué	NOM	ADJ,NOM	f	s		s_y_R|d_u|e_#	s_u_r|d_ou|é_e	0.0	0.04
-surdouée	syRdue	surdoué	ADJ	ADJ,NOM	f	s		s_y_R|d_u|e_#	s_u_r|d_ou|é_e	0.07	0.01
+surdouée	syRdwe	surdoué	NOM	ADJ,NOM	f	s		s_y_R|d_w_e_#	s_u_r|d_ou_é_e	0.0	0.04
+surdouée	syRdwe	surdoué	ADJ	ADJ,NOM	f	s		s_y_R|d_w_e_#	s_u_r|d_ou_é_e	0.07	0.01
 surdoués	syRdwe	surdoué	NOM	ADJ,NOM	m	p		s_y_R|d_w_e_#	s_u_r|d_ou_é_s	0.61	0.72
 surdoués	syRdwe	surdoué	ADJ	ADJ,NOM	m	p		s_y_R|d_w_e_#	s_u_r|d_ou_é_s	0.07	0.26
 surdéterminé	syRdetERmine	surdéterminer	VER	VER	m	s	par:pas;	s_y_R|d_e|t_E_R|m_i|n_e	s_u_r|d_é|t_e_r|m_i|n_é	0.07	0.0
@@ -121730,9 +121730,9 @@ tatoue	tatu	tatouer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	t_a|t_u_#	t_a|t_
 tatouent	tatu	tatouer	VER	VER			ind:pre:3p;	t_a|t_u_#	t_a|t_ou_ent	0.0	0.02
 tatouer	tatwe	tatouer	VER	VER			inf;	t_a|t_w_e	t_a|t_ou_er	0.81	1.91
 tatoueur	tatw9R	tatoueur	NOM	NOM	m	s		t_a|t_w_9_R	t_a|t_ou_eu_r	1.01	0.14
-tatoueurs	tatu9R	tatoueur	NOM	NOM	m	p		t_a|t_u|9_R_#	t_a|t_ou|eu_r_s	0.0	0.09
+tatoueurs	tatw9R	tatoueur	NOM	NOM	m	p		t_a|t_w_9_R_#	t_a|t_ou_eu_r_s	0.0	0.09
 tatoueuse	tatw2z	tatoueur	NOM	NOM	f	s		t_a|t_w_2_z_#	t_a|t_ou_eu_s_e	0.0	0.14
-tatouez	tatue	tatouer	VER	VER			imp:pre:2p;ind:pre:2p;	t_a|t_u|e	t_a|t_ou|ez	0.0	0.02
+tatouez	tatwe	tatouer	VER	VER			imp:pre:2p;ind:pre:2p;	t_a|t_w_e	t_a|t_ou_ez	0.0	0.02
 tatous	tatu	tatou	NOM	NOM	m	p		t_a|t_u_#	t_a|t_ou_s	0.07	0.04
 tatoué	tatwe	tatouer	VER	VER,ADJ	m	s	par:pas;	t_a|t_w_e	t_a|t_ou_é	1.15	1.23
 tatoué	tatwe	tatoué	ADJ	VER,ADJ	m	s		t_a|t_w_e	t_a|t_ou_é	1.42	1.07
@@ -123718,8 +123718,8 @@ totémiques	totemik	totémique	ADJ	ADJ	m	p		t_o|t_e|m_i_k_#	t_o|t_é|m_i_qu_es	0
 totémisme	totemism	totémisme	NOM	NOM	m	s		t_o|t_e|m_i_s_m_#	t_o|t_é|m_i_s_m_e	0.0	0.01
 touareg	twaReg	touareg	ADJ	ADJ,NOM	m	s		t_w_a|R_e_g	t_ou_a|r_e_g	0.0	0.03
 touareg	twaReg	touareg	NOM	ADJ,NOM	m	s		t_w_a|R_e_g	t_ou_a|r_e_g	0.0	0.01
-touaregs	tuaREg	touareg	ADJ	ADJ,NOM	m	p		t_u|a|R_E_g_#	t_ou|a|r_e_g_s	0.0	0.03
-touaregs	tuaREg	touareg	NOM	ADJ,NOM	m	p		t_u|a|R_E_g_#	t_ou|a|r_e_g_s	0.07	0.0
+touaregs	twaREg	touareg	ADJ	ADJ,NOM	m	p		t_w_a|R_E_g_#	t_ou_a|r_e_g_s	0.0	0.03
+touaregs	twaREg	touareg	NOM	ADJ,NOM	m	p		t_w_a|R_E_g_#	t_ou_a|r_e_g_s	0.07	0.0
 toubab	tubab	toubab	NOM	NOM	m	s		t_u|b_a_b	t_ou|b_a_b	0.54	0.1
 toubabs	tubab	toubab	NOM	NOM	m	p		t_u|b_a_b_#	t_ou|b_a_b_s	0.07	0.2
 toubib	tubib	toubib	NOM	NOM	m	s		t_u|b_i_b	t_ou|b_i_b	11.35	5.71
@@ -131974,7 +131974,7 @@ zézettes	zezEt	zézette	NOM	NOM	f	p		z_e|z_E_t_#	z_é|z_e_tt_es	0.27	0.0
 échouerez	eSuRe	échouer	VER	VER			ind:fut:2p;	e|S_u_#|R_e	é|ch_ou_e|r_ez	0.0	0.21
 échouerons	eSuR§	échouer	VER	VER			ind:fut:1p;	e|S_u_#|R_§	é|ch_ou_e|r_ons	0.0	0.17
 échoueront	eSuR§	échouer	VER	VER			ind:fut:3p;	e|S_u_#|R_§	é|ch_ou_e|r_ont	0.07	0.13
-échouez	eSue	échouer	VER	VER			imp:pre:2p;ind:pre:2p;	e|S_u|e	é|ch_ou|ez	0.0	0.48
+échouez	eSwe	échouer	VER	VER			imp:pre:2p;ind:pre:2p;	e|S_w_e	é|ch_ou_ez	0.0	0.48
 échouiez	eSuje	échouer	VER	VER			ind:imp:2p;	e|S_u|j_e	é|ch_ou|i_ez	0.0	0.02
 échouions	eSuj§	échouer	VER	VER			ind:imp:1p;	e|S_u|j_§	é|ch_ou|i_ons	0.07	0.02
 échouons	eSw§	échouer	VER	VER			ind:pre:1p;	e|S_w_§	é|ch_ou_ons	0.27	0.38
@@ -134074,7 +134074,7 @@ zézettes	zezEt	zézette	NOM	NOM	f	p		z_e|z_E_t_#	z_é|z_e_tt_es	0.27	0.0
 épanouissement	epanwis°m@	épanouissement	NOM	NOM	m	s		e|p_a|n_w_i|s_°|m_@	é|p_a|n_ou_i|ss_e|m_ent	3.65	0.62
 épanouissements	epanwis°m@	épanouissement	NOM	NOM	m	p		e|p_a|n_w_i|s_°|m_@_#	é|p_a|n_ou_i|ss_e|m_en_ts	0.07	0.0
 épanouissent	epanwis	épanouir	VER	VER			ind:pre:3p;	e|p_a|n_w_i_s_#	é|p_a|n_ou_i_ss_ent	1.01	0.28
-épanouisses	epanuis	épanouir	VER	VER			sub:pre:2s;	e|p_a|n_u|i_s_#	é|p_a|n_ou|i_ss_es	0.0	0.15
+épanouisses	epanwis	épanouir	VER	VER			sub:pre:2s;	e|p_a|n_w_i_s_#	é|p_a|n_ou_i_ss_es	0.0	0.15
 épanouit	epanwi	épanouir	VER	VER			ind:pre:3s;ind:pas:3s;	e|p_a|n_w_i	é|p_a|n_ou_it	3.11	0.75
 épargna	epaRNa	épargner	VER	VER			ind:pas:3s;	e|p_a_R|N_a	é|p_a_r|gn_a	1.35	0.12
 épargnaient	epaRNE	épargner	VER	VER			ind:imp:3p;	e|p_a_R|N_E	é|p_a_r|gn_aient	0.74	0.01
@@ -135843,12 +135843,12 @@ zézettes	zezEt	zézette	NOM	NOM	f	p		z_e|z_E_t_#	z_é|z_e_tt_es	0.27	0.0
 évanouie	evanwi	évanoui	ADJ	ADJ,VER	f	s		e|v_a|n_w_i_#	é|v_a|n_ou_i_e	1.96	0.32
 évanouies	evanwi	évanouir	VER	ADJ,VER	f	p	par:pas;	e|v_a|n_w_i_#	é|v_a|n_ou_i_es	0.27	0.16
 évanouies	evanwi	évanoui	ADJ	ADJ,VER	f	p		e|v_a|n_w_i_#	é|v_a|n_ou_i_es	1.15	0.1
-évanouir	evanuiR	évanouir	VER	VER			inf;	e|v_a|n_u|i_R	é|v_a|n_ou|i_r	8.24	4.4
+évanouir	evanwiR	évanouir	VER	VER			inf;	e|v_a|n_w_i_R	é|v_a|n_ou_i_r	8.24	4.4
 évanouira	evanwiRa	évanouir	VER	VER			ind:fut:3s;	e|v_a|n_w_i|R_a	é|v_a|n_ou_i|r_a	0.07	0.11
 évanouirai	evanwiRe	évanouir	VER	VER			ind:fut:1s;	e|v_a|n_w_i|R_e	é|v_a|n_ou_i|r_ai	0.07	0.04
 évanouirait	evanwiRE	évanouir	VER	VER			cnd:pre:3s;	e|v_a|n_w_i|R_E	é|v_a|n_ou_i|r_ait	0.27	0.05
 évanouirent	evanwiR	évanouir	VER	VER			ind:pas:3p;	e|v_a|n_w_i_R_#	é|v_a|n_ou_i_r_ent	0.47	0.02
-évanouirez	evanuiRe	évanouir	VER	VER			ind:fut:2p;	e|v_a|n_u|i|R_e	é|v_a|n_ou|i|r_ez	0.0	0.14
+évanouirez	evanwiRe	évanouir	VER	VER			ind:fut:2p;	e|v_a|n_w_i|R_e	é|v_a|n_ou_i|r_ez	0.0	0.14
 évanouiront	evanwiR§	évanouir	VER	VER			ind:fut:3p;	e|v_a|n_w_i|R_§	é|v_a|n_ou_i|r_ont	0.0	0.05
 évanouis	evanwi	évanouir	VER	ADJ,VER	m	p	imp:pre:2s;ind:pre:1s;ind:pre:2s;par:pas;	e|v_a|n_w_i_#	é|v_a|n_ou_i_s	1.42	1.3
 évanouis	evanwi	évanoui	ADJ	ADJ,VER	m	p		e|v_a|n_w_i_#	é|v_a|n_ou_i_s	2.5	0.01
@@ -135860,7 +135860,7 @@ zézettes	zezEt	zézette	NOM	NOM	f	p		z_e|z_E_t_#	z_é|z_e_tt_es	0.27	0.0
 évanouissement	evanwis°m@	évanouissement	NOM	NOM	m	s		e|v_a|n_w_i|s_°|m_@	é|v_a|n_ou_i|ss_e|m_ent	2.91	0.62
 évanouissements	evanwis°m@	évanouissement	NOM	NOM	m	p		e|v_a|n_w_i|s_°|m_@_#	é|v_a|n_ou_i|ss_e|m_en_ts	0.41	0.21
 évanouissent	evanwis	évanouir	VER	VER			ind:pre:3p;	e|v_a|n_w_i_s_#	é|v_a|n_ou_i_ss_ent	1.35	0.65
-évanouisses	evanuis	évanouir	VER	VER			sub:pre:2s;	e|v_a|n_u|i_s_#	é|v_a|n_ou|i_ss_es	0.0	0.07
+évanouisses	evanwis	évanouir	VER	VER			sub:pre:2s;	e|v_a|n_w_i_s_#	é|v_a|n_ou_i_ss_es	0.0	0.07
 évanouissez	evanwise	évanouir	VER	VER			imp:pre:2p;ind:pre:2p;	e|v_a|n_w_i|s_e	é|v_a|n_ou_i|ss_ez	0.07	0.09
 évanouit	evanwi	évanouir	VER	VER			ind:pre:3s;ind:pas:3s;	e|v_a|n_w_i	é|v_a|n_ou_it	3.38	1.41
 évapora	evapoRa	évaporer	VER	VER			ind:pas:3s;	e|v_a|p_o|R_a	é|v_a|p_o|r_a	0.14	0.0

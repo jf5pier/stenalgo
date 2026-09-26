@@ -22996,21 +22996,21 @@ réagîmes	ReaZim	réagir	VER	VER			ind:pas:1p;	R_e|a|Z_i_m_#	r_é|a|g_î_m_es	0
 réagîtes	ReaZit	réagir	VER	VER			ind:pas:2p;	R_e|a|Z_i_t_#	r_é|a|g_î_t_es	0.0	0.0	synthetic
 réagirions	ReaZiRj§	réagir	VER	VER			cnd:pre:1p;	R_e|a|Z_i|R_j_§	r_é|a|g_i|r_i_ons	0.0	0.0	synthetic
 réagissiez	ReaZisje	réagir	VER	VER			sub:pre:2p;	R_e|a|Z_i|s_j_e	r_é|a|g_i|ss_i_ez	0.0	0.0	synthetic
-évanouissons	evanuis§	évanouir	VER	VER			ind:pre:1p;	e|v_a|n_u|i|s_§	é|v_a|n_ou|i|ss_ons	0.0	0.0	synthetic
-évanouissions	evanuisj§	évanouir	VER	VER			ind:imp:1p;	e|v_a|n_u|i|s_j_§	é|v_a|n_ou|i|ss_i_ons	0.0	0.0	synthetic
-évanouissiez	evanuisje	évanouir	VER	VER			ind:imp:2p;	e|v_a|n_u|i|s_j_e	é|v_a|n_ou|i|ss_i_ez	0.0	0.0	synthetic
-évanouiras	evanuiRa	évanouir	VER	VER			ind:fut:2s;	e|v_a|n_u|i|R_a	é|v_a|n_ou|i|r_as	0.0	0.0	synthetic
-évanouirons	evanuiR§	évanouir	VER	VER			ind:fut:1p;	e|v_a|n_u|i|R_§	é|v_a|n_ou|i|r_ons	0.0	0.0	synthetic
-évanouis	evanui	évanouir	VER	VER			ind:pas:2s;	e|v_a|n_u|i	é|v_a|n_ou|is	0.0	0.0	synthetic
-évanouîmes	evanuim	évanouir	VER	VER			ind:pas:1p;	e|v_a|n_u|i_m_#	é|v_a|n_ou|î_m_es	0.0	0.0	synthetic
-évanouîtes	evanuit	évanouir	VER	VER			ind:pas:2p;	e|v_a|n_u|i_t_#	é|v_a|n_ou|î_t_es	0.0	0.0	synthetic
-évanouirais	evanuiRE	évanouir	VER	VER			cnd:pre:1s;	e|v_a|n_u|i|R_E	é|v_a|n_ou|i|r_ais	0.0	0.0	synthetic
-évanouirais	evanuiRE	évanouir	VER	VER			cnd:pre:2s;	e|v_a|n_u|i|R_E	é|v_a|n_ou|i|r_ais	0.0	0.0	synthetic
-évanouirions	evanuiRj§	évanouir	VER	VER			cnd:pre:1p;	e|v_a|n_u|i|R_j_§	é|v_a|n_ou|i|r_i_ons	0.0	0.0	synthetic
-évanouiriez	evanuiRje	évanouir	VER	VER			cnd:pre:2p;	e|v_a|n_u|i|R_j_e	é|v_a|n_ou|i|r_i_ez	0.0	0.0	synthetic
-évanouiraient	evanuiRE	évanouir	VER	VER			cnd:pre:3p;	e|v_a|n_u|i|R_E	é|v_a|n_ou|i|r_aient	0.0	0.0	synthetic
-évanouissiez	evanuisje	évanouir	VER	VER			sub:pre:2p;	e|v_a|n_u|i|s_j_e	é|v_a|n_ou|i|ss_i_ez	0.0	0.0	synthetic
-évanouissons	evanuis§	évanouir	VER	VER			imp:pre:1p;	e|v_a|n_u|i|s_§	é|v_a|n_ou|i|ss_ons	0.0	0.0	synthetic
+évanouissons	evanwis§	évanouir	VER	VER			ind:pre:1p;	e|v_a|n_w_i|s_§	é|v_a|n_ou_i|ss_ons	0.0	0.0	synthetic
+évanouissions	evanwisj§	évanouir	VER	VER			ind:imp:1p;	e|v_a|n_w_i|s_j_§	é|v_a|n_ou_i|ss_i_ons	0.0	0.0	synthetic
+évanouissiez	evanwisje	évanouir	VER	VER			ind:imp:2p;	e|v_a|n_w_i|s_j_e	é|v_a|n_ou_i|ss_i_ez	0.0	0.0	synthetic
+évanouiras	evanwiRa	évanouir	VER	VER			ind:fut:2s;	e|v_a|n_w_i|R_a	é|v_a|n_ou_i|r_as	0.0	0.0	synthetic
+évanouirons	evanwiR§	évanouir	VER	VER			ind:fut:1p;	e|v_a|n_w_i|R_§	é|v_a|n_ou_i|r_ons	0.0	0.0	synthetic
+évanouis	evanwi	évanouir	VER	VER			ind:pas:2s;	e|v_a|n_w_i	é|v_a|n_ou_is	0.0	0.0	synthetic
+évanouîmes	evanwim	évanouir	VER	VER			ind:pas:1p;	e|v_a|n_w_i_m_#	é|v_a|n_ou_î_m_es	0.0	0.0	synthetic
+évanouîtes	evanwit	évanouir	VER	VER			ind:pas:2p;	e|v_a|n_w_i_t_#	é|v_a|n_ou_î_t_es	0.0	0.0	synthetic
+évanouirais	evanwiRE	évanouir	VER	VER			cnd:pre:1s;	e|v_a|n_w_i|R_E	é|v_a|n_ou_i|r_ais	0.0	0.0	synthetic
+évanouirais	evanwiRE	évanouir	VER	VER			cnd:pre:2s;	e|v_a|n_w_i|R_E	é|v_a|n_ou_i|r_ais	0.0	0.0	synthetic
+évanouirions	evanwiRj§	évanouir	VER	VER			cnd:pre:1p;	e|v_a|n_w_i|R_j_§	é|v_a|n_ou_i|r_i_ons	0.0	0.0	synthetic
+évanouiriez	evanwiRje	évanouir	VER	VER			cnd:pre:2p;	e|v_a|n_w_i|R_j_e	é|v_a|n_ou_i|r_i_ez	0.0	0.0	synthetic
+évanouiraient	evanwiRE	évanouir	VER	VER			cnd:pre:3p;	e|v_a|n_w_i|R_E	é|v_a|n_ou_i|r_aient	0.0	0.0	synthetic
+évanouissiez	evanwisje	évanouir	VER	VER			sub:pre:2p;	e|v_a|n_w_i|s_j_e	é|v_a|n_ou_i|ss_i_ez	0.0	0.0	synthetic
+évanouissons	evanwis§	évanouir	VER	VER			imp:pre:1p;	e|v_a|n_w_i|s_§	é|v_a|n_ou_i|ss_ons	0.0	0.0	synthetic
 blottissons	blotis§	blottir	VER	VER			ind:pre:1p;	b_l_o|t_i|s_§	b_l_o|tt_i|ss_ons	0.0	0.0	synthetic
 blottissez	blotise	blottir	VER	VER			ind:pre:2p;	b_l_o|t_i|s_e	b_l_o|tt_i|ss_ez	0.0	0.0	synthetic
 blottissais	blotisE	blottir	VER	VER			ind:imp:2s;	b_l_o|t_i|s_E	b_l_o|tt_i|ss_ais	0.0	0.0	synthetic
@@ -32707,14 +32707,14 @@ décrions	dekRij§	décrier	VER	VER			imp:pre:1p;	d_e|k_R_ij|§	d_é|c_r_i|ons	0
 reloués	R2lwe	relouer	VER	VER	m	p	par:pas;	R_2|l_w_e_#	r_e|l_ou_é_s	0.0	0.0	synthetic
 relouée	R2lwe	relouer	VER	VER	f	s	par:pas;	R_2|l_w_e_#	r_e|l_ou_é_e	0.0	0.0	synthetic
 relouées	R2lwe	relouer	VER	VER	f	p	par:pas;	R_2|l_w_e_#	r_e|l_ou_é_es	0.0	0.0	synthetic
-relouons	R°lu§	relouer	VER	VER			ind:pre:1p;	R_°|l_u|§	r_e|l_ou|ons	0.0	0.0	synthetic
-relouais	R°luE	relouer	VER	VER			ind:imp:2s;	R_°|l_u|E	r_e|l_ou|ais	0.0	0.0	synthetic
-relouas	R°lua	relouer	VER	VER			ind:pas:2s;	R_°|l_u|a	r_e|l_ou|as	0.0	0.0	synthetic
+relouons	R°lw§	relouer	VER	VER			ind:pre:1p;	R_°|l_w_§	r_e|l_ou_ons	0.0	0.0	synthetic
+relouais	R°lwE	relouer	VER	VER			ind:imp:2s;	R_°|l_w_E	r_e|l_ou_ais	0.0	0.0	synthetic
+relouas	R°lwa	relouer	VER	VER			ind:pas:2s;	R_°|l_w_a	r_e|l_ou_as	0.0	0.0	synthetic
 relouerions	R°luj§	relouer	VER	VER			cnd:pre:1p;	R_°|l_u#|R_j_§	r_e|l_ou_e|r_i_ons	0.0	0.0	synthetic
 reloueriez	R°luje	relouer	VER	VER			cnd:pre:2p;	R_°|l_u#|R_j_e	r_e|l_ou_e|r_i_ez	0.0	0.0	synthetic
 reloue	R°lu	relouer	VER	VER			sub:pre:1s;	R_°|l_u#	r_e|l_ou_e	0.0	0.0	synthetic
 reloues	R°lu	relouer	VER	VER			sub:pre:2s;	R_°|l_u#	r_e|l_ou_es	0.0	0.0	synthetic
-relouons	R°lu§	relouer	VER	VER			imp:pre:1p;	R_°|l_u|§	r_e|l_ou|ons	0.0	0.0	synthetic
+relouons	R°lw§	relouer	VER	VER			imp:pre:1p;	R_°|l_w_§	r_e|l_ou_ons	0.0	0.0	synthetic
 décloués	deklue	déclouer	VER	VER	m	p	par:pas;	d_e|k_l_u|e_#	d_é|c_l_ou|é_s	0.0	0.0	synthetic
 déclouons	deklu§	déclouer	VER	VER			ind:pre:1p;	d_e|k_l_u|§	d_é|c_l_ou|ons	0.0	0.0	synthetic
 déclouais	dekluE	déclouer	VER	VER			ind:imp:2s;	d_e|k_l_u|E	d_é|c_l_ou|ais	0.0	0.0	synthetic
@@ -46198,3 +46198,74 @@ paillèterions	pajEt°Rj§	pailleter	VER	VER			cnd:pre:1p;	p_a|j_E|t_°|R_j_§	p
 paillèteriez	pajEt°Rje	pailleter	VER	VER			cnd:pre:2p;	p_a|j_E|t_°|R_j_e	p_a|ill_è|t_e|r_i_ez	0.0	0.0	synthetic
 paillèteraient	pajEt°RE	pailleter	VER	VER			cnd:pre:3p;	p_a|j_E|t_°|R_E	p_a|ill_è|t_e|r_aient	0.0	0.0	synthetic
 paillète	pajEt	pailleter	VER	VER			sub:pre:3s;	p_a|j_E_t_#	p_a|ill_è_t_e	0.0	0.0	synthetic
+refluais	R°flyE	refluer	VER	VER			ind:imp:1s;	R_°|f_l_y|E	r_e|f_l_u|ais	0.0	0.0	synthetic
+récriais	RekRiE	récrier	VER	VER			ind:imp:1s;	R_e|k_R_i|E	r_é|c_r_i|ais	0.0	0.0	synthetic
+rabrouais	RabRuE	rabrouer	VER	VER			ind:imp:1s;	R_a|b_R_u|E	r_a|b_r_ou|ais	0.0	0.0	synthetic
+maugréais	mogReE	maugréer	VER	VER			ind:imp:1s;	m_o|g_R_e|E	m_au|g_r_é|ais	0.0	0.0	synthetic
+obstruais	OpstRyE	obstruer	VER	VER			ind:imp:1s;	O_p|s_t_R_y|E	o_b|s_t_r_u|ais	0.0	0.0	synthetic
+expropriais	EkspRopRijE	exproprier	VER	VER			ind:imp:1s;	E|ks_p_R_o|p_R_ij|E	e|x_p_r_o|p_r_i|ais	0.0	0.0	synthetic
+affluais	aflyE	affluer	VER	VER			ind:imp:1s;	a|f_l_y|E	a|ff_l_u|ais	0.0	0.0	synthetic
+entretuais	@tR°tyE	entretuer	VER	VER			ind:imp:1s;	@|t_R_°|t_y|E	en|t_r_e|t_u|ais	0.0	0.0	synthetic
+énucléais	enykleE	énucléer	VER	VER			ind:imp:1s;	e|n_y|k_l_e|E	é|n_u|c_l_é|ais	0.0	0.0	synthetic
+striais	stRijE	strier	VER	VER			ind:imp:1s;	s_t_R_ij|E	s_t_r_i|ais	0.0	0.0	synthetic
+décriais	dekRijE	décrier	VER	VER			ind:imp:1s;	d_e|k_R_ij|E	d_é|c_r_i|ais	0.0	0.0	synthetic
+appropriais	apRopRijE	approprier	VER	VER			ind:imp:1s;	a|p_R_o|p_R_ij|E	a|pp_r_o|p_r_i|ais	0.0	0.0	synthetic
+clouais	kluE	clouer	VER	VER			ind:imp:1s;	k_l_u|E	c_l_ou|ais	0.0	0.0	synthetic
+écrouais	ekRuE	écrouer	VER	VER			ind:imp:1s;	e|k_R_u|E	é|c_r_ou|ais	0.0	0.0	synthetic
+enclouais	@kluE	enclouer	VER	VER			ind:imp:1s;	@|k_l_u|E	en|c_l_ou|ais	0.0	0.0	synthetic
+démultipliais	demyltiplijE	démultiplier	VER	VER			ind:imp:1s;	d_e|m_y_l|t_i|p_l_ij|E	d_é|m_u_l|t_i|p_l_i|ais	0.0	0.0	synthetic
+reclouais	R2kluE	reclouer	VER	VER			ind:imp:1s;	R_2|k_l_u|E	r_e|c_l_ou|ais	0.0	0.0	synthetic
+renflouais	R@fluE	renflouer	VER	VER			ind:imp:1s;	R_@|f_l_u|E	r_en|f_l_ou|ais	0.0	0.0	synthetic
+toréais	toReE	toréer	VER	VER			ind:imp:1s;	t_o|R_e|E	t_o|r_é|ais	0.0	0.0	synthetic
+regréais	R°gReE	regréer	VER	VER			ind:imp:1s;	R_°|g_R_e|E	r_e|g_r_é|ais	0.0	0.0	synthetic
+déclouais	dekluE	déclouer	VER	VER			ind:imp:1s;	d_e|k_l_u|E	d_é|c_l_ou|ais	0.0	0.0	synthetic
+suppléais	sypleE	suppléer	VER	VER			ind:imp:1s;	s_y|p_l_e|E	s_u|pp_l_é|ais	0.0	0.0	synthetic
+procréais	pRokReE	procréer	VER	VER			ind:imp:1s;	p_R_o|k_R_e|E	p_r_o|c_r_é|ais	0.0	0.0	synthetic
+expatriais	EkspatRijE	expatrier	VER	VER			ind:imp:1s;	E|ks_p_a|t_R_ij|E	e|x_p_a|t_r_i|ais	0.0	0.0	synthetic
+récréais	RekReE	récréer	VER	VER			ind:imp:1s;	R_e|k_R_e|E	r_é|c_r_é|ais	0.0	0.0	synthetic
+rapatriais	RapatRijE	rapatrier	VER	VER			ind:imp:1s;	R_a|p_a|t_R_ij|E	r_a|p_a|t_r_i|ais	0.0	0.0	synthetic
+flouais	fluE	flouer	VER	VER			ind:imp:1s;	f_l_u|E	f_l_ou|ais	0.0	0.0	synthetic
+engluais	@glyE	engluer	VER	VER			ind:imp:1s;	@|g_l_y|E	en|g_l_u|ais	0.0	0.0	synthetic
+relouais	R°lwE	relouer	VER	VER			ind:imp:1s;	R_°|l_w_E	r_e|l_ou_ais	0.0	0.0	synthetic
+influais	5flyE	influer	VER	VER			ind:imp:1s;	5|f_l_y|E	in|f_l_u|ais	0.0	0.0	synthetic
+sidères	sidER	sidérer	VER	VER			ind:pre:2s;	s_i|d_E_R_#	s_i|d_è_r_es	0.0	0.0	synthetic
+sidérons	sideR§	sidérer	VER	VER			ind:pre:1p;	s_i|d_e|R_§	s_i|d_é|r_ons	0.0	0.0	synthetic
+sidérez	sideRe	sidérer	VER	VER			ind:pre:2p;	s_i|d_e|R_e	s_i|d_é|r_ez	0.0	0.0	synthetic
+sidèrent	sidER	sidérer	VER	VER			ind:pre:3p;	s_i|d_E_R_#	s_i|d_è_r_ent	0.0	0.0	synthetic
+sidérais	sideRE	sidérer	VER	VER			ind:imp:2s;	s_i|d_e|R_E	s_i|d_é|r_ais	0.0	0.0	synthetic
+sidérions	sideRj§	sidérer	VER	VER			ind:imp:1p;	s_i|d_e|R_j_§	s_i|d_é|r_i_ons	0.0	0.0	synthetic
+sidériez	sideRje	sidérer	VER	VER			ind:imp:2p;	s_i|d_e|R_j_e	s_i|d_é|r_i_ez	0.0	0.0	synthetic
+sidéraient	sideRE	sidérer	VER	VER			ind:imp:3p;	s_i|d_e|R_E	s_i|d_é|r_aient	0.0	0.0	synthetic
+sidérerai	sideR°Re	sidérer	VER	VER			ind:fut:1s;	s_i|d_e|R_°|R_e	s_i|d_é|r_e|r_ai	0.0	0.0	synthetic
+sidéreras	sideR°Ra	sidérer	VER	VER			ind:fut:2s;	s_i|d_e|R_°|R_a	s_i|d_é|r_e|r_as	0.0	0.0	synthetic
+sidérera	sideR°Ra	sidérer	VER	VER			ind:fut:3s;	s_i|d_e|R_°|R_a	s_i|d_é|r_e|r_a	0.0	0.0	synthetic
+sidérerons	sideR°R§	sidérer	VER	VER			ind:fut:1p;	s_i|d_e|R_°|R_§	s_i|d_é|r_e|r_ons	0.0	0.0	synthetic
+sidérerez	sideR°Re	sidérer	VER	VER			ind:fut:2p;	s_i|d_e|R_°|R_e	s_i|d_é|r_e|r_ez	0.0	0.0	synthetic
+sidéreront	sideR°R§	sidérer	VER	VER			ind:fut:3p;	s_i|d_e|R_°|R_§	s_i|d_é|r_e|r_ont	0.0	0.0	synthetic
+sidérai	sideRe	sidérer	VER	VER			ind:pas:1s;	s_i|d_e|R_e	s_i|d_é|r_ai	0.0	0.0	synthetic
+sidéras	sideRa	sidérer	VER	VER			ind:pas:2s;	s_i|d_e|R_a	s_i|d_é|r_as	0.0	0.0	synthetic
+sidéra	sideRa	sidérer	VER	VER			ind:pas:3s;	s_i|d_e|R_a	s_i|d_é|r_a	0.0	0.0	synthetic
+sidérâmes	sideRam	sidérer	VER	VER			ind:pas:1p;	s_i|d_e|R_a_m_#	s_i|d_é|r_â_m_es	0.0	0.0	synthetic
+sidérèrent	sideRER	sidérer	VER	VER			ind:pas:3p;	s_i|d_e|R_E_R_#	s_i|d_é|r_è_r_ent	0.0	0.0	synthetic
+sidérerais	sideR°RE	sidérer	VER	VER			cnd:pre:1s;	s_i|d_e|R_°|R_E	s_i|d_é|r_e|r_ais	0.0	0.0	synthetic
+sidérerais	sideR°RE	sidérer	VER	VER			cnd:pre:2s;	s_i|d_e|R_°|R_E	s_i|d_é|r_e|r_ais	0.0	0.0	synthetic
+sidérerait	sideR°RE	sidérer	VER	VER			cnd:pre:3s;	s_i|d_e|R_°|R_E	s_i|d_é|r_e|r_ait	0.0	0.0	synthetic
+sidérerions	sideR°Rj§	sidérer	VER	VER			cnd:pre:1p;	s_i|d_e|R_°|R_j_§	s_i|d_é|r_e|r_i_ons	0.0	0.0	synthetic
+sidéreriez	sideR°Rje	sidérer	VER	VER			cnd:pre:2p;	s_i|d_e|R_°|R_j_e	s_i|d_é|r_e|r_i_ez	0.0	0.0	synthetic
+sidéreraient	sideR°RE	sidérer	VER	VER			cnd:pre:3p;	s_i|d_e|R_°|R_E	s_i|d_é|r_e|r_aient	0.0	0.0	synthetic
+sidère	sidER	sidérer	VER	VER			sub:pre:1s;	s_i|d_E_R_#	s_i|d_è_r_e	0.0	0.0	synthetic
+sidères	sidER	sidérer	VER	VER			sub:pre:2s;	s_i|d_E_R_#	s_i|d_è_r_es	0.0	0.0	synthetic
+sidère	sidER	sidérer	VER	VER			sub:pre:3s;	s_i|d_E_R_#	s_i|d_è_r_e	0.0	0.0	synthetic
+sidérions	sideRj§	sidérer	VER	VER			sub:pre:1p;	s_i|d_e|R_j_§	s_i|d_é|r_i_ons	0.0	0.0	synthetic
+sidériez	sideRje	sidérer	VER	VER			sub:pre:2p;	s_i|d_e|R_j_e	s_i|d_é|r_i_ez	0.0	0.0	synthetic
+sidèrent	sidER	sidérer	VER	VER			sub:pre:3p;	s_i|d_E_R_#	s_i|d_è_r_ent	0.0	0.0	synthetic
+sidérons	sideR§	sidérer	VER	VER			imp:pre:1p;	s_i|d_e|R_§	s_i|d_é|r_ons	0.0	0.0	synthetic
+sidérez	sideRe	sidérer	VER	VER			imp:pre:2p;	s_i|d_e|R_e	s_i|d_é|r_ez	0.0	0.0	synthetic
+alambiqué	al@bike	alambiqué	ADJ	VER,ADJ	m	s		a|l_@|b_i|k_e	a|l_am|b_i|qu_é	0.0	0.0	synthetic
+individué	5divid8e	individué	ADJ	ADJ	m	s		5|d_i|v_i|d_8_e	in|d_i|v_i|d_u_é	0.0	0.0	synthetic
+mosaïqué	mozaike	mosaïqué	ADJ	ADJ	m	s		m_o|z_a|i|k_e	m_o|s_a|ï|qu_é	0.0	0.0	synthetic
+parqué	paRke	parqué	ADJ	VER,ADJ	m	s		p_a_R|k_e	p_a_r|qu_é	0.0	0.0	synthetic
+ponctué	p§kt8e	ponctué	ADJ	VER,ADJ	m	s		p_§_k|t_8_e	p_on_c|t_u_é	0.0	0.0	synthetic
+individuées	5divid8e	individué	ADJ	ADJ	f	p		5|d_i|v_i|d_8_e_#	in|d_i|v_i|d_u_é_es	0.0	0.0	synthetic
+mosaïquées	mozaike	mosaïqué	ADJ	ADJ	f	p		m_o|z_a|i|k_e_#	m_o|s_a|ï|qu_é_es	0.0	0.0	synthetic
+parquées	paRke	parqué	ADJ	VER,ADJ	f	p		p_a_R|k_e_#	p_a_r|qu_é_es	0.0	0.0	synthetic

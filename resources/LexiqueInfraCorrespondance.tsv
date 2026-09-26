@@ -4877,7 +4877,7 @@ amadouant	amadw@	VER	a.m.a.d.ou.ant	a-a.m-m.a-a.d-d.ou-w.ant-@	1.1.1.1.0.1.
 amadoue	amadu	VER	a.m.a.d.ou.e	a-a.m-m.a-a.d-d.ou-u.e-#	1.1.1.1.1.1.
 amadouer	amadwe	VER	a.m.a.d.ou.er	a-a.m-m.a-a.d-d.ou-w.er-e	1.1.1.1.0.1.
 amadoueras	amaduRa	VER	a.m.a.d.ou.e.r.as	a-a.m-m.a-a.d-d.ou-u.e-#.r-R.as-a	1.1.1.1.1.0.1.1.
-amadouez	amadue	VER	a.m.a.d.ou.ez	a-a.m-m.a-a.d-d.ou-u.ez-e	1.1.1.1.1.1.
+amadouez	amadwe	VER	a.m.a.d.ou.ez	a-a.m-m.a-a.d-d.ou-w.ez-e	1.1.1.1.0.1.
 amadoué	amadwe	VER	a.m.a.d.ou.é	a-a.m-m.a-a.d-d.ou-w.é-e	1.1.1.1.0.1.
 amaigri	amegRi	ADJ	a.m.ai.g.r.i	a-a.m-m.ai-e.g-g.r-R.i-i	1.1.0.0.1.1.
 amaigri	amegRi	VER	a.m.ai.g.r.i	a-a.m-m.ai-e.g-g.r-R.i-i	1.1.0.0.1.1.
@@ -11301,7 +11301,7 @@ avoueriez	avuRje	VER	a.v.ou.e.r.i.ez	a-a.v-v.ou-u.e-#.r-R.i-j.ez-e	1.1.1.0.1.0.1
 avouerions	avuRj§	VER	a.v.ou.e.r.i.ons	a-a.v-v.ou-u.e-#.r-R.i-j.ons-§	1.1.1.0.1.0.1.
 avoueront	avuR§	VER	a.v.ou.e.r.ont	a-a.v-v.ou-u.e-#.r-R.ont-§	1.1.1.0.1.1.
 avoues	avu	VER	a.v.ou.es	a-a.v-v.ou-u.es-#	1.1.1.1.
-avouez	avue	VER	a.v.ou.ez	a-a.v-v.ou-u.ez-e	1.1.1.1.
+avouez	avwe	VER	a.v.ou.ez	a-a.v-v.ou-w.ez-e	1.1.0.1.
 avouiez	avuje	VER	a.v.ou.i.ez	a-a.v-v.ou-u.i-j.ez-e	1.1.1.0.1.
 avouions	avuj§	VER	a.v.ou.i.ons	a-a.v-v.ou-u.i-j.ons-§	1.1.1.0.1.
 avouons	avw§	VER	a.v.ou.ons	a-a.v-v.ou-w.ons-§	1.1.0.1.
@@ -11683,7 +11683,7 @@ bafoue	bafu	VER	b.a.f.ou.e	b-b.a-a.f-f.ou-u.e-#	1.1.1.1.1.
 bafouent	bafu	VER	b.a.f.ou.ent	b-b.a-a.f-f.ou-u.ent-#	1.1.1.1.0.
 bafouer	bafwe	VER	b.a.f.ou.er	b-b.a-a.f-f.ou-w.er-e	1.1.1.0.1.
 bafoues	bafu	VER	b.a.f.ou.es	b-b.a-a.f-f.ou-u.es-#	1.1.1.1.1.
-bafouez	bafue	VER	b.a.f.ou.ez	b-b.a-a.f-f.ou-u.ez-e	1.1.1.1.1.
+bafouez	bafwe	VER	b.a.f.ou.ez	b-b.a-a.f-f.ou-w.ez-e	1.1.1.0.1.
 bafouilla	bafuja	VER	b.a.f.ou.ill.a	b-b.a-a.f-f.ou-u.ill-j.a-a	1.1.1.1.0.1.
 bafouillage	bafujaZ	NOM	b.a.f.ou.ill.a.ge	b-b.a-a.f-f.ou-u.ill-j.a-a.ge-Z	1.1.1.1.0.1.1.
 bafouillages	bafujaZ	NOM	b.a.f.ou.ill.a.g.es	b-b.a-a.f-f.ou-u.ill-j.a-a.g-Z.es-#	1.1.1.1.0.1.1.1.
@@ -14333,8 +14333,8 @@ bivouaquait	bivwakE	VER	b.i.v.ou.a.qu.ait	b-b.i-i.v-v.ou-w.a-a.qu-k.ait-E	1.1.1.
 bivouaque	bivwak	VER	b.i.v.ou.a.qu.e	b-b.i-i.v-v.ou-w.a-a.qu-k.e-#	1.1.1.0.1.1.1.
 bivouaquent	bivwak	VER	b.i.v.ou.a.qu.ent	b-b.i-i.v-v.ou-w.a-a.qu-k.ent-#	1.1.1.0.1.1.0.
 bivouaquer	bivwake	VER	b.i.v.ou.a.qu.er	b-b.i-i.v-v.ou-w.a-a.qu-k.er-e	1.1.1.0.1.1.1.
-bivouaquerons	bivuak°R§	VER	b.i.v.ou.a.qu.e.r.ons	b-b.i-i.v-v.ou-u.a-a.qu-k.e-°.r-R.ons-§	1.1.1.1.1.1.0.1.1.
-bivouaquons	bivuak§	VER	b.i.v.ou.a.qu.ons	b-b.i-i.v-v.ou-u.a-a.qu-k.ons-§	1.1.1.1.1.1.1.
+bivouaquerons	bivwak°R§	VER	b.i.v.ou.a.qu.e.r.ons	b-b.i-i.v-v.ou-w.a-a.qu-k.e-°.r-R.ons-§	1.1.1.0.1.1.0.1.1.
+bivouaquons	bivwak§	VER	b.i.v.ou.a.qu.ons	b-b.i-i.v-v.ou-w.a-a.qu-k.ons-§	1.1.1.0.1.1.1.
 bivouaqué	bivwake	VER	b.i.v.ou.a.qu.é	b-b.i-i.v-v.ou-w.a-a.qu-k.é-e	1.1.1.0.1.1.1.
 bivouaquée	bivwake	VER	b.i.v.ou.a.qu.é.e	b-b.i-i.v-v.ou-w.a-a.qu-k.é-e.e-#	1.1.1.0.1.1.1.1.
 bizarde	bizaRd	ADJ	b.i.z.a.r.d.e	b-b.i-i.z-z.a-a.r-R.d-d.e-#	1.1.1.1.1.1.1.
@@ -41190,8 +41190,8 @@ déjouer	deZwe	VER	d.é.j.ou.er	d-d.é-e.j-Z.ou-w.er-e	1.1.1.0.1.
 déjouerai	deZuRe	VER	d.é.j.ou.e.r.ai	d-d.é-e.j-Z.ou-u.e-#.r-R.ai-e	1.1.1.1.0.1.1.
 déjouerez	deZuRe	VER	d.é.j.ou.e.r.ez	d-d.é-e.j-Z.ou-u.e-#.r-R.ez-e	1.1.1.1.0.1.1.
 déjouerions	deZuRj§	VER	d.é.j.ou.e.r.i.ons	d-d.é-e.j-Z.ou-u.e-#.r-R.i-j.ons-§	1.1.1.1.0.1.0.1.
-déjouez	deZue	VER	d.é.j.ou.ez	d-d.é-e.j-Z.ou-u.ez-e	1.1.1.1.1.
-déjouons	deZu§	VER	d.é.j.ou.ons	d-d.é-e.j-Z.ou-u.ons-§	1.1.1.1.1.
+déjouez	deZwe	VER	d.é.j.ou.ez	d-d.é-e.j-Z.ou-w.ez-e	1.1.1.0.1.
+déjouons	deZw§	VER	d.é.j.ou.ons	d-d.é-e.j-Z.ou-w.ons-§	1.1.1.0.1.
 déjoué	deZwe	VER	d.é.j.ou.é	d-d.é-e.j-Z.ou-w.é-e	1.1.1.0.1.
 déjouée	deZwe	VER	d.é.j.ou.é.e	d-d.é-e.j-Z.ou-w.é-e.e-#	1.1.1.0.1.1.
 déjouées	deZwe	VER	d.é.j.ou.é.es	d-d.é-e.j-Z.ou-w.é-e.es-#	1.1.1.0.1.1.
@@ -43616,7 +43616,7 @@ désavouent	dezavu	VER	d.é.s.a.v.ou.ent	d-d.é-e.s-z.a-a.v-v.ou-u.ent-#	1.1.0.1
 désavouer	dezavwe	VER	d.é.s.a.v.ou.er	d-d.é-e.s-z.a-a.v-v.ou-w.er-e	1.1.0.1.1.0.1.
 désavoueraient	dezavuRE	VER	d.é.s.a.v.ou.e.r.aient	d-d.é-e.s-z.a-a.v-v.ou-u.e-#.r-R.aient-E	1.1.0.1.1.1.0.1.1.
 désavouerons	dezavuR§	VER	d.é.s.a.v.ou.e.r.ons	d-d.é-e.s-z.a-a.v-v.ou-u.e-#.r-R.ons-§	1.1.0.1.1.1.0.1.1.
-désavouez	dezavue	VER	d.é.s.a.v.ou.ez	d-d.é-e.s-z.a-a.v-v.ou-u.ez-e	1.1.0.1.1.1.1.
+désavouez	dezavwe	VER	d.é.s.a.v.ou.ez	d-d.é-e.s-z.a-a.v-v.ou-w.ez-e	1.1.0.1.1.0.1.
 désavouât	dezavwa	VER	d.é.s.a.v.ou.ât	d-d.é-e.s-z.a-a.v-v.ou-w.ât-a	1.1.0.1.1.0.1.
 désavoué	dezavwe	VER	d.é.s.a.v.ou.é	d-d.é-e.s-z.a-a.v-v.ou-w.é-e	1.1.0.1.1.0.1.
 désavouée	dezavwe	VER	d.é.s.a.v.ou.é.e	d-d.é-e.s-z.a-a.v-v.ou-w.é-e.e-#	1.1.0.1.1.0.1.1.
@@ -45172,7 +45172,7 @@ dévouer	devwe	VER	d.é.v.ou.er	d-d.é-e.v-v.ou-w.er-e	1.1.1.0.1.
 dévouera	devuRa	VER	d.é.v.ou.e.r.a	d-d.é-e.v-v.ou-u.e-#.r-R.a-a	1.1.1.1.0.1.1.
 dévouerais	devuRE	VER	d.é.v.ou.e.r.ais	d-d.é-e.v-v.ou-u.e-#.r-R.ais-E	1.1.1.1.0.1.1.
 dévoues	devu	VER	d.é.v.ou.es	d-d.é-e.v-v.ou-u.es-#	1.1.1.1.1.
-dévouez	devue	VER	d.é.v.ou.ez	d-d.é-e.v-v.ou-u.ez-e	1.1.1.1.1.
+dévouez	devwe	VER	d.é.v.ou.ez	d-d.é-e.v-v.ou-w.ez-e	1.1.1.0.1.
 dévouât	devwa	VER	d.é.v.ou.ât	d-d.é-e.v-v.ou-w.ât-a	1.1.1.0.1.
 dévoué	devwe	VER	d.é.v.ou.é	d-d.é-e.v-v.ou-w.é-e	1.1.1.0.1.
 dévoué	devwe	ADJ	d.é.v.ou.é	d-d.é-e.v-v.ou-w.é-e	1.1.1.0.1.
@@ -56353,7 +56353,7 @@ fouetterai	fwEt°Re	VER	f.ou.e.tt.e.r.ai	f-f.ou-w.e-E.tt-t.e-°.r-R.ai-e	1.0.1.1
 fouetterait	fwEt°RE	VER	f.ou.e.tt.e.r.ait	f-f.ou-w.e-E.tt-t.e-°.r-R.ait-E	1.0.1.1.0.1.1.
 fouetteront	fwEt°R§	VER	f.ou.e.tt.e.r.ont	f-f.ou-w.e-E.tt-t.e-°.r-R.ont-§	1.0.1.1.0.1.1.
 fouettes	fwEt	VER	f.ou.e.tt.es	f-f.ou-w.e-E.tt-t.es-#	1.0.1.1.1.
-fouetteur	fuEt9R	NOM	f.ou.e.tt.eu.r	f-f.ou-u.e-E.tt-t.eu-9.r-R	1.1.1.1.0.1.
+fouetteur	fwEt9R	NOM	f.ou.e.tt.eu.r	f-f.ou-w.e-E.tt-t.eu-9.r-R	1.0.1.1.0.1.
 fouetteurs	fwEt9R	ADJ	f.ou.e.tt.eu.r.s	f-f.ou-w.e-E.tt-t.eu-9.r-R.s-#	1.0.1.1.0.1.1.
 fouetteurs	fwEt9R	NOM	f.ou.e.tt.eu.r.s	f-f.ou-w.e-E.tt-t.eu-9.r-R.s-#	1.0.1.1.0.1.1.
 fouetteuse	fwEt2z	NOM	f.ou.e.tt.eu.s.e	f-f.ou-w.e-E.tt-t.eu-2.s-z.e-#	1.0.1.1.1.0.1.
@@ -72241,7 +72241,7 @@ joueuse	Zw2z	ADJ	j.ou.eu.s.e	j-Z.ou-w.eu-2.s-z.e-#	1.0.1.0.1.
 joueuse	Zw2z	NOM	j.ou.eu.s.e	j-Z.ou-w.eu-2.s-z.e-#	1.0.1.0.1.
 joueuses	Zw2z	ADJ	j.ou.eu.s.es	j-Z.ou-w.eu-2.s-z.es-#	1.0.1.0.1.
 joueuses	Zw2z	NOM	j.ou.eu.s.es	j-Z.ou-w.eu-2.s-z.es-#	1.0.1.0.1.
-jouez	Zue	VER	j.ou.ez	j-Z.ou-u.ez-e	1.1.1.
+jouez	Zwe	VER	j.ou.ez	j-Z.ou-w.ez-e	1.0.1.
 joufflu	Zufly	ADJ	j.ou.ff.l.u	j-Z.ou-u.ff-f.l-l.u-y	1.1.1.1.1.
 joufflu	Zufly	NOM	j.ou.ff.l.u	j-Z.ou-u.ff-f.l-l.u-y	1.1.1.1.1.
 joufflue	Zufly	ADJ	j.ou.ff.l.u.e	j-Z.ou-u.ff-f.l-l.u-y.e-#	1.1.1.1.1.1.
@@ -75420,7 +75420,7 @@ loues	lu	VER	l.ou.es	l-l.ou-u.es-#	1.1.1.
 loueur	lw9R	NOM	l.ou.eu.r	l-l.ou-w.eu-9.r-R	1.0.0.1.
 loueurs	lw9R	NOM	l.ou.eu.r.s	l-l.ou-w.eu-9.r-R.s-#	1.0.0.1.1.
 loueuse	lw2z	NOM	l.ou.eu.s.e	l-l.ou-w.eu-2.s-z.e-#	1.0.1.0.1.
-louez	lue	VER	l.ou.ez	l-l.ou-u.ez-e	1.1.1.
+louez	lwe	VER	l.ou.ez	l-l.ou-w.ez-e	1.0.1.
 louf	luf	ADJ	l.ou.f	l-l.ou-u.f-f	1.1.1.
 loufer	lufe	VER	l.ou.f.er	l-l.ou-u.f-f.er-e	1.1.1.1.
 loufes	luf	VER	l.ou.f.es	l-l.ou-u.f-f.es-#	1.1.1.1.
@@ -84782,7 +84782,7 @@ nouaient	nwE	VER	n.ou.aient	n-n.ou-w.aient-E	1.0.1.
 nouais	nwE	VER	n.ou.ais	n-n.ou-w.ais-E	1.0.1.
 nouait	nwE	VER	n.ou.ait	n-n.ou-w.ait-E	1.0.1.
 nouant	nw@	VER	n.ou.ant	n-n.ou-w.ant-@	1.0.1.
-nouas	nua	VER	n.ou.as	n-n.ou-u.as-a	1.1.1.
+nouas	nwa	VER	n.ou.as	n-n.ou-w.as-a	1.0.1.
 nouba	nuba	NOM	n.ou.b.a	n-n.ou-u.b-b.a-a	1.1.1.1.
 noubas	nuba	NOM	n.ou.b.a.s	n-n.ou-u.b-b.a-a.s-#	1.1.1.1.1.
 noue	nu	NOM	n.ou.e	n-n.ou-u.e-#	1.1.1.
@@ -84797,7 +84797,7 @@ noueront	nuR§	VER	n.ou.e.r.ont	n-n.ou-u.e-#.r-R.ont-§	1.1.0.1.1.
 noueuse	nw2z	ADJ	n.ou.eu.s.e	n-n.ou-w.eu-2.s-z.e-#	1.0.1.0.1.
 noueuses	nw2z	ADJ	n.ou.eu.s.es	n-n.ou-w.eu-2.s-z.es-#	1.0.1.0.1.
 noueux	nw2	ADJ	n.ou.eu.x	n-n.ou-w.eu-2.x-#	1.0.1.1.
-nouez	nue	VER	n.ou.ez	n-n.ou-u.ez-e	1.1.1.
+nouez	nwe	VER	n.ou.ez	n-n.ou-w.ez-e	1.0.1.
 nougat	nuga	NOM	n.ou.g.a.t	n-n.ou-u.g-g.a-a.t-#	1.1.0.1.1.
 nougatine	nugatin	NOM	n.ou.g.a.t.i.n.e	n-n.ou-u.g-g.a-a.t-t.i-i.n-n.e-#	1.1.0.1.1.1.1.1.
 nougatines	nugatin	NOM	n.ou.g.a.t.i.n.es	n-n.ou-u.g-g.a-a.t-t.i-i.n-n.es-#	1.1.0.1.1.1.1.1.
@@ -87854,7 +87854,7 @@ ouïe	wi	VER	ou.ï.e	ou-w.ï-i.e-#	1.1.1.
 ouïes	wi	NOM	ou.ï.es	ou-w.ï-i.es-#	1.1.1.
 ouïgour	uiguR	NOM	ou.ï.g.ou.r	ou-u.ï-i.g-g.ou-u.r-R	0.1.0.1.1.
 ouïr	wiR	VER	ou.ï.r	ou-w.ï-i.r-R	1.1.1.
-ouïrais	uiRE	VER	ou.ï.r.ais	ou-u.ï-i.r-R.ais-E	0.1.1.1.
+ouïrais	wiRE	VER	ou.ï.r.ais	ou-w.ï-i.r-R.ais-E	0.1.1.1.
 ouïs	wi	VER	ou.ï.s	ou-w.ï-i.s-#	1.1.1.
 ouït	wi	VER	ou.ï.t	ou-w.ï-i.t-#	1.1.1.
 ovaire	ovER	NOM	o.v.ai.r.e	o-o.v-v.ai-E.r-R.e-#	1.1.1.1.1.
@@ -104905,7 +104905,7 @@ rejointoyés	R°Zw5twaje	VER	r.e.j.oin.t.oy.é.s	r-R.e-°.j-Z.oin-w5.t-t.oy-waj.
 rejoints	R°Zw5	VER	r.e.j.oin.ts	r-R.e-°.j-Z.oin-w5.ts-#	1.0.1.1.1.
 rejoints	R°Zw5	ADJ	r.e.j.oin.ts	r-R.e-°.j-Z.oin-w5.ts-#	1.0.1.1.1.
 rejoua	R°Zwa	VER	r.e.j.ou.a	r-R.e-°.j-Z.ou-w.a-a	1.0.1.0.1.
-rejouaient	R°ZuE	VER	r.e.j.ou.aient	r-R.e-°.j-Z.ou-u.aient-E	1.0.1.1.1.
+rejouaient	R°ZwE	VER	r.e.j.ou.aient	r-R.e-°.j-Z.ou-w.aient-E	1.0.1.0.1.
 rejouais	R°ZwE	VER	r.e.j.ou.ais	r-R.e-°.j-Z.ou-w.ais-E	1.0.1.0.1.
 rejouant	R°Zw@	VER	r.e.j.ou.ant	r-R.e-°.j-Z.ou-w.ant-@	1.0.1.0.1.
 rejoue	R°Zu	VER	r.e.j.ou.e	r-R.e-°.j-Z.ou-u.e-#	1.0.1.1.1.
@@ -104916,8 +104916,8 @@ rejoueras	R°ZuRa	VER	r.e.j.ou.e.r.as	r-R.e-°.j-Z.ou-u.e-#.r-R.as-a	1.0.1.1.0.1
 rejouerez	R°ZuRe	VER	r.e.j.ou.e.r.ez	r-R.e-°.j-Z.ou-u.e-#.r-R.ez-e	1.0.1.1.0.1.1.
 rejouerons	R°ZuR§	VER	r.e.j.ou.e.r.ons	r-R.e-°.j-Z.ou-u.e-#.r-R.ons-§	1.0.1.1.0.1.1.
 rejoues	R°Zu	VER	r.e.j.ou.es	r-R.e-°.j-Z.ou-u.es-#	1.0.1.1.1.
-rejouez	R°Zue	VER	r.e.j.ou.ez	r-R.e-°.j-Z.ou-u.ez-e	1.0.1.1.1.
-rejouons	R°Zu§	VER	r.e.j.ou.ons	r-R.e-°.j-Z.ou-u.ons-§	1.0.1.1.1.
+rejouez	R°Zwe	VER	r.e.j.ou.ez	r-R.e-°.j-Z.ou-w.ez-e	1.0.1.0.1.
+rejouons	R°Zw§	VER	r.e.j.ou.ons	r-R.e-°.j-Z.ou-w.ons-§	1.0.1.0.1.
 rejoué	R°Zwe	VER	r.e.j.ou.é	r-R.e-°.j-Z.ou-w.é-e	1.0.1.0.1.
 rejuger	R°ZyZe	VER	r.e.j.u.g.er	r-R.e-°.j-Z.u-y.g-Z.er-e	1.0.1.1.1.1.
 rejugez	R°ZyZe	VER	r.e.j.u.g.ez	r-R.e-°.j-Z.u-y.g-Z.ez-e	1.0.1.1.1.1.
@@ -105153,7 +105153,7 @@ relookerai	R°luk°Re	VER	r.e.l.oo.k.e.r.ai	r-R.e-°.l-l.oo-u.k-k.e-°.r-R.ai-e	
 relooké	R°luke	VER	r.e.l.oo.k.é	r-R.e-°.l-l.oo-u.k-k.é-e	1.0.1.1.1.1.
 relookée	R°luke	VER	r.e.l.oo.k.é.e	r-R.e-°.l-l.oo-u.k-k.é-e.e-#	1.0.1.1.1.1.1.
 reloquer	R°loke	VER	r.e.l.o.qu.er	r-R.e-°.l-l.o-o.qu-k.er-e	1.0.1.0.1.1.
-relouer	R°lue	VER	r.e.l.ou.er	r-R.e-°.l-l.ou-u.er-e	1.0.1.1.1.
+relouer	R°lwe	VER	r.e.l.ou.er	r-R.e-°.l-l.ou-w.er-e	1.0.1.0.1.
 relouerons	R°luR§	VER	r.e.l.ou.e.r.ons	r-R.e-°.l-l.ou-u.e-#.r-R.ons-§	1.0.1.1.0.1.1.
 relourde	R°luRd	VER	r.e.l.ou.r.d.e	r-R.e-°.l-l.ou-u.r-R.d-d.e-#	1.0.1.1.1.1.1.
 relourder	R°luRde	VER	r.e.l.ou.r.d.er	r-R.e-°.l-l.ou-u.r-R.d-d.er-e	1.0.1.1.1.1.1.
@@ -109642,7 +109642,7 @@ roua	Rwa	VER	r.ou.a	r-R.ou-w.a-a	1.0.1.
 rouage	RwaZ	NOM	r.ou.a.ge	r-R.ou-w.a-a.ge-Z	1.0.1.1.
 rouages	RwaZ	NOM	r.ou.a.g.es	r-R.ou-w.a-a.g-Z.es-#	1.0.1.1.1.
 rouaient	RwE	VER	r.ou.aient	r-R.ou-w.aient-E	1.0.1.
-rouais	RuE	VER	r.ou.ais	r-R.ou-u.ais-E	1.1.1.
+rouais	RwE	VER	r.ou.ais	r-R.ou-w.ais-E	1.0.1.
 rouait	RwE	VER	r.ou.ait	r-R.ou-w.ait-E	1.0.1.
 rouan	Rw@	ADJ	r.ou.an	r-R.ou-w.an-@	1.0.1.
 rouan	Rw@	NOM	r.ou.an	r-R.ou-w.an-@	1.0.1.
@@ -111839,12 +111839,12 @@ réjouies	ReZwi	ADJ	r.é.j.ou.i.es	r-R.é-e.j-Z.ou-w.i-i.es-#	1.1.1.0.1.1.
 réjouies	ReZwi	VER	r.é.j.ou.i.es	r-R.é-e.j-Z.ou-w.i-i.es-#	1.1.1.0.1.1.
 réjouir	ReZwiR	VER	r.é.j.ou.i.r	r-R.é-e.j-Z.ou-w.i-i.r-R	1.1.1.0.1.1.
 réjouira	ReZwiRa	VER	r.é.j.ou.i.r.a	r-R.é-e.j-Z.ou-w.i-i.r-R.a-a	1.1.1.0.1.1.1.
-réjouirai	ReZuiRe	VER	r.é.j.ou.i.r.ai	r-R.é-e.j-Z.ou-u.i-i.r-R.ai-e	1.1.1.1.1.1.1.
+réjouirai	ReZwiRe	VER	r.é.j.ou.i.r.ai	r-R.é-e.j-Z.ou-w.i-i.r-R.ai-e	1.1.1.0.1.1.1.
 réjouirais	ReZwiRE	VER	r.é.j.ou.i.r.ais	r-R.é-e.j-Z.ou-w.i-i.r-R.ais-E	1.1.1.0.1.1.1.
 réjouirait	ReZwiRE	VER	r.é.j.ou.i.r.ait	r-R.é-e.j-Z.ou-w.i-i.r-R.ait-E	1.1.1.0.1.1.1.
 réjouirent	ReZwiR	VER	r.é.j.ou.i.r.ent	r-R.é-e.j-Z.ou-w.i-i.r-R.ent-#	1.1.1.0.1.1.0.
 réjouirez	ReZwiRe	VER	r.é.j.ou.i.r.ez	r-R.é-e.j-Z.ou-w.i-i.r-R.ez-e	1.1.1.0.1.1.1.
-réjouirons	ReZuiR§	VER	r.é.j.ou.i.r.ons	r-R.é-e.j-Z.ou-u.i-i.r-R.ons-§	1.1.1.1.1.1.1.
+réjouirons	ReZwiR§	VER	r.é.j.ou.i.r.ons	r-R.é-e.j-Z.ou-w.i-i.r-R.ons-§	1.1.1.0.1.1.1.
 réjouiront	ReZwiR§	VER	r.é.j.ou.i.r.ont	r-R.é-e.j-Z.ou-w.i-i.r-R.ont-§	1.1.1.0.1.1.1.
 réjouis	ReZwi	ADJ	r.é.j.ou.i.s	r-R.é-e.j-Z.ou-w.i-i.s-#	1.1.1.0.1.1.
 réjouis	ReZwi	VER	r.é.j.ou.is	r-R.é-e.j-Z.ou-w.is-i	1.1.1.0.1.
@@ -111861,7 +111861,7 @@ réjouissants	ReZwis@	ADJ	r.é.j.ou.i.ss.an.ts	r-R.é-e.j-Z.ou-w.i-i.ss-s.an-@.t
 réjouisse	ReZwis	VER	r.é.j.ou.i.ss.e	r-R.é-e.j-Z.ou-w.i-i.ss-s.e-#	1.1.1.0.1.1.1.
 réjouissent	ReZwis	VER	r.é.j.ou.i.ss.ent	r-R.é-e.j-Z.ou-w.i-i.ss-s.ent-#	1.1.1.0.1.1.0.
 réjouissez	ReZwise	VER	r.é.j.ou.i.ss.ez	r-R.é-e.j-Z.ou-w.i-i.ss-s.ez-e	1.1.1.0.1.1.1.
-réjouissiez	ReZuisje	VER	r.é.j.ou.i.ss.i.ez	r-R.é-e.j-Z.ou-u.i-i.ss-s.i-j.ez-e	1.1.1.1.1.1.0.1.
+réjouissiez	ReZwisje	VER	r.é.j.ou.i.ss.i.ez	r-R.é-e.j-Z.ou-w.i-i.ss-s.i-j.ez-e	1.1.1.0.1.1.0.1.
 réjouissions	ReZwisj§	VER	r.é.j.ou.i.ss.i.ons	r-R.é-e.j-Z.ou-w.i-i.ss-s.i-j.ons-§	1.1.1.0.1.1.0.1.
 réjouissons	ReZwis§	VER	r.é.j.ou.i.ss.ons	r-R.é-e.j-Z.ou-w.i-i.ss-s.ons-§	1.1.1.0.1.1.1.
 réjouit	ReZwi	VER	r.é.j.ou.it	r-R.é-e.j-Z.ou-w.it-i	1.1.1.0.1.
@@ -115318,8 +115318,8 @@ secouerez	s°kuRe	VER	s.e.c.ou.e.r.ez	s-s.e-°.c-k.ou-u.e-#.r-R.ez-e	1.0.0.1.0.1
 secoueront	s°kuR§	VER	s.e.c.ou.e.r.ont	s-s.e-°.c-k.ou-u.e-#.r-R.ont-§	1.0.0.1.0.1.1.
 secoues	s°ku	VER	s.e.c.ou.es	s-s.e-°.c-k.ou-u.es-#	1.0.0.1.1.
 secoueur	s°kw9R	NOM	s.e.c.ou.eu.r	s-s.e-°.c-k.ou-w.eu-9.r-R	1.0.0.0.0.1.
-secoueurs	s°ku9R	NOM	s.e.c.ou.eu.r.s	s-s.e-°.c-k.ou-u.eu-9.r-R.s-#	1.0.0.1.0.1.1.
-secouez	s°kue	VER	s.e.c.ou.ez	s-s.e-°.c-k.ou-u.ez-e	1.0.0.1.1.
+secoueurs	s°kw9R	NOM	s.e.c.ou.eu.r.s	s-s.e-°.c-k.ou-w.eu-9.r-R.s-#	1.0.0.0.0.1.1.
+secouez	s°kwe	VER	s.e.c.ou.ez	s-s.e-°.c-k.ou-w.ez-e	1.0.0.0.1.
 secouions	s°kuj§	VER	s.e.c.ou.i.ons	s-s.e-°.c-k.ou-u.i-j.ons-§	1.0.0.1.0.1.
 secouons	s°kw§	VER	s.e.c.ou.ons	s-s.e-°.c-k.ou-w.ons-§	1.0.0.0.1.
 secourable	s°kuRabl	ADJ	s.e.c.ou.r.a.b.l.e	s-s.e-°.c-k.ou-u.r-R.a-a.b-b.l-l.e-#	1.0.0.1.1.1.1.1.1.
@@ -120719,8 +120719,8 @@ surdosage	syRdozaZ	NOM	s.u.r.d.o.s.a.ge	s-s.u-y.r-R.d-d.o-o.s-z.a-a.ge-Z	1.1.1.1
 surdose	syRdoz	NOM	s.u.r.d.o.s.e	s-s.u-y.r-R.d-d.o-o.s-z.e-#	1.1.1.1.0.0.1.
 surdoué	syRdwe	ADJ	s.u.r.d.ou.é	s-s.u-y.r-R.d-d.ou-w.é-e	1.1.1.1.0.1.
 surdoué	syRdwe	NOM	s.u.r.d.ou.é	s-s.u-y.r-R.d-d.ou-w.é-e	1.1.1.1.0.1.
-surdouée	syRdue	ADJ	s.u.r.d.ou.é.e	s-s.u-y.r-R.d-d.ou-u.é-e.e-#	1.1.1.1.1.1.1.
-surdouée	syRdue	NOM	s.u.r.d.ou.é.e	s-s.u-y.r-R.d-d.ou-u.é-e.e-#	1.1.1.1.1.1.1.
+surdouée	syRdwe	ADJ	s.u.r.d.ou.é.e	s-s.u-y.r-R.d-d.ou-w.é-e.e-#	1.1.1.1.0.1.1.
+surdouée	syRdwe	NOM	s.u.r.d.ou.é.e	s-s.u-y.r-R.d-d.ou-w.é-e.e-#	1.1.1.1.0.1.1.
 surdoués	syRdwe	ADJ	s.u.r.d.ou.é.s	s-s.u-y.r-R.d-d.ou-w.é-e.s-#	1.1.1.1.0.1.1.
 surdoués	syRdwe	NOM	s.u.r.d.ou.é.s	s-s.u-y.r-R.d-d.ou-w.é-e.s-#	1.1.1.1.0.1.1.
 surdéterminé	syRdetERmine	VER	s.u.r.d.é.t.e.r.m.i.n.é	s-s.u-y.r-R.d-d.é-e.t-t.e-E.r-R.m-m.i-i.n-n.é-e	1.1.1.1.1.1.1.1.1.1.1.1.
@@ -123154,9 +123154,9 @@ tatoue	tatu	VER	t.a.t.ou.e	t-t.a-a.t-t.ou-u.e-#	1.1.1.1.1.
 tatouent	tatu	VER	t.a.t.ou.ent	t-t.a-a.t-t.ou-u.ent-#	1.1.1.1.0.
 tatouer	tatwe	VER	t.a.t.ou.er	t-t.a-a.t-t.ou-w.er-e	1.1.1.0.1.
 tatoueur	tatw9R	NOM	t.a.t.ou.eu.r	t-t.a-a.t-t.ou-w.eu-9.r-R	1.1.1.0.0.1.
-tatoueurs	tatu9R	NOM	t.a.t.ou.eu.r.s	t-t.a-a.t-t.ou-u.eu-9.r-R.s-#	1.1.1.1.0.1.1.
+tatoueurs	tatw9R	NOM	t.a.t.ou.eu.r.s	t-t.a-a.t-t.ou-w.eu-9.r-R.s-#	1.1.1.0.0.1.1.
 tatoueuse	tatw2z	NOM	t.a.t.ou.eu.s.e	t-t.a-a.t-t.ou-w.eu-2.s-z.e-#	1.1.1.0.1.0.1.
-tatouez	tatue	VER	t.a.t.ou.ez	t-t.a-a.t-t.ou-u.ez-e	1.1.1.1.1.
+tatouez	tatwe	VER	t.a.t.ou.ez	t-t.a-a.t-t.ou-w.ez-e	1.1.1.0.1.
 tatous	tatu	NOM	t.a.t.ou.s	t-t.a-a.t-t.ou-u.s-#	1.1.1.1.1.
 tatoué	tatwe	VER	t.a.t.ou.é	t-t.a-a.t-t.ou-w.é-e	1.1.1.0.1.
 tatoué	tatwe	ADJ	t.a.t.ou.é	t-t.a-a.t-t.ou-w.é-e	1.1.1.0.1.
@@ -125170,8 +125170,8 @@ totémiques	totemik	ADJ	t.o.t.é.m.i.qu.es	t-t.o-o.t-t.é-e.m-m.i-i.qu-k.es-#	1.
 totémisme	totemism	NOM	t.o.t.é.m.i.s.m.e	t-t.o-o.t-t.é-e.m-m.i-i.s-s.m-m.e-#	1.0.1.1.1.1.0.1.1.
 touareg	twaReg	ADJ	t.ou.a.r.e.g	t-t.ou-w.a-a.r-R.e-e.g-g	1.0.1.1.0.0.
 touareg	twaReg	NOM	t.ou.a.r.e.g	t-t.ou-w.a-a.r-R.e-e.g-g	1.0.1.1.0.0.
-touaregs	tuaREg	ADJ	t.ou.a.r.e.g.s	t-t.ou-u.a-a.r-R.e-E.g-g.s-#	1.1.1.1.1.0.1.
-touaregs	tuaREg	NOM	t.ou.a.r.e.g.s	t-t.ou-u.a-a.r-R.e-E.g-g.s-#	1.1.1.1.1.0.1.
+touaregs	twaREg	ADJ	t.ou.a.r.e.g.s	t-t.ou-w.a-a.r-R.e-E.g-g.s-#	1.0.1.1.1.0.1.
+touaregs	twaREg	NOM	t.ou.a.r.e.g.s	t-t.ou-w.a-a.r-R.e-E.g-g.s-#	1.0.1.1.1.0.1.
 toubab	tubab	NOM	t.ou.b.a.b	t-t.ou-u.b-b.a-a.b-b	1.1.1.1.1.
 toubabs	tubab	NOM	t.ou.b.a.b.s	t-t.ou-u.b-b.a-a.b-b.s-#	1.1.1.1.1.1.
 toubib	tubib	NOM	t.ou.b.i.b	t-t.ou-u.b-b.i-i.b-b	1.1.1.1.1.
@@ -133542,7 +133542,7 @@ zézettes	zezEt	NOM	z.é.z.e.tt.es	z-z.é-e.z-z.e-E.tt-t.es-#	1.1.1.1.1.1.
 échouerez	eSuRe	VER	é.ch.ou.e.r.ez	é-e.ch-S.ou-u.e-#.r-R.ez-e	1.1.1.0.1.1.
 échouerons	eSuR§	VER	é.ch.ou.e.r.ons	é-e.ch-S.ou-u.e-#.r-R.ons-§	1.1.1.0.1.1.
 échoueront	eSuR§	VER	é.ch.ou.e.r.ont	é-e.ch-S.ou-u.e-#.r-R.ont-§	1.1.1.0.1.1.
-échouez	eSue	VER	é.ch.ou.ez	é-e.ch-S.ou-u.ez-e	1.1.1.1.
+échouez	eSwe	VER	é.ch.ou.ez	é-e.ch-S.ou-w.ez-e	1.1.0.1.
 échouiez	eSuje	VER	é.ch.ou.i.ez	é-e.ch-S.ou-u.i-j.ez-e	1.1.1.0.1.
 échouions	eSuj§	VER	é.ch.ou.i.ons	é-e.ch-S.ou-u.i-j.ons-§	1.1.1.0.1.
 échouons	eSw§	VER	é.ch.ou.ons	é-e.ch-S.ou-w.ons-§	1.1.0.1.
@@ -135664,7 +135664,7 @@ zézettes	zezEt	NOM	z.é.z.e.tt.es	z-z.é-e.z-z.e-E.tt-t.es-#	1.1.1.1.1.1.
 épanouissement	epanwis°m@	NOM	é.p.a.n.ou.i.ss.e.m.ent	é-e.p-p.a-a.n-n.ou-w.i-i.ss-s.e-°.m-m.ent-@	1.1.1.1.0.1.1.0.1.1.
 épanouissements	epanwis°m@	NOM	é.p.a.n.ou.i.ss.e.m.en.ts	é-e.p-p.a-a.n-n.ou-w.i-i.ss-s.e-°.m-m.en-@.ts-#	1.1.1.1.0.1.1.0.1.1.1.
 épanouissent	epanwis	VER	é.p.a.n.ou.i.ss.ent	é-e.p-p.a-a.n-n.ou-w.i-i.ss-s.ent-#	1.1.1.1.0.1.1.0.
-épanouisses	epanuis	VER	é.p.a.n.ou.i.ss.es	é-e.p-p.a-a.n-n.ou-u.i-i.ss-s.es-#	1.1.1.1.1.1.1.1.
+épanouisses	epanwis	VER	é.p.a.n.ou.i.ss.es	é-e.p-p.a-a.n-n.ou-w.i-i.ss-s.es-#	1.1.1.1.0.1.1.1.
 épanouit	epanwi	VER	é.p.a.n.ou.it	é-e.p-p.a-a.n-n.ou-w.it-i	1.1.1.1.0.1.
 épanouît	epanwi	VER	é.p.a.n.ou.ît	é-e.p-p.a-a.n-n.ou-w.ît-i	1.1.1.1.0.1.
 épargna	epaRNa	VER	é.p.a.r.gn.a	é-e.p-p.a-a.r-R.gn-N.a-a	1.1.1.1.1.1.
@@ -137454,12 +137454,12 @@ zézettes	zezEt	NOM	z.é.z.e.tt.es	z-z.é-e.z-z.e-E.tt-t.es-#	1.1.1.1.1.1.
 évanouie	evanwi	VER	é.v.a.n.ou.i.e	é-e.v-v.a-a.n-n.ou-w.i-i.e-#	1.1.1.1.0.1.1.
 évanouies	evanwi	ADJ	é.v.a.n.ou.i.es	é-e.v-v.a-a.n-n.ou-w.i-i.es-#	1.1.1.1.0.1.1.
 évanouies	evanwi	VER	é.v.a.n.ou.i.es	é-e.v-v.a-a.n-n.ou-w.i-i.es-#	1.1.1.1.0.1.1.
-évanouir	evanuiR	VER	é.v.a.n.ou.i.r	é-e.v-v.a-a.n-n.ou-u.i-i.r-R	1.1.1.1.1.1.1.
+évanouir	evanwiR	VER	é.v.a.n.ou.i.r	é-e.v-v.a-a.n-n.ou-w.i-i.r-R	1.1.1.1.0.1.1.
 évanouira	evanwiRa	VER	é.v.a.n.ou.i.r.a	é-e.v-v.a-a.n-n.ou-w.i-i.r-R.a-a	1.1.1.1.0.1.1.1.
 évanouirai	evanwiRe	VER	é.v.a.n.ou.i.r.ai	é-e.v-v.a-a.n-n.ou-w.i-i.r-R.ai-e	1.1.1.1.0.1.1.1.
 évanouirait	evanwiRE	VER	é.v.a.n.ou.i.r.ait	é-e.v-v.a-a.n-n.ou-w.i-i.r-R.ait-E	1.1.1.1.0.1.1.1.
 évanouirent	evanwiR	VER	é.v.a.n.ou.i.r.ent	é-e.v-v.a-a.n-n.ou-w.i-i.r-R.ent-#	1.1.1.1.0.1.1.0.
-évanouirez	evanuiRe	VER	é.v.a.n.ou.i.r.ez	é-e.v-v.a-a.n-n.ou-u.i-i.r-R.ez-e	1.1.1.1.1.1.1.1.
+évanouirez	evanwiRe	VER	é.v.a.n.ou.i.r.ez	é-e.v-v.a-a.n-n.ou-w.i-i.r-R.ez-e	1.1.1.1.0.1.1.1.
 évanouiront	evanwiR§	VER	é.v.a.n.ou.i.r.ont	é-e.v-v.a-a.n-n.ou-w.i-i.r-R.ont-§	1.1.1.1.0.1.1.1.
 évanouis	evanwi	ADJ	é.v.a.n.ou.i.s	é-e.v-v.a-a.n-n.ou-w.i-i.s-#	1.1.1.1.0.1.1.
 évanouis	evanwi	VER	é.v.a.n.ou.is	é-e.v-v.a-a.n-n.ou-w.is-i	1.1.1.1.0.1.
@@ -137471,7 +137471,7 @@ zézettes	zezEt	NOM	z.é.z.e.tt.es	z-z.é-e.z-z.e-E.tt-t.es-#	1.1.1.1.1.1.
 évanouissement	evanwis°m@	NOM	é.v.a.n.ou.i.ss.e.m.ent	é-e.v-v.a-a.n-n.ou-w.i-i.ss-s.e-°.m-m.ent-@	1.1.1.1.0.1.1.0.1.1.
 évanouissements	evanwis°m@	NOM	é.v.a.n.ou.i.ss.e.m.en.ts	é-e.v-v.a-a.n-n.ou-w.i-i.ss-s.e-°.m-m.en-@.ts-#	1.1.1.1.0.1.1.0.1.1.1.
 évanouissent	evanwis	VER	é.v.a.n.ou.i.ss.ent	é-e.v-v.a-a.n-n.ou-w.i-i.ss-s.ent-#	1.1.1.1.0.1.1.0.
-évanouisses	evanuis	VER	é.v.a.n.ou.i.ss.es	é-e.v-v.a-a.n-n.ou-u.i-i.ss-s.es-#	1.1.1.1.1.1.1.1.
+évanouisses	evanwis	VER	é.v.a.n.ou.i.ss.es	é-e.v-v.a-a.n-n.ou-w.i-i.ss-s.es-#	1.1.1.1.0.1.1.1.
 évanouissez	evanwise	VER	é.v.a.n.ou.i.ss.ez	é-e.v-v.a-a.n-n.ou-w.i-i.ss-s.ez-e	1.1.1.1.0.1.1.1.
 évanouit	evanwi	VER	é.v.a.n.ou.it	é-e.v-v.a-a.n-n.ou-w.it-i	1.1.1.1.0.1.
 évanouît	evanwi	VER	é.v.a.n.ou.ît	é-e.v-v.a-a.n-n.ou-w.ît-i	1.1.1.1.0.1.

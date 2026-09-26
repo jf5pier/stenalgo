@@ -397,11 +397,32 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
     attested rows, not in the generator. Same heuristic may still unlock the 6 `jetterez` rows
     (the doubled-consonant stem marks the E the committed `°` hides — would need rewriting a
     committed schwa, left open).
-  - `u`↔`w` (18 rows): LexiqueInfra splits within lemmas (`évanouir` attests `w_i`, `réjouir`
-    `u|i`; phonologically `w` is right for both) — a fix script normalizing the `u`-attesting rows
-    in both lexicon halves.
+  - `u`↔`w` — DONE 2026-09-26 (`util/fixOuGlideConsistency.py --apply`): the 25 lemmas whose
+    `ou`+vowel rows split between hiatus /u/ and glide /w/ (`jouez` Z_u|e beside `jouer` Z_w_e,
+    `évanouir` 18 u / 17 w, `réjouirai`, `relouer`, `touareg`…) are normalized to /w/ with the
+    syllable merge, in all four files (Lexique383 phon/syll/nbsyll/cv-cv/p_cvcv/phonrenv, Infra
+    phono/assoc/regTo_GP, Mixte and Synthetic phon/syll_cv/orthosyll_cv): 36 Mixte + 19 Synthetic
+    rows. `python lexique.py` regenerates exactly the 36 patched Mixte rows. Uniformly-/u/ lemmas
+    (`hindouisme`, `louisianais`, `ouïgour`) and the obstruent+liquid hiatus lemmas (`trouer`,
+    `clouer`, /u/ is correct there) are untouched. Rebuild: S2 converged after appending 71 rows
+    (3 rounds; the changed strokes moved the collision gate: the whole `sidérer` paradigm (33)
+    plus one gap each in 35 hiatus/participle lemmas: `clouer`, `strier`, `suppléer`,
+    `individué`, `mosaïqué`…); final collisions 0/0/0; Plover 167,708 → 167,768 (−55/+115
+    stenos), 0 spellings lost, 27 gained (23 `sidérer` forms, `individué(es)`, `mosaïqué(es)`);
+    keyboard-layout.json identical; 639 tests pass. Before/after `scratch/uw-before/`, log
+    `scratch/uw-rebuild.log`.
   - the two small splice bugs: the dropped `n` in `enorgueillir`'s cut (5 rows) and the malformed
-    `ij#` unit in `oublierions`/`publierions`/`supplieriez` (3 rows).
+    `ij#` unit in `oublierions`/`publierions`/`supplieriez` (3 rows). Same class, found
+    2026-09-26: the cluster `-ouer` verbs' synthetic rows carry a malformed `u#` unit
+    (`troue` t_R_u#, `clouerions` k_l_u#|R_j_§, `rabroue`, `écroue`, `renfloue`, `relouer`…;
+    44 rows whose syll_cv and orthosyll_cv no longer align unit for unit).
+  - **`python lexique.py` no longer reproduces the committed LexiqueMixte.tsv** (found
+    2026-09-26): 0b5eace remapped 49 `-eter`/`-eler` verbs to `ach:eter`/`p:eler` in
+    verbs-fr.xml, which drops them from `loadElerEterQualifyingVerbs` (lexique.py:441, reads
+    only `app:eler`/`j:eter`), so a regeneration no longer applies reform rule 5 to their
+    Lexique383 doubled forms: 56 rows revert (`amoncèle` → `amoncelle`, `amoncèlement` →
+    `amoncellement`). Until fixed, any Mixte-level fix must patch Mixte in place, not rerun
+    lexique.py.
   - accepted noise, no action: `o` non-final-open (Infra contradicts itself, `posera` `o` vs
     `délogera` `O`), `2`/`9`/`°` variation (~10 rows), the boundary 1-offs.
 - **Pluvier-style TAO prefix/suffix shortcut scan** — go through Pluvier's dictionary rules
