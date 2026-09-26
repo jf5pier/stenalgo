@@ -14388,7 +14388,7 @@ blets	blE	blet	ADJ	ADJ	m	p		b_l_E_#	b_l_e_ts	0.07	0.01
 blette	blEt	blet	ADJ	ADJ	f	s		b_l_E_t_#	b_l_e_tt_e	0.61	0.02
 blettes	blEt	blette	NOM	ADJ,NOM	f	p		b_l_E_t_#	b_l_e_tt_es	0.2	0.16
 blettes	blEt	blet	ADJ	ADJ,NOM	f	p		b_l_E_t_#	b_l_e_tt_es	0.27	0.01
-blettir	bletiR	blettir	VER	VER			inf;	b_l_e|t_i_R	b_l_e|tt_i_r	0.07	0.0
+blettir	blEtiR	blettir	VER	VER			inf;	b_l_E|t_i_R	b_l_e|tt_i_r	0.07	0.0
 blettissait	blEtisE	blettir	VER	VER			ind:imp:3s;	b_l_E|t_i|s_E	b_l_e|tt_i|ss_ait	0.07	0.0
 blettissement	bletis°m@	blettissement	NOM	NOM	m	s		b_l_e|t_i|s_°|m_@	b_l_e|tt_i|ss_e|m_ent	0.14	0.0
 bleu	bl2	bleu	ADJ	ADJ,NOM	m	s		b_l_2	b_l_eu	100.41	31.24
@@ -33796,22 +33796,22 @@ derviche	dERviS	derviche	NOM	NOM	m	s		d_E_R|v_i_S_#	d_e_r|v_i_ch_e	1.35	0.08
 derviches	dERviS	derviche	NOM	NOM	m	p		d_E_R|v_i_S_#	d_e_r|v_i_ch_es	0.41	0.03
 des	de	des	ART:ind	ART:ind		p		d_e_#	d_e_s	10624.93	6055.71
 descamisados	dEskamizado	descamisado	NOM	NOM	m	p		d_E_s|k_a|m_i|z_a|d_o_#	d_e_s|c_a|m_i|s_a|d_o_s	0.07	0.0
-descella	desEla	desceller	VER	VER			ind:pas:3s;	d_e|s_E|l_a	d_e|sc_e|ll_a	0.07	0.0
-descellant	desEl@	desceller	VER	VER			par:pre;	d_e|s_E|l_@	d_e|sc_e|ll_ant	0.07	0.0
-desceller	desEle	desceller	VER	VER			inf;	d_e|s_E|l_e	d_e|sc_e|ll_er	0.41	0.01
+descella	dEsEla	desceller	VER	VER			ind:pas:3s;	d_E|s_E|l_a	d_e|sc_e|ll_a	0.07	0.0
+descellant	dEsEl@	desceller	VER	VER			par:pre;	d_E|s_E|l_@	d_e|sc_e|ll_ant	0.07	0.0
+desceller	dEsEle	desceller	VER	VER			inf;	d_E|s_E|l_e	d_e|sc_e|ll_er	0.41	0.01
 descellera	dEsEl°Ra	desceller	VER	VER			ind:fut:3s;	d_E|s_E|l_°|R_a	d_e|sc_e|ll_e|r_a	0.0	0.02
-descellez	desEle	desceller	VER	VER			ind:pre:2p;	d_e|s_E|l_e	d_e|sc_e|ll_ez	0.07	0.0
-descellé	desEle	desceller	VER	VER	m	s	par:pas;	d_e|s_E|l_e	d_e|sc_e|ll_é	0.47	0.02
-descellée	desEle	desceller	VER	VER	f	s	par:pas;	d_e|s_E|l_e_#	d_e|sc_e|ll_é_e	0.14	0.02
-descellées	desEle	desceller	VER	VER	f	p	par:pas;	d_e|s_E|l_e_#	d_e|sc_e|ll_é_es	0.14	0.0
-descellés	desEle	desceller	VER	VER	m	p	par:pas;	d_e|s_E|l_e_#	d_e|sc_e|ll_é_s	0.2	0.0
-descend	des@	descendre	VER	VER			ind:pre:3s;	d_e|s_@_#	d_e|sc_en_d	32.64	26.09
-descendaient	des@dE	descendre	VER	VER			ind:imp:3p;	d_e|s_@|d_E	d_e|sc_en|d_aient	10.41	0.67
-descendais	des@dE	descendre	VER	VER			ind:imp:1s;ind:imp:2s;	d_e|s_@|d_E	d_e|sc_en|d_ais	3.45	0.97
-descendait	des@dE	descendre	VER	VER			ind:imp:3s;	d_e|s_@|d_E	d_e|sc_en|d_ait	33.45	2.43
+descellez	dEsEle	desceller	VER	VER			ind:pre:2p;	d_E|s_E|l_e	d_e|sc_e|ll_ez	0.07	0.0
+descellé	dEsEle	desceller	VER	VER	m	s	par:pas;	d_E|s_E|l_e	d_e|sc_e|ll_é	0.47	0.02
+descellée	dEsEle	desceller	VER	VER	f	s	par:pas;	d_E|s_E|l_e_#	d_e|sc_e|ll_é_e	0.14	0.02
+descellées	dEsEle	desceller	VER	VER	f	p	par:pas;	d_E|s_E|l_e_#	d_e|sc_e|ll_é_es	0.14	0.0
+descellés	dEsEle	desceller	VER	VER	m	p	par:pas;	d_E|s_E|l_e_#	d_e|sc_e|ll_é_s	0.2	0.0
+descend	dEs@	descendre	VER	VER			ind:pre:3s;	d_E|s_@_#	d_e|sc_en_d	32.64	26.09
+descendaient	dEs@dE	descendre	VER	VER			ind:imp:3p;	d_E|s_@|d_E	d_e|sc_en|d_aient	10.41	0.67
+descendais	dEs@dE	descendre	VER	VER			ind:imp:1s;ind:imp:2s;	d_E|s_@|d_E	d_e|sc_en|d_ais	3.45	0.97
+descendait	dEs@dE	descendre	VER	VER			ind:imp:3s;	d_E|s_@|d_E	d_e|sc_en|d_ait	33.45	2.43
 descendance	des@d@s	descendance	NOM	NOM	f	s		d_e|s_@|d_@_s_#	d_e|sc_en|d_an_c_e	1.89	1.3
 descendances	des@d@s	descendance	NOM	NOM	f	p		d_e|s_@|d_@_s_#	d_e|sc_en|d_an_c_es	0.07	0.01
-descendant	des@d@	descendre	VER	ADJ,NOM,VER			par:pre;	d_e|s_@|d_@	d_e|sc_en|d_ant	16.76	3.73
+descendant	dEs@d@	descendre	VER	ADJ,NOM,VER			par:pre;	d_E|s_@|d_@	d_e|sc_en|d_ant	16.76	3.73
 descendant	des@d@	descendant	NOM	ADJ,NOM,VER	m	s		d_e|s_@|d_@	d_e|sc_en|d_ant	1.69	0.78
 descendant	des@d@	descendant	ADJ	ADJ,NOM,VER	m	s		d_e|s_@|d_@	d_e|sc_en|d_ant	2.23	0.75
 descendante	des@d@t	descendant	NOM	ADJ,NOM	f	s		d_e|s_@|d_@_t_#	d_e|sc_en|d_an_t_e	0.34	0.25
@@ -33820,36 +33820,36 @@ descendantes	des@d@t	descendant	NOM	ADJ,NOM	f	p		d_e|s_@|d_@_t_#	d_e|sc_en|d_an_
 descendantes	des@d@t	descendant	ADJ	ADJ,NOM	f	p		d_e|s_@|d_@_t_#	d_e|sc_en|d_an_t_es	0.27	0.01
 descendants	des@d@	descendant	NOM	ADJ,NOM	m	p		d_e|s_@|d_@_#	d_e|sc_en|d_an_ts	2.97	2.38
 descendants	des@d@	descendant	ADJ	ADJ,NOM	m	p		d_e|s_@|d_@_#	d_e|sc_en|d_an_ts	0.27	0.56
-descende	des@d	descendre	VER	VER			sub:pre:1s;sub:pre:3s;	d_e|s_@_d_#	d_e|sc_en_d_e	2.5	3.55
-descendent	des@d	descendre	VER	VER			ind:pre:3p;sub:pre:3p;	d_e|s_@_d_#	d_e|sc_en_d_ent	10.41	4.27
-descendes	des@d	descendre	VER	VER			sub:pre:2s;	d_e|s_@_d_#	d_e|sc_en_d_es	0.14	1.13
+descende	dEs@d	descendre	VER	VER			sub:pre:1s;sub:pre:3s;	d_E|s_@_d_#	d_e|sc_en_d_e	2.5	3.55
+descendent	dEs@d	descendre	VER	VER			ind:pre:3p;sub:pre:3p;	d_E|s_@_d_#	d_e|sc_en_d_ent	10.41	4.27
+descendes	dEs@d	descendre	VER	VER			sub:pre:2s;	d_E|s_@_d_#	d_e|sc_en_d_es	0.14	1.13
 descendeur	des@d9R	descendeur	NOM	NOM	m	s		d_e|s_@|d_9_R	d_e|sc_en|d_eu_r	0.0	0.04
 descendeurs	des@d9R	descendeur	NOM	NOM	m	p		d_e|s_@|d_9_R_#	d_e|sc_en|d_eu_r_s	0.07	0.0
-descendez	des@de	descendre	VER	VER			imp:pre:2p;ind:pre:2p;	d_e|s_@|d_e	d_e|sc_en|d_ez	1.96	25.89
-descendiez	des@dje	descendre	VER	VER			ind:imp:2p;	d_e|s_@|d_j_e	d_e|sc_en|d_i_ez	0.14	0.53
-descendions	des@dj§	descendre	VER	VER			ind:imp:1p;	d_e|s_@|d_j_§	d_e|sc_en|d_i_ons	2.7	0.38
-descendirent	des@diR	descendre	VER	VER			ind:pas:3p;	d_e|s_@|d_i_R_#	d_e|sc_en|d_i_r_ent	10.0	0.04
-descendis	des@di	descendre	VER	VER			ind:pas:1s;	d_e|s_@|d_i	d_e|sc_en|d_is	4.93	0.05
-descendit	des@di	descendre	VER	VER			ind:pas:3s;	d_e|s_@|d_i	d_e|sc_en|d_it	33.99	0.61
-descendons	des@d§	descendre	VER	VER			imp:pre:1p;ind:pre:1p;	d_e|s_@|d_§	d_e|sc_en|d_ons	3.31	4.3
-descendra	des@dRa	descendre	VER	VER			ind:fut:3s;	d_e|s_@|d_R_a	d_e|sc_en|d_r_a	1.82	3.44
-descendrai	des@dRe	descendre	VER	VER			ind:fut:1s;	d_e|s_@|d_R_e	d_e|sc_en|d_r_ai	1.42	1.82
-descendraient	des@dRE	descendre	VER	VER			cnd:pre:3p;	d_e|s_@|d_R_E	d_e|sc_en|d_r_aient	0.41	0.05
-descendrais	des@dRE	descendre	VER	VER			cnd:pre:1s;cnd:pre:2s;	d_e|s_@|d_R_E	d_e|sc_en|d_r_ais	0.41	0.46
-descendrait	des@dRE	descendre	VER	VER			cnd:pre:3s;	d_e|s_@|d_R_E	d_e|sc_en|d_r_ait	1.35	0.78
-descendras	des@dRa	descendre	VER	VER			ind:fut:2s;	d_e|s_@|d_R_a	d_e|sc_en|d_r_as	0.2	0.44
-descendre	des@dR	descendre	VER	VER			inf;	d_e|s_@_d_R_#	d_e|sc_en_d_r_e	70.41	65.28
-descendrez	des@dRe	descendre	VER	VER			ind:fut:2p;	d_e|s_@|d_R_e	d_e|sc_en|d_r_ez	0.14	0.53
-descendriez	des@dRie	descendre	VER	VER			cnd:pre:2p;	d_e|s_@|d_R_i|e	d_e|sc_en|d_r_i|ez	0.0	0.03
-descendrions	des@dRij§	descendre	VER	VER			cnd:pre:1p;	d_e|s_@|d_R_ij|§	d_e|sc_en|d_r_i|ons	0.2	0.0
-descendrons	des@dR§	descendre	VER	VER			ind:fut:1p;	d_e|s_@|d_R_§	d_e|sc_en|d_r_ons	0.54	0.69
-descendront	des@dR§	descendre	VER	VER			ind:fut:3p;	d_e|s_@|d_R_§	d_e|sc_en|d_r_ont	0.2	0.81
-descends	des@	descendre	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:2s;	d_e|s_@_#	d_e|sc_en_ds	12.16	62.31
-descendu	des@dy	descendre	VER	VER	m	s	par:pas;	d_e|s_@|d_y	d_e|sc_en|d_u	26.01	18.05
-descendue	des@dy	descendre	VER	VER	f	s	par:pas;	d_e|s_@|d_y_#	d_e|sc_en|d_u_e	7.97	3.66
-descendues	des@dy	descendre	VER	VER	f	p	par:pas;	d_e|s_@|d_y_#	d_e|sc_en|d_u_es	1.15	0.16
-descendus	des@dy	descendre	VER	VER	m	p	par:pas;	d_e|s_@|d_y	d_e|sc_en|d_us	8.04	2.71
-descendîmes	des@dim	descendre	VER	VER			ind:pas:1p;	d_e|s_@|d_i_m_#	d_e|sc_en|d_î_m_es	2.09	0.13
+descendez	dEs@de	descendre	VER	VER			imp:pre:2p;ind:pre:2p;	d_E|s_@|d_e	d_e|sc_en|d_ez	1.96	25.89
+descendiez	dEs@dje	descendre	VER	VER			ind:imp:2p;	d_E|s_@|d_j_e	d_e|sc_en|d_i_ez	0.14	0.53
+descendions	dEs@dj§	descendre	VER	VER			ind:imp:1p;	d_E|s_@|d_j_§	d_e|sc_en|d_i_ons	2.7	0.38
+descendirent	dEs@diR	descendre	VER	VER			ind:pas:3p;	d_E|s_@|d_i_R_#	d_e|sc_en|d_i_r_ent	10.0	0.04
+descendis	dEs@di	descendre	VER	VER			ind:pas:1s;	d_E|s_@|d_i	d_e|sc_en|d_is	4.93	0.05
+descendit	dEs@di	descendre	VER	VER			ind:pas:3s;	d_E|s_@|d_i	d_e|sc_en|d_it	33.99	0.61
+descendons	dEs@d§	descendre	VER	VER			imp:pre:1p;ind:pre:1p;	d_E|s_@|d_§	d_e|sc_en|d_ons	3.31	4.3
+descendra	dEs@dRa	descendre	VER	VER			ind:fut:3s;	d_E|s_@|d_R_a	d_e|sc_en|d_r_a	1.82	3.44
+descendrai	dEs@dRe	descendre	VER	VER			ind:fut:1s;	d_E|s_@|d_R_e	d_e|sc_en|d_r_ai	1.42	1.82
+descendraient	dEs@dRE	descendre	VER	VER			cnd:pre:3p;	d_E|s_@|d_R_E	d_e|sc_en|d_r_aient	0.41	0.05
+descendrais	dEs@dRE	descendre	VER	VER			cnd:pre:1s;cnd:pre:2s;	d_E|s_@|d_R_E	d_e|sc_en|d_r_ais	0.41	0.46
+descendrait	dEs@dRE	descendre	VER	VER			cnd:pre:3s;	d_E|s_@|d_R_E	d_e|sc_en|d_r_ait	1.35	0.78
+descendras	dEs@dRa	descendre	VER	VER			ind:fut:2s;	d_E|s_@|d_R_a	d_e|sc_en|d_r_as	0.2	0.44
+descendre	dEs@dR	descendre	VER	VER			inf;	d_E|s_@_d_R_#	d_e|sc_en_d_r_e	70.41	65.28
+descendrez	dEs@dRe	descendre	VER	VER			ind:fut:2p;	d_E|s_@|d_R_e	d_e|sc_en|d_r_ez	0.14	0.53
+descendriez	dEs@dRie	descendre	VER	VER			cnd:pre:2p;	d_E|s_@|d_R_i|e	d_e|sc_en|d_r_i|ez	0.0	0.03
+descendrions	dEs@dRij§	descendre	VER	VER			cnd:pre:1p;	d_E|s_@|d_R_ij|§	d_e|sc_en|d_r_i|ons	0.2	0.0
+descendrons	dEs@dR§	descendre	VER	VER			ind:fut:1p;	d_E|s_@|d_R_§	d_e|sc_en|d_r_ons	0.54	0.69
+descendront	dEs@dR§	descendre	VER	VER			ind:fut:3p;	d_E|s_@|d_R_§	d_e|sc_en|d_r_ont	0.2	0.81
+descends	dEs@	descendre	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:2s;	d_E|s_@_#	d_e|sc_en_ds	12.16	62.31
+descendu	dEs@dy	descendre	VER	VER	m	s	par:pas;	d_E|s_@|d_y	d_e|sc_en|d_u	26.01	18.05
+descendue	dEs@dy	descendre	VER	VER	f	s	par:pas;	d_E|s_@|d_y_#	d_e|sc_en|d_u_e	7.97	3.66
+descendues	dEs@dy	descendre	VER	VER	f	p	par:pas;	d_E|s_@|d_y_#	d_e|sc_en|d_u_es	1.15	0.16
+descendus	dEs@dy	descendre	VER	VER	m	p	par:pas;	d_E|s_@|d_y	d_e|sc_en|d_us	8.04	2.71
+descendîmes	dEs@dim	descendre	VER	VER			ind:pas:1p;	d_E|s_@|d_i_m_#	d_e|sc_en|d_î_m_es	2.09	0.13
 descenseur	des@s9R	descenseur	NOM	NOM	m	s		d_e|s_@|s_9_R	d_e|sc_en|s_eu_r	0.0	0.01
 descente	des@t	descente	NOM	NOM	f	s		d_e|s_@_t_#	d_e|sc_en_t_e	20.81	10.48
 descentes	des@t	descente	NOM	NOM	f	p		d_e|s_@_t_#	d_e|sc_en_t_es	2.43	1.1
@@ -33886,201 +33886,185 @@ desquelles	dekEl	desquelles	PRO:rel	PRO:int,PRO:rel	f	p		d_e_#|k_E_l_#	d_e_s|qu_
 desquelles	dekEl	desquelles	PRO:int	PRO:int,PRO:rel				d_e_#|k_E_l_#	d_e_s|qu_e_ll_es	1.76	0.01
 desquels	dekEl	desquels	PRO:rel	PRO:int,PRO:rel	m	p		d_e_#|k_E_l_#	d_e_s|qu_e_l_s	7.97	0.64
 desquels	dekEl	desquels	PRO:int	PRO:int,PRO:rel				d_e_#|k_E_l_#	d_e_s|qu_e_l_s	2.16	0.15
-dessaisi	desEzi	dessaisir	VER	VER	m	s	par:pas;	d_e|s_E|z_i	d_e|ss_ai|s_i	0.07	0.07
-dessaisir	deseziR	dessaisir	VER	VER			inf;	d_e|s_e|z_i_R	d_e|ss_ai|s_i_r	0.27	0.16
-dessaisis	desEzi	dessaisir	VER	VER	m	p	ind:pre:1s;par:pas;	d_e|s_E|z_i	d_e|ss_ai|s_is	0.07	0.01
-dessaisissais	desEzisE	dessaisir	VER	VER			ind:imp:1s;	d_e|s_E|z_i|s_E	d_e|ss_ai|s_i|ss_ais	0.07	0.0
+dessaisi	dEsEzi	dessaisir	VER	VER	m	s	par:pas;	d_E|s_E|z_i	d_e|ss_ai|s_i	0.07	0.07
+dessaisir	dEseziR	dessaisir	VER	VER			inf;	d_E|s_e|z_i_R	d_e|ss_ai|s_i_r	0.27	0.16
+dessaisis	dEsEzi	dessaisir	VER	VER	m	p	ind:pre:1s;par:pas;	d_E|s_E|z_i	d_e|ss_ai|s_is	0.07	0.01
+dessaisissais	dEsEzisE	dessaisir	VER	VER			ind:imp:1s;	d_E|s_E|z_i|s_E	d_e|ss_ai|s_i|ss_ais	0.07	0.0
 dessaisissement	desezis°m@	dessaisissement	NOM	NOM	m	s		d_e|s_e|z_i|s_°|m_@	d_e|ss_ai|s_i|ss_e|m_ent	0.07	0.0
-dessaisissent	desEzis	dessaisir	VER	VER			ind:pre:3p;	d_e|s_E|z_i_s_#	d_e|ss_ai|s_i_ss_ent	0.07	0.0
-dessaisit	desEzi	dessaisir	VER	VER			ind:pre:3s;ind:pas:3s;	d_e|s_E|z_i	d_e|ss_ai|s_it	0.07	0.01
-dessalaient	desalE	dessaler	VER	VER			ind:imp:3p;	d_e|s_a|l_E	d_e|ss_a|l_aient	0.07	0.0
-dessalait	desalE	dessaler	VER	VER			ind:imp:3s;	d_e|s_a|l_E	d_e|ss_a|l_ait	0.07	0.0
-dessalant	desal@	dessaler	VER	VER			par:pre;	d_e|s_a|l_@	d_e|ss_a|l_ant	0.07	0.0
-dessale	desal	dessaler	VER	VER			ind:pre:3s;	d_e|s_a_l_#	d_e|ss_a_l_e	0.07	0.0
-dessaler	desale	dessaler	VER	VER			inf;	d_e|s_a|l_e	d_e|ss_a|l_er	0.0	0.16
-dessalé	desale	dessaler	VER	VER,ADJ	m	s	par:pas;	d_e|s_a|l_e	d_e|ss_a|l_é	0.07	0.0
+dessaisissent	dEsEzis	dessaisir	VER	VER			ind:pre:3p;	d_E|s_E|z_i_s_#	d_e|ss_ai|s_i_ss_ent	0.07	0.0
+dessaisit	dEsEzi	dessaisir	VER	VER			ind:pre:3s;ind:pas:3s;	d_E|s_E|z_i	d_e|ss_ai|s_it	0.07	0.01
+dessalaient	dEsalE	dessaler	VER	VER			ind:imp:3p;	d_E|s_a|l_E	d_e|ss_a|l_aient	0.07	0.0
+dessalait	dEsalE	dessaler	VER	VER			ind:imp:3s;	d_E|s_a|l_E	d_e|ss_a|l_ait	0.07	0.0
+dessalant	dEsal@	dessaler	VER	VER			par:pre;	d_E|s_a|l_@	d_e|ss_a|l_ant	0.07	0.0
+dessale	dEsal	dessaler	VER	VER			ind:pre:3s;	d_E|s_a_l_#	d_e|ss_a_l_e	0.07	0.0
+dessaler	dEsale	dessaler	VER	VER			inf;	d_E|s_a|l_e	d_e|ss_a|l_er	0.0	0.16
+dessalé	dEsale	dessaler	VER	VER,ADJ	m	s	par:pas;	d_E|s_a|l_e	d_e|ss_a|l_é	0.07	0.0
 dessalé	desale	dessalé	ADJ	VER,ADJ	m	s		d_e|s_a|l_e	d_e|ss_a|l_é	0.14	0.0
 dessalée	desale	dessalé	ADJ	ADJ	f	s		d_e|s_a|l_e_#	d_e|ss_a|l_é_e	0.14	0.0
 dessalées	desale	dessalé	ADJ	ADJ	f	p		d_e|s_a|l_e_#	d_e|ss_a|l_é_es	0.14	0.0
 dessalés	desale	dessalé	ADJ	ADJ	m	p		d_e|s_a|l_e_#	d_e|ss_a|l_é_s	0.07	0.0
-dessoulais	desulE	dessouler	VER	VER			ind:imp:1s;	d_e|s_#_u|l_E	d_e|ss_ou|l_ais	0.0	0.01
-dessoule	desul	dessouler	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	d_e|s_#_u_l_#	d_e|ss_ou_l_e	0.41	0.13
-dessoulent	desul	dessouler	VER	VER			ind:pre:3p;	d_e|s_#_u_l_#	d_e|ss_ou_l_ent	0.07	0.0
-dessouler	desule	dessouler	VER	VER			inf;	d_e|s_#_u|l_e	d_e|ss_ou|l_er	0.14	0.08
-dessoulé	desule	dessouler	VER	VER	m	s	par:pas;	d_e|s_#_u|l_e	d_e|ss_ou|l_é	0.41	0.07
-dessoulée	desule	dessouler	VER	VER	f	s	par:pas;	d_e|s_#_u|l_e_#	d_e|ss_ou|l_é_e	0.07	0.1
-dessoulés	desule	dessouler	VER	VER	m	p	par:pas;	d_e|s_#_u|l_e_#	d_e|ss_ou|l_é_s	0.07	0.0
-dessape	desap	dessaper	VER	VER			ind:pre:3s;	d_e|s_a_p_#	d_e|ss_a_p_e	0.07	0.0
-dessaper	dsape	dessaper	VER	VER			inf;	d_#_s_a|p_e	d_e_ss_a|p_er	0.07	0.0
+dessape	dEsap	dessaper	VER	VER			ind:pre:3s;	d_E|s_a_p_#	d_e|ss_a_p_e	0.07	0.0
+dessaper	dEsape	dessaper	VER	VER			inf;	d_E|s_a|p_e	d_e|ss_a|p_er	0.07	0.0
 dessein	des5	dessein	NOM	NOM	m	s		d_e|s_5	d_e|ss_ein	10.2	5.32
 desseins	des5	dessein	NOM	NOM	m	p		d_e|s_5_#	d_e|ss_ein_s	4.66	1.97
-desselle	desEl	desseller	VER	VER			imp:pre:2s;ind:pre:3s;	d_e|s_E_l_#	d_e|ss_e_ll_e	0.07	0.02
-desseller	desEle	desseller	VER	VER			inf;	d_e|s_E|l_e	d_e|ss_e|ll_er	0.41	0.03
-dessellez	desEle	desseller	VER	VER			imp:pre:2p;	d_e|s_E|l_e	d_e|ss_e|ll_ez	0.0	0.05
-dessellé	desEle	desseller	VER	VER	m	s	par:pas;	d_e|s_E|l_e	d_e|ss_e|ll_é	0.0	0.01
-dessellées	desEle	desseller	VER	VER	f	p	par:pas;	d_e|s_E|l_e_#	d_e|ss_e|ll_é_es	0.07	0.0
-dessellés	desEle	desseller	VER	VER	m	p	par:pas;	d_e|s_E|l_e_#	d_e|ss_e|ll_é_s	0.07	0.01
-desserra	desERa	desserrer	VER	VER			ind:pas:3s;	d_e|s_E|R_a	d_e|ss_e|rr_a	1.76	0.01
+desselle	dEsEl	desseller	VER	VER			imp:pre:2s;ind:pre:3s;	d_E|s_E_l_#	d_e|ss_e_ll_e	0.07	0.02
+desseller	dEsEle	desseller	VER	VER			inf;	d_E|s_E|l_e	d_e|ss_e|ll_er	0.41	0.03
+dessellez	dEsEle	desseller	VER	VER			imp:pre:2p;	d_E|s_E|l_e	d_e|ss_e|ll_ez	0.0	0.05
+dessellé	dEsEle	desseller	VER	VER	m	s	par:pas;	d_E|s_E|l_e	d_e|ss_e|ll_é	0.0	0.01
+dessellées	dEsEle	desseller	VER	VER	f	p	par:pas;	d_E|s_E|l_e_#	d_e|ss_e|ll_é_es	0.07	0.0
+dessellés	dEsEle	desseller	VER	VER	m	p	par:pas;	d_E|s_E|l_e_#	d_e|ss_e|ll_é_s	0.07	0.01
+desserra	dEsERa	desserrer	VER	VER			ind:pas:3s;	d_E|s_E|R_a	d_e|ss_e|rr_a	1.76	0.01
 desserrage	desERaZ	desserrage	NOM	NOM	m	s		d_e|s_E|R_a_Z	d_e|ss_e|rr_a_ge	0.07	0.01
-desserrai	desERe	desserrer	VER	VER			ind:pas:1s;	d_e|s_E|R_e	d_e|ss_e|rr_ai	0.27	0.0
-desserraient	desERE	desserrer	VER	VER			ind:imp:3p;	d_e|s_E|R_E	d_e|ss_e|rr_aient	0.2	0.0
-desserrais	desERE	desserrer	VER	VER			ind:imp:1s;ind:imp:2s;	d_e|s_E|R_E	d_e|ss_e|rr_ais	0.07	0.01
-desserrait	desERE	desserrer	VER	VER			ind:imp:3s;	d_e|s_E|R_E	d_e|ss_e|rr_ait	0.81	0.01
-desserrant	desER@	desserrer	VER	VER			par:pre;	d_e|s_E|R_@	d_e|ss_e|rr_ant	0.47	0.0
-desserre	desER	desserrer	VER	NOM,VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	d_e|s_E_R_#	d_e|ss_e_rr_e	0.74	0.83
+desserrai	dEsERe	desserrer	VER	VER			ind:pas:1s;	d_E|s_E|R_e	d_e|ss_e|rr_ai	0.27	0.0
+desserraient	dEsERE	desserrer	VER	VER			ind:imp:3p;	d_E|s_E|R_E	d_e|ss_e|rr_aient	0.2	0.0
+desserrais	dEsERE	desserrer	VER	VER			ind:imp:1s;ind:imp:2s;	d_E|s_E|R_E	d_e|ss_e|rr_ais	0.07	0.01
+desserrait	dEsERE	desserrer	VER	VER			ind:imp:3s;	d_E|s_E|R_E	d_e|ss_e|rr_ait	0.81	0.01
+desserrant	dEsER@	desserrer	VER	VER			par:pre;	d_E|s_E|R_@	d_e|ss_e|rr_ant	0.47	0.0
+desserre	dEsER	desserrer	VER	NOM,VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	d_E|s_E_R_#	d_e|ss_e_rr_e	0.74	0.83
 desserre	desER	desserre	NOM	NOM,VER	f	s		d_e|s_E_R_#	d_e|ss_e_rr_e	0.07	0.0
-desserrent	desER	desserrer	VER	VER			ind:pre:3p;	d_e|s_E_R_#	d_e|ss_e_rr_ent	0.2	0.03
-desserrer	desERe	desserrer	VER	VER			inf;	d_e|s_E|R_e	d_e|ss_e|rr_er	3.58	0.38
-desserrera	desER°Ra	desserrer	VER	VER			ind:fut:3s;	d_e|s_E|R_°|R_a	d_e|ss_e|rr_e|r_a	0.07	0.01
-desserreraient	desER°RE	desserrer	VER	VER			cnd:pre:3p;	d_e|s_E|R_°|R_E	d_e|ss_e|rr_e|r_aient	0.07	0.0
-desserrerait	desER°RE	desserrer	VER	VER			cnd:pre:3s;	d_e|s_E|R_°|R_E	d_e|ss_e|rr_e|r_ait	0.07	0.0
-desserrez	desERe	desserrer	VER	VER			imp:pre:2p;ind:pre:2p;	d_e|s_E|R_e	d_e|ss_e|rr_ez	0.07	0.72
-desserrons	desER§	desserrer	VER	VER			imp:pre:1p;	d_e|s_E|R_§	d_e|ss_e|rr_ons	0.0	0.03
-desserrèrent	desERER	desserrer	VER	VER			ind:pas:3p;	d_e|s_E|R_E_R_#	d_e|ss_e|rr_è_r_ent	0.14	0.0
-desserré	desERe	desserrer	VER	VER	m	s	par:pas;	d_e|s_E|R_e	d_e|ss_e|rr_é	1.69	0.32
-desserrée	desERe	desserrer	VER	VER	f	s	par:pas;	d_e|s_E|R_e_#	d_e|ss_e|rr_é_e	0.27	0.07
-desserrées	desERe	desserrer	VER	VER	f	p	par:pas;	d_e|s_E|R_e_#	d_e|ss_e|rr_é_es	0.2	0.01
-desserrés	desERe	desserrer	VER	VER	m	p	par:pas;	d_e|s_E|R_e_#	d_e|ss_e|rr_é_s	0.14	0.1
-dessers	desER	desservir	VER	VER			ind:pre:2s;	d_e|s_E_R_#	d_e|ss_e_r_s	0.07	0.0
+desserrent	dEsER	desserrer	VER	VER			ind:pre:3p;	d_E|s_E_R_#	d_e|ss_e_rr_ent	0.2	0.03
+desserrer	dEsERe	desserrer	VER	VER			inf;	d_E|s_E|R_e	d_e|ss_e|rr_er	3.58	0.38
+desserrera	dEsER°Ra	desserrer	VER	VER			ind:fut:3s;	d_E|s_E|R_°|R_a	d_e|ss_e|rr_e|r_a	0.07	0.01
+desserreraient	dEsER°RE	desserrer	VER	VER			cnd:pre:3p;	d_E|s_E|R_°|R_E	d_e|ss_e|rr_e|r_aient	0.07	0.0
+desserrerait	dEsER°RE	desserrer	VER	VER			cnd:pre:3s;	d_E|s_E|R_°|R_E	d_e|ss_e|rr_e|r_ait	0.07	0.0
+desserrez	dEsERe	desserrer	VER	VER			imp:pre:2p;ind:pre:2p;	d_E|s_E|R_e	d_e|ss_e|rr_ez	0.07	0.72
+desserrons	dEsER§	desserrer	VER	VER			imp:pre:1p;	d_E|s_E|R_§	d_e|ss_e|rr_ons	0.0	0.03
+desserrèrent	dEsERER	desserrer	VER	VER			ind:pas:3p;	d_E|s_E|R_E_R_#	d_e|ss_e|rr_è_r_ent	0.14	0.0
+desserré	dEsERe	desserrer	VER	VER	m	s	par:pas;	d_E|s_E|R_e	d_e|ss_e|rr_é	1.69	0.32
+desserrée	dEsERe	desserrer	VER	VER	f	s	par:pas;	d_E|s_E|R_e_#	d_e|ss_e|rr_é_e	0.27	0.07
+desserrées	dEsERe	desserrer	VER	VER	f	p	par:pas;	d_E|s_E|R_e_#	d_e|ss_e|rr_é_es	0.2	0.01
+desserrés	dEsERe	desserrer	VER	VER	m	p	par:pas;	d_E|s_E|R_e_#	d_e|ss_e|rr_é_s	0.14	0.1
+dessers	dEsER	desservir	VER	VER			ind:pre:2s;	d_E|s_E_R_#	d_e|ss_e_r_s	0.07	0.0
 dessert	desER	dessert	NOM	NOM,VER	m	s		d_e|s_E_R_#	d_e|ss_e_r_t	11.62	11.61
-dessert	desER	desservir	VER	NOM,VER			ind:pre:3s;	d_e|s_E_R_#	d_e|ss_e_r_t	0.41	0.24
+dessert	dEsER	desservir	VER	NOM,VER			ind:pre:3s;	d_E|s_E_R_#	d_e|ss_e_r_t	0.41	0.24
 desserte	desERt	desserte	NOM	NOM	f	s		d_e|s_E_R_t_#	d_e|ss_e_r_t_e	1.49	0.07
 dessertes	desERt	desserte	NOM	NOM	f	p		d_e|s_E_R_t_#	d_e|ss_e_r_t_es	0.27	0.01
-dessertie	desERti	dessertir	VER	VER	f	s	par:pas;	d_e|s_E_R|t_i_#	d_e|ss_e_r|t_i_e	0.07	0.01
-dessertir	desERtiR	dessertir	VER	VER			inf;	d_e|s_E_R|t_i_R	d_e|ss_e_r|t_i_r	0.07	0.0
+dessertie	dEsERti	dessertir	VER	VER	f	s	par:pas;	d_E|s_E_R|t_i_#	d_e|ss_e_r|t_i_e	0.07	0.01
+dessertir	dEsERtiR	dessertir	VER	VER			inf;	d_E|s_E_R|t_i_R	d_e|ss_e_r|t_i_r	0.07	0.0
 desserts	desER	dessert	NOM	NOM	m	p		d_e|s_E_R_#	d_e|ss_e_r_ts	0.95	1.79
-desservaient	desERvE	desservir	VER	VER			ind:imp:3p;	d_e|s_E_R|v_E	d_e|ss_e_r|v_aient	0.34	0.01
-desservait	desERvE	desservir	VER	VER			ind:imp:3s;	d_e|s_E_R|v_E	d_e|ss_e_r|v_ait	0.88	0.02
-desservant	desERv@	desservir	VER	ADJ,NOM,VER			par:pre;	d_e|s_E_R|v_@	d_e|ss_e_r|v_ant	0.61	0.14
+desservaient	dEsERvE	desservir	VER	VER			ind:imp:3p;	d_E|s_E_R|v_E	d_e|ss_e_r|v_aient	0.34	0.01
+desservait	dEsERvE	desservir	VER	VER			ind:imp:3s;	d_E|s_E_R|v_E	d_e|ss_e_r|v_ait	0.88	0.02
+desservant	dEsERv@	desservir	VER	ADJ,NOM,VER			par:pre;	d_E|s_E_R|v_@	d_e|ss_e_r|v_ant	0.61	0.14
 desservant	desERv@	desservant	ADJ	ADJ,NOM,VER	m	s		d_e|s_E_R|v_@	d_e|ss_e_r|v_ant	0.14	0.0
 desservant	desERv@	desservant	NOM	ADJ,NOM,VER	m	s		d_e|s_E_R|v_@	d_e|ss_e_r|v_ant	0.2	0.0
-desserve	desERv	desservir	VER	VER			sub:pre:3s;	d_e|s_E_R_v_#	d_e|ss_e_r_v_e	0.07	0.02
-desservent	desERv	desservir	VER	VER			ind:pre:3p;	d_e|s_E_R_v_#	d_e|ss_e_r_v_ent	0.34	0.16
-desservi	desERvi	desservir	VER	VER	m	s	par:pas;	d_e|s_E_R|v_i	d_e|ss_e_r|v_i	0.61	0.16
-desservie	desERvi	desservir	VER	VER	f	s	par:pas;	d_e|s_E_R|v_i_#	d_e|ss_e_r|v_i_e	0.41	0.12
-desservies	desERvi	desservir	VER	VER	f	p	par:pas;	d_e|s_E_R|v_i_#	d_e|ss_e_r|v_i_es	0.07	0.14
-desservir	desERviR	desservir	VER	VER			inf;	d_e|s_E_R|v_i_R	d_e|ss_e_r|v_i_r	1.08	0.07
-desservira	desERviRa	desservir	VER	VER			ind:fut:3s;	d_e|s_E_R|v_i|R_a	d_e|ss_e_r|v_i|r_a	0.0	0.02
-desservirait	desERviRE	desservir	VER	VER			cnd:pre:3s;	d_e|s_E_R|v_i|R_E	d_e|ss_e_r|v_i|r_ait	0.07	0.02
-desserviront	desERviR§	desservir	VER	VER			ind:fut:3p;	d_e|s_E_R|v_i|R_§	d_e|ss_e_r|v_i|r_ont	0.07	0.0
-desservis	desERvi	desservir	VER	VER	m	p	par:pas;	d_e|s_E_R|v_i	d_e|ss_e_r|v_is	0.07	0.03
-desservit	desERvi	desservir	VER	VER			ind:pas:3s;	d_e|s_E_R|v_i	d_e|ss_e_r|v_it	0.07	0.0
+desserve	dEsERv	desservir	VER	VER			sub:pre:3s;	d_E|s_E_R_v_#	d_e|ss_e_r_v_e	0.07	0.02
+desservent	dEsERv	desservir	VER	VER			ind:pre:3p;	d_E|s_E_R_v_#	d_e|ss_e_r_v_ent	0.34	0.16
+desservi	dEsERvi	desservir	VER	VER	m	s	par:pas;	d_E|s_E_R|v_i	d_e|ss_e_r|v_i	0.61	0.16
+desservie	dEsERvi	desservir	VER	VER	f	s	par:pas;	d_E|s_E_R|v_i_#	d_e|ss_e_r|v_i_e	0.41	0.12
+desservies	dEsERvi	desservir	VER	VER	f	p	par:pas;	d_E|s_E_R|v_i_#	d_e|ss_e_r|v_i_es	0.07	0.14
+desservir	dEsERviR	desservir	VER	VER			inf;	d_E|s_E_R|v_i_R	d_e|ss_e_r|v_i_r	1.08	0.07
+desservira	dEsERviRa	desservir	VER	VER			ind:fut:3s;	d_E|s_E_R|v_i|R_a	d_e|ss_e_r|v_i|r_a	0.0	0.02
+desservirait	dEsERviRE	desservir	VER	VER			cnd:pre:3s;	d_E|s_E_R|v_i|R_E	d_e|ss_e_r|v_i|r_ait	0.07	0.02
+desserviront	dEsERviR§	desservir	VER	VER			ind:fut:3p;	d_E|s_E_R|v_i|R_§	d_e|ss_e_r|v_i|r_ont	0.07	0.0
+desservis	dEsERvi	desservir	VER	VER	m	p	par:pas;	d_E|s_E_R|v_i	d_e|ss_e_r|v_is	0.07	0.03
+desservit	dEsERvi	desservir	VER	VER			ind:pas:3s;	d_E|s_E_R|v_i	d_e|ss_e_r|v_it	0.07	0.0
 dessiccation	desikasj§	dessiccation	NOM	NOM	f	s		d_e|s_i|k_a|s_j_§	d_e|ss_i|cc_a|t_i_on	0.07	0.03
-dessille	desij	dessiller	VER	VER			ind:pre:3s;	d_e|s_i_j_#	d_e|ss_i_ll_e	0.07	0.0
-dessiller	desije	dessiller	VER	VER			inf;	d_e|s_i|j_e	d_e|ss_i|ll_er	0.34	0.0
-dessilleront	desij°R§	dessiller	VER	VER			ind:fut:3p;	d_e|s_i|j_°|R_§	d_e|ss_i|ll_e|r_ont	0.07	0.0
-dessillé	desije	dessiller	VER	VER	m	s	par:pas;	d_e|s_i|j_e	d_e|ss_i|ll_é	0.07	0.29
-dessillés	desije	dessiller	VER	VER	m	p	par:pas;	d_e|s_i|j_e_#	d_e|ss_i|ll_é_s	0.27	0.0
+dessille	dEsij	dessiller	VER	VER			ind:pre:3s;	d_E|s_i_j_#	d_e|ss_i_ll_e	0.07	0.0
+dessiller	dEsije	dessiller	VER	VER			inf;	d_E|s_i|j_e	d_e|ss_i|ll_er	0.34	0.0
+dessilleront	dEsij°R§	dessiller	VER	VER			ind:fut:3p;	d_E|s_i|j_°|R_§	d_e|ss_i|ll_e|r_ont	0.07	0.0
+dessillé	dEsije	dessiller	VER	VER	m	s	par:pas;	d_E|s_i|j_e	d_e|ss_i|ll_é	0.07	0.29
+dessillés	dEsije	dessiller	VER	VER	m	p	par:pas;	d_E|s_i|j_e_#	d_e|ss_i|ll_é_s	0.27	0.0
 dessin	des5	dessin	NOM	NOM	m	s		d_e|s_5	d_e|ss_in	34.86	17.92
-dessina	desina	dessiner	VER	VER			ind:pas:3s;	d_e|s_i|n_a	d_e|ss_i|n_a	3.45	0.29
-dessinai	desine	dessiner	VER	VER			ind:pas:1s;	d_e|s_i|n_e	d_e|ss_i|n_ai	0.68	0.0
-dessinaient	desinE	dessiner	VER	VER			ind:imp:3p;	d_e|s_i|n_E	d_e|ss_i|n_aient	5.2	0.14
-dessinais	desinE	dessiner	VER	VER			ind:imp:1s;ind:imp:2s;	d_e|s_i|n_E	d_e|ss_i|n_ais	0.88	0.89
-dessinait	desinE	dessiner	VER	VER			ind:imp:3s;	d_e|s_i|n_E	d_e|ss_i|n_ait	10.88	0.85
-dessinant	desin@	dessiner	VER	VER			par:pre;	d_e|s_i|n_@	d_e|ss_i|n_ant	4.73	0.29
+dessina	dEsina	dessiner	VER	VER			ind:pas:3s;	d_E|s_i|n_a	d_e|ss_i|n_a	3.45	0.29
+dessinai	dEsine	dessiner	VER	VER			ind:pas:1s;	d_E|s_i|n_e	d_e|ss_i|n_ai	0.68	0.0
+dessinaient	dEsinE	dessiner	VER	VER			ind:imp:3p;	d_E|s_i|n_E	d_e|ss_i|n_aient	5.2	0.14
+dessinais	dEsinE	dessiner	VER	VER			ind:imp:1s;ind:imp:2s;	d_E|s_i|n_E	d_e|ss_i|n_ais	0.88	0.89
+dessinait	dEsinE	dessiner	VER	VER			ind:imp:3s;	d_E|s_i|n_E	d_e|ss_i|n_ait	10.88	0.85
+dessinant	dEsin@	dessiner	VER	VER			par:pre;	d_E|s_i|n_@	d_e|ss_i|n_ant	4.73	0.29
 dessinateur	desinat9R	dessinateur	NOM	NOM	m	s		d_e|s_i|n_a|t_9_R	d_e|ss_i|n_a|t_eu_r	5.27	1.08
 dessinateurs	desinat9R	dessinateur	NOM	NOM	m	p		d_e|s_i|n_a|t_9_R_#	d_e|ss_i|n_a|t_eu_r_s	1.76	0.46
 dessinatrice	desinatRis	dessinateur	NOM	NOM	f	s		d_e|s_i|n_a|t_R_i_s_#	d_e|ss_i|n_a|t_r_i_c_e	0.27	0.31
-dessine	desin	dessiner	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	d_e|s_i_n_#	d_e|ss_i_n_e	10.68	6.05
-dessinent	desin	dessiner	VER	VER			ind:pre:3p;	d_e|s_i_n_#	d_e|ss_i_n_ent	3.85	0.44
-dessiner	desine	dessiner	VER	VER			inf;	d_e|s_i|n_e	d_e|ss_i|n_er	12.97	9.1
-dessinera	desin°Ra	dessiner	VER	VER			ind:fut:3s;	d_e|s_i|n_°|R_a	d_e|ss_i|n_e|r_a	0.0	0.12
-dessinerai	desin°Re	dessiner	VER	VER			ind:fut:1s;	d_e|s_i|n_°|R_e	d_e|ss_i|n_e|r_ai	0.14	0.32
-dessineraient	desin°RE	dessiner	VER	VER			cnd:pre:3p;	d_e|s_i|n_°|R_E	d_e|ss_i|n_e|r_aient	0.07	0.0
-dessinerais	desin°RE	dessiner	VER	VER			cnd:pre:1s;cnd:pre:2s;	d_e|s_i|n_°|R_E	d_e|ss_i|n_e|r_ais	0.14	0.04
-dessinerait	desin°RE	dessiner	VER	VER			cnd:pre:3s;	d_e|s_i|n_°|R_E	d_e|ss_i|n_e|r_ait	0.07	0.16
-dessinerez	desin°Re	dessiner	VER	VER			ind:fut:2p;	d_e|s_i|n_°|R_e	d_e|ss_i|n_e|r_ez	0.07	0.0
-dessineront	desin°R§	dessiner	VER	VER			ind:fut:3p;	d_e|s_i|n_°|R_§	d_e|ss_i|n_e|r_ont	0.07	0.03
-dessines	desin	dessiner	VER	VER			ind:pre:2s;	d_e|s_i_n_#	d_e|ss_i_n_es	0.07	1.39
-dessinez	desine	dessiner	VER	VER			imp:pre:2p;ind:pre:2p;	d_e|s_i|n_e	d_e|ss_i|n_ez	0.27	0.99
-dessiniez	desinje	dessiner	VER	VER			ind:imp:2p;	d_e|s_i|n_j_e	d_e|ss_i|n_i_ez	0.0	0.26
-dessinions	desinj§	dessiner	VER	VER			ind:imp:1p;	d_e|s_i|n_j_§	d_e|ss_i|n_i_ons	0.07	0.02
+dessine	dEsin	dessiner	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	d_E|s_i_n_#	d_e|ss_i_n_e	10.68	6.05
+dessinent	dEsin	dessiner	VER	VER			ind:pre:3p;	d_E|s_i_n_#	d_e|ss_i_n_ent	3.85	0.44
+dessiner	dEsine	dessiner	VER	VER			inf;	d_E|s_i|n_e	d_e|ss_i|n_er	12.97	9.1
+dessinera	dEsin°Ra	dessiner	VER	VER			ind:fut:3s;	d_E|s_i|n_°|R_a	d_e|ss_i|n_e|r_a	0.0	0.12
+dessinerai	dEsin°Re	dessiner	VER	VER			ind:fut:1s;	d_E|s_i|n_°|R_e	d_e|ss_i|n_e|r_ai	0.14	0.32
+dessineraient	dEsin°RE	dessiner	VER	VER			cnd:pre:3p;	d_E|s_i|n_°|R_E	d_e|ss_i|n_e|r_aient	0.07	0.0
+dessinerais	dEsin°RE	dessiner	VER	VER			cnd:pre:1s;cnd:pre:2s;	d_E|s_i|n_°|R_E	d_e|ss_i|n_e|r_ais	0.14	0.04
+dessinerait	dEsin°RE	dessiner	VER	VER			cnd:pre:3s;	d_E|s_i|n_°|R_E	d_e|ss_i|n_e|r_ait	0.07	0.16
+dessinerez	dEsin°Re	dessiner	VER	VER			ind:fut:2p;	d_E|s_i|n_°|R_e	d_e|ss_i|n_e|r_ez	0.07	0.0
+dessineront	dEsin°R§	dessiner	VER	VER			ind:fut:3p;	d_E|s_i|n_°|R_§	d_e|ss_i|n_e|r_ont	0.07	0.03
+dessines	dEsin	dessiner	VER	VER			ind:pre:2s;	d_E|s_i_n_#	d_e|ss_i_n_es	0.07	1.39
+dessinez	dEsine	dessiner	VER	VER			imp:pre:2p;ind:pre:2p;	d_E|s_i|n_e	d_e|ss_i|n_ez	0.27	0.99
+dessiniez	dEsinje	dessiner	VER	VER			ind:imp:2p;	d_E|s_i|n_j_e	d_e|ss_i|n_i_ez	0.0	0.26
+dessinions	dEsinj§	dessiner	VER	VER			ind:imp:1p;	d_E|s_i|n_j_§	d_e|ss_i|n_i_ons	0.07	0.02
 dessins	des5	dessin	NOM	NOM	m	p		d_e|s_5_#	d_e|ss_in_s	21.42	11.68
-dessinèrent	desinER	dessiner	VER	VER			ind:pas:3p;	d_e|s_i|n_E_R_#	d_e|ss_i|n_è_r_ent	0.41	0.01
-dessiné	desine	dessiner	VER	VER,NOM	m	s	par:pas;	d_e|s_i|n_e	d_e|ss_i|n_é	8.99	5.05
+dessinèrent	dEsinER	dessiner	VER	VER			ind:pas:3p;	d_E|s_i|n_E_R_#	d_e|ss_i|n_è_r_ent	0.41	0.01
+dessiné	dEsine	dessiner	VER	VER,NOM	m	s	par:pas;	d_E|s_i|n_e	d_e|ss_i|n_é	8.99	5.05
 dessiné	desine	dessiné	NOM	VER,NOM	m	s		d_e|s_i|n_e	d_e|ss_i|n_é	0.41	0.05
-dessinée	desine	dessiner	VER	VER	f	s	par:pas;	d_e|s_i|n_e_#	d_e|ss_i|n_é_e	7.7	1.33
-dessinées	desine	dessiner	VER	VER	f	p	par:pas;	d_e|s_i|n_e_#	d_e|ss_i|n_é_es	5.27	1.85
-dessinés	desine	dessiner	VER	VER,NOM	m	p	par:pas;	d_e|s_i|n_e_#	d_e|ss_i|n_é_s	2.84	0.33
+dessinée	dEsine	dessiner	VER	VER	f	s	par:pas;	d_E|s_i|n_e_#	d_e|ss_i|n_é_e	7.7	1.33
+dessinées	dEsine	dessiner	VER	VER	f	p	par:pas;	d_E|s_i|n_e_#	d_e|ss_i|n_é_es	5.27	1.85
+dessinés	dEsine	dessiner	VER	VER,NOM	m	p	par:pas;	d_E|s_i|n_e_#	d_e|ss_i|n_é_s	2.84	0.33
 dessinés	desine	dessiné	NOM	VER,NOM	m	p		d_e|s_i|n_e_#	d_e|ss_i|n_é_s	0.14	0.07
-dessoucha	desuSa	dessoucher	VER	VER			ind:pas:3s;	d_e|s_u|S_a	d_e|ss_ou|ch_a	0.07	0.0
-dessouchée	desuSe	dessoucher	VER	VER	f	s	par:pas;	d_e|s_u|S_e_#	d_e|ss_ou|ch_é_e	0.07	0.0
-dessouda	desuda	dessouder	VER	VER			ind:pas:3s;	d_e|s_u|d_a	d_e|ss_ou|d_a	0.07	0.0
-dessouder	desude	dessouder	VER	VER			inf;	d_e|s_u|d_e	d_e|ss_ou|d_er	0.14	0.45
-dessoudé	desude	dessouder	VER	VER	m	s	par:pas;	d_e|s_u|d_e	d_e|ss_ou|d_é	0.2	0.18
-dessoudée	desude	dessouder	VER	VER	f	s	par:pas;	d_e|s_u|d_e_#	d_e|ss_ou|d_é_e	0.07	0.0
-dessoudées	desude	dessouder	VER	VER	f	p	par:pas;	d_e|s_u|d_e_#	d_e|ss_ou|d_é_es	0.07	0.0
-dessoulait	desulE	dessouler	VER	VER			ind:imp:3s;	d_e|s_u|l_E	d_e|ss_ou|l_ait	0.07	0.0
-dessouler	desule	dessouler	VER	VER			inf;	d_e|s_u|l_e	d_e|ss_ou|l_er	0.0	0.01
-dessoulé	desule	dessouler	VER	VER	m	s	par:pas;	d_e|s_u|l_e	d_e|ss_ou|l_é	0.14	0.04
+dessoucha	dEsuSa	dessoucher	VER	VER			ind:pas:3s;	d_E|s_u|S_a	d_e|ss_ou|ch_a	0.07	0.0
+dessouchée	dEsuSe	dessoucher	VER	VER	f	s	par:pas;	d_E|s_u|S_e_#	d_e|ss_ou|ch_é_e	0.07	0.0
+dessouda	dEsuda	dessouder	VER	VER			ind:pas:3s;	d_E|s_u|d_a	d_e|ss_ou|d_a	0.07	0.0
+dessouder	dEsude	dessouder	VER	VER			inf;	d_E|s_u|d_e	d_e|ss_ou|d_er	0.14	0.45
+dessoudé	dEsude	dessouder	VER	VER	m	s	par:pas;	d_E|s_u|d_e	d_e|ss_ou|d_é	0.2	0.18
+dessoudée	dEsude	dessouder	VER	VER	f	s	par:pas;	d_E|s_u|d_e_#	d_e|ss_ou|d_é_e	0.07	0.0
+dessoudées	dEsude	dessouder	VER	VER	f	p	par:pas;	d_E|s_u|d_e_#	d_e|ss_ou|d_é_es	0.07	0.0
+dessoulait	dEsulE	dessouler	VER	VER			ind:imp:3s;	d_E|s_u|l_E	d_e|ss_ou|l_ait	0.07	0.0
+dessouler	dEsule	dessouler	VER	VER			inf;	d_E|s_u|l_e	d_e|ss_ou|l_er	0.0	0.01
+dessoulé	dEsule	dessouler	VER	VER	m	s	par:pas;	d_E|s_u|l_e	d_e|ss_ou|l_é	0.14	0.04
 dessous	d°su	dessous	NOM	ADV,NOM	m			d_°|s_u_#	d_e|ss_ou_s	29.46	18.14
 dessous	d°su	dessous	ADV	ADV,NOM				d_°|s_u_#	d_e|ss_ou_s	17.5	11.01
-dessoula	desula	dessouler	VER	VER			ind:pas:3s;	d_e|s_u|l_a	d_e|ss_ou|l_a	0.07	0.0
-dessoulait	desulE	dessouler	VER	VER			ind:imp:3s;	d_e|s_u|l_E	d_e|ss_ou|l_ait	0.14	0.0
-dessoule	desul	dessouler	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	d_e|s_u_l_#	d_e|ss_ou_l_e	0.2	0.63
-dessoulent	desul	dessouler	VER	VER			ind:pre:3p;	d_e|s_u_l_#	d_e|ss_ou_l_ent	0.0	0.05
-dessouler	desule	dessouler	VER	VER			inf;	d_e|s_u|l_e	d_e|ss_ou|l_er	0.14	0.37
-dessoules	desul	dessouler	VER	VER			ind:pre:2s;	d_e|s_u_l_#	d_e|ss_ou_l_es	0.0	0.01
-dessoulez	desule	dessouler	VER	VER			imp:pre:2p;ind:pre:2p;	d_e|s_u|l_e	d_e|ss_ou|l_ez	0.0	0.04
-dessoulé	desule	dessouler	VER	VER	m	s	par:pas;	d_e|s_u|l_e	d_e|ss_ou|l_é	0.14	0.58
-dessoulée	desule	dessouler	VER	VER	f	s	par:pas;	d_e|s_u|l_e_#	d_e|ss_ou|l_é_e	0.14	0.01
 dessuintée	des85te	dessuinter	VER	VER	f	s	par:pas;	d_e|s_8_5|t_e_#	d_e|ss_u_in|t_é_e	0.07	0.0
 dessus	d°sy	dessus	ADV	ADV,NOM				d_°|s_y_#	d_e|ss_u_s	57.57	111.19
 dessus	d°sy	dessus	NOM	ADV,NOM	m			d_°|s_y_#	d_e|ss_u_s	27.23	54.77
-dessèche	desES	dessécher	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;sub:pre:1s;	d_e|s_E_S_#	d_e|ss_è_ch_e	0.74	0.85
+dessèche	dEsES	dessécher	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;sub:pre:1s;	d_E|s_E_S_#	d_e|ss_è_ch_e	0.74	0.85
 dessèchement	desES°m@	dessèchement	NOM	NOM	m	s		d_e|s_E|S_°|m_@	d_e|ss_è|ch_e|m_ent	0.07	0.02
-dessèchent	desES	dessécher	VER	VER			ind:pre:3p;	d_e|s_E_S_#	d_e|ss_è_ch_ent	0.34	0.14
-dessécha	deseSa	dessécher	VER	VER			ind:pas:3s;	d_e|s_e|S_a	d_e|ss_é|ch_a	0.0	0.02
-desséchaient	deseSE	dessécher	VER	VER			ind:imp:3p;	d_e|s_e|S_E	d_e|ss_é|ch_aient	0.47	0.02
-desséchais	deseSE	dessécher	VER	VER			ind:imp:1s;	d_e|s_e|S_E	d_e|ss_é|ch_ais	0.07	0.0
-desséchait	deseSE	dessécher	VER	VER			ind:imp:3s;	d_e|s_e|S_E	d_e|ss_é|ch_ait	1.42	0.01
-desséchant	deseS@	dessécher	VER	ADJ,VER			par:pre;	d_e|s_e|S_@	d_e|ss_é|ch_ant	0.2	0.14
+dessèchent	dEsES	dessécher	VER	VER			ind:pre:3p;	d_E|s_E_S_#	d_e|ss_è_ch_ent	0.34	0.14
+dessécha	dEseSa	dessécher	VER	VER			ind:pas:3s;	d_E|s_e|S_a	d_e|ss_é|ch_a	0.0	0.02
+desséchaient	dEseSE	dessécher	VER	VER			ind:imp:3p;	d_E|s_e|S_E	d_e|ss_é|ch_aient	0.47	0.02
+desséchais	dEseSE	dessécher	VER	VER			ind:imp:1s;	d_E|s_e|S_E	d_e|ss_é|ch_ais	0.07	0.0
+desséchait	dEseSE	dessécher	VER	VER			ind:imp:3s;	d_E|s_e|S_E	d_e|ss_é|ch_ait	1.42	0.01
+desséchant	dEseS@	dessécher	VER	ADJ,VER			par:pre;	d_E|s_e|S_@	d_e|ss_é|ch_ant	0.2	0.14
 desséchant	deseS@	desséchant	ADJ	ADJ,VER	m	s		d_e|s_e|S_@	d_e|ss_é|ch_ant	0.07	0.01
 desséchante	deseS@t	desséchant	ADJ	ADJ	f	s		d_e|s_e|S_@_t_#	d_e|ss_é|ch_an_t_e	0.14	0.0
-dessécher	deseSe	dessécher	VER	VER			inf;	d_e|s_e|S_e	d_e|ss_é|ch_er	0.88	0.25
-dessécherait	deseS°RE	dessécher	VER	VER			cnd:pre:3s;	d_e|s_e|S_°|R_E	d_e|ss_é|ch_e|r_ait	0.07	0.01
-dessécheront	deseS°R§	dessécher	VER	VER			ind:fut:3p;	d_e|s_e|S_°|R_§	d_e|ss_é|ch_e|r_ont	0.07	0.01
-desséchez	deseSe	dessécher	VER	VER			ind:pre:2p;	d_e|s_e|S_e	d_e|ss_é|ch_ez	0.0	0.01
-desséchèrent	deseSER	dessécher	VER	VER			ind:pas:3p;	d_e|s_e|S_E_R_#	d_e|ss_é|ch_è_r_ent	0.07	0.0
-desséché	deseSe	dessécher	VER	VER	m	s	par:pas;	d_e|s_e|S_e	d_e|ss_é|ch_é	3.72	0.49
-desséchée	deseSe	dessécher	VER	VER	f	s	par:pas;	d_e|s_e|S_e_#	d_e|ss_é|ch_é_e	4.32	0.8
-desséchées	deseSe	dessécher	VER	VER	f	p	par:pas;	d_e|s_e|S_e_#	d_e|ss_é|ch_é_es	1.28	0.24
-desséchés	deseSe	dessécher	VER	VER	m	p	par:pas;	d_e|s_e|S_e_#	d_e|ss_é|ch_é_s	1.96	0.56
+dessécher	dEseSe	dessécher	VER	VER			inf;	d_E|s_e|S_e	d_e|ss_é|ch_er	0.88	0.25
+dessécherait	dEseS°RE	dessécher	VER	VER			cnd:pre:3s;	d_E|s_e|S_°|R_E	d_e|ss_é|ch_e|r_ait	0.07	0.01
+dessécheront	dEseS°R§	dessécher	VER	VER			ind:fut:3p;	d_E|s_e|S_°|R_§	d_e|ss_é|ch_e|r_ont	0.07	0.01
+desséchez	dEseSe	dessécher	VER	VER			ind:pre:2p;	d_E|s_e|S_e	d_e|ss_é|ch_ez	0.0	0.01
+desséchèrent	dEseSER	dessécher	VER	VER			ind:pas:3p;	d_E|s_e|S_E_R_#	d_e|ss_é|ch_è_r_ent	0.07	0.0
+desséché	dEseSe	dessécher	VER	VER	m	s	par:pas;	d_E|s_e|S_e	d_e|ss_é|ch_é	3.72	0.49
+desséchée	dEseSe	dessécher	VER	VER	f	s	par:pas;	d_E|s_e|S_e_#	d_e|ss_é|ch_é_e	4.32	0.8
+desséchées	dEseSe	dessécher	VER	VER	f	p	par:pas;	d_E|s_e|S_e_#	d_e|ss_é|ch_é_es	1.28	0.24
+desséchés	dEseSe	dessécher	VER	VER	m	p	par:pas;	d_E|s_e|S_e_#	d_e|ss_é|ch_é_s	1.96	0.56
 destin	dest5	destin	NOM	NOM	m	s		d_e_s|t_5	d_e_s|t_in	62.77	51.93
-destina	destina	destiner	VER	VER			ind:pas:3s;	d_e_s|t_i|n_a	d_e_s|t_i|n_a	0.07	0.0
-destinaient	destinE	destiner	VER	VER			ind:imp:3p;	d_e_s|t_i|n_E	d_e_s|t_i|n_aient	0.34	0.0
-destinais	destinE	destiner	VER	VER			ind:imp:1s;ind:imp:2s;	d_e_s|t_i|n_E	d_e_s|t_i|n_ais	0.27	0.09
-destinait	destinE	destiner	VER	VER			ind:imp:3s;	d_e_s|t_i|n_E	d_e_s|t_i|n_ait	1.76	0.21
-destinant	destin@	destiner	VER	VER			par:pre;	d_e_s|t_i|n_@	d_e_s|t_i|n_ant	0.07	0.0
+destina	dEstina	destiner	VER	VER			ind:pas:3s;	d_E_s|t_i|n_a	d_e_s|t_i|n_a	0.07	0.0
+destinaient	dEstinE	destiner	VER	VER			ind:imp:3p;	d_E_s|t_i|n_E	d_e_s|t_i|n_aient	0.34	0.0
+destinais	dEstinE	destiner	VER	VER			ind:imp:1s;ind:imp:2s;	d_E_s|t_i|n_E	d_e_s|t_i|n_ais	0.27	0.09
+destinait	dEstinE	destiner	VER	VER			ind:imp:3s;	d_E_s|t_i|n_E	d_e_s|t_i|n_ait	1.76	0.21
+destinant	dEstin@	destiner	VER	VER			par:pre;	d_E_s|t_i|n_@	d_e_s|t_i|n_ant	0.07	0.0
 destinataire	destinatER	destinataire	NOM	NOM		s		d_e_s|t_i|n_a|t_E_R_#	d_e_s|t_i|n_a|t_ai_r_e	1.82	0.67
 destinataires	destinatER	destinataire	NOM	NOM		p		d_e_s|t_i|n_a|t_E_R_#	d_e_s|t_i|n_a|t_ai_r_es	0.41	0.04
 destination	destinasj§	destination	NOM	NOM	f	s		d_e_s|t_i|n_a|s_j_§	d_e_s|t_i|n_a|t_i_on	9.59	10.41
 destinations	destinasj§	destination	NOM	NOM	f	p		d_e_s|t_i|n_a|s_j_§_#	d_e_s|t_i|n_a|t_i_on_s	0.54	0.46
 destinatrice	destinatRis	destinateur	NOM	NOM	f	s		d_e_s|t_i|n_a|t_R_i_s_#	d_e_s|t_i|n_a|t_r_i_c_e	0.14	0.0
-destine	destin	destiner	VER	VER			ind:pre:1s;ind:pre:3s;	d_e_s|t_i_n_#	d_e_s|t_i_n_e	1.28	0.37
-destinent	destin	destiner	VER	VER			ind:pre:3p;	d_e_s|t_i_n_#	d_e_s|t_i_n_ent	0.14	0.01
-destiner	destine	destiner	VER	VER			inf;	d_e_s|t_i|n_e	d_e_s|t_i|n_er	0.07	0.0
-destines	destin	destiner	VER	VER			ind:pre:2s;	d_e_s|t_i_n_#	d_e_s|t_i_n_es	0.0	0.2
-destinez	destine	destiner	VER	VER			ind:pre:2p;	d_e_s|t_i|n_e	d_e_s|t_i|n_ez	0.2	0.16
-destiniez	destinje	destiner	VER	VER			ind:imp:2p;	d_e_s|t_i|n_j_e	d_e_s|t_i|n_i_ez	0.0	0.01
+destine	dEstin	destiner	VER	VER			ind:pre:1s;ind:pre:3s;	d_E_s|t_i_n_#	d_e_s|t_i_n_e	1.28	0.37
+destinent	dEstin	destiner	VER	VER			ind:pre:3p;	d_E_s|t_i_n_#	d_e_s|t_i_n_ent	0.14	0.01
+destiner	dEstine	destiner	VER	VER			inf;	d_E_s|t_i|n_e	d_e_s|t_i|n_er	0.07	0.0
+destines	dEstin	destiner	VER	VER			ind:pre:2s;	d_E_s|t_i_n_#	d_e_s|t_i_n_es	0.0	0.2
+destinez	dEstine	destiner	VER	VER			ind:pre:2p;	d_E_s|t_i|n_e	d_e_s|t_i|n_ez	0.2	0.16
+destiniez	dEstinje	destiner	VER	VER			ind:imp:2p;	d_E_s|t_i|n_j_e	d_e_s|t_i|n_i_ez	0.0	0.01
 destins	dest5	destin	NOM	NOM	m	p		d_e_s|t_5_#	d_e_s|t_in_s	4.46	1.1
-destiné	destine	destiner	VER	VER,ADJ	m	s	par:pas;	d_e_s|t_i|n_e	d_e_s|t_i|n_é	11.35	5.09
+destiné	dEstine	destiner	VER	VER,ADJ	m	s	par:pas;	d_E_s|t_i|n_e	d_e_s|t_i|n_é	11.35	5.09
 destiné	destine	destiné	ADJ	VER,ADJ	m	s		d_e_s|t_i|n_e	d_e_s|t_i|n_é	1.22	0.66
 destinée	destine	destinée	NOM	VER,ADJ,NOM	f	s		d_e_s|t_i|n_e_#	d_e_s|t_i|n_é_e	8.31	8.64
-destinée	destine	destiner	VER	VER,ADJ,NOM	f	s	par:pas;	d_e_s|t_i|n_e_#	d_e_s|t_i|n_é_e	8.92	3.19
+destinée	dEstine	destiner	VER	VER,ADJ,NOM	f	s	par:pas;	d_E_s|t_i|n_e_#	d_e_s|t_i|n_é_e	8.92	3.19
 destinée	destine	destiné	ADJ	VER,ADJ,NOM	f	s		d_e_s|t_i|n_e_#	d_e_s|t_i|n_é_e	1.69	0.93
-destinées	destine	destiner	VER	VER,ADJ,NOM	f	p	par:pas;	d_e_s|t_i|n_e_#	d_e_s|t_i|n_é_es	3.85	1.08
+destinées	dEstine	destiner	VER	VER,ADJ,NOM	f	p	par:pas;	d_E_s|t_i|n_e_#	d_e_s|t_i|n_é_es	3.85	1.08
 destinées	destine	destinée	NOM	VER,ADJ,NOM	f	p		d_e_s|t_i|n_e_#	d_e_s|t_i|n_é_es	2.91	0.44
 destinées	destine	destiné	ADJ	VER,ADJ,NOM	f	p		d_e_s|t_i|n_e_#	d_e_s|t_i|n_é_es	1.35	0.08
-destinés	destine	destiner	VER	VER,ADJ	m	p	par:pas;	d_e_s|t_i|n_e_#	d_e_s|t_i|n_é_s	6.69	2.11
+destinés	dEstine	destiner	VER	VER,ADJ	m	p	par:pas;	d_E_s|t_i|n_e_#	d_e_s|t_i|n_é_s	6.69	2.11
 destinés	destine	destiné	ADJ	VER,ADJ	m	p		d_e_s|t_i|n_e_#	d_e_s|t_i|n_é_s	0.47	0.31
-destitue	destity	destituer	VER	VER			ind:pre:3s;	d_e_s|t_i|t_y_#	d_e_s|t_i|t_u_e	0.07	0.01
-destituer	destit8e	destituer	VER	VER			inf;	d_e_s|t_i|t_8_e	d_e_s|t_i|t_u_er	0.14	0.17
-destitueront	destityR§	destituer	VER	VER			ind:fut:3p;	d_e_s|t_i|t_y_#|R_§	d_e_s|t_i|t_u_e|r_ont	0.07	0.0
-destituez	destitye	destituer	VER	VER			imp:pre:2p;	d_e_s|t_i|t_y|e	d_e_s|t_i|t_u|ez	0.07	0.01
+destitue	dEstity	destituer	VER	VER			ind:pre:3s;	d_E_s|t_i|t_y_#	d_e_s|t_i|t_u_e	0.07	0.01
+destituer	dEstit8e	destituer	VER	VER			inf;	d_E_s|t_i|t_8_e	d_e_s|t_i|t_u_er	0.14	0.17
+destitueront	dEstityR§	destituer	VER	VER			ind:fut:3p;	d_E_s|t_i|t_y_#|R_§	d_e_s|t_i|t_u_e|r_ont	0.07	0.0
+destituez	dEstitye	destituer	VER	VER			imp:pre:2p;	d_E_s|t_i|t_y|e	d_e_s|t_i|t_u|ez	0.07	0.01
 destitution	destitysj§	destitution	NOM	NOM	f	s		d_e_s|t_i|t_y|s_j_§	d_e_s|t_i|t_u|t_i_on	0.34	0.17
-destitué	destit8e	destituer	VER	VER	m	s	par:pas;	d_e_s|t_i|t_8_e	d_e_s|t_i|t_u_é	0.41	0.36
-destituée	destit8e	destituer	VER	VER	f	s	par:pas;	d_e_s|t_i|t_8_e_#	d_e_s|t_i|t_u_é_e	0.0	0.01
+destitué	dEstit8e	destituer	VER	VER	m	s	par:pas;	d_E_s|t_i|t_8_e	d_e_s|t_i|t_u_é	0.41	0.36
+destituée	dEstit8e	destituer	VER	VER	f	s	par:pas;	d_E_s|t_i|t_8_e_#	d_e_s|t_i|t_u_é_e	0.0	0.01
 destrier	destRije	destrier	NOM	NOM	m	s		d_e_s|t_R_ij|e	d_e_s|t_r_i|er	0.34	0.25
 destriers	destRije	destrier	NOM	NOM	m	p		d_e_s|t_R_ij|e_#	d_e_s|t_r_i|er_s	0.41	0.14
 destroy	destRwaj	destroy	ADJ	ADJ		s		d_e_s|t_R_wa_j	d_e_s|t_r_o_y	0.14	0.25
@@ -44778,84 +44762,84 @@ eczémateux	Egzemat2	eczémateux	NOM	ADJ,NOM	m			E_g|z_e|m_a|t_2_#	e_c|z_é|m_a|
 eczémateux	Egzemat2	eczémateux	ADJ	ADJ,NOM	m	p		E_g|z_e|m_a|t_2_#	e_c|z_é|m_a|t_eu_x	0.07	0.0
 edelweiss	edElvajs	edelweiss	NOM	NOM	m			e|d_E_l|v_a_j_s	e|d_e_l|w_e_i_ss	0.54	0.0
 edwardienne	edwaRdjEn	edwardien	ADJ	ADJ	f	s		e|d_w_a_R|d_j_E_n_#	e|d_w_a_r|d_i_e_nn_e	0.07	0.0
-efface	efas	effacer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	e|f_a_s_#	e|ff_a_c_e	11.69	6.19
+efface	Efas	effacer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	E|f_a_s_#	e|ff_a_c_e	11.69	6.19
 effacement	efas°m@	effacement	NOM	NOM	m	s		e|f_a|s_°|m_@	e|ff_a|c_e|m_ent	2.7	0.36
 effacements	efas°m@	effacement	NOM	NOM	m	p		e|f_a|s_°|m_@_#	e|ff_a|c_e|m_en_ts	0.07	0.0
-effacent	efas	effacer	VER	VER			ind:pre:3p;	e|f_a_s_#	e|ff_a_c_ent	3.58	1.0
-effacer	efase	effacer	VER	VER			inf;	e|f_a|s_e	e|ff_a|c_er	18.31	10.05
-effacera	efas°Ra	effacer	VER	VER			ind:fut:3s;	e|f_a|s_°|R_a	e|ff_a|c_e|r_a	0.88	0.73
-effacerai	efas°Re	effacer	VER	VER			ind:fut:1s;	e|f_a|s_°|R_e	e|ff_a|c_e|r_ai	0.14	0.23
-effaceraient	efas°RE	effacer	VER	VER			cnd:pre:3p;	e|f_a|s_°|R_E	e|ff_a|c_e|r_aient	0.0	0.02
-effacerais	efas°RE	effacer	VER	VER			cnd:pre:1s;cnd:pre:2s;	e|f_a|s_°|R_E	e|ff_a|c_e|r_ais	0.07	0.05
-effacerait	efas°RE	effacer	VER	VER			cnd:pre:3s;	e|f_a|s_°|R_E	e|ff_a|c_e|r_ait	0.74	0.21
-effaceras	efas°Ra	effacer	VER	VER			ind:fut:2s;	e|f_a|s_°|R_a	e|ff_a|c_e|r_as	0.2	0.03
-effacerez	efas°Re	effacer	VER	VER			ind:fut:2p;	e|f_a|s_°|R_e	e|ff_a|c_e|r_ez	0.0	0.03
-effacerions	efas°Rj§	effacer	VER	VER			cnd:pre:1p;	e|f_a|s_°|R_j_§	e|ff_a|c_e|r_i_ons	0.0	0.01
-effacerons	efas°R§	effacer	VER	VER			ind:fut:1p;	e|f_a|s_°|R_§	e|ff_a|c_e|r_ons	0.0	0.13
-effaceront	efas°R§	effacer	VER	VER			ind:fut:3p;	e|f_a|s_°|R_§	e|ff_a|c_e|r_ont	0.27	0.15
-effaces	efas	effacer	VER	VER			ind:pre:2s;	e|f_a_s_#	e|ff_a_c_es	0.07	0.47
+effacent	Efas	effacer	VER	VER			ind:pre:3p;	E|f_a_s_#	e|ff_a_c_ent	3.58	1.0
+effacer	Efase	effacer	VER	VER			inf;	E|f_a|s_e	e|ff_a|c_er	18.31	10.05
+effacera	Efas°Ra	effacer	VER	VER			ind:fut:3s;	E|f_a|s_°|R_a	e|ff_a|c_e|r_a	0.88	0.73
+effacerai	Efas°Re	effacer	VER	VER			ind:fut:1s;	E|f_a|s_°|R_e	e|ff_a|c_e|r_ai	0.14	0.23
+effaceraient	Efas°RE	effacer	VER	VER			cnd:pre:3p;	E|f_a|s_°|R_E	e|ff_a|c_e|r_aient	0.0	0.02
+effacerais	Efas°RE	effacer	VER	VER			cnd:pre:1s;cnd:pre:2s;	E|f_a|s_°|R_E	e|ff_a|c_e|r_ais	0.07	0.05
+effacerait	Efas°RE	effacer	VER	VER			cnd:pre:3s;	E|f_a|s_°|R_E	e|ff_a|c_e|r_ait	0.74	0.21
+effaceras	Efas°Ra	effacer	VER	VER			ind:fut:2s;	E|f_a|s_°|R_a	e|ff_a|c_e|r_as	0.2	0.03
+effacerez	Efas°Re	effacer	VER	VER			ind:fut:2p;	E|f_a|s_°|R_e	e|ff_a|c_e|r_ez	0.0	0.03
+effacerions	Efas°Rj§	effacer	VER	VER			cnd:pre:1p;	E|f_a|s_°|R_j_§	e|ff_a|c_e|r_i_ons	0.0	0.01
+effacerons	Efas°R§	effacer	VER	VER			ind:fut:1p;	E|f_a|s_°|R_§	e|ff_a|c_e|r_ons	0.0	0.13
+effaceront	Efas°R§	effacer	VER	VER			ind:fut:3p;	E|f_a|s_°|R_§	e|ff_a|c_e|r_ont	0.27	0.15
+effaces	Efas	effacer	VER	VER			ind:pre:2s;	E|f_a_s_#	e|ff_a_c_es	0.07	0.47
 effaceur	efas9R	effaceur	NOM	NOM	m	s		e|f_a|s_9_R	e|ff_a|c_eu_r	0.0	0.1
-effacez	efase	effacer	VER	VER			imp:pre:2p;ind:pre:2p;	e|f_a|s_e	e|ff_a|c_ez	0.2	0.89
-effaciez	efasje	effacer	VER	VER			ind:imp:2p;	e|f_a|s_j_e	e|ff_a|c_i_ez	0.0	0.05
-effacions	efasj§	effacer	VER	VER			ind:imp:1p;	e|f_a|s_j_§	e|ff_a|c_i_ons	0.07	0.01
-effacèrent	efasER	effacer	VER	VER			ind:pas:3p;	e|f_a|s_E_R_#	e|ff_a|c_è_r_ent	1.01	0.0
-effacé	efase	effacer	VER	VER,ADJ	m	s	par:pas;	e|f_a|s_e	e|ff_a|c_é	6.96	5.24
+effacez	Efase	effacer	VER	VER			imp:pre:2p;ind:pre:2p;	E|f_a|s_e	e|ff_a|c_ez	0.2	0.89
+effaciez	Efasje	effacer	VER	VER			ind:imp:2p;	E|f_a|s_j_e	e|ff_a|c_i_ez	0.0	0.05
+effacions	Efasj§	effacer	VER	VER			ind:imp:1p;	E|f_a|s_j_§	e|ff_a|c_i_ons	0.07	0.01
+effacèrent	EfasER	effacer	VER	VER			ind:pas:3p;	E|f_a|s_E_R_#	e|ff_a|c_è_r_ent	1.01	0.0
+effacé	Efase	effacer	VER	VER,ADJ	m	s	par:pas;	E|f_a|s_e	e|ff_a|c_é	6.96	5.24
 effacé	efase	effacé	ADJ	VER,ADJ	m	s		e|f_a|s_e	e|ff_a|c_é	3.45	0.94
-effacée	efase	effacer	VER	VER,ADJ	f	s	par:pas;	e|f_a|s_e_#	e|ff_a|c_é_e	3.31	1.51
+effacée	Efase	effacer	VER	VER,ADJ	f	s	par:pas;	E|f_a|s_e_#	e|ff_a|c_é_e	3.31	1.51
 effacée	efase	effacé	ADJ	VER,ADJ	f	s		e|f_a|s_e_#	e|ff_a|c_é_e	3.04	0.43
-effacées	efase	effacer	VER	VER,ADJ	f	p	par:pas;	e|f_a|s_e_#	e|ff_a|c_é_es	1.96	0.5
+effacées	Efase	effacer	VER	VER,ADJ	f	p	par:pas;	E|f_a|s_e_#	e|ff_a|c_é_es	1.96	0.5
 effacées	efase	effacé	ADJ	VER,ADJ	f	p		e|f_a|s_e_#	e|ff_a|c_é_es	1.55	0.12
-effacés	efase	effacer	VER	VER,ADJ	m	p	par:pas;	e|f_a|s_e_#	e|ff_a|c_é_s	1.69	0.68
+effacés	Efase	effacer	VER	VER,ADJ	m	p	par:pas;	E|f_a|s_e_#	e|ff_a|c_é_s	1.69	0.68
 effacés	efase	effacé	ADJ	VER,ADJ	m	p		e|f_a|s_e_#	e|ff_a|c_é_s	1.15	0.33
-effara	efaRa	effarer	VER	VER			ind:pas:3s;	e|f_a|R_a	e|ff_a|r_a	0.07	0.0
-effaraient	efaRE	effarer	VER	VER			ind:imp:3p;	e|f_a|R_E	e|ff_a|r_aient	0.07	0.0
-effarait	efaRE	effarer	VER	VER			ind:imp:3s;	e|f_a|R_E	e|ff_a|r_ait	0.14	0.0
+effara	EfaRa	effarer	VER	VER			ind:pas:3s;	E|f_a|R_a	e|ff_a|r_a	0.07	0.0
+effaraient	EfaRE	effarer	VER	VER			ind:imp:3p;	E|f_a|R_E	e|ff_a|r_aient	0.07	0.0
+effarait	EfaRE	effarer	VER	VER			ind:imp:3s;	E|f_a|R_E	e|ff_a|r_ait	0.14	0.0
 effarant	efaR@	effarant	ADJ	ADJ,VER	m	s		e|f_a|R_@	e|ff_a|r_ant	0.81	0.81
-effarant	efaR@	effarer	VER	ADJ,VER			par:pre;	e|f_a|R_@	e|ff_a|r_ant	0.14	0.0
+effarant	EfaR@	effarer	VER	ADJ,VER			par:pre;	E|f_a|R_@	e|ff_a|r_ant	0.14	0.0
 effarante	efaR@t	effarant	ADJ	ADJ	f	s		e|f_a|R_@_t_#	e|ff_a|r_an_t_e	1.28	0.22
 effarantes	efaR@t	effarant	ADJ	ADJ	f	p		e|f_a|R_@_t_#	e|ff_a|r_an_t_es	0.34	0.0
 effarants	efaR@	effarant	ADJ	ADJ	m	p		e|f_a|R_@_#	e|ff_a|r_an_ts	0.14	0.05
-effare	efaR	effarer	VER	VER			ind:pre:1s;ind:pre:3s;	e|f_a_R_#	e|ff_a_r_e	0.2	0.01
+effare	EfaR	effarer	VER	VER			ind:pre:1s;ind:pre:3s;	E|f_a_R_#	e|ff_a_r_e	0.2	0.01
 effarement	efaR°m@	effarement	NOM	NOM	m	s		e|f_a|R_°|m_@	e|ff_a|r_e|m_ent	1.82	0.0
-effarer	efaRe	effarer	VER	VER			inf;	e|f_a|R_e	e|ff_a|r_er	0.0	0.02
-effaroucha	efaRuSa	effaroucher	VER	VER			ind:pas:3s;	e|f_a|R_u|S_a	e|ff_a|r_ou|ch_a	0.07	0.0
-effarouchaient	efaRuSE	effaroucher	VER	VER			ind:imp:3p;	e|f_a|R_u|S_E	e|ff_a|r_ou|ch_aient	0.2	0.0
-effarouchait	efaRuSE	effaroucher	VER	VER			ind:imp:3s;	e|f_a|R_u|S_E	e|ff_a|r_ou|ch_ait	0.68	0.0
-effarouchant	efaRuS@	effaroucher	VER	VER			par:pre;	e|f_a|R_u|S_@	e|ff_a|r_ou|ch_ant	0.2	0.0
-effarouche	efaRuS	effaroucher	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	e|f_a|R_u_S_#	e|ff_a|r_ou_ch_e	0.61	0.29
+effarer	EfaRe	effarer	VER	VER			inf;	E|f_a|R_e	e|ff_a|r_er	0.0	0.02
+effaroucha	EfaRuSa	effaroucher	VER	VER			ind:pas:3s;	E|f_a|R_u|S_a	e|ff_a|r_ou|ch_a	0.07	0.0
+effarouchaient	EfaRuSE	effaroucher	VER	VER			ind:imp:3p;	E|f_a|R_u|S_E	e|ff_a|r_ou|ch_aient	0.2	0.0
+effarouchait	EfaRuSE	effaroucher	VER	VER			ind:imp:3s;	E|f_a|R_u|S_E	e|ff_a|r_ou|ch_ait	0.68	0.0
+effarouchant	EfaRuS@	effaroucher	VER	VER			par:pre;	E|f_a|R_u|S_@	e|ff_a|r_ou|ch_ant	0.2	0.0
+effarouche	EfaRuS	effaroucher	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	E|f_a|R_u_S_#	e|ff_a|r_ou_ch_e	0.61	0.29
 effarouchement	efaRuS°m@	effarouchement	NOM	NOM	m	s		e|f_a|R_u|S_°|m_@	e|ff_a|r_ou|ch_e|m_ent	0.07	0.0
 effarouchements	efaRuS°m@	effarouchement	NOM	NOM	m	p		e|f_a|R_u|S_°|m_@_#	e|ff_a|r_ou|ch_e|m_en_ts	0.14	0.0
-effarouchent	efaRuS	effaroucher	VER	VER			ind:pre:3p;	e|f_a|R_u_S_#	e|ff_a|r_ou_ch_ent	0.2	0.3
-effaroucher	efaRuSe	effaroucher	VER	VER			inf;	e|f_a|R_u|S_e	e|ff_a|r_ou|ch_er	1.96	0.02
-effarouches	efaRuS	effaroucher	VER	VER			ind:pre:2s;	e|f_a|R_u_S_#	e|ff_a|r_ou_ch_es	0.07	0.0
-effarouchâmes	efaRuSam	effaroucher	VER	VER			ind:pas:1p;	e|f_a|R_u|S_a_m_#	e|ff_a|r_ou|ch_â_m_es	0.14	0.0
+effarouchent	EfaRuS	effaroucher	VER	VER			ind:pre:3p;	E|f_a|R_u_S_#	e|ff_a|r_ou_ch_ent	0.2	0.3
+effaroucher	EfaRuSe	effaroucher	VER	VER			inf;	E|f_a|R_u|S_e	e|ff_a|r_ou|ch_er	1.96	0.02
+effarouches	EfaRuS	effaroucher	VER	VER			ind:pre:2s;	E|f_a|R_u_S_#	e|ff_a|r_ou_ch_es	0.07	0.0
+effarouchâmes	EfaRuSam	effaroucher	VER	VER			ind:pas:1p;	E|f_a|R_u|S_a_m_#	e|ff_a|r_ou|ch_â_m_es	0.14	0.0
 effarouché	efaRuSe	effarouché	ADJ	VER,ADJ	m	s		e|f_a|R_u|S_e	e|ff_a|r_ou|ch_é	0.74	0.06
-effarouché	efaRuSe	effaroucher	VER	VER,ADJ	m	s	par:pas;	e|f_a|R_u|S_e	e|ff_a|r_ou|ch_é	0.27	0.0
+effarouché	EfaRuSe	effaroucher	VER	VER,ADJ	m	s	par:pas;	E|f_a|R_u|S_e	e|ff_a|r_ou|ch_é	0.27	0.0
 effarouchée	efaRuSe	effarouché	ADJ	VER,ADJ	f	s		e|f_a|R_u|S_e_#	e|ff_a|r_ou|ch_é_e	0.34	0.72
-effarouchée	efaRuSe	effaroucher	VER	VER,ADJ	f	s	par:pas;	e|f_a|R_u|S_e_#	e|ff_a|r_ou|ch_é_e	0.27	0.0
+effarouchée	EfaRuSe	effaroucher	VER	VER,ADJ	f	s	par:pas;	E|f_a|R_u|S_e_#	e|ff_a|r_ou|ch_é_e	0.27	0.0
 effarouchées	efaRuSe	effarouché	ADJ	ADJ	f	p		e|f_a|R_u|S_e_#	e|ff_a|r_ou|ch_é_es	0.68	0.01
 effarouchés	efaRuSe	effarouché	ADJ	VER,ADJ	m	p		e|f_a|R_u|S_e_#	e|ff_a|r_ou|ch_é_s	0.74	0.03
-effarouchés	efaRuSe	effaroucher	VER	VER,ADJ	m	p	par:pas;	e|f_a|R_u|S_e_#	e|ff_a|r_ou|ch_é_s	0.34	0.01
+effarouchés	EfaRuSe	effaroucher	VER	VER,ADJ	m	p	par:pas;	E|f_a|R_u|S_e_#	e|ff_a|r_ou|ch_é_s	0.34	0.01
 effarvatte	efaRvat	effarvatte	NOM	NOM	f	s		e|f_a_R|v_a_t_#	e|ff_a_r|v_a_tt_e	0.07	0.0
 effarvattes	efaRvat	effarvatte	NOM	NOM	f	p		e|f_a_R|v_a_t_#	e|ff_a_r|v_a_tt_es	0.07	0.0
-effarèrent	efaRER	effarer	VER	VER			ind:pas:3p;	e|f_a|R_E_R_#	e|ff_a|r_è_r_ent	0.07	0.0
-effaré	efaRe	effarer	VER	VER,ADJ	m	s	par:pas;	e|f_a|R_e	e|ff_a|r_é	0.54	0.05
+effarèrent	EfaRER	effarer	VER	VER			ind:pas:3p;	E|f_a|R_E_R_#	e|ff_a|r_è_r_ent	0.07	0.0
+effaré	EfaRe	effarer	VER	VER,ADJ	m	s	par:pas;	E|f_a|R_e	e|ff_a|r_é	0.54	0.05
 effaré	efaRe	effaré	ADJ	VER,ADJ	m	s		e|f_a|R_e	e|ff_a|r_é	1.62	0.03
 effarée	efaRe	effaré	ADJ	VER,ADJ	f	s		e|f_a|R_e_#	e|ff_a|r_é_e	0.88	0.1
-effarée	efaRe	effarer	VER	VER,ADJ	f	s	par:pas;	e|f_a|R_e_#	e|ff_a|r_é_e	0.47	0.01
+effarée	EfaRe	effarer	VER	VER,ADJ	f	s	par:pas;	E|f_a|R_e_#	e|ff_a|r_é_e	0.47	0.01
 effarées	efaRe	effaré	ADJ	ADJ	f	p		e|f_a|R_e_#	e|ff_a|r_é_es	0.14	0.0
-effarés	efaRe	effarer	VER	VER,ADJ	m	p	par:pas;	e|f_a|R_e_#	e|ff_a|r_é_s	0.27	0.02
+effarés	EfaRe	effarer	VER	VER,ADJ	m	p	par:pas;	E|f_a|R_e_#	e|ff_a|r_é_s	0.27	0.02
 effarés	efaRe	effaré	ADJ	VER,ADJ	m	p		e|f_a|R_e_#	e|ff_a|r_é_s	0.81	0.0
-effaça	efasa	effacer	VER	VER			ind:pas:3s;	e|f_a|s_a	e|ff_a|ç_a	5.27	0.02
+effaça	Efasa	effacer	VER	VER			ind:pas:3s;	E|f_a|s_a	e|ff_a|ç_a	5.27	0.02
 effaçable	efasabl	effaçable	ADJ	ADJ		s		e|f_a|s_a_b_l_#	e|ff_a|ç_a_b_l_e	0.0	0.01
 effaçables	efasabl	effaçable	ADJ	ADJ		p		e|f_a|s_a_b_l_#	e|ff_a|ç_a_b_l_es	0.07	0.0
 effaçage	efasaZ	effaçage	NOM	NOM	m	s		e|f_a|s_a_Z	e|ff_a|ç_a_ge	0.0	0.01
-effaçai	efase	effacer	VER	VER			ind:pas:1s;	e|f_a|s_e	e|ff_a|ç_ai	0.14	0.0
-effaçaient	efasE	effacer	VER	VER			ind:imp:3p;	e|f_a|s_E	e|ff_a|ç_aient	2.5	0.06
-effaçais	efasE	effacer	VER	VER			ind:imp:1s;ind:imp:2s;	e|f_a|s_E	e|ff_a|ç_ais	0.34	0.02
-effaçait	efasE	effacer	VER	VER			ind:imp:3s;	e|f_a|s_E	e|ff_a|ç_ait	7.43	0.2
-effaçant	efas@	effacer	VER	VER			par:pre;	e|f_a|s_@	e|ff_a|ç_ant	2.97	0.27
-effaçons	efas§	effacer	VER	VER			imp:pre:1p;ind:pre:1p;	e|f_a|s_§	e|ff_a|ç_ons	0.07	0.25
+effaçai	Efase	effacer	VER	VER			ind:pas:1s;	E|f_a|s_e	e|ff_a|ç_ai	0.14	0.0
+effaçaient	EfasE	effacer	VER	VER			ind:imp:3p;	E|f_a|s_E	e|ff_a|ç_aient	2.5	0.06
+effaçais	EfasE	effacer	VER	VER			ind:imp:1s;ind:imp:2s;	E|f_a|s_E	e|ff_a|ç_ais	0.34	0.02
+effaçait	EfasE	effacer	VER	VER			ind:imp:3s;	E|f_a|s_E	e|ff_a|ç_ait	7.43	0.2
+effaçant	Efas@	effacer	VER	VER			par:pre;	E|f_a|s_@	e|ff_a|ç_ant	2.97	0.27
+effaçons	Efas§	effacer	VER	VER			imp:pre:1p;ind:pre:1p;	E|f_a|s_§	e|ff_a|ç_ons	0.07	0.25
 effectif	efEktif	effectif	NOM	ADJ,NOM	m	s		e|f_E_k|t_i_f	e|ff_e_c|t_i_f	2.23	0.62
 effectif	efEktif	effectif	ADJ	ADJ,NOM	m	s		e|f_E_k|t_i_f	e|ff_e_c|t_i_f	1.01	0.35
 effectifs	efEktif	effectif	NOM	ADJ,NOM	m	p		e|f_E_k|t_i_f_#	e|ff_e_c|t_i_f_s	5.41	2.02
@@ -44864,27 +44848,27 @@ effective	efEktiv	effectif	ADJ	ADJ	f	s		e|f_E_k|t_i_v_#	e|ff_e_c|t_i_v_e	1.22	0.
 effectivement	efEktiv°m@	effectivement	ADV	ADV				e|f_E_k|t_i|v_°|m_@	e|ff_e_c|t_i|v_e|m_ent	16.28	13.57
 effectives	efEktiv	effectif	ADJ	ADJ	f	p		e|f_E_k|t_i_v_#	e|ff_e_c|t_i_v_es	0.14	0.01
 effectivité	efEktivite	effectivité	NOM	NOM	f	s		e|f_E_k|t_i|v_i|t_e	e|ff_e_c|t_i|v_i|t_é	0.07	0.0
-effectua	efEkt8a	effectuer	VER	VER			ind:pas:3s;	e|f_E_k|t_8_a	e|ff_e_c|t_u_a	1.01	0.02
-effectuai	efEkt8e	effectuer	VER	VER			ind:pas:1s;	e|f_E_k|t_8_e	e|ff_e_c|t_u_ai	0.27	0.0
-effectuaient	efEkt8E	effectuer	VER	VER			ind:imp:3p;	e|f_E_k|t_8_E	e|ff_e_c|t_u_aient	0.95	0.02
-effectuais	efEktyE	effectuer	VER	VER			ind:imp:1s;	e|f_E_k|t_y|E	e|ff_e_c|t_u|ais	0.0	0.08
-effectuait	efEkt8E	effectuer	VER	VER			ind:imp:3s;	e|f_E_k|t_8_E	e|ff_e_c|t_u_ait	1.35	0.11
-effectuant	efEkt8@	effectuer	VER	VER			par:pre;	e|f_E_k|t_8_@	e|ff_e_c|t_u_ant	0.81	0.13
-effectue	efEkty	effectuer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	e|f_E_k|t_y_#	e|ff_e_c|t_u_e	0.95	0.9
-effectuent	efEkty	effectuer	VER	VER			ind:pre:3p;	e|f_E_k|t_y_#	e|ff_e_c|t_u_ent	0.07	0.04
-effectuer	efEkt8e	effectuer	VER	VER			inf;	e|f_E_k|t_8_e	e|ff_e_c|t_u_er	4.59	2.84
-effectuera	efEktyRa	effectuer	VER	VER			ind:fut:3s;	e|f_E_k|t_y_#|R_a	e|ff_e_c|t_u_e|r_a	0.07	0.23
-effectuerai	efEktyRe	effectuer	VER	VER			ind:fut:1s;	e|f_E_k|t_y_#|R_e	e|ff_e_c|t_u_e|r_ai	0.0	0.05
-effectuerait	efEktyRE	effectuer	VER	VER			cnd:pre:3s;	e|f_E_k|t_y_#|R_E	e|ff_e_c|t_u_e|r_ait	0.2	0.0
-effectuerons	efEktyR§	effectuer	VER	VER			ind:fut:1p;	e|f_E_k|t_y_#|R_§	e|ff_e_c|t_u_e|r_ons	0.0	0.15
-effectues	efEkty	effectuer	VER	VER			ind:pre:2s;	e|f_E_k|t_y_#	e|ff_e_c|t_u_es	0.07	0.02
-effectuez	efEktye	effectuer	VER	VER			imp:pre:2p;ind:pre:2p;	e|f_E_k|t_y|e	e|ff_e_c|t_u|ez	0.0	0.23
-effectuions	efEktyj§	effectuer	VER	VER			ind:imp:1p;	e|f_E_k|t_y|j_§	e|ff_e_c|t_u|i_ons	0.07	0.01
-effectuons	efEkt8§	effectuer	VER	VER			imp:pre:1p;ind:pre:1p;	e|f_E_k|t_8_§	e|ff_e_c|t_u_ons	0.0	0.52
-effectué	efEkt8e	effectuer	VER	VER	m	s	par:pas;	e|f_E_k|t_8_e	e|ff_e_c|t_u_é	2.3	3.43
-effectuée	efEkt8e	effectuer	VER	VER	f	s	par:pas;	e|f_E_k|t_8_e_#	e|ff_e_c|t_u_é_e	1.08	0.95
-effectuées	efEkt8e	effectuer	VER	VER	f	p	par:pas;	e|f_E_k|t_8_e_#	e|ff_e_c|t_u_é_es	0.81	0.32
-effectués	efEkt8e	effectuer	VER	VER	m	p	par:pas;	e|f_E_k|t_8_e_#	e|ff_e_c|t_u_é_s	0.61	0.46
+effectua	EfEkt8a	effectuer	VER	VER			ind:pas:3s;	E|f_E_k|t_8_a	e|ff_e_c|t_u_a	1.01	0.02
+effectuai	EfEkt8e	effectuer	VER	VER			ind:pas:1s;	E|f_E_k|t_8_e	e|ff_e_c|t_u_ai	0.27	0.0
+effectuaient	EfEkt8E	effectuer	VER	VER			ind:imp:3p;	E|f_E_k|t_8_E	e|ff_e_c|t_u_aient	0.95	0.02
+effectuais	EfEktyE	effectuer	VER	VER			ind:imp:1s;	E|f_E_k|t_y|E	e|ff_e_c|t_u|ais	0.0	0.08
+effectuait	EfEkt8E	effectuer	VER	VER			ind:imp:3s;	E|f_E_k|t_8_E	e|ff_e_c|t_u_ait	1.35	0.11
+effectuant	EfEkt8@	effectuer	VER	VER			par:pre;	E|f_E_k|t_8_@	e|ff_e_c|t_u_ant	0.81	0.13
+effectue	EfEkty	effectuer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	E|f_E_k|t_y_#	e|ff_e_c|t_u_e	0.95	0.9
+effectuent	EfEkty	effectuer	VER	VER			ind:pre:3p;	E|f_E_k|t_y_#	e|ff_e_c|t_u_ent	0.07	0.04
+effectuer	EfEkt8e	effectuer	VER	VER			inf;	E|f_E_k|t_8_e	e|ff_e_c|t_u_er	4.59	2.84
+effectuera	EfEktyRa	effectuer	VER	VER			ind:fut:3s;	E|f_E_k|t_y_#|R_a	e|ff_e_c|t_u_e|r_a	0.07	0.23
+effectuerai	EfEktyRe	effectuer	VER	VER			ind:fut:1s;	E|f_E_k|t_y_#|R_e	e|ff_e_c|t_u_e|r_ai	0.0	0.05
+effectuerait	EfEktyRE	effectuer	VER	VER			cnd:pre:3s;	E|f_E_k|t_y_#|R_E	e|ff_e_c|t_u_e|r_ait	0.2	0.0
+effectuerons	EfEktyR§	effectuer	VER	VER			ind:fut:1p;	E|f_E_k|t_y_#|R_§	e|ff_e_c|t_u_e|r_ons	0.0	0.15
+effectues	EfEkty	effectuer	VER	VER			ind:pre:2s;	E|f_E_k|t_y_#	e|ff_e_c|t_u_es	0.07	0.02
+effectuez	EfEktye	effectuer	VER	VER			imp:pre:2p;ind:pre:2p;	E|f_E_k|t_y|e	e|ff_e_c|t_u|ez	0.0	0.23
+effectuions	EfEktyj§	effectuer	VER	VER			ind:imp:1p;	E|f_E_k|t_y|j_§	e|ff_e_c|t_u|i_ons	0.07	0.01
+effectuons	EfEkt8§	effectuer	VER	VER			imp:pre:1p;ind:pre:1p;	E|f_E_k|t_8_§	e|ff_e_c|t_u_ons	0.0	0.52
+effectué	EfEkt8e	effectuer	VER	VER	m	s	par:pas;	E|f_E_k|t_8_e	e|ff_e_c|t_u_é	2.3	3.43
+effectuée	EfEkt8e	effectuer	VER	VER	f	s	par:pas;	E|f_E_k|t_8_e_#	e|ff_e_c|t_u_é_e	1.08	0.95
+effectuées	EfEkt8e	effectuer	VER	VER	f	p	par:pas;	E|f_E_k|t_8_e_#	e|ff_e_c|t_u_é_es	0.81	0.32
+effectués	EfEkt8e	effectuer	VER	VER	m	p	par:pas;	E|f_E_k|t_8_e_#	e|ff_e_c|t_u_é_s	0.61	0.46
 effendi	ef5di	effendi	NOM	NOM	m	s		e|f_5|d_i	e|ff_en|d_i	1.62	0.19
 effervescence	efERves@s	effervescence	NOM	NOM	f	s		e|f_E_R|v_e|s_@_s_#	e|ff_e_r|v_e|sc_en_c_e	3.78	0.4
 effervescences	efERvEs@s	effervescence	NOM	NOM	f	p		e|f_E_R|v_E|s_@_s_#	e|ff_e_r|v_e|sc_en_c_es	0.07	0.0
@@ -44894,22 +44878,22 @@ effervescentes	efERvEs@t	effervescent	ADJ	ADJ	f	p		e|f_E_R|v_E|s_@_t_#	e|ff_e_r|
 effervescents	efERvEs@	effervescent	ADJ	ADJ	m	p		e|f_E_R|v_E|s_@_#	e|ff_e_r|v_e|sc_en_ts	0.2	0.01
 effet	efE	effet	NOM	NOM	m	s		e|f_E	e|ff_et	173.18	99.17
 effets	efE	effet	NOM	NOM	m	p		e|f_E_#	e|ff_e_ts	19.19	17.58
-effeuilla	ef9ja	effeuiller	VER	VER			ind:pas:3s;	e|f_9|j_a	e|ff_eu|ill_a	0.07	0.0
+effeuilla	Ef9ja	effeuiller	VER	VER			ind:pas:3s;	E|f_9|j_a	e|ff_eu|ill_a	0.07	0.0
 effeuillage	ef9jaZ	effeuillage	NOM	NOM	m	s		e|f_9|j_a_Z	e|ff_eu|ill_a_ge	0.07	0.08
-effeuillaient	ef9jE	effeuiller	VER	VER			ind:imp:3p;	e|f_9|j_E	e|ff_eu|ill_aient	0.14	0.0
-effeuillait	ef9jE	effeuiller	VER	VER			ind:imp:3s;	e|f_9|j_E	e|ff_eu|ill_ait	0.27	0.0
-effeuillant	ef9j@	effeuiller	VER	VER			par:pre;	e|f_9|j_@	e|ff_eu|ill_ant	0.0	0.01
-effeuille	ef9j	effeuiller	VER	VER			ind:pre:1s;ind:pre:3s;	e|f_9_j_#	e|ff_eu_ill_e	0.47	0.0
-effeuillent	ef9j	effeuiller	VER	VER			ind:pre:3p;	e|f_9_j_#	e|ff_eu_ill_ent	0.07	0.0
-effeuiller	ef9je	effeuiller	VER	VER			inf;	e|f_9|j_e	e|ff_eu|ill_er	0.41	0.12
-effeuilleras	ef9j°Ra	effeuiller	VER	VER			ind:fut:2s;	e|f_9|j_°|R_a	e|ff_eu|ill_e|r_as	0.07	0.0
+effeuillaient	Ef9jE	effeuiller	VER	VER			ind:imp:3p;	E|f_9|j_E	e|ff_eu|ill_aient	0.14	0.0
+effeuillait	Ef9jE	effeuiller	VER	VER			ind:imp:3s;	E|f_9|j_E	e|ff_eu|ill_ait	0.27	0.0
+effeuillant	Ef9j@	effeuiller	VER	VER			par:pre;	E|f_9|j_@	e|ff_eu|ill_ant	0.0	0.01
+effeuille	Ef9j	effeuiller	VER	VER			ind:pre:1s;ind:pre:3s;	E|f_9_j_#	e|ff_eu_ill_e	0.47	0.0
+effeuillent	Ef9j	effeuiller	VER	VER			ind:pre:3p;	E|f_9_j_#	e|ff_eu_ill_ent	0.07	0.0
+effeuiller	Ef9je	effeuiller	VER	VER			inf;	E|f_9|j_e	e|ff_eu|ill_er	0.41	0.12
+effeuilleras	Ef9j°Ra	effeuiller	VER	VER			ind:fut:2s;	E|f_9|j_°|R_a	e|ff_eu|ill_e|r_as	0.07	0.0
 effeuilleuse	ef9j2z	effeuilleur	NOM	NOM	f	s		e|f_9|j_2_z_#	e|ff_eu|ill_eu_s_e	0.14	0.11
 effeuilleuses	ef9j2z	effeuilleur	NOM	NOM	f	p		e|f_9|j_2_z_#	e|ff_eu|ill_eu_s_es	0.07	0.06
-effeuillez	ef9je	effeuiller	VER	VER			imp:pre:2p;	e|f_9|j_e	e|ff_eu|ill_ez	0.0	0.01
-effeuillèrent	ef9jER	effeuiller	VER	VER			ind:pas:3p;	e|f_9|j_E_R_#	e|ff_eu|ill_è_r_ent	0.07	0.0
-effeuillé	ef9je	effeuiller	VER	VER	m	s	par:pas;	e|f_9|j_e	e|ff_eu|ill_é	0.07	0.01
-effeuillée	ef9je	effeuiller	VER	VER	f	s	par:pas;	e|f_9|j_e_#	e|ff_eu|ill_é_e	0.2	0.01
-effeuillés	ef9je	effeuiller	VER	VER	m	p	par:pas;	e|f_9|j_e_#	e|ff_eu|ill_é_s	0.07	0.01
+effeuillez	Ef9je	effeuiller	VER	VER			imp:pre:2p;	E|f_9|j_e	e|ff_eu|ill_ez	0.0	0.01
+effeuillèrent	Ef9jER	effeuiller	VER	VER			ind:pas:3p;	E|f_9|j_E_R_#	e|ff_eu|ill_è_r_ent	0.07	0.0
+effeuillé	Ef9je	effeuiller	VER	VER	m	s	par:pas;	E|f_9|j_e	e|ff_eu|ill_é	0.07	0.01
+effeuillée	Ef9je	effeuiller	VER	VER	f	s	par:pas;	E|f_9|j_e_#	e|ff_eu|ill_é_e	0.2	0.01
+effeuillés	Ef9je	effeuiller	VER	VER	m	p	par:pas;	E|f_9|j_e_#	e|ff_eu|ill_é_s	0.07	0.01
 efficace	efikas	efficace	ADJ	ADJ		s		e|f_i|k_a_s_#	e|ff_i|c_a_c_e	12.23	12.19
 efficacement	efikas°m@	efficacement	ADV	ADV				e|f_i|k_a|s_°|m_@	e|ff_i|c_a|c_e|m_ent	2.23	0.67
 efficaces	efikas	efficace	ADJ	ADJ		p		e|f_i|k_a_s_#	e|ff_i|c_a_c_es	3.04	2.35
@@ -44921,41 +44905,41 @@ efficientes	efisj@t	efficient	ADJ	ADJ	f	p		e|f_i|s_j_@_t_#	e|ff_i|c_i_en_t_es	0.
 efficients	efisj@	efficient	ADJ	ADJ	m	p		e|f_i|s_j_@_#	e|ff_i|c_i_en_ts	0.07	0.0
 effigie	efiZi	effigie	NOM	NOM	f	s		e|f_i|Z_i_#	e|ff_i|g_i_e	3.38	1.52
 effigies	efiZi	effigie	NOM	NOM	f	p		e|f_i|Z_i_#	e|ff_i|g_i_es	0.81	0.07
-effila	efila	effiler	VER	VER			ind:pas:3s;	e|f_i|l_a	e|ff_i|l_a	0.07	0.0
-effilaient	efilE	effiler	VER	VER			ind:imp:3p;	e|f_i|l_E	e|ff_i|l_aient	0.07	0.0
-effilait	efilE	effiler	VER	VER			ind:imp:3s;	e|f_i|l_E	e|ff_i|l_ait	0.14	0.0
-effilant	efil@	effiler	VER	VER			par:pre;	e|f_i|l_@	e|ff_i|l_ant	0.2	0.0
-effile	efil	effiler	VER	VER			ind:pre:3s;	e|f_i_l_#	e|ff_i_l_e	0.2	0.0
+effila	Efila	effiler	VER	VER			ind:pas:3s;	E|f_i|l_a	e|ff_i|l_a	0.07	0.0
+effilaient	EfilE	effiler	VER	VER			ind:imp:3p;	E|f_i|l_E	e|ff_i|l_aient	0.07	0.0
+effilait	EfilE	effiler	VER	VER			ind:imp:3s;	E|f_i|l_E	e|ff_i|l_ait	0.14	0.0
+effilant	Efil@	effiler	VER	VER			par:pre;	E|f_i|l_@	e|ff_i|l_ant	0.2	0.0
+effile	Efil	effiler	VER	VER			ind:pre:3s;	E|f_i_l_#	e|ff_i_l_e	0.2	0.0
 effilement	efil°m@	effilement	NOM	NOM	m	s		e|f_i|l_°|m_@	e|ff_i|l_e|m_ent	0.07	0.0
-effilent	efil	effiler	VER	VER			ind:pre:3p;	e|f_i_l_#	e|ff_i_l_ent	0.07	0.01
-effiler	efile	effiler	VER	VER			inf;	e|f_i|l_e	e|ff_i|l_er	0.27	0.03
+effilent	Efil	effiler	VER	VER			ind:pre:3p;	E|f_i_l_#	e|ff_i_l_ent	0.07	0.01
+effiler	Efile	effiler	VER	VER			inf;	E|f_i|l_e	e|ff_i|l_er	0.27	0.03
 effilochage	efiloSaZ	effilochage	NOM	NOM	m	s		e|f_i|l_o|S_a_Z	e|ff_i|l_o|ch_a_ge	0.07	0.0
-effilochaient	efiloSE	effilocher	VER	VER			ind:imp:3p;	e|f_i|l_o|S_E	e|ff_i|l_o|ch_aient	0.47	0.0
-effilochait	efiloSE	effilocher	VER	VER			ind:imp:3s;	e|f_i|l_o|S_E	e|ff_i|l_o|ch_ait	0.88	0.01
-effilochant	efiloS@	effilocher	VER	VER			par:pre;	e|f_i|l_o|S_@	e|ff_i|l_o|ch_ant	0.27	0.0
-effiloche	efilOS	effilocher	VER	VER			ind:pre:3s;	e|f_i|l_O_S_#	e|ff_i|l_o_ch_e	0.95	0.05
-effilochent	efilOS	effilocher	VER	VER			ind:pre:3p;	e|f_i|l_O_S_#	e|ff_i|l_o_ch_ent	0.34	0.0
-effilocher	efiloSe	effilocher	VER	VER			inf;	e|f_i|l_o|S_e	e|ff_i|l_o|ch_er	0.47	0.0
-effilochera	efilOS°Ra	effilocher	VER	VER			ind:fut:3s;	e|f_i|l_O|S_°|R_a	e|ff_i|l_o|ch_e|r_a	0.07	0.01
+effilochaient	EfiloSE	effilocher	VER	VER			ind:imp:3p;	E|f_i|l_o|S_E	e|ff_i|l_o|ch_aient	0.47	0.0
+effilochait	EfiloSE	effilocher	VER	VER			ind:imp:3s;	E|f_i|l_o|S_E	e|ff_i|l_o|ch_ait	0.88	0.01
+effilochant	EfiloS@	effilocher	VER	VER			par:pre;	E|f_i|l_o|S_@	e|ff_i|l_o|ch_ant	0.27	0.0
+effiloche	EfilOS	effilocher	VER	VER			ind:pre:3s;	E|f_i|l_O_S_#	e|ff_i|l_o_ch_e	0.95	0.05
+effilochent	EfilOS	effilocher	VER	VER			ind:pre:3p;	E|f_i|l_O_S_#	e|ff_i|l_o_ch_ent	0.34	0.0
+effilocher	EfiloSe	effilocher	VER	VER			inf;	E|f_i|l_o|S_e	e|ff_i|l_o|ch_er	0.47	0.0
+effilochera	EfilOS°Ra	effilocher	VER	VER			ind:fut:3s;	E|f_i|l_O|S_°|R_a	e|ff_i|l_o|ch_e|r_a	0.07	0.01
 effilochure	efiloSyR	effilochure	NOM	NOM	f	s		e|f_i|l_o|S_y_R_#	e|ff_i|l_o|ch_u_r_e	0.2	0.0
 effilochures	efiloSyR	effilochure	NOM	NOM	f	p		e|f_i|l_o|S_y_R_#	e|ff_i|l_o|ch_u_r_es	0.27	0.0
-effilochèrent	efiloSER	effilocher	VER	VER			ind:pas:3p;	e|f_i|l_o|S_E_R_#	e|ff_i|l_o|ch_è_r_ent	0.07	0.0
-effiloché	efiloSe	effilocher	VER	VER	m	s	par:pas;	e|f_i|l_o|S_e	e|ff_i|l_o|ch_é	0.81	0.11
-effilochée	efiloSe	effilocher	VER	VER	f	s	par:pas;	e|f_i|l_o|S_e_#	e|ff_i|l_o|ch_é_e	0.88	0.02
-effilochées	efiloSe	effilocher	VER	VER	f	p	par:pas;	e|f_i|l_o|S_e_#	e|ff_i|l_o|ch_é_es	0.47	0.0
-effilochés	efiloSe	effilocher	VER	VER	m	p	par:pas;	e|f_i|l_o|S_e_#	e|ff_i|l_o|ch_é_s	0.68	0.0
+effilochèrent	EfiloSER	effilocher	VER	VER			ind:pas:3p;	E|f_i|l_o|S_E_R_#	e|ff_i|l_o|ch_è_r_ent	0.07	0.0
+effiloché	EfiloSe	effilocher	VER	VER	m	s	par:pas;	E|f_i|l_o|S_e	e|ff_i|l_o|ch_é	0.81	0.11
+effilochée	EfiloSe	effilocher	VER	VER	f	s	par:pas;	E|f_i|l_o|S_e_#	e|ff_i|l_o|ch_é_e	0.88	0.02
+effilochées	EfiloSe	effilocher	VER	VER	f	p	par:pas;	E|f_i|l_o|S_e_#	e|ff_i|l_o|ch_é_es	0.47	0.0
+effilochés	EfiloSe	effilocher	VER	VER	m	p	par:pas;	E|f_i|l_o|S_e_#	e|ff_i|l_o|ch_é_s	0.68	0.0
 effilure	efilyR	effilure	NOM	NOM	f	s		e|f_i|l_y_R_#	e|ff_i|l_u_r_e	0.07	0.0
 effilures	efilyR	effilure	NOM	NOM	f	p		e|f_i|l_y_R_#	e|ff_i|l_u_r_es	0.07	0.0
 effilé	efile	effilé	ADJ	VER,ADJ,NOM	m	s		e|f_i|l_e	e|ff_i|l_é	1.08	0.06
-effilé	efile	effiler	VER	VER,ADJ,NOM	m	s	par:pas;	e|f_i|l_e	e|ff_i|l_é	0.07	0.0
+effilé	Efile	effiler	VER	VER,ADJ,NOM	m	s	par:pas;	E|f_i|l_e	e|ff_i|l_é	0.07	0.0
 effilé	efile	effilé	NOM	VER,ADJ,NOM	m	s		e|f_i|l_e	e|ff_i|l_é	0.2	0.0
-effilée	efile	effiler	VER	VER,ADJ	f	s	par:pas;	e|f_i|l_e_#	e|ff_i|l_é_e	0.68	0.01
+effilée	Efile	effiler	VER	VER,ADJ	f	s	par:pas;	E|f_i|l_e_#	e|ff_i|l_é_e	0.68	0.01
 effilée	efile	effilé	ADJ	VER,ADJ	f	s		e|f_i|l_e_#	e|ff_i|l_é_e	1.15	0.0
-effilées	efile	effiler	VER	VER,ADJ	f	p	par:pas;	e|f_i|l_e_#	e|ff_i|l_é_es	0.41	0.02
+effilées	Efile	effiler	VER	VER,ADJ	f	p	par:pas;	E|f_i|l_e_#	e|ff_i|l_é_es	0.41	0.02
 effilées	efile	effilé	ADJ	VER,ADJ	f	p		e|f_i|l_e_#	e|ff_i|l_é_es	0.88	0.01
 effilés	efile	effilé	ADJ	VER,ADJ,NOM	m	p		e|f_i|l_e_#	e|ff_i|l_é_s	1.35	0.01
 effilés	efile	effilé	NOM	VER,ADJ,NOM	m	p		e|f_i|l_e_#	e|ff_i|l_é_s	0.14	0.01
-effilés	efile	effiler	VER	VER,ADJ,NOM	m	p	par:pas;	e|f_i|l_e_#	e|ff_i|l_é_s	0.27	0.0
+effilés	Efile	effiler	VER	VER,ADJ,NOM	m	p	par:pas;	E|f_i|l_e_#	e|ff_i|l_é_s	0.27	0.0
 efflanqué	efl@ke	efflanqué	ADJ	VER,ADJ	m	s		e|f_l_@|k_e	e|ff_l_an|qu_é	2.3	0.14
 efflanqué	efl@ke	efflanquer	VER	VER,ADJ	m	s	par:pas;	e|f_l_@|k_e	e|ff_l_an|qu_é	0.81	0.0
 efflanquée	efl@ke	efflanquer	VER	VER,ADJ	f	s	par:pas;	e|f_l_@|k_e_#	e|ff_l_an|qu_é_e	0.14	0.0
@@ -44964,145 +44948,145 @@ efflanquées	efl@ke	efflanquer	VER	VER,ADJ	f	p	par:pas;	e|f_l_@|k_e_#	e|ff_l_an|
 efflanquées	efl@ke	efflanqué	ADJ	VER,ADJ	f	p		e|f_l_@|k_e_#	e|ff_l_an|qu_é_es	0.47	0.0
 efflanqués	efl@ke	efflanquer	VER	VER,ADJ	m	p	par:pas;	e|f_l_@|k_e_#	e|ff_l_an|qu_é_s	0.27	0.01
 efflanqués	efl@ke	efflanqué	ADJ	VER,ADJ	m	p		e|f_l_@|k_e_#	e|ff_l_an|qu_é_s	0.54	0.0
-effleura	efl9Ra	effleurer	VER	VER			ind:pas:3s;	e|f_l_9|R_a	e|ff_l_eu|r_a	4.93	0.01
+effleura	Efl9Ra	effleurer	VER	VER			ind:pas:3s;	E|f_l_9|R_a	e|ff_l_eu|r_a	4.93	0.01
 effleurage	efl9RaZ	effleurage	NOM	NOM	m	s		e|f_l_9|R_a_Z	e|ff_l_eu|r_a_ge	0.07	0.0
-effleurai	efl9Re	effleurer	VER	VER			ind:pas:1s;	e|f_l_9|R_e	e|ff_l_eu|r_ai	0.14	0.0
-effleuraient	efl9RE	effleurer	VER	VER			ind:imp:3p;	e|f_l_9|R_E	e|ff_l_eu|r_aient	0.88	0.0
-effleurais	efl9RE	effleurer	VER	VER			ind:imp:1s;	e|f_l_9|R_E	e|ff_l_eu|r_ais	0.2	0.0
-effleurait	efl9RE	effleurer	VER	VER			ind:imp:3s;	e|f_l_9|R_E	e|ff_l_eu|r_ait	2.77	0.1
-effleurant	efl9R@	effleurer	VER	VER			par:pre;	e|f_l_9|R_@	e|ff_l_eu|r_ant	1.49	0.12
-effleure	efl9R	effleurer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	e|f_l_9_R_#	e|ff_l_eu_r_e	3.78	0.54
+effleurai	Efl9Re	effleurer	VER	VER			ind:pas:1s;	E|f_l_9|R_e	e|ff_l_eu|r_ai	0.14	0.0
+effleuraient	Efl9RE	effleurer	VER	VER			ind:imp:3p;	E|f_l_9|R_E	e|ff_l_eu|r_aient	0.88	0.0
+effleurais	Efl9RE	effleurer	VER	VER			ind:imp:1s;	E|f_l_9|R_E	e|ff_l_eu|r_ais	0.2	0.0
+effleurait	Efl9RE	effleurer	VER	VER			ind:imp:3s;	E|f_l_9|R_E	e|ff_l_eu|r_ait	2.77	0.1
+effleurant	Efl9R@	effleurer	VER	VER			par:pre;	E|f_l_9|R_@	e|ff_l_eu|r_ant	1.49	0.12
+effleure	Efl9R	effleurer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	E|f_l_9_R_#	e|ff_l_eu_r_e	3.78	0.54
 effleurement	efl9R°m@	effleurement	NOM	NOM	m	s		e|f_l_9|R_°|m_@	e|ff_l_eu|r_e|m_ent	0.81	0.03
 effleurements	efl9R°m@	effleurement	NOM	NOM	m	p		e|f_l_9|R_°|m_@_#	e|ff_l_eu|r_e|m_en_ts	0.41	0.04
-effleurent	efl9R	effleurer	VER	VER			ind:pre:3p;	e|f_l_9_R_#	e|ff_l_eu_r_ent	0.74	0.05
-effleurer	efl9Re	effleurer	VER	VER			inf;	e|f_l_9|R_e	e|ff_l_eu|r_er	4.59	0.62
-effleurera	efl9R°Ra	effleurer	VER	VER			ind:fut:3s;	e|f_l_9|R_°|R_a	e|ff_l_eu|r_e|r_a	0.14	0.0
-effleurerait	efl9R°RE	effleurer	VER	VER			cnd:pre:3s;	e|f_l_9|R_°|R_E	e|ff_l_eu|r_e|r_ait	0.2	0.01
-effleureront	efl9R°R§	effleurer	VER	VER			ind:fut:3p;	e|f_l_9|R_°|R_§	e|ff_l_eu|r_e|r_ont	0.07	0.0
-effleures	efl9R	effleurer	VER	VER			ind:pre:2s;	e|f_l_9_R_#	e|ff_l_eu_r_es	0.07	0.03
-effleurez	efl9Re	effleurer	VER	VER			imp:pre:2p;ind:pre:2p;	e|f_l_9|R_e	e|ff_l_eu|r_ez	0.07	0.04
-effleurâmes	efl9Ram	effleurer	VER	VER			ind:pas:1p;	e|f_l_9|R_a_m_#	e|ff_l_eu|r_â_m_es	0.14	0.0
-effleurèrent	efl9RER	effleurer	VER	VER			ind:pas:3p;	e|f_l_9|R_E_R_#	e|ff_l_eu|r_è_r_ent	0.34	0.0
-effleuré	efl9Re	effleurer	VER	VER	m	s	par:pas;	e|f_l_9|R_e	e|ff_l_eu|r_é	3.18	1.27
-effleurée	efl9Re	effleurer	VER	VER	f	s	par:pas;	e|f_l_9|R_e_#	e|ff_l_eu|r_é_e	1.49	0.41
-effleurées	efl9Re	effleurer	VER	VER	f	p	par:pas;	e|f_l_9|R_e_#	e|ff_l_eu|r_é_es	0.2	0.0
-effleurés	efl9Re	effleurer	VER	VER	m	p	par:pas;	e|f_l_9|R_e_#	e|ff_l_eu|r_é_s	0.2	0.04
+effleurent	Efl9R	effleurer	VER	VER			ind:pre:3p;	E|f_l_9_R_#	e|ff_l_eu_r_ent	0.74	0.05
+effleurer	Efl9Re	effleurer	VER	VER			inf;	E|f_l_9|R_e	e|ff_l_eu|r_er	4.59	0.62
+effleurera	Efl9R°Ra	effleurer	VER	VER			ind:fut:3s;	E|f_l_9|R_°|R_a	e|ff_l_eu|r_e|r_a	0.14	0.0
+effleurerait	Efl9R°RE	effleurer	VER	VER			cnd:pre:3s;	E|f_l_9|R_°|R_E	e|ff_l_eu|r_e|r_ait	0.2	0.01
+effleureront	Efl9R°R§	effleurer	VER	VER			ind:fut:3p;	E|f_l_9|R_°|R_§	e|ff_l_eu|r_e|r_ont	0.07	0.0
+effleures	Efl9R	effleurer	VER	VER			ind:pre:2s;	E|f_l_9_R_#	e|ff_l_eu_r_es	0.07	0.03
+effleurez	Efl9Re	effleurer	VER	VER			imp:pre:2p;ind:pre:2p;	E|f_l_9|R_e	e|ff_l_eu|r_ez	0.07	0.04
+effleurâmes	Efl9Ram	effleurer	VER	VER			ind:pas:1p;	E|f_l_9|R_a_m_#	e|ff_l_eu|r_â_m_es	0.14	0.0
+effleurèrent	Efl9RER	effleurer	VER	VER			ind:pas:3p;	E|f_l_9|R_E_R_#	e|ff_l_eu|r_è_r_ent	0.34	0.0
+effleuré	Efl9Re	effleurer	VER	VER	m	s	par:pas;	E|f_l_9|R_e	e|ff_l_eu|r_é	3.18	1.27
+effleurée	Efl9Re	effleurer	VER	VER	f	s	par:pas;	E|f_l_9|R_e_#	e|ff_l_eu|r_é_e	1.49	0.41
+effleurées	Efl9Re	effleurer	VER	VER	f	p	par:pas;	E|f_l_9|R_e_#	e|ff_l_eu|r_é_es	0.2	0.0
+effleurés	Efl9Re	effleurer	VER	VER	m	p	par:pas;	E|f_l_9|R_e_#	e|ff_l_eu|r_é_s	0.2	0.04
 efflorescence	efloRes@s	efflorescence	NOM	NOM	f	s		e|f_l_o|R_e|s_@_s_#	e|ff_l_o|r_e|sc_en_c_e	0.27	0.01
 effluent	efly@	effluent	NOM	NOM	m	s		e|f_l_y|@	e|ff_l_u|ent	0.0	0.01
 effluve	eflyv	effluve	NOM	NOM	m	s		e|f_l_y_v_#	e|ff_l_u_v_e	0.61	0.02
 effluves	eflyv	effluve	NOM	NOM	m	p		e|f_l_y_v_#	e|ff_l_u_v_es	5.88	0.06
-effondra	ef§dRa	effondrer	VER	VER			ind:pas:3s;	e|f_§|d_R_a	e|ff_on|d_r_a	3.72	0.24
-effondrai	ef§dRe	effondrer	VER	VER			ind:pas:1s;	e|f_§|d_R_e	e|ff_on|d_r_ai	0.34	0.02
-effondraient	ef§dRE	effondrer	VER	VER			ind:imp:3p;	e|f_§|d_R_E	e|ff_on|d_r_aient	0.81	0.01
-effondrais	ef§dRE	effondrer	VER	VER			ind:imp:1s;	e|f_§|d_R_E	e|ff_on|d_r_ais	0.14	0.0
-effondrait	ef§dRE	effondrer	VER	VER			ind:imp:3s;	e|f_§|d_R_E	e|ff_on|d_r_ait	2.5	0.15
-effondrant	ef§dR@	effondrer	VER	VER			par:pre;	e|f_§|d_R_@	e|ff_on|d_r_ant	0.34	0.04
-effondre	ef§dR	effondrer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	e|f_§_d_R_#	e|ff_on_d_r_e	3.85	3.19
+effondra	Ef§dRa	effondrer	VER	VER			ind:pas:3s;	E|f_§|d_R_a	e|ff_on|d_r_a	3.72	0.24
+effondrai	Ef§dRe	effondrer	VER	VER			ind:pas:1s;	E|f_§|d_R_e	e|ff_on|d_r_ai	0.34	0.02
+effondraient	Ef§dRE	effondrer	VER	VER			ind:imp:3p;	E|f_§|d_R_E	e|ff_on|d_r_aient	0.81	0.01
+effondrais	Ef§dRE	effondrer	VER	VER			ind:imp:1s;	E|f_§|d_R_E	e|ff_on|d_r_ais	0.14	0.0
+effondrait	Ef§dRE	effondrer	VER	VER			ind:imp:3s;	E|f_§|d_R_E	e|ff_on|d_r_ait	2.5	0.15
+effondrant	Ef§dR@	effondrer	VER	VER			par:pre;	E|f_§|d_R_@	e|ff_on|d_r_ant	0.34	0.04
+effondre	Ef§dR	effondrer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	E|f_§_d_R_#	e|ff_on_d_r_e	3.85	3.19
 effondrement	ef§dR°m@	effondrement	NOM	NOM	m	s		e|f_§|d_R_°|m_@	e|ff_on|d_r_e|m_ent	6.28	1.82
 effondrements	ef§dR°m@	effondrement	NOM	NOM	m	p		e|f_§|d_R_°|m_@_#	e|ff_on|d_r_e|m_en_ts	0.54	0.01
-effondrent	ef§dR	effondrer	VER	VER			ind:pre:3p;	e|f_§_d_R_#	e|ff_on_d_r_ent	1.15	0.41
-effondrer	ef§dRe	effondrer	VER	VER			inf;	e|f_§|d_R_e	e|ff_on|d_r_er	5.34	3.22
-effondrera	ef§dR°Ra	effondrer	VER	VER			ind:fut:3s;	e|f_§|d_R_°|R_a	e|ff_on|d_r_e|r_a	0.34	0.51
-effondreraient	ef§dR°RE	effondrer	VER	VER			cnd:pre:3p;	e|f_§|d_R_°|R_E	e|ff_on|d_r_e|r_aient	0.0	0.04
-effondrerais	ef§dR°RE	effondrer	VER	VER			cnd:pre:1s;	e|f_§|d_R_°|R_E	e|ff_on|d_r_e|r_ais	0.07	0.05
-effondrerait	ef§dR°RE	effondrer	VER	VER			cnd:pre:3s;	e|f_§|d_R_°|R_E	e|ff_on|d_r_e|r_ait	0.27	0.36
-effondreront	ef§dR°R§	effondrer	VER	VER			ind:fut:3p;	e|f_§|d_R_°|R_§	e|ff_on|d_r_e|r_ont	0.0	0.11
-effondrez	ef§dRe	effondrer	VER	VER			ind:pre:2p;	e|f_§|d_R_e	e|ff_on|d_r_ez	0.0	0.03
-effondrèrent	ef§dRER	effondrer	VER	VER			ind:pas:3p;	e|f_§|d_R_E_R_#	e|ff_on|d_r_è_r_ent	0.54	0.0
-effondré	ef§dRe	effondrer	VER	VER,ADJ	m	s	par:pas;	e|f_§|d_R_e	e|ff_on|d_r_é	3.24	2.75
+effondrent	Ef§dR	effondrer	VER	VER			ind:pre:3p;	E|f_§_d_R_#	e|ff_on_d_r_ent	1.15	0.41
+effondrer	Ef§dRe	effondrer	VER	VER			inf;	E|f_§|d_R_e	e|ff_on|d_r_er	5.34	3.22
+effondrera	Ef§dR°Ra	effondrer	VER	VER			ind:fut:3s;	E|f_§|d_R_°|R_a	e|ff_on|d_r_e|r_a	0.34	0.51
+effondreraient	Ef§dR°RE	effondrer	VER	VER			cnd:pre:3p;	E|f_§|d_R_°|R_E	e|ff_on|d_r_e|r_aient	0.0	0.04
+effondrerais	Ef§dR°RE	effondrer	VER	VER			cnd:pre:1s;	E|f_§|d_R_°|R_E	e|ff_on|d_r_e|r_ais	0.07	0.05
+effondrerait	Ef§dR°RE	effondrer	VER	VER			cnd:pre:3s;	E|f_§|d_R_°|R_E	e|ff_on|d_r_e|r_ait	0.27	0.36
+effondreront	Ef§dR°R§	effondrer	VER	VER			ind:fut:3p;	E|f_§|d_R_°|R_§	e|ff_on|d_r_e|r_ont	0.0	0.11
+effondrez	Ef§dRe	effondrer	VER	VER			ind:pre:2p;	E|f_§|d_R_e	e|ff_on|d_r_ez	0.0	0.03
+effondrèrent	Ef§dRER	effondrer	VER	VER			ind:pas:3p;	E|f_§|d_R_E_R_#	e|ff_on|d_r_è_r_ent	0.54	0.0
+effondré	Ef§dRe	effondrer	VER	VER,ADJ	m	s	par:pas;	E|f_§|d_R_e	e|ff_on|d_r_é	3.24	2.75
 effondré	ef§dRe	effondré	ADJ	VER,ADJ	m	s		e|f_§|d_R_e	e|ff_on|d_r_é	2.16	0.37
-effondrée	ef§dRe	effondrer	VER	VER,ADJ	f	s	par:pas;	e|f_§|d_R_e_#	e|ff_on|d_r_é_e	2.16	1.87
+effondrée	Ef§dRe	effondrer	VER	VER,ADJ	f	s	par:pas;	E|f_§|d_R_e_#	e|ff_on|d_r_é_e	2.16	1.87
 effondrée	ef§dRe	effondré	ADJ	VER,ADJ	f	s		e|f_§|d_R_e_#	e|ff_on|d_r_é_e	1.08	0.1
-effondrées	ef§dRe	effondrer	VER	VER,ADJ	f	p	par:pas;	e|f_§|d_R_e_#	e|ff_on|d_r_é_es	0.2	0.05
+effondrées	Ef§dRe	effondrer	VER	VER,ADJ	f	p	par:pas;	E|f_§|d_R_e_#	e|ff_on|d_r_é_es	0.2	0.05
 effondrées	ef§dRe	effondré	ADJ	VER,ADJ	f	p		e|f_§|d_R_e_#	e|ff_on|d_r_é_es	0.95	0.01
-effondrés	ef§dRe	effondrer	VER	VER,ADJ	m	p	par:pas;	e|f_§|d_R_e_#	e|ff_on|d_r_é_s	0.61	0.17
+effondrés	Ef§dRe	effondrer	VER	VER,ADJ	m	p	par:pas;	E|f_§|d_R_e_#	e|ff_on|d_r_é_s	0.61	0.17
 effondrés	ef§dRe	effondré	ADJ	VER,ADJ	m	p		e|f_§|d_R_e_#	e|ff_on|d_r_é_s	1.08	0.03
-efforce	efORs	efforcer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	e|f_O_R_s_#	e|ff_o_r_c_e	8.04	2.09
-efforcent	efORs	efforcer	VER	VER			ind:pre:3p;	e|f_O_R_s_#	e|ff_o_r_c_ent	2.16	0.38
-efforcer	efORse	efforcer	VER	VER			inf;	e|f_O_R|s_e	e|ff_o_r|c_er	2.57	0.86
-efforcera	efORs°Ra	efforcer	VER	VER			ind:fut:3s;	e|f_O_R|s_°|R_a	e|ff_o_r|c_e|r_a	0.2	0.04
-efforcerai	efORs°Re	efforcer	VER	VER			ind:fut:1s;	e|f_O_R|s_°|R_e	e|ff_o_r|c_e|r_ai	0.27	0.4
-efforceraient	efORs°RE	efforcer	VER	VER			cnd:pre:3p;	e|f_O_R|s_°|R_E	e|ff_o_r|c_e|r_aient	0.14	0.0
-efforcerais	efORs°RE	efforcer	VER	VER			cnd:pre:1s;cnd:pre:2s;	e|f_O_R|s_°|R_E	e|ff_o_r|c_e|r_ais	0.14	0.02
-efforcerait	efORs°RE	efforcer	VER	VER			cnd:pre:3s;	e|f_O_R|s_°|R_E	e|ff_o_r|c_e|r_ait	0.14	0.01
-efforcerons	efORs°R§	efforcer	VER	VER			ind:fut:1p;	e|f_O_R|s_°|R_§	e|ff_o_r|c_e|r_ons	0.07	0.12
-efforces	efORs	efforcer	VER	VER			ind:pre:2s;	e|f_O_R_s_#	e|ff_o_r_c_es	0.27	0.11
-efforcez	efORse	efforcer	VER	VER			imp:pre:2p;ind:pre:2p;	e|f_O_R|s_e	e|ff_o_r|c_ez	0.0	0.31
-efforcions	efORsj§	efforcer	VER	VER			ind:imp:1p;	e|f_O_R|s_j_§	e|ff_o_r|c_i_ons	0.81	0.0
-efforcèrent	efORsER	efforcer	VER	VER			ind:pas:3p;	e|f_O_R|s_E_R_#	e|ff_o_r|c_è_r_ent	0.2	0.0
-efforcé	efORse	efforcer	VER	VER	m	s	par:pas;	e|f_O_R|s_e	e|ff_o_r|c_é	2.03	0.46
-efforcée	efORse	efforcer	VER	VER	f	s	par:pas;	e|f_O_R|s_e_#	e|ff_o_r|c_é_e	0.81	0.14
-efforcés	efORse	efforcer	VER	VER	m	p	par:pas;	e|f_O_R|s_e_#	e|ff_o_r|c_é_s	0.41	0.12
+efforce	EfORs	efforcer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	E|f_O_R_s_#	e|ff_o_r_c_e	8.04	2.09
+efforcent	EfORs	efforcer	VER	VER			ind:pre:3p;	E|f_O_R_s_#	e|ff_o_r_c_ent	2.16	0.38
+efforcer	EfORse	efforcer	VER	VER			inf;	E|f_O_R|s_e	e|ff_o_r|c_er	2.57	0.86
+efforcera	EfORs°Ra	efforcer	VER	VER			ind:fut:3s;	E|f_O_R|s_°|R_a	e|ff_o_r|c_e|r_a	0.2	0.04
+efforcerai	EfORs°Re	efforcer	VER	VER			ind:fut:1s;	E|f_O_R|s_°|R_e	e|ff_o_r|c_e|r_ai	0.27	0.4
+efforceraient	EfORs°RE	efforcer	VER	VER			cnd:pre:3p;	E|f_O_R|s_°|R_E	e|ff_o_r|c_e|r_aient	0.14	0.0
+efforcerais	EfORs°RE	efforcer	VER	VER			cnd:pre:1s;cnd:pre:2s;	E|f_O_R|s_°|R_E	e|ff_o_r|c_e|r_ais	0.14	0.02
+efforcerait	EfORs°RE	efforcer	VER	VER			cnd:pre:3s;	E|f_O_R|s_°|R_E	e|ff_o_r|c_e|r_ait	0.14	0.01
+efforcerons	EfORs°R§	efforcer	VER	VER			ind:fut:1p;	E|f_O_R|s_°|R_§	e|ff_o_r|c_e|r_ons	0.07	0.12
+efforces	EfORs	efforcer	VER	VER			ind:pre:2s;	E|f_O_R_s_#	e|ff_o_r_c_es	0.27	0.11
+efforcez	EfORse	efforcer	VER	VER			imp:pre:2p;ind:pre:2p;	E|f_O_R|s_e	e|ff_o_r|c_ez	0.0	0.31
+efforcions	EfORsj§	efforcer	VER	VER			ind:imp:1p;	E|f_O_R|s_j_§	e|ff_o_r|c_i_ons	0.81	0.0
+efforcèrent	EfORsER	efforcer	VER	VER			ind:pas:3p;	E|f_O_R|s_E_R_#	e|ff_o_r|c_è_r_ent	0.2	0.0
+efforcé	EfORse	efforcer	VER	VER	m	s	par:pas;	E|f_O_R|s_e	e|ff_o_r|c_é	2.03	0.46
+efforcée	EfORse	efforcer	VER	VER	f	s	par:pas;	E|f_O_R|s_e_#	e|ff_o_r|c_é_e	0.81	0.14
+efforcés	EfORse	efforcer	VER	VER	m	p	par:pas;	E|f_O_R|s_e_#	e|ff_o_r|c_é_s	0.41	0.12
 effort	efOR	effort	NOM	NOM	m	s		e|f_O_R_#	e|ff_o_r_t	98.18	23.26
 efforts	efOR	effort	NOM	NOM	m	p		e|f_O_R_#	e|ff_o_r_ts	38.45	19.44
-efforça	efORsa	efforcer	VER	VER			ind:pas:3s;	e|f_O_R|s_a	e|ff_o_r|ç_a	5.61	0.02
-efforçai	efORse	efforcer	VER	VER			ind:pas:1s;	e|f_O_R|s_e	e|ff_o_r|ç_ai	0.95	0.01
-efforçaient	efORsE	efforcer	VER	VER			ind:imp:3p;	e|f_O_R|s_E	e|ff_o_r|ç_aient	4.05	0.04
-efforçais	efORsE	efforcer	VER	VER			ind:imp:1s;	e|f_O_R|s_E	e|ff_o_r|ç_ais	2.5	0.08
-efforçait	efORsE	efforcer	VER	VER			ind:imp:3s;	e|f_O_R|s_E	e|ff_o_r|ç_ait	14.19	0.32
-efforçant	efORs@	efforcer	VER	VER			par:pre;	e|f_O_R|s_@	e|ff_o_r|ç_ant	7.64	0.24
-efforçons	efORs§	efforcer	VER	VER			imp:pre:1p;ind:pre:1p;	e|f_O_R|s_§	e|ff_o_r|ç_ons	0.41	0.38
-efforçâmes	efORsam	efforcer	VER	VER			ind:pas:1p;	e|f_O_R|s_a_m_#	e|ff_o_r|ç_â_m_es	0.14	0.0
+efforça	EfORsa	efforcer	VER	VER			ind:pas:3s;	E|f_O_R|s_a	e|ff_o_r|ç_a	5.61	0.02
+efforçai	EfORse	efforcer	VER	VER			ind:pas:1s;	E|f_O_R|s_e	e|ff_o_r|ç_ai	0.95	0.01
+efforçaient	EfORsE	efforcer	VER	VER			ind:imp:3p;	E|f_O_R|s_E	e|ff_o_r|ç_aient	4.05	0.04
+efforçais	EfORsE	efforcer	VER	VER			ind:imp:1s;	E|f_O_R|s_E	e|ff_o_r|ç_ais	2.5	0.08
+efforçait	EfORsE	efforcer	VER	VER			ind:imp:3s;	E|f_O_R|s_E	e|ff_o_r|ç_ait	14.19	0.32
+efforçant	EfORs@	efforcer	VER	VER			par:pre;	E|f_O_R|s_@	e|ff_o_r|ç_ant	7.64	0.24
+efforçons	EfORs§	efforcer	VER	VER			imp:pre:1p;ind:pre:1p;	E|f_O_R|s_§	e|ff_o_r|ç_ons	0.41	0.38
+efforçâmes	EfORsam	efforcer	VER	VER			ind:pas:1p;	E|f_O_R|s_a_m_#	e|ff_o_r|ç_â_m_es	0.14	0.0
 effraction	efRaksj§	effraction	NOM	NOM	f	s		e|f_R_a_k|s_j_§	e|ff_r_a_c|t_i_on	2.03	7.49
 effractions	efRaksj§	effraction	NOM	NOM	f	p		e|f_R_a_k|s_j_§_#	e|ff_r_a_c|t_i_on_s	0.0	0.27
-effraie	efRE	effrayer	VER	NOM,VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	e|f_R_E_#	e|ff_r_ai_e	2.43	7.65
+effraie	EfRE	effrayer	VER	NOM,VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	E|f_R_E_#	e|ff_r_ai_e	2.43	7.65
 effraie	efRE	effraie	NOM	NOM,VER	f	s		e|f_R_E_#	e|ff_r_ai_e	0.34	0.13
-effraient	efRE	effrayer	VER	VER			ind:pre:3p;	e|f_R_E	e|ff_r_aient	0.47	1.07
-effraiera	efRERa	effrayer	VER	VER			ind:fut:3s;	e|f_R_E_#|R_a	e|ff_r_ai_e|r_a	0.07	0.07
-effraieraient	efRERE	effrayer	VER	VER			cnd:pre:3p;	e|f_R_E_#|R_E	e|ff_r_ai_e|r_aient	0.0	0.01
-effraierait	efRERE	effrayer	VER	VER			cnd:pre:3s;	e|f_R_E_#|R_E	e|ff_r_ai_e|r_ait	0.2	0.36
-effraieras	efRERa	effrayer	VER	VER			ind:fut:2s;	e|f_R_E_#|R_a	e|ff_r_ai_e|r_as	0.0	0.04
-effraierez	efRERe	effrayer	VER	VER			ind:fut:2p;	e|f_R_E_#|R_e	e|ff_r_ai_e|r_ez	0.0	0.03
-effraies	efRE	effrayer	VER	NOM,VER			ind:pre:2s;	e|f_R_E_#	e|ff_r_ai_es	0.2	0.53
+effraient	EfRE	effrayer	VER	VER			ind:pre:3p;	E|f_R_E	e|ff_r_aient	0.47	1.07
+effraiera	EfRERa	effrayer	VER	VER			ind:fut:3s;	E|f_R_E_#|R_a	e|ff_r_ai_e|r_a	0.07	0.07
+effraieraient	EfRERE	effrayer	VER	VER			cnd:pre:3p;	E|f_R_E_#|R_E	e|ff_r_ai_e|r_aient	0.0	0.01
+effraierait	EfRERE	effrayer	VER	VER			cnd:pre:3s;	E|f_R_E_#|R_E	e|ff_r_ai_e|r_ait	0.2	0.36
+effraieras	EfRERa	effrayer	VER	VER			ind:fut:2s;	E|f_R_E_#|R_a	e|ff_r_ai_e|r_as	0.0	0.04
+effraierez	EfRERe	effrayer	VER	VER			ind:fut:2p;	E|f_R_E_#|R_e	e|ff_r_ai_e|r_ez	0.0	0.03
+effraies	EfRE	effrayer	VER	NOM,VER			ind:pre:2s;	E|f_R_E_#	e|ff_r_ai_es	0.2	0.53
 effraies	efRE	effraie	NOM	NOM,VER	f	p		e|f_R_E_#	e|ff_r_ai_es	0.14	0.0
-effrange	efR@Z	effranger	VER	VER			ind:pre:3s;	e|f_R_@_Z	e|ff_r_an_ge	0.07	0.0
-effrangeait	efR@ZE	effranger	VER	VER			ind:imp:3s;	e|f_R_@|Z_E	e|ff_r_an|ge_ait	0.07	0.0
-effrangent	efR@Z	effranger	VER	VER			ind:pre:3p;	e|f_R_@_Z_#	e|ff_r_an_g_ent	0.07	0.0
-effrangé	efR@Ze	effranger	VER	VER	m	s	par:pas;	e|f_R_@|Z_e	e|ff_r_an|g_é	0.61	0.01
-effrangée	efR@Ze	effranger	VER	VER	f	s	par:pas;	e|f_R_@|Z_e_#	e|ff_r_an|g_é_e	0.34	0.0
-effrangées	efR@Ze	effranger	VER	VER	f	p	par:pas;	e|f_R_@|Z_e_#	e|ff_r_an|g_é_es	0.41	0.0
-effrangés	efR@Ze	effranger	VER	VER	m	p	par:pas;	e|f_R_@|Z_e_#	e|ff_r_an|g_é_s	0.41	0.0
-effraya	efREja	effrayer	VER	VER			ind:pas:3s;	e|f_R_E|j_a	e|ff_r_a|y_a	2.09	0.0
-effrayaient	efREjE	effrayer	VER	VER			ind:imp:3p;	e|f_R_E|j_E	e|ff_r_a|y_aient	1.35	0.23
-effrayais	efREjE	effrayer	VER	VER			ind:imp:1s;	e|f_R_E|j_E	e|ff_r_a|y_ais	0.2	0.04
-effrayait	efREjE	effrayer	VER	VER			ind:imp:3s;	e|f_R_E|j_E	e|ff_r_a|y_ait	7.16	0.91
+effrange	EfR@Z	effranger	VER	VER			ind:pre:3s;	E|f_R_@_Z	e|ff_r_an_ge	0.07	0.0
+effrangeait	EfR@ZE	effranger	VER	VER			ind:imp:3s;	E|f_R_@|Z_E	e|ff_r_an|ge_ait	0.07	0.0
+effrangent	EfR@Z	effranger	VER	VER			ind:pre:3p;	E|f_R_@_Z_#	e|ff_r_an_g_ent	0.07	0.0
+effrangé	EfR@Ze	effranger	VER	VER	m	s	par:pas;	E|f_R_@|Z_e	e|ff_r_an|g_é	0.61	0.01
+effrangée	EfR@Ze	effranger	VER	VER	f	s	par:pas;	E|f_R_@|Z_e_#	e|ff_r_an|g_é_e	0.34	0.0
+effrangées	EfR@Ze	effranger	VER	VER	f	p	par:pas;	E|f_R_@|Z_e_#	e|ff_r_an|g_é_es	0.41	0.0
+effrangés	EfR@Ze	effranger	VER	VER	m	p	par:pas;	E|f_R_@|Z_e_#	e|ff_r_an|g_é_s	0.41	0.0
+effraya	EfREja	effrayer	VER	VER			ind:pas:3s;	E|f_R_E|j_a	e|ff_r_a|y_a	2.09	0.0
+effrayaient	EfREjE	effrayer	VER	VER			ind:imp:3p;	E|f_R_E|j_E	e|ff_r_a|y_aient	1.35	0.23
+effrayais	EfREjE	effrayer	VER	VER			ind:imp:1s;	E|f_R_E|j_E	e|ff_r_a|y_ais	0.2	0.04
+effrayait	EfREjE	effrayer	VER	VER			ind:imp:3s;	E|f_R_E|j_E	e|ff_r_a|y_ait	7.16	0.91
 effrayamment	efREjam@	effrayamment	ADV	ADV				e|f_R_Ej|a|m_@	e|ff_r_ay|a|mm_ent	0.2	0.0
 effrayant	efREj@	effrayant	ADJ	ADJ,VER	m	s		e|f_R_Ej|@	e|ff_r_ay|ant	8.99	10.07
-effrayant	efREj@	effrayer	VER	ADJ,VER			par:pre;	e|f_R_Ej|@	e|ff_r_ay|ant	1.42	0.77
+effrayant	EfREj@	effrayer	VER	ADJ,VER			par:pre;	E|f_R_Ej|@	e|ff_r_ay|ant	1.42	0.77
 effrayante	efREj@t	effrayant	ADJ	ADJ	f	s		e|f_R_Ej|@_t_#	e|ff_r_ay|an_t_e	7.16	2.86
 effrayantes	efREj@t	effrayant	ADJ	ADJ	f	p		e|f_R_Ej|@_t_#	e|ff_r_ay|an_t_es	1.42	0.69
 effrayants	efREj@	effrayant	ADJ	ADJ	m	p		e|f_R_Ej|@_#	e|ff_r_ay|an_ts	1.62	1.07
-effraye	efREj	effrayer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	e|f_R_Ej_#	e|ff_r_ay_e	0.61	1.1
-effrayent	efREj	effrayer	VER	VER			ind:pre:3p;	e|f_R_E_j_#	e|ff_r_a_y_ent	0.2	0.25
-effrayer	efREje	effrayer	VER	VER			inf;	e|f_R_E|j_e	e|ff_r_a|y_er	4.73	9.43
-effrayerais	efREj°RE	effrayer	VER	VER			cnd:pre:1s;	e|f_R_E|j_°|R_E	e|ff_r_a|y_e|r_ais	0.0	0.03
-effrayerait	efREj°RE	effrayer	VER	VER			cnd:pre:3s;	e|f_R_E|j_°|R_E	e|ff_r_a|y_e|r_ait	0.0	0.08
-effrayeras	efREj°Ra	effrayer	VER	VER			ind:fut:2s;	e|f_R_E|j_°|R_a	e|ff_r_a|y_e|r_as	0.0	0.01
-effrayez	efREje	effrayer	VER	VER			imp:pre:2p;ind:pre:2p;	e|f_R_E|j_e	e|ff_r_a|y_ez	0.34	1.01
-effrayons	efREj§	effrayer	VER	VER			imp:pre:1p;ind:pre:1p;	e|f_R_E|j_§	e|ff_r_a|y_ons	0.07	0.2
-effrayèrent	efREjER	effrayer	VER	VER			ind:pas:3p;	e|f_R_E|j_E_R_#	e|ff_r_a|y_è_r_ent	0.0	0.14
-effrayé	efREje	effrayer	VER	VER,ADJ	m	s	par:pas;	e|f_R_Ej|e	e|ff_r_ay|é	3.99	6.36
+effraye	EfREj	effrayer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	E|f_R_Ej_#	e|ff_r_ay_e	0.61	1.1
+effrayent	EfREj	effrayer	VER	VER			ind:pre:3p;	E|f_R_E_j_#	e|ff_r_a_y_ent	0.2	0.25
+effrayer	EfREje	effrayer	VER	VER			inf;	E|f_R_E|j_e	e|ff_r_a|y_er	4.73	9.43
+effrayerais	EfREj°RE	effrayer	VER	VER			cnd:pre:1s;	E|f_R_E|j_°|R_E	e|ff_r_a|y_e|r_ais	0.0	0.03
+effrayerait	EfREj°RE	effrayer	VER	VER			cnd:pre:3s;	E|f_R_E|j_°|R_E	e|ff_r_a|y_e|r_ait	0.0	0.08
+effrayeras	EfREj°Ra	effrayer	VER	VER			ind:fut:2s;	E|f_R_E|j_°|R_a	e|ff_r_a|y_e|r_as	0.0	0.01
+effrayez	EfREje	effrayer	VER	VER			imp:pre:2p;ind:pre:2p;	E|f_R_E|j_e	e|ff_r_a|y_ez	0.34	1.01
+effrayons	EfREj§	effrayer	VER	VER			imp:pre:1p;ind:pre:1p;	E|f_R_E|j_§	e|ff_r_a|y_ons	0.07	0.2
+effrayèrent	EfREjER	effrayer	VER	VER			ind:pas:3p;	E|f_R_E|j_E_R_#	e|ff_r_a|y_è_r_ent	0.0	0.14
+effrayé	EfREje	effrayer	VER	VER,ADJ	m	s	par:pas;	E|f_R_Ej|e	e|ff_r_ay|é	3.99	6.36
 effrayé	efREje	effrayé	ADJ	VER,ADJ	m	s		e|f_R_Ej|e	e|ff_r_ay|é	4.53	3.11
-effrayée	efREje	effrayer	VER	VER,ADJ	f	s	par:pas;	e|f_R_Ej|e_#	e|ff_r_ay|é_e	2.64	5.0
+effrayée	EfREje	effrayer	VER	VER,ADJ	f	s	par:pas;	E|f_R_Ej|e_#	e|ff_r_ay|é_e	2.64	5.0
 effrayée	efREje	effrayé	ADJ	VER,ADJ	f	s		e|f_R_Ej|e_#	e|ff_r_ay|é_e	2.84	2.51
 effrayées	efREje	effrayé	ADJ	VER,ADJ	f	p		e|f_R_Ej|e_#	e|ff_r_ay|é_es	0.2	0.27
-effrayées	efREje	effrayer	VER	VER,ADJ	f	p	par:pas;	e|f_R_Ej|e_#	e|ff_r_ay|é_es	0.27	0.13
-effrayés	efREje	effrayer	VER	VER,ADJ	m	p	par:pas;	e|f_R_Ej|e_#	e|ff_r_ay|é_s	1.42	1.57
+effrayées	EfREje	effrayer	VER	VER,ADJ	f	p	par:pas;	E|f_R_Ej|e_#	e|ff_r_ay|é_es	0.27	0.13
+effrayés	EfREje	effrayer	VER	VER,ADJ	m	p	par:pas;	E|f_R_Ej|e_#	e|ff_r_ay|é_s	1.42	1.57
 effrayés	efREje	effrayé	ADJ	VER,ADJ	m	p		e|f_R_Ej|e_#	e|ff_r_ay|é_s	1.89	0.9
-effrita	efRita	effriter	VER	VER			ind:pas:3s;	e|f_R_i|t_a	e|ff_r_i|t_a	0.2	0.01
-effritaient	efRitE	effriter	VER	VER			ind:imp:3p;	e|f_R_i|t_E	e|ff_r_i|t_aient	0.27	0.01
-effritait	efRitE	effriter	VER	VER			ind:imp:3s;	e|f_R_i|t_E	e|ff_r_i|t_ait	0.54	0.1
-effritant	efRit@	effriter	VER	VER			par:pre;	e|f_R_i|t_@	e|ff_r_i|t_ant	0.54	0.0
-effrite	efRit	effriter	VER	VER			ind:pre:1s;ind:pre:3s;	e|f_R_i_t_#	e|ff_r_i_t_e	1.55	0.23
+effrita	EfRita	effriter	VER	VER			ind:pas:3s;	E|f_R_i|t_a	e|ff_r_i|t_a	0.2	0.01
+effritaient	EfRitE	effriter	VER	VER			ind:imp:3p;	E|f_R_i|t_E	e|ff_r_i|t_aient	0.27	0.01
+effritait	EfRitE	effriter	VER	VER			ind:imp:3s;	E|f_R_i|t_E	e|ff_r_i|t_ait	0.54	0.1
+effritant	EfRit@	effriter	VER	VER			par:pre;	E|f_R_i|t_@	e|ff_r_i|t_ant	0.54	0.0
+effrite	EfRit	effriter	VER	VER			ind:pre:1s;ind:pre:3s;	E|f_R_i_t_#	e|ff_r_i_t_e	1.55	0.23
 effritement	efRit°m@	effritement	NOM	NOM	m	s		e|f_R_i|t_°|m_@	e|ff_r_i|t_e|m_ent	0.41	0.01
 effritements	efRit°m@	effritement	NOM	NOM	m	p		e|f_R_i|t_°|m_@_#	e|ff_r_i|t_e|m_en_ts	0.07	0.0
-effritent	efRit	effriter	VER	VER			ind:pre:3p;	e|f_R_i_t_#	e|ff_r_i_t_ent	0.68	0.04
-effriter	efRite	effriter	VER	VER			inf;	e|f_R_i|t_e	e|ff_r_i|t_er	0.54	0.04
-effriterait	efRit°RE	effriter	VER	VER			cnd:pre:3s;	e|f_R_i|t_°|R_E	e|ff_r_i|t_e|r_ait	0.14	0.0
-effrité	efRite	effriter	VER	VER	m	s	par:pas;	e|f_R_i|t_e	e|ff_r_i|t_é	0.41	0.02
-effritée	efRite	effriter	VER	VER	f	s	par:pas;	e|f_R_i|t_e_#	e|ff_r_i|t_é_e	0.27	0.0
-effritées	efRite	effriter	VER	VER	f	p	par:pas;	e|f_R_i|t_e_#	e|ff_r_i|t_é_es	0.2	0.0
-effrités	efRite	effriter	VER	VER	m	p	par:pas;	e|f_R_i|t_e_#	e|ff_r_i|t_é_s	0.34	0.0
+effritent	EfRit	effriter	VER	VER			ind:pre:3p;	E|f_R_i_t_#	e|ff_r_i_t_ent	0.68	0.04
+effriter	EfRite	effriter	VER	VER			inf;	E|f_R_i|t_e	e|ff_r_i|t_er	0.54	0.04
+effriterait	EfRit°RE	effriter	VER	VER			cnd:pre:3s;	E|f_R_i|t_°|R_E	e|ff_r_i|t_e|r_ait	0.14	0.0
+effrité	EfRite	effriter	VER	VER	m	s	par:pas;	E|f_R_i|t_e	e|ff_r_i|t_é	0.41	0.02
+effritée	EfRite	effriter	VER	VER	f	s	par:pas;	E|f_R_i|t_e_#	e|ff_r_i|t_é_e	0.27	0.0
+effritées	EfRite	effriter	VER	VER	f	p	par:pas;	E|f_R_i|t_e_#	e|ff_r_i|t_é_es	0.2	0.0
+effrités	EfRite	effriter	VER	VER	m	p	par:pas;	E|f_R_i|t_e_#	e|ff_r_i|t_é_s	0.34	0.0
 effroi	efRwa	effroi	NOM	NOM	m	s		e_f|R_wa	e_ff|r_oi	12.91	2.83
 effronterie	efR§t°Ri	effronterie	NOM	NOM	f	s		e|f_R_§|t_°|R_i_#	e|ff_r_on|t_e|r_i_e	1.15	0.46
 effronteries	efR§t°Ri	effronterie	NOM	NOM	f	p		e|f_R_§|t_°|R_i_#	e|ff_r_on|t_e|r_i_es	0.07	0.0
@@ -45127,13 +45111,13 @@ effusion	efyzj§	effusion	NOM	NOM	f	s		e|f_y|z_j_§	e|ff_u|s_i_on	3.24	1.39
 effusionniste	efyzjonist	effusionniste	ADJ	ADJ		s		e|f_y|z_j_o|n_i_s_t_#	e|ff_u|s_i_o|nn_i_s_t_e	0.07	0.0
 effusionnistes	efyzjonist	effusionniste	ADJ	ADJ	m	p		e|f_y|z_j_o|n_i_s_t_#	e|ff_u|s_i_o|nn_i_s_t_es	0.07	0.0
 effusions	efyzj§	effusion	NOM	NOM	f	p		e|f_y|z_j_§_#	e|ff_u|s_i_on_s	3.18	0.34
-efféminait	efeminE	efféminer	VER	VER			ind:imp:3s;	e|f_e|m_i|n_E	e|ff_é|m_i|n_ait	0.07	0.0
+efféminait	EfeminE	efféminer	VER	VER			ind:imp:3s;	E|f_e|m_i|n_E	e|ff_é|m_i|n_ait	0.07	0.0
 efféminé	efemine	efféminé	ADJ	VER,ADJ	m	s		e|f_e|m_i|n_e	e|ff_é|m_i|n_é	0.2	0.49
-efféminé	efemine	efféminer	VER	VER,ADJ	m	s	par:pas;	e|f_e|m_i|n_e	e|ff_é|m_i|n_é	0.0	0.14
+efféminé	Efemine	efféminer	VER	VER,ADJ	m	s	par:pas;	E|f_e|m_i|n_e	e|ff_é|m_i|n_é	0.0	0.14
 efféminée	efemine	efféminé	ADJ	VER,ADJ	f	s		e|f_e|m_i|n_e_#	e|ff_é|m_i|n_é_e	0.14	0.04
-efféminée	efemine	efféminer	VER	VER,ADJ	f	s	par:pas;	e|f_e|m_i|n_e_#	e|ff_é|m_i|n_é_e	0.0	0.01
+efféminée	Efemine	efféminer	VER	VER,ADJ	f	s	par:pas;	E|f_e|m_i|n_e_#	e|ff_é|m_i|n_é_e	0.0	0.01
 efféminés	efemine	efféminé	ADJ	VER,ADJ	m	p		e|f_e|m_i|n_e_#	e|ff_é|m_i|n_é_s	0.34	0.28
-efféminés	efemine	efféminer	VER	VER,ADJ	m	p	par:pas;	e|f_e|m_i|n_e_#	e|ff_é|m_i|n_é_s	0.0	0.1
+efféminés	Efemine	efféminer	VER	VER,ADJ	m	p	par:pas;	E|f_e|m_i|n_e_#	e|ff_é|m_i|n_é_s	0.0	0.1
 efrit	EfRit	efrit	NOM	NOM	m	s		E|f_R_i_t	e|f_r_i_t	0.07	0.0
 ego	ego	ego	NOM	NOM	m			e|g_o	e|g_o	1.22	4.16
 eh	e	eh	ONO	ONO				e_#	e_h	176.62	386.0
@@ -50221,7 +50205,7 @@ essaierais	EsERE	essayer	VER	VER			cnd:pre:1s;cnd:pre:2s;	E|s_E_#|R_E	e|ss_ai_e|
 essaierait	EsERE	essayer	VER	VER			cnd:pre:3s;	E|s_E_#|R_E	e|ss_ai_e|r_ait	1.62	0.94
 essaieras	EsERa	essayer	VER	VER			ind:fut:2s;	E|s_E_#|R_a	e|ss_ai_e|r_as	0.34	0.48
 essaierez	EsERe	essayer	VER	VER			ind:fut:2p;	E|s_E_#|R_e	e|ss_ai_e|r_ez	0.07	0.4
-essaieriez	esERje	essayer	VER	VER			cnd:pre:2p;	e|s_E_#|R_j_e	e|ss_ai_e|r_i_ez	0.0	0.1
+essaieriez	EsERje	essayer	VER	VER			cnd:pre:2p;	E|s_E_#|R_j_e	e|ss_ai_e|r_i_ez	0.0	0.1
 essaierions	EsERj§	essayer	VER	VER			cnd:pre:1p;	E|s_E_#|R_j_§	e|ss_ai_e|r_i_ons	0.0	0.16
 essaierons	EsER§	essayer	VER	VER			ind:fut:1p;	E|s_E_#|R_§	e|ss_ai_e|r_ons	0.2	0.39
 essaieront	EsER§	essayer	VER	VER			ind:fut:3p;	E|s_E_#|R_§	e|ss_ai_e|r_ont	0.47	1.1
@@ -50240,42 +50224,42 @@ essartage	EsaRtaZ	essartage	NOM	NOM	m	s		E|s_a_R|t_a_Z	e|ss_a_r|t_a_ge	0.07	0.0
 essarte	EsaRt	essarter	VER	VER			ind:pre:3s;	E|s_a_R_t_#	e|ss_a_r_t_e	0.07	0.0
 essarts	EsaR	essart	NOM	NOM	m	p		E|s_a_R_#	e|ss_a_r_ts	0.07	0.0
 essartée	EsaRte	essarter	VER	VER	f	s	par:pas;	E|s_a_R|t_e_#	e|ss_a_r|t_é_e	0.07	0.0
-essaya	esEja	essayer	VER	VER			ind:pas:3s;	e|s_E|j_a	e|ss_a|y_a	24.66	0.65
+essaya	EsEja	essayer	VER	VER			ind:pas:3s;	E|s_E|j_a	e|ss_a|y_a	24.66	0.65
 essayage	esEjaZ	essayage	NOM	NOM	m	s		e|s_Ej|a_Z	e|ss_ay|a_ge	1.82	1.26
 essayages	esEjaZ	essayage	NOM	NOM	m	p		e|s_Ej|a_Z_#	e|ss_ay|a_g_es	1.01	0.58
-essayai	esEje	essayer	VER	VER			ind:pas:1s;	e|s_E|j_e	e|ss_a|y_ai	9.73	0.32
-essayaient	esEjE	essayer	VER	VER			ind:imp:3p;	e|s_E|j_E	e|ss_a|y_aient	6.08	2.73
-essayais	esEjE	essayer	VER	VER			ind:imp:1s;ind:imp:2s;	e|s_E|j_E	e|ss_a|y_ais	15.27	18.67
-essayait	esEjE	essayer	VER	VER			ind:imp:3s;	e|s_E|j_E	e|ss_a|y_ait	35.81	14.4
-essayant	esEj@	essayer	VER	VER			par:pre;	e|s_E|j_@	e|ss_a|y_ant	22.57	8.96
-essaye	esEj	essayer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	e|s_Ej_#	e|ss_ay_e	10.47	56.84
-essayent	esEj	essayer	VER	VER			ind:pre:3p;	e|s_E_j_#	e|ss_a_y_ent	1.69	4.07
-essayer	esEje	essayer	VER	VER			inf;	e|s_E|j_e	e|ss_a|y_er	56.42	134.69
-essayera	esEj°Ra	essayer	VER	VER			ind:fut:3s;	e|s_E|j_°|R_a	e|ss_a|y_e|r_a	0.2	1.03
-essayerai	esEj°Re	essayer	VER	VER			ind:fut:1s;	e|s_E|j_°|R_e	e|ss_a|y_e|r_ai	0.54	1.8
-essayeraient	esEj°RE	essayer	VER	VER			cnd:pre:3p;	e|s_E|j_°|R_E	e|ss_a|y_e|r_aient	0.07	0.08
-essayerais	esEj°RE	essayer	VER	VER			cnd:pre:1s;cnd:pre:2s;	e|s_E|j_°|R_E	e|ss_a|y_e|r_ais	0.27	0.66
-essayerait	esEj°RE	essayer	VER	VER			cnd:pre:3s;	e|s_E|j_°|R_E	e|ss_a|y_e|r_ait	0.27	0.13
-essayeras	esEj°Ra	essayer	VER	VER			ind:fut:2s;	e|s_E|j_°|R_a	e|ss_a|y_e|r_as	0.0	0.1
-essayerez	esEj°Re	essayer	VER	VER			ind:fut:2p;	e|s_E|j_°|R_e	e|ss_a|y_e|r_ez	0.14	0.16
-essayeriez	esEj°Rje	essayer	VER	VER			cnd:pre:2p;	e|s_E|j_°|R_j_e	e|ss_a|y_e|r_i_ez	0.0	0.12
-essayerons	esEj°R§	essayer	VER	VER			ind:fut:1p;	e|s_E|j_°|R_§	e|ss_a|y_e|r_ons	0.0	0.58
-essayeront	esEj°R§	essayer	VER	VER			ind:fut:3p;	e|s_E|j_°|R_§	e|ss_a|y_e|r_ont	0.0	0.15
-essayes	esEj	essayer	VER	VER			ind:pre:2s;sub:pre:2s;	e|s_Ej_#	e|ss_ay_es	0.34	5.96
+essayai	EsEje	essayer	VER	VER			ind:pas:1s;	E|s_E|j_e	e|ss_a|y_ai	9.73	0.32
+essayaient	EsEjE	essayer	VER	VER			ind:imp:3p;	E|s_E|j_E	e|ss_a|y_aient	6.08	2.73
+essayais	EsEjE	essayer	VER	VER			ind:imp:1s;ind:imp:2s;	E|s_E|j_E	e|ss_a|y_ais	15.27	18.67
+essayait	EsEjE	essayer	VER	VER			ind:imp:3s;	E|s_E|j_E	e|ss_a|y_ait	35.81	14.4
+essayant	EsEj@	essayer	VER	VER			par:pre;	E|s_E|j_@	e|ss_a|y_ant	22.57	8.96
+essaye	EsEj	essayer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	E|s_Ej_#	e|ss_ay_e	10.47	56.84
+essayent	EsEj	essayer	VER	VER			ind:pre:3p;	E|s_E_j_#	e|ss_a_y_ent	1.69	4.07
+essayer	EsEje	essayer	VER	VER			inf;	E|s_E|j_e	e|ss_a|y_er	56.42	134.69
+essayera	EsEj°Ra	essayer	VER	VER			ind:fut:3s;	E|s_E|j_°|R_a	e|ss_a|y_e|r_a	0.2	1.03
+essayerai	EsEj°Re	essayer	VER	VER			ind:fut:1s;	E|s_E|j_°|R_e	e|ss_a|y_e|r_ai	0.54	1.8
+essayeraient	EsEj°RE	essayer	VER	VER			cnd:pre:3p;	E|s_E|j_°|R_E	e|ss_a|y_e|r_aient	0.07	0.08
+essayerais	EsEj°RE	essayer	VER	VER			cnd:pre:1s;cnd:pre:2s;	E|s_E|j_°|R_E	e|ss_a|y_e|r_ais	0.27	0.66
+essayerait	EsEj°RE	essayer	VER	VER			cnd:pre:3s;	E|s_E|j_°|R_E	e|ss_a|y_e|r_ait	0.27	0.13
+essayeras	EsEj°Ra	essayer	VER	VER			ind:fut:2s;	E|s_E|j_°|R_a	e|ss_a|y_e|r_as	0.0	0.1
+essayerez	EsEj°Re	essayer	VER	VER			ind:fut:2p;	E|s_E|j_°|R_e	e|ss_a|y_e|r_ez	0.14	0.16
+essayeriez	EsEj°Rje	essayer	VER	VER			cnd:pre:2p;	E|s_E|j_°|R_j_e	e|ss_a|y_e|r_i_ez	0.0	0.12
+essayerons	EsEj°R§	essayer	VER	VER			ind:fut:1p;	E|s_E|j_°|R_§	e|ss_a|y_e|r_ons	0.0	0.58
+essayeront	EsEj°R§	essayer	VER	VER			ind:fut:3p;	E|s_E|j_°|R_§	e|ss_a|y_e|r_ont	0.0	0.15
+essayes	EsEj	essayer	VER	VER			ind:pre:2s;sub:pre:2s;	E|s_Ej_#	e|ss_ay_es	0.34	5.96
 essayeur	esEj9R	essayeur	NOM	NOM	m	s		e|s_Ej|9_R	e|ss_ay|eu_r	0.14	0.01
 essayeuses	esEj2z	essayeur	NOM	NOM	f	p		e|s_E|j_2_z_#	e|ss_a|y_eu_s_es	0.07	0.0
-essayez	esEje	essayer	VER	VER			imp:pre:2p;ind:pre:2p;	e|s_E|j_e	e|ss_a|y_ez	6.96	54.14
-essayiez	esEjje	essayer	VER	VER			ind:imp:2p;	e|s_E_j|j_e	e|ss_a_y|i_ez	0.2	1.24
-essayions	esEjj§	essayer	VER	VER			ind:imp:1p;	e|s_E_j|j_§	e|ss_a_y|i_ons	0.81	0.75
+essayez	EsEje	essayer	VER	VER			imp:pre:2p;ind:pre:2p;	E|s_E|j_e	e|ss_a|y_ez	6.96	54.14
+essayiez	EsEjje	essayer	VER	VER			ind:imp:2p;	E|s_E_j|j_e	e|ss_a_y|i_ez	0.2	1.24
+essayions	EsEjj§	essayer	VER	VER			ind:imp:1p;	E|s_E_j|j_§	e|ss_a_y|i_ons	0.81	0.75
 essayiste	esEjist	essayiste	NOM	NOM		s		e|s_E|j_i_s_t_#	e|ss_a|y_i_s_t_e	0.07	0.01
 essayistes	esEjist	essayiste	NOM	NOM		p		e|s_E|j_i_s_t_#	e|ss_a|y_i_s_t_es	0.07	0.0
-essayons	esEj§	essayer	VER	VER			imp:pre:1p;ind:pre:1p;	e|s_E|j_§	e|ss_a|y_ons	3.31	21.75
-essayâmes	esEjam	essayer	VER	VER			ind:pas:1p;	e|s_E|j_a_m_#	e|ss_a|y_â_m_es	0.2	0.0
-essayèrent	esEjER	essayer	VER	VER			ind:pas:3p;	e|s_E|j_E_R_#	e|ss_a|y_è_r_ent	0.81	0.27
-essayé	esEje	essayer	VER	VER	m	s	par:pas;par:pas;par:pas;par:pas;	e|s_Ej|e	e|ss_ay|é	45.68	124.02
-essayée	esEje	essayer	VER	VER	f	s	par:pas;	e|s_Ej|e_#	e|ss_ay|é_e	0.34	0.51
-essayées	esEje	essayer	VER	VER	f	p	par:pas;	e|s_Ej|e_#	e|ss_ay|é_es	0.14	0.35
-essayés	esEje	essayer	VER	VER	m	p	par:pas;	e|s_Ej|e_#	e|ss_ay|é_s	0.47	0.45
+essayons	EsEj§	essayer	VER	VER			imp:pre:1p;ind:pre:1p;	E|s_E|j_§	e|ss_a|y_ons	3.31	21.75
+essayâmes	EsEjam	essayer	VER	VER			ind:pas:1p;	E|s_E|j_a_m_#	e|ss_a|y_â_m_es	0.2	0.0
+essayèrent	EsEjER	essayer	VER	VER			ind:pas:3p;	E|s_E|j_E_R_#	e|ss_a|y_è_r_ent	0.81	0.27
+essayé	EsEje	essayer	VER	VER	m	s	par:pas;par:pas;par:pas;par:pas;	E|s_Ej|e	e|ss_ay|é	45.68	124.02
+essayée	EsEje	essayer	VER	VER	f	s	par:pas;	E|s_Ej|e_#	e|ss_ay|é_e	0.34	0.51
+essayées	EsEje	essayer	VER	VER	f	p	par:pas;	E|s_Ej|e_#	e|ss_ay|é_es	0.14	0.35
+essayés	EsEje	essayer	VER	VER	m	p	par:pas;	E|s_Ej|e_#	e|ss_ay|é_s	0.47	0.45
 esse	Es	esse	NOM	NOM	f	s		E_s_#	e_ss_e	0.68	0.02
 essence	es@s	essence	NOM	NOM	f	s		e|s_@_s_#	e|ss_en_c_e	27.77	32.91
 essences	es@s	essence	NOM	NOM	f	p		e|s_@_s_#	e|ss_en_c_es	1.69	0.34
@@ -50307,7 +50291,7 @@ essorait	EsoRE	essorer	VER	VER			ind:imp:3s;	E|s_o|R_E	e|ss_o|r_ait	0.27	0.01
 essorant	EsoR@	essorer	VER	VER			par:pre;	E|s_o|R_@	e|ss_o|r_ant	0.14	0.0
 essore	EsOR	essorer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	E|s_O_R_#	e|ss_o_r_e	0.07	0.07
 essorent	EsOR	essorer	VER	VER			ind:pre:3p;	E|s_O_R_#	e|ss_o_r_ent	0.14	0.0
-essorer	esoRe	essorer	VER	VER			inf;	e|s_o|R_e	e|ss_o|r_er	1.08	0.08
+essorer	EsoRe	essorer	VER	VER			inf;	E|s_o|R_e	e|ss_o|r_er	1.08	0.08
 essorerait	EsOR°RE	essorer	VER	VER			cnd:pre:3s;	E|s_O|R_°|R_E	e|ss_o|r_e|r_ait	0.07	0.0
 essoreuse	esoR2z	essoreuse	NOM	NOM	f	s		e|s_o|R_2_z_#	e|ss_o|r_eu_s_e	0.07	0.36
 essorillé	EsoRije	essoriller	VER	VER	m	s	par:pas;	E|s_o|R_i|j_e	e|ss_o|r_i|ll_é	0.07	0.0
@@ -50326,25 +50310,25 @@ essouffle	Esufl	essouffler	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	E|s_u_f_l
 essoufflement	esufl°m@	essoufflement	NOM	NOM	m	s		e|s_u|f_l_°|m_@	e|ss_ou|ff_l_e|m_ent	1.55	0.16
 essoufflements	esufl°m@	essoufflement	NOM	NOM	m	p		e|s_u|f_l_°|m_@_#	e|ss_ou|ff_l_e|m_en_ts	0.07	0.03
 essoufflent	Esufl	essouffler	VER	VER			ind:pre:3p;	E|s_u_f_l_#	e|ss_ou_ff_l_ent	0.07	0.01
-essouffler	esufle	essouffler	VER	VER			inf;	e|s_u|f_l_e	e|ss_ou|ff_l_er	0.34	0.08
+essouffler	Esufle	essouffler	VER	VER			inf;	E|s_u|f_l_e	e|ss_ou|ff_l_er	0.34	0.08
 essouffleront	Esufl°R§	essouffler	VER	VER			ind:fut:3p;	E|s_u|f_l_°|R_§	e|ss_ou|ff_l_e|r_ont	0.07	0.0
 essouffles	Esufl	essouffler	VER	VER			ind:pre:2s;	E|s_u_f_l_#	e|ss_ou_ff_l_es	0.07	0.01
 essoufflez	Esufle	essouffler	VER	VER			ind:pre:2p;	E|s_u|f_l_e	e|ss_ou|ff_l_ez	0.14	0.0
 essoufflèrent	EsuflER	essouffler	VER	VER			ind:pas:3p;	E|s_u|f_l_E_R_#	e|ss_ou|ff_l_è_r_ent	0.07	0.0
-essoufflé	esufle	essouffler	VER	VER,ADJ	m	s	par:pas;	e|s_u|f_l_e	e|ss_ou|ff_l_é	1.76	0.38
+essoufflé	Esufle	essouffler	VER	VER,ADJ	m	s	par:pas;	E|s_u|f_l_e	e|ss_ou|ff_l_é	1.76	0.38
 essoufflé	esufle	essoufflé	ADJ	VER,ADJ	m	s		e|s_u|f_l_e	e|ss_ou|ff_l_é	5.14	0.34
-essoufflée	esufle	essouffler	VER	VER,ADJ	f	s	par:pas;	e|s_u|f_l_e_#	e|ss_ou|ff_l_é_e	1.28	0.25
+essoufflée	Esufle	essouffler	VER	VER,ADJ	f	s	par:pas;	E|s_u|f_l_e_#	e|ss_ou|ff_l_é_e	1.28	0.25
 essoufflée	esufle	essoufflé	ADJ	VER,ADJ	f	s		e|s_u|f_l_e_#	e|ss_ou|ff_l_é_e	2.84	0.08
 essoufflées	esufle	essoufflé	ADJ	ADJ	f	p		e|s_u|f_l_e_#	e|ss_ou|ff_l_é_es	0.14	0.0
 essoufflés	esufle	essoufflé	ADJ	VER,ADJ	m	p		e|s_u|f_l_e_#	e|ss_ou|ff_l_é_s	1.28	0.12
-essoufflés	esufle	essouffler	VER	VER,ADJ	m	p	par:pas;	e|s_u|f_l_e_#	e|ss_ou|ff_l_é_s	0.68	0.01
+essoufflés	Esufle	essouffler	VER	VER,ADJ	m	p	par:pas;	E|s_u|f_l_e_#	e|ss_ou|ff_l_é_s	0.68	0.01
 essuie	Es8i	essuyer	VER	NOM,VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	E|s_8_i_#	e|ss_u_i_e	7.97	3.98
 essuie	Es8i	essuie	NOM	NOM,VER	m	s		E|s_8_i_#	e|ss_u_i_e	0.14	0.12
 essuient	Es8i	essuyer	VER	VER			ind:pre:3p;	E|s_8_i_#	e|ss_u_i_ent	0.68	0.05
 essuiera	Es8iRa	essuyer	VER	VER			ind:fut:3s;	E|s_8_i_#|R_a	e|ss_u_i_e|r_a	0.0	0.04
-essuierais	es8iRE	essuyer	VER	VER			cnd:pre:1s;	e|s_8_i_#|R_E	e|ss_u_i_e|r_ais	0.0	0.02
+essuierais	Es8iRE	essuyer	VER	VER			cnd:pre:1s;	E|s_8_i_#|R_E	e|ss_u_i_e|r_ais	0.0	0.02
 essuieras	Es8iRa	essuyer	VER	VER			ind:fut:2s;	E|s_8_i_#|R_a	e|ss_u_i_e|r_as	0.07	0.01
-essuierez	es8iRe	essuyer	VER	VER			ind:fut:2p;	e|s_8_i_#|R_e	e|ss_u_i_e|r_ez	0.0	0.04
+essuierez	Es8iRe	essuyer	VER	VER			ind:fut:2p;	E|s_8_i_#|R_e	e|ss_u_i_e|r_ez	0.0	0.04
 essuierions	Es8iRj§	essuyer	VER	VER			cnd:pre:1p;	E|s_8_i_#|R_j_§	e|ss_u_i_e|r_i_ons	0.07	0.0
 essuies	Es8i	essuyer	VER	NOM,VER			ind:pre:2s;	E|s_8_i_#	e|ss_u_i_es	0.07	0.23
 essuies	Es8i	essuie	NOM	NOM,VER	m	p		E|s_8_i_#	e|ss_u_i_es	0.0	0.14
@@ -50356,16 +50340,16 @@ essuyaient	Es8ijE	essuyer	VER	VER			ind:imp:3p;	E|s_8_ij|E	e|ss_u_y|aient	0.61	0
 essuyais	Es8ijE	essuyer	VER	VER			ind:imp:1s;ind:imp:2s;	E|s_8_ij|E	e|ss_u_y|ais	0.68	0.07
 essuyait	Es8ijE	essuyer	VER	VER			ind:imp:3s;	E|s_8_ij|E	e|ss_u_y|ait	6.42	0.41
 essuyant	Es8ij@	essuyer	VER	VER			par:pre;	E|s_8_ij|@	e|ss_u_y|ant	7.09	0.15
-essuyer	es8ije	essuyer	VER	VER			inf;	e|s_8_ij|e	e|ss_u_y|er	11.35	3.39
+essuyer	Es8ije	essuyer	VER	VER			inf;	E|s_8_ij|e	e|ss_u_y|er	11.35	3.39
 essuyeur	es8ij9R	essuyeur	NOM	NOM	m	s		e|s_8_ij|9_R	e|ss_u_y|eu_r	0.0	0.02
 essuyez	Es8ije	essuyer	VER	VER			imp:pre:2p;ind:pre:2p;	E|s_8_ij|e	e|ss_u_y|ez	0.27	1.41
 essuyions	Es8ij§	essuyer	VER	VER			ind:imp:1p;	E|s_8_ij_#|§	e|ss_u_y_i|ons	0.07	0.0
 essuyons	Es8ij§	essuyer	VER	VER			imp:pre:1p;ind:pre:1p;	E|s_8_ij|§	e|ss_u_y|ons	0.0	0.07
 essuyèrent	Es8ijER	essuyer	VER	VER			ind:pas:3p;	E|s_8_ij|E_R_#	e|ss_u_y|è_r_ent	0.2	0.01
-essuyé	es8ije	essuyer	VER	VER	m	s	par:pas;	e|s_8_ij|e	e|ss_u_y|é	5.0	1.68
-essuyée	es8ije	essuyer	VER	VER	f	s	par:pas;	e|s_8_ij|e_#	e|ss_u_y|é_e	0.61	0.04
-essuyées	es8ije	essuyer	VER	VER	f	p	par:pas;	e|s_8_ij|e_#	e|ss_u_y|é_es	0.34	0.02
-essuyés	es8ije	essuyer	VER	VER	m	p	par:pas;	e|s_8_ij|e_#	e|ss_u_y|é_s	0.07	0.03
+essuyé	Es8ije	essuyer	VER	VER	m	s	par:pas;	E|s_8_ij|e	e|ss_u_y|é	5.0	1.68
+essuyée	Es8ije	essuyer	VER	VER	f	s	par:pas;	E|s_8_ij|e_#	e|ss_u_y|é_e	0.61	0.04
+essuyées	Es8ije	essuyer	VER	VER	f	p	par:pas;	E|s_8_ij|e_#	e|ss_u_y|é_es	0.34	0.02
+essuyés	Es8ije	essuyer	VER	VER	m	p	par:pas;	E|s_8_ij|e_#	e|ss_u_y|é_s	0.07	0.03
 est	E	être	VER	ADJ,NOM,AUX,VER			ind:pre:3s;	E_#_#	e_s_t	6331.76	19417.69
 est	E	être	AUX	ADJ,NOM,AUX,VER			ind:pre:3s;	E_#_#	e_s_t	1600.27	3318.95
 est	Est	est	NOM	ADJ,NOM,AUX,VER	m	s		E_s_t	e_s_t	49.73	81.74
@@ -50400,8 +50384,8 @@ estampée	Est@pe	estamper	VER	VER	f	s	par:pas;	E_s|t_@|p_e_#	e_s|t_am|p_é_e	0.0
 estancia	Est@sja	estancia	NOM	NOM	f	s		E_s|t_@|s_j_a	e_s|t_an|c_i_a	0.2	0.06
 estancias	Est@sja	estancia	NOM	NOM	f	p		E_s|t_@|s_j_a_#	e_s|t_an|c_i_a_s	0.2	0.0
 este	Est	este	NOM	NOM	m	s		E_s_t_#	e_s_t_e	0.14	0.5
-ester	estER	ester	NOM	NOM,VER	m	s		e_s|t_E_R	e_s|t_e_r	0.0	0.25
-ester	este	ester	VER	NOM,VER			inf;	e_s|t_e	e_s|t_er	0.0	0.01
+ester	EstER	ester	NOM	NOM,VER	m	s		E_s|t_E_R	e_s|t_e_r	0.0	0.25
+ester	Este	ester	VER	NOM,VER			inf;	E_s|t_e	e_s|t_er	0.0	0.01
 estes	Est	este	NOM	NOM	m	p		E_s_t_#	e_s_t_es	0.27	0.0
 esthète	EstEt	esthète	NOM	NOM		s		E_s|t_E_t_#	e_s|th_è_t_e	1.49	0.27
 esthètes	EstEt	esthète	NOM	NOM		p		E_s|t_E_t_#	e_s|th_è_t_es	1.08	0.02
@@ -54569,15 +54553,15 @@ flemmardais	flEmaRdE	flemmarder	VER	VER			ind:imp:1s;	f_l_E|m_a_R|d_E	f_l_e|mm_a
 flemmardant	flEmaRd@	flemmarder	VER	VER			par:pre;	f_l_E|m_a_R|d_@	f_l_e|mm_a_r|d_ant	0.0	0.01
 flemmarde	flemaRd	flemmard	NOM	ADJ,NOM,VER	f	s		f_l_e|m_a_R_d_#	f_l_e|mm_a_r_d_e	0.07	0.04
 flemmarde	flemaRd	flemmard	ADJ	ADJ,NOM,VER	f	s		f_l_e|m_a_R_d_#	f_l_e|mm_a_r_d_e	0.0	0.03
-flemmarde	flemaRd	flemmarder	VER	ADJ,NOM,VER			ind:pre:3s;	f_l_e|m_a_R_d_#	f_l_e|mm_a_r_d_e	0.0	0.03
-flemmarder	flemaRde	flemmarder	VER	VER			inf;	f_l_e|m_a_R|d_e	f_l_e|mm_a_r|d_er	0.14	0.1
+flemmarde	flEmaRd	flemmarder	VER	ADJ,NOM,VER			ind:pre:3s;	f_l_E|m_a_R_d_#	f_l_e|mm_a_r_d_e	0.0	0.03
+flemmarder	flEmaRde	flemmarder	VER	VER			inf;	f_l_E|m_a_R|d_e	f_l_e|mm_a_r|d_er	0.14	0.1
 flemmardes	flEmaRd	flemmard	ADJ	ADJ,VER	f	p		f_l_E|m_a_R_d_#	f_l_e|mm_a_r_d_es	0.0	0.01
 flemmardes	flEmaRd	flemmarder	VER	ADJ,VER			ind:pre:2s;	f_l_E|m_a_R_d_#	f_l_e|mm_a_r_d_es	0.0	0.01
 flemmardise	flEmaRdiz	flemmardise	NOM	NOM	f	s		f_l_E|m_a_R|d_i_z_#	f_l_e|mm_a_r|d_i_s_e	0.07	0.01
 flemmards	flemaR	flemmard	NOM	ADJ,NOM	m	p		f_l_e|m_a_R_#	f_l_e|mm_a_r_ds	0.14	0.13
 flemmards	flemaR	flemmard	ADJ	ADJ,NOM	m	p		f_l_e|m_a_R_#	f_l_e|mm_a_r_ds	0.14	0.04
 flemme	flEm	flemme	NOM	NOM	f	s		f_l_E_m_#	f_l_e_mm_e	1.62	0.49
-flemmer	fleme	flemmer	VER	VER			inf;	f_l_e|m_e	f_l_e|mm_er	0.0	0.02
+flemmer	flEme	flemmer	VER	VER			inf;	f_l_E|m_e	f_l_e|mm_er	0.0	0.02
 fleur	fl9R	fleur	NOM	NOM	f	s		f_l_9_R	f_l_eu_r	42.97	25.2
 fleurage	fl9RaZ	fleurage	NOM	NOM	m	s		f_l_9|R_a_Z	f_l_eu|r_a_ge	0.27	0.0
 fleuraient	fl9RE	fleurer	VER	VER			ind:imp:3p;	f_l_9|R_E	f_l_eu|r_aient	0.47	0.0
@@ -60673,7 +60657,7 @@ greffe	gREf	greffe	NOM	ADJ,NOM,VER		s		g_R_E_f_#	g_r_e_ff_e	4.86	3.31
 greffe	gREf	greffer	VER	ADJ,NOM,VER			imp:pre:2s;ind:pre:3s;sub:pre:3s;	g_R_E_f_#	g_r_e_ff_e	0.14	0.63
 greffe	gREf	greffe	ADJ	ADJ,NOM,VER	m	s		g_R_E_f_#	g_r_e_ff_e	0.54	0.04
 greffent	gREf	greffer	VER	VER			ind:pre:3p;	g_R_E_f_#	g_r_e_ff_ent	0.14	0.14
-greffer	gRefe	greffer	VER	VER			inf;	g_R_e|f_e	g_r_e|ff_er	0.61	0.84
+greffer	gREfe	greffer	VER	VER			inf;	g_R_E|f_e	g_r_e|ff_er	0.61	0.84
 greffera	gREf°Ra	greffer	VER	VER			ind:fut:3s;	g_R_E|f_°|R_a	g_r_e|ff_e|r_a	0.07	0.01
 grefferais	gREf°RE	greffer	VER	VER			cnd:pre:1s;	g_R_E|f_°|R_E	g_r_e|ff_e|r_ais	0.07	0.0
 grefferons	gREf°R§	greffer	VER	VER			ind:fut:1p;	g_R_E|f_°|R_§	g_r_e|ff_e|r_ons	0.07	0.0
@@ -60685,14 +60669,14 @@ greffiers	gRefje	greffier	NOM	NOM	m	p		g_R_e|f_j_e_#	g_r_e|ff_i_er_s	0.47	0.04
 greffière	gREfjER	greffier	NOM	NOM	f	s		g_R_E|f_j_E_R_#	g_r_e|ff_i_è_r_e	0.0	0.08
 greffon	gREf§	greffon	NOM	NOM	m	s		g_R_E|f_§	g_r_e|ff_on	0.0	0.18
 greffons	gREf§	greffon	NOM	NOM	m	p		g_R_E|f_§_#	g_r_e|ff_on_s	0.2	0.16
-greffé	gRefe	greffer	VER	VER,ADJ,NOM	m	s	par:pas;	g_R_e|f_e	g_r_e|ff_é	0.47	0.44
+greffé	gREfe	greffer	VER	VER,ADJ,NOM	m	s	par:pas;	g_R_E|f_e	g_r_e|ff_é	0.47	0.44
 greffé	gRefe	greffé	ADJ	VER,ADJ,NOM	m	s		g_R_e|f_e	g_r_e|ff_é	0.0	0.05
 greffé	gRefe	greffé	NOM	VER,ADJ,NOM	m	s		g_R_e|f_e	g_r_e|ff_é	0.07	0.01
 greffée	gRefe	greffé	ADJ	VER,ADJ	f	s		g_R_e|f_e_#	g_r_e|ff_é_e	0.34	0.26
-greffée	gRefe	greffer	VER	VER,ADJ	f	s	par:pas;	g_R_e|f_e_#	g_r_e|ff_é_e	0.14	0.04
-greffées	gRefe	greffer	VER	VER,NOM	f	p	par:pas;	g_R_e|f_e_#	g_r_e|ff_é_es	0.0	0.01
+greffée	gREfe	greffer	VER	VER,ADJ	f	s	par:pas;	g_R_E|f_e_#	g_r_e|ff_é_e	0.14	0.04
+greffées	gREfe	greffer	VER	VER,NOM	f	p	par:pas;	g_R_E|f_e_#	g_r_e|ff_é_es	0.0	0.01
 greffées	gRefe	greffé	NOM	VER,NOM	f	p		g_R_e|f_e_#	g_r_e|ff_é_es	0.07	0.0
-greffés	gRefe	greffer	VER	VER,ADJ,NOM	m	p	par:pas;	g_R_e|f_e_#	g_r_e|ff_é_s	0.07	0.2
+greffés	gREfe	greffer	VER	VER,ADJ,NOM	m	p	par:pas;	g_R_E|f_e_#	g_r_e|ff_é_s	0.07	0.2
 greffés	gRefe	greffé	ADJ	VER,ADJ,NOM	m	p		g_R_e|f_e_#	g_r_e|ff_é_s	0.07	0.03
 greffés	gRefe	greffé	NOM	VER,ADJ,NOM	m	p		g_R_e|f_e_#	g_r_e|ff_é_s	0.0	0.03
 grelot	gR°lo	grelot	NOM	NOM	m	s		g_R_°|l_o_#	g_r_e|l_o_t	1.82	0.11
@@ -63033,17 +63017,17 @@ helvétiques	Elvetik	helvétique	ADJ	ADJ	m	p		#_E_l|v_e|t_i_k_#	h_e_l|v_é|t_i_q
 hem	Em	hem	ONO	ONO				#_E_m	h_e_m	0.2	0.1
 hemlock	EmlOk	hemlock	NOM	NOM	m	s		#_E_m|l_O_k	h_e_m|l_o_ck	0.0	0.23
 hennin	en5	hennin	NOM	NOM	m	s		#_e|n_5	h_e|nn_in	0.34	0.0
-hennir	eniR	hennir	VER	VER			inf;	#_e|n_i_R	h_e|nn_i_r	0.0	0.03
-hennirent	eniR	hennir	VER	VER			ind:pas:3p;	#_e|n_i_R_#	h_e|nn_i_r_ent	0.14	0.0
-hennissaient	enisE	hennir	VER	VER			ind:imp:3p;	#_e|n_i|s_E	h_e|nn_i|ss_aient	0.27	0.0
-hennissait	enisE	hennir	VER	VER			ind:imp:3s;	#_e|n_i|s_E	h_e|nn_i|ss_ait	0.07	0.0
+hennir	EniR	hennir	VER	VER			inf;	#_E|n_i_R	h_e|nn_i_r	0.0	0.03
+hennirent	EniR	hennir	VER	VER			ind:pas:3p;	#_E|n_i_R_#	h_e|nn_i_r_ent	0.14	0.0
+hennissaient	EnisE	hennir	VER	VER			ind:imp:3p;	#_E|n_i|s_E	h_e|nn_i|ss_aient	0.27	0.0
+hennissait	EnisE	hennir	VER	VER			ind:imp:3s;	#_E|n_i|s_E	h_e|nn_i|ss_ait	0.07	0.0
 hennissant	enis@	hennissant	ADJ	VER,ADJ	m	s		#_e|n_i|s_@	h_e|nn_i|ss_ant	0.27	0.01
-hennissant	enis@	hennir	VER	VER,ADJ			par:pre;	#_e|n_i|s_@	h_e|nn_i|ss_ant	0.27	0.0
+hennissant	Enis@	hennir	VER	VER,ADJ			par:pre;	#_E|n_i|s_@	h_e|nn_i|ss_ant	0.27	0.0
 hennissantes	enis@t	hennissant	ADJ	ADJ	f	p		#_e|n_i|s_@_t_#	h_e|nn_i|ss_an_t_es	0.07	0.0
 hennissement	enis°m@	hennissement	NOM	NOM	m	s		#_e|n_i|s_°|m_@	h_e|nn_i|ss_e|m_ent	1.76	0.14
 hennissements	enis°m@	hennissement	NOM	NOM	m	p		#_e|n_i|s_°|m_@_#	h_e|nn_i|ss_e|m_en_ts	1.15	0.3
-hennissent	enis	hennir	VER	VER			ind:pre:3p;	#_e|n_i_s_#	h_e|nn_i_ss_ent	0.07	0.02
-hennit	eni	hennir	VER	VER			ind:pre:3s;ind:pas:3s;	#_e|n_i	h_e|nn_it	0.74	0.02
+hennissent	Enis	hennir	VER	VER			ind:pre:3p;	#_E|n_i_s_#	h_e|nn_i_ss_ent	0.07	0.02
+hennit	Eni	hennir	VER	VER			ind:pre:3s;ind:pas:3s;	#_E|n_i	h_e|nn_it	0.74	0.02
 henné	ene	henné	NOM	NOM	m	s		#_e|n_e	h_e|nn_é	0.95	1.15
 henry	@Ri	henry	NOM	NOM	m	s		#_@|R_i	h_en|r_y	0.0	0.15
 hep	Ep	hep	ONO	ONO				#_E_p	h_e_p	1.96	1.94
@@ -73203,8 +73187,8 @@ lessivaient	lEsivE	lessiver	VER	VER			ind:imp:3p;	l_E|s_i|v_E	l_e|ss_i|v_aient	0
 lessivait	lEsivE	lessiver	VER	VER			ind:imp:3s;	l_E|s_i|v_E	l_e|ss_i|v_ait	0.14	0.0
 lessivant	lEsiv@	lessiver	VER	VER			par:pre;	l_E|s_i|v_@	l_e|ss_i|v_ant	0.14	0.0
 lessive	lesiv	lessive	NOM	NOM,VER	f	s		l_e|s_i_v_#	l_e|ss_i_v_e	7.7	8.09
-lessive	lesiv	lessiver	VER	NOM,VER			imp:pre:2s;ind:pre:3s;	l_e|s_i_v_#	l_e|ss_i_v_e	0.07	0.13
-lessiver	lesive	lessiver	VER	VER			inf;	l_e|s_i|v_e	l_e|ss_i|v_er	0.88	0.12
+lessive	lEsiv	lessiver	VER	NOM,VER			imp:pre:2s;ind:pre:3s;	l_E|s_i_v_#	l_e|ss_i_v_e	0.07	0.13
+lessiver	lEsive	lessiver	VER	VER			inf;	l_E|s_i|v_e	l_e|ss_i|v_er	0.88	0.12
 lessiverait	lEsiv°RE	lessiver	VER	VER			cnd:pre:3s;	l_E|s_i|v_°|R_E	l_e|ss_i|v_e|r_ait	0.07	0.0
 lessives	lesiv	lessive	NOM	NOM	f	p		l_e|s_i_v_#	l_e|ss_i_v_es	1.08	0.42
 lessiveuse	lesiv2z	lessiveur	NOM	NOM	f	s		l_e|s_i|v_2_z_#	l_e|ss_i|v_eu_s_e	2.3	0.04
@@ -83054,7 +83038,7 @@ nerfs	nER	nerf	NOM	NOM	m	p		n_E_R_#	n_e_r_fs	26.55	22.03
 nerprun	nERpR1	nerprun	NOM	NOM	m	s		n_E_R|p_R_1	n_e_r|p_r_un	0.14	0.0
 nerpruns	nERpR1	nerprun	NOM	NOM	m	p		n_E_R|p_R_1_#	n_e_r|p_r_un_s	0.07	0.0
 nerva	nERva	nerver	VER	VER			ind:pas:3s;	n_E_R|v_a	n_e_r|v_a	0.0	0.34
-nerver	n2Rve	nerver	VER	VER			inf;	n_2_R|v_e	n_e_r|v_er	0.0	0.02
+nerver	nERve	nerver	VER	VER			inf;	n_E_R|v_e	n_e_r|v_er	0.0	0.02
 nerveuse	nERv2z	nerveux	ADJ	ADJ,NOM	f	s		n_E_R|v_2_z_#	n_e_r|v_eu_s_e	10.88	16.99
 nerveuse	nERv2z	nerveux	NOM	ADJ,NOM	f	s		n_E_R|v_2_z_#	n_e_r|v_eu_s_e	0.34	0.88
 nerveusement	nERv2z°m@	nerveusement	ADV	ADV				n_E_R|v_2|z_°|m_@	n_e_r|v_eu|s_e|m_ent	7.36	0.38
@@ -83092,44 +83076,44 @@ nettes	nEt	net	ADJ	ADJ	f	p		n_E_t_#	n_e_tt_es	4.05	0.79
 netteté	nEtte	netteté	NOM	NOM	f	s		n_E_t_#|t_e	n_e_tt_e|t_é	9.12	0.61
 nettoie	nEtwa	nettoyer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;sub:pre:3s;	n_E|t_wa_#	n_e|tt_oi_e	2.64	12.09
 nettoiement	netwam@	nettoiement	NOM	NOM	m	s		n_e|t_wa_#|m_@	n_e|tt_oi_e|m_ent	0.27	0.03
-nettoient	netwa	nettoyer	VER	VER			ind:pre:3p;	n_e|t_wa_#	n_e|tt_oi_ent	0.81	0.67
-nettoiera	netwaRa	nettoyer	VER	VER			ind:fut:3s;	n_e|t_wa_#|R_a	n_e|tt_oi_e|r_a	0.2	0.33
-nettoierai	netwaRe	nettoyer	VER	VER			ind:fut:1s;	n_e|t_wa_#|R_e	n_e|tt_oi_e|r_ai	0.07	0.75
+nettoient	nEtwa	nettoyer	VER	VER			ind:pre:3p;	n_E|t_wa_#	n_e|tt_oi_ent	0.81	0.67
+nettoiera	nEtwaRa	nettoyer	VER	VER			ind:fut:3s;	n_E|t_wa_#|R_a	n_e|tt_oi_e|r_a	0.2	0.33
+nettoierai	nEtwaRe	nettoyer	VER	VER			ind:fut:1s;	n_E|t_wa_#|R_e	n_e|tt_oi_e|r_ai	0.07	0.75
 nettoieraient	nEtwaRE	nettoyer	VER	VER			cnd:pre:3p;	n_E|t_wa_#|R_E	n_e|tt_oi_e|r_aient	0.0	0.02
 nettoierais	nEtwaRE	nettoyer	VER	VER			cnd:pre:1s;cnd:pre:2s;	n_E|t_wa_#|R_E	n_e|tt_oi_e|r_ais	0.0	0.11
-nettoierait	netwaRE	nettoyer	VER	VER			cnd:pre:3s;	n_e|t_wa_#|R_E	n_e|tt_oi_e|r_ait	0.07	0.13
+nettoierait	nEtwaRE	nettoyer	VER	VER			cnd:pre:3s;	n_E|t_wa_#|R_E	n_e|tt_oi_e|r_ait	0.07	0.13
 nettoieras	nEtwaRa	nettoyer	VER	VER			ind:fut:2s;	n_E|t_wa_#|R_a	n_e|tt_oi_e|r_as	0.0	0.33
-nettoierez	netwaRe	nettoyer	VER	VER			ind:fut:2p;	n_e|t_wa_#|R_e	n_e|tt_oi_e|r_ez	0.14	0.04
+nettoierez	nEtwaRe	nettoyer	VER	VER			ind:fut:2p;	n_E|t_wa_#|R_e	n_e|tt_oi_e|r_ez	0.14	0.04
 nettoierons	nEtwaR§	nettoyer	VER	VER			ind:fut:1p;	n_E|t_wa_#|R_§	n_e|tt_oi_e|r_ons	0.0	0.13
-nettoies	netwa	nettoyer	VER	VER			ind:pre:2s;sub:pre:2s;	n_e|t_wa_#	n_e|tt_oi_es	0.14	1.42
-nettoya	netwaja	nettoyer	VER	VER			ind:pas:3s;	n_e|t_wa_j|a	n_e|tt_o_y|a	1.28	0.02
+nettoies	nEtwa	nettoyer	VER	VER			ind:pre:2s;sub:pre:2s;	n_E|t_wa_#	n_e|tt_oi_es	0.14	1.42
+nettoya	nEtwaja	nettoyer	VER	VER			ind:pas:3s;	n_E|t_wa_j|a	n_e|tt_o_y|a	1.28	0.02
 nettoyable	netwajabl	nettoyable	ADJ	ADJ		s		n_e|t_wa_j|a_b_l_#	n_e|tt_o_y|a_b_l_e	0.0	0.01
 nettoyables	netwajabl	nettoyable	ADJ	ADJ		p		n_e|t_wa_j|a_b_l_#	n_e|tt_o_y|a_b_l_es	0.07	0.0
 nettoyage	netwajaZ	nettoyage	NOM	NOM	m	s		n_e|t_wa_j|a_Z	n_e|tt_o_y|a_ge	5.88	7.48
 nettoyages	netwajaZ	nettoyage	NOM	NOM	m	p		n_e|t_wa_j|a_Z_#	n_e|tt_o_y|a_g_es	0.47	0.02
-nettoyai	netwaje	nettoyer	VER	VER			ind:pas:1s;	n_e|t_wa_j|e	n_e|tt_o_y|ai	0.14	0.0
-nettoyaient	netwajE	nettoyer	VER	VER			ind:imp:3p;	n_e|t_wa_j|E	n_e|tt_o_y|aient	0.95	0.07
-nettoyais	netwajE	nettoyer	VER	VER			ind:imp:1s;ind:imp:2s;	n_e|t_wa_j|E	n_e|tt_o_y|ais	0.14	1.06
-nettoyait	netwajE	nettoyer	VER	VER			ind:imp:3s;	n_e|t_wa_j|E	n_e|tt_o_y|ait	2.57	1.02
-nettoyant	netwaj@	nettoyer	VER	ADJ,NOM,VER			par:pre;	n_e|t_wa_j|@	n_e|tt_o_y|ant	1.01	0.64
+nettoyai	nEtwaje	nettoyer	VER	VER			ind:pas:1s;	n_E|t_wa_j|e	n_e|tt_o_y|ai	0.14	0.0
+nettoyaient	nEtwajE	nettoyer	VER	VER			ind:imp:3p;	n_E|t_wa_j|E	n_e|tt_o_y|aient	0.95	0.07
+nettoyais	nEtwajE	nettoyer	VER	VER			ind:imp:1s;ind:imp:2s;	n_E|t_wa_j|E	n_e|tt_o_y|ais	0.14	1.06
+nettoyait	nEtwajE	nettoyer	VER	VER			ind:imp:3s;	n_E|t_wa_j|E	n_e|tt_o_y|ait	2.57	1.02
+nettoyant	nEtwaj@	nettoyer	VER	ADJ,NOM,VER			par:pre;	n_E|t_wa_j|@	n_e|tt_o_y|ant	1.01	0.64
 nettoyant	netwaj@	nettoyant	NOM	ADJ,NOM,VER	m	s		n_e|t_wa_j|@	n_e|tt_o_y|ant	0.0	0.33
 nettoyant	netwaj@	nettoyant	ADJ	ADJ,NOM,VER	m	s		n_e|t_wa_j|@	n_e|tt_o_y|ant	0.07	0.07
 nettoyante	netwaj@t	nettoyant	ADJ	ADJ	f	s		n_e|t_wa_j|@_t_#	n_e|tt_o_y|an_t_e	0.0	0.01
 nettoyants	netwaj@	nettoyant	NOM	ADJ,NOM	m	p		n_e|t_wa_j|@_#	n_e|tt_o_y|an_ts	0.07	0.02
 nettoyants	netwaj@	nettoyant	ADJ	ADJ,NOM	m	p		n_e|t_wa_j|@_#	n_e|tt_o_y|an_ts	0.0	0.01
-nettoyer	netwaje	nettoyer	VER	VER			inf;	n_e|t_wa_j|e	n_e|tt_o_y|er	10.95	30.28
+nettoyer	nEtwaje	nettoyer	VER	VER			inf;	n_E|t_wa_j|e	n_e|tt_o_y|er	10.95	30.28
 nettoyeur	netwaj9R	nettoyeur	NOM	NOM	m	s		n_e|t_wa_j|9_R	n_e|tt_o_y|eu_r	0.34	1.24
 nettoyeurs	netwaj9R	nettoyeur	NOM	NOM	m	p		n_e|t_wa_j|9_R_#	n_e|tt_o_y|eu_r_s	0.2	0.91
 nettoyeuse	netwaj2z	nettoyeur	NOM	NOM	f	s		n_e|t_wa_j|2_z_#	n_e|tt_o_y|eu_s_e	0.07	0.36
 nettoyeuses	netwaj2z	nettoyeur	NOM	NOM	f	p		n_e|t_wa_j|2_z_#	n_e|tt_o_y|eu_s_es	0.07	0.0
-nettoyez	netwaje	nettoyer	VER	VER			imp:pre:2p;ind:pre:2p;	n_e|t_wa_j|e	n_e|tt_o_y|ez	0.0	2.88
-nettoyiez	netwajje	nettoyer	VER	VER			ind:imp:2p;	n_e|t_wa_j_j|e	n_e|tt_o_y_i|ez	0.07	0.14
-nettoyons	netwaj§	nettoyer	VER	VER			imp:pre:1p;ind:pre:1p;	n_e|t_wa_j|§	n_e|tt_o_y|ons	0.14	0.46
-nettoyèrent	netwajER	nettoyer	VER	VER			ind:pas:3p;	n_e|t_wa_j|E_R_#	n_e|tt_o_y|è_r_ent	0.07	0.01
-nettoyé	netwaje	nettoyer	VER	VER	m	s	par:pas;	n_e|t_wa_j|e	n_e|tt_o_y|é	4.19	7.72
-nettoyée	netwaje	nettoyer	VER	VER	f	s	par:pas;	n_e|t_wa_j|e_#	n_e|tt_o_y|é_e	1.08	0.89
-nettoyées	netwaje	nettoyer	VER	VER	f	p	par:pas;	n_e|t_wa_j|e_#	n_e|tt_o_y|é_es	0.41	0.29
-nettoyés	netwaje	nettoyer	VER	VER	m	p	par:pas;	n_e|t_wa_j|e_#	n_e|tt_o_y|é_s	0.88	0.45
+nettoyez	nEtwaje	nettoyer	VER	VER			imp:pre:2p;ind:pre:2p;	n_E|t_wa_j|e	n_e|tt_o_y|ez	0.0	2.88
+nettoyiez	nEtwajje	nettoyer	VER	VER			ind:imp:2p;	n_E|t_wa_j_j|e	n_e|tt_o_y_i|ez	0.07	0.14
+nettoyons	nEtwaj§	nettoyer	VER	VER			imp:pre:1p;ind:pre:1p;	n_E|t_wa_j|§	n_e|tt_o_y|ons	0.14	0.46
+nettoyèrent	nEtwajER	nettoyer	VER	VER			ind:pas:3p;	n_E|t_wa_j|E_R_#	n_e|tt_o_y|è_r_ent	0.07	0.01
+nettoyé	nEtwaje	nettoyer	VER	VER	m	s	par:pas;	n_E|t_wa_j|e	n_e|tt_o_y|é	4.19	7.72
+nettoyée	nEtwaje	nettoyer	VER	VER	f	s	par:pas;	n_E|t_wa_j|e_#	n_e|tt_o_y|é_e	1.08	0.89
+nettoyées	nEtwaje	nettoyer	VER	VER	f	p	par:pas;	n_E|t_wa_j|e_#	n_e|tt_o_y|é_es	0.41	0.29
+nettoyés	nEtwaje	nettoyer	VER	VER	m	p	par:pas;	n_E|t_wa_j|e_#	n_e|tt_o_y|é_s	0.88	0.45
 neuf	n9f	neuf	ADJ:num	ADJ,ADJ:num				n_9_f	n_eu_f	56.01	32.05
 neuf	n9f	neuf	ADJ	ADJ,ADJ:num	m	s		n_9_f	n_eu_f	14.12	8.59
 neufs	n9f	neuf	ADJ	ADJ	m	p		n_9_f_#	n_eu_f_s	11.89	3.5
@@ -94860,31 +94844,31 @@ presse	pREs	presse	NOM	NOM,VER	f	s		p_R_E_s_#	p_r_e_ss_e	40.68	45.1
 presse	pREs	presser	VER	NOM,VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	p_R_E_s_#	p_r_e_ss_e	8.51	18.49
 pressement	pREs°m@	pressement	NOM	NOM	m	s		p_R_E|s_°|m_@	p_r_e|ss_e|m_ent	0.2	0.01
 pressements	pREs°m@	pressement	NOM	NOM	m	p		p_R_E|s_°|m_@_#	p_r_e|ss_e|m_en_ts	0.14	0.0
-pressens	pRes@	pressentir	VER	VER			ind:pre:1s;ind:pre:2s;	p_R_e|s_@_#	p_r_e|ss_en_s	1.15	0.28
-pressent	pRes@	pressentir	VER	VER			ind:pre:3s;	p_R_e|s_@	p_r_e|ss_ent	3.45	0.63
+pressens	pREs@	pressentir	VER	VER			ind:pre:1s;ind:pre:2s;	p_R_E|s_@_#	p_r_e|ss_en_s	1.15	0.28
+pressent	pREs@	pressentir	VER	VER			ind:pre:3s;	p_R_E|s_@	p_r_e|ss_ent	3.45	0.63
 pressent	pRes	presser	VER	VER			ind:pre:3p;	p_R_e_s_#	p_r_e_ss_ent	0.81	0.16
-pressentaient	pRes@tE	pressentir	VER	VER			ind:imp:3p;	p_R_e|s_@|t_E	p_r_e|ss_en|t_aient	0.34	0.0
-pressentais	pRes@tE	pressentir	VER	VER			ind:imp:1s;ind:imp:2s;	p_R_e|s_@|t_E	p_r_e|ss_en|t_ais	2.43	0.12
-pressentait	pRes@tE	pressentir	VER	VER			ind:imp:3s;	p_R_e|s_@|t_E	p_r_e|ss_en|t_ait	3.18	0.15
-pressentant	pRes@t@	pressentir	VER	VER			par:pre;	p_R_e|s_@|t_@	p_r_e|ss_en|t_ant	1.96	0.0
-pressentent	pRes@t	pressentir	VER	VER			ind:pre:3p;	p_R_e|s_@_t_#	p_r_e|ss_en_t_ent	0.2	0.04
-pressentez	pRes@te	pressentir	VER	VER			ind:pre:2p;	p_R_e|s_@|t_e	p_r_e|ss_en|t_ez	0.0	0.06
-pressenti	pRes@ti	pressentir	VER	ADJ,VER	m	s	par:pas;	p_R_e|s_@|t_i	p_r_e|ss_en|t_i	2.09	0.68
+pressentaient	pREs@tE	pressentir	VER	VER			ind:imp:3p;	p_R_E|s_@|t_E	p_r_e|ss_en|t_aient	0.34	0.0
+pressentais	pREs@tE	pressentir	VER	VER			ind:imp:1s;ind:imp:2s;	p_R_E|s_@|t_E	p_r_e|ss_en|t_ais	2.43	0.12
+pressentait	pREs@tE	pressentir	VER	VER			ind:imp:3s;	p_R_E|s_@|t_E	p_r_e|ss_en|t_ait	3.18	0.15
+pressentant	pREs@t@	pressentir	VER	VER			par:pre;	p_R_E|s_@|t_@	p_r_e|ss_en|t_ant	1.96	0.0
+pressentent	pREs@t	pressentir	VER	VER			ind:pre:3p;	p_R_E|s_@_t_#	p_r_e|ss_en_t_ent	0.2	0.04
+pressentez	pREs@te	pressentir	VER	VER			ind:pre:2p;	p_R_E|s_@|t_e	p_r_e|ss_en|t_ez	0.0	0.06
+pressenti	pREs@ti	pressentir	VER	ADJ,VER	m	s	par:pas;	p_R_E|s_@|t_i	p_r_e|ss_en|t_i	2.09	0.68
 pressenti	pRes@ti	pressenti	ADJ	ADJ,VER	m	s		p_R_e|s_@|t_i	p_r_e|ss_en|t_i	0.34	0.01
-pressentie	pRes@ti	pressentir	VER	ADJ,VER	f	s	par:pas;	p_R_e|s_@|t_i_#	p_r_e|ss_en|t_i_e	0.41	0.01
+pressentie	pREs@ti	pressentir	VER	ADJ,VER	f	s	par:pas;	p_R_E|s_@|t_i_#	p_r_e|ss_en|t_i_e	0.41	0.01
 pressentie	pRes@ti	pressenti	ADJ	ADJ,VER	f	s		p_R_e|s_@|t_i_#	p_r_e|ss_en|t_i_e	0.47	0.0
 pressenties	pRes@ti	pressenti	ADJ	ADJ	f	p		p_R_e|s_@|t_i_#	p_r_e|ss_en|t_i_es	0.07	0.0
 pressentiez	pREs@tje	pressentir	VER	VER			ind:imp:2p;	p_R_E|s_@|t_j_e	p_r_e|ss_en|t_i_ez	0.0	0.04
 pressentiment	pRes@tim@	pressentiment	NOM	NOM	m	s		p_R_e|s_@|t_i|m_@	p_r_e|ss_en|t_i|m_ent	6.76	7.17
 pressentiments	pRes@tim@	pressentiment	NOM	NOM	m	p		p_R_e|s_@|t_i|m_@_#	p_r_e|ss_en|t_i|m_en_ts	1.96	1.17
-pressentions	pRes@tj§	pressentir	VER	VER			ind:imp:1p;	p_R_e|s_@|t_j_§	p_r_e|ss_en|t_i_ons	0.2	0.0
-pressentir	pRes@tiR	pressentir	VER	VER			inf;	p_R_e|s_@|t_i_R	p_r_e|ss_en|t_i_r	2.7	0.14
-pressentirez	pRes@tiRe	pressentir	VER	VER			ind:fut:2p;	p_R_e|s_@|t_i|R_e	p_r_e|ss_en|t_i|r_ez	0.07	0.0
-pressentis	pRes@ti	pressentir	VER	ADJ,VER	m	p	ind:pas:1s;par:pas;	p_R_e|s_@|t_i_#	p_r_e|ss_en|t_i_s	0.27	0.03
+pressentions	pREs@tj§	pressentir	VER	VER			ind:imp:1p;	p_R_E|s_@|t_j_§	p_r_e|ss_en|t_i_ons	0.2	0.0
+pressentir	pREs@tiR	pressentir	VER	VER			inf;	p_R_E|s_@|t_i_R	p_r_e|ss_en|t_i_r	2.7	0.14
+pressentirez	pREs@tiRe	pressentir	VER	VER			ind:fut:2p;	p_R_E|s_@|t_i|R_e	p_r_e|ss_en|t_i|r_ez	0.07	0.0
+pressentis	pREs@ti	pressentir	VER	ADJ,VER	m	p	ind:pas:1s;par:pas;	p_R_E|s_@|t_i	p_r_e|ss_en|t_is	0.27	0.03
 pressentis	pRes@ti	pressenti	ADJ	ADJ,VER	m	p		p_R_e|s_@|t_i_#	p_r_e|ss_en|t_i_s	0.14	0.0
-pressentit	pRes@ti	pressentir	VER	VER			ind:pas:3s;	p_R_e|s_@|t_i	p_r_e|ss_en|t_it	0.47	0.0
-pressentons	pRes@t§	pressentir	VER	VER			imp:pre:1p;	p_R_e|s_@|t_§	p_r_e|ss_en|t_ons	0.0	0.01
-pressentîmes	pRes@tim	pressentir	VER	VER			ind:pas:1p;	p_R_e|s_@|t_i_m_#	p_r_e|ss_en|t_î_m_es	0.14	0.0
+pressentit	pREs@ti	pressentir	VER	VER			ind:pas:3s;	p_R_E|s_@|t_i	p_r_e|ss_en|t_it	0.47	0.0
+pressentons	pREs@t§	pressentir	VER	VER			imp:pre:1p;	p_R_E|s_@|t_§	p_r_e|ss_en|t_ons	0.0	0.01
+pressentîmes	pREs@tim	pressentir	VER	VER			ind:pas:1p;	p_R_E|s_@|t_i_m_#	p_r_e|ss_en|t_î_m_es	0.14	0.0
 presser	pREse	presser	VER	VER			inf;	p_R_E|s_e	p_r_e|ss_er	12.43	5.64
 pressera	pREs°Ra	presser	VER	VER			ind:fut:3s;	p_R_E|s_°|R_a	p_r_e|ss_e|r_a	0.07	0.03
 presserai	pREs°Re	presser	VER	VER			ind:fut:1s;	p_R_E|s_°|R_e	p_r_e|ss_e|r_ai	0.0	0.16
@@ -94905,10 +94889,10 @@ pressions	pREsj§	presser	VER	VER,NOM			ind:imp:1p;	p_R_E|s_j_§	p_r_e|ss_i_ons	
 pressoir	pREswaR	pressoir	NOM	NOM	m	s		p_R_E|s_wa_R	p_r_e|ss_oi_r	0.95	0.17
 pressoirs	pREswaR	pressoir	NOM	NOM	m	p		p_R_E|s_wa_R_#	p_r_e|ss_oi_r_s	0.2	0.01
 pressons	pREs§	presser	VER	VER			imp:pre:1p;ind:pre:1p;	p_R_E|s_§	p_r_e|ss_ons	1.89	2.02
-pressurant	pResyR@	pressurer	VER	VER			par:pre;	p_R_e|s_y|R_@	p_r_e|ss_u|r_ant	0.07	0.0
-pressure	pResyR	pressurer	VER	VER			imp:pre:2s;ind:pre:3s;	p_R_e|s_y_R_#	p_r_e|ss_u_r_e	0.2	0.17
-pressurer	pResyRe	pressurer	VER	VER			inf;	p_R_e|s_y|R_e	p_r_e|ss_u|r_er	0.2	0.06
-pressures	pResyR	pressurer	VER	VER			ind:pre:2s;	p_R_e|s_y_R_#	p_r_e|ss_u_r_es	0.0	0.03
+pressurant	pREsyR@	pressurer	VER	VER			par:pre;	p_R_E|s_y|R_@	p_r_e|ss_u|r_ant	0.07	0.0
+pressure	pREsyR	pressurer	VER	VER			imp:pre:2s;ind:pre:3s;	p_R_E|s_y_R_#	p_r_e|ss_u_r_e	0.2	0.17
+pressurer	pREsyRe	pressurer	VER	VER			inf;	p_R_E|s_y|R_e	p_r_e|ss_u|r_er	0.2	0.06
+pressures	pREsyR	pressurer	VER	VER			ind:pre:2s;	p_R_E|s_y_R_#	p_r_e|ss_u_r_es	0.0	0.03
 pressurisation	pREsyRizasj§	pressurisation	NOM	NOM	f	s		p_R_E|s_y|R_i|z_a|s_j_§	p_r_e|ss_u|r_i|s_a|t_i_on	0.0	0.38
 pressuriser	pREsyRize	pressuriser	VER	VER			inf;	p_R_E|s_y|R_i|z_e	p_r_e|ss_u|r_i|s_er	0.0	0.02
 pressurisez	pREsyRize	pressuriser	VER	VER			imp:pre:2p;	p_R_E|s_y|R_i|z_e	p_r_e|ss_u|r_i|s_ez	0.0	0.02
@@ -94919,8 +94903,8 @@ pressurisée	pResyRize	pressuriser	VER	VER,ADJ	f	s	par:pas;	p_R_e|s_y|R_i|z_e_#	
 pressurisées	pResyRize	pressuriser	VER	VER	f	p	par:pas;	p_R_e|s_y|R_i|z_e_#	p_r_e|ss_u|r_i|s_é_es	0.07	0.0
 pressurisés	pREsyRize	pressurisé	ADJ	VER,ADJ	m	p		p_R_E|s_y|R_i|z_e_#	p_r_e|ss_u|r_i|s_é_s	0.0	0.19
 pressurisés	pREsyRize	pressuriser	VER	VER,ADJ	m	p	par:pas;	p_R_E|s_y|R_i|z_e_#	p_r_e|ss_u|r_i|s_é_s	0.0	0.05
-pressurée	pResyRe	pressurer	VER	VER	f	s	par:pas;	p_R_e|s_y|R_e_#	p_r_e|ss_u|r_é_e	0.07	0.0
-pressurés	pResyRe	pressurer	VER	VER	m	p	par:pas;	p_R_e|s_y|R_e_#	p_r_e|ss_u|r_é_s	0.07	0.02
+pressurée	pREsyRe	pressurer	VER	VER	f	s	par:pas;	p_R_E|s_y|R_e_#	p_r_e|ss_u|r_é_e	0.07	0.0
+pressurés	pREsyRe	pressurer	VER	VER	m	p	par:pas;	p_R_E|s_y|R_e_#	p_r_e|ss_u|r_é_s	0.07	0.02
 pressèrent	pREsER	presser	VER	VER			ind:pas:3p;	p_R_E|s_E_R_#	p_r_e|ss_è_r_ent	0.54	0.01
 pressé	pREse	presser	VER	VER,ADJ,NOM	m	s	par:pas;	p_R_E|s_e	p_r_e|ss_é	12.23	17.12
 pressé	pREse	pressé	ADJ	VER,ADJ,NOM	m	s		p_R_E|s_e	p_r_e|ss_é	12.7	9.96
@@ -102891,7 +102875,7 @@ redescendra	R°dEs@dRa	redescendre	VER	VER			ind:fut:3s;	R_°|d_E|s_@|d_R_a	r_e|
 redescendrai	R°dEs@dRe	redescendre	VER	VER			ind:fut:1s;	R_°|d_E|s_@|d_R_e	r_e|d_e|sc_en|d_r_ai	0.2	0.19
 redescendrais	R°dEs@dRE	redescendre	VER	VER			cnd:pre:1s;	R_°|d_E|s_@|d_R_E	r_e|d_e|sc_en|d_r_ais	0.0	0.01
 redescendrait	R°dEs@dRE	redescendre	VER	VER			cnd:pre:3s;	R_°|d_E|s_@|d_R_E	r_e|d_e|sc_en|d_r_ait	0.2	0.0
-redescendre	R°des@dR	redescendre	VER	VER			inf;	R_°|d_e|s_@_d_R_#	r_e|d_e|sc_en_d_r_e	5.88	3.08
+redescendre	R°dEs@dR	redescendre	VER	VER			inf;	R_°|d_E|s_@_d_R_#	r_e|d_e|sc_en_d_r_e	5.88	3.08
 redescendrons	R°dEs@dR§	redescendre	VER	VER			ind:fut:1p;	R_°|d_E|s_@|d_R_§	r_e|d_e|sc_en|d_r_ons	0.07	0.01
 redescendront	R°dEs@dR§	redescendre	VER	VER			ind:fut:3p;	R_°|d_E|s_@|d_R_§	r_e|d_e|sc_en|d_r_ont	0.0	0.02
 redescends	R°dEs@	redescendre	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:2s;	R_°|d_E|s_@_#	r_e|d_e|sc_en_ds	1.69	3.05
@@ -106334,30 +106318,30 @@ ressouviens	R°suvj5	ressouvenir	VER	VER			ind:pre:1s;	R_°|s_u|v_j_5_#	r_e|ss_o
 ressouvint	R°suv5	ressouvenir	VER	VER			ind:pas:3s;	R_°|s_u|v_5	r_e|ss_ou|v_int	0.07	0.0
 ressui	R°s8i	ressui	NOM	NOM	m	s		R_°|s_8_i	r_e|ss_u_i	0.07	0.0
 ressuiement	R2s8im@	ressuiement	NOM	NOM	m	s		R_2|s_8_i_#|m_@	r_e|ss_u_i_e|m_ent	0.07	0.0
-ressuscita	Resysita	ressusciter	VER	VER			ind:pas:3s;	R_e|s_y|s_i|t_a	r_e|ss_u|sc_i|t_a	0.27	0.06
-ressuscitai	Resysite	ressusciter	VER	VER			ind:pas:1s;	R_e|s_y|s_i|t_e	r_e|ss_u|sc_i|t_ai	0.14	0.0
-ressuscitaient	ResysitE	ressusciter	VER	VER			ind:imp:3p;	R_e|s_y|s_i|t_E	r_e|ss_u|sc_i|t_aient	0.95	0.02
-ressuscitais	ResysitE	ressusciter	VER	VER			ind:imp:1s;	R_e|s_y|s_i|t_E	r_e|ss_u|sc_i|t_ais	0.2	0.01
-ressuscitait	ResysitE	ressusciter	VER	VER			ind:imp:3s;	R_e|s_y|s_i|t_E	r_e|ss_u|sc_i|t_ait	1.35	0.11
-ressuscitant	Resysit@	ressusciter	VER	VER			par:pre;	R_e|s_y|s_i|t_@	r_e|ss_u|sc_i|t_ant	0.68	0.03
-ressuscite	Resysit	ressusciter	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	R_e|s_y|s_i_t_#	r_e|ss_u|sc_i_t_e	1.42	0.82
-ressuscitent	Resysit	ressusciter	VER	VER			ind:pre:3p;	R_e|s_y|s_i_t_#	r_e|ss_u|sc_i_t_ent	1.08	0.51
-ressusciter	Resysite	ressusciter	VER	VER			inf;	R_e|s_y|s_i|t_e	r_e|ss_u|sc_i|t_er	4.8	2.94
-ressuscitera	Resysit°Ra	ressusciter	VER	VER			ind:fut:3s;	R_e|s_y|s_i|t_°|R_a	r_e|ss_u|sc_i|t_e|r_a	0.27	1.03
-ressusciterai	Resysit°Re	ressusciter	VER	VER			ind:fut:1s;	R_e|s_y|s_i|t_°|R_e	r_e|ss_u|sc_i|t_e|r_ai	0.07	0.11
-ressusciteraient	Resysit°RE	ressusciter	VER	VER			cnd:pre:3p;	R_e|s_y|s_i|t_°|R_E	r_e|ss_u|sc_i|t_e|r_aient	0.2	0.01
-ressusciterait	Resysit°RE	ressusciter	VER	VER			cnd:pre:3s;	R_e|s_y|s_i|t_°|R_E	r_e|ss_u|sc_i|t_e|r_ait	0.47	0.29
-ressusciteras	Resysit°Ra	ressusciter	VER	VER			ind:fut:2s;	R_e|s_y|s_i|t_°|R_a	r_e|ss_u|sc_i|t_e|r_as	0.07	0.0
-ressusciterez	Resysit°Re	ressusciter	VER	VER			ind:fut:2p;	R_e|s_y|s_i|t_°|R_e	r_e|ss_u|sc_i|t_e|r_ez	0.07	0.01
-ressusciterons	Resysit°R§	ressusciter	VER	VER			ind:fut:1p;	R_e|s_y|s_i|t_°|R_§	r_e|ss_u|sc_i|t_e|r_ons	0.14	0.27
-ressusciteront	Resysit°R§	ressusciter	VER	VER			ind:fut:3p;	R_e|s_y|s_i|t_°|R_§	r_e|ss_u|sc_i|t_e|r_ont	0.14	0.06
-ressuscites	Resysit	ressusciter	VER	VER			ind:pre:2s;	R_e|s_y|s_i_t_#	r_e|ss_u|sc_i_t_es	0.07	0.22
-ressuscitez	Resysite	ressusciter	VER	VER			imp:pre:2p;ind:pre:2p;	R_e|s_y|s_i|t_e	r_e|ss_u|sc_i|t_ez	0.0	0.27
-ressuscitons	Resysit§	ressusciter	VER	VER			imp:pre:1p;	R_e|s_y|s_i|t_§	r_e|ss_u|sc_i|t_ons	0.0	0.01
-ressuscité	Resysite	ressusciter	VER	VER	m	s	par:pas;	R_e|s_y|s_i|t_e	r_e|ss_u|sc_i|t_é	3.72	3.86
-ressuscitée	Resysite	ressusciter	VER	VER	f	s	par:pas;	R_e|s_y|s_i|t_e_#	r_e|ss_u|sc_i|t_é_e	0.81	0.56
-ressuscitées	Resysite	ressusciter	VER	VER	f	p	par:pas;	R_e|s_y|s_i|t_e_#	r_e|ss_u|sc_i|t_é_es	0.2	0.01
-ressuscités	Resysite	ressusciter	VER	VER	m	p	par:pas;	R_e|s_y|s_i|t_e_#	r_e|ss_u|sc_i|t_é_s	0.74	0.23
+ressuscita	REsysita	ressusciter	VER	VER			ind:pas:3s;	R_E|s_y|s_i|t_a	r_e|ss_u|sc_i|t_a	0.27	0.06
+ressuscitai	REsysite	ressusciter	VER	VER			ind:pas:1s;	R_E|s_y|s_i|t_e	r_e|ss_u|sc_i|t_ai	0.14	0.0
+ressuscitaient	REsysitE	ressusciter	VER	VER			ind:imp:3p;	R_E|s_y|s_i|t_E	r_e|ss_u|sc_i|t_aient	0.95	0.02
+ressuscitais	REsysitE	ressusciter	VER	VER			ind:imp:1s;	R_E|s_y|s_i|t_E	r_e|ss_u|sc_i|t_ais	0.2	0.01
+ressuscitait	REsysitE	ressusciter	VER	VER			ind:imp:3s;	R_E|s_y|s_i|t_E	r_e|ss_u|sc_i|t_ait	1.35	0.11
+ressuscitant	REsysit@	ressusciter	VER	VER			par:pre;	R_E|s_y|s_i|t_@	r_e|ss_u|sc_i|t_ant	0.68	0.03
+ressuscite	REsysit	ressusciter	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	R_E|s_y|s_i_t_#	r_e|ss_u|sc_i_t_e	1.42	0.82
+ressuscitent	REsysit	ressusciter	VER	VER			ind:pre:3p;	R_E|s_y|s_i_t_#	r_e|ss_u|sc_i_t_ent	1.08	0.51
+ressusciter	REsysite	ressusciter	VER	VER			inf;	R_E|s_y|s_i|t_e	r_e|ss_u|sc_i|t_er	4.8	2.94
+ressuscitera	REsysit°Ra	ressusciter	VER	VER			ind:fut:3s;	R_E|s_y|s_i|t_°|R_a	r_e|ss_u|sc_i|t_e|r_a	0.27	1.03
+ressusciterai	REsysit°Re	ressusciter	VER	VER			ind:fut:1s;	R_E|s_y|s_i|t_°|R_e	r_e|ss_u|sc_i|t_e|r_ai	0.07	0.11
+ressusciteraient	REsysit°RE	ressusciter	VER	VER			cnd:pre:3p;	R_E|s_y|s_i|t_°|R_E	r_e|ss_u|sc_i|t_e|r_aient	0.2	0.01
+ressusciterait	REsysit°RE	ressusciter	VER	VER			cnd:pre:3s;	R_E|s_y|s_i|t_°|R_E	r_e|ss_u|sc_i|t_e|r_ait	0.47	0.29
+ressusciteras	REsysit°Ra	ressusciter	VER	VER			ind:fut:2s;	R_E|s_y|s_i|t_°|R_a	r_e|ss_u|sc_i|t_e|r_as	0.07	0.0
+ressusciterez	REsysit°Re	ressusciter	VER	VER			ind:fut:2p;	R_E|s_y|s_i|t_°|R_e	r_e|ss_u|sc_i|t_e|r_ez	0.07	0.01
+ressusciterons	REsysit°R§	ressusciter	VER	VER			ind:fut:1p;	R_E|s_y|s_i|t_°|R_§	r_e|ss_u|sc_i|t_e|r_ons	0.14	0.27
+ressusciteront	REsysit°R§	ressusciter	VER	VER			ind:fut:3p;	R_E|s_y|s_i|t_°|R_§	r_e|ss_u|sc_i|t_e|r_ont	0.14	0.06
+ressuscites	REsysit	ressusciter	VER	VER			ind:pre:2s;	R_E|s_y|s_i_t_#	r_e|ss_u|sc_i_t_es	0.07	0.22
+ressuscitez	REsysite	ressusciter	VER	VER			imp:pre:2p;ind:pre:2p;	R_E|s_y|s_i|t_e	r_e|ss_u|sc_i|t_ez	0.0	0.27
+ressuscitons	REsysit§	ressusciter	VER	VER			imp:pre:1p;	R_E|s_y|s_i|t_§	r_e|ss_u|sc_i|t_ons	0.0	0.01
+ressuscité	REsysite	ressusciter	VER	VER	m	s	par:pas;	R_E|s_y|s_i|t_e	r_e|ss_u|sc_i|t_é	3.72	3.86
+ressuscitée	REsysite	ressusciter	VER	VER	f	s	par:pas;	R_E|s_y|s_i|t_e_#	r_e|ss_u|sc_i|t_é_e	0.81	0.56
+ressuscitées	REsysite	ressusciter	VER	VER	f	p	par:pas;	R_E|s_y|s_i|t_e_#	r_e|ss_u|sc_i|t_é_es	0.2	0.01
+ressuscités	REsysite	ressusciter	VER	VER	m	p	par:pas;	R_E|s_y|s_i|t_e_#	r_e|ss_u|sc_i|t_é_s	0.74	0.23
 ressuyé	R°s8ije	ressuyer	VER	VER	m	s	par:pas;	R_°|s_8_ij|e	r_e|ss_u_y|é	0.2	0.0
 ressuyée	R°s8ije	ressuyer	VER	VER	f	s	par:pas;	R_°|s_8_ij|e_#	r_e|ss_u_y|é_e	0.14	0.0
 ressué	R°s8e	ressuer	VER	VER	m	s	par:pas;	R_°|s_8_e	r_e|ss_u_é	0.07	0.0
@@ -114066,19 +114050,19 @@ sectes	sEkt	secte	NOM	NOM	f	p		s_E_k_t_#	s_e_c_t_es	1.08	0.87
 secteur	sekt9R	secteur	NOM	NOM	m	s		s_e_k|t_9_R	s_e_c|t_eu_r	18.45	24.57
 secteurs	sekt9R	secteur	NOM	NOM	m	p		s_e_k|t_9_R_#	s_e_c|t_eu_r_s	1.89	1.93
 section	seksj§	section	NOM	NOM	f	s		s_e_k|s_j_§	s_e_c|t_i_on	16.35	18.03
-sectionna	seksjona	sectionner	VER	VER			ind:pas:3s;	s_e_k|s_j_o|n_a	s_e_c|t_i_o|nn_a	0.14	0.0
-sectionnaient	seksjonE	sectionner	VER	VER			ind:imp:3p;	s_e_k|s_j_o|n_E	s_e_c|t_i_o|nn_aient	0.07	0.0
+sectionna	sEksjona	sectionner	VER	VER			ind:pas:3s;	s_E_k|s_j_o|n_a	s_e_c|t_i_o|nn_a	0.14	0.0
+sectionnaient	sEksjonE	sectionner	VER	VER			ind:imp:3p;	s_E_k|s_j_o|n_E	s_e_c|t_i_o|nn_aient	0.07	0.0
 sectionnant	sEksjOn@	sectionner	VER	VER			par:pre;	s_E_k|s_j_O|n_@	s_e_c|t_i_o|nn_ant	0.0	0.04
-sectionne	seksjOn	sectionner	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	s_e_k|s_j_O_n_#	s_e_c|t_i_o_nn_e	0.2	0.27
+sectionne	sEksjOn	sectionner	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	s_E_k|s_j_O_n_#	s_e_c|t_i_o_nn_e	0.2	0.27
 sectionnement	seksjOn°m@	sectionnement	NOM	NOM	m	s		s_e_k|s_j_O|n_°|m_@	s_e_c|t_i_o|nn_e|m_ent	0.07	0.01
-sectionnent	seksjOn	sectionner	VER	VER			ind:pre:3p;	s_e_k|s_j_O_n_#	s_e_c|t_i_o_nn_ent	0.14	0.0
-sectionner	seksjone	sectionner	VER	VER			inf;	s_e_k|s_j_o|n_e	s_e_c|t_i_o|nn_er	0.07	0.33
-sectionnera	seksjOn°Ra	sectionner	VER	VER			ind:fut:3s;	s_e_k|s_j_O|n_°|R_a	s_e_c|t_i_o|nn_e|r_a	0.0	0.02
-sectionnez	seksjone	sectionner	VER	VER			imp:pre:2p;	s_e_k|s_j_o|n_e	s_e_c|t_i_o|nn_ez	0.0	0.06
-sectionné	seksjone	sectionner	VER	VER	m	s	par:pas;	s_e_k|s_j_o|n_e	s_e_c|t_i_o|nn_é	0.54	0.53
-sectionnée	seksjone	sectionner	VER	VER	f	s	par:pas;	s_e_k|s_j_o|n_e_#	s_e_c|t_i_o|nn_é_e	0.41	0.34
-sectionnées	seksjone	sectionner	VER	VER	f	p	par:pas;	s_e_k|s_j_o|n_e_#	s_e_c|t_i_o|nn_é_es	0.2	0.06
-sectionnés	seksjone	sectionner	VER	VER	m	p	par:pas;	s_e_k|s_j_o|n_e_#	s_e_c|t_i_o|nn_é_s	0.14	0.09
+sectionnent	sEksjOn	sectionner	VER	VER			ind:pre:3p;	s_E_k|s_j_O_n_#	s_e_c|t_i_o_nn_ent	0.14	0.0
+sectionner	sEksjone	sectionner	VER	VER			inf;	s_E_k|s_j_o|n_e	s_e_c|t_i_o|nn_er	0.07	0.33
+sectionnera	sEksjOn°Ra	sectionner	VER	VER			ind:fut:3s;	s_E_k|s_j_O|n_°|R_a	s_e_c|t_i_o|nn_e|r_a	0.0	0.02
+sectionnez	sEksjone	sectionner	VER	VER			imp:pre:2p;	s_E_k|s_j_o|n_e	s_e_c|t_i_o|nn_ez	0.0	0.06
+sectionné	sEksjone	sectionner	VER	VER	m	s	par:pas;	s_E_k|s_j_o|n_e	s_e_c|t_i_o|nn_é	0.54	0.53
+sectionnée	sEksjone	sectionner	VER	VER	f	s	par:pas;	s_E_k|s_j_o|n_e_#	s_e_c|t_i_o|nn_é_e	0.41	0.34
+sectionnées	sEksjone	sectionner	VER	VER	f	p	par:pas;	s_E_k|s_j_o|n_e_#	s_e_c|t_i_o|nn_é_es	0.2	0.06
+sectionnés	sEksjone	sectionner	VER	VER	m	p	par:pas;	s_E_k|s_j_o|n_e_#	s_e_c|t_i_o|nn_é_s	0.14	0.09
 sections	seksj§	section	NOM	NOM	f	p		s_e_k|s_j_§_#	s_e_c|t_i_on_s	5.88	2.31
 sectorielles	sektoRjEl	sectoriel	ADJ	ADJ	f	p		s_e_k|t_o|R_j_E_l_#	s_e_c|t_o|r_i_e_ll_es	0.07	0.0
 sectoriels	sektoRjEl	sectoriel	ADJ	ADJ	m	p		s_e_k|t_o|R_j_E_l_#	s_e_c|t_o|r_i_e_l_s	0.07	0.0
@@ -125331,22 +125315,22 @@ trentenaires	tR@t°nER	trentenaire	ADJ	ADJ		p		t_R_@|t_°|n_E_R_#	t_r_en|t_e|n_a
 trentième	tR@tjEm	trentième	ADJ	ADJ				t_R_@|t_j_E_m_#	t_r_en|t_i_è_m_e	0.88	0.69
 tressa	tREsa	tresser	VER	VER			ind:pas:3s;	t_R_E|s_a	t_r_e|ss_a	0.07	0.0
 tressaient	tREsE	tresser	VER	VER			ind:imp:3p;	t_R_E|s_E	t_r_e|ss_aient	0.41	0.0
-tressaillaient	tResajE	tressaillir	VER	VER			ind:imp:3p;	t_R_e|s_a|j_E	t_r_e|ss_a|ill_aient	0.2	0.0
-tressaillais	tResajE	tressaillir	VER	VER			ind:imp:1s;	t_R_e|s_a|j_E	t_r_e|ss_a|ill_ais	0.07	0.0
-tressaillait	tResajE	tressaillir	VER	VER			ind:imp:3s;	t_R_e|s_a|j_E	t_r_e|ss_a|ill_ait	1.55	0.0
-tressaillant	tResaj@	tressaillir	VER	VER			par:pre;	t_R_e|s_a|j_@	t_r_e|ss_a|ill_ant	0.88	0.01
-tressaille	tResaj	tressaillir	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	t_R_e|s_a_j_#	t_r_e|ss_a_ill_e	1.08	0.19
+tressaillaient	tREsajE	tressaillir	VER	VER			ind:imp:3p;	t_R_E|s_a|j_E	t_r_e|ss_a|ill_aient	0.2	0.0
+tressaillais	tREsajE	tressaillir	VER	VER			ind:imp:1s;	t_R_E|s_a|j_E	t_r_e|ss_a|ill_ais	0.07	0.0
+tressaillait	tREsajE	tressaillir	VER	VER			ind:imp:3s;	t_R_E|s_a|j_E	t_r_e|ss_a|ill_ait	1.55	0.0
+tressaillant	tREsaj@	tressaillir	VER	VER			par:pre;	t_R_E|s_a|j_@	t_r_e|ss_a|ill_ant	0.88	0.01
+tressaille	tREsaj	tressaillir	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	t_R_E|s_a_j_#	t_r_e|ss_a_ill_e	1.08	0.19
 tressaillement	tResaj°m@	tressaillement	NOM	NOM	m	s		t_R_e|s_a|j_°|m_@	t_r_e|ss_a|ill_e|m_ent	2.36	0.13
 tressaillements	tResaj°m@	tressaillement	NOM	NOM	m	p		t_R_e|s_a|j_°|m_@_#	t_r_e|ss_a|ill_e|m_en_ts	1.49	0.23
-tressaillent	tResaj	tressaillir	VER	VER			ind:pre:3p;	t_R_e|s_a_j_#	t_r_e|ss_a_ill_ent	0.54	0.02
+tressaillent	tREsaj	tressaillir	VER	VER			ind:pre:3p;	t_R_E|s_a_j_#	t_r_e|ss_a_ill_ent	0.54	0.02
 tressaillez	tREsaje	tressaillir	VER	VER			ind:pre:2p;	t_R_E|s_a|j_e	t_r_e|ss_a|ill_ez	0.0	0.11
-tressailli	tResaji	tressaillir	VER	VER	m	s	par:pas;	t_R_e|s_a|j_i	t_r_e|ss_a|ill_i	1.22	0.23
-tressaillir	tResajiR	tressaillir	VER	VER			inf;	t_R_e|s_a|j_i_R	t_r_e|ss_a|ill_i_r	4.12	0.38
-tressaillira	tResajiRa	tressaillir	VER	VER			ind:fut:3s;	t_R_e|s_a|j_i|R_a	t_r_e|ss_a|ill_i|r_a	0.07	0.0
-tressaillirait	tResajiRE	tressaillir	VER	VER			cnd:pre:3s;	t_R_e|s_a|j_i|R_E	t_r_e|ss_a|ill_i|r_ait	0.07	0.0
-tressaillirent	tResajiR	tressaillir	VER	VER			ind:pas:3p;	t_R_e|s_a|j_i_R_#	t_r_e|ss_a|ill_i_r_ent	0.14	0.1
-tressaillis	tResaji	tressaillir	VER	VER			ind:pas:1s;ind:pas:2s;	t_R_e|s_a|j_i	t_r_e|ss_a|ill_is	0.14	0.02
-tressaillit	tResaji	tressaillir	VER	VER			ind:pas:3s;	t_R_e|s_a|j_i	t_r_e|ss_a|ill_it	3.65	0.25
+tressailli	tREsaji	tressaillir	VER	VER	m	s	par:pas;	t_R_E|s_a|j_i	t_r_e|ss_a|ill_i	1.22	0.23
+tressaillir	tREsajiR	tressaillir	VER	VER			inf;	t_R_E|s_a|j_i_R	t_r_e|ss_a|ill_i_r	4.12	0.38
+tressaillira	tREsajiRa	tressaillir	VER	VER			ind:fut:3s;	t_R_E|s_a|j_i|R_a	t_r_e|ss_a|ill_i|r_a	0.07	0.0
+tressaillirait	tREsajiRE	tressaillir	VER	VER			cnd:pre:3s;	t_R_E|s_a|j_i|R_E	t_r_e|ss_a|ill_i|r_ait	0.07	0.0
+tressaillirent	tREsajiR	tressaillir	VER	VER			ind:pas:3p;	t_R_E|s_a|j_i_R_#	t_r_e|ss_a|ill_i_r_ent	0.14	0.1
+tressaillis	tREsaji	tressaillir	VER	VER			ind:pas:1s;ind:pas:2s;	t_R_E|s_a|j_i	t_r_e|ss_a|ill_is	0.14	0.02
+tressaillit	tREsaji	tressaillir	VER	VER			ind:pas:3s;	t_R_E|s_a|j_i	t_r_e|ss_a|ill_it	3.65	0.25
 tressait	tREsE	tresser	VER	VER			ind:imp:3s;	t_R_E|s_E	t_r_e|ss_ait	0.47	0.0
 tressant	tREs@	tresser	VER	VER			par:pre;	t_R_E|s_@	t_r_e|ss_ant	0.41	0.0
 tressauta	tREsota	tressauter	VER	VER			ind:pas:3s;	t_R_E|s_o|t_a	t_r_e|ss_au|t_a	0.27	0.0
@@ -125359,23 +125343,23 @@ tressaute	tREsot	tressauter	VER	VER			ind:pre:1s;ind:pre:3s;	t_R_E|s_o_t_#	t_r_e
 tressautement	tResot°m@	tressautement	NOM	NOM	m	s		t_R_e|s_o|t_°|m_@	t_r_e|ss_au|t_e|m_ent	0.27	0.0
 tressautements	tResot°m@	tressautement	NOM	NOM	m	p		t_R_e|s_o|t_°|m_@_#	t_r_e|ss_au|t_e|m_en_ts	0.47	0.0
 tressautent	tREsot	tressauter	VER	VER			ind:pre:3p;	t_R_E|s_o_t_#	t_r_e|ss_au_t_ent	0.88	0.0
-tressauter	tResote	tressauter	VER	VER			inf;	t_R_e|s_o|t_e	t_r_e|ss_au|t_er	0.68	0.01
+tressauter	tREsote	tressauter	VER	VER			inf;	t_R_E|s_o|t_e	t_r_e|ss_au|t_er	0.68	0.01
 tressautera	tREsot°Ra	tressauter	VER	VER			ind:fut:3s;	t_R_E|s_o|t_°|R_a	t_r_e|ss_au|t_e|r_a	0.07	0.0
-tressautés	tResote	tressauter	VER	VER	m	p	par:pas;	t_R_e|s_o|t_e_#	t_r_e|ss_au|t_é_s	0.07	0.0
+tressautés	tREsote	tressauter	VER	VER	m	p	par:pas;	t_R_E|s_o|t_e_#	t_r_e|ss_au|t_é_s	0.07	0.0
 tresse	tREs	tresse	NOM	NOM,VER	f	s		t_R_E_s_#	t_r_e_ss_e	1.08	0.77
 tresse	tREs	tresser	VER	NOM,VER			ind:pre:1s;ind:pre:3s;	t_R_E_s_#	t_r_e_ss_e	0.14	0.06
 tressent	tREs	tresser	VER	VER			ind:pre:3p;	t_R_E_s_#	t_r_e_ss_ent	0.14	0.1
-tresser	tRese	tresser	VER	VER			inf;	t_R_e|s_e	t_r_e|ss_er	1.69	0.34
+tresser	tREse	tresser	VER	VER			inf;	t_R_E|s_e	t_r_e|ss_er	1.69	0.34
 tresseraient	tREs°RE	tresser	VER	VER			cnd:pre:3p;	t_R_E|s_°|R_E	t_r_e|ss_e|r_aient	0.07	0.0
 tresseras	tREs°Ra	tresser	VER	VER			ind:fut:2s;	t_R_E|s_°|R_a	t_r_e|ss_e|r_as	0.0	0.01
 tresses	tREs	tresse	NOM	NOM	f	p		t_R_E_s_#	t_r_e_ss_es	3.65	1.06
 tresseurs	tREs9R	tresseur	NOM	NOM	m	p		t_R_E|s_9_R_#	t_r_e|ss_eu_r_s	0.07	0.0
 tressons	tREs§	tresser	VER	VER			imp:pre:1p;ind:pre:1p;	t_R_E|s_§	t_r_e|ss_ons	0.07	0.14
 tressèrent	tREsER	tresser	VER	VER			ind:pas:3p;	t_R_E|s_E_R_#	t_r_e|ss_è_r_ent	0.07	0.0
-tressé	tRese	tresser	VER	VER	m	s	par:pas;	t_R_e|s_e	t_r_e|ss_é	1.96	0.13
-tressée	tRese	tresser	VER	VER	f	s	par:pas;	t_R_e|s_e_#	t_r_e|ss_é_e	1.89	0.17
-tressées	tRese	tresser	VER	VER	f	p	par:pas;	t_R_e|s_e_#	t_r_e|ss_é_es	1.01	0.0
-tressés	tRese	tresser	VER	VER	m	p	par:pas;	t_R_e|s_e_#	t_r_e|ss_é_s	0.47	0.2
+tressé	tREse	tresser	VER	VER	m	s	par:pas;	t_R_E|s_e	t_r_e|ss_é	1.96	0.13
+tressée	tREse	tresser	VER	VER	f	s	par:pas;	t_R_E|s_e_#	t_r_e|ss_é_e	1.89	0.17
+tressées	tREse	tresser	VER	VER	f	p	par:pas;	t_R_E|s_e_#	t_r_e|ss_é_es	1.01	0.0
+tressés	tREse	tresser	VER	VER	m	p	par:pas;	t_R_E|s_e_#	t_r_e|ss_é_s	0.47	0.2
 treuil	tR9j	treuil	NOM	NOM	m	s		t_R_9_j	t_r_eu_il	1.69	1.34
 treuiller	tR9je	treuiller	VER	VER			inf;	t_R_9|j_e	t_r_eu|ill_er	0.0	0.14
 treuils	tR9j	treuil	NOM	NOM	m	p		t_R_9_j_#	t_r_eu_il_s	0.47	0.14
@@ -128828,30 +128812,30 @@ verrière	vERjER	verrière	NOM	ADJ,NOM	f	s		v_E|R_j_E_R_#	v_e|rr_i_è_r_e	4.53	0
 verrière	vERjER	verrière	ADJ	ADJ,NOM	f	s		v_E|R_j_E_R_#	v_e|rr_i_è_r_e	0.07	0.0
 verrières	vERjER	verrière	ADJ	ADJ,NOM	f	p		v_E|R_j_E_R_#	v_e|rr_i_è_r_es	0.14	0.0
 verrières	vERjER	verrière	NOM	ADJ,NOM	f	p		v_E|R_j_E_R_#	v_e|rr_i_è_r_es	1.42	0.0
-verrons	veR§	voir	VER	VER			ind:fut:1p;	v_e|R_§	v_e|rr_ons	7.57	13.26
-verront	veR§	voir	VER	VER			ind:fut:3p;	v_e|R_§	v_e|rr_ont	2.7	6.54
+verrons	vER§	voir	VER	VER			ind:fut:1p;	v_E|R_§	v_e|rr_ons	7.57	13.26
+verront	vER§	voir	VER	VER			ind:fut:3p;	v_E|R_§	v_e|rr_ont	2.7	6.54
 verroterie	veROt°Ri	verroterie	NOM	NOM	f	s		v_e|R_O|t_°|R_i_#	v_e|rr_o|t_e|r_i_e	1.01	0.04
 verroteries	veROt°Ri	verroterie	NOM	NOM	f	p		v_e|R_O|t_°|R_i_#	v_e|rr_o|t_e|r_i_es	0.41	0.01
 verrou	veRu	verrou	NOM	NOM	m	s		v_e|R_u	v_e|rr_ou	7.64	3.54
-verrouilla	veRuja	verrouiller	VER	VER			ind:pas:3s;	v_e|R_u|j_a	v_e|rr_ou|ill_a	0.61	0.11
+verrouilla	vERuja	verrouiller	VER	VER			ind:pas:3s;	v_E|R_u|j_a	v_e|rr_ou|ill_a	0.61	0.11
 verrouillage	veRujaZ	verrouillage	NOM	NOM	m	s		v_e|R_u|j_a_Z	v_e|rr_ou|ill_a_ge	0.54	1.23
-verrouillai	veRuje	verrouiller	VER	VER			ind:pas:1s;	v_e|R_u|j_e	v_e|rr_ou|ill_ai	0.07	0.0
-verrouillait	veRujE	verrouiller	VER	VER			ind:imp:3s;	v_e|R_u|j_E	v_e|rr_ou|ill_ait	0.34	0.15
-verrouillant	veRuj@	verrouiller	VER	VER			par:pre;	v_e|R_u|j_@	v_e|rr_ou|ill_ant	0.2	0.0
-verrouille	veRuj	verrouiller	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	v_e|R_u_j_#	v_e|rr_ou_ill_e	0.27	1.98
-verrouillent	veRuj	verrouiller	VER	VER			ind:pre:3p;	v_e|R_u_j_#	v_e|rr_ou_ill_ent	0.0	0.28
-verrouiller	veRuje	verrouiller	VER	VER			inf;	v_e|R_u|j_e	v_e|rr_ou|ill_er	0.47	1.36
-verrouilles	veRuj	verrouiller	VER	VER			ind:pre:2s;	v_e|R_u_j_#	v_e|rr_ou_ill_es	0.14	0.09
-verrouillez	veRuje	verrouiller	VER	VER			imp:pre:2p;ind:pre:2p;	v_e|R_u|j_e	v_e|rr_ou|ill_ez	0.0	1.27
-verrouillons	veRuj§	verrouiller	VER	VER			ind:pre:1p;	v_e|R_u|j_§	v_e|rr_ou|ill_ons	0.0	0.02
-verrouillèrent	veRujER	verrouiller	VER	VER			ind:pas:3p;	v_e|R_u|j_E_R_#	v_e|rr_ou|ill_è_r_ent	0.07	0.0
-verrouillé	veRuje	verrouiller	VER	VER,ADJ	m	s	par:pas;	v_e|R_u|j_e	v_e|rr_ou|ill_é	0.61	1.85
+verrouillai	vERuje	verrouiller	VER	VER			ind:pas:1s;	v_E|R_u|j_e	v_e|rr_ou|ill_ai	0.07	0.0
+verrouillait	vERujE	verrouiller	VER	VER			ind:imp:3s;	v_E|R_u|j_E	v_e|rr_ou|ill_ait	0.34	0.15
+verrouillant	vERuj@	verrouiller	VER	VER			par:pre;	v_E|R_u|j_@	v_e|rr_ou|ill_ant	0.2	0.0
+verrouille	vERuj	verrouiller	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	v_E|R_u_j_#	v_e|rr_ou_ill_e	0.27	1.98
+verrouillent	vERuj	verrouiller	VER	VER			ind:pre:3p;	v_E|R_u_j_#	v_e|rr_ou_ill_ent	0.0	0.28
+verrouiller	vERuje	verrouiller	VER	VER			inf;	v_E|R_u|j_e	v_e|rr_ou|ill_er	0.47	1.36
+verrouilles	vERuj	verrouiller	VER	VER			ind:pre:2s;	v_E|R_u_j_#	v_e|rr_ou_ill_es	0.14	0.09
+verrouillez	vERuje	verrouiller	VER	VER			imp:pre:2p;ind:pre:2p;	v_E|R_u|j_e	v_e|rr_ou|ill_ez	0.0	1.27
+verrouillons	vERuj§	verrouiller	VER	VER			ind:pre:1p;	v_E|R_u|j_§	v_e|rr_ou|ill_ons	0.0	0.02
+verrouillèrent	vERujER	verrouiller	VER	VER			ind:pas:3p;	v_E|R_u|j_E_R_#	v_e|rr_ou|ill_è_r_ent	0.07	0.0
+verrouillé	vERuje	verrouiller	VER	VER,ADJ	m	s	par:pas;	v_E|R_u|j_e	v_e|rr_ou|ill_é	0.61	1.85
 verrouillé	veRuje	verrouillé	ADJ	VER,ADJ	m	s		v_e|R_u|j_e	v_e|rr_ou|ill_é	0.2	0.98
-verrouillée	veRuje	verrouiller	VER	VER,ADJ	f	s	par:pas;	v_e|R_u|j_e_#	v_e|rr_ou|ill_é_e	0.61	1.24
+verrouillée	vERuje	verrouiller	VER	VER,ADJ	f	s	par:pas;	v_E|R_u|j_e_#	v_e|rr_ou|ill_é_e	0.61	1.24
 verrouillée	veRuje	verrouillé	ADJ	VER,ADJ	f	s		v_e|R_u|j_e_#	v_e|rr_ou|ill_é_e	0.61	0.6
-verrouillées	veRuje	verrouiller	VER	VER,ADJ	f	p	par:pas;	v_e|R_u|j_e_#	v_e|rr_ou|ill_é_es	0.14	0.33
+verrouillées	vERuje	verrouiller	VER	VER,ADJ	f	p	par:pas;	v_E|R_u|j_e_#	v_e|rr_ou|ill_é_es	0.14	0.33
 verrouillées	veRuje	verrouillé	ADJ	VER,ADJ	f	p		v_e|R_u|j_e_#	v_e|rr_ou|ill_é_es	0.07	0.23
-verrouillés	veRuje	verrouiller	VER	VER,ADJ	m	p	par:pas;	v_e|R_u|j_e_#	v_e|rr_ou|ill_é_s	0.2	0.09
+verrouillés	vERuje	verrouiller	VER	VER,ADJ	m	p	par:pas;	v_E|R_u|j_e_#	v_e|rr_ou|ill_é_s	0.2	0.09
 verrouillés	veRuje	verrouillé	ADJ	VER,ADJ	m	p		v_e|R_u|j_e_#	v_e|rr_ou|ill_é_s	0.2	0.08
 verrous	veRu	verrou	NOM	NOM	m	p		v_e|R_u_#	v_e|rr_ou_s	4.39	1.74
 verrue	veRy	verrue	NOM	NOM	f	s		v_e|R_y_#	v_e|rr_u_e	1.76	0.66

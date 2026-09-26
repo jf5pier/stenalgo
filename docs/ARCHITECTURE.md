@@ -237,6 +237,14 @@ design-decision log); reworded to the current vocabulary.
 5. **Dual-target architecture confirmed:** a large precomputed static dictionary for
    Plover, and a small dictionary plus runtime rule engine for a microcontroller build
    modeled on Javelin. Both consume the same underlying paradigm-table data.
+6. **Vowel harmony (harmonisation vocalique) is ignored when ignoring it protects the
+   lemma's phonetics and simplifies the stroke diversity needed to express its declension.**
+   French lets a lax `E` become `e` next to a similar-sounding syllable (`essaie` /EsE/ but
+   `essayais` /esEjE/, `descend` /dEs@/ but `descendre` /des@dR/). The lexicon is inconsistent
+   about it inside one lemma, and every variant would cost an extra stroke. The lemma keeps
+   the lax vowel in all its forms: `util/fixFirstSyllableE.py` (2026-09-26) sets `E` in the
+   first-syllable `e` of the validated lemmas (`essayer`, `descendre`, `effacer`, `dessiner`,
+   `voir`'s `verrons`…) across Lexique383, Infra, Mixte and Synthetic.
 
 ### Why elicitation, not solver-picked features
 

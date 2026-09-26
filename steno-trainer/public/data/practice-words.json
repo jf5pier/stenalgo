@@ -13292,10 +13292,11 @@
   "before": "",
   "after": "",
   "label": "infinitif",
-  "phonology": "e.sE.je",
-  "steno": "e/sie/Rwe/-l",
+  "phonology": "E.sE.je",
+  "steno": "ie/sie/Rwe/-l",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -14101,10 +14102,11 @@
   "before": "",
   "after": "",
   "label": "participe passé, m. sg.",
-  "phonology": "e.sEj.e",
-  "steno": "e/siej/e",
+  "phonology": "E.sEj.e",
+  "steno": "ie/siej/e",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -25929,12 +25931,13 @@
   "before": "",
   "after": "",
   "label": "infinitif",
-  "phonology": "de.s@dR",
-  "steno": "pve/s@dR",
+  "phonology": "dE.s@dR",
+  "steno": "pvie/s@dR",
   "strokes": [
    [
     4,
     5,
+    13,
     14
    ],
    [
@@ -26860,12 +26863,13 @@
   "before": "tu",
   "after": "",
   "label": "indicatif présent, 2e sg.",
-  "phonology": "de.s@",
-  "steno": "pve/s@/-d",
+  "phonology": "dE.s@",
+  "steno": "pvie/s@/-d",
   "strokes": [
    [
     4,
     5,
+    13,
     14
    ],
    [
@@ -26883,12 +26887,13 @@
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
-  "phonology": "de.s@",
-  "steno": "pve/s@/-k",
+  "phonology": "dE.s@",
+  "steno": "pvie/s@/-k",
   "strokes": [
    [
     4,
     5,
+    13,
     14
    ],
    [
@@ -29263,10 +29268,11 @@
   "before": "il",
   "after": "",
   "label": "indicatif présent, 3e sg.",
-  "phonology": "e.sEj",
-  "steno": "e/siej",
+  "phonology": "E.sEj",
+  "steno": "ie/siej",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -29283,10 +29289,11 @@
   "before": "qu'il",
   "after": "",
   "label": "subjonctif présent, 3e sg.",
-  "phonology": "e.sEj",
-  "steno": "e/siej/-R",
+  "phonology": "E.sEj",
+  "steno": "ie/siej/-R",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -29306,10 +29313,11 @@
   "before": "j'",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
-  "phonology": "e.sEj",
-  "steno": "e/siej/-k",
+  "phonology": "E.sEj",
+  "steno": "ie/siej/-k",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -30575,10 +30583,11 @@
   "before": "vous",
   "after": "",
   "label": "indicatif présent, 2e pl.",
-  "phonology": "e.sE.je",
-  "steno": "e/sie/Rwe/-d",
+  "phonology": "E.sE.je",
+  "steno": "ie/sie/Rwe/-d",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -30602,10 +30611,11 @@
   "before": "",
   "after": "!",
   "label": "impératif présent, 2e pl.",
-  "phonology": "e.sE.je",
-  "steno": "e/sie/Rwe/-k",
+  "phonology": "E.sE.je",
+  "steno": "ie/sie/Rwe/-k",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -49639,12 +49649,13 @@
   "before": "",
   "after": "",
   "label": "infinitif",
-  "phonology": "ne.twaj.e",
-  "steno": "mRe/twaj/e/-l",
+  "phonology": "nE.twaj.e",
+  "steno": "mRie/twaj/e/-l",
   "strokes": [
    [
     6,
     8,
+    13,
     14
    ],
    [
@@ -56173,12 +56184,13 @@
   "before": "il",
   "after": "",
   "label": "indicatif présent, 3e sg.",
-  "phonology": "de.s@",
-  "steno": "pve/s@",
+  "phonology": "dE.s@",
+  "steno": "pvie/s@",
   "strokes": [
    [
     4,
     5,
+    13,
     14
    ],
    [
@@ -56445,12 +56457,13 @@
   "before": "vous",
   "after": "",
   "label": "impératif présent, 2e pl. · indicatif présent, 2e pl.",
-  "phonology": "de.s@.de",
-  "steno": "pve/s@/pve",
+  "phonology": "dE.s@.de",
+  "steno": "pvie/s@/pve",
   "strokes": [
    [
     4,
     5,
+    13,
     14
    ],
    [
@@ -65757,10 +65770,11 @@
   "before": "nous",
   "after": "",
   "label": "impératif présent, 1re pl. · indicatif présent, 1re pl.",
-  "phonology": "e.sE.j§",
-  "steno": "e/sie/Rwai",
+  "phonology": "E.sE.j§",
+  "steno": "ie/sie/Rwai",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -74715,10 +74729,11 @@
   "before": "tu",
   "after": "",
   "label": "indicatif imparfait, 2e sg.",
-  "phonology": "e.sE.jE",
-  "steno": "e/sie/Rwie/-d",
+  "phonology": "E.sE.jE",
+  "steno": "ie/sie/Rwie/-d",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -74743,10 +74758,11 @@
   "before": "j'",
   "after": "",
   "label": "indicatif imparfait, 1re sg.",
-  "phonology": "e.sE.jE",
-  "steno": "e/sie/Rwie/-k",
+  "phonology": "E.sE.jE",
+  "steno": "ie/sie/Rwie/-k",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -76906,12 +76922,13 @@
   "before": "",
   "after": "",
   "label": "participe passé, m. sg.",
-  "phonology": "de.s@.dy",
-  "steno": "pve/s@/pv@i",
+  "phonology": "dE.s@.dy",
+  "steno": "pvie/s@/pv@i",
   "strokes": [
    [
     4,
     5,
+    13,
     14
    ],
    [
@@ -91603,10 +91620,11 @@
   "before": "il",
   "after": "",
   "label": "indicatif imparfait, 3e sg.",
-  "phonology": "e.sE.jE",
-  "steno": "e/sie/Rwie",
+  "phonology": "E.sE.jE",
+  "steno": "ie/sie/Rwie",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -98848,11 +98866,12 @@
   "before": "nous",
   "after": "",
   "label": "indicatif futur, 1re pl.",
-  "phonology": "ve.R§",
-  "steno": "ve/Rai/-k",
+  "phonology": "vE.R§",
+  "steno": "vie/Rai/-k",
   "strokes": [
    [
     5,
+    13,
     14
    ],
    [
@@ -105525,9 +105544,9 @@
  },
  {
   "ortho": "nettoie",
-  "before": "je",
+  "before": "il",
   "after": "",
-  "label": "impératif présent, 2e sg. · indicatif présent, 1re sg. / 3e sg. · subjonctif présent, 3e sg.",
+  "label": "indicatif présent, 3e sg.",
   "phonology": "nE.twa",
   "steno": "mRie/twa",
   "strokes": [
@@ -105541,6 +105560,56 @@
     7,
     9,
     12
+   ]
+  ],
+  "frequency": 12.09
+ },
+ {
+  "ortho": "nettoie",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "nE.twa",
+  "steno": "mRie/twa/-R",
+  "strokes": [
+   [
+    6,
+    8,
+    13,
+    14
+   ],
+   [
+    7,
+    9,
+    12
+   ],
+   [
+    21
+   ]
+  ],
+  "frequency": 12.09
+ },
+ {
+  "ortho": "nettoie",
+  "before": "je",
+  "after": "",
+  "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
+  "phonology": "nE.twa",
+  "steno": "mRie/twa/-k",
+  "strokes": [
+   [
+    6,
+    8,
+    13,
+    14
+   ],
+   [
+    7,
+    9,
+    12
+   ],
+   [
+    18
    ]
   ],
   "frequency": 12.09
@@ -109569,7 +109638,7 @@
   "ortho": "dessert",
   "before": "le",
   "after": "",
-  "label": "nom, m. sg. · indicatif présent, 3e sg.",
+  "label": "nom, m. sg.",
   "phonology": "de.sER",
   "steno": "pve/sieR",
   "strokes": [
@@ -123267,7 +123336,7 @@
   "ortho": "effrayant",
   "before": "l'",
   "after": "",
-  "label": "adjectif, m. sg. · participe présent",
+  "label": "adjectif, m. sg.",
   "phonology": "e.fREj.@",
   "steno": "e/kpRiej/@",
   "strokes": [
@@ -123522,10 +123591,11 @@
   "before": "",
   "after": "",
   "label": "infinitif",
-  "phonology": "e.fa.se",
-  "steno": "e/kpa/se/-l",
+  "phonology": "E.fa.se",
+  "steno": "ie/kpa/se/-l",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -128415,10 +128485,11 @@
   "before": "",
   "after": "",
   "label": "infinitif",
-  "phonology": "e.fRE.je",
-  "steno": "e/kpRie/Rwe/-l",
+  "phonology": "E.fRE.je",
+  "steno": "ie/kpRie/Rwe/-l",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -131996,12 +132067,13 @@
   "before": "",
   "after": "",
   "label": "infinitif",
-  "phonology": "de.si.ne",
-  "steno": "pve/si/mRe/-l",
+  "phonology": "dE.si.ne",
+  "steno": "pvie/si/mRe/-l",
   "strokes": [
    [
     4,
     5,
+    13,
     14
    ],
    [
@@ -133712,10 +133784,11 @@
   "before": "",
   "after": "",
   "label": "participe présent",
-  "phonology": "e.sE.j@",
-  "steno": "e/sie/Rw@",
+  "phonology": "E.sE.j@",
+  "steno": "ie/sie/Rw@",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -143755,7 +143828,7 @@
   "ortho": "lessive",
   "before": "la",
   "after": "",
-  "label": "nom, f. sg. · indicatif présent, 3e sg.",
+  "label": "nom, f. sg.",
   "phonology": "le.siv",
   "steno": "mte/sijs",
   "strokes": [
@@ -148940,12 +149013,13 @@
   "before": "",
   "after": "",
   "label": "participe passé, m. sg.",
-  "phonology": "ne.twaj.e",
-  "steno": "mRe/twaj/e",
+  "phonology": "nE.twaj.e",
+  "steno": "mRie/twaj/e",
   "strokes": [
    [
     6,
     8,
+    13,
     14
    ],
    [
@@ -149854,11 +149928,12 @@
   "ortho": "effraie",
   "before": "il",
   "after": "",
-  "label": "indicatif présent, 3e sg. · nom, f. sg.",
-  "phonology": "e.fRE",
-  "steno": "e/kpRie",
+  "label": "indicatif présent, 3e sg.",
+  "phonology": "E.fRE",
+  "steno": "ie/kpRie",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -149876,10 +149951,11 @@
   "before": "j'",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
-  "phonology": "e.fRE",
-  "steno": "e/kpRie/-k",
+  "phonology": "E.fRE",
+  "steno": "ie/kpRie/-k",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -170704,11 +170780,12 @@
   "before": "ils",
   "after": "",
   "label": "indicatif futur, 3e pl.",
-  "phonology": "ve.R§",
-  "steno": "ve/Rai/-st",
+  "phonology": "vE.R§",
+  "steno": "vie/Rai/-st",
   "strokes": [
    [
     5,
+    13,
     14
    ],
    [
@@ -174151,13 +174228,14 @@
  },
  {
   "ortho": "effrayé",
-  "before": "l'",
+  "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. sg.",
-  "phonology": "e.fREj.e",
-  "steno": "e/kpRiej/e",
+  "label": "participe passé, m. sg.",
+  "phonology": "E.fREj.e",
+  "steno": "ie/kpRiej/e",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -177485,10 +177563,11 @@
   "before": "il",
   "after": "",
   "label": "indicatif présent, 3e sg.",
-  "phonology": "e.fas",
-  "steno": "e/kpas",
+  "phonology": "E.fas",
+  "steno": "ie/kpas",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -177505,10 +177584,11 @@
   "before": "que j'",
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
-  "phonology": "e.fas",
-  "steno": "e/kpas/-R",
+  "phonology": "E.fas",
+  "steno": "ie/kpas/-R",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -177528,10 +177608,11 @@
   "before": "j'",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
-  "phonology": "e.fas",
-  "steno": "e/kpas/-k",
+  "phonology": "E.fas",
+  "steno": "ie/kpas/-k",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -180703,12 +180784,13 @@
   "before": "il",
   "after": "",
   "label": "indicatif présent, 3e sg.",
-  "phonology": "de.sin",
-  "steno": "pve/sin",
+  "phonology": "dE.sin",
+  "steno": "pvie/sin",
   "strokes": [
    [
     4,
     5,
+    13,
     14
    ],
    [
@@ -180724,12 +180806,13 @@
   "before": "que je",
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
-  "phonology": "de.sin",
-  "steno": "pve/sin/-R",
+  "phonology": "dE.sin",
+  "steno": "pvie/sin/-R",
   "strokes": [
    [
     4,
     5,
+    13,
     14
    ],
    [
@@ -180748,12 +180831,13 @@
   "before": "je",
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
-  "phonology": "de.sin",
-  "steno": "pve/sin/-k",
+  "phonology": "dE.sin",
+  "steno": "pvie/sin/-k",
   "strokes": [
    [
     4,
     5,
+    13,
     14
    ],
    [
@@ -183044,10 +183128,11 @@
   "before": "tu",
   "after": "",
   "label": "indicatif présent, 2e sg.",
-  "phonology": "e.sEj",
-  "steno": "e/siej/-d",
+  "phonology": "E.sEj",
+  "steno": "ie/siej/-d",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -183067,10 +183152,11 @@
   "before": "que tu",
   "after": "",
   "label": "subjonctif présent, 2e sg.",
-  "phonology": "e.sEj",
-  "steno": "e/siej/-dR",
+  "phonology": "E.sEj",
+  "steno": "ie/siej/-dR",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -200624,13 +200710,14 @@
  },
  {
   "ortho": "effacé",
-  "before": "l'",
+  "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. sg.",
-  "phonology": "e.fa.se",
-  "steno": "e/kpa/se",
+  "label": "participe passé, m. sg.",
+  "phonology": "E.fa.se",
+  "steno": "ie/kpa/se",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -204102,15 +204189,16 @@
  },
  {
   "ortho": "destiné",
-  "before": "le",
+  "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. sg.",
-  "phonology": "des.ti.ne",
-  "steno": "pves/ti/mR*e",
+  "label": "participe passé, m. sg.",
+  "phonology": "dEs.ti.ne",
+  "steno": "pvies/ti/mRe",
   "strokes": [
    [
     4,
     5,
+    13,
     14,
     17
    ],
@@ -204121,7 +204209,6 @@
    [
     6,
     8,
-    10,
     14
    ]
   ],
@@ -205364,15 +205451,16 @@
  },
  {
   "ortho": "dessiné",
-  "before": "le",
+  "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · nom, m. sg.",
-  "phonology": "de.si.ne",
-  "steno": "pve/si/mRe",
+  "label": "participe passé, m. sg.",
+  "phonology": "dE.si.ne",
+  "steno": "pvie/si/mRe",
   "strokes": [
    [
     4,
     5,
+    13,
     14
    ],
    [
@@ -206595,13 +206683,14 @@
  },
  {
   "ortho": "effrayée",
-  "before": "l'",
+  "before": "",
   "after": "",
-  "label": "participe passé, f. sg. · adjectif, f. sg.",
-  "phonology": "e.fREj.e",
-  "steno": "e/kpRiej/e/-j",
+  "label": "participe passé, f. sg.",
+  "phonology": "E.fREj.e",
+  "steno": "ie/kpRiej/e/-j",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -229067,12 +229156,13 @@
   "before": "nous",
   "after": "",
   "label": "impératif présent, 1re pl. · indicatif présent, 1re pl.",
-  "phonology": "de.s@.d§",
-  "steno": "pve/s@/pvai",
+  "phonology": "dE.s@.d§",
+  "steno": "pvie/s@/pvai",
   "strokes": [
    [
     4,
     5,
+    13,
     14
    ],
    [
@@ -230049,12 +230139,13 @@
   "before": "qu'ils",
   "after": "",
   "label": "subjonctif présent, 3e pl.",
-  "phonology": "de.s@d",
-  "steno": "pve/s@d/-sR",
+  "phonology": "dE.s@d",
+  "steno": "pvie/s@d/-sR",
   "strokes": [
    [
     4,
     5,
+    13,
     14
    ],
    [
@@ -230074,12 +230165,13 @@
   "before": "ils",
   "after": "",
   "label": "indicatif présent, 3e pl.",
-  "phonology": "de.s@d",
-  "steno": "pve/s@d/-st",
+  "phonology": "dE.s@d",
+  "steno": "pvie/s@d/-st",
   "strokes": [
    [
     4,
     5,
+    13,
     14
    ],
    [
@@ -232201,53 +232293,6 @@
     9,
     12,
     18
-   ]
-  ],
-  "frequency": 4.22
- },
- {
-  "ortho": "ferraille",
-  "before": "la",
-  "after": "",
-  "label": "nom, f. sg. · indicatif présent, 3e sg.",
-  "phonology": "fE.Raj",
-  "steno": "kpie/Raj",
-  "strokes": [
-   [
-    2,
-    4,
-    13,
-    14
-   ],
-   [
-    8,
-    12,
-    16
-   ]
-  ],
-  "frequency": 4.22
- },
- {
-  "ortho": "funeste",
-  "before": "",
-  "after": "",
-  "label": "adjectif, sg.",
-  "phonology": "fy.nEst",
-  "steno": "kp@i/mRiest",
-  "strokes": [
-   [
-    2,
-    4,
-    11,
-    13
-   ],
-   [
-    6,
-    8,
-    13,
-    14,
-    17,
-    20
    ]
   ],
   "frequency": 4.22

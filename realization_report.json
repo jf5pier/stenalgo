@@ -5,7 +5,7 @@
     "conditionnel",
     "infinitif"
    ],
-   "affectedWords": 3982,
+   "affectedWords": 3985,
    "chosenKeys": [
     23
    ],
@@ -188,7 +188,7 @@
     "passé",
     "pers_3"
    ],
-   "affectedWords": 12489,
+   "affectedWords": 12490,
    "chosenKeys": [
     20
    ],
@@ -285,7 +285,7 @@
     "imparfait",
     "subjonctif"
    ],
-   "affectedWords": 5832,
+   "affectedWords": 5819,
    "chosenKeys": [
     21
    ],
@@ -364,7 +364,7 @@
     "impératif",
     "pers_1"
    ],
-   "affectedWords": 7890,
+   "affectedWords": 7889,
    "chosenKeys": [
     18
    ],
@@ -449,7 +449,7 @@
     "nbr_p",
     "p"
    ],
-   "affectedWords": 50557,
+   "affectedWords": 50553,
    "chosenKeys": [
     17
    ],
@@ -1678,6 +1678,10 @@
     "hulules"
    ],
    [
+    "dessellés",
+    "descellés"
+   ],
+   [
     "entr'aperçues",
     "entraperçues"
    ],
@@ -2034,10 +2038,6 @@
     "allées"
    ],
    [
-    "dessellées",
-    "descellées"
-   ],
-   [
     "nazes",
     "nases"
    ],
@@ -2104,10 +2104,6 @@
    [
     "dragues",
     "drags"
-   ],
-   [
-    "descellée",
-    "dessellée"
    ],
    [
     "kraks",
@@ -2212,10 +2208,6 @@
    [
     "développées",
     "développés"
-   ],
-   [
-    "desselles",
-    "descelles"
    ],
    [
     "palliés",
@@ -2432,6 +2424,10 @@
    [
     "cheiks",
     "chèques"
+   ],
+   [
+    "descellées",
+    "dessellées"
    ],
    [
     "serfs",
@@ -2898,10 +2894,6 @@
     "délassées"
    ],
    [
-    "dessellent",
-    "descellent"
-   ],
-   [
     "délasser",
     "délacer"
    ],
@@ -2986,10 +2978,6 @@
     "heurs"
    ],
    [
-    "dessellés",
-    "descellés"
-   ],
-   [
     "rams",
     "rames"
    ],
@@ -3020,6 +3008,10 @@
    [
     "verts",
     "vairs"
+   ],
+   [
+    "descelles",
+    "desselles"
    ],
    [
     "éteints",
@@ -3592,6 +3584,10 @@
    [
     "pantes",
     "pentes"
+   ],
+   [
+    "descellée",
+    "dessellée"
    ],
    [
     "mixers",
@@ -4774,10 +4770,6 @@
     "tantes"
    ],
    [
-    "desseller",
-    "desceller"
-   ],
-   [
     "dorées",
     "dorés"
    ],
@@ -5120,6 +5112,10 @@
    [
     "files",
     "fils"
+   ],
+   [
+    "desceller",
+    "desseller"
    ],
    [
     "monsignores",
@@ -5720,6 +5716,10 @@
    [
     "données",
     "donnés"
+   ],
+   [
+    "descellent",
+    "dessellent"
    ],
    [
     "terrai",
