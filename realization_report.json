@@ -5,7 +5,7 @@
     "conditionnel",
     "infinitif"
    ],
-   "affectedWords": 3985,
+   "affectedWords": 3986,
    "chosenKeys": [
     23
    ],
@@ -77,7 +77,7 @@
    "markers": [
     "f"
    ],
-   "affectedWords": 15292,
+   "affectedWords": 15322,
    "chosenKeys": [
     16
    ],
@@ -449,7 +449,7 @@
     "nbr_p",
     "p"
    ],
-   "affectedWords": 50553,
+   "affectedWords": 50717,
    "chosenKeys": [
     17
    ],
@@ -3170,6 +3170,10 @@
     "joices"
    ],
    [
+    "coteaux",
+    "kotos"
+   ],
+   [
     "décas",
     "deccas"
    ],
@@ -3956,6 +3960,10 @@
    [
     "diagnostics",
     "diagnostiques"
+   ],
+   [
+    "esperantos",
+    "espérantos"
    ],
    [
     "vantés",

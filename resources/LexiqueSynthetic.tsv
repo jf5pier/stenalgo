@@ -5703,12 +5703,12 @@ détériorâtes	deteRjoRat	détériorer	VER	VER			ind:pas:2p;	d_e|t_e|R_j_o|R_a_
 détériore	deteRjOR	détériorer	VER	VER			sub:pre:1s;	d_e|t_e|R_j_O_R_#	d_é|t_é|r_i_o_r_e	0.0	0.0	synthetic
 détériores	deteRjOR	détériorer	VER	VER			sub:pre:2s;	d_e|t_e|R_j_O_R_#	d_é|t_é|r_i_o_r_es	0.0	0.0	synthetic
 détériore	deteRjOR	détériorer	VER	VER			sub:pre:3s;	d_e|t_e|R_j_O_R_#	d_é|t_é|r_i_o_r_e	0.0	0.0	synthetic
-monopolisée	monopolize	monopoliser	VER	VER	f	s	par:pas;	m_o|n_o|p_o|l_i|z_e_#	m_o|n_o|p_o|l_i|s_é_e	0.0	0.0	synthetic
-monopolisées	monopolize	monopoliser	VER	VER	f	p	par:pas;	m_o|n_o|p_o|l_i|z_e_#	m_o|n_o|p_o|l_i|s_é_es	0.0	0.0	synthetic
-monopolisâtes	monopolizat	monopoliser	VER	VER			ind:pas:2p;	m_o|n_o|p_o|l_i|z_a_t_#	m_o|n_o|p_o|l_i|s_â_t_es	0.0	0.0	synthetic
-monopolise	monopoliz	monopoliser	VER	VER			sub:pre:1s;	m_o|n_o|p_o|l_i_z_#	m_o|n_o|p_o|l_i_s_e	0.0	0.0	synthetic
-monopolises	monopoliz	monopoliser	VER	VER			sub:pre:2s;	m_o|n_o|p_o|l_i_z_#	m_o|n_o|p_o|l_i_s_es	0.0	0.0	synthetic
-monopolise	monopoliz	monopoliser	VER	VER			sub:pre:3s;	m_o|n_o|p_o|l_i_z_#	m_o|n_o|p_o|l_i_s_e	0.0	0.0	synthetic
+monopolisée	mOnOpOlize	monopoliser	VER	VER	f	s	par:pas;	m_O|n_O|p_O|l_i|z_e_#	m_o|n_o|p_o|l_i|s_é_e	0.0	0.0	synthetic
+monopolisées	mOnOpOlize	monopoliser	VER	VER	f	p	par:pas;	m_O|n_O|p_O|l_i|z_e_#	m_o|n_o|p_o|l_i|s_é_es	0.0	0.0	synthetic
+monopolisâtes	mOnOpOlizat	monopoliser	VER	VER			ind:pas:2p;	m_O|n_O|p_O|l_i|z_a_t_#	m_o|n_o|p_o|l_i|s_â_t_es	0.0	0.0	synthetic
+monopolise	mOnOpOliz	monopoliser	VER	VER			sub:pre:1s;	m_O|n_O|p_O|l_i_z_#	m_o|n_o|p_o|l_i_s_e	0.0	0.0	synthetic
+monopolises	mOnOpOliz	monopoliser	VER	VER			sub:pre:2s;	m_O|n_O|p_O|l_i_z_#	m_o|n_o|p_o|l_i_s_es	0.0	0.0	synthetic
+monopolise	mOnOpOliz	monopoliser	VER	VER			sub:pre:3s;	m_O|n_O|p_O|l_i_z_#	m_o|n_o|p_o|l_i_s_e	0.0	0.0	synthetic
 dédiâtes	dedjat	dédier	VER	VER			ind:pas:2p;	d_e|d_j_a_t_#	d_é|d_i_â_t_es	0.0	0.0	synthetic
 dédie	dedi	dédier	VER	VER			sub:pre:1s;	d_e|d_i_#	d_é|d_i_e	0.0	0.0	synthetic
 dédies	dedi	dédier	VER	VER			sub:pre:2s;	d_e|d_i_#	d_é|d_i_es	0.0	0.0	synthetic
@@ -8740,12 +8740,12 @@ estomaquâtes	Estomakat	estomaquer	VER	VER			ind:pas:2p;	E_s|t_o|m_a|k_a_t_#	e_s
 estomaque	Estomak	estomaquer	VER	VER			sub:pre:1s;	E_s|t_o|m_a_k_#	e_s|t_o|m_a_qu_e	0.0	0.0	synthetic
 estomaques	Estomak	estomaquer	VER	VER			sub:pre:2s;	E_s|t_o|m_a_k_#	e_s|t_o|m_a_qu_es	0.0	0.0	synthetic
 estomaque	Estomak	estomaquer	VER	VER			sub:pre:3s;	E_s|t_o|m_a_k_#	e_s|t_o|m_a_qu_e	0.0	0.0	synthetic
-corroborés	koRoboRe	corroborer	VER	VER	m	p	par:pas;	k_o|R_o|b_o|R_e_#	c_o|rr_o|b_o|r_é_s	0.0	0.0	synthetic
-corroborée	koRoboRe	corroborer	VER	VER	f	s	par:pas;	k_o|R_o|b_o|R_e_#	c_o|rr_o|b_o|r_é_e	0.0	0.0	synthetic
-corroborâtes	koRoboRat	corroborer	VER	VER			ind:pas:2p;	k_o|R_o|b_o|R_a_t_#	c_o|rr_o|b_o|r_â_t_es	0.0	0.0	synthetic
-corrobore	koRobOR	corroborer	VER	VER			sub:pre:1s;	k_o|R_o|b_O_R_#	c_o|rr_o|b_o_r_e	0.0	0.0	synthetic
-corrobores	koRobOR	corroborer	VER	VER			sub:pre:2s;	k_o|R_o|b_O_R_#	c_o|rr_o|b_o_r_es	0.0	0.0	synthetic
-corrobore	koRobOR	corroborer	VER	VER			sub:pre:3s;	k_o|R_o|b_O_R_#	c_o|rr_o|b_o_r_e	0.0	0.0	synthetic
+corroborés	kORObORe	corroborer	VER	VER	m	p	par:pas;	k_O|R_O|b_O|R_e_#	c_o|rr_o|b_o|r_é_s	0.0	0.0	synthetic
+corroborée	kORObORe	corroborer	VER	VER	f	s	par:pas;	k_O|R_O|b_O|R_e_#	c_o|rr_o|b_o|r_é_e	0.0	0.0	synthetic
+corroborâtes	kORObORat	corroborer	VER	VER			ind:pas:2p;	k_O|R_O|b_O|R_a_t_#	c_o|rr_o|b_o|r_â_t_es	0.0	0.0	synthetic
+corrobore	kORObOR	corroborer	VER	VER			sub:pre:1s;	k_O|R_O|b_O_R_#	c_o|rr_o|b_o_r_e	0.0	0.0	synthetic
+corrobores	kORObOR	corroborer	VER	VER			sub:pre:2s;	k_O|R_O|b_O_R_#	c_o|rr_o|b_o_r_es	0.0	0.0	synthetic
+corrobore	kORObOR	corroborer	VER	VER			sub:pre:3s;	k_O|R_O|b_O_R_#	c_o|rr_o|b_o_r_e	0.0	0.0	synthetic
 fourgonnâtes	fuRgonat	fourgonner	VER	VER			ind:pas:2p;	f_u_R|g_o|n_a_t_#	f_ou_r|g_o|nn_â_t_es	0.0	0.0	synthetic
 fourgonne	fuRgOn	fourgonner	VER	VER			sub:pre:1s;	f_u_R|g_O_n_#	f_ou_r|g_o_nn_e	0.0	0.0	synthetic
 fourgonnes	fuRgOn	fourgonner	VER	VER			sub:pre:2s;	f_u_R|g_O_n_#	f_ou_r|g_o_nn_es	0.0	0.0	synthetic
@@ -13774,10 +13774,10 @@ tourneboulées	tuRn°bule	tournebouler	VER	VER	f	p	par:pas;	t_u_R|n_°|b_u|l_e_#
 autographiés	OtOgRafje	autographier	VER	VER	m	p	par:pas;	O|t_O|g_R_a|f_j_e_#	au|t_o|g_r_a|ph_i_é_s	0.0	0.0	synthetic
 autographiée	OtOgRafje	autographier	VER	VER	f	s	par:pas;	O|t_O|g_R_a|f_j_e_#	au|t_o|g_r_a|ph_i_é_e	0.0	0.0	synthetic
 autographiées	OtOgRafje	autographier	VER	VER	f	p	par:pas;	O|t_O|g_R_a|f_j_e_#	au|t_o|g_r_a|ph_i_é_es	0.0	0.0	synthetic
-autographiâtes	otogRafjat	autographier	VER	VER			ind:pas:2p;	o|t_o|g_R_a|f_j_a_t_#	au|t_o|g_r_a|ph_i_â_t_es	0.0	0.0	synthetic
-autographie	otogRafi	autographier	VER	VER			sub:pre:1s;	o|t_o|g_R_a|f_i_#	au|t_o|g_r_a|ph_i_e	0.0	0.0	synthetic
-autographies	otogRafi	autographier	VER	VER			sub:pre:2s;	o|t_o|g_R_a|f_i_#	au|t_o|g_r_a|ph_i_es	0.0	0.0	synthetic
-autographie	otogRafi	autographier	VER	VER			sub:pre:3s;	o|t_o|g_R_a|f_i_#	au|t_o|g_r_a|ph_i_e	0.0	0.0	synthetic
+autographiâtes	OtOgRafjat	autographier	VER	VER			ind:pas:2p;	O|t_O|g_R_a|f_j_a_t_#	au|t_o|g_r_a|ph_i_â_t_es	0.0	0.0	synthetic
+autographie	OtOgRafi	autographier	VER	VER			sub:pre:1s;	O|t_O|g_R_a|f_i_#	au|t_o|g_r_a|ph_i_e	0.0	0.0	synthetic
+autographies	OtOgRafi	autographier	VER	VER			sub:pre:2s;	O|t_O|g_R_a|f_i_#	au|t_o|g_r_a|ph_i_es	0.0	0.0	synthetic
+autographie	OtOgRafi	autographier	VER	VER			sub:pre:3s;	O|t_O|g_R_a|f_i_#	au|t_o|g_r_a|ph_i_e	0.0	0.0	synthetic
 joutés	Zute	jouter	VER	VER	m	p	par:pas;	Z_u|t_e_#	j_ou|t_é_s	0.0	0.0	synthetic
 joutée	Zute	jouter	VER	VER	f	s	par:pas;	Z_u|t_e_#	j_ou|t_é_e	0.0	0.0	synthetic
 joutées	Zute	jouter	VER	VER	f	p	par:pas;	Z_u|t_e_#	j_ou|t_é_es	0.0	0.0	synthetic
@@ -39403,8 +39403,8 @@ ovariectomies	OvaRjEktOmi	ovariectomie	NOM	NOM	f	p		O|v_a|R_j_E_k|t_O|m_i_#	o|v_
 ovariotomies	ovaRjotomi	ovariotomie	NOM	NOM	f	p		o|v_a|R_j_o|t_o|m_i_#	o|v_a|r_i_o|t_o|m_i_es	0.0	0.0	synthetic
 ovines	ovin	ovin	ADJ	ADJ	f	p		o|v_i_n_#	o|v_i_n_es	0.0	0.0	synthetic
 ovine	ovin	ovin	ADJ	ADJ	f	s		o|v_i_n_#	o|v_i_n_e	0.0	0.0	synthetic
-ovoïdales	ovoidal	ovoïdal	ADJ	ADJ	f	p		o|v_o|i|d_a_l_#	o|v_o|ï|d_a_l_es	0.0	0.0	synthetic
-ovoïdaux	ovoido	ovoïdal	ADJ	ADJ	m	p		o|v_o|i|d_o_#	o|v_o|ï|d_au_x	0.0	0.0	synthetic
+ovoïdales	OvOidal	ovoïdal	ADJ	ADJ	f	p		O|v_O|i|d_a_l_#	o|v_o|ï|d_a_l_es	0.0	0.0	synthetic
+ovoïdaux	OvOido	ovoïdal	ADJ	ADJ	m	p		O|v_O|i|d_o_#	o|v_o|ï|d_au_x	0.0	0.0	synthetic
 ovulaires	ovylER	ovulaire	ADJ	ADJ	f	p		o|v_y|l_E_R_#	o|v_u|l_ai_r_es	0.0	0.0	synthetic
 ovées	Ove	ové	ADJ	ADJ	f	p		O|v_e_#	o|v_é_es	0.0	0.0	synthetic
 ovés	Ove	ové	ADJ	ADJ	m	p		O|v_e_#	o|v_é_s	0.0	0.0	synthetic
@@ -42619,7 +42619,7 @@ marquent	maRk	marquer	VER	VER			sub:pre:3p;	m_a_R_k_#	m_a_r_qu_ent	0.0	0.0	synth
 piaillent	pjaj	piailler	VER	VER			sub:pre:3p;	p_j_a_j_#	p_i_a_ill_ent	0.0	0.0	synthetic
 francisent	fR@siz	franciser	VER	VER			sub:pre:3p;	f_R_@|s_i_z_#	f_r_an|c_i_s_ent	0.0	0.0	synthetic
 mâchent	maS	mâcher	VER	VER			sub:pre:3p;	m_a_S_#	m_â_ch_ent	0.0	0.0	synthetic
-autographient	otogRafi	autographier	VER	VER			sub:pre:3p;	o|t_o|g_R_a|f_i_#	au|t_o|g_r_a|ph_i_ent	0.0	0.0	synthetic
+autographient	OtOgRafi	autographier	VER	VER			sub:pre:3p;	O|t_O|g_R_a|f_i_#	au|t_o|g_r_a|ph_i_ent	0.0	0.0	synthetic
 éditent	edit	éditer	VER	VER			sub:pre:3p;	e|d_i_t_#	é|d_i_t_ent	0.0	0.0	synthetic
 scotchent	skOtS	scotcher	VER	VER			sub:pre:3p;	s_k_O_t_S_#	s_c_o_t_ch_ent	0.0	0.0	synthetic
 puent	py	puer	VER	VER			sub:pre:3p;	p_y_#	p_u_ent	0.0	0.0	synthetic
@@ -45408,7 +45408,7 @@ quêtent	kEt	quêter	VER	VER			sub:pre:3p;	k_E_t_#	qu_ê_t_ent	0.0	0.0	synthetic
 habillent	abij	habiller	VER	VER			sub:pre:3p;	#_a|b_i_j_#	h_a|b_i_ll_ent	0.0	0.0	synthetic
 numérotent	nymeROt	numéroter	VER	VER			sub:pre:3p;	n_y|m_e|R_O_t_#	n_u|m_é|r_o_t_ent	0.0	0.0	synthetic
 synchronisent	s5kRoniz	synchroniser	VER	VER			sub:pre:3p;	s_5|k_R_o|n_i_z_#	s_yn|ch_r_o|n_i_s_ent	0.0	0.0	synthetic
-corroborent	koRobOR	corroborer	VER	VER			sub:pre:3p;	k_o|R_o|b_O_R_#	c_o|rr_o|b_o_r_ent	0.0	0.0	synthetic
+corroborent	kORObOR	corroborer	VER	VER			sub:pre:3p;	k_O|R_O|b_O_R_#	c_o|rr_o|b_o_r_ent	0.0	0.0	synthetic
 démarquent	demaRk	démarquer	VER	VER			sub:pre:3p;	d_e|m_a_R_k_#	d_é|m_a_r_qu_ent	0.0	0.0	synthetic
 cotisent	kotiz	cotiser	VER	VER			sub:pre:3p;	k_o|t_i_z_#	c_o|t_i_s_ent	0.0	0.0	synthetic
 ligotent	ligOt	ligoter	VER	VER			sub:pre:3p;	l_i|g_O_t_#	l_i|g_o_t_ent	0.0	0.0	synthetic
@@ -45520,7 +45520,7 @@ immigrent	imigR	immigrer	VER	VER			sub:pre:3p;	i|m_i_g_R_#	i|mm_i_g_r_ent	0.0	0.
 irritent	iRit	irriter	VER	VER			sub:pre:3p;	i|R_i_t_#	i|rr_i_t_ent	0.0	0.0	synthetic
 stupéfient	stypefi	stupéfier	VER	VER			sub:pre:3p;	s_t_y|p_e|f_i_#	s_t_u|p_é|f_i_ent	0.0	0.0	synthetic
 replantent	R°pl@t	replanter	VER	VER			sub:pre:3p;	R_°|p_l_@_t_#	r_e|p_l_an_t_ent	0.0	0.0	synthetic
-monopolisent	monopoliz	monopoliser	VER	VER			sub:pre:3p;	m_o|n_o|p_o|l_i_z_#	m_o|n_o|p_o|l_i_s_ent	0.0	0.0	synthetic
+monopolisent	mOnOpOliz	monopoliser	VER	VER			sub:pre:3p;	m_O|n_O|p_O|l_i_z_#	m_o|n_o|p_o|l_i_s_ent	0.0	0.0	synthetic
 décernent	desERn	décerner	VER	VER			sub:pre:3p;	d_e|s_E_R_n_#	d_é|c_e_r_n_ent	0.0	0.0	synthetic
 assoiffent	aswaf	assoiffer	VER	VER			sub:pre:3p;	a|s_wa_f_#	a|ss_oi_ff_ent	0.0	0.0	synthetic
 convulsent	k§vyls	convulser	VER	VER			sub:pre:3p;	k_§|v_y_l_s_#	c_on|v_u_l_s_ent	0.0	0.0	synthetic
@@ -48810,3 +48810,167 @@ recrée	R°kRe	recréer	VER	VER			sub:pre:3s;	R_°|k_R_e_#	r_e|c_r_é_e	0.0	0.0	
 recrée	R°kRe	recréer	VER	VER			imp:pre:2s;	R_°|k_R_e_#	r_e|c_r_é_e	0.0	0.0	synthetic
 recréez	R°kRee	recréer	VER	VER			imp:pre:2p;	R_°|k_R_e|e	r_e|c_r_é|ez	0.0	0.0	synthetic
 dessoulée	dEsule	dessouler	VER	VER	f	s	par:pas;	d_E|s_u|l_e_#	d_e|ss_ou|l_é_e	0.0	0.0	synthetic
+acnéique	akneik	acnéique	ADJ	ADJ	f	s		a_k|n_e|i_k_#	a_c|n_é|i_qu_e	0.0	0.0	synthetic
+aggiornamentos	aZjORnamEnto	aggiornamento	NOM	NOM	m	p		a|Z_#_j_O_R|n_a|m_E_n|t_o_#	a|g_g_i_o_r|n_a|m_e_n|t_o_s	0.0	0.0	synthetic
+amyotrophiques	amjotRofik	amyotrophique	ADJ	ADJ	f	p		a|m_j_o|t_R_o|f_i_k_#	a|m_y_o|t_r_o|ph_i_qu_es	0.0	0.0	synthetic
+anodiques	anOdik	anodique	ADJ	ADJ	f	p		a|n_O|d_i_k_#	a|n_o|d_i_qu_es	0.0	0.0	synthetic
+anthropomorphiques	@tRopomORfik	anthropomorphique	ADJ	ADJ	f	p		@|t_R_o|p_o|m_O_R|f_i_k_#	an|th_r_o|p_o|m_o_r|ph_i_qu_es	0.0	0.0	synthetic
+antialcooliques	@tialkolik	antialcoolique	ADJ	ADJ	f	p		@|t_i|a_l|k_o|l_i_k_#	an|t_i|a_l|c_oo|l_i_qu_es	0.0	0.0	synthetic
+antibolchevique	@tibOlS°vik	antibolchevique	ADJ	ADJ	f	s		@|t_i|b_O_l|S_°|v_i_k_#	an|t_i|b_o_l|ch_e|v_i_qu_e	0.0	0.0	synthetic
+anticatholiques	@tikatolik	anticatholique	ADJ	ADJ	f	p		@|t_i|k_a|t_o|l_i_k_#	an|t_i|c_a|th_o|l_i_qu_es	0.0	0.0	synthetic
+anticycliques	@tisiklik	anticyclique	ADJ	ADJ	f	p		@|t_i|s_i|k_l_i_k_#	an|t_i|c_y|c_l_i_qu_es	0.0	0.0	synthetic
+anticyclonique	@tisiklonik	anticyclonique	ADJ	ADJ	f	s		@|t_i|s_i|k_l_o|n_i_k_#	an|t_i|c_y|c_l_o|n_i_qu_e	0.0	0.0	synthetic
+antihygiéniques	@tiiZjenik	antihygiénique	ADJ	ADJ	f	p		@|t_i_#|i|Z_j_e|n_i_k_#	an|t_i_h|y|g_i_é|n_i_qu_es	0.0	0.0	synthetic
+antiscientifiques	@tisj@tifik	antiscientifique	ADJ	ADJ	f	p		@|t_i|s_j_@|t_i|f_i_k_#	an|t_i|sc_i_en|t_i|f_i_qu_es	0.0	0.0	synthetic
+apodictiques	apodiktik	apodictique	ADJ	ADJ	f	p		a|p_o|d_i_k|t_i_k_#	a|p_o|d_i_c|t_i_qu_es	0.0	0.0	synthetic
+aponévrotiques	aponevROtik	aponévrotique	ADJ	ADJ	f	p		a|p_o|n_e|v_R_O|t_i_k_#	a|p_o|n_é|v_r_o|t_i_qu_es	0.0	0.0	synthetic
+autodidactiques	otodidaktik	autodidactique	ADJ	ADJ	f	p		o|t_o|d_i|d_a_k|t_i_k_#	au|t_o|d_i|d_a_c|t_i_qu_es	0.0	0.0	synthetic
+autologue	otolOg	autologue	ADJ	ADJ	f	s		o|t_o|l_O_g_#	au|t_o|l_o_gu_e	0.0	0.0	synthetic
+autoérotiques	otoeROtik	autoérotique	ADJ	ADJ	f	p		o|t_o|e|R_O|t_i_k_#	au|t_o|é|r_o|t_i_qu_es	0.0	0.0	synthetic
+ayuntamientos	ajuntamjEnto	ayuntamiento	NOM	NOM	m	p		a|j_u_n|t_a|m_j_E_n|t_o_#	a|y_u_n|t_a|m_i_e_n|t_o_s	0.0	0.0	synthetic
+bibliophiliques	biblijofilik	bibliophilique	ADJ	ADJ	f	p		b_i|b_l_ij|o|f_i|l_i_k_#	b_i|b_l_i|o|ph_i|l_i_qu_es	0.0	0.0	synthetic
+botuliques	bOtylik	botulique	ADJ	ADJ	f	p		b_O|t_y|l_i_k_#	b_o|t_u|l_i_qu_es	0.0	0.0	synthetic
+catalaunique	katalonik	catalaunique	ADJ	ADJ	f	s		k_a|t_a|l_o|n_i_k_#	c_a|t_a|l_au|n_i_qu_e	0.0	0.0	synthetic
+catarrhales	kataRal	catarrhal	ADJ	ADJ	f	p		k_a|t_a|R_#_a_l_#	c_a|t_a|rr_h_a_l_es	0.0	0.0	synthetic
+catarrhale	kataRal	catarrhal	ADJ	ADJ	f	s		k_a|t_a|R_#_a_l_#	c_a|t_a|rr_h_a_l_e	0.0	0.0	synthetic
+chaldaïque	kaldaik	chaldaïque	ADJ	ADJ	f	s		k_a_l|d_a|i_k_#	ch_a_l|d_a|ï_qu_e	0.0	0.0	synthetic
+chaplinesques	SaplinEsk	chaplinesque	ADJ	ADJ	f	p		S_a|p_l_i|n_E_s_k_#	ch_a|p_l_i|n_e_s_qu_es	0.0	0.0	synthetic
+christiques	kRistik	christique	ADJ	ADJ	f	p		k_R_i_s|t_i_k_#	ch_r_i_s|t_i_qu_es	0.0	0.0	synthetic
+chérubiniques	SeRybinik	chérubinique	ADJ	ADJ	f	p		S_e|R_y|b_i|n_i_k_#	ch_é|r_u|b_i|n_i_qu_es	0.0	0.0	synthetic
+cloniques	klOnik	clonique	ADJ	ADJ	f	p		k_l_O|n_i_k_#	c_l_o|n_i_qu_es	0.0	0.0	synthetic
+contrapuntiques	k§tRap§tik	contrapuntique	ADJ	ADJ	f	p		k_§|t_R_a|p_§|t_i_k_#	c_on|t_r_a|p_un|t_i_qu_es	0.0	0.0	synthetic
+coprologiques	kopRoloZik	coprologique	ADJ	ADJ	f	p		k_o|p_R_o|l_o|Z_i_k_#	c_o|p_r_o|l_o|g_i_qu_es	0.0	0.0	synthetic
+cradoques	kRadOk	cradoque	ADJ	ADJ	f	p		k_R_a|d_O_k_#	c_r_a|d_o_qu_es	0.0	0.0	synthetic
+cryoniques	kRijonik	cryonique	ADJ	ADJ	f	p		k_R_ij|o|n_i_k_#	c_r_y|o|n_i_qu_es	0.0	0.0	synthetic
+cryptos	kRipto	crypto	NOM	NOM	m	p		k_R_i_p|t_o_#	c_r_y_p|t_o_s	0.0	0.0	synthetic
+cryptogamiques	kRiptogamik	cryptogamique	ADJ	ADJ	f	p		k_R_i_p|t_o|g_a|m_i_k_#	c_r_y_p|t_o|g_a|m_i_qu_es	0.0	0.0	synthetic
+culbutos	kylbyto	culbuto	NOM	NOM	m	p		k_y_l|b_y|t_o_#	c_u_l|b_u|t_o_s	0.0	0.0	synthetic
+cycloïdale	sikloidal	cycloïdal	ADJ	ADJ	f	s		s_i|k_l_o|i|d_a_l_#	c_y|c_l_o|ï|d_a_l_e	0.0	0.0	synthetic
+diachroniques	djakRonik	diachronique	ADJ	ADJ	f	p		d_j_a|k_R_o|n_i_k_#	d_i_a|ch_r_o|n_i_qu_es	0.0	0.0	synthetic
+diaphragmatiques	djafRagmatik	diaphragmatique	ADJ	ADJ	f	p		d_j_a|f_R_a_g|m_a|t_i_k_#	d_i_a|ph_r_a_g|m_a|t_i_qu_es	0.0	0.0	synthetic
+divertimentos	divERtimEnto	divertimento	NOM	NOM	m	p		d_i|v_E_R|t_i|m_E_n|t_o_#	d_i|v_e_r|t_i|m_e_n|t_o_s	0.0	0.0	synthetic
+dynamométriques	dinamometRik	dynamométrique	ADJ	ADJ	f	p		d_i|n_a|m_o|m_e|t_R_i_k_#	d_y|n_a|m_o|m_é|t_r_i_qu_es	0.0	0.0	synthetic
+dynastiques	dinastik	dynastique	ADJ	ADJ	f	p		d_i|n_a_s|t_i_k_#	d_y|n_a_s|t_i_qu_es	0.0	0.0	synthetic
+démotiques	demotik	démotique	ADJ	ADJ	f	p		d_e|m_o|t_i_k_#	d_é|m_o|t_i_qu_es	0.0	0.0	synthetic
+ectodermiques	EktOdERmik	ectodermique	ADJ	ADJ	f	p		E_k|t_O|d_E_R|m_i_k_#	e_c|t_o|d_e_r|m_i_qu_es	0.0	0.0	synthetic
+ectopiques	EktOpik	ectopique	ADJ	ADJ	f	p		E_k|t_O|p_i_k_#	e_c|t_o|p_i_qu_es	0.0	0.0	synthetic
+eidétiques	Edetik	eidétique	ADJ	ADJ	f	p		E|d_e|t_i_k_#	ei|d_é|t_i_qu_es	0.0	0.0	synthetic
+endothermiques	@dotERmik	endothermique	ADJ	ADJ	f	p		@|d_o|t_E_R|m_i_k_#	en|d_o|th_e_r|m_i_qu_es	0.0	0.0	synthetic
+esperantos	EspeR@to	esperanto	NOM	NOM	m	p		E_s|p_e|R_@|t_o_#	e_s|p_e|r_an|t_o_s	0.0	0.0	synthetic
+espérantos	EspeR@to	espéranto	NOM	NOM	m	p		E_s|p_e|R_@|t_o_#	e_s|p_é|r_an|t_o_s	0.0	0.0	synthetic
+ethmoïdale	EtmOidal	ethmoïdal	ADJ	ADJ	f	s		E_t|m_O|i|d_a_l_#	e_th|m_o|ï|d_a_l_e	0.0	0.0	synthetic
+eurythmique	2Ritmik	eurythmique	ADJ	ADJ	f	s		2|R_i_t|m_i_k_#	eu|r_y_th|m_i_qu_e	0.0	0.0	synthetic
+exothermiques	EgzotERmik	exothermique	ADJ	ADJ	f	p		E_gz|o|t_E_R|m_i_k_#	e_x|o|th_e_r|m_i_qu_es	0.0	0.0	synthetic
+extragalactiques	EkstRagalaktik	extragalactique	ADJ	ADJ	f	p		E|ks_t_R_a|g_a|l_a_k|t_i_k_#	e|x_t_r_a|g_a|l_a_c|t_i_qu_es	0.0	0.0	synthetic
+fantasmatiques	f@tasmatik	fantasmatique	ADJ	ADJ	f	p		f_@|t_a_s|m_a|t_i_k_#	f_an|t_a_s|m_a|t_i_qu_es	0.0	0.0	synthetic
+ferrique	fERik	ferrique	ADJ	ADJ	f	s		f_E|R_i_k_#	f_e|rr_i_qu_e	0.0	0.0	synthetic
+galliques	galik	gallique	ADJ	ADJ	f	p		g_a|l_i_k_#	g_a|ll_i_qu_es	0.0	0.0	synthetic
+galvaniques	galvanik	galvanique	ADJ	ADJ	f	p		g_a_l|v_a|n_i_k_#	g_a_l|v_a|n_i_qu_es	0.0	0.0	synthetic
+hanséatiques	@seatik	hanséatique	ADJ	ADJ	f	p		#_@|s_e|a|t_i_k_#	h_an|s_é|a|t_i_qu_es	0.0	0.0	synthetic
+herméneutiques	ERmen2tik	herméneutique	ADJ	ADJ	f	p		#_E_R|m_e|n_2|t_i_k_#	h_e_r|m_é|n_eu|t_i_qu_es	0.0	0.0	synthetic
+herpétiques	ERpetik	herpétique	ADJ	ADJ	f	p		#_E_R|p_e|t_i_k_#	h_e_r|p_é|t_i_qu_es	0.0	0.0	synthetic
+hippopotamesques	ipopotamEsk	hippopotamesque	ADJ	ADJ	f	p		#_i|p_o|p_o|t_a|m_E_s_k_#	h_i|pp_o|p_o|t_a|m_e_s_qu_es	0.0	0.0	synthetic
+horrifiques	oRifik	horrifique	ADJ	ADJ	f	p		#_o|R_i|f_i_k_#	h_o|rr_i|f_i_qu_es	0.0	0.0	synthetic
+hydrodynamiques	idRodinamik	hydrodynamique	ADJ	ADJ	f	p		#_i|d_R_o|d_i|n_a|m_i_k_#	h_y|d_r_o|d_y|n_a|m_i_qu_es	0.0	0.0	synthetic
+hydropiques	idRopik	hydropique	ADJ	ADJ,NOM	f	p		#_i|d_R_o|p_i_k_#	h_y|d_r_o|p_i_qu_es	0.0	0.0	synthetic
+hydroélectriques	idRoelEktRik	hydroélectrique	ADJ	ADJ	f	p		#_i|d_R_o|e|l_E_k|t_R_i_k_#	h_y|d_r_o|é|l_e_c|t_r_i_qu_es	0.0	0.0	synthetic
+hylémorphiques	ilemoRfik	hylémorphique	ADJ	ADJ	f	p		#_i|l_e|m_o_R|f_i_k_#	h_y|l_é|m_o_r|ph_i_qu_es	0.0	0.0	synthetic
+hypertrophiques	ipERtRofik	hypertrophique	ADJ	ADJ	f	p		#_i|p_E_R|t_R_o|f_i_k_#	h_y|p_e_r|t_r_o|ph_i_qu_es	0.0	0.0	synthetic
+hébéphréniques	ebefRenik	hébéphrénique	ADJ	ADJ	f	p		#_e|b_e|f_R_e|n_i_k_#	h_é|b_é|ph_r_é|n_i_qu_es	0.0	0.0	synthetic
+hématologiques	ematOlOZik	hématologique	ADJ	ADJ	f	p		#_e|m_a|t_O|l_O|Z_i_k_#	h_é|m_a|t_o|l_o|g_i_qu_es	0.0	0.0	synthetic
+hémolytiques	emolitik	hémolytique	ADJ	ADJ	f	p		#_e|m_o|l_i|t_i_k_#	h_é|m_o|l_y|t_i_qu_es	0.0	0.0	synthetic
+iconographiques	ikonogRafik	iconographique	ADJ	ADJ	f	p		i|k_o|n_o|g_R_a|f_i_k_#	i|c_o|n_o|g_r_a|ph_i_qu_es	0.0	0.0	synthetic
+inorganiques	inORganik	inorganique	ADJ	ADJ	f	p		i|n_O_R|g_a|n_i_k_#	i|n_o_r|g_a|n_i_qu_es	0.0	0.0	synthetic
+interétatiques	5tERetatik	interétatique	ADJ	ADJ	f	p		5|t_E|R_e|t_a|t_i_k_#	in|t_e|r_é|t_a|t_i_qu_es	0.0	0.0	synthetic
+intracardiaques	5tRakaRdjak	intracardiaque	ADJ	ADJ	f	p		5|t_R_a|k_a_R|d_j_a_k_#	in|t_r_a|c_a_r|d_i_a_qu_es	0.0	0.0	synthetic
+isométriques	izOmetRik	isométrique	ADJ	ADJ	f	p		i|z_O|m_e|t_R_i_k_#	i|s_o|m_é|t_r_i_qu_es	0.0	0.0	synthetic
+isothermiques	izOtERmik	isothermique	ADJ	ADJ	f	p		i|z_O|t_E_R|m_i_k_#	i|s_o|th_e_r|m_i_qu_es	0.0	0.0	synthetic
+isotoniques	izOtOnik	isotonique	ADJ	ADJ	f	p		i|z_O|t_O|n_i_k_#	i|s_o|t_o|n_i_qu_es	0.0	0.0	synthetic
+isotopiques	izotopik	isotopique	ADJ	ADJ	f	p		i|z_o|t_o|p_i_k_#	i|s_o|t_o|p_i_qu_es	0.0	0.0	synthetic
+isthmiques	ismik	isthmique	ADJ	ADJ	f	p		i_s_#_#|m_i_k_#	i_s_t_h|m_i_qu_es	0.0	0.0	synthetic
+kotos	koto	koto	NOM	NOM	m	p		k_o|t_o_#	k_o|t_o_s	0.0	0.0	synthetic
+kystiques	kistik	kystique	ADJ	ADJ	f	p		k_i_s|t_i_k_#	k_y_s|t_i_qu_es	0.0	0.0	synthetic
+lamentos	lamEnto	lamento	NOM	NOM	m	p		l_a|m_E_n|t_o_#	l_a|m_e_n|t_o_s	0.0	0.0	synthetic
+laryngologiques	laR5gOlOZik	laryngologique	ADJ	ADJ	f	p		l_a|R_5|g_O|l_O|Z_i_k_#	l_a|r_yn|g_o|l_o|g_i_qu_es	0.0	0.0	synthetic
+lettrique	lEtRik	lettrique	ADJ	ADJ	f	s		l_E|t_R_i_k_#	l_e|tt_r_i_qu_e	0.0	0.0	synthetic
+machiniques	maSinik	machinique	ADJ	ADJ	f	p		m_a|S_i|n_i_k_#	m_a|ch_i|n_i_qu_es	0.0	0.0	synthetic
+mitotiques	mitOtik	mitotique	ADJ	ADJ	f	p		m_i|t_O|t_i_k_#	m_i|t_o|t_i_qu_es	0.0	0.0	synthetic
+mnésique	mnezik	mnésique	ADJ	ADJ	f	s		m_n_e|z_i_k_#	m_n_é|s_i_qu_e	0.0	0.0	synthetic
+moliéresques	moljeREsk	moliéresque	ADJ	ADJ	f	p		m_o|l_j_e|R_E_s_k_#	m_o|l_i_é|r_e_s_qu_es	0.0	0.0	synthetic
+multirisques	myltiRisk	multirisque	ADJ	ADJ	f	p		m_y_l|t_i|R_i_s_k_#	m_u_l|t_i|r_i_s_qu_es	0.0	0.0	synthetic
+muséologiques	myzeOlOZik	muséologique	ADJ	ADJ	f	p		m_y|z_e|O|l_O|Z_i_k_#	m_u|s_é|o|l_o|g_i_qu_es	0.0	0.0	synthetic
+myocardiques	mjOkaRdik	myocardique	ADJ	ADJ	f	p		m_j_O|k_a_R|d_i_k_#	m_y_o|c_a_r|d_i_qu_es	0.0	0.0	synthetic
+mystagogiques	mistagOZik	mystagogique	ADJ	ADJ	f	p		m_i_s|t_a|g_O|Z_i_k_#	m_y_s|t_a|g_o|g_i_qu_es	0.0	0.0	synthetic
+mégalithiques	megalitik	mégalithique	ADJ	ADJ	f	p		m_e|g_a|l_i|t_i_k_#	m_é|g_a|l_i|th_i_qu_es	0.0	0.0	synthetic
+mésozoïques	mezozoik	mésozoïque	ADJ	ADJ,NOM	f	p		m_e|z_o|z_o|i_k_#	m_é|s_o|z_o|ï_qu_es	0.0	0.0	synthetic
+métamorphiques	metamORfik	métamorphique	ADJ	ADJ	f	p		m_e|t_a|m_O_R|f_i_k_#	m_é|t_a|m_o_r|ph_i_qu_es	0.0	0.0	synthetic
+méthodologiques	metodoloZik	méthodologique	ADJ	ADJ	f	p		m_e|t_o|d_o|l_o|Z_i_k_#	m_é|th_o|d_o|l_o|g_i_qu_es	0.0	0.0	synthetic
+météoritiques	meteoRitik	météoritique	ADJ	ADJ	f	p		m_e|t_e|o|R_i|t_i_k_#	m_é|t_é|o|r_i|t_i_qu_es	0.0	0.0	synthetic
+neuroniques	n2ROnik	neuronique	ADJ	ADJ	f	p		n_2|R_O|n_i_k_#	n_eu|r_o|n_i_qu_es	0.0	0.0	synthetic
+nodale	nodal	nodal	ADJ	ADJ	f	s		n_o|d_a_l_#	n_o|d_a_l_e	0.0	0.0	synthetic
+nymphales	n5fal	nymphal	ADJ	ADJ	f	p		n_5|f_a_l_#	n_ym|ph_a_l_es	0.0	0.0	synthetic
+nymphale	n5fal	nymphal	ADJ	ADJ	f	s		n_5|f_a_l_#	n_ym|ph_a_l_e	0.0	0.0	synthetic
+oenologiques	2noloZik	oenologique	ADJ	ADJ	f	p		2|n_o|l_o|Z_i_k_#	oe|n_o|l_o|g_i_qu_es	0.0	0.0	synthetic
+oncologiques	§koloZik	oncologique	ADJ	ADJ	f	p		§|k_o|l_o|Z_i_k_#	on|c_o|l_o|g_i_qu_es	0.0	0.0	synthetic
+ophtalmiques	Oftalmik	ophtalmique	ADJ	ADJ	f	p		O_f|t_a_l|m_i_k_#	o_ph|t_a_l|m_i_qu_es	0.0	0.0	synthetic
+opératiques	OpeRatik	opératique	ADJ	ADJ	f	p		O|p_e|R_a|t_i_k_#	o|p_é|r_a|t_i_qu_es	0.0	0.0	synthetic
+orthostatiques	ORtostatik	orthostatique	ADJ	ADJ	f	p		O_R|t_o_s|t_a|t_i_k_#	o_r|th_o_s|t_a|t_i_qu_es	0.0	0.0	synthetic
+ostéologiques	OsteOlOZik	ostéologique	ADJ	ADJ	f	p		O_s|t_e|O|l_O|Z_i_k_#	o_s|t_é|o|l_o|g_i_qu_es	0.0	0.0	synthetic
+paléontologique	pale§toloZik	paléontologique	ADJ	ADJ	f	s		p_a|l_e|§|t_o|l_o|Z_i_k_#	p_a|l_é|on|t_o|l_o|g_i_qu_e	0.0	0.0	synthetic
+paralympique	paRal5pik	paralympique	ADJ	ADJ,NOM	f	s		p_a|R_a|l_5|p_i_k_#	p_a|r_a|l_ym|p_i_qu_e	0.0	0.0	synthetic
+paramétriques	paRametRik	paramétrique	ADJ	ADJ	f	p		p_a|R_a|m_e|t_R_i_k_#	p_a|r_a|m_é|t_r_i_qu_es	0.0	0.0	synthetic
+philotechniques	filotEknik	philotechnique	ADJ	ADJ	f	p		f_i|l_o|t_E_k|n_i_k_#	ph_i|l_o|t_e_ch|n_i_qu_es	0.0	0.0	synthetic
+photiques	fOtik	photique	ADJ	ADJ	f	p		f_O|t_i_k_#	ph_o|t_i_qu_es	0.0	0.0	synthetic
+photoniques	fotonik	photonique	ADJ	ADJ	f	p		f_o|t_o|n_i_k_#	ph_o|t_o|n_i_qu_es	0.0	0.0	synthetic
+photopériodiques	fotopeRjodik	photopériodique	ADJ	ADJ	f	p		f_o|t_o|p_e|R_j_o|d_i_k_#	ph_o|t_o|p_é|r_i_o|d_i_qu_es	0.0	0.0	synthetic
+phraséologiques	fRazeoloZik	phraséologique	ADJ	ADJ	f	p		f_R_a|z_e|o|l_o|Z_i_k_#	ph_r_a|s_é|o|l_o|g_i_qu_es	0.0	0.0	synthetic
+pleurétiques	pl9Retik	pleurétique	ADJ	ADJ	f	p		p_l_9|R_e|t_i_k_#	p_l_eu|r_é|t_i_qu_es	0.0	0.0	synthetic
+pneumoniques	pn2monik	pneumonique	ADJ	ADJ	f	p		p_n_2|m_o|n_i_k_#	p_n_eu|m_o|n_i_qu_es	0.0	0.0	synthetic
+polliniques	polinik	pollinique	ADJ	ADJ	f	p		p_o|l_i|n_i_k_#	p_o|ll_i|n_i_qu_es	0.0	0.0	synthetic
+polygéniques	pOliZenik	polygénique	ADJ	ADJ	f	p		p_O|l_i|Z_e|n_i_k_#	p_o|l_y|g_é|n_i_qu_es	0.0	0.0	synthetic
+pronunciamientos	pRonunsjamjEnto	pronunciamiento	NOM	NOM	m	p		p_R_o|n_u_n|s_j_a|m_j_E_n|t_o_#	p_r_o|n_u_n|c_i_a|m_i_e_n|t_o_s	0.0	0.0	synthetic
+prosodiques	pRozodik	prosodique	ADJ	ADJ	f	p		p_R_o|z_o|d_i_k_#	p_r_o|s_o|d_i_qu_es	0.0	0.0	synthetic
+prothétiques	pROtetik	prothétique	ADJ	ADJ	f	p		p_R_O|t_e|t_i_k_#	p_r_o|th_é|t_i_qu_es	0.0	0.0	synthetic
+protoplasmiques	pRotoplasmik	protoplasmique	ADJ	ADJ	f	p		p_R_o|t_o|p_l_a_s|m_i_k_#	p_r_o|t_o|p_l_a_s|m_i_qu_es	0.0	0.0	synthetic
+protéolytiques	pRoteolitik	protéolytique	ADJ	ADJ	f	p		p_R_o|t_e|o|l_i|t_i_k_#	p_r_o|t_é|o|l_y|t_i_qu_es	0.0	0.0	synthetic
+psychopathiques	psikopatik	psychopathique	ADJ	ADJ	f	p		p_s_i|k_o|p_a|t_i_k_#	p_s_y|ch_o|p_a|th_i_qu_es	0.0	0.0	synthetic
+psychopathologiques	psikopatoloZik	psychopathologique	ADJ	ADJ	f	p		p_s_i|k_o|p_a|t_o|l_o|Z_i_k_#	p_s_y|ch_o|p_a|th_o|l_o|g_i_qu_es	0.0	0.0	synthetic
+psychophysiologiques	psikofizjoloZik	psychophysiologique	ADJ	ADJ	f	p		p_s_i|k_o|f_i|z_j_o|l_o|Z_i_k_#	p_s_y|ch_o|ph_y|s_i_o|l_o|g_i_qu_es	0.0	0.0	synthetic
+pugilistiques	pyZilistik	pugilistique	ADJ	ADJ	f	p		p_y|Z_i|l_i_s|t_i_k_#	p_u|g_i|l_i_s|t_i_qu_es	0.0	0.0	synthetic
+pythagorique	pitagoRik	pythagorique	ADJ	ADJ	f	s		p_i|t_a|g_o|R_i_k_#	p_y|th_a|g_o|r_i_qu_e	0.0	0.0	synthetic
+pédophilique	pedofilik	pédophilique	ADJ	ADJ	f	s		p_e|d_o|f_i|l_i_k_#	p_é|d_o|ph_i|l_i_qu_e	0.0	0.0	synthetic
+périscopiques	peRiskopik	périscopique	ADJ	ADJ	f	p		p_e|R_i_s|k_o|p_i_k_#	p_é|r_i_s|c_o|p_i_qu_es	0.0	0.0	synthetic
+rabiques	Rabik	rabique	ADJ	ADJ	f	p		R_a|b_i_k_#	r_a|b_i_qu_es	0.0	0.0	synthetic
+radiographiques	RadjogRafik	radiographique	ADJ	ADJ	f	p		R_a|d_j_o|g_R_a|f_i_k_#	r_a|d_i_o|g_r_a|ph_i_qu_es	0.0	0.0	synthetic
+raphaélesques	RafaelEsk	raphaélesque	ADJ	ADJ	f	p		R_a|f_a|e|l_E_s_k_#	r_a|ph_a|é|l_e_s_qu_es	0.0	0.0	synthetic
+rhomboïdale	R§boidal	rhomboïdal	ADJ	ADJ	f	s		R_#_§|b_o|i|d_a_l_#	r_h_om|b_o|ï|d_a_l_e	0.0	0.0	synthetic
+saliques	salik	salique	ADJ	ADJ	f	p		s_a|l_i_k_#	s_a|l_i_qu_es	0.0	0.0	synthetic
+sardanapalesque	saRdanapalEsk	sardanapalesque	ADJ	ADJ	f	s		s_a_R|d_a|n_a|p_a|l_E_s_k_#	s_a_r|d_a|n_a|p_a|l_e_s_qu_e	0.0	0.0	synthetic
+scénaristiques	senaRistik	scénaristique	ADJ	ADJ	f	p		s_e|n_a|R_i_s|t_i_k_#	sc_é|n_a|r_i_s|t_i_qu_es	0.0	0.0	synthetic
+septicémiques	sEptisemik	septicémique	ADJ	ADJ	f	p		s_E_p|t_i|s_e|m_i_k_#	s_e_p|t_i|c_é|m_i_qu_es	0.0	0.0	synthetic
+sismologiques	sismoloZik	sismologique	ADJ	ADJ	f	p		s_i_s|m_o|l_o|Z_i_k_#	s_i_s|m_o|l_o|g_i_qu_es	0.0	0.0	synthetic
+sociopolitiques	sOsjopOlitik	sociopolitique	ADJ	ADJ	f	p		s_O|s_j_o|p_O|l_i|t_i_k_#	s_o|c_i_o|p_o|l_i|t_i_qu_es	0.0	0.0	synthetic
+spastiques	spastik	spastique	ADJ	ADJ	f	p		s_p_a_s|t_i_k_#	s_p_a_s|t_i_qu_es	0.0	0.0	synthetic
+spectrométriques	spEktRometRik	spectrométrique	ADJ	ADJ	f	p		s_p_E_k|t_R_o|m_e|t_R_i_k_#	s_p_e_c|t_r_o|m_é|t_r_i_qu_es	0.0	0.0	synthetic
+streptococciques	stREptOkOksik	streptococcique	ADJ	ADJ	f	p		s_t_R_E_p|t_O|k_O_k|s_i_k_#	s_t_r_e_p|t_o|c_o_c|c_i_qu_es	0.0	0.0	synthetic
+subcarpatiques	sypkaRpatik	subcarpatique	ADJ	ADJ	f	p		s_y_p|k_a_R|p_a|t_i_k_#	s_u_b|c_a_r|p_a|t_i_qu_es	0.0	0.0	synthetic
+substantifiques	sypst@tifik	substantifique	ADJ	ADJ	f	p		s_y_p|s_t_@|t_i|f_i_k_#	s_u_b|s_t_an|t_i|f_i_qu_es	0.0	0.0	synthetic
+synergiques	sinERZik	synergique	ADJ	ADJ	f	p		s_i|n_E_R|Z_i_k_#	s_y|n_e_r|g_i_qu_es	0.0	0.0	synthetic
+séborrhéiques	sebOReik	séborrhéique	ADJ	ADJ	f	p		s_e|b_O|R_#_e|i_k_#	s_é|b_o|rr_h_é|i_qu_es	0.0	0.0	synthetic
+sémaphorique	semafoRik	sémaphorique	ADJ	ADJ	f	s		s_e|m_a|f_o|R_i_k_#	s_é|m_a|ph_o|r_i_qu_e	0.0	0.0	synthetic
+thalamiques	talamik	thalamique	ADJ	ADJ	f	p		t_a|l_a|m_i_k_#	th_a|l_a|m_i_qu_es	0.0	0.0	synthetic
+thermoélectrique	tERmoelEktRik	thermoélectrique	ADJ	ADJ	f	s		t_E_R|m_o|e|l_E_k|t_R_i_k_#	th_e_r|m_o|é|l_e_c|t_r_i_qu_e	0.0	0.0	synthetic
+thrombolytiques	tR§bOlitik	thrombolytique	ADJ	ADJ	f	p		t_R_§|b_O|l_i|t_i_k_#	th_r_om|b_o|l_y|t_i_qu_es	0.0	0.0	synthetic
+théocratiques	teokRatik	théocratique	ADJ	ADJ	f	p		t_e|o|k_R_a|t_i_k_#	th_é|o|c_r_a|t_i_qu_es	0.0	0.0	synthetic
+topologiques	topoloZik	topologique	ADJ	ADJ	f	p		t_o|p_o|l_o|Z_i_k_#	t_o|p_o|l_o|g_i_qu_es	0.0	0.0	synthetic
+transdermiques	tR@sdERmik	transdermique	ADJ	ADJ	f	p		t_R_@_s|d_E_R|m_i_k_#	t_r_an_s|d_e_r|m_i_qu_es	0.0	0.0	synthetic
+triasiques	tRijasik	triasique	ADJ	ADJ	f	p		t_R_ij|a|s_i_k_#	t_r_i|a|s_i_qu_es	0.0	0.0	synthetic
+trismiques	tRismik	trismique	ADJ	ADJ	f	p		t_R_i_s|m_i_k_#	t_r_i_s|m_i_qu_es	0.0	0.0	synthetic
+ubuesques	ybyEsk	ubuesque	ADJ	ADJ	f	p		y|b_y|E_s_k_#	u|b_u|e_s_qu_es	0.0	0.0	synthetic
+vitrioliques	vitRijOlik	vitriolique	ADJ	ADJ	f	p		v_i|t_R_ij|O|l_i_k_#	v_i|t_r_i|o|l_i_qu_es	0.0	0.0	synthetic
+vocaliques	vokalik	vocalique	ADJ	ADJ	f	p		v_o|k_a|l_i_k_#	v_o|c_a|l_i_qu_es	0.0	0.0	synthetic
+voltaïques	vOltaik	voltaïque	ADJ	ADJ	f	p		v_O_l|t_a|i_k_#	v_o_l|t_a|ï_qu_es	0.0	0.0	synthetic
+volumiques	vOlymik	volumique	ADJ	ADJ	f	p		v_O|l_y|m_i_k_#	v_o|l_u|m_i_qu_es	0.0	0.0	synthetic
+véliques	velik	vélique	ADJ	ADJ	f	p		v_e|l_i_k_#	v_é|l_i_qu_es	0.0	0.0	synthetic
+épigastriques	epigastRik	épigastrique	ADJ	ADJ	f	p		e|p_i|g_a_s|t_R_i_k_#	é|p_i|g_a_s|t_r_i_qu_es	0.0	0.0	synthetic
+éthériques	eteRik	éthérique	ADJ	ADJ	f	p		e|t_e|R_i_k_#	é|th_é|r_i_qu_es	0.0	0.0	synthetic
