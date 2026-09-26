@@ -26,6 +26,7 @@ from an empirically-derived per-template ending table instead
 (deriveConjugationEndingTables, generateMissingConjugatedForm).
 """
 
+import difflib
 import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
 from dataclasses import dataclass
@@ -941,6 +942,103 @@ def deriveConjugationEndingTables(
     )
 
 
+def repairSpliceUnits(rawSyllCV: str) -> str:
+    """
+    Turn the empty units a fixed-length cut leaves (a trailing one: cloue "k_l_u|" cut
+    for the silent e; a leading one: halées "_a|l_e") and the fused "u#"/"ij#" units they
+    were stored as into a sounded unit plus a silent "#" unit, as the attested rows write
+    them (troue "t_R_u_#", hâler "#_a|l_e").
+    """
+    units, boundaries = _unitsAndBoundaries(rawSyllCV)
+    repaired: list[str] = []
+    shift = 0
+    newBoundaries: set[int] = set()
+    for i, unit in enumerate(units):
+        if i in boundaries:
+            newBoundaries.add(i + shift)
+        if unit == "":
+            repaired.append("#")
+        elif len(unit) > 1 and unit.endswith("#"):
+            repaired += [unit[:-1], "#"]
+            shift += 1
+        else:
+            repaired.append(unit)
+    return _joinBreakdown(repaired, newBoundaries)
+
+
+def isWellFormedSplice(phonology: str, rawSyllCV: str) -> bool:
+    """
+    Whether a spliced row is worth emitting: no empty unit left, and a phonology that is
+    the sounded units of its phonemic breakdown, up to the mid-vowel symbols (the
+    normalizer sharpens the two fields' vowels independently: enserre "@sER" beside
+    "@|s_e|R"). The endings are mined by string length, so a target whose radical is
+    shaped unlike its donors' (an -ouer/-uer/-éer verb spliced with the -ier donors of
+    étudi:er: clouerions "kluj§" for "kluRj§") gets a wrong phonology; such a slot is
+    skipped, not repaired.
+    """
+    units, _ = _unitsAndBoundaries(rawSyllCV)
+    if "" in units:
+        return False
+    strip = str.maketrans("", "", "eEo O2 9°".replace(" ", ""))
+    return _joinPhonology(units).translate(strip) == phonology.translate(strip)
+
+
+def reinsertLostNasalUnit(
+        phonology: str, rawSyllCV: str, rawOrthosyllCV: str) -> tuple[str, str] | None:
+    """
+    Repair a row whose syll_cv lost one "n"/"m" unit that the orthosyll_cv still carries
+    fused in the previous unit (enorgueillis: phon "@nORg9ji", syll "@|O_R|g_9|j_i_#",
+    ortho "en|o_r|gu_e|ill_i_s"; the attested rows write "@|n_O_R|..." and
+    "e|n_o_r|..."). The unit is reinserted at the start of the next syllable in both
+    fields, and the ortho unit "en" becomes "e". Returns (syll_cv, orthosyll_cv), or None
+    unless exactly one (position, letter) makes the sounded join equal the phon (up to
+    mid-vowel symbols) and both fields have the same unit count and no empty unit.
+    """
+    units, bounds = _unitsAndBoundaries(rawSyllCV)
+    oUnits, oBounds = _unitsAndBoundaries(rawOrthosyllCV)
+    if len(units) != len(oUnits) or "" in units or "" in oUnits or bounds != oBounds:
+        return None
+    strip = str.maketrans("", "", "eEoO29°")
+    target = phonology.translate(strip)
+    found = [
+        (k, c) for k in range(1, len(units)) for c in "nm"
+        if len(oUnits[k - 1]) == 2 and oUnits[k - 1].endswith(c) and units[k - 1] != c
+        and _joinPhonology(units[:k] + [c] + units[k:]).translate(strip) == target
+    ]
+    if len(found) != 1:
+        return None
+    k, c = found[0]
+    newBounds = {b if b <= k else b + 1 for b in bounds}
+    newUnits = units[:k] + [c] + units[k:]
+    newOUnits = oUnits[:k - 1] + [oUnits[k - 1][0]] + [c] + oUnits[k:]
+    return _joinBreakdown(newUnits, newBounds), _joinBreakdown(newOUnits, newBounds)
+
+
+def rewriteSplicePhon(phonology: str, rawSyllCV: str) -> str | None:
+    """
+    The sounded join of a repaired syll_cv, offered as the phonology of a row whose
+    syll_cv is right but whose stored phon lost a phoneme (clouerions "kluj§" beside
+    "k_l_u_#|R_j_§": the radical's R). Returns None unless the rewrite is safe: the join
+    differs from the stored phon, up to mid-vowel symbols, only by inserted characters
+    (the phon lost a phoneme; a deletion or substitution means the syll_cv lost one:
+    enivre "@|i_v_R" for "@nivR"), no unit is a vowel+glide unit ("ij", "Ej", "8j": those
+    rows have a genuinely wrong syllable too, oublieriez "u|b_l_ij#|R_j_e"), no unit is
+    empty, and the join has no doubled "jj".
+    """
+    units, _ = _unitsAndBoundaries(rawSyllCV)
+    if "" in units or any(len(u) > 1 and u.endswith("j") for u in units):
+        return None
+    joined = _joinPhonology(units)
+    if "jj" in joined:
+        return None
+    strip = str.maketrans("", "", "eEoO29°")
+    a, b = phonology.translate(strip), joined.translate(strip)
+    ops = difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes()
+    if any(tag != "equal" and tag != "insert" for tag, *_ in ops):
+        return None
+    return joined
+
+
 def generateMissingConjugatedForm(
         lemme: Lemme,
         template: ConjugationTemplate,
@@ -981,6 +1079,9 @@ def generateMissingConjugatedForm(
         fieldValues["phonology"], fieldValues["rawSyllCV"], fieldValues["rawOrthosyllCV"],
         endingTables.syllableSplitByCluster, endingTables.midVowelByOrtho,
     )
+    rawSyllCV = repairSpliceUnits(rawSyllCV)
+    if not isWellFormedSplice(phonology, rawSyllCV):
+        return None
     return Word(
         ortho=ortho, phonology=phonology, lemme=lemme,
         gramCat=GramCat.VER, orthoGramCat=[GramCat.VER],

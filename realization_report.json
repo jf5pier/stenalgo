@@ -188,7 +188,7 @@
     "passé",
     "pers_3"
    ],
-   "affectedWords": 11979,
+   "affectedWords": 11982,
    "chosenKeys": [
     20
    ],
@@ -285,7 +285,7 @@
     "imparfait",
     "subjonctif"
    ],
-   "affectedWords": 5797,
+   "affectedWords": 5796,
    "chosenKeys": [
     21
    ],
@@ -364,7 +364,7 @@
     "impératif",
     "pers_1"
    ],
-   "affectedWords": 7488,
+   "affectedWords": 7490,
    "chosenKeys": [
     18
    ],
@@ -449,7 +449,7 @@
     "nbr_p",
     "p"
    ],
-   "affectedWords": 50265,
+   "affectedWords": 50267,
    "chosenKeys": [
     17
    ],
@@ -564,7 +564,7 @@
    "markers": [
     "pers_2"
    ],
-   "affectedWords": 7816,
+   "affectedWords": 7817,
    "chosenKeys": [
     19
    ],
