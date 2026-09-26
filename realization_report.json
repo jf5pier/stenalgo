@@ -5,7 +5,7 @@
     "conditionnel",
     "infinitif"
    ],
-   "affectedWords": 3913,
+   "affectedWords": 3982,
    "chosenKeys": [
     23
    ],
@@ -188,7 +188,7 @@
     "passé",
     "pers_3"
    ],
-   "affectedWords": 11982,
+   "affectedWords": 12489,
    "chosenKeys": [
     20
    ],
@@ -285,7 +285,7 @@
     "imparfait",
     "subjonctif"
    ],
-   "affectedWords": 5796,
+   "affectedWords": 5832,
    "chosenKeys": [
     21
    ],
@@ -364,7 +364,7 @@
     "impératif",
     "pers_1"
    ],
-   "affectedWords": 7490,
+   "affectedWords": 7890,
    "chosenKeys": [
     18
    ],
@@ -449,7 +449,7 @@
     "nbr_p",
     "p"
    ],
-   "affectedWords": 50267,
+   "affectedWords": 50557,
    "chosenKeys": [
     17
    ],
@@ -564,7 +564,7 @@
    "markers": [
     "pers_2"
    ],
-   "affectedWords": 7817,
+   "affectedWords": 8159,
    "chosenKeys": [
     19
    ],
@@ -844,6 +844,10 @@
    [
     "vieux",
     "vieilles"
+   ],
+   [
+    "écrierez",
+    "écrirez"
    ],
    [
     "lampés",
@@ -1530,6 +1534,10 @@
     "airs"
    ],
    [
+    "écrieraient",
+    "écriraient"
+   ],
+   [
     "déculottés",
     "déculottées"
    ],
@@ -1552,6 +1560,10 @@
    [
     "corrompues",
     "corrompus"
+   ],
+   [
+    "décrieraient",
+    "décriraient"
    ],
    [
     "vins",
@@ -1596,6 +1608,10 @@
    [
     "sceaux",
     "sots"
+   ],
+   [
+    "décriront",
+    "décrieront"
    ],
    [
     "mamelouks",
@@ -2128,6 +2144,10 @@
    [
     "échappés",
     "échappées"
+   ],
+   [
+    "écriront",
+    "écrieront"
    ],
    [
     "squatters",
@@ -2846,6 +2866,14 @@
     "vues"
    ],
    [
+    "décrirais",
+    "décrierais"
+   ],
+   [
+    "décrirais",
+    "décrierais"
+   ],
+   [
     "hourras",
     "hourrahs"
    ],
@@ -3478,6 +3506,10 @@
     "faussés"
    ],
    [
+    "décrirai",
+    "décrierai"
+   ],
+   [
     "buter",
     "butter"
    ],
@@ -3570,6 +3602,10 @@
     "échos"
    ],
    [
+    "décrirez",
+    "décrierez"
+   ],
+   [
     "chopées",
     "choppées"
    ],
@@ -3624,6 +3660,10 @@
    [
     "épisses",
     "épices"
+   ],
+   [
+    "écrirai",
+    "écrierai"
    ],
    [
     "relevés",
@@ -3848,6 +3888,14 @@
    [
     "kondos",
     "condos"
+   ],
+   [
+    "écrierais",
+    "écrirais"
+   ],
+   [
+    "écrierais",
+    "écrirais"
    ],
    [
     "lèches",
@@ -4450,6 +4498,10 @@
     "satires"
    ],
    [
+    "décrieras",
+    "décriras"
+   ],
+   [
     "quarres",
     "quarts"
    ],
@@ -5010,6 +5062,10 @@
     "contés"
    ],
    [
+    "écrirons",
+    "écrierons"
+   ],
+   [
     "remplies",
     "remplis"
    ],
@@ -5140,6 +5196,10 @@
    [
     "suis",
     "suies"
+   ],
+   [
+    "décrirons",
+    "décrierons"
    ],
    [
     "convins",
@@ -5392,6 +5452,10 @@
    [
     "fricassées",
     "fricassés"
+   ],
+   [
+    "écriras",
+    "écrieras"
    ],
    [
     "volatiles",

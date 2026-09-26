@@ -851,6 +851,17 @@ class ConjugationEndingTables:
     midVowelByOrtho: dict[MidVowelKey, str]
 
 
+def endingTemplateKey(template: str, infinitiveWord: Word) -> str:
+    """
+    The key the ending tables use for a lemma: its template, split by the glide-aware
+    class of its infinitive. An -ier verb whose infinitive ends in the vowel+glide unit
+    "ij" (crier "k_R_ij|e", trier, plier, oublier) has a radical shaped unlike the
+    "d_j_e" of étudier, so the two must not share endings (crierions spliced from the
+    étudier donors lost its R and doubled its glide).
+    """
+    return template + "#ij" if infinitiveWord.phonology.endswith("ije") else template
+
+
 def deriveConjugationEndingTables(
         theory: dict[Strokes, list[Word]],
         verbisteTemplates: dict[Lemme, str],
@@ -879,7 +890,7 @@ def deriveConjugationEndingTables(
     for lemme, donorInfinitive in infinitiveByLemme.items():
         template = getTrustedTemplate(lemme, verbisteTemplates, exceptions)
         if template is not None:
-            infinitivesByTemplate[template].append(donorInfinitive)
+            infinitivesByTemplate[endingTemplateKey(template, donorInfinitive)].append(donorInfinitive)
 
     infinitiveSuffixByKey: dict[tuple[str, str], str] = {
         (field, template): _longestCommonSuffix([getattr(w, field) for w in infinitiveWords])
@@ -907,6 +918,7 @@ def deriveConjugationEndingTables(
             infinitiveWord = infinitiveByLemme.get(word.lemme)
             if template is None or infinitiveWord is None:
                 continue
+            template = endingTemplateKey(template, infinitiveWord)
             for tag in _rawInfoVerbTags(word):
                 parts = tag.split(":")
                 if len(parts) != 3:
@@ -1062,9 +1074,10 @@ def generateMissingConjugatedForm(
         return None
 
     fieldValues: dict[str, str] = {}
+    tableTemplate = endingTemplateKey(template.name, infinitiveWord)
     for field in CONJUGATION_STRING_FIELDS:
-        suffix = endingTables.infinitiveSuffixByKey.get((field, template.name))
-        endingKey = (field, template.name, code, personNumber)
+        suffix = endingTables.infinitiveSuffixByKey.get((field, tableTemplate))
+        endingKey = (field, tableTemplate, code, personNumber)
         ending = endingTables.slotEndingByKey.get(endingKey)
         matchRate = endingTables.slotMatchRateByKey.get(endingKey, 0.0)
         if suffix is None or ending is None or matchRate < minMatchRate:
