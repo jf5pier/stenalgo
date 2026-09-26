@@ -135,7 +135,7 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 
 ## Verification approach
 
-- `pytest src/test/` must pass after any `.py` change (538 tests at the time of writing).
+- `pytest src/test/` must pass after any `.py` change (649 tests at the time of writing).
 - Behaviour-preserving changes are proven by a full rebuild following the rebuild table in
   `docs/PIPELINE.md`, comparing the md5s of `phonetic_theory.tsv`, `disambiguated_theory.tsv`,
   `resolved_press_sets.json`, `keypress_groups.json`, `realization_report.json`,

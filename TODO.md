@@ -468,7 +468,29 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
     34 Mixte + 21 Synthetic rows. Rebuild: collisions 0/0/0, 649 tests, Plover 170,156 → 170,321 (0
     spellings lost, +165 gained: S2 appended 164 rows, 156 ADJ — the -ique adjectives' plural/gender
     forms now agree with their exemplars). Before-state `scratch/harm-before/`. Families 1 (~40
-    `-onner` loi-de-position verbs) and 3 (suffix-driven pairs) and the `mixed` rows remain open.
+    `-onner` loi-de-position verbs) and 3 (suffix-driven pairs) DECIDED 2026-09-26: left as is (real
+    positional/suffix alternations). Only the `mixed` rows remain open.
+  - The generator's first-syllable exclusion of NON_FINAL_DOUBLED — TESTED AND KEPT 2026-09-26: dropping
+    the `any(boundary <= nucleus …)` condition in `_midVowelContexts` (so a first-syllable `e` before a
+    doubled consonant laxes too) is a net wash on the backtest (14,376 -> 14,375 of 14,529 exact): the
+    `condescend` 23 `e`/`E` rows become 11 `°`/`E`, 18 new `enquête`/`enterre` `e`/`E` misses appear (`e`
+    that stays tense before `rr`/`tt` in non-prefix first syllables), 1 `celait` regression. Now that
+    `util/fixFirstSyllableE.py` put `E` in the infinitives themselves, the rule has nothing left to add;
+    reverted. The `jetterez` 6 rows stay open.
+  - Batch 3, the `mixed` rows APPLIED 2026-09-26 (`util/fixMixedHarmonyVowels.py --apply`, targets in
+    `util/harmonyVowelTargets.tsv`, candidates by `util/buildMixedHarmonyCandidates.py`, all validated by
+    hand against fr.wiktionary, see docs/VOWEL_HARMONY_CANDIDATES.md): `E` before a doubled consonant
+    or `sc`, `O`/`o`/`e` per Wiktionary; left alone: the masculine `-o(t)` / feminine `-Ot(te)` pairs,
+    `boeuf`/`oeuf`, and the 49 `-oter`/`-onner`/... verbs that only flatten the loi de position
+    (`greloter`, `flotter`, `adorer`, `téléphoner`…; `cloner`, `diplômer` stay flattened to `o`);
+    `professeur` is `O` in all its forms (homophones). 282 Mixte + 42 Synthetic rows. `lexique.py` learns
+    `oo-OO` (coopter); Lexique383 gives `professeur`/`professeurs` genre `m` (it was blank, so the reading
+    "s" was a subset of `professeure` "f s" and no press-set group formed). Rebuild: S2 converged, collisions
+    0/0/0, 649 tests, Plover 170,321 -> 171,586 strokes, 0 spellings lost, 1,253 gained (S2 regenerated
+    forms once the strokes moved). Before-state `scratch/mh-before/`, log `scratch/mh-rebuild4.log`.
+    OPEN: `chopper` (no pronunciation); 30 other NOM lemmas have a blank-genre row beside a feminine one
+    (`amateur`, `architecte`, `malade`…), not audited; `agressions` NOM row lost its merge with the
+    `agresser` VER row (harmless).
 - **Pluvier-style TAO prefix/suffix shortcut scan** — go through Pluvier's dictionary rules
   (docs/PRIOR_ART.md; the TAO strokes that emit a whole multi-syllable prefix or suffix from
   one special keystroke), and for each rule measure the payoff in OUR lexicon: the sum of

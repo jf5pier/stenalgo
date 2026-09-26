@@ -19074,16 +19074,15 @@
  },
  {
   "ortho": "professeur",
-  "before": "",
+  "before": "le",
   "after": "",
-  "label": "nom, sg.",
-  "phonology": "pRo.fE.s9R",
-  "steno": "pRae/kpie/s@R",
+  "label": "nom, m. sg.",
+  "phonology": "pRO.fE.s9R",
+  "steno": "pRe/kpie/s@R",
   "strokes": [
    [
     4,
     8,
-    12,
     14
    ],
    [
@@ -34784,10 +34783,11 @@
   "before": "l'",
   "after": "",
   "label": "adjectif, m. sg.",
-  "phonology": "e.ksE.l@",
-  "steno": "e/ksie/mt@",
+  "phonology": "E.ksE.l@",
+  "steno": "ie/ksie/mt@",
   "strokes": [
    [
+    13,
     14
    ],
    [
@@ -68735,9 +68735,9 @@
  },
  {
   "ortho": "téléphoné",
-  "before": "le",
+  "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. sg.",
+  "label": "participe passé, m. sg.",
   "phonology": "te.le.fo.ne",
   "steno": "te/mte/kpae/mRe",
   "strokes": [
@@ -69283,9 +69283,9 @@
  },
  {
   "ortho": "porté",
-  "before": "",
+  "before": "le",
   "after": "",
-  "label": "participe passé, m. sg.",
+  "label": "participe passé, m. sg. · adjectif, m. sg.",
   "phonology": "pOR.te",
   "steno": "peR/t*e",
   "strokes": [
@@ -83480,12 +83480,11 @@
   "before": "la",
   "after": "",
   "label": "nom, f. sg.",
-  "phonology": "ko.lEk.sj§",
-  "steno": "kae/mtiek/sRwai",
+  "phonology": "kO.lEk.sj§",
+  "steno": "ke/mtiek/sRwai",
   "strokes": [
    [
     2,
-    12,
     14
    ],
    [
@@ -101473,15 +101472,14 @@
   "ortho": "violent",
   "before": "le",
   "after": "",
-  "label": "adjectif, m. sg.",
-  "phonology": "vjo.l@",
-  "steno": "vRwae/mt@",
+  "label": "adjectif, m. sg. · nom, m. sg.",
+  "phonology": "vjO.l@",
+  "steno": "vRwe/mt@",
   "strokes": [
    [
     5,
     8,
     9,
-    12,
     14
    ],
    [
@@ -112518,18 +112516,22 @@
   "ortho": "pressée",
   "before": "la",
   "after": "",
-  "label": "adjectif, f. sg. · nom, f. sg.",
-  "phonology": "pRe.se",
-  "steno": "pRe/se",
+  "label": "adjectif, f. sg. · nom, f. sg. · participe passé, f. sg.",
+  "phonology": "pRE.se",
+  "steno": "pRie/se/-j",
   "strokes": [
    [
     4,
     8,
+    13,
     14
    ],
    [
     3,
     14
+   ],
+   [
+    16
    ]
   ],
   "frequency": 11.26
@@ -116101,14 +116103,15 @@
   "before": "",
   "after": "",
   "label": "infinitif",
-  "phonology": "a.te.RiR",
-  "steno": "a/te/RiR",
+  "phonology": "a.tE.RiR",
+  "steno": "a/tie/RiR",
   "strokes": [
    [
     12
    ],
    [
     7,
+    13,
     14
    ],
    [
@@ -140402,14 +140405,13 @@
   "ortho": "professeurs",
   "before": "les",
   "after": "",
-  "label": "nom, pl.",
-  "phonology": "pRo.fE.s9R",
-  "steno": "pRae/kpie/s@R/-s",
+  "label": "nom, m. pl.",
+  "phonology": "pRO.fE.s9R",
+  "steno": "pRe/kpie/s@R/-s",
   "strokes": [
    [
     4,
     8,
-    12,
     14
    ],
    [
@@ -202853,15 +202855,14 @@
   "ortho": "violente",
   "before": "la",
   "after": "",
-  "label": "adjectif, f. sg. · indicatif présent, 3e sg.",
-  "phonology": "vjo.l@t",
-  "steno": "vRwae/mt@t",
+  "label": "adjectif, f. sg.",
+  "phonology": "vjO.l@t",
+  "steno": "vRwe/mt@t",
   "strokes": [
    [
     5,
     8,
     9,
-    12,
     14
    ],
    [
@@ -207159,13 +207160,12 @@
   "before": "la",
   "after": "",
   "label": "nom, f. sg.",
-  "phonology": "no.sj§",
-  "steno": "mRae/sRwai",
+  "phonology": "nO.sj§",
+  "steno": "mRe/sRwai",
   "strokes": [
    [
     6,
     8,
-    12,
     14
    ],
    [
@@ -208169,11 +208169,10 @@
   "before": "les",
   "after": "",
   "label": "nom, f. pl.",
-  "phonology": "op.sj§",
-  "steno": "aejk/sRwai",
+  "phonology": "Op.sj§",
+  "steno": "ejk/sRwai/-s",
   "strokes": [
    [
-    12,
     14,
     16,
     18
@@ -208184,6 +208183,9 @@
     9,
     12,
     13
+   ],
+   [
+    17
    ]
   ],
   "frequency": 4.94
@@ -220555,15 +220557,14 @@
   "ortho": "violents",
   "before": "les",
   "after": "",
-  "label": "adjectif, m. pl.",
-  "phonology": "vjo.l@",
-  "steno": "vRwae/mt@/-s",
+  "label": "adjectif, m. pl. · nom, m. pl.",
+  "phonology": "vjO.l@",
+  "steno": "vRwe/mt@/-s",
   "strokes": [
    [
     5,
     8,
     9,
-    12,
     14
    ],
    [
@@ -220913,7 +220914,7 @@
   "ortho": "gouvernante",
   "before": "la",
   "after": "",
-  "label": "nom, f. sg.",
+  "label": "nom, f. sg. · adjectif, f. sg.",
   "phonology": "gu.vER.n@t",
   "steno": "ks@e/vieR/mR@t",
   "strokes": [
@@ -229825,8 +229826,8 @@
   "before": "les",
   "after": "",
   "label": "adjectif, f. pl.",
-  "phonology": "E.kse.l@t",
-  "steno": "ie/kse/mt@t",
+  "phonology": "E.ksE.l@t",
+  "steno": "ie/ksie/mt@t/-s",
   "strokes": [
    [
     13,
@@ -229835,6 +229836,7 @@
    [
     2,
     3,
+    13,
     14
    ],
    [
@@ -229842,6 +229844,9 @@
     7,
     11,
     20
+   ],
+   [
+    17
    ]
   ],
   "frequency": 4.28
@@ -231257,7 +231262,7 @@
   "after": "",
   "label": "adjectif, m. pl.",
   "phonology": "E.ksE.l@",
-  "steno": "ie/ksie/mt@",
+  "steno": "ie/ksie/mt@/-s",
   "strokes": [
    [
     13,
@@ -231273,6 +231278,9 @@
     6,
     7,
     11
+   ],
+   [
+    17
    ]
   ],
   "frequency": 4.25

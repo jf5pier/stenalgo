@@ -486,6 +486,9 @@ later companion script.
 | fixSpuriousDuplicateVerbRows | Lexique383, Mixte | yes | yes | duplicate VER/AUX rows |
 | fixSplicedVerbBreakdowns | Synthetic (in place) | no | n/a | spliced finite forms re-normalized, item B2 (S2.4) |
 | fixOuGlideConsistency | Lexique383, Infra, Mixte, Synthetic | yes | yes | `ou`+vowel /u/ hiatus → glide /w/ in the 25 lemmas that mix both (jouez, évanouir…) |
+| fixFirstSyllableE | Lexique383, Infra, Mixte, Synthetic | yes | yes | first-syllable `e` → `E` in the validated lemmas (`essayer`, `descendre`, `effacer`…), decision 6 |
+| fixHarmonyVowels | Lexique383, Infra, Mixte, Synthetic | yes | yes | `o`/`O` of 14 validated genuine-harmony lemmas (`-ologique`, `coronarien`…) |
+| fixMixedHarmonyVowels | Lexique383, Infra, Mixte, Synthetic | yes | yes | 282 Mixte rows: `e`/`E`, `o`/`O` per `util/harmonyVowelTargets.tsv` (hand-validated against fr.wiktionary); `python -m util.reportVowelHarmony` + `python -m util.buildMixedHarmonyCandidates` (hand-run, read-only) build the candidate list |
 | fixMalformedSyntheticSplices | Synthetic (in place) | no | n/a | repairs empty/fused `u#` units, lost R (`kluj§`), lost `n` unit; deletes the rest (S2.4) |
 | fixParticipleGenderPhon | Synthetic (in place) | no | n/a | synthetic participles' feminine-stem consonant added/dropped, item B45 (S2.4) |
 | fixXlfnSingleCorruption | Infra | no | yes | `_xlfn.SINGLE(...)` (Excel) |
