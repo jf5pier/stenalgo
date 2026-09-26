@@ -385,8 +385,11 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
     13,269; `fixSplicedVerbBreakdowns --apply` corrected 142 more stored rows). The first syllable
     is excluded because the prefix vowels keep their quality there (`dessécher` /deseSe/,
     `effacer` /efase/ — 120 rows), and `sc` is not a doubled `s` because `descendre` attests
-    /des@d/ (86 rows). Residue, all lexicon-side (per-lemma coarse infinitive vs committed finite
-    forms — the upgrade script): `condescendre`/`redescendre` attest E before `sc` (27 rows,
+    /des@d/ (86 rows). Both widenings of the rule were tested 2026-09-25 and REVERTED: treating
+    `sc` as a doubled `s` (flips `descendre`'s 86 correct rows), and admitting the word's first
+    syllable for `pressentiez`/`tressaillez` (first-syllable cases, not a detector gap — the
+    widened detector changed nothing else on the corpus). Residue, all lexicon-side (per-lemma
+    coarse infinitive vs committed finite forms — the upgrade script): `condescendre`/`redescendre` attest E before `sc` (27 rows,
     `k§dEs@`, `R°dEs@`) though `descendre` attests `e`; `essuyer` (`Es8ija`), `blettir`
     (`blEtisE`), `pressentir` (`pREs@tje`) and `tressaillir` (`tREsaje`) attest E from the word's
     first syllable (16 rows). The 12 `élever` rows (`El°va`) are NOT generator gaps: `é` is a
