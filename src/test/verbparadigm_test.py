@@ -31,7 +31,7 @@ from src.verbparadigm import (
     parseConjugationTemplates,
     spliceParticiplePhon,
 )
-from src.verbparadigm import NON_FINAL_CLOSED, NON_FINAL_OPEN
+from src.verbparadigm import NON_FINAL_CLOSED, NON_FINAL_DOUBLED, NON_FINAL_OPEN
 from src.word import GramCat, Word
 
 
@@ -696,8 +696,8 @@ class TestNormalizeSplicedBreakdown:
     def test_nonfinal_closed_syllable_laxes_coarse_vowel(self):
         # aguerrir /ageriR/ cut to a form closing the syllable: "e" -> E.
         vowels = {("e", NON_FINAL_CLOSED): "E"}
-        assert normalizeSplicedBreakdown("ageRiR", "a|g_e_R|i_R", "a|gu_e_rr|i_r", _SPLITS, vowels) == (
-            "agERiR", "a|g_E_R|i_R", "a|gu_e_rr|i_r"
+        assert normalizeSplicedBreakdown("ageRiR", "a|g_e_R|i_R", "a|g_e_r|di_r", _SPLITS, vowels) == (
+            "agERiR", "a|g_E_R|i_R", "a|g_e_r|di_r"
         )
 
     def test_nonfinal_rule_never_rewrites_the_schwa(self):
@@ -772,6 +772,14 @@ class TestDeriveMidVowelTable:
         table = deriveMidVowelTable(words)
         assert table[("ai", NON_FINAL_OPEN)] == "E"
 
+    def test_e_before_doubled_consonant_past_first_syllable_laxes(self):
+        # aguerrit /agERi/ beside aiguerrir-style coarse rows, and a first-syllable
+        # prefix vowel that keeps its quality (dessécher /deseSe/).
+        doubled = [_make_corpus_word("aguerrit", "agERi", "a|g_E|R_i", "a|gu_e|rr_i")] * 20
+        prefix = [_make_corpus_word("dessécha", "deseSa", "d_e|s_e|S_a", "d_e|ss_é|ch_a")] * 20
+        table = deriveMidVowelTable(doubled + prefix)
+        assert table[("e", NON_FINAL_DOUBLED)] == "E"
+
     def test_coarse_counterpart_abstains_in_nonfinal_keys(self):
         # 20 committed E rows against 15 coarse "e" rows: the coarse ones never
         # committed to a quality, so they cannot outvote the committed reading.
@@ -784,7 +792,7 @@ class TestDeriveMidVowelTable:
         # "e" in a non-final open syllable is the schwa's home (26k corpus rows); the
         # lax readings never let one quality settle, so no rule is learned.
         words = ([_make_corpus_word("menace", "m°nas", "m_°|n_a_s", "m_e|n_a_ce")] * 30
-                 + [_make_corpus_word("aguerrit", "agERi", "a|g_E|R_i", "a|gu_e|rr_i")] * 5)
+                 + [_make_corpus_word("télou", "tElu", "t_E|l_u", "t_e|l_ou")] * 5)
         assert ("e", NON_FINAL_OPEN) not in deriveMidVowelTable(words)
 
 

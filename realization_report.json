@@ -77,7 +77,7 @@
    "markers": [
     "f"
    ],
-   "affectedWords": 15287,
+   "affectedWords": 15286,
    "chosenKeys": [
     16
    ],
@@ -285,7 +285,7 @@
     "imparfait",
     "subjonctif"
    ],
-   "affectedWords": 5797,
+   "affectedWords": 5795,
    "chosenKeys": [
     21
    ],
@@ -364,7 +364,7 @@
     "impératif",
     "pers_1"
    ],
-   "affectedWords": 7452,
+   "affectedWords": 7455,
    "chosenKeys": [
     18
    ],
@@ -449,7 +449,7 @@
     "nbr_p",
     "p"
    ],
-   "affectedWords": 50250,
+   "affectedWords": 50252,
    "chosenKeys": [
     17
    ],
@@ -564,7 +564,7 @@
    "markers": [
     "pers_2"
    ],
-   "affectedWords": 7818,
+   "affectedWords": 7819,
    "chosenKeys": [
     19
    ],
