@@ -723,6 +723,9 @@ class Word:
         # ko-OR-di-na-t9R ko-OR-di-na-t9R CV-VC-CV-CV-CVC CV-VC-CV-CV-CVC
         graphem_phonem = Word.fixAssociation(
             graphem_phonem, "oo-oO", "o-o.o-O")
+        # coopter, once util/fixMixedHarmonyVowels.py set the first o lax: c-k.oo-OO
+        graphem_phonem = Word.fixAssociation(
+            graphem_phonem, "oo-OO", "o-O.o-O")
         # mezzos m-m.e-E.zz-dz.o-o.s-# mEd-zo mEd-zo CVC-CV CVC-C
         graphem_phonem = Word.fixAssociation(
             graphem_phonem, "zz-dz", "z-d.z-z")

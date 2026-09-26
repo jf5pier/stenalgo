@@ -26,8 +26,8 @@ next onset), so `mixed` still holds regular alternations.
    `désordonner`, `perquisitionner`…) and the `E/e` verbs `atterrer`, `paresser`,
    `désintéresser`. Lax vowel in the closed syllable (`abonne` /abOn/), tense before `-é`/`-er`
    (`abonner` /abone/). The "next vowel is `e`" signal is only the infinitive/participle ending.
-   This is the regular loi de position the generator learns. OPEN DECISION: leave as is, or flatten
-   to `O` in every form like `essayer`, which changes the strokes of ~40 lemmas.
+   This is the regular loi de position the generator learns. DECIDED 2026-09-26: leave as is (flattening
+   to `O` like `essayer` would change the strokes of ~40 lemmas for a regular alternation).
 2. **Genuine harmony between two mid vowels in one word (~12).** `cosmologique`, `radiologique`,
    `radioscopique`, `étiologique`, `troglodytique`, `rototo`, `coronarien`, `ovoïdal`, `philosophal`,
    `autographier`, `cochonnée`, `corroborer`, `lobotomiser`, `monopoliser`. The first `o` follows
@@ -37,7 +37,7 @@ next onset), so `mixed` still holds regular alternations.
 3. **Suffix-driven alternation (~8).** `greffier`/`greffière`, `potier`/`potière`,
    `gondolier`/`gondolière`, `ferronnier`/`ferronnière`, `croqueur`/`croqueuse`,
    `roteur`/`roteuse`, `footballeur`/`footballeuse`: the masculine/feminine pair differs. Real French;
-   leave alone unless one vowel per gender pair is wanted.
+   DECIDED 2026-09-26: leave alone.
 
 ## How to attack it later
 
@@ -48,3 +48,65 @@ next onset), so `mixed` still holds regular alternations.
    way the first-syllable one was (per-lemma rows, minority forms), validate, apply, rebuild
    (`rm -f *.pickle; python dictionary.py`), compare Plover/collisions.
 3. `9/2` (`boeuf`/`oeuf` plurals) and `reverse` are small, review separately.
+
+## The `mixed` candidate list, cross-validated on fr.wiktionary (2026-09-26)
+
+`python -m util.buildMixedHarmonyCandidates` (read-only; needs the report above; caches the
+fr.wiktionary wikitext in `scratch/wiktionary-cache.json`, writes
+`scratch/vowel-harmony-mixed-candidates.tsv`) reads, for each of the 619 `mixed` (lemma, position)
+rows, the same-ranked oral mid vowel in the IPA of the lemma's fr.wiktionary entry and compares it to
+the lemma's rows. Wiktionary only pronounces the lemma form (the infinitive for a verb), so it is
+strong evidence for nouns/adjectives and weak for verbs.
+
+| Verdict | E/e | O/o | 9/2 | Meaning |
+|---|---|---|---|---|
+| `fix-minority` | 56 | 102 | 2 | Wiktionary agrees with the majority (ties: with Wiktionary): the minority rows are the stray errors (`cosmologique` O, `insolent`…) |
+| `fix-majority` | 5 | 29 | 0 | Wiktionary agrees with the minority: `insolent`/`dolent`/`offrant`/`flemmard` are lax in every form, a few rows carry the lax vowel |
+| `verb-fix-minority` | 15 | 34 | 0 | verbs, Wiktionary agrees with the majority (`atterrir`, `exécuter` E; `adorer`, `choper` O) |
+| `verb-fix-majority` | 11 | 263 | 0 | verbs whose infinitive is lax on Wiktionary while the majority is tense: the family-1 shape (`étonner`, `broder`); left as is by decision |
+| `position` | 0 | 74 | 0 | stem-stressed lax vs open tense: the regular loi de position, left as is |
+| `no-wikt` | 3 | 25 | 0 | no usable pronunciation (missing entry or a different mid-vowel count) |
+
+These verdicts were then validated by hand and applied (below).
+
+### Validation of the 241 candidates (2026-09-26, by hand)
+
+The non-verb `fix-minority`/`fix-majority` rows and the `verb-fix-minority` rows (241
+(lemma, position) rows in 239 lemmas) were validated 15 at a time against fr.wiktionary; the table
+is `scratch/harmony-decisions.tsv` (lemma, target vowel, or `HOLD`), the display queue
+`scratch/harmony-queue.tsv`. Rules the validation settled:
+
+- **`e` before a doubled consonant (or `sc`) is `E`**, in every syllable including the first
+  (`agression`, `essaim`, `condescendant`, `convalescent`, `effervescent`), overriding Wiktionary's `e`.
+- **Masculine `-o(t)` / feminine `-Ot(te)` pairs are not harmonized** (HOLD, 23 lemmas: `bistrot`,
+  `bot`, `boulot`, `cagot`, `chicot`, `dévot`, `falot`, `fiérot`, `huguenot`, `idiot`, `manchot`,
+  `mendigot`, `nabot`, `parigot`, `parpaillot`, `petiot`, `poivrot`, `pâlot`, `ribot`, `rigolo`,
+  `solognot`, `sot`, `vieillot`): the vowel changes with the gender and that is real French.
+- **`boeuf`/`oeuf` (`9` singular, `2` plural) are a protected exception group** with `os`, `aïeul`,
+  `ciel`: not touched.
+- `oppositionnel` follows the `opposition` entry (`O` for both vowels); `flotter` is `O` against
+  Wiktionary's `o`.
+- Result of the validation: 133 `O`, 73 `E`, 9 `o`, 3 `e`, 23 HOLD; the 28 `no-wikt` rows were read by
+  hand from the IPA the same way (`chopper` HOLD: no usable pronunciation; `bigot`, `wisigoth` HOLD by
+  the `-o(t)` rule).
+
+### Applied (2026-09-26)
+
+`python -m util.fixMixedHarmonyVowels --apply` (targets `util/harmonyVowelTargets.tsv`, keyed by
+lemma, unit position and orthographic unit) patched 282 Mixte, 42 Synthetic, 282 Lexique383 and 282
+Infra rows in the lemmas that remain; `python lexique.py` regenerates Mixte identically except for two
+harmless rows. Decisions taken after the first rebuilds:
+
+- The 49 O/o verbs that would only flatten the loi de position (`greloter`, `carotter`, `flotter`,
+  `adorer`, `téléphoner`, `démissionner`…) were taken back out of the targets, as were all `-oter`/`-onner`
+  verbs: they keep the lexicon's existing pattern. `cloner` and `diplômer` stay flattened to `o`;
+  `autographier` was already set by batch 2.
+- `professeur`, `professeure`, `professeurs` are homophones (`O`). Lexique383 left the gender of
+  `professeur`/`professeurs` blank, so their reading "s" was a subset of `professeure` "f s" and no
+  press-set group formed (1 same-lemma residual collision): genre `m` was set on those two rows.
+- Infra can carry a two-phoneme unit (`coopter` `oo-oO`): the fix script edits each phoneme of a unit and
+  `lexique.py` learns `oo-OO`.
+- Rebuild: collisions 0/0/0, Plover 170,321 -> 171,586 strokes, 0 spellings lost, 1,253 gained.
+
+Open: `chopper`; 30 other NOM lemmas have a blank-genre row beside a feminine one (`amateur`,
+`architecte`, `malade`…), not audited; `agressions` NOM no longer merges with the `agresser` VER row.

@@ -245,6 +245,11 @@ design-decision log); reworded to the current vocabulary.
    the lax vowel in all its forms: `util/fixFirstSyllableE.py` (2026-09-26) sets `E` in the
    first-syllable `e` of the validated lemmas (`essayer`, `descendre`, `effacer`, `dessiner`,
    `voir`'s `verrons`…) across Lexique383, Infra, Mixte and Synthetic.
+   Batch 2/3 (2026-09-26, `util/fixHarmonyVowels.py`, `util/fixMixedHarmonyVowels.py`) extend it to the
+   `mixed` within-lemma disagreements, validated by hand against fr.wiktionary. Rules: `e` before a
+   doubled consonant or `sc` is `E`; masculine `-o(t)` / feminine `-Ot(te)` pairs, `boeuf`/`oeuf` and
+   the regular loi de position of the `-oter`/`-onner` verbs are NOT harmonized (they are real
+   phonetics, not lexicon noise). See docs/VOWEL_HARMONY_CANDIDATES.md.
 
 ### Why elicitation, not solver-picked features
 
