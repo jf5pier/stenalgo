@@ -416,13 +416,12 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
     2026-09-26: the cluster `-ouer` verbs' synthetic rows carry a malformed `u#` unit
     (`troue` t_R_u#, `clouerions` k_l_u#|R_j_§, `rabroue`, `écroue`, `renfloue`, `relouer`…;
     44 rows whose syll_cv and orthosyll_cv no longer align unit for unit).
-  - **`python lexique.py` no longer reproduces the committed LexiqueMixte.tsv** (found
-    2026-09-26): 0b5eace remapped 49 `-eter`/`-eler` verbs to `ach:eter`/`p:eler` in
-    verbs-fr.xml, which drops them from `loadElerEterQualifyingVerbs` (lexique.py:441, reads
-    only `app:eler`/`j:eter`), so a regeneration no longer applies reform rule 5 to their
-    Lexique383 doubled forms: 56 rows revert (`amoncèle` → `amoncelle`, `amoncèlement` →
-    `amoncellement`). Until fixed, any Mixte-level fix must patch Mixte in place, not rerun
-    lexique.py.
+  - `python lexique.py` stopped reproducing the committed LexiqueMixte.tsv after 0b5eace (found
+    and FIXED 2026-09-26): the 49 verbs remapped to `ach:eter`/`p:eler` dropped out of
+    `loadElerEterQualifyingVerbs`, so reform rule 5 no longer regularized their Lexique383
+    doubled rows (56 rows reverted, `amoncèle` → `amoncelle`). The loader now also accepts those
+    two templates (the rewrite only fires on a still-doubled prefix, so regular è verbs are
+    untouched); a regeneration is byte-identical to the committed Mixte again.
   - accepted noise, no action: `o` non-final-open (Infra contradicts itself, `posera` `o` vs
     `délogera` `O`), `2`/`9`/`°` variation (~10 rows), the boundary 1-offs.
 - **Pluvier-style TAO prefix/suffix shortcut scan** — go through Pluvier's dictionary rules
