@@ -456,6 +456,11 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
     untouched); a regeneration is byte-identical to the committed Mixte again.
   - accepted noise, no action: `o` non-final-open (Infra contradicts itself, `posera` `o` vs
     `délogera` `O`), `2`/`9`/`°` variation (~10 rows), the boundary 1-offs.
+- **Vowel-harmony standardization, batch 2** — the read-only report (`python -m util.reportVowelHarmony`)
+  found 687 within-lemma E/e, O/o, 9/2 disagreements in 663 lemmas; the classified findings, the ~12
+  genuine-harmony lemmas (`-ologique`, `coronarien`, `monopoliser`…), the ~40 loi-de-position `-onner`
+  verbs awaiting a decision, and the plan are in `docs/VOWEL_HARMONY_CANDIDATES.md`. Follows the first
+  batch (`util/fixFirstSyllableE.py`, docs/ARCHITECTURE.md decision 6).
 - **Pluvier-style TAO prefix/suffix shortcut scan** — go through Pluvier's dictionary rules
   (docs/PRIOR_ART.md; the TAO strokes that emit a whole multi-syllable prefix or suffix from
   one special keystroke), and for each rule measure the payoff in OUR lexicon: the sum of
