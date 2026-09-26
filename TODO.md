@@ -411,11 +411,22 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
     stenos), 0 spellings lost, 27 gained (23 `sidérer` forms, `individué(es)`, `mosaïqué(es)`);
     keyboard-layout.json identical; 639 tests pass. Before/after `scratch/uw-before/`, log
     `scratch/uw-rebuild.log`.
-  - the two small splice bugs: the dropped `n` in `enorgueillir`'s cut (5 rows) and the malformed
-    `ij#` unit in `oublierions`/`publierions`/`supplieriez` (3 rows). Same class, found
-    2026-09-26: the cluster `-ouer` verbs' synthetic rows carry a malformed `u#` unit
-    (`troue` t_R_u#, `clouerions` k_l_u#|R_j_§, `rabroue`, `écroue`, `renfloue`, `relouer`…;
-    44 rows whose syll_cv and orthosyll_cv no longer align unit for unit).
+  - the splice bugs behind the malformed `u#`/`ij#` units — FIXED 2026-09-26 (generator guard +
+    `util/fixMalformedSyntheticSplices.py --apply`): the endings are mined by string length, so an
+    -ouer/-uer/-éer verb spliced with the -ier donors of `étudi:er` lost its R in the cnd forms
+    (`clouerions` `kluj§`) and left an empty/fused unit (`cloue` `k_l_u#`). `repairSpliceUnits`
+    turns empty and fused units into a sounded unit + `#`; `isWellFormedSplice` (no empty unit,
+    phon == sounded join up to mid vowels) makes `generateMissingConjugatedForm` skip a bad slot;
+    the script repaired 281 stored rows (58 phon R restored, 36 lost `n` unit reinserted for
+    `enorgueillir`/`enivrer` via `reinsertLostNasalUnit`) and deleted 49. Rebuild: collisions
+    0/0/0, Plover 167,768 → 167,747 (34 spellings lost, 13 gained); 649 tests pass. OPEN: the 34
+    lost spellings are the cnd `-ierions`/`-ieriez` forms of 15 -ier verbs (`trier`, `crier`,
+    `plier`…; the donor ending gives `ij#|R_j_` / phon `jj` — needs a glide-aware ending class,
+    e.g. splitting `étudi:er` by infinitive tail), `oublieriez`/`publieriez`, and the
+    `désennuie(nt)` forms (unit-count rule vs the `ui` ortho unit); 9 loanword/noun rows
+    (`games`, `kreutzers`, `miladys`, `sweepstakes`, `updates`, `molle(s)`, `interviewée(s)`)
+    still fail the guard, made by another generator. `enorgueillir`'s dropped `n` is fixed
+    (reinserted); `interviewer` stays deleted (its Mixte source is inconsistent).
   - `python lexique.py` stopped reproducing the committed LexiqueMixte.tsv after 0b5eace (found
     and FIXED 2026-09-26): the 49 verbs remapped to `ach:eter`/`p:eler` dropped out of
     `loadElerEterQualifyingVerbs`, so reform rule 5 no longer regularized their Lexique383
