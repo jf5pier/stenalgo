@@ -10502,7 +10502,7 @@ autographe	otogRaf	autographe	NOM	ADJ,NOM	m	s		o|t_o|g_R_a_f_#	au|t_o|g_r_a_ph_e
 autographe	otogRaf	autographe	ADJ	ADJ,NOM		s		o|t_o|g_R_a_f_#	au|t_o|g_r_a_ph_e	0.2	0.14
 autographes	otogRaf	autographe	NOM	ADJ,NOM	m	p		o|t_o|g_R_a_f_#	au|t_o|g_r_a_ph_es	0.88	1.17
 autographes	otogRaf	autographe	ADJ	ADJ,NOM	f	p		o|t_o|g_R_a_f_#	au|t_o|g_r_a_ph_es	0.0	0.01
-autographier	otogRafje	autographier	VER	VER			inf;	o|t_o|g_R_a|f_j_e	au|t_o|g_r_a|ph_i_er	0.07	0.0
+autographier	OtOgRafje	autographier	VER	VER			inf;	O|t_O|g_R_a|f_j_e	au|t_o|g_r_a|ph_i_er	0.07	0.0
 autographié	OtOgRafje	autographier	VER	VER	m	s	par:pas;	O|t_O|g_R_a|f_j_e	au|t_o|g_r_a|ph_i_é	0.0	0.01
 autoguidage	otogidaZ	autoguidage	NOM	NOM	m	s		o|t_o|g_i|d_a_Z	au|t_o|gu_i|d_a_ge	0.0	0.05
 autoguidé	otogide	autoguidé	ADJ	ADJ	m	s		o|t_o|g_i|d_e	au|t_o|gu_i|d_é	0.0	0.01
@@ -24823,7 +24823,7 @@ cochonnez	koSone	cochonner	VER	VER			ind:pre:2p;	k_o|S_o|n_e	c_o|ch_o|nn_ez	0.07
 cochonné	koSone	cochonner	VER	VER	m	s	par:pas;	k_o|S_o|n_e	c_o|ch_o|nn_é	0.2	0.01
 cochonnée	kOSOne	cochonnée	NOM	NOM	f	s		k_O|S_O|n_e_#	c_o|ch_o|nn_é_e	0.0	0.01
 cochonnées	koSone	cochonner	VER	VER,ADJ	f	p	par:pas;	k_o|S_o|n_e_#	c_o|ch_o|nn_é_es	0.07	0.0
-cochonnées	koSone	cochonnée	ADJ	VER,ADJ	f	p		k_o|S_o|n_e_#	c_o|ch_o|nn_é_es	0.07	0.0
+cochonnées	kOSOne	cochonnée	ADJ	VER,ADJ	f	p		k_O|S_O|n_e_#	c_o|ch_o|nn_é_es	0.07	0.0
 cochons	koS§	cochon	NOM	ADJ,NOM	m	p		k_o|S_§_#	c_o|ch_on_s	7.91	8.5
 cochons	koS§	cochon	ADJ	ADJ,NOM	m	p		k_o|S_§_#	c_o|ch_on_s	2.03	3.32
 cochylis	kokilis	cochylis	NOM	NOM	m			k_o|k_i|l_i_s	c_o|ch_y|l_i_s	0.07	0.0
@@ -29946,7 +29946,7 @@ coronale	koRonal	coronal	ADJ	ADJ	f	s		k_o|R_o|n_a_l_#	c_o|r_o|n_a_l_e	0.0	0.04
 coronales	koRonal	coronal	ADJ	ADJ	f	p		k_o|R_o|n_a_l_#	c_o|r_o|n_a_l_es	0.0	0.01
 coronarien	kOROnaRj5	coronarien	ADJ	ADJ,NOM	m	s		k_O|R_O|n_a|R_j_5	c_o|r_o|n_a|r_i_en	0.0	0.08
 coronarien	kOROnaRj5	coronarien	NOM	ADJ,NOM	m	s		k_O|R_O|n_a|R_j_5	c_o|r_o|n_a|r_i_en	0.0	0.01
-coronarienne	koRonaRjEn	coronarien	ADJ	ADJ	f	s		k_o|R_o|n_a|R_j_E_n_#	c_o|r_o|n_a|r_i_e_nn_e	0.0	0.09
+coronarienne	kOROnaRjEn	coronarien	ADJ	ADJ	f	s		k_O|R_O|n_a|R_j_E_n_#	c_o|r_o|n_a|r_i_e_nn_e	0.0	0.09
 coroner	koRonER	coroner	NOM	NOM	m	s		k_o|R_o|n_E_R	c_o|r_o|n_e_r	0.0	1.98
 coroners	koRonER	coroner	NOM	NOM	m	p		k_o|R_o|n_E_R_#	c_o|r_o|n_e_r_s	0.0	0.04
 coronilles	koRonij	coronille	NOM	NOM	f	p		k_o|R_o|n_i_j_#	c_o|r_o|n_i_ll_es	0.2	0.0
@@ -30068,18 +30068,18 @@ corrigées	koRiZe	corriger	VER	VER,ADJ	f	p	par:pas;	k_o|R_i|Z_e_#	c_o|rr_i|g_é_
 corrigés	koRiZe	corrigé	ADJ	VER,ADJ,NOM	m	p		k_o|R_i|Z_e_#	c_o|rr_i|g_é_s	0.14	0.14
 corrigés	koRiZe	corriger	VER	VER,ADJ,NOM	m	p	par:pas;	k_o|R_i|Z_e_#	c_o|rr_i|g_é_s	0.14	0.08
 corrigés	koRiZe	corrigé	NOM	VER,ADJ,NOM	m	p		k_o|R_i|Z_e_#	c_o|rr_i|g_é_s	0.07	0.03
-corrobora	koRoboRa	corroborer	VER	VER			ind:pas:3s;	k_o|R_o|b_o|R_a	c_o|rr_o|b_o|r_a	0.07	0.0
-corroboraient	koRoboRE	corroborer	VER	VER			ind:imp:3p;	k_o|R_o|b_o|R_E	c_o|rr_o|b_o|r_aient	0.07	0.02
-corroborait	koRoboRE	corroborer	VER	VER			ind:imp:3s;	k_o|R_o|b_o|R_E	c_o|rr_o|b_o|r_ait	0.27	0.02
+corrobora	kORObORa	corroborer	VER	VER			ind:pas:3s;	k_O|R_O|b_O|R_a	c_o|rr_o|b_o|r_a	0.07	0.0
+corroboraient	kORObORE	corroborer	VER	VER			ind:imp:3p;	k_O|R_O|b_O|R_E	c_o|rr_o|b_o|r_aient	0.07	0.02
+corroborait	kORObORE	corroborer	VER	VER			ind:imp:3s;	k_O|R_O|b_O|R_E	c_o|rr_o|b_o|r_ait	0.27	0.02
 corroborant	kORObOR@	corroborer	VER	VER			par:pre;	k_O|R_O|b_O|R_@	c_o|rr_o|b_o|r_ant	0.0	0.01
 corroboration	koRoboRasj§	corroboration	NOM	NOM	f	s		k_o|R_o|b_o|R_a|s_j_§	c_o|rr_o|b_o|r_a|t_i_on	0.0	0.03
-corrobore	koRobOR	corroborer	VER	VER			ind:pre:3s;	k_o|R_o|b_O_R_#	c_o|rr_o|b_o_r_e	0.2	0.15
-corroborent	koRobOR	corroborer	VER	VER			ind:pre:3p;	k_o|R_o|b_O_R_#	c_o|rr_o|b_o_r_ent	0.07	0.2
-corroborer	koRoboRe	corroborer	VER	VER			inf;	k_o|R_o|b_o|R_e	c_o|rr_o|b_o|r_er	0.41	0.69
-corroborera	koRobOR°Ra	corroborer	VER	VER			ind:fut:3s;	k_o|R_o|b_O|R_°|R_a	c_o|rr_o|b_o|r_e|r_a	0.0	0.08
-corroborèrent	koRoboRER	corroborer	VER	VER			ind:pas:3p;	k_o|R_o|b_o|R_E_R_#	c_o|rr_o|b_o|r_è_r_ent	0.07	0.0
+corrobore	kORObOR	corroborer	VER	VER			ind:pre:3s;	k_O|R_O|b_O_R_#	c_o|rr_o|b_o_r_e	0.2	0.15
+corroborent	kORObOR	corroborer	VER	VER			ind:pre:3p;	k_O|R_O|b_O_R_#	c_o|rr_o|b_o_r_ent	0.07	0.2
+corroborer	kORObORe	corroborer	VER	VER			inf;	k_O|R_O|b_O|R_e	c_o|rr_o|b_o|r_er	0.41	0.69
+corroborera	kORObOR°Ra	corroborer	VER	VER			ind:fut:3s;	k_O|R_O|b_O|R_°|R_a	c_o|rr_o|b_o|r_e|r_a	0.0	0.08
+corroborèrent	kORObORER	corroborer	VER	VER			ind:pas:3p;	k_O|R_O|b_O|R_E_R_#	c_o|rr_o|b_o|r_è_r_ent	0.07	0.0
 corroboré	kORObORe	corroborer	VER	VER	m	s	par:pas;	k_O|R_O|b_O|R_e	c_o|rr_o|b_o|r_é	0.0	0.16
-corroborées	koRoboRe	corroborer	VER	VER	f	p	par:pas;	k_o|R_o|b_o|R_e_#	c_o|rr_o|b_o|r_é_es	0.0	0.02
+corroborées	kORObORe	corroborer	VER	VER	f	p	par:pas;	k_O|R_O|b_O|R_e_#	c_o|rr_o|b_o|r_é_es	0.0	0.02
 corrodait	koRodE	corroder	VER	VER			ind:imp:3s;	k_o|R_o|d_E	c_o|rr_o|d_ait	0.41	0.0
 corrodant	koRod@	corrodant	ADJ	ADJ	m	s		k_o|R_o|d_@	c_o|rr_o|d_ant	0.07	0.0
 corrodante	koRod@t	corrodant	ADJ	ADJ	f	s		k_o|R_o|d_@_t_#	c_o|rr_o|d_an_t_e	0.07	0.0
@@ -30222,7 +30222,7 @@ cosmogonique	kOsmogonik	cosmogonique	ADJ	ADJ	m	s		k_O_s|m_o|g_o|n_i_k_#	c_o_s|m_
 cosmographie	kOsmogRafi	cosmographie	NOM	NOM	f	s		k_O_s|m_o|g_R_a|f_i_#	c_o_s|m_o|g_r_a|ph_i_e	0.14	0.0
 cosmologie	kOsmoloZi	cosmologie	NOM	NOM	f	s		k_O_s|m_o|l_o|Z_i_#	c_o_s|m_o|l_o|g_i_e	0.07	0.09
 cosmologique	kOsmOlOZik	cosmologique	ADJ	ADJ	f	s		k_O_s|m_O|l_O|Z_i_k_#	c_o_s|m_o|l_o|g_i_qu_e	0.0	0.03
-cosmologiques	kOsmoloZik	cosmologique	ADJ	ADJ	m	p		k_O_s|m_o|l_o|Z_i_k_#	c_o_s|m_o|l_o|g_i_qu_es	0.07	0.02
+cosmologiques	kOsmOlOZik	cosmologique	ADJ	ADJ	m	p		k_O_s|m_O|l_O|Z_i_k_#	c_o_s|m_o|l_o|g_i_qu_es	0.07	0.02
 cosmologue	kOsmolOg	cosmologue	NOM	NOM		s		k_O_s|m_o|l_O_g_#	c_o_s|m_o|l_o_gu_e	0.07	0.0
 cosmonaute	kOsmonot	cosmonaute	NOM	NOM		s		k_O_s|m_o|n_o_t_#	c_o_s|m_o|n_au_t_e	0.54	0.83
 cosmonautes	kOsmonot	cosmonaute	NOM	NOM		p		k_O_s|m_o|n_o_t_#	c_o_s|m_o|n_au_t_es	0.34	0.46
@@ -74133,8 +74133,8 @@ lobectomie	lobEktomi	lobectomie	NOM	NOM	f	s		l_o|b_E_k|t_o|m_i_#	l_o|b_e_c|t_o|m
 lober	lobe	lober	VER	VER			inf;	l_o|b_e	l_o|b_er	0.0	0.03
 lobes	lOb	lobe	NOM	NOM	m	p		l_O_b_#	l_o_b_es	0.74	0.74
 lobotomie	lobotomi	lobotomie	NOM	NOM	f	s		l_o|b_o|t_o|m_i_#	l_o|b_o|t_o|m_i_e	0.14	0.83
-lobotomiser	lobotomize	lobotomiser	VER	VER			inf;	l_o|b_o|t_o|m_i|z_e	l_o|b_o|t_o|m_i|s_er	0.0	0.04
-lobotomisé	lobotomize	lobotomiser	VER	VER	m	s	par:pas;	l_o|b_o|t_o|m_i|z_e	l_o|b_o|t_o|m_i|s_é	0.07	0.25
+lobotomiser	lObOtOmize	lobotomiser	VER	VER			inf;	l_O|b_O|t_O|m_i|z_e	l_o|b_o|t_o|m_i|s_er	0.0	0.04
+lobotomisé	lObOtOmize	lobotomiser	VER	VER	m	s	par:pas;	l_O|b_O|t_O|m_i|z_e	l_o|b_o|t_o|m_i|s_é	0.07	0.25
 lobotomisée	lObOtOmize	lobotomiser	VER	VER	f	s	par:pas;	l_O|b_O|t_O|m_i|z_e_#	l_o|b_o|t_o|m_i|s_é_e	0.0	0.03
 lobs	lOb	lob	NOM	NOM	m	p		l_O_b_#	l_o_b_s	0.07	0.0
 lobulaire	lobylER	lobulaire	ADJ	ADJ	m	s		l_o|b_y|l_E_R_#	l_o|b_u|l_ai_r_e	0.07	0.0
@@ -79908,18 +79908,18 @@ monoplans	monopl@	monoplan	NOM	NOM	m	p		m_o|n_o|p_l_@_#	m_o|n_o|p_l_an_s	0.14	0.
 monopode	monopOd	monopode	ADJ	ADJ	m	s		m_o|n_o|p_O_d_#	m_o|n_o|p_o_d_e	0.0	0.01
 monopole	monopOl	monopole	NOM	NOM	m	s		m_o|n_o|p_O_l_#	m_o|n_o|p_o_l_e	2.91	1.32
 monopoles	monopOl	monopole	NOM	NOM	m	p		m_o|n_o|p_O_l_#	m_o|n_o|p_o_l_es	0.2	0.29
-monopolisa	monopoliza	monopoliser	VER	VER			ind:pas:3s;	m_o|n_o|p_o|l_i|z_a	m_o|n_o|p_o|l_i|s_a	0.0	0.02
-monopolisaient	monopolizE	monopoliser	VER	VER			ind:imp:3p;	m_o|n_o|p_o|l_i|z_E	m_o|n_o|p_o|l_i|s_aient	0.07	0.0
-monopolisais	monopolizE	monopoliser	VER	VER			ind:imp:1s;	m_o|n_o|p_o|l_i|z_E	m_o|n_o|p_o|l_i|s_ais	0.07	0.0
-monopolisait	monopolizE	monopoliser	VER	VER			ind:imp:3s;	m_o|n_o|p_o|l_i|z_E	m_o|n_o|p_o|l_i|s_ait	0.14	0.04
-monopolise	monopoliz	monopoliser	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	m_o|n_o|p_o|l_i_z_#	m_o|n_o|p_o|l_i_s_e	0.07	0.23
-monopolisent	monopoliz	monopoliser	VER	VER			ind:pre:3p;	m_o|n_o|p_o|l_i_z_#	m_o|n_o|p_o|l_i_s_ent	0.0	0.15
-monopoliser	monopolize	monopoliser	VER	VER			inf;	m_o|n_o|p_o|l_i|z_e	m_o|n_o|p_o|l_i|s_er	0.41	0.07
-monopolisera	monopoliz°Ra	monopoliser	VER	VER			ind:fut:3s;	m_o|n_o|p_o|l_i|z_°|R_a	m_o|n_o|p_o|l_i|s_e|r_a	0.0	0.01
-monopolisez	monopolize	monopoliser	VER	VER			imp:pre:2p;ind:pre:2p;	m_o|n_o|p_o|l_i|z_e	m_o|n_o|p_o|l_i|s_ez	0.0	0.03
-monopolisèrent	monopolizER	monopoliser	VER	VER			ind:pas:3p;	m_o|n_o|p_o|l_i|z_E_R_#	m_o|n_o|p_o|l_i|s_è_r_ent	0.07	0.0
+monopolisa	mOnOpOliza	monopoliser	VER	VER			ind:pas:3s;	m_O|n_O|p_O|l_i|z_a	m_o|n_o|p_o|l_i|s_a	0.0	0.02
+monopolisaient	mOnOpOlizE	monopoliser	VER	VER			ind:imp:3p;	m_O|n_O|p_O|l_i|z_E	m_o|n_o|p_o|l_i|s_aient	0.07	0.0
+monopolisais	mOnOpOlizE	monopoliser	VER	VER			ind:imp:1s;	m_O|n_O|p_O|l_i|z_E	m_o|n_o|p_o|l_i|s_ais	0.07	0.0
+monopolisait	mOnOpOlizE	monopoliser	VER	VER			ind:imp:3s;	m_O|n_O|p_O|l_i|z_E	m_o|n_o|p_o|l_i|s_ait	0.14	0.04
+monopolise	mOnOpOliz	monopoliser	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	m_O|n_O|p_O|l_i_z_#	m_o|n_o|p_o|l_i_s_e	0.07	0.23
+monopolisent	mOnOpOliz	monopoliser	VER	VER			ind:pre:3p;	m_O|n_O|p_O|l_i_z_#	m_o|n_o|p_o|l_i_s_ent	0.0	0.15
+monopoliser	mOnOpOlize	monopoliser	VER	VER			inf;	m_O|n_O|p_O|l_i|z_e	m_o|n_o|p_o|l_i|s_er	0.41	0.07
+monopolisera	mOnOpOliz°Ra	monopoliser	VER	VER			ind:fut:3s;	m_O|n_O|p_O|l_i|z_°|R_a	m_o|n_o|p_o|l_i|s_e|r_a	0.0	0.01
+monopolisez	mOnOpOlize	monopoliser	VER	VER			imp:pre:2p;ind:pre:2p;	m_O|n_O|p_O|l_i|z_e	m_o|n_o|p_o|l_i|s_ez	0.0	0.03
+monopolisèrent	mOnOpOlizER	monopoliser	VER	VER			ind:pas:3p;	m_O|n_O|p_O|l_i|z_E_R_#	m_o|n_o|p_o|l_i|s_è_r_ent	0.07	0.0
 monopolisé	mOnOpOlize	monopoliser	VER	VER	m	s	par:pas;	m_O|n_O|p_O|l_i|z_e	m_o|n_o|p_o|l_i|s_é	0.0	0.04
-monopolisés	monopolize	monopoliser	VER	VER	m	p	par:pas;	m_o|n_o|p_o|l_i|z_e_#	m_o|n_o|p_o|l_i|s_é_s	0.07	0.01
+monopolisés	mOnOpOlize	monopoliser	VER	VER	m	p	par:pas;	m_O|n_O|p_O|l_i|z_e_#	m_o|n_o|p_o|l_i|s_é_s	0.07	0.01
 monopoly	monopoli	monopoly	NOM	NOM	m	s		m_o|n_o|p_o|l_i	m_o|n_o|p_o|l_y	0.41	1.37
 monoprix	monopRi	monoprix	NOM	NOM	m			m_o|n_o|p_R_i_#	m_o|n_o|p_r_i_x	0.27	0.21
 monorail	monoRaj	monorail	NOM	ADJ,NOM	m	s		m_o|n_o|R_a_j	m_o|n_o|r_a_il	0.0	0.48
@@ -86903,7 +86903,7 @@ ovni	Ovni	ovni	NOM	NOM	m	s		O_v|n_i	o_v|n_i	0.14	1.07
 ovnis	Ovni	ovni	NOM	NOM	m	p		O_v|n_i_#	o_v|n_i_s	0.14	1.91
 ovocyte	ovosit	ovocyte	NOM	NOM	m	s		o|v_o|s_i_t_#	o|v_o|c_y_t_e	0.14	0.0
 ovocytes	ovosit	ovocyte	NOM	NOM	m	p		o|v_o|s_i_t_#	o|v_o|c_y_t_es	0.27	0.03
-ovoïdal	ovoidal	ovoïdal	ADJ	ADJ	m	s		o|v_o|i|d_a_l	o|v_o|ï|d_a_l	0.61	0.0
+ovoïdal	OvOidal	ovoïdal	ADJ	ADJ	m	s		O|v_O|i|d_a_l	o|v_o|ï|d_a_l	0.61	0.0
 ovoïdale	OvOidal	ovoïdal	ADJ	ADJ	f	s		O|v_O|i|d_a_l_#	o|v_o|ï|d_a_l_e	0.0	0.01
 ovoïde	ovoid	ovoïde	ADJ	ADJ		s		o|v_o|i_d_#	o|v_o|ï_d_e	0.95	0.0
 ovoïdes	ovoid	ovoïde	ADJ	ADJ		p		o|v_o|i_d_#	o|v_o|ï_d_es	0.14	0.0
@@ -90745,8 +90745,8 @@ philosophaient	filozofE	philosopher	VER	VER			ind:imp:3p;	f_i|l_o|z_o|f_E	ph_i|l
 philosophaillerie	filozofaj°Ri	philosophaillerie	NOM	NOM	f	s		f_i|l_o|z_o|f_a|j_°|R_i_#	ph_i|l_o|s_o|ph_a|ill_e|r_i_e	0.14	0.0
 philosophait	filozofE	philosopher	VER	VER			ind:imp:3s;	f_i|l_o|z_o|f_E	ph_i|l_o|s_o|ph_ait	0.27	0.0
 philosophal	filOzOfal	philosophal	ADJ	ADJ	m	s		f_i|l_O|z_O|f_a_l	ph_i|l_o|s_o|ph_a_l	0.07	0.0
-philosophale	filozofal	philosophal	ADJ	ADJ	f	s		f_i|l_o|z_o|f_a_l_#	ph_i|l_o|s_o|ph_a_l_e	0.54	0.07
-philosophales	filozofal	philosophal	ADJ	ADJ	f	p		f_i|l_o|z_o|f_a_l_#	ph_i|l_o|s_o|ph_a_l_es	0.07	0.0
+philosophale	filOzOfal	philosophal	ADJ	ADJ	f	s		f_i|l_O|z_O|f_a_l_#	ph_i|l_o|s_o|ph_a_l_e	0.54	0.07
+philosophales	filOzOfal	philosophal	ADJ	ADJ	f	p		f_i|l_O|z_O|f_a_l_#	ph_i|l_o|s_o|ph_a_l_es	0.07	0.0
 philosophant	filozof@	philosophant	ADJ	ADJ,VER	m	s		f_i|l_o|z_o|f_@	ph_i|l_o|s_o|ph_ant	0.07	0.0
 philosophant	filozof@	philosopher	VER	ADJ,VER			par:pre;	f_i|l_o|z_o|f_@	ph_i|l_o|s_o|ph_ant	0.07	0.0
 philosophard	filOzOfaR	philosophard	ADJ	ADJ	m	s		f_i|l_O|z_O|f_a_R_#	ph_i|l_o|s_o|ph_a_r_d	0.07	0.0
@@ -99995,7 +99995,7 @@ radioguidage	RadjogidaZ	radioguidage	NOM	NOM	m	s		R_a|d_j_o|g_i|d_a_Z	r_a|d_i_o|
 radioguidera	Radjogid°Ra	radioguider	VER	VER			ind:fut:3s;	R_a|d_j_o|g_i|d_°|R_a	r_a|d_i_o|gu_i|d_e|r_a	0.0	0.01
 radiologie	RadjoloZi	radiologie	NOM	NOM	f	s		R_a|d_j_o|l_o|Z_i_#	r_a|d_i_o|l_o|g_i_e	0.07	1.16
 radiologique	RadjOlOZik	radiologique	ADJ	ADJ	f	s		R_a|d_j_O|l_O|Z_i_k_#	r_a|d_i_o|l_o|g_i_qu_e	0.0	0.09
-radiologiques	RadjoloZik	radiologique	ADJ	ADJ	f	p		R_a|d_j_o|l_o|Z_i_k_#	r_a|d_i_o|l_o|g_i_qu_es	0.07	0.0
+radiologiques	RadjOlOZik	radiologique	ADJ	ADJ	f	p		R_a|d_j_O|l_O|Z_i_k_#	r_a|d_i_o|l_o|g_i_qu_es	0.07	0.0
 radiologiste	RadjOlOZist	radiologiste	NOM	NOM		s		R_a|d_j_O|l_O|Z_i_s_t_#	r_a|d_i_o|l_o|g_i_s_t_e	0.0	0.05
 radiologue	RadjolOg	radiologue	NOM	NOM		s		R_a|d_j_o|l_O_g_#	r_a|d_i_o|l_o_gu_e	0.2	0.51
 radiologues	RadjolOg	radiologue	NOM	NOM		p		R_a|d_j_o|l_O_g_#	r_a|d_i_o|l_o_gu_es	0.07	0.04
@@ -100010,7 +100010,7 @@ radioréveil	RadjoRevEj	radioréveil	NOM	NOM	m	s		R_a|d_j_o|R_e|v_E_j	r_a|d_i_o|
 radios	Radjo	radio	NOM	NOM		p		R_a|d_j_o_#	r_a|d_i_o_s	4.46	6.92
 radioscopie	Radjoskopi	radioscopie	NOM	NOM	f	s		R_a|d_j_o_s|k_o|p_i_#	r_a|d_i_o_s|c_o|p_i_e	0.14	0.03
 radioscopique	RadjOskOpik	radioscopique	ADJ	ADJ	f	s		R_a|d_j_O_s|k_O|p_i_k_#	r_a|d_i_o_s|c_o|p_i_qu_e	0.0	0.01
-radioscopiques	Radjoskopik	radioscopique	ADJ	ADJ		p		R_a|d_j_o_s|k_o|p_i_k_#	r_a|d_i_o_s|c_o|p_i_qu_es	0.07	0.0
+radioscopiques	RadjOskOpik	radioscopique	ADJ	ADJ		p		R_a|d_j_O_s|k_O|p_i_k_#	r_a|d_i_o_s|c_o|p_i_qu_es	0.07	0.0
 radiosonde	Radjos§d	radiosonde	NOM	NOM	f	s		R_a|d_j_o|s_§_d_#	r_a|d_i_o|s_on_d_e	0.0	0.01
 radiothérapie	RadjoteRapi	radiothérapie	NOM	NOM	f	s		R_a|d_j_o|t_e|R_a|p_i_#	r_a|d_i_o|th_é|r_a|p_i_e	0.0	0.21
 radiotélescope	RadjotelEskOp	radiotélescope	NOM	NOM	m	s		R_a|d_j_o|t_e|l_E_s|k_O_p_#	r_a|d_i_o|t_é|l_e_s|c_o_p_e	0.0	0.09
@@ -108349,7 +108349,7 @@ rotoplots	Rotoplo	rotoplots	NOM	NOM	m	p		R_o|t_o|p_l_o_#	r_o|t_o|p_l_o_ts	0.07	0
 rotor	RotOR	rotor	NOM	NOM	m	s		R_o|t_O_R	r_o|t_o_r	0.41	0.31
 rotors	RotOR	rotor	NOM	NOM	m	p		R_o|t_O_R_#	r_o|t_o_r_s	0.0	0.06
 rotos	Roto	roto	NOM	NOM	f	p		R_o|t_o_#	r_o|t_o_s	0.0	0.01
-rototo	ROtOto	rototo	NOM	NOM	m	s		R_O|t_O|t_o	r_o|t_o|t_o	0.0	0.02
+rototo	Rototo	rototo	NOM	NOM	m	s		R_o|t_o|t_o	r_o|t_o|t_o	0.0	0.02
 rototos	Rototo	rototo	NOM	NOM	m	p		R_o|t_o|t_o_#	r_o|t_o|t_o_s	0.07	0.01
 rots	Ro	rot	NOM	NOM	m	p		R_o_#	r_o_ts	0.61	0.09
 rotule	Rotyl	rotule	NOM	NOM	f	s		R_o|t_y_l_#	r_o|t_u_l_e	0.61	0.57
@@ -125850,7 +125850,7 @@ trocs	tROk	troc	NOM	NOM	m	p		t_R_O_k_#	t_r_o_c_s	0.27	0.0
 troglodyte	tRoglodit	troglodyte	NOM	NOM	m	s		t_R_o|g_l_o|d_i_t_#	t_r_o|g_l_o|d_y_t_e	0.27	0.1
 troglodytes	tRoglodit	troglodyte	NOM	NOM	m	p		t_R_o|g_l_o|d_i_t_#	t_r_o|g_l_o|d_y_t_es	0.41	0.1
 troglodytique	tROglOditik	troglodytique	ADJ	ADJ	m	s		t_R_O|g_l_O|d_i|t_i_k_#	t_r_o|g_l_o|d_y|t_i_qu_e	0.0	0.01
-troglodytiques	tRogloditik	troglodytique	ADJ	ADJ		p		t_R_o|g_l_o|d_i|t_i_k_#	t_r_o|g_l_o|d_y|t_i_qu_es	0.07	0.0
+troglodytiques	tROglOditik	troglodytique	ADJ	ADJ		p		t_R_O|g_l_O|d_i|t_i_k_#	t_r_o|g_l_o|d_y|t_i_qu_es	0.07	0.0
 trogne	tRON	trogne	NOM	NOM	f	s		t_R_O_N_#	t_r_o_gn_e	3.18	0.07
 trognes	tRON	trogne	NOM	NOM	f	p		t_R_O_N_#	t_r_o_gn_es	0.68	0.0
 trognon	tRoN§	trognon	NOM	NOM	m	s		t_R_o|N_§	t_r_o|gn_on	2.3	0.75
@@ -135316,7 +135316,7 @@ zézettes	zezEt	zézette	NOM	NOM	f	p		z_e|z_E_t_#	z_é|z_e_tt_es	0.27	0.0
 étioler	etjole	étioler	VER	VER			inf;	e|t_j_o|l_e	é|t_i_o|l_er	0.54	0.26
 étiologie	etjOlOZi	étiologie	NOM	NOM	f	s		e|t_j_O|l_O|Z_i_#	é|t_i_o|l_o|g_i_e	0.0	0.03
 étiologique	etjOlOZik	étiologique	ADJ	ADJ	m	s		e|t_j_O|l_O|Z_i_k_#	é|t_i_o|l_o|g_i_qu_e	0.0	0.01
-étiologiques	etjoloZik	étiologique	ADJ	ADJ		p		e|t_j_o|l_o|Z_i_k_#	é|t_i_o|l_o|g_i_qu_es	0.07	0.01
+étiologiques	etjOlOZik	étiologique	ADJ	ADJ		p		e|t_j_O|l_O|Z_i_k_#	é|t_i_o|l_o|g_i_qu_es	0.07	0.01
 étiolé	etjole	étioler	VER	VER	m	s	par:pas;	e|t_j_o|l_e	é|t_i_o|l_é	0.07	0.0
 étiolée	etjole	étioler	VER	VER	f	s	par:pas;	e|t_j_o|l_e_#	é|t_i_o|l_é_e	0.14	0.03
 étiolées	etjole	étioler	VER	VER	f	p	par:pas;	e|t_j_o|l_e_#	é|t_i_o|l_é_es	0.07	0.0

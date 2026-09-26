@@ -461,6 +461,14 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
   genuine-harmony lemmas (`-ologique`, `coronarien`, `monopoliser`…), the ~40 loi-de-position `-onner`
   verbs awaiting a decision, and the plan are in `docs/VOWEL_HARMONY_CANDIDATES.md`. Follows the first
   batch (`util/fixFirstSyllableE.py`, docs/ARCHITECTURE.md decision 6).
+  - Batch 2, family 2 APPLIED 2026-09-26 (`util/fixHarmonyVowels.py --apply`; lemma table checked on
+    fr.wiktionary): `O` for `cosmologique`, `radiologique`, `radioscopique`, `étiologique`,
+    `troglodytique`, `coronarien`, `ovoïdal`, `philosophal`, `cochonnée`, `corroborer`, `lobotomiser`,
+    `monopoliser`, `autographier`; `o` for `rototo`; word-final open vowels (`ovoïdaux`) untouched.
+    34 Mixte + 21 Synthetic rows. Rebuild: collisions 0/0/0, 649 tests, Plover 170,156 → 170,321 (0
+    spellings lost, +165 gained: S2 appended 164 rows, 156 ADJ — the -ique adjectives' plural/gender
+    forms now agree with their exemplars). Before-state `scratch/harm-before/`. Families 1 (~40
+    `-onner` loi-de-position verbs) and 3 (suffix-driven pairs) and the `mixed` rows remain open.
 - **Pluvier-style TAO prefix/suffix shortcut scan** — go through Pluvier's dictionary rules
   (docs/PRIOR_ART.md; the TAO strokes that emit a whole multi-syllable prefix or suffix from
   one special keystroke), and for each rule measure the payoff in OUR lexicon: the sum of
