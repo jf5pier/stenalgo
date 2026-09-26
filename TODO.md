@@ -378,16 +378,22 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
   normalization script (both lexicon halves, like the other `fix*` scripts).
 - **Close the B2 residue the audit classified but left open** — the continuation of the entry above,
   now that the generator side is done:
-  - the 96 plain-`e` non-final-open rows (`aguerrira` /E/ vs `descend` /e/, undecidable from the
-    coarse infinitive alone): try the French doubling heuristic — an `e` before a doubled consonant
-    reads E (`aguerrir` rr, `assujettir` tt, `pressentir` ss), counting `sc` as a double `s`. It
-    needs the orthographic unit AFTER the vowel, so the mid-vowel table key would grow a
-    following-unit dimension (MidVowelKey in src/verbparadigm.py), or the same signal feeds the
-    lexicon-side coarse-infinitive upgrade script. Known counterexamples to handle: the `es-`/
-    `eff-` prefix vowels stay tense despite the doubling (`essuyer` /e.sy.je/, `effacer` /e.fa.se/
-    — both attested coarse `e`). Backtest the split before committing (`scratch/b2_backtest.py`,
-    `scratch/b2_doubling_probe.py`); same heuristic may also fix the 6 `jetterez` rows (the
-    doubled-consonant stem marks the E the committed `°` hides).
+  - the plain-`e` non-final rows — DOUBLED-CONSONANT RULE DONE 2026-09-25 (NON_FINAL_DOUBLED in
+    src/verbparadigm.py, learned and applied like the other non-final contexts): a coarse `e`
+    before a doubled consonant letter in any syllable but the word's first laxes to E (`aguerrir`
+    rr, `assujettir` tt, `pressentir` ss; 38 rows fixed, 0 flipped; backtest 13,027 -> 13,065 of
+    13,269; `fixSplicedVerbBreakdowns --apply` corrected 142 more stored rows). The first syllable
+    is excluded because the prefix vowels keep their quality there (`dessécher` /deseSe/,
+    `effacer` /efase/ — 120 rows), and `sc` is not a doubled `s` because `descendre` attests
+    /des@d/ (86 rows). Residue, all lexicon-side (per-lemma coarse infinitive vs committed finite
+    forms — the upgrade script): `condescendre`/`redescendre` attest E before `sc` (27 rows,
+    `k§dEs@`, `R°dEs@`) though `descendre` attests `e`; `essuyer` (`Es8ija`), `blettir`
+    (`blEtisE`), `pressentir` (`pREs@tje`) and `tressaillir` (`tREsaje`) attest E from the word's
+    first syllable (16 rows). The 12 `élever` rows (`El°va`) are NOT generator gaps: `é` is a
+    one-phoneme grapheme (/e/), so the attested E rows are lexicon errors to correct in the
+    attested rows, not in the generator. Same heuristic may still unlock the 6 `jetterez` rows
+    (the doubled-consonant stem marks the E the committed `°` hides — would need rewriting a
+    committed schwa, left open).
   - `u`↔`w` (18 rows): LexiqueInfra splits within lemmas (`évanouir` attests `w_i`, `réjouir`
     `u|i`; phonologically `w` is right for both) — a fix script normalizing the `u`-attesting rows
     in both lexicon halves.
