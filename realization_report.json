@@ -77,7 +77,7 @@
    "markers": [
     "f"
    ],
-   "affectedWords": 15288,
+   "affectedWords": 15287,
    "chosenKeys": [
     16
    ],
@@ -188,7 +188,7 @@
     "passé",
     "pers_3"
    ],
-   "affectedWords": 11977,
+   "affectedWords": 11967,
    "chosenKeys": [
     20
    ],
@@ -285,7 +285,7 @@
     "imparfait",
     "subjonctif"
    ],
-   "affectedWords": 5774,
+   "affectedWords": 5797,
    "chosenKeys": [
     21
    ],
@@ -364,7 +364,7 @@
     "impératif",
     "pers_1"
    ],
-   "affectedWords": 7447,
+   "affectedWords": 7452,
    "chosenKeys": [
     18
    ],
@@ -449,7 +449,7 @@
     "nbr_p",
     "p"
    ],
-   "affectedWords": 50243,
+   "affectedWords": 50250,
    "chosenKeys": [
     17
    ],
@@ -564,7 +564,7 @@
    "markers": [
     "pers_2"
    ],
-   "affectedWords": 7817,
+   "affectedWords": 7818,
    "chosenKeys": [
     19
    ],
@@ -1988,6 +1988,10 @@
    [
     "fusés",
     "fusées"
+   ],
+   [
+    "aiguisent",
+    "excisent"
    ],
    [
     "tôlardes",
@@ -4112,6 +4116,10 @@
    [
     "quants",
     "camps"
+   ],
+   [
+    "excises",
+    "aiguises"
    ],
    [
     "coalisés",

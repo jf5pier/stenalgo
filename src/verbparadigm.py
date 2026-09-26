@@ -598,51 +598,79 @@ def deriveSyllableSplitTable(words: list[Word]) -> dict[ClusterKey, int | None]:
 
 
 # Mid vowels whose quality the spelling decides, in any syllable (achètera /aSEtRa/
-# beside acheter /aS°te/) or in a closed final one (abonne /abOn/ beside abonner
-# /abone/), and how settled the spelling must leave it for deriveMidVowelTable to keep
-# the rule.
+# beside acheter /aS°te/), in a closed final one before /z/ or not (abonne /abOn/
+# beside abonner /abone/), or in a non-final one, closed (aguerrira /agEriRa/ beside
+# the coarse aguerrir /ageriR/) or open (affaiblira /afEblira/ beside the coarse
+# affaiblir /afebliR/) — and how settled the spelling must leave it for
+# deriveMidVowelTable to keep the rule. Non-final rules rewrite the coarse symbols
+# only ("e", "o"): the others are committed qualities, and the schwa is a different
+# phoneme altogether, not a laxer one (devriez /d°vRje/ keeps its °).
+COARSE_VOWELS = set("eo")
+COARSE_OF = {"E": "e", "O": "o"}
 MID_VOWELS = set("eE°29oO")
 MIN_MID_VOWEL_COUNT = 20
 MIN_ANY_SYLLABLE_VOWEL_SHARE = 0.99
-MIN_CLOSED_FINAL_VOWEL_SHARE = 0.9
+MIN_CLOSED_VOWEL_SHARE = 0.9
 
-# (orthographic unit, context): "any" syllable, or a closed final one before /z/ or not.
+# (orthographic unit, context): "any" syllable, a closed final one before /z/ or not,
+# or a non-final one, closed or open.
 MidVowelKey = tuple[str, str]
-ANY_SYLLABLE, CLOSED_FINAL, CLOSED_FINAL_BEFORE_Z = "any", "closed", "closed before z"
+ANY_SYLLABLE, CLOSED, CLOSED_BEFORE_Z = "any", "closed", "closed before z"
+NON_FINAL_CLOSED, NON_FINAL_OPEN = "nonfinal-closed", "nonfinal-open"
 
 
-def _midVowelContexts(units: list[str]) -> dict[int, str]:
+def _midVowelContexts(units: list[str], boundaries: set[int] | None = None) -> dict[int, str]:
     """
-    The closed-final context of the word's last nucleus, when a sounded consonant
-    follows it (a closed final syllable).
+    The syllable context of the nuclei: the word's last one is closed final, before
+    /z/ or not (it needs no `boundaries`: everything after it is its coda). The others
+    — only when `boundaries` are given, for they alone tell a syllable's own coda from
+    the next syllable's onset — are non-final, closed when their syllable ends in a
+    sounded consonant. Without `boundaries` only the last nucleus is judged.
     """
     nuclei = [i for i, unit in enumerate(units) if _hasNucleus(unit)]
+    contexts: dict[int, str] = {}
     if not nuclei:
-        return {}
+        return contexts
     coda = [unit for unit in units[nuclei[-1] + 1:] if unit != "#"]
-    if not coda:
-        return {}
-    return {nuclei[-1]: CLOSED_FINAL_BEFORE_Z if coda[0] == "z" else CLOSED_FINAL}
+    for position, nucleus in enumerate(nuclei):
+        if position == len(nuclei) - 1:
+            if coda:
+                contexts[nucleus] = CLOSED_BEFORE_Z if coda[0] == "z" else CLOSED
+        elif boundaries is not None and any(boundary > nucleus for boundary in boundaries):
+            syllableEnd = min(boundary for boundary in boundaries if boundary > nucleus)
+            ownCoda = [
+                unit for unit in units[nucleus + 1:syllableEnd]
+                if unit != "#" and not _hasNucleus(unit)
+            ]
+            contexts[nucleus] = NON_FINAL_CLOSED if ownCoda else NON_FINAL_OPEN
+    return contexts
 
 
 def deriveMidVowelTable(words: list[Word]) -> dict[MidVowelKey, str]:
     """
     The mid vowel (MID_VOWELS) a nucleus gets from its orthographic unit: in any syllable
     ("è" -> E, "é" -> e, "au" -> o), kept at a MIN_ANY_SYLLABLE_VOWEL_SHARE share of the
-    most common vowel; and in a closed final syllable, before /z/ or not ("o" -> O, "o"
-    before /z/ -> o, "eu" before /z/ -> 2), kept at MIN_CLOSED_FINAL_VOWEL_SHARE. Both
-    need MIN_MID_VOWEL_COUNT occurrences. Only words whose breakdowns align unit for
-    unit and spell out their phonology count.
+    most common vowel; in a closed final syllable, before /z/ or not ("o" -> O, "o"
+    before /z/ -> o, "eu" before /z/ -> 2); or in a non-final syllable, closed or open,
+    where the spelling picks the lax member ("e" and "ai" -> E, "o" -> O) — both kept
+    at MIN_CLOSED_VOWEL_SHARE. All need MIN_MID_VOWEL_COUNT occurrences. Nuclei that
+    are not themselves a mid vowel ("wa", a glide and a vowel) do not vote: they say
+    nothing about which mid vowel the spelling picks. And when a non-final key's most
+    common vowel is a lax one, its coarse counterpart abstains too: a coarse row never
+    committed to a quality (Lexique383's "e" beside LexiqueInfra's "E"), so it cannot
+    outvote the committed readings (affaiblira's "ai" -> E at 96% of the committed
+    rows, 75% of all of them). Only words whose breakdowns align unit for unit and
+    spell out their phonology count.
     """
     vowelsByKey: dict[MidVowelKey, Counter[str]] = defaultdict(Counter)
     for word in words:
-        units, _ = _unitsAndBoundaries(word.rawSyllCV)
+        units, boundaries = _unitsAndBoundaries(word.rawSyllCV)
         orthoUnits, _ = _unitsAndBoundaries(word.rawOrthosyllCV)
         if len(units) != len(orthoUnits) or _joinPhonology(units) != word.phonology:
             continue
-        contexts = _midVowelContexts(units)
+        contexts = _midVowelContexts(units, boundaries)
         for i, unit in enumerate(units):
-            if _hasNucleus(unit):
+            if unit in MID_VOWELS:
                 vowelsByKey[(orthoUnits[i], ANY_SYLLABLE)][unit] += 1
                 if i in contexts:
                     vowelsByKey[(orthoUnits[i], contexts[i])][unit] += 1
@@ -650,8 +678,11 @@ def deriveMidVowelTable(words: list[Word]) -> dict[MidVowelKey, str]:
     for key, vowels in vowelsByKey.items():
         vowel, count = vowels.most_common(1)[0]
         total = vowels.total()
-        minShare = MIN_ANY_SYLLABLE_VOWEL_SHARE if key[1] == ANY_SYLLABLE else MIN_CLOSED_FINAL_VOWEL_SHARE
-        if vowel in MID_VOWELS and total >= MIN_MID_VOWEL_COUNT and count / total >= minShare:
+        if key[1] in (NON_FINAL_CLOSED, NON_FINAL_OPEN) and vowel in COARSE_OF:
+            # The coarse counterpart of the lax winner abstains (docstring above).
+            total -= vowels[COARSE_OF[vowel]]
+        minShare = MIN_ANY_SYLLABLE_VOWEL_SHARE if key[1] == ANY_SYLLABLE else MIN_CLOSED_VOWEL_SHARE
+        if total >= MIN_MID_VOWEL_COUNT and count / total >= minShare:
             table[key] = vowel
     return table
 
@@ -689,8 +720,10 @@ def normalizeSplicedBreakdown(
     phonology spells out the phonemic breakdown's units (all but B3's rows do), it also
     vocalizes a word-final glide after a consonant (FINAL_GLIDE_VOWEL) and, when the
     breakdowns are aligned, gives every mid vowel the quality its spelling calls for
-    (`midVowelByOrtho`, deriveMidVowelTable: the closed-final-syllable rule first, then
-    the any-syllable one), in the phonology and the phonemic breakdown alike.
+    (`midVowelByOrtho`, deriveMidVowelTable: the closed-final rule of the vowel's
+    syllable first, then the any-syllable one; the non-final rules run only after the
+    boundaries are re-placed, for only they say which syllables are non-final and
+    which closed), in the phonology and the phonemic breakdown alike.
     """
     units, boundaries = _unitsAndBoundaries(rawSyllCV)
     orthoUnits, orthoBoundaries = _unitsAndBoundaries(rawOrthosyllCV)
@@ -699,7 +732,8 @@ def normalizeSplicedBreakdown(
         boundaries |= orthoBoundaries
 
     sounded = [i for i, unit in enumerate(units) if unit != "#"]
-    if sounded and _joinPhonology(units) == phonology:
+    spelledOut = bool(sounded) and _joinPhonology(units) == phonology
+    if spelledOut:
         vowel = FINAL_GLIDE_VOWEL.get(units[sounded[-1]])
         afterConsonant = len(sounded) == 1 or not _hasNucleus(units[sounded[-2]])
         if vowel is not None and afterConsonant:
@@ -710,7 +744,6 @@ def normalizeSplicedBreakdown(
                 if unit in MID_VOWELS:
                     keys = [(orthoUnits[i], context) for context in (contexts.get(i, ANY_SYLLABLE), ANY_SYLLABLE)]
                     units[i] = next((midVowelByOrtho[key] for key in keys if key in midVowelByOrtho), unit)
-        phonology = _joinPhonology(units)
 
     nuclei = [i for i, unit in enumerate(units) if _hasNucleus(unit)]
     newBoundaries: set[int] = set()
@@ -722,6 +755,19 @@ def normalizeSplicedBreakdown(
                 newBoundaries.add(before + 1 + position)
         else:
             newBoundaries.update(i for i in boundaries if before < i <= after)
+
+    if spelledOut and aligned:
+        # Which syllables are non-final, and which of them closed, is only knowable
+        # now, after the re-placement; and a non-final rule rewrites the coarse
+        # symbols only — the others are committed (devriez keeps its °).
+        contexts = _midVowelContexts(units, newBoundaries)
+        for i, unit in enumerate(units):
+            if unit in COARSE_VOWELS and contexts.get(i) in (NON_FINAL_CLOSED, NON_FINAL_OPEN):
+                key = (orthoUnits[i], contexts[i])
+                if key in midVowelByOrtho:
+                    units[i] = midVowelByOrtho[key]
+    if spelledOut:
+        phonology = _joinPhonology(units)
 
     rawSyllCV = _joinBreakdown(units, newBoundaries)
     if aligned:
