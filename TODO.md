@@ -427,6 +427,16 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
     (`games`, `kreutzers`, `miladys`, `sweepstakes`, `updates`, `molle(s)`, `interviewée(s)`)
     still fail the guard, made by another generator. `enorgueillir`'s dropped `n` is fixed
     (reinserted); `interviewer` stays deleted (its Mixte source is inconsistent).
+  - the 34 lost `-ierions`/`-ieriez` spellings — FIXED 2026-09-26 (`endingTemplateKey`,
+    src/verbparadigm.py): the ending tables are keyed by template plus the glide class of the
+    infinitive (`#ij` when the phon ends `ije`: `crier`, `trier`, `plier`, `oublier`, and the
+    `-iller` verbs), so those verbs no longer splice the `étudier` (`d_j_e`) endings; `crierions`
+    `k_R_i_#|R_j_§`. Rebuild: S2 converged after 2 rounds appending 2,560 rows (34 back plus the
+    full paradigms of ~85 `-iller` verbs, `tiller`… ~30 rows each, previously blocked by the
+    well-formedness guard); collisions 0/0/0; Plover 167,747 → 170,098 strokes, 0 spellings
+    lost, 1,900 gained; 649 tests pass. Before-state `scratch/ier-before/`, logs
+    `scratch/ier-rebuild.log`, `scratch/ier-full.log`. Still open: 9 loanword/noun rows made by
+    another generator.
   - `python lexique.py` stopped reproducing the committed LexiqueMixte.tsv after 0b5eace (found
     and FIXED 2026-09-26): the 49 verbs remapped to `ach:eter`/`p:eler` dropped out of
     `loadElerEterQualifyingVerbs`, so reform rule 5 no longer regularized their Lexique383

@@ -7566,7 +7566,7 @@
   "ortho": "prie",
   "before": "que je",
   "after": "",
-  "label": "subjonctif présent, 1re sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "pRi",
   "steno": "pRi/-R",
   "strokes": [
@@ -43184,6 +43184,25 @@
     8,
     10,
     13
+   ]
+  ],
+  "frequency": 35.65
+ },
+ {
+  "ortho": "crie",
+  "before": "qu'il",
+  "after": "",
+  "label": "subjonctif présent, 3e sg.",
+  "phonology": "kRi",
+  "steno": "kRi/-R",
+  "strokes": [
+   [
+    2,
+    8,
+    13
+   ],
+   [
+    21
    ]
   ],
   "frequency": 35.65
@@ -90929,9 +90948,9 @@
  },
  {
   "ortho": "appuie",
-  "before": "qu'il",
+  "before": "que j'",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "a.p8i",
   "steno": "a/p@ai/-R",
   "strokes": [
@@ -232228,30 +232247,6 @@
     13,
     14,
     17,
-    20
-   ]
-  ],
-  "frequency": 4.22
- },
- {
-  "ortho": "jouerai",
-  "before": "je",
-  "after": "",
-  "label": "indicatif futur, 1re sg.",
-  "phonology": "Zu.Re",
-  "steno": "vt@e/Re/-t",
-  "strokes": [
-   [
-    5,
-    7,
-    11,
-    14
-   ],
-   [
-    8,
-    14
-   ],
-   [
     20
    ]
   ],
