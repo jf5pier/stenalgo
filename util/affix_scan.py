@@ -266,7 +266,7 @@ def partSelectAndBind(cands: dict, records: list[A.WordRecord], starboard: Starb
              f"Constants: RULE_BUDGET={R.RULE_BUDGET}, MAX_RULE_FORMS={R.MAX_RULE_FORMS}, "
              f"EXCEPTION_ALPHA={R.EXCEPTION_ALPHA}, EXCLUSION_COST={R.EXCLUSION_COST}, "
              f"FORM_COST={R.FORM_COST}, SWAP_CANDIDATES={R.SWAP_CANDIDATES}, "
-             f"SWAP_PASSES={R.SWAP_PASSES}.", "",
+             f"SWAP_PASSES={R.SWAP_PASSES}, TERRITORY_OVERLAP={R.TERRITORY_OVERLAP}.", "",
              "Note: bare verb-infinitive-ending candidates (isVerbEndingFragment) were left "
              "UNFILTERED in this run, per the user's 2026-09-27 decision to let them compete on "
              "score through Phase 3/4 instead of being cut upstream.", "",
@@ -294,6 +294,22 @@ def partSelectAndBind(cands: dict, records: list[A.WordRecord], starboard: Starb
     lines += ["## Sibling pairs (candidateSim >= FAMILY_LINK_SIM, not a grow lineage, out of scope for v1)", ""]
     for sim, a, bo in siblingPairs[:20]:
         lines.append(f"- {a} ~ {bo} (sim {sim:.2f})")
+
+    # One key per territory (R.TERRITORY_OVERLAP): no two selected rules may share this much.
+    overlaps = sorted(((R.territoryOverlap(b1.rule, b2.rule), b1.rule.root.ortho, b2.rule.root.ortho)
+                       for i, b1 in enumerate(bound) for b2 in bound[i + 1:]), reverse=True)
+    lines += ["", f"## Territory overlaps among selected rules (must all be < {R.TERRITORY_OVERLAP})", ""]
+    lines += [f"- {a} ~ {bo}: {ov:.2f}" for ov, a, bo in overlaps if ov >= 0.05] or ["- none >= 0.05"]
+    counts: dict[str, int] = {}
+    for ev in result.territoryEvents:
+        counts[ev.outcome] = counts.get(ev.outcome, 0) + 1
+    lines += ["", "## Territory-mates met during selection", "",
+              "Outcome counts: " + ", ".join(f"{k} {v}" for k, v in sorted(counts.items())), ""]
+    for ev in result.territoryEvents:
+        if ev.outcome == "inLineage":
+            continue
+        lines.append(f"- {ev.mateRoot} -> {ev.selectedRoot} (overlap {ev.overlap:.2f}): {ev.outcome}"
+                     + (f", total {ev.totalBefore:.0f} -> {ev.totalAfter:.0f}" if ev.totalAfter else ""))
     with open(RULES_REPORT_MD, "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
     print(f"wrote {RULES_TSV}, {RULES_REPORT_MD}")

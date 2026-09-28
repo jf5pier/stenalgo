@@ -811,7 +811,7 @@ def growAffixesLattice(
     Nothing here commits to a rule -- Phase 2/3 (not implemented yet) will do that. Guards
     `MAX_POOL` instead of the old 5..300 family sanity check, which no longer applies (§3.6):
     on hitting it, stops (keeping whatever was generated so far) rather than inventing a new
-    threshold (§9 pitfall). Returns (pool, stoppedEarly, totalGenerated)."""
+    threshold (§9 pitfall). Returns the pool: the seeds plus the deduped grown nodes."""
     allChildren: list[Candidate] = []
     seenExpand: set[tuple[str, frozenset[tuple[int, int, int]]]] = set()
     frontier = [c for c in cands.values() if c.carriers]
@@ -845,9 +845,35 @@ def growAffixesLattice(
     if stoppedEarly:
         print(f"WARNING: affix lattice pool exceeded MAX_POOL={MAX_POOL}; stopped early "
               f"({total} pattern nodes generated). Don't invent a new threshold -- report it.")
+    return _mergeChildrenIntoPool(cands, allChildren)
+
+
+def _mergeChildrenIntoPool(
+    cands: dict[tuple[str, int, str, str], Candidate], children: list[Candidate],
+) -> dict[tuple[str, int, str, str], Candidate]:
+    """§3.4 dedupe, across the seed pool too (2026-09-28): a grown child whose carriers+spans
+    equal a seed node's (typically an A7-pooled node like `·°ment`, which has no lineage of its
+    own) is not added as a second, unrelated-looking pool entry -- it becomes an alias of the
+    seed, and the seed inherits the child's lineage (`grownFromKey`/`rootKey`) so Phase 2 sees
+    it as a descendant of the root it was grown from. The dropped child never has children of
+    its own: `growAffixesLattice` never expands a carrier set a seed already expanded. No cycle
+    is possible either: spans grow strictly along a lineage, so the child's parent can't
+    descend from a seed with the child's exact spans."""
     pool = dict(cands)
-    for cand in _dedupeByCarrierSet(allChildren):
-        pool[(cand.position, cand.k, cand.phono, cand.ortho)] = cand
+    seedBySet: dict[tuple[str, frozenset[tuple[int, int, int]]], Candidate] = {}
+    for c in cands.values():
+        if c.carriers:
+            seedBySet.setdefault(_carrierSetKey(c.position, c.carriers), c)
+    for cand in _dedupeByCarrierSet(children):
+        key = (cand.position, cand.k, cand.phono, cand.ortho)
+        seed = seedBySet.get(_carrierSetKey(cand.position, cand.carriers))
+        if seed is None:
+            pool[key] = cand
+            continue
+        seed.aliases.extend([key] + cand.aliases)
+        if seed.grownFromKey is None:
+            seed.grownFromKey = cand.grownFromKey
+            seed.rootKey = cand.rootKey
     return pool
 
 

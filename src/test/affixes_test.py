@@ -26,6 +26,37 @@ def _sb():
     return sb
 
 
+class TestMergeChildrenIntoPool:
+    """A grown node identical (carriers+spans) to a lineage-less seed -- `ment`'s `[C]°.m@` vs the
+    A7-pooled `·°ment` -- is aliased onto the seed, which joins the lineage, not left beside it."""
+
+    def _setup(self):
+        words = [rec(f"w{i}ement", [(i + 10,), (2,), (3,)]) for i in range(5)]
+        root = Candidate(SUFFIX, 1, "m@", "ment", carriers=[Carrier(w, 2, 1, "s") for w in words])
+        seed = Candidate(SUFFIX, 2, "°.m@", "·°ment", carriers=[Carrier(w, 1, 2, "s") for w in words],
+                         isGeneralized=True)
+        rootKey = (SUFFIX, 1, "m@", "ment")
+        child = Candidate(SUFFIX, 2, "[C]°.m@", "·[e]ment", carriers=[Carrier(w, 1, 2, "s") for w in words],
+                          grownFromKey=rootKey, rootKey=rootKey, slots=(Slot("onset", "°"),))
+        cands = {rootKey: root, (SUFFIX, 2, "°.m@", "·°ment"): seed}
+        return cands, seed, child, rootKey
+
+    def test_identical_child_becomes_an_alias_and_links_the_seed(self):
+        cands, seed, child, rootKey = self._setup()
+        pool = A._mergeChildrenIntoPool(cands, [child])
+        assert (SUFFIX, 2, "[C]°.m@", "·[e]ment") not in pool
+        assert len(pool) == 2
+        assert (SUFFIX, 2, "[C]°.m@", "·[e]ment") in seed.aliases
+        assert seed.grownFromKey == rootKey and seed.rootKey == rootKey
+
+    def test_a_different_child_is_added_untouched(self):
+        cands, seed, child, _rootKey = self._setup()
+        child.carriers = child.carriers[:3]
+        pool = A._mergeChildrenIntoPool(cands, [child])
+        assert pool[(SUFFIX, 2, "[C]°.m@", "·[e]ment")] is child
+        assert seed.grownFromKey is None and not seed.aliases
+
+
 class TestMorphology:
     def test_prefix_filter(self):
         lem = LemmaIndex(["faire", "refaire", "nation"])
