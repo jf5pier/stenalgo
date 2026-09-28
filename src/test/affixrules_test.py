@@ -84,6 +84,70 @@ class TestProxyScoreAndRuleBuilding:
         assert exclusionCountOf([a, b]) == 3
 
 
+def _exactRule(cand, gain):
+    """A Rule with hand-made exact results: every pooled carrier gains `gain` strokes."""
+    from src.affixes import poolCarriers
+    rule = Rule(cand.position, cand, [cand], keys=(1,), sources=[cand])
+    rule.results = [CarrierResult(c, gain=gain) for c in poolCarriers([cand])]
+    rule.score = ruleScoreFromResults(rule.results, 0, 1)[0]
+    return rule
+
+
+def _words(n, prefix="w"):
+    return [rec(f"{prefix}{i}ement", [(100 + _idx[0],), (2,), (3,)]) for i in range(n)]
+
+
+class TestTerritory:
+    def test_overlap_is_frequency_weighted_share_of_the_smaller_rule(self):
+        from src.affixrules import territoryOverlap
+        ws = _words(4)
+        a = _exactRule(Candidate(SUFFIX, 1, "m@", "ment", carriers=[Carrier(w, 2, 1, "s") for w in ws]), 1)
+        b = _exactRule(Candidate(SUFFIX, 2, "°.m@", "·°ment", carriers=[Carrier(w, 1, 2, "s") for w in ws[:2]]), 2)
+        assert territoryOverlap(a, b) == 1.0          # all of the smaller rule's words
+        c = _exactRule(Candidate(SUFFIX, 1, "x", "x", carriers=[Carrier(w, 2, 1, "s") for w in ws[1:3] + _words(2, "z")]), 1)
+        assert territoryOverlap(a, c) == 0.5
+
+    def test_prefix_and_suffix_rules_never_share_a_territory(self):
+        from src.affixes import PREFIX
+        from src.affixrules import territoryOverlap
+        ws = _words(3)
+        a = _exactRule(Candidate(SUFFIX, 1, "m@", "ment", carriers=[Carrier(w, 2, 1, "s") for w in ws]), 1)
+        b = _exactRule(Candidate(PREFIX, 1, "R°", "re", carriers=[Carrier(w, 0, 1, "s") for w in ws]), 1)
+        assert territoryOverlap(a, b) == 0.0
+
+    def test_selection_merges_a_lineageless_mate_instead_of_selecting_it_alone(self, monkeypatch):
+        # `ment` (k=1, every word) and an A7-style `·°ment` (k=2, no lineage, most of the same
+        # words). Word-once crediting alone would select both, on two keys.
+        import src.affixrules as R
+        from src.affixes import poolCarriers
+
+        def fakeChoose(rule, pk, ctx, keypresses):
+            rule.keys = (1,)
+            rule.results = [CarrierResult(c, gain=c.span) for c in poolCarriers(rule.forms)]
+            rule.score = ruleScoreFromResults(rule.results, 0, len(rule.forms))[0]
+
+        monkeypatch.setattr(R, "chooseRuleKeypress", fakeChoose)
+        ws = _words(10)
+        ment = Candidate(SUFFIX, 1, "m@", "ment", carriers=[Carrier(w, 2, 1, "s") for w in ws])
+        ement = Candidate(SUFFIX, 2, "°.m@", "·°ment", carriers=[Carrier(w, 1, 2, "s") for w in ws[:8]])
+        cands = {candidateKey(c): c for c in (ment, ement)}
+        result = R.selectRules(cands, None, None, [], budget=5)
+        assert len(result.selected) == 1
+        assert {candidateKey(f) for f in result.selected[0].forms} == set(cands)
+        assert [e.outcome for e in result.territoryEvents] == ["merged"]
+
+    def test_swap_never_brings_in_a_mate_of_a_rule_that_stays(self):
+        from src.affixrules import SelectionResult, swapPass, territoryOverlap
+        ws, xs = _words(10), _words(2, "x")
+        a = _exactRule(Candidate(SUFFIX, 1, "m@", "ment", carriers=[Carrier(w, 2, 1, "s") for w in ws]), 1)
+        b = _exactRule(Candidate(SUFFIX, 2, "°.m@", "·°ment", carriers=[Carrier(w, 1, 2, "s") for w in ws[:5]]), 3)
+        c = _exactRule(Candidate(SUFFIX, 1, "te", "té", carriers=[Carrier(w, 2, 1, "s") for w in xs]), 1)
+        # Unfiltered, swapping c out for b (keeping a) would win: a and b on one territory.
+        out = swapPass(SelectionResult([c, a], [], 0, [b]))
+        assert a not in out.selected and b in out.selected and c in out.selected
+        assert all(territoryOverlap(x, y) < 0.5 for x in out.selected for y in out.selected if x is not y)
+
+
 class TestRuleScore:
     def test_word_exceptions_only_count_collision_reasons(self):
         w1 = rec("w1", [(1,), (2,)])

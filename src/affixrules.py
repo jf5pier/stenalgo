@@ -40,6 +40,12 @@ MAX_EXCEPTION_RATE = 0.05   # 2026-09-27 (user decision): a rule's exception rat
                             # only a label on the final pick for human review (rule.keySimilarity).
 SWAP_CANDIDATES = 20
 SWAP_PASSES = 3
+TERRITORY_OVERLAP = 0.5     # 2026-09-28: two same-position rules whose carriers overlap this much
+                            # (frequency-weighted, as a share of the smaller rule) are one territory
+                            # -- one key. Word-once crediting alone let `·°ment` (-dt) sit next to
+                            # `ment` (-tm) on 83% of the same words, and let `·[..]ter` patch `ter`'s
+                            # own exceptions on a second key: two outlines per word, two keys per
+                            # morpheme. A territory-mate may only join the selected rule as a form.
 REBIND_MAX_LOSS = 0.10
 REBIND_ITERATIONS = 3
 
@@ -108,6 +114,15 @@ class Rule:
     alternatives: list[tuple[float, tuple[int, ...]]] = field(default_factory=list)
     keySimilarity: float = 0.0   # the chosen key's phonetic-similarity score (not gated -- see
                                  # SIM_TOP_N -- so a low value here flags a non-mnemonic key)
+    sources: list[Candidate] = field(default_factory=list)  # roots whose subtrees fed the forms
+                                                            # (more than one after a territory merge)
+    _wordFreq: dict[int, float] | None = field(default=None, repr=False, compare=False)
+
+    def wordFreq(self) -> dict[int, float]:
+        """rec.idx -> frequency over the pooled carriers (cached: forms never change in place)."""
+        if self._wordFreq is None:
+            self._wordFreq = {c.rec.idx: c.rec.frequency for c in poolCarriers(self.forms)}
+        return self._wordFreq
 
 
 def buildCandidateRule(
@@ -115,8 +130,35 @@ def buildCandidateRule(
 ) -> Rule:
     """§4.4 steps 1-3: greedily add the descendant that most increases the proxy score, up to
     `MAX_RULE_FORMS`. No keyboard evaluation here -- cheap enough to run for every pool node."""
+    rule = _greedyForms(root, descendantsOf(root, childrenIdx))
+    rule.sources = [root]
+    return rule
+
+
+def buildMergedRule(
+    roots: list[Candidate], childrenIdx: dict[tuple[str, int, str, str], list[Candidate]],
+) -> Rule:
+    """Phase 2 over one territory (2026-09-28): the same greedy form selection as
+    `buildCandidateRule`, but drawing forms from several same-territory roots' subtrees at once
+    (`ment` + the A7-pooled `·°ment`), so one rule -- one key -- can cover both. Each root is
+    tried as forms[0]; the better proxy score wins. The greedy may still leave a root out."""
+    nodes: dict[tuple[str, int, str, str], Candidate] = {}
+    for r in roots:
+        for c in [r] + descendantsOf(r, childrenIdx):
+            nodes.setdefault(candidateKey(c), c)
+    best: Rule | None = None
+    for r in roots:
+        rule = _greedyForms(r, [c for k, c in nodes.items() if k != candidateKey(r)])
+        if best is None or rule.score > best.score:
+            best = rule
+    assert best is not None
+    best.sources = list(roots)
+    return best
+
+
+def _greedyForms(root: Candidate, remaining: list[Candidate]) -> Rule:
     forms = [root]
-    remaining = descendantsOf(root, childrenIdx)
+    remaining = list(remaining)
     bestScore = proxyScore(root.position, forms)
     while remaining and len(forms) < MAX_RULE_FORMS:
         best: tuple[float, Candidate] | None = None
@@ -264,12 +306,76 @@ def _marginal(
             - EXCLUSION_COST * exclusionCountOf(rule.forms) - FORM_COST * (len(rule.forms) - 1))
 
 
+def territoryOverlap(a: Rule, b: Rule) -> float:
+    """Frequency-weighted share of the smaller rule's carrier words that the other rule also
+    carries (same position only -- a prefix and a suffix rule never compete for a word)."""
+    if a.position != b.position:
+        return 0.0
+    fa, fb = a.wordFreq(), b.wordFreq()
+    if len(fb) < len(fa):
+        fa, fb = fb, fa
+    small = min(sum(fa.values()), sum(fb.values()))
+    if small <= 0:
+        return 0.0
+    return sum(f for idx, f in fa.items() if idx in fb) / small
+
+
+def territoryMate(rule: Rule, selected: list[Rule], threshold: float = TERRITORY_OVERLAP) -> Rule | None:
+    """The selected rule `rule` overlaps most, if at or above `threshold` (see TERRITORY_OVERLAP)."""
+    best: tuple[float, Rule] | None = None
+    for s in selected:
+        if s is rule:
+            continue
+        ov = territoryOverlap(rule, s)
+        if ov >= threshold and (best is None or ov > best[0]):
+            best = (ov, s)
+    return best[1] if best else None
+
+
+def _bestSOf(rules: list[Rule]) -> dict[tuple[str, int], float]:
+    bestS: dict[tuple[str, int], float] = {}
+    for rule in rules:
+        gains, _excFreq = _exactCarrierGains(rule)
+        for idx2, (_freq, gain) in gains.items():
+            k2 = (rule.position, idx2)
+            if gain > bestS.get(k2, 0.0):
+                bestS[k2] = gain
+    return bestS
+
+
+def creditedTotal(rules: list[Rule]) -> float:
+    """§5's objective: the word-once-credited total, rules applied in the given order."""
+    bestS: dict[tuple[str, int], float] = {}
+    total = 0.0
+    for rule in rules:
+        gains, excFreq = _exactCarrierGains(rule)
+        total += _marginal(gains, excFreq, rule, bestS)
+        for idx2, (_freq, gain) in gains.items():
+            k2 = (rule.position, idx2)
+            if gain > bestS.get(k2, 0.0):
+                bestS[k2] = gain
+    return total
+
+
+@dataclass
+class TerritoryEvent:
+    """One territory-mate met by the selection (reported for review)."""
+    selectedRoot: str          # the selected rule's root ortho, before any merge
+    mateRoot: str              # the candidate that overlapped it
+    overlap: float
+    outcome: str               # "merged", "rejected" (merge no better), "inLineage" (the greedy
+                               # already weighed it), "noKey" (merged rule has no legal key)
+    totalBefore: float = 0.0
+    totalAfter: float = 0.0
+
+
 @dataclass
 class SelectionResult:
     selected: list[Rule]
     curve: list[float]                    # cumulative total after each acceptance, 1..min(40, N)
     evaluatedExactCount: int               # roots that got the expensive §4.4 step 4 evaluation
     unselectedExact: list[Rule]            # exact-evaluated but not selected, best-score first
+    territoryEvents: list[TerritoryEvent] = field(default_factory=list)
 
 
 def selectRules(
@@ -280,7 +386,14 @@ def selectRules(
     each stage recomputed fresh against the current selection before being trusted, so a root is
     only accepted once its exact marginal has survived a fresh recompute with no other rule
     accepted in between. `chooseRuleKeypress` (the expensive step) runs at most once per root,
-    only for roots that reach stage 2."""
+    only for roots that reach stage 2.
+
+    One key per territory (2026-09-28, TERRITORY_OVERLAP): before a root is exact-evaluated or
+    accepted, it is checked against the selected rules. A territory-mate is never selected on its
+    own; instead the selected rule is rebuilt over both roots (`buildMergedRule`) and replaced in
+    place -- same budget slot -- if that raises the word-once-credited total. Either way the mate
+    leaves the heap for good. A mate already inside the selected rule's lineage is dropped without
+    evaluation: `buildCandidateRule`'s greedy already weighed it as a form."""
     idx = childrenIndex(cands)
     ruleCache: dict[tuple[str, int, str, str], Rule] = {}
 
@@ -306,6 +419,41 @@ def selectRules(
     total = 0.0
     exactEvaluated: set[tuple[str, int, str, str]] = set()
     droppedExact: list[Rule] = []
+    events: list[TerritoryEvent] = []
+
+    def lineageKeys(rule: Rule) -> set[tuple[str, int, str, str]]:
+        keys: set[tuple[str, int, str, str]] = set()
+        for src in rule.sources:
+            keys.add(candidateKey(src))
+            keys.update(candidateKey(d) for d in descendantsOf(src, idx))
+        return keys
+
+    def handleTerritory(rule: Rule, mate: Rule) -> None:
+        """`rule` overlaps the selected `mate`: try the merge, never select `rule` alone."""
+        nonlocal bestS, total
+        ev = TerritoryEvent(mate.root.ortho, rule.root.ortho, territoryOverlap(rule, mate), "inLineage")
+        events.append(ev)
+        if candidateKey(rule.root) in lineageKeys(mate):
+            return
+        merged = buildMergedRule(mate.sources + [rule.root], idx)
+        if [candidateKey(f) for f in merged.forms] == [candidateKey(f) for f in mate.forms]:
+            ev.outcome = "rejected"
+            return
+        chooseRuleKeypress(merged, pk, ctx, keypresses)
+        if merged.keys is None:
+            ev.outcome = "noKey"
+            return
+        i = next(j for j, x in enumerate(selected) if x is mate)
+        trial = selected[:i] + [merged] + selected[i + 1:]
+        ev.totalBefore, ev.totalAfter = total, creditedTotal(trial)
+        others = selected[:i] + selected[i + 1:]
+        if ev.totalAfter <= ev.totalBefore or territoryMate(merged, others) is not None:
+            ev.outcome = "rejected"
+            return
+        ev.outcome = "merged"
+        selected[i] = merged
+        bestS = _bestSOf(selected)
+        total = ev.totalAfter
 
     while heap and len(selected) < budget:
         _negval, s, key, stage = heapq.heappop(heap)
@@ -315,6 +463,10 @@ def selectRules(
             marg = _marginal(gains, excFreq, rule, bestS)
             if marg > 0:
                 heapq.heappush(heap, (-marg, s, key, 1))
+            continue
+        mate = territoryMate(rule, selected)
+        if mate is not None:
+            handleTerritory(rule, mate)
             continue
         if stage == 1:
             gains, excFreq = _proxyCarrierGains(rule)
@@ -348,7 +500,7 @@ def selectRules(
         curve.append(total)
 
     droppedExact.sort(key=lambda r: -(r.score or 0.0))
-    return SelectionResult(selected, curve[:curveLength], len(exactEvaluated), droppedExact)
+    return SelectionResult(selected, curve[:curveLength], len(exactEvaluated), droppedExact, events)
 
 
 def swapPass(
@@ -363,16 +515,7 @@ def swapPass(
 
     def totalOf(rules: list[Rule]) -> float:
         """Word-once-credited total (§5's objective), rules applied best-score-first."""
-        bestS: dict[tuple[str, int], float] = {}
-        total = 0.0
-        for rule in sorted(rules, key=lambda r: -(r.score or 0.0)):
-            gains, excFreq = _exactCarrierGains(rule)
-            total += _marginal(gains, excFreq, rule, bestS)
-            for idx2, (_freq, gain) in gains.items():
-                k2 = (rule.position, idx2)
-                if gain > bestS.get(k2, 0.0):
-                    bestS[k2] = gain
-        return total
+        return creditedTotal(sorted(rules, key=lambda r: -(r.score or 0.0)))
 
     changed = True
     rounds = 0
@@ -385,6 +528,10 @@ def swapPass(
             for cand in pool:
                 if cand in selected:
                     continue
+                # One key per territory (TERRITORY_OVERLAP): a swap may not bring in a rule
+                # that overlaps one staying selected.
+                if territoryMate(cand, selected[:i] + selected[i + 1:]) is not None:
+                    continue
                 trial = selected[:i] + [cand] + selected[i + 1:]
                 t = totalOf(trial)
                 if t > base and (bestSwap is None or t > bestSwap[1]):
@@ -394,7 +541,8 @@ def swapPass(
                 pool.remove(bestSwap[0])
                 selected[i] = bestSwap[0]
                 changed = True
-    return SelectionResult(selected, result.curve, result.evaluatedExactCount, result.unselectedExact)
+    return SelectionResult(selected, result.curve, result.evaluatedExactCount, result.unselectedExact,
+                           result.territoryEvents)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
