@@ -140,9 +140,11 @@ exist, `ment` was just the one a human happened to ask about) collapse into fewe
 | 4 | `tion` | 4465.1 | `-dtn` | 0 | |
 | ... | (27 more rows) | | | | |
 
-Regenerate with `PYTHONPATH=. env/bin/python -m util.affix_scan --part b --refresh` (~14 min,
-uses the cached `scratch/affix-records.pickle` so it skips the 44s lexicon reload... no, actually
-`--refresh` forces the reload; drop `--refresh` to reuse the cache if records haven't changed).
+Regenerate with `PYTHONPATH=. env/bin/python -m util.affix_scan --part b` (~13 min: the ~1751-key
+exhaustive search per exact-evaluated root, not the lexicon load, dominates). Drop the flag as
+shown -- `--refresh` forces a full lexicon reload from the phonetic/disambiguated theory (adds
+~44s) and is only needed if the lexicon itself changed; `scratch/affix-records.pickle` is reused
+otherwise.
 
 ## 5. Budget (20 vs 30): still open, leaning 30
 
