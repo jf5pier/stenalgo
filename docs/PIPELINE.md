@@ -842,10 +842,13 @@ Transformation: three scorers:
 - `analysePhonemeLexicalAmbiguity` (:1098, `lexicalPhonemeAmbiguityScore` :883): same at word
   level via `Word.replaceSyllables` (word.py:369). Looks up a word phonology as a syllable
   name at :913, :931 (item B29).
-- `analyseMultiphonemeLexicalAmbiguity_serial` (:1138, `lexicalSyllabicPartAmbiguityScore`
-  :975): for every pair of whole-part phoneme groups, swaps group 1 for group 2 and adds
+- `analyseMultiphonemeLexicalAmbiguity_serial` (:1111, `lexicalSyllabicPartAmbiguityScore`
+  :996): for every pair of whole-part phoneme groups, swaps group 1 for group 2 and adds
   min(word frequency, mutated-word frequency) when the mutated word exists — the
-  **syllabic-part ambiguity**.
+  **syllabic-part ambiguity**. Per-syllable invariants (the mutated syllable name and its
+  inventory entry) are hoisted out of the per-word loop, and per-syllable frequency sums
+  come from `Syllable.phonoWordFrequencySums` (lazy, never pickled) — the pre-2026-09-29
+  version recomputed both per word (the S3 build's #1 cost, ~90 s/pass).
 Result: layout statistics: `syllabicAmbiguity`/`lexicalAmbiguity` 190/120/190 pairs
 (onset/nucleus/coda); `syllabicPartAmbiguity` 16,836/378/9,870 pairs, zeros included.
 Notes: `syllabicPartAmbiguity` feeds Layout solve (S4.4); `lexicalAmbiguity` feeds Fallback keymap (S4.3).
