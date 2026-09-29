@@ -1,0 +1,53 @@
+=== elicitation — top 15 by cumulative ===
+Tue Sep 29 13:22:32 2026    scratch/profiles/elicitation.pstats
+
+         53918789 function calls (41694166 primitive calls) in 104.031 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1305 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    146/1    0.009    0.000  104.031  104.031 {built-in method builtins.exec}
+        1    0.000    0.000  104.031  104.031 <string>:1(<module>)
+        1    0.000    0.000  104.031  104.031 <frozen runpy>:206(run_module)
+        1    0.000    0.000  104.024  104.024 <frozen runpy>:65(_run_code)
+        1    1.009    1.009  104.024  104.024 elicitation.py:1(<module>)
+        2    0.000    0.000   70.498   35.249 elicitation.py:560(_runStep)
+        2    0.000    0.000   70.497   35.249 subprocess.py:513(run)
+        2    0.000    0.000   70.495   35.248 subprocess.py:1177(communicate)
+        4    0.000    0.000   70.495   17.624 subprocess.py:1274(wait)
+        4    0.000    0.000   70.495   17.624 subprocess.py:2052(_wait)
+        2    0.000    0.000   70.495   35.248 subprocess.py:2039(_try_wait)
+        2   70.495   35.248   70.495   35.248 {built-in method posix.waitpid}
+        1    0.063    0.063   25.104   25.104 elicitation.py:596(resolveAndWritePressSets)
+        1    2.099    2.099   13.681   13.681 __init__.py:120(dump)
+  6143431    1.265    0.000   10.371    0.000 encoder.py:426(_iterencode)
+
+
+
+=== elicitation — top 15 by tottime ===
+Tue Sep 29 13:22:32 2026    scratch/profiles/elicitation.pstats
+
+         53918789 function calls (41694166 primitive calls) in 104.031 seconds
+
+   Ordered by: internal time
+   List reduced from 1305 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        2   70.495   35.248   70.495   35.248 {built-in method posix.waitpid}
+13585337/6143431    4.574    0.000    9.105    0.000 encoder.py:280(_iterencode_list)
+        3    3.738    1.246    5.397    1.799 elicitation.py:321(resolvePressByCombination)
+        6    3.618    0.603    3.618    0.603 {built-in method _pickle.load}
+10473934/6143428    3.206    0.000    7.689    0.000 encoder.py:339(_iterencode_dict)
+        1    3.187    3.187    4.073    4.073 elicitation.py:480(serializeResolvedPressSets)
+    79614    2.339    0.000    3.370    0.000 keyboard.py:31(canonicalizeStrokes)
+        1    2.099    2.099   13.681   13.681 __init__.py:120(dump)
+  6143431    1.265    0.000   10.371    0.000 encoder.py:426(_iterencode)
+   649606    1.218    0.000    1.218    0.000 elicitation.py:37(wordFeatureCombinations)
+  6143430    1.212    0.000    1.212    0.000 {method 'write' of '_io.TextIOWrapper' objects}
+        1    1.009    1.009  104.024  104.024 elicitation.py:1(<module>)
+   321150    0.961    0.000    1.031    0.000 keyboard.py:45(<genexpr>)
+  7182769    0.867    0.000    0.867    0.000 {built-in method builtins.isinstance}
+   248858    0.737    0.000    2.054    0.000 elicitation.py:93(featureCombinationsByOrtho)
+
+

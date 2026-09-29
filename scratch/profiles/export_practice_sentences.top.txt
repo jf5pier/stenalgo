@@ -1,0 +1,53 @@
+=== export_practice_sentences — top 15 by cumulative ===
+Tue Sep 29 13:35:04 2026    scratch/profiles/export_practice_sentences.pstats
+
+         263187136 function calls (262701531 primitive calls) in 150.712 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1351 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    151/1    0.010    0.000  150.892  150.892 {built-in method builtins.exec}
+        1    0.000    0.000  150.892  150.892 <string>:1(<module>)
+        1    0.000    0.000  150.892  150.892 <frozen runpy>:206(run_module)
+        1    0.000    0.000  150.889  150.889 <frozen runpy>:65(_run_code)
+        1    0.379    0.379  150.889  150.889 export_practice_sentences.py:1(<module>)
+        1    0.714    0.714  150.418  150.418 export_practice_sentences.py:145(main)
+        1    0.128    0.128  130.915  130.915 _theoryio.py:82(loadPhoneticAndDisambiguatedTheory)
+        1    0.416    0.416  125.911  125.911 dictionary.py:372(buildDisambiguatedTheory)
+        1    0.569    0.569  114.260  114.260 ambiguitychecker.py:928(realizeKeypressGroupsAsExtraStroke)
+        7    0.370    0.053  111.697   15.957 ambiguitychecker.py:1119(_bestCandidate)
+  3262439   49.828    0.000   83.361    0.000 keyboard.py:546(getStrokeCost)
+      129    4.344    0.034   59.680    0.463 ambiguitychecker.py:1041(_feasible)
+       93    2.534    0.027   51.646    0.555 ambiguitychecker.py:1089(_candidateCost)
+  1650492    1.237    0.000   42.864    0.000 ambiguitychecker.py:1054(<genexpr>)
+  3262439    8.473    0.000   14.014    0.000 ambiguitychecker.py:1019(_composedInduced)
+
+
+
+=== export_practice_sentences — top 15 by tottime ===
+Tue Sep 29 13:35:04 2026    scratch/profiles/export_practice_sentences.pstats
+
+         263187136 function calls (262701531 primitive calls) in 150.712 seconds
+
+   Ordered by: internal time
+   List reduced from 1351 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+  3262439   49.828    0.000   83.361    0.000 keyboard.py:546(getStrokeCost)
+ 42651245    9.081    0.000    9.104    0.000 {built-in method builtins.sorted}
+  3262439    8.473    0.000   14.014    0.000 ambiguitychecker.py:1019(_composedInduced)
+ 32624390    8.000    0.000   12.267    0.000 keyboard.py:99(__getitem__)
+ 52489518    7.820    0.000    7.820    0.000 {method 'keys' of 'dict' objects}
+        2    5.955    2.977    5.999    3.000 ambiguitychecker.py:666(buildWordsByOrthoLemme)
+   636613    4.966    0.000   10.097    0.000 keyboard.py:683(strokesToRTFCRE)
+      129    4.344    0.034   59.680    0.463 ambiguitychecker.py:1041(_feasible)
+32627080/32627069    4.269    0.000    4.269    0.000 {built-in method builtins.getattr}
+        6    4.006    0.668    4.007    0.668 {built-in method _pickle.load}
+ 20355492    3.662    0.000    3.662    0.000 word.py:166(__hash__)
+3684197/3262439    2.806    0.000    4.465    0.000 keyboard.py:587(getStrokeShapeCost)
+ 12051911    2.579    0.000    2.661    0.000 {method 'get' of 'dict' objects}
+       93    2.534    0.027   51.646    0.555 ambiguitychecker.py:1089(_candidateCost)
+  3545247    2.281    0.000    3.014    0.000 ambiguitychecker.py:830(_appendCodaExtraStroke)
+
+

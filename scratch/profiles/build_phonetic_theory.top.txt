@@ -1,0 +1,53 @@
+=== build_phonetic_theory — top 15 by cumulative ===
+Tue Sep 29 13:20:33 2026    scratch/profiles/build_phonetic_theory.pstats
+
+         500836356 function calls (500833745 primitive calls) in 265.591 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1461 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    27/26    0.015    0.001  329.205   12.662 threading.py:651(wait)
+    148/1    0.008    0.000  265.507  265.507 {built-in method builtins.exec}
+      2/1    0.000    0.000  265.507  265.507 <string>:1(<module>)
+      2/1    0.381    0.190  265.507  265.507 <frozen runpy>:206(run_module)
+      2/1    0.000    0.000  264.232  264.232 <frozen runpy>:65(_run_code)
+      2/1    0.055    0.027  264.221  264.221 build_phonetic_theory.py:1(<module>)
+      2/1    0.000    0.000  264.166  264.166 build_phonetic_theory.py:87(main)
+        1    0.000    0.000  249.406  249.406 build_phonetic_theory.py:34(loadOrBuildDictionary)
+        1    0.000    0.000  230.243  230.243 dictionary.py:213(analyseAmbiguities)
+    27084   63.314    0.002  208.158    0.008 grammar.py:975(lexicalSyllabicPartAmbiguityScore)
+    27/26    0.137    0.005   81.288    3.126 threading.py:337(wait)
+ 48164002   51.175    0.000   73.856    0.000 word.py:383(replaceSyllables)
+ 48422609   39.935    0.000   56.859    0.000 {built-in method builtins.sum}
+        3    0.030    0.010   22.321    7.440 grammar.py:1094(_getLexicalAmbiguityScores)
+        6    0.001    0.000   21.383    3.564 process.py:149(join)
+
+
+
+=== build_phonetic_theory — top 15 by tottime ===
+Tue Sep 29 13:20:33 2026    scratch/profiles/build_phonetic_theory.pstats
+
+         500836356 function calls (500833745 primitive calls) in 265.591 seconds
+
+   Ordered by: internal time
+   List reduced from 1461 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    27084   63.314    0.002  208.158    0.008 grammar.py:975(lexicalSyllabicPartAmbiguityScore)
+ 48164002   51.175    0.000   73.856    0.000 word.py:383(replaceSyllables)
+ 48422609   39.935    0.000   56.859    0.000 {built-in method builtins.sum}
+ 98805297   16.767    0.000   16.767    0.000 grammar.py:994(<lambda>)
+ 96722820   13.587    0.000   13.587    0.000 {method 'find' of 'str' objects}
+  112/107   10.866    0.097   10.935    0.102 {method 'acquire' of '_thread.lock' objects}
+       12   10.548    0.879   10.548    0.879 {built-in method posix.waitpid}
+99223569/99223207    9.344    0.000    9.344    0.000 {built-in method builtins.len}
+  1137046    6.532    0.000    6.820    0.000 keyboard.py:465(getStrokesOfPhoneme)
+ 48164002    6.287    0.000    6.287    0.000 grammar.py:818(getSyllable)
+        6    4.073    0.679    4.073    0.679 {built-in method _pickle.dump}
+  6415442    2.821    0.000    3.178    0.000 {method 'join' of 'str' objects}
+  1544252    2.756    0.000    5.650    0.000 grammar.py:726(replaceMultiphonemeInSyllabicPart)
+        1    1.360    1.360    9.752    9.752 dictionary.py:102(readCorpus)
+   496687    1.355    0.000    2.007    0.000 grammar.py:574(increaseFrequency)
+
+
