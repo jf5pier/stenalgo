@@ -632,8 +632,12 @@ class Word:
         # X sound should not be broken into 2 consonnants (k-s) in 2 syllables
         if (self.isWellFormedCVSyll()
                 and "x" in self.ortho and "k-s" in self.syll):
-            printVerbose(self.ortho, ["fix_x_k_s"])
             pos = self.syll.index("k-s")
+            if self.ortho.rstrip("s").endswith("ction") and self.syll[pos:] == "k-sj§":
+                # the k-s of -ction (extraction Ek-stRak-sj§, exaction Eg-zak-sj§) is c + t, not
+                # an x: leave the k in the coda like every other -ction word (action ak-sj§)
+                return
+            printVerbose(self.ortho, ["fix_x_k_s"])
             self.syll = self.syll[0:pos] + "-ks" + self.syll[pos+3:]
             self.cv_cv = self.cv_cv[0:pos] + "-CC" + \
                 self.cv_cv[pos+3:]  # "*C-C*" becomes "*-CC*"
