@@ -40,12 +40,13 @@ python -m util.optimize_keyboard             # Keyboard Layout Optimization (S4)
 # Prerequisites: Dictionary.pickle (or the lexicons, for an in-memory build), starboard3h.json.
 # Outputs: starboard3h_optimized.json (--output PATH to choose; starboard3h.json is overwritten
 # only by an explicit --output starboard3h.json). ~90 s per syllabic part, plus model building.
-# After adopting a layout: rm -f Dictionary.pickle PhoneticTheory.pickle, then rebuild.
+# After adopting a layout: rm -f Dictionary.pickle PhoneticTheory.pickle DisambiguatedTheory.pickle, then rebuild.
 
 python -m util.build_phonetic_theory        # Dictionary Loading (S3) + Phonetic Theory
                                              # Building (S5)
 # Prerequisites: the lexicons and starboard3h.json; rm -f Dictionary.pickle PhoneticTheory.pickle
-# after ANY lexicon or layout change (the cache is never checked for staleness).
+# after ANY lexicon or layout change (those two caches are never checked for staleness;
+# DisambiguatedTheory.pickle fingerprint-checks itself, see Pitfalls below).
 # Outputs: Dictionary.pickle, PhoneticTheory.pickle, phonetic_theory.tsv.
 
 python -m src.elicitation --ask              # Elicitation Phase: Questionnaire Generation
@@ -60,7 +61,9 @@ python -m src.elicitation --resolve          # Press-Set Resolution, then the Gr
 
 python -m util.build_disambiguated_theory   # Different-Lemma or Grammatical-Category
                                              # Disambiguation (S7): refreshes
-                                             # disambiguated_theory.tsv
+                                             # disambiguated_theory.tsv and writes the
+                                             # fingerprinted DisambiguatedTheory.pickle
+                                             # the S8 exporters load
 
 python -m util.export_plover_dictionary      # Theory Export (S8), Plover branch
 # Prerequisites: both pickles, starboard3h.json, keypress_groups.json,
@@ -116,7 +119,7 @@ Architecture and design rationale: `docs/ARCHITECTURE.md`. The eight stages:
 7. **Different-Lemma or Grammatical-Category Disambiguation (S7)** — star/hash marks (`decideStarHashMark` rule stack), composed on the phonetic theory by `python -m util.build_disambiguated_theory` → the disambiguated theory (`disambiguated_theory.tsv`)
 8. **Theory Export (S8)** — Plover (`util/export_plover_*`) and steno-trainer (`util/export_*`) branches; nothing reads `disambiguated_theory.tsv`, every exporter recomputes the disambiguated theory via `util/_theoryio.py`
 
-Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whenever they exist and never checks them against the lexicon or layout (`rm -f *.pickle` after any lexicon or layout change — the Synthetic Lexicon Building (S2) wrapper deletes and rebuilds the pickles itself for rows its appenders add, but hand-made lexicon or layout edits remain the caller's responsibility; the orchestrator aborts on the first failing step). Editing `resources/spellingVariants.tsv` or `resources/reform1990.tsv` counts as a lexicon change: rerun `python lexique.py`, prune the Synthetic file (`python -m util.prune_spelling_variants --apply`), then rebuild (the dropped spellings must not survive in `LexiqueSynthetic.tsv`; the S2 appenders read through the same choke point, so a dropped spelling that coincides with a conjugated form of a kept verb — `boite`/`boiter` — stays exempt, see `isDroppedOrthoRow`). The NOM/ADJ cross-checkers need the external Morphalou 3.1 CSV (see `docs/PIPELINE.md` Synthetic Lexicon Building (S2)). The legacy discriminator path (`buildDiscriminatorSelection`, `satOptimizeDiscriminator`, `assignDiscriminatorKeypresses`) no longer runs: those functions are gone; `src/featureextractor.py` feeds only Synthetic Lexicon Building (S2)'s gating and the `ambiguitychecker` diagnostic, and of `src/greedyoptimizer.py` only `GRAMCAT_PRIORITY` is live (category-priority rule (R6)). Suspected bugs are listed in `TODO.md` ("Suspected bugs").
+Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whenever they exist and never checks them against the lexicon or layout (`rm -f *.pickle` after any lexicon or layout change — `DisambiguatedTheory.pickle`, unlike the two, IS fingerprint-checked against its inputs (md5s of the lexicons, `starboard3h.json`, `keypress_groups.json`, `resolved_press_sets.json`) and reloads only on a match, so it needs no manual rm; the Synthetic Lexicon Building (S2) wrapper deletes and rebuilds the pickles itself for rows its appenders add, but hand-made lexicon or layout edits remain the caller's responsibility; the orchestrator aborts on the first failing step). Editing `resources/spellingVariants.tsv` or `resources/reform1990.tsv` counts as a lexicon change: rerun `python lexique.py`, prune the Synthetic file (`python -m util.prune_spelling_variants --apply`), then rebuild (the dropped spellings must not survive in `LexiqueSynthetic.tsv`; the S2 appenders read through the same choke point, so a dropped spelling that coincides with a conjugated form of a kept verb — `boite`/`boiter` — stays exempt, see `isDroppedOrthoRow`). The NOM/ADJ cross-checkers need the external Morphalou 3.1 CSV (see `docs/PIPELINE.md` Synthetic Lexicon Building (S2)). The legacy discriminator path (`buildDiscriminatorSelection`, `satOptimizeDiscriminator`, `assignDiscriminatorKeypresses`) no longer runs: those functions are gone; `src/featureextractor.py` feeds only Synthetic Lexicon Building (S2)'s gating and the `ambiguitychecker` diagnostic, and of `src/greedyoptimizer.py` only `GRAMCAT_PRIORITY` is live (category-priority rule (R6)). Suspected bugs are listed in `TODO.md` ("Suspected bugs").
 
 ### Core Data Model
 

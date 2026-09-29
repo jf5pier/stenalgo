@@ -56,5 +56,8 @@ def test_every_appender_runs_with_apply():
 
 def test_moved_constants_keep_their_values():
     # These moved from dictionary.py; pin them so the move cannot silently drift.
-    assert PICKLE_CACHE_PATHS == ("Dictionary.pickle", "PhoneticTheory.pickle")
+    # DisambiguatedTheory.pickle joined the S2 deletion set 2026-09-29 (fingerprinted
+    # cache, util/_theoryio.py; would self-invalidate anyway, deleted to keep step).
+    assert PICKLE_CACHE_PATHS == ("Dictionary.pickle", "PhoneticTheory.pickle",
+                                  "DisambiguatedTheory.pickle")
     assert SYNTHETIC_TSV_PATH == "resources/LexiqueSynthetic.tsv"

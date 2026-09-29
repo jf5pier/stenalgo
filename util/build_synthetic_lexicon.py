@@ -6,8 +6,9 @@ inside a single invocation instead of a hand-repeated `python dictionary.py`.
 Convergence rule: a full round over the four appenders that leaves
 resources/LexiqueSynthetic.tsv byte-identical (md5) has appended nothing --
 Synthetic Lexicon Building (S2) is done. After any round that DID append rows,
-the pickles are stale, so this module deletes Dictionary.pickle /
-PhoneticTheory.pickle and reruns the Dictionary Loading (S3) + Phonetic Theory
+the pickles are stale, so this module deletes the pickle caches
+(PICKLE_CACHE_PATHS: Dictionary.pickle / PhoneticTheory.pickle /
+DisambiguatedTheory.pickle) and reruns the Dictionary Loading (S3) + Phonetic Theory
 Building (S5) build itself (`python -m util.build_phonetic_theory`); the
 next round's appenders then see fresh theory, exactly like today's "run it a
 second time" convergence. On an already-converged tree nothing is deleted and
@@ -28,7 +29,10 @@ import subprocess
 import sys
 
 SYNTHETIC_TSV_PATH = "resources/LexiqueSynthetic.tsv"
-PICKLE_CACHE_PATHS = ("Dictionary.pickle", "PhoneticTheory.pickle")
+# DisambiguatedTheory.pickle is fingerprint-checked (util/_theoryio.py) and would
+# self-invalidate on the LexiqueSynthetic.tsv md5 change anyway; deleting it here
+# keeps the three caches in step.
+PICKLE_CACHE_PATHS = ("Dictionary.pickle", "PhoneticTheory.pickle", "DisambiguatedTheory.pickle")
 
 # The steady-state Synthetic Lexicon Building (S2) appenders, run with --apply (their
 # dry-run mode is for a human checking a diff first). The one-shot fix scripts stay
@@ -119,7 +123,8 @@ def main() -> None:
     else:
         print("\nLexiqueSynthetic.tsv unchanged -- keeping the existing pickles "
               "(if you edited the lexicons or layout since they were written, "
-              "`rm -f Dictionary.pickle PhoneticTheory.pickle` and re-run).", flush=True)
+              "`rm -f Dictionary.pickle PhoneticTheory.pickle DisambiguatedTheory.pickle` "
+              "and re-run).", flush=True)
 
 
 if __name__ == "__main__":

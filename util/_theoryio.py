@@ -6,6 +6,7 @@ which both duplicated this exact block.
 Requires Dictionary.pickle/PhoneticTheory.pickle (`python -m
 util.build_phonetic_theory` first).
 """
+import hashlib
 import os
 import pickle
 import sys
@@ -47,6 +48,75 @@ def _loadDictionaryAndPhoneticTheory():  # type: ignore[no-untyped-def]
         phoneticTheory: dict[Strokes, list[Word]] = pickle.load(pfile)
 
     return dictionary, phoneticTheory
+
+
+# The disambiguated-theory cache. Unlike Dictionary.pickle/PhoneticTheory.pickle
+# (never checked for staleness; `rm -f` them after any lexicon or layout change),
+# this pickle is FINGERPRINTED: it reloads only when every input below is
+# byte-identical to when it was written -- necessary because
+# `elicitation_answers.json` is hand-edited between runs and its effect flows
+# through `resolved_press_sets.json` without any pickle being deleted.
+# `util/build_disambiguated_theory.py` (the S7 step) is the only writer;
+# loaders recompute silently on a miss. Synthetic Lexicon Building (S2) deletes
+# it (util/build_synthetic_lexicon.py PICKLE_CACHE_PATHS) whenever it appends
+# rows, alongside the two unchecked pickles.
+DISAMBIGUATED_THEORY_PICKLE_PATH = "DisambiguatedTheory.pickle"
+DISAMBIGUATED_THEORY_FINGERPRINT_INPUTS = (
+    "resources/LexiqueMixte.tsv",
+    "resources/LexiqueSynthetic.tsv",
+    "starboard3h.json",
+    "keypress_groups.json",
+    "resolved_press_sets.json",
+)
+_ENVELOPE_FORMAT = 1  # bump when the envelope layout below changes
+
+
+def _md5(path: str) -> str | None:
+    if not os.path.exists(path):
+        return None
+    h = hashlib.md5()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def disambiguatedTheoryFingerprint(
+    inputs: tuple[str, ...] = DISAMBIGUATED_THEORY_FINGERPRINT_INPUTS,
+) -> dict[str, str | None]:
+    """Per-input md5s of the disambiguated theory's five inputs (None for a
+    missing file, so a deleted input never validates a cache)."""
+    return {path: _md5(path) for path in inputs}
+
+
+def writeDisambiguatedTheoryPickle(
+    disambiguatedTheory: dict[Word, list[Strokes]],
+    path: str = DISAMBIGUATED_THEORY_PICKLE_PATH,
+    inputs: tuple[str, ...] = DISAMBIGUATED_THEORY_FINGERPRINT_INPUTS,
+) -> None:
+    """Envelope `(format, fingerprint, theory)`; only the S7 step calls this."""
+    with open(path, "wb") as pfile:
+        pickle.dump((_ENVELOPE_FORMAT, disambiguatedTheoryFingerprint(inputs), disambiguatedTheory),
+                    pfile, protocol=pickle.HIGHEST_PROTOCOL)
+
+
+def loadCachedDisambiguatedTheory(
+    path: str = DISAMBIGUATED_THEORY_PICKLE_PATH,
+    inputs: tuple[str, ...] = DISAMBIGUATED_THEORY_FINGERPRINT_INPUTS,
+) -> dict[Word, list[Strokes]] | None:
+    """The cached disambiguated theory, or None on a miss (absent/corrupt
+    pickle, envelope-format change, or any fingerprint-input mismatch) -- the
+    caller then recomputes via `Dictionary.buildDisambiguatedTheory`."""
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path, "rb") as pfile:
+            formatVersion, fingerprint, disambiguatedTheory = pickle.load(pfile)
+    except Exception:
+        return None  # a corrupt (e.g. truncated) cache is a miss, never an error
+    if formatVersion != _ENVELOPE_FORMAT or fingerprint != disambiguatedTheoryFingerprint(inputs):
+        return None
+    return disambiguatedTheory
 
 
 def loadPhoneticTheory() -> dict[Strokes, list[Word]]:
@@ -94,5 +164,12 @@ def loadPhoneticAndDisambiguatedTheory(
         raise RuntimeError(f"Run `python -m src.elicitation` first to generate {resolvedPressSetsPath}.")
 
     dictionary, phoneticTheory = _loadDictionaryAndPhoneticTheory()
-    return phoneticTheory, dictionary.buildDisambiguatedTheory(
-        phoneticTheory, keyboard, keypressGroupsPath, resolvedPressSetsPath)
+    # The layout input is pinned to starboard3h.json: every caller builds
+    # `keyboard` from it (no exporter loads a different layout).
+    disambiguatedTheory = loadCachedDisambiguatedTheory(
+        inputs=("resources/LexiqueMixte.tsv", "resources/LexiqueSynthetic.tsv",
+                "starboard3h.json", keypressGroupsPath, resolvedPressSetsPath))
+    if disambiguatedTheory is None:
+        disambiguatedTheory = dictionary.buildDisambiguatedTheory(
+            phoneticTheory, keyboard, keypressGroupsPath, resolvedPressSetsPath)
+    return phoneticTheory, disambiguatedTheory
