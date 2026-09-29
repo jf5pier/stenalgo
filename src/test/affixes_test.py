@@ -26,35 +26,89 @@ def _sb():
     return sb
 
 
-class TestMergeChildrenIntoPool:
-    """A grown node identical (carriers+spans) to a lineage-less seed -- `ment`'s `[C]°.m@` vs the
-    A7-pooled `·°ment` -- is aliased onto the seed, which joins the lineage, not left beside it."""
+def _wordRec(orthoSylls, phonoSylls, strokes, lemme=None, freq=10.0):
+    """A record with real syllables AND caller-chosen per-syllable strokes -- collisions are
+    decided by the remaining stem stroke, so tests must control it (`syllRec`'s auto-numbered base
+    makes every same-length record collide)."""
+    _idx[0] += 1
+    ortho = "".join(orthoSylls)
+    return WordRecord(
+        idx=_idx[0], ortho=ortho, lemme=lemme or ortho, gramCat="NOM", frequency=freq,
+        phonoSylls=tuple(phonoSylls), orthoSylls=tuple(orthoSylls),
+        base=tuple((s,) for s in strokes), extra=(), isLemmaForm=(lemme is None or lemme == ortho))
 
-    def _setup(self):
-        words = [rec(f"w{i}ement", [(i + 10,), (2,), (3,)]) for i in range(5)]
-        root = Candidate(SUFFIX, 1, "m@", "ment", carriers=[Carrier(w, 2, 1, "s") for w in words])
-        seed = Candidate(SUFFIX, 2, "°.m@", "·°ment", carriers=[Carrier(w, 1, 2, "s") for w in words],
-                         isGeneralized=True)
-        rootKey = (SUFFIX, 1, "m@", "ment")
-        child = Candidate(SUFFIX, 2, "[C]°.m@", "·[e]ment", carriers=[Carrier(w, 1, 2, "s") for w in words],
-                          grownFromKey=rootKey, rootKey=rootKey, slots=(Slot("onset", "°"),))
-        cands = {rootKey: root, (SUFFIX, 2, "°.m@", "·°ment"): seed}
-        return cands, seed, child, rootKey
 
-    def test_identical_child_becomes_an_alias_and_links_the_seed(self):
-        cands, seed, child, rootKey = self._setup()
-        pool = A._mergeChildrenIntoPool(cands, [child])
-        assert (SUFFIX, 2, "[C]°.m@", "·[e]ment") not in pool
-        assert len(pool) == 2
-        assert (SUFFIX, 2, "[C]°.m@", "·[e]ment") in seed.aliases
-        assert seed.grownFromKey == rootKey and seed.rootKey == rootKey
+_STEMS = ["abcd", "bcdf", "cdfg", "dfgh", "fghj", "ghjk", "hjkl", "jklm", "klmn", "lmnp"]
 
-    def test_a_different_child_is_added_untouched(self):
-        cands, seed, child, _rootKey = self._setup()
-        child.carriers = child.carriers[:3]
-        pool = A._mergeChildrenIntoPool(cands, [child])
-        assert pool[(SUFFIX, 2, "[C]°.m@", "·[e]ment")] is child
-        assert seed.grownFromKey is None and not seed.aliases
+
+def _tailWords(tailOrtho, tailPhono, stems, strokeBase=100, freq=10.0):
+    return [_wordRec((st, tailOrtho), (st, tailPhono), (strokeBase + i, 900), freq=freq)
+            for i, st in enumerate(stems)]
+
+
+class TestSingleGenerator:
+    """Plan 2026-09-28: k=1 anchors + A8 + variant merges + lattice growth, nothing else."""
+
+    def test_only_k1_anchors_and_an_unattested_stem_still_carries(self):
+        words = _tailWords("ment", "m@", _STEMS[:6])
+        lemmaOfFirstStem = _wordRec(("abcd", "if"), ("abcd", "if"), (500, 501))   # attests "abcd" only
+        pool = buildCandidates(words + [lemmaOfFirstStem], A.loadSeeds()[0], excludeTopWords=False)
+        ment = pool[(SUFFIX, 1, "m@", "ment")]
+        assert ment.isAnchor and ment.k == 1 and len(ment.carriers) == 6
+        # no stem-attestation gate: the five words whose stem is no lemma still carry ...
+        assert {c.rec.ortho for c in ment.carriers} == {w.ortho for w in words}
+        # ... and the old filter is only a reported statistic: 1 of 6 equal-frequency words
+        assert abs(ment.attestedShare - 1 / 6) < 1e-9
+        assert all(c.isAnchor for c in pool.values() if c.grownFromKey is None)
+        assert not any(c.isGeneralized and c.grownFromKey is None and not c.mergeParts
+                       for c in pool.values())     # no A7 node
+
+    def test_a_variant_merge_unions_carriers_and_keeps_its_parts(self):
+        words = _tailWords("ment", "m@", _STEMS[:5]) + _tailWords("mant", "m@", _STEMS[5:], strokeBase=200)
+        pool = buildCandidates(words, A.loadSeeds()[0], excludeTopWords=False)
+        merged = pool[(SUFFIX, 1, "m@", "mant|ment")]
+        assert merged.isAnchor and merged.isGeneralized and merged.variants == ["mant", "ment"]
+        assert len(merged.carriers) == 10 and merged.newConflictFreq == 0
+        assert len(merged.mergeParts) == 2 and all(k in pool for k in merged.mergeParts)
+
+    def test_a_merge_that_creates_collisions_is_dropped(self):
+        ments = _tailWords("ment", "m@", _STEMS[:5])
+        # each `mant` word has the SAME remaining stem stroke as a `ment` word (different lemma):
+        # fusing the two spellings would make them collide -> stay separate (U3a)
+        mants = _tailWords("mant", "m@", _STEMS[5:], strokeBase=100)
+        pool = buildCandidates(ments + mants, A.loadSeeds()[0], excludeTopWords=False)
+        assert (SUFFIX, 1, "m@", "mant|ment") not in pool
+        assert (SUFFIX, 1, "m@", "ment") in pool and (SUFFIX, 1, "m@", "mant") in pool
+
+    def test_a_lattice_key_collision_renames_the_later_node_and_never_overwrites(self):
+        def words(tail, strokeBase, freq):
+            return [_wordRec((st, "bi", "ce", tail), (st, "bi", "s°", "m@"), (strokeBase + i, 700, 800, 900),
+                             freq=freq) for i, st in enumerate(_STEMS[:5] if strokeBase == 100 else _STEMS[5:])]
+        ments, mants = words("ment", 100, 10.0), words("mant", 200, 1.0)
+        recs = ments + mants
+        car = lambda rs: [Carrier(r, 3, 1, "x") for r in rs]   # noqa: E731
+        p = Candidate(SUFFIX, 1, "m@", "ment", carriers=car(ments), isAnchor=True)
+        m = Candidate(SUFFIX, 1, "m@", "mant|ment", carriers=car(recs), isAnchor=True, isGeneralized=True)
+        pool = A.growAffixesLattice({(SUFFIX, 1, "m@", "ment"): p, (SUFFIX, 1, "m@", "mant|ment"): m})
+        assert A.LATTICE_STATS["renames"] >= 1
+        renamed = [c for c in pool.values() if "⟨" in c.ortho]
+        assert renamed
+        # 2 anchors + (child, grandchild) under each: nothing lost to an overwrite
+        assert len(pool) == 6
+        # every parent link resolves inside the pool, so a renamed node's children point at it
+        assert all(c.grownFromKey in pool for c in pool.values() if c.grownFromKey)
+        assert any(c.grownFromKey == (r.position, r.k, r.phono, r.ortho) for r in renamed for c in pool.values())
+
+    def test_an_identical_duplicate_child_folds_its_parent_in(self):
+        words3 = [_wordRec((st, "ce", "ment"), (st, "s°", "m@"), (100 + i, 800, 900)) for i, st in enumerate(_STEMS[:5])]
+        car = lambda rs: [Carrier(r, 2, 1, "x") for r in rs]   # noqa: E731
+        p = Candidate(SUFFIX, 1, "m@", "ment", carriers=car(words3), isAnchor=True)
+        m = Candidate(SUFFIX, 1, "m@", "mant|ment", carriers=car(words3), isAnchor=True, isGeneralized=True)
+        pool = A.growAffixesLattice({(SUFFIX, 1, "m@", "ment"): p, (SUFFIX, 1, "m@", "mant|ment"): m})
+        kids = [c for c in pool.values() if c.grownFromKey is not None]
+        # both anchors have the same carriers, so seenExpand lets only one expand: one child,
+        # never two identical twins
+        assert len(kids) == 1 and len(pool) == 3
 
 
 class TestMorphology:
@@ -189,7 +243,7 @@ class TestGeneralizedAffixPooling:
         # excludeTopWords=False: this tiny fixture has far fewer than TOP_WORDS_EXCLUDED distinct
         # words, so the "top 200 by frequency" carrier exclusion would swallow every record --
         # meaningless here, real callers always want the default.
-        kept = buildCandidates(records, seedPairs, excludeTopWords=False)
+        kept = buildCandidates(records, seedPairs, excludeTopWords=False, legacy=True)   # A7 is legacy-only now
         gen = [c for c in kept.values() if c.isGeneralized]
         assert len(gen) == 1
         assert gen[0].variants == ["bilité", "rilité", "tilité"]
@@ -329,9 +383,11 @@ class TestReduceExceptions:
         t = self._carrier("ti", "fact", 10.0, 200)
         m2 = self._carrier("m2i", "factm", 5.0, 200)  # collides with t
         r = self._carrier("ri", "ferr", 10.0, 300)
-        m3 = self._carrier("m3i", "ferrm", 5.0, 300)  # collides with r -- 3rd exclusion needed
-        groups = {"b": [b], "m": [m], "t": [t], "m2": [m2], "r": [r], "m3": [m3]}
-        assert _reduceExceptions(SUFFIX, groups, denom=55.0) is None
+        m3 = self._carrier("m3i", "ferrm", 5.0, 300)  # collides with r
+        u = self._carrier("ui", "gorg", 10.0, 400)
+        m4 = self._carrier("m4i", "gorgm", 5.0, 400)  # collides with u -- 4th exclusion needed
+        groups = {"b": [b], "m": [m], "t": [t], "m2": [m2], "r": [r], "m3": [m3], "u": [u], "m4": [m4]}
+        assert _reduceExceptions(SUFFIX, groups, denom=75.0) is None
 
 
 class TestLatticeDedupe:

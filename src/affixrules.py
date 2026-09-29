@@ -23,7 +23,7 @@ from src.affixes import (
 from src.keyboard import Stroke
 
 RULE_BUDGET = 30
-MAX_RULE_FORMS = 4
+MAX_RULE_FORMS = 6          # compute safety cap only (2026-09-28): FORM_COST carries the learnability cost
 EXCEPTION_ALPHA = 1.0
 EXCLUSION_COST = 5.0
 FORM_COST = 10.0
@@ -40,12 +40,15 @@ MAX_EXCEPTION_RATE = 0.05   # 2026-09-27 (user decision): a rule's exception rat
                             # only a label on the final pick for human review (rule.keySimilarity).
 SWAP_CANDIDATES = 20
 SWAP_PASSES = 3
-TERRITORY_OVERLAP = 0.5     # 2026-09-28: two same-position rules whose carriers overlap this much
-                            # (frequency-weighted, as a share of the smaller rule) are one territory
-                            # -- one key. Word-once crediting alone let `·°ment` (-dt) sit next to
-                            # `ment` (-tm) on 83% of the same words, and let `·[..]ter` patch `ter`'s
-                            # own exceptions on a second key: two outlines per word, two keys per
-                            # morpheme. A territory-mate may only join the selected rule as a form.
+RULE_OVERLAP_MAX = 0.5      # 2026-09-28: a rule whose carriers overlap a selected same-position rule
+                            # this much (frequency-weighted, as a share of the smaller rule) is
+                            # SKIPPED, never merged. With one generator, only anchors are roots and
+                            # merged-vs-parts rivalry is settled up front (resolveVariantRivals), so
+                            # this is a safety net: expect about zero skips.
+VARIANT_GROWTH_TOLERANCE = 0.0   # U3b: a merged spelling-variant anchor replaces its parts iff its
+                                 # rule scores at least main x (1 - this): fusing costs nothing
+RIVAL_RESOLVE_TOP = 60           # only variant groups with M or its main part in the top-N anchors
+                                 # by proxy upper bound get the (expensive) exact comparison
 REBIND_MAX_LOSS = 0.10
 REBIND_ITERATIONS = 3
 
@@ -65,17 +68,21 @@ def childrenIndex(
     root's own depth (§4.4: "every pool node is a potential root")."""
     idx: dict[tuple[str, int, str, str], list[Candidate]] = {}
     for c in pool.values():
-        if c.grownFromKey is not None:
-            idx.setdefault(c.grownFromKey, []).append(c)
+        for parent in ([c.grownFromKey] if c.grownFromKey is not None else []) + c.alsoFrom:
+            idx.setdefault(parent, []).append(c)
     return idx
 
 
 def descendantsOf(root: Candidate, childrenIdx: dict[tuple[str, int, str, str], list[Candidate]]) -> list[Candidate]:
     """All descendants of `root` at any depth (its whole grown subtree)."""
     out: list[Candidate] = []
+    seen: set[tuple[str, int, str, str]] = {candidateKey(root)}
     stack = list(childrenIdx.get(candidateKey(root), []))
     while stack:
         c = stack.pop()
+        if candidateKey(c) in seen:      # a folded duplicate can be reached through two parents
+            continue
+        seen.add(candidateKey(c))
         out.append(c)
         stack.extend(childrenIdx.get(candidateKey(c), []))
     return out
@@ -114,8 +121,7 @@ class Rule:
     alternatives: list[tuple[float, tuple[int, ...]]] = field(default_factory=list)
     keySimilarity: float = 0.0   # the chosen key's phonetic-similarity score (not gated -- see
                                  # SIM_TOP_N -- so a low value here flags a non-mnemonic key)
-    sources: list[Candidate] = field(default_factory=list)  # roots whose subtrees fed the forms
-                                                            # (more than one after a territory merge)
+    exactDone: bool = False      # chooseRuleKeypress already ran (score/keys are exact, not proxy)
     _wordFreq: dict[int, float] | None = field(default=None, repr=False, compare=False)
 
     def wordFreq(self) -> dict[int, float]:
@@ -129,49 +135,36 @@ def buildCandidateRule(
     root: Candidate, childrenIdx: dict[tuple[str, int, str, str], list[Candidate]],
 ) -> Rule:
     """§4.4 steps 1-3: greedily add the descendant that most increases the proxy score, up to
-    `MAX_RULE_FORMS`. No keyboard evaluation here -- cheap enough to run for every pool node."""
-    rule = _greedyForms(root, descendantsOf(root, childrenIdx))
-    rule.sources = [root]
-    return rule
-
-
-def buildMergedRule(
-    roots: list[Candidate], childrenIdx: dict[tuple[str, int, str, str], list[Candidate]],
-) -> Rule:
-    """Phase 2 over one territory (2026-09-28): the same greedy form selection as
-    `buildCandidateRule`, but drawing forms from several same-territory roots' subtrees at once
-    (`ment` + the A7-pooled `·°ment`), so one rule -- one key -- can cover both. Each root is
-    tried as forms[0]; the better proxy score wins. The greedy may still leave a root out."""
-    nodes: dict[tuple[str, int, str, str], Candidate] = {}
-    for r in roots:
-        for c in [r] + descendantsOf(r, childrenIdx):
-            nodes.setdefault(candidateKey(c), c)
-    best: Rule | None = None
-    for r in roots:
-        rule = _greedyForms(r, [c for k, c in nodes.items() if k != candidateKey(r)])
-        if best is None or rule.score > best.score:
-            best = rule
-    assert best is not None
-    best.sources = list(roots)
-    return best
+    `MAX_RULE_FORMS`. No keyboard evaluation here -- cheap enough to run for every anchor. Call it
+    for anchors only (D4: a grown node is only ever a form of its anchor's rule)."""
+    return _greedyForms(root, descendantsOf(root, childrenIdx))
 
 
 def _greedyForms(root: Candidate, remaining: list[Candidate]) -> Rule:
     forms = [root]
-    remaining = list(remaining)
+    # A candidate can raise the score by at most its own sum(f x span) (pooling never gains more,
+    # and extra carriers can only add collisions), and must beat FORM_COST to be worth a form --
+    # so anything at or below that is skipped without changing the result, which saves most of
+    # the O(subtree x forms x carriers) work on big anchors.
+    # Branch and bound on the same fact: candidates are tried in descending bound order and the
+    # scan stops once no remaining bound (minus FORM_COST) can beat the best gain found. Ties go
+    # to the earliest original position, exactly as the plain scan did.
+    scored = [(sum(x.rec.frequency * x.span for x in c.carriers), i, c) for i, c in enumerate(remaining)]
+    pending = sorted((t for t in scored if t[0] > FORM_COST), key=lambda t: (-t[0], t[1]))
     bestScore = proxyScore(root.position, forms)
-    while remaining and len(forms) < MAX_RULE_FORMS:
-        best: tuple[float, Candidate] | None = None
-        for cand in remaining:
+    while pending and len(forms) < MAX_RULE_FORMS:
+        best: tuple[float, int, int] | None = None   # (score, -origIndex, pendingPos)
+        for pos, (bound, origIdx, cand) in enumerate(pending):
+            if best is not None and bound - FORM_COST + bestScore < best[0]:
+                break
             s = proxyScore(root.position, forms + [cand])
-            if best is None or s > best[0]:
-                best = (s, cand)
+            if best is None or (s, -origIdx) > (best[0], best[1]):
+                best = (s, -origIdx, pos)
         assert best is not None
-        s, cand = best
+        s, _neg, pos = best
         if s <= bestScore:
             break
-        forms.append(cand)
-        remaining.remove(cand)
+        forms.append(pending.pop(pos)[2])
         bestScore = s
     return Rule(root.position, root, forms, score=bestScore)
 
@@ -220,6 +213,7 @@ def chooseRuleKeypress(rule: Rule, pk: PhonemeKeys, ctx: SimContext, keypresses:
     never to decide which keys get tried."""
     carriers = poolCarriers(rule.forms)
     exclusionCount = exclusionCountOf(rule.forms)
+    rule.exactDone = True
     if not carriers:
         return
     # Per form, not uniformly: a SLOT-bearing (lattice-grown) form's `phono` is a human-readable
@@ -320,8 +314,8 @@ def territoryOverlap(a: Rule, b: Rule) -> float:
     return sum(f for idx, f in fa.items() if idx in fb) / small
 
 
-def territoryMate(rule: Rule, selected: list[Rule], threshold: float = TERRITORY_OVERLAP) -> Rule | None:
-    """The selected rule `rule` overlaps most, if at or above `threshold` (see TERRITORY_OVERLAP)."""
+def territoryMate(rule: Rule, selected: list[Rule], threshold: float = RULE_OVERLAP_MAX) -> Rule | None:
+    """The selected rule `rule` overlaps most, if at or above `threshold` (see RULE_OVERLAP_MAX)."""
     best: tuple[float, Rule] | None = None
     for s in selected:
         if s is rule:
@@ -330,17 +324,6 @@ def territoryMate(rule: Rule, selected: list[Rule], threshold: float = TERRITORY
         if ov >= threshold and (best is None or ov > best[0]):
             best = (ov, s)
     return best[1] if best else None
-
-
-def _bestSOf(rules: list[Rule]) -> dict[tuple[str, int], float]:
-    bestS: dict[tuple[str, int], float] = {}
-    for rule in rules:
-        gains, _excFreq = _exactCarrierGains(rule)
-        for idx2, (_freq, gain) in gains.items():
-            k2 = (rule.position, idx2)
-            if gain > bestS.get(k2, 0.0):
-                bestS[k2] = gain
-    return bestS
 
 
 def creditedTotal(rules: list[Rule]) -> float:
@@ -358,15 +341,24 @@ def creditedTotal(rules: list[Rule]) -> float:
 
 
 @dataclass
-class TerritoryEvent:
-    """One territory-mate met by the selection (reported for review)."""
-    selectedRoot: str          # the selected rule's root ortho, before any merge
-    mateRoot: str              # the candidate that overlapped it
+class OverlapSkip:
+    """A rule popped by the selection but skipped for overlapping a selected one (reported)."""
+    skippedRoot: str
+    selectedRoot: str
     overlap: float
-    outcome: str               # "merged", "rejected" (merge no better), "inLineage" (the greedy
-                               # already weighed it), "noKey" (merged rule has no legal key)
-    totalBefore: float = 0.0
-    totalAfter: float = 0.0
+
+
+@dataclass
+class RivalDecision:
+    """One `resolveVariantRivals` verdict on a merged spelling-variant anchor (reported)."""
+    merged: str
+    parts: list[str]
+    newConflictFreq: float
+    mergedScore: float | None = None
+    mainScore: float | None = None
+    mergedForms: list[str] = field(default_factory=list)
+    mainForms: list[str] = field(default_factory=list)
+    outcome: str = ""    # "fused" (parts dropped), "apart" (merge dropped), "outOfReach" (merge dropped)
 
 
 @dataclass
@@ -375,12 +367,76 @@ class SelectionResult:
     curve: list[float]                    # cumulative total after each acceptance, 1..min(40, N)
     evaluatedExactCount: int               # roots that got the expensive §4.4 step 4 evaluation
     unselectedExact: list[Rule]            # exact-evaluated but not selected, best-score first
-    territoryEvents: list[TerritoryEvent] = field(default_factory=list)
+    overlapSkips: list[OverlapSkip] = field(default_factory=list)
+
+
+def anchorKeys(cands: dict[tuple[str, int, str, str], Candidate]) -> list[tuple[str, int, str, str]]:
+    return [k for k, c in cands.items() if c.isAnchor]
+
+
+def _upperBound(rule: Rule) -> float:
+    return sum(c.rec.frequency * c.span for c in poolCarriers(rule.forms))
+
+
+def resolveVariantRivals(
+    cands: dict[tuple[str, int, str, str], Candidate], pk: PhonemeKeys, ctx: SimContext,
+    keypresses: list[Stroke], ruleCache: dict[tuple[str, int, str, str], Rule] | None = None,
+) -> tuple[list[tuple[str, int, str, str]], list[RivalDecision]]:
+    """U3b: a merged spelling-variant anchor M (`ment|mant`) and its parts are rivals, never a
+    family -- settle it before selection. Within reach (M or its main = largest part is in the top
+    `RIVAL_RESOLVE_TOP` anchors by proxy upper bound), both rules get their exact keypress
+    evaluation; M replaces ALL its parts iff it has a legal key and scores at least
+    main x (1 - VARIANT_GROWTH_TOLERANCE) (fusing costs the main affix nothing), else the parts
+    stay and M is dropped. Out of reach, M is dropped. Rules land in `ruleCache` (evaluated once)."""
+    idx = childrenIndex(cands)
+    cache = ruleCache if ruleCache is not None else {}
+
+    def getRule(key: tuple[str, int, str, str]) -> Rule:
+        r = cache.get(key)
+        if r is None:
+            r = cache[key] = buildCandidateRule(cands[key], idx)
+        return r
+
+    anchors = anchorKeys(cands)
+    ub = {k: _upperBound(getRule(k)) for k in anchors}
+    top = set(sorted(anchors, key=lambda k: -ub[k])[:RIVAL_RESOLVE_TOP])
+    dropped: set[tuple[str, int, str, str]] = set()
+    decisions: list[RivalDecision] = []
+    for mkey in anchors:
+        m = cands[mkey]
+        parts = [cands[k] for k in m.mergeParts if k in cands]
+        if not parts:
+            continue
+        main = max(parts, key=lambda p: (p.freq, p.ortho))
+        mainKey = candidateKey(main)
+        dec = RivalDecision(m.ortho, [p.ortho for p in parts], m.newConflictFreq)
+        decisions.append(dec)
+        if mkey not in top and mainKey not in top:
+            dropped.add(mkey)
+            dec.outcome = "outOfReach"
+            continue
+        rm, rmain = getRule(mkey), getRule(mainKey)
+        for r in (rm, rmain):
+            if not r.exactDone:
+                chooseRuleKeypress(r, pk, ctx, keypresses)
+        mainScore = rmain.score if rmain.keys is not None else 0.0
+        dec.mergedScore, dec.mainScore = (rm.score if rm.keys is not None else None), mainScore
+        dec.mergedForms = [f.ortho for f in rm.forms]
+        dec.mainForms = [f.ortho for f in rmain.forms]
+        if rm.keys is not None and rm.score >= mainScore * (1 - VARIANT_GROWTH_TOLERANCE):
+            dropped.update(candidateKey(p) for p in parts)
+            dec.outcome = "fused"
+        else:
+            dropped.add(mkey)
+            dec.outcome = "apart"
+    return [k for k in anchors if k not in dropped], decisions
 
 
 def selectRules(
     cands: dict[tuple[str, int, str, str], Candidate], pk: PhonemeKeys, ctx: SimContext,
     keypresses: list[Stroke], budget: int = RULE_BUDGET, curveLength: int = 40,
+    anchors: list[tuple[str, int, str, str]] | None = None,
+    ruleCache: dict[tuple[str, int, str, str], Rule] | None = None,
 ) -> SelectionResult:
     """§5: lazy greedy over a 3-stage heap (raw upper bound -> proxy marginal -> exact marginal),
     each stage recomputed fresh against the current selection before being trusted, so a root is
@@ -388,14 +444,12 @@ def selectRules(
     accepted in between. `chooseRuleKeypress` (the expensive step) runs at most once per root,
     only for roots that reach stage 2.
 
-    One key per territory (2026-09-28, TERRITORY_OVERLAP): before a root is exact-evaluated or
-    accepted, it is checked against the selected rules. A territory-mate is never selected on its
-    own; instead the selected rule is rebuilt over both roots (`buildMergedRule`) and replaced in
-    place -- same budget slot -- if that raises the word-once-credited total. Either way the mate
-    leaves the heap for good. A mate already inside the selected rule's lineage is dropped without
-    evaluation: `buildCandidateRule`'s greedy already weighed it as a form."""
+    Roots are `anchors` (default: every `isAnchor` pool node; pass `resolveVariantRivals`' answer
+    to settle merged-vs-parts first) -- a grown node is only ever a form of its anchor's rule (D4).
+    A root overlapping a selected rule by `RULE_OVERLAP_MAX` is skipped, never merged."""
     idx = childrenIndex(cands)
-    ruleCache: dict[tuple[str, int, str, str], Rule] = {}
+    ruleCache = ruleCache if ruleCache is not None else {}
+    roots = anchors if anchors is not None else anchorKeys(cands)
 
     def getRule(key: tuple[str, int, str, str]) -> Rule:
         r = ruleCache.get(key)
@@ -404,56 +458,17 @@ def selectRules(
         return r
 
     heap: list[tuple[float, int, tuple[str, int, str, str], int]] = []
-    seq = 0
-    for key, root in cands.items():
-        rule = getRule(key)
-        carriers = poolCarriers(rule.forms)
-        ub = sum(c.rec.frequency * c.span for c in carriers)
-        heap.append((-ub, seq, key, 0))
-        seq += 1
+    for seq, key in enumerate(roots):
+        heap.append((-_upperBound(getRule(key)), seq, key, 0))
     heapq.heapify(heap)
 
     bestS: dict[tuple[str, int], float] = {}
     selected: list[Rule] = []
     curve: list[float] = []
     total = 0.0
-    exactEvaluated: set[tuple[str, int, str, str]] = set()
+    exactEvaluated: set[tuple[str, int, str, str]] = {k for k in roots if getRule(k).exactDone}
     droppedExact: list[Rule] = []
-    events: list[TerritoryEvent] = []
-
-    def lineageKeys(rule: Rule) -> set[tuple[str, int, str, str]]:
-        keys: set[tuple[str, int, str, str]] = set()
-        for src in rule.sources:
-            keys.add(candidateKey(src))
-            keys.update(candidateKey(d) for d in descendantsOf(src, idx))
-        return keys
-
-    def handleTerritory(rule: Rule, mate: Rule) -> None:
-        """`rule` overlaps the selected `mate`: try the merge, never select `rule` alone."""
-        nonlocal bestS, total
-        ev = TerritoryEvent(mate.root.ortho, rule.root.ortho, territoryOverlap(rule, mate), "inLineage")
-        events.append(ev)
-        if candidateKey(rule.root) in lineageKeys(mate):
-            return
-        merged = buildMergedRule(mate.sources + [rule.root], idx)
-        if [candidateKey(f) for f in merged.forms] == [candidateKey(f) for f in mate.forms]:
-            ev.outcome = "rejected"
-            return
-        chooseRuleKeypress(merged, pk, ctx, keypresses)
-        if merged.keys is None:
-            ev.outcome = "noKey"
-            return
-        i = next(j for j, x in enumerate(selected) if x is mate)
-        trial = selected[:i] + [merged] + selected[i + 1:]
-        ev.totalBefore, ev.totalAfter = total, creditedTotal(trial)
-        others = selected[:i] + selected[i + 1:]
-        if ev.totalAfter <= ev.totalBefore or territoryMate(merged, others) is not None:
-            ev.outcome = "rejected"
-            return
-        ev.outcome = "merged"
-        selected[i] = merged
-        bestS = _bestSOf(selected)
-        total = ev.totalAfter
+    skips: list[OverlapSkip] = []
 
     while heap and len(selected) < budget:
         _negval, s, key, stage = heapq.heappop(heap)
@@ -466,7 +481,7 @@ def selectRules(
             continue
         mate = territoryMate(rule, selected)
         if mate is not None:
-            handleTerritory(rule, mate)
+            skips.append(OverlapSkip(rule.root.ortho, mate.root.ortho, territoryOverlap(rule, mate)))
             continue
         if stage == 1:
             gains, excFreq = _proxyCarrierGains(rule)
@@ -500,7 +515,7 @@ def selectRules(
         curve.append(total)
 
     droppedExact.sort(key=lambda r: -(r.score or 0.0))
-    return SelectionResult(selected, curve[:curveLength], len(exactEvaluated), droppedExact, events)
+    return SelectionResult(selected, curve[:curveLength], len(exactEvaluated), droppedExact, skips)
 
 
 def swapPass(
@@ -528,7 +543,7 @@ def swapPass(
             for cand in pool:
                 if cand in selected:
                     continue
-                # One key per territory (TERRITORY_OVERLAP): a swap may not bring in a rule
+                # Overlap safety net (RULE_OVERLAP_MAX): a swap may not bring in a rule
                 # that overlaps one staying selected.
                 if territoryMate(cand, selected[:i] + selected[i + 1:]) is not None:
                     continue
@@ -542,7 +557,7 @@ def swapPass(
                 selected[i] = bestSwap[0]
                 changed = True
     return SelectionResult(selected, result.curve, result.evaluatedExactCount, result.unselectedExact,
-                           result.territoryEvents)
+                           result.overlapSkips)
 
 
 # ═══════════════════════════════════════════════════════════════════════════

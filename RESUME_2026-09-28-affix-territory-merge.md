@@ -1,5 +1,8 @@
 # Resume: one key per territory -- the `ment` / `·°ment` fix (2026-09-28)
 
+> **SUPERSEDED (2026-09-28, later the same day):** committed as checkpoint `8630552` and never
+> run. Follow `PLAN_2026-09-28-affix-single-generator-rewrite.md` instead.
+
 **Read after `RESUME_2026-09-27-affix-phase3-4-budgeted-selection.md`; where they disagree, this
 file wins.** It covers that file's §3 bug and §6 items 1-2.
 

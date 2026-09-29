@@ -1,0 +1,1921 @@
+position	root	rootK	forms	numForms	proxyScore
+prefix	a	1	a(k=1) | a[che|ge|me|pe|ve]·(k=2) | a[mu|pu]·(k=2) | a[ba|bâ|ca|cha|droi|ma|na|pâ|ra|sa|ta|va|voi]·(k=2)	4	10526.8
+suffix	ment	1	ment(k=1) | ·[be|ble|bre|ca|che|chi|cie|claffe|cle|cre|cré|cu|cé|de|di|die|dre|du|dé|dû|ffle|ffre|fie|fle|ge|gi|gle|gne|gre|gré|gu|gue|ille|le|li|lle|lu|lé|lû|ma|me|mmé|mé|ne|ni|nie|nne|nné|noie|nu|nue|né|nû|pe|pie|ple|pli|ppe|pre|que|ra|re|rre|rré|ré|se|ssuie|ssé|sé|ta|te|tie|tre|trie|tru|tte|té|ve|voue|vre|vé|xcré|xe|xtre|é]-{s°,ti}ment(k=2) | ·[a|ba|bla|bra|bâ|ca|cca|cha|cia|da|dia|droi|ga|geoi|gna|gra|la|loi|lâ|ma|mma|na|nia|niâ|nna|noi|noî|pa|pha|pla|qua|quoi|ra|ria|roi|rra|sa|soi|ssa|ssoi|ta|tia|toi|tra|tta|va|via|xa|za|ça]blement(k=3) | ·[ai|bai|chai|chaî|chè|ciè|crè|cè|dai|diai|die|dre|dè|e|fai|fè|gai|gè|ille|lai|lei|liè|llè|lè|mai|miè|mmai|mè|mê|nai|niai|niè|nnai|nnê|plai|plè|prê|què|rai|re|rrai|rè|sai|scè|sei|siè|ssai|ssiè|strai|sè|tai|te|tè|vai|ve|vei|vè|vé|vê|xiè|xtrê|è]-{tR,tj}tement(k=3)	4	9042.0
+suffix	·[be|ble|bre|ca|che|chi|cie|claffe|cle|cre|cré|cu|cé|de|di|die|dre|du|dé|dû|ffle|ffre|fie|fle|ge|gi|gle|gne|gre|gré|gu|gue|ille|le|li|lle|lu|lé|lû|ma|me|mmé|mé|ne|ni|nie|nne|nné|noie|nu|nue|né|nû|pe|pie|ple|pli|ppe|pre|que|ra|re|rre|rré|ré|se|ssuie|ssé|sé|ta|te|tie|tre|trie|tru|tte|té|ve|voue|vre|vé|xcré|xe|xtre|é]-{s°,ti}ment	2	·[be|ble|bre|ca|che|chi|cie|claffe|cle|cre|cré|cu|cé|de|di|die|dre|du|dé|dû|ffle|ffre|fie|fle|ge|gi|gle|gne|gre|gré|gu|gue|ille|le|li|lle|lu|lé|lû|ma|me|mmé|mé|ne|ni|nie|nne|nné|noie|nu|nue|né|nû|pe|pie|ple|pli|ppe|pre|que|ra|re|rre|rré|ré|se|ssuie|ssé|sé|ta|te|tie|tre|trie|tru|tte|té|ve|voue|vre|vé|xcré|xe|xtre|é]-{s°,ti}ment(k=2) | ·[a|ba|bla|bra|bâ|ca|cca|cha|cia|da|dia|droi|ga|geoi|gna|gra|la|loi|lâ|ma|mma|na|nia|niâ|nna|noi|noî|pa|pha|qua|quoi|ra|ria|roi|rra|sa|soi|ssa|ssoi|ta|tia|toi|tra|tta|va|via|voua|xa|za|ça]blement(k=3) | ·[ai|chai|chaî|chè|ciè|crè|cè|dai|diai|die|dè|e|fai|fè|gai|gè|ille|lai|lei|liè|llè|lè|mai|miè|mmai|mè|mê|nai|niai|niè|nnai|nnê|piè|plai|plè|prê|que|què|rai|rrai|rè|sai|scè|sei|siè|ssai|ssiè|strai|sè|tai|te|tè|vai|ve|vei|vè|vé|vê|xiè|xtrê|è]-{tR,tj}tement(k=3) | ·[bi|bli|bri|chi|ci|cri|di|fi|gi|gui|illi|li|mi|ni|nni|ny|phi|pi|qui|ri|rri|sci|si|ssi|sti|thi|ti|tri|tti|vi|xi|y|ï]caments(k=3)	4	7794.0
+suffix	·[be|ble|bre|ce|che|cle|cre|de|dre|ffle|ffre|fle|ge|gle|gne|gre|gue|ille|le|lle|me|ne|nne|pe|ple|ppe|pre|que|re|rre|sce|se|sse|te|tre|tte|ve|vre|xe|xtre]ment	2	·[be|ble|bre|ce|che|cle|cre|de|dre|ffle|ffre|fle|ge|gle|gne|gre|gue|ille|le|lle|me|ne|nne|pe|ple|ppe|pre|que|re|rre|sce|se|sse|te|tre|tte|ve|vre|xe|xtre]ment(k=2) | ·[a|ba|bla|bra|bâ|ca|cca|cha|cia|da|dia|droi|ga|geoi|gna|gra|la|loi|lâ|ma|mma|na|nia|niâ|nna|noi|noî|pa|pha|pla|qua|quoi|ra|ria|roi|rra|sa|soi|ssa|ssoi|ta|tia|toi|tra|tta|va|via|xa|za|ça]blement(k=3) | ·[ai|bai|chai|chaî|chè|ciè|crè|cè|dai|diai|die|dre|dè|e|fai|fè|gai|gè|ille|lai|lei|liè|llè|lè|mai|miè|mmai|mè|mê|nai|niai|niè|nnai|nnê|plai|plè|prê|què|rai|re|rrai|rè|sai|scè|sei|siè|ssai|ssiè|strai|sè|tai|te|tè|vai|ve|vei|vè|vé|vê|xiè|xtrê|è]-{tR,tj}tement(k=3) | ·[bi|bli|bri|chi|ci|cri|di|dri|fi|gi|gri|gui|i|illi|li|lli|mi|ni|nni|noui|ny|phi|pi|qui|ri|rri|sci|si|ssi|thi|ti|tri|tti|vi|vri|xi|y|ï]lement(k=3)	4	7431.8
+suffix	·°ment	2	·°ment(k=2) | ·[ai|bai|chai|chaî|chè|cie|ciè|crè|cè|dai|diai|die|dre|dè|e|fai|fè|gai|gè|ille|lai|lei|liè|llè|lè|mai|me|miè|mmai|mè|mê|nai|ne|niai|niè|nnai|nne|nnê|plai|plè|prê|què|rai|re|rei|rie|rrai|rè|sai|scè|se|sei|siè|ssai|ssiè|strai|sè|tai|te|tie|tè|vai|ve|vei|vè|vé|vê|xiè|xtrê|è]-{tR,tj}tement(k=3) | ·[a|ba|bla|bra|bâ|ca|cca|cha|cia|da|dia|droi|ga|geoi|gna|gra|la|loi|lâ|ma|mma|na|nia|niâ|nna|noi|noî|pa|pha|pla|qua|quoi|ra|ria|roi|rra|sa|soi|ssa|ssoi|ta|tia|toi|tra|tta|va|via|xa|za|ça]blement(k=3) | ·[bi|bli|bri|chi|ci|cri|di|dri|fi|gi|gri|gui|i|illi|li|lli|mi|ni|nni|noui|ny|phi|pi|pli|qui|ri|rri|sci|si|ssi|thi|ti|tri|tti|vi|vri|xi|y|ï]lement(k=3)	4	7231.8
+prefix	re	1	re(k=1) | re[char|gar|mar|par|tar]·(k=2) | re[bro|chau|co|do|fau|lo|mo|no|po|pro|vau|vo]·(k=2) | re[bou|brou|cou|dou|fou|grou|joue|loo|loue|mou|nou|pou|tou|trou|vou]·(k=2)	4	6827.6
+prefix	de	1	de(k=1) | de[ba|man|ve|vi|vien|vri]·(k=2)	2	4877.2
+suffix	tion	1	tion(k=1) | ·[a|ba|bra|ca|cia|cra|da|dia|fla|ga|gna|gra|la|lia|lla|ma|mma|na|pa|pla|qua|ra|ria|rra|sa|sla|ssa|ta|tia|tra|tta|va|via|xa|xpia]tion(k=2) | ·[sten|ten|tten|ven]tion(k=2) | ·[bi|ci|ddi|di|gni|li|mi|ni|ri|si|sti|ti|tri]tion(k=2)	4	4756.9
+prefix	en	1	en(k=1) | en[a|ca|châ|cloî|dia|fa|fla|foi|ga|gra|joi|la|ra|sa|ta|toi|tra|va]·(k=2) | en[che|ge|gre|le|re|se]·(k=2) | en[cen|chan|clen|gen|glan|gran|jam|san|vian]-{t}·(k=2)	4	4648.4
+prefix	co+col+com+con+cor	1	co+col+com+con+cor(k=1) | co[bi|ci|di|fi|fie|gi|li|mi|ni|pi|pie|pli|pri|si|ti|tri]·(k=2) | con[co|do|lo|o|plo|po|pro|so|to|trô|vo]·(k=2) | com[che|de|ge|pre|que|re|se|ve]-{t}·(k=2)	4	3733.8
+prefix	dé	1	dé(k=1) | dé[bou|brou|clou|cloue|cou|dou|fou|gou|goû|joue|mou|noue|pou|rou|trou|voue]·(k=2) | dé[ba|bap|bla|boî|bra|bâ|ca|cla|coi|doua|dra|fa|fla|ga|gra|la|ma|na|pha|pla|plâ|qua|ra|sa|ta|tra|va|voi|voie]-{p}·(k=2) | dé[bi|bri|brie|chi|ci|cli|cri|fi|fie|fri|gi|gri|gui|li|lie|mi|my|ni|pi|plie|pri|qui|ri|si|tri|vi]·(k=2)	4	3272.6
+suffix	té	1	té(k=1) | ·[a|ba|bi|ca|cia|da|dua|dé|ga|gi|gra|ma|na|nna|qui|ra|ri|ria|sa|sua|ta|ti|tia|tra|tua|va|vi|via|xua]-{mi}lité(k=3) | ·rité(k=2) | ·[cu|da|ga|jo|la|lia|no|o|pa|rio|shé|ta|to|té]rité(k=3)	4	3198.4
+suffix	·ation	2	·ation(k=2) | ·[con|li|lli|llu|man|mi|ti|tio]citations(k=4) | ·[bé|cré|cé|dé|fé|gré|gé|llé|lé|mé|né|pré|pé|rré|scé|sé|té|vé|é]ration(k=3) | ·[bu|ccu|cu|du|fu|gu|ju|lu|mu|nhu|nu|ppu|pu|su|tru|tu|u|xsu]tation(k=3)	4	3081.4
+suffix	·[a|ba|bra|ca|cia|cra|da|dia|fla|ga|gna|gra|la|lia|lla|ma|mma|na|pa|pla|qua|ra|ria|rra|sa|sla|ssa|ta|tia|tra|tta|va|via|xa|xpia]tion	2	·[a|ba|bra|ca|cia|cra|da|dia|fla|ga|gna|gra|la|lia|lla|ma|mma|na|pa|pla|qua|ra|ria|rra|sa|sla|ssa|ta|tia|tra|tta|va|via|xa|xpia]tion(k=2) | ·[bi|bli|bri|chi|di|fi|gi|i|li|mi|mmi|pi|pli|ppli|qui|ri|si|ti|tri|vi|xi|xpli]-{n,s}nation(k=3) | ·[bé|cré|dé|fé|gré|gé|lé|mé|né|pré|pé|rré|té|vé|é]ration(k=3) | ·[bu|ccu|cu|du|gu|ju|lu|mu|nhu|nu|ppu|pu|tu|xsu]cation(k=3)	4	2808.4
+suffix	·ité	2	·ité(k=2) | ·[bi|bli|bri|di|ffi|fi|gi|gui|li|lli|ni|pi|pli|qui|ri|si|ti|tri|vi|xi|xpli|ï]-{m,s}lité(k=3) | ·[a|ba|bra|ca|cia|da|dia|ga|gia|gna|gra|la|le|lia|lla|ma|na|nha|nia|nna|pa|pla|ra|ria|sa|ssa|ta|tia|tra|va|via]lité(k=3) | ·[cu|du|lu|mmu|pu|scu|ssu|tu]rité(k=3)	4	2581.0
+suffix	ger	1	ger(k=1) | ·[a|bra|cca|fra|ga|la|ma|mma|na|pa|ra|rra|sa|ssa|ta|tra|va]ger(k=2) | ·[dan|gran|lan|llen|man|ran|rran|tran]-{S}ger(k=2) | ·[bli|di|ffli|fi|fli|gli|i|mi|ri|rri|si|ti]gé(k=2)	4	2321.8
+suffix	·°nant	2	·°nant(k=2)	1	2241.0
+prefix	é	1	é(k=1) | é[bou|brou|cou|crou|gou|mou|pou|prou|tou]·(k=2) | é[chau|clo|co|lo|mo|ro|to|vo]·(k=2) | é[bran|chan|den|lan|tan|ten|ven]·(k=2)	4	2221.6
+suffix	tenant	2	tenant(k=2)	1	2220.8
+prefix	pour	1	pour(k=1)	1	2214.0
+prefix	sa	1	sa(k=1) | sa[bor|bou|cré|la|le|li|lo|pris|ta|ti|to|va]-{bo,kRis}·(k=2)	2	2152.3
+suffix	·[bi|ca|cer|ci|di|gi|li|mi|pre|qui|sci|si|sso|te|ter|ti|to|traî|tti|ve|ver]nant	2	·[bi|ca|cer|ci|di|gi|li|mi|pre|qui|sci|si|sso|te|ter|ti|to|traî|tti|ve|ver]nant(k=2)	1	2136.4
+suffix	nant	1	nant(k=1) | ·[bi|ca|cer|ci|di|gi|li|mi|pre|qui|sci|si|sso|te|ter|ti|to|traî|tti|ve|ver]nant(k=2)	2	2132.9
+suffix	·[pre|te|ve]nant	2	·[pre|te|ve]nant(k=2)	1	2080.7
+suffix	·tenant	2	·tenant(k=2)	1	2058.9
+prefix	ré	1	ré(k=1) | réa[bo|che|gi|jus|li|mé|ni|per|ra]·(k=3) | ré[cré|crée|e|flé|fé|gé|pre|pé|vei|vé|é]·(k=2) | ré[com|con|pon]·(k=2)	4	2027.7
+prefix	pou	1	pou(k=1)	1	1976.6
+prefix	par	1	par(k=1)	1	1955.7
+prefix	de[ba|man|ve|vi|vien|vri]·	2	de[ba|man|ve|vi|vien|vri]·(k=2)	1	1886.2
+prefix	ai·	2	ai·(k=2)	1	1882.2
+prefix	ma	1	ma(k=1) | ma[chi|cu|la|li|me|na|que|qui|ri|te|thé|ti|tra|ço]·(k=2)	2	1796.1
+suffix	·tement	2	·tement(k=2) | ·[bé|crè|fai|ille|lè|nnê|plè|que|què|strai|tê|vê]tement(k=3)	2	1756.0
+suffix	·lement	2	·lement(k=2) | ·[a|ba|bi|bou|bra|bri|bu|ca|ci|cia|cou|cu|cè|da|dia|do|ffo|fou|ga|gi|gna|gra|llu|llè|lu|ma|mê|na|ni|nia|pa|pha|qui|què|ra|ri|ria|rou|rô|sa|so|ta|ti|tia|tra|tè|va|ve|vi|via|vo|xa]lement(k=3)	2	1742.8
+prefix	pro	1	pro(k=1) | pro[co|mo|no|po|ro|so|to|vo]·(k=2) | pro[con|fon|lon|non]·(k=2)	3	1741.2
+prefix	im	1	im(k=1) | im[bai|bi|bri|bu|man|me|pa|pal|par|pay|pe|pen|per|pi|plan|pli|po|pon|por|pos|pra|pre|pri|pro|prou|pru|pré|pu|pui|pé]-{pyl}·(k=2)	2	1710.3
+suffix	tement	2	tement(k=2) | ·[bé|crè|fai|lè|nnê|plè|què|strai|tê|vê]tement(k=3) | ·[a|boî|ca|da|dia|droi|gra|ma|noî|pâ|qua|roi|troi]tement(k=3) | ·[jec|rec|rrec]tement(k=3)	4	1681.9
+suffix	ci	1	ci(k=1)	1	1653.9
+suffix	er	1	er(k=1) | ·[bli|blii|boy|clé|cré|doy|dri|droy|flou|flu|geoy|gri|loy|loyi|moy|noy|pli|plii|ppli|ppuy|ppuyi|pri|prii|rroy|ré|ssuy|ssuyi|stru|toy|tri|trii|troy|ttoy|ttoyi|voy|voyi]-{n8ij,vRij}é(k=2)	2	1649.5
+suffix	·[ai|bai|chai|chaî|chè|cie|ciè|crè|cè|dai|diai|die|dre|dè|e|fai|fè|gai|gè|ille|lai|lei|liè|llè|lè|mai|me|miè|mmai|mè|mê|nai|ne|niai|niè|nnai|nne|nnê|plai|plè|prê|què|rai|re|rei|rie|rrai|rè|sai|scè|se|sei|siè|ssai|ssiè|strai|sè|tai|te|tie|tè|vai|ve|vei|vè|vé|vê|xiè|xtrê|è]-{tR,tj}tement	3	·[ai|bai|chai|chaî|chè|cie|ciè|crè|cè|dai|diai|die|dre|dè|e|fai|fè|gai|gè|ille|lai|lei|liè|llè|lè|mai|me|miè|mmai|mè|mê|nai|ne|niai|niè|nnai|nne|nnê|plai|plè|prê|què|rai|re|rei|rie|rrai|rè|sai|scè|se|sei|siè|ssai|ssiè|strai|sè|tai|te|tie|tè|vai|ve|vei|vè|vé|vê|xiè|xtrê|è]-{tR,tj}tement(k=3) | ·[ce|che|ci|con|cu|den|dgé|di|em|ffi|fi|gi|gu|le|li|lon|lu|ma|man|men|mi|mé|na|nan|nen|nou|po|quen|ra|ri|si|sio|so|son|ssio|stan|ten|ter|ti|tio|tri|trin|tté|tu|té|ve|ver]-{s@}rellement(k=4)	2	1636.2
+suffix	teur	1	teur(k=1) | ·[a|ba|bra|ca|cia|da|dia|ga|gna|gra|la|lia|lla|ma|mma|na|nna|pa|pha|pla|qua|ra|ria|rra|sa|sla|ta|tia|tra|va|voi|xa|xploi]teur(k=2) | ·[flec|jec|lec|llec|pec|rec|tec|vec]teur(k=2) | ·[bri|ci|di|fi|gi|i|li|lli|mi|ni|pi|pli|qui|ri|sci|ssi|ti|vi]nateur(k=3)	4	1538.5
+prefix	im[bai|bi|bri|bu|man|me|pa|pal|par|pay|pe|pen|per|pi|plan|pli|po|pon|por|pos|pra|pre|pri|pro|prou|pru|pré|pu|pui|pé]-{pyl}·	2	im[bai|bi|bri|bu|man|me|pa|pal|par|pay|pe|pen|per|pi|plan|pli|po|pon|por|pos|pra|pre|pri|pro|prou|pru|pré|pu|pui|pé]-{pyl}·(k=2)	1	1385.4
+prefix	ja	1	ja(k=1)	1	1363.6
+suffix	·[bli|blii|boy|clé|cré|doy|dri|droy|flou|flu|geoy|gri|loy|loyi|moy|noy|pli|plii|ppli|ppuy|ppuyi|pri|prii|rroy|ré|ssuy|ssuyi|stru|toy|tri|trii|troy|ttoy|ttoyi|voy|voyi]-{n8ij,vRij}é	2	·[bli|blii|boy|clé|cré|doy|dri|droy|flou|flu|geoy|gri|loy|loyi|moy|noy|pli|plii|ppli|ppuy|ppuyi|pri|prii|rroy|ré|ssuy|ssuyi|stru|toy|tri|trii|troy|ttoy|ttoyi|voy|voyi]-{n8ij,vRij}é(k=2)	1	1363.2
+suffix	son	1	son(k=1) | ·[i|lai|mai|nai|ni|po|poi|rai|ri|ti]son(k=2)	2	1341.5
+suffix	lement	2	lement(k=2) | ·[a|ba|bi|bou|bra|bri|bu|ca|ci|cia|cou|cu|cè|da|dia|do|ffo|fou|ga|gi|gna|gra|llu|llè|lu|ma|mê|na|ni|nia|pa|pha|què|ra|ri|ria|rou|rô|sa|so|ta|ti|tia|tra|tè|va|vi|via|vo|xa]lement(k=3)	2	1317.5
+prefix	re[char|gar|mar|par|tar]·	2	re[char|gar|mar|par|tar]·(k=2)	1	1316.1
+suffix	·[ai|bai|chai|chaî|chè|ciè|crè|cè|dai|diai|die|dre|dè|e|fai|fè|gai|gè|ille|lai|lei|liè|llè|lè|mai|miè|mmai|mè|mê|nai|niai|niè|nnai|nnê|plai|plè|prê|què|rai|re|rrai|rè|sai|scè|sei|siè|ssai|ssiè|strai|sè|tai|te|tè|vai|ve|vei|vè|vé|vê|xiè|xtrê|è]-{tR,tj}tement	3	·[ai|bai|chai|chaî|chè|ciè|crè|cè|dai|diai|die|dre|dè|e|fai|fè|gai|gè|ille|lai|lei|liè|llè|lè|mai|miè|mmai|mè|mê|nai|niai|niè|nnai|nnê|plai|plè|prê|què|rai|re|rrai|rè|sai|scè|sei|siè|ssai|ssiè|strai|sè|tai|te|tè|vai|ve|vei|vè|vé|vê|xiè|xtrê|è]-{tR,tj}tement(k=3) | ·[ce|che|ci|con|cu|dgé|di|em|gi|gu|lho|li|lon|lu|ma|man|men|mer|mi|mé|na|nan|po|pu|ra|ri|si|son|ti|tio|tri|trin|tté|tu|té|ve]lièrement(k=4)	2	1286.6
+suffix	·[a|ba|bla|bra|bâ|ca|cca|cha|cia|da|dia|droi|ga|geoi|gna|gra|la|loi|lâ|ma|mma|na|nia|niâ|nna|noi|noî|pa|pha|pla|qua|quoi|ra|ria|roi|rra|sa|soi|ssa|ssoi|ta|tia|toi|tra|tta|va|via|xa|za|ça]blement	3	·[a|ba|bla|bra|bâ|ca|cca|cha|cia|da|dia|droi|ga|geoi|gna|gra|la|loi|lâ|ma|mma|na|nia|niâ|nna|noi|noî|pa|pha|pla|qua|quoi|ra|ria|roi|rra|sa|soi|ssa|ssoi|ta|tia|toi|tra|tta|va|via|xa|za|ça]blement(k=3) | ·[ce|dé|gré|mmé|mé|né|ré|scé|sé|tté|té]-{l}diatement(k=4)	2	1266.0
+suffix	·[ai|chai|chaî|chè|ciè|crè|cè|dai|diai|die|dè|e|fai|fè|gai|gè|ille|lai|lei|liè|llè|lè|mai|miè|mmai|mè|mê|nai|niai|niè|nnai|nnê|piè|plai|plè|prê|que|què|rai|rrai|rè|sai|scè|sei|siè|ssai|ssiè|strai|sè|tai|te|tè|vai|ve|vei|vè|vé|vê|xiè|xtrê|è]-{tR,tj}tement	3	·[ai|chai|chaî|chè|ciè|crè|cè|dai|diai|die|dè|e|fai|fè|gai|gè|ille|lai|lei|liè|llè|lè|mai|miè|mmai|mè|mê|nai|niai|niè|nnai|nnê|piè|plai|plè|prê|que|què|rai|rrai|rè|sai|scè|sei|siè|ssai|ssiè|strai|sè|tai|te|tè|vai|ve|vei|vè|vé|vê|xiè|xtrê|è]-{tR,tj}tement(k=3) | ·[ce|che|ci|con|cu|dgé|di|em|gi|gu|lho|li|lon|lu|ma|man|men|mer|mi|mé|na|nan|po|pu|ra|ri|si|son|ti|tio|tri|trin|tté|tu|ve]lièrement(k=4)	2	1263.5
+suffix	·[a|ba|bla|bra|bâ|ca|cca|cha|cia|da|dia|droi|ga|geoi|gna|gra|la|loi|lâ|ma|mma|na|nia|niâ|nna|noi|noî|pa|pha|qua|quoi|ra|ria|roi|rra|sa|soi|ssa|ssoi|ta|tia|toi|tra|tta|va|via|voua|xa|za|ça]blement	3	·[a|ba|bla|bra|bâ|ca|cca|cha|cia|da|dia|droi|ga|geoi|gna|gra|la|loi|lâ|ma|mma|na|nia|niâ|nna|noi|noî|pa|pha|qua|quoi|ra|ria|roi|rra|sa|soi|ssa|ssoi|ta|tia|toi|tra|tta|va|via|voua|xa|za|ça]blement(k=3) | ·[ce|dé|fé|gré|mmé|mé|né|ré|scé|sé|tté|té]-{l}diatement(k=4)	2	1259.3
+prefix	reaR·	2	reaR·(k=2)	1	1249.8
+prefix	per	1	per(k=1) | per[chlo|co|du|fo|for|fu|me|mi|mu|si|sé]-{tyR,vER}·(k=2)	2	1233.0
+prefix	ai	1	ai(k=1)	1	1230.9
+suffix	·[a|ba|bla|bra|bâ|ca|cca|cha|cia|da|dia|droi|ga|geoi|gna|gra|la|loi|lâ|ma|mma|na|nia|niâ|nna|noi|noî|pa|pha|pla|qua|quoi|ra|ria|roi|rra|sa|soi|ssa|ssoi|ta|tia|toi|tra|tta|va|via|xa|za|ça]blement	3	·[a|ba|bla|bra|bâ|ca|cca|cha|cia|da|dia|droi|ga|geoi|gna|gra|la|loi|lâ|ma|mma|na|nia|niâ|nna|noi|noî|pa|pha|pla|qua|quoi|ra|ria|roi|rra|sa|soi|ssa|ssoi|ta|tia|toi|tra|tta|va|via|xa|za|ça]blement(k=3)	1	1206.7
+prefix	se	1	se(k=1)	1	1205.3
+suffix	ture	1	ture(k=1) | ·[a|ba|bla|ca|che|cri|cul|da|dra|fac|fai|fec|fi|ga|ge|gia|gna|la|ma|me|mma|ni|nia|pos|pul|punc|ra|rri|sla|ta|tec|ti|tra|van|ven|ver|vol]ture(k=2) | ·[chi|di|gi|gis|gri|gé|i|llé|lo|pé|ri|sci|sin|ti|to|trou|tté|ves|é]-{ky}rature(k=3)	3	1191.6
+prefix	in	1	in(k=1) | infor[ma|me|mu|po|tu]·(k=3) | in[co|coh|do|so|to|vio|vo]·(k=2) | in[can|chan|fran|sen|tan|tem|ten|tran|ven]·(k=2)	4	1182.1
+prefix	a°·	2	a°·(k=2)	1	1091.5
+suffix	nir	1	nir(k=1) | ·[fi|jeu|ste|u|ve|ver]-{t°}nir(k=2) | ·tenir(k=2)	3	1085.7
+prefix	main	1	main(k=1)	1	1054.7
+prefix	au	1	au(k=1)	1	1039.4
+suffix	·[bi|bli|bri|chi|ci|cri|di|dri|fi|gi|gri|gui|i|illi|li|lli|mi|ni|nni|noui|ny|phi|pi|pli|qui|ri|rri|sci|si|ssi|thi|ti|tri|tti|vi|vri|xi|y|ï]lement	3	·[bi|bli|bri|chi|ci|cri|di|dri|fi|gi|gri|gui|i|illi|li|lli|mi|ni|nni|noui|ny|phi|pi|pli|qui|ri|rri|sci|si|ssi|thi|ti|tri|tti|vi|vri|xi|y|ï]lement(k=3)	1	1037.2
+suffix	·rité	2	·rité(k=2) | ·[cu|da|ga|jo|la|lia|no|o|pa|rio|shé|ta|to|té]rité(k=3)	2	1030.7
+prefix	pré	1	pré(k=1) | pré[a|da|fa|la|ma|na|pa|sa|va]·(k=2) | pré[cau|chau|co|do|mo|no|o|po|ro|so|vau|vô]·(k=2)	3	1028.0
+prefix	aE·	2	aE·(k=2)	1	1024.1
+prefix	em	1	em(k=1) | em[ba|boî|bra|ma|pa|pla|plâ|poi]·(k=2) | em[bra|braie|mé|mê|pié|pre|pê]·(k=2) | em[bra|bê|mè|mê|pe|pei|pie|pre|pê]·(k=2)	4	1022.9
+prefix	sou	1	sou(k=1) | sou[ba|le|li|lè|me|mi|pe|pè|ri|rii|ta|te|ti|ve|vien]-{t°}·(k=2)	2	1001.6
+prefix	trou	1	trou(k=1)	1	980.0
+suffix	·[bi|bli|bri|chi|ci|cri|di|fi|gi|gui|illi|li|mi|ni|nni|ny|phi|pi|qui|ri|rri|sci|si|ssi|sti|thi|ti|tri|tti|vi|xi|y|ï]caments	3	·[bi|bli|bri|chi|ci|cri|di|fi|gi|gui|illi|li|mi|ni|nni|ny|phi|pi|qui|ri|rri|sci|si|ssi|sti|thi|ti|tri|tti|vi|xi|y|ï]caments(k=3)	1	945.3
+prefix	ra	1	ra(k=1) | ra[ba|bo|bou|brou|bâ|cle|co|con|da|di|dou|fraî|ga|jus|ma|me|men|mo|mè|ni|pa|pe|ta|te|va|ve|vi]-{Zu,bE}·(k=2)	2	943.3
+suffix	·[fi|jeu|ste|u|ve|ver]-{t°}nir	2	·[fi|jeu|ste|u|ve|ver]-{t°}nir(k=2)	1	937.8
+suffix	·venir	2	·venir(k=2)	1	911.9
+suffix	·[ste|ve]-{t}nir	2	·[ste|ve]-{t}nir(k=2)	1	910.5
+suffix	·[bi|bli|bri|chi|ci|cri|di|dri|fi|gi|gri|gui|i|illi|li|lli|mi|ni|nni|noui|ny|phi|pi|qui|ri|rri|sci|si|ssi|thi|ti|tri|tti|vi|vri|xi|y|ï]lement	3	·[bi|bli|bri|chi|ci|cri|di|dri|fi|gi|gri|gui|i|illi|li|lli|mi|ni|nni|noui|ny|phi|pi|qui|ri|rri|sci|si|ssi|thi|ti|tri|tti|vi|vri|xi|y|ï]lement(k=3)	1	909.9
+suffix	rie	1	rie(k=1) | ·[ba|be|ble|brai|bre|ce|che|cié|cre|cu|de|dre|fe|ffe|ffle|fle|fre|fré|ge|gle|gne|gneu|go|gre|gue|ille|le|lle|lo|me|moi|ne|nie|nne|nu|o|pe|pho|phé|que|re|rre|se|sse|ta|te|tre|tte|tu|té|ve|vre]ries(k=2) | ·[cho|co|cro|do|dro|ffo|fo|go|lo|mo|po|ro|rro|so|sso|to|vro|ço]perie(k=3) | ·[au|blan|ble|bo|cu|cui|dan|fan|ffron|ffé|gen|ja|jou|la|lan|lle|lou|men|mis|ne|nis|nne|nnè|nu|pe|pia|pis|pè|que|què|ra|ris|san|sen|ssu|tis]terie(k=3)	4	904.9
+prefix	pa	1	pa(k=1) | pa[la|pa|ra|ta|va]·(k=2)	2	876.5
+suffix	·lité	2	·lité(k=2) | ·[a|ba|bi|ca|cia|da|dua|dé|ga|gi|gra|ma|na|nna|qui|ra|ri|ria|sa|sua|ta|ti|tia|tra|tua|va|vi|via|xua]-{mi}lité(k=3) | ·[a|bé|ci|cia|ffi|gi|la|men|mi|mmor|ni|né|o|pa|pi|po|ri|ré|sa|se|si|so|ta|ten|tio|té|ver|vi|â]-{mo}bilité(k=4)	3	872.2
+prefix	fa	1	fa(k=1)	1	860.4
+suffix	lité	2	lité(k=2) | ·[a|ba|bra|ca|cia|da|dia|ga|gia|gra|ma|na|nia|nna|pa|ra|ria|sa|ssa|ta|tia|tra|va|via]lité(k=3) | ·[a|cia|fer|la|mmo|pa|sa|si|ta|vé]bilité(k=4) | ·[bi|bri|ci|gi|ni|ri|ti|vi]-{m}lité(k=3)	4	852.5
+suffix	·[bi|bli|bri|chi|di|fi|gi|i|li|mi|mmi|pi|pli|ppli|qui|ri|si|ti|tri|vi|xi|xpli]-{n,s}nation	3	·[bi|bli|bri|chi|di|fi|gi|i|li|mi|mmi|pi|pli|ppli|qui|ri|si|ti|tri|vi|xi|xpli]-{n,s}nation(k=3) | ·[a|ca|cia|ga|gra|la|ma|na|ra|ta|tra|va]gination(k=4) | ·[bi|ci|cri|di|fi|gi|li|pli|ri|rri|si|ssi|ti|vi]-{N,n}lisation(k=4)	3	850.0
+suffix	·[ba|be|ble|brai|bre|ce|che|cié|cre|cu|de|dre|fe|ffe|ffle|fle|fre|fré|ge|gle|gne|gneu|go|gre|gue|ille|le|lle|lo|me|moi|ne|nie|nne|nu|o|pe|pho|phé|que|re|rre|se|sse|ta|te|tre|tte|tu|té|ve|vre]ries	2	·[ba|be|ble|brai|bre|ce|che|cié|cre|cu|de|dre|fe|ffe|ffle|fle|fre|fré|ge|gle|gne|gneu|go|gre|gue|ille|le|lle|lo|me|moi|ne|nie|nne|nu|o|pe|pho|phé|que|re|rre|se|sse|ta|te|tre|tte|tu|té|ve|vre]ries(k=2) | ·[chi|di|ffi|fi|gi|li|mi|ni|pi|pri|qui|ri|si|ti]llerie(k=3)	2	849.9
+prefix	re[bro|chau|co|do|fau|lo|mo|no|po|pro|vau|vo]·	2	re[bro|chau|co|do|fau|lo|mo|no|po|pro|vau|vo]·(k=2) | reco[bi|de|duc|dui|dè|ge|gra|mman|mmen|nnec|se|si]-{nE}·(k=3) | reco[dè|nnai|nnaî]·(k=3)	3	838.7
+suffix	·[sten|ten|tten|ven]tion	2	·[sten|ten|tten|ven]tion(k=2)	1	807.7
+suffix	·[a|ba|bi|ca|cia|da|dua|dé|ga|gi|gra|ma|na|nna|qui|ra|ri|ria|sa|sua|ta|ti|tia|tra|tua|va|vi|via|xua]-{mi}lité	3	·[a|ba|bi|ca|cia|da|dua|dé|ga|gi|gra|ma|na|nna|qui|ra|ri|ria|sa|sua|ta|ti|tia|tra|tua|va|vi|via|xua]-{mi}lité(k=3) | ·[a|bé|ci|cia|ffi|gi|la|men|mi|mmor|ni|né|o|pa|pi|po|ri|ré|sa|se|si|so|ta|ten|tio|té|ver|vi|â]-{mo}bilité(k=4)	2	801.8
+suffix	·rement	2	·rement(k=2) | ·[ai|ba|cai|chi|ciè|cè|dai|diai|fè|ga|gai|gu|gè|lai|liè|miè|mmai|mè|nai|niai|niè|nnai|plai|rai|rieu|soi|ssai|ssiè|ssoi|ssu|su|tai|te|ti|toi|trai|tè|vi|vè|za]-{tjE}rrement(k=3) | ·[a|bi|ce|ci|con|cu|dgé|di|dic|em|ga|gi|gu|li|llu|lon|lu|ma|men|mi|mé|nan|phé|po|pu|pé|remp|ri|si|son|ssa|ta|tio|tté|tu|té|va|vi|xté]lièrement(k=4)	3	782.3
+prefix	be	1	be(k=1)	1	775.1
+prefix	bon	1	bon(k=1)	1	764.0
+suffix	·tention	2	·tention(k=2)	1	760.0
+suffix	·[bli|blii|dri|gri|pli|plii|ppli|pri|prii|tri|trii]-{vR}é	2	·[bli|blii|dri|gri|pli|plii|ppli|pri|prii|tri|trii]-{vR}é(k=2)	1	755.5
+suffix	·[a|ba|bi|bou|bra|bri|bu|ca|ci|cia|cou|cu|cè|da|dia|do|ffo|fou|ga|gi|gna|gra|llu|llè|lu|ma|mê|na|ni|nia|pa|pha|qui|què|ra|ri|ria|rou|rô|sa|so|ta|ti|tia|tra|tè|va|ve|vi|via|vo|xa]lement	3	·[a|ba|bi|bou|bra|bri|bu|ca|ci|cia|cou|cu|cè|da|dia|do|ffo|fou|ga|gi|gna|gra|llu|llè|lu|ma|mê|na|ni|nia|pa|pha|qui|què|ra|ri|ria|rou|rô|sa|so|ta|ti|tia|tra|tè|va|ve|vi|via|vo|xa]lement(k=3)	1	751.8
+suffix	·[bi|bli|bri|di|ffi|fi|gi|gui|li|lli|ni|pi|pli|qui|ri|si|ti|tri|vi|xi|xpli|ï]-{m,s}lité	3	·[bi|bli|bri|di|ffi|fi|gi|gui|li|lli|ni|pi|pli|qui|ri|si|ti|tri|vi|xi|xpli|ï]-{m,s}lité(k=3) | ·[a|ac|aus|ca|ci|cia|cu|da|des|duc|ffec|ga|ges|gi|gna|jec|la|lec|lla|llec|mes|mmo|mo|na|né|pa|rac|rio|sa|si|ta|then|tho|ti|to|va|xclu]-{ny}bilité(k=4) | ·[dio|mé|pe|po|pon|pé|ré|sen|si]sabilité(k=5)	3	743.6
+suffix	lé	1	lé(k=1) | ·[be|bi|bou|ce|cke|cu|de|do|du|fou|ga|ge|ghi|gna|gou|i|mu|ne|o|ppe|pu|que|ra|rio|ro|se|so|sse|sseu|te|ti|toi|trô|tu|ve|vio|vé]-{fi,ny}lé(k=2)	2	724.8
+prefix	coni·	2	coni·(k=2)	1	722.3
+suffix	·[be|ble|bre|ce|che|cre|de|dre|fe|ffe|ffle|fle|fre|ge|gle|gne|gre|gue|ille|le|lle|me|ne|nne|pe|que|re|rre|se|sse|te|tre|tte|ve|vre]ries	2	·[be|ble|bre|ce|che|cre|de|dre|fe|ffe|ffle|fle|fre|ge|gle|gne|gre|gue|ille|le|lle|me|ne|nne|pe|que|re|rre|se|sse|te|tre|tte|ve|vre]ries(k=2) | ·[cho|co|cro|do|dro|ffo|fo|go|lo|mo|po|ro|rro|so|sso|to|vro|ço]perie(k=3)	2	712.7
+suffix	·[a|ba|bi|bou|bra|bri|bu|ca|ci|cia|cou|cu|cè|da|dia|do|ffo|fou|ga|gi|gna|gra|llu|llè|lu|ma|mê|na|ni|nia|pa|pha|què|ra|ri|ria|rou|rô|sa|so|ta|ti|tia|tra|tè|va|vi|via|vo|xa]lement	3	·[a|ba|bi|bou|bra|bri|bu|ca|ci|cia|cou|cu|cè|da|dia|do|ffo|fou|ga|gi|gna|gra|llu|llè|lu|ma|mê|na|ni|nia|pa|pha|què|ra|ri|ria|rou|rô|sa|so|ta|ti|tia|tra|tè|va|vi|via|vo|xa]lement(k=3)	1	711.2
+suffix	·[bi|ci|ddi|di|gni|li|mi|ni|ri|si|sti|ti|tri]tion	2	·[bi|ci|ddi|di|gni|li|mi|ni|ri|si|sti|ti|tri]tion(k=2) | ·[bo|mo|po|ppo]sition(k=3)	2	710.3
+suffix	·[be|bi|bou|ce|cke|cu|de|do|du|fou|ga|ge|ghi|gna|gou|i|mu|ne|o|ppe|pu|que|ra|rio|ro|se|so|sse|sseu|te|ti|toi|trô|tu|ve|vio|vé]-{fi,ny}lé	2	·[be|bi|bou|ce|cke|cu|de|do|du|fou|ga|ge|ghi|gna|gou|i|mu|ne|o|ppe|pu|que|ra|rio|ro|se|so|sse|sseu|te|ti|toi|trô|tu|ve|vio|vé]-{fi,ny}lé(k=2)	1	695.9
+suffix	·nement	2	·nement(k=2) | ·[bo|ca|ci|cu|dai|di|die|do|e|fi|fo|gno|illo|lai|li|llo|mai|mi|mo|o|po|qui|rai|rei|ri|ro|rrai|sai|scè|ser|sio|so|sso|tai|ter|ti|tio|tour|traî|tri|tti|ver|vi|vè|vé|ço]-{SE,tO}nement(k=3)	2	693.1
+suffix	tique	1	tique(k=1) | ·[chi|dy|li|ly|mi|ni|phi|ri|thri|vi]tique(k=2) | ·[cro|cré|for|go|llo|lé|mis|mo|ni|nig|no|né|plo|reau|ro|so|tas|thé|tis|to|té]matique(k=3) | ·[bé|dé|gné|gé|lé|mé|né|phré|phé|ré|scé|thé|té|vié|vé|é]tique(k=2)	4	691.7
+suffix	tation	2	tation(k=2) | ·[bi|ca|ccré|ci|di|gra|gur|li|lli|re]-{me}citations(k=4) | ·[can|man|men|plan|quen|rien|sen|ten]tation(k=3) | ·[ci|di|gi|li|mi|pi|si|vi|xci]-{b}tations(k=3)	4	690.6
+prefix	ren	1	ren(k=1) | ren[car|ché|co|con|de|dor|fer|fi|flou|floue|four|ga|gai|gor|gra|qui|toi|ve|ver|voy|voyi]-{fOR}·(k=2)	2	686.6
+suffix	tant	1	tant(k=1) | ·[bi|ci|cli|di|fi|gi|li|mi|pi|ri|rri|sci|si|ssi|vi|xci]tants(k=2)	2	684.1
+suffix	·°nir	2	·°nir(k=2) | ·[con|de|ppar|ter|tre]venir(k=3)	2	675.4
+suffix	ration	2	ration(k=2) | ·[bo|bu|bé|cla|cu|cé|do|dé|fo|fé|gu|gé|ju|lio|lo|lé|mi|mo|mé|né|pa|pi|plo|po|ppu|pu|pé|rio|scé|su|sé|to|tu|té|xplo]-{ko}ration(k=3)	2	674.8
+prefix	a@·	2	a@·(k=2)	1	673.8
+prefix	ai°·	2	ai°·(k=2)	1	673.8
+suffix	·[ba|ber|bi|bu|ca|ci|cré|cy|da|den|dgé|di|fai|frac|ga|gna|gni|i|li|lli|lon|lé|man|men|mmen|na|nau|ni|né|pen|phlé|que|qui|ri|si|ta|ti|tu|tui|va|ven|é]taire	2	·[ba|ber|bi|bu|ca|ci|cré|cy|da|den|dgé|di|fai|frac|ga|gna|gni|i|li|lli|lon|lé|man|men|mmen|na|nau|ni|né|pen|phlé|que|qui|ri|si|ta|ti|tu|tui|va|ven|é]taire(k=2) | ·[bli|co|cu|den|di|fi|ga|gle|gu|jo|le|li|llé|lo|lé|ma|no|o|pho|plé|po|pplé|pri|ra|ta|tar|te|ti|to|ver|vo|xcé]-{Re,my}étaire(k=3)	2	669.3
+prefix	ca	1	ca(k=1) | ca[ba|bi|bo|bou|car|far|fou|gou|la|li|lo|ma|me|mou|na|ni|no|pe|pi|po|que|què|ra|ri|si|sé|va|vi|ï]-{S°}·(k=2)	2	667.4
+prefix	ao·	2	ao·(k=2) | abo[a|ba|ca|ci|cé|di|gra|li|ma|mi|né|pho|ple|pri|prie|prii|qui|vi]-{Ra}·(k=3)	2	667.0
+suffix	·[bo|ca|ci|cu|dai|di|die|do|e|fi|fo|gno|illo|lai|li|llo|mai|mi|mo|o|po|qui|rai|rei|ri|ro|rrai|sai|scè|ser|sio|so|sso|tai|ter|ti|tio|tour|traî|tri|tti|ver|vi|vè|vé|ço]-{SE,tO}nement	3	·[bo|ca|ci|cu|dai|di|die|do|e|fi|fo|gno|illo|lai|li|llo|mai|mi|mo|o|po|qui|rai|rei|ri|ro|rrai|sai|scè|ser|sio|so|sso|tai|ter|ti|tio|tour|traî|tri|tti|ver|vi|vè|vé|ço]-{SE,tO}nement(k=3)	1	665.8
+suffix	rité	2	rité(k=2) | ·[ca|cu|cé|da|ga|jo|la|lia|lla|mé|no|o|pa|pla|pé|rio|scu|shé|ta|to|té|vé|xté]-{ty}rité(k=3)	2	665.8
+suffix	taire	1	taire(k=1) | ·[ba|ber|bi|bu|ca|ci|cré|cy|da|den|dgé|di|fai|frac|ga|gna|gni|i|li|lli|lon|lé|man|men|mmen|na|nau|ni|né|pen|phlé|que|qui|ri|si|ta|ti|tu|tui|va|ven|é]taire(k=2) | ·[bli|co|cu|den|di|fi|ga|gle|gu|jo|le|li|llé|lo|lé|ma|no|o|pho|plé|po|pplé|pri|ra|ta|tar|te|ti|to|ver|vo|xcé]-{Re,my}étaire(k=3)	3	665.5
+suffix	·ission	2	·ission(k=2) | ·[bo|mo|po|ppo|xpo]sition(k=3) | ·[pé|xpé|é]tition(k=3)	3	661.8
+suffix	·[a|ba|bra|ca|cia|da|dia|ga|gia|gna|gra|la|le|lia|lla|ma|na|nha|nia|nna|pa|pla|ra|ria|sa|ssa|ta|tia|tra|va|via]lité	3	·[a|ba|bra|ca|cia|da|dia|ga|gia|gna|gra|la|le|lia|lla|ma|na|nha|nia|nna|pa|pla|ra|ria|sa|ssa|ta|tia|tra|va|via]lité(k=3)	1	660.5
+suffix	·[bo|bu|bé|cla|cu|cé|do|dé|fo|fé|gu|gé|ju|lio|lo|lé|mi|mo|mé|né|pa|pi|plo|po|ppu|pu|pé|rio|scé|su|sé|to|tu|té|xplo]-{ko}ration	3	·[bo|bu|bé|cla|cu|cé|do|dé|fo|fé|gu|gé|ju|lio|lo|lé|mi|mo|mé|né|pa|pi|plo|po|ppu|pu|pé|rio|scé|su|sé|to|tu|té|xplo]-{ko}ration(k=3)	1	660.2
+prefix	res	1	res(k=1)	1	659.0
+suffix	·ration	2	·ration(k=2) | ·[bo|bu|bé|cla|cu|dé|fo|fé|gu|gé|jo|ju|lio|lo|lé|mi|mo|mé|né|pa|pi|plo|po|ppu|pu|pé|tu|té|xplo|é]-{ko,to}ration(k=3)	2	649.6
+suffix	ssion	1	ssion(k=1) | ·[ce|fe|gre|ppre|pre|se|sse]ssion(k=2) | ·[mi|mmi|sci]ssion(k=2) | ·[ce|fe|gre|pre|xpre]ssion(k=2)	4	647.9
+suffix	reux	1	reux(k=1) | ·[bé|cé|fu|ge|gou|leu|lheu|lou|lé|mou|nheu|né|quo|si|ssié|sé|tu|vou|vé]reux(k=2)	2	646.8
+suffix	dent	1	dent(k=1) | ·[ci|fi|si|ssi|vi]dent(k=2)	2	639.8
+suffix	·[ca|cu|cé|da|ga|jo|la|lia|lla|mé|no|o|pa|pla|pé|rio|scu|shé|ta|to|té|vé|xté]-{ty}rité	3	·[ca|cu|cé|da|ga|jo|la|lia|lla|mé|no|o|pa|pla|pé|rio|scu|shé|ta|to|té|vé|xté]-{ty}rité(k=3)	1	637.9
+suffix	·[a|ba|bra|ca|cia|da|dia|ga|gna|gra|la|lia|lla|ma|mma|na|nna|pa|pha|pla|qua|ra|ria|rra|sa|sla|ta|tia|tra|va|voi|xa|xploi]teur	2	·[a|ba|bra|ca|cia|da|dia|ga|gna|gra|la|lia|lla|ma|mma|na|nna|pa|pha|pla|qua|ra|ria|rra|sa|sla|ta|tia|tra|va|voi|xa|xploi]teur(k=2) | ·[bri|ci|di|fi|gi|i|li|lli|mi|ni|pi|pli|qui|ri|sci|ssi|ti|vi]nateur(k=3) | ·[a|bi|ca|ci|di|fi|ga|gé|li|lli|na|ni|nnih|né|or|pli|po|ra|ri|si|ssi|sé|ta|ti|tra|ven|vi|vé|xter]-{my}lisateur(k=4)	3	637.0
+prefix	ine·	2	ine·(k=2)	1	631.6
+suffix	·[bo|bu|bé|cla|cu|dé|fo|fé|gu|gé|jo|ju|lio|lo|lé|mi|mo|mé|né|pa|pi|plo|po|ppu|pu|pé|tu|té|xplo|é]-{ko,to}ration	3	·[bo|bu|bé|cla|cu|dé|fo|fé|gu|gé|jo|ju|lio|lo|lé|mi|mo|mé|né|pa|pi|plo|po|ppu|pu|pé|tu|té|xplo|é]-{ko,to}ration(k=3)	1	630.3
+prefix	cou	1	cou(k=1)	1	628.3
+prefix	re[ce|de|fai|fe|je|le|pre|ve]-{t}·	2	re[ce|de|fai|fe|je|le|pre|ve]-{t}·(k=2)	1	618.1
+prefix	sor	1	sor(k=1)	1	612.6
+prefix	reco·	2	reco·(k=2) | reco[mman|mmen|nnec|pie]-{nE}·(k=3)	2	608.8
+prefix	sur	1	sur(k=1) | sur[bai|mè|pre|vei|vê]·(k=2)	2	604.9
+suffix	·ateur	2	·ateur(k=2) | ·[bri|ci|di|fi|gi|i|li|lli|mi|ni|pi|pli|qui|ri|sci|ssi|ti|vi]nateur(k=3) | ·[bé|cré|dé|gé|lé|mé|né|pe|phé|ppré|pré|pé|té|vé]rateur(k=3) | ·[a|bi|ca|ci|cri|di|fi|ga|gé|li|lli|na|ni|nnih|né|or|pli|po|ra|ri|si|ssi|sé|ta|ti|tra|ven|vi|vé|xter]-{my}lisateur(k=4)	4	603.9
+prefix	ui·	2	ui·(k=2)	1	601.6
+prefix	hôi·	2	hôi·(k=2)	1	600.6
+prefix	ar	1	ar(k=1)	1	599.3
+suffix	·[ci|fi|si|ssi|vi]dent	2	·[ci|fi|si|ssi|vi]dent(k=2)	1	596.0
+suffix	·[ca|ci|fi|si|ssi|vi|xcé]-{se}dent	2	·[ca|ci|fi|si|ssi|vi|xcé]-{se}dent(k=2)	1	594.1
+suffix	·[a|ba|bla|ca|che|cri|cul|da|dra|fac|fai|fec|fi|ga|ge|gia|gna|la|ma|me|mma|ni|nia|pos|pul|punc|ra|rri|sla|ta|tec|ti|tra|van|ven|ver|vol]ture	2	·[a|ba|bla|ca|che|cri|cul|da|dra|fac|fai|fec|fi|ga|ge|gia|gna|la|ma|me|mma|ni|nia|pos|pul|punc|ra|rri|sla|ta|tec|ti|tra|van|ven|ver|vol]ture(k=2) | ·[chi|di|gi|gis|gri|gé|i|llé|lo|pé|ri|sci|sin|ti|to|trou|tté|ves|é]-{ky}rature(k=3)	2	588.9
+suffix	toire	1	toire(k=1) | ·[bi|bli|bo|bu|bé|ci|cla|cu|du|fa|ffa|fi|fla|lé|mi|pa|phé|pi|rro|ser|si|ten|tur|xplo]-{pe}ratoire(k=3) | ·[a|ba|bi|bra|ca|cri|cu|dic|ga|gra|is|jec|la|lla|llu|ma|mi|mma|na|ni|pa|per|ra|remp|ri|rri|sa|si|sis|ta|u|va|xa|xpia]-{fEk}toire(k=2)	3	588.6
+prefix	ra[ba|bo|bou|brou|bâ|cle|co|con|da|di|dou|fraî|ga|jus|ma|me|men|mo|mè|ni|pa|pe|ta|te|va|ve|vi]-{Zu,bE}·	2	ra[ba|bo|bou|brou|bâ|cle|co|con|da|di|dou|fraî|ga|jus|ma|me|men|mo|mè|ni|pa|pe|ta|te|va|ve|vi]-{Zu,bE}·(k=2)	1	587.2
+prefix	tée·	2	tée·(k=2) | télé[a|ca|char|ci|co|con|di|fa|gra|gui|gé|mar|me|mé|ob|pho|promp|re|ri|ro|sur|tra|ven|vi]·(k=3)	2	586.9
+prefix	ae·	2	ae·(k=2) | amé[an|che|di|ge|na|nu|nue|ra|ri]·(k=3)	2	580.8
+prefix	télé	2	télé(k=2) | télé[a|ca|char|ci|co|con|di|fa|gra|gui|gé|mar|me|mé|ob|pho|promp|re|ro|sur|tra|ven|vi]·(k=3)	2	579.5
+suffix	·[do|ffo|o|pau|rio|ro|rô|so|trô|vio]lé	2	·[do|ffo|o|pau|rio|ro|rô|so|trô|vio]lé(k=2)	1	576.6
+prefix	conti	2	conti(k=2)	1	576.0
+prefix	déi·	2	déi·(k=2)	1	574.4
+prefix	éi·	2	éi·(k=2)	1	574.2
+suffix	nement	2	nement(k=2) | ·[ca|chai|char|chaî|ci|cu|dai|di|ffi|fi|lai|li|mai|mi|qui|rai|rei|ri|rrai|sai|scè|ser|tai|ter|ti|to|tour|traî|tri|tti|ver|vi|vè|vé]nement(k=3)	2	573.1
+suffix	·[a|ba|bra|ca|cia|da|dia|ffa|ga|gna|gra|ma|na|nia|pa|pha|ra|ria|sa|ta|tia|tra|va|via|voi|xa]lement	3	·[a|ba|bra|ca|cia|da|dia|ffa|ga|gna|gra|ma|na|nia|pa|pha|ra|ria|sa|ta|tia|tra|va|via|voi|xa]lement(k=3)	1	572.9
+suffix	·[cu|da|ga|jo|la|lia|no|o|pa|rio|shé|ta|to|té]rité	3	·[cu|da|ga|jo|la|lia|no|o|pa|rio|shé|ta|to|té]rité(k=3)	1	570.8
+prefix	ren[car|ché|co|con|de|dor|fer|fi|flou|floue|four|ga|gai|gor|gra|qui|toi|ve|ver|voy|voyi]-{fOR}·	2	ren[car|ché|co|con|de|dor|fer|fi|flou|floue|four|ga|gai|gor|gra|qui|toi|ve|ver|voy|voyi]-{fOR}·(k=2)	1	568.3
+prefix	imOR·	2	imOR·(k=2)	1	564.8
+prefix	re[bou|brou|cou|dou|fou|grou|joue|loo|loue|mou|nou|pou|tou|trou|vou]·	2	re[bou|brou|cou|dou|fou|grou|joue|loo|loue|mou|nou|pou|tou|trou|vou]·(k=2) | retrou[pe|to|ve|vri]-{s°}·(k=3)	2	563.4
+suffix	·[ca|chai|char|chaî|ci|cu|dai|di|ffi|fi|lai|li|mai|mi|qui|rai|rei|ri|rrai|sai|scè|ser|tai|ter|ti|to|tour|traî|tri|tti|ver|vi|vè|vé]nement	3	·[ca|chai|char|chaî|ci|cu|dai|di|ffi|fi|lai|li|mai|mi|qui|rai|rei|ri|rrai|sai|scè|ser|tai|ter|ti|to|tour|traî|tri|tti|ver|vi|vè|vé]nement(k=3)	1	562.8
+suffix	·[a|bra|cca|fra|ga|la|ma|mma|na|pa|ra|rra|sa|ssa|ta|tra|va]ger	2	·[a|bra|cca|fra|ga|la|ma|mma|na|pa|ra|rra|sa|ssa|ta|tra|va]ger(k=2)	1	562.2
+prefix	dis	1	dis(k=1) | dis[co|con|cou|cour|cré|cur|gra|joi|pa|pen|po|pro|pu|qua|tan|ten|ti|tor|trac|trai|tray|tri]-{pER}·(k=2) | dispo[ce|cieu|di|dri|li|por|rai|raî|se|si|te|ti]·(k=3)	3	560.3
+suffix	·[boy|doy|droy|geoy|loy|loyi|moy|noy|rroy|toy|troy|ttoy|voy|voyi]é	2	·[boy|doy|droy|geoy|loy|loyi|moy|noy|rroy|toy|troy|ttoy|voy|voyi]é(k=2)	1	558.9
+suffix	·erer	2	·erer(k=2) | ·[bli|ci|di|gi|i|li|si|ti|vi]déré(k=3)	2	551.0
+prefix	di	1	di(k=1) | di[gi|gé|la|rec|ri|va|ver|vi]·(k=2)	2	549.1
+prefix	chan	1	chan(k=1) | chan[ce|cè|de|ge|so|to|tour]-{t°}·(k=2)	2	545.7
+suffix	dant	1	dant(k=1) | ·[ba|bon|ci|con|cor|cui|dju|gar|gra|li|mer|mi|mman|mmo|nau|pi|pon|ra|rau|ssé|sé|ten|xcé|xy]-{p@,s@}dant(k=2) | ·[mman|pen|scen|ten]dant(k=2)	3	540.6
+suffix	sement	2	sement(k=2) | ·[boi|bra|bu|cheu|cieu|deu|dieu|dio|eu|geoi|geu|gieu|gneu|gueu|gui|illeu|leu|lleu|loi|lou|meu|mu|neu|nieu|nneu|noi|nueu|nui|peu|pieu|pui|queu|quieu|quoi|reu|rieu|ro|roi|sseu|teu|tieu|toi|treu|tueu|vai|veu|vreu|xueu|y]-{fR2}sement(k=3) | ·[bo|bour|bra|bu|con|cor|cu|da|dan|di|du|ffec|ffi|ge|gi|gou|gue|gé|len|leu|lheu|li|lli|lo|lou|lup|lé|mi|mo|mul|nheu|ni|nu|né|pec|pen|pi|pri|pu|ra|re|ren|ri|scien|sti|sé|ta|te|ten|ti|tio|to|tra|tri|tru|tu|té|vei|vou]reusement(k=4)	3	534.4
+suffix	·[boi|bra|bu|cheu|cieu|deu|dieu|dio|eu|geoi|geu|gieu|gneu|gueu|gui|illeu|leu|lleu|loi|lou|meu|mu|neu|nieu|nneu|noi|nueu|nui|peu|pieu|pui|queu|quieu|quoi|reu|rieu|ro|roi|sseu|teu|tieu|toi|treu|tueu|vai|veu|vreu|xueu|y]-{fR2}sement	3	·[boi|bra|bu|cheu|cieu|deu|dieu|dio|eu|geoi|geu|gieu|gneu|gueu|gui|illeu|leu|lleu|loi|lou|meu|mu|neu|nieu|nneu|noi|nueu|nui|peu|pieu|pui|queu|quieu|quoi|reu|rieu|ro|roi|sseu|teu|tieu|toi|treu|tueu|vai|veu|vreu|xueu|y]-{fR2}sement(k=3) | ·[bo|bour|bra|bu|con|cor|cu|da|dan|di|du|ffec|ffi|ge|gi|gou|gue|gé|len|leu|lheu|li|lli|lo|lou|lup|lé|mi|mo|mul|nheu|ni|nu|né|pec|pen|pi|pri|pu|ra|re|ren|ri|scien|sti|sé|ta|te|ten|ti|tio|to|tra|tri|tru|tu|té|vei|vou]reusement(k=4)	2	529.6
+suffix	·[bé|crè|fai|ille|lè|nnê|plè|que|què|strai|tê|vê]tement	3	·[bé|crè|fai|ille|lè|nnê|plè|que|què|strai|tê|vê]tement(k=3)	1	527.5
+suffix	·[bé|crè|fai|lè|nnê|plè|què|strai|tê|vê]tement	3	·[bé|crè|fai|lè|nnê|plè|què|strai|tê|vê]tement(k=3)	1	527.4
+prefix	aa·	2	aa·(k=2)	1	515.3
+prefix	é[bou|brou|cou|crou|gou|mou|pou|prou|tou]·	2	é[bou|brou|cou|crou|gou|mou|pou|prou|tou]·(k=2)	1	513.1
+prefix	reu·	2	reu·(k=2)	1	510.9
+prefix	em°·	2	em°·(k=2)	1	510.2
+suffix	·[ba|cie|co|due|e|me|ne|nne|nnue|nue|qui|re|rie|se|sue|te|tie|tue|ve|xtue|xue]llement	3	·[ba|cie|co|due|e|me|ne|nne|nnue|nue|qui|re|rie|se|sue|te|tie|tue|ve|xtue|xue]llement(k=3) | ·[bi|den|ffi|fi|gi|le|llec|mi|nen|nou|po|quen|ri|rré|sio|so|ssio|stan|ten|ter|ti|tio|tri|tu|té|ver|vi]-{s@,v@}rellement(k=4)	2	506.8
+suffix	·cement	2	·cement(k=2) | ·[bi|bli|chi|ci|di|dri|gi|gri|gui|i|illi|li|lli|mi|ni|nni|noui|pi|ri|rri|si|ssi|ti|tri|tti|vi|vri]ssement(k=3)	2	502.7
+suffix	·amment	2	·amment(k=2) | ·[bli|bon|cha|con|cé|di|dép|ffi|ffé|gli|gui|lli|lé|nno|pen|pi|pé|sé|ti|vei|vi|vé|xce]-{pa,to}caments(k=3)	2	502.4
+prefix	éu·	2	éu·(k=2)	1	497.3
+suffix	llement	2	llement(k=2) | ·[bi|den|ffi|fi|gi|le|llec|mi|nen|nou|po|quen|ri|rré|sio|so|ssio|stan|ten|ter|ti|tio|tri|tu|té|ver|vi]-{s@,v@}rellement(k=4) | ·[ba|cie|co|due|e|me|ne|nne|nnue|nue|qui|re|rie|se|sue|te|tie|tue|ve|xtue|xue]llement(k=3)	3	496.8
+prefix	impor	2	impor(k=2)	1	488.3
+suffix	·[bé|cé|fu|ge|gou|leu|lheu|lou|lé|mou|nheu|né|quo|si|ssié|sé|tu|vou|vé]reux	2	·[bé|cé|fu|ge|gou|leu|lheu|lou|lé|mou|nheu|né|quo|si|ssié|sé|tu|vou|vé]reux(k=2)	1	487.2
+prefix	bou	1	bou(k=1)	1	485.1
+suffix	·cation	2	·cation(k=2) | ·[bri|ci|cor|di|gni|li|mes|mi|mmu|na|ni|nni|phis|pli|pu|ri|si|ssi|ti|to|tri|ven|vi|zi]nication(k=4) | ·[bar|bli|bri|di|du|ffo|fi|fé|llo|lo|ni|ti|vo|xi|xpli]-{pli}cation(k=3)	3	482.9
+prefix	gar	1	gar(k=1)	1	479.6
+prefix	ré[cré|crée|e|flé|fé|gé|pre|pé|vei|vé|é]·	2	ré[cré|crée|e|flé|fé|gé|pre|pé|vei|vé|é]·(k=2) | répé[chi|cri|di|li|qui|ti]·(k=3)	2	479.5
+suffix	·ilité	3	·ilité(k=3) | ·[a|ba|bé|ca|cca|ci|cia|di|ga|gi|illi|la|ma|mma|mmo|ni|nia|pa|ra|ria|sa|si|ssi|ta|ti|tra|tta|va|via|vra|vé|xi|ça]bilité(k=4)	2	477.6
+prefix	rai	1	rai(k=1)	1	477.5
+suffix	·Etement	3	·Etement(k=3)	1	477.4
+suffix	cation	2	cation(k=2) | ·[bar|bli|bri|di|du|ffo|ffus|fi|fur|llo|lo|mar|ni|slo|ter|ti|vo|xi|xpli]-{pli}cation(k=3) | ·[bri|ci|cor|di|gni|li|mes|mi|mmu|ni|nni|phis|pli|pu|ri|si|ssi|ti|to|tri|ven|vi|zi|é]nication(k=4)	3	474.3
+suffix	cier	1	cier(k=1) | ·[an|can|cen|dan|fa|ffi|fi|go|la|lan|li|ma|man|mer|nan|pi|ppli|ppré|pré|ren|rri|san|tan|ten|ti|tran|ïen]-{so}cier(k=2)	2	471.2
+suffix	·[cu|du|lu|mmu|pu|scu|ssu|tu]rité	3	·[cu|du|lu|mmu|pu|scu|ssu|tu]rité(k=3)	1	470.8
+prefix	es	1	es(k=1)	1	467.7
+prefix	cai·	2	cai·(k=2)	1	466.5
+suffix	sion	1	sion(k=1) | ·[ci|lli|vi|xci]sion(k=2) | ·[cclu|clu|llu|tru|xclu]-{f}sion(k=2)	3	464.7
+suffix	·[le|sio|so|ssio|tio]nnel	2	·[le|sio|so|ssio|tio]nnel(k=2) | ·[ca|cca|ci|dac|ddi|di|dic|fe|fonc|la|men|mo|per|ra|rra|rrec|sa|se|si|ta|tri|tu|tua|vi|xcep]-{pOR,v@}ssionnel(k=3)	2	464.1
+prefix	dii·	2	dii·(k=2)	1	461.2
+suffix	bilité	3	bilité(k=3) | ·[a|ba|ca|cca|ci|cia|di|ga|gi|illi|la|lu|ma|mma|mmo|ni|nia|pa|ra|ria|sa|si|ssi|ta|ti|tra|tta|va|via|vra|xi|ça]bilité(k=4) | ·[ce|dap|fi|mo|mé|ni|no|noeu|né|o|pa|pon|rri|si|ti|vi|vio|vo]-{pEk}sabilité(k=5)	3	460.1
+suffix	·°rie	2	·°rie(k=2) | ·[cho|co|cro|do|dro|ffo|fo|go|lo|mo|po|ro|rro|so|sso|to|tro|vro|ço]perie(k=3) | ·[chi|di|ffi|fi|gi|li|mi|ni|pi|pri|qui|si|ti]llerie(k=3) | ·[an|blan|dan|fan|gen|lan|men|mman|pen|ran|san|sen|ïen]terie(k=3)	4	460.0
+prefix	dis[co|con|cou|cour|cré|cur|gra|joi|pa|pen|po|pro|pu|qua|tan|ten|ti|tor|trac|trai|tray|tri]-{pER}·	2	dis[co|con|cou|cour|cré|cur|gra|joi|pa|pen|po|pro|pu|qua|tan|ten|ti|tor|trac|trai|tray|tri]-{pER}·(k=2) | dispo[ce|cieu|di|dri|li|por|rai|raî|se|si|te|ti]·(k=3)	2	458.8
+suffix	nnel	1	nnel(k=1) | ·[le|sio|so|ssio|tio]nnel(k=2) | ·[ac|ddi|di|fe|fonc|la|men|mo|ra|rra|rrec|sa|se|ta|ten|tri|tu|xcep]-{v@}ssionnel(k=3)	3	457.5
+suffix	·[bar|bli|bri|di|du|ffo|ffus|fi|fur|llo|lo|mar|ni|slo|ter|ti|vo|xi|xpli]-{pli}cation	3	·[bar|bli|bri|di|du|ffo|ffus|fi|fur|llo|lo|mar|ni|slo|ter|ti|vo|xi|xpli]-{pli}cation(k=3) | ·[bri|ci|cor|di|gni|li|mes|mi|mmu|ni|nni|phis|pli|pu|ri|si|ssi|ti|to|tri|ven|vi|zi|é]nication(k=4)	2	457.3
+prefix	réa·	2	réa·(k=2) | réa[bo|che|gi|jus|li|mé|ni|per|ra]·(k=3)	2	456.5
+suffix	·[cheu|cieu|deu|dieu|eu|ffreu|geu|gieu|gneu|gueu|illeu|leu|lleu|meu|neu|nieu|nneu|peu|pieu|queu|quieu|reu|rieu|sseu|teu|tieu|treu|veu|vreu|xieu]sement	3	·[cheu|cieu|deu|dieu|eu|ffreu|geu|gieu|gneu|gueu|illeu|leu|lleu|meu|neu|nieu|nneu|peu|pieu|queu|quieu|reu|rieu|sseu|teu|tieu|treu|veu|vreu|xieu]sement(k=3)	1	453.8
+prefix	écou	2	écou(k=2)	1	453.3
+suffix	·[bé|cré|cé|dé|fé|gré|gé|llé|lé|mé|né|pré|pé|rré|scé|sé|té|vé|é]ration	3	·[bé|cré|cé|dé|fé|gré|gé|llé|lé|mé|né|pré|pé|rré|scé|sé|té|vé|é]ration(k=3)	1	448.2
+suffix	·[a|ba|bra|ca|cia|da|dia|ga|gia|gra|ma|na|nia|nna|pa|ra|ria|sa|ssa|ta|tia|tra|va|via]lité	3	·[a|ba|bra|ca|cia|da|dia|ga|gia|gra|ma|na|nia|nna|pa|ra|ria|sa|ssa|ta|tia|tra|va|via]lité(k=3)	1	446.8
+suffix	·[a|ba|ca|cia|da|ga|gra|ma|na|nna|ra|ria|sa|ta|tia|tra|va|via]lité	3	·[a|ba|ca|cia|da|ga|gra|ma|na|nna|ra|ria|sa|ta|tia|tra|va|via]lité(k=3) | ·[bé|ci|ffi|gi|men|mi|mmor|ni|né|o|pi|po|ré|so|ten|tio|té|ver|vi|â]-{mo}nnalité(k=4)	2	445.0
+prefix	nou	1	nou(k=1)	1	444.8
+suffix	·onnel	2	·onnel(k=2) | ·[ac|cca|ci|ddi|di|fe|fonc|la|men|mo|per|ra|rra|rrec|sa|se|ta|tri|tu|vi|xcep]-{pOR,v@}ssionnel(k=3)	2	442.7
+suffix	venir	2	venir(k=2)	1	442.2
+suffix	·[an|can|cen|dan|fa|ffi|fi|go|la|lan|li|ma|man|mer|nan|pi|ppli|ppré|pré|ren|rri|san|tan|ten|ti|tran|ïen]-{so}cier	2	·[an|can|cen|dan|fa|ffi|fi|go|la|lan|li|ma|man|mer|nan|pi|ppli|ppré|pré|ren|rri|san|tan|ten|ti|tran|ïen]-{so}cier(k=2)	1	441.5
+prefix	réa	2	réa(k=2) | réa[bo|che|gi|jus|li|mé|ni|per]·(k=3)	2	439.5
+prefix	oy·	2	oy·(k=2)	1	438.9
+suffix	·[a|ba|bé|ca|cca|ci|cia|di|ga|gi|illi|la|ma|mma|mmo|ni|nia|pa|ra|ria|sa|si|ssi|ta|ti|tra|tta|va|via|vra|vé|xi|ça]bilité	4	·[a|ba|bé|ca|cca|ci|cia|di|ga|gi|illi|la|ma|mma|mmo|ni|nia|pa|ra|ria|sa|si|ssi|ta|ti|tra|tta|va|via|vra|vé|xi|ça]bilité(k=4)	1	438.9
+suffix	·[a|ba|ca|cca|ci|cia|di|ga|gi|illi|la|lu|ma|mma|mmo|ni|nia|pa|ra|ria|sa|si|ssi|ta|ti|tra|tta|va|via|vra|xi|ça]bilité	4	·[a|ba|ca|cca|ci|cia|di|ga|gi|illi|la|lu|ma|mma|mmo|ni|nia|pa|ra|ria|sa|si|ssi|ta|ti|tra|tta|va|via|vra|xi|ça]bilité(k=4)	1	436.8
+suffix	·[chi|cie|di|die|fie|gi|li|llie|ni|nie|pi|pie|pli|si|ti|tie|tri|trie]ments	2	·[chi|cie|di|die|fie|gi|li|llie|ni|nie|pi|pie|pli|si|ti|tie|tri|trie]ments(k=2)	1	434.7
+suffix	tion	1	tion(k=1)	1	433.9
+suffix	·[bu|ccu|cu|du|fu|gu|ju|lu|mu|nhu|nu|ppu|pu|su|tru|tu|u|xsu]tation	3	·[bu|ccu|cu|du|fu|gu|ju|lu|mu|nhu|nu|ppu|pu|su|tru|tu|u|xsu]tation(k=3)	1	431.9
+prefix	ser	1	ser(k=1)	1	431.6
+prefix	ve	1	ve(k=1)	1	429.3
+suffix	·[ce|che|ci|con|cu|den|dgé|di|em|ffi|fi|gi|gu|le|li|lon|lu|ma|man|men|mi|mé|na|nan|nen|nou|po|quen|ra|ri|si|sio|so|son|ssio|stan|ten|ter|ti|tio|tri|trin|tté|tu|té|ve|ver]-{s@}rellement	4	·[ce|che|ci|con|cu|den|dgé|di|em|ffi|fi|gi|gu|le|li|lon|lu|ma|man|men|mi|mé|na|nan|nen|nou|po|quen|ra|ri|si|sio|so|son|ssio|stan|ten|ter|ti|tio|tri|trin|tté|tu|té|ve|ver]-{s@}rellement(k=4)	1	428.6
+prefix	po	1	po(k=1) | po[li|mé|po|ta|te|é]·(k=2)	2	427.2
+suffix	·[bé|cé|du|dé|gu|jo|mi|mmo|mo|mé|né|po|pé|ro|scé|sso|to|tu|té|vi]ral	2	·[bé|cé|du|dé|gu|jo|mi|mmo|mo|mé|né|po|pé|ro|scé|sso|to|tu|té|vi]ral(k=2)	1	425.7
+suffix	·[bé|cré|dé|fé|gré|gé|lé|mé|né|pré|pé|rré|té|vé|é]ration	3	·[bé|cré|dé|fé|gré|gé|lé|mé|né|pré|pé|rré|té|vé|é]ration(k=3)	1	423.9
+suffix	ral	1	ral(k=1) | ·[bé|cé|du|dé|gu|jo|mi|mmo|mo|mé|né|po|pé|ro|scé|sso|to|tu|té|vi]ral(k=2)	2	419.8
+suffix	·[dan|gran|lan|llen|man|ran|rran|tran]-{S}ger	2	·[dan|gran|lan|llen|man|ran|rran|tran]-{S}ger(k=2)	1	418.3
+suffix	·voyé	2	·voyé(k=2)	1	417.7
+suffix	mment	1	mment(k=1) | ·[a|ce|cha|da|de|ga|ge|gea|illa|la|le|lla|lle|ne|nna|que|ra|re|rre|sa|scie|ssa|ta|tie|va]mment(k=2) | ·[bli|bon|cha|con|cé|ffi|ffé|gli|gui|lli|lé|nno|pen|pi|pri|sé|ti|vei|vi|vé|xce]-{pa,to}demment(k=3) | ·[cu|ffé|ppa|vé]remment(k=3)	4	416.9
+suffix	·[gi|lo|mi|pi|ter]nel	2	·[gi|lo|mi|pi|ter]nel(k=2)	1	413.9
+suffix	·[bar|bli|bri|di|du|ffo|fi|fé|llo|lo|ni|ti|vo|xi|xpli]-{pli}cation	3	·[bar|bli|bri|di|du|ffo|fi|fé|llo|lo|ni|ti|vo|xi|xpli]-{pli}cation(k=3) | ·[ci|cor|di|gni|li|mmu|ni|pli|pu|ra|ri|si|ssi|ti|to|ven|é]nication(k=4)	2	413.1
+prefix	géné	2	géné(k=2)	1	409.1
+suffix	blement	2	blement(k=2) | ·[a|ba|bla|ca|cca|cha|ci|da|dia|dou|ffa|ga|gi|gno|illi|la|lu|ma|na|nia|nna|pa|qua|ra|ria|rri|sa|si|ssa|ssem|ssi|ta|ti|tia|tta|va|xi|ça]blement(k=3)	2	408.0
+prefix	man	1	man(k=1)	1	407.8
+suffix	nel	1	nel(k=1) | ·[gi|lo|mi|pi|ter]nel(k=2)	2	405.9
+prefix	ini·	2	ini·(k=2)	1	403.3
+suffix	·[bu|cu|llu|lu|nu|ru|tu]tion	2	·[bu|cu|llu|lu|nu|ru|tu]tion(k=2) | ·[mi|po|so|sti|sé|ti|tri|tro|ttri|vo|é]-{zo}lution(k=3)	2	402.6
+prefix	ca[ba|bi|bo|bou|car|far|fou|gou|la|li|lo|ma|me|mou|na|ni|no|pe|pi|po|que|què|ra|ri|si|sé|va|vi|ï]-{S°}·	2	ca[ba|bi|bo|bou|car|far|fou|gou|la|li|lo|ma|me|mou|na|ni|no|pe|pi|po|que|què|ra|ri|si|sé|va|vi|ï]-{S°}·(k=2)	1	401.2
+suffix	·[ai|ba|cai|chi|ciè|cè|dai|diai|fè|ga|gai|gu|gè|lai|liè|miè|mmai|mè|nai|niai|niè|nnai|plai|rai|rieu|soi|ssai|ssiè|ssoi|ssu|su|tai|te|ti|toi|trai|tè|vi|vè|za]-{tjE}rrement	3	·[ai|ba|cai|chi|ciè|cè|dai|diai|fè|ga|gai|gu|gè|lai|liè|miè|mmai|mè|nai|niai|niè|nnai|plai|rai|rieu|soi|ssai|ssiè|ssoi|ssu|su|tai|te|ti|toi|trai|tè|vi|vè|za]-{tjE}rrement(k=3) | ·[a|bi|ce|ci|con|cu|dgé|di|dic|em|ga|gi|gu|li|llu|lon|lu|ma|men|mi|mé|nan|phé|po|pu|pé|remp|ri|si|son|ssa|ta|tio|tté|tu|té|va|vi|xté]lièrement(k=4)	2	400.9
+suffix	nal	1	nal(k=1) | ·[bu|ccha|ci|di|dé|fer|gi|gio|go|gu|mi|mmu|mo|mé|o|ri|ro|ré|sa|se|tha|ti|tio|to|tom|tri|tro|tur|ver]nal(k=2) | ·[a|bi|bli|di|ly|na|no|ri|ta|tes|ti|to|tri|tu]ginal(k=3)	3	399.1
+prefix	su	1	su(k=1)	1	395.4
+suffix	·[a|ce|cha|da|de|ga|ge|gea|illa|la|le|lla|lle|ne|nna|que|ra|re|rre|sa|scie|ssa|ta|tie|va]mment	2	·[a|ce|cha|da|de|ga|ge|gea|illa|la|le|lla|lle|ne|nna|que|ra|re|rre|sa|scie|ssa|ta|tie|va]mment(k=2) | ·[bli|bon|cha|con|cé|ffi|ffé|gli|gui|lli|lé|nno|pen|pi|pri|sé|ti|vei|vi|vé|xce]-{pa,to}demment(k=3)	2	393.6
+suffix	voir	1	voir(k=1) | ·[breu|ce|de|mou|ser|tre]voir(k=2)	2	393.5
+suffix	·[cu|scu|tu]rité	3	·[cu|scu|tu]rité(k=3)	1	391.8
+suffix	rement	2	rement(k=2) | ·[ai|ba|cai|chi|ciè|cè|dai|diai|fè|ga|gai|gu|gè|lai|liè|miè|mmai|mè|nai|niai|niè|nnai|plai|rai|rieu|soi|ssai|ssiè|ssoi|ssu|tai|ti|tiè|toi|trai|tè|vi|vè]rement(k=3) | ·[a|bi|ce|ci|con|cu|dgé|di|dic|em|ga|gi|gu|li|llu|lon|lu|ma|men|mi|mé|nan|phé|po|pu|pé|remp|ri|si|son|ssa|ta|tio|tté|tu|té|va|vi|xté]lièrement(k=4)	3	391.8
+suffix	·[a|ba|bla|ca|cca|cha|ci|da|dia|dou|ffa|ga|gi|gno|illi|la|lu|ma|na|nia|nna|pa|qua|ra|ria|rri|sa|si|ssa|ssem|ssi|ta|ti|tia|tta|va|xi|ça]blement	3	·[a|ba|bla|ca|cca|cha|ci|da|dia|dou|ffa|ga|gi|gno|illi|la|lu|ma|na|nia|nna|pa|qua|ra|ria|rri|sa|si|ssa|ssem|ssi|ta|ti|tia|tta|va|xi|ça]blement(k=3)	1	389.7
+suffix	tal	1	tal(k=1) | ·[bi|ci|cié|dan|den|do|gi|gé|jec|lec|men|mmen|mu|na|nen|ni|pi|ren|ri|rié|tho|zon]-{Rj@}tal(k=2)	2	389.5
+suffix	veau	1	veau(k=1)	1	388.8
+suffix	·tation	2	·tation(k=2) | ·[can|men|plan|quen|rien|sen|ten]tation(k=3) | ·[di|gi|li|mi|pi|si|vi|xci]-{b,s}tation(k=3)	3	386.3
+suffix	·[ccu|chi|ci|cu|di|gi|i|li|lli|mi|ni|ri|thi|ti|tri|va|vi]sation	3	·[ccu|chi|ci|cu|di|gi|i|li|lli|mi|ni|ri|thi|ti|tri|va|vi]sation(k=3) | ·[a|an|ba|bi|bo|bé|char|chro|cia|co|cra|cré|cu|da|dar|dgé|dia|for|ga|gli|go|gé|la|lli|lo|ma|mi|mmu|mo|mé|na|ni|nna|no|né|po|pro|ra|rar|ri|ria|rio|sec|sep|ssi|ssu|sua|ta|ter|teu|ti|tia|to|tra|tu|tua|té|va|vi|vé|xi|xtra]-{Na,ka}risation(k=4)	2	384.4
+prefix	aOR·	2	aOR·(k=2)	1	380.4
+suffix	·[sio|so|ssio|tio]nnel	2	·[sio|so|ssio|tio]nnel(k=2)	1	379.3
+prefix	re°·	2	re°·(k=2)	1	378.8
+suffix	·[a|ac|aus|ca|ci|cia|cu|da|des|duc|ffec|ga|ges|gi|gna|jec|la|lec|lla|llec|mes|mmo|mo|na|né|pa|rac|rio|sa|si|ta|then|tho|ti|to|va|xclu]-{ny}bilité	4	·[a|ac|aus|ca|ci|cia|cu|da|des|duc|ffec|ga|ges|gi|gna|jec|la|lec|lla|llec|mes|mmo|mo|na|né|pa|rac|rio|sa|si|ta|then|tho|ti|to|va|xclu]-{ny}bilité(k=4) | ·[dio|mé|pe|po|pon|pé|ré|sen|si]sabilité(k=5)	2	377.9
+prefix	vi	1	vi(k=1)	1	377.7
+suffix	·[bre|bé|ca|ce|ga|le|lle|lé|ma|mé|pe|que|qué|re|ré|se|sé|ta|ti|té|za]ro	2	·[bre|bé|ca|ce|ga|le|lle|lé|ma|mé|pe|que|qué|re|ré|se|sé|ta|ti|té|za]ro(k=2)	1	376.5
+prefix	sou[ba|le|li|lè|me|mi|pe|pè|ri|rii|ta|te|ti|ve|vien]-{t°}·	2	sou[ba|le|li|lè|me|mi|pe|pè|ri|rii|ta|te|ti|ve|vien]-{t°}·(k=2)	1	375.4
+suffix	·[a|bé|ci|cia|ffi|gi|la|men|mi|mmor|ni|né|o|pa|pi|po|ri|ré|sa|se|si|so|ta|ten|tio|té|ver|vi|â]-{mo}bilité	4	·[a|bé|ci|cia|ffi|gi|la|men|mi|mmor|ni|né|o|pa|pi|po|ri|ré|sa|se|si|so|ta|ten|tio|té|ver|vi|â]-{mo}bilité(k=4)	1	375.0
+suffix	sation	2	sation(k=2) | ·[a|an|ba|bi|bo|bé|char|chro|cia|co|cra|cré|cu|da|dar|dgé|dia|for|ga|gli|go|gé|la|lli|lo|ma|mi|mmu|mo|mé|na|ni|nna|no|né|po|pro|ra|rar|ri|ria|rio|sec|sep|ssi|ssu|sua|ta|ter|teu|ti|tia|to|tra|tu|tua|té|va|vi|vé|xi|xtra]-{Na,ka}risation(k=4) | ·[ccu|chi|ci|cu|di|gi|i|li|lli|mi|ni|ri|thi|ti|tri|va|vi]sation(k=3)	3	374.5
+suffix	lier	1	lier(k=1) | ·[a|ba|bi|ca|ce|ci|co|cu|da|de|do|gu|ma|mi|mme|na|nne|pe|ro|rre|se|si|sse|ssi|ta|te|to|tro|va|xfo]lier(k=2) | ·[con|mi|mmo|ni|pi|pis|ti]-{Re}culier(k=3)	3	374.4
+prefix	im[po|pro]·	2	im[po|pro]·(k=2)	1	373.1
+prefix	sau	1	sau(k=1)	1	372.8
+suffix	·[bre|bé|ce|le|lle|lé|mé|pé|que|qué|re|ré|se|sé|té]ro	2	·[bre|bé|ce|le|lle|lé|mé|pé|que|qué|re|ré|se|sé|té]ro(k=2)	1	371.5
+prefix	a[che|ge|me|pe|ve]·	2	a[che|ge|me|pe|ve]·(k=2)	1	369.6
+suffix	·[bé|cé|dé|mé|né|pé|scé|té]ral	2	·[bé|cé|dé|mé|né|pé|scé|té]ral(k=2)	1	369.0
+suffix	·[bli|bri|di|fi|ni|pli|ppli|ti|xi|xpli]cation	3	·[bli|bri|di|fi|ni|pli|ppli|ti|xi|xpli]cation(k=3) | ·[bri|ci|cor|di|gni|li|mes|mi|mmu|na|ni|nni|phis|pli|pu|ri|si|ssi|ti|to|tri|ven|vi|zi]nication(k=4)	2	367.6
+suffix	vail	1	vail(k=1)	1	367.4
+suffix	ro	1	ro(k=1) | ·[bre|bé|ca|ce|ga|le|lle|lé|ma|mé|pe|que|qué|re|ré|se|sé|ta|ti|té|za]ro(k=2)	2	367.2
+suffix	·[a|ba|bi|ca|ce|ci|co|cu|da|de|do|gu|ma|mi|mme|na|nne|pe|ro|rre|se|si|sse|ssi|ta|te|to|tro|va|xfo]lier	2	·[a|ba|bi|ca|ce|ci|co|cu|da|de|do|gu|ma|mi|mme|na|nne|pe|ro|rre|se|si|sse|ssi|ta|te|to|tro|va|xfo]lier(k=2) | ·[con|mi|mmo|ni|pi|pis|ti]-{Re}culier(k=3)	2	366.3
+suffix	·[pé|té|xté]-{f}rieur	2	·[pé|té|xté]-{f}rieur(k=2)	1	365.5
+prefix	réa[bo|che|gi|jus|li|mé|ni|per|ra]·	3	réa[bo|che|gi|jus|li|mé|ni|per|ra]·(k=3)	1	365.2
+prefix	impo·	2	impo·(k=2)	1	365.1
+suffix	·thiquement	3	·thiquement(k=3) | ·[ac|an|aus|ba|brep|bé|ca|cas|cep|cra|cu|des|do|fan|fec|ffec|ga|gi|gné|guis|je|jec|la|lec|len|li|lis|llec|ly|ma|man|mes|mi|mé|na|ni|no|nu|né|o|pa|pec|pes|phé|pla|ra|san|sis|ta|tas|thé|tinc|tis|tra|ven|ver|ves|xta]-{t@,zi}tivement(k=4)	2	364.4
+suffix	·2sement	3	·2sement(k=3) | ·[bo|bra|bu|con|cor|cu|da|dan|di|du|ffi|ge|gi|gou|gue|gé|len|leu|lheu|li|lli|lo|lou|lé|mi|mo|mou|nheu|ni|nu|né|pen|pi|pri|pu|ra|re|ren|ri|scien|sti|sé|ta|te|ten|ti|tio|to|tra|tri|tru|tu|té|vei|vou]reusement(k=4)	2	364.3
+suffix	rieur	1	rieur(k=1) | ·[pé|té|xté]-{f}rieur(k=2)	2	364.2
+suffix	·[ci|di|gi|li|mi|pi|si|vi|xci]-{b}tations	3	·[ci|di|gi|li|mi|pi|si|vi|xci]-{b}tations(k=3) | ·[bi|ca|ccré|ci|di|gra|gur|li|lli|re]-{me}citations(k=4)	2	362.5
+prefix	dé[bou|brou|clou|cloue|cou|dou|fou|gou|goû|joue|mou|noue|pou|rou|trou|voue]·	2	dé[bou|brou|clou|cloue|cou|dou|fou|gou|goû|joue|mou|noue|pou|rou|trou|voue]·(k=2)	1	360.4
+suffix	·[cie|e|me|ne|nne|re|rie|se|te|tie|ve]llement	3	·[cie|e|me|ne|nne|re|rie|se|te|tie|ve]llement(k=3) | ·[den|ffi|fi|gi|le|mi|nen|nou|po|quen|rré|sio|so|ssio|stan|ten|ter|tio|tri|tu|té|ver]-{s@}rellement(k=4)	2	359.5
+suffix	·[ai|ba|cai|chi|ciè|cè|dai|diai|fè|ga|gai|gu|gè|lai|liè|miè|mmai|mè|nai|niai|niè|nnai|plai|rai|rieu|soi|ssai|ssiè|ssoi|ssu|tai|ti|tiè|toi|trai|tè|vi|vè]rement	3	·[ai|ba|cai|chi|ciè|cè|dai|diai|fè|ga|gai|gu|gè|lai|liè|miè|mmai|mè|nai|niai|niè|nnai|plai|rai|rieu|soi|ssai|ssiè|ssoi|ssu|tai|ti|tiè|toi|trai|tè|vi|vè]rement(k=3) | ·[a|bi|ce|ci|con|cu|dgé|di|dic|em|ga|gi|gu|li|llu|lon|lu|ma|men|mi|mé|nan|phé|po|pu|pé|remp|ri|si|son|ssa|ta|tio|tté|tu|té|va|vi|xté]lièrement(k=4)	2	359.1
+suffix	·[bé|cé|dé|fé|gé|lé|mé|né|pé|rrié|scé|sé|té]ration	3	·[bé|cé|dé|fé|gé|lé|mé|né|pé|rrié|scé|sé|té]ration(k=3)	1	358.1
+prefix	amé[an|che|di|ge|na|nu|nue|ra|ri]·	3	amé[an|che|di|ge|na|nu|nue|ra|ri]·(k=3)	1	356.8
+suffix	·[fec|ffec|jec|lec|llec|nnec|pec|rec|rrec|tec]tion	2	·[fec|ffec|jec|lec|llec|nnec|pec|rec|rrec|tec]tion(k=2)	1	356.0
+prefix	mé	1	mé(k=1) | mé[ca|co|con|cré|di|fie|fii|ju|pre|pren|pri|ri|ti]-{l@,na}·(k=2)	2	354.4
+suffix	·[bé|dé|fé|gé|lé|mé|né|pé|té|é]ration	3	·[bé|dé|fé|gé|lé|mé|né|pé|té|é]ration(k=3)	1	351.7
+suffix	·[ai|cai|ciè|clai|cè|dai|diai|fè|gai|gè|lai|liè|miè|mmai|mè|nai|niai|niè|nnai|plai|rai|ssai|sse|ssiè|tai|te|trai|tè|vè]-{tj}rrement	3	·[ai|cai|ciè|clai|cè|dai|diai|fè|gai|gè|lai|liè|miè|mmai|mè|nai|niai|niè|nnai|plai|rai|ssai|sse|ssiè|tai|te|trai|tè|vè]-{tj}rrement(k=3) | ·[bi|ce|ci|con|cu|dgé|di|em|gi|gu|li|lon|lu|ma|men|mi|mé|nan|phé|po|pu|ri|si|son|ssa|tio|tté|tu|va]lièrement(k=4)	2	351.4
+suffix	·[bli|bon|cha|con|cé|di|dép|ffi|ffé|gli|gui|lli|lé|nno|pen|pi|pé|sé|ti|vei|vi|vé|xce]-{pa,to}caments	3	·[bli|bon|cha|con|cé|di|dép|ffi|ffé|gli|gui|lli|lé|nno|pen|pi|pé|sé|ti|vei|vi|vé|xce]-{pa,to}caments(k=3)	1	351.1
+suffix	·[bi|ci|cié|dan|den|do|gi|gé|jec|lec|men|mmen|mu|na|nen|ni|pi|ren|ri|rié|tho|zon]-{Rj@}tal	2	·[bi|ci|cié|dan|den|do|gi|gé|jec|lec|men|mmen|mu|na|nen|ni|pi|ren|ri|rié|tho|zon]-{Rj@}tal(k=2)	1	350.8
+prefix	mou	1	mou(k=1)	1	350.6
+prefix	inter	2	inter(k=2) | inter[ca|ce|chan|co|con|cos|cul|cé|di|dic|dé|fé|ga|gla|gou|je|li|lo|mez|mi|na|pla|po|pro|pré|pé|ra|re|sai|si|ste|sub|tri|ve|ven|ver|vien]-{sek}·(k=3)	2	349.7
+prefix	capi	2	capi(k=2)	1	348.0
+suffix	·[chai|chaî|dai|die|e|lai|mai|rai|rei|rrai|sai|scè|tai|traî|vè|vé]nement	3	·[chai|chaî|dai|die|e|lai|mai|rai|rei|rrai|sai|scè|tai|traî|vè|vé]nement(k=3)	1	346.6
+suffix	·[bli|gré|llé|loy|mé|nnay|pay|pli|roy|toy|ttoy|vé]able	2	·[bli|gré|llé|loy|mé|nnay|pay|pli|roy|toy|ttoy|vé]able(k=2)	1	345.9
+prefix	déci	2	déci(k=2)	1	345.5
+prefix	ca[bi|li|ni|pi|ri|si|vi|ï]·	2	ca[bi|li|ni|pi|ri|si|vi|ï]·(k=2)	1	344.3
+prefix	auo·	2	auo·(k=2) | homo[bio|bron|cen|che|co|con|cri|cré|cui|des|di|dé|fi|ge|ges|gra|gui|gé|li|lo|mi|mo|mu|mé|ne|pi|plas|por|pro|pu|ra|rou|ré|sa|se|su|sub|sug|sur|vi|zy|é]-{Ri}·(k=3)	2	343.7
+suffix	able	1	able(k=1) | ·[bli|gré|llé|loy|mé|nnay|pay|pli|roy|toy|ttoy|vé]able(k=2)	2	343.2
+suffix	·[chai|chaî|dai|lai|mai|rai|rei|rrai|sai|scè|tai|traî|vè|vé]nement	3	·[chai|chaî|dai|lai|mai|rai|rei|rrai|sai|scè|tai|traî|vè|vé]nement(k=3)	1	342.5
+suffix	·[bli|bra|co|cro|dio|dro|ga|glo|go|lo|ly|lé|mo|no|o|pho|ta|ter|to|tro|xi|xo]phone	2	·[bli|bra|co|cro|dio|dro|ga|glo|go|lo|ly|lé|mo|no|o|pho|ta|ter|to|tro|xi|xo]phone(k=2)	1	340.3
+prefix	réa[bo|che|gi|jus|li|mé|ni|per]·	3	réa[bo|che|gi|jus|li|mé|ni|per]·(k=3)	1	340.1
+suffix	gie	1	gie(k=1) | ·[ba|go|ller|llur|lo|ner|pha|plé|rra|rur|tal|thar|tur|té|vral|xal]gie(k=2) | ·[a|bio|cho|cio|co|cro|da|dio|do|ma|mio|mo|na|no|o|pho|po|pro|rio|ro|sio|ta|tho|to|tro|tyo|xo]logie(k=3)	3	339.5
+prefix	réa[gi|li|ni]·	3	réa[gi|li|ni]·(k=3)	1	338.3
+prefix	véi·	2	véi·(k=2)	1	336.9
+prefix	tom	1	tom(k=1)	1	336.9
+suffix	·[bri|ci|di|fi|gi|i|li|lli|mi|ni|pi|pli|qui|ri|sci|ssi|ti|vi]nateur	3	·[bri|ci|di|fi|gi|i|li|lli|mi|ni|pi|pli|qui|ri|sci|ssi|ti|vi]nateur(k=3) | ·[a|bi|ca|ci|cri|di|fi|ga|gé|li|lli|na|ni|nnih|né|or|pli|po|ra|ri|si|ssi|sé|ta|ti|tra|ven|vi|vé|xter]-{my}lisateur(k=4)	2	336.6
+prefix	dis[gra|joi|pa|qua]·	2	dis[gra|joi|pa|qua]·(k=2)	1	336.4
+suffix	·[ma|mi|mé|pu|sa|ta|to|tra]ricain	3	·[ma|mi|mé|pu|sa|ta|to|tra]ricain(k=3)	1	335.9
+suffix	vement	2	vement(k=2) | ·[ac|aus|ba|ca|ce|cu|ffec|ga|gi|gre|jec|la|lec|llec|ma|mi|na|ni|pec|pes|pla|pul|ra|si|ta|tinc|tra|tten|tui|ven|xclu]-{kse}tivement(k=4) | ·[chè|di|grè|lè|ner|sci|si|ssi|ti|vi|è|ï]vement(k=3)	3	335.3
+suffix	·[bu|ccha|ci|di|dé|fer|gi|gio|go|gu|mi|mmu|mo|mé|o|ri|ro|ré|sa|se|tha|ti|tio|to|tom|tri|tro|tur|ver]nal	2	·[bu|ccha|ci|di|dé|fer|gi|gio|go|gu|mi|mmu|mo|mé|o|ri|ro|ré|sa|se|tha|ti|tio|to|tom|tri|tro|tur|ver]nal(k=2) | ·[a|bi|bli|di|ly|na|no|ri|ta|tes|ti|to|tri|tu]ginal(k=3)	2	335.2
+suffix	·cité	2	·cité(k=2) | ·[bi|bli|ce|li|lli|lo|ni|pa|ssu|ten|ti|tri|ver|ï]sité(k=3)	2	334.9
+suffix	·[bli|co|cu|den|di|fi|ga|gle|gu|jo|le|li|llé|lo|lé|ma|no|o|pho|plé|po|pplé|pri|ra|ta|tar|te|ti|to|ver|vo|xcé]-{Re,my}étaire	3	·[bli|co|cu|den|di|fi|ga|gle|gu|jo|le|li|llé|lo|lé|ma|no|o|pho|plé|po|pplé|pri|ra|ta|tar|te|ti|to|ver|vo|xcé]-{Re,my}étaire(k=3)	1	334.2
+suffix	·[bi|bli|ce|li|lli|lo|ni|pa|ssu|ten|ti|tri|ver|ï]sité	3	·[bi|bli|ce|li|lli|lo|ni|pa|ssu|ten|ti|tri|ver|ï]sité(k=3)	1	333.3
+suffix	·[bu|ccu|cu|du|gu|ju|lu|mu|nhu|nu|ppu|pu|tu|xsu]cation	3	·[bu|ccu|cu|du|gu|ju|lu|mu|nhu|nu|ppu|pu|tu|xsu]cation(k=3)	1	333.1
+suffix	·[flec|jec|lec|llec|pec|rec|tec|vec]teur	2	·[flec|jec|lec|llec|pec|rec|tec|vec]teur(k=2)	1	330.8
+suffix	·[ce|mi|po|pre]ssible	2	·[ce|mi|po|pre]ssible(k=2)	1	330.6
+suffix	phone	1	phone(k=1) | ·[bli|bra|co|cro|dio|dro|ga|glo|go|lo|ly|lé|mo|no|o|pho|ta|ter|to|tro|xi|xo]phone(k=2)	2	330.3
+suffix	ssant	1	ssant(k=1) | ·[co|pa|ppa|té]ressant(k=3) | ·[a|bi|bli|bou|ca|chi|ci|di|dri|gi|goi|gri|gui|i|illi|joui|la|li|lli|mi|ni|nnai|nni|noui|pi|pli|pou|ppre|pui|rai|re|ri|roi|rra|rri|si|ssi|ti|tri|tti|va|vi|vri]ssant(k=2)	3	330.1
+suffix	·[ba|go|ller|llur|lo|ner|pha|plé|rra|rur|tal|thar|tur|té|vral|xal]gie	2	·[ba|go|ller|llur|lo|ner|pha|plé|rra|rur|tal|thar|tur|té|vral|xal]gie(k=2) | ·[bio|cho|cio|co|cro|dio|do|mio|mo|no|o|pho|po|pro|rio|ro|sio|tho|to|tro|tyo|xo]logie(k=3)	2	328.3
+prefix	ré[a|ca|cla|ga|pa]·	2	ré[a|ca|cla|ga|pa]·(k=2) | réa[ffi|gi|li|ni|pi|ssi]·(k=3)	2	326.6
+suffix	tude	1	tude(k=1) | ·[bi|bé|ci|gi|gni|gri|li|ni|pi|pli|plé|quié|sué|vi]-{ti}tude(k=2) | ·titude(k=2)	3	326.5
+suffix	·icain	2	·icain(k=2) | ·[ma|mi|mé|pu|sa|ta|to|tra]ricain(k=3)	2	326.1
+suffix	·[chi|ci|di|gi|i|li|lli|mi|ni|ri|thi|ti|tri|vi]sation	3	·[chi|ci|di|gi|i|li|lli|mi|ni|ri|thi|ti|tri|vi]sation(k=3) | ·[a|an|ba|bi|bo|bé|char|chro|cia|co|cra|cré|cu|da|dar|dgé|dia|for|ga|gli|go|gé|la|lli|lo|ma|mi|mmu|mo|mé|na|ni|nna|no|né|po|pro|ra|rar|ri|ria|rio|sec|sep|ssi|ssu|sua|ta|ter|teu|ti|tia|to|tra|tu|tua|té|va|vi|vé|xi]-{Na,ka}risation(k=4)	2	325.0
+suffix	·iment	2	·iment(k=2)	1	324.9
+suffix	·isation	3	·isation(k=3) | ·[a|an|ba|bi|bo|bé|char|chro|cia|co|cra|cré|cu|da|dar|dgé|dia|for|ga|gli|go|gé|la|lan|li|lli|lo|ma|mi|mmu|mo|mé|na|ni|nna|no|né|po|pro|ra|rar|ri|ria|rio|sec|sep|ssi|ssu|sua|ta|ter|teu|ti|tia|to|tra|tu|tua|té|va|vi|vé|xi]-{Na,ka}risation(k=4)	2	322.7
+suffix	sseur	1	sseur(k=1) | ·[au|ca|cai|ce|cha|chi|ci|di|dre|dri|fe|gi|gre|i|li|mi|ni|nnai|pai|pli|ppre|pre|ri|rri|sse|ta|ti|tri|trou|vi]sseur(k=2)	2	322.4
+suffix	ssible	1	ssible(k=1) | ·[ce|mi|po|pre]ssible(k=2)	2	322.1
+prefix	i	1	i(k=1) | i[ce|dé|ma|mi|ri|sa]-{zo}·(k=2)	2	321.3
+suffix	·[bi|den|ffi|fi|gi|le|llec|mi|nen|nou|po|quen|ri|rré|sio|so|ssio|stan|ten|ter|ti|tio|tri|tu|té|ver|vi]-{s@,v@}rellement	4	·[bi|den|ffi|fi|gi|le|llec|mi|nen|nou|po|quen|ri|rré|sio|so|ssio|stan|ten|ter|ti|tio|tri|tu|té|ver|vi]-{s@,v@}rellement(k=4)	1	320.1
+suffix	·Ellement	3	·Ellement(k=3) | ·[cor|den|ffi|fi|gi|le|man|mi|nen|nou|po|quen|ra|rré|sio|so|ssio|stan|ten|ter|tio|tri|tu|té|ver]-{s@}rellement(k=4)	2	318.6
+suffix	·[a|an|ba|bi|bo|bé|char|chro|cia|co|cra|cré|cu|da|dar|dgé|dia|for|ga|gli|go|gé|la|lan|li|lli|lo|ma|mi|mmu|mo|mé|na|ni|nna|no|né|po|pro|ra|rar|ri|ria|rio|sec|sep|ssi|ssu|sua|ta|ter|teu|ti|tia|to|tra|tu|tua|té|va|vi|vé|xi]-{Na,ka}risation	4	·[a|an|ba|bi|bo|bé|char|chro|cia|co|cra|cré|cu|da|dar|dgé|dia|for|ga|gli|go|gé|la|lan|li|lli|lo|ma|mi|mmu|mo|mé|na|ni|nna|no|né|po|pro|ra|rar|ri|ria|rio|sec|sep|ssi|ssu|sua|ta|ter|teu|ti|tia|to|tra|tu|tua|té|va|vi|vé|xi]-{Na,ka}risation(k=4)	1	318.5
+suffix	·[a|an|ba|bi|bo|bé|char|chro|cia|co|cra|cré|cu|da|dar|dgé|dia|for|ga|gli|go|gé|la|lli|lo|ma|mi|mmu|mo|mé|na|ni|nna|no|né|po|pro|ra|rar|ri|ria|rio|sec|sep|ssi|ssu|sua|ta|ter|teu|ti|tia|to|tra|tu|tua|té|va|vi|vé|xi|xtra]-{Na,ka}risation	4	·[a|an|ba|bi|bo|bé|char|chro|cia|co|cra|cré|cu|da|dar|dgé|dia|for|ga|gli|go|gé|la|lli|lo|ma|mi|mmu|mo|mé|na|ni|nna|no|né|po|pro|ra|rar|ri|ria|rio|sec|sep|ssi|ssu|sua|ta|ter|teu|ti|tia|to|tra|tu|tua|té|va|vi|vé|xi|xtra]-{Na,ka}risation(k=4)	1	318.3
+suffix	·[a|an|ba|bi|bo|bé|char|chro|cia|co|cra|cré|cu|da|dar|dgé|dia|for|ga|gli|go|gé|la|lli|lo|ma|mi|mmu|mo|mé|na|ni|nna|no|né|po|pro|ra|rar|ri|ria|rio|sec|sep|ssi|ssu|sua|ta|ter|teu|ti|tia|to|tra|tu|tua|té|va|vi|vé|xi]-{Na,ka}risation	4	·[a|an|ba|bi|bo|bé|char|chro|cia|co|cra|cré|cu|da|dar|dgé|dia|for|ga|gli|go|gé|la|lli|lo|ma|mi|mmu|mo|mé|na|ni|nna|no|né|po|pro|ra|rar|ri|ria|rio|sec|sep|ssi|ssu|sua|ta|ter|teu|ti|tia|to|tra|tu|tua|té|va|vi|vé|xi]-{Na,ka}risation(k=4)	1	318.3
+suffix	lleur	1	lleur(k=1)	1	317.6
+prefix	che	1	che(k=1)	1	316.9
+prefix	pu	1	pu(k=1)	1	316.7
+prefix	mi	1	mi(k=1)	1	316.7
+prefix	inER·	2	inER·(k=2)	1	315.1
+suffix	·[bri|ci|di|fi|gi|i|li|lli|mi|ni|pi|pli|qui|ri|sci|ssi|ti|vi]nateur	3	·[bri|ci|di|fi|gi|i|li|lli|mi|ni|pi|pli|qui|ri|sci|ssi|ti|vi]nateur(k=3) | ·[a|bi|ca|ci|di|fi|ga|gé|li|lli|na|ni|nnih|né|or|pli|po|ra|ri|si|ssi|sé|ta|ti|tra|ven|vi|vé|xter]-{my}lisateur(k=4)	2	314.9
+suffix	·lation	2	·lation(k=2) | ·[a|bi|bri|bu|co|cu|du|ge|gu|i|mi|mu|nnu|nu|pe|pi|pu|so|su|ta|ti|tu|vu|vé]-{Ze,na}lation(k=3)	2	314.6
+suffix	mi	1	mi(k=1) | ·[dor|ga|la|nne|ri|ta|té]mi(k=2)	2	314.3
+prefix	re[cour|four|lour|tour]·	2	re[cour|four|lour|tour]·(k=2)	1	314.3
+suffix	·citations	3	·citations(k=3) | ·[con|li|lli|llu|man|mi|ti|tio]citations(k=4)	2	314.2
+suffix	·[ar|bar|car|char|illar|nar|par|ppar|tar]tement	3	·[ar|bar|car|char|illar|nar|par|ppar|tar]tement(k=3)	1	314.2
+suffix	·[cu|du|dû|grû|gu|lu|lû|mue|nu|nue|nû|tru|tu]ment	2	·[cu|du|dû|grû|gu|lu|lû|mue|nu|nue|nû|tru|tu]ment(k=2)	1	313.9
+suffix	·yment	2	·yment(k=2) | ·[gé|so|ssi|ten|ter|ti|xté]lument(k=3)	2	312.7
+suffix	·[clé|cré|cé|dé|glé|gré|le|lé|mmé|mé|nné|né|plé|pplé|rré|ré|ssé|sé|té|vé|xcré|é]ment	2	·[clé|cré|cé|dé|glé|gré|le|lé|mmé|mé|nné|né|plé|pplé|rré|ré|ssé|sé|té|vé|xcré|é]ment(k=2)	1	311.7
+prefix	sé	1	sé(k=1)	1	310.4
+suffix	·nité	2	·nité(k=2) | ·[ba|ca|da|dem|der|dium|gi|le|li|ma|mi|mmu|re|ré|ter|ti|tu|vi]-{py}nité(k=3)	2	309.1
+suffix	·[mé|ta|to]ricain	3	·[mé|ta|to]ricain(k=3)	1	309.0
+prefix	sou[de|le|pe|ve]-{t}·	2	sou[de|le|pe|ve]-{t}·(k=2)	1	306.6
+suffix	·[ai|cai|ciè|clai|cè|dai|diai|fè|gai|gè|lai|liè|miè|mmai|mè|nai|niai|niè|nnai|plai|rai|ssai|ssiè|tai|tiè|trai|tè|vè]rement	3	·[ai|cai|ciè|clai|cè|dai|diai|fè|gai|gè|lai|liè|miè|mmai|mè|nai|niai|niè|nnai|plai|rai|ssai|ssiè|tai|tiè|trai|tè|vè]rement(k=3)	1	306.3
+prefix	io·	2	io·(k=2)	1	305.9
+suffix	·[bi|ci|gi|qui|ri|ti|vi]lité	3	·[bi|ci|gi|qui|ri|ti|vi]lité(k=3) | ·[a|cia|la|mmo|pa|sa|si|ta]bilité(k=4)	2	305.7
+prefix	ia·	2	ia·(k=2)	1	305.7
+suffix	·[ce|dé|gré|mmé|mé|né|ré|scé|sé|tté|té]-{l}diatement	4	·[ce|dé|gré|mmé|mé|né|ré|scé|sé|tté|té]-{l}diatement(k=4)	1	304.7
+suffix	cement	2	cement(k=2)	1	304.2
+suffix	·[ar|bar|car|char|gnar|illar|nar|par|ppar|rar|tar]tement	3	·[ar|bar|car|char|gnar|illar|nar|par|ppar|rar|tar]tement(k=3)	1	304.2
+prefix	ré[com|con|pon]·	2	ré[com|con|pon]·(k=2)	1	304.2
+prefix	ra§·	2	ra§·(k=2)	1	304.0
+suffix	·[con|li|lli|llu|man|mi|ti|tio]citations	4	·[con|li|lli|llu|man|mi|ti|tio]citations(k=4)	1	303.0
+suffix	·quement	2	·quement(k=2) | ·[bar|bli|bri|chi|cho|cli|di|fi|gi|li|mi|ni|nia|nni|phi|pi|pro|ra|res|ri|si|ssi|sè|tes|thi|ti|tri|ï]quement(k=3)	2	301.8
+suffix	·[bi|bri|ci|gi|ni|ri|ti|vi]-{m}lité	3	·[bi|bri|ci|gi|ni|ri|ti|vi]-{m}lité(k=3) | ·[a|cia|fer|la|mmo|pa|sa|si|ta|vé]bilité(k=4)	2	299.1
+suffix	ricain	2	ricain(k=2) | ·[mé|ta|to]ricain(k=3)	2	299.0
+suffix	çon	1	çon(k=1)	1	297.9
+prefix	préi·	2	préi·(k=2)	1	297.8
+suffix	·[ber|bor|car|chi|ci|dam|di|fa|gi|gri|gé|lié|ma|mi|pa|sci|sti|ter|ti|to|vi]nation	3	·[ber|bor|car|chi|ci|dam|di|fa|gi|gri|gé|lié|ma|mi|pa|sci|sti|ter|ti|to|vi]nation(k=3) | ·[cri|des|gglu|in|li|ma|or|ré|ssé|sé|ta|ter|ti|tio|xter]-{bo,ly}gination(k=4)	2	297.1
+suffix	·[a|ba|bla|ca|cca|cha|da|dia|ffa|ga|la|ma|na|nia|nna|pa|qua|ra|ria|sa|ssa|ta|tia|tta|va|ça]blement	3	·[a|ba|bla|ca|cca|cha|da|dia|ffa|ga|la|ma|na|nia|nna|pa|qua|ra|ria|sa|ssa|ta|tia|tta|va|ça]blement(k=3)	1	296.4
+suffix	·[a|ba|ca|cca|cia|ga|la|ma|mma|nia|pa|ra|ria|sa|ta|tra|tta|va|via|vra|ça]bilité	4	·[a|ba|ca|cca|cia|ga|la|ma|mma|nia|pa|ra|ria|sa|ta|tra|tta|va|via|vra|ça]bilité(k=4) | ·[ce|dap|fi|mo|mé|ni|no|noeu|né|o|pa|pon|rri|si|ti|vi|vio|vo]-{pEk}sabilité(k=5)	2	295.7
+suffix	·[ce|fe|gre|ppre|pre|se|sse]ssion	2	·[ce|fe|gre|ppre|pre|se|sse]ssion(k=2)	1	295.5
+suffix	·[ce|dé|fé|gré|mmé|mé|né|ré|scé|sé|tté|té]-{l}diatement	4	·[ce|dé|fé|gré|mmé|mé|né|ré|scé|sé|tté|té]-{l}diatement(k=4)	1	294.8
+prefix	re[cher|fer|mer|per|ver]·	2	re[cher|fer|mer|per|ver]·(k=2)	1	294.4
+suffix	·[bar|bli|bri|chi|cho|cli|di|fi|gi|li|mi|ni|nia|nni|phi|pi|pro|ra|res|ri|si|ssi|sè|tes|thi|ti|tri|ï]quement	3	·[bar|bli|bri|chi|cho|cli|di|fi|gi|li|mi|ni|nia|nni|phi|pi|pro|ra|res|ri|si|ssi|sè|tes|thi|ti|tri|ï]quement(k=3)	1	294.1
+suffix	mier	1	mier(k=1)	1	293.8
+suffix	nation	2	nation(k=2) | ·[ber|bor|car|chi|ci|dam|di|fa|gi|gri|gé|lié|ma|mi|pa|sci|sti|ter|ti|to|vi]nation(k=3) | ·[cri|des|gglu|in|li|ma|or|ré|ssé|sé|ta|ter|ti|tio|xter]-{bo,ly}gination(k=4)	3	293.7
+suffix	·ytion	2	·ytion(k=2) | ·[mi|sti|ti|tri|ttri]tution(k=3) | ·[dro|llo|po|so|sso|tro|vo]-{z}lution(k=3)	3	293.0
+suffix	·[bli|fri|ni|ri|xi|ï]cain	2	·[bli|fri|ni|ri|xi|ï]cain(k=2) | ·[ma|mi|mé|pu]ricain(k=3)	2	292.5
+suffix	·[bi|ci|gi|ni|pi|ri]tal	2	·[bi|ci|gi|ni|pi|ri]tal(k=2)	1	292.3
+suffix	·ablement	3	·ablement(k=3)	1	292.1
+suffix	·[cor|den|ffi|fi|gi|le|man|mi|nen|nou|po|quen|ra|rré|sio|so|ssio|stan|ten|ter|tio|tri|tu|té|ver]-{s@}rellement	4	·[cor|den|ffi|fi|gi|le|man|mi|nen|nou|po|quen|ra|rré|sio|so|ssio|stan|ten|ter|tio|tri|tu|té|ver]-{s@}rellement(k=4)	1	291.9
+prefix	ins	1	ins(k=1)	1	291.8
+suffix	tout	1	tout(k=1)	1	291.3
+suffix	rant	1	rant(k=1) | ·[bu|bé|co|coeu|du|dé|fo|fé|gno|go|gu|gé|li|lo|lé|mu|no|né|pa|pi|plo|ppu|pé|qué|ssu|tau|to|tti|tu|vi|vé|xpi]-{fa,la}rant(k=2)	2	291.1
+suffix	·[au|ca|cai|ce|cha|chi|ci|di|dre|dri|fe|gi|gre|i|li|mi|ni|nnai|pai|pli|ppre|pre|ri|rri|sse|ta|ti|tri|trou|vi]sseur	2	·[au|ca|cai|ce|cha|chi|ci|di|dre|dri|fe|gi|gre|i|li|mi|ni|nnai|pai|pli|ppre|pre|ri|rri|sse|ta|ti|tri|trou|vi]sseur(k=2)	1	290.8
+suffix	cain	1	cain(k=1) | ·[ma|mi|mé|pu]ricain(k=3) | ·[bli|cis|fri|ni|ri|ro|xi|ï]cain(k=2)	3	290.6
+suffix	·[den|ffi|fi|gi|le|mi|nen|nou|po|quen|rré|sio|so|ssio|stan|ten|ter|tio|tri|tu|té|ver]-{s@}rellement	4	·[den|ffi|fi|gi|le|mi|nen|nou|po|quen|rré|sio|so|ssio|stan|ten|ter|tio|tri|tu|té|ver]-{s@}rellement(k=4)	1	290.5
+suffix	·blement	2	·blement(k=2)	1	289.1
+suffix	·[bo|co|ffer|mi|pa|ppa|ri|té|va]ressant	3	·[bo|co|ffer|mi|pa|ppa|ri|té|va]ressant(k=3)	1	289.0
+suffix	·[ar|di|fi|li|ni|vo]cat	2	·[ar|di|fi|li|ni|vo]cat(k=2)	1	288.5
+prefix	véri	2	véri(k=2)	1	287.9
+suffix	tif	1	tif(k=1) | ·[a|ba|bat|bla|ca|cia|da|ga|la|ma|na|pla|ra|rra|sa|sla|ta|tra|va|via|xa]tif(k=2) | ·[ci|ddi|di|gi|mi|ni|si|ti|tri]tif(k=2) | ·[fec|ffec|jec|lec|llec|pec|rec]tif(k=2)	4	287.2
+suffix	·thiquement	3	·thiquement(k=3) | ·[an|aus|ba|brep|bé|cas|cep|cra|des|do|fan|fec|ffec|ga|gi|gné|guis|je|jec|la|lec|len|li|lis|llec|ly|ma|man|mes|mi|mé|na|no|nu|né|o|pa|pec|phé|ra|sis|tas|then|thé|tinc|tis|ver|ves|xta]-{bu,zi}tivement(k=4)	2	287.1
+suffix	don	1	don(k=1)	1	285.7
+suffix	·[a|bi|bli|bou|ca|chi|ci|di|dri|gi|goi|gri|gui|i|illi|joui|la|li|lli|mi|ni|nnai|nni|noui|pi|pli|pou|ppre|pui|rai|re|ri|roi|rra|rri|si|ssi|ti|tri|tti|va|vi|vri]ssant	2	·[a|bi|bli|bou|ca|chi|ci|di|dri|gi|goi|gri|gui|i|illi|joui|la|li|lli|mi|ni|nnai|nni|noui|pi|pli|pou|ppre|pui|rai|re|ri|roi|rra|rri|si|ssi|ti|tri|tti|va|vi|vri]ssant(k=2) | ·[bé|flé|fraî|je|ppé|té]ressant(k=3)	2	285.2
+suffix	table	1	table(k=1) | ·[bi|boî|cep|con|cu|domp|dou|fi|for|fu|la|lec|men|mi|mo|nné|pec|po|por|ppor|pré|quen|qui|ri|rien|rri|sen|trac|van|vi|xploi]-{lyk,tEs}table(k=2)	2	285.1
+suffix	·sionnel	2	·sionnel(k=2) | ·[ac|ddi|di|fe|fonc|la|men|mo|ra|rra|rrec|sa|se|ta|ten|tri|tu|xcep]-{v@}ssionnel(k=3)	2	284.8
+suffix	mation	2	mation(k=2) | ·[bli|ccla|cla|ffa|for|lli|nhu|qua|ti|to|u|xcla|xi]-{fiR,ni}mations(k=3)	2	282.0
+suffix	·ident	2	·ident(k=2)	1	281.8
+suffix	reusement	3	reusement(k=3) | ·[ge|gou|leu|lheu|lou|lé|mou|nheu|né|vou]reusement(k=4)	2	280.5
+suffix	·timents	2	·timents(k=2)	1	280.4
+prefix	caa·	2	caa·(k=2)	1	280.4
+suffix	·tainement	3	·tainement(k=3)	1	279.4
+prefix	dé[ba|bap|bla|boî|bra|bâ|ca|cla|coi|doua|dra|fa|fla|ga|gra|la|ma|na|pha|pla|plâ|qua|ra|sa|ta|tra|va|voi|voie]-{p}·	2	dé[ba|bap|bla|boî|bra|bâ|ca|cla|coi|doua|dra|fa|fla|ga|gra|la|ma|na|pha|pla|plâ|qua|ra|sa|ta|tra|va|voi|voie]-{p}·(k=2)	1	279.1
+suffix	·Essant	2	·Essant(k=2) | ·[bo|co|ffer|mi|pa|ppa|ri|té|va]ressant(k=3)	2	279.0
+suffix	cat	1	cat(k=1) | ·[ar|di|fi|li|ni|vo]cat(k=2)	2	278.8
+suffix	·mations	2	·mations(k=2) | ·[bli|cla|ffa|ffir|for|gra|lli|nhu|qua|so|ti|to|xcla|xi]-{fla,ni}mations(k=3)	2	278.7
+suffix	·[ac|an|aus|ba|brep|bé|ca|cas|cep|cra|cu|des|do|fan|fec|ffec|ga|gi|gné|guis|je|jec|la|lec|len|li|lis|llec|ly|ma|man|mes|mi|mé|na|ni|no|nu|né|o|pa|pec|pes|phé|pla|ra|san|sis|ta|tas|thé|tinc|tis|tra|ven|ver|ves|xta]-{t@,zi}tivement	4	·[ac|an|aus|ba|brep|bé|ca|cas|cep|cra|cu|des|do|fan|fec|ffec|ga|gi|gné|guis|je|jec|la|lec|len|li|lis|llec|ly|ma|man|mes|mi|mé|na|ni|no|nu|né|o|pa|pec|pes|phé|pla|ra|san|sis|ta|tas|thé|tinc|tis|tra|ven|ver|ves|xta]-{t@,zi}tivement(k=4)	1	278.6
+prefix	ce	1	ce(k=1)	1	277.6
+suffix	·ement	2	·ement(k=2) | ·[bé|ci|do|dé|fon|for|gé|lai|mi|mmen|mmu|nor|pa|pi|ppo|pu|pé|ssio|ssu|sti|su|ta|tu|xpre|é]-{v9,za}dément(k=3)	2	276.5
+suffix	·[bli|ci|di|ffi|gli|gui|li|lli|pi|ti|vi]caments	3	·[bli|ci|di|ffi|gli|gui|li|lli|pi|ti|vi]caments(k=3)	1	276.3
+prefix	fai·	2	fai·(k=2)	1	275.8
+suffix	·[gé|so|ssi|ten|ter|ti|xté]lument	3	·[gé|so|ssi|ten|ter|ti|xté]lument(k=3)	1	275.0
+suffix	vé	1	vé(k=1) | ·[cur|le|ne|ner|pra|rri|ser|ti]-{S°,pRu}vé(k=2)	2	274.2
+prefix	ha	1	ha(k=1)	1	273.5
+prefix	die·	2	die·(k=2)	1	273.5
+suffix	ri	1	ri(k=1)	1	273.3
+suffix	·nation	2	·nation(k=2) | ·[car|chi|ci|dam|di|fa|gi|lié|mi|sci|ter|ti|to|vi]nation(k=3) | ·[cri|gglu|li|ma|or|sé|ta|ter|xter]-{bo,ly}gination(k=4)	3	272.3
+suffix	·[ma|mi|mé|pu]ricain	3	·[ma|mi|mé|pu]ricain(k=3)	1	272.2
+suffix	·[a|ba|ca|cca|cia|ga|la|ma|mma|nia|pa|ra|ria|sa|ta|tra|tta|va|via|vra|ça]bilité	4	·[a|ba|ca|cca|cia|ga|la|ma|mma|nia|pa|ra|ria|sa|ta|tra|tta|va|via|vra|ça]bilité(k=4)	1	271.3
+suffix	·[ac|ddi|di|fe|fonc|la|men|mo|ra|rra|rrec|sa|se|ta|ten|tri|tu|xcep]-{v@}ssionnel	3	·[ac|ddi|di|fe|fonc|la|men|mo|ra|rra|rrec|sa|se|ta|ten|tri|tu|xcep]-{v@}ssionnel(k=3)	1	271.3
+suffix	·[mi|po|so|sti|sé|ti|tri|tro|ttri|vo|é]-{zo}lution	3	·[mi|po|so|sti|sé|ti|tri|tro|ttri|vo|é]-{zo}lution(k=3)	1	271.2
+suffix	·[ca|cca|ci|dac|ddi|di|dic|fe|fonc|la|men|mo|per|ra|rra|rrec|sa|se|si|ta|tri|tu|tua|vi|xcep]-{pOR,v@}ssionnel	3	·[ca|cca|ci|dac|ddi|di|dic|fe|fonc|la|men|mo|per|ra|rra|rrec|sa|se|si|ta|tri|tu|tua|vi|xcep]-{pOR,v@}ssionnel(k=3)	1	271.2
+prefix	co[bi|ci|di|fi|fie|gi|li|mi|ni|pi|pie|pli|pri|si|ti|tri]·	2	co[bi|ci|di|fi|fie|gi|li|mi|ni|pi|pie|pli|pri|si|ti|tri]·(k=2) | consi[dé|gna|gne|ma|nan|ne|toy]-{gy}·(k=3)	2	271.2
+suffix	du	1	du(k=1) | ·[fon|me|que|si|ten|tten|ven|vi]-{f@,p@}du(k=2)	2	270.6
+suffix	·gement	2	·gement(k=2)	1	270.3
+suffix	·[ac|cca|ci|ddi|di|fe|fonc|la|men|mo|per|ra|rra|rrec|sa|se|ta|tri|tu|vi|xcep]-{pOR,v@}ssionnel	3	·[ac|cca|ci|ddi|di|fe|fonc|la|men|mo|per|ra|rra|rrec|sa|se|ta|tri|tu|vi|xcep]-{pOR,v@}ssionnel(k=3)	1	269.8
+suffix	nier	1	nier(k=1)	1	269.5
+suffix	·[bau|dio|do|gau|llo|mmo|pau|po|ppo|ro|so|ssau|ssio|trô|vau]lument	3	·[bau|dio|do|gau|llo|mmo|pau|po|ppo|ro|so|ssau|ssio|trô|vau]lument(k=3)	1	268.0
+suffix	·[bli|bri|chi|cli|di|fi|gi|li|mi|ni|nni|phi|pi|ri|si|ssi|thi|ti|tri|ï]quement	3	·[bli|bri|chi|cli|di|fi|gi|li|mi|ni|nni|phi|pi|ri|si|ssi|thi|ti|tri|ï]quement(k=3)	1	267.6
+suffix	·[car|cen|fi|gé|la|lo|mo|mé|no|pé|ro|so]die	2	·[car|cen|fi|gé|la|lo|mo|mé|no|pé|ro|so]die(k=2)	1	267.4
+suffix	·[ci|lli|vi|xci]sion	2	·[ci|lli|vi|xci]sion(k=2)	1	267.3
+prefix	dor	1	dor(k=1)	1	266.9
+prefix	ay·	2	ay·(k=2)	1	266.8
+prefix	in[cor|for|sor]·	2	in[cor|for|sor]·(k=2) | infor[ma|me|mu|po|tu]·(k=3)	2	266.2
+suffix	·[bli|di|ffli|fi|fli|gli|i|mi|ri|rri|si|ti]gé	2	·[bli|di|ffli|fi|fli|gli|i|mi|ri|rri|si|ti]gé(k=2)	1	265.5
+prefix	décou·	2	décou·(k=2)	1	265.2
+suffix	·[bi|bé|ci|gi|gni|gri|li|ni|pi|pli|plé|quié|sué|vi]-{ti}tude	2	·[bi|bé|ci|gi|gni|gri|li|ni|pi|pli|plé|quié|sué|vi]-{ti}tude(k=2)	1	264.9
+suffix	née	1	née(k=1) | ·[ci|me|mi|mé|ri|ti]née(k=2)	2	264.8
+prefix	proe·	2	proe·(k=2)	1	264.7
+prefix	infor·	2	infor·(k=2) | infor[ma|me|mu|tu]·(k=3)	2	264.0
+suffix	·[cqui|po|ppo|qui|xpo]sition	3	·[cqui|po|ppo|qui|xpo]sition(k=3)	1	263.7
+suffix	·[ber|di|i|lli|lé|mal|ni|non|nus|pus|sci|ta|ti|tri|vi]cule	2	·[ber|di|i|lli|lé|mal|ni|non|nus|pus|sci|ta|ti|tri|vi]cule(k=2)	1	263.5
+suffix	·tainement	3	·tainement(k=3)	1	263.1
+suffix	·cident	2	·cident(k=2)	1	263.0
+suffix	tie	1	tie(k=1)	1	262.7
+suffix	sition	2	sition(k=2) | ·[cqui|po|ppo|qui|xpo]sition(k=3)	2	262.5
+prefix	dé[am|ban|bran|cam|cen|chan|clen|cram|fen|jan|mem|men|pen|plan|ran|san|sen|ten|trem|ven]·	2	dé[am|ban|bran|cam|cen|chan|clen|cram|fen|jan|mem|men|pen|plan|ran|san|sen|ten|trem|ven]·(k=2)	1	262.3
+suffix	·sition	2	·sition(k=2) | ·[po|ppo|qui]sition(k=3)	2	261.9
+suffix	·itation	3	·itation(k=3) | ·[bi|ci|di|li|lli]citations(k=4)	2	261.2
+prefix	pré[a|da|fa|la|ma|na|pa|sa|va]·	2	pré[a|da|fa|la|ma|na|pa|sa|va]·(k=2)	1	259.9
+suffix	·[car|chi|ci|dam|di|fa|gi|lié|mi|sci|ter|ti|to|vi]nation	3	·[car|chi|ci|dam|di|fa|gi|lié|mi|sci|ter|ti|to|vi]nation(k=3)	1	259.4
+suffix	·[ci|gni|li|ri|rri|ti]fique	2	·[ci|gni|li|ri|rri|ti]fique(k=2)	1	259.3
+suffix	·[bi|ci|di|li|lli]citations	4	·[bi|ci|di|li|lli]citations(k=4)	1	258.2
+suffix	·[ci|gni|li|né|ri|rri|ti]-{le}fique	2	·[ci|gni|li|né|ri|rri|ti]-{le}fique(k=2)	1	257.5
+suffix	die	1	die(k=1) | ·[car|cen|fi|gé|la|lo|mo|mé|no|pé|ro|so]die(k=2)	2	257.4
+suffix	·[bra|ce|cu|di|gi|gui|gé|llé|mi|mo|pa|pli|ri|ro|te|ter|tri|té]naire	2	·[bra|ce|cu|di|gi|gui|gé|llé|mi|mo|pa|pli|ri|ro|te|ter|tri|té]naire(k=2) | ·[bou|ma|or|qua|quan|ran|ri|sci|to]dinaire(k=3)	2	257.1
+suffix	fique	1	fique(k=1) | ·[ci|gni|li|ri|rri|ti]fique(k=2)	2	257.1
+suffix	·[a|bi|ca|ccré|ci|di|gra|gur|li|lli|re]-{me}citations	4	·[a|bi|ca|ccré|ci|di|gra|gur|li|lli|re]-{me}citations(k=4)	1	257.0
+suffix	·[ba|ca|da|dem|der|dium|ffi|gi|gui|li|ma|mi|mmu|ré|scé|ter|ti|tu|tur|vi]-{py}nité	3	·[ba|ca|da|dem|der|dium|ffi|gi|gui|li|ma|mi|mmu|ré|scé|ter|ti|tu|tur|vi]-{py}nité(k=3)	1	256.6
+suffix	cule	1	cule(k=1) | ·[ber|di|i|lli|lé|mal|ni|non|nus|pus|sci|ta|ti|tri|vi]cule(k=2)	2	256.4
+suffix	·[li|lli|mi|ti]citations	4	·[li|lli|mi|ti]citations(k=4)	1	256.4
+suffix	di	1	di(k=1) | ·[bon|dre|fon|gan|gou|gour|me|mi|roi|rron|sour|ti|tour|xti]di(k=2)	2	255.6
+suffix	·ication	3	·ication(k=3) | ·[bi|bri|ci|cor|di|dju|du|gni|li|mes|mi|mmu|mé|na|ni|nni|phis|pli|pu|ri|si|ssi|ti|to|tri|ven|vi|zi]nication(k=4)	2	254.4
+suffix	·[chi|ci|cli|di|gi|gri|mi|pi|sci|sti|ti|vi]nation	3	·[chi|ci|cli|di|gi|gri|mi|pi|sci|sti|ti|vi]nation(k=3) | ·[cri|des|gglu|li|ma|or|ré|ssé|sé|ta|ter|ti|tio|xter]-{bo,ly}gination(k=4)	2	254.4
+suffix	sir	1	sir(k=1)	1	253.1
+prefix	déa·	2	déa·(k=2)	1	252.9
+suffix	nité	2	nité(k=2) | ·[ba|ca|da|dem|der|dium|ffi|gi|gui|li|ma|mi|mmu|ré|scé|ter|ti|tu|tur|vi]-{py}nité(k=3)	2	252.1
+suffix	·[bi|ca|ccré|ci|di|gra|gur|li|lli|re]-{me}citations	4	·[bi|ca|ccré|ci|di|gra|gur|li|lli|re]-{me}citations(k=4)	1	251.2
+suffix	·[chè|di|grè|lè|ner|sci|si|ssi|ti|vi|è|ï]vement	3	·[chè|di|grè|lè|ner|sci|si|ssi|ti|vi|è|ï]vement(k=3) | ·[ac|aus|ba|ca|ce|cu|ffec|ga|gi|gre|jec|la|lec|llec|ma|mi|na|ni|pec|pes|pla|pul|ra|si|ta|tinc|tra|tten|tui|ven|xclu]-{kse}tivement(k=4)	2	250.3
+suffix	·Erement	3	·Erement(k=3) | ·[bi|ce|ci|con|cu|dgé|di|em|gi|gu|li|llu|lon|lu|ma|men|mi|mé|nan|phé|po|pu|ri|si|son|ssa|tio|tté|tu|va]lièrement(k=4)	2	250.3
+suffix	·[bo|mo|po|ppo|xpo]sition	3	·[bo|mo|po|ppo|xpo]sition(k=3)	1	248.7
+suffix	naire	1	naire(k=1) | ·[bra|ce|cu|di|gi|gui|gé|llé|mi|mo|pa|pli|ri|ro|te|ter|tri|té]naire(k=2) | ·[bou|ma|or|qua|quan|ran|ri|sci|to]dinaire(k=3)	3	248.4
+prefix	inté	2	inté(k=2)	1	248.1
+suffix	·bilité	3	·bilité(k=3) | ·[a|cia|lu|mmo|pa|sa|si|ta]bilité(k=4)	2	247.7
+suffix	·reusement	3	·reusement(k=3)	1	247.7
+suffix	·[a|cia|lu|mmo|pa|sa|si|ta]bilité	4	·[a|cia|lu|mmo|pa|sa|si|ta]bilité(k=4)	1	246.7
+suffix	·mmédiatement	4	·mmédiatement(k=4)	1	246.6
+prefix	eni·	2	eni·(k=2)	1	246.2
+prefix	en[che|ge|gre|le|re|se]·	2	en[che|ge|gre|le|re|se]·(k=2)	1	246.0
+suffix	·bilité	3	·bilité(k=3) | ·[a|cia|lu|mmo|pa|sa|si|ta]bilité(k=4)	2	245.8
+suffix	·[dor|ga|la|nne|ri|ta|té]mi	2	·[dor|ga|la|nne|ri|ta|té]mi(k=2)	1	245.4
+suffix	·[a|cia|la|mmo|pa|sa|si|ta]bilité	4	·[a|cia|la|mmo|pa|sa|si|ta]bilité(k=4)	1	245.2
+suffix	·[bli|cla|ffa|ffir|for|gra|lli|nhu|qua|so|ti|to|xcla|xi]-{fla,ni}mations	3	·[bli|cla|ffa|ffir|for|gra|lli|nhu|qua|so|ti|to|xcla|xi]-{fla,ni}mations(k=3)	1	245.1
+suffix	·[a|cia|lu|mmo|pa|sa|si|ta]bilité	4	·[a|cia|lu|mmo|pa|sa|si|ta]bilité(k=4)	1	245.1
+suffix	·[bri|ci|cor|di|gni|li|mes|mi|mmu|ni|nni|phis|pli|pu|ri|si|ssi|ti|to|tri|ven|vi|zi|é]nication	4	·[bri|ci|cor|di|gni|li|mes|mi|mmu|ni|nni|phis|pli|pu|ri|si|ssi|ti|to|tri|ven|vi|zi|é]nication(k=4)	1	244.6
+suffix	·[bi|ci|gi|gni|gri|li|ni|pi|pli|vi]-{t}tude	2	·[bi|ci|gi|gni|gri|li|ni|pi|pli|vi]-{t}tude(k=2)	1	244.1
+prefix	mar	1	mar(k=1)	1	243.8
+suffix	·[bi|bri|ci|cor|di|dju|du|gni|li|mes|mi|mmu|mé|na|ni|nni|phis|pli|pu|ri|si|ssi|ti|to|tri|ven|vi|zi]nication	4	·[bi|bri|ci|cor|di|dju|du|gni|li|mes|mi|mmu|mé|na|ni|nni|phis|pli|pu|ri|si|ssi|ti|to|tri|ven|vi|zi]nication(k=4)	1	243.8
+prefix	en[a|ca|châ|cloî|dia|fa|fla|foi|ga|gra|joi|la|ra|sa|ta|toi|tra|va]·	2	en[a|ca|châ|cloî|dia|fa|fla|foi|ga|gra|joi|la|ra|sa|ta|toi|tra|va]·(k=2)	1	243.4
+suffix	·[chi|ci|cli|di|gi|mi|sci|ti|vi]nation	3	·[chi|ci|cli|di|gi|mi|sci|ti|vi]nation(k=3) | ·[cri|gglu|li|ma|or|sé|ta|ter|xter]-{bo,ly}gination(k=4)	2	243.3
+prefix	trans	1	trans(k=1) | trans[bah|bor|ca|cas|con|cu|der|fi|for|fu|fé|mi|mu|na|pa|per|plan|po|pon|por|sah|se|si|va]-{mE,pi}·(k=2)	2	242.8
+suffix	·[bri|ci|cor|di|gni|li|mes|mi|mmu|na|ni|nni|phis|pli|pu|ri|si|ssi|ti|to|tri|ven|vi|zi]nication	4	·[bri|ci|cor|di|gni|li|mes|mi|mmu|na|ni|nni|phis|pli|pu|ri|si|ssi|ti|to|tri|ven|vi|zi]nication(k=4)	1	241.9
+prefix	séy·	2	séy·(k=2)	1	241.2
+suffix	·[bi|boî|cep|con|cu|domp|dou|fi|for|fu|la|lec|men|mi|mo|nné|pec|po|por|ppor|pré|quen|qui|ri|rien|rri|sen|trac|van|vi|xploi]-{lyk,tEs}table	2	·[bi|boî|cep|con|cu|domp|dou|fi|for|fu|la|lec|men|mi|mo|nné|pec|po|por|ppor|pré|quen|qui|ri|rien|rri|sen|trac|van|vi|xploi]-{lyk,tEs}table(k=2)	1	241.1
+suffix	·[a|cia|fer|la|mmo|pa|sa|si|ta|vé]bilité	4	·[a|cia|fer|la|mmo|pa|sa|si|ta|vé]bilité(k=4)	1	240.9
+suffix	tance	1	tance(k=1) | ·[bec|cons|cque|dis|fec|ffe|mi|pen|por|pé|sis|ssis|trai]tance(k=2)	2	240.0
+suffix	quement	2	quement(k=2) | ·niquement(k=3)	2	239.6
+suffix	·[ba|ca|da|dem|der|dium|gi|le|li|ma|mi|mmu|re|ré|ter|ti|tu|vi]-{py}nité	3	·[ba|ca|da|dem|der|dium|gi|le|li|ma|mi|mmu|re|ré|ter|ti|tu|vi]-{py}nité(k=3)	1	239.4
+prefix	ba	1	ba(k=1)	1	238.6
+suffix	·sation	2	·sation(k=2) | ·[a|bi|bo|cia|cu|ga|gé|lli|lo|ma|mo|na|no|né|po|pro|ra|ri|ta|ti|tra|té|vi|vé]-{ka}nisation(k=4) | ·[ccu|cu|i|li|ni|ri|ti|tri|vi]sation(k=3)	3	238.5
+suffix	·vement	2	·vement(k=2) | ·[chè|lè|ner|sci|si|ssi|ti|vi|è|ï]vement(k=3)	2	238.4
+suffix	·[bli|ccla|cla|ffa|for|lli|nhu|qua|ti|to|u|xcla|xi]-{fiR,ni}mations	3	·[bli|ccla|cla|ffa|for|lli|nhu|qua|ti|to|u|xcla|xi]-{fiR,ni}mations(k=3)	1	238.3
+prefix	auto	2	auto(k=2)	1	237.9
+prefix	re[bu|chu|cu|flu|flue|fu|ju|mu|mue|pu]·	2	re[bu|chu|cu|flu|flue|fu|ju|mu|mue|pu]·(k=2)	1	237.6
+suffix	to	1	to(k=1)	1	237.4
+suffix	·[po|ppo|xpo]sition	3	·[po|ppo|xpo]sition(k=3)	1	237.1
+suffix	·[co|pa|ppa|té]ressant	3	·[co|pa|ppa|té]ressant(k=3)	1	236.3
+prefix	ré[e|fle|vei]·	2	ré[e|fle|vei]·(k=2)	1	236.2
+suffix	·[a|ca|cia|da|ga|gna|la|lla|na|pa|sa|ta|va]bilité	4	·[a|ca|cia|da|ga|gna|la|lla|na|pa|sa|ta|va]bilité(k=4)	1	235.9
+prefix	tra	1	tra(k=1) | tra[la|va|ve|ver]-{ka}·(k=2)	2	235.9
+prefix	ei·	2	ei·(k=2) | expli[ca|ci|lo|me|te]-{Ra}·(k=3)	2	235.8
+suffix	·[bo|bour|bra|bu|con|cor|cu|da|dan|di|du|ffec|ffi|ge|gi|gou|gue|gé|len|leu|lheu|li|lli|lo|lou|lup|lé|mi|mo|mul|nheu|ni|nu|né|pec|pen|pi|pri|pu|ra|re|ren|ri|scien|sti|sé|ta|te|ten|ti|tio|to|tra|tri|tru|tu|té|vei|vou]reusement	4	·[bo|bour|bra|bu|con|cor|cu|da|dan|di|du|ffec|ffi|ge|gi|gou|gue|gé|len|leu|lheu|li|lli|lo|lou|lup|lé|mi|mo|mul|nheu|ni|nu|né|pec|pen|pi|pri|pu|ra|re|ren|ri|scien|sti|sé|ta|te|ten|ti|tio|to|tra|tri|tru|tu|té|vei|vou]reusement(k=4)	1	235.2
+suffix	·neries	2	·neries(k=2)	1	235.0
+suffix	·[ffé|fé|gé|pa|ppa|é]-{ve}rence	2	·[ffé|fé|gé|pa|ppa|é]-{ve}rence(k=2)	1	234.9
+prefix	con[co|do|lo|o|plo|po|pro|so|to|trô|vo]·	2	con[co|do|lo|o|plo|po|pro|so|to|trô|vo]·(k=2)	1	234.8
+suffix	·[lua|nua|tua]tion	2	·[lua|nua|tua]tion(k=2)	1	233.7
+suffix	·[bo|bra|bu|con|cor|cu|da|dan|di|du|ffi|ge|gi|gou|gue|gé|len|leu|lheu|li|lli|lo|lou|lé|mi|mo|mou|nheu|ni|nu|né|pen|pi|pri|pu|ra|re|ren|ri|scien|sti|sé|ta|te|ten|ti|tio|to|tra|tri|tru|tu|té|vei|vou]reusement	4	·[bo|bra|bu|con|cor|cu|da|dan|di|du|ffi|ge|gi|gou|gue|gé|len|leu|lheu|li|lli|lo|lou|lé|mi|mo|mou|nheu|ni|nu|né|pen|pi|pri|pu|ra|re|ren|ri|scien|sti|sé|ta|te|ten|ti|tio|to|tra|tri|tru|tu|té|vei|vou]reusement(k=4)	1	233.2
+prefix	di[gi|gé|la|rec|ri|va|ver|vi]·	2	di[gi|gé|la|rec|ri|va|ver|vi]·(k=2)	1	233.0
+suffix	·[dé|la|li|mmé]diatement	4	·[dé|la|li|mmé]diatement(k=4)	1	232.6
+prefix	em[ba|boî|bra|ma|pa|pla|plâ|poi]·	2	em[ba|boî|bra|ma|pa|pla|plâ|poi]·(k=2)	1	230.1
+prefix	déu·	2	déu·(k=2)	1	230.1
+suffix	ssement	2	ssement(k=2) | ·[bi|bli|bri|chi|ci|di|dri|foui|gi|gri|gui|i|illi|li|lli|mi|ni|nni|noui|pi|pli|ri|rri|si|ssi|ti|tri|tti|vi|vri]ssement(k=3)	2	229.7
+suffix	·[an|aus|ba|brep|bé|cas|cep|cra|des|do|fan|fec|ffec|ga|gi|gné|guis|je|jec|la|lec|len|li|lis|llec|ly|ma|man|mes|mi|mé|na|no|nu|né|o|pa|pec|phé|ra|sis|tas|then|thé|tinc|tis|ver|ves|xta]-{bu,zi}tivement	4	·[an|aus|ba|brep|bé|cas|cep|cra|des|do|fan|fec|ffec|ga|gi|gné|guis|je|jec|la|lec|len|li|lis|llec|ly|ma|man|mes|mi|mé|na|no|nu|né|o|pa|pec|phé|ra|sis|tas|then|thé|tinc|tis|ver|ves|xta]-{bu,zi}tivement(k=4)	1	229.6
+suffix	leur	1	leur(k=1)	1	229.3
+prefix	télé[a|ca|char|ci|co|con|di|fa|gra|gui|gé|mar|me|mé|ob|pho|promp|re|ri|ro|sur|tra|ven|vi]·	3	télé[a|ca|char|ci|co|con|di|fa|gra|gui|gé|mar|me|mé|ob|pho|promp|re|ri|ro|sur|tra|ven|vi]·(k=3)	1	228.1
+suffix	rence	1	rence(k=1) | ·[ffé|fé|gé|pa|ppa|é]-{ve}rence(k=2)	2	228.0
+suffix	cile	1	cile(k=1)	1	227.8
+suffix	·llution	2	·llution(k=2) | ·[po|so|sso|vo]-{zo}lution(k=3)	2	227.8
+suffix	·[bou|bé|chi|cou|cu|do|du|dé|fé|lio|lé|mi|mo|no|né|o|pa|pi|plo|po|pé|su|sé|ti|té|vo]rable	2	·[bou|bé|chi|cou|cu|do|du|dé|fé|lio|lé|mi|mo|no|né|o|pa|pi|plo|po|pé|su|sé|ti|té|vo]rable(k=2)	1	227.5
+prefix	im[pe|pié|pre|pré|pé]·	2	im[pe|pié|pre|pré|pé]·(k=2)	1	227.3
+suffix	·[bai|cai|grai|nai|nnai|rai|re]ssant	2	·[bai|cai|grai|nai|nnai|rai|re]ssant(k=2) | ·[co|pa|ppa|té]ressant(k=3)	2	227.0
+suffix	·[bé|ci|do|dé|fon|for|gé|lai|mi|mmen|mmu|nor|pa|pi|ppo|pu|pé|ssio|ssu|sti|su|ta|tu|xpre|é]-{v9,za}dément	3	·[bé|ci|do|dé|fon|for|gé|lai|mi|mmen|mmu|nor|pa|pi|ppo|pu|pé|ssio|ssu|sti|su|ta|tu|xpre|é]-{v9,za}dément(k=3)	1	227.0
+suffix	·mission	2	·mission(k=2)	1	226.7
+suffix	·[mi|mmi|sci]ssion	2	·[mi|mmi|sci]ssion(k=2)	1	226.7
+suffix	·[cai|ce|dre|fe|gre|nnai|pai|ppre]sseur	2	·[cai|ce|dre|fe|gre|nnai|pai|ppre]sseur(k=2)	1	226.6
+suffix	gement	2	gement(k=2) | ·[ga|la|llon|lo|lon|mma|na|ra|ran|rra|rran|ti|tran|va]-{SaR,bER}gement(k=3)	2	226.1
+suffix	·[di|i|lli|ni|ri|sci|ti|tri|vi]cule	2	·[di|i|lli|ni|ri|sci|ti|tri|vi]cule(k=2)	1	225.9
+suffix	lot	1	lot(k=1)	1	225.8
+suffix	timent	2	timent(k=2)	1	225.6
+suffix	cité	2	cité(k=2) | ·[bli|bri|ca|co|di|fi|ga|na|ni|pa|pli|pro|qua|ra|ri|ria|ro|ti|tri|tro|va|ï]-{li}cité(k=3)	2	225.6
+prefix	télé[a|ca|char|ci|co|con|di|fa|gra|gui|gé|mar|me|mé|ob|pho|promp|re|ro|sur|tra|ven|vi]·	3	télé[a|ca|char|ci|co|con|di|fa|gra|gui|gé|mar|me|mé|ob|pho|promp|re|ro|sur|tra|ven|vi]·(k=3)	1	225.5
+suffix	·[bli|cis|fri|ni|ri|ro|xi|ï]cain	2	·[bli|cis|fri|ni|ri|ro|xi|ï]cain(k=2)	1	225.4
+prefix	é@·	2	é@·(k=2)	1	224.4
+prefix	com°·	2	com°·(k=2)	1	224.2
+suffix	·[loy|roy|toy|ttoy]able	2	·[loy|roy|toy|ttoy]able(k=2)	1	223.7
+suffix	lation	2	lation(k=2) | ·[a|bi|bu|co|cu|du|gu|i|mi|mu|nnu|nu|pi|po|pu|so|ti|tu|vu|vé]-{Ze,na}lation(k=3)	2	222.8
+suffix	mal	1	mal(k=1) | ·[ci|cry|ni|si|ti|xi]mal(k=2)	2	222.7
+suffix	·atement	3	·atement(k=3) | ·[dé|la|li|mmé]diatement(k=4)	2	222.6
+prefix	ré[cu|du|pu|u]·	2	ré[cu|du|pu|u]·(k=2)	1	222.6
+suffix	·[bli|bri|ca|co|di|fi|ga|na|ni|pa|pli|pro|qua|ra|ri|ria|ro|ti|tri|tro|va|ï]-{li}cité	3	·[bli|bri|ca|co|di|fi|ga|na|ni|pa|pli|pro|qua|ra|ri|ria|ro|ti|tri|tro|va|ï]-{li}cité(k=3)	1	222.2
+prefix	dé[blo|bo|chau|co|cro|do|fau|flo|gau|go|gro|jau|lo|mo|no|o|po|pro|ro|so|to|trô]-{z}·	2	dé[blo|bo|chau|co|cro|do|fau|flo|gau|go|gro|jau|lo|mo|no|o|po|pro|ro|so|to|trô]-{z}·(k=2)	1	221.7
+suffix	·ination	3	·ination(k=3) | ·[bor|cri|des|gglu|li|ma|or|ré|ssé|sé|ta|ter|ti|tio|xter]-{bo,ly}gination(k=4)	2	221.5
+suffix	·[ffi|fi|li|pi|ppli|rri|ti]cier	2	·[ffi|fi|li|pi|ppli|rri|ti]cier(k=2)	1	221.2
+suffix	rable	1	rable(k=1) | ·[bou|bé|chi|cou|cu|do|du|dé|fé|lio|lé|mi|mo|no|né|o|pa|pi|plo|po|pé|su|sé|ti|té|vo]rable(k=2)	2	219.6
+suffix	·ddition	2	·ddition(k=2)	1	219.6
+suffix	·[a|cia|pa|sa|ta]bilité	4	·[a|cia|pa|sa|ta]bilité(k=4)	1	219.2
+suffix	·[a|bi|bri|bu|co|cu|du|ge|gu|i|mi|mu|nnu|nu|pe|pi|pu|so|su|ta|ti|tu|vu|vé]-{Ze,na}lation	3	·[a|bi|bri|bu|co|cu|du|ge|gu|i|mi|mu|nnu|nu|pe|pi|pu|so|su|ta|ti|tu|vu|vé]-{Ze,na}lation(k=3)	1	218.9
+suffix	·[bé|cié|pié|pé|rié|tié|xié|é]té	2	·[bé|cié|pié|pé|rié|tié|xié|é]té(k=2)	1	218.8
+suffix	·térieur	2	·térieur(k=2)	1	218.7
+suffix	·[a|ccla|cla|dam|dra|fa|ffa|fla|gra|la|ma|nha|pa|qua|ra|ta|va|xploi]ration	3	·[a|ccla|cla|dam|dra|fa|ffa|fla|gra|la|ma|nha|pa|qua|ra|ta|va|xploi]ration(k=3)	1	218.7
+suffix	·[a|bi|bu|co|cu|du|gu|i|mi|mu|nnu|nu|pi|po|pu|so|ti|tu|vu|vé]-{Ze,na}lation	3	·[a|bi|bu|co|cu|du|gu|i|mi|mu|nnu|nu|pi|po|pu|so|ti|tu|vu|vé]-{Ze,na}lation(k=3)	1	218.3
+prefix	a§·	2	a§·(k=2)	1	217.9
+suffix	·[a|cia|la|pa|sa|ta]bilité	4	·[a|cia|la|pa|sa|ta]bilité(k=4)	1	217.7
+suffix	·[a|cia|pa|sa|ta]bilité	4	·[a|cia|pa|sa|ta]bilité(k=4)	1	217.5
+suffix	·[ccu|cu|i|li|ni|ri|ti|tri|vi]sation	3	·[ccu|cu|i|li|ni|ri|ti|tri|vi]sation(k=3)	1	216.4
+suffix	·[bor|for|or|por|xpor]mations	3	·[bor|for|or|por|xpor]mations(k=3)	1	216.3
+suffix	·[cur|le|ne|ner|pra|rri|ser|ti]-{S°,pRu}vé	2	·[cur|le|ne|ner|pra|rri|ser|ti]-{S°,pRu}vé(k=2)	1	216.1
+prefix	infor[ma|me|mu|po|tu]·	3	infor[ma|me|mu|po|tu]·(k=3)	1	215.3
+suffix	·[cer|der|ter|ver]sité	3	·[cer|der|ter|ver]sité(k=3)	1	215.1
+prefix	plu	1	plu(k=1)	1	214.7
+prefix	maa·	2	maa·(k=2)	1	214.6
+suffix	·alement	3	·alement(k=3)	1	214.4
+suffix	·[a|au|bi|bli|bou|bri|ca|cai|chi|ci|di|dre|dri|gi|gri|gui|i|illi|la|li|lli|mi|mou|na|ni|nni|noui|pa|pi|pli|re|ri|roi|rra|rri|si|ssi|ti|tri|tti|vi|vri]-{bE,pRE}ssement	3	·[a|au|bi|bli|bou|bri|ca|cai|chi|ci|di|dre|dri|gi|gri|gui|i|illi|la|li|lli|mi|mou|na|ni|nni|noui|pa|pi|pli|re|ri|roi|rra|rri|si|ssi|ti|tri|tti|vi|vri]-{bE,pRE}ssement(k=3)	1	214.1
+suffix	·[a|ba|bla|ca|da|dra|ga|gia|gna|la|ma|mma|nia|ra|sla|ta|tra]ture	2	·[a|ba|bla|ca|da|dra|ga|gia|gna|la|ma|mma|nia|ra|sla|ta|tra]ture(k=2) | ·[cu|di|gi|gis|llé|lo|pé|ri|tté]rature(k=3)	2	214.0
+suffix	·[fer|ler|mer|per|scer|ser|ter|ver|xper]nement	3	·[fer|ler|mer|per|scer|ser|ter|ver|xper]nement(k=3)	1	213.8
+suffix	·[a|cia|la|pa|sa|ta]bilité	4	·[a|cia|la|pa|sa|ta]bilité(k=4)	1	213.3
+suffix	·[bi|bli|bri|chi|ci|di|dri|foui|gi|gri|gui|i|illi|li|lli|mi|ni|nni|noui|pi|pli|ri|rri|si|ssi|ti|tri|tti|vi|vri]ssement	3	·[bi|bli|bri|chi|ci|di|dri|foui|gi|gri|gui|i|illi|li|lli|mi|ni|nni|noui|pi|pli|ri|rri|si|ssi|ti|tri|tti|vi|vri]ssement(k=3)	1	213.2
+prefix	infor[ma|me|mu|tu]·	3	infor[ma|me|mu|tu]·(k=3)	1	213.1
+suffix	·[bbo|co|dio|gio|go|jo|lo|mmo|no|o|pro|rio|ro|to|tro|vio|vo]rité	3	·[bbo|co|dio|gio|go|jo|lo|mmo|no|o|pro|rio|ro|to|tro|vio|vo]rité(k=3)	1	213.1
+suffix	·[a|cia|la|pa|sa|ta|â]bilité	4	·[a|cia|la|pa|sa|ta|â]bilité(k=4)	1	212.8
+prefix	dé[bi|bri|brie|chi|ci|cli|cri|fi|fie|fri|gi|gri|gui|li|lie|mi|my|ni|pi|plie|pri|qui|ri|si|tri|vi]·	2	dé[bi|bri|brie|chi|ci|cli|cri|fi|fie|fri|gi|gri|gui|li|lie|mi|my|ni|pi|plie|pri|qui|ri|si|tri|vi]·(k=2)	1	212.6
+suffix	·bablement	3	·bablement(k=3)	1	212.5
+prefix	évi	2	évi(k=2)	1	212.4
+suffix	·ppression	2	·ppression(k=2)	1	212.3
+prefix	pro[fe|gé|me|pre|ve]·	2	pro[fe|gé|me|pre|ve]·(k=2)	1	212.2
+suffix	·peration	3	·peration(k=3)	1	211.4
+suffix	·[bec|cons|cque|dis|fec|ffe|mi|pen|por|pé|sis|ssis|trai]tance	2	·[bec|cons|cque|dis|fec|ffe|mi|pen|por|pé|sis|ssis|trai]tance(k=2)	1	211.3
+suffix	·[bli|bon|cha|con|cé|ffi|ffé|gli|gui|lli|lé|nno|pen|pi|pri|sé|ti|vei|vi|vé|xce]-{pa,to}demment	3	·[bli|bon|cha|con|cé|ffi|ffé|gli|gui|lli|lé|nno|pen|pi|pri|sé|ti|vei|vi|vé|xce]-{pa,to}demment(k=3)	1	211.2
+prefix	habi	2	habi(k=2)	1	211.0
+suffix	·peration	3	·peration(k=3)	1	210.0
+prefix	ra[cle|ge|me|pe|te|ve]·	2	ra[cle|ge|me|pe|te|ve]·(k=2)	1	209.6
+suffix	·alité	3	·alité(k=3)	1	209.5
+suffix	ssance	1	ssance(k=1) | ·[i|joui|nai|nnai|pui|roi]ssance(k=2)	2	209.3
+suffix	taine	1	taine(k=1)	1	208.7
+suffix	·[ber|fer|ler|mer|per|scer|ser|ter|ver|xper]nement	3	·[ber|fer|ler|mer|per|scer|ser|ter|ver|xper]nement(k=3)	1	208.5
+suffix	·[ci|cor|di|gni|li|mmu|ni|pli|pu|ra|ri|si|ssi|ti|to|ven|é]nication	4	·[ci|cor|di|gni|li|mmu|ni|pli|pu|ra|ri|si|ssi|ti|to|ven|é]nication(k=4)	1	208.4
+suffix	·[for|xpor]mations	3	·[for|xpor]mations(k=3)	1	208.3
+prefix	pré@·	2	pré@·(k=2)	1	208.0
+suffix	·formations	3	·formations(k=3)	1	207.8
+suffix	velle	1	velle(k=1)	1	207.6
+prefix	oe·	2	oe·(k=2) | opé[i|o|ra|si]·(k=3)	2	207.2
+prefix	opé[i|o|ra|si]·	3	opé[i|o|ra|si]·(k=3)	1	207.2
+suffix	·[ci|cor|di|gni|li|mmu|na|ni|pli|pu|ra|ri|si|ssi|ti|to|ven]nication	4	·[ci|cor|di|gni|li|mmu|na|ni|pli|pu|ra|ri|si|ssi|ti|to|ven]nication(k=4)	1	205.6
+prefix	reco[bi|de|duc|dui|dè|ge|gra|mman|mmen|nnec|se|si]-{nE}·	3	reco[bi|de|duc|dui|dè|ge|gra|mman|mmen|nnec|se|si]-{nE}·(k=3)	1	205.5
+prefix	impre·	2	impre·(k=2)	1	205.4
+prefix	eme·	2	eme·(k=2)	1	205.1
+suffix	·[bi|ci|cy|di|gni|i|li|lli|ni|ri|si|ti]taire	2	·[bi|ci|cy|di|gni|i|li|lli|ni|ri|si|ti]taire(k=2)	1	205.1
+suffix	·[bé|flé|fraî|je|ppé|té]ressant	3	·[bé|flé|fraî|je|ppé|té]ressant(k=3)	1	204.8
+prefix	entre	2	entre(k=2)	1	204.4
+prefix	ex	1	ex(k=1) | ex[a|al|i|oph|or]·(k=2)	2	204.3
+suffix	·[a|cla|dam|fa|ffa|fla|ggra|la|nha|pa|qua|ta|xploi]ration	3	·[a|cla|dam|fa|ffa|fla|ggra|la|nha|pa|qua|ta|xploi]ration(k=3)	1	204.0
+prefix	per[chlo|co|du|fo|for|fu|me|mi|mu|si|sé]-{tyR,vER}·	2	per[chlo|co|du|fo|for|fu|me|mi|mu|si|sé]-{tyR,vER}·(k=2)	1	203.4
+prefix	pro	1	pro(k=1) | pro[fe|gé|me|pre|ve]·(k=2)	2	202.7
+suffix	·[ba|bon|ci|con|cor|cui|dju|gar|gra|li|mer|mi|mman|mmo|nau|pi|pon|ra|rau|ssé|sé|ten|xcé|xy]-{p@,s@}dant	2	·[ba|bon|ci|con|cor|cui|dju|gar|gra|li|mer|mi|mman|mmo|nau|pi|pon|ra|rau|ssé|sé|ten|xcé|xy]-{p@,s@}dant(k=2)	1	202.5
+prefix	sen	1	sen(k=1)	1	202.4
+prefix	mon	1	mon(k=1)	1	202.4
+prefix	poi·	2	poi·(k=2)	1	202.1
+prefix	réu·	2	réu·(k=2)	1	201.6
+suffix	dement	2	dement(k=2) | ·[bar|bi|bor|ci|con|di|fi|gau|gi|illar|li|man|men|mi|mman|mmo|nar|pi|ssa|sur|tar|ten|vi]-{mER}dement(k=3)	2	201.2
+prefix	men	1	men(k=1)	1	199.9
+suffix	·vernement	3	·vernement(k=3)	1	199.7
+suffix	·[ce|dap|fi|mo|mé|ni|no|noeu|né|o|pa|pon|rri|si|ti|vi|vio|vo]-{pEk}sabilité	5	·[ce|dap|fi|mo|mé|ni|no|noeu|né|o|pa|pon|rri|si|ti|vi|vio|vo]-{pEk}sabilité(k=5)	1	199.7
+suffix	ré	1	ré(k=1) | ·[bé|cé|dé|ffé|fé|gé|lé|mé|nié|né|pé|rrié|ssié|thé|té]ré(k=2)	2	198.8
+prefix	re[bai|cè|de|dre|je|la|lai|lè|me|nai|nei|pa|pai|paie|pei|pê|ve|vê]·	2	re[bai|cè|de|dre|je|la|lai|lè|me|nai|nei|pa|pai|paie|pei|pê|ve|vê]·(k=2)	1	198.6
+prefix	le	1	le(k=1)	1	197.9
+suffix	·fférence	2	·fférence(k=2)	1	197.8
+suffix	·[ffé|fé|nhé|pa|ppa|é]rent	2	·[ffé|fé|nhé|pa|ppa|é]rent(k=2)	1	197.7
+prefix	vé	1	vé(k=1)	1	197.6
+suffix	fois	1	fois(k=1)	1	197.0
+prefix	re[grim|join|pin|quin|vien]·	2	re[grim|join|pin|quin|vien]·(k=2)	1	196.9
+suffix	·[dduc|duc|struc|truc]tion	2	·[dduc|duc|struc|truc]tion(k=2)	1	196.8
+suffix	·[dhé|ffé|fé|gé|é]-{v}rence	2	·[dhé|ffé|fé|gé|é]-{v}rence(k=2)	1	196.6
+prefix	si	1	si(k=1)	1	196.4
+suffix	·Enement	3	·Enement(k=3)	1	194.4
+suffix	·ajer	2	·ajer(k=2)	1	194.1
+suffix	·tivité	3	·tivité(k=3)	1	193.7
+suffix	en	1	en(k=1) | ·[bé|ché|cé|du|dé|lé|mé|né|pé|ré|sé|toy|tri|tzsché|té]ens(k=2)	2	193.7
+prefix	co°·	2	co°·(k=2)	1	193.6
+prefix	com[che|de|ge|pre|que|re|se|ve]-{t}·	2	com[che|de|ge|pre|que|re|se|ve]-{t}·(k=2)	1	193.5
+prefix	tou	1	tou(k=1)	1	193.2
+prefix	por	1	por(k=1)	1	193.0
+prefix	disy·	2	disy·(k=2)	1	192.9
+suffix	·[a|ba|bi|bra|ca|cri|cu|dic|ga|gra|is|jec|la|lla|llu|ma|mi|mma|na|ni|pa|per|ra|remp|ri|rri|sa|si|sis|ta|u|va|xa|xpia]-{fEk}toire	2	·[a|ba|bi|bra|ca|cri|cu|dic|ga|gra|is|jec|la|lla|llu|ma|mi|mma|na|ni|pa|per|ra|remp|ri|rri|sa|si|sis|ta|u|va|xa|xpia]-{fEk}toire(k=2) | ·[bi|bli|bo|bu|bé|ci|cla|cu|du|fa|ffa|fi|fla|lo|lé|mi|pa|phé|pi|ppo|qui|rro|ser|si|ten|tur|xplo|é]-{pe,tRa}ratoire(k=3)	2	192.3
+prefix	la	1	la(k=1)	1	191.9
+suffix	·[mman|pen|scen|ten]dant	2	·[mman|pen|scen|ten]dant(k=2)	1	191.5
+suffix	·iquement	3	·iquement(k=3)	1	190.8
+prefix	ani	2	ani(k=2)	1	190.7
+suffix	·Eller	2	·Eller(k=2)	1	190.5
+prefix	reco[dè|nnai|nnaî]·	3	reco[dè|nnai|nnaî]·(k=3)	1	190.3
+suffix	·[gou|lou|mou|vou]reux	2	·[gou|lou|mou|vou]reux(k=2)	1	189.8
+suffix	·[dhé|ffé|fé|nhé|é]rent	2	·[dhé|ffé|fé|nhé|é]rent(k=2)	1	189.5
+suffix	·nisation	3	·nisation(k=3) | ·[a|ba|bo|ca|chro|co|dem|der|ga|gé|lli|lo|ma|mi|mmu|mo|no|ta|ter|ti]nisation(k=4)	2	189.4
+suffix	·[i|li|ni|ri|ti|tri|vi]sation	3	·[i|li|ni|ri|ti|tri|vi]sation(k=3) | ·[a|bi|bo|cia|cu|ga|gé|lli|lo|ma|mo|na|no|né|po|pro|ra|ri|ta|ti|tra|té|vi|vé]-{ka}nisation(k=4)	2	189.1
+suffix	·tenir	2	·tenir(k=2)	1	189.0
+prefix	ena·	2	ena·(k=2)	1	188.5
+suffix	rent	1	rent(k=1) | ·[ffé|fé|nhé|pa|ppa|é]rent(k=2)	2	188.5
+suffix	·[can|cen|man|men|mman|pen|plan|quen|ren|rien|sen|tan|ten|ven]tration	3	·[can|cen|man|men|mman|pen|plan|quen|ren|rien|sen|tan|ten|ven]tration(k=3)	1	188.2
+suffix	·[fon|me|que|si|ten|tten|ven|vi]-{f@,p@}du	2	·[fon|me|que|si|ten|tten|ven|vi]-{f@,p@}du(k=2)	1	188.1
+prefix	rée·	2	rée·(k=2)	1	187.6
+prefix	aaR·	2	aaR·(k=2)	1	187.4
+prefix	a[mu|pu]·	2	a[mu|pu]·(k=2)	1	187.2
+suffix	·[a|bi|bo|cia|cu|ga|gé|lli|lo|ma|mo|na|no|né|po|pro|ra|ri|ta|ti|tra|té|vi|vé]-{ka}nisation	4	·[a|bi|bo|cia|cu|ga|gé|lli|lo|ma|mo|na|no|né|po|pro|ra|ri|ta|ti|tra|té|vi|vé]-{ka}nisation(k=4)	1	186.6
+suffix	·[bar|bi|bor|ci|con|di|fi|gau|gi|illar|li|man|men|mi|mman|mmo|nar|pi|ssa|sur|tar|ten|vi]-{mER}dement	3	·[bar|bi|bor|ci|con|di|fi|gau|gi|illar|li|man|men|mi|mman|mmo|nar|pi|ssa|sur|tar|ten|vi]-{mER}dement(k=3)	1	186.5
+suffix	·[a|ba|be|ca|cca|de|dou|go|lé|mo|mé|no|pe|pu|pé|re|sé|te|vie]ra	2	·[a|ba|be|ca|cca|de|dou|go|lé|mo|mé|no|pe|pu|pé|re|sé|te|vie]ra(k=2)	1	186.4
+suffix	·ivement	3	·ivement(k=3) | ·[ac|aus|ba|ca|ce|cu|ffec|ga|gi|gre|jec|la|lec|llec|ma|mi|na|ni|pec|pes|pla|pul|ra|si|ta|tinc|tra|tten|tui|ven|xclu]-{kse}tivement(k=4)	2	186.3
+suffix	·[jo|no|o|rio|to]rité	3	·[jo|no|o|rio|to]rité(k=3)	1	186.0
+suffix	·[a|ba|bi|bri|ca|cia|cu|dia|dua|ga|gi|gé|i|lia|llé|ma|na|nia|nna|o|pha|pu|ra|ria|sa|ssa|sua|ta|tia|tra|tua|té|va]liste	2	·[a|ba|bi|bri|ca|cia|cu|dia|dua|ga|gi|gé|i|lia|llé|ma|na|nia|nna|o|pha|pu|ra|ria|sa|ssa|sua|ta|tia|tra|tua|té|va]liste(k=2)	1	186.0
+prefix	com[a|ba|ca|fa|fra|ga|ma|pa|sa|scie]-{d}·	2	com[a|ba|ca|fa|fra|ga|ma|pa|sa|scie]-{d}·(k=2)	1	185.5
+suffix	·[ac|aus|ba|ca|ce|cu|ffec|ga|gi|gre|jec|la|lec|llec|ma|mi|na|ni|pec|pes|pla|pul|ra|si|ta|tinc|tra|tten|tui|ven|xclu]-{kse}tivement	4	·[ac|aus|ba|ca|ce|cu|ffec|ga|gi|gre|jec|la|lec|llec|ma|mi|na|ni|pec|pes|pla|pul|ra|si|ta|tinc|tra|tten|tui|ven|xclu]-{kse}tivement(k=4)	1	185.4
+suffix	·[ac|aus|ba|ca|ce|cu|ffec|ga|gi|gre|jec|la|lec|llec|ma|mi|na|ni|pec|pes|pla|pul|ra|si|ta|tinc|tra|tten|tui|ven|xclu]-{kse}tivement	4	·[ac|aus|ba|ca|ce|cu|ffec|ga|gi|gre|jec|la|lec|llec|ma|mi|na|ni|pec|pes|pla|pul|ra|si|ta|tinc|tra|tten|tui|ven|xclu]-{kse}tivement(k=4)	1	185.4
+suffix	sé	1	sé(k=1) | ·[a|bi|bé|ca|cia|coo|da|dar|de|dua|fu|ga|gi|la|lo|lé|ma|mé|na|ner|nna|né|phi|pro|ra|rar|ri|rro|sep|sla|so|ssu|ta|teu|ti|tia|to|té|vi|vo]lisé(k=3)	2	184.3
+suffix	·[a|ba|bo|ca|chro|co|dem|der|ga|gé|lli|lo|ma|mi|mmu|mo|no|ta|ter|ti]nisation	4	·[a|ba|bo|ca|chro|co|dem|der|ga|gé|lli|lo|ma|mi|mmu|mo|no|ta|ter|ti]nisation(k=4)	1	184.0
+suffix	·[bo|bro|co|ffo|fo|go|jo|lio|lo|mmo|mo|nno|no|po|ppro|rio|ro|rro|so|sso|tau|to|vo|xplo]ciation	3	·[bo|bro|co|ffo|fo|go|jo|lio|lo|mmo|mo|nno|no|po|ppro|rio|ro|rro|so|sso|tau|to|vo|xplo]ciation(k=3)	1	183.9
+suffix	·fférent	2	·fférent(k=2)	1	183.5
+suffix	·[be|ca|ce|che|de|fa|fé|ga|ge|gne|le|lle|me|mo|pe|ppe|que|se|te|ti|tu|vi]ron	2	·[be|ca|ce|che|de|fa|fé|ga|ge|gne|le|lle|me|mo|pe|ppe|que|se|te|ti|tu|vi]ron(k=2)	1	182.3
+suffix	·athique	2	·athique(k=2) | ·[ba|blé|cho|cro|cré|dra|for|ga|go|llo|lé|mis|mo|ni|nig|no|né|o|phrag|plo|reau|ris|ro|ré|so|ssé|tas|thé|ti|to|té]matique(k=3)	2	182.3
+prefix	éER·	2	éER·(k=2)	1	181.9
+suffix	·[ber|cer|ser|sser|ter|ver]sation	3	·[ber|cer|ser|sser|ter|ver]sation(k=3)	1	181.9
+suffix	·[a|boî|ca|da|dia|droi|gra|ma|noî|pâ|qua|roi|troi]tement	3	·[a|boî|ca|da|dia|droi|gra|ma|noî|pâ|qua|roi|troi]tement(k=3)	1	181.7
+prefix	voy	1	voy(k=1)	1	181.2
+prefix	dé@·	2	dé@·(k=2)	1	180.7
+suffix	·thiquement	3	·thiquement(k=3) | ·[aus|ba|bé|cas|cep|cra|crip|dac|des|do|fan|fec|ffec|ga|gi|gné|guis|jec|la|lec|li|lis|llec|ly|ma|man|mes|mi|mé|na|no|nu|né|o|pa|pec|phé|ra|sis|tas|then|thé|tinc|tis|tui|xta]-{zi}tivement(k=4)	2	180.5
+suffix	·[bo|co|ffo|fo|go|jo|lio|lo|mmo|mo|nno|no|po|ppro|ro|rro|so|sso|tau|to|vo|xplo]ciation	3	·[bo|co|ffo|fo|go|jo|lio|lo|mmo|mo|nno|no|po|ppro|ro|rro|so|sso|tau|to|vo|xplo]ciation(k=3)	1	180.5
+suffix	·[dio|mé|pe|po|pon|pé|ré|sen|si]sabilité	5	·[dio|mé|pe|po|pon|pé|ré|sen|si]sabilité(k=5)	1	179.6
+suffix	·gagez	2	·gagez(k=2)	1	179.5
+prefix	pri	1	pri(k=1)	1	179.4
+suffix	·[blo|bo|cho|co|dio|do|fflo|fo|fro|gno|illo|llo|lo|mmo|mo|no|o|po|ppro|pro|ro|sio|so|sso|tio|to|vo|vro|zo]nnement	3	·[blo|bo|cho|co|dio|do|fflo|fo|fro|gno|illo|llo|lo|mmo|mo|no|o|po|ppro|pro|ro|sio|so|sso|tio|to|vo|vro|zo]nnement(k=3)	1	179.4
+prefix	emOR·	2	emOR·(k=2)	1	179.0
+suffix	·[a|ba|ca|cia|dia|ga|lia|ma|na|nia|nna|pha|ra|ria|sa|ssa|ta|tia|tra|va]liste	2	·[a|ba|ca|cia|dia|ga|lia|ma|na|nia|nna|pha|ra|ria|sa|ssa|ta|tia|tra|va]liste(k=2)	1	178.5
+suffix	·[bio|cho|cio|co|cro|dio|do|mio|mo|no|o|pho|po|pro|rio|ro|sio|tho|to|tro|tyo|xo]logie	3	·[bio|cho|cio|co|cro|dio|do|mio|mo|no|o|pho|po|pro|rio|ro|sio|tho|to|tro|tyo|xo]logie(k=3)	1	178.3
+prefix	reER·	2	reER·(k=2)	1	178.1
+suffix	liste	1	liste(k=1) | ·[a|ba|bi|bri|ca|cia|cu|dia|dua|ga|gi|gé|i|lia|llé|ma|na|nia|nna|o|pha|pu|ra|ria|sa|ssa|sua|ta|tia|tra|tua|té|va]liste(k=2)	2	178.1
+suffix	tile	1	tile(k=1) | ·[bra|can|fan|jec|la|nu|rec|sa|trac|via]tile(k=2)	2	177.4
+suffix	·talement	3	·talement(k=3)	1	177.3
+suffix	·[blo|bo|cho|co|dio|do|fflo|fo|fro|gno|illo|llo|lo|mmo|mo|no|o|po|ppro|pro|ro|sio|so|sso|tio|to|vo|vro|zo]nnement	3	·[blo|bo|cho|co|dio|do|fflo|fo|fro|gno|illo|llo|lo|mmo|mo|no|o|po|ppro|pro|ro|sio|so|sso|tio|to|vo|vro|zo]nnement(k=3)	1	177.1
+prefix	esa·	2	esa·(k=2)	1	177.0
+suffix	teau	1	teau(k=1)	1	176.9
+prefix	en[ché|cé|fié|grai|nei|qué|quê|ra|raie|ré|se|te|traî|té|tê]·	2	en[ché|cé|fié|grai|nei|qué|quê|ra|raie|ré|se|te|traî|té|tê]·(k=2)	1	176.9
+suffix	ra	1	ra(k=1) | ·[a|ba|be|ca|cca|de|dou|go|lé|mo|mé|no|pe|pu|pé|re|sé|te|vie]ra(k=2)	2	176.6
+suffix	·diatement	3	·diatement(k=3)	1	176.2
+suffix	·issement	3	·issement(k=3)	1	175.5
+suffix	ron	1	ron(k=1) | ·[be|ca|ce|che|de|fa|fé|ga|ge|gne|le|lle|me|mo|pe|ppe|que|se|te|ti|tu|vi]ron(k=2)	2	175.2
+suffix	·[di|gi|gui|mi|pli|ri|tri]naire	2	·[di|gi|gui|mi|pli|ri|tri]naire(k=2) | ·[bou|ma|or|ri|sci]dinaire(k=3)	2	175.2
+prefix	inter[ca|ce|chan|co|con|cos|cul|cé|di|dic|dé|fé|ga|gla|gou|je|li|lo|mez|mi|na|pla|po|pro|pré|pé|ra|re|sai|si|ste|sub|tri|ve|ven|ver|vien]-{sek}·	3	inter[ca|ce|chan|co|con|cos|cul|cé|di|dic|dé|fé|ga|gla|gou|je|li|lo|mez|mi|na|pla|po|pro|pré|pé|ra|re|sai|si|ste|sub|tri|ve|ven|ver|vien]-{sek}·(k=3)	1	173.9
+prefix	sii·	2	sii·(k=2)	1	173.9
+suffix	·plement	2	·plement(k=2)	1	173.9
+suffix	·[bon|dre|fon|gan|gou|gour|me|mi|roi|rron|sour|ti|tour|xti]di	2	·[bon|dre|fon|gan|gou|gour|me|mi|roi|rron|sour|ti|tour|xti]di(k=2)	1	173.6
+suffix	·nisation	3	·nisation(k=3) | ·[a|dem|ga|lli|ma|mmu|mo|ti]nisation(k=4)	2	173.4
+suffix	·[ac|aus|ba|ca|cu|ffec|ga|gi|jec|la|lec|llec|ma|mi|na|ni|pec|pes|pla|ra|si|ta|tinc|tra|tten|tui|ven]tivement	4	·[ac|aus|ba|ca|cu|ffec|ga|gi|jec|la|lec|llec|ma|mi|na|ni|pec|pes|pla|ra|si|ta|tinc|tra|tten|tui|ven]tivement(k=4)	1	173.2
+prefix	trans[bah|bor|ca|cas|con|cu|der|fi|for|fu|fé|mi|mu|na|pa|per|plan|po|pon|por|sah|se|si|va]-{mE,pi}·	2	trans[bah|bor|ca|cas|con|cu|der|fi|for|fu|fé|mi|mu|na|pa|per|plan|po|pon|por|sah|se|si|va]-{mE,pi}·(k=2)	1	173.0
+prefix	dé[cré|cé|fra|fraî|fé|gré|gé|lé|mé|né|pa|plai|pre|pré|pé|ra|raie|ré|sé|vê]·	2	dé[cré|cé|fra|fraî|fé|gré|gé|lé|mé|né|pa|plai|pre|pré|pé|ra|raie|ré|sé|vê]·(k=2) | démé[a|da|de|ga|gle|gré|gu|mi|na|né|ri|ssu|y]·(k=3)	2	172.9
+suffix	·yktion	2	·yktion(k=2)	1	172.7
+suffix	sin	1	sin(k=1)	1	171.7
+suffix	plement	2	plement(k=2)	1	171.2
+suffix	·[ge|gou|leu|lheu|lou|lé|mou|nheu|né|vou]reusement	4	·[ge|gou|leu|lheu|lou|lé|mou|nheu|né|vou]reusement(k=4)	1	171.1
+suffix	·[bra|can|fan|jec|la|nu|rec|sa|trac|via]tile	2	·[bra|can|fan|jec|la|nu|rec|sa|trac|via]tile(k=2)	1	170.9
+prefix	re[bai|cré|cé|de|dé|fré|gré|grée|lé|mé|né|pré|pé|qué|té|vé|vê]·	2	re[bai|cré|cé|de|dé|fré|gré|grée|lé|mé|né|pré|pé|qué|té|vé|vê]·(k=2) | repré[co|cou|fi|ga|go|lé|ma|pi|po|sen]·(k=3)	2	170.1
+prefix	éa·	2	éa·(k=2)	1	169.6
+suffix	·[cen|chan|gen|glan|lan|man|men|mman|mmen|nan|nnan|pen|ran|ren|rran|sen|ssem|ten|tran|van]dement	3	·[cen|chan|gen|glan|lan|man|men|mman|mmen|nan|nnan|pen|ran|ren|rran|sen|ssem|ten|tran|van]dement(k=3)	1	169.6
+suffix	·naillement	3	·naillement(k=3) | ·[di|gi|le|lho|mi|sio|so|ssio|ter|tio]nnellement(k=4)	2	169.5
+prefix	ta	1	ta(k=1)	1	169.4
+suffix	·[pan|pen|ten|tten|ven]du	2	·[pan|pen|ten|tten|ven]du(k=2)	1	169.4
+suffix	·talement	3	·talement(k=3)	1	169.1
+prefix	reco[mman|mmen|nnec|pie]-{nE}·	3	reco[mman|mmen|nnec|pie]-{nE}·(k=3)	1	168.8
+suffix	·[bu|bé|co|coeu|du|dé|fo|fé|gno|go|gu|gé|li|lo|lé|mu|no|né|pa|pi|plo|ppu|pé|qué|ssu|tau|to|tti|tu|vi|vé|xpi]-{fa,la}rant	2	·[bu|bé|co|coeu|du|dé|fo|fé|gno|go|gu|gé|li|lo|lé|mu|no|né|pa|pi|plo|ppu|pé|qué|ssu|tau|to|tti|tu|vi|vé|xpi]-{fa,la}rant(k=2)	1	168.2
+suffix	·[a|dem|ga|lli|ma|mmu|mo|ti]nisation	4	·[a|dem|ga|lli|ma|mmu|mo|ti]nisation(k=4)	1	167.9
+prefix	con[cen|en|pen|pren|san|sen|tem|ten]·	2	con[cen|en|pen|pren|san|sen|tem|ten]·(k=2)	1	167.8
+suffix	tivement	3	tivement(k=3) | ·[ac|aus|ba|ca|cu|ffec|ga|gi|jec|la|lec|llec|ma|mi|na|ni|pec|pes|pla|ra|si|ta|tinc|tra|tten|tui|ven]tivement(k=4)	2	167.5
+prefix	uni	2	uni(k=2)	1	167.3
+suffix	·[bi|ci|cri|di|fi|gi|li|pli|ri|rri|si|ssi|ti|vi]-{N,n}lisation	4	·[bi|ci|cri|di|fi|gi|li|pli|ri|rri|si|ssi|ti|vi]-{N,n}lisation(k=4)	1	167.2
+prefix	imai·	3	imai·(k=3)	1	166.9
+suffix	·[co|for|gi|go|gy|gé|le|lo|lom|lé|ma|mi|mo|pha|pho|phré|pé|ro|som|ta|tech|thé|to]nie	2	·[co|for|gi|go|gy|gé|le|lo|lom|lé|ma|mi|mo|pha|pho|phré|pé|ro|som|ta|tech|thé|to]nie(k=2) | ·[ci|co|cri|dio|dri|dro|gno|lhar|lo|ly|lé|mo|no|o|pho|pi|ras|ro|ré|so|ta|tec|tho|to|zo]monie(k=3)	2	166.6
+suffix	·nateur	2	·nateur(k=2) | ·[di|fa|mi|so|ter|to|vi]nateur(k=3)	2	166.3
+prefix	pro[co|mo|no|po|ro|so|to|vo]·	2	pro[co|mo|no|po|ro|so|to|vo]·(k=2)	1	166.0
+prefix	embra·	2	embra·(k=2)	1	165.8
+prefix	cer	1	cer(k=1)	1	165.8
+suffix	·iqué	2	·iqué(k=2)	1	165.6
+suffix	·[bi|bli|chi|ci|di|dri|gi|gri|gui|i|illi|li|lli|mi|ni|nni|noui|pi|ri|rri|si|ssi|ti|tri|tti|vi|vri]ssement	3	·[bi|bli|chi|ci|di|dri|gi|gri|gui|i|illi|li|lli|mi|ni|nni|noui|pi|ri|rri|si|ssi|ti|tri|tti|vi|vri]ssement(k=3)	1	165.5
+suffix	·nalement	3	·nalement(k=3)	1	165.3
+suffix	·[blo|bo|cho|co|dio|do|fflo|fo|fro|gno|illo|llo|lo|mmo|mo|no|o|po|ppro|pro|ro|sio|so|sso|tio|to|vo|vro|zo]nnement	3	·[blo|bo|cho|co|dio|do|fflo|fo|fro|gno|illo|llo|lo|mmo|mo|no|o|po|ppro|pro|ro|sio|so|sso|tio|to|vo|vro|zo]nnement(k=3)	1	165.2
+suffix	tin	1	tin(k=1) | ·[ber|bleau|bo|co|des|dias|dic|fan|gan|gen|go|gus|illo|la|len|les|lle|man|men|pen|po|que|ra|re|ren|ré|san|tes|van|ver|zan]tin(k=2)	2	165.2
+prefix	exa	2	exa(k=2)	1	164.6
+prefix	décou	2	décou(k=2)	1	164.6
+suffix	·[ci|di|gi|illi|ni|si|ssi|ti|xi]bilité	4	·[ci|di|gi|illi|ni|si|ssi|ti|xi]bilité(k=4)	1	164.2
+prefix	em[bra|braie|mé|mê|pié|pre|pê]·	2	em[bra|braie|mé|mê|pié|pre|pê]·(k=2)	1	164.1
+suffix	·[can|cen|men|mman|pen|plan|quen|ren|rien|sen|ten]tration	3	·[can|cen|men|mman|pen|plan|quen|ren|rien|sen|ten]tration(k=3)	1	164.0
+prefix	cha	1	cha(k=1)	1	164.0
+prefix	mala	2	mala(k=2)	1	163.8
+suffix	let	1	let(k=1) | ·[be|ce|che|cu|dau|de|ge|geo|gne|gno|gre|nne|o|pe|que|ri|ro|rre|se|sse|te|to|tou|va|ve]let(k=2)	2	163.4
+prefix	ga	1	ga(k=1)	1	163.4
+prefix	extra[con|cor|ga|lu|or|po|sen|sys|te|va]·	3	extra[con|cor|ga|lu|or|po|sen|sys|te|va]·(k=3) | extraor[di|ju|lac|po|rri|so]·(k=4)	2	163.2
+suffix	·[ber|cer|ler|ser]té	2	·[ber|cer|ler|ser]té(k=2)	1	162.8
+suffix	soir	1	soir(k=1)	1	161.9
+suffix	·[bor|cri|des|gglu|li|ma|or|ré|ssé|sé|ta|ter|ti|tio|xter]-{bo,ly}gination	4	·[bor|cri|des|gglu|li|ma|or|ré|ssé|sé|ta|ter|ti|tio|xter]-{bo,ly}gination(k=4)	1	161.7
+prefix	dé[be|bra|braie|chaî|crê|dai|fe|fle|fra|fraî|gai|grai|gè|la|lai|me|mè|mê|nei|niai|pei|plai|pre|pê|ra|rai|rè|te|ve|vei|vê]·	2	dé[be|bra|braie|chaî|crê|dai|fe|fle|fra|fraî|gai|grai|gè|la|lai|me|mè|mê|nei|niai|pei|plai|pre|pê|ra|rai|rè|te|ve|vei|vê]·(k=2)	1	161.5
+suffix	·[cri|des|gglu|in|li|ma|or|ré|ssé|sé|ta|ter|ti|tio|xter]-{bo,ly}gination	4	·[cri|des|gglu|in|li|ma|or|ré|ssé|sé|ta|ter|ti|tio|xter]-{bo,ly}gination(k=4)	1	161.4
+suffix	dition	2	dition(k=2)	1	161.4
+suffix	ton	1	ton(k=1)	1	161.3
+suffix	·[chi|dy|li|ly|mi|ni|phi|ri|thri|vi]tique	2	·[chi|dy|li|ly|mi|ni|phi|ri|thri|vi]tique(k=2)	1	161.0
+suffix	·ature	2	·ature(k=2) | ·[cu|di|e|gi|gis|llé|lo|men|ppo|pri|pé|ri|tté]rature(k=3)	2	161.0
+suffix	·Ekteur	2	·Ekteur(k=2)	1	160.8
+suffix	·ccusation	3	·ccusation(k=3)	1	160.7
+prefix	dé[feu|fleu|gueu|jeu|meu|peu]·	2	dé[feu|fleu|gueu|jeu|meu|peu]·(k=2)	1	160.6
+suffix	·[cen|chan|gen|glan|man|men|mman|mmen|pen|ran|ren|rran|sen|ssem|ten|tran|van]dement	3	·[cen|chan|gen|glan|man|men|mman|mmen|pen|ran|ren|rran|sen|ssem|ten|tran|van]dement(k=3)	1	160.6
+suffix	·[a|bi|ce|ci|con|cu|dgé|di|dic|em|ga|gi|gu|li|llu|lon|lu|ma|men|mi|mé|nan|phé|po|pu|pé|remp|ri|si|son|ssa|ta|tio|tté|tu|té|va|vi|xté]lièrement	4	·[a|bi|ce|ci|con|cu|dgé|di|dic|em|ga|gi|gu|li|llu|lon|lu|ma|men|mi|mé|nan|phé|po|pu|pé|remp|ri|si|son|ssa|ta|tio|tté|tu|té|va|vi|xté]lièrement(k=4)	1	160.4
+suffix	·[a|bio|chi|cio|cro|da|dio|do|dé|go|ma|mio|mo|na|no|o|pho|po|pro|rio|ro|sio|ta|tho|to|tro|tyo|xo]-{ko}logie	3	·[a|bio|chi|cio|cro|da|dio|do|dé|go|ma|mio|mo|na|no|o|pho|po|pro|rio|ro|sio|ta|tho|to|tro|tyo|xo]-{ko}logie(k=3)	1	160.4
+suffix	·[di|sci|si|ssi|ti|vi|ï]vement	3	·[di|sci|si|ssi|ti|vi|ï]vement(k=3)	1	160.1
+prefix	discu	2	discu(k=2)	1	160.0
+suffix	nie	1	nie(k=1) | ·[co|for|gi|go|gy|gé|le|lo|lom|lé|ma|mi|mo|pha|pho|phré|pé|ro|som|ta|tech|thé|to]nie(k=2) | ·[ci|co|cri|dio|dri|dro|gno|lhar|lo|ly|lé|mo|no|o|pho|pi|ras|ro|ré|so|ta|tec|tho|to|zo]monie(k=3)	3	159.9
+suffix	·tendu	2	·tendu(k=2)	1	159.9
+suffix	·[cu|gu|lu|nhu|pu|tu]rellement	4	·[cu|gu|lu|nhu|pu|tu]rellement(k=4)	1	159.8
+suffix	·litique	2	·litique(k=2)	1	159.7
+prefix	in@·	2	in@·(k=2)	1	159.5
+suffix	·ogie	2	·ogie(k=2) | ·[a|bio|cho|cio|co|cro|da|dio|do|dro|llo|ma|mio|mo|na|no|o|pho|po|pro|rio|ro|sio|ta|tho|to|tro|tyo|xo]logie(k=3)	2	159.5
+suffix	tionnel	2	tionnel(k=2) | ·[ac|ddi|di|fonc|la|mo|por|ra|rra|rrec|sa|ta|ten|tri|tu|xcep]-{v@}tionnel(k=3)	2	159.5
+suffix	·[a|bio|cho|cio|co|cro|da|dio|do|dro|llo|ma|mio|mo|na|no|o|pho|po|pro|rio|ro|sio|ta|tho|to|tro|tyo|xo]logie	3	·[a|bio|cho|cio|co|cro|da|dio|do|dro|llo|ma|mio|mo|na|no|o|pho|po|pro|rio|ro|sio|ta|tho|to|tro|tyo|xo]logie(k=3)	1	159.2
+suffix	·[ac|ddi|di|fonc|la|mo|por|ra|rra|rrec|sa|ta|ten|tri|tu|xcep]-{v@}tionnel	3	·[ac|ddi|di|fonc|la|mo|por|ra|rra|rrec|sa|ta|ten|tri|tu|xcep]-{v@}tionnel(k=3)	1	158.6
+suffix	tage	1	tage(k=1) | ·[au|bo|cen|che|cho|chou|chu|co|cryp|cu|do|fa|gno|go|ille|le|lle|lo|ma|mec|men|mi|mo|no|nu|pac|pen|pis|po|por|pé|que|re|reau|ri|ro|si|ssar|va|van|ve|vol|yo|zu]-{Ra}tage(k=2)	2	158.2
+prefix	co@·	2	co@·(k=2)	1	158.1
+prefix	pi	1	pi(k=1)	1	157.6
+suffix	·[a|ba|bba|cra|dia|dra|ma|na|pa|pha|pra|ra|sia|ta|tia|xta]tique	2	·[a|ba|bba|cra|dia|dra|ma|na|pa|pha|pra|ra|sia|ta|tia|xta]tique(k=2) | ·[cro|cré|for|go|llo|lé|mis|mo|ni|nig|no|né|plo|reau|ro|so|tas|thé|tis|to|té]matique(k=3)	2	157.5
+suffix	·[lé|mé|pe|pé|re|sé]ra	2	·[lé|mé|pe|pé|re|sé]ra(k=2)	1	157.2
+suffix	·dement	2	·dement(k=2)	1	157.2
+suffix	·[bour|pen|pon|ver]sable	2	·[bour|pen|pon|ver]sable(k=2)	1	157.1
+suffix	·[go|lo]gie	2	·[go|lo]gie(k=2) | ·[a|bio|cho|cio|co|cro|da|dio|do|ma|mio|mo|na|no|o|pho|po|pro|rio|ro|sio|ta|tho|to|tro|tyo|xo]logie(k=3)	2	157.0
+suffix	·[cri|des|gglu|li|ma|or|ré|ssé|sé|ta|ter|ti|tio|xter]-{bo,ly}gination	4	·[cri|des|gglu|li|ma|or|ré|ssé|sé|ta|ter|ti|tio|xter]-{bo,ly}gination(k=4)	1	157.0
+suffix	·[a|bio|cho|cio|co|cro|da|dio|do|ma|mio|mo|na|no|o|pho|po|pro|rio|ro|sio|ta|tho|to|tro|tyo|xo]logie	3	·[a|bio|cho|cio|co|cro|da|dio|do|ma|mio|mo|na|no|o|pho|po|pro|rio|ro|sio|ta|tho|to|tro|tyo|xo]logie(k=3)	1	156.9
+suffix	logie	2	logie(k=2) | ·[a|bio|cho|cio|co|cro|dio|do|dro|llo|mio|mo|na|no|o|pho|po|pro|rio|ro|sio|tho|to|tro|tyo|xo]logie(k=3)	2	156.7
+prefix	vo	1	vo(k=1)	1	156.7
+suffix	·[a|ar|di|dia|fi|gi|li|ma|mi|na|ni|pi|ra|ri|si|ti|tri|vi|xi]cal	2	·[a|ar|di|dia|fi|gi|li|ma|mi|na|ni|pi|ra|ri|si|ti|tri|vi|xi]cal(k=2)	1	156.7
+suffix	·[a|bio|cho|cio|co|cro|dio|do|dro|llo|mio|mo|na|no|o|pho|po|pro|rio|ro|sio|tho|to|tro|tyo|xo]logie	3	·[a|bio|cho|cio|co|cro|dio|do|dro|llo|mio|mo|na|no|o|pho|po|pro|rio|ro|sio|tho|to|tro|tyo|xo]logie(k=3)	1	156.4
+suffix	·galement	3	·galement(k=3)	1	156.3
+prefix	méi·	2	méi·(k=2)	1	156.1
+suffix	·cision	2	·cision(k=2)	1	155.8
+suffix	vent	1	vent(k=1)	1	155.8
+prefix	ea·	2	ea·(k=2) | extra[con|cor|ga|lu|or|po|sen|sys|te|tri|trie|trii|va]·(k=3)	2	155.6
+suffix	·[di|fi|gi|li|mi|ni|pi|ri|si|ti|tri|vi|xi]cal	2	·[di|fi|gi|li|mi|ni|pi|ri|si|ti|tri|vi|xi]cal(k=2)	1	155.5
+suffix	·[a|bi|ce|ci|con|cu|dgé|di|dic|em|ga|gi|gu|li|llu|lon|lu|ma|men|mi|mé|nan|phé|po|pu|pé|remp|ri|si|son|ssa|ta|tio|tté|tu|té|va|vi|xté]lièrement	4	·[a|bi|ce|ci|con|cu|dgé|di|dic|em|ga|gi|gu|li|llu|lon|lu|ma|men|mi|mé|nan|phé|po|pu|pé|remp|ri|si|son|ssa|ta|tio|tté|tu|té|va|vi|xté]lièrement(k=4)	1	155.4
+suffix	cal	1	cal(k=1) | ·[a|ar|di|dia|fi|gi|li|ma|mi|na|ni|pi|ra|ri|si|ti|tri|vi|xi]cal(k=2)	2	155.3
+suffix	·nalement	3	·nalement(k=3)	1	155.3
+prefix	ché	1	ché(k=1)	1	155.1
+prefix	extra	2	extra(k=2) | extraor[di|ju|lac|po|rri|so]·(k=4) | extra[con|cor|ga|lu|or|po|sen|sys|te|va]·(k=3)	3	154.8
+suffix	·[cu|ffé|ppa|vé]remment	3	·[cu|ffé|ppa|vé]remment(k=3)	1	154.8
+prefix	re[ba|bap|bra|bâ|ca|cla|coi|cra|fa|ga|ja|joi|la|lâ|ma|na|pa|pla|plâ|ta|tra|va|voi]·	2	re[ba|bap|bra|bâ|ca|cla|coi|cra|fa|ga|ja|joi|la|lâ|ma|na|pa|pla|plâ|ta|tra|va|voi]·(k=2)	1	154.5
+suffix	gneur	1	gneur(k=1)	1	154.4
+suffix	·logie	2	·logie(k=2) | ·[a|bio|cho|cio|co|cro|dio|do|mio|mo|na|no|o|pho|po|pro|rio|ro|sio|tho|to|tro|tyo|xo]logie(k=3)	2	154.3
+suffix	·[a|bio|cho|cio|co|cro|dio|do|mio|mo|na|no|o|pho|po|pro|rio|ro|sio|tho|to|tro|tyo|xo]logie	3	·[a|bio|cho|cio|co|cro|dio|do|mio|mo|na|no|o|pho|po|pro|rio|ro|sio|tho|to|tro|tyo|xo]logie(k=3)	1	154.1
+suffix	·terie	2	·terie(k=2) | ·[au|blan|ble|bo|cu|cui|dan|fan|ffron|ffé|gen|ja|jou|la|lan|lle|lou|men|mis|ne|nis|nne|nnè|nu|pe|pia|pis|pè|que|què|ra|ris|san|sen|ssu|tis]terie(k=3)	2	154.0
+prefix	féi·	2	féi·(k=2)	1	153.7
+suffix	·[a|ga|jonc|la|ma|mo|na|pec|ra|rec|si|spec|ta|tec|tia|vec]tive	2	·[a|ga|jonc|la|ma|mo|na|pec|ra|rec|si|spec|ta|tec|tia|vec]tive(k=2)	1	153.6
+prefix	poli	2	poli(k=2)	1	153.6
+suffix	·[bio|cho|cio|co|cro|dio|do|dro|llo|mio|mo|no|o|pho|po|pro|rio|ro|sio|tho|to|tro|tyo|xo]logie	3	·[bio|cho|cio|co|cro|dio|do|dro|llo|mio|mo|no|o|pho|po|pro|rio|ro|sio|tho|to|tro|tyo|xo]logie(k=3)	1	153.2
+suffix	·[bé|ccré|ce|ché|cré|cé|dé|gé|llé|lé|me|mmé|mé|né|pé|re|ré|scé|shé|té|vé|xtré|xté|é]lité	3	·[bé|ccré|ce|ché|cré|cé|dé|gé|llé|lé|me|mmé|mé|né|pé|re|ré|scé|shé|té|vé|xtré|xté|é]lité(k=3)	1	153.1
+prefix	va	1	va(k=1)	1	152.7
+prefix	ci	1	ci(k=1) | ci[bou|ga|ma|me|men|sa|se|te|vi]·(k=2)	2	152.4
+prefix	fu	1	fu(k=1)	1	152.3
+suffix	·[te|ti|ve]nue	2	·[te|ti|ve]nue(k=2)	1	152.2
+suffix	·[cié|cré|dgé|lé|né|phlé|é]taire	2	·[cié|cré|dgé|lé|né|phlé|é]taire(k=2)	1	152.1
+suffix	·ijer	2	·ijer(k=2)	1	152.0
+suffix	·[cri|fi|ni|rri|ti]ture	2	·[cri|fi|ni|rri|ti]ture(k=2)	1	151.1
+suffix	·[a|ba|ca|cia|cra|da|dia|ga|gna|la|ma|na|nna|ra|ria|ta|tia|tra|va]nisation	4	·[a|ba|ca|cia|cra|da|dia|ga|gna|la|ma|na|nna|ra|ria|ta|tia|tra|va]nisation(k=4)	1	151.0
+suffix	·[a|ba|ca|cia|cra|da|dia|ga|gna|la|ma|na|nna|ra|ria|ta|tia|tra|va|xtra]nisation	4	·[a|ba|ca|cia|cra|da|dia|ga|gna|la|ma|na|nna|ra|ria|ta|tia|tra|va|xtra]nisation(k=4)	1	150.9
+suffix	·[bio|cho|cio|co|cro|dio|do|mio|mo|no|o|pho|po|pro|rio|ro|sio|tho|to|tro|tyo|xo]logie	3	·[bio|cho|cio|co|cro|dio|do|mio|mo|no|o|pho|po|pro|rio|ro|sio|tho|to|tro|tyo|xo]logie(k=3)	1	150.9
+suffix	·[a|ba|ca|cia|cra|da|dia|ga|gna|la|ma|na|nna|ra|ria|ta|tia|tra|va]nisation	4	·[a|ba|ca|cia|cra|da|dia|ga|gna|la|ma|na|nna|ra|ria|ta|tia|tra|va]nisation(k=4)	1	150.8
+prefix	fer	1	fer(k=1)	1	150.5
+suffix	·[bli|ci|ffi|gli|gui|li|lli|pi|pri|ti|vi]demment	3	·[bli|ci|ffi|gli|gui|li|lli|pi|pri|ti|vi]demment(k=3)	1	149.9
+suffix	·[cri|gglu|li|ma|or|sé|ta|ter|xter]-{bo,ly}gination	4	·[cri|gglu|li|ma|or|sé|ta|ter|xter]-{bo,ly}gination(k=4)	1	149.8
+prefix	en[chaî|fe|grai|lè|nei|quê|ra|se|sei|te|traî|tê|ve]·	2	en[chaî|fe|grai|lè|nei|quê|ra|se|sei|te|traî|tê|ve]·(k=2)	1	149.2
+suffix	cin	1	cin(k=1)	1	148.6
+suffix	·litaire	2	·litaire(k=2)	1	148.5
+prefix	atten	2	atten(k=2)	1	148.4
+suffix	dat	1	dat(k=1)	1	148.3
+prefix	ter	1	ter(k=1)	1	148.3
+prefix	obli	2	obli(k=2)	1	148.2
+suffix	ché	1	ché(k=1)	1	147.6
+suffix	·ramment	2	·ramment(k=2) | ·[cu|ffé|ppa|vé]remment(k=3)	2	147.6
+suffix	nique	1	nique(k=1) | ·[a|bbi|bi|bo|ca|chi|chro|clo|co|do|dé|fo|ga|go|gy|gé|i|ka|li|lli|llé|ma|mi|mo|mé|no|o|pa|pho|phré|ra|rai|ro|so|ta|tech|thé|to|tro|va|vio]-{Zje}nique(k=2)	2	147.5
+suffix	sable	1	sable(k=1) | ·[bour|pen|pon|ver]sable(k=2)	2	147.3
+suffix	·[bé|cé|dé|ffé|fé|gé|lé|mé|nié|né|pé|rrié|ssié|thé|té]ré	2	·[bé|cé|dé|ffé|fé|gé|lé|mé|nié|né|pé|rrié|ssié|thé|té]ré(k=2)	1	146.8
+suffix	·[can|man|men|plan|quen|rien|sen|ten]tation	3	·[can|man|men|plan|quen|rien|sen|ten]tation(k=3)	1	146.7
+suffix	·[ban|bar|ca|car|cen|ga|gé|illan|la|man|mo|mé|na|no|pu|ro|rra|tar|tu|van|var|xpé]dier	2	·[ban|bar|ca|car|cen|ga|gé|illan|la|man|mo|mé|na|no|pu|ro|rra|tar|tu|van|var|xpé]dier(k=2)	1	146.7
+suffix	·[mos|ros|sul|ten|tes|tos|tten]-{bi}tats	2	·[mos|ros|sul|ten|tes|tos|tten]-{bi}tats(k=2)	1	146.4
+suffix	tent	1	tent(k=1)	1	146.4
+suffix	·[chan|den|emp|gen|glan|illan|jan|man|men|pen|plan|quen|ren|rien|sen|van]té	2	·[chan|den|emp|gen|glan|illan|jan|man|men|pen|plan|quen|ren|rien|sen|van]té(k=2)	1	146.2
+prefix	re[bon|com|con|fon|gon|mon|non|plon|tom]·	2	re[bon|com|con|fon|gon|mon|non|plon|tom]·(k=2)	1	146.1
+prefix	mii·	2	mii·(k=2)	1	145.9
+suffix	·[bi|bri|ci|di|gni|i|li|mi|ni|nni|pli|ri|si|ssi|ti|tri|vi|zi]fication	4	·[bi|bri|ci|di|gni|i|li|mi|ni|nni|pli|ri|si|ssi|ti|tri|vi|zi]fication(k=4)	1	145.8
+suffix	·galement	3	·galement(k=3)	1	145.7
+suffix	·[bri|ci|di|gni|i|li|mi|ni|nni|pli|ri|si|ssi|ti|tri|vi|zi]fication	4	·[bri|ci|di|gni|i|li|mi|ni|nni|pli|ri|si|ssi|ti|tri|vi|zi]fication(k=4)	1	145.7
+suffix	·[bu|cu|du|gu|mu|nnu|nu|pu|su|tu|vu]lation	3	·[bu|cu|du|gu|mu|nnu|nu|pu|su|tu|vu]lation(k=3)	1	145.5
+suffix	·ccusation	3	·ccusation(k=3)	1	145.4
+suffix	ma	1	ma(k=1) | ·[go|gro|na|né|ra|zé]ma(k=2)	2	145.1
+suffix	·[mmen|ten|ver]sité	3	·[mmen|ten|ver]sité(k=3)	1	145.1
+suffix	·chement	2	·chement(k=2)	1	145.0
+suffix	·[a|ca|cia|ga|gra|la|ma|na|ra|ta|tra|va]gination	4	·[a|ca|cia|ga|gra|la|ma|na|ra|ta|tra|va]gination(k=4)	1	144.8
+suffix	·yrer	2	·yrer(k=2)	1	144.7
+suffix	·aliste	2	·aliste(k=2)	1	144.3
+suffix	dier	1	dier(k=1) | ·[ban|bar|ca|car|cen|ga|gé|illan|la|man|mo|mé|na|no|pu|ro|rra|tar|tu|van|var|xpé]dier(k=2)	2	144.3
+prefix	extra[con|cor|ga|lu|or|po|sen|sys|te|tri|trie|trii|va]·	3	extra[con|cor|ga|lu|or|po|sen|sys|te|tri|trie|trii|va]·(k=3)	1	144.1
+prefix	je	1	je(k=1)	1	144.0
+prefix	ra°·	2	ra°·(k=2)	1	143.8
+suffix	·[bi|bri|ci|di|gni|i|li|mi|ni|nni|pli|ri|si|ssi|ti|tri|vi|zi]fication	4	·[bi|bri|ci|di|gni|i|li|mi|ni|nni|pli|ri|si|ssi|ti|tri|vi|zi]fication(k=4)	1	143.6
+suffix	tive	1	tive(k=1) | ·[a|ga|jonc|la|ma|mo|na|pec|ra|rec|si|spec|ta|tec|tia|vec]tive(k=2)	2	143.6
+suffix	·[bri|ci|di|gni|i|li|mi|ni|nni|pli|ri|si|ssi|ti|tri|vi|zi]fication	4	·[bri|ci|di|gni|i|li|mi|ni|nni|pli|ri|si|ssi|ti|tri|vi|zi]fication(k=4)	1	143.5
+suffix	·[au|bo|cen|che|cho|chou|chu|co|cryp|cu|do|fa|gno|go|ille|le|lle|lo|ma|mec|men|mi|mo|no|nu|pac|pen|pis|po|por|pé|que|re|reau|ri|ro|si|ssar|va|van|ve|vol|yo|zu]-{Ra}tage	2	·[au|bo|cen|che|cho|chou|chu|co|cryp|cu|do|fa|gno|go|ille|le|lle|lo|ma|mec|men|mi|mo|no|nu|pac|pen|pis|po|por|pé|que|re|reau|ri|ro|si|ssar|va|van|ve|vol|yo|zu]-{Ra}tage(k=2)	1	143.2
+prefix	rii·	2	rii·(k=2)	1	142.8
+suffix	·[bi|bli|bo|bu|bé|cha|ci|cu|du|fa|ffa|fi|fla|fé|lé|mi|mmi|pa|phé|pi|rro|ser|si|ten|tur|xplo]-{pe}ratoire	3	·[bi|bli|bo|bu|bé|cha|ci|cu|du|fa|ffa|fi|fla|fé|lé|mi|mmi|pa|phé|pi|rro|ser|si|ten|tur|xplo]-{pe}ratoire(k=3)	1	142.6
+suffix	·atoire	2	·atoire(k=2) | ·[bi|bli|bo|bu|bé|cha|ci|cu|du|fa|ffa|fi|fla|fé|lé|mi|mmi|pa|phé|pi|rro|ser|si|ten|tur|xplo]-{pe}ratoire(k=3)	2	142.5
+suffix	·[di|gi|le|lho|mi|sio|so|ssio|ter|tio]nnellement	4	·[di|gi|le|lho|mi|sio|so|ssio|ter|tio]nnellement(k=4)	1	142.3
+suffix	·[con|de|ppar|ter|tre]venir	3	·[con|de|ppar|ter|tre]venir(k=3)	1	142.3
+suffix	nue	1	nue(k=1) | ·[te|ti|ve]nue(k=2)	2	142.2
+suffix	·[ce|che|ci|con|cu|dgé|di|em|gi|gu|lho|li|lon|lu|ma|man|men|mer|mi|mé|na|nan|po|pu|ra|ri|si|son|ti|tio|tri|trin|tté|tu|té|ve]lièrement	4	·[ce|che|ci|con|cu|dgé|di|em|gi|gu|lho|li|lon|lu|ma|man|men|mer|mi|mé|na|nan|po|pu|ra|ri|si|son|ti|tio|tri|trin|tté|tu|té|ve]lièrement(k=4)	1	142.0
+suffix	·[bi|bri|ci|ffi|gi|ni|pi|qui|ri|ti|vi]lement	3	·[bi|bri|ci|ffi|gi|ni|pi|qui|ri|ti|vi]lement(k=3)	1	141.4
+suffix	·[po|ppo|qui]sition	3	·[po|ppo|qui]sition(k=3)	1	141.1
+suffix	·[bo|bu|bé|co|cu|do|dé|fo|gé|lio|lé|mi|mé|né|pa|pi|po|pu|pé|tu|xplo]-{to}rateur	3	·[bo|bu|bé|co|cu|do|dé|fo|gé|lio|lé|mi|mé|né|pa|pi|po|pu|pé|tu|xplo]-{to}rateur(k=3)	1	141.0
+prefix	conci·	2	conci·(k=2) | consi[dé|gna|gne|toy]·(k=3)	2	140.9
+prefix	hu	1	hu(k=1)	1	140.9
+suffix	·[a|bi|ca|ci|cri|di|fi|ga|gé|li|lli|na|ni|nnih|né|or|pli|po|ra|ri|si|ssi|sé|ta|ti|tra|ven|vi|vé|xter]-{my}lisateur	4	·[a|bi|ca|ci|cri|di|fi|ga|gé|li|lli|na|ni|nnih|né|or|pli|po|ra|ri|si|ssi|sé|ta|ti|tra|ven|vi|vé|xter]-{my}lisateur(k=4)	1	140.5
+suffix	·nalement	3	·nalement(k=3)	1	139.9
+suffix	·[i|joui|nai|nnai|pui|roi]ssance	2	·[i|joui|nai|nnai|pui|roi]ssance(k=2)	1	139.8
+suffix	tat	1	tat(k=1) | ·[mos|ros|sul|ten|tes|tos|tten]-{bi}tats(k=2)	2	139.7
+prefix	re[bi|cy|di|fi|gli|li|mi|pi|pri|ti|vi]·	2	re[bi|cy|di|fi|gli|li|mi|pi|pri|ti|vi]·(k=2)	1	139.6
+suffix	·[ffe|ga|ge|jo|lle|mou|pé|que|su|tu]rette	2	·[ffe|ga|ge|jo|lle|mou|pé|que|su|tu]rette(k=2)	1	139.5
+suffix	·[chè|lè|ner|sci|si|ssi|ti|vi|è|ï]vement	3	·[chè|lè|ner|sci|si|ssi|ti|vi|è|ï]vement(k=3)	1	139.3
+prefix	déo·	2	déo·(k=2)	1	139.0
+suffix	·[bi|ce|ci|con|cu|dgé|di|em|gi|gu|li|llu|lon|lu|ma|men|mi|mé|nan|phé|po|pu|ri|si|son|ssa|tio|tté|tu|va]lièrement	4	·[bi|ce|ci|con|cu|dgé|di|em|gi|gu|li|llu|lon|lu|ma|men|mi|mé|nan|phé|po|pu|ri|si|son|ssa|tio|tté|tu|va]lièrement(k=4)	1	139.0
+suffix	·[a|ba|bra|ca|ga|gra|la|lla|ma|mma|na|pa|ra|sa|ta|va|xa|xpia]toire	2	·[a|ba|bra|ca|ga|gra|la|lla|ma|mma|na|pa|ra|sa|ta|va|xa|xpia]toire(k=2) | ·[bi|bli|bo|bu|bé|ci|cla|cu|du|fa|ffa|fi|fla|lé|mi|pa|phé|pi|rro|ser|si|ten|tur|xplo]-{pe}ratoire(k=3)	2	138.8
+suffix	·cilement	3	·cilement(k=3)	1	138.8
+suffix	·[gi|le|mi|sio|so|ssio|ter|tio]nnellement	4	·[gi|le|mi|sio|so|ssio|ter|tio]nnellement(k=4)	1	138.7
+suffix	·[ri|rri|ti]vé	2	·[ri|rri|ti]vé(k=2)	1	138.7
+suffix	·tivement	3	·tivement(k=3)	1	138.1
+suffix	sité	2	sité(k=2) | ·[mmen|ten|ver]sité(k=3)	2	138.1
+suffix	·[bé|dé|gné|gé|lé|mé|né|phré|phé|ré|scé|thé|té|vié|vé|é]tique	2	·[bé|dé|gné|gé|lé|mé|né|phré|phé|ré|scé|thé|té|vié|vé|é]tique(k=2)	1	137.9
+prefix	au·	2	au·(k=2)	1	137.9
+suffix	·[bou|ma|or|ri|sci|té]dinaire	3	·[bou|ma|or|ri|sci|té]dinaire(k=3)	1	137.8
+suffix	·[con|mi|mmo|ni|pi|pis|ti]-{Re}culier	3	·[con|mi|mmo|ni|pi|pis|ti]-{Re}culier(k=3)	1	137.7
+prefix	rem	1	rem(k=1) | rem[ba|bar|bo|bou|bru|me|mè|pa|pi|pla|pli|plu|po|por]-{buR}·(k=2)	2	137.5
+suffix	sson	1	sson(k=1)	1	137.4
+suffix	age	1	age(k=1)	1	137.1
+suffix	·[aus|ba|bé|cas|cep|cra|crip|dac|des|do|fan|fec|ffec|ga|gi|gné|guis|jec|la|lec|li|lis|llec|ly|ma|man|mes|mi|mé|na|no|nu|né|o|pa|pec|phé|ra|sis|tas|then|thé|tinc|tis|tui|xta]-{zi}tivement	4	·[aus|ba|bé|cas|cep|cra|crip|dac|des|do|fan|fec|ffec|ga|gi|gné|guis|jec|la|lec|li|lis|llec|ly|ma|man|mes|mi|mé|na|no|nu|né|o|pa|pec|phé|ra|sis|tas|then|thé|tinc|tis|tui|xta]-{zi}tivement(k=4)	1	137.0
+prefix	opé	2	opé(k=2)	1	136.8
+suffix	·[di|fa|mi|so|ter|to|vi]-{si}nateur	3	·[di|fa|mi|so|ter|to|vi]-{si}nateur(k=3)	1	136.7
+suffix	·[bi|bli|bo|bu|bé|ci|cla|cu|du|fa|ffa|fi|fla|lé|mi|pa|phé|pi|rro|ser|si|ten|tur|xplo]-{pe}ratoire	3	·[bi|bli|bo|bu|bé|ci|cla|cu|du|fa|ffa|fi|fla|lé|mi|pa|phé|pi|rro|ser|si|ten|tur|xplo]-{pe}ratoire(k=3)	1	136.7
+suffix	·rateur	2	·rateur(k=2) | ·[bo|bu|bé|co|cu|do|dé|fo|gé|lio|lé|mi|mé|né|pa|pi|po|pu|pé|tu|xplo]-{to}rateur(k=3)	2	136.5
+suffix	·[di|fa|mi|so|ter|to|vi]nateur	3	·[di|fa|mi|so|ter|to|vi]nateur(k=3)	1	136.2
+suffix	·osition	3	·osition(k=3)	1	136.1
+suffix	position	3	position(k=3)	1	136.0
+suffix	·[che|cre|dre|ge|ille|je|le|lle|me|ne|nne|pre|que|re|se|te|tre|ve|vre]té	2	·[che|cre|dre|ge|ille|je|le|lle|me|ne|nne|pre|que|re|se|te|tre|ve|vre]té(k=2)	1	135.5
+suffix	·oté	2	·oté(k=2)	1	135.4
+prefix	éy·	2	éy·(k=2)	1	134.9
+suffix	fication	3	fication(k=3) | ·[bi|bri|ci|di|gni|i|li|mi|ni|nni|pli|ri|si|ssi|ti|tri|vi|zi]fication(k=4)	2	134.9
+suffix	·fication	3	·fication(k=3) | ·[bri|ci|di|gni|i|li|mi|ni|nni|pli|ri|si|ssi|ti|tri|vi|zi]fication(k=4)	2	134.8
+suffix	·[bi|chi|dui|fai|ffi|ffu|gi|li|lli|ly|mu|ni|plai|po|ppo|pri|pui|ri|thi|ti|tri|xpo|y|ï]-{pE}sant	2	·[bi|chi|dui|fai|ffi|ffu|gi|li|lli|ly|mu|ni|plai|po|ppo|pri|pui|ri|thi|ti|tri|xpo|y|ï]-{pE}sant(k=2)	1	134.2
+suffix	·cegnements	3	·cegnements(k=3)	1	134.1
+suffix	·cibilité	4	·cibilité(k=4)	1	134.0
+prefix	é[chau|clo|co|lo|mo|ro|to|vo]·	2	é[chau|clo|co|lo|mo|ro|to|vo]·(k=2)	1	134.0
+suffix	·[bi|ce|ci|con|cu|dgé|di|em|gi|gu|li|lon|lu|ma|men|mi|mé|nan|phé|po|pu|ri|si|son|ssa|tio|tté|tu|va]lièrement	4	·[bi|ce|ci|con|cu|dgé|di|em|gi|gu|li|lon|lu|ma|men|mi|mé|nan|phé|po|pu|ri|si|son|ssa|tio|tté|tu|va]lièrement(k=4)	1	134.0
+suffix	·inaire	2	·inaire(k=2) | ·[bou|ma|or|ri|sci|té]dinaire(k=3)	2	133.9
+prefix	tran	1	tran(k=1)	1	133.9
+prefix	in[co|coh|do|so|to|vio|vo]·	2	in[co|coh|do|so|to|vio|vo]·(k=2)	1	133.8
+prefix	char	1	char(k=1)	1	133.5
+suffix	·[bé|ci|ffi|gi|men|mi|mmor|ni|né|o|pi|po|ré|so|ten|tio|té|ver|vi|â]-{mo}nnalité	4	·[bé|ci|ffi|gi|men|mi|mmor|ni|né|o|pi|po|ré|so|ten|tio|té|ver|vi|â]-{mo}nnalité(k=4)	1	133.5
+prefix	dou	1	dou(k=1)	1	133.4
+suffix	·cegnements	3	·cegnements(k=3)	1	133.3
+prefix	enER·	2	enER·(k=2)	1	133.0
+suffix	·[breu|ce|de|mou|ser|tre]voir	2	·[breu|ce|de|mou|ser|tre]voir(k=2)	1	133.0
+prefix	in[can|chan|fran|sen|tan|tem|ten|tran|ven]·	2	in[can|chan|fran|sen|tan|tem|ten|tran|ven]·(k=2)	1	132.6
+suffix	·rieusement	3	·rieusement(k=3)	1	132.3
+suffix	time	1	time(k=1)	1	132.2
+suffix	·[cra|cri|di|geoi|gné|gé|lou|ly|no|né|pha|pi|pla|ré|ta|tai|thé|toi|é]sie	2	·[cra|cri|di|geoi|gné|gé|lou|ly|no|né|pha|pi|pla|ré|ta|tai|thé|toi|é]sie(k=2)	1	132.1
+suffix	rette	1	rette(k=1) | ·[ffe|ga|ge|jo|lle|mou|pé|que|su|tu]rette(k=2)	2	131.9
+suffix	vité	2	vité(k=2) | ·[ca|ci|cli|gra|gé|sci|si|ssi|ti]vité(k=3)	2	131.8
+suffix	·[bri|ci|di|mmei|ni|qui|ri|ti|vei]lleux	2	·[bri|ci|di|mmei|ni|qui|ri|ti|vei]lleux(k=2)	1	131.7
+suffix	·[go|gro|na|né|ra|zé]ma	2	·[go|gro|na|né|ra|zé]ma(k=2)	1	131.7
+suffix	nateur	2	nateur(k=2) | ·[ci|di|mi|ssi|vi]nateur(k=3)	2	131.5
+prefix	hé	1	hé(k=1)	1	131.5
+suffix	·[bo|cie|die|do|e|fo|gno|illo|llo|mo|o|po|ro|sio|so|sso|tie|tio|to|ço]nnement	3	·[bo|cie|die|do|e|fo|gno|illo|llo|mo|o|po|ro|sio|so|sso|tie|tio|to|ço]nnement(k=3)	1	131.1
+suffix	sant	1	sant(k=1) | ·[bi|chi|dui|fai|ffi|ffu|gi|li|lli|ly|mu|ni|plai|po|ppo|pri|pui|ri|thi|ti|tri|xpo|y|ï]-{pE}sant(k=2)	2	131.1
+suffix	·[bi|bli|bo|bu|bé|ci|cla|cu|du|fa|ffa|fi|fla|lo|lé|mi|pa|phé|pi|ppo|qui|rro|ser|si|ten|tur|xplo|é]-{pe,tRa}ratoire	3	·[bi|bli|bo|bu|bé|ci|cla|cu|du|fa|ffa|fi|fla|lo|lé|mi|pa|phé|pi|ppo|qui|rro|ser|si|ten|tur|xplo|é]-{pe,tRa}ratoire(k=3)	1	130.8
+suffix	·[bo|mo|po|ppo]sition	3	·[bo|mo|po|ppo]sition(k=3)	1	130.8
+suffix	·[ci|di|mi|ssi|vi]nateur	3	·[ci|di|mi|ssi|vi]nateur(k=3)	1	130.8
+suffix	·[ce|che|ci|con|cu|dgé|di|em|gi|gu|lho|li|lon|lu|ma|man|men|mer|mi|mé|na|nan|po|pu|ra|ri|si|son|ti|tio|tri|trin|tté|tu|ve]lièrement	4	·[ce|che|ci|con|cu|dgé|di|em|gi|gu|lho|li|lon|lu|ma|man|men|mer|mi|mé|na|nan|po|pu|ra|ri|si|son|ti|tio|tri|trin|tté|tu|ve]lièrement(k=4)	1	130.7
+prefix	sou°·	2	sou°·(k=2)	1	130.6
+suffix	·[a|ba|bi|bo|ca|ci|cia|cra|cu|dia|ga|gé|ma|na|nna|ra|ri|ria|so|ssi|sua|ta|ti|tia|tra|tua|va|vi]-{Na}lisation	4	·[a|ba|bi|bo|ca|ci|cia|cra|cu|dia|ga|gé|ma|na|nna|ra|ri|ria|so|ssi|sua|ta|ti|tia|tra|tua|va|vi]-{Na}lisation(k=4)	1	130.6
+suffix	·[a|bi|bli|di|ly|na|no|ri|ta|tes|ti|to|tri|tu]ginal	3	·[a|bi|bli|di|ly|na|no|ri|ta|tes|ti|to|tri|tu]ginal(k=3)	1	130.5
+suffix	ti	1	ti(k=1)	1	130.4
+suffix	·raissant	2	·raissant(k=2)	1	129.7
+prefix	con[ce|cé|de|dé|e|fé|gé|plé|pré|préh|pé|qué|sé|é]·	2	con[ce|cé|de|dé|e|fé|gé|plé|pré|préh|pé|qué|sé|é]·(k=2)	1	129.7
+suffix	·[cru|gi|len|li|ma|man|mi|ni|ri|si|ti|tri|té|za|ï]cien	2	·[cru|gi|len|li|ma|man|mi|ni|ri|si|ti|tri|té|za|ï]cien(k=2)	1	129.6
+suffix	tier	1	tier(k=1)	1	129.4
+suffix	sion	1	sion(k=1)	1	129.4
+suffix	·nellement	3	·nellement(k=3) | ·[gi|le|mi|sio|so|ssio|ter|tio]nnellement(k=4)	2	129.2
+suffix	·[a|bi|ca|ci|di|fi|ga|gé|li|lli|na|ni|nnih|né|or|pli|po|ra|ri|si|ssi|sé|ta|ti|tra|ven|vi|vé|xter]-{my}lisateur	4	·[a|bi|ca|ci|di|fi|ga|gé|li|lli|na|ni|nnih|né|or|pli|po|ra|ri|si|ssi|sé|ta|ti|tra|ven|vi|vé|xter]-{my}lisateur(k=4)	1	129.0
+suffix	sation	2	sation(k=2)	1	128.8
+prefix	paa·	2	paa·(k=2)	1	128.1
+suffix	·[bu|ca|co|cu|du|fu|gu|llu|mi|mo|mu|nnu|nu|o|po|pu|si|so|su|to|tu]laire	2	·[bu|ca|co|cu|du|fu|gu|llu|mi|mo|mu|nnu|nu|o|po|pu|si|so|su|to|tu]laire(k=2)	1	128.0
+suffix	·[ba|blé|cho|cro|cré|dra|for|ga|go|llo|lé|mis|mo|ni|nig|no|né|o|phrag|plo|reau|ris|ro|ré|so|ssé|tas|thé|ti|to|té]matique	3	·[ba|blé|cho|cro|cré|dra|for|ga|go|llo|lé|mis|mo|ni|nig|no|né|o|phrag|plo|reau|ris|ro|ré|so|ssé|tas|thé|ti|to|té]matique(k=3)	1	127.7
+prefix	cona·	2	cona·(k=2)	1	127.5
+suffix	·miliation	3	·miliation(k=3)	1	127.5
+suffix	·[ga|la|llon|lo|lon|mma|na|ra|ran|rra|rran|ti|tran|va]-{SaR,bER}gement	3	·[ga|la|llon|lo|lon|mma|na|ra|ran|rra|rran|ti|tran|va]-{SaR,bER}gement(k=3)	1	127.4
+suffix	·[a|ca|dé|lé|pri|ré|té]o	2	·[a|ca|dé|lé|pri|ré|té]o(k=2)	1	127.1
+suffix	·[a|ba|ca|cha|da|ma|na|ta|va]lier	2	·[a|ba|ca|cha|da|ma|na|ta|va]lier(k=2)	1	126.6
+suffix	·[ca|ci|cli|gra|gé|sci|si|ssi|ti]vité	3	·[ca|ci|cli|gra|gé|sci|si|ssi|ti]vité(k=3)	1	126.5
+suffix	·Esser	2	·Esser(k=2)	1	126.2
+suffix	laire	1	laire(k=1) | ·[bu|ca|co|cu|du|fu|gu|llu|mi|mo|mu|nnu|nu|o|po|pu|si|so|su|to|tu]laire(k=2)	2	126.1
+prefix	te	1	te(k=1)	1	125.9
+suffix	·inel	2	·inel(k=2)	1	125.7
+prefix	ex[a|al|i|oph|or]·	2	ex[a|al|i|oph|or]·(k=2)	1	125.2
+suffix	sie	1	sie(k=1) | ·[cra|cri|di|geoi|gné|gé|lou|ly|no|né|pha|pi|pla|ré|ta|tai|thé|toi|é]sie(k=2)	2	124.9
+prefix	comman	2	comman(k=2)	1	124.9
+suffix	·[boie|ca|ga|la|ma|noie|ra|ta|voie]ments	2	·[boie|ca|ga|la|ma|noie|ra|ta|voie]ments(k=2)	1	124.8
+suffix	·[bli|bri|di|fi|ni|pli|ri|ti|tri|xi|ï]-{l}cité	3	·[bli|bri|di|fi|ni|pli|ri|ti|tri|xi|ï]-{l}cité(k=3)	1	124.5
+suffix	·iture	2	·iture(k=2)	1	124.3
+suffix	·[ci|cli|sci|si|ssi|ti]vité	3	·[ci|cli|sci|si|ssi|ti]vité(k=3)	1	124.3
+suffix	·@tation	3	·@tation(k=3)	1	124.0
+prefix	ad	1	ad(k=1) | ad[me|mi|mo|ve|vien]·(k=2)	2	124.0
+suffix	·pputation	3	·pputation(k=3)	1	123.7
+suffix	·lisation	3	·lisation(k=3) | ·[a|ba|bi|bo|ca|ci|cia|cra|cu|dia|ga|gé|ma|na|nna|ra|ri|ria|so|ssi|sua|ta|ti|tia|tra|tua|va|vi]-{Na}lisation(k=4)	2	123.6
+suffix	·dinateur	3	·dinateur(k=3)	1	123.2
+suffix	·[bo|do|fo|gno|illo|llo|mo|o|po|ro|sio|so|sso|tio|to|ço]nnement	3	·[bo|do|fo|gno|illo|llo|mo|o|po|ro|sio|so|sso|tio|to|ço]nnement(k=3)	1	123.2
+prefix	déE·	2	déE·(k=2)	1	123.1
+prefix	a[ba|bâ|ca|cha|droi|ma|na|pâ|ra|sa|ta|va|voi]·	2	a[ba|bâ|ca|cha|droi|ma|na|pâ|ra|sa|ta|va|voi]·(k=2)	1	123.1
+prefix	re§·	2	re§·(k=2)	1	123.0
+prefix	en[cen|chan|clen|gen|glan|gran|jam|san|vian]-{t}·	2	en[cen|chan|clen|gen|glan|gran|jam|san|vian]-{t}·(k=2)	1	122.9
+prefix	extraor[di|ju|lac|po|rri|so]·	4	extraor[di|ju|lac|po|rri|so]·(k=4)	1	122.9
+suffix	tère	1	tère(k=1) | ·[by|drop|dul|gis|lé|mip|nas|nis|rac|re|rop|sen|thop|tis]tère(k=2)	2	122.8
+suffix	·[can|men|plan|quen|rien|sen|ten]tation	3	·[can|men|plan|quen|rien|sen|ten]tation(k=3)	1	122.7
+suffix	·[bon|cé|pen|pru|vi]demment	3	·[bon|cé|pen|pru|vi]demment(k=3)	1	122.7
+suffix	·dinateur	3	·dinateur(k=3)	1	122.6
+suffix	·[chi|ché|cé|do|dé|fa|ga|li|lié|lé|nho|no|ny|né|pé|rié|ré|so|ssé|ther|thy|to|tré]-{Rit}mie	2	·[chi|ché|cé|do|dé|fa|ga|li|lié|lé|nho|no|ny|né|pé|rié|ré|so|ssé|ther|thy|to|tré]-{Rit}mie(k=2) | ·[bo|ca|clo|co|coo|cro|gly|go|li|ly|no|o|po|ro|sio|ti|to|tro|té|xi]-{na,pi}démie(k=3)	2	122.6
+prefix	mer	1	mer(k=1) | mer[ce|cre|cu|de|dou|vei]·(k=2)	2	122.5
+suffix	·[a|ba|bi|bo|ca|cia|cra|cu|dia|ga|gé|ma|na|nna|ra|ri|ria|ssi|sua|ta|ti|tia|tra|tua|vi]-{Na}lisation	4	·[a|ba|bi|bo|ca|cia|cra|cu|dia|ga|gé|ma|na|nna|ra|ri|ria|ssi|sua|ta|ti|tia|tra|tua|vi]-{Na}lisation(k=4)	1	122.4
+suffix	·[gi|li|mi|ni|ri|si|ti|tri|ï]cien	2	·[gi|li|mi|ni|ri|si|ti|tri|ï]cien(k=2)	1	122.4
+suffix	·[a|ba|bat|bla|ca|cia|da|ga|la|ma|na|pla|ra|rra|sa|sla|ta|tra|va|via|xa]tif	2	·[a|ba|bat|bla|ca|cia|da|ga|la|ma|na|pla|ra|rra|sa|sla|ta|tra|va|via|xa]tif(k=2)	1	122.4
+suffix	·naissance	2	·naissance(k=2)	1	122.3
+suffix	·iktion	2	·iktion(k=2) | ·[cons|lé|né|ri|ré|ter|tra]diction(k=3)	2	122.1
+suffix	·onnier	2	·onnier(k=2)	1	122.1
+suffix	·[bou|ma|or|qua|quan|ran|ri|sci|to]dinaire	3	·[bou|ma|or|qua|quan|ran|ri|sci|to]dinaire(k=3)	1	122.1
+suffix	·[a|ba|bi|bo|ca|cia|cra|cu|cuo|dia|ga|gé|ma|na|nna|ra|ri|ria|ssi|sua|ta|ti|tia|tra|tua|vi|vé]-{Na}lisation	4	·[a|ba|bi|bo|ca|cia|cra|cu|cuo|dia|ga|gé|ma|na|nna|ra|ri|ria|ssi|sua|ta|ti|tia|tra|tua|vi|vé]-{Na}lisation(k=4)	1	122.0
+prefix	en[cer|fer|ver]·	2	en[cer|fer|ver]·(k=2)	1	121.9
+suffix	·miliation	3	·miliation(k=3)	1	121.9
+suffix	·[bou|clai|co|cou|cu|lu|pa|pe|pé|ro|ssu|su|vo|xplo]reur	2	·[bou|clai|co|cou|cu|lu|pa|pe|pé|ro|ssu|su|vo|xplo]reur(k=2)	1	121.8
+suffix	o	1	o(k=1) | ·[a|ca|dé|lé|pri|ré|té]o(k=2)	2	121.8
+suffix	·damment	2	·damment(k=2) | ·[bon|cé|pen|pru|vi]demment(k=3)	2	121.8
+suffix	·[chi|di|gi|gui|i|li|lli|ly|mi|ni|ri|ti|tri|vi|xci]sé	2	·[chi|di|gi|gui|i|li|lli|ly|mi|ni|ri|ti|tri|vi|xci]sé(k=2) | ·[a|bi|bé|ca|cia|coo|da|dar|de|dua|fu|ga|gi|la|lo|lé|ma|mé|na|ner|nna|né|phi|pro|ra|rar|ri|rro|sep|sla|so|ssu|ta|teu|ti|tia|to|té|vi|vo]lisé(k=3)	2	121.8
+suffix	lleux	1	lleux(k=1) | ·[bri|ci|di|mmei|ni|qui|ri|ti|vei]lleux(k=2)	2	121.7
+prefix	aéro	3	aéro(k=3)	1	121.6
+suffix	·[bo|co|do|dro|ffo|fo|geo|go|lo|no|rro|so|sso|to|tro|vo|ço]nniers	2	·[bo|co|do|dro|ffo|fo|geo|go|lo|no|rro|so|sso|to|tro|vo|ço]nniers(k=2)	1	121.6
+suffix	·ologie	3	·ologie(k=3)	1	121.5
+suffix	·[bo|co|do|dro|ffo|fo|geo|lo|no|rro|so|sso|to|tro|vo|ço]nniers	2	·[bo|co|do|dro|ffo|fo|geo|lo|no|rro|so|sso|to|tro|vo|ço]nniers(k=2)	1	121.4
+suffix	nnement	2	nnement(k=2) | ·[bo|cie|die|do|e|fo|gno|illo|llo|mo|o|po|ro|sio|so|sso|tie|tio|to|ço]nnement(k=3)	2	121.1
+suffix	·[be|ce|che|cu|dau|de|ge|geo|gne|gno|gre|nne|o|pe|que|ri|ro|rre|se|sse|te|to|tou|va|ve]let	2	·[be|ce|che|cu|dau|de|ge|geo|gne|gno|gre|nne|o|pe|que|ri|ro|rre|se|sse|te|to|tou|va|ve]let(k=2)	1	121.1
+prefix	déOR·	2	déOR·(k=2)	1	120.8
+suffix	·[di|mi|vi]nateur	3	·[di|mi|vi]nateur(k=3)	1	120.0
+suffix	matique	2	matique(k=2) | ·[blé|dio|dra|for|go|lé|mis|nig|né|phrag|plo|ris|ro|so|ssé|thé|to|té]matique(k=3)	2	119.9
+suffix	·[bou|ma|or|ri|sci]dinaire	3	·[bou|ma|or|ri|sci]dinaire(k=3)	1	119.7
+suffix	·dicaments	3	·dicaments(k=3)	1	119.6
+suffix	cien	1	cien(k=1) | ·[cru|gi|len|li|ma|man|mi|ni|ri|si|ti|tri|té|za|ï]cien(k=2)	2	119.6
+prefix	comp	1	comp(k=1)	1	119.5
+suffix	ssure	1	ssure(k=1)	1	119.5
+suffix	mie	1	mie(k=1) | ·[bo|ca|clo|co|coo|cro|gly|go|li|ly|no|o|po|ro|sio|ti|to|tro|té|xi]-{na,pi}démie(k=3) | ·[chi|ché|cé|do|dé|fa|ga|li|lié|lé|nho|no|ny|né|pé|rié|ré|so|ssé|ther|thy|to|tré]-{Rit}mie(k=2)	3	119.3
+prefix	en@·	2	en@·(k=2)	1	119.0
+suffix	·position	3	·position(k=3)	1	118.8
+prefix	in[chi|ci|cli|di|fi|si|ti]-{v}·	2	in[chi|ci|cli|di|fi|si|ti]-{v}·(k=2)	1	118.8
+suffix	·talement	3	·talement(k=3)	1	118.6
+suffix	·[bi|llec|nac|pé|ri|tinc|trac|ven]tuel	2	·[bi|llec|nac|pé|ri|tinc|trac|ven]tuel(k=2)	1	118.4
+suffix	·[co|do|fo|gno|go|lo|no|plo|tau|to|vo]rant	2	·[co|do|fo|gno|go|lo|no|plo|tau|to|vo]rant(k=2)	1	118.2
+suffix	pé	1	pé(k=1) | ·[ca|car|ccu|ci|co|cou|cul|lou|na|no|o|qui|ssi|ti|ty]pé(k=2)	2	118.1
+suffix	·[bli|clé|ffray|loy|pay|pli|ppuy|pri|stru|tri|voy]és	2	·[bli|clé|ffray|loy|pay|pli|ppuy|pri|stru|tri|voy]és(k=2)	1	117.9
+suffix	·rection	2	·rection(k=2)	1	117.9
+suffix	deur	1	deur(k=1) | ·[bar|bor|ca|ccor|far|fon|la|man|mar|mer|mman|na|nau|pan|par|pon|pu|rau|ssa|ven]-{f@,t@}deur(k=2)	2	117.8
+prefix	ro	1	ro(k=1)	1	117.8
+prefix	tra[la|va|ve|ver]-{ka}·	2	tra[la|va|ve|ver]-{ka}·(k=2)	1	117.8
+suffix	reur	1	reur(k=1) | ·[bou|clai|co|cou|cu|lu|pa|pe|pé|ro|ssu|su|vo|xplo]reur(k=2)	2	117.8
+suffix	·galement	3	·galement(k=3)	1	117.6
+suffix	·[dé|lé|ré|té]o	2	·[dé|lé|ré|té]o(k=2)	1	117.3
+suffix	·[co|go|lo|mo|pho|ro|to]nie	2	·[co|go|lo|mo|pho|ro|to]nie(k=2)	1	117.2
+suffix	·[jec|rec|rrec]tement	3	·[jec|rec|rrec]tement(k=3)	1	117.1
+suffix	·[cho|co|cro|do|dro|ffo|fo|go|lo|mo|po|ro|rro|so|sso|to|tro|vro|ço]perie	3	·[cho|co|cro|do|dro|ffo|fo|go|lo|mo|po|ro|rro|so|sso|to|tro|vro|ço]perie(k=3)	1	116.9
+suffix	·[di|gi|li|mi|pi|si|vi|xci]-{b,s}tation	3	·[di|gi|li|mi|pi|si|vi|xci]-{b,s}tation(k=3)	1	116.9
+suffix	cé	1	cé(k=1)	1	116.7
+suffix	·[ca|po|so|tu]rel	2	·[ca|po|so|tu]rel(k=2)	1	116.6
+prefix	ais·	2	ais·(k=2)	1	116.5
+suffix	·[chi|di|gi|gis|gri|gé|i|llé|lo|pé|ri|sci|sin|ti|to|trou|tté|ves|é]-{ky}rature	3	·[chi|di|gi|gis|gri|gé|i|llé|lo|pé|ri|sci|sin|ti|to|trou|tté|ves|é]-{ky}rature(k=3)	1	116.4
+prefix	compa·	2	compa·(k=2)	1	116.4
+prefix	mae·	2	mae·(k=2)	1	116.0
+suffix	·trement	2	·trement(k=2)	1	115.9
+suffix	é	1	é(k=1) | ·[bli|clé|ffray|loy|pay|pli|ppuy|pri|stru|tri|voy]és(k=2)	2	115.6
+prefix	exa·	2	exa·(k=2)	1	115.5
+suffix	nnier	1	nnier(k=1) | ·[bo|co|do|dro|ffo|fo|geo|go|lo|no|rro|so|sso|to|tro|vo|ço]nniers(k=2)	2	115.5
+suffix	tuel	1	tuel(k=1) | ·[bi|llec|nac|pé|ri|tinc|trac|ven]tuel(k=2)	2	115.4
+prefix	atta	2	atta(k=2)	1	114.9
+suffix	·lisation	3	·lisation(k=3) | ·[a|ba|bi|bo|ca|cia|cra|cu|dia|ga|gé|ma|na|nna|ra|ri|ria|ssi|sua|ta|ti|tia|tra|tua|vi]-{Na}lisation(k=4)	2	114.9
+prefix	déEs·	2	déEs·(k=2)	1	114.9
+suffix	·[bi|ci|di|ffi|fi|mi|ni|ri|si|ti|tri|vi|xci]teur	2	·[bi|ci|di|ffi|fi|mi|ni|ri|si|ti|tri|vi|xci]teur(k=2)	1	114.8
+suffix	·[cho|co|cro|do|dro|ffo|fo|go|lo|mo|po|ro|rro|so|sso|to|vro|ço]perie	3	·[cho|co|cro|do|dro|ffo|fo|go|lo|mo|po|ro|rro|so|sso|to|vro|ço]perie(k=3)	1	114.8
+suffix	·[mi|sti|ti|tri|ttri]tution	3	·[mi|sti|ti|tri|ttri]tution(k=3)	1	114.6
+suffix	lisation	3	lisation(k=3) | ·[a|ba|bi|bo|ca|cia|cra|cu|cuo|dia|ga|gé|ma|na|nna|ra|ri|ria|ssi|sua|ta|ti|tia|tra|tua|vi|vé]-{Na}lisation(k=4)	2	114.4
+suffix	·[bu|cu|du|fu|gu|llu|mu|nnu|nu|pu|su|tu]laire	2	·[bu|cu|du|fu|gu|llu|mu|nnu|nu|pu|su|tu]laire(k=2)	1	114.2
+prefix	fi	1	fi(k=1)	1	114.2
+prefix	trans[bor|for|por]·	2	trans[bor|for|por]·(k=2)	1	113.9
+suffix	·[cro|cré|for|go|llo|lé|mis|mo|ni|nig|no|né|plo|reau|ro|so|tas|thé|tis|to|té]matique	3	·[cro|cré|for|go|llo|lé|mis|mo|ni|nig|no|né|plo|reau|ro|so|tas|thé|tis|to|té]matique(k=3)	1	113.5
+suffix	·[gio|go|mo|o|ro|tio|to|tom|tro]nale	2	·[gio|go|mo|o|ro|tio|to|tom|tro]nale(k=2)	1	113.3
+suffix	·[a|bi|bé|ca|cia|coo|da|dar|de|dua|fu|ga|gi|la|lo|lé|ma|mé|na|ner|nna|né|phi|pro|ra|rar|ri|rro|sep|sla|so|ssu|ta|teu|ti|tia|to|té|vi|vo]lisé	3	·[a|bi|bé|ca|cia|coo|da|dar|de|dua|fu|ga|gi|la|lo|lé|ma|mé|na|ner|nna|né|phi|pro|ra|rar|ri|rro|sep|sla|so|ssu|ta|teu|ti|tia|to|té|vi|vo]lisé(k=3)	1	113.3
+suffix	·cilement	3	·cilement(k=3)	1	113.2
+suffix	·[bor|fen|gar|mi|mman|mo|non|son]dable	2	·[bor|fen|gar|mi|mman|mo|non|son]dable(k=2)	1	113.1
+prefix	déli	2	déli(k=2)	1	113.0
+suffix	·[ce|tre]voir	2	·[ce|tre]voir(k=2)	1	112.7
+suffix	·[ca|car|ccu|ci|co|cou|cul|lou|na|no|o|qui|ssi|ti|ty]pé	2	·[ca|car|ccu|ci|co|cou|cul|lou|na|no|o|qui|ssi|ti|ty]pé(k=2)	1	112.6
+prefix	consi[dé|gna|gne|toy]·	3	consi[dé|gna|gne|toy]·(k=3)	1	112.6
+prefix	o	1	o(k=1)	1	112.6
+prefix	proi·	2	proi·(k=2)	1	112.5
+suffix	·[cau|mmo|mo|vo]tion	2	·[cau|mmo|mo|vo]tion(k=2)	1	112.5
+prefix	jo	1	jo(k=1)	1	112.4
+suffix	·itaire	2	·itaire(k=2) | ·[bli|ca|ci|co|cu|fi|jo|li|lli|llé|ma|mman|mmu|no|o|pho|ra|ri|ré|ta|te|to|ver]-{po}sitaire(k=3)	2	112.1
+prefix	dée·	2	dée·(k=2)	1	112.0
+suffix	·[bor|ccor|for|gor|nor|por|vor]tement	3	·[bor|ccor|for|gor|nor|por|vor]tement(k=3)	1	112.0
+suffix	lette	1	lette(k=1)	1	111.7
+suffix	·[gré|llé|mé|vé]able	2	·[gré|llé|mé|vé]able(k=2)	1	111.2
+prefix	consi[dé|gna|gne|ma|nan|ne|toy]-{gy}·	3	consi[dé|gna|gne|ma|nan|ne|toy]-{gy}·(k=3)	1	110.8
+suffix	·inal	2	·inal(k=2) | ·[bi|bli|di|do|no|ri|tes|tu]ginal(k=3)	2	110.7
+suffix	·cevoir	2	·cevoir(k=2)	1	110.7
+suffix	·[au|blan|ble|bo|cu|cui|dan|fan|ffron|ffé|gen|ja|jou|la|lan|lle|lou|men|mis|ne|nis|nne|nnè|nu|pe|pia|pis|pè|que|què|ra|ris|san|sen|ssu|tis]terie	3	·[au|blan|ble|bo|cu|cui|dan|fan|ffron|ffé|gen|ja|jou|la|lan|lle|lou|men|mis|ne|nis|nne|nnè|nu|pe|pia|pis|pè|que|què|ra|ris|san|sen|ssu|tis]terie(k=3)	1	110.6
+suffix	gique	1	gique(k=1) | ·[go|la|ller|llo|llur|lo|ner|plé|rra|rur|tal|thar|tur|té|vral|xal]gique(k=2)	2	110.6
+suffix	chement	2	chement(k=2)	1	110.3
+suffix	·vision	2	·vision(k=2)	1	110.1
+suffix	·ffication	3	·ffication(k=3)	1	109.9
+suffix	ssaire	1	ssaire(k=1)	1	109.6
+prefix	ree·	2	ree·(k=2)	1	109.4
+suffix	·[den|gen|len|men|nen|ner|quen|ren|rren|ssen|stan|ten]tiel	2	·[den|gen|len|men|nen|ner|quen|ren|rren|ssen|stan|ten]tiel(k=2)	1	109.1
+suffix	·[au|blan|bo|cu|cui|dan|fan|ffle|fflè|ffron|ffé|gen|ja|jou|la|lan|lle|lou|men|mis|ne|nis|nne|nnè|nu|pe|pia|pis|pè|que|què|ra|ris|rro|san|sen|ssu|tis]terie	3	·[au|blan|bo|cu|cui|dan|fan|ffle|fflè|ffron|ffé|gen|ja|jou|la|lan|lle|lou|men|mis|ne|nis|nne|nnè|nu|pe|pia|pis|pè|que|què|ra|ris|rro|san|sen|ssu|tis]terie(k=3)	1	108.9
+suffix	·[den|gen|len|men|nen|quen|ren|rren|ssen|stan|ten]tiel	2	·[den|gen|len|men|nen|quen|ren|rren|ssen|stan|ten]tiel(k=2)	1	108.9
+prefix	rai·	2	rai·(k=2) | rapi[bo|boi|de|di|fie|me|ta]·(k=3)	2	108.8
+prefix	sai·	2	sai·(k=2)	1	108.8
+prefix	trom	1	trom(k=1)	1	108.6
+suffix	truction	2	truction(k=2)	1	108.5
+suffix	·[ci|co|di|dio|do|gro|lli|llo|lo|lé|mo|nio|no|o|pho|po|ra|re|ri|ro|se|si|sio|ta|ti|to|tro|vio|xi|zo]mètres	2	·[ci|co|di|dio|do|gro|lli|llo|lo|lé|mo|nio|no|o|pho|po|ra|re|ri|ro|se|si|sio|ta|ti|to|tro|vio|xi|zo]mètres(k=2)	1	108.5
+suffix	·tructions	2	·tructions(k=2)	1	108.4
+suffix	·thination	3	·thination(k=3)	1	108.3
+prefix	dispo[ce|cieu|di|dri|li|por|rai|raî|se|si|te|ti]·	3	dispo[ce|cieu|di|dri|li|por|rai|raî|se|si|te|ti]·(k=3)	1	108.2
+prefix	télé[co|pho]·	3	télé[co|pho]·(k=3)	1	107.7
+suffix	·[cen|ches|fil|llus|mons|nes|nis|né|pé|ques|ven|xfil]tration	3	·[cen|ches|fil|llus|mons|nes|nis|né|pé|ques|ven|xfil]tration(k=3)	1	107.5
+suffix	·orant	2	·orant(k=2)	1	107.2
+suffix	·[fec|jec|rec|rrec]tement	3	·[fec|jec|rec|rrec]tement(k=3)	1	107.1
+prefix	sur[bai|mè|pre|vei|vê]·	2	sur[bai|mè|pre|vei|vê]·(k=2)	1	107.0
+suffix	gent	1	gent(k=1) | ·[dul|gli|lli|mer|ter|tin|tre|ver]gent(k=2)	2	107.0
+suffix	·aner	2	·aner(k=2)	1	106.8
+prefix	re@·	2	re@·(k=2)	1	106.8
+suffix	·[go|la|ller|llo|llur|lo|ner|plé|rra|rur|tal|thar|tur|té|vral|xal]gique	2	·[go|la|ller|llo|llur|lo|ner|plé|rra|rur|tal|thar|tur|té|vral|xal]gique(k=2)	1	106.7
+suffix	·matique	2	·matique(k=2) | ·[for|go|lé|mis|nig|né|plo|ro|so|thé|to|té]matique(k=3)	2	106.6
+suffix	rel	1	rel(k=1) | ·[ca|po|so|tu]rel(k=2)	2	106.6
+prefix	inco·	2	inco·(k=2)	1	106.5
+prefix	ma[chi|cu|la|li|me|na|que|qui|ri|te|thé|ti|tra|ço]·	2	ma[chi|cu|la|li|me|na|que|qui|ri|te|thé|ti|tra|ço]·(k=2)	1	106.3
+prefix	cal	1	cal(k=1)	1	106.2
+suffix	rée	1	rée(k=1)	1	106.1
+suffix	rateur	2	rateur(k=2)	1	105.9
+suffix	·vainements	3	·vainements(k=3)	1	105.6
+prefix	pla	1	pla(k=1)	1	105.6
+suffix	·[bli|ci|di|gi|i|li|si|ti|vi]déré	3	·[bli|ci|di|gi|i|li|si|ti|vi]déré(k=3)	1	105.5
+suffix	·[chi|di|ffi|fi|gi|li|mi|ni|pi|pri|qui|ri|si|ti]llerie	3	·[chi|di|ffi|fi|gi|li|mi|ni|pi|pri|qui|ri|si|ti]llerie(k=3)	1	105.5
+suffix	tration	2	tration(k=2) | ·[cen|ches|fil|llus|mons|nes|nis|né|pé|ques|ven|xfil]tration(k=3)	2	105.3
+suffix	·[cen|ches|fil|llus|mons|nis|né]tration	3	·[cen|ches|fil|llus|mons|nis|né]tration(k=3)	1	105.2
+suffix	·[pé|xpé|é]tition	3	·[pé|xpé|é]tition(k=3)	1	105.1
+suffix	·[ca|da|ga|gi|go|ma|mi|na|né|pa|si|ta|ti|tra|tu|é]lien	2	·[ca|da|ga|gi|go|ma|mi|na|né|pa|si|ta|ti|tra|tu|é]lien(k=2)	1	105.0
+suffix	·Ektion	2	·Ektion(k=2)	1	104.7
+suffix	·titude	2	·titude(k=2)	1	104.6
+prefix	pai·	2	pai·(k=2)	1	104.5
+suffix	·tivité	3	·tivité(k=3)	1	104.2
+prefix	é[chi|crie|di|li|mi|pi|ti|tri|vi]·	2	é[chi|crie|di|li|mi|pi|ti|tri|vi]·(k=2)	1	103.9
+prefix	retrou[pe|to|ve|vri]-{s°}·	3	retrou[pe|to|ve|vri]-{s°}·(k=3)	1	103.8
+prefix	homo[bio|bron|cen|che|co|con|cri|cré|cui|des|di|dé|fi|ge|ges|gra|gui|gé|li|lo|mi|mo|mu|mé|ne|pi|plas|por|pro|pu|ra|rou|ré|sa|se|su|sub|sug|sur|vi|zy|é]-{Ri}·	3	homo[bio|bron|cen|che|co|con|cri|cré|cui|des|di|dé|fi|ge|ges|gra|gui|gé|li|lo|mi|mo|mu|mé|ne|pi|plas|por|pro|pu|ra|rou|ré|sa|se|su|sub|sug|sur|vi|zy|é]-{Ri}·(k=3)	1	103.8
+suffix	ent	1	ent(k=1)	1	103.7
+suffix	tiel	1	tiel(k=1) | ·[den|gen|len|men|nen|ner|quen|ren|rren|ssen|stan|ten]tiel(k=2)	2	103.6
+suffix	dable	1	dable(k=1) | ·[bor|fen|gar|mi|mman|mo|non|son]dable(k=2)	2	103.5
+suffix	·[due|nnue|nue|sue|tue|xtue|xue]llement	3	·[due|nnue|nue|sue|tue|xtue|xue]llement(k=3)	1	103.4
+suffix	·Onnement	3	·Onnement(k=3)	1	103.3
+suffix	val	1	val(k=1)	1	103.3
+prefix	démé[a|da|de|ga|gle|gré|gu|mi|na|né|ri|ssu|y]·	3	démé[a|da|de|ga|gle|gré|gu|mi|na|né|ri|ssu|y]·(k=3)	1	103.3
+suffix	·vainements	3	·vainements(k=3)	1	102.8
+suffix	·tration	2	·tration(k=2) | ·[cen|ches|fil|llus|mons|nis|né]tration(k=3)	2	102.7
+suffix	·[bi|bli|li|lli|ni|ti|tri|ï]cité	3	·[bi|bli|li|lli|ni|ti|tri|ï]cité(k=3)	1	102.7
+prefix	répé[chi|cri|di|li|qui|ti]·	3	répé[chi|cri|di|li|qui|ti]·(k=3)	1	102.6
+prefix	pé	1	pé(k=1)	1	102.3
+suffix	·[dro|llo|po|so|sso|tro|vo]-{z}lution	3	·[dro|llo|po|so|sso|tro|vo]-{z}lution(k=3)	1	102.3
+prefix	for	1	for(k=1)	1	102.1
+suffix	·[bo|bu|ca|co|coo|cry|drau|dé|go|gé|jo|mé|ny|o|pha|phi|si|tho|thy|to|tu|té|vé|é]lique	2	·[bo|bu|ca|co|coo|cry|drau|dé|go|gé|jo|mé|ny|o|pha|phi|si|tho|thy|to|tu|té|vé|é]lique(k=2)	1	102.1
+suffix	·niquement	3	·niquement(k=3)	1	102.1
+prefix	rem[ba|bar|bo|bou|bru|me|mè|pa|pi|pla|pli|plu|po|por]-{buR}·	2	rem[ba|bar|bo|bou|bru|me|mè|pa|pi|pla|pli|plu|po|por]-{buR}·(k=2)	1	102.1
+suffix	·[blé|dio|dra|for|go|lé|mis|nig|né|phrag|plo|ris|ro|so|ssé|thé|to|té]matique	3	·[blé|dio|dra|for|go|lé|mis|nig|né|phrag|plo|ris|ro|so|ssé|thé|to|té]matique(k=3)	1	102.0
+suffix	·cilement	3	·cilement(k=3)	1	101.9
+suffix	terie	2	terie(k=2) | ·[au|blan|bo|cu|cui|dan|fan|ffle|fflè|ffron|ffé|gen|ja|jou|la|lan|lle|lou|men|mis|ne|nis|nne|nnè|nu|pe|pia|pis|pè|que|què|ra|ris|rro|san|sen|ssu|tis]terie(k=3)	2	101.9
+suffix	·gination	3	·gination(k=3)	1	101.8
+prefix	a[bo|cho|co|do|mo|po|so|to]·	2	a[bo|cho|co|do|mo|po|so|to]·(k=2)	1	101.8
+prefix	télé[ci|di|gui|ri|vi]·	3	télé[ci|di|gui|ri|vi]·(k=3)	1	101.8
+suffix	·[domp|ffron|fron|lon|mon]té	2	·[domp|ffron|fron|lon|mon]té(k=2)	1	101.7
+suffix	·[bi|bri|ci|ffi|gi|ni|pi|ri|ti|vi]lement	3	·[bi|bri|ci|ffi|gi|ni|pi|ri|ti|vi]lement(k=3)	1	101.6
+suffix	·[chi|di|ffi|fi|gi|li|mi|ni|pi|pri|qui|si|ti]llerie	3	·[chi|di|ffi|fi|gi|li|mi|ni|pi|pri|qui|si|ti]llerie(k=3)	1	101.5
+prefix	an	1	an(k=1)	1	101.4
+suffix	gé	1	gé(k=1)	1	101.4
+suffix	·[a|bbi|bi|bo|ca|chi|chro|clo|co|do|dé|fo|ga|go|gy|gé|i|ka|li|lli|llé|ma|mi|mo|mé|no|o|pa|pho|phré|ra|rai|ro|so|ta|tech|thé|to|tro|va|vio]-{Zje}nique	2	·[a|bbi|bi|bo|ca|chi|chro|clo|co|do|dé|fo|ga|go|gy|gé|i|ka|li|lli|llé|ma|mi|mo|mé|no|o|pa|pho|phré|ra|rai|ro|so|ta|tech|thé|to|tro|va|vio]-{Zje}nique(k=2)	1	101.2
+suffix	·[so|sso|tro|vo]-{z}lution	3	·[so|sso|tro|vo]-{z}lution(k=3)	1	101.1
+prefix	amy·	2	amy·(k=2)	1	101.0
+prefix	li	1	li(k=1)	1	100.7
+suffix	mètre	1	mètre(k=1) | ·[ci|co|di|dio|do|gro|lli|llo|lo|lé|mo|nio|no|o|pho|po|ra|re|ri|ro|se|si|sio|ta|ti|to|tro|vio|xi|zo]mètres(k=2)	2	100.4
+suffix	ssé	1	ssé(k=1)	1	100.4
+prefix	réa[ffi|gi|li|ni|pi|ssi]·	3	réa[ffi|gi|li|ni|pi|ssi]·(k=3)	1	100.1
+suffix	qué	1	qué(k=1) | ·[bi|bus|di|ffus|lo|ni|nia|pli|ppli|ra|slo|ti|tra|tri|vo|xi|xpli|ï]-{fis}qué(k=2)	2	100.0
+suffix	·[po|so|sso|vo]-{zo}lution	3	·[po|so|sso|vo]-{zo}lution(k=3)	1	100.0
+suffix	·[so|sso|vo]-{z}lution	3	·[so|sso|vo]-{z}lution(k=3)	1	99.9
+suffix	·[bi|fi|mi|qui|ri|rri|vi|xci]table	2	·[bi|fi|mi|qui|ri|rri|vi|xci]table(k=2)	1	99.7
+suffix	·[bli|di|fi|gi|li|si|ti]bataire	3	·[bli|di|fi|gi|li|si|ti]bataire(k=3)	1	99.6
+suffix	·[cons|lé|né|ri|ré|ter|tra]diction	3	·[cons|lé|né|ri|ré|ter|tra]diction(k=3)	1	99.5
+suffix	·[lé|né|ri|ter|tra]diction	3	·[lé|né|ri|ter|tra]diction(k=3)	1	99.4
+suffix	·niquement	3	·niquement(k=3)	1	99.4
+prefix	transOR·	2	transOR·(k=2)	1	99.4
+prefix	télé[ci|di|gui|vi]·	3	télé[ci|di|gui|vi]·(k=3)	1	99.2
+suffix	cial	1	cial(k=1)	1	99.1
+suffix	lution	2	lution(k=2) | ·[so|sso|vo]-{z}lution(k=3)	2	99.0
+prefix	in[com|con|domp|fon]·	2	in[com|con|domp|fon]·(k=2)	1	98.8
+suffix	loir	1	loir(k=1)	1	98.7
+suffix	·[mi|pi|spi|xpi]ration	3	·[mi|pi|spi|xpi]ration(k=3)	1	98.3
+suffix	·[mi|pi|xpi]ration	3	·[mi|pi|xpi]ration(k=3)	1	98.2
+suffix	·[bio|cho|co|dio|gio|lli|lo|ly|lé|mo|no|o|per|po|pro|rio|ro|ré|tho|to|tro]sophie	3	·[bio|cho|co|dio|gio|lli|lo|ly|lé|mo|no|o|per|po|pro|rio|ro|ré|tho|to|tro]sophie(k=3)	1	98.2
+suffix	·[mi|ni|pi|ti]culier	3	·[mi|ni|pi|ti]culier(k=3)	1	98.1
+suffix	·[ci|cry|ni|si|ti|xi]mal	2	·[ci|cry|ni|si|ti|xi]mal(k=2)	1	97.7
+suffix	tière	1	tière(k=1) | ·[ba|be|bo|fe|lle|ma|me|mi|nê|rou|rre|sso|sui]tière(k=2)	2	97.7
+prefix	équi	2	équi(k=2)	1	97.5
+prefix	télévi·	3	télévi·(k=3)	1	97.5
+prefix	expli	2	expli(k=2)	1	97.4
+suffix	·[bri|com|pri|ter|to|tra]été	3	·[bri|com|pri|ter|to|tra]été(k=3)	1	97.4
+prefix	po[li|mé|po|ta|te|é]·	2	po[li|mé|po|ta|te|é]·(k=2)	1	97.4
+suffix	lien	1	lien(k=1) | ·[ca|da|ga|gi|go|ma|mi|na|né|pa|si|ta|ti|tra|tu|é]lien(k=2)	2	97.3
+prefix	con[vain|vien|ïn]·	2	con[vain|vien|ïn]·(k=2)	1	97.0
+prefix	ac	1	ac(k=1)	1	97.0
+suffix	mé	1	mé(k=1)	1	96.9
+suffix	pect	1	pect(k=1)	1	96.9
+prefix	incom·	2	incom·(k=2)	1	96.8
+suffix	·manité	3	·manité(k=3)	1	96.5
+suffix	·[ci|fi|si|ssi|vi]dence	2	·[ci|fi|si|ssi|vi]dence(k=2)	1	96.5
+suffix	·[ca|ci|fi|pru|si|ssi|vi]-{py}dence	2	·[ca|ci|fi|pru|si|ssi|vi]-{py}dence(k=2)	1	96.5
+suffix	·[bé|du|dé|gno|gu|gé|lé|pé|ssu|vé]-{ti}rance	2	·[bé|du|dé|gno|gu|gé|lé|pé|ssu|vé]-{ti}rance(k=2)	1	96.4
+suffix	·tité	2	·tité(k=2)	1	96.3
+suffix	dence	1	dence(k=1) | ·[ci|fi|si|ssi|vi]dence(k=2)	2	96.1
+prefix	in[ce|clé|cré|dé|flé|fré|fé|gué|gé|quié|sai|sé|vé]·	2	in[ce|clé|cré|dé|flé|fré|fé|gué|gé|quié|sai|sé|vé]·(k=2)	1	96.1
+suffix	cieux	1	cieux(k=1) | ·[cen|da|dan|di|gra|len|li|lla|pi|pri|ren|ri|scien|sou|ten|tu]-{fi}cieux(k=2)	2	95.9
+prefix	or	1	or(k=1)	1	95.9
+prefix	profi	2	profi(k=2)	1	95.9
+suffix	·piration	3	·piration(k=3)	1	95.8
+suffix	·[by|drop|dul|gis|lé|mip|nas|nis|rac|re|rop|sen|thop|tis]tère	2	·[by|drop|dul|gis|lé|mip|nas|nis|rac|re|rop|sen|thop|tis]tère(k=2)	1	95.8
+suffix	·ylation	3	·ylation(k=3)	1	95.8
+suffix	·tairrement	3	·tairrement(k=3)	1	95.7
+prefix	repré[co|cou|fi|ga|go|lé|ma|pi|po|sen]·	3	repré[co|cou|fi|ga|go|lé|ma|pi|po|sen]·(k=3)	1	95.5
+suffix	·[gra|mor|so|tro]phie	2	·[gra|mor|so|tro]phie(k=2) | ·[bio|cho|co|dio|gio|lli|lo|ly|lé|mo|no|o|per|po|pro|rio|ro|ré|tho|to|tro]sophie(k=3)	2	95.4
+suffix	lon	1	lon(k=1) | ·[ath|fa|ga|me|que|qui|ta]-{S°}lon(k=2)	2	95.3
+suffix	·[ci|di|gi|mi|ri|ti|tri]nal	2	·[ci|di|gi|mi|ri|ti|tri]nal(k=2)	1	95.1
+prefix	dépo·	2	dépo·(k=2)	1	95.1
+suffix	·nalité	3	·nalité(k=3)	1	95.1
+suffix	·[do|lio|mo|no|o|plo|po|vo]rable	2	·[do|lio|mo|no|o|plo|po|vo]rable(k=2)	1	95.1
+suffix	·tager	2	·tager(k=2)	1	94.7
+suffix	·tination	3	·tination(k=3)	1	94.3
+prefix	aER·	2	aER·(k=2)	1	94.2
+suffix	·eté	2	·eté(k=2) | ·[bri|com|pri|ter|to|tra]été(k=3)	2	94.2
+prefix	esca	2	esca(k=2)	1	94.1
+prefix	rapi[bo|boi|de|di|fie|me|ta]·	3	rapi[bo|boi|de|di|fie|me|ta]·(k=3)	1	94.0
+suffix	·piration	3	·piration(k=3)	1	94.0
+suffix	·[bli|ca|ci|co|cu|fi|jo|li|lli|llé|ma|mman|mmu|no|o|pho|ra|ri|ré|ta|te|to|ver]-{po}sitaire	3	·[bli|ca|ci|co|cu|fi|jo|li|lli|llé|ma|mman|mmu|no|o|pho|ra|ri|ré|ta|te|to|ver]-{po}sitaire(k=3)	1	94.0
+prefix	expli[ca|ci|lo|me|te]-{Ra}·	3	expli[ca|ci|lo|me|te]-{Ra}·(k=3)	1	93.9
+suffix	sseau	1	sseau(k=1)	1	93.9
+prefix	inven	2	inven(k=2)	1	93.9
+suffix	diction	2	diction(k=2) | ·[lé|né|ri|ter|tra]diction(k=3)	2	93.5
+prefix	coy·	2	coy·(k=2)	1	93.5
+suffix	·ternel	2	·ternel(k=2)	1	93.4
+suffix	·[ac|ffrac|nac|rac|sac|trac|ttrac]tion	2	·[ac|ffrac|nac|rac|sac|trac|ttrac]tion(k=2)	1	93.4
+prefix	dé[bon|bron|com|con|fon|gon|mon|nom|on|plom|trom|tron]·	2	dé[bon|bron|com|con|fon|gon|mon|nom|on|plom|trom|tron]·(k=2)	1	93.4
+suffix	·[ci|co|cri|dio|dri|dro|gno|lhar|lo|ly|lé|mo|no|o|pho|pi|ras|ro|ré|so|ta|tec|tho|to|zo]monie	3	·[ci|co|cri|dio|dri|dro|gno|lhar|lo|ly|lé|mo|no|o|pho|pi|ras|ro|ré|so|ta|tec|tho|to|zo]monie(k=3)	1	93.2
+suffix	·[den|man|men|mmen|pen|ven]taire	2	·[den|man|men|mmen|pen|ven]taire(k=2)	1	93.2
+prefix	réy·	2	réy·(k=2)	1	93.1
+suffix	·[bo|ca|clo|co|coo|cro|gly|go|li|ly|no|o|po|ro|sio|ti|to|tro|té|xi]-{na,pi}démie	3	·[bo|ca|clo|co|coo|cro|gly|go|li|ly|no|o|po|ro|sio|ti|to|tro|té|xi]-{na,pi}démie(k=3)	1	93.1
+prefix	commu	2	commu(k=2)	1	93.0
+suffix	·mité	2	·mité(k=2)	1	93.0
+suffix	·[bo|co|coo|drau|go|jo|tho|to]lique	2	·[bo|co|coo|drau|go|jo|tho|to]lique(k=2)	1	92.9
+suffix	·[ci|cry|ni|si|ti|tis|xi]-{nOR}mal	2	·[ci|cry|ni|si|ti|tis|xi]-{nOR}mal(k=2)	1	92.8
+suffix	·°nu	2	·°nu(k=2)	1	92.7
+suffix	·niquement	3	·niquement(k=3)	1	92.6
+suffix	·[an|blan|dan|fan|gen|lan|men|mman|pen|ran|san|sen|ïen]terie	3	·[an|blan|dan|fan|gen|lan|men|mman|pen|ran|san|sen|ïen]terie(k=3)	1	92.6
+prefix	ee·	2	ee·(k=2)	1	92.6
+suffix	né	1	né(k=1)	1	92.5
+suffix	·°té	2	·°té(k=2)	1	92.4
+suffix	·orer	2	·orer(k=2)	1	92.4
+suffix	lique	1	lique(k=1) | ·[bo|bu|ca|co|coo|cry|drau|dé|go|gé|jo|mé|ny|o|pha|phi|si|tho|thy|to|tu|té|vé|é]lique(k=2)	2	92.3
+suffix	·[for|go|lé|mis|nig|né|plo|ro|so|thé|to|té]matique	3	·[for|go|lé|mis|nig|né|plo|ro|so|thé|to|té]matique(k=3)	1	92.1
+prefix	respec	2	respec(k=2)	1	91.9
+suffix	phie	1	phie(k=1) | ·[bio|cho|co|dio|gio|lli|lo|ly|lé|mo|no|o|per|po|pro|rio|ro|ré|tho|to|tro]sophie(k=3)	2	91.8
+suffix	·[bé|cré|dé|gé|lé|mé|né|pe|phé|ppré|pré|pé|té|vé]rateur	3	·[bé|cré|dé|gé|lé|mé|né|pe|phé|ppré|pré|pé|té|vé]rateur(k=3)	1	91.7
+prefix	réa[ffi|gi|li|ni|ssi]·	3	réa[ffi|gi|li|ni|ssi]·(k=3)	1	91.6
+prefix	cono·	2	cono·(k=2)	1	91.5
+suffix	·[cu|di|e|gi|gis|llé|lo|men|ppo|pri|pé|ri|tté]rature	3	·[cu|di|e|gi|gis|llé|lo|men|ppo|pri|pé|ri|tté]rature(k=3)	1	91.5
+suffix	·[ju|lo|lé|ti|tin]gué	2	·[ju|lo|lé|ti|tin]gué(k=2)	1	91.5
+suffix	·[cu|di|gi|gis|llé|lo|pé|ri|tté]rature	3	·[cu|di|gi|gis|llé|lo|pé|ri|tté]rature(k=3)	1	91.4
+suffix	dit	1	dit(k=1)	1	91.3
+suffix	·cidéré	3	·cidéré(k=3)	1	91.0
+suffix	son	1	son(k=1)	1	90.6
+suffix	gué	1	gué(k=1) | ·[ju|lo|lé|ti|tin]gué(k=2)	2	90.5
+suffix	·[ce|fe|gre|pre|xpre]ssion	2	·[ce|fe|gre|pre|xpre]ssion(k=2)	1	90.4
+suffix	·[bi|bli|di|do|no|ri|tes|tu]ginal	3	·[bi|bli|di|do|no|ri|tes|tu]ginal(k=3)	1	90.4
+suffix	·ision	2	·ision(k=2)	1	90.3
+prefix	mo	1	mo(k=1)	1	90.3
+suffix	·[bé|dé|fé|gé|lé|né|pé|sé|té]rable	2	·[bé|dé|fé|gé|lé|né|pé|sé|té]rable(k=2)	1	90.3
+prefix	lie·	2	lie·(k=2)	1	90.1
+suffix	·[cri|di|lé|né|ri|ti]fice	2	·[cri|di|lé|né|ri|ti]fice(k=2)	1	90.0
+prefix	assu	2	assu(k=2)	1	89.9
+suffix	·[dul|gli|lli|mer|ter|tin|tre|ver]gent	2	·[dul|gli|lli|mer|ter|tin|tre|ver]gent(k=2)	1	88.9
+suffix	rance	1	rance(k=1) | ·[bé|du|dé|gno|gu|gé|lé|pé|ssu|vé]-{ti}rance(k=2)	2	88.8
+prefix	remon	2	remon(k=2)	1	88.6
+suffix	·@tion	2	·@tion(k=2)	1	88.4
+prefix	réa[bo|ccou|che|dap|ffec|ffi|ffir|gen|gi|li|mor|mé|ni|per|ppe|ppre|ppren|ppro|rran|ssem|ssi|ssor|ssu|tta]-{Zys,pa}·	3	réa[bo|ccou|che|dap|ffec|ffi|ffir|gen|gi|li|mor|mé|ni|per|ppe|ppre|ppren|ppro|rran|ssem|ssi|ssor|ssu|tta]-{Zys,pa}·(k=3)	1	88.4
+suffix	·[cas|gas|las|nas|ras|tas]tique	2	·[cas|gas|las|nas|ras|tas]tique(k=2)	1	88.2
+suffix	sine	1	sine(k=1)	1	88.1
+suffix	sé	1	sé(k=1)	1	88.0
+suffix	·[bar|bor|ca|ccor|far|fon|la|man|mar|mer|mman|na|nau|pan|par|pon|pu|rau|ssa|ven]-{f@,t@}deur	2	·[bar|bor|ca|ccor|far|fon|la|man|mar|mer|mman|na|nau|pan|par|pon|pu|rau|ssa|ven]-{f@,t@}deur(k=2)	1	88.0
+prefix	mer[ce|cre|cu|de|dou|vei]·	2	mer[ce|cre|cu|de|dou|vei]·(k=2)	1	87.6
+prefix	poli·	2	poli·(k=2)	1	87.3
+suffix	·niquement	3	·niquement(k=3)	1	87.3
+suffix	·atif	2	·atif(k=2)	1	87.1
+suffix	·[cclu|clu|llu|tru|xclu]-{f}sion	2	·[cclu|clu|llu|tru|xclu]-{f}sion(k=2)	1	87.0
+prefix	rem[ba|boî|pa|pla]·	2	rem[ba|boî|pa|pla]·(k=2)	1	86.8
+suffix	mission	2	mission(k=2)	1	86.5
+suffix	demment	2	demment(k=2)	1	86.4
+prefix	en[cu|du|fu|glu|glue|ju|rhu|tu]·	2	en[cu|du|fu|glu|glue|ju|rhu|tu]·(k=2)	1	86.4
+suffix	pa	1	pa(k=1)	1	86.2
+prefix	héo·	2	héo·(k=2)	1	86.1
+prefix	abo[a|ba|ca|ci|cé|di|gra|li|ma|mi|né|pho|ple|pri|prie|prii|qui|vi]-{Ra}·	3	abo[a|ba|ca|ci|cé|di|gra|li|ma|mi|né|pho|ple|pri|prie|prii|qui|vi]-{Ra}·(k=3)	1	86.1
+suffix	·onie	2	·onie(k=2)	1	86.1
+suffix	·[ath|fa|ga|me|que|qui|ta]-{S°}lon	2	·[ath|fa|ga|me|que|qui|ta]-{S°}lon(k=2)	1	85.9
+prefix	cham	1	cham(k=1)	1	85.8
+suffix	·etaire	2	·etaire(k=2)	1	85.7
+suffix	·[cep|xcep]tion	2	·[cep|xcep]tion(k=2)	1	85.5
+suffix	·[bi|ci|cli|di|fi|gi|li|mi|pi|ri|rri|sci|si|ssi|vi|xci]tants	2	·[bi|ci|cli|di|fi|gi|li|mi|pi|ri|rri|sci|si|ssi|vi|xci]tants(k=2)	1	85.4
+prefix	au°·	2	au°·(k=2)	1	85.1
+prefix	poe·	2	poe·(k=2)	1	85.0
+prefix	lai°·	2	lai°·(k=2)	1	85.0
+suffix	nu	1	nu(k=1) | ·venu(k=2)	2	84.9
+suffix	·[bi|bor|ca|ci|gor|mi|mo|pi|poui|pre|qui|ri|te|ti|traî|ver|vi]neur	2	·[bi|bor|ca|ci|gor|mi|mo|pi|poui|pre|qui|ri|te|ti|traî|ver|vi]neur(k=2)	1	84.9
+suffix	·aliser	3	·aliser(k=3)	1	84.5
+prefix	té	1	té(k=1)	1	84.4
+prefix	dan	1	dan(k=1)	1	84.3
+prefix	i[ce|dé|ma|mi|ri|sa]-{zo}·	2	i[ce|dé|ma|mi|ri|sa]-{zo}·(k=2)	1	84.2
+suffix	al	1	al(k=1) | ·[ché|dri|dé|loy|né|ré]al(k=2)	2	84.1
+suffix	rage	1	rage(k=1)	1	84.0
+suffix	·[pa|qui|ssi|vi]gnol	2	·[pa|qui|ssi|vi]gnol(k=2)	1	84.0
+suffix	·mantaire	2	·mantaire(k=2)	1	84.0
+suffix	·[cu|du|mu|nnu|nu|pu|tu]lé	2	·[cu|du|mu|nnu|nu|pu|tu]lé(k=2)	1	84.0
+suffix	·[bi|ci|ffi|mi|si|ssi]lier	2	·[bi|ci|ffi|mi|si|ssi]lier(k=2)	1	83.9
+prefix	pro[con|fon|lon|non]·	2	pro[con|fon|lon|non]·(k=2)	1	83.7
+suffix	·[dduc|duc|truc]teur	2	·[dduc|duc|truc]teur(k=2)	1	83.7
+suffix	pide	1	pide(k=1)	1	83.7
+suffix	·astique	2	·astique(k=2)	1	83.6
+prefix	com[cor|for|or|por|tor]·	2	com[cor|for|or|por|tor]·(k=2)	1	83.5
+suffix	·[cen|da|dan|di|gra|len|li|lla|pi|pri|ren|ri|scien|sou|ten|tu]-{fi}cieux	2	·[cen|da|dan|di|gra|len|li|lla|pi|pri|ren|ri|scien|sou|ten|tu]-{fi}cieux(k=2)	1	83.5
+suffix	·[go|lo|o|pho]rie	2	·[go|lo|o|pho]rie(k=2)	1	83.4
+suffix	·icité	3	·icité(k=3)	1	83.1
+suffix	tiquement	3	tiquement(k=3)	1	83.0
+prefix	ou	1	ou(k=1)	1	82.5
+prefix	cau°·	2	cau°·(k=2)	1	82.4
+suffix	·ykteur	2	·ykteur(k=2)	1	82.4
+suffix	tain	1	tain(k=1)	1	82.4
+prefix	in[ca|fa|gra|joi|qua|ra|sa|tra|va]·	2	in[ca|fa|gra|joi|qua|ra|sa|tra|va]·(k=2)	1	82.3
+prefix	in[cu|du|dû|flu|flue|fu|su|tu]·	2	in[cu|du|dû|flu|flue|fu|su|tu]·(k=2)	1	82.3
+prefix	ten	1	ten(k=1)	1	82.2
+prefix	cré	1	cré(k=1)	1	82.2
+suffix	·[a|ba|bo|ca|chi|ci|der|do|ga|gié|go|lié|llé|lo|lé|ma|mi|mmu|na|ni|o|pho|pi|qui|ro|sé|ta|ter|ti|to|tu|vi]niste	2	·[a|ba|bo|ca|chi|ci|der|do|ga|gié|go|lié|llé|lo|lé|ma|mi|mmu|na|ni|o|pho|pi|qui|ro|sé|ta|ter|ti|to|tu|vi]niste(k=2)	1	82.2
+suffix	·[ffi|fi|gi|ren|tan|tri]ciel	2	·[ffi|fi|gi|ren|tan|tri]ciel(k=2)	1	82.1
+prefix	emE·	2	emE·(k=2)	1	82.0
+prefix	sue·	2	sue·(k=2)	1	81.9
+suffix	·[ffi|fi|gi|tri]ciel	2	·[ffi|fi|gi|tri]ciel(k=2)	1	81.8
+suffix	·[te|ve]nue	2	·[te|ve]nue(k=2)	1	81.8
+suffix	rade	1	rade(k=1)	1	81.7
+prefix	raa·	2	raa·(k=2)	1	81.5
+prefix	espa	2	espa(k=2)	1	81.3
+suffix	neur	1	neur(k=1) | ·[bi|bor|ca|ci|gor|mi|mo|pi|poui|pre|qui|ri|te|ti|traî|ver|vi]neur(k=2)	2	81.3
+prefix	phoo·	2	phoo·(k=2)	1	81.2
+suffix	·dduction	2	·dduction(k=2)	1	81.2
+prefix	reOl·	2	reOl·(k=2)	1	81.0
+prefix	em[bra|bê|mè|mê|pe|pei|pie|pre|pê]·	2	em[bra|bê|mè|mê|pe|pei|pie|pre|pê]·(k=2)	1	80.9
+suffix	·naliste	2	·naliste(k=2)	1	80.5
+prefix	photo	2	photo(k=2)	1	80.4
+suffix	·[bi|bus|di|ffus|lo|ni|nia|pli|ppli|ra|slo|ti|tra|tri|vo|xi|xpli|ï]-{fis}qué	2	·[bi|bus|di|ffus|lo|ni|nia|pli|ppli|ra|slo|ti|tra|tri|vo|xi|xpli|ï]-{fis}qué(k=2)	1	80.4
+prefix	na	1	na(k=1)	1	80.3
+suffix	·pidement	3	·pidement(k=3)	1	80.1
+suffix	fice	1	fice(k=1) | ·[cri|di|lé|né|ri|ti]fice(k=2)	2	80.0
+suffix	·orie	2	·orie(k=2)	1	79.8
+suffix	·[di|gli|li|lli]gent	2	·[di|gli|li|lli]gent(k=2)	1	79.7
+suffix	traire	1	traire(k=1)	1	79.6
+suffix	riste	1	riste(k=1) | ·[a|bo|cou|ffai|go|klo|le|lo|mo|mé|na|nié|quo|rrié|rro|ssoi|ta|ti|to|tu|é]ristes(k=2)	2	79.5
+prefix	prée·	2	prée·(k=2)	1	79.5
+suffix	ceau	1	ceau(k=1)	1	79.4
+suffix	nnellement	3	nnellement(k=3)	1	79.3
+suffix	·[ca|da|ga|ma|na|pa|ta|tra]lien	2	·[ca|da|ga|ma|na|pa|ta|tra]lien(k=2)	1	79.3
+suffix	port	1	port(k=1)	1	79.2
+suffix	·[cu|gu]lier	2	·[cu|gu]lier(k=2)	1	79.2
+suffix	niste	1	niste(k=1) | ·[a|ba|bo|ca|chi|ci|der|do|ga|gié|go|lié|llé|lo|lé|ma|mi|mmu|na|ni|o|pho|pi|qui|ro|sé|ta|ter|ti|to|tu|vi]niste(k=2)	2	79.1
+suffix	·[bi|ci|di|dri|gri|gui|mi|ni|pi|ppi|ri|si|tei|ti|tti|vei]-{vi}llon	2	·[bi|ci|di|dri|gri|gui|mi|ni|pi|ppi|ri|si|tei|ti|tti|vei]-{vi}llon(k=2)	1	79.0
+suffix	nnaire	1	nnaire(k=1) | ·sionnaire(k=2)	2	79.0
+suffix	·itution	3	·itution(k=3)	1	78.8
+suffix	·[cen|chia|dia|gas|lec|mé|ria|sté|xcen]trique	2	·[cen|chia|dia|gas|lec|mé|ria|sté|xcen]trique(k=2)	1	78.6
+suffix	·onnaire	2	·onnaire(k=2)	1	78.5
+prefix	cu	1	cu(k=1)	1	78.3
+suffix	naliste	2	naliste(k=2)	1	78.2
+prefix	préa·	2	préa·(k=2)	1	78.0
+suffix	·[che|le|ne]vé	2	·[che|le|ne]vé(k=2)	1	78.0
+suffix	·[loy|voy]és	2	·[loy|voy]és(k=2)	1	78.0
+suffix	·[cho|co|die|do|dro|ffo|geo|gno|llo|lo|mio|o|pa|pe|pho|pio|po|sio|so|sso|to|vo|ço]nnage	2	·[cho|co|die|do|dro|ffo|geo|gno|llo|lo|mio|o|pa|pe|pho|pio|po|sio|so|sso|to|vo|ço]nnage(k=2)	1	77.8
+suffix	·[di|fi|li|ni]cat	2	·[di|fi|li|ni]cat(k=2)	1	77.8
+suffix	·[ci|ddi|di|gi|mi|ni|si|ti|tri]tif	2	·[ci|ddi|di|gi|mi|ni|si|ti|tri]tif(k=2)	1	77.8
+suffix	·[do|e|geo|illo|llo|o|ro|so|ssio|sso|to]nnant	2	·[do|e|geo|illo|llo|o|ro|so|ssio|sso|to]nnant(k=2)	1	77.4
+prefix	infor	2	infor(k=2)	1	77.3
+suffix	gnol	1	gnol(k=1) | ·[pa|qui|ssi|vi]gnol(k=2)	2	77.3
+prefix	para	2	para(k=2)	1	77.1
+prefix	par°·	2	par°·(k=2)	1	77.1
+prefix	gé	1	gé(k=1)	1	77.0
+prefix	pa°·	2	pa°·(k=2)	1	76.9
+prefix	cir	1	cir(k=1) | cir[con|cons|cu]·(k=2)	2	76.8
+suffix	nisation	3	nisation(k=3)	1	76.8
+suffix	llon	1	llon(k=1) | ·[bi|ci|di|dri|gri|gui|mi|ni|pi|ppi|ri|si|tei|ti|tti|vei]-{vi}llon(k=2)	2	76.8
+suffix	·ifique	2	·ifique(k=2)	1	76.7
+prefix	inis·	2	inis·(k=2)	1	76.7
+suffix	·[cha|co|cre|cu|gi|su|ta|to|tu|vo]lat	2	·[cha|co|cre|cu|gi|su|ta|to|tu|vo]lat(k=2)	1	76.7
+suffix	titution	3	titution(k=3)	1	76.7
+prefix	pan	1	pan(k=1) | pan[cel|dé|ger|ta|te|thé]·(k=2)	2	76.6
+prefix	dis[co|po|pro]·	2	dis[co|po|pro]·(k=2)	1	76.2
+suffix	·[do|geo|illo|llo|o|ro|so|ssio|sso|to]nnant	2	·[do|geo|illo|llo|o|ro|so|ssio|sso|to]nnant(k=2)	1	76.2
+suffix	vision	2	vision(k=2)	1	75.9
+prefix	ré[ac|trac]·	2	ré[ac|trac]·(k=2)	1	75.9
+suffix	·mement	2	·mement(k=2)	1	75.7
+prefix	pan[cel|dé|ger|ta|te|thé]·	2	pan[cel|dé|ger|ta|te|thé]·(k=2)	1	75.5
+suffix	·[bi|di|ni|pli|ppli|ti|tri|xi|xpli|ï]qué	2	·[bi|di|ni|pli|ppli|ti|tri|xi|xpli|ï]qué(k=2)	1	75.3
+suffix	·nitions	2	·nitions(k=2)	1	75.2
+suffix	·nager	2	·nager(k=2)	1	75.2
+prefix	pré[cau|chau|co|do|mo|no|o|po|ro|so|vau|vô]·	2	pré[cau|chau|co|do|mo|no|o|po|ro|so|vau|vô]·(k=2)	1	75.2
+suffix	·cculé	2	·cculé(k=2)	1	75.1
+suffix	·[a|ba|da|go|la|li|lo|po|ra|ta|to|va]nais	2	·[a|ba|da|go|la|li|lo|po|ra|ta|to|va]nais(k=2)	1	75.1
+suffix	·erence	2	·erence(k=2)	1	75.0
+suffix	·[cho|co|do|dro|ffo|geo|gno|llo|lo|mio|o|pio|po|sio|so|sso|to|vo|ço]nnage	2	·[cho|co|do|dro|ffo|geo|gno|llo|lo|mio|o|pio|po|sio|so|sso|to|vo|ço]nnage(k=2)	1	75.0
+prefix	sais·	2	sais·(k=2)	1	74.8
+suffix	·olet	2	·olet(k=2)	1	74.6
+prefix	é[ba|ca|cha|cra|ga|ma|pa|ra|ta|va]·	2	é[ba|ca|cha|cra|ga|ma|pa|ra|ta|va]·(k=2)	1	74.5
+suffix	·[ba|ca|da|ga|gna|na|ta|va]taire	2	·[ba|ca|da|ga|gna|na|ta|va]taire(k=2)	1	73.8
+suffix	ssin	1	ssin(k=1)	1	73.7
+suffix	no	1	no(k=1)	1	73.7
+suffix	·[gné|gé|né|ré|tai|thé|tré|é]sie	2	·[gné|gé|né|ré|tai|thé|tré|é]sie(k=2)	1	73.6
+suffix	·[go|llo|lo]gique	2	·[go|llo|lo]gique(k=2)	1	73.5
+suffix	·sionnaire	2	·sionnaire(k=2)	1	73.4
+suffix	·isateur	3	·isateur(k=3)	1	73.4
+suffix	·ogique	2	·ogique(k=2)	1	73.3
+prefix	conER·	2	conER·(k=2)	1	73.3
+suffix	·[bé|ché|cé|du|dé|lé|mé|né|pé|ré|sé|toy|tri|tzsché|té]ens	2	·[bé|ché|cé|du|dé|lé|mé|né|pé|ré|sé|toy|tri|tzsché|té]ens(k=2)	1	73.3
+suffix	·venu	2	·venu(k=2)	1	73.1
+suffix	·[ba|be|bo|fe|lle|ma|me|mi|nê|rou|rre|sso|sui]tière	2	·[ba|be|bo|fe|lle|ma|me|mi|nê|rou|rre|sso|sui]tière(k=2)	1	73.0
+prefix	réac·	2	réac·(k=2)	1	72.9
+prefix	conak·	2	conak·(k=2)	1	72.9
+suffix	·olat	2	·olat(k=2)	1	72.8
+suffix	·[dau|geo|gno|o|to]let	2	·[dau|geo|gno|o|to]let(k=2)	1	72.7
+suffix	·[is|ni|po|ppé|pé]tence	2	·[is|ni|po|ppé|pé]tence(k=2)	1	72.5
+prefix	médi	2	médi(k=2)	1	72.5
+prefix	chan[ce|cè|de|ge|so|to|tour]-{t°}·	2	chan[ce|cè|de|ge|so|to|tour]-{t°}·(k=2)	1	72.5
+suffix	·ative	2	·ative(k=2)	1	72.4
+prefix	é[bran|chan|den|lan|tan|ten|ven]·	2	é[bran|chan|den|lan|tan|ten|ven]·(k=2)	1	72.3
+prefix	ie·	2	ie·(k=2)	1	72.3
+prefix	mui·	2	mui·(k=2)	1	72.2
+suffix	ciel	1	ciel(k=1) | ·[ffi|fi|gi|ren|tan|tri]ciel(k=2)	2	72.1
+suffix	·[pec|rec|spec|tec|vec]tive	2	·[pec|rec|spec|tec|vec]tive(k=2)	1	72.0
+prefix	ad[me|mi|mo|ve|vien]·	2	ad[me|mi|mo|ve|vien]·(k=2)	1	72.0
+suffix	monie	2	monie(k=2)	1	71.8
+prefix	mal	1	mal(k=1)	1	71.8
+suffix	·[a|ga|la|ma|na|ra|ta|tia]tive	2	·[a|ga|la|ma|na|ra|ta|tia]tive(k=2)	1	71.7
+suffix	·monie	2	·monie(k=2)	1	71.7
+suffix	·llogique	2	·llogique(k=2)	1	71.7
+suffix	logique	2	logique(k=2)	1	71.6
+suffix	din	1	din(k=1)	1	71.2
+suffix	·vention	2	·vention(k=2)	1	71.1
+prefix	compor·	2	compor·(k=2)	1	71.1
+prefix	lé	1	lé(k=1)	1	70.9
+prefix	cir[con|cons|cu]·	2	cir[con|cons|cu]·(k=2)	1	70.6
+suffix	logue	1	logue(k=1) | ·[bo|ca|cho|cio|co|cro|dio|do|go|lo|mo|na|no|o|pho|pi|po|ro|ta|tho|to|tro|xo]logue(k=2)	2	70.6
+suffix	·[be|fe|lle|me|rre]tière	2	·[be|fe|lle|me|rre]tière(k=2)	1	70.5
+suffix	·[a|bo|cou|ffai|go|klo|le|lo|mo|mé|na|nié|quo|rrié|rro|ssoi|ta|ti|to|tu|é]ristes	2	·[a|bo|cou|ffai|go|klo|le|lo|mo|mé|na|nié|quo|rrié|rro|ssoi|ta|ti|to|tu|é]ristes(k=2)	1	70.5
+suffix	tissement	3	tissement(k=3)	1	70.4
+suffix	net	1	net(k=1) | ·[bi|cor|di|li|que|qui|ssi|tchou|ti|tou]net(k=2)	2	70.3
+prefix	pa[la|pa|ra|ta|va]·	2	pa[la|pa|ra|ta|va]·(k=2)	1	70.3
+suffix	tence	1	tence(k=1) | ·[is|ni|po|ppé|pé]tence(k=2)	2	70.2
+suffix	trique	1	trique(k=1) | ·[cen|chia|dia|gas|lec|mé|ria|sté|xcen]trique(k=2)	2	70.2
+suffix	·[co|coo|cro|dio|do|gro|llo|lo|mo|nio|no|o|pho|po|ro|sio|to|tro|vio|zo]mètres	2	·[co|coo|cro|dio|do|gro|llo|lo|mo|nio|no|o|pho|po|ro|sio|to|tro|vio|zo]mètres(k=2)	1	70.1
+suffix	·cession	2	·cession(k=2)	1	70.0
+suffix	·[a|mo|so|té]riel	2	·[a|mo|so|té]riel(k=2)	1	69.9
+prefix	communi	3	communi(k=3)	1	69.9
+prefix	por°·	2	por°·(k=2)	1	69.9
+suffix	risation	3	risation(k=3)	1	69.8
+prefix	ré[ci|cri|di|i|joui|mi|pli|pri|si|tri|vi]·	2	ré[ci|cri|di|i|joui|mi|pli|pri|si|tri|vi]·(k=2)	1	69.8
+prefix	en[cor|dor|gor|tor]·	2	en[cor|dor|gor|tor]·(k=2)	1	69.4
+prefix	para·	2	para·(k=2)	1	69.4
+prefix	a[bou|dou|jou|vou|voue]·	2	a[bou|dou|jou|vou|voue]·(k=2)	1	69.3
+suffix	·fection	2	·fection(k=2)	1	69.0
+suffix	·[bi|ci|di|dri|gri|mi|ni|pi|ppi|ri|si|ti|tti]-{v}llon	2	·[bi|ci|di|dri|gri|mi|ni|pi|ppi|ri|si|ti|tti]-{v}llon(k=2)	1	69.0
+suffix	rrement	2	rrement(k=2)	1	68.9
+prefix	seni·	2	seni·(k=2)	1	68.9
+suffix	·[ti|y]sans	2	·[ti|y]sans(k=2)	1	68.9
+suffix	·iration	3	·iration(k=3)	1	68.9
+suffix	mement	2	mement(k=2)	1	68.9
+suffix	mis	1	mis(k=1)	1	68.7
+suffix	·tition	2	·tition(k=2)	1	68.6
+suffix	·[ci|di|gi|i|li|lli|ni|ro|sci|si|te|ti]forme	2	·[ci|di|gi|i|li|lli|ni|ro|sci|si|te|ti]forme(k=2)	1	68.5
+suffix	gramme	1	gramme(k=1)	1	68.4
+suffix	·[ci|me|mi|mé|ri|ti]née	2	·[ci|me|mi|mé|ri|ti]née(k=2)	1	68.3
+prefix	vii·	2	vii·(k=2)	1	68.1
+suffix	mant	1	mant(k=1)	1	68.0
+suffix	·dducteur	2	·dducteur(k=2)	1	68.0
+suffix	nnage	1	nnage(k=1) | ·[cho|co|die|do|dro|ffo|geo|gno|llo|lo|mio|o|pa|pe|pho|pio|po|sio|so|sso|to|vo|ço]nnage(k=2)	2	68.0
+prefix	exci	2	exci(k=2)	1	67.9
+prefix	raOR·	2	raOR·(k=2)	1	67.9
+suffix	seur	1	seur(k=1) | ·[cen|den|en|fen|ffen|pen|pul|scen|ver|xten]seur(k=2)	2	67.9
+suffix	·[bro|lo|mo|ro|rro|tau]ger	2	·[bro|lo|mo|ro|rro|tau]ger(k=2)	1	67.8
+suffix	·tériel	2	·tériel(k=2)	1	67.8
+prefix	sui·	2	sui·(k=2)	1	67.7
+suffix	·°ron	2	·°ron(k=2)	1	67.6
+suffix	·[ci|mi|ri|ti]née	2	·[ci|mi|ri|ti]née(k=2)	1	67.5
+suffix	·[do|so|ssio|ço]nnable	2	·[do|so|ssio|ço]nnable(k=2)	1	67.5
+suffix	·onnable	2	·onnable(k=2)	1	67.5
+suffix	·[do|so|ssio|ço]nnable	2	·[do|so|ssio|ço]nnable(k=2)	1	67.5
+suffix	nnant	1	nnant(k=1) | ·[do|e|geo|illo|llo|o|ro|so|ssio|sso|to]nnant(k=2)	2	67.4
+prefix	pa[la|li|lu|pa|po|ra|ren|ta|ti|trou]-{ni,po}·	2	pa[la|li|lu|pa|po|ra|ren|ta|ti|trou]-{ni,po}·(k=2)	1	67.4
+suffix	·°naire	2	·°naire(k=2)	1	67.3
+suffix	·onnage	2	·onnage(k=2)	1	67.2
+suffix	·[i|lai|mai|nai|ni|po|poi|rai|ri|ti]son	2	·[i|lai|mai|nai|ni|po|poi|rai|ri|ti]son(k=2)	1	67.2
+suffix	·[fec|ffec|jec|lec|llec|pec|rec]tif	2	·[fec|ffec|jec|lec|llec|pec|rec]tif(k=2)	1	67.2
+suffix	·[ce|te]naire	2	·[ce|te]naire(k=2)	1	67.2
+prefix	rao·	2	rao·(k=2)	1	67.1
+suffix	·[ba|bo|cho|do|dro|e|ffo|fo|llo|lo|pho|ra|ro|sio|so|ssio|tio|to|vro|ço]nné	2	·[ba|bo|cho|do|dro|e|ffo|fo|llo|lo|pho|ra|ro|sio|so|ssio|tio|to|vro|ço]nné(k=2)	1	66.9
+suffix	lat	1	lat(k=1) | ·[cha|co|cre|cu|gi|su|ta|to|tu|vo]lat(k=2)	2	66.8
+prefix	ci[bou|ga|ma|me|men|sa|se|te|vi]·	2	ci[bou|ga|ma|me|men|sa|se|te|vi]·(k=2)	1	66.8
+suffix	·Eson	2	·Eson(k=2)	1	66.7
+suffix	·[bo|cho|do|dro|ffo|fo|llo|lo|pho|ro|sio|so|ssio|tio|to|vro|ço]nné	2	·[bo|cho|do|dro|ffo|fo|llo|lo|pho|ro|sio|so|ssio|tio|to|vro|ço]nné(k=2)	1	66.7
+prefix	u	1	u(k=1)	1	66.5
+suffix	·[dic|tric|vic]tion	2	·[dic|tric|vic]tion(k=2)	1	66.5
+suffix	nais	1	nais(k=1) | ·[a|ba|da|go|la|li|lo|po|ra|ta|to|va]nais(k=2)	2	66.5
+suffix	·gnements	2	·gnements(k=2)	1	66.3
+prefix	théo·	2	théo·(k=2)	1	66.2
+suffix	·[bio|dro|gio|lio|lli|llo|lo|ly|lé|mo|o|po|ra|rio|ro|ré|si|tho|to|tro]-{no}graphe	2	·[bio|dro|gio|lio|lli|llo|lo|ly|lé|mo|o|po|ra|rio|ro|ré|si|tho|to|tro]-{no}graphe(k=2)	1	66.2
+suffix	·omie	2	·omie(k=2)	1	66.0
+suffix	·[ci|di|gi|i|li|lli|ni|sci|si|ti]forme	2	·[ci|di|gi|i|li|lli|ni|sci|si|ti]forme(k=2)	1	66.0
+prefix	rey·	2	rey·(k=2)	1	66.0
+suffix	vant	1	vant(k=1)	1	65.9
+suffix	gation	2	gation(k=2)	1	65.8
+prefix	chi	1	chi(k=1)	1	65.6
+suffix	·[cen|den|en|fen|ffen|pen|pul|scen|ver|xten]seur	2	·[cen|den|en|fen|ffen|pen|pul|scen|ver|xten]seur(k=2)	1	65.6
+suffix	·[dan|den|men|nen|ren|rien]tal	2	·[dan|den|men|nen|ren|rien]tal(k=2)	1	65.5
+suffix	·eration	3	·eration(k=3)	1	65.4
+suffix	mique	1	mique(k=1) | ·[chi|ché|clys|cé|der|dé|ga|gas|la|li|lu|lé|na|no|ny|plas|ra|rith|ré|sa|sla|so|tal|ther|thy|to|té|xys]-{ne}mique(k=2)	2	65.4
+suffix	ducteur	2	ducteur(k=2)	1	65.1
+suffix	·[bi|cor|di|li|que|qui|ssi|tchou|ti|tou]net	2	·[bi|cor|di|li|que|qui|ssi|tchou|ti|tou]net(k=2)	1	64.9
+prefix	asso	2	asso(k=2)	1	64.9
+suffix	·[go|lo|po|to]nais	2	·[go|lo|po|to]nais(k=2)	1	64.8
+prefix	ra[ba|bâ|da|ga|ma|pa|ta|va]·	2	ra[ba|bâ|da|ga|ma|pa|ta|va]·(k=2)	1	64.7
+prefix	bi	1	bi(k=1)	1	64.7
+suffix	·icien	2	·icien(k=2)	1	64.6
+prefix	déco·	2	déco·(k=2)	1	64.6
+suffix	·[a|bé|chlo|fu|go|gou|gy|klo|llu|lo|lé|mé|ni|né|o|pho|phé|pi|tho|ti|to|vé]-{te}rique	2	·[a|bé|chlo|fu|go|gou|gy|klo|llu|lo|lé|mé|ni|né|o|pho|phé|pi|tho|ti|to|vé]-{te}rique(k=2)	1	64.4
+prefix	poi	1	poi(k=1)	1	64.4
+suffix	·[ché|dri|dé|loy|né|ré]al	2	·[ché|dri|dé|loy|né|ré]al(k=2)	1	64.2
+suffix	culation	3	culation(k=3)	1	64.2
+suffix	rique	1	rique(k=1) | ·[a|bé|chlo|fu|go|gou|gy|klo|llu|lo|lé|mé|ni|né|o|pho|phé|pi|tho|ti|to|vé]-{te}rique(k=2)	2	64.0
+prefix	car	1	car(k=1)	1	64.0
+prefix	ana	2	ana(k=2)	1	63.9
+suffix	·ylter	2	·ylter(k=2)	1	63.8
+prefix	concen·	2	concen·(k=2)	1	63.8
+prefix	cam	1	cam(k=1)	1	63.7
+prefix	toi	1	toi(k=1)	1	63.5
+prefix	mea·	2	mea·(k=2)	1	63.5
+prefix	ti	1	ti(k=1)	1	63.4
+suffix	trier	2	trier(k=2)	1	63.2
+suffix	·[au|co|go|illo|nau|o|peau|po|ro|veau|vô]té	2	·[au|co|go|illo|nau|o|peau|po|ro|veau|vô]té(k=2)	1	63.0
+suffix	lisateur	3	lisateur(k=3)	1	62.9
+suffix	·icule	2	·icule(k=2)	1	62.7
+suffix	lièrement	3	lièrement(k=3)	1	62.7
+suffix	gnement	2	gnement(k=2)	1	62.7
+suffix	·itude	2	·itude(k=2)	1	62.6
+suffix	·[bo|ca|cho|cio|co|cro|dio|do|go|lo|mo|na|no|o|pho|pi|po|ro|ta|tho|to|tro|xo]logue	2	·[bo|ca|cho|cio|co|cro|dio|do|go|lo|mo|na|no|o|pho|pi|po|ro|ta|tho|to|tro|xo]logue(k=2)	1	62.4
+prefix	déER·	2	déER·(k=2)	1	62.2
+suffix	·[dul|gli|i|li|lli|mer|sur|tin]-{vER}gence	2	·[dul|gli|i|li|lli|mer|sur|tin]-{vER}gence(k=2)	1	62.2
+suffix	duction	2	duction(k=2)	1	62.1
+prefix	éli	2	éli(k=2)	1	62.1
+prefix	fo	1	fo(k=1)	1	61.9
+suffix	·[llon|lon|pon|son]ger	2	·[llon|lon|pon|son]ger(k=2)	1	61.8
+suffix	·[cen|den|en|fen|ffen|pen|scen|xten]seur	2	·[cen|den|en|fen|ffen|pen|scen|xten]seur(k=2)	1	61.8
+prefix	len°·	2	len°·(k=2)	1	61.7
+prefix	ori	2	ori(k=2)	1	61.6
+suffix	tition	2	tition(k=2)	1	61.5
+suffix	·[ché|dé|né|ré]al	2	·[ché|dé|né|ré]al(k=2)	1	61.5
+prefix	no	1	no(k=1)	1	61.4
+suffix	·[bi|di|li|qui|ssi|ti]net	2	·[bi|di|li|qui|ssi|ti]net(k=2)	1	61.4
+suffix	·[ber|bleau|bo|co|des|dias|dic|fan|gan|gen|go|gus|illo|la|len|les|lle|man|men|pen|po|que|ra|re|ren|ré|san|tes|van|ver|zan]tin	2	·[ber|bleau|bo|co|des|dias|dic|fan|gan|gen|go|gus|illo|la|len|les|lle|man|men|pen|po|que|ra|re|ren|ré|san|tes|van|ver|zan]tin(k=2)	1	61.3
+suffix	·[du|ju|la|lo|ma|mu|ppa|rru|so|su|to|tra|tu]rié	2	·[du|ju|la|lo|ma|mu|ppa|rru|so|su|to|tra|tu]rié(k=2)	1	61.3
+suffix	·ologique	3	·ologique(k=3)	1	61.2
+prefix	débrou·	2	débrou·(k=2)	1	61.2
+suffix	·°lé	2	·°lé(k=2)	1	61.2
+suffix	·[di|gli|i|li|lli]gence	2	·[di|gli|i|li|lli]gence(k=2)	1	61.0
+suffix	riel	1	riel(k=1) | ·[a|mo|so|té]riel(k=2)	2	61.0
+suffix	dien	1	dien(k=1)	1	61.0
+prefix	humi	2	humi(k=2)	1	60.9
+suffix	san	1	san(k=1) | ·[ti|y]sans(k=2)	2	60.7
+suffix	forme	1	forme(k=1) | ·[ci|di|gi|i|li|lli|ni|ro|sci|si|te|ti]forme(k=2)	2	60.5
+prefix	rea·	2	rea·(k=2)	1	60.4
+suffix	dé	1	dé(k=1)	1	60.4
+suffix	tenaire	2	tenaire(k=2)	1	60.3
+suffix	·tenaire	2	·tenaire(k=2)	1	60.3
+suffix	·[fi|lli|mi|pa|pi|qui|ta]gnon	2	·[fi|lli|mi|pa|pi|qui|ta]gnon(k=2)	1	60.3
+suffix	·[cen|llan|men|pen|ren|van]tage	2	·[cen|llan|men|pen|ren|van]tage(k=2)	1	60.2
+prefix	reOR·	2	reOR·(k=2)	1	60.2
+prefix	inyl·	2	inyl·(k=2)	1	60.1
+prefix	parti	2	parti(k=2)	1	60.0
+prefix	conOR·	2	conOR·(k=2)	1	60.0
+suffix	·atie	2	·atie(k=2)	1	59.6
+suffix	dité	2	dité(k=2)	1	59.4
+prefix	éEk·	2	éEk·(k=2)	1	59.1
+prefix	réi·	2	réi·(k=2)	1	59.0
+suffix	·ylaire	2	·ylaire(k=2)	1	58.9
+suffix	·ataire	2	·ataire(k=2)	1	58.8
+suffix	·ituer	2	·ituer(k=2)	1	58.6
+prefix	nue·	2	nue·(k=2)	1	58.6
+suffix	·ession	2	·ession(k=2)	1	58.5
+suffix	mité	2	mité(k=2)	1	58.3
+suffix	graphe	1	graphe(k=1) | ·[bio|dro|gio|lio|lli|llo|lo|ly|lé|mo|o|po|ra|rio|ro|ré|si|tho|to|tro]-{no}graphe(k=2)	2	58.3
+prefix	bâ	1	bâ(k=1)	1	58.3
+suffix	vo	1	vo(k=1)	1	58.3
+prefix	coe·	2	coe·(k=2)	1	58.2
+prefix	baa·	2	baa·(k=2)	1	58.1
+suffix	·@taire	2	·@taire(k=2)	1	58.0
+suffix	tien	1	tien(k=1)	1	57.9
+suffix	·icat	2	·icat(k=2)	1	57.8
+suffix	mentaire	2	mentaire(k=2)	1	57.8
+prefix	bou°·	2	bou°·(k=2)	1	57.7
+prefix	compa	2	compa(k=2)	1	57.6
+prefix	ma°·	2	ma°·(k=2)	1	57.6
+suffix	nnable	1	nnable(k=1) | ·[do|so|ssio|ço]nnable(k=2)	2	57.5
+suffix	vation	2	vation(k=2)	1	57.3
+prefix	to	1	to(k=1)	1	57.2
+prefix	porte	2	porte(k=2)	1	57.1
+suffix	·[chi|ché|clys|cé|der|dé|ga|gas|la|li|lu|lé|na|no|ny|plas|ra|rith|ré|sa|sla|so|tal|ther|thy|to|té|xys]-{ne}mique	2	·[chi|ché|clys|cé|der|dé|ga|gas|la|li|lu|lé|na|no|ny|plas|ra|rith|ré|sa|sla|so|tal|ther|thy|to|té|xys]-{ne}mique(k=2)	1	57.1
+suffix	nné	1	nné(k=1) | ·[ba|bo|cho|do|dro|e|ffo|fo|llo|lo|pho|ra|ro|sio|so|ssio|tio|to|vro|ço]nné(k=2)	2	57.0
+suffix	·@tal	2	·@tal(k=2)	1	57.0
+prefix	enu·	2	enu·(k=2)	1	56.9
+prefix	ge	1	ge(k=1)	1	56.7
+suffix	fait	1	fait(k=1)	1	56.5
+prefix	au@·	2	au@·(k=2)	1	56.4
+prefix	trahi·	2	trahi·(k=2)	1	56.4
+suffix	tu	1	tu(k=1)	1	56.1
+prefix	ni	1	ni(k=1)	1	56.1
+suffix	·iteur	2	·iteur(k=2)	1	56.1
+prefix	con5·	2	con5·(k=2)	1	56.0
+suffix	gence	1	gence(k=1) | ·[di|gli|i|li|lli]gence(k=2)	2	56.0
+suffix	vention	2	vention(k=2)	1	55.9
+prefix	oui·	2	oui·(k=2)	1	55.8
+prefix	rou	1	rou(k=1)	1	55.4
+suffix	eux	1	eux(k=1)	1	55.3
+suffix	·ORtable	2	·ORtable(k=2)	1	55.3
+suffix	·idence	2	·idence(k=2)	1	55.3
+prefix	eso·	2	eso·(k=2)	1	55.2
+prefix	mé[ca|co|con|cré|di|fie|fii|ju|pre|pren|pri|ri|ti]-{l@,na}·	2	mé[ca|co|con|cré|di|fie|fii|ju|pre|pren|pri|ri|ti]-{l@,na}·(k=2)	1	55.0
+prefix	contre	2	contre(k=2)	1	54.8
+prefix	ca°·	2	ca°·(k=2)	1	54.8
+suffix	·[ba|by|cra|cé|dio|don|gu|ma|nu|phé|pé|ri|vi|é]-{nER,nEp}tie	2	·[ba|by|cra|cé|dio|don|gu|ma|nu|phé|pé|ri|vi|é]-{nER,nEp}tie(k=2)	1	54.6
+prefix	senti	2	senti(k=2)	1	54.5
+suffix	gnon	1	gnon(k=1) | ·[fi|lli|mi|pa|pi|qui|ta]gnon(k=2)	2	54.5
+suffix	perie	2	perie(k=2)	1	54.4
+prefix	ée·	2	ée·(k=2)	1	54.2
+suffix	rier	1	rier(k=1) | ·[du|ju|la|lo|ma|mu|ppa|rru|so|su|to|tra|tu]rié(k=2)	2	54.1
+prefix	mor	1	mor(k=1)	1	54.1
+prefix	eno·	2	eno·(k=2)	1	53.8
+suffix	ffeur	1	ffeur(k=1)	1	53.7
+prefix	éaR·	2	éaR·(k=2)	1	53.7
+prefix	ju	1	ju(k=1)	1	53.6
+prefix	pui·	2	pui·(k=2)	1	53.6
+suffix	on	1	on(k=1)	1	53.5
+suffix	graphie	2	graphie(k=2)	1	53.3
+prefix	inEs·	2	inEs·(k=2)	1	52.8
+suffix	·itif	2	·itif(k=2)	1	52.7
+suffix	cent	1	cent(k=1)	1	52.7
+suffix	vage	1	vage(k=1)	1	52.6
+suffix	·ysion	2	·ysion(k=2)	1	52.5
+prefix	sa[bor|bou|cré|la|le|li|lo|pris|ta|ti|to|va]-{bo,kRis}·	2	sa[bor|bou|cré|la|le|li|lo|pris|ta|ti|to|va]-{bo,kRis}·(k=2)	1	52.5
+suffix	tution	2	tution(k=2)	1	52.5
+prefix	super	2	super(k=2)	1	52.4
+prefix	cone·	2	cone·(k=2)	1	52.4
+suffix	·ageux	2	·ageux(k=2)	1	52.3
+prefix	fée·	2	fée·(k=2)	1	52.2
+prefix	inci	2	inci(k=2)	1	52.0
+suffix	tionnaire	2	tionnaire(k=2)	1	51.8
+prefix	kio·	2	kio·(k=2)	1	51.8
+suffix	titude	2	titude(k=2)	1	51.7
+prefix	suOR·	2	suOR·(k=2)	1	51.4
+prefix	anti	2	anti(k=2)	1	51.4
+prefix	ga°·	2	ga°·(k=2)	1	51.1
+prefix	imo·	2	imo·(k=2)	1	51.1
+prefix	con@·	2	con@·(k=2)	1	50.9
+prefix	ran	1	ran(k=1)	1	50.7
+suffix	·onique	2	·onique(k=2)	1	50.4
+prefix	reuR·	2	reuR·(k=2)	1	50.2
+prefix	do	1	do(k=1)	1	50.2
+prefix	al	1	al(k=1)	1	50.2
+prefix	hi	1	hi(k=1)	1	50.1
+prefix	dra	1	dra(k=1)	1	50.1
+suffix	sateur	2	sateur(k=2)	1	49.8
+prefix	moi·	2	moi·(k=2)	1	49.8
+suffix	vée	1	vée(k=1)	1	49.4
+suffix	sque	1	sque(k=1)	1	49.4
+prefix	disa·	2	disa·(k=2)	1	49.2
+suffix	cide	1	cide(k=1)	1	48.6
+suffix	lence	1	lence(k=1)	1	48.5
+suffix	·@du	2	·@du(k=2)	1	47.9
+prefix	pro§·	2	pro§·(k=2)	1	47.7
+prefix	soi·	2	soi·(k=2)	1	47.6
+prefix	proo·	2	proo·(k=2)	1	47.5
+suffix	tie	1	tie(k=1) | ·[ba|by|cra|cé|dio|don|gu|ma|nu|phé|pé|ri|vi|é]-{nER,nEp}tie(k=2)	2	47.0
+suffix	science	1	science(k=1)	1	46.9
+suffix	rrier	1	rrier(k=1)	1	46.8
+prefix	dé§·	2	dé§·(k=2)	1	46.6
+suffix	venu	2	venu(k=2)	1	46.5
+suffix	·°ver	2	·°ver(k=2)	1	46.2
+suffix	·inier	2	·inier(k=2)	1	46.1
+suffix	ant	1	ant(k=1)	1	46.0
+suffix	go	1	go(k=1)	1	45.9
+suffix	·erable	2	·erable(k=2)	1	45.9
+suffix	·emie	2	·emie(k=2)	1	45.7
+prefix	insi·	2	insi·(k=2)	1	45.6
+prefix	emp	1	emp(k=1)	1	45.6
+prefix	proa·	2	proa·(k=2)	1	45.0
+suffix	tel	1	tel(k=1)	1	45.0
+suffix	bon	1	bon(k=1)	1	44.9
+prefix	gué	1	gué(k=1)	1	44.9
+suffix	sible	1	sible(k=1)	1	44.8
+prefix	syni·	2	syni·(k=2)	1	44.7
+prefix	disi·	2	disi·(k=2)	1	44.7
+suffix	dation	2	dation(k=2)	1	44.7
+prefix	plan	1	plan(k=1)	1	44.6
+prefix	cons	1	cons(k=1)	1	44.5
+prefix	lo	1	lo(k=1)	1	44.4
+prefix	é	1	é(k=1)	1	44.3
+suffix	ciation	2	ciation(k=2)	1	44.3
+prefix	ven	1	ven(k=1)	1	44.2
+suffix	mental	2	mental(k=2)	1	44.2
+prefix	tri	1	tri(k=1)	1	44.0
+suffix	nomie	2	nomie(k=2)	1	43.9
+prefix	pai·	2	pai·(k=2)	1	43.8
+suffix	·illon	2	·illon(k=2)	1	43.8
+prefix	déaR·	2	déaR·(k=2)	1	43.7
+prefix	ban	1	ban(k=1)	1	43.6
+suffix	au	1	au(k=1)	1	43.3
+suffix	·onal	2	·onal(k=2)	1	43.2
+prefix	cen	1	cen(k=1)	1	43.2
+suffix	cution	2	cution(k=2)	1	42.9
+suffix	·aktion	2	·aktion(k=2)	1	42.9
+prefix	reo·	2	reo·(k=2)	1	42.8
+suffix	·orique	2	·orique(k=2)	1	42.7
+suffix	mage	1	mage(k=1)	1	42.6
+suffix	el	1	el(k=1)	1	42.4
+prefix	tour	1	tour(k=1)	1	42.4
+prefix	pis	1	pis(k=1)	1	42.2
+suffix	·issant	2	·issant(k=2)	1	42.1
+prefix	ii·	2	ii·(k=2)	1	42.1
+suffix	·opper	2	·opper(k=2)	1	42.0
+suffix	·yteur	2	·yteur(k=2)	1	41.7
+suffix	quet	1	quet(k=1)	1	41.6
+prefix	ami	2	ami(k=2)	1	41.6
+suffix	ratoire	2	ratoire(k=2)	1	41.6
+prefix	thé	1	thé(k=1)	1	41.6
+suffix	nois	1	nois(k=1)	1	41.5
+prefix	loa·	2	loa·(k=2)	1	41.4
+prefix	loca	2	loca(k=2)	1	41.3
+suffix	·eder	2	·eder(k=2)	1	41.2
+suffix	tateur	2	tateur(k=2)	1	41.2
+suffix	·@tiel	2	·@tiel(k=2)	1	40.9
+suffix	lu	1	lu(k=1)	1	40.9
+prefix	démo	2	démo(k=2)	1	40.9
+suffix	·isan	2	·isan(k=2)	1	40.5
+prefix	récu	2	récu(k=2)	1	40.3
+suffix	nage	1	nage(k=1)	1	40.3
+prefix	mai·	2	mai·(k=2)	1	40.2
+prefix	cani·	2	cani·(k=2)	1	40.1
+suffix	·alier	2	·alier(k=2)	1	39.6
+prefix	écar	2	écar(k=2)	1	39.6
+suffix	lo	1	lo(k=1)	1	39.4
+prefix	me	1	me(k=1)	1	39.3
+prefix	sau°·	2	sau°·(k=2)	1	39.3
+prefix	cri	1	cri(k=1)	1	39.3
+prefix	indi	2	indi(k=2)	1	39.2
+prefix	exi·	2	exi·(k=2)	1	39.2
+suffix	mar	1	mar(k=1)	1	39.1
+suffix	pion	1	pion(k=1)	1	38.9
+suffix	nade	1	nade(k=1)	1	38.9
+prefix	gui	1	gui(k=1)	1	38.4
+suffix	sible	1	sible(k=1)	1	37.8
+suffix	·ilier	2	·ilier(k=2)	1	37.8
+suffix	sique	1	sique(k=1)	1	37.1
+suffix	card	1	card(k=1)	1	37.0
+prefix	déy·	2	déy·(k=2)	1	36.4
+prefix	bri	1	bri(k=1)	1	35.6
+suffix	dance	1	dance(k=1)	1	35.0
+suffix	lant	1	lant(k=1)	1	34.2
+prefix	gra	1	gra(k=1)	1	33.5
+prefix	man°·	2	man°·(k=2)	1	33.4
+suffix	tral	1	tral(k=1)	1	33.0
+suffix	fort	1	fort(k=1)	1	33.0
+suffix	mon	1	mon(k=1)	1	32.5
+suffix	geur	1	geur(k=1)	1	32.4
+prefix	fon	1	fon(k=1)	1	31.6
+suffix	lent	1	lent(k=1)	1	31.6
+prefix	dia	1	dia(k=1)	1	31.5
+prefix	cé	1	cé(k=1)	1	31.4
+prefix	ver	1	ver(k=1)	1	31.3
+prefix	cra	1	cra(k=1)	1	31.1
+prefix	bran	1	bran(k=1)	1	30.9
+suffix	geance	1	geance(k=1)	1	30.8
+suffix	quence	1	quence(k=1)	1	30.8
+suffix	pée	1	pée(k=1)	1	30.7
+suffix	vel	1	vel(k=1)	1	30.6
+suffix	tine	1	tine(k=1)	1	30.5
+suffix	quin	1	quin(k=1)	1	30.4
+prefix	bar	1	bar(k=1)	1	30.3
+prefix	cli	1	cli(k=1)	1	30.1
+prefix	bu	1	bu(k=1)	1	30.1
+suffix	blant	1	blant(k=1)	1	30.1
+suffix	lin	1	lin(k=1)	1	30.1
+prefix	fê	1	fê(k=1)	1	30.0
+prefix	fau	1	fau(k=1)	1	29.9
+prefix	qua	1	qua(k=1)	1	29.9
+suffix	quette	1	quette(k=1)	1	29.8
+prefix	ri	1	ri(k=1)	1	29.6
+suffix	lance	1	lance(k=1)	1	29.3
+suffix	llant	1	llant(k=1)	1	28.9
+prefix	bé	1	bé(k=1)	1	28.8
+suffix	lisme	1	lisme(k=1)	1	28.7
+prefix	tar	1	tar(k=1)	1	28.4
+suffix	trine	1	trine(k=1)	1	28.4
+suffix	ni	1	ni(k=1)	1	28.1
+suffix	daire	1	daire(k=1)	1	27.9
+suffix	pie	1	pie(k=1)	1	27.8
+suffix	cié	1	cié(k=1)	1	27.6
+suffix	za	1	za(k=1)	1	27.5
+suffix	ance	1	ance(k=1)	1	27.4
+prefix	ab	1	ab(k=1)	1	27.2
+prefix	pen	1	pen(k=1)	1	27.1
+suffix	illon	1	illon(k=1)	1	26.8
+suffix	pard	1	pard(k=1)	1	26.4
+prefix	pié	1	pié(k=1)	1	26.3
+suffix	gène	1	gène(k=1)	1	26.3
+suffix	tisme	1	tisme(k=1)	1	26.0
+prefix	gi	1	gi(k=1)	1	26.0
+suffix	lyse	1	lyse(k=1)	1	25.9
+prefix	bas	1	bas(k=1)	1	25.8
+suffix	llage	1	llage(k=1)	1	25.7
+suffix	chi	1	chi(k=1)	1	25.5
+suffix	gon	1	gon(k=1)	1	25.5
+suffix	veur	1	veur(k=1)	1	25.5
+suffix	tesse	1	tesse(k=1)	1	25.3
+suffix	ta	1	ta(k=1)	1	25.2
+suffix	con	1	con(k=1)	1	25.2
+suffix	ceur	1	ceur(k=1)	1	25.2
+suffix	thèque	1	thèque(k=1)	1	25.1
+suffix	illé	1	illé(k=1)	1	25.1
+suffix	reau	1	reau(k=1)	1	25.1
+suffix	tiste	1	tiste(k=1)	1	24.7
+suffix	pier	1	pier(k=1)	1	24.7
+prefix	ru	1	ru(k=1)	1	24.4
+suffix	cine	1	cine(k=1)	1	24.4
+prefix	lan	1	lan(k=1)	1	24.4
+suffix	llé	1	llé(k=1)	1	24.3
+suffix	tial	1	tial(k=1)	1	24.0
+suffix	nisme	1	nisme(k=1)	1	23.9
+suffix	cis	1	cis(k=1)	1	23.9
+suffix	tueux	1	tueux(k=1)	1	23.9
+suffix	tible	1	tible(k=1)	1	23.6
+suffix	seur	1	seur(k=1)	1	23.6
+suffix	gal	1	gal(k=1)	1	23.5
+suffix	page	1	page(k=1)	1	23.4
+suffix	belle	1	belle(k=1)	1	23.4
+suffix	geux	1	geux(k=1)	1	23.3
+prefix	qui	1	qui(k=1)	1	23.1
+suffix	raire	1	raire(k=1)	1	23.0
+suffix	relle	1	relle(k=1)	1	22.7
+suffix	la	1	la(k=1)	1	22.5
+suffix	leux	1	leux(k=1)	1	22.4
+prefix	mu	1	mu(k=1)	1	22.4
+suffix	lage	1	lage(k=1)	1	22.3
+suffix	chant	1	chant(k=1)	1	22.2
+suffix	queur	1	queur(k=1)	1	22.2
+suffix	llance	1	llance(k=1)	1	22.2
+suffix	beau	1	beau(k=1)	1	22.1
+suffix	trie	1	trie(k=1)	1	21.8
+suffix	nable	1	nable(k=1)	1	21.6
+suffix	eur	1	eur(k=1)	1	21.6
+prefix	cho	1	cho(k=1)	1	21.4
+prefix	gre	1	gre(k=1)	1	21.4
+prefix	vau	1	vau(k=1)	1	21.1
+suffix	rien	1	rien(k=1)	1	21.1
+suffix	dique	1	dique(k=1)	1	21.0
+prefix	pom	1	pom(k=1)	1	20.9
+prefix	fé	1	fé(k=1)	1	20.8
+prefix	sta	1	sta(k=1)	1	20.8
+suffix	sif	1	sif(k=1)	1	20.8
+suffix	chon	1	chon(k=1)	1	20.7
+prefix	tem	1	tem(k=1)	1	20.6
+suffix	cheur	1	cheur(k=1)	1	20.5
+suffix	ka	1	ka(k=1)	1	20.4
+suffix	teux	1	teux(k=1)	1	20.3
+suffix	dage	1	dage(k=1)	1	20.3
+suffix	quant	1	quant(k=1)	1	20.2
+suffix	rieux	1	rieux(k=1)	1	20.1
+suffix	nnette	1	nnette(k=1)	1	20.1
+prefix	har	1	har(k=1)	1	20.1
+suffix	nat	1	nat(k=1)	1	20.1
+prefix	mous	1	mous(k=1)	1	20.1
+prefix	multi	2	multi(k=2)	1	20.1
+suffix	illeur	1	illeur(k=1)	1	20.0
+suffix	fiant	1	fiant(k=1)	1	20.0
+prefix	fou	1	fou(k=1)	1	18.9
+prefix	sus	1	sus(k=1)	1	18.7
+suffix	trice	1	trice(k=1)	1	17.5
+suffix	aire	1	aire(k=1)	1	17.4
+suffix	ence	1	ence(k=1)	1	14.7
+suffix	ble	1	ble(k=1)	1	12.1
+suffix	gueur	1	gueur(k=1)	1	11.5
+suffix	zon	1	zon(k=1)	1	9.4
+suffix	fer	1	fer(k=1)	1	9.3
+suffix	bal	1	bal(k=1)	1	9.2
+suffix	logiste	2	logiste(k=2)	1	8.7
+suffix	peur	1	peur(k=1)	1	7.4
+suffix	ier	1	ier(k=1)	1	7.0
+prefix	dé	1	dé(k=1)	1	6.9
+suffix	ction	1	ction(k=1)	1	5.6
+suffix	bité	2	bité(k=2)	1	4.6
+prefix	re	1	re(k=1)	1	4.6
+suffix	sité	2	sité(k=2)	1	3.6
+suffix	ette	1	ette(k=1)	1	3.1
+suffix	ité	2	ité(k=2)	1	2.6
+suffix	vaire	1	vaire(k=1)	1	2.5
+prefix	fin	1	fin(k=1)	1	1.8
+suffix	ce	1	ce(k=1)	1	1.5
+suffix	tial	1	tial(k=1)	1	1.5
+suffix	elle	1	elle(k=1)	1	1.4
+suffix	logie	2	logie(k=2)	1	1.3
+suffix	ière	1	ière(k=1)	1	1.0
+prefix	fen	1	fen(k=1)	1	0.9
+suffix	logiste	2	logiste(k=2)	1	0.8
+suffix	ption	1	ption(k=1)	1	0.6
+suffix	logique	2	logique(k=2)	1	0.4
+suffix	·Ogique	2	·Ogique(k=2)	1	0.4
+prefix	trans	1	trans(k=1)	1	0.4
+suffix	ien	1	ien(k=1)	1	0.3
+suffix	val	1	val(k=1)	1	0.1
+suffix	lise	1	lise(k=1)	1	0.1
+suffix	logique	2	logique(k=2)	1	0.1
+prefix	re	1	re(k=1)	1	0.0
+suffix	ène	1	ène(k=1)	1	0.0
+suffix	fer	1	fer(k=1)	1	0.0
+suffix	cienne	1	cienne(k=1)	1	0.0
+suffix	ienne	1	ienne(k=1)	1	0.0
+prefix	emb	1	emb(k=1)	1	0.0
+prefix	in	1	in(k=1)	1	0.0
+suffix	rité	2	rité(k=2)	1	0.0
+suffix	if	1	if(k=1)	1	0.0
+suffix	·ajté	2	·ajté(k=2)	1	0.0
