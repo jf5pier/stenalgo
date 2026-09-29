@@ -29,7 +29,10 @@ Stroke: TypeAlias = tuple[int, ...]
 Strokes: TypeAlias = tuple[Stroke, ...]
 
 
-@lru_cache
+# maxsize=None: callers present ~80k distinct stroke tuples per step (one per word
+# group), so the default 128-entry cache thrashed and recomputed on nearly every
+# call (perf round 2, 2026-09-29). Pure tuple-in/tuple-out, unbounded is safe.
+@lru_cache(maxsize=None)
 def canonicalizeStrokes(strokes: Strokes) -> Strokes:
     """
     Collapse each Stroke to the physically-realized chord it produces: a stroke is a
@@ -448,10 +451,11 @@ Fingers assignments :
         return
 
     def _dropRenderMemos(self) -> None:
-        """Invalidate the keyDisplayName/strokesToRTFCRE caches: both derive
-        from phonemesAssignedToStroke, which the layout mutators change."""
+        """Invalidate the keyDisplayName/strokesToRTFCRE/getStrokesOfPhoneme caches:
+        all derive from phonemesAssignedToStroke, which the layout mutators change."""
         self.__dict__.pop("_keyDisplayNameCache", None)
         self.__dict__.pop("_strokesToRTFCRECache", None)
+        self.__dict__.pop("_strokesOfPhonemeCache", None)
 
 
     
@@ -466,6 +470,7 @@ Fingers assignments :
             _ = self.phonemesAssignedToStroke[stroke].pop(index)  # Remove the phoneme from the keypress
         else:
             raise KeyError(f"Phoneme {phoneme} not found in keypress {stroke}")
+        self._dropRenderMemos()
 
     @override
     def getPhonemesOfStroke(self, stroke: Stroke) -> list[str]:
@@ -479,12 +484,23 @@ Fingers assignments :
         """
         Find all strokes in a syllabic part that results in a given phonem
         """
+        # Memo keyed (phoneme, syllabicPart), lazily created (fromJSONFile builds
+        # instances through cls.__new__ without __init__) and dropped by the layout
+        # mutators via _dropRenderMemos: the scan walks the whole
+        # phonemesAssignedToStroke dict, and hot callers (buildPhoneticTheory via
+        # getStrokeOfSyllableByPart, the S4 solver) repeat the same ~66 lookups
+        # millions of times against a frozen layout. A fresh copy is returned per
+        # call (callers, and test_returns_copy, rely on that).
+        cached = self.__dict__.setdefault("_strokesOfPhonemeCache", {}).get((phoneme, syllabicPart))
+        if cached is not None:
+            return list(cached)
         assignedKeypress: list[Stroke] = []
 #        print(f"Searching for phoneme {phoneme} in syllabic part {syllabicPart}")
         for keypress, phonemes in self.phonemesAssignedToStroke.items():
 #            print(f"Checking keypress {keypress} with phonemes {phonemes}")
             if keypress[0] in self.keyIDinSyllabicPart[syllabicPart] and phoneme in phonemes:
                 assignedKeypress.append(keypress)
+        self.__dict__.setdefault("_strokesOfPhonemeCache", {})[(phoneme, syllabicPart)] = assignedKeypress
         return assignedKeypress[:]
 
     def getSinglekeyKeypress(self, syllabicPart: str) -> list[tuple[int]]:
