@@ -18,7 +18,7 @@ from dataclasses import dataclass, field
 from src.affixbinding import (
     MAX_ALTERNATIVES, SAMPLE_CARRIERS, SPLIT_MAX_LOSS, PhonemeKeys, salientPhonemes, simScore)
 from src.affixes import (
-    Binding, Candidate, Carrier, CarrierResult, RULE, SimContext, _exceptionShare, poolCarriers,
+    Binding, Candidate, Carrier, CarrierResult, RULE, SimContext, _exceptionShare, PREFIX, poolCarriers,
     simulate)
 from src.keyboard import Stroke
 
@@ -196,6 +196,43 @@ def _exceptionRate(results: list[CarrierResult]) -> float:
     return exceptions / total if total else 0.0
 
 
+def _neighbourGroups(position: str, carriers: list[Carrier]) -> dict[tuple[Stroke | None, bool], int]:
+    """Carriers counted by what `_newBase` looks at for a RULE binding: the neighbouring stroke
+    (None when the carrier has no neighbour) and whether the carrier is a single syllable."""
+    groups: dict[tuple[Stroke | None, bool], int] = {}
+    for c in carriers:
+        base = c.rec.base
+        ni = c.start + c.span if position == PREFIX else c.start - 1
+        key = (base[ni] if 0 <= ni < len(base) else None, c.span == 1)
+        groups[key] = groups.get(key, 0) + 1
+    return groups
+
+
+def _exceptionRateFloor(
+    groups: dict[tuple[Stroke | None, bool], int], keys: Stroke, ctx: SimContext,
+) -> float:
+    """Lower bound on `_exceptionRate` of `simulate` for a RULE binding of `keys`, from the pass-1
+    classification of `_newBase` alone (evaluated per neighbour group, not per carrier).
+    The rate is exceptions / (gaining + exceptions). Every carrier with a valid new base ends as a
+    gainer or as a `lostDistinction`/`markCostTooHigh` exception, and `standaloneTrap` is decided
+    in pass 1, so the denominator is fixed by pass 1 while the numerator can only grow in pass 2."""
+    keySet = set(keys)
+    trapKey = tuple(sorted(keys)) in ctx.singleStrokeOutlines
+    valid = trapped = 0
+    for (neighbour, single), n in groups.items():
+        if neighbour is None:
+            continue   # noNeighbour: neither a gain candidate nor an exception
+        if set(neighbour) & keySet or not ctx.isLegal(tuple(sorted(set(neighbour) | keySet))):
+            if single or trapKey:
+                trapped += n   # standaloneTrap
+            else:
+                valid += n     # falls back to a standalone stroke
+        else:
+            valid += n
+    total = valid + trapped
+    return trapped / total if total else 0.0
+
+
 def chooseRuleKeypress(rule: Rule, pk: PhonemeKeys, ctx: SimContext, keypresses: list[Stroke]) -> None:
     """§4.4 step 4, lazy and expensive (Part B simulation): pick the best keypress for `rule`'s
     forms and fill in its exact score, keeping the top `MAX_ALTERNATIVES` for the report. Call
@@ -233,8 +270,11 @@ def chooseRuleKeypress(rule: Rule, pk: PhonemeKeys, ctx: SimContext, keypresses:
     simOf = {k: simScore(frozenset(k), weights, pk, rule.position) for k in keypresses}
     sample = carriers[:SAMPLE_CARRIERS]
     stage1: list[tuple[float, float, Stroke]] = []
+    sampleGroups = _neighbourGroups(rule.position, sample)
     for k in keypresses:
-        (res,) = simulate([(Binding(rule.position, RULE, k), sample)], ctx)
+        if _exceptionRateFloor(sampleGroups, k, ctx) > MAX_EXCEPTION_RATE:
+            continue   # exact: pass 1 alone already proves the exception rate exceeds the cap
+        (res,) = simulate([(Binding(rule.position, RULE, k), sample)], ctx, boundaryRisk=False)
         sc, _benefit, _exc, _excFreq, _top = ruleScoreFromResults(res, exclusionCount, len(rule.forms))
         if sc > 0 and _exceptionRate(res) <= MAX_EXCEPTION_RATE:
             stage1.append((sc, simOf[k], k))
