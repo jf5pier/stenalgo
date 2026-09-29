@@ -41,14 +41,18 @@ def main() -> None:
     disambiguatedTheory = loadDisambiguatedTheory(starboard)
 
     stenoToWords: dict[str, list[Word]] = defaultdict(list)
+    wordsSeenBySteno: dict[str, set[Word]] = defaultdict(set)
     for word, strokesList in disambiguatedTheory.items():
         for strokes in strokesList:
             steno = renderFinalStrokesToRTFCRE(starboard, strokes)
             # A self-homograph word's own several strokes (see loadDisambiguatedTheory) should
             # always render distinct steno strings -- guard against counting the same
             # word twice under one steno as a spurious 1-word "collision" if they ever
-            # coincide.
-            if word not in stenoToWords[steno]:
+            # coincide. The parallel set carries the membership test (some buckets are
+            # large); the list keeps insertion order, which `max`'s first-wins tie-break
+            # below and the output order depend on.
+            if word not in wordsSeenBySteno[steno]:
+                wordsSeenBySteno[steno].add(word)
                 stenoToWords[steno].append(word)
 
     stenoDict: dict[str, str] = {}
