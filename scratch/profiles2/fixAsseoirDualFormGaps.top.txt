@@ -1,0 +1,61 @@
+Tue Sep 29 18:27:31 2026    scratch/profiles2/fixAsseoirDualFormGaps.pstats
+
+         1553486 function calls (1550868 primitive calls) in 1.058 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1278 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    147/1    0.007    0.000    1.058    1.058 {built-in method builtins.exec}
+        1    0.000    0.000    1.058    1.058 <string>:1(<module>)
+        1    0.000    0.000    1.058    1.058 <frozen runpy>:206(run_module)
+        1    0.000    0.000    1.056    1.056 <frozen runpy>:65(_run_code)
+        1    0.047    0.047    1.056    1.056 /home/jfsp/stenalgo-fix/util/fixAsseoirDualFormGaps.py:1(<module>)
+        1    0.004    0.004    0.921    0.921 /home/jfsp/stenalgo-fix/util/fixAsseoirDualFormGaps.py:103(main)
+        2    0.038    0.019    0.788    0.394 /home/jfsp/stenalgo-fix/util/fixAsseoirDualFormGaps.py:78(readTsvRows)
+   186529    0.401    0.000    0.750    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/csv.py:173(__next__)
+   186531    0.259    0.000    0.271    0.000 {built-in method builtins.next}
+    169/6    0.001    0.000    0.093    0.015 <frozen importlib._bootstrap>:1360(_find_and_load)
+    169/6    0.001    0.000    0.092    0.015 <frozen importlib._bootstrap>:1308(_find_and_load_unlocked)
+    157/7    0.000    0.000    0.092    0.013 <frozen importlib._bootstrap>:914(_load_unlocked)
+    124/6    0.000    0.000    0.092    0.015 <frozen importlib._bootstrap_external>:753(exec_module)
+   361/13    0.000    0.000    0.088    0.007 <frozen importlib._bootstrap>:483(_call_with_frames_removed)
+        2    0.050    0.025    0.087    0.043 /home/jfsp/stenalgo-fix/util/fixAsseoirDualFormGaps.py:83(indexByLemmeOrtho)
+        1    0.000    0.000    0.085    0.085 /home/jfsp/stenalgo-fix/src/verbparadigm.py:1(<module>)
+        1    0.000    0.000    0.070    0.070 /home/jfsp/stenalgo-fix/src/grammar.py:1(<module>)
+   373056    0.044    0.000    0.044    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/csv.py:159(fieldnames)
+   297263    0.038    0.000    0.038    0.000 {method 'get' of 'dict' objects}
+379668/379280    0.034    0.000    0.034    0.000 {built-in method builtins.len}
+
+
+===== sort by tottime =====
+Tue Sep 29 18:27:31 2026    scratch/profiles2/fixAsseoirDualFormGaps.pstats
+
+         1553486 function calls (1550868 primitive calls) in 1.058 seconds
+
+   Ordered by: internal time
+   List reduced from 1278 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+   186529    0.401    0.000    0.750    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/csv.py:173(__next__)
+   186531    0.259    0.000    0.271    0.000 {built-in method builtins.next}
+        2    0.050    0.025    0.087    0.043 /home/jfsp/stenalgo-fix/util/fixAsseoirDualFormGaps.py:83(indexByLemmeOrtho)
+        1    0.047    0.047    1.056    1.056 /home/jfsp/stenalgo-fix/util/fixAsseoirDualFormGaps.py:1(<module>)
+   373056    0.044    0.000    0.044    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/csv.py:159(fieldnames)
+        2    0.038    0.019    0.788    0.394 /home/jfsp/stenalgo-fix/util/fixAsseoirDualFormGaps.py:78(readTsvRows)
+   297263    0.038    0.000    0.038    0.000 {method 'get' of 'dict' objects}
+379668/379280    0.034    0.000    0.034    0.000 {built-in method builtins.len}
+        3    0.018    0.006    0.018    0.006 {method '_parse_whole' of 'xml.etree.ElementTree.XMLParser' objects}
+      125    0.013    0.000    0.013    0.000 {built-in method marshal.loads}
+     2075    0.010    0.000    0.010    0.000 {built-in method _codecs.utf_8_decode}
+    147/1    0.007    0.000    1.058    1.058 {built-in method builtins.exec}
+        3    0.005    0.002    0.023    0.008 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/xml/etree/ElementTree.py:557(parse)
+        1    0.004    0.004    0.921    0.921 /home/jfsp/stenalgo-fix/util/fixAsseoirDualFormGaps.py:103(main)
+      125    0.004    0.000    0.004    0.000 {method 'read' of '_io.BufferedReader' objects}
+        1    0.004    0.004    0.013    0.013 /home/jfsp/stenalgo-fix/src/verbparadigm.py:193(parseConjugationTemplates)
+  399/397    0.004    0.000    0.016    0.000 {built-in method builtins.__build_class__}
+        1    0.003    0.003    0.014    0.014 /home/jfsp/stenalgo-fix/src/verbparadigm.py:51(loadVerbisteTemplates)
+        1    0.003    0.003    0.003    0.003 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/string/__init__.py:1(<module>)
+   197/47    0.003    0.000    0.007    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/re/_parser.py:512(_parse)
+
+
