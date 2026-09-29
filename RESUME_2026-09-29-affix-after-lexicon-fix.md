@@ -13,18 +13,20 @@ reference comparison"). Work paused here to fix lexicon data on `main`, then ret
   big pickles/logs in `scratch/` are untracked and regenerable via `python -m util.affix_scan`).
 - Nothing about the theory/Plover output changed by this branch.
 
-## Step 1 (on `main`): data fix
+## Step 1 (on `main`): data fix -- DONE 2026-09-29 (`-ption` afa8fac, `-ction` a9b85cf; pushed)
 Resyllabify the 5 wrong `-ption` lemmas (`absorption(s)`, `réabsorption`, `résorption(s)`):
 `p_s_j_§` -> `p|s_j_§` in `resources/LexiqueMixte.tsv` (see TODO.md, commit 3de3273; source is
 Lexique383 syllable columns, so fix at the S1 origin, `lexique.py`, not by hand-editing the TSV).
 Then `rm -f *.pickle` and rebuild per `docs/PIPELINE.md`; check md5 changes are limited to those
-lemmas. Also check `ction` (`ksj§`, 5 carriers) and `-th` for the same artefact.
+lemmas. The 5 `-ction` lemmas with an x were fixed too (`fix_x_k_s`, a9b85cf); `-xion`/`-xtion` deliberately left. `-th` still unchecked.
 
 ## Step 2 (back on this branch)
-1. `git merge main` (or rebase) to pick up the fixed lexicon.
-2. Rerun the affix scan (`util/affix_scan.py`, L/M/H sweep) and the reference diff; confirm the
+Integration of `main` into this branch is deliberately deferred (user: not ready). Until then the
+branch still has the OLD lexicon (stray `psj§ ption` and `ksj§ ction` anchors). Decide how to get
+the fixed lexicon here before rerunning anything.
+1. Rerun the affix scan (`util/affix_scan.py`, L/M/H sweep) and the reference diff; confirm the
    stray `psj§ ption` anchor is gone and `tion`'s carriers grew.
-3. Decide whether the remaining cluster cases (`ksj§ ction`, `tj§ tion` = question/suggestion)
+2. Decide whether the remaining cluster cases (`ksj§` -xion/-xtion ~23 words, `tj§` -stion = question/digestion; `ksj§ ction` was a data bug, fixed)
    justify the generator change below.
 
 ## Idea, not started: cluster-onset fusion
