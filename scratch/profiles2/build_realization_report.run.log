@@ -1,0 +1,12 @@
+Self-homograph spellings with extra reading(s) beyond their primary (e.g. "calmez"): 13163 words, 18788 extra strokes realized.
+Preferred key [18] for marker 'impératif': honored
+Preferred key [19] for marker 'pers_2': honored
+Preferred key [20] for marker 'pers_3': honored
+Wrote realization_report.json: 7/7 keypress groups realized (0 residual theory collisions, 0 residual same-lemmeGramCat collisions [Phase P's own job], 37 cross-category clashes [out of scope, aller-style], 1262 cross-lemma collisions [out of scope, */# track's job]).
+  group 0 ['conditionnel', 'infinitif']: 3990 words -> keys [23] (cost 106)
+  group 1 ['f']: 15747 words -> keys [16] (cost 91)
+  group 2 ['future', 'passé', 'pers_3']: 12496 words -> keys [20] (cost 187)
+  group 3 ['imparfait', 'subjonctif']: 5815 words -> keys [21] (cost 125)
+  group 4 ['impératif', 'pers_1']: 7889 words -> keys [18] (cost 106)
+  group 5 ['nbr_p', 'p']: 51803 words -> keys [17] (cost 85)
+  group 6 ['pers_2']: 8159 words -> keys [19] (cost 106)

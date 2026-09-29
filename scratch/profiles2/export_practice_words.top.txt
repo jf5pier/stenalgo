@@ -1,0 +1,61 @@
+Tue Sep 29 18:30:27 2026    scratch/profiles2/export_practice_words.pstats
+
+         21668758 function calls (20667613 primitive calls) in 25.955 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1287 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    149/1    0.008    0.000   26.155   26.155 {built-in method builtins.exec}
+        1    0.000    0.000   26.155   26.155 <string>:1(<module>)
+        1    0.000    0.000   26.155   26.155 <frozen runpy>:206(run_module)
+        1    0.000    0.000   26.152   26.152 <frozen runpy>:65(_run_code)
+        1    0.480    0.480   26.152   26.152 /home/jfsp/stenalgo-fix/util/export_practice_words.py:1(<module>)
+        1    1.250    1.250   25.590   25.590 /home/jfsp/stenalgo-fix/util/export_practice_words.py:210(main)
+        1    0.000    0.000    8.965    8.965 /home/jfsp/stenalgo-fix/util/_theoryio.py:152(loadPhoneticAndDisambiguatedTheory)
+        7    8.146    1.164    8.160    1.166 {built-in method _pickle.load}
+   190253    3.745    0.000    5.376    0.000 /home/jfsp/stenalgo-fix/util/_stenorender.py:40(renderFinalStrokesToRTFCRE)
+        1    0.000    0.000    4.715    4.715 /home/jfsp/stenalgo-fix/util/_theoryio.py:103(loadCachedDisambiguatedTheory)
+        1    0.408    0.408    4.250    4.250 /home/jfsp/stenalgo-fix/util/_theoryio.py:42(_loadDictionaryAndPhoneticTheory)
+        1    0.226    0.226    3.683    3.683 /home/jfsp/stenalgo-fix/util/export_practice_words.py:176(buildReadingsByWord)
+        1    2.368    2.368    2.389    2.389 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:670(buildWordsByOrthoLemme)
+   190253    0.343    0.000    1.634    0.000 /home/jfsp/stenalgo-fix/util/export_practice_words.py:113(formatReadingsLabel)
+        1    0.325    0.325    1.583    1.583 /home/jfsp/stenalgo-fix/util/_theoryio.py:19(loadDictionary)
+1543124/869288    0.790    0.000    1.354    0.000 {method 'join' of 'str' objects}
+   171603    0.092    0.000    1.064    0.000 /home/jfsp/stenalgo-fix/util/export_practice_words.py:169(formatPhonology)
+   129652    0.295    0.000    0.961    0.000 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:680(_resolveEntryWord)
+   197949    0.582    0.000    0.923    0.000 /home/jfsp/stenalgo-fix/util/export_practice_words.py:95(_readingHeadAndDetail)
+        1    0.161    0.161    0.867    0.867 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/__init__.py:120(dump)
+
+
+===== sort by tottime =====
+Tue Sep 29 18:30:27 2026    scratch/profiles2/export_practice_words.pstats
+
+         21668758 function calls (20667613 primitive calls) in 25.955 seconds
+
+   Ordered by: internal time
+   List reduced from 1287 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        7    8.146    1.164    8.160    1.166 {built-in method _pickle.load}
+   190253    3.745    0.000    5.376    0.000 /home/jfsp/stenalgo-fix/util/_stenorender.py:40(renderFinalStrokesToRTFCRE)
+        1    2.368    2.368    2.389    2.389 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:670(buildWordsByOrthoLemme)
+        1    1.250    1.250   25.590   25.590 /home/jfsp/stenalgo-fix/util/export_practice_words.py:210(main)
+1543124/869288    0.790    0.000    1.354    0.000 {method 'join' of 'str' objects}
+  1311849    0.641    0.000    0.751    0.000 {method 'get' of 'dict' objects}
+  1356655    0.618    0.000    0.660    0.000 {built-in method builtins.sorted}
+   197949    0.582    0.000    0.923    0.000 /home/jfsp/stenalgo-fix/util/export_practice_words.py:95(_readingHeadAndDetail)
+        2    0.522    0.261    0.523    0.261 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/decoder.py:351(raw_decode)
+        1    0.480    0.480   26.152   26.152 /home/jfsp/stenalgo-fix/util/export_practice_words.py:1(<module>)
+        1    0.408    0.408    4.250    4.250 /home/jfsp/stenalgo-fix/util/_theoryio.py:42(_loadDictionaryAndPhoneticTheory)
+   190253    0.405    0.000    0.856    0.000 /home/jfsp/stenalgo-fix/util/export_practice_words.py:134(formatContext)
+   636659    0.393    0.000    0.771    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:721(strokesToRTFCRE)
+   190253    0.343    0.000    1.634    0.000 /home/jfsp/stenalgo-fix/util/export_practice_words.py:113(formatReadingsLabel)
+        1    0.325    0.325    1.583    1.583 /home/jfsp/stenalgo-fix/util/_theoryio.py:19(loadDictionary)
+   129652    0.295    0.000    0.961    0.000 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:680(_resolveEntryWord)
+   171465    0.279    0.000    0.689    0.000 /home/jfsp/stenalgo-fix/util/export_practice_words.py:196(chordsWithReadings)
+  2464401    0.276    0.000    0.276    0.000 /home/jfsp/stenalgo-fix/util/_stenorender.py:46(<genexpr>)
+842254/517420    0.273    0.000    0.524    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:280(_iterencode_list)
+   662908    0.249    0.000    0.801    0.000 /home/jfsp/stenalgo-fix/util/export_practice_words.py:173(<genexpr>)
+
+
