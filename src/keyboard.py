@@ -1,5 +1,6 @@
 #!/bin/env python3
 from dataclasses import dataclass, fields
+from functools import lru_cache
 from math import log,ceil
 from abc  import ABC, abstractmethod
 from typing import override, Any, Self, TypeAlias
@@ -28,6 +29,7 @@ Stroke: TypeAlias = tuple[int, ...]
 Strokes: TypeAlias = tuple[Stroke, ...]
 
 
+@lru_cache
 def canonicalizeStrokes(strokes: Strokes) -> Strokes:
     """
     Collapse each Stroke to the physically-realized chord it produces: a stroke is a
@@ -41,6 +43,8 @@ def canonicalizeStrokes(strokes: Strokes) -> Strokes:
     physical stroke (elicitation-cluster discovery, the */# reserved-key grouping)
     must compare this canonical form, not the raw tuple -- matching what
     `Starboard.strokesToRTFCRE`'s `sorted(set(stroke))` already does at render time.
+
+    lru_cache'd: pure tuple-in/tuple-out, called per word across several steps.
     """
     return tuple(tuple(sorted(set(stroke))) for stroke in strokes)
 
@@ -412,6 +416,7 @@ Fingers assignments :
     @override
     def clearLayout(self) -> None:
         self.phonemesAssignedToStroke = {}
+        self._dropRenderMemos()
 
     @override
     def addToLayout(self, stroke: Stroke, phoneme: str, phonemeOrder: list[str]|None = None) -> None:
@@ -439,8 +444,15 @@ Fingers assignments :
                     existingKeypressPhoneme.append(phoneme)
                     break
         self.phonemesAssignedToStroke[stroke] = existingKeypressPhoneme
+        self._dropRenderMemos()
         return
-            
+
+    def _dropRenderMemos(self) -> None:
+        """Invalidate the keyDisplayName/strokesToRTFCRE caches: both derive
+        from phonemesAssignedToStroke, which the layout mutators change."""
+        self.__dict__.pop("_keyDisplayNameCache", None)
+        self.__dict__.pop("_strokesToRTFCRECache", None)
+
 
     
     @override
@@ -672,7 +684,20 @@ Fingers assignments :
         English steno's S-/-S convention): several phonemes are reused between
         the left and right hand (e.g. "k" onset vs. "k" coda), so the hyphen
         placement -- not the letter -- is what keeps every key's name unique.
+
+        Memoized per instance (26 keys; created lazily because fromJSONFile
+        builds instances through cls.__new__ without __init__, and dropped by
+        addToLayout/clearLayout since the label derives from the layout).
         """
+        names: dict[int, str] = self.__dict__.setdefault("_keyDisplayNameCache", {})
+        cached = names.get(keyIndex)
+        if cached is not None:
+            return cached
+        name = self._computeKeyDisplayName(keyIndex)
+        names[keyIndex] = name
+        return name
+
+    def _computeKeyDisplayName(self, keyIndex: int) -> str:
         if keyIndex in self._reservedKeyDisplayNames:
             return self._reservedKeyDisplayNames[keyIndex]
         phonemes = self.phonemesAssignedToStroke.get((keyIndex,))
@@ -713,7 +738,13 @@ Fingers assignments :
         combinations resolve their keys out of order (e.g. coda key 21 "-R" before
         key 20 "-t"), which `strokesToString`'s plain phoneme rendering tolerates
         but Plover's stricter steno-string parser rejects.
+
+        Memoized per instance (lazily; dropped by addToLayout/clearLayout with
+        the key-name memo, since the rendering derives from the layout).
         """
+        rendered = self.__dict__.setdefault("_strokesToRTFCRECache", {}).get(strokes)
+        if rendered is not None:
+            return rendered
         strokeString = ""
         for stroke in strokes:
             if not strokeString == "":
@@ -726,6 +757,7 @@ Fingers assignments :
             if syllableString["nucleus"] == "":
                 syllableString["nucleus"] = "-"
             strokeString += f"{syllableString['onset']}{syllableString['nucleus']}{syllableString['coda']}"
+        self.__dict__.setdefault("_strokesToRTFCRECache", {})[strokes] = strokeString
         return strokeString
 
     def setIrelandEnglishLayout(self) -> None:

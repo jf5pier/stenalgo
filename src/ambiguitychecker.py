@@ -24,7 +24,7 @@ import os
 import pickle
 from collections import defaultdict
 from dataclasses import dataclass, field
-from functools import cmp_to_key
+from functools import cmp_to_key, lru_cache
 from itertools import combinations
 from typing import TypeVar
 
@@ -89,6 +89,7 @@ def detectCrossCategoryClash(words: list[Word]) -> list[Lemme]:
 RATIO_EXEMPTION_THRESHOLD = 10.0
 
 
+@lru_cache
 def loadReform1990DoubletPairs(tsvPath: str = "resources/reform1990.tsv") -> frozenset[frozenset[str]]:
     """
     Parses resources/reform1990.tsv into a set of {oldSpelling, newSpelling} pairs --
@@ -101,6 +102,9 @@ def loadReform1990DoubletPairs(tsvPath: str = "resources/reform1990.tsv") -> fro
     excluded -- the file's own notes document these as colliding with a genuinely
     distinct, unrelated word (e.g. `fût`/`fut`, `croît`/`croit`) despite being a reform
     pair, so they are NOT safe doublet exemptions.
+
+    lru_cache'd per path: the file is static during a run, and several steps
+    (S7, the exporters, composeReservedKeyStrokesForEntries) reparse it.
     """
     with open(tsvPath, encoding="utf-8") as tsvFile:
         rows = [line.rstrip("\n") for line in tsvFile if not line.startswith("#")]
