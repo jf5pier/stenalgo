@@ -34,8 +34,8 @@ MAX_FAMILY_CANDIDATES = 1500  # per position, by freq x k; keeps the O(n^2) simi
 MAX_STEMS_FOR_JACCARD = 300
 NESTED_SIM = 0.8              # one affix spelled and sounded inside another (-ité / -bilité)
 NESTED_MAX_EXTRA_LETTERS = 3
-GROWTH_MAX_DEPTH = 3          # A9: extra syllables absorbed beyond a base candidate's own k
-GROWTH_MAX_EXCEPTION_SHARE = 0.02  # mirrors affixbinding.SPLIT_MAX_LOSS -- same kind of bound
+LEGACY_GROWTH_MAX_DEPTH = 3   # --legacy only: A9 extra syllables absorbed beyond a base candidate's own k
+LEGACY_GROWTH_MAX_EXCEPTION_SHARE = 0.02  # --legacy only; mirrors affixbinding.SPLIT_MAX_LOSS
 GROWTH_MAX_SLOT_VALUES = 8    # --legacy only: a wildcard this wide is its own unlearnable rule
 # --legacy only (DESIGN_2026-09-27-affix-rule-selection.md D1: only 20-30 rules ship in the new
 # path, so the 300-family sanity ceiling these existed to enforce no longer applies there).
@@ -43,9 +43,17 @@ GROWTH_MIN_CARRIER_LEMMAS = 7 * MIN_CARRIER_LEMMAS
 GROWTH_MIN_STEM_ROOTS = 7 * MIN_STEM_ROOTS
 GROWTH_MIN_CANDIDATE_FREQ = 7 * MIN_CANDIDATE_FREQ
 
-# New lattice-growth path (DESIGN_2026-09-27-affix-rule-selection.md §3, §8).
-MAX_SLOT_EXCLUSIONS = 2
-GROWTH_MIN_MARGINAL = MIN_FAMILY_STROKEFREQ
+# New lattice-growth path (DESIGN_2026-09-27-affix-rule-selection.md §3, §8), relaxed by
+# PLAN_2026-09-28-affix-single-generator-rewrite.md U5: pure pruning thresholds are low, measured
+# bounds; learnability lives in the rule score (affixrules.py), not in generation-time gates.
+GROWTH_MAX_DEPTH = 4          # extra syllables absorbed beyond a k=1 anchor (k up to 5)
+GROWTH_MAX_EXCEPTION_SHARE = 0.05  # aligned with affixrules.MAX_EXCEPTION_RATE; collisions this lets
+                                   # through become word exceptions and are scored
+MAX_SLOT_EXCLUSIONS = 3
+GROWTH_MIN_EXPAND = 5.0       # a child is expanded again iff its subtree bound (sum f x syllables
+                              # still absorbable) reaches this -- measured, see the plan §3 step 2
+VARIANT_MAX_NEW_CONFLICT_SHARE = 0.02  # U3a: fusing spelling variants may add at most this share of
+                                       # the merged frequency as new different-lemma collisions
 MAX_POOL = 200000   # raised one order of magnitude from the design's 20000 default (2026-09-27):
                     # on the real lexicon the pool saturates at ~2,199 candidates by 200000 and is
                     # byte-identical at 2,000,000 and 20,000,000 (PYTHONHASHSEED=0 controlled
@@ -139,6 +147,7 @@ class LemmaIndex:
     def __init__(self, lemmas: set[str] | list[str]) -> None:
         self.set = {norm(x) for x in lemmas}
         self.sorted = sorted(self.set)
+        self.attestedCache: dict[tuple[str, str, str], bool] = {}
 
     def hasLemma(self, nstem: str) -> bool:
         return nstem in self.set
@@ -159,6 +168,33 @@ def passesPrefixFilter(stem: str, lemmas: LemmaIndex) -> bool:
 
 def passesSuffixFilter(stem: str, ownOrtho: str, lemmas: LemmaIndex) -> bool:
     return len(stem) >= MIN_STEM_LETTERS and lemmas.hasOtherLemmaStartingWith(norm(stem), norm(ownOrtho))
+
+
+def isAttested(pos: str, c: "Carrier", lemmas: LemmaIndex) -> bool:
+    """The OLD stem-attestation carrier gate (passesPrefixFilter/passesSuffixFilter, with the
+    inflected-prefix lemma fallback), now evaluated only to report `Candidate.attestedShare`
+    (plan U2: lemma no longer gates which words a pattern covers). Memoized per stem."""
+    r = c.rec
+    own = r.ortho if (r.isLemmaForm or isIterParticiple(r)) else r.lemme
+    key = (pos, c.stem, own if pos == SUFFIX else r.lemme + "|" + r.ortho)
+    hit = lemmas.attestedCache.get(key)
+    if hit is None:
+        if pos == SUFFIX:
+            hit = passesSuffixFilter(c.stem, own, lemmas)
+        else:
+            hit = passesPrefixFilter(c.stem, lemmas)
+            if not hit and not r.isLemmaForm:
+                oa = r.ortho[:len(r.ortho) - len(c.stem)]
+                hit = r.lemme.startswith(oa) and passesPrefixFilter(r.lemme[len(oa):], lemmas)
+        lemmas.attestedCache[key] = hit
+    return hit
+
+
+def attestedShareOf(pos: str, carriers: list["Carrier"], lemmas: LemmaIndex) -> float:
+    total = sum(c.rec.frequency for c in carriers)
+    if total <= 0:
+        return 0.0
+    return sum(c.rec.frequency for c in carriers if isAttested(pos, c, lemmas)) / total
 
 
 VERB_GRAMCAT = "GramCat.VER"  # WordRecord.gramCat is str(word.gramCat), e.g. "GramCat.VER"
@@ -229,7 +265,7 @@ class Candidate:
     examples: list[str] = field(default_factory=list)
     stemFreq: dict[str, float] = field(default_factory=dict)  # norm(stem) -> summed lemma-form carrier freq
     stemRoots: int = 0
-    isGeneralized: bool = False        # pooled from spelling variants that share a tail (A7)
+    isGeneralized: bool = False        # pooled from spelling variants (A8 group / variant merge) or grown
     variants: list[str] = field(default_factory=list)  # the orthos pooled into this one, if isGeneralized
     grownDepth: int = 0                # A9: syllables absorbed beyond the base candidate that seeded growth
     exceptionCount: int = 0            # A9: carriers dropped (kept unabbreviated) to allow the growth
@@ -238,6 +274,13 @@ class Candidate:
     slots: tuple["Slot", ...] = ()     # lattice (§3.1): slots[0] is next to the base, last next to the stem
     aliases: list[tuple[str, int, str, str]] = field(default_factory=list)  # lattice dedupe (§3.4)
     rootKey: tuple[str, int, str, str] | None = None  # lattice (§3.4): the ungrown ancestor
+    alsoFrom: list[tuple[str, int, str, str]] = field(default_factory=list)  # further parents whose
+                                       # identical duplicate child was folded into this node
+    isAnchor: bool = False             # a rule root: k=1 seed, A8 group or variant merge (never grown)
+    attestedShare: float = 0.0         # freq share of carriers whose stem passes the OLD lemma filter
+                                       # (report only -- no longer a carrier gate, plan U2)
+    mergeParts: list[tuple[str, int, str, str]] = field(default_factory=list)  # variant merge: the parts
+    newConflictFreq: float = 0.0       # variant merge: collision frequency the fusion added
 
     @property
     def phonoFlat(self) -> str:
@@ -517,7 +560,7 @@ def _exceptionShare(pos: str, carriers: list[Carrier], denom: float | None = Non
 def _growOneLevel(pos: str, base: Candidate) -> list[Candidate]:
     """One breadth-first growth level from `base`: absorb the next syllable, then generalize
     (A9) by greedily merging sibling per-value groups while the resulting exception share stays
-    under `GROWTH_MAX_EXCEPTION_SHARE`."""
+    under `LEGACY_GROWTH_MAX_EXCEPTION_SHARE`."""
     grown: dict[int, Carrier] = {}     # rec.idx -> grown carrier
     absorbedPhono: dict[int, str] = {}
     absorbedOrtho: dict[int, str] = {}
@@ -557,7 +600,7 @@ def _growOneLevel(pos: str, base: Candidate) -> list[Candidate]:
         candidates = [(k, v) for k, v in pairScore.items()
                       if len(membersOf[k[0]]) + len(membersOf[k[1]]) <= GROWTH_MAX_SLOT_VALUES]
         best = min(candidates, key=lambda kv: kv[1]) if candidates else None
-        if best is None or best[1] > GROWTH_MAX_EXCEPTION_SHARE:
+        if best is None or best[1] > LEGACY_GROWTH_MAX_EXCEPTION_SHARE:
             break
         (a, b), _ = best
         groupOf[a] = groupOf[a] + groupOf[b]
@@ -607,13 +650,13 @@ def _growOneLevel(pos: str, base: Candidate) -> list[Candidate]:
 
 def growAffixes(cands: dict[tuple[str, int, str, str], Candidate]) -> dict[tuple[str, int, str, str], Candidate]:
     """A9: breadth-first, try growing every kept candidate one more syllable at a time (up to
-    `GROWTH_MAX_DEPTH`), generalizing over whatever is found there. All depth-d results across
+    `LEGACY_GROWTH_MAX_DEPTH`), generalizing over whatever is found there. All depth-d results across
     every base are computed and thresholded before any depth-(d+1) growth is attempted -- a
     candidate that fails its threshold is a dead end, since deeper growth only ever loses
     carriers (see PLAN §13)."""
     grown = dict(cands)
     frontier = [c for c in cands.values() if c.carriers]
-    for _ in range(GROWTH_MAX_DEPTH):
+    for _ in range(LEGACY_GROWTH_MAX_DEPTH):
         nextFrontier: list[Candidate] = []
         for base in frontier:
             for cand in _growOneLevel(base.position, base):
@@ -699,7 +742,7 @@ def _buildGrownCandidate(
     return cand
 
 
-def _growLatticeLevel(pos: str, parent: Candidate) -> list[GrowthChild]:
+def _growLatticeLevel(pos: str, parent: Candidate, lemmas: LemmaIndex | None = None) -> list[GrowthChild]:
     """One lattice growth level from `parent`: absorb the next syllable, then emit the exact
     leaf, onset group and any-group children (§3.2) -- none consumes another."""
     grown: dict[int, Carrier] = {}
@@ -731,11 +774,12 @@ def _growLatticeLevel(pos: str, parent: Candidate) -> list[GrowthChild]:
             return None
         exceptionFreq = sum(c.rec.frequency for c in groupCarriers if c.rec.idx in excSet)
         cand = _buildGrownCandidate(pos, parent, slot, kept, exceptionFreq, len(excSet), absorbedOrtho)
-        emit = (cand.freq >= GROWTH_MIN_MARGINAL and cand.lemmas >= MIN_CARRIER_LEMMAS
-                and cand.stemRoots >= MIN_STEM_ROOTS)
+        emit = cand.lemmas >= MIN_CARRIER_LEMMAS and cand.stemRoots >= MIN_STEM_ROOTS
+        if emit and lemmas is not None:
+            cand.attestedShare = attestedShareOf(pos, kept, lemmas)
         ub = sum(c.rec.frequency * min(GROWTH_MAX_DEPTH - cand.grownDepth, _stemSyllablesLeft(pos, c) - 1)
                  for c in kept)
-        return GrowthChild(cand, emit, ub >= GROWTH_MIN_MARGINAL)
+        return GrowthChild(cand, emit, ub >= GROWTH_MIN_EXPAND)
 
     # 1. exact leaves: one per distinct absorbed syllable phono.
     for phono, carriers in byPhono.items():
@@ -798,26 +842,52 @@ def _dedupeByCarrierSet(cands: list[Candidate]) -> list[Candidate]:
             byKey[key] = cand
         elif _patternComplexity(cand) < _patternComplexity(existing):
             cand.aliases = existing.aliases + [(existing.position, existing.k, existing.phono, existing.ortho)]
+            _foldParents(cand, existing)
             byKey[key] = cand
         else:
             existing.aliases.append((cand.position, cand.k, cand.phono, cand.ortho))
+            _foldParents(existing, cand)
     return list(byKey.values())
 
 
+def _foldParents(survivor: Candidate, dropped: Candidate) -> None:
+    """The dropped duplicate's parents (grownFromKey + alsoFrom) become parents of the survivor,
+    so every anchor whose subtree held one of the two still reaches the surviving node."""
+    for parent in ([dropped.grownFromKey] if dropped.grownFromKey else []) + dropped.alsoFrom:
+        if parent != survivor.grownFromKey and parent not in survivor.alsoFrom:
+            survivor.alsoFrom.append(parent)
+
+
+LATTICE_STATS: dict[str, int] = {"renames": 0, "duplicates": 0, "generated": 0}
+# filled by the last growAffixesLattice call, for util/affix_scan.py's Part A report
+
+
+def _candKey(c: Candidate) -> tuple[str, int, str, str]:
+    return (c.position, c.k, c.phono, c.ortho)
+
+
 def growAffixesLattice(
-    cands: dict[tuple[str, int, str, str], Candidate],
+    cands: dict[tuple[str, int, str, str], Candidate], lemmas: LemmaIndex | None = None,
 ) -> dict[tuple[str, int, str, str], Candidate]:
     """Phase 1 (DESIGN_2026-09-27-affix-rule-selection.md §3): generate the pattern lattice.
-    Nothing here commits to a rule -- Phase 2/3 (not implemented yet) will do that. Guards
-    `MAX_POOL` instead of the old 5..300 family sanity check, which no longer applies (§3.6):
-    on hitting it, stops (keeping whatever was generated so far) rather than inventing a new
-    threshold (§9 pitfall). Returns the pool: the seeds plus the deduped grown nodes."""
+    Nothing here commits to a rule -- Phase 2/3 do that. Guards `MAX_POOL` instead of the old
+    5..300 family sanity check, which no longer applies (§3.6): on hitting it, stops (keeping
+    whatever was generated so far) rather than inventing a new threshold (§9 pitfall). Returns
+    the pool: the anchors plus the deduped grown nodes.
+
+    No silent key overwrites (plan §2.1.6): two grown nodes that share a (position, k, phono,
+    ortho) key are told apart by carrier set -- identical sets are one node (the second parent
+    is folded in as `alsoFrom`), different sets get the later one renamed `<ortho>⟨parent⟩`
+    before it is expanded or stored, so its own children point at the renamed key."""
     allChildren: list[Candidate] = []
     seenExpand: set[tuple[str, frozenset[tuple[int, int, int]]]] = set()
+    keyOwner: dict[tuple[str, int, str, str], tuple[tuple[str, frozenset[tuple[int, int, int]]], Candidate]] = {}
     frontier = [c for c in cands.values() if c.carriers]
+    for key, c in cands.items():
+        keyOwner[key] = (_carrierSetKey(c.position, c.carriers), c)
     for c in frontier:
         seenExpand.add(_carrierSetKey(c.position, c.carriers))
-    total = 0
+    total = renames = duplicates = 0
     stoppedEarly = False
     for _depth in range(GROWTH_MAX_DEPTH):
         if stoppedEarly:
@@ -826,18 +896,33 @@ def growAffixesLattice(
         for base in frontier:
             if stoppedEarly:
                 break
-            for child in _growLatticeLevel(base.position, base):
+            for child in _growLatticeLevel(base.position, base, lemmas):
                 total += 1
                 if total > MAX_POOL:
                     stoppedEarly = True
                     break
+                cand = child.cand
+                csk = _carrierSetKey(cand.position, cand.carriers)
                 if child.emit:
-                    allChildren.append(child.cand)
-                if child.expand:
-                    key = _carrierSetKey(child.cand.position, child.cand.carriers)
-                    if key not in seenExpand:
-                        seenExpand.add(key)
-                        nextFrontier.append(child.cand)
+                    key = _candKey(cand)
+                    owner = keyOwner.get(key)
+                    if owner is not None and owner[0] == csk:
+                        duplicates += 1
+                        _foldParents(owner[1], cand)
+                        continue
+                    if key in keyOwner:
+                        renames += 1
+                        ortho0 = cand.ortho
+                        cand.ortho = f"{ortho0}⟨{base.ortho}⟩"
+                        n = 1
+                        while _candKey(cand) in keyOwner:
+                            n += 1
+                            cand.ortho = f"{ortho0}⟨{base.ortho}⟩#{n}"
+                    keyOwner[_candKey(cand)] = (csk, cand)
+                    allChildren.append(cand)
+                if child.expand and csk not in seenExpand:
+                    seenExpand.add(csk)
+                    nextFrontier.append(cand)
         if not nextFrontier:
             break
         frontier = nextFrontier
@@ -845,35 +930,18 @@ def growAffixesLattice(
     if stoppedEarly:
         print(f"WARNING: affix lattice pool exceeded MAX_POOL={MAX_POOL}; stopped early "
               f"({total} pattern nodes generated). Don't invent a new threshold -- report it.")
-    return _mergeChildrenIntoPool(cands, allChildren)
-
-
-def _mergeChildrenIntoPool(
-    cands: dict[tuple[str, int, str, str], Candidate], children: list[Candidate],
-) -> dict[tuple[str, int, str, str], Candidate]:
-    """§3.4 dedupe, across the seed pool too (2026-09-28): a grown child whose carriers+spans
-    equal a seed node's (typically an A7-pooled node like `·°ment`, which has no lineage of its
-    own) is not added as a second, unrelated-looking pool entry -- it becomes an alias of the
-    seed, and the seed inherits the child's lineage (`grownFromKey`/`rootKey`) so Phase 2 sees
-    it as a descendant of the root it was grown from. The dropped child never has children of
-    its own: `growAffixesLattice` never expands a carrier set a seed already expanded. No cycle
-    is possible either: spans grow strictly along a lineage, so the child's parent can't
-    descend from a seed with the child's exact spans."""
+    LATTICE_STATS.update(renames=renames, duplicates=duplicates, generated=total)
+    deduped = _dedupeByCarrierSet(allChildren)
+    aliasTo = {alias: _candKey(surv) for surv in deduped for alias in surv.aliases}
     pool = dict(cands)
-    seedBySet: dict[tuple[str, frozenset[tuple[int, int, int]]], Candidate] = {}
-    for c in cands.values():
-        if c.carriers:
-            seedBySet.setdefault(_carrierSetKey(c.position, c.carriers), c)
-    for cand in _dedupeByCarrierSet(children):
-        key = (cand.position, cand.k, cand.phono, cand.ortho)
-        seed = seedBySet.get(_carrierSetKey(cand.position, cand.carriers))
-        if seed is None:
-            pool[key] = cand
-            continue
-        seed.aliases.extend([key] + cand.aliases)
-        if seed.grownFromKey is None:
-            seed.grownFromKey = cand.grownFromKey
-            seed.rootKey = cand.rootKey
+    for cand in deduped:
+        key = _candKey(cand)
+        assert key not in pool, f"lattice pool key overwritten: {key}"
+        if cand.grownFromKey in aliasTo:
+            cand.grownFromKey = aliasTo[cand.grownFromKey]
+        cand.alsoFrom = list(dict.fromkeys(
+            k for k in (aliasTo.get(k0, k0) for k0 in cand.alsoFrom) if k != cand.grownFromKey))
+        pool[key] = cand
     return pool
 
 
@@ -895,6 +963,65 @@ def carrierExclusionSet(records: list[WordRecord], n: int = TOP_WORDS_EXCLUDED) 
     return frozenset(topWords | monosyllabic)
 
 
+BUILD_STATS: dict[str, int] = {"mergesProposed": 0, "mergesDropped": 0}   # last buildCandidates call
+
+
+def _exceptionFreqOf(pos: str, carriers: list[Carrier]) -> float:
+    """Absolute different-lemma collision frequency (`_exceptionShare` with denom 1)."""
+    return _exceptionShare(pos, carriers, 1.0)[0]
+
+
+def buildVariantMerges(
+    cands: dict[tuple[str, int, str, str], Candidate],
+) -> dict[tuple[str, int, str, str], Candidate]:
+    """U3a, pre-inheritance pass: fuse k=1 spelling variants -- same position and phono, different
+    ortho (`ment`/`mant`, `té`/`ter`/`tée`) -- into one `a|b|c` merged node, but only while the
+    fusion adds at most VARIANT_MAX_NEW_CONFLICT_SHARE of new different-lemma collisions. Parts
+    are sorted by frequency; the largest starts a group and each next part joins if the test
+    passes, the rest go to the next round. Parts are never consumed (they stay in `cands`).
+    The post-inheritance check in `buildCandidates` is authoritative."""
+    byPhono: dict[tuple[str, str], list[Candidate]] = {}
+    for c in cands.values():
+        if c.k == 1 and c.carriers and not c.isGeneralized:
+            byPhono.setdefault((c.position, c.phono), []).append(c)
+    merges: dict[tuple[str, int, str, str], Candidate] = {}
+    for (pos, phono), parts in byPhono.items():
+        if len(parts) < 2:
+            continue
+        partFreq = {id(p): sum(x.rec.frequency for x in p.carriers) for p in parts}
+        partExc = {id(p): _exceptionFreqOf(pos, p.carriers) for p in parts}
+        remaining = sorted(parts, key=lambda p: (-partFreq[id(p)], p.ortho))
+        while len(remaining) >= 2:
+            cur = [remaining[0]]
+            carriers = list(remaining[0].carriers)
+            freq = partFreq[id(remaining[0])]
+            excSum = partExc[id(remaining[0])]
+            left: list[Candidate] = []
+            for p in remaining[1:]:
+                trial = carriers + p.carriers
+                trialFreq = freq + partFreq[id(p)]
+                newConflict = _exceptionFreqOf(pos, trial) - (excSum + partExc[id(p)])
+                if newConflict <= VARIANT_MAX_NEW_CONFLICT_SHARE * trialFreq:
+                    cur.append(p)
+                    carriers, freq, excSum = trial, trialFreq, excSum + partExc[id(p)]
+                else:
+                    left.append(p)
+            if len(cur) >= 2:
+                orthos = sorted(p.ortho for p in cur)
+                merged = Candidate(pos, 1, phono, "|".join(orthos), isSeed=any(p.isSeed for p in cur),
+                                    isGeneralized=True, variants=orthos,
+                                    mergeParts=[_candKey(p) for p in cur])
+                byIdx: dict[int, Carrier] = {}
+                for x in carriers:
+                    old = byIdx.get(x.rec.idx)
+                    if old is None or x.span > old.span:
+                        byIdx[x.rec.idx] = x
+                merged.carriers = list(byIdx.values())
+                merges[_candKey(merged)] = merged
+            remaining = left
+    return merges
+
+
 def buildCandidates(
     records: list[WordRecord],
     seedPairs: set[tuple[str, str]],
@@ -902,9 +1029,15 @@ def buildCandidates(
     legacy: bool = False,
     excludeTopWords: bool = True,
 ) -> dict[tuple[str, int, str, str], Candidate]:
+    """Phase 1's anchors, then the lattice. Non-legacy (plan 2026-09-28): ONE generator -- k=1
+    seeds (one per position/phono/ortho), the curated A8 groups and the U3 variant merges are the
+    anchors; everything longer is grown. Lemma no longer gates which words a pattern covers (U2);
+    it stays only for paradigm inheritance and the different-lemma collision definition. `legacy`
+    keeps the old raw k<=3 enumeration + A7 pooling + stem-attestation gate unchanged."""
     # Productivity attestation (passesPrefixFilter/passesSuffixFilter's lemma lookups) still uses
     # every record -- excluding a word from being a CARRIER doesn't mean its lemma shouldn't count
-    # when checking whether some OTHER word's stem is independently attested.
+    # when checking whether some OTHER word's stem is independently attested. Non-legacy: it only
+    # feeds the reported `attestedShare`.
     lemmas = LemmaIndex({r.lemme for r in records})
     # `excludeTopWords=False` is for small hand-built test fixtures, where "top 200 by frequency"
     # is meaningless (it would swallow every record) -- real callers always want the default.
@@ -926,32 +1059,39 @@ def buildCandidates(
 
     for r in carrierRecords:
         n = len(r.base)
-        for k in range(1, min(MAX_AFFIX_SYLL, n - 1) + 1):
+        for k in range(1, (min(MAX_AFFIX_SYLL, n - 1) if legacy else min(1, n - 1)) + 1):
             # prefixes: every record
             oa = "".join(r.orthoSylls[:k])
             if not seedsOnly or (PREFIX, oa) in seedPairs:
                 stem = r.ortho[len(oa):]
-                if not passesPrefixFilter(stem, lemmas) and not r.isLemmaForm and r.lemme.startswith(oa):
-                    stem = r.lemme[len(oa):]
-                if passesPrefixFilter(stem, lemmas):
-                    get(PREFIX, k, ".".join(r.phonoSylls[:k]), oa).carriers.append(Carrier(r, 0, k, stem))
+                if not legacy:
+                    if stem:
+                        get(PREFIX, k, ".".join(r.phonoSylls[:k]), oa).carriers.append(Carrier(r, 0, k, stem))
+                else:
+                    if not passesPrefixFilter(stem, lemmas) and not r.isLemmaForm and r.lemme.startswith(oa):
+                        stem = r.lemme[len(oa):]
+                    if passesPrefixFilter(stem, lemmas):
+                        get(PREFIX, k, ".".join(r.phonoSylls[:k]), oa).carriers.append(Carrier(r, 0, k, stem))
             # suffixes: lemma forms only, inflected forms inherit afterwards (iter-participles
             # are the one exception, see isIterParticiple)
             if r.isLemmaForm or isIterParticiple(r):
                 oa = "".join(r.orthoSylls[-k:])
                 if not seedsOnly or (SUFFIX, oa) in seedPairs:
                     stem = r.ortho[:-len(oa)]
-                    if passesSuffixFilter(stem, r.ortho, lemmas):
+                    if stem and (not legacy or passesSuffixFilter(stem, r.ortho, lemmas)):
                         get(SUFFIX, k, ".".join(r.phonoSylls[-k:]), oa).carriers.append(Carrier(r, n - k, k, stem))
 
-    cands = poolTailVariants(cands, keepOriginals=not legacy)
+    if legacy:
+        cands = poolTailVariants(cands, keepOriginals=False)
     cands = poolKnownAffixGroups(cands)
+    merges: dict[tuple[str, int, str, str], Candidate] = {}
+    if not legacy:
+        # after A8 (which consumes its members), so no merge part can vanish from the pool.
+        merges = buildVariantMerges(cands)
+        cands.update(merges)
 
-    kept: dict[tuple[str, int, str, str], Candidate] = {}
-    for key, c in cands.items():
+    def inheritAndStat(c: Candidate) -> None:
         if c.position == SUFFIX:
-            if len({x.rec.lemme for x in c.carriers}) < MIN_CARRIER_LEMMAS and not c.isSeed:
-                continue
             inherited: dict[int, Carrier] = {}
             for x in c.carriers:
                 for w in inflectedByLemme.get(x.rec.lemme, ()):
@@ -963,15 +1103,40 @@ def buildCandidates(
                         inherited[w.idx] = Carrier(w, sp[0], sp[1], x.stem)
             c.carriers.extend(inherited.values())
         _finishStats(c)
-        # isVerbEndingFragment (2026-09-27) is deliberately NOT applied here any more: the user
-        # decided (2026-09-27) to let bare verb-infinitive-ending candidates ("ter", "ler"...)
-        # compete in Phase 3's budgeted selection on their real score instead of being cut
-        # upstream, and see whether the final Phase 4 result keeps them. The function stays
-        # defined in case that decision is revisited.
-        if c.isSeed or (c.lemmas >= MIN_CARRIER_LEMMAS and c.stemRoots >= MIN_STEM_ROOTS
-                        and c.freq >= MIN_CANDIDATE_FREQ):
+
+    kept: dict[tuple[str, int, str, str], Candidate] = {}
+    if legacy:
+        for key, c in cands.items():
+            if c.position == SUFFIX and len({x.rec.lemme for x in c.carriers}) < MIN_CARRIER_LEMMAS \
+                    and not c.isSeed:
+                continue
+            inheritAndStat(c)
+            if c.isSeed or (c.lemmas >= MIN_CARRIER_LEMMAS and c.stemRoots >= MIN_STEM_ROOTS
+                            and c.freq >= MIN_CANDIDATE_FREQ):
+                kept[key] = c
+        return growAffixes(kept)
+
+    for c in cands.values():
+        inheritAndStat(c)
+    # U3a, authoritative post-inheritance conflict test: a merge stays only if fusing added at most
+    # VARIANT_MAX_NEW_CONFLICT_SHARE x its frequency of new different-lemma collisions.
+    dropped: set[tuple[str, int, str, str]] = set()
+    for mkey, m in merges.items():
+        partExc = sum(_exceptionFreqOf(m.position, cands[pk].carriers) for pk in m.mergeParts)
+        m.newConflictFreq = _exceptionFreqOf(m.position, m.carriers) - partExc
+        if m.newConflictFreq > VARIANT_MAX_NEW_CONFLICT_SHARE * m.freq:
+            dropped.add(mkey)
+    # (the isVerbEndingFragment filter is deliberately not applied any more -- 2026-09-27 user
+    # decision: bare verb-ending candidates compete on their real score in Phase 3)
+    BUILD_STATS.update(mergesProposed=len(merges), mergesDropped=len(dropped))
+    for key, c in cands.items():
+        if key in dropped:
+            continue
+        if c.isSeed or (c.lemmas >= MIN_CARRIER_LEMMAS and c.stemRoots >= MIN_STEM_ROOTS):
+            c.isAnchor = True
+            c.attestedShare = attestedShareOf(c.position, c.carriers, lemmas)
             kept[key] = c
-    return growAffixes(kept) if legacy else growAffixesLattice(kept)
+    return growAffixesLattice(kept, lemmas)
 
 
 def _finishStats(c: Candidate) -> None:

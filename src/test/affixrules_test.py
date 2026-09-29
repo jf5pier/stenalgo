@@ -87,7 +87,7 @@ class TestProxyScoreAndRuleBuilding:
 def _exactRule(cand, gain):
     """A Rule with hand-made exact results: every pooled carrier gains `gain` strokes."""
     from src.affixes import poolCarriers
-    rule = Rule(cand.position, cand, [cand], keys=(1,), sources=[cand])
+    rule = Rule(cand.position, cand, [cand], keys=(1,))
     rule.results = [CarrierResult(c, gain=gain) for c in poolCarriers([cand])]
     rule.score = ruleScoreFromResults(rule.results, 0, 1)[0]
     return rule
@@ -115,26 +115,91 @@ class TestTerritory:
         b = _exactRule(Candidate(PREFIX, 1, "R°", "re", carriers=[Carrier(w, 0, 1, "s") for w in ws]), 1)
         assert territoryOverlap(a, b) == 0.0
 
-    def test_selection_merges_a_lineageless_mate_instead_of_selecting_it_alone(self, monkeypatch):
-        # `ment` (k=1, every word) and an A7-style `·°ment` (k=2, no lineage, most of the same
-        # words). Word-once crediting alone would select both, on two keys.
+    def test_an_overlapping_rule_is_skipped_not_merged(self, monkeypatch):
+        # `ment` (k=1, every word) and a second anchor `·°ment` (most of the same words):
+        # word-once crediting alone would select both, on two keys. The overlap guard skips it.
         import src.affixrules as R
         from src.affixes import poolCarriers
 
         def fakeChoose(rule, pk, ctx, keypresses):
-            rule.keys = (1,)
+            rule.exactDone, rule.keys = True, (1,)
             rule.results = [CarrierResult(c, gain=c.span) for c in poolCarriers(rule.forms)]
             rule.score = ruleScoreFromResults(rule.results, 0, len(rule.forms))[0]
 
         monkeypatch.setattr(R, "chooseRuleKeypress", fakeChoose)
         ws = _words(10)
-        ment = Candidate(SUFFIX, 1, "m@", "ment", carriers=[Carrier(w, 2, 1, "s") for w in ws])
-        ement = Candidate(SUFFIX, 2, "°.m@", "·°ment", carriers=[Carrier(w, 1, 2, "s") for w in ws[:8]])
+        ment = Candidate(SUFFIX, 1, "m@", "ment", carriers=[Carrier(w, 2, 1, "s") for w in ws], isAnchor=True)
+        ement = Candidate(SUFFIX, 2, "°.m@", "·°ment", carriers=[Carrier(w, 1, 2, "s") for w in ws[:8]],
+                          isAnchor=True)
         cands = {candidateKey(c): c for c in (ment, ement)}
         result = R.selectRules(cands, None, None, [], budget=5)
-        assert len(result.selected) == 1
-        assert {candidateKey(f) for f in result.selected[0].forms} == set(cands)
-        assert [e.outcome for e in result.territoryEvents] == ["merged"]
+        assert [r.root.ortho for r in result.selected] == ["·°ment"]   # the higher upper bound wins
+        assert [(k.skippedRoot, k.selectedRoot) for k in result.overlapSkips] == [("ment", "·°ment")]
+
+    def test_a_grown_node_is_never_a_rule_root(self, monkeypatch):
+        import src.affixrules as R
+        from src.affixes import poolCarriers
+
+        def fakeChoose(rule, pk, ctx, keypresses):
+            rule.exactDone, rule.keys = True, (1,)
+            rule.results = [CarrierResult(c, gain=c.span) for c in poolCarriers(rule.forms)]
+            rule.score = ruleScoreFromResults(rule.results, 0, len(rule.forms))[0]
+
+        monkeypatch.setattr(R, "chooseRuleKeypress", fakeChoose)
+        ws = _words(10)
+        ment = Candidate(SUFFIX, 1, "m@", "ment", carriers=[Carrier(w, 2, 1, "s") for w in ws], isAnchor=True)
+        grown = Candidate(SUFFIX, 2, "°.m@", "·°ment", carriers=[Carrier(w, 1, 2, "s") for w in ws],
+                          grownFromKey=candidateKey(ment), rootKey=candidateKey(ment))
+        cands = {candidateKey(c): c for c in (ment, grown)}
+        result = R.selectRules(cands, None, None, [], budget=5)
+        assert [r.root.ortho for r in result.selected] == ["ment"]
+        assert grown in result.selected[0].forms          # it is a FORM of its anchor's rule
+
+    def test_a_folded_duplicate_is_a_descendant_of_both_parents(self):
+        a = Candidate(SUFFIX, 1, "m@", "ment", isAnchor=True)
+        b = Candidate(SUFFIX, 1, "m@", "mant|ment", isAnchor=True)
+        child = Candidate(SUFFIX, 2, "°.m@", "·°ment", grownFromKey=candidateKey(a), alsoFrom=[candidateKey(b)])
+        idx = childrenIndex({candidateKey(c): c for c in (a, b, child)})
+        assert descendantsOf(a, idx) == [child] and descendantsOf(b, idx) == [child]
+
+
+class TestVariantRivals:
+    def _setup(self, monkeypatch, scores):
+        import src.affixrules as R
+
+        def fakeChoose(rule, pk, ctx, keypresses):
+            rule.exactDone, rule.keys, rule.score = True, (1,), scores[rule.root.ortho]
+
+        monkeypatch.setattr(R, "chooseRuleKeypress", fakeChoose)
+        ments, mants = _words(5), _words(3, "y")
+        ment = Candidate(SUFFIX, 1, "m@", "ment", freq=50.0, isAnchor=True,
+                         carriers=[Carrier(w, 2, 1, "s") for w in ments])
+        mant = Candidate(SUFFIX, 1, "m@", "mant", freq=30.0, isAnchor=True,
+                         carriers=[Carrier(w, 2, 1, "s") for w in mants])
+        merged = Candidate(SUFFIX, 1, "m@", "mant|ment", freq=80.0, isAnchor=True, isGeneralized=True,
+                           carriers=ment.carriers + mant.carriers,
+                           mergeParts=[candidateKey(ment), candidateKey(mant)])
+        return {candidateKey(c): c for c in (ment, mant, merged)}, R
+
+    def test_merged_anchor_replaces_its_parts_when_it_scores_at_least_the_main(self, monkeypatch):
+        cands, R = self._setup(monkeypatch, {"ment": 100.0, "mant": 40.0, "mant|ment": 100.0})
+        kept, decisions = R.resolveVariantRivals(cands, None, None, [])
+        assert [cands[k].ortho for k in kept] == ["mant|ment"]
+        assert [d.outcome for d in decisions] == ["fused"]
+
+    def test_merged_anchor_is_dropped_when_it_scores_lower(self, monkeypatch):
+        cands, R = self._setup(monkeypatch, {"ment": 100.0, "mant": 40.0, "mant|ment": 99.0})
+        kept, decisions = R.resolveVariantRivals(cands, None, None, [])
+        assert sorted(cands[k].ortho for k in kept) == ["mant", "ment"]
+        assert [d.outcome for d in decisions] == ["apart"]
+
+    def test_group_outside_the_top_is_dropped_out_of_reach(self, monkeypatch):
+        cands, R = self._setup(monkeypatch, {"ment": 100.0, "mant": 40.0, "mant|ment": 100.0})
+        monkeypatch.setattr(R, "RIVAL_RESOLVE_TOP", 0)
+        kept, decisions = R.resolveVariantRivals(cands, None, None, [])
+        assert sorted(cands[k].ortho for k in kept) == ["mant", "ment"]
+        assert [d.outcome for d in decisions] == ["outOfReach"]
+
 
     def test_swap_never_brings_in_a_mate_of_a_rule_that_stays(self):
         from src.affixrules import SelectionResult, swapPass, territoryOverlap
