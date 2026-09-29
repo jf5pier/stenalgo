@@ -50633,8 +50633,8 @@ exact	Egzakt	exact	ADJ	ADJ	m	s		E_gz|a_k_t	e_x|a_c_t	19.86	76.66
 exacte	Egzakt	exact	ADJ	ADJ	f	s		E_gz|a_k_t_#	e_x|a_c_t_e	13.92	7.55
 exactement	Egzakt°m@	exactement	ADV	ADV				E_gz|a_k|t_°|m_@	e_x|a_c|t_e|m_ent	92.36	144.62
 exactes	Egzakt	exact	ADJ	ADJ	f	p		E_gz|a_k_t_#	e_x|a_c_t_es	2.97	1.08
-exaction	Egzaksj§	exaction	NOM	NOM	f	s		E_gz|a|k_s_j_§	e_x|a|c_t_i_on	0.0	0.01
-exactions	Egzaksj§	exaction	NOM	NOM	f	p		E_gz|a|k_s_j_§_#	e_x|a|c_t_i_on_s	1.69	0.31
+exaction	Egzaksj§	exaction	NOM	NOM	f	s		E_gz|a_k|s_j_§	e_x|a_c|t_i_on	0.0	0.01
+exactions	Egzaksj§	exaction	NOM	NOM	f	p		E_gz|a_k|s_j_§_#	e_x|a_c|t_i_on_s	1.69	0.31
 exactitude	Egzaktityd	exactitude	NOM	NOM	f	s		E_gz|a_k|t_i|t_y_d_#	e_x|a_c|t_i|t_u_d_e	4.93	1.26
 exactitudes	Egzaktityd	exactitude	NOM	NOM	f	p		E_gz|a_k|t_i|t_y_d_#	e_x|a_c|t_i|t_u_d_es	0.07	0.0
 exacts	Egzakt	exact	ADJ	ADJ	m	p		E_gz|a_k_t_#	e_x|a_c_t_s	1.82	1.51
@@ -51892,7 +51892,7 @@ extincteur	Ekst5kt9R	extincteur	NOM	ADJ,NOM	m	s		E|ks_t_5_k|t_9_R	e|x_t_in_c|t_e
 extincteur	Ekst5kt9R	extincteur	ADJ	ADJ,NOM	m	s		E|ks_t_5_k|t_9_R	e|x_t_in_c|t_eu_r	0.2	0.01
 extincteurs	Ekst5kt9R	extincteur	NOM	ADJ,NOM	m	p		E|ks_t_5_k|t_9_R_#	e|x_t_in_c|t_eu_r_s	0.07	0.44
 extincteurs	Ekst5kt9R	extincteur	ADJ	ADJ,NOM	m	p		E|ks_t_5_k|t_9_R_#	e|x_t_in_c|t_eu_r_s	0.0	0.01
-extinction	Ekst5ksj§	extinction	NOM	NOM	f	s		E|ks_t_5|k_s_j_§	e|x_t_in|c_t_i_on	3.65	3.42
+extinction	Ekst5ksj§	extinction	NOM	NOM	f	s		E|ks_t_5_k|s_j_§	e|x_t_in_c|t_i_on	3.65	3.42
 extinctrice	Ekst5ktRis	extinctrice	ADJ	ADJ	f	s		E|ks_t_5_k|t_R_i_s_#	e|x_t_in_c|t_r_i_c_e	0.0	0.01
 extirpa	EkstiRpa	extirper	VER	VER			ind:pas:3s;	E|ks_t_i_R|p_a	e|x_t_i_r|p_a	1.42	0.0
 extirpaient	EkstiRpE	extirper	VER	VER			ind:imp:3p;	E|ks_t_i_R|p_E	e|x_t_i_r|p_aient	0.2	0.0
@@ -51935,8 +51935,8 @@ extraconjugaux	EkstRak§Zygo	extraconjugal	ADJ	ADJ	m	p		E|ks_t_R_a|k_§|Z_y|g_o_
 extracorporelle	EkstRakORpOREl	extracorporel	ADJ	ADJ	f	s		E|ks_t_R_a|k_O_R|p_O|R_E_l_#	e|x_t_r_a|c_o_r|p_o|r_e_ll_e	0.0	0.01
 extracteur	EkstRakt9R	extracteur	NOM	NOM	m	s		E|ks_t_R_a_k|t_9_R	e|x_t_r_a_c|t_eu_r	0.0	0.04
 extracteurs	EkstRakt9R	extracteur	NOM	NOM	m	p		E|ks_t_R_a_k|t_9_R_#	e|x_t_r_a_c|t_eu_r_s	0.0	0.01
-extraction	EkstRaksj§	extraction	NOM	NOM	f	s		E|ks_t_R_a|k_s_j_§	e|x_t_r_a|c_t_i_on	1.35	1.79
-extractions	EkstRaksj§	extraction	NOM	NOM	f	p		E|ks_t_R_a|k_s_j_§_#	e|x_t_r_a|c_t_i_on_s	0.07	0.03
+extraction	EkstRaksj§	extraction	NOM	NOM	f	s		E|ks_t_R_a_k|s_j_§	e|x_t_r_a_c|t_i_on	1.35	1.79
+extractions	EkstRaksj§	extraction	NOM	NOM	f	p		E|ks_t_R_a_k|s_j_§_#	e|x_t_r_a_c|t_i_on_s	0.07	0.03
 extractive	EkstRaktiv	extractif	ADJ	ADJ	f	s		E|ks_t_R_a_k|t_i_v_#	e|x_t_r_a_c|t_i_v_e	0.0	0.01
 extradaient	EkstRadE	extrader	VER	VER			ind:imp:3p;	E|ks_t_R_a|d_E	e|x_t_r_a|d_aient	0.07	0.0
 extrade	EkstRad	extrader	VER	VER			imp:pre:2s;ind:pre:3s;	E|ks_t_R_a_d_#	e|x_t_r_a_d_e	0.07	0.04
