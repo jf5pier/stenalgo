@@ -28,6 +28,8 @@ import os
 import subprocess
 import sys
 
+from util._timing import timedCall
+
 SYNTHETIC_TSV_PATH = "resources/LexiqueSynthetic.tsv"
 # DisambiguatedTheory.pickle is fingerprint-checked (util/_theoryio.py) and would
 # self-invalidate on the LexiqueSynthetic.tsv md5 change anyway; deleting it here
@@ -94,7 +96,11 @@ def main() -> None:
     roundsDone = 0
     while True:
         before = _md5(SYNTHETIC_TSV_PATH)
-        runAppendersOnce()
+        # Per-round phase lines: the whole S2 step logs only one "step" line, so
+        # round-level costs (which round appended, how long the scans took) used
+        # to be inferable only from timestamps.
+        with timedCall("phase", f"util.build_synthetic_lexicon: appender round {roundsDone + 1}"):
+            runAppendersOnce()
         roundsDone += 1
         action = nextRoundAction(roundsDone, _md5(SYNTHETIC_TSV_PATH) != before)
         if action == "converged":
