@@ -500,3 +500,13 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
   descending order of usefulness in a tracked scratch file (e.g.
   `scratch/pluvier-affix-shortcuts.tsv`) for later human evaluation — do NOT wire any of
   them into the theory; this is measurement only.
+- ~~**Resyllabify 5 wrong `-ption` lemmas**~~ — DONE 2026-09-29 (`lexique.py` `fix_p_sj`; Mixte 5 rows, Plover 5 entries, trainer definitions regrouped). Still open: check `ction` (`ksj§`) and `-th` stray anchors. Original note: — `resources/LexiqueMixte.tsv` (source: Lexique383
+  syllable columns) — `absorption`, `absorptions`, `réabsorption`, `résorption`, `résorptions`
+  are split `…R|p_s_j_§` (the `p` in the onset of the last syllable, phono `psj§`, ortho `ption`).
+  Every other `-ption` word (adoption, exception, acception, assomption, exemption, rédemption,
+  circonscription, …) is split `p|s_j_§` (`p` in the coda of the previous syllable, last syllable
+  `sj§`/`tion`). The five are wrong: they create a stray `psj§ ption` suffix anchor (5 carriers,
+  freq 0.6) in the affix scan that can never fuse with `tion`. Fix the split, then rebuild per
+  `docs/PIPELINE.md` ("Recomputing after a fix", lexicon change → `rm -f *.pickle`). Afterwards
+  check whether other stray anchors (`ction` `ksj§`, 5 carriers; `-th`) are the same kind of
+  syllabification artefact. Found 2026-09-29 while comparing affix rules to OQLF/TAO.
