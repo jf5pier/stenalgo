@@ -49,9 +49,10 @@ def main() -> None:
     starboard = Starboard.fromJSONFile(KEYBOARD_JSON)
     if starboard is None:
         raise RuntimeError(f"{KEYBOARD_JSON} not found; run dictionary.py once first to generate it.")
-    theory, disambiguatedTheory = loadPhoneticAndDisambiguatedTheory(starboard)
+    theory, disambiguatedTheory, wordToStrokes, wordsByOrthoLemme = loadPhoneticAndDisambiguatedTheory(starboard)
     with open(RESOLVED_PRESS_SETS_PATH, encoding="utf-8") as f:
-        readingsByWord = buildReadingsByWord(json.load(f), theory)
+        readingsByWord = buildReadingsByWord(json.load(f), theory,
+                                             wordToStrokes=wordToStrokes, wordsByOrthoLemme=wordsByOrthoLemme)
 
     labelIndex: dict[str, int] = {}
     wordsByBase: dict[str, list] = {}

@@ -22,7 +22,10 @@ and the reform-doublet exemption (R2) pairs are reported, not failed on.
 import os
 import sys
 
-from src.ambiguitychecker import FinalCollisionReport, findFinalCollisions, loadReform1990DoubletPairs
+from src.ambiguitychecker import (
+    FinalCollisionReport, buildWordToStrokes, buildWordsByOrthoLemme,
+    findFinalCollisions, loadReform1990DoubletPairs,
+)
 from src.keyboard import Starboard
 from src.word import Word
 from util._stenorender import renderFinalStrokesToRTFCRE
@@ -78,15 +81,21 @@ def main() -> None:
     with timedCall("phase", "util.build_disambiguated_theory: unpickle Dictionary + PhoneticTheory"):
         dictionary, phoneticTheory = _loadDictionaryAndPhoneticTheory()
     with timedCall("phase", "util.build_disambiguated_theory: buildDisambiguatedTheory"):
+        # Built once, then threaded through the build, the pickle envelope (so
+        # every exporter reads them back instead of rebuilding) and the TSV write.
+        wordToStrokes = buildWordToStrokes(phoneticTheory)
+        wordsByOrthoLemme = buildWordsByOrthoLemme(phoneticTheory)
         disambiguatedTheory = dictionary.buildDisambiguatedTheory(
-            phoneticTheory, starboard, KEYPRESS_GROUPS_PATH, RESOLVED_PRESS_SETS_PATH)
+            phoneticTheory, starboard, KEYPRESS_GROUPS_PATH, RESOLVED_PRESS_SETS_PATH,
+            wordToStrokes=wordToStrokes, wordsByOrthoLemme=wordsByOrthoLemme)
     # The only writer of the fingerprinted cache the exporters read back
     # (util/_theoryio.loadCachedDisambiguatedTheory): written after the
     # computation, so an interrupted run never leaves a half-fresh pickle.
     with timedCall("phase", "util.build_disambiguated_theory: writeDisambiguatedTheoryPickle"):
-        writeDisambiguatedTheoryPickle(disambiguatedTheory)
+        writeDisambiguatedTheoryPickle(disambiguatedTheory, wordToStrokes, wordsByOrthoLemme)
     with timedCall("phase", f"util.build_disambiguated_theory: writeDisambiguatedTheory ({OUTPUT_PATH})"):
-        dictionary.writeDisambiguatedTheory(phoneticTheory, disambiguatedTheory, starboard, OUTPUT_PATH)
+        dictionary.writeDisambiguatedTheory(phoneticTheory, disambiguatedTheory, starboard, OUTPUT_PATH,
+                                            wordToStrokes=wordToStrokes)
     print(f"\nWrote {OUTPUT_PATH}: {len(disambiguatedTheory)} words with disambiguated-theory"
           f" (Phase P + */# track) strokes.")
     reportFinalCollisions(findFinalCollisions(disambiguatedTheory, loadReform1990DoubletPairs()), starboard)
