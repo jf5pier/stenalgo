@@ -415,9 +415,12 @@ class Dictionary:
         assignment = realizeKeypressGroupsAsExtraStroke(
             groupToWords, phoneticTheory, keyboard,
             extraGroupSetsByWord=extraGroupSetsByWord, preferredKeysByGroup=preferredKeysByGroup,
+            wordToStrokes=wordToStrokes,
         )
-        finalInduced = buildFinalInducedStrokes(phoneticTheory, groupToWords, assignment)
-        extraByWord = buildExtraInducedStrokes(phoneticTheory, assignment, extraGroupSetsByWord)
+        finalInduced = buildFinalInducedStrokes(phoneticTheory, groupToWords, assignment,
+                                                wordToStrokes=wordToStrokes)
+        extraByWord = buildExtraInducedStrokes(phoneticTheory, assignment, extraGroupSetsByWord,
+                                               wordToStrokes=wordToStrokes)
         # Spelling twins (another reading of a spelling its resolved press-set entry
         # already covers, see findSpellingTwinWords) get NO entry of their own: their
         # readings are the resolved Word's primary/alternate entries, and the residual

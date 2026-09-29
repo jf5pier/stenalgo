@@ -178,8 +178,8 @@ The names below are used in every "Input state" and "Result" line.
 | **resolved discriminating feature sets** | in memory `dict[LemmaHomophoneGroupKey, dict[WordOrtho, list[frozenset[str]]]]`; on disk a list of `{strokes, lemmeGramCat, pressSets, frequencies, readings}`; reloaded as `PressSetsByGroup` (group id `lemmeGramCat@strokes`); 47,828 groups | `resolveGroupPressSets` elicitation.py:374, `serializeResolvedPressSets` :471 | `resolved_press_sets.json` (gitignored) |
 | **keypress groups** | `markersByKeypress: dict[int, frozenset[str]]` (K=7) + metadata | `minKeypressesSatWithPriorities` featuregroupingsat.py:490, `serializeAssignment` :530 | `keypress_groups.json` (tracked) |
 | **keypress group population** | `groupToWords: dict[int, list[Word]]` + `extraGroupSetsByWord: dict[Word, list[frozenset[int]]]` | ambiguitychecker.py:803, :844 | no |
-| **physical keypress group assignment** | `KeypressGroupPhysicalAssignment` (`chosenKeysByGroup`, cost, alternates, residual buckets) | `realizeKeypressGroupsAsExtraStroke` ambiguitychecker.py:987 | report build only: `realization_report.json` (tracked) |
-| **final induced strokes** | `dict[Word, Strokes]`: base strokes plus at most one feature discriminating stroke | `buildFinalInducedStrokes` ambiguitychecker.py:1168 | no |
+| **physical keypress group assignment** | `KeypressGroupPhysicalAssignment` (`chosenKeysByGroup`, cost, alternates, residual buckets) | `realizeKeypressGroupsAsExtraStroke` ambiguitychecker.py:928 | report build only: `realization_report.json` (tracked) |
+| **final induced strokes** | `dict[Word, Strokes]`: base strokes plus at most one feature discriminating stroke | `buildFinalInducedStrokes` ambiguitychecker.py:1217 | no |
 | **disambiguated theory** | `dict[Word, list[Strokes]]`: index 0 primary (with its star/hash mark), then alternate entries | `Dictionary.buildDisambiguatedTheory` dictionary.py:342 | `disambiguated_theory.tsv` (gitignored, read by nothing) |
 | **Plover dictionary** | `dict[str, str]` (RTFCRE steno → spelling); 167,719 entries | `export_plover_dictionary.main` | `plover_stenalgo_dictionary.json` (tracked) |
 | **Plover key table** | module with `KEYS`, `IMPLICIT_HYPHEN_KEYS`, `GEMINI_PR_KEYMAP` | `export_plover_system.main` | `plover_stenalgo/plover_stenalgo/_generated_keys.py` (tracked) |
@@ -1045,8 +1045,8 @@ S6.Realization.5 Coda key search — realizeKeypressGroupsAsExtraStroke (:987)
   S6.Realization.5.3 Candidate cost — _candidateCost (:1147)
   S6.Realization.5.4 Word finalization — _finalizeReadyWords (:1066)
   S6.Realization.5.5 Final verification and residual buckets — (:1219-1258)
-S6.Realization.6 Final induced strokes (inline path) — buildFinalInducedStrokes (:1168)
-S6.Realization.7 Alternate entry strokes (inline path) — buildExtraInducedStrokes (:1196)
+S6.Realization.6 Final induced strokes (inline path) — buildFinalInducedStrokes (:1217)
+S6.Realization.7 Alternate entry strokes (inline path) — buildExtraInducedStrokes (:1246)
 S6.Realization.8 Report serialization (report build) — build_realization_report.main (:74-112)
 ```
 
@@ -1375,7 +1375,7 @@ Transformation: maps each preferred feature to its keypress group in this run (g
 change between runs of the Grouping Phase); features that are not live are skipped.
 Result: {4: (18,), 6: (19,), 2: (20,)}.
 
-#### Coda key search — realizeKeypressGroupsAsExtraStroke (S6.Realization.5)   src/ambiguitychecker.py:987
+#### Coda key search — realizeKeypressGroupsAsExtraStroke (S6.Realization.5)   src/ambiguitychecker.py:928
 Called by: both paths (dictionary.py:380-383; build_realization_report.py:69-72).
 Input state: keypress group population + the phonetic theory + keyboard layout + preferred keys.
 Transformation: builds `wordToGroups` (:882), the per-phoneme coda candidates (`codaKeysOf`,
@@ -1387,7 +1387,13 @@ Word finalization (S6.Realization.5.4); finally runs Final verification and resi
 Result: physical keypress group assignment (`KeypressGroupPhysicalAssignment` :904): g0→21, g1→16,
 g2→20, g3→23, g4→18, g5→17, g6→19 — all single keys, all three preferences honored.
 Helpers not expanded: `_composedInduced` (:1077), `_isRedundantForAnyWord` (:1084),
-`buildWordToGroups` (:882), `_appendCodaExtraStroke` (:892), `Keyboard.getStrokeCost` (keyboard.py:547).
+`buildWordToGroups` (:882), `_appendCodaExtraStroke` (:892), `Keyboard.getStrokeCost` (keyboard.py:547,
+memoized per (stroke, syllabicPart) since 2026-09-29 -- the coda search calls it millions
+of times over a few thousand distinct chords). Since the same date, the per-word union of
+already-decided other-group keys is computed once per group (`otherKeysByWord`), and
+`_feasible` returns the composed strokes it verified so `_candidateCost` reuses them (one
+composition pass per candidate instead of two); `wordToStrokes` can be threaded in by
+callers that already built it instead of being rebuilt here.
 
 - **Candidate ranking — _bestCandidate (S6.Realization.5.1)** :1177 — every distinct
   single-phoneme coda key-set, keeping the feasible ones with their cost; pairs
@@ -1428,7 +1434,7 @@ Helpers not expanded: `_composedInduced` (:1077), `_isRedundantForAnyWord` (:108
   final induced strokes, all from spelling twins (item B1) — which Disambiguated-theory
   assembly (S7.1) then drops from the disambiguated theory (item B47).
 
-#### Final induced strokes — buildFinalInducedStrokes (S6.Realization.6)   src/ambiguitychecker.py:1168
+#### Final induced strokes — buildFinalInducedStrokes (S6.Realization.6)   src/ambiguitychecker.py:1217
 Called by: `Dictionary.buildDisambiguatedTheory` only (dictionary.py:384).
 Transformation: for **every** phonetic-theory Word (dict order, deterministic): a Word that needs
 groups gets one feature discriminating stroke with the union of their chosen keys; others
