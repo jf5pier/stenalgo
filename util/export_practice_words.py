@@ -175,13 +175,19 @@ def formatPhonology(word: Word) -> str:
 
 def buildReadingsByWord(
     resolvedGroups: list[dict], theory: dict[Strokes, list[Word]],
+    wordToStrokes: dict[Word, Strokes] | None = None,
+    wordsByOrthoLemme: dict[tuple[str, str], list[Word]] | None = None,
 ) -> dict[Word, list[list[Reading]]]:
     """Every word covered by `resolved_press_sets.json` -> its readings per press-set
     alternate (parallel to its `loadDisambiguatedTheory` stroke list), matched to the real `Word`
     the same way the Discriminating-Feature Stroke Realization (Realization Phase)
-    pipeline does (`_resolveEntryWord`)."""
-    wordToStrokes = buildWordToStrokes(theory)
-    wordsByOrthoLemme = buildWordsByOrthoLemme(theory)
+    pipeline does (`_resolveEntryWord`). The two indexes default to being rebuilt
+    from `theory`; callers that already hold them (every exporter, from the
+    disambiguated-theory pickle envelope) pass them through."""
+    if wordToStrokes is None:
+        wordToStrokes = buildWordToStrokes(theory)
+    if wordsByOrthoLemme is None:
+        wordsByOrthoLemme = buildWordsByOrthoLemme(theory)
     readingsByWord: dict[Word, list[list[Reading]]] = {}
     for entry in resolvedGroups:
         for ortho, readingsPerAlternate in entry.get("readings", {}).items():
@@ -217,9 +223,10 @@ def main() -> None:
     if starboard is None:
         raise RuntimeError(f"{KEYBOARD_JSON} not found; run dictionary.py once first to generate it.")
 
-    theory, disambiguatedTheory = loadPhoneticAndDisambiguatedTheory(starboard)
+    theory, disambiguatedTheory, wordToStrokes, wordsByOrthoLemme = loadPhoneticAndDisambiguatedTheory(starboard)
     with open(RESOLVED_PRESS_SETS_PATH, encoding="utf-8") as f:
-        readingsByWord = buildReadingsByWord(json.load(f), theory)
+        readingsByWord = buildReadingsByWord(json.load(f), theory,
+                                             wordToStrokes=wordToStrokes, wordsByOrthoLemme=wordsByOrthoLemme)
 
     # Keyed by (ortho, steno), not ortho alone: a self-homograph's alternate strokes, and
     # two different words sharing a spelling but not a chord ("est" = être / nom), are

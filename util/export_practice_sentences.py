@@ -151,9 +151,10 @@ def main() -> None:
     starboard = Starboard.fromJSONFile(KEYBOARD_JSON)
     if starboard is None:
         raise RuntimeError(f"{KEYBOARD_JSON} not found; it is a committed input -- run from the repo root.")
-    theory, disambiguatedTheory = loadPhoneticAndDisambiguatedTheory(starboard)
+    theory, disambiguatedTheory, wordToStrokes, wordsByOrthoLemme = loadPhoneticAndDisambiguatedTheory(starboard)
     with open(RESOLVED_PRESS_SETS_PATH, encoding="utf-8") as f:
-        readingsByWord = buildReadingsByWord(json.load(f), theory)
+        readingsByWord = buildReadingsByWord(json.load(f), theory,
+                                             wordToStrokes=wordToStrokes, wordsByOrthoLemme=wordsByOrthoLemme)
     with open(PRACTICE_WORDS_PATH, encoding="utf-8") as f:
         drillItems = {(item["ortho"], item["steno"]) for item in json.load(f)}
 

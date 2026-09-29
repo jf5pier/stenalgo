@@ -373,6 +373,8 @@ class Dictionary:
         self, phoneticTheory: dict[Strokes, list[Word]], keyboard: Keyboard,
         keypressGroupsPath: str = "keypress_groups.json",
         resolvedPressSetsPath: str = "resolved_press_sets.json",
+        wordToStrokes: dict[Word, Strokes] | None = None,
+        wordsByOrthoLemme: dict[tuple[str, str], list[Word]] | None = None,
     ) -> dict[Word, list[Strokes]]:
         """
         The disambiguated theory: every word's final resolved Strokes -- a LIST, since
@@ -405,8 +407,12 @@ class Dictionary:
         with open(resolvedPressSetsPath, encoding="utf-8") as f:
             resolvedGroups = json.load(f)
 
-        wordToStrokes = buildWordToStrokes(phoneticTheory)
-        wordsByOrthoLemme = buildWordsByOrthoLemme(phoneticTheory)
+        # Callers that already hold the two indexes (the S7 step, which also
+        # persists them in DisambiguatedTheory.pickle) pass them in so they are
+        # built once per run instead of once per caller.
+        wordToStrokes = wordToStrokes if wordToStrokes is not None else buildWordToStrokes(phoneticTheory)
+        wordsByOrthoLemme = wordsByOrthoLemme if wordsByOrthoLemme is not None \
+            else buildWordsByOrthoLemme(phoneticTheory)
         groupToWords = buildKeypressGroupToWords(resolvedGroups, markersByKeypress, wordToStrokes, wordsByOrthoLemme)
         extraGroupSetsByWord = buildKeypressGroupExtraAlternates(
             resolvedGroups, markersByKeypress, wordToStrokes, wordsByOrthoLemme
@@ -437,6 +443,7 @@ class Dictionary:
     def writeDisambiguatedTheory(
         self, phoneticTheory: dict[Strokes, list[Word]], disambiguatedTheory: dict[Word, list[Strokes]],
         keyboard: Keyboard, filename: str,
+        wordToStrokes: dict[Word, Strokes] | None = None,
     ) -> None:
         """
         Writes `filename`: one row per (word, reading) -- a self-homograph word (see
@@ -448,7 +455,8 @@ class Dictionary:
         raw key-index tuples instead, same as `build_realization_report.py` already
         reports `chosenKeys`.
         """
-        wordToStrokes = buildWordToStrokes(phoneticTheory)
+        if wordToStrokes is None:
+            wordToStrokes = buildWordToStrokes(phoneticTheory)
         with open(filename, "w") as f:
             _ = f.write("ortho\tlemme\tgramCat\tstrokes\textraStrokes\n")
             for word in sorted(disambiguatedTheory, key=lambda w: (w.lemme, w.gramCat.name, w.ortho)):
