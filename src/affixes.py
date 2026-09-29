@@ -10,6 +10,7 @@ is an attested lemma. Affixes are grouped in families of similar members, compet
 keypress binding saves on the family's carriers.
 """
 import bisect
+import functools
 import unicodedata
 from dataclasses import dataclass, field
 from typing import NamedTuple
@@ -1372,6 +1373,7 @@ class CarrierResult:
     mergedSaving: bool = False    # True: saved = span (merged); False: saved = span - 1 (dedicated/standalone)
 
 
+@functools.lru_cache(maxsize=None)
 def markCostForCluster(m: int) -> int:
     """Extra strokes a reading pays when ranked last in a cluster of m spellings; the first
     mark merges into the last stroke for free."""
@@ -1466,10 +1468,12 @@ def hasBoundaryRisk(full: Strokes, outlines: set[Strokes]) -> bool:
     return reach[n]
 
 
-def simulate(groups: list[tuple[Binding, list[Carrier]]], ctx: SimContext) -> list[list[CarrierResult]]:
+def simulate(groups: list[tuple[Binding, list[Carrier]]], ctx: SimContext,
+             boundaryRisk: bool = True) -> list[list[CarrierResult]]:
     """Gain of each carrier under its group's binding, all groups considered together so that
     cross-group collisions cost marks. A carrier with no positive gain falls back to its full
-    outline (never longer)."""
+    outline (never longer). `boundaryRisk=False` skips the (report-only) `hasBoundaryRisk` flag,
+    which never feeds gain, reason or score."""
     results = [[CarrierResult(c) for c in carriers] for _b, carriers in groups]
     pending: dict[Strokes, dict[str, list[CarrierResult]]] = {}
     for (binding, _), res in zip(groups, results):
@@ -1518,8 +1522,9 @@ def simulate(groups: list[tuple[Binding, list[Carrier]]], ctx: SimContext) -> li
             if r.gain <= 0:
                 r.gain, r.reason, r.newBase = 0, "markCostTooHigh", None
                 continue
-            full = withMarks(r.newBase, w.markKeys) + w.extra
-            r.boundaryRisk = hasBoundaryRisk(full, ctx.finalOutlines)
+            if boundaryRisk:
+                full = withMarks(r.newBase, w.markKeys) + w.extra
+                r.boundaryRisk = hasBoundaryRisk(full, ctx.finalOutlines)
     return results
 
 
