@@ -4,54 +4,54 @@ Credited saving = cumulative word-once-credited total from the selection curve (
 
 | setting | EXCEPTION_ALPHA | EXCLUSION_COST | FORM_COST | saving @20 | saving @30 | forms | exclusions | word exceptions | attestedShare<0.5 | max exception rate | max overlap |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| L | 1.0 | 5.0 | 10.0 | 50134 | 61377 | 90 | 20 | 726 | 16 | 4.9% | 0.00 |
-| M | 1.0 | 50.0 | 100.0 | 55988 | 68811 | 79 | 15 | 953 | 15 | 4.9% | 0.00 |
-| H | 2.0 | 150.0 | 300.0 | 77716 | 97877 | 60 | 5 | 1605 | 12 | 4.9% | 0.09 |
+| L | 1.0 | 5.0 | 10.0 | 50140 | 61383 | 90 | 20 | 722 | 16 | 4.9% | 0.00 |
+| M | 1.0 | 50.0 | 100.0 | 55846 | 68670 | 79 | 15 | 950 | 15 | 4.9% | 0.00 |
+| H | 2.0 | 150.0 | 300.0 | 77723 | 97884 | 60 | 5 | 1598 | 12 | 4.9% | 0.09 |
 
 ## Rules selected in any setting, by rank
 
 | rule | L | M | H |
 |---|---|---|---|
-| suffix `ment` | — | — | 1 |
 | suffix `man|mand|mant|ment|ments|mmant|mment` | 1 | 1 | — |
-| suffix `ccion|cion|cyon|sion|ssion|tion|tions` | 2 | 2 | — |
+| suffix `ment` | — | — | 1 |
 | prefix `re` | — | — | 2 |
-| prefix `de` | 3 | 3 | 4 |
+| suffix `ccion|cion|cyon|sion|ssion|tion|tions` | 2 | 2 | — |
 | prefix `en` | — | — | 3 |
-| prefix `au` | — | 4 | 11 |
+| prefix `de` | 3 | 3 | 4 |
 | prefix `in` | 4 | 5 | — |
+| prefix `au` | — | 4 | 11 |
 | suffix `der` | 5 | 6 | 14 |
 | prefix `ain|hin|im|in` | — | — | 5 |
 | prefix `pro|proh|prô` | 6 | 11 | 19 |
 | suffix `tion` | — | — | 6 |
 | prefix `par` | — | 7 | 13 |
-| prefix `dé` | — | — | 7 |
 | prefix `ce|sce|se` | 7 | 9 | 20 |
-| suffix `sser` | — | 8 | — |
+| prefix `dé` | — | — | 7 |
 | prefix `im` | 8 | 13 | — |
 | suffix `ter` | — | — | 8 |
+| suffix `sser` | — | 8 | — |
 | suffix `er` | 9 | 17 | — |
 | prefix `é` | — | — | 9 |
-| suffix `nir` | 10 | 18 | — |
-| suffix `té` | — | — | 10 |
 | prefix `i` | — | 10 | — |
+| suffix `té` | — | — | 10 |
+| suffix `nir` | 10 | 18 | — |
 | prefix `ai` | 11 | 19 | — |
-| suffix `cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé` | — | — | 12 |
 | prefix `o` | — | 12 | 25 |
 | prefix `per` | 12 | — | — |
+| suffix `cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé` | — | — | 12 |
 | suffix `teur` | 13 | 22 | — |
 | prefix `pré` | — | 14 | — |
 | prefix `ex` | 14 | 28 | — |
+| suffix `voir` | 15 | 25 | — |
 | suffix `cher` | — | 15 | 30 |
 | prefix `pa|pei|pâ` | — | — | 15 |
-| suffix `voir` | 15 | 25 | — |
-| prefix `vou` | 16 | 24 | — |
 | prefix `ai|aî|e|ei|hai|he|hê|é` | — | — | 16 |
 | prefix `ra` | — | 16 | 29 |
-| suffix `ver` | — | — | 17 |
+| prefix `vou` | 16 | 24 | — |
 | suffix `ture` | 17 | — | — |
-| prefix `sa|sah` | — | — | 18 |
+| suffix `ver` | — | — | 17 |
 | prefix `ou` | 18 | — | — |
+| prefix `sa|sah` | — | — | 18 |
 | prefix `ve` | 19 | 26 | — |
 | prefix `di` | — | 20 | — |
 | prefix `cou` | 20 | — | — |
@@ -60,23 +60,23 @@ Credited saving = cumulative word-once-credited total from the selection curve (
 | prefix `ra|rai|raie|re|rhé|ré|réh` | — | — | 21 |
 | suffix `ser|sée|zer|zé` | — | — | 22 |
 | prefix `sou` | 22 | — | — |
-| prefix `mi` | — | 23 | — |
 | prefix `de|dea|di|die|dis|dy|dî` | — | — | 23 |
 | suffix `mi` | 23 | — | — |
-| suffix `rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée` | — | — | 24 |
+| prefix `mi` | — | 23 | — |
 | prefix `fi` | 24 | — | — |
+| suffix `rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée` | — | — | 24 |
 | prefix `trou` | 25 | — | — |
-| suffix `ger` | — | — | 26 |
 | suffix `tant` | 26 | — | — |
-| suffix `ner` | — | — | 27 |
+| suffix `ger` | — | — | 26 |
 | prefix `si` | 27 | — | — |
 | suffix `nner` | — | 27 | — |
-| prefix `vi` | 28 | — | — |
+| suffix `ner` | — | — | 27 |
 | prefix `e|hi|hy|i|y|î` | — | — | 28 |
+| prefix `vi` | 28 | — | — |
 | prefix `em` | — | 29 | — |
 | suffix `per` | 29 | — | — |
-| suffix `cer` | — | 30 | — |
 | prefix `té` | 30 | — | — |
+| suffix `cer` | — | 30 | — |
 
 ## Rules selected in every setting whose forms differ between settings
 
