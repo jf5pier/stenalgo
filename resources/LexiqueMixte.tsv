@@ -627,8 +627,8 @@ absorbées	apsORbe	absorber	VER	VER,ADJ	f	p	par:pas;	a_p|s_O_R|b_e_#	a_b|s_o_r|b
 absorbées	apsORbe	absorbé	ADJ	VER,ADJ	f	p		a_p|s_O_R|b_e_#	a_b|s_o_r|b_é_es	0.34	0.03
 absorbés	apsORbe	absorber	VER	VER,ADJ	m	p	par:pas;	a_p|s_O_R|b_e_#	a_b|s_o_r|b_é_s	1.69	0.16
 absorbés	apsORbe	absorbé	ADJ	VER,ADJ	m	p		a_p|s_O_R|b_e_#	a_b|s_o_r|b_é_s	0.47	0.02
-absorption	apsORpsj§	absorption	NOM	NOM	f	s		a_p|s_O_R|p_s_j_§	a_b|s_o_r|p_t_i_on	1.89	0.58
-absorptions	apsORpsj§	absorption	NOM	NOM	f	p		a_p|s_O_R|p_s_j_§_#	a_b|s_o_r|p_t_i_on_s	0.14	0.0
+absorption	apsORpsj§	absorption	NOM	NOM	f	s		a_p|s_O_R_p|s_j_§	a_b|s_o_r_p|t_i_on	1.89	0.58
+absorptions	apsORpsj§	absorption	NOM	NOM	f	p		a_p|s_O_R_p|s_j_§_#	a_b|s_o_r_p|t_i_on_s	0.14	0.0
 absoudrai	apsudRe	absoudre	VER	VER			ind:fut:1s;	a_p|s_u|d_R_e	a_b|s_ou|d_r_ai	0.0	0.01
 absoudrait	apsudRE	absoudre	VER	VER			cnd:pre:3s;	a_p|s_u|d_R_E	a_b|s_ou|d_r_ait	0.14	0.14
 absoudre	apsudR	absoudre	VER	VER			inf;	a_p|s_u_d_R_#	a_b|s_ou_d_r_e	1.55	1.08
@@ -109138,7 +109138,7 @@ réa	Rea	réa	NOM	NOM,VER	m	s		R_e|a	r_é|a	0.0	0.88
 réa	Rea	réer	VER	NOM,VER			ind:pas:3s;	R_e|a	r_é|a	0.0	0.09
 réabonnement	ReabOn°m@	réabonnement	NOM	NOM	m	s		R_e|a|b_O|n_°|m_@	r_é|a|b_o|nn_e|m_ent	0.07	0.03
 réabonner	ReabOne	réabonner	VER	VER			inf;	R_e|a|b_O|n_e	r_é|a|b_o|nn_er	0.0	0.03
-réabsorption	ReapsORpsj§	réabsorption	NOM	NOM	f	s		R_e|a_p|s_O_R|p_s_j_§	r_é|a_b|s_o_r|p_t_i_on	0.0	0.03
+réabsorption	ReapsORpsj§	réabsorption	NOM	NOM	f	s		R_e|a_p|s_O_R_p|s_j_§	r_é|a_b|s_o_r_p|t_i_on	0.0	0.03
 réac	Reak	réac	ADJ	ADJ	m	s		R_e|a_k	r_é|a_c	0.41	0.42
 réaccoutumer	Reakutyme	réaccoutumer	VER	VER			inf;	R_e|a|k_u|t_y|m_e	r_é|a|cc_ou|t_u|m_er	0.14	0.0
 réaccoutumerait	Reakutym°RE	réaccoutumer	VER	VER			cnd:pre:3s;	R_e|a|k_u|t_y|m_°|R_E	r_é|a|cc_ou|t_u|m_e|r_ait	0.07	0.0
@@ -111202,8 +111202,8 @@ résorberons	RezORb°R§	résorber	VER	VER			ind:fut:1p;	R_e|z_O_R|b_°|R_§	r_�
 résorbé	RezORbe	résorber	VER	VER	m	s	par:pas;	R_e|z_O_R|b_e	r_é|s_o_r|b_é	0.54	0.14
 résorbée	RezORbe	résorber	VER	VER	f	s	par:pas;	R_e|z_O_R|b_e_#	r_é|s_o_r|b_é_e	0.34	0.01
 résorbés	RezORbe	résorber	VER	VER	m	p	par:pas;	R_e|z_O_R|b_e_#	r_é|s_o_r|b_é_s	0.14	0.0
-résorption	RezORpsj§	résorption	NOM	NOM	f	s		R_e|z_O_R|p_s_j_§	r_é|s_o_r|p_t_i_on	0.14	0.0
-résorptions	RezORpsj§	résorption	NOM	NOM	f	p		R_e|z_O_R|p_s_j_§_#	r_é|s_o_r|p_t_i_on_s	0.07	0.0
+résorption	RezORpsj§	résorption	NOM	NOM	f	s		R_e|z_O_R_p|s_j_§	r_é|s_o_r_p|t_i_on	0.14	0.0
+résorptions	RezORpsj§	résorption	NOM	NOM	f	p		R_e|z_O_R_p|s_j_§_#	r_é|s_o_r_p|t_i_on_s	0.07	0.0
 résoudra	RezudRa	résoudre	VER	VER			ind:fut:3s;	R_e|z_u|d_R_a	r_é|s_ou|d_r_a	0.41	1.67
 résoudrai	RezudRe	résoudre	VER	VER			ind:fut:1s;	R_e|z_u|d_R_e	r_é|s_ou|d_r_ai	0.0	0.12
 résoudraient	RezudRE	résoudre	VER	VER			cnd:pre:3p;	R_e|z_u|d_R_E	r_é|s_ou|d_r_aient	0.07	0.0

@@ -626,6 +626,7 @@ class Word:
         self.fix_g_dZ()
         self.fix_j_dZ()
         self.fix_ch_tS()
+        self.fix_p_sj()
 
     def fix_x_k_s(self) -> None:
         # X sound should not be broken into 2 consonnants (k-s) in 2 syllables
@@ -669,6 +670,17 @@ class Word:
             self.cv_cv = self.cv_cv[0:pos] + "-CC" + \
                 self.cv_cv[pos+3:]  # "*C-C*" becomes "*-CC*"
             self.fix_ch_tS()  # recurse if there is more than one
+
+    def fix_p_sj(self) -> None:
+        # Lexique383 puts the p of five -ption lemmas in the onset of the last syllable
+        # (absorption ap-sOR-psj§ VC-CVC-CCYV), unlike every other -ption word
+        # (adoption a-dOp-sj§ V-CVC-CYV): move it to the coda of the previous syllable.
+        if (self.isWellFormedCVSyll() and self.ortho.rstrip("s").endswith("ption")
+                and "-psj§" in self.syll):
+            printVerbose(self.ortho, ["fix_p_sj"])
+            pos = self.syll.index("-psj§")
+            self.syll = self.syll[0:pos] + "p-sj§" + self.syll[pos+5:]
+            self.cv_cv = self.cv_cv[0:pos] + "C-CYV" + self.cv_cv[pos+5:]
 
     @staticmethod
     def fixLexiqueInfraGraphPhon(graphem_phonem: str) -> str:
