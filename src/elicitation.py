@@ -403,6 +403,21 @@ def resolveGroupPressSets(
     pressByOrthoCombinationByGroup, unresolvedOppositions = resolvePressByCombination(
         homophoneGroups, answersByOpposition
     )
+    return collapseToPressSetsByGroup(homophoneGroups, pressByOrthoCombinationByGroup), unresolvedOppositions
+
+
+def collapseToPressSetsByGroup(
+    homophoneGroups: dict[LemmaHomophoneGroupKey, list[Word]],
+    pressByOrthoCombinationByGroup: dict[LemmaHomophoneGroupKey, PressByOrthoCombination],
+) -> dict[LemmaHomophoneGroupKey, dict[WordOrtho, list[frozenset[str]]]]:
+    """
+    The per-spelling collapse half of `resolveGroupPressSets`, split out so a caller
+    that already ran `resolvePressByCombination` (the expensive opposition
+    cross-product) can reuse its result instead of recomputing it --
+    `resolveAndWritePressSets` needs the combination granularity, the collapsed
+    per-spelling view AND the conflict check, which used to mean running the
+    cross-product three times.
+    """
     pressSetsByGroup: dict[LemmaHomophoneGroupKey, dict[WordOrtho, list[frozenset[str]]]] = {}
     for homophoneGroupKey, words in homophoneGroups.items():
         pressByOrthoCombination = pressByOrthoCombinationByGroup.get(homophoneGroupKey)
@@ -416,7 +431,7 @@ def resolveGroupPressSets(
             )
             for ortho in sorted(combinationsByOrtho)
         }
-    return pressSetsByGroup, unresolvedOppositions
+    return pressSetsByGroup
 
 
 @dataclass
@@ -434,15 +449,23 @@ class GroupConflict:
 def validateElicitation(
     homophoneGroups: dict[LemmaHomophoneGroupKey, list[Word]],
     answersByOpposition: AnswerByOpposition,
+    resolution: tuple[dict[LemmaHomophoneGroupKey, dict[WordOrtho, list[frozenset[str]]]],
+                      list[frozenset[FeatureCombination]]] | None = None,
 ) -> tuple[list[GroupConflict], list[frozenset[FeatureCombination]]]:
     """
     E5: resolve every group's per-spelling press-sets (`resolveGroupPressSets`) and check
     that no two DIFFERENT spellings in the same group land on the identical press-set (the
     plan's "every press implied by the data lands on exactly one spelling").
 
+    `resolution` optionally passes in `resolveGroupPressSets`'s own output -- a caller
+    that already resolved (e.g. `resolveAndWritePressSets`) skips the redundant
+    recomputation of the opposition cross-product.
+
     Returns (conflicts, unresolvedOppositions).
     """
-    pressSetsByGroup, unresolvedOppositions = resolveGroupPressSets(homophoneGroups, answersByOpposition)
+    if resolution is None:
+        resolution = resolveGroupPressSets(homophoneGroups, answersByOpposition)
+    pressSetsByGroup, unresolvedOppositions = resolution
     conflicts: list[GroupConflict] = []
     for homophoneGroupKey, pressSetByOrtho in pressSetsByGroup.items():
         orthosByPressSet: dict[frozenset[str], set[WordOrtho]] = defaultdict(set)
@@ -607,8 +630,15 @@ def resolveAndWritePressSets(
         for rec in answerRecords
     ]
     answersByOpposition, duplicateOppositions = buildAnswersByOpposition(answeredOppositions)
-    pressSetsByGroup, unresolvedOppositions = resolveGroupPressSets(homophoneGroups, answersByOpposition)
-    conflicts, _ = validateElicitation(homophoneGroups, answersByOpposition)
+    # The opposition cross-product runs ONCE here: `resolvePressByCombination` gives
+    # the per-(spelling, reading) grain, `collapseToPressSetsByGroup` the per-spelling
+    # view, and both are handed to the serializer and the validator below (which
+    # previously each recomputed them -- three full cross-products per run).
+    pressByOrthoCombinationByGroup, unresolvedOppositions = resolvePressByCombination(
+        homophoneGroups, answersByOpposition)
+    pressSetsByGroup = collapseToPressSetsByGroup(homophoneGroups, pressByOrthoCombinationByGroup)
+    conflicts, _ = validateElicitation(homophoneGroups, answersByOpposition,
+                                       resolution=(pressSetsByGroup, unresolvedOppositions))
     conflictedGroupKeys = {conflict.homophoneGroupKey for conflict in conflicts}
 
     print("\n=== Phase E5 validation report ===")
@@ -637,7 +667,6 @@ def resolveAndWritePressSets(
         if key not in conflictedGroupKeys
     }
     frequencyByGroupOrtho = buildFrequencyByGroupOrtho(homophoneGroups, frequentWords)
-    pressByOrthoCombinationByGroup, _ = resolvePressByCombination(homophoneGroups, answersByOpposition)
     resolvedArtifact = serializeResolvedPressSets(
         cleanPressSetsByGroup, frequencyByGroupOrtho, pressByOrthoCombinationByGroup
     )
