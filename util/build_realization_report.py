@@ -70,6 +70,7 @@ def main() -> None:
     assignment = realizeKeypressGroupsAsExtraStroke(
         groupToWords, theory, starboard,
         extraGroupSetsByWord=extraGroupSetsByWord, preferredKeysByGroup=preferredKeysByGroup,
+        wordToStrokes=wordToStrokes,
     )
 
     artifact = {}

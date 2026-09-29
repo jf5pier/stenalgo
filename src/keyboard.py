@@ -388,7 +388,7 @@ Fingers assignments :
             unassignedKeys = unassignedKeys[partSize:]
 
         self.nbKeys: int = len(self._keyIndexes)
-        
+
         return
 
     @override
@@ -551,6 +551,16 @@ Fingers assignments :
         finger's key union isn't a legal keypress per `_possibleKeypress` -- the
         whole stroke is then infeasible, not just expensive.
         """
+        # Memo keyed (stroke, syllabicPart), created lazily because fromJSONFile
+        # builds instances through cls.__new__ without running __init__. Safe for
+        # the instance's lifetime: the cost reads only the class-level
+        # _possibleKeypress and the pure shape-cost helpers, never the mutable
+        # phonemesAssignedToStroke layout.
+        strokeCostCache: dict[tuple[Stroke, str], int | None] = \
+            self.__dict__.setdefault("_strokeCostCache", {})
+        memoKey = (stroke, syllabicPart)
+        if memoKey in strokeCostCache:
+            return strokeCostCache[memoKey]
         keyFromFinger: dict[str, list[int]] = {f:[] for f in self._possibleKeypress.fingers}
         cost: int = 0
         fingerInUse: set[str] = set()
@@ -562,11 +572,14 @@ Fingers assignments :
                     fingerInUse.add(finger)
             fingerKeyCombo = tuple(sorted(set(keyFromFinger[finger])))
             if fingerKeyCombo not in fingerKeypress:
+                strokeCostCache[memoKey] = None
                 return None
             cost += fingerKeypress[fingerKeyCombo]
         if syllabicPart in ["onset", "coda"]:
             cost += self.getStrokeShapeCost(stroke)
-        return int(cost * 0.85 **len(fingerInUse)) #Discount for using multiple fingers
+        strokeCost = int(cost * 0.85 **len(fingerInUse)) #Discount for using multiple fingers
+        strokeCostCache[memoKey] = strokeCost
+        return strokeCost
 
     def _strokeZigZagCost(self, stroke: Stroke) -> int:
         s1, s2 = stroke
