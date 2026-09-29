@@ -270,6 +270,38 @@ Everything needed to implement is in this file; no conversation context is requi
 - **Update the docs when A lands**: CLAUDE.md (rm-pickle discipline, new output),
   docs/PIPELINE.md (rebuild table), `.gitignore`.
 
+## 7. Outcome (2026-09-29, same day — implementation session)
+
+All batches landed on `performance-optim`, one commit each, every one verified per §4
+(716 tests green; full clean-pickle rebuild byte-identical on all compared artifacts —
+five consecutive clean-pickle runs have now produced identical md5s, closing §5's
+determinism question for this machine):
+
+| Batch | Commit | Pipeline (s) | Notes |
+|---|---|---|---|
+| baseline | — | 596.4 | §4 step 2 baseline (`scratch/baseline_A_md5s.txt`) |
+| A | 133a766 | 463.8 | exporters 53.8/60.7/60.2/74.3 → 15.6/25.2/17.6/23.4 s; miss/hit paths tested |
+| C | 70bd2e2 | 312.6 | S3-S5 pass 1 127.6 → 37.1 s (report's ~90 s/pass estimate confirmed exactly) |
+| B | ca153cf | 271.5 | S7 48.6 → 26.9 s, realization report 36.8 → 16.3 s |
+| E | f0f4eed | 258.7 | exporters 73.3 → 62.2 s total; verified together with D |
+| D | 3e4f655 | (258.7) | measurement half only — see correction 2 below |
+| F | 82609f7 | 251.0 | elicitation cross-product computed once |
+
+Corrections to this report, found while implementing:
+
+1. **Finding 1 / proposal A overcounted the invocations**: `buildDisambiguatedTheory`
+   executes **5×** per run, not 6 — `util/build_realization_report.py` never calls it
+   (it runs `realizeKeypressGroupsAsExtraStroke` directly). A's real saving is ~167 s
+   of exporter time, not ~220 s.
+2. **Proposal D's dedup is invalid**: the two `extractDiscriminatingFeatures` calls in
+   `completeVerbParadigms` compute *different* things — the baseline pass
+   (completeVerbParadigms.py:377) runs on the unaugmented theory, the one inside
+   `confirmCandidates` on the temporarily-augmented theory. Only D's per-round
+   `util._timing` instrumentation was applied.
+3. During B, mypy caught a `_feasible` return path left as `False` where `None` was
+   meant — with the new `is None` callers it would have read an in-scope collision as
+   feasible. Keep mypy in the per-batch protocol.
+
 ## Appendix — artifacts and final state
 
 - `scratch/profiles/`: 10 `.pstats` + 10 `.top.txt` extracts, `pipeline.svg` (py-spy whole
