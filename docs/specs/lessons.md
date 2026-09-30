@@ -177,7 +177,8 @@ Tracks are emitted in this order; ids are stable strings.
 The steps of §2, in order, chunked as §2.5. One lesson per chunk. `newKeys` = the
 sorted union of the lesson's keypress keys; `newChords` = the keypresses of ≥ 2 keys,
 as sorted lists (e.g. lesson with keypress `(8, 9)` gets `newChords: [[8, 9]]`). One
-rule per keypress (kind `phoneme`, §7.1). After each lesson, its keypresses enter
+rule per keypress (kind `phoneme`, §7.1), carrying its keypress's hand group
+(`hand`: left/thumbs/right, §6). After each lesson, its keypresses enter
 the covered set.
 
 ### 4.2 `accord`
@@ -273,6 +274,10 @@ one group are keyed by the group's maximum frequency (then `ortho`, `steno`), an
 whole groups are taken in rank order until the next group would exceed 50 — pair
 members are never split by the cap.
 
+The pools are the drill material; rule-text examples come from the pool first but
+may fall back outside it (§7.1) — a fallback example word is display-only, never
+drilled, so it is not bound by the eligibility rules of §3.
+
 ## 6. lessons.json schema
 
 ```json
@@ -280,7 +285,7 @@ members are never split by the cap.
  "lessons": [{"id": "phonemes-01", "track": "phonemes", "index": 1,
    "sectionTitle": "…", "title": "…", "kind": "phonemes",
    "newKeys": [8, 9, 11], "newChords": [[8, 9]],
-   "rules": [{"kind": "phoneme", "text": "La touche … écrit …", "examples": ["si"]}],
+   "rules": [{"kind": "phoneme", "hand": "left", "text": "La touche … écrit …"}],
    "words": [ {practice-words record, verbatim shape} ]}]}
 ```
 
@@ -297,8 +302,14 @@ members are never split by the cap.
     `Keyboard.view` highlights these;
   - `newChords`: lists of such ints, key-sets pressed together within one new
     keypress or mark;
-  - `rules`: `{kind, text, examples}` per §7; `examples` are orthography strings
-    drawn from the lesson's own `words` (at most 3, in pool order; empty allowed);
+  - `rules`: `{kind, text, hand?}` per §7 — no `examples` field: examples live
+    only inline in the rule text (§7.1). `hand` ("left" / "thumbs" / "right")
+    appears on phoneme rules only: the hand group of the keypress's single
+    finger (`Starboard._fingerAssignments`; the lt/rt keys are the thumbs). The
+    intro view groups phoneme rules under the fixed French headers "Main
+    gauche", "Les pouces", "Main droite", in that order, skipping empty groups
+    and keeping each group's internal order as exported; rules without a
+    `hand` (the marker tracks) render as a plain list;
   - `words`: **must reuse the `practice-words.json` record shape verbatim**
     (`ortho, before, after, label, phonology, steno, strokes, frequency`), produced
     by the same helpers, so the trainer's `Drill.elm` decoders work unchanged. The
@@ -316,24 +327,33 @@ side — examples carry the sound, and the trainer already renders X-SAMPA to IP
 
 ### 7.1 kind `phoneme`
 
-One key, one part, one phoneme:
+Every phoneme carries its examples directly after it, parenthesized:
 
-- onset: `La touche {touche} écrit le son /{phoneme}/ en début de syllabe ({exemples}).`
-- coda: `La touche {touche} écrit le son /{phoneme}/ en fin de syllabe ({exemples}).`
+- onset: `La touche {touche} écrit le son /{phoneme}/ en début de syllabe
+  ({exemples}).`
+- coda: `La touche {touche} écrit le son /{phoneme}/ en fin de syllabe
+  ({exemples}).`
 - nucleus: `La touche {touche} écrit la voyelle /{phoneme}/ ({exemples}).`
 
-Multi-phoneme keypress (the keypress is atomic, so one rule): `La touche {touche}
-écrit {phonèmes} selon la position ({exemples}).` with `{phonèmes}` =
-`/w/, /N/ ou /G/`.
+Multi-phoneme keypress (the keypress is atomic, so one rule) lists each phoneme
+with its own examples, joined `", "` and `" ou "` before the last:
+`La touche {touche} écrit /j/ (« oeil », « aïe »), /b/ (« arabe ») ou /w/
+(« watt »).` — there is no "selon la position" wording anymore.
 
 Chord keypress (≥ 2 keys): `Les touches {touches} pressées ensemble écrivent
-/{phoneme}/ en {début|fin} de syllabe ({exemples}).`
+…`, with the same per-phoneme body — `/{phoneme}/ en {début|fin} de syllabe
+({exemples})` for a single consonant phoneme, `la voyelle /{phoneme}/
+({exemples})` for a nucleus, or the multi-phoneme list above.
 
-Two-thumb nucleus chord: `Les touches {touches} pressées ensemble écrivent la
-voyelle /{phoneme}/ ({exemples}).`
-
-`{exemples}` = up to 3 example orthographies joined with `", "`, each wrapped as
-`« mot »`.
+`{exemples}` = up to 3 example orthographies, each `« mot »`, joined ` », « `
+(`« rat », « rang », « arabe »`). They are drawn first from the lesson's own
+pool (records pressing the keypress whose phonology contains the phoneme); when
+a phoneme has no such word in the pool (e.g. /w/ in lesson 1: nothing writable
+that early presses it), the **fallback** supplies the most frequent unmarked
+records of the full candidate stream (§5) that press that keypress with that
+phoneme — every phoneme of every introduced keypress gets at least one example,
+even when the lesson's own words cannot show it. Marked records never serve as
+fallback examples (§8).
 
 ### 7.2 kind `accord`
 
@@ -393,11 +413,14 @@ doigts`, 250 `Accords à deux doigts, suite`, 300 `La voyelle complète`; fallba
 (`Complexité trois cents`; distinct `(weightSum, nFingers)` steps sharing a
 weightSum share the section). Lesson titles spell the lesson number in French
 words too (§8's IPA-toggle invariant; digits 1, 2, 5, 8 and 9 are mapped):
-`Leçon {index en lettres} : {premiers phonèmes de la leçon}` (phonemes), `Leçon
-{index en lettres} : {marqueur}` (accord), `Leçon {index en lettres} :
-{mode_temps}` (verbe), `Leçon {index en lettres} : la marque {marque}`
-(desambiguation), `Leçon un : à venir` (affixes). (`numberInFrench` in
-`util/export_lessons.py` renders the cardinals, 0-999.)
+`Leçon {index en lettres} : {touches}` (phonemes — the introduced keypresses'
+key names, `keyboard-layout.json` `keys[i].name`, ordered by hand group gauche →
+pouces → droite, within a group in step order, joined `", "`: `Leçon un : R-,
+@-, a-, -j`; key names may carry mapped characters because they are key names,
+§8), `Leçon {index en lettres} : {marqueur}` (accord), `Leçon {index en
+lettres} : {mode_temps}` (verbe), `Leçon {index en lettres} : la marque
+{marque}` (desambiguation), `Leçon un : à venir` (affixes). (`numberInFrench`
+in `util/export_lessons.py` renders the cardinals, 0-999.)
 
 Affixes rule text: `Abréviations d'affixes : à venir.`
 
@@ -425,7 +448,14 @@ Affixes rule text: `Abréviations d'affixes : à venir.`
   character by character, so a mapped character in prose would come out as an
   IPA glyph ("Leçon 1" would render "Leçon œ̃"). Hence the spelled-out person
   labels (§7.3), the number words in titles and the fallback section title
-  (§7.6), and the affixes stub's wording (§4.5).
+  (§7.6), and the affixes stub's wording (§4.5). The trainer's hand-group
+  headers ("Main gauche", "Les pouces", "Main droite") are fixed French labels
+  in `Lessons.elm` and stay mapped-char-free by the same rule; key names in
+  phoneme-lesson titles (§7.6) are key names, so they are exempt like key
+  names everywhere else.
+- A star/hash-marked word never appears in a rule text before the
+  `desambiguation` track either: the §7.1 example fallback skips marked
+  records (`examplesFallbackByKeypress`).
 
 ## 9. Out of scope
 

@@ -1907,6 +1907,10 @@ star/hash code — `*`, `#`, `*#`, then the escalated codes in `*#`-count order,
 (−frequency, ortho, steno) among those whose phonetic keypresses, Keypress Groups and star/hash
 code are all already introduced (`eligible` :248); verbe-tense and desambiguation lessons under
 10 records are dropped (`MIN_DROP_POOL` :54 — a dropped code stays un-introduced). The Keypress
-Groups come from the realization report (`loadKeypressGroups` :267), not `keypress_groups.json`.
+Groups come from the realization report (`loadKeypressGroups` :267), not `keypress_groups.json`. Phoneme rules
+carry their keypress's hand group (`hand`: left/thumbs/right — the trainer groups them under "Main gauche",
+"Les pouces", "Main droite") and attach every phoneme's examples inline after that phoneme, falling back to the
+most frequent unmarked stream records when the lesson's own pool has no word for a phoneme
+(`examplesFallbackByKeypress`); spec: `docs/specs/lessons.md` §7.1.
 Result: `steno-trainer/public/data/lessons.json` (a fixed, fully generated progression: explicit
 final sorts only, so regeneration from the same inputs is byte-identical).

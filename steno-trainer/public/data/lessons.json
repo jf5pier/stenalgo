@@ -32,7 +32,7 @@
    "track": "phonemes",
    "index": 1,
    "sectionTitle": "Les premières touches",
-   "title": "Leçon un : @, R, j, a",
+   "title": "Leçon un : R-, @-, a-, -j",
    "kind": "phonemes",
    "newKeys": [
     8,
@@ -44,39 +44,23 @@
    "rules": [
     {
      "kind": "phoneme",
-     "text": "La touche @- écrit /@/ ou /9/ selon la position (« en », « oeil », « rang »).",
-     "examples": [
-      "en",
-      "oeil",
-      "rang"
-     ]
+     "hand": "thumbs",
+     "text": "La touche @- écrit /@/ (« en », « rang », « hareng ») ou /9/ (« oeil »)."
     },
     {
      "kind": "phoneme",
-     "text": "La touche R- écrit le son /R/ en début de syllabe (« rat », « rang », « arabe »).",
-     "examples": [
-      "rat",
-      "rang",
-      "arabe"
-     ]
+     "hand": "left",
+     "text": "La touche R- écrit le son /R/ en début de syllabe (« rat », « rang », « arabe »)."
     },
     {
      "kind": "phoneme",
-     "text": "La touche -j écrit /j/, /b/ ou /w/ selon la position (« oeil », « aïe », « arabe »).",
-     "examples": [
-      "oeil",
-      "aïe",
-      "arabe"
-     ]
+     "hand": "right",
+     "text": "La touche -j écrit /j/ (« oeil », « aïe »), /b/ (« arabe », « rab ») ou /w/ (« voyez », « croyais », « croyez »)."
     },
     {
      "kind": "phoneme",
-     "text": "La touche a- écrit la voyelle /a/ (« à », « rat », « aïe »).",
-     "examples": [
-      "à",
-      "rat",
-      "aïe"
-     ]
+     "hand": "thumbs",
+     "text": "La touche a- écrit la voyelle /a/ (« à », « rat », « aïe »)."
     }
    ],
    "words": [
@@ -280,7 +264,7 @@
    "track": "phonemes",
    "index": 2,
    "sectionTitle": "Les premières touches",
-   "title": "Leçon deux : w, s, i, e",
+   "title": "Leçon deux : w-, -i, -e, -s",
    "kind": "phonemes",
    "newKeys": [
     9,
@@ -292,39 +276,23 @@
    "rules": [
     {
      "kind": "phoneme",
-     "text": "La touche w- écrit /w/, /N/ ou /G/ selon la position (« oui », « agneau », « ouah »).",
-     "examples": [
-      "oui",
-      "agneau",
-      "ouah"
-     ]
+     "hand": "left",
+     "text": "La touche w- écrit /w/ (« oui », « ouah », « oyez »), /N/ (« agneau », « ignorance », « ignorons ») ou /G/ (« bingo », « gringo », « warnings »)."
     },
     {
      "kind": "phoneme",
-     "text": "La touche -s écrit le son /s/ en fin de syllabe (« os », « race », « russe »).",
-     "examples": [
-      "os",
-      "race",
-      "russe"
-     ]
+     "hand": "right",
+     "text": "La touche -s écrit le son /s/ en fin de syllabe (« os », « race », « russe »)."
     },
     {
      "kind": "phoneme",
-     "text": "La touche -i écrit la voyelle /i/ (« on », « y », « oui »).",
-     "examples": [
-      "on",
-      "y",
-      "oui"
-     ]
+     "hand": "thumbs",
+     "text": "La touche -i écrit la voyelle /i/ (« y », « oui », « ira »)."
     },
     {
      "kind": "phoneme",
-     "text": "La touche -e écrit /e/ ou /O/ selon la position (« et », « au », « ou »).",
-     "examples": [
-      "et",
-      "au",
-      "ou"
-     ]
+     "hand": "thumbs",
+     "text": "La touche -e écrit /e/ (« et », « héros », « ohé ») ou /O/ (« robe », « os », « oignon »)."
     }
    ],
    "words": [
@@ -1179,7 +1147,7 @@
    "track": "phonemes",
    "index": 3,
    "sectionTitle": "Les autres doigts",
-   "title": "Leçon trois : m, k, t, d",
+   "title": "Leçon trois : m-, t-, -k, -d",
    "kind": "phonemes",
    "newKeys": [
     6,
@@ -1191,37 +1159,23 @@
    "rules": [
     {
      "kind": "phoneme",
-     "text": "La touche m- écrit le son /m/ en début de syllabe (« n' », « nous », « non »).",
-     "examples": [
-      "n'",
-      "nous",
-      "non"
-     ]
+     "hand": "left",
+     "text": "La touche m- écrit le son /m/ en début de syllabe (« mon », « moi », « ma »)."
     },
     {
      "kind": "phoneme",
-     "text": "La touche -k écrit le son /k/ en fin de syllabe (« type », « truc », « musique »).",
-     "examples": [
-      "type",
-      "truc",
-      "musique"
-     ]
+     "hand": "right",
+     "text": "La touche -k écrit le son /k/ en fin de syllabe (« truc », « musique », « manque »)."
     },
     {
      "kind": "phoneme",
-     "text": "La touche t- écrit le son /t/ en début de syllabe (« tu », « t' », « toi »).",
-     "examples": [
-      "tu",
-      "t'",
-      "toi"
-     ]
+     "hand": "left",
+     "text": "La touche t- écrit le son /t/ en début de syllabe (« tu », « t' », « toi »)."
     },
     {
      "kind": "phoneme",
-     "text": "La touche -d écrit le son /d/ en fin de syllabe (« monde »).",
-     "examples": [
-      "monde"
-     ]
+     "hand": "right",
+     "text": "La touche -d écrit le son /d/ en fin de syllabe (« monde »)."
     }
    ],
    "words": [
@@ -2063,7 +2017,7 @@
    "track": "phonemes",
    "index": 4,
    "sectionTitle": "Les autres doigts",
-   "title": "Leçon quatre : p, t, v, R",
+   "title": "Leçon quatre : p-, v-, -t, -R",
    "kind": "phonemes",
    "newKeys": [
     4,
@@ -2075,38 +2029,23 @@
    "rules": [
     {
      "kind": "phoneme",
-     "text": "La touche p- écrit le son /p/ en début de syllabe (« pas », « pour », « par »).",
-     "examples": [
-      "pas",
-      "pour",
-      "par"
-     ]
+     "hand": "left",
+     "text": "La touche p- écrit le son /p/ en début de syllabe (« pas », « pour », « par »)."
     },
     {
      "kind": "phoneme",
-     "text": "La touche -t écrit le son /t/ en fin de syllabe (« juste », « vite »).",
-     "examples": [
-      "juste",
-      "vite"
-     ]
+     "hand": "right",
+     "text": "La touche -t écrit le son /t/ en fin de syllabe (« juste », « vite »)."
     },
     {
      "kind": "phoneme",
-     "text": "La touche v- écrit le son /v/ en début de syllabe (« vous », « va », « voir »).",
-     "examples": [
-      "vous",
-      "va",
-      "voir"
-     ]
+     "hand": "left",
+     "text": "La touche v- écrit le son /v/ en début de syllabe (« vous », « va », « voir »)."
     },
     {
      "kind": "phoneme",
-     "text": "La touche -R écrit le son /R/ en fin de syllabe (« pour », « par », « voir »).",
-     "examples": [
-      "pour",
-      "par",
-      "voir"
-     ]
+     "hand": "right",
+     "text": "La touche -R écrit le son /R/ en fin de syllabe (« pour », « par », « voir »)."
     }
    ],
    "words": [
@@ -2933,7 +2872,7 @@
    "track": "phonemes",
    "index": 5,
    "sectionTitle": "Les autres doigts",
-   "title": "Leçon cinq : k, n, s, l",
+   "title": "Leçon cinq : k-, s-, -n, -l",
    "kind": "phonemes",
    "newKeys": [
     2,
@@ -2945,35 +2884,23 @@
    "rules": [
     {
      "kind": "phoneme",
-     "text": "La touche k- écrit le son /k/ en début de syllabe (« qui », « quand », « quoi »).",
-     "examples": [
-      "qui",
-      "quand",
-      "quoi"
-     ]
+     "hand": "left",
+     "text": "La touche k- écrit le son /k/ en début de syllabe (« qui », « quand », « quoi »)."
     },
     {
      "kind": "phoneme",
-     "text": "La touche -n écrit le son /n/ en fin de syllabe (« une »).",
-     "examples": [
-      "une"
-     ]
+     "hand": "right",
+     "text": "La touche -n écrit le son /n/ en fin de syllabe (« une »)."
     },
     {
      "kind": "phoneme",
-     "text": "La touche s- écrit le son /s/ en début de syllabe (« ça », « sur », « s' »).",
-     "examples": [
-      "ça",
-      "sur",
-      "s'"
-     ]
+     "hand": "left",
+     "text": "La touche s- écrit le son /s/ en début de syllabe (« ça », « sur », « s' »)."
     },
     {
      "kind": "phoneme",
-     "text": "La touche -l écrit le son /l/ en fin de syllabe (« il »).",
-     "examples": [
-      "il"
-     ]
+     "hand": "right",
+     "text": "La touche -l écrit le son /l/ en fin de syllabe (« il »)."
     }
    ],
    "words": [
@@ -3790,7 +3717,7 @@
    "track": "phonemes",
    "index": 6,
    "sectionTitle": "Accords à deux touches",
-   "title": "Leçon six : °, j, v, E",
+   "title": "Leçon six : R-, w-, @-, a-, -i, -e, -j, -s",
    "kind": "phonemes",
    "newKeys": [
     8,
@@ -3823,34 +3750,23 @@
    "rules": [
     {
      "kind": "phoneme",
-     "text": "Les touches @-, a- pressées ensemble écrivent /°/ ou /8/ selon la position (« je », « ne », « un »).",
-     "examples": [
-      "je",
-      "ne",
-      "un"
-     ]
+     "hand": "thumbs",
+     "text": "Les touches @-, a- pressées ensemble écrivent /°/ (« je », « ne », « ce ») ou /8/ (« lui », « suis », « nuit »)."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches R-, w- pressées ensemble écrivent /j/ en début de syllabe (« bien », « rien »).",
-     "examples": [
-      "bien",
-      "rien"
-     ]
+     "hand": "left",
+     "text": "Les touches R-, w- pressées ensemble écrivent /j/ en début de syllabe (« bien », « rien »)."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches -j, -s pressées ensemble écrivent /v/ en fin de syllabe.",
-     "examples": []
+     "hand": "right",
+     "text": "Les touches -j, -s pressées ensemble écrivent /v/ en fin de syllabe (« arrive », « trouve », « vivre »)."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches -i, -e pressées ensemble écrivent la voyelle /E/ (« est », « un », « mais »).",
-     "examples": [
-      "est",
-      "un",
-      "mais"
-     ]
+     "hand": "thumbs",
+     "text": "Les touches -i, -e pressées ensemble écrivent la voyelle /E/ (« est », « mais », « elle »)."
     }
    ],
    "words": [
@@ -4663,7 +4579,7 @@
    "track": "phonemes",
    "index": 7,
    "sectionTitle": "Accords à deux touches",
-   "title": "Leçon sept : Z, m",
+   "title": "Leçon sept : -Z, -m",
    "kind": "phonemes",
    "newKeys": [
     24,
@@ -4673,15 +4589,13 @@
    "rules": [
     {
      "kind": "phoneme",
-     "text": "La touche -Z écrit /Z/ ou /G/ selon la position.",
-     "examples": []
+     "hand": "right",
+     "text": "La touche -Z écrit /Z/ (« mariage », « âge », « visage ») ou /G/ (« parking », « thanksgiving », « ring »)."
     },
     {
      "kind": "phoneme",
-     "text": "La touche -m écrit le son /m/ en fin de syllabe (« comme »).",
-     "examples": [
-      "comme"
-     ]
+     "hand": "right",
+     "text": "La touche -m écrit le son /m/ en fin de syllabe (« comme »)."
     }
    ],
    "words": [
@@ -5493,7 +5407,7 @@
    "track": "phonemes",
    "index": 8,
    "sectionTitle": "Accords à deux touches, suite",
-   "title": "Leçon huit : l, g, d, z",
+   "title": "Leçon huit : m-, t-, p-, v-, -k, -d, -n, -l",
    "kind": "phonemes",
    "newKeys": [
     4,
@@ -5526,31 +5440,23 @@
    "rules": [
     {
      "kind": "phoneme",
-     "text": "Les touches m-, t- pressées ensemble écrivent /l/ en début de syllabe (« la », « le », « les »).",
-     "examples": [
-      "la",
-      "le",
-      "les"
-     ]
+     "hand": "left",
+     "text": "Les touches m-, t- pressées ensemble écrivent /l/ en début de syllabe (« la », « le », « les »)."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches -k, -d pressées ensemble écrivent /g/ en fin de syllabe.",
-     "examples": []
+     "hand": "right",
+     "text": "Les touches -k, -d pressées ensemble écrivent /g/ en fin de syllabe (« exactement », « exemple », « existe »)."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches p-, v- pressées ensemble écrivent /d/ en début de syllabe (« de », « d' », « des »).",
-     "examples": [
-      "de",
-      "d'",
-      "des"
-     ]
+     "hand": "left",
+     "text": "Les touches p-, v- pressées ensemble écrivent /d/ en début de syllabe (« de », « d' », « des »)."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches -n, -l pressées ensemble écrivent /z/ en fin de syllabe.",
-     "examples": []
+     "hand": "right",
+     "text": "Les touches -n, -l pressées ensemble écrivent /z/ en fin de syllabe (« chose », « choses », « cause »)."
     }
    ],
    "words": [
@@ -6362,7 +6268,7 @@
    "track": "phonemes",
    "index": 9,
    "sectionTitle": "Accords à deux touches, suite",
-   "title": "Leçon neuf : g",
+   "title": "Leçon neuf : k-, s-",
    "kind": "phonemes",
    "newKeys": [
     2,
@@ -6377,8 +6283,8 @@
    "rules": [
     {
      "kind": "phoneme",
-     "text": "Les touches k-, s- pressées ensemble écrivent /g/ en début de syllabe.",
-     "examples": []
+     "hand": "left",
+     "text": "Les touches k-, s- pressées ensemble écrivent /g/ en début de syllabe (« regarde », « grand », « gars »)."
     }
    ],
    "words": [
@@ -7190,7 +7096,7 @@
    "track": "phonemes",
    "index": 10,
    "sectionTitle": "Derniers accords d'un doigt",
-   "title": "Leçon dix : S",
+   "title": "Leçon dix : -Z, -m",
    "kind": "phonemes",
    "newKeys": [
     24,
@@ -7205,8 +7111,8 @@
    "rules": [
     {
      "kind": "phoneme",
-     "text": "Les touches -Z, -m pressées ensemble écrivent /S/ en fin de syllabe.",
-     "examples": []
+     "hand": "right",
+     "text": "Les touches -Z, -m pressées ensemble écrivent /S/ en fin de syllabe (« marche », « cherche », « touche »)."
     }
    ],
    "words": [
@@ -8018,7 +7924,7 @@
    "track": "phonemes",
    "index": 11,
    "sectionTitle": "Voyelles à deux pouces",
-   "title": "Leçon onze : y, u, §, o",
+   "title": "Leçon onze : @-, -i, @-, -e, a-, -i, a-, -e",
    "kind": "phonemes",
    "newKeys": [
     11,
@@ -8047,23 +7953,23 @@
    "rules": [
     {
      "kind": "phoneme",
-     "text": "Les touches @-, -i pressées ensemble écrivent la voyelle /y/.",
-     "examples": []
+     "hand": "thumbs",
+     "text": "Les touches @-, -i pressées ensemble écrivent la voyelle /y/."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches @-, -e pressées ensemble écrivent la voyelle /u/.",
-     "examples": []
+     "hand": "thumbs",
+     "text": "Les touches @-, -e pressées ensemble écrivent la voyelle /u/."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches a-, -i pressées ensemble écrivent la voyelle /§/.",
-     "examples": []
+     "hand": "thumbs",
+     "text": "Les touches a-, -i pressées ensemble écrivent la voyelle /§/."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches a-, -e pressées ensemble écrivent la voyelle /o/.",
-     "examples": []
+     "hand": "thumbs",
+     "text": "Les touches a-, -e pressées ensemble écrivent la voyelle /o/."
     }
    ],
    "words": [
@@ -8875,7 +8781,7 @@
    "track": "phonemes",
    "index": 12,
    "sectionTitle": "Consonnes à deux doigts",
-   "title": "Leçon douze : n, p, z, f",
+   "title": "Leçon douze : m-, R-, t-, w-, -j, -k, -s, -d",
    "kind": "phonemes",
    "newKeys": [
     6,
@@ -8908,23 +8814,23 @@
    "rules": [
     {
      "kind": "phoneme",
-     "text": "Les touches m-, R- pressées ensemble écrivent /n/ en début de syllabe.",
-     "examples": []
+     "hand": "left",
+     "text": "Les touches m-, R- pressées ensemble écrivent /n/ en début de syllabe."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches -j, -k pressées ensemble écrivent /p/ en fin de syllabe.",
-     "examples": []
+     "hand": "right",
+     "text": "Les touches -j, -k pressées ensemble écrivent /p/ en fin de syllabe."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches t-, w- pressées ensemble écrivent /z/ en début de syllabe.",
-     "examples": []
+     "hand": "left",
+     "text": "Les touches t-, w- pressées ensemble écrivent /z/ en début de syllabe."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches -s, -d pressées ensemble écrivent /f/ en fin de syllabe.",
-     "examples": []
+     "hand": "right",
+     "text": "Les touches -s, -d pressées ensemble écrivent /f/ en fin de syllabe."
     }
    ],
    "words": [
@@ -9736,7 +9642,7 @@
    "track": "phonemes",
    "index": 13,
    "sectionTitle": "Accords à deux doigts, suite",
-   "title": "Leçon treize : 2, S, N, 5",
+   "title": "Leçon treize : p-, m-, @-, -i, -e, a-, -i, -e, -t, -n",
    "kind": "phonemes",
    "newKeys": [
     4,
@@ -9771,23 +9677,23 @@
    "rules": [
     {
      "kind": "phoneme",
-     "text": "Les touches @-, -i, -e pressées ensemble écrivent la voyelle /2/.",
-     "examples": []
+     "hand": "thumbs",
+     "text": "Les touches @-, -i, -e pressées ensemble écrivent la voyelle /2/."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches p-, m- pressées ensemble écrivent /S/ en début de syllabe.",
-     "examples": []
+     "hand": "left",
+     "text": "Les touches p-, m- pressées ensemble écrivent /S/ en début de syllabe."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches -t, -n pressées ensemble écrivent /N/ en fin de syllabe.",
-     "examples": []
+     "hand": "right",
+     "text": "Les touches -t, -n pressées ensemble écrivent /N/ en fin de syllabe."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches a-, -i, -e pressées ensemble écrivent la voyelle /5/.",
-     "examples": []
+     "hand": "thumbs",
+     "text": "Les touches a-, -i, -e pressées ensemble écrivent la voyelle /5/."
     }
    ],
    "words": [
@@ -10599,7 +10505,7 @@
    "track": "phonemes",
    "index": 14,
    "sectionTitle": "Accords à deux doigts, suite",
-   "title": "Leçon quatorze : Z, f, b",
+   "title": "Leçon quatorze : v-, t-, k-, p-, s-, v-",
    "kind": "phonemes",
    "newKeys": [
     2,
@@ -10625,18 +10531,18 @@
    "rules": [
     {
      "kind": "phoneme",
-     "text": "Les touches v-, t- pressées ensemble écrivent /Z/ en début de syllabe.",
-     "examples": []
+     "hand": "left",
+     "text": "Les touches v-, t- pressées ensemble écrivent /Z/ en début de syllabe."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches k-, p- pressées ensemble écrivent /f/ en début de syllabe.",
-     "examples": []
+     "hand": "left",
+     "text": "Les touches k-, p- pressées ensemble écrivent /f/ en début de syllabe."
     },
     {
      "kind": "phoneme",
-     "text": "Les touches s-, v- pressées ensemble écrivent /b/ en début de syllabe.",
-     "examples": []
+     "hand": "left",
+     "text": "Les touches s-, v- pressées ensemble écrivent /b/ en début de syllabe."
     }
    ],
    "words": [
@@ -11448,7 +11354,7 @@
    "track": "phonemes",
    "index": 15,
    "sectionTitle": "La voyelle complète",
-   "title": "Leçon quinze : 1",
+   "title": "Leçon quinze : @-, a-, -i, -e",
    "kind": "phonemes",
    "newKeys": [
     11,
@@ -11467,8 +11373,8 @@
    "rules": [
     {
      "kind": "phoneme",
-     "text": "Les touches @-, a-, -i, -e pressées ensemble écrivent la voyelle /1/.",
-     "examples": []
+     "hand": "thumbs",
+     "text": "Les touches @-, a-, -i, -e pressées ensemble écrivent la voyelle /1/."
     }
    ],
    "words": [
@@ -12289,12 +12195,7 @@
    "rules": [
     {
      "kind": "accord",
-     "text": "La touche -s marque le pluriel : ans → @/-s par rapport à @.",
-     "examples": [
-      "ans",
-      "choses",
-      "enfants"
-     ]
+     "text": "La touche -s marque le pluriel : ans → @/-s par rapport à @."
     }
    ],
    "words": [
@@ -13419,12 +13320,7 @@
    "rules": [
     {
      "kind": "accord",
-     "text": "La touche -j marque le féminin : seule → s@l/-j par rapport à s@l.",
-     "examples": [
-      "seule",
-      "sûre",
-      "amie"
-     ]
+     "text": "La touche -j marque le féminin : seule → s@l/-j par rapport à s@l."
     }
    ],
    "words": [
@@ -14641,48 +14537,23 @@
    "rules": [
     {
      "kind": "verb-markers",
-     "text": "La touche -t marque le futur et le passé et la troisième personne : « est », « tu », « ai ».",
-     "examples": [
-      "est",
-      "tu",
-      "ai"
-     ]
+     "text": "La touche -t marque le futur et le passé et la troisième personne : « est », « tu », « ai »."
     },
     {
      "kind": "verb-markers",
-     "text": "La touche -d marque la deuxième personne : « est », « tu », « ai ».",
-     "examples": [
-      "est",
-      "tu",
-      "ai"
-     ]
+     "text": "La touche -d marque la deuxième personne : « est », « tu », « ai »."
     },
     {
      "kind": "verb-markers",
-     "text": "La touche -k marque l'impératif et la première personne : « est », « tu », « ai ».",
-     "examples": [
-      "est",
-      "tu",
-      "ai"
-     ]
+     "text": "La touche -k marque l'impératif et la première personne : « est », « tu », « ai »."
     },
     {
      "kind": "verb-markers",
-     "text": "La touche -R marque l'imparfait et le subjonctif : « est », « tu », « ai ».",
-     "examples": [
-      "est",
-      "tu",
-      "ai"
-     ]
+     "text": "La touche -R marque l'imparfait et le subjonctif : « est », « tu », « ai »."
     },
     {
      "kind": "verb-markers",
-     "text": "La touche -l marque le conditionnel et l'infinitif : « est », « tu », « ai ».",
-     "examples": [
-      "est",
-      "tu",
-      "ai"
-     ]
+     "text": "La touche -l marque le conditionnel et l'infinitif : « est », « tu », « ai »."
     }
    ],
    "words": [
@@ -15629,12 +15500,7 @@
    "rules": [
     {
      "kind": "verb-tense",
-     "text": "Pour l'indicatif présent, les marques de conjugaison sont -k, -d : « est », « ai », « y ».",
-     "examples": [
-      "est",
-      "ai",
-      "y"
-     ]
+     "text": "Pour l'indicatif présent, les marques de conjugaison sont -k, -d : « est », « ai », « y »."
     }
    ],
    "words": [
@@ -16590,12 +16456,7 @@
    "rules": [
     {
      "kind": "verb-tense",
-     "text": "Pour l'imparfait de l'indicatif, les marques de conjugaison sont -s, -k, -d, -t : « était », « étais », « étais ».",
-     "examples": [
-      "était",
-      "étais",
-      "étais"
-     ]
+     "text": "Pour l'imparfait de l'indicatif, les marques de conjugaison sont -s, -k, -d, -t : « était », « étais », « étais »."
     }
    ],
    "words": [
@@ -17780,12 +17641,7 @@
    "rules": [
     {
      "kind": "verb-tense",
-     "text": "Pour le futur de l'indicatif, les marques de conjugaison sont -s, -k, -d, -t : « sera », « aura », « fera ».",
-     "examples": [
-      "sera",
-      "aura",
-      "fera"
-     ]
+     "text": "Pour le futur de l'indicatif, les marques de conjugaison sont -s, -k, -d, -t : « sera », « aura », « fera »."
     }
    ],
    "words": [
@@ -18992,12 +18848,7 @@
    "rules": [
     {
      "kind": "verb-tense",
-     "text": "Pour le participe passé, comme au passé composé, les marques de conjugaison sont -j, -s : « tu », « fait », « lui ».",
-     "examples": [
-      "tu",
-      "fait",
-      "lui"
-     ]
+     "text": "Pour le participe passé, comme au passé composé, les marques de conjugaison sont -j, -s : « tu », « fait », « lui »."
     }
    ],
    "words": [
@@ -20065,12 +19916,7 @@
    "rules": [
     {
      "kind": "verb-tense",
-     "text": "Pour l'infinitif, les marques de conjugaison sont -l : « faire », « dire », « voir ».",
-     "examples": [
-      "faire",
-      "dire",
-      "voir"
-     ]
+     "text": "Pour l'infinitif, les marques de conjugaison sont -l : « faire », « dire », « voir »."
     }
    ],
    "words": [
@@ -21213,12 +21059,7 @@
    "rules": [
     {
      "kind": "verb-tense",
-     "text": "Pour le conditionnel présent, les marques de conjugaison sont -s, -k, -d, -t : « aurais », « pourrait », « serait ».",
-     "examples": [
-      "aurais",
-      "pourrait",
-      "serait"
-     ]
+     "text": "Pour le conditionnel présent, les marques de conjugaison sont -s, -k, -d, -t : « aurais », « pourrait », « serait »."
     }
    ],
    "words": [
@@ -22446,12 +22287,7 @@
    "rules": [
     {
      "kind": "verb-tense",
-     "text": "Pour le subjonctif présent, les marques de conjugaison sont -k, -d, -R : « aime », « regarde », « arrive ».",
-     "examples": [
-      "aime",
-      "regarde",
-      "arrive"
-     ]
+     "text": "Pour le subjonctif présent, les marques de conjugaison sont -k, -d, -R : « aime », « regarde », « arrive »."
     }
    ],
    "words": [
@@ -23544,12 +23380,7 @@
    "rules": [
     {
      "kind": "verb-tense",
-     "text": "Pour l'impératif présent, les marques de conjugaison sont -k : « va », « suis », « allez ».",
-     "examples": [
-      "va",
-      "suis",
-      "allez"
-     ]
+     "text": "Pour l'impératif présent, les marques de conjugaison sont -k : « va », « suis », « allez »."
     }
    ],
    "words": [
@@ -24666,12 +24497,7 @@
    "rules": [
     {
      "kind": "mark",
-     "text": "La marque * (*) distingue haie (*ie) de est (ie).",
-     "examples": [
-      "est",
-      "haie",
-      "pas"
-     ]
+     "text": "La marque * (*) distingue haie (*ie) de est (ie)."
     }
    ],
    "words": [
@@ -25502,12 +25328,7 @@
    "rules": [
     {
      "kind": "mark",
-     "text": "La marque # (#) distingue hait (ie#) de est (ie).",
-     "examples": [
-      "est",
-      "hait",
-      "pas"
-     ]
+     "text": "La marque # (#) distingue hait (ie#) de est (ie)."
     }
    ],
    "words": [
@@ -26356,12 +26177,7 @@
    "rules": [
     {
      "kind": "mark",
-     "text": "La marque *# (*, #) distingue hai (*ie#) de est (ie).",
-     "examples": [
-      "est",
-      "hai",
-      "et"
-     ]
+     "text": "La marque *# (*, #) distingue hai (*ie#) de est (ie)."
     }
    ],
    "words": [
@@ -27235,12 +27051,7 @@
    "rules": [
     {
      "kind": "mark",
-     "text": "La marque *# *# (*, #) distingue ais (*e#/*#) de et (e).",
-     "examples": [
-      "et",
-      "ais",
-      "mais"
-     ]
+     "text": "La marque *# *# (*, #) distingue ais (*e#/*#) de et (e)."
     }
    ],
    "words": [
@@ -28230,12 +28041,7 @@
    "rules": [
     {
      "kind": "mark",
-     "text": "La marque *# *# *# (*, #) distingue ho (*ae#/*#/*#) de au (ae).",
-     "examples": [
-      "au",
-      "ho",
-      "ou"
-     ]
+     "text": "La marque *# *# *# (*, #) distingue ho (*ae#/*#/*#) de au (ae)."
     }
    ],
    "words": [
@@ -28637,8 +28443,7 @@
    "rules": [
     {
      "kind": "affixes",
-     "text": "Abréviations d'affixes : à venir.",
-     "examples": []
+     "text": "Abréviations d'affixes : à venir."
     }
    ],
    "words": []

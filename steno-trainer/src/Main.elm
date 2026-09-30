@@ -88,6 +88,8 @@ type Msg
     | GotDefinitions (Result Http.Error Definitions)
     | GotLessons (Result Http.Error Lessons)
     | SelectLesson String
+    | PrevLesson
+    | NextLesson
     | BackToLessonList
     | StartLessonDrill (List PracticeWord)
     | QueryChanged String
@@ -190,6 +192,12 @@ update msg model =
             ( { model | selectedLesson = Just id, drill = Nothing, typed = noTypedStrokes }
             , Cmd.none
             )
+
+        PrevLesson ->
+            stepLesson -1 model
+
+        NextLesson ->
+            stepLesson 1 model
 
         BackToLessonList ->
             ( { model | selectedLesson = Nothing, drill = Nothing, typed = noTypedStrokes }
@@ -353,6 +361,50 @@ activeItems model =
 
                 _ ->
                     Nothing
+
+
+{-| One step through the GLOBAL lesson order (the flat `lessons` list, i.e. the
+tracks' concatenation): lands on the target lesson's INTRO by reusing the
+`SelectLesson` path verbatim, so the drill state and the typed-strokes line
+reset exactly as a fresh pick does. Out-of-range steps and a missing selection
+are no-ops (the buttons are already disabled there). -}
+stepLesson : Int -> Model -> ( Model, Cmd Msg )
+stepLesson delta model =
+    case model.lessons of
+        Just (Loaded lessons) ->
+            let
+                target =
+                    model.selectedLesson
+                        |> Maybe.andThen (\id -> lessonIndexIn id lessons.lessons)
+                        |> Maybe.andThen (\i -> List.drop (i + delta) lessons.lessons |> List.head)
+            in
+            case target of
+                Just lesson ->
+                    update (SelectLesson lesson.id) model
+
+                Nothing ->
+                    ( model, Cmd.none )
+
+        _ ->
+            ( model, Cmd.none )
+
+
+lessonIndexIn : String -> List Lessons.Lesson -> Maybe Int
+lessonIndexIn id lessons =
+    let
+        step index remaining =
+            case remaining of
+                [] ->
+                    Nothing
+
+                first :: rest ->
+                    if first.id == id then
+                        Just index
+
+                    else
+                        step (index + 1) rest
+    in
+    step 0 lessons
 
 
 {-| Shuffle the current mode's list into a fresh drill, once it has loaded
@@ -637,9 +689,11 @@ viewDefinitions model =
 {-| Lesson mode's three screens: the picker (no lesson selected), the intro
 of the selected lesson, and -- once its "Start drill" has gone through the
 shuffle -- the shared drill view over that lesson's words, with a back link
-above it so a run can be abandoned without leaving the mode. The keyboard
-under the drill is the trainer's usual one (hints follow the drill); the
-intro carries its own (see `Lessons.viewIntro`). -}
+above it so a run can be abandoned without leaving the mode. Both the intro
+and the drill page carry the Previous/Next pair over the global lesson order
+(`Lessons.viewPrevNext`); both land on the target lesson's intro. The
+keyboard under the drill is the trainer's usual one (hints follow the drill);
+the intro carries its own (see `Lessons.viewIntro`). -}
 viewLessons : Model -> Html Msg
 viewLessons model =
     case model.lessons of
@@ -651,6 +705,20 @@ viewLessons model =
                 selected =
                     model.selectedLesson
                         |> Maybe.andThen (\id -> lessons.lessons |> List.filter (\l -> l.id == id) |> List.head)
+
+                ( onPrev, onNext ) =
+                    let
+                        length =
+                            List.length lessons.lessons
+                    in
+                    case model.selectedLesson |> Maybe.andThen (\id -> lessonIndexIn id lessons.lessons) of
+                        Just index ->
+                            ( (if index > 0 then Just PrevLesson else Nothing)
+                            , (if index < length - 1 then Just NextLesson else Nothing)
+                            )
+
+                        Nothing ->
+                            ( Nothing, Nothing )
             in
             case selected of
                 Just lesson ->
@@ -658,6 +726,8 @@ viewLessons model =
                         Lessons.viewIntro
                             { onBack = BackToLessonList
                             , onStart = StartLessonDrill
+                            , onPrev = onPrev
+                            , onNext = onNext
                             , render = Notation.render model.notation
                             , keys =
                                 case model.layout of
@@ -672,7 +742,9 @@ viewLessons model =
                     else
                         div [ class "lesson-drill" ]
                             [ p [ class "lesson-back" ]
-                                [ button [ onClick BackToLessonList ] [ text "← Lessons" ] ]
+                                ([ button [ onClick BackToLessonList ] [ text "← Lessons" ] ]
+                                    ++ Lessons.viewPrevNext onPrev onNext
+                                )
                             , viewDrill model
                             ]
 
