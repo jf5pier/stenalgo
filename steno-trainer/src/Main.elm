@@ -11,6 +11,7 @@ import Html.Events exposing (onClick, onInput)
 import Http
 import Json.Decode as D
 import Keyboard exposing (KeyInfo, Layout)
+import Lessons exposing (Lessons)
 import Notation exposing (Notation)
 import Ports
 import Random
@@ -28,11 +29,14 @@ common sentences word by word (`practice-sentences.json`, see
 `util/export_practice_sentences.py`). Both run through the same `Drill`
 state machine -- a sentence is just one long multi-stroke item. Definitions
 is a lookup, not a drill: type a spelling, see its homophones (see
-`Definitions`). -}
+`Definitions`). Lessons is the fixed progression of `lessons.json`: pick a
+lesson, read its rules, then drill its own word pool through the same `Drill`
+engine (see `Lessons`). -}
 type Mode
     = WordMode
     | SentenceMode
     | DefinitionMode
+    | LessonMode
 
 
 {-| The strokes correctly typed so far for the current target word (a
@@ -62,6 +66,8 @@ type alias Model =
     , serial : SerialStatus
     , notation : Notation
     , definitions : Maybe (LoadState Definitions)
+    , lessons : Maybe (LoadState Lessons)
+    , selectedLesson : Maybe String
     , query : String
     , hints : Bool
     , lastStroke : Set.Set Int
@@ -80,6 +86,10 @@ type Msg
     | IncomingBytes (List Int)
     | ToggleNotation
     | GotDefinitions (Result Http.Error Definitions)
+    | GotLessons (Result Http.Error Lessons)
+    | SelectLesson String
+    | BackToLessonList
+    | StartLessonDrill (List PracticeWord)
     | QueryChanged String
     | ToggleHints
 
@@ -100,6 +110,8 @@ init _ =
       , serial = CheckingSupport
       , notation = Notation.XSampa
       , definitions = Nothing
+      , lessons = Nothing
+      , selectedLesson = Nothing
       , query = ""
       , hints = True
       , lastStroke = Set.empty
@@ -143,6 +155,19 @@ update msg model =
                 , Http.get { url = "public/data/definitions.json", expect = Http.expectJson GotDefinitions Definitions.decoder }
                 )
 
+            else if mode == LessonMode && model.lessons == Nothing then
+                ( { model | mode = mode, drill = Nothing, typed = noTypedStrokes, selectedLesson = Nothing, lessons = Just Loading }
+                , Http.get { url = "public/data/lessons.json", expect = Http.expectJson GotLessons Lessons.decoder }
+                )
+
+            else if mode == LessonMode then
+                -- Already fetched (or fetching): back to the picker, not an
+                -- auto-resume of whatever lesson was last selected. No drill
+                -- starts (nothing is selected), so no `startDrillIfIdle`.
+                ( { model | mode = mode, drill = Nothing, typed = noTypedStrokes, selectedLesson = Nothing }
+                , Cmd.none
+                )
+
             else
                 startDrillIfIdle { model | mode = mode, drill = Nothing, typed = noTypedStrokes }
 
@@ -151,6 +176,32 @@ update msg model =
 
         GotDefinitions (Err err) ->
             ( { model | definitions = Just (Failed (httpErrorToString err)) }, Cmd.none )
+
+        GotLessons (Ok lessons) ->
+            ( { model | lessons = Just (Loaded lessons) }, Cmd.none )
+
+        GotLessons (Err err) ->
+            ( { model | lessons = Just (Failed (httpErrorToString err)) }, Cmd.none )
+
+        SelectLesson id ->
+            -- Picking a lesson shows its intro; its drill only starts on the
+            -- intro's explicit button, so no auto-start here (unlike
+            -- `startDrillIfIdle` for the whole-pool modes).
+            ( { model | selectedLesson = Just id, drill = Nothing, typed = noTypedStrokes }
+            , Cmd.none
+            )
+
+        BackToLessonList ->
+            ( { model | selectedLesson = Nothing, drill = Nothing, typed = noTypedStrokes }
+            , Cmd.none
+            )
+
+        StartLessonDrill words ->
+            -- The same shuffle path the Words mode uses: the shuffled list
+            -- comes back as `ShuffledWords`, which starts the drill.
+            ( model
+            , Random.generate ShuffledWords (shuffleGenerator words)
+            )
 
         QueryChanged query ->
             ( { model | query = query }, Cmd.none )
@@ -276,7 +327,11 @@ recordTypedStroke drill typed =
             typed
 
 
-{-| The current drill mode's list; `Nothing` in definition mode (no drill). -}
+{-| The current drill mode's list; `Nothing` in definition mode (no drill)
+and in lesson mode until a lesson is picked (the drill runs over the selected
+lesson's own pool, not a whole exported file). The returned list is also the
+pass-boundary reshuffle source, so finishing a lesson's pass deals a fresh
+shuffle of that same lesson. -}
 activeItems : Model -> Maybe (LoadState (List PracticeWord))
 activeItems model =
     case model.mode of
@@ -288,6 +343,16 @@ activeItems model =
 
         DefinitionMode ->
             Nothing
+
+        LessonMode ->
+            case model.lessons of
+                Just (Loaded lessons) ->
+                    model.selectedLesson
+                        |> Maybe.andThen (\id -> lessons.lessons |> List.filter (\l -> l.id == id) |> List.head)
+                        |> Maybe.map (\lesson -> Loaded lesson.words)
+
+                _ ->
+                    Nothing
 
 
 {-| Shuffle the current mode's list into a fresh drill, once it has loaded
@@ -420,6 +485,8 @@ viewModeSwitch mode =
         , modeButton SentenceMode "Sentences"
         , text " "
         , modeButton DefinitionMode "Definitions"
+        , text " "
+        , modeButton LessonMode "Lessons"
         ]
 
 
@@ -480,6 +547,9 @@ viewTrainer model =
             ( DefinitionMode, _ ) ->
                 viewDefinitions model
 
+            ( LessonMode, _ ) ->
+                viewLessons model
+
             ( _, Just (Failed message) ) ->
                 p [ class "error" ] [ text ("Couldn't load practice " ++ modeNoun model.mode ++ ": " ++ message) ]
 
@@ -488,33 +558,39 @@ viewTrainer model =
 
             _ ->
                 p [] [ text ("Loading practice " ++ modeNoun model.mode ++ "...") ]
-        , case model.layout of
-            Failed message ->
-                p [ class "error" ] [ text ("Couldn't load keyboard layout: " ++ message) ]
+        , if model.mode == LessonMode && model.drill == Nothing then
+            -- The lesson intro renders its own keyboard (highlighting the
+            -- lesson's new keys/chords); the list has nothing to highlight.
+            text ""
 
-            Loading ->
-                p [] [ text "Loading keyboard layout..." ]
+          else
+            case model.layout of
+                Failed message ->
+                    p [ class "error" ] [ text ("Couldn't load keyboard layout: " ++ message) ]
 
-            Loaded loadedLayout ->
-                let
-                    layout =
-                        Notation.layout model.notation loadedLayout
-                in
-                div []
-                    [ Keyboard.view
-                        (if model.hints && model.mode /= DefinitionMode then
-                            { highlighted = model.drill |> Maybe.andThen Drill.expectedStroke |> Maybe.withDefault Set.empty
-                            , correct = model.drill |> Maybe.andThen .feedback
-                            }
+                Loading ->
+                    p [] [ text "Loading keyboard layout..." ]
 
-                         else
-                            { highlighted = model.lastStroke
-                            , correct = model.drill |> Maybe.andThen .feedback
-                            }
-                        )
-                        layout.keys
-                    , Keyboard.viewChordBoard layout
-                    ]
+                Loaded loadedLayout ->
+                    let
+                        layout =
+                            Notation.layout model.notation loadedLayout
+                    in
+                    div []
+                        [ Keyboard.view
+                            (if model.hints && model.mode /= DefinitionMode then
+                                { highlighted = model.drill |> Maybe.andThen Drill.expectedStroke |> Maybe.withDefault Set.empty
+                                , correct = model.drill |> Maybe.andThen .feedback
+                                }
+
+                             else
+                                { highlighted = model.lastStroke
+                                , correct = model.drill |> Maybe.andThen .feedback
+                                }
+                            )
+                            layout.keys
+                        , Keyboard.viewChordBoard layout
+                        ]
         ]
 
 
@@ -529,6 +605,9 @@ modeNoun mode =
 
         DefinitionMode ->
             "definitions"
+
+        LessonMode ->
+            "lessons"
 
 
 viewDefinitions : Model -> Html Msg
@@ -553,6 +632,54 @@ viewDefinitions model =
             _ ->
                 p [] [ text "Loading definitions..." ]
         ]
+
+
+{-| Lesson mode's three screens: the picker (no lesson selected), the intro
+of the selected lesson, and -- once its "Start drill" has gone through the
+shuffle -- the shared drill view over that lesson's words, with a back link
+above it so a run can be abandoned without leaving the mode. The keyboard
+under the drill is the trainer's usual one (hints follow the drill); the
+intro carries its own (see `Lessons.viewIntro`). -}
+viewLessons : Model -> Html Msg
+viewLessons model =
+    case model.lessons of
+        Just (Failed message) ->
+            p [ class "error" ] [ text ("Couldn't load lessons: " ++ message) ]
+
+        Just (Loaded lessons) ->
+            let
+                selected =
+                    model.selectedLesson
+                        |> Maybe.andThen (\id -> lessons.lessons |> List.filter (\l -> l.id == id) |> List.head)
+            in
+            case selected of
+                Just lesson ->
+                    if model.drill == Nothing then
+                        Lessons.viewIntro
+                            { onBack = BackToLessonList
+                            , onStart = StartLessonDrill
+                            , keys =
+                                case model.layout of
+                                    Loaded layout ->
+                                        (Notation.layout model.notation layout).keys
+
+                                    _ ->
+                                        []
+                            }
+                            lesson
+
+                    else
+                        div [ class "lesson-drill" ]
+                            [ p [ class "lesson-back" ]
+                                [ button [ onClick BackToLessonList ] [ text "← Lessons" ] ]
+                            , viewDrill model
+                            ]
+
+                Nothing ->
+                    Lessons.viewList SelectLesson model.selectedLesson lessons
+
+        _ ->
+            p [] [ text "Loading lessons..." ]
 
 
 viewDrill : Model -> Html Msg
