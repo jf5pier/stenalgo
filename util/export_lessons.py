@@ -13,7 +13,9 @@ lessons of at most 4 keypresses. Each phoneme rule carries its keypress's hand g
 ("left"/"thumbs"/"right") for the intro view's "Main gauche"/"Les pouces"/"Main droite"
 grouping, and attaches every phoneme's examples directly after that phoneme -- falling
 back, when the lesson's own pool has no word for a phoneme, to the most frequent
-unmarked stream records that press the keypress with it. `accord` introduces the gender/number Keypress Groups,
+unmarked stream records that press the keypress with it (the phoneme realized in the
+keypress's own syllabic part -- an example whose phoneme sits in another part would
+show a different keypress, possibly the other hand). `accord` introduces the gender/number Keypress Groups,
 `verbe` the conjugation groups (one marker lesson) then one lesson per mood/tense,
 `desambiguation` the star/hash mark codes in mark-complexity order, and `affixes` is a
 placeholder for the (separate) affix-abbreviation work.
@@ -37,6 +39,7 @@ Requires the same inputs as `util.export_practice_words`, plus
 import json
 from functools import lru_cache
 
+from src.grammar import Phoneme
 from src.keyboard import Keypress, Starboard, Strokes, canonicalizeStrokes
 from src.word import GramCat, Word
 from util._stenorender import renderFinalStrokesToRTFCRE
@@ -355,6 +358,7 @@ def buildRecordStream(
     `(ortho, steno)` exactly the way `util.export_practice_words` merges, plus the
     private `_`-prefixed analysis the eligibility filter and the rule texts read:
     `_word` (first Word), `_keyps` (per-finger keypresses of the phonetic strokes),
+    `_phonemeParts` ((phoneme, part) pairs the word realizes in its syllables),
     `_groups` (Keypress Group indexes the feature discriminating strokes need),
     `_code` (star/hash code, None when invalid), `_cluster` (the record's final induced
     strokes with the marks removed -- its lemma-homophone group identity),
@@ -424,6 +428,7 @@ def buildRecordStream(
                     existing["before"], existing["after"] = before, after
                 existing["frequency"] = max(existing["frequency"], round(word.frequency, 3))
                 existing["_keyps"] = existing["_keyps"] | phoneticKeypresses
+                existing["_phonemeParts"] = existing["_phonemeParts"] | phonemePartsOfWord(word)
                 existing["_groups"] = existing["_groups"] | neededGroups
                 existing["_gramCats"] = existing["_gramCats"] | {word.gramCat}
                 for reading in readings:
@@ -436,7 +441,9 @@ def buildRecordStream(
                 "label": label, "phonology": formatPhonology(word), "steno": steno,
                 "strokes": [sorted(set(stroke)) for stroke in strokes],
                 "frequency": round(word.frequency, 3),
-                "_word": word, "_keyps": phoneticKeypresses, "_groups": neededGroups,
+                "_word": word, "_keyps": phoneticKeypresses,
+                "_phonemeParts": phonemePartsOfWord(word),
+                "_groups": neededGroups,
                 "_code": code, "_cluster": tuple(unmarked),
                 "_gramCats": {word.gramCat}, "_readings": list(readings),
             }
@@ -456,6 +463,26 @@ def _quotedExamples(orthos: list[str]) -> str:
 
 def _keyNames(starboard: Starboard, keys) -> str:
     return ", ".join(starboard.keyDisplayName(key) for key in keys)
+
+
+def phonemePartsOfWord(word: Word) -> frozenset[tuple[str, str]]:
+    """The `(phoneme, syllabic part)` pairs the word's syllables realize, with the
+    same onset/nucleus/coda split `Syllable.__init__` performs (consonants before
+    the first vowel of a syllable go to the onset, vowels to the nucleus,
+    consonants after it to the coda; a vowel-less syllable is all onset). A
+    keypress's keys all sit in one part's bank, so it can only write a phoneme
+    the word holds in THAT part: "voyez" realizes /w/ in its onset (left-hand
+    key 9), so it is no example for the coda /w/ of -j (right-hand key 16)."""
+    pairs: set[tuple[str, str]] = set()
+    for syllable in word.phonemesToSyllableNames(withSilent=False):
+        seenVowel = False
+        for phoneme in syllable:
+            if phoneme in Phoneme.nucleusPhonemes:
+                pairs.add((phoneme, "nucleus"))
+                seenVowel = True
+            else:
+                pairs.add((phoneme, "coda" if seenVowel else "onset"))
+    return frozenset(pairs)
 
 
 def examplesFallbackByKeypress(stream: list[dict]) -> dict[Keypress, tuple[dict, ...]]:
@@ -478,20 +505,26 @@ def examplesFallbackByKeypress(stream: list[dict]) -> dict[Keypress, tuple[dict,
 def _examplesByPhoneme(item: dict, pool: list[dict],
                        fallbackByKeypress: dict[Keypress, tuple[dict, ...]]) -> dict[str, list[str]]:
     """Up to 3 example orthographies per phoneme of the keypress (§7.1): first the
-    lesson's own pool records that press the keypress and contain the phoneme in
-    their phonology; when a phoneme has none, the most frequent fallback records
-    (`examplesFallbackByKeypress`) that press the keypress with that phoneme."""
-    keypress, phonemes = item["keypress"], item["phonemes"]
+    lesson's own pool records that press the keypress and realize the phoneme in
+    the keypress's syllabic part (`_phonemeParts` -- a keypress's keys sit in one
+    part's bank, so it only ever writes the phoneme there); when a phoneme has
+    none, the most frequent fallback records (`examplesFallbackByKeypress`) that
+    do. A record holding the phoneme in another part must not qualify: that
+    occurrence is written by a different keypress, possibly the other hand
+    ("voyez" realizes /w/ in its onset, so it never exemplifies the coda /w/ of
+    -j)."""
+    keypress, phonemes, part = item["keypress"], item["phonemes"], item["part"]
     examples: dict[str, list[str]] = {}
     for phoneme in phonemes:
+        pair = (phoneme, part)
         orthos: list[str] = []
         for record in pool:
-            if keypress in record["_keyps"] and phoneme in record["phonology"] \
+            if keypress in record["_keyps"] and pair in record["_phonemeParts"] \
                     and record["ortho"] not in orthos:
                 orthos.append(record["ortho"])
         if not orthos:
             for record in fallbackByKeypress.get(keypress, ()):
-                if phoneme in record["phonology"] and record["ortho"] not in orthos:
+                if pair in record["_phonemeParts"] and record["ortho"] not in orthos:
                     orthos.append(record["ortho"])
         examples[phoneme] = orthos[:3]
     return examples

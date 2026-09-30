@@ -337,8 +337,9 @@ Every phoneme carries its examples directly after it, parenthesized:
 
 Multi-phoneme keypress (the keypress is atomic, so one rule) lists each phoneme
 with its own examples, joined `", "` and `" ou "` before the last:
-`La touche {touche} écrit /j/ (« oeil », « aïe »), /b/ (« arabe ») ou /w/
-(« watt »).` — there is no "selon la position" wording anymore.
+`La touche {touche} écrit /j/ (« oeil », « aïe »), /b/ (« arabe ») ou /w/.`
+(the coda /w/ stays bare — no stream record realizes /w/ in a coda; see
+`{exemples}` below) — there is no "selon la position" wording anymore.
 
 Chord keypress (≥ 2 keys): `Les touches {touches} pressées ensemble écrivent
 …`, with the same per-phoneme body — `/{phoneme}/ en {début|fin} de syllabe
@@ -347,13 +348,19 @@ Chord keypress (≥ 2 keys): `Les touches {touches} pressées ensemble écrivent
 
 `{exemples}` = up to 3 example orthographies, each `« mot »`, joined ` », « `
 (`« rat », « rang », « arabe »`). They are drawn first from the lesson's own
-pool (records pressing the keypress whose phonology contains the phoneme); when
-a phoneme has no such word in the pool (e.g. /w/ in lesson 1: nothing writable
-that early presses it), the **fallback** supplies the most frequent unmarked
-records of the full candidate stream (§5) that press that keypress with that
-phoneme — every phoneme of every introduced keypress gets at least one example,
-even when the lesson's own words cannot show it. Marked records never serve as
-fallback examples (§8).
+pool; when a phoneme has no such word in the pool (e.g. /w/ in lesson 1:
+nothing writable that early presses it), the **fallback** supplies the most
+frequent unmarked records of the full candidate stream (§5). In both sources a
+record qualifies only when it presses the keypress AND realizes the phoneme in
+the keypress's own syllabic part (its onset/nucleus/coda bank — a keypress's
+keys never straddle parts): a word holding the phoneme in another part would
+show that phoneme written by a DIFFERENT keypress, possibly the other hand
+("voyez" holds /w/ in its onset, written by the left-hand key 9, so it never
+exemplifies the coda /w/ of -j — that one draws on the rare post-vocalic /w/
+loanwords: « out », « house », « sertão »). So a phoneme gets at least one
+example unless no stream record realizes it in that part at all (then it stays
+bare, like the chord vowels of the last nucleus lessons). Marked records never
+serve as fallback examples (§8).
 
 ### 7.2 kind `accord`
 
