@@ -1,0 +1,61 @@
+Tue Sep 29 18:29:45 2026    scratch/profiles2/build_realization_report.pstats
+
+         39935139 function calls (39915181 primitive calls) in 27.334 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1157 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    132/1    0.007    0.000   27.334   27.334 {built-in method builtins.exec}
+        1    0.000    0.000   27.334   27.334 <string>:1(<module>)
+        1    0.000    0.000   27.334   27.334 <frozen runpy>:206(run_module)
+        1    0.000    0.000   27.331   27.331 <frozen runpy>:65(_run_code)
+        1    0.269    0.269   27.331   27.331 /home/jfsp/stenalgo-fix/util/build_realization_report.py:1(<module>)
+        1    0.335    0.335   26.984   26.984 /home/jfsp/stenalgo-fix/util/build_realization_report.py:39(main)
+        1    0.589    0.589   18.529   18.529 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:932(realizeKeypressGroupsAsExtraStroke)
+        7    0.476    0.068   16.329    2.333 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:1119(_bestCandidate)
+      129    3.978    0.031   13.380    0.104 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:1040(_feasible)
+        1    0.000    0.000    4.236    4.236 /home/jfsp/stenalgo-fix/util/_theoryio.py:122(loadPhoneticTheory)
+        1    1.622    1.622    4.236    4.236 /home/jfsp/stenalgo-fix/util/_theoryio.py:42(_loadDictionaryAndPhoneticTheory)
+  1650496    2.357    0.000    3.910    0.000 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:1024(_composedInduced)
+       93    1.315    0.014    2.424    0.026 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:1089(_candidateCost)
+ 15682707    2.339    0.000    2.339    0.000 /home/jfsp/stenalgo-fix/src/word.py:166(__hash__)
+        6    2.256    0.376    2.256    0.376 {built-in method _pickle.load}
+        1    1.748    1.748    1.771    1.771 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:670(buildWordsByOrthoLemme)
+        1    0.353    0.353    1.769    1.769 /home/jfsp/stenalgo-fix/util/_theoryio.py:19(loadDictionary)
+  3262643    1.143    0.000    1.510    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:558(getStrokeCost)
+   174945    0.123    0.000    1.348    0.000 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:1073(<genexpr>)
+  1650594    0.535    0.000    1.266    0.000 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:1054(<genexpr>)
+
+
+===== sort by tottime =====
+Tue Sep 29 18:29:45 2026    scratch/profiles2/build_realization_report.pstats
+
+         39935139 function calls (39915181 primitive calls) in 27.334 seconds
+
+   Ordered by: internal time
+   List reduced from 1157 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+      129    3.978    0.031   13.380    0.104 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:1040(_feasible)
+  1650496    2.357    0.000    3.910    0.000 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:1024(_composedInduced)
+ 15682707    2.339    0.000    2.339    0.000 /home/jfsp/stenalgo-fix/src/word.py:166(__hash__)
+        6    2.256    0.376    2.256    0.376 {built-in method _pickle.load}
+        1    1.748    1.748    1.771    1.771 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:670(buildWordsByOrthoLemme)
+        1    1.622    1.622    4.236    4.236 /home/jfsp/stenalgo-fix/util/_theoryio.py:42(_loadDictionaryAndPhoneticTheory)
+       93    1.315    0.014    2.424    0.026 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:1089(_candidateCost)
+  3262643    1.143    0.000    1.510    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:558(getStrokeCost)
+  1829993    0.926    0.000    1.231    0.000 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:834(_appendCodaExtraStroke)
+      343    0.853    0.002    1.239    0.004 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:646(findCollidingInducedStrokes)
+  3808746    0.705    0.000    0.705    0.000 {built-in method builtins.sorted}
+        7    0.687    0.098    1.053    0.150 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:1013(_finalizeReadyWords)
+  3811958    0.677    0.000    0.684    0.000 {method 'get' of 'dict' objects}
+  1650594    0.626    0.000    0.626    0.000 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:1056(<genexpr>)
+        1    0.589    0.589   18.529   18.529 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:932(realizeKeypressGroupsAsExtraStroke)
+       98    0.586    0.006    0.915    0.009 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:1027(_isRedundantForAnyWord)
+  1650594    0.535    0.000    1.266    0.000 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:1054(<genexpr>)
+        3    0.506    0.169    0.507    0.169 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/decoder.py:351(raw_decode)
+        7    0.476    0.068   16.329    2.333 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:1119(_bestCandidate)
+  3263189    0.366    0.000    0.366    0.000 {method 'setdefault' of 'dict' objects}
+
+

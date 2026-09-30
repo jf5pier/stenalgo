@@ -49,9 +49,10 @@ def main() -> None:
     starboard = Starboard.fromJSONFile(KEYBOARD_JSON)
     if starboard is None:
         raise RuntimeError(f"{KEYBOARD_JSON} not found; run dictionary.py once first to generate it.")
-    theory, disambiguatedTheory = loadPhoneticAndDisambiguatedTheory(starboard)
+    theory, disambiguatedTheory, wordToStrokes, wordsByOrthoLemme = loadPhoneticAndDisambiguatedTheory(starboard)
     with open(RESOLVED_PRESS_SETS_PATH, encoding="utf-8") as f:
-        readingsByWord = buildReadingsByWord(json.load(f), theory)
+        readingsByWord = buildReadingsByWord(json.load(f), theory,
+                                             wordToStrokes=wordToStrokes, wordsByOrthoLemme=wordsByOrthoLemme)
 
     labelIndex: dict[str, int] = {}
     wordsByBase: dict[str, list] = {}
@@ -75,7 +76,11 @@ def main() -> None:
         if words
     ]
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
-        json.dump({"labels": list(labelIndex), "groups": groups}, f, ensure_ascii=False, separators=(",", ":"))
+        # dumps (not dump): only the one-shot dumps call uses the C encoder --
+        # json.dump always chunks through the pure-Python iterencode. Byte-identical
+        # output (no indent, same separators), ~5x faster on this 10M-item payload.
+        f.write(json.dumps({"labels": list(labelIndex), "groups": groups},
+                           ensure_ascii=False, separators=(",", ":")))
     print(f"Wrote {OUTPUT_PATH}: {sum(len(g[1]) for g in groups)} words in {len(groups)} base-chord groups,"
           f" {len(labelIndex)} distinct labels.")
 

@@ -387,12 +387,10 @@ class Word:
         phono = self.phonology
         if syll_orig == syll_final :
             return phono
-        i = 0
-        while (pos := phono[i:].find(syll_orig)) != -1:
-            pos += i
-            phono = phono[0:pos] + syll_final + phono[len(syll_orig) + pos :]
-            i = pos + len(syll_final)
-        return phono
+        # str.replace's left-to-right non-overlapping scan is equivalent to the
+        # hand-rolled find/replace loop this used to be (it resumed after the end
+        # of each inserted replacement, exactly like str.replace does).
+        return phono.replace(syll_orig, syll_final)
 
     @override
     def __str__(self) -> str:

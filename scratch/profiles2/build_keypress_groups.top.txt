@@ -1,0 +1,61 @@
+Tue Sep 29 18:28:34 2026    scratch/profiles2/build_keypress_groups.pstats
+
+         4899013 function calls (4587846 primitive calls) in 27.266 seconds
+
+   Ordered by: cumulative time
+   List reduced from 2589 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    449/1    0.008    0.000   27.267   27.267 {built-in method builtins.exec}
+        1    0.000    0.000   27.267   27.267 <string>:1(<module>)
+        1    0.000    0.000   27.267   27.267 <frozen runpy>:206(run_module)
+        1    0.000    0.000   27.265   27.265 <frozen runpy>:65(_run_code)
+        1    0.037    0.037   27.265   27.265 /home/jfsp/stenalgo-fix/util/build_keypress_groups.py:1(<module>)
+        1    0.132    0.132   26.725   26.725 /home/jfsp/stenalgo-fix/util/build_keypress_groups.py:51(main)
+        1    0.000    0.000   23.424   23.424 /home/jfsp/stenalgo-fix/src/featuregroupingsat.py:394(minKeypressesSatWithPriorities)
+      914    0.000    0.000   20.140    0.022 /home/jfsp/stenalgo/env/lib/python3.14/site-packages/ortools/sat/python/cp_model.py:195(deprecated_func)
+       23    0.000    0.000   20.138    0.876 /home/jfsp/stenalgo/env/lib/python3.14/site-packages/ortools/sat/python/cp_model.py:2017(Solve)
+       23    0.002    0.000   20.138    0.876 /home/jfsp/stenalgo/env/lib/python3.14/site-packages/ortools/sat/python/cp_model.py:1752(solve)
+       23   20.135    0.875   20.135    0.875 {built-in method ortools.sat.python.cp_model_helper.solve}
+        1    0.000    0.000   14.818   14.818 /home/jfsp/stenalgo-fix/src/featuregroupingsat.py:297(_bestAssignmentWithPriorities)
+        1    0.001    0.001    9.057    9.057 /home/jfsp/stenalgo-fix/src/featuregroupingsat.py:150(_breakTiesAlphabetically)
+        1    0.000    0.000    8.380    8.380 /home/jfsp/stenalgo-fix/src/featuregroupingsat.py:356(minKeypressesSat)
+        7    0.000    0.000    8.253    1.179 /home/jfsp/stenalgo-fix/src/featuregroupingsat.py:180(_feasibleAssignment)
+        8    1.457    0.182    2.921    0.365 /home/jfsp/stenalgo-fix/src/featuregroupingsat.py:48(_buildDistinctnessModel)
+        1    0.077    0.077    1.342    1.342 /home/jfsp/stenalgo-fix/src/featuregrouping.py:51(loadGroupOrthoFrequencies)
+   550529    0.202    0.000    1.313    0.000 /home/jfsp/stenalgo/env/lib/python3.14/site-packages/ortools/sat/python/cp_model.py:213(deprecated_func)
+        1    0.119    0.119    1.270    1.270 /home/jfsp/stenalgo-fix/src/featuregrouping.py:36(loadResolvedPressSets)
+386195/105383    0.277    0.000    1.253    0.000 {method 'join' of 'str' objects}
+
+
+===== sort by tottime =====
+Tue Sep 29 18:28:34 2026    scratch/profiles2/build_keypress_groups.pstats
+
+         4899013 function calls (4587846 primitive calls) in 27.266 seconds
+
+   Ordered by: internal time
+   List reduced from 2589 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+       23   20.135    0.875   20.135    0.875 {built-in method ortools.sat.python.cp_model_helper.solve}
+        8    1.457    0.182    2.921    0.365 /home/jfsp/stenalgo-fix/src/featuregroupingsat.py:48(_buildDistinctnessModel)
+        3    1.089    0.363    1.089    0.363 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/decoder.py:351(raw_decode)
+   190183    0.524    0.000    0.603    0.000 /home/jfsp/stenalgo-fix/src/featuregrouping.py:60(<genexpr>)
+   190183    0.450    0.000    0.516    0.000 /home/jfsp/stenalgo-fix/src/featuregrouping.py:42(<genexpr>)
+   378602    0.347    0.000    0.347    0.000 {built-in method ortools.sat.python.cp_model_helper._add_bounded_linear_expression}
+   133426    0.332    0.000    0.465    0.000 /home/jfsp/stenalgo/env/lib/python3.14/site-packages/ortools/sat/python/cp_model.py:372(new_bool_var)
+386195/105383    0.277    0.000    1.253    0.000 {method 'join' of 'str' objects}
+        1    0.222    0.222    0.394    0.394 /home/jfsp/stenalgo-fix/src/featuregrouping.py:103(verifyKeypressAssignment)
+   550529    0.202    0.000    1.313    0.000 /home/jfsp/stenalgo/env/lib/python3.14/site-packages/ortools/sat/python/cp_model.py:213(deprecated_func)
+   378602    0.162    0.000    0.549    0.000 /home/jfsp/stenalgo/env/lib/python3.14/site-packages/ortools/sat/python/cp_model.py:509(add)
+        2    0.161    0.080    0.268    0.134 /home/jfsp/stenalgo-fix/src/featuregroupingsat.py:37(groupSignatures)
+        1    0.132    0.132   26.725   26.725 /home/jfsp/stenalgo-fix/util/build_keypress_groups.py:51(main)
+        1    0.119    0.119    1.270    1.270 /home/jfsp/stenalgo-fix/src/featuregrouping.py:36(loadResolvedPressSets)
+   148440    0.108    0.000    0.108    0.000 /home/jfsp/stenalgo-fix/src/featuregrouping.py:78(inducedPressSet)
+    38378    0.095    0.000    0.095    0.000 /home/jfsp/stenalgo/env/lib/python3.14/site-packages/ortools/sat/python/cp_model.py:1039(add_max_equality)
+        3    0.094    0.031    0.113    0.038 /home/jfsp/stenalgo-fix/src/featuregrouping.py:66(liveMarkers)
+   358858    0.085    0.000    0.085    0.000 /home/jfsp/stenalgo-fix/src/featuregroupingsat.py:41(<genexpr>)
+        1    0.084    0.084    0.131    0.131 /home/jfsp/stenalgo-fix/src/featuregrouping.py:130(frequencyWeightedChordSizes)
+        1    0.077    0.077    1.342    1.342 /home/jfsp/stenalgo-fix/src/featuregrouping.py:51(loadGroupOrthoFrequencies)
+
+

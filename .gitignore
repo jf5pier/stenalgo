@@ -6,6 +6,7 @@ __pycache__/
 Dictionary.pickle
 FeatureDiscrimator.pickle
 PhoneticTheory.pickle
+DisambiguatedTheory.pickle
 AugTheory.pickle*
 
 # Local pipeline step timings (util/_timing.py, appended per run)

@@ -43,9 +43,12 @@ def extractDiscriminatingFeatures(theory: dict[Strokes, list[Word]]) \
     allFeatures: set[WordFeature] = set()
     for word in tqdm([word for words in theory.values() for word in words],
                       desc="Collecting word features", unit=" word", ascii=True, ncols=100):
+        # One list per word, appended to in place: building it with
+        # get(word, []) + [feature] copied the whole list once per feature.
+        wordFeatureList = wordFeatures.setdefault(word, [])
         for selectedFeature in word.getFeatures():
             allFeatures.add(selectedFeature)
-            wordFeatures[word] = wordFeatures.get(word, []) + [selectedFeature]
+            wordFeatureList.append(selectedFeature)
 
     wordFeatureSets: dict[Word, set[WordFeature]] = {w: set(fs) for w, fs in wordFeatures.items()}
 
@@ -115,7 +118,7 @@ def extractDiscriminatingFeatures(theory: dict[Strokes, list[Word]]) \
                         # list order -- otherwise a feature exclusive to the *second*
                         # homograph gets misattributed to the first, leaving the real
                         # owner with no usable discriminator at all.
-                        owner = next((w for w in wordsUsing if selectedFeature in wordFeatures[w]),
+                        owner = next((w for w in wordsUsing if selectedFeature in wordFeatureSets[w]),
                                      wordsUsing[0])
                         strokeLemmeDiscriminators[(strokes, lemme)][owner] += [selectedFeature]
                         # Popularity of the feature as a discriminator
@@ -145,39 +148,31 @@ def extractDiscriminatingFeatures(theory: dict[Strokes, list[Word]]) \
                         for feature, words in list(wordIsDiscrminatedByFeature.items())[:5]]))
 
     # The greedy part : Go through the features from the currently more impactfull to the least.
+    # (The old per-iteration leftOverDiscriminatedFrom bookkeeping is gone: it was
+    # initialized to EMPTY sets -- the commented-out deepcopy it replaced -- so the
+    # "from N other words" count it fed was constant 0 on every corpus ever run, and
+    # rebuilding every feature's word set per iteration was O(features^2 x words).
+    # orderedFeaturesSelected never depended on it.)
     orderedFeaturesSelected: list[WordFeature] = []
-    leftOverDiscriminatedFrom: dict[WordFeature, set[Word]] =  {f:set() for f in wordIsDiscrminatedFromByFeature} #deepcopy(wordIsDiscrminatedByFeature)
     for fi in range(len(wordIsDiscrminatedByFeature)):
-        # Features not yet used to discriminate a word
+        # Features not yet used to discriminate a word. Iteration follows
+        # wordIsDiscrminatedByFeature's popularity order: the sort below is stable,
+        # so ties resolve by first-seen and the selected sequence depends on this
+        # order. (The old inner re-filter over orderedFeaturesSelected was a no-op:
+        # the comprehension already excludes every selected feature.)
         leftOverFeatures = {
             feature: words for feature, words in wordIsDiscrminatedByFeature.items()
             if feature not in orderedFeaturesSelected
         }
-        # Remove words that are already discriminated by a previously selected feature
-        for preselectedFeature in orderedFeaturesSelected:
-            leftOverFeatures = {
-                feature: words for feature, words in leftOverFeatures.items()
-                if feature is not preselectedFeature
-            }
         sortedLeftOverFeatures= {
             feature:words for feature, words in sorted(leftOverFeatures.items(),
                                      key=lambda item: (_featureComplexity(item[0]), -len(item[1])))
         }
         # Greedy pick the best feature
         selectedFeature, selectedWords = list(sortedLeftOverFeatures.items())[0]
-        # Update stats of discriminated words
-        for preselectedFeature in [orderedFeaturesSelected[-1]] if len(orderedFeaturesSelected) > 0 else []:
-            for feature, words in leftOverDiscriminatedFrom.items():
-                                       # desc=f"Removing words already discriminated by {preselectedFeature}",
-                                       # unit=" features", ascii=True, ncols=100):
-
-                leftOverDiscriminatedFrom[feature] = set()
-                for word in words:
-                    leftOverDiscriminatedFrom[feature].add(word) if word not in wordIsDiscrminatedFromByFeature[preselectedFeature] else None
-
         orderedFeaturesSelected.append(selectedFeature)
         print(f"{fi+1}. Feature:{selectedFeature:>25}: discriminates {len(selectedWords):>4}" +
-              f" from {len(leftOverDiscriminatedFrom[selectedFeature])} other words sharing the same lemme." +
+              f" words." +
               f" A total of {len(set(wordsUsingFeature[selectedFeature]))} words have this feature")
 
     #print(orderedFeaturesSelected)
@@ -203,6 +198,17 @@ def buildFeasibleDiscriminatorOptions(
     of words is ever enumerated, so a feature shared by thousands of unrelated lemmes (e.g. a
     plural marker) costs no more than a feature used by two.
     """
+    # Inverted ONCE per call: word -> the features that discriminate it. The direct
+    # form scanned ALL of wordIsDiscrminatedByFeature per word of every group
+    # (26.7M Word.__hash__ calls on the real corpus). Per-word set contents are
+    # identical: features are added per word in wordIsDiscrminatedByFeature order,
+    # the same order the direct comprehension visited them in, so set iteration
+    # order downstream is unchanged too.
+    featuresByWord: dict[Word, set[WordFeature]] = defaultdict(set)
+    for feature, discriminatedWords in wordIsDiscrminatedByFeature.items():
+        for word in discriminatedWords:
+            featuresByWord[word].add(feature)
+
     groupFeasibleFeatures: dict[tuple[Strokes, LemmeGramCat], dict[Word, set[WordFeature]]] = {}
     for strokes, selectedWords in theory.items():
         wordByLemme: dict[LemmeGramCat, list[Word]] = groupWordsByLemme(selectedWords)
@@ -211,10 +217,7 @@ def buildFeasibleDiscriminatorOptions(
             if len(lemmeWords) <= 1:
                 continue
             wordFeasibleFeatures: dict[Word, set[WordFeature]] = {
-                word: {
-                    feature for feature, discriminatedWords in wordIsDiscrminatedByFeature.items()
-                    if word in discriminatedWords
-                } for word in lemmeWords
+                word: set(featuresByWord.get(word, ())) for word in lemmeWords
             }
             groupFeasibleFeatures[(strokes, lemme)] = wordFeasibleFeatures
     return groupFeasibleFeatures

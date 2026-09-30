@@ -1,0 +1,53 @@
+=== build_realization_report — top 15 by cumulative ===
+Tue Sep 29 13:27:29 2026    scratch/profiles/build_realization_report.pstats
+
+         226301389 function calls (225859733 primitive calls) in 109.377 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1150 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    132/1    0.012    0.000  109.377  109.377 {built-in method builtins.exec}
+        1    0.000    0.000  109.377  109.377 <string>:1(<module>)
+        1    0.000    0.000  109.377  109.377 <frozen runpy>:206(run_module)
+        1    0.000    0.000  109.376  109.376 <frozen runpy>:65(_run_code)
+        1    0.315    0.315  109.376  109.376 build_realization_report.py:1(<module>)
+        1    0.371    0.371  108.931  108.931 build_realization_report.py:39(main)
+        1    0.642    0.642   99.458   99.458 ambiguitychecker.py:928(realizeKeypressGroupsAsExtraStroke)
+        7    0.392    0.056   96.847   13.835 ambiguitychecker.py:1119(_bestCandidate)
+  3262439   42.359    0.000   70.463    0.000 keyboard.py:546(getStrokeCost)
+      129    4.241    0.033   52.591    0.408 ambiguitychecker.py:1041(_feasible)
+       93    2.259    0.024   43.865    0.472 ambiguitychecker.py:1089(_candidateCost)
+  1650492    1.165    0.000   36.480    0.000 ambiguitychecker.py:1054(<genexpr>)
+  3262439    7.638    0.000   12.618    0.000 ambiguitychecker.py:1019(_composedInduced)
+ 32624390    6.803    0.000   10.363    0.000 keyboard.py:99(__getitem__)
+ 39781270    7.043    0.000    7.043    0.000 {built-in method builtins.sorted}
+
+
+
+=== build_realization_report — top 15 by tottime ===
+Tue Sep 29 13:27:29 2026    scratch/profiles/build_realization_report.pstats
+
+         226301389 function calls (225859733 primitive calls) in 109.377 seconds
+
+   Ordered by: internal time
+   List reduced from 1150 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+  3262439   42.359    0.000   70.463    0.000 keyboard.py:546(getStrokeCost)
+  3262439    7.638    0.000   12.618    0.000 ambiguitychecker.py:1019(_composedInduced)
+ 39781270    7.043    0.000    7.043    0.000 {built-in method builtins.sorted}
+ 32624390    6.803    0.000   10.363    0.000 keyboard.py:99(__getitem__)
+ 52489512    6.407    0.000    6.407    0.000 {method 'keys' of 'dict' objects}
+      129    4.241    0.033   52.591    0.408 ambiguitychecker.py:1041(_feasible)
+32626730/32626723    3.560    0.000    3.561    0.000 {built-in method builtins.getattr}
+ 17253719    3.076    0.000    3.076    0.000 word.py:166(__hash__)
+        6    2.766    0.461    2.767    0.461 {built-in method _pickle.load}
+3684197/3262439    2.377    0.000    3.777    0.000 keyboard.py:587(getStrokeShapeCost)
+       93    2.259    0.024   43.865    0.472 ambiguitychecker.py:1089(_candidateCost)
+  3441924    2.055    0.000    2.681    0.000 ambiguitychecker.py:830(_appendCodaExtraStroke)
+        1    1.899    1.899    1.922    1.922 ambiguitychecker.py:666(buildWordsByOrthoLemme)
+        1    1.825    1.825    4.980    4.980 _theoryio.py:41(_loadDictionaryAndPhoneticTheory)
+       98    1.546    0.016    2.158    0.022 ambiguitychecker.py:1026(_isRedundantForAnyWord)
+
+

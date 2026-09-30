@@ -89,9 +89,9 @@ prédéterminâtes	pRedetERminat	prédéterminer	VER	VER			ind:pas:2p;	p_R_e|d_e
 prédétermine	pRedetERmin	prédéterminer	VER	VER			sub:pre:1s;	p_R_e|d_e|t_E_R|m_i_n_#	p_r_é|d_é|t_e_r|m_i_n_e	0.0	0.0	synthetic
 prédétermines	pRedetERmin	prédéterminer	VER	VER			sub:pre:2s;	p_R_e|d_e|t_E_R|m_i_n_#	p_r_é|d_é|t_e_r|m_i_n_es	0.0	0.0	synthetic
 prédétermine	pRedetERmin	prédéterminer	VER	VER			sub:pre:3s;	p_R_e|d_e|t_E_R|m_i_n_#	p_r_é|d_é|t_e_r|m_i_n_e	0.0	0.0	synthetic
-ressautés	R2sote	ressauter	VER	VER	m	p	par:pas;	R_2|s_o|t_e_#	r_e|ss_au|t_é_s	0.0	0.0	synthetic
-ressautée	R2sote	ressauter	VER	VER	f	s	par:pas;	R_2|s_o|t_e_#	r_e|ss_au|t_é_e	0.0	0.0	synthetic
-ressautées	R2sote	ressauter	VER	VER	f	p	par:pas;	R_2|s_o|t_e_#	r_e|ss_au|t_é_es	0.0	0.0	synthetic
+ressautés	R°sote	ressauter	VER	VER	m	p	par:pas;	R_°|s_o|t_e_#	r_e|ss_au|t_é_s	0.0	0.0	synthetic
+ressautée	R°sote	ressauter	VER	VER	f	s	par:pas;	R_°|s_o|t_e_#	r_e|ss_au|t_é_e	0.0	0.0	synthetic
+ressautées	R°sote	ressauter	VER	VER	f	p	par:pas;	R_°|s_o|t_e_#	r_e|ss_au|t_é_es	0.0	0.0	synthetic
 ressautâtes	R°sotat	ressauter	VER	VER			ind:pas:2p;	R_°|s_o|t_a_t_#	r_e|ss_au|t_â_t_es	0.0	0.0	synthetic
 ressaute	R°sot	ressauter	VER	VER			sub:pre:1s;	R_°|s_o_t_#	r_e|ss_au_t_e	0.0	0.0	synthetic
 ressautes	R°sot	ressauter	VER	VER			sub:pre:2s;	R_°|s_o_t_#	r_e|ss_au_t_es	0.0	0.0	synthetic
@@ -367,10 +367,10 @@ lourde	luRd	lourder	VER	VER			sub:pre:3s;	l_u_R_d_#	l_ou_r_d_e	0.0	0.0	synthetic
 revolés	R°vole	revoler	VER	VER	m	p	par:pas;	R_°|v_o|l_e_#	r_e|v_o|l_é_s	0.0	0.0	synthetic
 revolée	R°vole	revoler	VER	VER	f	s	par:pas;	R_°|v_o|l_e_#	r_e|v_o|l_é_e	0.0	0.0	synthetic
 revolées	R°vole	revoler	VER	VER	f	p	par:pas;	R_°|v_o|l_e_#	r_e|v_o|l_é_es	0.0	0.0	synthetic
-revolâtes	R2vOlat	revoler	VER	VER			ind:pas:2p;	R_2|v_O|l_a_t_#	r_e|v_o|l_â_t_es	0.0	0.0	synthetic
-revole	R2vOl	revoler	VER	VER			sub:pre:1s;	R_2|v_O_l_#	r_e|v_o_l_e	0.0	0.0	synthetic
-revoles	R2vOl	revoler	VER	VER			sub:pre:2s;	R_2|v_O_l_#	r_e|v_o_l_es	0.0	0.0	synthetic
-revole	R2vOl	revoler	VER	VER			sub:pre:3s;	R_2|v_O_l_#	r_e|v_o_l_e	0.0	0.0	synthetic
+revolâtes	R°vOlat	revoler	VER	VER			ind:pas:2p;	R_°|v_O|l_a_t_#	r_e|v_o|l_â_t_es	0.0	0.0	synthetic
+revole	R°vOl	revoler	VER	VER			sub:pre:1s;	R_°|v_O_l_#	r_e|v_o_l_e	0.0	0.0	synthetic
+revoles	R°vOl	revoler	VER	VER			sub:pre:2s;	R_°|v_O_l_#	r_e|v_o_l_es	0.0	0.0	synthetic
+revole	R°vOl	revoler	VER	VER			sub:pre:3s;	R_°|v_O_l_#	r_e|v_o_l_e	0.0	0.0	synthetic
 brasillâtes	bRazijat	brasiller	VER	VER			ind:pas:2p;	b_R_a|z_i|j_a_t_#	b_r_a|s_i|ll_â_t_es	0.0	0.0	synthetic
 brasille	bRazij	brasiller	VER	VER			sub:pre:1s;	b_R_a|z_i_j_#	b_r_a|s_i_ll_e	0.0	0.0	synthetic
 brasilles	bRazij	brasiller	VER	VER			sub:pre:2s;	b_R_a|z_i_j_#	b_r_a|s_i_ll_es	0.0	0.0	synthetic
@@ -515,10 +515,10 @@ choques	SOk	choquer	VER	VER			sub:pre:2s;	S_O_k_#	ch_o_qu_es	0.0	0.0	synthetic
 choque	SOk	choquer	VER	VER			sub:pre:3s;	S_O_k_#	ch_o_qu_e	0.0	0.0	synthetic
 revivifié	R°vivifje	revivifier	VER	VER	m	s	par:pas;	R_°|v_i|v_i|f_j_e	r_e|v_i|v_i|f_i_é	0.0	0.0	synthetic
 revivifiés	R°vivifje	revivifier	VER	VER	m	p	par:pas;	R_°|v_i|v_i|f_j_e_#	r_e|v_i|v_i|f_i_é_s	0.0	0.0	synthetic
-revivifiâtes	R2vivifjat	revivifier	VER	VER			ind:pas:2p;	R_2|v_i|v_i|f_j_a_t_#	r_e|v_i|v_i|f_i_â_t_es	0.0	0.0	synthetic
-revivifie	R2vivifi	revivifier	VER	VER			sub:pre:1s;	R_2|v_i|v_i|f_i_#	r_e|v_i|v_i|f_i_e	0.0	0.0	synthetic
-revivifies	R2vivifi	revivifier	VER	VER			sub:pre:2s;	R_2|v_i|v_i|f_i_#	r_e|v_i|v_i|f_i_es	0.0	0.0	synthetic
-revivifie	R2vivifi	revivifier	VER	VER			sub:pre:3s;	R_2|v_i|v_i|f_i_#	r_e|v_i|v_i|f_i_e	0.0	0.0	synthetic
+revivifiâtes	R°vivifjat	revivifier	VER	VER			ind:pas:2p;	R_°|v_i|v_i|f_j_a_t_#	r_e|v_i|v_i|f_i_â_t_es	0.0	0.0	synthetic
+revivifie	R°vivifi	revivifier	VER	VER			sub:pre:1s;	R_°|v_i|v_i|f_i_#	r_e|v_i|v_i|f_i_e	0.0	0.0	synthetic
+revivifies	R°vivifi	revivifier	VER	VER			sub:pre:2s;	R_°|v_i|v_i|f_i_#	r_e|v_i|v_i|f_i_es	0.0	0.0	synthetic
+revivifie	R°vivifi	revivifier	VER	VER			sub:pre:3s;	R_°|v_i|v_i|f_i_#	r_e|v_i|v_i|f_i_e	0.0	0.0	synthetic
 défaussâtes	defosat	défausser	VER	VER			ind:pas:2p;	d_e|f_o|s_a_t_#	d_é|f_au|ss_â_t_es	0.0	0.0	synthetic
 défausse	defos	défausser	VER	VER			sub:pre:1s;	d_e|f_o_s_#	d_é|f_au_ss_e	0.0	0.0	synthetic
 défausses	defos	défausser	VER	VER			sub:pre:2s;	d_e|f_o_s_#	d_é|f_au_ss_es	0.0	0.0	synthetic
@@ -4386,10 +4386,10 @@ déséquipe	dezekip	déséquiper	VER	VER			sub:pre:3s;	d_e|z_e|k_i_p_#	d_é|s_é
 rebordé	R°bORde	reborder	VER	VER	m	s	par:pas;	R_°|b_O_R|d_e	r_e|b_o_r|d_é	0.0	0.0	synthetic
 rebordés	R°bORde	reborder	VER	VER	m	p	par:pas;	R_°|b_O_R|d_e_#	r_e|b_o_r|d_é_s	0.0	0.0	synthetic
 rebordées	R°bORde	reborder	VER	VER	f	p	par:pas;	R_°|b_O_R|d_e_#	r_e|b_o_r|d_é_es	0.0	0.0	synthetic
-rebordâtes	R2bORdat	reborder	VER	VER			ind:pas:2p;	R_2|b_O_R|d_a_t_#	r_e|b_o_r|d_â_t_es	0.0	0.0	synthetic
-reborde	R2bORd	reborder	VER	VER			sub:pre:1s;	R_2|b_O_R_d_#	r_e|b_o_r_d_e	0.0	0.0	synthetic
-rebordes	R2bORd	reborder	VER	VER			sub:pre:2s;	R_2|b_O_R_d_#	r_e|b_o_r_d_es	0.0	0.0	synthetic
-reborde	R2bORd	reborder	VER	VER			sub:pre:3s;	R_2|b_O_R_d_#	r_e|b_o_r_d_e	0.0	0.0	synthetic
+rebordâtes	R°bORdat	reborder	VER	VER			ind:pas:2p;	R_°|b_O_R|d_a_t_#	r_e|b_o_r|d_â_t_es	0.0	0.0	synthetic
+reborde	R°bORd	reborder	VER	VER			sub:pre:1s;	R_°|b_O_R_d_#	r_e|b_o_r_d_e	0.0	0.0	synthetic
+rebordes	R°bORd	reborder	VER	VER			sub:pre:2s;	R_°|b_O_R_d_#	r_e|b_o_r_d_es	0.0	0.0	synthetic
+reborde	R°bORd	reborder	VER	VER			sub:pre:3s;	R_°|b_O_R_d_#	r_e|b_o_r_d_e	0.0	0.0	synthetic
 lités	lite	liter	VER	VER	m	p	par:pas;	l_i|t_e_#	l_i|t_é_s	0.0	0.0	synthetic
 litée	lite	liter	VER	VER	f	s	par:pas;	l_i|t_e_#	l_i|t_é_e	0.0	0.0	synthetic
 litées	lite	liter	VER	VER	f	p	par:pas;	l_i|t_e_#	l_i|t_é_es	0.0	0.0	synthetic
@@ -7628,10 +7628,10 @@ trucide	tRysid	trucider	VER	VER			sub:pre:3s;	t_R_y|s_i_d_#	t_r_u|c_i_d_e	0.0	0.
 refouillés	R°fuje	refouiller	VER	VER	m	p	par:pas;	R_°|f_u|j_e_#	r_e|f_ou|ill_é_s	0.0	0.0	synthetic
 refouillée	R°fuje	refouiller	VER	VER	f	s	par:pas;	R_°|f_u|j_e_#	r_e|f_ou|ill_é_e	0.0	0.0	synthetic
 refouillées	R°fuje	refouiller	VER	VER	f	p	par:pas;	R_°|f_u|j_e_#	r_e|f_ou|ill_é_es	0.0	0.0	synthetic
-refouillâtes	R2fujat	refouiller	VER	VER			ind:pas:2p;	R_2|f_u|j_a_t_#	r_e|f_ou|ill_â_t_es	0.0	0.0	synthetic
-refouille	R2fuj	refouiller	VER	VER			sub:pre:1s;	R_2|f_u_j_#	r_e|f_ou_ill_e	0.0	0.0	synthetic
-refouilles	R2fuj	refouiller	VER	VER			sub:pre:2s;	R_2|f_u_j_#	r_e|f_ou_ill_es	0.0	0.0	synthetic
-refouille	R2fuj	refouiller	VER	VER			sub:pre:3s;	R_2|f_u_j_#	r_e|f_ou_ill_e	0.0	0.0	synthetic
+refouillâtes	R°fujat	refouiller	VER	VER			ind:pas:2p;	R_°|f_u|j_a_t_#	r_e|f_ou|ill_â_t_es	0.0	0.0	synthetic
+refouille	R°fuj	refouiller	VER	VER			sub:pre:1s;	R_°|f_u_j_#	r_e|f_ou_ill_e	0.0	0.0	synthetic
+refouilles	R°fuj	refouiller	VER	VER			sub:pre:2s;	R_°|f_u_j_#	r_e|f_ou_ill_es	0.0	0.0	synthetic
+refouille	R°fuj	refouiller	VER	VER			sub:pre:3s;	R_°|f_u_j_#	r_e|f_ou_ill_e	0.0	0.0	synthetic
 débarquâtes	debaRkat	débarquer	VER	VER			ind:pas:2p;	d_e|b_a_R|k_a_t_#	d_é|b_a_r|qu_â_t_es	0.0	0.0	synthetic
 débarque	debaRk	débarquer	VER	VER			sub:pre:1s;	d_e|b_a_R_k_#	d_é|b_a_r_qu_e	0.0	0.0	synthetic
 débarques	debaRk	débarquer	VER	VER			sub:pre:2s;	d_e|b_a_R_k_#	d_é|b_a_r_qu_es	0.0	0.0	synthetic
@@ -8562,9 +8562,9 @@ singularisâtes	s5gylaRizat	singulariser	VER	VER			ind:pas:2p;	s_5|g_y|l_a|R_i|z
 singularise	s5gylaRiz	singulariser	VER	VER			sub:pre:1s;	s_5|g_y|l_a|R_i_z_#	s_in|g_u|l_a|r_i_s_e	0.0	0.0	synthetic
 singularises	s5gylaRiz	singulariser	VER	VER			sub:pre:2s;	s_5|g_y|l_a|R_i_z_#	s_in|g_u|l_a|r_i_s_es	0.0	0.0	synthetic
 singularise	s5gylaRiz	singulariser	VER	VER			sub:pre:3s;	s_5|g_y|l_a|R_i_z_#	s_in|g_u|l_a|r_i_s_e	0.0	0.0	synthetic
-relativisés	R2lativize	relativiser	VER	VER	m	p	par:pas;	R_2|l_a|t_i|v_i|z_e_#	r_e|l_a|t_i|v_i|s_é_s	0.0	0.0	synthetic
-relativisée	R2lativize	relativiser	VER	VER	f	s	par:pas;	R_2|l_a|t_i|v_i|z_e_#	r_e|l_a|t_i|v_i|s_é_e	0.0	0.0	synthetic
-relativisées	R2lativize	relativiser	VER	VER	f	p	par:pas;	R_2|l_a|t_i|v_i|z_e_#	r_e|l_a|t_i|v_i|s_é_es	0.0	0.0	synthetic
+relativisés	R°lativize	relativiser	VER	VER	m	p	par:pas;	R_°|l_a|t_i|v_i|z_e_#	r_e|l_a|t_i|v_i|s_é_s	0.0	0.0	synthetic
+relativisée	R°lativize	relativiser	VER	VER	f	s	par:pas;	R_°|l_a|t_i|v_i|z_e_#	r_e|l_a|t_i|v_i|s_é_e	0.0	0.0	synthetic
+relativisées	R°lativize	relativiser	VER	VER	f	p	par:pas;	R_°|l_a|t_i|v_i|z_e_#	r_e|l_a|t_i|v_i|s_é_es	0.0	0.0	synthetic
 relativisâtes	R°lativizat	relativiser	VER	VER			ind:pas:2p;	R_°|l_a|t_i|v_i|z_a_t_#	r_e|l_a|t_i|v_i|s_â_t_es	0.0	0.0	synthetic
 relativise	R°lativiz	relativiser	VER	VER			sub:pre:1s;	R_°|l_a|t_i|v_i_z_#	r_e|l_a|t_i|v_i_s_e	0.0	0.0	synthetic
 relativises	R°lativiz	relativiser	VER	VER			sub:pre:2s;	R_°|l_a|t_i|v_i_z_#	r_e|l_a|t_i|v_i_s_es	0.0	0.0	synthetic
@@ -9008,10 +9008,10 @@ asticotâtes	astikotat	asticoter	VER	VER			ind:pas:2p;	a_s|t_i|k_o|t_a_t_#	a_s|t
 asticote	astikOt	asticoter	VER	VER			sub:pre:1s;	a_s|t_i|k_O_t_#	a_s|t_i|c_o_t_e	0.0	0.0	synthetic
 asticotes	astikOt	asticoter	VER	VER			sub:pre:2s;	a_s|t_i|k_O_t_#	a_s|t_i|c_o_t_es	0.0	0.0	synthetic
 asticote	astikOt	asticoter	VER	VER			sub:pre:3s;	a_s|t_i|k_O_t_#	a_s|t_i|c_o_t_e	0.0	0.0	synthetic
-refaçonnâtes	R2fasOnat	refaçonner	VER	VER			ind:pas:2p;	R_2|f_a|s_O|n_a_t_#	r_e|f_a|ç_o|nn_â_t_es	0.0	0.0	synthetic
-refaçonne	R2fasOn	refaçonner	VER	VER			sub:pre:1s;	R_2|f_a|s_O_n_#	r_e|f_a|ç_o_nn_e	0.0	0.0	synthetic
-refaçonnes	R2fasOn	refaçonner	VER	VER			sub:pre:2s;	R_2|f_a|s_O_n_#	r_e|f_a|ç_o_nn_es	0.0	0.0	synthetic
-refaçonne	R2fasOn	refaçonner	VER	VER			sub:pre:3s;	R_2|f_a|s_O_n_#	r_e|f_a|ç_o_nn_e	0.0	0.0	synthetic
+refaçonnâtes	R°fasOnat	refaçonner	VER	VER			ind:pas:2p;	R_°|f_a|s_O|n_a_t_#	r_e|f_a|ç_o|nn_â_t_es	0.0	0.0	synthetic
+refaçonne	R°fasOn	refaçonner	VER	VER			sub:pre:1s;	R_°|f_a|s_O_n_#	r_e|f_a|ç_o_nn_e	0.0	0.0	synthetic
+refaçonnes	R°fasOn	refaçonner	VER	VER			sub:pre:2s;	R_°|f_a|s_O_n_#	r_e|f_a|ç_o_nn_es	0.0	0.0	synthetic
+refaçonne	R°fasOn	refaçonner	VER	VER			sub:pre:3s;	R_°|f_a|s_O_n_#	r_e|f_a|ç_o_nn_e	0.0	0.0	synthetic
 dévirginisé	deviRZinize	dévirginiser	VER	VER	m	s	par:pas;	d_e|v_i_R|Z_i|n_i|z_e	d_é|v_i_r|g_i|n_i|s_é	0.0	0.0	synthetic
 dévirginisés	deviRZinize	dévirginiser	VER	VER	m	p	par:pas;	d_e|v_i_R|Z_i|n_i|z_e_#	d_é|v_i_r|g_i|n_i|s_é_s	0.0	0.0	synthetic
 dévirginisées	deviRZinize	dévirginiser	VER	VER	f	p	par:pas;	d_e|v_i_R|Z_i|n_i|z_e_#	d_é|v_i_r|g_i|n_i|s_é_es	0.0	0.0	synthetic
@@ -10144,10 +10144,10 @@ surchauffe	syRSof	surchauffer	VER	VER			sub:pre:3s;	s_y_R|S_o_f_#	s_u_r|ch_au_ff
 repavés	R°pave	repaver	VER	VER	m	p	par:pas;	R_°|p_a|v_e_#	r_e|p_a|v_é_s	0.0	0.0	synthetic
 repavée	R°pave	repaver	VER	VER	f	s	par:pas;	R_°|p_a|v_e_#	r_e|p_a|v_é_e	0.0	0.0	synthetic
 repavées	R°pave	repaver	VER	VER	f	p	par:pas;	R_°|p_a|v_e_#	r_e|p_a|v_é_es	0.0	0.0	synthetic
-repavâtes	R2pavat	repaver	VER	VER			ind:pas:2p;	R_2|p_a|v_a_t_#	r_e|p_a|v_â_t_es	0.0	0.0	synthetic
-repave	R2pav	repaver	VER	VER			sub:pre:1s;	R_2|p_a_v_#	r_e|p_a_v_e	0.0	0.0	synthetic
-repaves	R2pav	repaver	VER	VER			sub:pre:2s;	R_2|p_a_v_#	r_e|p_a_v_es	0.0	0.0	synthetic
-repave	R2pav	repaver	VER	VER			sub:pre:3s;	R_2|p_a_v_#	r_e|p_a_v_e	0.0	0.0	synthetic
+repavâtes	R°pavat	repaver	VER	VER			ind:pas:2p;	R_°|p_a|v_a_t_#	r_e|p_a|v_â_t_es	0.0	0.0	synthetic
+repave	R°pav	repaver	VER	VER			sub:pre:1s;	R_°|p_a_v_#	r_e|p_a_v_e	0.0	0.0	synthetic
+repaves	R°pav	repaver	VER	VER			sub:pre:2s;	R_°|p_a_v_#	r_e|p_a_v_es	0.0	0.0	synthetic
+repave	R°pav	repaver	VER	VER			sub:pre:3s;	R_°|p_a_v_#	r_e|p_a_v_e	0.0	0.0	synthetic
 écrasâtes	ekRazat	écraser	VER	VER			ind:pas:2p;	e|k_R_a|z_a_t_#	é|c_r_a|s_â_t_es	0.0	0.0	synthetic
 écrase	ekRaz	écraser	VER	VER			sub:pre:1s;	e|k_R_a_z_#	é|c_r_a_s_e	0.0	0.0	synthetic
 écrases	ekRaz	écraser	VER	VER			sub:pre:2s;	e|k_R_a_z_#	é|c_r_a_s_es	0.0	0.0	synthetic
@@ -11464,10 +11464,10 @@ distribuâtes	distRib8at	distribuer	VER	VER			ind:pas:2p;	d_i_s|t_R_i|b_8_a_t_#	
 distribue	distRiby	distribuer	VER	VER			sub:pre:1s;	d_i_s|t_R_i|b_y_#	d_i_s|t_r_i|b_u_e	0.0	0.0	synthetic
 distribues	distRiby	distribuer	VER	VER			sub:pre:2s;	d_i_s|t_R_i|b_y_#	d_i_s|t_r_i|b_u_es	0.0	0.0	synthetic
 distribue	distRiby	distribuer	VER	VER			sub:pre:3s;	d_i_s|t_R_i|b_y_#	d_i_s|t_r_i|b_u_e	0.0	0.0	synthetic
-revirâtes	R2viRat	revirer	VER	VER			ind:pas:2p;	R_2|v_i|R_a_t_#	r_e|v_i|r_â_t_es	0.0	0.0	synthetic
-revire	R2viR	revirer	VER	VER			sub:pre:1s;	R_2|v_i_R_#	r_e|v_i_r_e	0.0	0.0	synthetic
-revires	R2viR	revirer	VER	VER			sub:pre:2s;	R_2|v_i_R_#	r_e|v_i_r_es	0.0	0.0	synthetic
-revire	R2viR	revirer	VER	VER			sub:pre:3s;	R_2|v_i_R_#	r_e|v_i_r_e	0.0	0.0	synthetic
+revirâtes	R°viRat	revirer	VER	VER			ind:pas:2p;	R_°|v_i|R_a_t_#	r_e|v_i|r_â_t_es	0.0	0.0	synthetic
+revire	R°viR	revirer	VER	VER			sub:pre:1s;	R_°|v_i_R_#	r_e|v_i_r_e	0.0	0.0	synthetic
+revires	R°viR	revirer	VER	VER			sub:pre:2s;	R_°|v_i_R_#	r_e|v_i_r_es	0.0	0.0	synthetic
+revire	R°viR	revirer	VER	VER			sub:pre:3s;	R_°|v_i_R_#	r_e|v_i_r_e	0.0	0.0	synthetic
 broutées	bRute	brouter	VER	VER	f	p	par:pas;	b_R_u|t_e_#	b_r_ou|t_é_es	0.0	0.0	synthetic
 broutâtes	bRutat	brouter	VER	VER			ind:pas:2p;	b_R_u|t_a_t_#	b_r_ou|t_â_t_es	0.0	0.0	synthetic
 broute	bRut	brouter	VER	VER			sub:pre:1s;	b_R_u_t_#	b_r_ou_t_e	0.0	0.0	synthetic
@@ -11776,10 +11776,10 @@ converses	k§vERs	converser	VER	VER			sub:pre:2s;	k_§|v_E_R_s_#	c_on|v_e_r_s_es
 converse	k§vERs	converser	VER	VER			sub:pre:3s;	k_§|v_E_R_s_#	c_on|v_e_r_s_e	0.0	0.0	synthetic
 vidâtes	vidat	vider	VER	VER			ind:pas:2p;	v_i|d_a_t_#	v_i|d_â_t_es	0.0	0.0	synthetic
 vides	vid	vider	VER	VER			sub:pre:2s;	v_i_d_#	v_i_d_es	0.0	0.0	synthetic
-rehaussâtes	R2osat	rehausser	VER	VER			ind:pas:2p;	R_2_#|o|s_a_t_#	r_e_h|au|ss_â_t_es	0.0	0.0	synthetic
-rehausse	R2os	rehausser	VER	VER			sub:pre:1s;	R_2_#|o_s_#	r_e_h|au_ss_e	0.0	0.0	synthetic
-rehausses	R2os	rehausser	VER	VER			sub:pre:2s;	R_2_#|o_s_#	r_e_h|au_ss_es	0.0	0.0	synthetic
-rehausse	R2os	rehausser	VER	VER			sub:pre:3s;	R_2_#|o_s_#	r_e_h|au_ss_e	0.0	0.0	synthetic
+rehaussâtes	R°osat	rehausser	VER	VER			ind:pas:2p;	R_°_#|o|s_a_t_#	r_e_h|au|ss_â_t_es	0.0	0.0	synthetic
+rehausse	R°os	rehausser	VER	VER			sub:pre:1s;	R_°_#|o_s_#	r_e_h|au_ss_e	0.0	0.0	synthetic
+rehausses	R°os	rehausser	VER	VER			sub:pre:2s;	R_°_#|o_s_#	r_e_h|au_ss_es	0.0	0.0	synthetic
+rehausse	R°os	rehausser	VER	VER			sub:pre:3s;	R_°_#|o_s_#	r_e_h|au_ss_e	0.0	0.0	synthetic
 dandiné	d@dine	dandiner	VER	VER	m	s	par:pas;	d_@|d_i|n_e	d_an|d_i|n_é	0.0	0.0	synthetic
 dandinées	d@dine	dandiner	VER	VER	f	p	par:pas;	d_@|d_i|n_e_#	d_an|d_i|n_é_es	0.0	0.0	synthetic
 dandinâtes	d@dinat	dandiner	VER	VER			ind:pas:2p;	d_@|d_i|n_a_t_#	d_an|d_i|n_â_t_es	0.0	0.0	synthetic
@@ -13369,10 +13369,10 @@ rythmâtes	Ritmat	rythmer	VER	VER			ind:pas:2p;	R_i_t|m_a_t_#	r_y_th|m_â_t_es	0
 rythme	Ritm	rythmer	VER	VER			sub:pre:1s;	R_i_t_m_#	r_y_th_m_e	0.0	0.0	synthetic
 rythmes	Ritm	rythmer	VER	VER			sub:pre:2s;	R_i_t_m_#	r_y_th_m_es	0.0	0.0	synthetic
 rythme	Ritm	rythmer	VER	VER			sub:pre:3s;	R_i_t_m_#	r_y_th_m_e	0.0	0.0	synthetic
-recordâtes	R2kORdat	recorder	VER	VER			ind:pas:2p;	R_2|k_O_R|d_a_t_#	r_e|c_o_r|d_â_t_es	0.0	0.0	synthetic
-recorde	R2kORd	recorder	VER	VER			sub:pre:1s;	R_2|k_O_R_d_#	r_e|c_o_r_d_e	0.0	0.0	synthetic
-recordes	R2kORd	recorder	VER	VER			sub:pre:2s;	R_2|k_O_R_d_#	r_e|c_o_r_d_es	0.0	0.0	synthetic
-recorde	R2kORd	recorder	VER	VER			sub:pre:3s;	R_2|k_O_R_d_#	r_e|c_o_r_d_e	0.0	0.0	synthetic
+recordâtes	R°kORdat	recorder	VER	VER			ind:pas:2p;	R_°|k_O_R|d_a_t_#	r_e|c_o_r|d_â_t_es	0.0	0.0	synthetic
+recorde	R°kORd	recorder	VER	VER			sub:pre:1s;	R_°|k_O_R_d_#	r_e|c_o_r_d_e	0.0	0.0	synthetic
+recordes	R°kORd	recorder	VER	VER			sub:pre:2s;	R_°|k_O_R_d_#	r_e|c_o_r_d_es	0.0	0.0	synthetic
+recorde	R°kORd	recorder	VER	VER			sub:pre:3s;	R_°|k_O_R_d_#	r_e|c_o_r_d_e	0.0	0.0	synthetic
 internâtes	5tERnat	interner	VER	VER			ind:pas:2p;	5|t_E_R|n_a_t_#	in|t_e_r|n_â_t_es	0.0	0.0	synthetic
 interne	5tERn	interner	VER	VER			sub:pre:1s;	5|t_E_R_n_#	in|t_e_r_n_e	0.0	0.0	synthetic
 internes	5tERn	interner	VER	VER			sub:pre:2s;	5|t_E_R_n_#	in|t_e_r_n_es	0.0	0.0	synthetic
@@ -15783,8 +15783,8 @@ gerbâtes	ZERbat	gerber	VER	VER			ind:pas:2p;	Z_E_R|b_a_t_#	g_e_r|b_â_t_es	0.0	
 gerbe	ZERb	gerber	VER	VER			sub:pre:1s;	Z_E_R_b_#	g_e_r_b_e	0.0	0.0	synthetic
 gerbes	ZERb	gerber	VER	VER			sub:pre:2s;	Z_E_R_b_#	g_e_r_b_es	0.0	0.0	synthetic
 gerbe	ZERb	gerber	VER	VER			sub:pre:3s;	Z_E_R_b_#	g_e_r_b_e	0.0	0.0	synthetic
-revissés	R2vise	revisser	VER	VER	m	p	par:pas;	R_2|v_i|s_e_#	r_e|v_i|ss_é_s	0.0	0.0	synthetic
-revissée	R2vise	revisser	VER	VER	f	s	par:pas;	R_2|v_i|s_e_#	r_e|v_i|ss_é_e	0.0	0.0	synthetic
+revissés	R°vise	revisser	VER	VER	m	p	par:pas;	R_°|v_i|s_e_#	r_e|v_i|ss_é_s	0.0	0.0	synthetic
+revissée	R°vise	revisser	VER	VER	f	s	par:pas;	R_°|v_i|s_e_#	r_e|v_i|ss_é_e	0.0	0.0	synthetic
 revissâtes	R°visat	revisser	VER	VER			ind:pas:2p;	R_°|v_i|s_a_t_#	r_e|v_i|ss_â_t_es	0.0	0.0	synthetic
 revisse	R°vis	revisser	VER	VER			sub:pre:1s;	R_°|v_i_s_#	r_e|v_i_ss_e	0.0	0.0	synthetic
 revisses	R°vis	revisser	VER	VER			sub:pre:2s;	R_°|v_i_s_#	r_e|v_i_ss_es	0.0	0.0	synthetic
@@ -19188,36 +19188,36 @@ ravagez	RavaZe	ravager	VER	VER			imp:pre:2p;	R_a|v_a|Z_e	r_a|v_a|g_ez	0.0	0.0	sy
 rechangés	R°S@Ze	rechanger	VER	VER	m	p	par:pas;	R_°|S_@|Z_e_#	r_e|ch_an|g_é_s	0.0	0.0	synthetic
 rechangée	R°S@Ze	rechanger	VER	VER	f	s	par:pas;	R_°|S_@|Z_e_#	r_e|ch_an|g_é_e	0.0	0.0	synthetic
 rechangées	R°S@Ze	rechanger	VER	VER	f	p	par:pas;	R_°|S_@|Z_e_#	r_e|ch_an|g_é_es	0.0	0.0	synthetic
-rechanges	R2S@Z	rechanger	VER	VER			ind:pre:2s;	R_2|S_@_Z_#	r_e|ch_an_g_es	0.0	0.0	synthetic
-rechangez	R2S@Ze	rechanger	VER	VER			ind:pre:2p;	R_2|S_@|Z_e	r_e|ch_an|g_ez	0.0	0.0	synthetic
-rechangent	R2S@Z	rechanger	VER	VER			ind:pre:3p;	R_2|S_@_Z_#	r_e|ch_an_g_ent	0.0	0.0	synthetic
-rechangeais	R2S@ZE	rechanger	VER	VER			ind:imp:1s;	R_2|S_@|Z_E	r_e|ch_an|ge_ais	0.0	0.0	synthetic
-rechangeais	R2S@ZE	rechanger	VER	VER			ind:imp:2s;	R_2|S_@|Z_E	r_e|ch_an|ge_ais	0.0	0.0	synthetic
-rechangions	R2S@Zj§	rechanger	VER	VER			ind:imp:1p;	R_2|S_@|Z_j_§	r_e|ch_an|g_i_ons	0.0	0.0	synthetic
-rechangiez	R2S@Zje	rechanger	VER	VER			ind:imp:2p;	R_2|S_@|Z_j_e	r_e|ch_an|g_i_ez	0.0	0.0	synthetic
-rechangeaient	R2S@ZE	rechanger	VER	VER			ind:imp:3p;	R_2|S_@|Z_E	r_e|ch_an|ge_aient	0.0	0.0	synthetic
-rechangerai	R2S@Z°Re	rechanger	VER	VER			ind:fut:1s;	R_2|S_@|Z_°|R_e	r_e|ch_an|g_e|r_ai	0.0	0.0	synthetic
-rechangeras	R2S@Z°Ra	rechanger	VER	VER			ind:fut:2s;	R_2|S_@|Z_°|R_a	r_e|ch_an|g_e|r_as	0.0	0.0	synthetic
-rechangera	R2S@Z°Ra	rechanger	VER	VER			ind:fut:3s;	R_2|S_@|Z_°|R_a	r_e|ch_an|g_e|r_a	0.0	0.0	synthetic
-rechangerons	R2S@Z°R§	rechanger	VER	VER			ind:fut:1p;	R_2|S_@|Z_°|R_§	r_e|ch_an|g_e|r_ons	0.0	0.0	synthetic
-rechangerez	R2S@Z°Re	rechanger	VER	VER			ind:fut:2p;	R_2|S_@|Z_°|R_e	r_e|ch_an|g_e|r_ez	0.0	0.0	synthetic
-rechangeront	R2S@Z°R§	rechanger	VER	VER			ind:fut:3p;	R_2|S_@|Z_°|R_§	r_e|ch_an|g_e|r_ont	0.0	0.0	synthetic
-rechangeai	R2S@Ze	rechanger	VER	VER			ind:pas:1s;	R_2|S_@|Z_e	r_e|ch_an|ge_ai	0.0	0.0	synthetic
-rechangeas	R2S@Za	rechanger	VER	VER			ind:pas:2s;	R_2|S_@|Z_a	r_e|ch_an|ge_as	0.0	0.0	synthetic
-rechangea	R2S@Za	rechanger	VER	VER			ind:pas:3s;	R_2|S_@|Z_a	r_e|ch_an|ge_a	0.0	0.0	synthetic
-rechangeâmes	R2S@Zam	rechanger	VER	VER			ind:pas:1p;	R_2|S_@|Z_a_m_#	r_e|ch_an|ge_â_m_es	0.0	0.0	synthetic
-rechangèrent	R2S@ZER	rechanger	VER	VER			ind:pas:3p;	R_2|S_@|Z_E_R_#	r_e|ch_an|g_è_r_ent	0.0	0.0	synthetic
-rechangerais	R2S@Z°RE	rechanger	VER	VER			cnd:pre:1s;	R_2|S_@|Z_°|R_E	r_e|ch_an|g_e|r_ais	0.0	0.0	synthetic
-rechangerait	R2S@Z°RE	rechanger	VER	VER			cnd:pre:3s;	R_2|S_@|Z_°|R_E	r_e|ch_an|g_e|r_ait	0.0	0.0	synthetic
-rechangerions	R2S@Z°Rj§	rechanger	VER	VER			cnd:pre:1p;	R_2|S_@|Z_°|R_j_§	r_e|ch_an|g_e|r_i_ons	0.0	0.0	synthetic
-rechangeraient	R2S@Z°RE	rechanger	VER	VER			cnd:pre:3p;	R_2|S_@|Z_°|R_E	r_e|ch_an|g_e|r_aient	0.0	0.0	synthetic
-rechange	R2S@Z	rechanger	VER	VER			sub:pre:1s;	R_2|S_@_Z	r_e|ch_an_ge	0.0	0.0	synthetic
-rechanges	R2S@Z	rechanger	VER	VER			sub:pre:2s;	R_2|S_@_Z_#	r_e|ch_an_g_es	0.0	0.0	synthetic
-rechange	R2S@Z	rechanger	VER	VER			sub:pre:3s;	R_2|S_@_Z	r_e|ch_an_ge	0.0	0.0	synthetic
-rechangions	R2S@Zj§	rechanger	VER	VER			sub:pre:1p;	R_2|S_@|Z_j_§	r_e|ch_an|g_i_ons	0.0	0.0	synthetic
-rechangiez	R2S@Zje	rechanger	VER	VER			sub:pre:2p;	R_2|S_@|Z_j_e	r_e|ch_an|g_i_ez	0.0	0.0	synthetic
-rechangent	R2S@Z	rechanger	VER	VER			sub:pre:3p;	R_2|S_@_Z_#	r_e|ch_an_g_ent	0.0	0.0	synthetic
-rechangez	R2S@Ze	rechanger	VER	VER			imp:pre:2p;	R_2|S_@|Z_e	r_e|ch_an|g_ez	0.0	0.0	synthetic
+rechanges	R°S@Z	rechanger	VER	VER			ind:pre:2s;	R_°|S_@_Z_#	r_e|ch_an_g_es	0.0	0.0	synthetic
+rechangez	R°S@Ze	rechanger	VER	VER			ind:pre:2p;	R_°|S_@|Z_e	r_e|ch_an|g_ez	0.0	0.0	synthetic
+rechangent	R°S@Z	rechanger	VER	VER			ind:pre:3p;	R_°|S_@_Z_#	r_e|ch_an_g_ent	0.0	0.0	synthetic
+rechangeais	R°S@ZE	rechanger	VER	VER			ind:imp:1s;	R_°|S_@|Z_E	r_e|ch_an|ge_ais	0.0	0.0	synthetic
+rechangeais	R°S@ZE	rechanger	VER	VER			ind:imp:2s;	R_°|S_@|Z_E	r_e|ch_an|ge_ais	0.0	0.0	synthetic
+rechangions	R°S@Zj§	rechanger	VER	VER			ind:imp:1p;	R_°|S_@|Z_j_§	r_e|ch_an|g_i_ons	0.0	0.0	synthetic
+rechangiez	R°S@Zje	rechanger	VER	VER			ind:imp:2p;	R_°|S_@|Z_j_e	r_e|ch_an|g_i_ez	0.0	0.0	synthetic
+rechangeaient	R°S@ZE	rechanger	VER	VER			ind:imp:3p;	R_°|S_@|Z_E	r_e|ch_an|ge_aient	0.0	0.0	synthetic
+rechangerai	R°S@Z°Re	rechanger	VER	VER			ind:fut:1s;	R_°|S_@|Z_°|R_e	r_e|ch_an|g_e|r_ai	0.0	0.0	synthetic
+rechangeras	R°S@Z°Ra	rechanger	VER	VER			ind:fut:2s;	R_°|S_@|Z_°|R_a	r_e|ch_an|g_e|r_as	0.0	0.0	synthetic
+rechangera	R°S@Z°Ra	rechanger	VER	VER			ind:fut:3s;	R_°|S_@|Z_°|R_a	r_e|ch_an|g_e|r_a	0.0	0.0	synthetic
+rechangerons	R°S@Z°R§	rechanger	VER	VER			ind:fut:1p;	R_°|S_@|Z_°|R_§	r_e|ch_an|g_e|r_ons	0.0	0.0	synthetic
+rechangerez	R°S@Z°Re	rechanger	VER	VER			ind:fut:2p;	R_°|S_@|Z_°|R_e	r_e|ch_an|g_e|r_ez	0.0	0.0	synthetic
+rechangeront	R°S@Z°R§	rechanger	VER	VER			ind:fut:3p;	R_°|S_@|Z_°|R_§	r_e|ch_an|g_e|r_ont	0.0	0.0	synthetic
+rechangeai	R°S@Ze	rechanger	VER	VER			ind:pas:1s;	R_°|S_@|Z_e	r_e|ch_an|ge_ai	0.0	0.0	synthetic
+rechangeas	R°S@Za	rechanger	VER	VER			ind:pas:2s;	R_°|S_@|Z_a	r_e|ch_an|ge_as	0.0	0.0	synthetic
+rechangea	R°S@Za	rechanger	VER	VER			ind:pas:3s;	R_°|S_@|Z_a	r_e|ch_an|ge_a	0.0	0.0	synthetic
+rechangeâmes	R°S@Zam	rechanger	VER	VER			ind:pas:1p;	R_°|S_@|Z_a_m_#	r_e|ch_an|ge_â_m_es	0.0	0.0	synthetic
+rechangèrent	R°S@ZER	rechanger	VER	VER			ind:pas:3p;	R_°|S_@|Z_E_R_#	r_e|ch_an|g_è_r_ent	0.0	0.0	synthetic
+rechangerais	R°S@Z°RE	rechanger	VER	VER			cnd:pre:1s;	R_°|S_@|Z_°|R_E	r_e|ch_an|g_e|r_ais	0.0	0.0	synthetic
+rechangerait	R°S@Z°RE	rechanger	VER	VER			cnd:pre:3s;	R_°|S_@|Z_°|R_E	r_e|ch_an|g_e|r_ait	0.0	0.0	synthetic
+rechangerions	R°S@Z°Rj§	rechanger	VER	VER			cnd:pre:1p;	R_°|S_@|Z_°|R_j_§	r_e|ch_an|g_e|r_i_ons	0.0	0.0	synthetic
+rechangeraient	R°S@Z°RE	rechanger	VER	VER			cnd:pre:3p;	R_°|S_@|Z_°|R_E	r_e|ch_an|g_e|r_aient	0.0	0.0	synthetic
+rechange	R°S@Z	rechanger	VER	VER			sub:pre:1s;	R_°|S_@_Z	r_e|ch_an_ge	0.0	0.0	synthetic
+rechanges	R°S@Z	rechanger	VER	VER			sub:pre:2s;	R_°|S_@_Z_#	r_e|ch_an_g_es	0.0	0.0	synthetic
+rechange	R°S@Z	rechanger	VER	VER			sub:pre:3s;	R_°|S_@_Z	r_e|ch_an_ge	0.0	0.0	synthetic
+rechangions	R°S@Zj§	rechanger	VER	VER			sub:pre:1p;	R_°|S_@|Z_j_§	r_e|ch_an|g_i_ons	0.0	0.0	synthetic
+rechangiez	R°S@Zje	rechanger	VER	VER			sub:pre:2p;	R_°|S_@|Z_j_e	r_e|ch_an|g_i_ez	0.0	0.0	synthetic
+rechangent	R°S@Z	rechanger	VER	VER			sub:pre:3p;	R_°|S_@_Z_#	r_e|ch_an_g_ent	0.0	0.0	synthetic
+rechangez	R°S@Ze	rechanger	VER	VER			imp:pre:2p;	R_°|S_@|Z_e	r_e|ch_an|g_ez	0.0	0.0	synthetic
 décourageais	dekuRaZE	décourager	VER	VER			ind:imp:2s;	d_e|k_u|R_a|Z_E	d_é|c_ou|r_a|ge_ais	0.0	0.0	synthetic
 découragions	dekuRaZj§	décourager	VER	VER			ind:imp:1p;	d_e|k_u|R_a|Z_j_§	d_é|c_ou|r_a|g_i_ons	0.0	0.0	synthetic
 découragiez	dekuRaZje	décourager	VER	VER			ind:imp:2p;	d_e|k_u|R_a|Z_j_e	d_é|c_ou|r_a|g_i_ez	0.0	0.0	synthetic
@@ -21951,37 +21951,37 @@ mollisse	molis	mollir	VER	VER			sub:pre:1s;	m_o|l_i_s_#	m_o|ll_i_ss_e	0.0	0.0	sy
 mollisses	molis	mollir	VER	VER			sub:pre:2s;	m_o|l_i_s_#	m_o|ll_i_ss_es	0.0	0.0	synthetic
 mollissiez	molisje	mollir	VER	VER			sub:pre:2p;	m_o|l_i|s_j_e	m_o|ll_i|ss_i_ez	0.0	0.0	synthetic
 mollissons	molis§	mollir	VER	VER			imp:pre:1p;	m_o|l_i|s_§	m_o|ll_i|ss_ons	0.0	0.0	synthetic
-redémolissons	R2demOlis§	redémolir	VER	VER			ind:pre:1p;	R_2|d_e|m_O|l_i|s_§	r_e|d_é|m_o|l_i|ss_ons	0.0	0.0	synthetic
-redémolissez	R2demOlise	redémolir	VER	VER			ind:pre:2p;	R_2|d_e|m_O|l_i|s_e	r_e|d_é|m_o|l_i|ss_ez	0.0	0.0	synthetic
-redémolissent	R2demOlis	redémolir	VER	VER			ind:pre:3p;	R_2|d_e|m_O|l_i_s_#	r_e|d_é|m_o|l_i_ss_ent	0.0	0.0	synthetic
-redémolissais	R2demOlisE	redémolir	VER	VER			ind:imp:1s;	R_2|d_e|m_O|l_i|s_E	r_e|d_é|m_o|l_i|ss_ais	0.0	0.0	synthetic
-redémolissais	R2demOlisE	redémolir	VER	VER			ind:imp:2s;	R_2|d_e|m_O|l_i|s_E	r_e|d_é|m_o|l_i|ss_ais	0.0	0.0	synthetic
-redémolissait	R2demOlisE	redémolir	VER	VER			ind:imp:3s;	R_2|d_e|m_O|l_i|s_E	r_e|d_é|m_o|l_i|ss_ait	0.0	0.0	synthetic
-redémolissions	R2demOlisj§	redémolir	VER	VER			ind:imp:1p;	R_2|d_e|m_O|l_i|s_j_§	r_e|d_é|m_o|l_i|ss_i_ons	0.0	0.0	synthetic
-redémolissiez	R2demOlisje	redémolir	VER	VER			ind:imp:2p;	R_2|d_e|m_O|l_i|s_j_e	r_e|d_é|m_o|l_i|ss_i_ez	0.0	0.0	synthetic
-redémolissaient	R2demOlisE	redémolir	VER	VER			ind:imp:3p;	R_2|d_e|m_O|l_i|s_E	r_e|d_é|m_o|l_i|ss_aient	0.0	0.0	synthetic
-redémolirai	R2demOliRe	redémolir	VER	VER			ind:fut:1s;	R_2|d_e|m_O|l_i|R_e	r_e|d_é|m_o|l_i|r_ai	0.0	0.0	synthetic
-redémoliras	R2demOliRa	redémolir	VER	VER			ind:fut:2s;	R_2|d_e|m_O|l_i|R_a	r_e|d_é|m_o|l_i|r_as	0.0	0.0	synthetic
-redémolira	R2demOliRa	redémolir	VER	VER			ind:fut:3s;	R_2|d_e|m_O|l_i|R_a	r_e|d_é|m_o|l_i|r_a	0.0	0.0	synthetic
-redémolirons	R2demOliR§	redémolir	VER	VER			ind:fut:1p;	R_2|d_e|m_O|l_i|R_§	r_e|d_é|m_o|l_i|r_ons	0.0	0.0	synthetic
-redémolirez	R2demOliRe	redémolir	VER	VER			ind:fut:2p;	R_2|d_e|m_O|l_i|R_e	r_e|d_é|m_o|l_i|r_ez	0.0	0.0	synthetic
-redémoliront	R2demOliR§	redémolir	VER	VER			ind:fut:3p;	R_2|d_e|m_O|l_i|R_§	r_e|d_é|m_o|l_i|r_ont	0.0	0.0	synthetic
-redémolis	R2demOli	redémolir	VER	VER			ind:pas:2s;	R_2|d_e|m_O|l_i	r_e|d_é|m_o|l_is	0.0	0.0	synthetic
-redémolîmes	R2demOlim	redémolir	VER	VER			ind:pas:1p;	R_2|d_e|m_O|l_i_m_#	r_e|d_é|m_o|l_î_m_es	0.0	0.0	synthetic
-redémolîtes	R2demOlit	redémolir	VER	VER			ind:pas:2p;	R_2|d_e|m_O|l_i_t_#	r_e|d_é|m_o|l_î_t_es	0.0	0.0	synthetic
-redémolirent	R2demOliR	redémolir	VER	VER			ind:pas:3p;	R_2|d_e|m_O|l_i_R_#	r_e|d_é|m_o|l_i_r_ent	0.0	0.0	synthetic
-redémolirais	R2demOliRE	redémolir	VER	VER			cnd:pre:1s;	R_2|d_e|m_O|l_i|R_E	r_e|d_é|m_o|l_i|r_ais	0.0	0.0	synthetic
-redémolirais	R2demOliRE	redémolir	VER	VER			cnd:pre:2s;	R_2|d_e|m_O|l_i|R_E	r_e|d_é|m_o|l_i|r_ais	0.0	0.0	synthetic
-redémolirait	R2demOliRE	redémolir	VER	VER			cnd:pre:3s;	R_2|d_e|m_O|l_i|R_E	r_e|d_é|m_o|l_i|r_ait	0.0	0.0	synthetic
-redémolirions	R2demOliRj§	redémolir	VER	VER			cnd:pre:1p;	R_2|d_e|m_O|l_i|R_j_§	r_e|d_é|m_o|l_i|r_i_ons	0.0	0.0	synthetic
-redémoliriez	R2demOliRje	redémolir	VER	VER			cnd:pre:2p;	R_2|d_e|m_O|l_i|R_j_e	r_e|d_é|m_o|l_i|r_i_ez	0.0	0.0	synthetic
-redémoliraient	R2demOliRE	redémolir	VER	VER			cnd:pre:3p;	R_2|d_e|m_O|l_i|R_E	r_e|d_é|m_o|l_i|r_aient	0.0	0.0	synthetic
-redémolisse	R2demOlis	redémolir	VER	VER			sub:pre:1s;	R_2|d_e|m_O|l_i_s_#	r_e|d_é|m_o|l_i_ss_e	0.0	0.0	synthetic
-redémolisses	R2demOlis	redémolir	VER	VER			sub:pre:2s;	R_2|d_e|m_O|l_i_s_#	r_e|d_é|m_o|l_i_ss_es	0.0	0.0	synthetic
-redémolisse	R2demOlis	redémolir	VER	VER			sub:pre:3s;	R_2|d_e|m_O|l_i_s_#	r_e|d_é|m_o|l_i_ss_e	0.0	0.0	synthetic
-redémolissiez	R2demOlisje	redémolir	VER	VER			sub:pre:2p;	R_2|d_e|m_O|l_i|s_j_e	r_e|d_é|m_o|l_i|ss_i_ez	0.0	0.0	synthetic
-redémolissons	R2demOlis§	redémolir	VER	VER			imp:pre:1p;	R_2|d_e|m_O|l_i|s_§	r_e|d_é|m_o|l_i|ss_ons	0.0	0.0	synthetic
-redémolissez	R2demOlise	redémolir	VER	VER			imp:pre:2p;	R_2|d_e|m_O|l_i|s_e	r_e|d_é|m_o|l_i|ss_ez	0.0	0.0	synthetic
+redémolissons	R°demOlis§	redémolir	VER	VER			ind:pre:1p;	R_°|d_e|m_O|l_i|s_§	r_e|d_é|m_o|l_i|ss_ons	0.0	0.0	synthetic
+redémolissez	R°demOlise	redémolir	VER	VER			ind:pre:2p;	R_°|d_e|m_O|l_i|s_e	r_e|d_é|m_o|l_i|ss_ez	0.0	0.0	synthetic
+redémolissent	R°demOlis	redémolir	VER	VER			ind:pre:3p;	R_°|d_e|m_O|l_i_s_#	r_e|d_é|m_o|l_i_ss_ent	0.0	0.0	synthetic
+redémolissais	R°demOlisE	redémolir	VER	VER			ind:imp:1s;	R_°|d_e|m_O|l_i|s_E	r_e|d_é|m_o|l_i|ss_ais	0.0	0.0	synthetic
+redémolissais	R°demOlisE	redémolir	VER	VER			ind:imp:2s;	R_°|d_e|m_O|l_i|s_E	r_e|d_é|m_o|l_i|ss_ais	0.0	0.0	synthetic
+redémolissait	R°demOlisE	redémolir	VER	VER			ind:imp:3s;	R_°|d_e|m_O|l_i|s_E	r_e|d_é|m_o|l_i|ss_ait	0.0	0.0	synthetic
+redémolissions	R°demOlisj§	redémolir	VER	VER			ind:imp:1p;	R_°|d_e|m_O|l_i|s_j_§	r_e|d_é|m_o|l_i|ss_i_ons	0.0	0.0	synthetic
+redémolissiez	R°demOlisje	redémolir	VER	VER			ind:imp:2p;	R_°|d_e|m_O|l_i|s_j_e	r_e|d_é|m_o|l_i|ss_i_ez	0.0	0.0	synthetic
+redémolissaient	R°demOlisE	redémolir	VER	VER			ind:imp:3p;	R_°|d_e|m_O|l_i|s_E	r_e|d_é|m_o|l_i|ss_aient	0.0	0.0	synthetic
+redémolirai	R°demOliRe	redémolir	VER	VER			ind:fut:1s;	R_°|d_e|m_O|l_i|R_e	r_e|d_é|m_o|l_i|r_ai	0.0	0.0	synthetic
+redémoliras	R°demOliRa	redémolir	VER	VER			ind:fut:2s;	R_°|d_e|m_O|l_i|R_a	r_e|d_é|m_o|l_i|r_as	0.0	0.0	synthetic
+redémolira	R°demOliRa	redémolir	VER	VER			ind:fut:3s;	R_°|d_e|m_O|l_i|R_a	r_e|d_é|m_o|l_i|r_a	0.0	0.0	synthetic
+redémolirons	R°demOliR§	redémolir	VER	VER			ind:fut:1p;	R_°|d_e|m_O|l_i|R_§	r_e|d_é|m_o|l_i|r_ons	0.0	0.0	synthetic
+redémolirez	R°demOliRe	redémolir	VER	VER			ind:fut:2p;	R_°|d_e|m_O|l_i|R_e	r_e|d_é|m_o|l_i|r_ez	0.0	0.0	synthetic
+redémoliront	R°demOliR§	redémolir	VER	VER			ind:fut:3p;	R_°|d_e|m_O|l_i|R_§	r_e|d_é|m_o|l_i|r_ont	0.0	0.0	synthetic
+redémolis	R°demOli	redémolir	VER	VER			ind:pas:2s;	R_°|d_e|m_O|l_i	r_e|d_é|m_o|l_is	0.0	0.0	synthetic
+redémolîmes	R°demOlim	redémolir	VER	VER			ind:pas:1p;	R_°|d_e|m_O|l_i_m_#	r_e|d_é|m_o|l_î_m_es	0.0	0.0	synthetic
+redémolîtes	R°demOlit	redémolir	VER	VER			ind:pas:2p;	R_°|d_e|m_O|l_i_t_#	r_e|d_é|m_o|l_î_t_es	0.0	0.0	synthetic
+redémolirent	R°demOliR	redémolir	VER	VER			ind:pas:3p;	R_°|d_e|m_O|l_i_R_#	r_e|d_é|m_o|l_i_r_ent	0.0	0.0	synthetic
+redémolirais	R°demOliRE	redémolir	VER	VER			cnd:pre:1s;	R_°|d_e|m_O|l_i|R_E	r_e|d_é|m_o|l_i|r_ais	0.0	0.0	synthetic
+redémolirais	R°demOliRE	redémolir	VER	VER			cnd:pre:2s;	R_°|d_e|m_O|l_i|R_E	r_e|d_é|m_o|l_i|r_ais	0.0	0.0	synthetic
+redémolirait	R°demOliRE	redémolir	VER	VER			cnd:pre:3s;	R_°|d_e|m_O|l_i|R_E	r_e|d_é|m_o|l_i|r_ait	0.0	0.0	synthetic
+redémolirions	R°demOliRj§	redémolir	VER	VER			cnd:pre:1p;	R_°|d_e|m_O|l_i|R_j_§	r_e|d_é|m_o|l_i|r_i_ons	0.0	0.0	synthetic
+redémoliriez	R°demOliRje	redémolir	VER	VER			cnd:pre:2p;	R_°|d_e|m_O|l_i|R_j_e	r_e|d_é|m_o|l_i|r_i_ez	0.0	0.0	synthetic
+redémoliraient	R°demOliRE	redémolir	VER	VER			cnd:pre:3p;	R_°|d_e|m_O|l_i|R_E	r_e|d_é|m_o|l_i|r_aient	0.0	0.0	synthetic
+redémolisse	R°demOlis	redémolir	VER	VER			sub:pre:1s;	R_°|d_e|m_O|l_i_s_#	r_e|d_é|m_o|l_i_ss_e	0.0	0.0	synthetic
+redémolisses	R°demOlis	redémolir	VER	VER			sub:pre:2s;	R_°|d_e|m_O|l_i_s_#	r_e|d_é|m_o|l_i_ss_es	0.0	0.0	synthetic
+redémolisse	R°demOlis	redémolir	VER	VER			sub:pre:3s;	R_°|d_e|m_O|l_i_s_#	r_e|d_é|m_o|l_i_ss_e	0.0	0.0	synthetic
+redémolissiez	R°demOlisje	redémolir	VER	VER			sub:pre:2p;	R_°|d_e|m_O|l_i|s_j_e	r_e|d_é|m_o|l_i|ss_i_ez	0.0	0.0	synthetic
+redémolissons	R°demOlis§	redémolir	VER	VER			imp:pre:1p;	R_°|d_e|m_O|l_i|s_§	r_e|d_é|m_o|l_i|ss_ons	0.0	0.0	synthetic
+redémolissez	R°demOlise	redémolir	VER	VER			imp:pre:2p;	R_°|d_e|m_O|l_i|s_e	r_e|d_é|m_o|l_i|ss_ez	0.0	0.0	synthetic
 anoblis	anobli	anoblir	VER	VER	m	p	par:pas;	a|n_o|b_l_i_#	a|n_o|b_l_i_s	0.0	0.0	synthetic
 anoblies	anobli	anoblir	VER	VER	f	p	par:pas;	a|n_o|b_l_i_#	a|n_o|b_l_i_es	0.0	0.0	synthetic
 anoblissons	anoblis§	anoblir	VER	VER			ind:pre:1p;	a|n_o|b_l_i|s_§	a|n_o|b_l_i|ss_ons	0.0	0.0	synthetic
@@ -23369,8 +23369,8 @@ radoucisse	Radusis	radoucir	VER	VER			sub:pre:3s;	R_a|d_u|s_i_s_#	r_a|d_ou|c_i_s
 radoucissiez	Radusisje	radoucir	VER	VER			sub:pre:2p;	R_a|d_u|s_i|s_j_e	r_a|d_ou|c_i|ss_i_ez	0.0	0.0	synthetic
 radoucissons	Radusis§	radoucir	VER	VER			imp:pre:1p;	R_a|d_u|s_i|s_§	r_a|d_ou|c_i|ss_ons	0.0	0.0	synthetic
 radoucissez	Radusise	radoucir	VER	VER			imp:pre:2p;	R_a|d_u|s_i|s_e	r_a|d_ou|c_i|ss_ez	0.0	0.0	synthetic
-regarnis	R2gaRni	regarnir	VER	VER	m	p	par:pas;	R_2|g_a_R|n_i_#	r_e|g_a_r|n_i_s	0.0	0.0	synthetic
-regarnie	R2gaRni	regarnir	VER	VER	f	s	par:pas;	R_2|g_a_R|n_i_#	r_e|g_a_r|n_i_e	0.0	0.0	synthetic
+regarnis	R°gaRni	regarnir	VER	VER	m	p	par:pas;	R_°|g_a_R|n_i_#	r_e|g_a_r|n_i_s	0.0	0.0	synthetic
+regarnie	R°gaRni	regarnir	VER	VER	f	s	par:pas;	R_°|g_a_R|n_i_#	r_e|g_a_r|n_i_e	0.0	0.0	synthetic
 regarnissons	R°gaRnis§	regarnir	VER	VER			ind:pre:1p;	R_°|g_a_R|n_i|s_§	r_e|g_a_r|n_i|ss_ons	0.0	0.0	synthetic
 regarnissez	R°gaRnise	regarnir	VER	VER			ind:pre:2p;	R_°|g_a_R|n_i|s_e	r_e|g_a_r|n_i|ss_ez	0.0	0.0	synthetic
 regarnissent	R°gaRnis	regarnir	VER	VER			ind:pre:3p;	R_°|g_a_R|n_i_s_#	r_e|g_a_r|n_i_ss_ent	0.0	0.0	synthetic
@@ -26933,37 +26933,37 @@ rouie	Rwi	rouir	VER	VER	f	s	par:pas;	R_w_i_#	r_ou_i_e	0.0	0.0	synthetic
 amatis	amati	amatir	VER	VER	m	p	par:pas;	a|m_a|t_i_#	a|m_a|t_i_s	0.0	0.0	synthetic
 amatie	amati	amatir	VER	VER	f	s	par:pas;	a|m_a|t_i_#	a|m_a|t_i_e	0.0	0.0	synthetic
 amaties	amati	amatir	VER	VER	f	p	par:pas;	a|m_a|t_i_#	a|m_a|t_i_es	0.0	0.0	synthetic
-regrossissons	R2gRosis§	regrossir	VER	VER			ind:pre:1p;	R_2|g_R_o|s_i|s_§	r_e|g_r_o|ss_i|ss_ons	0.0	0.0	synthetic
-regrossissez	R2gRosise	regrossir	VER	VER			ind:pre:2p;	R_2|g_R_o|s_i|s_e	r_e|g_r_o|ss_i|ss_ez	0.0	0.0	synthetic
-regrossissent	R2gRosis	regrossir	VER	VER			ind:pre:3p;	R_2|g_R_o|s_i_s_#	r_e|g_r_o|ss_i_ss_ent	0.0	0.0	synthetic
-regrossissais	R2gRosisE	regrossir	VER	VER			ind:imp:1s;	R_2|g_R_o|s_i|s_E	r_e|g_r_o|ss_i|ss_ais	0.0	0.0	synthetic
-regrossissais	R2gRosisE	regrossir	VER	VER			ind:imp:2s;	R_2|g_R_o|s_i|s_E	r_e|g_r_o|ss_i|ss_ais	0.0	0.0	synthetic
-regrossissait	R2gRosisE	regrossir	VER	VER			ind:imp:3s;	R_2|g_R_o|s_i|s_E	r_e|g_r_o|ss_i|ss_ait	0.0	0.0	synthetic
-regrossissions	R2gRosisj§	regrossir	VER	VER			ind:imp:1p;	R_2|g_R_o|s_i|s_j_§	r_e|g_r_o|ss_i|ss_i_ons	0.0	0.0	synthetic
-regrossissiez	R2gRosisje	regrossir	VER	VER			ind:imp:2p;	R_2|g_R_o|s_i|s_j_e	r_e|g_r_o|ss_i|ss_i_ez	0.0	0.0	synthetic
-regrossissaient	R2gRosisE	regrossir	VER	VER			ind:imp:3p;	R_2|g_R_o|s_i|s_E	r_e|g_r_o|ss_i|ss_aient	0.0	0.0	synthetic
-regrossirai	R2gRosiRe	regrossir	VER	VER			ind:fut:1s;	R_2|g_R_o|s_i|R_e	r_e|g_r_o|ss_i|r_ai	0.0	0.0	synthetic
-regrossiras	R2gRosiRa	regrossir	VER	VER			ind:fut:2s;	R_2|g_R_o|s_i|R_a	r_e|g_r_o|ss_i|r_as	0.0	0.0	synthetic
-regrossira	R2gRosiRa	regrossir	VER	VER			ind:fut:3s;	R_2|g_R_o|s_i|R_a	r_e|g_r_o|ss_i|r_a	0.0	0.0	synthetic
-regrossirons	R2gRosiR§	regrossir	VER	VER			ind:fut:1p;	R_2|g_R_o|s_i|R_§	r_e|g_r_o|ss_i|r_ons	0.0	0.0	synthetic
-regrossirez	R2gRosiRe	regrossir	VER	VER			ind:fut:2p;	R_2|g_R_o|s_i|R_e	r_e|g_r_o|ss_i|r_ez	0.0	0.0	synthetic
-regrossiront	R2gRosiR§	regrossir	VER	VER			ind:fut:3p;	R_2|g_R_o|s_i|R_§	r_e|g_r_o|ss_i|r_ont	0.0	0.0	synthetic
-regrossis	R2gRosi	regrossir	VER	VER			ind:pas:2s;	R_2|g_R_o|s_i	r_e|g_r_o|ss_is	0.0	0.0	synthetic
-regrossîmes	R2gRosim	regrossir	VER	VER			ind:pas:1p;	R_2|g_R_o|s_i_m_#	r_e|g_r_o|ss_î_m_es	0.0	0.0	synthetic
-regrossîtes	R2gRosit	regrossir	VER	VER			ind:pas:2p;	R_2|g_R_o|s_i_t_#	r_e|g_r_o|ss_î_t_es	0.0	0.0	synthetic
-regrossirent	R2gRosiR	regrossir	VER	VER			ind:pas:3p;	R_2|g_R_o|s_i_R_#	r_e|g_r_o|ss_i_r_ent	0.0	0.0	synthetic
-regrossirais	R2gRosiRE	regrossir	VER	VER			cnd:pre:1s;	R_2|g_R_o|s_i|R_E	r_e|g_r_o|ss_i|r_ais	0.0	0.0	synthetic
-regrossirais	R2gRosiRE	regrossir	VER	VER			cnd:pre:2s;	R_2|g_R_o|s_i|R_E	r_e|g_r_o|ss_i|r_ais	0.0	0.0	synthetic
-regrossirait	R2gRosiRE	regrossir	VER	VER			cnd:pre:3s;	R_2|g_R_o|s_i|R_E	r_e|g_r_o|ss_i|r_ait	0.0	0.0	synthetic
-regrossirions	R2gRosiRj§	regrossir	VER	VER			cnd:pre:1p;	R_2|g_R_o|s_i|R_j_§	r_e|g_r_o|ss_i|r_i_ons	0.0	0.0	synthetic
-regrossiriez	R2gRosiRje	regrossir	VER	VER			cnd:pre:2p;	R_2|g_R_o|s_i|R_j_e	r_e|g_r_o|ss_i|r_i_ez	0.0	0.0	synthetic
-regrossiraient	R2gRosiRE	regrossir	VER	VER			cnd:pre:3p;	R_2|g_R_o|s_i|R_E	r_e|g_r_o|ss_i|r_aient	0.0	0.0	synthetic
-regrossisse	R2gRosis	regrossir	VER	VER			sub:pre:1s;	R_2|g_R_o|s_i_s_#	r_e|g_r_o|ss_i_ss_e	0.0	0.0	synthetic
-regrossisses	R2gRosis	regrossir	VER	VER			sub:pre:2s;	R_2|g_R_o|s_i_s_#	r_e|g_r_o|ss_i_ss_es	0.0	0.0	synthetic
-regrossisse	R2gRosis	regrossir	VER	VER			sub:pre:3s;	R_2|g_R_o|s_i_s_#	r_e|g_r_o|ss_i_ss_e	0.0	0.0	synthetic
-regrossissiez	R2gRosisje	regrossir	VER	VER			sub:pre:2p;	R_2|g_R_o|s_i|s_j_e	r_e|g_r_o|ss_i|ss_i_ez	0.0	0.0	synthetic
-regrossissons	R2gRosis§	regrossir	VER	VER			imp:pre:1p;	R_2|g_R_o|s_i|s_§	r_e|g_r_o|ss_i|ss_ons	0.0	0.0	synthetic
-regrossissez	R2gRosise	regrossir	VER	VER			imp:pre:2p;	R_2|g_R_o|s_i|s_e	r_e|g_r_o|ss_i|ss_ez	0.0	0.0	synthetic
+regrossissons	R°gRosis§	regrossir	VER	VER			ind:pre:1p;	R_°|g_R_o|s_i|s_§	r_e|g_r_o|ss_i|ss_ons	0.0	0.0	synthetic
+regrossissez	R°gRosise	regrossir	VER	VER			ind:pre:2p;	R_°|g_R_o|s_i|s_e	r_e|g_r_o|ss_i|ss_ez	0.0	0.0	synthetic
+regrossissent	R°gRosis	regrossir	VER	VER			ind:pre:3p;	R_°|g_R_o|s_i_s_#	r_e|g_r_o|ss_i_ss_ent	0.0	0.0	synthetic
+regrossissais	R°gRosisE	regrossir	VER	VER			ind:imp:1s;	R_°|g_R_o|s_i|s_E	r_e|g_r_o|ss_i|ss_ais	0.0	0.0	synthetic
+regrossissais	R°gRosisE	regrossir	VER	VER			ind:imp:2s;	R_°|g_R_o|s_i|s_E	r_e|g_r_o|ss_i|ss_ais	0.0	0.0	synthetic
+regrossissait	R°gRosisE	regrossir	VER	VER			ind:imp:3s;	R_°|g_R_o|s_i|s_E	r_e|g_r_o|ss_i|ss_ait	0.0	0.0	synthetic
+regrossissions	R°gRosisj§	regrossir	VER	VER			ind:imp:1p;	R_°|g_R_o|s_i|s_j_§	r_e|g_r_o|ss_i|ss_i_ons	0.0	0.0	synthetic
+regrossissiez	R°gRosisje	regrossir	VER	VER			ind:imp:2p;	R_°|g_R_o|s_i|s_j_e	r_e|g_r_o|ss_i|ss_i_ez	0.0	0.0	synthetic
+regrossissaient	R°gRosisE	regrossir	VER	VER			ind:imp:3p;	R_°|g_R_o|s_i|s_E	r_e|g_r_o|ss_i|ss_aient	0.0	0.0	synthetic
+regrossirai	R°gRosiRe	regrossir	VER	VER			ind:fut:1s;	R_°|g_R_o|s_i|R_e	r_e|g_r_o|ss_i|r_ai	0.0	0.0	synthetic
+regrossiras	R°gRosiRa	regrossir	VER	VER			ind:fut:2s;	R_°|g_R_o|s_i|R_a	r_e|g_r_o|ss_i|r_as	0.0	0.0	synthetic
+regrossira	R°gRosiRa	regrossir	VER	VER			ind:fut:3s;	R_°|g_R_o|s_i|R_a	r_e|g_r_o|ss_i|r_a	0.0	0.0	synthetic
+regrossirons	R°gRosiR§	regrossir	VER	VER			ind:fut:1p;	R_°|g_R_o|s_i|R_§	r_e|g_r_o|ss_i|r_ons	0.0	0.0	synthetic
+regrossirez	R°gRosiRe	regrossir	VER	VER			ind:fut:2p;	R_°|g_R_o|s_i|R_e	r_e|g_r_o|ss_i|r_ez	0.0	0.0	synthetic
+regrossiront	R°gRosiR§	regrossir	VER	VER			ind:fut:3p;	R_°|g_R_o|s_i|R_§	r_e|g_r_o|ss_i|r_ont	0.0	0.0	synthetic
+regrossis	R°gRosi	regrossir	VER	VER			ind:pas:2s;	R_°|g_R_o|s_i	r_e|g_r_o|ss_is	0.0	0.0	synthetic
+regrossîmes	R°gRosim	regrossir	VER	VER			ind:pas:1p;	R_°|g_R_o|s_i_m_#	r_e|g_r_o|ss_î_m_es	0.0	0.0	synthetic
+regrossîtes	R°gRosit	regrossir	VER	VER			ind:pas:2p;	R_°|g_R_o|s_i_t_#	r_e|g_r_o|ss_î_t_es	0.0	0.0	synthetic
+regrossirent	R°gRosiR	regrossir	VER	VER			ind:pas:3p;	R_°|g_R_o|s_i_R_#	r_e|g_r_o|ss_i_r_ent	0.0	0.0	synthetic
+regrossirais	R°gRosiRE	regrossir	VER	VER			cnd:pre:1s;	R_°|g_R_o|s_i|R_E	r_e|g_r_o|ss_i|r_ais	0.0	0.0	synthetic
+regrossirais	R°gRosiRE	regrossir	VER	VER			cnd:pre:2s;	R_°|g_R_o|s_i|R_E	r_e|g_r_o|ss_i|r_ais	0.0	0.0	synthetic
+regrossirait	R°gRosiRE	regrossir	VER	VER			cnd:pre:3s;	R_°|g_R_o|s_i|R_E	r_e|g_r_o|ss_i|r_ait	0.0	0.0	synthetic
+regrossirions	R°gRosiRj§	regrossir	VER	VER			cnd:pre:1p;	R_°|g_R_o|s_i|R_j_§	r_e|g_r_o|ss_i|r_i_ons	0.0	0.0	synthetic
+regrossiriez	R°gRosiRje	regrossir	VER	VER			cnd:pre:2p;	R_°|g_R_o|s_i|R_j_e	r_e|g_r_o|ss_i|r_i_ez	0.0	0.0	synthetic
+regrossiraient	R°gRosiRE	regrossir	VER	VER			cnd:pre:3p;	R_°|g_R_o|s_i|R_E	r_e|g_r_o|ss_i|r_aient	0.0	0.0	synthetic
+regrossisse	R°gRosis	regrossir	VER	VER			sub:pre:1s;	R_°|g_R_o|s_i_s_#	r_e|g_r_o|ss_i_ss_e	0.0	0.0	synthetic
+regrossisses	R°gRosis	regrossir	VER	VER			sub:pre:2s;	R_°|g_R_o|s_i_s_#	r_e|g_r_o|ss_i_ss_es	0.0	0.0	synthetic
+regrossisse	R°gRosis	regrossir	VER	VER			sub:pre:3s;	R_°|g_R_o|s_i_s_#	r_e|g_r_o|ss_i_ss_e	0.0	0.0	synthetic
+regrossissiez	R°gRosisje	regrossir	VER	VER			sub:pre:2p;	R_°|g_R_o|s_i|s_j_e	r_e|g_r_o|ss_i|ss_i_ez	0.0	0.0	synthetic
+regrossissons	R°gRosis§	regrossir	VER	VER			imp:pre:1p;	R_°|g_R_o|s_i|s_§	r_e|g_r_o|ss_i|ss_ons	0.0	0.0	synthetic
+regrossissez	R°gRosise	regrossir	VER	VER			imp:pre:2p;	R_°|g_R_o|s_i|s_e	r_e|g_r_o|ss_i|ss_ez	0.0	0.0	synthetic
 glapis	glapi	glapir	VER	VER	m	p	par:pas;	g_l_a|p_i_#	g_l_a|p_i_s	0.0	0.0	synthetic
 glapies	glapi	glapir	VER	VER	f	p	par:pas;	g_l_a|p_i_#	g_l_a|p_i_es	0.0	0.0	synthetic
 glapissons	glapis§	glapir	VER	VER			ind:pre:1p;	g_l_a|p_i|s_§	g_l_a|p_i|ss_ons	0.0	0.0	synthetic
@@ -32127,9 +32127,9 @@ tendes	t@d	tendre	VER	VER			sub:pre:2s;	t_@_d_#	t_en_d_es	0.0	0.0	synthetic
 tendions	t@dj§	tendre	VER	VER			sub:pre:1p;	t_@|d_j_§	t_en|d_i_ons	0.0	0.0	synthetic
 tendiez	t@dje	tendre	VER	VER			sub:pre:2p;	t_@|d_j_e	t_en|d_i_ez	0.0	0.0	synthetic
 tendent	t@d	tendre	VER	VER			sub:pre:3p;	t_@_d_#	t_en_d_ent	0.0	0.0	synthetic
-remordus	R2mORdy	remordre	VER	VER	m	p	par:pas;	R_2|m_O_R|d_y_#	r_e|m_o_r|d_u_s	0.0	0.0	synthetic
-remordue	R2mORdy	remordre	VER	VER	f	s	par:pas;	R_2|m_O_R|d_y_#	r_e|m_o_r|d_u_e	0.0	0.0	synthetic
-remordues	R2mORdy	remordre	VER	VER	f	p	par:pas;	R_2|m_O_R|d_y_#	r_e|m_o_r|d_u_es	0.0	0.0	synthetic
+remordus	R°mORdy	remordre	VER	VER	m	p	par:pas;	R_°|m_O_R|d_y_#	r_e|m_o_r|d_u_s	0.0	0.0	synthetic
+remordue	R°mORdy	remordre	VER	VER	f	s	par:pas;	R_°|m_O_R|d_y_#	r_e|m_o_r|d_u_e	0.0	0.0	synthetic
+remordues	R°mORdy	remordre	VER	VER	f	p	par:pas;	R_°|m_O_R|d_y_#	r_e|m_o_r|d_u_es	0.0	0.0	synthetic
 tondez	t§de	tondre	VER	VER			ind:pre:2p;	t_§|d_e	t_on|d_ez	0.0	0.0	synthetic
 tondais	t§dE	tondre	VER	VER			ind:imp:2s;	t_§|d_E	t_on|d_ais	0.0	0.0	synthetic
 tondions	t§dj§	tondre	VER	VER			ind:imp:1p;	t_§|d_j_§	t_on|d_i_ons	0.0	0.0	synthetic
@@ -32407,37 +32407,37 @@ démordiez	demORdje	démordre	VER	VER			sub:pre:2p;	d_e|m_O_R|d_j_e	d_é|m_o_r|d
 démordent	demORd	démordre	VER	VER			sub:pre:3p;	d_e|m_O_R_d_#	d_é|m_o_r_d_ent	0.0	0.0	synthetic
 rependue	R°p@dy	rependre	VER	VER	f	s	par:pas;	R_°|p_@|d_y_#	r_e|p_en|d_u_e	0.0	0.0	synthetic
 rependues	R°p@dy	rependre	VER	VER	f	p	par:pas;	R_°|p_@|d_y_#	r_e|p_en|d_u_es	0.0	0.0	synthetic
-repend	R2p@	rependre	VER	VER			ind:pre:3s;	R_2|p_@_#	r_e|p_en_d	0.0	0.0	synthetic
-rependez	R2p@de	rependre	VER	VER			ind:pre:2p;	R_2|p_@|d_e	r_e|p_en|d_ez	0.0	0.0	synthetic
-rependent	R2p@d	rependre	VER	VER			ind:pre:3p;	R_2|p_@_d_#	r_e|p_en_d_ent	0.0	0.0	synthetic
-rependais	R2p@dE	rependre	VER	VER			ind:imp:1s;	R_2|p_@|d_E	r_e|p_en|d_ais	0.0	0.0	synthetic
-rependais	R2p@dE	rependre	VER	VER			ind:imp:2s;	R_2|p_@|d_E	r_e|p_en|d_ais	0.0	0.0	synthetic
-rependait	R2p@dE	rependre	VER	VER			ind:imp:3s;	R_2|p_@|d_E	r_e|p_en|d_ait	0.0	0.0	synthetic
-rependions	R2p@dj§	rependre	VER	VER			ind:imp:1p;	R_2|p_@|d_j_§	r_e|p_en|d_i_ons	0.0	0.0	synthetic
-rependiez	R2p@dje	rependre	VER	VER			ind:imp:2p;	R_2|p_@|d_j_e	r_e|p_en|d_i_ez	0.0	0.0	synthetic
-rependaient	R2p@dE	rependre	VER	VER			ind:imp:3p;	R_2|p_@|d_E	r_e|p_en|d_aient	0.0	0.0	synthetic
-rependrai	R2p@dRe	rependre	VER	VER			ind:fut:1s;	R_2|p_@|d_R_e	r_e|p_en|d_r_ai	0.0	0.0	synthetic
-rependras	R2p@dRa	rependre	VER	VER			ind:fut:2s;	R_2|p_@|d_R_a	r_e|p_en|d_r_as	0.0	0.0	synthetic
-rependrons	R2p@dR§	rependre	VER	VER			ind:fut:1p;	R_2|p_@|d_R_§	r_e|p_en|d_r_ons	0.0	0.0	synthetic
-rependrez	R2p@dRe	rependre	VER	VER			ind:fut:2p;	R_2|p_@|d_R_e	r_e|p_en|d_r_ez	0.0	0.0	synthetic
-rependront	R2p@dR§	rependre	VER	VER			ind:fut:3p;	R_2|p_@|d_R_§	r_e|p_en|d_r_ont	0.0	0.0	synthetic
-rependis	R2p@di	rependre	VER	VER			ind:pas:1s;	R_2|p_@|d_i	r_e|p_en|d_is	0.0	0.0	synthetic
-rependis	R2p@di	rependre	VER	VER			ind:pas:2s;	R_2|p_@|d_i	r_e|p_en|d_is	0.0	0.0	synthetic
-rependit	R2p@di	rependre	VER	VER			ind:pas:3s;	R_2|p_@|d_i	r_e|p_en|d_it	0.0	0.0	synthetic
-rependîmes	R2p@dim	rependre	VER	VER			ind:pas:1p;	R_2|p_@|d_i_m_#	r_e|p_en|d_î_m_es	0.0	0.0	synthetic
-rependirent	R2p@diR	rependre	VER	VER			ind:pas:3p;	R_2|p_@|d_i_R_#	r_e|p_en|d_i_r_ent	0.0	0.0	synthetic
-rependrais	R2p@dRE	rependre	VER	VER			cnd:pre:1s;	R_2|p_@|d_R_E	r_e|p_en|d_r_ais	0.0	0.0	synthetic
-rependrais	R2p@dRE	rependre	VER	VER			cnd:pre:2s;	R_2|p_@|d_R_E	r_e|p_en|d_r_ais	0.0	0.0	synthetic
-rependrait	R2p@dRE	rependre	VER	VER			cnd:pre:3s;	R_2|p_@|d_R_E	r_e|p_en|d_r_ait	0.0	0.0	synthetic
-rependrions	R2p@dRij§	rependre	VER	VER			cnd:pre:1p;	R_2|p_@|d_R_ij|§	r_e|p_en|d_r_i|ons	0.0	0.0	synthetic
-rependraient	R2p@dRE	rependre	VER	VER			cnd:pre:3p;	R_2|p_@|d_R_E	r_e|p_en|d_r_aient	0.0	0.0	synthetic
-repende	R2p@d	rependre	VER	VER			sub:pre:1s;	R_2|p_@_d_#	r_e|p_en_d_e	0.0	0.0	synthetic
-rependes	R2p@d	rependre	VER	VER			sub:pre:2s;	R_2|p_@_d_#	r_e|p_en_d_es	0.0	0.0	synthetic
-repende	R2p@d	rependre	VER	VER			sub:pre:3s;	R_2|p_@_d_#	r_e|p_en_d_e	0.0	0.0	synthetic
-rependions	R2p@dj§	rependre	VER	VER			sub:pre:1p;	R_2|p_@|d_j_§	r_e|p_en|d_i_ons	0.0	0.0	synthetic
-rependiez	R2p@dje	rependre	VER	VER			sub:pre:2p;	R_2|p_@|d_j_e	r_e|p_en|d_i_ez	0.0	0.0	synthetic
-rependent	R2p@d	rependre	VER	VER			sub:pre:3p;	R_2|p_@_d_#	r_e|p_en_d_ent	0.0	0.0	synthetic
-rependez	R2p@de	rependre	VER	VER			imp:pre:2p;	R_2|p_@|d_e	r_e|p_en|d_ez	0.0	0.0	synthetic
+repend	R°p@	rependre	VER	VER			ind:pre:3s;	R_°|p_@_#	r_e|p_en_d	0.0	0.0	synthetic
+rependez	R°p@de	rependre	VER	VER			ind:pre:2p;	R_°|p_@|d_e	r_e|p_en|d_ez	0.0	0.0	synthetic
+rependent	R°p@d	rependre	VER	VER			ind:pre:3p;	R_°|p_@_d_#	r_e|p_en_d_ent	0.0	0.0	synthetic
+rependais	R°p@dE	rependre	VER	VER			ind:imp:1s;	R_°|p_@|d_E	r_e|p_en|d_ais	0.0	0.0	synthetic
+rependais	R°p@dE	rependre	VER	VER			ind:imp:2s;	R_°|p_@|d_E	r_e|p_en|d_ais	0.0	0.0	synthetic
+rependait	R°p@dE	rependre	VER	VER			ind:imp:3s;	R_°|p_@|d_E	r_e|p_en|d_ait	0.0	0.0	synthetic
+rependions	R°p@dj§	rependre	VER	VER			ind:imp:1p;	R_°|p_@|d_j_§	r_e|p_en|d_i_ons	0.0	0.0	synthetic
+rependiez	R°p@dje	rependre	VER	VER			ind:imp:2p;	R_°|p_@|d_j_e	r_e|p_en|d_i_ez	0.0	0.0	synthetic
+rependaient	R°p@dE	rependre	VER	VER			ind:imp:3p;	R_°|p_@|d_E	r_e|p_en|d_aient	0.0	0.0	synthetic
+rependrai	R°p@dRe	rependre	VER	VER			ind:fut:1s;	R_°|p_@|d_R_e	r_e|p_en|d_r_ai	0.0	0.0	synthetic
+rependras	R°p@dRa	rependre	VER	VER			ind:fut:2s;	R_°|p_@|d_R_a	r_e|p_en|d_r_as	0.0	0.0	synthetic
+rependrons	R°p@dR§	rependre	VER	VER			ind:fut:1p;	R_°|p_@|d_R_§	r_e|p_en|d_r_ons	0.0	0.0	synthetic
+rependrez	R°p@dRe	rependre	VER	VER			ind:fut:2p;	R_°|p_@|d_R_e	r_e|p_en|d_r_ez	0.0	0.0	synthetic
+rependront	R°p@dR§	rependre	VER	VER			ind:fut:3p;	R_°|p_@|d_R_§	r_e|p_en|d_r_ont	0.0	0.0	synthetic
+rependis	R°p@di	rependre	VER	VER			ind:pas:1s;	R_°|p_@|d_i	r_e|p_en|d_is	0.0	0.0	synthetic
+rependis	R°p@di	rependre	VER	VER			ind:pas:2s;	R_°|p_@|d_i	r_e|p_en|d_is	0.0	0.0	synthetic
+rependit	R°p@di	rependre	VER	VER			ind:pas:3s;	R_°|p_@|d_i	r_e|p_en|d_it	0.0	0.0	synthetic
+rependîmes	R°p@dim	rependre	VER	VER			ind:pas:1p;	R_°|p_@|d_i_m_#	r_e|p_en|d_î_m_es	0.0	0.0	synthetic
+rependirent	R°p@diR	rependre	VER	VER			ind:pas:3p;	R_°|p_@|d_i_R_#	r_e|p_en|d_i_r_ent	0.0	0.0	synthetic
+rependrais	R°p@dRE	rependre	VER	VER			cnd:pre:1s;	R_°|p_@|d_R_E	r_e|p_en|d_r_ais	0.0	0.0	synthetic
+rependrais	R°p@dRE	rependre	VER	VER			cnd:pre:2s;	R_°|p_@|d_R_E	r_e|p_en|d_r_ais	0.0	0.0	synthetic
+rependrait	R°p@dRE	rependre	VER	VER			cnd:pre:3s;	R_°|p_@|d_R_E	r_e|p_en|d_r_ait	0.0	0.0	synthetic
+rependrions	R°p@dRij§	rependre	VER	VER			cnd:pre:1p;	R_°|p_@|d_R_ij|§	r_e|p_en|d_r_i|ons	0.0	0.0	synthetic
+rependraient	R°p@dRE	rependre	VER	VER			cnd:pre:3p;	R_°|p_@|d_R_E	r_e|p_en|d_r_aient	0.0	0.0	synthetic
+repende	R°p@d	rependre	VER	VER			sub:pre:1s;	R_°|p_@_d_#	r_e|p_en_d_e	0.0	0.0	synthetic
+rependes	R°p@d	rependre	VER	VER			sub:pre:2s;	R_°|p_@_d_#	r_e|p_en_d_es	0.0	0.0	synthetic
+repende	R°p@d	rependre	VER	VER			sub:pre:3s;	R_°|p_@_d_#	r_e|p_en_d_e	0.0	0.0	synthetic
+rependions	R°p@dj§	rependre	VER	VER			sub:pre:1p;	R_°|p_@|d_j_§	r_e|p_en|d_i_ons	0.0	0.0	synthetic
+rependiez	R°p@dje	rependre	VER	VER			sub:pre:2p;	R_°|p_@|d_j_e	r_e|p_en|d_i_ez	0.0	0.0	synthetic
+rependent	R°p@d	rependre	VER	VER			sub:pre:3p;	R_°|p_@_d_#	r_e|p_en_d_ent	0.0	0.0	synthetic
+rependez	R°p@de	rependre	VER	VER			imp:pre:2p;	R_°|p_@|d_e	r_e|p_en|d_ez	0.0	0.0	synthetic
 rouspétons	Ruspet§	rouspéter	VER	VER			ind:pre:1p;	R_u_s|p_e|t_§	r_ou_s|p_é|t_ons	0.0	0.0	synthetic
 rouspétais	RuspetE	rouspéter	VER	VER			ind:imp:2s;	R_u_s|p_e|t_E	r_ou_s|p_é|t_ais	0.0	0.0	synthetic
 rouspétions	Ruspetj§	rouspéter	VER	VER			ind:imp:1p;	R_u_s|p_e|t_j_§	r_ou_s|p_é|t_i_ons	0.0	0.0	synthetic
@@ -32676,9 +32676,9 @@ décrias	dekRija	décrier	VER	VER			ind:pas:2s;	d_e|k_R_ij|a	d_é|c_r_i|as	0.0	0
 décrie	dekRij	décrier	VER	VER			sub:pre:1s;	d_e|k_R_ij_#	d_é|c_r_i_e	0.0	0.0	synthetic
 décries	dekRij	décrier	VER	VER			sub:pre:2s;	d_e|k_R_ij_#	d_é|c_r_i_es	0.0	0.0	synthetic
 décrions	dekRij§	décrier	VER	VER			imp:pre:1p;	d_e|k_R_ij|§	d_é|c_r_i|ons	0.0	0.0	synthetic
-reloués	R2lwe	relouer	VER	VER	m	p	par:pas;	R_2|l_w_e_#	r_e|l_ou_é_s	0.0	0.0	synthetic
-relouée	R2lwe	relouer	VER	VER	f	s	par:pas;	R_2|l_w_e_#	r_e|l_ou_é_e	0.0	0.0	synthetic
-relouées	R2lwe	relouer	VER	VER	f	p	par:pas;	R_2|l_w_e_#	r_e|l_ou_é_es	0.0	0.0	synthetic
+reloués	R°lwe	relouer	VER	VER	m	p	par:pas;	R_°|l_w_e_#	r_e|l_ou_é_s	0.0	0.0	synthetic
+relouée	R°lwe	relouer	VER	VER	f	s	par:pas;	R_°|l_w_e_#	r_e|l_ou_é_e	0.0	0.0	synthetic
+relouées	R°lwe	relouer	VER	VER	f	p	par:pas;	R_°|l_w_e_#	r_e|l_ou_é_es	0.0	0.0	synthetic
 relouons	R°lw§	relouer	VER	VER			ind:pre:1p;	R_°|l_w_§	r_e|l_ou_ons	0.0	0.0	synthetic
 relouais	R°lwE	relouer	VER	VER			ind:imp:2s;	R_°|l_w_E	r_e|l_ou_ais	0.0	0.0	synthetic
 relouas	R°lwa	relouer	VER	VER			ind:pas:2s;	R_°|l_w_a	r_e|l_ou_as	0.0	0.0	synthetic
@@ -32909,14 +32909,14 @@ renfloueriez	R@fluRje	renflouer	VER	VER			cnd:pre:2p;	R_@|f_l_u_#|R_j_e	r_en|f_l
 renfloue	R@flu	renflouer	VER	VER			sub:pre:1s;	R_@|f_l_u_#	r_en|f_l_ou_e	0.0	0.0	synthetic
 renfloues	R@flu	renflouer	VER	VER			sub:pre:2s;	R_@|f_l_u_#	r_en|f_l_ou_es	0.0	0.0	synthetic
 renflouons	R@flu§	renflouer	VER	VER			imp:pre:1p;	R_@|f_l_u|§	r_en|f_l_ou|ons	0.0	0.0	synthetic
-reclouons	R2klu§	reclouer	VER	VER			ind:pre:1p;	R_2|k_l_u|§	r_e|c_l_ou|ons	0.0	0.0	synthetic
-reclouais	R2kluE	reclouer	VER	VER			ind:imp:2s;	R_2|k_l_u|E	r_e|c_l_ou|ais	0.0	0.0	synthetic
-reclouas	R2klua	reclouer	VER	VER			ind:pas:2s;	R_2|k_l_u|a	r_e|c_l_ou|as	0.0	0.0	synthetic
-reclouerions	R2kluRj§	reclouer	VER	VER			cnd:pre:1p;	R_2|k_l_u_#|R_j_§	r_e|c_l_ou_e|r_i_ons	0.0	0.0	synthetic
-recloueriez	R2kluRje	reclouer	VER	VER			cnd:pre:2p;	R_2|k_l_u_#|R_j_e	r_e|c_l_ou_e|r_i_ez	0.0	0.0	synthetic
-recloue	R2klu	reclouer	VER	VER			sub:pre:1s;	R_2|k_l_u_#	r_e|c_l_ou_e	0.0	0.0	synthetic
-recloues	R2klu	reclouer	VER	VER			sub:pre:2s;	R_2|k_l_u_#	r_e|c_l_ou_es	0.0	0.0	synthetic
-reclouons	R2klu§	reclouer	VER	VER			imp:pre:1p;	R_2|k_l_u|§	r_e|c_l_ou|ons	0.0	0.0	synthetic
+reclouons	R°klu§	reclouer	VER	VER			ind:pre:1p;	R_°|k_l_u|§	r_e|c_l_ou|ons	0.0	0.0	synthetic
+reclouais	R°kluE	reclouer	VER	VER			ind:imp:2s;	R_°|k_l_u|E	r_e|c_l_ou|ais	0.0	0.0	synthetic
+reclouas	R°klua	reclouer	VER	VER			ind:pas:2s;	R_°|k_l_u|a	r_e|c_l_ou|as	0.0	0.0	synthetic
+reclouerions	R°kluRj§	reclouer	VER	VER			cnd:pre:1p;	R_°|k_l_u_#|R_j_§	r_e|c_l_ou_e|r_i_ons	0.0	0.0	synthetic
+recloueriez	R°kluRje	reclouer	VER	VER			cnd:pre:2p;	R_°|k_l_u_#|R_j_e	r_e|c_l_ou_e|r_i_ez	0.0	0.0	synthetic
+recloue	R°klu	reclouer	VER	VER			sub:pre:1s;	R_°|k_l_u_#	r_e|c_l_ou_e	0.0	0.0	synthetic
+recloues	R°klu	reclouer	VER	VER			sub:pre:2s;	R_°|k_l_u_#	r_e|c_l_ou_es	0.0	0.0	synthetic
+reclouons	R°klu§	reclouer	VER	VER			imp:pre:1p;	R_°|k_l_u|§	r_e|c_l_ou|ons	0.0	0.0	synthetic
 parvenais	paRv°nE	parvenir	VER	VER			ind:imp:2s;	p_a_R|v_°|n_E	p_a_r|v_e|n_ais	0.0	0.0	synthetic
 parvins	paRv5	parvenir	VER	VER			ind:pas:2s;	p_a_R|v_5	p_a_r|v_ins	0.0	0.0	synthetic
 parviendrais	paRvj5dRE	parvenir	VER	VER			cnd:pre:2s;	p_a_R|v_j_5|d_R_E	p_a_r|v_i_en|d_r_ais	0.0	0.0	synthetic
@@ -40173,35 +40173,35 @@ rationalisées	Rasjonalize	rationalisé	ADJ	ADJ	f	p		R_a|s_j_o|n_a|l_i|z_e_#	r_a
 rationalités	Rasjonalite	rationalité	NOM	NOM	f	p		R_a|s_j_o|n_a|l_i|t_e_#	r_a|t_i_o|n_a|l_i|t_é_s	0.0	0.0	synthetic
 raucités	Rosite	raucité	NOM	NOM	f	p		R_o|s_i|t_e_#	r_au|c_i|t_é_s	0.0	0.0	synthetic
 ravigotes	RavigOt	ravigote	NOM	NOM	f	p		R_a|v_i|g_O_t_#	r_a|v_i|g_o_t_es	0.0	0.0	synthetic
-rebarrée	R2baRe	rebarré	ADJ	ADJ	f	s		R_2|b_a|R_e_#	r_e|b_a|rr_é_e	0.0	0.0	synthetic
-rebecs	R2bEk	rebec	NOM	NOM	m	p		R_2|b_E_k_#	r_e|b_e_c_s	0.0	0.0	synthetic
-rebonjours	R2b§ZuR	rebonjour	NOM	NOM	m	p		R_2|b_§|Z_u_R_#	r_e|b_on|j_ou_r_s	0.0	0.0	synthetic
+rebarrée	R°baRe	rebarré	ADJ	ADJ	f	s		R_°|b_a|R_e_#	r_e|b_a|rr_é_e	0.0	0.0	synthetic
+rebecs	R°bEk	rebec	NOM	NOM	m	p		R_°|b_E_k_#	r_e|b_e_c_s	0.0	0.0	synthetic
+rebonjours	R°b§ZuR	rebonjour	NOM	NOM	m	p		R_°|b_§|Z_u_R_#	r_e|b_on|j_ou_r_s	0.0	0.0	synthetic
 recalées	R°kale	recalé	ADJ	VER,ADJ	f	p		R_°|k_a|l_e_#	r_e|c_a|l_é_es	0.0	0.0	synthetic
 recels	R°sEl	recel	NOM	NOM	m	p		R_°|s_E_l_#	r_e|c_e_l_s	0.0	0.0	synthetic
-recevabilités	R2s2vabilite	recevabilité	NOM	NOM	f	p		R_2|s_2|v_a|b_i|l_i|t_e_#	r_e|c_e|v_a|b_i|l_i|t_é_s	0.0	0.0	synthetic
+recevabilités	R°s2vabilite	recevabilité	NOM	NOM	f	p		R_°|s_2|v_a|b_i|l_i|t_e_#	r_e|c_e|v_a|b_i|l_i|t_é_s	0.0	0.0	synthetic
 rechampis	R°S@pi	rechampi	NOM	NOM	m	p		R_°|S_@|p_i_#	r_e|ch_am|p_i_s	0.0	0.0	synthetic
-reconquistas	R2k§kista	reconquista	NOM	NOM	f	p		R_2|k_§|k_i_s|t_a_#	r_e|c_on|qu_i_s|t_a_s	0.0	0.0	synthetic
+reconquistas	R°k§kista	reconquista	NOM	NOM	f	p		R_°|k_§|k_i_s|t_a_#	r_e|c_on|qu_i_s|t_a_s	0.0	0.0	synthetic
 reconquêtes	R°k§kEt	reconquête	NOM	NOM	f	p		R_°|k_§|k_E_t_#	r_e|c_on|qu_ê_t_es	0.0	0.0	synthetic
 reconstructrices	R°k§stRyktRis	reconstructeur	ADJ	ADJ	f	p		R_°|k_§_s|t_R_y_k|t_R_i_s_#	r_e|c_on_s|t_r_u_c|t_r_i_c_es	0.0	0.0	synthetic
 reconstructeurs	R°k§stRykt9R	reconstructeur	ADJ	ADJ	m	p		R_°|k_§_s|t_R_y_k|t_9_R_#	r_e|c_on_s|t_r_u_c|t_eu_r_s	0.0	0.0	synthetic
 rectales	REktal	rectal	ADJ	ADJ	f	p		R_E_k|t_a_l_#	r_e_c|t_a_l_es	0.0	0.0	synthetic
 rectificatifs	REktifikatif	rectificatif	NOM	NOM	m	p		R_E_k|t_i|f_i|k_a|t_i_f_#	r_e_c|t_i|f_i|c_a|t_i_f_s	0.0	0.0	synthetic
-redans	R2d@	redan	NOM	NOM	m	p		R_2|d_@_#	r_e|d_an_s	0.0	0.0	synthetic
-redécorées	R2dekORe	redécoré	ADJ	ADJ	f	p		R_2|d_e|k_O|R_e_#	r_e|d_é|c_o|r_é_es	0.0	0.0	synthetic
-redécorée	R2dekORe	redécoré	ADJ	ADJ	f	s		R_2|d_e|k_O|R_e_#	r_e|d_é|c_o|r_é_e	0.0	0.0	synthetic
-redécorés	R2dekORe	redécoré	ADJ	ADJ	m	p		R_2|d_e|k_O|R_e_#	r_e|d_é|c_o|r_é_s	0.0	0.0	synthetic
+redans	R°d@	redan	NOM	NOM	m	p		R_°|d_@_#	r_e|d_an_s	0.0	0.0	synthetic
+redécorées	R°dekORe	redécoré	ADJ	ADJ	f	p		R_°|d_e|k_O|R_e_#	r_e|d_é|c_o|r_é_es	0.0	0.0	synthetic
+redécorée	R°dekORe	redécoré	ADJ	ADJ	f	s		R_°|d_e|k_O|R_e_#	r_e|d_é|c_o|r_é_e	0.0	0.0	synthetic
+redécorés	R°dekORe	redécoré	ADJ	ADJ	m	p		R_°|d_e|k_O|R_e_#	r_e|d_é|c_o|r_é_s	0.0	0.0	synthetic
 redécouvertes	R°dekuvERt	redécouvert	ADJ	ADJ	f	p		R_°|d_e|k_u|v_E_R_t_#	r_e|d_é|c_ou|v_e_r_t_es	0.0	0.0	synthetic
 redécouverte	R°dekuvERt	redécouvert	ADJ	ADJ	f	s		R_°|d_e|k_u|v_E_R_t_#	r_e|d_é|c_ou|v_e_r_t_e	0.0	0.0	synthetic
 redécouvertes	R°dekuvERt	redécouverte	NOM	NOM	f	p		R_°|d_e|k_u|v_E_R_t_#	r_e|d_é|c_ou|v_e_r_t_es	0.0	0.0	synthetic
 referendums	RefeR5dOm	referendum	NOM	NOM	m	p		R_e|f_e|R_5|d_O_m_#	r_e|f_e|r_en|d_u_m_s	0.0	0.0	synthetic
-refils	R2fil	refil	NOM	NOM	m	p		R_2|f_i_l_#	r_e|f_i_l_s	0.0	0.0	synthetic
-refouloirs	R2fulwaR	refouloir	NOM	NOM	m	p		R_2|f_u|l_wa_R_#	r_e|f_ou|l_oi_r_s	0.0	0.0	synthetic
+refils	R°fil	refil	NOM	NOM	m	p		R_°|f_i_l_#	r_e|f_i_l_s	0.0	0.0	synthetic
+refouloirs	R°fulwaR	refouloir	NOM	NOM	m	p		R_°|f_u|l_wa_R_#	r_e|f_ou|l_oi_r_s	0.0	0.0	synthetic
 reichs	RajS	reich	NOM	NOM	m	p		R_a_j_S_#	r_e_i_ch_s	0.0	0.0	synthetic
 rejointes	R°Zw5t	rejoint	ADJ	VER,ADJ	f	p		R_°|Z_w5_t_#	r_e|j_oin_t_es	0.0	0.0	synthetic
 rejointe	R°Zw5t	rejoint	ADJ	VER,ADJ	f	s		R_°|Z_w5_t_#	r_e|j_oin_t_e	0.0	0.0	synthetic
-relarguées	R2laRge	relargué	ADJ	ADJ	f	p		R_2|l_a_R|g_e_#	r_e|l_a_r|gu_é_es	0.0	0.0	synthetic
-relarguée	R2laRge	relargué	ADJ	ADJ	f	s		R_2|l_a_R|g_e_#	r_e|l_a_r|gu_é_e	0.0	0.0	synthetic
-relargués	R2laRge	relargué	ADJ	ADJ	m	p		R_2|l_a_R|g_e_#	r_e|l_a_r|gu_é_s	0.0	0.0	synthetic
+relarguées	R°laRge	relargué	ADJ	ADJ	f	p		R_°|l_a_R|g_e_#	r_e|l_a_r|gu_é_es	0.0	0.0	synthetic
+relarguée	R°laRge	relargué	ADJ	ADJ	f	s		R_°|l_a_R|g_e_#	r_e|l_a_r|gu_é_e	0.0	0.0	synthetic
+relargués	R°laRge	relargué	ADJ	ADJ	m	p		R_°|l_a_R|g_e_#	r_e|l_a_r|gu_é_s	0.0	0.0	synthetic
 relatives	R°lativ	relative	NOM	ADJ,NOM	f	p		R_°|l_a|t_i_v_#	r_e|l_a|t_i_v_es	0.0	0.0	synthetic
 relativités	R°lativite	relativité	NOM	NOM	f	p		R_°|l_a|t_i|v_i|t_e_#	r_e|l_a|t_i|v_i|t_é_s	0.0	0.0	synthetic
 religiosités	R°liZjozite	religiosité	NOM	NOM	f	p		R_°|l_i|Z_j_o|z_i|t_e_#	r_e|l_i|g_i_o|s_i|t_é_s	0.0	0.0	synthetic
@@ -40231,7 +40231,7 @@ restoroutes	REstoRut	restoroute	NOM	NOM	m	p		R_E_s|t_o|R_u_t_#	r_e_s|t_o|r_ou_t_
 restrictifs	REstRiktif	restrictif	ADJ	ADJ	m	p		R_E_s|t_R_i_k|t_i_f_#	r_e_s|t_r_i_c|t_i_f_s	0.0	0.0	synthetic
 resucées	R°syse	resucée	NOM	NOM	f	p		R_°|s_y|s_e_#	r_e|s_u|c_é_es	0.0	0.0	synthetic
 retapes	R°tap	retape	NOM	NOM,VER	f	p		R_°|t_a_p_#	r_e|t_a_p_es	0.0	0.0	synthetic
-retirables	R2tiRabl	retirable	ADJ	ADJ	f	p		R_2|t_i|R_a_b_l_#	r_e|t_i|r_a_b_l_es	0.0	0.0	synthetic
+retirables	R°tiRabl	retirable	ADJ	ADJ	f	p		R_°|t_i|R_a_b_l_#	r_e|t_i|r_a_b_l_es	0.0	0.0	synthetic
 retiros	RetiROs	retiro	NOM	NOM	m	p		R_e|t_i|R_O_s	r_e|t_i|r_o_s	0.0	0.0	synthetic
 retombes	R°t§b	retombe	NOM	NOM,VER	f	p		R_°|t_§_b_#	r_e|t_om_b_es	0.0	0.0	synthetic
 retombés	R°t§be	retombée	ADJ	VER,ADJ,NOM	m	p		R_°|t_§|b_e_#	r_e|t_om|b_é_s	0.0	0.0	synthetic
@@ -40242,9 +40242,9 @@ revivifiées	R°vivifje	revivifié	ADJ	ADJ	f	p		R_°|v_i|v_i|f_j_e_#	r_e|v_i|v_i
 revivifiée	R°vivifje	revivifié	ADJ	ADJ	f	s		R_°|v_i|v_i|f_j_e_#	r_e|v_i|v_i|f_i_é_e	0.0	0.0	synthetic
 revivifiés	R°vivifje	revivifié	ADJ	ADJ	m	p		R_°|v_i|v_i|f_j_e_#	r_e|v_i|v_i|f_i_é_s	0.0	0.0	synthetic
 revoirs	R°vwaR	revoir	NOM	NOM,VER	m	p		R_°|v_wa_R_#	r_e|v_oi_r_s	0.0	0.0	synthetic
-revérifiées	R2veRifje	revérifié	ADJ	ADJ	f	p		R_2|v_e|R_i|f_j_e_#	r_e|v_é|r_i|f_i_é_es	0.0	0.0	synthetic
-revérifiée	R2veRifje	revérifié	ADJ	ADJ	f	s		R_2|v_e|R_i|f_j_e_#	r_e|v_é|r_i|f_i_é_e	0.0	0.0	synthetic
-revérifiés	R2veRifje	revérifié	ADJ	ADJ	m	p		R_2|v_e|R_i|f_j_e_#	r_e|v_é|r_i|f_i_é_s	0.0	0.0	synthetic
+revérifiées	R°veRifje	revérifié	ADJ	ADJ	f	p		R_°|v_e|R_i|f_j_e_#	r_e|v_é|r_i|f_i_é_es	0.0	0.0	synthetic
+revérifiée	R°veRifje	revérifié	ADJ	ADJ	f	s		R_°|v_e|R_i|f_j_e_#	r_e|v_é|r_i|f_i_é_e	0.0	0.0	synthetic
+revérifiés	R°veRifje	revérifié	ADJ	ADJ	m	p		R_°|v_e|R_i|f_j_e_#	r_e|v_é|r_i|f_i_é_s	0.0	0.0	synthetic
 rhinoscopies	RinOskOpi	rhinoscopie	NOM	NOM	f	p		R_#_i|n_O_s|k_O|p_i_#	r_h_i|n_o_s|c_o|p_i_es	0.0	0.0	synthetic
 rhizomes	Rizom	rhizome	NOM	NOM	m	p		R_#_i|z_o_m_#	r_h_i|z_o_m_es	0.0	0.0	synthetic
 rhos	Ro	rho	NOM	NOM	m	p		R_#_o_#	r_h_o_s	0.0	0.0	synthetic
@@ -42280,7 +42280,7 @@ violentent	vjol@t	violenter	VER	VER			sub:pre:3p;	v_j_o|l_@_t_#	v_i_o|l_en_t_ent
 déraisonnent	deREzOn	déraisonner	VER	VER			sub:pre:3p;	d_e|R_E|z_O_n_#	d_é|r_ai|s_o_nn_ent	0.0	0.0	synthetic
 chaperonnent	Sap°ROn	chaperonner	VER	VER			sub:pre:3p;	S_a|p_°|R_O_n_#	ch_a|p_e|r_o_nn_ent	0.0	0.0	synthetic
 affament	afam	affamer	VER	VER			sub:pre:3p;	a|f_a_m_#	a|ff_a_m_ent	0.0	0.0	synthetic
-revivifient	R2vivifi	revivifier	VER	VER			sub:pre:3p;	R_2|v_i|v_i|f_i_#	r_e|v_i|v_i|f_i_ent	0.0	0.0	synthetic
+revivifient	R°vivifi	revivifier	VER	VER			sub:pre:3p;	R_°|v_i|v_i|f_i_#	r_e|v_i|v_i|f_i_ent	0.0	0.0	synthetic
 quantifient	k@tifi	quantifier	VER	VER			sub:pre:3p;	k_@|t_i|f_i_#	qu_an|t_i|f_i_ent	0.0	0.0	synthetic
 dépiautent	depjot	dépiauter	VER	VER			sub:pre:3p;	d_e|p_j_o_t_#	d_é|p_i_au_t_ent	0.0	0.0	synthetic
 dégonflent	deg§fl	dégonfler	VER	VER			sub:pre:3p;	d_e|g_§_f_l_#	d_é|g_on_f_l_ent	0.0	0.0	synthetic
@@ -42529,7 +42529,7 @@ décalent	dekal	décaler	VER	VER			sub:pre:3p;	d_e|k_a_l_#	d_é|c_a_l_ent	0.0	0.
 remportent	R@pORt	remporter	VER	VER			sub:pre:3p;	R_@|p_O_R_t_#	r_em|p_o_r_t_ent	0.0	0.0	synthetic
 confirment	k§fiRm	confirmer	VER	VER			sub:pre:3p;	k_§|f_i_R_m_#	c_on|f_i_r_m_ent	0.0	0.0	synthetic
 palpitent	palpit	palpiter	VER	VER			sub:pre:3p;	p_a_l|p_i_t_#	p_a_l|p_i_t_ent	0.0	0.0	synthetic
-revolent	R2vOl	revoler	VER	VER			sub:pre:3p;	R_2|v_O_l_#	r_e|v_o_l_ent	0.0	0.0	synthetic
+revolent	R°vOl	revoler	VER	VER			sub:pre:3p;	R_°|v_O_l_#	r_e|v_o_l_ent	0.0	0.0	synthetic
 confluent	k§fly	confluer	VER	VER			sub:pre:3p;	k_§|f_l_y_#	c_on|f_l_u_ent	0.0	0.0	synthetic
 emperlent	@pERl	emperler	VER	VER			sub:pre:3p;	@|p_E_R_l_#	em|p_e_r_l_ent	0.0	0.0	synthetic
 exacerbent	EgzasERb	exacerber	VER	VER			sub:pre:3p;	E_gz|a|s_E_R_b_#	e_x|a|c_e_r_b_ent	0.0	0.0	synthetic
@@ -42664,7 +42664,7 @@ sculptent	skylt	sculpter	VER	VER			sub:pre:3p;	s_k_y_l_#_t_#	s_c_u_l_p_t_ent	0.0
 reculent	R°kyl	reculer	VER	VER			sub:pre:3p;	R_°|k_y_l_#	r_e|c_u_l_ent	0.0	0.0	synthetic
 vagabondent	vagab§d	vagabonder	VER	VER			sub:pre:3p;	v_a|g_a|b_§_d_#	v_a|g_a|b_on_d_ent	0.0	0.0	synthetic
 informatisent	5fORmatiz	informatiser	VER	VER			sub:pre:3p;	5|f_O_R|m_a|t_i_z_#	in|f_o_r|m_a|t_i_s_ent	0.0	0.0	synthetic
-refouillent	R2fuj	refouiller	VER	VER			sub:pre:3p;	R_2|f_u_j_#	r_e|f_ou_ill_ent	0.0	0.0	synthetic
+refouillent	R°fuj	refouiller	VER	VER			sub:pre:3p;	R_°|f_u_j_#	r_e|f_ou_ill_ent	0.0	0.0	synthetic
 détronchent	detR§S	détroncher	VER	VER			sub:pre:3p;	d_e|t_R_§_S_#	d_é|t_r_on_ch_ent	0.0	0.0	synthetic
 confessent	k§fEs	confesser	VER	VER			sub:pre:3p;	k_§|f_E_s_#	c_on|f_e_ss_ent	0.0	0.0	synthetic
 disjonctent	disZ§kt	disjoncter	VER	VER			sub:pre:3p;	d_i_s|Z_§_k_t_#	d_i_s|j_on_c_t_ent	0.0	0.0	synthetic
@@ -43029,7 +43029,7 @@ palanquent	pal@k	palanquer	VER	VER			sub:pre:3p;	p_a|l_@_k_#	p_a|l_an_qu_ent	0.0
 esquintent	Esk5t	esquinter	VER	VER			sub:pre:3p;	E_s|k_5_t_#	e_s|qu_in_t_ent	0.0	0.0	synthetic
 charpentent	SaRp@t	charpenter	VER	VER			sub:pre:3p;	S_a_R|p_@_t_#	ch_a_r|p_en_t_ent	0.0	0.0	synthetic
 expirent	EkspiR	expirer	VER	VER			sub:pre:3p;	E|ks_p_i_R_#	e|x_p_i_r_ent	0.0	0.0	synthetic
-refaçonnent	R2fasOn	refaçonner	VER	VER			sub:pre:3p;	R_2|f_a|s_O_n_#	r_e|f_a|ç_o_nn_ent	0.0	0.0	synthetic
+refaçonnent	R°fasOn	refaçonner	VER	VER			sub:pre:3p;	R_°|f_a|s_O_n_#	r_e|f_a|ç_o_nn_ent	0.0	0.0	synthetic
 éternuent	etERny	éternuer	VER	VER			sub:pre:3p;	e|t_E_R|n_y_#	é|t_e_r|n_u_ent	0.0	0.0	synthetic
 emmaillotent	@majOt	emmailloter	VER	VER			sub:pre:3p;	@|m_a|j_O_t_#	em|m_a|ill_o_t_ent	0.0	0.0	synthetic
 focalisent	fokaliz	focaliser	VER	VER			sub:pre:3p;	f_o|k_a|l_i_z_#	f_o|c_a|l_i_s_ent	0.0	0.0	synthetic
@@ -43245,7 +43245,7 @@ casernent	kazERn	caserner	VER	VER			sub:pre:3p;	k_a|z_E_R_n_#	c_a|s_e_r_n_ent	0.
 canardent	kanaRd	canarder	VER	VER			sub:pre:3p;	k_a|n_a_R_d_#	c_a|n_a_r_d_ent	0.0	0.0	synthetic
 vallonnent	valOn	vallonner	VER	VER			sub:pre:3p;	v_a|l_O_n_#	v_a|ll_o_nn_ent	0.0	0.0	synthetic
 vissent	vis	visser	VER	VER			sub:pre:3p;	v_i_s_#	v_i_ss_ent	0.0	0.0	synthetic
-revirent	R2viR	revirer	VER	VER			sub:pre:3p;	R_2|v_i_R_#	r_e|v_i_r_ent	0.0	0.0	synthetic
+revirent	R°viR	revirer	VER	VER			sub:pre:3p;	R_°|v_i_R_#	r_e|v_i_r_ent	0.0	0.0	synthetic
 distancient	dist@si	distancier	VER	VER			sub:pre:3p;	d_i_s|t_@|s_i_#	d_i_s|t_an|c_i_ent	0.0	0.0	synthetic
 jonglent	Z§gl	jongler	VER	VER			sub:pre:3p;	Z_§_g_l_#	j_on_g_l_ent	0.0	0.0	synthetic
 schlinguent	Sl5g	schlinguer	VER	VER			sub:pre:3p;	S_l_5_g_#	sch_l_in_gu_ent	0.0	0.0	synthetic
@@ -43296,7 +43296,7 @@ parasitent	paRazit	parasiter	VER	VER			sub:pre:3p;	p_a|R_a|z_i_t_#	p_a|r_a|s_i_t
 sonnaillent	sonaj	sonnailler	VER	VER			sub:pre:3p;	s_o|n_a_j_#	s_o|nn_a_ill_ent	0.0	0.0	synthetic
 incriminent	5kRimin	incriminer	VER	VER			sub:pre:3p;	5|k_R_i|m_i_n_#	in|c_r_i|m_i_n_ent	0.0	0.0	synthetic
 intellectualisent	5tElEkt8aliz	intellectualiser	VER	VER			sub:pre:3p;	5|t_E|l_E_k|t_8_a|l_i_z_#	in|t_e|ll_e_c|t_u_a|l_i_s_ent	0.0	0.0	synthetic
-rebordent	R2bORd	reborder	VER	VER			sub:pre:3p;	R_2|b_O_R_d_#	r_e|b_o_r_d_ent	0.0	0.0	synthetic
+rebordent	R°bORd	reborder	VER	VER			sub:pre:3p;	R_°|b_O_R_d_#	r_e|b_o_r_d_ent	0.0	0.0	synthetic
 dardent	daRd	darder	VER	VER			sub:pre:3p;	d_a_R_d_#	d_a_r_d_ent	0.0	0.0	synthetic
 clignotent	kliNOt	clignoter	VER	VER			sub:pre:3p;	k_l_i|N_O_t_#	c_l_i|gn_o_t_ent	0.0	0.0	synthetic
 zonent	zOn	zoner	VER	VER			sub:pre:3p;	z_O_n_#	z_o_n_ent	0.0	0.0	synthetic
@@ -44070,7 +44070,7 @@ empressent	@pREs	empresser	VER	VER			sub:pre:3p;	@|p_R_E_s_#	em|p_r_e_ss_ent	0.0
 réunifient	Reynifi	réunifier	VER	VER			sub:pre:3p;	R_e|y|n_i|f_i_#	r_é|u|n_i|f_i_ent	0.0	0.0	synthetic
 privilégient	pRivileZi	privilégier	VER	VER			sub:pre:3p;	p_R_i|v_i|l_e|Z_i_#	p_r_i|v_i|l_é|g_i_ent	0.0	0.0	synthetic
 intronisent	5tRoniz	introniser	VER	VER			sub:pre:3p;	5|t_R_o|n_i_z_#	in|t_r_o|n_i_s_ent	0.0	0.0	synthetic
-repavent	R2pav	repaver	VER	VER			sub:pre:3p;	R_2|p_a_v_#	r_e|p_a_v_ent	0.0	0.0	synthetic
+repavent	R°pav	repaver	VER	VER			sub:pre:3p;	R_°|p_a_v_#	r_e|p_a_v_ent	0.0	0.0	synthetic
 décuvent	dekyv	décuver	VER	VER			sub:pre:3p;	d_e|k_y_v_#	d_é|c_u_v_ent	0.0	0.0	synthetic
 concassent	k§kas	concasser	VER	VER			sub:pre:3p;	k_§|k_a_s_#	c_on|c_a_ss_ent	0.0	0.0	synthetic
 stipulent	stipyl	stipuler	VER	VER			sub:pre:3p;	s_t_i|p_y_l_#	s_t_i|p_u_l_ent	0.0	0.0	synthetic
@@ -44188,7 +44188,7 @@ barbouillent	baRbuj	barbouiller	VER	VER			sub:pre:3p;	b_a_R|b_u_j_#	b_a_r|b_ou_i
 évaluent	evaly	évaluer	VER	VER			sub:pre:3p;	e|v_a|l_y_#	é|v_a|l_u_ent	0.0	0.0	synthetic
 herborisent	ERboRiz	herboriser	VER	VER			sub:pre:3p;	#_E_R|b_o|R_i_z_#	h_e_r|b_o|r_i_s_ent	0.0	0.0	synthetic
 crossent	kROs	crosser	VER	VER			sub:pre:3p;	k_R_O_s_#	c_r_o_ss_ent	0.0	0.0	synthetic
-recordent	R2kORd	recorder	VER	VER			sub:pre:3p;	R_2|k_O_R_d_#	r_e|c_o_r_d_ent	0.0	0.0	synthetic
+recordent	R°kORd	recorder	VER	VER			sub:pre:3p;	R_°|k_O_R_d_#	r_e|c_o_r_d_ent	0.0	0.0	synthetic
 châtrent	SatR	châtrer	VER	VER			sub:pre:3p;	S_a_t_R_#	ch_â_t_r_ent	0.0	0.0	synthetic
 déplissent	deplis	déplisser	VER	VER			sub:pre:3p;	d_e|p_l_i_s_#	d_é|p_l_i_ss_ent	0.0	0.0	synthetic
 démodent	demOd	démoder	VER	VER			sub:pre:3p;	d_e|m_O_d_#	d_é|m_o_d_ent	0.0	0.0	synthetic
@@ -45514,7 +45514,7 @@ adossent	adOs	adosser	VER	VER			sub:pre:3p;	a|d_O_s_#	a|d_o_ss_ent	0.0	0.0	synth
 pelotonnent	p°lotOn	pelotonner	VER	VER			sub:pre:3p;	p_°|l_o|t_O_n_#	p_e|l_o|t_o_nn_ent	0.0	0.0	synthetic
 soulignent	suliN	souligner	VER	VER			sub:pre:3p;	s_u|l_i_N_#	s_ou|l_i_gn_ent	0.0	0.0	synthetic
 cantonnent	k@tOn	cantonner	VER	VER			sub:pre:3p;	k_@|t_O_n_#	c_an|t_o_nn_ent	0.0	0.0	synthetic
-rehaussent	R2os	rehausser	VER	VER			sub:pre:3p;	R_2_#|o_s_#	r_e_h|au_ss_ent	0.0	0.0	synthetic
+rehaussent	R°os	rehausser	VER	VER			sub:pre:3p;	R_°_#|o_s_#	r_e_h|au_ss_ent	0.0	0.0	synthetic
 rétament	Retam	rétamer	VER	VER			sub:pre:3p;	R_e|t_a_m_#	r_é|t_a_m_ent	0.0	0.0	synthetic
 immigrent	imigR	immigrer	VER	VER			sub:pre:3p;	i|m_i_g_R_#	i|mm_i_g_r_ent	0.0	0.0	synthetic
 irritent	iRit	irriter	VER	VER			sub:pre:3p;	i|R_i_t_#	i|rr_i_t_ent	0.0	0.0	synthetic
@@ -46165,7 +46165,7 @@ clouais	kluE	clouer	VER	VER			ind:imp:1s;	k_l_u|E	c_l_ou|ais	0.0	0.0	synthetic
 écrouais	ekRuE	écrouer	VER	VER			ind:imp:1s;	e|k_R_u|E	é|c_r_ou|ais	0.0	0.0	synthetic
 enclouais	@kluE	enclouer	VER	VER			ind:imp:1s;	@|k_l_u|E	en|c_l_ou|ais	0.0	0.0	synthetic
 démultipliais	demyltiplijE	démultiplier	VER	VER			ind:imp:1s;	d_e|m_y_l|t_i|p_l_ij|E	d_é|m_u_l|t_i|p_l_i|ais	0.0	0.0	synthetic
-reclouais	R2kluE	reclouer	VER	VER			ind:imp:1s;	R_2|k_l_u|E	r_e|c_l_ou|ais	0.0	0.0	synthetic
+reclouais	R°kluE	reclouer	VER	VER			ind:imp:1s;	R_°|k_l_u|E	r_e|c_l_ou|ais	0.0	0.0	synthetic
 renflouais	R@fluE	renflouer	VER	VER			ind:imp:1s;	R_@|f_l_u|E	r_en|f_l_ou|ais	0.0	0.0	synthetic
 toréais	toReE	toréer	VER	VER			ind:imp:1s;	t_o|R_e|E	t_o|r_é|ais	0.0	0.0	synthetic
 regréais	R°gReE	regréer	VER	VER			ind:imp:1s;	R_°|g_R_e|E	r_e|g_r_é|ais	0.0	0.0	synthetic
@@ -48767,26 +48767,26 @@ rabroueraient	RabRuRE	rabrouer	VER	VER			cnd:pre:3p;	R_a|b_R_u_#|R_E	r_a|b_r_ou_
 rabroue	RabRu	rabrouer	VER	VER			sub:pre:3s;	R_a|b_R_u_#	r_a|b_r_ou_e	0.0	0.0	synthetic
 rabroue	RabRu	rabrouer	VER	VER			imp:pre:2s;	R_a|b_R_u_#	r_a|b_r_ou_e	0.0	0.0	synthetic
 rabrouez	RabRue	rabrouer	VER	VER			imp:pre:2p;	R_a|b_R_u|e	r_a|b_r_ou|ez	0.0	0.0	synthetic
-recloue	R2klu	reclouer	VER	VER			ind:pre:1s;	R_2|k_l_u_#	r_e|c_l_ou_e	0.0	0.0	synthetic
-recloues	R2klu	reclouer	VER	VER			ind:pre:2s;	R_2|k_l_u_#	r_e|c_l_ou_es	0.0	0.0	synthetic
-recloue	R2klu	reclouer	VER	VER			ind:pre:3s;	R_2|k_l_u_#	r_e|c_l_ou_e	0.0	0.0	synthetic
-reclouez	R2klue	reclouer	VER	VER			ind:pre:2p;	R_2|k_l_u|e	r_e|c_l_ou|ez	0.0	0.0	synthetic
-reclouent	R2klu	reclouer	VER	VER			ind:pre:3p;	R_2|k_l_u_#	r_e|c_l_ou_ent	0.0	0.0	synthetic
-reclouions	R2kluj§	reclouer	VER	VER			ind:imp:1p;	R_2|k_l_u|j_§	r_e|c_l_ou|i_ons	0.0	0.0	synthetic
-reclouiez	R2kluje	reclouer	VER	VER			ind:imp:2p;	R_2|k_l_u|j_e	r_e|c_l_ou|i_ez	0.0	0.0	synthetic
-reclouerai	R2kluRe	reclouer	VER	VER			ind:fut:1s;	R_2|k_l_u_#|R_e	r_e|c_l_ou_e|r_ai	0.0	0.0	synthetic
-recloueras	R2kluRa	reclouer	VER	VER			ind:fut:2s;	R_2|k_l_u_#|R_a	r_e|c_l_ou_e|r_as	0.0	0.0	synthetic
-reclouera	R2kluRa	reclouer	VER	VER			ind:fut:3s;	R_2|k_l_u_#|R_a	r_e|c_l_ou_e|r_a	0.0	0.0	synthetic
-reclouerons	R2kluR§	reclouer	VER	VER			ind:fut:1p;	R_2|k_l_u_#|R_§	r_e|c_l_ou_e|r_ons	0.0	0.0	synthetic
-reclouerez	R2kluRe	reclouer	VER	VER			ind:fut:2p;	R_2|k_l_u_#|R_e	r_e|c_l_ou_e|r_ez	0.0	0.0	synthetic
-recloueront	R2kluR§	reclouer	VER	VER			ind:fut:3p;	R_2|k_l_u_#|R_§	r_e|c_l_ou_e|r_ont	0.0	0.0	synthetic
-reclouerais	R2kluRE	reclouer	VER	VER			cnd:pre:1s;	R_2|k_l_u_#|R_E	r_e|c_l_ou_e|r_ais	0.0	0.0	synthetic
-reclouerais	R2kluRE	reclouer	VER	VER			cnd:pre:2s;	R_2|k_l_u_#|R_E	r_e|c_l_ou_e|r_ais	0.0	0.0	synthetic
-reclouerait	R2kluRE	reclouer	VER	VER			cnd:pre:3s;	R_2|k_l_u_#|R_E	r_e|c_l_ou_e|r_ait	0.0	0.0	synthetic
-recloueraient	R2kluRE	reclouer	VER	VER			cnd:pre:3p;	R_2|k_l_u_#|R_E	r_e|c_l_ou_e|r_aient	0.0	0.0	synthetic
-recloue	R2klu	reclouer	VER	VER			sub:pre:3s;	R_2|k_l_u_#	r_e|c_l_ou_e	0.0	0.0	synthetic
-recloue	R2klu	reclouer	VER	VER			imp:pre:2s;	R_2|k_l_u_#	r_e|c_l_ou_e	0.0	0.0	synthetic
-reclouez	R2klue	reclouer	VER	VER			imp:pre:2p;	R_2|k_l_u|e	r_e|c_l_ou|ez	0.0	0.0	synthetic
+recloue	R°klu	reclouer	VER	VER			ind:pre:1s;	R_°|k_l_u_#	r_e|c_l_ou_e	0.0	0.0	synthetic
+recloues	R°klu	reclouer	VER	VER			ind:pre:2s;	R_°|k_l_u_#	r_e|c_l_ou_es	0.0	0.0	synthetic
+recloue	R°klu	reclouer	VER	VER			ind:pre:3s;	R_°|k_l_u_#	r_e|c_l_ou_e	0.0	0.0	synthetic
+reclouez	R°klue	reclouer	VER	VER			ind:pre:2p;	R_°|k_l_u|e	r_e|c_l_ou|ez	0.0	0.0	synthetic
+reclouent	R°klu	reclouer	VER	VER			ind:pre:3p;	R_°|k_l_u_#	r_e|c_l_ou_ent	0.0	0.0	synthetic
+reclouions	R°kluj§	reclouer	VER	VER			ind:imp:1p;	R_°|k_l_u|j_§	r_e|c_l_ou|i_ons	0.0	0.0	synthetic
+reclouiez	R°kluje	reclouer	VER	VER			ind:imp:2p;	R_°|k_l_u|j_e	r_e|c_l_ou|i_ez	0.0	0.0	synthetic
+reclouerai	R°kluRe	reclouer	VER	VER			ind:fut:1s;	R_°|k_l_u_#|R_e	r_e|c_l_ou_e|r_ai	0.0	0.0	synthetic
+recloueras	R°kluRa	reclouer	VER	VER			ind:fut:2s;	R_°|k_l_u_#|R_a	r_e|c_l_ou_e|r_as	0.0	0.0	synthetic
+reclouera	R°kluRa	reclouer	VER	VER			ind:fut:3s;	R_°|k_l_u_#|R_a	r_e|c_l_ou_e|r_a	0.0	0.0	synthetic
+reclouerons	R°kluR§	reclouer	VER	VER			ind:fut:1p;	R_°|k_l_u_#|R_§	r_e|c_l_ou_e|r_ons	0.0	0.0	synthetic
+reclouerez	R°kluRe	reclouer	VER	VER			ind:fut:2p;	R_°|k_l_u_#|R_e	r_e|c_l_ou_e|r_ez	0.0	0.0	synthetic
+recloueront	R°kluR§	reclouer	VER	VER			ind:fut:3p;	R_°|k_l_u_#|R_§	r_e|c_l_ou_e|r_ont	0.0	0.0	synthetic
+reclouerais	R°kluRE	reclouer	VER	VER			cnd:pre:1s;	R_°|k_l_u_#|R_E	r_e|c_l_ou_e|r_ais	0.0	0.0	synthetic
+reclouerais	R°kluRE	reclouer	VER	VER			cnd:pre:2s;	R_°|k_l_u_#|R_E	r_e|c_l_ou_e|r_ais	0.0	0.0	synthetic
+reclouerait	R°kluRE	reclouer	VER	VER			cnd:pre:3s;	R_°|k_l_u_#|R_E	r_e|c_l_ou_e|r_ait	0.0	0.0	synthetic
+recloueraient	R°kluRE	reclouer	VER	VER			cnd:pre:3p;	R_°|k_l_u_#|R_E	r_e|c_l_ou_e|r_aient	0.0	0.0	synthetic
+recloue	R°klu	reclouer	VER	VER			sub:pre:3s;	R_°|k_l_u_#	r_e|c_l_ou_e	0.0	0.0	synthetic
+recloue	R°klu	reclouer	VER	VER			imp:pre:2s;	R_°|k_l_u_#	r_e|c_l_ou_e	0.0	0.0	synthetic
+reclouez	R°klue	reclouer	VER	VER			imp:pre:2p;	R_°|k_l_u|e	r_e|c_l_ou|ez	0.0	0.0	synthetic
 criiez	kRije	crier	VER	VER			ind:imp:2p;	k_R_ij_#|e	c_r_i_i|ez	0.0	0.0	synthetic
 crierons	kRiR§	crier	VER	VER			ind:fut:1p;	k_R_i_#|R_§	c_r_i_e|r_ons	0.0	0.0	synthetic
 crierez	kRiRe	crier	VER	VER			ind:fut:2p;	k_R_i_#|R_e	c_r_i_e|r_ez	0.0	0.0	synthetic
@@ -49977,22 +49977,22 @@ rassasiante	Rasazj@t	rassasiant	ADJ	ADJ,VER	f	s		R_a|s_a|z_j_@_t_#	r_a|ss_a|s_i_
 rationalisé	Rasjonalize	rationalisé	ADJ	ADJ	m	s		R_a|s_j_o|n_a|l_i|z_e	r_a|t_i_o|n_a|l_i|s_é	0.0	0.0	synthetic
 rattes	Rat	ratte	NOM	NOM	f	p		R_a_t_#	r_a_tt_es	0.0	0.0	synthetic
 ravigotante	Ravigot@t	ravigotant	ADJ	ADJ	f	s		R_a|v_i|g_o|t_@_t_#	r_a|v_i|g_o|t_an_t_e	0.0	0.0	synthetic
-rebarrées	R2baRe	rebarré	ADJ	ADJ	f	p		R_2|b_a|R_e_#	r_e|b_a|rr_é_es	0.0	0.0	synthetic
-rebarrés	R2baRe	rebarré	ADJ	ADJ	m	p		R_2|b_a|R_e_#	r_e|b_a|rr_é_s	0.0	0.0	synthetic
-reboules	R2bul	reboule	NOM	NOM	f	p		R_2|b_u_l_#	r_e|b_ou_l_es	0.0	0.0	synthetic
+rebarrées	R°baRe	rebarré	ADJ	ADJ	f	p		R_°|b_a|R_e_#	r_e|b_a|rr_é_es	0.0	0.0	synthetic
+rebarrés	R°baRe	rebarré	ADJ	ADJ	m	p		R_°|b_a|R_e_#	r_e|b_a|rr_é_s	0.0	0.0	synthetic
+reboules	R°bul	reboule	NOM	NOM	f	p		R_°|b_u_l_#	r_e|b_ou_l_es	0.0	0.0	synthetic
 rechargeables	R°SaRZabl	rechargeable	ADJ	ADJ	f	p		R_°|S_a_R|Z_a_b_l_#	r_e|ch_a_r|ge_a_b_l_es	0.0	0.0	synthetic
-recombinante	R2k§bin@t	recombinant	ADJ	ADJ,VER	f	s		R_2|k_§|b_i|n_@_t_#	r_e|c_om|b_i|n_an_t_e	0.0	0.0	synthetic
+recombinante	R°k§bin@t	recombinant	ADJ	ADJ,VER	f	s		R_°|k_§|b_i|n_@_t_#	r_e|c_om|b_i|n_an_t_e	0.0	0.0	synthetic
 recouvrante	R°kuvR@t	recouvrant	ADJ	ADJ,VER	f	s		R_°|k_u|v_R_@_t_#	r_e|c_ou|v_r_an_t_e	0.0	0.0	synthetic
 rectilinéaires	REktilineER	rectilinéaire	ADJ	ADJ	f	p		R_E_k|t_i|l_i|n_e|E_R_#	r_e_c|t_i|l_i|n_é|ai_r_es	0.0	0.0	synthetic
 reculante	R°kyl@t	reculant	ADJ	ADJ,VER	f	s		R_°|k_y|l_@_t_#	r_e|c_u|l_an_t_e	0.0	0.0	synthetic
 redoublante	R°dubl@t	redoublant	ADJ	ADJ,VER	f	s		R_°|d_u|b_l_@_t_#	r_e|d_ou|b_l_an_t_e	0.0	0.0	synthetic
 refroidissante	R°fRwadis@t	refroidissant	ADJ	VER,ADJ	f	s		R_°_f|R_wa|d_i|s_@_t_#	r_e_f|r_oi|d_i|ss_an_t_e	0.0	0.0	synthetic
 regs	REg	reg	NOM	NOM	m	p		R_E_g_#	r_e_g_s	0.0	0.0	synthetic
-relativistes	R2lativist	relativiste	ADJ	ADJ	f	p		R_2|l_a|t_i|v_i_s_t_#	r_e|l_a|t_i|v_i_s_t_es	0.0	0.0	synthetic
+relativistes	R°lativist	relativiste	ADJ	ADJ	f	p		R_°|l_a|t_i|v_i_s_t_#	r_e|l_a|t_i|v_i_s_t_es	0.0	0.0	synthetic
 relevables	R°l°vabl	relevable	ADJ	ADJ	f	p		R_°|l_°|v_a_b_l_#	r_e|l_e|v_a_b_l_es	0.0	0.0	synthetic
 relevante	R°l°v@t	relevant	ADJ	ADJ,VER	f	s		R_°|l_°|v_@_t_#	r_e|l_e|v_an_t_e	0.0	0.0	synthetic
 remontante	R°m§t@t	remontant	ADJ	ADJ,NOM,VER	f	s		R_°|m_§|t_@_t_#	r_e|m_on|t_an_t_e	0.0	0.0	synthetic
-remédiables	R2medjabl	remédiable	ADJ	ADJ	f	p		R_2|m_e|d_j_a_b_l_#	r_e|m_é|d_i_a_b_l_es	0.0	0.0	synthetic
+remédiables	R°medjabl	remédiable	ADJ	ADJ	f	p		R_°|m_e|d_j_a_b_l_#	r_e|m_é|d_i_a_b_l_es	0.0	0.0	synthetic
 rendante	R@d@t	rendant	ADJ	ADJ,VER	f	s		R_@|d_@_t_#	r_en|d_an_t_e	0.0	0.0	synthetic
 reniflante	R°nifl@t	reniflant	ADJ	ADJ,VER	f	s		R_°|n_i|f_l_@_t_#	r_e|n_i|f_l_an_t_e	0.0	0.0	synthetic
 reniflettes	R°niflEt	reniflette	NOM	NOM	f	p		R_°|n_i|f_l_E_t_#	r_e|n_i|f_l_e_tt_es	0.0	0.0	synthetic
@@ -50000,7 +50000,7 @@ repoussées	R°puse	repoussé	ADJ	VER,ADJ	f	p		R_°|p_u|s_e_#	r_e|p_ou|ss_é_es	
 repoussée	R°puse	repoussé	ADJ	VER,ADJ	f	s		R_°|p_u|s_e_#	r_e|p_ou|ss_é_e	0.0	0.0	synthetic
 reproductibles	R°pRodyktibl	reproductible	ADJ	ADJ	f	p		R_°|p_R_o|d_y_k|t_i_b_l_#	r_e|p_r_o|d_u_c|t_i_b_l_es	0.0	0.0	synthetic
 retroussettes	R°tRusEt	retroussette	NOM	NOM	f	p		R_°|t_R_u|s_E_t_#	r_e|t_r_ou|ss_e_tt_es	0.0	0.0	synthetic
-revitalisante	R2vitaliz@t	revitalisant	ADJ	ADJ	f	s		R_2|v_i|t_a|l_i|z_@_t_#	r_e|v_i|t_a|l_i|s_an_t_e	0.0	0.0	synthetic
+revitalisante	R°vitaliz@t	revitalisant	ADJ	ADJ	f	s		R_°|v_i|t_a|l_i|z_@_t_#	r_e|v_i|t_a|l_i|s_an_t_e	0.0	0.0	synthetic
 rhodaniens	Rodanj5	rhodanien	ADJ	ADJ	m	p		R_#_o|d_a|n_j_5_#	r_h_o|d_a|n_i_en_s	0.0	0.0	synthetic
 rhodoïds	Rodoid	rhodoïd	NOM	NOM	m	p		R_#_o|d_o|i_d_#	r_h_o|d_o|ï_d_s	0.0	0.0	synthetic
 rhumatoïdes	RymatOid	rhumatoïde	ADJ	ADJ	f	p		R_#_y|m_a|t_O|i_d_#	r_h_u|m_a|t_o|ï_d_es	0.0	0.0	synthetic
@@ -50323,3 +50323,24 @@ suitées	s8ite	suitée	ADJ	ADJ	f	p		s_8_i|t_e_#	s_u_i|t_é_es	0.0	0.0	synthetic
 suralimentées	syRalim@te	suralimenté	ADJ	ADJ	f	p		s_y|R_a|l_i|m_@|t_e_#	s_u|r_a|l_i|m_en|t_é_es	0.0	0.0	synthetic
 surendettées	syR@dEte	surendetté	ADJ	ADJ	f	p		s_y|R_@|d_E|t_e_#	s_u|r_en|d_e|tt_é_es	0.0	0.0	synthetic
 transposés	tR@spoze	transposée	ADJ	VER,ADJ	m	p		t_R_@_s|p_o|z_e_#	t_r_an_s|p_o|s_é_s	0.0	0.0	synthetic
+autolog	otolO	autologue	ADJ	ADJ	m	s		o|t_o|l_O_#	au|t_o|l_o_g	0.0	0.0	synthetic
+bifids	bifi	bifide	ADJ	ADJ	m	p		b_i|f_i_#	b_i|f_i_ds	0.0	0.0	synthetic
+burgond	byRg§	burgonde	ADJ	ADJ	m	s		b_y_R|g_§_#	b_u_r|g_on_d	0.0	0.0	synthetic
+deltoïds	dEltoi	deltoïde	ADJ	ADJ,NOM	m	p		d_E_l|t_o|i_#	d_e_l|t_o|ï_ds	0.0	0.0	synthetic
+fiats	fjat	fiat	NOM	NOM	m	p		f_j_a_t	f_i_a_ts	0.0	0.0	synthetic
+frigids	fRiZi	frigide	ADJ	ADJ,NOM	m	p		f_R_i|Z_i_#	f_r_i|g_i_ds	0.0	0.0	synthetic
+furiosos	fyRjozo	furioso	ADJ	ADJ	m	p		f_y|R_j_o|z_o_#	f_u|r_i_o|s_o_s	0.0	0.0	synthetic
+féodals	feodal	féodal	NOM	ADJ,NOM	m	p		f_e|o|d_a_l_#	f_é|o|d_a_l_s	0.0	0.0	synthetic
+giocosos	dZjokozo	giocoso	ADJ	ADJ	m	p		dZ_j_o|k_o|z_o_#	g_i_o|c_o|s_o_s	0.0	0.0	synthetic
+hambourgeoi	@buRZwa	hambourgeois	NOM	ADJ,NOM	m	s		#_@|b_u_R|Z_wa	h_am|b_ou_r|ge_oi	0.0	0.0	synthetic
+hollandai	ol@dE	hollandais	NOM	ADJ,NOM	m	s		#_o|l_@|d_E	h_o|ll_an|d_ai	0.0	0.0	synthetic
+impavids	5pavi	impavide	ADJ	ADJ	m	p		5|p_a|v_i_#	im|p_a|v_i_ds	0.0	0.0	synthetic
+monocords	monokOR	monocorde	ADJ	ADJ	m	p		m_o|n_o|k_O_R_#	m_o|n_o|c_o_r_ds	0.0	0.0	synthetic
+mourids	muRi	mouride	ADJ	ADJ	m	p		m_u|R_i_#	m_ou|r_i_ds	0.0	0.0	synthetic
+turpids	tyRpi	turpide	ADJ	ADJ	m	p		t_y_R|p_i_#	t_u_r|p_i_ds	0.0	0.0	synthetic
+mouride	muRid	mouride	ADJ	ADJ	f	s		m_u|R_i_d_#	m_ou|r_i_d_e	0.0	0.0	synthetic
+turpide	tyRpid	turpide	ADJ	ADJ	f	s		t_y_R|p_i_d_#	t_u_r|p_i_d_e	0.0	0.0	synthetic
+congru	k§gRy	congru	ADJ	ADJ	m	s		k_§|g_R_y	c_on|g_r_u	0.0	0.0	synthetic
+écrues	ekRy	écru	ADJ	ADJ	f	p		e|k_R_y_#	é|c_r_u_es	0.0	0.0	synthetic
+écrus	ekRy	écru	ADJ	ADJ	m	p		e|k_R_y	é|c_r_us	0.0	0.0	synthetic
+congrus	k§gRy	congru	ADJ	ADJ	m	p		k_§|g_R_y_#	c_on|g_r_u_s	0.0	0.0	synthetic

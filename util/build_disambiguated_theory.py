@@ -4,14 +4,15 @@ recompute the disambiguated theory (every word's final strokes -- the Realizatio
 Phase's same-lemma coda-bank marks plus the star/hash reserved-key marks, composed
 on the phonetic theory; see Dictionary.buildDisambiguatedTheory) and write its
 human view disambiguated_theory.tsv. Nothing reads that TSV -- every exporter
-recomputes the disambiguated theory inline (util/_theoryio.py) -- but the
-tracked-output verification protocol compares it.
+loads the same computation from the fingerprinted DisambiguatedTheory.pickle this
+step writes (util/_theoryio.py) -- but the tracked-output verification protocol
+compares it.
 
 Run: python -m util.build_disambiguated_theory   (from the repo root; it chdirs there)
 Requires Dictionary.pickle/PhoneticTheory.pickle (`python -m util.build_phonetic_theory`
 first), keypress_groups.json (`python -m util.build_keypress_groups`) and
 resolved_press_sets.json (`python -m src.elicitation`).
-Outputs: disambiguated_theory.tsv.
+Outputs: disambiguated_theory.tsv, DisambiguatedTheory.pickle.
 
 Fails (exit 1, after writing the TSV) when two differently-spelled words of different
 lemmas or categories share a final stroke -- a collision S7 should have marked apart
@@ -21,11 +22,14 @@ and the reform-doublet exemption (R2) pairs are reported, not failed on.
 import os
 import sys
 
-from src.ambiguitychecker import FinalCollisionReport, findFinalCollisions, loadReform1990DoubletPairs
+from src.ambiguitychecker import (
+    FinalCollisionReport, buildWordToStrokes, buildWordsByOrthoLemme,
+    findFinalCollisions, loadReform1990DoubletPairs,
+)
 from src.keyboard import Starboard
 from src.word import Word
 from util._stenorender import renderFinalStrokesToRTFCRE
-from util._theoryio import _loadDictionaryAndPhoneticTheory
+from util._theoryio import _loadDictionaryAndPhoneticTheory, writeDisambiguatedTheoryPickle
 from util._timing import timedCall
 
 KEYBOARD_JSON_PATH = "starboard3h.json"
@@ -77,10 +81,21 @@ def main() -> None:
     with timedCall("phase", "util.build_disambiguated_theory: unpickle Dictionary + PhoneticTheory"):
         dictionary, phoneticTheory = _loadDictionaryAndPhoneticTheory()
     with timedCall("phase", "util.build_disambiguated_theory: buildDisambiguatedTheory"):
+        # Built once, then threaded through the build, the pickle envelope (so
+        # every exporter reads them back instead of rebuilding) and the TSV write.
+        wordToStrokes = buildWordToStrokes(phoneticTheory)
+        wordsByOrthoLemme = buildWordsByOrthoLemme(phoneticTheory)
         disambiguatedTheory = dictionary.buildDisambiguatedTheory(
-            phoneticTheory, starboard, KEYPRESS_GROUPS_PATH, RESOLVED_PRESS_SETS_PATH)
+            phoneticTheory, starboard, KEYPRESS_GROUPS_PATH, RESOLVED_PRESS_SETS_PATH,
+            wordToStrokes=wordToStrokes, wordsByOrthoLemme=wordsByOrthoLemme)
+    # The only writer of the fingerprinted cache the exporters read back
+    # (util/_theoryio.loadCachedDisambiguatedTheory): written after the
+    # computation, so an interrupted run never leaves a half-fresh pickle.
+    with timedCall("phase", "util.build_disambiguated_theory: writeDisambiguatedTheoryPickle"):
+        writeDisambiguatedTheoryPickle(disambiguatedTheory, wordToStrokes, wordsByOrthoLemme)
     with timedCall("phase", f"util.build_disambiguated_theory: writeDisambiguatedTheory ({OUTPUT_PATH})"):
-        dictionary.writeDisambiguatedTheory(phoneticTheory, disambiguatedTheory, starboard, OUTPUT_PATH)
+        dictionary.writeDisambiguatedTheory(phoneticTheory, disambiguatedTheory, starboard, OUTPUT_PATH,
+                                            wordToStrokes=wordToStrokes)
     print(f"\nWrote {OUTPUT_PATH}: {len(disambiguatedTheory)} words with disambiguated-theory"
           f" (Phase P + */# track) strokes.")
     reportFinalCollisions(findFinalCollisions(disambiguatedTheory, loadReform1990DoubletPairs()), starboard)

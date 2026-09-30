@@ -1,0 +1,8 @@
+# timestamp	seconds	kind	status	label
+2026-09-29T13:20:19	250.7	phase	ok	util.build_phonetic_theory: loadOrBuildDictionary
+2026-09-29T13:20:19	0.0	phase	ok	util.build_phonetic_theory: loadKeyboard
+2026-09-29T13:20:31	12.4	phase	ok	util.build_phonetic_theory: loadOrBuildPhoneticTheory
+2026-09-29T13:20:33	2.4	phase	ok	util.build_phonetic_theory: writePhoneticTheory (phonetic_theory.tsv)
+2026-09-29T13:23:26	4.8	phase	ok	util.build_disambiguated_theory: unpickle Dictionary + PhoneticTheory
+2026-09-29T13:25:21	114.4	phase	ok	util.build_disambiguated_theory: buildDisambiguatedTheory
+2026-09-29T13:25:28	7.2	phase	ok	util.build_disambiguated_theory: writeDisambiguatedTheory (disambiguated_theory.tsv)

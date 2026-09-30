@@ -1,0 +1,14 @@
+=== 18:24:14 profiling build_phonetic_theory: util.build_phonetic_theory
+=== 18:25:24 profiling completeVerbParadigms: util.completeVerbParadigms --apply
+=== 18:27:11 profiling generateMissingNomAdjForms: util.generateMissingNomAdjForms --apply
+=== 18:27:29 profiling fixPayerDualFormGaps: util.fixPayerDualFormGaps --apply
+=== 18:27:30 profiling fixAsseoirDualFormGaps: util.fixAsseoirDualFormGaps --apply
+=== 18:27:31 profiling elicitation: src.elicitation
+=== 18:28:07 profiling build_keypress_groups: util.build_keypress_groups
+=== 18:28:34 profiling build_disambiguated_theory: util.build_disambiguated_theory
+=== 18:29:18 profiling build_realization_report: util.build_realization_report
+=== 18:29:45 profiling export_plover_dictionary: util.export_plover_dictionary
+=== 18:30:01 profiling export_practice_words: util.export_practice_words
+=== 18:30:27 profiling export_practice_sentences: util.export_practice_sentences
+=== 18:30:46 profiling export_definitions: util.export_definitions
+ALL DONE 18:31:22

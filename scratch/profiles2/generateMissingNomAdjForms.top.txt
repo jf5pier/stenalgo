@@ -1,0 +1,61 @@
+Tue Sep 29 18:27:29 2026    scratch/profiles2/generateMissingNomAdjForms.pstats
+
+         29281599 function calls (29280436 primitive calls) in 18.428 seconds
+
+   Ordered by: cumulative time
+   List reduced from 708 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     33/1    0.004    0.000   18.428   18.428 {built-in method builtins.exec}
+        1    0.000    0.000   18.428   18.428 <string>:1(<module>)
+        1    0.000    0.000   18.428   18.428 <frozen runpy>:206(run_module)
+        1    0.000    0.000   18.425   18.425 <frozen runpy>:65(_run_code)
+        1    0.228    0.228   18.425   18.425 /home/jfsp/stenalgo-fix/util/generateMissingNomAdjForms.py:1(<module>)
+        1    0.164    0.164   18.180   18.180 /home/jfsp/stenalgo-fix/util/generateMissingNomAdjForms.py:99(main)
+        2    1.528    0.764   13.569    6.784 /home/jfsp/stenalgo-fix/src/nomAdjParadigm.py:415(loadWords)
+   375318    0.180    0.000    9.805    0.000 <string>:2(__init__)
+   375318    2.443    0.000    9.624    0.000 /home/jfsp/stenalgo-fix/src/word.py:85(__post_init__)
+        1    0.839    0.839    7.295    7.295 /home/jfsp/stenalgo-fix/src/nomAdjParadigm.py:392(loadAllOrthosByLemme)
+        1    1.190    1.190    2.845    2.845 /home/jfsp/stenalgo-fix/src/nomAdjParadigm.py:250(deriveNomAdjEndingTables)
+   373058    0.920    0.000    1.886    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/csv.py:173(__next__)
+   375318    0.944    0.000    1.773    0.000 /home/jfsp/stenalgo-fix/src/word.py:379(parsePhonoSyll)
+   375318    0.920    0.000    1.743    0.000 /home/jfsp/stenalgo-fix/src/word.py:372(parseOrthoSyll)
+  4772971    1.272    0.000    1.272    0.000 {method 'split' of 'str' objects}
+   375318    0.288    0.000    0.854    0.000 /home/jfsp/stenalgo-fix/src/word.py:311(fix_glide_low_vowel_syllable_break)
+  2073091    0.607    0.000    0.792    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/enum.py:187(__get__)
+   407885    0.724    0.000    0.761    0.000 {built-in method builtins.next}
+  1070989    0.462    0.000    0.738    0.000 /home/jfsp/stenalgo-fix/src/word.py:381(<lambda>)
+  1070901    0.436    0.000    0.726    0.000 /home/jfsp/stenalgo-fix/src/word.py:376(<lambda>)
+
+
+===== sort by tottime =====
+Tue Sep 29 18:27:29 2026    scratch/profiles2/generateMissingNomAdjForms.pstats
+
+         29281599 function calls (29280436 primitive calls) in 18.428 seconds
+
+   Ordered by: internal time
+   List reduced from 708 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+   375318    2.443    0.000    9.624    0.000 /home/jfsp/stenalgo-fix/src/word.py:85(__post_init__)
+        2    1.528    0.764   13.569    6.784 /home/jfsp/stenalgo-fix/src/nomAdjParadigm.py:415(loadWords)
+  4772971    1.272    0.000    1.272    0.000 {method 'split' of 'str' objects}
+        1    1.190    1.190    2.845    2.845 /home/jfsp/stenalgo-fix/src/nomAdjParadigm.py:250(deriveNomAdjEndingTables)
+   375318    0.944    0.000    1.773    0.000 /home/jfsp/stenalgo-fix/src/word.py:379(parsePhonoSyll)
+   375318    0.920    0.000    1.743    0.000 /home/jfsp/stenalgo-fix/src/word.py:372(parseOrthoSyll)
+   373058    0.920    0.000    1.886    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/csv.py:173(__next__)
+        1    0.839    0.839    7.295    7.295 /home/jfsp/stenalgo-fix/src/nomAdjParadigm.py:392(loadAllOrthosByLemme)
+   407885    0.724    0.000    0.761    0.000 {built-in method builtins.next}
+  2073091    0.607    0.000    0.792    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/enum.py:187(__get__)
+  1070989    0.462    0.000    0.738    0.000 /home/jfsp/stenalgo-fix/src/word.py:381(<lambda>)
+   235280    0.447    0.000    0.659    0.000 /home/jfsp/stenalgo-fix/src/word.py:109(splitInfoVerb)
+  1070901    0.436    0.000    0.726    0.000 /home/jfsp/stenalgo-fix/src/word.py:376(<lambda>)
+  2431937    0.383    0.000    0.383    0.000 {method 'append' of 'list' objects}
+   416672    0.375    0.000    0.502    0.000 /home/jfsp/stenalgo-fix/src/nomAdjParadigm.py:219(_commonPrefixLen)
+        2    0.298    0.149    0.298    0.149 /home/jfsp/stenalgo-fix/src/nomAdjParadigm.py:100(attestedSlots)
+   375318    0.288    0.000    0.854    0.000 /home/jfsp/stenalgo-fix/src/word.py:311(fix_glide_low_vowel_syllable_break)
+   375318    0.273    0.000    0.410    0.000 /home/jfsp/stenalgo-fix/src/word.py:262(fix_ayer_conditionnel_onset_glide)
+2186481/2186454    0.253    0.000    0.253    0.000 {built-in method builtins.len}
+   376349    0.252    0.000    0.252    0.000 {method 'join' of 'str' objects}
+
+

@@ -1,0 +1,7 @@
+[timing] util.build_disambiguated_theory: unpickle Dictionary + PhoneticTheory: 4.0 s
+[timing] util.build_disambiguated_theory: buildDisambiguatedTheory: 28.0 s
+[timing] util.build_disambiguated_theory: writeDisambiguatedTheoryPickle: 1.7 s
+[timing] util.build_disambiguated_theory: writeDisambiguatedTheory (disambiguated_theory.tsv): 5.9 s
+
+Wrote disambiguated_theory.tsv: 171465 words with disambiguated-theory (Phase P + */# track) strokes.
+Final-stroke collisions: 0 cross-lemma, 0 same-lemma residual (Realization Phase), 0 reform doublet (R2, exempted).
