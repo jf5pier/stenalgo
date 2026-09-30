@@ -101737,7 +101737,7 @@ rebaptiser	R°batize	rebaptiser	VER	VER			inf;	R_°|b_a_#|t_i|z_e	r_e|b_a_p|t_i|
 rebaptisé	R°batize	rebaptiser	VER	VER	m	s	par:pas;	R_°|b_a_#|t_i|z_e	r_e|b_a_p|t_i|s_é	0.34	0.18
 rebaptisée	R°batize	rebaptiser	VER	VER	f	s	par:pas;	R_°|b_a_#|t_i|z_e_#	r_e|b_a_p|t_i|s_é_e	0.27	0.22
 rebaptisées	R°batize	rebaptiser	VER	VER	f	p	par:pas;	R_°|b_a_#|t_i|z_e_#	r_e|b_a_p|t_i|s_é_es	0.07	0.0
-rebarré	R2baRe	rebarré	ADJ	ADJ	m	s		R_2|b_a|R_e	r_e|b_a|rr_é	0.2	0.0
+rebarré	R°baRe	rebarré	ADJ	ADJ	m	s		R_°|b_a|R_e	r_e|b_a|rr_é	0.2	0.0
 rebasculait	R°baskylE	rebasculer	VER	VER			ind:imp:3s;	R_°|b_a_s|k_y|l_E	r_e|b_a_s|c_u|l_ait	0.07	0.0
 rebascule	R°baskyl	rebasculer	VER	VER			ind:pre:1s;ind:pre:3s;	R_°|b_a_s|k_y_l_#	r_e|b_a_s|c_u_l_e	0.07	0.01
 rebasculera	R°baskyl°Ra	rebasculer	VER	VER			ind:fut:3s;	R_°|b_a_s|k_y|l_°|R_a	r_e|b_a_s|c_u|l_e|r_a	0.07	0.0
@@ -101756,9 +101756,9 @@ rebattues	R°baty	rebattre	VER	VER,ADJ	f	p	par:pas;	R_°|b_a|t_y_#	r_e|b_a|tt_u_
 rebattues	R°baty	rebattu	ADJ	VER,ADJ	f	p		R_°|b_a|t_y_#	r_e|b_a|tt_u_es	0.07	0.0
 rebattus	R°baty	rebattre	VER	VER,ADJ	m	p	par:pas;	R_°|b_a|t_y	r_e|b_a|tt_us	0.07	0.0
 rebattus	R°baty	rebattu	ADJ	VER,ADJ	m	p		R_°|b_a|t_y	r_e|b_a|tt_us	0.07	0.0
-rebec	R2bEk	rebec	NOM	NOM	m	s		R_2|b_E_k	r_e|b_e_c	0.0	0.01
-rebecter	R2bEkte	rebecter	VER	VER			inf;	R_2|b_E_k|t_e	r_e|b_e_c|t_er	0.2	0.0
-rebecté	R2bEkte	rebecter	VER	VER	m	s	par:pas;	R_2|b_E_k|t_e	r_e|b_e_c|t_é	0.2	0.0
+rebec	R°bEk	rebec	NOM	NOM	m	s		R_°|b_E_k	r_e|b_e_c	0.0	0.01
+rebecter	R°bEkte	rebecter	VER	VER			inf;	R_°|b_E_k|t_e	r_e|b_e_c|t_er	0.2	0.0
+rebecté	R°bEkte	rebecter	VER	VER	m	s	par:pas;	R_°|b_E_k|t_e	r_e|b_e_c|t_é	0.2	0.0
 rebella	R°bEla	rebeller	VER	VER			ind:pas:3s;	R_°|b_E|l_a	r_e|b_e|ll_a	0.07	0.02
 rebellaient	R°bElE	rebeller	VER	VER			ind:imp:3p;	R_°|b_E|l_E	r_e|b_e|ll_aient	0.07	0.03
 rebellais	R°bElE	rebeller	VER	VER			ind:imp:1s;ind:imp:2s;	R_°|b_E|l_E	r_e|b_e|ll_ais	0.07	0.04
@@ -101800,8 +101800,8 @@ rebiquée	R°bike	rebiquer	VER	VER	f	s	par:pas;	R_°|b_i|k_e_#	r_e|b_i|qu_é_e	0
 reblanchir	R°bl@SiR	reblanchir	VER	VER			inf;	R_°|b_l_@|S_i_R	r_e|b_l_an|ch_i_r	0.07	0.0
 reblochon	R°bloS§	reblochon	NOM	NOM	m	s		R_°|b_l_o|S_§	r_e|b_l_o|ch_on	0.14	0.02
 reblochons	R°bloS§	reblochon	NOM	NOM	m	p		R_°|b_l_o|S_§_#	r_e|b_l_o|ch_on_s	0.27	0.0
-rebloquer	R2blOke	rebloquer	VER	VER			inf;	R_2|b_l_O|k_e	r_e|b_l_o|qu_er	0.0	0.14
-rebobiner	R2bObine	rebobiner	VER	VER			inf;	R_2|b_O|b_i|n_e	r_e|b_o|b_i|n_er	0.0	0.01
+rebloquer	R°blOke	rebloquer	VER	VER			inf;	R_°|b_l_O|k_e	r_e|b_l_o|qu_er	0.0	0.14
+rebobiner	R°bObine	rebobiner	VER	VER			inf;	R_°|b_O|b_i|n_e	r_e|b_o|b_i|n_er	0.0	0.01
 reboire	R°bwaR	reboire	VER	VER			inf;	R_°|b_wa_R_#	r_e|b_oi_r_e	0.14	0.17
 rebois	R°bwa	reboire	VER	VER			ind:pre:1s;	R_°|b_wa_#	r_e|b_oi_s	0.07	0.0
 reboise	R°bwaz	reboiser	VER	VER			ind:pre:3s;	R_°|b_wa_z_#	r_e|b_oi_s_e	0.07	0.0
@@ -101835,10 +101835,10 @@ rebondissements	R°b§dis°m@	rebondissement	NOM	NOM	m	p		R_°|b_§|d_i|s_°|m_@
 rebondissent	R°b§dis	rebondir	VER	VER			ind:pre:3p;	R_°|b_§|d_i_s_#	r_e|b_on|d_i_ss_ent	0.54	0.17
 rebondit	R°b§di	rebondir	VER	VER			ind:pre:3s;ind:pas:3s;	R_°|b_§|d_i	r_e|b_on|d_it	3.31	0.65
 rebonds	R°b§	rebond	NOM	NOM	m	p		R_°|b_§_#	r_e|b_on_ds	0.07	0.07
-rebonjour	R2b§ZuR	rebonjour	NOM	NOM	m	s		R_2|b_§|Z_u_R	r_e|b_on|j_ou_r	0.0	0.02
+rebonjour	R°b§ZuR	rebonjour	NOM	NOM	m	s		R_°|b_§|Z_u_R	r_e|b_on|j_ou_r	0.0	0.02
 rebooter	R°bOOte	rebooter	VER	VER			inf;	R_°|b_O|O|t_e	r_e|b_o|o|t_er	0.0	0.04
 rebord	R°bOR	rebord	NOM	NOM	m	s		R_°|b_O_R_#	r_e|b_o_r_d	17.3	2.66
-reborder	R2bORde	reborder	VER	VER			inf;	R_2|b_O_R|d_e	r_e|b_o_r|d_er	0.0	0.01
+reborder	R°bORde	reborder	VER	VER			inf;	R_°|b_O_R|d_e	r_e|b_o_r|d_er	0.0	0.01
 rebords	R°bOR	rebord	NOM	NOM	m	p		R_°|b_O_R_#	r_e|b_o_r_ds	1.35	0.04
 rebordée	R°bORde	reborder	VER	VER	f	s	par:pas;	R_°|b_O_R|d_e_#	r_e|b_o_r|d_é_e	0.07	0.0
 reboucha	R°buSa	reboucher	VER	VER			ind:pas:3s;	R_°|b_u|S_a	r_e|b_ou|ch_a	0.2	0.0
@@ -101859,8 +101859,8 @@ reboucle	R°bukl	reboucler	VER	VER			imp:pre:2s;ind:pre:3s;	R_°|b_u_k_l_#	r_e|b
 reboucler	R°bukle	reboucler	VER	VER			inf;	R_°|b_u|k_l_e	r_e|b_ou|c_l_er	0.47	0.01
 rebouclé	R°bukle	reboucler	VER	VER	m	s	par:pas;	R_°|b_u|k_l_e	r_e|b_ou|c_l_é	0.14	0.0
 rebouclée	R°bukle	reboucler	VER	VER	f	s	par:pas;	R_°|b_u|k_l_e_#	r_e|b_ou|c_l_é_e	0.07	0.0
-reboule	R2bul	reboule	NOM	NOM	f	s		R_2|b_u_l_#	r_e|b_ou_l_e	0.0	0.27
-rebourrer	R2buRe	rebourrer	VER	VER			inf;	R_2|b_u|R_e	r_e|b_ou|rr_er	0.07	0.0
+reboule	R°bul	reboule	NOM	NOM	f	s		R_°|b_u_l_#	r_e|b_ou_l_e	0.0	0.27
+rebourrer	R°buRe	rebourrer	VER	VER			inf;	R_°|b_u|R_e	r_e|b_ou|rr_er	0.07	0.0
 rebours	R°buR	rebours	ADV	ADV				R_°|b_u_R_#	r_e|b_ou_r_s	2.91	3.52
 reboute	R°but	rebouter	VER	VER			ind:pre:1s;	R_°|b_u_t_#	r_e|b_ou_t_e	0.2	0.0
 rebouter	R°bute	rebouter	VER	VER			inf;	R_°|b_u|t_e	r_e|b_ou|t_er	0.07	0.14
@@ -101890,7 +101890,7 @@ rebranchée	R°bR@Se	rebrancher	VER	VER	f	s	par:pas;	R_°|b_R_@|S_e_#	r_e|b_r_an
 rebrodait	R°bRodE	rebroder	VER	VER			ind:imp:3s;	R_°|b_R_o|d_E	r_e|b_r_o|d_ait	0.07	0.0
 rebrodée	R°bRode	rebroder	VER	VER	f	s	par:pas;	R_°|b_R_o|d_e_#	r_e|b_r_o|d_é_e	0.07	0.0
 rebrodés	R°bRode	rebroder	VER	VER	m	p	par:pas;	R_°|b_R_o|d_e_#	r_e|b_r_o|d_é_s	0.07	0.0
-rebrosser	R2bROse	rebrosser	VER	VER			inf;	R_2|b_R_O|s_e	r_e|b_r_o|ss_er	0.0	0.02
+rebrosser	R°bROse	rebrosser	VER	VER			inf;	R_°|b_R_O|s_e	r_e|b_r_o|ss_er	0.0	0.02
 rebroussa	R°bRusa	rebrousser	VER	VER			ind:pas:3s;	R_°|b_R_u|s_a	r_e|b_r_ou|ss_a	1.08	0.01
 rebroussai	R°bRuse	rebrousser	VER	VER			ind:pas:1s;	R_°|b_R_u|s_e	r_e|b_r_ou|ss_ai	0.07	0.01
 rebroussaient	R°bRusE	rebrousser	VER	VER			ind:imp:3p;	R_°|b_R_u|s_E	r_e|b_r_ou|ss_aient	0.14	0.01
@@ -101950,7 +101950,7 @@ rebâtissant	R°batis@	rebâtir	VER	VER			par:pre;	R_°|b_a|t_i|s_@	r_e|b_â|t_i
 rebâtissent	R°batis	rebâtir	VER	VER			ind:pre:3p;	R_°|b_a|t_i_s_#	r_e|b_â|t_i_ss_ent	0.0	0.02
 rebâtissons	R°batis§	rebâtir	VER	VER			imp:pre:1p;	R_°|b_a|t_i|s_§	r_e|b_â|t_i|ss_ons	0.07	0.0
 rebâtit	R°bati	rebâtir	VER	VER			ind:pre:3s;ind:pas:3s;	R_°|b_a|t_i	r_e|b_â|t_it	0.2	0.05
-rebéquer	R2beke	rebéquer	VER	VER			inf;	R_2|b_e|k_e	r_e|b_é|qu_er	0.07	0.0
+rebéquer	R°beke	rebéquer	VER	VER			inf;	R_°|b_e|k_e	r_e|b_é|qu_er	0.07	0.0
 recache	R°kaS	recacher	VER	VER			ind:pre:1s;	R_°|k_a_S_#	r_e|c_a_ch_e	0.0	0.01
 recacher	R°kaSe	recacher	VER	VER			inf;	R_°|k_a|S_e	r_e|c_a|ch_er	0.07	0.01
 recacheter	R°kaS°te	recacheter	VER	VER			inf;	R_°|k_a|S_°|t_e	r_e|c_a|ch_e|t_er	0.07	0.0
@@ -101959,7 +101959,7 @@ recadre	R°kadR	recadrer	VER	VER			imp:pre:2s;ind:pre:1s;	R_°|k_a_d_R_#	r_e|c_a
 recadrer	R°kadRe	recadrer	VER	VER			inf;	R_°|k_a|d_R_e	r_e|c_a|d_r_er	0.14	0.2
 recadrez	R°kadRe	recadrer	VER	VER			imp:pre:2p;	R_°|k_a|d_R_e	r_e|c_a|d_r_ez	0.0	0.01
 recala	R°kala	recaler	VER	VER			ind:pas:3s;	R_°|k_a|l_a	r_e|c_a|l_a	0.07	0.0
-recalage	R2kalaZ	recalage	NOM	NOM	m	s		R_2|k_a|l_a_Z	r_e|c_a|l_a_ge	0.0	0.01
+recalage	R°kalaZ	recalage	NOM	NOM	m	s		R_°|k_a|l_a_Z	r_e|c_a|l_a_ge	0.0	0.01
 recalculant	R°kalkyl@	recalculer	VER	VER			par:pre;	R_°|k_a_l|k_y|l_@	r_e|c_a_l|c_u|l_ant	0.07	0.0
 recalcule	R°kalkyl	recalculer	VER	VER			ind:pre:3s;	R_°|k_a_l|k_y_l_#	r_e|c_a_l|c_u_l_e	0.0	0.01
 recalculer	R°kalkyle	recalculer	VER	VER			inf;	R_°|k_a_l|k_y|l_e	r_e|c_a_l|c_u|l_er	0.0	0.06
@@ -101975,10 +101975,10 @@ recalés	R°kale	recaler	VER	VER,ADJ	m	p	par:pas;	R_°|k_a|l_e_#	r_e|c_a|l_é_s	
 recalés	R°kale	recalé	ADJ	VER,ADJ	m	p		R_°|k_a|l_e_#	r_e|c_a|l_é_s	0.0	0.01
 recarreler	R°kaR°le	recarreler	VER	VER			inf;	R_°|k_a|R_°|l_e	r_e|c_a|rr_e|l_er	0.0	0.01
 recasa	R°kaza	recaser	VER	VER			ind:pas:3s;	R_°|k_a|z_a	r_e|c_a|s_a	0.07	0.0
-recasable	R2kazabl	recasable	ADJ	ADJ		s		R_2|k_a|z_a_b_l_#	r_e|c_a|s_a_b_l_e	0.07	0.0
+recasable	R°kazabl	recasable	ADJ	ADJ		s		R_°|k_a|z_a_b_l_#	r_e|c_a|s_a_b_l_e	0.07	0.0
 recaser	R°kaze	recaser	VER	VER			inf;	R_°|k_a|z_e	r_e|c_a|s_er	0.14	0.2
 recaserai	R°kaz°Re	recaser	VER	VER			ind:fut:1s;	R_°|k_a|z_°|R_e	r_e|c_a|s_e|r_ai	0.0	0.01
-recasser	R2kase	recasser	VER	VER			inf;	R_2|k_a|s_e	r_e|c_a|ss_er	0.0	0.14
+recasser	R°kase	recasser	VER	VER			inf;	R_°|k_a|s_e	r_e|c_a|ss_er	0.0	0.14
 recasses	R°kas	recasser	VER	VER			ind:pre:2s;	R_°|k_a_s_#	r_e|c_a_ss_es	0.0	0.02
 recassé	R°kase	recasser	VER	VER	m	s	par:pas;	R_°|k_a|s_e	r_e|c_a|ss_é	0.0	0.05
 recassée	R°kase	recasser	VER	VER	f	s	par:pas;	R_°|k_a|s_e_#	r_e|c_a|ss_é_e	0.07	0.01
@@ -102000,7 +102000,7 @@ recelés	R°s°le	receler	VER	VER	m	p	par:pas;	R_°|s_°|l_e_#	r_e|c_e|l_é_s	0.
 recensa	R°s@sa	recenser	VER	VER			ind:pas:3s;	R_°|s_@|s_a	r_e|c_en|s_a	0.2	0.0
 recensais	R°s@sE	recenser	VER	VER			ind:imp:1s;	R_°|s_@|s_E	r_e|c_en|s_ais	0.07	0.0
 recensait	R°s@sE	recenser	VER	VER			ind:imp:3s;	R_°|s_@|s_E	r_e|c_en|s_ait	0.07	0.0
-recensant	R2s@s@	recenser	VER	VER			par:pre;	R_2|s_@|s_@	r_e|c_en|s_ant	0.0	0.01
+recensant	R°s@s@	recenser	VER	VER			par:pre;	R_°|s_@|s_@	r_e|c_en|s_ant	0.0	0.01
 recense	R°s@s	recenser	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	R_°|s_@_s_#	r_e|c_en_s_e	0.34	0.22
 recensement	R°s@s°m@	recensement	NOM	NOM	m	s		R_°|s_@|s_°|m_@	r_e|c_en|s_e|m_ent	0.95	1.14
 recensements	R°s@s°m@	recensement	NOM	NOM	m	p		R_°|s_@|s_°|m_@_#	r_e|c_en|s_e|m_en_ts	0.14	0.03
@@ -102021,7 +102021,7 @@ recentré	R°s@tRe	recentrer	VER	VER	m	s	par:pas;	R_°|s_@|t_R_e	r_e|c_en|t_r_é
 recentrée	R°s@tRe	recentrer	VER	VER	f	s	par:pas;	R_°|s_@|t_R_e_#	r_e|c_en|t_r_é_e	0.07	0.0
 recette	R°sEt	recette	NOM	NOM	f	s		R_°|s_E_t_#	r_e|c_e_tt_e	6.89	9.56
 recettes	R°sEt	recette	NOM	NOM	f	p		R_°|s_E_t_#	r_e|c_e_tt_es	6.49	3.0
-recevabilité	R2s2vabilite	recevabilité	NOM	NOM	f	s		R_2|s_2|v_a|b_i|l_i|t_e	r_e|c_e|v_a|b_i|l_i|t_é	0.0	0.01
+recevabilité	R°s2vabilite	recevabilité	NOM	NOM	f	s		R_°|s_2|v_a|b_i|l_i|t_e	r_e|c_e|v_a|b_i|l_i|t_é	0.0	0.01
 recevable	R°s°vabl	recevable	ADJ	ADJ		s		R_°|s_°|v_a_b_l_#	r_e|c_e|v_a_b_l_e	0.14	0.78
 recevables	R°s°vabl	recevable	ADJ	ADJ	f	p		R_°|s_°|v_a_b_l_#	r_e|c_e|v_a_b_l_es	0.14	0.09
 recevaient	R°s°vE	recevoir	VER	VER			ind:imp:3p;	R_°|s_°|v_E	r_e|c_e|v_aient	4.93	0.32
@@ -102052,7 +102052,7 @@ rechampi	R°S@pi	rechampi	NOM	NOM	m	s		R_°|S_@|p_i	r_e|ch_am|p_i	0.07	0.0
 rechampis	R°S@pi	rechampir	VER	VER	m	p	par:pas;	R_°|S_@|p_i	r_e|ch_am|p_is	0.07	0.0
 rechampit	R°S@pi	rechampir	VER	VER			ind:pre:3s;	R_°|S_@|p_i	r_e|ch_am|p_it	0.07	0.0
 rechange	R°S@Z	rechange	NOM	NOM	m	s		R_°|S_@_Z	r_e|ch_an_ge	2.7	4.71
-rechanger	R2S@Ze	rechanger	VER	VER			inf;	R_2|S_@|Z_e	r_e|ch_an|g_er	0.0	0.1
+rechanger	R°S@Ze	rechanger	VER	VER			inf;	R_°|S_@|Z_e	r_e|ch_an|g_er	0.0	0.1
 rechanges	R°S@Z	rechange	NOM	NOM	m	p		R_°|S_@_Z_#	r_e|ch_an_g_es	0.07	0.02
 rechangé	R°S@Ze	rechanger	VER	VER	m	s	par:pas;	R_°|S_@|Z_e	r_e|ch_an|g_é	0.07	0.07
 rechanta	R°S@ta	rechanter	VER	VER			ind:pas:3s;	R_°|S_@|t_a	r_e|ch_an|t_a	0.07	0.0
@@ -102108,7 +102108,7 @@ recherches	R°SERS	rechercher	VER	NOM,VER			ind:pre:2s;sub:pre:2s;	R_°|S_E_R_S_
 recherchez	R°SERSe	rechercher	VER	VER			imp:pre:2p;ind:pre:2p;	R_°|S_E_R|S_e	r_e|ch_e_r|ch_ez	0.27	2.86
 recherchiez	R°SERSje	rechercher	VER	VER			ind:imp:2p;	R_°|S_E_R|S_j_e	r_e|ch_e_r|ch_i_ez	0.0	0.6
 recherchions	R°SERSj§	rechercher	VER	VER			ind:imp:1p;	R_°|S_E_R|S_j_§	r_e|ch_e_r|ch_i_ons	0.14	0.12
-recherchiste	R2SERSist	recherchiste	NOM	NOM		s		R_2|S_E_R|S_i_s_t_#	r_e|ch_e_r|ch_i_s_t_e	0.0	0.01
+recherchiste	R°SERSist	recherchiste	NOM	NOM		s		R_°|S_E_R|S_i_s_t_#	r_e|ch_e_r|ch_i_s_t_e	0.0	0.01
 recherchons	R°SERS§	rechercher	VER	VER			imp:pre:1p;ind:pre:1p;	R_°|S_E_R|S_§	r_e|ch_e_r|ch_ons	0.27	3.89
 recherché	R°SERSe	rechercher	VER	VER,ADJ	m	s	par:pas;	R_°|S_E_R|S_e	r_e|ch_e_r|ch_é	2.77	5.39
 recherché	R°SERSe	recherché	ADJ	VER,ADJ	m	s		R_°|S_E_R|S_e	r_e|ch_e_r|ch_é	1.01	1.77
@@ -102146,7 +102146,7 @@ reclassement	R°klas°m@	reclassement	NOM	NOM	m	s		R_°|k_l_a|s_°|m_@	r_e|c_l_a
 reclasser	R°klase	reclasser	VER	VER			inf;	R_°|k_l_a|s_e	r_e|c_l_a|ss_er	0.07	0.04
 reclassé	R°klase	reclasser	VER	VER	m	s	par:pas;	R_°|k_l_a|s_e	r_e|c_l_a|ss_é	0.0	0.03
 reclassée	R°klase	reclasser	VER	VER	f	s	par:pas;	R_°|k_l_a|s_e_#	r_e|c_l_a|ss_é_e	0.0	0.02
-reclouer	R2klue	reclouer	VER	VER			inf;	R_2|k_l_u|e	r_e|c_l_ou|er	0.0	0.01
+reclouer	R°klue	reclouer	VER	VER			inf;	R_°|k_l_u|e	r_e|c_l_ou|er	0.0	0.01
 reclure	R°klyR	reclure	VER	VER			inf;	R_°|k_l_y_R_#	r_e|c_l_u_r_e	0.07	0.0
 reclus	R°kly	reclus	ADJ	ADJ,NOM	m			R_°|k_l_y_#	r_e|c_l_u_s	0.81	0.37
 reclus	R°kly	reclus	NOM	ADJ,NOM	m			R_°|k_l_y_#	r_e|c_l_u_s	0.68	0.34
@@ -102155,7 +102155,7 @@ recluse	R°klyz	reclus	ADJ	ADJ,NOM	f	s		R_°|k_l_y_z_#	r_e|c_l_u_s_e	0.88	0.17
 recluses	R°klyz	reclus	ADJ	ADJ,NOM	f	p		R_°|k_l_y_z_#	r_e|c_l_u_s_es	0.07	0.01
 recluses	R°klyz	reclus	NOM	ADJ,NOM	f	p		R_°|k_l_y_z_#	r_e|c_l_u_s_es	0.14	0.01
 recodage	R°kodaZ	recodage	NOM	NOM	m	s		R_°|k_o|d_a_Z	r_e|c_o|d_a_ge	0.0	0.01
-recogner	R2kONe	recogner	VER	VER			inf;	R_2|k_O|N_e	r_e|c_o|gn_er	0.07	0.0
+recogner	R°kONe	recogner	VER	VER			inf;	R_°|k_O|N_e	r_e|c_o|gn_er	0.07	0.0
 recognition	R°kOgnisj§	recognition	NOM	NOM	f	s		R_°|k_O_g|n_i|s_j_§	r_e|c_o_g|n_i|t_i_on	0.07	0.0
 recoiffa	R°kwafa	recoiffer	VER	VER			ind:pas:3s;	R_°|k_wa|f_a	r_e|c_oi|ff_a	0.07	0.0
 recoiffai	R°kwafe	recoiffer	VER	VER			ind:pas:1s;	R_°|k_wa|f_e	r_e|c_oi|ff_ai	0.07	0.0
@@ -102182,12 +102182,12 @@ recollera	R°kOl°Ra	recoller	VER	VER			ind:fut:3s;	R_°|k_O|l_°|R_a	r_e|c_o|ll
 recollé	R°kole	recoller	VER	VER	m	s	par:pas;	R_°|k_o|l_e	r_e|c_o|ll_é	0.27	0.13
 recollée	R°kole	recoller	VER	VER	f	s	par:pas;	R_°|k_o|l_e_#	r_e|c_o|ll_é_e	0.2	0.16
 recollés	R°kole	recoller	VER	VER	m	p	par:pas;	R_°|k_o|l_e_#	r_e|c_o|ll_é_s	0.2	0.0
-recoloration	R2kOlORasj§	recoloration	NOM	NOM	f	s		R_2|k_O|l_O|R_a|s_j_§	r_e|c_o|l_o|r_a|t_i_on	0.0	0.08
+recoloration	R°kOlORasj§	recoloration	NOM	NOM	f	s		R_°|k_O|l_O|R_a|s_j_§	r_e|c_o|l_o|r_a|t_i_on	0.0	0.08
 recombinaison	R°k§binEz§	recombinaison	NOM	NOM	f	s		R_°|k_§|b_i|n_E|z_§	r_e|c_om|b_i|n_ai|s_on	0.0	0.06
-recombinant	R2k§bin@	recombinant	ADJ	ADJ,VER	m	s		R_2|k_§|b_i|n_@	r_e|c_om|b_i|n_ant	0.0	0.01
-recombinant	R2k§bin@	recombiner	VER	ADJ,VER			par:pre;	R_2|k_§|b_i|n_@	r_e|c_om|b_i|n_ant	0.0	0.01
-recombiner	R2k§bine	recombiner	VER	VER			inf;	R_2|k_§|b_i|n_e	r_e|c_om|b_i|n_er	0.0	0.04
-recombiné	R2k§bine	recombiner	VER	VER	m	s	par:pas;	R_2|k_§|b_i|n_e	r_e|c_om|b_i|n_é	0.0	0.05
+recombinant	R°k§bin@	recombinant	ADJ	ADJ,VER	m	s		R_°|k_§|b_i|n_@	r_e|c_om|b_i|n_ant	0.0	0.01
+recombinant	R°k§bin@	recombiner	VER	ADJ,VER			par:pre;	R_°|k_§|b_i|n_@	r_e|c_om|b_i|n_ant	0.0	0.01
+recombiner	R°k§bine	recombiner	VER	VER			inf;	R_°|k_§|b_i|n_e	r_e|c_om|b_i|n_er	0.0	0.04
+recombiné	R°k§bine	recombiner	VER	VER	m	s	par:pas;	R_°|k_§|b_i|n_e	r_e|c_om|b_i|n_é	0.0	0.05
 recommanda	R°kom@da	recommander	VER	VER			ind:pas:3s;	R_°|k_o|m_@|d_a	r_e|c_o|mm_an|d_a	2.3	0.0
 recommandable	R°kom@dabl	recommandable	ADJ	ADJ		s		R_°|k_o|m_@|d_a_b_l_#	r_e|c_o|mm_an|d_a_b_l_e	0.68	0.32
 recommandables	R°kom@dabl	recommandable	ADJ	ADJ		p		R_°|k_o|m_@|d_a_b_l_#	r_e|c_o|mm_an|d_a_b_l_es	0.0	0.11
@@ -102254,9 +102254,9 @@ recommençait	R°kom@sE	recommencer	VER	VER			ind:imp:3s;	R_°|k_o|m_@|s_E	r_e|c
 recommençant	R°kom@s@	recommencer	VER	VER			par:pre;	R_°|k_o|m_@|s_@	r_e|c_o|mm_en|ç_ant	0.95	0.03
 recommençons	R°kom@s§	recommencer	VER	VER			imp:pre:1p;ind:pre:1p;	R_°|k_o|m_@|s_§	r_e|c_o|mm_en|ç_ons	0.74	2.39
 recommençâmes	R°kom@sam	recommencer	VER	VER			ind:pas:1p;	R_°|k_o|m_@|s_a_m_#	r_e|c_o|mm_en|ç_â_m_es	0.2	0.02
-recommercer	R2kOmERse	recommercer	VER	VER			inf;	R_2|k_O|m_E_R|s_e	r_e|c_o|mm_e_r|c_er	0.07	0.0
-recompléter	R2k§plete	recompléter	VER	VER			inf;	R_2|k_§|p_l_e|t_e	r_e|c_om|p_l_é|t_er	0.07	0.0
-recomplété	R2k§plete	recompléter	VER	VER	m	s	par:pas;	R_2|k_§|p_l_e|t_e	r_e|c_om|p_l_é|t_é	0.07	0.0
+recommercer	R°kOmERse	recommercer	VER	VER			inf;	R_°|k_O|m_E_R|s_e	r_e|c_o|mm_e_r|c_er	0.07	0.0
+recompléter	R°k§plete	recompléter	VER	VER			inf;	R_°|k_§|p_l_e|t_e	r_e|c_om|p_l_é|t_er	0.07	0.0
+recomplété	R°k§plete	recompléter	VER	VER	m	s	par:pas;	R_°|k_§|p_l_e|t_e	r_e|c_om|p_l_é|t_é	0.07	0.0
 recomposa	R°k§poza	recomposer	VER	VER			ind:pas:3s;	R_°|k_§|p_o|z_a	r_e|c_om|p_o|s_a	0.34	0.0
 recomposaient	R°k§pozE	recomposer	VER	VER			ind:imp:3p;	R_°|k_§|p_o|z_E	r_e|c_om|p_o|s_aient	0.14	0.0
 recomposais	R°k§pozE	recomposer	VER	VER			ind:imp:1s;	R_°|k_§|p_o|z_E	r_e|c_om|p_o|s_ais	0.07	0.0
@@ -102268,7 +102268,7 @@ recomposera	R°k§poz°Ra	recomposer	VER	VER			ind:fut:3s;	R_°|k_§|p_o|z_°|R_
 recomposition	R°k§pozisj§	recomposition	NOM	NOM	f	s		R_°|k_§|p_o|z_i|s_j_§	r_e|c_om|p_o|s_i|t_i_on	0.07	0.0
 recomposèrent	R°k§pozER	recomposer	VER	VER			ind:pas:3p;	R_°|k_§|p_o|z_E_R_#	r_e|c_om|p_o|s_è_r_ent	0.14	0.0
 recomposé	R°k§poze	recomposer	VER	VER	m	s	par:pas;	R_°|k_§|p_o|z_e	r_e|c_om|p_o|s_é	0.2	0.03
-recomposée	R2k§poze	recomposer	VER	VER	f	s	par:pas;	R_2|k_§|p_o|z_e_#	r_e|c_om|p_o|s_é_e	0.0	0.01
+recomposée	R°k§poze	recomposer	VER	VER	f	s	par:pas;	R_°|k_§|p_o|z_e_#	r_e|c_om|p_o|s_é_e	0.0	0.01
 recomposés	R°k§poze	recomposer	VER	VER	m	p	par:pas;	R_°|k_§|p_o|z_e_#	r_e|c_om|p_o|s_é_s	0.14	0.01
 recompta	R°k§ta	recompter	VER	VER			ind:pas:3s;	R_°|k_§_#|t_a	r_e|c_om_p|t_a	0.2	0.0
 recomptaient	R°k§tE	recompter	VER	VER			ind:imp:3p;	R_°|k_§_#|t_E	r_e|c_om_p|t_aient	0.07	0.0
@@ -102375,7 +102375,7 @@ reconquise	R°k§kiz	reconquis	ADJ	ADJ,VER	f	s		R_°|k_§|k_i_z_#	r_e|c_on|qu_i_
 reconquise	R°k§kiz	reconquérir	VER	ADJ,VER	f	s	par:pas;	R_°|k_§|k_i_z_#	r_e|c_on|qu_i_s_e	0.27	0.01
 reconquises	R°k§kiz	reconquis	ADJ	ADJ,VER	f	p		R_°|k_§|k_i_z_#	r_e|c_on|qu_i_s_es	0.14	0.0
 reconquises	R°k§kiz	reconquérir	VER	ADJ,VER	f	p	par:pas;	R_°|k_§|k_i_z_#	r_e|c_on|qu_i_s_es	0.07	0.0
-reconquista	R2k§kista	reconquista	NOM	NOM	f	s		R_2|k_§|k_i_s|t_a	r_e|c_on|qu_i_s|t_a	0.07	0.0
+reconquista	R°k§kista	reconquista	NOM	NOM	f	s		R_°|k_§|k_i_s|t_a	r_e|c_on|qu_i_s|t_a	0.07	0.0
 reconquit	R°k§ki	reconquérir	VER	VER			ind:pas:3s;	R_°|k_§|k_i	r_e|c_on|qu_it	0.07	0.0
 reconquière	R°k§kjER	reconquérir	VER	VER			sub:pre:3s;	R_°|k_§|k_j_E_R_#	r_e|c_on|qu_i_è_r_e	0.07	0.01
 reconquérais	R°k§keRE	reconquérir	VER	VER			ind:imp:1s;	R_°|k_§|k_e|R_E	r_e|c_on|qu_é|r_ais	0.07	0.0
@@ -102418,7 +102418,7 @@ reconstitué	R°k§stit8e	reconstituer	VER	VER	m	s	par:pas;	R_°|k_§_s|t_i|t_8_
 reconstituée	R°k§stit8e	reconstituer	VER	VER	f	s	par:pas;	R_°|k_§_s|t_i|t_8_e_#	r_e|c_on_s|t_i|t_u_é_e	1.01	0.05
 reconstituées	R°k§stit8e	reconstituer	VER	VER	f	p	par:pas;	R_°|k_§_s|t_i|t_8_e_#	r_e|c_on_s|t_i|t_u_é_es	0.14	0.16
 reconstitués	R°k§stit8e	reconstituer	VER	VER	m	p	par:pas;	R_°|k_§_s|t_i|t_8_e_#	r_e|c_on_s|t_i|t_u_é_s	0.81	0.02
-reconstructeur	R2k§stRykt9R	reconstructeur	NOM	NOM	m	s		R_2|k_§_s|t_R_y_k|t_9_R	r_e|c_on_s|t_r_u_c|t_eu_r	0.0	0.01
+reconstructeur	R°k§stRykt9R	reconstructeur	NOM	NOM	m	s		R_°|k_§_s|t_R_y_k|t_9_R	r_e|c_on_s|t_r_u_c|t_eu_r	0.0	0.01
 reconstruction	R°k§stRyksj§	reconstruction	NOM	NOM	f	s		R_°|k_§_s|t_R_y_k|s_j_§	r_e|c_on_s|t_r_u_c|t_i_on	4.12	2.07
 reconstructions	R°k§stRyksj§	reconstruction	NOM	NOM	f	p		R_°|k_§_s|t_R_y_k|s_j_§_#	r_e|c_on_s|t_r_u_c|t_i_on_s	0.07	0.17
 reconstructrice	R°k§stRyktRis	reconstructeur	ADJ	ADJ	f	s		R_°|k_§_s|t_R_y_k|t_R_i_s_#	r_e|c_on_s|t_r_u_c|t_r_i_c_e	0.0	0.04
@@ -102442,10 +102442,10 @@ reconstruit	R°k§stR8i	reconstruire	VER	VER	m	s	ind:pre:3s;par:pas;	R_°|k_§_s
 reconstruite	R°k§stR8it	reconstruire	VER	VER	f	s	par:pas;	R_°|k_§_s|t_R_8_i_t_#	r_e|c_on_s|t_r_u_i_t_e	1.15	0.29
 reconstruites	R°k§stR8it	reconstruire	VER	VER	f	p	par:pas;	R_°|k_§_s|t_R_8_i_t_#	r_e|c_on_s|t_r_u_i_t_es	0.27	0.06
 reconstruits	R°k§stR8i	reconstruire	VER	VER	m	p	par:pas;	R_°|k_§_s|t_R_8_i_#	r_e|c_on_s|t_r_u_i_ts	0.14	0.06
-reconsulter	R2k§sylte	reconsulter	VER	VER			inf;	R_2|k_§|s_y_l|t_e	r_e|c_on|s_u_l|t_er	0.0	0.01
-recontacter	R2k§takte	recontacter	VER	VER			inf;	R_2|k_§|t_a_k|t_e	r_e|c_on|t_a_c|t_er	0.07	0.27
-reconter	R2k§te	reconter	VER	VER			inf;	R_2|k_§|t_e	r_e|c_on|t_er	0.07	0.0
-recontrer	R2k§tRe	recontrer	VER	VER			inf;	R_2|k_§|t_R_e	r_e|c_on|t_r_er	0.0	0.2
+reconsulter	R°k§sylte	reconsulter	VER	VER			inf;	R_°|k_§|s_y_l|t_e	r_e|c_on|s_u_l|t_er	0.0	0.01
+recontacter	R°k§takte	recontacter	VER	VER			inf;	R_°|k_§|t_a_k|t_e	r_e|c_on|t_a_c|t_er	0.07	0.27
+reconter	R°k§te	reconter	VER	VER			inf;	R_°|k_§|t_e	r_e|c_on|t_er	0.07	0.0
+recontrer	R°k§tRe	recontrer	VER	VER			inf;	R_°|k_§|t_R_e	r_e|c_on|t_r_er	0.0	0.2
 reconventionnelle	R°k§v@sjonEl	reconventionnel	ADJ	ADJ	f	s		R_°|k_§|v_@|s_j_o|n_E_l_#	r_e|c_on|v_en|t_i_o|nn_e_ll_e	0.0	0.01
 reconversion	R°k§vERsj§	reconversion	NOM	NOM	f	s		R_°|k_§|v_E_R|s_j_§	r_e|c_on|v_e_r|s_i_on	0.74	0.36
 reconverti	R°k§vERti	reconvertir	VER	VER	m	s	par:pas;	R_°|k_§|v_E_R|t_i	r_e|c_on|v_e_r|t_i	0.68	0.13
@@ -102456,7 +102456,7 @@ reconvertis	R°k§vERti	reconvertir	VER	VER	m	p	imp:pre:2s;ind:pre:2s;ind:pas:2s
 reconvertissant	R°k§vERtis@	reconvertir	VER	VER			par:pre;	R_°|k_§|v_E_R|t_i|s_@	r_e|c_on|v_e_r|t_i|ss_ant	0.07	0.0
 reconvertisse	R°k§vERtis	reconvertir	VER	VER			sub:pre:1s;	R_°|k_§|v_E_R|t_i_s_#	r_e|c_on|v_e_r|t_i_ss_e	0.07	0.0
 reconvertit	R°k§vERti	reconvertir	VER	VER			ind:pre:3s;ind:pas:3s;	R_°|k_§|v_E_R|t_i	r_e|c_on|v_e_r|t_it	0.14	0.02
-reconvoquer	R2k§vOke	reconvoquer	VER	VER			inf;	R_2|k_§|v_O|k_e	r_e|c_on|v_o|qu_er	0.0	0.02
+reconvoquer	R°k§vOke	reconvoquer	VER	VER			inf;	R_°|k_§|v_O|k_e	r_e|c_on|v_o|qu_er	0.0	0.02
 recopia	R°kopja	recopier	VER	VER			ind:pas:3s;	R_°|k_o|p_j_a	r_e|c_o|p_i_a	0.27	0.0
 recopiage	R°kopjaZ	recopiage	NOM	NOM	m	s		R_°|k_o|p_j_a_Z	r_e|c_o|p_i_a_ge	0.07	0.0
 recopiai	R°kopje	recopier	VER	VER			ind:pas:1s;	R_°|k_o|p_j_e	r_e|c_o|p_i_ai	0.14	0.0
@@ -102476,7 +102476,7 @@ recopiée	R°kopje	recopier	VER	VER	f	s	par:pas;	R_°|k_o|p_j_e_#	r_e|c_o|p_i_é
 recopiées	R°kopje	recopier	VER	VER	f	p	par:pas;	R_°|k_o|p_j_e_#	r_e|c_o|p_i_é_es	0.41	0.23
 recopiés	R°kopje	recopier	VER	VER	m	p	par:pas;	R_°|k_o|p_j_e_#	r_e|c_o|p_i_é_s	0.47	0.03
 record	R°kOR	record	NOM	NOM	m	s		R_°|k_O_R_#	r_e|c_o_r_d	3.11	10.14
-recorder	R2kORde	recorder	VER	VER			inf;	R_2|k_O_R|d_e	r_e|c_o_r|d_er	0.0	0.03
+recorder	R°kORde	recorder	VER	VER			inf;	R_°|k_O_R|d_e	r_e|c_o_r|d_er	0.0	0.03
 recordman	R°kORdman	recordman	NOM	NOM	m	s		R_°|k_O_R|d_m_a_n	r_e|c_o_r|d_m_a_n	0.14	0.04
 recordmen	R°kORdmEn	recordman	NOM	NOM	m	p		R_°|k_O_R|d_m_E_n	r_e|c_o_r|d_m_e_n	0.07	0.0
 records	R°kOR	record	NOM	NOM	m	p		R_°|k_O_R_#	r_e|c_o_r_ds	2.84	3.2
@@ -102600,7 +102600,7 @@ recracha	R°kRaSa	recracher	VER	VER			ind:pas:3s;	R_°|k_R_a|S_a	r_e|c_r_a|ch_a	
 recrachaient	R°kRaSE	recracher	VER	VER			ind:imp:3p;	R_°|k_R_a|S_E	r_e|c_r_a|ch_aient	0.14	0.01
 recrachais	R°kRaSE	recracher	VER	VER			ind:imp:1s;	R_°|k_R_a|S_E	r_e|c_r_a|ch_ais	0.07	0.01
 recrachait	R°kRaSE	recracher	VER	VER			ind:imp:3s;	R_°|k_R_a|S_E	r_e|c_r_a|ch_ait	0.2	0.03
-recrachant	R2kRaS@	recracher	VER	VER			par:pre;	R_2|k_R_a|S_@	r_e|c_r_a|ch_ant	0.0	0.01
+recrachant	R°kRaS@	recracher	VER	VER			par:pre;	R_°|k_R_a|S_@	r_e|c_r_a|ch_ant	0.0	0.01
 recrache	R°kRaS	recracher	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	R_°|k_R_a_S_#	r_e|c_r_a_ch_e	0.41	0.61
 recrachent	R°kRaS	recracher	VER	VER			ind:pre:3p;	R_°|k_R_a_S_#	r_e|c_r_a_ch_ent	0.07	0.06
 recracher	R°kRaSe	recracher	VER	VER			inf;	R_°|k_R_a|S_e	r_e|c_r_a|ch_er	0.34	0.66
@@ -102626,7 +102626,7 @@ recroquevillais	R°kROkvijE	recroqueviller	VER	VER			ind:imp:1s;	R_°|k_R_O_k_#|
 recroquevillait	R°kROkvijE	recroqueviller	VER	VER			ind:imp:3s;	R_°|k_R_O_k_#|v_i|j_E	r_e|c_r_o_qu_e|v_i|ll_ait	0.74	0.0
 recroquevillant	R°kROkvij@	recroqueviller	VER	VER			par:pre;	R_°|k_R_O_k_#|v_i|j_@	r_e|c_r_o_qu_e|v_i|ll_ant	0.2	0.0
 recroqueville	R°kROkvij	recroqueviller	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	R_°|k_R_O_k_#|v_i_j_#	r_e|c_r_o_qu_e|v_i_ll_e	1.49	0.03
-recroquevillement	R2kROkvij°m@	recroquevillement	NOM	NOM	m	s		R_2|k_R_O_k_#|v_i|j_°|m_@	r_e|c_r_o_qu_e|v_i|ll_e|m_ent	0.14	0.0
+recroquevillement	R°kROkvij°m@	recroquevillement	NOM	NOM	m	s		R_°|k_R_O_k_#|v_i|j_°|m_@	r_e|c_r_o_qu_e|v_i|ll_e|m_ent	0.14	0.0
 recroquevillent	R°kROkvij	recroqueviller	VER	VER			ind:pre:3p;	R_°|k_R_O_k_#|v_i_j_#	r_e|c_r_o_qu_e|v_i_ll_ent	0.61	0.01
 recroqueviller	R°kROkvje	recroqueviller	VER	VER			inf;	R_°|k_R_O_k_#|v_j_e	r_e|c_r_o_qu_e|v_ill_er	1.22	0.03
 recroquevillions	R°kROkvijj§	recroqueviller	VER	VER			ind:imp:1p;	R_°|k_R_O_k_#|v_i_j|j_§	r_e|c_r_o_qu_e|v_i_ll|i_ons	0.14	0.0
@@ -102638,10 +102638,10 @@ recroquevillées	R°kROkvije	recroqueviller	VER	VER,ADJ	f	p	par:pas;	R_°|k_R_O_
 recroquevillées	R°kROkvije	recroquevillé	ADJ	VER,ADJ	f	p		R_°|k_R_O_k_#|v_i|j_e_#	r_e|c_r_o_qu_e|v_i|ll_é_es	0.61	0.0
 recroquevillés	R°kROkvije	recroquevillé	ADJ	VER,ADJ	m	p		R_°|k_R_O_k_#|v_i|j_e_#	r_e|c_r_o_qu_e|v_i|ll_é_s	0.41	0.1
 recroquevillés	R°kROkvije	recroqueviller	VER	VER,ADJ	m	p	par:pas;	R_°|k_R_O_k_#|v_i|j_e_#	r_e|c_r_o_qu_e|v_i|ll_é_s	1.15	0.0
-recru	R2kRy	recroître	VER	VER,ADJ	m	s	par:pas;	R_2|k_R_y	r_e|c_r_u	0.34	0.0
-recru	R2kRy	recru	ADJ	VER,ADJ	m	s		R_2|k_R_y	r_e|c_r_u	0.07	0.0
+recru	R°kRy	recroître	VER	VER,ADJ	m	s	par:pas;	R_°|k_R_y	r_e|c_r_u	0.34	0.0
+recru	R°kRy	recru	ADJ	VER,ADJ	m	s		R_°|k_R_y	r_e|c_r_u	0.07	0.0
 recrudescence	R°kRydes@s	recrudescence	NOM	NOM	f	s		R_°|k_R_y|d_e|s_@_s_#	r_e|c_r_u|d_e|sc_en_c_e	0.81	0.21
-recrudescente	R2kRydes@t	recrudescent	ADJ	ADJ	f	s		R_2|k_R_y|d_e|s_@_t_#	r_e|c_r_u|d_e|sc_en_t_e	0.0	0.01
+recrudescente	R°kRydes@t	recrudescent	ADJ	ADJ	f	s		R_°|k_R_y|d_e|s_@_t_#	r_e|c_r_u|d_e|sc_en_t_e	0.0	0.01
 recrue	R°kRy	recrue	NOM	ADJ,NOM	f	s		R_°|k_R_y_#	r_e|c_r_u_e	1.35	1.73
 recrue	R°kRy	recru	ADJ	ADJ,NOM	f	s		R_°|k_R_y_#	r_e|c_r_u_e	0.2	0.14
 recrues	R°kRy	recrue	NOM	ADJ,NOM	f	p		R_°|k_R_y_#	r_e|c_r_u_es	2.5	2.87
@@ -102763,7 +102763,7 @@ recueillit	R°k9ji	recueillir	VER	VER			ind:pas:3s;	R_°|k_9|j_i	r_e|c_ue|ill_it
 recueillons	R°k9j§	recueillir	VER	VER			imp:pre:1p;ind:pre:1p;	R_°|k_9|j_§	r_e|c_ue|ill_ons	0.07	0.38
 recueils	R°k9j	recueil	NOM	NOM	m	p		R_°|k_9_j_#	r_e|c_ue_il_s	0.81	0.19
 recuire	R°k8iR	recuire	VER	VER			inf;	R_°|k_8_i_R_#	r_e|c_u_i_r_e	0.07	0.02
-recuisson	R2k8is§	recuisson	NOM	NOM	f	s		R_2|k_8_i|s_§	r_e|c_u_i|ss_on	0.07	0.0
+recuisson	R°k8is§	recuisson	NOM	NOM	f	s		R_°|k_8_i|s_§	r_e|c_u_i|ss_on	0.07	0.0
 recuit	R°k8i	recuit	ADJ	VER,ADJ	m	s		R_°|k_8_i_#	r_e|c_u_i_t	0.54	0.03
 recuit	R°k8i	recuire	VER	VER,ADJ	m	s	par:pas;	R_°|k_8_i_#	r_e|c_u_i_t	0.2	0.0
 recuite	R°k8it	recuire	VER	VER,ADJ	f	s	par:pas;	R_°|k_8_i_t_#	r_e|c_u_i_t_e	0.14	0.0
@@ -102826,7 +102826,7 @@ recyclé	R°sikle	recycler	VER	VER	m	s	par:pas;	R_°|s_i|k_l_e	r_e|c_y|c_l_é	0.
 recyclée	R°sikle	recycler	VER	VER	f	s	par:pas;	R_°|s_i|k_l_e_#	r_e|c_y|c_l_é_e	0.14	0.1
 recyclées	R°sikle	recycler	VER	VER	f	p	par:pas;	R_°|s_i|k_l_e_#	r_e|c_y|c_l_é_es	0.0	0.03
 recyclés	R°sikle	recycler	VER	VER	m	p	par:pas;	R_°|s_i|k_l_e_#	r_e|c_y|c_l_é_s	0.07	0.06
-recâbler	R2kable	recâbler	VER	VER			inf;	R_2|k_a|b_l_e	r_e|c_â|b_l_er	0.0	0.03
+recâbler	R°kable	recâbler	VER	VER			inf;	R_°|k_a|b_l_e	r_e|c_â|b_l_er	0.0	0.03
 recèle	R°sEl	receler	VER	VER			ind:pre:1s;ind:pre:3s;	R_°|s_E_l_#	r_e|c_è_l_e	0.95	0.58
 recèlent	R°sEl	receler	VER	VER			ind:pre:3p;	R_°|s_E_l_#	r_e|c_è_l_ent	0.68	0.31
 recèles	R°sEl	receler	VER	VER			ind:pre:2s;	R_°|s_E_l_#	r_e|c_è_l_es	0.0	0.01
@@ -102835,7 +102835,7 @@ recélait	R°selE	recéler	VER	VER			ind:imp:3s;	R_°|s_e|l_E	r_e|c_é|l_ait	0.3
 recélant	R°sel@	recéler	VER	VER			par:pre;	R_°|s_e|l_@	r_e|c_é|l_ant	0.07	0.0
 recéler	R°sele	recéler	VER	VER			inf;	R_°|s_e|l_e	r_e|c_é|l_er	0.14	0.0
 recépages	R°sepaZ	recépage	NOM	NOM	m	p		R_°|s_e|p_a_Z_#	r_e|c_é|p_a_g_es	0.07	0.0
-redan	R2d@	redan	NOM	NOM	m	s		R_2|d_@	r_e|d_an	0.27	0.0
+redan	R°d@	redan	NOM	NOM	m	s		R_°|d_@	r_e|d_an	0.27	0.0
 reddition	REdisj§	reddition	NOM	NOM	f	s		R_E|d_i|s_j_§	r_e|dd_i|t_i_on	3.24	2.21
 redemanda	R°d°m@da	redemander	VER	VER			ind:pas:3s;	R_°|d_°|m_@|d_a	r_e|d_e|m_an|d_a	0.61	0.0
 redemandai	R°d°m@de	redemander	VER	VER			ind:pas:1s;	R_°|d_°|m_@|d_e	r_e|d_e|m_an|d_ai	0.0	0.14
@@ -102928,7 +102928,7 @@ redevient	R°d°vj5	redevenir	VER	VER			ind:pre:3s;	R_°|d_°|v_j_5_#	r_e|d_e|v_
 redevinrent	R°d°v5R	redevenir	VER	VER			ind:pas:3p;	R_°|d_°|v_5_R_#	r_e|d_e|v_in_r_ent	0.2	0.01
 redevins	R°d°v5	redevenir	VER	VER			ind:pas:1s;	R_°|d_°|v_5	r_e|d_e|v_ins	0.2	0.0
 redevint	R°d°v5	redevenir	VER	VER			ind:pas:3s;	R_°|d_°|v_5	r_e|d_e|v_int	3.65	0.23
-redevoir	R2d2vwaR	redevoir	VER	VER			inf;	R_2|d_2|v_wa_R	r_e|d_e|v_oi_r	0.0	0.01
+redevoir	R°d2vwaR	redevoir	VER	VER			inf;	R_°|d_2|v_wa_R	r_e|d_e|v_oi_r	0.0	0.01
 redevra	R°d°vRa	redevoir	VER	VER			ind:fut:3s;	R_°|d_°|v_R_a	r_e|d_e|v_r_a	0.07	0.0
 redevrez	R°d°vRe	redevoir	VER	VER			ind:fut:2p;	R_°|d_°|v_R_e	r_e|d_e|v_r_ez	0.0	0.01
 rediffusent	R°difyz	rediffuser	VER	VER			ind:pre:3p;	R_°|d_i|f_y_z_#	r_e|d_i|ff_u_s_ent	0.0	0.02
@@ -102937,9 +102937,9 @@ rediffuserons	R°difyz°R§	rediffuser	VER	VER			ind:fut:1p;	R_°|d_i|f_y|z_°|R
 rediffusez	R°difyze	rediffuser	VER	VER			imp:pre:2p;	R_°|d_i|f_y|z_e	r_e|d_i|ff_u|s_ez	0.0	0.01
 rediffusion	R°difyzj§	rediffusion	NOM	NOM	f	s		R_°|d_i|f_y|z_j_§	r_e|d_i|ff_u|s_i_on	0.0	0.44
 rediffusions	R°difyzj§	rediffusion	NOM	NOM	f	p		R_°|d_i|f_y|z_j_§_#	r_e|d_i|ff_u|s_i_on_s	0.0	0.2
-rediffusé	R2difyze	rediffuser	VER	VER	m	s	par:pas;	R_2|d_i|f_y|z_e	r_e|d_i|ff_u|s_é	0.0	0.05
+rediffusé	R°difyze	rediffuser	VER	VER	m	s	par:pas;	R_°|d_i|f_y|z_e	r_e|d_i|ff_u|s_é	0.0	0.05
 rediffusés	R°difyze	rediffuser	VER	VER	m	p	par:pas;	R_°|d_i|f_y|z_e_#	r_e|d_i|ff_u|s_é_s	0.07	0.03
-redimensionner	R2dim@sjOne	redimensionner	VER	VER			inf;	R_2|d_i|m_@|s_j_O|n_e	r_e|d_i|m_en|s_i_o|nn_er	0.0	0.01
+redimensionner	R°dim@sjOne	redimensionner	VER	VER			inf;	R_°|d_i|m_@|s_j_O|n_e	r_e|d_i|m_en|s_i_o|nn_er	0.0	0.01
 redimensionnées	R°dim@sjone	redimensionner	VER	VER	f	p	par:pas;	R_°|d_i|m_@|s_j_o|n_e_#	r_e|d_i|m_en|s_i_o|nn_é_es	0.0	0.01
 redingote	R°d5gOt	redingote	NOM	NOM	f	s		R_°|d_5|g_O_t_#	r_e|d_in|g_o_t_e	4.66	0.54
 redingotes	R°d5gOt	redingote	NOM	NOM	f	p		R_°|d_5|g_O_t_#	r_e|d_in|g_o_t_es	0.41	0.27
@@ -102962,7 +102962,7 @@ rediscuterons	R°diskyt°R§	rediscuter	VER	VER			ind:fut:1p;	R_°|d_i_s|k_y|t_�
 redise	R°diz	redire	VER	VER			sub:pre:1s;sub:pre:3s;	R_°|d_i_z_#	r_e|d_i_s_e	0.2	0.02
 redisent	R°diz	redire	VER	VER			ind:pre:3p;	R_°|d_i_z_#	r_e|d_i_s_ent	0.07	0.01
 redises	R°diz	redire	VER	VER			sub:pre:2s;	R_°|d_i_z_#	r_e|d_i_s_es	0.0	0.27
-redisposer	R2dispoze	redisposer	VER	VER			inf;	R_2|d_i_s|p_o|z_e	r_e|d_i_s|p_o|s_er	0.14	0.16
+redisposer	R°dispoze	redisposer	VER	VER			inf;	R_°|d_i_s|p_o|z_e	r_e|d_i_s|p_o|s_er	0.14	0.16
 redistribua	R°distRibya	redistribuer	VER	VER			ind:pas:3s;	R_°|d_i_s|t_R_i|b_y|a	r_e|d_i_s|t_r_i|b_u|a	0.0	0.01
 redistribuais	R°distRib8E	redistribuer	VER	VER			ind:imp:1s;ind:imp:2s;	R_°|d_i_s|t_R_i|b_8_E	r_e|d_i_s|t_r_i|b_u_ais	0.07	0.02
 redistribuait	R°distRib8E	redistribuer	VER	VER			ind:imp:3s;	R_°|d_i_s|t_R_i|b_8_E	r_e|d_i_s|t_r_i|b_u_ait	0.2	0.0
@@ -103097,7 +103097,7 @@ redressée	R°dREse	redresser	VER	VER	f	s	par:pas;	R_°|d_R_E|s_e_#	r_e|d_r_e|ss
 redressées	R°dREse	redresser	VER	VER	f	p	par:pas;	R_°|d_R_E|s_e_#	r_e|d_r_e|ss_é_es	0.34	0.0
 redressés	R°dREse	redresser	VER	VER	m	p	par:pas;	R_°|d_R_E|s_e_#	r_e|d_r_e|ss_é_s	0.54	0.01
 redéconner	R°dekone	redéconner	VER	VER			inf;	R_°|d_e|k_o|n_e	r_e|d_é|c_o|nn_er	0.0	0.01
-redécoré	R2dekORe	redécoré	ADJ	ADJ	m	s		R_2|d_e|k_O|R_e	r_e|d_é|c_o|r_é	0.14	0.26
+redécoré	R°dekORe	redécoré	ADJ	ADJ	m	s		R_°|d_e|k_O|R_e	r_e|d_é|c_o|r_é	0.14	0.26
 redécoupage	R°dekupaZ	redécoupage	NOM	NOM	m	s		R_°|d_e|k_u|p_a_Z	r_e|d_é|c_ou|p_a_ge	0.0	0.01
 redécouvert	R°dekuvER	redécouvrir	VER	VER	m	s	par:pas;	R_°|d_e|k_u|v_E_R_#	r_e|d_é|c_ou|v_e_r_t	0.41	0.13
 redécouverte	R°dekuvERt	redécouverte	NOM	NOM	f	s		R_°|d_e|k_u|v_E_R_t_#	r_e|d_é|c_ou|v_e_r_t_e	0.14	0.03
@@ -103119,8 +103119,8 @@ redéfini	R°defini	redéfinir	VER	VER	m	s	par:pas;	R_°|d_e|f_i|n_i	r_e|d_é|f_
 redéfinir	R°definiR	redéfinir	VER	VER			inf;	R_°|d_e|f_i|n_i_R	r_e|d_é|f_i|n_i_r	0.0	0.13
 redéfinis	R°defini	redéfinir	VER	VER	m	p	ind:pre:1s;par:pas;	R_°|d_e|f_i|n_i	r_e|d_é|f_i|n_is	0.07	0.03
 redéfinissons	R°definis§	redéfinir	VER	VER			imp:pre:1p;ind:pre:1p;	R_°|d_e|f_i|n_i|s_§	r_e|d_é|f_i|n_i|ss_ons	0.0	0.11
-redéfinition	R2definisj§	redéfinition	NOM	NOM	f	s		R_2|d_e|f_i|n_i|s_j_§	r_e|d_é|f_i|n_i|t_i_on	0.0	0.01
-redégringoler	R2degR5gOle	redégringoler	VER	VER			inf;	R_2|d_e|g_R_5|g_O|l_e	r_e|d_é|g_r_in|g_o|l_er	0.07	0.0
+redéfinition	R°definisj§	redéfinition	NOM	NOM	f	s		R_°|d_e|f_i|n_i|s_j_§	r_e|d_é|f_i|n_i|t_i_on	0.0	0.01
+redégringoler	R°degR5gOle	redégringoler	VER	VER			inf;	R_°|d_e|g_R_5|g_O|l_e	r_e|d_é|g_r_in|g_o|l_er	0.07	0.0
 redémarra	R°demaRa	redémarrer	VER	VER			ind:pas:3s;	R_°|d_e|m_a|R_a	r_e|d_é|m_a|rr_a	0.14	0.0
 redémarrage	R°demaRaZ	redémarrage	NOM	NOM	m	s		R_°|d_e|m_a|R_a_Z	r_e|d_é|m_a|rr_a_ge	0.0	0.13
 redémarraient	R°demaRE	redémarrer	VER	VER			ind:imp:3p;	R_°|d_e|m_a|R_E	r_e|d_é|m_a|rr_aient	0.07	0.0
@@ -103135,14 +103135,14 @@ redémarrerait	R°demaR°RE	redémarrer	VER	VER			cnd:pre:3s;	R_°|d_e|m_a|R_°|
 redémarrez	R°demaRe	redémarrer	VER	VER			imp:pre:2p;ind:pre:2p;	R_°|d_e|m_a|R_e	r_e|d_é|m_a|rr_ez	0.0	0.18
 redémarrons	R°demaR§	redémarrer	VER	VER			imp:pre:1p;	R_°|d_e|m_a|R_§	r_e|d_é|m_a|rr_ons	0.0	0.02
 redémarré	R°demaRe	redémarrer	VER	VER	m	s	par:pas;	R_°|d_e|m_a|R_e	r_e|d_é|m_a|rr_é	0.07	0.25
-redémolir	R2demOliR	redémolir	VER	VER			inf;	R_2|d_e|m_O|l_i_R	r_e|d_é|m_o|l_i_r	0.0	0.01
+redémolir	R°demOliR	redémolir	VER	VER			inf;	R_°|d_e|m_O|l_i_R	r_e|d_é|m_o|l_i_r	0.0	0.01
 redéploie	R°deplwa	redéployer	VER	VER			ind:pre:3s;	R_°|d_e_p|l_wa_#	r_e|d_é_p|l_oi_e	0.0	0.03
 redéploiement	R°deplwam@	redéploiement	NOM	NOM	m	s		R_°|d_e_p|l_wa_#|m_@	r_e|d_é_p|l_oi_e|m_ent	0.07	0.04
 redéployer	R°deplwaje	redéployer	VER	VER			inf;	R_°|d_e_p|l_wa_j|e	r_e|d_é_p|l_o_y|er	0.0	0.09
 redéployez	R°deplwaje	redéployer	VER	VER			imp:pre:2p;ind:pre:2p;	R_°|d_e_p|l_wa_j|e	r_e|d_é_p|l_o_y|ez	0.0	0.04
-redéposer	R2depoze	redéposer	VER	VER			inf;	R_2|d_e|p_o|z_e	r_e|d_é|p_o|s_er	0.0	0.01
+redéposer	R°depoze	redéposer	VER	VER			inf;	R_°|d_e|p_o|z_e	r_e|d_é|p_o|s_er	0.0	0.01
 redéposé	R°depoze	redéposer	VER	VER	m	s	par:pas;	R_°|d_e|p_o|z_e	r_e|d_é|p_o|s_é	0.07	0.07
-refabriquer	R2fabRike	refabriquer	VER	VER			inf;	R_2|f_a|b_R_i|k_e	r_e|f_a|b_r_i|qu_er	0.0	0.01
+refabriquer	R°fabRike	refabriquer	VER	VER			inf;	R_°|f_a|b_R_i|k_e	r_e|f_a|b_r_i|qu_er	0.0	0.01
 refaire	R°fER	refaire	VER	VER			inf;	R_°|f_E_R_#	r_e|f_ai_r_e	18.24	26.29
 refais	R°fE	refaire	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:2s;	R_°|f_E	r_e|f_ais	1.15	8.71
 refaisaient	R°f°zE	refaire	VER	VER			ind:imp:3p;	R_°|f_°|z_E	r_e|f_ai|s_aient	0.41	0.01
@@ -103159,13 +103159,13 @@ refaites	R°fEt	refaire	VER	VER,ADJ	f	p	imp:pre:2p;ind:pre:2p;par:pas;	R_°|f_E_
 refaites	R°fEt	refait	ADJ	VER,ADJ	f	p		R_°|f_E_t_#	r_e|f_ai_t_es	0.2	0.08
 refaits	R°fE	refaire	VER	VER,ADJ	m	p	par:pas;	R_°|f_E_#	r_e|f_ai_ts	0.14	0.19
 refaits	R°fE	refait	ADJ	VER,ADJ	m	p		R_°|f_E_#	r_e|f_ai_ts	0.07	0.01
-refamiliariser	R2familjaRize	refamiliariser	VER	VER			inf;	R_2|f_a|m_i|l_j_a|R_i|z_e	r_e|f_a|m_i|l_i_a|r_i|s_er	0.0	0.01
+refamiliariser	R°familjaRize	refamiliariser	VER	VER			inf;	R_°|f_a|m_i|l_j_a|R_i|z_e	r_e|f_a|m_i|l_i_a|r_i|s_er	0.0	0.01
 refasse	R°fas	refaire	VER	VER			sub:pre:1s;sub:pre:3s;	R_°|f_a_s_#	r_e|f_a_ss_e	0.41	1.18
 refassent	R°fas	refaire	VER	VER			sub:pre:3p;	R_°|f_a_s_#	r_e|f_a_ss_ent	0.07	0.02
 refasses	R°fas	refaire	VER	VER			sub:pre:2s;	R_°|f_a_s_#	r_e|f_a_ss_es	0.0	0.41
 refassiez	R°fasje	refaire	VER	VER			sub:pre:2p;	R_°|f_a|s_j_e	r_e|f_a|ss_i_ez	0.0	0.04
 refaufile	R°fofil	refaufiler	VER	VER			ind:pre:3s;	R_°|f_o|f_i_l_#	r_e|f_au|f_i_l_e	0.07	0.0
-refaçonner	R2fasOne	refaçonner	VER	VER			inf;	R_2|f_a|s_O|n_e	r_e|f_a|ç_o|nn_er	0.0	0.01
+refaçonner	R°fasOne	refaçonner	VER	VER			inf;	R_°|f_a|s_O|n_e	r_e|f_a|ç_o|nn_er	0.0	0.01
 refendre	R°f@dR	refendre	VER	VER			inf;	R_°|f_@_d_R_#	r_e|f_en_d_r_e	0.14	0.0
 refendu	R°f@dy	refendre	VER	VER	m	s	par:pas;	R_°|f_@|d_y	r_e|f_en|d_u	0.14	0.0
 refera	R°f°Ra	refaire	VER	VER			ind:fut:3s;	R_°|f_°|R_a	r_e|f_e|r_a	0.27	1.28
@@ -103200,10 +103200,10 @@ refermées	R°fERme	refermer	VER	VER	f	p	par:pas;	R_°|f_E_R|m_e_#	r_e|f_e_r|m_�
 refermés	R°fERme	refermer	VER	VER	m	p	par:pas;	R_°|f_E_R|m_e_#	r_e|f_e_r|m_é_s	1.22	0.2
 referons	R°f°R§	refaire	VER	VER			ind:fut:1p;	R_°|f_°|R_§	r_e|f_e|r_ons	0.41	0.14
 referont	R°f°R§	refaire	VER	VER			ind:fut:3p;	R_°|f_°|R_§	r_e|f_e|r_ont	0.07	0.3
-refeuilleter	R2f9j°te	refeuilleter	VER	VER			inf;	R_2|f_9|j_°|t_e	r_e|f_eu|ill_e|t_er	0.07	0.0
+refeuilleter	R°f9j°te	refeuilleter	VER	VER			inf;	R_°|f_9|j_°|t_e	r_e|f_eu|ill_e|t_er	0.07	0.0
 reficelai	R°fis°le	reficeler	VER	VER			ind:pas:1s;	R_°|f_i|s_°|l_e	r_e|f_i|c_e|l_ai	0.07	0.0
 reficelle	R°fisEl	reficeler	VER	VER			ind:pre:1s;	R_°|f_i|s_E_l_#	r_e|f_i|c_e_ll_e	0.07	0.0
-refil	R2fil	refil	NOM	NOM	m	s		R_2|f_i_l	r_e|f_i_l	0.14	0.0
+refil	R°fil	refil	NOM	NOM	m	s		R_°|f_i_l	r_e|f_i_l	0.14	0.0
 refila	R°fila	refiler	VER	VER			ind:pas:3s;	R_°|f_i|l_a	r_e|f_i|l_a	0.14	0.14
 refilai	R°file	refiler	VER	VER			ind:pas:1s;	R_°|f_i|l_e	r_e|f_i|l_ai	0.07	0.0
 refilaient	R°filE	refiler	VER	VER			ind:imp:3p;	R_°|f_i|l_E	r_e|f_i|l_aient	0.14	0.01
@@ -103221,7 +103221,7 @@ refilé	R°file	refiler	VER	VER	m	s	par:pas;	R_°|f_i|l_e	r_e|f_i|l_é	2.43	3.13
 refilée	R°file	refiler	VER	VER	f	s	par:pas;	R_°|f_i|l_e_#	r_e|f_i|l_é_e	0.41	0.37
 refilées	R°file	refiler	VER	VER	f	p	par:pas;	R_°|f_i|l_e_#	r_e|f_i|l_é_es	0.07	0.02
 refilés	R°file	refiler	VER	VER	m	p	par:pas;	R_°|f_i|l_e_#	r_e|f_i|l_é_s	0.14	0.13
-refinancement	R2fin@s°m@	refinancement	NOM	NOM	m	s		R_2|f_i|n_@|s_°|m_@	r_e|f_i|n_an|c_e|m_ent	0.0	0.04
+refinancement	R°fin@s°m@	refinancement	NOM	NOM	m	s		R_°|f_i|n_@|s_°|m_@	r_e|f_i|n_an|c_e|m_ent	0.0	0.04
 refinancée	R°fin@se	refinancer	VER	VER	f	s	par:pas;	R_°|f_i|n_@|s_e_#	r_e|f_i|n_an|c_é_e	0.0	0.01
 refirent	R°fiR	refaire	VER	VER			ind:pas:3p;	R_°|f_i_R_#	r_e|f_i_r_ent	0.47	0.01
 refis	R°fi	refaire	VER	VER			ind:pas:1s;	R_°|f_i	r_e|f_is	0.34	0.14
@@ -103264,7 +103264,7 @@ reflété	R°flete	refléter	VER	VER	m	s	par:pas;	R_°|f_l_e|t_e	r_e|f_l_é|t_é
 reflétée	R°flete	refléter	VER	VER	f	s	par:pas;	R_°|f_l_e|t_e_#	r_e|f_l_é|t_é_e	1.28	0.12
 reflétées	R°flete	refléter	VER	VER	f	p	par:pas;	R_°|f_l_e|t_e_#	r_e|f_l_é|t_é_es	0.34	0.14
 reflétés	R°flete	refléter	VER	VER	m	p	par:pas;	R_°|f_l_e|t_e_#	r_e|f_l_é|t_é_s	0.14	0.0
-refoncer	R2f§se	refoncer	VER	VER			inf;	R_2|f_§|s_e	r_e|f_on|c_er	0.0	0.01
+refoncer	R°f§se	refoncer	VER	VER			inf;	R_°|f_§|s_e	r_e|f_on|c_er	0.0	0.01
 refondant	R°f§d@	refonder	VER	VER			par:pre;	R_°|f_§|d_@	r_e|f_on|d_ant	0.07	0.0
 refonde	R°f§d	refonder	VER	VER			ind:pre:3s;	R_°|f_§_d_#	r_e|f_on_d_e	0.14	0.0
 refondre	R°f§dR	refondre	VER	VER			inf;	R_°|f_§_d_R_#	r_e|f_on_d_r_e	0.34	0.14
@@ -103274,7 +103274,7 @@ refondus	R°f§dy	refondre	VER	VER	m	p	par:pas;	R_°|f_§|d_y	r_e|f_on|d_us	0.27
 refont	R°f§	refaire	VER	VER			ind:pre:3p;	R_°|f_§	r_e|f_ont	0.41	0.42
 refonte	R°f§t	refonte	NOM	NOM	f	s		R_°|f_§_t_#	r_e|f_on_t_e	0.47	0.28
 reforger	R°fORZe	reforger	VER	VER			inf;	R_°|f_O_R|Z_e	r_e|f_o_r|g_er	0.14	0.14
-reforgé	R2fORZe	reforger	VER	VER	m	s	par:pas;	R_2|f_O_R|Z_e	r_e|f_o_r|g_é	0.0	0.14
+reforgé	R°fORZe	reforger	VER	VER	m	s	par:pas;	R_°|f_O_R|Z_e	r_e|f_o_r|g_é	0.0	0.14
 reforgée	R°fORZe	reforger	VER	VER	f	s	par:pas;	R_°|f_O_R|Z_e_#	r_e|f_o_r|g_é_e	0.0	0.27
 reforma	R°fORma	reformer	VER	VER			ind:pas:3s;	R_°|f_O_R|m_a	r_e|f_o_r|m_a	0.61	0.04
 reformaient	R°fORmE	reformer	VER	VER			ind:imp:3p;	R_°|f_O_R|m_E	r_e|f_o_r|m_aient	0.88	0.0
@@ -103288,7 +103288,7 @@ reformer	R°fORme	reformer	VER	VER			inf;	R_°|f_O_R|m_e	r_e|f_o_r|m_er	1.01	0.2
 reformerons	R°fORm°R§	reformer	VER	VER			ind:fut:1p;	R_°|f_O_R|m_°|R_§	r_e|f_o_r|m_e|r_ons	0.07	0.0
 reformeront	R°fORm°R§	reformer	VER	VER			ind:fut:3p;	R_°|f_O_R|m_°|R_§	r_e|f_o_r|m_e|r_ont	0.14	0.02
 reformez	R°fORme	reformer	VER	VER			imp:pre:2p;	R_°|f_O_R|m_e	r_e|f_o_r|m_ez	0.0	0.08
-reformulation	R2fORmylasj§	reformulation	NOM	NOM	f	s		R_2|f_O_R|m_y|l_a|s_j_§	r_e|f_o_r|m_u|l_a|t_i_on	0.0	0.01
+reformulation	R°fORmylasj§	reformulation	NOM	NOM	f	s		R_°|f_O_R|m_y|l_a|s_j_§	r_e|f_o_r|m_u|l_a|t_i_on	0.0	0.01
 reformuler	R°fORmyle	reformuler	VER	VER			inf;	R_°|f_O_R|m_y|l_e	r_e|f_o_r|m_u|l_er	0.0	0.5
 reformulé	R°fORmyle	reformuler	VER	VER	m	s	par:pas;	R_°|f_O_R|m_y|l_e	r_e|f_o_r|m_u|l_é	0.0	0.04
 reformulée	R°fORmyle	reformuler	VER	VER	f	s	par:pas;	R_°|f_O_R|m_y|l_e_#	r_e|f_o_r|m_u|l_é_e	0.14	0.0
@@ -103296,7 +103296,7 @@ reformèrent	R°fORmER	reformer	VER	VER			ind:pas:3p;	R_°|f_O_R|m_E_R_#	r_e|f_o
 reformé	R°fORme	reformer	VER	VER	m	s	par:pas;	R_°|f_O_R|m_e	r_e|f_o_r|m_é	0.47	0.05
 reformée	R°fORme	reformer	VER	VER	f	s	par:pas;	R_°|f_O_R|m_e_#	r_e|f_o_r|m_é_e	0.27	0.04
 reformés	R°fORme	reformer	VER	VER	m	p	par:pas;	R_°|f_O_R|m_e_#	r_e|f_o_r|m_é_s	0.34	0.01
-refouiller	R2fuje	refouiller	VER	VER			inf;	R_2|f_u|j_e	r_e|f_ou|ill_er	0.0	0.01
+refouiller	R°fuje	refouiller	VER	VER			inf;	R_°|f_u|j_e	r_e|f_ou|ill_er	0.0	0.01
 refouillé	R°fuje	refouiller	VER	VER	m	s	par:pas;	R_°|f_u|j_e	r_e|f_ou|ill_é	0.07	0.01
 refoula	R°fula	refouler	VER	VER			ind:pas:3s;	R_°|f_u|l_a	r_e|f_ou|l_a	0.41	0.0
 refoulai	R°fule	refouler	VER	VER			ind:pas:1s;	R_°|f_u|l_e	r_e|f_ou|l_ai	0.07	0.0
@@ -103313,7 +103313,7 @@ refoulent	R°ful	refouler	VER	VER			ind:pre:3p;	R_°|f_u_l_#	r_e|f_ou_l_ent	0.14
 refouler	R°fule	refouler	VER	VER			inf;	R_°|f_u|l_e	r_e|f_ou|l_er	2.3	0.72
 refoulerait	R°ful°RE	refouler	VER	VER			cnd:pre:3s;	R_°|f_u|l_°|R_E	r_e|f_ou|l_e|r_ait	0.07	0.0
 refoulez	R°fule	refouler	VER	VER			imp:pre:2p;ind:pre:2p;	R_°|f_u|l_e	r_e|f_ou|l_ez	0.07	0.05
-refouloir	R2fulwaR	refouloir	NOM	NOM	m	s		R_2|f_u|l_wa_R	r_e|f_ou|l_oi_r	0.0	0.01
+refouloir	R°fulwaR	refouloir	NOM	NOM	m	s		R_°|f_u|l_wa_R	r_e|f_ou|l_oi_r	0.0	0.01
 refoulé	R°fule	refouler	VER	VER,ADJ,NOM	m	s	par:pas;	R_°|f_u|l_e	r_e|f_ou|l_é	1.35	0.53
 refoulé	R°fule	refoulé	NOM	VER,ADJ,NOM	m	s		R_°|f_u|l_e	r_e|f_ou|l_é	0.41	0.37
 refoulé	R°fule	refoulé	ADJ	VER,ADJ,NOM	m	s		R_°|f_u|l_e	r_e|f_ou|l_é	0.47	0.36
@@ -103347,9 +103347,9 @@ refoutu	R°futy	refoutre	VER	VER	m	s	par:pas;	R_°|f_u|t_y	r_e|f_ou|t_u	0.07	0.0
 refrain	R°fR5	refrain	NOM	NOM	m	s		R_°|f_R_5	r_e|f_r_ain	8.24	1.98
 refrains	R°fR5	refrain	NOM	NOM	m	p		R_°|f_R_5_#	r_e|f_r_ain_s	2.43	0.41
 refranchies	R°fR@Si	refranchir	VER	VER	f	p	par:pas;	R_°|f_R_@|S_i_#	r_e|f_r_an|ch_i_es	0.07	0.0
-refranchir	R2fR@SiR	refranchir	VER	VER			inf;	R_2|f_R_@|S_i_R	r_e|f_r_an|ch_i_r	0.0	0.01
+refranchir	R°fR@SiR	refranchir	VER	VER			inf;	R_°|f_R_@|S_i_R	r_e|f_r_an|ch_i_r	0.0	0.01
 refrappe	R°fRap	refrapper	VER	VER			imp:pre:2s;ind:pre:3s;	R_°|f_R_a_p_#	r_e|f_r_a_pp_e	0.0	0.04
-refrapper	R2fRape	refrapper	VER	VER			inf;	R_2|f_R_a|p_e	r_e|f_r_a|pp_er	0.0	0.01
+refrapper	R°fRape	refrapper	VER	VER			inf;	R_°|f_R_a|p_e	r_e|f_r_a|pp_er	0.0	0.01
 refroidi	R°fRwadi	refroidir	VER	ADJ,VER	m	s	par:pas;	R_°_f|R_wa|d_i	r_e_f|r_oi|d_i	0.88	1.32
 refroidi	R°fRwadi	refroidi	ADJ	ADJ,VER	m	s		R_°_f|R_wa|d_i	r_e_f|r_oi|d_i	1.69	0.19
 refroidie	R°fRwadi	refroidir	VER	ADJ,VER	f	s	par:pas;	R_°_f|R_wa|d_i_#	r_e_f|r_oi|d_i_e	0.34	0.17
@@ -103495,7 +103495,7 @@ regardé	R°gaRde	regarder	VER	VER	m	s	par:pas;	R_°|g_a_R|d_e	r_e|g_a_r|d_é	51
 regardée	R°gaRde	regarder	VER	VER	f	s	par:pas;	R_°|g_a_R|d_e_#	r_e|g_a_r|d_é_e	11.01	7.61
 regardées	R°gaRde	regarder	VER	VER	f	p	par:pas;	R_°|g_a_R|d_e_#	r_e|g_a_r|d_é_es	1.15	0.2
 regardés	R°gaRde	regarder	VER	VER	m	p	par:pas;	R_°|g_a_R|d_e_#	r_e|g_a_r|d_é_s	5.2	1.47
-regarni	R2gaRni	regarnir	VER	VER	m	s	par:pas;	R_2|g_a_R|n_i	r_e|g_a_r|n_i	0.0	0.01
+regarni	R°gaRni	regarnir	VER	VER	m	s	par:pas;	R_°|g_a_R|n_i	r_e|g_a_r|n_i	0.0	0.01
 regarnies	R°gaRni	regarnir	VER	VER	f	p	par:pas;	R_°|g_a_R|n_i_#	r_e|g_a_r|n_i_es	0.07	0.0
 regarnir	R°gaRniR	regarnir	VER	VER			inf;	R_°|g_a_R|n_i_R	r_e|g_a_r|n_i_r	0.41	0.14
 regarnirez	R°gaRniRe	regarnir	VER	VER			ind:fut:2p;	R_°|g_a_R|n_i|R_e	r_e|g_a_r|n_i|r_ez	0.14	0.0
@@ -103515,7 +103515,7 @@ regimbé	R°Z5be	regimber	VER	VER	m	s	par:pas;	R_°|Z_5|b_e	r_e|g_im|b_é	0.07	0
 registre	R°ZistR	registre	NOM	NOM	m	s		R_°|Z_i_s_t_R_#	r_e|g_i_s_t_r_e	8.11	6.39
 registres	R°ZistR	registre	NOM	NOM	m	p		R_°|Z_i_s_t_R_#	r_e|g_i_s_t_r_es	4.73	2.23
 reglissé	R°glise	reglisser	VER	VER	m	s	par:pas;	R_°|g_l_i|s_e	r_e|g_l_i|ss_é	0.2	0.14
-regonflage	R2g§flaZ	regonflage	NOM	NOM	m	s		R_2|g_§|f_l_a_Z	r_e|g_on|f_l_a_ge	0.0	0.01
+regonflage	R°g§flaZ	regonflage	NOM	NOM	m	s		R_°|g_§|f_l_a_Z	r_e|g_on|f_l_a_ge	0.0	0.01
 regonflait	R°g§flE	regonfler	VER	VER			ind:imp:3s;	R_°|g_§|f_l_E	r_e|g_on|f_l_ait	0.2	0.0
 regonfle	R°g§fl	regonfler	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	R_°|g_§_f_l_#	r_e|g_on_f_l_e	0.2	0.06
 regonfler	R°g§fle	regonfler	VER	VER			inf;	R_°|g_§|f_l_e	r_e|g_on|f_l_er	0.41	0.29
@@ -103533,8 +103533,8 @@ regorgeant	R°gORZ@	regorger	VER	VER			par:pre;	R_°|g_O_R|Z_@	r_e|g_o_r|ge_ant	
 regorgent	R°gORZ	regorger	VER	VER			ind:pre:3p;	R_°|g_O_R_Z_#	r_e|g_o_r_g_ent	0.47	0.23
 regorger	R°gORZe	regorger	VER	VER			inf;	R_°|g_O_R|Z_e	r_e|g_o_r|g_er	0.07	0.03
 regorges	R°gORZ	regorger	VER	VER			ind:pre:2s;	R_°|g_O_R_Z_#	r_e|g_o_r_g_es	0.0	0.01
-regoûter	R2gute	regoûter	VER	VER			inf;	R_2|g_u|t_e	r_e|g_oû|t_er	0.07	0.03
-regoûté	R2gute	regoûter	VER	VER	m	s	par:pas;	R_2|g_u|t_e	r_e|g_oû|t_é	0.07	0.0
+regoûter	R°gute	regoûter	VER	VER			inf;	R_°|g_u|t_e	r_e|g_oû|t_er	0.07	0.03
+regoûté	R°gute	regoûter	VER	VER	m	s	par:pas;	R_°|g_u|t_e	r_e|g_oû|t_é	0.07	0.0
 regrattières	R°gRatjER	regrattier	NOM	NOM	f	p		R_°|g_R_a|t_j_E_R_#	r_e|g_r_a|tt_i_è_r_es	0.07	0.0
 regreffe	R°gREf	regreffer	VER	VER			ind:pre:3s;	R_°|g_R_E_f_#	r_e|g_r_e_ff_e	0.07	0.0
 regret	R°gRE	regret	NOM	NOM	m	s		R_°|g_R_E	r_e|g_r_et	29.32	7.25
@@ -103581,7 +103581,7 @@ regrimperas	R°gR5p°Ra	regrimper	VER	VER			ind:fut:2s;	R_°|g_R_5|p_°|R_a	r_e|
 regrimperons	R°gR5p°R§	regrimper	VER	VER			ind:fut:1p;	R_°|g_R_5|p_°|R_§	r_e|g_r_im|p_e|r_ons	0.0	0.01
 regrimpez	R°gR5pe	regrimper	VER	VER			imp:pre:2p;	R_°|g_R_5|p_e	r_e|g_r_im|p_ez	0.0	0.01
 regrimpé	R°gR5pe	regrimper	VER	VER	m	s	par:pas;	R_°|g_R_5|p_e	r_e|g_r_im|p_é	0.34	0.01
-regrossir	R2gRosiR	regrossir	VER	VER			inf;	R_2|g_R_o|s_i_R	r_e|g_r_o|ss_i_r	0.0	0.01
+regrossir	R°gRosiR	regrossir	VER	VER			inf;	R_°|g_R_o|s_i_R	r_e|g_r_o|ss_i_r	0.0	0.01
 regroupa	R°gRupa	regrouper	VER	VER			ind:pas:3s;	R_°|g_R_u|p_a	r_e|g_r_ou|p_a	0.07	0.0
 regroupaient	R°gRupE	regrouper	VER	VER			ind:imp:3p;	R_°|g_R_u|p_E	r_e|g_r_ou|p_aient	0.54	0.03
 regroupait	R°gRupE	regrouper	VER	VER			ind:imp:3s;	R_°|g_R_u|p_E	r_e|g_r_ou|p_ait	0.41	0.26
@@ -103602,25 +103602,25 @@ regroupés	R°gRupe	regrouper	VER	VER	m	p	par:pas;	R_°|g_R_u|p_e_#	r_e|g_r_ou|p
 regréaient	R°gReE	regréer	VER	VER			ind:imp:3p;	R_°|g_R_e|E	r_e|g_r_é|aient	0.07	0.0
 regréer	R°gRee	regréer	VER	VER			inf;	R_°|g_R_e|e	r_e|g_r_é|er	0.07	0.0
 regréé	R°gRee	regréer	VER	VER	m	s	par:pas;	R_°|g_R_e|e	r_e|g_r_é|é	0.2	0.0
-rehaussaient	R2osE	rehausser	VER	VER			ind:imp:3p;	R_2_#|o|s_E	r_e_h|au|ss_aient	0.2	0.0
-rehaussait	R2osE	rehausser	VER	VER			ind:imp:3s;	R_2_#|o|s_E	r_e_h|au|ss_ait	1.01	0.01
-rehaussant	R2os@	rehausser	VER	VER			par:pre;	R_2_#|o|s_@	r_e_h|au|ss_ant	0.47	0.0
-rehausse	R2os	rehausser	VER	NOM,VER			ind:pre:3s;	R_2_#|o_s_#	r_e_h|au_ss_e	0.41	0.2
-rehausse	R2os	rehausse	NOM	NOM,VER	f	s		R_2_#|o_s_#	r_e_h|au_ss_e	0.07	0.0
-rehaussement	R2os°m@	rehaussement	NOM	NOM	m	s		R_2_#|o|s_°|m_@	r_e_h|au|ss_e|m_ent	0.0	0.01
-rehaussent	R2os	rehausser	VER	VER			ind:pre:3p;	R_2_#|o_s_#	r_e_h|au_ss_ent	0.34	0.0
-rehausser	R2ose	rehausser	VER	VER			inf;	R_2_#|o|s_e	r_e_h|au|ss_er	0.88	0.34
-rehaussera	R2os°Ra	rehausser	VER	VER			ind:fut:3s;	R_2_#|o|s_°|R_a	r_e_h|au|ss_e|r_a	0.14	0.01
-rehausses	R2os	rehausse	NOM	NOM	f	p		R_2_#|o_s_#	r_e_h|au_ss_es	0.07	0.0
-rehausseur	R2os9R	rehausseur	NOM	ADJ,NOM	m	s		R_2_#|o|s_9_R	r_e_h|au|ss_eu_r	0.0	0.11
-rehausseur	R2os9R	rehausseur	ADJ	ADJ,NOM	m	s		R_2_#|o|s_9_R	r_e_h|au|ss_eu_r	0.0	0.01
-rehaussez	R2ose	rehausser	VER	VER			imp:pre:2p;	R_2_#|o|s_e	r_e_h|au|ss_ez	0.0	0.01
-rehaussé	R2ose	rehausser	VER	VER	m	s	par:pas;	R_2_#|o|s_e	r_e_h|au|ss_é	1.15	0.03
-rehaussée	R2ose	rehausser	VER	VER	f	s	par:pas;	R_2_#|o|s_e_#	r_e_h|au|ss_é_e	0.68	0.03
-rehaussées	R2ose	rehausser	VER	VER	f	p	par:pas;	R_2_#|o|s_e_#	r_e_h|au|ss_é_es	0.2	0.14
-rehaussés	R2ose	rehausser	VER	VER	m	p	par:pas;	R_2_#|o|s_e_#	r_e_h|au|ss_é_s	0.34	0.0
-rehaut	R2o	rehaut	NOM	NOM	m	s		R_2_#|o_#	r_e_h|au_t	0.07	0.0
-rehauts	R2o	rehaut	NOM	NOM	m	p		R_2_#|o_#	r_e_h|au_ts	0.14	0.0
+rehaussaient	R°osE	rehausser	VER	VER			ind:imp:3p;	R_°_#|o|s_E	r_e_h|au|ss_aient	0.2	0.0
+rehaussait	R°osE	rehausser	VER	VER			ind:imp:3s;	R_°_#|o|s_E	r_e_h|au|ss_ait	1.01	0.01
+rehaussant	R°os@	rehausser	VER	VER			par:pre;	R_°_#|o|s_@	r_e_h|au|ss_ant	0.47	0.0
+rehausse	R°os	rehausser	VER	NOM,VER			ind:pre:3s;	R_°_#|o_s_#	r_e_h|au_ss_e	0.41	0.2
+rehausse	R°os	rehausse	NOM	NOM,VER	f	s		R_°_#|o_s_#	r_e_h|au_ss_e	0.07	0.0
+rehaussement	R°os°m@	rehaussement	NOM	NOM	m	s		R_°_#|o|s_°|m_@	r_e_h|au|ss_e|m_ent	0.0	0.01
+rehaussent	R°os	rehausser	VER	VER			ind:pre:3p;	R_°_#|o_s_#	r_e_h|au_ss_ent	0.34	0.0
+rehausser	R°ose	rehausser	VER	VER			inf;	R_°_#|o|s_e	r_e_h|au|ss_er	0.88	0.34
+rehaussera	R°os°Ra	rehausser	VER	VER			ind:fut:3s;	R_°_#|o|s_°|R_a	r_e_h|au|ss_e|r_a	0.14	0.01
+rehausses	R°os	rehausse	NOM	NOM	f	p		R_°_#|o_s_#	r_e_h|au_ss_es	0.07	0.0
+rehausseur	R°os9R	rehausseur	NOM	ADJ,NOM	m	s		R_°_#|o|s_9_R	r_e_h|au|ss_eu_r	0.0	0.11
+rehausseur	R°os9R	rehausseur	ADJ	ADJ,NOM	m	s		R_°_#|o|s_9_R	r_e_h|au|ss_eu_r	0.0	0.01
+rehaussez	R°ose	rehausser	VER	VER			imp:pre:2p;	R_°_#|o|s_e	r_e_h|au|ss_ez	0.0	0.01
+rehaussé	R°ose	rehausser	VER	VER	m	s	par:pas;	R_°_#|o|s_e	r_e_h|au|ss_é	1.15	0.03
+rehaussée	R°ose	rehausser	VER	VER	f	s	par:pas;	R_°_#|o|s_e_#	r_e_h|au|ss_é_e	0.68	0.03
+rehaussées	R°ose	rehausser	VER	VER	f	p	par:pas;	R_°_#|o|s_e_#	r_e_h|au|ss_é_es	0.2	0.14
+rehaussés	R°ose	rehausser	VER	VER	m	p	par:pas;	R_°_#|o|s_e_#	r_e_h|au|ss_é_s	0.34	0.0
+rehaut	R°o	rehaut	NOM	NOM	m	s		R_°_#|o_#	r_e_h|au_t	0.07	0.0
+rehauts	R°o	rehaut	NOM	NOM	m	p		R_°_#|o_#	r_e_h|au_ts	0.14	0.0
 reich	RajS	reich	NOM	NOM	m	s		R_a_j_S	r_e_i_ch	4.26	0.03
 reichsmark	RajSsmaRk	reichsmark	NOM	NOM	m			R_a_j|S_s_m_a_R_k	r_e_i|ch_s_m_a_r_k	0.0	0.01
 reichstag	RajSstag	reichstag	NOM	NOM	m	s		R_a_j|S_s_t_a_g	r_e_i|ch_s_t_a_g	0.68	0.85
@@ -103744,7 +103744,7 @@ relais	R°lE	relais	NOM	NOM	m			R_°|l_E_#	r_e|l_ai_s	8.51	7.09
 relaisser	R°lEse	relaisser	VER	VER			inf;	R_°|l_E|s_e	r_e|l_ai|ss_er	0.07	0.0
 relance	R°l@s	relancer	VER	NOM,VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	R_°|l_@_s_#	r_e|l_an_c_e	0.68	1.87
 relance	R°l@s	relance	NOM	NOM,VER	f	s		R_°|l_@_s_#	r_e|l_an_c_e	0.14	0.62
-relancement	R2l@s°m@	relancement	NOM	NOM	m	s		R_2|l_@|s_°|m_@	r_e|l_an|c_e|m_ent	0.0	0.03
+relancement	R°l@s°m@	relancement	NOM	NOM	m	s		R_°|l_@|s_°|m_@	r_e|l_an|c_e|m_ent	0.0	0.03
 relancent	R°l@s	relancer	VER	VER			ind:pre:3p;	R_°|l_@_s_#	r_e|l_an_c_ent	0.07	0.01
 relancer	R°l@se	relancer	VER	VER			inf;	R_°|l_@|s_e	r_e|l_an|c_er	2.77	1.96
 relancera	R°l@s°Ra	relancer	VER	VER			ind:fut:3s;	R_°|l_@|s_°|R_a	r_e|l_an|c_e|r_a	0.0	0.02
@@ -103752,7 +103752,7 @@ relancerait	R°l@s°RE	relancer	VER	VER			cnd:pre:3s;	R_°|l_@|s_°|R_E	r_e|l_an
 relanceront	R°l@s°R§	relancer	VER	VER			ind:fut:3p;	R_°|l_@|s_°|R_§	r_e|l_an|c_e|r_ont	0.0	0.01
 relances	R°l@s	relancer	VER	NOM,VER			ind:pre:2s;	R_°|l_@_s_#	r_e|l_an_c_es	0.0	0.05
 relances	R°l@s	relance	NOM	NOM,VER	f	p		R_°|l_@_s_#	r_e|l_an_c_es	0.27	0.01
-relanceur	R2l@s9R	relanceur	NOM	NOM	m	s		R_2|l_@|s_9_R	r_e|l_an|c_eu_r	0.0	0.01
+relanceur	R°l@s9R	relanceur	NOM	NOM	m	s		R_°|l_@|s_9_R	r_e|l_an|c_eu_r	0.0	0.01
 relancez	R°l@se	relancer	VER	VER			imp:pre:2p;ind:pre:2p;	R_°|l_@|s_e	r_e|l_an|c_ez	0.0	0.27
 relancèrent	R°l@sER	relancer	VER	VER			ind:pas:3p;	R_°|l_@|s_E_R_#	r_e|l_an|c_è_r_ent	0.07	0.0
 relancé	R°l@se	relancer	VER	VER	m	s	par:pas;	R_°|l_@|s_e	r_e|l_an|c_é	1.22	0.48
@@ -103771,7 +103771,7 @@ relaps	R°laps	relaps	NOM	ADJ,NOM	m			R_°|l_a_p_s	r_e|l_a_p_s	0.34	0.0
 relapse	R°laps	relaps	ADJ	ADJ	f	s		R_°|l_a_p_s_#	r_e|l_a_p_s_e	0.07	0.0
 relapses	R°laps	relaps	NOM	ADJ,NOM	f	p		R_°|l_a_p_s_#	r_e|l_a_p_s_es	0.0	0.01
 relapses	R°laps	relaps	ADJ	ADJ,NOM	f	p		R_°|l_a_p_s_#	r_e|l_a_p_s_es	0.07	0.0
-relargué	R2laRge	relargué	ADJ	ADJ	m	s		R_2|l_a_R|g_e	r_e|l_a_r|gu_é	0.14	0.0
+relargué	R°laRge	relargué	ADJ	ADJ	m	s		R_°|l_a_R|g_e	r_e|l_a_r|gu_é	0.14	0.0
 relata	R°lata	relater	VER	VER			ind:pas:3s;	R_°|l_a|t_a	r_e|l_a|t_a	0.47	0.03
 relatai	R°late	relater	VER	VER			ind:pas:1s;	R_°|l_a|t_e	r_e|l_a|t_ai	0.07	0.0
 relataient	R°latE	relater	VER	VER			ind:imp:3p;	R_°|l_a|t_E	r_e|l_a|t_aient	0.27	0.01
@@ -103790,8 +103790,8 @@ relationnel	R°lasjonEl	relationnel	ADJ	ADJ	m	s		R_°|l_a|s_j_o|n_E_l	r_e|l_a|t_
 relationnelle	R°lasjonEl	relationnel	ADJ	ADJ	f	s		R_°|l_a|s_j_o|n_E_l_#	r_e|l_a|t_i_o|nn_e_ll_e	0.0	0.01
 relationnelles	R°lasjonEl	relationnel	ADJ	ADJ	f	p		R_°|l_a|s_j_o|n_E_l_#	r_e|l_a|t_i_o|nn_e_ll_es	0.0	0.09
 relationnels	R°lasjonEl	relationnel	ADJ	ADJ	m	p		R_°|l_a|s_j_o|n_E_l_#	r_e|l_a|t_i_o|nn_e_l_s	0.0	0.14
-relations	R2lasj§	relation	NOM	NOM,VER	f	p		R_2|l_a|s_j_§_#	r_e|l_a|t_i_on_s	42.16	30.92
-relations	R2latj§	relater	VER	NOM,VER			ind:imp:1p;	R_2|l_a|t_j_§	r_e|l_a|t_i_ons	0.07	0.0
+relations	R°lasj§	relation	NOM	NOM,VER	f	p		R_°|l_a|s_j_§_#	r_e|l_a|t_i_on_s	42.16	30.92
+relations	R°latj§	relater	VER	NOM,VER			ind:imp:1p;	R_°|l_a|t_j_§	r_e|l_a|t_i_ons	0.07	0.0
 relative	R°lativ	relatif	ADJ	ADJ,NOM	f	s		R_°|l_a|t_i_v_#	r_e|l_a|t_i_v_e	7.09	0.93
 relative	R°lativ	relative	NOM	ADJ,NOM	f	s		R_°|l_a|t_i_v_#	r_e|l_a|t_i_v_e	0.2	0.02
 relativement	R°lativ°m@	relativement	ADV	ADV				R_°|l_a|t_i|v_°|m_@	r_e|l_a|t_i|v_e|m_ent	8.65	4.48
@@ -103802,8 +103802,8 @@ relativise	R°lativiz	relativiser	VER	VER			imp:pre:2s;ind:pre:3s;	R_°|l_a|t_i|
 relativisent	R°lativiz	relativiser	VER	VER			ind:pre:3p;	R_°|l_a|t_i|v_i_z_#	r_e|l_a|t_i|v_i_s_ent	0.07	0.0
 relativiser	R°lativize	relativiser	VER	VER			inf;	R_°|l_a|t_i|v_i|z_e	r_e|l_a|t_i|v_i|s_er	0.07	0.23
 relativisme	R°lativizm	relativisme	NOM	NOM	m	s		R_°|l_a|t_i|v_i_z_m_#	r_e|l_a|t_i|v_i_s_m_e	0.0	0.05
-relativiste	R2lativist	relativiste	ADJ	ADJ	f	s		R_2|l_a|t_i|v_i_s_t_#	r_e|l_a|t_i|v_i_s_t_e	0.0	0.02
-relativisé	R2lativize	relativiser	VER	VER	m	s	par:pas;	R_2|l_a|t_i|v_i|z_e	r_e|l_a|t_i|v_i|s_é	0.0	0.02
+relativiste	R°lativist	relativiste	ADJ	ADJ	f	s		R_°|l_a|t_i|v_i_s_t_#	r_e|l_a|t_i|v_i_s_t_e	0.0	0.02
+relativisé	R°lativize	relativiser	VER	VER	m	s	par:pas;	R_°|l_a|t_i|v_i|z_e	r_e|l_a|t_i|v_i|s_é	0.0	0.02
 relativité	R°lativite	relativité	NOM	NOM	f	s		R_°|l_a|t_i|v_i|t_e	r_e|l_a|t_i|v_i|t_é	1.22	0.5
 relaté	R°late	relater	VER	VER	m	s	par:pas;	R_°|l_a|t_e	r_e|l_a|t_é	0.68	0.13
 relatée	R°late	relater	VER	VER	f	s	par:pas;	R_°|l_a|t_e_#	r_e|l_a|t_é_e	0.07	0.02
@@ -103844,7 +103844,7 @@ relayent	R°lEj	relayer	VER	VER			ind:pre:3p;	R_°|l_E_j_#	r_e|l_a_y_ent	0.14	0.
 relayer	R°lEje	relayer	VER	VER			inf;	R_°|l_E|j_e	r_e|l_a|y_er	1.01	0.93
 relayera	R°lEj°Ra	relayer	VER	VER			ind:fut:3s;	R_°|l_E|j_°|R_a	r_e|l_a|y_e|r_a	0.07	0.01
 relayerai	R°lEj°Re	relayer	VER	VER			ind:fut:1s;	R_°|l_E|j_°|R_e	r_e|l_a|y_e|r_ai	0.0	0.1
-relayeur	R2lEj9R	relayeur	NOM	NOM	m	s		R_2|l_E|j_9_R	r_e|l_a|y_eu_r	0.0	0.02
+relayeur	R°lEj9R	relayeur	NOM	NOM	m	s		R_°|l_E|j_9_R	r_e|l_a|y_eu_r	0.0	0.02
 relayez	R°lEje	relayer	VER	VER			imp:pre:2p;	R_°|l_Ej|e	r_e|l_ay|ez	0.0	0.05
 relayions	R°lEjj§	relayer	VER	VER			ind:imp:1p;	R_°|l_E_j|j_§	r_e|l_a_y|i_ons	0.07	0.0
 relayons	R°lEj§	relayer	VER	VER			imp:pre:1p;ind:pre:1p;	R_°|l_E|j_§	r_e|l_a|y_ons	0.07	0.02
@@ -103892,7 +103892,7 @@ relevées	R°l°ve	relevée	NOM	VER,ADJ,NOM	f	p		R_°|l_°|v_e_#	r_e|l_e|v_é_es
 relevés	R°l°ve	relevé	NOM	VER,ADJ,NOM	m	p		R_°|l_°|v_e_#	r_e|l_e|v_é_s	0.81	3.12
 relevés	R°l°ve	relever	VER	VER,ADJ,NOM	m	p	par:pas;	R_°|l_°|v_e_#	r_e|l_e|v_é_s	2.43	0.46
 relevés	R°l°ve	relevé	ADJ	VER,ADJ,NOM	m	p		R_°|l_°|v_e_#	r_e|l_e|v_é_s	2.36	0.38
-reliage	R2ljaZ	reliage	NOM	NOM	m	s		R_2|l_j_a_Z	r_e|l_i_a_ge	0.0	0.01
+reliage	R°ljaZ	reliage	NOM	NOM	m	s		R_°|l_j_a_Z	r_e|l_i_a_ge	0.0	0.01
 reliaient	R°ljE	relier	VER	VER			ind:imp:3p;	R_°|l_j_E	r_e|l_i_aient	0.88	0.22
 reliait	R°ljE	relier	VER	VER			ind:imp:3s;	R_°|l_j_E	r_e|l_i_ait	2.64	0.2
 reliant	R°lj@	relier	VER	VER			par:pre;	R_°|l_j_@	r_e|l_i_ant	1.55	0.78
@@ -103964,7 +103964,7 @@ relouerons	R°luR§	relouer	VER	VER			ind:fut:1p;	R_°|l_u_#|R_§	r_e|l_ou_e|r_o
 relourde	R°luRd	relourder	VER	VER			ind:pre:3s;	R_°|l_u_R_d_#	r_e|l_ou_r_d_e	0.07	0.0
 relourder	R°luRde	relourder	VER	VER			inf;	R_°|l_u_R|d_e	r_e|l_ou_r|d_er	0.07	0.0
 relourdé	R°luRde	relourder	VER	VER	m	s	par:pas;	R_°|l_u_R|d_e	r_e|l_ou_r|d_é	0.07	0.0
-reloué	R2lwe	relouer	VER	VER	m	s	par:pas;	R_2|l_w_e	r_e|l_ou_é	0.0	0.1
+reloué	R°lwe	relouer	VER	VER	m	s	par:pas;	R_°|l_w_e	r_e|l_ou_é	0.0	0.1
 relu	R°ly	relire	VER	VER,ADJ	m	s	par:pas;	R_°|l_y	r_e|l_u	3.65	1.35
 relu	R°ly	relu	ADJ	VER,ADJ	m	s		R_°|l_y	r_e|l_u	0.54	0.14
 relue	R°ly	relire	VER	VER,ADJ	f	s	par:pas;	R_°|l_y_#	r_e|l_u_e	0.2	0.02
@@ -104074,16 +104074,16 @@ reléguées	R°lege	relégué	ADJ	VER,ADJ	f	p		R_°|l_e|g_e_#	r_e|l_é|gu_é_es	
 relégués	R°lege	relégué	ADJ	VER,ADJ,NOM	m	p		R_°|l_e|g_e_#	r_e|l_é|gu_é_s	0.2	0.1
 relégués	R°lege	reléguer	VER	VER,ADJ,NOM	m	p	par:pas;	R_°|l_e|g_e_#	r_e|l_é|gu_é_s	0.2	0.05
 relégués	R°lege	relégué	NOM	VER,ADJ,NOM	m	p		R_°|l_e|g_e_#	r_e|l_é|gu_é_s	0.2	0.01
-remaigrir	R2megRiR	remaigrir	VER	VER			inf;	R_2|m_e|g_R_i_R	r_e|m_ai|g_r_i_r	0.0	0.01
+remaigrir	R°megRiR	remaigrir	VER	VER			inf;	R_°|m_e|g_R_i_R	r_e|m_ai|g_r_i_r	0.0	0.01
 remaillage	R°majaZ	remaillage	NOM	NOM	m	s		R_°|m_a|j_a_Z	r_e|m_a|ill_a_ge	0.2	0.0
 remaillaient	R°majE	remailler	VER	VER			ind:imp:3p;	R_°|m_a|j_E	r_e|m_a|ill_aient	0.07	0.0
 remaillant	R°maj@	remailler	VER	VER			par:pre;	R_°|m_a|j_@	r_e|m_a|ill_ant	0.07	0.0
 remailler	R°maje	remailler	VER	VER			inf;	R_°|m_a|j_e	r_e|m_a|ill_er	0.07	0.0
-remailleuse	R2maj2z	mailleur	NOM	NOM	f	s		R_2|m_a|j_2_z_#	r_e|m_a|ill_eu_s_e	0.07	0.0
+remailleuse	R°maj2z	mailleur	NOM	NOM	f	s		R_°|m_a|j_2_z_#	r_e|m_a|ill_eu_s_e	0.07	0.0
 remaillés	R°maje	remailler	VER	VER	m	p	par:pas;	R_°|m_a|j_e_#	r_e|m_a|ill_é_s	0.07	0.0
 remake	RimEk	remake	NOM	NOM	m	s		R_i|m_E_k_#	r_e|m_a_k_e	0.54	0.66
 remange	R°m@Z	remanger	VER	VER			ind:pre:1s;	R_°|m_@_Z	r_e|m_an_ge	0.0	0.03
-remanger	R2m@Ze	remanger	VER	VER			inf;	R_2|m_@|Z_e	r_e|m_an|g_er	0.0	0.04
+remanger	R°m@Ze	remanger	VER	VER			inf;	R_°|m_@|Z_e	r_e|m_an|g_er	0.0	0.04
 remangerait	R°m@Z°RE	remanger	VER	VER			cnd:pre:3s;	R_°|m_@|Z_°|R_E	r_e|m_an|g_e|r_ait	0.07	0.0
 remania	R°manja	remanier	VER	VER			ind:pas:3s;	R_°|m_a|n_j_a	r_e|m_a|n_i_a	0.07	0.0
 remaniait	R°manjE	remanier	VER	VER			ind:imp:3s;	R_°|m_a|n_j_E	r_e|m_a|n_i_ait	0.07	0.0
@@ -104332,8 +104332,8 @@ remisé	R°mize	remiser	VER	VER	m	s	par:pas;	R_°|m_i|z_e	r_e|m_i|s_é	0.74	0.12
 remisée	R°mize	remiser	VER	VER	f	s	par:pas;	R_°|m_i|z_e_#	r_e|m_i|s_é_e	0.27	0.0
 remisés	R°mize	remiser	VER	VER	m	p	par:pas;	R_°|m_i|z_e_#	r_e|m_i|s_é_s	0.34	0.01
 remit	R°mi	remettre	VER	VER			ind:pas:3s;	R_°|m_i	r_e|m_it	32.16	0.66
-remix	R2miks	remix	NOM	NOM	m			R_2|m_i_ks	r_e|m_i_x	0.0	0.15
-remixer	R2mikse	remixer	VER	VER			inf;	R_2|m_i|ks_e	r_e|m_i|x_er	0.0	0.02
+remix	R°miks	remix	NOM	NOM	m			R_°|m_i_ks	r_e|m_i_x	0.0	0.15
+remixer	R°mikse	remixer	VER	VER			inf;	R_°|m_i|ks_e	r_e|m_i|x_er	0.0	0.02
 remmailleuses	R@maj2z	remmailleuse	NOM	NOM	f	p		R_@|m_a|j_2_z_#	r_em|m_a|ill_eu_s_es	0.14	0.0
 remmenaient	R@m°nE	remmener	VER	VER			ind:imp:3p;	R_@|m_°|n_E	r_em|m_e|n_aient	0.07	0.0
 remmener	R@m°ne	remmener	VER	VER			inf;	R_@|m_°|n_e	r_em|m_e|n_er	0.07	0.16
@@ -104408,7 +104408,7 @@ remord	R°mOR	remordre	VER	VER			ind:pre:3s;	R_°|m_O_R_#	r_e|m_o_r_d	0.2	0.43
 remordait	R°mORdE	remordre	VER	VER			ind:imp:3s;	R_°|m_O_R|d_E	r_e|m_o_r|d_ait	0.14	0.0
 remords	R°mOR	remords	NOM	VER,NOM	m			R_°|m_O_R_#	r_e|m_o_r_ds	27.64	10.67
 remords	R°mOR	remordre	VER	VER,NOM			ind:pre:1s;	R_°|m_O_R_#	r_e|m_o_r_ds	0.07	0.17
-remordu	R2mORdy	remordre	VER	VER	m	s	par:pas;	R_2|m_O_R|d_y	r_e|m_o_r|d_u	0.0	0.01
+remordu	R°mORdy	remordre	VER	VER	m	s	par:pas;	R_°|m_O_R|d_y	r_e|m_o_r|d_u	0.0	0.01
 remorqua	R°mORka	remorquer	VER	VER			ind:pas:3s;	R_°|m_O_R|k_a	r_e|m_o_r|qu_a	0.2	0.0
 remorquage	R°mORkaZ	remorquage	NOM	NOM	m	s		R_°|m_O_R|k_a_Z	r_e|m_o_r|qu_a_ge	0.07	0.49
 remorquaient	R°mORkE	remorquer	VER	VER			ind:imp:3p;	R_°|m_O_R|k_E	r_e|m_o_r|qu_aient	0.07	0.0
@@ -104588,7 +104588,7 @@ remugles	R°mygl	remugle	NOM	NOM	m	p		R_°|m_y_g_l_#	r_e|m_u_g_l_es	1.55	0.01
 remuions	R°myj§	remuer	VER	VER			ind:imp:1p;	R_°|m_y|j_§	r_e|m_u|i_ons	0.07	0.0
 remuons	R°my§	remuer	VER	VER			imp:pre:1p;ind:pre:1p;	R_°|m_y|§	r_e|m_u|ons	0.0	0.2
 remuscle	R°myskl	remuscler	VER	VER			imp:pre:2s;	R_°|m_y_s_k_l_#	r_e|m_u_s_c_l_e	0.0	0.01
-remuscler	R2myskle	remuscler	VER	VER			inf;	R_2|m_y_s|k_l_e	r_e|m_u_s|c_l_er	0.0	0.16
+remuscler	R°myskle	remuscler	VER	VER			inf;	R_°|m_y_s|k_l_e	r_e|m_u_s|c_l_er	0.0	0.16
 remuâmes	R°m8am	remuer	VER	VER			ind:pas:1p;	R_°|m_8_a_m_#	r_e|m_u_â_m_es	0.07	0.0
 remuèrent	R°m8ER	remuer	VER	VER			ind:pas:3p;	R_°|m_8_E_R_#	r_e|m_u_è_r_ent	1.15	0.0
 remué	R°m8e	remuer	VER	VER	m	s	par:pas;	R_°|m_8_e	r_e|m_u_é	5.47	1.68
@@ -104610,7 +104610,7 @@ remâchées	R°maSe	remâcher	VER	VER	f	p	par:pas;	R_°|m_a|S_e_#	r_e|m_â|ch_é
 remède	R°mEd	remède	NOM	NOM	m	s		R_°|m_E_d_#	r_e|m_è_d_e	10.07	14.09
 remèdes	R°mEd	remède	NOM	NOM	m	p		R_°|m_E_d_#	r_e|m_è_d_es	3.38	2.05
 remédia	R°medja	remédier	VER	VER			ind:pas:3s;	R_°|m_e|d_j_a	r_e|m_é|d_i_a	0.07	0.01
-remédiable	R2medjabl	remédiable	ADJ	ADJ	m	s		R_2|m_e|d_j_a_b_l_#	r_e|m_é|d_i_a_b_l_e	0.0	0.01
+remédiable	R°medjabl	remédiable	ADJ	ADJ	m	s		R_°|m_e|d_j_a_b_l_#	r_e|m_é|d_i_a_b_l_e	0.0	0.01
 remédiait	R°medjE	remédier	VER	VER			ind:imp:3s;	R_°|m_e|d_j_E	r_e|m_é|d_i_ait	0.07	0.01
 remédie	R°medi	remédier	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	R_°|m_e|d_i_#	r_e|m_é|d_i_e	0.07	0.07
 remédier	R°medje	remédier	VER	VER			inf;	R_°|m_e|d_j_e	r_e|m_é|d_i_er	2.5	3.21
@@ -104624,7 +104624,7 @@ remémora	R°memoRa	remémorer	VER	VER			ind:pas:3s;	R_°|m_e|m_o|R_a	r_e|m_é|m
 remémorais	R°memoRE	remémorer	VER	VER			ind:imp:1s;	R_°|m_e|m_o|R_E	r_e|m_é|m_o|r_ais	0.27	0.03
 remémorait	R°memoRE	remémorer	VER	VER			ind:imp:3s;	R_°|m_e|m_o|R_E	r_e|m_é|m_o|r_ait	0.27	0.0
 remémorant	R°memoR@	remémorer	VER	VER			par:pre;	R_°|m_e|m_o|R_@	r_e|m_é|m_o|r_ant	0.34	0.02
-remémoration	R2memORasj§	remémoration	NOM	NOM	f	s		R_2|m_e|m_O|R_a|s_j_§	r_e|m_é|m_o|r_a|t_i_on	0.0	0.02
+remémoration	R°memORasj§	remémoration	NOM	NOM	f	s		R_°|m_e|m_O|R_a|s_j_§	r_e|m_é|m_o|r_a|t_i_on	0.0	0.02
 remémorative	R°memoRativ	remémoratif	ADJ	ADJ	f	s		R_°|m_e|m_o|R_a|t_i_v_#	r_e|m_é|m_o|r_a|t_i_v_e	0.07	0.0
 remémore	R°memoR	remémorer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	R_°|m_e|m_o_R_#	r_e|m_é|m_o_r_e	0.81	0.34
 remémorent	R°memoR	remémorer	VER	VER			ind:pre:3p;	R_°|m_e|m_o_R_#	r_e|m_é|m_o_r_ent	0.0	0.01
@@ -104653,14 +104653,14 @@ renardeau	R°naRdo	renardeau	NOM	NOM	m	s		R_°|n_a_R|d_o	r_e|n_a_r|d_eau	0.41	0.
 renardeaux	R°naRdo	renardeau	NOM	NOM	m	p		R_°|n_a_R|d_o_#	r_e|n_a_r|d_eau_x	0.14	0.0
 renardes	R°naRd	renard	NOM	NOM	f	p		R_°|n_a_R_d_#	r_e|n_a_r_d_es	0.0	0.01
 renards	R°naR	renard	NOM	NOM	m	p		R_°|n_a_R_#	r_e|n_a_r_ds	3.18	1.74
-renaud	R2no	renaud	NOM	NOM		s		R_2|n_o_#	r_e|n_au_d	0.68	0.0
+renaud	R°no	renaud	NOM	NOM		s		R_°|n_o_#	r_e|n_au_d	0.68	0.0
 renaudais	R°nodE	renauder	VER	VER			ind:imp:1s;	R_°|n_o|d_E	r_e|n_au|d_ais	0.07	0.0
 renaudait	R°nodE	renauder	VER	VER			ind:imp:3s;	R_°|n_o|d_E	r_e|n_au|d_ait	0.47	0.0
 renaudant	R°nod@	renauder	VER	VER			par:pre;	R_°|n_o|d_@	r_e|n_au|d_ant	0.2	0.0
 renaude	R°nod	renauder	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	R_°|n_o_d_#	r_e|n_au_d_e	0.61	0.0
 renaudent	R°nod	renauder	VER	VER			ind:pre:3p;	R_°|n_o_d_#	r_e|n_au_d_ent	0.07	0.0
 renauder	R°node	renauder	VER	VER			inf;	R_°|n_o|d_e	r_e|n_au|d_er	1.08	0.0
-renaudeur	R2nod9R	renaudeur	NOM	NOM	m	s		R_2|n_o|d_9_R	r_e|n_au|d_eu_r	0.07	0.0
+renaudeur	R°nod9R	renaudeur	NOM	NOM	m	s		R_°|n_o|d_9_R	r_e|n_au|d_eu_r	0.07	0.0
 renaudé	R°node	renauder	VER	VER	m	s	par:pas;	R_°|n_o|d_e	r_e|n_au|d_é	0.14	0.0
 renaît	R°nE	renaître	VER	VER			ind:pre:3s;	R_°|n_E_#	r_e|n_aî_t	1.96	0.96
 renaîtra	R°nEtRa	renaître	VER	VER			ind:fut:3s;	R_°|n_E|t_R_a	r_e|n_aî|t_r_a	0.74	0.44
@@ -104796,7 +104796,7 @@ rendus	R@dy	rendu	NOM	VER,ADJ,NOM	m	p		R_@|d_y	r_en|d_us	1.08	0.17
 rendîmes	R@dim	rendre	VER	VER			ind:pas:1p;	R_@|d_i_m_#	r_en|d_î_m_es	0.68	0.0
 reneige	R°nEZ	reneiger	VER	VER			ind:pre:3s;	R_°|n_E_Z	r_e|n_ei_ge	0.07	0.0
 reneiger	R°nEZe	reneiger	VER	VER			inf;	R_°|n_E|Z_e	r_e|n_ei|g_er	0.0	0.01
-renettoyer	R2nEtwaje	renettoyer	VER	VER			inf;	R_2|n_E|t_wa_j|e	r_e|n_e|tt_o_y|er	0.0	0.01
+renettoyer	R°nEtwaje	renettoyer	VER	VER			inf;	R_°|n_E|t_wa_j|e	r_e|n_e|tt_o_y|er	0.0	0.01
 renferma	R@fERma	renfermer	VER	VER			ind:pas:3s;	R_@|f_E_R|m_a	r_en|f_e_r|m_a	0.14	0.1
 renfermaient	R@fERmE	renfermer	VER	VER			ind:imp:3p;	R_@|f_E_R|m_E	r_en|f_e_r|m_aient	0.34	0.0
 renfermait	R@fERmE	renfermer	VER	VER			ind:imp:3s;	R_@|f_E_R|m_E	r_en|f_e_r|m_ait	0.88	0.17
@@ -104950,7 +104950,7 @@ renieront	R°niR§	renier	VER	VER			ind:fut:3p;	R_°|n_i_#|R_§	r_e|n_i_e|r_ont	
 renies	R°ni	renier	VER	VER			ind:pre:2s;	R_°|n_i_#	r_e|n_i_es	0.27	0.25
 reniez	R°nje	renier	VER	VER			imp:pre:2p;ind:pre:2p;	R_°|n_j_e	r_e|n_i_ez	0.14	0.03
 renifla	R°nifla	renifler	VER	VER			ind:pas:3s;	R_°|n_i|f_l_a	r_e|n_i|f_l_a	3.31	0.0
-reniflage	R2niflaZ	reniflage	NOM	NOM	m	s		R_2|n_i|f_l_a_Z	r_e|n_i|f_l_a_ge	0.0	0.05
+reniflage	R°niflaZ	reniflage	NOM	NOM	m	s		R_°|n_i|f_l_a_Z	r_e|n_i|f_l_a_ge	0.0	0.05
 reniflai	R°nifle	renifler	VER	VER			ind:pas:1s;	R_°|n_i|f_l_e	r_e|n_i|f_l_ai	0.2	0.0
 reniflaient	R°niflE	renifler	VER	VER			ind:imp:3p;	R_°|n_i|f_l_E	r_e|n_i|f_l_aient	0.88	0.0
 reniflais	R°niflE	renifler	VER	VER			ind:imp:1s;ind:imp:2s;	R_°|n_i|f_l_E	r_e|n_i|f_l_ais	0.34	0.04
@@ -105037,7 +105037,7 @@ renonçais	R°n§sE	renoncer	VER	VER			ind:imp:1s;	R_°|n_§|s_E	r_e|n_on|ç_ais
 renonçait	R°n§sE	renoncer	VER	VER			ind:imp:3s;	R_°|n_§|s_E	r_e|n_on|ç_ait	3.18	0.18
 renonçant	R°n§s@	renoncer	VER	VER			par:pre;	R_°|n_§|s_@	r_e|n_on|ç_ant	4.46	0.71
 renonçons	R°n§s§	renoncer	VER	VER			imp:pre:1p;ind:pre:1p;	R_°|n_§|s_§	r_e|n_on|ç_ons	0.47	0.47
-renoter	R2nOte	renoter	VER	VER			inf;	R_2|n_O|t_e	r_e|n_o|t_er	0.0	0.01
+renoter	R°nOte	renoter	VER	VER			inf;	R_°|n_O|t_e	r_e|n_o|t_er	0.0	0.01
 renoua	R°nwa	renouer	VER	VER			ind:pas:3s;	R_°|n_w_a	r_e|n_ou_a	0.27	0.0
 renouai	R°nwe	renouer	VER	VER			ind:pas:1s;	R_°|n_w_e	r_e|n_ou_ai	0.2	0.0
 renouaient	R°nwE	renouer	VER	VER			ind:imp:3p;	R_°|n_w_E	r_e|n_ou_aient	0.2	0.0
@@ -105286,9 +105286,9 @@ reparaît	R°paRE	reparaître	VER	VER			ind:pre:3s;	R_°|p_a|R_E_#	r_e|p_a|r_aî
 reparaîtra	R°paREtRa	reparaître	VER	VER			ind:fut:3s;	R_°|p_a|R_E|t_R_a	r_e|p_a|r_aî|t_r_a	0.27	0.01
 reparaîtrait	R°paREtRE	reparaître	VER	VER			cnd:pre:3s;	R_°|p_a|R_E|t_R_E	r_e|p_a|r_aî|t_r_ait	0.07	0.0
 reparaître	R°paREtR	reparaître	VER	VER			inf;	R_°|p_a|R_E_t_R_#	r_e|p_a|r_aî_t_r_e	3.38	0.06
-reparcourant	R2paRkuR@	reparcourir	VER	VER			par:pre;	R_2|p_a_R|k_u|R_@	r_e|p_a_r|c_ou|r_ant	0.2	0.0
-reparcourir	R2paRkuRiR	reparcourir	VER	VER			inf;	R_2|p_a_R|k_u|R_i_R	r_e|p_a_r|c_ou|r_i_r	0.07	0.13
-reparcouru	R2paRkuRy	reparcourir	VER	VER	m	s	par:pas;	R_2|p_a_R|k_u|R_y	r_e|p_a_r|c_ou|r_u	0.07	0.01
+reparcourant	R°paRkuR@	reparcourir	VER	VER			par:pre;	R_°|p_a_R|k_u|R_@	r_e|p_a_r|c_ou|r_ant	0.2	0.0
+reparcourir	R°paRkuRiR	reparcourir	VER	VER			inf;	R_°|p_a_R|k_u|R_i_R	r_e|p_a_r|c_ou|r_i_r	0.07	0.13
+reparcouru	R°paRkuRy	reparcourir	VER	VER	m	s	par:pas;	R_°|p_a_R|k_u|R_y	r_e|p_a_r|c_ou|r_u	0.07	0.01
 reparla	R°paRla	reparler	VER	VER			ind:pas:3s;	R_°|p_a_R|l_a	r_e|p_a_r|l_a	0.95	0.03
 reparlaient	R°paRlE	reparler	VER	VER			ind:imp:3p;	R_°|p_a_R|l_E	r_e|p_a_r|l_aient	0.14	0.0
 reparlais	R°paRlE	reparler	VER	VER			ind:imp:1s;ind:imp:2s;	R_°|p_a_R|l_E	r_e|p_a_r|l_ais	0.07	0.04
@@ -105377,8 +105377,8 @@ repassé	R°pase	repasser	VER	VER	m	s	par:pas;	R_°|p_a|s_e	r_e|p_a|ss_é	3.51	1
 repassée	R°pase	repasser	VER	VER	f	s	par:pas;	R_°|p_a|s_e_#	r_e|p_a|ss_é_e	1.15	0.52
 repassées	R°pase	repasser	VER	VER	f	p	par:pas;	R_°|p_a|s_e_#	r_e|p_a|ss_é_es	0.34	0.14
 repassés	R°pase	repasser	VER	VER	m	p	par:pas;	R_°|p_a|s_e_#	r_e|p_a|ss_é_s	0.95	0.7
-repavage	R2pavaZ	repavage	NOM	NOM	m	s		R_2|p_a|v_a_Z	r_e|p_a|v_a_ge	0.0	0.04
-repaver	R2pave	repaver	VER	VER			inf;	R_2|p_a|v_e	r_e|p_a|v_er	0.0	0.01
+repavage	R°pavaZ	repavage	NOM	NOM	m	s		R_°|p_a|v_a_Z	r_e|p_a|v_a_ge	0.0	0.04
+repaver	R°pave	repaver	VER	VER			inf;	R_°|p_a|v_e	r_e|p_a|v_er	0.0	0.01
 repavé	R°pave	repaver	VER	VER	m	s	par:pas;	R_°|p_a|v_e	r_e|p_a|v_é	0.07	0.0
 repayais	R°pEjE	repayer	VER	VER			ind:imp:1s;	R_°|p_Ej|E	r_e|p_ay|ais	0.07	0.0
 repayait	R°pEjE	repayer	VER	VER			ind:imp:3s;	R_°|p_Ej|E	r_e|p_ay|ait	0.07	0.0
@@ -105410,7 +105410,7 @@ repeintes	R°p5t	repeindre	VER	VER	f	p	par:pas;	R_°|p_5_t_#	r_e|p_ein_t_es	0.61
 repeints	R°p5	repeindre	VER	VER,NOM	m	p	par:pas;	R_°|p_5_#	r_e|p_ein_ts	0.54	0.01
 repeints	R°p5	repeint	NOM	VER,NOM	m	p		R_°|p_5_#	r_e|p_ein_ts	0.34	0.0
 rependra	R°p@dRa	rependre	VER	VER			ind:fut:3s;	R_°|p_@|d_R_a	r_e|p_en|d_r_a	0.07	0.0
-rependre	R2p@dR	rependre	VER	VER			inf;	R_2|p_@_d_R_#	r_e|p_en_d_r_e	0.0	0.22
+rependre	R°p@dR	rependre	VER	VER			inf;	R_°|p_@_d_R_#	r_e|p_en_d_r_e	0.0	0.22
 repends	R°p@	rependre	VER	VER			imp:pre:2s;ind:pre:1s;	R_°|p_@_#	r_e|p_en_ds	0.0	0.15
 rependu	R°p@dy	rependre	VER	VER	m	s	par:pas;	R_°|p_@|d_y	r_e|p_en|d_u	0.0	0.01
 rependus	R°p@dy	rependre	VER	VER	m	p	par:pas;	R_°|p_@|d_y	r_e|p_en|d_us	0.07	0.0
@@ -105640,7 +105640,7 @@ repositionnez	R°pozisjone	repositionner	VER	VER			imp:pre:2p;	R_°|p_o|z_i|s_j_
 reposoir	R°pozwaR	reposoir	NOM	NOM	m	s		R_°|p_o|z_wa_R	r_e|p_o|s_oi_r	0.81	0.17
 reposoirs	R°pozwaR	reposoir	NOM	NOM	m	p		R_°|p_o|z_wa_R_#	r_e|p_o|s_oi_r_s	0.2	0.0
 reposons	R°poz§	reposer	VER	VER			imp:pre:1p;ind:pre:1p;	R_°|p_o|z_§	r_e|p_o|s_ons	0.27	1.04
-reposséder	R2pOsede	reposséder	VER	VER			inf;	R_2|p_O|s_e|d_e	r_e|p_o|ss_é|d_er	0.0	0.03
+reposséder	R°pOsede	reposséder	VER	VER			inf;	R_°|p_O|s_e|d_e	r_e|p_o|ss_é|d_er	0.0	0.03
 repostait	R°postE	reposter	VER	VER			ind:imp:3s;	R_°|p_o_s|t_E	r_e|p_o_s|t_ait	0.07	0.0
 reposèrent	R°pozER	reposer	VER	VER			ind:pas:3p;	R_°|p_o|z_E_R_#	r_e|p_o|s_è_r_ent	0.41	0.0
 reposé	R°poze	reposer	VER	VER,ADJ	m	s	par:pas;	R_°|p_o|z_e	r_e|p_o|s_é	3.38	0.76
@@ -105656,7 +105656,7 @@ repoudrait	R°pudRE	repoudrer	VER	VER			ind:imp:3s;	R_°|p_u|d_R_E	r_e|p_ou|d_r_
 repoudrant	R°pudR@	repoudrer	VER	VER			par:pre;	R_°|p_u|d_R_@	r_e|p_ou|d_r_ant	0.14	0.0
 repoudre	R°pudR	repoudrer	VER	VER			imp:pre:2s;ind:pre:1s;	R_°|p_u_d_R_#	r_e|p_ou_d_r_e	0.0	0.04
 repoudrer	R°pudRe	repoudrer	VER	VER			inf;	R_°|p_u|d_R_e	r_e|p_ou|d_r_er	0.0	0.37
-repoudré	R2pudRe	repoudrer	VER	VER	m	s	par:pas;	R_2|p_u|d_R_e	r_e|p_ou|d_r_é	0.0	0.02
+repoudré	R°pudRe	repoudrer	VER	VER	m	s	par:pas;	R_°|p_u|d_R_e	r_e|p_ou|d_r_é	0.0	0.02
 repoudrée	R°pudRe	repoudrer	VER	VER	f	s	par:pas;	R_°|p_u|d_R_e_#	r_e|p_ou|d_r_é_e	0.07	0.0
 repoussa	R°pusa	repousser	VER	VER			ind:pas:3s;	R_°|p_u|s_a	r_e|p_ou|ss_a	11.15	0.03
 repoussage	R°pusaZ	repoussage	NOM	NOM	m	s		R_°|p_u|s_a_Z	r_e|p_ou|ss_a_ge	0.0	0.02
@@ -105782,7 +105782,7 @@ reproductif	R°pROdyktif	reproductif	ADJ	ADJ	m	s		R_°|p_R_O|d_y_k|t_i_f	r_e|p_r
 reproductifs	R°pROdyktif	reproductif	ADJ	ADJ	m	p		R_°|p_R_O|d_y_k|t_i_f_#	r_e|p_r_o|d_u_c|t_i_f_s	0.0	0.02
 reproduction	R°pRodyksj§	reproduction	NOM	NOM	f	s		R_°|p_R_o|d_y_k|s_j_§	r_e|p_r_o|d_u_c|t_i_on	5.34	4.08
 reproductions	R°pRodyksj§	reproduction	NOM	NOM	f	p		R_°|p_R_o|d_y_k|s_j_§_#	r_e|p_r_o|d_u_c|t_i_on_s	2.64	0.16
-reproductive	R2pROdyktiv	reproductif	ADJ	ADJ	f	s		R_2|p_R_O|d_y_k|t_i_v_#	r_e|p_r_o|d_u_c|t_i_v_e	0.0	0.01
+reproductive	R°pROdyktiv	reproductif	ADJ	ADJ	f	s		R_°|p_R_O|d_y_k|t_i_v_#	r_e|p_r_o|d_u_c|t_i_v_e	0.0	0.01
 reproductrice	R°pRodyktRis	reproducteur	ADJ	ADJ,NOM	f	s		R_°|p_R_o|d_y_k|t_R_i_s_#	r_e|p_r_o|d_u_c|t_r_i_c_e	0.07	0.03
 reproductrice	R°pRodyktRis	reproducteur	NOM	ADJ,NOM	f	s		R_°|p_R_o|d_y_k|t_R_i_s_#	r_e|p_r_o|d_u_c|t_r_i_c_e	0.14	0.01
 reproductrices	R°pRodyktRis	reproducteur	NOM	ADJ,NOM	f	p		R_°|p_R_o|d_y_k|t_R_i_s_#	r_e|p_r_o|d_u_c|t_r_i_c_es	0.0	0.1
@@ -105817,7 +105817,7 @@ reprogrammé	R°pRogRame	reprogrammer	VER	VER	m	s	par:pas;	R_°|p_R_o|g_R_a|m_e	
 reprogrammée	R°pRogRame	reprogrammer	VER	VER	f	s	par:pas;	R_°|p_R_o|g_R_a|m_e_#	r_e|p_r_o|g_r_a|mm_é_e	0.0	0.04
 reprogrammés	R°pRogRame	reprogrammer	VER	VER	m	p	par:pas;	R_°|p_R_o|g_R_a|m_e_#	r_e|p_r_o|g_r_a|mm_é_s	0.0	0.01
 reprographie	R°pRogRafi	reprographie	NOM	NOM	f	s		R_°|p_R_o|g_R_a|f_i_#	r_e|p_r_o|g_r_a|ph_i_e	0.07	0.08
-reproposer	R2pROpoze	reproposer	VER	VER			inf;	R_2|p_R_O|p_o|z_e	r_e|p_r_o|p_o|s_er	0.0	0.01
+reproposer	R°pROpoze	reproposer	VER	VER			inf;	R_°|p_R_O|p_o|z_e	r_e|p_r_o|p_o|s_er	0.0	0.01
 représailles	R°pRezaj	représaille	NOM	NOM	f	p		R_°|p_R_e|z_a_j_#	r_e|p_r_é|s_a_ill_es	4.86	3.07
 représenta	R°pRez@ta	représenter	VER	VER			ind:pas:3s;	R_°|p_R_e|z_@|t_a	r_e|p_r_é|s_en|t_a	0.95	0.16
 représentai	R°pRez@te	représenter	VER	VER			ind:pas:1s;	R_°|p_R_e|z_@|t_e	r_e|p_r_é|s_en|t_ai	0.27	0.0
@@ -105871,12 +105871,12 @@ reptilienne	REptiljEn	reptilien	ADJ	ADJ	f	s		R_E_p|t_i|l_j_E_n_#	r_e_p|t_i|l_i_e
 reptiliennes	REptiljEn	reptilien	ADJ	ADJ	f	p		R_E_p|t_i|l_j_E_n_#	r_e_p|t_i|l_i_e_nn_es	0.07	0.01
 reptiliens	REptilj5	reptilien	ADJ	ADJ	m	p		R_E_p|t_i|l_j_5_#	r_e_p|t_i|l_i_en_s	0.14	0.0
 repu	R°py	repu	ADJ	ADJ	m	s		R_°|p_y	r_e|p_u	1.49	0.54
-republication	R2pyblikasj§	republication	NOM	NOM	f	s		R_2|p_y|b_l_i|k_a|s_j_§	r_e|p_u|b_l_i|c_a|t_i_on	0.0	0.01
+republication	R°pyblikasj§	republication	NOM	NOM	f	s		R_°|p_y|b_l_i|k_a|s_j_§	r_e|p_u|b_l_i|c_a|t_i_on	0.0	0.01
 republier	R°pyblije	republier	VER	VER			inf;	R_°|p_y|b_l_ij|e	r_e|p_u|b_l_i|er	0.07	0.0
 republions	R°pybli§	republier	VER	VER			imp:pre:1p;	R_°|p_y|b_l_i|§	r_e|p_u|b_l_i|ons	0.0	0.01
 repue	R°py	repu	ADJ	ADJ	f	s		R_°|p_y_#	r_e|p_u_e	0.47	0.17
 repues	R°py	repu	ADJ	ADJ	f	p		R_°|p_y_#	r_e|p_u_es	0.27	0.14
-repuiser	R2p8ize	repuiser	VER	VER			inf;	R_2|p_8_i|z_e	r_e|p_u_i|s_er	0.07	0.0
+repuiser	R°p8ize	repuiser	VER	VER			inf;	R_°|p_8_i|z_e	r_e|p_u_i|s_er	0.07	0.0
 repus	R°py	repu	ADJ	ADJ	m	p		R_°|p_y_#	r_e|p_u_s	0.95	0.25
 repère	R°pER	repère	NOM	NOM,VER	m	s		R_°|p_E_R_#	r_e|p_è_r_e	5.34	2.44
 repère	R°pER	repérer	VER	NOM,VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;sub:pre:3s;	R_°|p_E_R_#	r_e|p_è_r_e	2.5	2.17
@@ -105900,7 +105900,7 @@ repérerais	R°peR°RE	repérer	VER	VER			cnd:pre:2s;	R_°|p_e|R_°|R_E	r_e|p_é
 repérerait	R°peR°RE	repérer	VER	VER			cnd:pre:3s;	R_°|p_e|R_°|R_E	r_e|p_é|r_e|r_ait	0.07	0.01
 repérerons	R°peR°R§	repérer	VER	VER			ind:fut:1p;	R_°|p_e|R_°|R_§	r_e|p_é|r_e|r_ons	0.0	0.01
 repéreront	R°peR°R§	repérer	VER	VER			ind:fut:3p;	R_°|p_e|R_°|R_§	r_e|p_é|r_e|r_ont	0.07	0.07
-repéreur	R2peR9R	repéreur	NOM	NOM	m	s		R_2|p_e|R_9_R	r_e|p_é|r_eu_r	0.0	0.05
+repéreur	R°peR9R	repéreur	NOM	NOM	m	s		R_°|p_e|R_9_R	r_e|p_é|r_eu_r	0.0	0.05
 repérez	R°peRe	repérer	VER	VER			imp:pre:2p;ind:pre:2p;	R_°|p_e|R_e	r_e|p_é|r_ez	0.0	0.75
 repériez	R°peRje	repérer	VER	VER			ind:imp:2p;	R_°|p_e|R_j_e	r_e|p_é|r_i_ez	0.0	0.03
 repérions	R°peRj§	repérer	VER	VER			ind:imp:1p;	R_°|p_e|R_j_§	r_e|p_é|r_i_ons	0.2	0.0
@@ -105917,7 +105917,7 @@ repêchage	R°pESaZ	repêchage	NOM	NOM	m	s		R_°|p_E|S_a_Z	r_e|p_ê|ch_a_ge	0.2	
 repêchages	R°pESaZ	repêchage	NOM	NOM	m	p		R_°|p_E|S_a_Z_#	r_e|p_ê|ch_a_g_es	0.07	0.01
 repêchai	R°pESe	repêcher	VER	VER			ind:pas:1s;	R_°|p_E|S_e	r_e|p_ê|ch_ai	0.14	0.0
 repêchait	R°pESE	repêcher	VER	VER			ind:imp:3s;	R_°|p_E|S_E	r_e|p_ê|ch_ait	0.34	0.01
-repêchant	R2pES@	repêcher	VER	VER			par:pre;	R_2|p_E|S_@	r_e|p_ê|ch_ant	0.0	0.01
+repêchant	R°pES@	repêcher	VER	VER			par:pre;	R_°|p_E|S_@	r_e|p_ê|ch_ant	0.0	0.01
 repêche	R°pES	repêcher	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	R_°|p_E_S_#	r_e|p_ê_ch_e	0.81	0.39
 repêcher	R°pESe	repêcher	VER	VER			inf;	R_°|p_E|S_e	r_e|p_ê|ch_er	1.08	0.91
 repêchera	R°pES°Ra	repêcher	VER	VER			ind:fut:3s;	R_°|p_E|S_°|R_a	r_e|p_ê|ch_e|r_a	0.07	0.11
@@ -105928,7 +105928,7 @@ repêché	R°pESe	repêcher	VER	VER	m	s	par:pas;	R_°|p_E|S_e	r_e|p_ê|ch_é	0.8
 repêchée	R°pESe	repêcher	VER	VER	f	s	par:pas;	R_°|p_E|S_e_#	r_e|p_ê|ch_é_e	0.27	0.36
 repêchées	R°pESe	repêcher	VER	VER	f	p	par:pas;	R_°|p_E|S_e_#	r_e|p_ê|ch_é_es	0.07	0.0
 repêchés	R°pESe	repêcher	VER	VER	m	p	par:pas;	R_°|p_E|S_e_#	r_e|p_ê|ch_é_s	0.07	0.2
-requalifier	R2kalifje	requalifier	VER	VER			inf;	R_2|k_a|l_i|f_j_e	r_e|qu_a|l_i|f_i_er	0.0	0.01
+requalifier	R°kalifje	requalifier	VER	VER			inf;	R_°|k_a|l_i|f_j_e	r_e|qu_a|l_i|f_i_er	0.0	0.01
 requiem	Rek8ijEm	requiem	NOM	NOM	m	s		R_e|k_8_ij|E_m	r_e|q_u_i|e_m	0.61	2.76
 requiers	R°kjER	requérir	VER	VER			ind:pre:1s;	R_°|k_j_E_R_#	r_e|qu_i_e_r_s	0.0	0.76
 requiert	R°kjER	requérir	VER	VER			ind:pre:3s;	R_°|k_j_E_R_#	r_e|qu_i_e_r_t	0.95	2.33
@@ -105964,7 +105964,7 @@ requérir	R°keRiR	requérir	VER	VER			inf;	R_°|k_e|R_i_R	r_e|qu_é|r_i_r	0.41	
 requérons	R°keR§	requérir	VER	VER			imp:pre:1p;ind:pre:1p;	R_°|k_e|R_§	r_e|qu_é|r_ons	0.07	0.04
 requête	R°kEt	requête	NOM	NOM	f	s		R_°|k_E_t_#	r_e|qu_ê_t_e	1.69	7.75
 requêtes	R°kEt	requête	NOM	NOM	f	p		R_°|k_E_t_#	r_e|qu_ê_t_es	0.27	1.07
-resalir	R2saliR	resalir	VER	VER			inf;	R_2|s_a|l_i_R	r_e|s_a|l_i_r	0.0	0.01
+resalir	R°saliR	resalir	VER	VER			inf;	R_°|s_a|l_i_R	r_e|s_a|l_i_r	0.0	0.01
 resape	R°sap	resaper	VER	VER			ind:pre:1s;	R_°|s_a_p_#	r_e|s_a_p_e	0.07	0.0
 resapent	R°sap	resaper	VER	VER			ind:pre:3p;	R_°|s_a_p_#	r_e|s_a_p_ent	0.07	0.0
 resapée	R°sape	resaper	VER	VER	f	s	par:pas;	R_°|s_a|p_e_#	r_e|s_a|p_é_e	0.14	0.0
@@ -105986,9 +105986,9 @@ rescapés	REskape	rescapé	ADJ	VER,ADJ,NOM	m	p		R_E_s|k_a|p_e_#	r_e_s|c_a|p_é_s
 rescision	Resizj§	rescision	NOM	NOM	f	s		R_e|s_i|z_j_§	r_e|sc_i|s_i_on	0.07	0.0
 rescousse	REskus	rescousse	NOM	NOM	f	s		R_E_s|k_u_s_#	r_e_s|c_ou_ss_e	3.18	1.43
 rescrit	REskRi	rescrit	NOM	NOM	m	s		R_E_s|k_R_i_#	r_e_s|c_r_i_t	0.14	0.0
-reservir	R2sERviR	reservir	VER	VER			inf;	R_2|s_E_R|v_i_R	r_e|s_e_r|v_i_r	0.0	0.04
-reset	R2zEt	reset	NOM	NOM	m	s		R_2|z_E_t	r_e|s_e_t	0.0	0.05
-resocialisation	R2sosializasj§	resocialisation	NOM	NOM	f	s		R_2|s_o|s_i|a|l_i|z_a|s_j_§	r_e|s_o|c_i|a|l_i|s_a|t_i_on	0.0	0.01
+reservir	R°sERviR	reservir	VER	VER			inf;	R_°|s_E_R|v_i_R	r_e|s_e_r|v_i_r	0.0	0.04
+reset	R°zEt	reset	NOM	NOM	m	s		R_°|z_E_t	r_e|s_e_t	0.0	0.05
+resocialisation	R°sosializasj§	resocialisation	NOM	NOM	f	s		R_°|s_o|s_i|a|l_i|z_a|s_j_§	r_e|s_o|c_i|a|l_i|s_a|t_i_on	0.0	0.01
 resongeait	R°z§ZE	resonger	VER	VER			ind:imp:3s;	R_°|z_§|Z_E	r_e|s_on|ge_ait	0.14	0.0
 resonger	R°z§Ze	resonger	VER	VER			inf;	R_°|z_§|Z_e	r_e|s_on|g_er	0.14	0.0
 respect	REspE	respect	NOM	NOM	m	s		R_E_s|p_E_#	r_e_s|p_e_ct	42.43	50.47
@@ -106151,7 +106151,7 @@ ressassés	R°sase	ressasser	VER	VER	m	p	par:pas;	R_°|s_a|s_e_#	r_e|ss_a|ss_é_
 ressaut	R°so	ressaut	NOM	NOM	m	s		R_°|s_o_#	r_e|ss_au_t	0.74	0.01
 ressauter	R°sote	ressauter	VER	VER			inf;	R_°|s_o|t_e	r_e|ss_au|t_er	0.0	0.07
 ressauts	R°so	ressaut	NOM	NOM	m	p		R_°|s_o_#	r_e|ss_au_ts	0.41	0.0
-ressauté	R2sote	ressauter	VER	VER	m	s	par:pas;	R_2|s_o|t_e	r_e|ss_au|t_é	0.0	0.01
+ressauté	R°sote	ressauter	VER	VER	m	s	par:pas;	R_°|s_o|t_e	r_e|ss_au|t_é	0.0	0.01
 ressayer	REsEje	ressayer	VER	VER			inf;	R_E|s_E|j_e	r_e|ss_a|y_er	0.0	0.12
 ressembla	R°s@bla	ressembler	VER	VER			ind:pas:3s;	R_°|s_@|b_l_a	r_e|ss_em|b_l_a	1.01	0.0
 ressemblaient	R°s@blE	ressembler	VER	VER			ind:imp:3p;	R_°|s_@|b_l_E	r_e|ss_em|b_l_aient	15.54	2.17
@@ -106188,7 +106188,7 @@ ressemelait	R°s°m°lE	ressemeler	VER	VER			ind:imp:3s;	R_°|s_°|m_°|l_E	r_e|
 ressemeler	R°s°m°le	ressemeler	VER	VER			inf;	R_°|s_°|m_°|l_e	r_e|ss_e|m_e|l_er	0.14	0.02
 ressemèlent	R°s°mEl	ressemeler	VER	VER			ind:pre:3p;	R_°|s_°|m_E_l_#	r_e|ss_e|m_è_l_ent	0.07	0.0
 ressemelée	R°s°m°le	ressemeler	VER	VER	f	s	par:pas;	R_°|s_°|m_°|l_e_#	r_e|ss_e|m_e|l_é_e	0.07	0.0
-ressemer	R2s°me	ressemer	VER	VER			inf;	R_2|s_°|m_e	r_e|ss_e|m_er	0.0	0.01
+ressemer	R°s°me	ressemer	VER	VER			inf;	R_°|s_°|m_e	r_e|ss_e|m_er	0.0	0.01
 ressens	R°s@	ressentir	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:2s;	R_°|s_@_#	r_e|ss_en_s	5.68	27.91
 ressent	R°s@	ressentir	VER	VER			ind:pre:3s;	R_°|s_@	r_e|ss_ent	7.23	10.23
 ressentaient	R°s@tE	ressentir	VER	VER			ind:imp:3p;	R_°|s_@|t_E	r_e|ss_en|t_aient	1.28	0.12
@@ -106317,7 +106317,7 @@ ressouvenue	R°suv°ny	ressouvenir	VER	VER	f	s	par:pas;	R_°|s_u|v_°|n_y_#	r_e|
 ressouviens	R°suvj5	ressouvenir	VER	VER			ind:pre:1s;	R_°|s_u|v_j_5_#	r_e|ss_ou|v_i_en_s	0.07	0.0
 ressouvint	R°suv5	ressouvenir	VER	VER			ind:pas:3s;	R_°|s_u|v_5	r_e|ss_ou|v_int	0.07	0.0
 ressui	R°s8i	ressui	NOM	NOM	m	s		R_°|s_8_i	r_e|ss_u_i	0.07	0.0
-ressuiement	R2s8im@	ressuiement	NOM	NOM	m	s		R_2|s_8_i_#|m_@	r_e|ss_u_i_e|m_ent	0.07	0.0
+ressuiement	R°s8im@	ressuiement	NOM	NOM	m	s		R_°|s_8_i_#|m_@	r_e|ss_u_i_e|m_ent	0.07	0.0
 ressuscita	REsysita	ressusciter	VER	VER			ind:pas:3s;	R_E|s_y|s_i|t_a	r_e|ss_u|sc_i|t_a	0.27	0.06
 ressuscitai	REsysite	ressusciter	VER	VER			ind:pas:1s;	R_E|s_y|s_i|t_e	r_e|ss_u|sc_i|t_ai	0.14	0.0
 ressuscitaient	REsysitE	ressusciter	VER	VER			ind:imp:3p;	R_E|s_y|s_i|t_E	r_e|ss_u|sc_i|t_aient	0.95	0.02
@@ -106493,7 +106493,7 @@ retape	R°tap	retape	NOM	NOM,VER	f	s		R_°|t_a_p_#	r_e|t_a_p_e	0.41	0.06
 retapent	R°tap	retaper	VER	VER			ind:pre:3p;	R_°|t_a_p_#	r_e|t_a_p_ent	0.07	0.01
 retaper	R°tape	retaper	VER	VER			inf;	R_°|t_a|p_e	r_e|t_a|p_er	1.28	1.6
 retaperait	R°tap°RE	retaper	VER	VER			cnd:pre:3s;	R_°|t_a|p_°|R_E	r_e|t_a|p_e|r_ait	0.07	0.0
-retapeur	R2tap9R	retapeur	NOM	NOM	m	s		R_2|t_a|p_9_R	r_e|t_a|p_eu_r	0.0	0.01
+retapeur	R°tap9R	retapeur	NOM	NOM	m	s		R_°|t_a|p_9_R	r_e|t_a|p_eu_r	0.0	0.01
 retapez	R°tape	retaper	VER	VER			imp:pre:2p;ind:pre:2p;	R_°|t_a|p_e	r_e|t_a|p_ez	0.0	0.08
 retapissant	R°tapis@	retapisser	VER	VER			par:pre;	R_°|t_a|p_i|s_@	r_e|t_a|p_i|ss_ant	0.07	0.0
 retapisse	R°tapis	retapisser	VER	VER			ind:pre:1s;ind:pre:3s;	R_°|t_a|p_i_s_#	r_e|t_a|p_i_ss_e	0.95	0.25
@@ -106612,14 +106612,14 @@ retinrent	R°t5R	retenir	VER	VER			ind:pas:3p;	R_°|t_5_R_#	r_e|t_in_r_ent	1.01	
 retins	R°t5	retenir	VER	VER			ind:pas:1s;	R_°|t_5	r_e|t_ins	1.82	0.02
 retint	R°t5	retenir	VER	VER			ind:pas:3s;	R_°|t_5	r_e|t_int	11.22	0.35
 retira	R°tiRa	retirer	VER	VER			ind:pas:3s;	R_°|t_i|R_a	r_e|t_i|r_a	15.81	0.45
-retirable	R2tiRabl	retirable	ADJ	ADJ	f	s		R_2|t_i|R_a_b_l_#	r_e|t_i|r_a_b_l_e	0.0	0.01
+retirable	R°tiRabl	retirable	ADJ	ADJ	f	s		R_°|t_i|R_a_b_l_#	r_e|t_i|r_a_b_l_e	0.0	0.01
 retirai	R°tiRe	retirer	VER	VER			ind:pas:1s;	R_°|t_i|R_e	r_e|t_i|r_ai	1.76	0.01
 retiraient	R°tiRE	retirer	VER	VER			ind:imp:3p;	R_°|t_i|R_E	r_e|t_i|r_aient	1.69	0.14
 retirais	R°tiRE	retirer	VER	VER			ind:imp:1s;ind:imp:2s;	R_°|t_i|R_E	r_e|t_i|r_ais	0.68	0.23
 retirait	R°tiRE	retirer	VER	VER			ind:imp:3s;	R_°|t_i|R_E	r_e|t_i|r_ait	7.16	0.45
 retirant	R°tiR@	retirer	VER	VER			par:pre;	R_°|t_i|R_@	r_e|t_i|r_ant	3.58	0.38
 retire	R°tiR	retirer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;sub:pre:3s;	R_°|t_i_R_#	r_e|t_i_r_e	14.8	21.56
-retirement	R2tiR°m@	retirement	NOM	NOM	m	s		R_2|t_i|R_°|m_@	r_e|t_i|r_e|m_ent	0.0	0.14
+retirement	R°tiR°m@	retirement	NOM	NOM	m	s		R_°|t_i|R_°|m_@	r_e|t_i|r_e|m_ent	0.0	0.14
 retirent	R°tiR	retirer	VER	VER			ind:pre:3p;	R_°|t_i_R_#	r_e|t_i_r_ent	1.42	1.19
 retirer	R°tiRe	retirer	VER	VER			inf;	R_°|t_i|R_e	r_e|t_i|r_er	21.96	27.39
 retirera	R°tiR°Ra	retirer	VER	VER			ind:fut:3s;	R_°|t_i|R_°|R_a	r_e|t_i|r_e|r_a	0.68	0.72
@@ -106761,7 +106761,7 @@ retracez	R°tRase	retracer	VER	VER			imp:pre:2p;	R_°|t_R_a|s_e	r_e|t_r_a|c_ez	0
 retracions	R°tRasj§	retracer	VER	VER			ind:imp:1p;	R_°|t_R_a|s_j_§	r_e|t_r_a|c_i_ons	0.07	0.01
 retracé	R°tRase	retracer	VER	VER	m	s	par:pas;	R_°|t_R_a|s_e	r_e|t_r_a|c_é	0.14	0.13
 retracée	R°tRase	retracer	VER	VER	f	s	par:pas;	R_°|t_R_a|s_e_#	r_e|t_r_a|c_é_e	0.07	0.0
-retraduction	R2tRadyksj§	retraduction	NOM	NOM	f	s		R_2|t_R_a|d_y_k|s_j_§	r_e|t_r_a|d_u_c|t_i_on	0.0	0.01
+retraduction	R°tRadyksj§	retraduction	NOM	NOM	f	s		R_°|t_R_a|d_y_k|s_j_§	r_e|t_r_a|d_u_c|t_i_on	0.0	0.01
 retraduit	R°tRad8i	retraduire	VER	VER	m	s	ind:pre:3s;par:pas;	R_°|t_R_a|d_8_i_#	r_e|t_r_a|d_u_i_t	0.14	0.01
 retraire	R°tRER	retraire	VER	VER			inf;	R_°|t_R_E_R_#	r_e|t_r_ai_r_e	0.0	0.01
 retrait	R°tRE	retrait	NOM	VER,NOM	m	s		R_°|t_R_E	r_e|t_r_ait	13.04	4.63
@@ -106806,10 +106806,10 @@ retranscrire	R°tR@skRiR	retranscrire	VER	VER			inf;	R_°|t_R_@_s|k_R_i_R_#	r_e|
 retranscris	R°tR@skRi	retranscrire	VER	VER			ind:pre:1s;	R_°|t_R_@_s|k_R_i	r_e|t_r_an_s|c_r_is	0.14	0.01
 retranscrit	R°tR@skRi	retranscrire	VER	VER	m	s	ind:pre:3s;par:pas;	R_°|t_R_@_s|k_R_i	r_e|t_r_an_s|c_r_it	0.07	0.04
 retranscrits	R°tR@skRi	retranscrire	VER	VER	m	p	par:pas;	R_°|t_R_@_s|k_R_i_#	r_e|t_r_an_s|c_r_i_ts	0.07	0.0
-retransforme	R2tR@sfORm	retransformer	VER	VER			ind:pre:1s;	R_2|t_R_@_s|f_O_R_m_#	r_e|t_r_an_s|f_o_r_m_e	0.07	0.02
-retransformer	R2tR@sfORme	retransformer	VER	VER			inf;	R_2|t_R_@_s|f_O_R|m_e	r_e|t_r_an_s|f_o_r|m_er	0.0	0.16
-retransformera	R2tR@sfORm°Ra	retransformer	VER	VER			ind:fut:3s;	R_2|t_R_@_s|f_O_R|m_°|R_a	r_e|t_r_an_s|f_o_r|m_e|r_a	0.0	0.02
-retransférer	R2tR@sfeRe	retransférer	VER	VER			inf;	R_2|t_R_@_s|f_e|R_e	r_e|t_r_an_s|f_é|r_er	0.0	0.01
+retransforme	R°tR@sfORm	retransformer	VER	VER			ind:pre:1s;	R_°|t_R_@_s|f_O_R_m_#	r_e|t_r_an_s|f_o_r_m_e	0.07	0.02
+retransformer	R°tR@sfORme	retransformer	VER	VER			inf;	R_°|t_R_@_s|f_O_R|m_e	r_e|t_r_an_s|f_o_r|m_er	0.0	0.16
+retransformera	R°tR@sfORm°Ra	retransformer	VER	VER			ind:fut:3s;	R_°|t_R_@_s|f_O_R|m_°|R_a	r_e|t_r_an_s|f_o_r|m_e|r_a	0.0	0.02
+retransférer	R°tR@sfeRe	retransférer	VER	VER			inf;	R_°|t_R_@_s|f_e|R_e	r_e|t_r_an_s|f_é|r_er	0.0	0.01
 retransmet	R°tR@smE	retransmettre	VER	VER			ind:pre:3s;	R_°|t_R_@_s|m_E_#	r_e|t_r_an_s|m_e_t	0.07	0.05
 retransmettait	R°tR@smEtE	retransmettre	VER	VER			ind:imp:3s;	R_°|t_R_@_s|m_E|t_E	r_e|t_r_an_s|m_e|tt_ait	0.0	0.01
 retransmettant	R°tR@smEt@	retransmettre	VER	VER			par:pre;	R_°|t_R_@_s|m_E|t_@	r_e|t_r_an_s|m_e|tt_ant	0.0	0.01
@@ -106915,11 +106915,11 @@ retrouvées	R°tRuve	retrouver	VER	VER	f	p	par:pas;	R_°|t_R_u|v_e_#	r_e|t_r_ou|
 retrouvés	R°tRuve	retrouver	VER	VER	m	p	par:pas;	R_°|t_R_u|v_e_#	r_e|t_r_ou|v_é_s	10.61	6.44
 rets	RE	rets	NOM	NOM	m			R_E_#	r_e_ts	0.27	0.12
 retsina	R°sina	retsina	NOM	NOM	m	s		R_°|s_#_i|n_a	r_e|t_s_i|n_a	0.0	0.13
-retuber	R2tybe	retuber	VER	VER			inf;	R_2|t_y|b_e	r_e|t_u|b_er	0.0	0.03
-retuer	R2t8e	retuer	VER	VER			inf;	R_2|t_8_e	r_e|t_u_er	0.0	0.01
+retuber	R°tybe	retuber	VER	VER			inf;	R_°|t_y|b_e	r_e|t_u|b_er	0.0	0.03
+retuer	R°t8e	retuer	VER	VER			inf;	R_°|t_8_e	r_e|t_u_er	0.0	0.01
 retâté	R°tate	retâter	VER	VER	m	s	par:pas;	R_°|t_a|t_e	r_e|t_â|t_é	0.07	0.0
 retéléphone	R°telefOn	retéléphoner	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	R_°|t_e|l_e|f_O_n_#	r_e|t_é|l_é|ph_o_n_e	0.07	0.14
-retéléphoner	R2telefOne	retéléphoner	VER	VER			inf;	R_2|t_e|l_e|f_O|n_e	r_e|t_é|l_é|ph_o|n_er	0.0	0.15
+retéléphoner	R°telefOne	retéléphoner	VER	VER			inf;	R_°|t_e|l_e|f_O|n_e	r_e|t_é|l_é|ph_o|n_er	0.0	0.15
 retînmes	R°t5m	retenir	VER	VER			ind:pas:1p;	R_°|t_5_m_#	r_e|t_în_m_es	0.14	0.0
 reubeu	R9b2	reubeu	NOM	NOM	m	s		R_9|b_2	r_eu|b_eu	0.47	0.01
 reubeus	R9b2	reubeu	NOM	NOM	m	p		R_9|b_2_#	r_eu|b_eu_s	0.14	0.0
@@ -107035,9 +107035,9 @@ reverdir	R°vERdiR	reverdir	VER	VER			inf;	R_°|v_E_R|d_i_R	r_e|v_e_r|d_i_r	0.2	
 reverdiront	R°vERdiR§	reverdir	VER	VER			ind:fut:3p;	R_°|v_E_R|d_i|R_§	r_e|v_e_r|d_i|r_ont	0.07	0.0
 reverdissaient	R°vERdisE	reverdir	VER	VER			ind:imp:3p;	R_°|v_E_R|d_i|s_E	r_e|v_e_r|d_i|ss_aient	0.14	0.0
 reverdit	R°vERdi	reverdir	VER	VER			ind:pre:3s;	R_°|v_E_R|d_i	r_e|v_e_r|d_it	0.14	0.02
-reverni	R2vERni	revernir	VER	VER	m	s	par:pas;	R_2|v_E_R|n_i	r_e|v_e_r|n_i	0.0	0.01
+reverni	R°vERni	revernir	VER	VER	m	s	par:pas;	R_°|v_E_R|n_i	r_e|v_e_r|n_i	0.0	0.01
 revernie	R°vERni	revernir	VER	VER	f	s	par:pas;	R_°|v_E_R|n_i_#	r_e|v_e_r|n_i_e	0.07	0.01
-revernir	R2vERniR	revernir	VER	VER			inf;	R_2|v_E_R|n_i_R	r_e|v_e_r|n_i_r	0.0	0.01
+revernir	R°vERniR	revernir	VER	VER			inf;	R_°|v_E_R|n_i_R	r_e|v_e_r|n_i_r	0.0	0.01
 reverra	R°vERa	revoir	VER	VER			ind:fut:3s;	R_°|v_E|R_a	r_e|v_e|rr_a	3.24	14.31
 reverrai	R°vERe	revoir	VER	VER			ind:fut:1s;	R_°|v_E|R_e	r_e|v_e|rr_ai	4.05	9.07
 reverraient	R°vERE	revoir	VER	VER			cnd:pre:3p;	R_°|v_E|R_E	r_e|v_e|rr_aient	0.88	0.03
@@ -107098,7 +107098,7 @@ revirement	R°viR°m@	revirement	NOM	NOM	m	s		R_°|v_i|R_°|m_@	r_e|v_i|r_e|m_en
 revirements	R°viR°m@	revirement	NOM	NOM	m	p		R_°|v_i|R_°|m_@_#	r_e|v_i|r_e|m_en_ts	0.27	0.09
 revirent	R°viR	revoir	VER	VER			ind:pas:3p;	R_°|v_i_R_#	r_e|v_i_r_ent	0.34	0.01
 revirent	R°viR	revirer	VER	VER			ind:pre:3p;	R_°|v_i_R_#	r_e|v_i_r_ent	0.34	0.0
-revirer	R2viRe	revirer	VER	VER			inf;	R_2|v_i|R_e	r_e|v_i|r_er	0.0	0.01
+revirer	R°viRe	revirer	VER	VER			inf;	R_°|v_i|R_e	r_e|v_i|r_er	0.0	0.01
 revis	R°vi	revivre	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:2s;	R_°|v_i	r_e|v_is	4.86	1.16
 revisita	R°vizita	revisiter	VER	VER			ind:pas:3s;	R_°|v_i|z_i|t_a	r_e|v_i|s_i|t_a	0.07	0.0
 revisite	R°vizit	revisiter	VER	VER			ind:pre:3s;	R_°|v_i|z_i_t_#	r_e|v_i|s_i_t_e	0.0	0.02
@@ -107109,11 +107109,11 @@ revisitée	R°vizite	revisiter	VER	VER	f	s	par:pas;	R_°|v_i|z_i|t_e_#	r_e|v_i|s
 revissa	R°visa	revisser	VER	VER			ind:pas:3s;	R_°|v_i|s_a	r_e|v_i|ss_a	0.07	0.0
 revisse	R°vis	revisser	VER	VER			ind:pre:1s;	R_°|v_i_s_#	r_e|v_i_ss_e	0.07	0.01
 revisser	R°vise	revisser	VER	VER			inf;	R_°|v_i|s_e	r_e|v_i|ss_er	0.07	0.0
-revissé	R2vise	revisser	VER	VER	m	s	par:pas;	R_2|v_i|s_e	r_e|v_i|ss_é	0.0	0.14
+revissé	R°vise	revisser	VER	VER	m	s	par:pas;	R_°|v_i|s_e	r_e|v_i|ss_é	0.0	0.14
 revissées	R°vise	revisser	VER	VER	f	p	par:pas;	R_°|v_i|s_e_#	r_e|v_i|ss_é_es	0.07	0.0
 revit	R°vi	revivre	VER	VER			ind:pre:3s;	R_°|v_i	r_e|v_it	1.01	0.7
 revit	R°vi	revoir	VER	VER			ind:pas:3s;	R_°|v_i	r_e|v_it	10.74	0.45
-revitalisant	R2vitaliz@	revitalisant	ADJ	ADJ	m	s		R_2|v_i|t_a|l_i|z_@	r_e|v_i|t_a|l_i|s_ant	0.0	0.04
+revitalisant	R°vitaliz@	revitalisant	ADJ	ADJ	m	s		R_°|v_i|t_a|l_i|z_@	r_e|v_i|t_a|l_i|s_ant	0.0	0.04
 revitalisation	R°vitalizasj§	revitalisation	NOM	NOM	f	s		R_°|v_i|t_a|l_i|z_a|s_j_§	r_e|v_i|t_a|l_i|s_a|t_i_on	0.07	0.04
 revitalise	R°vitaliz	revitaliser	VER	VER			imp:pre:2s;ind:pre:3s;	R_°|v_i|t_a|l_i_z_#	r_e|v_i|t_a|l_i_s_e	0.0	0.03
 revitaliser	R°vitalize	revitaliser	VER	VER			inf;	R_°|v_i|t_a|l_i|z_e	r_e|v_i|t_a|l_i|s_er	0.0	0.15
@@ -107128,7 +107128,7 @@ revivent	R°viv	revivre	VER	VER			ind:pre:3p;	R_°|v_i_v_#	r_e|v_i_v_ent	0.34	0.
 revivez	R°vive	revivre	VER	VER			imp:pre:2p;ind:pre:2p;	R_°|v_i|v_e	r_e|v_i|v_ez	0.0	0.14
 revivifiant	R°vivifj@	revivifier	VER	VER			par:pre;	R_°|v_i|v_i|f_j_@	r_e|v_i|v_i|f_i_ant	0.0	0.04
 revivifie	R°vivifi	revivifier	VER	VER			ind:pre:1s;ind:pre:3s;	R_°|v_i|v_i|f_i_#	r_e|v_i|v_i|f_i_e	0.07	0.01
-revivifier	R2vivifje	revivifier	VER	VER			inf;	R_2|v_i|v_i|f_j_e	r_e|v_i|v_i|f_i_er	0.0	0.01
+revivifier	R°vivifje	revivifier	VER	VER			inf;	R_°|v_i|v_i|f_j_e	r_e|v_i|v_i|f_i_er	0.0	0.01
 revivifié	R°vivifje	revivifié	ADJ	ADJ	m	s		R_°|v_i|v_i|f_j_e	r_e|v_i|v_i|f_i_é	0.07	0.0
 revivifiée	R°vivifje	revivifier	VER	VER	f	s	par:pas;	R_°|v_i|v_i|f_j_e_#	r_e|v_i|v_i|f_i_é_e	0.07	0.0
 revivifiées	R°vivifje	revivifier	VER	VER	f	p	par:pas;	R_°|v_i|v_i|f_j_e_#	r_e|v_i|v_i|f_i_é_es	0.07	0.0
@@ -107156,7 +107156,7 @@ revoit	R°vwa	revoir	VER	VER			ind:pre:3s;	R_°|v_wa_#	r_e|v_oi_t	5.81	5.92
 revolait	R°volE	revoler	VER	VER			ind:imp:3s;	R_°|v_o|l_E	r_e|v_o|l_ait	0.07	0.0
 revole	R°vOl	revoler	VER	VER			ind:pre:3s;	R_°|v_O_l_#	r_e|v_o_l_e	0.07	0.01
 revolent	R°vOl	revoler	VER	VER			ind:pre:3p;	R_°|v_O_l_#	r_e|v_o_l_ent	0.07	0.0
-revoler	R2vOle	revoler	VER	VER			inf;	R_2|v_O|l_e	r_e|v_o|l_er	0.0	0.03
+revoler	R°vOle	revoler	VER	VER			inf;	R_°|v_O|l_e	r_e|v_o|l_er	0.0	0.03
 revolera	R°vOl°Ra	revoler	VER	VER			ind:fut:3s;	R_°|v_O|l_°|R_a	r_e|v_o|l_e|r_a	0.0	0.02
 revolver	RevOlvER	revolver	NOM	NOM	m	s		R_e|v_O_l|v_E_R	r_e|v_o_l|v_e_r	23.31	28.05
 révolvers	RevOlvER	revolver	NOM	NOM	m	p		R_e|v_O_l|v_E_R_#	r_é|v_o_l|v_e_r_s	1.89	2.69
@@ -107192,8 +107192,8 @@ revécue	R°veky	revivre	VER	VER	f	s	par:pas;	R_°|v_e|k_y_#	r_e|v_é|c_u_e	0.07
 revécues	R°veky	revécu	ADJ	ADJ	f	p		R_°|v_e|k_y_#	r_e|v_é|c_u_es	0.07	0.0
 revécurent	R°vekyR	revivre	VER	VER			ind:pas:3p;	R_°|v_e|k_y_R_#	r_e|v_é|c_u_r_ent	0.07	0.0
 revécut	R°veky	revivre	VER	VER			ind:pas:3s;	R_°|v_e|k_y	r_e|v_é|c_ut	0.41	0.0
-revérifier	R2veRifje	revérifier	VER	VER			inf;	R_2|v_e|R_i|f_j_e	r_e|v_é|r_i|f_i_er	0.0	0.57
-revérifié	R2veRifje	revérifié	ADJ	ADJ	m	s		R_2|v_e|R_i|f_j_e	r_e|v_é|r_i|f_i_é	0.07	0.25
+revérifier	R°veRifje	revérifier	VER	VER			inf;	R_°|v_e|R_i|f_j_e	r_e|v_é|r_i|f_i_er	0.0	0.57
+revérifié	R°veRifje	revérifié	ADJ	ADJ	m	s		R_°|v_e|R_i|f_j_e	r_e|v_é|r_i|f_i_é	0.07	0.25
 revêche	R°vES	revêche	ADJ	ADJ		s		R_°|v_E_S_#	r_e|v_ê_ch_e	1.35	0.23
 revêches	R°vES	revêche	ADJ	ADJ		p		R_°|v_E_S_#	r_e|v_ê_ch_es	0.41	0.05
 revêt	R°vE	revêtir	VER	VER			ind:pre:3s;	R_°|v_E_#	r_e|v_ê_t	2.09	0.25
