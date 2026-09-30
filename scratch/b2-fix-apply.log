@@ -1,0 +1,3 @@
+Loading theory (uses PhoneticTheory.pickle if present)...
+Spliced finite rows: 34226; corrected: 14926 (phon 3459, syll_cv 14520, orthosyll_cv 13516)
+--apply: wrote 14926 corrected rows to resources/LexiqueSynthetic.tsv

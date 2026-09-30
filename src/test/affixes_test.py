@@ -461,3 +461,36 @@ class TestRuleBinding:
         c = Carrier(rec("aabc", [(2,), (3,), (7,)]), 0, 1, "abc")
         (res,) = simulate([(Binding(PREFIX, RULE, (4,)), [c])], ctx)
         assert res[0].gain == 1 and res[0].mergedSaving
+
+
+class TestRulePartialOverlap:
+    """RULE_PARTIAL_OVERLAP (experiment flag, default OFF): a 2-key rule merges when only some of
+    its keys are in the neighbouring stroke."""
+
+    def _run(self, neighbour, keys, flag):
+        old = A.RULE_PARTIAL_OVERLAP
+        A.RULE_PARTIAL_OVERLAP = flag
+        try:
+            c = Carrier(rec("xab", [(2,), neighbour, (7,)]), 0, 1, "stem")
+            (res,) = simulate([(Binding(PREFIX, RULE, keys), [c])], SimContext(_sb(), []))
+            return res[0]
+        finally:
+            A.RULE_PARTIAL_OVERLAP = old
+
+    def test_partial_overlap_fails_when_off(self):
+        r = self._run((3,), (3, 4), False)
+        assert (r.gain, r.reason, r.newBase) == (0, "standaloneTrap", None)
+
+    def test_partial_overlap_merges_when_on(self):
+        r = self._run((3,), (3, 4), True)
+        assert r.gain == 1 and r.mergedSaving and r.newBase == ((2,), (3, 4), (7,))[1:]
+
+    def test_complete_overlap_fails_in_both_modes(self):
+        for flag in (False, True):
+            r = self._run((3, 4), (3, 4), flag)
+            assert (r.gain, r.reason) == (0, "standaloneTrap")
+
+    def test_single_key_rule_unchanged(self):
+        for flag in (False, True):
+            r = self._run((3, 4), (4,), flag)
+            assert (r.gain, r.reason) == (0, "standaloneTrap")

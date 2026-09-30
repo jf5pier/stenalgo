@@ -1,0 +1,65 @@
+members found: ['bilité', 'cilité', 'gilité', 'nilité', 'rilité', 'tilité', 'vilité']
+  bilité     phono=bi.li.te     lemmas=110 freq=   111.0 stemRoots= 91 examples=['responsabilité', 'possibilité', 'culpabilité', 'responsabilités', 'possibilités', 'sensibilité']
+  tilité     phono=ti.li.te     lemmas=  7 freq=     6.3 stemRoots=  7 examples=['hostilité', 'fertilité', 'hostilités', 'inutilité', 'subtilité', 'subtilités']
+  rilité     phono=Ri.li.te     lemmas=  2 freq=     1.6 stemRoots=  2 examples=['stérilité', 'puérilité', 'puérilités', 'stérilités']
+  gilité     phono=Zi.li.te     lemmas=  1 freq=     1.2 stemRoots=  1 examples=['fragilité', 'fragilités']
+  vilité     phono=vi.li.te     lemmas=  1 freq=     0.0 stemRoots=  1 examples=['servilité', 'servilités']
+  cilité     phono=si.li.te     lemmas=  2 freq=     0.0 stemRoots=  2 examples=['gracilité', 'indocilité', 'gracilités', 'indocilités']
+  nilité     phono=ni.li.te     lemmas=  1 freq=     0.0 stemRoots=  1 examples=['juvénilité', 'juvénilités']
+
+lité (k=2) candidate: lemmas=145 freq=296.6 carriers=298
+
+pooled family: 252 carriers, upperBound=360.1, stemSubgroups=[['bilité', 'tilité', 'rilité', 'gilité', 'vilité', 'cilité', 'nilité']]
+competingPairs (top 10): []
+
+1751 legal keypresses (0s)
+familyOptions: 5 options (0s)
+
+--- option 0: sim=0.741 comfort=539.14 strokeFreqSaved=357.2 freqBenefiting=119.1 of 120.0 (share 0.992) fallbacks={'keyOverlap': 2} boundaryRisks=0
+    subgroup members=['bilité', 'tilité', 'rilité', 'gilité', 'vilité', 'cilité', 'nilité'] kind=merged keys=(16, 20, 23) sim=0.741
+
+--- option 1: sim=0.614 comfort=566.78 strokeFreqSaved=314.6 freqBenefiting=104.9 of 120.0 (share 0.874) fallbacks={'keyOverlap': 96} boundaryRisks=12
+    subgroup members=['bilité', 'tilité', 'rilité', 'gilité', 'vilité', 'cilité', 'nilité'] kind=merged keys=(7, 16, 23) sim=0.614
+
+--- option 2: sim=0.570 comfort=507.14 strokeFreqSaved=339.4 freqBenefiting=113.1 of 120.0 (share 0.942) fallbacks={'keyOverlap': 18} boundaryRisks=24
+    subgroup members=['bilité', 'tilité', 'rilité', 'gilité', 'vilité', 'cilité', 'nilité'] kind=merged keys=(14, 20, 23) sim=0.570
+
+--- option 3: sim=0.551 comfort=488.47 strokeFreqSaved=336.5 freqBenefiting=112.2 of 120.0 (share 0.934) fallbacks={'keyOverlap': 20} boundaryRisks=0
+    subgroup members=['bilité', 'tilité', 'rilité', 'gilité', 'vilité', 'cilité', 'nilité'] kind=merged keys=(14, 16, 20) sim=0.551
+
+--- option 4: sim=0.551 comfort=488.47 strokeFreqSaved=336.5 freqBenefiting=112.2 of 120.0 (share 0.934) fallbacks={'keyOverlap': 20} boundaryRisks=2
+    subgroup members=['bilité', 'tilité', 'rilité', 'gilité', 'vilité', 'cilité', 'nilité'] kind=merged keys=(14, 16, 23) sim=0.551
+
+=== Sample carrier outcomes for the best option ===
+    responsabilité  member=bilité   gain=3 markCost=0 partners=[]
+    possibilité     member=bilité   gain=3 markCost=0 partners=[]
+    culpabilité     member=bilité   gain=3 markCost=0 partners=[]
+    responsabilités member=bilité   gain=3 markCost=0 partners=[]
+    possibilités    member=bilité   gain=3 markCost=0 partners=[]
+    sensibilité     member=bilité   gain=3 markCost=0 partners=[]
+    comptabilité    member=bilité   gain=3 markCost=0 partners=[]
+    amabilité       member=bilité   gain=3 markCost=0 partners=[]
+    hostilité       member=tilité   gain=3 markCost=0 partners=[]
+    probabilités    member=bilité   gain=3 markCost=0 partners=[]
+    crédibilité     member=bilité   gain=3 markCost=0 partners=[]
+    stabilité       member=bilité   gain=3 markCost=0 partners=[]
+    probabilité     member=bilité   gain=3 markCost=0 partners=[]
+    irresponsabilité member=bilité   gain=3 markCost=0 partners=[]
+    visibilité      member=bilité   gain=3 markCost=0 partners=[]
+    respectabilité  member=bilité   gain=3 markCost=0 partners=[]
+    fragilité       member=gilité   gain=3 markCost=0 partners=[]
+    fertilité       member=tilité   gain=3 markCost=0 partners=[]
+    stérilité       member=rilité   gain=3 markCost=0 partners=[]
+    disponibilité   member=bilité   gain=3 markCost=0 partners=[]
+    impossibilité   member=bilité   gain=3 markCost=0 partners=[]
+    instabilité     member=bilité   gain=3 markCost=0 partners=[]
+    hostilités      member=tilité   gain=3 markCost=0 partners=[]
+    vulnérabilité   member=bilité   gain=3 markCost=0 partners=[]
+    immobilité      member=bilité   gain=3 markCost=0 partners=[]
+
+=== Forced single-keypress (no split) diagnostic ===
+  alt0: keys=(16, 20, 23) sim=0.741 strokeFreqSaved=357.2 conflictShare=0.0000 fallbacks={'keyOverlap': 2}
+  alt1: keys=(7, 16, 23) sim=0.614 strokeFreqSaved=314.6 conflictShare=0.0000 fallbacks={'keyOverlap': 96}
+  alt2: keys=(14, 20, 23) sim=0.570 strokeFreqSaved=339.4 conflictShare=0.0000 fallbacks={'keyOverlap': 18}
+  alt3: keys=(14, 16, 20) sim=0.551 strokeFreqSaved=336.5 conflictShare=0.0000 fallbacks={'keyOverlap': 20}
+  alt4: keys=(14, 16, 23) sim=0.551 strokeFreqSaved=336.5 conflictShare=0.0000 fallbacks={'keyOverlap': 20}

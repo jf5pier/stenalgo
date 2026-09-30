@@ -1,0 +1,11 @@
+=== probe PYTHONHASHSEED=0 (fixed) ===
+seed0 exit=0
+=== probe unpinned (fixed) ===
+unpinned exit=0
+=== S2.2 dry (timed) ===
+s22 exit=0
+=== S2.3 payer dry (timed) ===
+s23a exit=0
+=== S2.3 asseoir dry (timed) ===
+s23b exit=0
+=== all done ===

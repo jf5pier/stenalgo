@@ -1,0 +1,29 @@
+# rank 2: prefix `re` keys (16, 19): regex scope search (setting H, price 5.0, partial True)
+
+2346 distinct scopes. Anchor alone: objective 5731 (benefit 6151, hard exc 85). Current list (20 syllables): objective 5878 (benefit 6666, 73 fallbacks).
+
+| atoms <= | regex | objective | d vs anchor alone | benefit | 2-stroke words | fallbacks | fallback freq | hard exc | top fallbacks |
+|---|---|---|---|---|---|---|---|---|---|
+| 2 | `C+[a]r` | 6301 | +571 | 6827 | 214 | 21 | 11 | 85 | retarder, retardé, retardé, retardé, retardée |
+| 3 | `C+[a]r` | 6301 | +571 | 6827 | 214 | 21 | 11 | 85 | retarder, retardé, retardé, retardé, retardée |
+| 4 | `C+[a]r` | 6301 | +571 | 6827 | 214 | 21 | 11 | 85 | retarder, retardé, retardé, retardé, retardée |
+| 5 | `C+[a]r` | 6301 | +571 | 6827 | 214 | 21 | 11 | 85 | retarder, retardé, retardé, retardé, retardée |
+| 6 | `C+[a]r` | 6301 | +571 | 6827 | 214 | 21 | 11 | 85 | retarder, retardé, retardé, retardé, retardée |
+| 8 | `C+[a]r` | 6301 | +571 | 6827 | 214 | 21 | 11 | 85 | retarder, retardé, retardé, retardé, retardée |
+
+## top 12 overall (any complexity <= 8 atoms)
+
+| regex | atoms | objective | benefit | words | fallbacks |
+|---|---|---|---|---|---|
+| `C+[a]r` | 2 | 6301 | 6827 | 214 | 21 |
+| `C[a]r` | 2 | 6298 | 6823 | 184 | 21 |
+| `C+[au]r` | 3 | 6292 | 6828 | 245 | 23 |
+| `C[au]r` | 3 | 6289 | 6824 | 215 | 23 |
+| `C[a][rst]` | 4 | 6283 | 6823 | 189 | 24 |
+| `C+[a][rst]` | 4 | 6281 | 6827 | 220 | 25 |
+| `C[aè][rst]` | 5 | 6278 | 6823 | 190 | 25 |
+| `C+[aè][rst]` | 5 | 6276 | 6827 | 221 | 26 |
+| `C[a][rn]` | 3 | 6261 | 6826 | 226 | 29 |
+| `C+[a][rl]` | 3 | 6256 | 6827 | 225 | 30 |
+| `C[a][rl]` | 3 | 6253 | 6823 | 195 | 30 |
+| `C[au][rn]` | 4 | 6252 | 6827 | 257 | 31 |

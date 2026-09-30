@@ -1,0 +1,101 @@
+# -ment regex scope search (real simulator, keys (20,21,25), setting H, partial overlap True)
+
+4178 distinct scopes from the grammar, 1029 simulator runs. Atoms = vowel letters + excluded onset letters. `C\{xy}` = consonants except x, y. Objective = benefit - alpha*excFreq - price*fallbackWords - form cost.
+
+Reference `(C+[eiu]+)?`: benefit 8723, fallbacks 76 (freq 85), exceptions 3, 2-stroke words 2481.
+
+## price 0 per fallback word
+
+| atoms <= | regex | objective | benefit | 2-stroke words | fallbacks | fallback freq | hard exc | top fallbacks |
+|---|---|---|---|---|---|---|---|---|
+| 2 | `C{1,2}[eu]+` | 8231 | 8531 | 2390 | 58 | 52 | 1 | largement, jument, argument, parlement, bêtement, arguments |
+| 3 | `C{1,2}[eui]+` | 8429 | 8729 | 2471 | 76 | 85 | 1 | rarement, largement, jument, ciment, argument, parlement |
+| 4 | `C{1,2}[euia]+` | 8486 | 8786 | 2498 | 91 | 105 | 1 | rarement, largement, jument, ciment, braiments, argument |
+| 5 | `C{1,2}[euiaû]+` | 8487 | 8787 | 2506 | 94 | 106 | 1 | rarement, largement, jument, ciment, braiments, argument |
+| 6 | `C{1,2}[euiaû]+` | 8487 | 8787 | 2506 | 94 | 106 | 1 | rarement, largement, jument, ciment, braiments, argument |
+
+## price 5 per fallback word
+
+| atoms <= | regex | objective | benefit | 2-stroke words | fallbacks | fallback freq | hard exc | top fallbacks |
+|---|---|---|---|---|---|---|---|---|
+| 2 | `C{1,2}[eu]+` | 7941 | 8531 | 2390 | 58 | 52 | 1 | largement, jument, argument, parlement, bêtement, arguments |
+| 3 | `C{1,2}[eui]+` | 8049 | 8729 | 2471 | 76 | 85 | 1 | rarement, largement, jument, ciment, argument, parlement |
+| 4 | `C\{f}+[eui]+` | 8087 | 8727 | 2461 | 68 | 82 | 1 | rarement, largement, jument, ciment, argument, parlement |
+| 5 | `C\{fj}+[eui]+` | 8097 | 8727 | 2459 | 66 | 76 | 1 | rarement, largement, ciment, argument, parlement, bêtement |
+| 6 | `C\{fj}+[eui]+` | 8097 | 8727 | 2459 | 66 | 76 | 1 | rarement, largement, ciment, argument, parlement, bêtement |
+
+## price 20 per fallback word
+
+| atoms <= | regex | objective | benefit | 2-stroke words | fallbacks | fallback freq | hard exc | top fallbacks |
+|---|---|---|---|---|---|---|---|---|
+| 2 | `C{1,2}[eu]+` | 7071 | 8531 | 2390 | 58 | 52 | 1 | largement, jument, argument, parlement, bêtement, arguments |
+| 3 | `C\{g}{1,2}[eu]+` | 7424 | 8344 | 2258 | 31 | 23 | 1 | jument, parlement, bêtement, salement, sacrement, juments |
+| 4 | `C\{gj}{1,2}[eu]+` | 7464 | 8344 | 2256 | 29 | 16 | 1 | parlement, bêtement, salement, sacrement, sacrements, vainement |
+| 5 | `C\{gj}{1,2}[eua]+` | 7480 | 8400 | 2267 | 31 | 19 | 1 | parlement, bêtement, salement, fixement, sacrement, finement |
+| 6 | `C\{gj}{1,2}[eua]+` | 7480 | 8400 | 2267 | 31 | 19 | 1 | parlement, bêtement, salement, fixement, sacrement, finement |
+
+## price 50 per fallback word
+
+| atoms <= | regex | objective | benefit | 2-stroke words | fallbacks | fallback freq | hard exc | top fallbacks |
+|---|---|---|---|---|---|---|---|---|
+| 2 | `C\{v}[e]` | 6507 | 7207 | 1160 | 8 | 10 | 1 | bêtement, sagement, salement, vainement, allaitement, vertement |
+| 3 | `C\{v}[eu]+` | 6659 | 7459 | 1390 | 10 | 17 | 1 | jument, bêtement, sagement, salement, juments, vainement |
+| 4 | `C\{gr}{1,2}[eu]+` | 6840 | 7940 | 2070 | 16 | 13 | 1 | jument, bêtement, juments, vainement, sainement, sèchement |
+| 5 | `C\{gr}{1,2}[eu]+` | 6840 | 7940 | 2070 | 16 | 13 | 1 | jument, bêtement, juments, vainement, sainement, sèchement |
+| 6 | `C\{gr}{1,2}[eu]+` | 6840 | 7940 | 2070 | 16 | 13 | 1 | jument, bêtement, juments, vainement, sainement, sèchement |
+
+## price 150 per fallback word
+
+| atoms <= | regex | objective | benefit | 2-stroke words | fallbacks | fallback freq | hard exc | top fallbacks |
+|---|---|---|---|---|---|---|---|---|
+| 2 | `C\{l}[e]` | 5887 | 6787 | 1042 | 4 | 1 | 1 | vainement, allaitement, vertement, alertement |
+| 3 | `C\{gv}[e]` | 6177 | 7077 | 1084 | 4 | 5 | 1 | bêtement, vainement, vertement, baisement |
+| 4 | `C\{gv}[e]` | 6177 | 7077 | 1084 | 4 | 5 | 1 | bêtement, vainement, vertement, baisement |
+| 5 | `C\{gv}[e]` | 6177 | 7077 | 1084 | 4 | 5 | 1 | bêtement, vainement, vertement, baisement |
+| 6 | `C\{gv}[e]` | 6177 | 7077 | 1084 | 4 | 5 | 1 | bêtement, vainement, vertement, baisement |
+
+## Pareto (benefit vs fallback words), any complexity <= 5 atoms
+
+| regex | atoms | benefit | fallbacks | fallback freq |
+|---|---|---|---|---|
+| `C\{lt}[e]` | 3 | 6002 | 0 | 0 |
+| `C\{lt}[eû]` | 4 | 6002 | 1 | 1 |
+| `C\{gl}[e]` | 3 | 6664 | 2 | 1 |
+| `C\{gl}[eû]` | 4 | 6664 | 3 | 1 |
+| `C\{gv}[e]` | 3 | 7077 | 4 | 5 |
+| `C\{gv}[eû]` | 4 | 7077 | 5 | 6 |
+| `C\{gv}[eu]+` | 4 | 7311 | 6 | 12 |
+| `C\{gv}[euû]+` | 5 | 7311 | 7 | 12 |
+| `C\{jv}[eu]+` | 4 | 7459 | 8 | 10 |
+| `C\{jv}[euû]+` | 5 | 7459 | 9 | 11 |
+| `C\{jv}[eua]+` | 5 | 7516 | 10 | 13 |
+| `C\{jp}[eu]+` | 4 | 7565 | 13 | 10 |
+| `C\{jp}[euû]+` | 5 | 7566 | 14 | 11 |
+| `C\{jx}[eua]+` | 5 | 7627 | 15 | 15 |
+| `C\{gr}{1,2}[eu]+` | 4 | 7940 | 16 | 13 |
+| `C\{gr}{1,2}[eua]+` | 5 | 7992 | 18 | 16 |
+| `C\{cg}{1,2}[eu]+` | 4 | 8105 | 21 | 18 |
+| `C\{cg}{1,2}[eua]+` | 5 | 8120 | 23 | 21 |
+| `C\{gs}{1,2}[eua]+` | 5 | 8134 | 24 | 25 |
+| `C\{gv}{1,2}[eu]+` | 4 | 8227 | 25 | 18 |
+| `C\{gp}{1,2}[eu]+` | 4 | 8242 | 26 | 18 |
+| `C\{gv}{1,2}[eua]+` | 5 | 8283 | 27 | 21 |
+| `C\{gp}{1,2}[eua]+` | 5 | 8298 | 28 | 21 |
+| `C\{gj}{1,2}[eu]+` | 4 | 8344 | 29 | 16 |
+| `C\{gj}{1,2}[eua]+` | 5 | 8400 | 31 | 19 |
+| `C\{gp}{1,2}[eui]+` | 5 | 8414 | 32 | 39 |
+| `C\{jp}{1,2}[eu]+` | 4 | 8446 | 35 | 20 |
+| `C\{jp}{1,2}[eua]+` | 5 | 8504 | 37 | 23 |
+| `C\{fp}+[eua]+` | 5 | 8505 | 39 | 30 |
+| `C\{mp}{1,2}[eui]+` | 5 | 8593 | 43 | 48 |
+| `C\{jp}{1,2}[eui]+` | 5 | 8613 | 47 | 59 |
+| `C\{fp}+[eui]+` | 5 | 8614 | 49 | 65 |
+| `C\{fh}+[eui]+` | 5 | 8665 | 58 | 72 |
+| `C\{hj}{1,2}[eui]+` | 5 | 8667 | 64 | 68 |
+| `C\{fj}+[eui]+` | 5 | 8727 | 66 | 76 |
+| `C\{f}{1,2}[euiû]+` | 5 | 8727 | 71 | 83 |
+| `C\{j}{1,2}[eui]+` | 4 | 8729 | 74 | 78 |
+| `C\{j}{1,2}[euiû]+` | 5 | 8729 | 77 | 79 |
+| `C\{f}+[euia]+` | 5 | 8785 | 87 | 104 |
+| `C\{j}{1,2}[euia]+` | 5 | 8786 | 89 | 98 |
+| `C{1,2}[euiaû]+` | 5 | 8787 | 94 | 106 |

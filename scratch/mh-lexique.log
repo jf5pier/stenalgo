@@ -1,0 +1,607 @@
+balaye  :
+ Creating word
+effraye  :
+ Creating word
+essaye  :
+ Creating word
+game  :
+ Creating word
+soleil  :
+ Creating word
+égaye  :
+ Creating word
+balaye  :
+ BreakdownSyllables
+balaye  :
+ corpus_words found, phono: balEj balEj CV CV-CVY
+balaye  :
+ Breakdown
+balaye  :
+ 0 CV 0 C 
+ g/p: b b 
+ skip Y/C: False False
+balaye  :
+ appended g/p  [('C', 'b')] ['b']
+balaye  :
+ 0 CV 1 V 
+ g/p: a a 
+ skip Y/C: False False
+balaye  :
+ appended g/p  [('C', 'b'), ('V', 'a')] ['b', 'a']
+balaye  :
+ 1 CVY 0 C 
+ g/p: l l 
+ skip Y/C: False False
+balaye  :
+ appended g/p  [('C', 'l')] ['l']
+balaye  :
+ 1 CVY 1 V 
+ g/p: ay Ej 
+ skip Y/C: False False
+balaye  :
+ appended g/p  [('C', 'l'), ('V', 'ay')] ['l', 'Ej']
+balaye  :
+ 1 CVY 2 Y 
+ g/p: e # 
+ skip Y/C: True False
+balaye  :
+ Pop # in Y [('e', '#')] ['l', 'Ej'] [('C', 'l'), ('V', 'ay')]
+balaye  :
+ no more graph/phon
+Not found in Lexique383 descendît dEs@di dEs@di ['des@di']
+Not found in Lexique383 dessaoulais dEsulE dEsulE ['desulE']
+Not found in Lexique383 dessaoule dEsul dEsul ['desul']
+Not found in Lexique383 dessaoulent dEsul dEsul ['desul']
+Not found in Lexique383 dessaouler dEsule dEsule ['desule']
+Not found in Lexique383 dessaoulé dEsule dEsule ['desule']
+Not found in Lexique383 dessaoulée dEsule dEsule ['desule']
+Not found in Lexique383 dessaoulés dEsule dEsule ['desule']
+Not found in Lexique383 desserrât dEsERa dEsERa ['desERa']
+Not found in Lexique383 dessinât dEsina dEsina ['desina']
+Not found in Lexique383 dessoûla dEsula dEsula ['desula']
+Not found in Lexique383 dessoûlait dEsulE dEsulE ['desulE']
+Not found in Lexique383 dessoûle dEsul dEsul ['desul']
+Not found in Lexique383 dessoûlent dEsul dEsul ['desul']
+Not found in Lexique383 dessoûler dEsule dEsule ['desule']
+Not found in Lexique383 dessoûles dEsul dEsul ['desul']
+Not found in Lexique383 dessoûlez dEsule dEsule ['desule']
+Not found in Lexique383 dessoûlé dEsule dEsule ['desule']
+Not found in Lexique383 dessoûlée dEsule dEsule ['desule']
+Not found in Lexique383 effarouchât EfaRuSa EfaRuSa ['efaRuSa']
+Not found in Lexique383 effleurât Efl9Ra Efl9Ra ['efl9Ra']
+Not found in Lexique383 effondrât Ef§dRa Ef§dRa ['ef§dRa']
+effraye  :
+ BreakdownSyllables
+effraye  :
+ corpus_words found, phono: EfREj EfREj CV V-CCVY
+effraye  :
+ Breakdown
+effraye  :
+ 0 V 0 V 
+ g/p: e E 
+ skip Y/C: False False
+effraye  :
+ appended g/p  [('V', 'e')] ['E']
+effraye  :
+ 1 CCVY 0 C 
+ g/p: ff f 
+ skip Y/C: False False
+effraye  :
+ appended g/p  [('C', 'ff')] ['f']
+effraye  :
+ 1 CCVY 1 C 
+ g/p: r R 
+ skip Y/C: False False
+effraye  :
+ appended g/p  [('C', 'ff'), ('C', 'r')] ['f', 'R']
+effraye  :
+ 1 CCVY 2 V 
+ g/p: ay Ej 
+ skip Y/C: False False
+effraye  :
+ appended g/p  [('C', 'ff'), ('C', 'r'), ('V', 'ay')] ['f', 'R', 'Ej']
+effraye  :
+ 1 CCVY 3 Y 
+ g/p: e # 
+ skip Y/C: True False
+effraye  :
+ Pop # in Y [('e', '#')] ['f', 'R', 'Ej'] [('C', 'ff'), ('C', 'r'), ('V', 'ay')]
+effraye  :
+ no more graph/phon
+essaye  :
+ BreakdownSyllables
+essaye  :
+ corpus_words found, phono: EsEj EsEj CV V-CVY
+essaye  :
+ Breakdown
+essaye  :
+ 0 V 0 V 
+ g/p: e E 
+ skip Y/C: False False
+essaye  :
+ appended g/p  [('V', 'e')] ['E']
+essaye  :
+ 1 CVY 0 C 
+ g/p: ss s 
+ skip Y/C: False False
+essaye  :
+ appended g/p  [('C', 'ss')] ['s']
+essaye  :
+ 1 CVY 1 V 
+ g/p: ay Ej 
+ skip Y/C: False False
+essaye  :
+ appended g/p  [('C', 'ss'), ('V', 'ay')] ['s', 'Ej']
+essaye  :
+ 1 CVY 2 Y 
+ g/p: e # 
+ skip Y/C: True False
+essaye  :
+ Pop # in Y [('e', '#')] ['s', 'Ej'] [('C', 'ss'), ('V', 'ay')]
+essaye  :
+ no more graph/phon
+Not found in Lexique383 essayât EsEja EsEja ['esEja']
+game  :
+ BreakdownSyllables
+game  :
+ corpus_words found, phono: gEjm gEjm CV CVYC
+game  :
+ Breakdown
+game  :
+ 0 CVYC 0 C 
+ g/p: g g 
+ skip Y/C: False False
+game  :
+ appended g/p  [('C', 'g')] ['g']
+game  :
+ 0 CVYC 1 V 
+ g/p: a E 
+ skip Y/C: False False
+game  :
+ appended g/p  [('C', 'g'), ('V', 'a')] ['g', 'E']
+game  :
+ 0 CVYC 2 Y 
+ g/p: m # 
+ skip Y/C: False False
+game  :
+ Pop # in Y [('m', '#'), ('e', '#')] ['g', 'E'] [('C', 'g'), ('V', 'a')]
+game  :
+ Pop # in Y [('e', '#')] ['g', 'E', '#'] [('C', 'g'), ('V', 'a'), ('#', 'm')]
+game  :
+ no more graph/phon
+Not found in Lexique383 nettoyât nEtwaja nEtwaja ['netwaja']
+Not found in Lexique383 pressentît pREs@ti pREs@ti ['pRes@ti']
+Not found in Lexique383 ressuscitât REsysita REsysita ['Resysita']
+soleil  :
+ BreakdownSyllables
+soleil  :
+ corpus_words found, phono: solEj solEj CV CV-CVY
+soleil  :
+ Breakdown
+soleil  :
+ 0 CV 0 C 
+ g/p: s s 
+ skip Y/C: False False
+soleil  :
+ appended g/p  [('C', 's')] ['s']
+soleil  :
+ 0 CV 1 V 
+ g/p: o o 
+ skip Y/C: False False
+soleil  :
+ appended g/p  [('C', 's'), ('V', 'o')] ['s', 'o']
+soleil  :
+ 1 CVY 0 C 
+ g/p: l l 
+ skip Y/C: False False
+soleil  :
+ appended g/p  [('C', 'l')] ['l']
+soleil  :
+ 1 CVY 1 V 
+ g/p: ei E 
+ skip Y/C: False False
+soleil  :
+ appended g/p  [('C', 'l'), ('V', 'ei')] ['l', 'E']
+soleil  :
+ 1 CVY 2 Y 
+ g/p: l j 
+ skip Y/C: False False
+soleil  :
+ appended g/p  [('C', 'l'), ('V', 'ei'), ('Y', 'l')] ['l', 'E', 'j']
+soleil  :
+ no more graph/phon
+égaye  :
+ BreakdownSyllables
+égaye  :
+ corpus_words found, phono: egEj egEj CV V-CVY
+égaye  :
+ Breakdown
+égaye  :
+ 0 V 0 V 
+ g/p: é e 
+ skip Y/C: False False
+égaye  :
+ appended g/p  [('V', 'é')] ['e']
+égaye  :
+ 1 CVY 0 C 
+ g/p: g g 
+ skip Y/C: False False
+égaye  :
+ appended g/p  [('C', 'g')] ['g']
+égaye  :
+ 1 CVY 1 V 
+ g/p: ay Ej 
+ skip Y/C: False False
+égaye  :
+ appended g/p  [('C', 'g'), ('V', 'ay')] ['g', 'Ej']
+égaye  :
+ 1 CVY 2 Y 
+ g/p: e # 
+ skip Y/C: True False
+égaye  :
+ Pop # in Y [('e', '#')] ['g', 'Ej'] [('C', 'g'), ('V', 'ay')]
+égaye  :
+ no more graph/phon
+Whole words phonemes:
+Top phonemes: [R:2624.0, E:2571.5, t:2477.9, a:2128.9, s:1814.2] 
+
+Top onset phonemes :
+Top phonemes: [s:1662.8, p:1648.5, t:1354.4, m:1103.4, d:1087.7] 
+
+Top coda phonemes :
+Top phonemes: [R:1785.2, t:1123.4, m:631.0, k:444.1, l:361.8] 
+
+Top nucleus phonemes :
+Top phonemes: [E:2571.5, a:2128.9, °:1607.0, i:1311.1, 2:895.1] 
+
+Syllable: p2 > peut: 698.6, peu: 0.7, peu ou prou: 0.7 > SyllFreq 700.1 700.1
+Syllable: tEtR > être: 698.0 > SyllFreq 698.0 698.0
+Syllable: d° > dessus: 211.3, demi: 93.9, des: 69.2, delà: 64.9 > SyllFreq 566.5 439.2
+Syllable: mEm > même: 478.3, mêmes: 80.7 > SyllFreq 559.0 559.0
+Syllable: s° > ce que: 322.2, celui: 128.7, montre: 1.8, semi: 1.3 > SyllFreq 456.9 454.0
+Nb Mismatched syll/orthosyll 52792
+Nb Mismatched syll/infrasyll 305
+game  :
+ syll/infrasyll not matching
+Nb Matched syll/infrasyll 137056
+soleil  :
+ syll/infrasyll matching
+essaye  :
+ syll/infrasyll matching
+effraye  :
+ syll/infrasyll matching
+balaye  :
+ syll/infrasyll matching
+égaye  :
+ syll/infrasyll matching
+Nb broken down 137381
+soleil  :
+ broken down Word(ortho='soleil', phonology='solEj', lemme='soleil', gram_cat='NOM', ortho_gram_cat='NOM', gender='m', number='s', info_verb='', syll='so-lEj', cv_cv='CV-CVY', orthosyll='so-leil', frequency=328.78, frequencyFilm=120.72)
+essaye  :
+ broken down Word(ortho='essaye', phonology='EsEj', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='imp:pre:2s;ind:pre:1s;ind:pre:3s;', syll='E-sEj', cv_cv='V-CVY', orthosyll='es-saye', frequency=10.47, frequencyFilm=56.84)
+effraye  :
+ broken down Word(ortho='effraye', phonology='EfREj', lemme='effrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='imp:pre:2s;ind:pre:1s;ind:pre:3s;', syll='E-fREj', cv_cv='V-CCVY', orthosyll='ef-fraye', frequency=0.61, frequencyFilm=1.1)
+balaye  :
+ broken down Word(ortho='balaye', phonology='balEj', lemme='balayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='imp:pre:2s;ind:pre:1s;ind:pre:3s;', syll='ba-lEj', cv_cv='CV-CVY', orthosyll='ba-laye', frequency=1.35, frequencyFilm=1.03)
+game  :
+ broken down Word(ortho='game', phonology='gEjm', lemme='game', gram_cat='NOM', ortho_gram_cat='NOM', gender='m', number='s', info_verb='', syll='gEjm', cv_cv='CVYC', orthosyll='', frequency=0.14, frequencyFilm=0.64)
+égaye  :
+ broken down Word(ortho='égaye', phonology='egEj', lemme='égayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='imp:pre:2s;ind:pre:3s;', syll='e-gEj', cv_cv='V-CVY', orthosyll='é-gaye', frequency=0.54, frequencyFilm=0.07)
+Nb missing 4877
+[Word(ortho='ok', phonology='oke', lemme='ok', gram_cat='ADJ', ortho_gram_cat='ADJ,ADV', gender='', number='', info_verb='', syll='o-ke', cv_cv='V-CV', orthosyll='ok', frequency=1.15, frequencyFilm=234.89), ['o', 'ke'], ['o', 'k'], ['o', 'k']]
+[Word(ortho='ok', phonology='oke', lemme='ok', gram_cat='ADV', ortho_gram_cat='ADJ,ADV', gender='', number='', info_verb='', syll='o-ke', cv_cv='V-CV', orthosyll='ok', frequency=1.22, frequencyFilm=136.5), ['o', 'ke'], ['o', 'k'], ['o', 'k']]
+[Word(ortho='empêcher', phonology='@pESe', lemme='empêcher', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='@-pE-Se', cv_cv='V-CV-CV', orthosyll='em-pê-cher', frequency=70.2, frequencyFilm=55.99), ['@', 'pE', 'Se'], ['@', 'pe', 'Se'], ['em', 'pê', 'cher']]
+[Word(ortho='essayons', phonology='EsEj§', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='imp:pre:1p;ind:pre:1p;', syll='E-se-j§', cv_cv='V-CV-YV', orthosyll='es-sayons', frequency=3.31, frequencyFilm=21.75), ['E', 'se', 'j§'], ['E', 'sE', 'j§'], ['e', 'ssa', 'yons']]
+[Word(ortho='enterré', phonology='@tERe', lemme='enterrer', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='par:pas;', syll='@-tE-Re', cv_cv='V-CV-CV', orthosyll='en-ter-ré', frequency=6.15, frequencyFilm=19.9), ['@', 'tE', 'Re'], ['@', 'te', 'Re'], ['en', 'te', 'rré']]
+[Word(ortho='essayais', phonology='EsEjE', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:1s;ind:imp:2s;', syll='E-se-jE', cv_cv='V-CV-YV', orthosyll='es-sayais', frequency=15.27, frequencyFilm=18.67), ['E', 'se', 'jE'], ['E', 'sE', 'jE'], ['e', 'ssa', 'yais']]
+[Word(ortho='enterrer', phonology='@tERe', lemme='enterrer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='@-tE-Re', cv_cv='V-CV-CV', orthosyll='en-ter-rer', frequency=9.12, frequencyFilm=17.27), ['@', 'tE', 'Re'], ['@', 'te', 'Re'], ['en', 'te', 'rrer']]
+[Word(ortho='entraîner', phonology='@tREne', lemme='entraîner', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='@-tRE-ne', cv_cv='V-CCV-CV', orthosyll='en-traî-ner', frequency=20.81, frequencyFilm=15.39), ['@', 'tRE', 'ne'], ['@', 'tRe', 'ne'], ['en', 'traî', 'ner']]
+[Word(ortho='essayait', phonology='EsEjE', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3s;', syll='E-se-jE', cv_cv='V-CV-YV', orthosyll='es-sayait', frequency=35.81, frequencyFilm=14.4), ['E', 'se', 'jE'], ['E', 'sE', 'jE'], ['e', 'ssa', 'yait']]
+[Word(ortho='enseigner', phonology='@sENe', lemme='enseigner', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;;', syll='@-sE-Ne', cv_cv='V-CV-CV', orthosyll='en-sei-gner', frequency=5.0, frequencyFilm=10.06), ['@', 'sE', 'Ne'], ['@', 'se', 'Ne'], ['en', 'sei', 'gner']]
+[Word(ortho='essayant', phonology='EsEj@', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='par:pre;', syll='E-se-j@', cv_cv='V-CV-YV', orthosyll='es-sayant', frequency=22.57, frequencyFilm=8.96), ['E', 'se', 'j@'], ['E', 'sE', 'j@'], ['e', 'ssa', 'yant']]
+[Word(ortho='entraîné', phonology='@tREne', lemme='entraîner', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='par:pas;', syll='@-tRE-ne', cv_cv='V-CCV-CV', orthosyll='en-traî-né', frequency=10.41, frequencyFilm=8.33), ['@', 'tRE', 'ne'], ['@', 'tRe', 'ne'], ['en', 'traî', 'né']]
+[Word(ortho='empêché', phonology='@pESe', lemme='empêcher', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='par:pas;', syll='@-pE-Se', cv_cv='V-CV-CV', orthosyll='em-pê-ché', frequency=9.26, frequencyFilm=7.81), ['@', 'pE', 'Se'], ['@', 'pe', 'Se'], ['em', 'pê', 'ché']]
+[Word(ortho='embêter', phonology='@bEte', lemme='embêter', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='@-bE-te', cv_cv='V-CV-CV', orthosyll='em-bê-ter', frequency=3.58, frequencyFilm=7.68), ['@', 'bE', 'te'], ['@', 'be', 'te'], ['em', 'bê', 'ter']]
+[Word(ortho='enquêter', phonology='@kEte', lemme='enquêter', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='@-kE-te', cv_cv='V-CV-CV', orthosyll='en-quê-ter', frequency=1.35, frequencyFilm=7.29), ['@', 'kE', 'te'], ['@', 'ke', 'te'], ['en', 'quê', 'ter']]
+[Word(ortho='enterrée', phonology='@tERe', lemme='enterrer', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='par:pas;', syll='@-tE-Re', cv_cv='V-CV-CV', orthosyll='en-ter-rée', frequency=3.58, frequencyFilm=5.92), ['@', 'tE', 'Re'], ['@', 'te', 'Re'], ['en', 'te', 'rrée']]
+[Word(ortho='payé', phonology='pEje', lemme='payé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='', syll='pe-je', cv_cv='CV-YV', orthosyll='payé', frequency=2.97, frequencyFilm=5.62), ['pe', 'je'], ['pE', 'je'], ['pa', 'yé']]
+[Word(ortho='payait', phonology='pEjE', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3s;', syll='pe-jE', cv_cv='CV-YV', orthosyll='payait', frequency=8.85, frequencyFilm=5.12), ['pe', 'jE'], ['pE', 'jE'], ['pa', 'yait']]
+[Word(ortho='encaisser', phonology='@kEse', lemme='encaisser', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='@-kE-se', cv_cv='V-CV-CV', orthosyll='en-cais-ser', frequency=3.78, frequencyFilm=4.84), ['@', 'kE', 'se'], ['@', 'ke', 'se'], ['en', 'cai', 'sser']]
+[Word(ortho='payes', phonology='pEj', lemme='payer', gram_cat='VER', ortho_gram_cat='NOM,VER', gender='', number='', info_verb='ind:pre:2s;sub:pre:2s;', syll='pej', cv_cv='CVY', orthosyll='payes', frequency=1.15, frequencyFilm=4.59), ['pej'], ['pEj'], ['payes']]
+[Word(ortho='payent', phonology='pEj', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:3p;', syll='pej', cv_cv='CVY', orthosyll='payent', frequency=1.35, frequencyFilm=4.3), ['pej'], ['pEj'], ['payent']]
+[Word(ortho='essayent', phonology='EsEj', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:3p;', syll='E-sej', cv_cv='V-CVY', orthosyll='es-sayent', frequency=1.69, frequencyFilm=4.07), ['E', 'sej'], ['E', 'sEj'], ['e', 'ssayent']]
+[Word(ortho='enseigné', phonology='@sENe', lemme='enseigner', gram_cat='VER', ortho_gram_cat='VER,ADJ,NOM', gender='m', number='s', info_verb='par:pas;', syll='@-sE-Ne', cv_cv='V-CV-CV', orthosyll='en-sei-gné', frequency=3.85, frequencyFilm=3.79), ['@', 'sE', 'Ne'], ['@', 'se', 'Ne'], ['en', 'sei', 'gné']]
+[Word(ortho='payés', phonology='pEje', lemme='payé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='', syll='pe-je', cv_cv='CV-YV', orthosyll='payés', frequency=3.04, frequencyFilm=3.21), ['pe', 'je'], ['pE', 'je'], ['pa', 'yés']]
+[Word(ortho='entraînés', phonology='@tREne', lemme='entraîner', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='par:pas;', syll='@-tRE-ne', cv_cv='V-CCV-CV', orthosyll='en-traî-nés', frequency=4.12, frequencyFilm=2.73), ['@', 'tRE', 'ne'], ['@', 'tRe', 'ne'], ['en', 'traî', 'nés']]
+[Word(ortho='essayaient', phonology='EsEjE', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3p;', syll='E-se-jE', cv_cv='V-CV-YV', orthosyll='es-sayaient', frequency=6.08, frequencyFilm=2.73), ['E', 'se', 'jE'], ['E', 'sE', 'jE'], ['e', 'ssa', 'yaient']]
+[Word(ortho='enterrés', phonology='@tERe', lemme='enterrer', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='par:pas;', syll='@-tE-Re', cv_cv='V-CV-CV', orthosyll='en-ter-rés', frequency=1.82, frequencyFilm=2.63), ['@', 'tE', 'Re'], ['@', 'te', 'Re'], ['en', 'te', 'rrés']]
+[Word(ortho='entraînée', phonology='@tREne', lemme='entraîner', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='par:pas;', syll='@-tRE-ne', cv_cv='V-CCV-CV', orthosyll='en-traî-née', frequency=5.0, frequencyFilm=2.47), ['@', 'tRE', 'ne'], ['@', 'tRe', 'ne'], ['en', 'traî', 'née']]
+[Word(ortho='rayures', phonology='REjyR', lemme='rayure', gram_cat='NOM', ortho_gram_cat='NOM', gender='f', number='p', info_verb='', syll='Re-jyR', cv_cv='CV-YVC', orthosyll='rayu-res', frequency=6.76, frequencyFilm=2.46), ['Re', 'jyR'], ['RE', 'jyR'], ['ra', 'yures']]
+[Word(ortho='payerai', phonology='pEj°Re', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:fut:1s;', syll='pe-j°-Re', cv_cv='CV-YV-CV', orthosyll='paye-rai', frequency=0.34, frequencyFilm=2.4), ['pe', 'j°', 'Re'], ['pE', 'j°', 'Re'], ['pa', 'ye', 'rai']]
+[Word(ortho='enchaîné', phonology='@SEne', lemme='enchaîner', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='par:pas;', syll='@-SE-ne', cv_cv='V-CV-CV', orthosyll='en-chaî-né', frequency=4.32, frequencyFilm=2.39), ['@', 'SE', 'ne'], ['@', 'Se', 'ne'], ['en', 'chaî', 'né']]
+[Word(ortho='rayer', phonology='REje', lemme='rayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='Re-je', cv_cv='CV-YV', orthosyll='rayer', frequency=1.76, frequencyFilm=2.26), ['Re', 'je'], ['RE', 'je'], ['ra', 'yer']]
+[Word(ortho='payera', phonology='pEj°Ra', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:fut:3s;', syll='pe-j°-Ra', cv_cv='CV-YV-CV', orthosyll='paye-ra', frequency=0.2, frequencyFilm=2.24), ['pe', 'j°', 'Ra'], ['pE', 'j°', 'Ra'], ['pa', 'ye', 'ra']]
+[Word(ortho='enquêté', phonology='@kEte', lemme='enquêter', gram_cat='VER', ortho_gram_cat='VER', gender='m', number='s', info_verb='par:pas;', syll='@-kE-te', cv_cv='V-CV-CV', orthosyll='en-quê-té', frequency=0.14, frequencyFilm=2.13), ['@', 'kE', 'te'], ['@', 'ke', 'te'], ['en', 'quê', 'té']]
+[Word(ortho='rayé', phonology='REje', lemme='rayer', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='par:pas;', syll='Re-je', cv_cv='CV-YV', orthosyll='rayé', frequency=3.04, frequencyFilm=2.09), ['Re', 'je'], ['RE', 'je'], ['ra', 'yé']]
+[Word(ortho='enterré', phonology='@tERe', lemme='enterré', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='', syll='@-tE-Re', cv_cv='V-CV-CV', orthosyll='en-ter-ré', frequency=1.22, frequencyFilm=1.94), ['@', 'tE', 'Re'], ['@', 'te', 'Re'], ['en', 'te', 'rré']]
+[Word(ortho='essayerai', phonology='EsEj°Re', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:fut:1s;', syll='E-se-j°-Re', cv_cv='V-CV-YV-CV', orthosyll='es-saye-rai', frequency=0.54, frequencyFilm=1.8), ['E', 'se', 'j°', 'Re'], ['E', 'sE', 'j°', 'Re'], ['e', 'ssa', 'ye', 'rai']]
+[Word(ortho='payons', phonology='pEj§', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='imp:pre:1p;ind:pre:1p;', syll='pe-j§', cv_cv='CV-YV', orthosyll='payons', frequency=0.74, frequencyFilm=1.68), ['pe', 'j§'], ['pE', 'j§'], ['pa', 'yons']]
+[Word(ortho='empêchée', phonology='@pESe', lemme='empêcher', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='par:pas;', syll='@-pE-Se', cv_cv='V-CV-CV', orthosyll='em-pê-chée', frequency=2.3, frequencyFilm=1.58), ['@', 'pE', 'Se'], ['@', 'pe', 'Se'], ['em', 'pê', 'chée']]
+[Word(ortho='payerez', phonology='pEj°Re', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:fut:2p;', syll='pe-j°-Re', cv_cv='CV-YV-CV', orthosyll='paye-rez', frequency=0.2, frequencyFilm=1.49), ['pe', 'j°', 'Re'], ['pE', 'j°', 'Re'], ['pa', 'ye', 'rez']]
+[Word(ortho='encaissé', phonology='@kEse', lemme='encaisser', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='par:pas;', syll='@-kE-se', cv_cv='V-CV-CV', orthosyll='en-cais-sé', frequency=0.74, frequencyFilm=1.47), ['@', 'kE', 'se'], ['@', 'ke', 'se'], ['en', 'cai', 'ssé']]
+[Word(ortho='enchaîner', phonology='@SEne', lemme='enchaîner', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='@-SE-ne', cv_cv='V-CV-CV', orthosyll='en-chaî-ner', frequency=2.43, frequencyFilm=1.46), ['@', 'SE', 'ne'], ['@', 'Se', 'ne'], ['en', 'chaî', 'ner']]
+[Word(ortho='payée', phonology='pEje', lemme='payé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='', syll='pe-je', cv_cv='CV-YV', orthosyll='payée', frequency=0.88, frequencyFilm=1.36), ['pe', 'je'], ['pE', 'je'], ['pa', 'yée']]
+[Word(ortho='essayiez', phonology='EsEjje', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:2p;', syll='E-sej-je', cv_cv='V-CVY-YV', orthosyll='es-sayiez', frequency=0.2, frequencyFilm=1.24), ['E', 'sej', 'je'], ['E', 'sEj', 'je'], ['e', 'ssay', 'iez']]
+[Word(ortho='engraisser', phonology='@gREse', lemme='engraisser', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='@-gRE-se', cv_cv='V-CCV-CV', orthosyll='en-grais-ser', frequency=0.88, frequencyFilm=1.12), ['@', 'gRE', 'se'], ['@', 'gRe', 'se'], ['en', 'grai', 'sser']]
+[Word(ortho='payais', phonology='pEjE', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:1s;ind:imp:2s;', syll='pe-jE', cv_cv='CV-YV', orthosyll='payais', frequency=1.08, frequencyFilm=1.07), ['pe', 'jE'], ['pE', 'jE'], ['pa', 'yais']]
+[Word(ortho='essayera', phonology='EsEj°Ra', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:fut:3s;', syll='E-se-j°-Ra', cv_cv='V-CV-YV-CV', orthosyll='es-saye-ra', frequency=0.2, frequencyFilm=1.03), ['E', 'se', 'j°', 'Ra'], ['E', 'sE', 'j°', 'Ra'], ['e', 'ssa', 'ye', 'ra']]
+[Word(ortho='rayée', phonology='REje', lemme='rayé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='', syll='Re-je', cv_cv='CV-YV', orthosyll='rayée', frequency=1.15, frequencyFilm=0.98), ['Re', 'je'], ['RE', 'je'], ['ra', 'yée']]
+[Word(ortho='enterrées', phonology='@tERe', lemme='enterrer', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='par:pas;', syll='@-tE-Re', cv_cv='V-CV-CV', orthosyll='en-ter-rées', frequency=0.47, frequencyFilm=0.95), ['@', 'tE', 'Re'], ['@', 'te', 'Re'], ['en', 'te', 'rrées']]
+[Word(ortho='enterrée', phonology='@tERe', lemme='enterré', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='', syll='@-tE-Re', cv_cv='V-CV-CV', orthosyll='en-ter-rée', frequency=1.01, frequencyFilm=0.93), ['@', 'tE', 'Re'], ['@', 'te', 'Re'], ['en', 'te', 'rrée']]
+[Word(ortho='enrayer', phonology='@REje', lemme='enrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='@-Re-je', cv_cv='V-CV-YV', orthosyll='en-rayer', frequency=0.74, frequencyFilm=0.92), ['@', 'Re', 'je'], ['@', 'RE', 'je'], ['en', 'ra', 'yer']]
+[Word(ortho='effrayait', phonology='EfREjE', lemme='effrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3s;', syll='E-fRe-jE', cv_cv='V-CCV-YV', orthosyll='ef-frayait', frequency=7.16, frequencyFilm=0.91), ['E', 'fRe', 'jE'], ['E', 'fRE', 'jE'], ['e', 'ffra', 'yait']]
+[Word(ortho='rayé', phonology='REje', lemme='rayé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='', syll='Re-je', cv_cv='CV-YV', orthosyll='rayé', frequency=3.51, frequencyFilm=0.9), ['Re', 'je'], ['RE', 'je'], ['ra', 'yé']]
+[Word(ortho='raye', phonology='REj', lemme='rayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='imp:pre:2s;ind:pre:1s;ind:pre:3s;sub:pre:1s;', syll='Rej', cv_cv='CVY', orthosyll='raye', frequency=0.54, frequencyFilm=0.83), ['Rej'], ['REj'], ['raye']]
+[Word(ortho='empêchés', phonology='@pESe', lemme='empêcher', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='par:pas;', syll='@-pE-Se', cv_cv='V-CV-CV', orthosyll='em-pê-chés', frequency=1.42, frequencyFilm=0.8), ['@', 'pE', 'Se'], ['@', 'pe', 'Se'], ['em', 'pê', 'chés']]
+[Word(ortho='endetté', phonology='@dEte', lemme='endetter', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='par:pas;', syll='@-dE-te', cv_cv='V-CV-CV', orthosyll='en-det-té', frequency=0.34, frequencyFilm=0.79), ['@', 'dE', 'te'], ['@', 'de', 'te'], ['en', 'de', 'tté']]
+[Word(ortho='entraînés', phonology='@tREne', lemme='entraîné', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='', syll='@-tRE-ne', cv_cv='V-CCV-CV', orthosyll='en-traî-nés', frequency=0.61, frequencyFilm=0.79), ['@', 'tRE', 'ne'], ['@', 'tRe', 'ne'], ['en', 'traî', 'nés']]
+[Word(ortho='paya', phonology='pEja', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3s;', syll='pe-ja', cv_cv='CV-YV', orthosyll='paya', frequency=5.14, frequencyFilm=0.76), ['pe', 'ja'], ['pE', 'ja'], ['pa', 'ya']]
+[Word(ortho='essayions', phonology='EsEjj§', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:1p;', syll='E-sej-j§', cv_cv='V-CVY-YV', orthosyll='es-sayions', frequency=0.81, frequencyFilm=0.75), ['E', 'sej', 'j§'], ['E', 'sEj', 'j§'], ['e', 'ssay', 'ions']]
+[Word(ortho='essayerais', phonology='EsEj°RE', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='cnd:pre:1s;cnd:pre:2s;', syll='E-se-j°-RE', cv_cv='V-CV-YV-CV', orthosyll='es-saye-rais', frequency=0.27, frequencyFilm=0.66), ['E', 'se', 'j°', 'RE'], ['E', 'sE', 'j°', 'RE'], ['e', 'ssa', 'ye', 'rais']]
+[Word(ortho='payaient', phonology='pEjE', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3p;', syll='pe-jE', cv_cv='CV-YV', orthosyll='payaient', frequency=2.5, frequencyFilm=0.66), ['pe', 'jE'], ['pE', 'jE'], ['pa', 'yaient']]
+[Word(ortho='rayée', phonology='REje', lemme='rayer', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='par:pas;', syll='Re-je', cv_cv='CV-YV', orthosyll='rayée', frequency=1.55, frequencyFilm=0.66), ['Re', 'je'], ['RE', 'je'], ['ra', 'yée']]
+[Word(ortho='essaya', phonology='EsEja', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3s;', syll='E-se-ja', cv_cv='V-CV-YV', orthosyll='es-saya', frequency=24.66, frequencyFilm=0.65), ['E', 'se', 'ja'], ['E', 'sE', 'ja'], ['e', 'ssa', 'ya']]
+[Word(ortho='bégayer', phonology='begEje', lemme='bégayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='be-ge-je', cv_cv='CV-CV-YV', orthosyll='bé-gayer', frequency=1.01, frequencyFilm=0.64), ['be', 'ge', 'je'], ['be', 'gE', 'je'], ['bé', 'ga', 'yer']]
+[Word(ortho='game', phonology='gEjm', lemme='game', gram_cat='NOM', ortho_gram_cat='NOM', gender='m', number='s', info_verb='', syll='gEjm', cv_cv='CVYC', orthosyll='', frequency=0.14, frequencyFilm=0.64), ['gEjm'], ['gE'], ['game']]
+[Word(ortho='enterrés', phonology='@tERe', lemme='enterré', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='', syll='@-tE-Re', cv_cv='V-CV-CV', orthosyll='en-ter-rés', frequency=1.22, frequencyFilm=0.63), ['@', 'tE', 'Re'], ['@', 'te', 'Re'], ['en', 'te', 'rrés']]
+[Word(ortho='rayez', phonology='REje', lemme='rayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='imp:pre:2p;ind:pre:2p;', syll='Re-je', cv_cv='CV-YV', orthosyll='rayez', frequency=0.14, frequencyFilm=0.6), ['Re', 'je'], ['RE', 'je'], ['ra', 'yez']]
+[Word(ortho='entêté', phonology='@tEte', lemme='entêté', gram_cat='NOM', ortho_gram_cat='VER,ADJ,NOM', gender='m', number='s', info_verb='', syll='@-tE-te', cv_cv='V-CV-CV', orthosyll='en-tê-té', frequency=0.68, frequencyFilm=0.58), ['@', 'tE', 'te'], ['@', 'te', 'te'], ['en', 'tê', 'té']]
+[Word(ortho='essayerons', phonology='EsEj°R§', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:fut:1p;', syll='E-se-j°-R§', cv_cv='V-CV-YV-CV', orthosyll='es-saye-rons', frequency=0.0, frequencyFilm=0.58), ['E', 'se', 'j°', 'R§'], ['E', 'sE', 'j°', 'R§'], ['e', 'ssa', 'ye', 'rons']]
+[Word(ortho='payerons', phonology='pEj°R§', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:fut:1p;', syll='pe-j°-R§', cv_cv='CV-YV-CV', orthosyll='paye-rons', frequency=0.14, frequencyFilm=0.58), ['pe', 'j°', 'R§'], ['pE', 'j°', 'R§'], ['pa', 'ye', 'rons']]
+[Word(ortho='payeront', phonology='pEj°R§', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:fut:3p;', syll='pe-j°-R§', cv_cv='CV-YV-CV', orthosyll='paye-ront', frequency=0.14, frequencyFilm=0.55), ['pe', 'j°', 'R§'], ['pE', 'j°', 'R§'], ['pa', 'ye', 'ront']]
+[Word(ortho='enchaînés', phonology='@SEne', lemme='enchaîner', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='par:pas;', syll='@-SE-ne', cv_cv='V-CV-CV', orthosyll='en-chaî-nés', frequency=1.15, frequencyFilm=0.53), ['@', 'SE', 'ne'], ['@', 'Se', 'ne'], ['en', 'chaî', 'nés']]
+[Word(ortho='payées', phonology='pEje', lemme='payé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='', syll='pe-je', cv_cv='CV-YV', orthosyll='payées', frequency=0.74, frequencyFilm=0.52), ['pe', 'je'], ['pE', 'je'], ['pa', 'yées']]
+[Word(ortho='enchaîné', phonology='@SEne', lemme='enchaîné', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='', syll='@-SE-ne', cv_cv='V-CV-CV', orthosyll='en-chaî-né', frequency=1.49, frequencyFilm=0.51), ['@', 'SE', 'ne'], ['@', 'Se', 'ne'], ['en', 'chaî', 'né']]
+[Word(ortho='enchaînées', phonology='@SEne', lemme='enchaîner', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='par:pas;', syll='@-SE-ne', cv_cv='V-CV-CV', orthosyll='en-chaî-nées', frequency=0.47, frequencyFilm=0.5), ['@', 'SE', 'ne'], ['@', 'Se', 'ne'], ['en', 'chaî', 'nées']]
+[Word(ortho='entraîné', phonology='@tREne', lemme='entraîné', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='', syll='@-tRE-ne', cv_cv='V-CCV-CV', orthosyll='en-traî-né', frequency=1.01, frequencyFilm=0.49), ['@', 'tRE', 'ne'], ['@', 'tRe', 'ne'], ['en', 'traî', 'né']]
+[Word(ortho='payes', phonology='pEj', lemme='paye', gram_cat='NOM', ortho_gram_cat='NOM,VER', gender='f', number='p', info_verb='', syll='pej', cv_cv='CVY', orthosyll='payes', frequency=0.0, frequencyFilm=0.48), ['pej'], ['pEj'], ['payes']]
+[Word(ortho='enchaînée', phonology='@SEne', lemme='enchaîner', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='par:pas;', syll='@-SE-ne', cv_cv='V-CV-CV', orthosyll='en-chaî-née', frequency=0.41, frequencyFilm=0.47), ['@', 'SE', 'ne'], ['@', 'Se', 'ne'], ['en', 'chaî', 'née']]
+[Word(ortho='étayer', phonology='etEje', lemme='étayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='e-te-je', cv_cv='V-CV-YV', orthosyll='é-tayer', frequency=1.15, frequencyFilm=0.47), ['e', 'te', 'je'], ['e', 'tE', 'je'], ['é', 'ta', 'yer']]
+[Word(ortho='enseignée', phonology='@sENe', lemme='enseigner', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='par:pas;', syll='@-sE-Ne', cv_cv='V-CV-CV', orthosyll='en-sei-gnée', frequency=0.88, frequencyFilm=0.43), ['@', 'sE', 'Ne'], ['@', 'se', 'Ne'], ['en', 'sei', 'gnée']]
+[Word(ortho='bégaye', phonology='begEj', lemme='bégayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='imp:pre:2s;ind:pre:1s;ind:pre:3s;', syll='be-gej', cv_cv='CV-CVY', orthosyll='bé-gaye', frequency=0.61, frequencyFilm=0.41), ['be', 'gej'], ['be', 'gEj'], ['bé', 'gaye']]
+[Word(ortho='entraînée', phonology='@tREne', lemme='entraîné', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='', syll='@-tRE-ne', cv_cv='V-CCV-CV', orthosyll='en-traî-née', frequency=0.54, frequencyFilm=0.41), ['@', 'tRE', 'ne'], ['@', 'tRe', 'ne'], ['en', 'traî', 'née']]
+[Word(ortho='embrayer', phonology='@bREje', lemme='embrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='@-bRe-je', cv_cv='V-CCV-YV', orthosyll='em-brayer', frequency=0.41, frequencyFilm=0.37), ['@', 'bRe', 'je'], ['@', 'bRE', 'je'], ['em', 'bra', 'yer']]
+[Word(ortho='payeras', phonology='pEj°Ra', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:fut:2s;', syll='pe-j°-Ra', cv_cv='CV-YV-CV', orthosyll='paye-ras', frequency=0.34, frequencyFilm=0.37), ['pe', 'j°', 'Ra'], ['pE', 'j°', 'Ra'], ['pa', 'ye', 'ras']]
+[Word(ortho='rayure', phonology='REjyR', lemme='rayure', gram_cat='NOM', ortho_gram_cat='NOM', gender='f', number='s', info_verb='', syll='Re-jyR', cv_cv='CV-YVC', orthosyll='rayu-re', frequency=0.61, frequencyFilm=0.36), ['Re', 'jyR'], ['RE', 'jyR'], ['ra', 'yure']]
+[Word(ortho='enchaînés', phonology='@SEne', lemme='enchaîné', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='', syll='@-SE-ne', cv_cv='V-CV-CV', orthosyll='en-chaî-nés', frequency=1.22, frequencyFilm=0.35), ['@', 'SE', 'ne'], ['@', 'Se', 'ne'], ['en', 'chaî', 'nés']]
+[Word(ortho='engraissé', phonology='@gREse', lemme='engraisser', gram_cat='VER', ortho_gram_cat='VER', gender='m', number='s', info_verb='par:pas;', syll='@-gRE-se', cv_cv='V-CCV-CV', orthosyll='en-grais-sé', frequency=0.88, frequencyFilm=0.33), ['@', 'gRE', 'se'], ['@', 'gRe', 'se'], ['en', 'grai', 'ssé']]
+[Word(ortho='payerais', phonology='pEj°RE', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='cnd:pre:1s;cnd:pre:2s;', syll='pe-j°-RE', cv_cv='CV-YV-CV', orthosyll='paye-rais', frequency=0.34, frequencyFilm=0.33), ['pe', 'j°', 'RE'], ['pE', 'j°', 'RE'], ['pa', 'ye', 'rais']]
+[Word(ortho='enrayé', phonology='@REje', lemme='enrayer', gram_cat='VER', ortho_gram_cat='VER', gender='m', number='s', info_verb='par:pas;', syll='@-Re-je', cv_cv='V-CV-YV', orthosyll='en-rayé', frequency=0.2, frequencyFilm=0.32), ['@', 'Re', 'je'], ['@', 'RE', 'je'], ['en', 'ra', 'yé']]
+[Word(ortho='enchaînées', phonology='@SEne', lemme='enchaîné', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='', syll='@-SE-ne', cv_cv='V-CV-CV', orthosyll='en-chaî-nées', frequency=0.34, frequencyFilm=0.31), ['@', 'SE', 'ne'], ['@', 'Se', 'ne'], ['en', 'chaî', 'nées']]
+[Word(ortho='rayés', phonology='REje', lemme='rayer', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='par:pas;', syll='Re-je', cv_cv='CV-YV', orthosyll='rayés', frequency=1.01, frequencyFilm=0.3), ['Re', 'je'], ['RE', 'je'], ['ra', 'yés']]
+[Word(ortho='entêté', phonology='@tEte', lemme='entêter', gram_cat='VER', ortho_gram_cat='VER,ADJ,NOM', gender='m', number='s', info_verb='par:pas;', syll='@-tE-te', cv_cv='V-CV-CV', orthosyll='en-tê-té', frequency=0.54, frequencyFilm=0.29), ['@', 'tE', 'te'], ['@', 'te', 'te'], ['en', 'tê', 'té']]
+[Word(ortho='fraye', phonology='fREj', lemme='frayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='imp:pre:2s;ind:pre:1s;ind:pre:3s;', syll='fRej', cv_cv='CCVY', orthosyll='fraye', frequency=0.61, frequencyFilm=0.29), ['fRej'], ['fREj'], ['fraye']]
+[Word(ortho='emmêlé', phonology='@mEle', lemme='emmêler', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='par:pas;', syll='@-mE-le', cv_cv='V-CV-CV', orthosyll='em-mê-lé', frequency=0.27, frequencyFilm=0.28), ['@', 'mE', 'le'], ['@', 'me', 'le'], ['em', 'mê', 'lé']]
+[Word(ortho='bégayé', phonology='begEje', lemme='bégayer', gram_cat='VER', ortho_gram_cat='VER', gender='m', number='s', info_verb='par:pas;', syll='be-ge-je', cv_cv='CV-CV-YV', orthosyll='bé-gayé', frequency=0.27, frequencyFilm=0.27), ['be', 'ge', 'je'], ['be', 'gE', 'je'], ['bé', 'ga', 'yé']]
+[Word(ortho='empressé', phonology='@pREse', lemme='empresser', gram_cat='VER', ortho_gram_cat='VER,ADJ,NOM', gender='m', number='s', info_verb='par:pas;', syll='@-pRE-se', cv_cv='V-CCV-CV', orthosyll='em-pres-sé', frequency=1.35, frequencyFilm=0.27), ['@', 'pRE', 'se'], ['@', 'pRe', 'se'], ['em', 'pre', 'ssé']]
+[Word(ortho='enraye', phonology='@REj', lemme='enrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:3s;', syll='@-Rej', cv_cv='V-CVY', orthosyll='en-raye', frequency=0.2, frequencyFilm=0.27), ['@', 'Rej'], ['@', 'REj'], ['en', 'raye']]
+[Word(ortho='essayèrent', phonology='EsEjER', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3p;', syll='E-se-jER', cv_cv='V-CV-YVC', orthosyll='es-sayè-rent', frequency=0.81, frequencyFilm=0.27), ['E', 'se', 'jER'], ['E', 'sE', 'jER'], ['e', 'ssa', 'yèrent']]
+[Word(ortho='embraye', phonology='@bREj', lemme='embrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='imp:pre:2s;ind:pre:1s;ind:pre:3s;', syll='@-bRej', cv_cv='V-CCVY', orthosyll='em-braye', frequency=0.61, frequencyFilm=0.26), ['@', 'bRej'], ['@', 'bREj'], ['em', 'braye']]
+[Word(ortho='enseigné', phonology='@sENe', lemme='enseigné', gram_cat='ADJ', ortho_gram_cat='VER,ADJ,NOM', gender='m', number='s', info_verb='', syll='@-sE-Ne', cv_cv='V-CV-CV', orthosyll='en-sei-gné', frequency=0.07, frequencyFilm=0.26), ['@', 'sE', 'Ne'], ['@', 'se', 'Ne'], ['en', 'sei', 'gné']]
+[Word(ortho='effrayent', phonology='EfREj', lemme='effrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:3p;', syll='E-fRej', cv_cv='V-CCVY', orthosyll='ef-frayent', frequency=0.2, frequencyFilm=0.25), ['E', 'fRej'], ['E', 'fREj'], ['e', 'ffrayent']]
+[Word(ortho='frayant', phonology='fREj@', lemme='frayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='par:pre;', syll='fRe-j@', cv_cv='CCV-YV', orthosyll='frayant', frequency=0.81, frequencyFilm=0.25), ['fRe', 'j@'], ['fRE', 'j@'], ['fra', 'yant']]
+[Word(ortho='relayaient', phonology='R°lEjE', lemme='relayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3p;', syll='R°-le-jE', cv_cv='CV-CV-YV', orthosyll='re-layaient', frequency=1.22, frequencyFilm=0.25), ['R°', 'le', 'jE'], ['R°', 'lE', 'jE'], ['re', 'la', 'yaient']]
+[Word(ortho='enneigés', phonology='@nEZe', lemme='enneiger', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='par:pas;', syll='@-nE-Ze', cv_cv='V-CV-CV', orthosyll='en-nei-gés', frequency=0.2, frequencyFilm=0.24), ['@', 'nE', 'Ze'], ['@', 'ne', 'Ze'], ['en', 'nei', 'gés']]
+[Word(ortho='enneigés', phonology='@nEZe', lemme='enneigé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='', syll='@-nE-Ze', cv_cv='V-CV-CV', orthosyll='en-nei-gés', frequency=0.41, frequencyFilm=0.24), ['@', 'nE', 'Ze'], ['@', 'ne', 'Ze'], ['en', 'nei', 'gés']]
+[Word(ortho='entêté', phonology='@tEte', lemme='entêté', gram_cat='ADJ', ortho_gram_cat='VER,ADJ,NOM', gender='m', number='s', info_verb='', syll='@-tE-te', cv_cv='V-CV-CV', orthosyll='en-tê-té', frequency=0.27, frequencyFilm=0.24), ['@', 'tE', 'te'], ['@', 'te', 'te'], ['en', 'tê', 'té']]
+[Word(ortho='effrayaient', phonology='EfREjE', lemme='effrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3p;', syll='E-fRe-jE', cv_cv='V-CCV-YV', orthosyll='ef-frayaient', frequency=1.35, frequencyFilm=0.23), ['E', 'fRe', 'jE'], ['E', 'fRE', 'jE'], ['e', 'ffra', 'yaient']]
+[Word(ortho='encaissés', phonology='@kEse', lemme='encaisser', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='par:pas;', syll='@-kE-se', cv_cv='V-CV-CV', orthosyll='en-cais-sés', frequency=0.07, frequencyFilm=0.23), ['@', 'kE', 'se'], ['@', 'ke', 'se'], ['en', 'cai', 'ssés']]
+[Word(ortho='endettée', phonology='@dEte', lemme='endetté', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='', syll='@-dE-te', cv_cv='V-CV-CV', orthosyll='en-det-tée', frequency=0.07, frequencyFilm=0.23), ['@', 'dE', 'te'], ['@', 'de', 'te'], ['en', 'de', 'ttée']]
+[Word(ortho='enseignées', phonology='@sENe', lemme='enseigner', gram_cat='VER', ortho_gram_cat='VER', gender='f', number='p', info_verb='par:pas;', syll='@-sE-Ne', cv_cv='V-CV-CV', orthosyll='en-sei-gnées', frequency=0.27, frequencyFilm=0.22), ['@', 'sE', 'Ne'], ['@', 'se', 'Ne'], ['en', 'sei', 'gnées']]
+[Word(ortho='effrayons', phonology='EfREj§', lemme='effrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='imp:pre:1p;ind:pre:1p;', syll='E-fRe-j§', cv_cv='V-CCV-YV', orthosyll='ef-frayons', frequency=0.07, frequencyFilm=0.2), ['E', 'fRe', 'j§'], ['E', 'fRE', 'j§'], ['e', 'ffra', 'yons']]
+[Word(ortho='emmêler', phonology='@mEle', lemme='emmêler', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='@-mE-le', cv_cv='V-CV-CV', orthosyll='em-mê-ler', frequency=0.41, frequencyFilm=0.2), ['@', 'mE', 'le'], ['@', 'me', 'le'], ['em', 'mê', 'ler']]
+[Word(ortho='empressé', phonology='@pREse', lemme='empressé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ,NOM', gender='m', number='s', info_verb='', syll='@-pRE-se', cv_cv='V-CCV-CV', orthosyll='em-pres-sé', frequency=0.95, frequencyFilm=0.2), ['@', 'pRE', 'se'], ['@', 'pRe', 'se'], ['em', 'pre', 'ssé']]
+[Word(ortho='encaissé', phonology='@kEse', lemme='encaissé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='', syll='@-kE-se', cv_cv='V-CV-CV', orthosyll='en-cais-sé', frequency=0.54, frequencyFilm=0.2), ['@', 'kE', 'se'], ['@', 'ke', 'se'], ['en', 'cai', 'ssé']]
+[Word(ortho='enneigé', phonology='@nEZe', lemme='enneiger', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='par:pas;', syll='@-nE-Ze', cv_cv='V-CV-CV', orthosyll='en-nei-gé', frequency=0.0, frequencyFilm=0.2), ['@', 'nE', 'Ze'], ['@', 'ne', 'Ze'], ['en', 'nei', 'gé']]
+[Word(ortho='enneigé', phonology='@nEZe', lemme='enneigé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='', syll='@-nE-Ze', cv_cv='V-CV-CV', orthosyll='en-nei-gé', frequency=0.54, frequencyFilm=0.2), ['@', 'nE', 'Ze'], ['@', 'ne', 'Ze'], ['en', 'nei', 'gé']]
+[Word(ortho='payerait', phonology='pEj°RE', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='cnd:pre:3s;', syll='pe-j°-RE', cv_cv='CV-YV-CV', orthosyll='paye-rait', frequency=0.47, frequencyFilm=0.2), ['pe', 'j°', 'RE'], ['pE', 'j°', 'RE'], ['pa', 'ye', 'rait']]
+[Word(ortho='rayées', phonology='REje', lemme='rayer', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='par:pas;', syll='Re-je', cv_cv='CV-YV', orthosyll='rayées', frequency=0.47, frequencyFilm=0.2), ['Re', 'je'], ['RE', 'je'], ['ra', 'yées']]
+[Word(ortho='bégayait', phonology='begEjE', lemme='bégayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3s;', syll='be-ge-jE', cv_cv='CV-CV-YV', orthosyll='bé-gayait', frequency=1.76, frequencyFilm=0.18), ['be', 'ge', 'jE'], ['be', 'gE', 'jE'], ['bé', 'ga', 'yait']]
+[Word(ortho='endetter', phonology='@dEte', lemme='endetter', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='@-dE-te', cv_cv='V-CV-CV', orthosyll='en-det-ter', frequency=0.27, frequencyFilm=0.18), ['@', 'dE', 'te'], ['@', 'de', 'te'], ['en', 'de', 'tter']]
+[Word(ortho='entêter', phonology='@tEte', lemme='entêter', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='@-tE-te', cv_cv='V-CV-CV', orthosyll='en-tê-ter', frequency=0.95, frequencyFilm=0.18), ['@', 'tE', 'te'], ['@', 'te', 'te'], ['en', 'tê', 'ter']]
+[Word(ortho='emmêlé', phonology='@mEle', lemme='emmêlé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='', syll='@-mE-le', cv_cv='V-CV-CV', orthosyll='em-mê-lé', frequency=0.14, frequencyFilm=0.17), ['@', 'mE', 'le'], ['@', 'me', 'le'], ['em', 'mê', 'lé']]
+[Word(ortho='essayerez', phonology='EsEj°Re', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:fut:2p;', syll='E-se-j°-Re', cv_cv='V-CV-YV-CV', orthosyll='es-saye-rez', frequency=0.14, frequencyFilm=0.16), ['E', 'se', 'j°', 'Re'], ['E', 'sE', 'j°', 'Re'], ['e', 'ssa', 'ye', 'rez']]
+[Word(ortho='bégayez', phonology='begEje', lemme='bégayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:2p;', syll='be-ge-je', cv_cv='CV-CV-YV', orthosyll='bé-gayez', frequency=0.07, frequencyFilm=0.15), ['be', 'ge', 'je'], ['be', 'gE', 'je'], ['bé', 'ga', 'yez']]
+[Word(ortho='endetté', phonology='@dEte', lemme='endetté', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='', syll='@-dE-te', cv_cv='V-CV-CV', orthosyll='en-det-té', frequency=0.14, frequencyFilm=0.15), ['@', 'dE', 'te'], ['@', 'de', 'te'], ['en', 'de', 'tté']]
+[Word(ortho='entêtés', phonology='@tEte', lemme='entêté', gram_cat='NOM', ortho_gram_cat='VER,ADJ,NOM', gender='m', number='p', info_verb='', syll='@-tE-te', cv_cv='V-CV-CV', orthosyll='en-tê-tés', frequency=0.07, frequencyFilm=0.15), ['@', 'tE', 'te'], ['@', 'te', 'te'], ['en', 'tê', 'tés']]
+[Word(ortho='essayeront', phonology='EsEj°R§', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:fut:3p;', syll='E-se-j°-R§', cv_cv='V-CV-YV-CV', orthosyll='es-saye-ront', frequency=0.0, frequencyFilm=0.15), ['E', 'se', 'j°', 'R§'], ['E', 'sE', 'j°', 'R§'], ['e', 'ssa', 'ye', 'ront']]
+[Word(ortho='frayait', phonology='fREjE', lemme='frayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3s;', syll='fRe-jE', cv_cv='CCV-YV', orthosyll='frayait', frequency=1.35, frequencyFilm=0.15), ['fRe', 'jE'], ['fRE', 'jE'], ['fra', 'yait']]
+[Word(ortho='effrayèrent', phonology='EfREjER', lemme='effrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3p;', syll='E-fRe-jER', cv_cv='V-CCV-YVC', orthosyll='ef-frayè-rent', frequency=0.0, frequencyFilm=0.14), ['E', 'fRe', 'jER'], ['E', 'fRE', 'jER'], ['e', 'ffra', 'yèrent']]
+[Word(ortho='empressées', phonology='@pREse', lemme='empresser', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='par:pas;', syll='@-pRE-se', cv_cv='V-CCV-CV', orthosyll='em-pres-sées', frequency=0.27, frequencyFilm=0.14), ['@', 'pRE', 'se'], ['@', 'pRe', 'se'], ['em', 'pre', 'ssées']]
+[Word(ortho='empressés', phonology='@pREse', lemme='empressé', gram_cat='NOM', ortho_gram_cat='VER,ADJ,NOM', gender='m', number='p', info_verb='', syll='@-pRE-se', cv_cv='V-CCV-CV', orthosyll='em-pres-sés', frequency=0.14, frequencyFilm=0.14), ['@', 'pRE', 'se'], ['@', 'pRe', 'se'], ['em', 'pre', 'ssés']]
+[Word(ortho='endettés', phonology='@dEte', lemme='endetter', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='par:pas;', syll='@-dE-te', cv_cv='V-CV-CV', orthosyll='en-det-tés', frequency=0.0, frequencyFilm=0.14), ['@', 'dE', 'te'], ['@', 'de', 'te'], ['en', 'de', 'ttés']]
+[Word(ortho='enrayée', phonology='@REje', lemme='enrayer', gram_cat='VER', ortho_gram_cat='VER', gender='f', number='s', info_verb='par:pas;', syll='@-Re-je', cv_cv='V-CV-YV', orthosyll='en-rayée', frequency=0.27, frequencyFilm=0.14), ['@', 'Re', 'je'], ['@', 'RE', 'je'], ['en', 'ra', 'yée']]
+[Word(ortho='rayant', phonology='REj@', lemme='rayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='par:pre;', syll='Re-j@', cv_cv='CV-YV', orthosyll='rayant', frequency=0.41, frequencyFilm=0.14), ['Re', 'j@'], ['RE', 'j@'], ['ra', 'yant']]
+[Word(ortho='essayerait', phonology='EsEj°RE', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='cnd:pre:3s;', syll='E-se-j°-RE', cv_cv='V-CV-YV-CV', orthosyll='es-saye-rait', frequency=0.27, frequencyFilm=0.13), ['E', 'se', 'j°', 'RE'], ['E', 'sE', 'j°', 'RE'], ['e', 'ssa', 'ye', 'rait']]
+[Word(ortho='endettée', phonology='@dEte', lemme='endetter', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='par:pas;', syll='@-dE-te', cv_cv='V-CV-CV', orthosyll='en-det-tée', frequency=0.14, frequencyFilm=0.12), ['@', 'dE', 'te'], ['@', 'de', 'te'], ['en', 'de', 'ttée']]
+[Word(ortho='métayers', phonology='metEje', lemme='métayer', gram_cat='NOM', ortho_gram_cat='NOM', gender='m', number='p', info_verb='', syll='me-te-je', cv_cv='CV-CV-YV', orthosyll='mé-tayers', frequency=0.68, frequencyFilm=0.12), ['me', 'te', 'je'], ['me', 'tE', 'je'], ['mé', 'ta', 'yers']]
+[Word(ortho='métayer', phonology='metEje', lemme='métayer', gram_cat='NOM', ortho_gram_cat='NOM', gender='m', number='s', info_verb='', syll='me-te-je', cv_cv='CV-CV-YV', orthosyll='mé-tayer', frequency=0.81, frequencyFilm=0.11), ['me', 'te', 'je'], ['me', 'tE', 'je'], ['mé', 'ta', 'yer']]
+[Word(ortho='payèrent', phonology='pEjER', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3p;', syll='pe-jER', cv_cv='CV-YVC', orthosyll='payè-rent', frequency=0.41, frequencyFilm=0.11), ['pe', 'jER'], ['pE', 'jER'], ['pa', 'yèrent']]
+[Word(ortho='enneigée', phonology='@nEZe', lemme='enneigé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='', syll='@-nE-Ze', cv_cv='V-CV-CV', orthosyll='en-nei-gée', frequency=0.88, frequencyFilm=0.1), ['@', 'nE', 'Ze'], ['@', 'ne', 'Ze'], ['en', 'nei', 'gée']]
+[Word(ortho='payeraient', phonology='pEj°RE', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='cnd:pre:3p;', syll='pe-j°-RE', cv_cv='CV-YV-CV', orthosyll='paye-raient', frequency=0.14, frequencyFilm=0.1), ['pe', 'j°', 'RE'], ['pE', 'j°', 'RE'], ['pa', 'ye', 'raient']]
+[Word(ortho='payeriez', phonology='pEj°Rje', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='cnd:pre:2p;', syll='pe-j°-Rje', cv_cv='CV-YV-CYV', orthosyll='paye-riez', frequency=0.07, frequencyFilm=0.1), ['pe', 'j°', 'Rje'], ['pE', 'j°', 'Rje'], ['pa', 'ye', 'riez']]
+[Word(ortho='enterrées', phonology='@tERe', lemme='enterré', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='', syll='@-tE-Re', cv_cv='V-CV-CV', orthosyll='en-ter-rées', frequency=0.14, frequencyFilm=0.09), ['@', 'tE', 'Re'], ['@', 'te', 'Re'], ['en', 'te', 'rrées']]
+[Word(ortho='entraînées', phonology='@tREne', lemme='entraîner', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='par:pas;', syll='@-tRE-ne', cv_cv='V-CCV-CV', orthosyll='en-traî-nées', frequency=1.01, frequencyFilm=0.09), ['@', 'tRE', 'ne'], ['@', 'tRe', 'ne'], ['en', 'traî', 'nées']]
+[Word(ortho='entraînées', phonology='@tREne', lemme='entraîné', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='', syll='@-tRE-ne', cv_cv='V-CCV-CV', orthosyll='en-traî-nées', frequency=0.07, frequencyFilm=0.09), ['@', 'tRE', 'ne'], ['@', 'tRe', 'ne'], ['en', 'traî', 'nées']]
+[Word(ortho='rayent', phonology='REj', lemme='rayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:3p;', syll='Rej', cv_cv='CVY', orthosyll='rayent', frequency=0.07, frequencyFilm=0.09), ['Rej'], ['REj'], ['rayent']]
+[Word(ortho='rayés', phonology='REje', lemme='rayé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='', syll='Re-je', cv_cv='CV-YV', orthosyll='rayés', frequency=1.62, frequencyFilm=0.09), ['Re', 'je'], ['RE', 'je'], ['ra', 'yés']]
+[Word(ortho='bégayais', phonology='begEjE', lemme='bégayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:1s;ind:imp:2s;', syll='be-ge-jE', cv_cv='CV-CV-YV', orthosyll='bé-gayais', frequency=0.27, frequencyFilm=0.08), ['be', 'ge', 'jE'], ['be', 'gE', 'jE'], ['bé', 'ga', 'yais']]
+[Word(ortho='empressée', phonology='@pREse', lemme='empresser', gram_cat='VER', ortho_gram_cat='VER,ADJ,NOM', gender='f', number='s', info_verb='par:pas;', syll='@-pRE-se', cv_cv='V-CCV-CV', orthosyll='em-pres-sée', frequency=0.47, frequencyFilm=0.08), ['@', 'pRE', 'se'], ['@', 'pRe', 'se'], ['em', 'pre', 'ssée']]
+[Word(ortho='enchaînée', phonology='@SEne', lemme='enchaîné', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='', syll='@-SE-ne', cv_cv='V-CV-CV', orthosyll='en-chaî-née', frequency=0.07, frequencyFilm=0.08), ['@', 'SE', 'ne'], ['@', 'Se', 'ne'], ['en', 'chaî', 'née']]
+[Word(ortho='entêtée', phonology='@tEte', lemme='entêté', gram_cat='ADJ', ortho_gram_cat='VER,ADJ,NOM', gender='f', number='s', info_verb='', syll='@-tE-te', cv_cv='V-CV-CV', orthosyll='en-tê-tée', frequency=0.74, frequencyFilm=0.08), ['@', 'tE', 'te'], ['@', 'te', 'te'], ['en', 'tê', 'tée']]
+[Word(ortho='essayeraient', phonology='EsEj°RE', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='cnd:pre:3p;', syll='E-se-j°-RE', cv_cv='V-CV-YV-CV', orthosyll='es-saye-raient', frequency=0.07, frequencyFilm=0.08), ['E', 'se', 'j°', 'RE'], ['E', 'sE', 'j°', 'RE'], ['e', 'ssa', 'ye', 'raient']]
+[Word(ortho='étaye', phonology='etEj', lemme='étayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:3s;', syll='e-tej', cv_cv='V-CVY', orthosyll='é-taye', frequency=0.0, frequencyFilm=0.08), ['e', 'tej'], ['e', 'tEj'], ['é', 'taye']]
+[Word(ortho='emmêlés', phonology='@mEle', lemme='emmêler', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='par:pas;', syll='@-mE-le', cv_cv='V-CV-CV', orthosyll='em-mê-lés', frequency=0.95, frequencyFilm=0.07), ['@', 'mE', 'le'], ['@', 'me', 'le'], ['em', 'mê', 'lés']]
+[Word(ortho='emmêlés', phonology='@mEle', lemme='emmêlé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='', syll='@-mE-le', cv_cv='V-CV-CV', orthosyll='em-mê-lés', frequency=1.96, frequencyFilm=0.07), ['@', 'mE', 'le'], ['@', 'me', 'le'], ['em', 'mê', 'lés']]
+[Word(ortho='endettés', phonology='@dEte', lemme='endetté', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='', syll='@-dE-te', cv_cv='V-CV-CV', orthosyll='en-det-tés', frequency=0.0, frequencyFilm=0.07), ['@', 'dE', 'te'], ['@', 'de', 'te'], ['en', 'de', 'ttés']]
+[Word(ortho='enseignés', phonology='@sENe', lemme='enseigner', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='par:pas;', syll='@-sE-Ne', cv_cv='V-CV-CV', orthosyll='en-sei-gnés', frequency=0.34, frequencyFilm=0.06), ['@', 'sE', 'Ne'], ['@', 'se', 'Ne'], ['en', 'sei', 'gnés']]
+[Word(ortho='entêtée', phonology='@tEte', lemme='entêter', gram_cat='VER', ortho_gram_cat='VER,ADJ,NOM', gender='f', number='s', info_verb='par:pas;', syll='@-tE-te', cv_cv='V-CV-CV', orthosyll='en-tê-tée', frequency=0.0, frequencyFilm=0.06), ['@', 'tE', 'te'], ['@', 'te', 'te'], ['en', 'tê', 'tée']]
+[Word(ortho='embrayé', phonology='@bREje', lemme='embrayer', gram_cat='VER', ortho_gram_cat='VER', gender='m', number='s', info_verb='par:pas;', syll='@-bRe-je', cv_cv='V-CCV-YV', orthosyll='em-brayé', frequency=0.34, frequencyFilm=0.05), ['@', 'bRe', 'je'], ['@', 'bRE', 'je'], ['em', 'bra', 'yé']]
+[Word(ortho='enneigées', phonology='@nEZe', lemme='enneigé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='', syll='@-nE-Ze', cv_cv='V-CV-CV', orthosyll='en-nei-gées', frequency=0.68, frequencyFilm=0.05), ['@', 'nE', 'Ze'], ['@', 'ne', 'Ze'], ['en', 'nei', 'gées']]
+[Word(ortho='entêtés', phonology='@tEte', lemme='entêté', gram_cat='ADJ', ortho_gram_cat='VER,ADJ,NOM', gender='m', number='p', info_verb='', syll='@-tE-te', cv_cv='V-CV-CV', orthosyll='en-tê-tés', frequency=0.2, frequencyFilm=0.05), ['@', 'tE', 'te'], ['@', 'te', 'te'], ['en', 'tê', 'tés']]
+[Word(ortho='rayées', phonology='REje', lemme='rayé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='', syll='Re-je', cv_cv='CV-YV', orthosyll='rayées', frequency=0.54, frequencyFilm=0.05), ['Re', 'je'], ['RE', 'je'], ['ra', 'yées']]
+[Word(ortho='étayées', phonology='etEje', lemme='étayer', gram_cat='VER', ortho_gram_cat='VER', gender='f', number='p', info_verb='par:pas;', syll='e-te-je', cv_cv='V-CV-YV', orthosyll='é-tayées', frequency=0.14, frequencyFilm=0.05), ['e', 'te', 'je'], ['e', 'tE', 'je'], ['é', 'ta', 'yées']]
+[Word(ortho='effrayais', phonology='EfREjE', lemme='effrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:1s;', syll='E-fRe-jE', cv_cv='V-CCV-YV', orthosyll='ef-frayais', frequency=0.2, frequencyFilm=0.04), ['E', 'fRe', 'jE'], ['E', 'fRE', 'jE'], ['e', 'ffra', 'yais']]
+[Word(ortho='empêché', phonology='@pESe', lemme='empêché', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='', syll='@-pE-Se', cv_cv='V-CV-CV', orthosyll='em-pê-ché', frequency=0.34, frequencyFilm=0.04), ['@', 'pE', 'Se'], ['@', 'pe', 'Se'], ['em', 'pê', 'ché']]
+[Word(ortho='enneigées', phonology='@nEZe', lemme='enneiger', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='par:pas;', syll='@-nE-Ze', cv_cv='V-CV-CV', orthosyll='en-nei-gées', frequency=0.68, frequencyFilm=0.04), ['@', 'nE', 'Ze'], ['@', 'ne', 'Ze'], ['en', 'nei', 'gées']]
+[Word(ortho='steamboat', phonology='stimbOwt', lemme='steamboat', gram_cat='NOM', ortho_gram_cat='NOM', gender='m', number='s', info_verb='', syll='stim-bOwt', cv_cv='CCVC-CVYC', orthosyll='', frequency=0.0, frequencyFilm=0.04), ['stim', 'bOwt'], ['stim', 'bO'], ['steam', 'boat']]
+[Word(ortho='update', phonology='9pdajt', lemme='update', gram_cat='NOM', ortho_gram_cat='NOM', gender='f', number='s', info_verb='', syll='9p-dajt', cv_cv='VC-CVYC', orthosyll='up-da-te', frequency=0.0, frequencyFilm=0.04), ['9p', 'dajt'], ['9p', 'da'], ['up', 'date']]
+[Word(ortho='défrayé', phonology='defREje', lemme='défrayer', gram_cat='VER', ortho_gram_cat='VER', gender='m', number='s', info_verb='par:pas;', syll='de-fRe-je', cv_cv='CV-CCV-YV', orthosyll='dé-frayé', frequency=0.07, frequencyFilm=0.03), ['de', 'fRe', 'je'], ['de', 'fRE', 'je'], ['dé', 'fra', 'yé']]
+[Word(ortho='délayer', phonology='delEje', lemme='délayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='de-le-je', cv_cv='CV-CV-YV', orthosyll='dé-layer', frequency=0.47, frequencyFilm=0.03), ['de', 'le', 'je'], ['de', 'lE', 'je'], ['dé', 'la', 'yer']]
+[Word(ortho='emmêlée', phonology='@mEle', lemme='emmêler', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='par:pas;', syll='@-mE-le', cv_cv='V-CV-CV', orthosyll='em-mê-lée', frequency=0.41, frequencyFilm=0.03), ['@', 'mE', 'le'], ['@', 'me', 'le'], ['em', 'mê', 'lée']]
+[Word(ortho='empressés', phonology='@pREse', lemme='empresser', gram_cat='VER', ortho_gram_cat='VER,ADJ,NOM', gender='m', number='p', info_verb='par:pas;', syll='@-pRE-se', cv_cv='V-CCV-CV', orthosyll='em-pres-sés', frequency=0.54, frequencyFilm=0.03), ['@', 'pRE', 'se'], ['@', 'pRe', 'se'], ['em', 'pre', 'ssés']]
+[Word(ortho='encaissée', phonology='@kEse', lemme='encaisser', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='par:pas;', syll='@-kE-se', cv_cv='V-CV-CV', orthosyll='en-cais-sée', frequency=0.34, frequencyFilm=0.03), ['@', 'kE', 'se'], ['@', 'ke', 'se'], ['en', 'cai', 'ssée']]
+[Word(ortho='encaissés', phonology='@kEse', lemme='encaissé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='', syll='@-kE-se', cv_cv='V-CV-CV', orthosyll='en-cais-sés', frequency=0.14, frequencyFilm=0.03), ['@', 'kE', 'se'], ['@', 'ke', 'se'], ['en', 'cai', 'ssés']]
+[Word(ortho='engraissés', phonology='@gREse', lemme='engraisser', gram_cat='VER', ortho_gram_cat='VER', gender='m', number='p', info_verb='par:pas;', syll='@-gRE-se', cv_cv='V-CCV-CV', orthosyll='en-grais-sés', frequency=0.07, frequencyFilm=0.03), ['@', 'gRE', 'se'], ['@', 'gRe', 'se'], ['en', 'grai', 'ssés']]
+[Word(ortho='enrayent', phonology='@REj', lemme='enrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:3p;', syll='@-Rej', cv_cv='V-CVY', orthosyll='en-rayent', frequency=0.07, frequencyFilm=0.03), ['@', 'Rej'], ['@', 'REj'], ['en', 'rayent']]
+[Word(ortho='frayes', phonology='fREj', lemme='frayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:2s;', syll='fRej', cv_cv='CCVY', orthosyll='frayes', frequency=0.07, frequencyFilm=0.03), ['fRej'], ['fREj'], ['frayes']]
+[Word(ortho='layer', phonology='lEje', lemme='layer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='le-je', cv_cv='CV-YV', orthosyll='layer', frequency=0.14, frequencyFilm=0.03), ['le', 'je'], ['lE', 'je'], ['la', 'yer']]
+[Word(ortho='payions', phonology='pEjj§', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:1p;', syll='pej-j§', cv_cv='CVY-YV', orthosyll='payions', frequency=0.07, frequencyFilm=0.03), ['pej', 'j§'], ['pEj', 'j§'], ['pay', 'ions']]
+[Word(ortho='étayez', phonology='etEje', lemme='étayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='imp:pre:2p;ind:pre:2p;', syll='e-te-je', cv_cv='V-CV-YV', orthosyll='é-tayez', frequency=0.07, frequencyFilm=0.03), ['e', 'te', 'je'], ['e', 'tE', 'je'], ['é', 'ta', 'yez']]
+[Word(ortho='débraye', phonology='debREj', lemme='débrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='imp:pre:2s;ind:pre:1s;ind:pre:3s;', syll='de-bRej', cv_cv='CV-CCVY', orthosyll='dé-braye', frequency=0.14, frequencyFilm=0.02), ['de', 'bRej'], ['de', 'bREj'], ['dé', 'braye']]
+[Word(ortho='embrayes', phonology='@bREj', lemme='embrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:2s;', syll='@-bRej', cv_cv='V-CCVY', orthosyll='em-brayes', frequency=0.07, frequencyFilm=0.02), ['@', 'bRej'], ['@', 'bREj'], ['em', 'brayes']]
+[Word(ortho='emmêlée', phonology='@mEle', lemme='emmêlé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='', syll='@-mE-le', cv_cv='V-CV-CV', orthosyll='em-mê-lée', frequency=0.07, frequencyFilm=0.02), ['@', 'mE', 'le'], ['@', 'me', 'le'], ['em', 'mê', 'lée']]
+[Word(ortho='emmêlées', phonology='@mEle', lemme='emmêler', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='par:pas;', syll='@-mE-le', cv_cv='V-CV-CV', orthosyll='em-mê-lées', frequency=0.41, frequencyFilm=0.02), ['@', 'mE', 'le'], ['@', 'me', 'le'], ['em', 'mê', 'lées']]
+[Word(ortho='empressé', phonology='@pREse', lemme='empressé', gram_cat='NOM', ortho_gram_cat='VER,ADJ,NOM', gender='m', number='s', info_verb='', syll='@-pRE-se', cv_cv='V-CCV-CV', orthosyll='em-pres-sé', frequency=0.14, frequencyFilm=0.02), ['@', 'pRE', 'se'], ['@', 'pRe', 'se'], ['em', 'pre', 'ssé']]
+[Word(ortho='empressée', phonology='@pREse', lemme='empressé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ,NOM', gender='f', number='s', info_verb='', syll='@-pRE-se', cv_cv='V-CCV-CV', orthosyll='em-pres-sée', frequency=0.47, frequencyFilm=0.02), ['@', 'pRE', 'se'], ['@', 'pRe', 'se'], ['em', 'pre', 'ssée']]
+[Word(ortho='empêchées', phonology='@pESe', lemme='empêcher', gram_cat='VER', ortho_gram_cat='VER', gender='f', number='p', info_verb='par:pas;', syll='@-pE-Se', cv_cv='V-CV-CV', orthosyll='em-pê-chées', frequency=0.14, frequencyFilm=0.02), ['@', 'pE', 'Se'], ['@', 'pe', 'Se'], ['em', 'pê', 'chées']]
+[Word(ortho='encaissée', phonology='@kEse', lemme='encaissé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='', syll='@-kE-se', cv_cv='V-CV-CV', orthosyll='en-cais-sée', frequency=0.54, frequencyFilm=0.02), ['@', 'kE', 'se'], ['@', 'ke', 'se'], ['en', 'cai', 'ssée']]
+[Word(ortho='enseigné', phonology='@sENe', lemme='enseigné', gram_cat='NOM', ortho_gram_cat='VER,ADJ,NOM', gender='m', number='s', info_verb='', syll='@-sE-Ne', cv_cv='V-CV-CV', orthosyll='en-sei-gné', frequency=0.0, frequencyFilm=0.02), ['@', 'sE', 'Ne'], ['@', 'se', 'Ne'], ['en', 'sei', 'gné']]
+[Word(ortho='entêtés', phonology='@tEte', lemme='entêter', gram_cat='VER', ortho_gram_cat='VER,ADJ,NOM', gender='m', number='p', info_verb='par:pas;', syll='@-tE-te', cv_cv='V-CV-CV', orthosyll='en-tê-tés', frequency=0.14, frequencyFilm=0.02), ['@', 'tE', 'te'], ['@', 'te', 'te'], ['en', 'tê', 'tés']]
+[Word(ortho='frayais', phonology='fREjE', lemme='frayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:1s;', syll='fRe-jE', cv_cv='CCV-YV', orthosyll='frayais', frequency=0.2, frequencyFilm=0.02), ['fRe', 'jE'], ['fRE', 'jE'], ['fra', 'yais']]
+[Word(ortho='frayent', phonology='fREj', lemme='frayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:3p;', syll='fRej', cv_cv='CCVY', orthosyll='frayent', frequency=0.34, frequencyFilm=0.02), ['fRej'], ['fREj'], ['frayent']]
+[Word(ortho='monnaye', phonology='monEj', lemme='monnayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:3s;', syll='mo-nej', cv_cv='CV-CVY', orthosyll='mon-naye', frequency=0.07, frequencyFilm=0.02), ['mo', 'nej'], ['mo', 'nEj'], ['mo', 'nnaye']]
+[Word(ortho='pagayant', phonology='pagEj@', lemme='pagayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='par:pre;', syll='pa-ge-j@', cv_cv='CV-CV-YV', orthosyll='pa-gayant', frequency=0.07, frequencyFilm=0.02), ['pa', 'ge', 'j@'], ['pa', 'gE', 'j@'], ['pa', 'ga', 'yant']]
+[Word(ortho='raya', phonology='REja', lemme='rayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3s;', syll='Re-ja', cv_cv='CV-YV', orthosyll='raya', frequency=0.54, frequencyFilm=0.02), ['Re', 'ja'], ['RE', 'ja'], ['ra', 'ya']]
+[Word(ortho='rayait', phonology='REjE', lemme='rayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3s;', syll='Re-jE', cv_cv='CV-YV', orthosyll='rayait', frequency=0.61, frequencyFilm=0.02), ['Re', 'jE'], ['RE', 'jE'], ['ra', 'yait']]
+[Word(ortho='relayeur', phonology='R2lEj9R', lemme='relayeur', gram_cat='NOM', ortho_gram_cat='NOM', gender='m', number='s', info_verb='', syll='R2-le-j9R', cv_cv='CV-CV-YVC', orthosyll='', frequency=0.0, frequencyFilm=0.02), ['R2', 'le', 'j9R'], ['R2', 'lE', 'j9R'], ['re', 'la', 'yeur']]
+[Word(ortho='relayons', phonology='R°lEj§', lemme='relayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='imp:pre:1p;ind:pre:1p;', syll='R°-le-j§', cv_cv='CV-CV-YV', orthosyll='re-layons', frequency=0.07, frequencyFilm=0.02), ['R°', 'le', 'j§'], ['R°', 'lE', 'j§'], ['re', 'la', 'yons']]
+[Word(ortho='étayé', phonology='etEje', lemme='étayer', gram_cat='VER', ortho_gram_cat='VER', gender='m', number='s', info_verb='par:pas;', syll='e-te-je', cv_cv='V-CV-YV', orthosyll='é-tayé', frequency=0.54, frequencyFilm=0.02), ['e', 'te', 'je'], ['e', 'tE', 'je'], ['é', 'ta', 'yé']]
+[Word(ortho='étayée', phonology='etEje', lemme='étayer', gram_cat='VER', ortho_gram_cat='VER', gender='f', number='s', info_verb='par:pas;', syll='e-te-je', cv_cv='V-CV-YV', orthosyll='é-tayée', frequency=0.47, frequencyFilm=0.02), ['e', 'te', 'je'], ['e', 'tE', 'je'], ['é', 'ta', 'yée']]
+[Word(ortho='bégaya', phonology='begEja', lemme='bégayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3s;', syll='be-ge-ja', cv_cv='CV-CV-YV', orthosyll='bé-gaya', frequency=1.15, frequencyFilm=0.01), ['be', 'ge', 'ja'], ['be', 'gE', 'ja'], ['bé', 'ga', 'ya']]
+[Word(ortho='bégayante', phonology='begEj@t', lemme='bégayant', gram_cat='ADJ', ortho_gram_cat='ADJ', gender='f', number='s', info_verb='', syll='be-ge-j@t', cv_cv='CV-CV-YVC', orthosyll='bé-gayan-te', frequency=0.14, frequencyFilm=0.01), ['be', 'ge', 'j@t'], ['be', 'gE', 'j@t'], ['bé', 'ga', 'yante']]
+[Word(ortho='déblayait', phonology='deblEjE', lemme='déblayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3s;', syll='de-ble-jE', cv_cv='CV-CCV-YV', orthosyll='dé-blayait', frequency=0.47, frequencyFilm=0.01), ['de', 'ble', 'jE'], ['de', 'blE', 'jE'], ['dé', 'bla', 'yait']]
+[Word(ortho='débrayes', phonology='debREj', lemme='débrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:2s;', syll='de-bRej', cv_cv='CV-CCVY', orthosyll='dé-brayes', frequency=0.07, frequencyFilm=0.01), ['de', 'bRej'], ['de', 'bREj'], ['dé', 'brayes']]
+[Word(ortho='défraya', phonology='defREja', lemme='défrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3s;', syll='de-fRe-ja', cv_cv='CV-CCV-YV', orthosyll='dé-fraya', frequency=0.2, frequencyFilm=0.01), ['de', 'fRe', 'ja'], ['de', 'fRE', 'ja'], ['dé', 'fra', 'ya']]
+[Word(ortho='délayée', phonology='delEje', lemme='délayé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='', syll='de-le-je', cv_cv='CV-CV-YV', orthosyll='dé-layée', frequency=0.14, frequencyFilm=0.01), ['de', 'le', 'je'], ['de', 'lE', 'je'], ['dé', 'la', 'yée']]
+[Word(ortho='dérayer', phonology='deREje', lemme='dérayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='de-Re-je', cv_cv='CV-CV-YV', orthosyll='', frequency=0.0, frequencyFilm=0.01), ['de', 'Re', 'je'], ['de', 'RE', 'je'], ['dé', 'ra', 'yer']]
+[Word(ortho='embrayait', phonology='@bREjE', lemme='embrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3s;', syll='@-bRe-jE', cv_cv='V-CCV-YV', orthosyll='em-brayait', frequency=0.34, frequencyFilm=0.01), ['@', 'bRe', 'jE'], ['@', 'bRE', 'jE'], ['em', 'bra', 'yait']]
+[Word(ortho='embrayée', phonology='@bREje', lemme='embrayer', gram_cat='VER', ortho_gram_cat='VER', gender='f', number='s', info_verb='par:pas;', syll='@-bRe-je', cv_cv='V-CCV-YV', orthosyll='em-brayée', frequency=0.0, frequencyFilm=0.01), ['@', 'bRe', 'je'], ['@', 'bRE', 'je'], ['em', 'bra', 'yée']]
+[Word(ortho='emmêlées', phonology='@mEle', lemme='emmêlé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='', syll='@-mE-le', cv_cv='V-CV-CV', orthosyll='em-mê-lées', frequency=0.68, frequencyFilm=0.01), ['@', 'mE', 'le'], ['@', 'me', 'le'], ['em', 'mê', 'lées']]
+[Word(ortho='empressés', phonology='@pREse', lemme='empressé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ,NOM', gender='m', number='p', info_verb='', syll='@-pRE-se', cv_cv='V-CCV-CV', orthosyll='em-pres-sés', frequency=0.54, frequencyFilm=0.01), ['@', 'pRE', 'se'], ['@', 'pRe', 'se'], ['em', 'pre', 'ssés']]
+[Word(ortho='encaissées', phonology='@kEse', lemme='encaisser', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='par:pas;', syll='@-kE-se', cv_cv='V-CV-CV', orthosyll='en-cais-sées', frequency=0.34, frequencyFilm=0.01), ['@', 'kE', 'se'], ['@', 'ke', 'se'], ['en', 'cai', 'ssées']]
+[Word(ortho='engraissée', phonology='@gREse', lemme='engraisser', gram_cat='VER', ortho_gram_cat='VER', gender='f', number='s', info_verb='par:pas;', syll='@-gRE-se', cv_cv='V-CCV-CV', orthosyll='en-grais-sée', frequency=0.27, frequencyFilm=0.01), ['@', 'gRE', 'se'], ['@', 'gRe', 'se'], ['en', 'grai', 'ssée']]
+[Word(ortho='enneigée', phonology='@nEZe', lemme='enneiger', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='par:pas;', syll='@-nE-Ze', cv_cv='V-CV-CV', orthosyll='en-nei-gée', frequency=0.27, frequencyFilm=0.01), ['@', 'nE', 'Ze'], ['@', 'ne', 'Ze'], ['en', 'nei', 'gée']]
+[Word(ortho='enseignée', phonology='@sENe', lemme='enseigné', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='', syll='@-sE-Ne', cv_cv='V-CV-CV', orthosyll='en-sei-gnée', frequency=0.0, frequencyFilm=0.01), ['@', 'sE', 'Ne'], ['@', 'se', 'Ne'], ['en', 'sei', 'gnée']]
+[Word(ortho='enseignés', phonology='@sENe', lemme='enseigné', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='', syll='@-sE-Ne', cv_cv='V-CV-CV', orthosyll='en-sei-gnés', frequency=0.07, frequencyFilm=0.01), ['@', 'sE', 'Ne'], ['@', 'se', 'Ne'], ['en', 'sei', 'gnés']]
+[Word(ortho='enserrer', phonology='@sERe', lemme='enserrer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='@-sE-Re', cv_cv='V-CV-CV', orthosyll='en-ser-rer', frequency=0.54, frequencyFilm=0.01), ['@', 'sE', 'Re'], ['@', 'se', 'Re'], ['en', 'se', 'rrer']]
+[Word(ortho='essayiste', phonology='esEjist', lemme='essayiste', gram_cat='NOM', ortho_gram_cat='NOM', gender='', number='s', info_verb='', syll='e-se-jist', cv_cv='V-CV-YVCC', orthosyll='es-sayis-te', frequency=0.07, frequencyFilm=0.01), ['e', 'se', 'jist'], ['e', 'sE', 'jist'], ['e', 'ssa', 'yiste']]
+[Word(ortho='fraya', phonology='fREja', lemme='frayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3s;', syll='fRe-ja', cv_cv='CCV-YV', orthosyll='fraya', frequency=0.81, frequencyFilm=0.01), ['fRe', 'ja'], ['fRE', 'ja'], ['fra', 'ya']]
+[Word(ortho='frayaient', phonology='fREjE', lemme='frayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3p;', syll='fRe-jE', cv_cv='CCV-YV', orthosyll='frayaient', frequency=0.47, frequencyFilm=0.01), ['fRe', 'jE'], ['fRE', 'jE'], ['fra', 'yaient']]
+[Word(ortho='frayons', phonology='fREj§', lemme='frayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='imp:pre:1p;ind:pre:1p;', syll='fRe-j§', cv_cv='CCV-YV', orthosyll='frayons', frequency=0.07, frequencyFilm=0.01), ['fRe', 'j§'], ['fRE', 'j§'], ['fra', 'yons']]
+[Word(ortho='monnayait', phonology='monEjE', lemme='monnayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3s;', syll='mo-ne-jE', cv_cv='CV-CV-YV', orthosyll='mon-nayait', frequency=0.2, frequencyFilm=0.01), ['mo', 'ne', 'jE'], ['mo', 'nE', 'jE'], ['mo', 'nna', 'yait']]
+[Word(ortho='prépayée', phonology='pRepEje', lemme='prépayer', gram_cat='VER', ortho_gram_cat='VER', gender='f', number='s', info_verb='par:pas;', syll='pRe-pe-je', cv_cv='CCV-CV-YV', orthosyll='pré-payée', frequency=0.0, frequencyFilm=0.01), ['pRe', 'pe', 'je'], ['pRe', 'pE', 'je'], ['pré', 'pa', 'yée']]
+[Word(ortho='relayait', phonology='R°lEjE', lemme='relayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3s;', syll='R°-le-jE', cv_cv='CV-CV-YV', orthosyll='re-layait', frequency=0.47, frequencyFilm=0.01), ['R°', 'le', 'jE'], ['R°', 'lE', 'jE'], ['re', 'la', 'yait']]
+[Word(ortho='relayant', phonology='R°lEj@', lemme='relayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='par:pre;', syll='R°-le-j@', cv_cv='CV-CV-YV', orthosyll='re-layant', frequency=0.54, frequencyFilm=0.01), ['R°', 'le', 'j@'], ['R°', 'lE', 'j@'], ['re', 'la', 'yant']]
+[Word(ortho='relaye', phonology='R°lEj', lemme='relayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:1s;ind:pre:3s;', syll='R°-lej', cv_cv='CV-CVY', orthosyll='re-laye', frequency=0.07, frequencyFilm=0.01), ['R°', 'lej'], ['R°', 'lEj'], ['re', 'laye']]
+[Word(ortho='relayera', phonology='R°lEj°Ra', lemme='relayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:fut:3s;', syll='R°-le-j°-Ra', cv_cv='CV-CV-YV-CV', orthosyll='re-laye-ra', frequency=0.07, frequencyFilm=0.01), ['R°', 'le', 'j°', 'Ra'], ['R°', 'lE', 'j°', 'Ra'], ['re', 'la', 'ye', 'ra']]
+[Word(ortho='remblayer', phonology='R@blEje', lemme='remblayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='R@-ble-je', cv_cv='CV-CCV-YV', orthosyll='rem-blayer', frequency=0.14, frequencyFilm=0.01), ['R@', 'ble', 'je'], ['R@', 'blE', 'je'], ['rem', 'bla', 'yer']]
+[Word(ortho='zézayant', phonology='zezEj@', lemme='zézayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='par:pre;', syll='ze-ze-j@', cv_cv='CV-CV-YV', orthosyll='zé-zayant', frequency=0.2, frequencyFilm=0.01), ['ze', 'ze', 'j@'], ['ze', 'zE', 'j@'], ['zé', 'za', 'yant']]
+[Word(ortho='étayage', phonology='etEjaZ', lemme='étayage', gram_cat='NOM', ortho_gram_cat='NOM', gender='m', number='s', info_verb='', syll='e-te-jaZ', cv_cv='V-CV-YVC', orthosyll='é-taya-ge', frequency=0.07, frequencyFilm=0.01), ['e', 'te', 'jaZ'], ['e', 'tE', 'jaZ'], ['é', 'ta', 'yage']]
+[Word(ortho='étayant', phonology='etEj@', lemme='étayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='par:pre;', syll='e-te-j@', cv_cv='V-CV-YV', orthosyll='é-tayant', frequency=0.34, frequencyFilm=0.01), ['e', 'te', 'j@'], ['e', 'tE', 'j@'], ['é', 'ta', 'yant']]
+[Word(ortho='bégayai', phonology='begEje', lemme='bégayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:1s;', syll='be-ge-je', cv_cv='CV-CV-YV', orthosyll='bé-gayai', frequency=0.14, frequencyFilm=0.0), ['be', 'ge', 'je'], ['be', 'gE', 'je'], ['bé', 'ga', 'yai']]
+[Word(ortho='bégayaient', phonology='begEjE', lemme='bégayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3p;', syll='be-ge-jE', cv_cv='CV-CV-YV', orthosyll='bé-gayaient', frequency=0.07, frequencyFilm=0.0), ['be', 'ge', 'jE'], ['be', 'gE', 'jE'], ['bé', 'ga', 'yaient']]
+[Word(ortho='bégayant', phonology='begEj@', lemme='bégayant', gram_cat='ADJ', ortho_gram_cat='ADJ,VER', gender='m', number='s', info_verb='', syll='be-ge-j@', cv_cv='CV-CV-YV', orthosyll='bé-gayant', frequency=0.41, frequencyFilm=0.0), ['be', 'ge', 'j@'], ['be', 'gE', 'j@'], ['bé', 'ga', 'yant']]
+[Word(ortho='bégayant', phonology='begEj@', lemme='bégayer', gram_cat='VER', ortho_gram_cat='ADJ,VER', gender='', number='', info_verb='par:pre;', syll='be-ge-j@', cv_cv='CV-CV-YV', orthosyll='bé-gayant', frequency=0.95, frequencyFilm=0.0), ['be', 'ge', 'j@'], ['be', 'gE', 'j@'], ['bé', 'ga', 'yant']]
+[Word(ortho='bégayantes', phonology='begEj@t', lemme='bégayant', gram_cat='ADJ', ortho_gram_cat='ADJ', gender='f', number='p', info_verb='', syll='be-ge-j@t', cv_cv='CV-CV-YVC', orthosyll='bé-gayan-tes', frequency=0.07, frequencyFilm=0.0), ['be', 'ge', 'j@t'], ['be', 'gE', 'j@t'], ['bé', 'ga', 'yantes']]
+[Word(ortho='bégayants', phonology='begEj@', lemme='bégayant', gram_cat='ADJ', ortho_gram_cat='ADJ', gender='m', number='p', info_verb='', syll='be-ge-j@', cv_cv='CV-CV-YV', orthosyll='bé-gayants', frequency=0.07, frequencyFilm=0.0), ['be', 'ge', 'j@'], ['be', 'gE', 'j@'], ['bé', 'ga', 'yants']]
+[Word(ortho='bégayées', phonology='begEje', lemme='bégayer', gram_cat='VER', ortho_gram_cat='VER', gender='f', number='p', info_verb='par:pas;', syll='be-ge-je', cv_cv='CV-CV-YV', orthosyll='bé-gayées', frequency=0.07, frequencyFilm=0.0), ['be', 'ge', 'je'], ['be', 'gE', 'je'], ['bé', 'ga', 'yées']]
+[Word(ortho='déblaya', phonology='deblEja', lemme='déblayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3s;', syll='de-ble-ja', cv_cv='CV-CCV-YV', orthosyll='dé-blaya', frequency=0.07, frequencyFilm=0.0), ['de', 'ble', 'ja'], ['de', 'blE', 'ja'], ['dé', 'bla', 'ya']]
+[Word(ortho='déblayaient', phonology='deblEjE', lemme='déblayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3p;', syll='de-ble-jE', cv_cv='CV-CCV-YV', orthosyll='dé-blayaient', frequency=0.54, frequencyFilm=0.0), ['de', 'ble', 'jE'], ['de', 'blE', 'jE'], ['dé', 'bla', 'yaient']]
+[Word(ortho='déblayant', phonology='deblEj@', lemme='déblayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='par:pre;', syll='de-ble-j@', cv_cv='CV-CCV-YV', orthosyll='dé-blayant', frequency=0.27, frequencyFilm=0.0), ['de', 'ble', 'j@'], ['de', 'blE', 'j@'], ['dé', 'bla', 'yant']]
+[Word(ortho='déblayera', phonology='deblEj°Ra', lemme='déblayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:fut:3s;', syll='de-ble-j°-Ra', cv_cv='CV-CCV-YV-CV', orthosyll='dé-blaye-ra', frequency=0.07, frequencyFilm=0.0), ['de', 'ble', 'j°', 'Ra'], ['de', 'blE', 'j°', 'Ra'], ['dé', 'bla', 'ye', 'ra']]
+[Word(ortho='débrayent', phonology='debREj', lemme='débrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:3p;', syll='de-bRej', cv_cv='CV-CCVY', orthosyll='dé-brayent', frequency=0.07, frequencyFilm=0.0), ['de', 'bRej'], ['de', 'bREj'], ['dé', 'brayent']]
+[Word(ortho='défrayant', phonology='defREj@', lemme='défrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='par:pre;', syll='de-fRe-j@', cv_cv='CV-CCV-YV', orthosyll='dé-frayant', frequency=0.07, frequencyFilm=0.0), ['de', 'fRe', 'j@'], ['de', 'fRE', 'j@'], ['dé', 'fra', 'yant']]
+[Word(ortho='défrayent', phonology='defREj', lemme='défrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:3p;', syll='de-fRej', cv_cv='CV-CCVY', orthosyll='dé-frayent', frequency=0.07, frequencyFilm=0.0), ['de', 'fRej'], ['de', 'fREj'], ['dé', 'frayent']]
+[Word(ortho='défrayer', phonology='defREje', lemme='défrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='de-fRe-je', cv_cv='CV-CCV-YV', orthosyll='dé-frayer', frequency=0.41, frequencyFilm=0.0), ['de', 'fRe', 'je'], ['de', 'fRE', 'je'], ['dé', 'fra', 'yer']]
+[Word(ortho='défrayèrent', phonology='defREjER', lemme='défrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3p;', syll='de-fRe-jER', cv_cv='CV-CCV-YVC', orthosyll='dé-frayè-rent', frequency=0.07, frequencyFilm=0.0), ['de', 'fRe', 'jER'], ['de', 'fRE', 'jER'], ['dé', 'fra', 'yèrent']]
+[Word(ortho='délaya', phonology='delEja', lemme='délayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3s;', syll='de-le-ja', cv_cv='CV-CV-YV', orthosyll='dé-laya', frequency=0.14, frequencyFilm=0.0), ['de', 'le', 'ja'], ['de', 'lE', 'ja'], ['dé', 'la', 'ya']]
+[Word(ortho='délayait', phonology='delEjE', lemme='délayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3s;', syll='de-le-jE', cv_cv='CV-CV-YV', orthosyll='dé-layait', frequency=0.14, frequencyFilm=0.0), ['de', 'le', 'jE'], ['de', 'lE', 'jE'], ['dé', 'la', 'yait']]
+[Word(ortho='délayant', phonology='delEj@', lemme='délayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='par:pre;', syll='de-le-j@', cv_cv='CV-CV-YV', orthosyll='dé-layant', frequency=0.41, frequencyFilm=0.0), ['de', 'le', 'j@'], ['de', 'lE', 'j@'], ['dé', 'la', 'yant']]
+[Word(ortho='délaye', phonology='delEj', lemme='délayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:3s;', syll='de-lej', cv_cv='CV-CVY', orthosyll='dé-laye', frequency=0.27, frequencyFilm=0.0), ['de', 'lej'], ['de', 'lEj'], ['dé', 'laye']]
+[Word(ortho='délayent', phonology='delEj', lemme='délayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:3p;', syll='de-lej', cv_cv='CV-CVY', orthosyll='dé-layent', frequency=0.07, frequencyFilm=0.0), ['de', 'lej'], ['de', 'lEj'], ['dé', 'layent']]
+[Word(ortho='délayé', phonology='delEje', lemme='délayer', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='par:pas;', syll='de-le-je', cv_cv='CV-CV-YV', orthosyll='dé-layé', frequency=0.54, frequencyFilm=0.0), ['de', 'le', 'je'], ['de', 'lE', 'je'], ['dé', 'la', 'yé']]
+[Word(ortho='délayé', phonology='delEje', lemme='délayé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='s', info_verb='', syll='de-le-je', cv_cv='CV-CV-YV', orthosyll='dé-layé', frequency=0.07, frequencyFilm=0.0), ['de', 'le', 'je'], ['de', 'lE', 'je'], ['dé', 'la', 'yé']]
+[Word(ortho='délayée', phonology='delEje', lemme='délayer', gram_cat='VER', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='par:pas;', syll='de-le-je', cv_cv='CV-CV-YV', orthosyll='dé-layée', frequency=0.41, frequencyFilm=0.0), ['de', 'le', 'je'], ['de', 'lE', 'je'], ['dé', 'la', 'yée']]
+[Word(ortho='délayés', phonology='delEje', lemme='délayer', gram_cat='VER', ortho_gram_cat='VER', gender='m', number='p', info_verb='par:pas;', syll='de-le-je', cv_cv='CV-CV-YV', orthosyll='dé-layés', frequency=0.34, frequencyFilm=0.0), ['de', 'le', 'je'], ['de', 'lE', 'je'], ['dé', 'la', 'yés']]
+[Word(ortho='effraya', phonology='EfREja', lemme='effrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3s;', syll='E-fRe-ja', cv_cv='V-CCV-YV', orthosyll='ef-fraya', frequency=2.09, frequencyFilm=0.0), ['E', 'fRe', 'ja'], ['E', 'fRE', 'ja'], ['e', 'ffra', 'ya']]
+[Word(ortho='embouteiller', phonology='@butEje', lemme='embouteiller', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='@-bu-tE-je', cv_cv='V-CV-CV-YV', orthosyll='em-bou-teil-ler', frequency=0.2, frequencyFilm=0.0), ['@', 'bu', 'tE', 'je'], ['@', 'bu', 'te', 'je'], ['em', 'bou', 'tei', 'ller']]
+[Word(ortho='embraya', phonology='@bREja', lemme='embrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3s;', syll='@-bRe-ja', cv_cv='V-CCV-YV', orthosyll='em-braya', frequency=0.68, frequencyFilm=0.0), ['@', 'bRe', 'ja'], ['@', 'bRE', 'ja'], ['em', 'bra', 'ya']]
+[Word(ortho='embrayais', phonology='@bREjE', lemme='embrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:1s;', syll='@-bRe-jE', cv_cv='V-CCV-YV', orthosyll='em-brayais', frequency=0.07, frequencyFilm=0.0), ['@', 'bRe', 'jE'], ['@', 'bRE', 'jE'], ['em', 'bra', 'yais']]
+[Word(ortho='embrayant', phonology='@bREj@', lemme='embrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='par:pre;', syll='@-bRe-j@', cv_cv='V-CCV-YV', orthosyll='em-brayant', frequency=0.14, frequencyFilm=0.0), ['@', 'bRe', 'j@'], ['@', 'bRE', 'j@'], ['em', 'bra', 'yant']]
+[Word(ortho='empressée', phonology='@pREse', lemme='empressé', gram_cat='NOM', ortho_gram_cat='VER,ADJ,NOM', gender='f', number='s', info_verb='', syll='@-pRE-se', cv_cv='V-CCV-CV', orthosyll='em-pres-sée', frequency=0.2, frequencyFilm=0.0), ['@', 'pRE', 'se'], ['@', 'pRe', 'se'], ['em', 'pre', 'ssée']]
+[Word(ortho='empressées', phonology='@pREse', lemme='empressé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='', syll='@-pRE-se', cv_cv='V-CCV-CV', orthosyll='em-pres-sées', frequency=0.14, frequencyFilm=0.0), ['@', 'pRE', 'se'], ['@', 'pRe', 'se'], ['em', 'pre', 'ssées']]
+[Word(ortho='empêchée', phonology='@pESe', lemme='empêché', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='s', info_verb='', syll='@-pE-Se', cv_cv='V-CV-CV', orthosyll='em-pê-chée', frequency=0.2, frequencyFilm=0.0), ['@', 'pE', 'Se'], ['@', 'pe', 'Se'], ['em', 'pê', 'chée']]
+[Word(ortho='empêchés', phonology='@pESe', lemme='empêché', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='m', number='p', info_verb='', syll='@-pE-Se', cv_cv='V-CV-CV', orthosyll='em-pê-chés', frequency=0.07, frequencyFilm=0.0), ['@', 'pE', 'Se'], ['@', 'pe', 'Se'], ['em', 'pê', 'chés']]
+[Word(ortho='encaissées', phonology='@kEse', lemme='encaissé', gram_cat='ADJ', ortho_gram_cat='VER,ADJ', gender='f', number='p', info_verb='', syll='@-kE-se', cv_cv='V-CV-CV', orthosyll='en-cais-sées', frequency=0.07, frequencyFilm=0.0), ['@', 'kE', 'se'], ['@', 'ke', 'se'], ['en', 'cai', 'ssées']]
+[Word(ortho='engraissées', phonology='@gREse', lemme='engraisser', gram_cat='VER', ortho_gram_cat='VER', gender='f', number='p', info_verb='par:pas;', syll='@-gRE-se', cv_cv='V-CCV-CV', orthosyll='en-grais-sées', frequency=0.2, frequencyFilm=0.0), ['@', 'gRE', 'se'], ['@', 'gRe', 'se'], ['en', 'grai', 'ssées']]
+[Word(ortho='enraya', phonology='@REja', lemme='enrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3s;', syll='@-Re-ja', cv_cv='V-CV-YV', orthosyll='en-raya', frequency=0.2, frequencyFilm=0.0), ['@', 'Re', 'ja'], ['@', 'RE', 'ja'], ['en', 'ra', 'ya']]
+[Word(ortho='enrayait', phonology='@REjE', lemme='enrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3s;', syll='@-Re-jE', cv_cv='V-CV-YV', orthosyll='en-rayait', frequency=0.14, frequencyFilm=0.0), ['@', 'Re', 'jE'], ['@', 'RE', 'jE'], ['en', 'ra', 'yait']]
+[Word(ortho='enrayant', phonology='@REj@', lemme='enrayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='par:pre;', syll='@-Re-j@', cv_cv='V-CV-YV', orthosyll='en-rayant', frequency=0.14, frequencyFilm=0.0), ['@', 'Re', 'j@'], ['@', 'RE', 'j@'], ['en', 'ra', 'yant']]
+[Word(ortho='entêtée', phonology='@tEte', lemme='entêté', gram_cat='NOM', ortho_gram_cat='VER,ADJ,NOM', gender='f', number='s', info_verb='', syll='@-tE-te', cv_cv='V-CV-CV', orthosyll='en-tê-tée', frequency=0.07, frequencyFilm=0.0), ['@', 'tE', 'te'], ['@', 'te', 'te'], ['en', 'tê', 'tée']]
+[Word(ortho='essayeuses', phonology='esEj2z', lemme='essayeur', gram_cat='NOM', ortho_gram_cat='NOM', gender='f', number='p', info_verb='', syll='e-se-j2z', cv_cv='V-CV-YVC', orthosyll='es-sayeu-ses', frequency=0.07, frequencyFilm=0.0), ['e', 'se', 'j2z'], ['e', 'sE', 'j2z'], ['e', 'ssa', 'yeuses']]
+[Word(ortho='essayistes', phonology='esEjist', lemme='essayiste', gram_cat='NOM', ortho_gram_cat='NOM', gender='', number='p', info_verb='', syll='e-se-jist', cv_cv='V-CV-YVCC', orthosyll='es-sayis-tes', frequency=0.07, frequencyFilm=0.0), ['e', 'se', 'jist'], ['e', 'sE', 'jist'], ['e', 'ssa', 'yistes']]
+[Word(ortho='essayâmes', phonology='EsEjam', lemme='essayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:1p;', syll='E-se-jam', cv_cv='V-CV-YVC', orthosyll='es-sayâ-mes', frequency=0.2, frequencyFilm=0.0), ['E', 'se', 'jam'], ['E', 'sE', 'jam'], ['e', 'ssa', 'yâmes']]
+[Word(ortho='frayèrent', phonology='fREjER', lemme='frayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3p;', syll='fRe-jER', cv_cv='CCV-YVC', orthosyll='frayè-rent', frequency=0.07, frequencyFilm=0.0), ['fRe', 'jER'], ['fRE', 'jER'], ['fra', 'yèrent']]
+[Word(ortho='frayée', phonology='fREje', lemme='frayée', gram_cat='NOM', ortho_gram_cat='VER,NOM', gender='f', number='s', info_verb='', syll='fRe-je', cv_cv='CCV-YV', orthosyll='frayée', frequency=0.07, frequencyFilm=0.0), ['fRe', 'je'], ['fRE', 'je'], ['fra', 'yée']]
+[Word(ortho='laya', phonology='lEja', lemme='layer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3s;', syll='le-ja', cv_cv='CV-YV', orthosyll='laya', frequency=0.34, frequencyFilm=0.0), ['le', 'ja'], ['lE', 'ja'], ['la', 'ya']]
+[Word(ortho='monnayant', phonology='monEj@', lemme='monnayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='par:pre;', syll='mo-ne-j@', cv_cv='CV-CV-YV', orthosyll='mon-nayant', frequency=0.07, frequencyFilm=0.0), ['mo', 'ne', 'j@'], ['mo', 'nE', 'j@'], ['mo', 'nna', 'yant']]
+[Word(ortho='pagaya', phonology='pagEja', lemme='pagayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3s;', syll='pa-ge-ja', cv_cv='CV-CV-YV', orthosyll='pa-gaya', frequency=0.07, frequencyFilm=0.0), ['pa', 'ge', 'ja'], ['pa', 'gE', 'ja'], ['pa', 'ga', 'ya']]
+[Word(ortho='pagayait', phonology='pagEjE', lemme='pagayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3s;', syll='pa-ge-jE', cv_cv='CV-CV-YV', orthosyll='pa-gayait', frequency=0.07, frequencyFilm=0.0), ['pa', 'ge', 'jE'], ['pa', 'gE', 'jE'], ['pa', 'ga', 'yait']]
+[Word(ortho='pagayèrent', phonology='pagEjER', lemme='pagayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3p;', syll='pa-ge-jER', cv_cv='CV-CV-YVC', orthosyll='pa-gayè-rent', frequency=0.07, frequencyFilm=0.0), ['pa', 'ge', 'jER'], ['pa', 'gE', 'jER'], ['pa', 'ga', 'yèrent']]
+[Word(ortho='payassent', phonology='pEjas', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='sub:imp:3p;', syll='pe-jas', cv_cv='CV-YVC', orthosyll='payas-sent', frequency=0.07, frequencyFilm=0.0), ['pe', 'jas'], ['pE', 'jas'], ['pa', 'yassent']]
+[Word(ortho='payassiez', phonology='pEjasje', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='sub:imp:2p;', syll='pe-ja-sje', cv_cv='CV-YV-CYV', orthosyll='payas-siez', frequency=0.07, frequencyFilm=0.0), ['pe', 'ja', 'sje'], ['pE', 'ja', 'sje'], ['pa', 'ya', 'ssiez']]
+[Word(ortho='payâmes', phonology='pEjam', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:1p;', syll='pe-jam', cv_cv='CV-YVC', orthosyll='payâ-mes', frequency=0.07, frequencyFilm=0.0), ['pe', 'jam'], ['pE', 'jam'], ['pa', 'yâmes']]
+[Word(ortho='payât', phonology='pEja', lemme='payer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='sub:imp:3s;', syll='pe-ja', cv_cv='CV-YV', orthosyll='payât', frequency=0.34, frequencyFilm=0.0), ['pe', 'ja'], ['pE', 'ja'], ['pa', 'yât']]
+[Word(ortho='rayaient', phonology='REjE', lemme='rayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3p;', syll='Re-jE', cv_cv='CV-YV', orthosyll='rayaient', frequency=0.27, frequencyFilm=0.0), ['Re', 'jE'], ['RE', 'jE'], ['ra', 'yaient']]
+[Word(ortho='rayerais', phonology='REj°RE', lemme='rayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='cnd:pre:1s;', syll='Re-j°-RE', cv_cv='CV-YV-CV', orthosyll='raye-rais', frequency=0.07, frequencyFilm=0.0), ['Re', 'j°', 'RE'], ['RE', 'j°', 'RE'], ['ra', 'ye', 'rais']]
+[Word(ortho='rayions', phonology='REjj§', lemme='rayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:1p;', syll='Rej-j§', cv_cv='CVY-YV', orthosyll='rayions', frequency=0.07, frequencyFilm=0.0), ['Rej', 'j§'], ['REj', 'j§'], ['ray', 'ions']]
+[Word(ortho='rayât', phonology='REja', lemme='rayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='sub:imp:3s;', syll='Re-ja', cv_cv='CV-YV', orthosyll='rayât', frequency=0.07, frequencyFilm=0.0), ['Re', 'ja'], ['RE', 'ja'], ['ra', 'yât']]
+[Word(ortho='relaya', phonology='R°lEja', lemme='relayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3s;', syll='R°-le-ja', cv_cv='CV-CV-YV', orthosyll='re-laya', frequency=0.14, frequencyFilm=0.0), ['R°', 'le', 'ja'], ['R°', 'lE', 'ja'], ['re', 'la', 'ya']]
+[Word(ortho='relayent', phonology='R°lEj', lemme='relayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:3p;', syll='R°-lej', cv_cv='CV-CVY', orthosyll='re-layent', frequency=0.14, frequencyFilm=0.0), ['R°', 'lej'], ['R°', 'lEj'], ['re', 'layent']]
+[Word(ortho='relayions', phonology='R°lEjj§', lemme='relayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:1p;', syll='R°-lej-j§', cv_cv='CV-CVY-YV', orthosyll='re-layions', frequency=0.07, frequencyFilm=0.0), ['R°', 'lej', 'j§'], ['R°', 'lEj', 'j§'], ['re', 'lay', 'ions']]
+[Word(ortho='relayâmes', phonology='R°lEjam', lemme='relayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:1p;', syll='R°-le-jam', cv_cv='CV-CV-YVC', orthosyll='re-layâ-mes', frequency=0.14, frequencyFilm=0.0), ['R°', 'le', 'jam'], ['R°', 'lE', 'jam'], ['re', 'la', 'yâmes']]
+[Word(ortho='relayèrent', phonology='R°lEjER', lemme='relayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3p;', syll='R°-le-jER', cv_cv='CV-CV-YVC', orthosyll='re-layè-rent', frequency=0.2, frequencyFilm=0.0), ['R°', 'le', 'jER'], ['R°', 'lE', 'jER'], ['re', 'la', 'yèrent']]
+[Word(ortho='remblaya', phonology='R@blEja', lemme='remblayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pas:3s;', syll='R@-ble-ja', cv_cv='CV-CCV-YV', orthosyll='rem-blaya', frequency=0.07, frequencyFilm=0.0), ['R@', 'ble', 'ja'], ['R@', 'blE', 'ja'], ['rem', 'bla', 'ya']]
+[Word(ortho='remblayé', phonology='R@blEje', lemme='remblayer', gram_cat='VER', ortho_gram_cat='VER', gender='m', number='s', info_verb='par:pas;', syll='R@-ble-je', cv_cv='CV-CCV-YV', orthosyll='rem-blayé', frequency=0.07, frequencyFilm=0.0), ['R@', 'ble', 'je'], ['R@', 'blE', 'je'], ['rem', 'bla', 'yé']]
+[Word(ortho='remblayée', phonology='R@blEje', lemme='remblayer', gram_cat='VER', ortho_gram_cat='VER', gender='f', number='s', info_verb='par:pas;', syll='R@-ble-je', cv_cv='CV-CCV-YV', orthosyll='rem-blayée', frequency=0.07, frequencyFilm=0.0), ['R@', 'ble', 'je'], ['R@', 'blE', 'je'], ['rem', 'bla', 'yée']]
+[Word(ortho='réessayant', phonology='ReesEj@', lemme='réessayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='par:pre;', syll='Re-e-se-j@', cv_cv='CV-V-CV-YV', orthosyll='ré-es-sayant', frequency=0.07, frequencyFilm=0.0), ['Re', 'e', 'se', 'j@'], ['Re', 'e', 'sE', 'j@'], ['ré', 'e', 'ssa', 'yant']]
+[Word(ortho='sweepstake', phonology='swipstEjk', lemme='sweepstake', gram_cat='NOM', ortho_gram_cat='NOM', gender='m', number='s', info_verb='', syll='swip-stEjk', cv_cv='CYVC-CCVYC', orthosyll='s-weeps-ta-ke', frequency=0.07, frequencyFilm=0.0), ['swip', 'stEjk'], ['swip', 'stE'], ['sweep', 'stake']]
+[Word(ortho='zézayaient', phonology='zezEjE', lemme='zézayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3p;', syll='ze-ze-jE', cv_cv='CV-CV-YV', orthosyll='zé-zayaient', frequency=0.07, frequencyFilm=0.0), ['ze', 'ze', 'jE'], ['ze', 'zE', 'jE'], ['zé', 'za', 'yaient']]
+[Word(ortho='zézaye', phonology='zezEj', lemme='zézayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:pre:3s;', syll='ze-zej', cv_cv='CV-CVY', orthosyll='zé-zaye', frequency=0.07, frequencyFilm=0.0), ['ze', 'zej'], ['ze', 'zEj'], ['zé', 'zaye']]
+[Word(ortho='zézayer', phonology='zezEje', lemme='zézayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='inf;', syll='ze-ze-je', cv_cv='CV-CV-YV', orthosyll='zé-zayer', frequency=0.07, frequencyFilm=0.0), ['ze', 'ze', 'je'], ['ze', 'zE', 'je'], ['zé', 'za', 'yer']]
+[Word(ortho='étayaient', phonology='etEjE', lemme='étayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3p;', syll='e-te-jE', cv_cv='V-CV-YV', orthosyll='é-tayaient', frequency=0.2, frequencyFilm=0.0), ['e', 'te', 'jE'], ['e', 'tE', 'jE'], ['é', 'ta', 'yaient']]
+[Word(ortho='étayait', phonology='etEjE', lemme='étayer', gram_cat='VER', ortho_gram_cat='VER', gender='', number='', info_verb='ind:imp:3s;', syll='e-te-jE', cv_cv='V-CV-YV', orthosyll='é-tayait', frequency=0.41, frequencyFilm=0.0), ['e', 'te', 'jE'], ['e', 'tE', 'jE'], ['é', 'ta', 'yait']]
+[Word(ortho='étayés', phonology='etEje', lemme='étayer', gram_cat='VER', ortho_gram_cat='VER', gender='m', number='p', info_verb='par:pas;', syll='e-te-je', cv_cv='V-CV-YV', orthosyll='é-tayés', frequency=0.61, frequencyFilm=0.0), ['e', 'te', 'je'], ['e', 'tE', 'je'], ['é', 'ta', 'yés']]
+balaye  :
+ Writing to resources/LexiqueMixte.tsv
+effraye  :
+ Writing to resources/LexiqueMixte.tsv
+essaye  :
+ Writing to resources/LexiqueMixte.tsv
+game  :
+ Writing to resources/LexiqueMixte.tsv
+soleil  :
+ Writing to resources/LexiqueMixte.tsv
+égaye  :
+ Writing to resources/LexiqueMixte.tsv

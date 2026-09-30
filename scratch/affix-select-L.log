@@ -1,0 +1,8 @@
+1751 legal keypresses
+variant rivals: 4 fused, 23 apart, 874 out of reach; 2181 anchors remain (1756s)
+phase 3: 30 rules selected, 74 roots exact-evaluated (416s)
+phase 3 swap pass: done (1s)
+phase 4: 30 rules bound (2s)
+wrote scratch/affix-rules.tsv, scratch/affix-rules-report.md
+total 2179s
+DONE

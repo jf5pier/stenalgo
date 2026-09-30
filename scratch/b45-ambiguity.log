@@ -1,0 +1,16 @@
+
+=== Phase 0 Ambiguity Report ===
+Multi-word clusters:                 42301
+Same-lemma ambiguous clusters:        40877
+Lemma-homophone ambiguous clusters:   6707
+Cross-category clashes (aller-style): 100 found: ['aboulique', 'accore', 'accusateur', 'alentour', 'angevin', 'anglophobe', 'antimissile', 'antipoison', 'apostat', 'attentiste', 'autocrate', 'bernois', 'biface', 'bigouden', 'bivalve', 'blagueur', 'brabançon', 'brachycéphale', 'brigadiste', 'cagot']
+
+Lemma-homophone cluster size distribution:
+  2 lemmas: 5963 clusters, 191500.48 freq mass
+  3 lemmas: 584 clusters, 206563.05 freq mass
+  4 lemmas: 138 clusters, 118435.56 freq mass
+  5 lemmas: 18 clusters, 36918.95 freq mass  <-- OVERFLOW (beyond */# budget)
+  6 lemmas: 3 clusters, 3998.79 freq mass  <-- OVERFLOW (beyond */# budget)
+  7 lemmas: 1 clusters, 5960.88 freq mass  <-- OVERFLOW (beyond */# budget)
+
+Overflow frequency mass: 46878.62 (8.32% of lemma-homophone mass)

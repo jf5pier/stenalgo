@@ -1,0 +1,81 @@
+1751 legal keypresses
+
+=== prefix `dé` key (19,): 10280 words, exceptions 210 words / 263 freq; reasons {'standaloneTrap': 111, 'markCostTooHigh': 99}
+  exceptions whose next stroke already contains the rule key (19,): 111 of 210 words, 130 of 263 freq
+  exceptions by key present in the stem's first stroke (key id/part: exc words/all words with the key, exc freq):
+    key 19/c 111/115 (97%) freq 130
+    key 13/n 101/3458 (3%) freq 120
+    key 14/n 85/4610 (2%) freq 72
+    key 2/o 64/2982 (2%) freq 92
+    key 6/o 61/2281 (3%) freq 39
+    key 3/o 60/1947 (3%) freq 76
+    key 4/o 58/1917 (3%) freq 103
+    key 11/n 55/2719 (2%) freq 119
+  split off stems whose first stroke has key(s) [19] -> key B (16,): exceptions 99 words / 133 freq (was 210 / 263); stroke saving 5414 (was 5282)
+  split off stems whose first stroke has key(s) [19, 11] -> key B (22,): exceptions 106 words / 96 freq (was 210 / 263); stroke saving 5446 (was 5282)
+  split off stems whose first stroke has key(s) [19, 11, 6] -> key B (22,): exceptions 167 words / 108 freq (was 210 / 263); stroke saving 5434 (was 5282)
+  split off stems whose first stroke has key(s) [19, 11, 6, 3] -> key B (18, 22): exceptions 306 words / 134 freq (was 210 / 263); stroke saving 5403 (was 5282)
+
+=== prefix `re` key (19,): 5931 words, exceptions 172 words / 288 freq; reasons {'standaloneTrap': 71, 'markCostTooHigh': 101}
+  exceptions whose next stroke already contains the rule key (19,): 71 of 172 words, 171 of 288 freq
+  exceptions by key present in the stem's first stroke (key id/part: exc words/all words with the key, exc freq):
+    key 14/n 100/2437 (4%) freq 145
+    key 13/n 84/2443 (3%) freq 126
+    key 19/c 71/74 (96%) freq 171
+    key 7/o 55/1593 (3%) freq 64
+    key 6/o 55/1591 (3%) freq 50
+    key 21/c 50/648 (8%) freq 201
+    key 11/n 48/2138 (2%) freq 100
+    key 4/o 44/1694 (3%) freq 61
+  split off stems whose first stroke has key(s) [21] -> key B (16,): exceptions 144 words / 115 freq (was 172 / 288); stroke saving 7143 (was 6970)
+  split off stems whose first stroke has key(s) [21, 19] -> key B (16,): exceptions 100 words / 94 freq (was 172 / 288); stroke saving 7171 (was 6970)
+  split off stems whose first stroke has key(s) [21, 19, 4] -> key B (16,): exceptions 164 words / 94 freq (was 172 / 288); stroke saving 7155 (was 6970)
+  split off stems whose first stroke has key(s) [21, 19, 4, 13] -> key B (16,): exceptions 185 words / 112 freq (was 172 / 288); stroke saving 7141 (was 6970)
+
+=== prefix `é` key (19,): 6109 words, exceptions 137 words / 502 freq; reasons {'markCostTooHigh': 61, 'standaloneTrap': 76}
+  exceptions whose next stroke already contains the rule key (19,): 76 of 137 words, 108 of 502 freq
+  exceptions by key present in the stem's first stroke (key id/part: exc words/all words with the key, exc freq):
+    key 19/c 76/86 (88%) freq 108
+    key 14/n 58/2817 (2%) freq 344
+    key 7/o 49/1836 (3%) freq 403
+    key 13/n 46/2137 (2%) freq 330
+    key 12/n 42/2591 (2%) freq 56
+    key 4/o 39/1340 (3%) freq 48
+    key 11/n 38/1891 (2%) freq 128
+    key 6/o 34/1800 (2%) freq 16
+  split off stems whose first stroke has key(s) [19] -> key B (16,): exceptions 61 words / 393 freq (was 137 / 502); stroke saving 5500 (was 5373)
+  split off stems whose first stroke has key(s) [19, 11] -> key B (9,): exceptions 55 words / 375 freq (was 137 / 502); stroke saving 5501 (was 5373)
+  split off stems whose first stroke has key(s) [19, 11, 4] -> key B (9,): exceptions 94 words / 396 freq (was 137 / 502); stroke saving 5479 (was 5373)
+  split off stems whose first stroke has key(s) [19, 11, 4, 6] -> key B (9,): exceptions 164 words / 447 freq (was 137 / 502); stroke saving 5423 (was 5373)
+
+=== prefix `ra|rai|raie|re|rhé|ré|réh` key (25,): 3743 words, exceptions 135 words / 139 freq; reasons {'markCostTooHigh': 66, 'standaloneTrap': 69}
+  exceptions whose next stroke already contains the rule key (25,): 27 of 135 words, 40 of 139 freq
+  exceptions by key present in the stem's first stroke (key id/part: exc words/all words with the key, exc freq):
+    key 14/n 70/1729 (4%) freq 78
+    key 13/n 68/1731 (4%) freq 49
+    key 7/o 51/1145 (4%) freq 106
+    key 22/c 42/42 (100%) freq 13
+    key 9/o 36/521 (7%) freq 20
+    key 25/c 27/37 (73%) freq 40
+    key 23/c 26/201 (13%) freq 4
+    key 8/o 26/593 (4%) freq 3
+  split off stems whose first stroke has key(s) [7] -> key B (20,): exceptions 131 words / 56 freq (was 135 / 139); stroke saving 3230 (was 3145)
+  split off stems whose first stroke has key(s) [7, 22] -> key B (20,): exceptions 102 words / 52 freq (was 135 / 139); stroke saving 3235 (was 3145)
+  split off stems whose first stroke has key(s) [7, 22, 25] -> key B (20,): exceptions 90 words / 48 freq (was 135 / 139); stroke saving 3239 (was 3145)
+  split off stems whose first stroke has key(s) [7, 22, 25, 8] -> key B (20,): exceptions 95 words / 50 freq (was 135 / 139); stroke saving 3233 (was 3145)
+
+=== prefix `en` key (18, 22): 4244 words, exceptions 134 words / 57 freq; reasons {'standaloneTrap': 134}
+  exceptions whose next stroke already contains the rule key (18, 22): 84 of 134 words, 36 of 57 freq
+  exceptions by key present in the stem's first stroke (key id/part: exc words/all words with the key, exc freq):
+    key 7/o 63/1475 (4%) freq 27
+    key 13/n 58/1374 (4%) freq 45
+    key 14/n 58/1927 (3%) freq 45
+    key 25/c 51/53 (96%) freq 21
+    key 12/n 45/1994 (2%) freq 7
+    key 22/c 42/45 (93%) freq 32
+    key 18/c 42/42 (100%) freq 4
+    key 11/n 42/1549 (3%) freq 4
+  split off stems whose first stroke has key(s) [14] -> key B (19,): exceptions 98 words / 16 freq (was 134 / 57); stroke saving 6019 (was 5978)
+  split off stems whose first stroke has key(s) [14, 25] -> key B (19,): exceptions 62 words / 7 freq (was 134 / 57); stroke saving 6029 (was 5978)
+  split off stems whose first stroke has key(s) [14, 25, 18] -> key B (19,): exceptions 38 words / 5 freq (was 134 / 57); stroke saving 6031 (was 5978)
+  split off stems whose first stroke has key(s) [14, 25, 18, 22] -> key B (19,): exceptions 26 words / 4 freq (was 134 / 57); stroke saving 6034 (was 5978)

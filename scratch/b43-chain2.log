@@ -1,0 +1,5 @@
+=== shared groups (seed 0) ===
+shared exit=0
+=== probe PYTHONHASHSEED=1 ===
+seed1 exit=0
+=== done ===

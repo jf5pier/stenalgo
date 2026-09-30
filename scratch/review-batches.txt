@@ -1,0 +1,209 @@
+abattage	abatage	abatage	124917	3683	discovered	suggest ACTIVE -- true variant (abattage standard)
+abattis	abatis	abatis	22283	7150	discovered	suggest ACTIVE -- true variant (abattis standard)
+âge	age	age	11062105	734325	discovered	suggest ACTIVE -- true variant (âge standard; unaccented is English)
+allégement	allègement	allègement	64812	59657	reform1990	close call or sparse data -- human settles canonical
+appâts	appas	appas	42589	37812	reform1990	close call or sparse data -- human settles canonical
+aryen	arien	arien	124324	47092	discovered	suggest ACTIVE -- true variant (aryen standard)
+baby	babi	babi	374880	17589	discovered	suggest ACTIVE -- true variant (baby standard loan)
+bagotter	bagoter	bagoter	117	104	discovered	suggest ACTIVE -- true variant (bagotter standard)
+bâiller	bailler	bailler	297184	108039	discovered	suggest VETO -- distinct: bailler (archaic, grant) vs bâiller (yawn)
+balade	ballade	ballade	915059	210441	discovered	suggest VETO -- distinct: balade (outing) vs ballade (poem/song)
+balle	bale	bale	2222021	23043	discovered	suggest VETO -- bale is the English word; balle the French one
+ballotine	ballottine	ballottine	2171	1869	reform1990	close call or sparse data -- human settles canonical
+baluchon	balluchon	balluchon	55830	15833	discovered	suggest ACTIVE -- true variant (baluchon standard)
+baluchonnage	balluchonnage	balluchonnage	254	0	discovered	suggest ACTIVE -- true variant
+baluchonner	balluchonner	balluchonner	139	0	discovered	suggest ACTIVE -- true variant
+barbote	barbotte	barbotte	7757	2816	discovered	suggest ACTIVE -- true variant
+baronnet	baronet	baronet	32346	5814	discovered	suggest ACTIVE -- true variant (baronnet standard; baronet is the English word)
+beluga	béluga	béluga	8367	7948	seed	close call or sparse data -- human settles canonical
+bésicles	besicles	besicles	10427	8330	reform1990	close call or sparse data -- human settles canonical
+by	bi	bi	1457930	853756	discovered	suggest VETO -- distinct: bi- prefix vs by (English)
+bignole	bignolle	bignolle	2051	543	discovered	suggest ACTIVE -- true variant (bignole standard)
+bite	bitte byte	bitte byte	242181	20932 15835	discovered	suggest VETO -- distinct: bite vs bitte (mooring bit) vs byte (computing)
+bitter	biter	biter	40862	1676	discovered	suggest VETO -- bitter is the English word (beer)
+biture	byture	byture	7828	22	discovered	suggest ACTIVE -- true variant (biture standard)
+bizut	bizuth	bizuth	3818	3130	reform1990	close call or sparse data -- human settles canonical
+bonnard	bonard	bonard	71323	17748	discovered	suggest ACTIVE -- true variant (bonnard standard)
+bonniche	boniche	boniche	12485	8157	discovered	suggest ACTIVE -- true variant (bonniche/boniche both attested)
+bonnir	bonir	bonir	141109	975	discovered	suggest ACTIVE -- true variant (bonnir standard)
+bortsch	bortch	bortch	7398	1028	discovered	suggest ACTIVE -- true variant (bortsch has several accepted spellings)
+boule	boulle	boulle	1641448	15434	discovered	suggest VETO -- boulle is a proper noun (marqueterie Boulle)
+boulotter	bouloter	bouloter	32182	24613	reform1990	close call or sparse data -- human settles canonical
+briffer	brifer	brifer	2075	86	discovered	suggest ACTIVE -- true variant (briffer standard)
+bringeure	bringeüre	bringeüre	16	0	reform1990	close call or sparse data -- human settles canonical
+brinquebaler	brinqueballer	brinqueballer	9484	1144	discovered	suggest ACTIVE -- true variant (brinquebaler standard)
+butte	bute	bute	341940	90185	discovered	suggest VETO -- bute belongs to buter's paradigm; butte is a distinct noun
+buter	butter	butter	489391	367737	discovered	suggest VETO -- distinct: buter (stumble) vs butter (butter/mound up)
+buteur	butteur	butteur	18047	313	discovered	suggest ACTIVE -- true variant (buteur standard)
+butoir	buttoir	buttoir	40563	1150	discovered	suggest ACTIVE -- true variant (butoir standard)
+cachotier	cachottier	cachottier	13856	12268	reform1990	close call or sparse data -- human settles canonical
+caler	caller	caller	1248986	440047	discovered	suggest VETO -- caller is a Canadianism for 'to call', not a spelling of caler
+canner	caner	caner	1138856	827679	discovered	suggest VETO -- distinct: caner (slang, chicken out) vs canner (put in cans)
+canette	cannette	cannette	165939	41193	discovered	suggest ACTIVE -- true variant (canette standard)
+care	carre	carre	288842	30871	discovered	suggest VETO -- care is the English word
+cari	carry cary	carry cary	55449	41908 41903	discovered	suggest ACTIVE -- true variant (cari/carry/cary curry-family spellings)
+cariatide	caryatide	caryatide	24488	5529	discovered	suggest ACTIVE -- true variant (cariatide standard)
+chah	schah	schah	46572	5872	discovered	suggest ACTIVE -- true variant (chah/schah/shah)
+chape	chappe	chappe	113632	13343	discovered	suggest ACTIVE -- true variant (chape standard)
+chargeure	chargeüre	chargeüre	18	0	reform1990	close call or sparse data -- human settles canonical
+chariotée	charriotée	charriotée	3	0	reform1990	close call or sparse data -- human settles canonical
+chasse	châsse	châsse	2728541	51022	discovered	suggest VETO -- distinct: chasse (hunt) vs châsse (reliquary)
+chébec	chebec	chebec	1749	1203	reform1990	close call or sparse data -- human settles canonical
+cheik	scheik	scheik	53515	4744	discovered	suggest ACTIVE -- true variant (cheik standard)
+chile	chyle	chyle	52355	7392	discovered	suggest VETO -- distinct: chile (chili spelling) vs chyme... chyle (lymph)
+schlass	chlass	chlass	2530	227	discovered	suggest ACTIVE -- true variant (schlass standard)
+chnoque	schnoque	schnoque	2511	1858	discovered	suggest ACTIVE -- true variant (schnoque standard)
+chnouf	schnouf schnouff	schnouf schnouff	1090	640 279	discovered	suggest ACTIVE -- true variant (chnouf standard)
+chouia	chouya	chouya	6194	546	discovered	suggest ACTIVE -- true variant (chouia standard)
+cicérone	cicerone	cicerone	12821	11979	reform1990	close call or sparse data -- human settles canonical
+cime	cyme	cyme	386617	4470	discovered	suggest VETO -- distinct: cime (summit) vs cyme (botany)
+claper	clapper	clapper	10540	4777	discovered	suggest ACTIVE -- true variant (rare dialectal pair)
+colon	côlon	côlon	726219	117594	discovered	suggest VETO -- homograph collision: colon (settler) vs côlon (bowel) -- isException class
+commandant	comandant	comandant	2333826	984	discovered	suggest ACTIVE -- misspelling variant (commandant standard)
+connard	conard	conard	345732	7411	discovered	suggest ACTIVE -- true variant (connard standard)
+connasse	conasse	conasse	39995	2341	discovered	suggest ACTIVE -- true variant (connasse standard)
+conquistadors	conquistadores	conquistadores	27207	19796	reform1990	close call or sparse data -- human settles canonical
+corolle	corole	corole	61831	32156	reform1990	close call or sparse data -- human settles canonical
+cote	cotte	cotte	404853	115974	discovered	suggest VETO -- distinct: cote (rating) vs cotte (armor/skirt)
+crâne	crane	crane	1894185	50169	discovered	suggest ACTIVE -- true variant (crâne standard)
+curricula	curriculums	curriculums	15107	7844	reform1990	close call or sparse data -- human settles canonical
+dalle	dale	dale	547893	98384	discovered	suggest ACTIVE -- true variant (dalle standard; dale accepted)
+date	datte	datte	6566349	133094	discovered	suggest VETO -- distinct: date vs datte (fig)
+dessoûler	dessaouler dessouler	dessaouler dessouler	12569	9092 1486	seed	close call or sparse data -- human settles canonical
+diffracter	difracter	difracter	17785	50	discovered	suggest ACTIVE -- true variant (diffracter standard)
+dine	dyne	dyne	32690	1251	discovered	suggest VETO -- dyne is a physics unit; dine is a verb form
+dysfonctionnement	disfonctionnement	disfonctionnement	376805	4199	discovered	suggest ACTIVE -- misspelling variant (dysfonctionnement standard)
+dissous	dissout	dissout	162758	141869	reform1990	close call or sparse data -- human settles canonical
+dribbler	dribler	dribler	23822	1085	discovered	suggest ACTIVE -- true variant (dribbler standard)
+dropper	droper	droper	1323	756	discovered	suggest ACTIVE -- true variant (dropper standard slang)
+détonner	détoner	détoner	77535	10815	discovered	suggest VETO -- distinct: détoner (detonate) vs détonner (be off-key)
+embattre	embatre	embatre	228	160	reform1990	close call or sparse data -- human settles canonical
+empiétement	empiètement	empiètement	23693	22242	reform1990	close call or sparse data -- human settles canonical
+espionnite	espionite	espionite	2664	347	discovered	suggest ACTIVE -- true variant (espionnite standard)
+folingue	follingue	follingue	359	276	discovered	suggest ACTIVE -- true variant (folingue standard)
+forêt	foret	foret	5029873	38939	discovered	suggest VETO -- distinct: forêt (forest) vs foret (drill bit)
+frappadingue	frapadingue	frapadingue	4310	589	discovered	suggest ACTIVE -- true variant (frapadingue/frappadingue both attested)
+fripe	frippe	frippe	19582	895	discovered	suggest ACTIVE -- true variant (fripe/frippe both attested)
+frite	fritte	fritte	405361	3252	discovered	suggest ACTIVE -- true variant (frite standard; fritte accepted)
+fusarole	fusarolle	fusarolle	5	1	reform1990	close call or sparse data -- human settles canonical
+gabare	gabarre	gabarre	15826	10189	discovered	suggest ACTIVE -- true variant (gabare/gabarre both attested)
+gai	gay	gay	785552	540908	discovered	suggest VETO -- distinct in modern usage: gai (cheerful) vs gay (homosexual)
+gailleterie	gaillèterie	gaillèterie	28	0	reform1990	close call or sparse data -- human settles canonical
+galle	gale	gale	254564	88747	discovered	UNDECIDED -- galle is both the old spelling of gale and a distinct word (burlap); counts muddy
+galon	gallon	gallon	139966	25959	discovered	suggest VETO -- distinct: gallon (unit) vs galon (braid)
+gangréneuse	gangréneux	gangréneux	1329	927	reform1990	close call or sparse data -- human settles canonical
+gapette	gâpette	gâpette	1007	435	discovered	suggest ACTIVE -- true variant (gâpette/gapette both attested)
+garrotter	garroter	garroter	32365	27647	reform1990	close call or sparse data -- human settles canonical
+gaulle	gaule	gaule	1435259	426920	discovered	suggest VETO -- gaulle count inflated by the proper noun (De Gaulle)
+glavioter	glaviotter	glaviotter	1029	22	discovered	suggest ACTIVE -- true variant (glavioter standard)
+gnognotte	gnognote	gnognote	3025	1686	discovered	suggest ACTIVE -- true variant (gnognotte standard)
+gnôle	gnole	gnole	27979	7641	discovered	suggest ACTIVE -- true variant (gnôle standard)
+gratouiller	grattouiller	grattouiller	10076	4631	discovered	suggest ACTIVE -- true variant (gratouiller standard)
+gratouillis	grattouillis	grattouillis	1277	505	discovered	suggest ACTIVE -- true variant (gratouillis standard)
+grifton	griffton	griffton	58	0	discovered	suggest ACTIVE -- misspelling variant (both are griffon spellings)
+grill	gril	gril	97242	91289	discovered	suggest ACTIVE -- true variant (gril is the old spelling of grill)
+grizzly	grizzli	grizzli	30820	20884	discovered	suggest ACTIVE -- true variant (grizzli/grizzly both accepted)
+grolle	grole	grole	2658	1507	reform1990	close call or sparse data -- human settles canonical
+haschisch	hachisch haschich	hachisch haschich	30900	5475 28384	discovered	suggest ACTIVE -- true variant (haschisch/hachisch/haschich)
+halle	hale hâle	hale hâle	433131	52897 29920	discovered	suggest VETO -- three distinct words: halle (market) / hale (haler) / hâle (tan)
+hâler	haler	haler	107534	99248	discovered	suggest VETO -- distinct: haler (tow) vs hâler (tan/redden)
+harpie	harpye	harpye	70809	2047	discovered	suggest ACTIVE -- true variant (harpie standard; harpye archaic)
+homéo-	homœo-	homœo-	0	0	reform1990	close call or sparse data -- human settles canonical
+imbitable	imbittable	imbittable	1030	0	discovered	suggest ACTIVE -- true variant (imbitable standard)
+impresario	imprésario	imprésario	41365	24541	reform1990	close call or sparse data -- human settles canonical
+yodler	iodler	iodler	947	171	discovered	suggest ACTIVE -- true variant (yodler standard)
+jerrican	jerrycan	jerrycan	13396	10379	discovered	suggest ACTIVE -- true variant (jerrican/jerrycan both accepted)
+kippa	kipa	kipa	18110	1817	discovered	suggest ACTIVE -- true variant (kippa standard)
+kitsch	kitch	kitch	98382	13166	discovered	suggest ACTIVE -- true variant (kitsch standard)
+laper	lapper	lapper	41635	1141	discovered	suggest ACTIVE -- true variant (laper/lapper same sense, both attested)
+lire	lyre	lyre	23710179	153260	discovered	suggest VETO -- distinct: lire (currency/read) vs lyre (instrument)
+lis	lys	lys	717628	289122	discovered	suggest ACTIVE -- true variant (lis/lys both accepted)
+lise	lyse	lyse	432241	44990	discovered	suggest VETO -- lyse (lysis) is distinct; lise is a verb form
+louloute	louloutte	louloutte	3359	618	discovered	suggest ACTIVE -- true variant (louloute standard)
+loupiote	loupiotte	loupiotte	16288	1842	discovered	suggest ACTIVE -- true variant (loupiote standard)
+lutter	luter	luter	7187659	5497	discovered	suggest VETO -- distinct: lutter (wrestle) vs luter (lute a joint)
+mafia	maffia	maffia	214468	7819	discovered	suggest ACTIVE -- true variant (mafia standard; maffia accepted)
+mafieux	maffieux	maffieux	124168	6285	discovered	suggest ACTIVE -- true variant (mafieux standard)
+mafioso	maffioso	maffioso	8188	1105	discovered	suggest ACTIVE -- true variant (mafioso standard)
+mamy	mammy	mammy	42529	4843	discovered	suggest ACTIVE -- true variant (mamy/mammy both nonstandard of mamie)
+mangeotter	mangeoter	mangeoter	115	68	reform1990	close call or sparse data -- human settles canonical
+mari	mary	mary	7077284	1263594	discovered	suggest VETO -- mary is the English name
+mariolle	mariole	mariole	12205	11597	reform1990	close call or sparse data -- human settles canonical
+marronner	maronner	maronner	7797	3394	discovered	suggest ACTIVE -- true variant (marronner standard)
+mater	matter mâter	matter mâter	512270	73594 8071	discovered	suggest VETO -- distinct: mater (stare down) vs mâter (mast) vs matter
+matin	mâtin	mâtin	11502131	19830	discovered	suggest VETO -- distinct: matin (morning) vs mâtin (mastiff)
+milord	mylord	mylord	238619	29167	discovered	suggest ACTIVE -- true variant (milord standard; mylord accepted)
+myrmidon	mirmidon	mirmidon	7954	574	discovered	suggest ACTIVE -- true variant (myrmidon standard)
+molasse	mollasse	mollasse	6851	5791	discovered	suggest ACTIVE -- true variant (molasse standard)
+momerie	mômerie	mômerie	5433	3038	discovered	suggest ACTIVE -- true variant (momerie standard)
+moudjahidine	moudjahiddine moudjahidines	moudjahiddine moudjahidines	21627	1145 13710	discovered	suggest ACTIVE -- true variant (moudjahidine standard; several spellings)
+mouffette	moufette	moufette	4592	3316	discovered	suggest ACTIVE -- true variant (mouffette standard)
+mur	mûr	mûr	9137636	778483	discovered	suggest VETO -- distinct: mur (wall) vs mûr (ripe)
+nirvana	nirvâna	nirvâna	76119	15525	discovered	suggest ACTIVE -- true variant (nirvana standard)
+nonne	none	none	148487	61621	discovered	suggest ACTIVE -- true variant (nonne standard; none archaic)
+nonnette	nonette	nonette	5850	4599	discovered	suggest ACTIVE -- true variant (nonnette standard)
+ognon	oignon	oignon	528330	433108	reform1990	close call or sparse data -- human settles canonical
+oignonière	ognonière	ognonière	14	0	reform1990	close call or sparse data -- human settles canonical
+oie	oye	oye	400701	16234	discovered	suggest ACTIVE -- true variant (oie standard; oye archaic)
+oléosaccarure	oléosaccharure	oléosaccharure	0	0	reform1990	close call or sparse data -- human settles canonical
+panner	paner	paner	541909	84321	discovered	suggest ACTIVE -- true variant (paner standard)
+pané	panné	panné	46370	3096	discovered	suggest VETO -- distinct: pané (breaded) vs panné (down-and-out)
+papy	papi	papi	138362	86166	discovered	suggest ACTIVE -- true variant (papy standard)
+par	parr	parr	313698937	14306	discovered	suggest VETO -- parr (young salmon) is a distinct word
+parlote	parlotte	parlotte	8576	7968	discovered	suggest ACTIVE -- true variant (parlote/parlotte both attested)
+parti	party	party	43283089	219714	discovered	suggest VETO -- party is the English loan
+pschitt	pchitt	pchitt	9757	290	discovered	suggest ACTIVE -- true variant (pschitt standard)
+phylloxera	phylloxéra	phylloxéra	27913	20707	reform1990	close call or sparse data -- human settles canonical
+piccolo	picolo	picolo	22702	1568	discovered	suggest ACTIVE -- true variant (piccolo standard)
+piffer	pifer	pifer	2443	454	discovered	suggest ACTIVE -- true variant (piffer standard)
+piètement	piétement	piétement	2431	2213	reform1990	close call or sparse data -- human settles canonical
+plingeure	plingeüre	plingeüre	0	0	reform1990	close call or sparse data -- human settles canonical
+poli	poly	poly	896492	45636	discovered	suggest VETO -- distinct: poli (polished) vs poly- (prefix)
+polope	pollope	pollope	158	0	discovered	suggest ACTIVE -- true variant (rare slang pair)
+pouffiasse	poufiasse	poufiasse	14535	5477	discovered	suggest ACTIVE -- true variant (pouffiasse standard)
+psy	psi	psi	533890	56277	discovered	suggest VETO -- distinct: psi (Greek letter) vs psy (psychiatry)
+rate	ratte	ratte	355646	4950	discovered	suggest VETO -- ratte is a potato variety, a distinct word
+recépée	recepée	recepée	66	36	reform1990	close call or sparse data -- human settles canonical
+resurgir	ressurgir	ressurgir	194240	144211	discovered	suggest ACTIVE -- true variant (resurgir/ressurgir both accepted)
+rho	rhô	rhô	10533	2859	discovered	suggest ACTIVE -- true variant (rho standard)
+rif	riff	riff	44773	34176	discovered	suggest VETO -- rif (Rif mountains) vs riff (music) are different things
+rôder	roder	roder	415699	115053	discovered	suggest VETO -- distinct: rôder (prowl) vs roder (break in an engine)
+roi	roy	roy	15918211	846513	discovered	suggest ACTIVE -- true variant (roi standard; roy archaic)
+rot	rôt	rôt	59219	8026	discovered	suggest VETO -- distinct: rot (burp) vs rôt (roast)
+ruffian	rufian	rufian	13385	890	discovered	suggest ACTIVE -- true variant (ruffian standard)
+sadducéen	saducéen	saducéen	26927	3174	discovered	suggest ACTIVE -- true variant (sadducéen standard)
+saoul	soul soûl	soul soûl	180256	152469 78014	discovered	suggest ACTIVE -- true variant (saoul/soul/soûl are all spellings of one word)
+soûlard	saoulard	saoulard	10886	711	discovered	suggest ACTIVE -- true variant (saoulard/soûlard both attested)
+saouler	soûler	soûler	134532	91239	seed	close call or sparse data -- human settles canonical
+soûlerie	saoulerie	saoulerie	5076	3747	discovered	suggest ACTIVE -- true variant (saoulerie/soûlerie both attested)
+satire	satyre	satyre	217216	84224	discovered	suggest VETO -- distinct: satire vs satyre (satyr)
+satirique	satyrique	satyrique	166048	10736	discovered	suggest VETO -- distinct: satirique (satire) vs satyrique (satyr plays)
+sensass	sensas	sensas	3098	2484	discovered	suggest ACTIVE -- true variant (sensas/sensass slang)
+shrapnel	shrapnell	shrapnell	12872	5046	discovered	suggest ACTIVE -- true variant (shrapnel standard)
+sylvaner	silvaner	silvaner	6882	162	discovered	suggest ACTIVE -- true variant (sylvaner standard)
+snif	sniff	sniff	7926	7112	discovered	suggest ACTIVE -- true variant (snif/sniff both used)
+sniffer	snifer	snifer	29584	292	discovered	suggest ACTIVE -- true variant (sniffer standard)
+solos	soli	soli	29180	28867	reform1990	close call or sparse data -- human settles canonical
+sotie	sottie	sottie	7571	4283	reform1990	close call or sparse data -- human settles canonical
+suiffer	suifer	suifer	1109	490	discovered	suggest ACTIVE -- true variant (suiffer standard)
+sur	sûr	sûr	299499412	16471496	discovered	suggest VETO -- distinct: sur (on) vs sûr (sure) -- isException class
+tâche	tache	tache	4855964	1451182	discovered	suggest VETO -- distinct: tache (stain) vs tâche (task)
+tâcher	tacher	tacher	5660557	1798067	discovered	suggest VETO -- distinct: tacher (stain) vs tâcher (task)
+taler	taller	taller	3143850	17469	discovered	suggest VETO -- unclear pair; taler's huge count looks like a proper noun -- leave both
+tanin	tannin	tannin	107334	18044	discovered	suggest ACTIVE -- true variant (tanin standard)
+tartignole	tartignolle	tartignolle	672	385	reform1990	close call or sparse data -- human settles canonical
+tartuffe	tartufe	tartufe	75009	19682	discovered	suggest ACTIVE -- true variant (tartuffe/tartufe both accepted)
+tartuferie	tartufferie	tartufferie	4475	3753	discovered	suggest ACTIVE -- true variant (tartuferie/tartufferie)
+tempi	tempos	tempos	12885	10757	reform1990	close call or sparse data -- human settles canonical
+typer	tiper	tiper	14330037	1084	discovered	suggest VETO -- tiper is the 'to tip' loan, not a spelling of typer
+tocante	toquante	toquante	2796	1455	reform1990	close call or sparse data -- human settles canonical
+tome	tomme	tomme	1566035	30931	discovered	suggest VETO -- distinct: tome (volume) vs tomme (cheese)
+tomette	tommette	tommette	18277	7040	discovered	suggest ACTIVE -- true variant (tomette standard)
+trimballer	trimbaler	trimbaler	75301	47548	seed	close call or sparse data -- human settles canonical
+trotskiste	trotskyste	trotskyste	49374	14264	discovered	suggest ACTIVE -- true variant (trotskiste standard)
+téocali	téocalli	téocalli	206	145	reform1990	close call or sparse data -- human settles canonical
+velum	vélum	vélum	8429	4423	reform1990	close call or sparse data -- human settles canonical
+voussoyer	vousoyer	vousoyer	1243	69	discovered	suggest ACTIVE -- true variant (voussoyer standard)
+zieuter	zyeuter	zyeuter	8887	5569	seed	close call or sparse data -- human settles canonical
+égrugeure	égrugeüre	égrugeüre	0	0	reform1990	close call or sparse data -- human settles canonical
+équarrisseur	équarisseur	équarisseur	9018	1842	discovered	suggest ACTIVE -- true variant (équarrisseur standard)

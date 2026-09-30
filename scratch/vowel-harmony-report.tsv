@@ -1,0 +1,688 @@
+lemme	position	ortho_unit	pair	lax_rows	tense_rows	class	lax_next	tense_next	minority	majority
+atterrer	2	e	E/e	4	4	harmony	-1,E3	e4	tense: atterré atterrée atterrées atterrés	atterraient atterrait atterre atterrèrent
+becquer	1	e	E/e	1	2	harmony	@1	e2	lax: becquant	becquer becqué
+désintéresser	7	e	E/e	8	6	harmony	-2,@1,E2,a1,°2	e6	tense: désintéresser désintéressiez désintéressé désintéressée désintéressées désintéressés	désintéressa désintéressaient désintéressait désintéressant
+greffier	2	e	E/e	1	2	harmony	E1	e2	lax: greffière	greffier greffiers
+paresser	3	e	E/e	6	2	harmony	-1,@1,E3,§1	e2	tense: paresser paressé	paressaient paressais paressait paressant
+abonner	2	o	O/o	2	7	harmony	-1,@1	e7	lax: abonnant abonne	abonnai abonner abonnez abonné
+arraisonner	4	o	O/o	1	4	harmony	°1	e4	lax: arraisonnerons	arraisonner arraisonné arraisonnées arraisonnés
+ascensionner	5	o	O/o	1	1	harmony	-1	e1	tense: ascensionner	ascensionne
+autographier	0	au	O/o	1	1	harmony	O1	o1	tense: autographier	autographié
+boycotter	4	o	O/o	5	3	harmony	-3,°2	e3	tense: boycotter boycottez boycotté	boycotte boycottent boycotterai boycotteront
+bûcheronner	5	o	O/o	1	1	harmony	-1	e1	tense: bûcheronner	bûcheronne
+carrosser	3	o	O/o	1	3	harmony	-1	e3	lax: carrosse	carrosser carrossée carrossées
+cochonnée	1	o	O/o	1	1	harmony	O1	o1	tense: cochonnées	cochonnée
+cocoter	3	o	O/o	3	1	harmony	-2,°1	e1	tense: cocoter	cocotent cocoterait cocotte
+collationner	6	o	O/o	1	2	harmony	-1	e2	lax: collationne	collationner collationnés
+commotionner	6	o	O/o	1	3	harmony	°1	e3	lax: commotionnerait	commotionné commotionnée commotionnés
+convulsionner	7	o	O/o	1	1	harmony	-1	e1	tense: convulsionnée	convulsionne
+coronarien	1	o	O/o	2	1	harmony	O2	o1	tense: coronarienne	coronarien
+corroborer	1	o	O/o	2	9	harmony	O2	o9	lax: corroborant corroboré	corrobora corroboraient corroborait corrobore
+cosmologique	4	o	O/o	1	1	harmony	O1	o1	tense: cosmologiques	cosmologique
+couillonner	3	o	O/o	2	4	harmony	-2	e4	lax: couillonne couillonnent	couillonner couillonné couillonnée couillonnés
+croqueur	2	o	O/o	2	2	harmony	92	22	tense: croqueuse	croqueur
+culotter	3	o	O/o	2	5	harmony	-2	e5	lax: culotte culottes	culotter culotté culottée culottées
+dindonner	3	o	O/o	1	1	harmony	-1	e1	tense: dindonné	dindonne
+déballonner	5	o	O/o	2	2	harmony	°2	e2	tense: déballonner déballonné	déballonnerais déballonneront
+déhotter	3	o	O/o	1	3	harmony	-1	e3	lax: déhotte	déhotter déhotté déhottée
+désordonner	6	o	O/o	1	3	harmony	-1	e3	lax: désordonne	désordonné désordonnée désordonnés
+emplafonner	5	o	O/o	2	3	harmony	-2	e3	lax: emplafonne emplafonnent	emplafonner emplafonné emplafonnée
+encotonner	4	o	O/o	1	1	harmony	-1	e1	tense: encotonner	encotonne
+enjuponner	4	o	O/o	1	1	harmony	-1	e1	tense: enjuponnée	enjuponne
+ferronnier	3	o	O/o	1	2	harmony	E1	e2	lax: ferronnière	ferronnier ferronniers
+footballeur	4	a	O/o	1	1	harmony	91	21	tense: footballeuse	footballeur
+gondolier	3	o	O/o	1	2	harmony	E1	e2	lax: gondolière	gondolier gondoliers
+goudronner	4	o	O/o	1	4	harmony	-1	e4	lax: goudronne	goudronner goudronnez goudronné goudronnée
+lobotomiser	1	o	O/o	1	2	harmony	O1	o2	lax: lobotomisée	lobotomiser lobotomisé
+lobotomiser	3	o	O/o	1	2	harmony	O1	o2	lax: lobotomisée	lobotomiser lobotomisé
+maquignonner	5	o	O/o	1	2	harmony	-1	e2	lax: maquignonne	maquignonné maquignonnés
+monopoliser	1	o	O/o	1	11	harmony	O1	o11	lax: monopolisé	monopolisa monopolisaient monopolisais monopolisait
+monopoliser	3	o	O/o	1	11	harmony	O1	o11	lax: monopolisé	monopolisa monopolisaient monopolisais monopolisait
+mouronner	3	o	O/o	1	1	harmony	-1	e1	tense: mouronner	mouronne
+ovoïdal	0	o	O/o	1	1	harmony	O1	o1	tense: ovoïdal	ovoïdale
+perquisitionner	9	o	O/o	3	2	harmony	-2,°1	e2	tense: perquisitionner perquisitionné	perquisitionne perquisitionnent perquisitionnera
+philosophal	3	o	O/o	1	2	harmony	O1	o2	lax: philosophal	philosophale philosophales
+positionner	6	o	O/o	3	3	harmony	-2,°1	e3	tense: positionner positionné positionnée	positionne positionnent positionnera
+potier	1	o	O/o	1	2	harmony	E1	e2	lax: potière	potier potiers
+pouponner	3	o	O/o	2	2	harmony	-2	e2	tense: pouponner pouponné	pouponne pouponnent
+pétitionner	6	o	O/o	1	1	harmony	-1	e1	tense: pétitionner	pétitionnent
+radiologique	4	o	O/o	1	1	harmony	O1	o1	tense: radiologiques	radiologique
+radioscopique	4	o	O/o	1	1	harmony	O1	o1	tense: radioscopiques	radioscopique
+rationner	4	o	O/o	1	6	harmony	-1	e6	lax: rationne	rationner rationnez rationné rationnée
+ratonner	3	o	O/o	1	1	harmony	-1	e1	tense: ratonner	ratonnent
+reloger	3	o	O/o	2	2	harmony	-1,°1	e2	tense: reloger relogé	reloge relogerais
+roteur	1	o	O/o	1	2	harmony	91	22	lax: roteur	roteuse roteuses
+rototo	1	o	O/o	1	1	harmony	O1	o1	tense: rototos	rototo
+réapprovisionner	10	o	O/o	2	3	harmony	-1,°1	e3	lax: réapprovisionne réapprovisionnerait	réapprovisionner réapprovisionné réapprovisionnée
+satonner	3	o	O/o	1	2	harmony	-1	e2	lax: satonne	satonner satonné
+troglodytique	2	o	O/o	1	1	harmony	O1	o1	tense: troglodytiques	troglodytique
+émotionner	5	o	O/o	1	1	harmony	-1	e1	tense: émotionné	émotionne
+étalonner	4	o	O/o	1	2	harmony	-1	e2	lax: étalonne	étalonner étalonné
+étiologique	3	o	O/o	1	1	harmony	O1	o1	tense: étiologiques	étiologique
+empierrer	3	e	E/e	3	1	reverse	e3	E1	tense: empierrait	empierrer empierré empierrée
+carillonneur	5	o	O/o	1	1	reverse	21	91	tense: carillonneur	carillonneuse
+comploteur	4	o	O/o	1	2	reverse	21	92	lax: comploteuse	comploteur comploteurs
+décodeur	3	o	O/o	1	2	reverse	21	92	lax: décodeuse	décodeur décodeurs
+déconneur	3	o	O/o	1	2	reverse	21	92	lax: déconneuse	déconneur déconneurs
+introspection	3	o	O/o	1	1	reverse	e1	E1	tense: introspection	introspections
+polissonner	5	o	O/o	1	1	reverse	e1	E1	tense: polissonnait	polissonner
+yodler	1	o	O/o	1	1	reverse	e1	E1	tense: yodlait	yodler
+boeuf	1	oeu	9/2	2	1	mixed	-2	-1	tense: boeufs	boeuf
+oeuf	0	oeu	9/2	1	1	mixed	-1	-1	tense: oeufs	oeuf
+agresser	3	e	E/e	15	1	mixed	-2,@1,E3,a1,e6,°2	§1	tense: agressions	agressa agressaient agressais agressait
+agresseur	3	e	E/e	2	2	mixed	92	92	tense: agresseurs	agresseur
+agressif	3	e	E/e	2	2	mixed	i2	i2	tense: agressifs agressives	agressif agressive
+agression	3	e	E/e	1	1	mixed	§1	§1	tense: agressions	agression
+aguerrir	2	e	E/e	7	1	mixed	i7	i1	tense: aguerrir	aguerri aguerrie aguerries aguerrira
+amerrir	2	e	E/e	2	1	mixed	i2	i1	tense: amerrir	amerri amerrit
+antidépresseur	7	e	E/e	2	2	mixed	92	92	tense: antidépresseur	antidépresseurs
+aquarelliste	4	e	E/e	1	1	mixed	i1	i1	tense: aquarelliste	aquarellistes
+assujetti	4	e	E/e	2	1	mixed	i2	i1	tense: assujetties	assujetti assujettis
+assujettir	4	e	E/e	9	3	mixed	i9	i3	tense: assujetties assujettir assujettissant	assujetti assujettie assujettiraient assujettis
+atterrir	2	e	E/e	20	1	mixed	i20	i1	tense: atterrir	atterri atterrira atterrirai atterrirais
+autonettoyant	4	e	E/e	1	1	mixed	@1	@1	tense: autonettoyante	autonettoyant
+becquet	1	e	E/e	1	1	mixed	E1	E1	tense: becquet	becquets
+cannelloni	3	e	E/e	1	1	mixed	o1	o1	tense: cannelloni	cannellonis
+caressant	3	e	E/e	2	2	mixed	@2	@2	tense: caressantes caressants	caressant caressante
+coexister	2	e	E/e	3	7	mixed	i3	i7	lax: coexister coexistez coexistons	coexistaient coexistait coexistant coexiste
+condescendant	3	e	E/e	1	2	mixed	@1	@2	lax: condescendants	condescendant condescendante
+condescendre	3	e	E/e	5	2	mixed	@5	@2	tense: condescendant condescendre	condescend condescendait condescendit condescendrais
+convalescent	5	e	E/e	3	3	mixed	@3	@3	tense: convalescent convalescente	convalescentes convalescents
+cressonnière	2	e	E/e	1	1	mixed	o1	o1	tense: cressonnière	cressonnières
+dilettante	3	e	E/e	2	2	mixed	@2	@2	tense: dilettante	dilettantes
+dilettantisme	3	e	E/e	1	1	mixed	@1	@1	tense: dilettantisme	dilettantismes
+décennal	3	e	E/e	1	1	mixed	a1	a1	tense: décennal	décennale
+dépayser	3	a	E/e	4	5	mixed	i4	i5	lax: dépaysera dépaysé dépaysée dépaysés	dépaysaient dépaysait dépaysant dépayse
+dépressif	4	e	E/e	3	3	mixed	i3	i3	tense: dépressif dépressive	dépressifs dépressives
+détection	3	e	E/e	1	1	mixed	§1	§1	tense: détections	détection
+effervescence	5	e	E/e	1	1	mixed	@1	@1	tense: effervescence	effervescences
+effervescent	5	e	E/e	2	2	mixed	@2	@2	tense: effervescent effervescente	effervescentes effervescents
+embellir	2	e	E/e	15	1	mixed	i15	i1	tense: embellir	embelli embellie embellies embellira
+empierré	3	e	E/e	2	2	mixed	e2	e2	tense: empierrées empierrés	empierré empierrée
+empresser	3	e	E/e	16	4	mixed	-3,@1,E4,a2,e2,°4	e4	tense: empressé empressée empressées empressés	empressa empressai empressaient empressais
+endetter	2	e	E/e	5	4	mixed	-1,@1,E1,e2	e4	tense: endetter endetté endettée endettés	endettait endettant endette endettez
+enserrer	2	e	E/e	15	1	mixed	-3,@1,E3,a1,e5,°2	e1	tense: enserrer	enserra enserrai enserraient enserrait
+enterrer	2	e	E/e	23	5	mixed	-3,@1,E4,a2,e3,§2,°8	e5	tense: enterrer enterré enterrée enterrées enterrés	enterra enterrai enterraient enterrais
+erratum	0	e	E/e	1	1	mixed	a1	a1	tense: erratum	errata
+essaim	0	e	E/e	1	1	mixed	51	51	tense: essaim	essaims
+esseuler	0	e	E/e	2	2	mixed	92	92	tense: esseulé esseulée	esseulées esseulés
+esseulé	0	e	E/e	2	2	mixed	92	92	tense: esseulé esseulée	esseulées esseulés
+essuyage	0	e	E/e	1	1	mixed	81	81	tense: essuyage	essuyages
+excellence	3	e	E/e	1	1	mixed	@1	@1	tense: excellences	excellence
+excellent	0	e	E/e	3	1	mixed	E2,e1	E1	tense: excellent	excellente excellentes excellents
+excellent	3	e	E/e	3	1	mixed	@3	@1	tense: excellentes	excellent excellente excellents
+exceller	0	e	E/e	11	1	mixed	E11	E1	tense: excellent	excella excellaient excellais excellait
+excepter	0	e	E/e	10	1	mixed	E10	E1	tense: exceptions	exceptais exceptait exceptant excepte
+exception	0	e	E/e	1	1	mixed	E1	E1	tense: exceptions	exception
+excrétion	0	e	E/e	1	1	mixed	e1	e1	tense: excrétions	excrétion
+exemption	0	e	E/e	1	1	mixed	@1	@1	tense: exemptions	exemption
+expression	4	e	E/e	1	1	mixed	§1	§1	tense: expressions	expression
+expédient	0	e	E/e	3	1	mixed	e3	e1	tense: expédient	expédient expédientes expédients
+expédier	0	e	E/e	22	1	mixed	e22	e1	tense: expédient	expédia expédiai expédiaient expédiais
+exécuter	0	e	E/e	28	1	mixed	e28	e1	tense: exécutions	exécuta exécutai exécutaient exécutais
+exécution	0	e	E/e	1	1	mixed	e1	e1	tense: exécutions	exécution
+fessier	1	e	E/e	5	1	mixed	E1,e4	E1	tense: fessière	fessier fessiers fessières
+flagellation	4	e	E/e	1	1	mixed	a1	a1	tense: flagellations	flagellation
+flemmard	2	e	E/e	1	6	mixed	a1	a6	lax: flemmardes	flemmard flemmarde flemmards
+impressionner	3	e	E/e	11	8	mixed	O6,o5	O1,o7	tense: impressionnais impressionnant impressionner impressionneras impressionné impressionnée	impressionna impressionnaient impressionnait impressionne
+impressionniste	3	e	E/e	2	2	mixed	o2	o2	tense: impressionniste	impressionnistes
+incandescence	4	e	E/e	1	1	mixed	@1	@1	tense: incandescence	incandescences
+ineffable	2	e	E/e	1	1	mixed	a1	a1	tense: ineffable	ineffables
+ineffaçable	2	e	E/e	1	1	mixed	a1	a1	tense: ineffaçable	ineffaçables
+inintelligent	4	e	E/e	1	1	mixed	i1	i1	tense: inintelligent	inintelligents
+interception	5	e	E/e	1	1	mixed	§1	§1	tense: interceptions	interception
+interjection	5	e	E/e	1	1	mixed	§1	§1	tense: interjections	interjection
+introspection	6	e	E/e	1	1	mixed	§1	§1	tense: introspections	introspection
+intéresser	4	e	E/e	27	1	mixed	-3,@1,E4,a1,e8,§2,°8	°1	tense: intéresseriez	intéressa intéressai intéressaient intéressais
+javelliser	3	e	E/e	4	1	mixed	i4	i1	tense: javelliser	javellise javellisé javellisée javellisées
+lego	1	e	E/e	1	1	mixed	o1	o1	tense: lego	legos
+lessiveur	1	e	E/e	1	1	mixed	i1	i1	tense: lessiveuse	lessiveuses
+libellule	3	e	E/e	1	1	mixed	y1	y1	tense: libellule	libellules
+maniacodépressif	11	e	E/e	1	2	mixed	i1	i2	lax: maniacodépressive	maniacodépressif
+maquettiste	3	e	E/e	1	1	mixed	i1	i1	tense: maquettiste	maquettistes
+oppresser	3	e	E/e	2	8	mixed	-2	@1,E2,a1,e4	lax: oppresse oppressent	oppressa oppressaient oppressait oppressant
+parabellum	5	e	E/e	1	1	mixed	O1	O1	tense: parabellum	parabellums
+paresseux	3	e	E/e	4	2	mixed	24	22	tense: paresseuses	paresseuse paresseux
+pessimiste	1	e	E/e	2	2	mixed	i2	i2	tense: pessimiste	pessimistes
+pierreux	2	e	E/e	2	1	mixed	22	21	tense: pierreuses	pierreuse pierreux
+pierrot	2	e	E/e	1	1	mixed	o1	o1	tense: pierrots	pierrot
+presser	2	e	E/e	21	1	mixed	-2,@1,E4,a1,e6,§2,°5	-1	tense: pressent	pressa pressai pressaient pressais
+pressuriser	2	e	E/e	3	3	mixed	y3	y3	tense: pressurisé pressurisée pressurisées	pressuriser pressurisez pressurisés
+pressurisé	2	e	E/e	1	2	mixed	y1	y2	lax: pressurisés	pressurisé pressurisée
+pressé	2	e	E/e	4	4	mixed	e4	e4	tense: pressée pressées	pressé pressés
+processeur	4	e	E/e	1	1	mixed	91	91	tense: processeur	processeurs
+progresser	5	e	E/e	21	2	mixed	-3,@1,E4,a1,e5,§2,°5	°2	tense: progresserez progresserons	progressa progressai progressaient progressais
+quintessencié	3	e	E/e	1	2	mixed	@1	@2	lax: quintessenciées	quintessencié quintessenciée
+racketter	3	e	E/e	4	1	mixed	-1,e3	§1	tense: rackettons	rackette racketter rackettez racketté
+régresser	4	e	E/e	3	3	mixed	-1,@1,E1	e2,°1	tense: régresser régressera régressé	régressait régressant régresse
+surimpression	6	e	E/e	1	1	mixed	§1	§1	tense: surimpression	surimpressions
+touareg	4	e	E/e	2	2	mixed	-2	-2	tense: touareg	touaregs
+trompettiste	4	e	E/e	1	1	mixed	i1	i1	tense: trompettiste	trompettistes
+turbocompresseur	9	e	E/e	1	1	mixed	91	91	tense: turbocompresseur	turbocompresseurs
+abandonner	4	o	O/o	14	18	mixed	-3,°11	@1,E4,a3,e8,§2	lax: abandonne abandonnent abandonnera abandonnerai abandonneraient abandonnerais	abandonna abandonnai abandonnaient abandonnais
+accoler	2	o	O/o	3	8	mixed	-2,°1	@1,E1,a1,e5	lax: accole accolent accolerais	accola accolait accolant accoler
+accommoder	4	o	O/o	10	13	mixed	-2,°8	@1,E4,a1,e5,§2	lax: accommode accommodent accommodera accommoderai accommoderaient accommoderais	accommoda accommodai accommodaient accommodais
+accrocher	3	o	O/o	10	17	mixed	-3,°7	@1,E4,a1,e8,§2,°1	lax: accroche accrochent accrochera accrocherai accrocheraient accrocherais	accrocha accrochai accrochaient accrochais
+achopper	2	o	O/o	2	7	mixed	-1,e1	E3,a1,e3	lax: achoppe achopper	achoppa achoppai achoppaient achoppais
+actionner	4	o	O/o	3	12	mixed	-2,°1	@1,E3,a1,e7	lax: actionne actionnent actionneront	actionna actionnai actionnaient actionnais
+additionner	5	o	O/o	4	10	mixed	-2,°2	@1,E3,e6	lax: additionne additionnent additionneraient additionnerait	additionnaient additionnais additionnait additionnant
+adonner	2	o	O/o	3	13	mixed	-2,°1	@1,E3,a1,e7,§1	lax: adonne adonnent adonnerait	adonna adonnai adonnaient adonnais
+adorer	2	o	O/o	15	15	mixed	-3,E1,°11	@1,E3,a1,e8,§2	tense: adora adorai adoraient adorais adorait adorant	adore adorent adorera adorerai
+affectionner	6	o	O/o	2	8	mixed	-2	@1,E3,e4	lax: affectionne affectionnent	affectionnaient affectionnais affectionnait affectionnant
+affoler	2	o	O/o	7	15	mixed	-3,°4	@1,E4,a1,e8,§1	lax: affole affolent affolera affolerais affolerait affoleront	affola affolai affolaient affolais
+affrioler	4	o	O/o	2	4	mixed	-1,°1	@1,E1,e2	lax: affriole affriolerait	affriolait affriolant affrioler affriolés
+aiguillonner	5	o	O/o	2	8	mixed	-2	@1,E2,e5	lax: aiguillonne aiguillonnent	aiguillonnaient aiguillonnait aiguillonnant aiguillonner
+alloc	2	o	O/o	1	1	mixed	-1	-1	tense: allocs	alloc
+ambitionner	5	o	O/o	2	6	mixed	-2	@1,E2,e3	lax: ambitionne ambitionnent	ambitionnais ambitionnait ambitionnant ambitionner
+amidonner	4	o	O/o	1	7	mixed	-1	E1,e6	lax: amidonnent	amidonnaient amidonner amidonnez amidonné
+améliorer	5	o	O/o	7	11	mixed	-3,E1,°3	@1,E2,a1,e6,§1	lax: améliore améliorent améliorera améliorerait amélioreront améliores	améliora amélioraient améliorait améliorant
+anabolisant	4	o	O/o	2	2	mixed	i2	i2	tense: anabolisants	anabolisant
+antiproton	5	o	O/o	1	1	mixed	§1	§1	tense: antiprotons	antiproton
+antipsychotique	7	o	O/o	2	2	mixed	i2	i2	tense: antipsychotiques	antipsychotique
+appoggiature	2	o	O/o	1	1	mixed	a1	a1	tense: appoggiatures	appoggiature
+approcher	3	o	O/o	11	18	mixed	-3,°8	@1,E4,a2,e8,§2,°1	lax: approche approchent approchera approcherai approcherais approcherait	approcha approchai approchaient approchais
+approvisionner	3	o	O/o	1	11	mixed	i1	i11	lax: approvisionnant	approvisionnait approvisionne approvisionnent approvisionner
+approvisionner	8	o	O/o	4	8	mixed	-2,@1,°1	E1,e6,§1	lax: approvisionnant approvisionne approvisionnent approvisionnera	approvisionnait approvisionner approvisionniez approvisionnons
+arborer	3	o	O/o	5	11	mixed	-3,E1,°1	@1,E3,a1,e5,§1	lax: arbore arborent arborerait arbores arborèrent	arbora arboraient arborais arborait
+assaisonner	4	o	O/o	2	8	mixed	-1,°1	E2,a1,e5	lax: assaisonne assaisonnerait	assaisonna assaisonnait assaisonner assaisonnèrent
+assommer	2	o	O/o	9	12	mixed	-3,°6	@1,E2,a1,e7,§1	lax: assomme assomment assommera assommerai assommeraient assommerais	assomma assommaient assommait assommant
+audition	0	au	O/o	1	1	mixed	i1	i1	tense: audition	auditions
+auditionner	5	o	O/o	5	5	mixed	-3,°2	E1,e4	tense: auditionnais auditionner auditionnez auditionné auditionnée	auditionne auditionnent auditionnera auditionnerais
+autocollant	4	o	O/o	1	5	mixed	@1	@5	lax: autocollante	autocollant autocollantes autocollants
+autographier	2	o	O/o	1	1	mixed	a1	a1	tense: autographier	autographié
+badigeonner	5	o	O/o	3	11	mixed	-1,°2	@1,E3,a1,e5,§1	lax: badigeonne badigeonnerai badigeonnerez	badigeonna badigeonnaient badigeonnait badigeonnant
+bagotter	3	o	O/o	1	3	mixed	-1	E2,e1	lax: bagotte	bagottaient bagottais bagotter
+ballonner	3	o	O/o	2	6	mixed	-2	E1,e5	lax: ballonne ballonnent	ballonnaient ballonner ballonné ballonnée
+balloter	3	o	O/o	2	8	mixed	-2	@1,E3,e4	lax: ballotte ballottent	ballottaient ballottait ballottant ballottèrent
+baluchonner	5	o	O/o	1	3	mixed	-1	-1,e2	lax: baluchonne	baluchonnent baluchonner baluchonné
+barboter	4	o	O/o	4	7	mixed	-2,°2	@1,E2,a1,e2,§1	lax: barbote barbotent barboterais barboterait	barbota barbotaient barbotait barbotant
+bastonner	4	o	O/o	1	5	mixed	-1	-1,e4	lax: bastonne	bastonnent bastonner bastonné bastonnée
+bedonner	3	o	O/o	1	1	mixed	-1	@1	tense: bedonnant	bedonne
+besogner	3	o	O/o	4	7	mixed	-2,e1,°1	@1,E4,a1,e1	lax: besogne besognent besogneras besogné	besogna besognaient besognais besognait
+biberonner	5	o	O/o	1	3	mixed	-1	E1,e2	lax: biberonne	biberonnait biberonner biberonné
+bibliographique	5	o	O/o	1	1	mixed	a1	a1	tense: bibliographiques	bibliographique
+bichonner	3	o	O/o	2	6	mixed	-1,°1	@1,E1,e4	lax: bichonne bichonnerai	bichonnait bichonnant bichonner bichonnez
+bidonnant	3	o	O/o	1	1	mixed	@1	@1	tense: bidonnant	bidonnante
+bidonner	3	o	O/o	3	10	mixed	-2,°1	@1,E3,e6	lax: bidonne bidonnent bidonnera	bidonnaient bidonnais bidonnait bidonnant
+bigot	3	o	O/o	3	4	mixed	-3	-4	lax: bigote bigotes	bigot bigots
+bistrot	5	o	O/o	1	2	mixed	-1	-2	lax: bistrote	bistrot bistrots
+bloquer	2	o	O/o	8	15	mixed	-3,°5	@1,E4,a1,e8,§1	lax: bloque bloquent bloquera bloquerai bloquerais bloquerait	bloqua bloquai bloquaient bloquais
+boggie	1	o	O/o	1	1	mixed	i1	i1	tense: boggie	boggies
+bolivien	1	o	O/o	2	4	mixed	i2	i4	lax: bolivien	bolivienne boliviens
+bonnette	1	o	O/o	1	1	mixed	E1	E1	tense: bonnettes	bonnette
+bosser	1	o	O/o	9	11	mixed	-3,°6	@1,E3,a1,e4,§2	lax: bosse bossent bossera bosserai bosserais bosserait	bossa bossaient bossais bossait
+bot	1	o	O/o	1	1	mixed	-1	-1	tense: bot	bote
+botteler	1	o	O/o	3	1	mixed	°3	E1	tense: bottèlent	botteler bottelé bottelées
+botter	1	o	O/o	10	13	mixed	-3,°7	@1,E2,a1,e8,§1	lax: botte bottent bottera botterai botterais botterait	botta bottai bottaient bottait
+bouchonner	3	o	O/o	2	7	mixed	-1,°1	@1,E2,a1,e3	lax: bouchonne bouchonneras	bouchonna bouchonnaient bouchonnait bouchonnant
+bouffonner	3	o	O/o	1	4	mixed	-1	@1,E1,a1,e1	lax: bouffonnes	bouffonna bouffonnait bouffonnant bouffonner
+bougonner	3	o	O/o	2	7	mixed	-2	@1,E3,a1,e2	lax: bougonne bougonnent	bougonna bougonnaient bougonnais bougonnait
+bouillonner	3	o	O/o	2	10	mixed	-2	@1,E4,e5	lax: bouillonne bouillonnent	bouillonnaient bouillonnais bouillonnait bouillonnant
+boulonner	3	o	O/o	1	6	mixed	-1	@1,E1,e4	lax: boulonne	boulonnait boulonnant boulonner boulonné
+boulot	3	o	O/o	2	4	mixed	-2	-4	lax: boulotte boulottes	boulot boulots
+bouloter	3	o	O/o	2	2	mixed	-2	E1,e1	tense: boulottait boulottées	boulotte boulottes
+bourdonner	4	o	O/o	2	7	mixed	-2	@1,E3,a1,e2	lax: bourdonne bourdonnent	bourdonna bourdonnaient bourdonnais bourdonnait
+bourgeonner	4	o	O/o	4	4	mixed	-2,e1,°1	@1,E2,e1	tense: bourgeonnaient bourgeonnait bourgeonnant bourgeonner	bourgeonne bourgeonnent bourgeonneraient bourgeonné
+boutonner	3	o	O/o	4	11	mixed	-3,°1	@1,E3,a1,e6	lax: boutonne boutonnent boutonnerait boutonnes	boutonna boutonnaient boutonnais boutonnait
+braconner	4	o	O/o	1	6	mixed	-1	@1,E2,e3	lax: braconne	braconnais braconnait braconnant braconner
+brioché	3	o	O/o	1	2	mixed	e1	e2	lax: briochée	brioché briochés
+broder	2	o	O/o	5	11	mixed	-3,°2	@1,E3,a1,e6	lax: brode brodent brodera broderai brodes	broda brodaient brodais brodait
+brosser	2	o	O/o	7	11	mixed	-3,°4	@1,E3,a1,e6	lax: brosse brossent brossera brosserai brosseras brosserez	brossa brossaient brossais brossait
+buissonner	4	o	O/o	1	2	mixed	-1	@1,e1	lax: buissonne	buissonnant buissonner
+bâillonner	3	o	O/o	4	9	mixed	-2,°2	@1,E1,a1,e5,§1	lax: bâillonne bâillonnent bâillonnera bâillonnerait	bâillonna bâillonnait bâillonnant bâillonner
+bécoter	3	o	O/o	3	5	mixed	-2,e1	@1,E1,e3	lax: bécote bécotent bécoté	bécotait bécotant bécoter bécotée
+cabosser	3	o	O/o	1	7	mixed	-1	E1,a1,e5	lax: cabosse	cabossa cabossait cabosser cabossé
+cachetonner	5	o	O/o	1	2	mixed	-1	E2	lax: cachetonne	cachetonnais cachetonnait
+cagot	3	o	O/o	2	3	mixed	-2	-3	lax: cagote cagotes	cagot cagots
+cajoler	3	o	O/o	5	9	mixed	-2,°3	@1,E3,a1,e4	lax: cajole cajolent cajolera cajolerai cajolerait	cajola cajolaient cajolait cajolant
+calotter	3	o	O/o	2	4	mixed	-2	E1,e3	lax: calotte calottes	calottais calotté calottées calottés
+cancérologue	5	o	O/o	1	1	mixed	O1	O1	tense: cancérologues	cancérologue
+cantonner	3	o	O/o	3	14	mixed	-2,°1	@1,E4,a1,e7,§1	lax: cantonne cantonnent cantonneraient	cantonna cantonnai cantonnaient cantonnais
+caparaçonner	7	o	O/o	1	5	mixed	-1	E1,e4	lax: caparaçonne	caparaçonnait caparaçonné caparaçonnée caparaçonnées
+caracoler	5	o	O/o	3	4	mixed	-2,°1	@1,E1,a1,e1	lax: caracole caracolent caracolerez	caracola caracolait caracolant caracoler
+carillonner	5	o	O/o	3	5	mixed	-3	@1,E2,e2	lax: carillonne carillonnent carillonnes	carillonnaient carillonnait carillonnant carillonner
+carotter	3	o	O/o	4	3	mixed	-2,e1,°1	E1,e2	tense: carottait carotter carottés	carotte carottent carotterait carotté
+cartographier	4	o	O/o	1	3	mixed	a1	a3	lax: cartographié	cartographient cartographier cartographiés
+cartonner	4	o	O/o	2	6	mixed	-2	@1,e5	lax: cartonne cartonnent	cartonnant cartonner cartonné cartonnée
+cataloguer	5	o	O/o	5	7	mixed	-3,@1,°1	E1,e6	lax: cataloguant catalogue cataloguent cataloguerai catalogues	cataloguais cataloguer cataloguiez catalogué
+cautionner	4	o	O/o	4	5	mixed	-3,°1	E1,e4	lax: cautionne cautionnent cautionnerait cautionnes	cautionnait cautionner cautionnez cautionné
+champignonner	5	o	O/o	2	2	mixed	-2	E2	tense: champignonnaient champignonnait	champignonne champignonnent
+chantonner	3	o	O/o	2	11	mixed	-2	@1,E4,a1,e5	lax: chantonne chantonnent	chantonna chantonnai chantonnaient chantonnais
+charbonner	4	o	O/o	2	6	mixed	-2	E2,e4	lax: charbonne charbonnent	charbonnaient charbonnait charbonner charbonné
+chicot	3	o	O/o	1	2	mixed	-1	-2	lax: chicote	chicot chicots
+chiffonner	3	o	O/o	1	9	mixed	-1	@1,E2,a1,e5	lax: chiffonne	chiffonna chiffonnaient chiffonnait chiffonnant
+chlorer	2	o	O/o	1	1	mixed	e1	e1	tense: chloré	chlorer
+choline	1	o	O/o	1	1	mixed	i1	i1	tense: cholines	choline
+choper	1	o	O/o	11	11	mixed	-3,°8	@1,E3,e6,§1	tense: chopaient chopais chopait chopant choper chopez	chope chopent chopera choperai
+chopper	1	o	O/o	3	5	mixed	-3	91,e3,§1	lax: choppe choppent choppes	choppers choppez choppons choppé
+choquer	1	o	O/o	7	12	mixed	-2,°5	@1,E3,a1,e6,§1	lax: choque choquent choquera choqueraient choquerais choquerait	choqua choquaient choquait choquant
+chorégraphier	1	o	O/o	1	1	mixed	e1	e1	tense: chorégraphiées	chorégraphier
+chuchoter	3	o	O/o	7	14	mixed	-2,°5	@1,E4,a1,e7,§1	lax: chuchote chuchotent chuchoteraient chuchoterais chuchoterait chuchoteras	chuchota chuchotai chuchotaient chuchotais
+citronner	4	o	O/o	1	1	mixed	e1	e1	tense: citronnez	citronnée
+citronné	4	o	O/o	1	1	mixed	e1	e1	tense: citronné	citronnée
+claironner	4	o	O/o	2	6	mixed	-2	@1,E1,a1,e2,§1	lax: claironne claironnent	claironna claironnait claironnant claironner
+clapoter	4	o	O/o	3	5	mixed	-2,°1	@1,E2,a1,e1	lax: clapote clapotent clapoterait	clapota clapotaient clapotait clapotant
+clignoter	4	o	O/o	4	7	mixed	-2,°2	@1,E3,a1,e2	lax: clignote clignotent clignotera clignoterait	clignota clignotaient clignotait clignotant
+cloisonner	4	o	O/o	1	7	mixed	-1	@1,E2,e4	lax: cloisonne	cloisonnaient cloisonnais cloisonnant cloisonner
+cloner	2	o	O/o	1	5	mixed	e1	-2,@1,e2	lax: cloner	clonant clone clonent cloné
+cloper	2	o	O/o	3	2	mixed	-2,e1	@1,E1	tense: clopais clopant	clope cloper clopes
+clore	2	o	O/o	1	5	mixed	-1	-4,a1	lax: clore	clora clos close closent
+cocarder	1	o	O/o	1	1	mixed	a1	a1	tense: cocardés	cocarder
+cocher	1	o	O/o	3	13	mixed	-2,°1	@1,E3,a1,e8	lax: coche cocheras coches	cocha cochait cochant cocher
+cochléaire	1	o	O/o	1	1	mixed	e1	e1	tense: cochléaires	cochléaire
+cochonnée	3	o	O/o	1	1	mixed	e1	e1	tense: cochonnées	cochonnée
+coffrer	1	o	O/o	8	9	mixed	-3,°5	E2,e6,§1	lax: coffre coffrent coffrera coffrerai coffrerais coffrerons	coffraient coffrait coffrer coffrez
+cogner	1	o	O/o	10	14	mixed	-3,°7	@1,E4,a1,e7,§1	lax: cogne cognent cognera cognerai cogneraient cognerais	cogna cognai cognaient cognais
+collaborer	5	o	O/o	8	11	mixed	-3,°5	@1,E3,a1,e4,§2	lax: collabore collaborent collaborera collaborerai collaboreraient collaborerez	collabora collaborai collaboraient collaborais
+collection	1	o	O/o	1	1	mixed	E1	E1	tense: collection	collections
+collectionner	7	o	O/o	3	12	mixed	-3	@1,E3,a1,e5,§2	lax: collectionne collectionnent collectionnes	collectionna collectionnaient collectionnais collectionnait
+coller	1	o	O/o	10	17	mixed	-3,°7	@1,E4,a2,e8,§2	lax: colle collent collera collerai collerais collerait	colla collai collaient collais
+colleter	1	o	O/o	3	1	mixed	°3	E1	tense: collète	colleter colleté colletés
+comite	1	o	O/o	1	1	mixed	i1	i1	tense: comites	comite
+commuer	1	o	O/o	1	5	mixed	81	84,y1	lax: commué	commuais commuant commuent commuer
+comploter	4	o	O/o	5	11	mixed	-3,°2	@1,E4,e5,§1	lax: complote complotent comploteraient comploterait complotes	complotai complotaient complotais complotait
+conditionner	6	o	O/o	3	8	mixed	-2,°1	@1,E1,e5,§1	lax: conditionne conditionnent conditionnerons	conditionnait conditionnant conditionner conditionnons
+confectionner	7	o	O/o	4	14	mixed	-1,°3	E4,a2,e7,§1	lax: confectionne confectionnerai confectionnerais confectionnerait	confectionna confectionnai confectionnaient confectionnais
+congestionner	7	o	O/o	2	5	mixed	-2	E2,e3	lax: congestionne congestionnent	congestionnaient congestionnait congestionné congestionnée
+connecter	1	o	O/o	1	12	mixed	E1	E12	lax: connectant	connecte connectent connecter connectera
+consoler	3	o	O/o	12	15	mixed	-3,°9	@1,E4,a1,e8,§1	lax: console consolent consolera consolerai consoleraient consolerais	consola consolai consolaient consolais
+consommer	3	o	O/o	4	13	mixed	-2,°2	@1,E2,a1,e7,§2	lax: consomme consomment consommerait consommeront	consomma consommai consommaient consommait
+contorsionner	7	o	O/o	2	9	mixed	-2	@1,E2,a1,e5	lax: contorsionne contorsionnent	contorsionna contorsionnaient contorsionnait contorsionnant
+convoquer	3	o	O/o	8	14	mixed	-2,°6	@1,E3,a1,e7,§2	lax: convoque convoquent convoquera convoquerai convoqueraient convoquerait	convoqua convoquai convoquaient convoquait
+coopter	1	o	O/o	2	1	mixed	O2	O1	tense: coopter	cooptant coopté
+coordonner	1	o	O/o	1	12	mixed	O1	O12	lax: coordonnant	coordonna coordonnaient coordonnait coordonne
+coordonner	5	o	O/o	4	9	mixed	-1,@1,°2	E2,a1,e5,§1	lax: coordonnant coordonne coordonnera coordonnerait	coordonna coordonnaient coordonnait coordonner
+cordonner	4	o	O/o	1	1	mixed	e1	e1	tense: cordonnées	cordonner
+corner	1	o	O/o	14	2	mixed	-3,@1,E5,a2,e3	E1,e1	tense: corner	corna cornaient cornais cornait
+coronarien	3	o	O/o	2	1	mixed	a2	a1	tense: coronarienne	coronarien
+corroborer	3	o	O/o	2	9	mixed	O2	O3,o6	lax: corroborant corroboré	corrobora corroboraient corroborait corrobore
+corroborer	5	o	O/o	5	6	mixed	-2,@1,e1,°1	E3,a1,e2	lax: corroborant corrobore corroborent corroborera corroboré	corrobora corroboraient corroborait corroborer
+cosmologique	6	o	O/o	1	1	mixed	i1	i1	tense: cosmologiques	cosmologique
+costal	1	o	O/o	1	2	mixed	a1	a1,o1	lax: costal	costale costaux
+couronner	3	o	O/o	6	9	mixed	-3,°3	@1,E2,a1,e5	lax: couronne couronnent couronnera couronnerai couronnerons couronnes	couronna couronnaient couronnait couronnant
+coïncider	1	o	O/o	1	11	mixed	51	511	lax: coïncident	coïncida coïncidaient coïncidais coïncidait
+cramponner	4	o	O/o	3	13	mixed	-2,°1	@1,E3,a1,e7,§1	lax: cramponne cramponnent cramponneront	cramponna cramponnaient cramponnais cramponnait
+crayonner	3	o	O/o	1	8	mixed	-1	@1,E1,a1,e5	lax: crayonne	crayonna crayonnait crayonnant crayonner
+crocheter	2	o	O/o	8	1	mixed	°8	E1	tense: crochètent	crocheta crochetaient crochetait crochetant
+croquer	2	o	O/o	9	14	mixed	-3,°6	@1,E4,a1,e7,§1	lax: croque croquent croquera croquerai croqueraient croquerais	croqua croquai croquaient croquais
+cérémoniel	5	o	O/o	1	2	mixed	E1	E2	lax: cérémonielle	cérémoniel cérémoniels
+dardillonner	5	o	O/o	1	1	mixed	-1	E1	tense: dardillonnaient	dardillonne
+dialoguer	4	o	O/o	3	10	mixed	-2,°1	@1,E2,e6,§1	lax: dialogue dialoguent dialoguera	dialoguai dialoguaient dialoguait dialoguant
+diaporama	4	o	O/o	1	1	mixed	a1	a1	tense: diaporamas	diaporama
+diplômer	4	ô	O/o	1	4	mixed	e1	e4	lax: diplômer	diplômé diplômée diplômées diplômés
+dipsomane	4	o	O/o	2	1	mixed	a2	a1	tense: dipsomanes	dipsomane
+directionnel	7	o	O/o	1	3	mixed	E1	E3	lax: directionnelle	directionnel directionnelles directionnels
+disloquer	4	o	O/o	4	11	mixed	-2,°2	@1,E3,a1,e6	lax: disloque disloquent disloquerai disloqueront	disloqua disloquai disloquaient disloquait
+dolent	1	o	O/o	1	3	mixed	@1	@3	lax: dolent	dolente dolentes dolents
+donner	1	o	O/o	12	21	mixed	-3,°9	@1,E4,a3,e9,§2,°2	lax: donne donnent donnera donnerai donneraient donnerais	donna donnai donnaient donnais
+dopant	1	o	O/o	1	1	mixed	@1	@1	tense: dopants	dopant
+doper	1	o	O/o	3	7	mixed	-2,@1	E2,e5	lax: dopant dope dopes	dopais dopait doper dopez
+dorer	1	o	O/o	4	10	mixed	-2,°2	@1,E3,a1,e5	lax: dore dorent dorera doreront	dora doraient dorais dorait
+dorloter	4	o	O/o	4	8	mixed	-2,°2	@1,E1,e6	lax: dorlote dorlotent dorloterai dorloterons	dorlotait dorlotant dorloter dorlotez
+droguer	2	o	O/o	4	10	mixed	-3,@1	E3,e7	lax: droguant drogue droguent drogues	droguaient droguais droguait droguer
+dropper	2	o	O/o	1	1	mixed	-1	@1	tense: droppant	droppe
+déboutonner	5	o	O/o	2	9	mixed	-2	@1,E1,a1,e6	lax: déboutonne déboutonnent	déboutonna déboutonnait déboutonnant déboutonner
+décapoter	5	o	O/o	2	4	mixed	-1,e1	E1,e3	lax: décapote décapoté	décapotait décapoter décapotée décapotés
+décapoté	5	o	O/o	1	1	mixed	e1	e1	tense: décapotée	décapoté
+décapuchonner	7	o	O/o	1	3	mixed	-1	E1,a1,e1	lax: décapuchonne	décapuchonna décapuchonner décapuchonnèrent
+décocher	3	o	O/o	3	11	mixed	-2,°1	@1,E3,a1,e6	lax: décoche décochent décochera	décocha décochai décochaient décochais
+décoder	3	o	O/o	3	9	mixed	-2,°1	@1,E1,e6,§1	lax: décode décodent décoderai	décodait décodant décoder décodez
+décoller	3	o	O/o	9	14	mixed	-3,°6	@1,E4,a1,e7,§1	lax: décolle décollent décollera décollerai décollerait décolleras	décolla décollai décollaient décollais
+décongestionner	9	o	O/o	3	1	mixed	-1,@1,e1	e1	tense: décongestionner	décongestionnant décongestionne décongestionné
+déconner	3	o	O/o	5	7	mixed	-3,°2	@1,E3,e3	lax: déconne déconnent déconnerai déconnerais déconnes	déconnaient déconnais déconnait déconnant
+décorer	3	o	O/o	5	13	mixed	-2,°3	@1,E4,a1,e7	lax: décore décorent décorera décorerait décoreront	décora décorai décoraient décorais
+décrocher	4	o	O/o	9	15	mixed	-2,°7	@1,E4,a1,e8,§1	lax: décroche décrochent décrochera décrocherai décrocheraient décrocherais	décrocha décrochai décrochaient décrochais
+décrotter	4	o	O/o	3	5	mixed	-2,@1	E1,e3,§1	lax: décrottant décrotte décrottent	décrottait décrotter décrottions décrottée
+déculotter	5	o	O/o	1	6	mixed	-1	@1,E1,a1,e2,°1	lax: déculotte	déculotta déculottait déculottant déculotter
+déflationniste	7	o	O/o	1	1	mixed	i1	i1	tense: déflationnistes	déflationniste
+déflorer	4	o	O/o	1	5	mixed	°1	E1,e4	lax: déflorerons	déflorait déflorer défloré déflorée
+défroquer	4	o	O/o	1	4	mixed	e1	a1,e3	lax: défroquer	défroqua défroqué défroquée défroqués
+dégobiller	3	o	O/o	1	6	mixed	i1	i6	lax: dégobillé	dégobilla dégobillaient dégobillait dégobillant
+dégommer	3	o	O/o	4	9	mixed	-2,°2	@1,E1,e6,§1	lax: dégomme dégomment dégommera dégommerai	dégommait dégommant dégommer dégommez
+dégoter	3	o	O/o	7	8	mixed	-2,°5	E1,a1,e6	lax: dégote dégoterais dégoteras dégottera dégotterai dégotterait	dégota dégotait dégoter dégotez
+dégringoler	6	o	O/o	5	12	mixed	-2,°3	@1,E3,a2,e5,§1	lax: dégringole dégringolent dégringoleraient dégringolerais dégringoleront	dégringola dégringolai dégringolaient dégringolait
+délocaliser	3	o	O/o	2	1	mixed	a2	a1	tense: délocalisez	délocaliser délocalisé
+déloger	3	o	O/o	4	7	mixed	-1,°3	E1,a1,e5	lax: déloge délogera délogerait délogerons	délogea délogeait déloger délogez
+démissionner	6	o	O/o	11	9	mixed	-3,°8	@1,E3,a1,e4	tense: démissionna démissionnaient démissionnais démissionnait démissionnant démissionner	démissionne démissionnent démissionnera démissionnerai
+démocratiser	3	o	O/o	1	3	mixed	a1	a3	lax: démocratisé	démocratise démocratiser démocratiseront
+démoralisateur	3	o	O/o	1	2	mixed	a1	a2	lax: démoralisateur	démoralisateurs
+démotiver	3	o	O/o	2	1	mixed	i2	i1	tense: démotive	démotiver démotivée
+dénommer	3	o	O/o	1	7	mixed	-1	E2,e5	lax: dénomment	dénommaient dénommait dénommer dénommez
+dénoter	3	o	O/o	3	5	mixed	-2,°1	@1,E2,e2	lax: dénote dénotent dénoterait	dénotaient dénotait dénotant dénoter
+dépersonnaliser	6	o	O/o	1	1	mixed	a1	a1	tense: dépersonnaliser	dépersonnalisé
+déplorer	4	o	O/o	7	12	mixed	-2,E1,§1,°3	@1,E3,a1,e6,§1	lax: déplore déplorent déplorerais déplorerait déplorerons déplorions	déplora déplorai déploraient déplorais
+dépolitiser	3	o	O/o	1	1	mixed	i1	i1	tense: dépolitisant	dépolitisé
+déraisonner	5	o	O/o	3	3	mixed	-2,e1	E1,e2	tense: déraisonnait déraisonner déraisonnez	déraisonne déraisonnes déraisonné
+déroger	3	o	O/o	4	4	mixed	-2,°2	E1,a1,e2	tense: dérogea dérogeait déroger dérogé	déroge dérogent dérogera dérogerait
+désarçonner	6	o	O/o	1	7	mixed	-1	E2,a1,e4	lax: désarçonne	désarçonna désarçonnaient désarçonnait désarçonner
+déshonorer	6	o	O/o	7	9	mixed	-3,°4	@1,E2,e6	lax: déshonore déshonorent déshonorera déshonorerai déshonorerais déshonorerait	déshonoraient déshonorait déshonorant déshonorer
+désoler	3	o	O/o	5	13	mixed	-3,°2	@1,E3,a1,e7,°1	lax: désole désolent désolera désolerait désoles	désola désolai désolaient désolais
+désosser	3	o	O/o	1	6	mixed	-1	E1,e5	lax: désosse	désossait désosser désossé désossée
+détoner	3	o	O/o	1	3	mixed	°1	E1,e2	lax: détonera	détonait détoner détonée
+détonner	3	o	O/o	2	5	mixed	-2	@1,E2,a1,e1	lax: détonne détonnent	détonna détonnaient détonnait détonnant
+développer	5	o	O/o	10	13	mixed	-2,E1,°7	@1,E3,a1,e7,§1	lax: développe développent développera développerai développeraient développerais	développa développai développaient développais
+dévorer	3	o	O/o	11	14	mixed	-3,E1,°7	@1,E3,a1,e7,§2	lax: dévore dévorent dévorera dévorerai dévoreraient dévorerais	dévora dévorai dévoraient dévorais
+dévot	3	o	O/o	4	4	mixed	-4	-4	tense: dévot dévots	dévote dévotes
+effilocher	4	o	O/o	3	9	mixed	-2,°1	@1,E3,e5	lax: effiloche effilochent effilochera	effilochaient effilochait effilochant effilocher
+embrocher	3	o	O/o	3	10	mixed	-2,°1	@1,E2,a1,e6	lax: embroche embrochent embrochera	embrocha embrochais embrochant embrocher
+empocher	2	o	O/o	6	13	mixed	-3,°3	@1,E3,a1,e8	lax: empoche empochent empochera empocherais empocheras empoches	empocha empochai empochaient empochais
+empoisonner	4	o	O/o	9	11	mixed	-3,°6	@1,E3,a1,e6	lax: empoisonne empoisonnent empoisonnera empoisonnerai empoisonneraient empoisonnerais	empoisonna empoisonnaient empoisonnais empoisonnait
+emprisonner	5	o	O/o	3	11	mixed	-2,°1	@1,E3,a1,e6	lax: emprisonne emprisonnent emprisonnera	emprisonna emprisonnaient emprisonnait emprisonnant
+encapuchonner	6	o	O/o	1	7	mixed	-1	@1,E1,a1,e4	lax: encapuchonne	encapuchonna encapuchonnait encapuchonnant encapuchonné
+enclore	3	o	O/o	1	3	mixed	-1	-3	lax: enclore	enclos enclose encloses
+endommagement	2	o	O/o	1	1	mixed	a1	a1	tense: endommagements	endommagement
+englober	3	o	O/o	5	10	mixed	-2,°3	@1,E3,a1,e5	lax: englobe englobent englobera engloberaient engloberait	engloba englobaient englobais englobait
+entonner	2	o	O/o	4	11	mixed	-2,°2	@1,E4,a2,e2,§2	lax: entonne entonnent entonnera entonneraient	entonna entonnaient entonnais entonnait
+entrechoquer	5	o	O/o	3	9	mixed	-2,°1	@1,E3,e4,§1	lax: entrechoque entrechoquent entrechoqueront	entrechoquaient entrechoquait entrechoquant entrechoquer
+envelopper	4	o	O/o	7	14	mixed	-3,°4	@1,E4,a1,e7,§1	lax: enveloppe enveloppent enveloppera envelopperaient envelopperait envelopperez	enveloppa enveloppai enveloppaient enveloppais
+environner	4	o	O/o	2	8	mixed	-2	@1,E2,e5	lax: environne environnent	environnaient environnait environnant environner
+envoler	2	o	O/o	12	15	mixed	-3,°9	@1,E4,a2,e7,§1	lax: envole envolent envolera envolerai envoleraient envolerais	envola envolai envolaient envolais
+escamoter	5	o	O/o	2	9	mixed	-1,°1	@1,E2,a1,e5	lax: escamote escamoterai	escamota escamotaient escamotait escamotant
+escroquer	4	o	O/o	4	6	mixed	-3,°1	@1,e5	lax: escroque escroquent escroquera escroques	escroquant escroquer escroquez escroqué
+espionner	4	o	O/o	3	12	mixed	-1,°2	@1,E3,e6,§1,°1	lax: espionnent espionnera espionnerai	espionnaient espionnais espionnait espionnant
+essorer	2	o	O/o	3	8	mixed	-2,°1	@1,E2,a1,e4	lax: essore essorent essorerait	essora essoraient essorait essorant
+exorciser	2	o	O/o	12	1	mixed	i12	i1	tense: exorcisant	exorcisa exorcisait exorcise exorcisent
+explorer	4	o	O/o	6	15	mixed	-2,°4	@1,E4,a1,e7,§2	lax: explore explorent explorera explorerai explorerez explorerons	explora explorai exploraient explorais
+extrascolaire	7	o	O/o	1	1	mixed	E1	E1	tense: extrascolaires	extrascolaire
+falot	3	o	O/o	2	4	mixed	-2	-4	lax: falote falotes	falot falots
+fanfaronner	5	o	O/o	2	6	mixed	-2	@1,E2,a1,e2	lax: fanfaronne fanfaronnes	fanfaronna fanfaronnaient fanfaronnait fanfaronnant
+façonner	3	o	O/o	7	9	mixed	-2,°5	@1,E2,a1,e5	lax: façonne façonnent façonnera façonnerai façonnerais façonnerez	façonna façonnaient façonnait façonnant
+festonner	4	o	O/o	1	7	mixed	-1	E2,e5	lax: festonne	festonnaient festonnait festonner festonné
+fignoler	3	o	O/o	5	9	mixed	-2,°3	@1,E2,a1,e4,§1	lax: fignole fignolent fignolerai fignolerais fignolerait	fignola fignolaient fignolait fignolant
+fiérot	4	o	O/o	1	3	mixed	-1	-3	lax: fiérote	fiérot fiérots
+flageoler	4	o	O/o	3	7	mixed	-2,°1	@1,E3,a1,e2	lax: flageole flageolent flageoleront	flageola flageolai flageolaient flageolait
+flotter	2	o	O/o	9	14	mixed	-3,°6	@1,E4,a1,e7,§1	lax: flotte flottent flottera flotteraient flotterait flotteras	flotta flottaient flottais flottait
+foisonner	3	o	O/o	4	4	mixed	-2,°2	@1,E2,e1	tense: foisonnaient foisonnait foisonnant foisonner	foisonne foisonnent foisonneraient foisonneront
+folichon	1	o	O/o	1	2	mixed	i1	i2	lax: folichon	folichonne folichonnes
+folichonner	5	o	O/o	1	1	mixed	-1	E1	tense: folichonnait	folichonne
+fonctionner	5	o	O/o	7	9	mixed	-3,°4	@1,E3,a1,e3,§1	lax: fonctionne fonctionnent fonctionnera fonctionneraient fonctionnerait fonctionneront	fonctionna fonctionnaient fonctionnais fonctionnait
+formation	1	o	O/o	1	1	mixed	a1	a1	tense: formations	formation
+fourgonner	4	o	O/o	1	3	mixed	-1	E1,a1,e1	lax: fourgonne	fourgonnait fourgonnas fourgonner
+fractionner	6	o	O/o	2	5	mixed	-1,e1	@1,E1,e3	lax: fractionne fractionnée	fractionnait fractionnant fractionner fractionné
+fractionné	6	o	O/o	1	1	mixed	e1	e1	tense: fractionnées	fractionnée
+fredonner	4	o	O/o	6	14	mixed	-2,°4	@1,E4,a2,e6,§1	lax: fredonne fredonnent fredonnera fredonnerai fredonnerait fredonneras	fredonna fredonnaient fredonnais fredonnait
+frictionner	6	o	O/o	4	8	mixed	-2,°2	@1,E3,a1,e3	lax: frictionne frictionnent frictionnerai frictionnerait	frictionna frictionnais frictionnait frictionnant
+fridolin	4	o	O/o	1	1	mixed	51	51	tense: fridolins	fridolin
+frisoter	4	o	O/o	1	5	mixed	-1	E1,e4	lax: frisottent	frisottaient frisotté frisottée frisottées
+frissonner	4	o	O/o	3	10	mixed	-3	@1,E4,a1,e4	lax: frissonne frissonnent frissonnes	frissonna frissonnai frissonnaient frissonnais
+frotter	2	o	O/o	9	16	mixed	-3,°6	@1,E4,a1,e8,§2	lax: frotte frottent frottera frotterai frotterais frotterait	frotta frottai frottaient frottais
+fusionner	4	o	O/o	5	6	mixed	-2,°3	@1,E1,e3,§1	lax: fusionne fusionnent fusionneraient fusionnerait fusionneront	fusionnaient fusionnant fusionner fusionnons
+galonner	3	o	O/o	1	5	mixed	-1	E1,e4	lax: galonne	galonnait galonné galonnée galonnées
+galoper	3	o	O/o	6	10	mixed	-3,°3	@1,E4,a1,e3,§1	lax: galope galopent galopera galoperaient galoperez galopes	galopa galopaient galopais galopait
+garroter	3	o	O/o	2	4	mixed	-2	E1,e3	lax: garrotte garrottent	garrottaient garrotté garrottée garrottés
+gigoter	3	o	O/o	4	6	mixed	-3,e1	@1,E2,a1,e2	lax: gigote gigotent gigotes gigoté	gigota gigotaient gigotait gigotant
+gober	1	o	O/o	7	13	mixed	-3,°4	@1,E4,a1,e6,§1	lax: gobe gobent gobera goberaient goberait goberont	goba gobaient gobais gobait
+gommer	1	o	O/o	4	8	mixed	-3,°1	@1,E1,a1,e5	lax: gomme gomment gommerait gommes	gomma gommait gommant gommer
+gondoler	3	o	O/o	3	10	mixed	-2,°1	@1,E4,e5	lax: gondole gondolent gondolera	gondolaient gondolais gondolait gondolant
+gouvernorat	6	o	O/o	1	1	mixed	a1	a1	tense: gouvernorats	gouvernorat
+graillonner	4	o	O/o	1	2	mixed	-1	E1,a1	lax: graillonne	graillonna graillonnait
+graphomane	4	o	O/o	1	1	mixed	a1	a1	tense: graphomanes	graphomane
+greloter	4	o	O/o	3	10	mixed	-3	@1,E4,a1,e2,§2	lax: grelotte grelottent grelottes	grelotta grelottaient grelottais grelottait
+griffonner	4	o	O/o	3	12	mixed	-3	@1,E3,a1,e7	lax: griffonne griffonnent griffonnes	griffonna griffonnai griffonnaient griffonnais
+grignoter	4	o	O/o	7	13	mixed	-2,°5	@1,E4,a1,e5,§2	lax: grignote grignotent grignotera grignoterai grignoteraient grignoterons	grignota grignotaient grignotais grignotait
+grisonner	4	o	O/o	2	5	mixed	-2	@1,E2,e2	lax: grisonne grisonnent	grisonnaient grisonnait grisonnant grisonner
+grogner	2	o	O/o	4	11	mixed	-3,°1	@1,E4,a1,e4,§1	lax: grogne grognent grognera grognes	grogna grognai grognaient grognais
+grognonner	4	o	O/o	1	2	mixed	-1	a1,e1	lax: grognonne	grognonna grognonner
+grommeler	2	o	O/o	10	3	mixed	°10	E3	tense: grommèle grommèlent grommèlerait	grommela grommelai grommelaient grommelait
+harponner	4	o	O/o	3	5	mixed	-2,°1	a1,e4	lax: harponne harponnent harponnera	harponna harponner harponné harponnée
+hocher	1	o	O/o	5	11	mixed	-3,°2	@1,E4,a1,e4,§1	lax: hoche hochent hocheraient hocheront hoches	hocha hochai hochaient hochais
+honorer	3	o	O/o	10	15	mixed	-3,°7	@1,E4,a1,e8,§1	lax: honore honorent honorera honorerai honorerait honoreras	honora honorai honoraient honorais
+hoqueter	1	o	O/o	8	1	mixed	°8	E1	tense: hoquète	hoqueta hoquetai hoquetais hoquetait
+huguenot	5	o	O/o	2	3	mixed	-2	-3	lax: huguenote	huguenot huguenots
+hypnagogique	6	o	O/o	1	1	mixed	i1	i1	tense: hypnagogiques	hypnagogique
+idiot	3	o	O/o	4	4	mixed	-4	-4	tense: idiot idiots	idiote idiotes
+ignorer	2	o	O/o	11	17	mixed	-1,E1,°9	-2,@1,E3,a1,e8,§2	lax: ignorera ignorerai ignoreraient ignorerais ignorerait ignoreras	ignora ignorai ignoraient ignorais
+illusionner	5	o	O/o	2	3	mixed	-2	E1,e2	lax: illusionne illusionnent	illusionnait illusionner illusionnez
+immoler	2	o	O/o	1	6	mixed	-1	-1,a1,e4	lax: immole	immola immolent immoler immolé
+implorer	3	o	O/o	8	12	mixed	-2,E1,°5	@1,E3,a1,e6,§1	lax: implore implorent implorera implorerai implorerais implorerez	implora implorai imploraient implorais
+impressionner	6	o	O/o	7	12	mixed	-3,°4	@1,E4,a1,e6	lax: impressionne impressionnent impressionnera impressionnerait impressionneras impressionneront	impressionna impressionnaient impressionnais impressionnait
+incommodant	4	o	O/o	1	2	mixed	@1	@2	lax: incommodant	incommodante incommodantes
+innocenter	2	o	O/o	1	9	mixed	@1	@9	lax: innocentant	innocentait innocente innocenter innocentera
+innommé	2	o	O/o	1	2	mixed	e1	e2	lax: innommée	innommé innommés
+innovateur	2	o	O/o	1	2	mixed	a1	a2	lax: innovatrice	innovateur
+inoculer	2	o	O/o	1	7	mixed	y1	y7	lax: inoculant	inocule inoculent inoculer inoculerait
+insolent	2	o	O/o	2	4	mixed	@2	@4	lax: insolent	insolente insolentes insolents
+insolvable	2	o	O/o	1	1	mixed	a1	a1	tense: insolvables	insolvable
+interconnecter	5	o	O/o	1	1	mixed	E1	E1	tense: interconnectée	interconnecté
+interlocutoire	5	o	O/o	1	1	mixed	y1	y1	tense: interlocutoires	interlocutoire
+interroger	4	o	O/o	12	17	mixed	-3,°9	@1,E4,a2,e8,§2	lax: interroge interrogent interrogera interrogerai interrogeraient interrogerais	interrogea interrogeai interrogeaient interrogeais
+interventionniste	8	o	O/o	2	2	mixed	i2	i2	tense: interventionnistes	interventionniste
+invoquer	2	o	O/o	9	13	mixed	-3,°6	@1,E3,a1,e7,§1	lax: invoque invoquent invoquera invoquerai invoquerais invoquerait	invoqua invoquai invoquaient invoquais
+isoler	2	o	O/o	6	15	mixed	-2,°4	@1,E4,a1,e8,§1	lax: isole isolent isolera isoleraient isolerait isoleront	isola isolai isolaient isolais
+jalonner	3	o	O/o	2	8	mixed	-2	@1,E3,e4	lax: jalonne jalonnent	jalonnaient jalonnais jalonnait jalonnant
+jargonner	4	o	O/o	2	3	mixed	-2	@1,e2	lax: jargonne jargonnent	jargonnant jargonner jargonné
+joliet	1	o	O/o	1	1	mixed	E1	E1	tense: joliette	joliet
+klaxonner	4	o	O/o	5	9	mixed	-3,°2	@1,E3,a1,e4	lax: klaxonne klaxonnent klaxonnera klaxonnerai klaxonnes	klaxonna klaxonnai klaxonnaient klaxonnais
+laryngoscope	5	o	O/o	1	1	mixed	O1	O1	tense: laryngoscopes	laryngoscope
+ligoter	3	o	O/o	5	12	mixed	-2,°3	@1,E3,a1,e6,§1	lax: ligote ligotent ligoterai ligoterait ligoterons	ligota ligotaient ligotait ligotant
+lobotomiser	5	o	O/o	1	2	mixed	i1	i2	lax: lobotomisée	lobotomiser lobotomisé
+locuteur	1	o	O/o	1	1	mixed	y1	y1	tense: locuteur	locutrice
+loger	1	o	O/o	12	15	mixed	-3,°9	@1,E4,a1,e8,§1	lax: loge logent logera logerai logeraient logerait	logea logeai logeaient logeais
+loquer	1	o	O/o	1	3	mixed	e1	E1,e2	lax: loqué	loquait loquer loqués
+lorette	1	o	O/o	1	1	mixed	E1	E1	tense: lorettes	lorette
+lyophiliser	2	o	O/o	1	2	mixed	i1	i2	lax: lyophilisé	lyophilisant lyophiliser
+lyophilisé	2	o	O/o	1	2	mixed	i1	i2	lax: lyophilisé	lyophilisée lyophilisés
+manchot	3	o	O/o	3	4	mixed	-3	-4	lax: manchote manchotes	manchot manchots
+margoter	4	o	O/o	1	2	mixed	-1	E1,§1	lax: margotte	margotait margottons
+marmonner	4	o	O/o	3	10	mixed	-3	@1,E2,a1,e6	lax: marmonne marmonnent marmonnes	marmonna marmonnaient marmonnait marmonnant
+marmotter	4	o	O/o	2	5	mixed	-2	@1,E1,a1,e2	lax: marmotte marmottes	marmotta marmottait marmottant marmotter
+marronner	3	o	O/o	1	3	mixed	°1	E1,e2	lax: marronnera	marronnais marronner marronné
+maçonner	3	o	O/o	1	6	mixed	-1	@1,e5	lax: maçonnent	maçonnant maçonner maçonné maçonnée
+mendigot	5	o	O/o	1	2	mixed	-1	-2	lax: mendigote	mendigot mendigots
+mentionner	4	o	O/o	8	14	mixed	-3,°5	@1,E3,a1,e8,§1	lax: mentionne mentionnent mentionnerai mentionnerais mentionnerait mentionneras	mentionna mentionnai mentionnaient mentionnais
+michetonner	5	o	O/o	2	2	mixed	-2	E1,e1	tense: michetonnais michetonner	michetonne michetonnes
+mijoter	3	o	O/o	4	12	mixed	-3,°1	@1,E3,a1,e5,§2	lax: mijote mijotent mijotera mijotes	mijota mijotaient mijotais mijotait
+missionner	4	o	O/o	1	2	mixed	e1	a1,e1	lax: missionné	missionna missionnés
+mitochondrie	3	o	O/o	1	1	mixed	§1	§1	tense: mitochondries	mitochondrie
+mitonner	3	o	O/o	3	8	mixed	-2,°1	@1,E2,e5	lax: mitonne mitonnent mitonnerait	mitonnaient mitonnait mitonnant mitonner
+moissonner	3	o	O/o	4	8	mixed	-2,°2	@1,E1,e6	lax: moissonne moissonnent moissonnera moissonnerai	moissonnait moissonnant moissonner moissonnez
+monnayeur	1	o	O/o	1	1	mixed	E1	E1	tense: monnayeurs	monnayeur
+monopoliser	5	o	O/o	1	11	mixed	i1	i11	lax: monopolisé	monopolisa monopolisaient monopolisais monopolisait
+moquer	1	o	O/o	12	16	mixed	-3,°9	@1,E4,a1,e8,§2	lax: moque moquent moquera moquerai moqueraient moquerais	moqua moquai moquaient moquais
+morave	1	o	O/o	1	2	mixed	a1	a2	lax: morave	moraves
+motivant	1	o	O/o	1	1	mixed	i1	i1	tense: motivant	motivante
+moutonner	3	o	O/o	2	4	mixed	-2	@1,E2,e1	lax: moutonne moutonnent	moutonnaient moutonnait moutonnant moutonner
+mâchonner	3	o	O/o	2	8	mixed	-2	@1,E3,a1,e3	lax: mâchonne mâchonnent	mâchonna mâchonnaient mâchonnais mâchonnait
+mémoriser	3	o	O/o	1	12	mixed	i1	i12	lax: mémorisé	mémorisaient mémorisait mémorise mémorisent
+nabot	3	o	O/o	1	2	mixed	-1	-2	lax: nabote	nabot nabots
+nanomètre	3	o	O/o	1	1	mixed	E1	E1	tense: nanomètres	nanomètre
+nobliau	1	o	O/o	1	1	mixed	i1	i1	tense: nobliaux	nobliau
+nominer	1	o	O/o	1	5	mixed	i1	i5	lax: nominer	nomine nominé nominée nominées
+nommer	1	o	O/o	11	16	mixed	-3,°8	@1,E4,a1,e8,§2	lax: nomme nomment nommera nommerai nommerais nommerait	nomma nommai nommaient nommais
+notarial	1	o	O/o	1	2	mixed	a1	a2	lax: notariale	notarial notariaux
+noter	1	o	O/o	11	15	mixed	-2,§1,°8	@1,E4,a1,e8,§1	lax: note notent notera noterai noterais noterait	nota notai notaient notais
+notion	1	o	O/o	1	1	mixed	§1	§1	tense: notion	notions
+occasionner	5	o	O/o	2	9	mixed	-2	@1,E2,a1,e5	lax: occasionne occasionnent	occasionna occasionnait occasionnant occasionner
+occipital	0	o	O/o	3	1	mixed	i3	i1	tense: occipitale	occipital occipitales occipitaux
+occulter	0	o	O/o	1	10	mixed	y1	y10	lax: occultant	occulta occultaient occultait occulte
+occultiste	0	o	O/o	1	2	mixed	y1	y2	lax: occultiste	occultistes
+oculus	0	o	O/o	1	1	mixed	y1	y1	tense: oculus	oculi
+officier	0	o	O/o	2	11	mixed	i2	i11	lax: officière officié	officiaient officiais officiait officiant
+offrant	0	o	O/o	1	5	mixed	@1	@5	lax: offrante	offrant offrantes offrants
+offrir	0	o	O/o	3	26	mixed	-3	@1,E7,e1,i16,§1	lax: offre offrent offres	offert offerte offertes offerts
+ophidien	0	o	O/o	1	1	mixed	i1	i1	tense: ophidiens	ophidien
+opiat	0	o	O/o	1	1	mixed	a1	a1	tense: opiats	opiat
+oppositionnel	0	o	O/o	1	1	mixed	o1	o1	tense: oppositionnelle	oppositionnel
+oppositionnel	7	o	O/o	1	1	mixed	E1	E1	tense: oppositionnelle	oppositionnel
+option	0	o	O/o	1	1	mixed	§1	§1	tense: options	option
+ordonner	3	o	O/o	9	14	mixed	-3,E1,°5	@1,E3,a1,e8,§1	lax: ordonne ordonnent ordonnera ordonnerai ordonnerais ordonnerait	ordonna ordonnai ordonnaient ordonnais
+orthogonal	3	o	O/o	1	1	mixed	o1	o1	tense: orthogonaux	orthogonal
+orthoptère	3	o	O/o	1	1	mixed	E1	E1	tense: orthoptères	orthoptère
+ovoïdal	2	o	O/o	1	1	mixed	i1	i1	tense: ovoïdal	ovoïdale
+papilionacé	6	o	O/o	1	2	mixed	a1	a2	lax: papilionacé	papilionacée papilionacées
+papillonner	5	o	O/o	3	6	mixed	-3	E3,a1,e2	lax: papillonne papillonnent papillonnes	papillonna papillonnaient papillonnais papillonnait
+papoter	3	o	O/o	3	7	mixed	-2,°1	@1,E3,e3	lax: papote papotent papotera	papotaient papotait papotant papoter
+pardonner	4	o	O/o	12	16	mixed	-3,°9	@1,E4,a1,e7,§2,°1	lax: pardonne pardonnent pardonnera pardonnerai pardonneraient pardonnerais	pardonna pardonnaient pardonnais pardonnait
+parigot	5	o	O/o	4	4	mixed	-4	-4	tense: parigot parigots	parigote parigotes
+parodontal	3	o	O/o	1	1	mixed	§1	§1	tense: parodontal	parodontale
+parpaillot	6	o	O/o	2	1	mixed	-2	-1	tense: parpaillot	parpaillote parpaillotes
+passionner	4	o	O/o	5	13	mixed	-2,°3	@1,E4,a1,e6,§1	lax: passionne passionnent passionnera passionnerait passionneras	passionna passionnai passionnaient passionnais
+peloter	3	o	O/o	5	11	mixed	-3,°2	@1,E3,a1,e5,§1	lax: pelote pelotent peloterai peloterait pelotes	pelota pelotaient pelotais pelotait
+pelotonner	5	o	O/o	2	11	mixed	-2	@1,E3,a1,e6	lax: pelotonne pelotonnent	pelotonna pelotonnai pelotonnaient pelotonnais
+perfectionner	8	o	O/o	3	12	mixed	-2,°1	@1,E4,a1,e5,§1	lax: perfectionne perfectionnent perfectionnerais	perfectionna perfectionnaient perfectionnais perfectionnait
+petiot	4	o	O/o	1	2	mixed	-1	-2	lax: petiote	petiot petiots
+philosophal	5	o	O/o	1	2	mixed	a1	a2	lax: philosophal	philosophale philosophales
+picoler	3	o	O/o	4	8	mixed	-3,°1	@1,E3,e4	lax: picole picolent picolerait picoles	picolaient picolais picolait picolant
+picoter	3	o	O/o	3	6	mixed	-2,@1	E2,a1,e3	lax: picotant picote picotent	picota picotaient picotait picoter
+pigeonner	3	o	O/o	1	3	mixed	-1	@1,e2	lax: pigeonne	pigeonnant pigeonner pigeonné
+pilonner	3	o	O/o	2	9	mixed	-1,°1	@1,E2,e6	lax: pilonnent pilonnera	pilonnaient pilonnait pilonnant pilonner
+piloter	3	o	O/o	8	13	mixed	-3,°5	@1,E4,a1,e7	lax: pilote pilotent pilotera piloterai piloterait piloteras	pilota pilotaient pilotais pilotait
+pinçoter	3	o	O/o	2	1	mixed	-1,E1	@1	tense: pinçotant	pinçotait pinçote
+piocher	2	o	O/o	4	8	mixed	-3,e1	@1,E3,e4	lax: pioche piochent pioches pioché	piochaient piochais piochait piochant
+pistonner	4	o	O/o	2	6	mixed	°2	E1,e4,§1	lax: pistonnera pistonnerai	pistonnais pistonner pistonnions pistonné
+plafonner	4	o	O/o	1	5	mixed	-1	@1,e3,§1	lax: plafonne	plafonnant plafonner plafonnons plafonné
+plastronner	6	o	O/o	3	4	mixed	-3	@1,E2,e1	lax: plastronne plastronnent plastronnes	plastronnaient plastronnait plastronnant plastronner
+plutonien	4	o	O/o	1	1	mixed	E1	51	tense: plutonien	plutonienne
+poinçonner	3	o	O/o	1	5	mixed	°1	E1,e4	lax: poinçonneraient	poinçonnait poinçonner poinçonné poinçonnée
+poivrot	4	o	O/o	2	2	mixed	-2	-2	tense: poivrot poivrots	poivrote poivrotes
+polarisant	1	o	O/o	1	1	mixed	a1	a1	tense: polarisants	polarisant
+polariser	1	o	O/o	1	7	mixed	a1	a7	lax: polarisant	polarisaient polarisait polarise polarisent
+polder	1	o	O/o	1	1	mixed	E1	E1	tense: polders	polder
+polluant	1	o	O/o	1	2	mixed	81	82	lax: polluante	polluant polluants
+polytechnicien	1	o	O/o	1	2	mixed	i1	i2	lax: polytechnicienne	polytechnicien polytechniciens
+pommer	1	o	O/o	3	4	mixed	-2,e1	E1,e3	lax: pomme pommer pommes	pommaient pommé pommée pommées
+pomponner	3	o	O/o	2	10	mixed	-2	@1,E2,a1,e6	lax: pomponne pomponnent	pomponna pomponnaient pomponnait pomponnant
+ponctionner	5	o	O/o	1	3	mixed	-1	E1,a1,e1	lax: ponctionne	ponctionna ponctionnait ponctionner
+porter	1	o	O/o	30	1	mixed	-3,@1,E5,a2,e7,§2,°10	e1	tense: porter	porta portai portaient portais
+portion	1	o	O/o	1	1	mixed	§1	§1	tense: portions	portion
+postillonner	6	o	O/o	3	6	mixed	-3	@1,E1,a1,e3	lax: postillonne postillonnent postillonnes	postillonna postillonnait postillonnant postillonner
+potelé	1	o	O/o	2	2	mixed	°2	E2	tense: potelées potelés	potelé potelée
+professeur	2	o	O/o	1	2	mixed	E1	E2	lax: professeure	professeur professeurs
+promener	2	o	O/o	10	19	mixed	e1,°9	E12,°7	lax: promenai promenaient promenais promenait promenant promener	promena promenez promeniez promenions
+prospection	2	o	O/o	1	1	mixed	E1	E1	tense: prospections	prospection
+provenir	2	o	O/o	1	8	mixed	°1	52,E2,°4	lax: provenu	provenaient provenait provenant provenir
+provoquer	4	o	O/o	13	15	mixed	-3,°10	@1,E4,a1,e7,§2	lax: provoque provoquent provoquera provoquerai provoqueraient provoquerais	provoqua provoquai provoquaient provoquais
+préconiser	4	o	O/o	1	15	mixed	i1	i15	lax: préconisant	préconisa préconisaient préconisais préconisait
+prénommer	4	o	O/o	2	10	mixed	-2	@1,E4,a1,e4	lax: prénomme prénomment	prénomma prénommaient prénommais prénommait
+préprogrammé	5	o	O/o	1	1	mixed	a1	a1	tense: préprogrammé	préprogrammée
+préélectoral	8	o	O/o	1	1	mixed	a1	a1	tense: préélectoral	préélectorale
+pâlot	3	o	O/o	2	2	mixed	-2	-2	tense: pâlot pâlots	pâlotte pâlottes
+péritonéal	5	o	O/o	1	1	mixed	e1	e1	tense: péritonéale	péritonéal
+questionner	5	o	O/o	7	14	mixed	-2,°5	@1,E4,a1,e6,§2	lax: questionne questionnent questionnera questionnerai questionnerait questionnerons	questionna questionnai questionnaient questionnais
+rabibocher	5	o	O/o	4	3	mixed	-2,e1,°1	e3	tense: rabibocher rabibochées rabibochés	rabiboche rabibochent rabibocherez rabiboché
+raccommoder	5	o	O/o	4	11	mixed	-2,°2	@1,E2,a1,e6,§1	lax: raccommode raccommodent raccommodera raccommoderai	raccommoda raccommodaient raccommodait raccommodant
+raccrocher	4	o	O/o	9	14	mixed	-3,°6	@1,E4,a1,e7,§1	lax: raccroche raccrochent raccrochera raccrocherai raccrocheraient raccrocherais	raccrocha raccrochai raccrochaient raccrochais
+radiologique	6	o	O/o	1	1	mixed	i1	i1	tense: radiologiques	radiologique
+radioscopique	7	o	O/o	1	1	mixed	i1	i1	tense: radioscopiques	radioscopique
+raffoler	3	o	O/o	6	6	mixed	-3,@1,e1,°1	E3,e3	tense: raffolaient raffolais raffolait raffoler raffolez raffoliez	raffolant raffole raffolent raffoleront
+raisonner	3	o	O/o	3	12	mixed	-3	@1,E3,a1,e6,§1	lax: raisonne raisonnent raisonnes	raisonna raisonnai raisonnaient raisonnais
+randonner	3	o	O/o	2	4	mixed	-1,e1	E1,e3	lax: randonne randonner	randonnait randonnez randonnée randonnées
+rançonner	3	o	O/o	1	7	mixed	-1	E2,e5	lax: rançonne	rançonnaient rançonnait rançonner rançonné
+rapprocher	4	o	O/o	6	16	mixed	-2,°4	@1,E4,a1,e8,§2	lax: rapproche rapprochent rapprochera rapprocherais rapprocherait rapprocheront	rapprocha rapprochai rapprochaient rapprochais
+rayonner	2	o	O/o	5	8	mixed	-3,°2	@1,E3,a1,e3	lax: rayonne rayonnent rayonnera rayonnerait rayonnes	rayonna rayonnaient rayonnais rayonnait
+reboutonner	5	o	O/o	2	10	mixed	-1,°1	@1,E3,a1,e5	lax: reboutonne reboutonnerait	reboutonna reboutonnaient reboutonnais reboutonnant
+recoller	3	o	O/o	3	6	mixed	-2,°1	E1,a1,e4	lax: recolle recollent recollera	recolla recollait recoller recollé
+reconditionner	8	o	O/o	1	3	mixed	-1	e2,§1	lax: reconditionne	reconditionnons reconditionné reconditionnée
+reculotter	5	o	O/o	1	4	mixed	-1	a1,e3	lax: reculotte	reculotta reculotter reculotté reculottée
+redimensionner	8	o	O/o	1	1	mixed	e1	e1	tense: redimensionnées	redimensionner
+redonner	3	o	O/o	11	11	mixed	-3,°8	@1,E3,a1,e5,§1	tense: redonna redonnai redonnaient redonnais redonnait redonnant	redonne redonnent redonnera redonnerai
+rencogner	3	o	O/o	2	6	mixed	-1,°1	@1,E1,a1,e3	lax: rencogne rencognerait	rencogna rencognait rencognant rencogner
+renfrogner	4	o	O/o	2	7	mixed	-1,°1	@1,E1,a1,e4	lax: renfrogne renfrognerait	renfrogna renfrognait renfrognant renfrogner
+renommer	3	o	O/o	1	7	mixed	°1	E1,e6	lax: renommera	renommait renommer renommez renommé
+reporter	3	o	O/o	17	2	mixed	-2,@1,E3,a1,e6,§1,°3	E1,e1	tense: reporter	reporta reportait reportant reporte
+reprocher	4	o	O/o	10	17	mixed	-3,°7	@1,E4,a1,e8,§2,°1	lax: reproche reprochent reprochera reprocherai reprocherais reprocherait	reprocha reprochai reprochaient reprochais
+reproductif	4	o	O/o	1	2	mixed	y1	y2	lax: reproductive	reproductif reproductifs
+revoler	3	o	O/o	4	2	mixed	-2,e1,°1	E1,e1	tense: revolait revolé	revole revolent revoler revolera
+ribot	3	o	O/o	1	1	mixed	-1	-1	tense: ribot	ribote
+rigoler	3	o	O/o	11	12	mixed	-3,°8	@1,E4,a1,e4,§2	lax: rigole rigolent rigolera rigolerai rigoleraient rigolerais	rigola rigolaient rigolais rigolait
+rigolo	5	o	O/o	2	4	mixed	-2	-4	lax: rigolote rigolotes	rigolo rigolos
+rocher	1	o	O/o	1	4	mixed	e1	a1,e3	lax: roché	rochas rocher rochers
+romancer	1	o	O/o	1	3	mixed	@1	@3	lax: romancé	romance romancer romancée
+romancé	1	o	O/o	1	2	mixed	@1	@2	lax: romancé	romancée romancées
+ronchonner	3	o	O/o	3	7	mixed	-3	@1,E3,a1,e2	lax: ronchonne ronchonnent ronchonnes	ronchonna ronchonnaient ronchonnais ronchonnait
+ronronner	3	o	O/o	3	9	mixed	-2,°1	@1,E4,a1,e2,§1	lax: ronronne ronronnent ronronnerait	ronronna ronronnaient ronronnais ronronnait
+rosser	1	o	O/o	4	9	mixed	-3,°1	@1,E2,a1,e5	lax: rosse rossent rosserai rosses	rossa rossaient rossait rossant
+roter	1	o	O/o	4	9	mixed	-3,°1	@1,E3,a1,e4	lax: rote rotent rotera rotes	rota rotaient rotais rotait
+rototo	3	o	O/o	1	1	mixed	o1	o1	tense: rototos	rototo
+réceptionner	7	o	O/o	3	5	mixed	-2,°1	@1,a1,e3	lax: réceptionne réceptionnent réceptionnera	réceptionna réceptionnant réceptionner réceptionné
+rédactionnel	7	o	O/o	1	1	mixed	E1	E1	tense: rédactionnelle	rédactionnel
+réquisitionner	8	o	O/o	1	10	mixed	-1	@1,E2,e6,§1	lax: réquisitionne	réquisitionnais réquisitionnait réquisitionnant réquisitionner
+résonner	3	o	O/o	5	8	mixed	-2,°3	@1,E3,a1,e3	lax: résonne résonnent résonnera résonneraient résonneront	résonna résonnaient résonnait résonnant
+réveillonner	5	o	O/o	3	6	mixed	-1,e1,°1	E3,a1,e1,§1	lax: réveillonne réveillonnerons réveillonné	réveillonnaient réveillonnait réveillonner réveillonnons
+révolutionner	8	o	O/o	3	6	mixed	°3	E2,a1,e3	lax: révolutionnera révolutionnerait révolutionneront	révolutionna révolutionnaient révolutionnait révolutionner
+saboter	3	o	O/o	6	9	mixed	-2,@1,°3	E2,e6,§1	lax: sabotant sabote sabotent saboterai saboterait saboteront	sabotais sabotait saboter sabotez
+sanctionner	5	o	O/o	3	11	mixed	-1,°2	@1,E3,e6,§1	lax: sanctionne sanctionnera sanctionnerait	sanctionnaient sanctionnait sanctionnant sanctionner
+saucissonner	5	o	O/o	1	5	mixed	-1	@1,e4	lax: saucissonne	saucissonnant saucissonner saucissonné saucissonnée
+savonner	3	o	O/o	3	10	mixed	-2,°1	@1,E3,a1,e5	lax: savonne savonnent savonnera	savonna savonnai savonnaient savonnais
+sectionner	5	o	O/o	4	8	mixed	-2,@1,°1	E1,a1,e6	lax: sectionnant sectionne sectionnent sectionnera	sectionna sectionnaient sectionner sectionnez
+sermonner	4	o	O/o	3	8	mixed	-2,°1	@1,E2,a1,e4	lax: sermonne sermonnerai sermonnes	sermonna sermonnaient sermonnait sermonnant
+servomoteur	6	o	O/o	1	1	mixed	91	91	tense: servomoteurs	servomoteur
+siffloter	4	o	O/o	2	8	mixed	-1,°1	@1,E3,a1,e3	lax: sifflote siffloterai	sifflota sifflotais sifflotait sifflotant
+sillonner	3	o	O/o	3	13	mixed	-3	@1,E4,a1,e6,§1	lax: sillonne sillonnent sillonnes	sillonna sillonnaient sillonnais sillonnait
+siphonner	3	o	O/o	1	5	mixed	-1	E1,e4	lax: siphonne	siphonnait siphonner siphonné siphonnée
+siroter	3	o	O/o	3	9	mixed	-2,°1	@1,E3,a1,e3,§1	lax: sirote sirotent siroterais	sirota sirotaient sirotais sirotait
+sismologue	4	o	O/o	1	1	mixed	O1	O1	tense: sismologues	sismologue
+snober	2	o	O/o	3	7	mixed	-2,°1	E2,e5	lax: snobe snobent snoberez	snobaient snobais snober snobez
+socialo	1	o	O/o	2	2	mixed	a2	a2	tense: socialos	socialo
+solenniser	1	o	O/o	1	1	mixed	a1	a1	tense: solennisèrent	solenniser
+solognot	5	o	O/o	1	2	mixed	-1	-2	lax: solognote	solognot solognots
+somalien	1	o	O/o	1	3	mixed	a1	a3	lax: somalienne	somalien somaliens
+sommer	1	o	O/o	3	12	mixed	-3	@1,E3,a1,e6,§1	lax: somme somment sommes	somma sommai sommais sommait
+somnolent	4	o	O/o	1	3	mixed	@1	@3	lax: somnolent	somnolente somnolentes somnolents
+somnoler	1	o	O/o	11	1	mixed	O2,o9	O1	tense: somnolent	somnola somnolai somnolaient somnolais
+somnoler	4	o	O/o	3	9	mixed	-2,°1	@1,E3,a1,e4	lax: somnole somnolent somnolerais	somnola somnolai somnolaient somnolais
+sonner	1	o	O/o	10	15	mixed	-3,°7	@1,E4,a1,e8,§1	lax: sonne sonnent sonnera sonnerai sonnerais sonnerait	sonna sonnai sonnaient sonnais
+sot	1	o	O/o	4	4	mixed	-4	-4	tense: sot sots	sotte sottes
+soupçonner	4	o	O/o	7	17	mixed	-3,°4	@1,E4,a1,e8,§2,°1	lax: soupçonne soupçonnent soupçonnera soupçonnerais soupçonnerait soupçonneront	soupçonna soupçonnai soupçonnaient soupçonnais
+stationner	5	o	O/o	3	12	mixed	-2,°1	@1,E3,a1,e6,§1	lax: stationne stationnent stationnera	stationna stationnaient stationnait stationnant
+stopper	2	o	O/o	6	15	mixed	-3,°3	@1,E4,a1,e7,§2	lax: stoppe stoppent stoppera stopperai stopperiez stoppes	stoppa stoppai stoppaient stoppais
+stéréotyper	5	o	O/o	1	4	mixed	i1	i4	lax: stéréotyper	stéréotypé stéréotypée stéréotypées stéréotypés
+subordonner	6	o	O/o	1	8	mixed	-1	@1,E2,e5	lax: subordonne	subordonnaient subordonnais subordonnant subordonner
+subventionner	7	o	O/o	3	5	mixed	-2,°1	@1,e4	lax: subventionne subventionnent subventionnera	subventionnant subventionner subventionné subventionnée
+suffoquer	3	o	O/o	5	14	mixed	-2,°3	@1,E4,a1,e6,§2	lax: suffoque suffoquent suffoquera suffoquerait suffoqueront	suffoqua suffoquai suffoquaient suffoquais
+supporter	3	o	O/o	29	2	mixed	-3,91,@1,E4,a1,e7,§2,°10	91,e1	tense: supporter	supporta supportai supportaient supportais
+surdimensionné	9	o	O/o	1	1	mixed	e1	e1	tense: surdimensionné	surdimensionnée
+surdéveloppé	8	o	O/o	2	2	mixed	e2	e2	tense: surdéveloppées surdéveloppés	surdéveloppé surdéveloppée
+surnommer	4	o	O/o	2	13	mixed	-2	@1,E4,a1,e4,§1,°2	lax: surnomme surnomment	surnomma surnommaient surnommais surnommait
+surprotéger	5	o	O/o	2	2	mixed	e2	E1,e1	tense: surprotège surprotégeais	surprotéger surprotégé
+survoler	4	o	O/o	6	13	mixed	-2,°4	@1,E3,a2,e5,§2	lax: survole survolent survolera survolerai survolerez survolerons	survola survolaient survolais survolait
+syncoper	3	o	O/o	1	3	mixed	e1	e3	lax: syncoper	syncopé syncopée syncopés
+sécessionniste	6	o	O/o	2	2	mixed	i2	i2	tense: sécessionnistes	sécessionniste
+sélectionner	7	o	O/o	5	9	mixed	-1,@1,°3	E2,a1,e6	lax: sélectionnant sélectionne sélectionnera sélectionnerai sélectionnerais	sélectionna sélectionnaient sélectionnait sélectionner
+tabloïd	4	o	O/o	2	1	mixed	i2	i1	tense: tabloïds	tabloïd
+talonner	3	o	O/o	2	8	mixed	-2	@1,E1,a1,e4,§1	lax: talonne talonnent	talonna talonnait talonnant talonner
+tamponner	3	o	O/o	3	11	mixed	-2,°1	@1,E3,a1,e6	lax: tamponne tamponnent tamponnera	tamponna tamponnai tamponnaient tamponnais
+tisonner	3	o	O/o	2	5	mixed	-2	@1,E1,a1,e2	lax: tisonne tisonnent	tisonna tisonnait tisonnant tisonner
+tonner	1	o	O/o	4	8	mixed	-3,°1	@1,E3,a1,e3	lax: tonne tonnent tonnerait tonnes	tonna tonnaient tonnais tonnait
+torchonner	4	o	O/o	1	2	mixed	-1	E1,e1	lax: torchonne	torchonnait torchonner
+tourbillonner	6	o	O/o	2	9	mixed	-2	@1,E4,a1,e3	lax: tourbillonne tourbillonnent	tourbillonna tourbillonnaient tourbillonnais tourbillonnait
+tournicoter	6	o	O/o	3	7	mixed	-2,°1	@1,E2,a1,e3	lax: tournicote tournicotent tournicoterais	tournicota tournicotais tournicotait tournicotant
+transitionnel	7	o	O/o	1	1	mixed	E1	E1	tense: transitionnel	transitionnelle
+transocéanique	4	o	O/o	1	1	mixed	e1	e1	tense: transocéaniques	transocéanique
+tricoter	4	o	O/o	7	12	mixed	-2,°5	@1,E3,a1,e7	lax: tricote tricotent tricotera tricoterai tricoterait tricoteras	tricota tricotai tricotaient tricotais
+tripoter	4	o	O/o	4	13	mixed	-3,°1	@1,E4,a1,e7	lax: tripote tripotent tripoterai tripotes	tripota tripotaient tripotais tripotait
+troglodytique	5	o	O/o	1	1	mixed	i1	i1	tense: troglodytiques	troglodytique
+tronçonner	4	o	O/o	1	7	mixed	-1	E2,e5	lax: tronçonne	tronçonnaient tronçonnait tronçonner tronçonné
+troquer	2	o	O/o	4	13	mixed	-1,°3	@1,E4,a2,e6	lax: troque troquera troquerai troquerais	troqua troquaient troquais troquait
+trotter	2	o	O/o	5	10	mixed	-3,°2	@1,E3,a1,e3,§2	lax: trotte trottent trottera trotterions trottes	trotta trottaient trottais trottait
+tâtonner	3	o	O/o	4	12	mixed	-2,°2	@1,E4,a2,e4,§1	lax: tâtonne tâtonnent tâtonnera tâtonnerais	tâtonna tâtonnai tâtonnaient tâtonnais
+téléphoner	5	o	O/o	13	13	mixed	-3,°10	@1,E3,a1,e6,§2	tense: téléphona téléphonai téléphonaient téléphonais téléphonait téléphonant	téléphone téléphonent téléphonera téléphonerai
+téléphoné	5	o	O/o	1	3	mixed	e1	e3	lax: téléphonée	téléphoné téléphonées téléphonés
+unidimensionnel	9	o	O/o	1	1	mixed	E1	E1	tense: unidimensionnel	unidimensionnelle
+valorisant	3	o	O/o	1	1	mixed	i1	i1	tense: valorisant	valorisante
+vibrionner	5	o	O/o	1	3	mixed	-1	@1,E2	lax: vibrionne	vibrionnaient vibrionnait vibrionnant
+vieillot	4	o	O/o	2	2	mixed	-2	-2	tense: vieillot vieillots	vieillotte vieillottes
+violent	2	o	O/o	1	5	mixed	@1	@5	lax: violent	violent violente violentes violents
+violer	2	o	O/o	8	12	mixed	-3,°5	@1,E3,a1,e6,§1	lax: viole violent violerai violerais violerait violeras	viola violaient violais violait
+visionner	4	o	O/o	4	7	mixed	-2,°2	@1,a1,e4,§1	lax: visionne visionnent visionnera visionneront	visionna visionnant visionner visionnez
+voguer	1	o	O/o	8	9	mixed	-3,°5	@1,E3,a1,e2,§2	lax: vogue voguent voguera voguerai voguerait voguerions	vogua voguaient voguais voguait
+volanter	1	o	O/o	1	2	mixed	@1	@2	lax: volanté	volante volantes
+voler	1	o	O/o	13	16	mixed	-3,°10	@1,E4,a1,e8,§2	lax: vole volent volera volerai voleraient volerais	vola volai volaient volais
+voleter	1	o	O/o	6	2	mixed	°6	E2	tense: volète volètent	voleta voletaient voletait voletant
+voter	1	o	O/o	11	15	mixed	-3,°8	@1,E4,a1,e7,§2	lax: vote votent votera voterai voterais voterait	vota votaient votais votait
+wisigoth	5	o	O/o	1	1	mixed	-1	-1	tense: wisigoths	wisigothe
+zoreille	1	o	O/o	1	1	mixed	E1	E1	tense: zoreilles	zoreille
+ânonner	2	o	O/o	1	7	mixed	-1	@1,E2,a1,e2,§1	lax: ânonne	ânonna ânonnaient ânonnait ânonnant
+échelonner	4	o	O/o	3	8	mixed	-2,°1	@1,E2,e5	lax: échelonne échelonnent échelonnerons	échelonnaient échelonnait échelonnant échelonner
+écloper	3	o	O/o	1	3	mixed	e1	E1,e2	lax: écloper	éclopait éclopé éclopés
+éclore	3	o	O/o	1	1	mixed	-1	-1	tense: éclose	éclore
+écoper	2	o	O/o	9	10	mixed	-3,°6	E2,a1,e6,§1	lax: écope écopent écopera écoperai écoperait écoperas	écopa écopai écopais écopait
+écosser	2	o	O/o	2	8	mixed	-2	@1,E3,a1,e3	lax: écosse écossent	écossa écossaient écossais écossait
+éducationnel	7	o	O/o	1	1	mixed	E1	E1	tense: éducationnelle	éducationnel
+élaborer	4	o	O/o	3	14	mixed	-2,°1	@1,E3,a1,e7,§2	lax: élabore élaborent élaboreraient	élabora élaborai élaboraient élaborait
+éperonner	4	o	O/o	2	8	mixed	-1,°1	@1,E1,a1,e5	lax: éperonne éperonnera	éperonna éperonnant éperonner éperonnez
+étiologique	5	o	O/o	1	1	mixed	i1	i1	tense: étiologiques	étiologique
+étoffer	2	o	O/o	2	6	mixed	-2	E2,e4	lax: étoffe étoffes	étoffaient étoffait étoffer étoffé
+étonner	2	o	O/o	12	18	mixed	-3,°9	@1,E4,a2,e8,§2,°1	lax: étonne étonnent étonnera étonnerai étonneraient étonnerais	étonna étonnai étonnaient étonnais
+évaporer	4	o	O/o	4	7	mixed	-2,°2	E3,a1,e3	lax: évapore évaporent évaporerait évaporeront	évapora évaporaient évaporais évaporait
+évoquer	2	o	O/o	10	17	mixed	-3,°7	@1,E4,a2,e8,§2	lax: évoque évoquent évoquera évoquerai évoqueraient évoquerait	évoqua évoquai évoquaient évoquais
