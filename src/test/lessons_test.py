@@ -12,9 +12,10 @@ from ..keyboard import Starboard
 from ..word import GramCat, Word
 from util.export_lessons import (
     MAX_LESSON_KEYPRESSES, RECORD_FIELDS, accordRule, buildLessons, chunkStep,
-    eligible, fingerKeypressesOfStroke, loadKeypressGroups, markRule,
-    numberInFrench, phonemeOrderingKey, phonemeRule, phonemeSteps,
-    selectTopWords, starHashCodeOf, verbMarkerRule, verbTenseOf, verbTenseRule,
+    eligible, examplesFallbackByKeypress, fingerKeypressesOfStroke,
+    handOfKeypress, loadKeypressGroups, markRule, numberInFrench,
+    phonemeOrderingKey, phonemeRule, phonemeSteps, selectTopWords,
+    starHashCodeOf, verbMarkerRule, verbTenseOf, verbTenseRule,
 )
 
 STAR_KEY = 10
@@ -165,14 +166,30 @@ def _orthosOf(lesson: dict) -> list[str]:
     return [record["ortho"] for record in lesson["words"]]
 
 
-# A rule-text pool whose records need no Word objects (only phonemeRule reads
-# _keyps; markRule reads _code/_cluster; the verb renderers read nothing).
+# A rule-text pool whose records need no Word objects (phonemeRule reads
+# _keyps/phonology; markRule reads _code/_cluster; the verb renderers read
+# nothing).
 _RULE_POOL = [
-    {"ortho": "sa", "steno": "s*a", "_keyps": frozenset({(8,), (11,)}),
-     "_code": "*", "_cluster": ((8, 11),)},
-    {"ortho": "pa", "steno": "pa", "_keyps": frozenset({(3,), (11,)}),
-     "_code": "", "_cluster": ((8, 11),)},
+    {"ortho": "sa", "steno": "s*a", "phonology": "sa",
+     "_keyps": frozenset({(8,), (11,)}), "_code": "*", "_cluster": ((8, 11),)},
+    {"ortho": "pa", "steno": "pa", "phonology": "pa",
+     "_keyps": frozenset({(3,), (11,)}), "_code": "", "_cluster": ((8, 11),)},
+    {"ortho": "mi", "steno": "mi", "phonology": "mi",
+     "_keyps": frozenset({(12,)}), "_code": "", "_cluster": ((12,),)},
 ]
+
+# A miniature full-stream fixture for the §7.1 example fallback: "te" is the
+# most frequent unmarked record pressing (16,), "ta" the least frequent, and
+# "ti" is marked (code "*") so it never serves as a fallback example.
+_FALLBACK_STREAM = [
+    {"ortho": "ta", "steno": "ta", "phonology": "ta", "frequency": 1.0,
+     "_keyps": frozenset({(16,), (11,)}), "_code": "", "_cluster": ((16, 11),)},
+    {"ortho": "te", "steno": "te", "phonology": "te", "frequency": 9.0,
+     "_keyps": frozenset({(16,)}), "_code": "", "_cluster": ((16,),)},
+    {"ortho": "ti", "steno": "t*i", "phonology": "ti", "frequency": 8.0,
+     "_keyps": frozenset({(16,)}), "_code": "*", "_cluster": ((16,),)},
+]
+_FALLBACK = examplesFallbackByKeypress(_FALLBACK_STREAM)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -530,6 +547,58 @@ class TestNumberInFrench:
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# handOfKeypress (§6/§7.1: left / thumbs / right)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+class TestHandOfKeypress:
+
+    def test_finger_to_hand(self):
+        fa = Starboard._fingerAssignments
+        assert handOfKeypress((3,), fa) == "left"      # lp: left pinky
+        assert handOfKeypress((8,), fa) == "left"      # li: left index
+        assert handOfKeypress((11,), fa) == "thumbs"   # lt: left thumb
+        assert handOfKeypress((13,), fa) == "thumbs"   # rt: right thumb
+        assert handOfKeypress((16,), fa) == "right"    # ri: right index
+        assert handOfKeypress((24,), fa) == "right"    # rp: right pinky
+
+    def test_chord_keypress_takes_its_single_fingers_hand(self):
+        fa = Starboard._fingerAssignments
+        assert handOfKeypress((8, 9), fa) == "left"     # both keys on li
+        assert handOfKeypress((11, 13), fa) == "thumbs"  # lt + rt
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# examplesFallbackByKeypress (§7.1 example fallback)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+class TestExamplesFallbackByKeypress:
+
+    def test_most_frequent_unmarked_first(self):
+        index = examplesFallbackByKeypress(_FALLBACK_STREAM)
+        assert [r["ortho"] for r in index[(16,)]] == ["te", "ta"]
+
+    def test_marked_records_never_serve_as_fallback(self):
+        index = examplesFallbackByKeypress(_FALLBACK_STREAM)
+        assert "ti" not in [r["ortho"] for r in index[(16,)]]
+
+    def test_indexed_by_every_keypress_of_the_record(self):
+        index = examplesFallbackByKeypress(_FALLBACK_STREAM)
+        assert set(index) == {(11,), (16,)}
+
+    def test_frequency_ties_break_on_ortho_then_steno(self):
+        stream = [
+            {"ortho": "zz", "steno": "b", "phonology": "t", "frequency": 2.0,
+             "_keyps": frozenset({(16,)}), "_code": ""},
+            {"ortho": "aa", "steno": "z", "phonology": "t", "frequency": 2.0,
+             "_keyps": frozenset({(16,)}), "_code": ""},
+            {"ortho": "aa", "steno": "a", "phonology": "t", "frequency": 2.0,
+             "_keyps": frozenset({(16,)}), "_code": ""},
+        ]
+        assert [r["steno"] for r in examplesFallbackByKeypress(stream)[(16,)]] \
+            == ["a", "z", "b"]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # Rule-text renderers (§7)
 # ═══════════════════════════════════════════════════════════════════════════════
 
@@ -537,52 +606,63 @@ class TestPhonemeRule:
 
     def test_onset(self, starboard_with_layout: Starboard):
         item = {"keypress": (8,), "phonemes": ("s",), "part": "onset"}
-        assert phonemeRule(item, starboard_with_layout, _RULE_POOL) == {
-            "kind": "phoneme",
-            "text": "La touche s- écrit le son /s/ en début de syllabe (« sa »).",
-            "examples": ["sa"]}
+        assert phonemeRule(item, starboard_with_layout, _RULE_POOL, _FALLBACK) == {
+            "kind": "phoneme", "hand": "left",
+            "text": "La touche s- écrit le son /s/ en début de syllabe (« sa »)."}
 
     def test_nucleus(self, starboard_with_layout: Starboard):
         item = {"keypress": (11,), "phonemes": ("a",), "part": "nucleus"}
-        assert phonemeRule(item, starboard_with_layout, _RULE_POOL) == {
-            "kind": "phoneme",
-            "text": "La touche a- écrit la voyelle /a/ (« sa », « pa »).",
-            "examples": ["sa", "pa"]}
+        assert phonemeRule(item, starboard_with_layout, _RULE_POOL, _FALLBACK) == {
+            "kind": "phoneme", "hand": "thumbs",
+            "text": "La touche a- écrit la voyelle /a/ (« sa », « pa »)."}
 
-    def test_coda_without_examples(self, starboard_with_layout: Starboard):
+    def test_coda_falls_back_to_frequent_stream_words(self, starboard_with_layout: Starboard):
+        # No pool word presses (16,): the §7.1 fallback supplies the most
+        # frequent unmarked stream records pressing it with /t/ -- "ti" is
+        # marked (code "*") and never shows up.
         item = {"keypress": (16,), "phonemes": ("t",), "part": "coda"}
-        assert phonemeRule(item, starboard_with_layout, []) == {
-            "kind": "phoneme",
-            "text": "La touche -t écrit le son /t/ en fin de syllabe.",
-            "examples": []}
+        assert phonemeRule(item, starboard_with_layout, [], _FALLBACK) == {
+            "kind": "phoneme", "hand": "right",
+            "text": "La touche -t écrit le son /t/ en fin de syllabe (« te », « ta »)."}
 
-    def test_multiphone_keypress_names_every_phoneme(self, starboard_with_layout: Starboard):
+    def test_no_examples_anywhere_leaves_the_phoneme_bare(self, starboard_with_layout: Starboard):
+        item = {"keypress": (16,), "phonemes": ("v",), "part": "coda"}
+        assert phonemeRule(item, starboard_with_layout, [], _FALLBACK) == {
+            "kind": "phoneme", "hand": "right",
+            "text": "La touche -t écrit le son /v/ en fin de syllabe."}
+
+    def test_multiphone_keypress_carries_each_phonemes_own_examples(
+            self, starboard_with_layout: Starboard):
+        # "mi" presses (12,) and contains /i/, so /i/ alone gets examples.
         item = {"keypress": (12,), "phonemes": ("i", "e", "o"), "part": "nucleus"}
-        assert phonemeRule(item, starboard_with_layout, []) == {
-            "kind": "phoneme",
-            "text": "La touche i- écrit /i/, /e/ ou /o/ selon la position.",
-            "examples": []}
+        assert phonemeRule(item, starboard_with_layout, _RULE_POOL, _FALLBACK) == {
+            "kind": "phoneme", "hand": "thumbs",
+            "text": "La touche i- écrit /i/ (« mi »), /e/ ou /o/."}
+
+    def test_two_phonemes_join_with_ou(self, starboard_with_layout: Starboard):
+        item = {"keypress": (16,), "phonemes": ("t", "e"), "part": "coda"}
+        assert phonemeRule(item, starboard_with_layout, [], _FALLBACK) == {
+            "kind": "phoneme", "hand": "right",
+            "text": "La touche -t écrit /t/ (« te », « ta ») ou /e/ (« te »)."}
 
     def test_chord_onset(self, starboard_with_layout: Starboard):
         item = {"keypress": (8, 9), "phonemes": ("E",), "part": "onset"}
-        assert phonemeRule(item, starboard_with_layout, []) == {
-            "kind": "phoneme",
-            "text": "Les touches s-, l- pressées ensemble écrivent /E/ en début de syllabe.",
-            "examples": []}
+        assert phonemeRule(item, starboard_with_layout, [], _FALLBACK) == {
+            "kind": "phoneme", "hand": "left",
+            "text": "Les touches s-, l- pressées ensemble écrivent /E/ en début de syllabe."}
 
     def test_two_thumb_nucleus_chord(self, starboard_with_layout: Starboard):
         item = {"keypress": (11, 13), "phonemes": ("ô",), "part": "nucleus"}
-        assert phonemeRule(item, starboard_with_layout, []) == {
-            "kind": "phoneme",
-            "text": "Les touches a-, -e pressées ensemble écrivent la voyelle /ô/.",
-            "examples": []}
+        assert phonemeRule(item, starboard_with_layout, [], _FALLBACK) == {
+            "kind": "phoneme", "hand": "thumbs",
+            "text": "Les touches a-, -e pressées ensemble écrivent la voyelle /ô/."}
 
-    def test_examples_come_from_records_touching_the_keypress(self,
-                                                              starboard_with_layout: Starboard):
+    def test_examples_come_from_pool_records_pressing_the_keypress_with_the_phoneme(
+            self, starboard_with_layout: Starboard):
         item = {"keypress": (3,), "phonemes": ("p",), "part": "onset"}
-        # "sa" does not press key 3, so only "pa" is an example.
-        rule = phonemeRule(item, starboard_with_layout, _RULE_POOL)
-        assert rule["examples"] == ["pa"]
+        # "sa" does not press key 3 and the fallback has nothing for (3,), so
+        # only "pa" is an example.
+        rule = phonemeRule(item, starboard_with_layout, _RULE_POOL, _FALLBACK)
         assert rule["text"].endswith("(« pa »).")
 
 
@@ -598,14 +678,13 @@ class TestAccordRule:
         group = {"chosenKeys": (14,), "markers": ("f",)}
         assert accordRule(group, starboard_with_layout, wordToStrokes, [first]) == {
             "kind": "accord",
-            "text": "La touche -o marque le féminin : sate → sat/o par rapport à sat.",
-            "examples": ["sate"]}
+            "text": "La touche -o marque le féminin : sate → sat/o par rapport à sat."}
 
     def test_empty_pool(self, starboard_with_layout: Starboard):
         _first, wordToStrokes = self._pool()
         group = {"chosenKeys": (14,), "markers": ("f",)}
         assert accordRule(group, starboard_with_layout, wordToStrokes, []) == {
-            "kind": "accord", "text": "La touche -o marque le féminin.", "examples": []}
+            "kind": "accord", "text": "La touche -o marque le féminin."}
 
     def test_duplicate_marker_labels_are_deduplicated(self, starboard_with_layout: Starboard):
         # {nbr_p, p} both render as "le pluriel".
@@ -629,15 +708,13 @@ class TestVerbMarkerRule:
         assert verbMarkerRule(group, starboard_with_layout, _RULE_POOL) == {
             "kind": "verb-markers",
             "text": ("La touche l- marque le conditionnel et l'infinitif : "
-                     "« sa », « pa »."),
-            "examples": ["sa", "pa"]}
+                     "« sa », « pa », « mi ».")}
 
     def test_without_examples(self, starboard_with_layout: Starboard):
         group = {"chosenKeys": (9,), "markers": ("conditionnel", "infinitif")}
         assert verbMarkerRule(group, starboard_with_layout, []) == {
             "kind": "verb-markers",
-            "text": "La touche l- marque le conditionnel et l'infinitif.",
-            "examples": []}
+            "text": "La touche l- marque le conditionnel et l'infinitif."}
 
     def test_person_labels_are_spelled_out(self, starboard_with_layout: Starboard):
         # "1re"/"2e"/"3e" are forbidden: the digits 1 and 2 are IPA-mapped in the
@@ -657,8 +734,7 @@ class TestVerbTenseRule:
         assert rule == {
             "kind": "verb-tense",
             "text": ("Pour l'indicatif présent, les marques de conjugaison sont "
-                     "i-, -o : « sa », « pa »."),
-            "examples": ["sa", "pa"]}
+                     "i-, -o : « sa », « pa », « mi ».")}
 
 
 class TestMarkRule:
@@ -672,8 +748,7 @@ class TestMarkRule:
         ]
         assert markRule("*", starboard, pool) == {
             "kind": "mark",
-            "text": "La marque * (*) distingue sa (s*a) de pa (pa).",
-            "examples": ["sa", "pa"]}
+            "text": "La marque * (*) distingue sa (s*a) de pa (pa)."}
 
     def test_prefers_a_complete_contrast_over_an_unpaired_marked_record(self,
                                                                        starboard: Starboard):
@@ -689,12 +764,11 @@ class TestMarkRule:
         pool = [{"ortho": "lis", "steno": "l*i", "_code": "#", "_cluster": ((9, 12),)}]
         assert markRule("#", starboard, pool) == {
             "kind": "mark",
-            "text": "La marque # (#) s'ajoute à la fin du mot : lis (l*i).",
-            "examples": ["lis"]}
+            "text": "La marque # (#) s'ajoute à la fin du mot : lis (l*i)."}
 
     def test_empty_pool(self, starboard: Starboard):
         assert markRule("*#", starboard, []) == {
-            "kind": "mark", "text": "La marque *# (*, #).", "examples": []}
+            "kind": "mark", "text": "La marque *# (*, #)."}
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -743,6 +817,15 @@ class TestBuildLessonsDocument:
             for record in lesson["words"]:
                 assert tuple(record.keys()) == RECORD_FIELDS
 
+    def test_only_phoneme_rules_carry_a_hand(self, lessons):
+        document, _counts = lessons
+        for lesson in document["lessons"]:
+            for rule in lesson["rules"]:
+                if lesson["track"] == "phonemes":
+                    assert rule["hand"] in ("left", "thumbs", "right")
+                else:
+                    assert "hand" not in rule
+
     def test_new_keys_stay_inside_the_keyboard_and_skip_the_unused_marks(self, lessons):
         document, _counts = lessons
         for lesson in document["lessons"]:
@@ -778,6 +861,7 @@ class TestBuildLessonsDocument:
         for lesson in document["lessons"]:
             strings += [lesson["title"], lesson["sectionTitle"]]
             strings += [rule["text"] for rule in lesson["rules"]]
+            strings += [rule.get("hand", "") for rule in lesson["rules"]]
         for s in strings:
             assert "1re" not in s and "2e personne" not in s and "3e personne" not in s
             assert "Règles d'abréviation" not in s
@@ -799,25 +883,37 @@ class TestBuildLessonsPhonemesTrack:
         document, _counts = lessons
         lesson = _lessonOf(document, "phonemes-01")
         assert lesson["sectionTitle"] == "Les premières touches"
-        assert lesson["title"] == "Leçon un : a, s, t, i"
+        # The title names the introduced keypresses' KEY names, ordered by hand
+        # group gauche -> pouces -> droite, within a group in deal order:
+        # s- (left), a- and i- (thumbs), -t (right).
+        assert lesson["title"] == "Leçon un : s-, a-, i-, -t"
         assert lesson["kind"] == "phonemes"
         # Round-robin deal: nucleus (11), onset (8), coda (16), nucleus (12).
         assert lesson["newKeys"] == [8, 11, 12, 16]
         assert lesson["newChords"] == []
 
-    def test_first_lesson_rules_in_deal_order(self, lessons):
+    def test_titles_order_key_names_by_hand_group(self, lessons):
+        document, _counts = lessons
+        assert _lessonOf(document, "phonemes-02")["title"] \
+            == "Leçon deux : l-, -e, -o, -R"
+        assert _lessonOf(document, "phonemes-03")["title"] == "Leçon trois : p-"
+
+    def test_first_lesson_rules_in_deal_order_with_hands(self, lessons):
         document, _counts = lessons
         rules = _lessonOf(document, "phonemes-01")["rules"]
         assert rules == [
-            {"kind": "phoneme",
-             "text": "La touche a- écrit la voyelle /a/ (« sa »).", "examples": ["sa"]},
-            {"kind": "phoneme",
-             "text": "La touche s- écrit le son /s/ en début de syllabe (« dis », « sa »).",
-             "examples": ["dis", "sa"]},
-            {"kind": "phoneme",
-             "text": "La touche -t écrit le son /t/ en fin de syllabe.", "examples": []},
-            {"kind": "phoneme",
-             "text": "La touche i- écrit la voyelle /i/ (« dis »).", "examples": ["dis"]},
+            {"kind": "phoneme", "hand": "thumbs",
+             "text": "La touche a- écrit la voyelle /a/ (« sa »)."},
+            {"kind": "phoneme", "hand": "left",
+             "text": "La touche s- écrit le son /s/ en début de syllabe (« sa »)."},
+            # No pool word presses (16,): the §7.1 fallback supplies the most
+            # frequent unmarked stream words pressing it with /t/ ("pâte" is
+            # star-marked and never shows).
+            {"kind": "phoneme", "hand": "right",
+             "text": ("La touche -t écrit le son /t/ en fin de syllabe "
+                      "(« sates », « sate », « pat »).")},
+            {"kind": "phoneme", "hand": "thumbs",
+             "text": "La touche i- écrit la voyelle /i/ (« dis »)."},
         ]
 
     def test_lesson_words_use_only_covered_keypresses(self, lessons):
@@ -844,17 +940,19 @@ class TestBuildLessonsPhonemesTrack:
     def test_chord_lessons_declare_new_chords(self, lessons):
         document, _counts = lessons
         lesson4 = _lessonOf(document, "phonemes-04")
-        assert lesson4["title"] == "Leçon quatre : E"
+        assert lesson4["title"] == "Leçon quatre : s-, l-"
         assert lesson4["newKeys"] == [8, 9]
         assert lesson4["newChords"] == [[8, 9]]
-        assert lesson4["rules"][0]["text"] \
-            == "Les touches s-, l- pressées ensemble écrivent /E/ en début de syllabe."
+        assert lesson4["rules"][0] == {
+            "kind": "phoneme", "hand": "left",
+            "text": "Les touches s-, l- pressées ensemble écrivent /E/ en début de syllabe."}
         lesson5 = _lessonOf(document, "phonemes-05")
-        assert lesson5["title"] == "Leçon cinq : ô"
+        assert lesson5["title"] == "Leçon cinq : a-, -e"
         assert lesson5["newKeys"] == [11, 13]
         assert lesson5["newChords"] == [[11, 13]]
-        assert lesson5["rules"][0]["text"] \
-            == "Les touches a-, -e pressées ensemble écrivent la voyelle /ô/."
+        assert lesson5["rules"][0] == {
+            "kind": "phoneme", "hand": "thumbs",
+            "text": "Les touches a-, -e pressées ensemble écrivent la voyelle /ô/."}
 
 
 class TestBuildLessonsAccordTrack:
@@ -867,16 +965,14 @@ class TestBuildLessonsAccordTrack:
         assert _orthosOf(lesson1) == ["sate"]
         assert lesson1["rules"] == [{
             "kind": "accord",
-            "text": "La touche -o marque le féminin : sate → sat/o par rapport à sat.",
-            "examples": ["sate"]}]
+            "text": "La touche -o marque le féminin : sate → sat/o par rapport à sat."}]
         lesson2 = _lessonOf(document, "accord-02")
         assert lesson2["title"] == "Leçon deux : le pluriel"
         assert lesson2["newKeys"] == [17]
         assert _orthosOf(lesson2) == ["sates"]
         assert lesson2["rules"] == [{
             "kind": "accord",
-            "text": "La touche -R marque le pluriel : sates → sat/-R par rapport à sat.",
-            "examples": ["sates"]}]
+            "text": "La touche -R marque le pluriel : sates → sat/-R par rapport à sat."}]
 
     def test_acced_record_ships_its_marked_strokes(self, lessons):
         document, _counts = lessons
@@ -896,13 +992,10 @@ class TestBuildLessonsVerbeTrack:
         assert _orthosOf(lesson) == ["lise", "lire", "dis"]
         assert lesson["rules"] == [
             {"kind": "verb-markers",
-             "text": ("La touche l- marque le conditionnel et l'infinitif : "
-                      "« lise », « lire », « dis »."),
-             "examples": ["lise", "lire", "dis"]},
+             "text": "La touche l- marque le conditionnel et l'infinitif : "
+                     "« lise », « lire », « dis »."},
             {"kind": "verb-markers",
-             "text": ("La touche i- marque la deuxième personne : "
-                      "« lise », « lire », « dis »."),
-             "examples": ["lise", "lire", "dis"]},
+             "text": "La touche i- marque la deuxième personne : « lise », « lire », « dis »."},
         ]
         # Every tense pool has fewer than 10 records: all 8 tense lessons drop.
         assert counts["verbe"] == 1
@@ -929,8 +1022,7 @@ class TestBuildLessonsDesambiguationTrack:
                                      "pat", "pâte"]
         assert lesson["rules"] == [{
             "kind": "mark",
-            "text": "La marque * (*) distingue pâ (p*a) de pa (pa).",
-            "examples": ["pa", "pâ", "sa"]}]
+            "text": "La marque * (*) distingue pâ (p*a) de pa (pa)."}]
 
     def test_empty_codes_drop(self, lessons):
         # No record carries # or *#: both lessons drop (pool < 10), leaving the
@@ -957,8 +1049,7 @@ class TestBuildLessonsAffixesTrack:
                           "sectionTitle": "Affixes", "title": "Leçon un : à venir",
                           "kind": "affixes", "newKeys": [], "newChords": [],
                           "rules": [{"kind": "affixes",
-                                     "text": "Abréviations d'affixes : à venir.",
-                                     "examples": []}],
+                                     "text": "Abréviations d'affixes : à venir."}],
                           "words": []}
         assert counts["affixes"] == 1
 

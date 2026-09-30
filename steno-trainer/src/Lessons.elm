@@ -1,19 +1,22 @@
-module Lessons exposing (Lesson, Lessons, Rule, Track, decoder, viewIntro, viewList)
+module Lessons exposing (Lesson, Lessons, Rule, Track, decoder, viewIntro, viewList, viewPrevNext)
 
 {-| Lesson mode: the fixed learner progression exported by
 `util/export_lessons.py` (`lessons.json`) -- tracks of lessons, each lesson
 introducing new keys/chords with a French rule text and example words, then
 drilling its own word pool through the same `Drill` engine as the Words mode.
-Every learner-facing string (track and lesson titles, rule texts, examples)
-comes from the JSON; only the navigation chrome is English, like the other
-modes. The word records reuse the `practice-words.json` shape verbatim
+Every learner-facing string (track and lesson titles, rule texts, the
+examples embedded in them) comes from the JSON; only the navigation chrome
+("Start drill", "← Lessons", "Previous/Next lesson") is English, like the
+other modes. The word records reuse the `practice-words.json` shape verbatim
 (spec `docs/specs/lessons.md` §6), so `Drill.wordDecoder` decodes them
 unchanged. Fetched only when the mode is first opened (see `Main.elm`).
 Rule texts, lesson/section/track titles and track descriptions embed
 X-SAMPA (phoneme spans, key names, steno examples), so both views apply
 the caller's `render` (notation -> string, `Notation.render`) to every
-such string -- except rule `examples`, which are orthographies, never
-phonetics.
+such string. Phoneme rules carry a `hand` group; the intro renders them
+under the fixed French headers "Main gauche", "Les pouces", "Main droite"
+(themselves free of every IPA-mapped character, spec §8), in that order,
+skipping empty groups.
 -}
 
 import Drill exposing (PracticeWord)
@@ -21,7 +24,7 @@ import Html exposing (Html, button, div, h2, h3, li, p, text, ul)
 import Html.Attributes exposing (class, classList, disabled)
 import Html.Events exposing (onClick)
 import Json.Decode as D
-import Json.Decode.Pipeline exposing (required)
+import Json.Decode.Pipeline exposing (optional, required)
 import Keyboard exposing (KeyInfo)
 import Set exposing (Set)
 
@@ -36,7 +39,7 @@ type alias Track =
 type alias Rule =
     { kind : String
     , text : String
-    , examples : List String
+    , hand : Maybe String
     }
 
 
@@ -95,7 +98,16 @@ ruleDecoder =
     D.succeed Rule
         |> required "kind" D.string
         |> required "text" D.string
-        |> required "examples" (D.list D.string)
+        |> optional "hand" (D.nullable D.string) Nothing
+
+
+{-| The hand groups of the intro's rule grouping, in display order: left
+non-thumb fingers, then the thumbs of both sides, then right non-thumb
+fingers. The labels are fixed French strings -- no IPA-mapped character
+(the IPA toggle rewrites whole rendered strings, spec §8). -}
+handGroups : List ( String, String )
+handGroups =
+    [ ( "left", "Main gauche" ), ( "thumbs", "Les pouces" ), ( "right", "Main droite" ) ]
 
 
 {-| The lesson picker: every track in export order with its title and
@@ -153,21 +165,23 @@ viewLessonButton config lesson =
         ]
 
 
-{-| What a lesson introduces, before drilling it: its rules (the French text
-and its example words), a keyboard rendering with the lesson's `newKeys` and
-every key of its `newChords` lit, and the button that starts the drill
-(handled in `Main.elm`, which shuffles the lesson's `words` into the shared
-`Drill` engine). `keys` are the layout's keys already notation-mapped (see
-`Notation.layout`); a lesson still loading its layout simply renders no
-keyboard. `render` (the notation's string rewriter, `Notation.render`) is
-applied to the section title, the lesson title and every rule text -- their
-X-SAMPA content must follow the notation toggle -- but not to rule examples
-(orthographies, never phonetics). Lessons with an empty pool (the affixes
-stub, a thin early phoneme lesson) disable the button -- there is nothing to
-drill yet. -}
+{-| What a lesson introduces, before drilling it: its rules (the French text,
+examples embedded inline per phoneme), a keyboard rendering with the lesson's
+`newKeys` and every key of its `newChords` lit, and the button that starts the
+drill (handled in `Main.elm`, which shuffles the lesson's `words` into the
+shared `Drill` engine). `onPrev`/`onNext` step through the global lesson order
+(`viewPrevNext`); `Nothing` disables the button at the two ends. `keys` are
+the layout's keys already notation-mapped (see `Notation.layout`); a lesson
+still loading its layout simply renders no keyboard. `render` (the notation's
+string rewriter, `Notation.render`) is applied to the section title, the
+lesson title and every rule text -- their X-SAMPA content must follow the
+notation toggle. Lessons with an empty pool (the affixes stub, a thin early
+phoneme lesson) disable the drill button -- there is nothing to drill yet. -}
 viewIntro :
     { onBack : msg
     , onStart : List PracticeWord -> msg
+    , onPrev : Maybe msg
+    , onNext : Maybe msg
     , render : String -> String
     , keys : List KeyInfo
     }
@@ -176,10 +190,12 @@ viewIntro :
 viewIntro config lesson =
     div [ class "lesson-intro" ]
         [ p [ class "lesson-back" ]
-            [ button [ onClick config.onBack ] [ text "← Lessons" ] ]
+            ([ button [ onClick config.onBack ] [ text "← Lessons" ] ]
+                ++ viewPrevNext config.onPrev config.onNext
+            )
         , p [ class "lesson-section-title" ] [ text (config.render lesson.sectionTitle) ]
         , h2 [ class "lesson-title" ] [ text (config.render lesson.title) ]
-        , ul [ class "lesson-rules" ] (List.map (viewRule config.render) lesson.rules)
+        , viewRules config.render lesson.rules
         , div [ class "lesson-keyboard" ]
             [ Keyboard.view
                 { highlighted = highlightedKeys lesson
@@ -197,24 +213,71 @@ viewIntro config lesson =
         ]
 
 
-{-| The rule texts embed their examples inline ("... (« rat », « rang »)"),
-so the examples line is the compact reminder of the words to look for, not a
-duplicate reading of the text. `render` rewrites the text's X-SAMPA
-(phoneme spans, key names, steno examples) per the notation toggle; the
-examples line stays as exported -- orthographies, never phonetics. -}
+{-| The lesson's rules: phoneme rules (those carrying a `hand` group) render
+grouped under the three hand headers in handGroups order, skipping empty
+groups and keeping each group's internal order as exported; rules without a
+hand (the marker tracks) render as a plain list. -}
+viewRules : (String -> String) -> List Rule -> Html msg
+viewRules render rules =
+    if List.all (\rule -> rule.hand == Nothing) rules then
+        ul [ class "lesson-rules" ] (List.map (viewRule render) rules)
+
+    else
+        div [ class "lesson-rules" ]
+            (List.filterMap (viewHandGroup render rules) handGroups)
+
+
+viewHandGroup :
+    (String -> String)
+    -> List Rule
+    -> ( String, String )
+    -> Maybe (Html msg)
+viewHandGroup render rules ( hand, label ) =
+    let
+        handRules =
+            List.filter (\rule -> rule.hand == Just hand) rules
+    in
+    if List.isEmpty handRules then
+        Nothing
+
+    else
+        Just <|
+            div [ class "lesson-hand-group" ]
+                [ h3 [ class "lesson-hand-title" ] [ text (label ++ " :") ]
+                , ul [ class "lesson-hand-rules" ]
+                    (List.map (viewRule render) handRules)
+                ]
+
+
+{-| One rule line: the French text with its examples already embedded by the
+exporter. `render` rewrites the text's X-SAMPA (phoneme spans, key names,
+steno examples) per the notation toggle. -}
 viewRule : (String -> String) -> Rule -> Html msg
 viewRule render rule =
     li [ class "lesson-rule" ]
-        ([ p [ class "lesson-rule-text" ] [ text (render rule.text) ] ]
-            ++ (if List.isEmpty rule.examples then
-                    []
+        [ p [ class "lesson-rule-text" ] [ text (render rule.text) ] ]
 
-                else
-                    [ p [ class "lesson-rule-examples" ]
-                        [ text (String.join ", " rule.examples) ]
-                    ]
-               )
-        )
+
+{-| The "Previous lesson"/"Next lesson" pair (English chrome, like "Start
+drill"): `Nothing` disables the button -- never hides it -- at the two ends
+of the global lesson order. Shared by the intro and the drill page; both
+navigate to the target lesson's intro, handled in `Main.elm`. -}
+viewPrevNext : Maybe msg -> Maybe msg -> List (Html msg)
+viewPrevNext onPrev onNext =
+    [ navButton "← Previous lesson" onPrev
+    , text " "
+    , navButton "Next lesson →" onNext
+    ]
+
+
+navButton : String -> Maybe msg -> Html msg
+navButton label maybeMsg =
+    case maybeMsg of
+        Just msg ->
+            button [ class "lesson-nav-button", onClick msg ] [ text label ]
+
+        Nothing ->
+            button [ class "lesson-nav-button", disabled True ] [ text label ]
 
 
 {-| Every key the lesson introduces: its single keys plus every key of its

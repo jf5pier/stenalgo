@@ -9,7 +9,11 @@ effort (the `PositionWeights` sum of `Starboard.getStrokeCost`'s decomposition, 
 its shape-cost term and multi-finger discount), groups them into steps at each distinct
 `(weightSum, nFingers)`, deals each step round-robin over syllabic part (so an early
 lesson mixes a vowel with consonants and can already write words) and chunks it into
-lessons of at most 4 keypresses. `accord` introduces the gender/number Keypress Groups,
+lessons of at most 4 keypresses. Each phoneme rule carries its keypress's hand group
+("left"/"thumbs"/"right") for the intro view's "Main gauche"/"Les pouces"/"Main droite"
+grouping, and attaches every phoneme's examples directly after that phoneme -- falling
+back, when the lesson's own pool has no word for a phoneme, to the most frequent
+unmarked stream records that press the keypress with it. `accord` introduces the gender/number Keypress Groups,
 `verbe` the conjugation groups (one marker lesson) then one lesson per mood/tense,
 `desambiguation` the star/hash mark codes in mark-complexity order, and `affixes` is a
 placeholder for the (separate) affix-abbreviation work.
@@ -56,6 +60,10 @@ MAX_LESSON_KEYPRESSES = 4  # phoneme-track chunk size (§2.5)
 
 FINGER_RANK = {"lt": 0, "rt": 0, "li": 1, "ri": 1, "lm": 2, "rm": 2,
                "lr": 3, "rr": 3, "lp": 4, "rp": 4}
+# The three hand groups of the intro view's rule grouping (gauche -> pouces ->
+# droite), in display order; a keypress belongs to the group of its single
+# finger (`Starboard._fingerAssignments`; the lt/rt keys 11-14 are the thumbs).
+HANDS = ("left", "thumbs", "right")
 PART_ORDER = ("nucleus", "onset", "coda")  # PART_RANK order; also the round-robin deal order
 PART_RANK = {"nucleus": 0, "onset": 1, "coda": 2}
 FINGER_FULL_NAME = {"lp": "leftPinky", "lr": "leftRing", "lm": "leftMiddle",
@@ -163,6 +171,17 @@ def fingerKeypressesOfStroke(stroke: tuple[int, ...], fingerAssignments: list[st
     for key in set(stroke):
         keysByFinger.setdefault(fingerAssignments[key], []).append(key)
     return [tuple(sorted(keysByFinger[finger])) for finger in sorted(keysByFinger)]
+
+
+def handOfKeypress(keypress: Keypress, fingerAssignments: list[str]) -> str:
+    """The hand group of a keypress: "left" or "right" for the non-thumb fingers,
+    "thumbs" for the lt/rt keys (a keypress belongs to one finger). The intro view
+    groups rules under the fixed French headers "Main gauche"/"Les pouces"/"Main
+    droite" in this order (HANDS)."""
+    finger = fingerAssignments[keypress[0]]
+    if finger in ("lt", "rt"):
+        return "thumbs"
+    return "left" if finger.startswith("l") else "right"
 
 
 def _syllabicPartOf(starboard: Starboard, key: int) -> str | None:
@@ -439,35 +458,91 @@ def _keyNames(starboard: Starboard, keys) -> str:
     return ", ".join(starboard.keyDisplayName(key) for key in keys)
 
 
-def _phonemeList(phonemes: tuple[str, ...]) -> str:
-    return ", ".join(f"/{p}/" for p in phonemes[:-1]) + f" ou /{phonemes[-1]}/"
+def examplesFallbackByKeypress(stream: list[dict]) -> dict[Keypress, tuple[dict, ...]]:
+    """Per keypress, the unmarked records of the FULL candidate stream that press it,
+    most frequent first (`(-frequency, ortho, steno)`): the §7.1 example fallback for
+    a phoneme the lesson's own pool covers with no word -- every phoneme of every
+    introduced keypress must get at least one example. Marked records (`_code` != "")
+    never serve as fallback examples: a marked word must not appear before the
+    desambiguation track (§8)."""
+    byFrequency = sorted(stream, key=lambda r: (-r["frequency"], r["ortho"], r["steno"]))
+    index: dict[Keypress, list[dict]] = {}
+    for record in byFrequency:
+        if record["_code"] != "":
+            continue
+        for keypress in sorted(record["_keyps"]):
+            index.setdefault(keypress, []).append(record)
+    return {keypress: tuple(records) for keypress, records in index.items()}
 
 
-def phonemeRule(item: dict, starboard: Starboard, pool: list[dict]) -> dict:
-    """One key, one part, one phoneme (§7.1). A multi-phoneme keypress is atomic, so it
-    gets one rule; chord keypresses name every key."""
+def _examplesByPhoneme(item: dict, pool: list[dict],
+                       fallbackByKeypress: dict[Keypress, tuple[dict, ...]]) -> dict[str, list[str]]:
+    """Up to 3 example orthographies per phoneme of the keypress (§7.1): first the
+    lesson's own pool records that press the keypress and contain the phoneme in
+    their phonology; when a phoneme has none, the most frequent fallback records
+    (`examplesFallbackByKeypress`) that press the keypress with that phoneme."""
+    keypress, phonemes = item["keypress"], item["phonemes"]
+    examples: dict[str, list[str]] = {}
+    for phoneme in phonemes:
+        orthos: list[str] = []
+        for record in pool:
+            if keypress in record["_keyps"] and phoneme in record["phonology"] \
+                    and record["ortho"] not in orthos:
+                orthos.append(record["ortho"])
+        if not orthos:
+            for record in fallbackByKeypress.get(keypress, ()):
+                if phoneme in record["phonology"] and record["ortho"] not in orthos:
+                    orthos.append(record["ortho"])
+        examples[phoneme] = orthos[:3]
+    return examples
+
+
+def _inlinePhoneme(phoneme: str, orthos: list[str]) -> str:
+    """`/{phoneme}/` immediately followed by its own parenthesized examples."""
+    return f"/{phoneme}/" + (f" ({_quotedExamples(orthos)})" if orthos else "")
+
+
+def _multiPhonemeText(phonemes: tuple[str, ...],
+                      examplesByPhoneme: dict[str, list[str]]) -> str:
+    """Each phoneme of an atomic multi-phoneme keypress with its own examples,
+    joined ", " and " ou " before the last: `/j/ (« oeil »), /b/ (« arabe ») ou
+    /w/ (« watt »)`."""
+    parts = [_inlinePhoneme(phoneme, examplesByPhoneme[phoneme]) for phoneme in phonemes]
+    return ", ".join(parts[:-1]) + f" ou {parts[-1]}"
+
+
+def phonemeRule(item: dict, starboard: Starboard, pool: list[dict],
+                fallbackByKeypress: dict[Keypress, tuple[dict, ...]]) -> dict:
+    """One key, one part, one phoneme (§7.1); each phoneme's examples sit directly
+    after it. A multi-phoneme keypress is atomic, so it gets one rule listing every
+    phoneme with its own examples; chord keypresses name every key. The rule carries
+    its keypress's hand group (left/thumbs/right) for the intro view's grouping."""
     keypress, phonemes, part = item["keypress"], item["phonemes"], item["part"]
-    examples = [record["ortho"] for record in pool if keypress in record["_keyps"]][:3]
-    suffix = f" ({_quotedExamples(examples)})" if examples else ""
+    examples = _examplesByPhoneme(item, pool, fallbackByKeypress)
     names = _keyNames(starboard, keypress)
+    hand = handOfKeypress(keypress, starboard._fingerAssignments)
     if len(phonemes) > 1:
-        phonemeText = _phonemeList(phonemes)
+        detail = _multiPhonemeText(phonemes, examples)
         if len(keypress) == 1:
-            text = f"La touche {names} écrit {phonemeText} selon la position{suffix}."
+            text = f"La touche {names} écrit {detail}."
         else:
-            text = f"Les touches {names} pressées ensemble écrivent {phonemeText} selon la position{suffix}."
+            text = f"Les touches {names} pressées ensemble écrivent {detail}."
     elif part == "nucleus":
+        ex0 = examples[phonemes[0]]
+        suffix = f" ({_quotedExamples(ex0)})" if ex0 else ""
         if len(keypress) == 1:
             text = f"La touche {names} écrit la voyelle /{phonemes[0]}/{suffix}."
         else:
             text = f"Les touches {names} pressées ensemble écrivent la voyelle /{phonemes[0]}/{suffix}."
     else:
         position = "début" if part == "onset" else "fin"
+        ex0 = examples[phonemes[0]]
+        suffix = f" ({_quotedExamples(ex0)})" if ex0 else ""
         if len(keypress) == 1:
             text = f"La touche {names} écrit le son /{phonemes[0]}/ en {position} de syllabe{suffix}."
         else:
             text = f"Les touches {names} pressées ensemble écrivent /{phonemes[0]}/ en {position} de syllabe{suffix}."
-    return {"kind": "phoneme", "text": text, "examples": examples}
+    return {"kind": "phoneme", "hand": hand, "text": text}
 
 
 def _accordMarkerText(markers: tuple[str, ...]) -> str:
@@ -484,36 +559,32 @@ def accordRule(group: dict, starboard: Starboard, wordToStrokes: dict[Word, Stro
     """§7.2: the marked form contrasted with the same word's phonetic-theory steno."""
     touche = _keyNames(starboard, group["chosenKeys"])
     marker = _accordMarkerText(group["markers"])
-    examples = _exampleOrthos(pool)
     if not pool:
-        return {"kind": "accord",
-                "text": f"La touche {touche} marque {marker}.", "examples": []}
+        return {"kind": "accord", "text": f"La touche {touche} marque {marker}."}
     first = pool[0]
     base = starboard.strokesToRTFCRE(canonicalizeStrokes(wordToStrokes[first["_word"]]))
     text = (f"La touche {touche} marque {marker} : "
             f"{first['ortho']} → {first['steno']} par rapport à {base}.")
-    return {"kind": "accord", "text": text, "examples": examples}
+    return {"kind": "accord", "text": text}
 
 
 def verbMarkerRule(group: dict, starboard: Starboard, pool: list[dict]) -> dict:
     """§7.3."""
     touche = _keyNames(starboard, group["chosenKeys"])
     markers = " et ".join(VERB_MARKER_LABELS[m] for m in group["markers"])
-    examples = _exampleOrthos(pool)
-    quoted = _quotedExamples(examples)
+    quoted = _quotedExamples(_exampleOrthos(pool))
     text = (f"La touche {touche} marque {markers} : {quoted}." if quoted
             else f"La touche {touche} marque {markers}.")
-    return {"kind": "verb-markers", "text": text, "examples": examples}
+    return {"kind": "verb-markers", "text": text}
 
 
 def verbTenseRule(tenseLabel: str, touchedKeys: list[int], starboard: Starboard,
                   pool: list[dict]) -> dict:
     """§7.4: {touches} are the marker keys the tense's selected records actually press."""
-    examples = _exampleOrthos(pool)
     touches = _keyNames(starboard, touchedKeys)
     text = (f"Pour {tenseLabel}, les marques de conjugaison sont {touches} : "
-            f"{_quotedExamples(examples)}.")
-    return {"kind": "verb-tense", "text": text, "examples": examples}
+            f"{_quotedExamples(_exampleOrthos(pool))}.")
+    return {"kind": "verb-tense", "text": text}
 
 
 def markRule(code: str, starboard: Starboard, pool: list[dict]) -> dict:
@@ -537,7 +608,7 @@ def markRule(code: str, starboard: Starboard, pool: list[dict]) -> dict:
                 f"{marked['ortho']} ({marked['steno']}).")
     else:
         text = f"La marque {code} ({touches})."
-    return {"kind": "mark", "text": text, "examples": _exampleOrthos(pool)}
+    return {"kind": "mark", "text": text}
 
 
 # --- Lesson assembly (§4, §5, §6) ----------------------------------------------
@@ -570,6 +641,7 @@ def buildLessons(
     `(document, perTrackLessonCounts)`."""
     stream, skippedWords, invalidRecords = buildRecordStream(
         starboard, disambiguatedTheory, wordToStrokes, readingsByWord, keypressGroups)
+    fallbackByKeypress = examplesFallbackByKeypress(stream)
     clusterMaxFrequency: dict[tuple, float] = {}
     for record in stream:
         cluster = record["_cluster"]
@@ -601,12 +673,19 @@ def buildLessons(
             coveredKeypresses = newCovered  # the lesson's own pool may use its new keys
             pool = poolTop(lambda record: True)
             index = counters.get("phonemes", 0) + 1
-            title = "Leçon {0} : {1}".format(
-                numberInFrench(index), ", ".join(item["phonemes"][0] for item in chunk))
+            # The title names the introduced keypresses' key names (keyboard-layout
+            # keys[i].name), ordered by hand group (gauche -> pouces -> droite), within
+            # a group in the exporter's step order (§7.6).
+            keyNamesByHand = [_keyNames(starboard, item["keypress"])
+                              for hand in HANDS
+                              for item in chunk
+                              if handOfKeypress(item["keypress"], starboard._fingerAssignments) == hand]
+            title = f"Leçon {numberInFrench(index)} : {', '.join(keyNamesByHand)}"
             _emitLesson(lessons, counters, "phonemes", title, "phonemes", sectionTitle,
                         sorted({key for item in chunk for key in item["keypress"]}),
                         [sorted(item["keypress"]) for item in chunk if len(item["keypress"]) >= 2],
-                        [phonemeRule(item, starboard, pool) for item in chunk],
+                        [phonemeRule(item, starboard, pool, fallbackByKeypress)
+                         for item in chunk],
                         _wordsOf(pool))
 
     # 4.2 accord
@@ -699,8 +778,7 @@ def buildLessons(
     # 4.5 affixes (stub)
     _emitLesson(lessons, counters, "affixes", "Leçon un : à venir", "affixes",
                 TRACK_TITLES["affixes"], [], [],
-                [{"kind": "affixes", "text": "Abréviations d'affixes : à venir.",
-                  "examples": []}],
+                [{"kind": "affixes", "text": "Abréviations d'affixes : à venir."}],
                 [])
 
     trackOrder = {trackId: i for i, (trackId, _t, _d) in enumerate(TRACKS)}
