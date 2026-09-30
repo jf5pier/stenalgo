@@ -62,7 +62,7 @@ def loadRecords(starboard: Starboard, refresh: bool) -> list[A.WordRecord]:
         with open(RECORDS, "rb") as f:
             return pickle.load(f)  # type: ignore[no-any-return]
     t = time.time()
-    phonetic, disambiguated = loadPhoneticAndDisambiguatedTheory(starboard)
+    phonetic, disambiguated, _wordToStrokes, _wordsByOrthoLemme = loadPhoneticAndDisambiguatedTheory(starboard)
     records, skipped = A.extractRecords(phonetic, disambiguated)
     print(f"records: {len(records)} extracted, {skipped} skipped ({time.time() - t:.0f}s)")
     with open(RECORDS, "wb") as f:

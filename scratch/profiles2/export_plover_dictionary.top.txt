@@ -1,0 +1,61 @@
+Tue Sep 29 18:30:01 2026    scratch/profiles2/export_plover_dictionary.pstats
+
+         13699727 function calls (13697408 primitive calls) in 15.778 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1141 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    133/1    0.009    0.000   15.778   15.778 {built-in method builtins.exec}
+        1    0.000    0.000   15.778   15.778 <string>:1(<module>)
+        1    0.000    0.000   15.778   15.778 <frozen runpy>:206(run_module)
+        1    0.000    0.000   15.775   15.775 <frozen runpy>:65(_run_code)
+        1    0.210    0.210   15.775   15.775 /home/jfsp/stenalgo-fix/util/export_plover_dictionary.py:1(<module>)
+        1    0.701    0.701   15.478   15.478 /home/jfsp/stenalgo-fix/util/export_plover_dictionary.py:36(main)
+        1    0.332    0.332    8.772    8.772 /home/jfsp/stenalgo-fix/util/_theoryio.py:128(loadDisambiguatedTheory)
+        1    0.000    0.000    8.440    8.440 /home/jfsp/stenalgo-fix/util/_theoryio.py:152(loadPhoneticAndDisambiguatedTheory)
+        7    6.321    0.903    6.337    0.905 {built-in method _pickle.load}
+        1    1.646    1.646    4.441    4.441 /home/jfsp/stenalgo-fix/util/_theoryio.py:42(_loadDictionaryAndPhoneticTheory)
+        1    0.000    0.000    3.998    3.998 /home/jfsp/stenalgo-fix/util/_theoryio.py:103(loadCachedDisambiguatedTheory)
+   190253    1.765    0.000    3.297    0.000 /home/jfsp/stenalgo-fix/util/_stenorender.py:40(renderFinalStrokesToRTFCRE)
+        1    0.378    0.378    1.790    1.790 /home/jfsp/stenalgo-fix/util/_theoryio.py:19(loadDictionary)
+        1    0.293    0.293    1.654    1.654 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:493(findFinalCollisions)
+   171603    0.884    0.000    1.317    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:32(canonicalizeStrokes)
+        1    0.190    0.190    0.843    0.843 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/__init__.py:120(dump)
+   636659    0.378    0.000    0.711    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:721(strokesToRTFCRE)
+   686416    0.156    0.000    0.555    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:426(_iterencode)
+   755866    0.316    0.000    0.433    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:49(<genexpr>)
+   686416    0.217    0.000    0.399    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:339(_iterencode_dict)
+
+
+===== sort by tottime =====
+Tue Sep 29 18:30:01 2026    scratch/profiles2/export_plover_dictionary.pstats
+
+         13699727 function calls (13697408 primitive calls) in 15.778 seconds
+
+   Ordered by: internal time
+   List reduced from 1141 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        7    6.321    0.903    6.337    0.905 {built-in method _pickle.load}
+   190253    1.765    0.000    3.297    0.000 /home/jfsp/stenalgo-fix/util/_stenorender.py:40(renderFinalStrokesToRTFCRE)
+        1    1.646    1.646    4.441    4.441 /home/jfsp/stenalgo-fix/util/_theoryio.py:42(_loadDictionaryAndPhoneticTheory)
+   171603    0.884    0.000    1.317    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:32(canonicalizeStrokes)
+        1    0.701    0.701   15.478   15.478 /home/jfsp/stenalgo-fix/util/export_plover_dictionary.py:36(main)
+  1231684    0.385    0.000    0.385    0.000 {built-in method builtins.sorted}
+        1    0.378    0.378    1.790    1.790 /home/jfsp/stenalgo-fix/util/_theoryio.py:19(loadDictionary)
+   636659    0.378    0.000    0.711    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:721(strokesToRTFCRE)
+        1    0.332    0.332    8.772    8.772 /home/jfsp/stenalgo-fix/util/_theoryio.py:128(loadDisambiguatedTheory)
+   755866    0.316    0.000    0.433    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:49(<genexpr>)
+        1    0.293    0.293    1.654    1.654 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:493(findFinalCollisions)
+  2464401    0.272    0.000    0.272    0.000 /home/jfsp/stenalgo-fix/util/_stenorender.py:46(<genexpr>)
+   686416    0.217    0.000    0.399    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:339(_iterencode_dict)
+        1    0.210    0.210   15.775   15.775 /home/jfsp/stenalgo-fix/util/export_plover_dictionary.py:1(<module>)
+   690064    0.197    0.000    0.197    0.000 {method 'get' of 'dict' objects}
+        1    0.190    0.190    0.843    0.843 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/__init__.py:120(dump)
+  1284684    0.187    0.000    0.187    0.000 /home/jfsp/stenalgo-fix/util/_stenorender.py:44(<genexpr>)
+   686416    0.156    0.000    0.555    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:426(_iterencode)
+  1022409    0.137    0.000    0.137    0.000 {method 'append' of 'list' objects}
+   686415    0.098    0.000    0.098    0.000 {method 'write' of '_io.TextIOWrapper' objects}
+
+

@@ -1,0 +1,61 @@
+Tue Sep 29 18:31:21 2026    scratch/profiles2/export_definitions.pstats
+
+         49768306 function calls (40791145 primitive calls) in 34.555 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1203 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    141/1    0.009    0.000   34.779   34.779 {built-in method builtins.exec}
+        1    0.000    0.000   34.779   34.779 <string>:1(<module>)
+        1    0.000    0.000   34.779   34.779 <frozen runpy>:206(run_module)
+        1    0.000    0.000   34.778   34.778 <frozen runpy>:65(_run_code)
+        1    0.419    0.419   34.778   34.778 /home/jfsp/stenalgo-fix/util/export_definitions.py:1(<module>)
+        1    1.459    1.459   34.274   34.274 /home/jfsp/stenalgo-fix/util/export_definitions.py:48(main)
+        1    0.000    0.000    8.737    8.737 /home/jfsp/stenalgo-fix/util/_theoryio.py:152(loadPhoneticAndDisambiguatedTheory)
+        7    7.926    1.132    7.943    1.135 {built-in method _pickle.load}
+        1    0.716    0.716    5.983    5.983 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/__init__.py:120(dump)
+  2356143    0.445    0.000    4.910    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:426(_iterencode)
+        1    0.000    0.000    4.825    4.825 /home/jfsp/stenalgo-fix/util/_theoryio.py:103(loadCachedDisambiguatedTheory)
+  2356143    0.430    0.000    4.465    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:339(_iterencode_dict)
+10652362/2356137    3.352    0.000    4.035    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:280(_iterencode_list)
+        1    0.417    0.417    3.912    3.912 /home/jfsp/stenalgo-fix/util/_theoryio.py:42(_loadDictionaryAndPhoneticTheory)
+   716282    1.994    0.000    3.898    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:721(strokesToRTFCRE)
+        1    0.247    0.247    3.775    3.775 /home/jfsp/stenalgo-fix/util/export_practice_words.py:176(buildReadingsByWord)
+   190253    1.843    0.000    3.503    0.000 /home/jfsp/stenalgo-fix/util/_stenorender.py:40(renderFinalStrokesToRTFCRE)
+    79346    0.177    0.000    2.600    0.000 /home/jfsp/stenalgo-fix/util/export_definitions.py:37(_mergeIdenticalRows)
+   171465    0.054    0.000    2.412    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/__init__.py:185(dumps)
+        1    2.356    2.356    2.377    2.377 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:670(buildWordsByOrthoLemme)
+
+
+===== sort by tottime =====
+Tue Sep 29 18:31:21 2026    scratch/profiles2/export_definitions.pstats
+
+         49768306 function calls (40791145 primitive calls) in 34.555 seconds
+
+   Ordered by: internal time
+   List reduced from 1203 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        7    7.926    1.132    7.943    1.135 {built-in method _pickle.load}
+10652362/2356137    3.352    0.000    4.035    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:280(_iterencode_list)
+        1    2.356    2.356    2.377    2.377 /home/jfsp/stenalgo-fix/src/ambiguitychecker.py:670(buildWordsByOrthoLemme)
+   171466    2.147    0.000    2.147    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:207(iterencode)
+   716282    1.994    0.000    3.898    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:721(strokesToRTFCRE)
+   190253    1.843    0.000    3.503    0.000 /home/jfsp/stenalgo-fix/util/_stenorender.py:40(renderFinalStrokesToRTFCRE)
+        1    1.459    1.459   34.274   34.274 /home/jfsp/stenalgo-fix/util/export_definitions.py:48(main)
+1719090/1040516    0.884    0.000    1.500    0.000 {method 'join' of 'str' objects}
+        1    0.716    0.716    5.983    5.983 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/__init__.py:120(dump)
+  1950282    0.685    0.000    0.705    0.000 {method 'get' of 'dict' objects}
+   197949    0.610    0.000    0.965    0.000 /home/jfsp/stenalgo-fix/util/export_practice_words.py:95(_readingHeadAndDetail)
+        2    0.536    0.268    0.536    0.268 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/decoder.py:351(raw_decode)
+  4964972    0.531    0.000    0.531    0.000 {built-in method builtins.isinstance}
+  1331231    0.476    0.000    0.498    0.000 {built-in method builtins.sorted}
+  2356143    0.445    0.000    4.910    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:426(_iterencode)
+  2356143    0.430    0.000    4.465    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:339(_iterencode_dict)
+        1    0.419    0.419   34.778   34.778 /home/jfsp/stenalgo-fix/util/export_definitions.py:1(<module>)
+        1    0.417    0.417    3.912    3.912 /home/jfsp/stenalgo-fix/util/_theoryio.py:42(_loadDictionaryAndPhoneticTheory)
+   800276    0.406    0.000    0.624    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:679(keyDisplayName)
+  2066424    0.393    0.000    0.393    0.000 {method 'setdefault' of 'dict' objects}
+
+

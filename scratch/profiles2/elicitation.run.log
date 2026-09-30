@@ -1,0 +1,22 @@
+=== Phase E3 scale report ===
+Same-lemma homophone groups (size > 1): 49778
+  ...with >= 2 distinct spellings:      49777
+Total cross-spelling combination pairs: 206973
+Distinct feature oppositions (questions): 200
+Tie oppositions (identical combinations, unresolvable by any marker): 0
+Max combination compound size:          5
+Markers ever pressed together (pairs):  71
+Singleton-opposition atom pairs:        1
+Greedy-coloring K lower bound, without pressed-together rule: 2
+Greedy-coloring K lower bound, with pressed-together rule:    6
+
+Questionnaire items: 200 (70 not fully clean)
+
+=== Phase E5 validation report ===
+Answered oppositions loaded:            200
+Duplicate oppositions (disagreeing answers for the same pair): 0
+Distinct unresolved oppositions encountered (groups containing them are skipped): 0
+Groups with a press-set conflict:                           0
+
+Wrote resolved_press_sets.json: 49777 validated groups (of 49777 resolved, 0 held back as conflicted)
+Wrote questionnaire.json

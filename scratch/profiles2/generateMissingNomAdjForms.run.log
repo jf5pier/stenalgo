@@ -1,0 +1,8 @@
+WARNING: Morphalou not found at 'morphalou/Morphalou3.1_CSV.csv' -- generating from the donor table alone, unverified against an external source. Pass --morphalou PATH or --no-morphalou to silence this.
+
+Generated: 0
+Skipped (not generated (none)): 12314
+Skipped (suspected invariable (s/x/z NOM plural, or invariant ADJ gender ending)): 2990
+Skipped (ortho already exists (likely a tag gap, not a missing form)): 1814
+Skipped (not generated (exception_override)): 46
+Skipped (exception: invariable): 8

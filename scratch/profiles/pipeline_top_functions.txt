@@ -1,0 +1,35 @@
+10521	main
+6690	lexicalSyllabicPartAmbiguityScore
+5044	buildDisambiguatedTheory
+4947	realizeKeypressGroupsAsExtraStroke
+4947	_bestCandidate
+4053	_run_module_as_main
+4053	_run_code
+3994	_getLexicalAmbiguityScores
+3957	&lt;module&gt;
+2872	loadOrBuildDictionary
+2788	__init__
+2677	&lt;genexpr&gt;
+2130	_feasible
+2106	analyseMultiphonemeLexicalAmbiguity_serial
+2086	replaceSyllables
+1932	_candidateCost
+1891	start
+1891	run
+1891	analysePhonemeLexicalAmbiguity
+1891	analyseAmbiguities
+1891	_launch
+1891	_bootstrap
+1891	_Popen
+1485	confirmCandidates
+1313	extractDiscriminatingFeatures
+1164	getStrokeCost
+1100	buildDiscriminatorSelection
+935	getSyllable
+924	buildFeasibleDiscriminatorOptions
+917	lexicalPhonemeAmbiguityScore
+864	process 143694:&quot;/home/jfsp/stenalgo/env/bin/python -m util.build_keypress_groups&quot;
+756	minKeypressesSatWithPriorities
+739	loadOrBuildPhoneticTheory
+706	replaceMultiphonemeInSyllabicPart
+700	process 143670:&quot;/home/jfsp/stenalgo/env/bin/python -m src.elicitation&quot;

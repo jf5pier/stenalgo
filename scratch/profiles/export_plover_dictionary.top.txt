@@ -1,0 +1,53 @@
+=== export_plover_dictionary — top 15 by cumulative ===
+Tue Sep 29 13:29:50 2026    scratch/profiles/export_plover_dictionary.pstats
+
+         263724508 function calls (263300431 primitive calls) in 133.028 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1197 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    133/1    0.008    0.000  133.028  133.028 {built-in method builtins.exec}
+        1    0.000    0.000  133.028  133.028 <string>:1(<module>)
+        1    0.000    0.000  133.028  133.028 <frozen runpy>:206(run_module)
+        1    0.000    0.000  133.027  133.027 <frozen runpy>:65(_run_code)
+        1    0.213    0.213  133.027  133.027 export_plover_dictionary.py:1(<module>)
+        1    0.453    0.453  132.726  132.726 export_plover_dictionary.py:36(main)
+        1    0.470    0.470  118.721  118.721 _theoryio.py:58(loadDisambiguatedTheory)
+        1    0.144    0.144  118.251  118.251 _theoryio.py:82(loadPhoneticAndDisambiguatedTheory)
+        1    0.410    0.410  113.194  113.194 dictionary.py:372(buildDisambiguatedTheory)
+        1    0.622    0.622  102.721  102.721 ambiguitychecker.py:928(realizeKeypressGroupsAsExtraStroke)
+        7    0.388    0.055  100.168   14.310 ambiguitychecker.py:1119(_bestCandidate)
+  3262439   44.071    0.000   73.321    0.000 keyboard.py:546(getStrokeCost)
+      129    4.250    0.033   54.068    0.419 ambiguitychecker.py:1041(_feasible)
+       93    2.342    0.025   45.711    0.492 ambiguitychecker.py:1089(_candidateCost)
+  1650492    1.105    0.000   37.722    0.000 ambiguitychecker.py:1054(<genexpr>)
+
+
+
+=== export_plover_dictionary — top 15 by tottime ===
+Tue Sep 29 13:29:50 2026    scratch/profiles/export_plover_dictionary.pstats
+
+         263724508 function calls (263300431 primitive calls) in 133.028 seconds
+
+   Ordered by: internal time
+   List reduced from 1197 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+  3262439   44.071    0.000   73.321    0.000 keyboard.py:546(getStrokeCost)
+ 42923630    8.267    0.000    8.289    0.000 {built-in method builtins.sorted}
+  3262439    7.920    0.000   13.041    0.000 ambiguitychecker.py:1019(_composedInduced)
+ 32624390    6.944    0.000   10.659    0.000 keyboard.py:99(__getitem__)
+ 52489512    6.755    0.000    6.755    0.000 {method 'keys' of 'dict' objects}
+   636613    4.380    0.000    8.750    0.000 keyboard.py:683(strokesToRTFCRE)
+      129    4.250    0.033   54.068    0.419 ambiguitychecker.py:1041(_feasible)
+32626738/32626731    3.715    0.000    3.715    0.000 {built-in method builtins.getattr}
+        1    3.390    3.390    3.412    3.412 ambiguitychecker.py:666(buildWordsByOrthoLemme)
+ 19623150    3.365    0.000    3.365    0.000 word.py:166(__hash__)
+        6    2.697    0.450    2.697    0.450 {built-in method _pickle.load}
+3684197/3262439    2.475    0.000    3.932    0.000 keyboard.py:587(getStrokeShapeCost)
+       93    2.342    0.025   45.711    0.492 ambiguitychecker.py:1089(_candidateCost)
+ 11700189    2.151    0.000    2.196    0.000 {method 'get' of 'dict' objects}
+  3545247    2.151    0.000    2.826    0.000 ambiguitychecker.py:830(_appendCodaExtraStroke)
+
+

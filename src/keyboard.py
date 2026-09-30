@@ -1,5 +1,6 @@
 #!/bin/env python3
 from dataclasses import dataclass, fields
+from functools import lru_cache
 from math import log,ceil
 from abc  import ABC, abstractmethod
 from typing import override, Any, Self, TypeAlias
@@ -28,6 +29,10 @@ Stroke: TypeAlias = tuple[int, ...]
 Strokes: TypeAlias = tuple[Stroke, ...]
 
 
+# maxsize=None: callers present ~80k distinct stroke tuples per step (one per word
+# group), so the default 128-entry cache thrashed and recomputed on nearly every
+# call (perf round 2, 2026-09-29). Pure tuple-in/tuple-out, unbounded is safe.
+@lru_cache(maxsize=None)
 def canonicalizeStrokes(strokes: Strokes) -> Strokes:
     """
     Collapse each Stroke to the physically-realized chord it produces: a stroke is a
@@ -41,6 +46,8 @@ def canonicalizeStrokes(strokes: Strokes) -> Strokes:
     physical stroke (elicitation-cluster discovery, the */# reserved-key grouping)
     must compare this canonical form, not the raw tuple -- matching what
     `Starboard.strokesToRTFCRE`'s `sorted(set(stroke))` already does at render time.
+
+    lru_cache'd: pure tuple-in/tuple-out, called per word across several steps.
     """
     return tuple(tuple(sorted(set(stroke))) for stroke in strokes)
 
@@ -388,7 +395,7 @@ Fingers assignments :
             unassignedKeys = unassignedKeys[partSize:]
 
         self.nbKeys: int = len(self._keyIndexes)
-        
+
         return
 
     @override
@@ -412,6 +419,7 @@ Fingers assignments :
     @override
     def clearLayout(self) -> None:
         self.phonemesAssignedToStroke = {}
+        self._dropRenderMemos()
 
     @override
     def addToLayout(self, stroke: Stroke, phoneme: str, phonemeOrder: list[str]|None = None) -> None:
@@ -439,8 +447,16 @@ Fingers assignments :
                     existingKeypressPhoneme.append(phoneme)
                     break
         self.phonemesAssignedToStroke[stroke] = existingKeypressPhoneme
+        self._dropRenderMemos()
         return
-            
+
+    def _dropRenderMemos(self) -> None:
+        """Invalidate the keyDisplayName/strokesToRTFCRE/getStrokesOfPhoneme caches:
+        all derive from phonemesAssignedToStroke, which the layout mutators change."""
+        self.__dict__.pop("_keyDisplayNameCache", None)
+        self.__dict__.pop("_strokesToRTFCRECache", None)
+        self.__dict__.pop("_strokesOfPhonemeCache", None)
+
 
     
     @override
@@ -454,6 +470,7 @@ Fingers assignments :
             _ = self.phonemesAssignedToStroke[stroke].pop(index)  # Remove the phoneme from the keypress
         else:
             raise KeyError(f"Phoneme {phoneme} not found in keypress {stroke}")
+        self._dropRenderMemos()
 
     @override
     def getPhonemesOfStroke(self, stroke: Stroke) -> list[str]:
@@ -467,12 +484,23 @@ Fingers assignments :
         """
         Find all strokes in a syllabic part that results in a given phonem
         """
+        # Memo keyed (phoneme, syllabicPart), lazily created (fromJSONFile builds
+        # instances through cls.__new__ without __init__) and dropped by the layout
+        # mutators via _dropRenderMemos: the scan walks the whole
+        # phonemesAssignedToStroke dict, and hot callers (buildPhoneticTheory via
+        # getStrokeOfSyllableByPart, the S4 solver) repeat the same ~66 lookups
+        # millions of times against a frozen layout. A fresh copy is returned per
+        # call (callers, and test_returns_copy, rely on that).
+        cached = self.__dict__.setdefault("_strokesOfPhonemeCache", {}).get((phoneme, syllabicPart))
+        if cached is not None:
+            return list(cached)
         assignedKeypress: list[Stroke] = []
 #        print(f"Searching for phoneme {phoneme} in syllabic part {syllabicPart}")
         for keypress, phonemes in self.phonemesAssignedToStroke.items():
 #            print(f"Checking keypress {keypress} with phonemes {phonemes}")
             if keypress[0] in self.keyIDinSyllabicPart[syllabicPart] and phoneme in phonemes:
                 assignedKeypress.append(keypress)
+        self.__dict__.setdefault("_strokesOfPhonemeCache", {})[(phoneme, syllabicPart)] = assignedKeypress
         return assignedKeypress[:]
 
     def getSinglekeyKeypress(self, syllabicPart: str) -> list[tuple[int]]:
@@ -551,6 +579,16 @@ Fingers assignments :
         finger's key union isn't a legal keypress per `_possibleKeypress` -- the
         whole stroke is then infeasible, not just expensive.
         """
+        # Memo keyed (stroke, syllabicPart), created lazily because fromJSONFile
+        # builds instances through cls.__new__ without running __init__. Safe for
+        # the instance's lifetime: the cost reads only the class-level
+        # _possibleKeypress and the pure shape-cost helpers, never the mutable
+        # phonemesAssignedToStroke layout.
+        strokeCostCache: dict[tuple[Stroke, str], int | None] = \
+            self.__dict__.setdefault("_strokeCostCache", {})
+        memoKey = (stroke, syllabicPart)
+        if memoKey in strokeCostCache:
+            return strokeCostCache[memoKey]
         keyFromFinger: dict[str, list[int]] = {f:[] for f in self._possibleKeypress.fingers}
         cost: int = 0
         fingerInUse: set[str] = set()
@@ -562,11 +600,14 @@ Fingers assignments :
                     fingerInUse.add(finger)
             fingerKeyCombo = tuple(sorted(set(keyFromFinger[finger])))
             if fingerKeyCombo not in fingerKeypress:
+                strokeCostCache[memoKey] = None
                 return None
             cost += fingerKeypress[fingerKeyCombo]
         if syllabicPart in ["onset", "coda"]:
             cost += self.getStrokeShapeCost(stroke)
-        return int(cost * 0.85 **len(fingerInUse)) #Discount for using multiple fingers
+        strokeCost = int(cost * 0.85 **len(fingerInUse)) #Discount for using multiple fingers
+        strokeCostCache[memoKey] = strokeCost
+        return strokeCost
 
     def _strokeZigZagCost(self, stroke: Stroke) -> int:
         s1, s2 = stroke
@@ -659,7 +700,20 @@ Fingers assignments :
         English steno's S-/-S convention): several phonemes are reused between
         the left and right hand (e.g. "k" onset vs. "k" coda), so the hyphen
         placement -- not the letter -- is what keeps every key's name unique.
+
+        Memoized per instance (26 keys; created lazily because fromJSONFile
+        builds instances through cls.__new__ without __init__, and dropped by
+        addToLayout/clearLayout since the label derives from the layout).
         """
+        names: dict[int, str] = self.__dict__.setdefault("_keyDisplayNameCache", {})
+        cached = names.get(keyIndex)
+        if cached is not None:
+            return cached
+        name = self._computeKeyDisplayName(keyIndex)
+        names[keyIndex] = name
+        return name
+
+    def _computeKeyDisplayName(self, keyIndex: int) -> str:
         if keyIndex in self._reservedKeyDisplayNames:
             return self._reservedKeyDisplayNames[keyIndex]
         phonemes = self.phonemesAssignedToStroke.get((keyIndex,))
@@ -700,7 +754,13 @@ Fingers assignments :
         combinations resolve their keys out of order (e.g. coda key 21 "-R" before
         key 20 "-t"), which `strokesToString`'s plain phoneme rendering tolerates
         but Plover's stricter steno-string parser rejects.
+
+        Memoized per instance (lazily; dropped by addToLayout/clearLayout with
+        the key-name memo, since the rendering derives from the layout).
         """
+        rendered = self.__dict__.setdefault("_strokesToRTFCRECache", {}).get(strokes)
+        if rendered is not None:
+            return rendered
         strokeString = ""
         for stroke in strokes:
             if not strokeString == "":
@@ -713,6 +773,7 @@ Fingers assignments :
             if syllableString["nucleus"] == "":
                 syllableString["nucleus"] = "-"
             strokeString += f"{syllableString['onset']}{syllableString['nucleus']}{syllableString['coda']}"
+        self.__dict__.setdefault("_strokesToRTFCRECache", {})[strokes] = strokeString
         return strokeString
 
     def setIrelandEnglishLayout(self) -> None:

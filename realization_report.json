@@ -5,7 +5,7 @@
     "conditionnel",
     "infinitif"
    ],
-   "affectedWords": 3990,
+   "affectedWords": 3998,
    "chosenKeys": [
     23
    ],
@@ -77,7 +77,7 @@
    "markers": [
     "f"
    ],
-   "affectedWords": 15747,
+   "affectedWords": 15752,
    "chosenKeys": [
     16
    ],
@@ -188,7 +188,7 @@
     "passé",
     "pers_3"
    ],
-   "affectedWords": 12496,
+   "affectedWords": 12497,
    "chosenKeys": [
     20
    ],
@@ -285,7 +285,7 @@
     "imparfait",
     "subjonctif"
    ],
-   "affectedWords": 5815,
+   "affectedWords": 5811,
    "chosenKeys": [
     21
    ],
@@ -449,7 +449,7 @@
     "nbr_p",
     "p"
    ],
-   "affectedWords": 51797,
+   "affectedWords": 51808,
    "chosenKeys": [
     17
    ],
@@ -564,7 +564,7 @@
    "markers": [
     "pers_2"
    ],
-   "affectedWords": 8159,
+   "affectedWords": 8160,
    "chosenKeys": [
     19
    ],
@@ -1874,6 +1874,14 @@
     "tannées"
    ],
    [
+    "repends",
+    "repens"
+   ],
+   [
+    "repends",
+    "repens"
+   ],
+   [
     "pékins",
     "péquins"
    ],
@@ -2604,6 +2612,10 @@
    [
     "biftèques",
     "biftecks"
+   ],
+   [
+    "recrues",
+    "recrus"
    ],
    [
     "croisées",

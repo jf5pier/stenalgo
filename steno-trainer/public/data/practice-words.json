@@ -48889,14 +48889,13 @@
   "before": "les",
   "after": "",
   "label": "nom, f. pl.",
-  "phonology": "R2.la.sj§",
-  "steno": "R@ie/mta/sRwai",
+  "phonology": "R°.la.sj§",
+  "steno": "R@a/mta/sRwai/-s",
   "strokes": [
    [
     8,
     11,
-    13,
-    14
+    12
    ],
    [
     6,
@@ -48909,6 +48908,9 @@
     9,
     12,
     13
+   ],
+   [
+    17
    ]
   ],
   "frequency": 30.92

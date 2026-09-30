@@ -1,0 +1,53 @@
+=== completeVerbParadigms — top 15 by cumulative ===
+Tue Sep 29 13:40:14 2026    scratch/profiles/completeVerbParadigms.pstats
+
+         191177354 function calls (191174570 primitive calls) in 130.343 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1533 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    13/12    1.008    0.078  191.156   15.930 threading.py:651(wait)
+    153/1    0.050    0.000  128.717  128.717 {built-in method builtins.exec}
+      2/1    0.000    0.000  128.675  128.675 <string>:1(<module>)
+      2/1    0.000    0.000  128.669  128.669 <frozen runpy>:206(run_module)
+      2/1    0.000    0.000  128.669  128.669 <frozen runpy>:65(_run_code)
+    13/12    0.699    0.054   94.489    7.874 threading.py:337(wait)
+    56/51   52.280    0.934   90.015    1.765 {method 'acquire' of '_thread.lock' objects}
+        2   12.074    6.037   17.859    8.930 featureextractor.py:31(extractDiscriminatingFeatures)
+      2/1    0.229    0.114   17.800   17.800 completeVerbParadigms.py:1(<module>)
+      2/1    0.060    0.030   17.572   17.572 completeVerbParadigms.py:356(main)
+        2    3.059    1.529   15.024    7.512 featureextractor.py:285(buildDiscriminatorSelection)
+ 98801465    9.979    0.000    9.979    0.000 word.py:166(__hash__)
+        2    7.038    3.519    8.756    4.378 featureextractor.py:187(buildFeasibleDiscriminatorOptions)
+        1    0.072    0.072    7.505    7.505 completeVerbParadigms.py:272(confirmCandidates)
+        1    0.001    0.001    6.651    6.651 verbparadigm.py:865(deriveConjugationEndingTables)
+
+
+
+=== completeVerbParadigms — top 15 by tottime ===
+Tue Sep 29 13:40:14 2026    scratch/profiles/completeVerbParadigms.pstats
+
+         191177354 function calls (191174570 primitive calls) in 130.343 seconds
+
+   Ordered by: internal time
+   List reduced from 1533 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    56/51   52.280    0.934   90.015    1.765 {method 'acquire' of '_thread.lock' objects}
+        2   12.074    6.037   17.859    8.930 featureextractor.py:31(extractDiscriminatingFeatures)
+ 98801465    9.979    0.000    9.979    0.000 word.py:166(__hash__)
+        2    7.038    3.519    8.756    4.378 featureextractor.py:187(buildFeasibleDiscriminatorOptions)
+ 10183071    4.780    0.000    5.353    0.000 {method 'add' of 'set' objects}
+   345023    3.231    0.000    4.098    0.000 word.py:177(getFeatures)
+        2    3.059    1.529   15.024    7.512 featureextractor.py:285(buildDiscriminatorSelection)
+        1    2.816    2.816    2.996    2.996 verbparadigm.py:1166(detectUndersampledLemmas)
+  5149261    2.432    0.000    4.962    0.000 featureextractor.py:127(<lambda>)
+  4380196    2.156    0.000    2.410    0.000 featureextractor.py:118(<genexpr>)
+        2    2.118    1.059    2.961    1.480 featureextractor.py:223(selectSharedDiscriminators)
+  5343535    1.943    0.000    2.618    0.000 word.py:170(__eq__)
+  5022246    1.802    0.000    2.219    0.000 {method 'get' of 'dict' objects}
+        2    1.791    0.895    1.791    0.895 {built-in method gc.collect}
+11262174/11261778    1.654    0.000    1.654    0.000 {built-in method builtins.len}
+
+

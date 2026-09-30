@@ -24,7 +24,7 @@ import os
 import pickle
 from collections import defaultdict
 from dataclasses import dataclass, field
-from functools import cmp_to_key
+from functools import cmp_to_key, lru_cache
 from itertools import combinations
 from typing import TypeVar
 
@@ -89,6 +89,7 @@ def detectCrossCategoryClash(words: list[Word]) -> list[Lemme]:
 RATIO_EXEMPTION_THRESHOLD = 10.0
 
 
+@lru_cache
 def loadReform1990DoubletPairs(tsvPath: str = "resources/reform1990.tsv") -> frozenset[frozenset[str]]:
     """
     Parses resources/reform1990.tsv into a set of {oldSpelling, newSpelling} pairs --
@@ -101,6 +102,9 @@ def loadReform1990DoubletPairs(tsvPath: str = "resources/reform1990.tsv") -> fro
     excluded -- the file's own notes document these as colliding with a genuinely
     distinct, unrelated word (e.g. `fût`/`fut`, `croît`/`croit`) despite being a reform
     pair, so they are NOT safe doublet exemptions.
+
+    lru_cache'd per path: the file is static during a run, and several steps
+    (S7, the exporters, composeReservedKeyStrokesForEntries) reparse it.
     """
     with open(tsvPath, encoding="utf-8") as tsvFile:
         rows = [line.rstrip("\n") for line in tsvFile if not line.startswith("#")]
@@ -932,6 +936,7 @@ def realizeKeypressGroupsAsExtraStroke(
     comboSize: int = 2,
     extraGroupSetsByWord: dict[Word, list[frozenset[int]]] | None = None,
     preferredKeysByGroup: dict[int, tuple[int, ...]] | None = None,
+    wordToStrokes: dict[Word, Strokes] | None = None,
 ) -> KeypressGroupPhysicalAssignment:
     """
     Corrected successor to the earlier (flawed) findKeypressGroupRealizations: that
@@ -977,7 +982,7 @@ def realizeKeypressGroupsAsExtraStroke(
     candidate) if it would collide with anything. `assignment.preferredKeyHonoredByGroup`
     reports which requests actually won.
     """
-    wordToStrokes = buildWordToStrokes(theory)
+    wordToStrokes = wordToStrokes if wordToStrokes is not None else buildWordToStrokes(theory)
     wordToGroups = buildWordToGroups(groupToWords)
     candidatePhonemes = list(Phoneme.consonantPhonemes)
     codaKeysOf: dict[str, tuple[int, ...]] = {}
@@ -1016,45 +1021,40 @@ def realizeKeypressGroupsAsExtraStroke(
             finalizedWordsByStroke[stroke].append(word)
             finalizedWords.add(word)
 
-    def _composedInduced(word: Word, groupId: int, candidateKeys: tuple[int, ...]) -> Strokes:
-        unionKeys: set[int] = set(candidateKeys)
-        for otherGroup in wordToGroups[word]:
-            if otherGroup != groupId:
-                unionKeys.update(assignment.chosenKeysByGroup.get(otherGroup, ()))
-        return _appendCodaExtraStroke(wordToStrokes[word], tuple(sorted(unionKeys)))
+    def _composedInduced(word: Word, candidateKeys: tuple[int, ...], otherKeys: frozenset[int]) -> Strokes:
+        return _appendCodaExtraStroke(wordToStrokes[word], tuple(sorted(set(candidateKeys) | otherKeys)))
 
-    def _isRedundantForAnyWord(words: list[Word], groupId: int, keys: tuple[int, ...]) -> bool:
+    def _isRedundantForAnyWord(words: list[Word], keys: tuple[int, ...],
+                               otherKeysByWord: dict[Word, frozenset[int]]) -> bool:
         """True if some word needing groupId ALSO needs another already-decided group
         whose keys already fully cover `keys` -- the addition would be a silent no-op for
         that word (its final composed stroke wouldn't change), quietly failing to
         differentiate it from a sibling that doesn't need groupId at all."""
         keySet = set(keys)
         for word in words:
-            otherKeys: set[int] = set()
-            for otherGroup in wordToGroups[word]:
-                if otherGroup != groupId:
-                    otherKeys.update(assignment.chosenKeysByGroup.get(otherGroup, ()))
+            otherKeys = otherKeysByWord[word]
             if otherKeys and keySet <= otherKeys:
                 return True
         return False
 
-    def _feasible(words: list[Word], groupId: int, keys: tuple[int, ...]) -> bool:
+    def _feasible(words: list[Word], groupId: int, keys: tuple[int, ...],
+                  otherKeysByWord: dict[Word, frozenset[int]]) -> dict[Word, Strokes] | None:
         # Cheap fast-path: reusing another already-decided group's key-set outright is
         # always wrong for a word needing ONLY groupId (see this function's caller-side
         # docstring on `finalizedWordsByStroke` for why this alone isn't sufficient --
         # the full finalized-pool check below covers the multi-group composition case).
         if keys in assignment.chosenKeysByGroup.values():
-            return False
-        if not keys or _isRedundantForAnyWord(words, groupId, keys):
-            return False
-        induced = {word: _composedInduced(word, groupId, keys) for word in words}
+            return None
+        if not keys or _isRedundantForAnyWord(words, keys, otherKeysByWord):
+            return None
+        induced = {word: _composedInduced(word, keys, otherKeysByWord[word]) for word in words}
         # A word that also needs an already-decided OTHER group gets `keys` unioned with
         # that group's key into one physical chord -- that union has to actually be
         # pressable (a legal per-finger key combo), not just theory/collision-clean.
         if any(keyboard.getStrokeCost(stroke[-1], "coda") is None for stroke in induced.values()):
-            return False
+            return None
         if any(stroke in theory for stroke in induced.values()):
-            return False
+            return None
         # Only compare pairwise collisions among words that need the exact same FULL set
         # of Grouping Phase groups -- their eventual composed stroke is guaranteed identical
         # regardless of processing order, so a collision here is real. Two words needing
@@ -1075,7 +1075,7 @@ def realizeKeypressGroupsAsExtraStroke(
             for sameSignatureWords in bySignature.values()
             for w1, w2 in findCollidingInducedStrokes(sameSignatureWords)
         ):
-            return False
+            return None
         # Also check against every already-FINALIZED word (its own groups are all
         # decided, so its stroke can't change anymore) -- this is what catches a
         # multi-group composition coinciding with some other single (or differently
@@ -1083,10 +1083,11 @@ def realizeKeypressGroupsAsExtraStroke(
         for word, stroke in induced.items():
             for otherWord in finalizedWordsByStroke.get(stroke, ()):
                 if otherWord != word and _isInScopeCollision(word, otherWord):
-                    return False
-        return True
+                    return None
+        return induced
 
-    def _candidateCost(words: list[Word], groupId: int, keys: tuple[int, ...]) -> int:
+    def _candidateCost(words: list[Word], keys: tuple[int, ...],
+                       induced: dict[Word, Strokes]) -> int:
         """
         Frequency-weighted average cost of the REAL composed extra stroke this candidate
         produces across its affected words -- not `keys` priced in isolation. A word that
@@ -1104,8 +1105,7 @@ def realizeKeypressGroupsAsExtraStroke(
         totalCost = 0.0
         totalWeight = 0.0
         for word in words:
-            stroke = _composedInduced(word, groupId, keys)
-            cost = keyboard.getStrokeCost(stroke[-1], "coda")
+            cost = keyboard.getStrokeCost(induced[word][-1], "coda")
             if cost is None:
                 continue  # already excluded by _feasible; defensive only
             weight = word.frequency
@@ -1117,31 +1117,49 @@ def realizeKeypressGroupsAsExtraStroke(
         return round(totalCost / totalWeight)
 
     def _bestCandidate(words: list[Word], groupId: int) -> list[tuple[tuple[int, ...], int]]:
+        # Per word: the union of the ALREADY-DECIDED keys of its other groups -- every
+        # candidate for this group composes with exactly these, so compute them once
+        # per group instead of once per (candidate x word).
+        otherKeysByWord: dict[Word, frozenset[int]] = {}
+        for word in words:
+            otherKeys: set[int] = set()
+            for otherGroup in wordToGroups[word]:
+                if otherGroup != groupId:
+                    otherKeys.update(assignment.chosenKeysByGroup.get(otherGroup, ()))
+            otherKeysByWord[word] = frozenset(otherKeys)
         ranked: list[tuple[tuple[int, ...], int]] = []
         seenKeys: set[tuple[int, ...]] = set()
         for keys in list(codaKeysOf.values()):
-            if not keys or keys in seenKeys or not _feasible(words, groupId, keys):
+            if not keys or keys in seenKeys:
+                continue
+            induced = _feasible(words, groupId, keys, otherKeysByWord)
+            if induced is None:
                 continue
             seenKeys.add(keys)
-            ranked.append((keys, _candidateCost(words, groupId, keys)))
+            ranked.append((keys, _candidateCost(words, keys, induced)))
         if not ranked and comboSize >= 2:
             for p1, p2 in combinations(candidatePhonemes, 2):
                 keys = tuple(sorted(set(codaKeysOf.get(p1, ())) | set(codaKeysOf.get(p2, ()))))
-                if not keys or keys in seenKeys or not _feasible(words, groupId, keys):
+                if not keys or keys in seenKeys:
+                    continue
+                induced = _feasible(words, groupId, keys, otherKeysByWord)
+                if induced is None:
                     continue
                 seenKeys.add(keys)
-                ranked.append((keys, _candidateCost(words, groupId, keys)))
+                ranked.append((keys, _candidateCost(words, keys, induced)))
         ranked.sort(key=lambda kc: kc[1])
         preferred = (preferredKeysByGroup or {}).get(groupId)
         if preferred is not None:
             if preferred in seenKeys:
                 assignment.preferredKeyHonoredByGroup[groupId] = True
                 ranked.sort(key=lambda kc: kc[0] != preferred)  # stable: keeps cost order among the rest
-            elif _feasible(words, groupId, preferred):
-                assignment.preferredKeyHonoredByGroup[groupId] = True
-                ranked.insert(0, (preferred, _candidateCost(words, groupId, preferred)))
             else:
-                assignment.preferredKeyHonoredByGroup[groupId] = False
+                preferredInduced = _feasible(words, groupId, preferred, otherKeysByWord)
+                if preferredInduced is not None:
+                    assignment.preferredKeyHonoredByGroup[groupId] = True
+                    ranked.insert(0, (preferred, _candidateCost(words, preferred, preferredInduced)))
+                else:
+                    assignment.preferredKeyHonoredByGroup[groupId] = False
         return ranked
 
     for groupId in sorted(groupToWords, key=lambda g: -len(groupToWords[g])):
@@ -1204,6 +1222,7 @@ def buildFinalInducedStrokes(
     theory: dict[Strokes, list[Word]],
     groupToWords: dict[int, list[Word]],
     assignment: KeypressGroupPhysicalAssignment,
+    wordToStrokes: dict[Word, Strokes] | None = None,
 ) -> dict[Word, Strokes]:
     """
     The final stroke of Discriminating-Feature Stroke Realization (Realization Phase) for
@@ -1217,7 +1236,7 @@ def buildFinalInducedStrokes(
     -- the same reconstruction `realizeKeypressGroupsAsExtraStroke` already does internally
     for its own verification pass, generalized here to the full lexicon.
     """
-    wordToStrokes = buildWordToStrokes(theory)
+    wordToStrokes = wordToStrokes if wordToStrokes is not None else buildWordToStrokes(theory)
     wordToGroups = buildWordToGroups(groupToWords)
     finalInduced: dict[Word, Strokes] = {}
     for word, strokes in wordToStrokes.items():
@@ -1232,6 +1251,7 @@ def buildExtraInducedStrokes(
     theory: dict[Strokes, list[Word]],
     assignment: KeypressGroupPhysicalAssignment,
     extraGroupSetsByWord: dict[Word, list[frozenset[int]]],
+    wordToStrokes: dict[Word, Strokes] | None = None,
 ) -> dict[Word, list[Strokes]]:
     """
     A self-homograph word's OTHER readings (see `buildKeypressGroupExtraAlternates`,
@@ -1245,7 +1265,7 @@ def buildExtraInducedStrokes(
     (`composeReservedKeyStrokesForEntries`) adds each alternate's star/hash mark
     afterwards, from the cluster its own stroke falls in.
     """
-    wordToStrokes = buildWordToStrokes(theory)
+    wordToStrokes = wordToStrokes if wordToStrokes is not None else buildWordToStrokes(theory)
     extraByWord: dict[Word, list[Strokes]] = {}
     for word, groupSets in extraGroupSetsByWord.items():
         strokes: list[Strokes] = []

@@ -610,13 +610,34 @@ class Syllable:
         return [p.name for p in Syllable.phonemeColByPart[syllabicPart].phonemes]
 
     def trackWord(self, word: Word) -> None:
-        """ 
+        """
         Keep track of words using this syllable
         """
         if word.phonology in self.phonoWords:
             self.phonoWords[word.phonology].append(word)
         else:
             self.phonoWords[word.phonology] = [word]
+
+    def phonoWordFrequencySums(self) -> dict[str, float]:
+        """
+        phonoWords key -> summed Word.frequency of its Words, built once on
+        first use: the lexical ambiguity analysis rereads these sums millions
+        of times, and the inventory is frozen by then (trackWord only runs
+        while the corpus is being read), so the cache can never go stale.
+        """
+        sums = self.__dict__.get("_phonoWordFrequencySums")
+        if sums is None:
+            sums = {phonoWord: sum(w.frequency for w in words)
+                    for phonoWord, words in self.phonoWords.items()}
+            self._phonoWordFrequencySums = sums
+        return sums
+
+    def __getstate__(self) -> dict:
+        # Never pickle the lazily-built frequency-sum cache: it rebuilds on
+        # first use, and dropping it keeps Dictionary.pickle the size it was.
+        state = self.__dict__.copy()
+        state.pop("_phonoWordFrequencySums", None)
+        return state
 
     @staticmethod
     def printTopPhonemesPerPosition(nb: int = -1):
@@ -893,6 +914,12 @@ class SyllableCollection:
         )
         score: float = 0.0
         for syll1 in phoneme1_syllables:
+            # phonoWords is keyed by word.phonology, so a bucket's first Word's
+            # replaceSyllables(syll1.name, X) IS phono_word1.replace(syll1.name, X)
+            # -- no Word lookup per mutated phonology (same trick as the
+            # multiphoneme stage), and the per-bucket frequency sums come from
+            # phonoWordFrequencySums (identical additions in identical order).
+            frequencySums1 = syll1.phonoWordFrequencySums()
             if phoneme2 in list(map(str, syll1.phonemesByPart[syllabicPart])) :
                 # Case where both phonemes are part of the same syllable
                 # This is a tripple ambiguity with the 2 syllables that only
@@ -904,45 +931,20 @@ class SyllableCollection:
                 short_syllable1 = syll1.replacePhonemeInSyllabicPart(phoneme1, "", syllabicPart)
                 short_syllable2 = syll1.replacePhonemeInSyllabicPart(phoneme2, "", syllabicPart)
                 for phono_word1 in syll1.phonoWords:
-                    base_score1: float = sum(map(lambda w: w.frequency, syll1.phonoWords[phono_word1]))
-                    base_words_ortho = list(map(lambda w: w.ortho, syll1.phonoWords[phono_word1]))
-                    word: Word = syll1.phonoWords[phono_word1][0]
-                    phono_short_word1 = word.replaceSyllables(
-                        syll1.name, short_syllable1
-                    )
+                    base_score1: float = frequencySums1[phono_word1]
+                    phono_short_word1 = phono_word1.replace(syll1.name, short_syllable1)
                     phono_short_syll1 = self.getSyllable(phono_short_word1)
-                    listOrthoOtherWords1 = []
                     base_score_short1: float = 0.0
                     if phono_short_syll1 is not None:
-                        phono_short_words1 = phono_short_syll1.phonoWords
-                        base_score_short1 = (
-                            sum(map(lambda w: w.frequency, phono_short_words1[phono_short_word1]))
-                            if phono_short_word1 in phono_short_words1
-                            else 0.0
-                        )
-                        listOrthoOtherWords1 = [phono_short_word1]+ list(
-                            map(lambda w: w.ortho, phono_short_words1[phono_short_word1])
-                            if phono_short_word1 in phono_short_words1
-                            else []
-                        )
+                        base_score_short1 = phono_short_syll1.phonoWordFrequencySums() \
+                            .get(phono_short_word1, 0.0)
 
-                    phono_short_word2 = word.replaceSyllables(
-                        syll1.name, short_syllable2)
+                    phono_short_word2 = phono_word1.replace(syll1.name, short_syllable2)
                     phono_short_syll2 = self.getSyllable(phono_short_word2)
-                    listOrthoOtherWords2 = []
                     base_score_short2: float = 0.0
                     if phono_short_syll2 is not None:
-                        phono_short_words2 = phono_short_syll2.phonoWords
-                        base_score_short2  = (
-                            sum(map(lambda w: w.frequency, phono_short_words2[phono_short_word2]))
-                            if phono_short_word2 in phono_short_words2
-                            else 0.0
-                        )
-                        listOrthoOtherWords2 = [phono_short_word2]+ list(
-                            map(lambda w: w.ortho, phono_short_words2[phono_short_word2])
-                            if phono_short_word2 in phono_short_words2
-                            else []
-                        )
+                        base_score_short2 = phono_short_syll2.phonoWordFrequencySums() \
+                            .get(phono_short_word2, 0.0)
 
                     least_scores = sum(sorted(
                         [base_score1, base_score_short1, base_score_short2])[:-1])
@@ -952,17 +954,19 @@ class SyllableCollection:
                 # Score is only defined by the 2 syllables that
                 # have 1 phoneme different
                 p1_to_p2 = syll1.replacePhonemeInSyllabicPart(phoneme1, phoneme2, syllabicPart)
+                # The mutated syllable's inventory entry depends only on
+                # (syll1, phoneme2) -- never on the word, so look it up once.
+                phono_syll2= self.getSyllable(p1_to_p2)
+                if phono_syll2 is None:
+                    continue
+                frequencySums2 = phono_syll2.phonoWordFrequencySums()
                 for phono_word1 in syll1.phonoWords:
-                    base_score1 = sum(map(lambda w: w.frequency, syll1.phonoWords[phono_word1]))
-                    word = syll1.phonoWords[phono_word1][0]
-                    mutated_phono_word2 = word.replaceSyllables(syll1.name, p1_to_p2)
-                    phono_syll2= self.getSyllable(p1_to_p2)
-                    if phono_syll2 is not None :
-                        phono_words2 = phono_syll2.phonoWords
-                        if mutated_phono_word2 in phono_words2:
-                            base_score2: float = sum(map(lambda w: w.frequency, phono_words2[mutated_phono_word2]))
-                            least_scores = min(base_score1, base_score2)
-                            score += least_scores
+                    base_score1 = frequencySums1[phono_word1]
+                    mutated_phono_word2 = phono_word1.replace(syll1.name, p1_to_p2)
+                    if mutated_phono_word2 in frequencySums2:
+                        base_score2: float = frequencySums2[mutated_phono_word2]
+                        least_scores = min(base_score1, base_score2)
+                        score += least_scores
         return score
 
     @lru_cache
@@ -976,7 +980,7 @@ class SyllableCollection:
                                           multiphoneme2: tuple[str, ...], syllabicPart: str) -> float:
         """Ambiguity is defined by the existance of two words that are
         different by only one group of phonemes of one syllabic part.
-        If a single stroke is assigned to those two different groups of 
+        If a single stroke is assigned to those two different groups of
         phonemes then using that stroke will be ambigous.
         The score is defined by the frequnecy of the sum of least frequent
         ambgious words."""
@@ -984,24 +988,28 @@ class SyllableCollection:
         multiphoneme1_syllables = self._getSyllablesOfMultiphonemes(multiphoneme1, syllabicPart)
 
         score: float = 0.0
-        #print("m1",multiphoneme1, "m2", multiphoneme2,"syll", multiphoneme1_syllables) if len(multiphoneme1_syllables) > 0 else None
         for syll1 in multiphoneme1_syllables:
             # Score is only defined by the 2 syllables that
-            # have 1 group of phonemes in 1 syllabic part different
+            # have 1 group of phonemes in 1 syllabic part different.
+            # The mutated syllable name and its inventory entry depend only on
+            # (syll1, multiphoneme2), never on the word -- hoist them out of
+            # the per-word loop and skip the whole syllable when the mutated
+            # syllable does not exist (no phono word of syll1 can match then).
             multip1_to_multip2 = syll1.replaceMultiphonemeInSyllabicPart(multiphoneme2, syllabicPart)
-            #print("syll1", syll1, syllabicPart, "multip1to2", multip1_to_multip2)
+            phono_syll2 = self.getSyllable(multip1_to_multip2)
+            if phono_syll2 is None:
+                continue
+            frequencySums2 = phono_syll2.phonoWordFrequencySums()
+            frequencySums1 = syll1.phonoWordFrequencySums()
             for phono_word1 in syll1.phonoWords:
-                base_score1 = sum(map(lambda w: w.frequency, syll1.phonoWords[phono_word1]))
-                word = syll1.phonoWords[phono_word1][0]
-                mutated_phono_word2 = word.replaceSyllables(syll1.name, multip1_to_multip2)
-                phono_syll2= self.getSyllable(multip1_to_multip2)
-                #print("syll1", syll1.name, "word", word.ortho, "mutated_phono_word2", mutated_phono_word2, "phono_syll2", phono_syll2.name if phono_syll2 is not None else None)
-                if phono_syll2 is not None :
-                    phono_words2 = phono_syll2.phonoWords
-                    if mutated_phono_word2 in phono_words2:
-                        base_score2: float = sum(map(lambda w: w.frequency, phono_words2[mutated_phono_word2]))
-                        least_scores = min(base_score1, base_score2)
-                        score += least_scores
+                # word.replaceSyllables(syll1.name, multip1_to_multip2) with
+                # word = the bucket's first Word: its phonology IS phono_word1
+                # (phonoWords is keyed by it).
+                mutated_phono_word2 = phono_word1.replace(syll1.name, multip1_to_multip2)
+                base_score2 = frequencySums2.get(mutated_phono_word2)
+                if base_score2 is not None:
+                    least_scores = min(frequencySums1[phono_word1], base_score2)
+                    score += least_scores
         return score
 
     def analysePhonemSyllabicAmbiguity(self):

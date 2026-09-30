@@ -1,0 +1,61 @@
+Tue Sep 29 18:28:02 2026    scratch/profiles2/elicitation.pstats
+
+         57347889 function calls (45267799 primitive calls) in 30.092 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1264 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    146/1    0.009    0.000   30.113   30.113 {built-in method builtins.exec}
+        1    0.000    0.000   30.113   30.113 <string>:1(<module>)
+        1    0.000    0.000   30.113   30.113 <frozen runpy>:206(run_module)
+        1    0.000    0.000   30.111   30.111 <frozen runpy>:65(_run_code)
+        1    0.875    0.875   30.111   30.111 /home/jfsp/stenalgo-fix/src/elicitation.py:1(<module>)
+        1    0.007    0.007   18.543   18.543 /home/jfsp/stenalgo-fix/src/elicitation.py:619(resolveAndWritePressSets)
+        2    1.978    0.989   12.846    6.423 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/__init__.py:120(dump)
+  6152450    1.222    0.000    9.856    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:426(_iterencode)
+13597810/6152450    4.343    0.000    8.634    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:280(_iterencode_list)
+10483370/6152444    3.057    0.000    7.280    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:339(_iterencode_dict)
+        6    3.639    0.607    3.640    0.607 {built-in method _pickle.load}
+        1    0.494    0.494    3.514    3.514 /home/jfsp/stenalgo-fix/src/elicitation.py:503(serializeResolvedPressSets)
+        1    0.180    0.180    3.394    3.394 /home/jfsp/stenalgo-fix/src/elicitation.py:68(buildLemmaHomophoneGroups)
+    79623    0.752    0.000    3.045    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:32(canonicalizeStrokes)
+   148440    2.418    0.000    2.825    0.000 /home/jfsp/stenalgo-fix/src/elicitation.py:532(readingsOf)
+        1    0.024    0.024    2.767    2.767 /home/jfsp/stenalgo-fix/src/elicitation.py:591(printScaleReport)
+        1    1.304    1.304    2.743    2.743 /home/jfsp/stenalgo-fix/src/elicitation.py:172(reportScale)
+   321181    2.236    0.000    2.293    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:49(<genexpr>)
+   248889    0.669    0.000    1.700    0.000 /home/jfsp/stenalgo-fix/src/elicitation.py:93(featureCombinationsByOrtho)
+        1    0.439    0.439    1.019    1.019 /home/jfsp/stenalgo-fix/src/elicitation.py:321(resolvePressByCombination)
+
+
+===== sort by tottime =====
+Tue Sep 29 18:28:02 2026    scratch/profiles2/elicitation.pstats
+
+         57347889 function calls (45267799 primitive calls) in 30.092 seconds
+
+   Ordered by: internal time
+   List reduced from 1264 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+13597810/6152450    4.343    0.000    8.634    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:280(_iterencode_list)
+        6    3.639    0.607    3.640    0.607 {built-in method _pickle.load}
+10483370/6152444    3.057    0.000    7.280    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:339(_iterencode_dict)
+   148440    2.418    0.000    2.825    0.000 /home/jfsp/stenalgo-fix/src/elicitation.py:532(readingsOf)
+   321181    2.236    0.000    2.293    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:49(<genexpr>)
+        2    1.978    0.989   12.846    6.423 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/__init__.py:120(dump)
+        1    1.304    1.304    2.743    2.743 /home/jfsp/stenalgo-fix/src/elicitation.py:172(reportScale)
+  6152450    1.222    0.000    9.856    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/encoder.py:426(_iterencode)
+  6152448    1.012    0.000    1.012    0.000 {method 'write' of '_io.TextIOWrapper' objects}
+   649678    0.935    0.000    0.935    0.000 /home/jfsp/stenalgo-fix/src/elicitation.py:37(wordFeatureCombinations)
+        1    0.875    0.875   30.111   30.111 /home/jfsp/stenalgo-fix/src/elicitation.py:1(<module>)
+  7190073    0.811    0.000    0.811    0.000 {built-in method builtins.isinstance}
+    79623    0.752    0.000    3.045    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:32(canonicalizeStrokes)
+   248889    0.669    0.000    1.700    0.000 /home/jfsp/stenalgo-fix/src/elicitation.py:93(featureCombinationsByOrtho)
+1583012/1281578    0.619    0.000    0.856    0.000 {built-in method builtins.sorted}
+        1    0.494    0.494    3.514    3.514 /home/jfsp/stenalgo-fix/src/elicitation.py:503(serializeResolvedPressSets)
+  2673610    0.442    0.000    0.442    0.000 {method 'add' of 'set' objects}
+        1    0.439    0.439    1.019    1.019 /home/jfsp/stenalgo-fix/src/elicitation.py:321(resolvePressByCombination)
+        1    0.363    0.363    0.774    0.774 /home/jfsp/stenalgo-fix/src/elicitation.py:228(buildQuestionnaireItems)
+   666857    0.226    0.000    0.226    0.000 {method 'get' of 'dict' objects}
+
+

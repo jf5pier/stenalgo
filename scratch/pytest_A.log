@@ -1,0 +1,26 @@
+........................................................................ [ 10%]
+........................................................................ [ 20%]
+....................................F................................... [ 30%]
+........................................................................ [ 40%]
+........................................................................ [ 50%]
+........................................................................ [ 60%]
+........................................................................ [ 70%]
+........................................................................ [ 80%]
+........................................................................ [ 90%]
+....................................................................     [100%]
+=================================== FAILURES ===================================
+____________________ test_moved_constants_keep_their_values ____________________
+
+    def test_moved_constants_keep_their_values():
+        # These moved from dictionary.py; pin them so the move cannot silently drift.
+>       assert PICKLE_CACHE_PATHS == ("Dictionary.pickle", "PhoneticTheory.pickle")
+E       AssertionError: assert ('Dictionary....heory.pickle') == ('Dictionary....heory.pickle')
+E         
+E         Left contains one more item: 'DisambiguatedTheory.pickle'
+E         Use -v to get more diff
+
+src/test/build_synthetic_lexicon_test.py:59: AssertionError
+=========================== short test summary info ============================
+FAILED src/test/build_synthetic_lexicon_test.py::test_moved_constants_keep_their_values
+1 failed, 715 passed in 3.67s
+PYTEST_EXIT=1

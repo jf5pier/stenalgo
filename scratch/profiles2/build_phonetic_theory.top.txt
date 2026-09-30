@@ -1,0 +1,61 @@
+Tue Sep 29 18:25:20 2026    scratch/profiles2/build_phonetic_theory.pstats
+
+         95908706 function calls (95906103 primitive calls) in 65.722 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1456 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+      7/6    0.821    0.117   74.707   12.451 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/threading.py:651(wait)
+    148/1    0.023    0.000   65.484   65.484 {built-in method builtins.exec}
+      2/1    0.000    0.000   65.484   65.484 <string>:1(<module>)
+      2/1    0.324    0.162   65.484   65.484 <frozen runpy>:206(run_module)
+      2/1    0.000    0.000   64.398   64.398 <frozen runpy>:65(_run_code)
+      2/1    0.057    0.028   64.381   64.381 /home/jfsp/stenalgo-fix/util/build_phonetic_theory.py:1(<module>)
+      7/6    0.007    0.001   64.207   10.701 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/threading.py:337(wait)
+        1    0.000    0.000   34.827   34.827 /home/jfsp/stenalgo-fix/dictionary.py:213(analyseAmbiguities)
+    27084    7.395    0.000   19.166    0.001 /home/jfsp/stenalgo-fix/src/grammar.py:996(lexicalSyllabicPartAmbiguityScore)
+        6    0.000    0.000   15.534    2.589 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/multiprocessing/process.py:149(join)
+      2/1    0.000    0.000   14.305   14.305 /home/jfsp/stenalgo-fix/util/build_phonetic_theory.py:87(main)
+        1    0.000    0.000   13.653   13.653 /home/jfsp/stenalgo-fix/src/grammar.py:1071(analysePhonemeLexicalAmbiguity)
+       12    0.000    0.000   11.628    0.969 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/multiprocessing/popen_fork.py:25(poll)
+        6    0.000    0.000   11.628    1.938 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/multiprocessing/popen_fork.py:37(wait)
+       12   11.628    0.969   11.628    0.969 {built-in method posix.waitpid}
+        1    0.000    0.000   11.112   11.112 /home/jfsp/stenalgo-fix/util/build_phonetic_theory.py:76(loadOrBuildPhoneticTheory)
+        1    0.000    0.000    8.959    8.959 /home/jfsp/stenalgo-fix/src/grammar.py:1111(analyseMultiphonemeLexicalAmbiguity_serial)
+        3    0.020    0.007    8.958    2.986 /home/jfsp/stenalgo-fix/src/grammar.py:1119(_getLexicalAmbiguityScores)
+   668519    0.444    0.000    8.650    0.000 /home/jfsp/stenalgo-fix/dictionary.py:339(<genexpr>)
+        1    0.034    0.034    8.527    8.527 /home/jfsp/stenalgo-fix/dictionary.py:86(__init__)
+
+
+===== sort by tottime =====
+Tue Sep 29 18:25:20 2026    scratch/profiles2/build_phonetic_theory.pstats
+
+         95908706 function calls (95906103 primitive calls) in 65.722 seconds
+
+   Ordered by: internal time
+   List reduced from 1456 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+       12   11.628    0.969   11.628    0.969 {built-in method posix.waitpid}
+    27084    7.395    0.000   19.166    0.001 /home/jfsp/stenalgo-fix/src/grammar.py:996(lexicalSyllabicPartAmbiguityScore)
+  1137140    5.876    0.000    6.129    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:477(getStrokesOfPhoneme)
+    32/27    4.949    0.155    4.950    0.183 {method 'acquire' of '_thread.lock' objects}
+ 17332146    2.956    0.000    2.956    0.000 {method 'get' of 'dict' objects}
+ 16420266    2.808    0.000    2.808    0.000 {method 'replace' of 'str' objects}
+        6    2.441    0.407    2.453    0.409 {built-in method _pickle.dump}
+  6415591    1.936    0.000    2.181    0.000 {method 'join' of 'str' objects}
+  1544252    1.762    0.000    3.647    0.000 /home/jfsp/stenalgo-fix/src/grammar.py:747(replaceMultiphonemeInSyllabicPart)
+        1    1.159    1.159    8.493    8.493 /home/jfsp/stenalgo-fix/dictionary.py:102(readCorpus)
+   496729    1.051    0.000    1.553    0.000 /home/jfsp/stenalgo-fix/src/grammar.py:574(increaseFrequency)
+   171747    0.942    0.000    4.164    0.000 /home/jfsp/stenalgo-fix/src/word.py:85(__post_init__)
+    79623    0.928    0.000    1.739    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:646(strokesToString)
+   496772    0.925    0.000    1.033    0.000 /home/jfsp/stenalgo-fix/src/grammar.py:569(phonemeNamesByPart)
+  2038750    0.909    0.000    1.762    0.000 /home/jfsp/stenalgo-fix/src/grammar.py:992(<lambda>)
+   496772    0.822    0.000    7.174    0.000 /home/jfsp/stenalgo-fix/src/keyboard.py:631(getStrokeOfSyllableByPart)
+      7/6    0.821    0.117   74.707   12.451 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/threading.py:651(wait)
+   373481    0.764    0.000    1.532    0.000 /home/jfsp/.local/share/uv/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/csv.py:173(__next__)
+  1143944    0.711    0.000    0.895    0.000 {built-in method builtins.next}
+  2231001    0.569    0.000    0.569    0.000 {method 'split' of 'str' objects}
+
+

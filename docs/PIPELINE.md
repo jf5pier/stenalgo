@@ -46,7 +46,7 @@ The real dependency order. Steps 0 and 1 and the human loop 4h are run by hand, 
 | 4h | `python -m util.build_questionnaire_page` → publish → answer → copy answers into `elicitation_answers.json` → rerun step 4 (`--resolve`) | Elicitation Phase: Answer Collection | only when step 4 reports "unresolved oppositions" | The human-in-the-loop part. The page is also rendered by `--ask` (standalone `python -m util.build_questionnaire_page` still works). |
 | 5 | `python -m util.build_keypress_groups` | Discriminating-Feature Grouping (Grouping Phase) | when the live features or discriminating feature sets change | The tracked output rarely changes after a lexicon fix. |
 | 6 | `python -m util.build_realization_report` | Discriminating-Feature Stroke Realization (Realization Phase), report build | before step 9's keyboard legend | Writes the realization report only. It does not feed the disambiguated theory or the Plover dictionary. |
-| 7 | `python -m util.build_disambiguated_theory` | Different-Lemma or Grammatical-Category Disambiguation (S7) | only to refresh `disambiguated_theory.tsv` | Fast (pickles exist); hard-errors naming the exact prerequisite commands when the pickles or JSONs are missing. |
+| 7 | `python -m util.build_disambiguated_theory` | Different-Lemma or Grammatical-Category Disambiguation (S7) | to refresh `disambiguated_theory.tsv` and the exporters' `DisambiguatedTheory.pickle` | Fast (pickles exist); hard-errors naming the exact prerequisite commands when the pickles or JSONs are missing. Also writes the fingerprinted `DisambiguatedTheory.pickle` every exporter loads instead of recomputing (fact 1). |
 | 8 | `python -m util.export_plover_dictionary`, `python -m util.export_plover_system` | Theory Export (S8), Plover branch | Plover | Either order. |
 | 9 | `python -m util.export_keyboard_layout` (after step 6), `python -m util.export_practice_words`, **then** `python -m util.export_practice_sentences`, then `python -m util.export_definitions` | Theory Export (S8), trainer branch | steno-trainer | `export_practice_sentences` reads `practice-words.json` (export_practice_sentences.py:157). |
 | opt | `python -m util.check_conjugation_disambiguation_order` | Elicitation Phase: Answer Collection, validator | checking answers | Writes `conjugation_disambiguation_report.json` (gitignored). |
@@ -75,10 +75,13 @@ wall time — plus the heavyweight phases inside `util.build_phonetic_theory` an
 Four facts that the command list does not show:
 
 1. **Nothing reads `disambiguated_theory.tsv`.** It is a gitignored human view. Every exporter that
-   needs the disambiguated theory recomputes it (`util/_theoryio.loadPhoneticAndDisambiguatedTheory` →
-   `Dictionary.buildDisambiguatedTheory`, util/_theoryio.py:82), rerunning the Realization Phase and
-   Different-Lemma or Grammatical-Category Disambiguation (S7), four times in a full export.
-   Step 7 only refreshes `disambiguated_theory.tsv`; the Plover dictionary needs steps 4 and 5.
+   needs the disambiguated theory loads the fingerprinted `DisambiguatedTheory.pickle` written by
+   step 7 (`util/_theoryio.loadPhoneticAndDisambiguatedTheory` → `loadCachedDisambiguatedTheory`);
+   only a fingerprint miss (an input's md5 changed since the pickle was written, or the pickle is
+   absent/corrupt) falls back to recomputing `Dictionary.buildDisambiguatedTheory` in the
+   exporter's own process. Before 2026-09-29 every export recomputed it — the Realization Phase
+   plus Different-Lemma or Grammatical-Category Disambiguation (S7), four times in a full export.
+   Step 7 refreshes `disambiguated_theory.tsv` and that pickle; the Plover dictionary needs steps 4 and 5.
 2. **The pickle-cache trap.** `util.build_phonetic_theory` reuses `Dictionary.pickle` and
    `PhoneticTheory.pickle` whenever they exist (util/build_phonetic_theory.py). Neither cache is
    checked against the lexicon TSVs, `excluded_words.txt` or `starboard3h.json`. After a
@@ -175,8 +178,8 @@ The names below are used in every "Input state" and "Result" line.
 | **resolved discriminating feature sets** | in memory `dict[LemmaHomophoneGroupKey, dict[WordOrtho, list[frozenset[str]]]]`; on disk a list of `{strokes, lemmeGramCat, pressSets, frequencies, readings}`; reloaded as `PressSetsByGroup` (group id `lemmeGramCat@strokes`); 47,828 groups | `resolveGroupPressSets` elicitation.py:374, `serializeResolvedPressSets` :471 | `resolved_press_sets.json` (gitignored) |
 | **keypress groups** | `markersByKeypress: dict[int, frozenset[str]]` (K=7) + metadata | `minKeypressesSatWithPriorities` featuregroupingsat.py:490, `serializeAssignment` :530 | `keypress_groups.json` (tracked) |
 | **keypress group population** | `groupToWords: dict[int, list[Word]]` + `extraGroupSetsByWord: dict[Word, list[frozenset[int]]]` | ambiguitychecker.py:803, :844 | no |
-| **physical keypress group assignment** | `KeypressGroupPhysicalAssignment` (`chosenKeysByGroup`, cost, alternates, residual buckets) | `realizeKeypressGroupsAsExtraStroke` ambiguitychecker.py:987 | report build only: `realization_report.json` (tracked) |
-| **final induced strokes** | `dict[Word, Strokes]`: base strokes plus at most one feature discriminating stroke | `buildFinalInducedStrokes` ambiguitychecker.py:1168 | no |
+| **physical keypress group assignment** | `KeypressGroupPhysicalAssignment` (`chosenKeysByGroup`, cost, alternates, residual buckets) | `realizeKeypressGroupsAsExtraStroke` ambiguitychecker.py:928 | report build only: `realization_report.json` (tracked) |
+| **final induced strokes** | `dict[Word, Strokes]`: base strokes plus at most one feature discriminating stroke | `buildFinalInducedStrokes` ambiguitychecker.py:1217 | no |
 | **disambiguated theory** | `dict[Word, list[Strokes]]`: index 0 primary (with its star/hash mark), then alternate entries | `Dictionary.buildDisambiguatedTheory` dictionary.py:342 | `disambiguated_theory.tsv` (gitignored, read by nothing) |
 | **Plover dictionary** | `dict[str, str]` (RTFCRE steno → spelling); 167,719 entries | `export_plover_dictionary.main` | `plover_stenalgo_dictionary.json` (tracked) |
 | **Plover key table** | module with `KEYS`, `IMPLICIT_HYPHEN_KEYS`, `GEMINI_PR_KEYMAP` | `export_plover_system.main` | `plover_stenalgo/plover_stenalgo/_generated_keys.py` (tracked) |
@@ -839,10 +842,13 @@ Transformation: three scorers:
 - `analysePhonemeLexicalAmbiguity` (:1098, `lexicalPhonemeAmbiguityScore` :883): same at word
   level via `Word.replaceSyllables` (word.py:369). Looks up a word phonology as a syllable
   name at :913, :931 (item B29).
-- `analyseMultiphonemeLexicalAmbiguity_serial` (:1138, `lexicalSyllabicPartAmbiguityScore`
-  :975): for every pair of whole-part phoneme groups, swaps group 1 for group 2 and adds
+- `analyseMultiphonemeLexicalAmbiguity_serial` (:1111, `lexicalSyllabicPartAmbiguityScore`
+  :996): for every pair of whole-part phoneme groups, swaps group 1 for group 2 and adds
   min(word frequency, mutated-word frequency) when the mutated word exists — the
-  **syllabic-part ambiguity**.
+  **syllabic-part ambiguity**. Per-syllable invariants (the mutated syllable name and its
+  inventory entry) are hoisted out of the per-word loop, and per-syllable frequency sums
+  come from `Syllable.phonoWordFrequencySums` (lazy, never pickled) — the pre-2026-09-29
+  version recomputed both per word (the S3 build's #1 cost, ~90 s/pass).
 Result: layout statistics: `syllabicAmbiguity`/`lexicalAmbiguity` 190/120/190 pairs
 (onset/nucleus/coda); `syllabicPartAmbiguity` 16,836/378/9,870 pairs, zeros included.
 Notes: `syllabicPartAmbiguity` feeds Layout solve (S4.4); `lexicalAmbiguity` feeds Fallback keymap (S4.3).
@@ -1039,8 +1045,8 @@ S6.Realization.5 Coda key search — realizeKeypressGroupsAsExtraStroke (:987)
   S6.Realization.5.3 Candidate cost — _candidateCost (:1147)
   S6.Realization.5.4 Word finalization — _finalizeReadyWords (:1066)
   S6.Realization.5.5 Final verification and residual buckets — (:1219-1258)
-S6.Realization.6 Final induced strokes (inline path) — buildFinalInducedStrokes (:1168)
-S6.Realization.7 Alternate entry strokes (inline path) — buildExtraInducedStrokes (:1196)
+S6.Realization.6 Final induced strokes (inline path) — buildFinalInducedStrokes (:1217)
+S6.Realization.7 Alternate entry strokes (inline path) — buildExtraInducedStrokes (:1246)
 S6.Realization.8 Report serialization (report build) — build_realization_report.main (:74-112)
 ```
 
@@ -1300,8 +1306,9 @@ now holds only the loaders and verifiers (`loadResolvedPressSets`,
 ### Discriminating-Feature Stroke Realization (Realization Phase)
 
 One sequence of calls, two code paths. The **inline path** runs inside
-`Dictionary.buildDisambiguatedTheory` (dictionary.py:373-389) and feeds the disambiguated theory and every exporter
-(util/_theoryio.py:82). The **report build** is `util/build_realization_report.py` main
+`Dictionary.buildDisambiguatedTheory` (dictionary.py:373-389) and feeds the disambiguated theory
+and (on a `DisambiguatedTheory.pickle` miss) every exporter (util/_theoryio.py:82). The
+**report build** is `util/build_realization_report.py` main
 (:58-72) and writes the **realization report**. Both read `keypress_groups.json`
 and `resolved_press_sets.json`. Only the trainer keyboard legend reads the report, so the two
 can drift (item B18, TODO.md § Queued follow-ups).
@@ -1368,7 +1375,7 @@ Transformation: maps each preferred feature to its keypress group in this run (g
 change between runs of the Grouping Phase); features that are not live are skipped.
 Result: {4: (18,), 6: (19,), 2: (20,)}.
 
-#### Coda key search — realizeKeypressGroupsAsExtraStroke (S6.Realization.5)   src/ambiguitychecker.py:987
+#### Coda key search — realizeKeypressGroupsAsExtraStroke (S6.Realization.5)   src/ambiguitychecker.py:928
 Called by: both paths (dictionary.py:380-383; build_realization_report.py:69-72).
 Input state: keypress group population + the phonetic theory + keyboard layout + preferred keys.
 Transformation: builds `wordToGroups` (:882), the per-phoneme coda candidates (`codaKeysOf`,
@@ -1380,7 +1387,13 @@ Word finalization (S6.Realization.5.4); finally runs Final verification and resi
 Result: physical keypress group assignment (`KeypressGroupPhysicalAssignment` :904): g0→21, g1→16,
 g2→20, g3→23, g4→18, g5→17, g6→19 — all single keys, all three preferences honored.
 Helpers not expanded: `_composedInduced` (:1077), `_isRedundantForAnyWord` (:1084),
-`buildWordToGroups` (:882), `_appendCodaExtraStroke` (:892), `Keyboard.getStrokeCost` (keyboard.py:547).
+`buildWordToGroups` (:882), `_appendCodaExtraStroke` (:892), `Keyboard.getStrokeCost` (keyboard.py:547,
+memoized per (stroke, syllabicPart) since 2026-09-29 -- the coda search calls it millions
+of times over a few thousand distinct chords). Since the same date, the per-word union of
+already-decided other-group keys is computed once per group (`otherKeysByWord`), and
+`_feasible` returns the composed strokes it verified so `_candidateCost` reuses them (one
+composition pass per candidate instead of two); `wordToStrokes` can be threaded in by
+callers that already built it instead of being rebuilt here.
 
 - **Candidate ranking — _bestCandidate (S6.Realization.5.1)** :1177 — every distinct
   single-phoneme coda key-set, keeping the feasible ones with their cost; pairs
@@ -1421,7 +1434,7 @@ Helpers not expanded: `_composedInduced` (:1077), `_isRedundantForAnyWord` (:108
   final induced strokes, all from spelling twins (item B1) — which Disambiguated-theory
   assembly (S7.1) then drops from the disambiguated theory (item B47).
 
-#### Final induced strokes — buildFinalInducedStrokes (S6.Realization.6)   src/ambiguitychecker.py:1168
+#### Final induced strokes — buildFinalInducedStrokes (S6.Realization.6)   src/ambiguitychecker.py:1217
 Called by: `Dictionary.buildDisambiguatedTheory` only (dictionary.py:384).
 Transformation: for **every** phonetic-theory Word (dict order, deterministic): a Word that needs
 groups gets one feature discriminating stroke with the union of their chosen keys; others
@@ -1481,8 +1494,9 @@ Scale: 4,450 lemma-homophone groups. Sizes (Words): 2: 2,947; 3: 989; 4: 341; 5:
 ### Disambiguated-theory assembly — Dictionary.buildDisambiguatedTheory (S7.1)   dictionary.py:342
 Called by: `python -m util.build_disambiguated_theory` (`main`
 util/build_disambiguated_theory.py:49, after checking both
-`keypress_groups.json` and `resolved_press_sets.json` exist, :37-40) and every
-Theory Export (S8) exporter through Disambiguated-theory loading (S8.1).
+`keypress_groups.json` and `resolved_press_sets.json` exist, :37-40) and, only on
+a `DisambiguatedTheory.pickle` fingerprint miss, a Theory Export (S8) exporter
+through Disambiguated-theory loading (S8.1).
 Input state: the phonetic theory (78,680 keys / 168,314 Words), keyboard layout, the two JSON paths.
 Transformation: (1) loads `markersByKeypress` (:371-373) and the resolved discriminating
 feature sets (:374-375); (2) runs the Realization Phase on its inline path (S7.2) → final
@@ -1498,7 +1512,7 @@ on its own final stroke).
 Result: the disambiguated theory, 168,042 Words in phonetic-theory order; `disambiguated_theory.tsv` has 186,234 data rows, so 18,192
 alternate entries.
 Artifacts: reads both JSON files and `resources/reform1990.tsv` (path relative to the working directory).
-Notes: never uses `self`, so exporters unpickle the whole `Dictionary` just to call it (refactor candidate).
+Notes: never uses `self`, so callers unpickle the whole `Dictionary` just to call it (refactor candidate).
 
 ### Realization Phase, inline path (S7.2)   dictionary.py:373-384
 Called by: Disambiguated-theory assembly (S7.1).
@@ -1754,8 +1768,9 @@ regression.
 
 Theory Export (S8) turns the disambiguated theory into the files people use: the **Plover branch**
 (dictionary, key table, plugin) and the **trainer branch** (four JSON files), plus two shared
-calls. Every exporter that needs the disambiguated theory recomputes it in its own process; none reads
-`disambiguated_theory.tsv`. The key table (S8.4) and the trainer legend (S8.6) read only `starboard3h.json`,
+calls. Every exporter that needs the disambiguated theory loads the fingerprinted
+`DisambiguatedTheory.pickle` written by step 7 (recomputing in its own process only on a
+fingerprint miss); none reads `disambiguated_theory.tsv`. The key table (S8.4) and the trainer legend (S8.6) read only `starboard3h.json`,
 and the legend also reads the realization report.
 
 ### Shared calls
@@ -1768,10 +1783,14 @@ Transformation: raises unless both JSON inputs exist (:92-94); `_loadDictionaryA
 (:41) aliases `__main__.Dictionary` (pickles written by dictionary.py's old buildOnly recorded
 the class as `__main__`; new ones written by `util.build_phonetic_theory` record
 `dictionary.Dictionary` and need no alias),
-unpickles the five `Dictionary.pickle` objects and the phonetic theory, then calls
-`dictionary.buildDisambiguatedTheory(...)` (:96).
+unpickles the five `Dictionary.pickle` objects and the phonetic theory, then loads
+`DisambiguatedTheory.pickle` through `loadCachedDisambiguatedTheory` when its
+fingerprint (per-input md5s of `resources/LexiqueMixte.tsv`,
+`resources/LexiqueSynthetic.tsv`, `starboard3h.json` and the two JSON inputs)
+matches, and only on a miss calls `dictionary.buildDisambiguatedTheory(...)`.
 Result: (the phonetic theory, the disambiguated theory); `loadDisambiguatedTheory` drops the phonetic theory.
-Artifacts: reads both pickles, both JSON inputs, `resources/reform1990.tsv`.
+Artifacts: reads both pickles (plus `DisambiguatedTheory.pickle` on a hit), both JSON inputs,
+`resources/reform1990.tsv` (recompute path only).
 
 #### Stroke rendering — renderFinalStrokesToRTFCRE (S8.2)   util/_stenorender.py:39
 Called by: Plover dictionary export (S8.3, :45), Trainer word drill (S8.7, :231), Trainer
