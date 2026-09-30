@@ -9,6 +9,11 @@ comes from the JSON; only the navigation chrome is English, like the other
 modes. The word records reuse the `practice-words.json` shape verbatim
 (spec `docs/specs/lessons.md` §6), so `Drill.wordDecoder` decodes them
 unchanged. Fetched only when the mode is first opened (see `Main.elm`).
+Rule texts, lesson/section/track titles and track descriptions embed
+X-SAMPA (phoneme spans, key names, steno examples), so both views apply
+the caller's `render` (notation -> string, `Notation.render`) to every
+such string -- except rule `examples`, which are orthographies, never
+phonetics.
 -}
 
 import Drill exposing (PracticeWord)
@@ -97,38 +102,54 @@ ruleDecoder =
 description, and that track's lessons as a vertical list of buttons (the
 export's generation order is the learning order). `onSelect` receives the
 lesson's id; `selected` (the id of the selected lesson, if any) only shows
-up here after coming back from the intro or a drill. -}
-viewList : (String -> msg) -> Maybe String -> Lessons -> Html msg
-viewList onSelect selected lessons =
+up here after coming back from the intro or a drill. `render` (the
+notation's string rewriter, `Notation.render`) is applied to the track and
+lesson titles and the track descriptions, whose X-SAMPA content must follow
+the notation toggle. -}
+viewList :
+    { onSelect : String -> msg
+    , selected : Maybe String
+    , render : String -> String
+    }
+    -> Lessons
+    -> Html msg
+viewList config lessons =
     div [ class "lessons" ]
-        (List.map (viewTrack onSelect selected lessons) lessons.tracks)
+        (List.map (viewTrack config lessons) lessons.tracks)
 
 
-viewTrack : (String -> msg) -> Maybe String -> Lessons -> Track -> Html msg
-viewTrack onSelect selected lessons track =
+viewTrack :
+    { config | onSelect : String -> msg, selected : Maybe String, render : String -> String }
+    -> Lessons
+    -> Track
+    -> Html msg
+viewTrack config lessons track =
     let
         trackLessons =
             List.filter (\lesson -> lesson.track == track.id) lessons.lessons
     in
     div [ class "lesson-track" ]
-        [ h3 [] [ text track.title ]
-        , p [ class "lesson-track-description" ] [ text track.description ]
+        [ h3 [] [ text (config.render track.title) ]
+        , p [ class "lesson-track-description" ] [ text (config.render track.description) ]
         , ul [ class "lesson-list" ]
-            (List.map (viewLessonButton onSelect selected) trackLessons)
+            (List.map (viewLessonButton config) trackLessons)
         ]
 
 
-viewLessonButton : (String -> msg) -> Maybe String -> Lesson -> Html msg
-viewLessonButton onSelect selected lesson =
+viewLessonButton :
+    { config | onSelect : String -> msg, selected : Maybe String, render : String -> String }
+    -> Lesson
+    -> Html msg
+viewLessonButton config lesson =
     li []
         [ button
             [ classList
                 [ ( "lesson-item", True )
-                , ( "selected", selected == Just lesson.id )
+                , ( "selected", config.selected == Just lesson.id )
                 ]
-            , onClick (onSelect lesson.id)
+            , onClick (config.onSelect lesson.id)
             ]
-            [ text lesson.title ]
+            [ text (config.render lesson.title) ]
         ]
 
 
@@ -138,11 +159,16 @@ every key of its `newChords` lit, and the button that starts the drill
 (handled in `Main.elm`, which shuffles the lesson's `words` into the shared
 `Drill` engine). `keys` are the layout's keys already notation-mapped (see
 `Notation.layout`); a lesson still loading its layout simply renders no
-keyboard. Lessons with an empty pool (the affixes stub, a thin early phoneme
-lesson) disable the button -- there is nothing to drill yet. -}
+keyboard. `render` (the notation's string rewriter, `Notation.render`) is
+applied to the section title, the lesson title and every rule text -- their
+X-SAMPA content must follow the notation toggle -- but not to rule examples
+(orthographies, never phonetics). Lessons with an empty pool (the affixes
+stub, a thin early phoneme lesson) disable the button -- there is nothing to
+drill yet. -}
 viewIntro :
     { onBack : msg
     , onStart : List PracticeWord -> msg
+    , render : String -> String
     , keys : List KeyInfo
     }
     -> Lesson
@@ -151,9 +177,9 @@ viewIntro config lesson =
     div [ class "lesson-intro" ]
         [ p [ class "lesson-back" ]
             [ button [ onClick config.onBack ] [ text "← Lessons" ] ]
-        , p [ class "lesson-section-title" ] [ text lesson.sectionTitle ]
-        , h2 [ class "lesson-title" ] [ text lesson.title ]
-        , ul [ class "lesson-rules" ] (List.map viewRule lesson.rules)
+        , p [ class "lesson-section-title" ] [ text (config.render lesson.sectionTitle) ]
+        , h2 [ class "lesson-title" ] [ text (config.render lesson.title) ]
+        , ul [ class "lesson-rules" ] (List.map (viewRule config.render) lesson.rules)
         , div [ class "lesson-keyboard" ]
             [ Keyboard.view
                 { highlighted = highlightedKeys lesson
@@ -173,11 +199,13 @@ viewIntro config lesson =
 
 {-| The rule texts embed their examples inline ("... (« rat », « rang »)"),
 so the examples line is the compact reminder of the words to look for, not a
-duplicate reading of the text. -}
-viewRule : Rule -> Html msg
-viewRule rule =
+duplicate reading of the text. `render` rewrites the text's X-SAMPA
+(phoneme spans, key names, steno examples) per the notation toggle; the
+examples line stays as exported -- orthographies, never phonetics. -}
+viewRule : (String -> String) -> Rule -> Html msg
+viewRule render rule =
     li [ class "lesson-rule" ]
-        ([ p [ class "lesson-rule-text" ] [ text rule.text ] ]
+        ([ p [ class "lesson-rule-text" ] [ text (render rule.text) ] ]
             ++ (if List.isEmpty rule.examples then
                     []
 

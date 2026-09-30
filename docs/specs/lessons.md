@@ -241,9 +241,9 @@ Dropped when the pool has fewer than 10 records (§5).
 
 ### 4.5 `affixes` (stub)
 
-A single placeholder lesson, id `affixes-01`, kind `affixes`: rule text "À venir."
-(§7.6), no words, no keys. It reserves the track so the UI can show it; the real
-affix-abbreviation lessons are out of scope (§9).
+A single placeholder lesson, id `affixes-01`, kind `affixes`: rule text
+"Abréviations d'affixes : à venir." (§7.6), no words, no keys. It reserves the track
+so the UI can show it; the real affix-abbreviation lessons are out of scope (§9).
 
 ## 5. Word selection and the word-count rule
 
@@ -348,11 +348,12 @@ pluriel`). `{exemple_marqué}` is the pool's first record's `ortho` + `steno`
 ### 7.3 kind `verb-markers`
 
 `La touche {touche} marque {marqueurs} : {exemples}.` with `{marqueurs}` the
-group's markers rendered in French (`pers_1` → `la 1re personne`, `pers_2` → `la 2e
-personne`, `pers_3` → `la 3e personne`, `infinitif` → `l'infinitif`, `impératif` →
-`l'impératif`, `subjonctif` → `le subjonctif`, `imparfait` → `l'imparfait`,
-`future` → `le futur`, `passé` → `le passé`, `conditionnel` → `le conditionnel`),
-joined with ` et `.
+group's markers rendered in French (`pers_1` → `la première personne`, `pers_2` →
+`la deuxième personne`, `pers_3` → `la troisième personne`, `infinitif` →
+`l'infinitif`, `impératif` → `l'impératif`, `subjonctif` → `le subjonctif`,
+`imparfait` → `l'imparfait`, `future` → `le futur`, `passé` → `le passé`,
+`conditionnel` → `le conditionnel`), joined with ` et `. The person labels are
+spelled out (never `1re`/`2e`/`3e`) because of §8's IPA-toggle invariant.
 
 ### 7.4 kind `verb-tense`
 
@@ -388,13 +389,17 @@ layout regenerates: 100 `Les premières touches`, 125 `Les autres doigts`, 150
 `Accords à deux touches`, 175 `Accords à deux touches, suite`, 200 `Derniers
 accords d'un doigt` / (200, 2) `Voyelles à deux pouces`, 225 `Consonnes à deux
 doigts`, 250 `Accords à deux doigts, suite`, 300 `La voyelle complète`; fallback
-`Complexité {weightSum}` (distinct `(weightSum, nFingers)` steps sharing a weightSum
-share the section). Lesson titles: `Leçon {index} : {premiers phonèmes de la
-leçon}` (phonemes), `Leçon {index} : {marqueur}` (accord), `Leçon {index} :
-{mode_temps}` (verbe), `Leçon {index} : la marque {marque}` (desambiguation),
-`Leçon 1 : à venir` (affixes).
+`Complexité {weightSum en lettres}` — the weight spelled out in French words
+(`Complexité trois cents`; distinct `(weightSum, nFingers)` steps sharing a
+weightSum share the section). Lesson titles spell the lesson number in French
+words too (§8's IPA-toggle invariant; digits 1, 2, 5, 8 and 9 are mapped):
+`Leçon {index en lettres} : {premiers phonèmes de la leçon}` (phonemes), `Leçon
+{index en lettres} : {marqueur}` (accord), `Leçon {index en lettres} :
+{mode_temps}` (verbe), `Leçon {index en lettres} : la marque {marque}`
+(desambiguation), `Leçon un : à venir` (affixes). (`numberInFrench` in
+`util/export_lessons.py` renders the cardinals, 0-999.)
 
-Affixes rule text: `Règles d'abréviation des affixes : à venir.`
+Affixes rule text: `Abréviations d'affixes : à venir.`
 
 ## 8. Invariants
 
@@ -411,6 +416,16 @@ Affixes rule text: `Règles d'abréviation des affixes : à venir.`
 - Track order, lesson order within a track, and every pool order are total orders
   (the `(-frequency, ortho, steno)` key or its group variant) — no ties left to
   chance.
+- French prose in the §7 templates — rule texts, lesson/section/track titles,
+  track descriptions — never contains a character of the trainer's IPA table
+  (`E O R Z S N G @ ° § 5 8 9 2 1`; `ipaByXSampa` in
+  `steno-trainer/src/Notation.elm`) outside the three places phonetics belong:
+  `/phoneme/` spans, key names and steno examples. The trainer's
+  "Phonemes: X-SAMPA / Show IPA" toggle rewrites the entire rendered string
+  character by character, so a mapped character in prose would come out as an
+  IPA glyph ("Leçon 1" would render "Leçon œ̃"). Hence the spelled-out person
+  labels (§7.3), the number words in titles and the fallback section title
+  (§7.6), and the affixes stub's wording (§4.5).
 
 ## 9. Out of scope
 

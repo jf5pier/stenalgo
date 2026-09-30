@@ -32,7 +32,7 @@
    "track": "phonemes",
    "index": 1,
    "sectionTitle": "Les premières touches",
-   "title": "Leçon 1 : @, R, j, a",
+   "title": "Leçon un : @, R, j, a",
    "kind": "phonemes",
    "newKeys": [
     8,
@@ -280,7 +280,7 @@
    "track": "phonemes",
    "index": 2,
    "sectionTitle": "Les premières touches",
-   "title": "Leçon 2 : w, s, i, e",
+   "title": "Leçon deux : w, s, i, e",
    "kind": "phonemes",
    "newKeys": [
     9,
@@ -1179,7 +1179,7 @@
    "track": "phonemes",
    "index": 3,
    "sectionTitle": "Les autres doigts",
-   "title": "Leçon 3 : m, k, t, d",
+   "title": "Leçon trois : m, k, t, d",
    "kind": "phonemes",
    "newKeys": [
     6,
@@ -2063,7 +2063,7 @@
    "track": "phonemes",
    "index": 4,
    "sectionTitle": "Les autres doigts",
-   "title": "Leçon 4 : p, t, v, R",
+   "title": "Leçon quatre : p, t, v, R",
    "kind": "phonemes",
    "newKeys": [
     4,
@@ -2933,7 +2933,7 @@
    "track": "phonemes",
    "index": 5,
    "sectionTitle": "Les autres doigts",
-   "title": "Leçon 5 : k, n, s, l",
+   "title": "Leçon cinq : k, n, s, l",
    "kind": "phonemes",
    "newKeys": [
     2,
@@ -3790,7 +3790,7 @@
    "track": "phonemes",
    "index": 6,
    "sectionTitle": "Accords à deux touches",
-   "title": "Leçon 6 : °, j, v, E",
+   "title": "Leçon six : °, j, v, E",
    "kind": "phonemes",
    "newKeys": [
     8,
@@ -4663,7 +4663,7 @@
    "track": "phonemes",
    "index": 7,
    "sectionTitle": "Accords à deux touches",
-   "title": "Leçon 7 : Z, m",
+   "title": "Leçon sept : Z, m",
    "kind": "phonemes",
    "newKeys": [
     24,
@@ -5493,7 +5493,7 @@
    "track": "phonemes",
    "index": 8,
    "sectionTitle": "Accords à deux touches, suite",
-   "title": "Leçon 8 : l, g, d, z",
+   "title": "Leçon huit : l, g, d, z",
    "kind": "phonemes",
    "newKeys": [
     4,
@@ -6362,7 +6362,7 @@
    "track": "phonemes",
    "index": 9,
    "sectionTitle": "Accords à deux touches, suite",
-   "title": "Leçon 9 : g",
+   "title": "Leçon neuf : g",
    "kind": "phonemes",
    "newKeys": [
     2,
@@ -7190,7 +7190,7 @@
    "track": "phonemes",
    "index": 10,
    "sectionTitle": "Derniers accords d'un doigt",
-   "title": "Leçon 10 : S",
+   "title": "Leçon dix : S",
    "kind": "phonemes",
    "newKeys": [
     24,
@@ -8018,7 +8018,7 @@
    "track": "phonemes",
    "index": 11,
    "sectionTitle": "Voyelles à deux pouces",
-   "title": "Leçon 11 : y, u, §, o",
+   "title": "Leçon onze : y, u, §, o",
    "kind": "phonemes",
    "newKeys": [
     11,
@@ -8875,7 +8875,7 @@
    "track": "phonemes",
    "index": 12,
    "sectionTitle": "Consonnes à deux doigts",
-   "title": "Leçon 12 : n, p, z, f",
+   "title": "Leçon douze : n, p, z, f",
    "kind": "phonemes",
    "newKeys": [
     6,
@@ -9736,7 +9736,7 @@
    "track": "phonemes",
    "index": 13,
    "sectionTitle": "Accords à deux doigts, suite",
-   "title": "Leçon 13 : 2, S, N, 5",
+   "title": "Leçon treize : 2, S, N, 5",
    "kind": "phonemes",
    "newKeys": [
     4,
@@ -10599,7 +10599,7 @@
    "track": "phonemes",
    "index": 14,
    "sectionTitle": "Accords à deux doigts, suite",
-   "title": "Leçon 14 : Z, f, b",
+   "title": "Leçon quatorze : Z, f, b",
    "kind": "phonemes",
    "newKeys": [
     2,
@@ -11448,7 +11448,7 @@
    "track": "phonemes",
    "index": 15,
    "sectionTitle": "La voyelle complète",
-   "title": "Leçon 15 : 1",
+   "title": "Leçon quinze : 1",
    "kind": "phonemes",
    "newKeys": [
     11,
@@ -12280,7 +12280,7 @@
    "track": "accord",
    "index": 1,
    "sectionTitle": "Accord (genre et nombre)",
-   "title": "Leçon 1 : le pluriel",
+   "title": "Leçon un : le pluriel",
    "kind": "accord",
    "newKeys": [
     17
@@ -13410,7 +13410,7 @@
    "track": "accord",
    "index": 2,
    "sectionTitle": "Accord (genre et nombre)",
-   "title": "Leçon 2 : le féminin",
+   "title": "Leçon deux : le féminin",
    "kind": "accord",
    "newKeys": [
     16
@@ -14628,7 +14628,7 @@
    "track": "verbe",
    "index": 1,
    "sectionTitle": "Verbes",
-   "title": "Leçon 1 : les marques de conjugaison",
+   "title": "Leçon un : les marques de conjugaison",
    "kind": "verbe",
    "newKeys": [
     18,
@@ -14641,7 +14641,7 @@
    "rules": [
     {
      "kind": "verb-markers",
-     "text": "La touche -t marque le futur et le passé et la 3e personne : « est », « tu », « ai ».",
+     "text": "La touche -t marque le futur et le passé et la troisième personne : « est », « tu », « ai ».",
      "examples": [
       "est",
       "tu",
@@ -14650,7 +14650,7 @@
     },
     {
      "kind": "verb-markers",
-     "text": "La touche -d marque la 2e personne : « est », « tu », « ai ».",
+     "text": "La touche -d marque la deuxième personne : « est », « tu », « ai ».",
      "examples": [
       "est",
       "tu",
@@ -14659,7 +14659,7 @@
     },
     {
      "kind": "verb-markers",
-     "text": "La touche -k marque l'impératif et la 1re personne : « est », « tu », « ai ».",
+     "text": "La touche -k marque l'impératif et la première personne : « est », « tu », « ai ».",
      "examples": [
       "est",
       "tu",
@@ -15622,7 +15622,7 @@
    "track": "verbe",
    "index": 2,
    "sectionTitle": "Verbes",
-   "title": "Leçon 2 : l'indicatif présent",
+   "title": "Leçon deux : l'indicatif présent",
    "kind": "verbe",
    "newKeys": [],
    "newChords": [],
@@ -16583,7 +16583,7 @@
    "track": "verbe",
    "index": 3,
    "sectionTitle": "Verbes",
-   "title": "Leçon 3 : l'imparfait de l'indicatif",
+   "title": "Leçon trois : l'imparfait de l'indicatif",
    "kind": "verbe",
    "newKeys": [],
    "newChords": [],
@@ -17773,7 +17773,7 @@
    "track": "verbe",
    "index": 4,
    "sectionTitle": "Verbes",
-   "title": "Leçon 4 : le futur de l'indicatif",
+   "title": "Leçon quatre : le futur de l'indicatif",
    "kind": "verbe",
    "newKeys": [],
    "newChords": [],
@@ -18985,7 +18985,7 @@
    "track": "verbe",
    "index": 5,
    "sectionTitle": "Verbes",
-   "title": "Leçon 5 : le participe passé, comme au passé composé",
+   "title": "Leçon cinq : le participe passé, comme au passé composé",
    "kind": "verbe",
    "newKeys": [],
    "newChords": [],
@@ -20058,7 +20058,7 @@
    "track": "verbe",
    "index": 6,
    "sectionTitle": "Verbes",
-   "title": "Leçon 6 : l'infinitif",
+   "title": "Leçon six : l'infinitif",
    "kind": "verbe",
    "newKeys": [],
    "newChords": [],
@@ -21206,7 +21206,7 @@
    "track": "verbe",
    "index": 7,
    "sectionTitle": "Verbes",
-   "title": "Leçon 7 : le conditionnel présent",
+   "title": "Leçon sept : le conditionnel présent",
    "kind": "verbe",
    "newKeys": [],
    "newChords": [],
@@ -22439,7 +22439,7 @@
    "track": "verbe",
    "index": 8,
    "sectionTitle": "Verbes",
-   "title": "Leçon 8 : le subjonctif présent",
+   "title": "Leçon huit : le subjonctif présent",
    "kind": "verbe",
    "newKeys": [],
    "newChords": [],
@@ -23537,7 +23537,7 @@
    "track": "verbe",
    "index": 9,
    "sectionTitle": "Verbes",
-   "title": "Leçon 9 : l'impératif présent",
+   "title": "Leçon neuf : l'impératif présent",
    "kind": "verbe",
    "newKeys": [],
    "newChords": [],
@@ -24657,7 +24657,7 @@
    "track": "desambiguation",
    "index": 1,
    "sectionTitle": "Désambiguïsation",
-   "title": "Leçon 1 : la marque *",
+   "title": "Leçon un : la marque *",
    "kind": "desambiguation",
    "newKeys": [
     10
@@ -25493,7 +25493,7 @@
    "track": "desambiguation",
    "index": 2,
    "sectionTitle": "Désambiguïsation",
-   "title": "Leçon 2 : la marque #",
+   "title": "Leçon deux : la marque #",
    "kind": "desambiguation",
    "newKeys": [
     15
@@ -26341,7 +26341,7 @@
    "track": "desambiguation",
    "index": 3,
    "sectionTitle": "Désambiguïsation",
-   "title": "Leçon 3 : la marque *#",
+   "title": "Leçon trois : la marque *#",
    "kind": "desambiguation",
    "newKeys": [
     10,
@@ -27228,7 +27228,7 @@
    "track": "desambiguation",
    "index": 4,
    "sectionTitle": "Désambiguïsation",
-   "title": "Leçon 4 : la marque *# *#",
+   "title": "Leçon quatre : la marque *# *#",
    "kind": "desambiguation",
    "newKeys": [],
    "newChords": [],
@@ -28223,7 +28223,7 @@
    "track": "desambiguation",
    "index": 5,
    "sectionTitle": "Désambiguïsation",
-   "title": "Leçon 5 : la marque *# *# *#",
+   "title": "Leçon cinq : la marque *# *# *#",
    "kind": "desambiguation",
    "newKeys": [],
    "newChords": [],
@@ -28630,14 +28630,14 @@
    "track": "affixes",
    "index": 1,
    "sectionTitle": "Affixes",
-   "title": "Leçon 1 : à venir",
+   "title": "Leçon un : à venir",
    "kind": "affixes",
    "newKeys": [],
    "newChords": [],
    "rules": [
     {
      "kind": "affixes",
-     "text": "Règles d'abréviation des affixes : à venir.",
+     "text": "Abréviations d'affixes : à venir.",
      "examples": []
     }
    ],

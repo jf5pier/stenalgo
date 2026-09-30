@@ -79,8 +79,11 @@ TENSES = (
 ACCORD_MARKER_ATOMS = frozenset({"f", "m", "p", "nbr_s", "nbr_p"})
 ACCORD_MARKER_LABELS = {"f": "le féminin", "p": "le pluriel", "m": "le masculin",
                         "nbr_s": "le singulier", "nbr_p": "le pluriel"}
-VERB_MARKER_LABELS = {"pers_1": "la 1re personne", "pers_2": "la 2e personne",
-                      "pers_3": "la 3e personne", "infinitif": "l'infinitif",
+# Person labels are spelled out (not "1re"/"2e"/"3e") because the digits 1 and 2
+# are IPA-mapped in the trainer's Notation.elm table: the IPA toggle rewrites the
+# whole rendered rule text, so a digit in prose would come out as an IPA glyph (§8).
+VERB_MARKER_LABELS = {"pers_1": "la première personne", "pers_2": "la deuxième personne",
+                      "pers_3": "la troisième personne", "infinitif": "l'infinitif",
                       "impératif": "l'impératif", "subjonctif": "le subjonctif",
                       "imparfait": "l'imparfait", "future": "le futur",
                       "passé": "le passé", "conditionnel": "le conditionnel"}
@@ -107,6 +110,46 @@ TRACKS = (
     ("affixes", "Affixes", "Abréviations d'affixes — à venir."),
 )
 TRACK_TITLES = {trackId: title for trackId, title, _description in TRACKS}
+
+# --- Numbers in French prose ---------------------------------------------------
+#
+# Lesson titles ("Leçon 3 : ...") and the section-title fallback spell their
+# numbers in words: the trainer's IPA toggle (Notation.elm `ipaByXSampa`) also
+# maps the digits 1, 2, 5, 8 and 9, so a digit in prose would be rewritten into
+# an IPA glyph ("Leçon 1" -> "Leçon œ̃"). French number words are lowercase and
+# free of every mapped character (§8).
+
+_FRENCH_UNITS = ("zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept",
+                 "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze",
+                 "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf")
+_FRENCH_TENS = {2: "vingt", 3: "trente", 4: "quarante", 5: "cinquante",
+                6: "soixante", 8: "quatre-vingt"}
+
+
+def numberInFrench(n: int) -> str:
+    """The cardinal `n` in lowercase French words, 0-999 (standard rules: 21
+    "vingt et un", 71 "soixante et onze", 80 "quatre-vingts", 91
+    "quatre-vingt-onze", 125 "cent vingt-cinq"). Used wherever a number would
+    otherwise sit in French prose the IPA toggle rewrites (§8)."""
+    assert 0 <= n <= 999, n
+    if n < 20:
+        return _FRENCH_UNITS[n]
+    if n < 100:
+        tens, units = divmod(n, 10)
+        if tens in (7, 9):  # soixante-dix… / quatre-vingt-dix… : rest is 1-19
+            rest = n - (60 if tens == 7 else 80)
+            joiner = " et " if n == 71 else "-"
+            return _FRENCH_TENS[6 if tens == 7 else 8] + joiner + _FRENCH_UNITS[rest]
+        if units == 0:
+            return _FRENCH_TENS[tens] + ("s" if tens == 8 else "")
+        # "et un" only with tens 20-60 ("vingt et un"), never "quatre-vingt et un".
+        joiner = " et " if units == 1 and tens < 7 else "-"
+        return _FRENCH_TENS[tens] + joiner + _FRENCH_UNITS[units]
+    hundreds, rest = divmod(n, 100)
+    hundredsWord = "cent" if hundreds == 1 else _FRENCH_UNITS[hundreds] + " cent"
+    if rest == 0:
+        return hundredsWord + ("s" if hundreds > 1 else "")
+    return hundredsWord + " " + numberInFrench(rest)
 
 # The practice-words.json record shape, verbatim (the trainer's Drill.elm decoders).
 RECORD_FIELDS = ("ortho", "before", "after", "label", "phonology", "steno", "strokes",
@@ -551,14 +594,15 @@ def buildLessons(
 
     # 4.1 phonemes
     for weightSum, nFingers, items in phonemeSteps(starboard):
-        sectionTitle = SECTION_TITLES.get((weightSum, nFingers), f"Complexité {weightSum}")
+        sectionTitle = SECTION_TITLES.get((weightSum, nFingers),
+                                         f"Complexité {numberInFrench(weightSum)}")
         for chunk in chunkStep(items):
             newCovered = coveredKeypresses | {item["keypress"] for item in chunk}
             coveredKeypresses = newCovered  # the lesson's own pool may use its new keys
             pool = poolTop(lambda record: True)
             index = counters.get("phonemes", 0) + 1
             title = "Leçon {0} : {1}".format(
-                index, ", ".join(item["phonemes"][0] for item in chunk))
+                numberInFrench(index), ", ".join(item["phonemes"][0] for item in chunk))
             _emitLesson(lessons, counters, "phonemes", title, "phonemes", sectionTitle,
                         sorted({key for item in chunk for key in item["keypress"]}),
                         [sorted(item["keypress"]) for item in chunk if len(item["keypress"]) >= 2],
@@ -572,7 +616,8 @@ def buildLessons(
         pool = poolTop(lambda record: bool(record["_gramCats"] & {GramCat.ADJ, GramCat.NOM})
                        and groupIndex in record["_groups"])
         _emitLesson(lessons, counters, "accord",
-                    f"Leçon {counters.get('accord', 0) + 1} : {_accordMarkerText(group['markers'])}",
+                    f"Leçon {numberInFrench(counters.get('accord', 0) + 1)} : "
+                    f"{_accordMarkerText(group['markers'])}",
                     "accord", TRACK_TITLES["accord"],
                     sorted(group["chosenKeys"]),
                     [list(group["chosenKeys"])] if len(group["chosenKeys"]) >= 2 else [],
@@ -584,7 +629,8 @@ def buildLessons(
     markerPool = poolTop(lambda record: bool(record["_gramCats"] & {GramCat.VER, GramCat.AUX}))
     markerNewKeys = sorted({key for i in verbGroupIndexes for key in keypressGroups[i]["chosenKeys"]})
     _emitLesson(lessons, counters, "verbe",
-                f"Leçon {counters.get('verbe', 0) + 1} : les marques de conjugaison",
+                f"Leçon {numberInFrench(counters.get('verbe', 0) + 1)} : "
+                "les marques de conjugaison",
                 "verbe", TRACK_TITLES["verbe"], markerNewKeys, [],
                 [verbMarkerRule(keypressGroups[i], starboard, markerPool)
                  for i in verbGroupIndexes],
@@ -598,7 +644,7 @@ def buildLessons(
         touchedGroups = frozenset().union(*[record["_groups"] for record in pool]) if pool else frozenset()
         touchedKeys = sorted({key for i in touchedGroups for key in keypressGroups[i]["chosenKeys"]})
         _emitLesson(lessons, counters, "verbe",
-                    f"Leçon {counters.get('verbe', 0) + 1} : {tenseLabel}",
+                    f"Leçon {numberInFrench(counters.get('verbe', 0) + 1)} : {tenseLabel}",
                     "verbe", TRACK_TITLES["verbe"], [], [],
                     [verbTenseRule(tenseLabel, touchedKeys, starboard, pool)],
                     _wordsOf(pool))
@@ -644,15 +690,16 @@ def buildLessons(
         else:
             newKeys, newChords = [], []
         _emitLesson(lessons, counters, "desambiguation",
-                    f"Leçon {counters.get('desambiguation', 0) + 1} : la marque {code}",
+                    f"Leçon {numberInFrench(counters.get('desambiguation', 0) + 1)} : "
+                    f"la marque {code}",
                     "desambiguation", TRACK_TITLES["desambiguation"], newKeys, newChords,
                     [markRule(code, starboard, pool)],
                     _wordsOf(pool))
 
     # 4.5 affixes (stub)
-    _emitLesson(lessons, counters, "affixes", "Leçon 1 : à venir", "affixes",
+    _emitLesson(lessons, counters, "affixes", "Leçon un : à venir", "affixes",
                 TRACK_TITLES["affixes"], [], [],
-                [{"kind": "affixes", "text": "Règles d'abréviation des affixes : à venir.",
+                [{"kind": "affixes", "text": "Abréviations d'affixes : à venir.",
                   "examples": []}],
                 [])
 
