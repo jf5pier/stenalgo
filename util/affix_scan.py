@@ -407,10 +407,12 @@ def partSelectAndBind(cands: dict, records: list[A.WordRecord], starboard: Starb
     selectAndBind(cands, records, starboard, ctx, pk, keypresses, lemmas, RULES_TSV, RULES_REPORT_MD)
 
 
-def partSweep(cands: dict, records: list[A.WordRecord], starboard: Starboard) -> None:  # type: ignore[type-arg]
+def partSweep(cands: dict, records: list[A.WordRecord], starboard: Starboard,  # type: ignore[type-arg]
+              settings: tuple[str, ...] | None = None) -> None:
     """U6: run rival resolution + Phases 3-4 once per weight setting, reusing the pool, sim
     context, phoneme keys and keypress list; every Rule is rebuilt per setting (scores depend on
-    the weights, which are module globals). Writes scratch/affix-sweep/<name>/... + comparison.md."""
+    the weights, which are module globals). Writes scratch/affix-sweep/<name>/... + comparison.md
+    (`settings` restricts the run to the named settings; comparison.md is then left untouched)."""
     from src import affixrules as R
 
     ctx, pk, keypresses, lemmas = _engine(cands, records, starboard)
@@ -418,6 +420,8 @@ def partSweep(cands: dict, records: list[A.WordRecord], starboard: Starboard) ->
     summaries: dict[str, dict] = {}  # type: ignore[type-arg]
     try:
         for name, alpha, exclCost, formCost in SWEEP_SETTINGS:
+            if settings and name not in settings:
+                continue
             R.EXCEPTION_ALPHA, R.EXCLUSION_COST, R.FORM_COST = alpha, exclCost, formCost
             print(f"=== sweep {name}: EXCEPTION_ALPHA={alpha} EXCLUSION_COST={exclCost} FORM_COST={formCost}")
             outDir = os.path.join(SWEEP_DIR, name)
@@ -426,7 +430,8 @@ def partSweep(cands: dict, records: list[A.WordRecord], starboard: Starboard) ->
                                             os.path.join(outDir, "affix-rules-report.md"))
     finally:
         R.EXCEPTION_ALPHA, R.EXCLUSION_COST, R.FORM_COST = saved
-    writeComparison(summaries)
+    if not settings:
+        writeComparison(summaries)
 
 
 def writeComparison(summaries: dict) -> None:  # type: ignore[type-arg]
@@ -622,6 +627,9 @@ def main() -> None:
     ap.add_argument("--sweep", action="store_true",
                      help="--part b: run selection at each SWEEP_SETTINGS weight setting "
                           f"and write {SWEEP_DIR}/")
+    ap.add_argument("--settings", default=None,
+                     help="--sweep: comma-separated weight settings to run (e.g. H); default all of "
+                          "SWEEP_SETTINGS, and comparison.md is only written then")
     ap.add_argument("--partial-overlap", action="store_true",
                     help="experiment: a RULE merges unless ALL its keys are in the neighbour stroke "
                          "(src.affixes.RULE_PARTIAL_OVERLAP); --sweep then writes to SWEEP_DIR_PARTIAL")
@@ -662,7 +670,8 @@ def main() -> None:
             if args.preview_only:
                 partRules(cands, records, starboard)
             elif args.sweep:
-                partSweep(cands, records, starboard)
+                partSweep(cands, records, starboard,
+                           tuple(args.settings.split(",")) if args.settings else None)
             else:
                 partSelectAndBind(cands, records, starboard)
     print(f"total {time.time() - t:.0f}s")
