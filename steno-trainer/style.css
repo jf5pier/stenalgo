@@ -268,3 +268,82 @@ body {
 .definition-table tr.near-homophone {
   color: #888;
 }
+
+.lessons,
+.lesson-intro {
+  max-width: 40rem;
+}
+
+.lesson-track {
+  margin-bottom: 1.5rem;
+}
+
+.lesson-track h3 {
+  font-size: 1.05rem;
+  margin: 0 0 0.2rem;
+}
+
+.lesson-track-description {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0 0 0.5rem;
+}
+
+.lesson-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lesson-item {
+  display: block;
+  width: 100%;
+  max-width: 24rem;
+  text-align: left;
+  margin: 0.2rem 0;
+  padding: 0.3rem 0.5rem;
+}
+
+.lesson-item.selected {
+  background: #eee;
+  font-weight: bold;
+}
+
+.lesson-back {
+  margin: 0 0 0.75rem;
+}
+
+.lesson-section-title {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.lesson-title {
+  font-size: 1.4rem;
+  margin: 0 0 0.5rem;
+}
+
+.lesson-rules {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5rem;
+}
+
+.lesson-rule {
+  padding: 0.3rem 0;
+}
+
+.lesson-rule-text {
+  margin: 0;
+}
+
+.lesson-rule-examples {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0.1rem 0 0;
+}
+
+.lesson-start {
+  margin: 0 0 1rem;
+}
