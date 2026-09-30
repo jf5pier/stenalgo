@@ -1021,14 +1021,14 @@ A generated lexicon row in `resources/LexiqueSynthetic.tsv` (`source=synthetic`,
 ### Theory Export (S8)
 The stage that renders the disambiguated theory for its users, in two branches: the **Plover branch**
 (Plover dictionary, key table, system plugin) and the **trainer branch** (keyboard legend,
-word drill, sentences, definitions).
-- Code: util/export_plover_dictionary.py, util/export_plover_system.py, util/export_keyboard_layout.py, util/export_practice_words.py, util/export_practice_sentences.py, util/export_definitions.py.
+word drill, sentences, definitions, lessons).
+- Code: util/export_plover_dictionary.py, util/export_plover_system.py, util/export_keyboard_layout.py, util/export_practice_words.py, util/export_practice_sentences.py, util/export_definitions.py, util/export_lessons.py.
 - Avoid "Theory Export (S5)".
 - First used in: Theory Export (S8).
 
 ### Trainer data
-A dataset state: the four steno-trainer JSON files (`keyboard-layout`, `practice-words`,
-`practice-sentences`, `definitions`) under `steno-trainer/public/data/`; the output of the
+A dataset state: the five steno-trainer JSON files (`keyboard-layout`, `practice-words`,
+`practice-sentences`, `definitions`, `lessons`) under `steno-trainer/public/data/`; the output of the
 trainer branch.
 - First used in: Theory Export (S8).
 

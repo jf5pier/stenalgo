@@ -593,11 +593,12 @@ def _runSteps(module: "Callable[[str, str], None]") -> None:
     module("Theory Export (S8): trainer word drills", "util.export_practice_words")
     module("Theory Export (S8): trainer sentences", "util.export_practice_sentences")
     module("Theory Export (S8): trainer definitions", "util.export_definitions")
+    module("Theory Export (S8): trainer lessons", "util.export_lessons")
 
     print("\nstenalgo pipeline complete: phonetic theory (pickles + phonetic_theory.tsv), "
           "LexiqueSynthetic.tsv, resolved_press_sets.json, keypress_groups.json, "
           "realization_report.json, disambiguated_theory.tsv, the Plover outputs and "
-          "the four steno-trainer exports are up to date.", flush=True)
+          "the five steno-trainer exports are up to date.", flush=True)
 
 
 if __name__ == "__main__":
