@@ -658,6 +658,7 @@ viewLessons model =
                         Lessons.viewIntro
                             { onBack = BackToLessonList
                             , onStart = StartLessonDrill
+                            , render = Notation.render model.notation
                             , keys =
                                 case model.layout of
                                     Loaded layout ->
@@ -676,7 +677,12 @@ viewLessons model =
                             ]
 
                 Nothing ->
-                    Lessons.viewList SelectLesson model.selectedLesson lessons
+                    Lessons.viewList
+                        { onSelect = SelectLesson
+                        , selected = model.selectedLesson
+                        , render = Notation.render model.notation
+                        }
+                        lessons
 
         _ ->
             p [] [ text "Loading lessons..." ]

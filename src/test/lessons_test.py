@@ -5,14 +5,16 @@ mapping, pool ranking), the French rule-text renderers, and one full
 the pickles, the realization report) are multi-MB repo artifacts the unit tests
 must not depend on, so every fixture here is hand-built."""
 
+import re
+
 import pytest
 from ..keyboard import Starboard
 from ..word import GramCat, Word
 from util.export_lessons import (
     MAX_LESSON_KEYPRESSES, RECORD_FIELDS, accordRule, buildLessons, chunkStep,
     eligible, fingerKeypressesOfStroke, loadKeypressGroups, markRule,
-    phonemeOrderingKey, phonemeRule, phonemeSteps, selectTopWords,
-    starHashCodeOf, verbMarkerRule, verbTenseOf, verbTenseRule,
+    numberInFrench, phonemeOrderingKey, phonemeRule, phonemeSteps,
+    selectTopWords, starHashCodeOf, verbMarkerRule, verbTenseOf, verbTenseRule,
 )
 
 STAR_KEY = 10
@@ -494,6 +496,40 @@ class TestEligible:
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# numberInFrench (§7.6/§8: digits 1, 2, 5, 8, 9 are IPA-mapped, so numbers in
+# prose are spelled out)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+class TestNumberInFrench:
+
+    @pytest.mark.parametrize("n, words", [
+        (0, "zéro"), (1, "un"), (8, "huit"), (9, "neuf"), (11, "onze"),
+        (16, "seize"), (17, "dix-sept"), (20, "vingt"), (21, "vingt et un"),
+        (22, "vingt-deux"), (30, "trente"), (55, "cinquante-cinq"),
+        (61, "soixante et un"), (70, "soixante-dix"), (71, "soixante et onze"),
+        (79, "soixante-dix-neuf"), (80, "quatre-vingts"),
+        (81, "quatre-vingt-un"), (91, "quatre-vingt-onze"),
+        (99, "quatre-vingt-dix-neuf"), (100, "cent"), (101, "cent un"),
+        (125, "cent vingt-cinq"), (200, "deux cents"), (300, "trois cents"),
+        (999, "neuf cent quatre-vingt-dix-neuf"),
+    ])
+    def test_cardinals(self, n, words):
+        assert numberInFrench(n) == words
+
+    @pytest.mark.parametrize("n", [-1, 1000])
+    def test_out_of_range(self, n):
+        with pytest.raises(AssertionError):
+            numberInFrench(n)
+
+    @pytest.mark.parametrize("n", range(100))
+    def test_no_ipa_mapped_character(self, n):
+        # The whole point (spec §8): French number words never contain a
+        # character of Notation.elm's ipaByXSampa table.
+        ipaByXSampa = set("E@°§5O9821RZSNG")
+        assert not (set(numberInFrench(n)) & ipaByXSampa)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # Rule-text renderers (§7)
 # ═══════════════════════════════════════════════════════════════════════════════
 
@@ -602,6 +638,15 @@ class TestVerbMarkerRule:
             "kind": "verb-markers",
             "text": "La touche l- marque le conditionnel et l'infinitif.",
             "examples": []}
+
+    def test_person_labels_are_spelled_out(self, starboard_with_layout: Starboard):
+        # "1re"/"2e"/"3e" are forbidden: the digits 1 and 2 are IPA-mapped in the
+        # trainer's Notation.elm table, and the IPA toggle rewrites the whole rule
+        # text (spec §8).
+        group = {"chosenKeys": (9,), "markers": ("pers_1", "pers_2", "pers_3")}
+        rule = verbMarkerRule(group, starboard_with_layout, [])
+        assert rule["text"] == ("La touche l- marque la première personne et "
+                                "la deuxième personne et la troisième personne.")
 
 
 class TestVerbTenseRule:
@@ -723,6 +768,30 @@ class TestBuildLessonsDocument:
         assert document1 == document2
         assert counts1 == counts2
 
+    def test_ipa_unsafe_wording_is_gone(self, lessons):
+        # Spec §8: the digits 1 and 2 are IPA-mapped in the trainer's
+        # Notation.elm table and the IPA toggle rewrites whole strings, so the
+        # person labels and the affixes stub must use the new spellings.
+        document, _counts = lessons
+        strings = [t["title"] for t in document["tracks"]] \
+            + [t["description"] for t in document["tracks"]]
+        for lesson in document["lessons"]:
+            strings += [lesson["title"], lesson["sectionTitle"]]
+            strings += [rule["text"] for rule in lesson["rules"]]
+        for s in strings:
+            assert "1re" not in s and "2e personne" not in s and "3e personne" not in s
+            assert "Règles d'abréviation" not in s
+        assert any("la deuxième personne" in s for s in strings)
+        assert any("Abréviations d'affixes : à venir." in s for s in strings)
+
+    def test_lesson_numbers_are_spelled_out(self, lessons):
+        # Titles may carry digits only as phonemes (e.g. "Leçon quinze : 1" on
+        # the real layout); the lesson number itself is a French word.
+        document, _counts = lessons
+        for lesson in document["lessons"]:
+            assert not re.match(r"Leçon \d", lesson["title"])
+            assert lesson["title"].startswith("Leçon ")
+
 
 class TestBuildLessonsPhonemesTrack:
 
@@ -730,7 +799,7 @@ class TestBuildLessonsPhonemesTrack:
         document, _counts = lessons
         lesson = _lessonOf(document, "phonemes-01")
         assert lesson["sectionTitle"] == "Les premières touches"
-        assert lesson["title"] == "Leçon 1 : a, s, t, i"
+        assert lesson["title"] == "Leçon un : a, s, t, i"
         assert lesson["kind"] == "phonemes"
         # Round-robin deal: nucleus (11), onset (8), coda (16), nucleus (12).
         assert lesson["newKeys"] == [8, 11, 12, 16]
@@ -775,13 +844,13 @@ class TestBuildLessonsPhonemesTrack:
     def test_chord_lessons_declare_new_chords(self, lessons):
         document, _counts = lessons
         lesson4 = _lessonOf(document, "phonemes-04")
-        assert lesson4["title"] == "Leçon 4 : E"
+        assert lesson4["title"] == "Leçon quatre : E"
         assert lesson4["newKeys"] == [8, 9]
         assert lesson4["newChords"] == [[8, 9]]
         assert lesson4["rules"][0]["text"] \
             == "Les touches s-, l- pressées ensemble écrivent /E/ en début de syllabe."
         lesson5 = _lessonOf(document, "phonemes-05")
-        assert lesson5["title"] == "Leçon 5 : ô"
+        assert lesson5["title"] == "Leçon cinq : ô"
         assert lesson5["newKeys"] == [11, 13]
         assert lesson5["newChords"] == [[11, 13]]
         assert lesson5["rules"][0]["text"] \
@@ -793,7 +862,7 @@ class TestBuildLessonsAccordTrack:
     def test_one_lesson_per_gender_number_group_in_affected_words_order(self, lessons):
         document, _counts = lessons
         lesson1 = _lessonOf(document, "accord-01")
-        assert lesson1["title"] == "Leçon 1 : le féminin"
+        assert lesson1["title"] == "Leçon un : le féminin"
         assert lesson1["newKeys"] == [14]
         assert _orthosOf(lesson1) == ["sate"]
         assert lesson1["rules"] == [{
@@ -801,7 +870,7 @@ class TestBuildLessonsAccordTrack:
             "text": "La touche -o marque le féminin : sate → sat/o par rapport à sat.",
             "examples": ["sate"]}]
         lesson2 = _lessonOf(document, "accord-02")
-        assert lesson2["title"] == "Leçon 2 : le pluriel"
+        assert lesson2["title"] == "Leçon deux : le pluriel"
         assert lesson2["newKeys"] == [17]
         assert _orthosOf(lesson2) == ["sates"]
         assert lesson2["rules"] == [{
@@ -822,7 +891,7 @@ class TestBuildLessonsVerbeTrack:
     def test_marker_lesson_always_ships(self, lessons):
         document, counts = lessons
         lesson = _lessonOf(document, "verbe-01")
-        assert lesson["title"] == "Leçon 1 : les marques de conjugaison"
+        assert lesson["title"] == "Leçon un : les marques de conjugaison"
         assert lesson["newKeys"] == [9, 12]  # union of the two verb groups' chosenKeys
         assert _orthosOf(lesson) == ["lise", "lire", "dis"]
         assert lesson["rules"] == [
@@ -831,7 +900,8 @@ class TestBuildLessonsVerbeTrack:
                       "« lise », « lire », « dis »."),
              "examples": ["lise", "lire", "dis"]},
             {"kind": "verb-markers",
-             "text": "La touche i- marque la 2e personne : « lise », « lire », « dis ».",
+             "text": ("La touche i- marque la deuxième personne : "
+                      "« lise », « lire », « dis »."),
              "examples": ["lise", "lire", "dis"]},
         ]
         # Every tense pool has fewer than 10 records: all 8 tense lessons drop.
@@ -851,7 +921,7 @@ class TestBuildLessonsDesambiguationTrack:
         document, counts = lessons
         lesson = _lessonOf(document, "desambiguation-01")
         assert lesson["sectionTitle"] == "Désambiguïsation"
-        assert lesson["title"] == "Leçon 1 : la marque *"
+        assert lesson["title"] == "Leçon un : la marque *"
         assert lesson["newKeys"] == [STAR_KEY]
         assert lesson["newChords"] == []
         # Whole lemma-homophone groups side by side, ranked by max frequency.
@@ -884,10 +954,10 @@ class TestBuildLessonsAffixesTrack:
         document, counts = lessons
         lesson = _lessonOf(document, "affixes-01")
         assert lesson == {"id": "affixes-01", "track": "affixes", "index": 1,
-                          "sectionTitle": "Affixes", "title": "Leçon 1 : à venir",
+                          "sectionTitle": "Affixes", "title": "Leçon un : à venir",
                           "kind": "affixes", "newKeys": [], "newChords": [],
                           "rules": [{"kind": "affixes",
-                                     "text": "Règles d'abréviation des affixes : à venir.",
+                                     "text": "Abréviations d'affixes : à venir.",
                                      "examples": []}],
                           "words": []}
         assert counts["affixes"] == 1
