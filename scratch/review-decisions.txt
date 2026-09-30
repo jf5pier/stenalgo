@@ -1,0 +1,211 @@
+# Batch rulings; row numbers refer to scratch/review-batches.txt line numbers
+# Format: row<TAB>decision (active|veto)  [-- canonical override noted in remarks]
+1	active
+2	active
+3	active
+4	active	reform-left canonical: allègement
+5	active
+6	active
+7	active
+8	active
+9	veto
+10	veto
+11	active	drop bale (user: remove it)
+12	active
+13	active
+14	active
+15	active
+16	active
+17	active
+18	active	canonical override: beluga (user)
+19	active
+20	veto
+21	active
+22	veto
+23	veto
+24	active
+25	active
+26	active
+27	active
+28	active
+29	active
+30	veto
+31	active	reform-left canonical: bouloter
+32	active
+33	active
+34	active
+35	veto
+36	veto
+37	active
+38	active
+39	active
+40	veto
+41	veto
+42	active
+43	active	canonical override: carre; drop care (user: remove it)
+44	active
+45	active
+46	active
+47	active
+48	active	reform-left canonical: chargeüre
+49	active	reform-left canonical: charriotée
+50	veto
+51	active
+52	active
+53	veto
+54	active
+55	active
+56	active
+57	active
+58	active
+59	veto
+60	active
+61	veto
+62	active
+63	active
+64	active
+65	active
+66	active	reform-left canonical: corole
+67	veto
+68	active
+69	active	reform-left canonical: curriculums
+70	active
+71	veto
+72	active	canonical override: dessouler (user: keep reformed); drop dessoûler, dessaouler
+73	active
+74	veto
+75	active
+76	active	reform-left canonical: dissout
+77	active
+78	active
+79	veto
+80	active
+81	active	reform-left canonical: empiètement
+82	active
+83	active
+84	veto
+85	active
+86	active
+87	active
+88	active
+89	active
+90	veto
+91	active	reform-left canonical: gaillèterie
+92	veto	keep both (user)
+93	veto
+94	veto	masc/fem forms of same adjective, both needed
+95	active
+96	active	reform-left canonical: garroter
+97	veto
+98	active
+99	active
+100	active
+101	active
+102	active
+103	active	drop BOTH grifton+griffton (user); canonical=griffon (independent lexicon entry, setId row "griffton": canonical grifton->griffon, dropLemmes grifton griffton)
+104	active
+105	active
+106	active	reform-left canonical: grole
+107	active
+108	veto
+109	veto
+110	active
+111	active
+112	active
+113	active	reform-left canonical: imprésario
+114	active
+115	active
+116	active
+117	active
+118	active
+119	veto
+120	active
+121	veto
+122	active
+123	active
+124	veto
+125	active
+126	active
+127	active
+128	active
+129	active	reform-left canonical: mangeoter
+130	active	drop mary only (user); canonical mari
+131	active	reform-left canonical: mariole
+132	active
+133	veto
+134	veto
+135	active
+136	active
+137	active
+138	active
+139	active
+140	active
+141	veto
+142	active
+143	active
+144	active
+145	active	canonical override: oignon (user); drop ognon
+146	active	canonical override: oignonière (user); drop ognonière
+147	active
+148	active
+149	active
+150	veto
+151	active
+152	active	drop parr only (user); canonical par
+153	active
+154	veto
+155	active
+156	active	reform-left canonical: phylloxéra
+157	active
+158	active
+159	active
+160	active	reform-left canonical: plingeüre
+161	veto
+162	active
+163	active
+164	veto
+165	veto
+166	active
+167	active
+168	active
+169	veto
+170	veto
+171	active
+172	veto
+173	active
+174	active
+175	active	canonical: soul (reformed, user); drop saoul, soûl -- needs reform1990 pairs saoul->soul
+176	active	canonical: soulard (reformed, user); drop saoulard, soûlard -- needs reform1990 pairs
+177	active	canonical: souler (reformed, user); drop saouler, soûler -- needs reform1990 pairs
+178	active	canonical: soulerie (reformed, user); drop saoulerie, soûlerie -- needs reform1990 pairs
+179	veto
+180	veto
+181	active
+182	active
+183	active
+184	active
+185	active
+186	active
+187	active	reform-left canonical: sottie
+188	active
+189	veto
+190	veto
+191	veto
+192	veto
+193	active
+194	active
+195	active
+196	active
+197	active	reform-left canonical: tempos
+198	veto
+199	active
+200	veto
+201	active
+202	active
+203	active
+204	active	reform-left canonical: téocalli
+205	active	reform-left canonical: vélum
+206	active
+207	active
+208	active	reform-left canonical: égrugeüre
+209	active

@@ -1,0 +1,34 @@
+candidates: 2200 (5s)
+families: 512 (259s)
+top 30 families by upper bound (sum freq x span):
+  P001   10552.2 sub=2 a ha
+  P002    7705.8 sub=2 re ré ren rem re re
+  S001    7301.8 sub=2 ·[be|ble|bre|ca|che|chi|cie|claffe|cle|cre|cré|cu|cé|de|di|die|dre|du|dé|dû|ffle|ffre|fie|fle|ge|gi|gle|gne|gre|gré|gu|gue|ille|le|li|lle|lu|lé|lû|ma|me|mmé|mé|ne|ni|nie|nne|nné|noie|nu|nue|né|nû|pe|pie|ple|pli|ppe|pre|que|ra|re|rre|rré|ré|se|ssuie|ssé|sé|ta|te|tie|tre|trie|tru|tte|té|ve|voue|vre|vé|xcré|xe|xtre|é]-{s°,ti}ment ·[bi|bli|bri|chi|ci|cri|di|fi|gi|gui|illi|li|mi|ni|nni|ny|phi|pi|qui|ri|rri|sci|si|ssi|sti|thi|ti|tri|tti|vi|xi|y|ï]caments
+  S002    7047.5 sub=3 ter té tant tter
+  S003    6549.3 sub=1 ·[be|ble|bre|ce|che|cle|cre|de|dre|ffle|ffre|fle|ge|gle|gne|gre|gue|ille|le|lle|me|ne|nne|pe|ple|ppe|pre|que|re|rre|sce|se|sse|te|tre|tte|ve|vre|xe|xtre]ment
+  S004    6170.1 sub=1 ·°ment
+  S005    5535.2 sub=2 ment mer
+  P003    5439.1 sub=2 en em an
+  S006    4951.5 sub=4 ser sser cer ser ssant cé ssé sé
+  S007    4683.4 sub=8 ·[pre|te|ve]nant ·[an|ban|chan|en|gen|lan|man|men|mman|pen|san|scen]dé ·[gre|me]ner ·[che|le]ver ·[mman|pen|scen|ten]dant ·[pan|pen|ten|tten|ven]du ·[cé|ssé|sé|xcé]der ·[che|le|ne]vé
+  P004    4430.7 sub=2 pour pou tou tour
+  S008    4204.4 sub=2 tion tion ssion sion sion llon
+  S009    3937.1 sub=10 ·[bu|clu|du|ffu|fu|mu|xcu]-{k}sez ·[bli|blii|dri|gri|pli|plii|ppli|pri|prii|tri|trii]-{vR}é ·[bli|bri|fi|mi|ni|pi|pli|ppli|si|ti|xi|xpli]-{d}quer ·[dan|gran|lan|llen|man|ran|rran|tran]-{S}ger ·[bla|ga|la|nna|ra|ssa|sse|ta|za]-{fR}yer ·[a|ga|ma|ra|ta|voi]-{s}giner ·[bau|bo|co|lo|ppro|pro|vau|vo]-{kR}chez ·[bai|dre|fe|lai|ppre|pre|re]-{gR}sser
+  P005    3935.9 sub=2 co+col+com+con+cor co[bi|ci|di|fi|fie|gi|li|mi|ni|pi|pie|pli|pri|si|ti|tri]· con[co|do|lo|o|plo|po|pro|so|to|trô|vo]· con[ce|cé|de|dé|e|fé|gé|plé|pré|préh|pé|qué|sé|é]·
+  S010    3641.6 sub=7 ·[bar|blar|car|char|gar|gnar|lar|llar|mar|mmar|nar|par|sar|tar|ttar|var|zar]dez ·[boy|doy|droy|geoy|loy|loyi|moy|noy|rroy|toy|troy|ttoy|voy|voyi]é ·[cla|ffa|ga|pa]rer ·[a|bâ|ca|da|la|ma|na|nna|pa|ra|rra|sa|ssa|ta|tra|va]iller ·[lei|rei|sei|vei]ller ·[bar|mar]qué ·[ba|ta]ller ·[a|ba|ca|cha|da|ma|na|ta|va]lier
+  S011    3589.5 sub=9 ·[crê|nne|pê|rrê|trai]ter ·[an|cen|chan|den|emp|gen|glan|illan|jan|len|man|men|mmen|nen|pen|plan|quen|ren|rien|san|sen|ten|tien|tten|van|ven]ter ·[che|cque|ffle|ille|je|le|lle|pe|que|re|ve]ter ·[chou|cou|dou|frou|glou|goû|jou|lou|voû]tez ·[cré|ffré|flé|gé|plé|pré|pé|quié|quê|xcré]tez ·[bu|chu|cru|cu|ffû|lu|mmu|mu|nu|ppu|pu|u|zu]ter ·[bé|cié|pié|pé|rié|tié|xié|é]té ·[chan|den|emp|gen|glan|illan|jan|man|men|pen|plan|quen|ren|rien|sen|van]té
+  S012    3573.2 sub=7 ·[bi|bri|ci|di|gi|gni|gri|i|li|lli|mi|mmi|ni|nni|pi|qui|ri|ry|si|ssi|ti|vi|xci|xi|ï]té ·[bi|ci|cy|di|fi|gi|li|mi|pi|ri|sci|si|ssi|vi|xci]ter ·[cu|du|lu|mmu|pu|scu|ssu|tu]rité ·[bbo|co|dio|gio|go|jo|lo|mmo|no|o|pro|rio|ro|to|tro|vio|vo]rité ·[bé|ccré|ce|ché|cré|cé|dé|gé|llé|lé|me|mmé|mé|né|pé|re|ré|scé|shé|té|vé|xtré|xté|é]lité ·[au|blo|bo|cho|co|do|glo|gno|go|illo|jo|llo|lo|mo|nno|no|peau|plo|po|reau|ro|sau|ssau|sso|vio|vro|ço]ter ·[bi|ci|fi|li|mi|pi|ri|rri|si|xci]tants ·[au|co|go|illo|nau|o|peau|po|ro|veau|vô]té
+  P006    3440.6 sub=5 re[bro|chau|co|do|fau|lo|mo|no|po|pro|vau|vo]· re[bou|brou|cou|dou|fou|grou|joue|loo|loue|mou|nou|pou|tou|trou|vou]· ré[cré|crée|e|flé|fé|gé|pre|pé|vei|vé|é]· ré[com|con|pon]· re[bu|chu|cu|flu|flue|fu|ju|mu|mue|pu]· ré[e|fle|vei]· ré[cu|du|pu|u]· re[bai|cè|de|dre|je|la|lai|lè|me|nai|nei|pa|pai|paie|pei|pê|ve|vê]·
+  P007    3416.5 sub=6 aE· ao· a@· ae· auo· au· au@·
+  S013    3275.5 sub=4 ler lé let ller lant lent
+  S014    3223.9 sub=7 ·[ce|de|ge|me|mme|pe|ppe|que|rre|se|sse|te|ve]ler ·[bo|co|do|ffo|fo|geo|gno|go|jo|no|o|pau|po|so|sso|to|trô|vo]lé ·[do|ffo|o|pau|rio|ro|rô|so|trô|vio]lé ·[bu|cu|du|gu|llu|lu|mu|nnu|pu|su|tu|vu]lez ·[cu|du|mu|nnu|nu|pu|tu]lé ·[cu|gu]lier ·[dau|geo|gno|o|to]let ·[ccul|cul|pul|sul|ul]ter
+  P008    3217.7 sub=1 dé dé
+  S015    3188.3 sub=4 ner nant nner née né net nais nnant
+  S016    3035.9 sub=5 ·[a|ba|bra|ca|cia|cra|da|dia|fla|ga|gna|gra|la|lia|lla|ma|mma|na|pa|pla|qua|ra|ria|rra|sa|sla|ssa|ta|tia|tra|tta|va|via|xa|xpia]tion ·[bu|ccu|cu|du|fu|gu|ju|lu|mu|nhu|nu|ppu|pu|su|tru|tu|u|xsu]tation ·[fec|ffec|jec|lec|llec|nnec|pec|rec|rrec|tec]tion ·[a|ccla|cla|dam|dra|fa|ffa|fla|gra|la|ma|nha|pa|qua|ra|ta|va|xploi]ration ·[bu|cu|du|gu|mu|nnu|nu|pu|su|tu|vu]lation
+  S017    2957.5 sub=6 ·[chi|di|li|qui|ri|rri|ssi|ti|vi]vé ·[bi|chi|ci|cli|di|ffi|fi|gi|gri|li|mi|pi|pli|poui|qui|ri|sci|si|ssi|sti|ti|tri|tti|vi]né ·[chi|ci|di|gui|li|lli|ly|mi|ni|nni|phi|ri|thi|ti|tri|vi|xci|y|ï]ser ·[a|bi|bé|ca|cia|coo|da|dar|de|dua|fu|ga|gi|la|lo|lé|ma|mé|na|ner|nna|né|phi|pro|ra|rar|ri|rro|sep|sla|so|ssu|ta|teu|ti|tia|to|té|vi|vo]lisé ·[chi|di|gi|gui|i|li|lli|ly|mi|ni|ri|ti|tri|vi|xci]sé ·[bi|di|ni|pli|ppli|ti|tri|xi|xpli|ï]qué
+  S018    2932.7 sub=9 ·[sten|ten|tten|ven]tion ·[bi|ci|ddi|di|gni|li|mi|ni|ri|si|sti|ti|tri]tion ·[bu|cu|llu|lu|nu|ru|tu]tion ·[ce|fe|gre|ppre|pre|se|sse]ssion ·[ci|lli|vi|xci]sion ·[mi|mmi|sci]ssion ·[cau|mmo|mo|vo]tion ·[pé|xpé|é]tition
+  S019    2879.6 sub=7 ·ation tation ration ·ration ·tation cation ·cation ·lation
+  P009    2775.0 sub=3 per ser inER· inter éER· cer fer ter
+  P010    2735.0 sub=2 ai· ai°· ais·
+  S020    2692.9 sub=7 ·[bé|cé|dé|fé|gé|lé|mmé|mé|né|pé|scé|ssié|sé|té|vé]rer ·[be|ble|bre|ce|che|cre|de|dre|fe|ffe|ffle|fle|fre|ge|gle|gne|gre|gue|ille|le|lle|me|ne|nne|pe|que|re|rre|se|sse|te|tre|tte|ve|vre]ries ·[mi|pi|si|ti|tti|vi|xpi]rer ·[bre|bé|ce|le|lle|lé|mé|pé|que|qué|re|ré|se|sé|té]ro ·[bu|cu|du|gu|ju|lu|mu|pu|ssu|su|tu]rer ·[bé|cé|dé|ffé|fé|gé|lé|mé|nié|né|pé|rrié|ssié|thé|té]ré ·[chi|di|ffi|fi|gi|li|mi|ni|pi|pri|qui|ri|si|ti]llerie ·[chi|di|ffi|fi|gi|li|mi|ni|pi|pri|qui|si|ti]llerie
+total 271s

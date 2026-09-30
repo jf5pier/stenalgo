@@ -1,0 +1,605 @@
+part A 6s; pre-growth pool 1213, final pool 2349
+
+[1] grown children overwriting a same-key pre-growth pool node: 2
+  ('prefix', 2, 'Re.a', 'réa·')  pre: 169 carriers (seed=False, variants=5)  -> child: 319 carriers, lost 90, gained 240
+  ('prefix', 2, 'Egz.a', 'exa·')  pre: 82 carriers (seed=False, variants=3)  -> child: 11 carriers, lost 78, gained 7
+
+[2] same-signature conflicts (A7 node AND grown node for one (pos,k,tail,rest)): 187;  A7 nodes with no grown twin (legit roots): 173
+  overlap 1.00  suff k=3 tail='t°.m@' rest='a'
+    A7    '·atement' 'a.t°.m@' |7| excl=[] subtree=1 seed=False
+    grown '·[a|boî|ca|da|dia|droi|gra|ma|noî|pâ|qua|roi|troi]tement' '[C]a.t°.m@' |17| excl=[0] parent='tement' a7-only=0 grown-only=10
+  overlap 1.00  suff k=2 tail='lE' rest='o'
+    A7    '·olet' 'o.lE' |29| excl=[] subtree=0 seed=False
+    grown '·[dau|geo|gno|o|to]let' '[C]o.lE' |14| excl=[0] parent='let' a7-only=15 grown-only=0
+  overlap 1.00  suff k=2 tail='tER' rest='e'
+    A7    '·etaire' 'e.tER' |12| excl=[] subtree=0 seed=False
+    grown '·[cié|cré|dgé|lé|né|phlé|é]taire' '[C]e.tER' |21| excl=[0] parent='taire' a7-only=0 grown-only=9
+  overlap 1.00  suff k=2 tail='nabl' rest='o'
+    A7    '·onnable' 'o.nabl' |14| excl=[] subtree=0 seed=False
+    grown '·[do|so|ssio|ço]nnable' '[C]o.nabl' |14| excl=[0] parent='nnable' a7-only=0 grown-only=0
+  overlap 1.00  suff k=2 tail='nER' rest='°'
+    A7    '·°naire' '°.nER' |17| excl=[] subtree=0 seed=False
+    grown '·[ce|te]naire' '[C]°.nER' |16| excl=[0] parent='naire' a7-only=1 grown-only=0
+  overlap 1.00  suff k=3 tail='zi.sj§' rest='o'
+    A7    '·osition' 'o.zi.sj§' |22| excl=[] subtree=0 seed=False
+    grown '·[po|ppo|xpo]sition' '[C]o.zi.sj§' |33| excl=[0] parent='sition' a7-only=0 grown-only=11
+  overlap 1.00  suff k=2 tail='d@s' rest='i'
+    A7    '·idence' 'i.d@s' |8| excl=[] subtree=0 seed=False
+    grown '·[ci|fi|si|ssi|vi]dence' '[C]i.d@s' |16| excl=[0] parent='dence' a7-only=0 grown-only=8
+  overlap 1.00  suff k=2 tail='Zi' rest='o'
+    A7    '·ogie' 'o.Zi' |113| excl=[] subtree=1 seed=True
+    grown '·[go|lo]gie' '[C]o.Zi' |101| excl=[0] parent='gie' a7-only=12 grown-only=0
+  overlap 1.00  suff k=3 tail='v°.m@' rest='i'
+    A7    '·ivement' 'i.v°.m@' |67| excl=[] subtree=1 seed=False
+    grown '·[di|sci|si|ssi|ti|vi|ï]vement' '[C]i.v°.m@' |75| excl=[0] parent='vement' a7-only=0 grown-only=8
+  overlap 1.00  suff k=2 tail='sj§' rest='ik'
+    A7    '·iktion' 'ik.sj§' |19| excl=[] subtree=1 seed=False
+    grown '·[dic|tric|vic]tion' '[C]ik.sj§' |14| excl=[0] parent='tion' a7-only=5 grown-only=0
+  overlap 1.00  suff k=2 tail='dy' rest='@'
+    A7    '·@du' '@.dy' |29| excl=[] subtree=0 seed=False
+    grown '·[pan|pen|ten|tten|ven]du' '[C]@.dy' |57| excl=[0] parent='du' a7-only=0 grown-only=28
+  overlap 1.00  suff k=3 tail='Ra.sj§' rest='i'
+    A7    '·iration' 'i.Ra.sj§' |8| excl=[] subtree=0 seed=False
+    grown '·[mi|pi|spi|xpi]ration' '[C]i.Ra.sj§' |14| excl=[0] parent='ration' a7-only=0 grown-only=6
+  overlap 1.00  suff k=3 tail='ta.sj§' rest='@'
+    A7    '·@tation' '@.ta.sj§' |38| excl=[] subtree=0 seed=False
+    grown '·[can|man|men|plan|quen|rien|sen|ten]tation' '[C]@.ta.sj§' |48| excl=[0] parent='tation' a7-only=0 grown-only=10
+  overlap 1.00  suff k=3 tail='Ra.sj§' rest='e'
+    A7    '·eration' 'e.Ra.sj§' |43| excl=[] subtree=0 seed=False
+    grown '·[bé|cé|dé|fé|gé|lé|mé|né|pé|rrié|scé|sé|té]ration' '[C]e.Ra.sj§' |64| excl=[0] parent='ration' a7-only=0 grown-only=21
+  overlap 0.99  suff k=2 tail='nEl' rest='o'
+    A7    '·onnel' 'o.nEl' |171| excl=[] subtree=1 seed=False
+    grown '·[sio|so|ssio|tio]nnel' '[C]o.nEl' |188| excl=[0] parent='nnel' a7-only=1 grown-only=18
+  overlap 0.98  suff k=3 tail='R°.m@' rest='E'
+    A7    '·Erement' 'E.R°.m@' |62| excl=[] subtree=1 seed=False
+    grown '·[ai|cai|ciè|clai|cè|dai|diai|fè|gai|gè|lai|liè|miè|mmai|mè|nai|niai|niè|nnai|plai|rai|ssai|ssiè|tai|tiè|trai|tè|vè]rement' '[C]E.R°.m@' |68| excl=[0] parent='rement' a7-only=1 grown-only=7
+  overlap 0.98  suff k=2 tail='Zik' rest='o'
+    A7    '·ogique' 'o.Zik' |118| excl=[] subtree=0 seed=True
+    grown '·[go|llo|lo]gique' '[C]o.Zik' |114| excl=[0] parent='gique' a7-only=6 grown-only=2
+  overlap 0.98  suff k=3 tail='z°.m@' rest='2'
+    A7    '·2sement' '2.z°.m@' |109| excl=[] subtree=1 seed=False
+    grown '·[cheu|cieu|deu|dieu|eu|ffreu|geu|gieu|gneu|gueu|illeu|leu|lleu|meu|neu|nieu|nneu|peu|pieu|queu|quieu|reu|rieu|sseu|teu|tieu|treu|veu|vreu|xieu]sement' '[C]2.z°.m@' |123| excl=[0] parent='sement' a7-only=2 grown-only=16
+  overlap 0.97  suff k=3 tail='za.sj§' rest='i'
+    A7    '·isation' 'i.za.sj§' |221| excl=[] subtree=2 seed=False
+    grown '·[chi|ci|di|gi|i|li|lli|mi|ni|ri|thi|ti|tri|vi]sation' '[C]i.za.sj§' |218| excl=[0] parent='sation' a7-only=9 grown-only=6
+  overlap 0.97  suff k=2 tail='list' rest='a'
+    A7    '·aliste' 'a.list' |129| excl=[] subtree=0 seed=False
+    grown '·[a|ba|ca|cia|dia|ga|lia|ma|na|nia|nna|pha|ra|ria|sa|ssa|ta|tia|tra|va]liste' '[C]a.list' |154| excl=[0] parent='liste' a7-only=4 grown-only=29
+  overlap 0.97  suff k=3 tail='l°.m@' rest='E'
+    A7    '·Ellement' 'E.l°.m@' |74| excl=[] subtree=1 seed=False
+    grown '·[cie|e|me|ne|nne|re|rie|se|te|tie|ve]llement' '[C]E.l°.m@' |63| excl=[0] parent='llement' a7-only=13 grown-only=2
+  overlap 0.97  suff k=2 tail='m@' rest='°'
+    A7    '·°ment' '°.m@' |2275| excl=[] subtree=20 seed=True
+    grown '·[be|ble|bre|ce|che|cle|cre|de|dre|ffle|ffre|fle|ge|gle|gne|gre|gue|ille|le|lle|me|ne|nne|pe|ple|ppe|pre|que|re|rre|sce|se|sse|te|tre|tte|ve|vre|xe|xtre]ment' '[C]°.m@' |1862| excl=[0] parent='ment' a7-only=475 grown-only=62
+  overlap 0.95  suff k=2 tail='naZ' rest='o'
+    A7    '·onnage' 'o.naZ' |39| excl=[] subtree=0 seed=False
+    grown '·[cho|co|do|dro|ffo|geo|gno|llo|lo|mio|o|pio|po|sio|so|sso|to|vo|ço]nnage' '[C]o.naZ' |49| excl=[0] parent='nnage' a7-only=2 grown-only=12
+  overlap 0.95  suff k=3 tail='s°.m@' rest='i'
+    A7    '·issement' 'i.s°.m@' |152| excl=[] subtree=0 seed=False
+    grown '·[bi|bli|bri|chi|ci|di|dri|foui|gi|gri|gui|i|illi|li|lli|mi|ni|nni|noui|pi|pli|ri|rri|si|ssi|ti|tri|tti|vi|vri]ssement' '[C]i.s°.m@' |169| excl=[0] parent='ssement' a7-only=8 grown-only=25
+  overlap 0.95  suff k=2 tail='m@' rest='e'
+    A7    '·ement' 'e.m@' |55| excl=[] subtree=1 seed=False
+    grown '·[clé|cré|cé|dé|glé|gré|le|lé|mmé|mé|nné|né|plé|pplé|rré|ré|ssé|sé|té|vé|xcré|é]ment' '[C]e.m@' |66| excl=[0] parent='ment' a7-only=3 grown-only=14
+  overlap 0.93  suff k=2 tail='tER' rest='@'
+    A7    '·@taire' '@.tER' |45| excl=[] subtree=0 seed=False
+    grown '·[den|man|men|mmen|pen|ven]taire' '[C]@.tER' |52| excl=[0] parent='taire' a7-only=3 grown-only=10
+  overlap 0.93  suff k=2 tail='sj§' rest='a'
+    A7    '·ation' 'a.sj§' |1418| excl=[] subtree=18 seed=True
+    grown '·[a|ba|bra|ca|cia|cra|da|dia|fla|ga|gna|gra|la|lia|lla|ma|mma|na|pa|pla|qua|ra|ria|rra|sa|sla|ssa|ta|tia|tra|tta|va|via|xa|xpia]tion' '[C]a.sj§' |893| excl=[0] parent='tion' a7-only=588 grown-only=63
+  overlap 0.93  suff k=2 tail='t9R' rest='a'
+    A7    '·ateur' 'a.t9R' |766| excl=[] subtree=3 seed=False
+    grown '·[a|ba|bra|ca|cia|da|dia|ga|gna|gra|la|lia|lla|ma|mma|na|nna|pa|pha|pla|qua|ra|ria|rra|sa|sla|ta|tia|tra|va|voi|xa|xploi]teur' '[C]a.t9R' |566| excl=[0] parent='teur' a7-only=242 grown-only=42
+  overlap 0.92  suff k=3 tail='na.sj§' rest='i'
+    A7    '·ination' 'i.na.sj§' |52| excl=[] subtree=1 seed=False
+    grown '·[chi|ci|cli|di|gi|gri|mi|pi|sci|sti|ti|vi]nation' '[C]i.na.sj§' |67| excl=[0] parent='nation' a7-only=4 grown-only=19
+  overlap 0.91  pref k=2 tail='tR@s' rest='OR'
+    A7    'transOR·' 'tR@s.OR' |69| excl=[] subtree=0 seed=False
+    grown 'trans[bor|for|por]·' 'tR@s.[C]OR' |70| excl=[0] parent='trans' a7-only=6 grown-only=7
+  overlap 0.91  suff k=3 tail='ta.sj§' rest='i'
+    A7    '·itation' 'i.ta.sj§' |33| excl=[] subtree=2 seed=False
+    grown '·[ci|di|gi|li|mi|pi|si|vi|xci]-{b}tations' '[C-{b}]i.ta.sj§' |51| excl=[1] parent='tation' a7-only=3 grown-only=21
+  overlap 0.91  suff k=2 tail='tiv' rest='a'
+    A7    '·ative' 'a.tiv' |22| excl=[] subtree=0 seed=False
+    grown '·[a|ga|la|ma|na|ra|ta|tia]tive' '[C]a.tiv' |26| excl=[0] parent='tive' a7-only=2 grown-only=6
+  overlap 0.91  suff k=2 tail='Rabl' rest='e'
+    A7    '·erable' 'e.Rabl' |22| excl=[] subtree=0 seed=False
+    grown '·[bé|dé|fé|gé|lé|né|pé|sé|té]rable' '[C]e.Rabl' |41| excl=[0] parent='rable' a7-only=2 grown-only=21
+  overlap 0.91  pref k=2 tail='@' rest='OR'
+    A7    'emOR·' '@.OR' |163| excl=[] subtree=0 seed=False
+    grown 'en[cor|dor|gor|tor]·' '@.[C]OR' |97| excl=[0] parent='en' a7-only=75 grown-only=9
+  overlap 0.90  suff k=2 tail='tyR' rest='i'
+    A7    '·iture' 'i.tyR' |20| excl=[] subtree=0 seed=False
+    grown '·[cri|fi|ni|rri|ti]ture' '[C]i.tyR' |20| excl=[0] parent='ture' a7-only=2 grown-only=2
+  overlap 0.89  suff k=2 tail='Ri' rest='°'
+    A7    '·°rie' '°.Ri' |461| excl=[] subtree=3 seed=False
+    grown '·[be|ble|bre|ce|che|cre|de|dre|fe|ffe|ffle|fle|fre|ge|gle|gne|gre|gue|ille|le|lle|me|ne|nne|pe|que|re|rre|se|sse|te|tre|tte|ve|vre]ries' '[C]°.Ri' |456| excl=[0] parent='rie' a7-only=57 grown-only=52
+  overlap 0.89  suff k=2 tail='ze' rest='i'
+    A7    '·iser' 'i.ze' |2231| excl=[] subtree=6 seed=False
+    grown '·[chi|di|gi|gui|i|li|lli|ly|mi|ni|ri|ti|tri|vi|xci]sé' '[C]i.ze' |289| excl=[0] parent='sé' a7-only=1975 grown-only=33
+  overlap 0.88  pref k=2 tail='R°' rest='ER'
+    A7    'reER·' 'R°.ER' |93| excl=[] subtree=0 seed=False
+    grown 're[cher|fer|mer|per|ver]·' 'R°.[C]ER' |136| excl=[0] parent='re' a7-only=11 grown-only=54
+  overlap 0.88  pref k=2 tail='a' rest='u'
+    A7    'au·' 'a.u' |327| excl=[] subtree=0 seed=False
+    grown 'a[bou|dou|jou|vou|voue]·' 'a.[C]u' |84| excl=[0] parent='a' a7-only=253 grown-only=10
+  overlap 0.88  pref k=2 tail='pRo' rest='§'
+    A7    'pro§·' 'pRo.§' |32| excl=[] subtree=0 seed=False
+    grown 'pro[con|fon|lon|non]·' 'pRo.[C]§' |33| excl=[0] parent='pro' a7-only=4 grown-only=5
+  overlap 0.88  suff k=2 tail='kyl' rest='i'
+    A7    '·icule' 'i.kyl' |16| excl=[] subtree=0 seed=False
+    grown '·[di|i|lli|ni|ri|sci|ti|tri|vi]cule' '[C]i.kyl' |38| excl=[0] parent='cule' a7-only=2 grown-only=24
+  overlap 0.87  pref k=2 tail='de' rest='§'
+    A7    'dé§·' 'de.§' |207| excl=[] subtree=0 seed=False
+    grown 'dé[bon|bron|com|comp|con|fon|gon|mon|nom|on|plom|trom|tron]·' 'de.[C]§' |320| excl=[0] parent='dé' a7-only=27 grown-only=140
+  overlap 0.87  suff k=2 tail='twaR' rest='a'
+    A7    '·atoire' 'a.twaR' |104| excl=[] subtree=1 seed=False
+    grown '·[a|ba|bra|ca|ga|gra|la|lla|ma|mma|na|pa|ra|sa|ta|va|xa|xpia]toire' '[C]a.twaR' |115| excl=[0] parent='toire' a7-only=14 grown-only=25
+  overlap 0.86  suff k=2 tail='t8e' rest='i'
+    A7    '·ituer' 'i.t8e' |137| excl=[] subtree=0 seed=False
+    grown '·[bi|sti|ti]tuer' '[C]i.t8e' |44| excl=[0] parent='tuer' a7-only=99 grown-only=6
+  overlap 0.85  suff k=3 tail='lo.Zi' rest='o'
+    A7    '·ologie' 'o.lo.Zi' |82| excl=[] subtree=0 seed=False
+    grown '·[bio|cho|cio|co|cro|dio|do|dro|llo|mio|mo|no|o|pho|po|pro|rio|ro|sio|tho|to|tro|tyo|xo]logie' '[C]o.lo.Zi' |94| excl=[0] parent='logie' a7-only=12 grown-only=24
+  overlap 0.85  suff k=3 tail='li.te' rest='a'
+    A7    '·alité' 'a.li.te' |162| excl=[] subtree=0 seed=False
+    grown '·[a|ba|bra|ca|cia|da|dia|ga|gia|gra|ma|na|nia|nna|pa|ra|ria|sa|ssa|ta|tia|tra|va|via]lité' '[C]a.li.te' |174| excl=[0] parent='lité' a7-only=24 grown-only=36
+  overlap 0.85  pref k=2 tail='R°' rest='§'
+    A7    're§·' 'R°.§' |225| excl=[] subtree=0 seed=False
+    grown 're[bon|com|comp|con|fon|gon|mon|non|plon|tom]·' 'R°.[C]§' |310| excl=[0] parent='re' a7-only=34 grown-only=119
+  overlap 0.85  suff k=2 tail='tif' rest='a'
+    A7    '·atif' 'a.tif' |315| excl=[] subtree=0 seed=False
+    grown '·[a|ba|bat|bla|ca|cia|da|ga|la|ma|na|pla|ra|rra|sa|sla|ta|tra|va|via|xa]tif' '[C]a.tif' |204| excl=[0] parent='tif' a7-only=142 grown-only=31
+  overlap 0.85  pref k=2 tail='5' rest='OR'
+    A7    'imOR·' '5.OR' |98| excl=[] subtree=0 seed=False
+    grown 'in[cor|for|sor]·' '5.[C]OR' |52| excl=[0] parent='in' a7-only=54 grown-only=8
+  overlap 0.84  suff k=2 tail='tal' rest='@'
+    A7    '·@tal' '@.tal' |63| excl=[] subtree=0 seed=False
+    grown '·[dan|den|men|nen|ren|rien]tal' '[C]@.tal' |58| excl=[0] parent='tal' a7-only=14 grown-only=9
+  overlap 0.84  suff k=2 tail='m@' rest='a'
+    A7    '·amment' 'a.m@' |93| excl=[] subtree=2 seed=False
+    grown '·[a|ce|cha|da|de|ga|ge|gea|illa|la|le|lla|lle|ne|nna|que|ra|re|rre|sa|scie|ssa|ta|tie|va]mment' '[C]a.m@' |70| excl=[0] parent='mment' a7-only=34 grown-only=11
+  overlap 0.84  suff k=2 tail='nER' rest='i'
+    A7    '·inaire' 'i.nER' |25| excl=[] subtree=1 seed=False
+    grown '·[di|gi|gui|mi|pli|ri|tri]naire' '[C]i.nER' |35| excl=[0] parent='naire' a7-only=4 grown-only=14
+  overlap 0.84  suff k=2 tail='sj§' rest='y'
+    A7    '·ytion' 'y.sj§' |55| excl=[] subtree=2 seed=False
+    grown '·[bu|cu|llu|lu|nu|ru|tu]tion' '[C]y.sj§' |50| excl=[0] parent='tion' a7-only=13 grown-only=8
+  overlap 0.84  pref k=2 tail='de' rest='E'
+    A7    'déE·' 'de.E' |98| excl=[] subtree=0 seed=False
+    grown 'dé[be|bra|braie|chaî|crê|dai|fle|fra|fraî|gai|grai|gè|la|lai|me|mè|mê|nei|niai|pei|plai|pre|pê|rai|rè|te|ve|vei|vê]·' 'de.[C]E' |248| excl=[0] parent='dé' a7-only=16 grown-only=166
+  overlap 0.83  suff k=2 tail='tER' rest='a'
+    A7    '·ataire' 'a.tER' |36| excl=[] subtree=0 seed=False
+    grown '·[ba|ca|da|ga|gna|na|ta|va]taire' '[C]a.tER' |37| excl=[0] parent='taire' a7-only=6 grown-only=7
+  overlap 0.83  suff k=2 tail='sjEl' rest='@'
+    A7    '·@tiel' '@.sjEl' |71| excl=[] subtree=0 seed=False
+    grown '·[den|gen|len|men|nen|quen|ren|rren|ssen|stan|ten]tiel' '[C]@.sjEl' |83| excl=[0] parent='tiel' a7-only=12 grown-only=24
+  overlap 0.82  suff k=3 tail='si.te' rest='i'
+    A7    '·icité' 'i.si.te' |61| excl=[] subtree=0 seed=False
+    grown '·[bli|bri|di|fi|ni|pli|ri|ti|tri|xi|ï]-{l}cité' '[C-{l}]i.si.te' |66| excl=[1] parent='cité' a7-only=11 grown-only=16
+  overlap 0.82  suff k=2 tail='zj§' rest='i'
+    A7    '·ision' 'i.zj§' |22| excl=[] subtree=0 seed=False
+    grown '·[ci|lli|vi|xci]sion' '[C]i.zj§' |29| excl=[0] parent='sion' a7-only=4 grown-only=11
+  overlap 0.81  suff k=2 tail='ni' rest='o'
+    A7    '·onie' 'o.ni' |47| excl=[] subtree=0 seed=False
+    grown '·[co|go|lo|mo|pho|ro|to]nie' '[C]o.ni' |48| excl=[0] parent='nie' a7-only=9 grown-only=10
+  overlap 0.81  pref k=2 tail='@' rest='°'
+    A7    'em°·' '@.°' |377| excl=[] subtree=0 seed=False
+    grown 'en[che|ge|gre|le|re|se]·' '@.[C]°' |31| excl=[0] parent='en' a7-only=352 grown-only=6
+  overlap 0.80  suff k=2 tail='sj5' rest='i'
+    A7    '·icien' 'i.sj5' |110| excl=[] subtree=0 seed=False
+    grown '·[gi|li|mi|ni|ri|si|ti|tri|ï]cien' '[C]i.sj5' |92| excl=[0] parent='cien' a7-only=36 grown-only=18
+  overlap 0.80  pref k=2 tail='@' rest='e'
+    A7    'eme·' '@.e' |143| excl=[] subtree=0 seed=False
+    grown 'em[bra|braie|mé|mê|pié|pre|pê]·' '@.[C]e' |75| excl=[0] parent='em' a7-only=83 grown-only=15
+  overlap 0.80  pref k=2 tail='de' rest='e'
+    A7    'dée·' 'de.e' |175| excl=[] subtree=0 seed=False
+    grown 'dé[cré|cé|fra|fraie|fraî|fé|gré|gé|lé|mé|né|pa|plai|pre|pré|pé|ré|sé|vê]·' 'de.[C]e' |229| excl=[0] parent='dé' a7-only=35 grown-only=89
+  overlap 0.79  pref k=2 tail='R°' rest='aR'
+    A7    'reaR·' 'R°.aR' |119| excl=[] subtree=0 seed=False
+    grown 're[char|gar|mar|par]·' 'R°.[C]aR' |165| excl=[0] parent='re' a7-only=25 grown-only=71
+  overlap 0.79  suff k=2 tail='m@' rest='y'
+    A7    '·yment' 'y.m@' |19| excl=[] subtree=1 seed=False
+    grown '·[cu|du|dû|grû|gu|lu|lû|mue|nu|nue|nû|tru|tu]ment' '[C]y.m@' |26| excl=[0] parent='ment' a7-only=4 grown-only=11
+  overlap 0.79  suff k=2 tail='tik' rest='a'
+    A7    '·athique' 'a.tik' |149| excl=[] subtree=1 seed=False
+    grown '·[a|ba|bba|cra|dia|dra|ma|na|pa|pha|pra|ra|sia|ta|tia|xta]tique' '[C]a.tik' |122| excl=[0] parent='tique' a7-only=53 grown-only=26
+  overlap 0.78  pref k=2 tail='R°' rest='uR'
+    A7    'reuR·' 'R°.uR' |23| excl=[] subtree=0 seed=False
+    grown 're[cour|four|lour|tour]·' 'R°.[C]uR' |50| excl=[0] parent='re' a7-only=5 grown-only=32
+  overlap 0.78  suff k=2 tail='m@' rest='i'
+    A7    '·iment' 'i.m@' |49| excl=[] subtree=0 seed=False
+    grown '·[chi|cie|di|die|fie|gi|li|llie|ni|nie|pi|pie|pli|si|ti|tie|tri|trie]ments' '[C]i.m@' |66| excl=[0] parent='ment' a7-only=11 grown-only=28
+  overlap 0.77  suff k=2 tail='tyR' rest='a'
+    A7    '·ature' 'a.tyR' |31| excl=[] subtree=1 seed=False
+    grown '·[a|ba|bla|ca|da|dra|ga|gia|gna|la|ma|mma|nia|ra|sla|ta|tra]ture' '[C]a.tyR' |38| excl=[0] parent='ture' a7-only=7 grown-only=14
+  overlap 0.77  suff k=2 tail='t9R' rest='i'
+    A7    '·iteur' 'i.t9R' |48| excl=[] subtree=0 seed=False
+    grown '·[bi|ci|di|ffi|fi|mi|ni|ri|si|ti|tri|vi|xci]teur' '[C]i.t9R' |55| excl=[0] parent='teur' a7-only=11 grown-only=18
+  overlap 0.77  suff k=2 tail='tER' rest='i'
+    A7    '·itaire' 'i.tER' |204| excl=[] subtree=1 seed=False
+    grown '·[bi|ci|cy|di|gni|i|li|lli|ni|ri|si|ti]taire' '[C]i.tER' |77| excl=[0] parent='taire' a7-only=145 grown-only=18
+  overlap 0.76  suff k=2 tail='sj§' rest='Ek'
+    A7    '·Ektion' 'Ek.sj§' |34| excl=[] subtree=0 seed=False
+    grown '·[fec|ffec|jec|lec|llec|nnec|pec|rec|rrec|tec]tion' '[C]Ek.sj§' |48| excl=[0] parent='tion' a7-only=8 grown-only=22
+  overlap 0.76  suff k=2 tail='ka' rest='i'
+    A7    '·icat' 'i.ka' |23| excl=[] subtree=0 seed=False
+    grown '·[di|fi|li|ni]cat' '[C]i.ka' |17| excl=[0] parent='cat' a7-only=10 grown-only=4
+  overlap 0.75  suff k=3 tail='n°.m@' rest='E'
+    A7    '·Enement' 'E.n°.m@' |16| excl=[] subtree=0 seed=False
+    grown '·[chai|chaî|dai|lai|mai|rai|rei|rrai|sai|scè|tai|traî|vè|vé]nement' '[C]E.n°.m@' |23| excl=[0] parent='nement' a7-only=4 grown-only=11
+  overlap 0.75  suff k=2 tail='Ri' rest='o'
+    A7    '·orie' 'o.Ri' |17| excl=[] subtree=0 seed=False
+    grown '·[go|lo|o|pho]rie' '[C]o.Ri' |12| excl=[0] parent='rie' a7-only=8 grown-only=3
+  overlap 0.75  suff k=2 tail='sj§' rest='yk'
+    A7    '·yktion' 'yk.sj§' |28| excl=[] subtree=0 seed=False
+    grown '·[dduc|duc|struc|truc]tion' '[C]yk.sj§' |33| excl=[0] parent='tion' a7-only=7 grown-only=12
+  overlap 0.74  suff k=2 tail='ne' rest='o'
+    A7    '·onner' 'o.ne' |1400| excl=[] subtree=0 seed=False
+    grown '·[bo|cho|do|dro|ffo|fo|llo|lo|pho|ro|sio|so|ssio|tio|to|vro|ço]nné' '[C]o.ne' |195| excl=[0] parent='nné' a7-only=1255 grown-only=50
+  overlap 0.74  suff k=3 tail='li.ze' rest='i'
+    A7    '·iliser' 'i.li.ze' |263| excl=[] subtree=0 seed=False
+    grown '·[bi|gi|phi|ri|ti|vi]liser' '[C]i.li.ze' |220| excl=[0] parent='liser' a7-only=100 grown-only=57
+  overlap 0.74  suff k=2 tail='t9R' rest='yk'
+    A7    '·ykteur' 'yk.t9R' |59| excl=[] subtree=0 seed=False
+    grown '·[dduc|duc|truc]teur' '[C]yk.t9R' |50| excl=[0] parent='teur' a7-only=22 grown-only=13
+  overlap 0.73  suff k=2 tail='te' rest='@'
+    A7    '·@ter' '@.te' |609| excl=[] subtree=0 seed=False
+    grown '·[chan|den|emp|gen|glan|illan|jan|man|men|pen|plan|quen|ren|rien|sen|van]té' '[C]@.te' |139| excl=[0] parent='té' a7-only=507 grown-only=37
+  overlap 0.73  suff k=2 tail='Ze' rest='a'
+    A7    '·ager' 'a.Ze' |669| excl=[] subtree=0 seed=False
+    grown '·[a|bra|cca|fra|ga|la|ma|mma|na|pa|ra|rra|sa|ssa|ta|tra|va]ger' '[C]a.Ze' |225| excl=[0] parent='ger' a7-only=505 grown-only=61
+  overlap 0.73  suff k=2 tail='ke' rest='i'
+    A7    '·iqué' 'i.ke' |289| excl=[] subtree=0 seed=False
+    grown '·[bi|di|ni|pli|ppli|ti|tri|xi|xpli|ï]qué' '[C]i.ke' |59| excl=[0] parent='qué' a7-only=246 grown-only=16
+  overlap 0.72  pref k=2 tail='R°' rest='a'
+    A7    'rea·' 'R°.a' |245| excl=[] subtree=0 seed=False
+    grown 're[ba|bap|bra|bâ|ca|cla|coi|cra|fa|ga|ja|joi|la|lâ|ma|na|pa|pla|plâ|ta|tra|va|voi]·' 'R°.[C]a' |427| excl=[0] parent='re' a7-only=68 grown-only=250
+  overlap 0.72  suff k=3 tail='t°.m@' rest='E'
+    A7    '·Etement' 'E.t°.m@' |18| excl=[] subtree=0 seed=False
+    grown '·[bé|crè|fai|lè|nnê|plè|què|strai|tê|vê]tement' '[C]E.t°.m@' |25| excl=[0] parent='tement' a7-only=5 grown-only=12
+  overlap 0.72  suff k=2 tail='lje' rest='a'
+    A7    '·alier' 'a.lje' |42| excl=[] subtree=0 seed=False
+    grown '·[a|ba|ca|cha|da|ma|na|ta|va]lier' '[C]a.lje' |36| excl=[0] parent='lier' a7-only=16 grown-only=10
+  overlap 0.72  suff k=2 tail='Re' rest='y'
+    A7    '·yrer' 'y.Re' |459| excl=[] subtree=0 seed=False
+    grown '·[bu|cu|du|gu|ju|lu|mu|pu|ssu|su|tu]rer' '[C]y.Re' |281| excl=[0] parent='rer' a7-only=257 grown-only=79
+  overlap 0.72  suff k=2 tail='lER' rest='y'
+    A7    '·ylaire' 'y.lER' |99| excl=[] subtree=0 seed=False
+    grown '·[bu|cu|du|fu|gu|llu|mu|nnu|nu|pu|su|tu]laire' '[C]y.lER' |102| excl=[0] parent='laire' a7-only=28 grown-only=31
+  overlap 0.72  suff k=2 tail='je' rest='E'
+    A7    '·Eller' 'E.je' |150| excl=[] subtree=0 seed=False
+    grown '·[lei|rei|sei|vei]ller' '[C]E.je' |53| excl=[0] parent='ller' a7-only=112 grown-only=15
+  overlap 0.72  suff k=2 tail='nal' rest='i'
+    A7    '·inal' 'i.nal' |77| excl=[] subtree=1 seed=False
+    grown '·[ci|di|gi|mi|ri|ti|tri]nal' '[C]i.nal' |67| excl=[0] parent='nal' a7-only=29 grown-only=19
+  overlap 0.71  suff k=2 tail='te' rest='°'
+    A7    '·°té' '°.te' |320| excl=[] subtree=0 seed=False
+    grown '·[che|cre|dre|ge|ille|je|le|lle|me|ne|nne|pre|que|re|se|te|tre|ve|vre]té' '[C]°.te' |125| excl=[0] parent='té' a7-only=231 grown-only=36
+  overlap 0.71  pref k=2 tail='ka' rest='i'
+    A7    'cai·' 'ka.i' |103| excl=[] subtree=0 seed=False
+    grown 'ca[bi|li|ni|pi|ri|si|vi|ï]·' 'ka.[C]i' |31| excl=[0] parent='ca' a7-only=81 grown-only=9
+  overlap 0.69  suff k=2 tail='nje' rest='o'
+    A7    '·onnier' 'o.nje' |69| excl=[] subtree=0 seed=False
+    grown '·[bo|co|do|dro|ffo|fo|geo|lo|no|rro|so|sso|to|tro|vo|ço]nniers' '[C]o.nje' |62| excl=[0] parent='nnier' a7-only=26 grown-only=19
+  overlap 0.69  suff k=2 tail='ne' rest='i'
+    A7    '·iner' 'i.ne' |1000| excl=[] subtree=1 seed=False
+    grown '·[bi|chi|ci|cli|di|ffi|fi|gi|gri|li|mi|pi|pli|poui|qui|ri|sci|si|ssi|sti|ti|tri|tti|vi]né' '[C]i.ne' |501| excl=[0] parent='ner' a7-only=654 grown-only=155
+  overlap 0.69  pref k=2 tail='R°' rest='°'
+    A7    're°·' 'R°.°' |129| excl=[] subtree=0 seed=False
+    grown 're[ce|de|fai|fe|je|le|pre|ve]-{t}·' 'R°.[C-{t}]°' |126| excl=[1] parent='re' a7-only=42 grown-only=39
+  overlap 0.69  suff k=2 tail='j§' rest='i'
+    A7    '·illon' 'i.j§' |58| excl=[] subtree=0 seed=False
+    grown '·[bi|ci|di|dri|gri|mi|ni|pi|ppi|ri|si|ti|tti]-{v}llon' '[C-{v}]i.j§' |66| excl=[1] parent='llon' a7-only=18 grown-only=26
+  overlap 0.69  suff k=2 tail='le' rest='y'
+    A7    '·yler' 'y.le' |465| excl=[] subtree=0 seed=False
+    grown '·[bu|cu|du|gu|llu|lu|mu|nnu|pu|su|tu|vu]lez' '[C]y.le' |260| excl=[0] parent='ler' a7-only=286 grown-only=81
+  overlap 0.68  suff k=2 tail='je' rest='i'
+    A7    '·iller' 'i.je' |1091| excl=[] subtree=0 seed=False
+    grown '·[bi|ci|di|dri|mi|pi|ppi|qui|sci|si|ssi|ti|tri]ller' '[C]i.je' |322| excl=[0] parent='ller' a7-only=873 grown-only=104
+  overlap 0.67  suff k=2 tail='de' rest='@'
+    A7    '·@der' '@.de' |190| excl=[] subtree=0 seed=False
+    grown '·[an|ban|chan|en|gen|lan|man|men|mman|pen|san|scen]dé' '[C]@.de' |98| excl=[0] parent='der' a7-only=124 grown-only=32
+  overlap 0.67  suff k=2 tail='se' rest='ER'
+    A7    '·ERser' 'ER.se' |182| excl=[] subtree=0 seed=False
+    grown '·[per|ver]ser' '[C]ER.se' |55| excl=[0] parent='ser' a7-only=145 grown-only=18
+  overlap 0.67  suff k=2 tail='te' rest='i'
+    A7    '·ité' 'i.te' |1408| excl=[] subtree=10 seed=True
+    grown '·[bi|ci|cy|di|fi|gi|li|mi|pi|ri|sci|si|ssi|vi|xci]ter' '[C]i.te' |243| excl=[0] parent='ter' a7-only=1246 grown-only=81
+  overlap 0.67  suff k=2 tail='fik' rest='i'
+    A7    '·ifique' 'i.fik' |24| excl=[] subtree=0 seed=False
+    grown '·[ci|gni|li|ri|rri|ti]fique' '[C]i.fik' |26| excl=[0] parent='fique' a7-only=8 grown-only=10
+  overlap 0.66  suff k=2 tail='pe' rest='i'
+    A7    '·iper' 'i.pe' |85| excl=[] subtree=0 seed=False
+    grown '·[ci|qui|ssi|ty|xci]per' '[C]i.pe' |41| excl=[0] parent='per' a7-only=58 grown-only=14
+  overlap 0.65  suff k=2 tail='te' rest='o'
+    A7    '·oté' 'o.te' |516| excl=[] subtree=0 seed=False
+    grown '·[au|co|go|illo|nau|o|peau|po|ro|veau|vô]té' '[C]o.te' |52| excl=[0] parent='té' a7-only=482 grown-only=18
+  overlap 0.65  suff k=2 tail='tyd' rest='i'
+    A7    '·itude' 'i.tyd' |41| excl=[] subtree=0 seed=False
+    grown '·[bi|ci|gi|gni|gri|li|ni|pi|pli|vi]-{t}tude' '[C-{t}]i.tyd' |23| excl=[1] parent='tude' a7-only=26 grown-only=8
+  overlap 0.65  suff k=2 tail='le' rest='a'
+    A7    '·aller' 'a.le' |135| excl=[] subtree=0 seed=False
+    grown '·[ba|ta]ller' '[C]a.le' |40| excl=[0] parent='ller' a7-only=109 grown-only=14
+  overlap 0.65  suff k=2 tail='e' rest='aj'
+    A7    '·ajer' 'aj.e' |335| excl=[] subtree=0 seed=False
+    grown '·[loy|voy]és' '[C]aj.e' |31| excl=[0] parent='é' a7-only=315 grown-only=11
+  overlap 0.64  suff k=2 tail='k5' rest='i'
+    A7    '·icain' 'i.k5' |64| excl=[] subtree=1 seed=False
+    grown '·[bli|fri|ni|ri|xi|ï]cain' '[C]i.k5' |28| excl=[0] parent='cain' a7-only=46 grown-only=10
+  overlap 0.64  pref k=2 tail='R°' rest='o'
+    A7    'reo·' 'R°.o' |110| excl=[] subtree=0 seed=False
+    grown 're[bro|chau|co|do|fau|lo|mo|no|po|pro|vau|vo]·' 'R°.[C]o' |318| excl=[0] parent='re' a7-only=40 grown-only=248
+  overlap 0.63  suff k=2 tail='tif' rest='i'
+    A7    '·itif' 'i.tif' |68| excl=[] subtree=0 seed=False
+    grown '·[ci|ddi|di|gi|mi|ni|si|ti|tri]tif' '[C]i.tif' |60| excl=[0] parent='tif' a7-only=30 grown-only=22
+  overlap 0.63  pref k=2 tail='R°' rest='e'
+    A7    'ree·' 'R°.e' |210| excl=[] subtree=0 seed=False
+    grown 're[bai|cré|cé|de|dé|fré|gré|grée|lé|mé|né|pré|pé|qué|té|vé|vê]·' 'R°.[C]e' |198| excl=[0] parent='re' a7-only=85 grown-only=73
+  overlap 0.62  suff k=2 tail='sj§' rest='ak'
+    A7    '·aktion' 'ak.sj§' |22| excl=[] subtree=0 seed=False
+    grown '·[ac|ffrac|nac|rac|sac|trac|ttrac]tion' '[C]ak.sj§' |16| excl=[0] parent='tion' a7-only=12 grown-only=6
+  overlap 0.62  suff k=2 tail='z@' rest='i'
+    A7    '·isan' 'i.z@' |138| excl=[] subtree=0 seed=False
+    grown '·[ti|y]sans' '[C]i.z@' |16| excl=[0] parent='san' a7-only=128 grown-only=6
+  overlap 0.62  suff k=2 tail='fje' rest='i'
+    A7    '·ifier' 'i.fje' |575| excl=[] subtree=1 seed=False
+    grown '·[bri|ci|cri|di|gni|i|li|ni|nni|pli|ri|rri|si|thi|ti|tri|vi|zi]fier' '[C]i.fje' |319| excl=[0] parent='fier' a7-only=376 grown-only=120
+  overlap 0.62  suff k=2 tail='Re' rest='e'
+    A7    '·erer' 'e.Re' |1185| excl=[] subtree=2 seed=False
+    grown '·[bé|cé|dé|ffé|fé|gé|lé|mé|nié|né|pé|rrié|ssié|thé|té]ré' '[C]e.Re' |183| excl=[0] parent='ré' a7-only=1071 grown-only=69
+  overlap 0.61  pref k=2 tail='pa' rest='a'
+    A7    'paa·' 'pa.a' |162| excl=[] subtree=0 seed=False
+    grown 'pa[la|pa|ra|ta|va]·' 'pa.[C]a' |36| excl=[0] parent='pa' a7-only=140 grown-only=14
+  overlap 0.59  suff k=2 tail='niR' rest='°'
+    A7    '·°nir' '°.niR' |208| excl=[] subtree=1 seed=False
+    grown '·[ste|ve]-{t}nir' '[C-{t}]°.niR' |22| excl=[1] parent='nir' a7-only=195 grown-only=9
+  overlap 0.59  suff k=2 tail='R@s' rest='e'
+    A7    '·erence' 'e.R@s' |26| excl=[] subtree=0 seed=False
+    grown '·[dhé|ffé|fé|gé|é]-{v}rence' '[C-{v}]e.R@s' |22| excl=[1] parent='rence' a7-only=13 grown-only=9
+  overlap 0.59  pref k=2 tail='@' rest='ER'
+    A7    'enER·' '@.ER' |56| excl=[] subtree=0 seed=False
+    grown 'en[cer|fer|ver]·' '@.[C]ER' |44| excl=[0] parent='en' a7-only=30 grown-only=18
+  overlap 0.59  suff k=2 tail='de' rest='i'
+    A7    '·ider' 'i.de' |156| excl=[] subtree=0 seed=False
+    grown '·[ci|gui|li|mi|pi|qui|si|xy]dé' '[C]i.de' |88| excl=[0] parent='der' a7-only=104 grown-only=36
+  overlap 0.59  suff k=2 tail='ze' rest='o'
+    A7    '·oser' 'o.ze' |275| excl=[] subtree=0 seed=False
+    grown '·[cro|lo|pho|po|ppo|rro|xplo]ser' '[C]o.ze' |129| excl=[0] parent='ser' a7-only=199 grown-only=53
+  overlap 0.59  suff k=2 tail='sj§' rest='e'
+    A7    '·ession' 'e.sj§' |17| excl=[] subtree=0 seed=False
+    grown '·[ce|fe|gre|ppre|pre|se|sse]ssion' '[C]e.sj§' |27| excl=[0] parent='ssion' a7-only=7 grown-only=17
+  overlap 0.59  suff k=2 tail='le' rest='°'
+    A7    '·°lé' '°.le' |395| excl=[] subtree=0 seed=False
+    grown '·[ce|de|ge|me|mme|pe|ppe|que|rre|se|sse|te|ve]ler' '[C]°.le' |225| excl=[0] parent='ler' a7-only=263 grown-only=93
+  overlap 0.58  suff k=2 tail='le' rest='o'
+    A7    '·oler' 'o.le' |243| excl=[] subtree=0 seed=False
+    grown '·[bo|co|do|ffo|fo|geo|gno|go|jo|no|o|pau|po|so|sso|to|trô|vo]lé' '[C]o.le' |146| excl=[0] parent='ler' a7-only=158 grown-only=61
+  overlap 0.58  pref k=2 tail='Re' rest='e'
+    A7    'rée·' 'Re.e' |134| excl=[] subtree=0 seed=False
+    grown 'ré[cré|crée|e|flé|fé|gé|pre|pé|vei|vé|é]·' 'Re.[C]e' |291| excl=[0] parent='ré' a7-only=56 grown-only=213
+  overlap 0.58  suff k=2 tail='t@' rest='i'
+    A7    '·itant' 'i.t@' |338| excl=[] subtree=1 seed=False
+    grown '·[bi|ci|cli|di|fi|gi|li|mi|pi|ri|rri|sci|si|ssi|vi|xci]tants' '[C]i.t@' |57| excl=[0] parent='tant' a7-only=305 grown-only=24
+  overlap 0.58  pref k=2 tail='a' rest='°'
+    A7    'a°·' 'a.°' |145| excl=[] subtree=0 seed=False
+    grown 'a[che|ge|me|pe|ve]·' 'a.[C]°' |85| excl=[0] parent='a' a7-only=96 grown-only=36
+  overlap 0.57  suff k=3 tail='li.te' rest='i'
+    A7    '·ilité' 'i.li.te' |269| excl=[] subtree=2 seed=True
+    grown '·[bi|bri|ci|gi|ni|ri|ti|vi]-{m}lité' '[C-{m}]i.li.te' |105| excl=[1] parent='lité' a7-only=209 grown-only=45
+  overlap 0.57  suff k=2 tail='Re' rest='o'
+    A7    '·orer' 'o.Re' |242| excl=[] subtree=0 seed=False
+    grown '·[bo|co|do|fo|gno|go|jo|lio|lo|mo|no|plo|po|rio|ro|tau|to|vo|xplo]rer' '[C]o.Re' |168| excl=[0] parent='rer' a7-only=146 grown-only=72
+  overlap 0.56  suff k=2 tail='te' rest='y'
+    A7    '·yter' 'y.te' |213| excl=[] subtree=0 seed=False
+    grown '·[bu|chu|cru|cu|ffû|lu|mmu|mu|nu|ppu|pu|u|zu]ter' '[C]y.te' |120| excl=[0] parent='ter' a7-only=146 grown-only=53
+  overlap 0.56  suff k=2 tail='nal' rest='o'
+    A7    '·onal' 'o.nal' |65| excl=[] subtree=0 seed=False
+    grown '·[gio|go|mo|o|ro|tio|to|tom|tro]nale' '[C]o.nal' |52| excl=[0] parent='nal' a7-only=36 grown-only=23
+  overlap 0.56  pref k=2 tail='e' rest='u'
+    A7    'éu·' 'e.u' |121| excl=[] subtree=0 seed=False
+    grown 'é[bou|brou|cou|crou|gou|mou|pou|prou|tou]·' 'e.[C]u' |108| excl=[0] parent='é' a7-only=61 grown-only=48
+  overlap 0.56  suff k=2 tail='s@' rest='E'
+    A7    '·Essant' 'E.s@' |42| excl=[] subtree=1 seed=False
+    grown '·[bai|cai|grai|nai|nnai|rai|re]ssant' '[C]E.s@' |18| excl=[0] parent='ssant' a7-only=32 grown-only=8
+  overlap 0.55  suff k=2 tail='de' rest='aR'
+    A7    '·aRder' 'aR.de' |151| excl=[] subtree=0 seed=False
+    grown '·[bar|blar|car|char|gar|gnar|lar|llar|mar|mmar|nar|par|sar|tar|ttar|var|zar]dez' '[C]aR.de' |105| excl=[0] parent='der' a7-only=93 grown-only=47
+  overlap 0.55  pref k=2 tail='R°' rest='y'
+    A7    'rey·' 'R°.y' |99| excl=[] subtree=0 seed=False
+    grown 're[bu|chu|cu|flu|flue|fu|ju|mu|mue|pu]·' 'R°.[C]y' |120| excl=[0] parent='re' a7-only=45 grown-only=66
+  overlap 0.55  suff k=2 tail='sj§' rest='@'
+    A7    '·@tion' '@.sj§' |33| excl=[] subtree=0 seed=False
+    grown '·[sten|ten|tten|ven]tion' '[C]@.sj§' |22| excl=[0] parent='tion' a7-only=21 grown-only=10
+  overlap 0.54  pref k=2 tail='de' rest='u'
+    A7    'déu·' 'de.u' |264| excl=[] subtree=0 seed=False
+    grown 'dé[bou|brou|clou|cloue|cou|dou|fou|gou|goû|grou|joue|mou|noue|pou|rou|trou|voue]·' 'de.[C]u' |308| excl=[0] parent='dé' a7-only=122 grown-only=166
+  overlap 0.52  suff k=2 tail='e' rest='ij'
+    A7    '·ijer' 'ij.e' |175| excl=[] subtree=0 seed=False
+    grown '·[bli|blii|dri|gri|pli|plii|ppli|pri|prii|tri|trii]-{vR}é' '[C-{vR}]ij.e' |96| excl=[1] parent='er' a7-only=125 grown-only=46
+  overlap 0.52  pref k=2 tail='R°' rest='u'
+    A7    'reu·' 'R°.u' |243| excl=[] subtree=0 seed=False
+    grown 're[bou|brou|cou|dou|fou|grou|joue|loo|loue|mou|nou|pou|tou|trou|vou]·' 'R°.[C]u' |233| excl=[0] parent='re' a7-only=122 grown-only=112
+  overlap 0.52  pref k=2 tail='dis' rest='a'
+    A7    'disa·' 'dis.a' |27| excl=[] subtree=0 seed=False
+    grown 'dis[gra|joi|pa|qua]·' 'dis.[C]a' |66| excl=[0] parent='dis' a7-only=13 grown-only=52
+  overlap 0.51  suff k=2 tail='de' rest='e'
+    A7    '·eder' 'e.de' |115| excl=[] subtree=0 seed=False
+    grown '·[cé|ssé|sé|xcé]der' '[C]e.de' |68| excl=[0] parent='der' a7-only=80 grown-only=33
+  overlap 0.51  pref k=2 tail='su' rest='°'
+    A7    'sou°·' 'su.°' |67| excl=[] subtree=0 seed=False
+    grown 'sou[de|le|pe|ve]-{t}·' 'su.[C-{t}]°' |43| excl=[1] parent='sou' a7-only=45 grown-only=21
+  overlap 0.51  suff k=2 tail='te' rest='Ek'
+    A7    '·Ekter' 'Ek.te' |131| excl=[] subtree=0 seed=False
+    grown '·[bec|fec|ffec|jec|mec|nnec|pec|tec]ter' '[C]Ek.te' |96| excl=[0] parent='ter' a7-only=82 grown-only=47
+  overlap 0.50  suff k=2 tail='se' rest='@'
+    A7    '·@cer' '@.se' |347| excl=[] subtree=1 seed=False
+    grown '·[den|en|gan|lan|man|men|mmen|nan|nnan|quen|ren|rren|tan|van]cé' '[C]@.se' |125| excl=[0] parent='cer' a7-only=284 grown-only=62
+  overlap 0.50  pref k=2 tail='Re' rest='i'
+    A7    'réi·' 'Re.i' |209| excl=[] subtree=0 seed=False
+    grown 'ré[ci|cri|di|i|joui|mi|pli|pri|si|tri|vi]·' 'Re.[C]i' |137| excl=[0] parent='ré' a7-only=140 grown-only=68
+  overlap 0.50  suff k=2 tail='ny' rest='°'
+    A7    '·°nu' '°.ny' |52| excl=[] subtree=0 seed=False
+    grown '·[te|ve]nue' '[C]°.ny' |12| excl=[0] parent='nue' a7-only=46 grown-only=6
+  overlap 0.49  pref k=2 tail='de' rest='@'
+    A7    'dé@·' 'de.@' |323| excl=[] subtree=0 seed=False
+    grown 'dé[am|ban|bran|cam|cen|chan|clen|cram|fen|jan|man|mem|men|pen|plan|ran|san|sen|ten|trem]·' 'de.[C]@' |166| excl=[0] parent='dé' a7-only=242 grown-only=85
+  overlap 0.49  suff k=2 tail='te' rest='yl'
+    A7    '·ylter' 'yl.te' |47| excl=[] subtree=0 seed=False
+    grown '·[ccul|cul|pul|sul|ul]ter' '[C]yl.te' |37| excl=[0] parent='ter' a7-only=29 grown-only=19
+  overlap 0.48  suff k=2 tail='ne' rest='a'
+    A7    '·aner' 'a.ne' |123| excl=[] subtree=0 seed=False
+    grown '·[a|ca|dam|doua|fa|ga|ma|na|pa|ta|va]né' '[C]a.ne' |66| excl=[0] parent='ner' a7-only=91 grown-only=34
+  overlap 0.48  suff k=2 tail='se' rest='a'
+    A7    '·asser' 'a.se' |500| excl=[] subtree=0 seed=False
+    grown '·[ca|fa|ffa|ga|la|ma|na|pa|pla|tra]cer' '[C]a.se' |95| excl=[0] parent='cer' a7-only=454 grown-only=49
+  overlap 0.48  pref k=2 tail='5' rest='i'
+    A7    'ini·' '5.i' |267| excl=[] subtree=0 seed=False
+    grown 'in[chi|ci|cli|di|fi|si|ti]-{v}·' '5.[C-{v}]i' |122| excl=[1] parent='in' a7-only=208 grown-only=63
+  overlap 0.48  suff k=2 tail='t9R' rest='Ek'
+    A7    '·Ekteur' 'Ek.t9R' |23| excl=[] subtree=0 seed=False
+    grown '·[flec|jec|lec|llec|pec|rec|tec|vec]teur' '[C]Ek.t9R' |31| excl=[0] parent='teur' a7-only=12 grown-only=20
+  overlap 0.47  suff k=2 tail='tik' rest='as'
+    A7    '·astique' 'as.tik' |19| excl=[] subtree=0 seed=False
+    grown '·[cas|gas|las|nas|ras|tas]tique' '[C]as.tik' |19| excl=[0] parent='tique' a7-only=10 grown-only=10
+  overlap 0.47  suff k=2 tail='je' rest='a'
+    A7    '·ailler' 'a.je' |187| excl=[] subtree=0 seed=False
+    grown '·[a|bâ|ca|da|la|ma|na|nna|pa|ra|rra|sa|ssa|ta|tra|va]iller' '[C]a.je' |136| excl=[0] parent='iller' a7-only=123 grown-only=72
+  overlap 0.47  suff k=2 tail='lje' rest='i'
+    A7    '·ilier' 'i.lje' |58| excl=[] subtree=0 seed=False
+    grown '·[bi|ci|ffi|mi|si|ssi]lier' '[C]i.lje' |51| excl=[0] parent='lier' a7-only=34 grown-only=27
+  overlap 0.46  pref k=2 tail='@' rest='@'
+    A7    'en@·' '@.@' |122| excl=[] subtree=0 seed=False
+    grown 'en[cen|chan|clen|gen|glan|gran|jam|san|vian]-{t}·' '@.[C-{t}]@' |41| excl=[1] parent='en' a7-only=103 grown-only=22
+  overlap 0.43  suff k=2 tail='sj§' rest='i'
+    A7    '·ission' 'i.sj§' |123| excl=[] subtree=2 seed=False
+    grown '·[mi|mmi|sci]ssion' '[C]i.sj§' |23| excl=[0] parent='ssion' a7-only=113 grown-only=13
+  overlap 0.43  pref k=2 tail='e' rest='@'
+    A7    'é@·' 'e.@' |136| excl=[] subtree=0 seed=False
+    grown 'é[bran|chan|den|lan|tan|ten|ven]·' 'e.[C]@' |134| excl=[0] parent='é' a7-only=78 grown-only=76
+  overlap 0.43  pref k=2 tail='de' rest='a'
+    A7    'déa·' 'de.a' |470| excl=[] subtree=0 seed=False
+    grown 'dé[ba|bap|bla|boî|bra|bâ|ca|cla|coi|doua|dra|fa|fla|ga|gra|la|ma|mâ|na|pha|pla|plâ|qua|ra|sa|ta|tra|va|voi]-{p}·' 'de.[C-{p}]a' |553| excl=[1] parent='dé' a7-only=267 grown-only=350
+  overlap 0.43  suff k=2 tail='R@' rest='o'
+    A7    '·orant' 'o.R@' |31| excl=[] subtree=0 seed=False
+    grown '·[co|do|fo|gno|go|lo|no|plo|tau|to|vo]rant' '[C]o.R@' |28| excl=[0] parent='rant' a7-only=19 grown-only=16
+  overlap 0.42  pref k=2 tail='pRe' rest='a'
+    A7    'préa·' 'pRe.a' |53| excl=[] subtree=0 seed=False
+    grown 'pré[a|da|fa|la|ma|na|pa|sa|va]·' 'pRe.[C]a' |73| excl=[0] parent='pré' a7-only=31 grown-only=51
+  overlap 0.41  suff k=2 tail='Re' rest='i'
+    A7    '·irer' 'i.Re' |121| excl=[] subtree=0 seed=False
+    grown '·[mi|pi|si|ti|tti|vi|xpi]rer' '[C]i.Re' |92| excl=[0] parent='rer' a7-only=83 grown-only=54
+  overlap 0.41  suff k=2 tail='te' rest='OR'
+    A7    '·ORter' 'OR.te' |143| excl=[] subtree=0 seed=False
+    grown '·[cor|for|or|por|ppor|xpor]té' '[C]OR.te' |85| excl=[0] parent='ter' a7-only=108 grown-only=50
+  overlap 0.41  pref k=2 tail='Ra' rest='°'
+    A7    'ra°·' 'Ra.°' |75| excl=[] subtree=0 seed=False
+    grown 'ra[cle|ge|me|pe|te|ve]·' 'Ra.[C]°' |39| excl=[0] parent='ra' a7-only=59 grown-only=23
+  overlap 0.39  pref k=2 tail='de' rest='i'
+    A7    'déi·' 'de.i' |399| excl=[] subtree=0 seed=False
+    grown 'dé[bi|bri|brie|chi|ci|cli|cri|fi|fie|fri|gi|gri|gui|li|lie|mi|my|ni|pi|pli|pri|qui|ri|si|tri|vi]·' 'de.[C]i' |459| excl=[0] parent='dé' a7-only=243 grown-only=303
+  overlap 0.39  suff k=2 tail='Re' rest='a'
+    A7    '·arer' 'a.Re' |113| excl=[] subtree=0 seed=False
+    grown '·[cla|ffa|ga|pa]rer' '[C]a.Re' |64| excl=[0] parent='rer' a7-only=88 grown-only=39
+  overlap 0.39  suff k=2 tail='se' rest='E'
+    A7    '·Esser' 'E.se' |118| excl=[] subtree=0 seed=False
+    grown '·[bai|dre|fe|lai|ppre|pre|re]-{gR}sser' '[C-{gR}]E.se' |64| excl=[1] parent='sser' a7-only=93 grown-only=39
+  overlap 0.38  pref k=2 tail='5' rest='@'
+    A7    'in@·' '5.@' |99| excl=[] subtree=0 seed=False
+    grown 'in[can|chan|fran|sen|tan|tem|ten|tran|ven]·' '5.[C]@' |85| excl=[0] parent='in' a7-only=67 grown-only=53
+  overlap 0.36  pref k=2 tail='@' rest='y'
+    A7    'amy·' '@.y' |112| excl=[] subtree=0 seed=False
+    grown 'en[cu|du|fu|glu|glue|ju|rhu|tu]·' '@.[C]y' |56| excl=[0] parent='en' a7-only=92 grown-only=36
+  overlap 0.36  suff k=2 tail='ke' rest='o'
+    A7    '·oquer' 'o.ke' |56| excl=[] subtree=0 seed=False
+    grown '·[blo|cho|cro|ffo|llo|lo|slo|vo]quer' '[C]o.ke' |70| excl=[0] parent='quer' a7-only=36 grown-only=50
+  overlap 0.35  pref k=2 tail='de' rest='o'
+    A7    'déo·' 'de.o' |320| excl=[] subtree=0 seed=False
+    grown 'dé[blo|bo|chau|co|cro|do|flo|gau|go|gro|jau|lo|mo|no|o|po|pro|ro|so|to|trô]-{z}·' 'de.[C-{z}]o' |414| excl=[1] parent='dé' a7-only=208 grown-only=302
+  overlap 0.32  pref k=2 tail='a' rest='a'
+    A7    'aa·' 'a.a' |491| excl=[] subtree=0 seed=False
+    grown 'a[ba|bâ|ca|cha|droi|ma|na|pâ|ra|sa|ta|va|voi]·' 'a.[C]a' |130| excl=[0] parent='a' a7-only=450 grown-only=89
+  overlap 0.30  pref k=2 tail='e' rest='i'
+    A7    'éi·' 'e.i' |429| excl=[] subtree=0 seed=False
+    grown 'é[chi|crie|di|li|mi|pi|ti|tri|vi]·' 'e.[C]i' |140| excl=[0] parent='é' a7-only=387 grown-only=98
+  overlap 0.29  suff k=2 tail='ve' rest='°'
+    A7    '·°ver' '°.ve' |60| excl=[] subtree=0 seed=False
+    grown '·[che|le|ne]vé' '[C]°.ve' |28| excl=[0] parent='vé' a7-only=52 grown-only=20
+  overlap 0.28  pref k=2 tail='@' rest='E'
+    A7    'emE·' '@.E' |137| excl=[] subtree=0 seed=False
+    grown 'em[bra|bê|mè|mê|pe|pei|pie|pre|pê]·' '@.[C]E' |79| excl=[0] parent='em' a7-only=115 grown-only=57
+  overlap 0.28  pref k=2 tail='@' rest='a'
+    A7    'ena·' '@.a' |330| excl=[] subtree=0 seed=False
+    grown 'em[ba|boî|bra|ma|pa|pla|plâ|poi]·' '@.[C]a' |199| excl=[0] parent='em' a7-only=275 grown-only=144
+  overlap 0.28  suff k=2 tail='te' rest='e'
+    A7    '·eté' 'e.te' |80| excl=[] subtree=1 seed=False
+    grown '·[bé|cié|pié|pé|rié|tié|xié|é]té' '[C]e.te' |29| excl=[0] parent='té' a7-only=72 grown-only=21
+  overlap 0.26  pref k=2 tail='Ra' rest='a'
+    A7    'raa·' 'Ra.a' |172| excl=[] subtree=0 seed=False
+    grown 'ra[ba|bâ|da|ga|ma|pa|ta|va]·' 'Ra.[C]a' |82| excl=[0] parent='ra' a7-only=151 grown-only=61
+  overlap 0.25  suff k=2 tail='d@' rest='i'
+    A7    '·ident' 'i.d@' |20| excl=[] subtree=0 seed=False
+    grown '·[ci|fi|si|ssi|vi]dent' '[C]i.d@' |22| excl=[0] parent='dent' a7-only=15 grown-only=17
+  overlap 0.24  suff k=2 tail='zj§' rest='y'
+    A7    '·ysion' 'y.zj§' |19| excl=[] subtree=0 seed=False
+    grown '·[cclu|clu|llu|tru|xclu]-{f}sion' '[C-{f}]y.zj§' |17| excl=[1] parent='sion' a7-only=15 grown-only=13
+  overlap 0.22  pref k=2 tail='5' rest='e'
+    A7    'ine·' '5.e' |182| excl=[] subtree=0 seed=False
+    grown 'in[ce|clé|cré|dé|flé|fré|fé|gué|gé|quié|sai|sé|vé]·' '5.[C]e' |158| excl=[0] parent='in' a7-only=148 grown-only=124
+  overlap 0.21  pref k=2 tail='e' rest='a'
+    A7    'éa·' 'e.a' |228| excl=[] subtree=0 seed=False
+    grown 'é[ba|ca|cha|cra|ga|ma|pa|ra|ta|va]·' 'e.[C]a' |126| excl=[0] parent='é' a7-only=202 grown-only=100
+  overlap 0.19  pref k=2 tail='e' rest='o'
+    A7    'héo·' 'e.o' |193| excl=[] subtree=0 seed=False
+    grown 'é[chau|clo|co|lo|mo|ro|to|vo]·' 'e.[C]o' |67| excl=[0] parent='é' a7-only=180 grown-only=54
+  overlap 0.15  pref k=2 tail='pRo' rest='o'
+    A7    'proo·' 'pRo.o' |51| excl=[] subtree=0 seed=False
+    grown 'pro[co|mo|no|po|ro|so|to|vo]·' 'pRo.[C]o' |47| excl=[0] parent='pro' a7-only=44 grown-only=40
+  overlap 0.14  pref k=2 tail='a' rest='y'
+    A7    'ay·' 'a.y' |242| excl=[] subtree=0 seed=False
+    grown 'a[mu|pu]·' 'a.[C]y' |35| excl=[0] parent='a' a7-only=237 grown-only=30
+  overlap 0.12  pref k=2 tail='a' rest='o'
+    A7    'ao·' 'a.o' |398| excl=[] subtree=1 seed=False
+    grown 'a[bo|cho|co|do|mo|po|so|to]·' 'a.[C]o' |98| excl=[0] parent='a' a7-only=386 grown-only=86
+  overlap 0.11  pref k=2 tail='5' rest='o'
+    A7    'imo·' '5.o' |81| excl=[] subtree=0 seed=False
+    grown 'in[co|coh|do|so|to|vio|vo]·' '5.[C]o' |79| excl=[0] parent='in' a7-only=72 grown-only=70
+  overlap 0.07  pref k=2 tail='Re' rest='y'
+    A7    'réy·' 'Re.y' |73| excl=[] subtree=0 seed=False
+    grown 'ré[cu|du|pu|u]·' 'Re.[C]y' |80| excl=[0] parent='ré' a7-only=68 grown-only=75
+
+[3] -ment pair:  ment |2292|   ·°ment(A7) |2275|   [C]°.m@(grown) |1862|  D exclusions=(Slot(kind='onset', value='°', excluded=()),)
+    P∩D=1800  P-only=475  D-only=62  D⊆P=False
+    A7-only (in ·°ment, NOT in grown node) (top by freq):
+      heureusement           syls=('2', 'R2', 'z°', 'm@') lemma=heureusement f=39.8
+      sérieusement           syls=('se', 'Rj2', 'z°', 'm@') lemma=sérieusement f=39.3
+      malheureusement        syls=('ma', 'l2', 'R2', 'z°', 'm@') lemma=malheureusement f=35.4
+      naturellement          syls=('na', 'ty', 'RE', 'l°', 'm@') lemma=naturellement f=21.1
+      personnellement        syls=('pER', 'so', 'nE', 'l°', 'm@') lemma=personnellement f=18.4
+      réellement             syls=('Re', 'E', 'l°', 'm@') lemma=réellement f=18.3
+      actuellement           syls=('ak', 't8E', 'l°', 'm@') lemma=actuellement f=11.4
+      officiellement         syls=('o', 'fi', 'sjE', 'l°', 'm@') lemma=officiellement f=10.4
+      définitivement         syls=('de', 'fi', 'ni', 'ti', 'v°', 'm@') lemma=définitivement f=9.3
+      lancement              syls=('l@', 's°', 'm@') lemma=lancement f=8.6
+    grown-only (in [C]°.m@, NOT in ·°ment) (top by freq):
+      tellement              syls=('tE', 'l°', 'm@') lemma=tellement f=183.7
+      sûrement               syls=('sy', 'R°', 'm@') lemma=sûrement f=133.7
+      vêtements              syls=('vE', 't°', 'm@') lemma=vêtement f=57.6
+      autrement              syls=('o', 'tR°', 'm@') lemma=autrement f=40.2
+      jugement               syls=('Zy', 'Z°', 'm@') lemma=jugement f=19.9
+      règlement              syls=('RE', 'gl°', 'm@') lemma=règlement f=19.4
+      vachement              syls=('va', 'S°', 'm@') lemma=vachement f=15.7
+      rarement               syls=('Ra', 'R°', 'm@') lemma=rarement f=14.1
+      logement               syls=('lO', 'Z°', 'm@') lemma=logement f=8.4
+      librement              syls=('li', 'bR°', 'm@') lemma=librement f=6.8
+    A7-only carriers that ARE k=1 ment carriers: 0 / 475
+    union: 4137 carriers, freq 6360, exception share 0.0058 (cap 0.02)
+
+[4] score probe (exact keypress evaluation, ~1 min)
+  ctx+keypresses 0s (1751 keys)
+  rule A (root ment, forms ['ment', '·[be|ble|bre|ca|che|chi|cie|claffe|cle|cre|cré|cu|cé|de|di|die|dre|du|dé|dû|ffle|ffre|fie|fle|ge|gi|gle|gne|gre|gré|gu|gue|ille|le|li|lle|lu|lé|lû|ma|me|mmé|mé|ne|ni|nie|nne|nné|noie|nu|nue|né|nû|pe|pie|ple|pli|ppe|pre|que|ra|re|rre|rré|ré|se|ssuie|ssé|sé|ta|te|tie|tre|trie|tru|tte|té|ve|voue|vre|vé|xcré|xe|xtre|é]-{s°,ti}ment', '·[a|ba|bla|bra|bâ|ca|cca|cha|cia|da|dia|droi|ga|geoi|gna|gra|la|loi|lâ|ma|mma|na|nia|niâ|nna|noi|noî|pa|pha|pla|qua|quoi|ra|ria|roi|rra|sa|soi|ssa|ssoi|ta|tia|toi|tra|tta|va|via|xa|za|ça]blement', '·[ai|bai|chai|chaî|chè|ciè|crè|cè|dai|diai|die|dre|dè|e|fai|fè|gai|gè|ille|lai|lei|liè|llè|lè|mai|miè|mmai|mè|mê|nai|niai|niè|nnai|nnê|plai|plè|prê|què|rai|re|rrai|rè|sai|scè|sei|siè|ssai|ssiè|strai|sè|tai|te|tè|vai|ve|vei|vè|vé|vê|xiè|xtrê|è]-{tR,tj}tement']): exact 8176.3 keys=(20, 25) exc=2 (37s)
+  rule B (root ·°ment, forms ['·°ment', '·[ai|bai|chai|chaî|chè|cie|ciè|crè|cè|dai|diai|die|dre|dè|e|fai|fè|gai|gè|ille|lai|lei|liè|llè|lè|mai|me|miè|mmai|mè|mê|nai|ne|niai|niè|nnai|nne|nnê|plai|plè|prê|què|rai|re|rei|rie|rrai|rè|sai|scè|se|sei|siè|ssai|ssiè|strai|sè|tai|te|tie|tè|vai|ve|vei|vè|vé|vê|xiè|xtrê|è]-{tR,tj}tement', '·[a|ba|bla|bra|bâ|ca|cca|cha|cia|da|dia|droi|ga|geoi|gna|gra|la|loi|lâ|ma|mma|na|nia|niâ|nna|noi|noî|pa|pha|pla|qua|quoi|ra|ria|roi|rra|sa|soi|ssa|ssoi|ta|tia|toi|tra|tta|va|via|xa|za|ça]blement', '·[bi|bli|bri|chi|ci|cri|di|dri|fi|gi|gri|gui|i|illi|li|lli|mi|ni|nni|noui|ny|phi|pi|pli|qui|ri|rri|sci|si|ssi|thi|ti|tri|tti|vi|vri|xi|y|ï]lement']): exact 6880.9 keys=(19, 20) exc=33 (37s)
+  rule C (unified, forms ['ment', '·[be|ble|bre|ce|che|cle|cre|de|dre|ffle|ffre|fle|ge|gle|gne|gre|gue|ille|le|lle|me|ne|nne|pe|ple|ppe|pre|que|re|rre|sce|se|sse|te|tre|tte|ve|vre|xe|xtre]ment', '·[ai|bai|chai|chaî|chè|cie|ciè|crè|cè|dai|diai|die|dre|dè|e|fai|fè|gai|gè|ille|lai|lei|liè|llè|lè|mai|me|miè|mmai|mè|mê|nai|ne|niai|niè|nnai|nne|nnê|plai|plè|prê|què|rai|re|rei|rie|rrai|rè|sai|scè|se|sei|siè|ssai|ssiè|strai|sè|tai|te|tie|tè|vai|ve|vei|vè|vé|vê|xiè|xtrê|è]-{tR,tj}tement', '·[be|ble|bre|ca|che|chi|cie|claffe|cle|cre|cré|cu|cé|de|di|die|dre|du|dé|dû|ffle|ffre|fie|fle|ge|gi|gle|gne|gre|gré|gu|gue|ille|le|li|lle|lu|lé|lû|ma|me|mmé|mé|ne|ni|nie|nne|nné|noie|nu|nue|né|nû|pe|pie|ple|pli|ppe|pre|que|ra|re|rre|rré|ré|se|ssuie|ssé|sé|ta|te|tie|tre|trie|tru|tte|té|ve|voue|vre|vé|xcré|xe|xtre|é]-{s°,ti}ment']): exact 8655.5 keys=(20, 25) exc=14 (34s)
+
+  word-once-credited objective:  ment+·°ment separate = 9366.4 (2651 words, benefit 9576, costs 210)
+  word-once-credited objective:  unified single rule          = 8655.5 (2641 words, benefit 8728, costs 72)
+  delta (unified - separate) = -710.9  [plus: one budget slot freed, one key to learn instead of two]

@@ -65,6 +65,8 @@ PREFIX = "prefix"
 SUFFIX = "suffix"
 MERGED = "merged"
 DEDICATED = "dedicated"
+RULE_PARTIAL_OVERLAP = False   # experiment flag (OFF = historical behaviour): a RULE binding fails to merge
+                               # only when ALL its keys are already in the neighbouring stroke
 RULE = "rule"    # Phase 2 (DESIGN §4.2): merged when clash-free, else a physical-reason standalone
                  # fallback -- collisions still cost the word its abbreviation, never a shorter one.
 
@@ -1419,6 +1421,15 @@ class SimContext:
         return total
 
 
+def ruleKeysOverlap(neighbour: Stroke, keys: Stroke) -> bool:
+    """A RULE binding of `keys` cannot merge into `neighbour`: any key shared (default), or every
+    key shared when RULE_PARTIAL_OVERLAP. `affixrules._exceptionRateFloor` must use this too."""
+    shared = set(neighbour) & set(keys)
+    if RULE_PARTIAL_OVERLAP:
+        return len(shared) == len(set(keys))
+    return bool(shared)
+
+
 def _newBase(binding: Binding, c: Carrier, ctx: SimContext) -> tuple[Strokes | None, str | None, bool]:
     """Returns (newBase, fallback reason, mergedSaving) -- `mergedSaving` tells `simulate` whether
     this carrier's saving is `span` (merged) or `span - 1` (dedicated, or a RULE binding's
@@ -1435,7 +1446,8 @@ def _newBase(binding: Binding, c: Carrier, ctx: SimContext) -> tuple[Strokes | N
         mergeReason = "noNeighbour"
     else:
         neighbour = base[ni]
-        if set(neighbour) & set(binding.keys):
+        if (ruleKeysOverlap(neighbour, binding.keys) if binding.kind == RULE
+                else set(neighbour) & set(binding.keys)):
             mergeReason = "keyOverlap"
         else:
             union = tuple(sorted(set(neighbour) | set(binding.keys)))

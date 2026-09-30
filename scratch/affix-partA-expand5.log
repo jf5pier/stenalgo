@@ -1,0 +1,3 @@
+candidates: 13624 (14s)
+pool 13624 nodes, 3089 anchors; variant merges: 1101 kept, 13 dropped by the conflict test (1570 proposed); key-collision renames 398, folded duplicates 3350, generated 90035; GROWTH_MIN_EXPAND=5.0; Part A 14s, peak RSS 727 MB
+total 19s

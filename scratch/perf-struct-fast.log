@@ -1,0 +1,6 @@
+detect original   114.5s 185e76d5cee4e5af  n=5351
+detect fast         3.2s 7287fbffda47c06b  n=5351
+structural original   115.1s da3a25c1cc44fc60
+structural fast         3.2s 77e132cd7595e65d  n=1817
+DIFFERENT
+exit=0

@@ -19,7 +19,7 @@ from src.affixbinding import (
     MAX_ALTERNATIVES, SAMPLE_CARRIERS, SPLIT_MAX_LOSS, PhonemeKeys, salientPhonemes, simScore)
 from src.affixes import (
     Binding, Candidate, Carrier, CarrierResult, RULE, SimContext, _exceptionShare, PREFIX, poolCarriers,
-    simulate)
+    simulate, ruleKeysOverlap)
 from src.keyboard import Stroke
 
 RULE_BUDGET = 30
@@ -222,7 +222,7 @@ def _exceptionRateFloor(
     for (neighbour, single), n in groups.items():
         if neighbour is None:
             continue   # noNeighbour: neither a gain candidate nor an exception
-        if set(neighbour) & keySet or not ctx.isLegal(tuple(sorted(set(neighbour) | keySet))):
+        if ruleKeysOverlap(neighbour, keys) or not ctx.isLegal(tuple(sorted(set(neighbour) | keySet))):
             if single or trapKey:
                 trapped += n   # standaloneTrap
             else:

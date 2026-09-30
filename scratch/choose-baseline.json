@@ -1,0 +1,647 @@
+{
+ "('prefix', 1, '@', 'am|an|ant|em|en|ench|enh|ham|han|hen')": {
+  "alts": [],
+  "exc": 0,
+  "excFreq": 0.0,
+  "forms": [
+   "am|an|ant|em|en|ench|enh|ham|han|hen",
+   "en[bran|cen|chan|clen|fan|gen|gran|jam|man|plan|san|ten]\u00b7",
+   "em[che|ge|gre|le|me|pe|ple|re|se|tre|ve]\u00b7",
+   "em[a|ba|bla|bo\u00ee|bra|ca|clo\u00ee|da|dia|fa|fla|foi|ga|goi|gra|joi|la|ma|pa|pha|pla|pl\u00e2|poi|ra|sa|ta|thra|tr'a|tra|vah]\u00b7",
+   "en[bi|bri|chi|cli|cy|di|dri|fi|foui|gli|gui|i|ky|li|mi|phi|phy|pi|pli|pri|qui|ri|ti|tih|vi|vie|zy]\u00b7",
+   "en[be|bra|b\u00ea|cai|ce|cha\u00ee|cie|d\u00ea|fe|grai|lai|l\u00e8|m\u00e8|m\u00ea|nei|pe|pre|prei|p\u00e8|p\u00ea|qu\u00ea|ra|se|sei|te|ti\u00e8|tr'ai|trai|tra\u00ee|t\u00ea|ve]\u00b7"
+  ],
+  "keys": null,
+  "saved": 0.0,
+  "score": 8475.51,
+  "sim": 0.0,
+  "top": []
+ },
+ "('prefix', 1, 'a', 'a')": {
+  "alts": [],
+  "exc": 0,
+  "excFreq": 0.0,
+  "forms": [
+   "a",
+   "a[ban|fflan|ffran|gran|lam|lan|len|lham|man|men|ppren|rran|scen|ssem|ssen|tten|van|ven]\u00b7",
+   "a[bri|by|b\u00ee|ccli|ci|cqui|cri|cry|ddi|di|ffi|ffli|ffri|fi|fri|gi|gri|gui|li|lli|mi|my|myg|nhy|ni|nni|nnih|ny|pi|ppli|ppri|qui|rri|ssi|ssy|sy|tti|ttri|ty|vi|xi|zi|zy]\u00b7",
+   "a[che|ge|le|lle|me|nne|pe|ppe|ppre|que|te|tte|ve]\u00b7",
+   "a[ba|bba|boie|bra|b\u00e2|ca|cca|ccla|cha|da|djoi|dra|droi|ffa|ga|ggra|gla|gra|la|ma|mha|na|nna|pa|pha|pla|ppa|pp\u00e2|p\u00e2|qua|ra|ria|rra|sia|ssa|ssoi|ta|tha|tra|tta|ttra|va|via|voi|ya]\u00b7",
+   "a[bai|be|b\u00ea|ch\u00e8|cquie|dre|ffai|grai|gre|gue|le|llai|lle|ll\u00e8|mai|me|m\u00e8|nne|pai|ppe|ppr\u00ea|rai|rrai|rr\u00ea|se|ssai|sse|ss\u00e8|tte|ttei|v\u00e8]\u00b7"
+  ],
+  "keys": null,
+  "saved": 0.0,
+  "score": 20682.940000000002,
+  "sim": 0.0,
+  "top": []
+ },
+ "('prefix', 1, 'a', 'a|ah|ha|hah|h\u00e2|\u00e2')": {
+  "alts": [],
+  "exc": 0,
+  "excFreq": 0.0,
+  "forms": [
+   "a|ah|ha|hah|h\u00e2|\u00e2",
+   "a[bi|bri|by|b\u00ee|ccli|ci|cqui|cri|cry|ddi|di|ffi|ffli|ffri|fi|fri|gi|gri|gui|li|lli|mi|my|myg|nhy|ni|nni|nnih|ny|pi|ppli|ppri|qui|ri|rri|ssi|ssy|sy|ti|tti|ttri|ty|vi|xi|zi|zy|\u00ef]\u00b7",
+   "a[ban|fflan|ffran|gran|lam|lan|len|lham|man|men|ppren|ran|ren|rran|scen|ssem|ssen|tten|van|ven]\u00b7",
+   "a[che|ge|le|lle|me|ne|nne|pe|ppe|ppre|que|te|tte|ve|vre]\u00b7",
+   "a[a|ba|bba|boie|bra|b\u00e2|ca|cca|ccla|cha|da|djoi|dra|droi|ffa|ga|ggra|gla|gra|la|lla|ma|mha|na|nna|pa|pha|pla|ppa|pp\u00e2|qua|ra|ria|rra|sia|ssa|ssoi|ta|tha|tra|tta|ttra|va|via|voi|wa|ya]\u00b7",
+   "a\u00e9[a|an|cia|cie|c\u00e9|di|en|fle|go|lec|lio|llu|lu|ma|men|mo|na|ni|no|nu|nua|o|ou|qua|qui|ra|ri|rin|ro|ros|rri|ssi|ta|ti|ty|tyl]\u00b7"
+  ],
+  "keys": null,
+  "saved": 0.0,
+  "score": 21372.53,
+  "sim": 0.0,
+  "top": []
+ },
+ "('prefix', 1, 'by', 'b\u00fb')": {
+  "alts": [
+   [
+    7.59,
+    [
+     3,
+     5
+    ]
+   ],
+   [
+    7.59,
+    [
+     2,
+     3,
+     5
+    ]
+   ],
+   [
+    7.59,
+    [
+     3,
+     5,
+     7
+    ]
+   ],
+   [
+    7.59,
+    [
+     3,
+     5,
+     8
+    ]
+   ],
+   [
+    7.59,
+    [
+     3,
+     5,
+     9
+    ]
+   ]
+  ],
+  "exc": 0,
+  "excFreq": 0,
+  "forms": [
+   "b\u00fb"
+  ],
+  "keys": [
+   3,
+   5
+  ],
+  "saved": 7.59,
+  "score": 7.59,
+  "sim": 0.6666666666666667,
+  "top": []
+ },
+ "('prefix', 1, 'de', 'de|des|d\u00e9|d\u00e9h')": {
+  "alts": [],
+  "exc": 0,
+  "excFreq": 0.0,
+  "forms": [
+   "de|des|d\u00e9|d\u00e9h",
+   "d\u00e9[bi|bri|brie|chi|ci|cli|cri|di|fi|fri|gi|gri|gui|i|li|mi|my|ni|pi|pli|pri|qui|ri|shy|si|ssi|tri|vi]\u00b7",
+   "d\u00e9[a|ba|bap|bla|boi|bo\u00ee|bra|b\u00e2|ca|ce|cla|coi|cra|doua|dra|fa|fla|ga|goi|gra|la|ma|m\u00e2|na|pa|pha|pla|pl\u00e2|poi|pra|qua|ra|sa|sha|ta|tra|va|via|voi]\u00b7",
+   "d\u00e9[bou|brou|clou|cloue|cou|dou|fou|gou|go\u00fb|grou|joue|kou|mou|noue|pou|rou|trou|voue]\u00b7",
+   "d\u00e9[bau|blo|bo|chau|co|cro|do|flo|fo|fro|gau|go|gro|jau|lo|mo|no|o|piau|plo|po|pro|ro|so|to|tr\u00f4|vo]-{z}\u00b7",
+   "d\u00e9[ce|ch\u00e9|cr\u00e9|c\u00e9|fai|fra|fraie|fra\u00ee|f\u00e9|gre|gr\u00e9|g\u00e9|l\u00e9|m\u00e9|n\u00e9|pa|plai|pre|pr\u00e9|p\u00e9|r\u00e9|sh\u00e9|ssai|ss\u00e9|s\u00e9|t\u00e9|v\u00ea]\u00b7"
+  ],
+  "keys": null,
+  "saved": 0.0,
+  "score": 5748.51,
+  "sim": 0.0,
+  "top": []
+ },
+ "('prefix', 1, 'de', 'd\u00e9')": {
+  "alts": [],
+  "exc": 0,
+  "excFreq": 0.0,
+  "forms": [
+   "d\u00e9",
+   "d\u00e9[bi|bri|brie|chi|ci|cli|cri|di|fi|fri|gi|gri|gui|i|li|mi|my|ni|pi|pli|pri|qui|ri|shy|si|tri|vi]\u00b7",
+   "d\u00e9[ba|bap|bla|boi|bo\u00ee|bra|b\u00e2|ca|ce|cla|coi|cra|doua|dra|fa|fla|ga|goi|gra|la|ma|m\u00e2|na|pa|pha|pla|pl\u00e2|poi|pra|qua|ra|sa|sha|ta|tra|va|via|voi]\u00b7",
+   "d\u00e9[bou|brou|clou|cloue|cou|dou|fou|gou|go\u00fb|grou|joue|kou|mou|noue|pou|rou|trou|voue]\u00b7",
+   "d\u00e9[bau|blo|bo|chau|co|cro|do|flo|fo|fro|gau|go|gro|jau|lo|mo|no|o|piau|plo|po|pro|ro|so|to|tr\u00f4|vo]-{z}\u00b7",
+   "d\u00e9[ce|ch\u00e9|cr\u00e9|c\u00e9|fai|fra|fraie|fra\u00ee|f\u00e9|gre|gr\u00e9|g\u00e9|l\u00e9|m\u00e9|n\u00e9|pa|plai|pre|pr\u00e9|p\u00e9|r\u00e9|sh\u00e9|s\u00e9|t\u00e9|v\u00ea]\u00b7"
+  ],
+  "keys": null,
+  "saved": 0.0,
+  "score": 5686.07,
+  "sim": 0.0,
+  "top": []
+ },
+ "('prefix', 1, 'e', 'ae|ai|a\u00ee|e|ei|he|h\u00e9|oe|\u00e9|\u00e9h')": {
+  "alts": [],
+  "exc": 0,
+  "excFreq": 0.0,
+  "forms": [
+   "ae|ai|a\u00ee|e|ei|he|h\u00e9|oe|\u00e9|\u00e9h",
+   "\u00e9[cchy|chi|cri|crie|di|ffi|gri|gui|li|ly|mi|nni|pi|qui|ri|ry|si|thi|thy|ti|tri|ty|vi]\u00b7",
+   "\u00e9[ba|bah|bra|ca|cha|cla|cra|ffa|ga|gra|ja|la|loi|ma|na|pa|qua|ra|ta|tha|troi|va]\u00b7",
+   "\u00e9[blou|bou|brou|chou|choue|cou|crou|dou|gou|mou|pou|prou|ssou|tou]\u00b7",
+   "\u00e9[bran|chan|den|fflan|glan|lan|man|mmen|pan|pen|ssen|tam|tan|ten|tran|van|ven]\u00b7",
+   "\u00e9[bu|clu|cu|du|fflu|ffu|lu|mu|nu|plu|pu|ru|tu]\u00b7"
+  ],
+  "keys": null,
+  "saved": 0.0,
+  "score": 7232.91,
+  "sim": 0.0,
+  "top": []
+ },
+ "('prefix', 1, 'kRa', 'cra|crai|cr\u00e2|kra')": {
+  "alts": [
+   [
+    96.74000000000017,
+    [
+     16,
+     17
+    ]
+   ],
+   [
+    96.62000000000016,
+    [
+     19
+    ]
+   ],
+   [
+    96.62000000000016,
+    [
+     17,
+     19
+    ]
+   ],
+   [
+    96.60000000000016,
+    [
+     18,
+     19
+    ]
+   ],
+   [
+    96.60000000000016,
+    [
+     17,
+     18,
+     19
+    ]
+   ]
+  ],
+  "exc": 3,
+  "excFreq": 0.060000000000000005,
+  "forms": [
+   "cra|crai|cr\u00e2|kra"
+  ],
+  "keys": [
+   16,
+   17
+  ],
+  "saved": 96.80000000000017,
+  "score": 96.74000000000017,
+  "sim": -0.2000000000000002,
+  "top": [
+   "cramouille",
+   "cramouilles",
+   "crachouille"
+  ]
+ },
+ "('prefix', 1, 'k\u00a7', 'comp|kon')": {
+  "alts": [
+   [
+    140.33999999999995,
+    [
+     2
+    ]
+   ],
+   [
+    140.33999999999995,
+    [
+     2,
+     3
+    ]
+   ],
+   [
+    140.33999999999995,
+    [
+     2,
+     17
+    ]
+   ],
+   [
+    140.33999999999995,
+    [
+     2,
+     18
+    ]
+   ],
+   [
+    140.33999999999995,
+    [
+     2,
+     19
+    ]
+   ]
+  ],
+  "exc": 0,
+  "excFreq": 0,
+  "forms": [
+   "comp|kon"
+  ],
+  "keys": [
+   2
+  ],
+  "saved": 140.33999999999995,
+  "score": 140.33999999999995,
+  "sim": 0.6666666666666667,
+  "top": []
+ },
+ "('prefix', 1, 'mis', 'mys')": {
+  "alts": [
+   [
+    68.5,
+    [
+     3,
+     6,
+     20
+    ]
+   ],
+   [
+    68.5,
+    [
+     3,
+     6
+    ]
+   ],
+   [
+    68.5,
+    [
+     3,
+     6,
+     16
+    ]
+   ],
+   [
+    68.5,
+    [
+     3,
+     6,
+     17
+    ]
+   ],
+   [
+    68.5,
+    [
+     3,
+     6,
+     19
+    ]
+   ]
+  ],
+  "exc": 0,
+  "excFreq": 0,
+  "forms": [
+   "mys",
+   "mys[ta|ti|t\u00e9]\u00b7"
+  ],
+  "keys": [
+   3,
+   6,
+   20
+  ],
+  "saved": 78.5,
+  "score": 68.5,
+  "sim": 0.7121134020618557,
+  "top": []
+ },
+ "('prefix', 1, 'tRe', 'tr\u00e9')": {
+  "alts": [
+   [
+    62.99999999999997,
+    [
+     16
+    ]
+   ],
+   [
+    62.99999999999997,
+    [
+     16,
+     18
+    ]
+   ],
+   [
+    62.979999999999976,
+    [
+     19
+    ]
+   ],
+   [
+    62.979999999999976,
+    [
+     16,
+     19
+    ]
+   ],
+   [
+    62.979999999999976,
+    [
+     18,
+     19
+    ]
+   ]
+  ],
+  "exc": 2,
+  "excFreq": 0.0,
+  "forms": [
+   "tr\u00e9"
+  ],
+  "keys": [
+   16
+  ],
+  "saved": 62.99999999999997,
+  "score": 62.99999999999997,
+  "sim": -0.10000000000000007,
+  "top": [
+   "tr\u00e9fli\u00e8res",
+   "tr\u00e9mail"
+  ]
+ },
+ "('suffix', 1, 'Zu', 'jou')": {
+  "alts": [
+   [
+    10.879999999999999,
+    [
+     24
+    ]
+   ],
+   [
+    10.879999999999999,
+    [
+     6,
+     24
+    ]
+   ],
+   [
+    10.879999999999999,
+    [
+     8,
+     24
+    ]
+   ],
+   [
+    10.879999999999999,
+    [
+     9,
+     24
+    ]
+   ],
+   [
+    10.879999999999999,
+    [
+     16,
+     24
+    ]
+   ]
+  ],
+  "exc": 0,
+  "excFreq": 0,
+  "forms": [
+   "jou"
+  ],
+  "keys": [
+   24
+  ],
+  "saved": 10.879999999999999,
+  "score": 10.879999999999999,
+  "sim": 0.6666666666666666,
+  "top": []
+ },
+ "('suffix', 1, 'kER', 'caire')": {
+  "alts": [
+   [
+    9.949999999999998,
+    [
+     18,
+     21
+    ]
+   ],
+   [
+    9.949999999999998,
+    [
+     6,
+     18,
+     21
+    ]
+   ],
+   [
+    9.949999999999998,
+    [
+     9,
+     18,
+     21
+    ]
+   ],
+   [
+    9.949999999999998,
+    [
+     16,
+     18,
+     21
+    ]
+   ],
+   [
+    9.949999999999998,
+    [
+     17,
+     18,
+     21
+    ]
+   ]
+  ],
+  "exc": 0,
+  "excFreq": 0,
+  "forms": [
+   "caire"
+  ],
+  "keys": [
+   18,
+   21
+  ],
+  "saved": 9.949999999999998,
+  "score": 9.949999999999998,
+  "sim": 0.8,
+  "top": []
+ },
+ "('suffix', 1, 'kas', 'casse')": {
+  "alts": [
+   [
+    5.159999999999999,
+    [
+     18
+    ]
+   ],
+   [
+    5.159999999999999,
+    [
+     9,
+     18
+    ]
+   ],
+   [
+    5.159999999999999,
+    [
+     18,
+     19
+    ]
+   ],
+   [
+    5.159999999999999,
+    [
+     18,
+     20
+    ]
+   ],
+   [
+    5.159999999999999,
+    [
+     18,
+     22
+    ]
+   ]
+  ],
+  "exc": 0,
+  "excFreq": 0,
+  "forms": [
+   "casse"
+  ],
+  "keys": [
+   18
+  ],
+  "saved": 5.159999999999999,
+  "score": 5.159999999999999,
+  "sim": 0.4,
+  "top": []
+ },
+ "('suffix', 1, 'mE', 'mais|may|met|mets|mmet')": {
+  "alts": [
+   [
+    58.79999999999999,
+    [
+     25
+    ]
+   ],
+   [
+    58.79999999999999,
+    [
+     16,
+     25
+    ]
+   ],
+   [
+    58.79999999999999,
+    [
+     17,
+     25
+    ]
+   ],
+   [
+    58.79999999999999,
+    [
+     18,
+     25
+    ]
+   ],
+   [
+    58.79999999999999,
+    [
+     19,
+     25
+    ]
+   ]
+  ],
+  "exc": 0,
+  "excFreq": 0,
+  "forms": [
+   "mais|may|met|mets|mmet"
+  ],
+  "keys": [
+   25
+  ],
+  "saved": 58.79999999999999,
+  "score": 58.79999999999999,
+  "sim": 0.6666666666666666,
+  "top": []
+ },
+ "('suffix', 1, 'ny', 'nu')": {
+  "alts": [
+   [
+    114.72999999999982,
+    [
+     16,
+     17,
+     22
+    ]
+   ],
+   [
+    114.72999999999982,
+    [
+     20,
+     22
+    ]
+   ],
+   [
+    114.72999999999982,
+    [
+     16,
+     20,
+     22
+    ]
+   ],
+   [
+    114.72999999999982,
+    [
+     17,
+     20,
+     22
+    ]
+   ],
+   [
+    114.72999999999982,
+    [
+     18,
+     20,
+     22
+    ]
+   ]
+  ],
+  "exc": 0,
+  "excFreq": 0,
+  "forms": [
+   "nu",
+   "\u00b7venu",
+   "\u00b7tenu"
+  ],
+  "keys": [
+   16,
+   17,
+   22
+  ],
+  "saved": 134.72999999999982,
+  "score": 114.72999999999982,
+  "sim": 0.6038290986276611,
+  "top": []
+ }
+}

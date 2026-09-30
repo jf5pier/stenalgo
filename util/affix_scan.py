@@ -37,6 +37,7 @@ RULES_TSV = "scratch/affix-rules.tsv"           # Phase 3+4 final output (DESIGN
 RULES_REPORT_MD = "scratch/affix-rules-report.md"
 POOL_PICKLE = "scratch/affix-pool.pickle"        # non-legacy Part A result, reused by --reuse-pool
 SWEEP_DIR = "scratch/affix-sweep"
+SWEEP_DIR_PARTIAL = "scratch/affix-sweep-partial"
 SWEEP_SETTINGS = (   # plan 2026-09-28 U6; stroke-frequency units, top rules score ~5,000-9,000
     ("L", 1.0, 5.0, 10.0),      # (name, EXCEPTION_ALPHA, EXCLUSION_COST, FORM_COST); L = today's
     ("M", 1.0, 50.0, 100.0),
@@ -602,6 +603,7 @@ def _overlap(assigned: list[B.Assigned], familyId: str) -> list[str]:
 
 
 def main() -> None:
+    global SWEEP_DIR
     ap = argparse.ArgumentParser()
     ap.add_argument("--refresh", action="store_true")
     ap.add_argument("--part", choices=["a", "b", "all"], default="all")
@@ -620,7 +622,13 @@ def main() -> None:
     ap.add_argument("--sweep", action="store_true",
                      help="--part b: run selection at each SWEEP_SETTINGS weight setting "
                           f"and write {SWEEP_DIR}/")
+    ap.add_argument("--partial-overlap", action="store_true",
+                    help="experiment: a RULE merges unless ALL its keys are in the neighbour stroke "
+                         "(src.affixes.RULE_PARTIAL_OVERLAP); --sweep then writes to SWEEP_DIR_PARTIAL")
     args = ap.parse_args()
+    if args.partial_overlap:
+        A.RULE_PARTIAL_OVERLAP = True
+        SWEEP_DIR = SWEEP_DIR_PARTIAL
     if args.max_pool is not None:
         A.MAX_POOL = args.max_pool
     if args.growth_min_expand is not None:

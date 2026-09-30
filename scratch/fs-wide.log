@@ -1,0 +1,24 @@
+(phon,syll,osyll) ok flags:
+  36048 skipped
+      2 (False, False, False)
+    143 (False, False, True)
+      3 (True, False, False)
+      6 (True, False, True)
+  14375 (True, True, True)
+all ok: 14375 / 14529
+59 (('E', 'e'),) [('abêtissait', 'ind:imp:3s', 'a|b_E|t_i|s_E', 'a|b_e|t_i|s_E'), ('aigrirent', 'ind:pas:3p', 'E|g_R_i_R_#', 'e|g_R_i_R_#'), ('aigrissaient', 'ind:imp:3p', 'E|g_R_i|s_E', 'e|g_R_i|s_E')]
+24 (('o', 'O'),) [('délogera', 'ind:fut:3s', 'd_e|l_o|Z_°|R_a', 'd_e|l_O|Z_°|R_a'), ('délogerait', 'cnd:pre:3s', 'd_e|l_o|Z_°|R_E', 'd_e|l_O|Z_°|R_E'), ('délogerons', 'ind:fut:1p', 'd_e|l_o|Z_°|R_§', 'd_e|l_O|Z_°|R_§')]
+22 (('O', 'o'),) [('bottèlent', 'ind:pre:3p', 'b_O|t_E_l_#', 'b_o|t_E_l_#'), ('grommèle', 'imp:pre:2s', 'g_R_O|m_E_l_#', 'g_R_o|m_E_l_#'), ('grommèle', 'ind:pre:1s', 'g_R_O|m_E_l_#', 'g_R_o|m_E_l_#')]
+18 (('e', 'E'),) [('enquête', 'sub:pre:3s', '@|k_e_t_#', '@|k_E_t_#'), ('enquêtes', 'sub:pre:2s', '@|k_e_t_#', '@|k_E_t_#'), ('enterre', 'sub:pre:3s', '@|t_e_R_#', '@|t_E_R_#')]
+11 (('°', 'E'),) [('condescend', 'ind:pre:3s', 'k_§|d_°|s_@_#', 'k_§|d_E|s_@_#'), ('condescendait', 'ind:imp:3s', 'k_§|d_°|s_@|d_E', 'k_§|d_E|s_@|d_E'), ('condescendit', 'ind:pas:3s', 'k_§|d_°|s_@|d_i', 'k_§|d_E|s_@|d_i')]
+4 (('2', '9'),) [('bleuira', 'ind:fut:3s', 'b_l_2|i|R_a', 'b_l_9|i|R_a'), ('bleuissaient', 'ind:imp:3p', 'b_l_2|i|s_E', 'b_l_9|i|s_E'), ('bleuissait', 'ind:imp:3s', 'b_l_2|i|s_E', 'b_l_9|i|s_E')]
+4 (('2', '°'),) [('interjeta', 'ind:pas:3s', '5|t_E_R|Z_2|t_a', '5|t_E_R|Z_°|t_a'), ('pesèrent', 'ind:pas:3p', 'p_2|z_E_R_#', 'p_°|z_E_R_#'), ('remangerait', 'cnd:pre:3s', 'R_2|m_@|Z_°|R_E', 'R_°|m_@|Z_°|R_E')]
+3 (('9', '2'),) [('feutres', 'sub:pre:2s', 'f_9_t_R_#', 'f_2_t_R_#'), ('pleuve', 'sub:pre:3s', 'p_l_9_v_#', 'p_l_2_v_#'), ('pleuvent', 'ind:pre:3p', 'p_l_9_v_#', 'p_l_2_v_#')]
+2 (('|', '_'), ('_', '|')) [('croyiez', 'ind:imp:2p', 'k_R_wa|j_#_e', 'k_R_wa_j_#|e'), ('croyiez', 'sub:pre:2p', 'k_R_wa|j_#_e', 'k_R_wa_j_#|e')]
+1 (('°', 'e'),) [('celait', 'ind:imp:3s', 's_°|l_E', 's_e|l_E')]
+1 (('°', '2'),) [('chancelions', 'ind:imp:1p', 'S_@|s_°|l_j_§', 'S_@|s_2|l_j_§')]
+1 (('8_', 'y|'),) [('ennuagent', 'ind:pre:3p', '@|n_8_a_Z_#', '@|n_y|a_Z_#')]
+1 (('w', 'u'),) [('relouerons', 'ind:fut:1p', 'R_°|l_w_#|R_§', 'R_°|l_u_#|R_§')]
+1 (('', '_j'), ('j_', '')) [('renvoyiez', 'sub:pre:2p', 'R_@|v_wa_j|j_e', 'R_@|v_wa_j_j|e')]
+1 (('s', 'z'),) [('resurgirai', 'ind:fut:1s', 'R_°|s_y_R|Z_i|R_e', 'R_°|z_y_R|Z_i|R_e')]
+1 (('y|', '8_'),) [('évertuais', 'ind:imp:1s', 'e|v_E_R|t_y|E', 'e|v_E_R|t_8_E')]
