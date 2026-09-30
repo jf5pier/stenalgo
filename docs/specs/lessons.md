@@ -9,8 +9,10 @@ lesson intro then reuses the Words-mode drill engine) is described here only whe
 constrains the JSON.
 
 Inputs: `starboard3h.json`, the phonetic and disambiguated theories
-(`util/_theoryio.loadPhoneticAndDisambiguatedTheory`), `keypress_groups.json`,
-`realization_report.json`, `resolved_press_sets.json`. The spec of the marks and
+(`util/_theoryio.loadPhoneticAndDisambiguatedTheory`), `realization_report.json`
+(its `keypressGroups` carry the markers, `affectedWords` and `chosenKeys` of the
+accord/verbe groups — `keypress_groups.json` holds only the Grouping Phase
+constraints), `resolved_press_sets.json`. The spec of the marks and
 groups themselves is [star-hash-marking.md](star-hash-marking.md) and
 [discriminating-features.md](discriminating-features.md). Terms are defined in
 [GLOSSARY.md](../GLOSSARY.md); the pipeline view is
@@ -119,11 +121,13 @@ already write words; plain left-to-right chunking would give lesson 1 four nucle
 nothing to consonate them with.
 
 Worked example, step (100, 1). Part queues after the tail sort — nucleus: `(11,)`,
-`(12,)`; onset: `(8,)`, `(9,)`; coda: `(16,)`, `(17,)`. Dealt sequence:
-`(11,), (8,), (16,), (12,), (9,), (17,)`. Chunked at 4: lesson 1 = `{@/9, R, j-b-w,
-a}` (keys 8, 11, 12, 16), lesson 2 = `{w-N-G, s}` (keys 9, 17). Lesson 1's pool
+`(12,)`, `(13,)`, `(14,)`; onset: `(8,)`, `(9,)`; coda: `(16,)`, `(17,)`. Dealt
+sequence: `(11,), (8,), (16,), (12,), (9,), (17,), (13,), (14,)` (dealing continues
+with the remaining nucleus once onset and coda are exhausted). Chunked at 4:
+lesson 1 = `{R, j-b-w, a, @/9}` — keys 8, 11, 12, 16 — and lesson 2 = `{s, w-N-G,
+i, e}` — keys 9, 13, 14, 17. Lesson 1's pool
 includes unmarked vowel-only words such as `à`; `a`/`ah`/`ha` stay out until the
-star/hash track (§3, rule 2). On the current layout this yields **14 phoneme
+star/hash track (§3, rule 2). On the current layout this yields **15 phoneme
 lessons**.
 
 ## 3. Coverage and eligibility
@@ -179,10 +183,11 @@ the covered set.
 ### 4.2 `accord`
 
 One lesson per **gender/number Keypress Group**: every group in
-`keypress_groups.json` whose marker set ⊆ {`f`, `m`, `p`, `nbr_s`, `nbr_p`} (on the
-current answers: `{f}` and `{nbr_p, p}`). Groups are ordered by descending
-`keypressGroups[g].affectedWords`, ties by the alphabetically sorted marker tuple —
-`keypress_groups.json` group ids are not stable across runs, so code never orders by
+`realization_report.json`'s `keypressGroups` whose marker set ⊆ {`f`, `m`, `p`,
+`nbr_s`, `nbr_p`} (on the current answers: `{f}` and `{nbr_p, p}`). Groups are
+ordered by descending `keypressGroups[g].affectedWords`, ties by the
+alphabetically sorted marker tuple —
+group ids are not stable across runs, so code never orders by
 id. `newKeys`/`newChords` come from the group's `chosenKeys` in
 `realization_report.json`. The pool is the top-50 ADJ/NOM records (§5) whose marker
 groups all are introduced (cumulatively) **and** which touch the new group — the
@@ -228,7 +233,9 @@ Lessons in **mark-complexity order**: `*`, `#`, `*#`, then one lesson per escala
 depth (`*# *#`, `*# *# *#`, …) present in the data, ascending. `newKeys`: `[10]`,
 `[15]`, `[10, 15]`, then `[]` for escalated lessons (no new keys); `newChords` is
 `[[10, 15]]` on the `*#` lesson only. The pool is the top-50 records whose star/hash
-code is **exactly** the lesson's code, eligible otherwise; members of one
+code is **exactly** the lesson's code, eligible otherwise — plus the canonical
+(unmarked, code-∅) member of every included lemma-homophone group, so the §7.5
+contrast template is always renderable; members of one
 lemma-homophone group rank side by side (§5). One rule per mark (kind `mark`, §7.5).
 Dropped when the pool has fewer than 10 records (§5).
 
