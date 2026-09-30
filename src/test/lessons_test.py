@@ -14,8 +14,8 @@ from util.export_lessons import (
     MAX_LESSON_KEYPRESSES, RECORD_FIELDS, accordRule, buildLessons, chunkStep,
     eligible, examplesFallbackByKeypress, fingerKeypressesOfStroke,
     handOfKeypress, loadKeypressGroups, markRule, numberInFrench,
-    phonemeOrderingKey, phonemeRule, phonemeSteps, selectTopWords,
-    starHashCodeOf, verbMarkerRule, verbTenseOf, verbTenseRule,
+    phonemeOrderingKey, phonemePartsOfWord, phonemeRule, phonemeSteps,
+    selectTopWords, starHashCodeOf, verbMarkerRule, verbTenseOf, verbTenseRule,
 )
 
 STAR_KEY = 10
@@ -167,27 +167,41 @@ def _orthosOf(lesson: dict) -> list[str]:
 
 
 # A rule-text pool whose records need no Word objects (phonemeRule reads
-# _keyps/phonology; markRule reads _code/_cluster; the verb renderers read
+# _keyps/_phonemeParts; markRule reads _code/_cluster; the verb renderers read
 # nothing).
 _RULE_POOL = [
     {"ortho": "sa", "steno": "s*a", "phonology": "sa",
-     "_keyps": frozenset({(8,), (11,)}), "_code": "*", "_cluster": ((8, 11),)},
+     "_keyps": frozenset({(8,), (11,)}),
+     "_phonemeParts": frozenset({("s", "onset"), ("a", "nucleus")}),
+     "_code": "*", "_cluster": ((8, 11),)},
     {"ortho": "pa", "steno": "pa", "phonology": "pa",
-     "_keyps": frozenset({(3,), (11,)}), "_code": "", "_cluster": ((8, 11),)},
+     "_keyps": frozenset({(3,), (11,)}),
+     "_phonemeParts": frozenset({("p", "onset"), ("a", "nucleus")}),
+     "_code": "", "_cluster": ((8, 11),)},
     {"ortho": "mi", "steno": "mi", "phonology": "mi",
-     "_keyps": frozenset({(12,)}), "_code": "", "_cluster": ((12,),)},
+     "_keyps": frozenset({(12,)}),
+     "_phonemeParts": frozenset({("m", "onset"), ("i", "nucleus")}),
+     "_code": "", "_cluster": ((12,),)},
 ]
 
 # A miniature full-stream fixture for the §7.1 example fallback: "te" is the
 # most frequent unmarked record pressing (16,), "ta" the least frequent, and
-# "ti" is marked (code "*") so it never serves as a fallback example.
+# "ti" is marked (code "*") so it never serves as a fallback example. The
+# phonologies put each word's /t/ in a coda ("at", "et", "it") -- a keypress
+# only ever writes a phoneme the word holds in that keypress's syllabic part.
 _FALLBACK_STREAM = [
-    {"ortho": "ta", "steno": "ta", "phonology": "ta", "frequency": 1.0,
-     "_keyps": frozenset({(16,), (11,)}), "_code": "", "_cluster": ((16, 11),)},
-    {"ortho": "te", "steno": "te", "phonology": "te", "frequency": 9.0,
-     "_keyps": frozenset({(16,)}), "_code": "", "_cluster": ((16,),)},
-    {"ortho": "ti", "steno": "t*i", "phonology": "ti", "frequency": 8.0,
-     "_keyps": frozenset({(16,)}), "_code": "*", "_cluster": ((16,),)},
+    {"ortho": "ta", "steno": "ta", "phonology": "at", "frequency": 1.0,
+     "_keyps": frozenset({(16,), (11,)}),
+     "_phonemeParts": frozenset({("a", "nucleus"), ("t", "coda")}),
+     "_code": "", "_cluster": ((16, 11),)},
+    {"ortho": "te", "steno": "te", "phonology": "et", "frequency": 9.0,
+     "_keyps": frozenset({(16,)}),
+     "_phonemeParts": frozenset({("e", "nucleus"), ("t", "coda")}),
+     "_code": "", "_cluster": ((16,),)},
+    {"ortho": "ti", "steno": "t*i", "phonology": "it", "frequency": 8.0,
+     "_keyps": frozenset({(16,)}),
+     "_phonemeParts": frozenset({("i", "nucleus"), ("t", "coda")}),
+     "_code": "*", "_cluster": ((16,),)},
 ]
 _FALLBACK = examplesFallbackByKeypress(_FALLBACK_STREAM)
 
@@ -568,6 +582,40 @@ class TestHandOfKeypress:
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# phonemePartsOfWord (the (phoneme, syllabic part) pairs a word realizes)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+class TestPhonemePartsOfWord:
+
+    def test_consonants_split_onset_then_coda_around_the_vowels(self):
+        # "voyez" = v w a | j e: the /v w/ cluster precedes its syllable's vowel
+        # (onset), while the /j/ of "je" precedes its own syllable's vowel (also
+        # an onset) -- /w/ and /j/ are consonants, so each takes its syllable's
+        # position, not the word's.
+        word = _make_word(ortho="voyez", phonology="vwaje", rawSyllCV="v_w_a|j_e")
+        assert phonemePartsOfWord(word) == frozenset(
+            {("v", "onset"), ("w", "onset"), ("a", "nucleus"),
+             ("j", "onset"), ("e", "nucleus")})
+
+    def test_a_consonant_after_its_syllables_vowel_is_coda(self):
+        # "oeil" = 8 j: the /j/ follows its syllable's vowel -> coda (the -j
+        # keypress of the real layout).
+        word = _make_word(ortho="oeil", phonology="8j", rawSyllCV="8_j")
+        assert phonemePartsOfWord(word) == frozenset({("8", "nucleus"), ("j", "coda")})
+
+    def test_vowelless_syllable_is_entirely_onset(self):
+        word = _make_word(ortho="ab", phonology="ba", rawSyllCV="b|a")
+        assert phonemePartsOfWord(word) == frozenset({("b", "onset"), ("a", "nucleus")})
+
+    def test_silent_phonemes_are_dropped(self):
+        # "#" is the silent marker: withSilent=False strips it before splitting.
+        word = _make_word(ortho="pat", phonology="pat", rawSyllCV="p_a_t_#")
+        assert ("#", "coda") not in phonemePartsOfWord(word)
+        assert phonemePartsOfWord(word) == frozenset(
+            {("p", "onset"), ("a", "nucleus"), ("t", "coda")})
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # examplesFallbackByKeypress (§7.1 example fallback)
 # ═══════════════════════════════════════════════════════════════════════════════
 
@@ -640,10 +688,11 @@ class TestPhonemeRule:
             "text": "La touche i- écrit /i/ (« mi »), /e/ ou /o/."}
 
     def test_two_phonemes_join_with_ou(self, starboard_with_layout: Starboard):
+        # /e/ never occurs in a coda (it is a vowel), so only /t/ gets examples.
         item = {"keypress": (16,), "phonemes": ("t", "e"), "part": "coda"}
         assert phonemeRule(item, starboard_with_layout, [], _FALLBACK) == {
             "kind": "phoneme", "hand": "right",
-            "text": "La touche -t écrit /t/ (« te », « ta ») ou /e/ (« te »)."}
+            "text": "La touche -t écrit /t/ (« te », « ta ») ou /e/."}
 
     def test_chord_onset(self, starboard_with_layout: Starboard):
         item = {"keypress": (8, 9), "phonemes": ("E",), "part": "onset"}
@@ -664,6 +713,27 @@ class TestPhonemeRule:
         # only "pa" is an example.
         rule = phonemeRule(item, starboard_with_layout, _RULE_POOL, _FALLBACK)
         assert rule["text"].endswith("(« pa »).")
+
+    def test_a_phoneme_held_in_another_part_is_not_an_example(
+            self, starboard_with_layout: Starboard):
+        # Regression: the coda keypress (16,) of the real layout writes /j/, /b/
+        # and /w/, and the old match ("presses the keypress" AND "phoneme
+        # anywhere in the phonology") served "voyez"-like words as /w/ examples
+        # even though their /w/ sits in the onset, written by the OTHER hand's
+        # key -- here "croyais" presses (16,) with its coda /j/ but holds /w/ in
+        # its onset, so /w/ stays bare while /j/ takes the example.
+        stream = [
+            {"ortho": "croyais", "steno": "croyais", "phonology": "kRwajE",
+             "frequency": 7.0, "_keyps": frozenset({(16,), (9,)}),
+             "_phonemeParts": frozenset({("k", "onset"), ("R", "onset"),
+                                         ("w", "onset"), ("a", "nucleus"),
+                                         ("j", "coda"), ("E", "nucleus")}),
+             "_code": "", "_cluster": ((16,),)},
+        ]
+        fallback = examplesFallbackByKeypress(stream)
+        item = {"keypress": (16,), "phonemes": ("j", "w"), "part": "coda"}
+        rule = phonemeRule(item, starboard_with_layout, [], fallback)
+        assert rule["text"] == "La touche -t écrit /j/ (« croyais ») ou /w/."
 
 
 class TestAccordRule:
