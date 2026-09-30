@@ -1,3 +1,5 @@
+1751 legal keypresses
+2724 ment carriers, 2724 usable (start>=1, syllables aligned)
 # -ment regex scope scores (real simulator, keys (20, 21, 25), setting H, partial overlap True)
 
 2724 carriers whose last syllable is `ment`. `k2 words` = words given the 2-stroke form;
@@ -29,3 +31,4 @@ Most frequent excluded words (named by the pattern, fall back to plain `ment`) p
 - C+[eiuéûaé]+ + oie/ie: seulement, vêtements, rarement, éléments, élément, compliments, compliment, sacrément
 - C+ + any vowel letters: moment, seulement, vêtements, moments, rarement, éléments, élément, compliments
 - anything (upper bound): moment, seulement, vêtements, moments, bâtiment, serment, rarement, éléments
+wrote scratch/ment-regex-scores-H-partial.md, scratch/ment-syllable-table-H-partial.md (155 syllables) in 11s

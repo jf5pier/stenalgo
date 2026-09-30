@@ -1,3 +1,15 @@
+1751 legal keypresses
+2724 carriers, 155 distinct previous syllables, consonants bcdfghjlmnpqrstvxz, vowel pool euiéoaûyî
+stage 1: 1149 distinct scopes (5s)
+  500 scopes scored
+  1000 scopes scored
+stage 2: tweaking 22 seeds (68s)
+after tweaks: 4178 distinct scopes, 1029 scored (68s)
+  1500 scopes scored
+  2000 scopes scored
+  2500 scopes scored
+  3000 scopes scored
+  3500 scopes scored
 # -ment regex scope search (real simulator, keys (20,21,25), setting H, partial overlap True)
 
 4178 distinct scopes from the grammar, 1029 simulator runs. Atoms = vowel letters + excluded onset letters. `C\{xy}` = consonants except x, y. Objective = benefit - alpha*excFreq - price*fallbackWords - form cost.
@@ -100,3 +112,4 @@ Reference `(C+[eiu]+)?`: benefit 8723, fallbacks 78 (freq 85), exceptions 3, 2-s
 | `C\{f}+[euia]+` | 5 | 8785 | 89 | 104 |
 | `C\{j}{1,2}[euia]+` | 5 | 8786 | 91 | 98 |
 | `C{1,2}[euiaû]+` | 5 | 8787 | 96 | 106 |
+wrote scratch/ment-regex-search-H.md in 227s
