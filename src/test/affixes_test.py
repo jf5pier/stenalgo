@@ -3,7 +3,7 @@ import src.affixes as A
 from src.affixes import (
     DEDICATED, MERGED, PREFIX, RULE, SUFFIX, Binding, Candidate, Carrier, LemmaIndex, Slot,
     SimContext, WordRecord, _dedupeByCarrierSet, _growLatticeLevel, _onsetRest, _reduceExceptions,
-    buildCandidates, buildFamily, colourSubgroups, inheritedSpan, markCostForCluster, norm,
+    buildCandidates, buildFamily, isNoGrowthAnchor, colourSubgroups, inheritedSpan, markCostForCluster, norm,
     passesPrefixFilter, passesSuffixFilter, poolKnownAffixGroups, poolTailVariants, simulate,
     slotLabel, slotMatchesSyllable)
 from src.keyboard import Starboard
@@ -355,6 +355,18 @@ class TestLatticeGrowth:
         assert len(children) == 1
         assert children[0].emit is False
         assert children[0].expand is True
+
+
+class TestNoGrowthAnchor:
+    def test_re_prefix_anchors_do_not_grow(self):
+        assert isNoGrowthAnchor(Candidate(PREFIX, 1, "R°", "re"))
+        assert isNoGrowthAnchor(Candidate(PREFIX, 1, "R°", "re|reh"))
+
+    def test_other_anchors_keep_growing(self):
+        assert not isNoGrowthAnchor(Candidate(SUFFIX, 1, "R°", "re"))     # a suffix, not the prefix
+        assert not isNoGrowthAnchor(Candidate(PREFIX, 1, "Re", "ré"))     # phonetic ré stays growable
+        assert not isNoGrowthAnchor(Candidate(PREFIX, 1, "R°", "re|ré"))  # one spelling is not listed
+        assert not isNoGrowthAnchor(Candidate(PREFIX, 1, "d°", "de"))
 
 
 class TestReduceExceptions:
