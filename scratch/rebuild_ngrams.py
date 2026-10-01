@@ -31,8 +31,18 @@ Dropped (with counts in the report):
 Trailing fragments (`de l'`) are kept: their counts are the prefix's true
 total.
 
-Usage: env/bin/python scratch/rebuild_ngrams.py
-Outputs: scratch/top_ngrams/{1..5}gram_topN.tsv + apostrophe_words.tsv
+Usage:
+- env/bin/python scratch/rebuild_ngrams.py
+  Outputs: scratch/top_ngrams/{1..5}gram_topN.tsv + apostrophe_words.tsv
+- env/bin/python scratch/rebuild_ngrams.py --query TERMS.txt [OUT.tsv] [--fill]
+  Point-query mode: look every term of TERMS.txt up in the same merged bins
+  (orgtre intermediates + viewer-estimated fill), NOT just the top-N slices,
+  and write term/word_units/freq/source rows (source: orgtre | est | MISSING).
+  Default OUT: scratch/tao_coverage.tsv. With --fill, additionally query the
+  Ngram Viewer for every term: locally-found terms anchor a per-bin
+  share->count scale (median), and MISSING terms get estimated counts from it
+  (source: fill); still-missing terms stay MISSING (viewer index omits
+  below-threshold words).
 """
 
 from __future__ import annotations
@@ -47,6 +57,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 SRC = REPO / "scratch" / "top_ngrams" / "orgtre"
 OUT = REPO / "scratch" / "top_ngrams"
+sys.path.insert(0, str(REPO))  # for the --fill viewer import of util/
 ORDERS = (1, 2, 3, 4, 5)
 # Per order, the top-N slices to write (the 2/3-gram top-100s replace the
 # old viewer-wildcard files that used a different tokenization).
@@ -90,7 +101,9 @@ def keep(tokens: list[str]) -> str | None:
     return None
 
 
-def main() -> None:
+def loadBins() -> tuple[dict[int, Counter], dict[int, dict[str, int]]]:
+    """Read the orgtre intermediates into per-word-unit-bin Counters, plus the
+    viewer-estimated blind-spot fill (see module docstring)."""
     counts: dict[int, Counter] = defaultdict(Counter)
     reasons: Counter = Counter()
     for order in ORDERS:
@@ -130,7 +143,84 @@ def main() -> None:
                            for ng, share in shares.items()}
         print(f"bin {bin_}: {len(estimated[bin_])} estimated entries "
               f"(scale {scale:.3e} from {len(ratios[bin_])} anchors)")
+    return counts, estimated
 
+
+def queryTerms(terms_path: Path, out_path: Path, fill: bool = False) -> None:
+    """Point-query every term against the merged bins (orgtre + estimates),
+    far beyond the top-N slices; report coverage. With fill=True, top up the
+    MISSING rows with viewer-scaled estimates (see module docstring)."""
+    counts, estimated = loadBins()
+    merged = {bin_: Counter(cnt) for bin_, cnt in counts.items()}
+    for bin_, est in estimated.items():
+        merged[bin_].update(est)
+
+    terms: list[str] = []
+    seen: set[str] = set()
+    with open(terms_path, encoding="utf-8") as fh:
+        for line in fh:
+            term = normalize(line.strip())
+            if not term or term in seen or term.startswith("#"):
+                continue
+            seen.add(term)
+            terms.append(term)
+
+    rows: dict[str, tuple[int, int, str]] = {}  # term -> (bin, freq, source)
+    for term in terms:
+        bin_ = wordUnits(term)
+        if term in merged.get(bin_, {}):
+            source = "est" if term in estimated.get(bin_, {}) else "orgtre"
+            rows[term] = (bin_, merged[bin_][term], source)
+        else:
+            rows[term] = (bin_, 0, "MISSING")
+
+    if fill:
+        from util.ngram_data import viewerShares  # heavy import, query-time only
+        shares = {normalize(ng): share
+                  for ng, share in viewerShares(terms).items()}
+        # Per-bin share->count scale from the terms known both ways.
+        ratios: dict[int, list[float]] = defaultdict(list)
+        allRatios: list[float] = []
+        for term, (bin_, freq, source) in rows.items():
+            share = shares.get(term)
+            if source != "MISSING" and share:
+                ratios[bin_].append(freq / share)
+                allRatios.append(freq / share)
+        globalScale = statistics.median(allRatios) if allRatios else 0
+        for term, (bin_, freq, source) in list(rows.items()):
+            if source != "MISSING":
+                continue
+            share = shares.get(term)
+            if not share:
+                continue  # below the viewer's threshold too
+            anchors = ratios.get(bin_) or allRatios
+            scale = statistics.median(anchors) if anchors else 0
+            rows[term] = (bin_, round(share * scale), "fill")
+            print(f"filled {term!r} (bin {bin_}, "
+                  f"{'bin' if ratios.get(bin_) else 'GLOBAL'} scale)", file=sys.stderr)
+
+    found = sum(1 for _, (_, _, source) in rows.items() if source != "MISSING")
+    with open(out_path, "w", encoding="utf-8") as out:
+        out.write("term\tword_units\tfreq\tsource\n")
+        for term in terms:  # input order
+            bin_, freq, source = rows[term]
+            out.write(f"{term}\t{bin_}\t{freq}\t{source}\n")
+    total = len(terms)
+    print(f"{found}/{total} terms found "
+          f"({total - found} missing beyond orgtre depth) -> {out_path}")
+
+
+def main() -> None:
+    args = [a for a in sys.argv[1:] if a != "--fill"]
+    fill = len(args) != len(sys.argv[1:])
+    if args and args[0] == "--query":
+        terms_path = Path(args[1])
+        out_path = (Path(args[2]) if len(args) > 2
+                    else REPO / "scratch" / "tao_coverage.tsv")
+        queryTerms(terms_path, out_path, fill=fill)
+        return
+
+    counts, estimated = loadBins()
     for order in ORDERS:
         merged = Counter(counts[order])
         merged.update(estimated.get(order, {}))
