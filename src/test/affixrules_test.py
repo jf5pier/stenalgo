@@ -137,6 +137,7 @@ class TestTerritory:
         assert [(k.skippedRoot, k.selectedRoot) for k in result.overlapSkips] == [("ment", "·°ment")]
 
     def test_a_grown_node_is_never_a_rule_root(self, monkeypatch):
+        monkeypatch.setattr("src.affixscopes.SCOPES", {})   # `ment` is a scoped anchor otherwise
         import src.affixrules as R
         from src.affixes import poolCarriers
 
@@ -182,6 +183,7 @@ class TestVariantRivals:
         return {candidateKey(c): c for c in (ment, mant, merged)}, R
 
     def test_merged_anchor_replaces_its_parts_when_it_scores_at_least_the_main(self, monkeypatch):
+        monkeypatch.setattr("src.affixscopes.SCOPES", {})   # the engine's own rival test, not the decided verdicts
         cands, R = self._setup(monkeypatch, {"ment": 100.0, "mant": 40.0, "mant|ment": 100.0})
         kept, decisions = R.resolveVariantRivals(cands, None, None, [])
         assert [cands[k].ortho for k in kept] == ["mant|ment"]
@@ -194,6 +196,7 @@ class TestVariantRivals:
         assert [d.outcome for d in decisions] == ["apart"]
 
     def test_group_outside_the_top_is_dropped_out_of_reach(self, monkeypatch):
+        monkeypatch.setattr("src.affixscopes.SCOPES", {})   # the engine's own rival test, not the decided verdicts
         cands, R = self._setup(monkeypatch, {"ment": 100.0, "mant": 40.0, "mant|ment": 100.0})
         monkeypatch.setattr(R, "RIVAL_RESOLVE_TOP", 0)
         kept, decisions = R.resolveVariantRivals(cands, None, None, [])

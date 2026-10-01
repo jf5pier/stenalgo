@@ -80,7 +80,8 @@ class TestSingleGenerator:
         assert (SUFFIX, 1, "m@", "mant|ment") not in pool
         assert (SUFFIX, 1, "m@", "ment") in pool and (SUFFIX, 1, "m@", "mant") in pool
 
-    def test_a_lattice_key_collision_renames_the_later_node_and_never_overwrites(self):
+    def test_a_lattice_key_collision_renames_the_later_node_and_never_overwrites(self, monkeypatch):
+        monkeypatch.setattr("src.affixscopes.SCOPES", {})   # the generic lattice, not the decided scope of `ment`
         def words(tail, strokeBase, freq):
             return [_wordRec((st, "bi", "ce", tail), (st, "bi", "s°", "m@"), (strokeBase + i, 700, 800, 900),
                              freq=freq) for i, st in enumerate(_STEMS[:5] if strokeBase == 100 else _STEMS[5:])]
@@ -99,7 +100,8 @@ class TestSingleGenerator:
         assert all(c.grownFromKey in pool for c in pool.values() if c.grownFromKey)
         assert any(c.grownFromKey == (r.position, r.k, r.phono, r.ortho) for r in renamed for c in pool.values())
 
-    def test_an_identical_duplicate_child_folds_its_parent_in(self):
+    def test_an_identical_duplicate_child_folds_its_parent_in(self, monkeypatch):
+        monkeypatch.setattr("src.affixscopes.SCOPES", {})   # the generic lattice, not the decided scope of `ment`
         words3 = [_wordRec((st, "ce", "ment"), (st, "s°", "m@"), (100 + i, 800, 900)) for i, st in enumerate(_STEMS[:5])]
         car = lambda rs: [Carrier(r, 2, 1, "x") for r in rs]   # noqa: E731
         p = Candidate(SUFFIX, 1, "m@", "ment", carriers=car(words3), isAnchor=True)

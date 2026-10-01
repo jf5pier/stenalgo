@@ -17,6 +17,7 @@ from typing import NamedTuple
 
 import numpy as np
 
+from src.affixscopes import scopeFormsOf
 from src.ambiguitychecker import assignStarHashCombos, buildWordToStrokes
 from src.keyboard import Starboard, Stroke, Strokes, canonicalizeStrokes
 from src.word import Word
@@ -287,6 +288,8 @@ class Candidate:
                                        # (report only -- no longer a carrier gate, plan U2)
     mergeParts: list[tuple[str, int, str, str]] = field(default_factory=list)  # variant merge: the parts
     newConflictFreq: float = 0.0       # variant merge: collision frequency the fusion added
+    isScoped: bool = False             # a form built from a decided scope (src/affixscopes.py): its carriers
+                                       # that gain nothing fall back to the anchor alone (affixrules)
 
     @property
     def phonoFlat(self) -> str:
@@ -326,7 +329,7 @@ class Slot:
     """One absorbed syllable of a lattice node (§3.1): a fixed value, a group sharing a fixed
     nucleus+coda but varying onset, or a full wildcard -- each may exclude a short list of
     attested values that would otherwise cause too many collisions (D3, D6)."""
-    kind: str                        # "exact" | "onset" | "any"
+    kind: str                        # "exact" | "onset" | "any" | "scope" (value: the scope label)
     value: str = ""                  # exact: the syllable phono; onset: the nucleus+coda ("rest")
     excluded: tuple[str, ...] = ()   # onset: excluded onset consonants; any: excluded syllable phonos
 
@@ -339,13 +342,15 @@ def slotMatchesSyllable(slot: Slot, phono: str) -> bool:
         return rest == slot.value and onset not in slot.excluded
     if slot.kind == "any":
         return phono not in slot.excluded
+    if slot.kind == "scope":
+        raise ValueError("a scope slot is matched by src.affixscopes.ScopeForm.matches, not by phono alone")
     raise ValueError(f"unknown slot kind {slot.kind!r}")
 
 
 def slotLabel(slot: Slot) -> str:
     """A phono-space label, unique per distinct pattern (§9 pitfall): exclusions are folded in."""
     excl = "-{" + ",".join(slot.excluded) + "}" if slot.excluded else ""
-    if slot.kind == "exact":
+    if slot.kind in ("exact", "scope"):
         return slot.value
     if slot.kind == "onset":
         return f"[C{excl}]{slot.value}"
@@ -877,6 +882,48 @@ def isNoGrowthAnchor(c: Candidate) -> bool:
     return c.position == PREFIX and set(c.ortho.split("|")) <= NO_GROWTH_PREFIX_ORTHOS
 
 
+def isScopedAnchor(c: Candidate) -> bool:
+    """True for an anchor with a decided scope (`src.affixscopes.SCOPES`, empty list = no growth): its
+    forms come from `growScopedForms`, never from the lattice."""
+    return c.k == 1 and c.isAnchor and scopeFormsOf(c.position, c.ortho, c.phono) is not None
+
+
+def growScopedForms(parent: Candidate) -> list[Candidate]:
+    """The decided k=2 forms of a scoped anchor, in the table's order. A carrier joins the first form
+    that matches it (a word gets one form); the neighbour must be an existing, aligned syllable and
+    keep at least one stem syllable (`_growCarrier`)."""
+    forms = scopeFormsOf(parent.position, parent.ortho, parent.phono) or []
+    taken: set[int] = set()
+    out: list[Candidate] = []
+    for form in forms:
+        kept: list[Carrier] = []
+        for c in parent.carriers:
+            rec = c.rec
+            if c.rec.idx in taken or len(rec.orthoSylls) != len(rec.base):
+                continue
+            g = _growCarrier(parent.position, c)
+            if g is None:
+                continue
+            gc, nPhono, nOrtho = g
+            if form.matches(rec.orthoSylls[c.start], nOrtho, nPhono):
+                kept.append(gc)
+                taken.add(rec.idx)
+        if not kept:
+            continue
+        label = form.label
+        if parent.position == SUFFIX:
+            phono, ortho = f"{label}.{parent.phono}", f"·[{label}]{parent.ortho}"
+        else:
+            phono, ortho = f"{parent.phono}.{label}", f"{parent.ortho}[{label}]·"
+        cand = Candidate(
+            parent.position, parent.k + 1, phono, ortho, carriers=kept, isGeneralized=True,
+            grownDepth=1, grownFromKey=_candKey(parent), rootKey=_candKey(parent),
+            slots=(Slot("scope", label),), isScoped=True)
+        _finishStats(cand)
+        out.append(cand)
+    return out
+
+
 def growAffixesLattice(
     cands: dict[tuple[str, int, str, str], Candidate], lemmas: LemmaIndex | None = None,
 ) -> dict[tuple[str, int, str, str], Candidate]:
@@ -893,7 +940,7 @@ def growAffixesLattice(
     allChildren: list[Candidate] = []
     seenExpand: set[tuple[str, frozenset[tuple[int, int, int]]]] = set()
     keyOwner: dict[tuple[str, int, str, str], tuple[tuple[str, frozenset[tuple[int, int, int]]], Candidate]] = {}
-    frontier = [c for c in cands.values() if c.carriers and not isNoGrowthAnchor(c)]
+    frontier = [c for c in cands.values() if c.carriers and not isNoGrowthAnchor(c) and not isScopedAnchor(c)]
     for key, c in cands.items():
         keyOwner[key] = (_carrierSetKey(c.position, c.carriers), c)
     for c in frontier:
@@ -953,6 +1000,12 @@ def growAffixesLattice(
         cand.alsoFrom = list(dict.fromkeys(
             k for k in (aliasTo.get(k0, k0) for k0 in cand.alsoFrom) if k != cand.grownFromKey))
         pool[key] = cand
+    for c in cands.values():
+        if c.carriers and isScopedAnchor(c):
+            for cand in growScopedForms(c):
+                key = _candKey(cand)
+                assert key not in pool, f"scoped form key overwritten: {key}"
+                pool[key] = cand
     return pool
 
 

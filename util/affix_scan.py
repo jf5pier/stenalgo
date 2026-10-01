@@ -42,6 +42,7 @@ SWEEP_SETTINGS = (   # plan 2026-09-28 U6; stroke-frequency units, top rules sco
     ("L", 1.0, 5.0, 10.0),      # (name, EXCEPTION_ALPHA, EXCLUSION_COST, FORM_COST); L = today's
     ("M", 1.0, 50.0, 100.0),
     ("H", 2.0, 150.0, 300.0),
+    ("D", 2.0, 5.0, 100.0),     # the user's decided values (2026-09-30): fallback price 5, form cost 100
 )
 
 # Prototype strict frequency per seed family (RESUME_2026-09-26-pluvier-affix-scan.md).
@@ -300,7 +301,7 @@ def selectAndBind(cands: dict, records: list[A.WordRecord], starboard: Starboard
     with open(rulesTsv, "w", encoding="utf-8") as f:
         f.write("rank\tposition\troot\tforms\tkeys\trtfcre\tsharedWith\tscore\tstrokeFreqSaved\t"
                 "keySimilarity\twordExceptions\texceptionFreq\ttopExceptions\tcarriers\tlemmas\texamples\t"
-                "attestedShare\n")
+                "attestedShare\tfallbacks\n")
         for rank, b in enumerate(bound, 1):
             r = b.rule
             forms = " | ".join(f"{fm.ortho}(k={fm.k})" for fm in r.forms)
@@ -310,7 +311,7 @@ def selectAndBind(cands: dict, records: list[A.WordRecord], starboard: Starboard
                     f"{rtfcreOfKeys(starboard, b.keys)}\t{';'.join(b.sharedWith)}\t{r.score:.1f}\t"
                     f"{r.strokeFreqSaved:.1f}\t{r.keySimilarity:.2f}\t{r.wordExceptions}\t{r.exceptionFreq:.1f}\t"
                     f"{','.join(r.topExceptions[:10])}\t{len(carriers)}\t{lemmaCount}\t"
-                    f"{' '.join(c.rec.ortho for c in carriers[:6])}\t{attested[id(r)]:.3f}\n")
+                    f"{' '.join(c.rec.ortho for c in carriers[:6])}\t{attested[id(r)]:.3f}\t{r.fallbacks}\n")
 
     lines = ["# Affix rules (Phase 3 + 4 result, DESIGN_2026-09-27-affix-rule-selection.md; "
              "single-generator pool, PLAN_2026-09-28)", "",
@@ -342,7 +343,7 @@ def selectAndBind(cands: dict, records: list[A.WordRecord], starboard: Starboard
         if r.root.mergeParts:
             lines.append(f"- fused spelling variants: {', '.join(r.root.variants)} "
                          f"(new conflict freq {r.root.newConflictFreq:.1f})")
-        lines.append(f"- word exceptions {r.wordExceptions} (freq {r.exceptionFreq:.1f})")
+        lines.append(f"- word exceptions {r.wordExceptions} (freq {r.exceptionFreq:.1f}); scope fallbacks {r.fallbacks}")
         if r.topExceptions:
             lines.append(f"- top exceptions: {', '.join(r.topExceptions[:10])}")
         for res in sorted(r.results, key=lambda x: -x.carrier.rec.frequency)[:6]:
@@ -385,7 +386,7 @@ def selectAndBind(cands: dict, records: list[A.WordRecord], starboard: Starboard
         "rules": [(b.rule.position, b.rule.root.ortho) for b in bound],
         "forms": {(b.rule.position, b.rule.root.ortho): [fm.ortho for fm in b.rule.forms] for b in bound},
         "numForms": sum(len(b.rule.forms) for b in bound),
-        "exclusions": sum(R.exclusionCountOf(b.rule.forms) for b in bound),
+        "exclusions": sum(R.ruleExclusions(b.rule) for b in bound),
         "wordExceptions": sum(b.rule.wordExceptions for b in bound),
         "pseudo": [(b.rule.position, b.rule.root.ortho) for b in pseudo],
         "maxExceptionRate": max(exceptionRates.values(), default=0.0),
