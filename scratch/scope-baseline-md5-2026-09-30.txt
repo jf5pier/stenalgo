@@ -1,0 +1,2 @@
+584638c13e6638d2e573c24993ad17df  scratch/affix-sweep-partial/H/affix-rules.tsv
+e86e7d92e48c03636e2f692a0c7e8121  scratch/affix-sweep-partial/H/affix-rules-report.md

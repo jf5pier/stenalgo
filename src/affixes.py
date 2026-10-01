@@ -51,6 +51,9 @@ GROWTH_MAX_DEPTH = 4          # extra syllables absorbed beyond a k=1 anchor (k 
 GROWTH_MAX_EXCEPTION_SHARE = 0.05  # aligned with affixrules.MAX_EXCEPTION_RATE; collisions this lets
                                    # through become word exceptions and are scored
 MAX_SLOT_EXCLUSIONS = 3
+NO_GROWTH_PREFIX_ORTHOS = frozenset({"re", "reh"})   # meaning-carrying prefix ("again"): its rule stays
+                              # anchor-alone (user decision 2026-09-30) -- fusing it with the next
+                              # syllable (regarder, retarder) links unrelated meanings
 GROWTH_MIN_EXPAND = 5.0       # a child is expanded again iff its subtree bound (sum f x syllables
                               # still absorbable) reaches this -- measured, see the plan §3 step 2
 VARIANT_MAX_NEW_CONFLICT_SHARE = 0.02  # U3a: fusing spelling variants may add at most this share of
@@ -869,6 +872,11 @@ def _candKey(c: Candidate) -> tuple[str, int, str, str]:
     return (c.position, c.k, c.phono, c.ortho)
 
 
+def isNoGrowthAnchor(c: Candidate) -> bool:
+    """True for the anchors whose rule must not grow (`NO_GROWTH_PREFIX_ORTHOS`, merged `re|reh` too)."""
+    return c.position == PREFIX and set(c.ortho.split("|")) <= NO_GROWTH_PREFIX_ORTHOS
+
+
 def growAffixesLattice(
     cands: dict[tuple[str, int, str, str], Candidate], lemmas: LemmaIndex | None = None,
 ) -> dict[tuple[str, int, str, str], Candidate]:
@@ -885,7 +893,7 @@ def growAffixesLattice(
     allChildren: list[Candidate] = []
     seenExpand: set[tuple[str, frozenset[tuple[int, int, int]]]] = set()
     keyOwner: dict[tuple[str, int, str, str], tuple[tuple[str, frozenset[tuple[int, int, int]]], Candidate]] = {}
-    frontier = [c for c in cands.values() if c.carriers]
+    frontier = [c for c in cands.values() if c.carriers and not isNoGrowthAnchor(c)]
     for key, c in cands.items():
         keyOwner[key] = (_carrierSetKey(c.position, c.carriers), c)
     for c in frontier:

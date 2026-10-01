@@ -1,3 +1,5 @@
+> **SUPERSEDED (2026-09-30 late) by `RESUME_2026-09-30-scope-decisions-to-engine.md`** for the front matter (sections 1-9 below are stale: all 30 ranks are decided now). The per-rank decision log at the END of this file ("DECISIONS 2026-09-30 …" and every bullet after it) is still the detail record of numbers and scripts.
+
 # RESUME 2026-09-30 — learnable scopes for the affix rules (`-ment` done, `re`/`ré` analysed)
 
 Written for a fresh Sonnet session. Everything below is on disk; nothing depends on the earlier chat.
@@ -347,3 +349,110 @@ counts as `lostDistinction` — an artefact of the lexicon error.) Keys (16,19),
   (TODO.md entry added for the `ra`+`Re` oddity). DECISION (user): `re` (`R°`) and `ré` (`Re`) stay separate rules (status
   quo, no phonology-class merge); the `re`+`ré` merge section of this note is kept as measurement only. Also measured:
   best 2-key pair for fused `re`+`ré` = (6,18): benefit 8,896, 214 hard exceptions (freq 122) (`scratch/re_fusion_2keys.py`).
+
+## DECISIONS 2026-09-30 (late): no growth for `re-`, rank 3 `en` = `@ C{1,2} @`
+
+- **`re|reh` (rank 2): no growth** (user). Implemented: `NO_GROWTH_PREFIX_ORTHOS` / `isNoGrowthAnchor` in `src/affixes.py`
+  (+2 tests, 723 pass); the H sweep was rerun (`scratch/affix-sweep-partial/H/`, 1,405 s): same 30 rules in the same order;
+  rank 2 is now `re|reh(k=1)` alone on keys (9,18): saved 6,200, 40 exception words (freq 48.8). The full 30-rule table is
+  `scratch/rules-table-H-nogrowth.md` (generator `scratch/rules_table.py`). `re` and `ré` stay separate rules (R° vs Re).
+- **Rank 3 `en`: scope `@ C{1,2} @`** (user): `en` (nasal vowel `@`) fused with the next syllable when that syllable is
+  1-2 consonants + `@` by PHONOLOGY (`cen/san` s@, `chan` S@, `gen/jam` Z@, `fan` f@, `gran` gR@, `clen` kl@, `ten` t@, plus
+  fl@ gl@ tR@ vj@). Measured (scratch/en_phon_scope.py, H, flag on, keys (2,16,18)): 227 two-stroke words, 30 fallbacks
+  (freq 1,019: enfant(s), entend(s), enchanté(e)), benefit 6,035 vs 5,595 for `en` alone, objective(5) 5,580 vs list 5,615
+  vs alone 5,290. Only ~190 words really gain (mostly the `entend-` family, engendrer, enfantine). Widening to any nasal
+  vowel is worse (110 fallbacks, 5,171). Pooling the `@` spellings (am/an/em/en/han) on one key: only `en` (173 words) and
+  `em` (9) gain, exceptions 33 -> 87, `en`-only stays better (scratch/nasal_pair_scope.py). Not yet in the engine (option C).
+- **Rank 4 `de|des|dé|déh`: anchor alone, no growth** (user). Measured (scratch/de_phon_scope.py, H, flag on, keys (11,16,18),
+  growth only on `dé`-spelled words): anchor alone objective(5) 4,524; current 28-syllable list 2,633 (408 fallbacks); `C{1,2}i`
+  2,844 (377 fallbacks); the list's growth adds only +238 benefit (5%). Only `dé`+`si` (décider/décision) is a clear single
+  gain (+227); skipped. The merged anchor itself has 226 hard-exception words (freq 102).
+- **Rank 5 `de` (`d°`, keys (16,19)): scope = `man` or `ve`** (user): `de` fused with the next syllable only for `man` (demander
+  family, +572) and `ve` (devenir family, +277). Measured (scratch/de2_scope.py, H, flag on): objective(5) 4,492, 47 two-stroke
+  words, 0 fallbacks, vs `de` alone 3,643 and the current 10-syllable list 4,614 (87% of its gain with 2 literals). `vi`
+  (deviner, +47) skipped; `ba`/`re` of the current list add nothing; regexes over m/v syllables are no simpler than the list.
+- **Rank 6 `-tion` (keys (9,20,25)): scope `C*[ai]` before `tion`** (user): `tion` stays one stroke; when the syllable before it
+  is consonants + `a` or `i` by PHONOLOGY (-ation, -ition: nation, ration, station, position, condition, addition) both go on one
+  stroke (k=2, also the plural `tions`). No k=3 form (`Ci`+`Ca`: fication, lisation, citations) and no `ten/ven/tten` form
+  (attention, convention). Measured (scratch/tion_scope.py, H, flag on, objective counts FORM_COST per form): `tion` alone
+  3,178; + `C*[ai]` 4,669 (1,698 two-stroke words, 14 fallbacks freq 72, benefit 5,361, 2 hard exceptions); `C*a` alone 4,335; any
+  vowel 4,545 (56 fallbacks); + k=3 3,779; the sweep's 4-form rule 3,384 (129 fallbacks). `ten/ven/tten` alone +118, with `Ca` -215.
+  NOTE: the by-anchor JSON ranks differ from the sweep table (JSON 6 = in-, 7 = -tion) and its keys are stale for ranks moved
+  by the no-growth `re` rule: `in-` is now on (9,19), not (9,18).
+- **Rank 7 `ain|hin|im|in` (keys (9,19), moved from (9,18) when the no-growth `re` took it): anchor + `inté`** (user): the merged anchor
+  alone, plus `in`+`té` on one stroke (intérêt, intéresse, intérieur: 118 words, +438 benefit, 0 fallbacks). No other growth.
+  Measured (scratch/in_scope.py, H, flag on, 300 per form, 5 per fallback): anchor alone objective 4,089 (4,821 carriers, 2 hard
+  exceptions); + `té` ~4,227; the current 4-form rule 3,640 (86 fallbacks); best pattern `in/im`+`C*e` 4,105 (79 fallbacks).
+  Single followers por (+4), ter (-160), te (-109), pre (-241) do not pay.
+- **Rank 8 `é` (keys (2,5), NOT the stale (16,19) of the by-anchor JSON): anchor alone, no growth** (user). Measured (scratch/e_scope.py,
+  H, flag on): `é` alone objective(5) 5,143 (6,111 carriers, 9 hard exceptions); current 17-syllable list 4,239 (162 fallbacks);
+  `C{1,2}i` 4,306 (143 fallbacks). No `é`+`Ci` follower pays; the few unlisted gains (tR@ étranger +110, lEk électrique +86,
+  le +59, tER +54) are too small.
+- **Rank 9 `ter` (keys (16,20,22)): anchor alone, no growth** (user). Measured (scratch/phon_scope.py 9 ter 16,20,22, H, flag on):
+  `ter` alone objective(5) 4,269 (3,162 carriers, 0 hard exceptions); the current 5-syllable list (arrêter, traiter, crêter, pêter, nne)
+  4,213 (+4 benefit, 12 fallbacks); `C*E` 3,983. No neighbour forms a pattern (écouter +162, éviter +137, présenter +118 are scattered).
+- **Rank 10 `té` (keys (19,20,25)): scope `C\{bv}{1,2}i` before `té`** (user): `té` stays one stroke; when the syllable before it is
+  1-2 consonants other than /b/ and /v/ (by sound), then `i` (the -ité ending: vérité, qualité, université, unité, -lité) both go on one
+  stroke (k=2). No 3-syllable form (-bilité: `bi|li|té` adds only +59 benefit, objective -313). Measured (scratch/te_search.py,
+  te_excl.py, te_k3.py; H, flag on; objective(5) charging ONE form): `té` alone 2,678; current 23-phonology list 3,261; plain `C{1,2}i`
+  3,200 (164 fallbacks); `C\{b}{1,2}i` 3,396 (127); `C\{bv}{1,2}i` 3,452 (92 fallbacks freq 75, 1,573 two-stroke words, 29 hard exceptions);
+  `\{bvz}` 3,530 (80) not taken. Excluding /v/ as well as /b/ adds 2 hard exceptions (caté, catés: markCostTooHigh).
+- **Rank 11 `au` (keys (2,5,8)): `au` + literals `jour`, `to`, `tre`, `di`** (user): `au` stays one stroke; fused with the next syllable only for
+  `jour` (aujourd'hui, +360, one word), `to` (auto-, autorité, autorisation: 228 words, +152), `tre` (autrement, autrefois, +67) and `di`
+  (audition, +21). Measured (scratch/au_lit.py, phon_scope.py; H, flag on): `au` alone objective(5) 2,763; this 4-literal scope 3,363
+  (290 two-stroke words, 2 fallbacks freq 19); the current 29-phonology list 3,372 (16 fallbacks freq 358). No pattern fits.
+- **Rank 12 `pa` (keys (2,5,18)): no growth form** in the sweep, nothing to scope (the by-anchor JSON still has the stale (2,5)).
+- **Rank 13 `cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé` (keys (16,17,19)): anchor alone, no growth** (user). Measured (phon_scope.py 13, growth on `cé`
+  words only, H, flag on): anchor alone objective(5) 4,325; current 9-phonology list (`C@` before cé: commencé, lancé, avancé) 4,449 (+3%,
+  26 words, mostly commencé +107); `C*@` 4,439. CAVEAT recorded: these scorers evaluate each rule ALONE; the sweep scores a rule after the
+  earlier ones, so its exception/fallback counts also include cross-rule collisions (e.g. `é`: 70 exception words in the sweep table vs 9 alone).
+  Verify the final set of scopes with one combined simulation before wiring them into the engine.
+- **Rank 14 `par` (keys (8,19)): no growth form**, nothing to scope.
+- **Rank 15 `ai|aî|e|ei|hai|he|hê|é` (keys (5,18,19)): `e` + four literals, no growth on `ai`** (user): the `e` spelling fuses with the next syllable only for
+  `ksky` (excuser, excusez), `kspli` (expliquer, explication), `sE` (essayer, essaie) and `n°` (ennemi); the sweep's `ai` form (ai+d°/gR°/gl°/l°/m°) is dropped.
+  Measured (scratch/ai_e_scope.py, ai_e_lit.py, ai_e_joint.py; H, flag on, whole rule): anchor alone objective(5) 3,659; four `e` literals 4,458 (124
+  two-stroke words, 9 fallbacks freq 206: the essai family); sweep's `e` list 3,932; adding `ai`+`m°` (aimerai) 4,435; `ks…` as a pattern 1,910
+  (the ex- words collide with each other); more literals (excellent, expérience, exploser) lower it (7 literals 4,355).
+- **Rank 16 `der` (keys (16,19,25)): `der` + literals `gaR`, `m@` before `-dez`** (user): the `dez` forms fuse with the previous syllable only for `gaR` (regardez;
+  `gardez` falls back) and `m@` (demandez, commandez, recommandez); no pattern. Measured (scratch/der_lit.py, phon_scope.py 16; H, flag on): `der` alone
+  objective(5) 1,906; `gaR`+`m@` 2,213 (9 two-stroke words, 2 fallbacks freq 39) vs the 29-phonology list 2,214. `regardez` is one very frequent word
+  (+256 of the +307): could alternatively be a dedicated brief.
+- **Rank 13 UPDATE (user): anchor + `m@`** (replaces "anchor alone" above): `cé` words fuse with the previous syllable only for `m@` (commencé, recommencé,
+  ensemencé; 4 words, +107 alone, 0 fallbacks): objective(5) about 4,432 vs 4,325 alone (estimated from the single-neighbour run, not rerun as a set).
+- **Rank 17 `ra|rai|raie|re|rhé|ré|réh` (keys (3,4,16)): `ré` + units `a`, `fle`, `vE`, `C{1,2}y`** (user): the `ré` spelling fuses with the next syllable for `a` (réa-:
+  réalité, réaliser, réagir; 369 words), `fle` (réfléchir), `vE` (réveiller, réveil) and `C{1,2}y` = 1-2 consonants + `y` by sound (réduire, récupérer, réputation, résumer,
+  réunir; 258 words); the sweep's k=2 `Cy` list and its 3-syllable `réa[...]` form are replaced. Measured (scratch/re17_greedy.py, re17_c02y.py; H, flag on, growth on
+  `ré` only): anchor alone objective(5) 2,460; the four units 2,968 (712 two-stroke words, 17 fallbacks freq 19); `C{0,2}y` (adds the bare `y`: réussir, réunion) 3,036 with
+  25 fallbacks freq 118 (réussi...), NOT taken; the greedy path continued `y`, `p§` (répondre) 3,095, `k§`, ... up to 3,225 (11 units). The sweep's `Cy` list alone 2,647.
+- **Rank 18 `sa|sah` (keys (5,24)): no growth form**, nothing to scope.
+- **Rank 19 `ver` (keys (19,20,22)): `ver` + `Ri` before `vé`** (user): the `vé` forms fuse with the previous syllable only for `Ri` (arrivé, dérivé; 3 words, +199). Measured
+  (scratch/ver_lit.py, phon_scope.py 19; H, flag on): `ver` alone objective(5) 2,005; + `Ri` 2,204 (1 fallback, `rivé`, freq 0); `Ri`+`tRu`+`l°` 2,289 = the sweep's 20-syllable list 2,285
+  but `trouvé` and `levé` (frequent) fall back, NOT taken.
+- **Ranks 20 `pro|proh|prô` (4,5,8), 21 `ce|sce|se` (3,6), 22 `pou|pu` (4,7,18): no growth form**, nothing to scope.
+- **FORM COST (user, 2026-09-30): about 100 per form, not the H setting's 300** ("a form is probably cheaper to learn than 300"). Effect on the decisions so far: the growth
+  literals of ranks 3 (+290 benefit), 13 (+107), 16 (+307) and 19 (+199) stay (net +190, +7, +207, +99); the anchor-alone choices of ranks 4, 8, 9 stay (their growth lost on fallbacks,
+  not on the form cost). NOTE: scratch/phon_scope.py charges the form cost ONCE in total (the extra growth form is free): subtract about 100 from any growth row when comparing with the anchor alone.
+- **Rank 23 `ser|sée|zer|zé` (keys (16,19,20)): two k=2 forms `li`+`ser` and `Cy`+`sez`** (user): the ending fuses with a preceding `li` (baliser, utiliser, réaliser: 523 words,
+  5 fallbacks) and, for the `sez` spelling, with a preceding 1+ consonants + `y` (excusez, refusez, amusez: 7 words, excusez alone +230). No 3-syllable `X`+`li`+`ser` form.
+  Measured (scratch/ser_scope.py, ser_scope100.py; H, flag on, 100 per form): anchor alone objective(5) 1,738; the two forms 2,024 (6 fallbacks); `li`+`ser` alone 1,870; the sweep's
+  3-syllable list 1,801 (36 fallbacks: canaliser, visualiser, analyser); at 300 per form no growth form pays (anchor alone 1,538 is best).
+- **Rank 24 `de|dea|di|die|dis|dy|dî` (keys (3,16,19)): `di` + `C{1,2}i`** (user): the `di` spelling fuses with the next syllable when it is 1-2 consonants + `i` by sound (difficile,
+  diriger, discipline, division, digne...); exactly the sweep's 10-phonology list (fi, Ri, si, vi, li, mi, ti, ksi, Ni, Zi), so no loss. Measured (scratch/di_lit.py, phon_scope.py 24; H, flag
+  on): `di` alone objective(5) 1,701; `C{1,2}i` 1,986 (280 two-stroke words, 2 fallbacks freq 1; net of a 100 form +184); `+ REk` (directeur, direction) +331 net, NOT taken; more literals
+  (vOR divorcer, plo diplomate) +359, +378.
+- **Rank 25 `e|hi|hy|i|y|î` (keys (16,17,19)): `i` + `[mn][aeiouy]`** (user, suggested the m/n idea): the `i` spelling fuses with the next syllable when it starts with /m/ or /n/ followed by a PLAIN
+  vowel (a e i o u y; no nasal or open vowels): imagine, inutile, innocent, immédiat, ... 811 two-stroke words, 19 fallbacks (freq 6: immaculé, inné, immolé). Measured (scratch/i25_greedy.py,
+  i25_mn.py; H, flag on): `i` alone objective(5) 2,246; `[mn][aeiouy]` 2,794 (+448 net of a 100 form); greedy literals ma+ny+d@+no 2,751; `[mn]V` with nasal/open vowels 1,587; the sweep's
+  80-phonology list 1,033 (48 hard exceptions freq 493, 169 fallbacks) -- a net loss vs `i` alone.
+- **Rank 26 `rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée` (keys (16,20,21)): `rer` + `p[aeiouy]` + `C*e` + `sy`** (user): the `rer` spelling fuses with the previous syllable when it is
+  /p/ + a plain vowel (préparer, séparer, récupérer, espérer, respirer), or consonants + `é` (gérer, libérer, tolérer, considérer), or the literal `sy` (assurer, rassurer, censurer).
+  Measured (scratch/rer_lit.py, rer_union.py; H, flag on): `rer` alone objective(5) 1,728; the three together 2,072 (107 two-stroke words, 5 fallbacks freq 19: gérer, blairer, parer,
+  galérer, macérer; +244 net of a 100 form); `p[aeiouy]` alone +150; the sweep's `C*e` alone +45; `ti` (tirer) falls back, not taken.
+- **Rank 27 `o` (keys (16,18,19)): `o` + `C{1,2}i` + `kV`** (user, suggested `kV`): the `o` spelling fuses with the next syllable when it is 1-2 consonants + `i` by sound (obligé, officier, origine,
+  opinion; = the sweep's 14-phonology list) or /k/ + any vowel (occuper `ky` 51 words, occasion `ka`, okoumé `ku`). Measured (scratch/o_lit.py, o_kv.py; H, flag on): `o` alone objective(5) 1,651;
+  `C{1,2}i` 1,923 (+172 net of a 100 form); + `kV` 2,219 (400 two-stroke words, 13 fallbacks freq 4; +468 net); `ky` only +424; more literals be (obéir) +53, ka +54, se +26 NOT taken.
+- **Rank 28 `ger` (keys (16,24)): no growth form**, nothing to scope.
+- **Rank 29 `ner` (keys (18,19,20)): `ner` + `C{1,2}[i°]` before the `né` spelling** (user): the `né` forms fuse with the previous syllable when it is 1-2 consonants + `i` or schwa by sound
+  (terminé, examiné, éliminé, ramené, mené, dessiné...). Measured (scratch/ner_lit.py, ner_ci.py; H, flag on): `ner` alone objective(5) 1,266; `C{1,2}[i°]` 1,439 (120 two-stroke words, 8 fallbacks
+  freq 20: mené, dîné, miné, fouiné; +73 net of a 100 form); `C{1,2}i` +30; the sweep's 48-phonology list +100.
+- **Rank 30 `cher` (keys (9,24,25)): no growth form.** ALL 30 RANKS DECIDED; the consolidated table is `scratch/scope-decisions-2026-09-30.md`.

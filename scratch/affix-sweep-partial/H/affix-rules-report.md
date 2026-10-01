@@ -8,11 +8,11 @@ Selected rules with attestedShare < 0.5 (the old stem-attestation filter would h
 
 ## Savings curve (cumulative total after each acceptance, 1..40)
 
-8587, 15002, 20733, 25315, 29859, 34289, 38905, 43178, 47869, 51315, 54715, 57874, 60931, 63983, 66616, 69305, 71954, 75121, 77504, 79959, 82174, 85245, 87307, 89302, 91263, 93269, 95179, 97061, 99016, 100805
+8587, 14689, 20420, 25002, 29555, 33985, 38600, 42873, 47565, 51011, 54410, 57570, 60627, 63679, 66311, 69000, 71650, 74817, 77200, 79655, 81870, 84941, 87003, 88997, 90959, 92964, 94874, 96756, 98711, 100501
 
 ## 1. suffix `ment` -- keys (20, 21, 25) = `-tRm`
 
-forms: `ment`(k=1), `·[be|ble|boie|bre|ca|ce|che|chi|chisse|ci|cie|claffe|cle|cre|cré|cu|cé|de|di|die|doie|dre|droie|du|dé|dû|ffle|ffre|fie|fle|ge|gi|gle|gne|gre|gré|gu|gue|ille|la|le|li|lle|loie|lu|lé|lû|ma|me|mmé|moie|mé|ne|ni|nie|nne|nné|noie|nu|nue|né|nû|pe|pie|ple|pli|ppe|pre|que|ra|re|rre|rré|ré|sce|se|sse|ssé|sé|ta|te|ti|tie|toie|tre|trie|tru|tte|té|ve|voie|voue|vre|vé|xcré|xe|xtre|zaie|é]ment`(k=2)
+forms: `ment`(k=1), `·[be|ble|boie|bre|ca|ce|che|chi|chisse|ci|cie|claffe|cle|cre|cré|cu|cé|de|di|die|doie|dre|droie|du|dé|dû|ffle|ffre|fie|fle|ge|gi|gle|gne|gre|gré|gu|gue|ille|la|le|li|lle|loie|lu|lé|lû|ma|me|mmé|moie|mé|ne|ni|nie|nne|nné|noie|nu|nue|né|nû|pe|pie|ple|pli|ppe|pre|que|ra|re|rre|rré|ré|sce|se|sse|ssoie|ssé|sé|ta|te|ti|tie|toie|tre|trie|tru|tte|té|ve|voue|vre|vé|xcré|xe|xtre|zaie|é]ment`(k=2)
 - score 8587.1, strokeFreqSaved 8887.1, keySimilarity 0.45 -- NOT phonetically motivated (SIM_TOP_N pick below SIM_MIN)
 - attestedShare 0.76; exception rate 0.0%; top categories: ADV 60%, NOM 39%, ADJ 0%
 - word exceptions 1 (freq 0.0)
@@ -24,20 +24,20 @@ forms: `ment`(k=1), `·[be|ble|boie|bre|ca|ce|che|chi|chisse|ci|cie|claffe|cle|c
     sûrement: s@i/R@a/m@ -> s@itRm
     complètement: kai/pmtie/t@a/m@ -> kai/pmtietRm
 
-## 2. prefix `re|reh` -- keys (16, 19) = `-jd`
+## 2. prefix `re|reh` -- keys (9, 18) = `w-k`
 
-forms: `re|reh`(k=1), `re[char|gar|lar|mar|nar|par|tar]·`(k=2), `re[au|chau|co|do|fau|gro|lo|mo|nau|no|po|pro|so|ssau|vau|vo]·`(k=2)
-- score 6415.1, strokeFreqSaved 7197.0, keySimilarity -0.14 -- NOT phonetically motivated (SIM_TOP_N pick below SIM_MIN)
-- attestedShare 0.75; exception rate 2.2%; top categories: VER 75%, NOM 22%, ADJ 3%
+forms: `re|reh`(k=1)
+- score 6102.2, strokeFreqSaved 6199.8, keySimilarity -0.33 -- NOT phonetically motivated (SIM_TOP_N pick below SIM_MIN)
+- attestedShare 0.82; exception rate 0.6%; top categories: VER 75%, NOM 22%, ADJ 3%
 - fused spelling variants: re, reh (new conflict freq 0.0)
-- word exceptions 139 (freq 90.9)
-- top exceptions: record, relax, relais, recours, relax, relève, renard, records, repaire, recoudre
-    revoir: R@a/vwaR -> vwajdR
-    regardez: R@a/ksaR/pve/-k -> pvejd/-k
-    reviens: R@a/vRwaie/-k -> vRwaiejd/-k
-    regarder: R@a/ksaR/pve/-l -> pvejd/-l
-    retour: R@a/t@eR -> t@ejdR
-    retard: R@a/taR -> tajdR
+- word exceptions 40 (freq 48.8)
+- top exceptions: remords, relax, requin, relax, requins, relis, rené, recoins, relique, reliques
+    revoir: R@a/vwaR -> vwakR
+    regardez: R@a/ksaR/pve/-k -> kswakR/pve/-k
+    reviens: R@a/vRwaie/-k -> vRwaiek/-k
+    regarder: R@a/ksaR/pve/-l -> kswakR/pve/-l
+    retour: R@a/t@eR -> tw@ekR
+    retard: R@a/taR -> twakR
 
 ## 3. prefix `en` -- keys (2, 16, 18) = `k-jk`
 
@@ -68,7 +68,7 @@ forms: `de|des|dé|déh`(k=1), `dé[bi|bri|brie|chi|ci|cli|cri|di|fi|fri|gi|gri|
     décidé: pve/si/pve -> pv@ejk
     désolée: pve/twae/mte/-j -> tw@aejk/mte/-j
 
-## 5. prefix `de` -- keys (2, 16, 19) = `k-jd`
+## 5. prefix `de` -- keys (16, 19) = `-jd`
 
 forms: `de`(k=1), `de[ba|man|meu|moi|re|van|ve|vi|vien|vri]·`(k=2)
 - score 4615.4, strokeFreqSaved 4915.4, keySimilarity 0.27 -- NOT phonetically motivated (SIM_TOP_N pick below SIM_MIN)
@@ -95,13 +95,13 @@ forms: `tion`(k=1), `·[a|ba|bra|ca|cia|cra|da|dia|fla|ga|gna|gra|la|lia|lla|ma|
     solution: sae/mt@i/sRwai -> sae/mtw@itm
     position: pae/twi/sRwai -> pae/twitm
 
-## 7. prefix `ain|hin|im|in` -- keys (9, 18) = `w-k`
+## 7. prefix `ain|hin|im|in` -- keys (9, 19) = `w-d`
 
 forms: `ain|hin|im|in`(k=1), `in[bé|ce|clé|cré|dé|flé|fré|fé|gré|gé|pe|plé|pre|pré|pé|quié|sai|sé|te|tré|té|vé]·`(k=2), `im[cor|for|por]·`(k=2), `inté[ce|chi|ci|cro|cu|di|du|fec|fen|fi|for|fri|gra|gre|gri|li|llec|lli|lo|lé|ma|men|mi|ni|nia|nie|nieu|nio|nom|nou|né|o|pa|pen|pi|ra|re|ri|ria|rieu|rio|ré|sa|si|ssa|ssio|te|tec|ter|ti|té|vi|voy]·`(k=3)
-- score 4544.8, strokeFreqSaved 5609.6, keySimilarity 0.01 -- NOT phonetically motivated (SIM_TOP_N pick below SIM_MIN)
-- attestedShare 0.48; exception rate 1.1%; top categories: NOM 33%, VER 33%, ADJ 29%
+- score 4553.5, strokeFreqSaved 5613.9, keySimilarity 0.01 -- NOT phonetically motivated (SIM_TOP_N pick below SIM_MIN)
+- attestedShare 0.48; exception rate 0.9%; top categories: NOM 33%, VER 33%, ADJ 29%
 - fused spelling variants: ain, hin, im, in (new conflict freq 0.0)
-- word exceptions 53 (freq 82.4)
+- word exceptions 45 (freq 80.2)
 - top exceptions: importante, importantes, impressionné, impressionner, intégrité, impressionnée, indemne, impressionnés, inquiétante, importé
     importe: aie/petR -> pwektR
     ainsi: aie/si -> swik
@@ -153,7 +153,7 @@ forms: `té`(k=1), `·[bi|bri|ci|cli|cri|di|fi|gi|gni|gri|i|li|lli|mi|mmi|ni|nni
 
 ## 11. prefix `au` -- keys (2, 5, 8) = `kvR-`
 
-forms: `au`(k=1), `au[ber|bu|bé|cu|da|di|dio|gu|gus|jour|lo|mô|pa|re|ri|ro|ré|ssi|tar|then|to|toch|tom|top|tore|tos|tre|tri|ver|xe|xi]·`(k=2)
+forms: `au`(k=1), `au[ber|bu|bé|cu|da|di|dien|dio|gu|gus|jour|lo|mô|pa|re|ri|ré|ssi|tar|then|to|toch|tom|top|tore|tos|tre|tri|ver|xe|xi]·`(k=2)
 - score 3446.0, strokeFreqSaved 3746.6, keySimilarity 0.15 -- NOT phonetically motivated (SIM_TOP_N pick below SIM_MIN)
 - attestedShare 0.41; exception rate 0.4%; top categories: AUX 28%, ADV 23%, VER 22%
 - word exceptions 2 (freq 0.3)
@@ -208,7 +208,7 @@ forms: `par`(k=1)
 
 ## 15. prefix `ai|aî|e|ei|hai|he|hê|é` -- keys (5, 18, 19) = `v-kd`
 
-forms: `ai|aî|e|ei|hai|he|hê|é`(k=1), `ai[che|de|gle|gre|le|me|nne|rre]·`(k=2), `e[ffra|ssa|ssai|ssaie|xce|xcré|xpre|xte|xtrê]·`(k=2)
+forms: `ai|aî|e|ei|hai|he|hê|é`(k=1), `ai[che|de|gle|gre|le|me|nne|rre]·`(k=2), `e[ssa|ssai|ssaie|xce|xcré|xpre|xte|xtrê]·`(k=2)
 - score 3056.9, strokeFreqSaved 4253.2, keySimilarity -0.26 -- NOT phonetically motivated (SIM_TOP_N pick below SIM_MIN)
 - attestedShare 0.32; exception rate 1.2%; top categories: VER 73%, NOM 17%, ADJ 9%
 - fused spelling variants: ai, aî, e, ei, hai, he, hê, é (new conflict freq 0.1)
@@ -451,21 +451,21 @@ forms: `cher`(k=1)
 
 ## Variant rivals (merged spelling-variant anchors vs their parts, U3b)
 
-- `ae|ai|aî|e|ei|he|hé|oe|é|éh` (parts é, e, hé, ai; new conflict freq 5.5); merged score 4355 vs main 4430: **apart**
+- `ae|ai|aî|e|ei|he|hé|oe|é|éh` (parts é, e, hé, ai; new conflict freq 5.5); merged score 4350 vs main 4430: **apart**
     merged forms: ae|ai|aî|e|ei|he|hé|oe|é|éh, é[cchy|chi|cri|di|ffi|gri|gui|li|ly|mi|nni|pi|qui|ri|ry|si|thi|thy|ti|tri|ty|vi]·; main forms: é, é[chi|cri|di|gri|li|ly|mi|pi|qui|ri|ry|thi|thy|ti|tri|ty|vi]·
 - `tai|taie|taient|tais|tait|tet|têt` (parts tait, tais, taient, tet; new conflict freq 0.0): **outOfReach**
 - `a|ah|ha|hah|hâ|â` (parts a, ha, â, hâ, ah; new conflict freq 7.6); merged score None vs main 0: **apart**
-    merged forms: a|ah|ha|hah|hâ|â, a[bi|bri|by|bî|ccli|ci|cqui|cri|cry|ddi|di|ffi|ffli|ffri|fi|fri|gi|gri|gui|li|lli|mi|my|myg|nhy|ni|nni|nnih|ny|pi|ppli|ppri|qui|ri|rri|ssi|ssy|sy|ti|tti|ttri|ty|vi|xi|zi|zy|ï]·, a[ban|fflan|ffran|gen|gran|lam|lan|len|lham|man|men|ppren|ran|ren|rran|scen|ssem|ssen|tten|van|ven]·, a[a|ba|bba|boie|bra|bâ|ca|cca|ccla|cha|da|djoi|dra|droi|ffa|ga|ggra|gla|gra|la|lla|ma|mha|na|nna|pa|pha|pla|ppa|ppâ|qua|ra|ria|rra|sia|ssa|ssoi|ta|tha|tra|tta|ttra|va|via|voi|wa|ya]·, a[bai|be|bê|chè|cquie|dre|ffai|grai|gre|le|llai|lle|llè|lè|mai|me|mè|nne|pai|ppe|rai|rrai|rrê|se|ssai|sse|ssè|tte|ttei|vè]·, aé[a|an|cia|cie|cé|di|en|fle|go|lec|lio|llu|lu|ma|men|mo|na|ni|no|nu|nua|o|ou|qua|qui|ra|ri|rin|ro|ros|rri|ssi|ta|ti|ty|tyl|via]·; main forms: a, a[ban|fflan|ffran|gen|gran|lam|lan|len|lham|man|men|ppren|rran|scen|ssem|ssen|tten|van|ven]·, a[bri|by|bî|ccli|ci|cqui|cri|cry|ddi|di|ffi|ffli|ffri|fi|fri|gi|gri|gui|li|lli|mi|my|myg|nhy|ni|nni|nnih|ny|pi|ppli|ppri|qui|rri|ssi|ssy|sy|tti|ttri|ty|vi|xi|zi|zy]·, a[bai|be|bê|chè|cquie|dre|ffai|grai|gre|le|llai|lle|llè|mai|me|mè|nne|pai|ppe|rai|rrai|rrê|se|ssai|sse|ssè|tte|ttei|vè]·, a[ba|bba|boie|bra|bâ|ca|cca|ccla|cha|da|djoi|dra|droi|ffa|ga|ggra|gla|gra|la|ma|mha|na|nna|pa|pha|pla|ppa|ppâ|pâ|qua|ra|ria|rra|sia|ssa|ssoi|ta|tha|tra|tta|ttra|va|via|voi|ya]·, aé[a|an|cia|cie|cé|di|en|fle|go|lec|lio|llu|lu|ma|men|mo|na|ni|no|nu|nua|o|ou|qua|qui|ra|ri|rin|ro|ros|rri|ssi|ta|ti|ty|tyl|via]·
+    merged forms: a|ah|ha|hah|hâ|â, a[bi|bri|by|bî|ccli|ci|cqui|cri|cry|ddi|di|ffi|ffli|ffri|fi|fri|gi|gri|gui|li|lli|mi|my|myg|nhy|ni|nni|nnih|ny|pi|ppli|ppri|qui|ri|rri|ssi|ssy|sy|ti|tti|ttri|ty|vi|xi|zi|zy|ï]·, a[ban|fflan|ffran|gen|gran|lam|lan|len|lham|man|men|ppren|ran|ren|rran|scen|ssem|ssen|tten|van|ven]·, a[a|ba|bba|boie|bra|bâ|ca|cca|ccla|cha|da|djoi|dra|droi|ffa|ga|ggra|gla|gra|la|lla|ma|mha|na|nna|pa|pha|pla|ppa|ppâ|qua|ra|ria|rra|sia|ssa|ssoi|ta|tha|tra|tta|ttra|va|via|voi|wa|ya]·, a[bai|be|bê|chè|cquie|dre|ffai|grai|gre|le|llai|lle|llè|lè|mai|me|mè|nne|pai|ppe|pprê|rai|rrai|rrê|se|ssai|sse|ssè|tte|ttei|vè]·, aé[a|an|cia|cie|cé|di|en|fle|ga|go|lec|lio|llu|lu|ma|mo|na|ni|no|nu|nua|o|ou|qua|qui|ra|ri|rin|ro|ros|rri|ssi|ta|ti|ty|tyl]·; main forms: a, a[ban|fflan|ffran|gen|gran|lam|lan|len|lham|man|men|ppren|rran|scen|ssem|ssen|tten|van|ven]·, a[bri|by|bî|ccli|ci|cqui|cri|cry|ddi|di|ffi|ffli|ffri|fi|fri|gi|gri|gui|li|lli|mi|my|myg|nhy|ni|nni|nnih|ny|pi|ppli|ppri|qui|rri|ssi|ssy|sy|tti|ttri|ty|vi|xi|zi|zy]·, a[bai|be|bê|chè|cquie|dre|ffai|grai|gre|le|llai|lle|llè|mai|me|mè|nne|pai|ppe|pprê|rai|rrai|rrê|se|ssai|sse|ssè|tte|ttei|vè]·, a[ba|bba|boie|bra|bâ|ca|cca|ccla|cha|da|djoi|dra|droi|ffa|ga|ggra|gla|gra|la|ma|mha|na|nna|pa|pha|pla|ppa|ppâ|pâ|qua|ra|ria|rra|sia|ssa|ssoi|ta|tha|tra|tta|ttra|va|via|voi|ya]·, aé[a|an|cia|cie|cé|di|en|fle|ga|go|lec|lio|llu|lu|ma|mo|na|ni|no|nu|nua|o|ou|qua|qui|ra|ri|rin|ro|ros|rri|ssi|ta|ti|ty|tyl]·
 - `le|leh|ler|lers|ller|llé|llée|lée` (parts ler, ller, llée, lée, llé; new conflict freq 14.6); merged score None vs main 0: **apart**
-    merged forms: le|leh|ler|lers|ller|llé|llée|lée, ·[ce|de|ge|me|mme|pe|ppe|que|rre|se|sse|te|ve]ler⟨le|leh|ler|lers|ller|llé|llée|lée⟩, ·[bo|co|do|ffo|fo|geo|gno|go|jo|mo|no|o|pau|po|ro|so|sso|to|trô|vo]lé; main forms: ler, ·[ce|de|ge|me|mme|pe|ppe|que|rre|se|sse|te|ve]ler, ·[bo|co|do|ffo|fo|geo|gno|go|jo|no|o|pau|po|so|sso|to|trô|vo]lé
+    merged forms: le|leh|ler|lers|ller|llé|llée|lée, ·[ce|de|ge|me|mme|pe|ppe|que|rre|se|sse|te|ve]ler, ·[bo|co|do|ffo|fo|geo|gno|go|jo|mo|no|o|pau|po|ro|so|sso|to|trô|vo]lé; main forms: ler, ·[ce|de|ge|me|mme|pe|ppe|que|rre|se|sse|te|ve]ler, ·[bo|co|do|ffo|fo|geo|gno|go|jo|no|o|pau|po|so|sso|to|trô|vo]lé
 - `am|an|ant|em|en|ench|enh|ham|han|hen` (parts en, em, an, am, han; new conflict freq 3.0); merged score 5067 vs main 5731: **apart**
-    merged forms: am|an|ant|em|en|ench|enh|ham|han|hen, en[bran|cen|chan|clen|fan|gen|gran|jam|man|plan|san|ten]·, em[che|ge|gre|le|me|pe|ple|re|se|tre|ve]·, em[a|ba|bla|boî|bra|ca|cloî|da|dia|fa|fla|foi|ga|goi|gra|joi|la|ma|pa|pha|pla|plâ|poi|ra|sa|ta|thra|tr'a|tra|vah]·; main forms: en, en[cen|chan|clen|fan|gen|gran|jam|san|ten]·
+    merged forms: am|an|ant|em|en|ench|enh|ham|han|hen, en[bran|cen|chan|clen|fan|gen|gran|jam|man|plan|san|ten]·, em[che|ge|gre|le|me|pe|ple|re|se|tre|ve]·, em[a|ba|bla|boî|bra|ca|cloî|da|dia|fa|fla|foi|ga|goi|gra|joi|la|ma|pa|pha|pla|plâ|poi|pâ|ra|sa|ta|thra|tr'a|tra|va|vah]·; main forms: en, en[cen|chan|clen|fan|gen|gran|jam|san|ten]·
 - `ve|ver|wé` (parts ver; new conflict freq 0.1); merged score 2625 vs main 2633: **apart**
     merged forms: ve|ver|wé, ·[che|chi|cur|di|li|ner|nno|pprou|qui|ra|ri|rri|ser|ssi|ti|tra|trou|vi|xca]-{l°}vé; main forms: ver, ·[che|chi|cur|di|li|ner|nno|pprou|qui|ra|ri|rri|ser|ssi|ti|tra|trou|vi|xca]-{l°}vé
 - `au|aul|ho|hos|o|oi` (parts o, ho; new conflict freq -0.0): **outOfReach**
 - `bai|be` (parts be; new conflict freq 0.0): **outOfReach**
-- `re|reh` (parts re; new conflict freq 0.0); merged score 6415 vs main 6414: **fused**
-    merged forms: re|reh, re[char|gar|lar|mar|nar|par|tar]·, re[au|chau|co|do|fau|gro|lo|mo|nau|no|po|pro|so|ssau|vau|vo]·; main forms: re, re[char|gar|lar|mar|nar|par|tar]·, re[chau|co|do|fau|gro|lo|mo|nau|no|po|pro|so|ssau|vau|vo]·
+- `re|reh` (parts re; new conflict freq 0.0); merged score 6102 vs main 6101: **fused**
+    merged forms: re|reh; main forms: re
 - `mai|maî|me|mei|mes|mè|mê` (parts me, mai, mê; new conflict freq 0.0): **outOfReach**
 - `bom|bon` (parts bon, bom; new conflict freq 0.2): **outOfReach**
 - `ma|mah|mâ` (parts ma, mâ, mah; new conflict freq 0.5); merged score None vs main 0: **apart**
@@ -489,7 +489,7 @@ forms: `cher`(k=1)
 - `ssé|sée` (parts ssé; new conflict freq 0.0): **outOfReach**
 - `mau|mo|moh` (parts mo, mau; new conflict freq 0.1): **outOfReach**
 - `man|mand|mant|ment|ments|mmant|mment` (parts ment, mment, mant, mand, man; new conflict freq 1.4); merged score 7909 vs main 8587: **apart**
-    merged forms: man|mand|mant|ment|ments|mmant|mment, ·[a|ai|be|ble|boie|bre|ca|ce|cha|che|chi|chisse|ci|cie|claffe|cle|cre|cré|cu|cé|da|de|di|die|doie|dre|droie|du|dé|dû|ffle|ffre|fie|fle|for|ga|ge|gle|gne|gre|gré|gu|gue|ille|la|le|li|lla|lle|loie|lu|lé|lû|ma|me|moie|mé|ne|ni|nie|nna|nne|nné|noie|nu|nue|né|nû|pe|pie|ple|pli|ppe|pre|que|ra|re|ro|rre|rré|ré|sa|sce|scie|se|sias|ssa|sse|ssé|sul|sé|ta|te|ti|tie|toie|tre|trie|tru|tte|té|ve|voie|voue|vre|vé|xcré|xe|xtre|zaie|é]ment; main forms: ment, ·[be|ble|boie|bre|ca|ce|che|chi|chisse|ci|cie|claffe|cle|cre|cré|cu|cé|de|di|die|doie|dre|droie|du|dé|dû|ffle|ffre|fie|fle|ge|gi|gle|gne|gre|gré|gu|gue|ille|la|le|li|lle|loie|lu|lé|lû|ma|me|mmé|moie|mé|ne|ni|nie|nne|nné|noie|nu|nue|né|nû|pe|pie|ple|pli|ppe|pre|que|ra|re|rre|rré|ré|sce|se|sse|ssé|sé|ta|te|ti|tie|toie|tre|trie|tru|tte|té|ve|voie|voue|vre|vé|xcré|xe|xtre|zaie|é]ment
+    merged forms: man|mand|mant|ment|ments|mmant|mment, ·[a|ai|be|ble|boie|bre|ca|ce|cha|che|chi|chisse|ci|cie|claffe|cle|cre|cré|cu|cé|da|de|di|die|doie|dre|droie|du|dé|dû|ffle|ffre|fie|fle|for|ga|ge|gle|gne|gre|gré|gu|gue|ille|la|le|li|lla|lle|loie|lu|lé|lû|ma|me|moie|mé|ne|ni|nie|nna|nne|nné|noie|nu|nue|né|nû|pe|pie|ple|pli|ppe|pre|que|ra|re|ro|rre|rré|ré|sa|sce|scie|se|sias|ssa|sse|ssoie|ssé|sul|sé|ta|te|ti|tie|toie|tre|trie|tru|tte|té|ve|voue|vre|vé|xcré|xe|xtre|zaie|é]ment; main forms: ment, ·[be|ble|boie|bre|ca|ce|che|chi|chisse|ci|cie|claffe|cle|cre|cré|cu|cé|de|di|die|doie|dre|droie|du|dé|dû|ffle|ffre|fie|fle|ge|gi|gle|gne|gre|gré|gu|gue|ille|la|le|li|lle|loie|lu|lé|lû|ma|me|mmé|moie|mé|ne|ni|nie|nne|nné|noie|nu|nue|né|nû|pe|pie|ple|pli|ppe|pre|que|ra|re|rre|rré|ré|sce|se|sse|ssoie|ssé|sé|ta|te|ti|tie|toie|tre|trie|tru|tte|té|ve|voue|vre|vé|xcré|xe|xtre|zaie|é]ment
 - `pro|proh|prô` (parts pro; new conflict freq 0.0); merged score 2455 vs main 2453: **fused**
     merged forms: pro|proh|prô; main forms: pro
 - `bien|byen` (parts bien; new conflict freq 0.0): **outOfReach**
@@ -499,12 +499,12 @@ forms: `cher`(k=1)
 - `vail|vaille|vailles` (parts vail; new conflict freq 0.0): **outOfReach**
 - `nhir|nir|nnir` (parts nir, nnir; new conflict freq 0.0): **outOfReach**
 - `ai|aî|e|ei|hai|he|hê|é` (parts e, ai, é, he; new conflict freq 0.1); merged score 3057 vs main 2670: **fused**
-    merged forms: ai|aî|e|ei|hai|he|hê|é, ai[che|de|gle|gre|le|me|nne|rre]·, e[ffra|ssa|ssai|ssaie|xce|xcré|xpre|xte|xtrê]·; main forms: e, e[ffra|ssa|ssai|ssaie|xce|xcré|xpre|xte|xtrê]·
+    merged forms: ai|aî|e|ei|hai|he|hê|é, ai[che|de|gle|gre|le|me|nne|rre]·, e[ssa|ssai|ssaie|xce|xcré|xpre|xte|xtrê]·; main forms: e, e[ssa|ssai|ssaie|xce|xcré|xpre|xte|xtrê]·
 - `der|dé|dée` (parts der, dée, dé; new conflict freq 52.2); merged score 2178 vs main 3052: **apart**
     merged forms: der|dé|dée, ·[an|ba|bar|bau|blar|bon|bro|ca|car|cca|ccor|chan|char|chi|ci|con|cor|en|fau|ffau|fon|ga|gan|gar|gnar|gon|gour|gra|gui|illa|la|lan|lar|li|llar|lli|man|mar|mer|mi|mma|mman|mmar|mmo|na|nar|nau|ni|non|o|par|pen|pi|qui|ra|rau|san|sar|scen|si|ssou|ssua|sua|va|vau|vi|xtra|zar]-{bOR,se}dez; main forms: der, ·[an|ba|bar|bau|blar|bon|ca|car|cca|ccor|chan|char|ci|con|cé|en|fau|ffau|gar|gnar|gon|gour|gra|gui|illa|la|lan|lar|li|llar|man|mar|mer|mi|mman|mmar|mmo|na|nar|nau|non|o|par|pen|pi|qui|ra|rau|san|sar|scen|si|ssou|ssua|ssé|sua|sé|va|vau|xtra|zar]-{bOR}dez
 - `mi|mie|mis|mmies|mmis|mmy|my` (parts mi, mie, mis; new conflict freq 0.9): **outOfReach**
 - `au|aux|hau|haut|ho|hô|o|oh|ô` (parts au, o, ho, hô, hau; new conflict freq 34.4); merged score None vs main 3446: **apart**
-    merged forms: au|aux|hau|haut|ho|hô|o|oh|ô, au[a|ber|bi|bli|bu|bé|ca|cca|ccul|cé|da|di|dieu|dio|do|don|ffen|ffi|ffri|ffus|gi|gu|gus|jour|li|llan|lo|lym|lé|ma|mar|me|mer|mi|mo|mé|mô|na|ni|nnê|nnête|no|nu|né|pa|pi|pio|po|ppi|ppo|ppor|ppre|ppri|pu|pus|pé|ra|ran|re|rei|ri|rien|ro|ros|rri|ryc|ré|sa|sci|se|ssa|ssi|ta|tai|tar|te|then|to|toch|tom|top|tore|tos|tre|tri|tu|va|ver|vi|vo|vu|xe|xi]-{ky,no}·; main forms: au, au[ber|bu|bé|cu|da|di|dio|gu|gus|jour|lo|mô|pa|re|ri|ro|ré|ssi|tar|then|to|toch|tom|top|tore|tos|tre|tri|ver|xe|xi]·
+    merged forms: au|aux|hau|haut|ho|hô|o|oh|ô, au[a|ber|bi|bli|bu|bé|ca|cca|ccul|cé|da|di|dien|dieu|dio|do|don|ffen|ffi|ffri|ffus|gi|gu|gus|jour|li|llan|lo|lym|lé|ma|mar|me|mer|mi|mo|mé|mô|na|ni|nni|nnê|nnête|no|nu|né|pa|pi|pio|po|ppi|ppo|ppor|ppre|ppri|pu|pus|pé|ra|ran|re|rei|ri|rien|ros|rri|ryc|ré|sa|sci|se|ssa|ssi|ta|tai|tar|te|then|to|toch|tom|top|tore|tos|tre|tri|va|ver|vi|vo|vu|xi]-{ky,no}·; main forms: au, au[ber|bu|bé|cu|da|di|dien|dio|gu|gus|jour|lo|mô|pa|re|ri|ré|ssi|tar|then|to|toch|tom|top|tore|tos|tre|tri|ver|xe|xi]·
 - `d'hui|duit` (parts duit; new conflict freq 0.0): **outOfReach**
 - `fa|fe|fei|fâ|pha` (parts fa, fâ, pha; new conflict freq 0.2): **outOfReach**
 - `pou|pu` (parts pou; new conflict freq 0.2); merged score 2215 vs main 2212: **fused**
@@ -535,7 +535,7 @@ forms: `cher`(k=1)
 - `pa|pas|pat|ppa|ppât` (parts pa, pas, ppa; new conflict freq 1.2): **outOfReach**
 - `du|due|dus` (parts du; new conflict freq 1.9): **outOfReach**
 - `ree|ri|rie|ries|rii|ris|rit|rri|rrie|rril|rris|rry|ry|rye` (parts ri, rie, ry, rri; new conflict freq 1.3): **outOfReach**
-- `ain|hin|im|in` (parts in, im; new conflict freq 0.0); merged score 4545 vs main 3301: **fused**
+- `ain|hin|im|in` (parts in, im; new conflict freq 0.0); merged score 4553 vs main 3301: **fused**
     merged forms: ain|hin|im|in, in[bé|ce|clé|cré|dé|flé|fré|fé|gré|gé|pe|plé|pre|pré|pé|quié|sai|sé|te|tré|té|vé]·, im[cor|for|por]·, inté[ce|chi|ci|cro|cu|di|du|fec|fen|fi|for|fri|gra|gre|gri|li|llec|lli|lo|lé|ma|men|mi|ni|nia|nie|nieu|nio|nom|nou|né|o|pa|pen|pi|ra|re|ri|ria|rieu|rio|ré|sa|si|ssa|ssio|te|tec|ter|ti|té|vi|voy]·; main forms: in, in[ce|clé|cré|dé|flé|fré|fé|gré|gué|gé|quié|sai|sé|te|tré|té|vé]·
 - `cau|cho|coa|coh|cô|ko|quo` (parts cô, cau, quo, cho, coh, ko; new conflict freq 0.4): **outOfReach**
 - `nnu|nue|nut` (parts nue, nnu; new conflict freq 0.0): **outOfReach**
@@ -601,7 +601,7 @@ forms: `cher`(k=1)
 - `ccion|cion|cyon|sion|ssion|tion|tions` (parts tion, ssion, sion; new conflict freq 0.1); merged score 3912 vs main 4582: **apart**
     merged forms: ccion|cion|cyon|sion|ssion|tion|tions, ·[a|ba|bra|ca|cia|cra|da|dia|fla|ga|gna|gra|la|lia|lla|ma|mma|na|pa|pla|qua|ra|ria|rra|sa|sla|ssa|ta|tia|tra|tta|va|via|xa|xpia]tions⟨ccion|cion|cyon|sion|ssion|tion|tions⟩, ·[cen|en|men|pen|sten|ten|tten|ven|xten]tion, ·[bi|ci|ddi|di|gni|li|lli|mi|mmi|ni|pi|ri|sci|si|sti|ti|tri]tion, ·[bi|bli|bri|chi|ci|di|fi|gi|gri|i|ki|li|lli|mi|mmi|ni|pi|pli|ppli|qui|ri|ry|si|spi|sti|thi|ti|tri|vi|xci|xi|xpli]tations; main forms: tion, ·[a|ba|bra|ca|cia|cra|da|dia|fla|ga|gna|gra|la|lia|lla|ma|mma|na|pa|pla|qua|ra|ria|rra|sa|sla|ssa|ta|tia|tra|tta|va|via|xa|xpia]tions, ·[bi|bli|bri|chi|ci|di|fi|gi|gri|i|ki|li|lli|mi|mmi|ni|pi|pli|ppli|qui|ri|ry|si|spi|sti|thi|ti|tri|vi|xci|xi|xpli]tations, ·[sten|ten|tten|ven]tion
 - `ca|cah|cha|câ|ka|kha|khâ|qua` (parts ca, qua, ka, câ, cah; new conflict freq 2.1); merged score None vs main 0: **apart**
-    merged forms: ca|cah|cha|câ|ka|kha|khâ|qua, ca[bi|dri|gi|li|lli|mi|ni|nni|pi|pri|ri|si|ssi|ti|vi]·; main forms: ca, ca[ba|bi|bo|bri|bé|ca|cah|cha|che|cho|co|da|das|de|den|do|far|fe|fou|fé|gi|ille|illou|jo|la|lai|lan|le|lem|len|li|lli|llo|lo|lom|lu|lyp|lé|ma|mar|me|mem|mi|mio|mo|mou|mé|més|na|nar|nas|ne|ni|nna|nne|nni|no|nu|ou|pa|pe|po|pri|pu|pé|que|què|ra|rac|ram|re|ri|rio|ro|rou|rre|rrié|rro|rrou|rré|ryo|sa|se|ser|si|so|ssa|sse|ssi|sso|ssou|sé|ta|tal|tas|ter|thar|tho|thé|to|té|va|val|ver|vi]-{pi}·
+    merged forms: ca|cah|cha|câ|ka|kha|khâ|qua, ca[bi|dri|gi|li|lli|mi|ni|nni|pi|pri|ri|si|ssi|theri|ti|vi]·; main forms: ca, ca[ba|bi|bo|bri|bé|ca|cah|cha|che|cho|chè|co|da|das|de|den|do|far|fe|fou|fé|gi|illa|ille|illou|jo|la|lai|lan|le|lem|len|li|lli|llo|lo|lom|lu|lyp|lé|ma|mar|me|mem|mi|mio|mo|mou|mé|més|na|nar|nas|ne|ni|nna|nne|nni|no|nu|ou|pa|pe|po|pri|pu|pé|que|què|ra|rac|ram|re|ri|rio|ro|rou|rre|rrié|rro|rrou|rré|ryo|sa|se|ser|si|so|ssa|sse|ssi|sso|ssou|sé|ta|tal|tas|ter|thar|the|tho|thé|to|té|va|val|ver|vi]-{pi}·
 - `bu|bû` (parts bu, bû; new conflict freq 0.0): **outOfReach**
 - `cer|ser` (parts ser, cer; new conflict freq 0.0): **outOfReach**
 - `eu|heu|oe` (parts eu, oe; new conflict freq 0.0): **outOfReach**
@@ -629,7 +629,7 @@ forms: `cher`(k=1)
 - `pprendre|prendre` (parts prendre; new conflict freq 0.0): **outOfReach**
 - `gen|jam|jan` (parts gen, jam; new conflict freq 0.0): **outOfReach**
 - `prae|prai|pre|pré|préh|prê` (parts pré; new conflict freq 0.0); merged score 1464 vs main 1455: **fused**
-    merged forms: prae|prai|pre|pré|préh|prê, pré[a|am|ca|cai|cam|cau|cep|chau|ci|cieu|cio|co|con|da|des|di|dic|dis|do|dé|en|ex|fa|fec|fi|for|in|is|ju|la|le|li|lu|lè|ma|mens|mo|mu|mé|na|no|nup|o|pa|po|pon|pro|pu|ra|re|ren|ro|ré|sa|sen|ser|si|so|somp|ssen|su|sé|te|ten|ter|to|va|ve|ven|vi|vien|voy|voyi|é]-{fe,se}·; main forms: pré
+    merged forms: prae|prai|pre|pré|préh|prê, pré[a|am|ca|cai|cam|cau|cep|chau|ci|cieu|cio|co|con|da|des|di|dic|dis|do|dé|en|ex|fa|fec|fi|for|in|is|ju|la|le|li|lè|ma|mens|mo|mu|mé|na|no|nup|o|pa|po|pon|pro|pu|ra|re|ren|ro|ré|sa|sen|ser|si|so|somp|ssen|su|sé|te|ten|ter|to|va|ve|ven|vi|vien|voy|voyi|é]-{fe,se}·; main forms: pré
 - `illeur|illeurs|lleur|yeur` (parts lleur, illeur; new conflict freq 0.0): **outOfReach**
 - `cri|crie|crit` (parts crit; new conflict freq 0.0): **outOfReach**
 - `ner|neur|nheur|nneur` (parts nneur, neur, ner; new conflict freq 0.0): **outOfReach**
