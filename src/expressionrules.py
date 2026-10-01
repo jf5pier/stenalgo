@@ -31,6 +31,7 @@ is Phase 2 Stage B; `ExprRule.keys`/`beta` stay None until then.
 
 from __future__ import annotations
 
+from bisect import bisect_left
 from dataclasses import dataclass, field
 
 from src.affixes import PREFIX, SUFFIX
@@ -54,6 +55,10 @@ FORM_COST = 100.0
 # Q5: explicit composability pair bonus — rewards rule pairs whose joint use
 # is frequent ("il y a" x ne…pas). Tunable; 0.0 = off until measured.
 PAIR_BONUS_WEIGHT = 0.0
+
+# Q2 families: one base keypress, variants separated by */# selector keys —
+# at most 4 distinguishable variants per family (selectors: none, *, #, *#).
+MAX_FAMILY_VARIANTS = 4
 
 RULE_OVERLAP_MAX = 0.5        # territory-contest threshold (affix tradition)
 
@@ -138,8 +143,8 @@ def briefCandidates(pool: list[PoolExpression]) -> list[ExprRule]:
     return out
 
 
-def attachCandidates(pool: list[PoolExpression],
-                     particles: frozenset[str]) -> list[ExprRule]:
+def attachCandidates(pool: list[PoolExpression], particles: frozenset[str],
+                     familyOf=None) -> list[ExprRule]:
     """Attach-rule candidates: PROPER prefix/suffix runs of pool expressions
     (a proper run leaves a non-empty remainder), keyed by (run, position) —
     a run seen at an edge is a candidate for that edge only. A run's
@@ -173,7 +178,8 @@ def attachCandidates(pool: list[PoolExpression],
             continue
         span = standalone.longformStrokes if standalone else len(units)
         out.append(ExprRule("attach", units, position=position, freq=bound,
-                            strokesSaved=span))
+                            strokesSaved=span,
+                            family=familyOf(units) if familyOf else ""))
     out.sort(key=lambda r: (-r.freq, r.units, r.position))
     return out
 
@@ -211,15 +217,27 @@ def touchedExpressions(rule: ExprRule, pool: list[PoolExpression]) -> set[int]:
 
 def proxySaving(briefs: tuple[BriefRule, ...], attaches: tuple[AttachRule, ...],
                 expr: PoolExpression) -> float:
-    """Upper-bound saving on one expression: every attach of the current
-    selection merges cleanly (its stroke span vanishes), every brief segment
-    collapses to len(beta) strokes. Real segmentation, placeholder chords."""
+    """Upper-bound saving on one expression: every attach WITH a merge
+    target merges cleanly (its stroke span vanishes); an attach with no
+    host (the ladder's noNeighbour — a trailing prefix, a suffix with
+    nothing before it) keeps its longform and saves nothing. Every brief
+    segment collapses to len(beta) strokes. Real segmentation, placeholder
+    chords."""
     plan = planStream(Rules(briefs=briefs, attaches=attaches), list(expr.tokens))
+    tokens = list(expr.tokens)
     saving = 0
     for kind, payload, extra in plan.entries:
         if kind == "attach":
-            span = extra
-            saving += sum(len(t.strokes) for t in expr.tokens[span[0]:span[1]])
+            rule, (start, end) = payload, extra
+            if rule.position == PREFIX:
+                i = bisect_left(plan.residual, end)
+                if i >= len(plan.residual):
+                    continue          # no host after it — longform stays
+            else:
+                i = bisect_left(plan.residual, start) - 1
+                if i < 0:
+                    continue          # no host before it — longform stays
+            saving += sum(len(t.strokes) for t in tokens[start:end])
         else:
             segTokens, brief = payload, extra
             if brief is not None:
@@ -285,6 +303,39 @@ def territoryOverlap(spansA: list[list[tuple[int, int]]],
     return shared / smaller if smaller > 0 else 0.0
 
 
+def pruneRedundantVariants(selected: list[ExprRule], pool: list[PoolExpression],
+                           savingAt=proxySaving) -> list[ExprRule]:
+    """Drop absorbed family variants (forms == 0) whose removal leaves the
+    pool's total saving unchanged — their work is done by other selected
+    rules composing (greedy absorption is myopic: "et à" absorbed into the
+    et family before the et and à attaches were themselves selected). The
+    swapPass spirit, applied to variants; heads and standalone rules stay.
+    """
+    changed = True
+    while changed:
+        changed = False
+        variants = [r for r in selected if r.family and r.forms == 0]
+        for v in reversed(variants):
+            without = [r for r in selected if r is not v]
+            briefsAll = tuple(r.proxyBrief() for r in selected if r.kind == "brief")
+            attachesAll = tuple(r.proxyAttach() for r in selected if r.kind == "attach")
+            briefsWithout = tuple(r.proxyBrief() for r in without if r.kind == "brief")
+            attachesWithout = tuple(r.proxyAttach() for r in without if r.kind == "attach")
+            loss = 0.0
+            for i in touchedExpressions(v, pool):
+                withV = savingAt(briefsAll, attachesAll, pool[i])
+                sansV = savingAt(briefsWithout, attachesWithout, pool[i])
+                loss += pool[i].freq * (withV - sansV)
+            if loss <= 0:
+                selected = without
+                changed = True
+    # keep the head's form count honest after drops
+    for head in (r for r in selected if r.forms > 0):
+        head.forms = sum(1 for r in selected if r.family == head.family) \
+            if head.family else head.forms
+    return selected
+
+
 def selectExpressionRules(
     candidates: list[ExprRule],
     pool: list[PoolExpression],
@@ -318,7 +369,16 @@ def selectExpressionRules(
     selected: list[ExprRule] = []
     selectedSpans: list[list[list[tuple[int, int]]]] = []
     result = ExprSelectionResult(evaluated=len(candidates))
-    while candOf and len(selected) < budget:
+    slots = 0        # budget units: a family (head + absorbed variants) is ONE
+    closed: set[str] = set()   # families already selected — never re-opened
+    while candOf and slots < budget:
+        if closed:
+            keep = [i for i, c in enumerate(candOf)
+                    if not (c.family and c.family in closed)]
+            if len(keep) != len(candOf):
+                candOf = [candOf[i] for i in keep]
+                touchedOf = [touchedOf[i] for i in keep]
+                spansOf = [spansOf[i] for i in keep]
         bestIdx: int | None = None
         bestMarg = 0.0
         for i, cand in enumerate(candOf):
@@ -350,13 +410,51 @@ def selectExpressionRules(
         cand.score = bestMarg
         selected.append(cand)
         selectedSpans.append(spans)
+        slots += 1
         if cand.kind == "brief":
             briefs = briefs + (cand.proxyBrief(),)
         else:
             attaches = attaches + (cand.proxyAttach(),)
         for e in touched:
             currentSaving[e] = savingAt(briefs, attaches, pool[e])
+
+        # Q2 family bundling: the accepted rule's family is ONE budget slot —
+        # greedily absorb siblings whose fresh marginal still clears
+        # FORM_COST (variants are forms); drop the rest for good; at most
+        # MAX_FAMILY_VARIANTS variants (the */# selector budget).
+        if cand.family:
+            cand.forms = 1
+            closed.add(cand.family)
+            sibIdx = 0
+            while sibIdx < len(candOf) and cand.forms < MAX_FAMILY_VARIANTS:
+                sib = candOf[sibIdx]
+                if sib.family != cand.family or sib.kind != cand.kind:
+                    sibIdx += 1
+                    continue
+                sibBriefs = briefs + ((sib.proxyBrief(),) if sib.kind == "brief" else ())
+                sibAttaches = attaches + ((sib.proxyAttach(),) if sib.kind == "attach" else ())
+                sibMarg = 0.0
+                for e in touchedOf[sibIdx]:
+                    extra = savingAt(sibBriefs, sibAttaches, pool[e]) - currentSaving[e]
+                    if extra > 0:
+                        sibMarg += pool[e].freq * extra
+                candOf.pop(sibIdx)
+                sibTouched = touchedOf.pop(sibIdx)
+                spansOf.pop(sibIdx)
+                if sibMarg - FORM_COST > 0:
+                    sib.score = sibMarg - FORM_COST
+                    sib.forms = 0          # the family's form count lives on the head
+                    cand.forms += 1
+                    selected.append(sib)
+                    selectedSpans.append([])
+                    if sib.kind == "brief":
+                        briefs = briefs + (sib.proxyBrief(),)
+                    else:
+                        attaches = attaches + (sib.proxyAttach(),)
+                    for e in sibTouched:
+                        currentSaving[e] = savingAt(briefs, attaches, pool[e])
+                # else: dropped permanently — the family is closed to it
         result.curve.append(sum(currentSaving[e] * pool[e].freq
                                 for e in range(len(pool))))
-    result.selected = selected
+    result.selected = pruneRedundantVariants(selected, pool, savingAt)
     return result
