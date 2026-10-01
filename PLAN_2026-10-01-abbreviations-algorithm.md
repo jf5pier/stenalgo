@@ -11,6 +11,24 @@ briefs (one stroke, e.g. "il est", "il y a") and (b) attach keypresses
 mot", "ne + verbe + pas"), composable ("il y a" + ne…pas ⇒ "il n'y a pas" in
 one stroke when the union is legal and free).
 
+## Decisions registered (round 2, 2026-10-01 — see the questions file)
+
+- Composition first (Q1); separate expression budget ~10–20 (Q4); explicit
+  pair bonus for composability, weight set in Phase 2 (Q5); queue floors
+  ≥2 strokes and ≥5M occurrences (Q6); no shadowing — canonical distinctness
+  from all live outlines (Q7); multi-stroke briefs allowed with
+  `hasBoundaryRisk` gates (Q8); mnemonic AND free-chord derivations,
+  `keySimilarity` a label only (Q9); attach rules productive over any host
+  (Q10); 2010–2019 window ranks candidates (Q11); standalone-stroke fallback
+  on merge failure (Q12).
+- **Rule families (Q2)**: base keypresses on the 22 phoneme keys; `*` (10)
+  and `#` (15) may join a keypress only to give semantically related
+  particles ONE shared rule with mark-style variant selectors
+  (`du / de la / de l' / des` = one rule + `*`/`#` variants); keys 0/1 stay
+  excluded. Phase 1 must extend the algebra and Phase 2 the selection model
+  with this family notion (one learnable unit, several variant strokes).
+- Circumfix semantics still open (Q3) — decided during Phase 1 experiments.
+
 ## Phase 0 — dependency merge + candidate pool
 
 **Inputs**: branches `abbreviations` (ae6ad5d) and `affix-abbreviation-rules`

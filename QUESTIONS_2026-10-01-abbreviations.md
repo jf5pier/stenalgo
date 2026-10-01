@@ -83,3 +83,20 @@ weight differently in contemporary text.
 Standalone attach stroke (the `_newBase` RULE fallback — the writer feels the
 impossible chord as an extra stroke) or write the particle out in full
 (counted as a word exception against the 5% gate)?
+
+## Answers — round 2 (2026-10-01)
+
+| Q | Decision |
+|---|----------|
+| Q1 | **Composition first**: attach rules win when they already cover the tokens; briefs are minted only when no productive rule covers the expression. |
+| Q2 | **22 phoneme keys + `*`/`#` for rule-family reuse**: base keypresses live on the 22 phoneme keys; `*` (10) and `#` (15) may join a keypress only when they let semantically related particles share ONE rule with mark-style variant selectors — e.g. `du / de la / de l' / des` as one rule + `*`/`#` variants. Keys 0/1 stay excluded (third-mark option preserved). This adds a *rule-family* notion to the Phase 1/2 design: one learnable rule, several variant strokes distinguished by mark keys. |
+| Q3 | **Open** — circumfix semantics (one suffix keypress vs prefix+suffix pair; variant frames one rule or several) to be settled with Phase 1's algebra experiments. |
+| Q4 | **Separate budget** for expression rules (~10–20, number picked later); the 30 affix rules are not reopened. Briefs priced in the FORM_COST tradition. |
+| Q5 | **Explicit pair bonus**: the selection objective rewards rule pairs whose joint use is frequent (`il y a` × `ne…pas`); the weight is a tunable constant set in Phase 2. |
+| Q6 | **≥2 strokes and ≥5M occurrences** to enter the queue; both constants tunable in one place. |
+| Q7 | **Hard no shadowing**: every brief outline canonically distinct from all live outlines; no existing word gets harder to write. |
+| Q8 | **Multi-stroke briefs allowed**, gated by `hasBoundaryRisk` checks; expected rare. |
+| Q9 | **Mnemonic + free chords**: derivation families from the longform AND free chord assignment when it buys frequency; `keySimilarity` stays a review label, never a gate. |
+| Q10 | **Productive scope**: attach rules apply to any host word, like affix rules; exception rate measured on the full lexicon against the 5% gate. |
+| Q11 | **2010–2019 window** (the TSV corpus) is the ranking arbiter. |
+| Q12 | **Standalone stroke fallback** (the `_newBase` RULE ladder) on merge failure; keeps the constant-keypress contract visible. |
