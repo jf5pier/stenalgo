@@ -164,3 +164,38 @@ class TestSelection:
         brief = ExprRule("brief", ("il", "y", "a"))
         pas = ExprRule("attach", ("pas",), position=SUFFIX)
         assert jointFrequency(brief, pas, pool) == 30_000_000
+
+
+class TestFamilies:
+    """Q2: related particle variants are ONE learnable rule (one budget
+    slot, one base keypress, */# selector variants)."""
+
+    @staticmethod
+    def lemmas(units):
+        return {"de": "de", "d'": "de", "la": "la"}.get(units[0], "")
+
+    def test_family_is_one_slot_with_variant_absorption(self):
+        pool = [expr(["de", "la", "maison"], 100_000_000),
+                expr(["de", "chat"], 60_000_000)]
+        candidates = (briefCandidates(pool)
+                      + attachCandidates(pool, PARTICLES, familyOf=self.lemmas))
+        result = selectExpressionRules(candidates, pool, budget=3)
+        # (de la) prefix wins round 1; (de,) — same family — is absorbed as a
+        # variant (its marginal on "de chat" clears FORM_COST); everything
+        # else is suppressed; one slot, two rules.
+        assert [( " ".join(r.units), r.position) for r in result.selected] == \
+            [("de la", PREFIX), ("de", PREFIX)]
+        assert result.selected[0].forms == 2
+        assert result.selected[1].forms == 0   # the family's count lives on the head
+
+    def test_family_cap_closes_the_family(self):
+        """Five same-family variants: the head plus three absorbed (the
+        selector budget), the fifth dropped for good — never a new head."""
+        pool = [expr([u, "chat"], 10_000_000)
+                for u in ("l'", "la", "le", "leur", "les")]
+        candidates = attachCandidates(pool, frozenset({"l'", "la", "le", "leur", "les"}),
+                                      familyOf=lambda units: "le")
+        result = selectExpressionRules(candidates, pool, budget=5)
+        assert len(result.selected) == 4          # MAX_FAMILY_VARIANTS
+        assert all(r.family == "le" for r in result.selected)
+        assert result.selected[0].forms == 4

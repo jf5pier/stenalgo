@@ -78,23 +78,40 @@ def main() -> None:
     particles = frozenset(u for u, ok in seen.items() if ok)
     print(f"particles ({len(particles)}): {' '.join(sorted(particles))}")
 
-    candidates = briefCandidates(pool) + attachCandidates(pool, particles)
+    # Q2 families: the lemma of a run's first unit groups its variants
+    # (de / d' / de la / de l' / du / des -> "de").
+    lemmaOf: dict[str, str] = {}
+    for unit, ok in seen.items():
+        pairs = resolveTerm(unit, byOrtho)
+        if pairs and pairs[0][1] is not None:
+            lemmaOf[unit] = pairs[0][1].lemme
+
+    def familyOf(units: tuple[str, ...]) -> str:
+        return lemmaOf.get(units[0], "")
+
+    candidates = briefCandidates(pool) + attachCandidates(pool, particles, familyOf)
+    families = {c.family for c in candidates if c.family}
     print(f"candidates: {len(candidates)} "
           f"({sum(1 for c in candidates if c.kind == 'brief')} briefs, "
-          f"{sum(1 for c in candidates if c.kind == 'attach')} attaches)")
+          f"{sum(1 for c in candidates if c.kind == 'attach')} attaches, "
+          f"{len(families)} families)")
 
     result = selectExpressionRules(candidates, pool, budget=budget)
     with open(OUT_TSV, "w", encoding="utf-8") as out:
-        out.write("rank\tkind\texpression\tposition\tfreq\tstrokes_saved\tscore\n")
+        out.write("rank\tkind\tfamily\texpression\tposition\tfreq\t"
+                  "strokes_saved\tscore\n")
         for rank, rule in enumerate(result.selected, 1):
-            out.write(f"{rank}\t{rule.kind}\t{' '.join(rule.units)}\t"
+            out.write(f"{rank}\t{rule.kind}\t{rule.family}\t{' '.join(rule.units)}\t"
                       f"{rule.position}\t{rule.freq:.0f}\t{rule.strokesSaved}\t"
                       f"{rule.score:.3e}\n")
-    print(f"selected {len(result.selected)} -> {OUT_TSV}")
+    slots = {(r.family or " ".join(r.units)) if r.kind == "attach"
+             else " ".join(r.units) for r in result.selected}
+    print(f"selected {len(result.selected)} rules in {len(slots)} slots -> {OUT_TSV}")
     for rank, rule in enumerate(result.selected, 1):
         print(f"  {rank:2}. {rule.kind:6} {' '.join(rule.units):24} "
-              f"{rule.position:6} freq={rule.freq:.3e} "
-              f"saved={rule.strokesSaved} score={rule.score:.3e}")
+              f"{rule.position:6} fam={rule.family or '-':6} "
+              f"freq={rule.freq:.3e} saved={rule.strokesSaved} "
+              f"score={rule.score:.3e}")
     if result.skips:
         print("territory skips:")
         for a, b, ov in result.skips[:10]:
