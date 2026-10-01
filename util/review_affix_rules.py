@@ -38,6 +38,12 @@ def _show(p: P.Proposal, say: Callable[[str], None]) -> None:
     say("  " + p.line())
     if p.examples:
         say("  e.g. " + ", ".join(p.examples))
+    for note in p.notes:
+        say("  " + note)
+    if p.rows:
+        say("  per addition:" if p.kind == "growth" else "  per added spelling:")
+        for row in p.rows:
+            say("    " + row.line())
     if p.alternatives:
         say("  next best: " + "; ".join(f"{label} ({net:+.0f})" for label, net in p.alternatives))
 
@@ -59,6 +65,13 @@ def reviewItem(
         if proposal is None:
             return _nothingToPropose(item, decisions, path, today, ask, say), False
         _show(proposal, say)
+        if proposal.kind == "growth" and proposal.groups:
+            decisions, outcome = _reviewGroups(item, proposal, decisions, path, today, ask, say)
+            if outcome == "quit":
+                return decisions, True
+            if outcome == "skip":
+                return decisions, False
+            continue                       # offer the next proposal (an extension, or the next best form)
         a = _ask("  accept? [y/n/s/q] ", ask)
         if a == "q":
             return decisions, True
@@ -84,6 +97,50 @@ def reviewItem(
         decisions = decisions.withEntry(replace(
             existing, refused=sorted(set(existing.refused) | {proposal.label}), note=note or existing.note, date=today))
         saveDecisions(decisions, path)
+
+
+def _reviewGroups(
+    item: Pending, proposal: P.Proposal, decisions: Decisions, path: str, today: str,
+    ask: Callable[[str], str], say: Callable[[str], None],
+) -> tuple[Decisions, str]:
+    """One accept line per grown (anchor spelling + neighbour syllable) group; the accepted groups become the
+    growth form(s), the refused ones are never proposed again. Returns (decisions, "done" | "skip" | "quit")."""
+    accepted: list[tuple[str, str]] = []
+    refused: list[str] = []
+    net = 0.0
+    for row in proposal.rows:
+        group = proposal.groups.get(row.label)
+        if group is None:
+            continue
+        a = _ask(f"  {row.label} (net {row.net:+.0f}): accept? [y/n/s/q] ", ask)
+        if a == "q":
+            return decisions, "quit"
+        if a == "s":
+            return decisions, "skip"
+        if a == "y":
+            accepted.append(group)
+            net += row.net
+        else:
+            refused.append(row.label)
+    note = ask("  note (optional): ").strip()
+    existing = decisions.get(item.position, item.spellings, item.phono) or AnchorDecision(
+        item.position, item.spellings, item.phono, "fused" if "|" in item.spellings else "-", None)
+    growth = existing.growth
+    numbers = dict(existing.numbers)
+    if accepted:
+        growth = (growth or []) + P.formsForGroups(root_of(proposal), accepted)
+        numbers = {"acceptedGroups": [f"{sp} + /{ph}/" for sp, ph in accepted], "groupNet": round(net)}
+    decisions = decisions.withEntry(replace(
+        existing, growth=growth, refused=sorted(set(existing.refused) | set(refused)),
+        note=note or existing.note, date=today, numbers=numbers))
+    saveDecisions(decisions, path)
+    say(f"  saved: {len(accepted)} group(s) accepted, {len(refused)} refused")
+    return decisions, "done"
+
+
+def root_of(proposal: P.Proposal) -> A.Candidate:
+    """formsForGroups only reads `root.ortho` (merged or single): a stand-in carrying it."""
+    return A.Candidate(proposal.position, 1, proposal.phono, proposal.spellings)
 
 
 def _nothingToPropose(

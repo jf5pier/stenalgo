@@ -151,3 +151,24 @@ class TestFusion:
         (r2,) = P.restrictedGrowth(part, [ScopeForm("y", frozenset({"tion", "ssion"}), A_re("x"))])
         assert r2.anchors == frozenset({"tion"})
         assert P.restrictedGrowth(part, [ScopeForm("z", frozenset({"né"}), A_re("x"))]) == []
+
+
+class TestRows:
+    def test_growth_rows_group_the_newly_covered_words_by_anchor_spelling_and_neighbour_sound(self):
+        root, words = _prefixPool([("a", "ma", "ma", (5,), 8), ("a", "ti", "ti", (6,), 6)])
+        ctx = SimContext(_sb(), words)
+        p = P.proposeGrowth(root, _decisions(root), KEYS, ctx)
+        rows = {r.label: r for r in p.rows}
+        assert set(rows) == {"a + /ma/", "a + /ti/"}
+        assert (rows["a + /ma/"].words, rows["a + /ma/"].gainWords) == (8, 8)
+        assert rows["a + /ma/"].benefit == 8 * 100.0 * 2          # grown carriers save 2 strokes each
+        assert rows["a + /ti/"].net == pytest.approx(6 * 100.0 * 2)
+        assert "a + /ma/: 8 words" in rows["a + /ma/"].line()
+
+    def test_fusion_rows_are_per_added_spelling(self, monkeypatch):
+        TestFusion()._setup(monkeypatch)             # installs the fake chooseRuleKeypress
+        m, pool, dec = TestFusion()._setup(monkeypatch)
+        p = P.proposeFusion(m, pool, dec, None, None, [])
+        (row,) = p.rows
+        assert row.label == "b" and row.words == 3 and row.freq == 150.0 and row.benefit == 150.0
+        assert any(n.startswith("existing words:") for n in p.notes)

@@ -86,3 +86,35 @@ def test_an_invalid_answer_is_asked_again(tmp_path):
     p = _proposal("growth", "ma", forms=[ScopeForm("ma")])
     out, path, _ = _run([GROWTH], [p], ["x", "", "s"], tmp_path)
     assert loadDecisions(path).entries == {}
+
+
+def _groupProposal():
+    p = _proposal("growth", "R[e]", forms=[ScopeForm("R[e]")])
+    p.rows = [P.Row("aa + /RE/", 10, 100.0, 10, 200.0), P.Row("aa + /R@/", 5, 50.0, 5, 90.0),
+              P.Row("aa + /Re/", 3, 1.0, 3, 1.0, fallbacks=1)]
+    p.groups = {"aa + /RE/": ("aa", "RE"), "aa + /R@/": ("aa", "R@"), "aa + /Re/": ("aa", "Re")}
+    return p
+
+
+def test_growth_asks_one_line_per_group_and_saves_only_the_accepted_ones(tmp_path):
+    out, path, log = _run([GROWTH], [_groupProposal(), None], ["y", "y", "n", ""], tmp_path)
+    e = loadDecisions(path).get("prefix", "aa", "A")
+    assert [f.sound.pattern for f in e.growth] == ["R@|RE"]
+    assert e.refused == ["aa + /Re/"] and e.numbers["acceptedGroups"] == ["aa + /RE/", "aa + /R@/"]
+
+
+def test_refused_groups_leave_growth_undecided_and_skip_stops_without_writing(tmp_path):
+    out, path, _ = _run([GROWTH], [_groupProposal(), None], ["n", "n", "n", "", "n"], tmp_path)
+    e = loadDecisions(path).get("prefix", "aa", "A")
+    assert e.growth is None and len(e.refused) == 3
+    out, path, _ = _run([GROWTH], [_groupProposal()], ["y", "s"], tmp_path)
+    assert loadDecisions(path).entries == {}
+
+
+def test_merged_anchor_spellings_with_the_same_sounds_share_a_form():
+    from src.affixes import Candidate
+    root = Candidate("prefix", 1, "A", "aa|ab")
+    forms = P.formsForGroups(root, [("aa", "RE"), ("ab", "RE"), ("aa", "R@")])
+    assert [(sorted(f.anchors), f.sound.pattern) for f in forms] == [(["aa"], "R@|RE"), (["ab"], "RE")]
+    same = P.formsForGroups(root, [("aa", "RE"), ("ab", "RE")])
+    assert len(same) == 1 and sorted(same[0].anchors) == ["aa", "ab"]
