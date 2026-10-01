@@ -31,6 +31,7 @@ MAX_ATOMS = 4            # alternatives in one form
 MIN_WORDS = 5            # a candidate must cover at least this many carriers
 EXACT_TOP = 40           # candidates (best optimistic bound) that get the exact evaluation
 SIBLING_MAX_DISTANCE = 2
+MAX_ROWS = 40            # groups (rows) of the per-addition table of a growth proposal, one accept line each
 
 Key = tuple[str, str, str]   # (position, spellings, phono)
 
@@ -70,11 +71,78 @@ def _numbers(rule: R.Rule, results: list[A.CarrierResult], nFallback: int, keys:
                    sum(r.carrier.rec.frequency for r in grown))
 
 
-def numbersAtKeys(rule: R.Rule, keys: Stroke, ctx: A.SimContext) -> Numbers:
-    """The rule scored on a fixed keypress (cheap: two simulations); a rule with no keys has no numbers."""
+def evaluateAtKeys(rule: R.Rule, keys: Stroke, ctx: A.SimContext) -> tuple[Numbers, list[A.CarrierResult]]:
     carriers, nFallback = R.resolveFallbacks(rule, keys, A.poolCarriers(rule.forms), ctx)
     (res,) = A.simulate([(A.Binding(rule.position, A.RULE, keys), carriers)], ctx, boundaryRisk=False)
-    return _numbers(rule, res, nFallback, keys)
+    return _numbers(rule, res, nFallback, keys), res
+
+
+def numbersAtKeys(rule: R.Rule, keys: Stroke, ctx: A.SimContext) -> Numbers:
+    """The rule scored on a fixed keypress (cheap: two simulations); a rule with no keys has no numbers."""
+    return evaluateAtKeys(rule, keys, ctx)[0]
+
+
+@dataclass
+class Row:
+    """The statistics of ONE addition (an added spelling, or one neighbour sound of a growth form)."""
+    label: str
+    words: int = 0                 # carriers of the rule in this group
+    freq: float = 0.0
+    gainWords: int = 0             # carriers that gain strokes
+    benefit: float = 0.0           # sum of frequency x strokes saved
+    fallbacks: int = 0             # growth carriers that gained nothing and kept the anchor alone
+    fallbackFreq: float = 0.0
+    exceptions: int = 0            # hard exceptions (collisions: the word keeps its long outline)
+    exceptionFreq: float = 0.0
+    examples: list[str] = field(default_factory=list)       # most frequent gaining words
+    excExamples: list[str] = field(default_factory=list)    # most frequent hard exceptions
+
+    @property
+    def net(self) -> float:
+        """This group's own contribution to the rule score (benefit - exception weight - fallback price)."""
+        return self.benefit - R.EXCEPTION_ALPHA * self.exceptionFreq - R.EXCLUSION_COST * self.fallbacks
+
+    def line(self) -> str:
+        out = (f"{self.label}: {self.words} words freq {self.freq:.0f} | gain {self.gainWords} (benefit {self.benefit:.0f})"
+               f" | exc {self.exceptions} (freq {self.exceptionFreq:.0f}) | fb {self.fallbacks} (freq {self.fallbackFreq:.0f})"
+               f" | net {self.net:+.0f}")
+        if self.examples:
+            out += " | e.g. " + ", ".join(self.examples[:5])
+        if self.excExamples:
+            out += " | exceptions: " + ", ".join(self.excExamples[:5])
+        return out
+
+
+def rowsOf(rule: R.Rule, results: list[A.CarrierResult], groupOf: Callable[[A.Carrier], str | None]) -> dict[str, Row]:
+    """Group the evaluated carriers of `rule` (`groupOf` of the carrier as POOLED, before any fallback; None = ignore)."""
+    pooled = {c.rec.idx: c for c in A.poolCarriers(rule.forms)}
+    rows: dict[str, Row] = {}
+    gained: dict[str, list[tuple[float, str]]] = {}
+    excepted: dict[str, list[tuple[float, str]]] = {}
+    for r in results:
+        orig = pooled.get(r.carrier.rec.idx, r.carrier)
+        label = groupOf(orig)
+        if label is None:
+            continue
+        row = rows.setdefault(label, Row(label))
+        f, w = r.carrier.rec.frequency, r.carrier.rec.ortho
+        row.words += 1
+        row.freq += f
+        if r.gain > 0:
+            row.gainWords += 1
+            row.benefit += f * r.gain
+            gained.setdefault(label, []).append((f, w))
+        elif r.reason in R.WORD_EXCEPTION_REASONS:
+            row.exceptions += 1
+            row.exceptionFreq += f
+            excepted.setdefault(label, []).append((f, w))
+        if orig.span > 1 and r.carrier.span == 1:
+            row.fallbacks += 1
+            row.fallbackFreq += f
+    for label, row in rows.items():
+        row.examples = [w for _f, w in sorted(gained.get(label, []), reverse=True)[:6]]
+        row.excExamples = [w for _f, w in sorted(excepted.get(label, []), reverse=True)[:6]]
+    return rows
 
 
 def numbersBest(rule: R.Rule, pk: PhonemeKeys, ctx: A.SimContext, keypresses: list[Stroke]) -> Numbers:
@@ -106,6 +174,9 @@ class Proposal:
     net: float
     entry: AnchorDecision             # the entry to store when accepted
     flags: list[str] = field(default_factory=list)       # "similar rule: ...", "two decided rules on one key"
+    rows: list[Row] = field(default_factory=list)        # per addition (added spelling / neighbour sound)
+    notes: list[str] = field(default_factory=list)       # context lines (e.g. the effect on the existing words)
+    groups: dict[str, tuple[str, str]] = field(default_factory=dict)   # growth: row label -> (anchor spelling, neighbour sound)
     examples: list[str] = field(default_factory=list)
     alternatives: list[tuple[str, float]] = field(default_factory=list)   # next best (label, net)
 
@@ -159,11 +230,14 @@ def proposeFusion(
         return None
     idx = R.childrenIndex(pool)
     alone: list[Numbers] = []
+    aloneRules: list[R.Rule] = []
     growth: list[ScopeForm] = []
     pendingGrowth = True
     for p in rules:
         progress(f"  evaluating `{p.ortho}` alone ...")
-        alone.append(numbersBest(R.buildCandidateRule(p, idx), pk, ctx, keypresses))
+        aloneRule = R.buildCandidateRule(p, idx)
+        aloneRules.append(aloneRule)
+        alone.append(numbersBest(aloneRule, pk, ctx, keypresses))
         partForms = decisions.growthForms(p.position, p.ortho, p.phono)
         if partForms is not None:
             pendingGrowth = False
@@ -184,13 +258,33 @@ def proposeFusion(
             flags.append(f"similar rule: added spelling `{s}` is already in rule {other}")
     if len(rules) > 1:
         flags.append(f"two decided rules on one key ({', '.join('`' + p.ortho + '`' for p in rules)})")
+    # per added spelling, and the effect on the words the parts already had
+    spellingOf = (lambda c: c.rec.orthoSylls[c.start]) if merged.position == A.PREFIX else \
+        (lambda c: c.rec.orthoSylls[c.start + c.span - 1])
+    existing = lambda c: c.rec.idx in ruleIdx  # noqa: E731
+    fusedRows = rowsOf(fusedRule, fusedRule.results, lambda c: "(existing words)" if existing(c) else spellingOf(c))
+    aloneExisting = Row("(existing words, alone)")
+    for ar in aloneRules:
+        for row in rowsOf(ar, ar.results, lambda c: "x").values():
+            for f in ("words", "freq", "gainWords", "benefit", "fallbacks", "fallbackFreq", "exceptions", "exceptionFreq"):
+                setattr(aloneExisting, f, getattr(aloneExisting, f) + getattr(row, f))
+    rows = sorted((r for k, r in fusedRows.items() if k != "(existing words)"), key=lambda r: (-r.freq, r.label))
+    notes: list[str] = []
+    before = fusedRows.get("(existing words)", Row("(existing words)"))
+    notes.append(
+        f"existing words: alone {aloneExisting.words} words, benefit {aloneExisting.benefit:.0f}, exc {aloneExisting.exceptions} "
+        f"(freq {aloneExisting.exceptionFreq:.0f}), fb {aloneExisting.fallbacks} -> fused {before.words} words, benefit "
+        f"{before.benefit:.0f}, exc {before.exceptions} (freq {before.exceptionFreq:.0f}), fb {before.fallbacks}; "
+        f"net change {before.net - aloneExisting.net:+.0f}" + (f"; their exceptions: {', '.join(before.excExamples[:6])}"
+                                                               if before.excExamples else ""))
+    notes.append(f"keys: parts alone " + ", ".join(str(a.keys) for a in alone) + f" -> merged {fused.keys}")
     return Proposal(
         "fusion", merged.position, merged.ortho, merged.phono, f"fuse {merged.ortho}", len(added),
         sum(c.rec.frequency for c in added),
         fused.fallbackWords - sum(a.fallbackWords for a in alone), fused.fallbackFreq - sum(a.fallbackFreq for a in alone),
         fused.exceptionWords - sum(a.exceptionWords for a in alone),
         fused.exceptionFreq - sum(a.exceptionFreq for a in alone), fused.score - aloneSum, entry, flags,
-        [c.rec.ortho for c in added[:6]])
+        rows=rows, notes=notes, examples=[c.rec.ortho for c in added[:6]])
 
 
 # ── growth ─────────────────────────────────────────────────────────────────
@@ -258,6 +352,7 @@ def proposeGrowth(
     entry = _entryOf(decisions, root.position, root.ortho, root.phono)
     current: list[ScopeForm] = list(entry.growth or [])
     refused = refused | frozenset(entry.refused)
+    refusedGroups = {r for r in refused if " + /" in r}          # "spelling + /sound/" groups the user refused
     base = numbersAtKeys(_growthRule(root, current, decisions), keys, ctx)
 
     info: dict[int, tuple[str, str, str]] = {}        # rec.idx -> (anchor spelling, neighbour spelling, neighbour sound)
@@ -271,6 +366,7 @@ def proposeGrowth(
         _gc, nPhono, nOrtho = g
         info[rec.idx] = (rec.orthoSylls[c.start], nOrtho, nPhono)
     taken = {c.rec.idx for f in _growthRule(root, current, decisions).forms[1:] for c in f.carriers}
+    taken |= {i for i, (sp, _o, ph) in info.items() if f"{sp} + /{ph}/" in refusedGroups}
     freq = {c.rec.idx: c.rec.frequency for c in root.carriers}
     merged = "|" in root.ortho
     cands: list[_Cand] = []
@@ -373,8 +469,47 @@ def proposeGrowth(
     helped.sort(key=lambda c: (-c.rec.frequency, c.rec.idx))
     newEntry = AnchorDecision(root.position, root.ortho, root.phono, entry.verdict, best.forms, list(entry.refused),
                               entry.note, entry.date, dict(entry.numbers))
+    # per addition: the newly covered words grouped by (anchor spelling, neighbour sound)
+    rule = _growthRule(root, best.forms, decisions)
+    _n, results = evaluateAtKeys(rule, keys, ctx)
+
+    def group(c: A.Carrier) -> str | None:
+        if c.rec.idx not in best.covered or c.span < 2:
+            return None
+        r = c.rec
+        a, nb = (c.start, c.start + c.span - 1) if root.position == A.PREFIX else (c.start + c.span - 1, c.start)
+        return f"{r.orthoSylls[a]} + /{r.phonoSylls[nb]}/"
+
+    allRows = sorted(rowsOf(rule, results, group).values(), key=lambda r: (-r.freq, r.label))
+    shown = allRows[:MAX_ROWS]
+    notes = [f"base (current forms) at keys {keys}: score {base.score:.0f}; proposed: score {n.score:.0f}; "
+             f"{len(allRows)} (anchor spelling, neighbour sound) groups newly covered"
+             + (f", the {MAX_ROWS} largest shown" if len(allRows) > MAX_ROWS else "")]
+    groups = {}
+    for row in shown:
+        sp, _plus, ph = row.label.partition(" + /")
+        groups[row.label] = (sp, ph[:-1])
     return Proposal(
         "growth", root.position, root.ortho, root.phono, best.label, n.grownWords - base.grownWords,
         n.grownFreq - base.grownFreq, n.fallbackWords - base.fallbackWords, n.fallbackFreq - base.fallbackFreq,
         n.exceptionWords - base.exceptionWords, n.exceptionFreq - base.exceptionFreq, net, newEntry, flags,
-        [c.rec.ortho for c in helped[:6]], [(s[1].label, s[0]) for s in ranked[1:4]])
+        rows=shown, notes=notes, examples=[c.rec.ortho for c in helped[:6]],
+        alternatives=[(s[1].label, s[0]) for s in ranked[1:4]], groups=groups)
+
+
+def formsForGroups(root: A.Candidate, accepted: list[tuple[str, str]]) -> list[ScopeForm]:
+    """Growth forms for the accepted (anchor spelling, neighbour sound) groups: one form per distinct set of sounds
+    (spellings that take the same sounds share a form, which saves form prices); a single spelling needs no anchor."""
+    bySpelling: dict[str, list[str]] = {}
+    for sp, ph in accepted:
+        bySpelling.setdefault(sp, [])
+        if ph not in bySpelling[sp]:
+            bySpelling[sp].append(ph)
+    if "|" not in root.ortho:
+        sounds = sorted({ph for _sp, ph in accepted})
+        return [ScopeForm("|".join(sounds), None, re.compile("|".join(re.escape(p) for p in sounds)))] if sounds else []
+    bySounds: dict[tuple[str, ...], list[str]] = {}
+    for sp, phs in sorted(bySpelling.items()):
+        bySounds.setdefault(tuple(sorted(phs)), []).append(sp)
+    return [ScopeForm(f"{'|'.join(sps)}:{'|'.join(phs)}", frozenset(sps), re.compile("|".join(re.escape(p) for p in phs)))
+            for phs, sps in bySounds.items()]
