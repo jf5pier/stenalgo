@@ -89,6 +89,10 @@ python -m util.export_practice_sentences
 python -m util.export_definitions
 # Prerequisites: the export_practice_words inputs. Outputs: steno-trainer/public/data/definitions.json.
 
+python -m util.export_lessons
+# Prerequisites: both pickles, starboard3h.json, resolved_press_sets.json,
+# realization_report.json. Outputs: steno-trainer/public/data/lessons.json.
+
 python dictionary.py                         # the orchestrator over everything from S2 to S8
 # Prerequisites: as above (skips nothing; aborts on the first failing step).
 # Outputs: all of the S2-S8 outputs above, in dependency order; per-step wall times

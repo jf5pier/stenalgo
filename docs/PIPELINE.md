@@ -45,10 +45,10 @@ The real dependency order. Steps 0 and 1 and the human loop 4h are run by hand, 
 | 4 | `python -m src.elicitation` (`--ask` / `--resolve`) | Discriminating-Feature Elicitation (Elicitation Phase): Questionnaire Generation, Press-Set Resolution | everything after it | Rebuilds the resolved discriminating feature sets from the stored `elicitation_answers.json`. Asks no questions. `--ask` = Questionnaire Generation + the HTML page; `--resolve` = Press-Set Resolution + the Grouping Phase + the realization report (requires `elicitation_answers.json`, exit 1 without it); no flags = both steps, which is what the orchestrator runs. |
 | 4h | `python -m util.build_questionnaire_page` → publish → answer → copy answers into `elicitation_answers.json` → rerun step 4 (`--resolve`) | Elicitation Phase: Answer Collection | only when step 4 reports "unresolved oppositions" | The human-in-the-loop part. The page is also rendered by `--ask` (standalone `python -m util.build_questionnaire_page` still works). |
 | 5 | `python -m util.build_keypress_groups` | Discriminating-Feature Grouping (Grouping Phase) | when the live features or discriminating feature sets change | The tracked output rarely changes after a lexicon fix. |
-| 6 | `python -m util.build_realization_report` | Discriminating-Feature Stroke Realization (Realization Phase), report build | before step 9's keyboard legend | Writes the realization report only. It does not feed the disambiguated theory or the Plover dictionary. |
+| 6 | `python -m util.build_realization_report` | Discriminating-Feature Stroke Realization (Realization Phase), report build | before step 9's keyboard legend and lessons export | Writes the realization report only. It does not feed the disambiguated theory or the Plover dictionary. |
 | 7 | `python -m util.build_disambiguated_theory` | Different-Lemma or Grammatical-Category Disambiguation (S7) | to refresh `disambiguated_theory.tsv` and the exporters' `DisambiguatedTheory.pickle` | Fast (pickles exist); hard-errors naming the exact prerequisite commands when the pickles or JSONs are missing. Also writes the fingerprinted `DisambiguatedTheory.pickle` every exporter loads instead of recomputing (fact 1). |
 | 8 | `python -m util.export_plover_dictionary`, `python -m util.export_plover_system` | Theory Export (S8), Plover branch | Plover | Either order. |
-| 9 | `python -m util.export_keyboard_layout` (after step 6), `python -m util.export_practice_words`, **then** `python -m util.export_practice_sentences`, then `python -m util.export_definitions` | Theory Export (S8), trainer branch | steno-trainer | `export_practice_sentences` reads `practice-words.json` (export_practice_sentences.py:157). |
+| 9 | `python -m util.export_keyboard_layout` (after step 6), `python -m util.export_practice_words`, **then** `python -m util.export_practice_sentences`, then `python -m util.export_definitions`, then `python -m util.export_lessons` | Theory Export (S8), trainer branch | steno-trainer | `export_practice_sentences` reads `practice-words.json` (export_practice_sentences.py:157); `export_lessons` reads its Keypress Groups from `realization_report.json`, not `keypress_groups.json` (export_lessons.py:267). |
 | opt | `python -m util.check_conjugation_disambiguation_order` | Elicitation Phase: Answer Collection, validator | checking answers | Writes `conjugation_disambiguation_report.json` (gitignored). |
 
 **The orchestrated entrypoint.** `python dictionary.py` (no arguments) runs the whole chain
@@ -88,10 +88,11 @@ Four facts that the command list does not show:
    lexicon or layout change without step 2, every later step silently works on the old
    Word list and old strokes. `phonetic_theory.tsv` is rewritten on every run (2026-09-24,
    TODO.md B14 fixed), so it always matches the cached theory the run used — stale or not.
-3. **The realization report is read by one exporter.** `export_keyboard_layout.py:128`
-   takes the conjugation-feature legend from the tracked `realization_report.json`,
+3. **The realization report is read by two exporters.** `export_keyboard_layout.py:128`
+   takes the conjugation-feature legend from the tracked `realization_report.json`, and
+   `export_lessons.py:267` the Keypress Groups for the lesson progression,
    while the Plover dictionary and drills use the keys recomputed on the inline path. Skip
-   step 6 after a change of keypress groups and the legend disagrees with the dictionary
+   step 6 after a change of keypress groups and the legend (or the lesson progression) disagrees with the dictionary
    (item B18).
 4. **`starboard3h.json` is regenerated only deliberately.** Keyboard Layout Optimization
    (S4) is a real stage with its own command, `python -m util.optimize_keyboard`, which
@@ -151,7 +152,7 @@ manual fallback and as the explanation of what the orchestrator does internally.
    `disambiguated_theory.tsv`) by final stroke and flag any group with ≥ 2 distinct `ortho` and ≥ 2
    distinct `lemmeGramCat`, excluding `reform1990.tsv` spelling-doublet pairs.
 8. Then the exports — rebuild-table steps 8-9 (`util.export_plover_dictionary` /
-   `util.export_plover_system`, then the four steno-trainer exports) — so
+   `util.export_plover_system`, then the five steno-trainer exports) — so
    `plover_stenalgo_dictionary.json` and `steno-trainer/public/data/*.json` match the fixed
    theory.
 
@@ -183,7 +184,7 @@ The names below are used in every "Input state" and "Result" line.
 | **disambiguated theory** | `dict[Word, list[Strokes]]`: index 0 primary (with its star/hash mark), then alternate entries | `Dictionary.buildDisambiguatedTheory` dictionary.py:342 | `disambiguated_theory.tsv` (gitignored, read by nothing) |
 | **Plover dictionary** | `dict[str, str]` (RTFCRE steno → spelling); 167,719 entries | `export_plover_dictionary.main` | `plover_stenalgo_dictionary.json` (tracked) |
 | **Plover key table** | module with `KEYS`, `IMPLICIT_HYPHEN_KEYS`, `GEMINI_PR_KEYMAP` | `export_plover_system.main` | `plover_stenalgo/plover_stenalgo/_generated_keys.py` (tracked) |
-| **trainer data** | JSON: `keyboard-layout`, `practice-words`, `practice-sentences`, `definitions` | trainer exporters | `steno-trainer/public/data/*.json` (tracked) |
+| **trainer data** | JSON: `keyboard-layout`, `practice-words`, `practice-sentences`, `definitions`, `lessons` | trainer exporters | `steno-trainer/public/data/*.json` (tracked) |
 
 ---
 
@@ -249,7 +250,7 @@ Different-Lemma or Grammatical-Category Disambiguation (S7) .. python -m util.bu
 Theory Export (S8) ............................... python -m util.export_*
 ├─ Disambiguated-theory loading (recomputes the disambiguated theory) — loadPhoneticAndDisambiguatedTheory  S8.1
 ├─ Plover branch: dictionary, key table, plugin ................... S8.3-S8.5 → plover_stenalgo_dictionary.json, _generated_keys.py
-└─ Trainer branch: legend, word drill, sentences, definitions ..... S8.6-S8.9 → steno-trainer/public/data/*.json
+└─ Trainer branch: legend, word drill, sentences, definitions, lessons ..... S8.6-S8.10 → steno-trainer/public/data/*.json
 ```
 
 The two homophone problems have two mechanisms. Words that are forms of the same lemma and
@@ -1767,7 +1768,7 @@ regression.
 ## Theory Export (S8)
 
 Theory Export (S8) turns the disambiguated theory into the files people use: the **Plover branch**
-(dictionary, key table, plugin) and the **trainer branch** (four JSON files), plus two shared
+(dictionary, key table, plugin) and the **trainer branch** (five JSON files), plus two shared
 calls. Every exporter that needs the disambiguated theory loads the fingerprinted
 `DisambiguatedTheory.pickle` written by step 7 (recomputing in its own process only on a
 fingerprint miss); none reads `disambiguated_theory.tsv`. The key table (S8.4) and the trainer legend (S8.6) read only `starboard3h.json`,
@@ -1777,7 +1778,8 @@ and the legend also reads the realization report.
 
 #### Disambiguated-theory loading — loadPhoneticAndDisambiguatedTheory / loadDisambiguatedTheory (S8.1)   util/_theoryio.py:82, :58
 Called by: Plover dictionary export (S8.3) via `loadDisambiguatedTheory`; Trainer word drill (S8.7),
-Trainer sentences (S8.8) and Trainer definitions (S8.9) via `loadPhoneticAndDisambiguatedTheory`. The
+Trainer sentences (S8.8), Trainer definitions (S8.9) and Trainer lessons (S8.10) via
+`loadPhoneticAndDisambiguatedTheory`. The
 report build of the Realization Phase uses only `loadPhoneticTheory` (:52).
 Transformation: raises unless both JSON inputs exist (:92-94); `_loadDictionaryAndPhoneticTheory`
 (:41) aliases `__main__.Dictionary` (pickles written by dictionary.py's old buildOnly recorded
@@ -1794,7 +1796,7 @@ Artifacts: reads both pickles (plus `DisambiguatedTheory.pickle` on a hit), both
 
 #### Stroke rendering — renderFinalStrokesToRTFCRE (S8.2)   util/_stenorender.py:39
 Called by: Plover dictionary export (S8.3, :45), Trainer word drill (S8.7, :231), Trainer
-sentences (S8.8, :164), Trainer definitions (S8.9, :65).
+sentences (S8.8, :164), Trainer definitions (S8.9, :65), Trainer lessons (S8.10, :351).
 Transformation: per stroke, `keys = sorted(set(stroke))` (the canonical form), then:
 1. **\*/# marker stroke** (only keys 10/15) → `*`, `#` or `*#` (:43-44);
 2. **merged star/hash stroke** (reserved + phoneme keys) → `_renderMarkedStroke` (:26),
@@ -1887,3 +1889,28 @@ Transformation: groups every phonetic-theory Word by canonical base steno (`cano
 per disambiguated-theory stroke; merges identical rows (`_mergeIdenticalRows` :35); sorts by
 (−frequency, ortho); writes compact positional JSON with a shared label table.
 Result: `steno-trainer/public/data/definitions.json` (whole lexicon).
+
+#### Trainer lessons — export_lessons.main (S8.10)   util/export_lessons.py:673
+Called by: `python -m util.export_lessons`.
+Transformation: renders the FULL disambiguated theory into practice-words-shaped records
+(`buildRecordStream` :284, through Trainer word drill's (S8.7) `buildReadingsByWord` /
+`chordsWithReadings` / `format*` helpers, without its 10,000-record cap), then builds the five
+tracks in order (`buildLessons` :518), each lesson carrying its newly introduced keys/chords, French
+rule texts and a word pool: `phonemes` (keypresses ordered by the per-finger `PositionWeights`
+sum of `getStrokeCost`'s decomposition, without its shape-cost term and multi-finger discount,
+`phonemeSteps` :153, dealt round-robin over syllabic part and chunked into lessons of at most 4
+keypresses), `accord` (one lesson per gender/number Keypress Group), `verbe` (one lesson for all
+conjugation groups, then one per mood/tense, `TENSES` :68), `desambiguation` (one lesson per
+star/hash code — `*`, `#`, `*#`, then the escalated codes in `*#`-count order, `starHashCodeOf`
+:197 — pooling whole lemma-homophone clusters in rank order, never split at the cap) and
+`affixes` (a single placeholder lesson). A pool (`selectTopWords` :262) is the top 50 records by
+(−frequency, ortho, steno) among those whose phonetic keypresses, Keypress Groups and star/hash
+code are all already introduced (`eligible` :248); verbe-tense and desambiguation lessons under
+10 records are dropped (`MIN_DROP_POOL` :54 — a dropped code stays un-introduced). The Keypress
+Groups come from the realization report (`loadKeypressGroups` :267), not `keypress_groups.json`. Phoneme rules
+carry their keypress's hand group (`hand`: left/thumbs/right — the trainer groups them under "Main gauche",
+"Les pouces", "Main droite") and attach every phoneme's examples inline after that phoneme, falling back to the
+most frequent unmarked stream records when the lesson's own pool has no word for a phoneme
+(`examplesFallbackByKeypress`); spec: `docs/specs/lessons.md` §7.1.
+Result: `steno-trainer/public/data/lessons.json` (a fixed, fully generated progression: explicit
+final sorts only, so regeneration from the same inputs is byte-identical).
