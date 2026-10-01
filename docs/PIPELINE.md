@@ -1895,3 +1895,5 @@ A side analysis, not part of the S1-S8 chain and not read by any exporter: `pyth
 scopes and spelling-variant fusions in `src/affixscopes.py`. It reads `resources/LexiqueMixte.tsv`/`LexiqueSynthetic.tsv`
 and `starboard3h.json` (a lexicon or layout change means rerunning Part A) and writes under `scratch/affix-sweep-partial/`. Full
 description, commands and decisions: [AFFIX_RULES.md](AFFIX_RULES.md).
+Its optional output, applied AFTER the stable theory and leaving it unchanged, is `python -m util.export_affix_dictionary`
+(`plover_stenalgo_affix_dictionary.json`, `affix_abbreviations.tsv`; reads the committed `affix_rules.json`; last step of `python dictionary.py`).

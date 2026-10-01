@@ -71,6 +71,13 @@ merged into the last phoneme stroke. One of the two kinds of extra stroke.
 - Avoid "bare mark stroke", "bare `*#` stroke".
 - First used in: Different-Lemma or Grammatical-Category Disambiguation (S7).
 
+### Affix abbreviation
+An optional short outline for a word of the finished theory, in which an affix rule's keys replace the affix syllable(s). One per word
+(the one saving the most strokes); it exists only when its outline collides with no outline of the stable theory, keeps the word's own
+marks and never adds one. The long outline stays valid. Shipped as a separate dictionary.
+- Code: `buildAbbreviations` src/affixabbrev.py; `util/export_affix_dictionary.py` → `plover_stenalgo_affix_dictionary.json`, `affix_abbreviations.tsv`.
+- First used in: affix rule analysis (docs/AFFIX_RULES.md).
+
 ### Affix anchor
 The k=1 candidate a rule is built on: one affix syllable (position, spelling, phonology) and its carrier words, for
 example suffix `ment` /m@/. Spellings with the same sound can be fused into one anchor sharing a key (see **Affix fusion**).
