@@ -520,4 +520,4 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
   split of `rayer` forms). Decision (user, 2026-09-30): `re` (`R°`) and `ré` (`Re`) stay separate rules, no
   phonology-class merge. Check also the `raie`/`rayer` family for the same split, then rebuild per `docs/PIPELINE.md`.
 
-- **Affix pipeline integration (2026-10-01).** Systematise the on-the-fly affix steps (scope proposer, combined-simulation gate, fusion policy, adopt step, deterministic pool: 12,138/12,141/12,149 nodes in three runs, unscoped lattice nodes only) per `PLAN_2026-10-01-affix-pipeline-integration.md`; six decisions to elicit from the user first.
+- **Affix pipeline integration (2026-10-01): implemented, uncommitted.** Stage Affix Abbreviation Building (S9) per `PLAN_2026-10-01-affix-pipeline-implementation.md` (decisions file, S9a/S9b, interactive review, per-rule cache; docs in `docs/AFFIX_RULES.md`). Open: the trainer integration (separate branch, plan decision 6); the `ra`/`Re` phonology items above; re-review of the verdicts when the lexicon changes (pending items are listed by `util.build_affix_rules`).

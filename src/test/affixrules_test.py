@@ -1,4 +1,5 @@
 """Tests for src/affixrules.py (Phase 2, DESIGN_2026-09-27-affix-rule-selection.md §4)."""
+import src.affixrules as R
 from src.affixes import RULE, SUFFIX, Candidate, Carrier, CarrierResult, Slot, WordRecord
 from src.affixrules import (
     Rule, buildCandidateRule, candidateKey, childrenIndex, descendantsOf, exclusionCountOf,
@@ -54,12 +55,12 @@ class TestD5LongestFormWins:
 
 class TestProxyScoreAndRuleBuilding:
     def _rootAndChild(self):
-        carriers = [Carrier(rec(f"w{i}bilité", [(1,), (2,), (3,), (4,)]), 2, 2, f"w{i}b")
+        carriers = [Carrier(rec(f"w{i}bilité", [(1,), (2,), (3,), (4,)], freq=100.0), 2, 2, f"w{i}b")
                     for i in range(6)]
         root = Candidate(SUFFIX, 2, "li.te", "lité", carriers=carriers)
         childCarriers = [Carrier(c.rec, 1, 3, "stem") for c in carriers]
         child = Candidate(SUFFIX, 3, "i.li.te", "·ilité", carriers=childCarriers,
-                           grownFromKey=candidateKey(root))
+                           grownFromKey=candidateKey(root), isScoped=True)
         return root, child
 
     def test_adding_a_beneficial_descendant_raises_the_score(self):
@@ -94,7 +95,7 @@ def _exactRule(cand, gain):
 
 
 def _words(n, prefix="w"):
-    return [rec(f"{prefix}{i}ement", [(100 + _idx[0],), (2,), (3,)]) for i in range(n)]
+    return [rec(f"{prefix}{i}ement", [(100 + _idx[0],), (2,), (3,)], freq=100.0) for i in range(n)]
 
 
 class TestTerritory:
@@ -137,7 +138,6 @@ class TestTerritory:
         assert [(k.skippedRoot, k.selectedRoot) for k in result.overlapSkips] == [("ment", "·°ment")]
 
     def test_a_grown_node_is_never_a_rule_root(self, monkeypatch):
-        monkeypatch.setattr("src.affixscopes.SCOPES", {})   # `ment` is a scoped anchor otherwise
         import src.affixrules as R
         from src.affixes import poolCarriers
 
@@ -150,7 +150,7 @@ class TestTerritory:
         ws = _words(10)
         ment = Candidate(SUFFIX, 1, "m@", "ment", carriers=[Carrier(w, 2, 1, "s") for w in ws], isAnchor=True)
         grown = Candidate(SUFFIX, 2, "°.m@", "·°ment", carriers=[Carrier(w, 1, 2, "s") for w in ws],
-                          grownFromKey=candidateKey(ment), rootKey=candidateKey(ment))
+                          grownFromKey=candidateKey(ment), rootKey=candidateKey(ment), isScoped=True)
         cands = {candidateKey(c): c for c in (ment, grown)}
         result = R.selectRules(cands, None, None, [], budget=5)
         assert [r.root.ortho for r in result.selected] == ["ment"]
@@ -165,13 +165,7 @@ class TestTerritory:
 
 
 class TestVariantRivals:
-    def _setup(self, monkeypatch, scores):
-        import src.affixrules as R
-
-        def fakeChoose(rule, pk, ctx, keypresses):
-            rule.exactDone, rule.keys, rule.score = True, (1,), scores[rule.root.ortho]
-
-        monkeypatch.setattr(R, "chooseRuleKeypress", fakeChoose)
+    def _cands(self):
         ments, mants = _words(5), _words(3, "y")
         ment = Candidate(SUFFIX, 1, "m@", "ment", freq=50.0, isAnchor=True,
                          carriers=[Carrier(w, 2, 1, "s") for w in ments])
@@ -180,28 +174,38 @@ class TestVariantRivals:
         merged = Candidate(SUFFIX, 1, "m@", "mant|ment", freq=80.0, isAnchor=True, isGeneralized=True,
                            carriers=ment.carriers + mant.carriers,
                            mergeParts=[candidateKey(ment), candidateKey(mant)])
-        return {candidateKey(c): c for c in (ment, mant, merged)}, R
+        return {candidateKey(c): c for c in (ment, mant, merged)}
 
-    def test_merged_anchor_replaces_its_parts_when_it_scores_at_least_the_main(self, monkeypatch):
-        monkeypatch.setattr("src.affixscopes.SCOPES", {})   # the engine's own rival test, not the decided verdicts
-        cands, R = self._setup(monkeypatch, {"ment": 100.0, "mant": 40.0, "mant|ment": 100.0})
-        kept, decisions = R.resolveVariantRivals(cands, None, None, [])
+    @staticmethod
+    def _verdict(verdict):
+        from src.affixdecisions import AnchorDecision, Decisions
+        return Decisions([AnchorDecision(SUFFIX, "mant|ment", "m@", verdict)])
+
+    def test_a_fused_verdict_replaces_the_parts_by_the_merge(self):
+        cands = self._cands()
+        kept, outcomes = R.resolveVariantRivals(cands, self._verdict("fused"))
         assert [cands[k].ortho for k in kept] == ["mant|ment"]
-        assert [d.outcome for d in decisions] == ["fused"]
+        assert [(d.outcome, d.pending) for d in outcomes] == [("fused", False)]
 
-    def test_merged_anchor_is_dropped_when_it_scores_lower(self, monkeypatch):
-        cands, R = self._setup(monkeypatch, {"ment": 100.0, "mant": 40.0, "mant|ment": 99.0})
-        kept, decisions = R.resolveVariantRivals(cands, None, None, [])
+    def test_an_apart_verdict_keeps_the_parts(self):
+        cands = self._cands()
+        kept, outcomes = R.resolveVariantRivals(cands, self._verdict("apart"))
         assert sorted(cands[k].ortho for k in kept) == ["mant", "ment"]
-        assert [d.outcome for d in decisions] == ["apart"]
+        assert [(d.outcome, d.pending) for d in outcomes] == [("apart", False)]
 
-    def test_group_outside_the_top_is_dropped_out_of_reach(self, monkeypatch):
-        monkeypatch.setattr("src.affixscopes.SCOPES", {})   # the engine's own rival test, not the decided verdicts
-        cands, R = self._setup(monkeypatch, {"ment": 100.0, "mant": 40.0, "mant|ment": 100.0})
-        monkeypatch.setattr(R, "RIVAL_RESOLVE_TOP", 0)
-        kept, decisions = R.resolveVariantRivals(cands, None, None, [])
+    def test_an_undecided_merge_is_apart_and_pending(self):
+        from src.affixdecisions import Decisions
+        cands = self._cands()
+        kept, outcomes = R.resolveVariantRivals(cands, Decisions())
         assert sorted(cands[k].ortho for k in kept) == ["mant", "ment"]
-        assert [d.outcome for d in decisions] == ["outOfReach"]
+        assert [(d.outcome, d.pending) for d in outcomes] == [("apart", True)]
+
+    def test_a_merge_with_one_more_spelling_is_a_different_undecided_key(self):
+        from src.affixdecisions import AnchorDecision, Decisions
+        cands = self._cands()
+        stale = Decisions([AnchorDecision(SUFFIX, "man|mant|ment", "m@", "fused")])   # the old exact set
+        kept, outcomes = R.resolveVariantRivals(cands, stale)
+        assert [(d.outcome, d.pending) for d in outcomes] == [("apart", True)]
 
 
     def test_swap_never_brings_in_a_mate_of_a_rule_that_stays(self):

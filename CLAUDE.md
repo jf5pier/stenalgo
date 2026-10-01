@@ -89,11 +89,20 @@ python -m util.export_practice_sentences
 python -m util.export_definitions
 # Prerequisites: the export_practice_words inputs. Outputs: steno-trainer/public/data/definitions.json.
 
-python -m util.export_affix_dictionary
-# Optional affix abbreviations on top of the finished theory (the theory is unchanged). Prerequisites: both pickles,
-# the committed affix_rules.json. Outputs: plover_stenalgo_affix_dictionary.json, affix_abbreviations.tsv.
+python -m util.build_affix_rules             # Affix Abbreviation Building (S9a), optional layer after S8
+# Prerequisites: both pickles, starboard3h.json, the committed affix_decisions.json (the user's fusion/growth verdicts).
+# Outputs: affix_rules.json, affix_rules_report.md, AffixSelection.pickle (gitignored cache: absent = full ~25 min
+# selection; present = reused, or reselected from its cached rule evaluations when the decisions changed; rm it after any
+# lexicon or layout change). Asks nothing: undecided items get the safe default and are listed as PENDING.
 
-python dictionary.py                         # the orchestrator over everything from S2 to S8
+python -m util.review_affix_rules            # hand-run, interactive: decides the PENDING affix items (y/n/s/q), writes
+                                             # affix_decisions.json after every answer; then rerun util.build_affix_rules
+
+python -m util.export_affix_dictionary       # Affix Abbreviation Building (S9b)
+# Prerequisites: both pickles, the committed affix_rules.json. Outputs: plover_stenalgo_affix_dictionary.json,
+# affix_abbreviations.tsv.
+
+python dictionary.py                         # the orchestrator over everything from S2 to S9
 # Prerequisites: as above (skips nothing; aborts on the first failing step).
 # Outputs: all of the S2-S8 outputs above, in dependency order; per-step wall times
 # appended to pipeline_timings.log (gitignored).
@@ -107,13 +116,13 @@ the Ngram toolbox (`python -m util.ngram_data download|extract-lexique|scan|quer
 `googlebooks-fre-1grams/`), the variant-set builder (`python -m util.build_spelling_variants`
 — emits the draft `resources/spellingVariants.tsv`; discovered sets never auto-activate),
 and the Synthetic pruner (`python -m util.prune_spelling_variants`, dry-run by default),
-and the affix-rule analysis (`python -m util.affix_scan`, decided scopes in `src/affixscopes.py`, see `docs/AFFIX_RULES.md`).)
+and the affix-rule decisions (`affix_decisions.json`, see `docs/AFFIX_RULES.md`).)
 
 ## Architecture
 
 **Full reference: `docs/PIPELINE.md`** (call graph, rebuild order, dataset states, the
 "Recomputing after a fix" checklist) and **`docs/GLOSSARY.md`** (canonical vocabulary).
-Architecture and design rationale: `docs/ARCHITECTURE.md`. The eight stages:
+Architecture and design rationale: `docs/ARCHITECTURE.md`. The nine stages:
 
 1. **Lexicon Building (S1)** — `python lexique.py` → `resources/LexiqueMixte.tsv` (136,203 rows); enforces `resources/spellingVariants.tsv` (one canonical spelling per variant set; `src/spellingvariants.py` hooks reconcile both the lemme normalization and the 1990-reform ortho rewrites, so the canonical may sit on either side of a reform pair)
 2. **Synthetic Lexicon Building (S2)** — `util/completeVerbParadigms.py` etc., run converged by `python -m util.build_synthetic_lexicon` (which the `python dictionary.py` orchestrator calls) → `resources/LexiqueSynthetic.tsv`
@@ -123,6 +132,7 @@ Architecture and design rationale: `docs/ARCHITECTURE.md`. The eight stages:
 6. **Same-Lemma and Grammatical-Category Disambiguation (S6)** — three phases: Elicitation (`python -m src.elicitation --ask` / `--resolve`), Grouping (`python -m util.build_keypress_groups`), Realization (feature discriminating strokes; inline in `Dictionary.buildDisambiguatedTheory` + `python -m util.build_realization_report`)
 7. **Different-Lemma or Grammatical-Category Disambiguation (S7)** — star/hash marks (`decideStarHashMark` rule stack), composed on the phonetic theory by `python -m util.build_disambiguated_theory` → the disambiguated theory (`disambiguated_theory.tsv`)
 8. **Theory Export (S8)** — Plover (`util/export_plover_*`) and steno-trainer (`util/export_*`) branches; nothing reads `disambiguated_theory.tsv`, every exporter recomputes the disambiguated theory via `util/_theoryio.py`
+9. **Affix Abbreviation Building (S9)** — optional layer after S8, the theory is unchanged: S9a `util/build_affix_rules.py` selects 30 affix rules from the committed verdicts `affix_decisions.json` (cache `AffixSelection.pickle`; `util/review_affix_rules.py` is the hand-run interactive review of the pending decisions), S9b `util/export_affix_dictionary.py` writes the abbreviation dictionary; see `docs/AFFIX_RULES.md`
 
 Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whenever they exist and never checks them against the lexicon or layout (`rm -f *.pickle` after any lexicon or layout change — `DisambiguatedTheory.pickle`, unlike the two, IS fingerprint-checked against its inputs (md5s of the lexicons, `starboard3h.json`, `keypress_groups.json`, `resolved_press_sets.json`) and reloads only on a match, so it needs no manual rm; the Synthetic Lexicon Building (S2) wrapper deletes and rebuilds the pickles itself for rows its appenders add, but hand-made lexicon or layout edits remain the caller's responsibility; the orchestrator aborts on the first failing step). Editing `resources/spellingVariants.tsv` or `resources/reform1990.tsv` counts as a lexicon change: rerun `python lexique.py`, prune the Synthetic file (`python -m util.prune_spelling_variants --apply`), then rebuild (the dropped spellings must not survive in `LexiqueSynthetic.tsv`; the S2 appenders read through the same choke point, so a dropped spelling that coincides with a conjugated form of a kept verb — `boite`/`boiter` — stays exempt, see `isDroppedOrthoRow`). The NOM/ADJ cross-checkers need the external Morphalou 3.1 CSV (see `docs/PIPELINE.md` Synthetic Lexicon Building (S2)). The legacy discriminator path (`buildDiscriminatorSelection`, `satOptimizeDiscriminator`, `assignDiscriminatorKeypresses`) no longer runs: those functions are gone; `src/featureextractor.py` feeds only Synthetic Lexicon Building (S2)'s gating and the `ambiguitychecker` diagnostic, and of `src/greedyoptimizer.py` only `GRAMCAT_PRIORITY` is live (category-priority rule (R6)). Suspected bugs are listed in `TODO.md` ("Suspected bugs").
 
@@ -143,12 +153,13 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 
 ## Verification approach
 
-- `pytest src/test/` must pass after any `.py` change (740 tests at the time of writing; the 717 of main plus the affix branch).
+- `pytest src/test/` must pass after any `.py` change (748 tests at the time of writing; the 717 of main plus the affix branch).
 - Behaviour-preserving changes are proven by a full rebuild following the rebuild table in
   `docs/PIPELINE.md`, comparing the md5s of `phonetic_theory.tsv`, `disambiguated_theory.tsv`,
   `resolved_press_sets.json`, `keypress_groups.json`, `realization_report.json`,
   `plover_stenalgo_dictionary.json` and `steno-trainer/public/data/*.json` against a
-  pre-change baseline — they must be identical.
+  pre-change baseline — they must be identical. After a change that reaches the affix layer (S9) also compare
+  `affix_rules.json`, `affix_rules_report.md`, `plover_stenalgo_affix_dictionary.json` and `affix_abbreviations.tsv`.
 - The hand-run ambiguity report (`python -m src.ambiguitychecker`, after Phonetic Theory
   Building (S5)) is the drift signal for homophone scope; its "overflow" metric counts
   lemma-homophone groups beyond the four-code budget.

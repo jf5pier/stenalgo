@@ -14,20 +14,20 @@ MEASUREMENT AND PROPOSALS ONLY -- nothing here is wired into the theory.
 """
 import heapq
 from dataclasses import dataclass, field
+from typing import Callable
 
 from src.affixbinding import (
     MAX_ALTERNATIVES, SAMPLE_CARRIERS, SPLIT_MAX_LOSS, PhonemeKeys, salientPhonemes, simScore)
 from src.affixes import (
-    Binding, Candidate, Carrier, CarrierResult, RULE, SimContext, _exceptionShare, PREFIX, isScopedAnchor,
+    Binding, Candidate, Carrier, CarrierResult, RULE, SimContext, _exceptionShare, PREFIX,
     poolCarriers, simulate, ruleKeysOverlap)
-from src.affixscopes import fusionVerdict
+from src.affixdecisions import Decisions
 from src.keyboard import Stroke
 
 RULE_BUDGET = 30
-MAX_RULE_FORMS = 6          # compute safety cap only (2026-09-28): FORM_COST carries the learnability cost
-EXCEPTION_ALPHA = 1.0
-EXCLUSION_COST = 5.0
-FORM_COST = 10.0
+EXCEPTION_ALPHA = 2.0       # the user's decided prices (2026-09-30, "setting D"): exception weight 2,
+EXCLUSION_COST = 5.0        # fallback / slot-exclusion price 5,
+FORM_COST = 100.0           # form price 100 (stroke-frequency units)
 MAX_EXCEPTION_RATE = 0.05   # 2026-09-27 (user decision): a rule's exception rate -- exceptions /
                             # (covered + exceptions) -- must not exceed this, full stop, whatever
                             # its score. Found empirically on "re": the highest-similarity key
@@ -46,12 +46,6 @@ RULE_OVERLAP_MAX = 0.5      # 2026-09-28: a rule whose carriers overlap a select
                             # SKIPPED, never merged. With one generator, only anchors are roots and
                             # merged-vs-parts rivalry is settled up front (resolveVariantRivals), so
                             # this is a safety net: expect about zero skips.
-VARIANT_GROWTH_TOLERANCE = 0.0   # U3b: a merged spelling-variant anchor replaces its parts iff its
-                                 # rule scores at least main x (1 - this): fusing costs nothing
-RIVAL_RESOLVE_TOP = 60           # only variant groups with M or its main part in the top-N anchors
-                                 # by proxy upper bound get the (expensive) exact comparison
-REBIND_MAX_LOSS = 0.10
-REBIND_ITERATIONS = 3
 
 # Word exceptions (§4.3): collision fallbacks only. keyOverlap/illegalChord go standalone instead
 # (§4.2) and are never counted here.
@@ -137,43 +131,10 @@ class Rule:
 def buildCandidateRule(
     root: Candidate, childrenIdx: dict[tuple[str, int, str, str], list[Candidate]],
 ) -> Rule:
-    """§4.4 steps 1-3: greedily add the descendant that most increases the proxy score, up to
-    `MAX_RULE_FORMS`. No keyboard evaluation here -- cheap enough to run for every anchor. Call it
-    for anchors only (D4: a grown node is only ever a form of its anchor's rule)."""
-    if isScopedAnchor(root):
-        # decided scope (src/affixscopes.py): every listed form, no greedy choice, in the table's order
-        forms = [root] + [c for c in descendantsOf(root, childrenIdx) if c.isScoped]
-        return Rule(root.position, root, forms, score=proxyScore(root.position, forms))
-    return _greedyForms(root, descendantsOf(root, childrenIdx))
-
-
-def _greedyForms(root: Candidate, remaining: list[Candidate]) -> Rule:
-    forms = [root]
-    # A candidate can raise the score by at most its own sum(f x span) (pooling never gains more,
-    # and extra carriers can only add collisions), and must beat FORM_COST to be worth a form --
-    # so anything at or below that is skipped without changing the result, which saves most of
-    # the O(subtree x forms x carriers) work on big anchors.
-    # Branch and bound on the same fact: candidates are tried in descending bound order and the
-    # scan stops once no remaining bound (minus FORM_COST) can beat the best gain found. Ties go
-    # to the earliest original position, exactly as the plain scan did.
-    scored = [(sum(x.rec.frequency * x.span for x in c.carriers), i, c) for i, c in enumerate(remaining)]
-    pending = sorted((t for t in scored if t[0] > FORM_COST), key=lambda t: (-t[0], t[1]))
-    bestScore = proxyScore(root.position, forms)
-    while pending and len(forms) < MAX_RULE_FORMS:
-        best: tuple[float, int, int] | None = None   # (score, -origIndex, pendingPos)
-        for pos, (bound, origIdx, cand) in enumerate(pending):
-            if best is not None and bound - FORM_COST + bestScore < best[0]:
-                break
-            s = proxyScore(root.position, forms + [cand])
-            if best is None or (s, -origIdx) > (best[0], best[1]):
-                best = (s, -origIdx, pos)
-        assert best is not None
-        s, _neg, pos = best
-        if s <= bestScore:
-            break
-        forms.append(pending.pop(pos)[2])
-        bestScore = s
-    return Rule(root.position, root, forms, score=bestScore)
+    """A rule = its anchor plus the decided growth forms (`affix_decisions.json`), in the table's order. No
+    growth without a verdict: an undecided anchor is a rule of the anchor alone."""
+    forms = [root] + [c for c in descendantsOf(root, childrenIdx) if c.isScoped]
+    return Rule(root.position, root, forms, score=proxyScore(root.position, forms))
 
 
 def ruleExclusions(rule: Rule) -> int:
@@ -185,7 +146,7 @@ def resolveFallbacks(
     rule: Rule, keys: Stroke, carriers: list[Carrier], ctx: SimContext,
 ) -> tuple[list[Carrier], int]:
     """A carrier of a scoped form (span > 1) that gains nothing under `keys` reverts to the anchor alone
-    (the user's "fallback"; `affixscopes`). Returns the carriers with those replaced and their count; a
+    (the user's "fallback"; `affixdecisions`). Returns the carriers with those replaced and their count; a
     rule without scoped forms is returned untouched, without simulating."""
     if not any(f.isScoped for f in rule.forms):
         return carriers, 0
@@ -251,7 +212,7 @@ def _exceptionRateFloor(
     for (neighbour, single), n in groups.items():
         if neighbour is None:
             continue   # noNeighbour: neither a gain candidate nor an exception
-        if ruleKeysOverlap(neighbour, keys) or not ctx.isLegal(tuple(sorted(set(neighbour) | keySet))):
+        if ruleKeysOverlap(neighbour, keys, ctx.partialOverlap) or not ctx.isLegal(tuple(sorted(set(neighbour) | keySet))):
             if single or trapKey:
                 trapped += n   # standaloneTrap
             else:
@@ -425,14 +386,13 @@ class OverlapSkip:
 @dataclass
 class RivalDecision:
     """One `resolveVariantRivals` verdict on a merged spelling-variant anchor (reported)."""
+    position: str
     merged: str
+    phono: str
     parts: list[str]
     newConflictFreq: float
-    mergedScore: float | None = None
-    mainScore: float | None = None
-    mergedForms: list[str] = field(default_factory=list)
-    mainForms: list[str] = field(default_factory=list)
-    outcome: str = ""    # "fused" (parts dropped), "apart" (merge dropped), "outOfReach" (merge dropped)
+    outcome: str = ""      # "fused" (parts dropped) or "apart" (merge dropped)
+    pending: bool = False  # no verdict in affix_decisions.json: "apart" by default
 
 
 @dataclass
@@ -453,66 +413,29 @@ def _upperBound(rule: Rule) -> float:
 
 
 def resolveVariantRivals(
-    cands: dict[tuple[str, int, str, str], Candidate], pk: PhonemeKeys, ctx: SimContext,
-    keypresses: list[Stroke], ruleCache: dict[tuple[str, int, str, str], Rule] | None = None,
+    cands: dict[tuple[str, int, str, str], Candidate], decisions: Decisions,
 ) -> tuple[list[tuple[str, int, str, str]], list[RivalDecision]]:
-    """U3b: a merged spelling-variant anchor M (`ment|mant`) and its parts are rivals, never a
-    family -- settle it before selection. Within reach (M or its main = largest part is in the top
-    `RIVAL_RESOLVE_TOP` anchors by proxy upper bound), both rules get their exact keypress
-    evaluation; M replaces ALL its parts iff it has a legal key and scores at least
-    main x (1 - VARIANT_GROWTH_TOLERANCE) (fusing costs the main affix nothing), else the parts
-    stay and M is dropped. Out of reach, M is dropped. Rules land in `ruleCache` (evaluated once)."""
-    idx = childrenIndex(cands)
-    cache = ruleCache if ruleCache is not None else {}
-
-    def getRule(key: tuple[str, int, str, str]) -> Rule:
-        r = cache.get(key)
-        if r is None:
-            r = cache[key] = buildCandidateRule(cands[key], idx)
-        return r
-
+    """A merged spelling-variant anchor M (`ment|mant`) and its parts are rivals, never a family: the
+    user's verdict on M (`affix_decisions.json`) settles it before selection. "fused": M replaces ALL its
+    parts; "apart": the parts stay and M is dropped. A merge with no verdict is undecided: it behaves as
+    "apart" and is reported `pending`. Returns the remaining anchors and one decision per merge."""
     anchors = anchorKeys(cands)
-    ub = {k: _upperBound(getRule(k)) for k in anchors}
-    top = set(sorted(anchors, key=lambda k: -ub[k])[:RIVAL_RESOLVE_TOP])
     dropped: set[tuple[str, int, str, str]] = set()
-    decisions: list[RivalDecision] = []
+    outcomes: list[RivalDecision] = []
     for mkey in anchors:
         m = cands[mkey]
         parts = [cands[k] for k in m.mergeParts if k in cands]
         if not parts:
             continue
-        main = max(parts, key=lambda p: (p.freq, p.ortho))
-        mainKey = candidateKey(main)
-        dec = RivalDecision(m.ortho, [p.ortho for p in parts], m.newConflictFreq)
-        decisions.append(dec)
-        verdict = fusionVerdict((m.position, m.ortho, m.phono), [(p.position, p.ortho, p.phono) for p in parts])
+        verdict = decisions.fusionVerdict(m.position, m.ortho, m.phono)
+        dec = RivalDecision(m.position, m.ortho, m.phono, [p.ortho for p in parts], m.newConflictFreq, outcome=verdict,
+                            pending=not decisions.isDecidedMerge(m.position, m.ortho, m.phono))
+        outcomes.append(dec)
         if verdict == "fused":
             dropped.update(candidateKey(p) for p in parts)
-            dec.outcome = "fused"
-            continue
-        if verdict == "apart":
-            dropped.add(mkey)
-            dec.outcome = "apart"
-            continue
-        if mkey not in top and mainKey not in top:
-            dropped.add(mkey)
-            dec.outcome = "outOfReach"
-            continue
-        rm, rmain = getRule(mkey), getRule(mainKey)
-        for r in (rm, rmain):
-            if not r.exactDone:
-                chooseRuleKeypress(r, pk, ctx, keypresses)
-        mainScore = rmain.score if rmain.keys is not None else 0.0
-        dec.mergedScore, dec.mainScore = (rm.score if rm.keys is not None else None), mainScore
-        dec.mergedForms = [f.ortho for f in rm.forms]
-        dec.mainForms = [f.ortho for f in rmain.forms]
-        if rm.keys is not None and rm.score >= mainScore * (1 - VARIANT_GROWTH_TOLERANCE):
-            dropped.update(candidateKey(p) for p in parts)
-            dec.outcome = "fused"
         else:
             dropped.add(mkey)
-            dec.outcome = "apart"
-    return [k for k in anchors if k not in dropped], decisions
+    return [k for k in anchors if k not in dropped], outcomes
 
 
 def selectRules(
@@ -520,6 +443,7 @@ def selectRules(
     keypresses: list[Stroke], budget: int = RULE_BUDGET, curveLength: int = 40,
     anchors: list[tuple[str, int, str, str]] | None = None,
     ruleCache: dict[tuple[str, int, str, str], Rule] | None = None,
+    evaluate: Callable[[Rule], None] | None = None,
 ) -> SelectionResult:
     """§5: lazy greedy over a 3-stage heap (raw upper bound -> proxy marginal -> exact marginal),
     each stage recomputed fresh against the current selection before being trusted, so a root is
@@ -529,7 +453,9 @@ def selectRules(
 
     Roots are `anchors` (default: every `isAnchor` pool node; pass `resolveVariantRivals`' answer
     to settle merged-vs-parts first) -- a grown node is only ever a form of its anchor's rule (D4).
-    A root overlapping a selected rule by `RULE_OVERLAP_MAX` is skipped, never merged."""
+    A root overlapping a selected rule by `RULE_OVERLAP_MAX` is skipped, never merged.
+    `evaluate(rule)` replaces `chooseRuleKeypress` as the exact evaluation (a caller with cached evaluations restores
+    them there, at the very point a fresh evaluation would run, so the selection order is the same as without a cache)."""
     idx = childrenIndex(cands)
     ruleCache = ruleCache if ruleCache is not None else {}
     roots = anchors if anchors is not None else anchorKeys(cands)
@@ -572,7 +498,10 @@ def selectRules(
             if marg <= 0:
                 continue
             if key not in exactEvaluated:
-                chooseRuleKeypress(rule, pk, ctx, keypresses)
+                if evaluate is not None:
+                    evaluate(rule)
+                else:
+                    chooseRuleKeypress(rule, pk, ctx, keypresses)
                 exactEvaluated.add(key)
             if rule.keys is None:
                 continue  # no legal/positive keypress at all -- dead end, drop for good

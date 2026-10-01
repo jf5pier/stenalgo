@@ -9,6 +9,10 @@ PhoneticTheory.pickle
 DisambiguatedTheory.pickle
 AugTheory.pickle*
 
+# Affix rule selection cache (util/build_affix_rules.py): per-rule evaluations; rm to force a full recompute
+AffixSelection.pickle
+AffixSelection.pickle.tmp
+
 # Local pipeline step timings (util/_timing.py, appended per run)
 pipeline_timings.log
 
