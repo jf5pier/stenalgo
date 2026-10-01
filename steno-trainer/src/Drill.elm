@@ -1,4 +1,4 @@
-module Drill exposing (PracticeWord, Segment, State, applyStroke, currentSegmentIndex, currentWord, decoder, expectedStroke, init, nextWord, reshuffle, sentenceDecoder)
+module Drill exposing (PracticeWord, Segment, State, applyStroke, currentSegmentIndex, currentWord, decoder, expectedStroke, init, nextWord, reshuffle, sentenceDecoder, wordDecoder)
 
 {-| The drill engine: a shuffled walk through the word list (loaded already
 frequency-ordered by `util/export_practice_words.py`, but drilled in a
