@@ -1,0 +1,17 @@
+c51caa54979d30e8cbe71dd20501648d  phonetic_theory.tsv
+abc091484b5daf2d65363d65f151d4a6  disambiguated_theory.tsv
+4cec9109c7eac0e691d80b0cbeac8462  resolved_press_sets.json
+70923564820eb1c574491b4d85fdec6f  keypress_groups.json
+024bfbd6906037a951b13060bdf08bc9  realization_report.json
+fa91b8e179a8d5166385cfce14d694f0  plover_stenalgo_dictionary.json
+ca7980e2212f65b1a5d1701e9488fce4  steno-trainer/public/data/definitions.json
+a99d11edc819aebf506722276047ed3c  steno-trainer/public/data/keyboard-layout.json
+a012b5d1734fcc3f27c7fa7d9648885e  steno-trainer/public/data/practice-sentences.json
+592c9108d33d2d4ddd1f6dc065fd4e6f  steno-trainer/public/data/practice-words.json
+b968c5b5918c75d8f24fc892f2259449  affix_rules.json
+c379b34f9fe8f5372d8562cad1982753  affix_rules_report.md
+625f998a6014a6d600c4a3d8589705a0  plover_stenalgo_affix_dictionary.json
+d903fd4131db0e2dd616f440cbcd8c8f  affix_abbreviations.tsv
+f38fa6ed3f8dbe9384ba822c595e0757  resources/LexiqueMixte.tsv
+371fd4e8f6098b6c04af73170f5fb880  resources/LexiqueSynthetic.tsv
+578d39899c077ce1be6c88876e0bdf1c  starboard3h.json

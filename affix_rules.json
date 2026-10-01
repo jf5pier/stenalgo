@@ -1,6 +1,17 @@
 [
  {
   "rank": 1,
+  "position": "prefix",
+  "ortho": "a",
+  "phono": "a",
+  "keys": [
+   8,
+   11,
+   18
+  ]
+ },
+ {
+  "rank": 2,
   "position": "suffix",
   "ortho": "ment",
   "phono": "m@",
@@ -11,7 +22,7 @@
   ]
  },
  {
-  "rank": 2,
+  "rank": 3,
   "position": "prefix",
   "ortho": "am|an|ant|em|en|ench|enh|ham|han|hen",
   "phono": "@",
@@ -22,7 +33,17 @@
   ]
  },
  {
-  "rank": 3,
+  "rank": 4,
+  "position": "prefix",
+  "ortho": "co+col+com+con+cor",
+  "phono": "kO+kOR+kOl+kOm+ko+koR+k§",
+  "keys": [
+   9,
+   19
+  ]
+ },
+ {
+  "rank": 5,
   "position": "prefix",
   "ortho": "re|reh",
   "phono": "R°",
@@ -32,7 +53,7 @@
   ]
  },
  {
-  "rank": 4,
+  "rank": 6,
   "position": "suffix",
   "ortho": "ccion|cion|cyon|sion|ssion|tion|tions",
   "phono": "sj§",
@@ -43,7 +64,7 @@
   ]
  },
  {
-  "rank": 5,
+  "rank": 7,
   "position": "prefix",
   "ortho": "é",
   "phono": "e",
@@ -53,7 +74,7 @@
   ]
  },
  {
-  "rank": 6,
+  "rank": 8,
   "position": "prefix",
   "ortho": "ain|hin|im|in",
   "phono": "5",
@@ -64,7 +85,7 @@
   ]
  },
  {
-  "rank": 7,
+  "rank": 9,
   "position": "prefix",
   "ortho": "de",
   "phono": "d°",
@@ -75,7 +96,7 @@
   ]
  },
  {
-  "rank": 8,
+  "rank": 10,
   "position": "prefix",
   "ortho": "ai|aî|e|ei|hai|he|hê|é",
   "phono": "E",
@@ -86,7 +107,7 @@
   ]
  },
  {
-  "rank": 9,
+  "rank": 11,
   "position": "prefix",
   "ortho": "de|des|dé|déh",
   "phono": "de",
@@ -97,7 +118,7 @@
   ]
  },
  {
-  "rank": 10,
+  "rank": 12,
   "position": "suffix",
   "ortho": "cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé",
   "phono": "se",
@@ -108,7 +129,7 @@
   ]
  },
  {
-  "rank": 11,
+  "rank": 13,
   "position": "suffix",
   "ortho": "ter",
   "phono": "te",
@@ -119,7 +140,7 @@
   ]
  },
  {
-  "rank": 12,
+  "rank": 14,
   "position": "prefix",
   "ortho": "au",
   "phono": "o",
@@ -130,7 +151,7 @@
   ]
  },
  {
-  "rank": 13,
+  "rank": 15,
   "position": "suffix",
   "ortho": "té",
   "phono": "te",
@@ -141,7 +162,7 @@
   ]
  },
  {
-  "rank": 14,
+  "rank": 16,
   "position": "suffix",
   "ortho": "der|dé|dée",
   "phono": "de",
@@ -152,7 +173,7 @@
   ]
  },
  {
-  "rank": 15,
+  "rank": 17,
   "position": "suffix",
   "ortho": "ner|nez|nner|nnée|née|nées",
   "phono": "ne",
@@ -163,7 +184,7 @@
   ]
  },
  {
-  "rank": 16,
+  "rank": 18,
   "position": "prefix",
   "ortho": "ra|rai|raie|re|rhé|ré|réh",
   "phono": "Re",
@@ -174,7 +195,7 @@
   ]
  },
  {
-  "rank": 17,
+  "rank": 19,
   "position": "prefix",
   "ortho": "pa",
   "phono": "pa",
@@ -185,17 +206,17 @@
   ]
  },
  {
-  "rank": 18,
+  "rank": 20,
   "position": "prefix",
-  "ortho": "par",
-  "phono": "paR",
+  "ortho": "ma",
+  "phono": "ma",
   "keys": [
-   8,
-   19
+   3,
+   4
   ]
  },
  {
-  "rank": 19,
+  "rank": 21,
   "position": "prefix",
   "ortho": "e|hi|hy|i|y|î",
   "phono": "i",
@@ -205,7 +226,7 @@
   ]
  },
  {
-  "rank": 20,
+  "rank": 22,
   "position": "prefix",
   "ortho": "sa|sah",
   "phono": "sa",
@@ -215,7 +236,7 @@
   ]
  },
  {
-  "rank": 21,
+  "rank": 23,
   "position": "prefix",
   "ortho": "o",
   "phono": "o",
@@ -226,7 +247,7 @@
   ]
  },
  {
-  "rank": 22,
+  "rank": 24,
   "position": "prefix",
   "ortho": "pro|proh|prô",
   "phono": "pRo",
@@ -237,7 +258,7 @@
   ]
  },
  {
-  "rank": 23,
+  "rank": 25,
   "position": "suffix",
   "ortho": "ver",
   "phono": "ve",
@@ -248,7 +269,7 @@
   ]
  },
  {
-  "rank": 24,
+  "rank": 26,
   "position": "prefix",
   "ortho": "ce|sce|se",
   "phono": "s°",
@@ -258,7 +279,7 @@
   ]
  },
  {
-  "rank": 25,
+  "rank": 27,
   "position": "suffix",
   "ortho": "rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée",
   "phono": "Re",
@@ -269,7 +290,7 @@
   ]
  },
  {
-  "rank": 26,
+  "rank": 28,
   "position": "prefix",
   "ortho": "pou|pu",
   "phono": "pu",
@@ -280,7 +301,7 @@
   ]
  },
  {
-  "rank": 27,
+  "rank": 29,
   "position": "prefix",
   "ortho": "de|dea|di|die|dis|dy|dî",
   "phono": "di",
@@ -291,7 +312,7 @@
   ]
  },
  {
-  "rank": 28,
+  "rank": 30,
   "position": "suffix",
   "ortho": "ser|sée|zer|zé",
   "phono": "ze",
@@ -299,27 +320,6 @@
    18,
    22,
    23
-  ]
- },
- {
-  "rank": 29,
-  "position": "suffix",
-  "ortho": "ger",
-  "phono": "Ze",
-  "keys": [
-   16,
-   24
-  ]
- },
- {
-  "rank": 30,
-  "position": "suffix",
-  "ortho": "cher",
-  "phono": "Se",
-  "keys": [
-   9,
-   24,
-   25
   ]
  }
 ]

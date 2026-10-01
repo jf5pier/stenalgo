@@ -9,9 +9,10 @@ Outputs:
 
 Run: python -m util.export_affix_dictionary
 Requires the stable theory (same inputs as util.export_plover_dictionary) and affix_rules.json, the rule list
-written by `python -m util.affix_scan --part b --sweep --partial-overlap --settings D`
-(scratch/affix-sweep-partial/D/affix-rules.json, copied to the repo root when adopted). A change of lexicon or
-layout needs the affix scan (and affix_rules.json) rerun first: the rule keys were chosen against that theory.
+written by `python -m util.build_affix_rules` (Affix Abbreviation Building, S9a; it reads the committed
+affix_decisions.json). A change of lexicon or layout needs that step rerun (`rm AffixSelection.pickle` first):
+the rule keys were chosen against that theory. This exporter only WARNS when the cache of the selection was made
+from other inputs, and skips (with a warning) a rule whose anchor is no longer in the pool.
 """
 import json
 import os
@@ -19,6 +20,7 @@ import time
 
 from src import affixes as A
 from src.affixabbrev import buildAbbreviations, loadRuleSpecs, theoryOutlines
+from src.affixdecisions import inputFingerprint
 from src.keyboard import Starboard
 from util._stenorender import renderFinalStrokesToRTFCRE
 from util._theoryio import loadPhoneticAndDisambiguatedTheory
@@ -28,6 +30,18 @@ RULES_JSON = "affix_rules.json"
 MAIN_DICTIONARY = "plover_stenalgo_dictionary.json"
 OUTPUT_DICTIONARY = "plover_stenalgo_affix_dictionary.json"
 OUTPUT_TSV = "affix_abbreviations.tsv"
+SELECTION_PICKLE = "AffixSelection.pickle"
+
+
+def warnIfSelectionIsStale() -> None:
+    """affix_rules.json carries no fingerprint (it must stay a plain list); the selection cache does."""
+    if not os.path.exists(SELECTION_PICKLE):
+        return
+    from util.build_affix_rules import fingerprintWarnings, loadStore
+    store = loadStore(SELECTION_PICKLE)
+    if store is not None:
+        for w in fingerprintWarnings(store["fingerprint"], inputFingerprint()):
+            print(f"WARNING: {w}: affix_rules.json may be stale (`rm {SELECTION_PICKLE}` and rerun util.build_affix_rules)")
 
 
 def main() -> None:
@@ -36,9 +50,8 @@ def main() -> None:
     if starboard is None:
         raise RuntimeError(f"{KEYBOARD_JSON} not found; it is a committed input -- run from the repo root.")
     if not os.path.exists(RULES_JSON):
-        raise RuntimeError(f"{RULES_JSON} not found: run the affix scan (see this module's docstring) and copy its affix-rules.json.")
-    # the rules were selected with this binding mode (src.affixes.RULE_PARTIAL_OVERLAP, docs/AFFIX_RULES.md)
-    A.RULE_PARTIAL_OVERLAP = True
+        raise RuntimeError(f"{RULES_JSON} not found: run `python -m util.build_affix_rules` first.")
+    warnIfSelectionIsStale()
 
     phonetic, disambiguated, _wordToStrokes, _wordsByOrthoLemme = loadPhoneticAndDisambiguatedTheory(starboard)
     records, skipped = A.extractRecords(phonetic, disambiguated)
@@ -79,6 +92,9 @@ def main() -> None:
           f"{stats.abbreviated} abbreviated, {stats.noOption} with no allowed form, {stats.outranked} lost a shared "
           f"outline to a more frequent spelling; strokes saved x frequency = {savedFreq:.0f} ({time.time() - t0:.0f}s).")
     print("abbreviations per rule rank:", dict(sorted(stats.byRank.items())))
+    if stats.skippedRules:
+        print(f"WARNING: rules {stats.skippedRules} skipped: their anchor is no longer in the pool "
+              f"(lexicon/layout/decisions changed): rerun util.build_affix_rules")
 
 
 if __name__ == "__main__":

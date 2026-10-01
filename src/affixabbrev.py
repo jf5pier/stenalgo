@@ -1,7 +1,7 @@
 """Optional affix abbreviations: extra short outlines for words of a STABLE, finished theory.
 
 The theory (base strokes, same-lemma feature strokes, star/hash marks) is complete without them and is never
-changed here. Each of the 30 affix rules (`affix_rules.json`, written by `util.affix_scan`) names an anchor and a
+changed here. Each of the 30 affix rules (`affix_rules.json`, written by `util.build_affix_rules`) names an anchor and a
 keypress; a carrier word gets, in addition to its long outline, a shorter one in which the rule's keys replace the
 affix syllable(s) (`src.affixes._newBase`). The long outline stays valid as a fallback for anyone who does not
 remember the rules, and the abbreviations ship as a separate, optional dictionary.
@@ -51,6 +51,7 @@ class AbbreviationStats:
     noOption: int = 0            # every form fails (no merge, no gain, or collides with the stable theory)
     outranked: int = 0           # lost the shared outline to a more frequent spelling
     byRank: dict[int, int] = field(default_factory=dict)   # rank -> abbreviations in the dictionary
+    skippedRules: list[int] = field(default_factory=list)  # ranks whose anchor is no longer in the pool (stale rules)
 
 
 def loadRuleSpecs(path: str = "affix_rules.json") -> list[RuleSpec]:
@@ -83,8 +84,9 @@ def buildAbbreviations(
     for rule in sorted(rules, key=lambda r: r.rank):
         root = pool.get((rule.position, 1, rule.phono, rule.ortho))
         if root is None:
-            raise KeyError(f"affix rule {rule.rank} anchor {(rule.position, rule.phono, rule.ortho)} is not in the pool: "
-                           "affix_rules.json is stale (rerun util.affix_scan, or the lexicon/layout changed)")
+            # safe default: a rule whose anchor vanished (lexicon or layout change) yields no abbreviations
+            stats.skippedRules.append(rule.rank)
+            continue
         forms = buildCandidateRule(root, idx).forms
         binding = Binding(rule.position, RULE, rule.keys)
         for wordIdx, options in _options(forms, root).items():
