@@ -89,6 +89,10 @@ python -m util.export_practice_sentences
 python -m util.export_definitions
 # Prerequisites: the export_practice_words inputs. Outputs: steno-trainer/public/data/definitions.json.
 
+python -m util.export_affix_dictionary
+# Optional affix abbreviations on top of the finished theory (the theory is unchanged). Prerequisites: both pickles,
+# the committed affix_rules.json. Outputs: plover_stenalgo_affix_dictionary.json, affix_abbreviations.tsv.
+
 python dictionary.py                         # the orchestrator over everything from S2 to S8
 # Prerequisites: as above (skips nothing; aborts on the first failing step).
 # Outputs: all of the S2-S8 outputs above, in dependency order; per-step wall times
@@ -102,7 +106,8 @@ the Ngram toolbox (`python -m util.ngram_data download|extract-lexique|scan|quer
 — purge is manual-only by policy; the ~5 GB v3 shards live in gitignored
 `googlebooks-fre-1grams/`), the variant-set builder (`python -m util.build_spelling_variants`
 — emits the draft `resources/spellingVariants.tsv`; discovered sets never auto-activate),
-and the Synthetic pruner (`python -m util.prune_spelling_variants`, dry-run by default).)
+and the Synthetic pruner (`python -m util.prune_spelling_variants`, dry-run by default),
+and the affix-rule analysis (`python -m util.affix_scan`, decided scopes in `src/affixscopes.py`, see `docs/AFFIX_RULES.md`).)
 
 ## Architecture
 
@@ -138,7 +143,7 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 
 ## Verification approach
 
-- `pytest src/test/` must pass after any `.py` change (717 tests at the time of writing).
+- `pytest src/test/` must pass after any `.py` change (740 tests at the time of writing; the 717 of main plus the affix branch).
 - Behaviour-preserving changes are proven by a full rebuild following the rebuild table in
   `docs/PIPELINE.md`, comparing the md5s of `phonetic_theory.tsv`, `disambiguated_theory.tsv`,
   `resolved_press_sets.json`, `keypress_groups.json`, `realization_report.json`,

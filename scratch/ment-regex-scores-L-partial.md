@@ -1,0 +1,31 @@
+# -ment regex scope scores (real simulator, keys (20, 21, 25), setting L, partial overlap True)
+
+2724 carriers whose last syllable is `ment`. `k2 words` = words given the 2-stroke form;
+`gain>0 k2` = of those, how many really gain (rest fall back). Exceptions = collision fallbacks.
+
+| scope | k2 words | kept as k2 | fallbacks (words) | fallbacks (freq) | benefit | hard exc | score, fallback free | score, fallback 5 each |
+|---|---|---|---|---|---|---|---|---|
+| BASELINE enumerated list (100 syllables) | 2623 | 2518 | 105 | 481 | 8525 | 3 | 8509 | 7984 |
+| no k=2 form (ment alone) | 0 | 0 | 0 | 0 | 4787 | 1 | 4787 | 4787 |
+| user A: (C+[eiuéû]+)? | 2562 | 2458 | 102 | 426 | 8544 | 9 | 8524 | 8014 |
+| user B: (C+[eiu]+)? | 2481 | 2405 | 76 | 85 | 8723 | 3 | 8707 | 8327 |
+| C+[eiuéû]  (single vowel) | 2322 | 2224 | 98 | 411 | 8434 | 3 | 8418 | 7928 |
+| C+[eiu]    (single vowel) | 2243 | 2171 | 72 | 71 | 8609 | 3 | 8593 | 8233 |
+| C*[eiuéû]+ (onset optional) | 2564 | 2460 | 102 | 426 | 8544 | 9 | 8524 | 8014 |
+| C+[eiuéûa]+ | 2589 | 2470 | 119 | 446 | 8606 | 3 | 8590 | 7995 |
+| C+[eiuéûaé]+ + oie/ie | 2626 | 2483 | 143 | 515 | 8524 | 3 | 8508 | 7793 |
+| C+ + any vowel letters | 2652 | 2484 | 168 | 963 | 8516 | 3 | 8500 | 7660 |
+| anything (upper bound) | 2724 | 2527 | 197 | 1032 | 8494 | 3 | 8478 | 7493 |
+
+Most frequent excluded words (named by the pattern, fall back to plain `ment`) per scope:
+- BASELINE enumerated list (100 syllables): seulement, vêtements, bâtiment, éléments, élément, sacrément, largement, ciment
+- no k=2 form (ment alone): -
+- user A: (C+[eiuéû]+)?: seulement, rarement, éléments, élément, compliments, compliment, sacrément, largement
+- user B: (C+[eiu]+)?: rarement, largement, jument, ciment, argument, parlement, bêtement, arguments
+- C+[eiuéû]  (single vowel): seulement, éléments, élément, compliments, compliment, sacrément, largement, jument
+- C+[eiu]    (single vowel): largement, jument, ciment, argument, parlement, bêtement, arguments, aliments
+- C*[eiuéû]+ (onset optional): seulement, rarement, éléments, élément, compliments, compliment, sacrément, largement
+- C+[eiuéûa]+: seulement, rarement, éléments, élément, compliments, compliment, sacrément, largement
+- C+[eiuéûaé]+ + oie/ie: seulement, vêtements, rarement, éléments, élément, compliments, compliment, sacrément
+- C+ + any vowel letters: moment, seulement, vêtements, moments, rarement, éléments, élément, compliments
+- anything (upper bound): moment, seulement, vêtements, moments, bâtiment, serment, rarement, éléments

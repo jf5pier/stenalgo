@@ -1,0 +1,18 @@
+=== Phase E3 scale report ===
+Same-lemma homophone groups (size > 1): 48373
+  ...with >= 2 distinct spellings:      48371
+Total cross-spelling combination pairs: 185354
+Distinct feature oppositions (questions): 200
+Tie oppositions (identical combinations, unresolvable by any marker): 0
+Max combination compound size:          5
+Markers ever pressed together (pairs):  71
+Singleton-opposition atom pairs:        1
+Greedy-coloring K lower bound, without pressed-together rule: 2
+Greedy-coloring K lower bound, with pressed-together rule:    6
+
+Questionnaire items: 200 (71 not fully clean)
+
+=== Elicitation Phase: questionnaire page render ===
+$ /home/jfsp/stenalgo/env/bin/python -m util.build_questionnaire_page
+wrote /home/jfsp/stenalgo/elicitation_questionnaire.html 57519 bytes
+Wrote questionnaire.json

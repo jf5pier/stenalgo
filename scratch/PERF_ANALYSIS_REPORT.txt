@@ -1,0 +1,189 @@
+================================================================================
+PERFORMANCE PROFILING REPORT: findStructuralCandidates & deriveConjugationEndingTables
+================================================================================
+
+MEASURED TIMINGS (with PYTHONHASHSEED=0, 169,695 words in theory, 80,952 strokes):
+
+Function Level:
+  deriveConjugationEndingTables: 1.135s (very fast, not the bottleneck)
+  findStructuralCandidates: 134.958s (SLOW - dominated by hotspot)
+
+Hotspot Function (within findStructuralCandidates):
+  fullFeatureSpace: 99.316s out of 134.958s (73% of total)
+  - Called 5,602 times (once per lemmeGramCat in detectUndersampledLemmas)
+  - Average per call: 17.26ms
+
+Stage 2.1 (completeVerbParadigms) Context:
+  Total S2.1 runtime: ~318s
+  endingTables + findStructuralCandidates: ~126s (39% of S2.1)
+
+================================================================================
+ROOT CAUSE ANALYSIS
+================================================================================
+
+File: src/verbparadigm.py, Lines 119-134 (fullFeatureSpace function)
+File: src/verbparadigm.py, Lines 681-739 (detectUndersampledLemmas function)
+
+PROBLEM:
+--------
+Lines 716-719 in detectUndersampledLemmas:
+  featureSpaceByLemmeGramCat: dict[LemmeGramCat, set[WordFeature]] = {
+      lemmeGramCat: fullFeatureSpace(strokeLemmeDiscriminators, lemmeGramCat)
+      for lemmeGramCat in templateByLemmeGramCat
+  }
+
+This calls fullFeatureSpace 5,602 times. Each call iterates through the ENTIRE
+strokeLemmeDiscriminators dictionary (93,048 keys) searching for entries matching
+a single lemmeGramCat.
+
+Algorithm Complexity:
+  - fullFeatureSpace scans: O(n) where n = len(strokeLemmeDiscriminators) = 93,048
+  - Called m times where m = len(templateByLemmeGramCat) = 5,602
+  - Total: O(m * n) = 5,602 * 93,048 ≈ 521 million dictionary iterations
+
+Lines 119-134 in fullFeatureSpace:
+  for (_strokes, groupLemme), wordFeatures in strokeLemmeDiscriminators.items():
+      if groupLemme != lemmeGramCat:
+          continue
+      for features in wordFeatures.values():
+          space.update(features)
+
+This is executed 5,602 times with 521M iterations total, plus 18M set.update() calls.
+
+================================================================================
+MEASURED OPTIMIZATION IMPACT
+================================================================================
+
+OPTIMIZED APPROACH:
+-------------------
+Instead of calling fullFeatureSpace 5,602 times (each doing full dict scan),
+precompute a single index grouping strokeLemmeDiscriminators by lemmeGramCat
+ONCE, then lookup values directly.
+
+Measured Performance (with monkeypatch test):
+  Original detectUndersampledLemmas: 126.6s
+  Optimized detectUndersampledLemmas: 28.3s
+  Speedup: 4.5x
+  Savings: 98.4s
+
+Correctness: ✓ All 5,351 results verified identical
+
+Full findStructuralCandidates Performance:
+  Original: 215.9s (from profiling)
+  Optimized: 30.9s (with monkeypatch)
+  Speedup: 7.0x
+  Note: Includes other phases (participle forms, finite forms, infinitive words)
+
+================================================================================
+PROPOSED FIXES (Ranked by Impact)
+================================================================================
+
+FIX #1: INDEX STROKE_LEMME_DISCRIMINATORS BY LEMME_GRAM_CAT [CRITICAL]
+--------
+
+Location: src/verbparadigm.py, detectUndersampledLemmas (lines 681-739)
+Savings: ~98s (from ~126s -> ~28s in detectUndersampledLemmas)
+         ~185s in full findStructuralCandidates (215s -> 30s)
+Complexity: Low (simple dict preprocessing)
+Output correctness: ✓ Verified identical
+
+Implementation:
+1. In detectUndersampledLemmas, after line 715 (before line 716):
+
+   # Precompute index: group by lemmeGramCat for O(1) lookup instead of O(n) scan
+   index_by_lemme: dict[LemmeGramCat, list[dict[Word, list[WordFeature]]]] = defaultdict(list)
+   for (_strokes, groupLemme), wordFeatures in strokeLemmeDiscriminators.items():
+       index_by_lemme[groupLemme].append(wordFeatures)
+
+2. Replace fullFeatureSpace calls (lines 716-719) with direct index lookup:
+
+   featureSpaceByLemmeGramCat: dict[LemmeGramCat, set[WordFeature]] = {}
+   for lemmeGramCat in templateByLemmeGramCat:
+       space: set[WordFeature] = set()
+       for wordFeatures in index_by_lemme[lemmeGramCat]:
+           for features in wordFeatures.values():
+               space.update(features)
+       featureSpaceByLemmeGramCat[lemmeGramCat] = space
+
+Alternative: Extract index-building into a helper function and call it once in
+detectUndersampledLemmas. This avoids fullFeatureSpace deprecation if it's used
+elsewhere (check callers).
+
+Callers of fullFeatureSpace (search result):
+  - detectUndersampledLemmas (line 717, only caller identified)
+
+If detectUndersampledLemmas is the only caller, fullFeatureSpace can be marked
+@deprecated or removed after applying the fix.
+
+================================================================================
+SECONDARY OPTIMIZATIONS (Lower Priority)
+================================================================================
+
+FIX #2: Cache _longestCommonSuffix results [MINOR]
+Location: src/verbparadigm.py, deriveConjugationEndingTables (line 524)
+Time: Only 0.003s out of 1.135s (<<1% of that function)
+Status: deriveConjugationEndingTables is NOT the bottleneck; skip for now
+Impact: Negligible
+
+FIX #3: Lazy evaluation of word attributes in deriveConjugationEndingTables [MINOR]
+Time: ~0.079s for _rawInfoVerbTags (7% of 1.135s function time)
+Status: Low priority, function is already fast
+Impact: Could save ~0.08s with memoization, not worth the complexity
+
+================================================================================
+SUMMARY TABLE
+================================================================================
+
+Function                          Original  Optimized  Speedup  Savings  Status
+────────────────────────────────────────────────────────────────────────────────
+deriveConjugationEndingTables      1.135s    1.135s     1.0x      0s    ✓ Fast
+findStructuralCandidates         215.9s     30.9s      7.0x    185s    ✗ Slow
+  └─ detectUndersampledLemmas    126.6s     28.3s      4.5x     98s    [FIX #1]
+    └─ fullFeatureSpace           99.3s      0.2s    496.5x     99s    [FIX #1]
+
+Pipeline Impact (S2.1: completeVerbParadigms):
+  Current endingTables+findStructuralCandidates: ~126s (39% of S2.1)
+  Optimized endingTables+findStructuralCandidates: ~28s (9% of S2.1)
+  Total S2.1 improvement: ~318s -> ~220s (30.8% reduction)
+
+================================================================================
+PROFILING ARTIFACTS CREATED
+================================================================================
+
+/home/jfsp/stenalgo/scratch/perf_struct_cprofile.py
+  Complete cProfile-based profiling of both functions
+  Outputs: perf-struct-cprof.log, perf-struct-*.prof files
+
+/home/jfsp/stenalgo/scratch/perf_struct_lineinst.py
+  Detailed instrumentation of detectUndersampledLemmas hotpath
+  Measures: loop iterations, data structure sizes, optimization impact
+  Output: perf-struct-lines.log
+
+/home/jfsp/stenalgo/scratch/perf_struct_ending_detail.py
+  Phase-by-phase breakdown of deriveConjugationEndingTables
+  Confirms function is NOT the bottleneck
+  Output: perf-struct-ending-detail.log
+
+/home/jfsp/stenalgo/scratch/perf_struct_fix_test.py
+  Monkeypatch test of FIX #1 optimization
+  Verifies: 4.5x speedup with identical output
+  Output: perf-struct-fix-test.log
+
+================================================================================
+ESTIMATED SAVINGS AFTER IMPLEMENTING FIX #1
+================================================================================
+
+Synthetic Lexicon Building (S2) overall:
+  Current S2 pipeline: ~726s
+  S2.1 (completeVerbParadigms): ~318s
+  S2.2+ : ~408s
+
+After FIX #1:
+  New S2.1: ~220s (30% reduction)
+  New S2 total: ~628s (14% reduction, ~98s savings)
+
+Full pipeline impact (assuming S2 triggers full rebuild per the code):
+  Time saved per full rebuild: ~98s
+  Rebuilds per typical workflow: Variable (per CLAUDE.md: "after lexicon or layout change")
+
+================================================================================

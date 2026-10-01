@@ -1,3 +1,5 @@
+> **Status 2026-10-01: HISTORICAL.** Kept for its reasoning. The current description is `docs/AFFIX_RULES.md`; the state is `RESUME_2026-10-01-option-c-engine.md`; the next phase (pipeline integration) is `PLAN_2026-10-01-affix-pipeline-integration.md`.
+
 # Design: affix rule lattice + budgeted rule selection (2026-09-27)
 
 **Audience: the model that implements this after a `/clear`.** The user agreed to this design

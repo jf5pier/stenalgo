@@ -71,6 +71,44 @@ merged into the last phoneme stroke. One of the two kinds of extra stroke.
 - Avoid "bare mark stroke", "bare `*#` stroke".
 - First used in: Different-Lemma or Grammatical-Category Disambiguation (S7).
 
+### Affix abbreviation
+An optional short outline for a word of the finished theory, in which an affix rule's keys replace the affix syllable(s). One per word
+(the one saving the most strokes); it exists only when its outline collides with no outline of the stable theory, keeps the word's own
+marks and never adds one. The long outline stays valid. Shipped as a separate dictionary.
+- Code: `buildAbbreviations` src/affixabbrev.py; `util/export_affix_dictionary.py` → `plover_stenalgo_affix_dictionary.json`, `affix_abbreviations.tsv`.
+- First used in: affix rule analysis (docs/AFFIX_RULES.md).
+
+### Affix anchor
+The k=1 candidate a rule is built on: one affix syllable (position, spelling, phonology) and its carrier words, for
+example suffix `ment` /m@/. Spellings with the same sound can be fused into one anchor sharing a key (see **Affix fusion**).
+- Code: `Candidate.isAnchor` src/affixes.py; `src/affixscopes.py` keys anchors by (position, spelling, phonology).
+- Not an **Anchor** in any other sense: the word is only used for affix rules.
+- First used in: affix rule analysis (docs/AFFIX_RULES.md).
+
+### Affix fallback
+A carrier that an **affix scope** names but that gains nothing under the rule's keypress (collision, no legal chord): it
+keeps the anchor alone. Counted per rule and priced `EXCLUSION_COST` (5 in sweep setting D) per word.
+- Code: `resolveFallbacks`, `Rule.fallbacks` src/affixrules.py.
+- Avoid "exclusion" for a fallback (an exclusion is a slot's excluded syllable of the generic lattice).
+
+### Affix fusion
+Spelling variants with the same sound merged into ONE anchor on one keypress (`ner|nez|nner|née...`). A fusion that contains a
+decided anchor is judged on the decided growth only: the other spellings stay anchor-only, and an unapproved fusion is dropped.
+- Code: `APPROVED_FUSIONS`, `fusionVerdict` src/affixscopes.py; `resolveVariantRivals` src/affixrules.py.
+- Avoid "merge" in new prose (the code still says `mergeParts`, "variant merge").
+
+### Affix growth form
+An affix rule's form that fuses the anchor syllable with its NEIGHBOUR syllable (before a suffix, after a prefix) on one stroke
+(k=2), for the carriers its **affix scope** selects. The anchor alone is the k=1 form. An anchor with no growth form is a
+**no-growth anchor** (`re-`, `é`, `-ter`...).
+- Code: `growScopedForms` src/affixes.py; `Candidate.isScoped`; the generic lattice (`growAffixesLattice`) for anchors without a decided scope.
+
+### Affix scope
+The decided condition selecting a growth form's carriers: the anchor syllable's spelling, a regex on the neighbour's sound
+(X-SAMPA) and/or on its spelling, all conditions required. Decided per anchor by the user; an empty list means no growth.
+- Code: `ScopeForm`, `SCOPES` src/affixscopes.py.
+- First used in: affix rule analysis (docs/AFFIX_RULES.md).
+
 ### Alternate (alternate discriminating feature set)
 One of several discriminating feature sets that each identify the same self-homograph
 spelling, one per distinct feature combination; pressing any one of them is enough. Index 0

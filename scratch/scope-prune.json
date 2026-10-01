@@ -1,0 +1,724 @@
+[
+ {
+  "rank": 1,
+  "rule": "suffix ment",
+  "keys": [
+   20,
+   25
+  ],
+  "words": 2724,
+  "exc": 1,
+  "excF": 0.0,
+  "trap": 1,
+  "trapF": 0.0,
+  "other": 0,
+  "otherF": 0,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 1,
+  "residualF": 0.0,
+  "saving": 8886.82
+ },
+ {
+  "rank": 2,
+  "rule": "prefix re",
+  "keys": [
+   19
+  ],
+  "words": 5931,
+  "exc": 172,
+  "excF": 288.31,
+  "trap": 71,
+  "trapF": 170.63,
+  "other": 101,
+  "otherF": 117.68,
+  "K": [
+   19
+  ],
+  "kw": 74,
+  "coveredTrap": 71,
+  "collateral": 3,
+  "collateralSaving": 6.68,
+  "residual": 101,
+  "residualF": 117.68,
+  "saving": 6970.4
+ },
+ {
+  "rank": 3,
+  "rule": "prefix en",
+  "keys": [
+   18,
+   22
+  ],
+  "words": 4244,
+  "exc": 134,
+  "excF": 57.3,
+  "trap": 134,
+  "trapF": 57.3,
+  "other": 0,
+  "otherF": 0,
+  "K": [
+   18,
+   22,
+   25
+  ],
+  "kw": 139,
+  "coveredTrap": 134,
+  "collateral": 5,
+  "collateralSaving": 2.4499999999999997,
+  "residual": 0,
+  "residualF": 0,
+  "saving": 5978.25
+ },
+ {
+  "rank": 4,
+  "rule": "prefix de",
+  "keys": [
+   18,
+   20
+  ],
+  "words": 261,
+  "exc": 0,
+  "excF": 0,
+  "trap": 0,
+  "trapF": 0,
+  "other": 0,
+  "otherF": 0,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 0,
+  "residualF": 0,
+  "saving": 4912.4
+ },
+ {
+  "rank": 5,
+  "rule": "prefix ain|hin|im|in",
+  "keys": [
+   16,
+   19
+  ],
+  "words": 4820,
+  "exc": 88,
+  "excF": 76.88,
+  "trap": 65,
+  "trapF": 18.08,
+  "other": 23,
+  "otherF": 58.8,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 88,
+  "residualF": 76.88,
+  "saving": 5620.91
+ },
+ {
+  "rank": 6,
+  "rule": "suffix tion",
+  "keys": [
+   20,
+   25
+  ],
+  "words": 2164,
+  "exc": 2,
+  "excF": 10.88,
+  "trap": 0,
+  "trapF": 0,
+  "other": 2,
+  "otherF": 10.88,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 2,
+  "residualF": 10.88,
+  "saving": 5441.3
+ },
+ {
+  "rank": 7,
+  "rule": "prefix dé",
+  "keys": [
+   19
+  ],
+  "words": 10280,
+  "exc": 210,
+  "excF": 263.14,
+  "trap": 111,
+  "trapF": 129.89,
+  "other": 99,
+  "otherF": 133.25,
+  "K": [
+   19
+  ],
+  "kw": 115,
+  "coveredTrap": 111,
+  "collateral": 4,
+  "collateralSaving": 2.13,
+  "residual": 99,
+  "residualF": 133.25,
+  "saving": 5282.04
+ },
+ {
+  "rank": 8,
+  "rule": "suffix ter",
+  "keys": [
+   20,
+   25
+  ],
+  "words": 3158,
+  "exc": 6,
+  "excF": 0.33,
+  "trap": 1,
+  "trapF": 0.21,
+  "other": 5,
+  "otherF": 0.12,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 6,
+  "residualF": 0.33,
+  "saving": 4572.92
+ },
+ {
+  "rank": 9,
+  "rule": "prefix é",
+  "keys": [
+   19
+  ],
+  "words": 6109,
+  "exc": 137,
+  "excF": 501.56,
+  "trap": 76,
+  "trapF": 108.49,
+  "other": 61,
+  "otherF": 393.07,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 137,
+  "residualF": 501.56,
+  "saving": 5373.46
+ },
+ {
+  "rank": 10,
+  "rule": "suffix té",
+  "keys": [
+   19,
+   22
+  ],
+  "words": 2889,
+  "exc": 23,
+  "excF": 27.64,
+  "trap": 3,
+  "trapF": 0.05,
+  "other": 20,
+  "otherF": 27.59,
+  "K": [
+   19
+  ],
+  "kw": 3,
+  "coveredTrap": 3,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 20,
+  "residualF": 27.59,
+  "saving": 4147.33
+ },
+ {
+  "rank": 11,
+  "rule": "prefix au",
+  "keys": [
+   16,
+   19
+  ],
+  "words": 563,
+  "exc": 10,
+  "excF": 0.62,
+  "trap": 10,
+  "trapF": 0.62,
+  "other": 0,
+  "otherF": 0,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 10,
+  "residualF": 0.62,
+  "saving": 3736.14
+ },
+ {
+  "rank": 12,
+  "rule": "suffix cer|cé|cée|cés|scer|se|ser|s",
+  "keys": [
+   19,
+   20
+  ],
+  "words": 2014,
+  "exc": 25,
+  "excF": 520.29,
+  "trap": 0,
+  "trapF": 0,
+  "other": 25,
+  "otherF": 520.29,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 25,
+  "residualF": 520.29,
+  "saving": 4500.03
+ },
+ {
+  "rank": 13,
+  "rule": "prefix par",
+  "keys": [
+   16,
+   19
+  ],
+  "words": 552,
+  "exc": 2,
+  "excF": 0.0,
+  "trap": 2,
+  "trapF": 0.0,
+  "other": 0,
+  "otherF": 0,
+  "K": [
+   19
+  ],
+  "kw": 2,
+  "coveredTrap": 2,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 0,
+  "residualF": 0,
+  "saving": 3070.98
+ },
+ {
+  "rank": 14,
+  "rule": "suffix der",
+  "keys": [
+   19,
+   20,
+   25
+  ],
+  "words": 1054,
+  "exc": 39,
+  "excF": 10.46,
+  "trap": 0,
+  "trapF": 0,
+  "other": 39,
+  "otherF": 10.46,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 39,
+  "residualF": 10.46,
+  "saving": 3522.9
+ },
+ {
+  "rank": 15,
+  "rule": "prefix pa|pei|pâ",
+  "keys": [
+   18,
+   25
+  ],
+  "words": 1813,
+  "exc": 88,
+  "excF": 50.36,
+  "trap": 88,
+  "trapF": 50.36,
+  "other": 0,
+  "otherF": 0,
+  "K": [
+   18,
+   22,
+   25
+  ],
+  "kw": 88,
+  "coveredTrap": 88,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 0,
+  "residualF": 0,
+  "saving": 3149.55
+ },
+ {
+  "rank": 16,
+  "rule": "prefix ai|aî|e|ei|hai|he|hê|é",
+  "keys": [
+   19,
+   20
+  ],
+  "words": 1973,
+  "exc": 87,
+  "excF": 326.15999999999997,
+  "trap": 63,
+  "trapF": 28.01,
+  "other": 24,
+  "otherF": 298.15,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 87,
+  "residualF": 326.15999999999997,
+  "saving": 4196.82
+ },
+ {
+  "rank": 17,
+  "rule": "suffix ver",
+  "keys": [
+   19,
+   20,
+   22
+  ],
+  "words": 448,
+  "exc": 2,
+  "excF": 0.21000000000000002,
+  "trap": 0,
+  "trapF": 0,
+  "other": 2,
+  "otherF": 0.21000000000000002,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 2,
+  "residualF": 0.21000000000000002,
+  "saving": 3082.94
+ },
+ {
+  "rank": 18,
+  "rule": "prefix sa|sah",
+  "keys": [
+   20,
+   24
+  ],
+  "words": 1017,
+  "exc": 48,
+  "excF": 5.74,
+  "trap": 47,
+  "trapF": 5.74,
+  "other": 1,
+  "otherF": 0.0,
+  "K": [
+   20,
+   24
+  ],
+  "kw": 33,
+  "coveredTrap": 33,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 15,
+  "residualF": 0.22,
+  "saving": 2643.96
+ },
+ {
+  "rank": 19,
+  "rule": "prefix pro|proh|prô",
+  "keys": [
+   9,
+   19
+  ],
+  "words": 1353,
+  "exc": 52,
+  "excF": 28.95,
+  "trap": 52,
+  "trapF": 28.95,
+  "other": 0,
+  "otherF": 0,
+  "K": [
+   9,
+   19
+  ],
+  "kw": 52,
+  "coveredTrap": 52,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 0,
+  "residualF": 0,
+  "saving": 2426.16
+ },
+ {
+  "rank": 20,
+  "rule": "prefix ce|sce|se",
+  "keys": [
+   16,
+   23
+  ],
+  "words": 274,
+  "exc": 13,
+  "excF": 12.33,
+  "trap": 13,
+  "trapF": 12.33,
+  "other": 0,
+  "otherF": 0,
+  "K": [
+   23,
+   24
+  ],
+  "kw": 12,
+  "coveredTrap": 12,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 1,
+  "residualF": 0.19,
+  "saving": 2370.4
+ },
+ {
+  "rank": 21,
+  "rule": "prefix ra|rai|raie|re|rhé|ré|réh",
+  "keys": [
+   25
+  ],
+  "words": 3743,
+  "exc": 135,
+  "excF": 139.39,
+  "trap": 69,
+  "trapF": 52.58,
+  "other": 66,
+  "otherF": 86.81,
+  "K": [
+   22
+  ],
+  "kw": 42,
+  "coveredTrap": 42,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 93,
+  "residualF": 126.41,
+  "saving": 3145.23
+ },
+ {
+  "rank": 22,
+  "rule": "suffix ser|sée|zer|zé",
+  "keys": [
+   19,
+   20,
+   25
+  ],
+  "words": 1932,
+  "exc": 79,
+  "excF": 50.76,
+  "trap": 0,
+  "trapF": 0,
+  "other": 79,
+  "otherF": 50.76,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 79,
+  "residualF": 50.76,
+  "saving": 2761.95
+ },
+ {
+  "rank": 23,
+  "rule": "prefix de|dea|di|die|dis|dy|dî",
+  "keys": [
+   16,
+   19
+  ],
+  "words": 1201,
+  "exc": 26,
+  "excF": 12.56,
+  "trap": 26,
+  "trapF": 12.56,
+  "other": 0,
+  "otherF": 0,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 26,
+  "residualF": 12.56,
+  "saving": 2291.46
+ },
+ {
+  "rank": 24,
+  "rule": "suffix rae|rai|raie|re|rer|rez|rrer",
+  "keys": [
+   16,
+   20,
+   22
+  ],
+  "words": 1633,
+  "exc": 53,
+  "excF": 51.03,
+  "trap": 0,
+  "trapF": 0,
+  "other": 53,
+  "otherF": 51.03,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 53,
+  "residualF": 51.03,
+  "saving": 2363.24
+ },
+ {
+  "rank": 25,
+  "rule": "prefix o",
+  "keys": [
+   19
+  ],
+  "words": 1201,
+  "exc": 16,
+  "excF": 9.38,
+  "trap": 5,
+  "trapF": 4.57,
+  "other": 11,
+  "otherF": 4.81,
+  "K": [
+   19
+  ],
+  "kw": 5,
+  "coveredTrap": 5,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 11,
+  "residualF": 4.81,
+  "saving": 2239.7599999999998
+ },
+ {
+  "rank": 26,
+  "rule": "suffix ger",
+  "keys": [
+   16,
+   24
+  ],
+  "words": 1023,
+  "exc": 0,
+  "excF": 0,
+  "trap": 0,
+  "trapF": 0,
+  "other": 0,
+  "otherF": 0,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 0,
+  "residualF": 0,
+  "saving": 1909.87
+ },
+ {
+  "rank": 27,
+  "rule": "suffix ner",
+  "keys": [
+   19,
+   20
+  ],
+  "words": 1226,
+  "exc": 44,
+  "excF": 3.48,
+  "trap": 6,
+  "trapF": 0.25,
+  "other": 38,
+  "otherF": 3.23,
+  "K": [
+   19
+  ],
+  "kw": 6,
+  "coveredTrap": 6,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 38,
+  "residualF": 3.23,
+  "saving": 2488.23
+ },
+ {
+  "rank": 28,
+  "rule": "prefix e|hi|hy|i|y|î",
+  "keys": [
+   16,
+   19
+  ],
+  "words": 2506,
+  "exc": 57,
+  "excF": 537.05,
+  "trap": 40,
+  "trapF": 54.76,
+  "other": 17,
+  "otherF": 482.28999999999996,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 57,
+  "residualF": 537.05,
+  "saving": 3183.21
+ },
+ {
+  "rank": 29,
+  "rule": "prefix ra",
+  "keys": [
+   16
+  ],
+  "words": 2499,
+  "exc": 49,
+  "excF": 32.21,
+  "trap": 28,
+  "trapF": 25.259999999999998,
+  "other": 21,
+  "otherF": 6.95,
+  "K": [
+   16
+  ],
+  "kw": 25,
+  "coveredTrap": 25,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 24,
+  "residualF": 9.04,
+  "saving": 1856.3
+ },
+ {
+  "rank": 30,
+  "rule": "suffix cher",
+  "keys": [
+   16,
+   24,
+   25
+  ],
+  "words": 831,
+  "exc": 0,
+  "excF": 0,
+  "trap": 0,
+  "trapF": 0,
+  "other": 0,
+  "otherF": 0,
+  "K": [],
+  "kw": 0,
+  "coveredTrap": 0,
+  "collateral": 0,
+  "collateralSaving": 0,
+  "residual": 0,
+  "residualF": 0,
+  "saving": 1789.25
+ }
+]

@@ -1,0 +1,31 @@
+rank	position	root	forms	keys	rtfcre	sharedWith	score	strokeFreqSaved	keySimilarity	wordExceptions	exceptionFreq	topExceptions	carriers	lemmas	examples	attestedShare	fallbacks
+1	suffix	ment	ment(k=1) | ·[C{1,2}[eui]+]ment(k=2)	(16, 20, 25)	-jtm		8503.2	8763.2	0.44	1	0.0	blèsement	2724	2156	moment seulement tellement exactement sûrement complètement	0.763	32
+2	prefix	am|an|ant|em|en|ench|enh|ham|han|hen	am|an|ant|em|en|ench|enh|ham|han|hen(k=1) | am|an|ant|em|en|ench|enh|ham|han|hen[en:C{1,2}@]·(k=2)	(3, 6, 18)	sm-k		7185.1	7578.5	-0.44	50	61.7	engagé,engager,engagée,engrais,envol,engagés,engagez,engagé,engagé,entassés	6892	1312	enfants enfant enfin entendu ensemble envie	0.538	34
+3	prefix	re|reh	re|reh(k=1)	(9, 18)	w-k		6102.2	6199.8	-0.33	40	48.8	remords,relax,requin,relax,requins,relis,rené,recoins,relique,reliques	6275	812	revoir regardez reviens regarder retour retard	0.817	0
+4	suffix	ccion|cion|cyon|sion|ssion|tion|tions	ccion|cion|cyon|sion|ssion|tion|tions(k=1) | ·[tion:C*[ai]]ccion|cion|cyon|sion|ssion|tion|tions(k=2)	(16, 17, 20)	-jst		5542.8	5915.0	0.66	4	101.1	impression,caution,impressions,cautions	2366	1546	attention attention situation impression mission félicitations	0.841	14
+5	prefix	é	é(k=1)	(2, 5)	kv-		5443.4	5449.0	-1.00	9	2.8	épi,équité,épis,édit,édits,évitée,équidés,évitées,équités	6111	1177	écoute étaient école état écrit équipe	0.368	0
+6	prefix	ain|hin|im|in	ain|hin|im|in(k=1) | ain|hin|im|in[in+té]·(k=2)	(7, 14, 16)	tej		4727.3	4832.7	-0.19	4	2.7	indemne,indemnes,insights,intrait	4821	1286	importe ainsi important impossible inquiète intérieur	0.489	0
+7	prefix	de	de(k=1) | de[man|ve]·(k=2)	(2, 6, 19)	km-d		4692.3	4792.3	0.22	0	0.0		261	35	demain demande devrais demandé devrait devant	0.798	0
+8	prefix	ai|aî|e|ei|hai|he|hê|é	ai|aî|e|ei|hai|he|hê|é(k=1) | ai|aî|e|ei|hai|he|hê|é[e:ksky|kspli|sE|n°]·(k=2)	(5, 18, 19)	v-kd		4673.2	4803.2	-0.44	0	0.0		1973	343	aider excusez aimerais essaie essayer essayé	0.355	6
+9	prefix	de|des|dé|déh	de|des|dé|déh(k=1)	(5, 9, 18)	vw-k		4665.5	4975.9	-0.50	130	155.2	début,débarque,dépit,déçu,débuts,dévoiler,dépanner,débarquent,dédie,déçue	10383	1663	désolé désolé début désolée décidé désolée	0.626	0
+10	suffix	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé(k=1) | ·[cé:m@]cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé(k=2)	(16, 17, 19)	-jsd		4632.0	4732.0	0.33	0	0.0		2019	402	assez passer passé laissez laisser pensé	0.662	0
+11	suffix	ter	ter(k=1)	(16, 20, 22)	-jtn		4568.5	4568.5	0.33	0	0.0		3162	649	rester arrêter arrêtez acheter restez écoutez	0.916	0
+12	prefix	au	au(k=1) | au[jour|to|tre|di]·(k=2)	(7, 8, 19)	tR-d		3572.7	3673.4	0.24	1	0.3	autisme	564	218	aujourd'hui aurais aurait aucune aura aucun	0.389	0
+13	suffix	té	té(k=1) | ·[C\{bv}{1,2}i]té(k=2)	(19, 20, 25)	-dtm		3546.3	4047.2	0.46	11	10.5	gravité,limité,agilité,limités,lité,caté,agilités,lités,litée,litées	2889	1067	côté vérité sécurité santé liberté société	0.693	76
+14	suffix	der|dé|dée	der|dé|dée(k=1) | ·[dez|der|dé:gaR|m@]der|dé|dée(k=2)	(18, 19, 25)	-kdm		3531.7	3638.5	0.62	8	3.4	codé,codée,codé,codées,codés,codée,coder,codés	1441	310	aider idée regardez demandé demander regarder	0.306	0
+15	suffix	ner|nez|nner|nnée|née|nées	ner|nez|nner|nnée|née|nées(k=1) | ·[né:C{1,2}[i°]]ner|nez|nner|nnée|née|nées(k=2)	(16, 17, 25)	-jsm		3256.2	3371.3	0.04	1	0.0	tannées	2274	525	donné donner années journée année donnez	0.570	3
+16	prefix	ra|rai|raie|re|rhé|ré|réh	ra|rai|raie|re|rhé|ré|réh(k=1) | ra|rai|raie|re|rhé|ré|réh[ré:a|fle|vE|C{1,2}y]·(k=2)	(3, 4, 16)	sp-j		3183.4	3367.3	-0.27	17	7.0	régner,régnez,régné,récria,récriai,récrié,récriée,récriées,récriés,récriaient	3743	637	réponse réussi réponds réveille répondre réalité	0.490	14
+17	prefix	pa	pa(k=1)	(2, 5, 18)	kv-k		3167.3	3171.3	-0.33	13	2.0	pager,pagaie,pagaie,patine,pagaies,papisme,pagaient,pagaies,pagé,paginer	1677	542	passer passé papa parents patron passé	0.272	0
+18	prefix	par	par(k=1)	(8, 19)	R-d		3071.0	3071.0	0.30	0	0.0		552	123	partir parlé pardon partie parti parfois	0.660	0
+19	prefix	e|hi|hy|i|y|î	e|hi|hy|i|y|î(k=1) | e|hi|hy|i|y|î[i:[mn][aeiouy]]·(k=2)	(16, 19)	-jd		3020.6	3200.0	-0.57	7	4.7	hissez,hisser,hissé,hissai,hissées,hissés,hissée	2506	855	idée ira imagine ignore irai inutile	0.216	14
+20	prefix	sa|sah	sa|sah(k=1)	(5, 24)	v-Z		2649.0	2649.5	-0.33	14	0.2	sableuse,saroual,sableuses,sarouals,sabelles,saboule,saboulent,saboules,samizdats,sanieuses	1017	309	savoir savez salut savais salut savait	0.822	0
+21	prefix	o	o(k=1) | o[C{1,2}i|kV]·(k=2)	(16, 17, 19)	-jsd		2469.1	2584.1	0.05	0	0.0		1201	312	ok occupe ok occuper occasion offrir	0.240	3
+22	prefix	pro|proh|prô	pro|proh|prô(k=1)	(4, 5, 8)	pvR-		2455.1	2455.1	0.70	4	0.0	prodrome,prodromes,procréerai,procréerez	1353	286	problème problèmes propos prochaine promis probablement	0.685	0
+23	suffix	ver	ver(k=1) | ·[vé:Ri]ver(k=2)	(16, 17, 18)	-jsk		2408.5	2508.5	0.46	0	0.0		452	87	trouvé trouver arrivé arriver sauver retrouver	0.824	0
+24	prefix	ce|sce|se	ce|sce|se(k=1)	(3, 6)	sm-		2382.7	2382.7	0.50	0	0.0		274	65	serait celui semaine serai ceci semaines	0.639	0
+25	suffix	rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée	rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée(k=1) | ·[rer:p[aeiouy]|C*e|sy]rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée(k=2)	(16, 19, 21)	-jdR		2277.8	2387.8	0.59	1	0.0	aurai	1633	345	tirer soirée tiré pleurer préparer tirez	0.642	2
+26	prefix	pou|pu	pou|pu(k=1)	(4, 7, 18)	pt-k		2215.0	2215.0	0.33	0	0.0		278	81	pouvez pourrait pourrais pouvoir pouvais pouvait	0.892	0
+27	prefix	de|dea|di|die|dis|dy|dî	de|dea|di|die|dis|dy|dî(k=1) | de|dea|di|die|dis|dy|dî[di:C{1,2}i]·(k=2)	(3, 16, 19)	s-jd		2195.6	2295.6	0.16	0	0.0		1201	268	dirait difficile disais disait dîner dirai	0.329	0
+28	suffix	ser|sée|zer|zé	ser|sée|zer|zé(k=1) | ·[sez:C*y]ser|sée|zer|zé(k=2) | ·[li]ser|sée|zer|zé(k=2)	(18, 22, 23)	-knl		2129.4	2354.4	0.62	0	0.0		1939	443	excusez poser utiliser épouser amuser excuser	0.704	5
+29	suffix	ger	ger(k=1)	(16, 24)	-jZ		1910.1	1910.1	0.50	0	0.0		1028	178	manger changer changé danger protéger mangé	0.937	0
+30	suffix	cher	cher(k=1)	(9, 24, 25)	w-Zm		1789.2	1789.2	0.50	0	0.0		831	162	chercher marcher coucher cacher empêcher touché	0.788	0

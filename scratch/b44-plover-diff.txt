@@ -1,0 +1,149 @@
+PLOVER DICTIONARY COMPARISON: BEFORE vs AFTER
+======================================================================
+
+1. ENTRY COUNTS AND CHANGES
+----------------------------------------------------------------------
+BEFORE: 167762 entries
+AFTER: 167945 entries
+Removed stenos: 0
+Added stenos: 183
+Changed stenos (same key, different value): 5
+
+2. SPELLINGS REACHABLE BEFORE BUT NOT AFTER
+----------------------------------------------------------------------
+Count: 0
+
+3. SPELLINGS REACHABLE AFTER BUT NOT BEFORE
+----------------------------------------------------------------------
+Count: 50
+  allaites
+  amplis
+  baillent
+  baillez
+  baryes
+  brandys
+  briffes
+  buttent
+  bégaies
+  bénits
+  cardent
+  clappent
+  clappes
+  descelle
+  dégouttent
+  dégouttes
+  détone
+  détonent
+  entent
+  entes
+  exhaussent
+  gouttent
+  heurtes
+  mies
+  mâtent
+  mâtes
+  pais
+  parafe
+  parafes
+  pausent
+  ralle
+  rallent
+  ralles
+  repais
+  sacquent
+  saque
+  scelles
+  scribouillent
+  scribouilles
+  sellent
+  soûles
+  subits
+  tallent
+  ululent
+  ventent
+  égraine
+  égrainent
+  épisse
+  épissent
+  épisses
+
+4. CHANGED STENOS (SAME KEY, DIFFERENT VALUE)
+----------------------------------------------------------------------
+Count: 5
+Examples (showing up to 20):
+  @/pmti/-s: emplis -> amplis
+  Re/paR/ti/-s: répartis -> réparties
+  e/kmtieR/si/-s: éclaircis -> éclaircies
+  ksa/R@/ti/-s: garantis -> garanties
+  se/twi/-s: saisis -> saisies
+
+5. SPECIFIC WORDS - STENOS IN BEFORE AND AFTER
+----------------------------------------------------------------------
+
+panse:
+  BEFORE (1): ['p*@s']
+  AFTER (3): ['p*@s', 'p*@s/-R', 'p*@s/-k']
+
+pense:
+  BEFORE (3): ['p@s', 'p@s/-R', 'p@s/-k']
+  AFTER (3): ['p@s', 'p@s/-R', 'p@s/-k']
+
+conte:
+  BEFORE (1): ['kai#t']
+  AFTER (3): ['k*ait/-R', 'k*ait/-k', 'kai#t']
+
+compte:
+  BEFORE (3): ['kait', 'kait/-R', 'kait/-k']
+  AFTER (3): ['kait', 'kait/-R', 'kait/-k']
+
+butte:
+  BEFORE (1): ['sv*@it']
+  AFTER (3): ['sv*@it', 'sv*@it/-R', 'sv*@it/-k']
+
+bute:
+  BEFORE (3): ['sv@i#t', 'sv@it/-R', 'sv@it/-k']
+  AFTER (3): ['sv@i#t', 'sv@it/-R', 'sv@it/-k']
+
+admis:
+  BEFORE (4): ['ad/m*inl', 'ad/mi', 'ad/mi/-d', 'ad/mi/-k']
+  AFTER (5): ['ad/m*inl', 'ad/m*inl/-s', 'ad/mi', 'ad/mi/-d', 'ad/mi/-k']
+
+garanties:
+  BEFORE (1): ['ksa/R@/ti/-js']
+  AFTER (2): ['ksa/R@/ti/-js', 'ksa/R@/ti/-s']
+
+subits:
+  BEFORE (0): []
+  AFTER (1): ['s@i/sv*i/-s']
+
+hais:
+  BEFORE (1): ['ie#/-k']
+  AFTER (2): ['*ie/-d', 'ie#/-k']
+
+fête:
+  BEFORE (2): ['kpiet', 'kpiet/-R']
+  AFTER (3): ['kp*iet/-k', 'kpiet', 'kpiet/-R']
+
+entre:
+  BEFORE (3): ['@tR', '@tR/-R', '@tR/-k']
+  AFTER (3): ['@tR', '@tR/-R', '@tR/-k']
+
+heurte:
+  BEFORE (1): ['@#tR']
+  AFTER (3): ['*@tR/-R', '*@tR/-k', '@#tR']
+
+6. MARKS ON ALTERNATES IN AFTER
+----------------------------------------------------------------------
+Stenos with marks on alternates: 1519
+Examples (showing up to 10):
+  *@/-s -> hans
+  *@R/-s -> heurts
+  *@ae/-s -> hués
+  *@e#/*# -> houe
+  *@e#/*#/*# -> houx
+  *@in/-s -> unes
+  *@kR/-R -> encre
+  *@kR/-dR -> encres
+  *@kR/-s -> ancres
+  *@kR/-sR -> ancrent
+

@@ -1,0 +1,1277 @@
+422 variant sets
+
+abatage [REVIEW] (discovered):
+    canonical  abattage                 2010-2019: 124917
+    drop      abatage                  2010-2019: 3683
+abatis [REVIEW] (discovered):
+    canonical  abattis                  2010-2019: 22283
+    drop      abatis                   2010-2019: 7150
+abeiller (reform1990):
+    canonical  abeiller                 2010-2019: 110
+    drop      abeillier                2010-2019: 0
+absous (reform1990):
+    canonical  absous                   2010-2019: 34659
+    drop      absout                   2010-2019: 14783
+acuponcture (reform1990):
+    canonical  acupuncture              2010-2019: 107997
+    drop      acuponcture              2010-2019: 4137
+age [REVIEW] (discovered):
+    canonical  âge                      2010-2019: 11062105
+    drop      age                      2010-2019: 734325
+aiguiller (reform1990):
+    canonical  aiguiller                2010-2019: 1220074
+    drop      aiguillier               2010-2019: 295
+aiguë (reform1990):
+    canonical  aiguë                    2010-2019: 687739
+    drop      aigüe                    2010-2019: 20810
+allegretto (reform1990):
+    canonical  allegretto               2010-2019: 8262
+    drop      allégretto               2010-2019: 123
+allegro (reform1990):
+    canonical  allegro                  2010-2019: 48865
+    drop      allégro                  2010-2019: 1494
+allo (reform1990):
+    canonical  allô                     2010-2019: 278703
+    drop      allo                     2010-2019: 90533
+allègement [REVIEW] (reform1990):
+    canonical  allégement               2010-2019: 64812
+    drop      allègement               2010-2019: 59657
+allègrement (reform1990):
+    canonical  allègrement              2010-2019: 129907
+    drop      allégrement              2010-2019: 42319
+ambiguïté (reform1990):
+    canonical  ambiguïté                2010-2019: 777403
+    drop      ambigüité                2010-2019: 24809
+appas [REVIEW] (reform1990):
+    canonical  appâts                   2010-2019: 42589
+    drop      appas                    2010-2019: 37812
+arboretum (reform1990):
+    canonical  arboretum                2010-2019: 23138
+    drop      arborétum                2010-2019: 165
+arguer (reform1990):
+    canonical  arguer                   2010-2019: 238112
+    drop      argüer                   2010-2019: 339
+arien [REVIEW] (discovered):
+    canonical  aryen                    2010-2019: 124324
+    drop      arien                    2010-2019: 47092
+arole (reform1990):
+    canonical  arole                    2010-2019: 3021
+    drop      arolle                   2010-2019: 913
+artefact (reform1990):
+    canonical  artefact                 2010-2019: 120000
+    drop      artéfact                 2010-2019: 33771
+asseoir (reform1990):
+    canonical  asseoir                  2010-2019: 8325403
+    drop      assoir                   2010-2019: 10000
+azulejo (reform1990):
+    canonical  azulejo                  2010-2019: 3352
+    drop      azuléjo                  2010-2019: 0
+babi [REVIEW] (discovered):
+    canonical  baby                     2010-2019: 374880
+    drop      babi                     2010-2019: 17589
+bagoter [REVIEW] (discovered):
+    canonical  bagotter                 2010-2019: 117
+    drop      bagoter                  2010-2019: 104
+bailler [REVIEW] (discovered):
+    canonical  bâiller                  2010-2019: 297184
+    drop      bailler                  2010-2019: 108039
+balade [REVIEW] (discovered):
+    canonical  balade                   2010-2019: 915059
+    drop      ballade                  2010-2019: 210441
+bale [REVIEW] (discovered):
+    canonical  balle                    2010-2019: 2222021
+    drop      bale                     2010-2019: 23043
+ballotage (reform1990):
+    canonical  ballottage               2010-2019: 10570
+    drop      ballotage                2010-2019: 2221
+ballotement (reform1990):
+    canonical  ballottement             2010-2019: 4695
+    drop      ballotement              2010-2019: 466
+balloter (reform1990):
+    canonical  balloter                 2010-2019: 144132
+    drop      ballotter                2010-2019: 20469
+ballotine [REVIEW] (reform1990):
+    canonical  ballotine                2010-2019: 2171
+    drop      ballottine               2010-2019: 1869
+balluchon [REVIEW] (discovered):
+    canonical  baluchon                 2010-2019: 55830
+    drop      balluchon                2010-2019: 15833
+balluchonnage [REVIEW] (discovered):
+    canonical  baluchonnage             2010-2019: 254
+    drop      balluchonnage            2010-2019: 0
+balluchonner [REVIEW] (discovered):
+    canonical  baluchonner              2010-2019: 139
+    drop      balluchonner             2010-2019: 0
+barbote [REVIEW] (discovered):
+    canonical  barbote                  2010-2019: 7757
+    drop      barbotte                 2010-2019: 2816
+barcarole (reform1990):
+    canonical  barcarolle               2010-2019: 6136
+    drop      barcarole                2010-2019: 1456
+barmans (reform1990):
+    canonical  barmen                   2010-2019: 14541
+    drop      barmans                  2010-2019: 5000
+baronet [REVIEW] (discovered):
+    canonical  baronnet                 2010-2019: 32346
+    drop      baronet                  2010-2019: 5814
+barquerole (reform1990):
+    canonical  barquerolle              2010-2019: 82
+    drop      barquerole               2010-2019: 8
+beluga [REVIEW] (seed):
+    canonical  beluga                   2010-2019: 8367
+    drop      béluga                   2010-2019: 7948
+besicles [REVIEW] (reform1990):
+    canonical  bésicles                 2010-2019: 10427
+    drop      besicles                 2010-2019: 8330
+bi [REVIEW] (discovered):
+    canonical  by                       2010-2019: 1457930
+    drop      bi                       2010-2019: 853756
+bignole [REVIEW] (discovered):
+    canonical  bignole                  2010-2019: 2051
+    drop      bignolle                 2010-2019: 543
+billeterie (reform1990):
+    canonical  billeterie               2010-2019: 4355
+    drop      billèterie               2010-2019: 0
+bite [REVIEW] (discovered):
+    canonical  bite                     2010-2019: 242181
+    drop      bitte                    2010-2019: 20932
+    drop      byte                     2010-2019: 15835
+biter [REVIEW] (discovered):
+    canonical  bitter                   2010-2019: 40862
+    drop      biter                    2010-2019: 1676
+biture [REVIEW] (discovered):
+    canonical  biture                   2010-2019: 7828
+    drop      byture                   2010-2019: 22
+bizut [REVIEW] (reform1990):
+    canonical  bizut                    2010-2019: 3818
+    drop      bizuth                   2010-2019: 3130
+boite (reform1990):
+    canonical  boîte                    2010-2019: 2976897
+    drop      boite                    2010-2019: 206305
+bolchevique (reform1990):
+    canonical  bolchevique              2010-2019: 92845
+    drop      bolchévique              2010-2019: 12344
+bolchevisme (reform1990):
+    canonical  bolchevisme              2010-2019: 62117
+    drop      bolchévisme              2010-2019: 6558
+bolcheviste (reform1990):
+    canonical  bolcheviste              2010-2019: 7566
+    drop      bolchéviste              2010-2019: 687
+bonard [REVIEW] (discovered):
+    canonical  bonnard                  2010-2019: 71323
+    drop      bonard                   2010-2019: 17748
+bonhomie (reform1990):
+    canonical  bonhomie                 2010-2019: 111197
+    drop      bonhommie                2010-2019: 5426
+boniche [REVIEW] (discovered):
+    canonical  bonniche                 2010-2019: 12485
+    drop      boniche                  2010-2019: 8157
+bonir [REVIEW] (discovered):
+    canonical  bonnir                   2010-2019: 141109
+    drop      bonir                    2010-2019: 975
+bonneterie (reform1990):
+    canonical  bonneterie               2010-2019: 15863
+    drop      bonnèterie               2010-2019: 24
+bortch [REVIEW] (discovered):
+    canonical  bortsch                  2010-2019: 7398
+    drop      bortch                   2010-2019: 1028
+boule [REVIEW] (discovered):
+    canonical  boule                    2010-2019: 1641448
+    drop      boulle                   2010-2019: 15434
+bouloter [REVIEW] (reform1990):
+    canonical  boulotter                2010-2019: 32182
+    drop      bouloter                 2010-2019: 24613
+boursoufflage (reform1990):
+    canonical  boursouflage             2010-2019: 138
+    drop      boursoufflage            2010-2019: 4
+boursoufflement (reform1990):
+    canonical  boursouflement           2010-2019: 627
+    drop      boursoufflement          2010-2019: 72
+boursouffler (reform1990):
+    canonical  boursoufler              2010-2019: 10677
+    drop      boursouffler             2010-2019: 325
+boursoufflure (reform1990):
+    canonical  boursouflure             2010-2019: 14213
+    drop      boursoufflure            2010-2019: 532
+bouteiller (reform1990):
+    canonical  bouteiller               2010-2019: 17318
+    drop      bouteillier              2010-2019: 704
+bouterole (reform1990):
+    canonical  bouterolle               2010-2019: 761
+    drop      bouterole                2010-2019: 22
+boutiller (reform1990):
+    canonical  boutillier               2010-2019: 9194
+    drop      boutiller                2010-2019: 372
+brasero (reform1990):
+    canonical  brasero                  2010-2019: 40392
+    drop      braséro                  2010-2019: 1450
+brifer [REVIEW] (discovered):
+    canonical  briffer                  2010-2019: 2075
+    drop      brifer                   2010-2019: 86
+bringeure [REVIEW] (reform1990):
+    canonical  bringeure                2010-2019: 16
+    drop      bringeüre                2010-2019: 0
+brinquebaler [REVIEW] (discovered):
+    canonical  brinquebaler             2010-2019: 9484
+    drop      brinqueballer            2010-2019: 1144
+briqueterie (reform1990):
+    canonical  briqueterie              2010-2019: 12896
+    drop      briquèterie              2010-2019: 76
+brunches (reform1990):
+    canonical  brunchs                  2010-2019: 13555
+    drop      brunches                 2010-2019: 751
+buffleterie (reform1990):
+    canonical  buffleterie              2010-2019: 1035
+    drop      bufflèterie              2010-2019: 6
+bute [REVIEW] (discovered):
+    canonical  butte                    2010-2019: 341940
+    drop      bute                     2010-2019: 90185
+buter [REVIEW] (discovered):
+    canonical  buter                    2010-2019: 489391
+    drop      butter                   2010-2019: 367737
+buteur [REVIEW] (discovered):
+    canonical  buteur                   2010-2019: 18047
+    drop      butteur                  2010-2019: 313
+butoir [REVIEW] (discovered):
+    canonical  butoir                   2010-2019: 40563
+    drop      buttoir                  2010-2019: 1150
+cacahouète (reform1990):
+    canonical  cacahuète                2010-2019: 46599
+    drop      cacahouète               2010-2019: 14208
+cachoterie (reform1990):
+    canonical  cachoterie               2010-2019: 32209
+    drop      cachotterie              2010-2019: 5499
+cachotier [REVIEW] (reform1990):
+    canonical  cachotier                2010-2019: 13856
+    drop      cachottier               2010-2019: 12268
+cahute (reform1990):
+    canonical  cahute                   2010-2019: 34867
+    drop      cahutte                  2010-2019: 672
+caler [REVIEW] (discovered):
+    canonical  caler                    2010-2019: 1248986
+    drop      caller                   2010-2019: 440047
+cameraman (reform1990):
+    canonical  cameraman                2010-2019: 53136
+    drop      caméraman                2010-2019: 23009
+caner [REVIEW] (discovered):
+    canonical  canner                   2010-2019: 1138856
+    drop      caner                    2010-2019: 827679
+canette [REVIEW] (discovered):
+    canonical  canette                  2010-2019: 165939
+    drop      cannette                 2010-2019: 41193
+care [REVIEW] (discovered):
+    canonical  care                     2010-2019: 288842
+    drop      carre                    2010-2019: 30871
+cari [REVIEW] (discovered):
+    canonical  cari                     2010-2019: 55449
+    drop      carry                    2010-2019: 41908
+    drop      cary                     2010-2019: 41903
+cariatide [REVIEW] (discovered):
+    canonical  cariatide                2010-2019: 24488
+    drop      caryatide                2010-2019: 5529
+chah [REVIEW] (discovered):
+    canonical  chah                     2010-2019: 46572
+    drop      schah                    2010-2019: 5872
+chape [REVIEW] (discovered):
+    canonical  chape                    2010-2019: 113632
+    drop      chappe                   2010-2019: 13343
+chargeure [REVIEW] (reform1990):
+    canonical  chargeure                2010-2019: 18
+    drop      chargeüre                2010-2019: 0
+chariot (reform1990):
+    canonical  chariot                  2010-2019: 463110
+    drop      charriot                 2010-2019: 5017
+chariotage (reform1990):
+    canonical  chariotage               2010-2019: 371
+    drop      charriotage              2010-2019: 0
+charioter (reform1990):
+    canonical  charioter                2010-2019: 225
+    drop      charrioter               2010-2019: 14
+chariotée [REVIEW] (reform1990):
+    canonical  chariotée                2010-2019: 3
+    drop      charriotée               2010-2019: 0
+chasse [REVIEW] (discovered):
+    canonical  chasse                   2010-2019: 2728541
+    drop      châsse                   2010-2019: 51022
+chebec [REVIEW] (reform1990):
+    canonical  chébec                   2010-2019: 1749
+    drop      chebec                   2010-2019: 1203
+chechia (reform1990):
+    canonical  chéchia                  2010-2019: 14022
+    drop      chechia                  2010-2019: 1129
+cheik [REVIEW] (discovered):
+    canonical  cheik                    2010-2019: 53515
+    drop      scheik                   2010-2019: 4744
+chile [REVIEW] (discovered):
+    canonical  chile                    2010-2019: 52355
+    drop      chyle                    2010-2019: 7392
+chistera (reform1990):
+    canonical  chistera                 2010-2019: 4399
+    drop      chistéra                 2010-2019: 36
+chlamydiae (reform1990):
+    canonical  chlamydiae               2010-2019: 3961
+    drop      chlamydias               2010-2019: 390
+chlass [REVIEW] (discovered):
+    canonical  schlass                  2010-2019: 2530
+    drop      chlass                   2010-2019: 227
+chlinguer (seed):
+    canonical  schlinguer               2010-2019: 6618
+    drop      chlinguer                2010-2019: 1298
+chnoque [REVIEW] (discovered):
+    canonical  chnoque                  2010-2019: 2511
+    drop      schnoque                 2010-2019: 1858
+chnouf [REVIEW] (discovered):
+    canonical  chnouf                   2010-2019: 1090
+    drop      schnouf                  2010-2019: 640
+    drop      schnouff                 2010-2019: 279
+chouia [REVIEW] (discovered):
+    canonical  chouia                   2010-2019: 6194
+    drop      chouya                   2010-2019: 546
+ciao (reform1990):
+    canonical  ciao                     2010-2019: 43858
+    drop      tchao                    2010-2019: 14919
+cicerone [REVIEW] (reform1990):
+    canonical  cicérone                 2010-2019: 12821
+    drop      cicerone                 2010-2019: 11979
+cime [REVIEW] (discovered):
+    canonical  cime                     2010-2019: 386617
+    drop      cyme                     2010-2019: 4470
+claper [REVIEW] (discovered):
+    canonical  claper                   2010-2019: 10540
+    drop      clapper                  2010-2019: 4777
+clergymans (reform1990):
+    canonical  clergymen                2010-2019: 1964
+    drop      clergymans               2010-2019: 17
+cocoter (reform1990):
+    canonical  cocoter                  2010-2019: 209596
+    drop      cocotter                 2010-2019: 262
+colon [REVIEW] (discovered):
+    canonical  colon                    2010-2019: 726219
+    drop      côlon                    2010-2019: 117594
+comandant [REVIEW] (discovered):
+    canonical  commandant               2010-2019: 2333826
+    drop      comandant                2010-2019: 984
+combatif (reform1990):
+    canonical  combatif                 2010-2019: 51294
+    drop      combattif                2010-2019: 2249
+combativité (reform1990):
+    canonical  combativité              2010-2019: 54808
+    drop      combattivité             2010-2019: 954
+conard [REVIEW] (discovered):
+    canonical  connard                  2010-2019: 345732
+    drop      conard                   2010-2019: 7411
+conasse [REVIEW] (discovered):
+    canonical  connasse                 2010-2019: 39995
+    drop      conasse                  2010-2019: 2341
+condottiere (reform1990):
+    canonical  condottiere              2010-2019: 23246
+    drop      condottière              2010-2019: 1962
+conquistadores [REVIEW] (reform1990):
+    canonical  conquistadors            2010-2019: 27207
+    drop      conquistadores           2010-2019: 19796
+corolaire (reform1990):
+    canonical  corollaire               2010-2019: 225499
+    drop      corolaire                2010-2019: 37375
+corole [REVIEW] (reform1990):
+    canonical  corolle                  2010-2019: 61831
+    drop      corole                   2010-2019: 32156
+cote [REVIEW] (discovered):
+    canonical  cote                     2010-2019: 404853
+    drop      cotte                    2010-2019: 115974
+crane [REVIEW] (discovered):
+    canonical  crâne                    2010-2019: 1894185
+    drop      crane                    2010-2019: 50169
+credo (reform1990):
+    canonical  credo                    2010-2019: 204243
+    drop      crédo                    2010-2019: 9593
+cuisseau (reform1990):
+    canonical  cuissot                  2010-2019: 11210
+    drop      cuisseau                 2010-2019: 1501
+curricula [REVIEW] (reform1990):
+    canonical  curricula                2010-2019: 15107
+    drop      curriculums              2010-2019: 7844
+dale [REVIEW] (discovered):
+    canonical  dalle                    2010-2019: 547893
+    drop      dale                     2010-2019: 98384
+dansoter (reform1990):
+    canonical  dansoter                 2010-2019: 675
+    drop      dansotter                2010-2019: 276
+date [REVIEW] (discovered):
+    canonical  date                     2010-2019: 6566349
+    drop      datte                    2010-2019: 133094
+decrescendo (reform1990):
+    canonical  decrescendo              2010-2019: 9061
+    drop      décrescendo              2010-2019: 195
+dentelier (reform1990):
+    canonical  dentelière               2010-2019: 779
+    drop      dentelier                2010-2019: 114
+desperado (reform1990):
+    canonical  desperado                2010-2019: 5145
+    drop      despérado                2010-2019: 76
+dessaouler [REVIEW] (seed):
+    canonical  dessoûler                2010-2019: 12569
+    drop      dessaouler               2010-2019: 9092
+    drop      dessouler                2010-2019: 1486
+dessiller (reform1990):
+    canonical  dessiller                2010-2019: 21527
+    drop      déciller                 2010-2019: 1155
+diesel (reform1990):
+    canonical  diesel                   2010-2019: 115188
+    drop      diésel                   2010-2019: 1338
+diffracter [REVIEW] (discovered):
+    canonical  diffracter               2010-2019: 17785
+    drop      difracter                2010-2019: 50
+dine [REVIEW] (discovered):
+    canonical  dine                     2010-2019: 32690
+    drop      dyne                     2010-2019: 1251
+disaccaride (reform1990):
+    canonical  disaccharide             2010-2019: 1773
+    drop      disaccaride              2010-2019: 0
+disfonctionnement [REVIEW] (discovered):
+    canonical  dysfonctionnement        2010-2019: 376805
+    drop      disfonctionnement        2010-2019: 4199
+dissous [REVIEW] (reform1990):
+    canonical  dissous                  2010-2019: 162758
+    drop      dissout                  2010-2019: 141869
+djebel (reform1990):
+    canonical  djebel                   2010-2019: 66324
+    drop      djébel                   2010-2019: 1320
+douceâtre (reform1990):
+    canonical  douceâtre                2010-2019: 38060
+    drop      douçâtre                 2010-2019: 1693
+dribbler [REVIEW] (discovered):
+    canonical  dribbler                 2010-2019: 23822
+    drop      dribler                  2010-2019: 1085
+droper [REVIEW] (discovered):
+    canonical  dropper                  2010-2019: 1323
+    drop      droper                   2010-2019: 756
+dégoter (seed):
+    canonical  dégoter                  2010-2019: 76342
+    drop      dégotter                 2010-2019: 28757
+détoner [REVIEW] (discovered):
+    canonical  détonner                 2010-2019: 77535
+    drop      détoner                  2010-2019: 10815
+eczéma (reform1990):
+    canonical  eczéma                   2010-2019: 85478
+    drop      exéma                    2010-2019: 182
+eczémateux (reform1990):
+    canonical  eczémateux               2010-2019: 2974
+    drop      exémateux                2010-2019: 7
+edelweiss (reform1990):
+    canonical  edelweiss                2010-2019: 16578
+    drop      édelweiss                2010-2019: 415
+ego (reform1990):
+    canonical  ego                      2010-2019: 726206
+    drop      égo                      2010-2019: 39704
+embatre [REVIEW] (reform1990):
+    canonical  embattre                 2010-2019: 228
+    drop      embatre                  2010-2019: 160
+empiètement [REVIEW] (reform1990):
+    canonical  empiétement              2010-2019: 23693
+    drop      empiètement              2010-2019: 22242
+errata (reform1990):
+    canonical  errata                   2010-2019: 8662
+    drop      erratums                 2010-2019: 67
+espionite [REVIEW] (discovered):
+    canonical  espionnite               2010-2019: 2664
+    drop      espionite                2010-2019: 347
+exeat (reform1990):
+    canonical  exeat                    2010-2019: 3081
+    drop      exéat                    2010-2019: 121
+exequatur (reform1990):
+    canonical  exequatur                2010-2019: 47795
+    drop      exéquatur                2010-2019: 773
+faine (reform1990):
+    canonical  faine                    2010-2019: 4040
+    drop      faîne                    2010-2019: 884
+favela (reform1990):
+    canonical  favela                   2010-2019: 28823
+    drop      favéla                   2010-2019: 0
+fayoter (reform1990):
+    canonical  fayoter                  2010-2019: 3545
+    drop      fayotter                 2010-2019: 80
+fedayin (reform1990):
+    canonical  fedayin                  2010-2019: 5753
+    drop      fédayin                  2010-2019: 160
+ferries (reform1990):
+    canonical  ferries                  2010-2019: 100739
+    drop      ferrys                   2010-2019: 16644
+fiord (reform1990):
+    canonical  fjord                    2010-2019: 65760
+    drop      fiord                    2010-2019: 2790
+folingue [REVIEW] (discovered):
+    canonical  folingue                 2010-2019: 359
+    drop      follingue                2010-2019: 276
+foret [REVIEW] (discovered):
+    canonical  forêt                    2010-2019: 5029873
+    drop      foret                    2010-2019: 38939
+frapadingue [REVIEW] (discovered):
+    canonical  frappadingue             2010-2019: 4310
+    drop      frapadingue              2010-2019: 589
+fripe [REVIEW] (discovered):
+    canonical  fripe                    2010-2019: 19582
+    drop      frippe                   2010-2019: 895
+frisoter (reform1990):
+    canonical  frisoter                 2010-2019: 11177
+    drop      frisotter                2010-2019: 1815
+frisotis (reform1990):
+    canonical  frisottis                2010-2019: 3972
+    drop      frisotis                 2010-2019: 262
+frite [REVIEW] (discovered):
+    canonical  frite                    2010-2019: 405361
+    drop      fritte                   2010-2019: 3252
+fumerole (reform1990):
+    canonical  fumerole                 2010-2019: 19153
+    drop      fumerolle                2010-2019: 2146
+fusarole [REVIEW] (reform1990):
+    canonical  fusarole                 2010-2019: 5
+    drop      fusarolle                2010-2019: 1
+féerie (reform1990):
+    canonical  féerie                   2010-2019: 95276
+    drop      féérie                   2010-2019: 8808
+féerique (reform1990):
+    canonical  féerique                 2010-2019: 127834
+    drop      féérique                 2010-2019: 18374
+féeriquement (reform1990):
+    canonical  féeriquement             2010-2019: 791
+    drop      féériquement             2010-2019: 96
+gabare [REVIEW] (discovered):
+    canonical  gabare                   2010-2019: 15826
+    drop      gabarre                  2010-2019: 10189
+gageure (reform1990):
+    canonical  gageure                  2010-2019: 84392
+    drop      gageüre                  2010-2019: 307
+gai [REVIEW] (discovered):
+    canonical  gai                      2010-2019: 785552
+    drop      gay                      2010-2019: 540908
+gailleterie [REVIEW] (reform1990):
+    canonical  gailleterie              2010-2019: 28
+    drop      gaillèterie              2010-2019: 0
+gale [REVIEW] (discovered):
+    canonical  galle                    2010-2019: 254564
+    drop      gale                     2010-2019: 88747
+gallon [REVIEW] (discovered):
+    canonical  galon                    2010-2019: 139966
+    drop      gallon                   2010-2019: 25959
+ganaderia (reform1990):
+    canonical  ganaderia                2010-2019: 1314
+    drop      ganadéria                2010-2019: 0
+gangréneuse [REVIEW] (reform1990):
+    canonical  gangréneuse              2010-2019: 1329
+    drop      gangréneux               2010-2019: 927
+gapette [REVIEW] (discovered):
+    canonical  gapette                  2010-2019: 1007
+    drop      gâpette                  2010-2019: 435
+garrotage (reform1990):
+    canonical  garrottage               2010-2019: 414
+    drop      garrotage                2010-2019: 86
+garroter [REVIEW] (reform1990):
+    canonical  garrotter                2010-2019: 32365
+    drop      garroter                 2010-2019: 27647
+gaule [REVIEW] (discovered):
+    canonical  gaulle                   2010-2019: 1435259
+    drop      gaule                    2010-2019: 426920
+gelinotte (reform1990):
+    canonical  gélinotte                2010-2019: 4207
+    drop      gelinotte                2010-2019: 1516
+gentlemans (reform1990):
+    canonical  gentlemen                2010-2019: 100311
+    drop      gentlemans               2010-2019: 839
+ghilde (reform1990):
+    canonical  guilde                   2010-2019: 143616
+    drop      ghilde                   2010-2019: 1104
+girole (reform1990):
+    canonical  girole                   2010-2019: 33072
+    drop      girolle                  2010-2019: 3953
+glavioter [REVIEW] (discovered):
+    canonical  glavioter                2010-2019: 1029
+    drop      glaviotter               2010-2019: 22
+gnognote [REVIEW] (discovered):
+    canonical  gnognotte                2010-2019: 3025
+    drop      gnognote                 2010-2019: 1686
+gnole [REVIEW] (discovered):
+    canonical  gnôle                    2010-2019: 27979
+    drop      gnole                    2010-2019: 7641
+gobeleterie (reform1990):
+    canonical  gobeleterie              2010-2019: 586
+    drop      gobelèterie              2010-2019: 17
+graineterie (reform1990):
+    canonical  graineterie              2010-2019: 1694
+    drop      grainèterie              2010-2019: 0
+gratouiller [REVIEW] (discovered):
+    canonical  gratouiller              2010-2019: 10076
+    drop      grattouiller             2010-2019: 4631
+gratouillis [REVIEW] (discovered):
+    canonical  gratouillis              2010-2019: 1277
+    drop      grattouillis             2010-2019: 505
+grelotement (reform1990):
+    canonical  grelottement             2010-2019: 3301
+    drop      grelotement              2010-2019: 1499
+greloter (reform1990):
+    canonical  greloter                 2010-2019: 137834
+    drop      grelotter                2010-2019: 57597
+griffton [REVIEW] (discovered):
+    canonical  grifton                  2010-2019: 58
+    drop      griffton                 2010-2019: 0
+gril [REVIEW] (discovered):
+    canonical  grill                    2010-2019: 97242
+    drop      gril                     2010-2019: 91289
+grizzli [REVIEW] (discovered):
+    canonical  grizzly                  2010-2019: 30820
+    drop      grizzli                  2010-2019: 20884
+grole [REVIEW] (reform1990):
+    canonical  grolle                   2010-2019: 2658
+    drop      grole                    2010-2019: 1507
+guibole (reform1990):
+    canonical  guibole                  2010-2019: 9165
+    drop      guibolle                 2010-2019: 1459
+guillemeter (reform1990):
+    canonical  guillemeter              2010-2019: 161
+    drop      guilleméter              2010-2019: 0
+guérillero (reform1990):
+    canonical  guérillero               2010-2019: 16769
+    drop      guérilléro               2010-2019: 584
+hachisch [REVIEW] (discovered):
+    canonical  haschisch                2010-2019: 30900
+    drop      hachisch                 2010-2019: 5475
+    drop      haschich                 2010-2019: 28384
+hale [REVIEW] (discovered):
+    canonical  halle                    2010-2019: 433131
+    drop      hale                     2010-2019: 52897
+    drop      hâle                     2010-2019: 29920
+haler [REVIEW] (discovered):
+    canonical  hâler                    2010-2019: 107534
+    drop      haler                    2010-2019: 99248
+harpie [REVIEW] (discovered):
+    canonical  harpie                   2010-2019: 70809
+    drop      harpye                   2010-2019: 2047
+hobbies (reform1990):
+    canonical  hobbies                  2010-2019: 20975
+    drop      hobbys                   2010-2019: 1891
+homéo- [REVIEW] (reform1990):
+    canonical  homéo-                   2010-2019: 0
+    drop      homœo-                   2010-2019: 0
+imbitable [REVIEW] (discovered):
+    canonical  imbitable                2010-2019: 1030
+    drop      imbittable               2010-2019: 0
+imbécilité (reform1990):
+    canonical  imbécillité              2010-2019: 47616
+    drop      imbécilité               2010-2019: 3162
+impedimenta (reform1990):
+    canonical  impedimenta              2010-2019: 6223
+    drop      impédimenta              2010-2019: 170
+imperium (reform1990):
+    canonical  imperium                 2010-2019: 56460
+    drop      impérium                 2010-2019: 2260
+impresario [REVIEW] (reform1990):
+    canonical  impresario               2010-2019: 41365
+    drop      imprésario               2010-2019: 24541
+innommé (reform1990):
+    canonical  innommé                  2010-2019: 20513
+    drop      innomé                   2010-2019: 2722
+interpeler (reform1990):
+    canonical  interpeller              2010-2019: 316459
+    drop      interpeler               2010-2019: 6488
+iodler [REVIEW] (discovered):
+    canonical  yodler                   2010-2019: 947
+    drop      iodler                   2010-2019: 171
+jamboree (reform1990):
+    canonical  jamboree                 2010-2019: 3766
+    drop      jamborée                 2010-2019: 99
+jazzmans (reform1990):
+    canonical  jazzmen                  2010-2019: 10361
+    drop      jazzmans                 2010-2019: 145
+jerrican [REVIEW] (discovered):
+    canonical  jerrican                 2010-2019: 13396
+    drop      jerrycan                 2010-2019: 10379
+joailler (reform1990):
+    canonical  joaillier                2010-2019: 44674
+    drop      joailler                 2010-2019: 21431
+kipa [REVIEW] (discovered):
+    canonical  kippa                    2010-2019: 18110
+    drop      kipa                     2010-2019: 1817
+kitch [REVIEW] (discovered):
+    canonical  kitsch                   2010-2019: 98382
+    drop      kitch                    2010-2019: 13166
+laper [REVIEW] (discovered):
+    canonical  laper                    2010-2019: 41635
+    drop      lapper                   2010-2019: 1141
+legato (reform1990):
+    canonical  legato                   2010-2019: 9240
+    drop      légato                   2010-2019: 38
+levraut (reform1990):
+    canonical  levraut                  2010-2019: 3821
+    drop      levreau                  2010-2019: 1215
+lieder (reform1990):
+    canonical  lieder                   2010-2019: 37617
+    drop      lieds                    2010-2019: 1588
+lignerole (reform1990):
+    canonical  lignerolle               2010-2019: 185
+    drop      lignerole                2010-2019: 20
+limes (reform1990):
+    canonical  limes                    2010-2019: 37769
+    drop      limès                    2010-2019: 392
+lire [REVIEW] (discovered):
+    canonical  lire                     2010-2019: 23710179
+    drop      lyre                     2010-2019: 153260
+lis [REVIEW] (discovered):
+    canonical  lis                      2010-2019: 717628
+    drop      lys                      2010-2019: 289122
+lise [REVIEW] (discovered):
+    canonical  lise                     2010-2019: 432241
+    drop      lyse                     2010-2019: 44990
+louloute [REVIEW] (discovered):
+    canonical  louloute                 2010-2019: 3359
+    drop      louloutte                2010-2019: 618
+loupiote [REVIEW] (discovered):
+    canonical  loupiote                 2010-2019: 16288
+    drop      loupiotte                2010-2019: 1842
+lunetier (reform1990):
+    canonical  lunetier                 2010-2019: 2235
+    drop      lunettier                2010-2019: 380
+luter [REVIEW] (discovered):
+    canonical  lutter                   2010-2019: 7187659
+    drop      luter                    2010-2019: 5497
+maffia [REVIEW] (discovered):
+    canonical  mafia                    2010-2019: 214468
+    drop      maffia                   2010-2019: 7819
+maffieux [REVIEW] (discovered):
+    canonical  mafieux                  2010-2019: 124168
+    drop      maffieux                 2010-2019: 6285
+maffioso [REVIEW] (discovered):
+    canonical  mafioso                  2010-2019: 8188
+    drop      maffioso                 2010-2019: 1105
+mafiosi (reform1990):
+    canonical  mafiosi                  2010-2019: 5751
+    drop      mafiosos                 2010-2019: 517
+mah-jong (reform1990):
+    canonical  majong                   2010-2019: 423
+    drop      mah-jong                 2010-2019: 0
+mammy [REVIEW] (discovered):
+    canonical  mamy                     2010-2019: 42529
+    drop      mammy                    2010-2019: 4843
+mangeoter [REVIEW] (reform1990):
+    canonical  mangeotter               2010-2019: 115
+    drop      mangeoter                2010-2019: 68
+mangeure (reform1990):
+    canonical  mangeure                 2010-2019: 107
+    drop      mangeüre                 2010-2019: 0
+margoter (reform1990):
+    canonical  margoter                 2010-2019: 1530
+    drop      margotter                2010-2019: 68
+mari [REVIEW] (discovered):
+    canonical  mari                     2010-2019: 7077284
+    drop      mary                     2010-2019: 1263594
+mariole [REVIEW] (reform1990):
+    canonical  mariolle                 2010-2019: 12205
+    drop      mariole                  2010-2019: 11597
+marketing (reform1990):
+    canonical  marketing                2010-2019: 1174464
+    drop      markéting                2010-2019: 352
+maronner [REVIEW] (discovered):
+    canonical  marronner                2010-2019: 7797
+    drop      maronner                 2010-2019: 3394
+marqueterie (reform1990):
+    canonical  marqueterie              2010-2019: 36048
+    drop      marquèterie              2010-2019: 157
+mater [REVIEW] (discovered):
+    canonical  mater                    2010-2019: 512270
+    drop      matter                   2010-2019: 73594
+    drop      mâter                    2010-2019: 8071
+matin [REVIEW] (discovered):
+    canonical  matin                    2010-2019: 11502131
+    drop      mâtin                    2010-2019: 19830
+maxima (reform1990):
+    canonical  maxima                   2010-2019: 54480
+    drop      maximums                 2010-2019: 11067
+media (reform1990):
+    canonical  média                    2010-2019: 2342035
+    drop      media                    2010-2019: 537705
+mesa (reform1990):
+    canonical  mesa                     2010-2019: 45287
+    drop      mésa                     2010-2019: 2665
+messeoir (reform1990):
+    canonical  messeoir                 2010-2019: 334
+    drop      messoir                  2010-2019: 0
+milord [REVIEW] (discovered):
+    canonical  milord                   2010-2019: 238619
+    drop      mylord                   2010-2019: 29167
+minima (reform1990):
+    canonical  minima                   2010-2019: 159030
+    drop      minimums                 2010-2019: 20650
+mirmidon [REVIEW] (discovered):
+    canonical  myrmidon                 2010-2019: 7954
+    drop      mirmidon                 2010-2019: 574
+moderato (reform1990):
+    canonical  moderato                 2010-2019: 15363
+    drop      modérato                 2010-2019: 28
+molasse [REVIEW] (discovered):
+    canonical  molasse                  2010-2019: 6851
+    drop      mollasse                 2010-2019: 5791
+momerie [REVIEW] (discovered):
+    canonical  momerie                  2010-2019: 5433
+    drop      mômerie                  2010-2019: 3038
+monosaccaride (reform1990):
+    canonical  monosaccharide           2010-2019: 919
+    drop      monosaccaride            2010-2019: 0
+moucherole (reform1990):
+    canonical  moucherolle              2010-2019: 765
+    drop      moucherole               2010-2019: 9
+moudjahiddine [REVIEW] (discovered):
+    canonical  moudjahidine             2010-2019: 21627
+    drop      moudjahiddine            2010-2019: 1145
+    drop      moudjahidines            2010-2019: 13710
+moufette [REVIEW] (discovered):
+    canonical  mouffette                2010-2019: 4592
+    drop      moufette                 2010-2019: 3316
+mousqueterie (reform1990):
+    canonical  mousqueterie             2010-2019: 15815
+    drop      mousquèterie             2010-2019: 21
+mu (reform1990):
+    canonical  mu                       2010-2019: 483963
+    drop      mû                       2010-2019: 119446
+muleta (reform1990):
+    canonical  muleta                   2010-2019: 9650
+    drop      muléta                   2010-2019: 0
+mur [REVIEW] (discovered):
+    canonical  mur                      2010-2019: 9137636
+    drop      mûr                      2010-2019: 778483
+muserole (reform1990):
+    canonical  muserolle                2010-2019: 3485
+    drop      muserole                 2010-2019: 54
+nirvana [REVIEW] (discovered):
+    canonical  nirvana                  2010-2019: 76119
+    drop      nirvâna                  2010-2019: 15525
+none [REVIEW] (discovered):
+    canonical  nonne                    2010-2019: 148487
+    drop      none                     2010-2019: 61621
+nonette [REVIEW] (discovered):
+    canonical  nonnette                 2010-2019: 5850
+    drop      nonette                  2010-2019: 4599
+nouraghe (reform1990):
+    canonical  nuraghe                  2010-2019: 4443
+    drop      nouraghe                 2010-2019: 17
+nénufar (reform1990):
+    canonical  nénuphar                 2010-2019: 73357
+    drop      nénufar                  2010-2019: 1685
+ognon [REVIEW] (reform1990):
+    canonical  ognon                    2010-2019: 528330
+    drop      oignon                   2010-2019: 433108
+ognonade (reform1990):
+    canonical  oignonade                2010-2019: 74
+    drop      ognonade                 2010-2019: 0
+ognonière [REVIEW] (reform1990):
+    canonical  oignonière               2010-2019: 14
+    drop      ognonière                2010-2019: 0
+oie [REVIEW] (discovered):
+    canonical  oie                      2010-2019: 400701
+    drop      oye                      2010-2019: 16234
+oléosaccarure [REVIEW] (reform1990):
+    canonical  oléosaccarure            2010-2019: 0
+    drop      oléosaccharure           2010-2019: 0
+optima (reform1990):
+    canonical  optima                   2010-2019: 6976
+    drop      optimums                 2010-2019: 2845
+ouillière (reform1990):
+    canonical  ouillère                 2010-2019: 76
+    drop      ouillière                2010-2019: 20
+paner [REVIEW] (discovered):
+    canonical  panner                   2010-2019: 541909
+    drop      paner                    2010-2019: 84321
+paneterie (reform1990):
+    canonical  paneterie                2010-2019: 1502
+    drop      panèterie                2010-2019: 14
+panné [REVIEW] (discovered):
+    canonical  pané                     2010-2019: 46370
+    drop      panné                    2010-2019: 3096
+papeterie (reform1990):
+    canonical  papeterie                2010-2019: 69482
+    drop      papèterie                2010-2019: 604
+papi [REVIEW] (discovered):
+    canonical  papy                     2010-2019: 138362
+    drop      papi                     2010-2019: 86166
+par [REVIEW] (discovered):
+    canonical  par                      2010-2019: 313698937
+    drop      parr                     2010-2019: 14306
+parlote [REVIEW] (discovered):
+    canonical  parlote                  2010-2019: 8576
+    drop      parlotte                 2010-2019: 7968
+parqueterie (reform1990):
+    canonical  parqueterie              2010-2019: 412
+    drop      parquèterie              2010-2019: 0
+parti [REVIEW] (discovered):
+    canonical  parti                    2010-2019: 43283089
+    drop      party                    2010-2019: 219714
+paseo (reform1990):
+    canonical  paseo                    2010-2019: 60935
+    drop      paséo                    2010-2019: 281
+pchitt [REVIEW] (discovered):
+    canonical  pschitt                  2010-2019: 9757
+    drop      pchitt                   2010-2019: 290
+penalty (reform1990):
+    canonical  penalty                  2010-2019: 26194
+    drop      pénalty                  2010-2019: 2279
+perestroïka (reform1990):
+    canonical  perestroïka              2010-2019: 33886
+    drop      pérestroïka              2010-2019: 1506
+persifflage (reform1990):
+    canonical  persiflage               2010-2019: 21012
+    drop      persifflage              2010-2019: 529
+persiffler (reform1990):
+    canonical  persifler                2010-2019: 18559
+    drop      persiffler               2010-2019: 288
+persiffleur (reform1990):
+    canonical  persifleur               2010-2019: 8935
+    drop      persiffleur              2010-2019: 210
+peso (reform1990):
+    canonical  peso                     2010-2019: 28805
+    drop      péso                     2010-2019: 56
+phylloxera [REVIEW] (reform1990):
+    canonical  phylloxera               2010-2019: 27913
+    drop      phylloxéra               2010-2019: 20707
+phénix (reform1990):
+    canonical  phénix                   2010-2019: 126385
+    drop      phœnix                   2010-2019: 26883
+piccolo [REVIEW] (discovered):
+    canonical  piccolo                  2010-2019: 22702
+    drop      picolo                   2010-2019: 1568
+pifer [REVIEW] (discovered):
+    canonical  piffer                   2010-2019: 2443
+    drop      pifer                    2010-2019: 454
+pizzeria (reform1990):
+    canonical  pizzeria                 2010-2019: 114424
+    drop      pizzéria                 2010-2019: 6623
+piètement [REVIEW] (reform1990):
+    canonical  piètement                2010-2019: 2431
+    drop      piétement                2010-2019: 2213
+placebo (reform1990):
+    canonical  placebo                  2010-2019: 110569
+    drop      placébo                  2010-2019: 2724
+plingeure [REVIEW] (reform1990):
+    canonical  plingeure                2010-2019: 0
+    drop      plingeüre                2010-2019: 0
+poli [REVIEW] (discovered):
+    canonical  poli                     2010-2019: 896492
+    drop      poly                     2010-2019: 45636
+policemans (reform1990):
+    canonical  policemen                2010-2019: 9705
+    drop      policemans               2010-2019: 102
+pollope [REVIEW] (discovered):
+    canonical  polope                   2010-2019: 158
+    drop      pollope                  2010-2019: 0
+polysaccaride (reform1990):
+    canonical  polysaccharide           2010-2019: 4190
+    drop      polysaccaride            2010-2019: 0
+ponch (reform1990):
+    canonical  punch                    2010-2019: 121591
+    drop      ponch                    2010-2019: 427
+pouffiasse [REVIEW] (discovered):
+    canonical  pouffiasse               2010-2019: 14535
+    drop      poufiasse                2010-2019: 5477
+proscenium (reform1990):
+    canonical  proscenium               2010-2019: 3980
+    drop      proscénium               2010-2019: 426
+prunelier (reform1990):
+    canonical  prunellier               2010-2019: 4391
+    drop      prunelier                2010-2019: 442
+psi [REVIEW] (discovered):
+    canonical  psy                      2010-2019: 533890
+    drop      psi                      2010-2019: 56277
+putti (reform1990):
+    canonical  putti                    2010-2019: 7854
+    drop      puttos                   2010-2019: 20
+quanta (reform1990):
+    canonical  quanta                   2010-2019: 35418
+    drop      quantums                 2010-2019: 389
+quiller (reform1990):
+    canonical  quiller                  2010-2019: 123029
+    drop      quillier                 2010-2019: 1026
+quincailler (reform1990):
+    canonical  quincaillier             2010-2019: 11323
+    drop      quincailler              2010-2019: 4676
+québecois (reform1990):
+    canonical  québécois                2010-2019: 542197
+    drop      québecois                2010-2019: 2186
+rasseoir (reform1990):
+    canonical  rasseoir                 2010-2019: 412362
+    drop      rassoir                  2010-2019: 2520
+rate [REVIEW] (discovered):
+    canonical  rate                     2010-2019: 355646
+    drop      ratte                    2010-2019: 4950
+receleur (reform1990):
+    canonical  receleur                 2010-2019: 22552
+    drop      recéleur                 2010-2019: 2258
+recepage (reform1990):
+    canonical  recépage                 2010-2019: 1415
+    drop      recepage                 2010-2019: 138
+recepée [REVIEW] (reform1990):
+    canonical  recépée                  2010-2019: 66
+    drop      recepée                  2010-2019: 36
+recordmans (reform1990):
+    canonical  recordmen                2010-2019: 794
+    drop      recordmans               2010-2019: 71
+reflex (reform1990):
+    canonical  reflex                   2010-2019: 52466
+    drop      réflex                   2010-2019: 2594
+relai (reform1990):
+    canonical  relais                   2010-2019: 1052003
+    drop      relai                    2010-2019: 24002
+ressurgir [REVIEW] (discovered):
+    canonical  resurgir                 2010-2019: 194240
+    drop      ressurgir                2010-2019: 144211
+revolver (reform1990):
+    canonical  revolver                 2010-2019: 498859
+    drop      révolver                 2010-2019: 18670
+rho [REVIEW] (discovered):
+    canonical  rho                      2010-2019: 10533
+    drop      rhô                      2010-2019: 2859
+rif [REVIEW] (discovered):
+    canonical  rif                      2010-2019: 44773
+    drop      riff                     2010-2019: 34176
+robinetier (reform1990):
+    canonical  robinetier               2010-2019: 77
+    drop      robinétier               2010-2019: 0
+roder [REVIEW] (discovered):
+    canonical  rôder                    2010-2019: 415699
+    drop      roder                    2010-2019: 115053
+roi [REVIEW] (discovered):
+    canonical  roi                      2010-2019: 15918211
+    drop      roy                      2010-2019: 846513
+romancero (reform1990):
+    canonical  romancero                2010-2019: 9018
+    drop      romancéro                2010-2019: 80
+rongeure (reform1990):
+    canonical  rongeure                 2010-2019: 130
+    drop      rongeüre                 2010-2019: 0
+rot [REVIEW] (discovered):
+    canonical  rot                      2010-2019: 59219
+    drop      rôt                      2010-2019: 8026
+rouloter (reform1990):
+    canonical  roulotter                2010-2019: 177
+    drop      rouloter                 2010-2019: 60
+rousserole (reform1990):
+    canonical  rousserolle              2010-2019: 1615
+    drop      rousserole               2010-2019: 291
+ruffian [REVIEW] (discovered):
+    canonical  ruffian                  2010-2019: 13385
+    drop      rufian                   2010-2019: 890
+rugbymans (reform1990):
+    canonical  rugbymen                 2010-2019: 11427
+    drop      rugbymans                2010-2019: 445
+rushes (reform1990):
+    canonical  rushes                   2010-2019: 15237
+    drop      rushs                    2010-2019: 4109
+saccarine (reform1990):
+    canonical  saccharine               2010-2019: 7231
+    drop      saccarine                2010-2019: 73
+saccarose (reform1990):
+    canonical  saccharose               2010-2019: 28671
+    drop      saccarose                2010-2019: 52
+sadducéen [REVIEW] (discovered):
+    canonical  sadducéen                2010-2019: 26927
+    drop      saducéen                 2010-2019: 3174
+saoul [REVIEW] (discovered):
+    canonical  saoul                    2010-2019: 180256
+    drop      soul                     2010-2019: 152469
+    drop      soûl                     2010-2019: 78014
+saoulard [REVIEW] (discovered):
+    canonical  soûlard                  2010-2019: 10886
+    drop      saoulard                 2010-2019: 711
+saouler [REVIEW] (seed):
+    canonical  saouler                  2010-2019: 134532
+    drop      soûler                   2010-2019: 91239
+saoulerie [REVIEW] (discovered):
+    canonical  soûlerie                 2010-2019: 5076
+    drop      saoulerie                2010-2019: 3747
+satire [REVIEW] (discovered):
+    canonical  satire                   2010-2019: 217216
+    drop      satyre                   2010-2019: 84224
+satirique [REVIEW] (discovered):
+    canonical  satirique                2010-2019: 166048
+    drop      satyrique                2010-2019: 10736
+satisfecit (reform1990):
+    canonical  satisfecit               2010-2019: 11843
+    drop      satisfécit               2010-2019: 222
+scampi (reform1990):
+    canonical  scampi                   2010-2019: 9891
+    drop      scampis                  2010-2019: 3099
+scénarii (reform1990):
+    canonical  scénarios                2010-2019: 424470
+    drop      scénarii                 2010-2019: 18796
+select (reform1990):
+    canonical  select                   2010-2019: 113994
+    drop      sélect                   2010-2019: 28763
+senior (reform1990):
+    canonical  senior                   2010-2019: 156411
+    drop      sénior                   2010-2019: 5121
+sensas [REVIEW] (discovered):
+    canonical  sensass                  2010-2019: 3098
+    drop      sensas                   2010-2019: 2484
+serpillière (reform1990):
+    canonical  serpillière              2010-2019: 53051
+    drop      serpillère               2010-2019: 14053
+shrapnel [REVIEW] (discovered):
+    canonical  shrapnel                 2010-2019: 12872
+    drop      shrapnell                2010-2019: 5046
+silvaner [REVIEW] (discovered):
+    canonical  sylvaner                 2010-2019: 6882
+    drop      silvaner                 2010-2019: 162
+sketches (reform1990):
+    canonical  sketches                 2010-2019: 31185
+    drop      sketchs                  2010-2019: 13502
+snif [REVIEW] (discovered):
+    canonical  snif                     2010-2019: 7926
+    drop      sniff                    2010-2019: 7112
+snifer [REVIEW] (discovered):
+    canonical  sniffer                  2010-2019: 29584
+    drop      snifer                   2010-2019: 292
+soli [REVIEW] (reform1990):
+    canonical  solos                    2010-2019: 29180
+    drop      soli                     2010-2019: 28867
+sombrero (reform1990):
+    canonical  sombrero                 2010-2019: 14606
+    drop      sombréro                 2010-2019: 150
+sorgho (reform1990):
+    canonical  sorgho                   2010-2019: 65318
+    drop      sorgo                    2010-2019: 1491
+sostenuto (reform1990):
+    canonical  sostenuto                2010-2019: 3043
+    drop      sosténuto                2010-2019: 0
+sotie [REVIEW] (reform1990):
+    canonical  sotie                    2010-2019: 7571
+    drop      sottie                   2010-2019: 4283
+spermaceti (reform1990):
+    canonical  spermaceti               2010-2019: 1757
+    drop      spermacéti               2010-2019: 57
+sportsmans (reform1990):
+    canonical  sportsmen                2010-2019: 4333
+    drop      sportsmans               2010-2019: 10
+suifer [REVIEW] (discovered):
+    canonical  suiffer                  2010-2019: 1109
+    drop      suifer                   2010-2019: 490
+supermans (reform1990):
+    canonical  supermen                 2010-2019: 1076
+    drop      supermans                2010-2019: 204
+sur [REVIEW] (discovered):
+    canonical  sur                      2010-2019: 299499412
+    drop      sûr                      2010-2019: 16471496
+surseoir (reform1990):
+    canonical  surseoir                 2010-2019: 376292
+    drop      sursoir                  2010-2019: 1081
+tache [REVIEW] (discovered):
+    canonical  tâche                    2010-2019: 4855964
+    drop      tache                    2010-2019: 1451182
+tacher [REVIEW] (discovered):
+    canonical  tâcher                   2010-2019: 5660557
+    drop      tacher                   2010-2019: 1798067
+taler [REVIEW] (discovered):
+    canonical  taler                    2010-2019: 3143850
+    drop      taller                   2010-2019: 17469
+tanin [REVIEW] (discovered):
+    canonical  tanin                    2010-2019: 107334
+    drop      tannin                   2010-2019: 18044
+tartignole [REVIEW] (reform1990):
+    canonical  tartignole               2010-2019: 672
+    drop      tartignolle              2010-2019: 385
+tartufe [REVIEW] (discovered):
+    canonical  tartuffe                 2010-2019: 75009
+    drop      tartufe                  2010-2019: 19682
+tartuferie [REVIEW] (discovered):
+    canonical  tartuferie               2010-2019: 4475
+    drop      tartufferie              2010-2019: 3753
+tavaïole (reform1990):
+    canonical  tavaïolle                2010-2019: 105
+    drop      tavaïole                 2010-2019: 19
+tempi [REVIEW] (reform1990):
+    canonical  tempi                    2010-2019: 12885
+    drop      tempos                   2010-2019: 10757
+tennismans (reform1990):
+    canonical  tennismen                2010-2019: 2998
+    drop      tennismans               2010-2019: 79
+tepidarium (reform1990):
+    canonical  tepidarium               2010-2019: 3699
+    drop      tépidarium               2010-2019: 149
+tequila (reform1990):
+    canonical  tequila                  2010-2019: 63266
+    drop      téquila                  2010-2019: 4706
+tiper [REVIEW] (discovered):
+    canonical  typer                    2010-2019: 14330037
+    drop      tiper                    2010-2019: 1084
+tocade (seed):
+    canonical  toquade                  2010-2019: 12675
+    drop      tocade                   2010-2019: 5952
+tocante [REVIEW] (reform1990):
+    canonical  tocante                  2010-2019: 2796
+    drop      toquante                 2010-2019: 1455
+tocard (seed):
+    canonical  tocard                   2010-2019: 16557
+    drop      toquard                  2010-2019: 2259
+tome [REVIEW] (discovered):
+    canonical  tome                     2010-2019: 1566035
+    drop      tomme                    2010-2019: 30931
+tomette [REVIEW] (discovered):
+    canonical  tomette                  2010-2019: 18277
+    drop      tommette                 2010-2019: 7040
+torero (reform1990):
+    canonical  torero                   2010-2019: 38796
+    drop      toréro                   2010-2019: 1333
+trimbaler [REVIEW] (seed):
+    canonical  trimballer               2010-2019: 75301
+    drop      trimbaler                2010-2019: 47548
+trole (reform1990):
+    canonical  trolle                   2010-2019: 3400
+    drop      trole                    2010-2019: 818
+trompeter (reform1990):
+    canonical  trompeter                2010-2019: 225432
+    drop      trompéter                2010-2019: 60
+trotskiste [REVIEW] (discovered):
+    canonical  trotskiste               2010-2019: 49374
+    drop      trotskyste               2010-2019: 14264
+téocali [REVIEW] (reform1990):
+    canonical  téocali                  2010-2019: 206
+    drop      téocalli                 2010-2019: 145
+vantail (reform1990):
+    canonical  vantail                  2010-2019: 25740
+    drop      ventail                  2010-2019: 4072
+vaquero (reform1990):
+    canonical  vaquero                  2010-2019: 4636
+    drop      vaquéro                  2010-2019: 0
+varia (reform1990):
+    canonical  varia                    2010-2019: 40452
+    drop      varias                   2010-2019: 5973
+velum [REVIEW] (reform1990):
+    canonical  velum                    2010-2019: 8429
+    drop      vélum                    2010-2019: 4423
+vergeure (reform1990):
+    canonical  vergeure                 2010-2019: 138
+    drop      vergeüre                 2010-2019: 0
+veto (reform1990):
+    canonical  veto                     2010-2019: 173047
+    drop      véto                     2010-2019: 27552
+vilenie (reform1990):
+    canonical  vilenie                  2010-2019: 27692
+    drop      vilénie                  2010-2019: 2235
+vousoyer [REVIEW] (discovered):
+    canonical  voussoyer                2010-2019: 1243
+    drop      vousoyer                 2010-2019: 69
+yachtmans (reform1990):
+    canonical  yachtmen                 2010-2019: 955
+    drop      yachtmans                2010-2019: 0
+yoyoter (reform1990):
+    canonical  yoyoter                  2010-2019: 251
+    drop      yoyotter                 2010-2019: 0
+zieuter [REVIEW] (seed):
+    canonical  zieuter                  2010-2019: 8887
+    drop      zyeuter                  2010-2019: 5569
+égrugeure [REVIEW] (reform1990):
+    canonical  égrugeure                2010-2019: 0
+    drop      égrugeüre                2010-2019: 0
+équarisseur [REVIEW] (discovered):
+    canonical  équarrisseur             2010-2019: 9018
+    drop      équarisseur              2010-2019: 1842
+évènement (reform1990):
+    canonical  événement                2010-2019: 3268043
+    drop      évènement                2010-2019: 838107
+évènementiel (seed):
+    canonical  événementiel             2010-2019: 75073
+    drop      évènementiel             2010-2019: 10716

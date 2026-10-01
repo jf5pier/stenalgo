@@ -510,3 +510,14 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
   `docs/PIPELINE.md` ("Recomputing after a fix", lexicon change → `rm -f *.pickle`). Afterwards
   check whether other stray anchors (`ction` `ksj§`, 5 carriers; `-th`) are the same kind of
   syllabification artefact. Found 2026-09-29 while comparing affix rules to OQLF/TAO.
+
+- **`ra`-spelled prefix syllables with an `Re` phonology (lexicon, to investigate).** Found 2026-09-30 while
+  analysing rank 17 (`ra|rai|raie|re|rhé|ré|réh`, `Re` phonology) of the affix sweep. Besides `ré`, its parts are:
+  `rai` (raidir, rainer, rainure(s), rainurer, rainurés; `ai` = é is plausible), `raie` (raiera, raierai, raierais,
+  raieras, raierions, raieront), `rhé` (rhétorique, rhésus, rhéostat…) and `ra` carried by a single word,
+  `rayâmes` (orthographic syllable `ra` pronounced `Re`, which should not be possible for a syllable spelled `ra`: look
+  at its phonology / orthosyll in `Lexique383.tsv` / `LexiqueInfraCorrespondance.tsv`, probably the `ra|yâmes`
+  split of `rayer` forms). Decision (user, 2026-09-30): `re` (`R°`) and `ré` (`Re`) stay separate rules, no
+  phonology-class merge. Check also the `raie`/`rayer` family for the same split, then rebuild per `docs/PIPELINE.md`.
+
+- **Affix pipeline integration (2026-10-01).** Systematise the on-the-fly affix steps (scope proposer, combined-simulation gate, fusion policy, adopt step, deterministic pool: 12,138/12,141/12,149 nodes in three runs, unscoped lattice nodes only) per `PLAN_2026-10-01-affix-pipeline-integration.md`; six decisions to elicit from the user first.

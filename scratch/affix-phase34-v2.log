@@ -1,0 +1,7 @@
+records: 171349 extracted, 381 skipped (44s)
+1751 legal keypresses
+phase 3: 30 rules selected, 48 roots exact-evaluated (69s)
+phase 3 swap pass: done (2s)
+phase 4: 30 rules bound (0s)
+wrote scratch/affix-rules.tsv, scratch/affix-rules-report.md
+total 126s

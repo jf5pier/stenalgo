@@ -1,0 +1,76 @@
+1751 legal keypresses
+
+=== prefix `dé` key (19,): 10280 words, exceptions 210 words / 263 freq; reasons {'standaloneTrap': 111, 'markCostTooHigh': 99}
+  exceptions by first phoneme of the stem (exc words/all words, exc freq):
+    /f/ 29/575 (5%) freq 74
+    /b/ 28/827 (3%) freq 6
+    /m/ 22/908 (2%) freq 11
+    /k/ 19/1641 (1%) freq 13
+    /s/ 16/354 (5%) freq 65
+    /p/ 16/919 (2%) freq 20
+    /g/ 16/766 (2%) freq 5
+    /n/ 11/325 (3%) freq 2
+  split off /s/ -> key B (6,): exceptions 196 words / 198 freq (was 210 / 263); stroke saving 5347 (was 5282)
+  split off /s/f/ -> key B (6,): exceptions 210 words / 144 freq (was 210 / 263); stroke saving 5401 (was 5282)
+  split off /s/f/m/ -> key B (5, 7): exceptions 195 words / 138 freq (was 210 / 263); stroke saving 5408 (was 5282)
+  split off /s/f/m/k/ -> key B (5, 9): exceptions 216 words / 135 freq (was 210 / 263); stroke saving 5369 (was 5282)
+
+=== prefix `re` key (19,): 5931 words, exceptions 172 words / 288 freq; reasons {'standaloneTrap': 71, 'markCostTooHigh': 101}
+  exceptions by first phoneme of the stem (exc words/all words, exc freq):
+    /l/ 26/438 (6%) freq 13
+    /p/ 25/712 (4%) freq 60
+    /t/ 22/649 (3%) freq 6
+    /s/ 21/451 (5%) freq 41
+    /n/ 19/328 (6%) freq 9
+    /f/ 14/363 (4%) freq 1
+    /k/ 11/825 (1%) freq 23
+    /m/ 7/439 (2%) freq 27
+  split off /p/ -> key B (2, 5): exceptions 147 words / 228 freq (was 172 / 288); stroke saving 7030 (was 6970)
+  split off /p/s/ -> key B (2, 5): exceptions 126 words / 187 freq (was 172 / 288); stroke saving 7072 (was 6970)
+  split off /p/s/m/ -> key B (2, 5): exceptions 119 words / 160 freq (was 172 / 288); stroke saving 7106 (was 6970)
+  split off /p/s/m/n/ -> key B (2, 5): exceptions 105 words / 152 freq (was 172 / 288); stroke saving 7117 (was 6970)
+
+=== prefix `é` key (19,): 6109 words, exceptions 137 words / 502 freq; reasons {'markCostTooHigh': 61, 'standaloneTrap': 76}
+  exceptions by first phoneme of the stem (exc words/all words, exc freq):
+    /t/ 34/900 (4%) freq 396
+    /p/ 29/850 (3%) freq 46
+    /v/ 16/504 (3%) freq 9
+    /l/ 11/509 (2%) freq 6
+    /S/ 10/303 (3%) freq 2
+    /R/ 8/158 (5%) freq 4
+    /k/ 7/1144 (1%) freq 17
+    /g/ 7/322 (2%) freq 12
+  split off /t/ -> key B (4,): exceptions 112 words / 399 freq (was 137 / 502); stroke saving 5477 (was 5373)
+  split off /t/k/ -> key B (4, 5): exceptions 106 words / 382 freq (was 137 / 502); stroke saving 5493 (was 5373)
+  split off /t/k/g/ -> key B (4, 5): exceptions 99 words / 370 freq (was 137 / 502); stroke saving 5506 (was 5373)
+  split off /t/k/g/l/ -> key B (4, 5): exceptions 89 words / 365 freq (was 137 / 502); stroke saving 5512 (was 5373)
+
+=== prefix `ra|rai|raie|re|rhé|ré|réh` key (25,): 3743 words, exceptions 135 words / 139 freq; reasons {'markCostTooHigh': 66, 'standaloneTrap': 69}
+  exceptions by first phoneme of the stem (exc words/all words, exc freq):
+    /z/ 18/359 (5%) freq 13
+    /E/ 17/39 (44%) freq 1
+    /Z/ 15/214 (7%) freq 24
+    /N/ 15/55 (27%) freq 7
+    /t/ 13/337 (4%) freq 57
+    /R/ 13/68 (19%) freq 3
+    /k/ 12/267 (4%) freq 13
+    /p/ 6/371 (2%) freq 4
+  split off /t/ -> key B (2,): exceptions 122 words / 83 freq (was 135 / 139); stroke saving 3204 (was 3145)
+  split off /t/Z/ -> key B (2,): exceptions 115 words / 63 freq (was 135 / 139); stroke saving 3224 (was 3145)
+  split off /t/Z/k/ -> key B (3, 4): exceptions 103 words / 50 freq (was 135 / 139); stroke saving 3237 (was 3145)
+  split off /t/Z/k/z/ -> key B (3, 4): exceptions 90 words / 37 freq (was 135 / 139); stroke saving 3250 (was 3145)
+
+=== prefix `en` key (18, 22): 4244 words, exceptions 134 words / 57 freq; reasons {'standaloneTrap': 134}
+  exceptions by first phoneme of the stem (exc words/all words, exc freq):
+    /t/ 41/965 (4%) freq 20
+    /k/ 21/592 (4%) freq 3
+    /d/ 20/392 (5%) freq 3
+    /f/ 18/366 (5%) freq 12
+    /s/ 13/339 (4%) freq 15
+    /v/ 7/311 (2%) freq 0
+    /S/ 3/125 (2%) freq 1
+    /R/ 3/285 (1%) freq 0
+  split off /t/ -> key B (2,): exceptions 94 words / 38 freq (was 134 / 57); stroke saving 6000 (was 5978)
+  split off /t/s/ -> key B (4,): exceptions 81 words / 22 freq (was 134 / 57); stroke saving 6016 (was 5978)
+  split off /t/s/f/ -> key B (5, 18): exceptions 96 words / 18 freq (was 134 / 57); stroke saving 6019 (was 5978)
+  split off /t/s/f/k/ -> key B (5, 18): exceptions 79 words / 16 freq (was 134 / 57); stroke saving 6022 (was 5978)

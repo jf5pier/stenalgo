@@ -1,3 +1,5 @@
+> **Status 2026-10-01: HISTORICAL.** Kept for its reasoning. The current description is `docs/AFFIX_RULES.md`; the state is `RESUME_2026-10-01-option-c-engine.md`; the next phase (pipeline integration) is `PLAN_2026-10-01-affix-pipeline-integration.md`.
+
 # Affix Abbreviation Discovery and Key Binding — handoff spec (2026-09-26)
 
 **Audience: the model that implements this after a `/clear`.** Everything needed is here. The

@@ -1,0 +1,265 @@
+=================== prefix 'ae|ai|aî|e|ei|he|hé|oe|é|éh' /e/ keys 2,5
+6777 carriers; approved-forms-only objective 6076 (fb 0, exc 21/7); keys (2, 5)
+added spellings: {'é': 5295, 'hé': 304, 'e': 174, 'ai': 52, 'he': 5, 'éh': 4, 'oe': 1, 'ae': 1}
+best single (anchor spelling, neighbour sound), net of a 100 form, >=3 words:
+  é    + /tR@/ words   45 freq  110.4 d_obj    +10 fb   0 étranger étrangers étranger étrangère
+  é    + /lEk/ words  132 freq   86.4 d_obj    -14 fb   0 électrique électricité élections élection
+  é    + /tER/ words   47 freq   64.0 d_obj    -36 fb   0 éternité éternel éternelle éternellement
+  é    + /le/ words   43 freq   58.8 d_obj    -41 fb   0 éléments élément éléphant éléphants
+  é    + /mi/ words   43 freq   45.0 d_obj    -55 fb   0 émission émissions émissaire émissaire
+  é    + /mo/ words   24 freq   36.9 d_obj    -63 fb   0 émotion émotions émotionnel émotionnelle
+  é    + /kRi/ words   57 freq   77.9 d_obj    -65 fb   7 écrivain écriture écrivez écrirai
+  é    + /lwa/ words   31 freq   33.9 d_obj    -66 fb   0 éloigner éloigné éloignez éloigné
+  é    + /dy/ words   33 freq   31.6 d_obj    -68 fb   0 éducation éduquer éduqué éducatif
+  é    + /ga/ words   74 freq   55.1 d_obj    -72 fb   5 également égalité égaré égarer
+  é    + /nER/ words   48 freq   81.2 d_obj    -73 fb   6 énergie énerver énervé énervée
+  é    + /klE/ words   37 freq   23.3 d_obj    -77 fb   0 éclairer éclairage éclaireur éclairé
+  e    + /s@/ words    7 freq   23.1 d_obj    -77 fb   0 essentiel essentiel essentielle essentiellement
+  é    + /paR/ words   68 freq   22.8 d_obj    -77 fb   0 épargner épargné épargnez épargnée
+  é    + /li/ words   79 freq   36.2 d_obj    -79 fb   3 éliminer éliminé élimine éliminés
+  é    + /vE/ words   32 freq   45.8 d_obj    -82 fb   1 évènements événement éveillé éveiller
+  e    + /fEk/ words    9 freq   16.8 d_obj    -83 fb   0 effectivement effectifs effectif effectif
+  hé   + /Ro/ words    9 freq   16.4 d_obj    -85 fb   0 héroïne héroïque héroïques héroïsme
+  é    + /kRa/ words   57 freq   46.5 d_obj    -85 fb   4 écraser écrasé écrasés écrasée
+  hé   + /li/ words   17 freq   14.2 d_obj    -86 fb   0 hélicoptère hélicoptères héliport héliporté
+  é    + /go/ words   51 freq   15.6 d_obj    -87 fb   0 égoïste égoïsme égoïste égocentrique
+  hé   + /mo/ words   26 freq   13.3 d_obj    -87 fb   0 hémorragie hémorroïdes hémoglobine hémorragies
+  é    + /tO/ words   10 freq   12.9 d_obj    -87 fb   0 étonnerait étonnement étonnera étonnerai
+  é    + /nOR/ words    3 freq   12.7 d_obj    -87 fb   0 énormément énormités énormité
+  é    + /t5/ words   45 freq   12.6 d_obj    -87 fb   0 étincelle étincelles éteindra éteindrai
+
+approved forms' own patterns applied to each added anchor spelling (net of a 100 form):
+=================== suffix 'ccion|cion|cyon|sion|ssion|tion|tions' /sj§/ keys 16,17,20
+2366 carriers; approved-forms-only objective 5643 (fb 14, exc 4/101); keys (16, 17, 20)
+added spellings: {'tion': 253, 'tions': 158, 'ssion': 53, 'sion': 48, 'ssions': 35, 'sions': 28, 'cion': 2, 'cions': 2}
+best single (anchor spelling, neighbour sound), net of a 100 form, >=3 words:
+  ssion + /pRe/ words    5 freq  103.8 d_obj   +247 fb  16 impression dépression répression oppression
+  tion + /t8a/ words    7 freq  102.1 d_obj     +2 fb  14 situation ponctuation fluctuation accentuation
+  tion + /ly/ words   14 freq   95.0 d_obj     -7 fb  14 solution révolution évolution résolution
+  tion + /REk/ words    6 freq   56.2 d_obj    -44 fb  19 direction correction résurrection érection
+  ssion + /mi/ words   15 freq  101.9 d_obj    -66 fb  21 permission émission commission transmission
+  tion + /t@/ words   10 freq  366.0 d_obj    -67 fb  16 attention attention intention détention
+  tion + /dik/ words    7 freq   32.2 d_obj    -73 fb  15 malédiction bénédiction interdiction juridiction
+  tion + /v@/ words    7 freq   30.8 d_obj    -75 fb  14 intervention invention convention contravention
+  tion + /ty/ words    7 freq   22.9 d_obj    -77 fb  14 constitution prostitution institution reconstitution
+  tion + /ak/ words    3 freq   21.4 d_obj    -79 fb  14 réaction rétroaction exaction
+  tion + /sEp/ words    8 freq   30.5 d_obj    -79 fb  14 réception déception conception perception
+  ssion + /ky/ words    4 freq   19.9 d_obj    -80 fb  14 discussion percussion répercussion concussion
+  tion + /ky/ words    8 freq   19.0 d_obj    -81 fb  14 exécution persécution élocution électrocution
+  tion + /lEk/ words    7 freq   27.6 d_obj    -84 fb  14 collection élection sélection réélection
+  tions + /tRyk/ words    4 freq   17.8 d_obj    -84 fb  14 instructions constructions destructions reconstructions
+  tion + /fEk/ words    9 freq   32.2 d_obj    -86 fb  15 affection infection perfection désinfection
+  tion + /Ryp/ words    4 freq   14.8 d_obj    -87 fb  19 corruption éruption irruption interruption
+  tion + /tRyk/ words    6 freq   36.5 d_obj    -89 fb  14 destruction construction instruction autodestruction
+  tions + /REk/ words    5 freq    7.0 d_obj    -90 fb  19 corrections directions érections résurrections
+  tion + /by/ words    5 freq    9.1 d_obj    -91 fb  14 distribution contribution rétribution attribution
+  tions + /ly/ words    6 freq    9.0 d_obj    -91 fb  14 solutions révolutions résolutions évolutions
+  ssion + /se/ words   11 freq   30.2 d_obj    -91 fb  14 possession obsession concession procession
+  tions + /Ryp/ words    4 freq    1.2 d_obj    -92 fb  19 interruptions éruptions corruptions irruptions
+  tion + /fak/ words    9 freq    8.4 d_obj    -92 fb  14 satisfaction putréfaction stupéfaction insatisfaction
+  tions + /t8a/ words    3 freq    8.2 d_obj    -92 fb  14 situations fluctuations ponctuations
+
+approved forms' own patterns applied to each added anchor spelling (net of a 100 form):
+  tion:C*[ai] on `tions`: words    1 d_obj   -100 fb 14 examples allocations
+  tion:C*[ai] on `ssion`: words   17 d_obj    -66 fb 21 examples permission émission commission compassion transmission
+  tion:C*[ai] on `ssions`: words   11 d_obj   -100 fb 21 examples permissions émissions commissions transmissions démissions
+=================== prefix 'au|aux|hau|haut|ho|hô|o|oh|ô' /o/ keys 17,18,19
+2154 carriers; approved-forms-only objective 6697 (fb 14, exc 28/92); keys (17, 18, 19)
+added spellings: {'o': 576, 'ho': 219, 'au': 160, 'hô': 11, 'hau': 10, 'ô': 7}
+best single (anchor spelling, neighbour sound), net of a 100 form, >=3 words:
+  o    + /RE/ words    5 freq    2.5 d_obj    -69 fb  17 oreillons oreillette oraisons oraison
+  o    + /se/ words   12 freq   25.6 d_obj    -74 fb  14 océan océans océanographique océanique
+  o    + /pOR/ words   12 freq   14.8 d_obj    -85 fb  14 opportunité opportunités opportun opportuniste
+  ho   + /mi/ words    7 freq   14.1 d_obj    -86 fb  14 homicide homicide homicides homicides
+  au   + /t@/ words   20 freq   11.7 d_obj    -88 fb  14 authentique authentiques authenticité authentification
+  ho   + /l@/ words    9 freq    7.0 d_obj    -93 fb  14 hollandais hollandais hollandaise hollandaises
+  au   + /tRi/ words    9 freq    6.9 d_obj    -93 fb  14 autrichiens autrichien autrichienne autrichien
+  au   + /da/ words    4 freq    4.9 d_obj    -95 fb  14 audacieux audacieuse audacieuses audacieusement
+  ho   + /lo/ words   12 freq    4.2 d_obj    -96 fb  14 holocauste hologramme hologrammes holographique
+  o    + /l5/ words    7 freq    4.1 d_obj    -96 fb  14 olympiques olympique olympiades olympiade
+  au   + /bER/ words    5 freq    3.5 d_obj    -97 fb  14 aubergiste aubergines aubergine aubergine
+  au   + /ksi/ words    4 freq    3.3 d_obj    -97 fb  14 auxiliaire auxiliaires auxiliaire auxiliaires
+  au   + /Re/ words   23 freq    2.4 d_obj    -98 fb  14 auréole auréolé auréoles auréolée
+  au   + /mo/ words    5 freq    1.5 d_obj    -98 fb  14 aumônier aumôniers aumônerie aumônière
+  hô   + /t°/ words    7 freq    1.3 d_obj    -99 fb  14 hôtelière hôtelier hôtelier hôtelières
+  ho   + /nO/ words    7 freq    1.2 d_obj    -99 fb  14 honorerai honorerez honoreras honorerons
+  au   + /djo/ words   11 freq    1.1 d_obj    -99 fb  14 audiovisuelle audiovisuel audiovisuel audioconférence
+  ho   + /me/ words   11 freq    1.3 d_obj    -99 fb  14 homéopathie homélie homéopathique homéopathe
+  au   + /tok/ words    4 freq    1.1 d_obj    -99 fb  14 autochtones autochtone autochtone autochtones
+  o    + /py/ words    6 freq    1.0 d_obj    -99 fb  14 opulence opulente opulents opulentes
+  o    + /ne/ words    3 freq    0.8 d_obj    -99 fb  14 onéreux onéreuse onéreuses
+  au   + /Ri/ words   11 freq    0.6 d_obj    -99 fb  14 auriculaire auriculaire aurifère aurifères
+  o    + /vy/ words    5 freq    0.6 d_obj    -99 fb  14 ovulation ovuler ovulaire ovulaires
+  ho   + /za/ words    3 freq    0.5 d_obj    -99 fb  14 hosannas hosanna hosannah
+  o    + /no/ words    4 freq    0.5 d_obj   -100 fb  14 onomatopéique onomatopée onomatopées onopordons
+
+approved forms' own patterns applied to each added anchor spelling (net of a 100 form):
+  au:jour|to|tre|di on `o`: words    7 d_obj   -100 fb 14 examples ottoman ottomans ottoman ottomane ottomane
+  o:C{1,2}i|kV on `ho`: words   80 d_obj  -1373 fb 41 examples homicide homicide homicides homicides horizon
+  o:C{1,2}i|kV on `au`: words   27 d_obj    -75 fb 14 examples aussitôt autrichiens autrichien autrichien autrichiens
+  o:C{1,2}i|kV on `hô`: words    2 d_obj    +33 fb 14 examples hôpital hôpitaux
+=================== suffix 'ger|gée' /Ze/ keys 16,24
+1042 carriers; approved-forms-only objective 1929 (fb 0, exc 0/0); keys (16, 24)
+added spellings: {'ger': 151, 'gé': 114, 'gez': 112, 'gée': 111, 'geai': 110, 'gées': 107, 'gés': 106, 'gers': 20}
+best single (anchor spelling, neighbour sound), net of a 100 form, >=3 words:
+  ger  + /R@/ words    5 freq   81.1 d_obj    -19 fb   0 arranger déranger oranger réarranger
+  ger  + /ta/ words    7 freq   37.2 d_obj    -63 fb   0 partager potager départager potager
+  gé   + /R@/ words    4 freq   26.3 d_obj    -74 fb   0 arrangé dérangé orangé réarrangé
+  gez  + /ga/ words    5 freq   29.8 d_obj    -78 fb   0 dégagez engagez désengagez rengagez
+  ger  + /Ri/ words    4 freq   20.8 d_obj    -79 fb   0 diriger corriger ériger rediriger
+  ger  + /na/ words   10 freq   20.7 d_obj    -79 fb   0 déménager emménager ménager aménager
+  ger  + /ga/ words    5 freq   27.5 d_obj    -80 fb   0 engager dégager réengager rengager
+  ger  + /Ro/ words    5 freq   16.7 d_obj    -83 fb   0 interroger déroger réinterroger proroger
+  gé   + /ga/ words    5 freq   24.2 d_obj    -83 fb   0 engagé dégagé réengagé désengagé
+  gé   + /na/ words    6 freq   13.2 d_obj    -87 fb   0 déménagé emménagé aménagé ménagé
+  ger  + /l§/ words    4 freq   12.9 d_obj    -87 fb   0 allonger prolonger rallonger forlonger
+  ger  + /S@/ words    3 freq   10.0 d_obj    -90 fb   0 échanger rechanger interchanger
+  ger  + /sa/ words    3 freq   15.8 d_obj    -90 fb   0 messager passager passager
+  gez  + /R@/ words    4 freq    9.2 d_obj    -91 fb   0 dérangez arrangez orangez réarrangez
+  ger  + /Ra/ words    5 freq    8.5 d_obj    -91 fb   0 encourager enrager décourager fourrager
+  gé   + /Ro/ words    4 freq    7.7 d_obj    -92 fb   0 interrogé dérogé arrogé prorogé
+  ger  + /SaR/ words    4 freq    7.0 d_obj    -93 fb   0 décharger recharger télécharger surcharger
+  gé   + /Ri/ words    4 freq    6.8 d_obj    -93 fb   0 dirigé corrigé érigé redirigé
+  gé   + /l§/ words    4 freq    6.4 d_obj    -94 fb   0 allongé prolongé rallongé forlongé
+  gé   + /S@/ words    3 freq    6.0 d_obj    -94 fb   0 échangé interchangé rechangé
+  gé   + /ta/ words    4 freq    5.9 d_obj    -94 fb   0 partagé avantagé désavantagé départagé
+  ger  + /za/ words    6 freq    5.9 d_obj    -94 fb   0 envisager dévisager réenvisager présager
+  gez  + /Ri/ words    3 freq    4.8 d_obj    -95 fb   0 dirigez corrigez érigez
+  gée  + /l§/ words    4 freq    4.6 d_obj    -95 fb   0 allongée prolongée rallongée forlongée
+  gez  + /l§/ words    4 freq    4.3 d_obj    -96 fb   0 allongez rallongez prolongez forlongez
+
+approved forms' own patterns applied to each added anchor spelling (net of a 100 form):
+=================== suffix 'cher|chée|scher|sher' /Se/ keys 9,24,25
+865 carriers; approved-forms-only objective 1806 (fb 0, exc 0/0); keys (9, 24, 25)
+added spellings: {'cher': 89, 'chée': 76, 'ché': 74, 'chées': 74, 'chés': 73, 'chez': 42, 'chai': 28, 'chers': 2}
+best single (anchor spelling, neighbour sound), net of a 100 form, >=3 words:
+  cher + /pRo/ words    3 freq   33.7 d_obj    -66 fb   0 approcher reprocher rapprocher
+  chez + /pRo/ words    3 freq   31.6 d_obj    -68 fb   0 approchez rapprochez reprochez
+  cher + /kRo/ words    3 freq   21.9 d_obj    -78 fb   0 accrocher décrocher raccrocher
+  ché  + /kRo/ words    3 freq   18.1 d_obj    -82 fb   0 raccroché accroché décroché
+  cher + /ta/ words    4 freq   14.8 d_obj    -85 fb   0 attacher détacher rattacher entacher
+  chez + /kRo/ words    3 freq   13.6 d_obj    -86 fb   0 accrochez raccrochez décrochez
+  ché  + /ta/ words    4 freq   10.8 d_obj    -89 fb   0 attaché détaché rattaché entaché
+  chez + /ta/ words    3 freq    8.3 d_obj    -92 fb   0 attachez détachez rattachez
+  ché  + /pRo/ words    3 freq    6.9 d_obj    -93 fb   0 approché reproché rapproché
+  chée + /ta/ words    4 freq    6.2 d_obj    -94 fb   0 attachée détachée entachée rattachée
+  ché  + /kl@/ words    3 freq    5.8 d_obj    -94 fb   0 déclenché enclenché déclanché
+  cher + /kl@/ words    3 freq    5.3 d_obj    -95 fb   0 déclencher enclencher déclancher
+  ché  + /bo/ words    4 freq    4.9 d_obj    -95 fb   0 embauché débauché réembauché ébauché
+  cher + /bo/ words    6 freq    4.0 d_obj    -96 fb   0 embaucher débaucher rabibocher réembaucher
+  cher + /bR@/ words    3 freq    2.5 d_obj    -98 fb   0 débrancher rebrancher ébrancher
+  chés + /ta/ words    4 freq    2.4 d_obj    -98 fb   0 attachés détachés rattachés entachés
+  chée + /kRo/ words    3 freq    2.3 d_obj    -98 fb   0 accrochée décrochée raccrochée
+  cher + /ku/ words    3 freq    8.5 d_obj    -98 fb   0 accoucher recoucher découcher
+  chée + /pRo/ words    3 freq    1.9 d_obj    -98 fb   0 approchée rapprochée reprochée
+  chés + /kRo/ words    3 freq    1.6 d_obj    -98 fb   0 accrochés raccrochés décrochés
+  ché  + /bR@/ words    3 freq    1.5 d_obj    -98 fb   0 débranché rebranché ébranché
+  chés + /pRo/ words    3 freq    1.3 d_obj    -99 fb   0 rapprochés approchés reprochés
+  chées + /ta/ words    4 freq    0.8 d_obj    -99 fb   0 attachées détachées rattachées entachées
+  chée + /bo/ words    4 freq    0.8 d_obj    -99 fb   0 embauchée débauchée ébauchée réembauchée
+  chées + /kRo/ words    3 freq    0.8 d_obj    -99 fb   0 accrochées raccrochées décrochées
+
+approved forms' own patterns applied to each added anchor spelling (net of a 100 form):
+=================== suffix 've|ver|wé' /ve/ keys 16,17,18
+456 carriers; approved-forms-only objective 2512 (fb 0, exc 0/0); keys (16, 17, 18)
+added spellings: {'ver': 65, 'vée': 50, 'vés': 50, 'vées': 50, 'vé': 49, 'vez': 32, 'vai': 22, 'vers': 3}
+best single (anchor spelling, neighbour sound), net of a 100 form, >=3 words:
+  ver  + /l°/ words    8 freq   80.6 d_obj    -19 fb   0 enlever élever relever soulever
+  vé   + /l°/ words    6 freq   44.9 d_obj    -55 fb   0 enlevé élevé relevé soulevé
+  vez  + /l°/ words    6 freq   29.7 d_obj    -70 fb   0 enlevez relevez soulevez élevez
+  vée  + /l°/ words    6 freq   15.8 d_obj    -84 fb   0 enlevée élevée soulevée relevée
+  ver  + /ti/ words   11 freq   10.0 d_obj    -90 fb   0 cultiver activer désactiver motiver
+  vé   + /pRu/ words    4 freq    7.3 d_obj    -93 fb   0 éprouvé approuvé désapprouvé réprouvé
+  vé   + /ti/ words    7 freq    6.7 d_obj    -94 fb   0 activé motivé désactivé cultivé
+  ver  + /pRu/ words    4 freq    5.9 d_obj    -94 fb   0 éprouver approuver désapprouver réprouver
+  vés  + /l°/ words    6 freq    5.6 d_obj    -94 fb   0 enlevés élevés soulevés relevés
+  vez  + /ti/ words    5 freq    3.6 d_obj    -96 fb   0 activez cultivez désactivez réactivez
+  vez  + /pRu/ words    4 freq    2.7 d_obj    -97 fb   0 éprouvez approuvez désapprouvez réprouvez
+  vées + /l°/ words    6 freq    2.3 d_obj    -98 fb   0 enlevées prélevées élevées relevées
+  vée  + /ti/ words    7 freq    1.8 d_obj    -98 fb   0 activée cultivée motivée désactivée
+  vées + /ti/ words    7 freq    1.0 d_obj    -99 fb   0 désactivées activées cultivées motivées
+  vés  + /ti/ words    7 freq    1.2 d_obj    -99 fb   0 motivés captivés activés désactivés
+  vée  + /pRu/ words    4 freq    0.8 d_obj    -99 fb   0 approuvée éprouvée désapprouvée réprouvée
+  ver  + /li/ words    3 freq    0.5 d_obj   -100 fb   0 saliver enjoliver oliver
+  vai  + /l°/ words    5 freq    0.4 d_obj   -100 fb   0 élevai relevai enlevai soulevai
+  vés  + /pRu/ words    4 freq    0.4 d_obj   -100 fb   0 éprouvés approuvés désapprouvés réprouvés
+  vées + /pRu/ words    4 freq    0.2 d_obj   -100 fb   0 réprouvées approuvées éprouvées désapprouvées
+  ver  + /la/ words    3 freq    0.1 d_obj   -100 fb   0 relaver prélaver délaver
+  vai  + /ti/ words    4 freq    0.0 d_obj   -100 fb   0 cultivai activai motivai invectivai
+
+approved forms' own patterns applied to each added anchor spelling (net of a 100 form):
+  ver:vé:Ri on `ver`: words    2 d_obj    +84 fb 0 examples arriver dériver
+  ver:vé:Ri on `vée`: words    2 d_obj    -62 fb 0 examples arrivée dérivée
+  ver:vé:Ri on `vés`: words    2 d_obj    -67 fb 0 examples arrivés dérivés
+  ver:vé:Ri on `vées`: words    2 d_obj    -96 fb 0 examples arrivées dérivées
+  ver:vé:Ri on `vez`: words    2 d_obj    -89 fb 0 examples arrivez dérivez
+  ver:vé:Ri on `vai`: words    1 d_obj   -100 fb 0 examples arrivai
+=================== prefix 'pa|pei|pâ' /pa/ keys 2,5
+1813 carriers; approved-forms-only objective 3167 (fb 0, exc 21/11); keys (2, 5)
+added spellings: {'pa': 1153, 'pâ': 72}
+best single (anchor spelling, neighbour sound), net of a 100 form, >=3 words:
+  pa   + /pi/ words   43 freq   14.6 d_obj    -87 fb   0 papillon papillons papyrus papillotes
+  pa   + /tRij/ words   20 freq   10.9 d_obj    -89 fb   0 patriotisme patriote patriotique patriotes
+  pa   + /te/ words    6 freq   10.1 d_obj    -90 fb   0 pathétique pathétiques pathétique pathétiquement
+  pa   + /Rap/ words    8 freq    8.2 d_obj    -92 fb   0 parapluie parapluies parapsychologie parapsychologue
+  pa   + /p°/ words   16 freq    6.5 d_obj    -94 fb   0 paperasse paperasserie paperasses papetier
+  pa   + /lEs/ words    5 freq    6.4 d_obj    -94 fb   0 palestiniens palestinien palestiniens palestinienne
+  pa   + /tER/ words   12 freq    6.5 d_obj    -94 fb   0 paternité paternelle paternel paternel
+  pa   + /vi/ words    4 freq    6.0 d_obj    -95 fb   0 pavillon pavillons pavillonnaire pavillonnaires
+  pa   + /no/ words   17 freq    3.7 d_obj    -96 fb   0 panoplie panorama panoramique panoramique
+  pa   + /kis/ words    6 freq    2.8 d_obj    -97 fb   0 pakistanais pakistanais pakistanaise pakistanaise
+  pa   + /tRi/ words   17 freq    2.6 d_obj    -97 fb   0 patrimoine patrimoines patricienne patriciens
+  pa   + /t°/ words    8 freq    2.4 d_obj    -98 fb   0 patelin patelin pattemouille patelins
+  pa   + /Rwa/ words    8 freq    1.8 d_obj    -98 fb   0 paroissiens paroissiale paroissial paroissien
+  pa   + /li/ words   19 freq    0.7 d_obj    -99 fb   0 palissade palissades palilalie palinodies
+  pa   + /l°/ words    6 freq    0.7 d_obj    -99 fb   0 palefrenier palefreniers paletot palefrenière
+  pa   + /le/ words   17 freq    0.5 d_obj   -100 fb   0 paléontologue paléontologie paléontologiste paléolithique
+  pa   + /vwa/ words   12 freq    0.3 d_obj   -100 fb   0 pavoiser pavoisait pavoisera pavoisé
+  pa   + /Rje/ words    4 freq    0.3 d_obj   -100 fb   0 pariétal pariétale pariétaux pariétales
+  pa   + /ne/ words    3 freq    0.2 d_obj   -100 fb   0 panégyrique panégyriques panégyristes
+  pa   + /Si/ words    4 freq    0.2 d_obj   -100 fb   0 pachyderme pachydermes pachydermique pachydermiques
+  pa   + /lja/ words    5 freq    0.2 d_obj   -100 fb   0 palliatifs palliatif palliatif palliatifs
+  pa   + /ly/ words   10 freq    0.5 d_obj   -100 fb   0 paludisme palucher paluchait paludamentum
+  pa   + /jaR/ words    4 freq    0.2 d_obj   -100 fb   0 paillardise paillardises paillardait paillardement
+  pa   + /se/ words    3 freq    0.2 d_obj   -100 fb   0 passéiste passéistes paseo
+  pa   + /vlO/ words    3 freq    0.1 d_obj   -100 fb   0 pavlovien pavlovienne pavloviens
+
+approved forms' own patterns applied to each added anchor spelling (net of a 100 form):
+=================== suffix 'man|mand|mant|ment|ments|mmant|mment' /m@/ keys 16,20,25
+2909 carriers; approved-forms-only objective 7664 (fb 37, exc 5/434); keys (16, 20, 25)
+added spellings: {'ment': 149, 'mment': 70, 'ments': 59, 'mant': 19, 'mants': 11, 'man': 9, 'mans': 6, 'mand': 3, 'mands': 3, 'mmant': 1, 'mmants': 1}
+best single (anchor spelling, neighbour sound), net of a 100 form, >=3 words:
+  mment + /Ra/ words    6 freq   53.0 d_obj    -47 fb  37 apparemment différemment couramment indifféremment
+  mment + /da/ words   10 freq   45.5 d_obj    -66 fb  39 évidemment précédemment prudemment ardemment
+  ment + /Re/ words   13 freq   26.2 d_obj    -74 fb  37 carrément désespérément séparément assurément
+  ment + /de/ words    3 freq   23.0 d_obj    -77 fb  37 profondément décidément commodément
+  mment + /za/ words    6 freq   18.4 d_obj    -82 fb  37 suffisamment insuffisamment plaisamment complaisamment
+  ment + /me/ words    4 freq   15.5 d_obj    -84 fb  37 énormément conformément nommément uniformément
+  ment + /ze/ words    6 freq   15.5 d_obj    -87 fb  37 précisément aisément posément supposément
+  mment + /ta/ words    6 freq   11.5 d_obj    -88 fb  37 constamment notamment précipitamment instamment
+  ment + /ne/ words   13 freq   10.9 d_obj    -89 fb  37 instantanément impunément passionnément spontanément
+  mment + /sa/ words    8 freq   23.4 d_obj    -93 fb  40 récemment décemment innocemment incessamment
+  mment + /la/ words    6 freq    3.2 d_obj    -97 fb  37 violemment excellemment insolemment galamment
+  mment + /na/ words    4 freq    1.9 d_obj    -98 fb  37 étonnamment pertinemment éminemment impertinemment
+  mment + /ja/ words    3 freq    1.6 d_obj    -98 fb  37 brillamment vaillamment bienveillamment
+  mment + /ka/ words    4 freq    1.5 d_obj    -99 fb  37 fréquemment subséquemment éloquemment conséquemment
+  mment + /Za/ words    5 freq    1.4 d_obj    -99 fb  37 intelligemment diligemment négligemment urgemment
+  ment + /twa/ words    4 freq    0.8 d_obj    -99 fb  37 tutoiement apitoiement chatoiement nettoiement
+  mment + /ga/ words    3 freq    0.2 d_obj   -100 fb  37 élégamment arrogamment inélégamment
+  ment + /fl°/ words    3 freq    4.6 d_obj   -100 fb  37 sifflement essoufflement soufflement
+  ment + /fR°/ words    3 freq    0.2 d_obj   -100 fb  37 chiffrement déchiffrement engouffrement
+  ment + /le/ words    3 freq   10.3 d_obj   -100 fb  37 élément isolément radioélément
+  ment + /dwa/ words    3 freq    0.1 d_obj   -100 fb  37 verdoiement ondoiement rudoiement
+  ments + /fl°/ words    3 freq    0.4 d_obj   -100 fb  37 sifflements essoufflements soufflements
+  ments + /j°/ words   18 freq    5.5 d_obj   -105 fb  39 piaillements tressaillements ravitaillements déraillements
+  ment + /j°/ words   26 freq    5.5 d_obj   -105 fb  39 ravitaillement piaillement bâillement déraillement
+  ment + /dy/ words    3 freq    0.3 d_obj   -110 fb  39 indûment assidûment ardûment
+
+approved forms' own patterns applied to each added anchor spelling (net of a 100 form):
+  ment:C{1,2}[eui]+ on `mment`: words   35 d_obj    -24 fb 47 examples apparemment évidemment récemment précédemment différemment
+  ment:C{1,2}[eui]+ on `ments`: words    1 d_obj   -101 fb 37 examples errements
+  ment:C{1,2}[eui]+ on `mant`: words    6 d_obj   -116 fb 40 examples déprimant légitimant écumant comprimant dirimant
+  ment:C{1,2}[eui]+ on `mants`: words    4 d_obj   -116 fb 40 examples déprimants écumants dirimants transhumants
+  ment:C{1,2}[eui]+ on `man`: words    1 d_obj   -100 fb 37 examples bochiman
+  ment:C{1,2}[eui]+ on `mand`: words    3 d_obj   -110 fb 39 examples allemand allemand antiallemand
+  ment:C{1,2}[eui]+ on `mands`: words    3 d_obj   -110 fb 39 examples allemands allemands antiallemands

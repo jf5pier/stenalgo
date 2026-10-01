@@ -18,8 +18,9 @@ from dataclasses import dataclass, field
 from src.affixbinding import (
     MAX_ALTERNATIVES, SAMPLE_CARRIERS, SPLIT_MAX_LOSS, PhonemeKeys, salientPhonemes, simScore)
 from src.affixes import (
-    Binding, Candidate, Carrier, CarrierResult, RULE, SimContext, _exceptionShare, poolCarriers,
-    simulate)
+    Binding, Candidate, Carrier, CarrierResult, RULE, SimContext, _exceptionShare, PREFIX, isScopedAnchor,
+    poolCarriers, simulate, ruleKeysOverlap)
+from src.affixscopes import fusionVerdict
 from src.keyboard import Stroke
 
 RULE_BUDGET = 30
@@ -122,6 +123,8 @@ class Rule:
     keySimilarity: float = 0.0   # the chosen key's phonetic-similarity score (not gated -- see
                                  # SIM_TOP_N -- so a low value here flags a non-mnemonic key)
     exactDone: bool = False      # chooseRuleKeypress already ran (score/keys are exact, not proxy)
+    fallbacks: int = 0           # scoped-form carriers that gained nothing under `keys` and kept the anchor alone;
+                                 # each costs EXCLUSION_COST like a slot exclusion (the user's "fallback price")
     _wordFreq: dict[int, float] | None = field(default=None, repr=False, compare=False)
 
     def wordFreq(self) -> dict[int, float]:
@@ -137,6 +140,10 @@ def buildCandidateRule(
     """§4.4 steps 1-3: greedily add the descendant that most increases the proxy score, up to
     `MAX_RULE_FORMS`. No keyboard evaluation here -- cheap enough to run for every anchor. Call it
     for anchors only (D4: a grown node is only ever a form of its anchor's rule)."""
+    if isScopedAnchor(root):
+        # decided scope (src/affixscopes.py): every listed form, no greedy choice, in the table's order
+        forms = [root] + [c for c in descendantsOf(root, childrenIdx) if c.isScoped]
+        return Rule(root.position, root, forms, score=proxyScore(root.position, forms))
     return _greedyForms(root, descendantsOf(root, childrenIdx))
 
 
@@ -169,6 +176,28 @@ def _greedyForms(root: Candidate, remaining: list[Candidate]) -> Rule:
     return Rule(root.position, root, forms, score=bestScore)
 
 
+def ruleExclusions(rule: Rule) -> int:
+    """Slot exclusions plus scope fallbacks: the words the learner must know as exceptions to the forms."""
+    return exclusionCountOf(rule.forms) + rule.fallbacks
+
+
+def resolveFallbacks(
+    rule: Rule, keys: Stroke, carriers: list[Carrier], ctx: SimContext,
+) -> tuple[list[Carrier], int]:
+    """A carrier of a scoped form (span > 1) that gains nothing under `keys` reverts to the anchor alone
+    (the user's "fallback"; `affixscopes`). Returns the carriers with those replaced and their count; a
+    rule without scoped forms is returned untouched, without simulating."""
+    if not any(f.isScoped for f in rule.forms):
+        return carriers, 0
+    (res,) = simulate([(Binding(rule.position, RULE, keys), carriers)], ctx, boundaryRisk=False)
+    failed = {r.carrier.rec.idx for r in res
+              if r.carrier.span > 1 and r.gain <= 0 and rule.forms[r.carrier.member].isScoped}
+    if not failed:
+        return carriers, 0
+    anchor = {c.rec.idx: c._replace(member=0) for c in rule.root.carriers}
+    return [anchor[c.rec.idx] if c.rec.idx in failed else c for c in carriers], len(failed)
+
+
 def ruleScoreFromResults(
     results: list[CarrierResult], exclusionCount: int, numForms: int,
 ) -> tuple[float, float, int, float, list[str]]:
@@ -196,6 +225,43 @@ def _exceptionRate(results: list[CarrierResult]) -> float:
     return exceptions / total if total else 0.0
 
 
+def _neighbourGroups(position: str, carriers: list[Carrier]) -> dict[tuple[Stroke | None, bool], int]:
+    """Carriers counted by what `_newBase` looks at for a RULE binding: the neighbouring stroke
+    (None when the carrier has no neighbour) and whether the carrier is a single syllable."""
+    groups: dict[tuple[Stroke | None, bool], int] = {}
+    for c in carriers:
+        base = c.rec.base
+        ni = c.start + c.span if position == PREFIX else c.start - 1
+        key = (base[ni] if 0 <= ni < len(base) else None, c.span == 1)
+        groups[key] = groups.get(key, 0) + 1
+    return groups
+
+
+def _exceptionRateFloor(
+    groups: dict[tuple[Stroke | None, bool], int], keys: Stroke, ctx: SimContext,
+) -> float:
+    """Lower bound on `_exceptionRate` of `simulate` for a RULE binding of `keys`, from the pass-1
+    classification of `_newBase` alone (evaluated per neighbour group, not per carrier).
+    The rate is exceptions / (gaining + exceptions). Every carrier with a valid new base ends as a
+    gainer or as a `lostDistinction`/`markCostTooHigh` exception, and `standaloneTrap` is decided
+    in pass 1, so the denominator is fixed by pass 1 while the numerator can only grow in pass 2."""
+    keySet = set(keys)
+    trapKey = tuple(sorted(keys)) in ctx.singleStrokeOutlines
+    valid = trapped = 0
+    for (neighbour, single), n in groups.items():
+        if neighbour is None:
+            continue   # noNeighbour: neither a gain candidate nor an exception
+        if ruleKeysOverlap(neighbour, keys) or not ctx.isLegal(tuple(sorted(set(neighbour) | keySet))):
+            if single or trapKey:
+                trapped += n   # standaloneTrap
+            else:
+                valid += n     # falls back to a standalone stroke
+        else:
+            valid += n
+    total = valid + trapped
+    return trapped / total if total else 0.0
+
+
 def chooseRuleKeypress(rule: Rule, pk: PhonemeKeys, ctx: SimContext, keypresses: list[Stroke]) -> None:
     """§4.4 step 4, lazy and expensive (Part B simulation): pick the best keypress for `rule`'s
     forms and fill in its exact score, keeping the top `MAX_ALTERNATIVES` for the report. Call
@@ -214,6 +280,7 @@ def chooseRuleKeypress(rule: Rule, pk: PhonemeKeys, ctx: SimContext, keypresses:
     carriers = poolCarriers(rule.forms)
     exclusionCount = exclusionCountOf(rule.forms)
     rule.exactDone = True
+    rule.fallbacks = 0
     if not carriers:
         return
     # Per form, not uniformly: a SLOT-bearing (lattice-grown) form's `phono` is a human-readable
@@ -233,29 +300,36 @@ def chooseRuleKeypress(rule: Rule, pk: PhonemeKeys, ctx: SimContext, keypresses:
     simOf = {k: simScore(frozenset(k), weights, pk, rule.position) for k in keypresses}
     sample = carriers[:SAMPLE_CARRIERS]
     stage1: list[tuple[float, float, Stroke]] = []
+    sampleGroups = _neighbourGroups(rule.position, sample)
     for k in keypresses:
-        (res,) = simulate([(Binding(rule.position, RULE, k), sample)], ctx)
-        sc, _benefit, _exc, _excFreq, _top = ruleScoreFromResults(res, exclusionCount, len(rule.forms))
+        if _exceptionRateFloor(sampleGroups, k, ctx) > MAX_EXCEPTION_RATE:
+            continue   # exact: pass 1 alone already proves the exception rate exceeds the cap
+        sampleK, nFallback = resolveFallbacks(rule, k, sample, ctx)
+        (res,) = simulate([(Binding(rule.position, RULE, k), sampleK)], ctx, boundaryRisk=False)
+        sc, _benefit, _exc, _excFreq, _top = ruleScoreFromResults(res, exclusionCount + nFallback, len(rule.forms))
         if sc > 0 and _exceptionRate(res) <= MAX_EXCEPTION_RATE:
             stage1.append((sc, simOf[k], k))
     stage1.sort(key=lambda t: (-t[0], -t[1], t[2]))
     finalKeys = [(k, s) for _sc, s, k in stage1[:MAX_ALTERNATIVES]]
-    finals: list[tuple[float, Stroke, float, list[CarrierResult]]] = []
+    finals: list[tuple[float, Stroke, float, list[CarrierResult], int]] = []
     for k, s in finalKeys:
-        (res,) = simulate([(Binding(rule.position, RULE, k), carriers)], ctx)
-        sc, _benefit, _exc, _excFreq, _top = ruleScoreFromResults(res, exclusionCount, len(rule.forms))
+        carriersK, nFallback = resolveFallbacks(rule, k, carriers, ctx)
+        (res,) = simulate([(Binding(rule.position, RULE, k), carriersK)], ctx)
+        sc, _benefit, _exc, _excFreq, _top = ruleScoreFromResults(res, exclusionCount + nFallback, len(rule.forms))
         if _exceptionRate(res) <= MAX_EXCEPTION_RATE:   # re-confirm against the full carrier set
-            finals.append((sc, k, s, res))
+            finals.append((sc, k, s, res, nFallback))
     finals.sort(key=lambda t: -t[0])
     if not finals:
         return
-    _bestScore, bestKeys, bestSim, bestResults = finals[0]
-    sc, benefit, excCount, excFreq, top = ruleScoreFromResults(bestResults, exclusionCount, len(rule.forms))
+    _bestScore, bestKeys, bestSim, bestResults, bestFallbacks = finals[0]
+    sc, benefit, excCount, excFreq, top = ruleScoreFromResults(
+        bestResults, exclusionCount + bestFallbacks, len(rule.forms))
+    rule.fallbacks = bestFallbacks
     rule.keys, rule.score, rule.strokeFreqSaved = bestKeys, sc, benefit
     rule.wordExceptions, rule.exceptionFreq, rule.topExceptions = excCount, excFreq, top
     rule.results = bestResults
     rule.keySimilarity = bestSim
-    rule.alternatives = [(fsc, k) for fsc, k, _s, _res in finals]
+    rule.alternatives = [(fsc, k) for fsc, k, _s, _res, _nf in finals]
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -297,7 +371,7 @@ def _marginal(
         if extra > 0:
             benefit += freq * extra
     return (benefit - EXCEPTION_ALPHA * exceptionFreq
-            - EXCLUSION_COST * exclusionCountOf(rule.forms) - FORM_COST * (len(rule.forms) - 1))
+            - EXCLUSION_COST * ruleExclusions(rule) - FORM_COST * (len(rule.forms) - 1))
 
 
 def territoryOverlap(a: Rule, b: Rule) -> float:
@@ -411,6 +485,15 @@ def resolveVariantRivals(
         mainKey = candidateKey(main)
         dec = RivalDecision(m.ortho, [p.ortho for p in parts], m.newConflictFreq)
         decisions.append(dec)
+        verdict = fusionVerdict((m.position, m.ortho, m.phono), [(p.position, p.ortho, p.phono) for p in parts])
+        if verdict == "fused":
+            dropped.update(candidateKey(p) for p in parts)
+            dec.outcome = "fused"
+            continue
+        if verdict == "apart":
+            dropped.add(mkey)
+            dec.outcome = "apart"
+            continue
         if mkey not in top and mainKey not in top:
             dropped.add(mkey)
             dec.outcome = "outOfReach"
@@ -576,8 +659,8 @@ def _jointLoss(a: Rule, b: Rule, keys: Stroke, ctx: SimContext) -> float:
     """Share of either rule's own gain lost by simulating both together under the same `keys`
     (§6, `_mutualConflict`'s joint-simulation idea, but measured as a share instead of a
     boolean)."""
-    carriersA = poolCarriers(a.forms)
-    carriersB = poolCarriers(b.forms)
+    carriersA = resolveFallbacks(a, keys, poolCarriers(a.forms), ctx)[0]
+    carriersB = resolveFallbacks(b, keys, poolCarriers(b.forms), ctx)[0]
     bindingA = Binding(a.position, RULE, keys)
     bindingB = Binding(b.position, RULE, keys)
     soloA, soloB = simulate([(bindingA, carriersA)], ctx)[0], simulate([(bindingB, carriersB)], ctx)[0]
