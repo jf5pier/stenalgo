@@ -312,3 +312,38 @@ counts as `lostDistinction` — an artefact of the lexicon error.) Keys (16,19),
 - `R°`+`R2`+`ré` (Re) fused: benefit 8733, 208 hard-exception words (freq 236) on (16,19); best key (6,9,18): 8801, 195 (freq 168).
   Compare two separate rules (re 6172 + ré 2722 = 8894): the fusion costs ~160 benefit (−1.8%) and ~110 exception words
   (réponds, répond(ent), réveil, reparti, revoler…). After the lexicon fix (main branch) these numbers become the real ones.
+
+## UPDATE 2026-09-30 (evening) — lexicon fix landed; `re`/`ré` remeasured on the REAL lexicon
+
+- `R2` fix done on main (`5087bd5`, `util/fixReSchwa.py`, 164 Lexique383 rows; pushed), merged into this branch (`066897d`).
+  Records and pool regenerated (`--refresh --part a --partial-overlap`); H-only sweep rerun
+  (`util.affix_scan --part b --reuse-pool --sweep --partial-overlap --settings H`, 25 min, 1,365 s of it in the
+  variant-rival step): `scratch/affix-sweep-partial/H/`. `re` anchor `R°` now 807 lemmas, freq 6,248 (was 715 / 6,211);
+  the `R2` anchor is gone. `scratch/affix-H-partial-by-anchor.json` is STILL the old sweep (rank/keys equal for
+  rank 2, but its "current list" columns are stale; `affix_scope_table.py` reads it).
+- `-ment` rerun: regex `C{1,2}[eui]+` unchanged (benefit 8,729, 78 fallback words / freq 85, 1 hard exception);
+  enumerated list 8,525 / 105 fallbacks; `(C+[eiu]+)?` 8,723. Decision stands.
+- `re`/`ré` (scratch/re_fusion.py, re_morph.py; H, flag on; benefit / hard-exception words (freq)); no patch needed now:
+
+| group | (16,19) | best key |
+|---|---|---|
+| `re` alone | 6,219 / 98 (76) | (9,18): 6,246 / 47 (49) |
+| `ré` alone | 2,613 / 27 (109) | own key (3,4,16): 2,722 / 12 (0) |
+| `re`+`ré` fused | 8,781 / 211 (236) | (6,9,18): 8,845 / 207 (172) |
+| rank 17 (`ré`+`rhé`+`réh`+`rai`+`raie`+`ra`) | 5,000 / 84 (134) | (2,11,18): 5,092 / 93 (42) |
+| all of rank 2 + 17 | 10,829 / 480 (600) | (9,18): 10,824 / 486 (606) |
+
+  Two rules (6,219 + 2,722 = 8,941) vs fused 8,781: fusion costs 160 benefit (-1.8%) and ~113 more hard-exception
+  words, frees a key and a budget slot. Matches the earlier patched estimate (8,733 fused, -1.8%).
+- `re` anchor alone: 6,159 words gain (4,880 stem-is-a-lemma + 1,279 not); 95 hard exceptions (freq ~76).
+- Sweep on the merged lexicon, top of the list (H): 1 `-ment` 8,587; 2 `re|reh` 6,415 (still with growth forms);
+  3 `en`; 4 `de|des|dé|déh`; 5 `de`; 6 `-tion`; 7 `in-`; 8 `é`; 17 `ra|rai|raie|re|rhé|ré|réh` 2,689.
+- Still open: the `re`/`ré` decisions of section 5 step 3 (fuse, rank 17, key, `r-`, strict stem scope).
+
+- CORRECTION (same evening): the rows "rank 17" and "all of rank 2 + 17" above (and the earlier "ra/rai/raie adds raconter,
+  rapport" claims) are contaminated: `scratch/re_fusion.py` picks roots by spelling only, so its `ra` root also pulled
+  in the separate `Ra` prefix anchor (441 lemmas). The REAL rank 17 anchor (phonology `Re`) holds ~3,740 carriers, of
+  which `ra` = 1 word (rayâmes), `rai` = 6, `raie` = 6, `rhé` = 14 carriers: the extras really are negligible
+  (TODO.md entry added for the `ra`+`Re` oddity). DECISION (user): `re` (`R°`) and `ré` (`Re`) stay separate rules (status
+  quo, no phonology-class merge); the `re`+`ré` merge section of this note is kept as measurement only. Also measured:
+  best 2-key pair for fused `re`+`ré` = (6,18): benefit 8,896, 214 hard exceptions (freq 122) (`scratch/re_fusion_2keys.py`).
