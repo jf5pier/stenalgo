@@ -511,7 +511,7 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
   check whether other stray anchors (`ction` `ksj§`, 5 carriers; `-th`) are the same kind of
   syllabification artefact. Found 2026-09-29 while comparing affix rules to OQLF/TAO.
 
-- **`re`+consonant words with first-syllable phonology `R2` (lexicon, to investigate).** Found 2026-09-30 while
+- **`re`+consonant words with first-syllable phonology `R2` (lexicon) -- FIXED 2026-09-30** (main `5087bd5`, `util/fixReSchwa.py`: 164 Lexique383 rows R2 -> R°; the odd `RE`/`Re`/`Ri` `re` phonologies below were left as they are). Found 2026-09-30 while
   analysing the `re` affix rule (`scratch/re_r2.py`): in `resources/LexiqueMixte.tsv` 328 words spelled `re`+consonant
   (relations `R2lasj§`, recontacter, revérifier, redécoré, rependre, recasser, refinancement, remix, reset…) have the
   first syllable `R2` instead of `R°`; none is spelled `reu` (where `R2` is expected). Mostly the genuine "again"
@@ -521,3 +521,13 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
   doubling), `Re` (17: revolver, requiem, reggae, reflex, referendum, revoter), `Ri` (5: remake, revival, retriever).
   Effect today: these words are not carriers of the `re` anchor (`R°`, 5,931 words) so they never get the `re` key.
   Rebuild per `docs/PIPELINE.md` ("Recomputing after a fix", lexicon change → `rm -f *.pickle`).
+
+- **`ra`-spelled prefix syllables with an `Re` phonology (lexicon, to investigate).** Found 2026-09-30 while
+  analysing rank 17 (`ra|rai|raie|re|rhé|ré|réh`, `Re` phonology) of the affix sweep. Besides `ré`, its parts are:
+  `rai` (raidir, rainer, rainure(s), rainurer, rainurés; `ai` = é is plausible), `raie` (raiera, raierai, raierais,
+  raieras, raierions, raieront), `rhé` (rhétorique, rhésus, rhéostat…) and `ra` carried by a single word,
+  `rayâmes` (orthographic syllable `ra` pronounced `Re`, which should not be possible for a syllable spelled `ra`: look
+  at its phonology / orthosyll in `Lexique383.tsv` / `LexiqueInfraCorrespondance.tsv`, probably the `ra|yâmes`
+  split of `rayer` forms). Decision (user, 2026-09-30): `re` (`R°`) and `ré` (`Re`) stay separate rules, no
+  phonology-class merge. Check also the `raie`/`rayer` family for the same split, then rebuild per `docs/PIPELINE.md`.
+
