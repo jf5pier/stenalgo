@@ -46,8 +46,10 @@
 import argparse
 import csv
 import gzip
+import json
 import sys
 import time
+import urllib.parse
 import urllib.request
 from collections import defaultdict
 from concurrent.futures import ProcessPoolExecutor
@@ -400,6 +402,47 @@ VIEWER_BATCH_TERMS = 8
 VIEWER_THROTTLE_SECONDS = 1.0
 
 
+def _viewerFetch(batch: Sequence[str], corpus: str, yearStart: int,
+                 yearEnd: int) -> list[dict]:
+    """One batched viewer request; returns the parsed JSON rows."""
+    # Percent-encode: accented terms make urllib's ascii URL encoding raise.
+    url = (f"{VIEWER_JSON_URL}?content="
+           f"{urllib.parse.quote(','.join(batch))}"
+           f"&corpus={corpus}&year_start={yearStart}"
+           f"&year_end={yearEnd}&smoothing=0")
+    request = urllib.request.Request(url, headers={
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64)"})
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(request, timeout=60) as response:
+                return json.loads(response.read().decode("utf-8"))
+        except Exception:  # noqa: BLE001 - retry then give up loudly
+            if attempt == 2:
+                raise
+            time.sleep(5.0)
+    return []  # unreachable; keeps mypy happy
+
+
+def viewerShares(terms: Sequence[str], corpus: str = "30",
+                 yearStart: int = 2015, yearEnd: int = 2019) -> dict[str, float]:
+    """Plain NGRAM rows only: ngram -> mean relative share over the window
+    (wildcard EXPANSION rows are ignored). Terms below the viewer's occurrence
+    threshold simply do not come back. The corpus must be the numeric id
+    ("30" = French): string names are silently ignored, falling back to
+    English."""
+    out: dict[str, float] = {}
+    for start in range(0, len(terms), VIEWER_BATCH_TERMS):
+        batch = terms[start:start + VIEWER_BATCH_TERMS]
+        for row in _viewerFetch(batch, corpus, yearStart, yearEnd):
+            if row.get("type") != "NGRAM":
+                continue
+            timeseries = row["timeseries"]
+            out[row["ngram"]] = (sum(timeseries) / len(timeseries))
+        if start + VIEWER_BATCH_TERMS < len(terms):
+            time.sleep(VIEWER_THROTTLE_SECONDS)
+    return out
+
+
 def queryViewer(terms: Sequence[str], corpus: str = "30",
                 yearStart: int = 2015, yearEnd: int = 2019) -> None:
     """Spot-check convenience ONLY. The viewer's index omits every word below
@@ -409,13 +452,8 @@ def queryViewer(terms: Sequence[str], corpus: str = "30",
     "fre"/"fre_2019" are silently ignored and fall back to English."""
     for start in range(0, len(terms), VIEWER_BATCH_TERMS):
         batch = terms[start:start + VIEWER_BATCH_TERMS]
-        url = (f"{VIEWER_JSON_URL}?content={','.join(batch)}"
-               f"&corpus={corpus}&year_start={yearStart}"
-               f"&year_end={yearEnd}&smoothing=0")
-        request = urllib.request.Request(url, headers={
-            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64)"})
-        with urllib.request.urlopen(request, timeout=60) as response:
-            print(response.read().decode("utf-8"))
+        for row in _viewerFetch(batch, corpus, yearStart, yearEnd):
+            print(json.dumps(row, ensure_ascii=False))
         if start + VIEWER_BATCH_TERMS < len(terms):
             time.sleep(VIEWER_THROTTLE_SECONDS)
 

@@ -1,0 +1,26 @@
+term	missing_units	freq_source	freq
+de l	l	orgtre	17272345
+à l	l	orgtre	7706847
+la france	france	orgtre	4170463
+a-t-il	t	orgtre	1648352
+de la france	france	orgtre	1270691
+québec	québec	orgtre	839179
+copyright arvensa editions page	arvensa,editions	orgtre	563507
+fur et à mesure	fur	orgtre	513447
+montréal	montréal	orgtre	506882
+au fur et à mesure	fur	orgtre	504802
+mexique	mexique	orgtre	418749
+caire	caire	orgtre	246489
+manufacturier	manufacturier	fill	20933
+manufacturière	manufacturière	fill	20090
+et caetera	caetera	fill	2318
+excel	excel	fill	2035
+toronto	toronto	fill	732
+ottawa	ottawa	fill	498
+o.k.	o.k.	fill	319
+ontario	ontario	fill	241
+sherbrooke	sherbrooke	fill	35
+repentigny	repentigny	fill	8
+tourigny	tourigny	MISSING	0
+sévigny	sévigny	MISSING	0
+souligny	souligny	MISSING	0
