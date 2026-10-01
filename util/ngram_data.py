@@ -400,11 +400,13 @@ VIEWER_BATCH_TERMS = 8
 VIEWER_THROTTLE_SECONDS = 1.0
 
 
-def queryViewer(terms: Sequence[str], corpus: str = "fre_2019",
+def queryViewer(terms: Sequence[str], corpus: str = "30",
                 yearStart: int = 2015, yearEnd: int = 2019) -> None:
     """Spot-check convenience ONLY. The viewer's index omits every word below
     its occurrence threshold (trimballer and évènementiel return empty), so an
-    empty answer here means nothing; LexiqueGoogleNgram.tsv is the arbiter."""
+    empty answer here means nothing; LexiqueGoogleNgram.tsv is the arbiter.
+    The corpus must be the numeric id ("30" = French): string names like
+    "fre"/"fre_2019" are silently ignored and fall back to English."""
     for start in range(0, len(terms), VIEWER_BATCH_TERMS):
         batch = terms[start:start + VIEWER_BATCH_TERMS]
         url = (f"{VIEWER_JSON_URL}?content={','.join(batch)}"
@@ -466,7 +468,9 @@ def main() -> None:
                       "(batched, throttled). NOT an arbiter: the viewer omits "
                       "rare words entirely.")
     query.add_argument("terms", help="Comma-separated terms.")
-    query.add_argument("--corpus", default="fre_2019")
+    query.add_argument("--corpus", default="30",
+                       help="Numeric viewer corpus id (30 = French); string "
+                            "names are silently ignored by the endpoint.")
 
     purge = sub.add_parser(
         "purge", help="Delete the raw shard dir. Manual on purpose: only after "
