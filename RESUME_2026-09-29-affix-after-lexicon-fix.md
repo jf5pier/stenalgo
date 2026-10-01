@@ -1,3 +1,5 @@
+> **Status 2026-10-01: HISTORICAL.** Kept for its reasoning. The current description is `docs/AFFIX_RULES.md`; the state is `RESUME_2026-10-01-option-c-engine.md`; the next phase (pipeline integration) is `PLAN_2026-10-01-affix-pipeline-integration.md`.
+
 > **Superseded 2026-09-29 (evening) by `RESUME_2026-09-29-affix-partial-overlap-flag.md`** — Steps 1-2 below are done; read that file first.
 
 # Resume: affix rules, after the `-ption` lexicon fix (written 2026-09-29)

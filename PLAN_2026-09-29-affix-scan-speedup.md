@@ -1,3 +1,5 @@
+> **Status 2026-10-01: HISTORICAL.** Kept for its reasoning. The current description is `docs/AFFIX_RULES.md`; the state is `RESUME_2026-10-01-option-c-engine.md`; the next phase (pipeline integration) is `PLAN_2026-10-01-affix-pipeline-integration.md`.
+
 # Plan: cut the affix scan sweep from ~86 min to minutes (written 2026-09-29)
 
 Branch `affix-abbreviation-rules`. Goal: same selected rules, far less compute. Each step is

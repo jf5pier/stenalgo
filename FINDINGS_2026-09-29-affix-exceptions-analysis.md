@@ -1,3 +1,5 @@
+> **Status 2026-10-01: HISTORICAL.** Kept for its reasoning. The current description is `docs/AFFIX_RULES.md`; the state is `RESUME_2026-10-01-option-c-engine.md`; the next phase (pipeline integration) is `PLAN_2026-10-01-affix-pipeline-integration.md`.
+
 # Findings 2026-09-29: where the affix rules' exceptions come from (H/M/L sweep, fixed lexicon)
 
 Written for a reader with no memory of the session. Data: `scratch/affix-sweep/{L,M,H}/affix-rules.tsv`
