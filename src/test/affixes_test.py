@@ -3,7 +3,7 @@ import src.affixes as A
 from src.affixes import (
     DEDICATED, MERGED, PREFIX, RULE, SUFFIX, Binding, Candidate, Carrier, LemmaIndex, Slot,
     SimContext, WordRecord, _dedupeByCarrierSet, _growLatticeLevel, _onsetRest, _reduceExceptions,
-    buildCandidates, buildFamily, colourSubgroups, inheritedSpan, markCostForCluster, norm,
+    buildCandidates, buildFamily, isNoGrowthAnchor, colourSubgroups, inheritedSpan, markCostForCluster, norm,
     passesPrefixFilter, passesSuffixFilter, poolKnownAffixGroups, poolTailVariants, simulate,
     slotLabel, slotMatchesSyllable)
 from src.keyboard import Starboard
@@ -80,7 +80,8 @@ class TestSingleGenerator:
         assert (SUFFIX, 1, "m@", "mant|ment") not in pool
         assert (SUFFIX, 1, "m@", "ment") in pool and (SUFFIX, 1, "m@", "mant") in pool
 
-    def test_a_lattice_key_collision_renames_the_later_node_and_never_overwrites(self):
+    def test_a_lattice_key_collision_renames_the_later_node_and_never_overwrites(self, monkeypatch):
+        monkeypatch.setattr("src.affixscopes.SCOPES", {})   # the generic lattice, not the decided scope of `ment`
         def words(tail, strokeBase, freq):
             return [_wordRec((st, "bi", "ce", tail), (st, "bi", "s°", "m@"), (strokeBase + i, 700, 800, 900),
                              freq=freq) for i, st in enumerate(_STEMS[:5] if strokeBase == 100 else _STEMS[5:])]
@@ -99,7 +100,8 @@ class TestSingleGenerator:
         assert all(c.grownFromKey in pool for c in pool.values() if c.grownFromKey)
         assert any(c.grownFromKey == (r.position, r.k, r.phono, r.ortho) for r in renamed for c in pool.values())
 
-    def test_an_identical_duplicate_child_folds_its_parent_in(self):
+    def test_an_identical_duplicate_child_folds_its_parent_in(self, monkeypatch):
+        monkeypatch.setattr("src.affixscopes.SCOPES", {})   # the generic lattice, not the decided scope of `ment`
         words3 = [_wordRec((st, "ce", "ment"), (st, "s°", "m@"), (100 + i, 800, 900)) for i, st in enumerate(_STEMS[:5])]
         car = lambda rs: [Carrier(r, 2, 1, "x") for r in rs]   # noqa: E731
         p = Candidate(SUFFIX, 1, "m@", "ment", carriers=car(words3), isAnchor=True)
@@ -357,6 +359,18 @@ class TestLatticeGrowth:
         assert children[0].expand is True
 
 
+class TestNoGrowthAnchor:
+    def test_re_prefix_anchors_do_not_grow(self):
+        assert isNoGrowthAnchor(Candidate(PREFIX, 1, "R°", "re"))
+        assert isNoGrowthAnchor(Candidate(PREFIX, 1, "R°", "re|reh"))
+
+    def test_other_anchors_keep_growing(self):
+        assert not isNoGrowthAnchor(Candidate(SUFFIX, 1, "R°", "re"))     # a suffix, not the prefix
+        assert not isNoGrowthAnchor(Candidate(PREFIX, 1, "Re", "ré"))     # phonetic ré stays growable
+        assert not isNoGrowthAnchor(Candidate(PREFIX, 1, "R°", "re|ré"))  # one spelling is not listed
+        assert not isNoGrowthAnchor(Candidate(PREFIX, 1, "d°", "de"))
+
+
 class TestReduceExceptions:
     def _carrier(self, onsetPhono, lemma, freq, stroke0):
         r = WordRecord(idx=_idx[0], ortho=lemma, lemme=lemma, gramCat="NOM", frequency=freq,
@@ -461,3 +475,36 @@ class TestRuleBinding:
         c = Carrier(rec("aabc", [(2,), (3,), (7,)]), 0, 1, "abc")
         (res,) = simulate([(Binding(PREFIX, RULE, (4,)), [c])], ctx)
         assert res[0].gain == 1 and res[0].mergedSaving
+
+
+class TestRulePartialOverlap:
+    """RULE_PARTIAL_OVERLAP (experiment flag, default OFF): a 2-key rule merges when only some of
+    its keys are in the neighbouring stroke."""
+
+    def _run(self, neighbour, keys, flag):
+        old = A.RULE_PARTIAL_OVERLAP
+        A.RULE_PARTIAL_OVERLAP = flag
+        try:
+            c = Carrier(rec("xab", [(2,), neighbour, (7,)]), 0, 1, "stem")
+            (res,) = simulate([(Binding(PREFIX, RULE, keys), [c])], SimContext(_sb(), []))
+            return res[0]
+        finally:
+            A.RULE_PARTIAL_OVERLAP = old
+
+    def test_partial_overlap_fails_when_off(self):
+        r = self._run((3,), (3, 4), False)
+        assert (r.gain, r.reason, r.newBase) == (0, "standaloneTrap", None)
+
+    def test_partial_overlap_merges_when_on(self):
+        r = self._run((3,), (3, 4), True)
+        assert r.gain == 1 and r.mergedSaving and r.newBase == ((2,), (3, 4), (7,))[1:]
+
+    def test_complete_overlap_fails_in_both_modes(self):
+        for flag in (False, True):
+            r = self._run((3, 4), (3, 4), flag)
+            assert (r.gain, r.reason) == (0, "standaloneTrap")
+
+    def test_single_key_rule_unchanged(self):
+        for flag in (False, True):
+            r = self._run((3, 4), (4,), flag)
+            assert (r.gain, r.reason) == (0, "standaloneTrap")

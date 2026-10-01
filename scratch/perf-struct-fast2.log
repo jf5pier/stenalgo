@@ -1,0 +1,10 @@
+detect original   127.1s 185e76d5cee4e5af  n=5351
+detect fast         3.8s 7287fbffda47c06b  n=5351
+keys same order: True
+content equal: True
+missingFeatures iteration-order diffs: 4610; siblings iteration-order diffs: 0
+example treillisser_VER ['subjonctif:pers_1:nbr_s', 'indicatif:imparfait', 'indicatif:future:nbr_s', 'pers_2', 'impératif:présent:pers_2:nbr_p', 'impératif:nbr_s'] | ['subjonctif:pers_1:nbr_s', 'indicatif:imparfait', 'indicatif:future:nbr_s', 'pers_2', 'impératif:présent:pers_2:nbr_p', 'impératif:nbr_s']
+candidates same (lgc, generated word) sequence: True
+structural original   129.6s da3a25c1cc44fc60
+structural fast         4.9s 77e132cd7595e65d  n=1817
+DIFFERENT

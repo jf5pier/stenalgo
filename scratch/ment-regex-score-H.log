@@ -1,0 +1,34 @@
+1751 legal keypresses
+2724 ment carriers, 2724 usable (start>=1, syllables aligned)
+# -ment regex scope scores (real simulator, keys (20, 21, 25), setting H, partial overlap True)
+
+2724 carriers whose last syllable is `ment`. `k2 words` = words given the 2-stroke form;
+`gain>0 k2` = of those, how many really gain (rest fall back). Exceptions = collision fallbacks.
+
+| scope | k2 words | kept as k2 | excluded (fall back to k1) | benefit | exc words | score | d score vs list |
+|---|---|---|---|---|---|---|---|
+| BASELINE enumerated list (100 syllables) | 2623 | 2518 | 105 | 8525 | 3 | -7537 | +0 |
+| no k=2 form (ment alone) | 0 | 0 | 0 | 4787 | 1 | 4787 | +12323 |
+| user A: (C+[eiuéû]+)? | 2562 | 2458 | 102 | 8544 | 9 | -7076 | +461 |
+| user B: (C+[eiu]+)? | 2481 | 2405 | 76 | 8723 | 3 | -2988 | +4549 |
+| C+[eiuéû]  (single vowel) | 2322 | 2224 | 98 | 8434 | 3 | -6578 | +959 |
+| C+[eiu]    (single vowel) | 2243 | 2171 | 72 | 8609 | 3 | -2502 | +5034 |
+| C*[eiuéû]+ (onset optional) | 2564 | 2460 | 102 | 8544 | 9 | -7076 | +461 |
+| C+[eiuéûa]+ | 2589 | 2470 | 119 | 8606 | 3 | -9556 | -2019 |
+| C+[eiuéûaé]+ + oie/ie | 2626 | 2483 | 143 | 8524 | 3 | -13238 | -5701 |
+| C+ + any vowel letters | 2652 | 2484 | 168 | 8516 | 3 | -16996 | -9459 |
+| anything (upper bound) | 2724 | 2527 | 197 | 8494 | 3 | -21368 | -13831 |
+
+Most frequent excluded words (named by the pattern, fall back to plain `ment`) per scope:
+- BASELINE enumerated list (100 syllables): seulement, vêtements, bâtiment, éléments, élément, sacrément, largement, ciment
+- no k=2 form (ment alone): -
+- user A: (C+[eiuéû]+)?: seulement, rarement, éléments, élément, compliments, compliment, sacrément, largement
+- user B: (C+[eiu]+)?: rarement, largement, jument, ciment, argument, parlement, bêtement, arguments
+- C+[eiuéû]  (single vowel): seulement, éléments, élément, compliments, compliment, sacrément, largement, jument
+- C+[eiu]    (single vowel): largement, jument, ciment, argument, parlement, bêtement, arguments, aliments
+- C*[eiuéû]+ (onset optional): seulement, rarement, éléments, élément, compliments, compliment, sacrément, largement
+- C+[eiuéûa]+: seulement, rarement, éléments, élément, compliments, compliment, sacrément, largement
+- C+[eiuéûaé]+ + oie/ie: seulement, vêtements, rarement, éléments, élément, compliments, compliment, sacrément
+- C+ + any vowel letters: moment, seulement, vêtements, moments, rarement, éléments, élément, compliments
+- anything (upper bound): moment, seulement, vêtements, moments, bâtiment, serment, rarement, éléments
+wrote scratch/ment-regex-scores-H-partial.md, scratch/ment-syllable-table-H-partial.md (155 syllables) in 10s

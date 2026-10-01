@@ -1,0 +1,8 @@
+1751 legal keypresses
+=== sweep H: EXCEPTION_ALPHA=2.0 EXCLUSION_COST=150.0 FORM_COST=300.0
+variant rivals: 15 fused, 13 apart, 873 out of reach; 2159 anchors remain (1365s)
+phase 3: 30 rules selected, 36 roots exact-evaluated (143s)
+phase 3 swap pass: done (1s)
+phase 4: 30 rules bound (2s)
+wrote scratch/affix-sweep-partial/H/affix-rules.tsv, scratch/affix-sweep-partial/H/affix-rules-report.md
+total 1516s
