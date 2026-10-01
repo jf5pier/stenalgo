@@ -1,3 +1,5 @@
+> **Status 2026-10-01: HISTORICAL.** Kept for its reasoning. The current description is `docs/AFFIX_RULES.md`; the state is `RESUME_2026-10-01-option-c-engine.md`; the next phase (pipeline integration) is `PLAN_2026-10-01-affix-pipeline-integration.md`.
+
 # Resume: affix rules — partial-key-overlap flag (written 2026-09-29, for a fresh Sonnet session)
 
 Supersedes the "next steps" of `RESUME_2026-09-29-affix-after-lexicon-fix.md` (its Steps 1-2 are done; its

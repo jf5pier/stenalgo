@@ -44,6 +44,12 @@ distinct from the personal theory layer (Phase 7).
 - Interacts with the phoneme-layer freeze (Phase 3) and the stroke budget — decide scope
   before freezing.
 
+### Affix abbreviations: unattended pipeline (follows the optional affix dictionary)
+
+Goal: `python dictionary.py` produces the optional affix dictionary without an agent. The engine and the exporter exist ([docs/AFFIX_RULES.md](docs/AFFIX_RULES.md));
+what is missing is turning the interactive choices (growth scopes, fusions, prices, adoption of the rule list) into committed policy/data files and deterministic steps.
+Inventory and open decisions: `PLAN_2026-10-01-affix-pipeline-integration.md`. Related: trainer lessons from `affix_abbreviations.tsv`.
+
 ### Dictionary densification (Phase 6)
 
 Goal: one entry per homophone-per-lemma pointing at a shared conjugation/paradigm table, plus

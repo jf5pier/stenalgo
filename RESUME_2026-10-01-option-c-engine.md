@@ -23,6 +23,11 @@ committed input `affix_rules.json` (written by the sweep as `affix-rules.json`),
 `affix_abbreviations.tsv`. Result: 59,358 abbreviations / 65,646 carriers (51,119 save 1 stroke, 8,239 save 2), 0 outline overlap with the main
 dictionary, deterministic (same md5 twice), main dictionary unchanged. 740 tests.
 
+## NEXT PHASE (user, 2026-10-01)
+Plan how to integrate the affix findings and the production pipeline into the main algorithm WITHOUT an agent in the loop: review every intermediate step done on the fly
+(scope proposals, combined check, fusion checks, adoption of the rule list) and systematise it. Start with `PLAN_2026-10-01-affix-pipeline-integration.md` (inventory, proposed
+disposition, six decisions to elicit from the user). Nothing there is decided yet.
+
 ## Open / next
 1. Not merged into main; ask the user before merging. Docs are done (AFFIX_RULES, GLOSSARY, PIPELINE pointer, CLAUDE.md, TODO `R2` entry removed; the
    `ra`+`Re` entry stays).

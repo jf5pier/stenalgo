@@ -16,6 +16,9 @@ lexicon built out of Lexique383 [[1]](#1) and LexiqueInfra [[3]](#3).
   feature discriminating strokes from the elicited feature sets ([spec](docs/specs/discriminating-features.md)).
 - **Different-lemma homophones done** — lemma-homophones (`ver`/`vert`/`verre`) get star/hash
   marks on the reserved keys ([spec](docs/specs/star-hash-marking.md)).
+- **Affix abbreviations (optional layer, branch `affix-abbreviation-rules`)** — 30 affix rules on dedicated keypresses give 59,358 words a shorter outline in a
+  separate Plover dictionary; the theory is unchanged and the long outlines stay as the fallback ([docs/AFFIX_RULES.md](docs/AFFIX_RULES.md)). Not yet part of the
+  automatic pipeline's decisions: see `PLAN_2026-10-01-affix-pipeline-integration.md`.
 - **Not done yet** — dictionary densification (conjugation tables, prefixes) and the personal
   theory layer; see [ROADMAP.md](ROADMAP.md).
 

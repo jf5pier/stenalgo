@@ -1,3 +1,5 @@
+> **DONE 2026-10-01.** Steps 1-5 below were carried out: combined check, engine support (option C), fusion decisions, the optional abbreviation dictionary. Current state: `RESUME_2026-10-01-option-c-engine.md` and `docs/AFFIX_RULES.md`; next phase: `PLAN_2026-10-01-affix-pipeline-integration.md`.
+
 # RESUME 2026-09-30 (late) — all 30 affix-rule growth scopes decided; next: combined check, then the engine
 
 Written for a fresh Sonnet session with no memory of the conversation. Everything below is on disk.

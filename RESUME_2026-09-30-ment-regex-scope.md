@@ -1,3 +1,5 @@
+> **Status 2026-10-01: HISTORICAL.** Kept for its reasoning. The current description is `docs/AFFIX_RULES.md`; the state is `RESUME_2026-10-01-option-c-engine.md`; the next phase (pipeline integration) is `PLAN_2026-10-01-affix-pipeline-integration.md`.
+
 > **SUPERSEDED (2026-09-30 late) by `RESUME_2026-09-30-scope-decisions-to-engine.md`** for the front matter (sections 1-9 below are stale: all 30 ranks are decided now). The per-rank decision log at the END of this file ("DECISIONS 2026-09-30 …" and every bullet after it) is still the detail record of numbers and scripts.
 
 # RESUME 2026-09-30 — learnable scopes for the affix rules (`-ment` done, `re`/`ré` analysed)
