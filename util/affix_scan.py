@@ -313,6 +313,11 @@ def selectAndBind(cands: dict, records: list[A.WordRecord], starboard: Starboard
                     f"{','.join(r.topExceptions[:10])}\t{len(carriers)}\t{lemmaCount}\t"
                     f"{' '.join(c.rec.ortho for c in carriers[:6])}\t{attested[id(r)]:.3f}\t{r.fallbacks}\n")
 
+    # machine-readable rule list (the optional affix dictionary exporter reads a committed copy: affix_rules.json)
+    with open(os.path.splitext(rulesTsv)[0] + ".json", "w", encoding="utf-8") as jf:
+        json.dump([{"rank": rank, "position": b.rule.position, "ortho": b.rule.root.ortho, "phono": b.rule.root.phono,
+                    "keys": list(b.keys)} for rank, b in enumerate(bound, 1)], jf, ensure_ascii=False, indent=1)
+
     lines = ["# Affix rules (Phase 3 + 4 result, DESIGN_2026-09-27-affix-rule-selection.md; "
              "single-generator pool, PLAN_2026-09-28)", "",
              f"Constants: RULE_BUDGET={R.RULE_BUDGET}, MAX_RULE_FORMS={R.MAX_RULE_FORMS}, "

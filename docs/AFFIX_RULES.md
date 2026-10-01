@@ -1,8 +1,8 @@
 # Affix abbreviation rules
 
-Status: analysis and proposals only. Nothing here feeds the phonetic theory, the disambiguated theory or
-the exporters yet; the output is a table of 30 proposed rules (`scratch/affix-sweep-partial/D/affix-rules.tsv`
-and `affix-rules-report.md`), with their keys and the words they abbreviate.
+Status: the analysis picks 30 rules (`scratch/affix-sweep-partial/D/affix-rules.tsv`, `affix-rules.json`, `affix-rules-report.md`) and
+the committed `affix_rules.json` feeds an OPTIONAL abbreviation dictionary (`util/export_affix_dictionary.py`, see "The optional
+abbreviation dictionary" below). Nothing in the phonetic theory, the disambiguated theory or the main Plover dictionary depends on it.
 
 An **affix rule** puts a frequent affix syllable (`re-`, `-ment`, `-tion`...) on ONE dedicated keypress that is
 merged into the neighbouring syllable's stroke, so a word such as `regarder` saves a stroke. The generator
@@ -17,9 +17,11 @@ Vocabulary: [GLOSSARY.md](GLOSSARY.md) ("Affix ..." entries). Design history: `D
 | `src/affixes.py` | word records, k=1 anchors, spelling-variant merges (fusions), the generic growth lattice, `simulate` (gain of a keypress binding on carriers, collisions cost marks) |
 | `src/affixscopes.py` | THE DECIDED SCOPES: the 30 anchors' growth forms and the approved fusions (`SCOPES`, `APPROVED_FUSIONS`, `fusionVerdict`) |
 | `src/affixrules.py` | rule = anchor + forms; exact keypress choice (`chooseRuleKeypress`), scope fallbacks (`resolveFallbacks`), rival resolution, budgeted selection (30 rules), key sharing |
+| `src/affixabbrev.py` | the abbreviations themselves: per word the best allowed short outline, collision-free against the stable theory |
+| `util/export_affix_dictionary.py` | writes `plover_stenalgo_affix_dictionary.json` and `affix_abbreviations.tsv` from `affix_rules.json` |
 | `util/affix_scan.py` | the driver: Part A builds the pool, Part B selects and binds; `--sweep` runs the weight settings |
 
-Tests: `src/test/affixes_test.py`, `affixrules_test.py`, `affixscopes_test.py`.
+Tests: `src/test/affixes_test.py`, `affixrules_test.py`, `affixscopes_test.py`, `affixabbrev_test.py`.
 
 ## How a rule is built
 
@@ -83,6 +85,32 @@ Pool pickles and `scratch/*-before/` snapshots are untracked (over 5 MB); never 
 `-tion` fusion 5,543, `é` 5,443...). Fallbacks are small (`-té` 76, `en` 34, `-ment` 32, `-tion` 14). No rule uses an
 enumerated syllable list. The earlier (pre-fusion) combined simulation of the 30 scopes (`scratch/combined_scopes.py`) showed
 key-sharing collisions (`en`/`é`, `i`/`cer...`) that the sweep's key re-selection removed.
+
+## The optional abbreviation dictionary (usable output)
+
+The theory is complete and stable without the affix rules, so the abbreviations are an OPTIONAL layer added after it
+(user decision, 2026-10-01): nothing in S1-S8 changes if they are ignored, and the long outlines stay as the fallback for a
+learner who does not remember the rules.
+
+```bash
+python -m util.export_affix_dictionary      # also the last step of `python dictionary.py`
+# needs: the stable theory (as util.export_plover_dictionary), the committed affix_rules.json
+# outputs: plover_stenalgo_affix_dictionary.json (short outline -> word), affix_abbreviations.tsv (long, short, saved, rule, k, freq)
+```
+
+- `affix_rules.json` (repo root, committed input like `starboard3h.json`) lists the 30 rules (rank, position, anchor spelling and
+  phonology, keys). It is written by the sweep (`scratch/affix-sweep-partial/D/affix-rules.json`) and copied to the root by hand
+  when a sweep is adopted. A lexicon or layout change means rerunning the affix scan first.
+- `src/affixabbrev.py` builds the pool from the stable theory's records, takes each rule's carriers and forms, and computes the short
+  outline with the rule's keys (`affixes._newBase`). Per word: one abbreviation, the one saving the most strokes (growth form, then
+  anchor alone; a tie goes to the better-ranked rule).
+- An abbreviation exists only if its outline equals no outline of the stable theory (all words, all readings) and no more frequent
+  spelling's abbreviation. It keeps the word's own star/hash and feature marks, and never adds a mark, so it cannot disturb the theory.
+  The exporter also fails if one collides with `plover_stenalgo_dictionary.json`.
+- Result on the current lexicon: 59,358 abbreviations for 65,646 carrier words (51,119 save 1 stroke, 8,239 save 2); 83 carriers have
+  no allowed form and 1,381 lost a shared outline to a more frequent spelling; strokes saved x frequency = 98,125 (the sweep's per-rule
+  benefits add up to 115,682 because they count shared words once per rule and allow marks). The main dictionary is unchanged. Use it in
+  Plover as a second dictionary of higher priority; remove it and nothing else changes.
 
 ## Pitfalls
 

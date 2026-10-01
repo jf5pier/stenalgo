@@ -1,0 +1,325 @@
+[
+ {
+  "rank": 1,
+  "position": "suffix",
+  "ortho": "ment",
+  "phono": "m@",
+  "keys": [
+   16,
+   20,
+   25
+  ]
+ },
+ {
+  "rank": 2,
+  "position": "prefix",
+  "ortho": "am|an|ant|em|en|ench|enh|ham|han|hen",
+  "phono": "@",
+  "keys": [
+   3,
+   6,
+   18
+  ]
+ },
+ {
+  "rank": 3,
+  "position": "prefix",
+  "ortho": "re|reh",
+  "phono": "R°",
+  "keys": [
+   9,
+   18
+  ]
+ },
+ {
+  "rank": 4,
+  "position": "suffix",
+  "ortho": "ccion|cion|cyon|sion|ssion|tion|tions",
+  "phono": "sj§",
+  "keys": [
+   16,
+   17,
+   20
+  ]
+ },
+ {
+  "rank": 5,
+  "position": "prefix",
+  "ortho": "é",
+  "phono": "e",
+  "keys": [
+   2,
+   5
+  ]
+ },
+ {
+  "rank": 6,
+  "position": "prefix",
+  "ortho": "ain|hin|im|in",
+  "phono": "5",
+  "keys": [
+   7,
+   14,
+   16
+  ]
+ },
+ {
+  "rank": 7,
+  "position": "prefix",
+  "ortho": "de",
+  "phono": "d°",
+  "keys": [
+   2,
+   6,
+   19
+  ]
+ },
+ {
+  "rank": 8,
+  "position": "prefix",
+  "ortho": "ai|aî|e|ei|hai|he|hê|é",
+  "phono": "E",
+  "keys": [
+   5,
+   18,
+   19
+  ]
+ },
+ {
+  "rank": 9,
+  "position": "prefix",
+  "ortho": "de|des|dé|déh",
+  "phono": "de",
+  "keys": [
+   5,
+   9,
+   18
+  ]
+ },
+ {
+  "rank": 10,
+  "position": "suffix",
+  "ortho": "cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé",
+  "phono": "se",
+  "keys": [
+   16,
+   17,
+   19
+  ]
+ },
+ {
+  "rank": 11,
+  "position": "suffix",
+  "ortho": "ter",
+  "phono": "te",
+  "keys": [
+   16,
+   20,
+   22
+  ]
+ },
+ {
+  "rank": 12,
+  "position": "prefix",
+  "ortho": "au",
+  "phono": "o",
+  "keys": [
+   7,
+   8,
+   19
+  ]
+ },
+ {
+  "rank": 13,
+  "position": "suffix",
+  "ortho": "té",
+  "phono": "te",
+  "keys": [
+   19,
+   20,
+   25
+  ]
+ },
+ {
+  "rank": 14,
+  "position": "suffix",
+  "ortho": "der|dé|dée",
+  "phono": "de",
+  "keys": [
+   18,
+   19,
+   25
+  ]
+ },
+ {
+  "rank": 15,
+  "position": "suffix",
+  "ortho": "ner|nez|nner|nnée|née|nées",
+  "phono": "ne",
+  "keys": [
+   16,
+   17,
+   25
+  ]
+ },
+ {
+  "rank": 16,
+  "position": "prefix",
+  "ortho": "ra|rai|raie|re|rhé|ré|réh",
+  "phono": "Re",
+  "keys": [
+   3,
+   4,
+   16
+  ]
+ },
+ {
+  "rank": 17,
+  "position": "prefix",
+  "ortho": "pa",
+  "phono": "pa",
+  "keys": [
+   2,
+   5,
+   18
+  ]
+ },
+ {
+  "rank": 18,
+  "position": "prefix",
+  "ortho": "par",
+  "phono": "paR",
+  "keys": [
+   8,
+   19
+  ]
+ },
+ {
+  "rank": 19,
+  "position": "prefix",
+  "ortho": "e|hi|hy|i|y|î",
+  "phono": "i",
+  "keys": [
+   16,
+   19
+  ]
+ },
+ {
+  "rank": 20,
+  "position": "prefix",
+  "ortho": "sa|sah",
+  "phono": "sa",
+  "keys": [
+   5,
+   24
+  ]
+ },
+ {
+  "rank": 21,
+  "position": "prefix",
+  "ortho": "o",
+  "phono": "o",
+  "keys": [
+   16,
+   17,
+   19
+  ]
+ },
+ {
+  "rank": 22,
+  "position": "prefix",
+  "ortho": "pro|proh|prô",
+  "phono": "pRo",
+  "keys": [
+   4,
+   5,
+   8
+  ]
+ },
+ {
+  "rank": 23,
+  "position": "suffix",
+  "ortho": "ver",
+  "phono": "ve",
+  "keys": [
+   16,
+   17,
+   18
+  ]
+ },
+ {
+  "rank": 24,
+  "position": "prefix",
+  "ortho": "ce|sce|se",
+  "phono": "s°",
+  "keys": [
+   3,
+   6
+  ]
+ },
+ {
+  "rank": 25,
+  "position": "suffix",
+  "ortho": "rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée",
+  "phono": "Re",
+  "keys": [
+   16,
+   19,
+   21
+  ]
+ },
+ {
+  "rank": 26,
+  "position": "prefix",
+  "ortho": "pou|pu",
+  "phono": "pu",
+  "keys": [
+   4,
+   7,
+   18
+  ]
+ },
+ {
+  "rank": 27,
+  "position": "prefix",
+  "ortho": "de|dea|di|die|dis|dy|dî",
+  "phono": "di",
+  "keys": [
+   3,
+   16,
+   19
+  ]
+ },
+ {
+  "rank": 28,
+  "position": "suffix",
+  "ortho": "ser|sée|zer|zé",
+  "phono": "ze",
+  "keys": [
+   18,
+   22,
+   23
+  ]
+ },
+ {
+  "rank": 29,
+  "position": "suffix",
+  "ortho": "ger",
+  "phono": "Ze",
+  "keys": [
+   16,
+   24
+  ]
+ },
+ {
+  "rank": 30,
+  "position": "suffix",
+  "ortho": "cher",
+  "phono": "Se",
+  "keys": [
+   9,
+   24,
+   25
+  ]
+ }
+]
