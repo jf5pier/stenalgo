@@ -353,6 +353,71 @@ def main() -> None:
                 out.write(f"{' '.join(rule.units)}\t{' '.join(bKey[0])}\t{m:.3e}\t{ex}\n")
     print(f"report: scratch/expr-rules.tsv ({len(rulesFinal)} rules), "
           f"expr-composability.tsv ({len(seenPairs)} pairs >= 1e6)")
+
+    # ---- Forced briefs (user decision 2026-10-01): tao entries with no
+    # coverage from the selected rules get invented strokes from their OWN
+    # budget (FORCED_BRIEF_BUDGET); the same mechanic adds words later.
+    from src.expressionrules import FORCED_BRIEF_BUDGET, deriveBriefStroke
+    from src.expressions import BriefRule
+
+    taoSet = {tuple(p.split("=")[0] for p in row["phonologies"].split(",") if p)
+              for row in rows if "tao" in row["flags"].split(",")}
+    covered = set()
+    for expr in pool:
+        if composeOutlineTraced(rulesJoint, expr.tokens, realCtx).saving > 0:
+            covered.add(expr.units)
+    forced = sorted((e for e in pool if e.units in taoSet
+                     and e.units not in covered
+                     and e.longformStrokes >= 2),
+                    key=lambda e: (-e.freq, e.units))[:FORCED_BRIEF_BUDGET]
+    briefs: list[tuple] = []
+    takenStrokes: set = set()
+    for expr in forced:
+        got = deriveBriefStroke(expr, realCtx, takenStrokes,
+                                freeChords=keypresses)
+        if got is None:
+            continue
+        stroke, label = got
+        takenStrokes.add(stroke)
+        briefs.append((expr, stroke, label))
+    briefRules = tuple(BriefRule(e.units, (st,)) for e, st, _l in briefs)
+    withBriefs = Rules(attaches=rulesJoint.attaches, briefs=briefRules)
+    savingBrief = 0.0
+    bShadows: list = []
+    byOutline: dict = {}
+    for expr in pool:
+        traced = composeOutlineTraced(withBriefs, expr.tokens, realCtx)
+        if traced.strokes is None:
+            continue
+        savingBrief += expr.freq * traced.saving
+        if traced.saving > 0 and traced.strokes in realCtx.finalOutlines:
+            bShadows.append((expr.units, traced.strokes))
+        byOutline.setdefault(traced.strokes, []).append(expr.units)
+    bCollisions = {o: us for o, us in byOutline.items() if len(set(us)) > 1}
+    with open(REPO / "scratch" / "expr-briefs.tsv", "w", encoding="utf-8") as out:
+        out.write("expr\tfreq\tderivation\tstroke\trtfcre\t"
+                  "longform_strokes\tstrokes_saved\n")
+        for expr, stroke, label in briefs:
+            out.write(f"{' '.join(expr.units)}\t{expr.freq:.0f}\t{label}\t"
+                      f"{','.join(map(str, stroke))}\t"
+                      f"{renderFinalStrokesToRTFCRE(starboard, (stroke,))}\t"
+                      f"{expr.longformStrokes}\t{expr.longformStrokes - 1}\n")
+    with open(OUT_TSV, "a", encoding="utf-8") as out:
+        for rank, (expr, stroke, label) in enumerate(briefs, len(rulesFinal) + 1):
+            out.write("\t".join([str(rank), "brief", "", " ".join(expr.units),
+                                  "", ",".join(map(str, stroke)),
+                                  renderFinalStrokesToRTFCRE(starboard, (stroke,)),
+                                  f"{expr.freq * (expr.longformStrokes - 1):.3e}",
+                                  f"{expr.freq * (expr.longformStrokes - 1):.3e}",
+                                  label, "0", "", "", ""]) + "\n")
+    print(f"forced briefs: {len(briefs)} created (of {len(forced)} uncovered "
+          f"tao entries, budget {FORCED_BRIEF_BUDGET}) -> scratch/expr-briefs.tsv")
+    print(f"with briefs: saving {savingBrief:.3e}, shadows {len(bShadows)}, "
+          f"collisions {len(bCollisions)}")
+    for units, outline in bShadows[:3]:
+        print("  SHADOW", " ".join(units), outline)
+    for outline, exprs in list(bCollisions.items())[:3]:
+        print("  COLLISION", outline, [" ".join(u) for u in exprs[:4]])
     slots = {(r.family or " ".join(r.units)) if r.kind == "attach"
              else " ".join(r.units) for r in result.selected}
     print(f"selected {len(result.selected)} rules in {len(slots)} slots -> {OUT_TSV}")

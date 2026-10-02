@@ -1,30 +1,71 @@
 rank	kind	family	expression	position	freq	strokes_saved	keys	score
-1	attach	de	de	prefix	578716792	1	9,18,23	7.644e+08
-2	attach	de	d'	prefix	156154508	1	9,10,18,23	1.636e+08
+1	attach	de	de	prefix	579342261	1	18,24	7.650e+08
+2	attach	de	d'	prefix	156154508	1	10,18,24	1.636e+08
 3	attach	à	à	prefix	267408208	1	9,17	2.751e+08
-4	attach	ne	n'	prefix	152965207	1	8,17,21	2.957e+08
-5	attach	ne	ne	prefix	44860332	1	8,10,17,21	4.893e+07
-6	attach	ne	n' y	prefix	11093429	2	8,15,17,21	2.014e+07
-7	attach	dans	dans	prefix	253868505	1	2,8	2.236e+08
-8	attach	et	et	prefix	278249465	1	8,16,19	2.788e+08
-9	attach	que	que	prefix	185627895	1	2,9	1.529e+08
-10	attach	que	que je	prefix	25758482	2	2,9,10	4.111e+06
-11	attach	que	que l'	prefix	18423683	2	2,9,15	8.153e+06
-12	attach	que	que nous	prefix	11446990	2	2,9,10,15	1.562e+06
-13	attach	il	il	prefix	168319881	1	7,9,18	1.958e+08
-14	attach	la	la	prefix	116132666	1	16,19	1.486e+08
-15	attach	le	le	suffix	199548478	1	3,17	6.253e+07
-16	attach	le	le	prefix	51233152	1	3,10,17	5.123e+07
-17	attach	les	les	suffix	176903013	1	3	3.569e+07
-18	attach	les	les	prefix	33827184	1	3,10	3.383e+07
-19	attach	pas	pas	suffix	206722861	1	16	1.172e+08
-20	attach	pas	pas le	suffix	6247194	2	10,16	1.384e+06
-21	attach	l'	l'	prefix	77616119	1	5,6	1.202e+08
-22	attach	l'	l' on	suffix	12730809	2	5,6,10	3.827e+06
-23	attach	je	je	prefix	112312128	1	4,18,19	7.449e+07
-24	attach	je	je ne	suffix	25361333	2	4,10,18,19	2.783e+06
-25	attach	je	je me	prefix	13654387	2	4,15,18,19	2.999e+06
-26	attach	ce	ce	prefix	86637555	1	5,7,19	8.788e+07
-27	attach	ce	ce qui	prefix	24454906	2	5,7,10,19	7.955e+06
-28	attach	s'	s'	prefix	53867708	1	3,4,5	5.667e+07
-29	attach	s'	s' il	suffix	12210772	2	3,4,5,10	3.269e+06
+4	attach	qu	qu'	prefix	217698158	1	5,9,18	1.699e+08
+5	attach	qu	qu' il	prefix	67919825	2	5,9,10,18	3.633e+07
+6	attach	qu	qu' elle	prefix	30480865	2	5,9,15,18	9.089e+06
+7	attach	ne	n'	prefix	152965207	1	8,17,21	2.998e+08
+8	attach	ne	ne	prefix	44860332	1	8,10,17,21	4.893e+07
+9	attach	ne	n' y	prefix	11093429	2	8,15,17,21	2.104e+07
+10	attach	dans	dans	prefix	253868505	1	8,9,16	2.175e+08
+11	attach	dans	dans ce	prefix	7363145	2	8,9,10,16	1.323e+06
+12	attach	que	que	prefix	197909645	1	9,16,19	1.678e+08
+13	attach	que	que je	prefix	25758482	2	9,10,16,19	4.111e+06
+14	attach	que	que l'	prefix	18423683	2	9,15,16,19	8.153e+06
+15	attach	que	que nous	prefix	11446990	2	9,10,15,16,19	1.562e+06
+16	attach	et	et	prefix	285239034	1	8,16,19	2.857e+08
+17	attach	il	il	prefix	168319881	1	7,16,19	2.357e+08
+18	attach	c	c'	prefix	134792591	1	2,4,5	1.466e+08
+19	attach	la	la	prefix	116132666	1	16,19	1.486e+08
+20	attach	le	le	suffix	204105844	1	3,17	6.318e+07
+21	attach	le	le	prefix	51233152	1	3,10,17	5.123e+07
+22	attach	pas	pas	suffix	206722861	1	9	1.184e+08
+23	attach	pas	pas le	suffix	6247194	2	9,10	1.384e+06
+24	attach	les	les	suffix	176903013	1	2	3.569e+07
+25	attach	les	les	prefix	33827184	1	2,10	3.383e+07
+26	attach	l'	l'	prefix	77616119	1	5,6	1.207e+08
+27	attach	l'	l' on	suffix	12730809	2	5,6,10	3.827e+06
+28	attach	je	je	prefix	112312128	1	4,18,20	7.449e+07
+29	attach	je	je ne	suffix	25361333	2	4,10,18,20	2.783e+06
+30	attach	je	je me	prefix	13654387	2	4,15,18,20	2.999e+06
+31	brief		avec		4	p-	1.055e+08	1.055e+08	free	0			
+32	brief		dans le		4,5,6,7,11,12	pvmt@a	4.506e+07	4.506e+07	union	0			
+33	brief		dans la		11,12	@a	4.287e+07	4.287e+07	vowels	0			
+34	brief		dans les		4,5,6,7,11,14	pvmt@e	3.109e+07	3.109e+07	union	0			
+35	brief		après		5	v-	3.007e+07	3.007e+07	free	0			
+36	brief		que je		2,5,7,11,12	kvt@a	2.576e+07	2.576e+07	union	0			
+37	brief		ainsi		8	R-	2.540e+07	2.540e+07	free	0			
+38	brief		avant		5,11,12	v@a	2.457e+07	2.457e+07	skeleton	0			
+39	brief		jamais		5,6,7,12,13,14	vmtaie	2.090e+07	2.090e+07	skeleton	0			
+40	brief		depuis		9	w-	1.920e+07	1.920e+07	free	0			
+41	brief		déjà		4,5,7,12,14	pvtae	1.522e+07	1.522e+07	skeleton	0			
+42	brief		petit		4,7,11,12,13	pt@ai	1.495e+07	1.495e+07	skeleton	0			
+43	brief		un peu		16	-j	1.372e+07	1.372e+07	free	0			
+44	brief		pendant		17	-s	1.317e+07	1.317e+07	free	0			
+45	brief		premier		4,6,8,9,11,13,14	pmRw@ie	1.255e+07	1.255e+07	skeleton	0			
+46	brief		première		4,6,8,9,11,13,14,21	pmRw@ieR	1.247e+07	1.247e+07	skeleton	0			
+47	brief		pourquoi		2,4,9,11,12,14,21	kpw@aeR	1.233e+07	1.233e+07	skeleton	0			
+48	brief		beaucoup		2,3,5,11,12,14	ksv@ae	1.224e+07	1.224e+07	skeleton	0			
+49	brief		souvent		18	-k	1.175e+07	1.175e+07	free	0			
+50	brief		question		2,7,8,9,12,13,14,17	ktRwaies	1.122e+07	1.122e+07	skeleton	0			
+51	brief		plusieurs		4,6,7,8,9,11,13,21	pmtRw@iR	1.119e+07	1.119e+07	skeleton	0			
+52	brief		maison		19	-d	1.093e+07	1.093e+07	free	0			
+53	brief		peut être		4,10,11,13,14,20,21	p*@ietR	1.074e+07	1.074e+07	union	0			
+54	brief		enfin		2,4,11,12,13,14	kp@aie	1.037e+07	1.037e+07	skeleton	0			
+55	brief		exemple		13,14,18,19,22,23	iekdnl	1.028e+07	1.028e+07	union	0			
+56	brief		petite		4,7,11,12,13,20	pt@ait	9.878e+06	9.878e+06	skeleton	0			
+57	brief		toutes les		20	-t	1.955e+07	1.955e+07	free	0			
+58	brief		lorsque		2,3,6,7,11,12,14,21	ksmt@aeR	9.631e+06	9.631e+06	skeleton	0			
+59	brief		maintenant		6,8,11,12,13,14	mR@aie	1.903e+07	1.903e+07	skeleton	0			
+60	brief		raison		21	-R	9.495e+06	9.495e+06	free	0			
+61	brief		façon		2,3,4,12,13	kspai	9.325e+06	9.325e+06	skeleton	0			
+62	brief		ailleurs		8,9,11,12,21	Rw@aR	9.186e+06	9.186e+06	skeleton	0			
+63	brief		besoin		3,5,11,12	sv@a	9.045e+06	9.045e+06	union	0			
+64	brief		ensemble		22	-n	8.865e+06	8.865e+06	free	0			
+65	brief		aujourd'hui		4,5,11,12,13,14	pv@aie	1.749e+07	1.749e+07	skeleton	0			
+66	brief		surtout		3,7,11,13,14,21	st@ieR	8.648e+06	8.648e+06	skeleton	0			
+67	brief		société		3,7,12,14	stae	1.714e+07	1.714e+07	skeleton	0			
+68	brief		avec les		23	-l	1.584e+07	1.584e+07	free	0			
+69	brief		possible		3,4,12,13,14,16,23	spaiejl	7.912e+06	7.912e+06	skeleton	0			
+70	brief		autour		7,11,12,14,21	t@aeR	7.871e+06	7.871e+06	skeleton	0			

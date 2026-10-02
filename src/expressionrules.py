@@ -47,8 +47,16 @@ MIN_LONGFORM_STROKES = 2      # expressions under 2 strokes never enter the queu
 MIN_OCCURRENCES = 5_000_000   # ditto for window-occurrence counts
 
 # Q4: the expression budget is SEPARATE from affixrules.RULE_BUDGET (30).
-# Mid-range placeholder of the user's ~10-20; the number is theirs to fix.
-EXPR_RULE_BUDGET = 15
+# User decision 2026-10-01: raised to 30, priority on the most frequent
+# words/expressions (the greedy's marginal frequency-weighted saving IS
+# that priority).
+EXPR_RULE_BUDGET = 30
+
+# Forced briefs (user decision 2026-10-01): tao entries too infrequent to
+# win a frequency slot get INVENTED brief strokes from their OWN budget,
+# separate from the selection budget; `deriveBriefStroke` is also the
+# word-adding mechanic for later additions to the theory.
+FORCED_BRIEF_BUDGET = 40
 
 # Pricing in the affix sweep-D tradition (2026-09-30 user decision:
 # exception alpha 2, fallback/exclusion price 5, form cost 100), extended
@@ -362,6 +370,65 @@ def repairKeypresses(selected: list[ExprRule], report: dict,
             rule.keys = tuple(sorted(set(base) | set(selector)))
         chosen[name] = base
     return chosen
+
+
+def deriveBriefStroke(expr: PoolExpression, ctx: SimContext,
+                      takenStrokes: set[Stroke],
+                      freeChords: list[Stroke] | tuple[()] = (),
+                      ) -> tuple[Stroke, str] | None:
+    """The brief-creation mechanic (user decision 2026-10-01): invent ONE
+    standalone stroke for a FORCED expression — tao entries too infrequent
+    to win a frequency slot, or a word added to the theory later. Q9's
+    mnemonic AND free-chord derivations, in preference order:
+
+      1. `union` — every member word's first-stroke keys pressed together;
+      2. `skeleton` — first word's first stroke + last word's last stroke;
+      3. `vowels` — the expression's nucleus keys, first occurrence order;
+      4. `free` — legal chords from `freeChords` (smallest first, then key
+         order; deterministic), the free-chord fallback.
+
+    A candidate must be a legal chord, must not be a live single-stroke
+    outline (Q7 no-shadowing -- `ctx.finalOutlines` is the canonical live
+    index), and must not be taken by another brief.
+    Single stroke only (multi-stroke briefs, Q8, would need boundary-risk
+    gating — none of the forced entries need it). Returns (stroke,
+    derivation label) or None."""
+    tokens = expr.tokens
+
+    def acceptable(keys: tuple[int, ...]) -> Stroke | None:
+        stroke = tuple(sorted(set(keys)))
+        # reserved keys are legality-transparent (the composer's convention)
+        syllabic = tuple(k for k in stroke if k not in RESERVED_MARK_KEYS)
+        if not stroke or not ctx.isLegal(syllabic):
+            return None
+        if stroke in ctx.singleStrokeOutlines or (stroke,) in ctx.finalOutlines:
+            return None
+        if stroke in takenStrokes:
+            return None
+        return stroke
+
+    candidates: list[tuple[Stroke, str]] = []
+    union = tuple(k for t in tokens for k in t.strokes[0])
+    if (stroke := acceptable(union)) is not None:
+        candidates.append((stroke, "union"))
+    skeleton = tuple(set(tokens[0].strokes[0]) | set(tokens[-1].strokes[-1]))
+    if (stroke := acceptable(skeleton)) is not None and (not candidates or candidates[0][0] != stroke):
+        candidates.append((stroke, "skeleton"))
+    nucleus = set(ctx.starboard.keyIDinSyllabicPart["nucleus"])
+    vowels = []
+    for token in tokens:
+        for stroke in token.strokes:
+            for key in stroke:
+                if key in nucleus and key not in vowels:
+                    vowels.append(key)
+    if (stroke := acceptable(tuple(vowels))) is not None and all(stroke != s for s, _ in candidates):
+        candidates.append((stroke, "vowels"))
+    if candidates:
+        return candidates[0]
+    for chord in sorted(freeChords, key=lambda c: (len(c), c)):
+        if (stroke := acceptable(chord)) is not None:
+            return stroke, "free"
+    return None
 
 
 @dataclass
