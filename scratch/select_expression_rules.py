@@ -114,7 +114,8 @@ def main() -> None:
     keypresses = enumerateKeypresses(starboard, realCtx)
     print(f"{len(keypresses)} legal base keypresses ({time.time() - t:.0f}s)")
     t = time.time()
-    keypressReport = assignKeypresses(result.selected, pool, realCtx, keypresses)
+    keypressReport = assignKeypresses(result.selected, pool, realCtx, keypresses,
+                                 repairCandidates=200)
     print(f"Stage B assignment done ({time.time() - t:.0f}s)")
 
     # Stage C: joint repair (cross-family distinctness) + audit, with a
@@ -125,8 +126,27 @@ def main() -> None:
 
     chosen: dict = {}
     audit = None
+    # Q3 stacking fix: families that co-occur on expressions (joint mass
+    # >= 2M) must hold DISJOINT keypresses so both merges can stack on one
+    # stroke (ne x pas on a 1-stroke host otherwise keyOverlaps).
+    from itertools import combinations
+
+    from src.expressionrules import touchedExpressions as _touched
+
+    famRules: dict[str, list] = {}
+    for r in result.selected:
+        if r.kind == "attach":
+            famRules.setdefault(r.family or " ".join(r.units), []).append(r)
+    famTouched = {f: {i for r in rs for i in _touched(r, pool)}
+                  for f, rs in famRules.items()}
+    disjointPairs = frozenset(
+        frozenset((a, b)) for a, b in combinations(sorted(famRules), 2)
+        if sum(pool[i].freq for i in famTouched[a] & famTouched[b]) >= 2e6)
+    print(f"disjoint-pair constraint on {len(disjointPairs)} co-occurring "
+          f"family pairs: {sorted(tuple(sorted(p)) for p in disjointPairs)}")
     for round_ in range(3):
-        chosen = repairKeypresses(result.selected, keypressReport)
+        chosen = repairKeypresses(result.selected, keypressReport,
+                                  disjointPairs=disjointPairs)
         audit = auditExpressionRules(result.selected, pool, realCtx)
         print(f"Stage C round {round_}: re-based {len(chosen)} families, "
               f"collisions {len(audit.collisions)}, shadows {len(audit.shadows)}")
@@ -139,23 +159,28 @@ def main() -> None:
         banned: set[str] = set()
         progressed = False
         for outline, exprs in audit.collisions.items():
-            famsInvolved: dict[str, set[tuple[str, ...]]] = {}
+            signatures = []
             for units in exprs:
                 traced = composeOutlineTraced(rules, poolByUnits[units].tokens,
                                               realCtx)
-                for seg in traced.segments:
-                    if seg.kind == "attach" and seg.rule is not None and seg.rule.family:
-                        famsInvolved.setdefault(seg.rule.family, set()).add(
-                            seg.rule.expression)
-            if len(famsInvolved) == 1:
+                signatures.append({
+                    (seg.rule.family, seg.rule.expression)
+                    for seg in traced.segments
+                    if seg.kind == "attach" and seg.rule is not None
+                    and seg.rule.family})
+            common = set.intersection(*signatures) if signatures else set()
+            differing = set().union(*signatures) - common
+            culpritFams = {fam for fam, _units in differing}
+            if len(culpritFams) == 1:
                 # Selector collapse on a marked host (the host's own * / #
                 # swallows the variant's selector — no base can fix it):
-                # drop the weaker colliding variant; its contexts compose
-                # through the other family's rules instead.
-                fam, exprsSet = next(iter(famsInvolved.items()))
+                # drop the weaker differing variant; its contexts compose
+                # through the common rules instead.
+                fam = next(iter(culpritFams))
+                unitsSet = {u for _f, u in differing}
                 colliding = sorted(
                     (r for r in result.selected
-                     if r.family == fam and r.units in exprsSet and r.forms == 0),
+                     if r.family == fam and r.units in unitsSet and r.forms == 0),
                     key=lambda r: -r.freq)
                 keep = colliding[0] if len(colliding) > 1 else None
                 for drop in colliding:
@@ -163,7 +188,7 @@ def main() -> None:
                         result.selected.remove(drop)
                         progressed = True
                 continue
-            banned.update(famsInvolved)
+            banned.update(culpritFams)
         for family in sorted(banned):
             info = keypressReport.get(family, {})
             alternatives = info.get("alternatives") or []
@@ -180,6 +205,9 @@ def main() -> None:
                   f"variants={info['variants']} score={info.get('score', 0):.3e}"
                   + (" (Stage B base kept)" if chosen[family] == info.get("base")
                      else " (moved)"))
+        elif info.get("base") is not None:
+            print(f"  family {family!r}: base={info['base']} kept from Stage B "
+                  f"(repair infeasible or unneeded)")
         else:
             print(f"  family {family!r}: NO LEGAL BASE (variants={info['variants']})")
     assert audit is not None
@@ -200,6 +228,28 @@ def main() -> None:
             out.write(f"{rank}\t{rule.kind}\t{rule.family}\t{' '.join(rule.units)}\t"
                       f"{rule.position}\t{rule.freq:.0f}\t{rule.strokesSaved}\t"
                       f"{keys}\t{rule.score:.3e}\n")
+
+    # Machine-readable dumps for the analyses (Q3 circumfix, Phase 3).
+    import json
+
+    finalRules = [
+        {"kind": r.kind, "family": r.family, "units": list(r.units),
+         "position": r.position, "keys": list(r.keys or ()), "freq": r.freq}
+        for r in result.selected]
+    with open(REPO / "scratch" / "expr-rules-final.json", "w", encoding="utf-8") as fh:
+        json.dump({"rules": finalRules, "chosen": {k: list(v)
+                                                   for k, v in chosen.items()}}, fh,
+                  ensure_ascii=False, indent=1)
+    rulesJoint = Rules(attaches=tuple(
+        r.toAttach() for r in result.selected
+        if r.kind == "attach" and r.keys is not None))
+    with open(REPO / "scratch" / "expr-savings.tsv", "w", encoding="utf-8") as fh:
+        fh.write("expr\tfreq\tlongform\tcomposed\tsaving\texceptions\n")
+        for expr in pool:
+            traced = composeOutlineTraced(rulesJoint, expr.tokens, realCtx)
+            fh.write(f"{'+'.join(expr.units)}\t{expr.freq:.0f}\t"
+                     f"{expr.longformStrokes}\t{len(traced.strokes or ())}\t"
+                     f"{traced.saving}\t{traced.exceptions}\n")
     slots = {(r.family or " ".join(r.units)) if r.kind == "attach"
              else " ".join(r.units) for r in result.selected}
     print(f"selected {len(result.selected)} rules in {len(slots)} slots -> {OUT_TSV}")

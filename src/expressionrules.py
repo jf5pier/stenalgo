@@ -37,8 +37,9 @@ from dataclasses import dataclass, field
 from src.affixes import PREFIX, SUFFIX, SimContext
 from src.affixrules import MAX_EXCEPTION_RATE
 from src.ambiguitychecker import HASH_KEY, STAR_KEY
-from src.expressions import (AttachRule, BriefRule, MERGED, STANDALONE,
-                             Rules, Token, composeOutlineTraced, planStream)
+from src.expressions import (AttachRule, BriefRule, MERGED, RESERVED_MARK_KEYS,
+                             Rules, STANDALONE, Token, composeOutlineTraced,
+                             planStream)
 from src.keyboard import Stroke, Strokes
 
 # Q6 floors — tunable in one place.
@@ -156,7 +157,8 @@ def _familyGroups(selected: list[ExprRule]) -> list[list[ExprRule]]:
 
 def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
                      ctx: SimContext, keypresses: list[Stroke],
-                     selectors: tuple[tuple[int, ...], ...] = SELECTORS) -> dict:
+                     selectors: tuple[tuple[int, ...], ...] = SELECTORS,
+                     repairCandidates: int = REPAIR_CANDIDATES) -> dict:
     """Stage B: give every selected attach rule a real keypress. Per family:
     try every legal base chord; variants take base + selector in
     descending-frequency order; stage 1 on the top-frequency sample with
@@ -237,7 +239,7 @@ def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
         # candidate only if the gate AND no-shadowing hold on ALL touched
         # expressions (Q7 hard no).
         alternatives: list[tuple[float, Stroke]] = []
-        for _score, base in stage1[:REPAIR_CANDIDATES]:
+        for _score, base in stage1[:repairCandidates]:
             score, rate, shadows = evaluate(base, touched)
             if rate <= MAX_EXCEPTION_RATE and shadows == 0:
                 alternatives.append((score, base))
@@ -258,7 +260,8 @@ def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
 
 
 def repairKeypresses(selected: list[ExprRule], report: dict,
-                     selectors: tuple[tuple[int, ...], ...] = SELECTORS
+                     selectors: tuple[tuple[int, ...], ...] = SELECTORS,
+                     disjointPairs: frozenset[frozenset[str]] = frozenset(),
                      ) -> dict[str, tuple[int, ...]]:
     """Stage C joint repair: re-assign the families' bases so variants of
     DIFFERENT families never share an effective keypress (base + selector)
@@ -269,11 +272,16 @@ def repairKeypresses(selected: list[ExprRule], report: dict,
 
     CP-SAT in the featuregroupingsat tradition: one integer variable per
     family over its Stage B candidate bases (gate- and shadow-clean,
-    score-ranked); pairwise AddAllowedAssignments forbid base combinations
-    whose effective variant sets intersect; the objective maximizes total
+    score-ranked); pairwise add_allowed_assignments forbid base
+    combinations whose effective variant sets collide; `disjointPairs`
+    (family-name pairs) tightens collision to INTERSECTION for pairs that
+    co-occur on one stroke (Q3's ne x pas finding: ne=(2,8,17) and
+    pas=(2,9) share key 2, so on a 1-stroke host the second merge
+    keyOverlaps and degrades to an exception — disjoint keys let BOTH
+    rules merge into the same stroke); the objective maximizes total
     score with a candidate-rank tie-break (deterministic; the Stage B
-    winner hints the solver). Returns family -> chosen base; families with
-    no candidates keep their Stage B state (None stays None)."""
+    winner hints the solver). Returns family -> chosen base; families
+    with no candidates keep their Stage B state (None stays None)."""
     from ortools.sat.python import cp_model
 
     groups = _familyGroups(selected)
@@ -304,8 +312,28 @@ def repairKeypresses(selected: list[ExprRule], report: dict,
 
     for i in range(len(baseVars)):
         for j in range(i + 1, len(baseVars)):
-            allowed = [(a, b) for a in range(len(effSets[i])) for b in range(len(effSets[j]))
-                       if not (set(effSets[i][a]) & set(effSets[j][b]))]
+            names = {fams[i][0], fams[j][0]}
+            mustDisjoint = frozenset(names) in disjointPairs
+            allowed = []
+            for a in range(len(effSets[i])):
+                for b in range(len(effSets[j])):
+                    # syllabic keys only: the composer's overlap check is
+                    # reserved-key-transparent (_syllabic), so */# selectors
+                    # never block stacking -- only shared phoneme keys do
+                    keysA = {k for kappa in effSets[i][a] for k in kappa
+                             if k not in RESERVED_MARK_KEYS}
+                    keysB = {k for kappa in effSets[j][b] for k in kappa
+                             if k not in RESERVED_MARK_KEYS}
+                    if mustDisjoint:
+                        # no KEY overlap at all: both families can stack
+                        # their merges on one stroke
+                        if not (keysA & keysB):
+                            allowed.append((a, b))
+                    elif not any(set(k1) == set(k2) for k1 in effSets[i][a]
+                                 for k2 in effSets[j][b]):
+                        # equality collision only: some effective keypress
+                        # appears in both families' variant sets
+                        allowed.append((a, b))
             model.add_allowed_assignments([baseVars[i], baseVars[j]], allowed)
 
     objective = []
@@ -321,10 +349,12 @@ def repairKeypresses(selected: list[ExprRule], report: dict,
     model.maximize(sum(objective) * 100 - sum(ranks))
 
     solver = cp_model.CpSolver()
-    solver.parameters.max_time_in_seconds = 30.0
+    solver.parameters.max_time_in_seconds = 120.0
     status = solver.Solve(model)
     chosen: dict[str, tuple[int, ...]] = {}
     if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        print(f"  repair solver status: {solver.StatusName(status)} "
+              f"({solver.WallTime():.1f}s)", flush=True)
         return chosen
     for var, (name, group, bases) in zip(baseVars, fams):
         base = bases[solver.Value(var)][1]
