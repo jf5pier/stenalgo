@@ -2,12 +2,11 @@
  {
   "rank": 1,
   "position": "prefix",
-  "ortho": "a",
+  "ortho": "a|ah|ha|hâ|â",
   "phono": "a",
   "keys": [
-   8,
-   11,
-   18
+   9,
+   16
   ]
  },
  {
@@ -27,9 +26,9 @@
   "ortho": "am|an|ant|em|en|ench|enh|ham|han|hen",
   "phono": "@",
   "keys": [
-   3,
+   4,
    6,
-   18
+   16
   ]
  },
  {
@@ -76,16 +75,27 @@
  {
   "rank": 8,
   "position": "prefix",
-  "ortho": "ain|hin|im|in",
-  "phono": "5",
+  "ortho": "de|des|dé|déh",
+  "phono": "de",
   "keys": [
-   7,
-   14,
-   16
+   3,
+   9,
+   18
   ]
  },
  {
   "rank": 9,
+  "position": "prefix",
+  "ortho": "ain|hin|im|in",
+  "phono": "5",
+  "keys": [
+   7,
+   8,
+   9
+  ]
+ },
+ {
+  "rank": 10,
   "position": "prefix",
   "ortho": "de",
   "phono": "d°",
@@ -96,7 +106,7 @@
   ]
  },
  {
-  "rank": 10,
+  "rank": 11,
   "position": "prefix",
   "ortho": "ai|aî|e|ei|hai|he|hê|é",
   "phono": "E",
@@ -104,17 +114,6 @@
    5,
    18,
    19
-  ]
- },
- {
-  "rank": 11,
-  "position": "prefix",
-  "ortho": "de|des|dé|déh",
-  "phono": "de",
-  "keys": [
-   5,
-   9,
-   18
   ]
  },
  {
@@ -208,11 +207,12 @@
  {
   "rank": 20,
   "position": "prefix",
-  "ortho": "ma",
+  "ortho": "ma|mah|mâ",
   "phono": "ma",
   "keys": [
-   3,
-   4
+   17,
+   18,
+   19
   ]
  },
  {
