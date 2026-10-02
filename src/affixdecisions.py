@@ -138,7 +138,28 @@ class Decisions:
         """The decided growth forms of this anchor (empty: no growth), or None when it has no decided growth
         (no entry, `growth: null` = undecided, or an apart merge that is not a rule)."""
         e = self.entries.get((position, ortho, phono))
-        return None if e is None or e.verdict == APART else e.growth
+        if e is None or e.verdict == APART:
+            return None
+        if e.growth is None and e.verdict == FUSED and "|" in ortho:
+            return self._inheritedGrowth(e)
+        return e.growth
+
+    def _inheritedGrowth(self, merged: AnchorDecision) -> list[ScopeForm] | None:
+        """A fused merge without growth of its own inherits the growth of its parts (decided anchors of the same
+        position and sound whose spellings lie inside the merge), restricted to each part's own spellings: the
+        other spellings of the merge stay anchor-only. None when no part has a non-empty growth."""
+        mine = set(merged.spellings.split("|"))
+        out: list[ScopeForm] = []
+        for p in self.entries.values():
+            if p.key == merged.key or p.position != merged.position or p.phono != merged.phono \
+                    or p.verdict == APART or not p.growth:
+                continue
+            own = frozenset(p.spellings.split("|"))
+            if not own <= mine:
+                continue
+            out += [ScopeForm(f.label, (f.anchors & own) if f.anchors is not None else own, f.sound, f.spelling)
+                    for f in p.growth if f.anchors is None or f.anchors & own]
+        return out or None
 
     def fusionVerdict(self, position: str, ortho: str, phono: str) -> str:
         """FUSED or APART for a merged anchor; undecided is APART (the safe default)."""

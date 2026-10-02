@@ -274,3 +274,14 @@ class TestRulePartialOverlap:
         for flag in (False, True):
             r = self._run((3, 4), (4,), flag)
             assert (r.gain, r.reason) == (0, "standaloneTrap")
+
+
+class TestDecidedSubMerge:
+    def test_a_decided_merge_the_greedy_pass_did_not_make_is_built_from_its_parts(self):
+        from src.affixdecisions import AnchorDecision, Decisions
+        words = _tailWords("ment", "m@", _STEMS[:5]) + _tailWords("mant", "m@", _STEMS[5:], strokeBase=100) \
+            + [_wordRec((st, "ba", "man"), (st, "ba", "m@"), (300 + i, 701, 901)) for i, st in enumerate(_STEMS[:5])]
+        dec = Decisions([AnchorDecision(SUFFIX, "man|ment", "m@", "fused", [])])
+        pool = buildCandidates(words, A.loadSeeds()[0], excludeTopWords=False, decisions=dec)
+        m = pool[(SUFFIX, 1, "m@", "man|ment")]
+        assert m.isAnchor and m.variants == ["man", "ment"] and len(m.carriers) >= 10

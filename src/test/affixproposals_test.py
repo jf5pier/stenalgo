@@ -172,3 +172,28 @@ class TestRows:
         (row,) = p.rows
         assert row.label == "b" and row.words == 3 and row.freq == 150.0 and row.benefit == 150.0
         assert any(n.startswith("existing words:") for n in p.notes)
+
+
+class TestFusionSubset:
+    def test_a_sub_merge_keeps_only_the_accepted_spellings(self, monkeypatch):
+        def fake(rule, pk, ctx, keypresses):
+            rule.exactDone, rule.keys = True, (4,)
+            rule.results = [A.CarrierResult(c, gain=c.span) for c in A.poolCarriers(rule.forms)]
+            rule.score, rule.strokeFreqSaved, *_ = R.ruleScoreFromResults(rule.results, 0, len(rule.forms))
+
+        monkeypatch.setattr(R, "chooseRuleKeypress", fake)
+        wa = [_word("a", "ma", "ma", k) for k in range(5)]
+        wb = [_word("b", "ma", "ma", k, freq=50.0) for k in range(3)]
+        wc = [_word("c", "ma", "ma", k, freq=10.0) for k in range(2)]
+        parts = [Candidate(PREFIX, 1, "A", s, carriers=[Carrier(w, 0, 1, "s") for w in ws], isAnchor=True)
+                 for s, ws in (("a", wa), ("b", wb), ("c", wc))]
+        parts[0].hasDecision = True
+        m = A.unionMerge(parts)
+        pool = {R.candidateKey(c): c for c in parts + [m]}
+        p = P.proposeFusion(m, pool, Decisions([AnchorDecision(PREFIX, "a", "A", SINGLE, [])]), None, None, [])
+        assert [r.label for r in p.rows] == ["b", "c"] and p.baseSpellings == ["a"]
+        assert set(p.groups) == {"b", "c"}
+        sub = p.evaluateSubset(["b"])
+        assert sub.spellings == "a|b" and sub.entry.verdict == FUSED and sub.net == pytest.approx(150.0)
+        assert [r.label for r in sub.rows] == ["b"]
+        assert p.evaluateSubset(["b", "c"]) is p                   # all accepted = the full merge

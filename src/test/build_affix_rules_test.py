@@ -120,6 +120,7 @@ class TestPending:
         assert ("growth", "bb") in kinds and ("fusion", "aa|az") in kinds
         (fusion,) = [p for p in out.pending if p.kind == "fusion"]
         assert "closest decided merge `aa|ab`" in fusion.detail
+        assert [p.kind for p in out.pending] == sorted((p.kind for p in out.pending), key=lambda k: k != "growth")   # growth first
 
     def test_nothing_pending_when_everything_is_decided(self, fakeEval):
         anchors = _three()

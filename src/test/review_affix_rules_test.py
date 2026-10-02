@@ -118,3 +118,32 @@ def test_merged_anchor_spellings_with_the_same_sounds_share_a_form():
     assert [(sorted(f.anchors), f.sound.pattern) for f in forms] == [(["aa"], "R@|RE"), (["ab"], "RE")]
     same = P.formsForGroups(root, [("aa", "RE"), ("ab", "RE")])
     assert len(same) == 1 and sorted(same[0].anchors) == ["aa", "ab"]
+
+
+def _fusionProposal(accept):
+    base = _proposal("fusion", "fuse a|b|c", forms=[], spellings="bb|bc|bd")
+    base.rows = [P.Row("bc", 5, 50.0, 5, 50.0), P.Row("bd", 3, 5.0, 3, 5.0)]
+    base.groups = {"bc": ("bc", ""), "bd": ("bd", "")}
+    base.baseSpellings = ["bb"]
+    sub = _proposal("fusion", "fuse bb|bc", forms=[], spellings="bb|bc")
+    base.evaluateSubset = lambda accepted: sub if accepted == accept else base
+    return base, sub
+
+
+def test_fusion_asks_one_line_per_added_spelling_and_saves_the_confirmed_sub_merge(tmp_path):
+    base, sub = _fusionProposal(["bc"])
+    out, path, log = _run([FUSION], [base], ["y", "n", "", "y"], tmp_path)
+    d = loadDecisions(path)
+    assert d.get("suffix", "bb|bc", "B").verdict == FUSED                    # the chosen sub-merge
+    full = d.get("suffix", "bb|bc|bd", "B")
+    assert full.verdict == APART and full.refused == ["bd"]                  # the greedy full merge is settled
+
+
+def test_fusion_sub_merge_declined_writes_nothing_and_none_accepted_keeps_it_apart(tmp_path):
+    base, sub = _fusionProposal(["bc"])
+    out, path, _ = _run([FUSION], [base], ["y", "n", "", "n"], tmp_path)
+    assert loadDecisions(path).entries == {}
+    base, sub = _fusionProposal(["bc"])
+    out, path, _ = _run([FUSION], [base], ["n", "n", ""], tmp_path)
+    e = loadDecisions(path).get("suffix", "bb|bc|bd", "B")
+    assert e.verdict == APART and e.refused == ["bc", "bd"]

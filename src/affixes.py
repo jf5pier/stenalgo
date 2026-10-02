@@ -15,7 +15,7 @@ import unicodedata
 from dataclasses import dataclass, field
 from typing import NamedTuple
 
-from src.affixdecisions import Decisions, loadDecisions
+from src.affixdecisions import FUSED, Decisions, loadDecisions
 from src.ambiguitychecker import assignStarHashCombos, buildWordToStrokes
 from src.keyboard import Starboard, Stroke, Strokes, canonicalizeStrokes
 from src.word import Word
@@ -476,6 +476,23 @@ def _exceptionFreqOf(pos: str, carriers: list[Carrier]) -> float:
     return _exceptionShare(pos, carriers, 1.0)[0]
 
 
+def unionMerge(parts: list[Candidate]) -> Candidate:
+    """The merged anchor `a|b|c` of k=1 candidates with one position and sound: carriers united (a word keeps its
+    longest span), parts kept as `mergeParts`. Used by the greedy variant merges and by the merges the user decided."""
+    first = parts[0]
+    orthos = sorted(p.ortho for p in parts)
+    merged = Candidate(first.position, 1, first.phono, "|".join(orthos), isSeed=any(p.isSeed for p in parts),
+                       isGeneralized=True, variants=orthos, mergeParts=[_candKey(p) for p in parts])
+    byIdx: dict[int, Carrier] = {}
+    for p in parts:
+        for x in p.carriers:
+            old = byIdx.get(x.rec.idx)
+            if old is None or x.span > old.span:
+                byIdx[x.rec.idx] = x
+    merged.carriers = list(byIdx.values())
+    return merged
+
+
 def buildVariantMerges(
     cands: dict[tuple[str, int, str, str], Candidate],
 ) -> dict[tuple[str, int, str, str], Candidate]:
@@ -512,16 +529,7 @@ def buildVariantMerges(
                 else:
                     left.append(p)
             if len(cur) >= 2:
-                orthos = sorted(p.ortho for p in cur)
-                merged = Candidate(pos, 1, phono, "|".join(orthos), isSeed=any(p.isSeed for p in cur),
-                                    isGeneralized=True, variants=orthos,
-                                    mergeParts=[_candKey(p) for p in cur])
-                byIdx: dict[int, Carrier] = {}
-                for x in carriers:
-                    old = byIdx.get(x.rec.idx)
-                    if old is None or x.span > old.span:
-                        byIdx[x.rec.idx] = x
-                merged.carriers = list(byIdx.values())
+                merged = unionMerge(cur)
                 merges[_candKey(merged)] = merged
             remaining = left
     return merges
@@ -584,6 +592,17 @@ def buildCandidates(
     cands = poolKnownAffixGroups(cands)
     # after A8 (which consumes its members), so no merge part can vanish from the pool.
     merges = buildVariantMerges(cands)
+    # merges the user decided that the greedy pass did not make (a chosen subset of the spellings of one sound):
+    # built from their parts, and exempt from the conflict test below (the verdict is the user's)
+    decidedMerges: set[tuple[str, int, str, str]] = set()
+    for e in decisions.entries.values():
+        key = (e.position, 1, e.phono, e.spellings)
+        if e.verdict != FUSED or key in merges:
+            continue
+        parts = [cands.get((e.position, 1, e.phono, sp)) for sp in e.spellings.split("|")]
+        if all(p is not None and p.carriers for p in parts):
+            merges[key] = unionMerge([p for p in parts if p is not None])
+            decidedMerges.add(key)
     cands.update(merges)
 
     def inheritAndStat(c: Candidate) -> None:
@@ -608,7 +627,7 @@ def buildCandidates(
     for mkey, m in merges.items():
         partExc = sum(_exceptionFreqOf(m.position, cands[pk].carriers) for pk in m.mergeParts)
         m.newConflictFreq = _exceptionFreqOf(m.position, m.carriers) - partExc
-        if m.newConflictFreq > VARIANT_MAX_NEW_CONFLICT_SHARE * m.freq:
+        if m.newConflictFreq > VARIANT_MAX_NEW_CONFLICT_SHARE * m.freq and mkey not in decidedMerges:
             dropped.add(mkey)
     # (bare verb-ending candidates are deliberately not filtered -- 2026-09-27 user decision: they
     # compete on their real score in the selection)
