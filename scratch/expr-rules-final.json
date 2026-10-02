@@ -8,11 +8,10 @@
    ],
    "position": "prefix",
    "keys": [
-    9,
     18,
-    23
+    24
    ],
-   "freq": 578716792.0
+   "freq": 579342261.0
   },
   {
    "kind": "attach",
@@ -22,10 +21,9 @@
    ],
    "position": "prefix",
    "keys": [
-    9,
     10,
     18,
-    23
+    24
    ],
    "freq": 156154508.0
   },
@@ -41,6 +39,52 @@
     17
    ],
    "freq": 267408208.0
+  },
+  {
+   "kind": "attach",
+   "family": "qu",
+   "units": [
+    "qu'"
+   ],
+   "position": "prefix",
+   "keys": [
+    5,
+    9,
+    18
+   ],
+   "freq": 217698158.0
+  },
+  {
+   "kind": "attach",
+   "family": "qu",
+   "units": [
+    "qu'",
+    "il"
+   ],
+   "position": "prefix",
+   "keys": [
+    5,
+    9,
+    10,
+    18
+   ],
+   "freq": 67919825.0
+  },
+  {
+   "kind": "attach",
+   "family": "qu",
+   "units": [
+    "qu'",
+    "elle"
+   ],
+   "position": "prefix",
+   "keys": [
+    5,
+    9,
+    15,
+    18
+   ],
+   "freq": 30480865.0
   },
   {
    "kind": "attach",
@@ -95,10 +139,90 @@
    ],
    "position": "prefix",
    "keys": [
-    2,
-    8
+    8,
+    9,
+    16
    ],
    "freq": 253868505.0
+  },
+  {
+   "kind": "attach",
+   "family": "dans",
+   "units": [
+    "dans",
+    "ce"
+   ],
+   "position": "prefix",
+   "keys": [
+    8,
+    9,
+    10,
+    16
+   ],
+   "freq": 7363145.0
+  },
+  {
+   "kind": "attach",
+   "family": "que",
+   "units": [
+    "que"
+   ],
+   "position": "prefix",
+   "keys": [
+    9,
+    16,
+    19
+   ],
+   "freq": 197909645.0
+  },
+  {
+   "kind": "attach",
+   "family": "que",
+   "units": [
+    "que",
+    "je"
+   ],
+   "position": "prefix",
+   "keys": [
+    9,
+    10,
+    16,
+    19
+   ],
+   "freq": 25758482.0
+  },
+  {
+   "kind": "attach",
+   "family": "que",
+   "units": [
+    "que",
+    "l'"
+   ],
+   "position": "prefix",
+   "keys": [
+    9,
+    15,
+    16,
+    19
+   ],
+   "freq": 18423683.0
+  },
+  {
+   "kind": "attach",
+   "family": "que",
+   "units": [
+    "que",
+    "nous"
+   ],
+   "position": "prefix",
+   "keys": [
+    9,
+    10,
+    15,
+    16,
+    19
+   ],
+   "freq": 11446990.0
   },
   {
    "kind": "attach",
@@ -112,66 +236,7 @@
     16,
     19
    ],
-   "freq": 278249465.0
-  },
-  {
-   "kind": "attach",
-   "family": "que",
-   "units": [
-    "que"
-   ],
-   "position": "prefix",
-   "keys": [
-    2,
-    9
-   ],
-   "freq": 185627895.0
-  },
-  {
-   "kind": "attach",
-   "family": "que",
-   "units": [
-    "que",
-    "je"
-   ],
-   "position": "prefix",
-   "keys": [
-    2,
-    9,
-    10
-   ],
-   "freq": 25758482.0
-  },
-  {
-   "kind": "attach",
-   "family": "que",
-   "units": [
-    "que",
-    "l'"
-   ],
-   "position": "prefix",
-   "keys": [
-    2,
-    9,
-    15
-   ],
-   "freq": 18423683.0
-  },
-  {
-   "kind": "attach",
-   "family": "que",
-   "units": [
-    "que",
-    "nous"
-   ],
-   "position": "prefix",
-   "keys": [
-    2,
-    9,
-    10,
-    15
-   ],
-   "freq": 11446990.0
+   "freq": 285239034.0
   },
   {
    "kind": "attach",
@@ -182,10 +247,24 @@
    "position": "prefix",
    "keys": [
     7,
-    9,
-    18
+    16,
+    19
    ],
    "freq": 168319881.0
+  },
+  {
+   "kind": "attach",
+   "family": "c",
+   "units": [
+    "c'"
+   ],
+   "position": "prefix",
+   "keys": [
+    2,
+    4,
+    5
+   ],
+   "freq": 134792591.0
   },
   {
    "kind": "attach",
@@ -211,7 +290,7 @@
     3,
     17
    ],
-   "freq": 199548478.0
+   "freq": 204105844.0
   },
   {
    "kind": "attach",
@@ -229,38 +308,13 @@
   },
   {
    "kind": "attach",
-   "family": "les",
-   "units": [
-    "les"
-   ],
-   "position": "suffix",
-   "keys": [
-    3
-   ],
-   "freq": 176903013.0
-  },
-  {
-   "kind": "attach",
-   "family": "les",
-   "units": [
-    "les"
-   ],
-   "position": "prefix",
-   "keys": [
-    3,
-    10
-   ],
-   "freq": 33827184.0
-  },
-  {
-   "kind": "attach",
    "family": "pas",
    "units": [
     "pas"
    ],
    "position": "suffix",
    "keys": [
-    16
+    9
    ],
    "freq": 206722861.0
   },
@@ -273,10 +327,35 @@
    ],
    "position": "suffix",
    "keys": [
-    10,
-    16
+    9,
+    10
    ],
    "freq": 6247194.0
+  },
+  {
+   "kind": "attach",
+   "family": "les",
+   "units": [
+    "les"
+   ],
+   "position": "suffix",
+   "keys": [
+    2
+   ],
+   "freq": 176903013.0
+  },
+  {
+   "kind": "attach",
+   "family": "les",
+   "units": [
+    "les"
+   ],
+   "position": "prefix",
+   "keys": [
+    2,
+    10
+   ],
+   "freq": 33827184.0
   },
   {
    "kind": "attach",
@@ -316,7 +395,7 @@
    "keys": [
     4,
     18,
-    19
+    20
    ],
    "freq": 112312128.0
   },
@@ -332,7 +411,7 @@
     4,
     10,
     18,
-    19
+    20
    ],
    "freq": 25361333.0
   },
@@ -348,80 +427,24 @@
     4,
     15,
     18,
-    19
+    20
    ],
    "freq": 13654387.0
-  },
-  {
-   "kind": "attach",
-   "family": "ce",
-   "units": [
-    "ce"
-   ],
-   "position": "prefix",
-   "keys": [
-    5,
-    7,
-    19
-   ],
-   "freq": 86637555.0
-  },
-  {
-   "kind": "attach",
-   "family": "ce",
-   "units": [
-    "ce",
-    "qui"
-   ],
-   "position": "prefix",
-   "keys": [
-    5,
-    7,
-    10,
-    19
-   ],
-   "freq": 24454906.0
-  },
-  {
-   "kind": "attach",
-   "family": "s'",
-   "units": [
-    "s'"
-   ],
-   "position": "prefix",
-   "keys": [
-    3,
-    4,
-    5
-   ],
-   "freq": 53867708.0
-  },
-  {
-   "kind": "attach",
-   "family": "s'",
-   "units": [
-    "s'",
-    "il"
-   ],
-   "position": "suffix",
-   "keys": [
-    3,
-    4,
-    5,
-    10
-   ],
-   "freq": 12210772.0
   }
  ],
  "chosen": {
   "de": [
-   9,
    18,
-   23
+   24
   ],
   "à": [
    9,
    17
+  ],
+  "qu": [
+   5,
+   9,
+   18
   ],
   "ne": [
    8,
@@ -429,22 +452,29 @@
    21
   ],
   "dans": [
-   2,
-   8
+   8,
+   9,
+   16
+  ],
+  "que": [
+   9,
+   16,
+   19
   ],
   "et": [
    8,
    16,
    19
   ],
-  "que": [
-   2,
-   9
-  ],
   "il": [
    7,
-   9,
-   18
+   16,
+   19
+  ],
+  "c": [
+   2,
+   4,
+   5
   ],
   "la": [
    16,
@@ -454,11 +484,11 @@
    3,
    17
   ],
-  "les": [
-   3
-  ],
   "pas": [
-   16
+   9
+  ],
+  "les": [
+   2
   ],
   "l'": [
    5,
@@ -467,17 +497,7 @@
   "je": [
    4,
    18,
-   19
-  ],
-  "ce": [
-   5,
-   7,
-   19
-  ],
-  "s'": [
-   3,
-   4,
-   5
+   20
   ]
  }
 }

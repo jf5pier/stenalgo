@@ -88,6 +88,12 @@ def resolveToken(token: str, byOrtho: dict[str, list[Word]]) -> list[tuple[str, 
                     break
             resolved = [(left + "'", particle[1])] if particle else [(left + "'", None)]
             return resolved + resolveToken(host, byOrtho)
+        if left in PARTICLES and not host:
+            # a BARE fragment unit ("c'", "qu'" — unlike n'/l'/d'/s' these are
+            # not theory words): fall back to its full form (ce/que/je...)
+            for cand in (left + "'", left, FULL_FORMS.get(left)):
+                if cand and cand in byOrtho:
+                    return [(token, pickWord(byOrtho[cand]))]
     return [(token, None)]
 
 

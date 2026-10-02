@@ -6,7 +6,8 @@ Frequencies are >= 5M so the Q6 floors pass."""
 
 from src.expressionrules import (MIN_OCCURRENCES, ExprRule, PoolExpression,
                                  assignKeypresses, attachCandidates,
-                                 briefCandidates, jointFrequency, proxySaving,
+                                 briefCandidates, deriveBriefStroke,
+                                 jointFrequency, proxySaving,
                                  selectExpressionRules, touchedExpressions)
 from src.expressions import (PREFIX, SUFFIX, AttachRule, BriefRule, Token)
 
@@ -246,3 +247,55 @@ class TestAssignKeypresses:
         report = assignKeypresses([rule], pool, ctx, [(4,)])  # 4 is in maison
         assert report["de"]["base"] is None
         assert rule.keys is None and not rule.exactDone
+
+
+class TestDeriveBriefStroke:
+    """The brief-creation mechanic: forced tao entries / later word additions
+    get ONE invented stroke — mnemonic derivations first, free chords last,
+    never shadowing a live outline or another brief."""
+
+    @staticmethod
+    def ctx(singles=frozenset(), outlines=frozenset()):
+        from src.affixes import SimContext
+        from src.keyboard import Starboard
+        sb = Starboard.fromJSONFile("starboard3h.json")
+        assert sb is not None
+        c = SimContext(sb, [])
+        c.singleStrokeOutlines = set(singles)
+        c.finalOutlines = set(outlines)
+        return c
+
+    @staticmethod
+    def expr(units, strokes):
+        return PoolExpression(tuple(units), 1.0,
+                              tuple(Token(u, s) for u, s in zip(units, strokes)))
+
+    def test_union_derivation_first(self):
+        e = self.expr(("mot", "cle"), (((2, 13),), ((14, 23),)))
+        got = deriveBriefStroke(e, self.ctx(), set())
+        assert got is not None and got[1] == "union"
+        assert got[0] == (2, 13, 14, 23)
+
+    def test_taken_stroke_falls_through(self):
+        e = self.expr(("mot", "cle"), (((2, 13),), ((14, 23),)))
+        got = deriveBriefStroke(e, self.ctx(), {(2, 13, 14, 23)})
+        assert got is not None and got[0] != (2, 13, 14, 23)  # next derivation
+
+    def test_shadowing_outline_skipped(self):
+        e = self.expr(("mot", "cle"), (((2, 13),), ((14, 23),)))
+        got = deriveBriefStroke(e, self.ctx(outlines={((2, 13, 14, 23),)}),
+                                set())
+        assert got is None or got[0] != (2, 13, 14, 23)
+
+    def test_free_chord_fallback(self):
+        # both tokens carry (13,): every mnemonic derivation yields the live
+        # single-stroke outline (13,) -- the free-chord ladder must fire
+        e = self.expr(("a", "b"), (((13,),), ((13,),)))
+        got = deriveBriefStroke(e, self.ctx(singles={(13,)}), set(),
+                                freeChords=[(2,), (3,), (2, 13)])
+        assert got is not None and got[1] == "free" and got[0] == (2,)
+
+    def test_none_when_nothing_legal(self):
+        e = self.expr(("a", "b"), (((13,),), ((13,),)))
+        assert deriveBriefStroke(e, self.ctx(singles={(13,)}), set(),
+                                 freeChords=[]) is None
