@@ -1,0 +1,27 @@
+1751 legal keypresses
+ 1 suffix ment                         keys (20, 25): exceptions 1/0 -> 1/0; saving 8887 -> 8887
+ 3 prefix en                           keys (18, 22): exceptions 134/57 -> 56/22; saving 5978 -> 6016
+ 4 prefix de                           keys (18, 20): exceptions 0/0 -> 6/4; saving 4912 -> 4907
+ 5 prefix ain|hin|im|in                keys (16, 19): exceptions 88/77 -> 39/65; saving 5621 -> 5666
+ 6 suffix tion                         keys (20, 25): exceptions 2/11 -> 2/11; saving 5441 -> 5442
+ 8 suffix ter                          keys (20, 25): exceptions 6/0 -> 6/0; saving 4573 -> 4573
+ 9 prefix é                            keys (19,): exceptions 137/502 -> 137/502; saving 5373 -> 5373
+10 suffix té                           keys (19, 22): exceptions 23/28 -> 20/28; saving 4147 -> 4147
+11 prefix au                           keys (16, 19): exceptions 10/1 -> 5/2; saving 3736 -> 3744
+12 suffix cer|cé|cée|cés|scer|se|ser|s keys (19, 20): exceptions 25/520 -> 25/520; saving 4500 -> 4500
+13 prefix par                          keys (16, 19): exceptions 2/0 -> 0/0; saving 3071 -> 3071
+14 suffix der                          keys (19, 20, 25): exceptions 39/10 -> 39/10; saving 3523 -> 3523
+15 prefix pa|pei|pâ                    keys (18, 25): exceptions 88/50 -> 64/37; saving 3150 -> 3163
+16 prefix ai|aî|e|ei|hai|he|hê|é       keys (19, 20): exceptions 87/326 -> 80/422; saving 4197 -> 4026
+17 suffix ver                          keys (19, 20, 22): exceptions 2/0 -> 2/0; saving 3083 -> 3083
+18 prefix sa|sah                       keys (20, 24): exceptions 48/6 -> 48/20; saving 2644 -> 2629
+19 prefix pro|proh|prô                 keys (9, 19): exceptions 52/29 -> 7/44; saving 2426 -> 2411
+20 prefix ce|sce|se                    keys (16, 23): exceptions 13/12 -> 4/1; saving 2370 -> 2382
+22 suffix ser|sée|zer|zé               keys (19, 20, 25): exceptions 79/51 -> 79/51; saving 2762 -> 2762
+24 suffix rae|rai|raie|re|rer|rez|rrer keys (16, 20, 22): exceptions 53/51 -> 53/51; saving 2363 -> 2363
+26 suffix ger                          keys (16, 24): exceptions 0/0 -> 0/0; saving 1910 -> 1910
+27 suffix ner                          keys (19, 20): exceptions 44/3 -> 38/3; saving 2488 -> 2488
+28 prefix e|hi|hy|i|y|î                keys (16, 19): exceptions 57/537 -> 23/484; saving 3183 -> 3262
+29 prefix ra                           keys (16,): exceptions 49/32 -> 49/32; saving 1856 -> 1856
+30 suffix cher                         keys (16, 24, 25): exceptions 0/0 -> 0/0; saving 1789 -> 1789
+multi-key rules total: exceptions 1039 -> 783 ; saving 93985 -> 93975

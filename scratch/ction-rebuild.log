@@ -1,0 +1,741 @@
+
+=== stenalgo pipeline: Dictionary loading + phonetic theory (S3-S5), pass 1 ===
+$ /home/jfsp/stenalgo/env/bin/python -m util.build_phonetic_theory
+Reading resources/LexiqueMixte.tsv: 0 words [00:00, ? words/s]Reading resources/LexiqueMixte.tsv: 6476 words [00:00, 64751.73 words/s]Reading resources/LexiqueMixte.tsv: 12952 words [00:00, 59709.76 words/s]Reading resources/LexiqueMixte.tsv: 18950 words [00:00, 44310.60 words/s]Reading resources/LexiqueMixte.tsv: 25284 words [00:00, 50321.15 words/s]Reading resources/LexiqueMixte.tsv: 31005 words [00:00, 52459.50 words/s]Reading resources/LexiqueMixte.tsv: 36516 words [00:00, 39027.71 words/s]Reading resources/LexiqueMixte.tsv: 41473 words [00:00, 41593.44 words/s]Reading resources/LexiqueMixte.tsv: 46118 words [00:01, 42399.22 words/s]Reading resources/LexiqueMixte.tsv: 51089 words [00:01, 44353.07 words/s]Reading resources/LexiqueMixte.tsv: 55796 words [00:01, 34447.51 words/s]Reading resources/LexiqueMixte.tsv: 61799 words [00:01, 40372.72 words/s]Reading resources/LexiqueMixte.tsv: 68129 words [00:01, 46072.62 words/s]Reading resources/LexiqueMixte.tsv: 73939 words [00:01, 49223.24 words/s]Reading resources/LexiqueMixte.tsv: 79258 words [00:01, 35691.52 words/s]Reading resources/LexiqueMixte.tsv: 85661 words [00:01, 41822.19 words/s]Reading resources/LexiqueMixte.tsv: 91923 words [00:02, 46731.78 words/s]Reading resources/LexiqueMixte.tsv: 97713 words [00:02, 49546.86 words/s]Reading resources/LexiqueMixte.tsv: 103202 words [00:02, 50866.95 words/s]Reading resources/LexiqueMixte.tsv: 108680 words [00:02, 33120.54 words/s]Reading resources/LexiqueMixte.tsv: 114553 words [00:02, 38234.65 words/s]Reading resources/LexiqueMixte.tsv: 120724 words [00:02, 43446.77 words/s]Reading resources/LexiqueMixte.tsv: 126397 words [00:02, 46645.41 words/s]Reading resources/LexiqueMixte.tsv: 132574 words [00:02, 50515.36 words/s]Reading resources/LexiqueMixte.tsv: 136186 words [00:03, 44650.74 words/s]
+Reading resources/LexiqueSynthetic.tsv: 0 words [00:00, ? words/s]Reading resources/LexiqueSynthetic.tsv: 5679 words [00:00, 56785.59 words/s]Reading resources/LexiqueSynthetic.tsv: 11358 words [00:00, 23029.41 words/s]Reading resources/LexiqueSynthetic.tsv: 16960 words [00:00, 31413.88 words/s]Reading resources/LexiqueSynthetic.tsv: 21608 words [00:00, 35426.62 words/s]Reading resources/LexiqueSynthetic.tsv: 27085 words [00:00, 40758.18 words/s]Reading resources/LexiqueSynthetic.tsv: 32511 words [00:00, 44570.37 words/s]Reading resources/LexiqueSynthetic.tsv: 38547 words [00:00, 49109.37 words/s]Reading resources/LexiqueSynthetic.tsv: 44251 words [00:01, 51416.43 words/s]Reading resources/LexiqueSynthetic.tsv: 49861 words [00:01, 52790.72 words/s]Reading resources/LexiqueSynthetic.tsv: 50324 words [00:01, 43486.11 words/s]
+readCorpus: 14715 infoVerb merges fired (identity-dedup, Word.mergeInfoVerb) across 171730 distinct Word instances.
+Analyzing syllabification...
+  0%|                                            | 0/171730 [00:00<?, ? words/s]  4%|#1                            | 6850/171730 [00:00<00:02, 68487.98 words/s]  9%|##4                          | 14776/171730 [00:00<00:02, 74265.92 words/s] 13%|###7                         | 22200/171730 [00:00<00:04, 33937.95 words/s] 17%|#####                        | 29762/171730 [00:00<00:03, 43479.95 words/s] 22%|######3                      | 37764/171730 [00:00<00:02, 52483.83 words/s] 26%|#######6                     | 45266/171730 [00:00<00:02, 58350.72 words/s] 31%|########9                    | 52889/171730 [00:00<00:01, 63197.68 words/s] 36%|##########3                  | 61026/171730 [00:01<00:01, 68269.12 words/s] 40%|###########5                 | 68520/171730 [00:01<00:01, 69925.88 words/s] 44%|############8                | 75986/171730 [00:01<00:01, 69927.66 words/s] 49%|##############               | 83306/171730 [00:01<00:01, 70461.61 words/s] 53%|###############3             | 91148/171730 [00:01<00:01, 72766.22 words/s] 57%|################6            | 98624/171730 [00:01<00:00, 73349.01 words/s] 62%|#################2          | 106081/171730 [00:01<00:00, 73703.97 words/s] 66%|##################5         | 114016/171730 [00:01<00:00, 75378.02 words/s] 71%|###################9        | 122343/171730 [00:01<00:00, 77725.02 words/s] 76%|#####################3      | 131179/171730 [00:01<00:00, 80894.97 words/s] 81%|######################8     | 139928/171730 [00:02<00:00, 82863.87 words/s] 87%|########################2   | 148772/171730 [00:02<00:00, 84529.70 words/s] 92%|#########################8  | 158683/171730 [00:02<00:00, 88891.53 words/s] 98%|###########################3| 167587/171730 [00:02<00:00, 86187.49 words/s]100%|############################| 171730/171730 [00:02<00:00, 70692.49 words/s]
+ Part onset Best order (ordered score 92166.5, disordered score -1399.6):
+ dZksptSgzfvNmnbRljw 
+
+ Part coda Best order (ordered score 15810.6, disordered score -5470.6):
+ pjbgwdfvsktRNzlmnZS 
+
+ Part nucleus Best order (ordered score 6607.8, disordered score 0.0):
+ 8O@i925aoEe§ 
+
+Analyzing syllabic ambiguities...
+Left hand ambiguity optimization
+Middle keys ambiguity optimization
+  0%|                                       | 0/19 [00:00<?, ? phonemes pairs/s]Right hand ambiguity optimization
+  0%|                                       | 0/15 [00:00<?, ? phonemes pairs/s]  0%|                                       | 0/19 [00:00<?, ? phonemes pairs/s]  7%|##                             | 1/15 [00:00<00:01,  8.01 phonemes pairs/s]  5%|#6                             | 1/19 [00:00<00:02,  7.09 phonemes pairs/s]  5%|#6                             | 1/19 [00:00<00:02,  6.99 phonemes pairs/s] 20%|######2                        | 3/15 [00:00<00:00, 13.39 phonemes pairs/s] 11%|###2                           | 2/19 [00:00<00:02,  8.33 phonemes pairs/s] 16%|####8                          | 3/19 [00:00<00:01,  9.38 phonemes pairs/s] 40%|############4                  | 6/15 [00:00<00:00, 20.01 phonemes pairs/s] 21%|######5                        | 4/19 [00:00<00:01, 10.62 phonemes pairs/s] 73%|######################        | 11/15 [00:00<00:00, 30.29 phonemes pairs/s] 26%|########1                      | 5/19 [00:00<00:01, 10.70 phonemes pairs/s]100%|##############################| 15/15 [00:00<00:00, 30.25 phonemes pairs/s]
+ 37%|###########4                   | 7/19 [00:00<00:00, 14.79 phonemes pairs/s] 37%|###########4                   | 7/19 [00:00<00:00, 12.48 phonemes pairs/s] 53%|###############7              | 10/19 [00:00<00:00, 18.11 phonemes pairs/s] 53%|###############7              | 10/19 [00:00<00:00, 15.80 phonemes pairs/s] 84%|#########################2    | 16/19 [00:00<00:00, 29.75 phonemes pairs/s]100%|##############################| 19/19 [00:00<00:00, 24.20 phonemes pairs/s]
+ 84%|#########################2    | 16/19 [00:00<00:00, 27.42 phonemes pairs/s]100%|##############################| 19/19 [00:00<00:00, 21.99 phonemes pairs/s]
+
+Analyzing lexical ambiguities at the phoneme level...
+Left hand ambiguity optimization
+Middle keys ambiguity optimization
+  0%|                                       | 0/19 [00:00<?, ? phonemes pairs/s]Right hand ambiguity optimization
+  0%|                                       | 0/15 [00:00<?, ? phonemes pairs/s]  0%|                                       | 0/19 [00:00<?, ? phonemes pairs/s]  5%|#6                             | 1/19 [00:01<00:18,  1.03s/ phonemes pairs] 11%|###2                           | 2/19 [00:01<00:11,  1.47 phonemes pairs/s] 16%|####8                          | 3/19 [00:01<00:08,  1.81 phonemes pairs/s]  7%|##                             | 1/15 [00:01<00:26,  1.90s/ phonemes pairs]  5%|#6                             | 1/19 [00:02<00:38,  2.12s/ phonemes pairs] 26%|########1                      | 5/19 [00:02<00:04,  2.96 phonemes pairs/s] 32%|#########7                     | 6/19 [00:02<00:03,  3.29 phonemes pairs/s] 37%|###########4                   | 7/19 [00:02<00:03,  3.97 phonemes pairs/s] 47%|##############6                | 9/19 [00:02<00:01,  5.95 phonemes pairs/s] 58%|#################3            | 11/19 [00:02<00:01,  7.01 phonemes pairs/s] 74%|######################1       | 14/19 [00:03<00:00, 10.54 phonemes pairs/s]100%|##############################| 19/19 [00:03<00:00, 17.75 phonemes pairs/s]100%|##############################| 19/19 [00:03<00:00,  6.09 phonemes pairs/s]
+ 13%|####1                          | 2/15 [00:03<00:19,  1.51s/ phonemes pairs] 11%|###2                           | 2/19 [00:03<00:27,  1.62s/ phonemes pairs] 16%|####8                          | 3/19 [00:04<00:21,  1.32s/ phonemes pairs] 20%|######2                        | 3/15 [00:04<00:16,  1.41s/ phonemes pairs] 21%|######5                        | 4/19 [00:05<00:15,  1.06s/ phonemes pairs] 27%|########2                      | 4/15 [00:05<00:12,  1.15s/ phonemes pairs] 33%|##########3                    | 5/15 [00:05<00:09,  1.10 phonemes pairs/s] 26%|########1                      | 5/19 [00:05<00:13,  1.05 phonemes pairs/s] 40%|############4                  | 6/15 [00:06<00:06,  1.33 phonemes pairs/s] 47%|##############4                | 7/15 [00:06<00:05,  1.57 phonemes pairs/s] 32%|#########7                     | 6/19 [00:06<00:11,  1.13 phonemes pairs/s] 53%|################5              | 8/15 [00:06<00:03,  1.94 phonemes pairs/s] 60%|##################5            | 9/15 [00:06<00:02,  2.54 phonemes pairs/s] 37%|###########4                   | 7/19 [00:06<00:08,  1.34 phonemes pairs/s] 67%|####################          | 10/15 [00:07<00:01,  3.19 phonemes pairs/s] 80%|########################      | 12/15 [00:07<00:00,  4.95 phonemes pairs/s]100%|##############################| 15/15 [00:07<00:00,  2.07 phonemes pairs/s]
+ 42%|#############                  | 8/19 [00:07<00:07,  1.54 phonemes pairs/s] 47%|##############6                | 9/19 [00:07<00:05,  1.91 phonemes pairs/s] 53%|###############7              | 10/19 [00:08<00:04,  2.03 phonemes pairs/s] 58%|#################3            | 11/19 [00:08<00:03,  2.33 phonemes pairs/s] 63%|##################9           | 12/19 [00:08<00:02,  2.85 phonemes pairs/s] 68%|####################5         | 13/19 [00:08<00:01,  3.35 phonemes pairs/s] 79%|#######################6      | 15/19 [00:08<00:00,  5.13 phonemes pairs/s] 89%|##########################8   | 17/19 [00:08<00:00,  7.17 phonemes pairs/s]100%|##############################| 19/19 [00:09<00:00,  2.10 phonemes pairs/s]
+Analyzing lexical ambiguities at the syllabic part level...
+Left hand multiphonemes ambiguity optimization
+  0%|                                 | 0/183 [00:00<?, ? multiphonemes pairs/s]  1%|1                        | 1/183 [00:01<05:53,  1.94s/ multiphonemes pairs]  1%|2                        | 2/183 [00:06<11:11,  3.71s/ multiphonemes pairs]  2%|4                        | 3/183 [00:10<11:25,  3.81s/ multiphonemes pairs]  2%|5                        | 4/183 [00:15<12:32,  4.21s/ multiphonemes pairs]  3%|6                        | 5/183 [00:23<16:46,  5.66s/ multiphonemes pairs]  3%|8                        | 6/183 [00:26<13:10,  4.46s/ multiphonemes pairs]  4%|9                        | 7/183 [00:29<12:19,  4.20s/ multiphonemes pairs]  4%|#                        | 8/183 [00:34<12:40,  4.34s/ multiphonemes pairs]  5%|#2                       | 9/183 [00:38<12:21,  4.26s/ multiphonemes pairs]  5%|#3                      | 10/183 [00:42<12:10,  4.22s/ multiphonemes pairs]  7%|#5                      | 12/183 [00:42<06:36,  2.32s/ multiphonemes pairs]  8%|#9                      | 15/183 [00:44<04:05,  1.46s/ multiphonemes pairs]  9%|##2                     | 17/183 [00:45<02:58,  1.08s/ multiphonemes pairs] 10%|##3                     | 18/183 [00:46<02:59,  1.09s/ multiphonemes pairs] 11%|##7                     | 21/183 [00:47<02:02,  1.33 multiphonemes pairs/s] 13%|###                     | 23/183 [00:47<01:28,  1.82 multiphonemes pairs/s] 15%|###5                    | 27/183 [00:47<00:49,  3.16 multiphonemes pairs/s] 16%|###8                    | 29/183 [00:49<01:08,  2.24 multiphonemes pairs/s] 17%|####                    | 31/183 [00:56<03:18,  1.30s/ multiphonemes pairs] 17%|####1                   | 32/183 [00:57<03:10,  1.26s/ multiphonemes pairs] 18%|####3                   | 33/183 [00:58<02:50,  1.14s/ multiphonemes pairs] 19%|####4                   | 34/183 [00:59<02:47,  1.13s/ multiphonemes pairs] 19%|####5                   | 35/183 [01:01<03:13,  1.31s/ multiphonemes pairs] 20%|####8                   | 37/183 [01:01<02:01,  1.20 multiphonemes pairs/s] 21%|#####1                  | 39/183 [01:01<01:24,  1.71 multiphonemes pairs/s] 22%|#####2                  | 40/183 [01:02<01:28,  1.62 multiphonemes pairs/s] 22%|#####3                  | 41/183 [01:02<01:14,  1.91 multiphonemes pairs/s] 23%|#####5                  | 42/183 [01:03<01:01,  2.28 multiphonemes pairs/s] 25%|#####9                  | 45/183 [01:03<00:32,  4.31 multiphonemes pairs/s] 26%|######1                 | 47/183 [01:03<00:24,  5.58 multiphonemes pairs/s] 27%|######4                 | 49/183 [01:03<00:21,  6.27 multiphonemes pairs/s] 28%|######6                 | 51/183 [01:03<00:17,  7.71 multiphonemes pairs/s] 29%|######9                 | 53/183 [01:03<00:14,  9.10 multiphonemes pairs/s] 30%|#######2                | 55/183 [01:04<00:19,  6.56 multiphonemes pairs/s] 31%|#######4                | 57/183 [01:04<00:18,  6.68 multiphonemes pairs/s] 34%|########1               | 62/183 [01:04<00:10, 12.07 multiphonemes pairs/s] 36%|########5               | 65/183 [01:05<00:10, 11.24 multiphonemes pairs/s] 37%|########7               | 67/183 [01:05<00:10, 11.24 multiphonemes pairs/s] 38%|#########               | 69/183 [01:05<00:09, 11.50 multiphonemes pairs/s] 40%|#########7              | 74/183 [01:05<00:06, 17.91 multiphonemes pairs/s] 44%|##########6             | 81/183 [01:05<00:03, 27.70 multiphonemes pairs/s] 56%|############8          | 102/183 [01:05<00:01, 66.66 multiphonemes pairs/s] 77%|################9     | 141/183 [01:05<00:00, 142.19 multiphonemes pairs/s]100%|#######################| 183/183 [01:05<00:00,  2.78 multiphonemes pairs/s]
+Middle keys multiphonemes ambiguity optimization
+  0%|                                  | 0/27 [00:00<?, ? multiphonemes pairs/s]  4%|9                         | 1/27 [00:00<00:19,  1.33 multiphonemes pairs/s]  7%|#9                        | 2/27 [00:02<00:29,  1.20s/ multiphonemes pairs] 11%|##8                       | 3/27 [00:04<00:41,  1.74s/ multiphonemes pairs] 15%|###8                      | 4/27 [00:05<00:28,  1.23s/ multiphonemes pairs] 19%|####8                     | 5/27 [00:05<00:19,  1.14 multiphonemes pairs/s] 22%|#####7                    | 6/27 [00:06<00:23,  1.10s/ multiphonemes pairs] 26%|######7                   | 7/27 [00:08<00:23,  1.16s/ multiphonemes pairs] 33%|########6                 | 9/27 [00:08<00:12,  1.42 multiphonemes pairs/s] 37%|#########2               | 10/27 [00:09<00:11,  1.48 multiphonemes pairs/s] 41%|##########1              | 11/27 [00:09<00:08,  1.84 multiphonemes pairs/s] 44%|###########1             | 12/27 [00:09<00:08,  1.83 multiphonemes pairs/s] 52%|############9            | 14/27 [00:10<00:04,  2.80 multiphonemes pairs/s]100%|#########################| 27/27 [00:10<00:00,  2.63 multiphonemes pairs/s]
+Right hand multiphonemes ambiguity optimization
+  0%|                                 | 0/140 [00:00<?, ? multiphonemes pairs/s]  1%|1                        | 1/140 [00:00<02:04,  1.12 multiphonemes pairs/s]  1%|3                        | 2/140 [00:01<01:29,  1.55 multiphonemes pairs/s]  2%|5                        | 3/140 [00:05<04:53,  2.14s/ multiphonemes pairs]  3%|7                        | 4/140 [00:06<03:38,  1.61s/ multiphonemes pairs]  4%|8                        | 5/140 [00:06<02:41,  1.20s/ multiphonemes pairs]  4%|#                        | 6/140 [00:08<03:03,  1.37s/ multiphonemes pairs]  6%|#4                       | 8/140 [00:08<01:46,  1.23 multiphonemes pairs/s]  6%|#6                       | 9/140 [00:10<02:09,  1.01 multiphonemes pairs/s]  8%|#8                      | 11/140 [00:10<01:17,  1.66 multiphonemes pairs/s]  9%|##2                     | 13/140 [00:10<00:57,  2.19 multiphonemes pairs/s] 11%|##5                     | 15/140 [00:10<00:39,  3.19 multiphonemes pairs/s] 14%|###2                    | 19/140 [00:11<00:22,  5.42 multiphonemes pairs/s] 15%|###6                    | 21/140 [00:11<00:18,  6.60 multiphonemes pairs/s] 18%|####2                   | 25/140 [00:11<00:11, 10.18 multiphonemes pairs/s] 20%|####8                   | 28/140 [00:11<00:09, 11.50 multiphonemes pairs/s] 26%|######1                 | 36/140 [00:11<00:04, 21.50 multiphonemes pairs/s] 29%|#######                 | 41/140 [00:11<00:03, 24.91 multiphonemes pairs/s] 41%|#########7              | 57/140 [00:11<00:01, 50.39 multiphonemes pairs/s] 57%|#############7          | 80/140 [00:11<00:00, 88.29 multiphonemes pairs/s] 94%|####################7 | 132/140 [00:12<00:00, 188.41 multiphonemes pairs/s]100%|#######################| 140/140 [00:12<00:00, 11.57 multiphonemes pairs/s]
+[timing] util.build_phonetic_theory: loadOrBuildDictionary: 108.0 s
+┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓         ┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓
+┃     ┃  k  ┃  p  ┃  m  ┃  R  ┃     ┃         ┃     ┃ jbw ┃  k  ┃  t  ┃  n  ┃ ZG  ┃
+┣━━━━━╋━━━━━╋━━━━━╋━━━━━╋━━━━━┫     ┃         ┃     ┣━━━━━╋━━━━━╋━━━━━╋━━━━━╋━━━━━┫
+┃     ┃  s  ┃  v  ┃  t  ┃ wNG ┃     ┃         ┃     ┃  s  ┃  d  ┃  R  ┃  l  ┃  m  ┃
+┗━━━━━┻━━━━━┻━━━━━┻━━━━━┻━━━┳━┻━━━┳━┻━━━┓ ┏━━━┻━┳━━━┻━┳━━━┻━━━━━┻━━━━━┻━━━━━┻━━━━━┛
+  ┃  1-key phonemes layer   ┃ @9  ┃  a  ┃ ┃  i  ┃ eO  ┃
+  ┗━━                       ┗━━━━━┻━━━━━┛ ┗━━━━━┻━━━━━┛
+┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓         ┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓
+┃     ┃ gf  ┃ fdS ┃ Sln ┃ nj  ┃     ┃         ┃     ┃ vp  ┃ pg  ┃  N  ┃ Nz  ┃  S  ┃
+┣━━━━━╋━━━━━╋━━━━━╋━━━━━╋━━━━━┫     ┃         ┃     ┣━━━━━╋━━━━━╋━━━━━╋━━━━━╋━━━━━┫
+┃     ┃ gb  ┃ bdZ ┃ Zlz ┃ zj  ┃     ┃         ┃     ┃ vf  ┃ fg  ┃     ┃  z  ┃  S  ┃
+┗━━━━━┻━━━━━┻━━━━━┻━━━━━┻━━━┳━┻━━━┳━┻━━━┓ ┏━━━┻━┳━━━┻━┳━━━┻━━━━━┻━━━━━┻━━━━━┻━━━━━┛
+  ┃  2-key phonemes layer   ┃°8yu ┃°8§o ┃ ┃ y§E ┃ uoE ┃
+  ┗━━                       ┗━━━━━┻━━━━━┛ ┗━━━━━┻━━━━━┛
+┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓         ┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓
+┃     ┃     ┃     ┃     ┃     ┃     ┃         ┃     ┃     ┃     ┃     ┃     ┃     ┃
+┣━━━━━╋━━━━━╋━━━━━╋━━━━━╋━━━━━┫     ┃         ┃     ┣━━━━━╋━━━━━╋━━━━━╋━━━━━╋━━━━━┫
+┃     ┃     ┃     ┃     ┃     ┃     ┃         ┃     ┃     ┃     ┃     ┃     ┃     ┃
+┗━━━━━┻━━━━━┻━━━━━┻━━━━━┻━━━┳━┻━━━┳━┻━━━┓ ┏━━━┻━┳━━━┻━┳━━━┻━━━━━┻━━━━━┻━━━━━┻━━━━━┛
+  ┃  3-key phonemes layer   ┃  2  ┃  5  ┃ ┃ 25  ┃ 25  ┃
+  ┗━━                       ┗━━━━━┻━━━━━┛ ┗━━━━━┻━━━━━┛
+┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓         ┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓
+┃     ┃     ┃     ┃     ┃     ┃     ┃         ┃     ┃     ┃     ┃     ┃     ┃     ┃
+┣━━━━━╋━━━━━╋━━━━━╋━━━━━╋━━━━━┫     ┃         ┃     ┣━━━━━╋━━━━━╋━━━━━╋━━━━━╋━━━━━┫
+┃     ┃     ┃     ┃     ┃     ┃     ┃         ┃     ┃     ┃     ┃     ┃     ┃     ┃
+┗━━━━━┻━━━━━┻━━━━━┻━━━━━┻━━━┳━┻━━━┳━┻━━━┓ ┏━━━┻━┳━━━┻━┳━━━┻━━━━━┻━━━━━┻━━━━━┻━━━━━┛
+  ┃  4-key phonemes layer   ┃  1  ┃  1  ┃ ┃  1  ┃  1  ┃
+  ┗━━                       ┗━━━━━┻━━━━━┛ ┗━━━━━┻━━━━━┛
+[timing] util.build_phonetic_theory: loadKeyboard: 0.0 s
+Building the phonetic theory:   0%|              | 0/171730 [00:00<?, ? words/s]Building the phonetic theory:   2%| | 3577/171730 [00:00<00:04, 35767.99 words/sBuilding the phonetic theory:   4%| | 7154/171730 [00:00<00:04, 33376.41 words/sBuilding the phonetic theory:   6%| | 10503/171730 [00:00<00:05, 30886.24 words/Building the phonetic theory:   8%| | 13611/171730 [00:00<00:05, 28846.33 words/Building the phonetic theory:  10%| | 16515/171730 [00:00<00:05, 28668.33 words/Building the phonetic theory:  11%|1| 19393/171730 [00:00<00:05, 28049.79 words/Building the phonetic theory:  13%|1| 22204/171730 [00:00<00:05, 27973.86 words/Building the phonetic theory:  15%|1| 25005/171730 [00:00<00:05, 27505.39 words/Building the phonetic theory:  16%|1| 27758/171730 [00:00<00:05, 27326.76 words/Building the phonetic theory:  18%|1| 30492/171730 [00:01<00:05, 26979.85 words/Building the phonetic theory:  19%|1| 33210/171730 [00:01<00:05, 27035.29 words/Building the phonetic theory:  21%|2| 35915/171730 [00:01<00:05, 26106.94 words/Building the phonetic theory:  22%|2| 38531/171730 [00:01<00:05, 25260.75 words/Building the phonetic theory:  24%|2| 41064/171730 [00:01<00:05, 25177.76 words/Building the phonetic theory:  25%|2| 43591/171730 [00:01<00:05, 25203.23 words/Building the phonetic theory:  27%|2| 46115/171730 [00:01<00:05, 25068.39 words/Building the phonetic theory:  28%|2| 48634/171730 [00:01<00:04, 25102.89 words/Building the phonetic theory:  30%|2| 51146/171730 [00:01<00:04, 24842.48 words/Building the phonetic theory:  31%|3| 53681/171730 [00:02<00:04, 24991.50 words/Building the phonetic theory:  33%|3| 56182/171730 [00:02<00:04, 24938.85 words/Building the phonetic theory:  34%|3| 58677/171730 [00:02<00:04, 24836.28 words/Building the phonetic theory:  36%|3| 61162/171730 [00:02<00:04, 24522.91 words/Building the phonetic theory:  37%|3| 63616/171730 [00:02<00:04, 24179.64 words/Building the phonetic theory:  38%|3| 66108/171730 [00:02<00:04, 24396.58 words/Building the phonetic theory:  40%|3| 68550/171730 [00:02<00:04, 23755.85 words/Building the phonetic theory:  41%|4| 70979/171730 [00:02<00:04, 23907.21 words/Building the phonetic theory:  43%|4| 73373/171730 [00:02<00:04, 23306.97 words/Building the phonetic theory:  44%|4| 75709/171730 [00:02<00:04, 22959.38 words/Building the phonetic theory:  46%|4| 78217/171730 [00:03<00:03, 23571.27 words/Building the phonetic theory:  47%|4| 80667/171730 [00:03<00:03, 23842.06 words/Building the phonetic theory:  48%|4| 83080/171730 [00:03<00:03, 23496.53 words/Building the phonetic theory:  50%|4| 85519/171730 [00:03<00:03, 23757.07 words/Building the phonetic theory:  51%|5| 87898/171730 [00:03<00:03, 23594.41 words/Building the phonetic theory:  53%|5| 90260/171730 [00:03<00:03, 23386.44 words/Building the phonetic theory:  54%|5| 92842/171730 [00:03<00:03, 24100.27 words/Building the phonetic theory:  55%|5| 95255/171730 [00:03<00:03, 23104.41 words/Building the phonetic theory:  57%|5| 97702/171730 [00:03<00:03, 23495.94 words/Building the phonetic theory:  58%|5| 100176/171730 [00:03<00:02, 23856.26 wordsBuilding the phonetic theory:  60%|5| 102569/171730 [00:04<00:02, 23555.92 wordsBuilding the phonetic theory:  61%|6| 104930/171730 [00:04<00:02, 23408.08 wordsBuilding the phonetic theory:  63%|6| 107334/171730 [00:04<00:02, 23588.40 wordsBuilding the phonetic theory:  64%|6| 109959/171730 [00:04<00:02, 24374.09 wordsBuilding the phonetic theory:  65%|6| 112463/171730 [00:04<00:02, 24570.00 wordsBuilding the phonetic theory:  67%|6| 114923/171730 [00:04<00:02, 23929.60 wordsBuilding the phonetic theory:  68%|6| 117321/171730 [00:04<00:02, 23596.96 wordsBuilding the phonetic theory:  70%|6| 119825/171730 [00:04<00:02, 24016.64 wordsBuilding the phonetic theory:  71%|7| 122310/171730 [00:04<00:02, 24256.90 wordsBuilding the phonetic theory:  73%|7| 124867/171730 [00:04<00:01, 24643.94 wordsBuilding the phonetic theory:  74%|7| 127335/171730 [00:05<00:01, 24546.07 wordsBuilding the phonetic theory:  76%|7| 129792/171730 [00:05<00:01, 24482.09 wordsBuilding the phonetic theory:  77%|7| 132242/171730 [00:05<00:01, 23845.25 wordsBuilding the phonetic theory:  78%|7| 134732/171730 [00:05<00:01, 24152.67 wordsBuilding the phonetic theory:  80%|7| 137257/171730 [00:05<00:01, 24475.64 wordsBuilding the phonetic theory:  81%|8| 139861/171730 [00:05<00:01, 24938.08 wordsBuilding the phonetic theory:  83%|8| 142392/171730 [00:05<00:01, 25047.17 wordsBuilding the phonetic theory:  84%|8| 144899/171730 [00:05<00:01, 24694.64 wordsBuilding the phonetic theory:  86%|8| 147384/171730 [00:05<00:00, 24738.00 wordsBuilding the phonetic theory:  87%|8| 149860/171730 [00:06<00:00, 24675.83 wordsBuilding the phonetic theory:  89%|8| 152329/171730 [00:06<00:00, 24615.11 wordsBuilding the phonetic theory:  90%|9| 154792/171730 [00:06<00:00, 24390.64 wordsBuilding the phonetic theory:  92%|9| 157232/171730 [00:06<00:00, 23963.49 wordsBuilding the phonetic theory:  93%|9| 159664/171730 [00:06<00:00, 24066.03 wordsBuilding the phonetic theory:  94%|9| 162146/171730 [00:06<00:00, 24288.40 wordsBuilding the phonetic theory:  96%|9| 164577/171730 [00:06<00:00, 23938.41 wordsBuilding the phonetic theory:  97%|9| 167063/171730 [00:06<00:00, 24208.41 wordsBuilding the phonetic theory:  99%|9| 169486/171730 [00:06<00:00, 24182.17 wordsBuilding the phonetic theory: 100%|#| 171730/171730 [00:06<00:00, 24813.61 words
+[timing] util.build_phonetic_theory: loadOrBuildPhoneticTheory: 8.6 s
+Max nb word ambiguity: 18 for words ['allai', 'aller', 'allers', 'allez', 'allé', 'allée', 'allées', 'allés', 'haler', 'halez', 'halé', 'halée', 'halées', 'halés', 'hâlé', 'hâlée', 'hâlées', 'hâlés']
+Max frequency ambiguity: 30221.489999999998 for words ['ai', 'aie', 'aient', 'aies', 'es', 'est', 'hai', 'haie', 'haies', 'hais', 'hait'] 
+ strokes:  ((13, 14),)
+[timing] util.build_phonetic_theory: writePhoneticTheory (phonetic_theory.tsv): 0.7 s
+
+Wrote phonetic_theory.tsv: 79614 phonetic-theory entries.
+[timing] Dictionary loading + phonetic theory (S3-S5), pass 1: 121.8 s
+
+=== stenalgo pipeline: Synthetic Lexicon Building (S2), converged ===
+$ /home/jfsp/stenalgo/env/bin/python -m util.build_synthetic_lexicon
+
+=== Synthetic Lexicon Building (S2): Synthetic Lexicon Building (S2.1): verb paradigm completion ===
+$ /home/jfsp/stenalgo/env/bin/python -m util.completeVerbParadigms --apply
+Loading theory (uses PhoneticTheory.pickle if present)...
+Collecting lemmes:   0%|                                              | 0/171730 [00:00<?, ? word/s]Collecting lemmes: 100%|############################| 171730/171730 [00:00<00:00, 2646356.01 word/s]
+Collecting word features:   0%|                                       | 0/171730 [00:00<?, ? word/s]Collecting word features:   6%|#4                     | 10923/171730 [00:00<00:01, 109197.30 word/s]Collecting word features:  13%|###                     | 21843/171730 [00:00<00:01, 97752.57 word/s]Collecting word features:  21%|####8                  | 35920/171730 [00:00<00:01, 116204.55 word/s]Collecting word features:  28%|######3                | 47701/171730 [00:00<00:01, 113964.43 word/s]Collecting word features:  37%|########5              | 63674/171730 [00:00<00:00, 129809.93 word/s]Collecting word features:  46%|##########4            | 78188/171730 [00:00<00:00, 134878.57 word/s]Collecting word features:  54%|############4          | 93166/171730 [00:00<00:00, 138387.03 word/s]Collecting word features:  63%|#############9        | 109029/171730 [00:00<00:00, 144695.67 word/s]Collecting word features:  72%|###############9      | 124118/171730 [00:00<00:00, 146603.25 word/s]Collecting word features:  82%|##################    | 141172/171730 [00:01<00:00, 150968.14 word/s]Collecting word features:  91%|####################  | 156721/171730 [00:01<00:00, 152320.16 word/s]Collecting word features: 100%|######################| 171730/171730 [00:01<00:00, 130128.06 word/s]
+Scaning discriminating features:   0%|                           | 0/79614 [00:00<?, ? homophones/s]Scaning discriminating features:   0%|               | 398/79614 [00:00<00:19, 3970.33 homophones/s]Scaning discriminating features:   1%|1              | 952/79614 [00:00<00:16, 4882.73 homophones/s]Scaning discriminating features:   2%|2             | 1496/79614 [00:00<00:15, 5134.98 homophones/s]Scaning discriminating features:   3%|3             | 2018/79614 [00:00<00:15, 5165.56 homophones/s]Scaning discriminating features:   3%|4             | 2546/79614 [00:00<00:14, 5202.46 homophones/s]Scaning discriminating features:   4%|5             | 3137/79614 [00:00<00:14, 5442.52 homophones/s]Scaning discriminating features:   5%|6             | 3705/79614 [00:00<00:13, 5515.46 homophones/s]Scaning discriminating features:   5%|7             | 4278/79614 [00:00<00:13, 5576.42 homophones/s]Scaning discriminating features:   6%|8             | 4854/79614 [00:00<00:13, 5631.03 homophones/s]Scaning discriminating features:   7%|9             | 5479/79614 [00:01<00:12, 5819.48 homophones/s]Scaning discriminating features:   8%|#             | 6123/79614 [00:01<00:12, 6008.54 homophones/s]Scaning discriminating features:   9%|#1            | 6805/79614 [00:01<00:11, 6254.22 homophones/s]Scaning discriminating features:   9%|#3            | 7451/79614 [00:01<00:11, 6316.10 homophones/s]Scaning discriminating features:  10%|#4            | 8159/79614 [00:01<00:10, 6536.20 homophones/s]Scaning discriminating features:  11%|#5            | 8878/79614 [00:01<00:10, 6725.30 homophones/s]Scaning discriminating features:  12%|#6            | 9604/79614 [00:01<00:10, 6880.89 homophones/s]Scaning discriminating features:  13%|#6           | 10356/79614 [00:01<00:09, 7072.38 homophones/s]Scaning discriminating features:  14%|#8           | 11141/79614 [00:01<00:09, 7298.23 homophones/s]Scaning discriminating features:  15%|#9           | 11930/79614 [00:01<00:09, 7464.27 homophones/s]Scaning discriminating features:  16%|##           | 12677/79614 [00:03<00:37, 1782.09 homophones/s]Scaning discriminating features:  17%|##1          | 13471/79614 [00:03<00:28, 2352.16 homophones/s]Scaning discriminating features:  18%|##3          | 14197/79614 [00:03<00:22, 2924.66 homophones/s]Scaning discriminating features:  19%|##4          | 14917/79614 [00:03<00:18, 3535.99 homophones/s]Scaning discriminating features:  20%|##5          | 15835/79614 [00:03<00:14, 4491.70 homophones/s]Scaning discriminating features:  21%|##7          | 16720/79614 [00:03<00:11, 5340.56 homophones/s]Scaning discriminating features:  22%|##8          | 17560/79614 [00:03<00:10, 6005.91 homophones/s]Scaning discriminating features:  23%|##9          | 18362/79614 [00:03<00:09, 6456.51 homophones/s]Scaning discriminating features:  24%|###1         | 19198/79614 [00:03<00:08, 6936.49 homophones/s]Scaning discriminating features:  25%|###2         | 20037/79614 [00:03<00:08, 7317.31 homophones/s]Scaning discriminating features:  26%|###4         | 20855/79614 [00:04<00:07, 7546.84 homophones/s]Scaning discriminating features:  27%|###5         | 21672/79614 [00:04<00:07, 7692.88 homophones/s]Scaning discriminating features:  28%|###6         | 22496/79614 [00:04<00:07, 7845.61 homophones/s]Scaning discriminating features:  29%|###8         | 23389/79614 [00:04<00:06, 8158.96 homophones/s]Scaning discriminating features:  30%|###9         | 24229/79614 [00:04<00:06, 7948.86 homophones/s]Scaning discriminating features:  31%|####         | 25056/79614 [00:04<00:06, 8039.80 homophones/s]Scaning discriminating features:  33%|####2        | 25917/79614 [00:04<00:06, 8205.05 homophones/s]Scaning discriminating features:  34%|####3        | 26747/79614 [00:04<00:07, 6632.74 homophones/s]Scaning discriminating features:  35%|####4        | 27505/79614 [00:04<00:07, 6868.45 homophones/s]Scaning discriminating features:  36%|####6        | 28358/79614 [00:05<00:07, 7307.73 homophones/s]Scaning discriminating features:  37%|####7        | 29125/79614 [00:05<00:06, 7387.15 homophones/s]Scaning discriminating features:  38%|####8        | 29890/79614 [00:05<00:06, 7159.46 homophones/s]Scaning discriminating features:  38%|#####        | 30625/79614 [00:05<00:06, 7173.95 homophones/s]Scaning discriminating features:  40%|#####1       | 31575/79614 [00:05<00:06, 7832.31 homophones/s]Scaning discriminating features:  41%|#####3       | 32557/79614 [00:05<00:05, 8404.74 homophones/s]Scaning discriminating features:  42%|#####4       | 33444/79614 [00:05<00:05, 8540.25 homophones/s]Scaning discriminating features:  43%|#####6       | 34364/79614 [00:05<00:05, 8732.84 homophones/s]Scaning discriminating features:  44%|#####7       | 35244/79614 [00:05<00:05, 8392.86 homophones/s]Scaning discriminating features:  45%|#####8       | 36091/79614 [00:06<00:05, 7847.67 homophones/s]Scaning discriminating features:  47%|######       | 37090/79614 [00:06<00:05, 8440.78 homophones/s]Scaning discriminating features:  48%|######1      | 37947/79614 [00:06<00:05, 8277.68 homophones/s]Scaning discriminating features:  49%|######3      | 38784/79614 [00:06<00:04, 8206.20 homophones/s]Scaning discriminating features:  50%|######4      | 39730/79614 [00:06<00:04, 8564.46 homophones/s]Scaning discriminating features:  51%|######6      | 40614/79614 [00:06<00:04, 8642.81 homophones/s]Scaning discriminating features:  52%|######8      | 41721/79614 [00:06<00:04, 9349.15 homophones/s]Scaning discriminating features:  54%|######9      | 42661/79614 [00:08<00:20, 1837.91 homophones/s]Scaning discriminating features:  55%|#######1     | 43716/79614 [00:08<00:14, 2503.12 homophones/s]Scaning discriminating features:  56%|#######2     | 44653/79614 [00:08<00:10, 3178.39 homophones/s]Scaning discriminating features:  57%|#######4     | 45640/79614 [00:08<00:08, 4001.86 homophones/s]Scaning discriminating features:  59%|#######6     | 46733/79614 [00:08<00:06, 5037.87 homophones/s]Scaning discriminating features:  60%|#######7     | 47677/79614 [00:08<00:05, 5657.91 homophones/s]Scaning discriminating features:  62%|########     | 49071/79614 [00:08<00:04, 7285.72 homophones/s]Scaning discriminating features:  63%|########2    | 50521/79614 [00:08<00:03, 8863.18 homophones/s]Scaning discriminating features:  65%|########4    | 51747/79614 [00:08<00:02, 9667.20 homophones/s]Scaning discriminating features:  67%|#######9    | 53008/79614 [00:09<00:02, 10413.47 homophones/s]Scaning discriminating features:  68%|########1   | 54318/79614 [00:09<00:02, 11128.07 homophones/s]Scaning discriminating features:  70%|########4   | 55820/79614 [00:09<00:01, 12197.83 homophones/s]Scaning discriminating features:  72%|########6   | 57138/79614 [00:09<00:02, 10861.70 homophones/s]Scaning discriminating features:  73%|########7   | 58320/79614 [00:09<00:02, 10149.32 homophones/s]Scaning discriminating features:  75%|########9   | 59639/79614 [00:09<00:01, 10916.61 homophones/s]Scaning discriminating features:  77%|#########2  | 61187/79614 [00:09<00:01, 12128.32 homophones/s]Scaning discriminating features:  78%|#########4  | 62461/79614 [00:09<00:01, 11693.68 homophones/s]Scaning discriminating features:  80%|#########6  | 63895/79614 [00:09<00:01, 12412.68 homophones/s]Scaning discriminating features:  82%|#########8  | 65175/79614 [00:10<00:01, 11879.70 homophones/s]Scaning discriminating features:  83%|##########  | 66395/79614 [00:10<00:01, 11962.59 homophones/s]Scaning discriminating features:  85%|##########1 | 67613/79614 [00:10<00:01, 11594.57 homophones/s]Scaning discriminating features:  86%|###########2 | 68789/79614 [00:10<00:01, 9981.49 homophones/s]Scaning discriminating features:  88%|###########4 | 69834/79614 [00:10<00:01, 9699.91 homophones/s]Scaning discriminating features:  89%|###########5 | 70835/79614 [00:10<00:00, 9141.82 homophones/s]Scaning discriminating features:  90%|###########7 | 71773/79614 [00:10<00:00, 8895.68 homophones/s]Scaning discriminating features:  91%|###########8 | 72677/79614 [00:10<00:00, 8125.37 homophones/s]Scaning discriminating features:  92%|############ | 73507/79614 [00:11<00:00, 8116.56 homophones/s]Scaning discriminating features:  93%|############1| 74331/79614 [00:11<00:00, 8035.49 homophones/s]Scaning discriminating features:  94%|############2| 75142/79614 [00:11<00:00, 7693.46 homophones/s]Scaning discriminating features:  95%|############3| 75918/79614 [00:11<00:00, 7617.13 homophones/s]Scaning discriminating features:  96%|############5| 76684/79614 [00:11<00:00, 7605.87 homophones/s]Scaning discriminating features:  97%|############6| 77509/79614 [00:11<00:00, 7785.94 homophones/s]Scaning discriminating features:  98%|############7| 78291/79614 [00:11<00:00, 7766.56 homophones/s]Scaning discriminating features:  99%|############9| 79070/79614 [00:11<00:00, 7639.04 homophones/s]Scaning discriminating features: 100%|#############| 79614/79614 [00:11<00:00, 6734.65 homophones/s]
+
+Number of words without homphones sharing their lemme: 41966 / 171730
+
+Most popular discriminating features:
+                        s: discriminate 36664 words from 27279 other words sharing the same lemme. A total of 51911 words have this feature
+                        p: discriminate 30275 words from 28314 other words sharing the same lemme. A total of 44452 words have this feature
+                    nbr_p: discriminate 28481 words from 30185 other words sharing the same lemme. A total of 31429 words have this feature
+                      VER: discriminate 25787 words from 1 other words sharing the same lemme. A total of 91198 words have this feature
+                      m:s: discriminate 25300 words from 42819 other words sharing the same lemme. A total of 25342 words have this feature
+1. Feature:                        s: discriminates 36664 from 0 other words sharing the same lemme. A total of 51911 words have this feature
+2. Feature:                        p: discriminates 30275 from 0 other words sharing the same lemme. A total of 44452 words have this feature
+3. Feature:                      VER: discriminates 25787 from 0 other words sharing the same lemme. A total of 91198 words have this feature
+4. Feature:                indicatif: discriminates 20636 from 0 other words sharing the same lemme. A total of 49838 words have this feature
+5. Feature:                  présent: discriminates 12614 from 0 other words sharing the same lemme. A total of 32725 words have this feature
+6. Feature:                      NOM: discriminates 9738 from 0 other words sharing the same lemme. A total of 48777 words have this feature
+7. Feature:                    passé: discriminates 9723 from 0 other words sharing the same lemme. A total of 31892 words have this feature
+8. Feature:                        m: discriminates 9446 from 0 other words sharing the same lemme. A total of 48771 words have this feature
+9. Feature:                impératif: discriminates 7079 from 0 other words sharing the same lemme. A total of 7184 words have this feature
+10. Feature:                        f: discriminates 6054 from 0 other words sharing the same lemme. A total of 42382 words have this feature
+11. Feature:                infinitif: discriminates 5231 from 0 other words sharing the same lemme. A total of 5231 words have this feature
+12. Feature:                      ADJ: discriminates 4204 from 0 other words sharing the same lemme. A total of 29469 words have this feature
+13. Feature:                imparfait: discriminates 4048 from 0 other words sharing the same lemme. A total of 12614 words have this feature
+14. Feature:                participe: discriminates 3681 from 0 other words sharing the same lemme. A total of 23019 words have this feature
+15. Feature:             conditionnel: discriminates 2759 from 0 other words sharing the same lemme. A total of 7554 words have this feature
+16. Feature:                   future: discriminates 2242 from 0 other words sharing the same lemme. A total of 10402 words have this feature
+17. Feature:                      ADV: discriminates 1641 from 0 other words sharing the same lemme. A total of 1641 words have this feature
+18. Feature:               subjonctif: discriminates 1268 from 0 other words sharing the same lemme. A total of 14334 words have this feature
+19. Feature:                      ONO: discriminates  211 from 0 other words sharing the same lemme. A total of 211 words have this feature
+20. Feature:                      PRE: discriminates   64 from 0 other words sharing the same lemme. A total of 64 words have this feature
+21. Feature:                      AUX: discriminates   31 from 0 other words sharing the same lemme. A total of 73 words have this feature
+22. Feature:                      CON: discriminates   28 from 0 other words sharing the same lemme. A total of 28 words have this feature
+23. Feature:                      LIA: discriminates    1 from 0 other words sharing the same lemme. A total of 1 words have this feature
+24. Feature:                    nbr_p: discriminates 28481 from 0 other words sharing the same lemme. A total of 31429 words have this feature
+25. Feature:                   pers_1: discriminates 19979 from 0 other words sharing the same lemme. A total of 20376 words have this feature
+26. Feature:                   pers_2: discriminates 18402 from 0 other words sharing the same lemme. A total of 23624 words have this feature
+27. Feature:                   pers_3: discriminates 12130 from 0 other words sharing the same lemme. A total of 30540 words have this feature
+28. Feature:                    nbr_s: discriminates 9768 from 0 other words sharing the same lemme. A total of 32302 words have this feature
+29. Feature:                  not_m_s: discriminates 20072 from 0 other words sharing the same lemme. A total of 64253 words have this feature
+30. Feature:                      m:s: discriminates 25300 from 0 other words sharing the same lemme. A total of 25342 words have this feature
+31. Feature:                      f:s: discriminates 22591 from 0 other words sharing the same lemme. A total of 22592 words have this feature
+32. Feature:                      m:p: discriminates 21636 from 0 other words sharing the same lemme. A total of 21912 words have this feature
+33. Feature:                      f:p: discriminates 19748 from 0 other words sharing the same lemme. A total of 19749 words have this feature
+34. Feature:          indicatif:passé: discriminates 10834 from 0 other words sharing the same lemme. A total of 12814 words have this feature
+35. Feature:        impératif:présent: discriminates 7079 from 0 other words sharing the same lemme. A total of 7184 words have this feature
+36. Feature:        indicatif:présent: discriminates 6103 from 0 other words sharing the same lemme. A total of 14538 words have this feature
+37. Feature:      indicatif:imparfait: discriminates 4048 from 0 other words sharing the same lemme. A total of 12614 words have this feature
+38. Feature:        participe:présent: discriminates 3356 from 0 other words sharing the same lemme. A total of 3356 words have this feature
+39. Feature:     conditionnel:présent: discriminates 2759 from 0 other words sharing the same lemme. A total of 7554 words have this feature
+40. Feature:         indicatif:future: discriminates 2242 from 0 other words sharing the same lemme. A total of 10402 words have this feature
+41. Feature:       subjonctif:présent: discriminates 1268 from 0 other words sharing the same lemme. A total of 14334 words have this feature
+42. Feature:          participe:passé: discriminates  325 from 0 other words sharing the same lemme. A total of 19663 words have this feature
+43. Feature:                  ADJ:num: discriminates   41 from 0 other words sharing the same lemme. A total of 41 words have this feature
+44. Feature:                  PRO:ind: discriminates   40 from 0 other words sharing the same lemme. A total of 40 words have this feature
+45. Feature:                  PRO:per: discriminates   35 from 0 other words sharing the same lemme. A total of 39 words have this feature
+46. Feature:                  ADJ:ind: discriminates   32 from 0 other words sharing the same lemme. A total of 32 words have this feature
+47. Feature:                  ADJ:pos: discriminates   30 from 0 other words sharing the same lemme. A total of 30 words have this feature
+48. Feature:                  PRO:pos: discriminates   23 from 0 other words sharing the same lemme. A total of 23 words have this feature
+49. Feature:                  PRO:rel: discriminates   17 from 0 other words sharing the same lemme. A total of 17 words have this feature
+50. Feature:                  PRO:int: discriminates   17 from 0 other words sharing the same lemme. A total of 17 words have this feature
+51. Feature:                  ART:def: discriminates    8 from 0 other words sharing the same lemme. A total of 8 words have this feature
+52. Feature:                  PRO:dem: discriminates    7 from 0 other words sharing the same lemme. A total of 9 words have this feature
+53. Feature:                  ART:ind: discriminates    4 from 0 other words sharing the same lemme. A total of 4 words have this feature
+54. Feature:                  ADJ:dem: discriminates    4 from 0 other words sharing the same lemme. A total of 4 words have this feature
+55. Feature:                  ADJ:int: discriminates    4 from 0 other words sharing the same lemme. A total of 4 words have this feature
+56. Feature:          indicatif:nbr_p: discriminates 22795 from 0 other words sharing the same lemme. A total of 25699 words have this feature
+57. Feature:         indicatif:pers_2: discriminates 15238 from 0 other words sharing the same lemme. A total of 15690 words have this feature
+58. Feature:         indicatif:pers_1: discriminates 15082 from 0 other words sharing the same lemme. A total of 15388 words have this feature
+59. Feature:            présent:nbr_p: discriminates 14330 from 0 other words sharing the same lemme. A total of 14347 words have this feature
+60. Feature:         indicatif:pers_3: discriminates 12537 from 0 other words sharing the same lemme. A total of 23874 words have this feature
+61. Feature:          indicatif:nbr_s: discriminates 10524 from 0 other words sharing the same lemme. A total of 24139 words have this feature
+62. Feature:           présent:pers_1: discriminates 10294 from 0 other words sharing the same lemme. A total of 10506 words have this feature
+63. Feature:           présent:pers_2: discriminates 8494 from 0 other words sharing the same lemme. A total of 13397 words have this feature
+64. Feature:              passé:nbr_p: discriminates 7091 from 0 other words sharing the same lemme. A total of 7091 words have this feature
+65. Feature:          imparfait:nbr_p: discriminates 6211 from 0 other words sharing the same lemme. A total of 6211 words have this feature
+66. Feature:         impératif:pers_2: discriminates 5359 from 0 other words sharing the same lemme. A total of 5464 words have this feature
+67. Feature:             passé:pers_3: discriminates 5192 from 0 other words sharing the same lemme. A total of 5192 words have this feature
+68. Feature:        subjonctif:pers_2: discriminates 5179 from 0 other words sharing the same lemme. A total of 5179 words have this feature
+69. Feature:         subjonctif:nbr_p: discriminates 5137 from 0 other words sharing the same lemme. A total of 5137 words have this feature
+70. Feature:        subjonctif:pers_1: discriminates 4879 from 0 other words sharing the same lemme. A total of 4880 words have this feature
+71. Feature:             passé:pers_2: discriminates 4744 from 0 other words sharing the same lemme. A total of 5013 words have this feature
+72. Feature:          impératif:nbr_p: discriminates 4241 from 0 other words sharing the same lemme. A total of 4242 words have this feature
+73. Feature:            future:pers_3: discriminates 4062 from 0 other words sharing the same lemme. A total of 4062 words have this feature
+74. Feature:         imparfait:pers_1: discriminates 4011 from 0 other words sharing the same lemme. A total of 4011 words have this feature
+75. Feature:              passé:nbr_s: discriminates 3743 from 0 other words sharing the same lemme. A total of 5723 words have this feature
+76. Feature:       conditionnel:nbr_p: discriminates 3646 from 0 other words sharing the same lemme. A total of 3646 words have this feature
+77. Feature:            future:pers_1: discriminates 3349 from 0 other words sharing the same lemme. A total of 3349 words have this feature
+78. Feature:         imparfait:pers_2: discriminates 3139 from 0 other words sharing the same lemme. A total of 3139 words have this feature
+79. Feature:            future:pers_2: discriminates 2991 from 0 other words sharing the same lemme. A total of 2991 words have this feature
+80. Feature:             future:nbr_s: discriminates 2880 from 0 other words sharing the same lemme. A total of 5698 words have this feature
+81. Feature:          impératif:nbr_s: discriminates 2838 from 0 other words sharing the same lemme. A total of 2942 words have this feature
+82. Feature:             passé:pers_1: discriminates 2762 from 0 other words sharing the same lemme. A total of 2812 words have this feature
+83. Feature:      conditionnel:pers_1: discriminates 2722 from 0 other words sharing the same lemme. A total of 2722 words have this feature
+84. Feature:      conditionnel:pers_2: discriminates 2229 from 0 other words sharing the same lemme. A total of 2229 words have this feature
+85. Feature:             future:nbr_p: discriminates 2082 from 0 other words sharing the same lemme. A total of 4704 words have this feature
+86. Feature:           présent:pers_3: discriminates 1914 from 0 other words sharing the same lemme. A total of 14406 words have this feature
+87. Feature:         impératif:pers_1: discriminates 1720 from 0 other words sharing the same lemme. A total of 1720 words have this feature
+88. Feature:          imparfait:nbr_s: discriminates 1689 from 0 other words sharing the same lemme. A total of 6403 words have this feature
+89. Feature:            présent:nbr_s: discriminates 1551 from 0 other words sharing the same lemme. A total of 15022 words have this feature
+90. Feature:         imparfait:pers_3: discriminates 1167 from 0 other words sharing the same lemme. A total of 7083 words have this feature
+91. Feature:      conditionnel:pers_3: discriminates  844 from 0 other words sharing the same lemme. A total of 3818 words have this feature
+92. Feature:       conditionnel:nbr_s: discriminates  820 from 0 other words sharing the same lemme. A total of 3908 words have this feature
+93. Feature:        subjonctif:pers_3: discriminates  615 from 0 other words sharing the same lemme. A total of 8748 words have this feature
+94. Feature:         subjonctif:nbr_s: discriminates  236 from 0 other words sharing the same lemme. A total of 9197 words have this feature
+95. Feature:             pers_3:nbr_s: discriminates 16945 from 0 other words sharing the same lemme. A total of 17037 words have this feature
+96. Feature:             pers_3:nbr_p: discriminates 13489 from 0 other words sharing the same lemme. A total of 13503 words have this feature
+97. Feature:             pers_1:nbr_s: discriminates 12745 from 0 other words sharing the same lemme. A total of 13018 words have this feature
+98. Feature:             pers_2:nbr_p: discriminates 10373 from 0 other words sharing the same lemme. A total of 10568 words have this feature
+99. Feature:             pers_2:nbr_s: discriminates 8029 from 0 other words sharing the same lemme. A total of 13056 words have this feature
+100. Feature:             pers_1:nbr_p: discriminates 7234 from 0 other words sharing the same lemme. A total of 7358 words have this feature
+101. Feature:                  VER:m:s: discriminates 5027 from 0 other words sharing the same lemme. A total of 5069 words have this feature
+102. Feature:                  VER:f:s: discriminates 4840 from 0 other words sharing the same lemme. A total of 4841 words have this feature
+103. Feature:                  VER:m:p: discriminates 4798 from 0 other words sharing the same lemme. A total of 5074 words have this feature
+104. Feature:                  VER:f:p: discriminates 4740 from 0 other words sharing the same lemme. A total of 4741 words have this feature
+105. Feature:  indicatif:présent:nbr_p: discriminates 7692 from 0 other words sharing the same lemme. A total of 7693 words have this feature
+106. Feature:    indicatif:passé:nbr_p: discriminates 7091 from 0 other words sharing the same lemme. A total of 7091 words have this feature
+107. Feature:indicatif:imparfait:nbr_p: discriminates 6211 from 0 other words sharing the same lemme. A total of 6211 words have this feature
+108. Feature: impératif:présent:pers_2: discriminates 5359 from 0 other words sharing the same lemme. A total of 5464 words have this feature
+109. Feature:   indicatif:passé:pers_3: discriminates 5192 from 0 other words sharing the same lemme. A total of 5192 words have this feature
+110. Feature:subjonctif:présent:pers_2: discriminates 5179 from 0 other words sharing the same lemme. A total of 5179 words have this feature
+111. Feature: subjonctif:présent:nbr_p: discriminates 5137 from 0 other words sharing the same lemme. A total of 5137 words have this feature
+112. Feature: indicatif:présent:pers_1: discriminates 5072 from 0 other words sharing the same lemme. A total of 5223 words have this feature
+113. Feature:subjonctif:présent:pers_1: discriminates 4879 from 0 other words sharing the same lemme. A total of 4880 words have this feature
+114. Feature:   indicatif:passé:pers_2: discriminates 4744 from 0 other words sharing the same lemme. A total of 5013 words have this feature
+115. Feature: indicatif:présent:pers_2: discriminates 4673 from 0 other words sharing the same lemme. A total of 4802 words have this feature
+116. Feature:  impératif:présent:nbr_p: discriminates 4241 from 0 other words sharing the same lemme. A total of 4242 words have this feature
+117. Feature:  indicatif:future:pers_3: discriminates 4062 from 0 other words sharing the same lemme. A total of 4062 words have this feature
+118. Feature:indicatif:imparfait:pers_1: discriminates 4011 from 0 other words sharing the same lemme. A total of 4011 words have this feature
+119. Feature:    indicatif:passé:nbr_s: discriminates 3743 from 0 other words sharing the same lemme. A total of 5723 words have this feature
+120. Feature:conditionnel:présent:nbr_p: discriminates 3646 from 0 other words sharing the same lemme. A total of 3646 words have this feature
+121. Feature:  indicatif:future:pers_1: discriminates 3349 from 0 other words sharing the same lemme. A total of 3349 words have this feature
+122. Feature:indicatif:imparfait:pers_2: discriminates 3139 from 0 other words sharing the same lemme. A total of 3139 words have this feature
+123. Feature:  indicatif:future:pers_2: discriminates 2991 from 0 other words sharing the same lemme. A total of 2991 words have this feature
+124. Feature:   indicatif:future:nbr_s: discriminates 2880 from 0 other words sharing the same lemme. A total of 5698 words have this feature
+125. Feature:  impératif:présent:nbr_s: discriminates 2838 from 0 other words sharing the same lemme. A total of 2942 words have this feature
+126. Feature:   indicatif:passé:pers_1: discriminates 2762 from 0 other words sharing the same lemme. A total of 2812 words have this feature
+127. Feature:conditionnel:présent:pers_1: discriminates 2722 from 0 other words sharing the same lemme. A total of 2722 words have this feature
+128. Feature: indicatif:présent:pers_3: discriminates 2319 from 0 other words sharing the same lemme. A total of 7740 words have this feature
+129. Feature:  indicatif:présent:nbr_s: discriminates 2312 from 0 other words sharing the same lemme. A total of 6845 words have this feature
+130. Feature:conditionnel:présent:pers_2: discriminates 2229 from 0 other words sharing the same lemme. A total of 2229 words have this feature
+131. Feature:   indicatif:future:nbr_p: discriminates 2082 from 0 other words sharing the same lemme. A total of 4704 words have this feature
+132. Feature: impératif:présent:pers_1: discriminates 1720 from 0 other words sharing the same lemme. A total of 1720 words have this feature
+133. Feature:indicatif:imparfait:nbr_s: discriminates 1689 from 0 other words sharing the same lemme. A total of 6403 words have this feature
+134. Feature:indicatif:imparfait:pers_3: discriminates 1167 from 0 other words sharing the same lemme. A total of 7083 words have this feature
+135. Feature:conditionnel:présent:pers_3: discriminates  844 from 0 other words sharing the same lemme. A total of 3818 words have this feature
+136. Feature:conditionnel:présent:nbr_s: discriminates  820 from 0 other words sharing the same lemme. A total of 3908 words have this feature
+137. Feature:subjonctif:présent:pers_3: discriminates  615 from 0 other words sharing the same lemme. A total of 8748 words have this feature
+138. Feature: subjonctif:présent:nbr_s: discriminates  236 from 0 other words sharing the same lemme. A total of 9197 words have this feature
+139. Feature:   indicatif:pers_3:nbr_s: discriminates 13441 from 0 other words sharing the same lemme. A total of 13446 words have this feature
+140. Feature:   indicatif:pers_3:nbr_p: discriminates 10428 from 0 other words sharing the same lemme. A total of 10428 words have this feature
+141. Feature:   indicatif:pers_1:nbr_s: discriminates 9186 from 0 other words sharing the same lemme. A total of 9384 words have this feature
+142. Feature:   indicatif:pers_2:nbr_p: discriminates 9086 from 0 other words sharing the same lemme. A total of 9267 words have this feature
+143. Feature:     présent:pers_3:nbr_s: discriminates 7844 from 0 other words sharing the same lemme. A total of 7920 words have this feature
+144. Feature:     présent:pers_1:nbr_s: discriminates 6834 from 0 other words sharing the same lemme. A total of 7046 words have this feature
+145. Feature:     présent:pers_3:nbr_p: discriminates 6486 from 0 other words sharing the same lemme. A total of 6486 words have this feature
+146. Feature:   indicatif:pers_2:nbr_s: discriminates 6152 from 0 other words sharing the same lemme. A total of 6423 words have this feature
+147. Feature:   indicatif:pers_1:nbr_p: discriminates 5896 from 0 other words sharing the same lemme. A total of 6004 words have this feature
+148. Feature:  subjonctif:pers_3:nbr_s: discriminates 4651 from 0 other words sharing the same lemme. A total of 4652 words have this feature
+149. Feature:  subjonctif:pers_1:nbr_s: discriminates 4509 from 0 other words sharing the same lemme. A total of 4510 words have this feature
+150. Feature:  subjonctif:pers_2:nbr_s: discriminates 4508 from 0 other words sharing the same lemme. A total of 4508 words have this feature
+151. Feature:     présent:pers_2:nbr_p: discriminates 4384 from 0 other words sharing the same lemme. A total of 4401 words have this feature
+152. Feature:     présent:pers_2:nbr_s: discriminates 4110 from 0 other words sharing the same lemme. A total of 8996 words have this feature
+153. Feature:  subjonctif:pers_3:nbr_p: discriminates 4096 from 0 other words sharing the same lemme. A total of 4096 words have this feature
+154. Feature:   imparfait:pers_3:nbr_s: discriminates 3909 from 0 other words sharing the same lemme. A total of 3909 words have this feature
+155. Feature:       passé:pers_2:nbr_p: discriminates 3850 from 0 other words sharing the same lemme. A total of 3850 words have this feature
+156. Feature:     présent:pers_1:nbr_p: discriminates 3460 from 0 other words sharing the same lemme. A total of 3460 words have this feature
+157. Feature:   imparfait:pers_3:nbr_p: discriminates 3174 from 0 other words sharing the same lemme. A total of 3174 words have this feature
+158. Feature:       passé:pers_3:nbr_s: discriminates 3108 from 0 other words sharing the same lemme. A total of 3108 words have this feature
+159. Feature:   impératif:pers_2:nbr_s: discriminates 2838 from 0 other words sharing the same lemme. A total of 2942 words have this feature
+160. Feature:   impératif:pers_2:nbr_p: discriminates 2521 from 0 other words sharing the same lemme. A total of 2522 words have this feature
+161. Feature:   imparfait:pers_1:nbr_s: discriminates 2437 from 0 other words sharing the same lemme. A total of 2437 words have this feature
+162. Feature:      future:pers_3:nbr_s: discriminates 2303 from 0 other words sharing the same lemme. A total of 2303 words have this feature
+163. Feature:conditionnel:pers_3:nbr_s: discriminates 2209 from 0 other words sharing the same lemme. A total of 2209 words have this feature
+164. Feature:       passé:pers_3:nbr_p: discriminates 2084 from 0 other words sharing the same lemme. A total of 2084 words have this feature
+165. Feature:      future:pers_1:nbr_s: discriminates 1887 from 0 other words sharing the same lemme. A total of 1887 words have this feature
+166. Feature:      future:pers_3:nbr_p: discriminates 1759 from 0 other words sharing the same lemme. A total of 1759 words have this feature
+167. Feature:   impératif:pers_1:nbr_p: discriminates 1720 from 0 other words sharing the same lemme. A total of 1720 words have this feature
+168. Feature:   imparfait:pers_2:nbr_s: discriminates 1676 from 0 other words sharing the same lemme. A total of 1676 words have this feature
+169. Feature:conditionnel:pers_1:nbr_s: discriminates 1643 from 0 other words sharing the same lemme. A total of 1643 words have this feature
+170. Feature:conditionnel:pers_3:nbr_p: discriminates 1609 from 0 other words sharing the same lemme. A total of 1609 words have this feature
+171. Feature:       passé:pers_1:nbr_s: discriminates 1605 from 0 other words sharing the same lemme. A total of 1655 words have this feature
+172. Feature:   imparfait:pers_1:nbr_p: discriminates 1574 from 0 other words sharing the same lemme. A total of 1574 words have this feature
+173. Feature:      future:pers_2:nbr_s: discriminates 1508 from 0 other words sharing the same lemme. A total of 1508 words have this feature
+174. Feature:      future:pers_2:nbr_p: discriminates 1483 from 0 other words sharing the same lemme. A total of 1483 words have this feature
+175. Feature:   imparfait:pers_2:nbr_p: discriminates 1463 from 0 other words sharing the same lemme. A total of 1463 words have this feature
+176. Feature:      future:pers_1:nbr_p: discriminates 1462 from 0 other words sharing the same lemme. A total of 1462 words have this feature
+177. Feature:conditionnel:pers_2:nbr_s: discriminates 1271 from 0 other words sharing the same lemme. A total of 1271 words have this feature
+178. Feature:       passé:pers_1:nbr_p: discriminates 1157 from 0 other words sharing the same lemme. A total of 1157 words have this feature
+179. Feature:conditionnel:pers_1:nbr_p: discriminates 1079 from 0 other words sharing the same lemme. A total of 1079 words have this feature
+180. Feature:conditionnel:pers_2:nbr_p: discriminates  958 from 0 other words sharing the same lemme. A total of 958 words have this feature
+181. Feature:       passé:pers_2:nbr_s: discriminates  894 from 0 other words sharing the same lemme. A total of 1163 words have this feature
+182. Feature:  subjonctif:pers_2:nbr_p: discriminates  671 from 0 other words sharing the same lemme. A total of 671 words have this feature
+183. Feature:  subjonctif:pers_1:nbr_p: discriminates  370 from 0 other words sharing the same lemme. A total of 370 words have this feature
+184. Feature:subjonctif:présent:pers_3:nbr_s: discriminates 4651 from 0 other words sharing the same lemme. A total of 4652 words have this feature
+185. Feature:subjonctif:présent:pers_1:nbr_s: discriminates 4509 from 0 other words sharing the same lemme. A total of 4510 words have this feature
+186. Feature:subjonctif:présent:pers_2:nbr_s: discriminates 4508 from 0 other words sharing the same lemme. A total of 4508 words have this feature
+187. Feature:indicatif:présent:pers_3:nbr_s: discriminates 4324 from 0 other words sharing the same lemme. A total of 4329 words have this feature
+188. Feature:subjonctif:présent:pers_3:nbr_p: discriminates 4096 from 0 other words sharing the same lemme. A total of 4096 words have this feature
+189. Feature:indicatif:imparfait:pers_3:nbr_s: discriminates 3909 from 0 other words sharing the same lemme. A total of 3909 words have this feature
+190. Feature:indicatif:passé:pers_2:nbr_p: discriminates 3850 from 0 other words sharing the same lemme. A total of 3850 words have this feature
+191. Feature:indicatif:présent:pers_3:nbr_p: discriminates 3411 from 0 other words sharing the same lemme. A total of 3411 words have this feature
+192. Feature:indicatif:présent:pers_1:nbr_s: discriminates 3261 from 0 other words sharing the same lemme. A total of 3412 words have this feature
+193. Feature:indicatif:imparfait:pers_3:nbr_p: discriminates 3174 from 0 other words sharing the same lemme. A total of 3174 words have this feature
+194. Feature:indicatif:passé:pers_3:nbr_s: discriminates 3108 from 0 other words sharing the same lemme. A total of 3108 words have this feature
+195. Feature:impératif:présent:pers_2:nbr_s: discriminates 2838 from 0 other words sharing the same lemme. A total of 2942 words have this feature
+196. Feature:impératif:présent:pers_2:nbr_p: discriminates 2521 from 0 other words sharing the same lemme. A total of 2522 words have this feature
+197. Feature:indicatif:présent:pers_2:nbr_p: discriminates 2470 from 0 other words sharing the same lemme. A total of 2471 words have this feature
+198. Feature:indicatif:imparfait:pers_1:nbr_s: discriminates 2437 from 0 other words sharing the same lemme. A total of 2437 words have this feature
+199. Feature:indicatif:future:pers_3:nbr_s: discriminates 2303 from 0 other words sharing the same lemme. A total of 2303 words have this feature
+200. Feature:conditionnel:présent:pers_3:nbr_s: discriminates 2209 from 0 other words sharing the same lemme. A total of 2209 words have this feature
+201. Feature:indicatif:présent:pers_2:nbr_s: discriminates 2203 from 0 other words sharing the same lemme. A total of 2331 words have this feature
+202. Feature:indicatif:passé:pers_3:nbr_p: discriminates 2084 from 0 other words sharing the same lemme. A total of 2084 words have this feature
+203. Feature:indicatif:future:pers_1:nbr_s: discriminates 1887 from 0 other words sharing the same lemme. A total of 1887 words have this feature
+204. Feature:indicatif:présent:pers_1:nbr_p: discriminates 1811 from 0 other words sharing the same lemme. A total of 1811 words have this feature
+205. Feature:indicatif:future:pers_3:nbr_p: discriminates 1759 from 0 other words sharing the same lemme. A total of 1759 words have this feature
+206. Feature:impératif:présent:pers_1:nbr_p: discriminates 1720 from 0 other words sharing the same lemme. A total of 1720 words have this feature
+207. Feature:indicatif:imparfait:pers_2:nbr_s: discriminates 1676 from 0 other words sharing the same lemme. A total of 1676 words have this feature
+208. Feature:conditionnel:présent:pers_1:nbr_s: discriminates 1643 from 0 other words sharing the same lemme. A total of 1643 words have this feature
+209. Feature:conditionnel:présent:pers_3:nbr_p: discriminates 1609 from 0 other words sharing the same lemme. A total of 1609 words have this feature
+210. Feature:indicatif:passé:pers_1:nbr_s: discriminates 1605 from 0 other words sharing the same lemme. A total of 1655 words have this feature
+211. Feature:indicatif:imparfait:pers_1:nbr_p: discriminates 1574 from 0 other words sharing the same lemme. A total of 1574 words have this feature
+212. Feature:indicatif:future:pers_2:nbr_s: discriminates 1508 from 0 other words sharing the same lemme. A total of 1508 words have this feature
+213. Feature:indicatif:future:pers_2:nbr_p: discriminates 1483 from 0 other words sharing the same lemme. A total of 1483 words have this feature
+214. Feature:indicatif:imparfait:pers_2:nbr_p: discriminates 1463 from 0 other words sharing the same lemme. A total of 1463 words have this feature
+215. Feature:indicatif:future:pers_1:nbr_p: discriminates 1462 from 0 other words sharing the same lemme. A total of 1462 words have this feature
+216. Feature:conditionnel:présent:pers_2:nbr_s: discriminates 1271 from 0 other words sharing the same lemme. A total of 1271 words have this feature
+217. Feature:indicatif:passé:pers_1:nbr_p: discriminates 1157 from 0 other words sharing the same lemme. A total of 1157 words have this feature
+218. Feature:conditionnel:présent:pers_1:nbr_p: discriminates 1079 from 0 other words sharing the same lemme. A total of 1079 words have this feature
+219. Feature:conditionnel:présent:pers_2:nbr_p: discriminates  958 from 0 other words sharing the same lemme. A total of 958 words have this feature
+220. Feature:indicatif:passé:pers_2:nbr_s: discriminates  894 from 0 other words sharing the same lemme. A total of 1163 words have this feature
+221. Feature:subjonctif:présent:pers_2:nbr_p: discriminates  671 from 0 other words sharing the same lemme. A total of 671 words have this feature
+222. Feature:subjonctif:présent:pers_1:nbr_p: discriminates  370 from 0 other words sharing the same lemme. A total of 370 words have this feature
+Collecting lemmes:   0%|                                              | 0/173293 [00:00<?, ? word/s]Collecting lemmes: 100%|############################| 173293/173293 [00:00<00:00, 3287159.33 word/s]
+Collecting word features:   0%|                                       | 0/173293 [00:00<?, ? word/s]Collecting word features:   3%|7                        | 4853/173293 [00:00<00:03, 48524.49 word/s]Collecting word features:   9%|##1                     | 15734/173293 [00:00<00:01, 83981.18 word/s]Collecting word features:  14%|###3                    | 24133/173293 [00:00<00:01, 75728.46 word/s]Collecting word features:  21%|####9                   | 35850/173293 [00:00<00:01, 90980.72 word/s]Collecting word features:  28%|######6                 | 47884/173293 [00:00<00:01, 96554.34 word/s]Collecting word features:  34%|#######8               | 58817/173293 [00:00<00:01, 100645.27 word/s]Collecting word features:  40%|#########1             | 69195/173293 [00:00<00:01, 101627.35 word/s]Collecting word features:  46%|##########9             | 79412/173293 [00:00<00:01, 84761.07 word/s]Collecting word features:  55%|############6          | 95553/173293 [00:01<00:00, 105392.20 word/s]Collecting word features:  63%|#############9        | 109801/173293 [00:01<00:00, 115686.92 word/s]Collecting word features:  70%|###############4      | 121933/173293 [00:01<00:00, 116174.95 word/s]Collecting word features:  80%|#################6    | 138702/173293 [00:01<00:00, 130941.69 word/s]Collecting word features:  90%|###################8  | 155971/173293 [00:01<00:00, 143068.81 word/s]Collecting word features:  98%|#####################6| 170584/173293 [00:01<00:00, 105520.05 word/s]Collecting word features: 100%|######################| 173293/173293 [00:01<00:00, 104790.98 word/s]
+Scaning discriminating features:   0%|                           | 0/79614 [00:00<?, ? homophones/s]Scaning discriminating features:   0%|               | 252/79614 [00:00<00:39, 2020.04 homophones/s]Scaning discriminating features:   1%|1              | 617/79614 [00:00<00:27, 2883.84 homophones/s]Scaning discriminating features:   1%|1              | 997/79614 [00:00<00:23, 3279.66 homophones/s]Scaning discriminating features:   2%|2             | 1430/79614 [00:00<00:21, 3677.77 homophones/s]Scaning discriminating features:   3%|3             | 2045/79614 [00:00<00:17, 4547.07 homophones/s]Scaning discriminating features:   3%|4             | 2607/79614 [00:00<00:15, 4904.30 homophones/s]Scaning discriminating features:   4%|5             | 3247/79614 [00:00<00:14, 5387.67 homophones/s]Scaning discriminating features:   5%|6             | 3910/79614 [00:00<00:13, 5777.66 homophones/s]Scaning discriminating features:   6%|7             | 4491/79614 [00:00<00:13, 5773.70 homophones/s]Scaning discriminating features:   6%|8             | 5071/79614 [00:02<00:54, 1364.24 homophones/s]Scaning discriminating features:   7%|#             | 5725/79614 [00:02<00:39, 1849.67 homophones/s]Scaning discriminating features:   8%|#1            | 6481/79614 [00:02<00:28, 2523.63 homophones/s]Scaning discriminating features:   9%|#2            | 7159/79614 [00:02<00:23, 3137.38 homophones/s]Scaning discriminating features:  10%|#3            | 7925/79614 [00:02<00:18, 3909.02 homophones/s]Scaning discriminating features:  11%|#5            | 8716/79614 [00:02<00:15, 4692.07 homophones/s]Scaning discriminating features:  12%|#6            | 9440/79614 [00:02<00:13, 5243.02 homophones/s]Scaning discriminating features:  13%|#6           | 10231/79614 [00:02<00:11, 5873.71 homophones/s]Scaning discriminating features:  14%|#7           | 10959/79614 [00:02<00:11, 6063.15 homophones/s]Scaning discriminating features:  15%|#9           | 11766/79614 [00:02<00:10, 6577.30 homophones/s]Scaning discriminating features:  16%|##           | 12613/79614 [00:03<00:09, 7089.62 homophones/s]Scaning discriminating features:  17%|##1          | 13432/79614 [00:03<00:08, 7394.20 homophones/s]Scaning discriminating features:  18%|##3          | 14216/79614 [00:03<00:08, 7347.44 homophones/s]Scaning discriminating features:  19%|##4          | 14982/79614 [00:03<00:08, 7396.12 homophones/s]Scaning discriminating features:  20%|##5          | 15857/79614 [00:03<00:08, 7781.74 homophones/s]Scaning discriminating features:  21%|##7          | 16732/79614 [00:03<00:07, 8063.38 homophones/s]Scaning discriminating features:  22%|##8          | 17561/79614 [00:03<00:07, 8127.93 homophones/s]Scaning discriminating features:  23%|###          | 18383/79614 [00:03<00:07, 8151.79 homophones/s]Scaning discriminating features:  24%|###1         | 19205/79614 [00:03<00:07, 7843.38 homophones/s]Scaning discriminating features:  25%|###2         | 20001/79614 [00:04<00:07, 7875.17 homophones/s]Scaning discriminating features:  26%|###4         | 20825/79614 [00:04<00:07, 7978.15 homophones/s]Scaning discriminating features:  27%|###5         | 21676/79614 [00:04<00:07, 8130.17 homophones/s]Scaning discriminating features:  28%|###6         | 22529/79614 [00:04<00:06, 8241.35 homophones/s]Scaning discriminating features:  30%|###8         | 23522/79614 [00:04<00:06, 8742.38 homophones/s]Scaning discriminating features:  31%|###9         | 24426/79614 [00:04<00:06, 8828.80 homophones/s]Scaning discriminating features:  32%|####1        | 25464/79614 [00:04<00:05, 9287.99 homophones/s]Scaning discriminating features:  33%|####3        | 26394/79614 [00:04<00:05, 9024.06 homophones/s]Scaning discriminating features:  34%|####4        | 27299/79614 [00:04<00:05, 8779.41 homophones/s]Scaning discriminating features:  35%|####6        | 28180/79614 [00:06<00:26, 1935.99 homophones/s]Scaning discriminating features:  37%|####7        | 29264/79614 [00:06<00:18, 2678.83 homophones/s]Scaning discriminating features:  38%|####9        | 30317/79614 [00:06<00:14, 3514.93 homophones/s]Scaning discriminating features:  39%|#####1       | 31293/79614 [00:06<00:11, 4329.44 homophones/s]Scaning discriminating features:  41%|#####2       | 32344/79614 [00:06<00:08, 5307.91 homophones/s]Scaning discriminating features:  42%|#####4       | 33311/79614 [00:06<00:07, 6106.51 homophones/s]Scaning discriminating features:  43%|#####6       | 34317/79614 [00:06<00:06, 6930.04 homophones/s]Scaning discriminating features:  44%|#####7       | 35299/79614 [00:06<00:05, 7591.67 homophones/s]Scaning discriminating features:  46%|#####9       | 36377/79614 [00:06<00:05, 8373.57 homophones/s]Scaning discriminating features:  47%|######1      | 37579/79614 [00:07<00:04, 9321.95 homophones/s]Scaning discriminating features:  49%|######3      | 38713/79614 [00:07<00:04, 9868.29 homophones/s]Scaning discriminating features:  50%|######      | 39831/79614 [00:07<00:03, 10233.49 homophones/s]Scaning discriminating features:  52%|######1     | 41122/79614 [00:07<00:03, 10996.23 homophones/s]Scaning discriminating features:  53%|######3     | 42358/79614 [00:07<00:03, 11388.92 homophones/s]Scaning discriminating features:  55%|######5     | 43536/79614 [00:07<00:03, 11279.75 homophones/s]Scaning discriminating features:  56%|######7     | 44691/79614 [00:07<00:03, 11283.89 homophones/s]Scaning discriminating features:  58%|######9     | 46121/79614 [00:07<00:02, 12161.39 homophones/s]Scaning discriminating features:  59%|#######1    | 47353/79614 [00:07<00:02, 11898.53 homophones/s]Scaning discriminating features:  61%|#######3    | 48629/79614 [00:07<00:02, 12147.94 homophones/s]Scaning discriminating features:  63%|#######5    | 50318/79614 [00:08<00:02, 13533.32 homophones/s]Scaning discriminating features:  65%|#######7    | 51681/79614 [00:08<00:02, 12880.87 homophones/s]Scaning discriminating features:  67%|#######9    | 52983/79614 [00:08<00:02, 12918.97 homophones/s]Scaning discriminating features:  69%|########2   | 54635/79614 [00:08<00:01, 13962.92 homophones/s]Scaning discriminating features:  70%|########4   | 56042/79614 [00:08<00:01, 13923.01 homophones/s]Scaning discriminating features:  72%|########6   | 57442/79614 [00:08<00:01, 13357.98 homophones/s]Scaning discriminating features:  74%|########8   | 58787/79614 [00:08<00:01, 13204.20 homophones/s]Scaning discriminating features:  76%|#########1  | 60517/79614 [00:08<00:01, 14381.30 homophones/s]Scaning discriminating features:  78%|#########3  | 62063/79614 [00:08<00:01, 14695.17 homophones/s]Scaning discriminating features:  80%|#########6  | 63723/79614 [00:09<00:01, 15247.40 homophones/s]Scaning discriminating features:  82%|#########8  | 65254/79614 [00:09<00:00, 14433.08 homophones/s]Scaning discriminating features:  84%|##########  | 66710/79614 [00:09<00:00, 14436.76 homophones/s]Scaning discriminating features:  86%|##########2 | 68163/79614 [00:09<00:00, 13812.52 homophones/s]Scaning discriminating features:  87%|##########4 | 69555/79614 [00:09<00:00, 13175.39 homophones/s]Scaning discriminating features:  89%|##########6 | 70884/79614 [00:09<00:00, 12785.29 homophones/s]Scaning discriminating features:  91%|###########7 | 72171/79614 [00:11<00:03, 2358.15 homophones/s]Scaning discriminating features:  92%|###########9 | 73095/79614 [00:11<00:02, 2814.71 homophones/s]Scaning discriminating features:  93%|############ | 74023/79614 [00:11<00:01, 3385.14 homophones/s]Scaning discriminating features:  94%|############2| 74937/79614 [00:11<00:01, 4019.40 homophones/s]Scaning discriminating features:  95%|############3| 75845/79614 [00:11<00:00, 4671.78 homophones/s]Scaning discriminating features:  96%|############5| 76736/79614 [00:11<00:00, 5299.08 homophones/s]Scaning discriminating features:  98%|############6| 77707/79614 [00:11<00:00, 6122.75 homophones/s]Scaning discriminating features:  99%|############8| 78859/79614 [00:12<00:00, 7259.60 homophones/s]Scaning discriminating features: 100%|#############| 79614/79614 [00:12<00:00, 6589.62 homophones/s]
+
+Number of words without homphones sharing their lemme: 41950 / 172889
+
+Most popular discriminating features:
+                        s: discriminate 36651 words from 27292 other words sharing the same lemme. A total of 51931 words have this feature
+                        p: discriminate 30264 words from 28287 other words sharing the same lemme. A total of 44488 words have this feature
+                    nbr_p: discriminate 28471 words from 30147 other words sharing the same lemme. A total of 32203 words have this feature
+                      VER: discriminate 25771 words from 1 other words sharing the same lemme. A total of 92761 words have this feature
+                      m:s: discriminate 25302 words from 43666 other words sharing the same lemme. A total of 25345 words have this feature
+1. Feature:                        s: discriminates 36651 from 0 other words sharing the same lemme. A total of 51931 words have this feature
+2. Feature:                        p: discriminates 30264 from 0 other words sharing the same lemme. A total of 44488 words have this feature
+3. Feature:                      VER: discriminates 25771 from 0 other words sharing the same lemme. A total of 92357 words have this feature
+4. Feature:                indicatif: discriminates 20633 from 0 other words sharing the same lemme. A total of 50717 words have this feature
+5. Feature:                  présent: discriminates 12605 from 0 other words sharing the same lemme. A total of 33203 words have this feature
+6. Feature:                      NOM: discriminates 9738 from 0 other words sharing the same lemme. A total of 48777 words have this feature
+7. Feature:                    passé: discriminates 9713 from 0 other words sharing the same lemme. A total of 32146 words have this feature
+8. Feature:                        m: discriminates 9433 from 0 other words sharing the same lemme. A total of 48789 words have this feature
+9. Feature:                impératif: discriminates 7098 from 0 other words sharing the same lemme. A total of 7302 words have this feature
+10. Feature:                        f: discriminates 6040 from 0 other words sharing the same lemme. A total of 42418 words have this feature
+11. Feature:                infinitif: discriminates 5231 from 0 other words sharing the same lemme. A total of 5231 words have this feature
+12. Feature:                      ADJ: discriminates 4204 from 0 other words sharing the same lemme. A total of 29469 words have this feature
+13. Feature:                imparfait: discriminates 4049 from 0 other words sharing the same lemme. A total of 12829 words have this feature
+14. Feature:                participe: discriminates 3668 from 0 other words sharing the same lemme. A total of 23073 words have this feature
+15. Feature:             conditionnel: discriminates 2762 from 0 other words sharing the same lemme. A total of 7759 words have this feature
+16. Feature:                   future: discriminates 2243 from 0 other words sharing the same lemme. A total of 10660 words have this feature
+17. Feature:                      ADV: discriminates 1641 from 0 other words sharing the same lemme. A total of 1641 words have this feature
+18. Feature:               subjonctif: discriminates 1301 from 0 other words sharing the same lemme. A total of 14500 words have this feature
+19. Feature:                      ONO: discriminates  211 from 0 other words sharing the same lemme. A total of 211 words have this feature
+20. Feature:                      PRE: discriminates   64 from 0 other words sharing the same lemme. A total of 64 words have this feature
+21. Feature:                      AUX: discriminates   31 from 0 other words sharing the same lemme. A total of 73 words have this feature
+22. Feature:                      CON: discriminates   28 from 0 other words sharing the same lemme. A total of 28 words have this feature
+23. Feature:                      LIA: discriminates    1 from 0 other words sharing the same lemme. A total of 1 words have this feature
+24. Feature:                    nbr_p: discriminates 28471 from 0 other words sharing the same lemme. A total of 32042 words have this feature
+25. Feature:                   pers_1: discriminates 19994 from 0 other words sharing the same lemme. A total of 20816 words have this feature
+26. Feature:                   pers_2: discriminates 18414 from 0 other words sharing the same lemme. A total of 24016 words have this feature
+27. Feature:                   pers_3: discriminates 12132 from 0 other words sharing the same lemme. A total of 30963 words have this feature
+28. Feature:                    nbr_s: discriminates 9765 from 0 other words sharing the same lemme. A total of 32794 words have this feature
+29. Feature:                  not_m_s: discriminates 20065 from 0 other words sharing the same lemme. A total of 64306 words have this feature
+30. Feature:                      m:s: discriminates 25302 from 0 other words sharing the same lemme. A total of 25345 words have this feature
+31. Feature:                      f:s: discriminates 22608 from 0 other words sharing the same lemme. A total of 22609 words have this feature
+32. Feature:                      m:p: discriminates 21652 from 0 other words sharing the same lemme. A total of 21929 words have this feature
+33. Feature:                      f:p: discriminates 19767 from 0 other words sharing the same lemme. A total of 19768 words have this feature
+34. Feature:          indicatif:passé: discriminates 10839 from 0 other words sharing the same lemme. A total of 13014 words have this feature
+35. Feature:        impératif:présent: discriminates 7098 from 0 other words sharing the same lemme. A total of 7302 words have this feature
+36. Feature:        indicatif:présent: discriminates 6101 from 0 other words sharing the same lemme. A total of 14745 words have this feature
+37. Feature:      indicatif:imparfait: discriminates 4049 from 0 other words sharing the same lemme. A total of 12829 words have this feature
+38. Feature:        participe:présent: discriminates 3356 from 0 other words sharing the same lemme. A total of 3356 words have this feature
+39. Feature:     conditionnel:présent: discriminates 2762 from 0 other words sharing the same lemme. A total of 7759 words have this feature
+40. Feature:         indicatif:future: discriminates 2243 from 0 other words sharing the same lemme. A total of 10660 words have this feature
+41. Feature:       subjonctif:présent: discriminates 1301 from 0 other words sharing the same lemme. A total of 14500 words have this feature
+42. Feature:          participe:passé: discriminates  312 from 0 other words sharing the same lemme. A total of 19717 words have this feature
+43. Feature:                  ADJ:num: discriminates   41 from 0 other words sharing the same lemme. A total of 41 words have this feature
+44. Feature:                  PRO:ind: discriminates   40 from 0 other words sharing the same lemme. A total of 40 words have this feature
+45. Feature:                  PRO:per: discriminates   35 from 0 other words sharing the same lemme. A total of 39 words have this feature
+46. Feature:                  ADJ:ind: discriminates   32 from 0 other words sharing the same lemme. A total of 32 words have this feature
+47. Feature:                  ADJ:pos: discriminates   30 from 0 other words sharing the same lemme. A total of 30 words have this feature
+48. Feature:                  PRO:pos: discriminates   23 from 0 other words sharing the same lemme. A total of 23 words have this feature
+49. Feature:                  PRO:rel: discriminates   17 from 0 other words sharing the same lemme. A total of 17 words have this feature
+50. Feature:                  PRO:int: discriminates   17 from 0 other words sharing the same lemme. A total of 17 words have this feature
+51. Feature:                  ART:def: discriminates    8 from 0 other words sharing the same lemme. A total of 8 words have this feature
+52. Feature:                  PRO:dem: discriminates    7 from 0 other words sharing the same lemme. A total of 9 words have this feature
+53. Feature:                  ART:ind: discriminates    4 from 0 other words sharing the same lemme. A total of 4 words have this feature
+54. Feature:                  ADJ:dem: discriminates    4 from 0 other words sharing the same lemme. A total of 4 words have this feature
+55. Feature:                  ADJ:int: discriminates    4 from 0 other words sharing the same lemme. A total of 4 words have this feature
+56. Feature:          indicatif:nbr_p: discriminates 22793 from 0 other words sharing the same lemme. A total of 26205 words have this feature
+57. Feature:         indicatif:pers_2: discriminates 15241 from 0 other words sharing the same lemme. A total of 15992 words have this feature
+58. Feature:         indicatif:pers_1: discriminates 15094 from 0 other words sharing the same lemme. A total of 15734 words have this feature
+59. Feature:            présent:nbr_p: discriminates 14322 from 0 other words sharing the same lemme. A total of 14636 words have this feature
+60. Feature:         indicatif:pers_3: discriminates 12539 from 0 other words sharing the same lemme. A total of 24181 words have this feature
+61. Feature:          indicatif:nbr_s: discriminates 10521 from 0 other words sharing the same lemme. A total of 24512 words have this feature
+62. Feature:           présent:pers_1: discriminates 10313 from 0 other words sharing the same lemme. A total of 10688 words have this feature
+63. Feature:           présent:pers_2: discriminates 8502 from 0 other words sharing the same lemme. A total of 13613 words have this feature
+64. Feature:              passé:nbr_p: discriminates 7106 from 0 other words sharing the same lemme. A total of 7180 words have this feature
+65. Feature:          imparfait:nbr_p: discriminates 6216 from 0 other words sharing the same lemme. A total of 6356 words have this feature
+66. Feature:         impératif:pers_2: discriminates 5378 from 0 other words sharing the same lemme. A total of 5543 words have this feature
+67. Feature:             passé:pers_3: discriminates 5207 from 0 other words sharing the same lemme. A total of 5273 words have this feature
+68. Feature:        subjonctif:pers_2: discriminates 5206 from 0 other words sharing the same lemme. A total of 5244 words have this feature
+69. Feature:         subjonctif:nbr_p: discriminates 5163 from 0 other words sharing the same lemme. A total of 5215 words have this feature
+70. Feature:        subjonctif:pers_1: discriminates 4910 from 0 other words sharing the same lemme. A total of 4935 words have this feature
+71. Feature:             passé:pers_2: discriminates 4774 from 0 other words sharing the same lemme. A total of 5043 words have this feature
+72. Feature:          impératif:nbr_p: discriminates 4249 from 0 other words sharing the same lemme. A total of 4325 words have this feature
+73. Feature:            future:pers_3: discriminates 4077 from 0 other words sharing the same lemme. A total of 4151 words have this feature
+74. Feature:         imparfait:pers_1: discriminates 4021 from 0 other words sharing the same lemme. A total of 4103 words have this feature
+75. Feature:              passé:nbr_s: discriminates 3750 from 0 other words sharing the same lemme. A total of 5834 words have this feature
+76. Feature:       conditionnel:nbr_p: discriminates 3666 from 0 other words sharing the same lemme. A total of 3753 words have this feature
+77. Feature:            future:pers_1: discriminates 3352 from 0 other words sharing the same lemme. A total of 3442 words have this feature
+78. Feature:         imparfait:pers_2: discriminates 3148 from 0 other words sharing the same lemme. A total of 3237 words have this feature
+79. Feature:            future:pers_2: discriminates 2999 from 0 other words sharing the same lemme. A total of 3067 words have this feature
+80. Feature:             future:nbr_s: discriminates 2890 from 0 other words sharing the same lemme. A total of 5821 words have this feature
+81. Feature:          impératif:nbr_s: discriminates 2873 from 0 other words sharing the same lemme. A total of 2977 words have this feature
+82. Feature:             passé:pers_1: discriminates 2773 from 0 other words sharing the same lemme. A total of 2902 words have this feature
+83. Feature:      conditionnel:pers_1: discriminates 2736 from 0 other words sharing the same lemme. A total of 2802 words have this feature
+84. Feature:      conditionnel:pers_2: discriminates 2234 from 0 other words sharing the same lemme. A total of 2282 words have this feature
+85. Feature:             future:nbr_p: discriminates 2089 from 0 other words sharing the same lemme. A total of 4839 words have this feature
+86. Feature:           présent:pers_3: discriminates 1917 from 0 other words sharing the same lemme. A total of 14591 words have this feature
+87. Feature:         impératif:pers_1: discriminates 1759 from 0 other words sharing the same lemme. A total of 1759 words have this feature
+88. Feature:          imparfait:nbr_s: discriminates 1720 from 0 other words sharing the same lemme. A total of 6473 words have this feature
+89. Feature:            présent:nbr_s: discriminates 1551 from 0 other words sharing the same lemme. A total of 15211 words have this feature
+90. Feature:         imparfait:pers_3: discriminates 1196 from 0 other words sharing the same lemme. A total of 7152 words have this feature
+91. Feature:      conditionnel:pers_3: discriminates  853 from 0 other words sharing the same lemme. A total of 3917 words have this feature
+92. Feature:       conditionnel:nbr_s: discriminates  832 from 0 other words sharing the same lemme. A total of 4006 words have this feature
+93. Feature:        subjonctif:pers_3: discriminates  655 from 0 other words sharing the same lemme. A total of 8831 words have this feature
+94. Feature:         subjonctif:nbr_s: discriminates  268 from 0 other words sharing the same lemme. A total of 9285 words have this feature
+95. Feature:             pers_3:nbr_s: discriminates 16950 from 0 other words sharing the same lemme. A total of 17221 words have this feature
+96. Feature:             pers_3:nbr_p: discriminates 13492 from 0 other words sharing the same lemme. A total of 13742 words have this feature
+97. Feature:             pers_1:nbr_s: discriminates 12760 from 0 other words sharing the same lemme. A total of 13245 words have this feature
+98. Feature:             pers_2:nbr_p: discriminates 10365 from 0 other words sharing the same lemme. A total of 10729 words have this feature
+99. Feature:             pers_2:nbr_s: discriminates 8055 from 0 other words sharing the same lemme. A total of 13287 words have this feature
+100. Feature:             pers_1:nbr_p: discriminates 7234 from 0 other words sharing the same lemme. A total of 7571 words have this feature
+101. Feature:                  VER:m:s: discriminates 5029 from 0 other words sharing the same lemme. A total of 5072 words have this feature
+102. Feature:                  VER:f:s: discriminates 4857 from 0 other words sharing the same lemme. A total of 4858 words have this feature
+103. Feature:                  VER:m:p: discriminates 4814 from 0 other words sharing the same lemme. A total of 5091 words have this feature
+104. Feature:                  VER:f:p: discriminates 4759 from 0 other words sharing the same lemme. A total of 4760 words have this feature
+105. Feature:  indicatif:présent:nbr_p: discriminates 7694 from 0 other words sharing the same lemme. A total of 7830 words have this feature
+106. Feature:    indicatif:passé:nbr_p: discriminates 7106 from 0 other words sharing the same lemme. A total of 7180 words have this feature
+107. Feature:indicatif:imparfait:nbr_p: discriminates 6216 from 0 other words sharing the same lemme. A total of 6356 words have this feature
+108. Feature: impératif:présent:pers_2: discriminates 5378 from 0 other words sharing the same lemme. A total of 5543 words have this feature
+109. Feature:   indicatif:passé:pers_3: discriminates 5207 from 0 other words sharing the same lemme. A total of 5273 words have this feature
+110. Feature:subjonctif:présent:pers_2: discriminates 5206 from 0 other words sharing the same lemme. A total of 5244 words have this feature
+111. Feature: subjonctif:présent:nbr_p: discriminates 5163 from 0 other words sharing the same lemme. A total of 5215 words have this feature
+112. Feature: indicatif:présent:pers_1: discriminates 5090 from 0 other words sharing the same lemme. A total of 5294 words have this feature
+113. Feature:subjonctif:présent:pers_1: discriminates 4910 from 0 other words sharing the same lemme. A total of 4935 words have this feature
+114. Feature:   indicatif:passé:pers_2: discriminates 4774 from 0 other words sharing the same lemme. A total of 5043 words have this feature
+115. Feature: indicatif:présent:pers_2: discriminates 4671 from 0 other words sharing the same lemme. A total of 4900 words have this feature
+116. Feature:  impératif:présent:nbr_p: discriminates 4249 from 0 other words sharing the same lemme. A total of 4325 words have this feature
+117. Feature:  indicatif:future:pers_3: discriminates 4077 from 0 other words sharing the same lemme. A total of 4151 words have this feature
+118. Feature:indicatif:imparfait:pers_1: discriminates 4021 from 0 other words sharing the same lemme. A total of 4103 words have this feature
+119. Feature:    indicatif:passé:nbr_s: discriminates 3750 from 0 other words sharing the same lemme. A total of 5834 words have this feature
+120. Feature:conditionnel:présent:nbr_p: discriminates 3666 from 0 other words sharing the same lemme. A total of 3753 words have this feature
+121. Feature:  indicatif:future:pers_1: discriminates 3352 from 0 other words sharing the same lemme. A total of 3442 words have this feature
+122. Feature:indicatif:imparfait:pers_2: discriminates 3148 from 0 other words sharing the same lemme. A total of 3237 words have this feature
+123. Feature:  indicatif:future:pers_2: discriminates 2999 from 0 other words sharing the same lemme. A total of 3067 words have this feature
+124. Feature:   indicatif:future:nbr_s: discriminates 2890 from 0 other words sharing the same lemme. A total of 5821 words have this feature
+125. Feature:  impératif:présent:nbr_s: discriminates 2873 from 0 other words sharing the same lemme. A total of 2977 words have this feature
+126. Feature:   indicatif:passé:pers_1: discriminates 2773 from 0 other words sharing the same lemme. A total of 2902 words have this feature
+127. Feature:conditionnel:présent:pers_1: discriminates 2736 from 0 other words sharing the same lemme. A total of 2802 words have this feature
+128. Feature: indicatif:présent:pers_3: discriminates 2327 from 0 other words sharing the same lemme. A total of 7809 words have this feature
+129. Feature:  indicatif:présent:nbr_s: discriminates 2323 from 0 other words sharing the same lemme. A total of 6915 words have this feature
+130. Feature:conditionnel:présent:pers_2: discriminates 2234 from 0 other words sharing the same lemme. A total of 2282 words have this feature
+131. Feature:   indicatif:future:nbr_p: discriminates 2089 from 0 other words sharing the same lemme. A total of 4839 words have this feature
+132. Feature: impératif:présent:pers_1: discriminates 1759 from 0 other words sharing the same lemme. A total of 1759 words have this feature
+133. Feature:indicatif:imparfait:nbr_s: discriminates 1720 from 0 other words sharing the same lemme. A total of 6473 words have this feature
+134. Feature:indicatif:imparfait:pers_3: discriminates 1196 from 0 other words sharing the same lemme. A total of 7152 words have this feature
+135. Feature:conditionnel:présent:pers_3: discriminates  853 from 0 other words sharing the same lemme. A total of 3917 words have this feature
+136. Feature:conditionnel:présent:nbr_s: discriminates  832 from 0 other words sharing the same lemme. A total of 4006 words have this feature
+137. Feature:subjonctif:présent:pers_3: discriminates  655 from 0 other words sharing the same lemme. A total of 8831 words have this feature
+138. Feature: subjonctif:présent:nbr_s: discriminates  268 from 0 other words sharing the same lemme. A total of 9285 words have this feature
+139. Feature:   indicatif:pers_3:nbr_s: discriminates 13448 from 0 other words sharing the same lemme. A total of 13565 words have this feature
+140. Feature:   indicatif:pers_3:nbr_p: discriminates 10433 from 0 other words sharing the same lemme. A total of 10616 words have this feature
+141. Feature:   indicatif:pers_1:nbr_s: discriminates 9196 from 0 other words sharing the same lemme. A total of 9550 words have this feature
+142. Feature:   indicatif:pers_2:nbr_p: discriminates 9085 from 0 other words sharing the same lemme. A total of 9405 words have this feature
+143. Feature:     présent:pers_3:nbr_s: discriminates 7851 from 0 other words sharing the same lemme. A total of 8005 words have this feature
+144. Feature:     présent:pers_1:nbr_s: discriminates 6857 from 0 other words sharing the same lemme. A total of 7137 words have this feature
+145. Feature:     présent:pers_3:nbr_p: discriminates 6496 from 0 other words sharing the same lemme. A total of 6586 words have this feature
+146. Feature:   indicatif:pers_2:nbr_s: discriminates 6160 from 0 other words sharing the same lemme. A total of 6587 words have this feature
+147. Feature:   indicatif:pers_1:nbr_p: discriminates 5898 from 0 other words sharing the same lemme. A total of 6184 words have this feature
+148. Feature:  subjonctif:pers_3:nbr_s: discriminates 4702 from 0 other words sharing the same lemme. A total of 4703 words have this feature
+149. Feature:  subjonctif:pers_1:nbr_s: discriminates 4547 from 0 other words sharing the same lemme. A total of 4548 words have this feature
+150. Feature:  subjonctif:pers_2:nbr_s: discriminates 4544 from 0 other words sharing the same lemme. A total of 4544 words have this feature
+151. Feature:     présent:pers_2:nbr_p: discriminates 4388 from 0 other words sharing the same lemme. A total of 4499 words have this feature
+152. Feature:     présent:pers_2:nbr_s: discriminates 4139 from 0 other words sharing the same lemme. A total of 9114 words have this feature
+153. Feature:  subjonctif:pers_3:nbr_p: discriminates 4128 from 0 other words sharing the same lemme. A total of 4128 words have this feature
+154. Feature:   imparfait:pers_3:nbr_s: discriminates 3933 from 0 other words sharing the same lemme. A total of 3933 words have this feature
+155. Feature:       passé:pers_2:nbr_p: discriminates 3852 from 0 other words sharing the same lemme. A total of 3852 words have this feature
+156. Feature:     présent:pers_1:nbr_p: discriminates 3477 from 0 other words sharing the same lemme. A total of 3551 words have this feature
+157. Feature:   imparfait:pers_3:nbr_p: discriminates 3219 from 0 other words sharing the same lemme. A total of 3219 words have this feature
+158. Feature:       passé:pers_3:nbr_s: discriminates 3145 from 0 other words sharing the same lemme. A total of 3145 words have this feature
+159. Feature:   impératif:pers_2:nbr_s: discriminates 2873 from 0 other words sharing the same lemme. A total of 2977 words have this feature
+160. Feature:   impératif:pers_2:nbr_p: discriminates 2565 from 0 other words sharing the same lemme. A total of 2566 words have this feature
+161. Feature:   imparfait:pers_1:nbr_s: discriminates 2480 from 0 other words sharing the same lemme. A total of 2480 words have this feature
+162. Feature:      future:pers_3:nbr_s: discriminates 2342 from 0 other words sharing the same lemme. A total of 2342 words have this feature
+163. Feature:conditionnel:pers_3:nbr_s: discriminates 2259 from 0 other words sharing the same lemme. A total of 2259 words have this feature
+164. Feature:       passé:pers_3:nbr_p: discriminates 2128 from 0 other words sharing the same lemme. A total of 2128 words have this feature
+165. Feature:      future:pers_1:nbr_s: discriminates 1933 from 0 other words sharing the same lemme. A total of 1933 words have this feature
+166. Feature:      future:pers_3:nbr_p: discriminates 1809 from 0 other words sharing the same lemme. A total of 1809 words have this feature
+167. Feature:   impératif:pers_1:nbr_p: discriminates 1759 from 0 other words sharing the same lemme. A total of 1759 words have this feature
+168. Feature:   imparfait:pers_2:nbr_s: discriminates 1723 from 0 other words sharing the same lemme. A total of 1723 words have this feature
+169. Feature:conditionnel:pers_1:nbr_s: discriminates 1689 from 0 other words sharing the same lemme. A total of 1689 words have this feature
+170. Feature:conditionnel:pers_3:nbr_p: discriminates 1658 from 0 other words sharing the same lemme. A total of 1658 words have this feature
+171. Feature:       passé:pers_1:nbr_s: discriminates 1652 from 0 other words sharing the same lemme. A total of 1702 words have this feature
+172. Feature:   imparfait:pers_1:nbr_p: discriminates 1623 from 0 other words sharing the same lemme. A total of 1623 words have this feature
+173. Feature:      future:pers_2:nbr_s: discriminates 1546 from 0 other words sharing the same lemme. A total of 1546 words have this feature
+174. Feature:      future:pers_2:nbr_p: discriminates 1521 from 0 other words sharing the same lemme. A total of 1521 words have this feature
+175. Feature:   imparfait:pers_2:nbr_p: discriminates 1514 from 0 other words sharing the same lemme. A total of 1514 words have this feature
+176. Feature:      future:pers_1:nbr_p: discriminates 1509 from 0 other words sharing the same lemme. A total of 1509 words have this feature
+177. Feature:conditionnel:pers_2:nbr_s: discriminates 1300 from 0 other words sharing the same lemme. A total of 1300 words have this feature
+178. Feature:       passé:pers_1:nbr_p: discriminates 1200 from 0 other words sharing the same lemme. A total of 1200 words have this feature
+179. Feature:conditionnel:pers_1:nbr_p: discriminates 1113 from 0 other words sharing the same lemme. A total of 1113 words have this feature
+180. Feature:conditionnel:pers_2:nbr_p: discriminates  982 from 0 other words sharing the same lemme. A total of 982 words have this feature
+181. Feature:       passé:pers_2:nbr_s: discriminates  922 from 0 other words sharing the same lemme. A total of 1191 words have this feature
+182. Feature:  subjonctif:pers_2:nbr_p: discriminates  700 from 0 other words sharing the same lemme. A total of 700 words have this feature
+183. Feature:  subjonctif:pers_1:nbr_p: discriminates  387 from 0 other words sharing the same lemme. A total of 387 words have this feature
+184. Feature:subjonctif:présent:pers_3:nbr_s: discriminates 4702 from 0 other words sharing the same lemme. A total of 4703 words have this feature
+185. Feature:subjonctif:présent:pers_1:nbr_s: discriminates 4547 from 0 other words sharing the same lemme. A total of 4548 words have this feature
+186. Feature:subjonctif:présent:pers_2:nbr_s: discriminates 4544 from 0 other words sharing the same lemme. A total of 4544 words have this feature
+187. Feature:indicatif:présent:pers_3:nbr_s: discriminates 4344 from 0 other words sharing the same lemme. A total of 4349 words have this feature
+188. Feature:subjonctif:présent:pers_3:nbr_p: discriminates 4128 from 0 other words sharing the same lemme. A total of 4128 words have this feature
+189. Feature:indicatif:imparfait:pers_3:nbr_s: discriminates 3933 from 0 other words sharing the same lemme. A total of 3933 words have this feature
+190. Feature:indicatif:passé:pers_2:nbr_p: discriminates 3852 from 0 other words sharing the same lemme. A total of 3852 words have this feature
+191. Feature:indicatif:présent:pers_3:nbr_p: discriminates 3460 from 0 other words sharing the same lemme. A total of 3460 words have this feature
+192. Feature:indicatif:présent:pers_1:nbr_s: discriminates 3291 from 0 other words sharing the same lemme. A total of 3442 words have this feature
+193. Feature:indicatif:imparfait:pers_3:nbr_p: discriminates 3219 from 0 other words sharing the same lemme. A total of 3219 words have this feature
+194. Feature:indicatif:passé:pers_3:nbr_s: discriminates 3145 from 0 other words sharing the same lemme. A total of 3145 words have this feature
+195. Feature:impératif:présent:pers_2:nbr_s: discriminates 2873 from 0 other words sharing the same lemme. A total of 2977 words have this feature
+196. Feature:impératif:présent:pers_2:nbr_p: discriminates 2565 from 0 other words sharing the same lemme. A total of 2566 words have this feature
+197. Feature:indicatif:présent:pers_2:nbr_p: discriminates 2517 from 0 other words sharing the same lemme. A total of 2518 words have this feature
+198. Feature:indicatif:imparfait:pers_1:nbr_s: discriminates 2480 from 0 other words sharing the same lemme. A total of 2480 words have this feature
+199. Feature:indicatif:future:pers_3:nbr_s: discriminates 2342 from 0 other words sharing the same lemme. A total of 2342 words have this feature
+200. Feature:conditionnel:présent:pers_3:nbr_s: discriminates 2259 from 0 other words sharing the same lemme. A total of 2259 words have this feature
+201. Feature:indicatif:présent:pers_2:nbr_s: discriminates 2254 from 0 other words sharing the same lemme. A total of 2382 words have this feature
+202. Feature:indicatif:passé:pers_3:nbr_p: discriminates 2128 from 0 other words sharing the same lemme. A total of 2128 words have this feature
+203. Feature:indicatif:future:pers_1:nbr_s: discriminates 1933 from 0 other words sharing the same lemme. A total of 1933 words have this feature
+204. Feature:indicatif:présent:pers_1:nbr_p: discriminates 1852 from 0 other words sharing the same lemme. A total of 1852 words have this feature
+205. Feature:indicatif:future:pers_3:nbr_p: discriminates 1809 from 0 other words sharing the same lemme. A total of 1809 words have this feature
+206. Feature:impératif:présent:pers_1:nbr_p: discriminates 1759 from 0 other words sharing the same lemme. A total of 1759 words have this feature
+207. Feature:indicatif:imparfait:pers_2:nbr_s: discriminates 1723 from 0 other words sharing the same lemme. A total of 1723 words have this feature
+208. Feature:conditionnel:présent:pers_1:nbr_s: discriminates 1689 from 0 other words sharing the same lemme. A total of 1689 words have this feature
+209. Feature:conditionnel:présent:pers_3:nbr_p: discriminates 1658 from 0 other words sharing the same lemme. A total of 1658 words have this feature
+210. Feature:indicatif:passé:pers_1:nbr_s: discriminates 1652 from 0 other words sharing the same lemme. A total of 1702 words have this feature
+211. Feature:indicatif:imparfait:pers_1:nbr_p: discriminates 1623 from 0 other words sharing the same lemme. A total of 1623 words have this feature
+212. Feature:indicatif:future:pers_2:nbr_s: discriminates 1546 from 0 other words sharing the same lemme. A total of 1546 words have this feature
+213. Feature:indicatif:future:pers_2:nbr_p: discriminates 1521 from 0 other words sharing the same lemme. A total of 1521 words have this feature
+214. Feature:indicatif:imparfait:pers_2:nbr_p: discriminates 1514 from 0 other words sharing the same lemme. A total of 1514 words have this feature
+215. Feature:indicatif:future:pers_1:nbr_p: discriminates 1509 from 0 other words sharing the same lemme. A total of 1509 words have this feature
+216. Feature:conditionnel:présent:pers_2:nbr_s: discriminates 1300 from 0 other words sharing the same lemme. A total of 1300 words have this feature
+217. Feature:indicatif:passé:pers_1:nbr_p: discriminates 1200 from 0 other words sharing the same lemme. A total of 1200 words have this feature
+218. Feature:conditionnel:présent:pers_1:nbr_p: discriminates 1113 from 0 other words sharing the same lemme. A total of 1113 words have this feature
+219. Feature:conditionnel:présent:pers_2:nbr_p: discriminates  982 from 0 other words sharing the same lemme. A total of 982 words have this feature
+220. Feature:indicatif:passé:pers_2:nbr_s: discriminates  922 from 0 other words sharing the same lemme. A total of 1191 words have this feature
+221. Feature:subjonctif:présent:pers_2:nbr_p: discriminates  700 from 0 other words sharing the same lemme. A total of 700 words have this feature
+222. Feature:subjonctif:présent:pers_1:nbr_p: discriminates  387 from 0 other words sharing the same lemme. A total of 387 words have this feature
+=== Confirmed candidates (dry-run, no files modified) ===
+
+=== Summary ===
+Undersampled VER lemmas confirmed to cause a new discriminator collision: 0
+Candidate rows confirmed: 0
+Lemmas/candidates skipped (see reasons): 5318
+  dépiler: no attested past-participle form to splice phonology from
+  dépiler: ind:pre:1s has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:pre:2s has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:pre:3s has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:pre:1p has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:pre:2p has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:pre:3p has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:imp:1s has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:imp:2s has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:imp:3s has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:imp:1p has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:imp:2p has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:imp:3p has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:fut:1s has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:fut:2s has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:fut:3s has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:fut:1p has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:fut:2p has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:fut:3p has no template ending or no confident-enough empirical phonology for template aim:er
+  dépiler: ind:pas:1s has no template ending or no confident-enough empirical phonology for template aim:er
+  ... and 5298 more
+
+--apply: appended 0 rows to resources/LexiqueSynthetic.tsv
+NOTE: resources/LexiqueSynthetic.tsv is not yet merged into LexiqueMixte.tsv by lexique.py -- this file alone does not yet affect the rest of the pipeline.
+
+=== Synthetic Lexicon Building (S2): Synthetic Lexicon Building (S2.2): NOM/ADJ gap generation ===
+$ /home/jfsp/stenalgo/env/bin/python -m util.generateMissingNomAdjForms --apply
+Loading Morphalou from morphalou/Morphalou3.1_CSV.csv ...
+Indexed 138105 NOM/ADJ lemma groups from Morphalou.
+
+Generated: 0
+Skipped (not generated (morphalou_no_phon)): 10395
+Skipped (suspected invariable (s/x/z NOM plural, or invariant ADJ gender ending)): 2990
+Skipped (not generated (none)): 1921
+Skipped (ortho already exists (likely a tag gap, not a missing form)): 1829
+Skipped (not generated (exception_override)): 46
+Skipped (exception: invariable): 8
+
+=== Synthetic Lexicon Building (S2): Synthetic Lexicon Building (S2.3): pa:yer dual-form gaps ===
+$ /home/jfsp/stenalgo/env/bin/python -m util.fixPayerDualFormGaps --apply
+pa:yer-family lemmas: 34  (with attested infinitive: 26)
+Dual-form slots per lemma: 21
+
+=== Generated candidates (0) ===
+
+=== Skipped (0) ===
+
+--apply: appended 0 rows to resources/LexiqueSynthetic.tsv
+
+=== Synthetic Lexicon Building (S2): Synthetic Lexicon Building (S2.3): ass:eoir dual-form gaps ===
+$ /home/jfsp/stenalgo/env/bin/python -m util.fixAsseoirDualFormGaps --apply
+ass:eoir-family lemmas: 2  (with attested infinitive: 2)
+Multi-alternative slots per lemma: 35
+
+=== Generated candidates (0) ===
+
+=== Skipped (21) ===
+  asseoir ind:pre:1p ('asseyons'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  asseoir ind:pre:2p ('asseyez'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  asseoir ind:pre:3p ('asseyent'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  asseoir ind:imp:1s ('asseyais'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  asseoir ind:imp:2s ('asseyais'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  asseoir ind:imp:3s ('asseyait'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  asseoir ind:imp:1p ('asseyions'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  asseoir ind:imp:2p ('asseyiez'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  asseoir ind:imp:3p ('asseyaient'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  asseoir sub:pre:1s ('asseye'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  asseoir sub:pre:2s ('asseyes'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  asseoir sub:pre:3s ('asseye'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  asseoir imp:pre:1p ('asseyons'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  asseoir imp:pre:2p ('asseyez'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  rasseoir ind:pre:1p ('rasseyons'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  rasseoir ind:pre:2p ('rasseyez'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  rasseoir ind:pre:3p ('rasseyent'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  rasseoir ind:imp:1s ('rasseyais'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  rasseoir ind:imp:3s ('rasseyait'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  rasseoir ind:imp:3p ('rasseyaient'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+  rasseoir imp:pre:2p ('rasseyez'): phon: no confident donor ending (matchRate=0.00, donors=0); syll_cv: no confident donor ending (matchRate=0.00, donors=0); orthosyll_cv: no confident donor ending (matchRate=0.00, donors=0)
+
+--apply: appended 0 rows to resources/LexiqueSynthetic.tsv
+
+Synthetic Lexicon Building (S2) converged after 1 round(s) (the last round appended nothing).
+
+LexiqueSynthetic.tsv unchanged -- keeping the existing pickles (if you edited the lexicons or layout since they were written, `rm -f Dictionary.pickle PhoneticTheory.pickle` and re-run).
+[timing] Synthetic Lexicon Building (S2), converged: 74.3 s
+
+=== stenalgo pipeline: Discriminating-Feature Elicitation (Elicitation Phase) ===
+$ /home/jfsp/stenalgo/env/bin/python -m src.elicitation
+=== Phase E3 scale report ===
+Same-lemma homophone groups (size > 1): 49772
+  ...with >= 2 distinct spellings:      49771
+Total cross-spelling combination pairs: 206963
+Distinct feature oppositions (questions): 200
+Tie oppositions (identical combinations, unresolvable by any marker): 0
+Max combination compound size:          5
+Markers ever pressed together (pairs):  71
+Singleton-opposition atom pairs:        1
+Greedy-coloring K lower bound, without pressed-together rule: 2
+Greedy-coloring K lower bound, with pressed-together rule:    6
+
+Questionnaire items: 200 (70 not fully clean)
+
+=== Phase E5 validation report ===
+Answered oppositions loaded:            200
+Duplicate oppositions (disagreeing answers for the same pair): 0
+Distinct unresolved oppositions encountered (groups containing them are skipped): 0
+Groups with a press-set conflict:                           0
+
+Wrote resolved_press_sets.json: 49771 validated groups (of 49771 resolved, 0 held back as conflicted)
+Wrote questionnaire.json
+[timing] Discriminating-Feature Elicitation (Elicitation Phase): 30.0 s
+
+=== stenalgo pipeline: Discriminating-Feature Grouping (Grouping Phase) ===
+$ /home/jfsp/stenalgo/env/bin/python -m util.build_keypress_groups
+Wrote keypress_groups.json: K=7, 0 conflicts (verified against 49771 groups), tier scores [1, 1, 0], 7 unpressable markers
+  0: ['conditionnel', 'infinitif']
+  1: ['f']
+  2: ['future', 'passé', 'pers_3']
+  3: ['imparfait', 'subjonctif']
+  4: ['impératif', 'pers_1']
+  5: ['nbr_p', 'p']
+  6: ['pers_2']
+[timing] Discriminating-Feature Grouping (Grouping Phase): 26.4 s
+
+=== stenalgo pipeline: Disambiguated theory refresh (S7 -> disambiguated_theory.tsv) ===
+$ /home/jfsp/stenalgo/env/bin/python -m util.build_disambiguated_theory
+[timing] util.build_disambiguated_theory: unpickle Dictionary + PhoneticTheory: 3.6 s
+[timing] util.build_disambiguated_theory: buildDisambiguatedTheory: 42.3 s
+[timing] util.build_disambiguated_theory: writeDisambiguatedTheory (disambiguated_theory.tsv): 2.1 s
+
+Wrote disambiguated_theory.tsv: 171448 words with disambiguated-theory (Phase P + */# track) strokes.
+Final-stroke collisions: 0 cross-lemma, 0 same-lemma residual (Realization Phase), 0 reform doublet (R2, exempted).
+[timing] Disambiguated theory refresh (S7 -> disambiguated_theory.tsv): 51.6 s
+
+=== stenalgo pipeline: Realization Phase report build ===
+$ /home/jfsp/stenalgo/env/bin/python -m util.build_realization_report
+Self-homograph spellings with extra reading(s) beyond their primary (e.g. "calmez"): 13163 words, 18788 extra strokes realized.
+Preferred key [18] for marker 'impératif': honored
+Preferred key [19] for marker 'pers_2': honored
+Preferred key [20] for marker 'pers_3': honored
+Wrote realization_report.json: 7/7 keypress groups realized (0 residual theory collisions, 0 residual same-lemmeGramCat collisions [Phase P's own job], 37 cross-category clashes [out of scope, aller-style], 1262 cross-lemma collisions [out of scope, */# track's job]).
+  group 0 ['conditionnel', 'infinitif']: 3990 words -> keys [23] (cost 106)
+  group 1 ['f']: 15747 words -> keys [16] (cost 91)
+  group 2 ['future', 'passé', 'pers_3']: 12496 words -> keys [20] (cost 187)
+  group 3 ['imparfait', 'subjonctif']: 5815 words -> keys [21] (cost 125)
+  group 4 ['impératif', 'pers_1']: 7889 words -> keys [18] (cost 106)
+  group 5 ['nbr_p', 'p']: 51797 words -> keys [17] (cost 85)
+  group 6 ['pers_2']: 8159 words -> keys [19] (cost 106)
+[timing] Realization Phase report build: 41.3 s
+
+=== stenalgo pipeline: Theory Export (S8): Plover dictionary ===
+$ /home/jfsp/stenalgo/env/bin/python -m util.export_plover_dictionary
+Wrote plover_stenalgo_dictionary.json: 171586 strokes. Collisions (different spellings on one steno, the most frequent kept): 0 cross-lemma, 0 same-lemma residual, 0 reform doublet (R2).
+[timing] Theory Export (S8): Plover dictionary: 52.6 s
+
+=== stenalgo pipeline: Theory Export (S8): Plover key table ===
+$ /home/jfsp/stenalgo/env/bin/python -m util.export_plover_system
+Wrote plover_stenalgo/plover_stenalgo/_generated_keys.py (26 keys).
+[timing] Theory Export (S8): Plover key table: 0.1 s
+
+=== stenalgo pipeline: Theory Export (S8): trainer keyboard layout ===
+$ /home/jfsp/stenalgo/env/bin/python -m util.export_keyboard_layout
+Wrote steno-trainer/public/data/keyboard-layout.json: 26 keys.
+[timing] Theory Export (S8): trainer keyboard layout: 0.0 s
+
+=== stenalgo pipeline: Theory Export (S8): trainer word drills ===
+$ /home/jfsp/stenalgo/env/bin/python -m util.export_practice_words
+Wrote steno-trainer/public/data/practice-words.json: 10000 drill items (0 words whose resolved readings didn't line up with their strokes -- labelled with all of the word's readings instead).
+[timing] Theory Export (S8): trainer word drills: 61.2 s
+
+=== stenalgo pipeline: Theory Export (S8): trainer sentences ===
+$ /home/jfsp/stenalgo/env/bin/python -m util.export_practice_sentences
+Wrote steno-trainer/public/data/practice-sentences.json: 217 sentences (59 of 276 distinct candidates rejected).
+[timing] Theory Export (S8): trainer sentences: 55.7 s
+
+=== stenalgo pipeline: Theory Export (S8): trainer definitions ===
+$ /home/jfsp/stenalgo/env/bin/python -m util.export_definitions
+Wrote steno-trainer/public/data/definitions.json: 171264 words in 79337 base-chord groups, 168 distinct labels.
+[timing] Theory Export (S8): trainer definitions: 57.8 s
+
+stenalgo pipeline complete: phonetic theory (pickles + phonetic_theory.tsv), LexiqueSynthetic.tsv, resolved_press_sets.json, keypress_groups.json, realization_report.json, disambiguated_theory.tsv, the Plover outputs and the four steno-trainer exports are up to date.
+[timing] orchestrated run: 572.8 s

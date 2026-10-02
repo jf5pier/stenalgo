@@ -1,0 +1,24 @@
+records 1.091862678527832
+1751 legal keypresses
+engine 1.0143604278564453
+[(97.6, 'a|ah|ha|hah|hâ|â', 6, 10978), (78.6, 'a', 6, 10310), (82.3, 'man|mand|mant|ment|ments|mmant', 6, 2909), (71.0, 'co+col+com+con+cor', 6, 6182), (78.6, 'ment', 6, 2724), (62.7, 'am|an|ant|em|en|ench|enh|ham|h', 6, 6891)]
+Tue Sep 29 15:16:14 2026    scratch/prof2.out
+
+         589828052 function calls (588680666 primitive calls) in 471.009 seconds
+
+   Ordered by: internal time
+   List reduced from 60 to 10 due to restriction <10>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    10516  164.114    0.016  440.260    0.042 /home/jfsp/stenalgo/src/affixes.py:1469(simulate)
+ 21040165   64.102    0.000  126.903    0.000 /home/jfsp/stenalgo/src/affixes.py:1420(_newBase)
+ 65660497   35.331    0.000   35.331    0.000 {method 'get' of 'dict' objects}
+ 14318719   24.388    0.000   26.027    0.000 /home/jfsp/stenalgo/src/affixes.py:1456(hasBoundaryRisk)
+ 21040165   20.530    0.000   20.530    0.000 <string>:2(__init__)
+   984336   19.675    0.000   33.273    0.000 /home/jfsp/stenalgo/src/keyboard.py:546(getStrokeCost)
+ 30144858   14.734    0.000   36.604    0.000 /home/jfsp/stenalgo/src/affixes.py:1375(markCostForCluster)
+112172675   13.931    0.000   13.931    0.000 {built-in method builtins.len}
+ 15048911   12.626    0.000   17.863    0.000 /home/jfsp/stenalgo/src/ambiguitychecker.py:273(assignStarHashCombos)
+ 32127936   12.165    0.000   15.569    0.000 {built-in method builtins.sorted}
+
+

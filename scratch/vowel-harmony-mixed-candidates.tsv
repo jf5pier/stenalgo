@@ -1,0 +1,620 @@
+lemme	position	ortho_unit	pair	lax_rows	tense_rows	class	lax_next	tense_next	minority	majority	lemma_form_vowel	wikt_ipa	wikt_vowel	verdict
+boeuf	1	oeu	9/2	2	1	mixed	-2	-1	tense: boeufs	boeuf	9	bœf	9	fix-minority
+oeuf	0	oeu	9/2	1	1	mixed	-1	-1	tense: oeufs	oeuf	9	œf	9	fix-minority
+agresseur	3	e	E/e	2	2	mixed	92	92	tense: agresseurs	agresseur	E	a.ɡʁɛ.sœʁ	E	fix-minority
+agressif	3	e	E/e	2	2	mixed	i2	i2	tense: agressifs agressives	agressif agressive	E	a.ɡʁɛ.sif	E	fix-minority
+agression	3	e	E/e	1	1	mixed	§1	§1	tense: agressions	agression	E	a.ɡʁe.sjɔ̃	e	fix-minority
+antidépresseur	7	e	E/e	2	2	mixed	92	92	tense: antidépresseur	antidépresseurs	e	ɑ̃.ti.de.pʁɛ.sœʁ	E	fix-minority
+aquarelliste	4	e	E/e	1	1	mixed	i1	i1	tense: aquarelliste	aquarellistes	e	a.kwa.ʁe.list	e	fix-minority
+autonettoyant	4	e	E/e	1	1	mixed	@1	@1	tense: autonettoyante	autonettoyant	E	o.to.ne.twa.jɑ̃	e	fix-minority
+becquet	1	e	E/e	1	1	mixed	E1	E1	tense: becquet	becquets	e	bɛ.kɛ	E	fix-minority
+cannelloni	3	e	E/e	1	1	mixed	o1	o1	tense: cannelloni	cannellonis	e	ka.nɛ.lo.ni	E	fix-minority
+caressant	3	e	E/e	2	2	mixed	@2	@2	tense: caressantes caressants	caressant caressante	E	ka.ʁɛ.sɑ̃	E	fix-minority
+condescendant	3	e	E/e	1	2	mixed	@1	@2	lax: condescendants	condescendant condescendante	e	kɔ̃.de.sɑ̃.dɑ̃	e	fix-minority
+convalescent	5	e	E/e	3	3	mixed	@3	@3	tense: convalescent convalescente	convalescentes convalescents	e	kɔ̃.va.le.sɑ̃	e	fix-minority
+cressonnière	2	e	E/e	1	1	mixed	o1	o1	tense: cressonnière	cressonnières	e	kʁe.sɔ.njɛʁ	e	fix-minority
+dilettante	3	e	E/e	2	2	mixed	@2	@2	tense: dilettante	dilettantes	e	di.lɛ.tɑ̃t	E	fix-minority
+dilettantisme	3	e	E/e	1	1	mixed	@1	@1	tense: dilettantisme	dilettantismes	e	di.lɛ.tɑ̃.tism	E	fix-minority
+décennal	3	e	E/e	1	1	mixed	a1	a1	tense: décennal	décennale	e	décenn	e	fix-minority
+dépressif	4	e	E/e	3	3	mixed	i3	i3	tense: dépressif dépressive	dépressifs dépressives	e	de.pʁɛ.sif	E	fix-minority
+détection	3	e	E/e	1	1	mixed	§1	§1	tense: détections	détection	E	de.tɛk.sjɔ̃	E	fix-minority
+effervescence	5	e	E/e	1	1	mixed	@1	@1	tense: effervescence	effervescences	e	e.fɛʁ.vɛ.sɑ̃s	E	fix-minority
+effervescent	5	e	E/e	2	2	mixed	@2	@2	tense: effervescent effervescente	effervescentes effervescents	e	e.fɛʁ.ve.sɑ̃	e	fix-minority
+empierré	3	e	E/e	2	2	mixed	e2	e2	tense: empierrées empierrés	empierré empierrée	E	ɑ̃.pjɛ.ʁe	E	fix-minority
+erratum	0	e	E/e	1	1	mixed	a1	a1	tense: erratum	errata	e	ɛ.ʁa.tɔm	E	fix-minority
+essaim	0	e	E/e	1	1	mixed	51	51	tense: essaim	essaims	e	e.sɛ̃	e	fix-minority
+esseulé	0	e	E/e	2	2	mixed	92	92	tense: esseulé esseulée	esseulées esseulés	e	e.sœ.le	e	fix-minority
+essuyage	0	e	E/e	1	1	mixed	81	81	tense: essuyage	essuyages	e	e.sɥi.jaʒ	e	fix-minority
+excellence	3	e	E/e	1	1	mixed	@1	@1	tense: excellences	excellence	E	ɛk.se.lɑ̃s	e	fix-minority
+excellent	0	e	E/e	3	1	mixed	E2,e1	E1	tense: excellent	excellente excellentes excellents	e	ɛk.sɛ.lɑ̃	E	fix-minority
+excellent	3	e	E/e	3	1	mixed	@3	@1	tense: excellentes	excellent excellente excellents	E	ɛk.sɛ.lɑ̃	E	fix-minority
+exception	0	e	E/e	1	1	mixed	E1	E1	tense: exceptions	exception	E	ɛk.sɛp.sjɔ̃	E	fix-minority
+excrétion	0	e	E/e	1	1	mixed	e1	e1	tense: excrétions	excrétion	E	ɛks.kʁe.sjɔ̃	E	fix-minority
+exemption	0	e	E/e	1	1	mixed	@1	@1	tense: exemptions	exemption	E	ɛɡ.zɑ̃p.sjɔ̃	E	fix-minority
+expression	4	e	E/e	1	1	mixed	§1	§1	tense: expressions	expression	E	ɛk.spʁɛ.sjɔ̃	E	fix-minority
+exécution	0	e	E/e	1	1	mixed	e1	e1	tense: exécutions	exécution	E	ɛɡ.ze.ky.sjɔ̃	E	fix-minority
+fessier	1	e	E/e	5	1	mixed	E1,e4	E1	tense: fessière	fessier fessiers fessières	E	fɛ.sje	E	fix-minority
+flagellation	4	e	E/e	1	1	mixed	a1	a1	tense: flagellations	flagellation	E	fla.ʒɛl.la.sjɔ̃	E	fix-minority
+impressionniste	3	e	E/e	2	2	mixed	o2	o2	tense: impressionniste	impressionnistes	e	ɛ̃.pʁɛ.sjɔ.nist	E	fix-minority
+incandescence	4	e	E/e	1	1	mixed	@1	@1	tense: incandescence	incandescences	e	ɛ̃.kɑ̃.de.sɑ̃s	e	fix-minority
+ineffable	2	e	E/e	1	1	mixed	a1	a1	tense: ineffable	ineffables	e	i.nɛ.fabl	E	fix-minority
+ineffaçable	2	e	E/e	1	1	mixed	a1	a1	tense: ineffaçable	ineffaçables	e	i.ne.fa.sabl	e	fix-minority
+inintelligent	4	e	E/e	1	1	mixed	i1	i1	tense: inintelligent	inintelligents	e	i.nɛ̃.te.li.ʒɑ̃	e	fix-minority
+interception	5	e	E/e	1	1	mixed	§1	§1	tense: interceptions	interception	E	ɛ̃.tɛʁ.sɛp.sjɔ̃	E	fix-minority
+interjection	5	e	E/e	1	1	mixed	§1	§1	tense: interjections	interjection	E	ɛ̃.tɛʁ.ʒɛk.sjɔ̃	E	fix-minority
+introspection	6	e	E/e	1	1	mixed	§1	§1	tense: introspections	introspection	E	ɛ̃.tʁɔ.spɛk.sjɔ̃	E	fix-minority
+lego	1	e	E/e	1	1	mixed	o1	o1	tense: lego	legos	e	le.go	e	fix-minority
+libellule	3	e	E/e	1	1	mixed	y1	y1	tense: libellule	libellules	e	li.be.lyl	e	fix-minority
+maquettiste	3	e	E/e	1	1	mixed	i1	i1	tense: maquettiste	maquettistes	e	ma.kɛ.tist	E	fix-minority
+paresseux	3	e	E/e	4	2	mixed	24	22	tense: paresseuses	paresseuse paresseux	E	pa.ʁɛ.sø	E	fix-minority
+pessimiste	1	e	E/e	2	2	mixed	i2	i2	tense: pessimiste	pessimistes	e	pe.si.mist	e	fix-minority
+pierreux	2	e	E/e	2	1	mixed	22	21	tense: pierreuses	pierreuse pierreux	E	pjɛ.ʁø	E	fix-minority
+pierrot	2	e	E/e	1	1	mixed	o1	o1	tense: pierrots	pierrot	E	pje.ʁo	e	fix-minority
+pressé	2	e	E/e	4	4	mixed	e4	e4	tense: pressée pressées	pressé pressés	E	pʁe.se	e	fix-minority
+processeur	4	e	E/e	1	1	mixed	91	91	tense: processeur	processeurs	e	pʁɔ.sɛ.sœʁ	E	fix-minority
+quintessencié	3	e	E/e	1	2	mixed	@1	@2	lax: quintessenciées	quintessencié quintessenciée	e	kɛ̃.te.sɑ̃.sje	e	fix-minority
+surimpression	6	e	E/e	1	1	mixed	§1	§1	tense: surimpression	surimpressions	e	sy.ʁɛ̃.pʁɛ.sjɔ̃	E	fix-minority
+touareg	4	e	E/e	2	2	mixed	-2	-2	tense: touareg	touaregs	e	twa.ʁɛɡ	E	fix-minority
+trompettiste	4	e	E/e	1	1	mixed	i1	i1	tense: trompettiste	trompettistes	e	tʁɔ̃.pɛ.tist	E	fix-minority
+turbocompresseur	9	e	E/e	1	1	mixed	91	91	tense: turbocompresseur	turbocompresseurs	e	tyʁ.bo.kɔ̃.pʁɛ.sœʁ	E	fix-minority
+anabolisant	4	o	O/o	2	2	mixed	i2	i2	tense: anabolisants	anabolisant	O	a.na.bɔ.li.zɑ̃	O	fix-minority
+antiproton	5	o	O/o	1	1	mixed	§1	§1	tense: antiprotons	antiproton	O	ɑ̃.ti.pʁɔ.tɔ̃	O	fix-minority
+antipsychotique	7	o	O/o	2	2	mixed	i2	i2	tense: antipsychotiques	antipsychotique	O	ɑ̃.ti.psi.kɔ.tik	O	fix-minority
+appoggiature	2	o	O/o	1	1	mixed	a1	a1	tense: appoggiatures	appoggiature	O	a.pɔ.ʒja.tyʁ	O	fix-minority
+audition	0	au	O/o	1	1	mixed	i1	i1	tense: audition	auditions	o	o.di.sjɔ̃	o	fix-minority
+bibliographique	5	o	O/o	1	1	mixed	a1	a1	tense: bibliographiques	bibliographique	O	bi.bli.jɔ.ɡʁa.fik	O	fix-minority
+bidonnant	3	o	O/o	1	1	mixed	@1	@1	tense: bidonnant	bidonnante	o	bi.dɔ.nɑ̃	O	fix-minority
+bistrot	5	o	O/o	1	2	mixed	-1	-2	lax: bistrote	bistrot bistrots	o	bis.tʁo	o	fix-minority
+boggie	1	o	O/o	1	1	mixed	i1	i1	tense: boggie	boggies	o	bɔ.ʒi	O	fix-minority
+bonnette	1	o	O/o	1	1	mixed	E1	E1	tense: bonnettes	bonnette	O	bɔ.nɛt	O	fix-minority
+bot	1	o	O/o	1	1	mixed	-1	-1	tense: bot	bote	o	bo	o	fix-minority
+boulot	3	o	O/o	2	4	mixed	-2	-4	lax: boulotte boulottes	boulot boulots	o	bu.lo	o	fix-minority
+cagot	3	o	O/o	2	3	mixed	-2	-3	lax: cagote cagotes	cagot cagots	o	ka.ɡo	o	fix-minority
+cancérologue	5	o	O/o	1	1	mixed	O1	O1	tense: cancérologues	cancérologue	O	kɑ̃.se.ʁɔ.lɔɡ	O	fix-minority
+chicot	3	o	O/o	1	2	mixed	-1	-2	lax: chicote	chicot chicots	o	ʃi.ko	o	fix-minority
+choline	1	o	O/o	1	1	mixed	i1	i1	tense: cholines	choline	O	kɔ.lin	O	fix-minority
+citronné	4	o	O/o	1	1	mixed	e1	e1	tense: citronné	citronnée	o	sit.ʁɔ.ne	O	fix-minority
+cochléaire	1	o	O/o	1	1	mixed	e1	e1	tense: cochléaires	cochléaire	O	kɔ.kle.ɛʁ	O	fix-minority
+cochonnée	3	o	O/o	1	1	mixed	e1	e1	tense: cochonnées	cochonnée	O	kɔ.ʃɔ.ne	O	fix-minority
+collection	1	o	O/o	1	1	mixed	E1	E1	tense: collection	collections	o	kɔ.lɛk.sjɔ̃	O	fix-minority
+comite	1	o	O/o	1	1	mixed	i1	i1	tense: comites	comite	O	kɔ.mit	O	fix-minority
+coronarien	3	o	O/o	2	1	mixed	a2	a1	tense: coronarienne	coronarien	O	kɔ.ʁɔ.na.ʁjɛ̃	O	fix-minority
+cosmologique	6	o	O/o	1	1	mixed	i1	i1	tense: cosmologiques	cosmologique	O	kɔs.mɔ.lɔ.ʒik	O	fix-minority
+diaporama	4	o	O/o	1	1	mixed	a1	a1	tense: diaporamas	diaporama	O	dja.po.ʁa.ma	o	fix-minority
+dipsomane	4	o	O/o	2	1	mixed	a2	a1	tense: dipsomanes	dipsomane	O	dip.sɔ.man	O	fix-minority
+dopant	1	o	O/o	1	1	mixed	@1	@1	tense: dopants	dopant	O	dɔ.pɑ̃	O	fix-minority
+décapoté	5	o	O/o	1	1	mixed	e1	e1	tense: décapotée	décapoté	O	de.ka.pɔ.te	O	fix-minority
+dévot	3	o	O/o	4	4	mixed	-4	-4	tense: dévot dévots	dévote dévotes	o	de.vo	o	fix-minority
+endommagement	2	o	O/o	1	1	mixed	a1	a1	tense: endommagements	endommagement	O	ɑ̃.dɔ.maʒ.mɑ̃	O	fix-minority
+extrascolaire	7	o	O/o	1	1	mixed	E1	E1	tense: extrascolaires	extrascolaire	O	ɛks.tʁa.skɔ.lɛʁ	O	fix-minority
+falot	3	o	O/o	2	4	mixed	-2	-4	lax: falote falotes	falot falots	o	fa.lo	o	fix-minority
+fiérot	4	o	O/o	1	3	mixed	-1	-3	lax: fiérote	fiérot fiérots	o	fje.ʁo	o	fix-minority
+formation	1	o	O/o	1	1	mixed	a1	a1	tense: formations	formation	O	fɔʁ.ma.sjɔ̃	O	fix-minority
+fridolin	4	o	O/o	1	1	mixed	51	51	tense: fridolins	fridolin	O	fʁi.dɔ.lɛ̃	O	fix-minority
+gouvernorat	6	o	O/o	1	1	mixed	a1	a1	tense: gouvernorats	gouvernorat	O	ɡu.vɛʁ.nɔ.ʁa	O	fix-minority
+graphomane	4	o	O/o	1	1	mixed	a1	a1	tense: graphomanes	graphomane	O	ɡʁa.fo.man	o	fix-minority
+huguenot	5	o	O/o	2	3	mixed	-2	-3	lax: huguenote	huguenot huguenots	o	yg.no	o	fix-minority
+hypnagogique	6	o	O/o	1	1	mixed	i1	i1	tense: hypnagogiques	hypnagogique	O	i.pna.ɡɔ.ʒik	O	fix-minority
+idiot	3	o	O/o	4	4	mixed	-4	-4	tense: idiot idiots	idiote idiotes	o	i.djo	o	fix-minority
+insolvable	2	o	O/o	1	1	mixed	a1	a1	tense: insolvables	insolvable	O	ɛ̃.sɔl.vabl	O	fix-minority
+interlocutoire	5	o	O/o	1	1	mixed	y1	y1	tense: interlocutoires	interlocutoire	O	ɛ̃.tɛʁ.lɔ.ky.twaʁ	O	fix-minority
+interventionniste	8	o	O/o	2	2	mixed	i2	i2	tense: interventionnistes	interventionniste	O	ɛ̃.tɛʁ.vɑ̃.sjɔ.nist	O	fix-minority
+joliet	1	o	O/o	1	1	mixed	E1	E1	tense: joliette	joliet	O	ʒɔ.ljɛ	O	fix-minority
+laryngoscope	5	o	O/o	1	1	mixed	O1	O1	tense: laryngoscopes	laryngoscope	O	la.ʁɛ̃.ɡɔ.skɔp	O	fix-minority
+locuteur	1	o	O/o	1	1	mixed	y1	y1	tense: locuteur	locutrice	o	lɔ.ky.tœʁ	O	fix-minority
+lorette	1	o	O/o	1	1	mixed	E1	E1	tense: lorettes	lorette	O	lɔ.ʁɛt	O	fix-minority
+manchot	3	o	O/o	3	4	mixed	-3	-4	lax: manchote manchotes	manchot manchots	o	mɑ̃.ʃo	o	fix-minority
+mendigot	5	o	O/o	1	2	mixed	-1	-2	lax: mendigote	mendigot mendigots	o	mɑ̃.di.ɡo	o	fix-minority
+mitochondrie	3	o	O/o	1	1	mixed	§1	§1	tense: mitochondries	mitochondrie	O	mi.to.kɔ̃.dʁi	o	fix-minority
+morave	1	o	O/o	1	2	mixed	a1	a2	lax: morave	moraves	O	mo.ʁav	o	fix-minority
+motivant	1	o	O/o	1	1	mixed	i1	i1	tense: motivant	motivante	o	mɔ.ti.vɑ̃	O	fix-minority
+nabot	3	o	O/o	1	2	mixed	-1	-2	lax: nabote	nabot nabots	o	na.bo	o	fix-minority
+nanomètre	3	o	O/o	1	1	mixed	E1	E1	tense: nanomètres	nanomètre	O	na.nɔ.mɛtʁ	O	fix-minority
+nobliau	1	o	O/o	1	1	mixed	i1	i1	tense: nobliaux	nobliau	O	nɔ.bli.jo	O	fix-minority
+notion	1	o	O/o	1	1	mixed	§1	§1	tense: notion	notions	o	nɔ.sjɔ̃	O	fix-minority
+occipital	0	o	O/o	3	1	mixed	i3	i1	tense: occipitale	occipital occipitales occipitaux	O	ɔk.si.pi.tal	O	fix-minority
+oculus	0	o	O/o	1	1	mixed	y1	y1	tense: oculus	oculi	o	ɔ.ky.lys	O	fix-minority
+ophidien	0	o	O/o	1	1	mixed	i1	i1	tense: ophidiens	ophidien	O	ɔ.fi.djɛ̃	O	fix-minority
+opiat	0	o	O/o	1	1	mixed	a1	a1	tense: opiats	opiat	O	ɔ.pja	O	fix-minority
+oppositionnel	0	o	O/o	1	1	mixed	o1	o1	tense: oppositionnelle	oppositionnel	O	o.po.zi.sjɔ.nɛl	o	fix-minority
+oppositionnel	7	o	O/o	1	1	mixed	E1	E1	tense: oppositionnelle	oppositionnel	O	o.po.zi.sjɔ.nɛl	O	fix-minority
+option	0	o	O/o	1	1	mixed	§1	§1	tense: options	option	O	ɔp.sjɔ̃	O	fix-minority
+orthogonal	3	o	O/o	1	1	mixed	o1	o1	tense: orthogonaux	orthogonal	O	ɔʁ.tɔ.ɡɔ.nal	O	fix-minority
+orthoptère	3	o	O/o	1	1	mixed	E1	E1	tense: orthoptères	orthoptère	O	ɔʁ.tɔp.tɛʁ	O	fix-minority
+ovoïdal	2	o	O/o	1	1	mixed	i1	i1	tense: ovoïdal	ovoïdale	O	ɔ.vɔ.i.dal	O	fix-minority
+parigot	5	o	O/o	4	4	mixed	-4	-4	tense: parigot parigots	parigote parigotes	o	pa.ʁi.ɡo	o	fix-minority
+parodontal	3	o	O/o	1	1	mixed	§1	§1	tense: parodontal	parodontale	o	pa.ʁɔ.dɔ̃.tal	O	fix-minority
+petiot	4	o	O/o	1	2	mixed	-1	-2	lax: petiote	petiot petiots	o	pə.tjo	o	fix-minority
+plutonien	4	o	O/o	1	1	mixed	E1	51	tense: plutonien	plutonienne	o	ply.tɔ.njɛ̃	O	fix-minority
+poivrot	4	o	O/o	2	2	mixed	-2	-2	tense: poivrot poivrots	poivrote poivrotes	o	pwa.vʁo	o	fix-minority
+polarisant	1	o	O/o	1	1	mixed	a1	a1	tense: polarisants	polarisant	O	pɔ.la.ʁi.zɑ̃	O	fix-minority
+polder	1	o	O/o	1	1	mixed	E1	E1	tense: polders	polder	O	pɔl.dɛʁ	O	fix-minority
+portion	1	o	O/o	1	1	mixed	§1	§1	tense: portions	portion	O	pɔʁ.sjɔ̃	O	fix-minority
+prospection	2	o	O/o	1	1	mixed	E1	E1	tense: prospections	prospection	O	pʁɔs.pɛk.sjɔ̃	O	fix-minority
+préprogrammé	5	o	O/o	1	1	mixed	a1	a1	tense: préprogrammé	préprogrammée	o	pʁe.pʁɔ.ɡʁa.me	O	fix-minority
+préélectoral	8	o	O/o	1	1	mixed	a1	a1	tense: préélectoral	préélectorale	o	pʁe.e.lɛk.tɔ.ʁal	O	fix-minority
+pâlot	3	o	O/o	2	2	mixed	-2	-2	tense: pâlot pâlots	pâlotte pâlottes	o	pɑ.lo	o	fix-minority
+péritonéal	5	o	O/o	1	1	mixed	e1	e1	tense: péritonéale	péritonéal	O	pe.ʁi.tɔ.ne.al	O	fix-minority
+radiologique	6	o	O/o	1	1	mixed	i1	i1	tense: radiologiques	radiologique	O	ʁa.djɔ.lɔ.ʒik	O	fix-minority
+radioscopique	7	o	O/o	1	1	mixed	i1	i1	tense: radioscopiques	radioscopique	O	ʁa.djɔs.kɔ.pik	O	fix-minority
+ribot	3	o	O/o	1	1	mixed	-1	-1	tense: ribot	ribote	o	ʁi.bo	o	fix-minority
+rigolo	5	o	O/o	2	4	mixed	-2	-4	lax: rigolote rigolotes	rigolo rigolos	o	ʁi.ɡɔ.lo	o	fix-minority
+rototo	3	o	O/o	1	1	mixed	o1	o1	tense: rototos	rototo	o	ʁo.to.to	o	fix-minority
+rédactionnel	7	o	O/o	1	1	mixed	E1	E1	tense: rédactionnelle	rédactionnel	O	ʁe.dak.sjɔ.nɛl	O	fix-minority
+servomoteur	6	o	O/o	1	1	mixed	91	91	tense: servomoteurs	servomoteur	O	sɛʁ.vo.mɔ.tœʁ	O	fix-minority
+sismologue	4	o	O/o	1	1	mixed	O1	O1	tense: sismologues	sismologue	O	sis.mɔ.lɔɡ	O	fix-minority
+socialo	1	o	O/o	2	2	mixed	a2	a2	tense: socialos	socialo	O	sɔ.sja.lo	O	fix-minority
+solognot	5	o	O/o	1	2	mixed	-1	-2	lax: solognote	solognot solognots	o	sɔ.lɔ.ɲo	o	fix-minority
+sot	1	o	O/o	4	4	mixed	-4	-4	tense: sot sots	sotte sottes	o	so	o	fix-minority
+surdimensionné	9	o	O/o	1	1	mixed	e1	e1	tense: surdimensionné	surdimensionnée	o	syʁ.di.mɑ̃.sjɔ.ne	O	fix-minority
+surdéveloppé	8	o	O/o	2	2	mixed	e2	e2	tense: surdéveloppées surdéveloppés	surdéveloppé surdéveloppée	O	syʁ.dev.lɔ.pe	O	fix-minority
+sécessionniste	6	o	O/o	2	2	mixed	i2	i2	tense: sécessionnistes	sécessionniste	O	se.sɛ.sjɔ.nist	O	fix-minority
+tabloïd	4	o	O/o	2	1	mixed	i2	i1	tense: tabloïds	tabloïd	O	ta.blɔ.id	O	fix-minority
+transitionnel	7	o	O/o	1	1	mixed	E1	E1	tense: transitionnel	transitionnelle	o	tʁɑ̃.zi.sjɔ.nɛl	O	fix-minority
+transocéanique	4	o	O/o	1	1	mixed	e1	e1	tense: transocéaniques	transocéanique	O	tʁɑ̃.sɔ.se.a.nik	O	fix-minority
+troglodytique	5	o	O/o	1	1	mixed	i1	i1	tense: troglodytiques	troglodytique	O	tʁɔ.ɡlɔ.di.tik	O	fix-minority
+unidimensionnel	9	o	O/o	1	1	mixed	E1	E1	tense: unidimensionnel	unidimensionnelle	o	y.ni.di.mɑ̃.sjɔ.nɛl	O	fix-minority
+valorisant	3	o	O/o	1	1	mixed	i1	i1	tense: valorisant	valorisante	o	va.lɔ.ʁi.zɑ̃	O	fix-minority
+vieillot	4	o	O/o	2	2	mixed	-2	-2	tense: vieillot vieillots	vieillotte vieillottes	o	vjɛ.jo	o	fix-minority
+zoreille	1	o	O/o	1	1	mixed	E1	E1	tense: zoreilles	zoreille	O	zɔ.ʁɛj	O	fix-minority
+éducationnel	7	o	O/o	1	1	mixed	E1	E1	tense: éducationnelle	éducationnel	O	e.dy.ka.sjɔ.nɛl	O	fix-minority
+étiologique	5	o	O/o	1	1	mixed	i1	i1	tense: étiologiques	étiologique	O	e.tjɔ.lɔ.ʒik	O	fix-minority
+assujetti	4	e	E/e	2	1	mixed	i2	i1	tense: assujetties	assujetti assujettis	E	a.sy.ʒe.ti	e	fix-majority
+expédient	0	e	E/e	3	1	mixed	e3	e1	tense: expédient	expédient expédientes expédients	E	ek.spe.djɑ̃	e	fix-majority
+flemmard	2	e	E/e	1	6	mixed	a1	a6	lax: flemmardes	flemmard flemmarde flemmards	e	flɛ.maʁ	E	fix-majority
+maniacodépressif	11	e	E/e	1	2	mixed	i1	i2	lax: maniacodépressive	maniacodépressif	e	ma.nja.kɔ.de.pʁɛ.sif	E	fix-majority
+pressurisé	2	e	E/e	1	2	mixed	y1	y2	lax: pressurisés	pressurisé pressurisée	e	pʁɛ.sy.ʁi.ze	E	fix-majority
+autocollant	4	o	O/o	1	5	mixed	@1	@5	lax: autocollante	autocollant autocollantes autocollants	o	o.to.kɔ.lɑ̃	O	fix-majority
+bolivien	1	o	O/o	2	4	mixed	i2	i4	lax: bolivien	bolivienne boliviens	O	bɔ.li.vjɛ̃	O	fix-majority
+brioché	3	o	O/o	1	2	mixed	e1	e2	lax: briochée	brioché briochés	o	bʁi.jɔ.ʃe	O	fix-majority
+costal	1	o	O/o	1	2	mixed	a1	a1,o1	lax: costal	costale costaux	O	kɔs.tal	O	fix-majority
+cérémoniel	5	o	O/o	1	2	mixed	E1	E2	lax: cérémonielle	cérémoniel cérémoniels	o	se.ʁe.mɔ.njɛl	O	fix-majority
+directionnel	7	o	O/o	1	3	mixed	E1	E3	lax: directionnelle	directionnel directionnelles directionnels	o	di.ʁɛk.sjɔ.nɛl	O	fix-majority
+dolent	1	o	O/o	1	3	mixed	@1	@3	lax: dolent	dolente dolentes dolents	O	dɔ.lɑ̃	O	fix-majority
+démoralisateur	3	o	O/o	1	2	mixed	a1	a2	lax: démoralisateur	démoralisateurs	O	de.mɔ.ʁa.li.za.tœʁ	O	fix-majority
+folichon	1	o	O/o	1	2	mixed	i1	i2	lax: folichon	folichonne folichonnes	O	fɔ.li.ʃɔ̃	O	fix-majority
+incommodant	4	o	O/o	1	2	mixed	@1	@2	lax: incommodant	incommodante incommodantes	O	ɛ̃.kɔ.mɔ.dɑ̃	O	fix-majority
+innommé	2	o	O/o	1	2	mixed	e1	e2	lax: innommée	innommé innommés	o	i.nɔ.me	O	fix-majority
+innovateur	2	o	O/o	1	2	mixed	a1	a2	lax: innovatrice	innovateur	o	i.nɔ.va.tœʁ	O	fix-majority
+insolent	2	o	O/o	2	4	mixed	@2	@4	lax: insolent	insolente insolentes insolents	O	ɛ̃.sɔ.lɑ̃	O	fix-majority
+lyophilisé	2	o	O/o	1	2	mixed	i1	i2	lax: lyophilisé	lyophilisée lyophilisés	O	ljɔ.fi.li.ze	O	fix-majority
+notarial	1	o	O/o	1	2	mixed	a1	a2	lax: notariale	notarial notariaux	o	nɔ.ta.ʁjal	O	fix-majority
+occultiste	0	o	O/o	1	2	mixed	y1	y2	lax: occultiste	occultistes	O	ɔ.kyl.tist	O	fix-majority
+offrant	0	o	O/o	1	5	mixed	@1	@5	lax: offrante	offrant offrantes offrants	o	ɔ.fʁɑ̃	O	fix-majority
+papilionacé	6	o	O/o	1	2	mixed	a1	a2	lax: papilionacé	papilionacée papilionacées	O	pa.pi.ljɔ.na.se	O	fix-majority
+parpaillot	6	o	O/o	2	1	mixed	-2	-1	tense: parpaillot	parpaillote parpaillotes	o	paʁ.pa.jo	o	fix-majority
+philosophal	5	o	O/o	1	2	mixed	a1	a2	lax: philosophal	philosophale philosophales	O	fi.lɔ.zɔ.fal	O	fix-majority
+polluant	1	o	O/o	1	2	mixed	81	82	lax: polluante	polluant polluants	o	pɔ.lɥɑ̃	O	fix-majority
+polytechnicien	1	o	O/o	1	2	mixed	i1	i2	lax: polytechnicienne	polytechnicien polytechniciens	o	pɔ.li.tɛk.ni.sjɛ̃	O	fix-majority
+professeur	2	o	O/o	1	2	mixed	E1	E2	lax: professeure	professeur professeurs	o	pʁɔ.fe.sœʁ	O	fix-majority
+reproductif	4	o	O/o	1	2	mixed	y1	y2	lax: reproductive	reproductif reproductifs	o	ʁə.pʁɔ.dyk.tif	O	fix-majority
+romancé	1	o	O/o	1	2	mixed	@1	@2	lax: romancé	romancée romancées	O	ʁɔ.mɑ̃.se	O	fix-majority
+somalien	1	o	O/o	1	3	mixed	a1	a3	lax: somalienne	somalien somaliens	o	sɔ.ma.ljɛ̃	O	fix-majority
+somnolent	4	o	O/o	1	3	mixed	@1	@3	lax: somnolent	somnolente somnolentes somnolents	O	sɔm.nɔ.lɑ̃	O	fix-majority
+téléphoné	5	o	O/o	1	3	mixed	e1	e3	lax: téléphonée	téléphoné téléphonées téléphonés	o	te.le.fɔ.ne	O	fix-majority
+violent	2	o	O/o	1	5	mixed	@1	@5	lax: violent	violent violente violentes violents	o	vjɔ.lɑ̃	O	fix-majority
+aguerrir	2	e	E/e	7	1	mixed	i7	i1	tense: aguerrir	aguerri aguerrie aguerries aguerrira	e	a.ɡɛ.ʁiʁ	E	verb-fix-minority
+amerrir	2	e	E/e	2	1	mixed	i2	i1	tense: amerrir	amerri amerrit	e	a.mɛ.ʁiʁ	E	verb-fix-minority
+assujettir	4	e	E/e	9	3	mixed	i9	i3	tense: assujetties assujettir assujettissant	assujetti assujettie assujettiraient assujettis	e	a.sy.ʒɛ.tiʁ	E	verb-fix-minority
+atterrir	2	e	E/e	20	1	mixed	i20	i1	tense: atterrir	atterri atterrira atterrirai atterrirais	e	a.tɛ.ʁiʁ	E	verb-fix-minority
+dépayser	3	a	E/e	4	5	mixed	i4	i5	lax: dépaysera dépaysé dépaysée dépaysés	dépaysaient dépaysait dépaysant dépayse	e	de.pe.i.ze	e	verb-fix-minority
+exceller	0	e	E/e	11	1	mixed	E11	E1	tense: excellent	excella excellaient excellais excellait	E	ɛ.kse.le	E	verb-fix-minority
+excepter	0	e	E/e	10	1	mixed	E10	E1	tense: exceptions	exceptais exceptait exceptant excepte	E	ɛk.sɛp.te	E	verb-fix-minority
+expédier	0	e	E/e	22	1	mixed	e22	e1	tense: expédient	expédia expédiai expédiaient expédiais	E	ɛk.spe.dje	E	verb-fix-minority
+exécuter	0	e	E/e	28	1	mixed	e28	e1	tense: exécutions	exécuta exécutai exécutaient exécutais	E	ɛɡ.ze.ky.te	E	verb-fix-minority
+intéresser	4	e	E/e	27	1	mixed	-3,@1,E4,a1,e8,§2,°8	°1	tense: intéresseriez	intéressa intéressai intéressaient intéressais	E	ɛ̃.te.ʁɛ.se	E	verb-fix-minority
+javelliser	3	e	E/e	4	1	mixed	i4	i1	tense: javelliser	javellise javellisé javellisée javellisées	e	ʒa.vɛ.li.ze	E	verb-fix-minority
+oppresser	3	e	E/e	2	8	mixed	-2	@1,E2,a1,e4	lax: oppresse oppressent	oppressa oppressaient oppressait oppressant	e	ɔ.pʁe.se	e	verb-fix-minority
+pressuriser	2	e	E/e	3	3	mixed	y3	y3	tense: pressurisé pressurisée pressurisées	pressuriser pressurisez pressurisés	E	pʁe.sy.ʁi.ze	e	verb-fix-minority
+racketter	3	e	E/e	4	1	mixed	-1,e3	§1	tense: rackettons	rackette racketter rackettez racketté	E	ʁa.kɛ.te	E	verb-fix-minority
+régresser	4	e	E/e	3	3	mixed	-1,@1,E1	e2,°1	tense: régresser régressera régressé	régressait régressant régresse	e	ʁe.ɡʁe.se	e	verb-fix-minority
+adorer	2	o	O/o	15	15	mixed	-3,E1,°11	@1,E3,a1,e8,§2	tense: adora adorai adoraient adorais adorait adorant	adore adorent adorera adorerai	o	a.dɔ.ʁe	O	verb-fix-minority
+autographier	2	o	O/o	1	1	mixed	a1	a1	tense: autographier	autographié	O	o.to.ɡʁa.fje	o	verb-fix-minority
+bourgeonner	4	o	O/o	4	4	mixed	-2,e1,°1	@1,E2,e1	tense: bourgeonnaient bourgeonnait bourgeonnant bourgeonner	bourgeonne bourgeonnent bourgeonneraient bourgeonné	o	buʁ.ʒɔ.ne	O	verb-fix-minority
+carotter	3	o	O/o	4	3	mixed	-2,e1,°1	E1,e2	tense: carottait carotter carottés	carotte carottent carotterait carotté	o	ka.ʁɔ.te	O	verb-fix-minority
+chlorer	2	o	O/o	1	1	mixed	e1	e1	tense: chloré	chlorer	O	klɔ.ʁe	O	verb-fix-minority
+choper	1	o	O/o	11	11	mixed	-3,°8	@1,E3,e6,§1	tense: chopaient chopais chopait chopant choper chopez	chope chopent chopera choperai	o	ʃɔ.pe	O	verb-fix-minority
+chorégraphier	1	o	O/o	1	1	mixed	e1	e1	tense: chorégraphiées	chorégraphier	O	kɔ.ʁe.ɡʁa.fje	O	verb-fix-minority
+cloner	2	o	O/o	1	5	mixed	e1	-2,@1,e2	lax: cloner	clonant clone clonent cloné	O	klo.ne	o	verb-fix-minority
+cloper	2	o	O/o	3	2	mixed	-2,e1	@1,E1	tense: clopais clopant	clope cloper clopes	O	klɔ.pe	O	verb-fix-minority
+cocarder	1	o	O/o	1	1	mixed	a1	a1	tense: cocardés	cocarder	O	kɔ.kaʁ.de	O	verb-fix-minority
+coopter	1	o	O/o	2	1	mixed	O2	O1	tense: coopter	cooptant coopté	o	kɔ.ɔp.te	O	verb-fix-minority
+cordonner	4	o	O/o	1	1	mixed	e1	e1	tense: cordonnées	cordonner	O	kɔʁ.dɔ.ne	O	verb-fix-minority
+corner	1	o	O/o	14	2	mixed	-3,@1,E5,a2,e3	E1,e1	tense: corner	corna cornaient cornais cornait	o	kɔʁ.ne	O	verb-fix-minority
+diplômer	4	ô	O/o	1	4	mixed	e1	e4	lax: diplômer	diplômé diplômée diplômées diplômés	O	di.plo.me	o	verb-fix-minority
+décongestionner	9	o	O/o	3	1	mixed	-1,@1,e1	e1	tense: décongestionner	décongestionnant décongestionne décongestionné	o	de.kɔ̃.ʒɛs.tjɔ.ne	O	verb-fix-minority
+délocaliser	3	o	O/o	2	1	mixed	a2	a1	tense: délocalisez	délocaliser délocalisé	O	de.lɔ.ka.li.ze	O	verb-fix-minority
+démissionner	6	o	O/o	11	9	mixed	-3,°8	@1,E3,a1,e4	tense: démissionna démissionnaient démissionnais démissionnait démissionnant démissionner	démissionne démissionnent démissionnera démissionnerai	o	de.mi.sjɔ.ne	O	verb-fix-minority
+démotiver	3	o	O/o	2	1	mixed	i2	i1	tense: démotive	démotiver démotivée	O	de.mɔ.ti.ve	O	verb-fix-minority
+dépersonnaliser	6	o	O/o	1	1	mixed	a1	a1	tense: dépersonnaliser	dépersonnalisé	o	de.pɛʁ.sɔ.na.li.ze	O	verb-fix-minority
+déraisonner	5	o	O/o	3	3	mixed	-2,e1	E1,e2	tense: déraisonnait déraisonner déraisonnez	déraisonne déraisonnes déraisonné	o	de.ʁɛ.zɔ.ne	O	verb-fix-minority
+exorciser	2	o	O/o	12	1	mixed	i12	i1	tense: exorcisant	exorcisa exorcisait exorcise exorcisent	O	ɛɡ.zɔʁ.si.ze	O	verb-fix-minority
+flotter	2	o	O/o	9	14	mixed	-3,°6	@1,E4,a1,e7,§1	lax: flotte flottent flottera flotteraient flotterait flotteras	flotta flottaient flottais flottait	o	flo.te	o	verb-fix-minority
+foisonner	3	o	O/o	4	4	mixed	-2,°2	@1,E2,e1	tense: foisonnaient foisonnait foisonnant foisonner	foisonne foisonnent foisonneraient foisonneront	o	fwa.zɔ.ne	O	verb-fix-minority
+porter	1	o	O/o	30	1	mixed	-3,@1,E5,a2,e7,§2,°10	e1	tense: porter	porta portai portaient portais	o	pɔʁ.te	O	verb-fix-minority
+rabibocher	5	o	O/o	4	3	mixed	-2,e1,°1	e3	tense: rabibocher rabibochées rabibochés	rabiboche rabibochent rabibocherez rabiboché	o	ʁa.bi.bɔ.ʃe	O	verb-fix-minority
+raffoler	3	o	O/o	6	6	mixed	-3,@1,e1,°1	E3,e3	tense: raffolaient raffolais raffolait raffoler raffolez raffoliez	raffolant raffole raffolent raffoleront	o	ʁa.fɔ.le	O	verb-fix-minority
+redonner	3	o	O/o	11	11	mixed	-3,°8	@1,E3,a1,e5,§1	tense: redonna redonnai redonnaient redonnais redonnait redonnant	redonne redonnent redonnera redonnerai	o	ʁə.dɔ.ne	O	verb-fix-minority
+reporter	3	o	O/o	17	2	mixed	-2,@1,E3,a1,e6,§1,°3	E1,e1	tense: reporter	reporta reportait reportant reporte	o	ʁə.pɔʁ.te	O	verb-fix-minority
+solenniser	1	o	O/o	1	1	mixed	a1	a1	tense: solennisèrent	solenniser	O	sɔ.la.ni.ze	O	verb-fix-minority
+somnoler	1	o	O/o	11	1	mixed	O2,o9	O1	tense: somnolent	somnola somnolai somnolaient somnolais	O	sɔm.nɔ.le	O	verb-fix-minority
+supporter	3	o	O/o	29	2	mixed	-3,91,@1,E4,a1,e7,§2,°10	91,e1	tense: supporter	supporta supportai supportaient supportais	o	sy.pɔʁ.te	O	verb-fix-minority
+surprotéger	5	o	O/o	2	2	mixed	e2	E1,e1	tense: surprotège surprotégeais	surprotéger surprotégé	O	syʁ.pʁɔ.te.ʒe	O	verb-fix-minority
+téléphoner	5	o	O/o	13	13	mixed	-3,°10	@1,E3,a1,e6,§2	tense: téléphona téléphonai téléphonaient téléphonais téléphonait téléphonant	téléphone téléphonent téléphonera téléphonerai	o	te.le.fɔ.ne	O	verb-fix-minority
+éclore	3	o	O/o	1	1	mixed	-1	-1	tense: éclose	éclore	O	e.klɔʁ	O	verb-fix-minority
+agresser	3	e	E/e	15	1	mixed	-2,@1,E3,a1,e6,°2	§1	tense: agressions	agressa agressaient agressais agressait	E	a.ɡʁe.se	e	verb-fix-majority
+coexister	2	e	E/e	3	7	mixed	i3	i7	lax: coexister coexistez coexistons	coexistaient coexistait coexistant coexiste	E	kɔ.ɛɡ.zis.te	E	verb-fix-majority
+condescendre	3	e	E/e	5	2	mixed	@5	@2	tense: condescendant condescendre	condescend condescendait condescendit condescendrais	e	kɔ̃.de.sɑ̃dʁ	e	verb-fix-majority
+embellir	2	e	E/e	15	1	mixed	i15	i1	tense: embellir	embelli embellie embellies embellira	e	ɑ̃.be.liʁ	e	verb-fix-majority
+empresser	3	e	E/e	16	4	mixed	-3,@1,E4,a2,e2,°4	e4	tense: empressé empressée empressées empressés	empressa empressai empressaient empressais	E	ɑ̃.pʁe.se	e	verb-fix-majority
+endetter	2	e	E/e	5	4	mixed	-1,@1,E1,e2	e4	tense: endetter endetté endettée endettés	endettait endettant endette endettez	e	ɑ̃.de.te	e	verb-fix-majority
+enserrer	2	e	E/e	15	1	mixed	-3,@1,E3,a1,e5,°2	e1	tense: enserrer	enserra enserrai enserraient enserrait	e	ɑ̃.se.ʁe	e	verb-fix-majority
+enterrer	2	e	E/e	23	5	mixed	-3,@1,E4,a2,e3,§2,°8	e5	tense: enterrer enterré enterrée enterrées enterrés	enterra enterrai enterraient enterrais	e	ɑ̃.te.ʁe	e	verb-fix-majority
+impressionner	3	e	E/e	11	8	mixed	O6,o5	O1,o7	tense: impressionnais impressionnant impressionner impressionneras impressionné impressionnée	impressionna impressionnaient impressionnait impressionne	e	ɛ̃.pʁe.sjɔ.ne	e	verb-fix-majority
+presser	2	e	E/e	21	1	mixed	-2,@1,E4,a1,e6,§2,°5	-1	tense: pressent	pressa pressai pressaient pressais	E	pʁe.se	e	verb-fix-majority
+progresser	5	e	E/e	21	2	mixed	-3,@1,E4,a1,e5,§2,°5	°2	tense: progresserez progresserons	progressa progressai progressaient progressais	E	pʁɔ.ɡʁe.se	e	verb-fix-majority
+abandonner	4	o	O/o	14	18	mixed	-3,°11	@1,E4,a3,e8,§2	lax: abandonne abandonnent abandonnera abandonnerai abandonneraient abandonnerais	abandonna abandonnai abandonnaient abandonnais	o	a.bɑ̃.dɔ.ne	O	verb-fix-majority
+accoler	2	o	O/o	3	8	mixed	-2,°1	@1,E1,a1,e5	lax: accole accolent accolerais	accola accolait accolant accoler	o	a.kɔ.le	O	verb-fix-majority
+accommoder	4	o	O/o	10	13	mixed	-2,°8	@1,E4,a1,e5,§2	lax: accommode accommodent accommodera accommoderai accommoderaient accommoderais	accommoda accommodai accommodaient accommodais	o	a.kɔ.mɔ.de	O	verb-fix-majority
+accrocher	3	o	O/o	10	17	mixed	-3,°7	@1,E4,a1,e8,§2,°1	lax: accroche accrochent accrochera accrocherai accrocheraient accrocherais	accrocha accrochai accrochaient accrochais	o	a.kʁɔ.ʃe	O	verb-fix-majority
+achopper	2	o	O/o	2	7	mixed	-1,e1	E3,a1,e3	lax: achoppe achopper	achoppa achoppai achoppaient achoppais	O	a.ʃɔ.pe	O	verb-fix-majority
+actionner	4	o	O/o	3	12	mixed	-2,°1	@1,E3,a1,e7	lax: actionne actionnent actionneront	actionna actionnai actionnaient actionnais	o	ak.sjɔ.ne	O	verb-fix-majority
+additionner	5	o	O/o	4	10	mixed	-2,°2	@1,E3,e6	lax: additionne additionnent additionneraient additionnerait	additionnaient additionnais additionnait additionnant	o	a.di.sjɔ.ne	O	verb-fix-majority
+adonner	2	o	O/o	3	13	mixed	-2,°1	@1,E3,a1,e7,§1	lax: adonne adonnent adonnerait	adonna adonnai adonnaient adonnais	o	a.dɔ.ne	O	verb-fix-majority
+affectionner	6	o	O/o	2	8	mixed	-2	@1,E3,e4	lax: affectionne affectionnent	affectionnaient affectionnais affectionnait affectionnant	o	a.fɛk.sjɔ.ne	O	verb-fix-majority
+affoler	2	o	O/o	7	15	mixed	-3,°4	@1,E4,a1,e8,§1	lax: affole affolent affolera affolerais affolerait affoleront	affola affolai affolaient affolais	o	a.fɔ.le	O	verb-fix-majority
+affrioler	4	o	O/o	2	4	mixed	-1,°1	@1,E1,e2	lax: affriole affriolerait	affriolait affriolant affrioler affriolés	o	a.fʁi.ɔ.le	O	verb-fix-majority
+aiguillonner	5	o	O/o	2	8	mixed	-2	@1,E2,e5	lax: aiguillonne aiguillonnent	aiguillonnaient aiguillonnait aiguillonnant aiguillonner	o	e.ɡɥi.jɔ.ne	O	verb-fix-majority
+ambitionner	5	o	O/o	2	6	mixed	-2	@1,E2,e3	lax: ambitionne ambitionnent	ambitionnais ambitionnait ambitionnant ambitionner	o	ɑ̃.bi.sjɔ.ne	O	verb-fix-majority
+améliorer	5	o	O/o	7	11	mixed	-3,E1,°3	@1,E2,a1,e6,§1	lax: améliore améliorent améliorera améliorerait amélioreront améliores	améliora amélioraient améliorait améliorant	o	a.me.ljɔ.ʁe	O	verb-fix-majority
+approcher	3	o	O/o	11	18	mixed	-3,°8	@1,E4,a2,e8,§2,°1	lax: approche approchent approchera approcherai approcherais approcherait	approcha approchai approchaient approchais	o	a.pʁɔ.ʃe	O	verb-fix-majority
+approvisionner	3	o	O/o	1	11	mixed	i1	i11	lax: approvisionnant	approvisionnait approvisionne approvisionnent approvisionner	o	a.pʁɔ.vi.zjɔ.ne	O	verb-fix-majority
+arborer	3	o	O/o	5	11	mixed	-3,E1,°1	@1,E3,a1,e5,§1	lax: arbore arborent arborerait arbores arborèrent	arbora arboraient arborais arborait	o	aʁ.bɔ.ʁe	O	verb-fix-majority
+assommer	2	o	O/o	9	12	mixed	-3,°6	@1,E2,a1,e7,§1	lax: assomme assomment assommera assommerai assommeraient assommerais	assomma assommaient assommait assommant	o	a.sɔ.me	O	verb-fix-majority
+badigeonner	5	o	O/o	3	11	mixed	-1,°2	@1,E3,a1,e5,§1	lax: badigeonne badigeonnerai badigeonnerez	badigeonna badigeonnaient badigeonnait badigeonnant	o	ba.di.ʒɔ.ne	O	verb-fix-majority
+baluchonner	5	o	O/o	1	3	mixed	-1	-1,e2	lax: baluchonne	baluchonnent baluchonner baluchonné	o	ba.ly.ʃɔ.ne	O	verb-fix-majority
+barboter	4	o	O/o	4	7	mixed	-2,°2	@1,E2,a1,e2,§1	lax: barbote barbotent barboterais barboterait	barbota barbotaient barbotait barbotant	o	baʁ.bɔ.te	O	verb-fix-majority
+bastonner	4	o	O/o	1	5	mixed	-1	-1,e4	lax: bastonne	bastonnent bastonner bastonné bastonnée	o	bɑs.tɔ.ne	O	verb-fix-majority
+bichonner	3	o	O/o	2	6	mixed	-1,°1	@1,E1,e4	lax: bichonne bichonnerai	bichonnait bichonnant bichonner bichonnez	o	bi.ʃɔ.ne	O	verb-fix-majority
+bidonner	3	o	O/o	3	10	mixed	-2,°1	@1,E3,e6	lax: bidonne bidonnent bidonnera	bidonnaient bidonnais bidonnait bidonnant	o	bi.dɔ.ne	O	verb-fix-majority
+bloquer	2	o	O/o	8	15	mixed	-3,°5	@1,E4,a1,e8,§1	lax: bloque bloquent bloquera bloquerai bloquerais bloquerait	bloqua bloquai bloquaient bloquais	o	blɔ.ke	O	verb-fix-majority
+bosser	1	o	O/o	9	11	mixed	-3,°6	@1,E3,a1,e4,§2	lax: bosse bossent bossera bosserai bosserais bosserait	bossa bossaient bossais bossait	o	bɔ.se	O	verb-fix-majority
+botter	1	o	O/o	10	13	mixed	-3,°7	@1,E2,a1,e8,§1	lax: botte bottent bottera botterai botterais botterait	botta bottai bottaient bottait	o	bɔ.te	O	verb-fix-majority
+bouchonner	3	o	O/o	2	7	mixed	-1,°1	@1,E2,a1,e3	lax: bouchonne bouchonneras	bouchonna bouchonnaient bouchonnait bouchonnant	o	bu.ʃɔ.ne	O	verb-fix-majority
+bouffonner	3	o	O/o	1	4	mixed	-1	@1,E1,a1,e1	lax: bouffonnes	bouffonna bouffonnait bouffonnant bouffonner	o	bu.fɔ.ne	O	verb-fix-majority
+bougonner	3	o	O/o	2	7	mixed	-2	@1,E3,a1,e2	lax: bougonne bougonnent	bougonna bougonnaient bougonnais bougonnait	o	bu.ɡɔ.ne	O	verb-fix-majority
+bouillonner	3	o	O/o	2	10	mixed	-2	@1,E4,e5	lax: bouillonne bouillonnent	bouillonnaient bouillonnais bouillonnait bouillonnant	o	bu.jɔ.ne	O	verb-fix-majority
+boulonner	3	o	O/o	1	6	mixed	-1	@1,E1,e4	lax: boulonne	boulonnait boulonnant boulonner boulonné	o	bu.lɔ.ne	O	verb-fix-majority
+bourdonner	4	o	O/o	2	7	mixed	-2	@1,E3,a1,e2	lax: bourdonne bourdonnent	bourdonna bourdonnaient bourdonnais bourdonnait	o	buʁ.dɔ.ne	O	verb-fix-majority
+boutonner	3	o	O/o	4	11	mixed	-3,°1	@1,E3,a1,e6	lax: boutonne boutonnent boutonnerait boutonnes	boutonna boutonnaient boutonnais boutonnait	o	bu.tɔ.ne	O	verb-fix-majority
+braconner	4	o	O/o	1	6	mixed	-1	@1,E2,e3	lax: braconne	braconnais braconnait braconnant braconner	o	bʁa.kɔ.ne	O	verb-fix-majority
+broder	2	o	O/o	5	11	mixed	-3,°2	@1,E3,a1,e6	lax: brode brodent brodera broderai brodes	broda brodaient brodais brodait	o	bʁɔ.de	O	verb-fix-majority
+brosser	2	o	O/o	7	11	mixed	-3,°4	@1,E3,a1,e6	lax: brosse brossent brossera brosserai brosseras brosserez	brossa brossaient brossais brossait	o	bʁɔ.se	O	verb-fix-majority
+buissonner	4	o	O/o	1	2	mixed	-1	@1,e1	lax: buissonne	buissonnant buissonner	o	bɥi.sɔ.ne	O	verb-fix-majority
+bâillonner	3	o	O/o	4	9	mixed	-2,°2	@1,E1,a1,e5,§1	lax: bâillonne bâillonnent bâillonnera bâillonnerait	bâillonna bâillonnait bâillonnant bâillonner	o	bɑ.jɔ.ne	O	verb-fix-majority
+bécoter	3	o	O/o	3	5	mixed	-2,e1	@1,E1,e3	lax: bécote bécotent bécoté	bécotait bécotant bécoter bécotée	o	be.kɔ.te	O	verb-fix-majority
+cajoler	3	o	O/o	5	9	mixed	-2,°3	@1,E3,a1,e4	lax: cajole cajolent cajolera cajolerai cajolerait	cajola cajolaient cajolait cajolant	o	ka.ʒɔ.le	O	verb-fix-majority
+cantonner	3	o	O/o	3	14	mixed	-2,°1	@1,E4,a1,e7,§1	lax: cantonne cantonnent cantonneraient	cantonna cantonnai cantonnaient cantonnais	o	kɑ̃.tɔ.ne	O	verb-fix-majority
+caracoler	5	o	O/o	3	4	mixed	-2,°1	@1,E1,a1,e1	lax: caracole caracolent caracolerez	caracola caracolait caracolant caracoler	o	ka.ʁa.kɔ.le	O	verb-fix-majority
+carillonner	5	o	O/o	3	5	mixed	-3	@1,E2,e2	lax: carillonne carillonnent carillonnes	carillonnaient carillonnait carillonnant carillonner	o	ka.ʁi.jɔ.ne	O	verb-fix-majority
+cartographier	4	o	O/o	1	3	mixed	a1	a3	lax: cartographié	cartographient cartographier cartographiés	o	kaʁ.tɔ.ɡʁa.fje	O	verb-fix-majority
+cartonner	4	o	O/o	2	6	mixed	-2	@1,e5	lax: cartonne cartonnent	cartonnant cartonner cartonné cartonnée	o	kaʁ.tɔ.ne	O	verb-fix-majority
+chantonner	3	o	O/o	2	11	mixed	-2	@1,E4,a1,e5	lax: chantonne chantonnent	chantonna chantonnai chantonnaient chantonnais	o	ʃɑ̃.tɔ.ne	O	verb-fix-majority
+chiffonner	3	o	O/o	1	9	mixed	-1	@1,E2,a1,e5	lax: chiffonne	chiffonna chiffonnaient chiffonnait chiffonnant	o	ʃi.fɔ.ne	O	verb-fix-majority
+choquer	1	o	O/o	7	12	mixed	-2,°5	@1,E3,a1,e6,§1	lax: choque choquent choquera choqueraient choquerais choquerait	choqua choquaient choquait choquant	o	ʃɔ.ke	O	verb-fix-majority
+chuchoter	3	o	O/o	7	14	mixed	-2,°5	@1,E4,a1,e7,§1	lax: chuchote chuchotent chuchoteraient chuchoterais chuchoterait chuchoteras	chuchota chuchotai chuchotaient chuchotais	o	ʃy.ʃɔ.te	O	verb-fix-majority
+claironner	4	o	O/o	2	6	mixed	-2	@1,E1,a1,e2,§1	lax: claironne claironnent	claironna claironnait claironnant claironner	o	klɛ.ʁɔ.ne	O	verb-fix-majority
+clapoter	4	o	O/o	3	5	mixed	-2,°1	@1,E2,a1,e1	lax: clapote clapotent clapoterait	clapota clapotaient clapotait clapotant	o	kla.pɔ.te	O	verb-fix-majority
+clignoter	4	o	O/o	4	7	mixed	-2,°2	@1,E3,a1,e2	lax: clignote clignotent clignotera clignoterait	clignota clignotaient clignotait clignotant	o	kli.ɲɔ.te	O	verb-fix-majority
+cloisonner	4	o	O/o	1	7	mixed	-1	@1,E2,e4	lax: cloisonne	cloisonnaient cloisonnais cloisonnant cloisonner	o	klwa.zɔ.ne	O	verb-fix-majority
+clore	2	o	O/o	1	5	mixed	-1	-4,a1	lax: clore	clora clos close closent	O	klɔʁ	O	verb-fix-majority
+cocher	1	o	O/o	3	13	mixed	-2,°1	@1,E3,a1,e8	lax: coche cocheras coches	cocha cochait cochant cocher	o	kɔ.ʃe	O	verb-fix-majority
+cogner	1	o	O/o	10	14	mixed	-3,°7	@1,E4,a1,e7,§1	lax: cogne cognent cognera cognerai cogneraient cognerais	cogna cognai cognaient cognais	o	kɔ.ɲe	O	verb-fix-majority
+collaborer	5	o	O/o	8	11	mixed	-3,°5	@1,E3,a1,e4,§2	lax: collabore collaborent collaborera collaborerai collaboreraient collaborerez	collabora collaborai collaboraient collaborais	o	kɔ.la.bɔ.ʁe	O	verb-fix-majority
+collectionner	7	o	O/o	3	12	mixed	-3	@1,E3,a1,e5,§2	lax: collectionne collectionnent collectionnes	collectionna collectionnaient collectionnais collectionnait	o	kɔ.lɛk.sjɔ.ne	O	verb-fix-majority
+coller	1	o	O/o	10	17	mixed	-3,°7	@1,E4,a2,e8,§2	lax: colle collent collera collerai collerais collerait	colla collai collaient collais	o	kɔ.le	O	verb-fix-majority
+commuer	1	o	O/o	1	5	mixed	81	84,y1	lax: commué	commuais commuant commuent commuer	o	kɔ.mɥe	O	verb-fix-majority
+comploter	4	o	O/o	5	11	mixed	-3,°2	@1,E4,e5,§1	lax: complote complotent comploteraient comploterait complotes	complotai complotaient complotais complotait	o	kɔ̃.plɔ.te	O	verb-fix-majority
+conditionner	6	o	O/o	3	8	mixed	-2,°1	@1,E1,e5,§1	lax: conditionne conditionnent conditionnerons	conditionnait conditionnant conditionner conditionnons	o	kɔ̃.di.sjɔ.ne	O	verb-fix-majority
+connecter	1	o	O/o	1	12	mixed	E1	E12	lax: connectant	connecte connectent connecter connectera	o	kɔ.nɛk.te	O	verb-fix-majority
+consoler	3	o	O/o	12	15	mixed	-3,°9	@1,E4,a1,e8,§1	lax: console consolent consolera consolerai consoleraient consolerais	consola consolai consolaient consolais	o	kɔ̃.sɔ.le	O	verb-fix-majority
+consommer	3	o	O/o	4	13	mixed	-2,°2	@1,E2,a1,e7,§2	lax: consomme consomment consommerait consommeront	consomma consommai consommaient consommait	o	kɔ̃.sɔ.me	O	verb-fix-majority
+contorsionner	7	o	O/o	2	9	mixed	-2	@1,E2,a1,e5	lax: contorsionne contorsionnent	contorsionna contorsionnaient contorsionnait contorsionnant	o	kɔ̃.tɔʁ.sjɔ.ne	O	verb-fix-majority
+convoquer	3	o	O/o	8	14	mixed	-2,°6	@1,E3,a1,e7,§2	lax: convoque convoquent convoquera convoquerai convoqueraient convoquerait	convoqua convoquai convoquaient convoquait	o	kɔ̃.vɔ.ke	O	verb-fix-majority
+coordonner	1	o	O/o	1	12	mixed	O1	O12	lax: coordonnant	coordonna coordonnaient coordonnait coordonne	o	kɔ.ɔʁ.dɔ.ne	O	verb-fix-majority
+corroborer	3	o	O/o	2	9	mixed	O2	O3,o6	lax: corroborant corroboré	corrobora corroboraient corroborait corrobore	O	kɔ.ʁɔ.bɔ.ʁe	O	verb-fix-majority
+corroborer	5	o	O/o	5	6	mixed	-2,@1,e1,°1	E3,a1,e2	lax: corroborant corrobore corroborent corroborera corroboré	corrobora corroboraient corroborait corroborer	O	kɔ.ʁɔ.bɔ.ʁe	O	verb-fix-majority
+couronner	3	o	O/o	6	9	mixed	-3,°3	@1,E2,a1,e5	lax: couronne couronnent couronnera couronnerai couronnerons couronnes	couronna couronnaient couronnait couronnant	o	ku.ʁɔ.ne	O	verb-fix-majority
+coïncider	1	o	O/o	1	11	mixed	51	511	lax: coïncident	coïncida coïncidaient coïncidais coïncidait	o	kɔ.ɛ̃.si.de	O	verb-fix-majority
+cramponner	4	o	O/o	3	13	mixed	-2,°1	@1,E3,a1,e7,§1	lax: cramponne cramponnent cramponneront	cramponna cramponnaient cramponnais cramponnait	o	kʁɑ̃.pɔ.ne	O	verb-fix-majority
+croquer	2	o	O/o	9	14	mixed	-3,°6	@1,E4,a1,e7,§1	lax: croque croquent croquera croquerai croqueraient croquerais	croqua croquai croquaient croquais	o	kʁɔ.ke	O	verb-fix-majority
+dialoguer	4	o	O/o	3	10	mixed	-2,°1	@1,E2,e6,§1	lax: dialogue dialoguent dialoguera	dialoguai dialoguaient dialoguait dialoguant	o	dja.lɔ.ɡe	O	verb-fix-majority
+disloquer	4	o	O/o	4	11	mixed	-2,°2	@1,E3,a1,e6	lax: disloque disloquent disloquerai disloqueront	disloqua disloquai disloquaient disloquait	o	di.slɔ.ke	O	verb-fix-majority
+donner	1	o	O/o	12	21	mixed	-3,°9	@1,E4,a3,e9,§2,°2	lax: donne donnent donnera donnerai donneraient donnerais	donna donnai donnaient donnais	o	dɔ.ne	O	verb-fix-majority
+dorer	1	o	O/o	4	10	mixed	-2,°2	@1,E3,a1,e5	lax: dore dorent dorera doreront	dora doraient dorais dorait	o	dɔ.ʁe	O	verb-fix-majority
+dorloter	4	o	O/o	4	8	mixed	-2,°2	@1,E1,e6	lax: dorlote dorlotent dorloterai dorloterons	dorlotait dorlotant dorloter dorlotez	o	dɔʁ.lɔ.te	O	verb-fix-majority
+déboutonner	5	o	O/o	2	9	mixed	-2	@1,E1,a1,e6	lax: déboutonne déboutonnent	déboutonna déboutonnait déboutonnant déboutonner	o	de.bu.tɔ.ne	O	verb-fix-majority
+décapoter	5	o	O/o	2	4	mixed	-1,e1	E1,e3	lax: décapote décapoté	décapotait décapoter décapotée décapotés	o	de.ka.pɔ.te	O	verb-fix-majority
+décocher	3	o	O/o	3	11	mixed	-2,°1	@1,E3,a1,e6	lax: décoche décochent décochera	décocha décochai décochaient décochais	o	de.kɔ.ʃe	O	verb-fix-majority
+décoder	3	o	O/o	3	9	mixed	-2,°1	@1,E1,e6,§1	lax: décode décodent décoderai	décodait décodant décoder décodez	o	de.kɔ.de	O	verb-fix-majority
+décoller	3	o	O/o	9	14	mixed	-3,°6	@1,E4,a1,e7,§1	lax: décolle décollent décollera décollerai décollerait décolleras	décolla décollai décollaient décollais	o	de.kɔ.le	O	verb-fix-majority
+déconner	3	o	O/o	5	7	mixed	-3,°2	@1,E3,e3	lax: déconne déconnent déconnerai déconnerais déconnes	déconnaient déconnais déconnait déconnant	o	de.kɔ.ne	O	verb-fix-majority
+décorer	3	o	O/o	5	13	mixed	-2,°3	@1,E4,a1,e7	lax: décore décorent décorera décorerait décoreront	décora décorai décoraient décorais	o	de.kɔ.ʁe	O	verb-fix-majority
+décrocher	4	o	O/o	9	15	mixed	-2,°7	@1,E4,a1,e8,§1	lax: décroche décrochent décrochera décrocherai décrocheraient décrocherais	décrocha décrochai décrochaient décrochais	o	de.kʁɔ.ʃe	O	verb-fix-majority
+déculotter	5	o	O/o	1	6	mixed	-1	@1,E1,a1,e2,°1	lax: déculotte	déculotta déculottait déculottant déculotter	o	de.ky.lɔ.te	O	verb-fix-majority
+défroquer	4	o	O/o	1	4	mixed	e1	a1,e3	lax: défroquer	défroqua défroqué défroquée défroqués	O	de.fʁɔ.ke	O	verb-fix-majority
+dégobiller	3	o	O/o	1	6	mixed	i1	i6	lax: dégobillé	dégobilla dégobillaient dégobillait dégobillant	o	de.ɡɔ.bi.je	O	verb-fix-majority
+dégommer	3	o	O/o	4	9	mixed	-2,°2	@1,E1,e6,§1	lax: dégomme dégomment dégommera dégommerai	dégommait dégommant dégommer dégommez	o	de.ɡɔ.me	O	verb-fix-majority
+dégringoler	6	o	O/o	5	12	mixed	-2,°3	@1,E3,a2,e5,§1	lax: dégringole dégringolent dégringoleraient dégringolerais dégringoleront	dégringola dégringolai dégringolaient dégringolait	o	de.ɡʁɛ̃.ɡɔ.le	O	verb-fix-majority
+démocratiser	3	o	O/o	1	3	mixed	a1	a3	lax: démocratisé	démocratise démocratiser démocratiseront	o	de.mɔ.kʁa.ti.ze	O	verb-fix-majority
+dénoter	3	o	O/o	3	5	mixed	-2,°1	@1,E2,e2	lax: dénote dénotent dénoterait	dénotaient dénotait dénotant dénoter	o	de.nɔ.te	O	verb-fix-majority
+déplorer	4	o	O/o	7	12	mixed	-2,E1,§1,°3	@1,E3,a1,e6,§1	lax: déplore déplorent déplorerais déplorerait déplorerons déplorions	déplora déplorai déploraient déplorais	o	de.plɔ.ʁe	O	verb-fix-majority
+déshonorer	6	o	O/o	7	9	mixed	-3,°4	@1,E2,e6	lax: déshonore déshonorent déshonorera déshonorerai déshonorerais déshonorerait	déshonoraient déshonorait déshonorant déshonorer	o	de.zɔ.nɔ.ʁe	O	verb-fix-majority
+désoler	3	o	O/o	5	13	mixed	-3,°2	@1,E3,a1,e7,°1	lax: désole désolent désolera désolerait désoles	désola désolai désolaient désolais	o	de.zɔ.le	O	verb-fix-majority
+détonner	3	o	O/o	2	5	mixed	-2	@1,E2,a1,e1	lax: détonne détonnent	détonna détonnaient détonnait détonnant	o	de.tɔ.ne	O	verb-fix-majority
+développer	5	o	O/o	10	13	mixed	-2,E1,°7	@1,E3,a1,e7,§1	lax: développe développent développera développerai développeraient développerais	développa développai développaient développais	o	dɛv.lɔ.pe	O	verb-fix-majority
+dévorer	3	o	O/o	11	14	mixed	-3,E1,°7	@1,E3,a1,e7,§2	lax: dévore dévorent dévorera dévorerai dévoreraient dévorerais	dévora dévorai dévoraient dévorais	o	de.vɔ.ʁe	O	verb-fix-majority
+effilocher	4	o	O/o	3	9	mixed	-2,°1	@1,E3,e5	lax: effiloche effilochent effilochera	effilochaient effilochait effilochant effilocher	o	e.fi.lɔ.ʃe	O	verb-fix-majority
+embrocher	3	o	O/o	3	10	mixed	-2,°1	@1,E2,a1,e6	lax: embroche embrochent embrochera	embrocha embrochais embrochant embrocher	o	ɑ̃.bʁɔ.ʃe	O	verb-fix-majority
+empocher	2	o	O/o	6	13	mixed	-3,°3	@1,E3,a1,e8	lax: empoche empochent empochera empocherais empocheras empoches	empocha empochai empochaient empochais	o	ɑ̃.pɔ.ʃe	O	verb-fix-majority
+empoisonner	4	o	O/o	9	11	mixed	-3,°6	@1,E3,a1,e6	lax: empoisonne empoisonnent empoisonnera empoisonnerai empoisonneraient empoisonnerais	empoisonna empoisonnaient empoisonnais empoisonnait	o	ɑ̃.pwa.zɔ.ne	O	verb-fix-majority
+emprisonner	5	o	O/o	3	11	mixed	-2,°1	@1,E3,a1,e6	lax: emprisonne emprisonnent emprisonnera	emprisonna emprisonnaient emprisonnait emprisonnant	o	ɑ̃.pʁi.zɔ.ne	O	verb-fix-majority
+enclore	3	o	O/o	1	3	mixed	-1	-3	lax: enclore	enclos enclose encloses	O	ɑ̃.klɔʁ	O	verb-fix-majority
+englober	3	o	O/o	5	10	mixed	-2,°3	@1,E3,a1,e5	lax: englobe englobent englobera engloberaient engloberait	engloba englobaient englobais englobait	o	ɑ̃.ɡlɔ.be	O	verb-fix-majority
+entonner	2	o	O/o	4	11	mixed	-2,°2	@1,E4,a2,e2,§2	lax: entonne entonnent entonnera entonneraient	entonna entonnaient entonnais entonnait	o	ɑ̃.tɔ.ne	O	verb-fix-majority
+entrechoquer	5	o	O/o	3	9	mixed	-2,°1	@1,E3,e4,§1	lax: entrechoque entrechoquent entrechoqueront	entrechoquaient entrechoquait entrechoquant entrechoquer	o	ɑ̃.tʁə.ʃɔ.ke	O	verb-fix-majority
+envelopper	4	o	O/o	7	14	mixed	-3,°4	@1,E4,a1,e7,§1	lax: enveloppe enveloppent enveloppera envelopperaient envelopperait envelopperez	enveloppa enveloppai enveloppaient enveloppais	o	ɑ̃v.lɔ.pe	O	verb-fix-majority
+environner	4	o	O/o	2	8	mixed	-2	@1,E2,e5	lax: environne environnent	environnaient environnait environnant environner	o	ɑ̃.vi.ʁɔ.ne	O	verb-fix-majority
+envoler	2	o	O/o	12	15	mixed	-3,°9	@1,E4,a2,e7,§1	lax: envole envolent envolera envolerai envoleraient envolerais	envola envolai envolaient envolais	o	ɑ̃.vɔ.le	O	verb-fix-majority
+escamoter	5	o	O/o	2	9	mixed	-1,°1	@1,E2,a1,e5	lax: escamote escamoterai	escamota escamotaient escamotait escamotant	o	ɛs.ka.mɔ.te	O	verb-fix-majority
+escroquer	4	o	O/o	4	6	mixed	-3,°1	@1,e5	lax: escroque escroquent escroquera escroques	escroquant escroquer escroquez escroqué	o	ɛs.kʁɔ.ke	O	verb-fix-majority
+espionner	4	o	O/o	3	12	mixed	-1,°2	@1,E3,e6,§1,°1	lax: espionnent espionnera espionnerai	espionnaient espionnais espionnait espionnant	o	ɛs.pjɔ.ne	O	verb-fix-majority
+essorer	2	o	O/o	3	8	mixed	-2,°1	@1,E2,a1,e4	lax: essore essorent essorerait	essora essoraient essorait essorant	o	e.sɔ.ʁe	O	verb-fix-majority
+fanfaronner	5	o	O/o	2	6	mixed	-2	@1,E2,a1,e2	lax: fanfaronne fanfaronnes	fanfaronna fanfaronnaient fanfaronnait fanfaronnant	o	fɑ̃.fa.ʁɔ.ne	O	verb-fix-majority
+façonner	3	o	O/o	7	9	mixed	-2,°5	@1,E2,a1,e5	lax: façonne façonnent façonnera façonnerai façonnerais façonnerez	façonna façonnaient façonnait façonnant	o	fa.sɔ.ne	O	verb-fix-majority
+fignoler	3	o	O/o	5	9	mixed	-2,°3	@1,E2,a1,e4,§1	lax: fignole fignolent fignolerai fignolerais fignolerait	fignola fignolaient fignolait fignolant	o	fi.ɲɔ.le	O	verb-fix-majority
+flageoler	4	o	O/o	3	7	mixed	-2,°1	@1,E3,a1,e2	lax: flageole flageolent flageoleront	flageola flageolai flageolaient flageolait	o	fla.ʒɔ.le	O	verb-fix-majority
+fonctionner	5	o	O/o	7	9	mixed	-3,°4	@1,E3,a1,e3,§1	lax: fonctionne fonctionnent fonctionnera fonctionneraient fonctionnerait fonctionneront	fonctionna fonctionnaient fonctionnais fonctionnait	o	fɔ̃k.sjɔ.ne	O	verb-fix-majority
+fractionner	6	o	O/o	2	5	mixed	-1,e1	@1,E1,e3	lax: fractionne fractionnée	fractionnait fractionnant fractionner fractionné	o	fʁak.sjɔ.ne	O	verb-fix-majority
+fredonner	4	o	O/o	6	14	mixed	-2,°4	@1,E4,a2,e6,§1	lax: fredonne fredonnent fredonnera fredonnerai fredonnerait fredonneras	fredonna fredonnaient fredonnais fredonnait	o	fʁə.dɔ.ne	O	verb-fix-majority
+frictionner	6	o	O/o	4	8	mixed	-2,°2	@1,E3,a1,e3	lax: frictionne frictionnent frictionnerai frictionnerait	frictionna frictionnais frictionnait frictionnant	o	fʁik.sjɔ.ne	O	verb-fix-majority
+frissonner	4	o	O/o	3	10	mixed	-3	@1,E4,a1,e4	lax: frissonne frissonnent frissonnes	frissonna frissonnai frissonnaient frissonnais	o	fʁi.sɔ.ne	O	verb-fix-majority
+frotter	2	o	O/o	9	16	mixed	-3,°6	@1,E4,a1,e8,§2	lax: frotte frottent frottera frotterai frotterais frotterait	frotta frottai frottaient frottais	o	fʁɔ.te	O	verb-fix-majority
+fusionner	4	o	O/o	5	6	mixed	-2,°3	@1,E1,e3,§1	lax: fusionne fusionnent fusionneraient fusionnerait fusionneront	fusionnaient fusionnant fusionner fusionnons	o	fy.zjɔ.ne	O	verb-fix-majority
+galoper	3	o	O/o	6	10	mixed	-3,°3	@1,E4,a1,e3,§1	lax: galope galopent galopera galoperaient galoperez galopes	galopa galopaient galopais galopait	o	ɡa.lɔ.pe	O	verb-fix-majority
+gigoter	3	o	O/o	4	6	mixed	-3,e1	@1,E2,a1,e2	lax: gigote gigotent gigotes gigoté	gigota gigotaient gigotait gigotant	o	ʒi.ɡɔ.te	O	verb-fix-majority
+gober	1	o	O/o	7	13	mixed	-3,°4	@1,E4,a1,e6,§1	lax: gobe gobent gobera goberaient goberait goberont	goba gobaient gobais gobait	o	ɡɔ.be	O	verb-fix-majority
+gommer	1	o	O/o	4	8	mixed	-3,°1	@1,E1,a1,e5	lax: gomme gomment gommerait gommes	gomma gommait gommant gommer	o	ɡɔ.me	O	verb-fix-majority
+gondoler	3	o	O/o	3	10	mixed	-2,°1	@1,E4,e5	lax: gondole gondolent gondolera	gondolaient gondolais gondolait gondolant	o	ɡɔ̃.dɔ.le	O	verb-fix-majority
+griffonner	4	o	O/o	3	12	mixed	-3	@1,E3,a1,e7	lax: griffonne griffonnent griffonnes	griffonna griffonnai griffonnaient griffonnais	o	ɡʁi.fɔ.ne	O	verb-fix-majority
+grignoter	4	o	O/o	7	13	mixed	-2,°5	@1,E4,a1,e5,§2	lax: grignote grignotent grignotera grignoterai grignoteraient grignoterons	grignota grignotaient grignotais grignotait	o	ɡʁi.ɲɔ.te	O	verb-fix-majority
+grisonner	4	o	O/o	2	5	mixed	-2	@1,E2,e2	lax: grisonne grisonnent	grisonnaient grisonnait grisonnant grisonner	o	ɡʁi.zɔ.ne	O	verb-fix-majority
+grogner	2	o	O/o	4	11	mixed	-3,°1	@1,E4,a1,e4,§1	lax: grogne grognent grognera grognes	grogna grognai grognaient grognais	o	ɡʁɔ.ɲe	O	verb-fix-majority
+hocher	1	o	O/o	5	11	mixed	-3,°2	@1,E4,a1,e4,§1	lax: hoche hochent hocheraient hocheront hoches	hocha hochai hochaient hochais	o	ɔ.ʃe	O	verb-fix-majority
+honorer	3	o	O/o	10	15	mixed	-3,°7	@1,E4,a1,e8,§1	lax: honore honorent honorera honorerai honorerait honoreras	honora honorai honoraient honorais	o	ɔ.nɔ.ʁe	O	verb-fix-majority
+ignorer	2	o	O/o	11	17	mixed	-1,E1,°9	-2,@1,E3,a1,e8,§2	lax: ignorera ignorerai ignoreraient ignorerais ignorerait ignoreras	ignora ignorai ignoraient ignorais	o	i.ɲɔ.ʁe	O	verb-fix-majority
+immoler	2	o	O/o	1	6	mixed	-1	-1,a1,e4	lax: immole	immola immolent immoler immolé	o	i.mɔ.le	O	verb-fix-majority
+implorer	3	o	O/o	8	12	mixed	-2,E1,°5	@1,E3,a1,e6,§1	lax: implore implorent implorera implorerai implorerais implorerez	implora implorai imploraient implorais	o	ɛ̃.plɔ.ʁe	O	verb-fix-majority
+impressionner	6	o	O/o	7	12	mixed	-3,°4	@1,E4,a1,e6	lax: impressionne impressionnent impressionnera impressionnerait impressionneras impressionneront	impressionna impressionnaient impressionnais impressionnait	o	ɛ̃.pʁe.sjɔ.ne	O	verb-fix-majority
+innocenter	2	o	O/o	1	9	mixed	@1	@9	lax: innocentant	innocentait innocente innocenter innocentera	o	i.nɔ.sɑ̃.te	O	verb-fix-majority
+inoculer	2	o	O/o	1	7	mixed	y1	y7	lax: inoculant	inocule inoculent inoculer inoculerait	o	i.nɔ.ky.le	O	verb-fix-majority
+interroger	4	o	O/o	12	17	mixed	-3,°9	@1,E4,a2,e8,§2	lax: interroge interrogent interrogera interrogerai interrogeraient interrogerais	interrogea interrogeai interrogeaient interrogeais	o	ɛ̃.te.ʁɔ.ʒe	O	verb-fix-majority
+invoquer	2	o	O/o	9	13	mixed	-3,°6	@1,E3,a1,e7,§1	lax: invoque invoquent invoquera invoquerai invoquerais invoquerait	invoqua invoquai invoquaient invoquais	o	ɛ̃.vɔ.ke	O	verb-fix-majority
+isoler	2	o	O/o	6	15	mixed	-2,°4	@1,E4,a1,e8,§1	lax: isole isolent isolera isoleraient isolerait isoleront	isola isolai isolaient isolais	o	i.zɔ.le	O	verb-fix-majority
+jalonner	3	o	O/o	2	8	mixed	-2	@1,E3,e4	lax: jalonne jalonnent	jalonnaient jalonnais jalonnait jalonnant	o	ʒa.lɔ.ne	O	verb-fix-majority
+jargonner	4	o	O/o	2	3	mixed	-2	@1,e2	lax: jargonne jargonnent	jargonnant jargonner jargonné	o	ʒaʁ.ɡɔ.ne	O	verb-fix-majority
+klaxonner	4	o	O/o	5	9	mixed	-3,°2	@1,E3,a1,e4	lax: klaxonne klaxonnent klaxonnera klaxonnerai klaxonnes	klaxonna klaxonnai klaxonnaient klaxonnais	o	klak.sɔ.ne	O	verb-fix-majority
+ligoter	3	o	O/o	5	12	mixed	-2,°3	@1,E3,a1,e6,§1	lax: ligote ligotent ligoterai ligoterait ligoterons	ligota ligotaient ligotait ligotant	o	li.ɡɔ.te	O	verb-fix-majority
+lobotomiser	5	o	O/o	1	2	mixed	i1	i2	lax: lobotomisée	lobotomiser lobotomisé	O	lɔ.bɔ.tɔ.mi.ze	O	verb-fix-majority
+loger	1	o	O/o	12	15	mixed	-3,°9	@1,E4,a1,e8,§1	lax: loge logent logera logerai logeraient logerait	logea logeai logeaient logeais	o	lɔ.ʒe	O	verb-fix-majority
+loquer	1	o	O/o	1	3	mixed	e1	E1,e2	lax: loqué	loquait loquer loqués	o	lɔ.ke	O	verb-fix-majority
+lyophiliser	2	o	O/o	1	2	mixed	i1	i2	lax: lyophilisé	lyophilisant lyophiliser	o	ljɔ.fi.li.ze	O	verb-fix-majority
+marmonner	4	o	O/o	3	10	mixed	-3	@1,E2,a1,e6	lax: marmonne marmonnent marmonnes	marmonna marmonnaient marmonnait marmonnant	o	maʁ.mɔ.ne	O	verb-fix-majority
+marmotter	4	o	O/o	2	5	mixed	-2	@1,E1,a1,e2	lax: marmotte marmottes	marmotta marmottait marmottant marmotter	o	maʁ.mɔ.te	O	verb-fix-majority
+maçonner	3	o	O/o	1	6	mixed	-1	@1,e5	lax: maçonnent	maçonnant maçonner maçonné maçonnée	o	ma.sɔ.ne	O	verb-fix-majority
+mentionner	4	o	O/o	8	14	mixed	-3,°5	@1,E3,a1,e8,§1	lax: mentionne mentionnent mentionnerai mentionnerais mentionnerait mentionneras	mentionna mentionnai mentionnaient mentionnais	o	mɑ̃.sjɔ.ne	O	verb-fix-majority
+mijoter	3	o	O/o	4	12	mixed	-3,°1	@1,E3,a1,e5,§2	lax: mijote mijotent mijotera mijotes	mijota mijotaient mijotais mijotait	o	mi.ʒɔ.te	O	verb-fix-majority
+mitonner	3	o	O/o	3	8	mixed	-2,°1	@1,E2,e5	lax: mitonne mitonnent mitonnerait	mitonnaient mitonnait mitonnant mitonner	o	mi.tɔ.ne	O	verb-fix-majority
+moissonner	3	o	O/o	4	8	mixed	-2,°2	@1,E1,e6	lax: moissonne moissonnent moissonnera moissonnerai	moissonnait moissonnant moissonner moissonnez	o	mwa.sɔ.ne	O	verb-fix-majority
+monopoliser	5	o	O/o	1	11	mixed	i1	i11	lax: monopolisé	monopolisa monopolisaient monopolisais monopolisait	O	mɔ.nɔ.pɔ.li.ze	O	verb-fix-majority
+moquer	1	o	O/o	12	16	mixed	-3,°9	@1,E4,a1,e8,§2	lax: moque moquent moquera moquerai moqueraient moquerais	moqua moquai moquaient moquais	o	mɔ.ke	O	verb-fix-majority
+moutonner	3	o	O/o	2	4	mixed	-2	@1,E2,e1	lax: moutonne moutonnent	moutonnaient moutonnait moutonnant moutonner	o	mu.tɔ.ne	O	verb-fix-majority
+mâchonner	3	o	O/o	2	8	mixed	-2	@1,E3,a1,e3	lax: mâchonne mâchonnent	mâchonna mâchonnaient mâchonnais mâchonnait	o	ma.ʃɔ.ne	O	verb-fix-majority
+mémoriser	3	o	O/o	1	12	mixed	i1	i12	lax: mémorisé	mémorisaient mémorisait mémorise mémorisent	o	me.mɔ.ʁi.ze	O	verb-fix-majority
+nominer	1	o	O/o	1	5	mixed	i1	i5	lax: nominer	nomine nominé nominée nominées	O	nɔ.mi.ne	O	verb-fix-majority
+nommer	1	o	O/o	11	16	mixed	-3,°8	@1,E4,a1,e8,§2	lax: nomme nomment nommera nommerai nommerais nommerait	nomma nommai nommaient nommais	o	nɔ.me	O	verb-fix-majority
+noter	1	o	O/o	11	15	mixed	-2,§1,°8	@1,E4,a1,e8,§1	lax: note notent notera noterai noterais noterait	nota notai notaient notais	o	nɔ.te	O	verb-fix-majority
+occasionner	5	o	O/o	2	9	mixed	-2	@1,E2,a1,e5	lax: occasionne occasionnent	occasionna occasionnait occasionnant occasionner	o	ɔ.ka.zjɔ.ne	O	verb-fix-majority
+occulter	0	o	O/o	1	10	mixed	y1	y10	lax: occultant	occulta occultaient occultait occulte	o	ɔ.kyl.te	O	verb-fix-majority
+officier	0	o	O/o	2	11	mixed	i2	i11	lax: officière officié	officiaient officiais officiait officiant	o	ɔ.fi.sje	O	verb-fix-majority
+offrir	0	o	O/o	3	26	mixed	-3	@1,E7,e1,i16,§1	lax: offre offrent offres	offert offerte offertes offerts	o	ɔ.fʁiʁ	O	verb-fix-majority
+ordonner	3	o	O/o	9	14	mixed	-3,E1,°5	@1,E3,a1,e8,§1	lax: ordonne ordonnent ordonnera ordonnerai ordonnerais ordonnerait	ordonna ordonnai ordonnaient ordonnais	o	ɔʁ.dɔ.ne	O	verb-fix-majority
+papoter	3	o	O/o	3	7	mixed	-2,°1	@1,E3,e3	lax: papote papotent papotera	papotaient papotait papotant papoter	o	pa.pɔ.te	O	verb-fix-majority
+pardonner	4	o	O/o	12	16	mixed	-3,°9	@1,E4,a1,e7,§2,°1	lax: pardonne pardonnent pardonnera pardonnerai pardonneraient pardonnerais	pardonna pardonnaient pardonnais pardonnait	o	paʁ.dɔ.ne	O	verb-fix-majority
+passionner	4	o	O/o	5	13	mixed	-2,°3	@1,E4,a1,e6,§1	lax: passionne passionnent passionnera passionnerait passionneras	passionna passionnai passionnaient passionnais	o	pa.sjɔ.ne	O	verb-fix-majority
+peloter	3	o	O/o	5	11	mixed	-3,°2	@1,E3,a1,e5,§1	lax: pelote pelotent peloterai peloterait pelotes	pelota pelotaient pelotais pelotait	o	plɔ.te	O	verb-fix-majority
+pelotonner	5	o	O/o	2	11	mixed	-2	@1,E3,a1,e6	lax: pelotonne pelotonnent	pelotonna pelotonnai pelotonnaient pelotonnais	o	pə.lɔ.tɔ.ne	O	verb-fix-majority
+perfectionner	8	o	O/o	3	12	mixed	-2,°1	@1,E4,a1,e5,§1	lax: perfectionne perfectionnent perfectionnerais	perfectionna perfectionnaient perfectionnais perfectionnait	o	pɛʁ.fɛk.sjɔ.ne	O	verb-fix-majority
+picoler	3	o	O/o	4	8	mixed	-3,°1	@1,E3,e4	lax: picole picolent picolerait picoles	picolaient picolais picolait picolant	o	pi.kɔ.le	O	verb-fix-majority
+pigeonner	3	o	O/o	1	3	mixed	-1	@1,e2	lax: pigeonne	pigeonnant pigeonner pigeonné	o	pi.ʒɔ.ne	O	verb-fix-majority
+pilonner	3	o	O/o	2	9	mixed	-1,°1	@1,E2,e6	lax: pilonnent pilonnera	pilonnaient pilonnait pilonnant pilonner	o	pi.lɔ.ne	O	verb-fix-majority
+piloter	3	o	O/o	8	13	mixed	-3,°5	@1,E4,a1,e7	lax: pilote pilotent pilotera piloterai piloterait piloteras	pilota pilotaient pilotais pilotait	o	pi.lɔ.te	O	verb-fix-majority
+piocher	2	o	O/o	4	8	mixed	-3,e1	@1,E3,e4	lax: pioche piochent pioches pioché	piochaient piochais piochait piochant	o	pjɔ.ʃe	O	verb-fix-majority
+plafonner	4	o	O/o	1	5	mixed	-1	@1,e3,§1	lax: plafonne	plafonnant plafonner plafonnons plafonné	o	pla.fɔ.ne	O	verb-fix-majority
+plastronner	6	o	O/o	3	4	mixed	-3	@1,E2,e1	lax: plastronne plastronnent plastronnes	plastronnaient plastronnait plastronnant plastronner	o	plas.tʁɔ.ne	O	verb-fix-majority
+polariser	1	o	O/o	1	7	mixed	a1	a7	lax: polarisant	polarisaient polarisait polarise polarisent	o	pɔ.la.ʁi.ze	O	verb-fix-majority
+pommer	1	o	O/o	3	4	mixed	-2,e1	E1,e3	lax: pomme pommer pommes	pommaient pommé pommée pommées	O	pɔ.me	O	verb-fix-majority
+pomponner	3	o	O/o	2	10	mixed	-2	@1,E2,a1,e6	lax: pomponne pomponnent	pomponna pomponnaient pomponnait pomponnant	o	pɔ̃.pɔ.ne	O	verb-fix-majority
+postillonner	6	o	O/o	3	6	mixed	-3	@1,E1,a1,e3	lax: postillonne postillonnent postillonnes	postillonna postillonnait postillonnant postillonner	o	pɔs.ti.jɔ.ne	O	verb-fix-majority
+promener	2	o	O/o	10	19	mixed	e1,°9	E12,°7	lax: promenai promenaient promenais promenait promenant promener	promena promenez promeniez promenions	O	pʁɔ.mə.ne	O	verb-fix-majority
+provenir	2	o	O/o	1	8	mixed	°1	52,E2,°4	lax: provenu	provenaient provenait provenant provenir	o	pʁɔv.niʁ	O	verb-fix-majority
+provoquer	4	o	O/o	13	15	mixed	-3,°10	@1,E4,a1,e7,§2	lax: provoque provoquent provoquera provoquerai provoqueraient provoquerais	provoqua provoquai provoquaient provoquais	o	pʁɔ.vɔ.ke	O	verb-fix-majority
+préconiser	4	o	O/o	1	15	mixed	i1	i15	lax: préconisant	préconisa préconisaient préconisais préconisait	o	pʁe.kɔ.ni.ze	O	verb-fix-majority
+prénommer	4	o	O/o	2	10	mixed	-2	@1,E4,a1,e4	lax: prénomme prénomment	prénomma prénommaient prénommais prénommait	o	pʁe.nɔ.me	O	verb-fix-majority
+questionner	5	o	O/o	7	14	mixed	-2,°5	@1,E4,a1,e6,§2	lax: questionne questionnent questionnera questionnerai questionnerait questionnerons	questionna questionnai questionnaient questionnais	o	kɛs.tjɔ.ne	O	verb-fix-majority
+raccommoder	5	o	O/o	4	11	mixed	-2,°2	@1,E2,a1,e6,§1	lax: raccommode raccommodent raccommodera raccommoderai	raccommoda raccommodaient raccommodait raccommodant	o	ʁa.kɔ.mɔ.de	O	verb-fix-majority
+raccrocher	4	o	O/o	9	14	mixed	-3,°6	@1,E4,a1,e7,§1	lax: raccroche raccrochent raccrochera raccrocherai raccrocheraient raccrocherais	raccrocha raccrochai raccrochaient raccrochais	o	ʁa.kʁɔ.ʃe	O	verb-fix-majority
+raisonner	3	o	O/o	3	12	mixed	-3	@1,E3,a1,e6,§1	lax: raisonne raisonnent raisonnes	raisonna raisonnai raisonnaient raisonnais	o	ʁɛ.zɔ.ne	O	verb-fix-majority
+randonner	3	o	O/o	2	4	mixed	-1,e1	E1,e3	lax: randonne randonner	randonnait randonnez randonnée randonnées	O	ʁɑ̃.dɔ.ne	O	verb-fix-majority
+rapprocher	4	o	O/o	6	16	mixed	-2,°4	@1,E4,a1,e8,§2	lax: rapproche rapprochent rapprochera rapprocherais rapprocherait rapprocheront	rapprocha rapprochai rapprochaient rapprochais	o	ʁa.pʁɔ.ʃe	O	verb-fix-majority
+reboutonner	5	o	O/o	2	10	mixed	-1,°1	@1,E3,a1,e5	lax: reboutonne reboutonnerait	reboutonna reboutonnaient reboutonnais reboutonnant	o	ʁə.bu.tɔ.ne	O	verb-fix-majority
+rencogner	3	o	O/o	2	6	mixed	-1,°1	@1,E1,a1,e3	lax: rencogne rencognerait	rencogna rencognait rencognant rencogner	o	ʁɑ̃.kɔ.ɲe	O	verb-fix-majority
+renfrogner	4	o	O/o	2	7	mixed	-1,°1	@1,E1,a1,e4	lax: renfrogne renfrognerait	renfrogna renfrognait renfrognant renfrogner	o	ʁɑ̃.fʁɔ.ɲe	O	verb-fix-majority
+reprocher	4	o	O/o	10	17	mixed	-3,°7	@1,E4,a1,e8,§2,°1	lax: reproche reprochent reprochera reprocherai reprocherais reprocherait	reprocha reprochai reprochaient reprochais	o	ʁə.pʁɔ.ʃe	O	verb-fix-majority
+rigoler	3	o	O/o	11	12	mixed	-3,°8	@1,E4,a1,e4,§2	lax: rigole rigolent rigolera rigolerai rigoleraient rigolerais	rigola rigolaient rigolais rigolait	o	ʁi.ɡɔ.le	O	verb-fix-majority
+rocher	1	o	O/o	1	4	mixed	e1	a1,e3	lax: roché	rochas rocher rochers	o	ʁɔ.ʃe	O	verb-fix-majority
+romancer	1	o	O/o	1	3	mixed	@1	@3	lax: romancé	romance romancer romancée	o	ʁɔ.mɑ̃.se	O	verb-fix-majority
+ronchonner	3	o	O/o	3	7	mixed	-3	@1,E3,a1,e2	lax: ronchonne ronchonnent ronchonnes	ronchonna ronchonnaient ronchonnais ronchonnait	o	ʁɔ̃.ʃɔ.ne	O	verb-fix-majority
+ronronner	3	o	O/o	3	9	mixed	-2,°1	@1,E4,a1,e2,§1	lax: ronronne ronronnent ronronnerait	ronronna ronronnaient ronronnais ronronnait	o	ʁɔ̃.ʁɔ.ne	O	verb-fix-majority
+rosser	1	o	O/o	4	9	mixed	-3,°1	@1,E2,a1,e5	lax: rosse rossent rosserai rosses	rossa rossaient rossait rossant	o	ʁɔ.se	O	verb-fix-majority
+roter	1	o	O/o	4	9	mixed	-3,°1	@1,E3,a1,e4	lax: rote rotent rotera rotes	rota rotaient rotais rotait	o	ʁɔ.te	O	verb-fix-majority
+réceptionner	7	o	O/o	3	5	mixed	-2,°1	@1,a1,e3	lax: réceptionne réceptionnent réceptionnera	réceptionna réceptionnant réceptionner réceptionné	o	ʁe.sɛp.sjɔ.ne	O	verb-fix-majority
+réquisitionner	8	o	O/o	1	10	mixed	-1	@1,E2,e6,§1	lax: réquisitionne	réquisitionnais réquisitionnait réquisitionnant réquisitionner	o	ʁe.ki.zi.sjɔ.ne	O	verb-fix-majority
+résonner	3	o	O/o	5	8	mixed	-2,°3	@1,E3,a1,e3	lax: résonne résonnent résonnera résonneraient résonneront	résonna résonnaient résonnait résonnant	o	ʁe.zɔ.ne	O	verb-fix-majority
+réveillonner	5	o	O/o	3	6	mixed	-1,e1,°1	E3,a1,e1,§1	lax: réveillonne réveillonnerons réveillonné	réveillonnaient réveillonnait réveillonner réveillonnons	o	ʁe.vɛ.jɔ.ne	O	verb-fix-majority
+sanctionner	5	o	O/o	3	11	mixed	-1,°2	@1,E3,e6,§1	lax: sanctionne sanctionnera sanctionnerait	sanctionnaient sanctionnait sanctionnant sanctionner	o	sɑ̃k.sjɔ.ne	O	verb-fix-majority
+saucissonner	5	o	O/o	1	5	mixed	-1	@1,e4	lax: saucissonne	saucissonnant saucissonner saucissonné saucissonnée	o	so.si.sɔ.ne	O	verb-fix-majority
+savonner	3	o	O/o	3	10	mixed	-2,°1	@1,E3,a1,e5	lax: savonne savonnent savonnera	savonna savonnai savonnaient savonnais	o	sa.vɔ.ne	O	verb-fix-majority
+sermonner	4	o	O/o	3	8	mixed	-2,°1	@1,E2,a1,e4	lax: sermonne sermonnerai sermonnes	sermonna sermonnaient sermonnait sermonnant	o	sɛʁ.mɔ.ne	O	verb-fix-majority
+siffloter	4	o	O/o	2	8	mixed	-1,°1	@1,E3,a1,e3	lax: sifflote siffloterai	sifflota sifflotais sifflotait sifflotant	o	si.flɔ.te	O	verb-fix-majority
+sillonner	3	o	O/o	3	13	mixed	-3	@1,E4,a1,e6,§1	lax: sillonne sillonnent sillonnes	sillonna sillonnaient sillonnais sillonnait	o	si.jɔ.ne	O	verb-fix-majority
+siroter	3	o	O/o	3	9	mixed	-2,°1	@1,E3,a1,e3,§1	lax: sirote sirotent siroterais	sirota sirotaient sirotais sirotait	o	si.ʁɔ.te	O	verb-fix-majority
+sommer	1	o	O/o	3	12	mixed	-3	@1,E3,a1,e6,§1	lax: somme somment sommes	somma sommai sommais sommait	o	sɔ.me	O	verb-fix-majority
+somnoler	4	o	O/o	3	9	mixed	-2,°1	@1,E3,a1,e4	lax: somnole somnolent somnolerais	somnola somnolai somnolaient somnolais	o	sɔm.nɔ.le	O	verb-fix-majority
+sonner	1	o	O/o	10	15	mixed	-3,°7	@1,E4,a1,e8,§1	lax: sonne sonnent sonnera sonnerai sonnerais sonnerait	sonna sonnai sonnaient sonnais	o	sɔ.ne	O	verb-fix-majority
+soupçonner	4	o	O/o	7	17	mixed	-3,°4	@1,E4,a1,e8,§2,°1	lax: soupçonne soupçonnent soupçonnera soupçonnerais soupçonnerait soupçonneront	soupçonna soupçonnai soupçonnaient soupçonnais	o	sup.sɔ.ne	O	verb-fix-majority
+stationner	5	o	O/o	3	12	mixed	-2,°1	@1,E3,a1,e6,§1	lax: stationne stationnent stationnera	stationna stationnaient stationnait stationnant	o	sta.sjɔ.ne	O	verb-fix-majority
+stopper	2	o	O/o	6	15	mixed	-3,°3	@1,E4,a1,e7,§2	lax: stoppe stoppent stoppera stopperai stopperiez stoppes	stoppa stoppai stoppaient stoppais	o	stɔ.pe	O	verb-fix-majority
+stéréotyper	5	o	O/o	1	4	mixed	i1	i4	lax: stéréotyper	stéréotypé stéréotypée stéréotypées stéréotypés	O	ste.ʁe.ɔ.ti.pe	O	verb-fix-majority
+subordonner	6	o	O/o	1	8	mixed	-1	@1,E2,e5	lax: subordonne	subordonnaient subordonnais subordonnant subordonner	o	sy.bɔʁ.dɔ.ne	O	verb-fix-majority
+subventionner	7	o	O/o	3	5	mixed	-2,°1	@1,e4	lax: subventionne subventionnent subventionnera	subventionnant subventionner subventionné subventionnée	o	syb.vɑ̃.sjɔ.ne	O	verb-fix-majority
+suffoquer	3	o	O/o	5	14	mixed	-2,°3	@1,E4,a1,e6,§2	lax: suffoque suffoquent suffoquera suffoquerait suffoqueront	suffoqua suffoquai suffoquaient suffoquais	o	sy.fɔ.ke	O	verb-fix-majority
+surnommer	4	o	O/o	2	13	mixed	-2	@1,E4,a1,e4,§1,°2	lax: surnomme surnomment	surnomma surnommaient surnommais surnommait	o	syʁ.nɔ.me	O	verb-fix-majority
+survoler	4	o	O/o	6	13	mixed	-2,°4	@1,E3,a2,e5,§2	lax: survole survolent survolera survolerai survolerez survolerons	survola survolaient survolais survolait	o	syʁ.vɔ.le	O	verb-fix-majority
+syncoper	3	o	O/o	1	3	mixed	e1	e3	lax: syncoper	syncopé syncopée syncopés	O	sɛ̃.kɔ.pe	O	verb-fix-majority
+talonner	3	o	O/o	2	8	mixed	-2	@1,E1,a1,e4,§1	lax: talonne talonnent	talonna talonnait talonnant talonner	o	ta.lɔ.ne	O	verb-fix-majority
+tamponner	3	o	O/o	3	11	mixed	-2,°1	@1,E3,a1,e6	lax: tamponne tamponnent tamponnera	tamponna tamponnai tamponnaient tamponnais	o	tɑ̃.pɔ.ne	O	verb-fix-majority
+tisonner	3	o	O/o	2	5	mixed	-2	@1,E1,a1,e2	lax: tisonne tisonnent	tisonna tisonnait tisonnant tisonner	o	ti.zɔ.ne	O	verb-fix-majority
+tonner	1	o	O/o	4	8	mixed	-3,°1	@1,E3,a1,e3	lax: tonne tonnent tonnerait tonnes	tonna tonnaient tonnais tonnait	o	tɔ.ne	O	verb-fix-majority
+tourbillonner	6	o	O/o	2	9	mixed	-2	@1,E4,a1,e3	lax: tourbillonne tourbillonnent	tourbillonna tourbillonnaient tourbillonnais tourbillonnait	o	tuʁ.bi.jɔ.ne	O	verb-fix-majority
+tournicoter	6	o	O/o	3	7	mixed	-2,°1	@1,E2,a1,e3	lax: tournicote tournicotent tournicoterais	tournicota tournicotais tournicotait tournicotant	o	tuʁ.ni.kɔ.te	O	verb-fix-majority
+tricoter	4	o	O/o	7	12	mixed	-2,°5	@1,E3,a1,e7	lax: tricote tricotent tricotera tricoterai tricoterait tricoteras	tricota tricotai tricotaient tricotais	o	tʁi.kɔ.te	O	verb-fix-majority
+tripoter	4	o	O/o	4	13	mixed	-3,°1	@1,E4,a1,e7	lax: tripote tripotent tripoterai tripotes	tripota tripotaient tripotais tripotait	o	tʁi.pɔ.te	O	verb-fix-majority
+troquer	2	o	O/o	4	13	mixed	-1,°3	@1,E4,a2,e6	lax: troque troquera troquerai troquerais	troqua troquaient troquais troquait	o	tʁɔ.ke	O	verb-fix-majority
+trotter	2	o	O/o	5	10	mixed	-3,°2	@1,E3,a1,e3,§2	lax: trotte trottent trottera trotterions trottes	trotta trottaient trottais trottait	o	tʁɔ.te	O	verb-fix-majority
+tâtonner	3	o	O/o	4	12	mixed	-2,°2	@1,E4,a2,e4,§1	lax: tâtonne tâtonnent tâtonnera tâtonnerais	tâtonna tâtonnai tâtonnaient tâtonnais	o	tɑ.tɔ.ne	O	verb-fix-majority
+violer	2	o	O/o	8	12	mixed	-3,°5	@1,E3,a1,e6,§1	lax: viole violent violerai violerais violerait violeras	viola violaient violais violait	o	vjɔ.le	O	verb-fix-majority
+visionner	4	o	O/o	4	7	mixed	-2,°2	@1,a1,e4,§1	lax: visionne visionnent visionnera visionneront	visionna visionnant visionner visionnez	o	vi.zjɔ.ne	O	verb-fix-majority
+voguer	1	o	O/o	8	9	mixed	-3,°5	@1,E3,a1,e2,§2	lax: vogue voguent voguera voguerai voguerait voguerions	vogua voguaient voguais voguait	o	vɔ.ɡe	O	verb-fix-majority
+voler	1	o	O/o	13	16	mixed	-3,°10	@1,E4,a1,e8,§2	lax: vole volent volera volerai voleraient volerais	vola volai volaient volais	o	vɔ.le	O	verb-fix-majority
+voter	1	o	O/o	11	15	mixed	-3,°8	@1,E4,a1,e7,§2	lax: vote votent votera voterai voterais voterait	vota votaient votais votait	o	vɔ.te	O	verb-fix-majority
+ânonner	2	o	O/o	1	7	mixed	-1	@1,E2,a1,e2,§1	lax: ânonne	ânonna ânonnaient ânonnait ânonnant	o	ɑ.nɔ.ne	O	verb-fix-majority
+échelonner	4	o	O/o	3	8	mixed	-2,°1	@1,E2,e5	lax: échelonne échelonnent échelonnerons	échelonnaient échelonnait échelonnant échelonner	o	eʃ.lɔ.ne	O	verb-fix-majority
+écloper	3	o	O/o	1	3	mixed	e1	E1,e2	lax: écloper	éclopait éclopé éclopés	O	e.klɔ.pe	O	verb-fix-majority
+écosser	2	o	O/o	2	8	mixed	-2	@1,E3,a1,e3	lax: écosse écossent	écossa écossaient écossais écossait	o	e.kɔ.se	O	verb-fix-majority
+élaborer	4	o	O/o	3	14	mixed	-2,°1	@1,E3,a1,e7,§2	lax: élabore élaborent élaboreraient	élabora élaborai élaboraient élaborait	o	e.la.bɔ.ʁe	O	verb-fix-majority
+éperonner	4	o	O/o	2	8	mixed	-1,°1	@1,E1,a1,e5	lax: éperonne éperonnera	éperonna éperonnant éperonner éperonnez	o	e.pʁɔ.ne	O	verb-fix-majority
+étonner	2	o	O/o	12	18	mixed	-3,°9	@1,E4,a2,e8,§2,°1	lax: étonne étonnent étonnera étonnerai étonneraient étonnerais	étonna étonnai étonnaient étonnais	o	e.tɔ.ne	O	verb-fix-majority
+évoquer	2	o	O/o	10	17	mixed	-3,°7	@1,E4,a2,e8,§2	lax: évoque évoquent évoquera évoquerai évoqueraient évoquerait	évoqua évoquai évoquaient évoquais	o	e.vɔ.ke	O	verb-fix-majority
+esseuler	0	e	E/e	2	2	mixed	92	92	tense: esseulé esseulée	esseulées esseulés		e.sø.le		no-wikt
+lessiveur	1	e	E/e	1	1	mixed	i1	i1	tense: lessiveuse	lessiveuses		le.si.vœʁ		no-wikt
+parabellum	5	e	E/e	1	1	mixed	O1	O1	tense: parabellum	parabellums	e	pa.ʁa.be.lum		no-wikt
+alloc	2	o	O/o	1	1	mixed	-1	-1	tense: allocs	alloc	O			no-wikt
+balloter	3	o	O/o	2	8	mixed	-2	@1,E3,e4	lax: ballotte ballottent	ballottaient ballottait ballottant ballottèrent		ba.lɔ.te		no-wikt
+bedonner	3	o	O/o	1	1	mixed	-1	@1	tense: bedonnant	bedonne		bə.dɔ.ne		no-wikt
+besogner	3	o	O/o	4	7	mixed	-2,e1,°1	@1,E4,a1,e1	lax: besogne besognent besogneras besogné	besogna besognaient besognais besognait	o	bə.zɔ.ɲe		no-wikt
+bigot	3	o	O/o	3	4	mixed	-3	-4	lax: bigote bigotes	bigot bigots	o	biɡ-		no-wikt
+chopper	1	o	O/o	3	5	mixed	-3	91,e3,§1	lax: choppe choppent choppes	choppers choppez choppons choppé		ts		no-wikt
+citronner	4	o	O/o	1	1	mixed	e1	e1	tense: citronnez	citronnée		si.tʁɔ.ne		no-wikt
+crayonner	3	o	O/o	1	8	mixed	-1	@1,E1,a1,e5	lax: crayonne	crayonna crayonnait crayonnant crayonner	o	kʁɛ.jɔ.ne		no-wikt
+dropper	2	o	O/o	1	1	mixed	-1	@1	tense: droppant	droppe		dʁɔ.pe		no-wikt
+déflationniste	7	o	O/o	1	1	mixed	i1	i1	tense: déflationnistes	déflationniste	O	mf		no-wikt
+dépolitiser	3	o	O/o	1	1	mixed	i1	i1	tense: dépolitisant	dépolitisé		de.pɔ.li.ti.ze		no-wikt
+encapuchonner	6	o	O/o	1	7	mixed	-1	@1,E1,a1,e4	lax: encapuchonne	encapuchonna encapuchonnait encapuchonnant encapuchonné		ɑ̃.ka.py.ʃɔ.ne		no-wikt
+explorer	4	o	O/o	6	15	mixed	-2,°4	@1,E4,a1,e7,§2	lax: explore explorent explorera explorerai explorerez explorerons	explora explorai exploraient explorais	o			no-wikt
+fractionné	6	o	O/o	1	1	mixed	e1	e1	tense: fractionnées	fractionnée		fʁak.sjɔ.ne		no-wikt
+greloter	4	o	O/o	3	10	mixed	-3	@1,E4,a1,e2,§2	lax: grelotte grelottent grelottes	grelotta grelottaient grelottais grelottait		ɡʁə.lɔ.te		no-wikt
+interconnecter	5	o	O/o	1	1	mixed	E1	E1	tense: interconnectée	interconnecté		ɛ̃.tɛʁ.kɔ.nɛk.te		no-wikt
+missionner	4	o	O/o	1	2	mixed	e1	a1,e1	lax: missionné	missionna missionnés		mi.sjɔ.ne		no-wikt
+monnayeur	1	o	O/o	1	1	mixed	E1	E1	tense: monnayeurs	monnayeur	O	mɔ.nɛ.jœʁ		no-wikt
+pinçoter	3	o	O/o	2	1	mixed	-1,E1	@1	tense: pinçotant	pinçotait pinçote		pɛ̃.sɔ.te		no-wikt
+rayonner	2	o	O/o	5	8	mixed	-3,°2	@1,E3,a1,e3	lax: rayonne rayonnent rayonnera rayonnerait rayonnes	rayonna rayonnaient rayonnais rayonnait	o	ʁɛ.jɔ.ne		no-wikt
+redimensionner	8	o	O/o	1	1	mixed	e1	e1	tense: redimensionnées	redimensionner	O	ʁə.di.mɑ̃.sjɔ.ne		no-wikt
+revoler	3	o	O/o	4	2	mixed	-2,e1,°1	E1,e1	tense: revolait revolé	revole revolent revoler revolera	O	ʁə.vɔ.le		no-wikt
+vibrionner	5	o	O/o	1	3	mixed	-1	@1,E2	lax: vibrionne	vibrionnaient vibrionnait vibrionnant		vi.bʁi.ɔ.ne		no-wikt
+volanter	1	o	O/o	1	2	mixed	@1	@2	lax: volanté	volante volantes		vɔ.lɑ̃.te		no-wikt
+wisigoth	5	o	O/o	1	1	mixed	-1	-1	tense: wisigoths	wisigothe		vi.zi.ɡo		no-wikt
+amidonner	4	o	O/o	1	7	mixed	-1	E1,e6	lax: amidonnent	amidonnaient amidonner amidonnez amidonné	o	a.mi.dɔ.ne		position
+approvisionner	8	o	O/o	4	8	mixed	-2,@1,°1	E1,e6,§1	lax: approvisionnant approvisionne approvisionnent approvisionnera	approvisionnait approvisionner approvisionniez approvisionnons	o	a.pʁɔ.vi.zjɔ.ne		position
+assaisonner	4	o	O/o	2	8	mixed	-1,°1	E2,a1,e5	lax: assaisonne assaisonnerait	assaisonna assaisonnait assaisonner assaisonnèrent	o	a.sɛ.zɔ.ne		position
+auditionner	5	o	O/o	5	5	mixed	-3,°2	E1,e4	tense: auditionnais auditionner auditionnez auditionné auditionnée	auditionne auditionnent auditionnera auditionnerais	o	o.di.sjɔ.ne		position
+bagotter	3	o	O/o	1	3	mixed	-1	E2,e1	lax: bagotte	bagottaient bagottais bagotter	o	ba.ɡɔ.te		position
+ballonner	3	o	O/o	2	6	mixed	-2	E1,e5	lax: ballonne ballonnent	ballonnaient ballonner ballonné ballonnée	o	ba.lɔ.ne		position
+biberonner	5	o	O/o	1	3	mixed	-1	E1,e2	lax: biberonne	biberonnait biberonner biberonné	o	bi.bʁɔ.ne		position
+botteler	1	o	O/o	3	1	mixed	°3	E1	tense: bottèlent	botteler bottelé bottelées	O	bɔ.tle		position
+bouloter	3	o	O/o	2	2	mixed	-2	E1,e1	tense: boulottait boulottées	boulotte boulottes		bu.lɔ.te		position
+cabosser	3	o	O/o	1	7	mixed	-1	E1,a1,e5	lax: cabosse	cabossa cabossait cabosser cabossé	o	ka.bɔ.se		position
+cachetonner	5	o	O/o	1	2	mixed	-1	E2	lax: cachetonne	cachetonnais cachetonnait		kaʃ.tɔ.ne		position
+calotter	3	o	O/o	2	4	mixed	-2	E1,e3	lax: calotte calottes	calottais calotté calottées calottés		ka.lɔ.te		position
+caparaçonner	7	o	O/o	1	5	mixed	-1	E1,e4	lax: caparaçonne	caparaçonnait caparaçonné caparaçonnée caparaçonnées		ka.pa.ʁa.sɔ.ne		position
+cataloguer	5	o	O/o	5	7	mixed	-3,@1,°1	E1,e6	lax: cataloguant catalogue cataloguent cataloguerai catalogues	cataloguais cataloguer cataloguiez catalogué	o	ka.ta.lɔ.ɡe		position
+cautionner	4	o	O/o	4	5	mixed	-3,°1	E1,e4	lax: cautionne cautionnent cautionnerait cautionnes	cautionnait cautionner cautionnez cautionné	o	kɔ.sjɔ.ne		position
+champignonner	5	o	O/o	2	2	mixed	-2	E2	tense: champignonnaient champignonnait	champignonne champignonnent		ʃɑ̃.pi.ɲɔ.ne		position
+charbonner	4	o	O/o	2	6	mixed	-2	E2,e4	lax: charbonne charbonnent	charbonnaient charbonnait charbonner charbonné	o	ʃaʁ.bɔ.ne		position
+coffrer	1	o	O/o	8	9	mixed	-3,°5	E2,e6,§1	lax: coffre coffrent coffrera coffrerai coffrerais coffrerons	coffraient coffrait coffrer coffrez	o	kɔ.fʁe		position
+colleter	1	o	O/o	3	1	mixed	°3	E1	tense: collète	colleter colleté colletés	O			position
+confectionner	7	o	O/o	4	14	mixed	-1,°3	E4,a2,e7,§1	lax: confectionne confectionnerai confectionnerais confectionnerait	confectionna confectionnai confectionnaient confectionnais	o	kɔ̃.fɛk.sjɔ.ne		position
+congestionner	7	o	O/o	2	5	mixed	-2	E2,e3	lax: congestionne congestionnent	congestionnaient congestionnait congestionné congestionnée		kɔ̃.ʒɛs.tjɔ.ne		position
+coordonner	5	o	O/o	4	9	mixed	-1,@1,°2	E2,a1,e5,§1	lax: coordonnant coordonne coordonnera coordonnerait	coordonna coordonnaient coordonnait coordonner	o	kɔ.ɔʁ.dɔ.ne		position
+crocheter	2	o	O/o	8	1	mixed	°8	E1	tense: crochètent	crocheta crochetaient crochetait crochetant	O	kʁɔʃ.te		position
+dardillonner	5	o	O/o	1	1	mixed	-1	E1	tense: dardillonnaient	dardillonne		daʁ.di.jɔ.ne		position
+doper	1	o	O/o	3	7	mixed	-2,@1	E2,e5	lax: dopant dope dopes	dopais dopait doper dopez	o	dɔ.pe		position
+droguer	2	o	O/o	4	10	mixed	-3,@1	E3,e7	lax: droguant drogue droguent drogues	droguaient droguais droguait droguer	o	dʁɔ.ɡe		position
+décapuchonner	7	o	O/o	1	3	mixed	-1	E1,a1,e1	lax: décapuchonne	décapuchonna décapuchonner décapuchonnèrent	o	de.ka.py.ʃɔ.ne		position
+décrotter	4	o	O/o	3	5	mixed	-2,@1	E1,e3,§1	lax: décrottant décrotte décrottent	décrottait décrotter décrottions décrottée	o	de.kʁɔ.te		position
+déflorer	4	o	O/o	1	5	mixed	°1	E1,e4	lax: déflorerons	déflorait déflorer défloré déflorée	o	de.flɔ.ʁe		position
+dégoter	3	o	O/o	7	8	mixed	-2,°5	E1,a1,e6	lax: dégote dégoterais dégoteras dégottera dégotterai dégotterait	dégota dégotait dégoter dégotez	o	de.ɡɔ.te		position
+déloger	3	o	O/o	4	7	mixed	-1,°3	E1,a1,e5	lax: déloge délogera délogerait délogerons	délogea délogeait déloger délogez	o	de.lɔ.ʒe		position
+dénommer	3	o	O/o	1	7	mixed	-1	E2,e5	lax: dénomment	dénommaient dénommait dénommer dénommez	o	de.nɔ.me		position
+déroger	3	o	O/o	4	4	mixed	-2,°2	E1,a1,e2	tense: dérogea dérogeait déroger dérogé	déroge dérogent dérogera dérogerait	o	de.ʁɔ.ʒe		position
+désarçonner	6	o	O/o	1	7	mixed	-1	E2,a1,e4	lax: désarçonne	désarçonna désarçonnaient désarçonnait désarçonner	o	de.zaʁ.sɔ.ne		position
+désosser	3	o	O/o	1	6	mixed	-1	E1,e5	lax: désosse	désossait désosser désossé désossée	o	de.zɔ.se		position
+détoner	3	o	O/o	1	3	mixed	°1	E1,e2	lax: détonera	détonait détoner détonée	o	de.tɔ.ne		position
+festonner	4	o	O/o	1	7	mixed	-1	E2,e5	lax: festonne	festonnaient festonnait festonner festonné	o	fɛs.tɔ.ne		position
+folichonner	5	o	O/o	1	1	mixed	-1	E1	tense: folichonnait	folichonne		fɔ.li.ʃɔ.ne		position
+fourgonner	4	o	O/o	1	3	mixed	-1	E1,a1,e1	lax: fourgonne	fourgonnait fourgonnas fourgonner	o	fuʁ.ɡɔ.ne		position
+frisoter	4	o	O/o	1	5	mixed	-1	E1,e4	lax: frisottent	frisottaient frisotté frisottée frisottées		fʁi.zɔ.te		position
+galonner	3	o	O/o	1	5	mixed	-1	E1,e4	lax: galonne	galonnait galonné galonnée galonnées		ɡa.lɔ.ne		position
+garroter	3	o	O/o	2	4	mixed	-2	E1,e3	lax: garrotte garrottent	garrottaient garrotté garrottée garrottés		ɡa.ʁɔ.te		position
+graillonner	4	o	O/o	1	2	mixed	-1	E1,a1	lax: graillonne	graillonna graillonnait		ɡʁɑ.jɔ.ne		position
+grognonner	4	o	O/o	1	2	mixed	-1	a1,e1	lax: grognonne	grognonna grognonner	o	ɡʁɔ.ɲɔ.ne		position
+grommeler	2	o	O/o	10	3	mixed	°10	E3	tense: grommèle grommèlent grommèlerait	grommela grommelai grommelaient grommelait	O	ɡʁɔm.le		position
+harponner	4	o	O/o	3	5	mixed	-2,°1	a1,e4	lax: harponne harponnent harponnera	harponna harponner harponné harponnée	o	aʁ.pɔ.ne		position
+hoqueter	1	o	O/o	8	1	mixed	°8	E1	tense: hoquète	hoqueta hoquetai hoquetais hoquetait	O	ɔk.te		position
+illusionner	5	o	O/o	2	3	mixed	-2	E1,e2	lax: illusionne illusionnent	illusionnait illusionner illusionnez	o	i.ly.zjɔ.ne		position
+margoter	4	o	O/o	1	2	mixed	-1	E1,§1	lax: margotte	margotait margottons		maʁ.ɡɔ.te		position
+marronner	3	o	O/o	1	3	mixed	°1	E1,e2	lax: marronnera	marronnais marronner marronné	o	ma.ʁɔ.ne		position
+michetonner	5	o	O/o	2	2	mixed	-2	E1,e1	tense: michetonnais michetonner	michetonne michetonnes	o	miʃ.tɔ.ne		position
+papillonner	5	o	O/o	3	6	mixed	-3	E3,a1,e2	lax: papillonne papillonnent papillonnes	papillonna papillonnaient papillonnais papillonnait	o	pa.pi.jɔ.ne		position
+picoter	3	o	O/o	3	6	mixed	-2,@1	E2,a1,e3	lax: picotant picote picotent	picota picotaient picotait picoter	o	pi.kɔ.te		position
+pistonner	4	o	O/o	2	6	mixed	°2	E1,e4,§1	lax: pistonnera pistonnerai	pistonnais pistonner pistonnions pistonné	o	pis.tɔ.ne		position
+poinçonner	3	o	O/o	1	5	mixed	°1	E1,e4	lax: poinçonneraient	poinçonnait poinçonner poinçonné poinçonnée	o	pwɛ̃.sɔ.ne		position
+ponctionner	5	o	O/o	1	3	mixed	-1	E1,a1,e1	lax: ponctionne	ponctionna ponctionnait ponctionner	o	pɔ̃.ksjɔ.ne		position
+potelé	1	o	O/o	2	2	mixed	°2	E2	tense: potelées potelés	potelé potelée	O	pɔ.tə.le		position
+rançonner	3	o	O/o	1	7	mixed	-1	E2,e5	lax: rançonne	rançonnaient rançonnait rançonner rançonné	o	ʁɑ̃.sɔ.ne		position
+recoller	3	o	O/o	3	6	mixed	-2,°1	E1,a1,e4	lax: recolle recollent recollera	recolla recollait recoller recollé	o	ʁə.kɔ.le		position
+reconditionner	8	o	O/o	1	3	mixed	-1	e2,§1	lax: reconditionne	reconditionnons reconditionné reconditionnée		ʁə.kɔ̃.di.sjɔ.ne		position
+reculotter	5	o	O/o	1	4	mixed	-1	a1,e3	lax: reculotte	reculotta reculotter reculotté reculottée	o	ʁə.ky.lɔ.te		position
+renommer	3	o	O/o	1	7	mixed	°1	E1,e6	lax: renommera	renommait renommer renommez renommé	o	ʁə.nɔ.me		position
+révolutionner	8	o	O/o	3	6	mixed	°3	E2,a1,e3	lax: révolutionnera révolutionnerait révolutionneront	révolutionna révolutionnaient révolutionnait révolutionner	o	ʁe.vɔ.ly.sjɔ.ne		position
+saboter	3	o	O/o	6	9	mixed	-2,@1,°3	E2,e6,§1	lax: sabotant sabote sabotent saboterai saboterait saboteront	sabotais sabotait saboter sabotez	o	sa.bɔ.te		position
+sectionner	5	o	O/o	4	8	mixed	-2,@1,°1	E1,a1,e6	lax: sectionnant sectionne sectionnent sectionnera	sectionna sectionnaient sectionner sectionnez	o	sɛk.sjɔ.ne		position
+siphonner	3	o	O/o	1	5	mixed	-1	E1,e4	lax: siphonne	siphonnait siphonner siphonné siphonnée	o	si.fɔ.ne		position
+snober	2	o	O/o	3	7	mixed	-2,°1	E2,e5	lax: snobe snobent snoberez	snobaient snobais snober snobez	o	snɔ.be		position
+sélectionner	7	o	O/o	5	9	mixed	-1,@1,°3	E2,a1,e6	lax: sélectionnant sélectionne sélectionnera sélectionnerai sélectionnerais	sélectionna sélectionnaient sélectionnait sélectionner	o	se.lɛk.sjɔ.ne		position
+torchonner	4	o	O/o	1	2	mixed	-1	E1,e1	lax: torchonne	torchonnait torchonner	o	tɔʁ.ʃɔ.ne		position
+tronçonner	4	o	O/o	1	7	mixed	-1	E2,e5	lax: tronçonne	tronçonnaient tronçonnait tronçonner tronçonné	o	tʁɔ̃.sɔ.ne		position
+voleter	1	o	O/o	6	2	mixed	°6	E2	tense: volète volètent	voleta voletaient voletait voletant	O	vɔl.te		position
+écoper	2	o	O/o	9	10	mixed	-3,°6	E2,a1,e6,§1	lax: écope écopent écopera écoperai écoperait écoperas	écopa écopai écopais écopait	o	e.kɔ.pe		position
+étoffer	2	o	O/o	2	6	mixed	-2	E2,e4	lax: étoffe étoffes	étoffaient étoffait étoffer étoffé	o	e.tɔ.fe		position
+évaporer	4	o	O/o	4	7	mixed	-2,°2	E3,a1,e3	lax: évapore évaporent évaporerait évaporeront	évapora évaporaient évaporais évaporait	o	e.va.pɔ.ʁe		position

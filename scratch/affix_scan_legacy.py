@@ -37,10 +37,12 @@ RULES_TSV = "scratch/affix-rules.tsv"           # Phase 3+4 final output (DESIGN
 RULES_REPORT_MD = "scratch/affix-rules-report.md"
 POOL_PICKLE = "scratch/affix-pool.pickle"        # non-legacy Part A result, reused by --reuse-pool
 SWEEP_DIR = "scratch/affix-sweep"
+SWEEP_DIR_PARTIAL = "scratch/affix-sweep-partial"
 SWEEP_SETTINGS = (   # plan 2026-09-28 U6; stroke-frequency units, top rules score ~5,000-9,000
     ("L", 1.0, 5.0, 10.0),      # (name, EXCEPTION_ALPHA, EXCLUSION_COST, FORM_COST); L = today's
     ("M", 1.0, 50.0, 100.0),
     ("H", 2.0, 150.0, 300.0),
+    ("D", 2.0, 5.0, 100.0),     # the user's decided values (2026-09-30): fallback price 5, form cost 100
 )
 
 # Prototype strict frequency per seed family (RESUME_2026-09-26-pluvier-affix-scan.md).
@@ -299,7 +301,7 @@ def selectAndBind(cands: dict, records: list[A.WordRecord], starboard: Starboard
     with open(rulesTsv, "w", encoding="utf-8") as f:
         f.write("rank\tposition\troot\tforms\tkeys\trtfcre\tsharedWith\tscore\tstrokeFreqSaved\t"
                 "keySimilarity\twordExceptions\texceptionFreq\ttopExceptions\tcarriers\tlemmas\texamples\t"
-                "attestedShare\n")
+                "attestedShare\tfallbacks\n")
         for rank, b in enumerate(bound, 1):
             r = b.rule
             forms = " | ".join(f"{fm.ortho}(k={fm.k})" for fm in r.forms)
@@ -309,7 +311,12 @@ def selectAndBind(cands: dict, records: list[A.WordRecord], starboard: Starboard
                     f"{rtfcreOfKeys(starboard, b.keys)}\t{';'.join(b.sharedWith)}\t{r.score:.1f}\t"
                     f"{r.strokeFreqSaved:.1f}\t{r.keySimilarity:.2f}\t{r.wordExceptions}\t{r.exceptionFreq:.1f}\t"
                     f"{','.join(r.topExceptions[:10])}\t{len(carriers)}\t{lemmaCount}\t"
-                    f"{' '.join(c.rec.ortho for c in carriers[:6])}\t{attested[id(r)]:.3f}\n")
+                    f"{' '.join(c.rec.ortho for c in carriers[:6])}\t{attested[id(r)]:.3f}\t{r.fallbacks}\n")
+
+    # machine-readable rule list (the optional affix dictionary exporter reads a committed copy: affix_rules.json)
+    with open(os.path.splitext(rulesTsv)[0] + ".json", "w", encoding="utf-8") as jf:
+        json.dump([{"rank": rank, "position": b.rule.position, "ortho": b.rule.root.ortho, "phono": b.rule.root.phono,
+                    "keys": list(b.keys)} for rank, b in enumerate(bound, 1)], jf, ensure_ascii=False, indent=1)
 
     lines = ["# Affix rules (Phase 3 + 4 result, DESIGN_2026-09-27-affix-rule-selection.md; "
              "single-generator pool, PLAN_2026-09-28)", "",
@@ -341,7 +348,7 @@ def selectAndBind(cands: dict, records: list[A.WordRecord], starboard: Starboard
         if r.root.mergeParts:
             lines.append(f"- fused spelling variants: {', '.join(r.root.variants)} "
                          f"(new conflict freq {r.root.newConflictFreq:.1f})")
-        lines.append(f"- word exceptions {r.wordExceptions} (freq {r.exceptionFreq:.1f})")
+        lines.append(f"- word exceptions {r.wordExceptions} (freq {r.exceptionFreq:.1f}); scope fallbacks {r.fallbacks}")
         if r.topExceptions:
             lines.append(f"- top exceptions: {', '.join(r.topExceptions[:10])}")
         for res in sorted(r.results, key=lambda x: -x.carrier.rec.frequency)[:6]:
@@ -384,7 +391,7 @@ def selectAndBind(cands: dict, records: list[A.WordRecord], starboard: Starboard
         "rules": [(b.rule.position, b.rule.root.ortho) for b in bound],
         "forms": {(b.rule.position, b.rule.root.ortho): [fm.ortho for fm in b.rule.forms] for b in bound},
         "numForms": sum(len(b.rule.forms) for b in bound),
-        "exclusions": sum(R.exclusionCountOf(b.rule.forms) for b in bound),
+        "exclusions": sum(R.ruleExclusions(b.rule) for b in bound),
         "wordExceptions": sum(b.rule.wordExceptions for b in bound),
         "pseudo": [(b.rule.position, b.rule.root.ortho) for b in pseudo],
         "maxExceptionRate": max(exceptionRates.values(), default=0.0),
@@ -406,10 +413,12 @@ def partSelectAndBind(cands: dict, records: list[A.WordRecord], starboard: Starb
     selectAndBind(cands, records, starboard, ctx, pk, keypresses, lemmas, RULES_TSV, RULES_REPORT_MD)
 
 
-def partSweep(cands: dict, records: list[A.WordRecord], starboard: Starboard) -> None:  # type: ignore[type-arg]
+def partSweep(cands: dict, records: list[A.WordRecord], starboard: Starboard,  # type: ignore[type-arg]
+              settings: tuple[str, ...] | None = None) -> None:
     """U6: run rival resolution + Phases 3-4 once per weight setting, reusing the pool, sim
     context, phoneme keys and keypress list; every Rule is rebuilt per setting (scores depend on
-    the weights, which are module globals). Writes scratch/affix-sweep/<name>/... + comparison.md."""
+    the weights, which are module globals). Writes scratch/affix-sweep/<name>/... + comparison.md
+    (`settings` restricts the run to the named settings; comparison.md is then left untouched)."""
     from src import affixrules as R
 
     ctx, pk, keypresses, lemmas = _engine(cands, records, starboard)
@@ -417,6 +426,8 @@ def partSweep(cands: dict, records: list[A.WordRecord], starboard: Starboard) ->
     summaries: dict[str, dict] = {}  # type: ignore[type-arg]
     try:
         for name, alpha, exclCost, formCost in SWEEP_SETTINGS:
+            if settings and name not in settings:
+                continue
             R.EXCEPTION_ALPHA, R.EXCLUSION_COST, R.FORM_COST = alpha, exclCost, formCost
             print(f"=== sweep {name}: EXCEPTION_ALPHA={alpha} EXCLUSION_COST={exclCost} FORM_COST={formCost}")
             outDir = os.path.join(SWEEP_DIR, name)
@@ -425,7 +436,8 @@ def partSweep(cands: dict, records: list[A.WordRecord], starboard: Starboard) ->
                                             os.path.join(outDir, "affix-rules-report.md"))
     finally:
         R.EXCEPTION_ALPHA, R.EXCLUSION_COST, R.FORM_COST = saved
-    writeComparison(summaries)
+    if not settings:
+        writeComparison(summaries)
 
 
 def writeComparison(summaries: dict) -> None:  # type: ignore[type-arg]
@@ -602,6 +614,7 @@ def _overlap(assigned: list[B.Assigned], familyId: str) -> list[str]:
 
 
 def main() -> None:
+    global SWEEP_DIR
     ap = argparse.ArgumentParser()
     ap.add_argument("--refresh", action="store_true")
     ap.add_argument("--part", choices=["a", "b", "all"], default="all")
@@ -620,7 +633,16 @@ def main() -> None:
     ap.add_argument("--sweep", action="store_true",
                      help="--part b: run selection at each SWEEP_SETTINGS weight setting "
                           f"and write {SWEEP_DIR}/")
+    ap.add_argument("--settings", default=None,
+                     help="--sweep: comma-separated weight settings to run (e.g. H); default all of "
+                          "SWEEP_SETTINGS, and comparison.md is only written then")
+    ap.add_argument("--partial-overlap", action="store_true",
+                    help="experiment: a RULE merges unless ALL its keys are in the neighbour stroke "
+                         "(src.affixes.RULE_PARTIAL_OVERLAP); --sweep then writes to SWEEP_DIR_PARTIAL")
     args = ap.parse_args()
+    if args.partial_overlap:
+        A.RULE_PARTIAL_OVERLAP = True
+        SWEEP_DIR = SWEEP_DIR_PARTIAL
     if args.max_pool is not None:
         A.MAX_POOL = args.max_pool
     if args.growth_min_expand is not None:
@@ -654,7 +676,8 @@ def main() -> None:
             if args.preview_only:
                 partRules(cands, records, starboard)
             elif args.sweep:
-                partSweep(cands, records, starboard)
+                partSweep(cands, records, starboard,
+                           tuple(args.settings.split(",")) if args.settings else None)
             else:
                 partSelectAndBind(cands, records, starboard)
     print(f"total {time.time() - t:.0f}s")

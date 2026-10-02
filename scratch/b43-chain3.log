@@ -1,0 +1,7 @@
+=== probe2 dump candidates (seed 0) ===
+dump exit=0
+=== probe2 seed 0 ===
+p2seed0 exit=1
+=== probe2 seed 1 ===
+p2seed1 exit=1
+=== done ===

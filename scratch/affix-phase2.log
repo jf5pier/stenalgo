@@ -1,0 +1,5 @@
+phase 2: 2201 candidate rules (proxy score) (12s)
+1751 legal keypresses (0s)
+phase 2 preview: exact-scored top 30 roots (1s)
+wrote scratch/affix-candidate-rules.tsv, scratch/affix-rules-preview.md
+total 21s

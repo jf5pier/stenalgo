@@ -1,0 +1,9 @@
+sameLemmeGramCat ['dételle', 'détellent', 'dételles'] [('détèle', 'imp:pre:2s;ind:pre:3s;', 0.16, False), ('dételle', 'ind:pre:1s;sub:pre:1s;sub:pre:3s;', 0.0, False), ('dételles', 'ind:pre:2s;sub:pre:2s;', 0.0, False), ('détellent', 'ind:pre:3p;', 0.0, False)]
+sameLemmeGramCat ['caquette', 'caquettent', 'caquète'] [('caquètent', 'ind:pre:3p;', 0.14, False), ('caquète', 'ind:pre:1s;ind:pre:3s;', 0.07, False), ('caquette', 'sub:pre:1s;sub:pre:3s;', 0.0, False), ('caquettent', 'sub:pre:3p;', 0.0, False)]
+sameLemmeGramCat ['déchiquette', 'déchiquettent', 'déchiquètent', 'déchiquètes'] [('déchiquète', 'imp:pre:2s;ind:pre:3s;', 0.14, False), ('déchiquètent', 'ind:pre:3p;', 0.04, False), ('déchiquètes', 'ind:pre:2s;', 0.0, False), ('déchiquette', 'sub:pre:1s;sub:pre:3s;', 0.0, False), ('déchiquettent', 'sub:pre:3p;', 0.0, False)]
+sameLemmeGramCat ['empaquette', 'empaquettent', 'empaquètent', 'empaquètes'] [('empaquète', 'imp:pre:2s;ind:pre:3s;', 0.03, False), ('empaquètent', 'ind:pre:3p;', 0.0, False), ('empaquètes', 'ind:pre:2s;', 0.0, False), ('empaquette', 'sub:pre:1s;sub:pre:3s;', 0.0, False), ('empaquettent', 'sub:pre:3p;', 0.0, False)]
+sameLemmeGramCat ['soufflette', 'soufflettent', 'soufflètent', 'soufflètes'] [('soufflète', 'imp:pre:2s;ind:pre:3s;', 0.02, False), ('soufflètent', 'ind:pre:3p;', 0.0, False), ('soufflètes', 'ind:pre:2s;', 0.0, False), ('soufflette', 'sub:pre:1s;sub:pre:3s;', 0.0, False), ('soufflettent', 'sub:pre:3p;', 0.0, False)]
+sameLemmeGramCat ['nivelle', 'nivelles', 'nivèlent'] [('nivèle', 'ind:pre:1s;', 0.0, False), ('nivèlent', 'ind:pre:3p;', 0.0, False), ('nivelles', 'ind:pre:2s;sub:pre:2s;', 0.0, False), ('nivelle', 'ind:pre:3s;sub:pre:1s;sub:pre:3s;imp:pre:2s;', 0.0, False)]
+    6 sameLemmeGramCat: a spelling unreachable in Plover
+   98 sameLemmeGramCat: has an unresolved twin Word
+  104 sameLemmeGramCat: total

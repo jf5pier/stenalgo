@@ -1,0 +1,10 @@
+58342229112eb6607051c61a528da1e5  phonetic_theory.tsv
+5a7375f6004321e6bd42cde125e3a839  disambiguated_theory.tsv
+507e84ca8606fcbaae0d700da4bc2b74  resolved_press_sets.json
+e46c39a4b4a2c960ad0c5aa01474dc8f  keypress_groups.json
+8e8f69d3f1675758d51691a648e2ee35  realization_report.json
+4d6c71cf663c7909c33892bb608320a5  plover_stenalgo_dictionary.json
+c81e8120720e8bf4f703d93808d7999d  steno-trainer/public/data/definitions.json
+a99d11edc819aebf506722276047ed3c  steno-trainer/public/data/keyboard-layout.json
+11607fbad5dd38472e5e5734961c7743  steno-trainer/public/data/practice-sentences.json
+1226c032f0eb993e13d5f729a82880dd  steno-trainer/public/data/practice-words.json

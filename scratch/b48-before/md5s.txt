@@ -1,0 +1,6 @@
+f04a9b1d45b30a9b2b844faca6ee3304  scratch/b48-before/definitions.json
+35c3f8a875266cc35631a77249c75931  scratch/b48-before/keypress_groups.json
+fc0acdd4c34b237595071d7f9a40eb73  scratch/b48-before/plover_stenalgo_dictionary.json
+11607fbad5dd38472e5e5734961c7743  scratch/b48-before/practice-sentences.json
+cb29e5f5752fdf8b5f87312058d1b4da  scratch/b48-before/practice-words.json
+4241c860f573e3955d6c6164ca4121f5  scratch/b48-before/realization_report.json

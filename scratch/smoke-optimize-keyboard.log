@@ -1,0 +1,214 @@
+Linking phonemes to strokes:   0%|                                    | 0/20 [00:00<?, ? phonemes/s]Linking phonemes to strokes:  10%|##8                         | 2/20 [00:00<00:01, 13.50 phonemes/s]Linking phonemes to strokes:  20%|#####6                      | 4/20 [00:00<00:01, 13.99 phonemes/s]Linking phonemes to strokes:  30%|########4                   | 6/20 [00:00<00:00, 14.23 phonemes/s]Linking phonemes to strokes:  40%|###########2                | 8/20 [00:00<00:00, 13.35 phonemes/s]Linking phonemes to strokes:  50%|#############5             | 10/20 [00:00<00:00, 13.73 phonemes/s]Linking phonemes to strokes:  60%|################2          | 12/20 [00:00<00:00, 13.93 phonemes/s]Linking phonemes to strokes:  70%|##################9        | 14/20 [00:01<00:00, 13.90 phonemes/s]Linking phonemes to strokes:  80%|#####################6     | 16/20 [00:01<00:00, 14.10 phonemes/s]Linking phonemes to strokes:  90%|########################3  | 18/20 [00:01<00:00, 14.09 phonemes/s]Linking phonemes to strokes: 100%|###########################| 20/20 [00:01<00:00, 13.92 phonemes/s]Linking phonemes to strokes: 100%|###########################| 20/20 [00:01<00:00, 13.90 phonemes/s]
+Linking phonemes to strokes:   0%|                                    | 0/16 [00:00<?, ? phonemes/s]Linking phonemes to strokes: 100%|#########################| 16/16 [00:00<00:00, 1255.15 phonemes/s]
+Linking phonemes to strokes:   0%|                                    | 0/20 [00:00<?, ? phonemes/s]Linking phonemes to strokes:   5%|#4                          | 1/20 [00:00<00:05,  3.45 phonemes/s]Linking phonemes to strokes:  10%|##8                         | 2/20 [00:00<00:04,  3.67 phonemes/s]Linking phonemes to strokes:  15%|####2                       | 3/20 [00:00<00:04,  3.60 phonemes/s]Linking phonemes to strokes:  20%|#####6                      | 4/20 [00:01<00:04,  3.73 phonemes/s]Linking phonemes to strokes:  25%|#######                     | 5/20 [00:01<00:04,  3.75 phonemes/s]Linking phonemes to strokes:  30%|########4                   | 6/20 [00:01<00:03,  3.73 phonemes/s]Linking phonemes to strokes:  35%|#########7                  | 7/20 [00:01<00:03,  3.55 phonemes/s]Linking phonemes to strokes:  40%|###########2                | 8/20 [00:02<00:03,  3.65 phonemes/s]Linking phonemes to strokes:  45%|############6               | 9/20 [00:02<00:03,  3.64 phonemes/s]Linking phonemes to strokes:  50%|#############5             | 10/20 [00:02<00:02,  3.66 phonemes/s]Linking phonemes to strokes:  55%|##############8            | 11/20 [00:03<00:02,  3.69 phonemes/s]Linking phonemes to strokes:  60%|################2          | 12/20 [00:03<00:02,  3.73 phonemes/s]Linking phonemes to strokes:  65%|#################5         | 13/20 [00:03<00:01,  3.72 phonemes/s]Linking phonemes to strokes:  70%|##################9        | 14/20 [00:03<00:01,  3.73 phonemes/s]Linking phonemes to strokes:  75%|####################2      | 15/20 [00:04<00:01,  3.73 phonemes/s]Linking phonemes to strokes:  80%|#####################6     | 16/20 [00:04<00:01,  3.75 phonemes/s]Linking phonemes to strokes:  85%|######################9    | 17/20 [00:04<00:00,  3.75 phonemes/s]Linking phonemes to strokes:  90%|########################3  | 18/20 [00:04<00:00,  3.75 phonemes/s]Linking phonemes to strokes:  95%|#########################6 | 19/20 [00:05<00:00,  3.75 phonemes/s]Linking phonemes to strokes: 100%|###########################| 20/20 [00:05<00:00,  3.77 phonemes/s]Linking phonemes to strokes: 100%|###########################| 20/20 [00:05<00:00,  3.71 phonemes/s]
+Linking multiphonemes to strokes:   0%|                         | 0/184 [00:00<?, ? multiphonemes/s]Linking multiphonemes to strokes: 100%|############| 184/184 [00:00<00:00, 31191.98 multiphonemes/s]
+Linking multiphonemes to strokes:   0%|                          | 0/28 [00:00<?, ? multiphonemes/s]Linking multiphonemes to strokes: 100%|##############| 28/28 [00:00<00:00, 62006.61 multiphonemes/s]
+Linking multiphonemes to strokes:   0%|                         | 0/141 [00:00<?, ? multiphonemes/s]Linking multiphonemes to strokes: 100%|############| 141/141 [00:00<00:00, 26562.92 multiphonemes/s]
+Linking multiphoneme to shared keys:   0%|                      | 0/184 [00:00<?, ? multiphonemes/s]Linking multiphoneme to shared keys: 100%|##########| 184/184 [00:00<00:00, 3592.74 multiphonemes/s]
+Linking multiphoneme to shared keys:   0%|                       | 0/28 [00:00<?, ? multiphonemes/s]Linking multiphoneme to shared keys: 100%|############| 28/28 [00:00<00:00, 9012.39 multiphonemes/s]
+Linking multiphoneme to shared keys:   0%|                      | 0/141 [00:00<?, ? multiphonemes/s]Linking multiphoneme to shared keys: 100%|##########| 141/141 [00:00<00:00, 2949.80 multiphonemes/s]
+Linking multiphoneme to missing keys:   0%|                     | 0/183 [00:00<?, ? multiphonemes/s]Linking multiphoneme to missing keys:   3%|3            | 5/183 [00:00<00:04, 41.41 multiphonemes/s]Linking multiphoneme to missing keys:   5%|6           | 10/183 [00:00<00:04, 39.97 multiphonemes/s]Linking multiphoneme to missing keys:   8%|9           | 15/183 [00:00<00:03, 43.22 multiphonemes/s]Linking multiphoneme to missing keys:  11%|#3          | 20/183 [00:00<00:03, 44.58 multiphonemes/s]Linking multiphoneme to missing keys:  14%|#7          | 26/183 [00:00<00:03, 46.73 multiphonemes/s]Linking multiphoneme to missing keys:  17%|##          | 32/183 [00:00<00:03, 48.39 multiphonemes/s]Linking multiphoneme to missing keys:  20%|##4         | 37/183 [00:00<00:02, 48.71 multiphonemes/s]Linking multiphoneme to missing keys:  23%|##8         | 43/183 [00:00<00:02, 50.70 multiphonemes/s]Linking multiphoneme to missing keys:  27%|###2        | 49/183 [00:02<00:11, 11.26 multiphonemes/s]Linking multiphoneme to missing keys:  31%|###6        | 56/183 [00:02<00:08, 15.83 multiphonemes/s]Linking multiphoneme to missing keys:  34%|####1       | 63/183 [00:02<00:05, 21.22 multiphonemes/s]Linking multiphoneme to missing keys:  38%|####5       | 70/183 [00:02<00:04, 27.27 multiphonemes/s]Linking multiphoneme to missing keys:  42%|####9       | 76/183 [00:02<00:03, 32.24 multiphonemes/s]Linking multiphoneme to missing keys:  46%|#####5      | 84/183 [00:02<00:02, 40.51 multiphonemes/s]Linking multiphoneme to missing keys:  51%|######      | 93/183 [00:02<00:01, 49.74 multiphonemes/s]Linking multiphoneme to missing keys:  56%|######1    | 103/183 [00:03<00:01, 59.86 multiphonemes/s]Linking multiphoneme to missing keys:  62%|######8    | 114/183 [00:03<00:00, 70.92 multiphonemes/s]Linking multiphoneme to missing keys:  69%|#######5   | 126/183 [00:03<00:00, 82.25 multiphonemes/s]Linking multiphoneme to missing keys:  77%|########4  | 141/183 [00:03<00:00, 99.74 multiphonemes/s]Linking multiphoneme to missing keys:  88%|########7 | 161/183 [00:03<00:00, 122.80 multiphonemes/s]Linking multiphoneme to missing keys: 100%|###########| 183/183 [00:03<00:00, 52.51 multiphonemes/s]
+Linking multiphoneme to missing keys:   0%|                      | 0/27 [00:00<?, ? multiphonemes/s]Linking multiphoneme to missing keys: 100%|###########| 27/27 [00:00<00:00, 1092.93 multiphonemes/s]
+Linking multiphoneme to missing keys:   0%|                     | 0/140 [00:00<?, ? multiphonemes/s]Linking multiphoneme to missing keys:   4%|4            | 5/140 [00:00<00:02, 47.92 multiphonemes/s]Linking multiphoneme to missing keys:   7%|8           | 10/140 [00:00<00:03, 40.37 multiphonemes/s]Linking multiphoneme to missing keys:  11%|#3          | 16/140 [00:00<00:02, 45.54 multiphonemes/s]Linking multiphoneme to missing keys:  16%|#8          | 22/140 [00:00<00:02, 47.70 multiphonemes/s]Linking multiphoneme to missing keys:  20%|##4         | 28/140 [00:00<00:02, 49.50 multiphonemes/s]Linking multiphoneme to missing keys:  24%|##9         | 34/140 [00:00<00:02, 51.15 multiphonemes/s]Linking multiphoneme to missing keys:  29%|###5        | 41/140 [00:00<00:01, 54.90 multiphonemes/s]Linking multiphoneme to missing keys:  34%|####1       | 48/140 [00:00<00:01, 58.70 multiphonemes/s]Linking multiphoneme to missing keys:  40%|####8       | 56/140 [00:01<00:01, 63.58 multiphonemes/s]Linking multiphoneme to missing keys:  46%|#####5      | 65/140 [00:01<00:01, 69.39 multiphonemes/s]Linking multiphoneme to missing keys:  54%|######4     | 75/140 [00:01<00:00, 76.29 multiphonemes/s]Linking multiphoneme to missing keys:  61%|#######3    | 86/140 [00:01<00:00, 85.45 multiphonemes/s]Linking multiphoneme to missing keys:  71%|#######1  | 100/140 [00:01<00:00, 100.56 multiphonemes/s]Linking multiphoneme to missing keys:  86%|########5 | 120/140 [00:01<00:00, 129.37 multiphonemes/s]Linking multiphoneme to missing keys: 100%|###########| 140/140 [00:01<00:00, 88.90 multiphonemes/s]
+Part onset, Max Multiphoneme Ambiguity: 29,468,262,600, Max Strokes penalty: 250,949,826 Max order penalty: 185,273,000
+Part nucleus, Max Multiphoneme Ambiguity: 23,036,310,899, Max Strokes penalty: 129,082,032 Max order penalty: 13,209,000
+Part coda, Max Multiphoneme Ambiguity: 2,797,728,300, Max Strokes penalty: 89,428,535 Max order penalty: 34,861,000
+Solving the models...
+Solving for onset model...
+Solution 1: objective = 13,704,646,463.0, elapsed = 10.23 s
+  multiphoneme_ambiguity_cost_onset = 13,645,616,448
+        strokes_penalty_cost_onset = 51,523,515
+  phoneme_order_penalty_cost_onset = 7,506,500
+Status for onset: CpSolverStatus.FEASIBLE
+FEASIBLE
+Total penalty = -17,353,541.0
+Solution 3: objective = -17,353,541.0, elapsed = 90.16 s
+  multiphoneme_ambiguity_cost_onset = 2,115,296
+        strokes_penalty_cost_onset = 72,950,663
+  phoneme_order_penalty_cost_onset = -92,419,500
+Phonemes:
+ Part onset, Phoneme k: Strokes [(2,)], Keys [2] Order position: 0
+ Part onset, Phoneme g: Strokes [(2, 3)], Keys [2, 3] Order position: 1
+ Part onset, Phoneme f: Strokes [(2, 4)], Keys [2, 4] Order position: 2
+ Part onset, Phoneme s: Strokes [(3,)], Keys [3] Order position: 64
+ Part onset, Phoneme b: Strokes [(3, 5)], Keys [3, 5] Order position: 66
+ Part onset, Phoneme p: Strokes [(4,)], Keys [4] Order position: 106
+ Part onset, Phoneme d: Strokes [(4, 5)], Keys [4, 5] Order position: 107
+ Part onset, Phoneme S: Strokes [(4, 6)], Keys [4, 6] Order position: 108
+ Part onset, Phoneme v: Strokes [(5,)], Keys [5] Order position: 132
+ Part onset, Phoneme Z: Strokes [(5, 7)], Keys [5, 7] Order position: 134
+ Part onset, Phoneme m: Strokes [(6,)], Keys [6] Order position: 147
+ Part onset, Phoneme l: Strokes [(6, 7)], Keys [6, 7] Order position: 148
+ Part onset, Phoneme n: Strokes [(6, 8)], Keys [6, 8] Order position: 149
+ Part onset, Phoneme t: Strokes [(7,)], Keys [7] Order position: 155
+ Part onset, Phoneme z: Strokes [(7, 9)], Keys [7, 9] Order position: 157
+ Part onset, Phoneme R: Strokes [(8,)], Keys [8] Order position: 159
+ Part onset, Phoneme j: Strokes [(8, 9)], Keys [8, 9] Order position: 160
+ Part onset, Phoneme w: Strokes [(9,)], Keys [9] Order position: 161
+ Part onset, Phoneme N: Strokes [(9,)], Keys [9] Order position: 161
+ Part onset, Phoneme G: Strokes [(9,)], Keys [9] Order position: 161
+Keys:
+ Part onset, Key 2: Phonemes ['k', 'f', 'g']
+ Part onset, Key 3: Phonemes ['s', 'b', 'g']
+ Part onset, Key 4: Phonemes ['p', 'd', 'f', 'S']
+ Part onset, Key 5: Phonemes ['d', 'v', 'b', 'Z']
+ Part onset, Key 6: Phonemes ['l', 'm', 'n', 'S']
+ Part onset, Key 7: Phonemes ['t', 'l', 'Z', 'z']
+ Part onset, Key 8: Phonemes ['R', 'j', 'n']
+ Part onset, Key 9: Phonemes ['j', 'w', 'z', 'N', 'G']
+Strokes:
+ Part onset, Stroke: (2,), Phonemes: ['k'], stroke cost: 106 (frequency weighted cost:  4,202,264)
+ Part onset, Stroke: (2, 3), Phonemes: ['g'], stroke cost: 148 (frequency weighted cost:  1,450,400)
+ Part onset, Stroke: (2, 4), Phonemes: ['f'], stroke cost: 180 (frequency weighted cost:  4,201,560)
+ Part onset, Stroke: (3,), Phonemes: ['s'], stroke cost: 106 (frequency weighted cost:  6,124,786)
+ Part onset, Stroke: (3, 5), Phonemes: ['b'], stroke cost: 180 (frequency weighted cost:  3,182,580)
+ Part onset, Stroke: (4,), Phonemes: ['p'], stroke cost: 106 (frequency weighted cost:  6,035,640)
+ Part onset, Stroke: (4, 5), Phonemes: ['d'], stroke cost: 148 (frequency weighted cost:  5,479,848)
+ Part onset, Stroke: (4, 6), Phonemes: ['S'], stroke cost: 180 (frequency weighted cost:  2,107,980)
+ Part onset, Stroke: (5,), Phonemes: ['v'], stroke cost: 106 (frequency weighted cost:  3,829,780)
+ Part onset, Stroke: (5, 7), Phonemes: ['Z'], stroke cost: 180 (frequency weighted cost:  2,161,980)
+ Part onset, Stroke: (6,), Phonemes: ['m'], stroke cost: 106 (frequency weighted cost:  4,480,514)
+ Part onset, Stroke: (6, 7), Phonemes: ['l'], stroke cost: 148 (frequency weighted cost:  5,577,380)
+ Part onset, Stroke: (6, 8), Phonemes: ['n'], stroke cost: 162 (frequency weighted cost:  3,954,420)
+ Part onset, Stroke: (7,), Phonemes: ['t'], stroke cost: 106 (frequency weighted cost:  6,454,234)
+ Part onset, Stroke: (7, 9), Phonemes: ['z'], stroke cost: 162 (frequency weighted cost:  1,703,430)
+ Part onset, Stroke: (8,), Phonemes: ['R'], stroke cost: 85 (frequency weighted cost:  7,149,520)
+ Part onset, Stroke: (8, 9), Phonemes: ['j'], stroke cost: 127 (frequency weighted cost:  3,314,827)
+ Part onset, Stroke: (9,), Phonemes: ['w', 'N', 'G'], stroke cost: 85 (frequency weighted cost:  1,539,520)
+Multiphonemes ambiguity:
+  Part onset, Multiphonemes ('j',) and ('R', 'j') share the same keys: [8, 9] cost 690,299 
+  Part onset, Multiphonemes ('R', 'w') and ('j',) share the same keys: [8, 9] cost 424,799 
+  Part onset, Multiphonemes ('t', 's') and ('s', 't') share the same keys: [3, 7] cost 361,800 
+  Part onset, Multiphonemes ('s', 'k') and ('g',) share the same keys: [2, 3] cost 329,999 
+  Part onset, Multiphonemes ('R', 'w') and ('R', 'j') share the same keys: [8, 9] cost 156,300 
+  Part onset, Multiphonemes ('n', 'j') and ('n', 'w') share the same keys: [6, 8, 9] cost 152,099 
+Solving for nucleus model...
+Solution 1: objective = 58,614,955.0, elapsed = 0.19 s
+  multiphoneme_ambiguity_cost_nucleus = 187,499
+      strokes_penalty_cost_nucleus = 64,834,956
+  phoneme_order_penalty_cost_nucleus = -6,407,500
+Status for nucleus: CpSolverStatus.OPTIMAL
+OPTIMAL
+Total penalty = 58,614,955.0
+Solution 2: objective = 58,614,955.0, elapsed = 67.72 s
+  multiphoneme_ambiguity_cost_nucleus = 187,499
+      strokes_penalty_cost_nucleus = 64,834,956
+  phoneme_order_penalty_cost_nucleus = -6,407,500
+Phonemes:
+ Part nucleus, Phoneme @: Strokes [(11,)], Keys [11] Order position: 0
+ Part nucleus, Phoneme 9: Strokes [(11,)], Keys [11] Order position: 0
+ Part nucleus, Phoneme °: Strokes [(11, 12)], Keys [11, 12] Order position: 1
+ Part nucleus, Phoneme 8: Strokes [(11, 12)], Keys [11, 12] Order position: 1
+ Part nucleus, Phoneme u: Strokes [(11, 13)], Keys [11, 13] Order position: 2
+ Part nucleus, Phoneme y: Strokes [(11, 14)], Keys [11, 14] Order position: 4
+ Part nucleus, Phoneme 1: Strokes [(11, 12, 13, 14)], Keys [11, 12, 13, 14] Order position: 6
+ Part nucleus, Phoneme 2: Strokes [(11, 13, 14)], Keys [11, 13, 14] Order position: 7
+ Part nucleus, Phoneme a: Strokes [(12,)], Keys [12] Order position: 8
+ Part nucleus, Phoneme §: Strokes [(12, 13)], Keys [12, 13] Order position: 9
+ Part nucleus, Phoneme o: Strokes [(12, 14)], Keys [12, 14] Order position: 10
+ Part nucleus, Phoneme 5: Strokes [(12, 13, 14)], Keys [12, 13, 14] Order position: 11
+ Part nucleus, Phoneme i: Strokes [(13,)], Keys [13] Order position: 12
+ Part nucleus, Phoneme E: Strokes [(13, 14)], Keys [13, 14] Order position: 13
+ Part nucleus, Phoneme e: Strokes [(14,)], Keys [14] Order position: 14
+ Part nucleus, Phoneme O: Strokes [(14,)], Keys [14] Order position: 14
+Keys:
+ Part nucleus, Key 11: Phonemes ['@', '°', 'u', 'y', '9', '8', '2', '1']
+ Part nucleus, Key 12: Phonemes ['a', 'o', '°', '§', '5', '8', '1']
+ Part nucleus, Key 13: Phonemes ['i', 'E', '§', 'u', '5', '2', '1']
+ Part nucleus, Key 14: Phonemes ['e', 'E', 'o', 'y', '5', 'O', '2', '1']
+Strokes:
+ Part nucleus, Stroke: (11,), Phonemes: ['@', '9'], stroke cost: 85 (frequency weighted cost:  5,158,480)
+ Part nucleus, Stroke: (11, 12), Phonemes: ['°', '8'], stroke cost: 127 (frequency weighted cost:  4,783,328)
+ Part nucleus, Stroke: (11, 13), Phonemes: ['u'], stroke cost: 144 (frequency weighted cost:  3,585,024)
+ Part nucleus, Stroke: (11, 14), Phonemes: ['y'], stroke cost: 144 (frequency weighted cost:  3,526,848)
+ Part nucleus, Stroke: (11, 12, 13, 14), Phonemes: ['1'], stroke cost: 216 (frequency weighted cost:  147,744)
+ Part nucleus, Stroke: (11, 13, 14), Phonemes: ['2'], stroke cost: 180 (frequency weighted cost:  1,265,400)
+ Part nucleus, Stroke: (12,), Phonemes: ['a'], stroke cost: 85 (frequency weighted cost:  8,925,510)
+ Part nucleus, Stroke: (12, 13), Phonemes: ['§'], stroke cost: 144 (frequency weighted cost:  3,892,896)
+ Part nucleus, Stroke: (12, 14), Phonemes: ['o'], stroke cost: 144 (frequency weighted cost:  5,613,264)
+ Part nucleus, Stroke: (12, 13, 14), Phonemes: ['5'], stroke cost: 180 (frequency weighted cost:  3,299,220)
+ Part nucleus, Stroke: (13,), Phonemes: ['i'], stroke cost: 85 (frequency weighted cost:  6,282,690)
+ Part nucleus, Stroke: (13, 14), Phonemes: ['E'], stroke cost: 127 (frequency weighted cost:  9,523,222)
+ Part nucleus, Stroke: (14,), Phonemes: ['e', 'O'], stroke cost: 85 (frequency weighted cost:  8,831,330)
+Multiphonemes ambiguity:
+  Part nucleus, Multiphonemes ('e',) and ('O',) share the same keys: [14] cost 88,799 
+  Part nucleus, Multiphonemes ('@',) and ('9',) share the same keys: [11] cost 69,600 
+  Part nucleus, Multiphonemes ('°',) and ('8', '@') share the same keys: [11, 12] cost 28,500 
+  Part nucleus, Multiphonemes ('1',) and ('8', 'E') share the same keys: [11, 12, 13, 14] cost 600 
+Solving for coda model...
+Solution 1: objective = 72,328,148.0, elapsed = 14.16 s
+  multiphoneme_ambiguity_cost_coda = 14,479,493
+         strokes_penalty_cost_coda = 64,749,155
+   phoneme_order_penalty_cost_coda = -6,900,500
+Status for coda: CpSolverStatus.FEASIBLE
+FEASIBLE
+Total penalty = 10,825,496.0
+Solution 3: objective = 10,825,496.0, elapsed = 90.19 s
+  multiphoneme_ambiguity_cost_coda = 5,299,199
+         strokes_penalty_cost_coda = 21,723,797
+   phoneme_order_penalty_cost_coda = -16,197,500
+Phonemes:
+ Part coda, Phoneme j: Strokes [(16,)], Keys [16] Order position: 0
+ Part coda, Phoneme b: Strokes [(16,)], Keys [16] Order position: 0
+ Part coda, Phoneme w: Strokes [(16,)], Keys [16] Order position: 0
+ Part coda, Phoneme v: Strokes [(16, 17)], Keys [16, 17] Order position: 1
+ Part coda, Phoneme p: Strokes [(16, 18)], Keys [16, 18] Order position: 2
+ Part coda, Phoneme s: Strokes [(17,)], Keys [17] Order position: 114
+ Part coda, Phoneme f: Strokes [(17, 19)], Keys [17, 19] Order position: 116
+ Part coda, Phoneme k: Strokes [(18,)], Keys [18] Order position: 193
+ Part coda, Phoneme g: Strokes [(18, 19)], Keys [18, 19] Order position: 194
+ Part coda, Phoneme d: Strokes [(19,)], Keys [19] Order position: 245
+ Part coda, Phoneme t: Strokes [(20,)], Keys [20] Order position: 277
+ Part coda, Phoneme N: Strokes [(20, 22)], Keys [20, 22] Order position: 279
+ Part coda, Phoneme R: Strokes [(21,)], Keys [21] Order position: 295
+ Part coda, Phoneme n: Strokes [(22,)], Keys [22] Order position: 304
+ Part coda, Phoneme z: Strokes [(22, 23)], Keys [22, 23] Order position: 305
+ Part coda, Phoneme l: Strokes [(23,)], Keys [23] Order position: 308
+ Part coda, Phoneme Z: Strokes [(24,)], Keys [24] Order position: 310
+ Part coda, Phoneme G: Strokes [(24,)], Keys [24] Order position: 310
+ Part coda, Phoneme S: Strokes [(24, 25)], Keys [24, 25] Order position: 311
+ Part coda, Phoneme m: Strokes [(25,)], Keys [25] Order position: 312
+Keys:
+ Part coda, Key 16: Phonemes ['p', 'v', 'j', 'b', 'w']
+ Part coda, Key 17: Phonemes ['s', 'v', 'f']
+ Part coda, Key 18: Phonemes ['p', 'k', 'g']
+ Part coda, Key 19: Phonemes ['d', 'f', 'g']
+ Part coda, Key 20: Phonemes ['t', 'N']
+ Part coda, Key 21: Phonemes ['R']
+ Part coda, Key 22: Phonemes ['n', 'z', 'N']
+ Part coda, Key 23: Phonemes ['l', 'z']
+ Part coda, Key 24: Phonemes ['Z', 'S', 'G']
+ Part coda, Key 25: Phonemes ['m', 'S']
+Strokes:
+ Part coda, Stroke: (16,), Phonemes: ['j', 'b', 'w'], stroke cost: 85 (frequency weighted cost:  1,017,790)
+ Part coda, Stroke: (16, 17), Phonemes: ['v'], stroke cost: 127 (frequency weighted cost:  547,624)
+ Part coda, Stroke: (16, 18), Phonemes: ['p'], stroke cost: 162 (frequency weighted cost:  589,680)
+ Part coda, Stroke: (17,), Phonemes: ['s'], stroke cost: 85 (frequency weighted cost:  1,845,775)
+ Part coda, Stroke: (17, 19), Phonemes: ['f'], stroke cost: 162 (frequency weighted cost:  258,390)
+ Part coda, Stroke: (18,), Phonemes: ['k'], stroke cost: 106 (frequency weighted cost:  1,061,908)
+ Part coda, Stroke: (18, 19), Phonemes: ['g'], stroke cost: 148 (frequency weighted cost:  292,448)
+ Part coda, Stroke: (19,), Phonemes: ['d'], stroke cost: 106 (frequency weighted cost:  732,354)
+ Part coda, Stroke: (20,), Phonemes: ['t'], stroke cost: 106 (frequency weighted cost:  2,347,582)
+ Part coda, Stroke: (20, 22), Phonemes: ['N'], stroke cost: 180 (frequency weighted cost:  133,920)
+ Part coda, Stroke: (21,), Phonemes: ['R'], stroke cost: 106 (frequency weighted cost:  7,427,632)
+ Part coda, Stroke: (22,), Phonemes: ['n'], stroke cost: 106 (frequency weighted cost:  732,036)
+ Part coda, Stroke: (22, 23), Phonemes: ['z'], stroke cost: 148 (frequency weighted cost:  765,752)
+ Part coda, Stroke: (23,), Phonemes: ['l'], stroke cost: 106 (frequency weighted cost:  2,209,358)
+ Part coda, Stroke: (24,), Phonemes: ['Z', 'G'], stroke cost: 127 (frequency weighted cost:  546,227)
+ Part coda, Stroke: (24, 25), Phonemes: ['S'], stroke cost: 170 (frequency weighted cost:  468,180)
+ Part coda, Stroke: (25,), Phonemes: ['m'], stroke cost: 127 (frequency weighted cost:  747,141)
+Multiphonemes ambiguity:
+  Part coda, Multiphonemes ('t', 'R') and ('R', 't') share the same keys: [20, 21] cost 4,400,400 
+  Part coda, Multiphonemes ('s', 'k') and ('k', 's') share the same keys: [17, 18] cost 281,700 
+  Part coda, Multiphonemes ('j', 'j') and ('j',) share the same keys: [16] cost 197,699 
+  Part coda, Multiphonemes ('b',) and ('j',) share the same keys: [16] cost 133,500 
+  Part coda, Multiphonemes ('R', 'd', 'R') and ('R', 'd') share the same keys: [19, 21] cost 89,700 
+  Part coda, Multiphonemes ('g', 'R') and ('R', 'g') share the same keys: [18, 19, 21] cost 85,200 
+  Part coda, Multiphonemes ('R', 'k') and ('k', 'R') share the same keys: [18, 21] cost 51,900 
+  Part coda, Multiphonemes ('p', 'R') and ('R', 'p') share the same keys: [16, 18, 21] cost 43,500 
+  Part coda, Multiphonemes ('v',) and ('j', 's') share the same keys: [16, 17] cost 15,600 
+
+Wrote the optimized layout to scratch/starboard3h_optimized_smoke.json.
+To adopt it: cp scratch/starboard3h_optimized_smoke.json starboard3h.json (deliberate), then:
+  rm -f Dictionary.pickle FirstTheory.pickle && python dictionary.py --build-only
+  (theory 1 depends on the layout; every exporter recomputes theory 2 on its next run).

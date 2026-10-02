@@ -1,0 +1,254 @@
+   543  twin spellings
+   373  twin Words never resolved
+   270    SAME phonetic strokes (B1 proper)
+   134  twin alone on its stroke (extra route, harmless)
+    38  twin on a chosen Word stroke (harmless)
+   228  other Word resolved by its own entry
+   103    (different phonetic strokes: B2/B9 territory)
+    15  chosen Word: some alternate stroke does not output the spelling
+    98  twin loses a shared stroke (harmless)
+b1 270 [('abasourdis', 'ind:pas:2s;', None, None, ['a/sva/tw@eR/pv*i'], 'par:pas;', ['a/sva/tw@eR/pvi/-s', 'a/sva/tw@eR/pvi/-dt']), ('abolis', 'ind:pas:2s;', None, None, ['a/svae/mt*i'], 'ind:pre:1s;par:pas;', ['a/svae/mti/-s', 'a/svae/mti/-k', 'a/svae/mti/-dt']), ('aboutis', 'ind:pas:2s;', None, None, ['a/sv@e/t*i'], 'ind:pre:1s;ind:pre:2s;par:pas;', ['a/sv@e/ti/-s', 'a/sv@e/ti/-k', 'a/sv@e/ti/-d', 'a/sv@e/ti/-dt']), ('abrutis', 'ind:pas:2s;', None, None, ['a/svR@i/t*i'], 'imp:pre:2s;ind:pre:1s;ind:pre:2s;par:pas;', ['a/svR@i/ti/-k', 'a/svR@i/ti/-s', 'a/svR@i/ti/-k', 'a/svR@i/ti/-d', 'a/svR@i/ti/-dt']), ('abâtardis', 'ind:pas:2s;', None, None, ['a/sva/taR/pv*i'], 'par:pas;', ['a/sva/taR/pvi/-s', 'a/sva/taR/pvi/-dt']), ('abêtis', 'par:pas;', 'm', 'p', ['a/sve/t*i'], 'ind:pre:2s;ind:pas:2s;', ['a/sve/ti/-s', 'a/sve/ti/-d', 'a/sve/ti/-dt']), ('accomplis', 'ind:pas:2s;', None, None, ['a/kai/pmt*i'], 'imp:pre:2s;ind:pre:1s;ind:pre:2s;par:pas;', ['a/kai/pmti/-k', 'a/kai/pmti/-s', 'a/kai/pmti/-k', 'a/kai/pmti/-d', 'a/kai/pmti/-dt']), ('accroupis', 'ind:pas:2s;', None, None, ['a/kR@e/p*i'], 'imp:pre:2s;ind:pre:1s;ind:pre:2s;par:pas;', ['a/kR@e/pi/-k', 'a/kR@e/pi/-s', 'a/kR@e/pi/-k', 'a/kR@e/pi/-d', 'a/kR@e/pi/-dt'])]
+altlost 15 [('admis', 2, 1), ('décries', 1, 0), ('démis', 2, 1), ('entrepris', 2, 1), ('pries', 1, 0), ('promis', 2, 1), ('repris', 2, 1), ('ressurgis', 2, 1)]
+--- altlost detail
+admis [[], ['pers_1'], ['pers_2']] [('ad/mi', 'admis', ['admis']), ('ad/mi/-k', 'admis', ['admis']), ('ad/mi/-d', 'admis', ['admis'])]
+admis [[], ['p']] [('ad/m*inl', 'admis', ['admis']), ('ad/minl/-s', 'admises', ['admis', 'admises'])]
+décries [['pers_2']] [('pve/kRi/-d', 'décris', ['décries', 'décris'])]
+décries [['pers_2', 'subjonctif']] [('pve/kRij/-dR', 'décries', ['décries'])]
+démis [[], ['pers_1'], ['pers_2']] [('pve/mi', 'démis', ['démis']), ('pve/mi/-k', 'démis', ['démis']), ('pve/mi/-d', 'démis', ['démis'])]
+démis [[], ['p']] [('pve/m*inl', 'démis', ['démis']), ('pve/minl/-s', 'démises', ['démis', 'démises'])]
+entrepris [[], ['p']] [('@/tR@a/pR*inl', 'entrepris', ['entrepris']), ('@/tR@a/pRinl/-s', 'entreprises', ['entrepris', 'entreprises'])]
+entrepris [[], ['pers_1'], ['pers_2']] [('@/tR@a/pRi', 'entrepris', ['entrepris']), ('@/tR@a/pRi/-k', 'entrepris', ['entrepris']), ('@/tR@a/pRi/-d', 'entrepris', ['entrepris'])]
+pries [['pers_2']] [('pRi/-d', 'pris', ['pries', 'pris'])]
+promis [[], ['pers_1'], ['pers_2']] [('pRae/mi', 'promis', ['promis']), ('pRae/mi/-k', 'promis', ['promis']), ('pRae/mi/-d', 'promis', ['promis'])]
+promis [[], ['p']] [('pRae/m*inl', 'promis', ['promis']), ('pRae/minl/-s', 'promises', ['promis', 'promises'])]
+repris [[], ['pers_1'], ['pers_2']] [('R@a/pRi', 'repris', ['repris']), ('R@a/pRi/-k', 'repris', ['repris']), ('R@a/pRi/-d', 'repris', ['repris'])]
+repris [[], ['p']] [('R@a/pR*inl', 'repris', ['repris']), ('R@a/pRinl/-s', 'reprises', ['repris', 'reprises'])]
+ressurgis [['p'], ['passé', 'pers_2']] [('R@a/s@iR/vt*i/-s', 'ressurgis', ['ressurgis']), ('R@a/s@iR/vti/-dt', 'resurgis', ['ressurgis', 'resurgis'])]
+soumis [[], ['pers_1'], ['pers_2']] [('s@e/mi', 'soumis', ['soumis']), ('s@e/mi/-k', 'soumis', ['soumis']), ('s@e/mi/-d', 'soumis', ['soumis'])]
+soumis [[], ['p']] [('s@e/m*inl', 'soumis', ['soumis']), ('s@e/minl/-s', 'soumises', ['soumis', 'soumises'])]
+surpris [[], ['p']] [('s@iR/pR*inl', 'surpris', ['surpris']), ('s@iR/pRinl/-s', 'surprises', ['surpris', 'surprises'])]
+surpris [[], ['pers_1'], ['pers_2']] [('s@iR/pRi', 'surpris', ['surpris']), ('s@iR/pRi/-k', 'surpris', ['surpris']), ('s@iR/pRi/-d', 'surpris', ['surpris'])]
+transmis [[], ['pers_1'], ['pers_2']] [('tR@s/mi', 'transmis', ['transmis']), ('tR@s/mi/-k', 'transmis', ['transmis']), ('tR@s/mi/-d', 'transmis', ['transmis'])]
+transmis [[], ['p']] [('tR@s/m*inl', 'transmis', ['transmis']), ('tR@s/minl/-s', 'transmises', ['transmis', 'transmises'])]
+zieute [[], ['impératif'], ['pers_1']] [('tRw*@iet', 'zieute', ['zieute']), ('tRw@iet/-k', 'zyeute', ['zieute', 'zyeute']), ('tRw@iet/-k', 'zyeute', ['zieute', 'zyeute'])]
+zieute [['subjonctif']] [('tRw*@t/-R', 'zieute', ['zieute'])]
+écrie [[], ['pers_1']] [('e/kR*i', 'écrie', ['écrie']), ('e/kRi/-k', 'écris', ['écrie', 'écris'])]
+écries [['pers_2']] [('e/kRi/-d', 'écris', ['écries', 'écris'])]
+écrie [['subjonctif']] [('e/kRij/-R', 'écrie', ['écrie'])]
+écries [['pers_2', 'subjonctif']] [('e/kRij/-dR', 'écries', ['écries'])]
+épris [[], ['pers_1'], ['pers_2']] [('e/pRi', 'épris', ['épris']), ('e/pRi/-k', 'épris', ['épris']), ('e/pRi/-d', 'épris', ['épris'])]
+épris [[], ['p']] [('e/pR*inl', 'épris', ['épris']), ('e/pRinl/-s', 'éprises', ['épris', 'éprises'])]
+--- lost feature strokes
+adhérerais(adeR°RE,adhérer_VER) a/pve/R@a/Rie/-d -> adorerais
+admis(admiz,admettre_VER) ad/minl/-s -> admises
+allaites(alEt,allaiter_VER) a/mtiet/-dR -> halètes
+amplis(@pli,ampli_NOM) @/pmti/-s -> emplis
+baille(baj,bailler_VER) svaj/-k -> bâille
+baille(baj,bailler_VER) svaj/-R -> bâille
+baillent(baj,bailler_VER) svaj/-sR -> bâillent
+baillez(baje,bailler_VER) sva/Rwe/-d -> bâillez
+baryes(baRi,barye_NOM) sva/Ri/-s -> barris
+boxais(bOksE,boxer_VER) sve/ksie/-k -> bégaie
+brandys(bR@di,brandy_NOM) svR@/pvi/-s -> brandis
+briffe(bRif,briffer_VER) svRisd/-k -> briefe
+briffe(bRif,briffer_VER) svRisd/-R -> briefe
+briffes(bRif,briffer_VER) svRisd/-dR -> briefes
+butte(byt,butter_VER) sv@it/-k -> bute
+butte(byt,butter_VER) sv@it/-R -> bute
+buttent(byt,butter_VER) sv@it/-sR -> butent
+buttes(byt,butter_VER) sv@it/-dR -> butes
+bâilles(baj,bâiller_VER) svaj/-dR -> bailles
+bégaies(begE,bégayer_VER) sve/ksie/-d -> boxais
+bélugas(belyga,béluga_NOM) sve/mt@i/ksa/-s -> belugas
+bénits(beni,bénit_ADJ) sve/mRi/-s -> bénis
+calle(kal,caller_VER) kal/-k -> cale
+cane(kan,caner_VER) kan/-R -> canne
+carde(kaRd,carder_VER) kadR/-k -> cadre
+carde(kaRd,carder_VER) kadR/-R -> cadre
+cardent(kaRd,carder_VER) kadR/-sR -> cadrent
+cardes(kaRd,carder_VER) kadR/-dR -> cadres
+cèle(sEl,celer_VER) siel/-k -> scelle
+chlingue(Sl5g,chlinguer_VER) pmtaiekd/-k -> schlingue
+chlingue(Sl5g,chlinguer_VER) pmtaiekd/-R -> schlingue
+chlingues(Sl5g,chlinguer_VER) pmtaiekd/-dR -> schlingues
+choppez(Sope,chopper_VER) pmae/pe/-d -> chopez
+choppe(SOp,chopper_VER) pmejk/-k -> chope
+chuinte(S85t,chuinter_VER) pm@aiet/-R -> shunte
+clappe(klap,clapper_VER) kmtajk/-R -> clape
+clappent(klap,clapper_VER) kmtajk/-sR -> clapent
+clappes(klap,clapper_VER) kmtajk/-dR -> clapes
+conte(k§t,conter_VER) kait/-k -> compte
+conte(k§t,conter_VER) kait/-R -> compte
+content(k§t,conter_VER) kait/-sR -> comptent
+contes(k§t,conter_VER) kait/-dR -> comptes
+convins(k§v5,convenir_VER) kai/vaie/-d -> convaincs
+cuissot(k8iso,cuissot_NOM) k@ai/sae -> cuisseau
+descelle(desEl,desceller_VER) pve/siel/-R -> desselle
+dessaoule(desul,dessaouler_VER) pve/s@el/-k -> dessoule
+dessaoule(desul,dessaouler_VER) pve/s@el/-R -> dessoule
+dessaoulent(desul,dessaouler_VER) pve/s@el/-sR -> dessoulent
+desselle(desEl,desseller_VER) pve/siel/-k -> décèle
+dessoulées(desule,dessouler_VER) pve/s@e/mte/-js -> dessoûlées
+dessoulés(desule,dessouler_VER) pve/s@e/mt*e/-s -> dessoûlés
+dessoûle(desul,dessoûler_VER) pve/s@el/-R -> dessoule
+dessoûles(desul,dessoûler_VER) pve/s@el/-dR -> dessoules
+dessoûlé(desule,dessoûler_VER) pve/s@e/mt*e -> dessoulé
+dessoûlée(desule,dessoûler_VER) pve/s@e/mt*e/-j -> dessoulée
+dore(dOR,dorer_VER) pveR/-k -> dors
+décries(dekRi,décrier_VER) pve/kRi/-d -> décris
+défis(defi,défaire_VER) pve/kpi/-k -> défie
+dégotes(degOt,dégoter_VER) pve/kset/-dR -> dégottes
+dégotté(degote,dégotter_VER) pve/ksae/te -> dégoté
+dégottée(degote,dégotter_VER) pve/ksae/te/-j -> dégotée
+dégottées(degote,dégotter_VER) pve/ksae/te/-js -> dégotées
+dégottés(degote,dégotter_VER) pve/ksae/te/-s -> dégotés
+dégotte(degOt,dégotter_VER) pve/kset/-R -> dégote
+dégoutte(degut,dégoutter_VER) pve/ks@et/-k -> dégoûte
+dégoutte(degut,dégoutter_VER) pve/ks@et/-R -> dégoûte
+dégouttent(degut,dégoutter_VER) pve/ks@et/-sR -> dégoûtent
+dégouttes(degut,dégoutter_VER) pve/ks@et/-dR -> dégoûtes
+démis(demiz,démettre_VER) pve/minl/-s -> démises
+déteins(det5,déteindre_VER) pve/taie/-k -> détins
+déteins(det5,déteindre_VER) pve/taie/-d -> détins
+détone(detOn,détoner_VER) pve/ten/-R -> détonne
+détonent(detOn,détoner_VER) pve/ten/-sR -> détonnent
+embellies(@bEli,embellie_NOM) @/svie/mti/-s -> embellis
+encre(@kR,encrer_VER) @kR/-R -> ancre
+ente(@t,enter_VER) @t/-R -> hante
+entent(@t,enter_VER) @t/-sR -> hantent
+entes(@t,enter_VER) @t/-dR -> hantes
+entrepris(@tR°pRiz,entreprendre_VER) @/tR@a/pRinl/-s -> entreprises
+exauces(Egzos,exaucer_VER) iekdnl/aes/-dR -> exhausses
+exhausse(Egzos,exhausser_VER) iekdnl/aes/-R -> exauce
+exhaussent(Egzos,exhausser_VER) iekdnl/aes/-sR -> exaucent
+fie(fi,fier_VER) kpi/-k -> fis
+fête(fEt,fêter_VER) kpiet/-k -> faites
+fêtes(fEt,fêter_VER) kpiet/-d -> faites
+garanties(gaR@ti,garantie_NOM) ksa/R@/ti/-s -> garantis
+goutte(gut,goutter_VER) ks@et/-k -> goûte
+goutte(gut,goutter_VER) ks@et/-R -> goûte
+gouttent(gut,goutter_VER) ks@et/-sR -> goûtent
+gouttes(gut,goutter_VER) ks@et/-dR -> goûtes
+halète(alEt,haleter_VER) a/mtiet/-k -> allaite
+hais(E,haïr_VER) ie/-k -> ai
+hais(E,haïr_VER) ie/-d -> es
+heurte(9Rt,heurter_VER) @tR/-k -> entre
+heurte(9Rt,heurter_VER) @tR/-R -> entre
+heurtent(9Rt,heurter_VER) @tR/-sR -> entrent
+heurtes(9Rt,heurter_VER) @tR/-dR -> entres
+lace(las,lacer_VER) mtas/-k -> lasse
+lace(las,lacer_VER) mtas/-R -> lasse
+lacent(las,lacer_VER) mtas/-sR -> lassent
+laces(las,lacer_VER) mtas/-dR -> lasses
+laçais(lasE,lacer_VER) mta/sie/-d -> lassais
+lacez(lase,lacer_VER) mta/se/-d -> lassez
+lacerais(las°RE,lacer_VER) mta/s@a/Rie/-d -> lasserais
+lansquine(l@skin,lansquiner_VER) mt@s/kin/-R -> lancequine
+lie(li,lier_VER) mti/-k -> lis
+lies(li,lier_VER) mti/-d -> lis
+mies(mi,mie_NOM) mi/-s -> mis
+mâte(mat,mâter_VER) mat/-k -> mate
+mâte(mat,mâter_VER) mat/-R -> mate
+mâtent(mat,mâter_VER) mat/-sR -> matent
+mâtes(mat,mâter_VER) mat/-dR -> mates
+panne(pan,panner_VER) pan/-R -> pane
+panse(p@s,panser_VER) p@s/-k -> pense
+panse(p@s,panser_VER) p@s/-R -> pense
+pansent(p@s,panser_VER) p@s/-sR -> pensent
+panses(p@s,panser_VER) p@s/-dR -> penses
+pansez(p@se,panser_VER) p@/se/-d -> pensez
+parafe(paRaf,parafer_VER) pa/Rasd/-R -> paraphe
+parafes(paRaf,parafer_VER) pa/Rasd/-dR -> paraphes
+pare(paR,parer_VER) paR/-k -> pars
+paressais(paREsE,paresser_VER) pa/Rie/sie/-d -> paraissais
+paresse(paREs,paresser_VER) pa/Ries/-R -> paraisse
+pause(poz,pauser_VER) paenl/-R -> pose
+pausent(poz,pauser_VER) paenl/-sR -> posent
+pauses(poz,pauser_VER) paenl/-dR -> poses
+pais(pE,paître_VER) pie/-k -> paie
+pais(pE,paître_VER) pie/-d -> paies
+prie(pRi,prier_VER) pRi/-k -> pris
+pries(pRi,prier_VER) pRi/-d -> pris
+promis(pRomiz,promettre_VER) pRae/minl/-s -> promises
+pèche(pES,pécher_VER) pieZm/-k -> pêche
+pèche(pES,pécher_VER) pieZm/-R -> pêche
+ralle(Ral,raller_VER) Ral/-R -> râle
+rallent(Ral,raller_VER) Ral/-sR -> râlent
+ralles(Ral,raller_VER) Ral/-dR -> râles
+relis(R°li,relire_VER) R@a/mti/-k -> relie
+remplie(R@pli,remplier_VER) R@/pmti/-k -> remplis
+remplies(R@pli,remplier_VER) R@/pmti/-d -> remplis
+repais(R°pE,repaître_VER) R@a/pie/-k -> repaie
+repais(R°pE,repaître_VER) R@a/pie/-d -> repaies
+repris(R°pRiz,reprendre_VER) R@a/pRinl/-s -> reprises
+resserres(R°sER,resserrer_VER) R@a/sieR/-d -> ressers
+ressers(R°sER,resservir_VER) R@a/sieR/-k -> resserre
+ressurgis(R°syRZi,ressurgir_VER) R@a/s@iR/vti/-dt -> resurgis
+ressurgissais(R°syRZisE,ressurgir_VER) R@a/s@iR/vti/sie/-d -> resurgissais
+ressurgirais(R°syRZiRE,ressurgir_VER) R@a/s@iR/vti/Rie/-d -> resurgirais
+reteins(R°t5,reteindre_VER) R@a/taie/-k -> retins
+reteins(R°t5,reteindre_VER) R@a/taie/-d -> retins
+récrie(RekRi,récrier_VER) Re/kRi/-k -> récris
+régies(ReZi,régie_NOM) Re/vti/-s -> régis
+réparties(RepaRti,répartie_NOM) Re/paR/ti/-s -> répartis
+sacquent(sak,sacquer_VER) sak/-sR -> saquent
+saisies(sezi,saisie_NOM) se/twi/-s -> saisis
+saoulez(sule,saouler_VER) s@e/mte/-d -> soûlez
+saque(sak,saquer_VER) sak/-k -> sacque
+saque(sak,saquer_VER) sak/-R -> sacque
+scelles(sEl,sceller_VER) siel/-dR -> selles
+scribouille(skRibuj,scribouiller_VER) ksRi/sv@ej/-k -> gribouille
+scribouille(skRibuj,scribouiller_VER) ksRi/sv@ej/-R -> gribouille
+scribouillent(skRibuj,scribouiller_VER) ksRi/sv@ej/-sR -> gribouillent
+scribouilles(skRibuj,scribouiller_VER) ksRi/sv@ej/-dR -> gribouilles
+selle(sEl,seller_VER) siel/-k -> scelle
+selle(sEl,seller_VER) siel/-R -> scelle
+sellent(sEl,seller_VER) siel/-sR -> scellent
+soumis(sumiz,soumettre_VER) s@e/minl/-s -> soumises
+soûle(sul,soûler_VER) s@el/-k -> saoule
+soûle(sul,soûler_VER) s@el/-R -> saoule
+soûlent(sul,soûler_VER) s@el/-sR -> saoulent
+soûles(sul,soûler_VER) s@el/-dR -> saoules
+subits(sybi,subit_ADJ) s@i/svi/-s -> subis
+surpris(syRpRiz,surprendre_VER) s@iR/pRinl/-s -> surprises
+tache(taS,tacher_VER) taZm/-k -> tâche
+tache(taS,tacher_VER) taZm/-R -> tâche
+tachez(taSe,tacher_VER) ta/pme/-d -> tâchez
+talle(tal,taller_VER) tal/-R -> tale
+tallent(tal,taller_VER) tal/-sR -> talent
+teinte(t5t,teinter_VER) taiet/-R -> tinte
+teintent(t5t,teinter_VER) taiet/-sR -> tintent
+tins(t5,tenir_VER) taie/-d -> teins
+tocades(tokad,tocade_NOM) tae/kad/-s -> toquades
+tocarde(tokaRd,tocard_ADJ) tae/kadR -> toquarde
+toquade(tokad,toquade_NOM) tae/kad -> tocade
+toquante(tok@t,toquante_NOM) tae/k@t -> tocante
+toquard(tokaR,toquard_ADJ) tae/kaR -> tocard
+toquards(tokaR,toquard_ADJ) tae/kaR/-s -> tocards
+toquardes(tokaRd,toquard_ADJ) tae/kadR/-s -> tocardes
+transmis(tR@smiz,transmettre_VER) tR@s/minl/-s -> transmises
+trimbale(tR5bal,trimbaler_VER) tRaie/sval/-k -> trimballe
+trimbale(tR5bal,trimbaler_VER) tRaie/sval/-R -> trimballe
+trimbales(tR5bal,trimbaler_VER) tRaie/sval/-dR -> trimballes
+trimbalais(tR5balE,trimbaler_VER) tRaie/sva/mtie/-d -> trimballais
+trimballent(tR5bal,trimballer_VER) tRaie/sval/-sR -> trimbalent
+tâchent(taS,tâcher_VER) taZm/-sR -> tachent
+tâches(taS,tâcher_VER) taZm/-dR -> taches
+ulule(ylyl,ululer_VER) @i/mt@il/-R -> hulule
+ululent(ylyl,ululer_VER) @i/mt@il/-sR -> hululent
+vente(v@t,venter_VER) v@t/-k -> vante
+vente(v@t,venter_VER) v@t/-R -> vante
+ventent(v@t,venter_VER) v@t/-sR -> vantent
+ventes(v@t,venter_VER) v@t/-dR -> vantes
+zieute(zj2t,zieuter_VER) tRw@iet/-k -> zyeute
+éclaircies(eklERsi,éclaircie_NOM) e/kmtieR/si/-s -> éclaircis
+écrie(ekRi,écrier_VER) e/kRi/-k -> écris
+écries(ekRi,écrier_VER) e/kRi/-d -> écris
+égraine(egREn,égrainer_VER) e/ksRien/-R -> égrène
+égrainent(egREn,égrainer_VER) e/ksRien/-sR -> égrènent
+épisse(epis,épisser_VER) e/pis/-R -> épice
+épissent(epis,épisser_VER) e/pis/-sR -> épicent
+épisses(epis,épisser_VER) e/pis/-dR -> épices
+épris(epRiz,éprendre_VER) e/pRinl/-s -> éprises
+évènementielles(even°m@sjEl,évènementiel_ADJ) e/ve/mR@a/m@/sRwiel/-js -> événementielles
+évènementiels(even°m@sjEl,évènementiel_ADJ) e/ve/mR@a/m@/sRwiel/-s -> événementiels

@@ -1,0 +1,9 @@
+1751 legal keypresses
+removing: {('suffix', 'cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé'), ('prefix', 'e|hi|hy|i|y|î'), ('prefix', 'é'), ('prefix', 'ai|aî|e|ei|hai|he|hê|é')}
+H baseline (30): 30 rules, exceptions 1598 words / 3017 freq, credited saving 97884 (curve end 97884)
+H without top-4 exception rules, refilled to 30: 30 rules, exceptions 1338 words / 1156 freq, credited saving 91387 (curve end 91387)
+H without top-4 exception rules, 26 rules: 26 rules, exceptions 1292 words / 1132 freq, credited saving 85901 (curve end 85901)
+refill new rules: [('suffix', 'er', 0, 0), ('prefix', 'mi', 22, 2.1), ('prefix', 'fa', 24, 22.4), ('suffix', 'nir', 0, 0)]
+refill dropped vs baseline: [('suffix', 'cer|cé|cée|cés|scer|se|ser|sse'), ('prefix', 'e|hi|hy|i|y|î'), ('prefix', 'é'), ('prefix', 'ai|aî|e|ei|hai|he|hê|é')]
+26 new rules: []
+26 dropped vs baseline: [('suffix', 'cer|cé|cée|cés|scer|se|ser|sse'), ('prefix', 'e|hi|hy|i|y|î'), ('prefix', 'é'), ('prefix', 'ai|aî|e|ei|hai|he|hê|é')]

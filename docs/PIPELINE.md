@@ -8,7 +8,7 @@ constants) and what comes out, with sizes measured on the 2026-09-22 data.
 
 How to read it:
 
-- Eight stages, S1 to S8, one top-level section each. Stages and phases are cited by
+- Nine stages, S1 to S9, one top-level section each. Stages and phases are cited by
   descriptive name with the code in parentheses ("Discriminating-Feature Grouping (Grouping
   Phase)"). Calls are numbered in execution order inside their stage ("Phonetic-theory construction
   (S5.3)"); in Same-Lemma and Grammatical-Category Disambiguation (S6) the ids carry the
@@ -49,6 +49,8 @@ The real dependency order. Steps 0 and 1 and the human loop 4h are run by hand, 
 | 7 | `python -m util.build_disambiguated_theory` | Different-Lemma or Grammatical-Category Disambiguation (S7) | to refresh `disambiguated_theory.tsv` and the exporters' `DisambiguatedTheory.pickle` | Fast (pickles exist); hard-errors naming the exact prerequisite commands when the pickles or JSONs are missing. Also writes the fingerprinted `DisambiguatedTheory.pickle` every exporter loads instead of recomputing (fact 1). |
 | 8 | `python -m util.export_plover_dictionary`, `python -m util.export_plover_system` | Theory Export (S8), Plover branch | Plover | Either order. |
 | 9 | `python -m util.export_keyboard_layout` (after step 6), `python -m util.export_practice_words`, **then** `python -m util.export_practice_sentences`, then `python -m util.export_definitions`, then `python -m util.export_lessons` | Theory Export (S8), trainer branch | steno-trainer | `export_practice_sentences` reads `practice-words.json` (export_practice_sentences.py:157); `export_lessons` reads its Keypress Groups from `realization_report.json`, not `keypress_groups.json` (export_lessons.py:267). |
+| 10 | `python -m util.build_affix_rules`, then `python -m util.export_affix_dictionary` | Affix Abbreviation Building (S9a, S9b) | the optional affix abbreviation layer | After the whole theory and its exports. S9a reads the committed `affix_decisions.json`; `AffixSelection.pickle` is its cache (absent: ~25 min full selection; present: reused or cheaply reselected; `rm` it after any lexicon or layout change). Lists PENDING decisions, asks nothing. |
+| 10h | `python -m util.review_affix_rules` → `python -m util.build_affix_rules` | Affix Abbreviation Building, review | only when step 10 lists PENDING decisions | Hand-run and interactive: proposes each pending item with its help/hurt numbers (growth BEFORE fusion; a fusion is judged with its parts' decided growth, and a fused merge inherits its parts' growth), writes `affix_decisions.json` after every answer, then reselects by itself (cached, about a minute) and continues with what is newly pending, until nothing is pending, you quit, or a pass saved nothing. |
 | opt | `python -m util.check_conjugation_disambiguation_order` | Elicitation Phase: Answer Collection, validator | checking answers | Writes `conjugation_disambiguation_report.json` (gitignored). |
 
 **The orchestrated entrypoint.** `python dictionary.py` (no arguments) runs the whole chain
@@ -58,7 +60,7 @@ itself: table steps 3-9 plus the four steady-state Synthetic Lexicon Building (S
 util.build_synthetic_lexicon`, in dependency order — step 3, the appenders (looped to
 convergence by the wrapper, which itself deletes the pickles and reruns the step-3 build
 after any round that appended rows), step 4, step 5, the disambiguated-theory refresh of step 7, step 6,
-then the step 8-9 exports. Every phase runs as its own `python -m` subprocess, because the
+then the step 8-9 exports, then step 10 (Affix Abbreviation Building, S9). Every phase runs as its own `python -m` subprocess, because the
 Dictionary must never be built twice in one process: `Syllable`'s class-level
 phoneme collections (src/grammar.py:451-466) accumulate frequencies across builds — which
 is also why the step-3 and step-7 builds live in `util.build_phonetic_theory` /
@@ -155,6 +157,11 @@ manual fallback and as the explanation of what the orchestrator does internally.
    `util.export_plover_system`, then the five steno-trainer exports) — so
    `plover_stenalgo_dictionary.json` and `steno-trainer/public/data/*.json` match the fixed
    theory.
+9. Affix Abbreviation Building (S9): `rm -f AffixSelection.pickle` (its cached rule evaluations are of the old lexicon),
+   then `python -m util.build_affix_rules` (~25 min) and `python -m util.export_affix_dictionary` — or just the orchestrated
+   `python dictionary.py`, which does both. A change that touches only `affix_decisions.json` needs no `rm`: the
+   selection reruns from its cache. The verification md5s of S9 are `affix_rules.json`, `affix_rules_report.md`,
+   `plover_stenalgo_affix_dictionary.json`, `affix_abbreviations.tsv`.
 
 ---
 
@@ -251,6 +258,12 @@ Theory Export (S8) ............................... python -m util.export_*
 ├─ Disambiguated-theory loading (recomputes the disambiguated theory) — loadPhoneticAndDisambiguatedTheory  S8.1
 ├─ Plover branch: dictionary, key table, plugin ................... S8.3-S8.5 → plover_stenalgo_dictionary.json, _generated_keys.py
 └─ Trainer branch: legend, word drill, sentences, definitions, lessons ..... S8.6-S8.10 → steno-trainer/public/data/*.json
+
+
+Affix Abbreviation Building (S9) ................. optional layer after the finished theory; see below and AFFIX_RULES.md
+├─ S9a  Rule selection and keypress binding — python -m util.build_affix_rules
+│       ← affix_decisions.json (committed verdicts), AffixSelection.pickle (cache) → affix_rules.json, affix_rules_report.md
+└─ S9b  Affix dictionary — python -m util.export_affix_dictionary → plover_stenalgo_affix_dictionary.json, affix_abbreviations.tsv
 ```
 
 The two homophone problems have two mechanisms. Words that are forms of the same lemma and
@@ -1914,3 +1927,35 @@ most frequent unmarked stream records when the lesson's own pool has no word for
 (`examplesFallbackByKeypress`); spec: `docs/specs/lessons.md` §7.1.
 Result: `steno-trainer/public/data/lessons.json` (a fixed, fully generated progression: explicit
 final sorts only, so regeneration from the same inputs is byte-identical).
+
+## Affix Abbreviation Building (S9)
+
+An OPTIONAL layer on top of the finished theory (the theory is unchanged and complete without it): a dedicated keypress for a
+frequent affix (`re-`, `-ment`, `-tion`...) merged into the neighbouring stroke, so that a word saves a stroke. Full description,
+decisions and the review loop: [AFFIX_RULES.md](AFFIX_RULES.md).
+
+### Rule selection and keypress binding — util/build_affix_rules.main (S9a)
+
+**Called by** `python dictionary.py` (after S8), or by hand: `python -m util.build_affix_rules`.
+**Input state** the stable theory (as the S8 exporters load it), `starboard3h.json`, both lexicons, the committed
+`affix_decisions.json` (the user's fusion verdicts and growth forms per anchor), and `AffixSelection.pickle` if present.
+**Transformation** pool of k=1 anchors, spelling-variant merges and decided growth forms; merges settled by verdict (an undecided
+merge stays apart); lazy-greedy selection of 30 rules (each word credited once at its best rule; exception weight 2, fallback price 5,
+form price 100); exact keypress choice per candidate rule (every legal keypress on a sample of the 2,000 most frequent carriers, the 30 best on all carriers; ~30-120 s each, cached per rule by a signature of its anchor, verdict, forms and
+carrier set); swap pass; keypress binding with sharing. Present pickle made from the current decisions: the final selection is reused;
+decisions changed: reselection from the cached evaluations; absent: full selection.
+**Result** 30 rules. PENDING decisions (a selected rule with no growth verdict, an undecided merge next to a selected anchor) are listed
+with the safe default applied; `python -m util.review_affix_rules` decides them.
+**Artifacts** reads `affix_decisions.json`; writes `affix_rules.json` (committed list of rank, position, anchor, phonology, keys),
+`affix_rules_report.md` (committed, deterministic, no timings), `AffixSelection.pickle` (gitignored: lexicon/layout fingerprint, per-rule
+evaluations, the final selection with the md5 of the decisions it was made from).
+**Notes** a lexicon/layout fingerprint mismatch only warns; `rm AffixSelection.pickle` forces a full recompute.
+
+### Affix dictionary — util/export_affix_dictionary.main (S9b)
+
+**Called by** `python dictionary.py` (after S9a), or by hand.
+**Input state** the stable theory, `affix_rules.json`.
+**Transformation** per carrier word of each rule the shortest allowed outline (growth form, then anchor alone), kept only if it equals
+no outline of the stable theory and no more frequent spelling's abbreviation; a rule whose anchor vanished is skipped with a warning.
+**Artifacts** writes `plover_stenalgo_affix_dictionary.json` (short outline → word) and `affix_abbreviations.tsv`; fails if an abbreviation
+collides with `plover_stenalgo_dictionary.json`.

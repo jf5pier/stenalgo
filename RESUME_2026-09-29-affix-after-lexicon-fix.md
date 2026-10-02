@@ -1,3 +1,7 @@
+> **Status 2026-10-01: HISTORICAL.** Kept for its reasoning. The current description is `docs/AFFIX_RULES.md`; the state is `RESUME_2026-10-01-option-c-engine.md`; the next phase (pipeline integration) is `PLAN_2026-10-01-affix-pipeline-integration.md`.
+
+> **Superseded 2026-09-29 (evening) by `RESUME_2026-09-29-affix-partial-overlap-flag.md`** — Steps 1-2 below are done; read that file first.
+
 # Resume: affix rules, after the `-ption` lexicon fix (written 2026-09-29)
 
 Branch `affix-abbreviation-rules` (last commit = "Single-generator affix rewrite + OQLF/TAO
@@ -51,3 +55,19 @@ different sound)? Needs full rebuild + md5 comparison.
 ## Untracked files deliberately not committed
 `birds.md`, `RESUME_2026-09-25-spelling-variant-removal.md`, `steno-trainer/user*.json`,
 `scratch/` pickles and logs.
+
+## Update 2026-09-29 (evening): speedup done, cluster-onset fusion measured
+- Sweep speedup committed (93a36eb, 7c0ee5f): full sweep 669 s instead of ~5,200 s, rule tables
+  byte-identical. See `PLAN_2026-09-29-affix-scan-speedup.md`. Stray `psj§ ption` / `ksj§ ction`
+  anchors are gone; `tion` 2,355 -> 2,365 carriers.
+- Cluster-onset fusion scope (`scratch/cluster_fusion_scope.py`, `scratch/same_ortho_scope.py`):
+  * Strict "consonant added to the onset" (sj§ + psj§/ksj§): 10 suffix pairs, total freq 167
+    (`xion` 14.8 vs `tion` 3,447 = 0.4%; the rest, llon/illon/breux, are not real variants);
+    prefixes 10 pairs / 166, and they would wrongly fuse distinct affixes (cre/re, pres/res).
+    NOT worth a generator change.
+  * Same SPELLING, different onset (voicing / sound alternations): 30 pairs, total freq 1,912:
+    -ser z/s 718, -tion sj/tj 434 (question, gestion), -sion zj/sj 130, -ller j/l 116, -sé 99,
+    -son 91, -sible 46 ... A spelling-keyed merge (group by position+ortho+nucleus/coda, onsets
+    differ) is simple and human-checkable ("the spelling decides the key"), but it needs a
+    merged-node identity (phono label like `sj§|tj§`) and a 2% conflict test as today.
+    Modest gain (~1.9k freq vs top rules at 3-9k): decision pending.
