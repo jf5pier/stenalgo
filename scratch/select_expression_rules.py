@@ -250,6 +250,109 @@ def main() -> None:
             fh.write(f"{'+'.join(expr.units)}\t{expr.freq:.0f}\t"
                      f"{expr.longformStrokes}\t{len(traced.strokes or ())}\t"
                      f"{traced.saving}\t{traced.exceptions}\n")
+
+    # ---- Phase 3: the expr-rules.tsv report (per-rule attribution over the
+    # joint composition) + the composability matrix.
+    from collections import defaultdict
+
+    from src.affixbinding import PhonemeKeys, salientPhonemes, simScore
+    from util._stenorender import renderFinalStrokesToRTFCRE
+
+    pk = PhonemeKeys(starboard)
+    rulesFinal = [r for r in result.selected
+                  if r.kind == "attach" and r.keys is not None]
+    ruleOf = {(r.units, r.position): r for r in rulesFinal}
+    def newStats() -> dict:
+        return {"saved": 0.0, "fired": 0.0, "excFreq": 0.0, "exc": [],
+                "examples": [], "with": defaultdict(float)}
+    stats: dict[tuple, dict] = defaultdict(newStats)
+    pairEx: dict[tuple, tuple] = {}
+    keyOf = lambda r: (r.units, r.position)
+    for expr in pool:
+        traced = composeOutlineTraced(rulesJoint, expr.tokens, realCtx)
+        if traced.strokes is None:
+            continue
+        fired = []
+        for seg in traced.segments:
+            if seg.kind != "attach" or seg.rule is None:
+                continue
+            rule = ruleOf.get((seg.rule.expression, seg.rule.position))
+            if rule is None:
+                continue
+            span = len(seg.strokes) or (seg.span[1] - seg.span[0])
+            k = keyOf(rule)
+            if seg.outcome == "merged":
+                stats[k]["saved"] += expr.freq * span
+                stats[k]["fired"] += expr.freq
+                fired.append(k)
+            elif seg.outcome == "standalone":
+                stats[k]["saved"] += expr.freq * (span - 1)
+                stats[k]["fired"] += expr.freq
+                fired.append(k)
+            else:
+                stats[k]["excFreq"] += expr.freq
+                stats[k]["exc"].append((expr.freq, expr.units))
+        longformR = renderFinalStrokesToRTFCRE(
+            starboard, tuple(s for t in expr.tokens for s in t.strokes))
+        composedR = renderFinalStrokesToRTFCRE(starboard, traced.strokes)
+        for a in fired:
+            for b in fired:
+                if a != b:
+                    stats[a]["with"][b] += expr.freq
+                    pairEx.setdefault(tuple(sorted((a, b))), (0.0, ""))
+                    if expr.freq > pairEx[tuple(sorted((a, b)))][0]:
+                        pairEx[tuple(sorted((a, b)))] = (
+                            expr.freq, f"{' '.join(expr.units)}: {longformR} -> {composedR}")
+        for k in fired or []:
+            if len(stats[k]["examples"]) < 3:
+                stats[k]["examples"].append(
+                    f"{' '.join(expr.units)}: {longformR} -> {composedR}")
+
+    phonoOf: dict[str, str] = {}
+    for rule in rulesFinal:
+        memberPhonos = []
+        for unit in rule.units:
+            if unit not in phonoOf:
+                pairs = resolveTerm(unit, byOrtho)
+                phonoOf[unit] = pairs[0][1].phonology if pairs and pairs[0][1] else ""
+            memberPhonos.append((phonoOf[unit], rule.freq))
+        weights = salientPhonemes(memberPhonos, pk)
+        rule.keySimilarity = simScore(frozenset(rule.keys or ()), weights, pk,
+                                      rule.position or "prefix")
+
+    with open(REPO / "scratch" / "expr-rules.tsv", "w", encoding="utf-8") as out:
+        out.write("rank\tkind\tfamily\texpression\tposition\tkeys\trtfcre\tscore\t"
+                  "strokeFreqSaved\tkeySimilarity\texceptionFreq\ttopExceptions\t"
+                  "examples\tcomposedWith\n")
+        for rank, rule in enumerate(rulesFinal, 1):
+            st = stats[keyOf(rule)]
+            top = sorted(st["exc"], key=lambda t: -t[0])[:5]
+            out.write("\t".join([
+                str(rank), rule.kind, rule.family, " ".join(rule.units),
+                rule.position, ",".join(map(str, rule.keys or ())),
+                renderFinalStrokesToRTFCRE(starboard, (tuple(sorted(rule.keys or ())),)),
+                f"{rule.score:.3e}", f"{st['saved']:.3e}",
+                f"{getattr(rule, 'keySimilarity', 0.0):.3f}",
+                f"{st['excFreq']:.3e}",
+                "; ".join(" ".join(u) for _f, u in top),
+                " | ".join(st["examples"]),
+                "; ".join(f"{' '.join(bKey[0])}({m:.2e})"
+                          for bKey, m in sorted(st["with"].items(),
+                                                key=lambda kv: -kv[1])[:4]),
+            ]) + "\n")
+    with open(REPO / "scratch" / "expr-composability.tsv", "w", encoding="utf-8") as out:
+        out.write("ruleA\truleB\tjoint_freq\tworked_example\n")
+        seenPairs = set()
+        for rule in rulesFinal:
+            for bKey, m in stats[keyOf(rule)]["with"].items():
+                pair = tuple(sorted([(rule.units, rule.position), bKey]))
+                if pair in seenPairs or m < 1e6:
+                    continue
+                seenPairs.add(pair)
+                ex = pairEx.get(pair, (0.0, ""))[1]
+                out.write(f"{' '.join(rule.units)}\t{' '.join(bKey[0])}\t{m:.3e}\t{ex}\n")
+    print(f"report: scratch/expr-rules.tsv ({len(rulesFinal)} rules), "
+          f"expr-composability.tsv ({len(seenPairs)} pairs >= 1e6)")
     slots = {(r.family or " ".join(r.units)) if r.kind == "attach"
              else " ".join(r.units) for r in result.selected}
     print(f"selected {len(result.selected)} rules in {len(slots)} slots -> {OUT_TSV}")

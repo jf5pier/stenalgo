@@ -1,0 +1,483 @@
+{
+ "rules": [
+  {
+   "kind": "attach",
+   "family": "de",
+   "units": [
+    "de"
+   ],
+   "position": "prefix",
+   "keys": [
+    9,
+    18,
+    23
+   ],
+   "freq": 578716792.0
+  },
+  {
+   "kind": "attach",
+   "family": "de",
+   "units": [
+    "d'"
+   ],
+   "position": "prefix",
+   "keys": [
+    9,
+    10,
+    18,
+    23
+   ],
+   "freq": 156154508.0
+  },
+  {
+   "kind": "attach",
+   "family": "à",
+   "units": [
+    "à"
+   ],
+   "position": "prefix",
+   "keys": [
+    9,
+    17
+   ],
+   "freq": 267408208.0
+  },
+  {
+   "kind": "attach",
+   "family": "ne",
+   "units": [
+    "n'"
+   ],
+   "position": "prefix",
+   "keys": [
+    8,
+    17,
+    21
+   ],
+   "freq": 152965207.0
+  },
+  {
+   "kind": "attach",
+   "family": "ne",
+   "units": [
+    "ne"
+   ],
+   "position": "prefix",
+   "keys": [
+    8,
+    10,
+    17,
+    21
+   ],
+   "freq": 44860332.0
+  },
+  {
+   "kind": "attach",
+   "family": "ne",
+   "units": [
+    "n'",
+    "y"
+   ],
+   "position": "prefix",
+   "keys": [
+    8,
+    15,
+    17,
+    21
+   ],
+   "freq": 11093429.0
+  },
+  {
+   "kind": "attach",
+   "family": "dans",
+   "units": [
+    "dans"
+   ],
+   "position": "prefix",
+   "keys": [
+    2,
+    8
+   ],
+   "freq": 253868505.0
+  },
+  {
+   "kind": "attach",
+   "family": "et",
+   "units": [
+    "et"
+   ],
+   "position": "prefix",
+   "keys": [
+    8,
+    16,
+    19
+   ],
+   "freq": 278249465.0
+  },
+  {
+   "kind": "attach",
+   "family": "que",
+   "units": [
+    "que"
+   ],
+   "position": "prefix",
+   "keys": [
+    2,
+    9
+   ],
+   "freq": 185627895.0
+  },
+  {
+   "kind": "attach",
+   "family": "que",
+   "units": [
+    "que",
+    "je"
+   ],
+   "position": "prefix",
+   "keys": [
+    2,
+    9,
+    10
+   ],
+   "freq": 25758482.0
+  },
+  {
+   "kind": "attach",
+   "family": "que",
+   "units": [
+    "que",
+    "l'"
+   ],
+   "position": "prefix",
+   "keys": [
+    2,
+    9,
+    15
+   ],
+   "freq": 18423683.0
+  },
+  {
+   "kind": "attach",
+   "family": "que",
+   "units": [
+    "que",
+    "nous"
+   ],
+   "position": "prefix",
+   "keys": [
+    2,
+    9,
+    10,
+    15
+   ],
+   "freq": 11446990.0
+  },
+  {
+   "kind": "attach",
+   "family": "il",
+   "units": [
+    "il"
+   ],
+   "position": "prefix",
+   "keys": [
+    7,
+    9,
+    18
+   ],
+   "freq": 168319881.0
+  },
+  {
+   "kind": "attach",
+   "family": "la",
+   "units": [
+    "la"
+   ],
+   "position": "prefix",
+   "keys": [
+    16,
+    19
+   ],
+   "freq": 116132666.0
+  },
+  {
+   "kind": "attach",
+   "family": "le",
+   "units": [
+    "le"
+   ],
+   "position": "suffix",
+   "keys": [
+    3,
+    17
+   ],
+   "freq": 199548478.0
+  },
+  {
+   "kind": "attach",
+   "family": "le",
+   "units": [
+    "le"
+   ],
+   "position": "prefix",
+   "keys": [
+    3,
+    10,
+    17
+   ],
+   "freq": 51233152.0
+  },
+  {
+   "kind": "attach",
+   "family": "les",
+   "units": [
+    "les"
+   ],
+   "position": "suffix",
+   "keys": [
+    3
+   ],
+   "freq": 176903013.0
+  },
+  {
+   "kind": "attach",
+   "family": "les",
+   "units": [
+    "les"
+   ],
+   "position": "prefix",
+   "keys": [
+    3,
+    10
+   ],
+   "freq": 33827184.0
+  },
+  {
+   "kind": "attach",
+   "family": "pas",
+   "units": [
+    "pas"
+   ],
+   "position": "suffix",
+   "keys": [
+    16
+   ],
+   "freq": 206722861.0
+  },
+  {
+   "kind": "attach",
+   "family": "pas",
+   "units": [
+    "pas",
+    "le"
+   ],
+   "position": "suffix",
+   "keys": [
+    10,
+    16
+   ],
+   "freq": 6247194.0
+  },
+  {
+   "kind": "attach",
+   "family": "l'",
+   "units": [
+    "l'"
+   ],
+   "position": "prefix",
+   "keys": [
+    5,
+    6
+   ],
+   "freq": 77616119.0
+  },
+  {
+   "kind": "attach",
+   "family": "l'",
+   "units": [
+    "l'",
+    "on"
+   ],
+   "position": "suffix",
+   "keys": [
+    5,
+    6,
+    10
+   ],
+   "freq": 12730809.0
+  },
+  {
+   "kind": "attach",
+   "family": "je",
+   "units": [
+    "je"
+   ],
+   "position": "prefix",
+   "keys": [
+    4,
+    18,
+    19
+   ],
+   "freq": 112312128.0
+  },
+  {
+   "kind": "attach",
+   "family": "je",
+   "units": [
+    "je",
+    "ne"
+   ],
+   "position": "suffix",
+   "keys": [
+    4,
+    10,
+    18,
+    19
+   ],
+   "freq": 25361333.0
+  },
+  {
+   "kind": "attach",
+   "family": "je",
+   "units": [
+    "je",
+    "me"
+   ],
+   "position": "prefix",
+   "keys": [
+    4,
+    15,
+    18,
+    19
+   ],
+   "freq": 13654387.0
+  },
+  {
+   "kind": "attach",
+   "family": "ce",
+   "units": [
+    "ce"
+   ],
+   "position": "prefix",
+   "keys": [
+    5,
+    7,
+    19
+   ],
+   "freq": 86637555.0
+  },
+  {
+   "kind": "attach",
+   "family": "ce",
+   "units": [
+    "ce",
+    "qui"
+   ],
+   "position": "prefix",
+   "keys": [
+    5,
+    7,
+    10,
+    19
+   ],
+   "freq": 24454906.0
+  },
+  {
+   "kind": "attach",
+   "family": "s'",
+   "units": [
+    "s'"
+   ],
+   "position": "prefix",
+   "keys": [
+    3,
+    4,
+    5
+   ],
+   "freq": 53867708.0
+  },
+  {
+   "kind": "attach",
+   "family": "s'",
+   "units": [
+    "s'",
+    "il"
+   ],
+   "position": "suffix",
+   "keys": [
+    3,
+    4,
+    5,
+    10
+   ],
+   "freq": 12210772.0
+  }
+ ],
+ "chosen": {
+  "de": [
+   9,
+   18,
+   23
+  ],
+  "à": [
+   9,
+   17
+  ],
+  "ne": [
+   8,
+   17,
+   21
+  ],
+  "dans": [
+   2,
+   8
+  ],
+  "et": [
+   8,
+   16,
+   19
+  ],
+  "que": [
+   2,
+   9
+  ],
+  "il": [
+   7,
+   9,
+   18
+  ],
+  "la": [
+   16,
+   19
+  ],
+  "le": [
+   3,
+   17
+  ],
+  "les": [
+   3
+  ],
+  "pas": [
+   16
+  ],
+  "l'": [
+   5,
+   6
+  ],
+  "je": [
+   4,
+   18,
+   19
+  ],
+  "ce": [
+   5,
+   7,
+   19
+  ],
+  "s'": [
+   3,
+   4,
+   5
+  ]
+ }
+}
