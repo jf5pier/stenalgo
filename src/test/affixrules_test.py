@@ -1,4 +1,4 @@
-"""Tests for src/affixrules.py (Phase 2, DESIGN_2026-09-27-affix-rule-selection.md §4)."""
+"""Tests for src/affixrules.py (Phase 2, docs/history/DESIGN_2026-09-27-affix-rule-selection.md §4)."""
 import src.affixrules as R
 from src.affixes import RULE, SUFFIX, Candidate, Carrier, CarrierResult, Slot, WordRecord
 from src.affixrules import (

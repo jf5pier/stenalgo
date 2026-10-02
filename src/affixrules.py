@@ -1,5 +1,5 @@
 """
-Phases 2-4 (DESIGN_2026-09-27-affix-rule-selection.md §4-6): turn the Phase-1 lattice pool into a
+Phases 2-4 (docs/history/DESIGN_2026-09-27-affix-rule-selection.md §4-6): turn the Phase-1 lattice pool into a
 budgeted, keypress-bound set of rules.
 
 - Phase 2 (§4): turn a pool node into a candidate rule -- a root plus a small set of its lattice
