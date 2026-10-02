@@ -37,9 +37,9 @@ from dataclasses import dataclass, field
 from src.affixes import PREFIX, SUFFIX, SimContext
 from src.affixrules import MAX_EXCEPTION_RATE
 from src.ambiguitychecker import HASH_KEY, STAR_KEY
-from src.expressions import (AttachRule, BriefRule, Rules, Token,
-                             composeOutlineTraced, planStream)
-from src.keyboard import Stroke
+from src.expressions import (AttachRule, BriefRule, MERGED, STANDALONE,
+                             Rules, Token, composeOutlineTraced, planStream)
+from src.keyboard import Stroke, Strokes
 
 # Q6 floors — tunable in one place.
 MIN_LONGFORM_STROKES = 2      # expressions under 2 strokes never enter the queue
@@ -132,7 +132,7 @@ class ExprRule:
 SELECTORS: tuple[tuple[int, ...], ...] = ((), (STAR_KEY,), (HASH_KEY,),
                                           (STAR_KEY, HASH_KEY))
 SAMPLE_EXPRESSIONS = 30   # stage-1 sample per family (affix SAMPLE_CARRIERS spirit)
-FINALIST_BASES = 5        # stage-2 finalists (affix MAX_ALTERNATIVES spirit)
+REPAIR_CANDIDATES = 20    # sample survivors fully evaluated; clean ones are repair candidates
 
 
 def _familyGroups(selected: list[ExprRule]) -> list[list[ExprRule]]:
@@ -175,17 +175,20 @@ def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
         touched.sort(key=lambda i: -pool[i].freq)
         sample = touched[:SAMPLE_EXPRESSIONS]
 
-        def evaluate(base: Stroke, carrierIdx: list[int]) -> tuple[float, float]:
-            """(score, exceptionRate) for this base over the given carriers,
-            the family evaluated ISOLATED (only its own variants compose):
-            evaluating alongside earlier-assigned families would strand
-            hostless particle n-grams ("et de" with de consumed by the de
-            family's rule) and trip the gate on pool fragments, and the
-            order would distort which family merges where — cross-family
-            truth is Stage C's joint repair. Trailing/leading pool
-            FRAGMENTS (a prefix run ending the expression, a suffix run
-            starting it — noNeighbour at the stream edge) are artifacts of
-            the n-gram slices, not carriers: excluded from both masses."""
+        def evaluate(base: Stroke, carrierIdx: list[int]) -> tuple[float, float, int]:
+            """(score, exceptionRate, shadowCount) for this base over the
+            given carriers, the family evaluated ISOLATED (only its own
+            variants compose): evaluating alongside earlier-assigned
+            families would strand hostless particle n-grams ("et de" with
+            de consumed by the de family's rule) and trip the gate on pool
+            fragments, and the order would distort which family merges
+            where — cross-family truth is Stage C's joint repair.
+            Trailing/leading pool FRAGMENTS (a prefix run ending the
+            expression, a suffix run starting it — noNeighbour at the
+            stream edge) are artifacts of the n-gram slices, not carriers:
+            excluded from both masses. A composed outline that is an
+            existing live outline (canonical index on `ctx.finalOutlines`)
+            is a shadow (Q7: hard no) and is counted."""
             rules: tuple[AttachRule, ...] = tuple(
                 AttachRule(r.units, r.position,
                            tuple(sorted(set(base) | set(selector))),
@@ -195,6 +198,7 @@ def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
             savingMass = 0.0
             exceptionMass = 0.0
             carrierMass = 0.0
+            shadowCount = 0
             for i in carrierIdx:
                 expr = pool[i]
                 traced = composeOutlineTraced(Rules(attaches=rules),
@@ -213,25 +217,31 @@ def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
                     continue          # fragment artifact, not a carrier
                 carrierMass += expr.freq
                 savingMass += expr.freq * traced.saving
+                if any(seg.outcome in (MERGED, STANDALONE) for seg in ours) \
+                        and traced.strokes in ctx.finalOutlines:
+                    shadowCount += 1
                 if any(seg.outcome == "exception" for seg in ours):
                     exceptionMass += expr.freq
             score = (savingMass - EXCEPTION_ALPHA * exceptionMass
                      - FORM_COST * (len(variants) - 1))
-            return score, (exceptionMass / carrierMass) if carrierMass else 1.0
+            return (score, (exceptionMass / carrierMass) if carrierMass else 1.0,
+                    shadowCount)
 
         stage1: list[tuple[float, Stroke]] = []
         for base in keypresses:
-            score, rate = evaluate(base, sample)
+            score, rate, _shadows = evaluate(base, sample)
             if rate <= MAX_EXCEPTION_RATE and score > 0:
                 stage1.append((score, base))
         stage1.sort(key=lambda t: (-t[0], t[1]))
-        best: tuple[float, Stroke] | None = None
-        for _score, base in stage1[:FINALIST_BASES]:
-            score, rate = evaluate(base, touched)
-            if rate <= MAX_EXCEPTION_RATE and (best is None or score > best[0]):
-                best = (score, base)
-        if best is None and stage1:
-            best = stage1[0]   # gate-only survivor: still the best available
+        # Full evaluation of the sample survivors; a base is a repair
+        # candidate only if the gate AND no-shadowing hold on ALL touched
+        # expressions (Q7 hard no).
+        alternatives: list[tuple[float, Stroke]] = []
+        for _score, base in stage1[:REPAIR_CANDIDATES]:
+            score, rate, shadows = evaluate(base, touched)
+            if rate <= MAX_EXCEPTION_RATE and shadows == 0:
+                alternatives.append((score, base))
+        best = min(alternatives, key=lambda t: (-t[0], t[1])) if alternatives else None
         info: dict[str, object] = {"variants": len(variants), "touched": len(touched)}
         if best is None:
             info["base"] = None
@@ -242,9 +252,121 @@ def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
             rule.keys = tuple(sorted(set(base) | set(selector)))
             rule.exactDone = True
         variants[0].score = score
-        info.update({"base": base, "score": score})
+        info.update({"base": base, "score": score, "alternatives": alternatives})
         report[family] = info
     return report
+
+
+def repairKeypresses(selected: list[ExprRule], report: dict,
+                     selectors: tuple[tuple[int, ...], ...] = SELECTORS
+                     ) -> dict[str, tuple[int, ...]]:
+    """Stage C joint repair: re-assign the families' bases so variants of
+    DIFFERENT families never share an effective keypress (base + selector)
+    — the cross-family union trap: hosts are productive (Q10), so any two
+    rules can meet on one host, and a 1-stroke host collapses prefix and
+    suffix into the same chord; equal effective keypresses then write
+    different particles identically.
+
+    CP-SAT in the featuregroupingsat tradition: one integer variable per
+    family over its Stage B candidate bases (gate- and shadow-clean,
+    score-ranked); pairwise AddAllowedAssignments forbid base combinations
+    whose effective variant sets intersect; the objective maximizes total
+    score with a candidate-rank tie-break (deterministic; the Stage B
+    winner hints the solver). Returns family -> chosen base; families with
+    no candidates keep their Stage B state (None stays None)."""
+    from ortools.sat.python import cp_model
+
+    groups = _familyGroups(selected)
+    fams: list[tuple[str, list[ExprRule], list[tuple[float, Stroke]]]] = []
+    for group in groups:
+        name = group[0].family or " ".join(group[0].units)
+        info = report.get(name, {})
+        bases = [b for b in info.get("alternatives", [])]  # type: ignore[union-attr]
+        if bases:
+            fams.append((name, group[:len(selectors)], bases))
+
+    model = cp_model.CpModel()
+    baseVars = []
+    effSets: list[list[tuple[tuple[int, ...], ...]]] = []
+    scoreInts: list[list[int]] = []
+    for i, (_name, group, bases) in enumerate(fams):
+        var = model.new_int_var(0, len(bases) - 1, f"family{i}")
+        baseVars.append(var)
+        effSets.append([tuple(tuple(sorted(set(base) | set(sel)))
+                              for sel in selectors[:len(group)])
+                        for _s, base in bases])
+        scoreInts.append([int(round(s * 1e-6)) for s, _b in bases])
+    # Stage B winners as determinism hints.
+    for var, (name, _group, bases) in zip(baseVars, fams):
+        stageB = report.get(name, {}).get("base")
+        if stageB in [b for _s, b in bases]:
+            model.add_hint(var, [b for _s, b in bases].index(stageB))
+
+    for i in range(len(baseVars)):
+        for j in range(i + 1, len(baseVars)):
+            allowed = [(a, b) for a in range(len(effSets[i])) for b in range(len(effSets[j]))
+                       if not (set(effSets[i][a]) & set(effSets[j][b]))]
+            model.add_allowed_assignments([baseVars[i], baseVars[j]], allowed)
+
+    objective = []
+    for k, (var, scores) in enumerate(zip(baseVars, scoreInts)):
+        s = model.new_int_var(min(scores), max(scores), f"score{k}")
+        model.add_element(var, scores, s)
+        objective.append(s)
+    ranks = []
+    for k, (var, scores) in enumerate(zip(baseVars, scoreInts)):
+        r = model.new_int_var(0, len(scores) - 1, f"rank{k}")
+        model.add_element(var, list(range(len(scores))), r)
+        ranks.append(r)
+    model.maximize(sum(objective) * 100 - sum(ranks))
+
+    solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = 30.0
+    status = solver.Solve(model)
+    chosen: dict[str, tuple[int, ...]] = {}
+    if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        return chosen
+    for var, (name, group, bases) in zip(baseVars, fams):
+        base = bases[solver.Value(var)][1]
+        for rule, selector in zip(group, selectors):
+            rule.keys = tuple(sorted(set(base) | set(selector)))
+        chosen[name] = base
+    return chosen
+
+
+@dataclass
+class ExprAudit:
+    """Stage C audit of the FINAL rule set over the whole pool, all
+    families composing together for the first time (the Phase 3 preview)."""
+    savingMass: float = 0.0            # frequency-weighted strokes saved
+    longformMass: float = 0.0          # the same pool written longform
+    exceptions: int = 0                # attach segments that kept longform
+    shadows: list[tuple[tuple[str, ...], Strokes]] = field(default_factory=list)
+    collisions: dict[Strokes, list[tuple[str, ...]]] = field(default_factory=dict)
+
+
+def auditExpressionRules(selected: list[ExprRule], pool: list[PoolExpression],
+                         ctx: SimContext) -> ExprAudit:
+    """Compose every pool expression under the final attach rules (jointly);
+    verify Q7 (no composed outline is a live outline) and global injectivity
+    (no two different expressions compose alike), and total the savings.
+    `ctx.finalOutlines` must be the CANONICAL live-outline index."""
+    rules = Rules(attaches=tuple(r.toAttach() for r in selected
+                                 if r.kind == "attach" and r.keys is not None))
+    audit = ExprAudit()
+    byOutline: dict[Strokes, list[tuple[str, ...]]] = {}
+    for expr in pool:
+        traced = composeOutlineTraced(rules, expr.tokens, ctx)
+        if traced.strokes is None:
+            continue                      # cannot happen over the resolved pool
+        audit.savingMass += expr.freq * traced.saving
+        audit.longformMass += expr.freq * expr.longformStrokes
+        audit.exceptions += traced.exceptions
+        if traced.saving > 0 and traced.strokes in ctx.finalOutlines:
+            audit.shadows.append((expr.units, traced.strokes))
+        byOutline.setdefault(traced.strokes, []).append(expr.units)
+    audit.collisions = {o: us for o, us in byOutline.items() if len(set(us)) > 1}
+    return audit
 
 
 @dataclass

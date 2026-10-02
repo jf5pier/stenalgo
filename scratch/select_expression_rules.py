@@ -116,11 +116,81 @@ def main() -> None:
     t = time.time()
     keypressReport = assignKeypresses(result.selected, pool, realCtx, keypresses)
     print(f"Stage B assignment done ({time.time() - t:.0f}s)")
+
+    # Stage C: joint repair (cross-family distinctness) + audit, with a
+    # feedback round: families implicated in an audit collision lose their
+    # base and the repair re-solves (v1 heuristic, up to 3 rounds).
+    from src.expressionrules import auditExpressionRules, repairKeypresses
+    from src.expressions import Rules, composeOutlineTraced
+
+    chosen: dict = {}
+    audit = None
+    for round_ in range(3):
+        chosen = repairKeypresses(result.selected, keypressReport)
+        audit = auditExpressionRules(result.selected, pool, realCtx)
+        print(f"Stage C round {round_}: re-based {len(chosen)} families, "
+              f"collisions {len(audit.collisions)}, shadows {len(audit.shadows)}")
+        if not audit.collisions:
+            break
+        poolByUnits = {e.units: e for e in pool}
+        rules = Rules(attaches=tuple(
+            r.toAttach() for r in result.selected
+            if r.kind == "attach" and r.keys is not None))
+        banned: set[str] = set()
+        progressed = False
+        for outline, exprs in audit.collisions.items():
+            famsInvolved: dict[str, set[tuple[str, ...]]] = {}
+            for units in exprs:
+                traced = composeOutlineTraced(rules, poolByUnits[units].tokens,
+                                              realCtx)
+                for seg in traced.segments:
+                    if seg.kind == "attach" and seg.rule is not None and seg.rule.family:
+                        famsInvolved.setdefault(seg.rule.family, set()).add(
+                            seg.rule.expression)
+            if len(famsInvolved) == 1:
+                # Selector collapse on a marked host (the host's own * / #
+                # swallows the variant's selector — no base can fix it):
+                # drop the weaker colliding variant; its contexts compose
+                # through the other family's rules instead.
+                fam, exprsSet = next(iter(famsInvolved.items()))
+                colliding = sorted(
+                    (r for r in result.selected
+                     if r.family == fam and r.units in exprsSet and r.forms == 0),
+                    key=lambda r: -r.freq)
+                keep = colliding[0] if len(colliding) > 1 else None
+                for drop in colliding:
+                    if drop is not keep:
+                        result.selected.remove(drop)
+                        progressed = True
+                continue
+            banned.update(famsInvolved)
+        for family in sorted(banned):
+            info = keypressReport.get(family, {})
+            alternatives = info.get("alternatives") or []
+            remaining = [a for a in alternatives if a[1] != chosen.get(family)]
+            if remaining and len(remaining) < len(alternatives):
+                info["alternatives"] = remaining
+                progressed = True
+        if not progressed:
+            break
+
     for family, info in keypressReport.items():
-        print(f"  family {family!r}: base={info.get('base')} "
-              f"variants={info['variants']} touched={info['touched']} "
-              f"score={info.get('score', 0):.3e}" if info.get("base") else
-              f"  family {family!r}: NO LEGAL BASE (variants={info['variants']})")
+        if family in chosen:
+            print(f"  family {family!r}: base={chosen[family]} "
+                  f"variants={info['variants']} score={info.get('score', 0):.3e}"
+                  + (" (Stage B base kept)" if chosen[family] == info.get("base")
+                     else " (moved)"))
+        else:
+            print(f"  family {family!r}: NO LEGAL BASE (variants={info['variants']})")
+    assert audit is not None
+    share = 100 * audit.savingMass / audit.longformMass if audit.longformMass else 0
+    print(f"audit: saving {audit.savingMass:.3e} of {audit.longformMass:.3e} "
+          f"longform strokes ({share:.1f}%), exceptions {audit.exceptions}, "
+          f"shadows {len(audit.shadows)}, collisions {len(audit.collisions)}")
+    for units, outline in audit.shadows[:5]:
+        print("  SHADOW", " ".join(units), outline)
+    for outline, exprs in list(audit.collisions.items())[:5]:
+        print("  COLLISION", outline, [" ".join(u) for u in exprs[:4]])
 
     with open(OUT_TSV, "w", encoding="utf-8") as out:
         out.write("rank\tkind\tfamily\texpression\tposition\tfreq\t"
