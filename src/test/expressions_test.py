@@ -155,12 +155,14 @@ class TestFailureLadder:
 
     def test_no_neighbour_keeps_longform(self):
         """A prefix particle with no following content segment: exception,
-        saving 0."""
+        saving 0. The segment carries its token span (Stage B's pool-
+        fragment detection reads it)."""
         rules = Rules(attaches=(AttachRule(("de", "la"), PREFIX, KAPPA_DE_LA),))
         tokens = (tok("mot", MOT), tok("de", DE), tok("la", LA))
         traced = composeOutlineTraced(rules, tokens, Ctx())
         assert traced.segments[-1].outcome == EXCEPTION
         assert traced.segments[-1].reason == "noNeighbour"
+        assert traced.segments[-1].span == (1, 3)
         assert traced.strokes == canonicalizeStrokes(MOT + DE + LA)
         assert traced.saving == 0
         assert traced.exceptions == 1

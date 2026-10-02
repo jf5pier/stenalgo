@@ -165,13 +165,14 @@ class Failure:
 class Segment:
     """One composed piece of the stream, in order: a word, a brief, or an
     attach particle. `strokes` is its contribution to the final outline
-    (empty for a merged attach)."""
+    (empty for a merged attach); `span` is the attach's token range."""
     units: tuple[str, ...]
     kind: str                         # "word" | "brief" | "attach"
     outcome: str                      # MERGED | STANDALONE | KEPT | EXCEPTION
     strokes: Strokes
     reason: str | None = None         # ladder reason for STANDALONE/EXCEPTION
     rule: AttachRule | BriefRule | None = None
+    span: tuple[int, int] = (-1, -1)  # attach tokens [start, end)
 
 
 @dataclass(frozen=True)
@@ -184,7 +185,7 @@ class Composition:
 
 
 @dataclass(frozen=True)
-class _Plan:
+class StreamPlan:
     """The segmented stream: ordered entries plus the token-index geometry
     merge targeting needs."""
     entries: tuple[tuple, ...]        # ("attach", rule, span) | ("content", tokens, brief)
@@ -192,7 +193,7 @@ class _Plan:
     contentPosOf: dict[int, int]      # residual token index -> content position
 
 
-def _plan(rules: Rules, tokens: list[Token]) -> _Plan:
+def planStream(rules: Rules, tokens: list[Token]) -> StreamPlan:
     # Step 1: longest-match-first attach consumption.
     table = sorted(((rule.expression, rule) for rule in rules.attaches),
                    key=lambda item: (-len(item[0]), item[0], item[1].position))
@@ -241,7 +242,7 @@ def _plan(rules: Rules, tokens: list[Token]) -> _Plan:
            for _, span, brief in content],
         key=lambda entry: entry[0])
     entries = tuple((kind, payload, extra) for _, kind, payload, extra in ordered)
-    return _Plan(entries, residual, contentPosOf)
+    return StreamPlan(entries, residual, contentPosOf)
 
 
 def composeOutlineTraced(rules: Rules, tokens: tuple[Token, ...],
@@ -252,7 +253,7 @@ def composeOutlineTraced(rules: Rules, tokens: tuple[Token, ...],
     if not tokenList or any(not t.strokes for t in tokenList):
         return Composition(None)
 
-    plan = _plan(rules, tokenList)
+    plan = planStream(rules, tokenList)
 
     # Content-segment outlines: briefs use beta, words their longform.
     outlines = [entry[2].strokes if entry[2] is not None else entry[1][0].strokes
@@ -315,17 +316,20 @@ def composeOutlineTraced(rules: Rules, tokens: tuple[Token, ...],
             units = tuple(t.unit for t in tokenList[span[0]:span[1]])
             keptStrokes = tuple(s for t in tokenList[span[0]:span[1]] for s in t.strokes)
             if outcome == MERGED:
-                segments.append(Segment(units, "attach", MERGED, (), None, rule))
+                segments.append(Segment(units, "attach", MERGED, (), None, rule,
+                                        (span[0], span[1])))
             elif outcome == STANDALONE:
                 stroke = tuple(sorted(rule.keypress))
                 final.append(stroke)
                 segments.append(Segment(units, "attach", STANDALONE,
-                                        (stroke,), attachReason, rule))
+                                        (stroke,), attachReason, rule,
+                                        (span[0], span[1])))
             else:
                 final.extend(keptStrokes)
                 exceptions += 1
                 segments.append(Segment(units, "attach", EXCEPTION,
-                                        keptStrokes, attachReason, rule))
+                                        keptStrokes, attachReason, rule,
+                                        (span[0], span[1])))
         else:
             segTokens, brief = payload, extra
             strokes = next(outlineIter)

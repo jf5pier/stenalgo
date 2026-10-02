@@ -34,8 +34,12 @@ from __future__ import annotations
 from bisect import bisect_left
 from dataclasses import dataclass, field
 
-from src.affixes import PREFIX, SUFFIX
-from src.expressions import AttachRule, BriefRule, Rules, Token, planStream
+from src.affixes import PREFIX, SUFFIX, SimContext
+from src.affixrules import MAX_EXCEPTION_RATE
+from src.ambiguitychecker import HASH_KEY, STAR_KEY
+from src.expressions import (AttachRule, BriefRule, Rules, Token,
+                             composeOutlineTraced, planStream)
+from src.keyboard import Stroke
 
 # Q6 floors — tunable in one place.
 MIN_LONGFORM_STROKES = 2      # expressions under 2 strokes never enter the queue
@@ -109,13 +113,138 @@ class ExprRule:
         assert self.kind == "attach"
         return AttachRule(self.units, self.position, _PLACEHOLDER_KEYS, self.family)
 
-    def toRule(self) -> BriefRule | AttachRule:
-        """The Phase 1 rule object for real composition (Stage B fields)."""
-        if self.kind == "brief":
-            assert self.beta is not None, "Stage B must assign the brief stroke first"
-            return BriefRule(self.units, tuple(self.beta), self.family)
-        assert self.keys is not None, "Stage B must assign the keypress first"
+    def toBrief(self) -> BriefRule:
+        """The Phase 1 brief for real composition (after Stage B's brief
+        stroke assignment)."""
+        assert self.kind == "brief" and self.beta is not None
+        return BriefRule(self.units, tuple(self.beta), self.family)
+
+    def toAttach(self) -> AttachRule:
+        """The Phase 1 attach rule for real composition (after Stage B's
+        keypress assignment)."""
+        assert self.kind == "attach" and self.keys is not None
         return AttachRule(self.units, self.position, self.keys, self.family)
+
+
+# Stage B (keypress assignment). Q2: families share ONE base keypress on the
+# 22 phoneme keys; variants are separated by */# selector keys, assigned in
+# descending-frequency order (the strongest variant is the bare base form).
+SELECTORS: tuple[tuple[int, ...], ...] = ((), (STAR_KEY,), (HASH_KEY,),
+                                          (STAR_KEY, HASH_KEY))
+SAMPLE_EXPRESSIONS = 30   # stage-1 sample per family (affix SAMPLE_CARRIERS spirit)
+FINALIST_BASES = 5        # stage-2 finalists (affix MAX_ALTERNATIVES spirit)
+
+
+def _familyGroups(selected: list[ExprRule]) -> list[list[ExprRule]]:
+    """Attach rules grouped one group per budget slot: a family (head +
+    absorbed variants) or a standalone rule. Briefs are NOT Stage B's job
+    (their strokes come from the brief-derivation stage)."""
+    groups: dict[str, list[ExprRule]] = {}
+    order: list[str] = []
+    for rule in selected:
+        if rule.kind != "attach":
+            continue
+        key = rule.family or f"\0{rule.position}:{' '.join(rule.units)}"
+        if key not in groups:
+            groups[key] = []
+            order.append(key)
+        groups[key].append(rule)
+    for key in order:
+        groups[key].sort(key=lambda r: (-r.freq, r.units, r.position))
+    return [groups[key] for key in order]
+
+
+def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
+                     ctx: SimContext, keypresses: list[Stroke],
+                     selectors: tuple[tuple[int, ...], ...] = SELECTORS) -> dict:
+    """Stage B: give every selected attach rule a real keypress. Per family:
+    try every legal base chord; variants take base + selector in
+    descending-frequency order; stage 1 on the top-frequency sample with
+    the MAX_EXCEPTION_RATE gate (occurrence-weighted: exceptional-expression
+    mass over touched mass), stage 2 on all touched expressions for the
+    finalists; score = frequency-weighted saving - EXCEPTION_ALPHA x
+    exception mass - FORM_COST x extra variants. Each family evaluates in
+    ISOLATION (cross-family truth is Stage C's joint repair). Sets
+    `keys`/`exactDone` on each rule; returns per-family diagnostics."""
+    report: dict[str, dict] = {}
+    for group in _familyGroups(selected):
+        family = group[0].family or " ".join(group[0].units)
+        variants = group[:len(selectors)]
+        touched = sorted({i for r in variants
+                          for i in touchedExpressions(r, pool)})
+        touched.sort(key=lambda i: -pool[i].freq)
+        sample = touched[:SAMPLE_EXPRESSIONS]
+
+        def evaluate(base: Stroke, carrierIdx: list[int]) -> tuple[float, float]:
+            """(score, exceptionRate) for this base over the given carriers,
+            the family evaluated ISOLATED (only its own variants compose):
+            evaluating alongside earlier-assigned families would strand
+            hostless particle n-grams ("et de" with de consumed by the de
+            family's rule) and trip the gate on pool fragments, and the
+            order would distort which family merges where — cross-family
+            truth is Stage C's joint repair. Trailing/leading pool
+            FRAGMENTS (a prefix run ending the expression, a suffix run
+            starting it — noNeighbour at the stream edge) are artifacts of
+            the n-gram slices, not carriers: excluded from both masses."""
+            rules: tuple[AttachRule, ...] = tuple(
+                AttachRule(r.units, r.position,
+                           tuple(sorted(set(base) | set(selector))),
+                           r.family)
+                for r, selector in zip(variants, selectors))
+            variantKeys = {(r.units, r.position) for r in variants}
+            savingMass = 0.0
+            exceptionMass = 0.0
+            carrierMass = 0.0
+            for i in carrierIdx:
+                expr = pool[i]
+                traced = composeOutlineTraced(Rules(attaches=rules),
+                                              expr.tokens, ctx)
+                ours = [seg for seg in traced.segments
+                        if seg.kind == "attach" and isinstance(seg.rule, AttachRule)
+                        and (seg.rule.expression, seg.rule.position) in variantKeys]
+                if not ours:
+                    continue
+                if all(seg.outcome == "exception" and seg.reason == "noNeighbour"
+                       and isinstance(rule := seg.rule, AttachRule)
+                       and ((rule.position == PREFIX
+                             and seg.span[1] == len(expr.tokens))
+                            or (rule.position == SUFFIX and seg.span[0] == 0))
+                       for seg in ours):
+                    continue          # fragment artifact, not a carrier
+                carrierMass += expr.freq
+                savingMass += expr.freq * traced.saving
+                if any(seg.outcome == "exception" for seg in ours):
+                    exceptionMass += expr.freq
+            score = (savingMass - EXCEPTION_ALPHA * exceptionMass
+                     - FORM_COST * (len(variants) - 1))
+            return score, (exceptionMass / carrierMass) if carrierMass else 1.0
+
+        stage1: list[tuple[float, Stroke]] = []
+        for base in keypresses:
+            score, rate = evaluate(base, sample)
+            if rate <= MAX_EXCEPTION_RATE and score > 0:
+                stage1.append((score, base))
+        stage1.sort(key=lambda t: (-t[0], t[1]))
+        best: tuple[float, Stroke] | None = None
+        for _score, base in stage1[:FINALIST_BASES]:
+            score, rate = evaluate(base, touched)
+            if rate <= MAX_EXCEPTION_RATE and (best is None or score > best[0]):
+                best = (score, base)
+        if best is None and stage1:
+            best = stage1[0]   # gate-only survivor: still the best available
+        info: dict[str, object] = {"variants": len(variants), "touched": len(touched)}
+        if best is None:
+            info["base"] = None
+            report[family] = info
+            continue
+        score, base = best
+        for rule, selector in zip(variants, selectors):
+            rule.keys = tuple(sorted(set(base) | set(selector)))
+            rule.exactDone = True
+        variants[0].score = score
+        info.update({"base": base, "score": score})
+        report[family] = info
+    return report
 
 
 @dataclass

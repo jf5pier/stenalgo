@@ -1,33 +1,33 @@
-rank	kind	family	expression	position	freq	strokes_saved	score
-1	attach	de	de	prefix	578716792	1	6.031e+08
-2	attach	de	d'	prefix	156154508	1	1.636e+08
-3	attach	à	à	prefix	267408208	1	2.748e+08
-4	attach	ne	n'	prefix	152965207	1	2.251e+08
-5	attach	ne	ne	prefix	44860332	1	4.893e+07
-6	attach	ne	n' y	prefix	11093429	2	2.014e+07
-7	attach	dans	dans	prefix	253868505	1	2.233e+08
-8	attach	et	et	prefix	278249465	1	1.944e+08
-9	attach	que	que	prefix	185627895	1	1.905e+08
-10	attach	que	que je	prefix	25758482	2	4.111e+06
-11	attach	que	que l'	prefix	18423683	2	8.153e+06
-12	attach	que	que nous	prefix	11446990	2	1.562e+06
-13	attach	il	il	prefix	168319881	1	1.480e+08
-14	attach	il	il n'	prefix	27097496	2	1.286e+07
-15	attach	il	il y	prefix	16702616	2	1.671e+07
-16	attach	la	la	prefix	116132666	1	1.180e+08
-17	attach	le	le	suffix	199548478	1	1.066e+08
-18	attach	le	le	prefix	51233152	1	5.123e+07
-19	attach	les	les	suffix	176903013	1	9.807e+07
-20	attach	les	les	prefix	33827184	1	3.383e+07
-21	attach	pas	pas	suffix	206722861	1	9.793e+07
-22	attach	pas	pas de	suffix	13702412	2	1.275e+06
-23	attach	pas	pas le	suffix	6247194	2	1.384e+06
-24	attach	l'	l'	prefix	77616119	1	8.365e+07
-25	attach	l'	l' on	suffix	12730809	2	3.827e+06
-26	attach	je	je	prefix	112312128	1	7.776e+07
-27	attach	je	je ne	suffix	25361333	2	2.783e+06
-28	attach	je	je me	prefix	13654387	2	2.999e+06
-29	attach	ce	ce	prefix	86637555	1	6.707e+07
-30	attach	ce	ce qui	prefix	24454906	2	7.955e+06
-31	attach	s'	s'	prefix	53867708	1	4.557e+07
-32	attach	s'	s' il	suffix	12210772	2	3.269e+06
+rank	kind	family	expression	position	freq	strokes_saved	keys	score
+1	attach	de	de	prefix	578716792	1	5	7.541e+08
+2	attach	de	d'	prefix	156154508	1	5,10	1.636e+08
+3	attach	à	à	prefix	267408208	1	9	2.751e+08
+4	attach	ne	n'	prefix	152965207	1	2	2.934e+08
+5	attach	ne	ne	prefix	44860332	1	2,10	4.893e+07
+6	attach	ne	n' y	prefix	11093429	2	2,15	2.014e+07
+7	attach	dans	dans	prefix	253868505	1	2	2.236e+08
+8	attach	et	et	prefix	278249465	1	8	2.788e+08
+9	attach	que	que	prefix	185627895	1	2	1.529e+08
+10	attach	que	que je	prefix	25758482	2	2,10	4.111e+06
+11	attach	que	que l'	prefix	18423683	2	2,15	8.153e+06
+12	attach	que	que nous	prefix	11446990	2	2,10,15	1.562e+06
+13	attach	il	il	prefix	168319881	1	7	1.958e+08
+14	attach	il	il n'	prefix	27097496	2	7,10	1.286e+07
+15	attach	il	il y	prefix	16702616	2	7,15	1.671e+07
+16	attach	la	la	prefix	116132666	1	16	1.486e+08
+17	attach	le	le	suffix	199548478	1	3	6.253e+07
+18	attach	le	le	prefix	51233152	1	3,10	5.123e+07
+19	attach	les	les	suffix	176903013	1	2	3.569e+07
+20	attach	les	les	prefix	33827184	1	2,10	3.383e+07
+21	attach	pas	pas	suffix	206722861	1	2	1.149e+08
+22	attach	pas	pas de	suffix	13702412	2	2,10	1.275e+06
+23	attach	pas	pas le	suffix	6247194	2	2,15	1.384e+06
+24	attach	l'	l'	prefix	77616119	1	4	1.202e+08
+25	attach	l'	l' on	suffix	12730809	2	4,10	3.827e+06
+26	attach	je	je	prefix	112312128	1	4	7.449e+07
+27	attach	je	je ne	suffix	25361333	2	4,10	2.783e+06
+28	attach	je	je me	prefix	13654387	2	4,15	2.999e+06
+29	attach	ce	ce	prefix	86637555	1	5	8.788e+07
+30	attach	ce	ce qui	prefix	24454906	2	5,10	7.955e+06
+31	attach	s'	s'	prefix	53867708	1	3	5.667e+07
+32	attach	s'	s' il	suffix	12210772	2	3,10	3.269e+06

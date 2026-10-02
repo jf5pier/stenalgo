@@ -5,8 +5,8 @@ proxy stage never composes strokes, so dummy token strokes suffice).
 Frequencies are >= 5M so the Q6 floors pass."""
 
 from src.expressionrules import (MIN_OCCURRENCES, ExprRule, PoolExpression,
-                                 attachCandidates, briefCandidates,
-                                 jointFrequency, proxySaving,
+                                 assignKeypresses, attachCandidates,
+                                 briefCandidates, jointFrequency, proxySaving,
                                  selectExpressionRules, touchedExpressions)
 from src.expressions import (PREFIX, SUFFIX, AttachRule, BriefRule, Token)
 
@@ -199,3 +199,50 @@ class TestFamilies:
         assert len(result.selected) == 4          # MAX_FAMILY_VARIANTS
         assert all(r.family == "le" for r in result.selected)
         assert result.selected[0].forms == 4
+
+
+class TestAssignKeypresses:
+    """Stage B: families share one base keypress; variants take */#
+    selectors in descending-frequency order; the 5% exception gate rejects
+    bases whose merges fail on the sample."""
+
+    @staticmethod
+    def ctx():
+        from src.affixes import SimContext
+        from src.keyboard import Starboard
+        sb = Starboard.fromJSONFile("starboard3h.json")
+        assert sb is not None
+        return SimContext(sb, [])
+
+    def test_family_shares_base_with_selectors(self):
+        ctx = self.ctx()
+        mot = (Token("de", ((4, 5, 11, 12),)), Token("la", ((7, 9, 13),)),
+               Token("maison", ((4, 8, 14), (7, 9, 13))))
+        pool = [PoolExpression(("de", "la", "maison"), 100_000_000, mot)]
+        head = ExprRule("attach", ("de", "la"), position=PREFIX, family="de",
+                        freq=100_000_000, strokesSaved=2)
+        head.forms = 2
+        variant = ExprRule("attach", ("de",), position=PREFIX, family="de",
+                           freq=60_000_000, strokesSaved=1)
+        variant.forms = 0
+        report = assignKeypresses([head, variant], pool, ctx, [(3,), (2,)])
+        assert report["de"]["base"] in [(2,), (3,)]
+        base = report["de"]["base"]
+        assert head.keys == base                          # strongest: bare base
+        assert variant.keys == tuple(sorted(set(base) | {10}))   # * selector
+        assert head.keys != variant.keys
+        assert head.exactDone and variant.exactDone
+
+    def test_gate_rejects_overlapping_base(self):
+        """The only candidate base shares a key with the host's first
+        stroke: a 1-stroke particle's failed merge is a spanOne EXCEPTION
+        (a standalone would save nothing), the gate trips, no base."""
+        ctx = self.ctx()
+        tokens = (Token("de", ((4, 5, 11, 12),)),
+                  Token("maison", ((4, 8, 14), (7, 9, 13))))
+        pool = [PoolExpression(("de", "maison"), 100_000_000, tokens)]
+        rule = ExprRule("attach", ("de",), position=PREFIX,
+                        freq=100_000_000, strokesSaved=1)
+        report = assignKeypresses([rule], pool, ctx, [(4,)])  # 4 is in maison
+        assert report["de"]["base"] is None
+        assert rule.keys is None and not rule.exactDone
