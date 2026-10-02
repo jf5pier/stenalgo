@@ -42,6 +42,10 @@ every transformation, threshold and dataset state — is in [PIPELINE.md](PIPELI
 8. **Theory Export (S8)** (`python -m util.export_*`) — two branches: Plover (dictionary,
    key table, system plugin) and steno-trainer (keyboard legend, word drill, sentences,
    definitions). Nothing reads `disambiguated_theory.tsv`; every exporter recomputes the disambiguated theory.
+9. **Affix Abbreviation Building (S9)** (`python -m util.build_affix_rules`, `python -m util.export_affix_dictionary`) — an OPTIONAL layer after the
+   finished theory: 30 affix rules, each on one dedicated keypress merged into the neighbouring stroke, selected under a budget from the user's
+   committed growth and fusion verdicts, and exported as a separate Plover dictionary. The theory is unchanged and the long outlines stay as the
+   fallback. Philosophy and algorithms: [AFFIX_DESIGN.md](AFFIX_DESIGN.md); reference: [AFFIX_RULES.md](AFFIX_RULES.md).
 
 ## Design rationale
 
@@ -380,6 +384,9 @@ the pickle caches are never checked for staleness.
 | `plover_stenalgo_dictionary.json` | Plover dictionary: 163,238 RTFCRE steno → spelling entries | `python -m util.export_plover_dictionary` (Theory Export (S8)) |
 | `plover_stenalgo/plover_stenalgo/_generated_keys.py` | Plover key table (KEYS, implicit-hyphen keys, Gemini PR keymap) | `python -m util.export_plover_system` (Theory Export (S8)) |
 | `steno-trainer/public/data/*.json` | Trainer data: keyboard-layout, practice-words, practice-sentences, definitions | `python -m util.export_keyboard_layout`, `python -m util.export_practice_words`, then `python -m util.export_practice_sentences`, then `python -m util.export_definitions` (Theory Export (S8)) |
+| `affix_decisions.json` | The user's affix growth and fusion verdicts (the only hand-decided input of Affix Abbreviation Building (S9)) | `python -m util.review_affix_rules` (interactive; writes after every answer) |
+| `affix_rules.json`, `affix_rules_report.md` | The 30 selected affix rules with their keys, and the deterministic report | `python -m util.build_affix_rules` (Affix Abbreviation Building (S9a)) |
+| `plover_stenalgo_affix_dictionary.json`, `affix_abbreviations.tsv` | The optional affix dictionary (72,204 short outlines) and its review table | `python -m util.export_affix_dictionary` (Affix Abbreviation Building (S9b)) |
 | `excluded_words.txt` | Excluded words (44 spellings dropped in Dictionary Loading (S3)) | hand-maintained input |
 | `resources/reform1990.tsv` | 1990-reform spelling table (source input of the reform rewrites and doublet pairs) | hand-maintained input |
 
@@ -389,6 +396,7 @@ the pickle caches are never checked for staleness.
 |---|---|---|
 | `Dictionary.pickle` | Word list + indexes + syllable and layout statistics (57.8 MB) | `python -m util.build_phonetic_theory` on a cache miss (Dictionary Loading (S3) + the layout statistics) |
 | `PhoneticTheory.pickle` | The phonetic theory (52 MB) | `python -m util.build_phonetic_theory` on a cache miss (Phonetic Theory Building (S5)) |
+| `AffixSelection.pickle` | Cached affix rule evaluations and the last selection (absent: full ~25 min selection) | `python -m util.build_affix_rules` |
 | `questionnaire.json` | Questionnaire items (200) | `python -m src.elicitation` (Questionnaire Generation) |
 | `resolved_press_sets.json` | Resolved discriminating feature sets (47,828 groups, ~32 MB) | `python -m src.elicitation` (Press-Set Resolution) |
 | `elicitation_questionnaire.html` | The Answer Collection questionnaire page | `python -m util.build_questionnaire_page` |
@@ -414,6 +422,7 @@ any rebuild.
 - [PIPELINE.md](PIPELINE.md) — the full per-call pipeline: every transformation, threshold
   and dataset state, stage by stage.
 - [GLOSSARY.md](GLOSSARY.md) — the canonical vocabulary, with legacy-name mappings.
+- [AFFIX_DESIGN.md](AFFIX_DESIGN.md) and [AFFIX_RULES.md](AFFIX_RULES.md) — the optional affix abbreviation layer (S9): why, and how to run it.
 - [specs/star-hash-marking.md](specs/star-hash-marking.md) — spec of Different-Lemma or
   Grammatical-Category Disambiguation (S7).
 - [specs/discriminating-features.md](specs/discriminating-features.md) — spec of
