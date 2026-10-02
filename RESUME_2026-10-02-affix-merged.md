@@ -1,28 +1,28 @@
-# RESUME 2026-10-01 (night) — affix branch verified, ready to merge
+# RESUME 2026-10-02 — affix layer (S9) MERGED and PUSHED; what is left
 
-Start here in a fresh session. Branch `affix-abbreviation-rules` (HEAD `7b9d346`), unmerged and unpushed. Environment: `env/bin/python`,
-`PYTHONPATH=.`, long runs with `PYTHONUNBUFFERED=1` in the background, ONE heavy job at a time (7 GB RAM); wait on a PID with
-`timeout 595 tail --pid=PID -f /dev/null`. Never commit/push/merge without an explicit request.
+Start here in a fresh session (Sonnet is fine). Repo `/home/jfsp/stenalgo`, branch `main`, HEAD `3c644af` (pushed to origin; GitHub Pages deploy of the
+steno-trainer succeeded). Environment: `env/bin/python`, `PYTHONPATH=.`, long runs with `PYTHONUNBUFFERED=1` in the background, ONE heavy job at a time
+(7 GB RAM); wait on a PID with `timeout 595 tail --pid=PID -f /dev/null`. Never commit/push without an explicit request. Branch
+`affix-abbreviation-rules` still exists locally (merged; may be deleted if the user agrees).
 
-## State
+## Mission
+Affix Abbreviation Building (S9) gives the stable theory an OPTIONAL second Plover dictionary of shorter outlines (30 affix rules, one keypress each).
+It is done; the remaining work is a learner trial and the non-affix items below. Docs: `docs/AFFIX_DESIGN.md` (why), `docs/AFFIX_RULES.md` (how).
 
-- Stage S9 (Affix Abbreviation Building) is complete and committed: S9a rule selection, S9b affix dictionary, the interactive review.
-- This session's commits: `c468ad2` (review asks growth before fusion; fused merges inherit their parts' growth; the review loops by itself,
-  reselecting after each pass; `MAX_ALTERNATIVES` 5 -> 30), `6f3be10` (regenerated affix data), `7b9d346` (`docs/AFFIX_DESIGN.md`).
-- **Full rebuild verified (2026-10-01, 1,734 s):** `rm -f *.pickle` (all four, `AffixSelection.pickle` included), then `python dictionary.py`
-  ran every step ok. Every output was byte-identical to the committed files: `phonetic_theory.tsv`, `disambiguated_theory.tsv`,
-  `resolved_press_sets.json`, `keypress_groups.json`, `realization_report.json`, `plover_stenalgo_dictionary.json`,
-  `steno-trainer/public/data/*.json`, `affix_rules.json`, `affix_rules_report.md`, `plover_stenalgo_affix_dictionary.json`,
-  `affix_abbreviations.tsv`; `git status` shows no tracked change. The affix selection is deterministic from scratch (S9a 1,497 s).
-  No question was asked: `affix_decisions.json` and `elicitation_answers.json` were kept.
-- Gates: 758 tests pass; `mypy src/` 127 errors (unchanged, pre-existing).
+## State (verified 2026-10-01/02)
+
+- Full rebuild from nothing (`rm -f` all four pickles, `python dictionary.py`, 1,734 s): every output byte-identical to the committed files, no question asked.
+- After the merge with main (which added the lessons exporter): 1,005 tests pass; `mypy src/` 140 errors = 127 old + 13 in main's lessons code
+  (`src/test/lessons_test.py`, `util/export_lessons.py`), none in affix files. `dictionary.py` was NOT rerun after the merge (main only added the
+  lessons exporter, no lexicon/layout change, so the affix outputs stay valid).
 - Result: 30 rules, 72,204 abbreviations for 80,473 carrier words, strokes saved x frequency 116,720; nothing pending.
-- Docs: `docs/AFFIX_DESIGN.md` (philosophy, design choices, algorithms), `docs/AFFIX_RULES.md` (operational reference), `docs/PIPELINE.md`.
+- Outputs at the repo root: `plover_stenalgo_affix_dictionary.json` (usable Plover dictionary), `affix_abbreviations.tsv`, `affix_rules.json`,
+  `affix_rules_report.md`; verdicts in `affix_decisions.json` (committed input; keep it with `elicitation_answers.json` when deleting pickles).
+- Untracked `scratch/` snapshots are intentional; never `git clean -x`.
 
-## Decisions for you (recommendation first)
+## Decisions for the user (recommendation first; ask, do not guess)
 
-1. **Merge to main.** Recommended. It is a direct merge (your convention), then rerun `pytest src/test/`. The branch is large (522 files, mostly
-   scratch/ and resource data), so check `git diff --stat main...HEAD -- . ':!scratch'` before merging. Push only on a separate request.
+1. **Delete the merged local branch `affix-abbreviation-rules`?** Ask the user.
 2. **Untracked files.** `scratch/` holds many untracked snapshots (`*-before/`, pickles, logs) and is never cleaned with `git clean -x`.
    Recommended: leave them. Old `RESUME_2026-09-*` / `PLAN_*` / `DESIGN_*` notes at the repo root are historical (marked so); moving them to
    `docs/history/` would tidy the root, only if you want it.
