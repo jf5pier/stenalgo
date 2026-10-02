@@ -895,3 +895,133 @@ def simulate(groups: list[tuple[Binding, list[Carrier]]], ctx: SimContext,
 
 
 
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Lean single-RULE-group simulation (the per-key sweep of `affixrules.chooseRuleKeypress`)
+# ═══════════════════════════════════════════════════════════════════════════
+
+@dataclass(slots=True)
+class SimUnit:
+    """The key-independent data of one carrier under a RULE binding at `position`. `simulateRuleUnits`
+    MUST mirror `simulate`/`_newBase` for one RULE group (the differential test pins them together):
+    only the per-key part (the new outline tuple, the collision buckets) is rebuilt for each key."""
+    carrier: Carrier
+    ortho: str
+    lemme: str
+    base: Strokes
+    freq: float
+    span: int
+    single: bool
+    g: int                  # neighbour id (-1: no neighbour)
+    pre: Strokes            # merged outline = pre + (union,) + post
+    post: Strokes
+    preS: Strokes           # standalone outline = preS + (D,) + postS
+    postS: Strokes
+    mcOld: int              # mark cost of the carrier's own old homophone cluster
+
+
+def makeSimUnit(position: str, c: Carrier, ctx: SimContext, neighbourIds: dict[Stroke, int]) -> SimUnit:
+    w = c.rec
+    base = w.base
+    lo, hi = c.start, c.start + c.span
+    ni = hi if position == PREFIX else lo - 1
+    g = -1
+    pre: Strokes = ()
+    post: Strokes = ()
+    if 0 <= ni < len(base):
+        nbStroke = base[ni]
+        g = neighbourIds.setdefault(nbStroke, len(neighbourIds))
+        if position == PREFIX:
+            pre, post = base[:lo], base[ni + 1:]
+        else:
+            pre, post = base[:ni], base[hi:]
+    mcOld = markCostForCluster(len({o.ortho for o in ctx.baseIndex.get(base, ())} | {w.ortho}))
+    return SimUnit(c, w.ortho, w.lemme, base, w.frequency, c.span, c.span == 1, g,
+                   pre, post, base[:lo], base[hi:], mcOld)
+
+
+def mergeUnions(neighbours: list[Stroke], k: Stroke, ctx: SimContext) -> list[Stroke | None]:
+    """Per neighbour stroke, the merged chord of `k` into it, or None when `_newBase` would find a
+    keyOverlap or an illegalChord."""
+    out: list[Stroke | None] = []
+    for n in neighbours:
+        if ruleKeysOverlap(n, k, ctx.partialOverlap):
+            out.append(None)
+            continue
+        union = tuple(sorted(set(n) | set(k)))
+        out.append(union if ctx.isLegal(union) else None)
+    return out
+
+
+def simulateRuleUnits(units: list[SimUnit], ctx: SimContext, X: list[Stroke | None], D: Stroke,
+                      trap: bool) -> tuple[list[int], list[str | None]]:
+    """Gain and fallback reason of each unit under one RULE binding: `simulate`'s semantics for a
+    single group, minus partners / newBase / markCost / boundaryRisk."""
+    n = len(units)
+    nbs: list[Strokes | None] = [None] * n
+    saved = [0] * n
+    reasons: list[str | None] = [None] * n
+    buckets: list[dict[str, list[SimUnit]] | None] = [None] * n
+    pending: dict[Strokes, dict[str, list[SimUnit]]] = {}
+    for i, u in enumerate(units):
+        if u.g < 0:
+            reasons[i] = "noNeighbour"
+            continue
+        x = X[u.g]
+        if x is not None:
+            nb = u.pre + (x,) + u.post
+            s = u.span
+        elif u.single or trap:
+            reasons[i] = "standaloneTrap"
+            continue
+        else:
+            nb = u.preS + (D,) + u.postS
+            s = u.span - 1
+        bucket = pending.get(nb)
+        if bucket is None:
+            bucket = pending[nb] = {}
+        bucket.setdefault(u.ortho, []).append(u)
+        nbs[i] = nb
+        saved[i] = s
+        buckets[i] = bucket
+    gains = [0] * n
+    baseIndex = ctx.baseIndex
+    for i, u in enumerate(units):
+        b = nbs[i]
+        if b is None:
+            continue
+        pe = buckets[i]
+        assert pe is not None
+        existing = baseIndex.get(b)
+        if existing is None and len(pe) == 1:
+            gains[i] = saved[i]
+            continue
+        spellings = {u.ortho}
+        lost = False
+        for o in existing or ():
+            if o.ortho == u.ortho:
+                continue
+            if o.lemme == u.lemme:
+                if o.base != u.base:
+                    lost = True
+                continue
+            spellings.add(o.ortho)
+        for ortho, rs in pe.items():
+            if ortho == u.ortho:
+                continue
+            first = rs[0]
+            if first.lemme == u.lemme:
+                if first.base != u.base:
+                    lost = True
+                continue
+            spellings.add(ortho)
+        if lost:
+            reasons[i] = "lostDistinction"
+            continue
+        gain = saved[i] - max(0, markCostForCluster(len(spellings)) - u.mcOld)
+        if gain <= 0:
+            reasons[i] = "markCostTooHigh"
+            continue
+        gains[i] = gain
+    return gains, reasons
