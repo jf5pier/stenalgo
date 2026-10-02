@@ -2,33 +2,46 @@
  "format": 1,
  "anchors": [
   {
-   "position": "suffix",
-   "spellings": "ment",
-   "phono": "m@",
-   "verdict": "-",
+   "position": "prefix",
+   "spellings": "ain|hin|im|in",
+   "phono": "5",
+   "verdict": "fused",
    "growth": [
     {
-     "label": "C{1,2}[eui]+",
-     "anchors": null,
+     "label": "in+té",
+     "anchors": [
+      "in"
+     ],
      "sound": null,
-     "spelling": "[^aeiouyàâäéèêëîïôöùûüœ]{1,2}[eui]+"
+     "spelling": "té"
     }
    ],
    "refused": [],
-   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
+   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md); merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
    "date": "2026-09-30",
    "numbers": {}
   },
   {
    "position": "prefix",
-   "spellings": "re|reh",
-   "phono": "R°",
+   "spellings": "am|an|ant|em|en|ench|enh|ham|han|hen",
+   "phono": "@",
    "verdict": "fused",
-   "growth": [],
+   "growth": [
+    {
+     "label": "en:C{1,2}@",
+     "anchors": [
+      "en"
+     ],
+     "sound": "[ptkbdgfsSvzZmnNlRjw]{1,2}@",
+     "spelling": null
+    }
+   ],
    "refused": [],
-   "note": "merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
-   "date": "2026-09-30",
-   "numbers": {}
+   "note": "fusion approved 2026-10-01 (scratch/fusion-check-2026-10-01.md)",
+   "date": "2026-10-01",
+   "numbers": {
+    "fusedMinusAlone": 1340
+   }
   },
   {
    "position": "prefix",
@@ -50,12 +63,149 @@
   },
   {
    "position": "prefix",
+   "spellings": "ai|aî|e|ei|hai|he|hê|é",
+   "phono": "E",
+   "verdict": "fused",
+   "growth": [
+    {
+     "label": "e:ksky|kspli|sE|n°",
+     "anchors": [
+      "e"
+     ],
+     "sound": "ksky|kspli|sE|n°",
+     "spelling": null
+    }
+   ],
+   "refused": [],
+   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md); merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "prefix",
+   "spellings": "ra|rai|raie|re|rhé|ré|réh",
+   "phono": "Re",
+   "verdict": "fused",
+   "growth": [
+    {
+     "label": "ré:a|fle|vE|C{1,2}y",
+     "anchors": [
+      "ré"
+     ],
+     "sound": "a|fle|vE|[ptkbdgfsSvzZmnNlRjw]{1,2}y",
+     "spelling": null
+    }
+   ],
+   "refused": [],
+   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md); merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "prefix",
+   "spellings": "re|reh",
+   "phono": "R°",
+   "verdict": "fused",
+   "growth": [],
+   "refused": [],
+   "note": "merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "prefix",
+   "spellings": "a",
+   "phono": "a",
+   "verdict": "-",
+   "growth": [
+    {
+     "label": "R@|RE|Re",
+     "anchors": null,
+     "sound": "R@|RE|Re",
+     "spelling": null
+    }
+   ],
+   "refused": [
+    "a + /me/",
+    "a + /paR/"
+   ],
+   "note": "",
+   "date": "2026-10-01",
+   "numbers": {
+    "acceptedGroups": [
+     "a + /RE/",
+     "a + /R@/",
+     "a + /Re/"
+    ],
+    "groupNet": 1198
+   }
+  },
+  {
+   "position": "prefix",
+   "spellings": "a|ah|ha|hah|hâ|â",
+   "phono": "a",
+   "verdict": "apart",
+   "growth": [],
+   "refused": [
+    "hah"
+   ],
+   "note": "",
+   "date": "2026-10-01",
+   "numbers": {
+    "net": 168,
+    "helpsWords": 668,
+    "helpsFreq": 577,
+    "hurtsFallbacks": 0,
+    "hurtsExceptions": 90
+   }
+  },
+  {
+   "position": "prefix",
+   "spellings": "a|ah|ha|hâ|â",
+   "phono": "a",
+   "verdict": "fused",
+   "growth": null,
+   "refused": [
+    "hah"
+   ],
+   "note": "",
+   "date": "2026-10-01",
+   "numbers": {
+    "net": 169,
+    "helpsWords": 667,
+    "helpsFreq": 577,
+    "hurtsFallbacks": 0,
+    "hurtsExceptions": 89
+   }
+  },
+  {
+   "position": "prefix",
    "spellings": "de|des|dé|déh",
    "phono": "de",
    "verdict": "fused",
    "growth": [],
    "refused": [],
    "note": "merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "prefix",
+   "spellings": "de|dea|di|die|dis|dy|dî",
+   "phono": "di",
+   "verdict": "fused",
+   "growth": [
+    {
+     "label": "di:C{1,2}i",
+     "anchors": [
+      "di"
+     ],
+     "sound": "[ptkbdgfsSvzZmnNlRjw]{1,2}i",
+     "spelling": null
+    }
+   ],
+   "refused": [],
+   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md); merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
    "date": "2026-09-30",
    "numbers": {}
   },
@@ -78,6 +228,535 @@
    "numbers": {}
   },
   {
+   "position": "prefix",
+   "spellings": "ae|ai|aî|e|ei|he|hé|oe|é|éh",
+   "phono": "e",
+   "verdict": "apart",
+   "growth": [],
+   "refused": [],
+   "note": "fusion not approved 2026-10-01 (scratch/fusion-check-2026-10-01.md): parts stay apart",
+   "date": "2026-10-01",
+   "numbers": {}
+  },
+  {
+   "position": "prefix",
+   "spellings": "é",
+   "phono": "e",
+   "verdict": "-",
+   "growth": [],
+   "refused": [],
+   "note": "no growth, decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "prefix",
+   "spellings": "e|hi|hy|i|y|î",
+   "phono": "i",
+   "verdict": "fused",
+   "growth": [
+    {
+     "label": "i:[mn][aeiouy]",
+     "anchors": [
+      "i"
+     ],
+     "sound": "[mn][aeiouy]",
+     "spelling": null
+    }
+   ],
+   "refused": [],
+   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md); merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "prefix",
+   "spellings": "co+col+com+con+cor",
+   "phono": "kO+kOR+kOl+kOm+ko+koR+k§",
+   "verdict": "-",
+   "growth": [
+    {
+     "label": "m@",
+     "anchors": null,
+     "sound": "m@",
+     "spelling": null
+    }
+   ],
+   "refused": [],
+   "note": "",
+   "date": "2026-10-01",
+   "numbers": {
+    "acceptedGroups": [
+     "co + /m@/"
+    ],
+    "groupNet": 695
+   }
+  },
+  {
+   "position": "prefix",
+   "spellings": "ma",
+   "phono": "ma",
+   "verdict": "-",
+   "growth": [
+    {
+     "label": "l2|la",
+     "anchors": null,
+     "sound": "l2|la",
+     "spelling": null
+    },
+    {
+     "label": "Ni",
+     "anchors": null,
+     "sound": "Ni",
+     "spelling": null
+    },
+    {
+     "label": "ni",
+     "anchors": null,
+     "sound": "ni",
+     "spelling": null
+    }
+   ],
+   "refused": [
+    "ma + /Na/",
+    "ma + /Ne/",
+    "ma + /No/",
+    "ma + /R@/",
+    "ma + /RE/",
+    "ma + /Ra/",
+    "ma + /Re/",
+    "ma + /Ri/",
+    "ma + /R°/",
+    "ma + /Si/",
+    "ma + /Z@/",
+    "ma + /ZEs/",
+    "ma + /Zi/",
+    "ma + /Zis/",
+    "ma + /Zo/",
+    "ma + /ZoR/",
+    "ma + /Zys/",
+    "ma + /dRi/",
+    "ma + /da/",
+    "ma + /d°/",
+    "ma + /ga/",
+    "ma + /i/",
+    "ma + /kE/",
+    "ma + /ka/",
+    "ma + /ki/",
+    "ma + /ksi/",
+    "ma + /k°/",
+    "ma + /l5/",
+    "ma + /l@/",
+    "ma + /lE/",
+    "ma + /le/",
+    "ma + /li/",
+    "ma + /lo/",
+    "ma + /mEk/",
+    "ma + /mO/",
+    "ma + /ma/",
+    "ma + /mi/",
+    "ma + /mo/",
+    "ma + /m°/",
+    "ma + /n8E/",
+    "ma + /n8e/",
+    "ma + /n9/",
+    "ma + /na/",
+    "ma + /ne/",
+    "ma + /no/",
+    "ma + /nu/",
+    "ma + /ny/",
+    "ma + /nys/",
+    "ma + /n°/",
+    "ma + /p°/",
+    "ma + /sa/",
+    "ma + /se/",
+    "ma + /si/",
+    "ma + /s°/",
+    "ma + /tER/",
+    "ma + /tRi/",
+    "ma + /ta/",
+    "ma + /te/",
+    "ma + /ti/",
+    "ma + /tu/",
+    "ma + /ty/",
+    "ma + /t°/",
+    "ma + /za/"
+   ],
+   "note": "",
+   "date": "2026-10-01",
+   "numbers": {
+    "acceptedGroups": [
+     "ma + /ni/"
+    ],
+    "groupNet": 104
+   }
+  },
+  {
+   "position": "prefix",
+   "spellings": "ma|mah|mâ",
+   "phono": "ma",
+   "verdict": "fused",
+   "growth": null,
+   "refused": [],
+   "note": "",
+   "date": "2026-10-01",
+   "numbers": {
+    "net": 16,
+    "helpsWords": 104,
+    "helpsFreq": 16,
+    "hurtsFallbacks": 0,
+    "hurtsExceptions": 0
+   }
+  },
+  {
+   "position": "prefix",
+   "spellings": "au",
+   "phono": "o",
+   "verdict": "-",
+   "growth": [
+    {
+     "label": "jour|to|tre|di",
+     "anchors": null,
+     "sound": "ZuR|to|tR°|di",
+     "spelling": null
+    }
+   ],
+   "refused": [],
+   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "prefix",
+   "spellings": "au|aux|hau|haut|ho|hô|o|oh|ô",
+   "phono": "o",
+   "verdict": "apart",
+   "growth": [],
+   "refused": [],
+   "note": "fusion not approved 2026-10-01 (scratch/fusion-check-2026-10-01.md): parts stay apart",
+   "date": "2026-10-01",
+   "numbers": {}
+  },
+  {
+   "position": "prefix",
+   "spellings": "o",
+   "phono": "o",
+   "verdict": "-",
+   "growth": [
+    {
+     "label": "C{1,2}i|kV",
+     "anchors": null,
+     "sound": "[ptkbdgfsSvzZmnNlRjw]{1,2}i|k[^ptkbdgfsSvzZmnNlRjw]",
+     "spelling": null
+    }
+   ],
+   "refused": [],
+   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "prefix",
+   "spellings": "pro|proh|prô",
+   "phono": "pRo",
+   "verdict": "fused",
+   "growth": [],
+   "refused": [],
+   "note": "merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "prefix",
+   "spellings": "pa",
+   "phono": "pa",
+   "verdict": "-",
+   "growth": [],
+   "refused": [],
+   "note": "no growth, decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "prefix",
+   "spellings": "pa|pei|pâ",
+   "phono": "pa",
+   "verdict": "apart",
+   "growth": [],
+   "refused": [],
+   "note": "fusion not approved 2026-10-01 (scratch/fusion-check-2026-10-01.md): parts stay apart",
+   "date": "2026-10-01",
+   "numbers": {}
+  },
+  {
+   "position": "prefix",
+   "spellings": "par",
+   "phono": "paR",
+   "verdict": "-",
+   "growth": [],
+   "refused": [],
+   "note": "no growth, decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "prefix",
+   "spellings": "pou|pu",
+   "phono": "pu",
+   "verdict": "fused",
+   "growth": [],
+   "refused": [],
+   "note": "merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "prefix",
+   "spellings": "sa|sah",
+   "phono": "sa",
+   "verdict": "fused",
+   "growth": [],
+   "refused": [],
+   "note": "merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "prefix",
+   "spellings": "ce|sce|se",
+   "phono": "s°",
+   "verdict": "fused",
+   "growth": [],
+   "refused": [],
+   "note": "merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "suffix",
+   "spellings": "rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée",
+   "phono": "Re",
+   "verdict": "fused",
+   "growth": [
+    {
+     "label": "rer:p[aeiouy]|C*e|sy",
+     "anchors": [
+      "rer"
+     ],
+     "sound": "p[aeiouy]|[ptkbdgfsSvzZmnNlRjw]*e|sy",
+     "spelling": null
+    }
+   ],
+   "refused": [],
+   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md); merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "suffix",
+   "spellings": "cher",
+   "phono": "Se",
+   "verdict": "-",
+   "growth": [],
+   "refused": [],
+   "note": "no growth, decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "suffix",
+   "spellings": "cher|chée|scher|sher",
+   "phono": "Se",
+   "verdict": "apart",
+   "growth": [],
+   "refused": [],
+   "note": "fusion not approved 2026-10-01 (scratch/fusion-check-2026-10-01.md): parts stay apart",
+   "date": "2026-10-01",
+   "numbers": {}
+  },
+  {
+   "position": "suffix",
+   "spellings": "ger",
+   "phono": "Ze",
+   "verdict": "-",
+   "growth": [],
+   "refused": [],
+   "note": "no growth, decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "suffix",
+   "spellings": "ger|gée",
+   "phono": "Ze",
+   "verdict": "apart",
+   "growth": [],
+   "refused": [],
+   "note": "fusion not approved 2026-10-01 (scratch/fusion-check-2026-10-01.md): parts stay apart",
+   "date": "2026-10-01",
+   "numbers": {}
+  },
+  {
+   "position": "suffix",
+   "spellings": "der",
+   "phono": "de",
+   "verdict": "-",
+   "growth": [
+    {
+     "label": "dez|der|dé:gaR|m@",
+     "anchors": [
+      "der",
+      "dez",
+      "dé"
+     ],
+     "sound": "gaR|m@",
+     "spelling": null
+    }
+   ],
+   "refused": [],
+   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "suffix",
+   "spellings": "der|dé|dée",
+   "phono": "de",
+   "verdict": "fused",
+   "growth": [
+    {
+     "label": "dez|der|dé:gaR|m@",
+     "anchors": [
+      "der",
+      "dez",
+      "dé"
+     ],
+     "sound": "gaR|m@",
+     "spelling": null
+    }
+   ],
+   "refused": [],
+   "note": "fusion approved 2026-10-01 (scratch/fusion-check-2026-10-01.md)",
+   "date": "2026-10-01",
+   "numbers": {
+    "fusedMinusAlone": 494
+   }
+  },
+  {
+   "position": "suffix",
+   "spellings": "man|mand|mant|ment|ments|mmant|mment",
+   "phono": "m@",
+   "verdict": "apart",
+   "growth": [],
+   "refused": [],
+   "note": "fusion not approved 2026-10-01 (scratch/fusion-check-2026-10-01.md): parts stay apart",
+   "date": "2026-10-01",
+   "numbers": {}
+  },
+  {
+   "position": "suffix",
+   "spellings": "ment",
+   "phono": "m@",
+   "verdict": "-",
+   "growth": [
+    {
+     "label": "C{1,2}[eui]+",
+     "anchors": null,
+     "sound": null,
+     "spelling": "[^aeiouyàâäéèêëîïôöùûüœ]{1,2}[eui]+"
+    }
+   ],
+   "refused": [],
+   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "suffix",
+   "spellings": "ner",
+   "phono": "ne",
+   "verdict": "-",
+   "growth": [
+    {
+     "label": "né:C{1,2}[i°]",
+     "anchors": [
+      "né"
+     ],
+     "sound": "[ptkbdgfsSvzZmnNlRjw]{1,2}[i°]",
+     "spelling": null
+    }
+   ],
+   "refused": [],
+   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "suffix",
+   "spellings": "ner|nez|nner|nnée|née|nées",
+   "phono": "ne",
+   "verdict": "fused",
+   "growth": [
+    {
+     "label": "né:C{1,2}[i°]",
+     "anchors": [
+      "né"
+     ],
+     "sound": "[ptkbdgfsSvzZmnNlRjw]{1,2}[i°]",
+     "spelling": null
+    }
+   ],
+   "refused": [],
+   "note": "fusion approved 2026-10-01 (scratch/fusion-check-2026-10-01.md)",
+   "date": "2026-10-01",
+   "numbers": {
+    "fusedMinusAlone": 1578
+   }
+  },
+  {
+   "position": "suffix",
+   "spellings": "cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé",
+   "phono": "se",
+   "verdict": "fused",
+   "growth": [
+    {
+     "label": "cé:m@",
+     "anchors": [
+      "cé"
+     ],
+     "sound": "m@",
+     "spelling": null
+    }
+   ],
+   "refused": [],
+   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md); merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
+   "date": "2026-09-30",
+   "numbers": {}
+  },
+  {
+   "position": "suffix",
+   "spellings": "ccion|cion|cyon|sion|ssion|tion|tions",
+   "phono": "sj§",
+   "verdict": "fused",
+   "growth": [
+    {
+     "label": "tion:C*[ai]",
+     "anchors": [
+      "tion",
+      "tions"
+     ],
+     "sound": "[ptkbdgfsSvzZmnNlRjw]*[ai]",
+     "spelling": null
+    }
+   ],
+   "refused": [],
+   "note": "fusion approved 2026-10-01 (scratch/fusion-check-2026-10-01.md)",
+   "date": "2026-10-01",
+   "numbers": {
+    "fusedMinusAlone": 344
+   }
+  },
+  {
    "position": "suffix",
    "spellings": "tion",
    "phono": "sj§",
@@ -92,37 +771,6 @@
    ],
    "refused": [],
    "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "prefix",
-   "spellings": "ain|hin|im|in",
-   "phono": "5",
-   "verdict": "fused",
-   "growth": [
-    {
-     "label": "in+té",
-     "anchors": [
-      "in"
-     ],
-     "sound": null,
-     "spelling": "té"
-    }
-   ],
-   "refused": [],
-   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md); merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "prefix",
-   "spellings": "é",
-   "phono": "e",
-   "verdict": "-",
-   "growth": [],
-   "refused": [],
-   "note": "no growth, decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
    "date": "2026-09-30",
    "numbers": {}
   },
@@ -156,139 +804,6 @@
    "numbers": {}
   },
   {
-   "position": "prefix",
-   "spellings": "au",
-   "phono": "o",
-   "verdict": "-",
-   "growth": [
-    {
-     "label": "jour|to|tre|di",
-     "anchors": null,
-     "sound": "ZuR|to|tR°|di",
-     "spelling": null
-    }
-   ],
-   "refused": [],
-   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "prefix",
-   "spellings": "pa",
-   "phono": "pa",
-   "verdict": "-",
-   "growth": [],
-   "refused": [],
-   "note": "no growth, decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "suffix",
-   "spellings": "cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé",
-   "phono": "se",
-   "verdict": "fused",
-   "growth": [
-    {
-     "label": "cé:m@",
-     "anchors": [
-      "cé"
-     ],
-     "sound": "m@",
-     "spelling": null
-    }
-   ],
-   "refused": [],
-   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md); merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "prefix",
-   "spellings": "par",
-   "phono": "paR",
-   "verdict": "-",
-   "growth": [],
-   "refused": [],
-   "note": "no growth, decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "prefix",
-   "spellings": "ai|aî|e|ei|hai|he|hê|é",
-   "phono": "E",
-   "verdict": "fused",
-   "growth": [
-    {
-     "label": "e:ksky|kspli|sE|n°",
-     "anchors": [
-      "e"
-     ],
-     "sound": "ksky|kspli|sE|n°",
-     "spelling": null
-    }
-   ],
-   "refused": [],
-   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md); merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "suffix",
-   "spellings": "der",
-   "phono": "de",
-   "verdict": "-",
-   "growth": [
-    {
-     "label": "dez|der|dé:gaR|m@",
-     "anchors": [
-      "der",
-      "dez",
-      "dé"
-     ],
-     "sound": "gaR|m@",
-     "spelling": null
-    }
-   ],
-   "refused": [],
-   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "prefix",
-   "spellings": "ra|rai|raie|re|rhé|ré|réh",
-   "phono": "Re",
-   "verdict": "fused",
-   "growth": [
-    {
-     "label": "ré:a|fle|vE|C{1,2}y",
-     "anchors": [
-      "ré"
-     ],
-     "sound": "a|fle|vE|[ptkbdgfsSvzZmnNlRjw]{1,2}y",
-     "spelling": null
-    }
-   ],
-   "refused": [],
-   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md); merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "prefix",
-   "spellings": "sa|sah",
-   "phono": "sa",
-   "verdict": "fused",
-   "growth": [],
-   "refused": [],
-   "note": "merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
    "position": "suffix",
    "spellings": "ver",
    "phono": "ve",
@@ -309,36 +824,14 @@
    "numbers": {}
   },
   {
-   "position": "prefix",
-   "spellings": "pro|proh|prô",
-   "phono": "pRo",
-   "verdict": "fused",
+   "position": "suffix",
+   "spellings": "ve|ver|wé",
+   "phono": "ve",
+   "verdict": "apart",
    "growth": [],
    "refused": [],
-   "note": "merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "prefix",
-   "spellings": "ce|sce|se",
-   "phono": "s°",
-   "verdict": "fused",
-   "growth": [],
-   "refused": [],
-   "note": "merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "prefix",
-   "spellings": "pou|pu",
-   "phono": "pu",
-   "verdict": "fused",
-   "growth": [],
-   "refused": [],
-   "note": "merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
-   "date": "2026-09-30",
+   "note": "fusion not approved 2026-10-01 (scratch/fusion-check-2026-10-01.md): parts stay apart",
+   "date": "2026-10-01",
    "numbers": {}
   },
   {
@@ -365,294 +858,6 @@
    "refused": [],
    "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md); merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
    "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "prefix",
-   "spellings": "de|dea|di|die|dis|dy|dî",
-   "phono": "di",
-   "verdict": "fused",
-   "growth": [
-    {
-     "label": "di:C{1,2}i",
-     "anchors": [
-      "di"
-     ],
-     "sound": "[ptkbdgfsSvzZmnNlRjw]{1,2}i",
-     "spelling": null
-    }
-   ],
-   "refused": [],
-   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md); merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "prefix",
-   "spellings": "e|hi|hy|i|y|î",
-   "phono": "i",
-   "verdict": "fused",
-   "growth": [
-    {
-     "label": "i:[mn][aeiouy]",
-     "anchors": [
-      "i"
-     ],
-     "sound": "[mn][aeiouy]",
-     "spelling": null
-    }
-   ],
-   "refused": [],
-   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md); merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "suffix",
-   "spellings": "rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée",
-   "phono": "Re",
-   "verdict": "fused",
-   "growth": [
-    {
-     "label": "rer:p[aeiouy]|C*e|sy",
-     "anchors": [
-      "rer"
-     ],
-     "sound": "p[aeiouy]|[ptkbdgfsSvzZmnNlRjw]*e|sy",
-     "spelling": null
-    }
-   ],
-   "refused": [],
-   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md); merged anchor that is itself one of the 30 selected rules: kept fused (grandfathered, never judged as a fusion)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "prefix",
-   "spellings": "o",
-   "phono": "o",
-   "verdict": "-",
-   "growth": [
-    {
-     "label": "C{1,2}i|kV",
-     "anchors": null,
-     "sound": "[ptkbdgfsSvzZmnNlRjw]{1,2}i|k[^ptkbdgfsSvzZmnNlRjw]",
-     "spelling": null
-    }
-   ],
-   "refused": [],
-   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "suffix",
-   "spellings": "ger",
-   "phono": "Ze",
-   "verdict": "-",
-   "growth": [],
-   "refused": [],
-   "note": "no growth, decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "suffix",
-   "spellings": "ner",
-   "phono": "ne",
-   "verdict": "-",
-   "growth": [
-    {
-     "label": "né:C{1,2}[i°]",
-     "anchors": [
-      "né"
-     ],
-     "sound": "[ptkbdgfsSvzZmnNlRjw]{1,2}[i°]",
-     "spelling": null
-    }
-   ],
-   "refused": [],
-   "note": "growth scope decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "suffix",
-   "spellings": "cher",
-   "phono": "Se",
-   "verdict": "-",
-   "growth": [],
-   "refused": [],
-   "note": "no growth, decided 2026-09-30 (scratch/scope-decisions-2026-09-30.md)",
-   "date": "2026-09-30",
-   "numbers": {}
-  },
-  {
-   "position": "prefix",
-   "spellings": "am|an|ant|em|en|ench|enh|ham|han|hen",
-   "phono": "@",
-   "verdict": "fused",
-   "growth": [
-    {
-     "label": "en:C{1,2}@",
-     "anchors": [
-      "en"
-     ],
-     "sound": "[ptkbdgfsSvzZmnNlRjw]{1,2}@",
-     "spelling": null
-    }
-   ],
-   "refused": [],
-   "note": "fusion approved 2026-10-01 (scratch/fusion-check-2026-10-01.md)",
-   "date": "2026-10-01",
-   "numbers": {
-    "fusedMinusAlone": 1340
-   }
-  },
-  {
-   "position": "suffix",
-   "spellings": "ner|nez|nner|nnée|née|nées",
-   "phono": "ne",
-   "verdict": "fused",
-   "growth": [
-    {
-     "label": "né:C{1,2}[i°]",
-     "anchors": [
-      "né"
-     ],
-     "sound": "[ptkbdgfsSvzZmnNlRjw]{1,2}[i°]",
-     "spelling": null
-    }
-   ],
-   "refused": [],
-   "note": "fusion approved 2026-10-01 (scratch/fusion-check-2026-10-01.md)",
-   "date": "2026-10-01",
-   "numbers": {
-    "fusedMinusAlone": 1578
-   }
-  },
-  {
-   "position": "suffix",
-   "spellings": "der|dé|dée",
-   "phono": "de",
-   "verdict": "fused",
-   "growth": [
-    {
-     "label": "dez|der|dé:gaR|m@",
-     "anchors": [
-      "der",
-      "dez",
-      "dé"
-     ],
-     "sound": "gaR|m@",
-     "spelling": null
-    }
-   ],
-   "refused": [],
-   "note": "fusion approved 2026-10-01 (scratch/fusion-check-2026-10-01.md)",
-   "date": "2026-10-01",
-   "numbers": {
-    "fusedMinusAlone": 494
-   }
-  },
-  {
-   "position": "suffix",
-   "spellings": "ccion|cion|cyon|sion|ssion|tion|tions",
-   "phono": "sj§",
-   "verdict": "fused",
-   "growth": [
-    {
-     "label": "tion:C*[ai]",
-     "anchors": [
-      "tion",
-      "tions"
-     ],
-     "sound": "[ptkbdgfsSvzZmnNlRjw]*[ai]",
-     "spelling": null
-    }
-   ],
-   "refused": [],
-   "note": "fusion approved 2026-10-01 (scratch/fusion-check-2026-10-01.md)",
-   "date": "2026-10-01",
-   "numbers": {
-    "fusedMinusAlone": 344
-   }
-  },
-  {
-   "position": "prefix",
-   "spellings": "ae|ai|aî|e|ei|he|hé|oe|é|éh",
-   "phono": "e",
-   "verdict": "apart",
-   "growth": [],
-   "refused": [],
-   "note": "fusion not approved 2026-10-01 (scratch/fusion-check-2026-10-01.md): parts stay apart",
-   "date": "2026-10-01",
-   "numbers": {}
-  },
-  {
-   "position": "prefix",
-   "spellings": "au|aux|hau|haut|ho|hô|o|oh|ô",
-   "phono": "o",
-   "verdict": "apart",
-   "growth": [],
-   "refused": [],
-   "note": "fusion not approved 2026-10-01 (scratch/fusion-check-2026-10-01.md): parts stay apart",
-   "date": "2026-10-01",
-   "numbers": {}
-  },
-  {
-   "position": "prefix",
-   "spellings": "pa|pei|pâ",
-   "phono": "pa",
-   "verdict": "apart",
-   "growth": [],
-   "refused": [],
-   "note": "fusion not approved 2026-10-01 (scratch/fusion-check-2026-10-01.md): parts stay apart",
-   "date": "2026-10-01",
-   "numbers": {}
-  },
-  {
-   "position": "suffix",
-   "spellings": "cher|chée|scher|sher",
-   "phono": "Se",
-   "verdict": "apart",
-   "growth": [],
-   "refused": [],
-   "note": "fusion not approved 2026-10-01 (scratch/fusion-check-2026-10-01.md): parts stay apart",
-   "date": "2026-10-01",
-   "numbers": {}
-  },
-  {
-   "position": "suffix",
-   "spellings": "ger|gée",
-   "phono": "Ze",
-   "verdict": "apart",
-   "growth": [],
-   "refused": [],
-   "note": "fusion not approved 2026-10-01 (scratch/fusion-check-2026-10-01.md): parts stay apart",
-   "date": "2026-10-01",
-   "numbers": {}
-  },
-  {
-   "position": "suffix",
-   "spellings": "man|mand|mant|ment|ments|mmant|mment",
-   "phono": "m@",
-   "verdict": "apart",
-   "growth": [],
-   "refused": [],
-   "note": "fusion not approved 2026-10-01 (scratch/fusion-check-2026-10-01.md): parts stay apart",
-   "date": "2026-10-01",
-   "numbers": {}
-  },
-  {
-   "position": "suffix",
-   "spellings": "ve|ver|wé",
-   "phono": "ve",
-   "verdict": "apart",
-   "growth": [],
-   "refused": [],
-   "note": "fusion not approved 2026-10-01 (scratch/fusion-check-2026-10-01.md): parts stay apart",
-   "date": "2026-10-01",
    "numbers": {}
   }
  ]

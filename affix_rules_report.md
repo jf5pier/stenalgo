@@ -2,33 +2,29 @@
 
 Constants: RULE_BUDGET=30, EXCEPTION_ALPHA=2.0, EXCLUSION_COST=5.0, FORM_COST=100.0, SWAP_CANDIDATES=20, SWAP_PASSES=3, RULE_OVERLAP_MAX=0.5, MAX_EXCEPTION_RATE=0.05. Growth forms and fusions come from `affix_decisions.json`.
 
-Pending decisions: **5**
+Pending decisions: **0** (none)
 
-- fusion prefix `a|ah|ha|hah|hâ|â` /a/ -- parts a, ha, â, hâ, ah
-- fusion prefix `ma|mah|mâ` /ma/ -- parts ma, mâ, mah
-- growth prefix `a` /a/ -- no growth verdict: anchor alone
-- growth prefix `co+col+com+con+cor` /kO+kOR+kOl+kOm+ko+koR+k§/ -- no growth verdict: anchor alone
-- growth prefix `ma` /ma/ -- no growth verdict: anchor alone
 
-Selected rules with attestedShare < 0.5 (candidate pseudo-affixes like `ma-`): **13** -- `a`, `co+col+com+con+cor`, `é`, `ain|hin|im|in`, `ai|aî|e|ei|hai|he|hê|é`, `au`, `der|dé|dée`, `ra|rai|raie|re|rhé|ré|réh`, `pa`, `ma`, `e|hi|hy|i|y|î`, `o`, `de|dea|di|die|dis|dy|dî`
+Selected rules with attestedShare < 0.5 (candidate pseudo-affixes like `ma-`): **13** -- `a|ah|ha|hâ|â`, `co+col+com+con+cor`, `é`, `ain|hin|im|in`, `ai|aî|e|ei|hai|he|hê|é`, `au`, `der|dé|dée`, `ra|rai|raie|re|rhé|ré|réh`, `pa`, `ma|mah|mâ`, `e|hi|hy|i|y|î`, `o`, `de|dea|di|die|dis|dy|dî`
 
 ## Savings curve (cumulative total after each acceptance, 1..40)
 
-16901, 25404, 32589, 39057, 45159, 50702, 56145, 60714, 65406, 70038, 74711, 79438, 84104, 87677, 91208, 94508, 97765, 100785, 103969, 107050, 109699, 112108, 115275, 117744, 120127, 122582, 124860, 127075, 129270, 131400
+17432, 25935, 32557, 39882, 45984, 51527, 56970, 61539, 66231, 70863, 75536, 80263, 85234, 88807, 92339, 95639, 98895, 101916, 105099, 108164, 110814, 113222, 116389, 118859, 121241, 123696, 125974, 128189, 130385, 132514
 
-## 1. prefix `a` -- keys (8, 11, 18) = `R@k`
+## 1. prefix `a|ah|ha|hâ|â` -- keys (9, 16) = `w-j`
 
-forms: `a`(k=1)
-- score 16900.8, strokeFreqSaved 17255.9, keySimilarity -1.50 -- NOT phonetically motivated
-- attestedShare 0.22; exception rate 1.4%; top categories: VER 52%, NOM 31%, ADJ 6%
-- word exceptions 147 (freq 177.6); scope fallbacks 0
-- top exceptions: aviez, aviez, alliez, accueil, accro, about, accords, abbé, ave, acquis
-    arrête: a/Riet -> R@iekt
-    amour: a/m@eR -> mR@ekR
-    avais: a/vie/-d -> vR@iek/-d
-    assez: a/se -> sR@ek
-    avais: a/vie/-k -> vR@iek/-k
-    ami: a/mi -> mR@ik
+forms: `a|ah|ha|hâ|â`(k=1), `a|ah|ha|hâ|â[R@|RE|Re]·`(k=2)
+- score 17432.3, strokeFreqSaved 17983.3, keySimilarity -0.90 -- NOT phonetically motivated
+- attestedShare 0.26; exception rate 1.5%; top categories: VER 52%, NOM 32%, ADJ 6%
+- fused spelling variants: a, ah, ha, hâ, â (new conflict freq 7.6)
+- word exceptions 160 (freq 188.0); scope fallbacks 15
+- top exceptions: attaque, attaque, allée, âgée, âgé, attaques, arabes, attaquent, arabe, arabe
+    arrête: a/Riet -> Rwiejt
+    amour: a/m@eR -> mw@ejR
+    avais: a/vie/-d -> vwiej/-d
+    assez: a/se -> swej
+    avais: a/vie/-k -> vwiej/-k
+    ami: a/mi -> mwij
 
 ## 2. suffix `ment` -- keys (16, 20, 25) = `-jtm`
 
@@ -44,27 +40,27 @@ forms: `ment`(k=1), `·[C{1,2}[eui]+]ment`(k=2)
     sûrement: s@i/R@a/m@ -> s@ijtm
     complètement: kai/pmtie/t@a/m@ -> kai/pmtiejtm
 
-## 3. prefix `am|an|ant|em|en|ench|enh|ham|han|hen` -- keys (3, 6, 18) = `sm-k`
+## 3. prefix `am|an|ant|em|en|ench|enh|ham|han|hen` -- keys (4, 6, 16) = `pm-j`
 
 forms: `am|an|ant|em|en|ench|enh|ham|han|hen`(k=1), `am|an|ant|em|en|ench|enh|ham|han|hen[en:C{1,2}@]·`(k=2)
-- score 7185.1, strokeFreqSaved 7578.5, keySimilarity -0.44 -- NOT phonetically motivated
-- attestedShare 0.54; exception rate 0.7%; top categories: VER 48%, NOM 33%, ADV 10%
+- score 7324.3, strokeFreqSaved 7617.2, keySimilarity 0.02 -- NOT phonetically motivated
+- attestedShare 0.54; exception rate 0.9%; top categories: VER 48%, NOM 33%, ADV 10%
 - fused spelling variants: am, an, ant, em, en, ench, enh, ham, han, hen (new conflict freq 3.0)
-- word exceptions 50 (freq 61.7); scope fallbacks 34
-- top exceptions: engagé, engager, engagée, engrais, envol, engagés, engagez, engagé, engagé, entassés
-    enfants: @/kp@/-s -> kspm@k/-s
-    enfant: @/kp@ -> kspm@k
-    enfin: @/kpaie -> kspmaiek
-    entendu: @/t@/pv@i -> spvm@ik
-    ensemble: @/s@jl -> sm@jkl
-    envie: @/vi -> svmik
+- word exceptions 64 (freq 18.9); scope fallbacks 31
+- top exceptions: emplacement, emplit, amplement, empli, entassés, enchaîne, emplacements, ampli, entasser, envient
+    enfants: @/kp@/-s -> kpm@j/-s
+    enfant: @/kp@ -> kpm@j
+    enfin: @/kpaie -> kpmaiej
+    entendu: @/t@/pv@i -> pvm@ij
+    ensemble: @/s@jl -> spm@jl
+    envie: @/vi -> pvmij
 
 ## 4. prefix `co+col+com+con+cor` -- keys (9, 19) = `w-d`
 
-forms: `co+col+com+con+cor`(k=1)
-- score 6467.6, strokeFreqSaved 7811.2, keySimilarity -0.08 -- NOT phonetically motivated
-- attestedShare 0.41; exception rate 3.0%; top categories: VER 48%, NOM 37%, ADJ 8%
-- word exceptions 187 (freq 671.8); scope fallbacks 0
+forms: `co+col+com+con+cor`(k=1), `co+col+com+con+cor[m@]·`(k=2)
+- score 6621.9, strokeFreqSaved 8180.7, keySimilarity -0.08 -- NOT phonetically motivated
+- attestedShare 0.42; exception rate 3.3%; top categories: VER 48%, NOM 37%, ADJ 8%
+- word exceptions 203 (freq 674.4); scope fallbacks 22
 - top exceptions: connais, connaît, connard, connard, connards, connu, coté, coté, coffrer, connue
     combien: kai/svRwaie -> svRwaied
     comprends: kai/pR@/-k -> pRw@d/-k
@@ -115,22 +111,37 @@ forms: `é`(k=1)
     écrit: e/kRi -> kvRi
     équipe: e/kijk -> kvijk
 
-## 8. prefix `ain|hin|im|in` -- keys (7, 14, 16) = `tej`
+## 8. prefix `de|des|dé|déh` -- keys (3, 9, 18) = `sw-k`
+
+forms: `de|des|dé|déh`(k=1)
+- score 4970.9, strokeFreqSaved 5077.7, keySimilarity -0.50 -- NOT phonetically motivated
+- attestedShare 0.63; exception rate 1.1%; top categories: VER 58%, NOM 28%, ADJ 13%
+- fused spelling variants: de, des, dé, déh (new conflict freq 3.5)
+- word exceptions 116 (freq 53.4); scope fallbacks 0
+- top exceptions: dégâts, débat, débarque, dévoiler, débats, débarquent, déballer, dévoilé, débarques, débat
+    désolé: pve/twae/mte -> stwaek/mte
+    désolé: pve/twae/mte -> stwaek/mte
+    début: pve/sv@i -> svw@ik
+    désolée: pve/twae/mte/-j -> stwaek/mte/-j
+    décidé: pve/si/pve -> swik/pve
+    désolée: pve/twae/mte/-j -> stwaek/mte/-j
+
+## 9. prefix `ain|hin|im|in` -- keys (7, 8, 9) = `tRw-`
 
 forms: `ain|hin|im|in`(k=1), `ain|hin|im|in[in+té]·`(k=2)
-- score 4727.3, strokeFreqSaved 4832.7, keySimilarity -0.19 -- NOT phonetically motivated
+- score 4727.4, strokeFreqSaved 4832.7, keySimilarity -0.62 -- NOT phonetically motivated
 - attestedShare 0.49; exception rate 0.1%; top categories: NOM 33%, VER 33%, ADJ 29%
 - fused spelling variants: ain, hin, im, in (new conflict freq 0.0)
-- word exceptions 4 (freq 2.7); scope fallbacks 0
-- top exceptions: indemne, indemnes, insights, intrait
-    importe: aie/petR -> ptejtR
-    ainsi: aie/si -> stiej
-    important: aie/peR/t@ -> ptejR/t@
-    impossible: aie/pae/sijl -> ptaej/sijl
-    inquiète: aie/kRwiet -> ktRwiejt
-    intérieur: aie/te/Rw@R -> tRw@ejR
+- word exceptions 3 (freq 2.7); scope fallbacks 0
+- top exceptions: indemne, indemnes, intiment
+    importe: aie/petR -> ptRwetR
+    ainsi: aie/si -> stRwi
+    important: aie/peR/t@ -> ptRweR/t@
+    impossible: aie/pae/sijl -> ptRwae/sijl
+    inquiète: aie/kRwiet -> ktRwiet
+    intérieur: aie/te/Rw@R -> tRw@R
 
-## 9. prefix `de` -- keys (2, 6, 19) = `km-d`
+## 10. prefix `de` -- keys (2, 6, 19) = `km-d`
 
 forms: `de`(k=1), `de[man|ve]·`(k=2)
 - score 4692.3, strokeFreqSaved 4792.3, keySimilarity 0.22 -- NOT phonetically motivated
@@ -143,7 +154,7 @@ forms: `de`(k=1), `de[man|ve]·`(k=2)
     devrait: pv@a/vRie -> kvmRied
     devant: pv@a/v@ -> kvm@d
 
-## 10. prefix `ai|aî|e|ei|hai|he|hê|é` -- keys (5, 18, 19) = `v-kd`
+## 11. prefix `ai|aî|e|ei|hai|he|hê|é` -- keys (5, 18, 19) = `v-kd`
 
 forms: `ai|aî|e|ei|hai|he|hê|é`(k=1), `ai|aî|e|ei|hai|he|hê|é[e:ksky|kspli|sE|n°]·`(k=2)
 - score 4673.2, strokeFreqSaved 4803.2, keySimilarity -0.44 -- NOT phonetically motivated
@@ -156,20 +167,6 @@ forms: `ai|aî|e|ei|hai|he|hê|é`(k=1), `ai|aî|e|ei|hai|he|hê|é[e:ksky|kspli
     essaie: ie/sie -> sviekd
     essayer: ie/sie/Rwe/-l -> vRwekd/-l
     essayé: ie/siej/e -> sviejkd/e
-
-## 11. prefix `de|des|dé|déh` -- keys (5, 9, 18) = `vw-k`
-
-forms: `de|des|dé|déh`(k=1)
-- score 4665.5, strokeFreqSaved 4975.9, keySimilarity -0.50 -- NOT phonetically motivated
-- attestedShare 0.63; exception rate 1.3%; top categories: VER 58%, NOM 28%, ADJ 13%
-- fused spelling variants: de, des, dé, déh (new conflict freq 3.5)
-- word exceptions 130 (freq 155.2); scope fallbacks 0
-- top exceptions: début, débarque, dépit, déçu, débuts, dévoiler, dépanner, débarquent, dédie, déçue
-    désolé: pve/twae/mte -> vtwaek/mte
-    désolé: pve/twae/mte -> vtwaek/mte
-    désolée: pve/twae/mte/-j -> vtwaek/mte/-j
-    décidé: pve/si/pve -> svwik/pve
-    désolée: pve/twae/mte/-j -> vtwaek/mte/-j
 
 ## 12. suffix `cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé` -- keys (16, 17, 19) = `-jsd`
 
@@ -285,19 +282,20 @@ forms: `pa`(k=1)
     patron: pa/tRai -> kvtRai
     passé: pa/se -> ksve
 
-## 20. prefix `ma` -- keys (3, 4) = `sp-`
+## 20. prefix `ma|mah|mâ` -- keys (17, 18, 19) = `-skd`
 
-forms: `ma`(k=1)
-- score 3081.5, strokeFreqSaved 3084.0, keySimilarity -0.33 -- NOT phonetically motivated
-- attestedShare 0.41; exception rate 0.2%; top categories: NOM 70%, ADJ 18%, VER 11%
-- word exceptions 3 (freq 1.3); scope fallbacks 0
-- top exceptions: maquis, machisme, macis
-    matin: ma/taie -> sptaie
-    mari: ma/Ri -> spRi
-    madame: ma/pvam -> spvam
-    mariage: ma/RwaZ -> spRwaZ
-    malade: ma/mtad -> spmtad
-    magnifique: ma/wi/kpik -> spwi/kpik
+forms: `ma|mah|mâ`(k=1), `ma|mah|mâ[ni]·`(k=2), `ma|mah|mâ[Ni]·`(k=2), `ma|mah|mâ[l2|la]·`(k=2)
+- score 3065.5, strokeFreqSaved 3403.9, keySimilarity -0.46 -- NOT phonetically motivated
+- attestedShare 0.44; exception rate 1.2%; top categories: NOM 70%, ADJ 18%, VER 11%
+- fused spelling variants: ma, mah, mâ (new conflict freq 0.5)
+- word exceptions 23 (freq 11.7); scope fallbacks 3
+- top exceptions: marais, marions, maraud, machisme, manage, manioc, maraude, matisse, mati, manient
+    matin: ma/taie -> taieskd
+    mari: ma/Ri -> Riskd
+    madame: ma/pvam -> pvaskdm
+    mariage: ma/RwaZ -> RwaskdZ
+    malade: ma/mtad -> mtaskd
+    magnifique: ma/wi/kpik -> kpiskd
 
 ## 21. prefix `e|hi|hy|i|y|î` -- keys (16, 19) = `-jd`
 
@@ -445,7 +443,7 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 
 - `ae|ai|aî|e|ei|he|hé|oe|é|éh` /e/ (parts é, e, hé, ai; new conflict freq 5.5): **apart**
 - `tai|taie|taient|tais|tait|tet|têt` /tE/ (parts tait, tais, taient, tet; new conflict freq 0.0): **apart** (undecided)
-- `a|ah|ha|hah|hâ|â` /a/ (parts a, ha, â, hâ, ah; new conflict freq 7.6): **apart** (undecided)
+- `a|ah|ha|hah|hâ|â` /a/ (parts a, ha, â, hâ, ah; new conflict freq 7.6): **apart**
 - `le|leh|ler|lers|ller|llé|llée|lée` /le/ (parts ler, ller, llée, lée, llé; new conflict freq 14.6): **apart** (undecided)
 - `am|an|ant|em|en|ench|enh|ham|han|hen` /@/ (parts en, em, an, am, han; new conflict freq 3.0): **fused**
 - `ve|ver|wé` /ve/ (parts ver; new conflict freq 0.1): **apart**
@@ -454,7 +452,7 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `re|reh` /R°/ (parts re; new conflict freq 0.0): **fused**
 - `mai|maî|me|mei|mes|mè|mê` /mE/ (parts me, mai, mê; new conflict freq 0.0): **apart** (undecided)
 - `bom|bon` /b§/ (parts bon, bom; new conflict freq 0.2): **apart** (undecided)
-- `ma|mah|mâ` /ma/ (parts ma, mâ, mah; new conflict freq 0.5): **apart** (undecided)
+- `ma|mah|mâ` /ma/ (parts ma, mâ, mah; new conflict freq 0.5): **fused**
 - `van|vant|vent` /v@/ (parts vant, vent; new conflict freq 0.0): **apart** (undecided)
 - `ar|har` /aR/ (parts ar, har; new conflict freq 0.1): **apart** (undecided)
 - `llon|lon` /l§/ (parts lon, llon; new conflict freq 0.6): **apart** (undecided)
@@ -1344,6 +1342,7 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `nisme|nnisme` /nism/ (parts nisme; new conflict freq 0.0): **apart** (undecided)
 - `el|hel` /El/ (parts hel; new conflict freq 0.0): **apart** (undecided)
 - `neuse|nneuse` /n2z/ (parts neuse; new conflict freq 0.0): **apart** (undecided)
+- `a|ah|ha|hâ|â` /a/ (parts a, ah, ha, hâ, â; new conflict freq 7.6): **fused**
 
 ## Decided merges that are no longer in the pool (lexicon change?)
 
