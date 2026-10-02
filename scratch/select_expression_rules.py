@@ -97,13 +97,39 @@ def main() -> None:
           f"{len(families)} families)")
 
     result = selectExpressionRules(candidates, pool, budget=budget)
+
+    # Stage B: real keypresses over the real collision index.
+    import time
+
+    from src.affixbinding import enumerateKeypresses
+    from src.expressionrules import assignKeypresses
+    from src.keyboard import canonicalizeStrokes
+
+    realCtx = SimContext(starboard, [])
+    realCtx.finalOutlines = {canonicalizeStrokes(s)
+                             for alts in theory.values() for s in alts}
+    realCtx.singleStrokeOutlines = {o[0] for o in realCtx.finalOutlines
+                                    if len(o) == 1}
+    t = time.time()
+    keypresses = enumerateKeypresses(starboard, realCtx)
+    print(f"{len(keypresses)} legal base keypresses ({time.time() - t:.0f}s)")
+    t = time.time()
+    keypressReport = assignKeypresses(result.selected, pool, realCtx, keypresses)
+    print(f"Stage B assignment done ({time.time() - t:.0f}s)")
+    for family, info in keypressReport.items():
+        print(f"  family {family!r}: base={info.get('base')} "
+              f"variants={info['variants']} touched={info['touched']} "
+              f"score={info.get('score', 0):.3e}" if info.get("base") else
+              f"  family {family!r}: NO LEGAL BASE (variants={info['variants']})")
+
     with open(OUT_TSV, "w", encoding="utf-8") as out:
         out.write("rank\tkind\tfamily\texpression\tposition\tfreq\t"
-                  "strokes_saved\tscore\n")
+                  "strokes_saved\tkeys\tscore\n")
         for rank, rule in enumerate(result.selected, 1):
+            keys = ",".join(map(str, rule.keys)) if rule.keys else ""
             out.write(f"{rank}\t{rule.kind}\t{rule.family}\t{' '.join(rule.units)}\t"
                       f"{rule.position}\t{rule.freq:.0f}\t{rule.strokesSaved}\t"
-                      f"{rule.score:.3e}\n")
+                      f"{keys}\t{rule.score:.3e}\n")
     slots = {(r.family or " ".join(r.units)) if r.kind == "attach"
              else " ".join(r.units) for r in result.selected}
     print(f"selected {len(result.selected)} rules in {len(slots)} slots -> {OUT_TSV}")
