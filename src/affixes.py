@@ -2,7 +2,7 @@
 Affix Abbreviation Discovery (Part A) and the shared gain simulation (Part B reuses it).
 
 MEASUREMENT AND PROPOSALS ONLY -- nothing here is wired into the theory. See
-PLAN_2026-09-26-affix-abbreviations.md for the design decisions this module implements.
+docs/history/PLAN_2026-09-26-affix-abbreviations.md for the design decisions this module implements.
 
 A word "carries" an affix when its first (or last) k syllable strokes spell it and its stem
 is an attested lemma. Affixes are grouped in families of similar members, competing members
@@ -285,7 +285,7 @@ class Slot:
 
 
 # Latin prefix assimilation groups, citation-backed (not auto-discovered by A7 or A3's
-# clustering -- see PLAN_2026-09-26-affix-abbreviations.md §11 for the etymological research).
+# clustering -- see docs/history/PLAN_2026-09-26-affix-abbreviations.md §11 for the etymological research).
 # `con-` assimilates to `co-` before a vowel, `col-` before l, `com-` before b/m/p, `cor-`
 # before r (Wiktionnaire, fr.wiktionary.org/wiki/con-): one prefix, safe to pool.
 #
@@ -377,7 +377,7 @@ def _exceptionShare(pos: str, carriers: list[Carrier], denom: float | None = Non
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# Lattice growth (DESIGN_2026-09-27-affix-rule-selection.md §3): the default path. Replaces the
+# Lattice growth (docs/history/DESIGN_2026-09-27-affix-rule-selection.md §3): the default path. Replaces the
 # single greedy agglomeration above (kept, unchanged, for --legacy) with a lattice where growing
 # one syllable emits ALL of an exact leaf per absorbed value, an onset-generalized group per
 # shared nucleus+coda, and one full wildcard -- nothing here absorbs anything else (D2, D3).
