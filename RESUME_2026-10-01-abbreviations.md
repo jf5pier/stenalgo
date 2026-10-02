@@ -26,9 +26,9 @@ the affix rules (`scratch/expr-rules.tsv`), later wired into the theory build.
   (Stage C: joint repair + audit), `7f2e6fa` (attach-stacking disjointness
   fix), `bf2562b` (Q3 decision registered), `69611b1` (Phase 3 report).
 - Interpreter: `/home/jfsp/stenalgo/env/bin/python` (bare `python` not on PATH).
-- **Committed 2026-10-02 and pushed** (commit subject "Add forced briefs
-  with multi-stroke eligibility, expression pool fragment fix, budget
-  sweep"; `git log -1 abbreviations` if HEAD moved): `src/expressionrules.py`
+- **Committed 2026-10-02 and pushed**: `de27537` "Add forced briefs with
+  multi-stroke eligibility, pool fragment fix, budget sweep" —
+  `src/expressionrules.py`
   (FORCED_BRIEF_BUDGET=40 + `deriveBriefStroke`), `src/test/
   expressionrules_test.py` (5 new brief tests; suite 786 green), `scratch/
   build_expr_candidates.py` (bare-fragment fallback fix), `scratch/
