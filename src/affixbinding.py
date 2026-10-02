@@ -13,7 +13,7 @@ NUCLEUS_VOWEL_WEIGHT = 0.5
 UNEXPLAINED_KEY_PENALTY = 0.25
 MAX_KEYPRESS_KEYS = 3
 SAMPLE_CARRIERS = 2000      # first-pass simulation sample (top frequency); finalists use all
-MAX_ALTERNATIVES = 5
+MAX_ALTERNATIVES = 30      # finalists of the key search (5 missed the best key of 3 rules; see docs/AFFIX_RULES.md)
 SPLIT_MAX_LOSS = 0.02       # a single keypress is kept unless more than this share of frequency collides
 FORBIDDEN_KEYS = frozenset({0, 1, 10, 15})   # reserved keys: never used (Decision 2)
 

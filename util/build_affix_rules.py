@@ -95,7 +95,9 @@ def pendingItems(
         near = closestDecided(decisions, d.position, d.merged, d.phono)
         items.append(Pending("fusion", d.position, d.merged, d.phono,
                              "parts " + ", ".join(d.parts) + (f"; closest decided merge `{near}`" if near else "")))
-    items.sort(key=lambda p: (p.kind, p.position, p.phono, p.spellings))
+    # growth BEFORE fusion: a fusion is judged with its parts' decided growth (`té` grows into `lité` before it is
+    # fused with `ter`), and a fused merge inherits the growth of its parts
+    items.sort(key=lambda p: (p.kind != "growth", p.position, p.phono, p.spellings))
     return items
 
 
@@ -150,7 +152,8 @@ def currentWeights() -> dict[str, float]:
     """The code constants every cached evaluation and the selection depend on."""
     return {"alpha": R.EXCEPTION_ALPHA, "exclusion": R.EXCLUSION_COST, "form": R.FORM_COST,
             "maxExceptionRate": R.MAX_EXCEPTION_RATE, "budget": R.RULE_BUDGET, "overlapMax": R.RULE_OVERLAP_MAX,
-            "swapCandidates": R.SWAP_CANDIDATES, "swapPasses": R.SWAP_PASSES}
+            "swapCandidates": R.SWAP_CANDIDATES, "swapPasses": R.SWAP_PASSES,
+            "keyShortlist": R.MAX_ALTERNATIVES}
 
 
 # ═══════════════════════════════════════════════════════════════════════════

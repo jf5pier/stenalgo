@@ -21,8 +21,10 @@ from typing import Callable
 from src import affixes as A
 from src import affixproposals as P
 from src.affixbinding import PhonemeKeys, enumerateKeypresses
-from src.affixdecisions import APART, DECISIONS_PATH, AnchorDecision, Decisions, loadDecisions, saveDecisions
+from src.affixdecisions import (APART, DECISIONS_PATH, AnchorDecision, Decisions, fileMd5, loadDecisions,
+                                saveDecisions)
 from src.keyboard import Starboard
+from util import build_affix_rules
 from util.build_affix_rules import KEYBOARD_JSON, STORE_PICKLE, Pending, loadStore
 
 Proposer = Callable[[Pending, Decisions], P.Proposal | None]
@@ -65,6 +67,9 @@ def reviewItem(
         if proposal is None:
             return _nothingToPropose(item, decisions, path, today, ask, say), False
         _show(proposal, say)
+        if proposal.kind == "fusion" and proposal.groups and proposal.evaluateSubset is not None:
+            decisions, outcome = _reviewSpellings(item, proposal, decisions, path, today, ask, say)
+            return decisions, outcome == "quit"
         if proposal.kind == "growth" and proposal.groups:
             decisions, outcome = _reviewGroups(item, proposal, decisions, path, today, ask, say)
             if outcome == "quit":
@@ -138,6 +143,46 @@ def _reviewGroups(
     return decisions, "done"
 
 
+def _reviewSpellings(
+    item: Pending, proposal: P.Proposal, decisions: Decisions, path: str, today: str,
+    ask: Callable[[str], str], say: Callable[[str], None],
+) -> tuple[Decisions, str]:
+    """One accept line per ADDED spelling of a fusion. The accepted ones are merged with the rules' own spellings
+    (a sub-merge: evaluated and confirmed before it is saved); the refused ones stay out. Returns (decisions, outcome)."""
+    accepted: list[str] = []
+    refused: list[str] = []
+    for row in proposal.rows:
+        a = _ask(f"  {row.label} (net {row.net:+.0f}): accept? [y/n/s/q] ", ask)
+        if a == "q":
+            return decisions, "quit"
+        if a == "s":
+            return decisions, "skip"
+        (accepted if a == "y" else refused).append(row.label)
+    note = ask("  note (optional): ").strip()
+    assert proposal.evaluateSubset is not None
+    full = proposal.spellings
+    if not accepted:
+        decisions = decisions.withEntry(AnchorDecision(item.position, full, item.phono, APART, [], refused, note, today,
+                                                       _numbersOf(proposal)))
+        saveDecisions(decisions, path)
+        say(f"  saved: `{full}` stays apart (no spelling accepted)")
+        return decisions, "done"
+    sub = proposal.evaluateSubset(accepted)
+    if sub is not proposal:
+        _show(sub, say)
+        if _ask(f"  save the merge `{sub.spellings}` (net {sub.net:+.0f})? [y/n] ", ask, "yn") == "n":
+            return decisions, "skip"
+    sub.entry.note, sub.entry.date, sub.entry.numbers = note, today, _numbersOf(sub)
+    sub.entry.refused = sorted(refused)
+    decisions = decisions.withEntry(sub.entry)
+    if sub.spellings != full:       # the greedy full merge is settled too: apart
+        decisions = decisions.withEntry(AnchorDecision(item.position, full, item.phono, APART, [], sorted(refused), note,
+                                                       today, _numbersOf(proposal)))
+    saveDecisions(decisions, path)
+    say(f"  saved: merge `{sub.spellings}` fused" + (f"; refused spellings: {', '.join(refused)}" if refused else ""))
+    return decisions, "done"
+
+
 def root_of(proposal: P.Proposal) -> A.Candidate:
     """formsForGroups only reads `root.ortho` (merged or single): a stand-in carrying it."""
     return A.Candidate(proposal.position, 1, proposal.phono, proposal.spellings)
@@ -166,12 +211,21 @@ def _nothingToPropose(
 def review(
     items: list[Pending], decisions: Decisions, proposer: Proposer, path: str,
     ask: Callable[[str], str] = input, say: Callable[[str], None] = print, today: str | None = None,
+    outcome: list[str] | None = None,
 ) -> Decisions:
+    """Reviews the items in order. `outcome` (if given) receives "quit" when the user quit, or "fusion" when a fusion
+    verdict was saved and the pass stopped there: the later items may be stale, the caller reselects first."""
     today = today or datetime.date.today().isoformat()
     for n, item in enumerate(items, 1):
         say(f"\n=== {n}/{len(items)}: {item.line()}")
+        before = decisions
         decisions, quit_ = reviewItem(item, decisions, proposer, path, today, ask, say)
         if quit_:
+            if outcome is not None:
+                outcome.append("quit")
+            break
+        if item.kind == "fusion" and decisions is not before and outcome is not None:
+            outcome.append("fusion")
             break
     return decisions
 
@@ -220,17 +274,31 @@ def main(argv: list[str] | None = None) -> int:
     if store is None:
         print(f"{args.pickle} not found: run `python -m util.build_affix_rules` first.")
         return 1
-    items = [Pending(**d) for d in store["selection"]["pending"] if not args.only or d["kind"] == args.only]
-    if args.limit:
-        items = items[:args.limit]
-    if not items:
-        print("nothing pending: the affix decisions cover the 30 selected rules.")
-        return 0
-    decisions = loadDecisions(args.decisions)
-    proposer = _realProposer(args.decisions, store["selection"]["rules"])
-    review(items, decisions, proposer, args.decisions)
-    print("\nrerun `python -m util.build_affix_rules` (cached evaluations are reused) to see what is still pending.")
-    return 0
+    # loops by itself: review, save, reselect (cached evaluations: about a minute), continue with what is newly
+    # pending, until nothing is pending, the user quits, or a pass changed no verdict
+    while True:
+        items = [Pending(**d) for d in store["selection"]["pending"] if not args.only or d["kind"] == args.only]
+        if args.limit:
+            items = items[:args.limit]
+        if not items:
+            print("nothing pending: the affix decisions cover the selected rules.")
+            return 0
+        md5Before = fileMd5(args.decisions)
+        decisions = loadDecisions(args.decisions)
+        proposer = _realProposer(args.decisions, store["selection"]["rules"])
+        outcome: list[str] = []
+        review(items, decisions, proposer, args.decisions, outcome=outcome)
+        if "quit" in outcome:
+            print("\nquit: rerun `python -m util.build_affix_rules` to reselect with your verdicts.")
+            return 0
+        if fileMd5(args.decisions) == md5Before:
+            print("\nno verdict was saved in this pass (everything skipped): stopping.")
+            return 0
+        print("\nreselecting with your verdicts ...", flush=True)
+        build_affix_rules.main(["--decisions", args.decisions, "--pickle", args.pickle])
+        store = loadStore(args.pickle)
+        if store is None:
+            return 1
 
 
 if __name__ == "__main__":

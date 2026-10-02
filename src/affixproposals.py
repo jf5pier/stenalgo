@@ -176,7 +176,9 @@ class Proposal:
     flags: list[str] = field(default_factory=list)       # "similar rule: ...", "two decided rules on one key"
     rows: list[Row] = field(default_factory=list)        # per addition (added spelling / neighbour sound)
     notes: list[str] = field(default_factory=list)       # context lines (e.g. the effect on the existing words)
-    groups: dict[str, tuple[str, str]] = field(default_factory=dict)   # growth: row label -> (anchor spelling, neighbour sound)
+    groups: dict[str, tuple[str, str]] = field(default_factory=dict)   # row label -> (anchor spelling, neighbour sound)
+    baseSpellings: list[str] = field(default_factory=list)             # fusion: the spellings of the rules being merged
+    evaluateSubset: Callable[[list[str]], "Proposal"] | None = field(default=None, repr=False, compare=False)
     examples: list[str] = field(default_factory=list)
     alternatives: list[tuple[str, float]] = field(default_factory=list)   # next best (label, net)
 
@@ -228,63 +230,95 @@ def proposeFusion(
     rules = [p for p in parts if p.hasDecision or (p.position, p.ortho, p.phono) in selectedKeys]
     if not rules:
         return None
-    idx = R.childrenIndex(pool)
     alone: list[Numbers] = []
     aloneRules: list[R.Rule] = []
     growth: list[ScopeForm] = []
     pendingGrowth = True
     for p in rules:
         progress(f"  evaluating `{p.ortho}` alone ...")
-        aloneRule = R.buildCandidateRule(p, idx)
+        # the part WITH the growth decided so far (also in this session: the pool was built before), so the merge is
+        # compared with what the part is worth once grown
+        aloneRule = R.Rule(p.position, p, [p] + A.growScopedForms(p, decisions), score=0.0)
         aloneRules.append(aloneRule)
         alone.append(numbersBest(aloneRule, pk, ctx, keypresses))
         partForms = decisions.growthForms(p.position, p.ortho, p.phono)
         if partForms is not None:
             pendingGrowth = False
             growth += restrictedGrowth(p, partForms)
-    entry = AnchorDecision(merged.position, merged.ortho, merged.phono, FUSED, None if pendingGrowth else growth)
-    forms = A.growScopedForms(merged, decisions.withEntry(entry)) if growth else []
-    progress(f"  evaluating the merged rule `{merged.ortho}` ...")
-    fusedRule = R.Rule(merged.position, merged, [merged] + forms, score=0.0)
-    fused = numbersBest(fusedRule, pk, ctx, keypresses)
     ruleIdx = {c.rec.idx for p in rules for c in p.carriers}
-    added = sorted((c for c in merged.carriers if c.rec.idx not in ruleIdx), key=lambda c: (-c.rec.frequency, c.rec.idx))
-    aloneSum = sum(a.score for a in alone)
-    flags: list[str] = []
-    own = {s for p in rules for s in p.ortho.split("|")}
-    for s in sorted({x for x in merged.ortho.split("|") if x not in own}):
-        other = _otherRuleWithSpelling(decisions, merged.position, s, (merged.position, merged.ortho, merged.phono))
-        if other:
-            flags.append(f"similar rule: added spelling `{s}` is already in rule {other}")
-    if len(rules) > 1:
-        flags.append(f"two decided rules on one key ({', '.join('`' + p.ortho + '`' for p in rules)})")
-    # per added spelling, and the effect on the words the parts already had
+    own = sorted({s for p in rules for s in p.ortho.split("|")})
     spellingOf = (lambda c: c.rec.orthoSylls[c.start]) if merged.position == A.PREFIX else \
         (lambda c: c.rec.orthoSylls[c.start + c.span - 1])
-    existing = lambda c: c.rec.idx in ruleIdx  # noqa: E731
-    fusedRows = rowsOf(fusedRule, fusedRule.results, lambda c: "(existing words)" if existing(c) else spellingOf(c))
+    aloneSum = sum(a.score for a in alone)
     aloneExisting = Row("(existing words, alone)")
     for ar in aloneRules:
         for row in rowsOf(ar, ar.results, lambda c: "x").values():
             for f in ("words", "freq", "gainWords", "benefit", "fallbacks", "fallbackFreq", "exceptions", "exceptionFreq"):
                 setattr(aloneExisting, f, getattr(aloneExisting, f) + getattr(row, f))
-    rows = sorted((r for k, r in fusedRows.items() if k != "(existing words)"), key=lambda r: (-r.freq, r.label))
-    notes: list[str] = []
-    before = fusedRows.get("(existing words)", Row("(existing words)"))
-    notes.append(
-        f"existing words: alone {aloneExisting.words} words, benefit {aloneExisting.benefit:.0f}, exc {aloneExisting.exceptions} "
-        f"(freq {aloneExisting.exceptionFreq:.0f}), fb {aloneExisting.fallbacks} -> fused {before.words} words, benefit "
-        f"{before.benefit:.0f}, exc {before.exceptions} (freq {before.exceptionFreq:.0f}), fb {before.fallbacks}; "
-        f"net change {before.net - aloneExisting.net:+.0f}" + (f"; their exceptions: {', '.join(before.excExamples[:6])}"
-                                                               if before.excExamples else ""))
-    notes.append(f"keys: parts alone " + ", ".join(str(a.keys) for a in alone) + f" -> merged {fused.keys}")
-    return Proposal(
-        "fusion", merged.position, merged.ortho, merged.phono, f"fuse {merged.ortho}", len(added),
-        sum(c.rec.frequency for c in added),
-        fused.fallbackWords - sum(a.fallbackWords for a in alone), fused.fallbackFreq - sum(a.fallbackFreq for a in alone),
-        fused.exceptionWords - sum(a.exceptionWords for a in alone),
-        fused.exceptionFreq - sum(a.exceptionFreq for a in alone), fused.score - aloneSum, entry, flags,
-        rows=rows, notes=notes, examples=[c.rec.ortho for c in added[:6]])
+
+    def evaluateMerge(cand: A.Candidate) -> Proposal:
+        entry = AnchorDecision(cand.position, cand.ortho, cand.phono, FUSED, None if pendingGrowth else growth)
+        forms = A.growScopedForms(cand, decisions.withEntry(entry)) if growth else []
+        progress(f"  evaluating the merged rule `{cand.ortho}` ...")
+        fusedRule = R.Rule(cand.position, cand, [cand] + forms, score=0.0)
+        fused = numbersBest(fusedRule, pk, ctx, keypresses)
+        results = fusedRule.results
+        keyNote = ""
+        # the key search shortlists on a sample of the most frequent words and can miss a better key (found on `a|ha|â`:
+        # the parts' own keys scored +1,200 above the shortlist's best): judge the merge at least at the parts' keys
+        for a in alone:
+            if a.keys is not None and a.keys != fused.keys:
+                n2, res2 = evaluateAtKeys(fusedRule, a.keys, ctx)
+                if n2.score > fused.score:
+                    keyNote = f" (the search chose {fused.keys} = {fused.score:.0f}; the parts' keys {a.keys} are better)"
+                    fused, results = n2, res2
+        added = sorted((c for c in cand.carriers if c.rec.idx not in ruleIdx), key=lambda c: (-c.rec.frequency, c.rec.idx))
+        flags: list[str] = []
+        for sp in sorted({x for x in cand.ortho.split("|") if x not in own}):
+            other = _otherRuleWithSpelling(decisions, cand.position, sp, (cand.position, cand.ortho, cand.phono))
+            if other:
+                flags.append(f"similar rule: added spelling `{sp}` is already in rule {other}")
+        if len(rules) > 1:
+            flags.append(f"two decided rules on one key ({', '.join('`' + p.ortho + '`' for p in rules)})")
+        fusedRows = rowsOf(fusedRule, results,
+                           lambda c: "(existing words)" if c.rec.idx in ruleIdx else spellingOf(c))
+        rows = sorted((r for k, r in fusedRows.items() if k != "(existing words)"), key=lambda r: (-r.freq, r.label))
+        before = fusedRows.get("(existing words)", Row("(existing words)"))
+        notes = [
+            f"existing words: alone {aloneExisting.words} words, benefit {aloneExisting.benefit:.0f}, exc "
+            f"{aloneExisting.exceptions} (freq {aloneExisting.exceptionFreq:.0f}), fb {aloneExisting.fallbacks} -> merged "
+            f"{before.words} words, benefit {before.benefit:.0f}, exc {before.exceptions} (freq {before.exceptionFreq:.0f}), "
+            f"fb {before.fallbacks}; net change {before.net - aloneExisting.net:+.0f}"
+            + (f"; their exceptions: {', '.join(before.excExamples[:6])}" if before.excExamples else ""),
+            f"score with growth: parts alone {aloneSum:.0f} -> merged {fused.score:.0f}",
+            "keys: parts alone " + ", ".join(str(a.keys) for a in alone) + f" -> merged {fused.keys}" + keyNote]
+        return Proposal(
+            "fusion", cand.position, cand.ortho, cand.phono, f"fuse {cand.ortho}", len(added),
+            sum(c.rec.frequency for c in added),
+            fused.fallbackWords - sum(a.fallbackWords for a in alone),
+            fused.fallbackFreq - sum(a.fallbackFreq for a in alone),
+            fused.exceptionWords - sum(a.exceptionWords for a in alone),
+            fused.exceptionFreq - sum(a.exceptionFreq for a in alone), fused.score - aloneSum, entry, flags,
+            rows=rows, notes=notes, examples=[c.rec.ortho for c in added[:6]])
+
+    full = evaluateMerge(merged)
+    full.groups = {row.label: (row.label, "") for row in full.rows}
+    full.baseSpellings = own
+
+    def evaluateSubset(accepted: list[str]) -> Proposal:
+        """The merge of the rules' own spellings with only the `accepted` added spellings."""
+        keep = set(own) | set(accepted)
+        if keep == set(merged.ortho.split("|")):
+            return full
+        sub = A.Candidate(merged.position, 1, merged.phono, "|".join(sorted(keep)), isGeneralized=True,
+                          variants=sorted(keep), isAnchor=True, mergeParts=[
+                              k for k in merged.mergeParts if k[3] in keep],
+                          carriers=[c for c in merged.carriers if spellingOf(c) in keep])
+        A._finishStats(sub)
+        return evaluateMerge(sub)
+
+    full.evaluateSubset = evaluateSubset
+    return full
 
 
 # ── growth ─────────────────────────────────────────────────────────────────

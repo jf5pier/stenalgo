@@ -25,7 +25,9 @@ python dictionary.py   ... S8 ...
   S9b  python -m util.export_affix_dictionary   plover_stenalgo_affix_dictionary.json, affix_abbreviations.tsv
 
 hand-run: python -m util.review_affix_rules      proposes each pending item, y/n/s/q, writes affix_decisions.json after every answer
-          (never deletes the pickle); rerun `python -m util.build_affix_rules` (cheap) and repeat until nothing is pending.
+          (never deletes the pickle); growth is asked BEFORE fusion (a fusion is judged with its parts' decided growth; a fused merge
+          inherits its parts' growth on their own spellings); it reselects by itself after each pass (cached, about a minute) and
+          continues with what is newly pending, until nothing is pending, you quit, or a pass saved nothing.
 ```
 
 Cache convention (the same as `Dictionary.pickle` and `elicitation_answers.json`): the ~25-minute selection reruns only when its
@@ -114,13 +116,16 @@ python -m util.export_affix_dictionary      # S9b: also the last step of `python
 - An abbreviation exists only if its outline equals no outline of the stable theory (all words, all readings) and no more frequent
   spelling's abbreviation. It keeps the word's own star/hash and feature marks, and never adds a mark, so it cannot disturb the theory.
   The exporter also fails if one collides with `plover_stenalgo_dictionary.json`.
-- Result on the current lexicon (2026-10-01, after the user accepted the new selection): 71,658 abbreviations for 79,814 carrier words;
-  142 carriers have no allowed form and 1,636 lost a shared outline to a more frequent spelling; strokes saved x frequency = 114,553.
-  The selection now includes the anchor-alone rules `a`, `co+col+com+con+cor` and `ma` (formerly infeasible under the generic
-  growth lattice) in place of `par`, `ger`, `cher`; their growth and fusions are PENDING (see the report). The main dictionary is
-  unchanged. Use it in Plover as a second dictionary of higher priority; remove it and nothing else changes.
+- Result on the current lexicon (2026-10-01, after the growth-before-fusion review): 72,204 abbreviations for 80,473 carrier words;
+  176 carriers have no allowed form and 1,643 lost a shared outline to a more frequent spelling; strokes saved x frequency = 116,720.
+  The selection includes the anchor-alone rules `a`, `co+col+com+con+cor` and `ma` in place of `par`, `ger`, `cher`; nothing is pending.
+  The main dictionary is unchanged. Use it in Plover as a second dictionary of higher priority; remove it and nothing else changes.
+- Key search (`scratch/keysearch_misses.py`, `scratch/wider_shortlist.py`, 2026-10-01): `chooseRuleKeypress` shortlists on the 2,000
+  most frequent carriers; with 5 finalists it missed the best key of 3 of the 15 rules that exceed the sample (`a|ah|ha|hâ|â` +3%,
+  `am|an|...` +2%, `de|des|dé|déh` +7%; the best keys ranked 25th, 40th and 6th on the sample). `MAX_ALTERNATIVES` is now 30 (part of
+  the cache fingerprint); the finalists cost a few seconds per rule. Not proven exhaustive.
 
-Timings (2026-10-01): full S9a selection 1,221-1,345 s (30 exact rule evaluations, ~40 s each); reselection after one changed verdict
+Timings (2026-10-01): full S9a selection 1,214-1,345 s (30 exact rule evaluations, ~40 s each); reselection after one changed verdict
 36-43 s (1 rule re-evaluated, 29 from the cache, result identical to the full run); unchanged decisions, pickle present: under 1 s;
 S9b 16 s. Two full runs under different `PYTHONHASHSEED` give byte-identical `affix_rules.json` and report.
 

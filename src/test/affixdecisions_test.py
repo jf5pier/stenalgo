@@ -33,11 +33,23 @@ class TestDecisionsFile:
     def test_the_committed_file_holds_the_thirty_decided_anchors(self):
         d = loadDecisions()
         decided = [e for e in d.entries.values() if e.verdict != APART]
-        assert len(decided) == 34                                  # the 30 rules' anchors + 4 approved fusions
-        assert sum(1 for e in d.entries.values() if e.verdict == APART) == 7
+        assert len(decided) == 39                                  # the 30 rules' anchors + the approved fusions
+        assert sum(1 for e in d.entries.values() if e.verdict == APART) == 8
         assert d.growthForms(PREFIX, "re|reh", "R°") == []          # no growth
         assert d.growthForms(PREFIX, "nonexistent", "x") is None    # no decision
         assert d.growthForms(SUFFIX, "man|ment", "m@") is None or d.fusionVerdict(SUFFIX, "man|ment", "m@") == APART
+
+    def test_a_fused_merge_without_growth_inherits_its_parts_growth_on_their_own_spellings(self):
+        from src.affixdecisions import ScopeForm
+        import re
+        form = ScopeForm("RE", None, re.compile("RE"), None)
+        d = Decisions([
+            AnchorDecision(PREFIX, "a", "a", SINGLE, [form]),
+            AnchorDecision(PREFIX, "a|ha", "a", FUSED, None),
+            AnchorDecision(PREFIX, "b|hb", "b", FUSED, None)])
+        (inherited,) = d.growthForms(PREFIX, "a|ha", "a")
+        assert inherited.anchors == frozenset({"a"}) and inherited.label == "RE"
+        assert d.growthForms(PREFIX, "b|hb", "b") is None       # no part has growth: still undecided
 
     def test_round_trip_and_atomic_save(self, tmp_path):
         d = loadDecisions()
