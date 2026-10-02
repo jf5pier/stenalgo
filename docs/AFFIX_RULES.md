@@ -8,7 +8,7 @@ Nothing in the phonetic theory, the disambiguated theory or the main Plover dict
 An **affix rule** puts a frequent affix syllable (`re-`, `-ment`, `-tion`...) on ONE dedicated keypress that is
 merged into the neighbouring syllable's stroke, so a word such as `regarder` saves a stroke. The generator
 finds the candidate rules, a budgeted selection keeps 30, and every rule gets the keypress that saves the most.
-Vocabulary: [GLOSSARY.md](GLOSSARY.md) ("Affix ..." entries). Design history (historical, superseded where they differ):
+Vocabulary: [GLOSSARY.md](GLOSSARY.md) ("Affix ..." entries). Philosophy, design choices and algorithms: [AFFIX_DESIGN.md](AFFIX_DESIGN.md). Design history (historical, superseded where they differ):
 `DESIGN_2026-09-27-affix-rule-selection.md`, `PLAN_2026-09-28-affix-single-generator-rewrite.md`,
 `PLAN_2026-10-01-affix-pipeline-implementation.md` (this implementation), the `RESUME_2026-09-*` notes.
 
