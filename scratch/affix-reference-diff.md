@@ -13,7 +13,7 @@
 | ex | prefix | 804 (#96) | 661 | 0.0% | 0.193 | L#14 M#28 | SELECTED |
 | extra | prefix | - | - | - | - | - | no k=1 anchor; best grown node freq 59, 112 carriers (not a root by design) |
 | in | prefix | 4397 (#12) | 4820 | 0.0% | 0.461 | L#4 M#5 H#5 | SELECTED |
-| inter | prefix | - | - | - | - | - | no k=1 anchor; best grown node freq 197, 466 carriers (not a root by design) |
+| inter | prefix | - | - | - | - | - | no k=1 anchor; best grown node freq 197, 468 carriers (not a root by design) |
 | intra | prefix | - | - | - | - | - | no k=1 anchor; best grown node freq 2, 20 carriers (not a root by design) |
 | mé | prefix | 1098 (#74) | 1030 | 0.0% | 0.348 | - | candidate unselected: pseudo-affix attested 0.35 |
 | morpho | prefix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
@@ -41,8 +41,8 @@
 | euse | suffix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
 | eux | suffix | 55 (#652) | 11 | 0.0% | 1.000 | - | candidate unselected: value too low vs. the top 30 |
 | euse | suffix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
-| ien | suffix | 4 (#1643) | 29 | 0.0% | 0.091 | - | candidate unselected: pseudo-affix attested 0.09 |
-| ienne | suffix | 0 (#1971) | 3 | 0.0% | 0.500 | - | candidate unselected: value too low vs. the top 30 |
+| ien | suffix | 4 (#1642) | 29 | 0.0% | 0.091 | - | candidate unselected: pseudo-affix attested 0.09 |
+| ienne | suffix | 0 (#1969) | 3 | 0.0% | 0.500 | - | candidate unselected: value too low vs. the top 30 |
 | ier | suffix | 7 (#1454) | 5 | 0.0% | 1.000 | L#9~ | inside a grown form of another rule |
 | ière | suffix | 14 (#1212) | 21 | 0.0% | 0.830 | - | candidate unselected: value too low vs. the top 30 |
 | if | suffix | 6 (#1500) | 6 | 0.0% | 0.000 | - | candidate unselected: pseudo-affix attested 0.00 |
@@ -75,23 +75,23 @@
 | uel W*EL | suffix | - | - | - | - | - | no k=1 anchor; best grown node freq 59, 42 carriers (not a root by design) |
 | el *EL | suffix | 89 (#497) | 60 | 0.0% | 0.493 | - | candidate unselected: pseudo-affix attested 0.49 |
 | teur *RT/RT | suffix | 1214 (#28) | 1259 | 0.0% | 0.888 | L#13 M#22 | SELECTED |
-| trice *RTS/RTS | suffix | 20 (#1059) | 22 | 0.0% | 0.890 | - | candidate unselected: value too low vs. the top 30 |
+| trice *RTS/RTS | suffix | 20 (#1058) | 22 | 0.0% | 0.890 | - | candidate unselected: value too low vs. the top 30 |
 | oine O*IB | suffix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
-| ien AEN | suffix | 4 (#1643) | 29 | 0.0% | 0.091 | - | candidate unselected: pseudo-affix attested 0.09 |
-| ienne AEB | suffix | 0 (#1971) | 3 | 0.0% | 0.500 | - | candidate unselected: value too low vs. the top 30 |
+| ien AEN | suffix | 4 (#1642) | 29 | 0.0% | 0.091 | - | candidate unselected: pseudo-affix attested 0.09 |
+| ienne AEB | suffix | 0 (#1969) | 3 | 0.0% | 0.500 | - | candidate unselected: value too low vs. the top 30 |
 | ouine AOUB | suffix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
-| sion -GZ | suffix | 4085 (#5) | 2355 | 0.0% | 0.834 | L#2 M#2 | SELECTED |
+| sion -GZ | suffix | 4091 (#5) | 2365 | 0.0% | 0.835 | L#2 M#2 | SELECTED |
 | zon -GZ | suffix | 794 (#57) | 113 | 0.0% | 0.909 | - | candidate unselected: value too low vs. the top 30 |
 | zion -GZ | suffix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
-| cienne -GZ | suffix | 1 (#1853) | 10 | 0.0% | 1.000 | - | candidate unselected: value too low vs. the top 30 |
+| cienne -GZ | suffix | 1 (#1852) | 10 | 0.0% | 1.000 | - | candidate unselected: value too low vs. the top 30 |
 | tionne -GZ | suffix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
 | zionne -GZ | suffix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
 | ance -NS | suffix | 65 (#598) | 39 | 0.0% | 0.646 | - | candidate unselected: value too low vs. the top 30 |
 | ence -NS | suffix | 65 (#598) | 39 | 0.0% | 0.646 | - | candidate unselected: value too low vs. the top 30 |
 | ande -ND | suffix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
 | cte -KT | suffix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
-| ssion -GS | suffix | 4085 (#5) | 2355 | 0.0% | 0.834 | L#2 M#2 | SELECTED |
-| tion -GS | suffix | 4085 (#5) | 2355 | 0.0% | 0.834 | L#2 M#2 H#6 | SELECTED |
+| ssion -GS | suffix | 4091 (#5) | 2365 | 0.0% | 0.835 | L#2 M#2 | SELECTED |
+| tion -GS | suffix | 4091 (#5) | 2365 | 0.0% | 0.835 | L#2 M#2 H#6 | SELECTED |
 | cial -GS | suffix | 134 (#375) | 42 | 0.0% | 0.739 | - | candidate unselected: value too low vs. the top 30 |
 | tial -GS | suffix | 25 (#980) | 26 | 0.0% | 0.974 | - | candidate unselected: value too low vs. the top 30 |
 | ciel -GS | suffix | 100 (#462) | 145 | 0.0% | 1.000 | - | candidate unselected: value too low vs. the top 30 |
@@ -108,7 +108,7 @@
 | ive *IF | suffix | - | - | - | - | - | no k=1 anchor; best grown node freq 77, 49 carriers (not a root by design) |
 | ntion -PBGS | suffix | - | - | - | - | - | no k=1 anchor; best grown node freq 380, 15 carriers (not a root by design) |
 | nction -PBGS | suffix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
-| ction *BGS | suffix | 20 (#1047) | 27 | 0.0% | 0.999 | - | candidate unselected: value too low vs. the top 30 |
+| ction *BGS | suffix | - | - | - | - | - | no k=1 anchor; best grown node freq 63, 11 carriers (not a root by design) |
 | ition IGZ | suffix | - | - | - | - | - | no k=1 anchor; best grown node freq 154, 47 carriers (not a root by design) |
 | itionne IGZ | suffix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
 | tre -TS | suffix | - | - | - | - | - | no k=1 anchor; best grown node freq 4332, 2461 carriers (not a root by design) |
@@ -132,7 +132,7 @@
 | bité -BT | suffix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
 | bilité -BLT | suffix | - | - | - | - | - | no k=1 anchor; best grown node freq 157, 310 carriers (not a root by design) |
 | ral -RL | suffix | 251 (#183) | 191 | 0.0% | 0.864 | - | candidate unselected: value too low vs. the top 30 |
-| bal -BL | suffix | 17 (#1114) | 30 | 0.0% | 0.947 | - | candidate unselected: value too low vs. the top 30 |
+| bal -BL | suffix | 17 (#1113) | 30 | 0.0% | 0.947 | - | candidate unselected: value too low vs. the top 30 |
 | ble -BL | suffix | 12 (#1251) | 3 | 0.0% | 1.000 | - | candidate unselected: value too low vs. the top 30 |
 | rbal -RBL | suffix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
 | rible -RBL | suffix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
@@ -152,7 +152,7 @@
 | nal -NL | suffix | 286 (#157) | 241 | 0.0% | 0.796 | - | candidate unselected: value too low vs. the top 30 |
 | aux O*EX | suffix | - | - | - | - | - | no k=1 anchor; best grown node freq 13, 27 carriers (not a root by design) |
 | sité ST*E | suffix | - | - | - | - | - | no k=1 anchor; best grown node freq 138, 142 carriers (not a root by design) |
-| ption -PGS | suffix | 1 (#1916) | 5 | 0.0% | 0.951 | - | candidate unselected: value too low vs. the top 30 |
+| ption -PGS | suffix | - | - | - | - | - | no k=1 anchor; best grown node freq 33, 14 carriers (not a root by design) |
 | igé EG | suffix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
 | iger *EG | suffix | - | - | - | - | - | no k=1 anchor; best grown node freq 36, 25 carriers (not a root by design) |
 | ce -SZ | suffix | 6 (#1473) | 23 | 0.0% | 0.582 | - | candidate unselected: value too low vs. the top 30 |
@@ -176,13 +176,13 @@
 | dé STK- | prefix | 5131 (#10) | 10383 | 0.0% | 0.626 | H#7 | SELECTED |
 | com K* | prefix | - | - | - | - | - | no k=1 anchor; best grown node freq 430, 107 carriers (not a root by design) |
 | comm KM- | prefix | - | - | - | - | - | no k=1 anchor; best grown node freq 430, 107 carriers (not a root by design) |
-| ent SPW | prefix | - | - | - | - | - | no k=1 anchor; best grown node freq 106, 300 carriers (not a root by design) |
+| ent SPW | prefix | - | - | - | - | - | no k=1 anchor; best grown node freq 106, 299 carriers (not a root by design) |
 | int SPW | prefix | - | - | - | - | L#4~ M#5~ H#5~ | inside a grown form of another rule |
 | end SPW | prefix | - | - | - | - | - | no k=1 anchor; best grown node freq 35, 34 carriers (not a root by design) |
 | ind SPW | prefix | - | - | - | - | - | no k=1 anchor; best grown node freq 73, 165 carriers (not a root by design) |
 | super SP-R | prefix | - | - | - | - | - | no k=1 anchor; best grown node freq 45, 115 carriers (not a root by design) |
 | multi MULT | prefix | - | - | - | - | - | no anchor (below pool thresholds / not a single-syllable anchor) |
-| inter INTS | prefix | - | - | - | - | - | no k=1 anchor; best grown node freq 197, 466 carriers (not a root by design) |
+| inter INTS | prefix | - | - | - | - | - | no k=1 anchor; best grown node freq 197, 468 carriers (not a root by design) |
 | trans TRANS | prefix | 198 (#277) | 487 | 0.0% | 0.882 | - | candidate unselected: value too low vs. the top 30 |
 | ex AIBGS | prefix | 804 (#96) | 661 | 0.0% | 0.193 | L#14 M#28 | SELECTED |
 | exce KP- | prefix | - | - | - | - | - | no k=1 anchor; best grown node freq 100, 20 carriers (not a root by design) |

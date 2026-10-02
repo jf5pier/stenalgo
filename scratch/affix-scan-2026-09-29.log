@@ -1,0 +1,24 @@
+records: 171349 extracted, 381 skipped (44s)
+candidates: 13619 (14s)
+pool 13619 nodes, 3087 anchors; variant merges: 1101 kept, 13 dropped by the conflict test (1570 proposed); key-collision renames 394, folded duplicates 3363, generated 90092; GROWTH_MIN_EXPAND=5.0; Part A 14s, peak RSS 1249 MB
+1751 legal keypresses
+=== sweep L: EXCEPTION_ALPHA=1.0 EXCLUSION_COST=5.0 FORM_COST=10.0
+variant rivals: 4 fused, 23 apart, 874 out of reach; 2179 anchors remain (1536s)
+phase 3: 30 rules selected, 74 roots exact-evaluated (429s)
+phase 3 swap pass: done (1s)
+phase 4: 30 rules bound (1s)
+wrote scratch/affix-sweep/L/affix-rules.tsv, scratch/affix-sweep/L/affix-rules-report.md
+=== sweep M: EXCEPTION_ALPHA=1.0 EXCLUSION_COST=50.0 FORM_COST=100.0
+variant rivals: 4 fused, 23 apart, 874 out of reach; 2179 anchors remain (1561s)
+phase 3: 30 rules selected, 54 roots exact-evaluated (418s)
+phase 3 swap pass: done (1s)
+phase 4: 30 rules bound (1s)
+wrote scratch/affix-sweep/M/affix-rules.tsv, scratch/affix-sweep/M/affix-rules-report.md
+=== sweep H: EXCEPTION_ALPHA=2.0 EXCLUSION_COST=150.0 FORM_COST=300.0
+variant rivals: 13 fused, 14 apart, 874 out of reach; 2162 anchors remain (1406s)
+phase 3: 30 rules selected, 37 roots exact-evaluated (225s)
+phase 3 swap pass: done (3s)
+phase 4: 30 rules bound (4s)
+wrote scratch/affix-sweep/H/affix-rules.tsv, scratch/affix-sweep/H/affix-rules-report.md
+wrote scratch/affix-sweep/comparison.md
+total 5652s

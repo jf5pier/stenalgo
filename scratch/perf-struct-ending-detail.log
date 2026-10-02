@@ -1,0 +1,44 @@
+======================================================================
+Instrumentation: deriveConjugationEndingTables detail
+======================================================================
+[0.0s] Loading...
+[1.3s] Loaded
+
+[1.3s] Phase 1: attestedInfinitiveWordByLemme...
+  Found 5239 infinitive lemmes in 0.049s
+
+[1.3s] Phase 2: Group infinitives by template...
+  Grouped into 130 templates in 0.006s
+    aim:er: 3592 infinitives
+    fin:ir: 257 infinitives
+    man:ger: 142 infinitives
+    pla:cer: 91 infinitives
+    réf:érer: 72 infinitives
+    étudi:er: 48 infinitives
+    ten:dre: 41 infinitives
+    netto:yer: 39 infinitives
+    app:eler: 32 infinitives
+    j:eter: 28 infinitives
+
+[1.3s] Phase 3: Derive infinitive suffixes...
+  Derived 390 suffix entries in 0.006s
+
+[1.4s] Phase 4: Scan theory for ending candidates...
+  Scanned 90484 verb words, processed 81059 for candidates in 1.145s
+  Collected 254745 candidate endings
+
+[2.5s] Phase 5: Compute mode for slot endings...
+  Processed 8997 slot ending keys in 0.046s
+
+======================================================================
+Summary of deriveConjugationEndingTables
+======================================================================
+Phase 1 (infinitiveByLemme): 0.049s
+Phase 2 (grouping): 0.006s
+Phase 3 (infinitive suffixes): 0.006s
+Phase 4 (theory scan): 1.145s [MAIN WORKLOAD]
+Phase 5 (mode computation): 0.046s
+Total: 1.252s
+
+[2.5s] Running actual function...
+  Actual function: 0.401s

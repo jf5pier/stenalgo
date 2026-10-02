@@ -16,6 +16,10 @@ lexicon built out of Lexique383 [[1]](#1) and LexiqueInfra [[3]](#3).
   feature discriminating strokes from the elicited feature sets ([spec](docs/specs/discriminating-features.md)).
 - **Different-lemma homophones done** — lemma-homophones (`ver`/`vert`/`verre`) get star/hash
   marks on the reserved keys ([spec](docs/specs/star-hash-marking.md)).
+- **Affix abbreviations (optional layer, Affix Abbreviation Building (S9), branch `affix-abbreviation-rules`)** — 30 affix rules on dedicated keypresses give
+  72,204 words a shorter outline in a separate Plover dictionary (`plover_stenalgo_affix_dictionary.json`); the theory is unchanged and the long outlines stay
+  as the fallback. Part of `python dictionary.py`; the growth and fusion verdicts are committed in `affix_decisions.json` and decided with the interactive
+  `python -m util.review_affix_rules`. See [docs/AFFIX_RULES.md](docs/AFFIX_RULES.md) (reference) and [docs/AFFIX_DESIGN.md](docs/AFFIX_DESIGN.md) (why).
 - **Not done yet** — dictionary densification (conjugation tables, prefixes) and the personal
   theory layer; see [ROADMAP.md](ROADMAP.md).
 

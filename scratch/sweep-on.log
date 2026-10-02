@@ -1,0 +1,21 @@
+1751 legal keypresses
+=== sweep L: EXCEPTION_ALPHA=1.0 EXCLUSION_COST=5.0 FORM_COST=10.0
+variant rivals: 5 fused, 22 apart, 874 out of reach; 2178 anchors remain (1871s)
+phase 3: 30 rules selected, 66 roots exact-evaluated (442s)
+phase 3 swap pass: done (1s)
+phase 4: 30 rules bound (0s)
+wrote scratch/affix-sweep-partial/L/affix-rules.tsv, scratch/affix-sweep-partial/L/affix-rules-report.md
+=== sweep M: EXCEPTION_ALPHA=1.0 EXCLUSION_COST=50.0 FORM_COST=100.0
+variant rivals: 7 fused, 20 apart, 874 out of reach; 2178 anchors remain (1527s)
+phase 3: 30 rules selected, 48 roots exact-evaluated (311s)
+phase 3 swap pass: done (1s)
+phase 4: 30 rules bound (0s)
+wrote scratch/affix-sweep-partial/M/affix-rules.tsv, scratch/affix-sweep-partial/M/affix-rules-report.md
+=== sweep H: EXCEPTION_ALPHA=2.0 EXCLUSION_COST=150.0 FORM_COST=300.0
+variant rivals: 14 fused, 13 apart, 874 out of reach; 2161 anchors remain (1325s)
+phase 3: 30 rules selected, 36 roots exact-evaluated (180s)
+phase 3 swap pass: done (1s)
+phase 4: 30 rules bound (2s)
+wrote scratch/affix-sweep-partial/H/affix-rules.tsv, scratch/affix-sweep-partial/H/affix-rules-report.md
+wrote scratch/affix-sweep-partial/comparison.md
+total 5667s

@@ -1,0 +1,21 @@
+rank	family	strict_words	strict_freq	strict_freq_x_strokes_saved	loose_words	loose_freq	loose_freq_x_strokes_saved	members (chord affix) by strict freq
+1	suffix -ité (ité rité ilité bilité bité vité cité sité)	855	901.4	1015.2	1575	1549.6	1690.1	-RT rité -LT ilité -FT vité -BLT bilité -FT cité ST*E sité -BT bité ITD ité
+2	suffix -tion (tion ssion sion ration cation lation ciation ction ntion ition ption rtion ...)	537	589.1	589.1	1219	2181.5	2181.5	-RGS ration -BGS cation -LGS lation SRAGS ciation IGZ itionne IGZ ition -RGS rtion -PGS ption -PBGS ntion -PBGS nction -GZ zon -GZ zionne -GZ zion -GZ tionne -GZ sion -GZ cienne -GS tion -GS tiel -GS tial -GS ssion -GS cien -GS ciel -GS cial *BGS ction
+3	prefix Latin (inter super multi trans re)	897	367.5	367.5	1092	477.3	572.9	INTS inter SP-R super MULT multi TRANS trans R- re
+4	prefix ex- (ex exce exci)	80	151.3	151.3	1231	1568.5	1568.5	KP- exce KP- exci AIBGS ex -BGS ex
+5	suffix -ment (ment vement)	106	127.8	127.8	106	127.8	127.8	-FPLT vement -PLT ment
+6	suffix -logie (logie logique logiste logue)	334	101.1	101.1	336	101.5	101.5	LO*IG logie LO*IK logique LO*IS logiste LO*EG logue
+7	suffix verb -ise/-iger (lise bilise ralise igé iger éner)	37	11.4	11.4	137	147.2	147.2	-BLZ bilise EG igé *EG iger -RLZ ralise EBS éner -LZ lise
+8	prefix con-/com- (con cons conn com comm coll corr)	0	0.0	0.0	1468	4720.5	4720.5	STPH- conn KR-/KL- corr KR-/KL- coll KOENS cons KOEN con KM- comm K* com
+9	prefix nasal+consonant (ent end int ind in ins ens)	0	0.0	0.0	4338	4239.2	4239.2	TPH- in STPH- ins STPH- ens SPW int SPW ind SPW ent SPW end
+10	prefix consonant+en (fin fen ten tén ven vén)	0	0.0	0.0	354	2381.4	2381.4	WH- fin WH- fen VH- vén VH- ven TH- tén TH- ten
+11	prefix vowel+m+b/p (amp amb emp emb imp imb omp omb ump umb)	0	0.0	0.0	2556	2107.2	2107.2	KPW- ump KPW- umb KPW- omp KPW- omb KPW- imp KPW- imb KPW- emp KPW- emb KPW- amp KPW- amb
+12	prefix dé- (dé dés déc)	0	0.0	0.0	2866	1679.3	1679.3	STK- dé STK dés STK déc DAOEZ dés
+13	suffix -ier/-ien (ier ière ien ienne ième)	0	0.0	0.0	145	332.9	332.9	AER ier AEN ien AEB ienne A*ER ière A*EN ien A*EM ième
+14	suffix consonant clusters (tre taire ture fre vre fer vaire erve ste sque ce th ille reille gnon cis ci rbe rne)	0	0.0	0.0	2	59.1	59.1	HO*N gnon -TS ture -TS tre -TS taire -SZ ce -RLZ reille -RB rne -RB rbe -RB cis -RB ci -LZ ille -GT th -FRB vaire -FRB fer -FRB erve -FR vre -FR fre -FK sque *S ste
+15	suffix -al/-el/-ble (ral bal ble rbal rible nal val vail vel el elle uel ette)	0	0.0	0.0	11	20.4	20.4	W*EL uel -RL ral -RBL rible -RBL rbal -NL nal -FL vel -FL val -FL vail -BL ble -BL bal *T ette *L elle *EL el
+16	suffix vowel/glide endings (on ène aire aux tude oine ouine ué oué quel)	0	0.0	0.0	43	6.9	6.9	W*E ué W*E oué O*IB oine O*EX aux AOUB ouine A*IR aire -TD tude -BLG quelle -BLG quel *N on *EB ène
+17	suffix -eur (teur trice deur gueur neur eur peur leur)	0	0.0	0.0	0	0.0	0.0	AO*R eur -RP peur -RN neur -RL leur -RG gueur -RD deur *RTS/RTS trice *RT/RT teur
+18	suffix -ance/-ande/-cte	0	0.0	0.0	0	0.0	0.0	-NS ence -NS ance -ND ande -KT cte
+19	suffix -if/-ive	0	0.0	0.0	0	0.0	0.0	*IFL if *IF ive
+20	suffix other	0	0.0	0.0	0	0.0	0.0	-FRS voir

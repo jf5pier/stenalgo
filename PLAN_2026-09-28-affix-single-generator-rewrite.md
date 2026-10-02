@@ -1,3 +1,5 @@
+> **Status 2026-10-01: HISTORICAL.** Kept for its reasoning. The current description is `docs/AFFIX_RULES.md`; the state is `RESUME_2026-10-01-option-c-engine.md`; the next phase (pipeline integration) is `PLAN_2026-10-01-affix-pipeline-integration.md`.
+
 # Plan: single-generator affix lattice, no A7, relaxed thresholds, weight sweep (2026-09-28)
 
 **Audience: the model (Sonnet) that implements this after a `/clear`.** The decisions in §1 are

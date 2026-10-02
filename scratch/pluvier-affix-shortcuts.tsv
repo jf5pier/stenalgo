@@ -1,0 +1,152 @@
+rank	chord	position	affix	lesson	note	matched_words	matched_freq	strict_words	strict_freq	strict_freq_x_strokes_saved	loose_words	loose_freq	loose_freq_x_strokes_saved	top_strict_examples
+1	-RT	suffix	rité	46		149	462.4	129	447.8	447.8	149	462.4	462.4	vérité sécurité autorité obscurité autorités charité
+2	INTS	prefix	inter	30		659	329.7	651	308.8	308.8	659	329.7	425.2	interdit interroger interrompre intervention intervenir interrogatoire
+3	-RGS	suffix	ration	33		240	296.1	181	237.8	237.8	240	296.1	296.1	opération déclaration génération opérations séparation respiration
+4	-BGS	suffix	cation	29	X	200	169.7	199	169.7	169.7	200	169.7	169.7	explication éducation communication vocation explications identification
+5	-LGS	suffix	lation	49		175	176.6	132	159.5	159.5	175	176.6	176.6	relation relations population circulation révélation consolation
+6	-LT	suffix	ilité	45		299	140.6	298	140.5	140.5	299	140.6	281.1	responsabilité possibilité culpabilité responsabilités possibilités sensibilité
+7	-FT	suffix	vité	31		118	132.2	118	132.2	132.2	118	132.2	132.2	invité invités activité invité activités gravité
+8	-FPLT	suffix	vement	41		106	127.8	106	127.8	127.8	106	127.8	127.8	mouvement effectivement mouvements définitivement attentivement enlèvement
+9	-BLT	suffix	bilité	45		244	113.8	244	113.8	227.6	244	113.8	227.6	responsabilité possibilité culpabilité responsabilités possibilités sensibilité
+10	KP-	prefix	exce	54		73	152.2	26	106.5	106.5	73	152.2	152.2	excellent excellence excellente excellentes excellents excessive
+11	-FT	suffix	cité	31		160	104.1	146	86.4	86.4	160	104.1	104.1	électricité publicité capacité capacités complicité efficacité
+12	ST*E	suffix	sité	51		124	91.7	120	85.6	85.6	124	91.7	91.7	université curiosité générosité visité hésité intensité
+13	LO*IG	suffix	logie	49		151	59.2	151	59.2	59.2	151	59.2	59.2	technologie psychologie biologie technologies idéologie mythologie
+14	SP-R	prefix	super	30		130	108.9	125	45.7	45.7	130	108.9	109.1	supermarché superstition superstitions superficiel superstitieux superficielle
+15	KP-	prefix	exci	54		63	58.2	54	44.9	44.9	63	58.2	58.2	excitant excité excitation excité excitée excitante
+16	LO*IK	suffix	logique	49		143	37.6	141	37.1	37.1	143	37.6	37.6	psychologique biologique biologiques écologique idéologique psychologiques
+17	SRAGS	suffix	ciation	44		25	22.2	25	22.2	22.2	25	22.2	22.2	association négociations négociation associations appréciation dénonciation
+18	MULT	prefix	multi	30		125	19.8	121	13.0	13.0	125	19.8	19.8	multiplier multitude multiplient multinationales multiplie multiplié
+19	-BT	suffix	bité	45		22	7.4	22	7.4	7.4	22	7.4	7.4	habité habité inhabité habités exorbités habités
+20	LO*IS	suffix	logiste	49		42	4.8	42	4.8	4.8	42	4.8	4.8	biologiste entomologiste écologiste pathologiste écologistes écologiste
+21	-BLZ	suffix	bilise	56		26	4.5	26	4.5	4.5	26	4.5	4.5	culpabilise stabilise immobilise mobilise culpabilises déstabilise
+22	EG	suffix	igé	56		64	99.8	2	3.6	3.6	64	99.8	99.8	exigé exigés
+23	*EG	suffix	iger	56		23	41.5	1	3.1	3.1	23	41.5	41.5	exiger
+24	ITD	suffix	ité	45		1575	1549.6	22	1.4	1.4	1575	1549.6	1549.6	spontanéité étanchéité velléités velléité déités homogénéité
+25	-RLZ	suffix	ralise	50	reille / ralise	14	0.8	8	0.2	0.2	14	0.8	0.8	généralise démoralise naturalises naturalise moralises moralise
+26	K*	prefix	com	28		1377	8239.1	0	0.0	0.0	478	2728.4	2728.4	
+27	KM-	prefix	comm	28		440	5553.6	0	0.0	0.0	438	2649.9	2649.9	
+28	SPW	prefix	ent	30		969	2128.2	0	0.0	0.0	961	1657.4	1657.4	
+29	AIBGS	prefix	ex	54		1885	2371.8	0	0.0	0.0	1231	1568.5	1568.5	
+30	-BGS	prefix	ex (rest ^[^aeiouyàâäéèêëîïôöùûü])	54	ex + consonant (chord shared with the cation suffix)	1330	1577.1	0	0.0	0.0	1229	1568.4	1568.4	
+31	VH-	prefix	ven	53		248	1744.4	0	0.0	0.0	37	1244.6	1244.6	
+32	KOEN	prefix	con	26		3384	4774.8	0	0.0	0.0	101	1222.0	1222.0	
+33	STPH-	prefix	conn	39	conn / ins,ens + vowel	99	1235.5	0	0.0	0.0	95	1221.8	1221.8	
+34	KPW-	prefix	imp	57	vowel + mp/mb	788	1162.0	0	0.0	0.0	788	1162.0	1162.0	
+35	SPW	prefix	int	30		1213	1081.4	0	0.0	0.0	1213	1081.4	1081.4	
+36	STK	prefix	dés (rest ^[aeiouyàâäéèêëîïôöùûü])	27	followed by a vowel	1252	940.9	0	0.0	0.0	1252	940.9	940.9	
+37	WH-	prefix	fin	51		156	726.7	0	0.0	0.0	144	703.0	703.0	
+38	STK	prefix	déc (rest ^[aeiouyàâäéèêëîïôöùûü])	27	followed by a vowel	1467	697.1	0	0.0	0.0	1467	697.1	697.1	
+39	*BGS	suffix	ction	33		244	569.6	0	0.0	0.0	239	564.0	564.0	
+40	STPH-	prefix	ens (rest ^[aeiouyàâäéèêëîïôöùûü])	39	conn / ins,ens + vowel	284	475.6	0	0.0	0.0	284	475.6	475.6	
+41	KOENS	prefix	cons	39		707	599.5	0	0.0	0.0	472	452.6	452.6	
+42	-PBGS	suffix	ntion	33		62	425.2	0	0.0	0.0	62	425.2	425.2	
+43	KPW-	prefix	emp	57	vowel + mp/mb	795	504.4	0	0.0	0.0	752	417.5	417.5	
+44	IGZ	suffix	ition	33		164	402.0	0	0.0	0.0	164	402.0	402.0	
+45	KPW-	prefix	emb	57	vowel + mp/mb	721	336.0	0	0.0	0.0	717	336.0	336.0	
+46	SPW	prefix	end	30		353	315.1	0	0.0	0.0	353	315.1	315.1	
+47	TH-	prefix	ten	53		184	552.8	0	0.0	0.0	54	306.5	306.5	
+48	AER	suffix	ier	13	financier voilier caissier	1357	2752.1	0	0.0	0.0	98	270.8	270.8	
+49	SPW	prefix	ind	30		544	263.8	0	0.0	0.0	542	263.5	263.5	
+50	TPH-	prefix	in (rest ^[aeiouyàâäéèêëîïôöùûü])	59	in + vowel	583	231.1	0	0.0	0.0	583	231.1	231.1	
+51	STPH-	prefix	ins (rest ^[aeiouyàâäéèêëîïôöùûü])	39	conn / ins,ens + vowel	402	215.0	0	0.0	0.0	402	215.0	215.0	
+52	KR-/KL-	prefix	coll	40	co + rr/ll	229	237.4	0	0.0	0.0	224	207.9	207.9	
+53	KR-/KL-	prefix	corr	40	co + rr/ll	193	109.7	0	0.0	0.0	193	109.7	109.7	
+54	-PGS	suffix	ption	52		70	107.6	0	0.0	0.0	65	107.0	107.0	
+55	WH-	prefix	fen	51		105	104.9	0	0.0	0.0	15	91.9	91.9	
+56	KPW-	prefix	amb	57	vowel + mp/mb	86	93.1	0	0.0	0.0	75	91.4	91.4	
+57	KPW-	prefix	imb	57	vowel + mp/mb	63	71.4	0	0.0	0.0	63	71.4	71.4	
+58	-FK	suffix	sque	60		185	556.2	0	0.0	0.0	2	59.1	59.1	
+59	A*ER	suffix	ière	13	financière théière	633	1598.5	0	0.0	0.0	34	45.9	45.9	
+60	DAOEZ	prefix	dés (rest ^[^aeiouyàâäéèêëîïôöùûü])	47	not followed by a vowel	181	44.0	0	0.0	0.0	147	41.4	41.4	
+61	-PBGS	suffix	nction	33		25	35.5	0	0.0	0.0	25	35.5	35.5	
+62	KPW-	prefix	amp	57	vowel + mp/mb	89	26.4	0	0.0	0.0	87	25.1	25.1	
+63	TH-	prefix	tén	53		20	20.6	0	0.0	0.0	20	20.6	20.6	
+64	W*EL	suffix	uel	19		122	955.8	0	0.0	0.0	10	19.5	19.5	
+65	TRANS	prefix	trans	43		670	220.2	0	0.0	0.0	178	18.9	18.9	
+66	A*EM	suffix	ième	12	huitième seizième	88	156.6	0	0.0	0.0	3	15.8	15.8	
+67	VH-	prefix	vén	53		84	14.8	0	0.0	0.0	84	14.8	14.8	
+68	-RGS	suffix	rtion	33		28	13.4	0	0.0	0.0	28	13.4	13.4	
+69	W*E	suffix	ué	19		830	1021.0	0	0.0	0.0	43	6.9	6.9	
+70	W*E	suffix	oué	19		108	163.7	0	0.0	0.0	24	5.9	5.9	
+71	KPW-	prefix	omb	57	vowel + mp/mb	78	49.9	0	0.0	0.0	71	3.7	3.7	
+72	IGZ	suffix	itionne	33		19	1.7	0	0.0	0.0	19	1.7	1.7	
+73	-RBL	suffix	rbal	46		1	0.9	0	0.0	0.0	1	0.9	0.9	
+74	EBS	suffix	éner	33		10	0.6	0	0.0	0.0	10	0.6	0.6	
+75	AEN	suffix	ien	22		937	9695.7	0	0.0	0.0	5	0.2	0.2	
+76	A*EN	suffix	ien	22	orthographic variant	937	9695.7	0	0.0	0.0	5	0.2	0.2	
+77	-GS	suffix	tion	29		2423	3985.6	0	0.0	0.0	1	0.1	0.1	
+78	AEB	suffix	ienne	22		632	376.2	0	0.0	0.0	5	0.1	0.1	
+79	KPW-	prefix	umb	57	vowel + mp/mb	2	0.1	0	0.0	0.0	2	0.1	0.1	
+80	-BLG	suffix	quel	13	laquelle lequel séquelle	13	147.6	0	0.0	0.0	0	0.0	0.0	
+81	-BLG	suffix	quelle	13	laquelle lequel séquelle	12	133.3	0	0.0	0.0	0	0.0	0.0	
+82	-RP	suffix	peur	13	trappeur torpeur	55	28.9	0	0.0	0.0	0	0.0	0.0	
+83	-RL	suffix	leur	13	voleur malheur	295	1084.5	0	0.0	0.0	0	0.0	0.0	
+84	*N	suffix	on	14	Caron melon	10235	26295.2	0	0.0	0.0	0	0.0	0.0	
+85	*S	suffix	ste	14	piste poste liste	1410	2669.8	0	0.0	0.0	0	0.0	0.0	
+86	*T	suffix	ette	17	words in -ette	1000	2803.4	0	0.0	0.0	0	0.0	0.0	
+87	*EB	suffix	ène	19		282	451.1	0	0.0	0.0	0	0.0	0.0	
+88	*EL	suffix	el	21		639	2202.3	0	0.0	0.0	0	0.0	0.0	
+89	*RT/RT	suffix	teur	21		1271	1197.7	0	0.0	0.0	0	0.0	0.0	
+90	*RTS/RTS	suffix	trice	21		404	89.5	0	0.0	0.0	0	0.0	0.0	
+91	O*IB	suffix	oine	22		26	17.2	0	0.0	0.0	0	0.0	0.0	
+92	AOUB	suffix	ouine	22		26	8.7	0	0.0	0.0	0	0.0	0.0	
+93	-GZ	suffix	sion	22	sion/zon/zion/cienne	692	1032.1	0	0.0	0.0	0	0.0	0.0	
+94	-GZ	suffix	zon	22	sion/zon/zion/cienne	7	13.2	0	0.0	0.0	0	0.0	0.0	
+95	-GZ	suffix	zion	22	sion/zon/zion/cienne	2	0.0	0	0.0	0.0	0	0.0	0.0	
+96	-GZ	suffix	cienne	22	sion/zon/zion/cienne	79	38.0	0	0.0	0.0	0	0.0	0.0	
+97	-GZ	suffix	tionne	22	sion/zon/zion/cienne	76	36.2	0	0.0	0.0	0	0.0	0.0	
+98	-GZ	suffix	zionne	22	sion/zon/zion/cienne	0	0.0	0	0.0	0.0	0	0.0	0.0	
+99	-NS	suffix	ance	26	IPA ɑ̃s	405	1463.2	0	0.0	0.0	0	0.0	0.0	
+100	-NS	suffix	ence	26	IPA ɑ̃s	323	1145.4	0	0.0	0.0	0	0.0	0.0	
+101	-ND	suffix	ande	26		122	885.4	0	0.0	0.0	0	0.0	0.0	
+102	-KT	suffix	cte	26		139	189.9	0	0.0	0.0	0	0.0	0.0	
+103	-GS	suffix	ssion	29		403	525.1	0	0.0	0.0	0	0.0	0.0	
+104	-GS	suffix	cial	29		19	73.4	0	0.0	0.0	0	0.0	0.0	
+105	-GS	suffix	tial	29		13	11.4	0	0.0	0.0	0	0.0	0.0	
+106	-GS	suffix	ciel	29		23	24.1	0	0.0	0.0	0	0.0	0.0	
+107	-GS	suffix	tiel	29		53	42.7	0	0.0	0.0	0	0.0	0.0	
+108	-GS	suffix	cien	29		128	132.2	0	0.0	0.0	0	0.0	0.0	
+109	-RD	suffix	deur	31		150	154.7	0	0.0	0.0	0	0.0	0.0	
+110	-RG	suffix	gueur	31		28	20.4	0	0.0	0.0	0	0.0	0.0	
+111	-RN	suffix	neur	31		187	397.3	0	0.0	0.0	0	0.0	0.0	
+112	AO*R	suffix	eur	31		3055	6413.1	0	0.0	0.0	0	0.0	0.0	
+113	*IFL	suffix	if	32		731	464.9	0	0.0	0.0	0	0.0	0.0	
+114	*IF	suffix	ive	32		743	916.9	0	0.0	0.0	0	0.0	0.0	
+115	-TS	suffix	tre	33		650	10064.1	0	0.0	0.0	0	0.0	0.0	
+116	-TS	suffix	taire	33		259	306.9	0	0.0	0.0	0	0.0	0.0	
+117	-TS	suffix	ture	33		281	1005.7	0	0.0	0.0	0	0.0	0.0	
+118	A*IR	suffix	aire	33		1149	4437.9	0	0.0	0.0	0	0.0	0.0	
+119	-PLT	suffix	ment	41	mɑ̃	2992	7672.6	0	0.0	0.0	0	0.0	0.0	
+120	-TD	suffix	tude	37		72	241.1	0	0.0	0.0	0	0.0	0.0	
+121	*L	suffix	elle	38		777	3335.3	0	0.0	0.0	0	0.0	0.0	
+122	-RB	suffix	cis	38		46	53.4	0	0.0	0.0	0	0.0	0.0	
+123	-RB	suffix	ci	38		85	4230.5	0	0.0	0.0	0	0.0	0.0	
+124	-RB	suffix	rbe	38		83	151.2	0	0.0	0.0	0	0.0	0.0	
+125	-RB	suffix	rne	38		209	340.8	0	0.0	0.0	0	0.0	0.0	
+126	-RL	suffix	ral	46	(same chord as -RL leur)	100	232.6	0	0.0	0.0	0	0.0	0.0	
+127	-BL	suffix	bal	46		6	5.4	0	0.0	0.0	0	0.0	0.0	
+128	-BL	suffix	ble	46		1455	2959.0	0	0.0	0.0	0	0.0	0.0	
+129	-RBL	suffix	rible	46		8	156.1	0	0.0	0.0	0	0.0	0.0	
+130	-FRS	suffix	voir	47		45	2355.2	0	0.0	0.0	0	0.0	0.0	
+131	-GT	suffix	th	48		28	16.2	0	0.0	0.0	0	0.0	0.0	
+132	LO*EG	suffix	logue	49		141	50.2	0	0.0	0.0	0	0.0	0.0	
+133	-LZ	suffix	ille	50	ille / lise	824	3155.4	0	0.0	0.0	0	0.0	0.0	
+134	-LZ	suffix	lise	50	ille / lise	234	186.8	0	0.0	0.0	0	0.0	0.0	
+135	-RLZ	suffix	reille	50	reille / ralise	16	107.8	0	0.0	0.0	0	0.0	0.0	
+136	-NL	suffix	nal	51		106	249.3	0	0.0	0.0	0	0.0	0.0	
+137	O*EX	suffix	aux	51	plurals in aux	617	871.4	0	0.0	0.0	0	0.0	0.0	
+138	-SZ	suffix	ce	58	homonym distinguisher	1614	6556.8	0	0.0	0.0	0	0.0	0.0	
+139	HO*N	suffix	gnon	60		79	141.4	0	0.0	0.0	0	0.0	0.0	
+140	-FL	suffix	val	40		23	110.7	0	0.0	0.0	0	0.0	0.0	
+141	-FL	suffix	vail	40		2	367.4	0	0.0	0.0	0	0.0	0.0	
+142	-FL	suffix	vel	40		5	32.0	0	0.0	0.0	0	0.0	0.0	
+143	-FR	suffix	fre	43		48	208.9	0	0.0	0.0	0	0.0	0.0	
+144	-FR	suffix	vre	43		97	1229.2	0	0.0	0.0	0	0.0	0.0	
+145	-FRB	suffix	fer	43		45	152.0	0	0.0	0.0	0	0.0	0.0	
+146	-FRB	suffix	vaire	43		13	3.7	0	0.0	0.0	0	0.0	0.0	
+147	-FRB	suffix	erve	43		27	87.0	0	0.0	0.0	0	0.0	0.0	
+148	STK-	prefix	dé	56		10476	5802.4	0	0.0	0.0	0	0.0	0.0	
+149	KPW-	prefix	omp	57	vowel + mp/mb	1	0.0	0	0.0	0.0	1	0.0	0.0	
+150	KPW-	prefix	ump	57	vowel + mp/mb	0	0.0	0	0.0	0.0	0	0.0	0.0	
+151	R-	prefix	re	13	re- prefix	7720	10424.5	0	0.0	0.0	0	0.0	0.0	

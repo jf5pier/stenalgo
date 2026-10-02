@@ -1,0 +1,11 @@
+Loading Morphalou from morphalou/Morphalou3.1_CSV.csv ...
+Indexed 138105 NOM/ADJ lemma groups from Morphalou.
+
+Generated: 0
+Skipped (not generated (morphalou_no_phon)): 12594
+Skipped (suspected invariable (s/x/z NOM plural, or invariant ADJ gender ending)): 3013
+Skipped (not generated (none)): 2135
+Skipped (ortho already exists (likely a tag gap, not a missing form)): 969
+Skipped (not generated (exception_override)): 46
+Skipped (exception: invariable): 8
+WALL 10.42 s  MAXRSS 965824 KB

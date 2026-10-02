@@ -1,0 +1,2 @@
+usage: python -m src.elicitation [-h] [--ask | --resolve]
+python -m src.elicitation: error: argument --resolve: not allowed with argument --ask

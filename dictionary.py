@@ -594,6 +594,12 @@ def _runSteps(module: "Callable[[str, str], None]") -> None:
     module("Theory Export (S8): trainer sentences", "util.export_practice_sentences")
     module("Theory Export (S8): trainer definitions", "util.export_definitions")
     module("Theory Export (S8): trainer lessons", "util.export_lessons")
+    # Affix Abbreviation Building (S9): an optional layer on top of the finished theory (the theory is
+    # unchanged). S9a selects the 30 rules from affix_decisions.json (AffixSelection.pickle present: reused or
+    # cheaply reselected from its cache; absent: a full ~25 min selection) and lists PENDING decisions; it never
+    # asks a question (util.review_affix_rules is the hand-run command that does). S9b exports the dictionary.
+    module("Affix Abbreviation Building (S9a): rule selection", "util.build_affix_rules")
+    module("Affix Abbreviation Building (S9b): affix dictionary", "util.export_affix_dictionary")
 
     print("\nstenalgo pipeline complete: phonetic theory (pickles + phonetic_theory.tsv), "
           "LexiqueSynthetic.tsv, resolved_press_sets.json, keypress_groups.json, "

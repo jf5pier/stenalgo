@@ -71,6 +71,46 @@ merged into the last phoneme stroke. One of the two kinds of extra stroke.
 - Avoid "bare mark stroke", "bare `*#` stroke".
 - First used in: Different-Lemma or Grammatical-Category Disambiguation (S7).
 
+### Affix abbreviation
+An optional short outline for a word of the finished theory, in which an affix rule's keys replace the affix syllable(s). One per word
+(the one saving the most strokes); it exists only when its outline collides with no outline of the stable theory, keeps the word's own
+marks and never adds one. The long outline stays valid. Shipped as a separate dictionary.
+- Code: `buildAbbreviations` src/affixabbrev.py; `util/export_affix_dictionary.py` → `plover_stenalgo_affix_dictionary.json`, `affix_abbreviations.tsv`.
+- First used in: Affix Abbreviation Building (S9).
+
+### Affix anchor
+The k=1 candidate a rule is built on: one affix syllable (position, spelling, phonology) and its carrier words, for
+example suffix `ment` /m@/. Spellings with the same sound can be fused into one anchor sharing a key (see **Affix fusion**).
+- Code: `Candidate.isAnchor` src/affixes.py; `affix_decisions.json` (`src/affixdecisions.py`) keys anchors by (position, spelling set, phonology).
+- Not an **Anchor** in any other sense: the word is only used for affix rules.
+- First used in: affix rule analysis (docs/AFFIX_RULES.md).
+
+### Affix fallback
+A carrier that an **affix scope** names but that gains nothing under the rule's keypress (collision, no legal chord): it
+keeps the anchor alone. Counted per rule and priced `EXCLUSION_COST` (5) per word.
+- Code: `resolveFallbacks`, `Rule.fallbacks` src/affixrules.py.
+
+### Affix fusion
+Spelling variants with the same sound merged into ONE anchor on one keypress (`ner|nez|nner|née...`). A fusion that contains a
+decided anchor is judged on the decided growth only: the other spellings stay anchor-only. The user's verdict per merge
+(`fused` / `apart`, in `affix_decisions.json`) settles it; a merge with no verdict, or whose exact spelling set changed, is undecided
+and stays apart until the review decides it. Growth is decided BEFORE fusion; a fused merge with no growth of its own inherits its
+parts' growth on their own spellings.
+- Code: `Decisions.fusionVerdict`, `Decisions.growthForms` (inheritance) src/affixdecisions.py; `resolveVariantRivals` src/affixrules.py.
+- Avoid "merge" in new prose (the code still says `mergeParts`, "variant merge").
+
+### Affix growth form
+An affix rule's form that fuses the anchor syllable with its NEIGHBOUR syllable (before a suffix, after a prefix) on one stroke
+(k=2), for the carriers its **affix scope** selects. The anchor alone is the k=1 form. An anchor with no growth form is a
+**no-growth anchor** (`re-`, `é`, `-ter`...).
+- Code: `growScopedForms` src/affixes.py; `Candidate.isScoped`. No growth without a verdict (the generic growth lattice was deleted).
+
+### Affix scope
+The decided condition selecting a growth form's carriers: the anchor syllable's spelling, a regex on the neighbour's sound
+(X-SAMPA) and/or on its spelling, all conditions required. Decided per anchor by the user; an empty list means no growth.
+- Code: `ScopeForm` src/affixdecisions.py; stored in `affix_decisions.json`.
+- First used in: Affix Abbreviation Building (S9).
+
 ### Alternate (alternate discriminating feature set)
 One of several discriminating feature sets that each identify the same self-homograph
 spelling, one per distinct feature combination; pressing any one of them is enough. Index 0
@@ -1025,6 +1065,14 @@ word drill, sentences, definitions, lessons).
 - Code: util/export_plover_dictionary.py, util/export_plover_system.py, util/export_keyboard_layout.py, util/export_practice_words.py, util/export_practice_sentences.py, util/export_definitions.py, util/export_lessons.py.
 - Avoid "Theory Export (S5)".
 - First used in: Theory Export (S8).
+
+### Affix Abbreviation Building (S9)
+The optional stage after Theory Export (S8): it selects 30 affix rules from the user's verdicts in `affix_decisions.json` (S9a,
+`util/build_affix_rules.py`, cache `AffixSelection.pickle`) and exports the abbreviation dictionary (S9b,
+`util/export_affix_dictionary.py`). The theory is unchanged by it. `util/review_affix_rules.py` is the hand-run interactive review of
+the PENDING decisions (the only affix command that asks questions).
+- Code: util/build_affix_rules.py, util/review_affix_rules.py, util/export_affix_dictionary.py; docs/AFFIX_RULES.md.
+- First used in: Affix Abbreviation Building (S9).
 
 ### Trainer data
 A dataset state: the five steno-trainer JSON files (`keyboard-layout`, `practice-words`,

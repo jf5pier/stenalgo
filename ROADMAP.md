@@ -44,6 +44,13 @@ distinct from the personal theory layer (Phase 7).
 - Interacts with the phoneme-layer freeze (Phase 3) and the stroke budget — decide scope
   before freezing.
 
+### Affix abbreviations (DONE 2026-10-01: Affix Abbreviation Building (S9))
+
+`python dictionary.py` produces the optional affix dictionary without an agent: the growth and fusion verdicts are committed in `affix_decisions.json`,
+the selection is cached, and a full rebuild from nothing reproduces the committed outputs byte for byte ([docs/AFFIX_RULES.md](docs/AFFIX_RULES.md),
+[docs/AFFIX_DESIGN.md](docs/AFFIX_DESIGN.md)). Open: trainer lessons from `affix_abbreviations.tsv` (separate branch); a learner trial of the 30 rules before any
+further tuning; re-review of verdicts when the lexicon changes (`python -m util.review_affix_rules`).
+
 ### Dictionary densification (Phase 6)
 
 Goal: one entry per homophone-per-lemma pointing at a shared conjugation/paradigm table, plus

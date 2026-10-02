@@ -1,0 +1,1 @@
+src.elicitation --resolve requires elicitation_answers.json: answer the questionnaire (elicitation_questionnaire.html, rendered by --ask) and copy the answers into elicitation_answers.json first.
