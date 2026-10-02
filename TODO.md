@@ -521,3 +521,20 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
   phonology-class merge. Check also the `raie`/`rayer` family for the same split, then rebuild per `docs/PIPELINE.md`.
 
 - **Affix pipeline integration (2026-10-01): DONE and committed on `affix-abbreviation-rules`.** Stage Affix Abbreviation Building (S9) per `docs/history/PLAN_2026-10-01-affix-pipeline-implementation.md` (decisions file, S9a/S9b, self-looping interactive review, per-rule cache; docs in `docs/AFFIX_RULES.md` and `docs/AFFIX_DESIGN.md`); a full rebuild from nothing is byte-identical. Open: the trainer integration (separate branch, plan decision 6); the `ra`/`Re` phonology items above; re-review of the verdicts when the lexicon changes (pending items are listed by `util.build_affix_rules`).
+
+- **Affix abbreviations lack the conjugation markings (2026-10-02, to do).** The words in `plover_stenalgo_affix_dictionary.json`
+  / `affix_abbreviations.tsv` are shortened outlines of the base theory strokes only; they do not carry the conjugation
+  markings that the disambiguated theory adds (and the homograph marks). Add them, derived from the root words' marked
+  strokes (homographs included): each abbreviated entry must end with the same marking as its root word's outline, and
+  stay collision-free against the stable theory. Check how the marks interact with the affix keypress (first-mark merge
+  into the last phoneme stroke) before changing `src/affixabbrev.py` / `util/export_affix_dictionary.py`; then compare the
+  S9 md5s per `CLAUDE.md` "Verification approach".
+
+- **Plan a conjugation-engine plugin for Plover (2026-10-02, to plan, not to build yet).** Goal: for all homophones of a word
+  stenogram (the outline without conjugation marking) keep ONE entry in the theory, with a reference to a conjugation table
+  listing the possible conjugation strokes and endings, so the static dictionary no longer needs one entry per marked form.
+  The plan should cover: the table format (shared paradigm data, see [[dual-target architecture]] note: Plover static dict +
+  Javelin-style runtime engine), the plugin type (Plover extension / meta or command plugin vs a dictionary-replacing
+  engine), how marker strokes resolve to a form at runtime, interaction with the affix layer (S9) and the `*`/`#` homophone
+  marks, undo behaviour, and what the Plover dictionary export keeps as a static fallback. Output: a `PLAN_<date>-...md` in
+  `docs/history/` or `docs/`.
