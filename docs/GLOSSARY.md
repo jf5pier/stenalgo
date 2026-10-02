@@ -94,8 +94,9 @@ keeps the anchor alone. Counted per rule and priced `EXCLUSION_COST` (5) per wor
 Spelling variants with the same sound merged into ONE anchor on one keypress (`ner|nez|nner|née...`). A fusion that contains a
 decided anchor is judged on the decided growth only: the other spellings stay anchor-only. The user's verdict per merge
 (`fused` / `apart`, in `affix_decisions.json`) settles it; a merge with no verdict, or whose exact spelling set changed, is undecided
-and stays apart until the review decides it.
-- Code: `Decisions.fusionVerdict` src/affixdecisions.py; `resolveVariantRivals` src/affixrules.py.
+and stays apart until the review decides it. Growth is decided BEFORE fusion; a fused merge with no growth of its own inherits its
+parts' growth on their own spellings.
+- Code: `Decisions.fusionVerdict`, `Decisions.growthForms` (inheritance) src/affixdecisions.py; `resolveVariantRivals` src/affixrules.py.
 - Avoid "merge" in new prose (the code still says `mergeParts`, "variant merge").
 
 ### Affix growth form

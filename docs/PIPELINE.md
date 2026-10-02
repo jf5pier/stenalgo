@@ -50,7 +50,7 @@ The real dependency order. Steps 0 and 1 and the human loop 4h are run by hand, 
 | 8 | `python -m util.export_plover_dictionary`, `python -m util.export_plover_system` | Theory Export (S8), Plover branch | Plover | Either order. |
 | 9 | `python -m util.export_keyboard_layout` (after step 6), `python -m util.export_practice_words`, **then** `python -m util.export_practice_sentences`, then `python -m util.export_definitions` | Theory Export (S8), trainer branch | steno-trainer | `export_practice_sentences` reads `practice-words.json` (export_practice_sentences.py:157). |
 | 10 | `python -m util.build_affix_rules`, then `python -m util.export_affix_dictionary` | Affix Abbreviation Building (S9a, S9b) | the optional affix abbreviation layer | After the whole theory and its exports. S9a reads the committed `affix_decisions.json`; `AffixSelection.pickle` is its cache (absent: ~25 min full selection; present: reused or cheaply reselected; `rm` it after any lexicon or layout change). Lists PENDING decisions, asks nothing. |
-| 10h | `python -m util.review_affix_rules` → `python -m util.build_affix_rules` | Affix Abbreviation Building, review | only when step 10 lists PENDING decisions | Hand-run and interactive: proposes each pending fusion or growth with its help/hurt numbers, writes `affix_decisions.json` after every answer; repeat step 10 (cheap) until nothing is pending. |
+| 10h | `python -m util.review_affix_rules` → `python -m util.build_affix_rules` | Affix Abbreviation Building, review | only when step 10 lists PENDING decisions | Hand-run and interactive: proposes each pending item with its help/hurt numbers (growth BEFORE fusion; a fusion is judged with its parts' decided growth, and a fused merge inherits its parts' growth), writes `affix_decisions.json` after every answer, then reselects by itself (cached, about a minute) and continues with what is newly pending, until nothing is pending, you quit, or a pass saved nothing. |
 | opt | `python -m util.check_conjugation_disambiguation_order` | Elicitation Phase: Answer Collection, validator | checking answers | Writes `conjugation_disambiguation_report.json` (gitignored). |
 
 **The orchestrated entrypoint.** `python dictionary.py` (no arguments) runs the whole chain
@@ -1913,7 +1913,7 @@ decisions and the review loop: [AFFIX_RULES.md](AFFIX_RULES.md).
 `affix_decisions.json` (the user's fusion verdicts and growth forms per anchor), and `AffixSelection.pickle` if present.
 **Transformation** pool of k=1 anchors, spelling-variant merges and decided growth forms; merges settled by verdict (an undecided
 merge stays apart); lazy-greedy selection of 30 rules (each word credited once at its best rule; exception weight 2, fallback price 5,
-form price 100); exact keypress choice per candidate rule (~30 s each, cached per rule by a signature of its anchor, verdict, forms and
+form price 100); exact keypress choice per candidate rule (every legal keypress on a sample of the 2,000 most frequent carriers, the 30 best on all carriers; ~30-120 s each, cached per rule by a signature of its anchor, verdict, forms and
 carrier set); swap pass; keypress binding with sharing. Present pickle made from the current decisions: the final selection is reused;
 decisions changed: reselection from the cached evaluations; absent: full selection.
 **Result** 30 rules. PENDING decisions (a selected rule with no growth verdict, an undecided merge next to a selected anchor) are listed
