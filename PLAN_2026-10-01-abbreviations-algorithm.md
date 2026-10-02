@@ -27,7 +27,15 @@ one stroke when the union is legal and free).
   (`du / de la / de l' / des` = one rule + `*`/`#` variants); keys 0/1 stay
   excluded. Phase 1 must extend the algebra and Phase 2 the selection model
   with this family notion (one learnable unit, several variant strokes).
-- Circumfix semantics still open (Q3) — decided during Phase 1 experiments.
+- Circumfix semantics DECIDED (Q3, 2026-10-01, user pick after the Phase 2
+  experiments): **Option C — decomposition with disjoint keys**. A
+  circumfix stays two attach rules (prefix + suffix); Stage C's repair
+  forces co-occurring families onto syllabically disjoint keypresses so
+  both merge into one stroke (ne…pas contexts 31%→78% fully saved, pool
+  12.4%→13.2%). A dedicated one-keypress circumfix rule (Option B) was
+  measured and rejected: its edge over C is only the residual 8.5% of
+  ne…pas mass, at the price of a new learnable unit, a budget slot, and
+  non-contiguous expressions in the algebra.
 
 ## Phase 0 — dependency merge + candidate pool
 
