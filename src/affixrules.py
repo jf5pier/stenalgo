@@ -19,8 +19,8 @@ from typing import Callable
 from src.affixbinding import (
     MAX_ALTERNATIVES, SAMPLE_CARRIERS, SPLIT_MAX_LOSS, PhonemeKeys, salientPhonemes, simScore)
 from src.affixes import (
-    Binding, Candidate, Carrier, CarrierResult, RULE, SimContext, _exceptionShare, PREFIX,
-    poolCarriers, simulate, ruleKeysOverlap)
+    Binding, Candidate, Carrier, CarrierResult, RULE, SimContext, SimUnit, _exceptionShare, PREFIX,
+    makeSimUnit, mergeUnions, poolCarriers, simulate, simulateRuleUnits, ruleKeysOverlap)
 from src.affixdecisions import Decisions
 from src.keyboard import Stroke
 
@@ -223,6 +223,75 @@ def _exceptionRateFloor(
     return trapped / total if total else 0.0
 
 
+@dataclass
+class KeySweep:
+    """The key-independent state of one rule's keypress sweep (built once by `prepareKeySweep`, read-only
+    afterwards so a fork pool can share it): the lean units of the full `poolCarriers` order, the anchor-only
+    alternative of each scoped carrier (`resolveFallbacks`' replacement) and the neighbour-stroke table."""
+    units: list[SimUnit]
+    alts: list[SimUnit | None]
+    scoped: list[bool]           # carrier is a scoped form with span > 1: it falls back when it gains nothing
+    neighbours: list[Stroke]     # neighbour id -> stroke
+    exclusionCount: int
+    numForms: int
+    hasScoped: bool
+    ctx: SimContext
+
+
+def prepareKeySweep(rule: Rule, carriers: list[Carrier], ctx: SimContext) -> KeySweep:
+    ids: dict[Stroke, int] = {}
+    units = [makeSimUnit(rule.position, c, ctx, ids) for c in carriers]
+    hasScoped = any(f.isScoped for f in rule.forms)
+    alts: list[SimUnit | None] = [None] * len(carriers)
+    scoped = [False] * len(carriers)
+    if hasScoped:
+        anchor = {c.rec.idx: c._replace(member=0) for c in rule.root.carriers}
+        for i, c in enumerate(carriers):
+            if c.span > 1 and rule.forms[c.member].isScoped:
+                scoped[i] = True
+                a = anchor.get(c.rec.idx)
+                if a is not None:   # a missing anchor raises KeyError only if this carrier fails, as in resolveFallbacks
+                    alts[i] = makeSimUnit(rule.position, a, ctx, ids)
+    return KeySweep(units, alts, scoped, list(ids), exclusionCountOf(rule.forms), len(rule.forms), hasScoped, ctx)
+
+
+def sweepKey(sw: KeySweep, k: Stroke, limit: int | None) -> tuple[float, float, int]:
+    """(score, exception rate, fallback count) of `rule` under key `k` on the first `limit` carriers (all when
+    None): bit-identical to `resolveFallbacks` + `simulate` + `ruleScoreFromResults` / `_exceptionRate`."""
+    ctx = sw.ctx
+    units = sw.units if limit is None else sw.units[:limit]
+    X = mergeUnions(sw.neighbours, k, ctx)
+    D = tuple(sorted(k))
+    trap = D in ctx.singleStrokeOutlines
+    gains, reasons = simulateRuleUnits(units, ctx, X, D, trap)
+    nFallback = 0
+    if sw.hasScoped:
+        failed = [i for i in range(len(units)) if sw.scoped[i] and gains[i] <= 0]
+        if failed:
+            units = list(units)
+            for i in failed:
+                alt = sw.alts[i]
+                if alt is None:
+                    raise KeyError(units[i].carrier.rec.idx)
+                units[i] = alt
+            nFallback = len(failed)
+            gains, reasons = simulateRuleUnits(units, ctx, X, D, trap)
+    benefit = 0.0
+    exceptions: list[float] = []
+    covered = 0
+    for u, gain, reason in zip(units, gains, reasons):
+        if gain > 0:
+            benefit += u.freq * gain
+            covered += 1
+        elif reason in WORD_EXCEPTION_REASONS:
+            exceptions.append(u.freq)
+    exceptionFreq = sum(exceptions)
+    score = (benefit - EXCEPTION_ALPHA * exceptionFreq - EXCLUSION_COST * (sw.exclusionCount + nFallback)
+             - FORM_COST * (sw.numForms - 1))
+    total = covered + len(exceptions)
+    return score, (len(exceptions) / total if total else 0.0), nFallback
+
+
 def chooseRuleKeypress(rule: Rule, pk: PhonemeKeys, ctx: SimContext, keypresses: list[Stroke]) -> None:
     """§4.4 step 4, lazy and expensive (Part B simulation): pick the best keypress for `rule`'s
     forms and fill in its exact score, keeping the top `MAX_ALTERNATIVES` for the report. Call
@@ -262,35 +331,36 @@ def chooseRuleKeypress(rule: Rule, pk: PhonemeKeys, ctx: SimContext, keypresses:
     sample = carriers[:SAMPLE_CARRIERS]
     stage1: list[tuple[float, float, Stroke]] = []
     sampleGroups = _neighbourGroups(rule.position, sample)
-    for k in keypresses:
-        if _exceptionRateFloor(sampleGroups, k, ctx) > MAX_EXCEPTION_RATE:
-            continue   # exact: pass 1 alone already proves the exception rate exceeds the cap
-        sampleK, nFallback = resolveFallbacks(rule, k, sample, ctx)
-        (res,) = simulate([(Binding(rule.position, RULE, k), sampleK)], ctx, boundaryRisk=False)
-        sc, _benefit, _exc, _excFreq, _top = ruleScoreFromResults(res, exclusionCount + nFallback, len(rule.forms))
-        if sc > 0 and _exceptionRate(res) <= MAX_EXCEPTION_RATE:
+    sw = prepareKeySweep(rule, carriers, ctx)
+    survivors = [k for k in keypresses if _exceptionRateFloor(sampleGroups, k, ctx) <= MAX_EXCEPTION_RATE]
+    # (the floor is exact: pass 1 alone proves the exception rate exceeds the cap for the dropped keys)
+    for k, (sc, rate, _nf) in [(k, sweepKey(sw, k, SAMPLE_CARRIERS)) for k in survivors]:
+        if sc > 0 and rate <= MAX_EXCEPTION_RATE:
             stage1.append((sc, simOf[k], k))
     stage1.sort(key=lambda t: (-t[0], -t[1], t[2]))
     finalKeys = [(k, s) for _sc, s, k in stage1[:MAX_ALTERNATIVES]]
-    finals: list[tuple[float, Stroke, float, list[CarrierResult], int]] = []
+    finals: list[tuple[float, Stroke, float, int]] = []
     for k, s in finalKeys:
-        carriersK, nFallback = resolveFallbacks(rule, k, carriers, ctx)
-        (res,) = simulate([(Binding(rule.position, RULE, k), carriersK)], ctx)
-        sc, _benefit, _exc, _excFreq, _top = ruleScoreFromResults(res, exclusionCount + nFallback, len(rule.forms))
-        if _exceptionRate(res) <= MAX_EXCEPTION_RATE:   # re-confirm against the full carrier set
-            finals.append((sc, k, s, res, nFallback))
+        sc, rate, nFallback = sweepKey(sw, k, None)
+        if rate <= MAX_EXCEPTION_RATE:   # re-confirm against the full carrier set
+            finals.append((sc, k, s, nFallback))
     finals.sort(key=lambda t: -t[0])
     if not finals:
         return
-    _bestScore, bestKeys, bestSim, bestResults, bestFallbacks = finals[0]
+    _bestScore, bestKeys, bestSim, bestFallbacks = finals[0]
+    carriersK, nFallback = resolveFallbacks(rule, bestKeys, carriers, ctx)
+    (bestResults,) = simulate([(Binding(rule.position, RULE, bestKeys), carriersK)], ctx)
     sc, benefit, excCount, excFreq, top = ruleScoreFromResults(
         bestResults, exclusionCount + bestFallbacks, len(rule.forms))
+    if sc != _bestScore or nFallback != bestFallbacks:
+        raise AssertionError(f"sweepKey diverged from simulate for {rule.root.ortho} {bestKeys}: "
+                             f"{_bestScore} != {sc} or {bestFallbacks} != {nFallback}")
     rule.fallbacks = bestFallbacks
     rule.keys, rule.score, rule.strokeFreqSaved = bestKeys, sc, benefit
     rule.wordExceptions, rule.exceptionFreq, rule.topExceptions = excCount, excFreq, top
     rule.results = bestResults
     rule.keySimilarity = bestSim
-    rule.alternatives = [(fsc, k) for fsc, k, _s, _res, _nf in finals]
+    rule.alternatives = [(fsc, k) for fsc, k, _s, _nf in finals]
 
 
 # ═══════════════════════════════════════════════════════════════════════════

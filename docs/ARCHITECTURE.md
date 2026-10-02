@@ -396,7 +396,7 @@ the pickle caches are never checked for staleness.
 |---|---|---|
 | `Dictionary.pickle` | Word list + indexes + syllable and layout statistics (57.8 MB) | `python -m util.build_phonetic_theory` on a cache miss (Dictionary Loading (S3) + the layout statistics) |
 | `PhoneticTheory.pickle` | The phonetic theory (52 MB) | `python -m util.build_phonetic_theory` on a cache miss (Phonetic Theory Building (S5)) |
-| `AffixSelection.pickle` | Cached affix rule evaluations and the last selection (absent: full ~25 min selection) | `python -m util.build_affix_rules` |
+| `AffixSelection.pickle` | Cached affix rule evaluations and the last selection (absent: full ~8 min selection) | `python -m util.build_affix_rules` |
 | `questionnaire.json` | Questionnaire items (200) | `python -m src.elicitation` (Questionnaire Generation) |
 | `resolved_press_sets.json` | Resolved discriminating feature sets (47,828 groups, ~32 MB) | `python -m src.elicitation` (Press-Set Resolution) |
 | `elicitation_questionnaire.html` | The Answer Collection questionnaire page | `python -m util.build_questionnaire_page` |
