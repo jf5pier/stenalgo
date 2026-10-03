@@ -16,6 +16,8 @@ Written to survive a `/clear` — read this file first in a fresh session.
 - Also drop the temporary `from __future__ import annotations` in `src/affixes.py` when merging main.
 - Driver nondeterminism (found 2026-10-03): `scratch/select_expression_rules.py` Stage C breaks equal-score base ties by
   set/dict iteration order, so results depend on `PYTHONHASHSEED` (21.7% vs 22.3%). FIXED 2026-10-03 (Stage C solver: one worker, fixed seed); baseline `scratch/md5_expr_deterministic.txt`.
+- Suffix `le`/`les` bug FIXED 2026-10-03 (prefix twin shadowed the suffix rule at a trailing particle): 23.3% / 123 exceptions.
+  Still open: low-mass rules (`je ne`, `je me`, `ce qu' il`, `pas le`) are worth reviewing; Stage C feedback loop is a v1 heuristic (6 rounds).
 - Decided 2026-10-03: no que briefs (`QUE_BRIEF_BUDGET` removed); adjacent hostless attaches merge (`attachCluster`);
   a brief-wins-when-attach-fails fallback was measured (+2.9%) and rejected for decodability. See the NOTES file, section 5.
 

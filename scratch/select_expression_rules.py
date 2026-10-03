@@ -174,7 +174,7 @@ def main() -> None:
 
     # Stage C: joint repair (cross-family distinctness) + audit, with a
     # feedback round: families implicated in an audit collision lose their
-    # base and the repair re-solves (v1 heuristic, up to 3 rounds).
+    # base and the repair re-solves (v1 heuristic, up to 6 rounds).
     from src.expressionrules import auditExpressionRules, repairKeypresses
     from src.expressions import Rules, composeOutlineTraced
 
@@ -198,7 +198,7 @@ def main() -> None:
         if sum(pool[i].freq for i in famTouched[a] & famTouched[b]) >= 2e6)
     print(f"disjoint-pair constraint on {len(disjointPairs)} co-occurring "
           f"family pairs: {sorted(tuple(sorted(p)) for p in disjointPairs)}")
-    for round_ in range(3):
+    for round_ in range(6):
         chosen = repairKeypresses(result.selected, keypressReport,
                                   disjointPairs=disjointPairs)
         audit = auditExpressionRules(result.selected, pool, realCtx)

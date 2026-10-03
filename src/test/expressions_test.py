@@ -197,6 +197,21 @@ class TestFailureLadder:
         traced = composeOutlineTraced(rules, tokens, Ctx())
         assert all(seg.reason != "attachCluster" for seg in traced.segments)
 
+    def test_trailing_particle_uses_its_suffix_twin(self):
+        """`le` has a prefix and a suffix rule: with a host before it and
+        nothing after, the suffix rule fires (it used to be dead code, the
+        prefix rule always won and failed noNeighbour)."""
+        rules = Rules(attaches=(AttachRule(("de", "la"), PREFIX, KAPPA_DE_LA),
+                                AttachRule(("de", "la"), SUFFIX, (14,))))
+        tokens = (tok("mot", MOT), tok("de", DE), tok("la", LA))
+        traced = composeOutlineTraced(rules, tokens, Ctx())
+        assert traced.segments[-1].rule.position == SUFFIX
+        assert traced.segments[-1].outcome == MERGED
+        assert traced.saving == 2
+        # a following token keeps the prefix rule
+        followed = composeOutlineTraced(rules, tokens + (tok("est", EST),), Ctx())
+        assert followed.segments[1].rule.position == PREFIX
+
     def test_span_one_never_goes_standalone(self):
         """A one-stroke particle with a failed merge keeps its longform
         (spanOne): a standalone would save nothing."""

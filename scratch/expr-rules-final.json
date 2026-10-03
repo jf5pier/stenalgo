@@ -8,26 +8,11 @@
    ],
    "position": "prefix",
    "keys": [
-    18,
+    22,
     24
    ],
    "beta": [],
    "freq": 579342261.0
-  },
-  {
-   "kind": "attach",
-   "family": "de",
-   "units": [
-    "d'"
-   ],
-   "position": "prefix",
-   "keys": [
-    10,
-    18,
-    24
-   ],
-   "beta": [],
-   "freq": 156154508.0
   },
   {
    "kind": "attach",
@@ -38,7 +23,7 @@
    "position": "prefix",
    "keys": [
     9,
-    17
+    18
    ],
    "beta": [],
    "freq": 267408208.0
@@ -51,9 +36,9 @@
    ],
    "position": "prefix",
    "keys": [
+    2,
     18,
-    20,
-    21
+    20
    ],
    "beta": [],
    "freq": 217698158.0
@@ -66,13 +51,29 @@
    ],
    "position": "prefix",
    "keys": [
+    2,
     10,
     18,
-    20,
-    21
+    20
    ],
    "beta": [],
    "freq": 197909645.0
+  },
+  {
+   "kind": "attach",
+   "family": "que",
+   "units": [
+    "que"
+   ],
+   "position": "suffix",
+   "keys": [
+    2,
+    15,
+    18,
+    20
+   ],
+   "beta": [],
+   "freq": 74787433.0
   },
   {
    "kind": "attach",
@@ -83,44 +84,11 @@
    "position": "prefix",
    "keys": [
     8,
-    17,
+    9,
     25
    ],
    "beta": [],
    "freq": 152965207.0
-  },
-  {
-   "kind": "attach",
-   "family": "ne",
-   "units": [
-    "ne"
-   ],
-   "position": "prefix",
-   "keys": [
-    8,
-    10,
-    17,
-    25
-   ],
-   "beta": [],
-   "freq": 44860332.0
-  },
-  {
-   "kind": "attach",
-   "family": "ne",
-   "units": [
-    "n'",
-    "y"
-   ],
-   "position": "prefix",
-   "keys": [
-    8,
-    15,
-    17,
-    25
-   ],
-   "beta": [],
-   "freq": 11093429.0
   },
   {
    "kind": "attach",
@@ -131,11 +99,28 @@
    "position": "prefix",
    "keys": [
     8,
-    9,
-    16
+    18,
+    24
    ],
    "beta": [],
    "freq": 253868505.0
+  },
+  {
+   "kind": "attach",
+   "family": "dans",
+   "units": [
+    "dans",
+    "ce"
+   ],
+   "position": "prefix",
+   "keys": [
+    8,
+    10,
+    18,
+    24
+   ],
+   "beta": [],
+   "freq": 7363145.0
   },
   {
    "kind": "attach",
@@ -146,8 +131,8 @@
    "position": "prefix",
    "keys": [
     8,
-    16,
-    19
+    17,
+    21
    ],
    "beta": [],
    "freq": 285239034.0
@@ -169,15 +154,47 @@
   },
   {
    "kind": "attach",
+   "family": "il",
+   "units": [
+    "il"
+   ],
+   "position": "suffix",
+   "keys": [
+    7,
+    10,
+    16,
+    19
+   ],
+   "beta": [],
+   "freq": 125658682.0
+  },
+  {
+   "kind": "attach",
+   "family": "il",
+   "units": [
+    "il",
+    "n'"
+   ],
+   "position": "prefix",
+   "keys": [
+    7,
+    15,
+    16,
+    19
+   ],
+   "beta": [],
+   "freq": 27097496.0
+  },
+  {
+   "kind": "attach",
    "family": "c",
    "units": [
     "c'"
    ],
    "position": "prefix",
    "keys": [
-    2,
-    4,
-    5
+    3,
+    4
    ],
    "beta": [],
    "freq": 134792591.0
@@ -190,11 +207,57 @@
    ],
    "position": "prefix",
    "keys": [
+    10,
     16,
     19
    ],
    "beta": [],
    "freq": 116132666.0
+  },
+  {
+   "kind": "attach",
+   "family": "la",
+   "units": [
+    "la"
+   ],
+   "position": "suffix",
+   "keys": [
+    16,
+    19
+   ],
+   "beta": [],
+   "freq": 462174379.0
+  },
+  {
+   "kind": "attach",
+   "family": "un",
+   "units": [
+    "un"
+   ],
+   "position": "suffix",
+   "keys": [
+    6,
+    16,
+    19
+   ],
+   "beta": [],
+   "freq": 160771744.0
+  },
+  {
+   "kind": "attach",
+   "family": "un",
+   "units": [
+    "un"
+   ],
+   "position": "prefix",
+   "keys": [
+    6,
+    10,
+    16,
+    19
+   ],
+   "beta": [],
+   "freq": 41372215.0
   },
   {
    "kind": "attach",
@@ -204,8 +267,9 @@
    ],
    "position": "suffix",
    "keys": [
-    3,
-    17
+    9,
+    16,
+    23
    ],
    "beta": [],
    "freq": 204105844.0
@@ -218,12 +282,75 @@
    ],
    "position": "prefix",
    "keys": [
-    3,
+    9,
     10,
-    17
+    16,
+    23
    ],
    "beta": [],
    "freq": 51233152.0
+  },
+  {
+   "kind": "attach",
+   "family": "l'",
+   "units": [
+    "l'"
+   ],
+   "position": "prefix",
+   "keys": [
+    10,
+    16,
+    19,
+    23
+   ],
+   "beta": [],
+   "freq": 77616119.0
+  },
+  {
+   "kind": "attach",
+   "family": "l'",
+   "units": [
+    "l'"
+   ],
+   "position": "suffix",
+   "keys": [
+    16,
+    19,
+    23
+   ],
+   "beta": [],
+   "freq": 292363887.0
+  },
+  {
+   "kind": "attach",
+   "family": "une",
+   "units": [
+    "une"
+   ],
+   "position": "suffix",
+   "keys": [
+    6,
+    16,
+    23
+   ],
+   "beta": [],
+   "freq": 141155064.0
+  },
+  {
+   "kind": "attach",
+   "family": "une",
+   "units": [
+    "une"
+   ],
+   "position": "prefix",
+   "keys": [
+    6,
+    10,
+    16,
+    23
+   ],
+   "beta": [],
+   "freq": 13527088.0
   },
   {
    "kind": "attach",
@@ -233,8 +360,23 @@
    ],
    "position": "suffix",
    "keys": [
-    9,
-    22
+    10,
+    17,
+    21
+   ],
+   "beta": [],
+   "freq": 206722861.0
+  },
+  {
+   "kind": "attach",
+   "family": "pas",
+   "units": [
+    "pas"
+   ],
+   "position": "prefix",
+   "keys": [
+    17,
+    21
    ],
    "beta": [],
    "freq": 206722861.0
@@ -248,9 +390,9 @@
    ],
    "position": "suffix",
    "keys": [
-    9,
-    10,
-    22
+    15,
+    17,
+    21
    ],
    "beta": [],
    "freq": 6247194.0
@@ -263,7 +405,8 @@
    ],
    "position": "suffix",
    "keys": [
-    2
+    19,
+    23
    ],
    "beta": [],
    "freq": 176903013.0
@@ -276,139 +419,42 @@
    ],
    "position": "prefix",
    "keys": [
-    2,
-    10
+    10,
+    19,
+    23
    ],
    "beta": [],
    "freq": 33827184.0
-  },
-  {
-   "kind": "attach",
-   "family": "l'",
-   "units": [
-    "l'"
-   ],
-   "position": "prefix",
-   "keys": [
-    2,
-    3,
-    5
-   ],
-   "beta": [],
-   "freq": 77616119.0
-  },
-  {
-   "kind": "attach",
-   "family": "je",
-   "units": [
-    "je"
-   ],
-   "position": "prefix",
-   "keys": [
-    4,
-    16,
-    19
-   ],
-   "beta": [],
-   "freq": 112312128.0
-  },
-  {
-   "kind": "attach",
-   "family": "ce",
-   "units": [
-    "ce"
-   ],
-   "position": "prefix",
-   "keys": [
-    16,
-    19,
-    23
-   ],
-   "beta": [],
-   "freq": 102898102.0
-  },
-  {
-   "kind": "attach",
-   "family": "ce",
-   "units": [
-    "ce",
-    "qui"
-   ],
-   "position": "prefix",
-   "keys": [
-    10,
-    16,
-    19,
-    23
-   ],
-   "beta": [],
-   "freq": 24454906.0
-  },
-  {
-   "kind": "attach",
-   "family": "ce",
-   "units": [
-    "ce",
-    "que"
-   ],
-   "position": "suffix",
-   "keys": [
-    15,
-    16,
-    19,
-    23
-   ],
-   "beta": [],
-   "freq": 23259462.0
-  },
-  {
-   "kind": "attach",
-   "family": "ce",
-   "units": [
-    "ce",
-    "qu'",
-    "il"
-   ],
-   "position": "prefix",
-   "keys": [
-    10,
-    15,
-    16,
-    19,
-    23
-   ],
-   "beta": [],
-   "freq": 7114956.0
   }
  ],
  "chosen": {
   "de": [
-   18,
+   22,
    24
   ],
   "à": [
    9,
-   17
+   18
   ],
   "que": [
+   2,
    18,
-   20,
-   21
+   20
   ],
   "ne": [
    8,
-   17,
+   9,
    25
   ],
   "dans": [
    8,
-   9,
-   16
+   18,
+   24
   ],
   "et": [
    8,
-   16,
-   19
+   17,
+   21
   ],
   "il": [
    7,
@@ -416,37 +462,38 @@
    19
   ],
   "c": [
-   2,
-   4,
-   5
+   3,
+   4
   ],
   "la": [
    16,
    19
   ],
-  "le": [
-   3,
-   17
-  ],
-  "pas": [
-   9,
-   22
-  ],
-  "les": [
-   2
-  ],
-  "l'": [
-   2,
-   3,
-   5
-  ],
-  "je": [
-   4,
+  "un": [
+   6,
    16,
    19
   ],
-  "ce": [
+  "le": [
+   9,
    16,
+   23
+  ],
+  "l'": [
+   16,
+   19,
+   23
+  ],
+  "une": [
+   6,
+   16,
+   23
+  ],
+  "pas": [
+   17,
+   21
+  ],
+  "les": [
    19,
    23
   ]

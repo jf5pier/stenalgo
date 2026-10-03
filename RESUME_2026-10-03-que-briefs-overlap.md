@@ -12,15 +12,26 @@ Done, in order, with the user's go at each step:
 3. que briefs: user chose option 1, NO que briefs. `QUE_BRIEF_BUDGET` and the driver's que-brief stage are gone; `queFamilyOf` stays.
 4. Option 2 (brief wins when its attach fails) was built, measured (+2.9% with briefs) and REJECTED/removed for decodability; details in
    the NOTES file, section 5.
-5. `util/build_affix_rules.py` (MAIN checkout, not this worktree; uncommitted there): `--workers` default is now `min(8, os.cpu_count())`.
+5. `util/build_affix_rules.py` (MAIN checkout, not this worktree; committed there as `cea684f`): `--workers` default is now `min(8, os.cpu_count())`.
    The docs' "~2.5 min on 16 cores" timings (CLAUDE.md, docs/PIPELINE.md, docs/ARCHITECTURE.md, the module docstring) were left unchanged.
 6. Committed on `abbreviations` (not pushed). Tests: 807 pass. `mypy` run bare in this worktree needs checking (a bare call from the repo root
    with the worktree's mypy.ini was not verified at the end).
 
-FIXED (commit after c47db08): the driver was hash-seed dependent (Stage C repair CP-SAT ran multi-worker with equal-objective optima:
-21.7% vs 22.3%). It now runs `num_workers = 1`, `random_seed = 0`; seeds 1 and 2 give identical outputs (21.7%, 206 exceptions, 3.838e9 with briefs).
-The 22.3% was a lucky tie-break. Baseline: `scratch/md5_expr_deterministic.txt` (`md5sum -c` from the worktree root).
-Remaining from section 5: items 4 (suffix `le`/`les` save 0, low-mass rules), 5 (max-1-key study), 6 (collision, Phase 4 wiring and docs).
+7. FIXED: the driver was hash-seed dependent (Stage C repair CP-SAT multi-worker, equal optima): now `num_workers = 1`, `random_seed = 0`.
+8. FIXED: suffix `le`/`les` saved 0 because the prefix twin of the same expression always won at a trailing particle; `planStream` now
+   yields to the suffix twin when nothing follows and a token precedes (`scratch/why_suffix_le.py`). Stage C feedback rounds raised 3 -> 6
+   (the converged run needs 4).
+
+CURRENT RESULT (deterministic, seeds 1 and 2 identical): attaches alone 23.3% of pool longform strokes (3.328e9), 123 exceptions, 0 shadows,
+0 collisions; with the 40 forced briefs 4.088e9. Baseline md5s: `scratch/md5_expr_deterministic.txt`. 808 tests pass.
+
+NEXT (ranked): (a) review the low-mass rules (`je ne`, `je me`, `ce qu' il`, `pas le`) and the slot list now that suffix `le`/`les` fire;
+(b) max-1-key overlap study (section 5 item 5; just `EXPR_MAX_SHARED_KEYS`, needs the decoder decision, NOTES section 4);
+(c) Phase 4: wiring into the build + Plover export + docs (CLAUDE.md, docs/PIPELINE.md, docs/GLOSSARY.md), required before any merge to main;
+(d) drop the temporary `from __future__ import annotations` in `src/affixes.py` when main is merged. MAIN checkout: commit `cea684f`
+caps the affix search at 8 workers (done and committed there, not pushed). Nothing is pushed on either branch.
+
+(Section 5 items 1-3 and the `le`/`les` part of 4 are done; see NEXT above.)
 
 ## 1. Where things are
 

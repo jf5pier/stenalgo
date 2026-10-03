@@ -27,6 +27,9 @@ cover the tokens):
    decides the merge direction). Consumed tokens never overlap. Expression
    ties break on expression text then position ("prefix" before "suffix"),
    never on declaration order.
+   Exception: a prefix rule matching at the very end of the stream (no token
+   after it) yields to the suffix rule of the same expression when one exists
+   and a token precedes it, so a host can receive it (voir le).
 2. BRIEF MATCHING — longest-match-first over the RESIDUAL stream (attach
    tokens are transparent), so "il n'y a pas" = [il, n', y, a, pas] still
    matches the brief ("il", "y", "a") with the "n'" attach sitting INSIDE the
@@ -229,6 +232,13 @@ def planStream(rules: Rules, tokens: list[Token]) -> StreamPlan:
         for expression, rule in table:
             end = i + len(expression)
             if end <= len(tokens) and tuple(t.unit for t in tokens[i:end]) == expression:
+                # a prefix rule with no token after it (a trailing particle) yields to
+                # the suffix rule of the same expression, which has a host before it
+                if rule.position == PREFIX and end == len(tokens) and i > 0:
+                    twin = next((r for e, r in table if e == expression
+                                 and r.position == SUFFIX), None)
+                    if twin is not None:
+                        rule = twin
                 marks[i] = (end, rule)
                 i = end
                 break

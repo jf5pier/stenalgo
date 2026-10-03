@@ -148,9 +148,16 @@ against the theory. Stacked attaches multiply the candidate count ((|K1|+1)(|K2|
   baseline md5s in `scratch/md5_expr_deterministic.txt` (`md5sum -c` from the worktree root).
   The earlier 22.3% outcome was a lucky tie-break, not a better design.
 
-## 6. State (updated at the end of the 2026-10-03 later session)
+- RESOLVED 2026-10-03 (suffix `le` / `les` saved 0): when a prefix and a suffix rule share an expression (le, les, ...),
+  `planStream` step 1 always matched the prefix twin ("prefix" sorts before "suffix"), so the suffix rule was dead code: `voir le`
+  matched prefix `le`, found no host after it and failed `noNeighbour`. Now a prefix rule matching at the very END of the stream
+  (nothing after it) with a token before it yields to its suffix twin. Diagnostic: `scratch/why_suffix_le.py`. Effect (deterministic
+  driver): attaches alone 21.7% -> 23.3% (3.328e9), exceptions 206 -> 123, with briefs 3.838e9 -> 4.088e9, 0 shadows, 0 collisions.
+  Stage C's feedback loop needed 4 rounds (round 3 reached 0 collisions; it ended at 2 collisions, `n' a` vs `n' y a`, with the old
+  limit of 3), so the driver's limit is now 6 rounds. Position choice depends only on the stream edge, which a decoder knows.
 
-- Committed on the branch: the overlap policy (`attachKeysOverlap`, `EXPR_MAX_SHARED_KEYS = 0`), the cluster merge,
-  the brief families / `_fallbackPair` / `assignBriefStrokes` work, the driver changes, tests (807 pass), and the TEMPORARY
-  `from __future__ import annotations` in `src/affixes.py` (drop when main is merged).
-- The `scratch/expr-*` outputs are now reproducible (21.7%); baseline `scratch/md5_expr_deterministic.txt`.
+## 6. State (end of the 2026-10-03 later session)
+
+- Committed on `abbreviations`: overlap policy, cluster merge, no que briefs, deterministic Stage C, suffix-twin fix (see git log).
+- Baseline outputs: `scratch/md5_expr_deterministic.txt` (`md5sum -c` from the worktree root; same under PYTHONHASHSEED 1 and 2).
+- 808 tests pass.
