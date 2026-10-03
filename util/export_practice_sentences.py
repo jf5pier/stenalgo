@@ -27,6 +27,7 @@ those are looked up as the bare pronoun.
 Run: python -m util.export_practice_sentences [--candidates PATH]
 Requires the same inputs as `util.export_practice_words`, plus its output.
 """
+from typing import Any
 import argparse
 import json
 from dataclasses import dataclass
@@ -112,8 +113,8 @@ def _spellOut(tokens: list[list[str]]) -> str:
     return text
 
 
-def buildSentence(candidate: dict, chordsByOrtho: dict[str, list[Chord]],
-                  drillItems: set[tuple[str, str]]) -> dict:
+def buildSentence(candidate: dict[str, Any], chordsByOrtho: dict[str, list[Chord]],
+                  drillItems: set[tuple[str, str]]) -> dict[str, Any]:
     text: str = candidate["text"].strip()
     tokens: list[list[str]] = candidate["tokens"]
     body = text.rstrip(FINAL_PUNCTUATION).strip()
@@ -169,7 +170,7 @@ def main() -> None:
     with open(args.candidates, encoding="utf-8") as f:
         candidates = [json.loads(line) for line in f if line.strip()]
 
-    sentences: list[dict] = []
+    sentences: list[dict[str, Any]] = []
     seen: set[str] = set()
     rejections: list[tuple[str, str]] = []
     for candidate in candidates:

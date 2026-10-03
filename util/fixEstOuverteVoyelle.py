@@ -161,8 +161,11 @@ def applyLexique383Corrections(path: str, corrections: list[EstCorrection]) -> i
             continue
         c = correctionsByCgram.get(fields[cgramIdx])
         if c is not None and fields[phonIdx] == c.lexOldPhon:
+            assert c.lexNewPhon is not None
             fields[phonIdx] = c.lexNewPhon
+            assert c.lexNewSyll is not None
             fields[syllIdx] = c.lexNewSyll
+            assert c.lexNewPhonrenv is not None
             fields[phonrenvIdx] = c.lexNewPhonrenv
             lines[i] = "\t".join(fields) + ending
             modified += 1
@@ -191,7 +194,9 @@ def applyInfraCorrections(path: str, corrections: list[EstCorrection]) -> int:
             continue
         c = correctionsByCgram.get(fields[cgramIdx])
         if c is not None and fields[phonoIdx] == c.infraOldPhono and fields[assocIdx] == c.infraOldAssoc:
+            assert c.infraNewPhono is not None
             fields[phonoIdx] = c.infraNewPhono
+            assert c.infraNewAssoc is not None
             fields[assocIdx] = c.infraNewAssoc
             lines[i] = "\t".join(fields) + ending
             modified += 1
@@ -220,7 +225,9 @@ def applyMixteCorrections(path: str, corrections: list[EstCorrection]) -> int:
             continue
         c = correctionsByCgram.get(fields[cgramIdx])
         if c is not None and fields[phonIdx] == c.mixteOldPhon:
+            assert c.mixteNewPhon is not None
             fields[phonIdx] = c.mixteNewPhon
+            assert c.mixteNewSyllCv is not None
             fields[syllCvIdx] = c.mixteNewSyllCv
             lines[i] = "\t".join(fields) + ending
             modified += 1

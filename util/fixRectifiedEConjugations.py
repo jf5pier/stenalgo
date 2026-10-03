@@ -37,6 +37,7 @@ additionally rewrites both files.
 
 Run: PYTHONHASHSEED=0 env/bin/python -m util.fixRectifiedEConjugations [--apply]
 """
+from typing import Any
 import argparse
 import csv
 import re
@@ -99,7 +100,7 @@ def attestedAlternatingFormsByLemme(
 
 
 def remappedLemmas(
-    templates: dict, doublingTemplateByLemme: dict[str, str],
+    templates: dict[str, Any], doublingTemplateByLemme: dict[str, str],
 ) -> tuple[dict[str, str], list[tuple[str, str, str, str, str]], list[str]]:
     """
     (remap, disagreements, mixed): `remap` maps each lemma Verbiste puts on a
@@ -134,7 +135,7 @@ def remappedLemmas(
 
 
 def syntheticRowsToPrune(
-    remap: dict[str, str], templates: dict,
+    remap: dict[str, str], templates: dict[str, Any],
 ) -> list[tuple[int, str, str, str]]:
     """
     LexiqueSynthetic.tsv rows (line number, lemma, ortho, infover) of remapped

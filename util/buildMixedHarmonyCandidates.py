@@ -108,7 +108,13 @@ def lemmaFormVowel(rows: list[dict[str, str]], lemme: str, position: int) -> tup
 
 
 def nextSet(field_value: str) -> set[str]:
-    return {re.match(r"(-?[^\d]*)", item).group(1) or "-" for item in field_value.split(",") if item}
+    names: set[str] = set()
+    for item in field_value.split(","):
+        if item:
+            match = re.match(r"(-?[^\d]*)", item)
+            assert match is not None  # the pattern matches the empty string
+            names.add(match.group(1) or "-")
+    return names
 
 
 def verdict(record: dict[str, str], wikt: list[str] | None, lemmaInfo: tuple[str, int, int] | None) -> tuple[str, str]:

@@ -10,6 +10,7 @@ import os
 import time
 from contextlib import contextmanager
 from datetime import datetime
+from typing import Iterator
 
 _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TIMINGS_LOG = os.path.join(_REPO_ROOT, "pipeline_timings.log")
@@ -31,7 +32,7 @@ def recordTiming(kind: str, label: str, seconds: float, status: str = "ok") -> N
 
 
 @contextmanager
-def timedCall(kind: str, label: str):
+def timedCall(kind: str, label: str) -> Iterator[None]:
     """`with timedCall("phase", "..."):` around one call; records ok or failed."""
     start = time.monotonic()
     try:

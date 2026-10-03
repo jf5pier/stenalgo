@@ -15,7 +15,7 @@ The five other trainer data files are not touched: this exporter runs after S9b,
 """
 import json
 import os
-from typing import Iterable
+from typing import Any, Iterable
 
 from src.affixabbrev import Abbreviation, RuleSpec, loadRuleSpecs
 from src.keyboard import Starboard, Strokes
@@ -81,7 +81,7 @@ def _savedText(saved: int) -> str:
     return "économise un trait" if saved == 1 else f"économise {numberInFrench(saved)} traits"
 
 
-def _wordRecord(group: list[Abbreviation], starboard: Starboard, phonology: str, label: str) -> dict:
+def _wordRecord(group: list[Abbreviation], starboard: Starboard, phonology: str, label: str) -> dict[str, Any]:
     """`group`: the abbreviations of one spelling, best first. The first one's short outline is the primary one (the
     hint); every other outline (its long one, and both outlines of the others, i.e. the homographs) is an alternate."""
     a = group[0]
@@ -163,18 +163,18 @@ def _sectionTitle(ruleIndex: int, nRules: int) -> str:
 def buildAffixLessons(
     rules: list[RuleSpec], abbreviations: list[Abbreviation], starboard: Starboard,
     phonologyByIdx: dict[int, str], formByIdx: dict[int, str] | None = None,
-) -> dict:
+) -> dict[str, Any]:
     """Pure builder: rule specs + the abbreviations of `buildAbbreviations` -> the `affix-lessons.json` document."""
     rules = sorted(rules, key=lambda r: r.rank)
     formByIdx = formByIdx or {}
-    ruleDocs = []
+    ruleDocs: list[dict[str, Any]] = []
     for r in rules:
         keys = sorted(r.keys)
         ruleDocs.append({"rank": r.rank, "position": r.position, "ortho": r.ortho, "phono": r.phono, "keys": keys,
                          "keyNames": [starboard.keyDisplayName(k) for k in keys], "label": ruleLabel(r)})
-    lessons: list[dict] = []
+    lessons: list[dict[str, Any]] = []
 
-    def emit(title: str, sectionTitle: str, newKeys: list[int], rulesText: list[str], words: list[dict]) -> None:
+    def emit(title: str, sectionTitle: str, newKeys: list[int], rulesText: list[str], words: list[dict[str, Any]]) -> None:
         index = len(lessons) + 1
         lessons.append({
             "id": f"{TRACK}-{index:02d}", "track": TRACK, "index": index, "sectionTitle": sectionTitle,

@@ -12,6 +12,10 @@ from multiprocessing import get_context, Pipe
 from multiprocessing.connection import Connection
 from functools import lru_cache
 
+PhonemePairScores = dict[tuple[str, str], float]
+MultiphonemePairScores = dict[tuple[tuple[str, ...], tuple[str, ...]], float]
+
+
 @dataclass
 class Phoneme:
     """
@@ -51,7 +55,7 @@ class Phoneme:
                 or self.isTemporaryPhoneme()):
             raise ValueError("Phoneme %s is not a vowel or consonant" % self.name)
 
-    def increaseFrequency(self, frequency: float, pos: int = 0, invPos: int = 0):
+    def increaseFrequency(self, frequency: float, pos: int = 0, invPos: int = 0) -> None:
         self.frequency += frequency
         self.posFrequency[pos] += frequency
         self.invPosFrequency[invPos] += frequency
@@ -65,14 +69,14 @@ class Phoneme:
     def isTemporaryPhoneme(self) -> bool:
         return self.name in self.temporaryPhonemes
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: object) -> bool:
         if type(other) is Phoneme:
             return self.name == other.name
         elif type(other) is str:
             return self.name == other
         else : return False
 
-    def __lt__(self, other) -> bool:
+    def __lt__(self, other: "Phoneme") -> bool:
         return self.frequency < other.frequency
 
     def __str__(self) -> str:
@@ -95,15 +99,15 @@ class Biphoneme:
     pair: tuple[str, str]
     frequency: float = 0.0
 
-    def increaseFrequency(self, frequency: float):
+    def increaseFrequency(self, frequency: float) -> None:
         self.frequency += frequency
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: object) -> bool:
         if isinstance(other, Biphoneme):
             return self.pair == other.pair
         return False
 
-    def __lt__(self, other) -> bool:
+    def __lt__(self, other: "Biphoneme") -> bool:
         return self.frequency < other.frequency
 
     def __str__(self) -> str:
@@ -129,7 +133,7 @@ class Multiphoneme:
     def increaseFrequency(self, frequency: float) -> None:
         self.frequency += frequency
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: object) -> bool:
         if isinstance(other, Multiphoneme):
             return self.phonemes == other.phonemes
         elif isinstance(other, set):
@@ -139,7 +143,7 @@ class Multiphoneme:
             return set(self.phonemes) == other
         return False
 
-    def __lt__(self, other) -> bool:
+    def __lt__(self, other: "Multiphoneme") -> bool:
         return self.frequency < other.frequency
 
 
@@ -571,7 +575,7 @@ class Syllable:
                 "nucleus": list(map(lambda p: p.name, self.phonemesByPart["nucleus"])),
                 "coda": list(map(lambda p: p.name, self.phonemesByPart["coda"]))}
 
-    def increaseFrequency(self, frequency: float):
+    def increaseFrequency(self, frequency: float) -> None:
         self.frequency += frequency
         for pos, phoneme in enumerate(self.phonemes):
             phoneme.increaseFrequency(
@@ -583,7 +587,7 @@ class Syllable:
             for biphoneme in self.biphonemesByPart[syllabicPart]:
                 biphoneme.increaseFrequency(frequency)
 
-    def increaseSpellingFrequency(self, spelling: str, frequency: float):
+    def increaseSpellingFrequency(self, spelling: str, frequency: float) -> None:
         spelling_frequency = self.spellings.get(spelling, 0.0) + frequency
         self.spellings[spelling] = spelling_frequency
         self.increaseFrequency(frequency)
@@ -632,7 +636,7 @@ class Syllable:
             self._phonoWordFrequencySums = sums
         return sums
 
-    def __getstate__(self) -> dict:
+    def __getstate__(self) -> dict[str, Any]:
         # Never pickle the lazily-built frequency-sum cache: it rebuilds on
         # first use, and dropping it keeps Dictionary.pickle the size it was.
         state = self.__dict__.copy()
@@ -640,15 +644,15 @@ class Syllable:
         return state
 
     @staticmethod
-    def printTopPhonemesPerPosition(nb: int = -1):
+    def printTopPhonemesPerPosition(nb: int = -1) -> None:
         Syllable.allPhonemeCol.printTopPhonemesPerPosition(nb)
 
     @staticmethod
-    def printTopPhonemesPerInvPosition(nb: int = -1):
+    def printTopPhonemesPerInvPosition(nb: int = -1) -> None:
         Syllable.allPhonemeCol.printTopPhonemesPerInvPosition(nb)
 
     @staticmethod
-    def printTopPhonemes(nb: int = -1):
+    def printTopPhonemes(nb: int = -1) -> None:
         print("Whole words phonemes:")
         Syllable.allPhonemeCol.printTopPhonemes(nb)
         for part in ["onset", "coda", "nucleus"]:
@@ -656,7 +660,7 @@ class Syllable:
             Syllable.phonemeColByPart[part].printTopPhonemes(nb)
 
     @staticmethod
-    def printTopBiphonemes(nb: int = -1):
+    def printTopBiphonemes(nb: int = -1) -> None:
         for syllabicPart in ["onset", "coda", "nucleus"]:
             print(f"{syllabicPart} biphonemes")
             Syllable.biphonemeColByPart[syllabicPart].printTopBiphonemes(nb)
@@ -670,7 +674,7 @@ class Syllable:
     @staticmethod
     def printOptimizedBiphonemeOrderScore() -> None:
     
-        def _printCSV(phonemes, pairwiseScore) :
+        def _printCSV(phonemes: Any, pairwiseScore: Any) -> None:
             print(",".join(phonemes))
             for i in phonemes :
                 printLine = i
@@ -715,7 +719,7 @@ class Syllable:
     def biphonemeCollectionByPart(syllabicPart:str) -> BiphonemeCollection:
         return Syllable.biphonemeColByPart[syllabicPart]
 
-    def replacePhonemeInSyllabicPart(self, phoneme1: Phoneme|str, phoneme2: Phoneme|str, syllabicPart: str):
+    def replacePhonemeInSyllabicPart(self, phoneme1: Phoneme|str, phoneme2: Phoneme|str, syllabicPart: str) -> str:
         """Replace a phoneme in one of 3 positions in a syllable"""
         if syllabicPart == "onset":
             onset= "".join(map(str, self.phonemesByPart["onset"]))
@@ -744,7 +748,7 @@ class Syllable:
         else:
             return "".join(map(str, self.phonemes))
 
-    def replaceMultiphonemeInSyllabicPart(self, multiphoneme: Multiphoneme|tuple[str, ...], syllabicPart: str):
+    def replaceMultiphonemeInSyllabicPart(self, multiphoneme: Multiphoneme|tuple[str, ...], syllabicPart: str) -> str:
         """Replace a syllabic part by a group of phonemes in one of 3 positions in a syllable"""
         multiphonemeStr = multiphoneme.phonemes if isinstance(multiphoneme, Multiphoneme) else multiphoneme
         if syllabicPart == "onset":
@@ -771,17 +775,17 @@ class Syllable:
         else:
             return "".join(map(str, self.phonemes))
 
-    def sortedSpellings(self):
+    def sortedSpellings(self) -> list[tuple[str, float]]:
         spel_freq = [(k, v) for k, v in self.spellings.items()]
         spel_freq.sort(key=lambda kv: kv[1], reverse=True)
         return spel_freq
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: object) -> bool:
         if isinstance(other, Syllable):
             return self.phonemes == other.phonemes
         return False
 
-    def __lt__(self, other) -> bool:
+    def __lt__(self, other: "Syllable") -> bool:
         return self.frequency < other.frequency
 
     def __str__(self) -> str:
@@ -822,7 +826,7 @@ class SyllableCollection:
         return self.__str__()
 
     def updateSyllable(self, syllable_name: str, spelling: str,
-                       addedfrequency: float, word: Word | None = None,):
+                       addedfrequency: float, word: Word | None = None,) -> None:
         """Updates syllable from collection, adding missing ones if needed"""
         if syllable_name not in self.syllable_names:
             s = Syllable(syllable_name, spelling)
@@ -971,10 +975,10 @@ class SyllableCollection:
 
     @lru_cache
     def _getSyllablesOfMultiphonemes(self, multiphoneme: tuple[str, ...], syllabicPart: str) -> list[Syllable]:
-        return list(
-            filter(lambda syll: multiphoneme == (syll.multiphonemesByPart[syllabicPart].phonemes
-                                                 if syll.multiphonemesByPart[syllabicPart] != None else None), self.syllables)
-        )
+        def phonemesOf(syll: Syllable) -> tuple[str, ...] | None:
+            part = syll.multiphonemesByPart[syllabicPart]
+            return part.phonemes if part is not None else None
+        return [syll for syll in self.syllables if multiphoneme == phonemesOf(syll)]
 
     def lexicalSyllabicPartAmbiguityScore(self, multiphoneme1: tuple[str, ...],
                                           multiphoneme2: tuple[str, ...], syllabicPart: str) -> float:
@@ -1012,7 +1016,7 @@ class SyllableCollection:
                     score += least_scores
         return score
 
-    def analysePhonemSyllabicAmbiguity(self):
+    def analysePhonemSyllabicAmbiguity(self) -> tuple[PhonemePairScores, PhonemePairScores, PhonemePairScores]:
         """Determines the ambiguity of assigning multiple phonemes to a
         single keypress. Low ambiguity mean a keypress can mean two
         different phonemes and the other keypressess of the syllable will
@@ -1051,7 +1055,7 @@ class SyllableCollection:
         print("")
         return(onset_recv.recv(), nucleus_recv.recv(), coda_recv.recv())
 
-    def analysePhonemeLexicalAmbiguity(self):
+    def analysePhonemeLexicalAmbiguity(self) -> tuple[PhonemePairScores, PhonemePairScores, PhonemePairScores]:
         """Similairly to the Syllabic Ambiguity, but over the whole lexicon:
         determines if a key assigned  to two phonemes will create
         ambiguities when typing a full word. Low ambiguity means that the
@@ -1059,7 +1063,7 @@ class SyllableCollection:
         provide enough context to identify which of the multiple phonemes
         assgined to a keypress to choose."""
 
-        def _getLexicalAmbiguityScores(phonemes: str,  syllabicPart: str, send_end: Connection):
+        def _getLexicalAmbiguityScores(phonemes: str,  syllabicPart: str, send_end: Connection) -> None:
             lexicalAmbiguity: dict[tuple[str,str], float] = {}
             for p1i, p1 in tqdm(list(enumerate(phonemes[:-1])), ascii=True, ncols=80, unit=" phonemes pairs") :
                 for p2 in phonemes[p1i + 1 :]:
@@ -1091,7 +1095,7 @@ class SyllableCollection:
         return (onset_recv.recv(), nucleus_recv.recv(), coda_recv.recv())
         #return (onset_inter_syll_ambiguity, nucleus_inter_syll_ambiguity, coda_inter_syll_ambiguity)
 
-    def analyseMultiphonemeLexicalAmbiguity_serial(self):
+    def analyseMultiphonemeLexicalAmbiguity_serial(self) -> tuple[MultiphonemePairScores, MultiphonemePairScores, MultiphonemePairScores]:
         """Similairly to the Syllabic Ambiguity, but over the whole lexicon:
         determines if a stroke assigned to two groups of phonemes in a single
         syllabic par will create ambiguities when typing a full word. Low
@@ -1099,7 +1103,7 @@ class SyllableCollection:
         other syllables of the word provide enough context to identify which
         of the multiple groups of phonemes assgined to a keypress to choose."""
 
-        def _getLexicalAmbiguityScores(multiphonemes: list[tuple[str, ...]],  syllabicPart: str):
+        def _getLexicalAmbiguityScores(multiphonemes: list[tuple[str, ...]],  syllabicPart: str) -> MultiphonemePairScores:
             lexicalAmbiguity: dict[tuple[tuple[str, ...], tuple[str, ...]], float] = {}
             for p1i, multip1 in tqdm(list(enumerate(multiphonemes[:-1])), ascii=True, ncols=80, unit=" multiphonemes pairs") :
                 for multip2 in multiphonemes[p1i + 1 :]:
@@ -1197,7 +1201,7 @@ class SyllableCollection:
         print(f"Right hand (coda) {ambiguityType} minimal-ambiguity multiphonemes pairs")
         self._richMultiphonemePrint(sortedAmbiguities["coda"])
 
-    def printTopSyllables(self, nb: int = -1):
+    def printTopSyllables(self, nb: int = -1) -> None:
         self.syllables.sort(reverse=True)
         for syl in self.syllables[:nb]:
             print("Syllable:", str(syl))

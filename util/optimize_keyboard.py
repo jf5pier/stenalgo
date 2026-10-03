@@ -22,10 +22,14 @@ Exit codes: 0 wrote the layout; 1 seed missing or the solver produced no layout.
 import argparse
 import os
 import sys
+from typing import TYPE_CHECKING
 
 from src.cpsatsolver import optimizeKeyboard
 from src.keyboard import Starboard
 from util._theoryio import loadDictionary
+
+if TYPE_CHECKING:
+    from dictionary import Dictionary
 
 SEED_PATH = "starboard3h.json"
 DEFAULT_OUTPUT = "starboard3h_optimized.json"
@@ -42,7 +46,7 @@ def parseArgs(argv: list[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def _buildDictionaryInMemory():  # type: ignore[no-untyped-def]
+def _buildDictionaryInMemory() -> "Dictionary":
     # src/ambiguitychecker.py's __main__ pattern: build without persisting, so this
     # command never silently refreshes the pickle cache.
     from src.grammar import Syllable

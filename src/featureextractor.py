@@ -169,9 +169,9 @@ def extractDiscriminatingFeatures(theory: dict[Strokes, list[Word]]) \
                                      key=lambda item: (_featureComplexity(item[0]), -len(item[1])))
         }
         # Greedy pick the best feature
-        selectedFeature, selectedWords = list(sortedLeftOverFeatures.items())[0]
+        selectedFeature, featureWords = list(sortedLeftOverFeatures.items())[0]
         orderedFeaturesSelected.append(selectedFeature)
-        print(f"{fi+1}. Feature:{selectedFeature:>25}: discriminates {len(selectedWords):>4}" +
+        print(f"{fi+1}. Feature:{selectedFeature:>25}: discriminates {len(featureWords):>4}" +
               f" words." +
               f" A total of {len(set(wordsUsingFeature[selectedFeature]))} words have this feature")
 

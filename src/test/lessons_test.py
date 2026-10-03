@@ -10,6 +10,7 @@ import re
 import pytest
 from ..keyboard import Starboard
 from ..word import GramCat, Word
+from typing import Any
 from util.export_lessons import (
     MAX_LESSON_KEYPRESSES, RECORD_FIELDS, accordRule, buildLessons, chunkStep,
     eligible, examplesFallbackByKeypress, fingerKeypressesOfStroke,
@@ -49,7 +50,7 @@ def starboard_with_layout() -> Starboard:
 
 def _make_word(**overrides) -> Word:
     """Create a Word with sensible defaults, overriding any field."""
-    defaults = dict(
+    defaults: dict[str, Any] = dict(
         ortho="pat",
         phonology="pat",
         lemme="pat",
@@ -85,7 +86,7 @@ def _fixture_theory(starboard: Starboard):
     phonetic strokes (skipped) and 1 invalid record (non-trailing reserved-only
     stroke). Every reading list is aligned with its stroke list, so the real
     `wordFeatureCombinations` machinery is never needed."""
-    disambiguated = {}
+    disambiguated: dict[Any, Any] = {}
     wordToStrokes = {}
     readingsByWord = {}
     for canonOrtho, markOrtho, phon, stroke, freq in _PAIRS:
@@ -280,9 +281,13 @@ class TestPhonemeOrderingKey:
     def test_plain_sum_has_no_shape_cost_and_no_discount(self, starboard: Starboard):
         # getStrokeCost adds the zigzag term (+100) then discounts 0.85**nFingers;
         # the ordering key is the raw per-finger sum.
-        assert phonemeOrderingKey((2, 5), starboard)[0] == 250
+        key = phonemeOrderingKey((2, 5), starboard)
+        assert key is not None
+        assert key[0] == 250
         assert starboard.getStrokeCost((2, 5), "onset") == 252
-        assert phonemeOrderingKey((8, 9), starboard)[0] == 150
+        key = phonemeOrderingKey((8, 9), starboard)
+        assert key is not None
+        assert key[0] == 150
         assert starboard.getStrokeCost((8, 9), "onset") == 127
 
 
@@ -870,7 +875,7 @@ class TestBuildLessonsDocument:
 
     def test_lesson_ids_are_dense_and_generation_ordered(self, lessons):
         document, counts = lessons
-        byTrack = {}
+        byTrack: dict[str, list[str]] = {}
         for lesson in document["lessons"]:
             byTrack.setdefault(lesson["track"], []).append(lesson["id"])
         assert byTrack == {trackId: [f"{trackId}-{index:02d}" for index in range(

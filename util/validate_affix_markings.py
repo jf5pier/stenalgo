@@ -20,8 +20,9 @@ import sys
 from collections import Counter
 
 from src import affixes as A
-from src.affixabbrev import Abbreviation, routesOf
-from src.keyboard import Starboard, Strokes
+from src.affixabbrev import Abbreviation
+from src.affixes import routesOf
+from src.keyboard import Starboard, Strokes, canonicalizeStrokes
 from util._stenorender import renderFinalStrokesToRTFCRE
 from util._affixio import loadAbbreviations
 
@@ -32,7 +33,7 @@ MARK_KEYS = {10, 15}
 
 
 def routeOutline(rec: A.WordRecord, marks: tuple[int, ...], extra: Strokes) -> Strokes:
-    return A.canonicalizeStrokes(A.withMarks(rec.base, marks) + extra)
+    return canonicalizeStrokes(A.withMarks(rec.base, marks) + extra)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -47,7 +48,7 @@ def main(argv: list[str] | None = None) -> int:
     if nExamples:
         for w, outs in disambiguated.items():
             for o in outs:
-                theoryWord.setdefault(A.canonicalizeStrokes(o), set()).add(w.ortho)
+                theoryWord.setdefault(canonicalizeStrokes(o), set()).add(w.ortho)
 
     routeOf: dict[tuple[str, Strokes], list[tuple[A.WordRecord, int]]] = {}
     for r in records:
@@ -79,7 +80,7 @@ def main(argv: list[str] | None = None) -> int:
         if elsewhere:
             errors.append(f"A: {a.ortho} route {ri}: stray mark keys {sorted(elsewhere)} in the base strokes")
 
-    present = Counter()
+    present: Counter[str] = Counter()
     lostExamples: dict[str, list[str]] = {"theory": [], "abbreviation": []}
     gaps: list[str] = []
     potential = 0
@@ -98,7 +99,7 @@ def main(argv: list[str] | None = None) -> int:
             if (idx, ri) in byRoute:
                 present["has an abbreviation"] += 1
                 continue
-            cand = A.canonicalizeStrokes(A.withMarks(shortBase, marks) + extra)
+            cand = canonicalizeStrokes(A.withMarks(shortBase, marks) + extra)
             shown = renderFinalStrokesToRTFCRE(starboard, cand)
             mine = f"{rec.ortho} (freq {rec.frequency:.1f}) route {ri}, long {renderFinalStrokesToRTFCRE(starboard, routeOutline(rec, marks, extra))}"
             if cand in taken:

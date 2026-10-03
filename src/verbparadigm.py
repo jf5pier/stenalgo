@@ -187,7 +187,9 @@ class ConjugationTemplate:
 
     @property
     def infinitiveSuffix(self) -> str:
-        return self.forms["inf"][0]
+        suffix = self.forms["inf"][0]
+        assert suffix is not None
+        return suffix
 
 
 def parseConjugationTemplates(xmlPath: str | Path) -> dict[str, ConjugationTemplate]:
@@ -201,7 +203,7 @@ def parseConjugationTemplates(xmlPath: str | Path) -> dict[str, ConjugationTempl
         name = templateElement.get("name")
         if not name:
             continue
-        forms: dict[str, list[str]] = {}
+        forms: dict[str, list[str | None]] = {}
         for moodElement in templateElement:
             moodCode = MOOD_TAG_TO_CODE.get(moodElement.tag)
             if moodCode is None:
@@ -279,9 +281,12 @@ def generateOrthoForm(
         index = IMPERATIVE_PERSON_INDEX.get(personNumber) if personNumber else None
     else:
         index = FINITE_PERSON_INDEX.get(personNumber) if personNumber else None
-    if index is None or index >= len(endings) or endings[index] is None:
+    if index is None or index >= len(endings):
         return None
-    return radical + endings[index]
+    ending = endings[index]
+    if ending is None:
+        return None
+    return radical + ending
 
 
 # Literal written ending appended to the last syllable segment of the m_s

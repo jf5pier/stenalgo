@@ -22,7 +22,7 @@ pytest src/test/word_test.py::TestWord::test_method_name
 # Prerequisites: dependencies installed. Outputs: console report only.
 
 # Type checking
-mypy src/
+mypy                                          # the scope is set in mypy.ini: src/, util/, dictionary.py, lexique.py
 # Prerequisites: dependencies installed. Outputs: console report only.
 
 # The pipeline in dependency order, run from the repo root; python dictionary.py orchestrates all of it.
@@ -165,7 +165,8 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 
 ## Verification approach
 
-- `pytest src/test/` must pass after any `.py` change (1005 tests at the time of writing, affix layer and lessons exporter included).
+- `pytest src/test/` must pass after any `.py` change (1029 tests at the time of writing, affix layer and lessons exporter included).
+- `mypy` (bare, scope and options in `mypy.ini`) must report no issues after any `.py` change.
 - Behaviour-preserving changes are proven by a full rebuild following the rebuild table in
   `docs/PIPELINE.md`, comparing the md5s of `phonetic_theory.tsv`, `disambiguated_theory.tsv`,
   `resolved_press_sets.json`, `keypress_groups.json`, `realization_report.json`,
@@ -184,3 +185,27 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 - TSV files use tab separators; recent commits fixed spaces-vs-tabs issues
 - `starboard3h.json` contains the pre-optimized keyboard mapping (26 keys: 22 phoneme keys + 4 reserved keys, 10 `*` and 15 `#` for the star/hash marks, 0/1 held for a possible third mark)
 - Resource lexicon files in `resources/` are large (10-25MB TSV); `top500_books.txt` and `top500_film.txt` define frequent words
+
+### Typing conventions (keep `mypy` clean)
+
+`mypy.ini` sets `check_untyped_defs`, so unannotated test and helper bodies are checked too. `mypy --strict`
+is clean on production code (`src/`, `util/`, `dictionary.py`, `lexique.py` outside `src/test/`); keep it so
+(the tests still carry about 1400 strict-only missing-annotation errors, tolerated for now).
+
+- Annotate every new production function (parameters and return). Nested helpers and `__eq__`/`__lt__` too:
+  `__eq__(self, other: object) -> bool`, `__lt__(self, other: "Cls") -> bool`.
+- Parameterize generics: `dict[str, Any]`, `list[int]`, `Counter[str]`, never a bare `dict`/`list`/`tuple`/`Counter`.
+- Do not reuse a variable name for a different type in one function (loop variables included); rename instead.
+  Most of the historical errors were this.
+- Narrow Optionals before use: `Starboard.fromJSONFile` returns `Self | None`, and `Decisions.growthForms`,
+  `proposeGrowth`, `loadStore` etc. can return `None`. In tests use `assert x is not None` (or a small helper).
+- Import a name from the module that defines it, not from a module that merely re-imports it
+  (`canonicalizeStrokes` from `src.keyboard`, `routesOf` from `src.affixes`, `Lemme` from `src.word`,
+  `MAX_ALTERNATIVES` from `src.affixbinding`): mypy rejects implicit re-exports.
+- Do not write `_ = obj.method()` for a method that returns `None`; mypy flags it once the method is annotated.
+- Types that would create an import cycle go under `if TYPE_CHECKING:` (see `util/_theoryio.py`).
+- ortools stubs type solver statuses and `cp_model.OPTIMAL`-style constants as different enums, so
+  `status == cp_model.OPTIMAL` needs `# type: ignore[comparison-overlap]` (false positive, works at runtime).
+- Test data that is deliberately simplified (fake stroke tuples, `Word(**defaults)` dicts) is annotated `Any`
+  (`defaults: dict[str, Any]`); an intentionally unused argument is the module-level `NONE: Any = None`.
+- Run bare `mypy`, not `mypy src/`: the latter skips `util/`, `dictionary.py` and `lexique.py`.

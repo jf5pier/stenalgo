@@ -36,6 +36,8 @@ Run: python -m util.export_lessons
 Requires the same inputs as `util.export_practice_words`, plus
 `realization_report.json` (`python -m util.build_realization_report`).
 """
+from collections.abc import Callable, Iterable
+from typing import Any
 import json
 from functools import lru_cache
 
@@ -215,7 +217,7 @@ def phonemeOrderingKey(keypress: Keypress, starboard: Starboard) -> tuple[int, i
     return (weightSum, len(keysByFinger), maxFingerRank, PART_RANK[part], tuple(sorted(keypress)))
 
 
-def phonemeSteps(starboard: Starboard) -> list[tuple[int, int, list[dict]]]:
+def phonemeSteps(starboard: Starboard) -> list[tuple[int, int, list[dict[str, Any]]]]:
     """The layout's keypresses grouped into steps at each distinct `(weightSum,
     nFingers)` of the §2.2 ordering; within a step, keypresses are sorted by the tail
     `(maxFingerRank, partRank, sortedKeypress)`. Each keypress item is
@@ -230,7 +232,7 @@ def phonemeSteps(starboard: Starboard) -> list[tuple[int, int, list[dict]]]:
         assert part is not None
         byStep.setdefault((weightSum, nFingers), []).append(
             (maxFingerRank, partRank, sortedKeypress, tuple(phonemes), part))
-    steps: list[tuple[int, int, list[dict]]] = []
+    steps: list[tuple[int, int, list[dict[str, Any]]]] = []
     for weightSum, nFingers in sorted(byStep):
         items = [{"keypress": tail[2], "phonemes": tail[3], "part": tail[4]}
                  for tail in sorted(byStep[(weightSum, nFingers)])]
@@ -238,13 +240,13 @@ def phonemeSteps(starboard: Starboard) -> list[tuple[int, int, list[dict]]]:
     return steps
 
 
-def chunkStep(items: list[dict]) -> list[list[dict]]:
+def chunkStep(items: list[dict[str, Any]]) -> list[list[dict[str, Any]]]:
     """Deal a step's tail-sorted keypresses round-robin over part (nucleus -> onset ->
     coda, skipping exhausted parts), then chunk the dealt sequence into consecutive
     lists of at most `MAX_LESSON_KEYPRESSES` keypresses (§2.5). The round-robin mixes a
     vowel with consonants in an early lesson so it can already write words."""
     queues = {part: [item for item in items if item["part"] == part] for part in PART_ORDER}
-    dealt: list[dict] = []
+    dealt: list[dict[str, Any]] = []
     nextIndex = {part: 0 for part in PART_ORDER}
     while True:
         took = False
@@ -310,7 +312,7 @@ def verbTenseOf(reading: frozenset[str]) -> str | None:
     return None
 
 
-def eligible(record: dict, coveredKeypresses: frozenset[Keypress],
+def eligible(record: dict[str, Any], coveredKeypresses: frozenset[Keypress],
              introducedGroups: frozenset[int], introducedCodes: frozenset[str]) -> bool:
     """§3: every per-finger keypress of the word's phonetic strokes is covered, every
     Keypress Group a feature discriminating stroke needs is introduced, and the record's
@@ -320,16 +322,16 @@ def eligible(record: dict, coveredKeypresses: frozenset[Keypress],
         return False
     if code != "" and code not in introducedCodes:
         return False
-    return (record["_keyps"] <= coveredKeypresses
-            and record["_groups"] <= introducedGroups)
+    return bool(record["_keyps"] <= coveredKeypresses
+                and record["_groups"] <= introducedGroups)
 
 
-def selectTopWords(records: list[dict], limit: int = POOL_SIZE) -> list[dict]:
+def selectTopWords(records: list[dict[str, Any]], limit: int = POOL_SIZE) -> list[dict[str, Any]]:
     """The pool ranking of §5: top `limit` by `(-frequency, ortho, steno)`."""
     return sorted(records, key=lambda r: (-r["frequency"], r["ortho"], r["steno"]))[:limit]
 
 
-def loadKeypressGroups(realizationReport: dict) -> list[dict]:
+def loadKeypressGroups(realizationReport: dict[str, Any]) -> list[dict[str, Any]]:
     """The Keypress Groups of `realization_report.json`'s `keypressGroups`, normalized
     and deterministically ordered (descending affectedWords, ties by the sorted marker
     tuple then id) -- group ids are not stable across runs, so code never orders by id
@@ -351,8 +353,8 @@ def buildRecordStream(
     disambiguatedTheory: dict[Word, list[Strokes]],
     wordToStrokes: dict[Word, Strokes],
     readingsByWord: dict[Word, list[list[frozenset[str]]]],
-    keypressGroups: list[dict],
-) -> tuple[list[dict], int, int]:
+    keypressGroups: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], int, int]:
     """The FULL disambiguated theory rendered into practice-words-shaped records (no
     10,000-record cap): one record per independently-valid stroke, merged on
     `(ortho, steno)` exactly the way `util.export_practice_words` merges, plus the
@@ -376,7 +378,7 @@ def buildRecordStream(
             groupsByStroke[strokeKeys] = cached
         return cached
 
-    byOrthoSteno: dict[tuple[str, str], dict] = {}
+    byOrthoSteno: dict[tuple[str, str], dict[str, Any]] = {}
     skippedWords = 0
     invalidRecords = 0
     for word in sorted(disambiguatedTheory, key=_wordSortKey):
@@ -453,7 +455,7 @@ def buildRecordStream(
 
 # --- Rule-text rendering (§7) -------------------------------------------------
 
-def _exampleOrthos(pool: list[dict], count: int = 3) -> list[str]:
+def _exampleOrthos(pool: list[dict[str, Any]], count: int = 3) -> list[str]:
     return [record["ortho"] for record in pool[:count]]
 
 
@@ -461,7 +463,7 @@ def _quotedExamples(orthos: list[str]) -> str:
     return ", ".join(f"« {ortho} »" for ortho in orthos)
 
 
-def _keyNames(starboard: Starboard, keys) -> str:
+def _keyNames(starboard: Starboard, keys: Iterable[int]) -> str:
     return ", ".join(starboard.keyDisplayName(key) for key in keys)
 
 
@@ -485,7 +487,7 @@ def phonemePartsOfWord(word: Word) -> frozenset[tuple[str, str]]:
     return frozenset(pairs)
 
 
-def examplesFallbackByKeypress(stream: list[dict]) -> dict[Keypress, tuple[dict, ...]]:
+def examplesFallbackByKeypress(stream: list[dict[str, Any]]) -> dict[Keypress, tuple[dict[str, Any], ...]]:
     """Per keypress, the unmarked records of the FULL candidate stream that press it,
     most frequent first (`(-frequency, ortho, steno)`): the §7.1 example fallback for
     a phoneme the lesson's own pool covers with no word -- every phoneme of every
@@ -493,7 +495,7 @@ def examplesFallbackByKeypress(stream: list[dict]) -> dict[Keypress, tuple[dict,
     never serve as fallback examples: a marked word must not appear before the
     desambiguation track (§8)."""
     byFrequency = sorted(stream, key=lambda r: (-r["frequency"], r["ortho"], r["steno"]))
-    index: dict[Keypress, list[dict]] = {}
+    index: dict[Keypress, list[dict[str, Any]]] = {}
     for record in byFrequency:
         if record["_code"] != "":
             continue
@@ -502,8 +504,8 @@ def examplesFallbackByKeypress(stream: list[dict]) -> dict[Keypress, tuple[dict,
     return {keypress: tuple(records) for keypress, records in index.items()}
 
 
-def _examplesByPhoneme(item: dict, pool: list[dict],
-                       fallbackByKeypress: dict[Keypress, tuple[dict, ...]]) -> dict[str, list[str]]:
+def _examplesByPhoneme(item: dict[str, Any], pool: list[dict[str, Any]],
+                       fallbackByKeypress: dict[Keypress, tuple[dict[str, Any], ...]]) -> dict[str, list[str]]:
     """Up to 3 example orthographies per phoneme of the keypress (§7.1): first the
     lesson's own pool records that press the keypress and realize the phoneme in
     the keypress's syllabic part (`_phonemeParts` -- a keypress's keys sit in one
@@ -544,8 +546,8 @@ def _multiPhonemeText(phonemes: tuple[str, ...],
     return ", ".join(parts[:-1]) + f" ou {parts[-1]}"
 
 
-def phonemeRule(item: dict, starboard: Starboard, pool: list[dict],
-                fallbackByKeypress: dict[Keypress, tuple[dict, ...]]) -> dict:
+def phonemeRule(item: dict[str, Any], starboard: Starboard, pool: list[dict[str, Any]],
+                fallbackByKeypress: dict[Keypress, tuple[dict[str, Any], ...]]) -> dict[str, Any]:
     """One key, one part, one phoneme (§7.1); each phoneme's examples sit directly
     after it. A multi-phoneme keypress is atomic, so it gets one rule listing every
     phoneme with its own examples; chord keypresses name every key. The rule carries
@@ -587,8 +589,8 @@ def _accordMarkerText(markers: tuple[str, ...]) -> str:
     return " et ".join(labels)
 
 
-def accordRule(group: dict, starboard: Starboard, wordToStrokes: dict[Word, Strokes],
-               pool: list[dict]) -> dict:
+def accordRule(group: dict[str, Any], starboard: Starboard, wordToStrokes: dict[Word, Strokes],
+               pool: list[dict[str, Any]]) -> dict[str, Any]:
     """§7.2: the marked form contrasted with the same word's phonetic-theory steno."""
     touche = _keyNames(starboard, group["chosenKeys"])
     marker = _accordMarkerText(group["markers"])
@@ -601,7 +603,7 @@ def accordRule(group: dict, starboard: Starboard, wordToStrokes: dict[Word, Stro
     return {"kind": "accord", "text": text}
 
 
-def verbMarkerRule(group: dict, starboard: Starboard, pool: list[dict]) -> dict:
+def verbMarkerRule(group: dict[str, Any], starboard: Starboard, pool: list[dict[str, Any]]) -> dict[str, Any]:
     """§7.3."""
     touche = _keyNames(starboard, group["chosenKeys"])
     markers = " et ".join(VERB_MARKER_LABELS[m] for m in group["markers"])
@@ -612,7 +614,7 @@ def verbMarkerRule(group: dict, starboard: Starboard, pool: list[dict]) -> dict:
 
 
 def verbTenseRule(tenseLabel: str, touchedKeys: list[int], starboard: Starboard,
-                  pool: list[dict]) -> dict:
+                  pool: list[dict[str, Any]]) -> dict[str, Any]:
     """§7.4: {touches} are the marker keys the tense's selected records actually press."""
     touches = _keyNames(starboard, touchedKeys)
     text = (f"Pour {tenseLabel}, les marques de conjugaison sont {touches} : "
@@ -620,7 +622,7 @@ def verbTenseRule(tenseLabel: str, touchedKeys: list[int], starboard: Starboard,
     return {"kind": "verb-tense", "text": text}
 
 
-def markRule(code: str, starboard: Starboard, pool: list[dict]) -> dict:
+def markRule(code: str, starboard: Starboard, pool: list[dict[str, Any]]) -> dict[str, Any]:
     """§7.5: the first complete lemma-homophone contrast of the pool (the marked record
     and the canonical member of its group); without a canonical member in the pool, the
     first marked record alone."""
@@ -646,9 +648,9 @@ def markRule(code: str, starboard: Starboard, pool: list[dict]) -> dict:
 
 # --- Lesson assembly (§4, §5, §6) ----------------------------------------------
 
-def _emitLesson(lessons: list[dict], counters: dict[str, int], track: str, title: str,
+def _emitLesson(lessons: list[dict[str, Any]], counters: dict[str, int], track: str, title: str,
                 kind: str, sectionTitle: str, newKeys: list[int], newChords: list[list[int]],
-                rules: list[dict], words: list[dict]) -> None:
+                rules: list[dict[str, Any]], words: list[dict[str, Any]]) -> None:
     index = counters.get(track, 0) + 1
     counters[track] = index
     lessons.append({
@@ -658,7 +660,7 @@ def _emitLesson(lessons: list[dict], counters: dict[str, int], track: str, title
     })
 
 
-def _wordsOf(pool: list[dict]) -> list[dict]:
+def _wordsOf(pool: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return [{field: record[field] for field in RECORD_FIELDS} for record in pool]
 
 
@@ -667,15 +669,15 @@ def buildLessons(
     disambiguatedTheory: dict[Word, list[Strokes]],
     wordToStrokes: dict[Word, Strokes],
     readingsByWord: dict[Word, list[list[frozenset[str]]]],
-    keypressGroups: list[dict],
-) -> tuple[dict, dict[str, int]]:
+    keypressGroups: list[dict[str, Any]],
+) -> tuple[dict[str, Any], dict[str, int]]:
     """The whole `lessons.json` document: the five tracks (§4) and the flat lesson list
     in generation order, per-track indexes dense after drops (§5). Returns
     `(document, perTrackLessonCounts)`."""
     stream, skippedWords, invalidRecords = buildRecordStream(
         starboard, disambiguatedTheory, wordToStrokes, readingsByWord, keypressGroups)
     fallbackByKeypress = examplesFallbackByKeypress(stream)
-    clusterMaxFrequency: dict[tuple, float] = {}
+    clusterMaxFrequency: dict[tuple[Any, ...], float] = {}
     for record in stream:
         cluster = record["_cluster"]
         clusterMaxFrequency[cluster] = max(clusterMaxFrequency.get(cluster, 0.0),
@@ -685,13 +687,13 @@ def buildLessons(
                           if set(g["markers"]) <= ACCORD_MARKER_ATOMS]
     verbGroupIndexes = [i for i in range(len(keypressGroups)) if i not in accordGroupIndexes]
 
-    lessons: list[dict] = []
+    lessons: list[dict[str, Any]] = []
     counters: dict[str, int] = {}
     coveredKeypresses: frozenset[Keypress] = frozenset()
     introducedGroups: frozenset[int] = frozenset()
     introducedCodes: frozenset[str] = frozenset()
 
-    def poolTop(predicate) -> list[dict]:
+    def poolTop(predicate: Callable[[dict[str, Any]], bool]) -> list[dict[str, Any]]:
         return selectTopWords([record for record in stream
                                if predicate(record)
                                and eligible(record, coveredKeypresses, introducedGroups,
@@ -748,9 +750,11 @@ def buildLessons(
                  for i in verbGroupIndexes],
                 _wordsOf(markerPool))
     for tenseId, _atoms, tenseLabel in TENSES:
-        pool = poolTop(lambda record, tid=tenseId:
-                       record["_gramCats"] & {GramCat.VER, GramCat.AUX}
-                       and any(verbTenseOf(reading) == tid for reading in record["_readings"]))
+        def hasTense(record: dict[str, Any], tid: Any = tenseId) -> bool:
+            return bool(record["_gramCats"] & {GramCat.VER, GramCat.AUX}
+                        and any(verbTenseOf(reading) == tid for reading in record["_readings"]))
+
+        pool = poolTop(hasTense)
         if len(pool) < MIN_DROP_POOL:
             continue  # introduces no coverage (§5)
         touchedGroups = frozenset().union(*[record["_groups"] for record in pool]) if pool else frozenset()
@@ -769,8 +773,8 @@ def buildLessons(
         introducedCodes = introducedCodes | {code}
         eligibleRecords = [record for record in stream
                            if eligible(record, coveredKeypresses, introducedGroups, introducedCodes)]
-        byCode: dict[tuple, list[dict]] = {}
-        canonicalByCluster: dict[tuple, list[dict]] = {}
+        byCode: dict[tuple[Any, ...], list[dict[str, Any]]] = {}
+        canonicalByCluster: dict[tuple[Any, ...], list[dict[str, Any]]] = {}
         for record in eligibleRecords:
             if record["_code"] == code:
                 byCode.setdefault(record["_cluster"], []).append(record)
@@ -785,7 +789,7 @@ def buildLessons(
                              block[0]["steno"], block))
         clusters.sort(key=lambda c: c[:3])
         # Whole lemma-homophone groups in rank order; the cap never splits a pair (§5).
-        pool: list[dict] = []
+        pool = []
         for _maxFreq, _ortho, _steno, block in clusters:
             if len(pool) + len(block) > POOL_SIZE:
                 break
@@ -794,6 +798,8 @@ def buildLessons(
             introducedCodes = introducedCodes - {code}  # dropped: its words stay ineligible
             continue
         if code == "*":
+            newKeys: list[int]
+            newChords: list[list[int]]
             newKeys, newChords = [STAR_KEY], []
         elif code == "#":
             newKeys, newChords = [HASH_KEY], []

@@ -20,6 +20,7 @@ Run: python -m util.check_conjugation_disambiguation_order
 Requires Dictionary.pickle/PhoneticTheory.pickle (`python -m util.build_phonetic_theory` first) and
 elicitation_answers.json.
 """
+from typing import Any
 import json
 import os
 import pickle
@@ -89,7 +90,7 @@ class Violation:
 
 
 def checkPressByOrthoCombination(
-    pressByOrthoCombinationByGroup: dict, orthoLemmeGramCatByGroupKey: dict[tuple, str],
+    pressByOrthoCombinationByGroup: dict[Any, Any], orthoLemmeGramCatByGroupKey: dict[tuple[Any, ...], str],
 ) -> tuple[list[Violation], set[str]]:
     violations: list[Violation] = []
     seenAtoms: set[str] = set()

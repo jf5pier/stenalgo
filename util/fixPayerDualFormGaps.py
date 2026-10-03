@@ -162,8 +162,8 @@ def main() -> None:
             continue
         for code, personNumber, iEnding, yEnding in slots:
             tag = f"{code}:{personNumber}"
-            for ending, formType in ((iEnding, "i"), (yEnding, "y")):
-                ortho = radical + ending
+            for donorEnding, formType in ((iEnding, "i"), (yEnding, "y")):
+                ortho = radical + donorEnding
                 for row in attestedByLemmeOrtho.get((lemme, ortho), []):
                     if tag not in {t for t in row["infover"].split(";") if t}:
                         continue
@@ -188,8 +188,8 @@ def main() -> None:
     skipped: list[tuple[str, str, str, str]] = []  # lemme, tag, ortho, reason
 
     for lemme in sorted(payerLemmas):
-        infinitiveWord = infinitiveByLemme.get(lemme)
-        if infinitiveWord is None:
+        lemmaInfinitive = infinitiveByLemme.get(lemme)
+        if lemmaInfinitive is None:
             continue
         try:
             radical = infinitiveRadical(lemme, template)
@@ -210,7 +210,7 @@ def main() -> None:
             reasons: list[str] = []
             for field in STRING_FIELDS:
                 suffix = fieldSuffix[field]
-                infVal = infinitiveWord[field]
+                infVal = lemmaInfinitive[field]
                 radicalLen = len(infVal) - len(suffix)
                 key = (field, code, personNumber, missingSide)
                 ending = slotEnding.get(key)

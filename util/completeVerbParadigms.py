@@ -29,6 +29,7 @@
 # yet flow into LexiqueMixte.tsv or the rest of the pipeline. That wiring is
 # the remaining half of Stage 5 and is deliberately left for a separate,
 # explicitly-approved change.
+from typing import Any
 import argparse
 import gc
 import os
@@ -163,11 +164,11 @@ def attestedFiniteFormsByLemme(
 
 
 def findStructuralCandidates(
-    strokeLemmeDiscriminators: dict,
+    strokeLemmeDiscriminators: dict[Any, Any],
     theory: dict[Strokes, list[Word]],
     verbisteTemplates: dict[Lemme, str],
-    exceptions: dict,
-    conjugationTemplates: dict,
+    exceptions: dict[Any, Any],
+    conjugationTemplates: dict[Any, Any],
     endingTables: ConjugationEndingTables,
     minFiniteMatchRate: float = MIN_FINITE_MATCH_RATE,
 ) -> tuple[list[Candidate], list[tuple[Lemme, str]]]:
@@ -272,7 +273,7 @@ def temporarilyAugmented(
 def confirmCandidates(
     candidates: list[Candidate],
     theory: dict[Strokes, list[Word]],
-    baselineFeaturesetWords: dict,
+    baselineFeaturesetWords: dict[Any, Any],
 ) -> tuple[list[Candidate], list[tuple[Lemme, str]]]:
     """
     Keeps only the candidates that actually cause a NEW cross-lemma

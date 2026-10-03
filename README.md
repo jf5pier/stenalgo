@@ -48,7 +48,7 @@ pip install -r requirements.txt             # install dependencies
 # Prerequisites: Python 3.12+. Outputs: installed packages only.
 pytest src/test/                            # run tests
 # Prerequisites: dependencies. Outputs: console report only.
-mypy src/                                   # type checking
+mypy                                        # type checking (scope in mypy.ini)
 # Prerequisites: dependencies. Outputs: console report only.
 
 # The pipeline in dependency order, run from the repo root; python dictionary.py orchestrates all of it:

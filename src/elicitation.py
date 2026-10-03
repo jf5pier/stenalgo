@@ -17,6 +17,7 @@ plan's open decision §F) or the abstract grouping solver (Discriminating-Featur
 (Grouping Phase)). This module only measures.
 """
 
+from typing import Any
 from collections import defaultdict
 from dataclasses import dataclass, field
 from itertools import combinations
@@ -504,7 +505,7 @@ def serializeResolvedPressSets(
     pressSetsByGroup: dict[LemmaHomophoneGroupKey, dict[WordOrtho, list[frozenset[str]]]],
     frequencyByGroupOrtho: dict[LemmaHomophoneGroupKey, dict[WordOrtho, float]] | None = None,
     pressByOrthoCombinationByGroup: dict[LemmaHomophoneGroupKey, PressByOrthoCombination] | None = None,
-) -> list[dict]:
+) -> list[dict[str, Any]]:
     """
     E6: the persisted elicitation artifact that feeds Discriminating-Feature Grouping
     (Grouping Phase) (not `buildDiscriminatorSelection`'s output). One entry per validated

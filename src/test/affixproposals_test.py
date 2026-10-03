@@ -1,4 +1,5 @@
 """Tests for src/affixproposals.py -- hand-built records on the real layout, no pickles."""
+from typing import Any
 import pytest
 
 import src.affixes as A
@@ -7,6 +8,8 @@ import src.affixrules as R
 from src.affixdecisions import FUSED, SINGLE, AnchorDecision, Decisions, ScopeForm
 from src.affixes import PREFIX, SUFFIX, Candidate, Carrier, SimContext, WordRecord
 from src.keyboard import Starboard
+
+NONE: Any = None  # deliberately untyped stand-in for an unused argument
 
 KEYS = (4,)
 STEMS = [(11,), (12,), (13,), (14,), (16,), (17,), (18,), (19,)]
@@ -46,6 +49,7 @@ class TestGrowth:
         ctx = SimContext(_sb(), words)
         p = P.proposeGrowth(root, _decisions(root), KEYS, ctx)
         assert p is not None and p.kind == "growth" and p.net > 0
+        assert p.entry.growth is not None
         (form,) = p.entry.growth
         assert form.matches("a", "ma", "ma") and form.matches("a", "ti", "ti")     # one general atom takes both groups
         assert p.helpsWords == 14 and p.hurtsFallbacks == 0 and p.hurtsExceptions == 0
@@ -59,6 +63,7 @@ class TestGrowth:
         root, words = _prefixPool([("a", "ma", "ma", (5,), 8), ("a", "ti", "ti", (6,), 6)])
         ctx = SimContext(_sb(), words)
         first = P.proposeGrowth(root, _decisions(root), KEYS, ctx)
+        assert first is not None
         second = P.proposeGrowth(root, _decisions(root), KEYS, ctx, refused=frozenset({first.label}))
         assert second is None or second.label != first.label
         entryRefused = AnchorDecision(PREFIX, "a", "A", SINGLE, None, [first.label])        # the stored refusals count too
@@ -70,7 +75,7 @@ class TestGrowth:
         ctx = SimContext(_sb(), words)
         dec = _decisions(root, [ScopeForm("ma", None, A_re("ma"))])
         ext = P.proposeGrowth(root, dec, KEYS, ctx)
-        assert ext is not None and len(ext.entry.growth) == 1 and ext.label.startswith("ma|")   # one more alternative
+        assert ext is not None and ext.entry.growth is not None and len(ext.entry.growth) == 1 and ext.label.startswith("ma|")   # one more alternative
         assert ext.net > 0 and ext.helpsWords == 6                                              # the `ti` group, no new form price
 
     def test_nothing_is_proposed_below_the_minimum_words(self):
@@ -85,6 +90,7 @@ class TestGrowth:
         dec = _decisions(root, [form])
         p = P.proposeGrowth(root, dec, KEYS, ctx)
         assert p is not None and p.label == "dez:ma+der"                       # the `der` case: sibling of `dez`
+        assert p.entry.growth is not None
         (f,) = p.entry.growth
         assert f.anchors == frozenset({"dez", "der"})
 
@@ -93,6 +99,7 @@ class TestGrowth:
         ctx = SimContext(_sb(), words)
         other = AnchorDecision(PREFIX, "zz", "Z", SINGLE, [ScopeForm("ma", None, A_re("ma"))])
         p = P.proposeGrowth(root, Decisions([other]), KEYS, ctx)
+        assert p is not None
         assert any("already used by `zz`" in f for f in p.flags)
 
     def test_line_format(self):
@@ -127,7 +134,8 @@ class TestFusion:
 
     def test_net_is_merged_minus_parts_and_helps_counts_the_added_words(self, monkeypatch):
         m, pool, dec = self._setup(monkeypatch)
-        p = P.proposeFusion(m, pool, dec, None, None, [])
+        p = P.proposeFusion(m, pool, dec, NONE, NONE, [])
+        assert p is not None
         assert p.kind == "fusion" and p.spellings == "a|b" and p.entry.verdict == FUSED
         assert (p.helpsWords, p.helpsFreq) == (3, 150.0)
         assert p.net == pytest.approx(150.0)             # the merge adds the `b` words, nothing else changes
@@ -135,13 +143,14 @@ class TestFusion:
     def test_two_decided_parts_are_flagged(self, monkeypatch):
         m, pool, dec = self._setup(monkeypatch)
         pool[(PREFIX, 1, "A", "b")].hasDecision = True
-        p = P.proposeFusion(m, pool, dec, None, None, [])
+        p = P.proposeFusion(m, pool, dec, NONE, NONE, [])
+        assert p is not None
         assert any("two decided rules on one key" in f for f in p.flags)
 
     def test_no_comparison_without_a_rule_part(self, monkeypatch):
         m, pool, dec = self._setup(monkeypatch)
         pool[(PREFIX, 1, "A", "a")].hasDecision = False
-        assert P.proposeFusion(m, pool, dec, None, None, []) is None
+        assert P.proposeFusion(m, pool, dec, NONE, NONE, []) is None
 
     def test_growth_forms_stay_on_the_parts_own_spellings(self):
         part = Candidate(PREFIX, 1, "A", "tion|tions")
@@ -158,6 +167,7 @@ class TestRows:
         root, words = _prefixPool([("a", "ma", "ma", (5,), 8), ("a", "ti", "ti", (6,), 6)])
         ctx = SimContext(_sb(), words)
         p = P.proposeGrowth(root, _decisions(root), KEYS, ctx)
+        assert p is not None
         rows = {r.label: r for r in p.rows}
         assert set(rows) == {"a + /ma/", "a + /ti/"}
         assert (rows["a + /ma/"].words, rows["a + /ma/"].gainWords) == (8, 8)
@@ -168,7 +178,8 @@ class TestRows:
     def test_fusion_rows_are_per_added_spelling(self, monkeypatch):
         TestFusion()._setup(monkeypatch)             # installs the fake chooseRuleKeypress
         m, pool, dec = TestFusion()._setup(monkeypatch)
-        p = P.proposeFusion(m, pool, dec, None, None, [])
+        p = P.proposeFusion(m, pool, dec, NONE, NONE, [])
+        assert p is not None
         (row,) = p.rows
         assert row.label == "b" and row.words == 3 and row.freq == 150.0 and row.benefit == 150.0
         assert any(n.startswith("existing words:") for n in p.notes)
@@ -190,9 +201,11 @@ class TestFusionSubset:
         parts[0].hasDecision = True
         m = A.unionMerge(parts)
         pool = {R.candidateKey(c): c for c in parts + [m]}
-        p = P.proposeFusion(m, pool, Decisions([AnchorDecision(PREFIX, "a", "A", SINGLE, [])]), None, None, [])
+        p = P.proposeFusion(m, pool, Decisions([AnchorDecision(PREFIX, "a", "A", SINGLE, [])]), NONE, NONE, [])
+        assert p is not None
         assert [r.label for r in p.rows] == ["b", "c"] and p.baseSpellings == ["a"]
         assert set(p.groups) == {"b", "c"}
+        assert p.evaluateSubset is not None
         sub = p.evaluateSubset(["b"])
         assert sub.spellings == "a|b" and sub.entry.verdict == FUSED and sub.net == pytest.approx(150.0)
         assert [r.label for r in sub.rows] == ["b"]

@@ -20,9 +20,9 @@ import json
 from dataclasses import dataclass, field
 
 from src.affixes import (
-    Binding, Candidate, Carrier, RULE, SimContext, _newBase, canonicalizeStrokes, routesOf, withMarks)
+    Binding, Candidate, Carrier, RULE, SimContext, _newBase, routesOf, withMarks)
 from src.affixrules import buildCandidateRule, childrenIndex
-from src.keyboard import Strokes
+from src.keyboard import Strokes, canonicalizeStrokes
 
 RuleKey = tuple[str, int, str, str]
 

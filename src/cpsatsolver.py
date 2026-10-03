@@ -433,7 +433,7 @@ def optimizeKeyboard(keyboard: Keyboard,
         # Output
         print(f"Status for {part}: {status}")
         print(solver[part].StatusName(status))
-        if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
+        if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:  # type: ignore[comparison-overlap]  # ortools stubs type the statuses as different enums
             print(f'Total penalty = {solver[part].ObjectiveValue():,}')
             printer.on_solution_callback()
             strokesAssignedToPhoneme: dict[str, list[tuple[int, ...]]] = {p: [] for p in phonemesByPart[part]}
