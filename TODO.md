@@ -524,7 +524,7 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
 
 - **DONE (2026-10-02): Affix abbreviations carry the conjugation markings.** Records now keep every route of a Word in the disambiguated
   theory (`WordRecord.routes`) and `src/affixabbrev.py` abbreviates each route with its own marks and trailing feature strokes:
-  79,715 abbreviations (the 72,204 earlier ones unchanged, plus 7,511 for the other routes; TSV column `route`). The marks (keys 10/15)
+  79,715 abbreviations (72,121 primary-route entries and 7,594 for the other routes; TSV column `route`; a shared outline goes to the most frequent spelling whatever its route, which changed 60 of the 72,204 earlier entries to a more frequent word; `util.validate_affix_markings` checks it). The marks (keys 10/15)
   never overlap a keypress; S9a output byte-identical. Not covered: a Word whose primary route has no free abbreviation can still
   get one for another route (by design, each route is settled on its own).
 

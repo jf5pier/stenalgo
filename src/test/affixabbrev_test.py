@@ -111,11 +111,19 @@ def test_every_route_of_a_word_keeps_its_own_marking():
     assert stats.abbreviated == 3 and stats.noOption == 0
 
 
-def test_another_route_never_displaces_a_primary_abbreviation_and_respects_the_stable_theory():
+def test_the_most_frequent_spelling_keeps_a_shared_outline_whatever_the_route():
     big = _rec("aabc", [(2,), (3,), (7,)], freq=1.0)
     other = _rec("aabd", [(5,), (3,), (7,)], freq=50.0, routes=[((), ()), ((10,), ())])
-    # other's route 1 outline ((3, 4), (7, 10)) is free; big's primary and other's primary share ((3, 4), (7,))
+    # the primary outlines of both are ((3, 4), (7,)): the frequent word keeps it; its route 1 is free
     abbr, _ = _run(_pool(big, other), [big, other])
     assert {(a.ortho, a.route) for a in abbr} == {("aabd", 0), ("aabd", 1)}
     abbr2, _ = _run(_pool(big, other), [big, other], taken=[((3, 4), (7, 10))])
     assert {(a.ortho, a.route) for a in abbr2} == {("aabd", 0)}
+
+
+def test_a_frequent_route_beats_a_rare_primary_abbreviation():
+    rare = _rec("aabc", [(2,), (3,), (7,)], freq=0.0)
+    word = _rec("aabd", [(5,), (3,), (7,)], freq=50.0, routes=[((10,), ()), ((), ())])
+    # word's primary route carries mark 10 -> ((3, 4), (7, 10)); its route 1 is unmarked and shares rare's outline
+    abbr, _ = _run(_pool(rare, word), [rare, word])
+    assert {(a.ortho, a.route) for a in abbr} == {("aabd", 0), ("aabd", 1)}

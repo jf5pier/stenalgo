@@ -10,8 +10,8 @@ Rules of the game:
 - one abbreviation per word and ROUTE: the one saving the most strokes (a tie goes to the better-ranked rule). A route
   is one of the word's outlines in the stable theory (the first is the primary one; the others carry other
   conjugation or homograph marks and trailing feature strokes): the abbreviation keeps that route's marks and
-  strokes after the shortened base, so the writer still selects the reading with the same marking. The primary
-  routes are settled first, exactly as before; another route only takes an outline no primary abbreviation has;
+  strokes after the shortened base, so the writer still selects the reading with the same marking;
+- one entry per outline: the most frequent spelling keeps it, whatever its route (a tie goes to the primary route);
 - an abbreviation is added only if its outline collides with NO outline of the stable theory and with no better
   abbreviation of another spelling: it never needs a mark, so it cannot disturb the theory;
 - a growth form that is not allowed falls back to the rule's anchor alone, then to no abbreviation.
@@ -118,21 +118,16 @@ def buildAbbreviations(
                     break           # options are ordered best form first
     stats.carriers = len(seen)
     stats.noOption = len(seen - {w for w, route in chosen if route == 0})
-    # one dictionary entry per outline: the most frequent spelling keeps it, and the primary routes go first
-    def winners(group: list[Abbreviation], taken: set[Strokes]) -> list[Abbreviation]:
-        byOutline: dict[Strokes, list[Abbreviation]] = {}
-        for a in group:
-            byOutline.setdefault(a.outline, []).append(a)
-        won: list[Abbreviation] = []
-        for outline, same in byOutline.items():
-            same.sort(key=lambda a: (-a.frequency, a.ortho, a.rank, a.route))
-            winner = same[0]
-            if outline not in taken:
-                won.append(winner)
-            stats.outranked += sum(1 for a in same[1:] if a.ortho != winner.ortho)
-        return won
-    primary = winners([a for a in chosen.values() if a.route == 0], set())
-    out = primary + winners([a for a in chosen.values() if a.route > 0], {a.outline for a in primary})
+    # one dictionary entry per outline: the most frequent spelling keeps it, whatever the route
+    byOutline: dict[Strokes, list[Abbreviation]] = {}
+    for a in chosen.values():
+        byOutline.setdefault(a.outline, []).append(a)
+    out: list[Abbreviation] = []
+    for outline, group in byOutline.items():
+        group.sort(key=lambda a: (-a.frequency, a.ortho, a.route, a.rank))
+        winner = group[0]
+        out.append(winner)
+        stats.outranked += sum(1 for a in group[1:] if a.ortho != winner.ortho)
     out.sort(key=lambda a: (-a.frequency, a.ortho, a.outline))
     stats.abbreviated = len(out)
     for a in out:
