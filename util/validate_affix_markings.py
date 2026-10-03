@@ -20,10 +20,10 @@ import sys
 from collections import Counter
 
 from src import affixes as A
-from src.affixabbrev import Abbreviation, buildAbbreviations, loadRuleSpecs, routesOf, theoryOutlines
+from src.affixabbrev import Abbreviation, routesOf
 from src.keyboard import Starboard, Strokes
 from util._stenorender import renderFinalStrokesToRTFCRE
-from util._theoryio import loadPhoneticAndDisambiguatedTheory
+from util._affixio import loadAbbreviations
 
 KEYBOARD_JSON = "starboard3h.json"
 RULES_JSON = "affix_rules.json"
@@ -40,19 +40,14 @@ def main(argv: list[str] | None = None) -> int:
     starboard = Starboard.fromJSONFile(KEYBOARD_JSON)
     if starboard is None or not os.path.exists(RULES_JSON):
         raise RuntimeError("run from the repo root, after util.build_affix_rules")
-    phonetic, disambiguated, _w, _o = loadPhoneticAndDisambiguatedTheory(starboard)
-    records, _skipped = A.extractRecords(phonetic, disambiguated)
-    seedPairs, _fams = A.loadSeeds()
-    pool = A.buildCandidates(records, seedPairs)
-    ctx = A.SimContext(starboard, records)
-    longOutline = {r.idx: A.canonicalizeStrokes(A.fullStrokesOf(r)) for r in records}
-    taken = theoryOutlines(disambiguated)
+    loaded = loadAbbreviations(starboard, verbose=False)
+    records, disambiguated, taken = loaded.records, loaded.disambiguated, loaded.taken
+    abbreviations = loaded.abbreviations
     theoryWord: dict[Strokes, set[str]] = {}
     if nExamples:
         for w, outs in disambiguated.items():
             for o in outs:
                 theoryWord.setdefault(A.canonicalizeStrokes(o), set()).add(w.ortho)
-    abbreviations, _stats = buildAbbreviations(loadRuleSpecs(RULES_JSON), pool, ctx, taken, longOutline)
 
     routeOf: dict[tuple[str, Strokes], list[tuple[A.WordRecord, int]]] = {}
     for r in records:

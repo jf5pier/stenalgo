@@ -47,6 +47,8 @@ class Abbreviation:
     k: int                    # 1 = the anchor alone, 2 = a growth form
     frequency: float
     route: int = 0            # 0 = the word's primary outline, i > 0 = its i-th other route
+    wordIdx: int = -1         # the carrier's `WordRecord.idx`
+    gramCat: str = ""         # the carrier's grammatical category (`WordRecord.gramCat`)
 
 
 @dataclass
@@ -111,7 +113,7 @@ def buildAbbreviations(
                     long = (longOutline[wordIdx] if route == 0
                             else canonicalizeStrokes(withMarks(rec.base, marks) + extra))
                     best = Abbreviation(rec.ortho, outline, long, saved, rule.rank, root.ortho, carrier.span,
-                                        rec.frequency, route)
+                                        rec.frequency, route, wordIdx, rec.gramCat)
                     old = chosen.get((wordIdx, route))
                     if old is None or best.saved > old.saved:
                         chosen[(wordIdx, route)] = best
