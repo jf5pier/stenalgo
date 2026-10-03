@@ -386,7 +386,7 @@ the pickle caches are never checked for staleness.
 | `steno-trainer/public/data/*.json` | Trainer data: keyboard-layout, practice-words, practice-sentences, definitions | `python -m util.export_keyboard_layout`, `python -m util.export_practice_words`, then `python -m util.export_practice_sentences`, then `python -m util.export_definitions` (Theory Export (S8)) |
 | `affix_decisions.json` | The user's affix growth and fusion verdicts (the only hand-decided input of Affix Abbreviation Building (S9)) | `python -m util.review_affix_rules` (interactive; writes after every answer) |
 | `affix_rules.json`, `affix_rules_report.md` | The 30 selected affix rules with their keys, and the deterministic report | `python -m util.build_affix_rules` (Affix Abbreviation Building (S9a)) |
-| `plover_stenalgo_affix_dictionary.json`, `affix_abbreviations.tsv` | The optional affix dictionary (72,204 short outlines) and its review table | `python -m util.export_affix_dictionary` (Affix Abbreviation Building (S9b)) |
+| `plover_stenalgo_affix_dictionary.json`, `affix_abbreviations.tsv` | The optional affix dictionary (79,715 short outlines, one per word and marked route) and its review table | `python -m util.export_affix_dictionary` (Affix Abbreviation Building (S9b)) |
 | `excluded_words.txt` | Excluded words (44 spellings dropped in Dictionary Loading (S3)) | hand-maintained input |
 | `resources/reform1990.tsv` | 1990-reform spelling table (source input of the reform rewrites and doublet pairs) | hand-maintained input |
 

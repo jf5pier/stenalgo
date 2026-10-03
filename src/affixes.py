@@ -54,6 +54,12 @@ class WordRecord:
     extra: Strokes               # strokes after the base ones (feature strokes, marks)
     isLemmaForm: bool
     markKeys: tuple[int, ...] = ()  # mark keys merged into the last base stroke
+    routes: tuple[tuple[tuple[int, ...], Strokes], ...] = ()   # (markKeys, extra) of every distinct route of the Word
+                                # in the disambiguated theory, the primary one (== markKeys/extra) first; () = that one only
+
+
+def routesOf(rec: "WordRecord") -> tuple[tuple[tuple[int, ...], Strokes], ...]:
+    return rec.routes or ((rec.markKeys, rec.extra),)
 
 
 def extractRecords(
@@ -78,11 +84,20 @@ def extractRecords(
             skipped += 1
             continue
         marks = tuple(sorted(set(fullC[len(base) - 1]) - set(base[-1])))
+        routes: list[tuple[tuple[int, ...], Strokes]] = [(marks, fullC[len(base):])]
+        for alt in full[1:]:
+            altC = canonicalizeStrokes(alt)
+            if (len(altC) < len(base) or altC[:len(base) - 1] != base[:-1]
+                    or not set(base[-1]) <= set(altC[len(base) - 1])):
+                continue   # not the base with marks merged into its last stroke: no abbreviation for this route
+            r = (tuple(sorted(set(altC[len(base) - 1]) - set(base[-1]))), altC[len(base):])
+            if r not in routes:
+                routes.append(r)
         records.append(WordRecord(
             idx=len(records), ortho=word.ortho, lemme=word.lemme, gramCat=str(word.gramCat),
             frequency=float(word.frequency), phonoSylls=phono, orthoSylls=orthoS,
             base=base, extra=fullC[len(base):], isLemmaForm=(word.ortho == word.lemme),
-            markKeys=marks))
+            markKeys=marks, routes=tuple(routes)))
     return records, skipped
 
 
