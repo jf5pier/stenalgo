@@ -247,7 +247,7 @@ def proposeFusion(
             growth += restrictedGrowth(p, partForms)
     ruleIdx = {c.rec.idx for p in rules for c in p.carriers}
     own = sorted({s for p in rules for s in p.ortho.split("|")})
-    spellingOf = (lambda c: c.rec.orthoSylls[c.start]) if merged.position == A.PREFIX else \
+    spellingOf: Callable[[A.Carrier], str] = (lambda c: c.rec.orthoSylls[c.start]) if merged.position == A.PREFIX else \
         (lambda c: c.rec.orthoSylls[c.start + c.span - 1])
     aloneSum = sum(a.score for a in alone)
     aloneExisting = Row("(existing words, alone)")

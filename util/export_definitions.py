@@ -21,6 +21,7 @@ first, then a self-homograph's alternates (see `loadDisambiguatedTheory`).
 Run: python -m util.export_definitions
 Requires the same inputs as `util.export_practice_words`.
 """
+from typing import Any
 import json
 
 from src.keyboard import Starboard, canonicalizeStrokes
@@ -34,10 +35,10 @@ from util.export_practice_words import (
 OUTPUT_PATH = "steno-trainer/public/data/definitions.json"
 
 
-def _mergeIdenticalRows(words: list[list]) -> list[list]:
+def _mergeIdenticalRows(words: list[list[Any]]) -> list[list[Any]]:
     """One row for Words that read identically here -- same spelling, phonology, chords
     and labels, e.g. "est" as VER and as AUX -- keeping the higher frequency."""
-    merged: dict[str, list] = {}
+    merged: dict[str, list[Any]] = {}
     for row in words:
         key = json.dumps([row[0], row[1], row[3]])
         if key not in merged or merged[key][2] < row[2]:
@@ -55,7 +56,7 @@ def main() -> None:
                                              wordToStrokes=wordToStrokes, wordsByOrthoLemme=wordsByOrthoLemme)
 
     labelIndex: dict[str, int] = {}
-    wordsByBase: dict[str, list] = {}
+    wordsByBase: dict[str, list[Any]] = {}
     for baseStrokes, words in theory.items():
         base = starboard.strokesToRTFCRE(canonicalizeStrokes(baseStrokes))
         group = wordsByBase.setdefault(base, [])

@@ -1,10 +1,13 @@
 """Tests for util/build_affix_rules.py (S9a): per-rule cache, signatures, pending items, store. No pickles of the repo."""
+from typing import Any
 import pytest
 
 import src.affixrules as R
 from src.affixdecisions import AnchorDecision, Decisions, ScopeForm
 from src.affixes import PREFIX, SUFFIX, Candidate, Carrier, CarrierResult, WordRecord
 from util import build_affix_rules as S
+
+NONE: Any = None  # deliberately untyped stand-in for an unused argument
 
 _idx = [10000]
 
@@ -76,7 +79,7 @@ class TestEvaluationCache:
         a = _anchor("aa", "A")
         pool = _pool(a)
         rule = R.buildCandidateRule(a, R.childrenIndex(pool))
-        R.chooseRuleKeypress(rule, None, None, [])
+        R.chooseRuleKeypress(rule, NONE, NONE, [])
         rule.results[0].reason, rule.results[0].partners = "x", [1, 2]
         fresh = R.buildCandidateRule(a, R.childrenIndex(pool))
         S.restoreEvaluation(fresh, S.compactEvaluation(rule))
@@ -87,23 +90,23 @@ class TestEvaluationCache:
     def test_second_run_evaluates_nothing_and_selects_the_same(self, fakeEval):
         anchors = _three()
         pool, dec = _pool(*anchors), _decisions(*anchors)
-        first = S.selectAndBind(pool, dec, None, None, [])
+        first = S.selectAndBind(pool, dec, NONE, NONE, [])
         n = len(fakeEval)
         assert n >= 3 and first.evaluatedNow == n
-        again = S.selectAndBind(pool, dec, None, None, [], first.evaluations)
+        again = S.selectAndBind(pool, dec, NONE, NONE, [], first.evaluations)
         assert len(fakeEval) == n and again.evaluatedNow == 0
         assert [(b.rule.root.ortho, b.keys) for b in again.bound] == [(b.rule.root.ortho, b.keys) for b in first.bound]
 
     def test_a_changed_verdict_reevaluates_only_that_rule_and_equals_a_full_recompute(self, fakeEval):
         anchors = _three()
         pool, dec = _pool(*anchors), _decisions(*anchors)
-        first = S.selectAndBind(pool, dec, None, None, [])
+        first = S.selectAndBind(pool, dec, NONE, NONE, [])
         fakeEval.clear()
         changed = dec.withEntry(AnchorDecision(SUFFIX, "bb", "B", "-", [ScopeForm("never")]))
-        partial = S.selectAndBind(pool, changed, None, None, [], first.evaluations)
+        partial = S.selectAndBind(pool, changed, NONE, NONE, [], first.evaluations)
         assert fakeEval == ["bb"] and partial.evaluatedNow == 1
         fakeEval.clear()
-        full = S.selectAndBind(pool, changed, None, None, [])
+        full = S.selectAndBind(pool, changed, NONE, NONE, [])
         assert sorted(fakeEval) == ["aa", "bb", "cc"]
         key = lambda o: [(b.rule.root.ortho, b.rule.score, [r.gain for r in b.rule.results]) for b in o.bound]  # noqa: E731
         assert key(partial) == key(full) and partial.result.curve == full.result.curve
@@ -115,7 +118,7 @@ class TestPending:
         merged = Candidate(SUFFIX, 1, "A", "aa|az", isAnchor=True, mergeParts=[R.candidateKey(a)])
         pool = {**_pool(a, b), R.candidateKey(merged): merged}
         decided = Decisions([AnchorDecision(SUFFIX, "aa", "A", "-"), AnchorDecision(SUFFIX, "aa|ab", "A", "fused")])
-        out = S.selectAndBind(pool, decided, None, None, [])
+        out = S.selectAndBind(pool, decided, NONE, NONE, [])
         kinds = [(p.kind, p.spellings) for p in out.pending]
         assert ("growth", "bb") in kinds and ("fusion", "aa|az") in kinds
         (fusion,) = [p for p in out.pending if p.kind == "fusion"]
@@ -124,7 +127,7 @@ class TestPending:
 
     def test_nothing_pending_when_everything_is_decided(self, fakeEval):
         anchors = _three()
-        out = S.selectAndBind(_pool(*anchors), _decisions(*anchors), None, None, [])
+        out = S.selectAndBind(_pool(*anchors), _decisions(*anchors), NONE, NONE, [])
         assert out.pending == []
 
     def test_closest_decided_needs_the_same_sound(self):
@@ -139,7 +142,9 @@ class TestStore:
         path = str(tmp_path / "s.pickle")
         assert S.loadStore(path) is None
         S.saveStore(path, {"version": S.STORE_VERSION, "x": 1})
-        assert S.loadStore(path)["x"] == 1 and not (tmp_path / "s.pickle.tmp").exists()
+        store = S.loadStore(path)
+        assert store is not None
+        assert store["x"] == 1 and not (tmp_path / "s.pickle.tmp").exists()
         S.saveStore(path, {"version": 99})
         assert S.loadStore(path) is None
 

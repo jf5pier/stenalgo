@@ -178,8 +178,8 @@ def main() -> None:
     skipped: list[tuple[str, str, str, str]] = []  # lemme, tag, ortho, reason
 
     for lemme in sorted(lemmas):
-        infinitiveWord = infinitiveByLemme.get(lemme)
-        if infinitiveWord is None:
+        lemmaInfinitive = infinitiveByLemme.get(lemme)
+        if lemmaInfinitive is None:
             continue
         try:
             radical = infinitiveRadical(lemme, template)
@@ -202,7 +202,7 @@ def main() -> None:
                 fieldValues: dict[str, str] = {}
                 reasons: list[str] = []
                 for field in STRING_FIELDS:
-                    infVal = infinitiveWord[field]
+                    infVal = lemmaInfinitive[field]
                     radicalLen = len(infVal) - len(infSuffix) if infSuffix else len(infVal)
                     key = (field, code, personNumber, altIndex)
                     fieldEnding = slotEnding.get(key)

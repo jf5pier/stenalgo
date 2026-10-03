@@ -1,9 +1,12 @@
 """Tests for src/affixrules.py (Phase 2, docs/history/DESIGN_2026-09-27-affix-rule-selection.md §4)."""
+from typing import Any
 import src.affixrules as R
 from src.affixes import RULE, SUFFIX, Candidate, Carrier, CarrierResult, Slot, WordRecord
 from src.affixrules import (
     Rule, buildCandidateRule, candidateKey, childrenIndex, descendantsOf, exclusionCountOf,
     proxyScore, ruleScoreFromResults)
+
+NONE: Any = None  # deliberately untyped stand-in for an unused argument
 
 _idx = [0]
 
@@ -133,7 +136,7 @@ class TestTerritory:
         ement = Candidate(SUFFIX, 2, "°.m@", "·°ment", carriers=[Carrier(w, 1, 2, "s") for w in ws[:8]],
                           isAnchor=True)
         cands = {candidateKey(c): c for c in (ment, ement)}
-        result = R.selectRules(cands, None, None, [], budget=5)
+        result = R.selectRules(cands, NONE, NONE, [], budget=5)
         assert [r.root.ortho for r in result.selected] == ["·°ment"]   # the higher upper bound wins
         assert [(k.skippedRoot, k.selectedRoot) for k in result.overlapSkips] == [("ment", "·°ment")]
 
@@ -152,7 +155,7 @@ class TestTerritory:
         grown = Candidate(SUFFIX, 2, "°.m@", "·°ment", carriers=[Carrier(w, 1, 2, "s") for w in ws],
                           grownFromKey=candidateKey(ment), rootKey=candidateKey(ment), isScoped=True)
         cands = {candidateKey(c): c for c in (ment, grown)}
-        result = R.selectRules(cands, None, None, [], budget=5)
+        result = R.selectRules(cands, NONE, NONE, [], budget=5)
         assert [r.root.ortho for r in result.selected] == ["ment"]
         assert grown in result.selected[0].forms          # it is a FORM of its anchor's rule
 

@@ -34,6 +34,7 @@ import argparse
 import collections
 import csv
 from dataclasses import dataclass
+from typing import Callable
 
 LEXIQUE383_PATH = "resources/Lexique383.tsv"
 LEXIQUE_INFRA_PATH = "resources/LexiqueInfraCorrespondance.tsv"
@@ -169,7 +170,8 @@ def fixInfraFields(fields: dict[str, str], indices: list[int]) -> dict[str, str]
     return {"assoc": assoc, "phono": phono, "regTo_GP": ".".join(regular)}
 
 
-def rewriteTsv(path: str, keyOf, fixOf, apply: bool) -> list[tuple[dict[str, str], dict[str, str]]]:
+def rewriteTsv(path: str, keyOf: Callable[[dict[str, str]], bool],
+               fixOf: Callable[[dict[str, str]], dict[str, str] | None], apply: bool) -> list[tuple[dict[str, str], dict[str, str]]]:
     """Rewrite the fields fixOf(fields) returns in the rows keyOf selects,
     preserving every other byte of the file. Returns (old, new) field pairs."""
     with open(path, newline="", encoding="utf-8") as f:

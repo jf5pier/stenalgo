@@ -26,6 +26,7 @@
 import argparse
 import csv
 from dataclasses import dataclass
+from typing import Callable
 
 LEXIQUE383_PATH = "resources/Lexique383.tsv"
 LEXIQUE_INFRA_PATH = "resources/LexiqueInfraCorrespondance.tsv"
@@ -149,7 +150,8 @@ def fixInfraFields(fields: dict[str, str], fix: RowFix) -> dict[str, str]:
     return {"assoc": assoc, "phono": phono, "regTo_GP": ".".join(regular)}
 
 
-def rewriteTsv(path: str, keyOf, fixOf, apply: bool) -> list[tuple[dict[str, str], dict[str, str]]]:
+def rewriteTsv(path: str, keyOf: Callable[[dict[str, str]], bool],
+               fixOf: Callable[[dict[str, str]], dict[str, str] | None], apply: bool) -> list[tuple[dict[str, str], dict[str, str]]]:
     with open(path, newline="", encoding="utf-8") as f:
         lines = f.readlines()
     header = lines[0].rstrip("\r\n").split("\t")
@@ -195,7 +197,7 @@ def main() -> None:
         return None if fix is None else {"phon": fix.newPhon, "syll_cv": fix.newSyllCv}
 
     totals = {}
-    touched = set()
+    touched: set[str] = set()
     for path in (LEXIQUE_MIXTE_PATH, LEXIQUE_SYNTHETIC_PATH):
         changes = rewriteTsv(path, lambda f: f["lemme"] in TARGET_LEMMAS, lexiconFix, args.apply)
         totals[path] = len(changes)

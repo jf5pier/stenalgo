@@ -38,7 +38,7 @@ def loadOrBuildDictionary() -> Dictionary:
     dumped back to back."""
     if os.path.exists(DICTIONARY_PICKLE_PATH):
         with open(DICTIONARY_PICKLE_PATH, "rb") as pfile:
-            dictionary = pickle.load(pfile)
+            dictionary: Dictionary = pickle.load(pfile)
             Syllable.allPhonemeCol = pickle.load(pfile)
             Syllable.phonemeColByPart = pickle.load(pfile)
             Syllable.biphonemeColByPart = pickle.load(pfile)
@@ -77,7 +77,8 @@ def loadOrBuildPhoneticTheory(dictionary: Dictionary, starboard: Starboard) -> d
     """PhoneticTheory.pickle (hit) or Dictionary.buildPhoneticTheory (miss)."""
     if os.path.exists(PHONETIC_THEORY_PICKLE_PATH):
         with open(PHONETIC_THEORY_PICKLE_PATH, "rb") as pfile:
-            return pickle.load(pfile)
+            theory: dict[Strokes, list[Word]] = pickle.load(pfile)
+            return theory
     phoneticTheory = dictionary.buildPhoneticTheory(starboard)
     with open(PHONETIC_THEORY_PICKLE_PATH, "wb") as pfile:
         pickle.dump(phoneticTheory, pfile)

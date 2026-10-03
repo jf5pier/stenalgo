@@ -10,7 +10,7 @@ from dataclasses import dataclass
 
 from src import affixes as A
 from src.affixabbrev import Abbreviation, AbbreviationStats, buildAbbreviations, loadRuleSpecs, theoryOutlines
-from src.keyboard import Starboard, Strokes
+from src.keyboard import Starboard, Strokes, canonicalizeStrokes
 from util._theoryio import loadPhoneticAndDisambiguatedTheory
 
 
@@ -37,7 +37,7 @@ def loadAbbreviations(starboard: Starboard, rulesJson: str = "affix_rules.json",
     if verbose:
         print(f"pool {len(pool)} nodes in {time.time() - t0:.0f}s", flush=True)
     ctx = A.SimContext(starboard, records)
-    longOutline = {r.idx: A.canonicalizeStrokes(A.fullStrokesOf(r)) for r in records}
+    longOutline = {r.idx: canonicalizeStrokes(A.fullStrokesOf(r)) for r in records}
     taken = theoryOutlines(disambiguated)
     abbreviations, stats = buildAbbreviations(loadRuleSpecs(rulesJson), pool, ctx, taken, longOutline)
     return LoadedAbbreviations(abbreviations, stats, records, pool, ctx, longOutline, disambiguated, taken)

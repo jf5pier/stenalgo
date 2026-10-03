@@ -58,7 +58,7 @@ from util._timing import recordTiming
 variantDrops = loadSpellingVariantDrops()
 
 
-def printVerbose(word: str, msg: list[Any]):
+def printVerbose(word: str, msg: list[Any]) -> None:
     # return
     if word in []:  # ["soleil"] :
         print(word, " :\n", " ".join(map(str, msg)))
@@ -205,7 +205,7 @@ class Dictionary:
             syllable_names = word.phonemesToSyllableNames(withSilent=False)
             spellings = word.graphemsToSyllables(withSilent=False)
             for (syllable_name, spelling) in zip(syllable_names, spellings):
-                _ = self.syllableCollection.updateSyllable(
+                self.syllableCollection.updateSyllable(
                     syllable_name, spelling, frequency, word)
 
         Syllable.sortPhonemesCollections()
@@ -351,7 +351,7 @@ class Dictionary:
             maxAmbiguityWords = []
             maxFrequencyAmbiguity = 0.0
             maxFrequencyAmbiguityWords = []
-            maxFrequencyAmbiguityStrokes= ()
+            maxFrequencyAmbiguityStrokes: Strokes = ()
             for syllableStrokes, words in phoneticTheory.items():
                 strokeString = keyboard.strokesToString(syllableStrokes)
                 wordOrthos = sorted(list(set(map(lambda w: w.ortho, words))))

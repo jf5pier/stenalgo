@@ -5,6 +5,7 @@
 import pytest
 from unittest.mock import MagicMock
 from src.word import Word, GramCat
+from typing import Any
 from src.featureextractor import (
     getAmbiguousMultiphonemes,
     extractDiscriminatingFeatures,
@@ -18,7 +19,7 @@ from src.featureextractor import (
 # ---------------------------------------------------------------------------
 
 def _make_word(**overrides) -> Word:
-    defaults = dict(
+    defaults: dict[str, Any] = dict(
         ortho="chat", phonology="Sa", lemme="chat",
         gramCat=GramCat.NOM, orthoGramCat=[GramCat.NOM],
         gender="m", number="s", infoVerb=None,
@@ -52,7 +53,7 @@ class TestGetAmbiguousMultiphonemes:
         w1 = _make_word(ortho="chat")
         w2 = _make_word(ortho="bon", phonology="bO~", lemme="bon",
                         rawSyllCV="b_O~", rawOrthosyllCV="b_o_n")
-        theory = {
+        theory: Any = {
             ((1, 2),): [w1],
             ((3, 4),): [w2],
         }
@@ -68,7 +69,7 @@ class TestGetAmbiguousMultiphonemes:
                         gramCat=GramCat.VER, orthoGramCat=[GramCat.VER],
                         rawSyllCV="f_E", rawOrthosyllCV="f_ai_s",
                         infoVerb="ind:pre:1s")
-        theory = {
+        theory: Any = {
             ((1, 2),): [w1, w2],
         }
         kb = _mock_keyboard()
@@ -88,7 +89,7 @@ class TestGetAmbiguousMultiphonemes:
                         gramCat=GramCat.VER, orthoGramCat=[GramCat.VER],
                         rawSyllCV="f_E", rawOrthosyllCV="f_ai_s",
                         infoVerb="ind:pre:1s")
-        theory = {
+        theory: Any = {
             ((1,),): [w1],
             ((2, 3),): [w2, w3],
         }
@@ -102,7 +103,7 @@ class TestGetAmbiguousMultiphonemes:
                         rawSyllCV="b", rawOrthosyllCV="b_1")
         w4 = _make_word(ortho="b2", phonology="b", lemme="b2",
                         rawSyllCV="b", rawOrthosyllCV="b_2")
-        theory = {
+        theory: Any = {
             ((1,),): [w1, w2],
             ((2,),): [w3, w4],
         }
@@ -118,7 +119,7 @@ class TestExtractDiscriminatingFeatures:
 
     def _make_verb(self, ortho, person_number, tense="pre", mode="ind", **extra):
         """Helper to create verb Words with distinct infoVerb."""
-        defaults = dict(
+        defaults: dict[str, Any] = dict(
             ortho=ortho, phonology="fE", lemme="faire",
             gramCat=GramCat.VER, orthoGramCat=[GramCat.VER],
             gender=None, number=None,
@@ -135,7 +136,7 @@ class TestExtractDiscriminatingFeatures:
         w1 = _make_word(ortho="chat")
         w2 = _make_word(ortho="bon", phonology="bO~", lemme="bon",
                         rawSyllCV="b_O~", rawOrthosyllCV="b_o_n")
-        theory = {
+        theory: Any = {
             ((1,),): [w1],
             ((2,),): [w2],
         }
@@ -149,7 +150,7 @@ class TestExtractDiscriminatingFeatures:
         """Two verb forms sharing the same lemme should be discriminated by features."""
         w1 = self._make_verb("fais", "1s")
         w2 = self._make_verb("fait", "3s")
-        theory = {
+        theory: Any = {
             ((1, 2),): [w1, w2],
         }
         disc_by, ordered, _ = extractDiscriminatingFeatures(theory)
@@ -167,7 +168,7 @@ class TestExtractDiscriminatingFeatures:
                               gender="f", number="s", lemme="regarnir")
         w2 = self._make_verb("regarnis", "part", tense="pp", mode="ind",
                               gender="m", number="p", lemme="regarnir")
-        theory = {((1, 2),): [w1, w2]}
+        theory: Any = {((1, 2),): [w1, w2]}
         _, _, strokeLemmeDiscriminators = extractDiscriminatingFeatures(theory)
         wordFeatures = strokeLemmeDiscriminators[((1, 2),), "regarnir_VER"]
         assert len(wordFeatures[w1]) > 1
@@ -177,7 +178,7 @@ class TestExtractDiscriminatingFeatures:
         """The ordered feature list should not contain duplicates."""
         w1 = self._make_verb("fais", "1s")
         w2 = self._make_verb("fait", "3s")
-        theory = {((1, 2),): [w1, w2]}
+        theory: Any = {((1, 2),): [w1, w2]}
         _, ordered, _sld = extractDiscriminatingFeatures(theory)
         assert len(ordered) == len(set(ordered))
 
@@ -188,7 +189,7 @@ class TestExtractDiscriminatingFeatures:
                         rawSyllCV="v_E_R", rawOrthosyllCV="v_e_r")
         w2 = _make_word(ortho="vert", phonology="vER", lemme="vert",
                         rawSyllCV="v_E_R", rawOrthosyllCV="v_e_r_t")
-        theory = {((1, 2),): [w1, w2]}
+        theory: Any = {((1, 2),): [w1, w2]}
         disc_by, ordered, _ = extractDiscriminatingFeatures(theory)
         # Each lemme group is size 1, so both words get tagged as discriminated
         total_discriminated = sum(len(ws) for ws in disc_by.values())
@@ -201,7 +202,7 @@ class TestExtractDiscriminatingFeatures:
                              rawOrthosyllCV="f_a_i_s")
         w3 = self._make_verb("fait", "3s")
         # w1 and w2 have same ortho, w3 has different ortho
-        theory = {((1, 2),): [w1, w2, w3]}
+        theory: Any = {((1, 2),): [w1, w2, w3]}
         disc_by, ordered, _ = extractDiscriminatingFeatures(theory)
         total_discriminated = sum(len(ws) for ws in disc_by.values())
         assert total_discriminated > 0
@@ -215,7 +216,7 @@ class TestExtractDiscriminatingFeatures:
         w2 = _make_word(ortho="amie", phonology="ami", lemme="ami",
                         gender="f", number="s",
                         rawSyllCV="a_m_i", rawOrthosyllCV="a_m_i_e")
-        theory = {((1, 2),): [w1, w2]}
+        theory: Any = {((1, 2),): [w1, w2]}
         disc_by, ordered, _ = extractDiscriminatingFeatures(theory)
         # Gender-related features like "m_s", "f_s", "m", "f" should discriminate
         gender_features = [f for f in disc_by if f in ("m", "f", "m_s", "f_s")]
@@ -231,7 +232,7 @@ class TestExtractDiscriminatingFeatures:
         w2 = _make_word(ortho="chats", phonology="Sa", lemme="chat",
                         gender="m", number="p",
                         rawSyllCV="S_a", rawOrthosyllCV="ch_a_t_s")
-        theory = {((1,),): [w1, w2]}
+        theory: Any = {((1,),): [w1, w2]}
         disc_by, ordered, _ = extractDiscriminatingFeatures(theory)
         # Number features "s" and "p" should discriminate
         number_features = [f for f in disc_by if f in ("s", "p")]
@@ -241,7 +242,7 @@ class TestExtractDiscriminatingFeatures:
     def test_returns_correct_types(self):
         """Return types match the signature."""
         w1 = _make_word(ortho="chat")
-        theory = {((1,),): [w1]}
+        theory: Any = {((1,),): [w1]}
         disc_by, ordered, strokeLemmeDiscriminators = extractDiscriminatingFeatures(theory)
         assert isinstance(disc_by, dict)
         assert isinstance(ordered, list)
@@ -270,7 +271,7 @@ class TestExtractDiscriminatingFeatures:
 class TestBuildFeasibleDiscriminatorOptions:
 
     def _make_verb(self, ortho, person_number, tense="pre", mode="ind", **extra):
-        defaults = dict(
+        defaults: dict[str, Any] = dict(
             ortho=ortho, phonology="fE", lemme="faire",
             gramCat=GramCat.VER, orthoGramCat=[GramCat.VER],
             gender=None, number=None,
@@ -285,7 +286,7 @@ class TestBuildFeasibleDiscriminatorOptions:
         """A lemme with only one word in its homophone group needs no
         discriminating feature, so it should not appear in the result at all."""
         w1 = _make_word(ortho="chat")
-        theory = {((1,),): [w1]}
+        theory: Any = {((1,),): [w1]}
         disc_by, _ordered, _sld = extractDiscriminatingFeatures(theory)
         result = buildFeasibleDiscriminatorOptions(theory, disc_by)
         assert result == {}
@@ -293,7 +294,7 @@ class TestBuildFeasibleDiscriminatorOptions:
     def test_multi_word_group_lists_every_feasible_feature_per_word(self):
         w1 = self._make_verb("fais", "1s")
         w2 = self._make_verb("fait", "3s")
-        theory = {((1, 2),): [w1, w2]}
+        theory: Any = {((1, 2),): [w1, w2]}
         disc_by, _ordered, _sld = extractDiscriminatingFeatures(theory)
         result = buildFeasibleDiscriminatorOptions(theory, disc_by)
         key = (((1, 2),), "faire_VER")
@@ -342,7 +343,7 @@ class TestSelectSharedDiscriminators:
         w2 = _make_word(ortho="a2", lemme="a")
         w3 = _make_word(ortho="b1", lemme="b")
         w4 = _make_word(ortho="b2", lemme="b")
-        groupFeasibleFeatures = {
+        groupFeasibleFeatures: Any = {
             (((1,),), "a"): {w1: {"shared"}, w2: {"other_a"}},
             (((2,),), "b"): {w3: {"shared"}, w4: {"other_b"}},
         }
@@ -356,7 +357,7 @@ class TestSelectSharedDiscriminators:
     def test_word_with_no_feasible_feature_is_unresolved(self):
         w1 = _make_word(ortho="a1", lemme="a")
         w2 = _make_word(ortho="a2", lemme="a")
-        groupFeasibleFeatures = {
+        groupFeasibleFeatures: Any = {
             (((1,),), "a"): {w1: {"f1"}, w2: set()},
         }
         chosen, unresolved = selectSharedDiscriminators(groupFeasibleFeatures)
@@ -373,7 +374,7 @@ class TestSelectSharedDiscriminators:
         wA = _make_word(ortho="élève", lemme="élève", gender="m")
         wB = _make_word(ortho="élève", lemme="élève", gender="f",
                         rawOrthosyllCV="e_l_e_v_e_bis")
-        groupFeasibleFeatures = {
+        groupFeasibleFeatures: Any = {
             (((1,),), "élève_NOM"): {wA: {"only_a"}, wB: {"only_b"}},
         }
         chosen, unresolved = selectSharedDiscriminators(groupFeasibleFeatures)
@@ -389,7 +390,7 @@ class TestSelectSharedDiscriminators:
         wA = _make_word(ortho="fayotte", lemme="fayotte", gender="m")
         wB = _make_word(ortho="fayotte", lemme="fayotte", gender="f",
                         rawOrthosyllCV="f_a_y_o_t_t_e_bis")
-        groupFeasibleFeatures = {
+        groupFeasibleFeatures: Any = {
             (((1,),), "fayotte_NOM"): {wA: set(), wB: set()},
         }
         chosen, unresolved = selectSharedDiscriminators(groupFeasibleFeatures)

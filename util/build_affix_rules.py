@@ -153,7 +153,7 @@ def currentWeights() -> dict[str, float]:
     return {"alpha": R.EXCEPTION_ALPHA, "exclusion": R.EXCLUSION_COST, "form": R.FORM_COST,
             "maxExceptionRate": R.MAX_EXCEPTION_RATE, "budget": R.RULE_BUDGET, "overlapMax": R.RULE_OVERLAP_MAX,
             "swapCandidates": R.SWAP_CANDIDATES, "swapPasses": R.SWAP_PASSES,
-            "keyShortlist": R.MAX_ALTERNATIVES}
+            "keyShortlist": B.MAX_ALTERNATIVES}
 
 
 # ═══════════════════════════════════════════════════════════════════════════

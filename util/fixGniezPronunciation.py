@@ -267,6 +267,7 @@ def applyInfraCorrections(
         fields = lines[i].rstrip("\n").split("\t")
         c = correctionsByItem.get(fields[itemIdx])
         if c is not None and fields[assocIdx] == c.infraOldAssoc:
+            assert c.infraNewAssoc is not None
             fields[assocIdx] = c.infraNewAssoc
             lines[i] = "\t".join(fields) + ending
             modified += 1
@@ -304,7 +305,9 @@ def applyMixteCorrections(
         if (c is not None and fields[cgramIdx] == "VER"
                 and fields[phonIdx] == c.mixteOldPhon
                 and fields[syllCvIdx] == c.mixteOldSyllCv):
+            assert c.mixteNewPhon is not None
             fields[phonIdx] = c.mixteNewPhon
+            assert c.mixteNewSyllCv is not None
             fields[syllCvIdx] = c.mixteNewSyllCv
             lines[i] = "\t".join(fields) + ending
             modified += 1

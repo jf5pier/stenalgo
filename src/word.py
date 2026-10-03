@@ -167,7 +167,7 @@ class Word:
     def __hash__(self) -> int:
         return self._hash
 
-    def __eq__(self, other):
+    def __eq__(self, other: object) -> bool:
         if not isinstance(other, Word):
             return NotImplemented
         # _hash is a 64-bit digest of identity(); comparing it alone is the cheapest check and

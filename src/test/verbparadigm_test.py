@@ -2,6 +2,7 @@
 # coding: utf-8
 """Tests for src/verbparadigm.py"""
 
+from typing import Any
 import pytest
 from src.featureextractor import extractDiscriminatingFeatures
 from src.verbparadigm import (
@@ -131,7 +132,7 @@ class TestLemmeOfVerbLemmeGramCat:
 class TestDetectUndersampledLemmas:
 
     def _build_strokeLemmeDiscriminators(self, words):
-        theory = {((i,),): [word] for i, word in enumerate(words)}
+        theory: Any = {((i,),): [word] for i, word in enumerate(words)}
         _, _, strokeLemmeDiscriminators = extractDiscriminatingFeatures(theory)
         return strokeLemmeDiscriminators
 
@@ -603,7 +604,7 @@ class TestDeriveConjugationEndingTablesAndGenerate:
         nothing to the derived tables."""
         donorInf = _make_infinitive("abir", "abiR")
         donorPre = _make_finite("abir", "abX", "ind:pre", "1s")
-        theory = {((1,),): [donorInf, donorPre]}
+        theory: Any = {((1,),): [donorInf, donorPre]}
         tables = deriveConjugationEndingTables(theory, verbisteTemplates={}, exceptions={})
         assert tables.infinitiveSuffixByKey == {}
         assert tables.slotEndingByKey == {}
@@ -733,7 +734,7 @@ class TestDeriveSyllableSplitTable:
         assert table == {("8", "a"): None}
 
     def test_unseen_adjacent_nuclei_keep_spliced_boundary(self):
-        table = {("e", "e"): 0}
+        table: Any = {("e", "e"): 0}
         assert normalizeSplicedBreakdown("es8i", "e|s_8_i#", "e|ss_ui_e", table, {}) == (
             "es8i", "e|s_8_i#", "e|ss_ui_e"
         )
@@ -810,7 +811,7 @@ class TestCrossLemmaFeatureSetCollisions:
         rechampiWords = (_make_verb_form("rechampis", "rechampir"), _make_verb_form("rechampit", "rechampir"))
         regarniWords = (_make_verb_form("regarnis", "regarnir"), _make_verb_form("regarnie", "regarnir"))
         featureSet = ("p", "indicatif")
-        featuresetWords = {featureSet: [rechampiWords, regarniWords]}
+        featuresetWords: Any = {featureSet: [rechampiWords, regarniWords]}
 
         collisions = crossLemmaFeatureSetCollisions(featuresetWords)
         assert featureSet in collisions
@@ -819,7 +820,7 @@ class TestCrossLemmaFeatureSetCollisions:
     def test_no_collision_when_lemmes_differ_across_unrelated_featuresets(self):
         rechampiWords = (_make_verb_form("rechampis", "rechampir"),)
         regarniWords = (_make_verb_form("regarnis", "regarnir"),)
-        featuresetWords = {
+        featuresetWords: Any = {
             ("p", "indicatif"): [rechampiWords],
             ("m_s",): [regarniWords],
         }
@@ -829,17 +830,17 @@ class TestCrossLemmaFeatureSetCollisions:
 class TestNewlyCollidingLemmas:
 
     def test_empty_when_no_augmented_collisions(self):
-        baseline = {}
+        baseline: Any = {}
         augmented = _featureset_entry(("p", "indicatif"), _make_verb_form("rechampis", "rechampir"))
         assert newlyCollidingLemmas(baseline, augmented) == set()
 
     def test_detects_brand_new_collision(self):
-        baseline = {
+        baseline: Any = {
             ("p", "indicatif"): [(_make_verb_form("rechampis", "rechampir"),)],
         }
         rechampiWords = (_make_verb_form("rechampis", "rechampir"), _make_verb_form("rechampit", "rechampir"))
         regarniWords = (_make_verb_form("regarnis", "regarnir"), _make_verb_form("regarnie", "regarnir"))
-        augmented = {("p", "indicatif"): [rechampiWords, regarniWords]}
+        augmented: Any = {("p", "indicatif"): [rechampiWords, regarniWords]}
 
         assert newlyCollidingLemmas(baseline, augmented) == {"rechampir_VER", "regarnir_VER"}
 
@@ -847,8 +848,8 @@ class TestNewlyCollidingLemmas:
         rechampiWords = (_make_verb_form("rechampis", "rechampir"),)
         regarniWords = (_make_verb_form("regarnis", "regarnir"),)
         featureSet = ("p", "indicatif")
-        baseline = {featureSet: [rechampiWords, regarniWords]}
-        augmented = {featureSet: [rechampiWords, regarniWords]}
+        baseline: Any = {featureSet: [rechampiWords, regarniWords]}
+        augmented: Any = {featureSet: [rechampiWords, regarniWords]}
 
         assert newlyCollidingLemmas(baseline, augmented) == set()
 
@@ -859,8 +860,8 @@ class TestNewlyCollidingLemmas:
         garniWords = (_make_verb_form("garnis", "garnir"),)
         rechampiWords = (_make_verb_form("rechampis", "rechampir"),)
         regarniWords = (_make_verb_form("regarnis", "regarnir"),)
-        baseline = {("p", "indicatif"): [garniWords, rechampiWords]}
-        augmented = {
+        baseline: Any = {("p", "indicatif"): [garniWords, rechampiWords]}
+        augmented: Any = {
             ("p", "indicatif"): [garniWords, rechampiWords],
             ("m_s",): [rechampiWords, regarniWords],
         }
@@ -874,9 +875,9 @@ class TestNewlyCollidingLemmas:
         baselineWords = [
             (_make_verb_form(f"mot{i}s", f"mot{i}"),) for i in range(500)
         ]
-        baseline = {featureSet: baselineWords}
+        baseline: Any = {featureSet: baselineWords}
         newWord = (_make_verb_form("regarnis", "regarnir"),)
-        augmented = {featureSet: baselineWords + [newWord]}
+        augmented: Any = {featureSet: baselineWords + [newWord]}
 
         result = newlyCollidingLemmas(baseline, augmented)
         assert "regarnir_VER" in result

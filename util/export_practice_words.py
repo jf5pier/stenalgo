@@ -37,6 +37,7 @@ Requires PhoneticTheory.pickle/Dictionary.pickle (`python -m util.build_phonetic
 keypress_groups.json (`python -m util.build_keypress_groups`) and
 resolved_press_sets.json (`python -m src.elicitation`).
 """
+from typing import Any
 import argparse
 import json
 
@@ -174,7 +175,7 @@ def formatPhonology(word: Word) -> str:
 
 
 def buildReadingsByWord(
-    resolvedGroups: list[dict], theory: dict[Strokes, list[Word]],
+    resolvedGroups: list[dict[str, Any]], theory: dict[Strokes, list[Word]],
     wordToStrokes: dict[Word, Strokes] | None = None,
     wordsByOrthoLemme: dict[tuple[str, str], list[Word]] | None = None,
 ) -> dict[Word, list[list[Reading]]]:
@@ -231,7 +232,7 @@ def main() -> None:
     # Keyed by (ortho, steno), not ortho alone: a self-homograph's alternate strokes, and
     # two different words sharing a spelling but not a chord ("est" = être / nom), are
     # each their own drill item now that every item says which reading it's for.
-    byOrthoSteno: dict[tuple[str, str], dict] = {}
+    byOrthoSteno: dict[tuple[str, str], dict[str, Any]] = {}
     misalignedWords = 0
     for word, strokesList in disambiguatedTheory.items():
         chords, aligned = chordsWithReadings(word, strokesList, readingsByWord)

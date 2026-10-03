@@ -16,10 +16,11 @@ from ..elicitation import (
     wordFeatureCombinations,
 )
 from ..word import GramCat, Word
+from typing import Any
 
 
 def _make_word(**overrides) -> Word:
-    defaults = dict(
+    defaults: dict[str, Any] = dict(
         ortho="chat", phonology="Sa", lemme="chat", gramCat=GramCat.NOM,
         orthoGramCat=[GramCat.NOM], gender="m", number="s", infoVerb=None,
         rawSyllCV="S_a", rawOrthosyllCV="ch_a_t", frequencyBook=1.0, frequencyFilm=2.0,
@@ -83,8 +84,8 @@ def test_subjonctif_imparfait_dropped_but_other_combinations_of_same_word_kept()
 # ── lemma-homophone groups / enumeration ─────────────────────────────────────
 
 @pytest.fixture
-def parler_group() -> dict[str, list[Word]]:
-    strokes = (("K1",),)
+def parler_group() -> dict[Any, list[Word]]:
+    strokes: Any = (("K1",),)
     parle = _make_word(ortho="parle", lemme="parler", gramCat=GramCat.VER, gender="", number="",
                         infoVerb="ind:pre:1s;ind:pre:3s;")
     parles = _make_word(ortho="parles", lemme="parler", gramCat=GramCat.VER, gender="", number="",
@@ -121,7 +122,7 @@ def test_reportScale_dedups_oppositions_and_finds_cooccurrence(parler_group):
 
 
 def test_tie_opposition_flagged_when_two_spellings_share_a_combination():
-    strokes = (("K1",),)
+    strokes: Any = (("K1",),)
     fayote = _make_word(ortho="fayote", lemme="fayoter", gramCat=GramCat.VER, gender="", number="",
                          infoVerb="ind:pre:3s;")
     fayotte = _make_word(ortho="fayotte", lemme="fayoter", gramCat=GramCat.VER, gender="", number="",
@@ -309,12 +310,12 @@ def test_serializeResolvedPressSets_carries_readings_parallel_to_alternates(parl
 # ── Regression: the real "calmez" over-marking bug (docs/specs/discriminating-features.md §2.4) ──
 
 @pytest.fixture
-def calmer_group() -> dict[str, list[Word]]:
+def calmer_group() -> dict[Any, list[Word]]:
     """A trimmed slice of the real "calmer_VER" homophone group: "calmez" is itself a
     homograph (impératif 2p vs indicatif présent 2p, both spelled/pronounced identically),
     "calmer" is the infinitif, "calmé" the participe passé m:s -- same shape that produced
     the "-kt" over-marking bug (impératif's own marker unioned with pers_2's)."""
-    strokes = (("K1",),)
+    strokes: Any = (("K1",),)
     calmez = _make_word(ortho="calmez", lemme="calmer", gramCat=GramCat.VER, gender="", number="",
                          infoVerb="imp:pre:2p;ind:pre:2p;")
     calmer = _make_word(ortho="calmer", lemme="calmer", gramCat=GramCat.VER, gender="", number="",

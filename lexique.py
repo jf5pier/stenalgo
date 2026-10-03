@@ -1139,20 +1139,20 @@ class Lexique:
                 ret.append(s)
         return ret
 
-    def printTopWordsFilm(self, nb=500) -> None:
+    def printTopWordsFilm(self, nb: int = 500) -> None:
         print("Somme\t%f" % sum(map(lambda w: w.frequencyFilm, self.words)))
         for w in self.words[:nb]:
             print("%s\t%f" % (w.ortho, w.frequencyFilm))
 
-    def printTopWordsBooks(self, nb=500) -> None:
+    def printTopWordsBooks(self, nb: int = 500) -> None:
         print("Somme\t%f" % sum(map(lambda w: w.frequency, self.words)))
         for w in self.words[:nb]:
             print("%s\t%f" % (w.ortho, w.frequency))
 
     def printSyllabificationStats(self) -> None:
         self.mismatchSyllableSpelling: list[Word] = []
-        self.mismatchSyllableAssociation = []
-        self.matchSyllableAssociation = []
+        self.mismatchSyllableAssociation: list[list[Any]] = []
+        self.matchSyllableAssociation: list[list[Any]] = []
         self.words.sort(key=lambda x: x.frequencyFilm, reverse=True)
         for word in self.words:
             syllable_names = word.syll.split("-")
@@ -1175,7 +1175,7 @@ class Lexique:
             else:
                 for (syllable_name, spelling) in zip(syllable_names,
                                                      spellings):
-                    _ = self.sylCol.updateSyllable(
+                    self.sylCol.updateSyllable(
                         syllable_name, spelling, word.frequency)
 
         Syllable.printTopPhonemes(5)
@@ -1187,12 +1187,12 @@ class Lexique:
 
         print("Nb Mismatched syll/infrasyll",
               len(self.mismatchSyllableAssociation))
-        for m in self.mismatchSyllableAssociation:
-            printVerbose(m[0].ortho, ["syll/infrasyll not matching"])
+        for assoc in self.mismatchSyllableAssociation:
+            printVerbose(assoc[0].ortho, ["syll/infrasyll not matching"])
 
         print("Nb Matched syll/infrasyll", len(self.matchSyllableAssociation))
-        for m in self.matchSyllableAssociation:
-            printVerbose(m[0].ortho, ["syll/infrasyll matching"])
+        for assoc in self.matchSyllableAssociation:
+            printVerbose(assoc[0].ortho, ["syll/infrasyll matching"])
 
         brokenDown = list(filter(lambda w: w.orthosyll_cv != [], self.words))
         print("Nb broken down", len(brokenDown))
@@ -1201,8 +1201,8 @@ class Lexique:
 
         missing = [w.ortho for w in filter(
             lambda w: w.orthosyll_cv == [], self.words)]
-        for m in missing:
-            printVerbose(m, ["orthosyll_cv is missing"])
+        for ortho in missing:
+            printVerbose(ortho, ["orthosyll_cv is missing"])
         print("Nb missing", len(missing))
         print("\n".join(map(str, self.mismatchSyllableAssociation)))
 

@@ -3,6 +3,7 @@
 """Tests for src/ambiguitychecker.py — Phase 0 ambiguity checker."""
 
 from unittest.mock import MagicMock
+from typing import Any
 
 from src.word import Word, GramCat
 from src.ambiguitychecker import (
@@ -45,7 +46,7 @@ from src.ambiguitychecker import (
 # ---------------------------------------------------------------------------
 
 def _make_word(**overrides) -> Word:
-    defaults = dict(
+    defaults: dict[str, Any] = dict(
         ortho="chat", phonology="Sa", lemme="chat",
         gramCat=GramCat.NOM, orthoGramCat=[GramCat.NOM],
         gender="m", number="s", infoVerb=None,
@@ -349,7 +350,7 @@ class TestGroupHomophonesByReservedStroke:
     def test_distinct_lemma_pair_sharing_a_stroke_is_grouped(self):
         a = _make_word(ortho="ver", lemme="ver", gramCat=GramCat.NOM, frequencyFilm=1.0)
         b = _make_word(ortho="verre", lemme="verre", gramCat=GramCat.NOM, frequencyFilm=5.0)
-        finalInduced = {a: ((1, 2),), b: ((1, 2),)}
+        finalInduced: Any = {a: ((1, 2),), b: ((1, 2),)}
         groups = groupHomophonesByReservedStroke(finalInduced)
         assert groups == {((1, 2),): [a, b]}
 
@@ -358,13 +359,13 @@ class TestGroupHomophonesByReservedStroke:
         # case, even though they still coincidentally share a final stroke here.
         a = _make_word(ortho="dors", lemme="dormir", gramCat=GramCat.VER, frequencyFilm=1.0)
         b = _make_word(ortho="dort", lemme="dormir", gramCat=GramCat.VER, frequencyFilm=1.0)
-        finalInduced = {a: ((1,),), b: ((1,),)}
+        finalInduced: Any = {a: ((1,),), b: ((1,),)}
         assert groupHomophonesByReservedStroke(finalInduced) == {}
 
     def test_all_homograph_group_is_excluded(self):
         a = _make_word(ortho="dîner", lemme="dîner", gramCat=GramCat.NOM, frequencyFilm=1.0)
         b = _make_word(ortho="dîner", lemme="dîner", gramCat=GramCat.VER, frequencyFilm=1.0)
-        finalInduced = {a: ((1,),), b: ((1,),)}
+        finalInduced: Any = {a: ((1,),), b: ((1,),)}
         assert groupHomophonesByReservedStroke(finalInduced) == {}
 
     def test_singleton_stroke_is_excluded(self):
@@ -378,7 +379,7 @@ class TestGroupHomophonesByReservedStroke:
         a = _make_word(ortho="dîner", lemme="dîner", gramCat=GramCat.NOM, frequencyFilm=1.0)
         b = _make_word(ortho="dîner", lemme="dîner", gramCat=GramCat.VER, frequencyFilm=99.0)
         c = _make_word(ortho="dînai", lemme="dînai", gramCat=GramCat.VER, frequencyFilm=0.5)
-        finalInduced = {a: ((1,),), b: ((1,),), c: ((1,),)}
+        finalInduced: Any = {a: ((1,),), b: ((1,),), c: ((1,),)}
         assert groupHomophonesByReservedStroke(finalInduced) == {((1,),): [a, b, c]}
 
 
@@ -387,7 +388,7 @@ class TestComposeReservedKeyStrokes:
     def test_appends_star_hash_extra_stroke_after_feature_discriminating_stroke(self):
         nom = _make_word(ortho="entrée", gramCat=GramCat.NOM, frequencyFilm=4.0)
         ver = _make_word(ortho="entré", gramCat=GramCat.VER, frequencyFilm=8.0)
-        finalInduced = {nom: ((1, 2), (16,)), ver: ((1, 2), (16,))}
+        finalInduced: Any = {nom: ((1, 2), (16,)), ver: ((1, 2), (16,))}
         composed = composeReservedKeyStrokes(finalInduced)
         assert composed[nom] == ((1, 2), (16,))
         assert composed[ver] == ((1, 2), (16,), (10,))
@@ -398,7 +399,7 @@ class TestComposeReservedKeyStrokes:
         # discriminating stroke.
         nom = _make_word(ortho="entrée", gramCat=GramCat.NOM, frequencyFilm=4.0)
         ver = _make_word(ortho="entré", gramCat=GramCat.VER, frequencyFilm=8.0)
-        finalInduced = {nom: ((1, 2), (3,), (16,)), ver: ((1, 2), (3,), (16,))}
+        finalInduced: Any = {nom: ((1, 2), (3,), (16,)), ver: ((1, 2), (3,), (16,))}
         composed = composeReservedKeyStrokes(finalInduced, phonemeStrokeCounts={nom: 2, ver: 2})
         assert composed[nom] == ((1, 2), (3,), (16,))
         assert composed[ver] == ((1, 2), (3, 10), (16,))
@@ -406,7 +407,7 @@ class TestComposeReservedKeyStrokes:
     def test_escalated_mark_keeps_further_symbols_as_trailing_strokes(self):
         # 6 readings exceed the 4-code single-stroke budget: the 6th gets a 2-symbol code.
         words = [_make_word(ortho=f"w{i}", lemme=f"w{i}", frequencyFilm=float(10 - i)) for i in range(6)]
-        finalInduced = {w: ((1,),) for w in words}
+        finalInduced: Any = {w: ((1,),) for w in words}
         appended = composeReservedKeyStrokes(finalInduced)
         merged = composeReservedKeyStrokes(finalInduced, phonemeStrokeCounts={w: 1 for w in words})
         for w in words:
@@ -417,7 +418,7 @@ class TestComposeReservedKeyStrokes:
 
     def test_words_outside_any_group_are_unchanged(self):
         solo = _make_word(ortho="chat")
-        finalInduced = {solo: ((1,), (16,))}
+        finalInduced: Any = {solo: ((1,), (16,))}
         assert composeReservedKeyStrokes(finalInduced) == finalInduced
 
     def test_two_different_clusters_never_collide_after_composition(self):
@@ -425,7 +426,7 @@ class TestComposeReservedKeyStrokes:
         a2 = _make_word(ortho="verre", lemme="verre", gramCat=GramCat.NOM, frequencyFilm=5.0)
         b1 = _make_word(ortho="pain", lemme="pain", gramCat=GramCat.NOM, frequencyFilm=2.0)
         b2 = _make_word(ortho="pin", lemme="pin", gramCat=GramCat.NOM, frequencyFilm=6.0)
-        finalInduced = {a1: ((1,),), a2: ((1,),), b1: ((2,),), b2: ((2,),)}
+        finalInduced: Any = {a1: ((1,),), a2: ((1,),), b1: ((2,),), b2: ((2,),)}
         composed = composeReservedKeyStrokes(finalInduced)
         assert len(set(composed.values())) == 4
 
@@ -439,7 +440,7 @@ class TestComposeReservedKeyStrokesForEntries:
         # primary.
         panse = _make_word(ortho="panse", lemme="panser", gramCat=GramCat.VER, frequencyFilm=0.1)
         pense = _make_word(ortho="pense", lemme="penser", gramCat=GramCat.VER, frequencyFilm=500.0)
-        entries = {panse: [((1,),), ((1,), (16,))], pense: [((1,),), ((1,), (16,))]}
+        entries: Any = {panse: [((1,),), ((1,), (16,))], pense: [((1,),), ((1,), (16,))]}
         composed = composeReservedKeyStrokesForEntries(entries, phonemeStrokeCounts={panse: 1, pense: 1})
         assert composed[pense] == [((1,),), ((1,), (16,))]
         assert composed[panse] == [((1, 10),), ((1, 10), (16,))]
@@ -449,7 +450,7 @@ class TestComposeReservedKeyStrokesForEntries:
         # stroke alone reveals.
         a = _make_word(ortho="aa", lemme="aa", frequencyFilm=1.0)
         b = _make_word(ortho="bb", lemme="bb", frequencyFilm=5.0)
-        entries = {a: [((1,),), ((1,), (16,))], b: [((1,), (16,))]}
+        entries: Any = {a: [((1,),), ((1,), (16,))], b: [((1,), (16,))]}
         composed = composeReservedKeyStrokesForEntries(entries)
         assert composed[b] == [((1,), (16,))]
         assert composed[a] == [((1,),), ((1,), (16,), (10,))]
@@ -458,13 +459,13 @@ class TestComposeReservedKeyStrokesForEntries:
         # Entry positions stay parallel to the press-set alternates.
         a = _make_word(ortho="aa", lemme="aa", frequencyFilm=1.0)
         b = _make_word(ortho="bb", lemme="bb", frequencyFilm=5.0)
-        entries = {a: [((1,),), ((1,), (16,)), ((1,), (16,))], b: [((1,), (16,))]}
+        entries: Any = {a: [((1,),), ((1,), (16,)), ((1,), (16,))], b: [((1,), (16,))]}
         composed = composeReservedKeyStrokesForEntries(entries)
         assert composed[a] == [((1,),), ((1,), (16,), (10,)), ((1,), (16,), (10,))]
 
     def test_all_composed_entries_are_distinct(self):
         words = [_make_word(ortho=f"w{i}", lemme=f"w{i}", frequencyFilm=float(10 - i)) for i in range(5)]
-        entries = {w: [((1,),), ((1,), (16,))] for w in words}
+        entries: Any = {w: [((1,),), ((1,), (16,))] for w in words}
         composed = composeReservedKeyStrokesForEntries(entries, phonemeStrokeCounts={w: 1 for w in words})
         allStrokes = [s for strokesList in composed.values() for s in strokesList]
         assert len(set(allStrokes)) == len(allStrokes) == 10
@@ -515,7 +516,7 @@ def _report(lemmaHomophoneLemmaCount: int, totalFrequency: float, sameLemmaGroup
 class TestComputeOverflowFrequencyMass:
 
     def test_threshold_split(self):
-        reports = {
+        reports: Any = {
             ((1,),): _report(3, 10.0),
             ((2,),): _report(4, 20.0),
             ((3,),): _report(5, 30.0),
@@ -527,7 +528,7 @@ class TestComputeOverflowFrequencyMass:
         assert set(overflowKeys) == {((3,),), ((4,),)}
 
     def test_no_overflow(self):
-        reports = {((1,),): _report(2, 10.0), ((2,),): _report(3, 5.0)}
+        reports: Any = {((1,),): _report(2, 10.0), ((2,),): _report(3, 5.0)}
         overflowMass, totalMass, overflowKeys = computeOverflowFrequencyMass(reports, threshold=5)
         assert overflowMass == 0.0
         assert totalMass == 15.0
@@ -538,7 +539,7 @@ class TestComputeClusterSizeDistribution:
 
     def test_histograms(self):
         w1, w2 = _make_word(ortho="a"), _make_word(ortho="b")
-        reports = {
+        reports: Any = {
             ((1,),): _report(1, 10.0, sameLemmaGroups={"lemme_NOM": [w1, w2]}),
             ((2,),): _report(3, 20.0),
         }
@@ -564,7 +565,7 @@ class TestBuildKeypressGroupToWords:
         wAbaca = _make_word(ortho="abaca", lemme="abaca", gramCat=GramCat.NOM)
         wAbacas = _make_word(ortho="abacas", lemme="abaca", gramCat=GramCat.NOM)
         sharedStrokes = ((12,), (3, 5, 12))
-        wordToStrokes = {wAbaca: sharedStrokes, wAbacas: sharedStrokes}
+        wordToStrokes: Any = {wAbaca: sharedStrokes, wAbacas: sharedStrokes}
         wordsByOrthoLemme = {
             ("abaca", "abaca_NOM"): [wAbaca], ("abacas", "abaca_NOM"): [wAbacas],
         }
@@ -583,7 +584,7 @@ class TestBuildKeypressGroupToWords:
         sharedStrokes = ((12,), (3, 5, 12))
         wRight = _make_word(ortho="abacas", lemme="abaca", gramCat=GramCat.NOM)
         wWrong = _make_word(ortho="abacas", lemme="abaca", gramCat=GramCat.NOM, gender="f")
-        wordToStrokes = {wRight: sharedStrokes, wWrong: ((99,),)}
+        wordToStrokes: Any = {wRight: sharedStrokes, wWrong: ((99,),)}
         wordsByOrthoLemme = {("abacas", "abaca_NOM"): [wWrong, wRight]}
         entry = {
             "strokes": [[12], [3, 5, 12]], "lemmeGramCat": "abaca_NOM",
@@ -600,7 +601,7 @@ class TestBuildKeypressGroupToWords:
         same spelling and lemma, which would then wrongly carry the subjonctif mark."""
         wNi = _make_word(ortho="nie", phonology="ni", lemme="nier", gramCat=GramCat.VER)
         wNj = _make_word(ortho="nie", phonology="nj", lemme="nier", gramCat=GramCat.VER)
-        wordToStrokes = {wNi: ((6, 8, 13),), wNj: ((6, 8, 8, 9),)}
+        wordToStrokes: Any = {wNi: ((6, 8, 13),), wNj: ((6, 8, 8, 9),)}
         wordsByOrthoLemme = {("nie", "nier_VER"): [wNi, wNj]}
         entry = {
             "strokes": [[6, 8, 9]], "lemmeGramCat": "nier_VER",
@@ -616,7 +617,7 @@ class TestBuildKeypressGroupToWords:
         `buildKeypressGroupExtraAlternates`, not this function."""
         wCalmez = _make_word(ortho="calmez", lemme="calmer", gramCat=GramCat.VER)
         sharedStrokes = ((12,),)
-        wordToStrokes = {wCalmez: sharedStrokes}
+        wordToStrokes: Any = {wCalmez: sharedStrokes}
         wordsByOrthoLemme = {("calmez", "calmer_VER"): [wCalmez]}
         entry = {
             "strokes": [[12]], "lemmeGramCat": "calmer_VER",
@@ -631,7 +632,7 @@ class TestBuildKeypressGroupExtraAlternates:
 
     def test_ignores_orthos_with_only_one_alternate(self):
         wAbacas = _make_word(ortho="abacas", lemme="abaca", gramCat=GramCat.NOM)
-        wordToStrokes = {wAbacas: ((12,),)}
+        wordToStrokes: Any = {wAbacas: ((12,),)}
         wordsByOrthoLemme = {("abacas", "abaca_NOM"): [wAbacas]}
         entry = {
             "strokes": [[12]], "lemmeGramCat": "abaca_NOM",
@@ -646,7 +647,7 @@ class TestBuildKeypressGroupExtraAlternates:
         """"calmez" = impératif (primary, consumed by buildKeypressGroupToWords) or
         pers_2 (extra) -- this function surfaces the extra one's own group-set."""
         wCalmez = _make_word(ortho="calmez", lemme="calmer", gramCat=GramCat.VER)
-        wordToStrokes = {wCalmez: ((12,),)}
+        wordToStrokes: Any = {wCalmez: ((12,),)}
         wordsByOrthoLemme = {("calmez", "calmer_VER"): [wCalmez]}
         entry = {
             "strokes": [[12]], "lemmeGramCat": "calmer_VER",
@@ -666,7 +667,7 @@ class TestFindSpellingTwinWords:
         wParticipe = _make_word(ortho="affadis", lemme="affadir", gramCat=GramCat.VER, gender="m", number="p")
         wPasse = _make_word(ortho="affadis", lemme="affadir", gramCat=GramCat.VER, gender=None, number=None)
         sharedStrokes = ((12,), (2, 4, 12), (4, 5, 13))
-        wordToStrokes = {wParticipe: sharedStrokes, wPasse: sharedStrokes}
+        wordToStrokes: Any = {wParticipe: sharedStrokes, wPasse: sharedStrokes}
         wordsByOrthoLemme = {("affadis", "affadir_VER"): [wParticipe, wPasse]}
         entry = {
             "strokes": [[12], [2, 4, 12], [4, 5, 13]], "lemmeGramCat": "affadir_VER",
@@ -681,7 +682,7 @@ class TestFindSpellingTwinWords:
         entry."""
         wRight = _make_word(ortho="abacas", lemme="abaca", gramCat=GramCat.NOM)
         wElsewhere = _make_word(ortho="abacas", lemme="abaca", gramCat=GramCat.NOM, gender="f")
-        wordToStrokes = {wRight: ((12,),), wElsewhere: ((99,),)}
+        wordToStrokes: Any = {wRight: ((12,),), wElsewhere: ((99,),)}
         wordsByOrthoLemme = {("abacas", "abaca_NOM"): [wElsewhere, wRight]}
         entry = {
             "strokes": [[12]], "lemmeGramCat": "abaca_NOM",
@@ -691,7 +692,7 @@ class TestFindSpellingTwinWords:
 
     def test_resolved_word_itself_is_never_a_twin(self):
         wOnly = _make_word(ortho="abacas", lemme="abaca", gramCat=GramCat.NOM)
-        wordToStrokes = {wOnly: ((12,),)}
+        wordToStrokes: Any = {wOnly: ((12,),)}
         wordsByOrthoLemme = {("abacas", "abaca_NOM"): [wOnly]}
         entry = {
             "strokes": [[12]], "lemmeGramCat": "abaca_NOM",
@@ -777,7 +778,7 @@ class TestRealizeKeypressGroupsAsExtraStroke:
         w3 = _make_word(ortho="honnit", lemme="honnir", gramCat=GramCat.VER)
         w5 = _make_word(ortho="honnie", lemme="honnir", gramCat=GramCat.VER)
         w3b = _make_word(ortho="other", lemme="other")
-        theory = {sharedBase: [w3, w5], ((9,),): [w3b]}
+        theory: Any = {sharedBase: [w3, w5], ((9,),): [w3b]}
         groupToWords = {0: [w3, w3b], 1: [w5]}
         kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
         costs = {(2,): 50, (3,): 100}
@@ -800,7 +801,7 @@ class TestRealizeKeypressGroupsAsExtraStroke:
         w_single = _make_word(ortho="single", lemme="x", gramCat=GramCat.VER)
         w0_pad = _make_word(ortho="pad0", lemme="pad0")
         w1_pad = _make_word(ortho="pad1", lemme="pad1")
-        theory = {sharedBase: [w_multi, w_single], ((8,),): [w0_pad], ((9,),): [w1_pad]}
+        theory: Any = {sharedBase: [w_multi, w_single], ((8,),): [w0_pad], ((9,),): [w1_pad]}
         groupToWords = {0: [w_multi, w0_pad], 1: [w_multi, w1_pad], 2: [w_single]}
         kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
         costs = {(2,): 10, (3,): 20, (2, 3): 15}
@@ -821,7 +822,7 @@ class TestRealizeKeypressGroupsAsExtraStroke:
         frequently co-occurring group's key."""
         w_a_only = _make_word(ortho="a_only")
         w_common = _make_word(ortho="common")
-        theory = {((1,),): [w_a_only], ((2,),): [w_common]}
+        theory: Any = {((1,),): [w_a_only], ((2,),): [w_common]}
         groupToWords = {0: [w_a_only, w_common], 1: [w_common]}
         kb = _mock_keyboard_for_keypresses({"R": (22,), "t": (23,), "s": (24,)})
         costs = {(22,): 50, (23,): 100, (24,): 100, (22, 23): 150, (22, 24): 300}
@@ -836,7 +837,7 @@ class TestRealizeKeypressGroupsAsExtraStroke:
         """A human preference (e.g. "pers_3 on -t, mnemonic for its written t ending")
         wins outright over a cheaper candidate, not just as a tiebreaker."""
         w = _make_word()
-        theory = {((1,),): [w]}
+        theory: Any = {((1,),): [w]}
         groupToWords = {0: [w]}
         kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
         kb.getStrokeCost.side_effect = lambda stroke, part: {(2,): 5, (3,): 2}.get(stroke)
@@ -852,7 +853,7 @@ class TestRealizeKeypressGroupsAsExtraStroke:
         stroke elsewhere in the theory) is left unhonored -- the normal cost-ranked
         search still finds a safe candidate instead of failing the group outright."""
         w = _make_word()
-        theory = {((1,),): [w], ((1,), (2,)): [_make_word(ortho="other")]}
+        theory: Any = {((1,),): [w], ((1,), (2,)): [_make_word(ortho="other")]}
         groupToWords = {0: [w]}
         kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
         kb.getStrokeCost.side_effect = lambda stroke, part: 1
@@ -869,7 +870,7 @@ class TestRealizeKeypressGroupsAsExtraStroke:
         coda-group search fail for reasons entirely outside its scope."""
         w1 = _make_word(ortho="abymes", lemme="abyme")
         w2 = _make_word(ortho="abîmes", lemme="abîme")
-        theory = {((1,),): [w1, w2]}
+        theory: Any = {((1,),): [w1, w2]}
         groupToWords = {0: [w1, w2]}
         kb = _mock_keyboard_for_keypresses({"t": (2,)})
         kb.getStrokeCost.side_effect = lambda stroke, part: 1
@@ -884,7 +885,7 @@ class TestRealizeKeypressGroupsAsExtraStroke:
         already-documented "aller"-style cross-category clash, not the Realization Phase's job."""
         w1 = _make_word(ortho="dîners", lemme="dîner", gramCat=GramCat.NOM)
         w2 = _make_word(ortho="dînés", lemme="dîner", gramCat=GramCat.VER)
-        theory = {((1,),): [w1, w2]}
+        theory: Any = {((1,),): [w1, w2]}
         groupToWords = {0: [w1, w2]}
         kb = _mock_keyboard_for_keypresses({"t": (2,)})
         kb.getStrokeCost.side_effect = lambda stroke, part: 1
@@ -897,7 +898,7 @@ class TestRealizeKeypressGroupsAsExtraStroke:
     def test_identical_ortho_never_reported_anywhere(self):
         w1 = _make_word(ortho="abaissés", lemme="abaisser", gramCat=GramCat.VER)
         w2 = _make_word(ortho="abaissés", lemme="abaissé", gramCat=GramCat.ADJ)
-        theory = {((1,),): [w1, w2]}
+        theory: Any = {((1,),): [w1, w2]}
         groupToWords = {0: [w1, w2]}
         kb = _mock_keyboard_for_keypresses({"t": (2,)})
         kb.getStrokeCost.side_effect = lambda stroke, part: 1
@@ -912,7 +913,7 @@ class TestRealizeKeypressGroupsAsExtraStroke:
         """The marker is realized as a brand-new trailing stroke, not merged into the
         word's last existing one."""
         w = _make_word()
-        theory = {((1,),): [w]}
+        theory: Any = {((1,),): [w]}
         groupToWords = {0: [w]}
         kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
         kb.getStrokeCost.side_effect = lambda stroke, part: {(2,): 5, (3,): 2}.get(stroke)
@@ -928,7 +929,7 @@ class TestRealizeKeypressGroupsAsExtraStroke:
         w = _make_word()
         # Both single-key candidates, and the only viable combo, are already real
         # strokes elsewhere in the theory -- no legal extra stroke is collision-free.
-        theory = {
+        theory: Any = {
             ((1,),): [w], ((1,), (2,)): [_make_word(ortho="o1")],
             ((1,), (3,)): [_make_word(ortho="o2")], ((1,), (2, 3)): [_make_word(ortho="o3")],
         }
@@ -948,7 +949,7 @@ class TestRealizeKeypressGroupsAsExtraStroke:
         w1 = _make_word(ortho="w1")
         w2 = _make_word(ortho="w2")
         sharedStrokes = ((1,),)
-        theory = {sharedStrokes: [w1, w2]}
+        theory: Any = {sharedStrokes: [w1, w2]}
         groupToWords = {0: [w1, w2], 1: [w2]}
         kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
         kb.getStrokeCost.side_effect = lambda stroke, part: {(2,): 1, (3,): 1}.get(stroke, 1)
@@ -974,7 +975,7 @@ class TestRealizeKeypressGroupsAsExtraStroke:
         # non-redundant candidate, (3,), composed with group 0's already-chosen (2,) for
         # w2, lands on ((1,), (2, 3)) -- block exactly that composed stroke via theory so
         # group 1 has no legal candidate left and ends up unassigned.
-        theory = {sharedStrokes: [w1, w2], ((1,), (2, 3)): [_make_word(ortho="o1")]}
+        theory: Any = {sharedStrokes: [w1, w2], ((1,), (2, 3)): [_make_word(ortho="o1")]}
         groupToWords = {0: [w1, w2], 1: [w2]}
         kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
         kb.getStrokeCost.side_effect = lambda stroke, part: 1
@@ -999,7 +1000,7 @@ class TestRealizeKeypressGroupsAsExtraStrokeWithExtraAlternates:
         wCalmez = _make_word(ortho="calmez", lemme="calmer", gramCat=GramCat.VER)
         wPad0 = _make_word(ortho="pad0", lemme="pad0")
         wPad1 = _make_word(ortho="pad1", lemme="pad1")
-        theory = {((1,),): [wCalmez], ((5,),): [wPad0], ((6,),): [wPad1]}
+        theory: Any = {((1,),): [wCalmez], ((5,),): [wPad0], ((6,),): [wPad1]}
         groupToWords = {0: [wCalmez, wPad0], 1: [wPad1]}
         kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
         kb.getStrokeCost.side_effect = lambda stroke, part: 1
@@ -1019,7 +1020,7 @@ class TestRealizeKeypressGroupsAsExtraStrokeWithExtraAlternates:
         wCalmez = _make_word(ortho="calmez", lemme="calmer", gramCat=GramCat.VER)
         wOther = _make_word(ortho="calmiez", lemme="calmer", gramCat=GramCat.VER)
         sharedBase = ((1,),)
-        theory = {sharedBase: [wCalmez, wOther]}
+        theory: Any = {sharedBase: [wCalmez, wOther]}
         groupToWords = {0: [wCalmez], 1: [wOther]}
         kb = _mock_keyboard_for_keypresses({"t": (2,), "s": (3,)})
         kb.getStrokeCost.side_effect = lambda stroke, part: 1
@@ -1034,7 +1035,7 @@ class TestBuildExtraInducedStrokes:
 
     def test_composes_each_extra_alternate_using_already_decided_keys(self):
         wCalmez = _make_word(ortho="calmez", lemme="calmer", gramCat=GramCat.VER)
-        theory = {((1,),): [wCalmez]}
+        theory: Any = {((1,),): [wCalmez]}
         assignment = KeypressGroupPhysicalAssignment(chosenKeysByGroup={0: (2,), 1: (3,)})
         extraGroupSetsByWord = {wCalmez: [frozenset({1})]}
         result = buildExtraInducedStrokes(theory, assignment, extraGroupSetsByWord)
@@ -1048,6 +1049,6 @@ class TestBuildExtraInducedStrokes:
         contributes no keys -- an alternate needing only that group is silently skipped
         rather than producing a bare (unmarked) stroke identical to the word's own base."""
         w = _make_word()
-        theory = {((1,),): [w]}
+        theory: Any = {((1,),): [w]}
         assignment = KeypressGroupPhysicalAssignment(chosenKeysByGroup={})
         assert buildExtraInducedStrokes(theory, assignment, {w: [frozenset({0})]}) == {}

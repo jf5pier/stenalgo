@@ -24,6 +24,7 @@ def starboard() -> Starboard:
 
 def starboard_steno(*strokes):
     board = Starboard.fromJSONFile(os.path.join(os.path.dirname(__file__), "..", "..", "starboard3h.json"))
+    assert board is not None
     return renderFinalStrokesToRTFCRE(board, strokes)
 
 

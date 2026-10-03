@@ -1,4 +1,5 @@
 """Tests for the decisions file (src/affixdecisions.py, affix_decisions.json) and their use in src/affixes.py / affixrules.py."""
+from typing import Any
 import json
 import re
 
@@ -10,7 +11,16 @@ from src.affixdecisions import (
     APART, FUSED, SINGLE, AnchorDecision, Decisions, DecisionsError, ScopeForm, loadDecisions, saveDecisions)
 from src.affixes import PREFIX, SUFFIX, Candidate, Carrier, CarrierResult, WordRecord
 
+NONE: Any = None  # deliberately untyped stand-in for an unused argument
+
 _idx = [5000]
+
+
+def _growth(d, position, spellings, phono):
+    """The decided growth forms, which the test expects to exist."""
+    forms = d.growthForms(position, spellings, phono)
+    assert forms is not None
+    return forms
 
 
 def _word(orthoSylls, phonoSylls, freq=10.0):
@@ -47,7 +57,7 @@ class TestDecisionsFile:
             AnchorDecision(PREFIX, "a", "a", SINGLE, [form]),
             AnchorDecision(PREFIX, "a|ha", "a", FUSED, None),
             AnchorDecision(PREFIX, "b|hb", "b", FUSED, None)])
-        (inherited,) = d.growthForms(PREFIX, "a|ha", "a")
+        (inherited,) = _growth(d, PREFIX, "a|ha", "a")
         assert inherited.anchors == frozenset({"a"}) and inherited.label == "RE"
         assert d.growthForms(PREFIX, "b|hb", "b") is None       # no part has growth: still undecided
 
@@ -84,21 +94,21 @@ class TestDecisionsFile:
 
     def test_decided_patterns(self):
         d = loadDecisions()
-        (en,) = d.growthForms(PREFIX, "am|an|ant|em|en|ench|enh|ham|han|hen", "@")
+        (en,) = _growth(d, PREFIX, "am|an|ant|em|en|ench|enh|ham|han|hen", "@")
         assert en.matches("en", "fan", "f@") and en.matches("en", "gran", "gR@")
         assert not en.matches("en", "ta", "ta") and not en.matches("en", "ment", "@")   # needs C{1,2} before @
         assert not en.matches("em", "fan", "f@")                                          # growth stays on `en`
-        (ten,) = d.growthForms(SUFFIX, "té", "te")
+        (ten,) = _growth(d, SUFFIX, "té", "te")
         assert ten.matches("té", "li", "li") and not ten.matches("té", "bi", "bi") and not ten.matches("té", "vi", "vi")
-        liser, sez = d.growthForms(SUFFIX, "ser|sée|zer|zé", "ze")
+        liser, sez = _growth(d, SUFFIX, "ser|sée|zer|zé", "ze")
         assert liser.matches("ser", "ba", "li") and sez.matches("sez", "cu", "ky") and not sez.matches("ser", "cu", "ky")
 
     def test_fused_forms_stay_on_the_approved_spelling(self):
         d = loadDecisions()
-        (tion,) = d.growthForms(SUFFIX, "ccion|cion|cyon|sion|ssion|tion|tions", "sj§")
+        (tion,) = _growth(d, SUFFIX, "ccion|cion|cyon|sion|ssion|tion|tions", "sj§")
         assert tion.matches("tion", "ta", "ta") and tion.matches("tions", "ta", "ta")
         assert not tion.matches("ssion", "pa", "pa")          # passion: not on the added spelling
-        (der,) = d.growthForms(SUFFIX, "der|dé|dée", "de")
+        (der,) = _growth(d, SUFFIX, "der|dé|dée", "de")
         assert all(der.matches(a, "x", "gaR") for a in ("dez", "der", "dé")) and not der.matches("dée", "x", "gaR")
 
     def test_verdicts(self):
@@ -167,7 +177,7 @@ class TestFallback:
         monkeypatch.setattr(R, "simulate", fakeSim)
         carriers = R.poolCarriers(rule.forms)
         assert sorted(c.span for c in carriers) == [2, 2]
-        fixed, n = R.resolveFallbacks(rule, (1,), carriers, None)
+        fixed, n = R.resolveFallbacks(rule, (1,), carriers, NONE)
         assert n == 1
         assert {c.rec.idx: (c.span, c.member) for c in fixed} == {w1.idx: (1, 0), w2.idx: (2, 1)}
         assert R.ruleExclusions(rule) == 0          # fallbacks are recorded by chooseRuleKeypress
@@ -184,4 +194,4 @@ class TestFallback:
 
         monkeypatch.setattr(R, "simulate", boom)
         carriers = anchor.carriers
-        assert R.resolveFallbacks(rule, (1,), carriers, None) == (carriers, 0)
+        assert R.resolveFallbacks(rule, (1,), carriers, NONE) == (carriers, 0)

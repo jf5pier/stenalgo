@@ -20,6 +20,7 @@ The module's `__main__` runs only this Part 1 metric (by hand, after Phonetic Th
 Building (S5)); the rest of the module is the live Realization Phase and star/hash marking code.
 """
 
+from typing import Any
 import os
 import pickle
 from collections import defaultdict
@@ -678,7 +679,7 @@ def buildWordsByOrthoLemme(theory: dict[Strokes, list[Word]]) -> dict[tuple[str,
 
 
 def _resolveEntryWord(
-    entry: dict, ortho: str,
+    entry: dict[str, Any], ortho: str,
     wordToStrokes: dict[Word, Strokes],
     wordsByOrthoLemme: dict[tuple[str, str], list[Word]],
 ) -> Word | None:
@@ -705,7 +706,7 @@ def _resolveEntryWord(
 
 
 def buildKeypressGroupToWords(
-    resolvedGroups: list[dict],
+    resolvedGroups: list[dict[str, Any]],
     markersByKeypress: dict[int, frozenset[str]],
     wordToStrokes: dict[Word, Strokes],
     wordsByOrthoLemme: dict[tuple[str, str], list[Word]],
@@ -749,7 +750,7 @@ def buildKeypressGroupToWords(
 
 
 def buildKeypressGroupExtraAlternates(
-    resolvedGroups: list[dict],
+    resolvedGroups: list[dict[str, Any]],
     markersByKeypress: dict[int, frozenset[str]],
     wordToStrokes: dict[Word, Strokes],
     wordsByOrthoLemme: dict[tuple[str, str], list[Word]],
@@ -787,7 +788,7 @@ def buildKeypressGroupExtraAlternates(
 
 
 def findSpellingTwinWords(
-    resolvedGroups: list[dict],
+    resolvedGroups: list[dict[str, Any]],
     wordToStrokes: dict[Word, Strokes],
     wordsByOrthoLemme: dict[tuple[str, str], list[Word]],
 ) -> set[Word]:

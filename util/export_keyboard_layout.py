@@ -18,6 +18,7 @@ conjugation-marker legend, `realization_report.json`
 """
 import json
 import os
+from typing import Any
 
 from src.keyboard import Starboard
 from util.export_plover_system import GEMINI_PR_LABELS
@@ -78,7 +79,7 @@ def _handAndGridPosition(keyIndex: int) -> tuple[str, int, int]:
     raise ValueError(f"Key {keyIndex} not placed in any bank/thumb-cluster/off-home slot")
 
 
-def _phonemeLayers(starboard: Starboard) -> list[dict]:
+def _phonemeLayers(starboard: Starboard) -> list[dict[str, Any]]:
     """
     Chords of 2+ keys, grouped by chord size -- the same grouping
     `Starboard.printLayout` draws as its "N-key phonemes layer" ASCII boards.
@@ -114,7 +115,7 @@ def _phonemeLayers(starboard: Starboard) -> list[dict]:
     return layers
 
 
-def _conjugationMarkers(starboard: Starboard) -> list[dict]:
+def _conjugationMarkers(starboard: Starboard) -> list[dict[str, Any]]:
     """
     The key -> meaning legend of Same-Lemma and Grammatical-Category Disambiguation (S6)
     (Discriminating-Feature Stroke Realization (Realization Phase); see
@@ -129,7 +130,7 @@ def _conjugationMarkers(starboard: Starboard) -> list[dict]:
     with open(PHASE_P_REALIZATION_JSON, encoding="utf-8") as f:
         realization = json.load(f)
 
-    markers = []
+    markers: list[dict[str, Any]] = []
     for group in realization.get("keypressGroups", {}).values():
         keys: list[int] = group["chosenKeys"]
         labels: list[str] = []
@@ -153,8 +154,8 @@ def main() -> None:
 
     names = starboard.keyDisplayNames()
     partByKey: dict[int, str] = {}
-    for part, keys in starboard.keyIDinSyllabicPart.items():
-        for k in keys:
+    for part, partKeys in starboard.keyIDinSyllabicPart.items():
+        for k in partKeys:
             partByKey[k] = part
 
     keys = []

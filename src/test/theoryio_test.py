@@ -3,6 +3,7 @@ hit/miss round-trips on tmp files. The real five fingerprint inputs are
 multi-MB repo artifacts the unit tests must not depend on, so every test
 passes its own `inputs` / `path`."""
 
+from typing import Any, cast
 from util._theoryio import (
     loadCachedDisambiguatedTheory,
     writeDisambiguatedTheoryPickle,
@@ -20,9 +21,9 @@ def _writeInputs(tmp_path, contents=(b"lexique", b"layout")):
 def test_round_trip_is_a_hit(tmp_path):
     inputs = _writeInputs(tmp_path)
     cachePath = str(tmp_path / "DisambiguatedTheory.pickle")
-    theory = {"ami": [(1, 2), (3,)]}
-    wordToStrokes = {}
-    wordsByOrthoLemme = {("ami", "VER"): []}
+    theory: Any = {"ami": [(1, 2), (3,)]}
+    wordToStrokes: dict[Any, Any] = {}
+    wordsByOrthoLemme: dict[Any, Any] = {("ami", "VER"): []}
     writeDisambiguatedTheoryPickle(theory, wordToStrokes, wordsByOrthoLemme,
                                     path=cachePath, inputs=inputs)
     assert loadCachedDisambiguatedTheory(path=cachePath, inputs=inputs) \
@@ -32,7 +33,7 @@ def test_round_trip_is_a_hit(tmp_path):
 def test_changed_input_is_a_miss(tmp_path):
     inputs = _writeInputs(tmp_path)
     cachePath = str(tmp_path / "DisambiguatedTheory.pickle")
-    writeDisambiguatedTheoryPickle({"ami": [(1, 2)]}, {}, {}, path=cachePath, inputs=inputs)
+    writeDisambiguatedTheoryPickle(cast(Any, {"ami": [(1, 2)]}), {}, {}, path=cachePath, inputs=inputs)
     with open(inputs[0], "wb") as f:
         f.write(b"lexique-edited")
     assert loadCachedDisambiguatedTheory(path=cachePath, inputs=inputs) is None
@@ -43,7 +44,7 @@ def test_deleted_input_is_a_miss(tmp_path):
     # rebuilt) must not load a stale cache.
     inputs = _writeInputs(tmp_path)
     cachePath = str(tmp_path / "DisambiguatedTheory.pickle")
-    writeDisambiguatedTheoryPickle({"ami": [(1, 2)]}, {}, {}, path=cachePath, inputs=inputs)
+    writeDisambiguatedTheoryPickle(cast(Any, {"ami": [(1, 2)]}), {}, {}, path=cachePath, inputs=inputs)
     import os
     os.remove(inputs[1])
     assert loadCachedDisambiguatedTheory(path=cachePath, inputs=inputs) is None
@@ -59,7 +60,7 @@ def test_truncated_cache_is_a_miss(tmp_path):
     # A corrupt pickle (interrupted write) loads as a miss, never as an error.
     inputs = _writeInputs(tmp_path)
     cachePath = tmp_path / "DisambiguatedTheory.pickle"
-    writeDisambiguatedTheoryPickle({"ami": [(1, 2)]}, {}, {}, path=str(cachePath), inputs=inputs)
+    writeDisambiguatedTheoryPickle(cast(Any, {"ami": [(1, 2)]}), {}, {}, path=str(cachePath), inputs=inputs)
     with open(cachePath, "r+b") as f:
         f.truncate(17)
     assert loadCachedDisambiguatedTheory(path=str(cachePath), inputs=inputs) is None
