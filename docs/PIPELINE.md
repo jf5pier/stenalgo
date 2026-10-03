@@ -1957,6 +1957,6 @@ evaluations, the final selection with the md5 of the decisions it was made from)
 **Input state** the stable theory, `affix_rules.json`.
 **Transformation** per carrier word of each rule the shortest allowed outline (growth form, then anchor alone), kept only if it equals
 no outline of the stable theory and no more frequent spelling's abbreviation; every route of the word (its marked variants) gets one, with the
-same marking, the primary routes settled first; a rule whose anchor vanished is skipped with a warning.
+same marking, a shared outline going to the most frequent spelling; a rule whose anchor vanished is skipped with a warning.
 **Artifacts** writes `plover_stenalgo_affix_dictionary.json` (short outline → word) and `affix_abbreviations.tsv`; fails if an abbreviation
 collides with `plover_stenalgo_dictionary.json`.

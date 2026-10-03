@@ -127,7 +127,7 @@ Keys 0, 1, 10, 15 are reserved and never used.
 For each carrier, the shortened outline of the best rule is added when it is free in the stable theory; a form that is not
 allowed falls back to the rule's anchor alone, then to no abbreviation. One abbreviation per word and route (the largest saving; a tie
 goes to the better-ranked rule); every route of the word, i.e. every conjugation/homograph marking it has in the theory, gets its
-own abbreviation with the same marking, primary routes first. The long outline stays valid. Output: a Plover JSON dictionary and a TSV for review.
+own abbreviation with the same marking; a shared outline goes to the most frequent spelling whatever the route. The long outline stays valid. Output: a Plover JSON dictionary and a TSV for review.
 
 ## 6. Known limits
 

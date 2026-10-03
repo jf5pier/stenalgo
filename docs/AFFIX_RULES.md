@@ -117,15 +117,15 @@ python -m util.export_affix_dictionary      # S9b: also the last step of `python
   outline with the rule's keys. Per word and route: one abbreviation, the one saving the most strokes (growth form, then
   anchor alone; a tie goes to the better-ranked rule). A route is one of the word's outlines in the stable theory (route 0 is the
   primary one; the others carry the other conjugation or homograph marks and trailing feature strokes), and the abbreviation keeps
-  that route's marks and strokes after the shortened base. The primary routes are settled first, then another route only takes an
-  outline no primary abbreviation has (`route` column of the TSV). The affix keypress cannot swallow a mark: the marks are keys
+  that route's marks and strokes after the shortened base. When several spellings or routes want one outline, the most frequent
+  spelling keeps it, whatever its route (a tie goes to the primary route; `route` column of the TSV). The affix keypress cannot swallow a mark: the marks are keys
   10 and 15, never among the 22 phoneme keys a rule's keypress is made of.
 - An abbreviation exists only if its outline equals no outline of the stable theory (all words, all readings) and no more frequent
   spelling's abbreviation. It keeps the word's own star/hash and feature marks, and never adds a mark, so it cannot disturb the theory.
   The exporter also fails if one collides with `plover_stenalgo_dictionary.json`.
-- Result on the current lexicon (2026-10-02, after the growth-before-fusion review and the route marks): 79,715 abbreviations (72,204
-  primary-route ones, 7,511 for other routes) for 80,473 carrier words; 176 carriers have no allowed form and 1,740 lost a shared
-  outline to a more frequent spelling; strokes saved x frequency = 141,965.
+- Result on the current lexicon (2026-10-02, after the growth-before-fusion review and the route marks): 79,715 abbreviations (72,121
+  primary-route ones, 7,594 for other routes) for 80,473 carrier words; 176 carriers have no allowed form and 1,815 lost a shared
+  outline to a more frequent spelling; strokes saved x frequency = 142,244.
   The selection includes the anchor-alone rules `a`, `co+col+com+con+cor` and `ma` in place of `par`, `ger`, `cher`; nothing is pending.
   The main dictionary is unchanged. Use it in Plover as a second dictionary of higher priority; remove it and nothing else changes.
 - Key search (`scratch/keysearch_misses.py`, `scratch/wider_shortlist.py`, 2026-10-01): `chooseRuleKeypress` shortlists on the 2,000

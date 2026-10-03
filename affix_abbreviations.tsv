@@ -245,6 +245,7 @@ impression	aie/pRe/sRwai	aie/pRejst	1	6	ccion|cion|cyon|sion|ssion|tion|tions	1	
 auras	ae/Ra/-d	tRad/-d	1	14	au	1	87.32	0
 autour	ae/t@eR	tR@edR	1	14	au	1	87.02	0
 serais	s@a/Rie/-k	smRie/-k	1	26	ce|sce|se	1	86.94	0
+serais	s@a/Rie/-d	smRie/-d	1	26	ce|sce|se	1	86.94	1
 enfer	@/kpieR	kpmiejR	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	86.02	0
 monter	mai/te/-l	maijtn/-l	1	13	ter	1	85.70	0
 pourra	p@e/Ra	ptRak	1	28	pou|pu	1	85.18	0
@@ -334,6 +335,7 @@ compagnie	kai/pa/wi	pwad/wi	1	4	co+col+com+con+cor	1	68.90	0
 comprenez	kai/pR@a/mRe	pRw@ad/mRe	1	4	co+col+com+con+cor	1	68.86	0
 conseil	kai/siej	swiejd	1	4	co+col+com+con+cor	1	68.86	0
 promets	pRae/mie/-k	pvmRie/-k	1	24	pro|proh|prô	1	68.81	0
+promets	pRae/mie/-d	pvmRie/-d	1	24	pro|proh|prô	1	68.81	1
 beauté	svae/te	svaedtm	1	15	té	1	68.57	0
 colère	kae/mtieR	mtwiedR	1	4	co+col+com+con+cor	1	67.91	0
 départ	pve/paR	spwakR	1	8	de|des|dé|déh	1	67.35	0
@@ -451,6 +453,7 @@ arrivera	a/Ri/v@a/Ra	Rwij/v@a/Ra	1	1	a|ah|ha|hâ|â	1	53.86	0
 éviter	e/vi/te/-l	kvi/te/-l	1	7	é	1	53.71	0
 allée	a/mte/-j	mtwej/-j	1	1	a|ah|ha|hâ|â	1	52.93	0
 passez	pa/se/-k	pajsd/-k	1	12	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé	1	52.84	0
+passez	pa/se/-d	pajsd/-d	1	12	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé	1	52.84	1
 parie	pa/R*i	kvR*ik	1	19	pa	1	52.59	0
 parie	pa/Ri/-k	kvRik/-k	1	19	pa	1	52.59	1
 parie	pa/Ri/-R	kvRik/-R	1	19	pa	1	52.59	2
@@ -538,7 +541,6 @@ répète	Re/piet/-R	spiejt/-R	1	18	ra|rai|raie|re|rhé|ré|réh	1	45.14	2
 disons	pvi/twai	stwaijd	1	29	de|dea|di|die|dis|dy|dî	1	45.13	0
 entendez	@/t@/pve	pvmej	2	3	am|an|ant|em|en|ench|enh|ham|han|hen	2	45.11	0
 compter	kai/te/-l	kaijtn/-l	1	13	ter	1	45.05	0
-serais	s@a/Rie/-d	smRie/-d	1	26	ce|sce|se	1	45.02	0
 machine	ma/pmin	pmiskdn	1	20	ma|mah|mâ	1	44.94	0
 récupérer	Re/k@i/pe/Re/-l	spej/Re/-l	2	18	ra|rai|raie|re|rhé|ré|réh	2	44.59	0
 samedi	sa/m@a/pvi	vm@aZ/pvi	1	22	sa|sah	1	44.51	0
@@ -1624,6 +1626,7 @@ déclare	pve/kmtaR/-k	ksmtwakR/-k	1	8	de|des|dé|déh	1	13.13	1
 déclare	pve/kmtaR/-R	ksmtwakR/-R	1	8	de|des|dé|déh	1	13.13	2
 fonction	kpaik/sRwai	kpaijskt	1	6	ccion|cion|cyon|sion|ssion|tion|tions	1	13.12	0
 passais	pa/sie/-k	ksviek/-k	1	19	pa	1	13.12	0
+passais	pa/sie/-d	ksviek/-d	1	19	pa	1	13.12	1
 arriverai	a/Ri/v@a/Re/-t	Rwij/v@a/Re/-t	1	1	a|ah|ha|hâ|â	1	13.08	0
 concernant	kai/sieR/mR@	swiedR/mR@	1	4	co+col+com+con+cor	1	13.08	0
 sachez	sa/pme	pvmeZ	1	22	sa|sah	1	13.07	0
@@ -1690,6 +1693,7 @@ considère	kai/si/pvieR	swid/pvieR	1	4	co+col+com+con+cor	1	12.53	0
 considère	kai/si/pvieR/-k	swid/pvieR/-k	1	4	co+col+com+con+cor	1	12.53	1
 considère	kai/si/pvieR/-R	swid/pvieR/-R	1	4	co+col+com+con+cor	1	12.53	2
 parait	pa/R*ie	kvR*iek	1	19	pa	1	12.53	0
+envie	@/vi/-k	pvmij/-k	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	12.50	1
 envie	@/vi/-R	pvmij/-R	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	12.50	2
 assister	a/sis/te/-l	swijs/te/-l	1	1	a|ah|ha|hâ|â	1	12.49	0
 malheureuse	ma/mt@ie/R@ienl	R@ieskdnl	2	20	ma|mah|mâ	2	12.48	0
@@ -2304,6 +2308,7 @@ compétition	kai/pe/ti/sRwai	kai/pejst	2	6	ccion|cion|cyon|sion|ssion|tion|tions
 dealer	pvi/mt@R	smt@jdR	1	29	de|dea|di|die|dis|dy|dî	1	8.43	0
 mannequin	ma/mR@a/kaie	mR@askd/kaie	1	20	ma|mah|mâ	1	8.43	0
 imbéciles	aie/sve/sil/-s	svtRwe/sil/-s	1	9	ain|hin|im|in	1	8.42	0
+réjouis	Re/vtwi/-s	spvtwij/-s	1	18	ra|rai|raie|re|rhé|ré|réh	1	8.42	1
 réjouis	Re/vtwi/-k	spvtwij/-k	1	18	ra|rai|raie|re|rhé|ré|réh	1	8.42	0
 réjouis	Re/vtwi/-d	spvtwij/-d	1	18	ra|rai|raie|re|rhé|ré|réh	1	8.42	2
 réjouis	Re/vtwi/-dt	spvtwij/-dt	1	18	ra|rai|raie|re|rhé|ré|réh	1	8.42	3
@@ -2897,6 +2902,7 @@ fondation	kpai/pva/sRwai	kpaijst	2	6	ccion|cion|cyon|sion|ssion|tion|tions	2	6.3
 registre	R@a/vtistR	vtwisktR	1	5	re|reh	1	6.39	0
 tremblement	tR@/svmt@a/m@	tR@jtm	2	2	ment	2	6.39	0
 commençais	kae/m@/sie/-k	swied/-k	2	4	co+col+com+con+cor	2	6.38	0
+commençais	kae/m@/sie/-d	swied/-d	2	4	co+col+com+con+cor	2	6.38	1
 croisé	kRwa/twe	kRwaknl	1	30	ser|sée|zer|zé	1	6.38	0
 remuer	R@a/m@ae/-l	mw@aek/-l	1	5	re|reh	1	6.38	0
 chargement	pmaR/vt@a/m@	pmajtRm	2	2	ment	2	6.37	0
@@ -2968,6 +2974,7 @@ efface	ie/kpas/-R	kpvaskd/-R	1	11	ai|aî|e|ei|hai|he|hê|é	1	6.19	2
 percer	pieR/se/-l	piejsdR/-l	1	12	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé	1	6.19	0
 débarque	pve/svakR	svwakR	1	8	de|des|dé|déh	1	6.18	0
 débarque	pve/svakR/-k	svwakR/-k	1	8	de|des|dé|déh	1	6.18	1
+débarque	pve/svakR/-R	svwakR/-R	1	8	de|des|dé|déh	1	6.18	2
 capturer	kajk/t@i/Re/-l	kajk/t@ijdR/-l	1	27	rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée	1	6.17	0
 passionnant	pa/sRwae/mR@	ksvRwaek/mR@	1	19	pa	1	6.17	0
 épargne	e/patRn	kpvatRn	1	7	é	1	6.17	0
@@ -3121,6 +3128,7 @@ viser	vi/twe/-l	viknl/-l	1	30	ser|sée|zer|zé	1	5.87	0
 aveu	a/v@ie	vw@iej	1	1	a|ah|ha|hâ|â	1	5.86	0
 applique	a/pmtik	pmtwijk	1	1	a|ah|ha|hâ|â	1	5.85	0
 applique	a/pmtik/-k	pmtwijk/-k	1	1	a|ah|ha|hâ|â	1	5.85	1
+applique	a/pmtik/-R	pmtwijk/-R	1	1	a|ah|ha|hâ|â	1	5.85	2
 compréhension	kai/pRe/@/sRwai	pRwed/@/sRwai	1	4	co+col+com+con+cor	1	5.85	0
 déshabiller	pve/twa/svi/Rwe/-l	stwak/svi/Rwe/-l	1	8	de|des|dé|déh	1	5.85	0
 envoler	@/vae/mte/-l	pvmaej/mte/-l	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	5.85	0
@@ -3511,6 +3519,7 @@ pourrie	p@e/Ri/-j	ptRik/-j	1	28	pou|pu	1	4.95	0
 programmes	pRae/ksRam/-s	kspvRam/-s	1	24	pro|proh|prô	1	4.95	0
 strictement	stRik/t@a/m@	stRijktm	2	2	ment	2	4.95	0
 assois	a/swa/-k	swaj/-k	1	1	a|ah|ha|hâ|â	1	4.94	0
+assois	a/swa/-d	swaj/-d	1	1	a|ah|ha|hâ|â	1	4.94	1
 débris	pve/svRi	svRwik	1	8	de|des|dé|déh	1	4.94	0
 manuel	ma/mR@aiel	mR@aieskdl	1	20	ma|mah|mâ	1	4.94	0
 options	ejk/sRwai/-s	ejskt/-s	1	6	ccion|cion|cyon|sion|ssion|tion|tions	1	4.94	0
@@ -3605,6 +3614,7 @@ améliore	a/me/mtRweR	mwej/mtRweR	1	1	a|ah|ha|hâ|â	1	4.75	0
 améliore	a/me/mtRweR/-k	mwej/mtRweR/-k	1	1	a|ah|ha|hâ|â	1	4.75	1
 améliore	a/me/mtRweR/-R	mwej/mtRweR/-R	1	1	a|ah|ha|hâ|â	1	4.75	2
 approché	a/pRae/pme	pRwaej/pme	1	1	a|ah|ha|hâ|â	1	4.75	0
+avertis	a/vieR/ti/-s	vwiejR/ti/-s	1	1	a|ah|ha|hâ|â	1	4.75	1
 avertis	a/vieR/ti/-k	vwiejR/ti/-k	1	1	a|ah|ha|hâ|â	1	4.75	0
 avertis	a/vieR/ti/-d	vwiejR/ti/-d	1	1	a|ah|ha|hâ|â	1	4.75	2
 avertis	a/vieR/ti/-dt	vwiejR/ti/-dt	1	1	a|ah|ha|hâ|â	1	4.75	3
@@ -3612,6 +3622,7 @@ devise	pv@a/vinl	kvmidnl	1	10	de	1	4.75	0
 déjeuné	pve/vt@/mR*e	svtw@k/mR*e	1	8	de|des|dé|déh	1	4.75	0
 nausée	mRae/twe	mRaeknl	1	30	ser|sée|zer|zé	1	4.75	0
 opère	ae/pieR	piejsdR	1	23	o	1	4.75	0
+opère	ae/pieR/-k	piejsdR/-k	1	23	o	1	4.75	1
 opère	ae/pieR/-R	piejsdR/-R	1	23	o	1	4.75	2
 éclaircir	e/kmtieR/siR	kvmtieR/siR	1	7	é	1	4.75	0
 assied	a/sRw*e	sRw*ej	1	1	a|ah|ha|hâ|â	1	4.74	0
@@ -4110,6 +4121,7 @@ placez	pmta/se/-k	pmtajsd/-k	1	12	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|
 placez	pmta/se/-d	pmtajsd/-d	1	12	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé	1	4.01	1
 réagis	Re/a/vti/-s	spvtij/-s	2	18	ra|rai|raie|re|rhé|ré|réh	2	4.01	1
 réagis	Re/a/vti/-k	spvtij/-k	2	18	ra|rai|raie|re|rhé|ré|réh	2	4.01	0
+réagis	Re/a/vti/-d	spvtij/-d	2	18	ra|rai|raie|re|rhé|ré|réh	2	4.01	2
 réagis	Re/a/vti/-dt	spvtij/-dt	2	18	ra|rai|raie|re|rhé|ré|réh	2	4.01	3
 séparément	se/pa/Re/m@	se/pa/Rejtm	1	2	ment	1	4.01	0
 appuyé	a/p@aij/e	pw@aij/e	1	1	a|ah|ha|hâ|â	1	4.00	0
@@ -4367,6 +4379,7 @@ entiers	@/tRwe/-s	pmtRwej/-s	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	3.68	0
 massive	ma/sijs	sijskd	1	20	ma|mah|mâ	1	3.68	0
 protégée	pRae/te/vte/-j	pvtRe/vte/-j	1	24	pro|proh|prô	1	3.68	0
 évoque	e/vek	kvek	1	7	é	1	3.68	0
+évoque	e/vek/-k	kvek/-k	1	7	é	1	3.68	1
 évoque	e/vek/-R	kvek/-R	1	7	é	1	3.68	2
 accompagnée	a/kai/pa/we/-j	kwaij/pa/we/-j	1	1	a|ah|ha|hâ|â	1	3.67	0
 amicale	a/mi/kal/-j	mwij/kal/-j	1	1	a|ah|ha|hâ|â	1	3.67	0
@@ -5129,6 +5142,7 @@ invincible	aie/vaie/sijl	vtRwaie/sijl	1	9	ain|hin|im|in	1	2.92	0
 récolte	Re/ketl/-k	kspejtl/-k	1	18	ra|rai|raie|re|rhé|ré|réh	1	2.92	1
 récolte	Re/ketl/-R	kspejtl/-R	1	18	ra|rai|raie|re|rhé|ré|réh	1	2.92	2
 aboie	a/svwa	svwaj	1	1	a|ah|ha|hâ|â	1	2.91	0
+aboie	a/svwa/-k	svwaj/-k	1	1	a|ah|ha|hâ|â	1	2.91	1
 aboie	a/svwa/-R	svwaj/-R	1	1	a|ah|ha|hâ|â	1	2.91	2
 flirter	kpmt@R/te/-l	kpmt@jtRn/-l	1	13	ter	1	2.91	0
 impensable	aie/p@/sajl	ptRw@/sajl	1	9	ain|hin|im|in	1	2.91	0
@@ -5946,6 +5960,7 @@ considérable	kai/si/pve/Rajl	swid/pve/Rajl	1	4	co+col+com+con+cor	1	2.31	0
 divinité	pvi/vi/mRi/te	pvi/vidtm	2	15	té	2	2.31	0
 déborde	pve/svedR	svwekdR	1	8	de|des|dé|déh	1	2.31	0
 déborde	pve/svedR/-k	svwekdR/-k	1	8	de|des|dé|déh	1	2.31	1
+déborde	pve/svedR/-R	svwekdR/-R	1	8	de|des|dé|déh	1	2.31	2
 délicates	pve/mti/kat/-s	smtwik/kat/-s	1	8	de|des|dé|déh	1	2.31	0
 emportée	@/peR/te/-j	pmejR/te/-j	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	2.31	0
 envoyons	@/vwaj/ai/-k	pvmwaj/ai/-k	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	2.31	0
@@ -6014,6 +6029,7 @@ illégales	i/mte/ksal/-js	mtejd/ksal/-js	1	21	e|hi|hy|i|y|î	1	2.28	0
 intrigue	aie/tRikd/-k	tRwikd/-k	1	9	ain|hin|im|in	1	2.28	1
 intrigue	aie/tRikd/-R	tRwikd/-R	1	9	ain|hin|im|in	1	2.28	2
 recouvre	R@a/k@ejsR	kw@ejskR	1	5	re|reh	1	2.28	0
+recouvre	R@a/k@ejsR/-k	kw@ejskR/-k	1	5	re|reh	1	2.28	1
 recouvre	R@a/k@ejsR/-R	kw@ejskR/-R	1	5	re|reh	1	2.28	2
 redresser	R@a/pvRie/se/-l	pvRwiek/se/-l	1	5	re|reh	1	2.28	0
 réfléchisse	Re/kpmte/pmis/-R	spmijs/-R	2	18	ra|rai|raie|re|rhé|ré|réh	2	2.28	0
@@ -6927,6 +6943,7 @@ barder	svaR/pve/-l	svakdRm/-l	1	16	der|dé|dée	1	1.84	0
 cocos	kae/kae/-s	kwaed/-s	1	4	co+col+com+con+cor	1	1.84	0
 crevés	kR@a/ve/-s	kR@ajsk/-s	1	25	ver	1	1.84	0
 débarquent	pve/svakR/-st	svwakR/-st	1	8	de|des|dé|déh	1	1.84	0
+débarquent	pve/svakR/-sR	svwakR/-sR	1	8	de|des|dé|déh	1	1.84	1
 déguster	pve/ks@is/te/-l	ksw@isk/te/-l	1	8	de|des|dé|déh	1	1.84	0
 détection	pve/tiek/sRwai	pve/tiejskt	1	6	ccion|cion|cyon|sion|ssion|tion|tions	1	1.84	0
 détruirai	pve/tR@ai/Re/-t	stRw@aik/Re/-t	1	8	de|des|dé|déh	1	1.84	0
@@ -7041,7 +7058,7 @@ récupérez	Re/k@i/pe/Re/-d	spej/Re/-d	2	18	ra|rai|raie|re|rhé|ré|réh	2	1.80	
 satanique	sa/ta/mRik	vtaZ/mRik	1	22	sa|sah	1	1.80	0
 spécialisé	spe/sRwa/mti/twe	spe/sRwaknl	2	30	ser|sée|zer|zé	2	1.80	0
 écuries	e/k@i/Ri/-s	kv@i/Ri/-s	1	7	é	1	1.80	0
-abats	a/sva/-k	svwaj/-k	1	1	a|ah|ha|hâ|â	1	1.79	0
+abats	a/sva/-d	svwaj/-d	1	1	a|ah|ha|hâ|â	1	1.79	1
 actualité	ak/t@a/mti/te	ak/t@adtm	2	15	té	2	1.79	0
 affiché	a/kpi/pme	kpwij/pme	1	1	a|ah|ha|hâ|â	1	1.79	0
 annoncent	a/mRais/-st	mRwaijs/-st	1	1	a|ah|ha|hâ|â	1	1.79	0
@@ -7237,6 +7254,7 @@ maritime	ma/Ri/tim	Riskd/tim	1	20	ma|mah|mâ	1	1.74	0
 omis	ae/mi	mijsd	1	23	o	1	1.74	0
 omis	ae/mi/-s	mijsd/-s	1	23	o	1	1.74	1
 omis	ae/mi/-k	mijsd/-k	1	23	o	1	1.74	2
+omis	ae/mi/-d	mijsd/-d	1	23	o	1	1.74	3
 randonnée	R@/pvae/mRe	R@/pvaejsm	1	17	ner|nez|nner|nnée|née|nées	1	1.74	0
 recouvrir	R@a/k@e/vRiR	kw@ek/vRiR	1	5	re|reh	1	1.74	0
 renards	R@a/mRaR/-s	mRwakR/-s	1	5	re|reh	1	1.74	0
@@ -7841,6 +7859,7 @@ exécutez	iekdnl/e/k@i/te/-d	iekdnl/e/k@ijtn/-d	1	13	ter	1	1.53	1
 inculte	aie/k@itl	ktRw@itl	1	9	ain|hin|im|in	1	1.53	0
 infime	aie/kpim	kptRwim	1	9	ain|hin|im|in	1	1.53	0
 inventée	aie/v@/te/-j	vtRw@/te/-j	1	9	ain|hin|im|in	1	1.53	0
+investis	aie/vies/ti/-s	vtRwies/ti/-s	1	9	ain|hin|im|in	1	1.53	1
 investis	aie/vies/ti/-k	vtRwies/ti/-k	1	9	ain|hin|im|in	1	1.53	0
 investis	aie/vies/ti/-d	vtRwies/ti/-d	1	9	ain|hin|im|in	1	1.53	2
 investis	aie/vies/ti/-dt	vtRwies/ti/-dt	1	9	ain|hin|im|in	1	1.53	3
@@ -7891,6 +7910,7 @@ réalistes	Re/a/mtist/-s	spmtijst/-s	2	18	ra|rai|raie|re|rhé|ré|réh	2	1.52	0
 élixir	e/mti/ksiR	kvmti/ksiR	1	7	é	1	1.52	0
 éternelles	e/tieR/mRiel/-js	kvtieR/mRiel/-js	1	7	é	1	1.52	0
 abattra	a/sva/tRa	svwaj/tRa	1	1	a|ah|ha|hâ|â	1	1.51	0
+accomplis	a/kai/pmti/-s	kwaij/pmti/-s	1	1	a|ah|ha|hâ|â	1	1.51	1
 accomplis	a/kai/pmti/-k	kwaij/pmti/-k	1	1	a|ah|ha|hâ|â	1	1.51	0
 accomplis	a/kai/pmti/-d	kwaij/pmti/-d	1	1	a|ah|ha|hâ|â	1	1.51	2
 accomplis	a/kai/pmti/-dt	kwaij/pmti/-dt	1	1	a|ah|ha|hâ|â	1	1.51	3
@@ -8622,6 +8642,7 @@ confidentialité	kai/kpi/pv@/sRwa/mti/te	kai/kpi/pv@/sRwadtm	2	15	té	2	1.31	0
 consistance	kai/sis/t@s	swisd/t@s	1	4	co+col+com+con+cor	1	1.31	0
 conviendra	kai/vRwaie/pvRa	vRwaied/pvRa	1	4	co+col+com+con+cor	1	1.31	0
 conçois	kai/swa/-k	swad/-k	1	4	co+col+com+con+cor	1	1.31	0
+conçois	kai/swa/-d	swad/-d	1	4	co+col+com+con+cor	1	1.31	1
 craquements	kRa/k@a/m@/-s	kRajtm/-s	2	2	ment	2	1.31	0
 diriges	pvi/RiZ/-d	sRijdZ/-d	1	29	de|dea|di|die|dis|dy|dî	1	1.31	0
 diriges	pvi/RiZ/-dR	sRijdZ/-dR	1	29	de|dea|di|die|dis|dy|dî	1	1.31	1
@@ -8722,6 +8743,7 @@ saxophone	sa/ksae/kpen	ksvaeZ/kpen	1	22	sa|sah	1	1.30	0
 étripe	e/tRijk	kvtRijk	1	7	é	1	1.30	0
 étripe	e/tRijk/-k	kvtRijk/-k	1	7	é	1	1.30	1
 étripe	e/tRijk/-R	kvtRijk/-R	1	7	é	1	1.30	2
+évanouis	e/va/mRwi/-s	kva/mRwi/-s	1	7	é	1	1.30	1
 évanouis	e/va/mRwi/-k	kva/mRwi/-k	1	7	é	1	1.30	0
 évanouis	e/va/mRwi/-d	kva/mRwi/-d	1	7	é	1	1.30	2
 évanouis	e/va/mRwi/-dt	kva/mRwi/-dt	1	7	é	1	1.30	3
@@ -8775,6 +8797,7 @@ terrassé	tie/Ra/se	tie/Rajsd	1	12	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée
 électromagnétique	e/mtiek/tRae/ma/we/tik	kvmtiek/tRae/ma/we/tik	1	7	é	1	1.29	0
 émouvoir	e/m@e/vwaR	kvm@e/vwaR	1	7	é	1	1.29	0
 épouvantables	e/p@e/v@/tajl/-s	kpv@e/v@/tajl/-s	1	7	é	1	1.29	0
+établis	e/ta/svmti/-s	kvta/svmti/-s	1	7	é	1	1.29	1
 établis	e/ta/svmti/-k	kvta/svmti/-k	1	7	é	1	1.29	0
 établis	e/ta/svmti/-d	kvta/svmti/-d	1	7	é	1	1.29	2
 établis	e/ta/svmti/-dt	kvta/svmti/-dt	1	7	é	1	1.29	3
@@ -8942,6 +8965,7 @@ comportements	kai/peR/t@a/m@/-s	kai/pejtRm/-s	2	2	ment	2	1.25	0
 contribuable	kai/tRi/sv@ajl	tRwid/sv@ajl	1	4	co+col+com+con+cor	1	1.25	0
 digéré	pvi/vte/Re	pvi/vtejdR	1	27	rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée	1	1.25	0
 débarques	pve/svakR/-d	svwakR/-d	1	8	de|des|dé|déh	1	1.25	0
+débarques	pve/svakR/-dR	svwakR/-dR	1	8	de|des|dé|déh	1	1.25	1
 dérailler	pve/Ra/Rwe/-l	sRwak/Rwe/-l	1	8	de|des|dé|déh	1	1.25	0
 désespérés	pve/twies/pe/Re/-s	stwiesk/pe/Re/-s	1	8	de|des|dé|déh	1	1.25	0
 expliquais	ie/kspmti/kie/-k	kviekd/-k	2	11	ai|aî|e|ei|hai|he|hê|é	2	1.25	0
@@ -9125,6 +9149,7 @@ conteste	kai/tiest/-k	twiesdt/-k	1	4	co+col+com+con+cor	1	1.21	1
 conteste	kai/tiest/-R	twiesdt/-R	1	4	co+col+com+con+cor	1	1.21	2
 contraindre	kai/tRaiedR	tRwaiedR	1	4	co+col+com+con+cor	1	1.21	0
 débats	pve/sva/-k	svwak/-k	1	8	de|des|dé|déh	1	1.21	0
+débats	pve/sva/-d	svwak/-d	1	8	de|des|dé|déh	1	1.21	1
 débutante	pve/sv@i/t@t	svw@ik/t@t	1	8	de|des|dé|déh	1	1.21	0
 dénoncerai	pve/mRai/s@a/Re/-t	smRwaik/s@a/Re/-t	1	8	de|des|dé|déh	1	1.21	0
 détiennent	pve/tRwien/-st	stRwiekn/-st	1	8	de|des|dé|déh	1	1.21	0
@@ -9326,6 +9351,7 @@ dirigera	pvi/Ri/vt@a/Ra	svt@ajd/Ra	2	29	de|dea|di|die|dis|dy|dî	2	1.17	0
 divisée	pvi/vi/twe/-j	stwejd/-j	2	29	de|dea|di|die|dis|dy|dî	2	1.17	0
 débarrassera	pve/sva/Ra/s@a/Ra	svwak/Ra/s@a/Ra	1	8	de|des|dé|déh	1	1.17	0
 dégonfles	pve/ksaisdl/-d	kswaiskdl/-d	1	8	de|des|dé|déh	1	1.17	0
+dégonfles	pve/ksaisdl/-dR	kswaiskdl/-dR	1	8	de|des|dé|déh	1	1.17	1
 délirait	pve/mti/Rie	smtwik/Rie	1	8	de|des|dé|déh	1	1.17	0
 déloger	pve/mtae/vte/-l	smtwaek/vte/-l	1	8	de|des|dé|déh	1	1.17	0
 démarrage	pve/ma/RaZ	smwak/RaZ	1	8	de|des|dé|déh	1	1.17	0
@@ -9447,6 +9473,7 @@ embarrasse	@/sva/Ras/-R	spvmaj/Ras/-R	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1
 encyclopédie	@/si/kmtae/pe/pvi	spmij/kmtae/pe/pvi	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	1.14	0
 exaucer	iekdnl/ae/se/-l	iekdnl/aejsd/-l	1	12	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé	1	1.14	0
 excessivement	ie/kse/si/v@a/m@	ie/kse/sijtm	2	2	ment	2	1.14	0
+exclus	ie/ksmt@i/-s	ksvmt@ikd/-s	1	11	ai|aî|e|ei|hai|he|hê|é	1	1.14	1
 exclus	ie/ksmt@i/-k	ksvmt@ikd/-k	1	11	ai|aî|e|ei|hai|he|hê|é	1	1.14	0
 exclus	ie/ksmt@i/-d	ksvmt@ikd/-d	1	11	ai|aî|e|ei|hai|he|hê|é	1	1.14	2
 exclus	ie/ksmt@i/-dt	ksvmt@ikd/-dt	1	11	ai|aî|e|ei|hai|he|hê|é	1	1.14	3
@@ -9636,7 +9663,7 @@ dépressif	pve/pRie/sisd	spRwiek/sisd	1	8	de|des|dé|déh	1	1.11	0
 enroule	@/R@el	pmR@ejl	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	1.11	0
 enroule	@/R@el/-k	pmR@ejl/-k	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	1.11	1
 enroule	@/R@el/-R	pmR@ejl/-R	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	1.11	2
-entendis	@/t@/pvi/-k	pvmij/-k	2	3	am|an|ant|em|en|ench|enh|ham|han|hen	2	1.11	0
+entendis	@/t@/pvi/-d	pvmij/-d	2	3	am|an|ant|em|en|ench|enh|ham|han|hen	2	1.11	1
 envahie	@/va/i/-j	pvmaj/i/-j	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	1.11	0
 envisagez	@/vi/twa/vte/-k	pvmij/twa/vte/-k	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	1.11	0
 envisagez	@/vi/twa/vte/-d	pvmij/twa/vte/-d	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	1.11	1
@@ -9999,6 +10026,7 @@ défilent	pve/kpil/-st	kspwikl/-st	1	8	de|des|dé|déh	1	1.04	0
 défilent	pve/kpil/-sR	kspwikl/-sR	1	8	de|des|dé|déh	1	1.04	1
 dégagée	pve/ksa/vte/-j	kswak/vte/-j	1	8	de|des|dé|déh	1	1.04	0
 démarrent	pve/maR/-st	smwakR/-st	1	8	de|des|dé|déh	1	1.04	0
+démarrent	pve/maR/-sR	smwakR/-sR	1	8	de|des|dé|déh	1	1.04	1
 désarmement	pve/twaR/m@a/m@	pve/twajtRm	2	2	ment	2	1.04	0
 désirait	pve/twi/Rie	stwik/Rie	1	8	de|des|dé|déh	1	1.04	0
 désolation	pve/twae/mta/sRwai	pve/twaejst	2	6	ccion|cion|cyon|sion|ssion|tion|tions	2	1.04	0
@@ -10521,6 +10549,7 @@ communier	kae/m@i/mRwe/-l	mw@id/mRwe/-l	1	4	co+col+com+con+cor	1	0.95	0
 compliquées	kai/pmti/ke/-js	pmtwid/ke/-js	1	4	co+col+com+con+cor	1	0.95	0
 condescendant	kai/pvie/s@/pv@	pvwied/s@/pv@	1	4	co+col+com+con+cor	1	0.95	0
 contraints	kai/tRaie/-s	tRwaied/-s	1	4	co+col+com+con+cor	1	0.95	0
+convertis	kai/vieR/ti/-s	vwiedR/ti/-s	1	4	co+col+com+con+cor	1	0.95	1
 convertis	kai/vieR/ti/-k	vwiedR/ti/-k	1	4	co+col+com+con+cor	1	0.95	0
 convertis	kai/vieR/ti/-d	vwiedR/ti/-d	1	4	co+col+com+con+cor	1	0.95	2
 convertis	kai/vieR/ti/-dt	vwiedR/ti/-dt	1	4	co+col+com+con+cor	1	0.95	3
@@ -11247,6 +11276,7 @@ tripoté	tRi/pae/t*e	tRi/p*aejtn	1	13	ter	1	0.85	0
 versements	vieR/s@a/m@/-s	viejtRm/-s	2	2	ment	2	0.85	0
 échafaud	e/pma/kpae	kpvma/kpae	1	7	é	1	0.85	0
 accolade	a/kae/mtad	kwaej/mtad	1	1	a|ah|ha|hâ|â	1	0.84	0
+affaiblis	a/kpie/svmti/-s	kpwiej/svmti/-s	1	1	a|ah|ha|hâ|â	1	0.84	1
 affaiblis	a/kpie/svmti/-k	kpwiej/svmti/-k	1	1	a|ah|ha|hâ|â	1	0.84	0
 affaiblis	a/kpie/svmti/-d	kpwiej/svmti/-d	1	1	a|ah|ha|hâ|â	1	0.84	2
 affaiblis	a/kpie/svmti/-dt	kpwiej/svmti/-dt	1	1	a|ah|ha|hâ|â	1	0.84	3
@@ -11416,7 +11446,6 @@ escortez	ies/keR/te/-k	ies/kejtRn/-k	1	13	ter	1	0.82	0
 escortez	ies/keR/te/-d	ies/kejtRn/-d	1	13	ter	1	0.82	1
 excellent	ie/ksiel/-st	ksviekdl/-st	1	11	ai|aî|e|ei|hai|he|hê|é	1	0.82	0
 excellent	ie/ksiel/-sR	ksviekdl/-sR	1	11	ai|aî|e|ei|hai|he|hê|é	1	0.82	1
-exclus	ie/ksmt@i/-s	ksvmt@ikd/-s	1	11	ai|aî|e|ei|hai|he|hê|é	1	0.82	0
 exprimez	ie/kspRi/me/-k	kspvRikd/me/-k	1	11	ai|aî|e|ei|hai|he|hê|é	1	0.82	0
 exprimez	ie/kspRi/me/-d	kspvRikd/me/-d	1	11	ai|aî|e|ei|hai|he|hê|é	1	0.82	1
 gradés	ksRa/pve/-s	ksRakdm/-s	1	16	der|dé|dée	1	0.82	0
@@ -12223,6 +12252,7 @@ accroupi	a/kR@e/pi	kRw@ej/pi	1	1	a|ah|ha|hâ|â	1	0.72	0
 affectera	a/kpiek/t@a/Ra	kpwiejk/t@a/Ra	1	1	a|ah|ha|hâ|â	1	0.72	0
 agrippe	a/ksRijk	ksRwijk	1	1	a|ah|ha|hâ|â	1	0.72	0
 agrippe	a/ksRijk/-k	ksRwijk/-k	1	1	a|ah|ha|hâ|â	1	0.72	1
+agrippe	a/ksRijk/-R	ksRwijk/-R	1	1	a|ah|ha|hâ|â	1	0.72	2
 antidépresseurs	@/ti/pve/pRie/s@R/-s	pmtij/pve/pRie/s@R/-s	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.72	0
 antisémite	@/ti/se/mit	pmtij/se/mit	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.72	0
 apostolique	a/paes/tae/mtik	pwaejs/tae/mtik	1	1	a|ah|ha|hâ|â	1	0.72	0
@@ -12557,6 +12587,7 @@ devins	pv@a/vaie/-d	kvmaied/-d	1	10	de	1	0.69	1
 discerner	pvi/sieR/mRe/-l	pvi/siejsRm/-l	1	17	ner|nez|nner|nnée|née|nées	1	0.69	0
 débardeur	pve/svaR/pv@R	svwakR/pv@R	1	8	de|des|dé|déh	1	0.69	0
 débordent	pve/svedR/-st	svwekdR/-st	1	8	de|des|dé|déh	1	0.69	0
+débordent	pve/svedR/-sR	svwekdR/-sR	1	8	de|des|dé|déh	1	0.69	1
 déchaînés	pve/pmie/mRe/-s	spmwiek/mRe/-s	1	8	de|des|dé|déh	1	0.69	0
 décompose	pve/kai/paenl	kswaik/paenl	1	8	de|des|dé|déh	1	0.69	0
 décompose	pve/kai/paenl/-k	kswaik/paenl/-k	1	8	de|des|dé|déh	1	0.69	1
@@ -13021,6 +13052,7 @@ révélait	Re/ve/mtie	spvej/mtie	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.65	0
 stupidités	st@i/pi/pvi/te/-s	st@i/pidtm/-s	2	15	té	2	0.65	0
 tranquilliser	tR@/ki/mti/twe/-l	tR@/kiknl/-l	2	30	ser|sée|zer|zé	2	0.65	0
 ébloui	e/svmt@e/i	ksvmt@e/i	1	7	é	1	0.65	0
+éblouis	e/svmt@e/i/-s	ksvmt@e/i/-s	1	7	é	1	0.65	1
 éblouis	e/svmt@e/i/-k	ksvmt@e/i/-k	1	7	é	1	0.65	0
 éblouis	e/svmt@e/i/-d	ksvmt@e/i/-d	1	7	é	1	0.65	2
 éblouis	e/svmt@e/i/-dt	ksvmt@e/i/-dt	1	7	é	1	0.65	3
@@ -13633,6 +13665,7 @@ réalisait	Re/a/mti/twie	spmtij/twie	2	18	ra|rai|raie|re|rhé|ré|réh	2	0.59	0
 réconcilié	Re/kai/si/mtRwe	kspaij/si/mtRwe	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.59	0
 réglage	Re/ksmtaZ	kspmtajZ	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.59	0
 répande	Re/p@d/-R	sp@jd/-R	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.59	0
+répartis	Re/paR/t*i/-s	spajR/t*i/-s	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.59	1
 répartis	Re/paR/ti/-k	spajR/ti/-k	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.59	0
 répartis	Re/paR/ti/-d	spajR/ti/-d	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.59	2
 répartis	Re/paR/ti/-dt	spajR/ti/-dt	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.59	3
@@ -13864,7 +13897,6 @@ promiscuité	pRae/mis/k@ai/te	pRae/mis/k@aidtm	1	15	té	1	0.57	0
 prononcée	pRae/mRai/se/-j	pRae/mRaijsd/-j	1	12	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé	1	0.57	0
 pétée	pe/te/-j	pejtn/-j	1	13	ter	1	0.57	0
 rassemblements	Ra/s@/svmt@a/m@/-s	Ra/s@jtm/-s	2	2	ment	2	0.57	0
-recouvre	R@a/k@ejsR/-k	kw@ejskR/-k	1	5	re|reh	1	0.57	0
 redouble	R@a/pv@ejl	pvw@ejkl	1	5	re|reh	1	0.57	0
 redouble	R@a/pv@ejl/-k	pvw@ejkl/-k	1	5	re|reh	1	0.57	1
 redouble	R@a/pv@ejl/-R	pvw@ejkl/-R	1	5	re|reh	1	0.57	2
@@ -14684,6 +14716,7 @@ débrouillais	pve/svR@e/Rwie/-k	svRw@ek/Rwie/-k	1	8	de|des|dé|déh	1	0.51	0
 débrouillais	pve/svR@e/Rwie/-d	svRw@ek/Rwie/-d	1	8	de|des|dé|déh	1	0.51	1
 définie	pve/kpi/mRi/-j	kspwik/mRi/-j	1	8	de|des|dé|déh	1	0.51	0
 démarres	pve/maR/-d	smwakR/-d	1	8	de|des|dé|déh	1	0.51	0
+démarres	pve/maR/-dR	smwakR/-dR	1	8	de|des|dé|déh	1	0.51	1
 démasquée	pve/mas/ke/-j	smwask/ke/-j	1	8	de|des|dé|déh	1	0.51	0
 démolira	pve/mae/mti/Ra	smwaek/mti/Ra	1	8	de|des|dé|déh	1	0.51	0
 déteindre	pve/taiedR	stwaiekdR	1	8	de|des|dé|déh	1	0.51	0
@@ -14782,6 +14815,7 @@ amèneront	a/mie/mR@a/Rai/-st	mwiej/mR@a/Rai/-st	1	1	a|ah|ha|hâ|â	1	0.50	0
 annonceurs	a/mRai/s@R/-s	mRwaij/s@R/-s	1	1	a|ah|ha|hâ|â	1	0.50	0
 applaudissement	a/pmtae/pvi/s@a/m@	a/pmtae/pvijtm	2	2	ment	2	0.50	0
 appliques	a/pmtik/-d	pmtwijk/-d	1	1	a|ah|ha|hâ|â	1	0.50	0
+appliques	a/pmtik/-dR	pmtwijk/-dR	1	1	a|ah|ha|hâ|â	1	0.50	1
 approchés	a/pRae/pme/-s	pRwaej/pme/-s	1	1	a|ah|ha|hâ|â	1	0.50	0
 arracheront	a/Ra/pm@a/Rai/-st	Rwaj/pm@a/Rai/-st	1	1	a|ah|ha|hâ|â	1	0.50	0
 aryens	a/Rwaie/-s	Rwaiej/-s	1	1	a|ah|ha|hâ|â	1	0.50	0
@@ -15613,7 +15647,6 @@ concordance	kai/keR/pv@s	kwedR/pv@s	1	4	co+col+com+con+cor	1	0.45	0
 contemplais	kai/t@/pmtie/-k	tw@d/pmtie/-k	1	4	co+col+com+con+cor	1	0.45	0
 contemplais	kai/t@/pmtie/-d	tw@d/pmtie/-d	1	4	co+col+com+con+cor	1	0.45	1
 continuité	kai/ti/mR@ai/te	twid/mR@ai/te	1	4	co+col+com+con+cor	1	0.45	0
-convertis	kai/vieR/ti/-s	vwiedR/ti/-s	1	4	co+col+com+con+cor	1	0.45	0
 convertit	kai/vieR/ti/-t	vwiedR/ti/-t	1	4	co+col+com+con+cor	1	0.45	0
 convient	kai/vi/-st	vwid/-st	1	4	co+col+com+con+cor	1	0.45	0
 convient	kai/vi/-sR	vwid/-sR	1	4	co+col+com+con+cor	1	0.45	1
@@ -16072,7 +16105,6 @@ vagissement	va/vti/s@a/m@	va/vtijtm	2	2	ment	2	0.43	0
 épaté	e/pa/te	kpva/te	1	7	é	1	0.43	0
 étuve	e/t@ijs	kvt@ijs	1	7	é	1	0.43	0
 abattait	a/sva/tie	svwaj/tie	1	1	a|ah|ha|hâ|â	1	0.42	0
-aboies	a/svwa/-d	svwaj/-d	1	1	a|ah|ha|hâ|â	1	0.42	0
 aboies	a/svwa/-dR	svwaj/-dR	1	1	a|ah|ha|hâ|â	1	0.42	1
 absentée	ajk/s@/te/-j	ajk/s@jtn/-j	1	13	ter	1	0.42	0
 accueillait	a/k@/Rwie	kw@j/Rwie	1	1	a|ah|ha|hâ|â	1	0.42	0
@@ -16617,6 +16649,7 @@ efforcerai	ie/kpeR/s@a/Re/-t	kpvekdR/s@a/Re/-t	1	11	ai|aî|e|ei|hai|he|hê|é	1	
 embringué	@/svRaie/kse	spvmRaiej/kse	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.40	0
 emparée	@/pa/Re/-j	pmaj/Re/-j	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.40	0
 empilés	@/pi/mte/-s	pmij/mte/-s	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.40	0
+emplis	@/pmt*i/-s	pmt*ij/-s	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.40	1
 emplis	@/pmti/-k	pmtij/-k	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.40	0
 emplis	@/pmti/-d	pmtij/-d	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.40	2
 emplis	@/pmti/-dt	pmtij/-dt	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.40	3
@@ -16831,6 +16864,7 @@ défavorisés	pve/kpa/vae/Ri/twe/-s	kspwak/vae/Ri/twe/-s	1	8	de|des|dé|déh	1	0
 dégarni	pve/ksaR/mRi	kswakR/mRi	1	8	de|des|dé|déh	1	0.39	0
 dégoise	pve/kswanl	kswaknl	1	8	de|des|dé|déh	1	0.39	0
 dégoise	pve/kswanl/-k	kswaknl/-k	1	8	de|des|dé|déh	1	0.39	1
+dégoise	pve/kswanl/-R	kswaknl/-R	1	8	de|des|dé|déh	1	0.39	2
 déjeunais	pve/vt@/mRie/-k	svtw@k/mRie/-k	1	8	de|des|dé|déh	1	0.39	0
 déjeunais	pve/vt@/mRie/-d	svtw@k/mRie/-d	1	8	de|des|dé|déh	1	0.39	1
 délégations	pve/mte/ksa/sRwai/-s	pve/mtejst/-s	2	6	ccion|cion|cyon|sion|ssion|tion|tions	2	0.39	0
@@ -17015,7 +17049,6 @@ assumez	a/s@i/me/-k	sw@ij/me/-k	1	1	a|ah|ha|hâ|â	1	0.38	0
 assumez	a/s@i/me/-d	sw@ij/me/-d	1	1	a|ah|ha|hâ|â	1	0.38	1
 autonomes	ae/tae/mRaem/-s	mtRaedm/-s	2	14	au	2	0.38	0
 avalées	a/va/mte/-js	vwaj/mte/-js	1	1	a|ah|ha|hâ|â	1	0.38	0
-avertis	a/vieR/ti/-s	vwiejR/ti/-s	1	1	a|ah|ha|hâ|â	1	0.38	0
 avidement	a/vi/pv@a/m@	a/vijtm	2	2	ment	2	0.38	0
 avirons	a/vi/Rai/-s	vwij/Rai/-s	1	1	a|ah|ha|hâ|â	1	0.38	0
 bordée	sveR/pve	svekdRm	1	16	der|dé|dée	1	0.38	0
@@ -17349,6 +17382,7 @@ refiles	R@a/kpil/-d	kpwikl/-d	1	5	re|reh	1	0.37	0
 refiles	R@a/kpil/-dR	kpwikl/-dR	1	5	re|reh	1	0.37	1
 refilée	R@a/kpi/mte/-j	kpwik/mte/-j	1	5	re|reh	1	0.37	0
 regroupent	R@a/ksR@ejk/-st	ksRw@ejk/-st	1	5	re|reh	1	0.37	0
+regroupent	R@a/ksR@ejk/-sR	ksRw@ejk/-sR	1	5	re|reh	1	0.37	1
 rejetées	R@aZ/te/-js	R@ajtnZ/-js	1	13	ter	1	0.37	0
 rejoignit	R@a/vtwa/wi	vtwak/wi	1	5	re|reh	1	0.37	0
 remarqueras	R@a/maR/k@a/Ra/-d	mwakR/k@a/Ra/-d	1	5	re|reh	1	0.37	0
@@ -17568,6 +17602,7 @@ parution	pa/R@i/sRwai	pa/R@ijst	1	6	ccion|cion|cyon|sion|ssion|tion|tions	1	0.36
 passifs	pa/sisd/-s	ksviskd/-s	1	19	pa	1	0.36	0
 patine	pa/tin	kvtikn	1	19	pa	1	0.36	0
 patine	pa/tin/-k	kvtikn/-k	1	19	pa	1	0.36	1
+patine	pa/tin/-R	kvtikn/-R	1	19	pa	1	0.36	2
 pilotez	pi/mtae/te/-k	pi/mtaejtn/-k	1	13	ter	1	0.36	0
 pilotez	pi/mtae/te/-d	pi/mtaejtn/-d	1	13	ter	1	0.36	1
 pouffiasses	p@e/kpRwas/-s	kptRwask/-s	1	28	pou|pu	1	0.36	0
@@ -17696,6 +17731,7 @@ déballez	pve/sva/mte/-k	svwak/mte/-k	1	8	de|des|dé|déh	1	0.35	0
 déballez	pve/sva/mte/-d	svwak/mte/-d	1	8	de|des|dé|déh	1	0.35	1
 débande	pve/sv@d	svw@kd	1	8	de|des|dé|déh	1	0.35	0
 débande	pve/sv@d/-k	svw@kd/-k	1	8	de|des|dé|déh	1	0.35	1
+débande	pve/sv@d/-R	svw@kd/-R	1	8	de|des|dé|déh	1	0.35	2
 débouler	pve/sv@e/mte/-l	svw@ek/mte/-l	1	8	de|des|dé|déh	1	0.35	0
 déchaînées	pve/pmie/mRe/-js	spmwiek/mRe/-js	1	8	de|des|dé|déh	1	0.35	0
 déchirerai	pve/pmi/R@a/Re	spmwik/R@a/Re	1	8	de|des|dé|déh	1	0.35	0
@@ -17707,6 +17743,7 @@ déconnectés	pve/kae/mRiek/te/-s	kswaek/mRiek/te/-s	1	8	de|des|dé|déh	1	0.35	
 dédommage	pve/pvae/maZ	spvwaek/maZ	1	8	de|des|dé|déh	1	0.35	0
 dédommage	pve/pvae/maZ/-k	spvwaek/maZ/-k	1	8	de|des|dé|déh	1	0.35	1
 dédommage	pve/pvae/maZ/-R	spvwaek/maZ/-R	1	8	de|des|dé|déh	1	0.35	2
+définis	pve/kpi/mRi/-s	kspwik/mRi/-s	1	8	de|des|dé|déh	1	0.35	1
 définis	pve/kpi/mRi/-k	kspwik/mRi/-k	1	8	de|des|dé|déh	1	0.35	0
 définis	pve/kpi/mRi/-d	kspwik/mRi/-d	1	8	de|des|dé|déh	1	0.35	2
 définis	pve/kpi/mRi/-dt	kspwik/mRi/-dt	1	8	de|des|dé|déh	1	0.35	3
@@ -17896,6 +17933,7 @@ amérique	a/me/Rik	mwej/Rik	1	1	a|ah|ha|hâ|â	1	0.34	0
 animai	a/mRi/me/-t	mRwij/me/-t	1	1	a|ah|ha|hâ|â	1	0.34	0
 antidouleur	@/ti/pv@e/mt@R	pmtij/pv@e/mt@R	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.34	0
 aperçoives	a/pieR/swajs/-dR	pwiejR/swajs/-dR	1	1	a|ah|ha|hâ|â	1	0.34	0
+aplatis	a/pmta/ti/-s	pmtwaj/ti/-s	1	1	a|ah|ha|hâ|â	1	0.34	1
 aplatis	a/pmta/ti/-k	pmtwaj/ti/-k	1	1	a|ah|ha|hâ|â	1	0.34	0
 aplatis	a/pmta/ti/-d	pmtwaj/ti/-d	1	1	a|ah|ha|hâ|â	1	0.34	2
 aplatis	a/pmta/ti/-dt	pmtwaj/ti/-dt	1	1	a|ah|ha|hâ|â	1	0.34	3
@@ -17979,6 +18017,7 @@ déplaisait	pve/pmtie/twie	spmtwiek/twie	1	8	de|des|dé|déh	1	0.34	0
 dérangerais	pve/R@/vt@a/Rie/-k	sRw@k/vt@a/Rie/-k	1	8	de|des|dé|déh	1	0.34	0
 dérangerais	pve/R@/vt@a/Rie/-d	sRw@k/vt@a/Rie/-d	1	8	de|des|dé|déh	1	0.34	1
 désape	pve/sajk	swajk	1	8	de|des|dé|déh	1	0.34	0
+désape	pve/sajk/-k	swajk/-k	1	8	de|des|dé|déh	1	0.34	1
 désapprouvait	pve/twa/pR@e/vie	stwak/pR@e/vie	1	8	de|des|dé|déh	1	0.34	0
 déshérité	pve/twe/Ri/te	pve/twedtm	2	15	té	2	0.34	0
 désisté	pve/twis/te	stwisk/te	1	8	de|des|dé|déh	1	0.34	0
@@ -18169,7 +18208,6 @@ abondantes	a/svai/pv@t/-s	svwaij/pv@t/-s	1	1	a|ah|ha|hâ|â	1	0.33	0
 abritent	a/svRit/-st	svRwijt/-st	1	1	a|ah|ha|hâ|â	1	0.33	0
 abritent	a/svRit/-sR	svRwijt/-sR	1	1	a|ah|ha|hâ|â	1	0.33	1
 accomplirai	a/kai/pmti/Re/-t	kwaij/pmti/Re/-t	1	1	a|ah|ha|hâ|â	1	0.33	0
-accomplis	a/kai/pmti/-s	kwaij/pmti/-s	1	1	a|ah|ha|hâ|â	1	0.33	0
 accoutumer	a/k@e/t@i/me/-l	kw@ej/t@i/me/-l	1	1	a|ah|ha|hâ|â	1	0.33	0
 accusées	a/k@i/twe/-js	kw@ij/twe/-js	1	1	a|ah|ha|hâ|â	1	0.33	0
 acquiesce	a/kRwies	kRwiejs	1	1	a|ah|ha|hâ|â	1	0.33	0
@@ -18328,6 +18366,7 @@ grondé	ksRai/pve	ksRaikdm	1	16	der|dé|dée	1	0.33	0
 habituerez	a/svi/t@i/Re/-d	svwij/t@i/Re/-d	1	1	a|ah|ha|hâ|â	1	0.33	0
 hackers	a/k@R/-s	kw@jR/-s	1	1	a|ah|ha|hâ|â	1	0.33	0
 hantez	@/te/-k	pmtej/-k	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.33	0
+hantez	@/te/-d	pmtej/-d	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.33	1
 havanes	a/van/-s	vwajn/-s	1	1	a|ah|ha|hâ|â	1	0.33	0
 illettrée	i/mte/tRe/-j	mtejd/tRe/-j	1	21	e|hi|hy|i|y|î	1	0.33	0
 imbroglio	aie/svRae/ksmtij/ae	svtRwae/ksmtij/ae	1	9	ain|hin|im|in	1	0.33	0
@@ -18377,7 +18416,7 @@ paroisses	pa/Rw*as/-s	kvRw*ask/-s	1	19	pa	1	0.33	0
 parrainé	pa/Rie/mRe	pa/Riejsm	1	17	ner|nez|nner|nnée|née|nées	1	0.33	0
 patati	pa/ta/ti	kvtak/ti	1	19	pa	1	0.33	0
 pavée	pa/ve/-j	kvek/-j	1	19	pa	1	0.33	0
-percez	pieR/se/-k	piejsdR/-k	1	12	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé	1	0.33	0
+percez	pieR/se/-d	piejsdR/-d	1	12	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé	1	0.33	1
 picorer	pi/kae/Re/-l	pi/kaejdR/-l	1	27	rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée	1	0.33	0
 pivoter	pi/vae/te/-l	pi/vaejtn/-l	1	13	ter	1	0.33	0
 poupon	p@e/pai	ptaik	1	28	pou|pu	1	0.33	0
@@ -19049,7 +19088,6 @@ décrypté	pve/kRijk/te	ksRwijk/te	1	8	de|des|dé|déh	1	0.30	0
 décélération	pve/se/mte/Ra/sRwai	pve/se/mtejst	2	6	ccion|cion|cyon|sion|ssion|tion|tions	2	0.30	0
 déferlent	pve/kpieRl/-st	kspwiekRl/-st	1	8	de|des|dé|déh	1	0.30	0
 déferlent	pve/kpieRl/-sR	kspwiekRl/-sR	1	8	de|des|dé|déh	1	0.30	1
-définis	pve/kpi/mRi/-s	kspwik/mRi/-s	1	8	de|des|dé|déh	1	0.30	0
 définitifs	pve/kpi/mRi/tisd/-s	kspwik/mRi/tisd/-s	1	8	de|des|dé|déh	1	0.30	0
 dégoûtait	pve/ks@e/tie	ksw@ek/tie	1	8	de|des|dé|déh	1	0.30	0
 démantelées	pve/m@/t@a/mte/-js	smw@k/t@a/mte/-js	1	8	de|des|dé|déh	1	0.30	0
@@ -20719,7 +20757,6 @@ accusateur	a/k@i/twa/t@R	kw@ij/twa/t@R	1	1	a|ah|ha|hâ|â	1	0.25	0
 acétylcholine	a/se/til/kae/mtin	swej/til/kae/mtin	1	1	a|ah|ha|hâ|â	1	0.25	0
 adjointe	a/pvtwaiet	pvtwaiejt	1	1	a|ah|ha|hâ|â	1	0.25	0
 adroites	a/pvRwat/-s	pvRwajt/-s	1	1	a|ah|ha|hâ|â	1	0.25	0
-affaiblis	a/kpie/svmti/-s	kpwiej/svmti/-s	1	1	a|ah|ha|hâ|â	1	0.25	0
 affame	a/kpam	kpwajm	1	1	a|ah|ha|hâ|â	1	0.25	0
 affame	a/kpam/-k	kpwajm/-k	1	1	a|ah|ha|hâ|â	1	0.25	1
 affame	a/kpam/-R	kpwajm/-R	1	1	a|ah|ha|hâ|â	1	0.25	2
@@ -21002,6 +21039,7 @@ recoupe	R@a/k@ejk/-k	kw@ejk/-k	1	5	re|reh	1	0.25	1
 recoupe	R@a/k@ejk/-R	kw@ejk/-R	1	5	re|reh	1	0.25	2
 recouper	R@a/k@e/pe/-l	kw@ek/pe/-l	1	5	re|reh	1	0.25	0
 recouvrent	R@a/k@ejsR/-st	kw@ejskR/-st	1	5	re|reh	1	0.25	0
+recouvrent	R@a/k@ejsR/-sR	kw@ejskR/-sR	1	5	re|reh	1	0.25	1
 reculant	R@a/k@i/mt@	kw@ik/mt@	1	5	re|reh	1	0.25	0
 redescendue	R@a/pvie/s@/pv@i/-j	pvwiek/s@/pv@i/-j	1	5	re|reh	1	0.25	0
 redeviendrai	R@a/pv@a/vRwaie/pvRe/-t	pvw@ak/vRwaie/pvRe/-t	1	5	re|reh	1	0.25	0
@@ -21334,6 +21372,7 @@ abrogent	a/svReZ/-sR	svRwejZ/-sR	1	1	a|ah|ha|hâ|â	1	0.23	1
 accomplies	a/kai/pmti/-js	kwaij/pmti/-js	1	1	a|ah|ha|hâ|â	1	0.23	0
 accosté	a/kes/te	kwejs/te	1	1	a|ah|ha|hâ|â	1	0.23	0
 accrocs	a/kR*ae/-s	kRw*aej/-s	1	1	a|ah|ha|hâ|â	1	0.23	0
+accroupis	a/kR@e/pi/-s	kRw@ej/pi/-s	1	1	a|ah|ha|hâ|â	1	0.23	1
 accroupis	a/kR@e/pi/-k	kRw@ej/pi/-k	1	1	a|ah|ha|hâ|â	1	0.23	0
 accroupis	a/kR@e/pi/-d	kRw@ej/pi/-d	1	1	a|ah|ha|hâ|â	1	0.23	2
 accroupis	a/kR@e/pi/-dt	kRw@ej/pi/-dt	1	1	a|ah|ha|hâ|â	1	0.23	3
@@ -21785,7 +21824,6 @@ vénération	ve/mRe/Ra/sRwai	ve/mRejst	2	6	ccion|cion|cyon|sion|ssion|tion|tions
 éreintée	e/Raie/te/-j	kvRaie/te/-j	1	7	é	1	0.23	0
 érigée	e/Ri/vte/-j	kvRi/vte/-j	1	7	é	1	0.23	0
 ésotérisme	e/twae/te/Rinlm	kvtwae/te/Rinlm	1	7	é	1	0.23	0
-établis	e/ta/svmti/-s	kvta/svmti/-s	1	7	é	1	0.23	0
 étals	e/tal/-s	kvtal/-s	1	7	é	1	0.23	0
 éteindrons	e/taie/pvRai/-k	kvtaie/pvRai/-k	1	7	é	1	0.23	0
 éteintes	e/taiet/-s	kvtaiet/-s	1	7	é	1	0.23	0
@@ -21843,6 +21881,7 @@ arriéré	a/Rwe/Re	Rwej/Re	1	1	a|ah|ha|hâ|â	1	0.22	0
 arroge	a/ReZ	RwejZ	1	1	a|ah|ha|hâ|â	1	0.22	0
 arroge	a/ReZ/-k	RwejZ/-k	1	1	a|ah|ha|hâ|â	1	0.22	1
 arroge	a/ReZ/-R	RwejZ/-R	1	1	a|ah|ha|hâ|â	1	0.22	2
+arrondis	a/Rai/pvi/-s	Rwaij/pvi/-s	1	1	a|ah|ha|hâ|â	1	0.22	1
 arrondis	a/Rai/pvi/-k	Rwaij/pvi/-k	1	1	a|ah|ha|hâ|â	1	0.22	0
 arrondis	a/Rai/pvi/-d	Rwaij/pvi/-d	1	1	a|ah|ha|hâ|â	1	0.22	2
 arrondis	a/Rai/pvi/-dt	Rwaij/pvi/-dt	1	1	a|ah|ha|hâ|â	1	0.22	3
@@ -22516,6 +22555,7 @@ acétate	a/se/tat	swej/tat	1	1	a|ah|ha|hâ|â	1	0.20	0
 adonnent	a/pven/-st	pvwejn/-st	1	1	a|ah|ha|hâ|â	1	0.20	0
 adonnent	a/pven/-sR	pvwejn/-sR	1	1	a|ah|ha|hâ|â	1	0.20	1
 adorablement	a/pvae/Ra/svmt@a/m@	a/pvae/Rajtm	2	2	ment	2	0.20	0
+adoucis	a/pv@e/si/-s	pvw@ej/si/-s	1	1	a|ah|ha|hâ|â	1	0.20	1
 adoucis	a/pv@e/si/-k	pvw@ej/si/-k	1	1	a|ah|ha|hâ|â	1	0.20	0
 adoucis	a/pv@e/si/-d	pvw@ej/si/-d	1	1	a|ah|ha|hâ|â	1	0.20	2
 adoucis	a/pv@e/si/-dt	pvw@ej/si/-dt	1	1	a|ah|ha|hâ|â	1	0.20	3
@@ -22819,7 +22859,6 @@ entrèrent	@/tRieR	pmtRiejR	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.20	0
 enveloppait	@/v@a/mtae/pie	pvm@aj/mtae/pie	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.20	0
 enveloppées	@/v@a/mtae/pe/-js	pvm@aj/mtae/pe/-js	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.20	0
 enverraient	@/vie/Rie/-st	pvmiej/Rie/-st	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.20	0
-envies	@/vi/-d	pvmij/-d	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.20	0
 envies	@/vi/-dR	pvmij/-dR	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.20	1
 envieuse	@/vRw@ienl	pvmRw@iejnl	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.20	0
 envieuses	@/vRw@ienl/-s	pvmRw@iejnl/-s	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.20	0
@@ -23254,6 +23293,7 @@ défilera	pve/kpi/mt@a/Ra	kspwik/mt@a/Ra	1	8	de|des|dé|déh	1	0.19	0
 défileront	pve/kpi/mt@a/Rai/-st	kspwik/mt@a/Rai/-st	1	8	de|des|dé|déh	1	0.19	0
 défoncerai	pve/kpai/s@a/Re/-t	kspwaik/s@a/Re/-t	1	8	de|des|dé|déh	1	0.19	0
 dégonflent	pve/ksaisdl/-st	kswaiskdl/-st	1	8	de|des|dé|déh	1	0.19	0
+dégonflent	pve/ksaisdl/-sR	kswaiskdl/-sR	1	8	de|des|dé|déh	1	0.19	1
 dégoûtais	pve/ks@e/tie/-k	ksw@ek/tie/-k	1	8	de|des|dé|déh	1	0.19	0
 dégoûtais	pve/ks@e/tie/-d	ksw@ek/tie/-d	1	8	de|des|dé|déh	1	0.19	1
 dégraisser	pve/ksRie/se/-l	ksRwiek/se/-l	1	8	de|des|dé|déh	1	0.19	0
@@ -23751,7 +23791,6 @@ interrogateur	aie/tie/Rae/ksa/t@R	tRwie/Rae/ksa/t@R	1	9	ain|hin|im|in	1	0.18	0
 interstellaires	aie/tieR/stie/mtieR/-s	tRwieR/stie/mtieR/-s	1	9	ain|hin|im|in	1	0.18	0
 intestinales	aie/ties/ti/mRal/-js	tRwies/ti/mRal/-js	1	9	ain|hin|im|in	1	0.18	0
 introductions	aie/tRae/pv@ik/sRwai/-s	aie/tRae/pv@ijskt/-s	1	6	ccion|cion|cyon|sion|ssion|tion|tions	1	0.18	0
-investis	aie/vies/ti/-s	vtRwies/ti/-s	1	9	ain|hin|im|in	1	0.18	0
 inégalée	i/mRe/ksa/mte/-j	ksajd/mte/-j	2	21	e|hi|hy|i|y|î	2	0.18	0
 iridium	i/Ri/pvRwem	Rijd/pvRwem	1	21	e|hi|hy|i|y|î	1	0.18	0
 irrécupérables	i/Re/k@i/pe/Rajl/-s	Rejd/k@i/pe/Rajl/-s	1	21	e|hi|hy|i|y|î	1	0.18	0
@@ -23874,7 +23913,6 @@ accordaient	a/keR/pvie/-st	kwejR/pvie/-st	1	1	a|ah|ha|hâ|â	1	0.17	0
 accouchait	a/k@e/pmie	kw@ej/pmie	1	1	a|ah|ha|hâ|â	1	0.17	0
 accrocherez	a/kRe/pm@a/Re/-d	kRwej/pm@a/Re/-d	1	1	a|ah|ha|hâ|â	1	0.17	0
 accrochiez	a/kRae/pmRwe	kRwaej/pmRwe	1	1	a|ah|ha|hâ|â	1	0.17	0
-accroupis	a/kR@e/pi/-s	kRw@ej/pi/-s	1	1	a|ah|ha|hâ|â	1	0.17	0
 accueilleraient	a/k@/Rw@a/Rie/-st	kw@j/Rw@a/Rie/-st	1	1	a|ah|ha|hâ|â	1	0.17	0
 achèteriez	a/pmie/t@a/Rwe	pmwiej/t@a/Rwe	1	1	a|ah|ha|hâ|â	1	0.17	0
 acrobatiques	a/kRae/sva/tik/-s	kRwaej/sva/tik/-s	1	1	a|ah|ha|hâ|â	1	0.17	0
@@ -25036,6 +25074,7 @@ patachon	pa/ta/pmai	kvtak/pmai	1	19	pa	1	0.16	0
 paternaliste	pa/tieR/mRa/mtist	kvtiekR/mRa/mtist	1	19	pa	1	0.16	0
 paternelles	pa/tieR/mRiel/-js	kvtiekR/mRiel/-js	1	19	pa	1	0.16	0
 patinent	pa/tin/-st	kvtikn/-st	1	19	pa	1	0.16	0
+patinent	pa/tin/-sR	kvtikn/-sR	1	19	pa	1	0.16	1
 patineuses	pa/ti/mR@ienl/-s	kvtik/mR@ienl/-s	1	19	pa	1	0.16	0
 patinoires	pa/ti/mRwaR/-s	kvtik/mRwaR/-s	1	19	pa	1	0.16	0
 percussion	pieR/k@i/sRwai	pieR/k@ijst	1	6	ccion|cion|cyon|sion|ssion|tion|tions	1	0.16	0
@@ -25324,7 +25363,6 @@ appliques	a/pmtik/-s	pmtwijk/-s	1	1	a|ah|ha|hâ|â	1	0.15	0
 apprirent	a/pRiR	pRwijR	1	1	a|ah|ha|hâ|â	1	0.15	0
 appropriations	a/pRae/pRij/a/sRwai/-s	a/pRae/pRijst/-s	2	6	ccion|cion|cyon|sion|ssion|tion|tions	2	0.15	0
 arrondira	a/Rai/pvi/Ra	Rwaij/pvi/Ra	1	1	a|ah|ha|hâ|â	1	0.15	0
-arrondis	a/Rai/pvi/-s	Rwaij/pvi/-s	1	1	a|ah|ha|hâ|â	1	0.15	0
 aruspice	a/R@is/pis	Rw@ijs/pis	1	1	a|ah|ha|hâ|â	1	0.15	0
 aspirés	as/pi/Re/-s	as/pijdR/-s	1	27	rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée	1	0.15	0
 assagir	a/sa/vtiR	swaj/vtiR	1	1	a|ah|ha|hâ|â	1	0.15	0
@@ -26423,6 +26461,7 @@ enivrez	@/i/vRe/-d	pmij/vRe/-d	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.14	1
 enjouement	@/vt@e/m@	@/vt@ejtm	1	2	ment	1	0.14	0
 enjoués	@/vtwe/-s	pvmtwej/-s	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.14	0
 enjôlée	@/vtae/mte/-j	pvmtaej/mte/-j	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.14	0
+enlaidis	@/mtie/pvi/-s	pmtiej/pvi/-s	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.14	1
 enlaidis	@/mtie/pvi/-k	pmtiej/pvi/-k	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.14	0
 enlaidis	@/mtie/pvi/-dt	pmtiej/pvi/-dt	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.14	2
 enlaidisses	@/mtie/pvis/-dR	pmtiej/pvis/-dR	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.14	0
@@ -27348,6 +27387,7 @@ débandé	pve/sv@/pve	svw@k/pve	1	8	de|des|dé|déh	1	0.13	0
 débarbouillée	pve/svaR/sv@e/Rwe/-j	svwakR/sv@e/Rwe/-j	1	8	de|des|dé|déh	1	0.13	0
 déboîte	pve/svwat	svwakt	1	8	de|des|dé|déh	1	0.13	0
 déboîte	pve/svwat/-k	svwakt/-k	1	8	de|des|dé|déh	1	0.13	1
+déboîte	pve/svwat/-R	svwakt/-R	1	8	de|des|dé|déh	1	0.13	2
 décade	pve/kad	kswakd	1	8	de|des|dé|déh	1	0.13	0
 décadentes	pve/ka/pv@t/-s	kswak/pv@t/-s	1	8	de|des|dé|déh	1	0.13	0
 décapitations	pve/ka/pi/ta/sRwai/-s	pve/ka/pijst/-s	2	6	ccion|cion|cyon|sion|ssion|tion|tions	2	0.13	0
@@ -27735,7 +27775,6 @@ téléguidée	te/mte/ksi/pve/-j	te/mte/ksikdm/-j	1	16	der|dé|dée	1	0.13	0
 utilités	@i/ti/mti/te/-s	@i/tidtm/-s	2	15	té	2	0.13	0
 volatiliser	vae/mta/ti/mti/twe/-l	vae/mta/tiknl/-l	2	30	ser|sée|zer|zé	2	0.13	0
 zoné	twae/mRe	twaejsm	1	17	ner|nez|nner|nnée|née|nées	1	0.13	0
-éblouis	e/svmt@e/i/-s	ksvmt@e/i/-s	1	7	é	1	0.13	0
 ébénistes	e/sve/mRist/-s	ksve/mRist/-s	1	7	é	1	0.13	0
 échappez	e/pma/pe/-k	kpvma/pe/-k	1	7	é	1	0.13	0
 échappez	e/pma/pe/-d	kpvma/pe/-d	1	7	é	1	0.13	1
@@ -28610,6 +28649,7 @@ débouchera	pve/sv@e/pm@a/Ra	svw@ek/pm@a/Ra	1	8	de|des|dé|déh	1	0.11	0
 déboulait	pve/sv@e/mtie	svw@ek/mtie	1	8	de|des|dé|déh	1	0.11	0
 débriefer	pve/svRi/kpe/-l	svRwik/kpe/-l	1	8	de|des|dé|déh	1	0.11	0
 débutes	pve/sv@it/-d	svw@ikt/-d	1	8	de|des|dé|déh	1	0.11	0
+débutes	pve/sv@it/-dR	svw@ikt/-dR	1	8	de|des|dé|déh	1	0.11	1
 décale	pve/kal	kswakl	1	8	de|des|dé|déh	1	0.11	0
 décale	pve/kal/-k	kswakl/-k	1	8	de|des|dé|déh	1	0.11	1
 décale	pve/kal/-R	kswakl/-R	1	8	de|des|dé|déh	1	0.11	2
@@ -29364,6 +29404,7 @@ consacreras	kai/sa/kR@a/Ra/-d	swad/kR@a/Ra/-d	1	4	co+col+com+con+cor	1	0.10	0
 conservées	kai/sieR/ve/-js	swiedR/ve/-js	1	4	co+col+com+con+cor	1	0.10	0
 considérerait	kai/si/pve/R@a/Rie	swid/pve/R@a/Rie	1	4	co+col+com+con+cor	1	0.10	0
 consigne	kai/sitn/-k	swidtn/-k	1	4	co+col+com+con+cor	1	0.10	1
+consigne	kai/sitn/-R	swidtn/-R	1	4	co+col+com+con+cor	1	0.10	2
 consignera	kai/si/w@a/Ra	swid/w@a/Ra	1	4	co+col+com+con+cor	1	0.10	0
 consommés	kai/sae/me/-s	swaed/me/-s	1	4	co+col+com+con+cor	1	0.10	0
 consultent	kai/s@itl/-st	sw@idtl/-st	1	4	co+col+com+con+cor	1	0.10	0
@@ -30010,7 +30051,6 @@ réincarnent	Re/aie/kaRn/-sR	spaiej/kaRn/-sR	1	18	ra|rai|raie|re|rhé|ré|réh	1
 réinterprétation	Re/aie/tieR/pRe/ta/sRwai	Re/aie/tieR/pRejst	2	6	ccion|cion|cyon|sion|ssion|tion|tions	2	0.10	0
 réinvestir	Re/aie/vies/tiR	spaiej/vies/tiR	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.10	0
 réjouirait	Re/vtwi/Rie	spvtwij/Rie	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.10	0
-réjouis	Re/vtwi/-s	spvtwij/-s	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.10	0
 rémunératrice	Re/m@i/mRe/Ra/tRis	spmRej/Ra/tRis	2	18	ra|rai|raie|re|rhé|ré|réh	2	0.10	0
 rénovant	Re/mRae/v@	spmRaej/v@	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.10	0
 répartissez	Re/paR/ti/se	spajR/ti/se	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.10	0
@@ -30197,7 +30237,9 @@ afrikaners	a/kpRi/ka/mRieR	kpRwij/ka/mRieR	1	1	a|ah|ha|hâ|â	1	0.09	0
 agiriez	a/vti/Rwe	vtwij/Rwe	1	1	a|ah|ha|hâ|â	1	0.09	0
 agiront	a/vti/Rai/-st	vtwij/Rai/-st	1	1	a|ah|ha|hâ|â	1	0.09	0
 agrippent	a/ksRijk/-st	ksRwijk/-st	1	1	a|ah|ha|hâ|â	1	0.09	0
+agrippent	a/ksRijk/-sR	ksRwijk/-sR	1	1	a|ah|ha|hâ|â	1	0.09	1
 agrippes	a/ksRijk/-d	ksRwijk/-d	1	1	a|ah|ha|hâ|â	1	0.09	0
+agrippes	a/ksRijk/-dR	ksRwijk/-dR	1	1	a|ah|ha|hâ|â	1	0.09	1
 ajoutaient	a/vt@e/tie/-st	vtw@ej/tie/-st	1	1	a|ah|ha|hâ|â	1	0.09	0
 alertons	a/mtieR/tai	mtwiejR/tai	1	1	a|ah|ha|hâ|â	1	0.09	0
 allongement	a/mtai/vt@a/m@	a/mtaijtm	2	2	ment	2	0.09	0
@@ -31655,6 +31697,7 @@ développaient	pve/v@a/mtae/pie/-st	svw@ak/mtae/pie/-st	1	8	de|des|dé|déh	1	0.
 déverrouillée	pve/vie/R@e/Rwe/-j	svwiek/R@e/Rwe/-j	1	8	de|des|dé|déh	1	0.07	0
 dévisageait	pve/vi/twa/vtie	svwik/twa/vtie	1	8	de|des|dé|déh	1	0.07	0
 dévoiles	pve/vwal/-d	svwakl/-d	1	8	de|des|dé|déh	1	0.07	0
+dévoiles	pve/vwal/-dR	svwakl/-dR	1	8	de|des|dé|déh	1	0.07	1
 dévêtues	pve/vie/t@i/-js	svwiek/t@i/-js	1	8	de|des|dé|déh	1	0.07	0
 effraiera	ie/kpRie/Ra	kpvRiekd/Ra	1	11	ai|aî|e|ei|hai|he|hê|é	1	0.07	0
 embardées	@/svaR/pve/-s	spvmajR/pve/-s	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.07	0
@@ -32044,7 +32087,6 @@ réorienter	Re/e/Rw@/te/-l	Re/e/Rw@jtn/-l	1	13	ter	1	0.07	0
 répandront	Re/p@/pvRai/-st	sp@j/pvRai/-st	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.07	0
 réparerait	Re/pa/R@a/Rie	spaj/R@a/Rie	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.07	0
 réparties	Re/paR/ti/-js	spajR/ti/-js	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.07	0
-répartis	Re/paR/t*i/-s	spajR/t*i/-s	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.07	0
 répartiteur	Re/paR/ti/t@R	spajR/ti/t@R	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.07	0
 répliquent	Re/pmtik/-st	spmtijk/-st	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.07	0
 répliquent	Re/pmtik/-sR	spmtijk/-sR	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.07	1
@@ -33029,6 +33071,7 @@ rétablissent	Re/ta/svmtis/-st	sptaj/svmtis/-st	1	18	ra|rai|raie|re|rhé|ré|ré
 rétractez	Re/tRak/te/-k	Re/tRajktn/-k	1	13	ter	1	0.06	0
 rétractez	Re/tRak/te/-d	Re/tRajktn/-d	1	13	ter	1	0.06	1
 rétrogradée	Re/tRae/ksRa/pve/-j	Re/tRae/ksRakdm/-j	1	16	der|dé|dée	1	0.06	0
+rétrécis	Re/tRe/si/-s	sptRej/si/-s	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.06	1
 rétrécis	Re/tRe/si/-k	sptRej/si/-k	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.06	0
 rétrécis	Re/tRe/si/-dt	sptRej/si/-dt	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.06	2
 réunirai	Re/@i/mRi/Re/-t	sp@ij/mRi/Re/-t	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.06	0
@@ -33154,6 +33197,7 @@ zieuter	tRw@ie/te/-l	tRw@iejtn/-l	1	13	ter	1	0.06	0
 étonnerez	e/te/mR@a/Re/-d	kvte/mR@a/Re/-d	1	7	é	1	0.06	0
 étoufferais	e/t@e/kp@a/Rie/-k	kvt@e/kp@a/Rie/-k	1	7	é	1	0.06	0
 étoufferais	e/t@e/kp@a/Rie/-d	kvt@e/kp@a/Rie/-d	1	7	é	1	0.06	1
+étourdis	e/t@eR/pvi/-s	kvt@eR/pvi/-s	1	7	é	1	0.06	1
 étourdis	e/t@eR/pvi/-k	kvt@eR/pvi/-k	1	7	é	1	0.06	0
 étourdis	e/t@eR/pvi/-d	kvt@eR/pvi/-d	1	7	é	1	0.06	2
 étourdis	e/t@eR/pvi/-dt	kvt@eR/pvi/-dt	1	7	é	1	0.06	3
@@ -34183,7 +34227,6 @@ résolves	Re/twejsl/-dR	sptwejsl/-dR	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.05	0
 résoudras	Re/tw@e/pvRa/-d	sptw@ej/pvRa/-d	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.05	0
 rétameur	Re/ta/m@R	sptaj/m@R	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.05	0
 rétroactivement	Re/tRae/ak/ti/v@a/m@	Re/tRae/ak/tijtm	2	2	ment	2	0.05	0
-rétrécis	Re/tRe/si/-s	sptRej/si/-s	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.05	0
 réuniraient	Re/@i/mRi/Rie/-st	sp@ij/mRi/Rie/-st	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.05	0
 réussissions	Re/@i/si/sRwai	sp@ij/si/sRwai	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.05	0
 réverbération	Re/vieR/sve/Ra/sRwai	Re/vieR/svejst	2	6	ccion|cion|cyon|sion|ssion|tion|tions	2	0.05	0
@@ -34816,6 +34859,7 @@ considéra	kai/si/pve/Ra	swid/pve/Ra	1	4	co+col+com+con+cor	1	0.04	0
 considéreraient	kai/si/pve/R@a/Rie/-st	swid/pve/R@a/Rie/-st	1	4	co+col+com+con+cor	1	0.04	0
 consigna	kai/si/wa	swid/wa	1	4	co+col+com+con+cor	1	0.04	0
 consignent	kai/sitn/-st	swidtn/-st	1	4	co+col+com+con+cor	1	0.04	0
+consignent	kai/sitn/-sR	swidtn/-sR	1	4	co+col+com+con+cor	1	0.04	1
 consola	kai/sae/mta	swaed/mta	1	4	co+col+com+con+cor	1	0.04	0
 consoleront	kai/se/mt@a/Rai/-st	swed/mt@a/Rai/-st	1	4	co+col+com+con+cor	1	0.04	0
 consolident	kai/sae/mtid/-st	swaed/mtid/-st	1	4	co+col+com+con+cor	1	0.04	0
@@ -34971,6 +35015,7 @@ débrouillées	pve/svR@e/Rwe/-js	svRw@ek/Rwe/-js	1	8	de|des|dé|déh	1	0.04	0
 débutèrent	pve/sv@i/tieR	svw@ik/tieR	1	8	de|des|dé|déh	1	0.04	0
 décalages	pve/ka/mtaZ/-s	kswak/mtaZ/-s	1	8	de|des|dé|déh	1	0.04	0
 décalques	pve/kakl/-d	kswakl/-d	1	8	de|des|dé|déh	1	0.04	0
+décalques	pve/kakl/-dR	kswakl/-dR	1	8	de|des|dé|déh	1	0.04	1
 décante	pve/k@t	ksw@kt	1	8	de|des|dé|déh	1	0.04	0
 décante	pve/k@t/-R	ksw@kt/-R	1	8	de|des|dé|déh	1	0.04	1
 décapitant	pve/ka/pi/t@	kswak/pi/t@	1	8	de|des|dé|déh	1	0.04	0
@@ -35217,6 +35262,7 @@ dévalisent	pve/va/mtinl/-sR	svwak/mtinl/-sR	1	8	de|des|dé|déh	1	0.04	1
 dévastant	pve/vas/t@	svwask/t@	1	8	de|des|dé|déh	1	0.04	0
 déversaient	pve/vieR/sie/-st	svwiekR/sie/-st	1	8	de|des|dé|déh	1	0.04	0
 dévient	pve/vi/-st	svwik/-st	1	8	de|des|dé|déh	1	0.04	0
+dévient	pve/vi/-sR	svwik/-sR	1	8	de|des|dé|déh	1	0.04	1
 dévisagez	pve/vi/twa/vte/-k	svwik/twa/vte/-k	1	8	de|des|dé|déh	1	0.04	0
 dévisagez	pve/vi/twa/vte/-d	svwik/twa/vte/-d	1	8	de|des|dé|déh	1	0.04	1
 dévissez	pve/vi/se/-k	svwik/se/-k	1	8	de|des|dé|déh	1	0.04	0
@@ -35967,6 +36013,7 @@ rançonner	R@/sae/mRe/-l	R@/saejsm/-l	1	17	ner|nez|nner|nnée|née|nées	1	0.04	
 ratatinée	Ra/ta/ti/mRe/-j	Ra/ta/tijsm/-j	1	17	ner|nez|nner|nnée|née|nées	1	0.04	0
 rebaptise	R@a/sva/tinl	svwak/tinl	1	5	re|reh	1	0.04	0
 rebaptise	R@a/sva/tinl/-k	svwak/tinl/-k	1	5	re|reh	1	0.04	1
+rebaptise	R@a/sva/tinl/-R	svwak/tinl/-R	1	5	re|reh	1	0.04	2
 rebellais	R@a/svie/mtie/-k	svwiek/mtie/-k	1	5	re|reh	1	0.04	0
 rebellais	R@a/svie/mtie/-d	svwiek/mtie/-d	1	5	re|reh	1	0.04	1
 rebellèrent	R@a/svie/mtieR	svwiek/mtieR	1	5	re|reh	1	0.04	0
@@ -36184,7 +36231,6 @@ réexaminiez	Re/iekdnl/a/mi/mRwe	spiejkdnl/a/mi/mRwe	1	18	ra|rai|raie|re|rhé|r�
 réfléchissante	Re/kpmte/pmi/s@t	spmij/s@t	2	18	ra|rai|raie|re|rhé|ré|réh	2	0.04	0
 réfrigérante	Re/kpRi/vte/R@t	kspRij/vte/R@t	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.04	0
 réfrigérants	Re/kpRi/vte/R@/-s	kspRij/vte/R@/-s	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.04	0
-réfugies	Re/kp@i/vti/-d	spvtij/-d	2	18	ra|rai|raie|re|rhé|ré|réh	2	0.04	0
 réfugies	Re/kp@i/vti/-dR	spvtij/-dR	2	18	ra|rai|raie|re|rhé|ré|réh	2	0.04	1
 réfugièrent	Re/kp@i/vtRwieR	spvtRwiejR	2	18	ra|rai|raie|re|rhé|ré|réh	2	0.04	0
 référencée	Re/kpe/R@/se/-j	Re/kpe/R@jsd/-j	1	12	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé	1	0.04	0
@@ -37177,6 +37223,7 @@ douillettement	pv@e/Rwie/t@a/m@	pv@e/Rwiejtm	2	2	ment	2	0.03	0
 dynamitez	pvi/mRa/mi/te/-k	pvi/mRadtm/-k	2	15	té	2	0.03	0
 dynamomètre	pvi/mRa/mae/mietR	smRajd/mae/mietR	1	29	de|dea|di|die|dis|dy|dî	1	0.03	0
 débandent	pve/sv@d/-st	svw@kd/-st	1	8	de|des|dé|déh	1	0.03	0
+débandent	pve/sv@d/-sR	svw@kd/-sR	1	8	de|des|dé|déh	1	0.03	1
 débarquerait	pve/svaR/k@a/Rie	svwakR/k@a/Rie	1	8	de|des|dé|déh	1	0.03	0
 débarquèrent	pve/svaR/kieR	svwakR/kieR	1	8	de|des|dé|déh	1	0.03	0
 déboutonnait	pve/sv@e/tae/mRie	svw@ek/tae/mRie	1	8	de|des|dé|déh	1	0.03	0
@@ -37521,7 +37568,6 @@ empirerait	@/pi/R@a/Rie	pmij/R@a/Rie	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	
 empirez	@/pi/Re/-k	pmij/Re/-k	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.03	0
 empirez	@/pi/Re/-d	pmij/Re/-d	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.03	1
 empirée	@/pi/Re/-j	pmij/Re/-j	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.03	0
-emplis	@/pmt*i/-s	pmt*ij/-s	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.03	0
 emplissant	@/pmti/s@	pmtij/s@	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.03	0
 emplâtres	@/pmtatR/-s	pmtajtR/-s	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.03	0
 empocherais	@/pe/pm@a/Rie	pmej/pm@a/Rie	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.03	0
@@ -37596,6 +37642,7 @@ enrayent	@/Riej/-st	pmRiej/-st	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.03	0
 enrichissez	@/Ri/pmi/se	pmRij/pmi/se	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.03	0
 enrobe	@/Rej	pmRej	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.03	0
 enrobe	@/Rej/-k	pmRej/-k	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.03	1
+enrobe	@/Rej/-R	pmRej/-R	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.03	2
 enroulant	@/R@e/mt@	pmR@ej/mt@	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.03	0
 enrubannée	@/R@i/sva/mRe/-j	pmR@ij/sva/mRe/-j	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.03	0
 enrôlons	@/Rae/mtai	pmRaej/mtai	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.03	0
@@ -38138,6 +38185,7 @@ passives	pa/sijs/-s	ksvijsk/-s	1	19	pa	1	0.03	0
 pataugeant	pa/tae/vt@	kvtaek/vt@	1	19	pa	1	0.03	0
 patientait	pa/sRw@/tie	ksvRw@k/tie	1	19	pa	1	0.03	0
 patines	pa/tin/-d	kvtikn/-d	1	19	pa	1	0.03	0
+patines	pa/tin/-dR	kvtikn/-dR	1	19	pa	1	0.03	1
 patinons	pa/ti/mRai	kvtik/mRai	1	19	pa	1	0.03	0
 patronné	pa/tRae/mRe	pa/tRaejsm	1	17	ner|nez|nner|nnée|née|nées	1	0.03	0
 patronnée	pa/tRae/mRe/-j	pa/tRaejsm/-j	1	17	ner|nez|nner|nnée|née|nées	1	0.03	0
@@ -39108,7 +39156,6 @@ aplaties	a/pmta/ti/-js	pmtwaj/ti/-js	1	1	a|ah|ha|hâ|â	1	0.02	0
 aplatirais	a/pmta/ti/Rie/-k	pmtwaj/ti/Rie/-k	1	1	a|ah|ha|hâ|â	1	0.02	0
 aplatirais	a/pmta/ti/Rie/-d	pmtwaj/ti/Rie/-d	1	1	a|ah|ha|hâ|â	1	0.02	1
 aplatirait	a/pmta/ti/Rie	pmtwaj/ti/Rie	1	1	a|ah|ha|hâ|â	1	0.02	0
-aplatis	a/pmta/ti/-s	pmtwaj/ti/-s	1	1	a|ah|ha|hâ|â	1	0.02	0
 aplatissent	a/pmta/tis/-st	pmtwaj/tis/-st	1	1	a|ah|ha|hâ|â	1	0.02	0
 apparaîtraient	a/pa/Rie/tRie/-st	pwaj/Rie/tRie/-st	1	1	a|ah|ha|hâ|â	1	0.02	0
 apparaîtrais	a/pa/Rie/tRie/-k	pwaj/Rie/tRie/-k	1	1	a|ah|ha|hâ|â	1	0.02	0
@@ -39434,7 +39481,6 @@ concordantes	kai/keR/pv@t/-s	kwedR/pv@t/-s	1	4	co+col+com+con+cor	1	0.02	0
 concoure	kai/k@eR/-R	kw@edR/-R	1	4	co+col+com+con+cor	1	0.02	0
 concubin	kai/k@i/svaie	kw@id/svaie	1	4	co+col+com+con+cor	1	0.02	0
 concurrentielle	kai/k@i/R@/sRwiel/-j	kw@id/R@/sRwiel/-j	1	4	co+col+com+con+cor	1	0.02	0
-concèdes	kai/sied/-d	swied/-d	1	4	co+col+com+con+cor	1	0.02	0
 condamnais	kai/pva/mRie/-k	pvwad/mRie/-k	1	4	co+col+com+con+cor	1	0.02	0
 condamnais	kai/pva/mRie/-d	pvwad/mRie/-d	1	4	co+col+com+con+cor	1	0.02	1
 condamnerai	kai/pva/mR@a/Re	pvwad/mR@a/Re	1	4	co+col+com+con+cor	1	0.02	0
@@ -39482,6 +39528,7 @@ conserveries	kai/sieR/v@a/Ri/-s	swiedR/v@a/Ri/-s	1	4	co+col+com+con+cor	1	0.02	0
 conserverons	kai/sieR/v@a/Rai/-k	swiedR/v@a/Rai/-k	1	4	co+col+com+con+cor	1	0.02	0
 consignait	kai/si/wie	swid/wie	1	4	co+col+com+con+cor	1	0.02	0
 consignes	kai/sitn/-d	swidtn/-d	1	4	co+col+com+con+cor	1	0.02	0
+consignes	kai/sitn/-dR	swidtn/-dR	1	4	co+col+com+con+cor	1	0.02	1
 consistants	kai/sis/t@/-s	swisd/t@/-s	1	4	co+col+com+con+cor	1	0.02	0
 consoeurs	kai/s@R/-s	sw@dR/-s	1	4	co+col+com+con+cor	1	0.02	0
 consolerez	kai/se/mt@a/Re/-d	swed/mt@a/Re/-d	1	4	co+col+com+con+cor	1	0.02	0
@@ -40150,7 +40197,6 @@ encaisseront	@/kie/s@a/Rai	kpmiej/s@a/Rai	1	3	am|an|ant|em|en|ench|enh|ham|han|h
 encastrées	@/kas/tRe/-js	kpmajs/tRe/-js	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.02	0
 encaustiquer	@/kaes/ti/ke	kpmaejs/ti/ke	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.02	0
 encerclait	@/sieR/kmtie	spmiejR/kmtie	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.02	0
-enchantez	@/pm@/te/-d	pmtej/-d	2	3	am|an|ant|em|en|ench|enh|ham|han|hen	2	0.02	0
 enchevêtrent	@/pm@a/vietR/-st	pm@aj/vietR/-st	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.02	0
 enchevêtré	@/pm@a/vie/tRe	pm@aj/vie/tRe	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.02	0
 enchevêtrées	@/pm@a/vie/tRe/-js	pm@aj/vie/tRe/-js	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.02	0
@@ -40905,7 +40951,6 @@ ovarien	ae/va/Rwaie	vajsd/Rwaie	1	23	o	1	0.02	0
 ovules	ae/v@il/-d	v@ijsdl/-d	1	23	o	1	0.02	0
 ovules	ae/v@il/-dR	v@ijsdl/-dR	1	23	o	1	0.02	1
 pacotilles	pa/kae/tij/-s	kvaek/tij/-s	1	19	pa	1	0.02	0
-pagaies	pa/ksie/-d	ksviek/-d	1	19	pa	1	0.02	0
 pagayant	pa/ksie/Rw@	ksviek/Rw@	1	19	pa	1	0.02	0
 pagaye	pa/ksa#j	ksva#jk	1	19	pa	1	0.02	0
 pageot	pa/vtae	kvtaek	1	19	pa	1	0.02	0
@@ -40969,7 +41014,6 @@ patronaux	pa/tRae/mRae	kvtRaek/mRae	1	19	pa	1	0.02	0
 patrouillerez	pa/tR@e/Rw@a/Re/-d	kvtR@ek/Rw@a/Re/-d	1	19	pa	1	0.02	0
 patrouillée	pa/tR@e/Rwe/-j	kvtR@ek/Rwe/-j	1	19	pa	1	0.02	0
 patrouillées	pa/tR@e/Rwe/-js	kvtR@ek/Rwe/-js	1	19	pa	1	0.02	0
-pavez	pa/ve/-k	kvek/-k	1	19	pa	1	0.02	0
 peinturlurée	paie/t@iR/mt@i/Re/-j	paie/t@iR/mt@ijdR/-j	1	27	rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée	1	0.02	0
 pelotonnée	p@a/mtae/tae/mRe/-j	p@a/mtae/taejsm/-j	1	17	ner|nez|nner|nnée|née|nées	1	0.02	0
 pelotonnés	p@a/mtae/tae/mRe/-s	p@a/mtae/taejsm/-s	1	17	ner|nez|nner|nnée|née|nées	1	0.02	0
@@ -41033,6 +41077,7 @@ profilée	pRae/kpi/mte/-j	kpvRi/mte/-j	1	24	pro|proh|prô	1	0.02	0
 profilés	pRae/kpi/mte/-s	kpvRi/mte/-s	1	24	pro|proh|prô	1	0.02	0
 proféra	pRae/kpe/Ra	kpvRe/Ra	1	24	pro|proh|prô	1	0.02	0
 proférez	pRae/kpe/Re/-k	kpvRe/Re/-k	1	24	pro|proh|prô	1	0.02	0
+proférez	pRae/kpe/Re/-d	kpvRe/Re/-d	1	24	pro|proh|prô	1	0.02	1
 proférée	pRae/kpe/Re/-j	kpvRe/Re/-j	1	24	pro|proh|prô	1	0.02	0
 progresserais	pRae/ksRie/s@a/Rie/-k	kspvRie/s@a/Rie/-k	1	24	pro|proh|prô	1	0.02	0
 progresserais	pRae/ksRie/s@a/Rie/-d	kspvRie/s@a/Rie/-d	1	24	pro|proh|prô	1	0.02	1
@@ -41929,7 +41974,6 @@ zombification	twai/svi/kpi/ka/sRwai	twai/svi/kpijst	2	6	ccion|cion|cyon|sion|ssi
 étonniez	e/tae/mRwe	kvtae/mRwe	1	7	é	1	0.02	0
 étouffiez	e/t@e/kpRwe	kvt@e/kpRwe	1	7	é	1	0.02	0
 étouffons	e/t@e/kpai	kvt@e/kpai	1	7	é	1	0.02	0
-étourdis	e/t@eR/pvi/-s	kvt@eR/pvi/-s	1	7	é	1	0.02	0
 étreignais	e/tRie/wie/-k	kvtRie/wie/-k	1	7	é	1	0.02	0
 étrenné	e/tRie/mRe	kvtRie/mRe	1	7	é	1	0.02	0
 étrillé	e/tRi/Rwe	kvtRi/Rwe	1	7	é	1	0.02	0
@@ -42150,7 +42194,6 @@ adossant	a/pvae/s@	pvwaej/s@	1	1	a|ah|ha|hâ|â	1	0.01	0
 adossées	a/pvae/se/-js	pvwaej/se/-js	1	1	a|ah|ha|hâ|â	1	0.01	0
 adoubement	a/pv@e/sv@a/m@	a/pv@ejtm	2	2	ment	2	0.01	0
 adouber	a/pv@e/sve/-l	pvw@ej/sve/-l	1	1	a|ah|ha|hâ|â	1	0.01	0
-adoucis	a/pv@e/si/-s	pvw@ej/si/-s	1	1	a|ah|ha|hâ|â	1	0.01	0
 adoucisse	a/pv@e/sis/-R	pvw@ej/sis/-R	1	1	a|ah|ha|hâ|â	1	0.01	0
 adoucissement	a/pv@e/si/s@a/m@	a/pv@e/sijtm	2	2	ment	2	0.01	0
 adoucisseurs	a/pv@e/si/s@R/-s	pvw@ej/si/s@R/-s	1	1	a|ah|ha|hâ|â	1	0.01	0
@@ -42714,7 +42757,6 @@ assagis	a/sa/vti/-k	swaj/vti/-k	1	1	a|ah|ha|hâ|â	1	0.01	1
 assagis	a/sa/vti/-dt	swaj/vti/-dt	1	1	a|ah|ha|hâ|â	1	0.01	2
 assagissant	a/sa/vti/s@	swaj/vti/s@	1	1	a|ah|ha|hâ|â	1	0.01	0
 assaillante	a/sa/Rw@t	swaj/Rw@t	1	1	a|ah|ha|hâ|â	1	0.01	0
-assailles	a/saj/-d	swaj/-d	1	1	a|ah|ha|hâ|â	1	0.01	0
 assaillons	a/sa/Rwai	swaj/Rwai	1	1	a|ah|ha|hâ|â	1	0.01	0
 assaisonnait	a/sie/twae/mRie	swiej/twae/mRie	1	1	a|ah|ha|hâ|â	1	0.01	0
 assaisonne	a/sie/twen	swiej/twen	1	1	a|ah|ha|hâ|â	1	0.01	0
@@ -43892,7 +43934,6 @@ débandaient	pve/sv@/pvie/-st	svw@k/pvie/-st	1	8	de|des|dé|déh	1	0.01	0
 débanderaient	pve/sv@/pv@a/Rie	svw@k/pv@a/Rie	1	8	de|des|dé|déh	1	0.01	0
 débarra	pve/sva/R*a	svwak/R*a	1	8	de|des|dé|déh	1	0.01	0
 débarrassa	pve/sva/Ra/sa	svwak/Ra/sa	1	8	de|des|dé|déh	1	0.01	0
-débatte	pve/svat/-R	svwakt/-R	1	8	de|des|dé|déh	1	0.01	0
 débattiez	pve/sva/tRwe	svwak/tRwe	1	8	de|des|dé|déh	1	0.01	0
 débattions	pve/sva/tRwai	svwak/tRwai	1	8	de|des|dé|déh	1	0.01	0
 débattra	pve/sva/tRa	svwak/tRa	1	8	de|des|dé|déh	1	0.01	0
@@ -43942,6 +43983,7 @@ déboussolées	pve/sv@e/sae/mte/-js	svw@ek/sae/mte/-js	1	8	de|des|dé|déh	1	0.0
 déboutonna	pve/sv@e/tae/mRa	svw@ek/tae/mRa	1	8	de|des|dé|déh	1	0.01	0
 déboutonnant	pve/sv@e/tae/mR@	svw@ek/tae/mR@	1	8	de|des|dé|déh	1	0.01	0
 déboutonnent	pve/sv@e/ten/-st	svw@ek/ten/-st	1	8	de|des|dé|déh	1	0.01	0
+déboutonnent	pve/sv@e/ten/-sR	svw@ek/ten/-sR	1	8	de|des|dé|déh	1	0.01	1
 déboutée	pve/sv@e/te/-j	svw@ek/te/-j	1	8	de|des|dé|déh	1	0.01	0
 débraguetté	pve/svRa/ksie/te	svRwak/ksie/te	1	8	de|des|dé|déh	1	0.01	0
 débraillées	pve/svRa/Rwe/-js	svRwak/Rwe/-js	1	8	de|des|dé|déh	1	0.01	0
@@ -44381,6 +44423,7 @@ délocalisez	pve/mtae/ka/mti/twe	smtwaek/ka/mti/twe	1	8	de|des|dé|déh	1	0.01	0
 délogée	pve/mtae/vte/-j	smtwaek/vte/-j	1	8	de|des|dé|déh	1	0.01	0
 déloque	pve/mtek	smtwek	1	8	de|des|dé|déh	1	0.01	0
 déloque	pve/mtek/-k	smtwek/-k	1	8	de|des|dé|déh	1	0.01	1
+déloque	pve/mtek/-R	smtwek/-R	1	8	de|des|dé|déh	1	0.01	2
 déléguait	pve/mte/ksie	smtwek/ksie	1	8	de|des|dé|déh	1	0.01	0
 déléguons	pve/mte/ksai	smtwek/ksai	1	8	de|des|dé|déh	1	0.01	0
 démangeais	pve/m@/vtie/-k	smw@k/vtie/-k	1	8	de|des|dé|déh	1	0.01	0
@@ -45843,7 +45886,6 @@ immensités	i/m@/si/te/-s	i/m@dtm/-s	2	15	té	2	0.01	0
 immergeant	i/mieR/vt@	miejdR/vt@	1	21	e|hi|hy|i|y|î	1	0.01	0
 immergerons	i/mieR/vt@a/Rai/-k	miejdR/vt@a/Rai/-k	1	21	e|hi|hy|i|y|î	1	0.01	0
 immigrées	i/mi/ksRe/-js	ksRejd/-js	2	21	e|hi|hy|i|y|î	2	0.01	0
-immisces	i/mis/-d	mijsd/-d	1	21	e|hi|hy|i|y|î	1	0.01	0
 immisces	i/mis/-dR	mijsd/-dR	1	21	e|hi|hy|i|y|î	1	0.01	1
 immobilisant	i/mae/svi/mti/tw@	svijd/mti/tw@	2	21	e|hi|hy|i|y|î	2	0.01	0
 immobilisent	i/mae/svi/mtinl/-st	svijd/mtinl/-st	2	21	e|hi|hy|i|y|î	2	0.01	0
@@ -47144,7 +47186,6 @@ prématurité	pRe/ma/t@i/Ri/te	pRe/ma/t@idtm	2	15	té	2	0.01	0
 présidés	pRe/twi/pve/-s	pRe/twikdm/-s	1	16	der|dé|dée	1	0.01	0
 prévôté	pRe/vae/te	pRe/vaedtm	1	15	té	1	0.01	0
 prêtés	pRie/te/-s	pRiedtm/-s	1	15	té	1	0.01	0
-prônais	pRae/mRie/-d	pvmRie/-d	1	24	pro|proh|prô	1	0.01	0
 prônera	pRae/mR@a/Ra	pvmR@a/Ra	1	24	pro|proh|prô	1	0.01	0
 prônerez	pRae/mR@a/Re	pvmR@a/Re	1	24	pro|proh|prô	1	0.01	0
 puisée	p@ai/twe/-j	p@aiknl/-j	1	30	ser|sée|zer|zé	1	0.01	0
@@ -47217,6 +47258,7 @@ rebâties	R@a/sva/ti/-js	svwak/ti/-js	1	5	re|reh	1	0.01	0
 rebâtirai	R@a/sva/ti/Re/-t	svwak/ti/Re/-t	1	5	re|reh	1	0.01	0
 rebâtirons	R@a/sva/ti/Rai/-k	svwak/ti/Rai/-k	1	5	re|reh	1	0.01	0
 rebâtis	R@a/sva/ti/-s	svwak/ti/-s	1	5	re|reh	1	0.01	0
+rebâtis	R@a/sva/ti/-k	svwak/ti/-k	1	5	re|reh	1	0.01	1
 rebâtis	R@a/sva/ti/-dt	svwak/ti/-dt	1	5	re|reh	1	0.01	2
 recache	R@a/kaZm	kwakZm	1	5	re|reh	1	0.01	0
 recacher	R@a/ka/pme	kwak/pme	1	5	re|reh	1	0.01	0
@@ -49023,7 +49065,6 @@ zozotement	twae/twe/t@a/m@	twae/twejtm	2	2	ment	2	0.01	0
 évangélisateur	e/v@/vte/mti/twa/t@R	kv@/vte/mti/twa/t@R	1	7	é	1	0.01	0
 évangélisation	e/v@/vte/mti/twa/sRwai	e/v@/vte/mtijst	2	6	ccion|cion|cyon|sion|ssion|tion|tions	2	0.01	0
 évangéliseront	e/v@/vte/mti/tw@a/Rai	kv@/vte/mti/tw@a/Rai	1	7	é	1	0.01	0
-évanouis	e/va/mRwi/-s	kva/mRwi/-s	1	7	é	1	0.01	0
 évaporaient	e/va/pae/Rie/-st	kva/pae/Rie/-st	1	7	é	1	0.01	0
 évaporais	e/va/pae/Rie/-k	kva/pae/Rie/-k	1	7	é	1	0.01	0
 évaporait	e/va/pae/Rie	kva/pae/Rie	1	7	é	1	0.01	0
@@ -49042,7 +49083,9 @@ zozotement	twae/twe/t@a/m@	twae/twejtm	2	2	ment	2	0.01	0
 éventait	e/v@/tie	kv@/tie	1	7	é	1	0.01	0
 évente	e/v@t	kv@t	1	7	é	1	0.01	0
 évente	e/v@t/-k	kv@t/-k	1	7	é	1	0.01	1
+évente	e/v@t/-R	kv@t/-R	1	7	é	1	0.01	2
 éventent	e/v@t/-st	kv@t/-st	1	7	é	1	0.01	0
+éventent	e/v@t/-sR	kv@t/-sR	1	7	é	1	0.01	1
 éventez	e/v@/te/-k	kv@/te/-k	1	7	é	1	0.01	0
 éventons	e/v@/tai	kv@/tai	1	7	é	1	0.01	0
 éventraient	e/v@/tRie/-st	kv@/tRie/-st	1	7	é	1	0.01	0
@@ -54670,7 +54713,6 @@ commentâtes	kae/m@/tat	twadt	2	4	co+col+com+con+cor	2	0.00	0
 commençante	kae/m@/s@t	sw@dt	2	4	co+col+com+con+cor	2	0.00	0
 commençantes	kae/m@/s@t/-s	sw@dt/-s	2	4	co+col+com+con+cor	2	0.00	0
 commençants	kae/m@/s@/-s	sw@d/-s	2	4	co+col+com+con+cor	2	0.00	0
-commenças	kae/m@/sa/-d	swad/-d	2	4	co+col+com+con+cor	2	0.00	0
 commercera	kae/mieR/s@a/Ra	mwiedR/s@a/Ra	1	4	co+col+com+con+cor	1	0.00	0
 commercerai	kae/mieR/s@a/Re/-t	mwiedR/s@a/Re/-t	1	4	co+col+com+con+cor	1	0.00	0
 commerceraient	kae/mieR/s@a/Rie/-st	mwiedR/s@a/Rie/-st	1	4	co+col+com+con+cor	1	0.00	0
@@ -56220,9 +56262,6 @@ coryza	kae/Ri/twa	Rwid/twa	1	4	co+col+com+con+cor	1	0.00	0
 coryzas	kae/Ri/twa/-s	Rwid/twa/-s	1	4	co+col+com+con+cor	1	0.00	0
 corés	kae/R*e/-s	Rw*ed/-s	1	4	co+col+com+con+cor	1	0.00	0
 coseigneurs	kae/twie/w@R	twied/w@R	1	4	co+col+com+con+cor	1	0.00	0
-cosigne	kae/sitn/-R	swidtn/-R	1	4	co+col+com+con+cor	1	0.00	0
-cosignent	kae/sitn/-sR	swidtn/-sR	1	4	co+col+com+con+cor	1	0.00	0
-cosignes	kae/sitn/-dR	swidtn/-dR	1	4	co+col+com+con+cor	1	0.00	0
 cossus	kae/s*@i	sw*@id	1	4	co+col+com+con+cor	1	0.00	0
 coterie	ke/t@a/Ri	tw@ad/Ri	1	4	co+col+com+con+cor	1	0.00	0
 cothurne	kae/t@iRn	tw@idRn	1	4	co+col+com+con+cor	1	0.00	0
@@ -56957,7 +56996,6 @@ débagoules	pve/sva/ks@el/-dR	svwak/ks@el/-dR	1	8	de|des|dé|déh	1	0.00	1
 débagoulâtes	pve/sva/ks@e/mtat	svwak/ks@e/mtat	1	8	de|des|dé|déh	1	0.00	0
 déballai	pve/sva/mte/-t	svwak/mte/-t	1	8	de|des|dé|déh	1	0.00	0
 déballaient	pve/sva/mtie/-st	svwak/mtie/-st	1	8	de|des|dé|déh	1	0.00	0
-déballes	pve/sval/-dR	svwakl/-dR	1	8	de|des|dé|déh	1	0.00	0
 déballonnage	pve/sva/mtae/mRaZ	svwak/mtae/mRaZ	1	8	de|des|dé|déh	1	0.00	0
 déballonne	pve/sva/mten/-R	svwak/mten/-R	1	8	de|des|dé|déh	1	0.00	0
 déballonnent	pve/sva/mten/-sR	svwak/mten/-sR	1	8	de|des|dé|déh	1	0.00	0
@@ -56983,7 +57021,6 @@ débandèrent	pve/sv@/pvieR	svw@k/pvieR	1	8	de|des|dé|déh	1	0.00	0
 débandée	pve/sv@/pve/-j	svw@k/pve/-j	1	8	de|des|dé|déh	1	0.00	0
 débandées	pve/sv@/pve/-js	svw@k/pve/-js	1	8	de|des|dé|déh	1	0.00	0
 débandés	pve/sv@/pve/-s	svw@k/pve/-s	1	8	de|des|dé|déh	1	0.00	0
-débaptise	pve/sva/tinl/-R	svwak/tinl/-R	1	8	de|des|dé|déh	1	0.00	0
 débaptisent	pve/sva/tinl/-sR	svwak/tinl/-sR	1	8	de|des|dé|déh	1	0.00	0
 débaptiserais	pve/sva/ti/tw@a/Rie	svwak/ti/tw@a/Rie	1	8	de|des|dé|déh	1	0.00	0
 débaptises	pve/sva/tinl/-dR	svwak/tinl/-dR	1	8	de|des|dé|déh	1	0.00	0
@@ -57022,15 +57059,11 @@ débarquâtes	pve/svaR/kat	svwakR/kat	1	8	de|des|dé|déh	1	0.00	0
 débarras	pve/sva/Ra/-d	svwak/Ra/-d	1	8	de|des|dé|déh	1	0.00	0
 débarrassai	pve/sva/Ra/se/-t	svwak/Ra/se/-t	1	8	de|des|dé|déh	1	0.00	0
 débarrassâtes	pve/sva/Ra/sat	svwak/Ra/sat	1	8	de|des|dé|déh	1	0.00	0
-débarre	pve/svaR/-R	svwakR/-R	1	8	de|des|dé|déh	1	0.00	0
-débarrent	pve/svaR/-sR	svwakR/-sR	1	8	de|des|dé|déh	1	0.00	0
 débarrer	pve/sva/Re	svwak/Re	1	8	de|des|dé|déh	1	0.00	0
-débarres	pve/svaR/-dR	svwakR/-dR	1	8	de|des|dé|déh	1	0.00	0
 débarrons	pve/sva/Rai	svwak/Rai	1	8	de|des|dé|déh	1	0.00	0
 débarrâtes	pve/sva/Rat	svwak/Rat	1	8	de|des|dé|déh	1	0.00	0
 débattes	pve/svat/-dR	svwakt/-dR	1	8	de|des|dé|déh	1	0.00	0
 débatteur	pve/sva/t@R	svwak/t@R	1	8	de|des|dé|déh	1	0.00	0
-débattis	pve/sva/ti/-k	svwak/ti/-k	1	8	de|des|dé|déh	1	0.00	0
 débattrai	pve/sva/tRe/-t	svwak/tRe/-t	1	8	de|des|dé|déh	1	0.00	0
 débattraient	pve/sva/tRie/-st	svwak/tRie/-st	1	8	de|des|dé|déh	1	0.00	0
 débattras	pve/sva/tRa/-d	svwak/tRa/-d	1	8	de|des|dé|déh	1	0.00	0
@@ -57246,7 +57279,9 @@ déboîtâtes	pve/svwa/tat	svwak/tat	1	8	de|des|dé|déh	1	0.00	0
 déboîtées	pve/svwa/te/-js	svwak/te/-js	1	8	de|des|dé|déh	1	0.00	0
 déboîtés	pve/svwa/te/-s	svwak/te/-s	1	8	de|des|dé|déh	1	0.00	0
 débraguette	pve/svRa/ksiet	svRwak/ksiet	1	8	de|des|dé|déh	1	0.00	0
+débraguette	pve/svRa/ksiet/-R	svRwak/ksiet/-R	1	8	de|des|dé|déh	1	0.00	1
 débraguettent	pve/svRa/ksiet/-st	svRwak/ksiet/-st	1	8	de|des|dé|déh	1	0.00	0
+débraguettent	pve/svRa/ksiet/-sR	svRwak/ksiet/-sR	1	8	de|des|dé|déh	1	0.00	1
 débraguetter	pve/svRa/ksie/te/-l	svRwak/ksie/te/-l	1	8	de|des|dé|déh	1	0.00	0
 débraguettes	pve/svRa/ksiet/-dR	svRwak/ksiet/-dR	1	8	de|des|dé|déh	1	0.00	0
 débraguettâtes	pve/svRa/ksie/tat	svRwak/ksie/tat	1	8	de|des|dé|déh	1	0.00	0
@@ -57372,7 +57407,7 @@ décalcifiée	pve/kal/si/kpRwe/-j	kswakl/si/kpRwe/-j	1	8	de|des|dé|déh	1	0.00	
 décalcifiées	pve/kal/si/kpRwe/-js	kswakl/si/kpRwe/-js	1	8	de|des|dé|déh	1	0.00	0
 décalcifiés	pve/kal/si/kpRwe/-s	kswakl/si/kpRwe/-s	1	8	de|des|dé|déh	1	0.00	0
 décalent	pve/kal/-st	kswakl/-st	1	8	de|des|dé|déh	1	0.00	0
-décales	pve/kal/-dR	kswakl/-dR	1	8	de|des|dé|déh	1	0.00	0
+décalent	pve/kal/-sR	kswakl/-sR	1	8	de|des|dé|déh	1	0.00	1
 décalitre	pve/ka/mtitR	kswak/mtitR	1	8	de|des|dé|déh	1	0.00	0
 décalogues	pve/ka/mtekd/-s	kswak/mtekd/-s	1	8	de|des|dé|déh	1	0.00	0
 décalotta	pve/ka/mtae/ta	kswak/mtae/ta	1	8	de|des|dé|déh	1	0.00	0
@@ -57387,7 +57422,6 @@ décalottées	pve/ka/mtae/te/-js	kswak/mtae/te/-js	1	8	de|des|dé|déh	1	0.00	0
 décalottés	pve/ka/mtae/te/-s	kswak/mtae/te/-s	1	8	de|des|dé|déh	1	0.00	0
 décalquai	pve/kal/ke/-t	kswakl/ke/-t	1	8	de|des|dé|déh	1	0.00	0
 décalquait	pve/kal/kie	kswakl/kie	1	8	de|des|dé|déh	1	0.00	0
-décalquent	pve/kakl/-sR	kswakl/-sR	1	8	de|des|dé|déh	1	0.00	0
 décalques	pve/kakl/-s	kswakl/-s	1	8	de|des|dé|déh	1	0.00	0
 décalquâtes	pve/kal/kat	kswakl/kat	1	8	de|des|dé|déh	1	0.00	0
 décalquées	pve/kal/ke/-js	kswakl/ke/-js	1	8	de|des|dé|déh	1	0.00	0
@@ -58198,7 +58232,6 @@ décriait	pve/kRij/ie	ksRwijk/ie	1	8	de|des|dé|déh	1	0.00	0
 décrias	pve/kRij/a	ksRwijk/a	1	8	de|des|dé|déh	1	0.00	0
 décrie	pve/kR*i/-k	ksRw*ik/-k	1	8	de|des|dé|déh	1	0.00	1
 décrie	pve/kRi#	ksRwi#k	1	8	de|des|dé|déh	1	0.00	0
-décrie	pve/kRij/-R	ksRwijk/-R	1	8	de|des|dé|déh	1	0.00	0
 décrie	pve/kRi/-R	ksRwik/-R	1	8	de|des|dé|déh	1	0.00	2
 décrient	pve/kRi/-st	ksRwik/-st	1	8	de|des|dé|déh	1	0.00	0
 décriera	pve/kRi/R*a	ksRwik/R*a	1	8	de|des|dé|déh	1	0.00	0
@@ -58214,7 +58247,6 @@ décrierions	pve/kRi/Rwai	ksRwik/Rwai	1	8	de|des|dé|déh	1	0.00	0
 décrierons	pve/kRi/R*ai/-k	ksRwik/R*ai/-k	1	8	de|des|dé|déh	1	0.00	0
 décrieront	pve/kRi/R*ai/-st	ksRwik/R*ai/-st	1	8	de|des|dé|déh	1	0.00	0
 décries	pve/kR*i/-d	ksRw*ik/-d	1	8	de|des|dé|déh	1	0.00	0
-décries	pve/kRij/-dR	ksRwijk/-dR	1	8	de|des|dé|déh	1	0.00	0
 décriiez	pve/kRij/e/-R	ksRwijk/e/-R	1	8	de|des|dé|déh	1	0.00	0
 décriions	pve/kRij/ai/-R	ksRwijk/ai/-R	1	8	de|des|dé|déh	1	0.00	0
 décriminalise	pve/kRi/mi/mRa/mtis/-R	ksRwik/mi/mRa/mtis/-R	1	8	de|des|dé|déh	1	0.00	0
@@ -58831,7 +58863,6 @@ dégauchissions	pve/ksae/pmi/sRwai	kswaek/pmi/sRwai	1	8	de|des|dé|déh	1	0.00	0
 dégauchissons	pve/ksae/pmi/sai	kswaek/pmi/sai	1	8	de|des|dé|déh	1	0.00	0
 dégauchîmes	pve/ksae/pmim	kswaek/pmim	1	8	de|des|dé|déh	1	0.00	0
 dégauchîtes	pve/ksae/pmit	kswaek/pmit	1	8	de|des|dé|déh	1	0.00	0
-dégaze	pve/ksanl/-R	kswaknl/-R	1	8	de|des|dé|déh	1	0.00	0
 dégazent	pve/ksanl/-st	kswaknl/-st	1	8	de|des|dé|déh	1	0.00	0
 dégazent	pve/ksanl/-sR	kswaknl/-sR	1	8	de|des|dé|déh	1	0.00	1
 dégazes	pve/ksanl/-dR	kswaknl/-dR	1	8	de|des|dé|déh	1	0.00	0
@@ -59095,7 +59126,6 @@ dégringolâtes	pve/ksRaie/ksae/mtat	ksRwaiek/ksae/mtat	1	8	de|des|dé|déh	1	0.
 dégringolée	pve/ksRaie/ksae/mte/-j	ksRwaiek/ksae/mte/-j	1	8	de|des|dé|déh	1	0.00	0
 dégringolées	pve/ksRaie/ksae/mte/-js	ksRwaiek/ksae/mte/-js	1	8	de|des|dé|déh	1	0.00	0
 dégringolés	pve/ksRaie/ksae/mte/-s	ksRwaiek/ksae/mte/-s	1	8	de|des|dé|déh	1	0.00	0
-dégrippent	pve/ksRijk/-sR	ksRwijk/-sR	1	8	de|des|dé|déh	1	0.00	0
 dégripper	pve/ksRi/pe	ksRwik/pe	1	8	de|des|dé|déh	1	0.00	0
 dégrippâtes	pve/ksRi/pat	ksRwik/pat	1	8	de|des|dé|déh	1	0.00	0
 dégrisa	pve/ksRi/twa	ksRwik/twa	1	8	de|des|dé|déh	1	0.00	0
@@ -59134,7 +59164,6 @@ dégrossissions	pve/ksRae/si/sRwai	ksRwaek/si/sRwai	1	8	de|des|dé|déh	1	0.00	0
 dégrossissons	pve/ksRae/si/sai	ksRwaek/si/sai	1	8	de|des|dé|déh	1	0.00	0
 dégrossîmes	pve/ksRae/sim	ksRwaek/sim	1	8	de|des|dé|déh	1	0.00	0
 dégrossîtes	pve/ksRae/sit	ksRwaek/sit	1	8	de|des|dé|déh	1	0.00	0
-dégrouillent	pve/ksR@ej/-sR	ksRw@ejk/-sR	1	8	de|des|dé|déh	1	0.00	0
 dégrouiller	pve/ksR@e/Rwe	ksRw@ek/Rwe	1	8	de|des|dé|déh	1	0.00	0
 dégrouilles	pve/ksR@ej/-dR	ksRw@ejk/-dR	1	8	de|des|dé|déh	1	0.00	0
 dégrouillâtes	pve/ksR@e/Rwat	ksRw@ek/Rwat	1	8	de|des|dé|déh	1	0.00	0
@@ -59324,7 +59353,6 @@ délabres	pve/mtajR/-dR	smtwajkR/-dR	1	8	de|des|dé|déh	1	0.00	0
 délabrâtes	pve/mta/svRat	smtwak/svRat	1	8	de|des|dé|déh	1	0.00	0
 délacer	pve/mta/s*e/-l	smtwak/s*e/-l	1	8	de|des|dé|déh	1	0.00	0
 délacèrent	pve/mta/sieR	smtwak/sieR	1	8	de|des|dé|déh	1	0.00	0
-délaie	pve/mte/-R	smtwek/-R	1	8	de|des|dé|déh	1	0.00	0
 délaient	pve/mte/-st	smtwek/-st	1	8	de|des|dé|déh	1	0.00	0
 délaierions	pve/mte/Rwai	smtwek/Rwai	1	8	de|des|dé|déh	1	0.00	0
 délaissement	pve/mtie/s@a/m@	pve/mtiejtm	2	2	ment	2	0.00	0
@@ -59634,8 +59662,6 @@ démariées	pve/ma/Rwe/-js	smwak/Rwe/-js	1	8	de|des|dé|déh	1	0.00	0
 démariés	pve/ma/Rwe/-s	smwak/Rwe/-s	1	8	de|des|dé|déh	1	0.00	0
 démarquai	pve/maR/ke/-t	smwakR/ke/-t	1	8	de|des|dé|déh	1	0.00	0
 démarquaient	pve/maR/kie/-st	smwakR/kie/-st	1	8	de|des|dé|déh	1	0.00	0
-démarquent	pve/makR/-sR	smwakR/-sR	1	8	de|des|dé|déh	1	0.00	0
-démarques	pve/makR/-dR	smwakR/-dR	1	8	de|des|dé|déh	1	0.00	0
 démarquâtes	pve/maR/kat	smwakR/kat	1	8	de|des|dé|déh	1	0.00	0
 démarrai	pve/ma/Re/-t	smwak/Re/-t	1	8	de|des|dé|déh	1	0.00	0
 démarrions	pve/ma/Rwai	smwak/Rwai	1	8	de|des|dé|déh	1	0.00	0
@@ -61821,7 +61847,6 @@ dévoieriez	pve/vwa/Rwe	svwak/Rwe	1	8	de|des|dé|déh	1	0.00	0
 dévoierions	pve/vwa/Rwai	svwak/Rwai	1	8	de|des|dé|déh	1	0.00	0
 dévoierons	pve/vwa/Rai/-k	svwak/Rai/-k	1	8	de|des|dé|déh	1	0.00	0
 dévoieront	pve/vwa/Rai/-st	svwak/Rai/-st	1	8	de|des|dé|déh	1	0.00	0
-dévoies	pve/vwa/-d	svwak/-d	1	8	de|des|dé|déh	1	0.00	0
 dévoies	pve/vwa/-dR	svwak/-dR	1	8	de|des|dé|déh	1	0.00	1
 dévoilante	pve/vwa/mt@t	svwak/mt@t	1	8	de|des|dé|déh	1	0.00	0
 dévoilements	pve/vwa/mt@a/m@/-s	pve/vwajtm/-s	2	2	ment	2	0.00	0
@@ -63607,6 +63632,7 @@ enlacerions	@/mta/s@a/Rwai	pmtaj/s@a/Rwai	1	3	am|an|ant|em|en|ench|enh|ham|han|h
 enlacerons	@/mta/s@a/Rai/-k	pmtaj/s@a/Rai/-k	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 enlaceront	@/mta/s@a/Rai/-st	pmtaj/s@a/Rai/-st	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 enlaces	@/mtas/-d	pmtajs/-d	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
+enlaces	@/mtas/-dR	pmtajs/-dR	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	1
 enlaciez	@/mta/sRwe	pmtaj/sRwe	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 enlacions	@/mta/sRwai	pmtaj/sRwai	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 enlaidies	@/mtie/pvi/-js	pmtiej/pvi/-js	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
@@ -63623,7 +63649,6 @@ enlaidiriez	@/mtie/pvi/Rwe	pmtiej/pvi/Rwe	1	3	am|an|ant|em|en|ench|enh|ham|han|h
 enlaidirions	@/mtie/pvi/Rwai	pmtiej/pvi/Rwai	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 enlaidirons	@/mtie/pvi/Rai/-k	pmtiej/pvi/Rai/-k	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 enlaidiront	@/mtie/pvi/Rai/-st	pmtiej/pvi/Rai/-st	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
-enlaidis	@/mtie/pvi/-s	pmtiej/pvi/-s	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 enlaidissaient	@/mtie/pvi/sie/-st	pmtiej/pvi/sie/-st	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 enlaidissais	@/mtie/pvi/sie/-k	pmtiej/pvi/sie/-k	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 enlaidissais	@/mtie/pvi/sie/-d	pmtiej/pvi/sie/-d	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	1
@@ -63834,7 +63859,6 @@ enrageâmes	@/Ra/vtam	pmRaj/vtam	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00
 enragiez	@/Ra/vtRwe	pmRaj/vtRwe	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 enragions	@/Ra/vtRwai	pmRaj/vtRwai	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 enragèrent	@/Ra/vtieR	pmRaj/vtieR	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
-enraie	@/Re/-R	pmRej/-R	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 enraient	@/Re/-st	pmRej/-st	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 enraiera	@/Re/Ra	pmRej/Ra	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 enraierions	@/Re/Rwai	pmRej/Rwai	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
@@ -64087,7 +64111,6 @@ entames	@/tam/-s	pmtajm/-s	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 entamâtes	@/ta/mat	pmtaj/mat	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 entassements	@/ta/s@a/m@/-s	@/tajtm/-s	2	2	ment	2	0.00	0
 entasseront	@/ta/s@a/Rai	pmtaj/s@a/Rai	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
-entasses	@/tas/-dR	pmtajs/-dR	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 entassâtes	@/ta/sat	pmtaj/sat	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
 entendeurs	@/t@/pv@R/-s	pvm@jR/-s	2	3	am|an|ant|em|en|ench|enh|ham|han|hen	2	0.00	0
 enterreur	@/tie/R@R	pmtiej/R@R	1	3	am|an|ant|em|en|ench|enh|ham|han|hen	1	0.00	0
@@ -69311,6 +69334,7 @@ obliquée	ae/svmti/ke/-j	kejsd/-j	2	23	o	2	0.00	0
 obliquées	ae/svmti/ke/-js	kejsd/-js	2	23	o	2	0.00	0
 obliqués	ae/svmti/ke/-s	kejsd/-s	2	23	o	2	0.00	0
 oblitère	ae/svmti/tieR	tiejsdR	2	23	o	2	0.00	0
+oblitère	ae/svmti/tieR/-k	tiejsdR/-k	2	23	o	2	0.00	1
 oblitère	ae/svmti/tieR/-R	tiejsdR/-R	2	23	o	2	0.00	2
 oblitèrent	ae/svmti/tieR/-st	tiejsdR/-st	2	23	o	2	0.00	0
 oblitèrent	ae/svmti/tieR/-sR	tiejsdR/-sR	2	23	o	2	0.00	1
@@ -69384,7 +69408,6 @@ occultismes	ae/k@il/tinlm/-s	k@ijsdl/tinlm/-s	1	23	o	1	0.00	0
 occultâtes	ae/k@il/tat	k@ijsdl/tat	1	23	o	1	0.00	0
 occultées	ae/k@il/te/-js	ae/k@ijtnl/-js	1	13	ter	1	0.00	0
 occultés	ae/k@il/te/-s	ae/k@ijtnl/-s	1	13	ter	1	0.00	0
-occupas	ae/k@i/pa/-d	pajsd/-d	2	23	o	2	0.00	0
 occupâtes	ae/k@i/pat	pajsdt	2	23	o	2	0.00	0
 ocelles	ae/siel	siejsdl	1	23	o	1	0.00	0
 ocellée	ae/sie/mte/-j	siejsd/mte/-j	1	23	o	1	0.00	0
@@ -69561,7 +69584,6 @@ optée	ejk/te/-j	ejktn/-j	1	13	ter	1	0.00	0
 optées	ejk/te/-js	ejktn/-js	1	13	ter	1	0.00	0
 optés	ejk/te/-s	ejktn/-s	1	13	ter	1	0.00	0
 opulences	ae/p@i/mt@s/-s	p@ijsd/mt@s/-s	1	23	o	1	0.00	0
-opères	ae/pieR/-d	piejsdR/-d	1	23	o	1	0.00	0
 opères	ae/pieR/-dR	piejsdR/-dR	1	23	o	1	0.00	1
 opérables	ae/pe/Rajl/-s	pejsd/Rajl/-s	1	23	o	1	0.00	0
 opérai	ae/pe/Re/-t	pejsd/Re/-t	1	23	o	1	0.00	0
@@ -69777,9 +69799,6 @@ pagayées	pa/ksie/Rwe/-js	ksviek/Rwe/-js	1	19	pa	1	0.00	0
 pagayés	pa/ksie/Rwe/-s	ksviek/Rwe/-s	1	19	pa	1	0.00	0
 pageais	pa/vtie/-k	kvtiek/-k	1	19	pa	1	0.00	0
 pageait	pa/vtie	kvtiek	1	19	pa	1	0.00	0
-pagine	pa/vtin/-R	kvtikn/-R	1	19	pa	1	0.00	0
-paginent	pa/vtin/-sR	kvtikn/-sR	1	19	pa	1	0.00	0
-pagines	pa/vtin/-dR	kvtikn/-dR	1	19	pa	1	0.00	0
 paginâtes	pa/vti/mRat	kvtik/mRat	1	19	pa	1	0.00	0
 pagnon	pa/wai	kvwaik	1	19	pa	1	0.00	0
 pagnote	pa/wet/-k	kvwekt/-k	1	19	pa	1	0.00	0
@@ -70719,7 +70738,6 @@ procréeraient	pRae/kRe/Rie/-st	kpvRe/Rie/-st	1	24	pro|proh|prô	1	0.00	0
 procréerais	pRae/kRe/Rie/-k	kpvRe/Rie/-k	1	24	pro|proh|prô	1	0.00	0
 procréerais	pRae/kRe/Rie/-d	kpvRe/Rie/-d	1	24	pro|proh|prô	1	0.00	1
 procréeras	pRae/kRe/Ra/-d	kpvRe/Ra/-d	1	24	pro|proh|prô	1	0.00	0
-procréerez	pRae/kRe/Re/-d	kpvRe/Re/-d	1	24	pro|proh|prô	1	0.00	0
 procréeriez	pRae/kRe/Rwe/-l	kpvRe/Rwe/-l	1	24	pro|proh|prô	1	0.00	0
 procréerions	pRae/kRe/Rwai/-l	kpvRe/Rwai/-l	1	24	pro|proh|prô	1	0.00	0
 procréeront	pRae/kRe/Rai/-st	kpvRe/Rai/-st	1	24	pro|proh|prô	1	0.00	0
@@ -71390,8 +71408,6 @@ rebaissée	R@a/sve/se/-j	svwek/se/-j	1	5	re|reh	1	0.00	0
 rebaissées	R@a/sve/se/-js	svwek/se/-js	1	5	re|reh	1	0.00	0
 rebaissés	R@a/sve/se/-s	svwek/se/-s	1	5	re|reh	1	0.00	0
 rebaisé	R@a/svie/twe	svwiek/twe	1	5	re|reh	1	0.00	0
-rebande	R@a/sv@d/-R	svw@kd/-R	1	5	re|reh	1	0.00	0
-rebandent	R@a/sv@d/-sR	svw@kd/-sR	1	5	re|reh	1	0.00	0
 rebarrée	R@a/sva/Re/-j	svwak/Re/-j	1	5	re|reh	1	0.00	0
 rebarrées	R@a/sva/Re/-js	svwak/Re/-js	1	5	re|reh	1	0.00	0
 rebarrés	R@a/sva/Re/-s	svwak/Re/-s	1	5	re|reh	1	0.00	0
@@ -71411,7 +71427,6 @@ rebiffées	R@a/svi/kpe/-js	svwik/kpe/-js	1	5	re|reh	1	0.00	0
 rebiffés	R@a/svi/kpe/-s	svwik/kpe/-s	1	5	re|reh	1	0.00	0
 rebiquaient	R@a/svi/kie/-st	svwik/kie/-st	1	5	re|reh	1	0.00	0
 rebiquait	R@a/svi/kie	svwik/kie	1	5	re|reh	1	0.00	0
-rebiquent	R@a/svik/-sR	svwik/-sR	1	5	re|reh	1	0.00	0
 rebiquer	R@a/svi/ke/-l	svwik/ke/-l	1	5	re|reh	1	0.00	0
 rebiquâtes	R@a/svi/kat	svwik/kat	1	5	re|reh	1	0.00	0
 rebiqué	R@a/svi/ke	svwik/ke	1	5	re|reh	1	0.00	0
@@ -71470,18 +71485,13 @@ rebondissons	R@a/svai/pvi/sai	svwaik/pvi/sai	1	5	re|reh	1	0.00	0
 rebondîmes	R@a/svai/pvim	svwaik/pvim	1	5	re|reh	1	0.00	0
 rebondîtes	R@a/svai/pvit	svwaik/pvit	1	5	re|reh	1	0.00	0
 rebonjours	R@a/svai/vt@eR/-s	svwaik/vt@eR/-s	1	5	re|reh	1	0.00	0
-reborde	R@a/svedR/-R	svwekdR/-R	1	5	re|reh	1	0.00	0
-rebordent	R@a/svedR/-sR	svwekdR/-sR	1	5	re|reh	1	0.00	0
 reboules	R@a/sv@el/-s	svw@ekl/-s	1	5	re|reh	1	0.00	0
 reboute	R@a/sv@et/-k	svw@ekt/-k	1	5	re|reh	1	0.00	0
 reboutez	R@a/sv@e/te/-d	svw@ek/te/-d	1	5	re|reh	1	0.00	0
 reboutonnaient	R@a/sv@e/tae/mRie/-st	svw@ek/tae/mRie/-st	1	5	re|reh	1	0.00	0
 reboutonnais	R@a/sv@e/tae/mRie/-k	svw@ek/tae/mRie/-k	1	5	re|reh	1	0.00	0
-reboutonnent	R@a/sv@e/ten/-sR	svw@ek/ten/-sR	1	5	re|reh	1	0.00	0
 reboutonnerait	R@a/sv@e/te/mR@a/Rie	svw@ek/te/mR@a/Rie	1	5	re|reh	1	0.00	0
 reboutonnèrent	R@a/sv@e/tae/mRieR	svw@ek/tae/mRieR	1	5	re|reh	1	0.00	0
-rebraguette	R@a/svRa/ksiet/-R	svRwak/ksiet/-R	1	5	re|reh	1	0.00	0
-rebraguettent	R@a/svRa/ksiet/-sR	svRwak/ksiet/-sR	1	5	re|reh	1	0.00	0
 rebrodait	R@a/svRae/pvie	svRwaek/pvie	1	5	re|reh	1	0.00	0
 rebrodé	R@a/svRae/pve	svRwaek/pve	1	5	re|reh	1	0.00	0
 rebrodée	R@a/svRae/pve/-j	svRwaek/pve/-j	1	5	re|reh	1	0.00	0
@@ -71502,7 +71512,6 @@ rebrûlée	R@a/svR@i/mte/-j	svRw@ik/mte/-j	1	5	re|reh	1	0.00	0
 rebrûlées	R@a/svR@i/mte/-js	svRw@ik/mte/-js	1	5	re|reh	1	0.00	0
 rebrûlés	R@a/svR@i/mte/-s	svRw@ik/mte/-s	1	5	re|reh	1	0.00	0
 rebu	R@a/sv*@i	svw*@ik	1	5	re|reh	1	0.00	0
-rebutes	R@a/sv@it/-dR	svw@ikt/-dR	1	5	re|reh	1	0.00	0
 rebuvait	R@a/sv@i/vie	svw@ik/vie	1	5	re|reh	1	0.00	0
 rebâtira	R@a/sva/ti/Ra	svwak/ti/Ra	1	5	re|reh	1	0.00	0
 rebâtiraient	R@a/sva/ti/Rie/-st	svwak/ti/Rie/-st	1	5	re|reh	1	0.00	0
@@ -71966,7 +71975,6 @@ recouvrais	R@a/k@e/vRie/-k	kw@ek/vRie/-k	1	5	re|reh	1	0.00	0
 recouvrais	R@a/k@e/vRie/-d	kw@ek/vRie/-d	1	5	re|reh	1	0.00	1
 recouvrance	R@a/k@e/vR@s	kw@ek/vR@s	1	5	re|reh	1	0.00	0
 recouvrante	R@a/k@e/vR@t	kw@ek/vR@t	1	5	re|reh	1	0.00	0
-recouvrent	R@a/k@ejsR/-sR	kw@ejskR/-sR	1	5	re|reh	1	0.00	0
 recouvreront	R@a/k@e/vR@a/Rai	kw@ek/vR@a/Rai	1	5	re|reh	1	0.00	0
 recouvres	R@a/k@ejsR/-d	kw@ejskR/-d	1	5	re|reh	1	0.00	0
 recouvres	R@a/k@ejsR/-dR	kw@ejskR/-dR	1	5	re|reh	1	0.00	0
@@ -72556,8 +72564,6 @@ regimbé	R@a/vtaie/sve	vtwaiek/sve	1	5	re|reh	1	0.00	0
 regimbée	R@a/vtaie/sve/-j	vtwaiek/sve/-j	1	5	re|reh	1	0.00	0
 regimbées	R@a/vtaie/sve/-js	vtwaiek/sve/-js	1	5	re|reh	1	0.00	0
 regimbés	R@a/vtaie/sve/-s	vtwaiek/sve/-s	1	5	re|reh	1	0.00	0
-regonflent	R@a/ksaisdl/-sR	kswaiskdl/-sR	1	5	re|reh	1	0.00	0
-regonfles	R@a/ksaisdl/-dR	kswaiskdl/-dR	1	5	re|reh	1	0.00	0
 regrattières	R@a/ksRa/tRwieR	ksRwak/tRwieR	1	5	re|reh	1	0.00	0
 regreffe	R@a/ksRiesd	ksRwieskd	1	5	re|reh	1	0.00	0
 regrettai	R@a/ksRie/te/-t	ksRwiek/te/-t	1	5	re|reh	1	0.00	0
@@ -73452,7 +73458,6 @@ replets	R@a/pmtie/-s	pmtwiek/-s	1	5	re|reh	1	0.00	0
 replia	R@a/pmtij/a	pmtwijk/a	1	5	re|reh	1	0.00	0
 repliai	R@a/pmtij/e/-t	pmtwijk/e/-t	1	5	re|reh	1	0.00	0
 replias	R@a/pmtij/a/-d	pmtwijk/a/-d	1	5	re|reh	1	0.00	0
-replie	R@a/pmtij/-R	pmtwijk/-R	1	5	re|reh	1	0.00	0
 replieraient	R@a/pmti/Rie/-st	pmtwik/Rie/-st	1	5	re|reh	1	0.00	0
 replierais	R@a/pmti/Rie/-k	pmtwik/Rie/-k	1	5	re|reh	1	0.00	0
 replierais	R@a/pmti/Rie/-d	pmtwik/Rie/-d	1	5	re|reh	1	0.00	1
@@ -73461,7 +73466,6 @@ replieras	R@a/pmti/Ra/-d	pmtwik/Ra/-d	1	5	re|reh	1	0.00	0
 replierez	R@a/pmti/Re/-d	pmtwik/Re/-d	1	5	re|reh	1	0.00	0
 replieriez	R@a/pmti/Rwe	pmtwik/Rwe	1	5	re|reh	1	0.00	0
 replierions	R@a/pmti/Rwai	pmtwik/Rwai	1	5	re|reh	1	0.00	0
-replies	R@a/pmtij/-dR	pmtwijk/-dR	1	5	re|reh	1	0.00	0
 repliiez	R@a/pmtij/e/-R	pmtwijk/e/-R	1	5	re|reh	1	0.00	0
 repliions	R@a/pmtij/ai/-R	pmtwijk/ai/-R	1	5	re|reh	1	0.00	0
 replongeaient	R@a/pmtai/vtie/-st	pmtwaik/vtie/-st	1	5	re|reh	1	0.00	0
@@ -73583,7 +73587,6 @@ requinquâtes	R@a/kaie/kat	kwaiek/kat	1	5	re|reh	1	0.00	0
 requinquées	R@a/kaie/ke/-js	kwaiek/ke/-js	1	5	re|reh	1	0.00	0
 requéraient	R@a/ke/Rie/-st	kwek/Rie/-st	1	5	re|reh	1	0.00	0
 requérais	R@a/ke/Rie/-k	kwek/Rie/-k	1	5	re|reh	1	0.00	0
-resape	R@a/sajk/-k	swajk/-k	1	5	re|reh	1	0.00	0
 resapée	R@a/sa/pe/-j	swak/pe/-j	1	5	re|reh	1	0.00	0
 resapés	R@a/sa/pe/-s	swak/pe/-s	1	5	re|reh	1	0.00	0
 rescision	Re/si/tRw*ai	spij/tRw*ai	1	18	ra|rai|raie|re|rhé|ré|réh	1	0.00	0
@@ -76678,7 +76681,6 @@ tenacement	t@a/mRa/s@a/m@	t@a/mRajtm	2	2	ment	2	0.00	0
 tendancieusement	t@/pv@/sRw@ie/tw@a/m@	t@/pv@/sRw@iejtm	2	2	ment	2	0.00	0
 tendretés	t@/pvR@a/te/-s	t@/pvR@adtm/-s	1	15	té	1	0.00	0
 tentées	t@/te/-js	t@dtm/-js	1	15	té	1	0.00	0
-tercez	tieR/se/-k	tiejsdR/-k	1	12	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé	1	0.00	0
 tergiversée	tieR/vti/vieR/se/-j	tieR/vti/viejsdR/-j	1	12	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé	1	0.00	0
 tergiversées	tieR/vti/vieR/se/-js	tieR/vti/viejsdR/-js	1	12	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé	1	0.00	0
 tergiversés	tieR/vti/vieR/se/-s	tieR/vti/viejsdR/-s	1	12	cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé	1	0.00	0
@@ -79116,8 +79118,6 @@ zozotements	twae/twe/t@a/m@/-s	twae/twejtm/-s	2	2	ment	2	0.00	0
 équarrîtes	e/ka/Rit	kva/Rit	1	7	é	1	0.00	0
 équatoriaux	e/kwa/tae/Rwae	kvwa/tae/Rwae	1	7	é	1	0.00	0
 équerrage	e/kie/RaZ	kvie/RaZ	1	7	é	1	0.00	0
-équeute	e/k@t/-R	kv@t/-R	1	7	é	1	0.00	0
-équeutent	e/k@t/-sR	kv@t/-sR	1	7	é	1	0.00	0
 équeutes	e/k@t/-dR	kv@t/-dR	1	7	é	1	0.00	0
 équeutâtes	e/k@ie/tat	kv@ie/tat	1	7	é	1	0.00	0
 équeutées	e/k@ie/t*e	kv@ie/t*e	1	7	é	1	0.00	0
