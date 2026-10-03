@@ -47,10 +47,11 @@ MIN_LONGFORM_STROKES = 2      # expressions under 2 strokes never enter the queu
 MIN_OCCURRENCES = 5_000_000   # ditto for window-occurrence counts
 
 # Q4: the expression budget is SEPARATE from affixrules.RULE_BUDGET (30).
-# User decision 2026-10-01: raised to 30, priority on the most frequent
-# words/expressions (the greedy's marginal frequency-weighted saving IS
-# that priority).
-EXPR_RULE_BUDGET = 30
+# User decision 2026-10-02: fixed at 15 — the sweep's peak (14.0% attaches
+# alone, 272 exceptions; past 15 the disjointness crowding degrades the
+# strong families). Priority on the most frequent words/expressions (the
+# greedy's marginal frequency-weighted saving IS that priority).
+EXPR_RULE_BUDGET = 15
 
 # Forced briefs (user decision 2026-10-01): tao entries too infrequent to
 # win a frequency slot get INVENTED brief strokes from their OWN budget,
@@ -72,6 +73,12 @@ PAIR_BONUS_WEIGHT = 0.0
 # Q2 families: one base keypress, variants separated by */# selector keys —
 # at most 4 distinguishable variants per family (selectors: none, *, #, *#).
 MAX_FAMILY_VARIANTS = 4
+# Brief families are not selector-bound: their variants are standalone
+# strokes, so the cap is the learnability bound, not the selector count
+# (user decision 2026-10-02: the que+pronoun family briefs its 8 subject
+# pronouns; each extra form still pays FORM_COST and must clear its
+# marginal — the solver decides how many survive).
+MAX_BRIEF_FAMILY_VARIANTS = 8
 
 RULE_OVERLAP_MAX = 0.5        # territory-contest threshold (affix tradition)
 
@@ -431,6 +438,36 @@ def deriveBriefStroke(expr: PoolExpression, ctx: SimContext,
     return None
 
 
+def assignBriefStrokes(selected: list[ExprRule], pool: list[PoolExpression],
+                       ctx: SimContext, freeChords: list[Stroke] | tuple[()] = (),
+                       takenStrokes: set[Stroke] | frozenset[Stroke] = frozenset(),
+                       ) -> dict[tuple[str, ...], tuple[Stroke, str] | None]:
+    """Stage B for selected BRIEF rules (user decision 2026-10-02: the que
+    families' briefs are selected by the same greedy as the attaches): derive
+    each one's stroke with `deriveBriefStroke` in descending-frequency order,
+    one shared taken-strokes set so no two briefs collide. A rule whose
+    derivation fails keeps `beta` None and stays selected — its contexts
+    fall back to composition — but the caller usually drops it. Sets
+    `beta`/`exactDone`; returns units -> (stroke, derivation label) | None."""
+    poolByUnits = {e.units: e for e in pool}
+    taken = set(takenStrokes)
+    report: dict[tuple[str, ...], tuple[Stroke, str] | None] = {}
+    for rule in sorted((r for r in selected if r.kind == "brief"),
+                       key=lambda r: (-r.freq, r.units)):
+        expr = poolByUnits.get(rule.units)
+        got = deriveBriefStroke(expr, ctx, taken, freeChords=freeChords) \
+            if expr is not None else None
+        if got is None:
+            report[rule.units] = None
+            continue
+        stroke, label = got
+        taken.add(stroke)
+        rule.beta = (stroke,)
+        rule.exactDone = True
+        report[rule.units] = (stroke, label)
+    return report
+
+
 @dataclass
 class ExprAudit:
     """Stage C audit of the FINAL rule set over the whole pool, all
@@ -444,12 +481,16 @@ class ExprAudit:
 
 def auditExpressionRules(selected: list[ExprRule], pool: list[PoolExpression],
                          ctx: SimContext) -> ExprAudit:
-    """Compose every pool expression under the final attach rules (jointly);
-    verify Q7 (no composed outline is a live outline) and global injectivity
-    (no two different expressions compose alike), and total the savings.
-    `ctx.finalOutlines` must be the CANONICAL live-outline index."""
-    rules = Rules(attaches=tuple(r.toAttach() for r in selected
-                                 if r.kind == "attach" and r.keys is not None))
+    """Compose every pool expression under the final rule set (jointly —
+    attach rules with assigned keypresses AND brief rules with assigned
+    strokes); verify Q7 (no composed outline is a live outline) and global
+    injectivity (no two different expressions compose alike), and total the
+    savings. `ctx.finalOutlines` must be the CANONICAL live-outline index."""
+    rules = Rules(
+        attaches=tuple(r.toAttach() for r in selected
+                       if r.kind == "attach" and r.keys is not None),
+        briefs=tuple(r.toBrief() for r in selected
+                     if r.kind == "brief" and r.beta is not None))
     audit = ExprAudit()
     byOutline: dict[Strokes, list[tuple[str, ...]]] = {}
     for expr in pool:
@@ -474,11 +515,15 @@ class ExprSelectionResult:
     evaluated: int = 0
 
 
-def briefCandidates(pool: list[PoolExpression]) -> list[ExprRule]:
+def briefCandidates(pool: list[PoolExpression],
+                    familyOf=None) -> list[ExprRule]:
     """Whole-expression briefs from the pool: multi-unit expressions past
     both floors. Single words are the affix system's domain, never briefed
     here. A brief's proxy per-occurrence saving collapses the whole
-    expression to one stroke."""
+    expression to one stroke. `familyOf` (user decision 2026-10-02) tags
+    the returned rules so family briefs can compete with the family's
+    attach candidates in the same greedy — the solver, not the caller,
+    picks the mechanism."""
     out: list[ExprRule] = []
     for expr in pool:
         if len(expr.units) < 2:
@@ -486,7 +531,8 @@ def briefCandidates(pool: list[PoolExpression]) -> list[ExprRule]:
         if expr.longformStrokes < MIN_LONGFORM_STROKES or expr.freq < MIN_OCCURRENCES:
             continue
         out.append(ExprRule("brief", expr.units, freq=expr.freq,
-                            strokesSaved=expr.longformStrokes - 1))
+                            strokesSaved=expr.longformStrokes - 1,
+                            family=familyOf(expr.units) if familyOf else ""))
     out.sort(key=lambda r: (-r.freq, r.units))
     return out
 
@@ -630,6 +676,28 @@ def matchedSpans(rule: ExprRule, units: tuple[str, ...]) -> list[tuple[int, int]
     return spans
 
 
+def _fallbackPair(spansA: list[list[tuple[int, int]]],
+                  spansB: list[list[tuple[int, int]]]) -> bool:
+    """True when the two rules' shared spans are always NESTED (one within
+    the other). A brief containing an attach's run (or vice versa) is the
+    other's FALLBACK on the algebra's attach-first stream, not a contest:
+    the attach consumes the shared tokens when its merge is legal, and the
+    brief still serves the exception contexts — selecting both is meaningful
+    (user decision 2026-10-02: the que families' mechanism choice goes
+    through the solver). Only partially-intersecting spans contest
+    territory. Equal spans count as nested (attach-first decides)."""
+    for spans_a, spans_b in zip(spansA, spansB):
+        if not spans_a or not spans_b:
+            continue
+        for a in spans_a:
+            for b in spans_b:
+                if a[0] < b[1] and b[0] < a[1]:
+                    if not (b[0] <= a[0] and a[1] <= b[1]) \
+                            and not (a[0] <= b[0] and b[1] <= a[1]):
+                        return False
+    return True
+
+
 def territoryOverlap(spansA: list[list[tuple[int, int]]],
                      spansB: list[list[tuple[int, int]]],
                      pool: list[PoolExpression]) -> float:
@@ -750,8 +818,13 @@ def selectExpressionRules(
         mate: tuple[ExprRule, float] | None = None
         for s, sSpans in zip(selected, selectedSpans):
             ov = territoryOverlap(spans, sSpans, pool)
-            if ov >= RULE_OVERLAP_MAX and (mate is None or ov > mate[1]):
-                mate = (s, ov)
+            if ov >= RULE_OVERLAP_MAX:
+                if s.kind != cand.kind and _fallbackPair(spans, sSpans):
+                    continue         # nested brief/attach: a fallback, not a
+                                     # contest (2026-10-02); brief-in-brief and
+                                     # attach-in-attach still contest
+                if mate is None or ov > mate[1]:
+                    mate = (s, ov)
         if mate is not None:
             result.skips.append((" ".join(cand.units), " ".join(mate[0].units), mate[1]))
             continue
@@ -773,8 +846,12 @@ def selectExpressionRules(
         if cand.family:
             cand.forms = 1
             closed.add(cand.family)
+            # the variant cap is kind-bound: attach families stop at the
+            # */# selector count, brief families at the learnability bound
+            cap = (MAX_BRIEF_FAMILY_VARIANTS if cand.kind == "brief"
+                   else MAX_FAMILY_VARIANTS)
             sibIdx = 0
-            while sibIdx < len(candOf) and cand.forms < MAX_FAMILY_VARIANTS:
+            while sibIdx < len(candOf) and cand.forms < cap:
                 sib = candOf[sibIdx]
                 if sib.family != cand.family or sib.kind != cand.kind:
                     sibIdx += 1

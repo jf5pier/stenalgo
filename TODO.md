@@ -2,6 +2,23 @@
 
 Written to survive a `/clear` — read this file first in a fresh session.
 
+## Branch TODO — max-1-key overlap (abbreviations branch, 2026-10-03)
+
+- Study allowing up to 1 shared key between an attach keypress and its host stroke (today `keyOverlap` refuses ANY
+  shared key in `src/expressions.py`; main's decided affix mode refuses only a FULL overlap). The decoder would
+  test the |K|+1 candidates `S \ K` and `S \ K + k`. Potential gain: fewer exceptions, a bigger pool of eligible
+  keypresses, a relaxed attach-attach disjointness. Risks: ambiguity is per (rule, host), shadowing widens, must be
+  audited over the whole theory. Not implemented. Full discussion and the 5-step experiment list:
+  `NOTES_2026-10-03-attach-overlap-and-plover-decoder.md` (section 4).
+- Merge hazard resolved 2026-10-03: the expression layer has its own `attachKeysOverlap` /
+  `EXPR_MAX_SHARED_KEYS = 0` in `src/expressions.py` and no longer uses main's `ruleKeysOverlap`; the study only
+  changes that constant.
+- Also drop the temporary `from __future__ import annotations` in `src/affixes.py` when merging main.
+- Driver nondeterminism (found 2026-10-03): `scratch/select_expression_rules.py` Stage C breaks equal-score base ties by
+  set/dict iteration order, so results depend on `PYTHONHASHSEED` (21.7% vs 22.3%). Make the tie-break deterministic.
+- Decided 2026-10-03: no que briefs (`QUE_BRIEF_BUDGET` removed); adjacent hostless attaches merge (`attachCluster`);
+  a brief-wins-when-attach-fails fallback was measured (+2.9%) and rejected for decodability. See the NOTES file, section 5.
+
 ## Suspected bugs (from docs refactor, 2026-09-22)
 
 Found while writing `docs/PIPELINE.md` (full write-ups, evidence and confidence in

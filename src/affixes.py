@@ -9,6 +9,9 @@ is an attested lemma. Affixes are grouped in families of similar members, compet
 (bio+logie / bio+logique) are split into sub-groups, and `simulate` measures the strokes a
 keypress binding saves on the family's carriers.
 """
+from __future__ import annotations  # TEMPORARY (abbreviations branch, 2026-10-03): Candidate is used
+# in an annotation before its class; main fixed it. Drop this line when merging main.
+
 import bisect
 import functools
 import unicodedata

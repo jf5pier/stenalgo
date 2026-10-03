@@ -78,18 +78,52 @@ def main() -> None:
     particles = frozenset(u for u, ok in seen.items() if ok)
     print(f"particles ({len(particles)}): {' '.join(sorted(particles))}")
 
-    # Q2 families: the lemma of a run's first unit groups its variants
-    # (de / d' / de la / de l' / du / des -> "de").
+    # Q2 families, refined 2026-10-02: the lemma of a run's first unit
+    # groups its variants (de / d' / de la / de l' / du / des -> "de");
+    # que/qu' runs group by the FOLLOWING word's category instead — three
+    # determiner subfamilies, the subject pronouns, and the bare head
+    # ("que and qu' before any other words").
     lemmaOf: dict[str, str] = {}
     for unit, ok in seen.items():
         pairs = resolveTerm(unit, byOrtho)
         if pairs and pairs[0][1] is not None:
             lemmaOf[unit] = pairs[0][1].lemme
 
-    def familyOf(units: tuple[str, ...]) -> str:
-        return lemmaOf.get(units[0], "")
+    QUE_HEADS = frozenset({"que", "qu'"})
+    QUE_DEFINITE = frozenset({"le", "la", "l'", "les"})
+    QUE_INDEFINITE = frozenset({"un", "une", "des", "du"})
+    QUE_DEMONSTRATIVE = frozenset({"ce", "cet", "cette", "ces"})
+    QUE_PRONOUNS = frozenset({"je", "j'", "tu", "il", "elle", "on",
+                              "nous", "vous", "ils", "elles"})
 
-    candidates = briefCandidates(pool) + attachCandidates(pool, particles, familyOf)
+    def queFamilyOf(units: tuple[str, ...]) -> str:
+        """The que-domain cut (user decision 2026-10-02): the determiner
+        subfamilies, the subject-pronoun family, and the bare head. Empty
+        outside the que domain."""
+        if units[0] in QUE_HEADS:
+            if len(units) >= 2:
+                second = units[1]
+                if second in QUE_DEFINITE:
+                    return "que+def"
+                if second in QUE_INDEFINITE:
+                    return "que+indef"
+                if second in QUE_DEMONSTRATIVE:
+                    return "que+dem"
+                if second in QUE_PRONOUNS:
+                    return "que+pron"
+            return "que"
+        return ""
+
+    def familyOf(units: tuple[str, ...]) -> str:
+        return queFamilyOf(units) or lemmaOf.get(units[0], "")
+
+    candidates = briefCandidates(pool, familyOf=queFamilyOf) \
+        + attachCandidates(pool, particles, familyOf)
+    # The pronoun family differentiates by briefs, never by a merged
+    # keypress or a */# selector (user decision 2026-10-02): it gets no
+    # attach candidates at all.
+    candidates = [c for c in candidates
+                  if not (c.kind == "attach" and c.family == "que+pron")]
     families = {c.family for c in candidates if c.family}
     print(f"candidates: {len(candidates)} "
           f"({sum(1 for c in candidates if c.kind == 'brief')} briefs, "
@@ -117,6 +151,26 @@ def main() -> None:
     keypressReport = assignKeypresses(result.selected, pool, realCtx, keypresses,
                                  repairCandidates=200)
     print(f"Stage B assignment done ({time.time() - t:.0f}s)")
+
+    # Stage B for the selected BRIEF rules (2026-10-02: the que families'
+    # briefs win slots in the same greedy as the attaches): derived strokes
+    # in descending-frequency order over one shared taken set.
+    from src.expressionrules import assignBriefStrokes, deriveBriefStroke
+    t = time.time()
+    briefReport = assignBriefStrokes(result.selected, pool, realCtx,
+                                     freeChords=keypresses)
+    failedBriefs = sorted(u for u, got in briefReport.items() if got is None)
+    if failedBriefs:
+        print(f"{len(failedBriefs)} brief rules got no stroke (dropped): "
+              + "; ".join(" ".join(u) for u in failedBriefs))
+        result.selected = [r for r in result.selected
+                           if r.kind != "brief" or r.beta is not None]
+    print(f"brief strokes: {sum(1 for v in briefReport.values() if v)} derived "
+          f"({time.time() - t:.0f}s)")
+    # every stroke a selected brief now holds — re-derivations and the
+    # forced-brief section must not take it again
+    selBriefTaken = {r.beta[0] for r in result.selected
+                     if r.kind == "brief" and r.beta is not None}
 
     # Stage C: joint repair (cross-family distinctness) + audit, with a
     # feedback round: families implicated in an audit collision lose their
@@ -153,9 +207,11 @@ def main() -> None:
         if not audit.collisions:
             break
         poolByUnits = {e.units: e for e in pool}
-        rules = Rules(attaches=tuple(
-            r.toAttach() for r in result.selected
-            if r.kind == "attach" and r.keys is not None))
+        rules = Rules(
+            attaches=tuple(r.toAttach() for r in result.selected
+                           if r.kind == "attach" and r.keys is not None),
+            briefs=tuple(r.toBrief() for r in result.selected
+                         if r.kind == "brief" and r.beta is not None))
         banned: set[str] = set()
         progressed = False
         for outline, exprs in audit.collisions.items():
@@ -166,17 +222,38 @@ def main() -> None:
                 signatures.append({
                     (seg.rule.family, seg.rule.expression)
                     for seg in traced.segments
-                    if seg.kind == "attach" and seg.rule is not None
+                    if seg.kind in ("attach", "brief") and seg.rule is not None
                     and seg.rule.family})
             common = set.intersection(*signatures) if signatures else set()
             differing = set().union(*signatures) - common
             culpritFams = {fam for fam, _units in differing}
             if len(culpritFams) == 1:
+                fam = next(iter(culpritFams))
+                if any(r.family == fam and r.kind == "brief"
+                       for r in result.selected):
+                    # a BRIEF family's stroke collides: re-derive every
+                    # family brief with the colliding outline (and each
+                    # brief's own stroke) in the taken set
+                    famRules = [r for r in result.selected
+                                if r.kind == "brief" and r.family == fam
+                                and r.beta is not None]
+                    for r in famRules:
+                        selBriefTaken.add(r.beta[0])   # force a move
+                    for r in famRules:
+                        got = deriveBriefStroke(poolByUnits[r.units], realCtx,
+                                                selBriefTaken,
+                                                freeChords=keypresses)
+                        if got is None:
+                            result.selected.remove(r)
+                        else:
+                            r.beta = (got[0],)
+                            selBriefTaken.add(got[0])
+                    progressed = True
+                    continue
                 # Selector collapse on a marked host (the host's own * / #
                 # swallows the variant's selector — no base can fix it):
                 # drop the weaker differing variant; its contexts compose
                 # through the common rules instead.
-                fam = next(iter(culpritFams))
                 unitsSet = {u for _f, u in differing}
                 colliding = sorted(
                     (r for r in result.selected
@@ -225,6 +302,8 @@ def main() -> None:
                   "strokes_saved\tkeys\tscore\n")
         for rank, rule in enumerate(result.selected, 1):
             keys = ",".join(map(str, rule.keys)) if rule.keys else ""
+            if rule.beta:
+                keys = "/".join(",".join(map(str, st)) for st in rule.beta)
             out.write(f"{rank}\t{rule.kind}\t{rule.family}\t{' '.join(rule.units)}\t"
                       f"{rule.position}\t{rule.freq:.0f}\t{rule.strokesSaved}\t"
                       f"{keys}\t{rule.score:.3e}\n")
@@ -234,15 +313,17 @@ def main() -> None:
 
     finalRules = [
         {"kind": r.kind, "family": r.family, "units": list(r.units),
-         "position": r.position, "keys": list(r.keys or ()), "freq": r.freq}
+         "position": r.position, "keys": list(r.keys or ()),
+         "beta": [list(st) for st in (r.beta or ())], "freq": r.freq}
         for r in result.selected]
     with open(REPO / "scratch" / "expr-rules-final.json", "w", encoding="utf-8") as fh:
         json.dump({"rules": finalRules, "chosen": {k: list(v)
                                                    for k, v in chosen.items()}}, fh,
                   ensure_ascii=False, indent=1)
-    rulesJoint = Rules(attaches=tuple(
-        r.toAttach() for r in result.selected
-        if r.kind == "attach" and r.keys is not None))
+    rulesJoint = Rules(
+        attaches=tuple(r.toAttach() for r in result.selected
+                       if r.kind == "attach" and r.keys is not None),
+        briefs=tuple(r.toBrief() for r in result.selected if r.kind == "brief"))
     with open(REPO / "scratch" / "expr-savings.tsv", "w", encoding="utf-8") as fh:
         fh.write("expr\tfreq\tlongform\tcomposed\tsaving\texceptions\n")
         for expr in pool:
@@ -259,8 +340,10 @@ def main() -> None:
     from util._stenorender import renderFinalStrokesToRTFCRE
 
     pk = PhonemeKeys(starboard)
+    # attaches (keypress) and briefs (beta strokes), in selection order
     rulesFinal = [r for r in result.selected
-                  if r.kind == "attach" and r.keys is not None]
+                  if (r.kind == "attach" and r.keys is not None)
+                  or (r.kind == "brief" and r.beta is not None)]
     ruleOf = {(r.units, r.position): r for r in rulesFinal}
     def newStats() -> dict:
         return {"saved": 0.0, "fired": 0.0, "excFreq": 0.0, "exc": [],
@@ -273,7 +356,18 @@ def main() -> None:
         if traced.strokes is None:
             continue
         fired = []
+        strokesOf = {t.unit: len(t.strokes) for t in expr.tokens}
         for seg in traced.segments:
+            if seg.kind == "brief" and seg.rule is not None:
+                rule = ruleOf.get((seg.rule.expression, ""))
+                if rule is None:
+                    continue
+                k = keyOf(rule)
+                stats[k]["saved"] += expr.freq * (
+                    sum(strokesOf.get(u, 1) for u in seg.units) - len(seg.strokes))
+                stats[k]["fired"] += expr.freq
+                fired.append(k)
+                continue
             if seg.kind != "attach" or seg.rule is None:
                 continue
             rule = ruleOf.get((seg.rule.expression, seg.rule.position))
@@ -310,6 +404,9 @@ def main() -> None:
 
     phonoOf: dict[str, str] = {}
     for rule in rulesFinal:
+        if rule.kind == "brief":
+            rule.keySimilarity = 0.0    # a brief's stroke is derived, not a key choice
+            continue
         memberPhonos = []
         for unit in rule.units:
             if unit not in phonoOf:
@@ -329,8 +426,14 @@ def main() -> None:
             top = sorted(st["exc"], key=lambda t: -t[0])[:5]
             out.write("\t".join([
                 str(rank), rule.kind, rule.family, " ".join(rule.units),
-                rule.position, ",".join(map(str, rule.keys or ())),
-                renderFinalStrokesToRTFCRE(starboard, (tuple(sorted(rule.keys or ())),)),
+                rule.position,
+                ("/".join(",".join(map(str, st)) for st in rule.beta)
+                 if rule.kind == "brief"
+                 else ",".join(map(str, rule.keys or ()))),
+                (renderFinalStrokesToRTFCRE(starboard, tuple(rule.beta))
+                 if rule.kind == "brief"
+                 else renderFinalStrokesToRTFCRE(
+                     starboard, (tuple(sorted(rule.keys or ())),))),
                 f"{rule.score:.3e}", f"{st['saved']:.3e}",
                 f"{getattr(rule, 'keySimilarity', 0.0):.3f}",
                 f"{st['excFreq']:.3e}",
@@ -362,7 +465,9 @@ def main() -> None:
 
     taoSet = {tuple(p.split("=")[0] for p in row["phonologies"].split(",") if p)
               for row in rows if "tao" in row["flags"].split(",")}
-    covered = set()
+    # selected briefs already own their expressions and their strokes
+    selBriefUnits = {r.units for r in result.selected if r.kind == "brief"}
+    covered = set(selBriefUnits)
     for expr in pool:
         if composeOutlineTraced(rulesJoint, expr.tokens, realCtx).saving > 0:
             covered.add(expr.units)
@@ -371,7 +476,9 @@ def main() -> None:
                      and e.longformStrokes >= 2),
                     key=lambda e: (-e.freq, e.units))[:FORCED_BRIEF_BUDGET]
     briefs: list[tuple] = []
-    takenStrokes: set = set()
+    takenStrokes: set = {r.beta[0] for r in result.selected
+                         if r.kind == "brief" and r.beta is not None}
+    takenStrokes |= selBriefTaken
     for expr in forced:
         got = deriveBriefStroke(expr, realCtx, takenStrokes,
                                 freeChords=keypresses)
@@ -381,7 +488,8 @@ def main() -> None:
         takenStrokes.add(stroke)
         briefs.append((expr, stroke, label))
     briefRules = tuple(BriefRule(e.units, (st,)) for e, st, _l in briefs)
-    withBriefs = Rules(attaches=rulesJoint.attaches, briefs=briefRules)
+    withBriefs = Rules(attaches=rulesJoint.attaches,
+                       briefs=rulesJoint.briefs + briefRules)
     savingBrief = 0.0
     bShadows: list = []
     byOutline: dict = {}
@@ -410,8 +518,8 @@ def main() -> None:
                                   f"{expr.freq * (expr.longformStrokes - 1):.3e}",
                                   f"{expr.freq * (expr.longformStrokes - 1):.3e}",
                                   label, "0", "", "", ""]) + "\n")
-    print(f"forced briefs: {len(briefs)} created (of {len(forced)} uncovered "
-          f"tao entries, budget {FORCED_BRIEF_BUDGET}) -> scratch/expr-briefs.tsv")
+    print(f"briefs: {len(briefs)} created ({len(forced)} uncovered tao entries, "
+          f"budget {FORCED_BRIEF_BUDGET}) -> scratch/expr-briefs.tsv")
     print(f"with briefs: saving {savingBrief:.3e}, shadows {len(bShadows)}, "
           f"collisions {len(bCollisions)}")
     for units, outline in bShadows[:3]:

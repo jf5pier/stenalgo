@@ -167,6 +167,36 @@ class TestFailureLadder:
         assert traced.saving == 0
         assert traced.exceptions == 1
 
+    def test_hostless_adjacent_attaches_merge_into_one_stroke(self):
+        """qu' + il with no content after them: both are noNeighbour, so they
+        compose with each other into one stroke (saving 1) instead of two
+        exceptions."""
+        rules = Rules(attaches=(AttachRule(("qu'",), PREFIX, KAPPA_NE),
+                                AttachRule(("il",), PREFIX, KAPPA_PAS)))
+        tokens = (tok("qu'", ((15, 16),)), tok("il", IL))
+        traced = composeOutlineTraced(rules, tokens, Ctx())
+        assert traced.strokes == canonicalizeStrokes(((2, 3),))
+        assert traced.saving == 1
+        assert traced.exceptions == 0
+        assert traced.segments[0].outcome == STANDALONE
+        assert traced.segments[0].reason == "attachCluster"
+        assert traced.segments[1].outcome == MERGED
+
+    def test_hostless_attaches_sharing_a_key_do_not_merge(self):
+        rules = Rules(attaches=(AttachRule(("qu'",), PREFIX, KAPPA_NE),
+                                AttachRule(("il",), PREFIX, KAPPA_NE)))
+        tokens = (tok("qu'", ((15, 16),)), tok("il", IL))
+        traced = composeOutlineTraced(rules, tokens, Ctx())
+        assert traced.exceptions == 2
+        assert traced.saving == 0
+
+    def test_hostless_attaches_with_a_host_still_stack_on_it(self):
+        rules = Rules(attaches=(AttachRule(("qu'",), PREFIX, KAPPA_NE),
+                                AttachRule(("il",), PREFIX, KAPPA_PAS)))
+        tokens = (tok("qu'", ((15, 16),)), tok("il", IL), tok("est", EST))
+        traced = composeOutlineTraced(rules, tokens, Ctx())
+        assert all(seg.reason != "attachCluster" for seg in traced.segments)
+
     def test_span_one_never_goes_standalone(self):
         """A one-stroke particle with a failed merge keeps its longform
         (spanOne): a standalone would save nothing."""
@@ -288,3 +318,41 @@ class TestFailuresAndValidation:
         traced = composeOutlineTraced(rules, tokens, Ctx())
         assert traced.saving == sum(len(t.strokes) for t in tokens) - len(traced.strokes)
         assert traced.saving == 2  # brief: 3->1; pas merged into the brief
+
+
+class TestAttachKeysOverlap:
+    """The expression layer owns its overlap policy: refuse when more than
+    `maxShared` syllabic keys are shared (0 = strict, the decoder contract)."""
+
+    def test_strict_default_refuses_any_shared_key(self):
+        from src.expressions import EXPR_MAX_SHARED_KEYS, attachKeysOverlap
+        assert EXPR_MAX_SHARED_KEYS == 0
+        assert not attachKeysOverlap((2, 13), (18, 20, 21))
+        assert attachKeysOverlap((2, 13, 18), (18, 20, 21))
+
+    def test_one_shared_key_allowed_at_limit_one(self):
+        from src.expressions import attachKeysOverlap
+        assert not attachKeysOverlap((2, 13, 18), (18, 20, 21), maxShared=1)
+        assert attachKeysOverlap((2, 13, 18, 20), (18, 20, 21), maxShared=1)
+
+    def test_full_overlap_refused_at_every_limit_below_its_size(self):
+        from src.expressions import attachKeysOverlap
+        assert attachKeysOverlap((18, 20, 21, 5), (18, 20, 21), maxShared=2)
+        assert not attachKeysOverlap((18, 20, 21, 5), (18, 20, 21), maxShared=3)
+
+    def test_module_constant_drives_the_composition(self, monkeypatch):
+        """Raising the limit lets a one-key-overlap merge through composeOutline."""
+        import src.expressions as E
+        from src.affixes import SimContext
+        from src.keyboard import Starboard
+        sb = Starboard.fromJSONFile("starboard3h.json")
+        assert sb is not None
+        ctx = SimContext(sb, [])
+        # host 'est' stroke shares key 18 with the attach keypress (18, 20, 21)
+        toks = (Token("de", ((9,),)), Token("mot", ((2, 13, 18),)))
+        rules = E.Rules(attaches=(E.AttachRule(("de",), E.PREFIX, (18, 20, 21)),))
+        strict = E.composeOutlineTraced(rules, toks, ctx)
+        assert strict.segments[0].outcome != E.MERGED
+        monkeypatch.setattr(E, "EXPR_MAX_SHARED_KEYS", 1)
+        loose = E.composeOutlineTraced(rules, toks, ctx)
+        assert loose.segments[0].outcome in (E.MERGED, E.STANDALONE)

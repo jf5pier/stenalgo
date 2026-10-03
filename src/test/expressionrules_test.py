@@ -4,8 +4,10 @@ segmentation, and the greedy budgeted selection — all keyboard-free (the
 proxy stage never composes strokes, so dummy token strokes suffice).
 Frequencies are >= 5M so the Q6 floors pass."""
 
-from src.expressionrules import (MIN_OCCURRENCES, ExprRule, PoolExpression,
-                                 assignKeypresses, attachCandidates,
+from src.expressionrules import (MAX_BRIEF_FAMILY_VARIANTS, MIN_OCCURRENCES,
+                                 ExprRule, PoolExpression, _fallbackPair,
+                                 assignBriefStrokes, assignKeypresses,
+                                 attachCandidates, auditExpressionRules,
                                  briefCandidates, deriveBriefStroke,
                                  jointFrequency, proxySaving,
                                  selectExpressionRules, touchedExpressions)
@@ -299,3 +301,129 @@ class TestDeriveBriefStroke:
         e = self.expr(("a", "b"), (((13,),), ((13,),)))
         assert deriveBriefStroke(e, self.ctx(singles={(13,)}), set(),
                                  freeChords=[]) is None
+
+
+class TestBriefFamilies:
+    """2026-10-02: briefs carry a family, compete with the family's attaches
+    in one greedy, and their variant cap is the learnability bound (8), not
+    the */# selector count (4)."""
+
+    def test_brief_candidates_carry_the_family(self):
+        pool = [expr(["que", "je"], MIN_OCCURRENCES), expr(["il", "y"], MIN_OCCURRENCES)]
+        rules = briefCandidates(
+            pool, familyOf=lambda units: "que+pron" if units[0] == "que" else "")
+        assert {r.units: r.family for r in rules} == {("que", "je"): "que+pron",
+                                                     ("il", "y"): ""}
+        assert all(r.family == "" for r in briefCandidates(pool))
+
+    def test_brief_family_cap_is_eight(self):
+        heads = [f"p{i}" for i in range(10)]
+        pool = [expr(["que", h], 10_000_000) for h in heads]
+        candidates = briefCandidates(pool, familyOf=lambda units: "que+pron")
+        result = selectExpressionRules(candidates, pool, budget=10)
+        assert MAX_BRIEF_FAMILY_VARIANTS == 8
+        assert len(result.selected) == MAX_BRIEF_FAMILY_VARIANTS
+        assert result.selected[0].forms == MAX_BRIEF_FAMILY_VARIANTS
+        assert all(r.kind == "brief" for r in result.selected)
+
+
+class TestFallbackPair:
+    def test_nested_spans_are_a_fallback(self):
+        assert _fallbackPair([[(0, 2)]], [[(0, 1)]])
+        assert _fallbackPair([[(1, 2)]], [[(0, 3)]])
+        assert _fallbackPair([[(0, 2)]], [[(0, 2)]])          # equal counts as nested
+
+    def test_partial_intersection_contests_territory(self):
+        assert not _fallbackPair([[(0, 2)]], [[(1, 3)]])
+
+    def test_one_partial_expression_is_enough(self):
+        assert not _fallbackPair([[(0, 2)], [(0, 3)]], [[(0, 1)], [(2, 4)]])
+
+    def test_disjoint_and_empty_are_no_contest(self):
+        assert _fallbackPair([[(0, 1)]], [[(2, 3)]])
+        assert _fallbackPair([[]], [[(0, 1)]])
+
+    def test_nested_brief_and_attach_both_get_selected(self):
+        """The brief owns "le chat"; the attach (le) still serves "le chien".
+        Where both match, the attach-first stream makes the brief the
+        fallback, so the nested pair is no territory contest."""
+        pool = [expr(["le", "chat"], 70_000_000, strokesPerUnit=2),
+                expr(["le", "chien"], 20_000_000, strokesPerUnit=2)]
+        candidates = ([b for b in briefCandidates(pool) if b.units == ("le", "chat")]
+                      + attachCandidates(pool, frozenset({"le"})))
+        result = selectExpressionRules(candidates, pool, budget=5)
+        assert [(r.kind, r.units) for r in result.selected] == \
+            [("brief", ("le", "chat")), ("attach", ("le",))]
+        assert result.skips == []
+
+    def test_brief_inside_brief_still_contests(self):
+        pool = [expr(["que", "le", "chat"], 50_000_000, strokesPerUnit=2),
+                expr(["le", "chat", "noir"], 40_000_000, strokesPerUnit=2)]
+        candidates = [ExprRule("brief", ("que", "le", "chat"), freq=50_000_000,
+                               strokesSaved=5),
+                      ExprRule("brief", ("le", "chat"), freq=90_000_000,
+                               strokesSaved=3)]
+        result = selectExpressionRules(candidates, pool, budget=5)
+        assert [" ".join(r.units) for r in result.selected] == ["le chat"]
+        assert result.skips[0][:2] == ("que le chat", "le chat")
+
+
+class TestAssignBriefStrokes:
+    ctx = staticmethod(TestDeriveBriefStroke.ctx)
+
+    @staticmethod
+    def pool():
+        return [PoolExpression(("mot", "cle"), 9.0,
+                               (Token("mot", ((2, 13),)), Token("cle", ((14, 23),)))),
+                PoolExpression(("mot", "rue"), 8.0,
+                               (Token("mot", ((2, 13),)), Token("rue", ((14, 24),))))]
+
+    def test_distinct_strokes_and_beta_set(self):
+        rules = [ExprRule("brief", ("mot", "cle"), freq=9.0),
+                 ExprRule("brief", ("mot", "rue"), freq=8.0)]
+        report = assignBriefStrokes(rules, self.pool(), self.ctx(),
+                                    freeChords=[(2,), (3,), (4,)])
+        assert all(v is not None for v in report.values())
+        strokes = [r.beta[0] for r in rules]
+        assert len(set(strokes)) == 2
+        assert all(r.exactDone for r in rules)
+        assert report[("mot", "cle")][0] == (2, 13, 14, 23)    # most frequent first
+
+    def test_failure_keeps_beta_none(self):
+        rules = [ExprRule("brief", ("a", "b"), freq=1.0)]
+        pool = [PoolExpression(("a", "b"), 1.0,
+                               (Token("a", ((13,),)), Token("b", ((13,),))))]
+        report = assignBriefStrokes(rules, pool, self.ctx(singles={(13,)}),
+                                    freeChords=[])
+        assert report == {("a", "b"): None}
+        assert rules[0].beta is None
+
+    def test_unknown_expression_fails_and_attaches_are_ignored(self):
+        rules = [ExprRule("brief", ("nowhere", "here"), freq=1.0),
+                 ExprRule("attach", ("de",), position=PREFIX)]
+        report = assignBriefStrokes(rules, self.pool(), self.ctx())
+        assert report == {("nowhere", "here"): None}
+
+    def test_taken_strokes_are_respected(self):
+        rules = [ExprRule("brief", ("mot", "cle"), freq=9.0)]
+        report = assignBriefStrokes(rules, self.pool(), self.ctx(),
+                                    freeChords=[(2,)],
+                                    takenStrokes={(2, 13, 14, 23)})
+        assert report[("mot", "cle")] != ((2, 13, 14, 23), "union")
+        assert rules[0].beta is None or rules[0].beta[0] != (2, 13, 14, 23)
+
+
+class TestAuditWithBriefs:
+    def test_selected_briefs_compose_in_the_audit(self):
+        pool = TestAssignBriefStrokes.pool()
+        rule = ExprRule("brief", ("mot", "cle"), freq=9.0)
+        rule.beta = ((2, 13, 14, 23),)
+        audit = auditExpressionRules([rule], pool, TestDeriveBriefStroke.ctx())
+        assert audit.savingMass == 9.0 * 1      # 2 strokes -> 1, only the first expr
+        assert audit.shadows == [] and audit.collisions == {}
+
+    def test_brief_without_beta_is_ignored(self):
+        pool = TestAssignBriefStrokes.pool()
+        audit = auditExpressionRules([ExprRule("brief", ("mot", "cle"), freq=9.0)],
+                                     pool, TestDeriveBriefStroke.ctx())
+        assert audit.savingMass == 0

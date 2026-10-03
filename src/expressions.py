@@ -53,7 +53,7 @@ cover the tokens):
    question. (`_newBase` never sees this: affix keypresses exclude the
    reserved keys, and its carriers' base strokes carry none.)
 4. FAILURE LADDER per attach (the `_newBase` RULE ladder, src/affixes.py):
-   key overlap with the neighbour stroke (`ruleKeysOverlap`) or an illegal
+   key overlap with the neighbour stroke (`attachKeysOverlap`) or an illegal
    union chord (`SimContext.isLegal`) falls back to a STANDALONE stroke
    sorted(kappa) replacing the particle segment at its position (saving
    span-1); a standalone is itself impossible when the particle spanned one
@@ -62,6 +62,12 @@ cover the tokens):
    (noNeighbour, e.g. a trailing particle) never falls back — all three keep
    the particle's longform (EXCEPTION, saving 0, counted against the 5%
    exception gate by the selection phase).
+
+CLUSTER MERGE: consecutive attaches that all ended noNeighbour (no host word
+after/before them, e.g. a bare "qu' il") compose with each other: a group of two
+or more becomes ONE stroke, the union of the keypresses, when they share no
+syllabic key, the union chord is legal and it is not an existing single-stroke
+outline (first member STANDALONE / "attachCluster", the others MERGED).
 
 Outline assembly walks the stream in token order; an attach that falls
 inside a brief's residual span (standalone or exception strokes only — a
@@ -86,7 +92,7 @@ from __future__ import annotations
 from bisect import bisect_left
 from dataclasses import dataclass, field
 
-from src.affixes import PREFIX, SUFFIX, SimContext, hasBoundaryRisk, ruleKeysOverlap
+from src.affixes import PREFIX, SUFFIX, SimContext, hasBoundaryRisk
 from src.ambiguitychecker import HASH_KEY, STAR_KEY
 from src.keyboard import Stroke, Strokes, canonicalizeStrokes
 
@@ -101,6 +107,26 @@ KEPT = "kept"              # word/brief outcome: outline used as-is
 EXCEPTION = "exception"    # attach outcome: longform kept, saving 0 (ladder bottom)
 
 RESERVED_MARK_KEYS = (STAR_KEY, HASH_KEY)  # the */# variant selectors (Q2)
+
+
+# How many syllabic keys an attach keypress may share with its host stroke
+# (the union hides a shared key). 0 = strict: every merge is exactly
+# invertible (host = stroke minus keypress), what a decoding Plover
+# plugin needs. 1 = the max-1-key overlap study, see
+# NOTES_2026-10-03-attach-overlap-and-plover-decoder.md. Deliberately NOT
+# src.affixes.ruleKeysOverlap: main's affix layer ships explicit entries and
+# decides its own mode (refuse only on a full overlap); the expression layer
+# must not inherit that default when the branches merge.
+EXPR_MAX_SHARED_KEYS = 0
+
+
+def attachKeysOverlap(neighbour: Stroke, keys: Stroke,
+                      maxShared: int | None = None) -> bool:
+    """True when `keys` cannot merge into `neighbour`: more than `maxShared`
+    keys are shared (default `EXPR_MAX_SHARED_KEYS`). Callers pass syllabic
+    keys only; the */# selectors are transparent."""
+    limit = EXPR_MAX_SHARED_KEYS if maxShared is None else maxShared
+    return len(set(neighbour) & set(keys)) > limit
 
 
 def _syllabic(keys: Stroke) -> Stroke:
@@ -284,7 +310,7 @@ def composeOutlineTraced(rules: Rules, tokens: tuple[Token, ...],
                 continue
             neighbourIndex = 0 if position == PREFIX else len(outlines[target]) - 1
             neighbour = outlines[target][neighbourIndex]
-            if ruleKeysOverlap(_syllabic(neighbour), _syllabic(rule.keypress)):
+            if attachKeysOverlap(_syllabic(neighbour), _syllabic(rule.keypress)):
                 reason = "keyOverlap"
             else:
                 union = tuple(sorted(set(neighbour) | set(rule.keypress)))
@@ -304,6 +330,40 @@ def composeOutlineTraced(rules: Rules, tokens: tuple[Token, ...],
             else:
                 results[index] = (STANDALONE, reason)
 
+    # Hostless adjacent attaches (qu' + il with nothing after them) compose
+    # with each other: a run of consecutive noNeighbour attaches is greedily
+    # grouped, a group of two or more becomes ONE stroke, the union of its
+    # keypresses, when no syllabic key is shared (attachKeysOverlap), the
+    # union chord is legal, and it is not an existing single-stroke outline.
+    clusterStroke: dict[int, Stroke] = {}   # entry index -> the group's stroke (its first attach)
+
+    def flushCluster(group: list[int]) -> None:
+        if len(group) < 2:
+            return
+        union = tuple(sorted({k for i in group for k in plan.entries[i][1].keypress}))
+        if union in ctx.singleStrokeOutlines:
+            return
+        clusterStroke[group[0]] = union
+        results[group[0]] = (STANDALONE, "attachCluster")
+        for i in group[1:]:
+            results[i] = (MERGED, "attachCluster")
+
+    group: list[int] = []
+    union_: set[int] = set()
+    for index, (kind, rule, span) in enumerate(plan.entries):
+        if kind == "attach" and results[index] == (EXCEPTION, "noNeighbour"):
+            keys = _syllabic(rule.keypress)
+            if group and (attachKeysOverlap(tuple(union_), keys)
+                          or not ctx.isLegal(_syllabic(tuple(sorted(union_ | set(rule.keypress)))))):
+                flushCluster(group)
+                group, union_ = [], set()
+            group.append(index)
+            union_ |= set(rule.keypress)
+        else:
+            flushCluster(group)
+            group, union_ = [], set()
+    flushCluster(group)
+
     # Final outline + trace, walking the entries in token order.
     final: list[Stroke] = []
     segments: list[Segment] = []
@@ -319,7 +379,7 @@ def composeOutlineTraced(rules: Rules, tokens: tuple[Token, ...],
                 segments.append(Segment(units, "attach", MERGED, (), None, rule,
                                         (span[0], span[1])))
             elif outcome == STANDALONE:
-                stroke = tuple(sorted(rule.keypress))
+                stroke = clusterStroke.get(index) or tuple(sorted(rule.keypress))
                 final.append(stroke)
                 segments.append(Segment(units, "attach", STANDALONE,
                                         (stroke,), attachReason, rule,
