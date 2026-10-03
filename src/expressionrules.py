@@ -365,6 +365,10 @@ def repairKeypresses(selected: list[ExprRule], report: dict,
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = 120.0
+    # equal-objective optima exist (equal scores, equal rank sums): a single
+    # worker and a fixed seed make the pick reproducible across runs
+    solver.parameters.num_workers = 1
+    solver.parameters.random_seed = 0
     status = solver.Solve(model)
     chosen: dict[str, tuple[int, ...]] = {}
     if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):

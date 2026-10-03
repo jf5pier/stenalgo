@@ -143,12 +143,14 @@ against the theory. Stacked attaches multiply the candidate count ((|K1|+1)(|K2|
   indices in `planStream` and a second `_composeOnce`).
 - FINDING, the driver is hash-seed dependent: Stage C breaks equal-score base ties by set/dict iteration order.
   With `PYTHONHASHSEED=1` the run gives 21.7% / 206 exceptions / 3.838e9 with briefs (`ne` base (8,17,25), `ce` (16,19,23));
-  with seed 2: 22.3% / 175 / 3.920e9 (`ne` (8,17,23), `ce` (16,19,25)). Unseeded runs vary. To be fixed with a deterministic
-  tie-break (see TODO.md); until then the md5 comparison against a baseline is meaningless.
+  with seed 2: 22.3% / 175 / 3.920e9 (`ne` (8,17,23), `ce` (16,19,25)). Unseeded runs varied. FIXED: `repairKeypresses` (Stage C CP-SAT) now runs with `num_workers = 1` and
+  `random_seed = 0`; seeds 1 and 2 give identical `scratch/expr-*` outputs (21.7%, 206 exceptions, 3.838e9 with briefs);
+  baseline md5s in `scratch/md5_expr_deterministic.txt` (`md5sum -c` from the worktree root).
+  The earlier 22.3% outcome was a lucky tie-break, not a better design.
 
 ## 6. State (updated at the end of the 2026-10-03 later session)
 
 - Committed on the branch: the overlap policy (`attachKeysOverlap`, `EXPR_MAX_SHARED_KEYS = 0`), the cluster merge,
   the brief families / `_fallbackPair` / `assignBriefStrokes` work, the driver changes, tests (807 pass), and the TEMPORARY
   `from __future__ import annotations` in `src/affixes.py` (drop when main is merged).
-- The `scratch/expr-*` outputs in the commit are from a PYTHONHASHSEED=1-equivalent run (21.7%); they change once the tie-break is deterministic.
+- The `scratch/expr-*` outputs are now reproducible (21.7%); baseline `scratch/md5_expr_deterministic.txt`.

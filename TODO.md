@@ -15,7 +15,7 @@ Written to survive a `/clear` — read this file first in a fresh session.
   changes that constant.
 - Also drop the temporary `from __future__ import annotations` in `src/affixes.py` when merging main.
 - Driver nondeterminism (found 2026-10-03): `scratch/select_expression_rules.py` Stage C breaks equal-score base ties by
-  set/dict iteration order, so results depend on `PYTHONHASHSEED` (21.7% vs 22.3%). Make the tie-break deterministic.
+  set/dict iteration order, so results depend on `PYTHONHASHSEED` (21.7% vs 22.3%). FIXED 2026-10-03 (Stage C solver: one worker, fixed seed); baseline `scratch/md5_expr_deterministic.txt`.
 - Decided 2026-10-03: no que briefs (`QUE_BRIEF_BUDGET` removed); adjacent hostless attaches merge (`attachCluster`);
   a brief-wins-when-attach-fails fallback was measured (+2.9%) and rejected for decodability. See the NOTES file, section 5.
 

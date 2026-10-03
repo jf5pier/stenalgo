@@ -1,0 +1,6 @@
+7b125b31a3f5e46c1c66ff2f64ab3a9b  scratch/expr-rules.tsv
+cf5005d376167c008f852ab9294b6ec0  scratch/expr-rules-proxy.tsv
+d76a64400307bcf8585ea7893f2d9d00  scratch/expr-rules-final.json
+f615b4de1105c43fed5da93fb8afad59  scratch/expr-savings.tsv
+30e408603ceafa79065920244e3c72bc  scratch/expr-composability.tsv
+2b7aa6ada68ca81326dee60446557677  scratch/expr-briefs.tsv

@@ -17,10 +17,9 @@ Done, in order, with the user's go at each step:
 6. Committed on `abbreviations` (not pushed). Tests: 807 pass. `mypy` run bare in this worktree needs checking (a bare call from the repo root
    with the worktree's mypy.ini was not verified at the end).
 
-OPEN, next: **the driver is hash-seed dependent** (Stage C ties between equal-score bases follow set/dict iteration order):
-`PYTHONHASHSEED=1` -> 21.7% / 206 exceptions / 3.838e9 with briefs; seed 2 -> 22.3% / 175 / 3.920e9 (`ne` base (8,17,25) vs (8,17,23), `ce`
-(16,19,23) vs (16,19,25)). The user asked to make it deterministic right after the commit. After that, refresh the md5 baseline
-(`scratch/md5_expr_before_overlap_refactor.txt` is stale) and re-run twice under different seeds to prove identical outputs.
+FIXED (commit after c47db08): the driver was hash-seed dependent (Stage C repair CP-SAT ran multi-worker with equal-objective optima:
+21.7% vs 22.3%). It now runs `num_workers = 1`, `random_seed = 0`; seeds 1 and 2 give identical outputs (21.7%, 206 exceptions, 3.838e9 with briefs).
+The 22.3% was a lucky tie-break. Baseline: `scratch/md5_expr_deterministic.txt` (`md5sum -c` from the worktree root).
 Remaining from section 5: items 4 (suffix `le`/`les` save 0, low-mass rules), 5 (max-1-key study), 6 (collision, Phase 4 wiring and docs).
 
 ## 1. Where things are

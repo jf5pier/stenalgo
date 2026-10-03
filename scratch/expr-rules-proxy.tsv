@@ -4,9 +4,9 @@ rank	kind	family	expression	position	freq	strokes_saved	keys	score
 3	attach	à	à	prefix	267408208	1	9,17	2.751e+08
 4	attach	que	qu'	prefix	217698158	1	18,20,21	4.479e+08
 5	attach	que	que	prefix	197909645	1	10,18,20,21	2.083e+08
-6	attach	ne	n'	prefix	152965207	1	8,17,23	2.998e+08
-7	attach	ne	ne	prefix	44860332	1	8,10,17,23	4.893e+07
-8	attach	ne	n' y	prefix	11093429	2	8,15,17,23	2.104e+07
+6	attach	ne	n'	prefix	152965207	1	8,17,25	2.998e+08
+7	attach	ne	ne	prefix	44860332	1	8,10,17,25	4.893e+07
+8	attach	ne	n' y	prefix	11093429	2	8,15,17,25	2.104e+07
 9	attach	dans	dans	prefix	253868505	1	8,9,16	2.236e+08
 10	attach	et	et	prefix	285239034	1	8,16,19	2.857e+08
 11	attach	il	il	prefix	168319881	1	7,16,19	2.357e+08
@@ -20,10 +20,10 @@ rank	kind	family	expression	position	freq	strokes_saved	keys	score
 19	attach	les	les	prefix	33827184	1	2,10	3.383e+07
 20	attach	l'	l'	prefix	77616119	1	2,3,5	1.214e+08
 21	attach	je	je	prefix	112312128	1	4,16,19	7.449e+07
-22	attach	ce	ce	prefix	102898102	1	16,19,25	7.984e+07
-23	attach	ce	ce qui	prefix	24454906	2	10,16,19,25	7.955e+06
-24	attach	ce	ce que	suffix	23259462	2	15,16,19,25	1.627e+07
-25	attach	ce	ce qu' il	prefix	7114956	3	10,15,16,19,25	2.135e+06
+22	attach	ce	ce	prefix	102898102	1	16,19,23	7.984e+07
+23	attach	ce	ce qui	prefix	24454906	2	10,16,19,23	7.955e+06
+24	attach	ce	ce que	suffix	23259462	2	15,16,19,23	1.627e+07
+25	attach	ce	ce qu' il	prefix	7114956	3	10,15,16,19,23	2.135e+06
 26	brief		avec		4	p-	1.055e+08	1.055e+08	free	0			
 27	brief		dans la		4,5,6,7,11,12	pvmt@a	4.287e+07	4.287e+07	union	0			
 28	brief		après		5	v-	3.007e+07	3.007e+07	free	0			
