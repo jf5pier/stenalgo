@@ -2,7 +2,7 @@
 Diagnostic (hand-run, read-only): check that the affix abbreviations carry the conjugation / homograph markings
 of the regular theory, route by route, and explain every route that has no abbreviation.
 
-Run: python -m util.validate_affix_markings          (about 40 s; needs the same inputs as util.export_affix_dictionary)
+Run: python -m util.validate_affix_markings [--examples N]   (about 40 s; N: print N examples of each kind of lost route; needs the same inputs as util.export_affix_dictionary)
 Exit code 0: no violation; 1: a violation (listed).
 
 Checks, on the abbreviations rebuilt exactly as `util.export_affix_dictionary` builds them:
@@ -35,7 +35,8 @@ def routeOutline(rec: A.WordRecord, marks: tuple[int, ...], extra: Strokes) -> S
     return A.canonicalizeStrokes(A.withMarks(rec.base, marks) + extra)
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    nExamples = int(argv[argv.index("--examples") + 1]) if argv and "--examples" in argv else 0
     starboard = Starboard.fromJSONFile(KEYBOARD_JSON)
     if starboard is None or not os.path.exists(RULES_JSON):
         raise RuntimeError("run from the repo root, after util.build_affix_rules")
@@ -46,6 +47,11 @@ def main() -> int:
     ctx = A.SimContext(starboard, records)
     longOutline = {r.idx: A.canonicalizeStrokes(A.fullStrokesOf(r)) for r in records}
     taken = theoryOutlines(disambiguated)
+    theoryWord: dict[Strokes, set[str]] = {}
+    if nExamples:
+        for w, outs in disambiguated.items():
+            for o in outs:
+                theoryWord.setdefault(A.canonicalizeStrokes(o), set()).add(w.ortho)
     abbreviations, _stats = buildAbbreviations(loadRuleSpecs(RULES_JSON), pool, ctx, taken, longOutline)
 
     routeOf: dict[tuple[str, Strokes], list[tuple[A.WordRecord, int]]] = {}
@@ -79,6 +85,7 @@ def main() -> int:
             errors.append(f"A: {a.ortho} route {ri}: stray mark keys {sorted(elsewhere)} in the base strokes")
 
     present = Counter()
+    lostExamples: dict[str, list[str]] = {"theory": [], "abbreviation": []}
     gaps: list[str] = []
     potential = 0
     siblings: dict[int, list[int]] = {}
@@ -97,10 +104,23 @@ def main() -> int:
                 present["has an abbreviation"] += 1
                 continue
             cand = A.canonicalizeStrokes(A.withMarks(shortBase, marks) + extra)
+            shown = renderFinalStrokesToRTFCRE(starboard, cand)
+            mine = f"{rec.ortho} (freq {rec.frequency:.1f}) route {ri}, long {renderFinalStrokesToRTFCRE(starboard, routeOutline(rec, marks, extra))}"
             if cand in taken:
                 present["lost: outline taken by the stable theory"] += 1
+                if nExamples:
+                    lostExamples["theory"].append(f"{mine}: wanted {shown}, which the theory gives to {sorted(theoryWord.get(cand, ()))}")
             elif cand in owner:
-                present["lost: outline taken by another abbreviation"] += 1
+                o = owner[cand]
+                if o.ortho == rec.ortho:
+                    present["not lost: the same spelling already owns that outline"] += 1
+                    continue
+                present["lost: outline taken by another spelling's abbreviation"] += 1
+                if o.frequency < rec.frequency:
+                    present["  of which the winner is the LESS frequent spelling (primary routes go first)"] += 1
+                if nExamples:
+                    lostExamples["abbreviation"].append(
+                        f"{mine}: wanted {shown}, kept by {o.ortho} (freq {o.frequency:.1f}, route {o.route})")
             else:
                 present["GAP"] += 1
                 gaps.append(f"{rec.ortho} route {ri}: {renderFinalStrokesToRTFCRE(starboard, cand)} is free but absent")
@@ -121,6 +141,10 @@ def main() -> int:
           f"{sum(len(routesOf(records[i])) for i in siblings)} ({potential} beyond the first)")
     for k, v in present.most_common():
         print(f"  {v:7d}  {k}")
+    for kind, lines in lostExamples.items():
+        lines.sort(key=lambda t: -float(t.split("freq ")[1].split(")")[0]))
+        for ln in lines[:nExamples]:
+            print(f"LOST to {kind}: {ln}")
     for e in errors[:40]:
         print("VIOLATION", e)
     if len(errors) > 40:
@@ -130,4 +154,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(sys.argv[1:]))
