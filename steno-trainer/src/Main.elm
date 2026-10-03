@@ -67,6 +67,7 @@ type alias Model =
     , notation : Notation
     , definitions : Maybe (LoadState Definitions)
     , lessons : Maybe (LoadState Lessons)
+    , affixData : Maybe Lessons.AffixData -- affix-lessons.json, when it came back (the stub stays otherwise)
     , selectedLesson : Maybe String
     , query : String
     , hints : Bool
@@ -87,6 +88,7 @@ type Msg
     | ToggleNotation
     | GotDefinitions (Result Http.Error Definitions)
     | GotLessons (Result Http.Error Lessons)
+    | GotAffixData (Result Http.Error Lessons.AffixData)
     | SelectLesson String
     | PrevLesson
     | NextLesson
@@ -113,6 +115,7 @@ init _ =
       , notation = Notation.XSampa
       , definitions = Nothing
       , lessons = Nothing
+      , affixData = Nothing
       , selectedLesson = Nothing
       , query = ""
       , hints = True
@@ -159,7 +162,10 @@ update msg model =
 
             else if mode == LessonMode && model.lessons == Nothing then
                 ( { model | mode = mode, drill = Nothing, typed = noTypedStrokes, selectedLesson = Nothing, lessons = Just Loading }
-                , Http.get { url = "public/data/lessons.json", expect = Http.expectJson GotLessons Lessons.decoder }
+                , Cmd.batch
+                    [ Http.get { url = "public/data/lessons.json", expect = Http.expectJson GotLessons Lessons.decoder }
+                    , Http.get { url = "public/data/affix-lessons.json", expect = Http.expectJson GotAffixData Lessons.affixDecoder }
+                    ]
                 )
 
             else if mode == LessonMode then
@@ -180,7 +186,26 @@ update msg model =
             ( { model | definitions = Just (Failed (httpErrorToString err)) }, Cmd.none )
 
         GotLessons (Ok lessons) ->
-            ( { model | lessons = Just (Loaded lessons) }, Cmd.none )
+            ( { model | lessons = Just (Loaded (mergeAffix model.affixData lessons)) }, Cmd.none )
+
+        GotAffixData (Ok data) ->
+            -- Whichever of lessons.json / affix-lessons.json arrives last does the merge.
+            ( { model
+                | affixData = Just data
+                , lessons =
+                    case model.lessons of
+                        Just (Loaded lessons) ->
+                            Just (Loaded (Lessons.mergeAffixData data lessons))
+
+                        other ->
+                            other
+              }
+            , Cmd.none
+            )
+
+        GotAffixData (Err _) ->
+            -- Optional layer: without the file the affixes track keeps its stub lesson.
+            ( model, Cmd.none )
 
         GotLessons (Err err) ->
             ( { model | lessons = Just (Failed (httpErrorToString err)) }, Cmd.none )
@@ -288,6 +313,16 @@ update msg model =
                 Err _ ->
                     -- Malformed packet -- ignore.
                     ( model, Cmd.none )
+
+
+mergeAffix : Maybe Lessons.AffixData -> Lessons -> Lessons
+mergeAffix affixData lessons =
+    case affixData of
+        Just data ->
+            Lessons.mergeAffixData data lessons
+
+        Nothing ->
+            lessons
 
 
 noTypedStrokes : TypedStrokes
@@ -591,7 +626,13 @@ viewSidebarLegends : Model -> List (Html Msg)
 viewSidebarLegends model =
     case model.layout of
         Loaded layout ->
-            [ Keyboard.viewLegends (Notation.layout model.notation layout) ]
+            [ Keyboard.viewLegends (Notation.layout model.notation layout)
+                (model.affixData
+                    |> Maybe.map .rules
+                    |> Maybe.withDefault []
+                    |> List.map (\rule -> { rule | keyNames = List.map (Notation.render model.notation) rule.keyNames })
+                )
+            ]
 
         _ ->
             []
