@@ -1,4 +1,4 @@
-module Lessons exposing (Lesson, Lessons, Rule, Track, decoder, viewIntro, viewList, viewPrevNext)
+module Lessons exposing (AffixData, Lesson, Lessons, Rule, Track, affixDecoder, decoder, mergeAffixData, viewIntro, viewList, viewPrevNext)
 
 {-| Lesson mode: the fixed learner progression exported by
 `util/export_lessons.py` (`lessons.json`) -- tracks of lessons, each lesson
@@ -68,6 +68,45 @@ decoder =
     D.map2 Lessons
         (D.field "tracks" (D.list trackDecoder))
         (D.field "lessons" (D.list lessonDecoder))
+
+
+{-| `affix-lessons.json` (`util/export_affix_lessons.py`): the affix rules and
+the `affixes` track's lessons, which replace the stub lesson of `lessons.json`
+(`mergeAffixData`). -}
+type alias AffixData =
+    { rules : List Keyboard.AffixRule
+    , lessons : List Lesson
+    }
+
+
+affixDecoder : D.Decoder AffixData
+affixDecoder =
+    D.map2 AffixData
+        (D.field "rules" (D.list Keyboard.affixRuleDecoder))
+        (D.field "lessons" (D.list lessonDecoder))
+
+
+{-| The lessons with the `affixes` track's lessons (the stub) replaced by the
+real ones, and that track's "à venir" description by a real one. An empty
+list of affix lessons keeps the stub. -}
+mergeAffixData : AffixData -> Lessons -> Lessons
+mergeAffixData data lessons =
+    if List.isEmpty data.lessons then
+        lessons
+
+    else
+        { tracks =
+            List.map
+                (\track ->
+                    if track.id == "affixes" then
+                        { track | description = "Une règle d'abréviation par leçon : un contour court pour chaque mot, le long reste accepté." }
+
+                    else
+                        track
+                )
+                lessons.tracks
+        , lessons = List.filter (\l -> l.track /= "affixes") lessons.lessons ++ data.lessons
+        }
 
 
 trackDecoder : D.Decoder Track

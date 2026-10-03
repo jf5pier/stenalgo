@@ -1,4 +1,4 @@
-module Keyboard exposing (KeyInfo, Layout, decoder, geminiKeymap, view, viewChordBoard, viewLegends)
+module Keyboard exposing (AffixRule, KeyInfo, Layout, affixRuleDecoder, decoder, geminiKeymap, view, viewChordBoard, viewLegends)
 
 {-| The virtual Starboard: decodes `keyboard-layout.json` (exported by
 `util/export_keyboard_layout.py` from the repo's own `Starboard` class) and
@@ -70,6 +70,24 @@ type alias ConjugationMarker =
     , keyNames : List String
     , label : String
     }
+
+
+{-| One affix abbreviation rule (`affix-lessons.json`, `rules`): the keys that
+stand for the affix and a French label ("préfixe « re- »"). Shown as the
+"Affix rules" legend once the affix data is loaded. -}
+type alias AffixRule =
+    { keys : List Int
+    , keyNames : List String
+    , label : String
+    }
+
+
+affixRuleDecoder : D.Decoder AffixRule
+affixRuleDecoder =
+    D.map3 AffixRule
+        (D.field "keys" (D.list D.int))
+        (D.field "keyNames" (D.list D.string))
+        (D.field "label" D.string)
 
 
 type alias Layout =
@@ -755,16 +773,23 @@ keyByIndex keys index =
 
 
 {-| The two plain-text legends too sparse/small to draw as a board: the
-3-/4-key thumb-only chords, and the same-lemma/conjugation marker keys.
+3-/4-key thumb-only chords, the same-lemma/conjugation marker keys, and (once loaded) the affix rules.
 Meant for a narrow sidebar column next to the page title, not stacked under
 the (tall) keyboards.
 -}
-viewLegends : Layout -> Html msg
-viewLegends layout =
+viewLegends : Layout -> List AffixRule -> Html msg
+viewLegends layout affixRules =
     div [ class "legends" ]
-        [ viewStrokeLegend layout.keys (List.filter (\l -> l.keyCount > 2) layout.phonemeLayers)
-        , viewConjugationLegend layout.conjugationMarkers
-        ]
+        ([ viewStrokeLegend layout.keys (List.filter (\l -> l.keyCount > 2) layout.phonemeLayers)
+         , viewConjugationLegend layout.conjugationMarkers
+         ]
+            ++ (if List.isEmpty affixRules then
+                    []
+
+                else
+                    [ viewAffixLegend affixRules ]
+               )
+        )
 
 
 viewStrokeLegend : List KeyInfo -> List PhonemeLayer -> Html msg
@@ -801,5 +826,17 @@ viewConjugationLegend markers =
         , ul [ class "legend" ]
             (markers
                 |> List.map (\m -> li [] [ text (String.join "+" m.keyNames ++ " : " ++ m.label) ])
+            )
+        ]
+
+
+{-| The affix rules, one per line: key names, then the affix they stand for. -}
+viewAffixLegend : List AffixRule -> Html msg
+viewAffixLegend rules =
+    div [ class "legend-block" ]
+        [ h3 [] [ text "Affix rules" ]
+        , ul [ class "legend" ]
+            (rules
+                |> List.map (\r -> li [] [ text (String.join "+" r.keyNames ++ " : " ++ r.label) ])
             )
         ]
