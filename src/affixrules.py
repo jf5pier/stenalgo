@@ -20,7 +20,7 @@ from src.affixbinding import (
     MAX_ALTERNATIVES, SAMPLE_CARRIERS, SPLIT_MAX_LOSS, PhonemeKeys, salientPhonemes, simScore)
 from src.affixes import (
     Binding, Candidate, Carrier, CarrierResult, RULE, SimContext, SimUnit, _exceptionShare, PREFIX,
-    makeSimUnit, mergeUnions, poolCarriers, simulate, simulateRuleUnits, ruleKeysOverlap)
+    makeSimUnit, mergeUnions, poolCarriers, simulate, simulateRuleBase, simulateRuleDelta, ruleKeysOverlap)
 from src.affixdecisions import Decisions
 from src.keyboard import Stroke
 
@@ -230,7 +230,7 @@ class KeySweep:
     alternative of each scoped carrier (`resolveFallbacks`' replacement) and the neighbour-stroke table."""
     units: list[SimUnit]
     alts: list[SimUnit | None]
-    scoped: list[bool]           # carrier is a scoped form with span > 1: it falls back when it gains nothing
+    scopedIdx: list[int]         # positions of the carriers of a scoped form with span > 1: they fall back when they gain nothing
     neighbours: list[Stroke]     # neighbour id -> stroke
     exclusionCount: int
     numForms: int
@@ -243,16 +243,16 @@ def prepareKeySweep(rule: Rule, carriers: list[Carrier], ctx: SimContext) -> Key
     units = [makeSimUnit(rule.position, c, ctx, ids) for c in carriers]
     hasScoped = any(f.isScoped for f in rule.forms)
     alts: list[SimUnit | None] = [None] * len(carriers)
-    scoped = [False] * len(carriers)
+    scopedIdx: list[int] = []
     if hasScoped:
         anchor = {c.rec.idx: c._replace(member=0) for c in rule.root.carriers}
         for i, c in enumerate(carriers):
             if c.span > 1 and rule.forms[c.member].isScoped:
-                scoped[i] = True
+                scopedIdx.append(i)
                 a = anchor.get(c.rec.idx)
                 if a is not None:   # a missing anchor raises KeyError only if this carrier fails, as in resolveFallbacks
                     alts[i] = makeSimUnit(rule.position, a, ctx, ids)
-    return KeySweep(units, alts, scoped, list(ids), exclusionCountOf(rule.forms), len(rule.forms), hasScoped, ctx)
+    return KeySweep(units, alts, scopedIdx, list(ids), exclusionCountOf(rule.forms), len(rule.forms), hasScoped, ctx)
 
 
 def sweepKey(sw: KeySweep, k: Stroke, limit: int | None) -> tuple[float, float, int]:
@@ -263,19 +263,20 @@ def sweepKey(sw: KeySweep, k: Stroke, limit: int | None) -> tuple[float, float, 
     X = mergeUnions(sw.neighbours, k, ctx)
     D = tuple(sorted(k))
     trap = D in ctx.singleStrokeOutlines
-    gains, reasons = simulateRuleUnits(units, ctx, X, D, trap)
+    base = simulateRuleBase(units, ctx, X, D, trap)
+    gains, reasons = base[0], base[1]
     nFallback = 0
     if sw.hasScoped:
-        failed = [i for i in range(len(units)) if sw.scoped[i] and gains[i] <= 0]
-        if failed:
-            units = list(units)
-            for i in failed:
+        repl: dict[int, SimUnit] = {}
+        for i in sw.scopedIdx:
+            if i < len(units) and gains[i] <= 0:
                 alt = sw.alts[i]
                 if alt is None:
                     raise KeyError(units[i].carrier.rec.idx)
-                units[i] = alt
-            nFallback = len(failed)
-            gains, reasons = simulateRuleUnits(units, ctx, X, D, trap)
+                repl[i] = alt
+        if repl:
+            nFallback = len(repl)
+            gains, reasons, units = simulateRuleDelta(units, base, repl, ctx, X, D, trap)
     benefit = 0.0
     exceptions: list[float] = []
     covered = 0
