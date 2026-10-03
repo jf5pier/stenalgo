@@ -114,8 +114,8 @@ pronunciation differs from the searched word's is a near-homophone: a word
 the layout happens to fold onto the same keys (e.g. /e/ and /O/ share one),
 which needs its marks just the same.
 -}
-view : (String -> String) -> String -> Definitions -> Html msg
-view render query definitions =
+view : (String -> String) -> Dict String (Dict String String) -> String -> Definitions -> Html msg
+view render abbreviations query definitions =
     let
         spelling =
             String.toLower (String.trim query)
@@ -133,12 +133,19 @@ view render query definitions =
         p [ class "definition-hint" ] [ text ("No word spelled \u{201C}" ++ spelling ++ "\u{201D} in the dictionary.") ]
 
     else
-        Html.div [] (List.map (viewGroup render spelling) groups)
+        Html.div [] (List.map (viewGroup render abbreviations spelling) groups)
 
 
-viewGroup : (String -> String) -> String -> Group -> Html msg
-viewGroup render spelling group =
+viewGroup : (String -> String) -> Dict String (Dict String String) -> String -> Group -> Html msg
+viewGroup render abbreviations spelling group =
     let
+        abbreviationOf entry chord =
+            Dict.get entry.ortho abbreviations
+                |> Maybe.andThen (Dict.get chord.steno)
+
+        hasAbbreviations =
+            List.any (\entry -> List.any (\chord -> abbreviationOf entry chord /= Nothing) entry.chords) group.entries
+
         searchedPhonologies =
             group.entries |> List.filter (\e -> e.ortho == spelling) |> List.map .phonology |> Set.fromList
 
@@ -150,18 +157,35 @@ viewGroup render spelling group =
             List.indexedMap
                 (\i chord ->
                     tr [ classList [ ( "searched", entry.ortho == spelling ), ( "near-homophone", nearHomophone ) ] ]
-                        [ td [] [ text (ifFirst i entry.ortho) ]
-                        , td [] [ text (ifFirst i ("/" ++ render entry.phonology ++ "/")) ]
-                        , td [ class "definition-steno" ] [ text (render chord.steno) ]
-                        , td [] [ text chord.label ]
-                        ]
+                        ([ td [] [ text (ifFirst i entry.ortho) ]
+                         , td [] [ text (ifFirst i ("/" ++ render entry.phonology ++ "/")) ]
+                         , td [ class "definition-steno" ] [ text (render chord.steno) ]
+                         , td [] [ text chord.label ]
+                         ]
+                            ++ (if hasAbbreviations then
+                                    [ td [ class "definition-steno" ] [ text (abbreviationOf entry chord |> Maybe.map render |> Maybe.withDefault "") ] ]
+
+                                else
+                                    []
+                               )
+                        )
                 )
                 entry.chords
     in
     Html.div [ class "definition-group" ]
         [ h3 [] [ text ("Base chord " ++ render group.base) ]
         , table [ class "definition-table" ]
-            [ thead [] [ tr [] [ th [] [ text "Word" ], th [] [ text "Pronunciation" ], th [] [ text "Chord" ], th [] [ text "Reading" ] ] ]
+            [ thead []
+                [ tr []
+                    ([ th [] [ text "Word" ], th [] [ text "Pronunciation" ], th [] [ text "Chord" ], th [] [ text "Reading" ] ]
+                        ++ (if hasAbbreviations then
+                                [ th [] [ text "Abbrev." ] ]
+
+                            else
+                                []
+                           )
+                    )
+                ]
             , tbody [] (List.concatMap entryRows group.entries)
             ]
         ]

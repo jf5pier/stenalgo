@@ -13,8 +13,13 @@ with context words -- "la maison", "que tu viennes", "parle !"), **Sentences**
 (217 short sentences, word by word), **Definitions** (look up a spelling's
 homophones) and **Lessons** (the fixed progression of `lessons.json`: read a
 lesson's rules, then drill its own word pool). A hints toggle hides the
-expected strokes and keys; an X-SAMPA/IPA
-toggle switches every phoneme on the page. Deliberately no progress
+expected strokes and keys; an "Affix rule hint" toggle (on by default in
+Words, Sentences and the Affixes lessons) shows under the chord board the affix
+rules that shorten the current word; an X-SAMPA/IPA
+toggle switches every phoneme on the page. Every drill has "Previous word"/"Next word" buttons and a
+**Simulate** button over the keyboard, which lights the current word's strokes
+(1 s + 0.2 s per key for an intermediate stroke, 3 s for the last; green, yellow for a
+conjugation marker; the 2-key phoneme badges and the 3-/4-key legend lines light with them). Deliberately no progress
 tracking/persistence and no WPM stats: reloading starts a fresh shuffle.
 
 ## Stack
@@ -50,8 +55,11 @@ python -m util.export_lessons              # lessons mode's generated progressio
 python -m util.export_affix_lessons        # optional, after util.export_affix_dictionary: the affixes track (docs/specs/affix-lessons.md)
 ```
 
-`public/data/affix-lessons.json` is optional: when Lessons mode finds it, its 30 rule lessons and its lesson on
-conjugated forms replace the stub of the `affixes` track in `lessons.json`, and an "Affix rules" legend joins the sidebar.
+`public/data/affix-lessons.json` is optional: it is fetched at startup, and its 30 rule lessons and its lesson on
+conjugated forms replace the stub of the `affixes` track in `lessons.json`, and the "Affix rule hint" toggle shows, under the chord board, the rules that shorten the current word
+(its `rule` field; only the words those lessons teach have one).
+`public/data/affix-abbreviations.json` (`python -m util.export_affix_abbreviations`, from `affix_abbreviations.tsv`, ~3.6 MB) is optional too: the Definitions page
+fetches it and adds an "Abbrev." column to the base-chord tables with at least one abbreviated row.
 In those lessons a word's hint shows the short outline, but the drill accepts either the short or the long outline
 (`alternates` in the word record; `Drill.applyStroke` follows whichever outline the strokes typed so far start).
 

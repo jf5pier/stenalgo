@@ -265,6 +265,7 @@ Affix Abbreviation Building (S9) ................. optional layer after the fini
 │       ← affix_decisions.json (committed verdicts), AffixSelection.pickle (cache) → affix_rules.json, affix_rules_report.md
 └─ S9b  Affix dictionary — python -m util.export_affix_dictionary → plover_stenalgo_affix_dictionary.json, affix_abbreviations.tsv
 └─ S9c  Trainer affix lessons — python -m util.export_affix_lessons → steno-trainer/public/data/affix-lessons.json
+└─ S9d  Trainer abbreviation column — python -m util.export_affix_abbreviations → steno-trainer/public/data/affix-abbreviations.json (from affix_abbreviations.tsv; the Definitions page's "Abbrev." column)
 ```
 
 The two homophone problems have two mechanisms. Words that are forms of the same lemma and
@@ -1966,6 +1967,12 @@ collides with `plover_stenalgo_dictionary.json`.
 
 **Called by** `python dictionary.py` (after S9b), or by hand.
 **Input state** the same as S9b (loaded through `util/_affixio.loadAbbreviations`).
-**Transformation** per rule (rank order) the 20 most frequent carriers of its primary route, then one lesson of the 20 most frequent
-marked routes (route >= 1) of verbs; schema and text conventions in `docs/specs/affix-lessons.md`.
+**Transformation** per rule (rank order) the 20 most frequent spellings among its carriers of the primary route (homographs merged, their outlines in `alternates`),
+then one lesson of the 20 most frequent marked routes (route >= 1) of verbs (one record per form, labelled lemma + tense + person); schema and text conventions in `docs/specs/affix-lessons.md`.
 **Artifacts** writes `steno-trainer/public/data/affix-lessons.json` only; the other trainer files stay byte-identical.
+
+### Trainer abbreviation column — util/export_affix_abbreviations.main (S9d)
+
+**Called by** `python dictionary.py` (after S9c), or by hand. **Input state** `affix_abbreviations.tsv` (S9b).
+**Transformation** spelling -> {long outline -> short outline}, first TSV row winning a shared long outline.
+**Artifacts** writes `steno-trainer/public/data/affix-abbreviations.json`, which the trainer's Definitions page matches by spelling and chord to fill its "Abbrev." column.

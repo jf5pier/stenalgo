@@ -118,7 +118,7 @@ TRACKS = (
     ("accord", "Accord (genre et nombre)", "Les marques de genre et de nombre."),
     ("verbe", "Verbes", "Les marques de conjugaison, temps par temps."),
     ("desambiguation", "Désambiguïsation", "Les marques * et # qui distinguent les homophones."),
-    ("affixes", "Affixes", "Abréviations d'affixes — à venir."),
+    ("affixes", "Affixes", "Une règle d'abréviation par leçon : un contour court pour chaque mot, le long reste accepté."),
 )
 TRACK_TITLES = {trackId: title for trackId, title, _description in TRACKS}
 

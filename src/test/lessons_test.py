@@ -859,7 +859,7 @@ class TestBuildLessonsDocument:
             {"id": "desambiguation", "title": "Désambiguïsation",
              "description": "Les marques * et # qui distinguent les homophones."},
             {"id": "affixes", "title": "Affixes",
-             "description": "Abréviations d'affixes — à venir."},
+             "description": "Une règle d'abréviation par leçon : un contour court pour chaque mot, le long reste accepté."},
         ]
 
     def test_per_track_counts_and_stream_counters(self, lessons):

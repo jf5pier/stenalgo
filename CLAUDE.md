@@ -110,6 +110,9 @@ python -m util.export_affix_lessons          # Affix Abbreviation Building (S9c)
 # Prerequisites: both pickles, starboard3h.json, the committed affix_rules.json. Outputs: steno-trainer/public/data/affix-lessons.json
 # (30 rule lessons + one on conjugated forms; the other trainer JSONs are untouched).
 
+python -m util.export_affix_abbreviations   # Affix Abbreviation Building (S9d): the Definitions page's "Abbrev." column
+# Prerequisites: affix_abbreviations.tsv (S9b). Outputs: steno-trainer/public/data/affix-abbreviations.json.
+
 python dictionary.py                         # the orchestrator over everything from S2 to S9
 # Prerequisites: as above (skips nothing; aborts on the first failing step).
 # Outputs: all of the S2-S9 outputs above, in dependency order; per-step wall times

@@ -1,4 +1,4 @@
-module Drill exposing (Outline, PracticeWord, Segment, State, applyStroke, currentSegmentIndex, currentWord, decoder, matchedOutline, expectedStroke, init, nextWord, reshuffle, sentenceDecoder, wordDecoder)
+module Drill exposing (Outline, PracticeWord, Segment, State, applyStroke, currentSegmentIndex, currentWord, decoder, skipWords, matchedOutline, expectedStroke, init, nextWord, reshuffle, sentenceDecoder, wordDecoder)
 
 {-| The drill engine: a shuffled walk through the word list (loaded already
 frequency-ordered by `util/export_practice_words.py`, but drilled in a
@@ -144,6 +144,20 @@ reshuffle words state =
         , currentWordIndex = 0
         , currentStrokeIndex = 0
         , typed = []
+    }
+
+
+{-| Jump `n` words ahead (negative: back) in the current pass, wrapping, and
+restart that word at its first stroke. For the "Previous word"/"Next word"
+buttons; going past the pass's end just wraps, the pass is reshuffled by
+`applyStroke` only. -}
+skipWords : Int -> State -> State
+skipWords n state =
+    { state
+        | currentWordIndex = wrappedIndex state (state.currentWordIndex + n)
+        , currentStrokeIndex = 0
+        , typed = []
+        , feedback = Nothing
     }
 
 

@@ -56,6 +56,7 @@ class WordRecord:
     markKeys: tuple[int, ...] = ()  # mark keys merged into the last base stroke
     routes: tuple[tuple[tuple[int, ...], Strokes], ...] = ()   # (markKeys, extra) of every distinct route of the Word
                                 # in the disambiguated theory, the primary one (== markKeys/extra) first; () = that one only
+    infoVerb: str = ""          # the Word's raw `infover` field (`ind:pre:3s;...`), for display only
 
 
 def routesOf(rec: "WordRecord") -> tuple[tuple[tuple[int, ...], Strokes], ...]:
@@ -97,7 +98,7 @@ def extractRecords(
             idx=len(records), ortho=word.ortho, lemme=word.lemme, gramCat=str(word.gramCat),
             frequency=float(word.frequency), phonoSylls=phono, orthoSylls=orthoS,
             base=base, extra=fullC[len(base):], isLemmaForm=(word.ortho == word.lemme),
-            markKeys=marks, routes=tuple(routes)))
+            markKeys=marks, routes=tuple(routes), infoVerb=word.infoVerb or ""))
     return records, skipped
 
 
