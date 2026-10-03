@@ -518,7 +518,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches w-, -j pressées ensemble remplacent le préfixe « a- » (aussi ah-, ha-, hâ-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches w- + -j pressées ensemble remplacent le préfixe « a- » (aussi ah-, ha-, hâ-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -563,7 +563,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "amour",
@@ -598,7 +599,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "avais",
@@ -636,8 +638,40 @@
          19
         ]
        ]
+      },
+      {
+       "steno": "a/vie/-k",
+       "strokes": [
+        [
+         12
+        ],
+        [
+         5,
+         13,
+         14
+        ],
+        [
+         18
+        ]
+       ]
+      },
+      {
+       "steno": "vwiej/-k",
+       "strokes": [
+        [
+         5,
+         9,
+         13,
+         14,
+         16
+        ],
+        [
+         18
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "assez",
@@ -668,46 +702,8 @@
         ]
        ]
       }
-     ]
-    },
-    {
-     "ortho": "avais",
-     "before": "",
-     "after": "",
-     "label": "préfixe « a- » (aussi ah-, ha-, hâ-) · économise un trait",
-     "phonology": "a.vE",
-     "steno": "vwiej/-k",
-     "strokes": [
-      [
-       5,
-       9,
-       13,
-       14,
-       16
-      ],
-      [
-       18
-      ]
      ],
-     "frequency": 373.32,
-     "alternates": [
-      {
-       "steno": "a/vie/-k",
-       "strokes": [
-        [
-         12
-        ],
-        [
-         5,
-         13,
-         14
-        ],
-        [
-         18
-        ]
-       ]
-      }
-     ]
+     "rule": 1
     },
     {
      "ortho": "ami",
@@ -738,7 +734,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "avons",
@@ -771,7 +768,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "amis",
@@ -808,7 +806,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "attendez",
@@ -849,7 +848,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "affaire",
@@ -886,7 +886,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "appeler",
@@ -935,7 +936,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "années",
@@ -974,7 +976,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "affaires",
@@ -1016,8 +1019,44 @@
          17
         ]
        ]
+      },
+      {
+       "steno": "a/kpieR/-d",
+       "strokes": [
+        [
+         12
+        ],
+        [
+         2,
+         4,
+         13,
+         14,
+         21
+        ],
+        [
+         19
+        ]
+       ]
+      },
+      {
+       "steno": "kpwiejR/-d",
+       "strokes": [
+        [
+         2,
+         4,
+         9,
+         13,
+         14,
+         16,
+         21
+        ],
+        [
+         19
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "arriver",
@@ -1062,7 +1101,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "arrêter",
@@ -1104,7 +1144,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "attendre",
@@ -1139,7 +1180,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "arrêtez",
@@ -1181,7 +1223,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "attend",
@@ -1212,7 +1255,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "attention",
@@ -1257,7 +1301,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "appelé",
@@ -1300,7 +1345,40 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
+    },
+    {
+     "ortho": "avis",
+     "before": "",
+     "after": "",
+     "label": "préfixe « a- » (aussi ah-, ha-, hâ-) · économise un trait",
+     "phonology": "a.vi",
+     "steno": "vwij",
+     "strokes": [
+      [
+       5,
+       9,
+       13,
+       16
+      ]
+     ],
+     "frequency": 139.22,
+     "alternates": [
+      {
+       "steno": "a/vi",
+       "strokes": [
+        [
+         12
+        ],
+        [
+         5,
+         13
+        ]
+       ]
+      }
+     ],
+     "rule": 1
     }
    ]
   },
@@ -1326,7 +1404,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches -j, -t, -m pressées ensemble remplacent le suffixe « -ment » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches -jtm pressées ensemble remplacent le suffixe « -ment » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -1371,7 +1449,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "seulement",
@@ -1410,7 +1489,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "tellement",
@@ -1451,7 +1531,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "exactement",
@@ -1505,7 +1586,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "sûrement",
@@ -1545,7 +1627,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "complètement",
@@ -1599,7 +1682,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "doucement",
@@ -1641,7 +1725,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "absolument",
@@ -1692,7 +1777,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "simplement",
@@ -1736,7 +1822,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "appartement",
@@ -1782,7 +1869,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "probablement",
@@ -1837,7 +1925,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "justement",
@@ -1881,7 +1970,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "gouvernement",
@@ -1936,7 +2026,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "vêtements",
@@ -1982,7 +2073,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "immédiatement",
@@ -2040,7 +2132,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "certainement",
@@ -2093,7 +2186,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "finalement",
@@ -2144,7 +2238,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "parfaitement",
@@ -2196,7 +2291,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "autrement",
@@ -2235,7 +2331,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     },
     {
      "ortho": "heureusement",
@@ -2288,7 +2385,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 2
     }
    ]
   },
@@ -2314,7 +2412,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches p-, m-, -j pressées ensemble remplacent le préfixe « am- » (aussi an-, ant-, em-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches pm- + -j pressées ensemble remplacent le préfixe « am- » (aussi an-, ant-, em-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -2363,7 +2461,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "enfant",
@@ -2396,7 +2495,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "enfin",
@@ -2433,7 +2533,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "entendu",
@@ -2472,7 +2573,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "ensemble",
@@ -2507,7 +2609,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "envie",
@@ -2539,7 +2642,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "endroit",
@@ -2576,7 +2680,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "entends",
@@ -2614,7 +2719,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "entrer",
@@ -2654,7 +2760,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "entendre",
@@ -2690,7 +2797,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "ensuite",
@@ -2728,7 +2836,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "entrez",
@@ -2768,7 +2877,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "envoie",
@@ -2802,7 +2912,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "enfer",
@@ -2839,7 +2950,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "envoyé",
@@ -2880,7 +2992,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "emmène",
@@ -2915,7 +3028,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "emmener",
@@ -2964,7 +3078,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "envoyer",
@@ -3011,7 +3126,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "ennuis",
@@ -3054,7 +3170,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     },
     {
      "ortho": "empêcher",
@@ -3101,7 +3218,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 3
     }
    ]
   },
@@ -3125,7 +3243,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches w-, -d pressées ensemble remplacent le préfixe « co- » (aussi col-, com-, con-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches w- + -d pressées ensemble remplacent le préfixe « co- » (aussi col-, com-, con-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -3178,7 +3296,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "combien",
@@ -3220,7 +3339,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "comprends",
@@ -3261,7 +3381,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "compris",
@@ -3296,7 +3417,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "confiance",
@@ -3336,7 +3458,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "commence",
@@ -3371,7 +3494,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "comprendre",
@@ -3409,7 +3533,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "connaissez",
@@ -3454,7 +3579,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "connaît",
@@ -3491,7 +3617,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "colonel",
@@ -3542,7 +3669,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "commencé",
@@ -3579,7 +3707,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "commencer",
@@ -3622,7 +3751,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "connaître",
@@ -3663,7 +3793,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "continuer",
@@ -3716,7 +3847,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "continue",
@@ -3760,8 +3892,52 @@
          13
         ]
        ]
+      },
+      {
+       "steno": "kai/ti/mR@i/-j",
+       "strokes": [
+        [
+         2,
+         12,
+         13
+        ],
+        [
+         7,
+         13
+        ],
+        [
+         6,
+         8,
+         11,
+         13
+        ],
+        [
+         16
+        ]
+       ]
+      },
+      {
+       "steno": "twid/mR@i/-j",
+       "strokes": [
+        [
+         7,
+         9,
+         13,
+         19
+        ],
+        [
+         6,
+         8,
+         11,
+         13
+        ],
+        [
+         16
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "conneries",
@@ -3811,7 +3987,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "connu",
@@ -3848,7 +4025,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "compagnie",
@@ -3889,7 +4067,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "comprenez",
@@ -3936,7 +4115,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "conseil",
@@ -3973,7 +4153,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     }
    ]
   },
@@ -3997,7 +4178,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches w-, -k pressées ensemble remplacent le préfixe « re- » (aussi reh-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches w- + -k pressées ensemble remplacent le préfixe « re- » (aussi reh-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -4043,7 +4224,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "reviens",
@@ -4089,7 +4271,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "retour",
@@ -4126,7 +4309,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "retard",
@@ -4161,7 +4345,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "revenir",
@@ -4208,7 +4393,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "retrouver",
@@ -4259,7 +4445,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "ressemble",
@@ -4296,7 +4483,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "retourne",
@@ -4335,7 +4523,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "retourner",
@@ -4388,7 +4577,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "reçu",
@@ -4423,7 +4613,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "revient",
@@ -4463,7 +4654,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "retrouve",
@@ -4504,7 +4696,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "revenu",
@@ -4551,7 +4744,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "regard",
@@ -4588,7 +4782,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "regrette",
@@ -4629,7 +4824,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "remercie",
@@ -4674,7 +4870,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "retrouvé",
@@ -4719,7 +4916,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "refuse",
@@ -4760,7 +4958,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "recherche",
@@ -4803,7 +5002,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     },
     {
      "ortho": "repas",
@@ -4836,7 +5036,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 5
     }
    ]
   },
@@ -4862,7 +5063,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches -j, -s, -t pressées ensemble remplacent le suffixe « -ccion » (aussi -cion, -cyon, -sion) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches -jst pressées ensemble remplacent le suffixe « -ccion » (aussi -cion, -cyon, -sion) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -4918,7 +5119,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "impression",
@@ -4966,7 +5168,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "mission",
@@ -5002,7 +5205,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "félicitations",
@@ -5068,7 +5272,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "solution",
@@ -5118,7 +5323,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "position",
@@ -5161,7 +5367,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "opération",
@@ -5209,7 +5416,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "action",
@@ -5245,7 +5453,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "relation",
@@ -5288,7 +5497,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "direction",
@@ -5338,7 +5548,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "intention",
@@ -5384,7 +5595,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "informations",
@@ -5444,7 +5656,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "pression",
@@ -5484,7 +5697,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "conversation",
@@ -5538,7 +5752,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "relations",
@@ -5587,7 +5802,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "passion",
@@ -5623,7 +5839,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "permission",
@@ -5671,7 +5888,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "émission",
@@ -5713,7 +5931,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "imagination",
@@ -5770,7 +5989,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     },
     {
      "ortho": "station",
@@ -5808,7 +6028,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 6
     }
    ]
   },
@@ -5832,7 +6053,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches k-, v- pressées ensemble remplacent le préfixe « é- » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches kv- pressées ensemble remplacent le préfixe « é- » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -5876,7 +6097,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "étaient",
@@ -5917,7 +6139,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "école",
@@ -5949,7 +6172,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "état",
@@ -5980,7 +6204,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "écrit",
@@ -6012,7 +6237,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "équipe",
@@ -6046,7 +6272,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "étiez",
@@ -6081,7 +6308,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "écoutez",
@@ -6127,7 +6355,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "écrire",
@@ -6161,7 +6390,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "écouter",
@@ -6207,7 +6437,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "étrange",
@@ -6242,7 +6473,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "époque",
@@ -6275,7 +6507,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "église",
@@ -6315,7 +6548,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "épouser",
@@ -6364,7 +6598,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "éviter",
@@ -6408,7 +6643,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "étions",
@@ -6445,7 +6681,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "énergie",
@@ -6492,7 +6729,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "épouse",
@@ -6529,7 +6767,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "énorme",
@@ -6566,7 +6805,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "échapper",
@@ -6613,7 +6853,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     }
    ]
   },
@@ -6639,7 +6880,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches s-, w-, -k pressées ensemble remplacent le préfixe « de- » (aussi des-, dé-, déh-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches sw- + -k pressées ensemble remplacent le préfixe « de- » (aussi des-, dé-, déh-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -6696,7 +6937,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "début",
@@ -6733,7 +6975,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "désolée",
@@ -6786,7 +7029,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "décidé",
@@ -6829,7 +7073,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "déteste",
@@ -6869,7 +7114,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "départ",
@@ -6905,7 +7151,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "dérange",
@@ -6941,7 +7188,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "dégage",
@@ -6978,7 +7226,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "dépêche",
@@ -7018,7 +7267,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "décision",
@@ -7065,7 +7315,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "déjeuner",
@@ -7110,8 +7361,53 @@
          14
         ]
        ]
+      },
+      {
+       "steno": "pve/vt@/mRe/-l",
+       "strokes": [
+        [
+         4,
+         5,
+         14
+        ],
+        [
+         5,
+         7,
+         11
+        ],
+        [
+         6,
+         8,
+         14
+        ],
+        [
+         23
+        ]
+       ]
+      },
+      {
+       "steno": "svtw@k/mRe/-l",
+       "strokes": [
+        [
+         3,
+         5,
+         7,
+         9,
+         11,
+         18
+        ],
+        [
+         6,
+         8,
+         14
+        ],
+        [
+         23
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "détruire",
@@ -7153,7 +7449,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "défense",
@@ -7191,7 +7488,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "dépend",
@@ -7225,7 +7523,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "découvert",
@@ -7273,7 +7572,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "décider",
@@ -7322,7 +7622,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "démon",
@@ -7358,7 +7659,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "désormais",
@@ -7405,7 +7707,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "découvrir",
@@ -7453,7 +7756,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     },
     {
      "ortho": "défendre",
@@ -7493,7 +7797,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 8
     }
    ]
   },
@@ -7519,7 +7824,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches t-, R-, w- pressées ensemble remplacent le préfixe « ain- » (aussi hin-, im-, in-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches tRw- pressées ensemble remplacent le préfixe « ain- » (aussi hin-, im-, in-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -7567,7 +7872,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "ainsi",
@@ -7601,7 +7907,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "important",
@@ -7645,7 +7952,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "impossible",
@@ -7693,7 +8001,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "inquiète",
@@ -7733,7 +8042,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "intérieur",
@@ -7773,7 +8083,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "intéresse",
@@ -7814,7 +8125,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "intérêt",
@@ -7853,7 +8165,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "importance",
@@ -7899,7 +8212,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "intéressant",
@@ -7946,7 +8260,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "interdit",
@@ -7993,7 +8308,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "inquiétez",
@@ -8043,7 +8359,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "importante",
@@ -8089,7 +8406,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "imbécile",
@@ -8135,7 +8453,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "intelligent",
@@ -8188,7 +8507,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "invite",
@@ -8224,7 +8544,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "invité",
@@ -8266,7 +8587,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "inquiéter",
@@ -8316,7 +8638,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "infirmière",
@@ -8370,7 +8693,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "invités",
@@ -8418,7 +8742,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     }
    ]
   },
@@ -8444,7 +8769,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches k-, m-, -d pressées ensemble remplacent le préfixe « de- » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches km- + -d pressées ensemble remplacent le préfixe « de- » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -8492,7 +8817,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "demande",
@@ -8527,7 +8853,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "devrais",
@@ -8572,7 +8899,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "demandé",
@@ -8613,7 +8941,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "devrait",
@@ -8652,7 +8981,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "devant",
@@ -8687,7 +9017,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "demander",
@@ -8734,7 +9065,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "devez",
@@ -8769,7 +9101,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "devons",
@@ -8806,7 +9139,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "dessus",
@@ -8843,7 +9177,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "devait",
@@ -8880,7 +9215,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "devenir",
@@ -8923,7 +9259,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "devenu",
@@ -8966,7 +9303,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "debout",
@@ -9005,7 +9343,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "devais",
@@ -9048,7 +9387,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "dedans",
@@ -9085,7 +9425,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "devoir",
@@ -9124,7 +9465,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "devient",
@@ -9167,7 +9509,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "demandez",
@@ -9214,7 +9557,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "demandais",
@@ -9263,7 +9607,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     }
    ]
   },
@@ -9289,7 +9634,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches v-, -k, -d pressées ensemble remplacent le préfixe « ai- » (aussi aî-, e-, ei-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches v- + -kd pressées ensemble remplacent le préfixe « ai- » (aussi aî-, e-, ei-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -9339,7 +9684,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "excusez",
@@ -9386,7 +9732,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "aimerais",
@@ -9437,7 +9784,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "essayer",
@@ -9483,7 +9831,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "essayé",
@@ -9526,7 +9875,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "excuse",
@@ -9567,7 +9917,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "erreur",
@@ -9602,7 +9953,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "aimer",
@@ -9641,7 +9993,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "expliquer",
@@ -9688,7 +10041,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "aimé",
@@ -9721,7 +10075,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "aidez",
@@ -9761,7 +10116,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "aimez",
@@ -9800,7 +10156,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "ennemi",
@@ -9839,7 +10196,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "aimais",
@@ -9880,7 +10238,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "essaye",
@@ -9917,7 +10276,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "expérience",
@@ -9966,7 +10326,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "essayez",
@@ -10012,7 +10373,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "aimait",
@@ -10047,7 +10409,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "explique",
@@ -10089,7 +10452,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "excellent",
@@ -10135,8 +10499,48 @@
          11
         ]
        ]
+      },
+      {
+       "steno": "ie/ksiel/-st",
+       "strokes": [
+        [
+         13,
+         14
+        ],
+        [
+         2,
+         3,
+         13,
+         14,
+         23
+        ],
+        [
+         17,
+         20
+        ]
+       ]
+      },
+      {
+       "steno": "ksviekdl/-st",
+       "strokes": [
+        [
+         2,
+         3,
+         5,
+         13,
+         14,
+         18,
+         19,
+         23
+        ],
+        [
+         17,
+         20
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 11
     }
    ]
   },
@@ -10162,7 +10566,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches -j, -s, -d pressées ensemble remplacent le suffixe « -cer » (aussi -cé, -cée, -cés) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches -jsd pressées ensemble remplacent le suffixe « -cer » (aussi -cé, -cée, -cés) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -10211,7 +10615,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "passé",
@@ -10244,7 +10649,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "laissez",
@@ -10287,7 +10693,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "laisser",
@@ -10330,7 +10737,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "pensé",
@@ -10365,7 +10773,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "pensez",
@@ -10404,7 +10813,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "penser",
@@ -10443,7 +10853,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "laissé",
@@ -10480,7 +10891,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "danser",
@@ -10521,7 +10933,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "passez",
@@ -10560,7 +10973,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "blessé",
@@ -10601,7 +11015,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "cassé",
@@ -10634,7 +11049,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "lycée",
@@ -10669,7 +11085,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "censé",
@@ -10702,7 +11119,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "casser",
@@ -10741,7 +11159,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "passée",
@@ -10780,7 +11199,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "fiancée",
@@ -10825,7 +11245,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "pousser",
@@ -10866,7 +11287,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "bosser",
@@ -10909,7 +11331,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "coincé",
@@ -10948,7 +11371,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     }
    ]
   },
@@ -10974,7 +11398,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches -j, -t, -n pressées ensemble remplacent le suffixe « -ter » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches -jtn pressées ensemble remplacent le suffixe « -ter » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -11027,7 +11451,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "restez",
@@ -11070,7 +11495,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "monter",
@@ -11111,7 +11537,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "porter",
@@ -11148,7 +11575,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "jeter",
@@ -11190,8 +11618,40 @@
          23
         ]
        ]
+      },
+      {
+       "steno": "vt@a/te#",
+       "strokes": [
+        [
+         5,
+         7,
+         11,
+         12
+        ],
+        [
+         7,
+         14,
+         15
+        ]
+       ]
+      },
+      {
+       "steno": "vt@a#jtn",
+       "strokes": [
+        [
+         5,
+         7,
+         11,
+         12,
+         15,
+         16,
+         20,
+         22
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "sauter",
@@ -11232,7 +11692,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "raconter",
@@ -11281,7 +11742,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "présenter",
@@ -11332,7 +11794,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "discuter",
@@ -11385,7 +11848,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "chanter",
@@ -11426,7 +11890,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "compter",
@@ -11467,7 +11932,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "resté",
@@ -11504,7 +11970,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "accepter",
@@ -11556,7 +12023,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "raté",
@@ -11589,7 +12057,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "raconté",
@@ -11632,7 +12101,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "jeté",
@@ -11669,7 +12139,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "supporter",
@@ -11716,7 +12187,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "accepté",
@@ -11762,7 +12234,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "traiter",
@@ -11805,7 +12278,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     },
     {
      "ortho": "rater",
@@ -11844,7 +12318,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 13
     }
    ]
   },
@@ -11870,7 +12345,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches t-, R-, -d pressées ensemble remplacent le préfixe « au- » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches tR- + -d pressées ensemble remplacent le préfixe « au- » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -11926,7 +12401,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "aurais",
@@ -11965,8 +12441,41 @@
          19
         ]
        ]
+      },
+      {
+       "steno": "ae/Rie/-k",
+       "strokes": [
+        [
+         12,
+         14
+        ],
+        [
+         8,
+         13,
+         14
+        ],
+        [
+         18
+        ]
+       ]
+      },
+      {
+       "steno": "tRied/-k",
+       "strokes": [
+        [
+         7,
+         8,
+         13,
+         14,
+         19
+        ],
+        [
+         18
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "aurait",
@@ -12000,7 +12509,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "aucune",
@@ -12037,7 +12547,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "aura",
@@ -12069,7 +12580,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "aucun",
@@ -12108,7 +12620,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "autant",
@@ -12140,7 +12653,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "auras",
@@ -12177,8 +12691,39 @@
          19
         ]
        ]
+      },
+      {
+       "steno": "ae/Ra/-s",
+       "strokes": [
+        [
+         12,
+         14
+        ],
+        [
+         8,
+         12
+        ],
+        [
+         17
+        ]
+       ]
+      },
+      {
+       "steno": "tRad/-s",
+       "strokes": [
+        [
+         7,
+         8,
+         12,
+         19
+        ],
+        [
+         17
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "autour",
@@ -12214,7 +12759,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "aurai",
@@ -12251,32 +12797,9 @@
          20
         ]
        ]
-      }
-     ]
-    },
-    {
-     "ortho": "aurais",
-     "before": "",
-     "after": "",
-     "label": "préfixe « au- » · économise un trait",
-     "phonology": "o.RE",
-     "steno": "tRied/-k",
-     "strokes": [
-      [
-       7,
-       8,
-       13,
-       14,
-       19
-      ],
-      [
-       18
-      ]
-     ],
-     "frequency": 74.56,
-     "alternates": [
+      },
       {
-       "steno": "ae/Rie/-k",
+       "steno": "ae/R*e",
        "strokes": [
         [
          12,
@@ -12284,15 +12807,25 @@
         ],
         [
          8,
-         13,
+         10,
          14
-        ],
+        ]
+       ]
+      },
+      {
+       "steno": "tR*ed",
+       "strokes": [
         [
-         18
+         7,
+         8,
+         10,
+         14,
+         19
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "aurez",
@@ -12330,7 +12863,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "auriez",
@@ -12364,7 +12898,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "auraient",
@@ -12406,7 +12941,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "auprès",
@@ -12442,7 +12978,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "autrefois",
@@ -12485,7 +13022,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "aurons",
@@ -12525,7 +13063,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "auront",
@@ -12567,7 +13106,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "autorité",
@@ -12612,7 +13152,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
     },
     {
      "ortho": "auteur",
@@ -12648,7 +13189,43 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 14
+    },
+    {
+     "ortho": "automne",
+     "before": "",
+     "after": "",
+     "label": "préfixe « au- » · économise un trait",
+     "phonology": "o.tOn",
+     "steno": "tRedn",
+     "strokes": [
+      [
+       7,
+       8,
+       14,
+       19,
+       22
+      ]
+     ],
+     "frequency": 16.88,
+     "alternates": [
+      {
+       "steno": "ae/ten",
+       "strokes": [
+        [
+         12,
+         14
+        ],
+        [
+         7,
+         14,
+         22
+        ]
+       ]
+      }
+     ],
+     "rule": 14
     }
    ]
   },
@@ -12674,7 +13251,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches -d, -t, -m pressées ensemble remplacent le suffixe « -té » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches -dtm pressées ensemble remplacent le suffixe « -té » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -12719,7 +13296,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "vérité",
@@ -12756,7 +13334,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "sécurité",
@@ -12803,7 +13382,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "santé",
@@ -12836,7 +13416,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "liberté",
@@ -12885,7 +13466,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "société",
@@ -12932,7 +13514,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "beauté",
@@ -12969,7 +13552,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "réalité",
@@ -13013,7 +13597,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "volonté",
@@ -13060,7 +13645,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "majesté",
@@ -13107,7 +13693,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "université",
@@ -13166,7 +13753,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "côtés",
@@ -13207,7 +13795,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "identité",
@@ -13252,7 +13841,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "unité",
@@ -13290,7 +13880,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "responsabilité",
@@ -13360,7 +13951,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "humanité",
@@ -13406,7 +13998,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "qualité",
@@ -13444,7 +14037,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "propriété",
@@ -13499,7 +14093,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "éternité",
@@ -13547,7 +14142,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     },
     {
      "ortho": "bonté",
@@ -13584,7 +14180,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 15
     }
    ]
   },
@@ -13610,7 +14207,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches -k, -d, -m pressées ensemble remplacent le suffixe « -der » (aussi -dé, -dée) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches -kdm pressées ensemble remplacent le suffixe « -der » (aussi -dé, -dée) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -13652,7 +14249,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "regardez",
@@ -13700,7 +14298,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "regarder",
@@ -13748,7 +14347,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "garder",
@@ -13792,7 +14392,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "idées",
@@ -13830,7 +14431,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "regardé",
@@ -13872,7 +14474,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "gardez",
@@ -13916,7 +14519,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "aidé",
@@ -13950,7 +14554,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "pédé",
@@ -13984,7 +14589,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "gardé",
@@ -14022,7 +14628,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "tarder",
@@ -14064,7 +14671,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "balader",
@@ -14116,7 +14724,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "suicider",
@@ -14168,7 +14777,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "merdé",
@@ -14206,7 +14816,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "bavarder",
@@ -14258,7 +14869,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "suicidé",
@@ -14304,7 +14916,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "vider",
@@ -14344,7 +14957,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "pédés",
@@ -14384,7 +14998,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "guider",
@@ -14426,7 +15041,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "vidé",
@@ -14460,7 +15076,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     }
    ]
   },
@@ -14486,7 +15103,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches -j, -s, -m pressées ensemble remplacent le suffixe « -ner » (aussi -nez, -nner, -nnée) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches -jsm pressées ensemble remplacent le suffixe « -ner » (aussi -nez, -nner, -nnée) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -14534,7 +15151,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "donner",
@@ -14577,8 +15195,41 @@
          23
         ]
        ]
+      },
+      {
+       "steno": "pvae/mRe#",
+       "strokes": [
+        [
+         4,
+         5,
+         12,
+         14
+        ],
+        [
+         6,
+         8,
+         14,
+         15
+        ]
+       ]
+      },
+      {
+       "steno": "pvae#jsm",
+       "strokes": [
+        [
+         4,
+         5,
+         12,
+         14,
+         15,
+         16,
+         17,
+         25
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "journée",
@@ -14618,7 +15269,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "donnez",
@@ -14662,7 +15314,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "dîner",
@@ -14697,8 +15350,43 @@
          14
         ]
        ]
+      },
+      {
+       "steno": "pvi/mRe/-l",
+       "strokes": [
+        [
+         4,
+         5,
+         13
+        ],
+        [
+         6,
+         8,
+         14
+        ],
+        [
+         23
+        ]
+       ]
+      },
+      {
+       "steno": "pvijsm/-l",
+       "strokes": [
+        [
+         4,
+         5,
+         13,
+         16,
+         17,
+         25
+        ],
+        [
+         23
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "terminé",
@@ -14740,49 +15428,8 @@
         ]
        ]
       }
-     ]
-    },
-    {
-     "ortho": "dîner",
-     "before": "",
-     "after": "",
-     "label": "suffixe « -ner » (aussi -nez, -nner, -nnée) · économise un trait",
-     "phonology": "di.ne",
-     "steno": "pvijsm/-l",
-     "strokes": [
-      [
-       4,
-       5,
-       13,
-       16,
-       17,
-       25
-      ],
-      [
-       23
-      ]
      ],
-     "frequency": 51.78,
-     "alternates": [
-      {
-       "steno": "pvi/mRe/-l",
-       "strokes": [
-        [
-         4,
-         5,
-         13
-        ],
-        [
-         6,
-         8,
-         14
-        ],
-        [
-         23
-        ]
-       ]
-      }
-     ]
+     "rule": 17
     },
     {
      "ortho": "ramener",
@@ -14832,7 +15479,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "tourner",
@@ -14876,7 +15524,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "pardonnez",
@@ -14930,7 +15579,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "tourné",
@@ -14970,7 +15620,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "ramené",
@@ -15009,7 +15660,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "emmené",
@@ -15046,7 +15698,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "mener",
@@ -15088,7 +15741,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "pardonner",
@@ -15142,7 +15796,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "traîner",
@@ -15186,7 +15841,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "téléphoné",
@@ -15242,7 +15898,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "téléphoner",
@@ -15304,7 +15961,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "données",
@@ -15347,8 +16005,47 @@
          17
         ]
        ]
+      },
+      {
+       "steno": "pvae/mRe/-js",
+       "strokes": [
+        [
+         4,
+         5,
+         12,
+         14
+        ],
+        [
+         6,
+         8,
+         14
+        ],
+        [
+         16,
+         17
+        ]
+       ]
+      },
+      {
+       "steno": "pvaejsm/-js",
+       "strokes": [
+        [
+         4,
+         5,
+         12,
+         14,
+         16,
+         17,
+         25
+        ],
+        [
+         16,
+         17
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 17
     },
     {
      "ortho": "promener",
@@ -15385,7 +16082,83 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 17
+    },
+    {
+     "ortho": "tournée",
+     "before": "",
+     "after": "",
+     "label": "suffixe « -ner » (aussi -nez, -nner, -nnée) · économise un trait",
+     "phonology": "tuR.ne",
+     "steno": "t@ejsRm",
+     "strokes": [
+      [
+       7,
+       11,
+       14,
+       16,
+       17,
+       21,
+       25
+      ]
+     ],
+     "frequency": 18.64,
+     "alternates": [
+      {
+       "steno": "t@eR/mRe",
+       "strokes": [
+        [
+         7,
+         11,
+         14,
+         21
+        ],
+        [
+         6,
+         8,
+         14
+        ]
+       ]
+      },
+      {
+       "steno": "t@eR/mRe/-j",
+       "strokes": [
+        [
+         7,
+         11,
+         14,
+         21
+        ],
+        [
+         6,
+         8,
+         14
+        ],
+        [
+         16
+        ]
+       ]
+      },
+      {
+       "steno": "t@ejsRm/-j",
+       "strokes": [
+        [
+         7,
+         11,
+         14,
+         16,
+         17,
+         21,
+         25
+        ],
+        [
+         16
+        ]
+       ]
+      }
+     ],
+     "rule": 17
     }
    ]
   },
@@ -15411,7 +16184,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches s-, p-, -j pressées ensemble remplacent le préfixe « ra- » (aussi rai-, raie-, re-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches sp- + -j pressées ensemble remplacent le préfixe « ra- » (aussi rai-, raie-, re-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -15457,7 +16230,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "réussi",
@@ -15498,7 +16272,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "réponds",
@@ -15538,7 +16313,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "réveille",
@@ -15576,7 +16352,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "répondre",
@@ -15614,7 +16391,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "réunion",
@@ -15661,7 +16439,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "réfléchir",
@@ -15704,7 +16483,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "répète",
@@ -15740,7 +16520,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "récupérer",
@@ -15791,7 +16572,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "régler",
@@ -15835,7 +16617,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "réveiller",
@@ -15881,7 +16664,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "répondu",
@@ -15927,7 +16711,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "résultats",
@@ -15980,7 +16765,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "répondez",
@@ -16024,7 +16810,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "réveillé",
@@ -16064,7 +16851,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "revolver",
@@ -16111,7 +16899,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "répond",
@@ -16145,7 +16934,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "réfléchi",
@@ -16186,7 +16976,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "région",
@@ -16227,7 +17018,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     },
     {
      "ortho": "résultat",
@@ -16274,7 +17066,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 18
     }
    ]
   },
@@ -16300,7 +17093,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches k-, v-, -k pressées ensemble remplacent le préfixe « pa- » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches kv- + -k pressées ensemble remplacent le préfixe « pa- » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -16343,7 +17136,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "parents",
@@ -16382,7 +17176,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "patron",
@@ -16419,7 +17214,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "passé",
@@ -16452,7 +17248,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "pareil",
@@ -16489,7 +17286,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "paraît",
@@ -16524,7 +17322,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "parole",
@@ -16559,7 +17358,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "papiers",
@@ -16602,7 +17402,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "papier",
@@ -16639,7 +17440,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "parie",
@@ -16674,7 +17476,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "passage",
@@ -16709,7 +17512,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "passera",
@@ -16752,7 +17556,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "paquet",
@@ -16786,7 +17591,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "paradis",
@@ -16829,7 +17635,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "paroles",
@@ -16870,7 +17677,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "patience",
@@ -16909,7 +17717,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "patient",
@@ -16946,7 +17755,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "palais",
@@ -16983,7 +17793,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "passait",
@@ -17018,7 +17829,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     },
     {
      "ortho": "patrie",
@@ -17053,7 +17865,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 19
     }
    ]
   },
@@ -17079,7 +17892,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches -s, -k, -d pressées ensemble remplacent le préfixe « ma- » (aussi mah-, mâ-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches -skd pressées ensemble remplacent le préfixe « ma- » (aussi mah-, mâ-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -17126,7 +17939,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "mari",
@@ -17159,7 +17973,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "madame",
@@ -17196,7 +18011,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "mariage",
@@ -17233,7 +18049,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "malade",
@@ -17269,7 +18086,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "magnifique",
@@ -17309,7 +18127,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "mademoiselle",
@@ -17370,7 +18189,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "marier",
@@ -17411,7 +18231,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "manière",
@@ -17452,7 +18273,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "maladie",
@@ -17492,7 +18314,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "magasin",
@@ -17541,7 +18364,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "malheur",
@@ -17578,7 +18402,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "machine",
@@ -17614,8 +18439,44 @@
          22
         ]
        ]
+      },
+      {
+       "steno": "ma/pmin/-R",
+       "strokes": [
+        [
+         6,
+         12
+        ],
+        [
+         4,
+         6,
+         13,
+         22
+        ],
+        [
+         21
+        ]
+       ]
+      },
+      {
+       "steno": "pmiskdn/-R",
+       "strokes": [
+        [
+         4,
+         6,
+         13,
+         17,
+         18,
+         19,
+         22
+        ],
+        [
+         21
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "marié",
@@ -17650,7 +18511,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "malin",
@@ -17689,7 +18551,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "mariée",
@@ -17730,7 +18593,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "marrant",
@@ -17763,7 +18627,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "magie",
@@ -17798,7 +18663,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "matériel",
@@ -17845,7 +18711,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     },
     {
      "ortho": "malheureux",
@@ -17889,7 +18756,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 20
     }
    ]
   },
@@ -17913,7 +18781,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches -j, -d pressées ensemble remplacent le préfixe « e- » (aussi hi-, hy-, i-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches -jd pressées ensemble remplacent le préfixe « e- » (aussi hi-, hy-, i-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -17954,7 +18822,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "imagine",
@@ -17993,7 +18862,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "ignore",
@@ -18027,8 +18897,40 @@
          21
         ]
        ]
+      },
+      {
+       "steno": "i/weR/-R",
+       "strokes": [
+        [
+         13
+        ],
+        [
+         9,
+         14,
+         21
+        ],
+        [
+         21
+        ]
+       ]
+      },
+      {
+       "steno": "wejdR/-R",
+       "strokes": [
+        [
+         9,
+         14,
+         16,
+         19,
+         21
+        ],
+        [
+         21
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "irai",
@@ -18065,7 +18967,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "inutile",
@@ -18104,7 +19007,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "idiot",
@@ -18143,7 +19047,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "image",
@@ -18176,7 +19081,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "hiver",
@@ -18211,7 +19117,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "imaginer",
@@ -18264,7 +19171,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "images",
@@ -18302,8 +19210,40 @@
          17
         ]
        ]
+      },
+      {
+       "steno": "i/maZ/-d",
+       "strokes": [
+        [
+         13
+        ],
+        [
+         6,
+         12,
+         24
+        ],
+        [
+         19
+        ]
+       ]
+      },
+      {
+       "steno": "majdZ/-d",
+       "strokes": [
+        [
+         6,
+         12,
+         16,
+         19,
+         24
+        ],
+        [
+         19
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "iras",
@@ -18340,7 +19280,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "ignorais",
@@ -18389,7 +19330,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "immeuble",
@@ -18423,7 +19365,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "innocent",
@@ -18460,7 +19403,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "imaginez",
@@ -18513,7 +19457,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "irait",
@@ -18546,7 +19491,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "irais",
@@ -18585,7 +19531,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "imagines",
@@ -18630,7 +19577,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "immense",
@@ -18663,7 +19611,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     },
     {
      "ortho": "idiote",
@@ -18702,7 +19651,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 21
     }
    ]
   },
@@ -18726,7 +19676,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches v-, -Z pressées ensemble remplacent le préfixe « sa- » (aussi sah-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches v- + -Z pressées ensemble remplacent le préfixe « sa- » (aussi sah-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -18771,7 +19721,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "savez",
@@ -18802,7 +19753,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "salut",
@@ -18838,7 +19790,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "savais",
@@ -18877,7 +19830,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "savait",
@@ -18910,7 +19864,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "salaud",
@@ -18946,7 +19901,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "salope",
@@ -18983,8 +19939,45 @@
          18
         ]
        ]
+      },
+      {
+       "steno": "sa/mtejk/-R",
+       "strokes": [
+        [
+         3,
+         12
+        ],
+        [
+         6,
+         7,
+         14,
+         16,
+         18
+        ],
+        [
+         21
+        ]
+       ]
+      },
+      {
+       "steno": "vmtejkZ/-R",
+       "strokes": [
+        [
+         5,
+         6,
+         7,
+         14,
+         16,
+         18,
+         24
+        ],
+        [
+         21
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "savons",
@@ -19018,8 +20011,40 @@
          13
         ]
        ]
+      },
+      {
+       "steno": "sa/vai/-s",
+       "strokes": [
+        [
+         3,
+         12
+        ],
+        [
+         5,
+         12,
+         13
+        ],
+        [
+         17
+        ]
+       ]
+      },
+      {
+       "steno": "vaiZ/-s",
+       "strokes": [
+        [
+         5,
+         12,
+         13,
+         24
+        ],
+        [
+         17
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "samedi",
@@ -19063,7 +20088,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "salon",
@@ -19099,7 +20125,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "saviez",
@@ -19134,7 +20161,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "sacré",
@@ -19168,7 +20196,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "salaire",
@@ -19206,7 +20235,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "sacrée",
@@ -19246,7 +20276,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "salauds",
@@ -19288,7 +20319,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "saloperie",
@@ -19340,7 +20372,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "salue",
@@ -19378,7 +20411,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "salopard",
@@ -19424,7 +20458,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "sacrifice",
@@ -19470,7 +20505,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "salade",
@@ -19506,7 +20542,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     }
    ]
   },
@@ -19532,7 +20569,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches -j, -s, -d pressées ensemble remplacent le préfixe « o- » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches -jsd pressées ensemble remplacent le préfixe « o- » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -19573,7 +20610,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "occupe",
@@ -19611,7 +20649,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "occuper",
@@ -19655,7 +20694,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "occasion",
@@ -19698,7 +20738,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "offrir",
@@ -19737,7 +20778,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "odeur",
@@ -19774,7 +20816,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "occupé",
@@ -19812,7 +20855,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "oreilles",
@@ -19854,7 +20898,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "obligé",
@@ -19896,7 +20941,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "officier",
@@ -19937,8 +20983,49 @@
          14
         ]
        ]
+      },
+      {
+       "steno": "ae/kpi/sRwe/-l",
+       "strokes": [
+        [
+         12,
+         14
+        ],
+        [
+         2,
+         4,
+         13
+        ],
+        [
+         3,
+         8,
+         9,
+         14
+        ],
+        [
+         23
+        ]
+       ]
+      },
+      {
+       "steno": "sRwejsd/-l",
+       "strokes": [
+        [
+         3,
+         8,
+         9,
+         14,
+         16,
+         17,
+         19
+        ],
+        [
+         23
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "oreille",
@@ -19974,7 +21061,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "offert",
@@ -20013,7 +21101,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "opinion",
@@ -20056,7 +21145,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "océan",
@@ -20095,7 +21185,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "origine",
@@ -20136,7 +21227,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "officiers",
@@ -20184,7 +21276,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "opéra",
@@ -20225,7 +21318,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "occupée",
@@ -20269,7 +21363,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "occupez",
@@ -20313,7 +21408,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     },
     {
      "ortho": "otage",
@@ -20348,7 +21444,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 23
     }
    ]
   },
@@ -20374,7 +21471,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches p-, v-, R- pressées ensemble remplacent le préfixe « pro- » (aussi proh-, prô-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches pvR- pressées ensemble remplacent le préfixe « pro- » (aussi proh-, prô-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -20428,7 +21525,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "problèmes",
@@ -20478,7 +21576,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "propos",
@@ -20514,7 +21613,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "prochaine",
@@ -20554,7 +21654,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "promis",
@@ -20589,7 +21690,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "promets",
@@ -20632,7 +21734,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "protéger",
@@ -20683,7 +21786,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "prochain",
@@ -20723,7 +21827,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "procès",
@@ -20760,7 +21865,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "projet",
@@ -20798,7 +21904,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "programme",
@@ -20838,7 +21945,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "propriétaire",
@@ -20893,7 +22001,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "procureur",
@@ -20940,7 +22049,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "protège",
@@ -20979,7 +22089,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "projets",
@@ -21023,7 +22134,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "profond",
@@ -21061,7 +22173,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "propose",
@@ -21101,7 +22214,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "promesse",
@@ -21140,7 +22254,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "produit",
@@ -21179,7 +22294,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     },
     {
      "ortho": "progrès",
@@ -21219,7 +22335,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 24
     }
    ]
   },
@@ -21245,7 +22362,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches -j, -s, -k pressées ensemble remplacent le suffixe « -ver » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches -jsk pressées ensemble remplacent le suffixe « -ver » : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -21292,7 +22409,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "trouver",
@@ -21335,7 +22453,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "arrivé",
@@ -21372,7 +22491,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "sauver",
@@ -21413,7 +22533,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "trouvez",
@@ -21456,7 +22577,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "sauvé",
@@ -21491,7 +22613,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "prouver",
@@ -21534,7 +22657,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "trouvée",
@@ -21577,7 +22701,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "lever",
@@ -21619,8 +22744,38 @@
          23
         ]
        ]
+      },
+      {
+       "steno": "mt@a/ve",
+       "strokes": [
+        [
+         6,
+         7,
+         11,
+         12
+        ],
+        [
+         5,
+         14
+        ]
+       ]
+      },
+      {
+       "steno": "mt@ajsk",
+       "strokes": [
+        [
+         6,
+         7,
+         11,
+         12,
+         16,
+         17,
+         18
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "laver",
@@ -21661,7 +22816,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "crever",
@@ -21704,7 +22860,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "levez",
@@ -21747,7 +22904,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "rêver",
@@ -21788,7 +22946,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "levé",
@@ -21827,7 +22986,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "sauvez",
@@ -21868,7 +23028,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "sauvée",
@@ -21909,7 +23070,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "observer",
@@ -21964,7 +23126,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "trouvés",
@@ -22007,7 +23170,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "crevé",
@@ -22044,7 +23208,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     },
     {
      "ortho": "sauvés",
@@ -22085,7 +23250,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 25
     }
    ]
   },
@@ -22109,7 +23275,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches s-, m- pressées ensemble remplacent le préfixe « ce- » (aussi sce-, se-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches sm- pressées ensemble remplacent le préfixe « ce- » (aussi sce-, se-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -22154,7 +23320,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "celui",
@@ -22192,7 +23359,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "semaine",
@@ -22228,7 +23396,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "serai",
@@ -22267,7 +23436,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "ceci",
@@ -22299,7 +23469,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "semaines",
@@ -22341,7 +23512,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "serais",
@@ -22382,7 +23554,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "seras",
@@ -22421,7 +23594,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "selon",
@@ -22457,7 +23631,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "secret",
@@ -22494,7 +23669,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "seconde",
@@ -22532,7 +23708,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "secours",
@@ -22568,8 +23745,44 @@
          21
         ]
        ]
+      },
+      {
+       "steno": "s@a/k@eR/-k",
+       "strokes": [
+        [
+         3,
+         11,
+         12
+        ],
+        [
+         2,
+         11,
+         14,
+         21
+        ],
+        [
+         18
+        ]
+       ]
+      },
+      {
+       "steno": "ksm@eR/-k",
+       "strokes": [
+        [
+         2,
+         3,
+         6,
+         11,
+         14,
+         21
+        ],
+        [
+         18
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "seront",
@@ -22612,7 +23825,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "serez",
@@ -22651,7 +23865,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "secondes",
@@ -22694,8 +23909,45 @@
          17
         ]
        ]
+      },
+      {
+       "steno": "s@a/ksaid/-d",
+       "strokes": [
+        [
+         3,
+         11,
+         12
+        ],
+        [
+         2,
+         3,
+         12,
+         13,
+         19
+        ],
+        [
+         19
+        ]
+       ]
+      },
+      {
+       "steno": "ksmaid/-d",
+       "strokes": [
+        [
+         2,
+         3,
+         6,
+         12,
+         13,
+         19
+        ],
+        [
+         19
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "serons",
@@ -22736,7 +23988,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "secrétaire",
@@ -22783,7 +24036,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "secrets",
@@ -22826,7 +24080,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "cependant",
@@ -22869,7 +24124,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     },
     {
      "ortho": "seriez",
@@ -22904,7 +24160,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 26
     }
    ]
   },
@@ -22930,7 +24187,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches -j, -d, -R pressées ensemble remplacent le suffixe « -rae » (aussi -rai, -raie, -re) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches -jdR pressées ensemble remplacent le suffixe « -rae » (aussi -rai, -raie, -re) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -22979,7 +24236,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "soirée",
@@ -23014,7 +24272,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "tiré",
@@ -23047,7 +24306,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "pleurer",
@@ -23094,7 +24354,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "préparer",
@@ -23139,7 +24400,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "tirez",
@@ -23178,7 +24440,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "réparer",
@@ -23221,7 +24484,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "assurer",
@@ -23263,7 +24527,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "respirer",
@@ -23310,7 +24575,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "préparez",
@@ -23359,7 +24625,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "libérer",
@@ -23405,7 +24672,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "virer",
@@ -23444,7 +24712,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "viré",
@@ -23479,7 +24748,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "préparé",
@@ -23522,7 +24792,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "durer",
@@ -23565,7 +24836,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "séparer",
@@ -23608,7 +24880,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "juré",
@@ -23645,7 +24918,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "préféré",
@@ -23690,7 +24964,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "gérer",
@@ -23731,7 +25006,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     },
     {
      "ortho": "libéré",
@@ -23776,7 +25052,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 27
     }
    ]
   },
@@ -23802,7 +25079,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches p-, t-, -k pressées ensemble remplacent le préfixe « pou- » (aussi pu-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches pt- + -k pressées ensemble remplacent le préfixe « pou- » (aussi pu-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -23846,7 +25123,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pourrait",
@@ -23882,7 +25160,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pourrais",
@@ -23924,7 +25203,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pouvoir",
@@ -23962,7 +25242,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pouvais",
@@ -24004,7 +25285,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pouvait",
@@ -24040,7 +25322,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pourra",
@@ -24074,7 +25357,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pourriez",
@@ -24110,7 +25394,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pouvons",
@@ -24146,7 +25431,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pourrai",
@@ -24186,7 +25472,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pourras",
@@ -24226,7 +25513,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pourrez",
@@ -24266,7 +25554,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pourraient",
@@ -24310,7 +25599,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pouvoirs",
@@ -24354,7 +25644,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pourrions",
@@ -24392,7 +25683,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "poussière",
@@ -24434,7 +25726,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "poupée",
@@ -24467,7 +25760,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pouviez",
@@ -24505,7 +25799,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pouvaient",
@@ -24549,7 +25844,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "pourrons",
@@ -24591,7 +25887,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     }
    ]
   },
@@ -24617,7 +25914,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches s-, -j, -d pressées ensemble remplacent le préfixe « de- » (aussi dea-, di-, die-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches s- + -jd pressées ensemble remplacent le préfixe « de- » (aussi dea-, di-, die-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -24663,7 +25960,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "difficile",
@@ -24703,7 +26001,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "disais",
@@ -24747,7 +26046,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "disait",
@@ -24785,7 +26085,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "dirai",
@@ -24825,7 +26126,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "différent",
@@ -24869,7 +26171,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "dimanche",
@@ -24907,7 +26210,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "dirais",
@@ -24949,7 +26253,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "directeur",
@@ -24997,7 +26302,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "différence",
@@ -25043,7 +26349,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "disons",
@@ -25081,7 +26388,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "dira",
@@ -25115,7 +26423,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "disant",
@@ -25151,7 +26460,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "différente",
@@ -25197,7 +26507,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "dirige",
@@ -25233,7 +26544,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "différentes",
@@ -25285,7 +26597,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "différents",
@@ -25334,8 +26647,47 @@
          17
         ]
        ]
+      },
+      {
+       "steno": "pvi/kpe/R*@",
+       "strokes": [
+        [
+         4,
+         5,
+         13
+        ],
+        [
+         2,
+         4,
+         14
+        ],
+        [
+         8,
+         10,
+         11
+        ]
+       ]
+      },
+      {
+       "steno": "kspejd/R*@",
+       "strokes": [
+        [
+         2,
+         3,
+         4,
+         14,
+         16,
+         19
+        ],
+        [
+         8,
+         10,
+         11
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "diras",
@@ -25375,7 +26727,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "divorce",
@@ -25413,7 +26766,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     },
     {
      "ortho": "disiez",
@@ -25451,7 +26805,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 29
     }
    ]
   },
@@ -25477,7 +26832,7 @@
    "rules": [
     {
      "kind": "affix",
-     "text": "Les touches -k, -n, -l pressées ensemble remplacent le suffixe « -ser » (aussi -sée, -zer, -zé) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+     "text": "Les touches -knl pressées ensemble remplacent le suffixe « -ser » (aussi -sée, -zer, -zé) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
     },
     {
      "kind": "affix",
@@ -25529,7 +26884,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "utiliser",
@@ -25582,7 +26938,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "baiser",
@@ -25625,29 +26982,7 @@
          23
         ]
        ]
-      }
-     ]
-    },
-    {
-     "ortho": "baiser",
-     "before": "",
-     "after": "",
-     "label": "suffixe « -ser » (aussi -sée, -zer, -zé) · économise un trait",
-     "phonology": "bE.ze",
-     "steno": "svieknl",
-     "strokes": [
-      [
-       3,
-       5,
-       13,
-       14,
-       18,
-       22,
-       23
-      ]
-     ],
-     "frequency": 40.92,
-     "alternates": [
+      },
       {
        "steno": "svie/twe",
        "strokes": [
@@ -25663,8 +26998,23 @@
          14
         ]
        ]
+      },
+      {
+       "steno": "svieknl",
+       "strokes": [
+        [
+         3,
+         5,
+         13,
+         14,
+         18,
+         22,
+         23
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "utilisé",
@@ -25711,7 +27061,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "posé",
@@ -25747,7 +27098,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "posez",
@@ -25789,7 +27141,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "musée",
@@ -25824,8 +27177,43 @@
          14
         ]
        ]
+      },
+      {
+       "steno": "m@i/twe/-j",
+       "strokes": [
+        [
+         6,
+         11,
+         13
+        ],
+        [
+         7,
+         9,
+         14
+        ],
+        [
+         16
+        ]
+       ]
+      },
+      {
+       "steno": "m@iknl/-j",
+       "strokes": [
+        [
+         6,
+         11,
+         13,
+         18,
+         22,
+         23
+        ],
+        [
+         16
+        ]
+       ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "baisé",
@@ -25865,7 +27253,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "brisé",
@@ -25903,7 +27292,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "causer",
@@ -25945,7 +27335,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "briser",
@@ -25989,7 +27380,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "amusez",
@@ -26032,7 +27424,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "causé",
@@ -26068,7 +27461,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "organiser",
@@ -26128,7 +27522,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "supposé",
@@ -26174,7 +27569,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "utilisez",
@@ -26227,7 +27623,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "baisers",
@@ -26271,7 +27668,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "organisé",
@@ -26325,7 +27723,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
     },
     {
      "ortho": "creuser",
@@ -26371,7 +27770,49 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 30
+    },
+    {
+     "ortho": "raser",
+     "before": "",
+     "after": "",
+     "label": "suffixe « -ser » (aussi -sée, -zer, -zé) · économise un trait",
+     "phonology": "Ra.ze",
+     "steno": "Raknl/-l",
+     "strokes": [
+      [
+       8,
+       12,
+       18,
+       22,
+       23
+      ],
+      [
+       23
+      ]
+     ],
+     "frequency": 10.27,
+     "alternates": [
+      {
+       "steno": "Ra/twe/-l",
+       "strokes": [
+        [
+         8,
+         12
+        ],
+        [
+         7,
+         9,
+         14
+        ],
+        [
+         23
+        ]
+       ]
+      }
+     ],
+     "rule": 30
     }
    ]
   },
@@ -26399,7 +27840,7 @@
      "ortho": "arrête",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "arrêter : impér. prés., deuxième pers. sing. ; ind. prés., première et troisième pers. sing. ; subj. prés., première et troisième pers. sing. · économise un trait",
      "phonology": "a.REt",
      "steno": "Rwiejt/-k",
      "strokes": [
@@ -26434,13 +27875,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "arrête",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "arrêter : impér. prés., deuxième pers. sing. ; ind. prés., première et troisième pers. sing. ; subj. prés., première et troisième pers. sing. · économise un trait",
      "phonology": "a.REt",
      "steno": "Rwiejt/-R",
      "strokes": [
@@ -26475,13 +27917,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 1
     },
     {
      "ortho": "connais",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "connaître : impér. prés., deuxième pers. sing. ; ind. prés., première et deuxième pers. sing. · économise un trait",
      "phonology": "ko.nE",
      "steno": "mRwied/-d",
      "strokes": [
@@ -26518,13 +27961,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "comprends",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "comprendre : impér. prés., deuxième pers. sing. ; ind. prés., première et deuxième pers. sing. · économise un trait",
      "phonology": "k§.pR@",
      "steno": "pRw@d/-d",
      "strokes": [
@@ -26559,13 +28003,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "demande",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "demander : impér. prés., deuxième pers. sing. ; ind. prés., première et troisième pers. sing. ; subj. prés., première et troisième pers. sing. · économise un trait",
      "phonology": "d°.m@d",
      "steno": "km@d/-k",
      "strokes": [
@@ -26600,13 +28045,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "demande",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "demander : impér. prés., deuxième pers. sing. ; ind. prés., première et troisième pers. sing. ; subj. prés., première et troisième pers. sing. · économise un trait",
      "phonology": "d°.m@d",
      "steno": "km@d/-R",
      "strokes": [
@@ -26641,13 +28087,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "laissez",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "laisser : impér. prés., deuxième pers. plur. ; ind. prés., deuxième pers. plur. · économise un trait",
      "phonology": "lE.se",
      "steno": "mtiejsd/-d",
      "strokes": [
@@ -26684,13 +28131,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 12
     },
     {
      "ortho": "regardez",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise deux traits",
+     "label": "regarder : impér. prés., deuxième pers. plur. ; ind. prés., deuxième pers. plur. · économise deux traits",
      "phonology": "R°.gaR.de",
      "steno": "R@akdm/-d",
      "strokes": [
@@ -26732,13 +28180,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 16
     },
     {
      "ortho": "importe",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "importer : impér. prés., deuxième pers. sing. ; ind. prés., première et troisième pers. sing. ; subj. prés., première et troisième pers. sing. · économise un trait",
      "phonology": "5.pORt",
      "steno": "ptRwetR/-k",
      "strokes": [
@@ -26776,13 +28225,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "importe",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "importer : impér. prés., deuxième pers. sing. ; ind. prés., première et troisième pers. sing. ; subj. prés., première et troisième pers. sing. · économise un trait",
      "phonology": "5.pORt",
      "steno": "ptRwetR/-R",
      "strokes": [
@@ -26820,13 +28270,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 9
     },
     {
      "ortho": "pourrais",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "pouvoir : cond. prés., première et deuxième pers. sing. · économise un trait",
      "phonology": "pu.RE",
      "steno": "ptRiek/-d",
      "strokes": [
@@ -26862,13 +28313,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 28
     },
     {
      "ortho": "savais",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "savoir : ind. imparf., première et deuxième pers. sing. · économise un trait",
      "phonology": "sa.vE",
      "steno": "vieZ/-d",
      "strokes": [
@@ -26901,13 +28353,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 22
     },
     {
      "ortho": "devrais",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "devoir : cond. prés., première et deuxième pers. sing. · économise un trait",
      "phonology": "d°.vRE",
      "steno": "kvmRied/-d",
      "strokes": [
@@ -26946,13 +28399,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 10
     },
     {
      "ortho": "excusez",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise deux traits",
+     "label": "excuser : impér. prés., deuxième pers. plur. ; ind. prés., deuxième pers. plur. · économise deux traits",
      "phonology": "E.ksky.ze",
      "steno": "vtwekd/-d",
      "strokes": [
@@ -26993,13 +28447,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "aimerais",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "aimer : cond. prés., première et deuxième pers. sing. · économise un trait",
      "phonology": "E.m°.RE",
      "steno": "vm@akd/Rie/-d",
      "strokes": [
@@ -27044,13 +28499,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 11
     },
     {
      "ortho": "écoute",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "écouter : impér. prés., deuxième pers. sing. ; ind. prés., première et troisième pers. sing. ; subj. prés., première et troisième pers. sing. · économise un trait",
      "phonology": "e.kut",
      "steno": "kv@et/-k",
      "strokes": [
@@ -27084,13 +28540,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "écoute",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "écouter : impér. prés., deuxième pers. sing. ; ind. prés., première et troisième pers. sing. ; subj. prés., première et troisième pers. sing. · économise un trait",
      "phonology": "e.kut",
      "steno": "kv@et/-R",
      "strokes": [
@@ -27124,13 +28581,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 7
     },
     {
      "ortho": "compris",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "comprendre : ind. passé, première et deuxième pers. sing. ; part. passé · économise un trait",
      "phonology": "k§.pRi",
      "steno": "pRwid/-s",
      "strokes": [
@@ -27165,13 +28623,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "compris",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "comprendre : ind. passé, première et deuxième pers. sing. ; part. passé · économise un trait",
      "phonology": "k§.pRi",
      "steno": "pRwid/-k",
      "strokes": [
@@ -27206,13 +28665,14 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     },
     {
      "ortho": "compris",
      "before": "",
      "after": "",
-     "label": "forme conjuguée · économise un trait",
+     "label": "comprendre : ind. passé, première et deuxième pers. sing. ; part. passé · économise un trait",
      "phonology": "k§.pRi",
      "steno": "pRwid/-d",
      "strokes": [
@@ -27247,7 +28707,8 @@
         ]
        ]
       }
-     ]
+     ],
+     "rule": 4
     }
    ]
   }

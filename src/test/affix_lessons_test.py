@@ -9,7 +9,7 @@ import pytest
 
 from ..affixabbrev import Abbreviation, RuleSpec
 from ..keyboard import Starboard
-from util.export_affix_lessons import WORDS_PER_LESSON, buildAffixLessons, isVerb, ruleLabel
+from util.export_affix_lessons import WORDS_PER_LESSON, buildAffixLessons, conjugationText, groupKeyNames, isVerb, ruleLabel
 from util._stenorender import renderFinalStrokesToRTFCRE
 from util.export_lessons import RECORD_FIELDS
 
@@ -76,7 +76,7 @@ def test_verb_lesson_is_ver_only_and_route_ge_one(starboard):
 def test_word_record_shape_and_alternates(starboard):
     word = _build(starboard)["lessons"][1]["words"][0]
     assert list(word)[:len(RECORD_FIELDS)] == list(RECORD_FIELDS) and "alternates" in word
-    assert word["strokes"] == [[9, 12], [13]]
+    assert word["strokes"] == [[9, 12], [13]] and word["rule"] == 2
     assert word["alternates"] == [{"steno": starboard_steno((3,), (12,), (13,)), "strokes": [[3], [12], [13]]}]
     assert all(stroke == sorted(stroke) for stroke in word["strokes"] + word["alternates"][0]["strokes"])
     assert word["before"] == word["after"] == ""
@@ -108,3 +108,35 @@ def test_rule_label_and_helpers():
 
 def test_empty_rules_gives_no_lesson(starboard):
     assert buildAffixLessons([], [], starboard, {}) == {"rules": [], "lessons": []}
+
+
+def test_homographs_merge_into_one_record_with_all_outlines(starboard):
+    abbreviations = [
+        Abbreviation("sert", ((9, 12), (13,)), ((3,), (12,), (13,)), 1, 1, "re", 1, 50.0, 0, 1, "VER"),
+        Abbreviation("sert", ((9, 12), (14,)), ((3,), (12,), (14,)), 1, 1, "re", 1, 40.0, 0, 2, "NOM"),
+    ]
+    words = buildAffixLessons(RULES[:1], abbreviations, starboard, {})["lessons"][0]["words"]
+    assert len(words) == 1 and words[0]["strokes"] == [[9, 12], [13]]
+    assert [a["strokes"] for a in words[0]["alternates"]] == [[[3], [12], [13]], [[3], [12], [14]], [[9, 12], [14]]]
+
+
+def test_verb_lesson_keeps_each_form_and_labels_it(starboard):
+    abbreviations = [_abbr("refait", 1, 10.0, route=1, gramCat="VER", idx=1),
+                     _abbr("refait", 1, 9.0, route=2, gramCat="VER", idx=2)]
+    forms = {1: "refaire : ind. prés., troisième pers. sing.", 2: "refaire : part. passé"}
+    words = buildAffixLessons(RULES[:1], abbreviations, starboard, {}, forms)["lessons"][-1]["words"]
+    assert len(words) == 2
+    assert words[0]["label"].startswith("refaire : ind. prés.") and words[1]["label"].startswith("refaire : part.")
+
+
+def test_conjugation_text_abbreviated_without_digits():
+    text = conjugationText("imp:pre:2s;ind:pre:1s;ind:pre:3s;par:pas;inf")
+    assert text == ("impér. prés., deuxième pers. sing. ; "
+                    "ind. prés., première et troisième pers. sing. ; part. passé ; inf.")
+    assert not any(c.isdigit() for c in text)
+
+
+def test_key_names_grouped_by_side():
+    assert groupKeyNames(["-j", "-s", "-d"]) == "-jsd"
+    assert groupKeyNames(["p-", "m-", "-j"]) == "pm- + -j"
+    assert groupKeyNames(["w-", "-j"]) == "w- + -j"

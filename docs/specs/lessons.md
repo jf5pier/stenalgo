@@ -410,7 +410,7 @@ Track titles: `Phonèmes`, `Accord (genre et nombre)`, `Verbes`,
 (`phonemes`: `Les touches et les sons, de la plus simple à la plus complexe.`;
 `accord`: `Les marques de genre et de nombre.`; `verbe`: `Les marques de
 conjugaison, temps par temps.`; `desambiguation`: `Les marques * et # qui
-distinguent les homophones.`; `affixes`: `Abréviations d'affixes — à venir.`).
+distinguent les homophones.`; `affixes`: `Une règle d'abréviation par leçon : un contour court pour chaque mot, le long reste accepté.`).
 
 Phoneme section titles per weight tier, with a generic fallback so any future
 layout regenerates: 100 `Les premières touches`, 125 `Les autres doigts`, 150

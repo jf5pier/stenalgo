@@ -8,8 +8,8 @@ Output: steno-trainer/public/data/affix-lessons.json
     {"rules": [{"rank", "position", "ortho", "phono", "keys", "keyNames", "label"}, ...],
      "lessons": [<lesson>, ...]}
 A lesson has exactly the `lessons.json` lesson schema (docs/specs/lessons.md); its words are `practice-words.json`
-records whose `steno`/`strokes` are the SHORT outline plus an `alternates` list holding the long outline as {steno, strokes}
-(the drill accepts either). See docs/specs/affix-lessons.md.
+records whose `steno`/`strokes` are the SHORT outline plus an `alternates` list of the other accepted outlines as {steno, strokes}
+(the drill accepts any) and the `rank` of its `rule`. See docs/specs/affix-lessons.md.
 
 The five other trainer data files are not touched: this exporter runs after S9b, S9 being an optional layer.
 """
@@ -49,6 +49,17 @@ def _spellings(ortho: str) -> list[str]:
     return out
 
 
+def groupKeyNames(names: list[str]) -> str:
+    """Key names with each side's keys grouped: `-j -s -d` -> `-jsd`, `w- p- -j` -> `wp- + -j` (left-hand names end
+    with `-`, right-hand ones start with it; any other name follows)."""
+    left = [n for n in names if n.endswith("-")]
+    right = [n for n in names if n.startswith("-") and not n.endswith("-")]
+    other = [n for n in names if n not in left and n not in right]
+    parts = ([("".join(n[:-1] for n in left) + "-")] if left else []) + \
+            ([("-" + "".join(n[1:] for n in right))] if right else []) + other
+    return " + ".join(parts)
+
+
 def ruleLabel(rule: RuleSpec) -> str:
     spellings = _spellings(rule.ortho)
 
@@ -70,14 +81,57 @@ def _savedText(saved: int) -> str:
     return "économise un trait" if saved == 1 else f"économise {numberInFrench(saved)} traits"
 
 
-def _wordRecord(a: Abbreviation, starboard: Starboard, phonology: str, label: str) -> dict:
+def _wordRecord(group: list[Abbreviation], starboard: Starboard, phonology: str, label: str) -> dict:
+    """`group`: the abbreviations of one spelling, best first. The first one's short outline is the primary one (the
+    hint); every other outline (its long one, and both outlines of the others, i.e. the homographs) is an alternate."""
+    a = group[0]
     short = renderFinalStrokesToRTFCRE(starboard, a.outline)
     values = {"ortho": a.ortho, "before": "", "after": "", "label": label, "phonology": phonology,
               "steno": short, "strokes": _strokesList(a.outline), "frequency": a.frequency}
     record = {field: values[field] for field in RECORD_FIELDS}
-    record["alternates"] = [{"steno": renderFinalStrokesToRTFCRE(starboard, a.longOutline),
-                            "strokes": _strokesList(a.longOutline)}]
+    seen = {a.outline}
+    alternates = []
+    for b in group:
+        for outline in (b.longOutline, b.outline):
+            if outline not in seen:
+                seen.add(outline)
+                alternates.append({"steno": renderFinalStrokesToRTFCRE(starboard, outline),
+                                   "strokes": _strokesList(outline)})
+    record["alternates"] = alternates
+    record["rule"] = a.rank   # the affix rule that shortens it (the trainer shows only the rules touching the current word)
     return record
+
+
+_MOODS = {"ind": "ind.", "sub": "subj.", "cnd": "cond.", "imp": "impér."}
+_TENSES = {"pre": "prés.", "imp": "imparf.", "fut": "fut.", "pas": "passé"}
+_PERSONS = {"1": "première", "2": "deuxième", "3": "troisième"}   # in words: the IPA toggle rewrites digits 1, 2
+_NUMBERS = {"s": "sing.", "p": "plur."}
+
+
+def conjugationText(infoVerb: str) -> str:
+    """`ind:pre:1s;ind:pre:3s;imp:pre:2s` -> `ind. prés., première et troisième pers. sing. ; ...`.
+    Spelled out in words, no digits (the trainer's IPA toggle rewrites digits)."""
+    groups: dict[tuple[str, str], list[str]] = {}
+    for item in infoVerb.split(";"):
+        parts = item.split(":")
+        if not item:
+            continue
+        if item == "inf":
+            groups.setdefault(("inf.", ""), [])
+        elif parts[0] == "par" and len(parts) == 2:
+            groups.setdefault(("part. " + _TENSES.get(parts[1], parts[1]), ""), [])
+        elif len(parts) == 3 and parts[0] in _MOODS and len(parts[2]) == 2:
+            who = _PERSONS.get(parts[2][0], ""), _NUMBERS.get(parts[2][1], "")
+            groups.setdefault((f"{_MOODS[parts[0]]} {_TENSES.get(parts[1], parts[1])},", who[1]), []).append(who[0])
+        else:
+            groups.setdefault((item, ""), [])
+    texts = []
+    for (name, number), persons in groups.items():
+        if persons:
+            texts.append(f"{name} {' et '.join(dict.fromkeys(persons))} pers. {number}")
+        else:
+            texts.append(name)
+    return " ; ".join(texts)
 
 
 def _example(a: Abbreviation, starboard: Starboard) -> str:
@@ -87,6 +141,14 @@ def _example(a: Abbreviation, starboard: Starboard) -> str:
 
 def _top(abbreviations: Iterable[Abbreviation], limit: int = WORDS_PER_LESSON) -> list[Abbreviation]:
     return sorted(abbreviations, key=lambda a: (-a.frequency, a.ortho, a.outline))[:limit]
+
+
+def _groupByOrtho(abbreviations: Iterable[Abbreviation], limit: int = WORDS_PER_LESSON) -> list[list[Abbreviation]]:
+    """The `limit` most frequent spellings, each with all its abbreviations (homographs), best first."""
+    byOrtho: dict[str, list[Abbreviation]] = {}
+    for a in sorted(abbreviations, key=lambda a: (-a.frequency, a.ortho, a.outline)):
+        byOrtho.setdefault(a.ortho, []).append(a)
+    return list(byOrtho.values())[:limit]
 
 
 def _sectionTitle(ruleIndex: int, nRules: int) -> str:
@@ -100,10 +162,11 @@ def _sectionTitle(ruleIndex: int, nRules: int) -> str:
 
 def buildAffixLessons(
     rules: list[RuleSpec], abbreviations: list[Abbreviation], starboard: Starboard,
-    phonologyByIdx: dict[int, str],
+    phonologyByIdx: dict[int, str], formByIdx: dict[int, str] | None = None,
 ) -> dict:
     """Pure builder: rule specs + the abbreviations of `buildAbbreviations` -> the `affix-lessons.json` document."""
     rules = sorted(rules, key=lambda r: r.rank)
+    formByIdx = formByIdx or {}
     ruleDocs = []
     for r in rules:
         keys = sorted(r.keys)
@@ -120,11 +183,12 @@ def buildAffixLessons(
             "rules": [{"kind": RULE_KIND, "text": t} for t in rulesText], "words": words})
 
     for i, (r, doc) in enumerate(zip(rules, ruleDocs)):
-        carriers = _top(a for a in abbreviations if a.rank == r.rank and a.route == 0)
-        if not carriers:
+        groups = _groupByOrtho(a for a in abbreviations if a.rank == r.rank and a.route == 0)
+        if not groups:
             continue
+        carriers = [g[0] for g in groups]
         what = "préfixe" if r.position == "prefix" else "suffixe"
-        names = ", ".join(doc["keyNames"])
+        names = groupKeyNames(doc["keyNames"])
         n = len(lessons) + 1
         intro = (f"Les touches {names} pressées ensemble remplacent le {what} {doc['label'].split(' ', 1)[1]} : "
                  f"elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules "
@@ -133,8 +197,8 @@ def buildAffixLessons(
         saved = max(a.saved for a in carriers)
         tail = ("Chaque mot s'écrit aussi avec son contour long, qui reste valable : "
                 "le contour court " + _savedText(saved).replace("économise", "économise au plus") + ".")
-        words = [_wordRecord(a, starboard, phonologyByIdx.get(a.wordIdx, ""),
-                             f"{what} {doc['label'].split(' ', 1)[1]} · {_savedText(a.saved)}") for a in carriers]
+        words = [_wordRecord(g, starboard, phonologyByIdx.get(g[0].wordIdx, ""),
+                             f"{what} {doc['label'].split(' ', 1)[1]} · {_savedText(g[0].saved)}") for g in groups]
         emit(f"Leçon {numberInFrench(n)} : {doc['label']}", _sectionTitle(i, len(rules)), doc["keys"],
              [intro, examples, tail], words)
 
@@ -144,8 +208,10 @@ def buildAffixLessons(
         intro = ("Une forme conjuguée garde sa marque de conjugaison (voir la légende des marques) : "
                  "l'abréviation raccourcit la base du verbe, puis reprend la marque et les frappes qui la suivent.")
         examples = "Exemples : " + " ; ".join(_example(a, starboard) for a in verbs[:3]) + "."
-        words = [_wordRecord(a, starboard, phonologyByIdx.get(a.wordIdx, ""),
-                             f"forme conjuguée · {_savedText(a.saved)}") for a in verbs]
+        # one example per conjugated form / homograph (no dedupe by spelling); each accepts its short or long outline
+        words = [_wordRecord([a], starboard, phonologyByIdx.get(a.wordIdx, ""),
+                             " · ".join(t for t in (formByIdx.get(a.wordIdx, "forme conjuguée"),
+                                                    _savedText(a.saved)) if t)) for a in verbs]
         emit(f"Leçon {numberInFrench(n)} : les formes conjuguées", "Formes conjuguées", [], [intro, examples], words)
     return {"rules": ruleDocs, "lessons": lessons}
 
@@ -158,7 +224,9 @@ def main() -> None:
         raise RuntimeError(f"{RULES_JSON} not found: run `python -m util.build_affix_rules` first.")
     loaded = loadAbbreviations(starboard, RULES_JSON, verbose=False)
     phonologyByIdx = {r.idx: ".".join(r.phonoSylls) for r in loaded.records}
-    document = buildAffixLessons(loadRuleSpecs(RULES_JSON), loaded.abbreviations, starboard, phonologyByIdx)
+    formByIdx = {r.idx: f"{r.lemme} : {conjugationText(r.infoVerb)}" if r.infoVerb else r.lemme
+                 for r in loaded.records}
+    document = buildAffixLessons(loadRuleSpecs(RULES_JSON), loaded.abbreviations, starboard, phonologyByIdx, formByIdx)
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(document, f, ensure_ascii=False, indent=1)
         f.write("\n")

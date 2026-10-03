@@ -1,4 +1,4 @@
-module Lessons exposing (AffixData, Lesson, Lessons, Rule, Track, affixDecoder, decoder, mergeAffixData, viewIntro, viewList, viewPrevNext)
+module Lessons exposing (Abbreviation, AffixData, Lesson, Lessons, Rule, Track, affixDecoder, decoder, mergeAffixData, viewIntro, viewList, viewPrevNext)
 
 {-| Lesson mode: the fixed learner progression exported by
 `util/export_lessons.py` (`lessons.json`) -- tracks of lessons, each lesson
@@ -76,37 +76,48 @@ the `affixes` track's lessons, which replace the stub lesson of `lessons.json`
 type alias AffixData =
     { rules : List Keyboard.AffixRule
     , lessons : List Lesson
+    , abbreviations : List Abbreviation
+    }
+
+
+{-| What the abbreviation hints need of an affix lesson's word: its spelling,
+the rank of the rule that shortens it and its accepted outlines' steno text
+(the short one first). -}
+type alias Abbreviation =
+    { ortho : String
+    , rule : Int
+    , outlines : List String
     }
 
 
 affixDecoder : D.Decoder AffixData
 affixDecoder =
-    D.map2 AffixData
+    D.map3 AffixData
         (D.field "rules" (D.list Keyboard.affixRuleDecoder))
         (D.field "lessons" (D.list lessonDecoder))
+        (D.field "lessons" (D.list (D.field "words" (D.list abbreviationDecoder))) |> D.map List.concat)
+
+
+abbreviationDecoder : D.Decoder Abbreviation
+abbreviationDecoder =
+    D.map3 Abbreviation
+        (D.field "ortho" D.string)
+        (D.field "rule" D.int)
+        (D.map2 (::)
+            (D.field "steno" D.string)
+            (D.oneOf [ D.field "alternates" (D.list (D.field "steno" D.string)), D.succeed [] ])
+        )
 
 
 {-| The lessons with the `affixes` track's lessons (the stub) replaced by the
-real ones, and that track's "à venir" description by a real one. An empty
-list of affix lessons keeps the stub. -}
+real ones. An empty list of affix lessons keeps the stub. -}
 mergeAffixData : AffixData -> Lessons -> Lessons
 mergeAffixData data lessons =
     if List.isEmpty data.lessons then
         lessons
 
     else
-        { tracks =
-            List.map
-                (\track ->
-                    if track.id == "affixes" then
-                        { track | description = "Une règle d'abréviation par leçon : un contour court pour chaque mot, le long reste accepté." }
-
-                    else
-                        track
-                )
-                lessons.tracks
-        , lessons = List.filter (\l -> l.track /= "affixes") lessons.lessons ++ data.lessons
-        }
+        { lessons | lessons = List.filter (\l -> l.track /= "affixes") lessons.lessons ++ data.lessons }
 
 
 trackDecoder : D.Decoder Track
