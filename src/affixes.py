@@ -944,20 +944,73 @@ def makeSimUnit(position: str, c: Carrier, ctx: SimContext, neighbourIds: dict[S
 def mergeUnions(neighbours: list[Stroke], k: Stroke, ctx: SimContext) -> list[Stroke | None]:
     """Per neighbour stroke, the merged chord of `k` into it, or None when `_newBase` would find a
     keyOverlap or an illegalChord."""
+    kSet = frozenset(k)
+    nk = len(kSet)
+    partial = ctx.partialOverlap
+    isLegal = ctx.isLegal
     out: list[Stroke | None] = []
     for n in neighbours:
-        if ruleKeysOverlap(n, k, ctx.partialOverlap):
-            out.append(None)
+        shared = kSet.intersection(n)
+        if (len(shared) == nk) if partial else shared:
+            out.append(None)     # = ruleKeysOverlap(n, k, partialOverlap)
             continue
-        union = tuple(sorted(set(n) | set(k)))
-        out.append(union if ctx.isLegal(union) else None)
+        union = tuple(sorted(kSet.union(n)))
+        out.append(union if isLegal(union) else None)
     return out
 
 
-def simulateRuleUnits(units: list[SimUnit], ctx: SimContext, X: list[Stroke | None], D: Stroke,
-                      trap: bool) -> tuple[list[int], list[str | None]]:
+def _classifyUnit(u: SimUnit, X: list[Stroke | None], D: Stroke,
+                  trap: bool) -> tuple[Strokes | None, int, str | None]:
+    """Pass 1 for one unit: (new outline, saved strokes, reason when there is none)."""
+    if u.g < 0:
+        return None, 0, "noNeighbour"
+    x = X[u.g]
+    if x is not None:
+        return u.pre + (x,) + u.post, u.span, None
+    if u.single or trap:
+        return None, 0, "standaloneTrap"
+    return u.preS + (D,) + u.postS, u.span - 1, None
+
+
+def _evalCollisions(u: SimUnit, saved: int, bucket: dict[str, list[SimUnit]],
+                    existing: list[WordRecord] | None) -> tuple[int, str | None]:
+    """Pass 2 for one unit: (gain, reason) given the existing outlines at its new outline and the bucket of
+    carriers that land there."""
+    spellings = {u.ortho}
+    lost = False
+    for o in existing or ():
+        if o.ortho == u.ortho:
+            continue
+        if o.lemme == u.lemme:
+            if o.base != u.base:
+                lost = True
+            continue
+        spellings.add(o.ortho)
+    for ortho, rs in bucket.items():
+        if ortho == u.ortho:
+            continue
+        first = rs[0]
+        if first.lemme == u.lemme:
+            if first.base != u.base:
+                lost = True
+            continue
+        spellings.add(ortho)
+    if lost:
+        return 0, "lostDistinction"
+    gain = saved - max(0, markCostForCluster(len(spellings)) - u.mcOld)
+    if gain <= 0:
+        return 0, "markCostTooHigh"
+    return gain, None
+
+
+RuleSim = tuple[list[int], list[str | None], list[Strokes | None], list[int]]   # gains, reasons, new outlines, saved
+
+
+def simulateRuleBase(units: list[SimUnit], ctx: SimContext, X: list[Stroke | None], D: Stroke,
+                     trap: bool) -> RuleSim:
     """Gain and fallback reason of each unit under one RULE binding: `simulate`'s semantics for a
-    single group, minus partners / newBase / markCost / boundaryRisk."""
+    single group, minus partners / newBase / markCost / boundaryRisk. Also returns the pass-1 state
+    (new outlines, saved strokes) that `simulateRuleDelta` reuses."""
     n = len(units)
     nbs: list[Strokes | None] = [None] * n
     saved = [0] * n
@@ -988,40 +1041,60 @@ def simulateRuleUnits(units: list[SimUnit], ctx: SimContext, X: list[Stroke | No
     gains = [0] * n
     baseIndex = ctx.baseIndex
     for i, u in enumerate(units):
-        b = nbs[i]
-        if b is None:
+        out = nbs[i]
+        if out is None:
             continue
         pe = buckets[i]
         assert pe is not None
-        existing = baseIndex.get(b)
+        existing = baseIndex.get(out)
         if existing is None and len(pe) == 1:
             gains[i] = saved[i]
             continue
-        spellings = {u.ortho}
-        lost = False
-        for o in existing or ():
-            if o.ortho == u.ortho:
-                continue
-            if o.lemme == u.lemme:
-                if o.base != u.base:
-                    lost = True
-                continue
-            spellings.add(o.ortho)
-        for ortho, rs in pe.items():
-            if ortho == u.ortho:
-                continue
-            first = rs[0]
-            if first.lemme == u.lemme:
-                if first.base != u.base:
-                    lost = True
-                continue
-            spellings.add(ortho)
-        if lost:
-            reasons[i] = "lostDistinction"
-            continue
-        gain = saved[i] - max(0, markCostForCluster(len(spellings)) - u.mcOld)
-        if gain <= 0:
-            reasons[i] = "markCostTooHigh"
-            continue
-        gains[i] = gain
+        gains[i], reasons[i] = _evalCollisions(u, saved[i], pe, existing)
+    return gains, reasons, nbs, saved
+
+
+def simulateRuleDelta(units: list[SimUnit], base: RuleSim, repl: dict[int, SimUnit], ctx: SimContext,
+                      X: list[Stroke | None], D: Stroke,
+                      trap: bool) -> tuple[list[int], list[str | None], list[SimUnit]]:
+    """`simulateRuleBase` of `units` with the units at the positions of `repl` swapped, recomputing only what
+    the swap can change: a unit's result depends on its own data and on the bucket of carriers sharing its new
+    outline, so only the buckets the swapped units leave or join are redone (members in position order, so a
+    bucket's first unit of each spelling is unchanged). Returns (gains, reasons, swapped units)."""
+    gains, reasons, nbs, saved = base
+    gains2, reasons2, nbs2, saved2 = list(gains), list(reasons), list(nbs), list(saved)
+    units2 = list(units)
+    touched: set[Strokes] = set()
+    for i, alt in repl.items():
+        old = nbs[i]
+        if old is not None:
+            touched.add(old)
+        units2[i] = alt
+        nb, s, why = _classifyUnit(alt, X, D, trap)
+        nbs2[i], saved2[i], gains2[i], reasons2[i] = nb, s, 0, why
+        if nb is not None:
+            touched.add(nb)
+    redo = [j for j, nb in enumerate(nbs2) if nb is not None and nb in touched]
+    pending: dict[Strokes, dict[str, list[SimUnit]]] = {}
+    for j in redo:
+        u = units2[j]
+        nb = nbs2[j]
+        assert nb is not None
+        pending.setdefault(nb, {}).setdefault(u.ortho, []).append(u)
+    baseIndex = ctx.baseIndex
+    for j in redo:
+        nb = nbs2[j]
+        assert nb is not None
+        pe = pending[nb]
+        existing = baseIndex.get(nb)
+        if existing is None and len(pe) == 1:
+            gains2[j], reasons2[j] = saved2[j], None
+        else:
+            gains2[j], reasons2[j] = _evalCollisions(units2[j], saved2[j], pe, existing)
+    return gains2, reasons2, units2
+
+
+def simulateRuleUnits(units: list[SimUnit], ctx: SimContext, X: list[Stroke | None], D: Stroke,
+                      trap: bool) -> tuple[list[int], list[str | None]]:
+    gains, reasons, _nbs, _saved = simulateRuleBase(units, ctx, X, D, trap)
     return gains, reasons

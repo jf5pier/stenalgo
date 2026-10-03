@@ -9,7 +9,7 @@ Outputs: `affix_rules.json` (the 30 rules and their keys, read by `util.export_a
 `affix_rules_report.md` (deterministic, no timings) and the cache `AffixSelection.pickle` (gitignored).
 
 Cache convention (like Dictionary.pickle / elicitation_answers.json):
-- `AffixSelection.pickle` absent: full selection (~8 min: exact keypress evaluation of ~40 candidate rules).
+- `AffixSelection.pickle` absent: full selection (~5.5 min: exact keypress evaluation of ~40 candidate rules).
   `rm AffixSelection.pickle` forces it; after ANY lexicon or layout change the cached evaluations are wrong. A
   lexicon/layout fingerprint mismatch only WARNS here (never an automatic rerun).
 - present and made from the current `affix_decisions.json` (md5 stored with the final selection): the final
@@ -380,7 +380,7 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         print(f"affix decisions changed: reselecting with {len(evaluations)} cached rule evaluations")
     else:
-        print(f"{args.pickle} absent: full selection (~8 min)")
+        print(f"{args.pickle} absent: full selection (~5.5 min)")
 
     from util._theoryio import loadPhoneticAndDisambiguatedTheory
     starboard = Starboard.fromJSONFile(KEYBOARD_JSON)
