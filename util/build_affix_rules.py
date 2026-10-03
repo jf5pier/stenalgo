@@ -9,7 +9,7 @@ Outputs: `affix_rules.json` (the 30 rules and their keys, read by `util.export_a
 `affix_rules_report.md` (deterministic, no timings) and the cache `AffixSelection.pickle` (gitignored).
 
 Cache convention (like Dictionary.pickle / elicitation_answers.json):
-- `AffixSelection.pickle` absent: full selection (~5.5 min: exact keypress evaluation of ~40 candidate rules).
+- `AffixSelection.pickle` absent: full selection (~2.5 min (16 cores; ~5.5 min with --workers 1): exact keypress evaluation of ~40 candidate rules).
   `rm AffixSelection.pickle` forces it; after ANY lexicon or layout change the cached evaluations are wrong. A
   lexicon/layout fingerprint mismatch only WARNS here (never an automatic rerun).
 - present and made from the current `affix_decisions.json` (md5 stored with the final selection): the final
@@ -357,7 +357,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--pickle", default=STORE_PICKLE)
     ap.add_argument("--rules", default=RULES_JSON)
     ap.add_argument("--report", default=REPORT_MD)
+    ap.add_argument("--workers", type=int, default=os.cpu_count() or 1,
+                    help="processes of the keypress sweep (default: all cores; 1 = serial; same results either way)")
     args = ap.parse_args(argv)
+    R.SWEEP_WORKERS = max(1, args.workers)
     t0 = time.time()
     decisions = loadDecisions(args.decisions)
     decisionsMd5 = fileMd5(args.decisions)
@@ -380,7 +383,7 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         print(f"affix decisions changed: reselecting with {len(evaluations)} cached rule evaluations")
     else:
-        print(f"{args.pickle} absent: full selection (~5.5 min)")
+        print(f"{args.pickle} absent: full selection (~2.5 min (16 cores; ~5.5 min with --workers 1))")
 
     from util._theoryio import loadPhoneticAndDisambiguatedTheory
     starboard = Starboard.fromJSONFile(KEYBOARD_JSON)

@@ -13,8 +13,10 @@ budgeted, keypress-bound set of rules.
 MEASUREMENT AND PROPOSALS ONLY -- nothing here is wired into the theory.
 """
 import heapq
+import multiprocessing
+from contextlib import contextmanager
 from dataclasses import dataclass, field
-from typing import Callable
+from typing import Callable, Iterator
 
 from src.affixbinding import (
     MAX_ALTERNATIVES, SAMPLE_CARRIERS, SPLIT_MAX_LOSS, PhonemeKeys, salientPhonemes, simScore)
@@ -255,6 +257,23 @@ def prepareKeySweep(rule: Rule, carriers: list[Carrier], ctx: SimContext) -> Key
     return KeySweep(units, alts, scopedIdx, list(ids), exclusionCountOf(rule.forms), len(rule.forms), hasScoped, ctx)
 
 
+def fallbackCarriers(sw: KeySweep, carriers: list[Carrier], k: Stroke) -> tuple[list[Carrier], int]:
+    """`resolveFallbacks(rule, k, carriers, ctx)` from the lean units, without the full `simulate`."""
+    ctx = sw.ctx
+    D = tuple(sorted(k))
+    gains = simulateRuleBase(sw.units, ctx, mergeUnions(sw.neighbours, k, ctx), D, D in ctx.singleStrokeOutlines)[0]
+    out = list(carriers)
+    n = 0
+    for i in sw.scopedIdx:
+        if gains[i] <= 0:
+            alt = sw.alts[i]
+            if alt is None:
+                raise KeyError(carriers[i].rec.idx)
+            out[i] = alt.carrier
+            n += 1
+    return out, n
+
+
 def sweepKey(sw: KeySweep, k: Stroke, limit: int | None) -> tuple[float, float, int]:
     """(score, exception rate, fallback count) of `rule` under key `k` on the first `limit` carriers (all when
     None): bit-identical to `resolveFallbacks` + `simulate` + `ruleScoreFromResults` / `_exceptionRate`."""
@@ -291,6 +310,60 @@ def sweepKey(sw: KeySweep, k: Stroke, limit: int | None) -> tuple[float, float, 
              - FORM_COST * (sw.numForms - 1))
     total = covered + len(exceptions)
     return score, (len(exceptions) / total if total else 0.0), nFallback
+
+
+SWEEP_WORKERS = 1       # worker processes of the keypress sweep (1: serial); `util.build_affix_rules --workers`
+SWEEP_MIN_KEYS = 4      # fewer keys than this are swept in-process (a fork would cost more than it saves)
+_SWEEP: KeySweep | None = None   # the sweep the forked workers read (set before the fork, never mutated)
+_GROUPS: dict[tuple[Stroke | None, bool], int] = {}   # the stage-1 sample's neighbour groups, likewise
+
+
+def _sweepTask(task: tuple[Stroke, int | None]) -> tuple[float, float, int]:
+    assert _SWEEP is not None
+    return sweepKey(_SWEEP, task[0], task[1])
+
+
+def _floorTask(k: Stroke) -> float:
+    assert _SWEEP is not None
+    return _exceptionRateFloor(_GROUPS, k, _SWEEP.ctx)
+
+
+@dataclass
+class KeyMaps:
+    """In-key-order maps over keypresses for one rule: `floor(keys)` is `_exceptionRateFloor` on the stage-1
+    sample's groups, `sweep(keys, limit)` is `sweepKey(sw, k, limit)`."""
+    floor: Callable[[list[Stroke]], list[float]]
+    sweep: Callable[[list[Stroke], int | None], list[tuple[float, float, int]]]
+
+
+@contextmanager
+def keySweepMap(sw: KeySweep, sampleGroups: dict[tuple[Stroke | None, bool], int]) -> Iterator[KeyMaps]:
+    """The maps over a fork pool when `SWEEP_WORKERS > 1` (the workers inherit `sw` copy-on-write; both functions
+    are pure up to the `ctx.isLegal` memo, so the results are bit-identical to the serial ones whatever the
+    scheduling)."""
+    global _SWEEP, _GROUPS
+    _SWEEP, _GROUPS = sw, sampleGroups
+    pool = multiprocessing.get_context("fork").Pool(SWEEP_WORKERS) if SWEEP_WORKERS > 1 else None
+
+    def chunk(n: int) -> int:
+        return max(1, n // (SWEEP_WORKERS * 8))
+
+    def floor(keys: list[Stroke]) -> list[float]:
+        if pool is None or len(keys) < SWEEP_MIN_KEYS:
+            return [_exceptionRateFloor(sampleGroups, k, sw.ctx) for k in keys]
+        return list(pool.imap(_floorTask, keys, chunksize=chunk(len(keys))))
+
+    def sweep(keys: list[Stroke], limit: int | None) -> list[tuple[float, float, int]]:
+        if pool is None or len(keys) < SWEEP_MIN_KEYS:
+            return [sweepKey(sw, k, limit) for k in keys]
+        return list(pool.imap(_sweepTask, [(k, limit) for k in keys], chunksize=chunk(len(keys))))
+    try:
+        yield KeyMaps(floor, sweep)
+    finally:
+        _SWEEP, _GROUPS = None, {}
+        if pool is not None:
+            pool.close()    # not terminate(): that waits seconds on the workers' queue lock
+            pool.join()
 
 
 def chooseRuleKeypress(rule: Rule, pk: PhonemeKeys, ctx: SimContext, keypresses: list[Stroke]) -> None:
@@ -333,23 +406,23 @@ def chooseRuleKeypress(rule: Rule, pk: PhonemeKeys, ctx: SimContext, keypresses:
     stage1: list[tuple[float, float, Stroke]] = []
     sampleGroups = _neighbourGroups(rule.position, sample)
     sw = prepareKeySweep(rule, carriers, ctx)
-    survivors = [k for k in keypresses if _exceptionRateFloor(sampleGroups, k, ctx) <= MAX_EXCEPTION_RATE]
-    # (the floor is exact: pass 1 alone proves the exception rate exceeds the cap for the dropped keys)
-    for k, (sc, rate, _nf) in [(k, sweepKey(sw, k, SAMPLE_CARRIERS)) for k in survivors]:
-        if sc > 0 and rate <= MAX_EXCEPTION_RATE:
-            stage1.append((sc, simOf[k], k))
-    stage1.sort(key=lambda t: (-t[0], -t[1], t[2]))
-    finalKeys = [(k, s) for _sc, s, k in stage1[:MAX_ALTERNATIVES]]
     finals: list[tuple[float, Stroke, float, int]] = []
-    for k, s in finalKeys:
-        sc, rate, nFallback = sweepKey(sw, k, None)
-        if rate <= MAX_EXCEPTION_RATE:   # re-confirm against the full carrier set
-            finals.append((sc, k, s, nFallback))
+    with keySweepMap(sw, sampleGroups) as maps:
+        # (the floor is exact: pass 1 alone proves the exception rate exceeds the cap for the dropped keys)
+        survivors = [k for k, fl in zip(keypresses, maps.floor(keypresses)) if fl <= MAX_EXCEPTION_RATE]
+        for k, (sc, rate, _nf) in zip(survivors, maps.sweep(survivors, SAMPLE_CARRIERS)):
+            if sc > 0 and rate <= MAX_EXCEPTION_RATE:
+                stage1.append((sc, simOf[k], k))
+        stage1.sort(key=lambda t: (-t[0], -t[1], t[2]))
+        finalKeys = [(k, s) for _sc, s, k in stage1[:MAX_ALTERNATIVES]]
+        for (k, s), (sc, rate, nFallback) in zip(finalKeys, maps.sweep([k for k, _s in finalKeys], None)):
+            if rate <= MAX_EXCEPTION_RATE:   # re-confirm against the full carrier set
+                finals.append((sc, k, s, nFallback))
     finals.sort(key=lambda t: -t[0])
     if not finals:
         return
     _bestScore, bestKeys, bestSim, bestFallbacks = finals[0]
-    carriersK, nFallback = resolveFallbacks(rule, bestKeys, carriers, ctx)
+    carriersK, nFallback = fallbackCarriers(sw, carriers, bestKeys)
     (bestResults,) = simulate([(Binding(rule.position, RULE, bestKeys), carriersK)], ctx)
     sc, benefit, excCount, excFreq, top = ruleScoreFromResults(
         bestResults, exclusionCount + bestFallbacks, len(rule.forms))

@@ -140,3 +140,11 @@ Profile of the largest prefix rule (2,000-carrier sample): stage 1 is ~90% of a 
 the full carriers ~1.3 s. Per `sweepKey`: mergeUnions 19%, pass A 42%, pass B 39% (only ~11 of 2,000 carriers failed, yet
 pass B reran all of them). Implemented `simulateRuleDelta` (only the buckets left or joined by swapped units are redone) and a
 leaner `mergeUnions` (frozenset intersection). Golden run again byte-identical; selection 429 s -> 307 s (total 5m26s).
+
+### Fork pool (2026-10-02, later still)
+`keySweepMap` (src/affixrules.py) maps the floor filter, the stage-1 sweep and the finals over a fork pool
+(`--workers N`, default all cores, 1 = serial); results are bit-identical (golden files and pickle equal). 16 cores:
+selection 307 s -> 121 s (total 2m25s), only ~2.5x: setup is ~23 s serial and the pool is forked once per rule.
+`pool.terminate()` stalled 4-8 s per rule on the workers' queue lock; `close()` + `join()` fixed that.
+Replacing the winner's `resolveFallbacks` (a full `simulate`) by `fallbackCarriers` saved almost nothing.
+Next candidates if needed: profile the non-sweep part of selectRules/swapPass/bindKeypresses, one persistent pool.

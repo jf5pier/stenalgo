@@ -73,6 +73,9 @@ def test_sweepKey_equals_old_path_for_every_keypress(position, seed):
     if trapStroke is not None and trapStroke not in keypresses:
         keypresses = keypresses + [trapStroke]
     reasonsSeen: set[str | None] = set()
+    from src.affixrules import fallbackCarriers
+    for k in keypresses[::11]:
+        assert fallbackCarriers(sw, carriers, k) == resolveFallbacks(rule, k, carriers, ctx)
     for sample in (50, None):
         cs = carriers if sample is None else carriers[:sample]
         for k in keypresses[::3] if sample else keypresses:
@@ -103,3 +106,23 @@ def test_simulateRuleUnits_matches_simulate_gains_and_reasons(position):
         (res,) = simulate([(Binding(position, RULE, k), carriers)], ctx, boundaryRisk=False)
         assert gains == [r.gain for r in res]
         assert reasons == [r.reason for r in res]
+
+
+def test_keySweepMap_pool_equals_serial(monkeypatch):
+    import src.affixrules as R
+    sb = Starboard.fromJSONFile("starboard3h.json")
+    assert sb is not None
+    rng = random.Random(3)
+    recs = _records(rng, list(phonemeKeys(sb)[:9]), 200)
+    ctx = SimContext(sb, recs)
+    rule = _rule(PREFIX, recs)
+    sw = prepareKeySweep(rule, poolCarriers(rule.forms), ctx)
+    keys = enumerateKeypresses(sb, ctx)[::9]
+    serial = [sweepKey(sw, k, 40) for k in keys]
+    monkeypatch.setattr(R, "SWEEP_WORKERS", 3)
+    groups = R._neighbourGroups(PREFIX, poolCarriers(rule.forms)[:40])
+    with R.keySweepMap(sw, groups) as maps:
+        assert maps.sweep(keys, 40) == serial
+        assert maps.sweep(keys[:2], None) == [sweepKey(sw, k, None) for k in keys[:2]]
+        assert maps.floor(keys) == [R._exceptionRateFloor(groups, k, ctx) for k in keys]
+    assert R._SWEEP is None
