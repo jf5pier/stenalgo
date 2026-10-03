@@ -49,7 +49,7 @@ The real dependency order. Steps 0 and 1 and the human loop 4h are run by hand, 
 | 7 | `python -m util.build_disambiguated_theory` | Different-Lemma or Grammatical-Category Disambiguation (S7) | to refresh `disambiguated_theory.tsv` and the exporters' `DisambiguatedTheory.pickle` | Fast (pickles exist); hard-errors naming the exact prerequisite commands when the pickles or JSONs are missing. Also writes the fingerprinted `DisambiguatedTheory.pickle` every exporter loads instead of recomputing (fact 1). |
 | 8 | `python -m util.export_plover_dictionary`, `python -m util.export_plover_system` | Theory Export (S8), Plover branch | Plover | Either order. |
 | 9 | `python -m util.export_keyboard_layout` (after step 6), `python -m util.export_practice_words`, **then** `python -m util.export_practice_sentences`, then `python -m util.export_definitions`, then `python -m util.export_lessons` | Theory Export (S8), trainer branch | steno-trainer | `export_practice_sentences` reads `practice-words.json` (export_practice_sentences.py:157); `export_lessons` reads its Keypress Groups from `realization_report.json`, not `keypress_groups.json` (export_lessons.py:267). |
-| 10 | `python -m util.build_affix_rules`, then `python -m util.export_affix_dictionary` | Affix Abbreviation Building (S9a, S9b) | the optional affix abbreviation layer | After the whole theory and its exports. S9a reads the committed `affix_decisions.json`; `AffixSelection.pickle` is its cache (absent: ~2.5 min full selection on 16 cores, ~5.5 min with `--workers 1`; present: reused or cheaply reselected; `rm` it after any lexicon or layout change). Lists PENDING decisions, asks nothing. |
+| 10 | `python -m util.build_affix_rules`, then `python -m util.export_affix_dictionary`, then `python -m util.export_affix_lessons` | Affix Abbreviation Building (S9a, S9b, S9c) | the optional affix abbreviation layer | After the whole theory and its exports. S9a reads the committed `affix_decisions.json`; `AffixSelection.pickle` is its cache (absent: ~2.5 min full selection on 16 cores, ~5.5 min with `--workers 1`; present: reused or cheaply reselected; `rm` it after any lexicon or layout change). Lists PENDING decisions, asks nothing. |
 | 10h | `python -m util.review_affix_rules` → `python -m util.build_affix_rules` | Affix Abbreviation Building, review | only when step 10 lists PENDING decisions | Hand-run and interactive: proposes each pending item with its help/hurt numbers (growth BEFORE fusion; a fusion is judged with its parts' decided growth, and a fused merge inherits its parts' growth), writes `affix_decisions.json` after every answer, then reselects by itself (cached, about a minute) and continues with what is newly pending, until nothing is pending, you quit, or a pass saved nothing. |
 | opt | `python -m util.check_conjugation_disambiguation_order` | Elicitation Phase: Answer Collection, validator | checking answers | Writes `conjugation_disambiguation_report.json` (gitignored). |
 
@@ -264,6 +264,7 @@ Affix Abbreviation Building (S9) ................. optional layer after the fini
 ├─ S9a  Rule selection and keypress binding — python -m util.build_affix_rules
 │       ← affix_decisions.json (committed verdicts), AffixSelection.pickle (cache) → affix_rules.json, affix_rules_report.md
 └─ S9b  Affix dictionary — python -m util.export_affix_dictionary → plover_stenalgo_affix_dictionary.json, affix_abbreviations.tsv
+└─ S9c  Trainer affix lessons — python -m util.export_affix_lessons → steno-trainer/public/data/affix-lessons.json
 ```
 
 The two homophone problems have two mechanisms. Words that are forms of the same lemma and
@@ -1960,3 +1961,11 @@ no outline of the stable theory and no more frequent spelling's abbreviation; ev
 same marking, a shared outline going to the most frequent spelling; a rule whose anchor vanished is skipped with a warning.
 **Artifacts** writes `plover_stenalgo_affix_dictionary.json` (short outline → word) and `affix_abbreviations.tsv`; fails if an abbreviation
 collides with `plover_stenalgo_dictionary.json`.
+
+### Trainer affix lessons — util/export_affix_lessons.main (S9c)
+
+**Called by** `python dictionary.py` (after S9b), or by hand.
+**Input state** the same as S9b (loaded through `util/_affixio.loadAbbreviations`).
+**Transformation** per rule (rank order) the 20 most frequent carriers of its primary route, then one lesson of the 20 most frequent
+marked routes (route >= 1) of verbs; schema and text conventions in `docs/specs/affix-lessons.md`.
+**Artifacts** writes `steno-trainer/public/data/affix-lessons.json` only; the other trainer files stay byte-identical.

@@ -387,6 +387,7 @@ the pickle caches are never checked for staleness.
 | `affix_decisions.json` | The user's affix growth and fusion verdicts (the only hand-decided input of Affix Abbreviation Building (S9)) | `python -m util.review_affix_rules` (interactive; writes after every answer) |
 | `affix_rules.json`, `affix_rules_report.md` | The 30 selected affix rules with their keys, and the deterministic report | `python -m util.build_affix_rules` (Affix Abbreviation Building (S9a)) |
 | `plover_stenalgo_affix_dictionary.json`, `affix_abbreviations.tsv` | The optional affix dictionary (79,715 short outlines, one per word and marked route) and its review table | `python -m util.export_affix_dictionary` (Affix Abbreviation Building (S9b)) |
+| `steno-trainer/public/data/affix-lessons.json` | The trainer's affix lessons (30 rules + conjugated forms) and rule legend; optional, merged over the stub of `lessons.json` | `python -m util.export_affix_lessons` (Affix Abbreviation Building (S9c)) |
 | `excluded_words.txt` | Excluded words (44 spellings dropped in Dictionary Loading (S3)) | hand-maintained input |
 | `resources/reform1990.tsv` | 1990-reform spelling table (source input of the reform rewrites and doublet pairs) | hand-maintained input |
 
