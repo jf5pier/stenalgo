@@ -66,7 +66,10 @@ were deleted (2026-10-01): no growth without a verdict.
 4. **Fallback**: a carrier a form names but that gains nothing under the rule's keys (collision, no legal chord)
    keeps the anchor alone. It is counted and priced 5 per word, so a scope that falls back often loses.
 5. **Keypress**: `chooseRuleKeypress` tests every legal keypress on the pooled carriers (fallbacks resolved per
-   key) and keeps the best score; a rule must keep its exception rate under `MAX_EXCEPTION_RATE`.
+   key) and keeps the best score; a rule must keep its exception rate under `MAX_EXCEPTION_RATE`. The per-key
+   sweep (`sweepKey`, over a fork pool: `--workers N`) is a lean re-implementation of `simulate` for one rule group
+   (`simulateRuleBase`/`simulateRuleDelta` in `src/affixes.py`); it MUST mirror `simulate`, which the differential
+   test `src/test/affixrules_sweep_test.py` and the winner's `simulate` cross-check enforce (identical results).
 6. **Selection**: lazy greedy over the roots, each word credited once at its best rule, 30 rules; two rules may share
    a keypress when a joint simulation loses little.
 
