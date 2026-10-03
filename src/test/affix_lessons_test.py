@@ -10,6 +10,7 @@ import pytest
 from ..affixabbrev import Abbreviation, RuleSpec
 from ..keyboard import Starboard
 from util.export_affix_lessons import WORDS_PER_LESSON, buildAffixLessons, isVerb, ruleLabel
+from util._stenorender import renderFinalStrokesToRTFCRE
 from util.export_lessons import RECORD_FIELDS
 
 
@@ -19,6 +20,11 @@ def starboard() -> Starboard:
     board = Starboard.fromJSONFile(path)
     assert board is not None
     return board
+
+
+def starboard_steno(*strokes):
+    board = Starboard.fromJSONFile(os.path.join(os.path.dirname(__file__), "..", "..", "starboard3h.json"))
+    return renderFinalStrokesToRTFCRE(board, strokes)
 
 
 RULES = [
@@ -71,8 +77,8 @@ def test_word_record_shape_and_alternates(starboard):
     word = _build(starboard)["lessons"][1]["words"][0]
     assert list(word)[:len(RECORD_FIELDS)] == list(RECORD_FIELDS) and "alternates" in word
     assert word["strokes"] == [[9, 12], [13]]
-    assert word["alternates"] == [[[3], [12], [13]]]
-    assert all(stroke == sorted(stroke) for stroke in word["strokes"] + word["alternates"][0])
+    assert word["alternates"] == [{"steno": starboard_steno((3,), (12,), (13,)), "strokes": [[3], [12], [13]]}]
+    assert all(stroke == sorted(stroke) for stroke in word["strokes"] + word["alternates"][0]["strokes"])
     assert word["before"] == word["after"] == ""
 
 
