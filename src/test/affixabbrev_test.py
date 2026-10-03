@@ -18,12 +18,12 @@ def _sb():
     return sb
 
 
-def _rec(ortho, base, freq=10.0, marks=(), extra=()):
+def _rec(ortho, base, freq=10.0, marks=(), extra=(), routes=()):
     _idx[0] += 1
     return WordRecord(
         idx=_idx[0], ortho=ortho, lemme=ortho, gramCat="NOM", frequency=freq, phonoSylls=tuple("x" * len(base)),
         orthoSylls=tuple(ortho[i:i + 1] for i in range(len(base))), base=tuple(base), extra=tuple(extra),
-        isLemmaForm=True, markKeys=tuple(marks))
+        isLemmaForm=True, markKeys=tuple(marks), routes=tuple(routes))
 
 
 def _pool(*words, forms=()):
@@ -97,3 +97,25 @@ def test_load_rule_specs(tmp_path):
     p = tmp_path / "r.json"
     p.write_text(json.dumps([{"rank": 2, "position": "suffix", "ortho": "ment", "phono": "m@", "keys": [16, 20, 25]}]))
     assert loadRuleSpecs(str(p)) == [RuleSpec(2, "suffix", "ment", "m@", (16, 20, 25))]
+
+
+def test_every_route_of_a_word_keeps_its_own_marking():
+    w = _rec("aabc", [(2,), (3,), (7,)], routes=[((), ()), ((10,), ()), ((), ((18,),))])
+    abbr, stats = _run(_pool(w), [w])
+    byRoute = {a.route: a for a in abbr}
+    assert byRoute[0].outline == ((3, 4), (7,))
+    assert byRoute[1].outline == ((3, 4), (7, 10))
+    assert byRoute[2].outline == ((3, 4), (7,), (18,))
+    assert byRoute[2].longOutline == ((2,), (3,), (7,), (18,))
+    assert byRoute[1].longOutline == ((2,), (3,), (7, 10))
+    assert stats.abbreviated == 3 and stats.noOption == 0
+
+
+def test_another_route_never_displaces_a_primary_abbreviation_and_respects_the_stable_theory():
+    big = _rec("aabc", [(2,), (3,), (7,)], freq=1.0)
+    other = _rec("aabd", [(5,), (3,), (7,)], freq=50.0, routes=[((), ()), ((10,), ())])
+    # other's route 1 outline ((3, 4), (7, 10)) is free; big's primary and other's primary share ((3, 4), (7,))
+    abbr, _ = _run(_pool(big, other), [big, other])
+    assert {(a.ortho, a.route) for a in abbr} == {("aabd", 0), ("aabd", 1)}
+    abbr2, _ = _run(_pool(big, other), [big, other], taken=[((3, 4), (7, 10))])
+    assert {(a.ortho, a.route) for a in abbr2} == {("aabd", 0)}

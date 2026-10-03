@@ -5,7 +5,7 @@ stays complete without it; enable this one in Plover (higher priority) to use th
 
 Outputs:
 - plover_stenalgo_affix_dictionary.json  steno -> spelling (only abbreviations, sorted by steno)
-- affix_abbreviations.tsv                 spelling, long steno, short steno, strokes saved, rule rank, anchor, k, frequency
+- affix_abbreviations.tsv                 spelling, long steno, short steno, strokes saved, rule rank, anchor, k, frequency, route
 
 Run: python -m util.export_affix_dictionary
 Requires the stable theory (same inputs as util.export_plover_dictionary) and affix_rules.json, the rule list
@@ -83,9 +83,9 @@ def main() -> None:
     with open(OUTPUT_DICTIONARY, "w", encoding="utf-8") as f:
         json.dump(stenoDict, f, ensure_ascii=False, indent=1, sort_keys=True)
     with open(OUTPUT_TSV, "w", encoding="utf-8") as f:
-        f.write("spelling\tlong\tshort\tsaved\trank\tanchor\tk\tfrequency\n")
+        f.write("spelling\tlong\tshort\tsaved\trank\tanchor\tk\tfrequency\troute\n")
         for a, short, long in rows:
-            f.write(f"{a.ortho}\t{long}\t{short}\t{a.saved}\t{a.rank}\t{a.anchor}\t{a.k}\t{a.frequency:.2f}\n")
+            f.write(f"{a.ortho}\t{long}\t{short}\t{a.saved}\t{a.rank}\t{a.anchor}\t{a.k}\t{a.frequency:.2f}\t{a.route}\n")
 
     savedFreq = sum(a.frequency * a.saved for a in abbreviations)
     print(f"Wrote {OUTPUT_DICTIONARY} ({len(stenoDict)} abbreviations) and {OUTPUT_TSV}: {stats.carriers} carrier words, "
