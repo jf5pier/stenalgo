@@ -106,6 +106,10 @@ python -m util.export_affix_dictionary       # Affix Abbreviation Building (S9b)
 # Prerequisites: both pickles, the committed affix_rules.json. Outputs: plover_stenalgo_affix_dictionary.json,
 # affix_abbreviations.tsv.
 
+python -m util.export_affix_lessons          # Affix Abbreviation Building (S9c): the trainer's affixes lesson track
+# Prerequisites: both pickles, starboard3h.json, the committed affix_rules.json. Outputs: steno-trainer/public/data/affix-lessons.json
+# (30 rule lessons + one on conjugated forms; the other trainer JSONs are untouched).
+
 python dictionary.py                         # the orchestrator over everything from S2 to S9
 # Prerequisites: as above (skips nothing; aborts on the first failing step).
 # Outputs: all of the S2-S9 outputs above, in dependency order; per-step wall times
@@ -164,7 +168,7 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
   `resolved_press_sets.json`, `keypress_groups.json`, `realization_report.json`,
   `plover_stenalgo_dictionary.json` and `steno-trainer/public/data/*.json` against a
   pre-change baseline — they must be identical. After a change that reaches the affix layer (S9) also compare
-  `affix_rules.json`, `affix_rules_report.md`, `plover_stenalgo_affix_dictionary.json` and `affix_abbreviations.tsv`.
+  `affix_rules.json`, `affix_rules_report.md`, `plover_stenalgo_affix_dictionary.json`, `affix_abbreviations.tsv` and `steno-trainer/public/data/affix-lessons.json`.
 - The hand-run ambiguity report (`python -m src.ambiguitychecker`, after Phonetic Theory
   Building (S5)) is the drift signal for homophone scope; its "overflow" metric counts
   lemma-homophone groups beyond the four-code budget.
