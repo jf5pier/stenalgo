@@ -30,7 +30,7 @@ hand-run: python -m util.review_affix_rules      proposes each pending item, y/n
           continues with what is newly pending, until nothing is pending, you quit, or a pass saved nothing.
 ```
 
-Cache convention (the same as `Dictionary.pickle` and `elicitation_answers.json`): the ~5.5-minute selection reruns only when its
+Cache convention (the same as `Dictionary.pickle` and `elicitation_answers.json`): the ~2.5-minute selection reruns only when its
 pickle is missing (`rm AffixSelection.pickle` to force it, after ANY lexicon or layout change: the cached evaluations are of the old
 input; a fingerprint mismatch of the two lexicons and `starboard3h.json` only WARNS, it never reruns by itself); `affix_decisions.json`
 is reused while it exists. Nothing interactive runs inside `python dictionary.py`: an undecided item gets the safe default (a merge

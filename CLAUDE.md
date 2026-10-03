@@ -95,7 +95,7 @@ python -m util.export_lessons
 
 python -m util.build_affix_rules             # Affix Abbreviation Building (S9a), optional layer after S8
 # Prerequisites: both pickles, starboard3h.json, the committed affix_decisions.json (the user's fusion/growth verdicts).
-# Outputs: affix_rules.json, affix_rules_report.md, AffixSelection.pickle (gitignored cache: absent = full ~5.5 min
+# Outputs: affix_rules.json, affix_rules_report.md, AffixSelection.pickle (gitignored cache: absent = full ~2.5 min (16 cores, --workers N; ~5.5 min serial)
 # selection; present = reused, or reselected from its cached rule evaluations when the decisions changed; rm it after any
 # lexicon or layout change). Asks nothing: undecided items get the safe default and are listed as PENDING.
 
