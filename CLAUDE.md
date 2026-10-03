@@ -113,7 +113,8 @@ python dictionary.py                         # the orchestrator over everything 
 ```
 
 (Diagnostics, hand-run, stay out of the list above: `python -m src.ambiguitychecker`,
-`python -m util.check_conjugation_disambiguation_order`, the featuregroupingsat K-scan
+`python -m util.check_conjugation_disambiguation_order`,
+`python -m util.validate_affix_markings` (the affix abbreviations keep every route's marks; ~25 s), the featuregroupingsat K-scan
 (`python src/featuregroupingsat.py`), the layout dumper (`python -m src.keyboard`),
 the Ngram toolbox (`python -m util.ngram_data download|extract-lexique|scan|query|purge`
 — purge is manual-only by policy; the ~5 GB v3 shards live in gitignored
