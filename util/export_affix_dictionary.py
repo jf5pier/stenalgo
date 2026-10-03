@@ -18,12 +18,10 @@ import json
 import os
 import time
 
-from src import affixes as A
-from src.affixabbrev import buildAbbreviations, loadRuleSpecs, theoryOutlines
 from src.affixdecisions import inputFingerprint
 from src.keyboard import Starboard
 from util._stenorender import renderFinalStrokesToRTFCRE
-from util._theoryio import loadPhoneticAndDisambiguatedTheory
+from util._affixio import loadAbbreviations
 
 KEYBOARD_JSON = "starboard3h.json"
 RULES_JSON = "affix_rules.json"
@@ -53,17 +51,8 @@ def main() -> None:
         raise RuntimeError(f"{RULES_JSON} not found: run `python -m util.build_affix_rules` first.")
     warnIfSelectionIsStale()
 
-    phonetic, disambiguated, _wordToStrokes, _wordsByOrthoLemme = loadPhoneticAndDisambiguatedTheory(starboard)
-    records, skipped = A.extractRecords(phonetic, disambiguated)
-    print(f"{len(records)} records ({skipped} skipped) in {time.time() - t0:.0f}s", flush=True)
-    seedPairs, _fams = A.loadSeeds()
-    pool = A.buildCandidates(records, seedPairs)
-    print(f"pool {len(pool)} nodes in {time.time() - t0:.0f}s", flush=True)
-    ctx = A.SimContext(starboard, records)
-    longOutline = {r.idx: A.canonicalizeStrokes(A.fullStrokesOf(r)) for r in records}
-
-    abbreviations, stats = buildAbbreviations(
-        loadRuleSpecs(RULES_JSON), pool, ctx, theoryOutlines(disambiguated), longOutline)
+    loaded = loadAbbreviations(starboard)
+    abbreviations, stats, disambiguated = loaded.abbreviations, loaded.stats, loaded.disambiguated
 
     stenoDict: dict[str, str] = {}
     rows = []
