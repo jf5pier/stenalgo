@@ -274,7 +274,7 @@ update msg model =
                                 , lastStroke = observed
                                 , typed =
                                     if newDrill.feedback == Just True then
-                                        recordTypedStroke drill model.typed
+                                        recordTypedStroke observed drill model.typed
 
                                     else
                                         model.typed
@@ -299,16 +299,21 @@ noTypedStrokes =
 line: a new line after a completed word, otherwise appended. A stroke
 completes the word when it's the last of the item, or of the current
 sentence word. -}
-recordTypedStroke : Drill.State -> TypedStrokes -> TypedStrokes
-recordTypedStroke drill typed =
+recordTypedStroke : Set.Set Int -> Drill.State -> TypedStrokes -> TypedStrokes
+recordTypedStroke observed drill typed =
     case Drill.currentWord drill of
         Just word ->
             let
                 index =
                     drill.currentStrokeIndex
 
+                -- the outline being typed: an alternate (long) one when the learner chose it
+                outline =
+                    Drill.matchedOutline observed drill
+                        |> Maybe.withDefault { steno = word.steno, strokes = word.strokes }
+
                 stroke =
-                    String.words word.steno
+                    String.words outline.steno
                         |> List.concatMap (String.split "/")
                         |> List.drop index
                         |> List.head
@@ -316,7 +321,7 @@ recordTypedStroke drill typed =
 
                 wordEnds =
                     if List.isEmpty word.segments then
-                        [ List.length word.strokes ]
+                        [ List.length outline.strokes ]
 
                     else
                         word.segments

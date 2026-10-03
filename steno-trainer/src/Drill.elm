@@ -1,4 +1,4 @@
-module Drill exposing (PracticeWord, Segment, State, applyStroke, currentSegmentIndex, currentWord, decoder, expectedStroke, init, nextWord, reshuffle, sentenceDecoder, wordDecoder)
+module Drill exposing (Outline, PracticeWord, Segment, State, applyStroke, currentSegmentIndex, currentWord, decoder, matchedOutline, expectedStroke, init, nextWord, reshuffle, sentenceDecoder, wordDecoder)
 
 {-| The drill engine: a shuffled walk through the word list (loaded already
 frequency-ordered by `util/export_practice_words.py`, but drilled in a
@@ -13,6 +13,7 @@ shuffled order and hands it to `init`/`reshuffle`.
 
 import Array exposing (Array)
 import Json.Decode as D
+import Json.Decode.Pipeline exposing (hardcoded, optional, required)
 import Set exposing (Set)
 
 
@@ -26,7 +27,11 @@ and `before`/`after` the context words shown around it for that reading
 A practice sentence is the same shape -- `ortho` its text, `strokes` all its
 words' strokes in order -- plus one `Segment` per word, so the view can say
 which word the next stroke belongs to (see `sentenceDecoder`). A single
-word has no segments. -}
+word has no segments.
+
+`strokes` is the outline the hint shows. `alternates` lists other outlines
+that are equally accepted (an affix lesson's long outline next to the short
+one, see `util/export_affix_lessons.py`); usually empty. -}
 type alias PracticeWord =
     { ortho : String
     , before : String
@@ -36,6 +41,15 @@ type alias PracticeWord =
     , steno : String
     , strokes : List (List Int)
     , segments : List Segment
+    , alternates : List Outline
+    }
+
+
+{-| An accepted way of writing an item: its steno text (what the hint and the
+typed-strokes line show) and its chords. -}
+type alias Outline =
+    { steno : String
+    , strokes : List (List Int)
     }
 
 
@@ -52,15 +66,23 @@ type alias Segment =
 
 wordDecoder : D.Decoder PracticeWord
 wordDecoder =
-    D.map8 PracticeWord
-        (D.field "ortho" D.string)
-        (D.field "before" D.string)
-        (D.field "after" D.string)
-        (D.field "label" D.string)
-        (D.field "phonology" D.string)
+    D.succeed PracticeWord
+        |> required "ortho" D.string
+        |> required "before" D.string
+        |> required "after" D.string
+        |> required "label" D.string
+        |> required "phonology" D.string
+        |> required "steno" D.string
+        |> required "strokes" (D.list (D.list D.int))
+        |> hardcoded []
+        |> optional "alternates" (D.list outlineDecoder) []
+
+
+outlineDecoder : D.Decoder Outline
+outlineDecoder =
+    D.map2 Outline
         (D.field "steno" D.string)
         (D.field "strokes" (D.list (D.list D.int)))
-        (D.succeed [])
 
 
 decoder : D.Decoder (List PracticeWord)
@@ -80,15 +102,16 @@ segmentDecoder =
 sentenceDecoder : D.Decoder (List PracticeWord)
 sentenceDecoder =
     D.list
-        (D.map8 PracticeWord
-            (D.field "text" D.string)
-            (D.succeed "")
-            (D.succeed "")
-            (D.succeed "")
-            (D.field "phonology" D.string)
-            (D.field "steno" D.string)
-            (D.field "strokes" (D.list (D.list D.int)))
-            (D.field "words" (D.list segmentDecoder))
+        (D.succeed PracticeWord
+            |> required "text" D.string
+            |> hardcoded ""
+            |> hardcoded ""
+            |> hardcoded ""
+            |> required "phonology" D.string
+            |> required "steno" D.string
+            |> required "strokes" (D.list (D.list D.int))
+            |> required "words" (D.list segmentDecoder)
+            |> optional "alternates" (D.list outlineDecoder) []
         )
 
 
@@ -96,6 +119,7 @@ type alias State =
     { words : Array PracticeWord
     , currentWordIndex : Int
     , currentStrokeIndex : Int
+    , typed : List (List Int) -- the strokes accepted so far for the current item, in order
     , feedback : Maybe Bool
     }
 
@@ -105,6 +129,7 @@ init words =
     { words = Array.fromList words
     , currentWordIndex = 0
     , currentStrokeIndex = 0
+    , typed = []
     , feedback = Nothing
     }
 
@@ -118,6 +143,7 @@ reshuffle words state =
         | words = Array.fromList words
         , currentWordIndex = 0
         , currentStrokeIndex = 0
+        , typed = []
     }
 
 
@@ -174,10 +200,34 @@ expectedStroke state =
         |> Maybe.map Set.fromList
 
 
+{-| The item's accepted outlines (the primary one first) that start with the
+given strokes. -}
+consistentOutlines : List (List Int) -> PracticeWord -> List Outline
+consistentOutlines typedNow word =
+    { steno = word.steno, strokes = word.strokes }
+        :: word.alternates
+        |> List.filter (\outline -> List.take (List.length typedNow) outline.strokes == typedNow)
+
+
+{-| The outline the next stroke would continue, were it accepted: the first
+(the primary one wins) outline consistent with the strokes so far plus
+`observed`. `Main.elm` uses it, on the state BEFORE `applyStroke`, to show
+what the learner typed. -}
+matchedOutline : Set Int -> State -> Maybe Outline
+matchedOutline observed state =
+    currentWord state
+        |> Maybe.andThen (\word -> consistentOutlines (state.typed ++ [ Set.toList observed ]) word |> List.head)
+
+
 {-| Advance the drill on a decoded stroke: match -> flash correct, move to the
 next stroke (or the next word, wrapping, if that was the word's last stroke);
 no match -> flash incorrect, retry the same word/stroke. No counter, no
 penalty, no lockout -- deliberately bare minimum.
+
+A stroke matches when the strokes accepted so far plus this one are the start
+of ANY accepted outline of the word (`strokes` or one of `alternates`); the
+word is done when they are a whole outline. Without alternates this is the
+plain one-outline comparison. The hint (`expectedStroke`) stays on `strokes`.
 
 Returns whether this stroke completed the last word of the current pass (the
 index wrapped back to 0), so `Main.elm` knows to generate a new shuffle --
@@ -186,32 +236,44 @@ boundary rather than acting on it.
 -}
 applyStroke : Set Int -> State -> ( State, Bool )
 applyStroke observed state =
-    case ( currentWord state, expectedStroke state ) of
-        ( Just word, Just expected ) ->
-            if observed == expected then
-                if state.currentStrokeIndex + 1 >= List.length word.strokes then
-                    let
-                        newIndex =
-                            wrappedIndex state (state.currentWordIndex + 1)
-                    in
-                    ( { state
-                        | currentWordIndex = newIndex
-                        , currentStrokeIndex = 0
-                        , feedback = Just True
-                      }
-                    , newIndex == 0
-                    )
+    case currentWord state of
+        Just word ->
+            let
+                typedNow =
+                    state.typed ++ [ Set.toList observed ]
 
-                else
-                    ( { state
-                        | currentStrokeIndex = state.currentStrokeIndex + 1
-                        , feedback = Just True
-                      }
-                    , False
-                    )
+                n =
+                    List.length typedNow
 
-            else
+                consistent =
+                    consistentOutlines typedNow word
+                        |> List.map .strokes
+            in
+            if List.isEmpty consistent then
                 ( { state | feedback = Just False }, False )
 
-        _ ->
+            else if List.any (\outline -> List.length outline == n) consistent then
+                let
+                    newIndex =
+                        wrappedIndex state (state.currentWordIndex + 1)
+                in
+                ( { state
+                    | currentWordIndex = newIndex
+                    , currentStrokeIndex = 0
+                    , typed = []
+                    , feedback = Just True
+                  }
+                , newIndex == 0
+                )
+
+            else
+                ( { state
+                    | currentStrokeIndex = n
+                    , typed = typedNow
+                    , feedback = Just True
+                  }
+                , False
+                )
+
+        Nothing ->
             ( state, False )

@@ -8,7 +8,7 @@ Output: steno-trainer/public/data/affix-lessons.json
     {"rules": [{"rank", "position", "ortho", "phono", "keys", "keyNames", "label"}, ...],
      "lessons": [<lesson>, ...]}
 A lesson has exactly the `lessons.json` lesson schema (docs/specs/lessons.md); its words are `practice-words.json`
-records whose `steno`/`strokes` are the SHORT outline plus an `alternates` list holding the long outline's strokes
+records whose `steno`/`strokes` are the SHORT outline plus an `alternates` list holding the long outline as {steno, strokes}
 (the drill accepts either). See docs/specs/affix-lessons.md.
 
 The five other trainer data files are not touched: this exporter runs after S9b, S9 being an optional layer.
@@ -75,7 +75,8 @@ def _wordRecord(a: Abbreviation, starboard: Starboard, phonology: str, label: st
     values = {"ortho": a.ortho, "before": "", "after": "", "label": label, "phonology": phonology,
               "steno": short, "strokes": _strokesList(a.outline), "frequency": a.frequency}
     record = {field: values[field] for field in RECORD_FIELDS}
-    record["alternates"] = [_strokesList(a.longOutline)]
+    record["alternates"] = [{"steno": renderFinalStrokesToRTFCRE(starboard, a.longOutline),
+                            "strokes": _strokesList(a.longOutline)}]
     return record
 
 
