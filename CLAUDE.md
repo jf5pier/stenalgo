@@ -169,6 +169,7 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
   `plover_stenalgo_dictionary.json` and `steno-trainer/public/data/*.json` against a
   pre-change baseline — they must be identical. After a change that reaches the affix layer (S9) also compare
   `affix_rules.json`, `affix_rules_report.md`, `plover_stenalgo_affix_dictionary.json`, `affix_abbreviations.tsv` and `steno-trainer/public/data/affix-lessons.json`.
+- After a change that reaches the trainer's affix lessons also compare `steno-trainer/public/data/affix-lessons.json`.
 - The hand-run ambiguity report (`python -m src.ambiguitychecker`, after Phonetic Theory
   Building (S5)) is the drift signal for homophone scope; its "overflow" metric counts
   lemma-homophone groups beyond the four-code budget.

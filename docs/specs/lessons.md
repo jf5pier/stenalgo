@@ -244,7 +244,8 @@ Dropped when the pool has fewer than 10 records (§5).
 
 A single placeholder lesson, id `affixes-01`, kind `affixes`: rule text
 "Abréviations d'affixes : à venir." (§7.6), no words, no keys. It reserves the track
-so the UI can show it; the real affix-abbreviation lessons are out of scope (§9).
+so the UI can show it. The real affix lessons are a separate optional file (`affix-lessons.json`, see
+`docs/specs/affix-lessons.md`) that the trainer merges over this stub; without it the stub stays.
 
 ## 5. Word selection and the word-count rule
 
@@ -466,8 +467,8 @@ Affixes rule text: `Abréviations d'affixes : à venir.`
 
 ## 9. Out of scope
 
-- Real affix-abbreviation lessons (the `affixes` track stays a stub; that work is
-  ongoing separately).
+- Real affix-abbreviation lessons in `lessons.json` (the `affixes` track stays a stub there;
+  the real ones are `affix-lessons.json`, `docs/specs/affix-lessons.md`).
 - Learner progress persistence in any form.
 - A lesson-ordering configuration file (the progression is fixed by this spec).
 - Any IPA rendering on the Python side (the trainer renders X-SAMPA itself).

@@ -47,7 +47,13 @@ python -m util.export_practice_words
 python -m util.export_practice_sentences   # after export_practice_words: its vocabulary gate
 python -m util.export_definitions          # definition mode's whole-lexicon lookup (~10 MB)
 python -m util.export_lessons              # lessons mode's generated progression (docs/specs/lessons.md)
+python -m util.export_affix_lessons        # optional, after util.export_affix_dictionary: the affixes track (docs/specs/affix-lessons.md)
 ```
+
+`public/data/affix-lessons.json` is optional: when Lessons mode finds it, its 30 rule lessons and its lesson on
+conjugated forms replace the stub of the `affixes` track in `lessons.json`, and an "Affix rules" legend joins the sidebar.
+In those lessons a word's hint shows the short outline, but the drill accepts either the short or the long outline
+(`alternates` in the word record; `Drill.applyStroke` follows whichever outline the strokes typed so far start).
 
 The sentences themselves come from `util/candidate_sentences.jsonl`, written
 once by an LLM with a per-token lemma/category/conjugation annotation (which
