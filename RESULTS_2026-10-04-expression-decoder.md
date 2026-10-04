@@ -199,3 +199,31 @@ Measured on the committed run (elision default):
 So 98.4% of the weighted open-set merges read back as the words that were written. The first ranking (rule mass, more particles = more mass) put 22.5% on another merge.
 Largest remaining mis-decodes (weights 1e6): `dans` + `et` and `et` + `dans` (read as `avec` + `la`), `à` + `me`, `à` + `mon`, `de` + `ton`, `j'` + `est`: unnatural pairs for the
 most part.
+
+## Plover plugin (step 5; `plover_stenalgo/`, `util/export_expression_data.py`, `docs/PIPELINE.md` S8.10)
+
+**Plover API (read from the v5.4.1 source, notes in `scratch/plover_api_notes.md`).** A dictionary plugin is a `StenoDictionary` subclass registered under the `plover.dictionary` entry point, name = file
+extension (`stenalgo`). The translator only calls `enabled`, `longest_key` and `get(key)` (exact tuple of RTFCRE strings, `None` = miss), asking for every suffix window of the buffered strokes up to `longest_key`,
+also with the empty prefix stroke; misses are not cached by Plover, so the plugin memoizes. First non-`None` dictionary wins, so the plugin sits above the stock dictionary. Glue: `qu'{^}` (text, then attach the
+next word); `{^suffix}` would trigger orthography rewriting of the previous word and is not used.
+
+**Design.** The dictionary answers only when the best reading is ONE expression piece (brief, merged attach, standalone keypress, cluster); plain words and multi-piece keys return `None`, so the stock
+dictionary and the translator's shorter windows handle them. The attested text of the pool fixes the order of attaches merged into one stroke (lost in a reading). Data: 0.3 MB (rules, attested readings,
+5,000 unit probabilities, particle stroke counts, key conflicts, chord legality) plus the stock dictionary as the outline -> words index (sha256 fingerprint refuses a mismatch). The vendored decoder core
+(`_core/`) needs only the standard library.
+
+**Does it need the unit probabilities? (`scratch/rank_static_rule.py`, open set of `rank_check.py`.)** Unattested readings compete on 24.0% of the open-set weight; the probability ranker picks the composed merge on
+79.9% of that, the static tie-breaks (fewest words/pieces, merges last, most merges first) only 30-42% and would need 579-649 exception chords to match the ranker. Cutting the table to the most frequent words: 200 words
+change the winner on 3.83% of the contested mass, 1,000 on 0.97%, 5,000 on 0.17%, 20,000 on 0.01%. Shipped: 5,000 words (0.16 MB), which also loses one pool expression in the real simulation
+(`rapport d'impôt`).
+
+**Real Plover check (`scratch/plover_translator_sim.py`, Plover's own `Translator`, [plugin, stock dictionary]).** 1,095 of the 1,151 pool expressions (97.4% of frequency mass) come out as written (91.5% before
+the attested texts, order and elision twins). The 56 others: plain-word shadows (`et les`/`hélé`, `et la`/`héla`, `par la`/`parla`, `par les`/`parlé`: the longform of an unabbreviated pair equals a stock
+word's outline, the plugin leaves plain readings to the stock dictionary), elision twins sharing one chord (`que l'`/`que le`, `dans l'`, `et d'`), wrong readings of unattested partial chords (`il m'a`,
+`rapport d'impôt`) and `d'œil`/`d'oeil`. Load time 2.7-4.5 s (the word index parse is about 2.8 s), memoized lookups afterwards. Live: `de l'` on a Starboard (COM7) in Plover 5.4.1.
+
+**Why `et les` is the longform.** `et`, `les`, `la`, `par` are prefix attaches: in a hostless pair the first has no neighbour (`noNeighbour`) and two attaches cannot union into one stroke when they share keys
+(`et` (9,16,19), `les` (2,16,19) share 16 and 19). Not a plugin bug; see `TODO.md`.
+
+**Pitfalls met.** The installed plugin must go under Plover's own plugin folder (`PYTHONUSERBASE=<config>\plugins\win`), not the default user site; plugins load at Plover start only; dictionaries added while the
+English system is active report every Stenalgo stroke as invalid steno (the system switch needs Apply).

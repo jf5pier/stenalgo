@@ -3,6 +3,7 @@
 Discussion record for later study (abbreviations branch). Nothing here is implemented except where
 stated; the proposal in section 4 is a candidate optimisation, tracked in `TODO.md`
 ("Branch TODO — max-1-key overlap").
+Update 2026-10-04: the decoder, its ranking and the Plover dictionary plugin are built since (`RESULTS_2026-10-04-expression-decoder.md`, `docs/PIPELINE.md` S8.10).
 
 ## 1. How an attach merges (the current algebra)
 

@@ -2,6 +2,34 @@
 
 Written to survive a `/clear` — read this file first in a fresh session.
 
+## Branch TODO — Plover expression dictionary plugin (abbreviations branch, 2026-10-04)
+
+State: plugin built, installed in the user's Windows Plover 5.4.1 and working on a Starboard (`de l'` verified live); data export in `util/export_expression_data.py`,
+docs in `docs/PIPELINE.md` S8.10. Open items, most important first:
+
+- **INVESTIGATE LATER — plain-word shadows of unabbreviated pool pairs.** `et les` / `et la` / `par la` / `par les` compose to their LONGFORM (`e/mte`, `e/mta`,
+  `paR/mta`, `paR/mte`): the `et`, `les`, `la`, `par` attaches are all prefix rules, so in a hostless pair the first has no neighbour (`noNeighbour`) and the two cannot
+  union into one stroke (shared keys 16 and 19). The longform is also the stock theory's two-stroke word `hélé`, `héla`, `parla`, `parlé`, so the plugin returns `None` (a plain
+  reading) and the stock dictionary wins. The ranker already prefers the attested `et` + `les` by frequency; the plugin discards plain readings by design. To study: how many frequent
+  pool pairs collide with a stock word's outline (the "plain-word shadows"), whether the stock theory should move the rare word (a mark on `hélé`) or whether a suffix/hostless form
+  of `et`/`les`... is worth a slot. Do NOT make the plugin override plain-word outlines without a decision (it changes the stock theory's output).
+- Remaining real-Plover mismatches (`scratch/plover_translator_sim.py`, 1,095 of 1,151 pool expressions = 97.4% of mass): the four shadows above; elision twins that share one chord (`que l'` /
+  `que le`, `dans l'`, `et d'`: only the more frequent one is writable); wrong readings of unattested partial chords (`il m'a` -> `de l'a`, `rapport d'impôt` -> `rapport de hein peau`);
+  `d'œil` written `d'oeil` (theory spelling vs pool spelling; check where the attested text is lost).
+- **Install source: `github.com/jf5pier/stenalgo-plover`** (reuse it: same layout as `plover_stenalgo/` here, `pyproject.toml` at the root, default branch `master`, it also tracks a
+  stray `plover_stenalgo.egg-info/`). Hand-sync from `plover_stenalgo/` after `python -m util.export_plover_plugin`; then `plover_plugins install git+https://github.com/jf5pier/stenalgo-plover`.
+  Consider a sync script and a `.gitignore` for the egg-info. The `.stenalgo` data and `plover_stenalgo_dictionary.json` are NOT in the package (build outputs, travel together).
+- **Briefs out of the `.stenalgo` file into their own `.json` for Plover.** The 40 forced briefs (and the selected briefs) are plain outline -> text entries, so a stock JSON dictionary can hold them: the
+  decoder needs them only to recognise a brief as a reading, the plugin does not need to compose them. To do: export them (outline in RTFCRE, written text) as `plover_stenalgo_briefs.json` next to the
+  stock dictionary, drop `rules.briefs` from the `.stenalgo` data, load them into the decoder's content index from that file (with its own fingerprint, like the word index) or leave them to Plover's own lookup
+  and keep them only as ranking/shadow information; check the pure-brief rank (class 1) and the `isExpression` rule still hold, and update `docs/PIPELINE.md` S8.10.
+- Test more strokes in the GUI (the elision glue `qu'{^}`, briefs, clusters) and record what differs from the simulation; the Gemini PR keymap of the Stenalgo system worked unchanged.
+- The user's `plover.cfg` still says `[System] name = Lapwing` (plugin not installed under Plover 5.4): harmless fallback to English at each start.
+- Pipeline integration: `python dictionary.py` does not run `util.export_expression_data` / `util.export_plover_plugin` (the rule set comes from `scratch/expr-*`, produced by
+  `scratch/select_expression_rules.py`, not by the pipeline). Decide when the layer joins the orchestrator.
+- The 5,000-word probability cut (`UNIT_PROBABILITY_WORDS`) was measured on the committed rules (`scratch/rank_static_rule.py`: 0.17% of the contested open-set mass changes winner); re-measure
+  after a rule-set change. `docs/GLOSSARY.md` has duplicated entries in the expression-layer section ("Decoder (expression layer)", "Key conflicts"), a merge leftover to clean.
+
 ## Branch TODO — expression families and selector collapse (abbreviations branch, 2026-10-03)
 
 - Decide the family merge (`FAMILY_MERGE=1` in `scratch/select_expression_rules.py`, opt-in, measured worse): revert, keep `un`/`une` only, or improve
@@ -605,10 +633,10 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
 ## Expression decoder (2026-10-04; see RESULTS_2026-10-04-expression-decoder.md and RESUME_2026-10-04-decoder-theory-shadow-elision.md)
 
 - Done: decoder (`src/expressiondecoder.py`), whole-theory shadow/collision audit, Stage B theory-wide shadow term (limit 0.002), pinky-diagonal key conflicts (attach saving 24.8%, `il n'` stacks again).
-- Ranking built (`src/expressionranking.py`); no composer `loses` check is needed for attested expressions. To do: export the attested table and the unigram probabilities as data for the plugin; look at the 1.6% open-set mis-decodes (`dans` + `et`...).
+- Ranking built (`src/expressionranking.py`); no composer `loses` check is needed for attested expressions. The attested table and the unigram probabilities are exported (`util/export_expression_data.py`); look at the 1.6% open-set mis-decodes (`dans` + `et`...).
 - Remaining collisions: `n' y`, `il n'`, `je me` (host `*` swallows the selector), `le`, `qui`, `un`.
 - Elision pairs are the default now. Open: the shadows of `un`, `le`, `c'`, `qu'` (46 events, 0.23% of host frequency, none a frequent phrase), the remaining collision families (`de`, `j'`, `je`, `il`, `à`, `n' y`, `il n'`, `je me`),
   hostless clusters read with either elision form (fragments only), complete `ASPIRATED_H`/`NO_ELISION` from a lexicon.
 - Report hosted-only saving (fragments excluded) next to the pool total in the driver.
 - Step 4 leftovers: brief that depends on a failed attach; attach keypress as standalone stroke (parked); overlap max-1; `longest_key` / prefix lookups in the Plover plugin.
-- Step 5 (Plover dictionary plugin) not started; Plover is not installed in the project env. Handoff: `RESUME_2026-10-04-step5-plover-plugin.md` (data export first, then a venv with a real Plover).
+- Step 5 (Plover dictionary plugin): DONE and installed in a real Plover 5.4.1 (see "Branch TODO — Plover expression dictionary plugin" at the top and `RESULTS_2026-10-04-expression-decoder.md`, "Plover plugin").

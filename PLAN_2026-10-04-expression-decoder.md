@@ -1,6 +1,6 @@
 # PLAN 2026-10-04 — the expression decoder (offline prototype first, Plover plugin last)
 
-**STATUS (end of 2026-10-04): steps 1-4 DONE, step 5 not started.** Code: `src/expressiondecoder.py`, `src/expressionranking.py`, `src/keyconflicts.py`, `src/elision.py`; numbers: `RESULTS_2026-10-04-expression-decoder.md`;
+**STATUS (end of 2026-10-04): steps 1-5 DONE (step 5: plugin built and installed in a real Plover 5.4.1, see `RESULTS_2026-10-04-expression-decoder.md` "Plover plugin" and `docs/PIPELINE.md` S8.10).** Code: `src/expressiondecoder.py`, `src/expressionranking.py`, `src/keyconflicts.py`, `src/elision.py`; numbers: `RESULTS_2026-10-04-expression-decoder.md`;
 handoff for step 5: `RESUME_2026-10-04-step5-plover-plugin.md`. Sections 1-3 below are the ORIGINAL plan, kept for the record (the committed rule set has changed since: elision pairs, theory shadow term, key conflicts).
 
 Written for delegation: a fresh agent should be able to run steps 1-3 from this file alone. Read first, in this order:

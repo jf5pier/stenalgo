@@ -19,6 +19,8 @@ lexicon built out of Lexique383 [[1]](#1) and LexiqueInfra [[3]](#3).
 - **Affix abbreviations (optional layer, branch `affix-abbreviation-rules`)** — 30 affix rules on dedicated keypresses give 59,358 words a shorter outline in a
   separate Plover dictionary; the theory is unchanged and the long outlines stay as the fallback ([docs/AFFIX_RULES.md](docs/AFFIX_RULES.md)). Not yet part of the
   automatic pipeline's decisions: see `PLAN_2026-10-01-affix-pipeline-integration.md`.
+- **Expression abbreviations (branch `abbreviations`)** — function-word expressions (`il n'`, `de la`, `que je`) shortened by attach keypresses and briefs, decoded in Plover by a dictionary
+  plugin (`plover_stenalgo/`, installed from github.com/jf5pier/stenalgo-plover; data + stock dictionary side by side): `docs/PIPELINE.md` S8.10, `RESULTS_2026-10-04-expression-decoder.md`.
 - **Not done yet** — dictionary densification (conjugation tables, prefixes) and the personal
   theory layer; see [ROADMAP.md](ROADMAP.md).
 
@@ -71,6 +73,8 @@ python -m src.elicitation --resolve         # resolve + group + report
 python -m util.build_disambiguated_theory   # S7 -> refreshes disambiguated_theory.tsv
 python -m util.export_plover_dictionary     # S8 Plover -> plover_stenalgo_dictionary.json
 python -m util.export_plover_system         # S8 Plover -> _generated_keys.py
+python -m util.export_expression_data       # S8.10 expression layer data -> plover_stenalgo_expressions.stenalgo (with the dictionary above)
+python -m util.export_plover_plugin         # S8.10 vendors the decoder into plover_stenalgo/_core/
 python -m util.export_keyboard_layout       # S8 trainer -> keyboard-layout.json
 python -m util.export_practice_words        # S8 trainer -> practice-words.json
 python -m util.export_practice_sentences    # S8 trainer -> practice-sentences.json (needs the

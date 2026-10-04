@@ -1,12 +1,17 @@
 # RESUME 2026-10-04 (end of session) — start of PLAN step 5: the Plover dictionary plugin
 
+**STATUS (later the same day): step 5 DONE.** The plugin exists (`plover_stenalgo/plover_stenalgo/{dictionary,render,stroke,wordindex}.py` + generated `_core/`), the data export is
+`python -m util.export_expression_data` (0.3 MB `.stenalgo` + the stock `plover_stenalgo_dictionary.json` beside it, fingerprint-checked), the plugin is installed in the user's Windows Plover 5.4.1 and
+reads `de l'` live on a Starboard. Numbers and open items: `RESULTS_2026-10-04-expression-decoder.md` "Plover plugin", `TODO.md` "Branch TODO — Plover expression dictionary plugin", docs in
+`docs/PIPELINE.md` S8.10. The "What to do" list below is HISTORICAL (the 5 items are done; the open questions of item 4 are answered in the results file). Next: the `stenalgo-plover` repo sync, more GUI tests.
+
 Read first, in this order: this file, `PLAN_2026-10-04-expression-decoder.md` (steps 1-4 done, step 5 below), `RESULTS_2026-10-04-expression-decoder.md` (all numbers),
 `RESUME_2026-10-04-decoder-theory-shadow-elision.md` (state and switches), `docs/GLOSSARY.md` section "Expression abbreviation layer" (vocabulary).
 
 ## 1. State (verify with `git log`, `git status`)
 
 - Worktree `/home/jfsp/Steno/stenalgo-briefs`, branch `abbreviations`, last commit `4516d77`. Nothing pushed, main not merged. Interpreter `/home/jfsp/Steno/stenalgo/env/bin/python`,
-  always `PYTHONPATH=.`. `pytest src/test/` = 839 pass. NEVER `git add -A` (untracked logs, `AffixSelection.pickle`, the box-drawing-named file, `scratch/*.log`, experiment folders stay out).
+  always `PYTHONPATH=.`. `pytest src/test/` = 839 pass (853 after the plugin work). NEVER `git add -A` (untracked logs, `AffixSelection.pickle`, the box-drawing-named file, `scratch/*.log`, experiment folders stay out).
   Commit and push only when asked; no merge of main.
 - The committed rule set (`scratch/expr-*`, md5 of `expr-rules.tsv` `7e5a6c68eb38...`) is the DEFAULT run of `PYTHONPATH=. env/bin/python scratch/select_expression_rules.py` (about 5 minutes; it
   overwrites the tracked `scratch/expr-*`; `git checkout scratch/expr-*.tsv scratch/expr-rules-final.json` restores). Defaults: elision pairs on (`ELISION_PAIRS=0` off), `SELECTOR_RETRY` on with them,
