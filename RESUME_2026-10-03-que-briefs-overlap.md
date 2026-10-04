@@ -33,6 +33,43 @@ caps the affix search at 8 workers (done and committed there, not pushed). Nothi
 
 (Section 5 items 1-3 and the `le`/`les` part of 4 are done; see NEXT above.)
 
+## 0b. UPDATE (end of the same day) — low-mass review and the family-merge experiment; read after section 0
+
+State: branch `abbreviations`, HEAD `9bc2219`; uncommitted: `scratch/select_expression_rules.py` (opt-in family merge, collapse/collision
+prints), new untracked `scratch/trace_families.py`, `scratch/why_shadow.py`, `scratch/before_families/`, `scratch/after_families/`, run logs
+`scratch/que_run_families*.log`. The tracked `scratch/expr-*` outputs were RESTORED from git: `md5sum -c scratch/md5_expr_deterministic.txt` passes.
+The default driver run therefore reproduces the baseline (23.3%, 123 exceptions, 0 shadows, with briefs 4.088e9).
+
+1. NEXT (a), low-mass review, done on the baseline outputs (no re-run). The `je`/`ce` families and `je ne`/`je me`/`ce qu' il` are no longer
+   selected (un/une took their slots). Weak selected rules (strokes saved vs exception mass in `expr-rules.tsv`): `pas` prefix 5.5M vs 210M,
+   `pas le` 3.2M vs 6.2M, `dans ce` 2.6M vs 7.4M, `dans` prefix 42M vs 365M. UNVERIFIED caveat: the pool composes bare n-grams, so the `pas`/`dans`
+   exception mass may be the hostless-token artifact (section 4); not yet checked in running text, nor whether `strokeFreqSaved` is already net.
+2. Family-merge experiment (user request): `un`/`une` as ONE family (both positions), and `le`/`la`/`l'`/`les` as ONE PREFIX-only family (their
+   suffix rules keep their lemma families). Implemented in the driver only, now OPT-IN: `FAMILY_MERGE=1` (plus `DEF_SUFFIX_FAMILY=1` to also bundle
+   the definite suffixes into a second family). Outputs of the merged run: `scratch/after_families/`, log `scratch/que_run_families3.log`.
+   RESULT, WORSE: attaches alone 21.8% (3.124e9), exceptions 133, 1 shadow (`il y`), with briefs 3.871e9 (baseline 23.3%, 123, 0, 4.088e9).
+3. Why (traced with `scratch/trace_families.py`, then the driver's new prints):
+   - Selection and `pruneRedundantVariants` are NOT the cause: after selection `l'`, `le`, `les` prefix, `un` prefix, `une` prefix/suffix are all
+     in their families. Stage C's "selector collapse" (driver, `select_expression_rules.py`) then drops them: `l'` prefix, `un` prefix, `une` prefix,
+     `une` suffix. It also drops variants of untouched families (`il y`, `ne`, `je me`, `pas de`, `de`, `de la`, `n' y`): the mechanism is general,
+     whether those drops also occur in the baseline was not checked.
+   - Collisions (round 0 audit): `que la` vs `que l'` share the outline (10,18,19,20,23): `que` prefix carries `*` (key 10), the `la` variant has no
+     selector and the `l'` variant has `*`, so the que `*` swallows the selector (INFERRED from the key sets, not traced rule by rule);
+     `il y a un` vs `il y a une` the same way (the host `a` already carries marks; inferred). The other round-0 collisions are `il y a`/`il n' a`,
+     `on ne`/`n' ont`, `que je ne`/`que je me`, `n' y a pas`/`n' y a pas de`, `ce n' est pas le`/`ce qui n' est pas`.
+   - The `il y` shadow (VERIFIED, `scratch/why_shadow.py`): collapse drops the `il y` prefix rule (kept `il n'`), so `il y` composes the `il` prefix
+     (7,22) onto the host `y` (13) = (7,13,22), the existing outline of the NOM `tine` (`tin`). Hard no (Q7). Round 0 had 0 shadows; it appears from round 1.
+   - `la` suffix (461M, the best single rule before), `l'` suffix and `une` suffix lose the SLOT competition, not a bug: as free siblings of the
+     `la`/`l'` families they cost no slot, as standalone families they do, and `je`, `ce`, `pas`, `le` suffix won those slots.
+4. Open decision (user's): (1) revert both merges (the default now); (2) keep only `un`/`une`, which needs the collapse step improved first;
+   (3) improve the collapse heuristic: it keeps only the highest-frequency colliding variant of a family; try another base/selector per variant
+   before dropping any (a bigger change, touches every family; recommended). The user said "merge un/une for sure" BEFORE this result;
+   confirm before treating it as final. Also unresolved: the `un`/`une` collapse log lines look inconsistent (`kept une` while `un` suffix is the
+   higher-frequency variant and ends up the sole survivor).
+5. Not verified: bare `mypy` in this worktree (no `mypy.ini` here; it exists on main). 808 tests were not re-run this session (no `src/` change).
+6. PROCESS LESSON: never wait for a background job with `pgrep -f NAME`; it matches the waiting shell's own command line and never ends (it cost
+   two false "still running" reports). Wait on the job's log (`until grep -q DONE LOG; do sleep 15; done`) or its task id. Now in CLAUDE.md.
+
 ## 1. Where things are
 
 - Worktree `/home/jfsp/Steno/stenalgo-briefs`, branch `abbreviations` (HEAD `94000fe`, tracks origin, last pushed `1884dae`;

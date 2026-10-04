@@ -1,7 +1,5 @@
 expr	freq	derivation	stroke	rtfcre	longform_strokes	strokes_saved
 avec	105501881	free	4	p-	2	1
-dans le	45059629	union	4,5,6,7,11,12	pvmt@a	2	1
-dans les	31086370	union	4,5,6,7,11,14	pvmt@e	2	1
 après	30071572	free	5	v-	2	1
 ainsi	25395752	free	8	R-	2	1
 avant	24573015	skeleton	5,11,12	v@a	2	1
@@ -9,27 +7,28 @@ jamais	20897000	skeleton	5,6,7,12,13,14	vmtaie	2	1
 depuis	19202466	free	9	w-	2	1
 déjà	15219730	skeleton	4,5,7,12,14	pvtae	2	1
 petit	14951284	skeleton	4,7,11,12,13	pt@ai	2	1
-je suis	14670144	union	3,5,7,11,12,13	svt@ai	3	2
-pendant	13168610	free	16	-j	2	1
+un peu	13723515	free	16	-j	2	1
+pendant	13168610	free	17	-s	2	1
 premier	12549903	skeleton	4,6,8,9,11,13,14	pmRw@ie	2	1
 première	12470397	skeleton	4,6,8,9,11,13,14,21	pmRw@ieR	2	1
 pourquoi	12326226	skeleton	2,4,9,11,12,14,21	kpw@aeR	2	1
 beaucoup	12242332	skeleton	2,3,5,11,12,14	ksv@ae	2	1
-souvent	11751248	free	17	-s	2	1
+souvent	11751248	free	18	-k	2	1
 question	11217176	skeleton	2,7,8,9,12,13,14,17	ktRwaies	2	1
 plusieurs	11194459	skeleton	4,6,7,8,9,11,13,21	pmtRw@iR	2	1
-maison	10934214	free	18	-k	2	1
+maison	10934214	free	19	-d	2	1
 peut être	10736579	union	4,10,11,13,14,20,21	p*@ietR	2	1
 enfin	10370263	skeleton	2,4,11,12,13,14	kp@aie	2	1
 exemple	10278028	union	13,14,18,19,22,23	iekdnl	2	1
 petite	9878428	skeleton	4,7,11,12,13,20	pt@ait	2	1
+toutes les	9776735	free	20	-t	3	2
 lorsque	9630884	skeleton	2,3,6,7,11,12,14,21	ksmt@aeR	2	1
 maintenant	9514931	skeleton	6,8,11,12,13,14	mR@aie	3	2
-raison	9495028	free	19	-d	2	1
+raison	9495028	free	21	-R	2	1
 façon	9324834	skeleton	2,3,4,12,13	kspai	2	1
 ailleurs	9185973	skeleton	8,9,11,12,21	Rw@aR	2	1
 besoin	9044550	union	3,5,11,12	sv@a	2	1
-ensemble	8864830	free	20	-t	2	1
+ensemble	8864830	free	22	-n	2	1
 aujourd'hui	8745168	skeleton	4,5,11,12,13,14	pv@aie	3	2
 surtout	8648452	skeleton	3,7,11,13,14,21	st@ieR	2	1
 société	8568348	skeleton	3,7,12,14	stae	3	2
@@ -39,3 +38,4 @@ quelque chose	7715117	union	2,4,6,12,13,14,18,22,23	kpmaieknl	2	1
 nature	7712835	skeleton	6,7,8,11,12,13,21	mtR@aiR	2	1
 rapport	7630796	skeleton	4,8,12,14,21	pRaeR	2	1
 général	7569237	union	5,7,14	vte	3	2
+demande	7559862	skeleton	4,5,6,11,12,19	pvm@ad	2	1

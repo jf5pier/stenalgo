@@ -1,63 +1,71 @@
 ruleA	ruleB	joint_freq	worked_example
-de	la	2.088e+08	de la: pv@a/mta -> -jdnZ
-de	et	5.696e+07	et de: e/pv@a -> R-sRnZ
-de	pas	1.498e+07	pas de: pa/pv@a -> -sRnZ
-de	que	5.410e+06	que de: k@a/pv@a -> k*ktnZ
-de	pas	4.072e+06	de ne pas: pv@a/mR@a/pa -> mR*@asRnZ
-de	la	1.670e+07	de la vie: pv@a/mta/vi -> v*ijdnZ
-de	que	1.718e+06	de ce que: pv@a/s@a/k@a -> ks@a#ktnZ
-de	les	1.503e+06	de toutes les: pv@a/t@et/-s/mte -> t@etnZ/-sdl
-de	n'	1.275e+06	n' y a pas de: mR-/i/*a/pa/pv@a -> Rwim/*a/-sRnZ
-à	la	8.202e+07	à la: a/mta -> w-jkd
-à	l'	6.393e+07	à l': a/mt- -> w-jkdl
-à	un	1.299e+07	à un: a/@aie -> mw-jkd
-à	une	1.283e+07	à une: a/@in -> mw-jkl
-à	et	1.626e+07	et à: e/a -> Rw-skR
-à	pas	8.019e+06	pas à: pa/a -> w-skR
-à	la	5.800e+06	à la fin: a/mta/kpaie -> kpw*aiejkd
-à	l'	1.093e+07	à l' intérieur: a/mt-/aie/te/Rw@R -> w*aiejkdl/te/Rw@R
-qu'	il	7.055e+07	qu' il: k-/il -> kt*jkdt
-qu'	un	9.340e+06	qu' un: k-/@aie -> km-jkdt
-qu'	une	8.072e+06	qu' une: k-/@in -> km-jktl
-qu'	il	3.019e+07	qu' il ne: k-/il/mR@a -> kmtR@ajkdt
-qu'	et	2.633e+06	et qu' il: e/k-/il -> ktR*jskdtR
-qu'	que	2.483e+06	qu' est ce que: k-/ie/s@a/k@a -> kiekt/ks@a#kt
-qu'	il n'	4.550e+06	qu' il n' y: k-/il/mR-/i -> kti#jkdt
-qu'	que	1.088e+06	qu' est ce que tu: k-/ie/s@a/k@a/t@i -> kiekt/s@a/kt*@ikt
-qu'	pas	1.161e+06	qu' il n' est pas: k-/il/mR-/ie/pa -> kt*ie#jskdtR
-que	le	2.239e+07	que le: k@a/mt@a -> kw*jktl
-que	les	2.189e+07	que les: k@a/mte -> k*kdtl
-que	la	2.034e+07	que la: k@a/mta -> k*jkdt
-que	l'	1.842e+07	que l': k@a/mt- -> k*jkdtl
-que	l'	8.153e+06	que l' on: k@a/mt-/ai -> k*aijkdtl
-que	c'	6.754e+06	que c' est: k@a/s*/ie -> ksp*iekt
-que	n'	2.256e+06	que je n' ai: k@a/vt@a/mR-/ie/-k -> kvt*@akt/Rwiem/-k
-que	pas	1.055e+06	que ce n' est pas: k@a/s@a/mR-/ie/pa -> ks*@akt/Rw*iesRm
-que	et	8.721e+06	et que: e/k@a -> kR-#sktR
-que	c'	3.575e+06	c' est que: s*/ie/k@a -> kspie#kt
-n'	pas	6.194e+07	n' est pas: mR-/ie/pa -> Rw*iesRm
-n'	pas	2.214e+06	n' y a pas de: mR-/i/*a/pa/pv@a -> Rwim/*a/-sRnZ
-n'	un	1.377e+06	n' est pas un: mR-/ie/pa/@aie -> mRwiejdm/pa
-n'	pas le	1.620e+06	n' est pas le: mR-/ie/pa/mt@a -> Rwie#sRm
-n'	une	1.221e+06	n' est pas une: mR-/ie/pa/@in -> mRwiejlm/pa
-n'	la	1.036e+06	n' est pas la: mR-/ie/pa/mta -> Rwiejdm/pa
-dans	la	4.287e+07	dans la: pv@/mta -> R-jkdZ
-dans	un	1.871e+07	dans un: pv@/@aie -> mR-jkdZ
-et	les	2.773e+07	et les: e/mte -> R-sdRl
-et	la	3.435e+07	et la: e/mta -> R-jsdR
-et	le	2.454e+07	et le: e/mt@a -> Rw-jsRl
-et	l'	1.703e+07	et l': e/mt- -> R-jsdRl
-et	il	1.285e+07	et il: e/il -> tR*jsdR
-et	un	5.935e+06	et un: e/@aie -> mR-jsdR
-et	une	7.059e+06	et une: e/@in -> mR-jsRl
-et	c'	3.042e+06	et c' est: e/s*/ie -> spRiesR
-il	un	1.244e+06	il y a un: il/i/*a/@aie -> tijd/m*ajd
-il	une	1.202e+06	il y a une: il/i/*a/@in -> tijd/m*ajl
-il	pas	1.210e+06	il ne faut pas: il/mR@a/kpae/pa -> mtR@ajd/kp*aesR
-il n'	pas	7.745e+06	il n' est pas: il/mR-/ie/pa -> t*ie#jsdR
-c'	un	6.633e+06	c' est un: s*/ie/@aie -> spmiejd
-c'	le	4.557e+06	c' est le: s*/ie/mt@a -> spwiejl
-c'	la	4.009e+06	c' est la: s*/ie/mta -> spiejd
-c'	une	5.280e+06	c' est une: s*/ie/@in -> spmiejl
-c'	l'	2.105e+06	c' est l': s*/ie/mt- -> spiejdl
-la	pas	4.681e+06	pas la: pa/mta -> -jsdR
+de	la	2.241e+08	de la: pv@a/mta -> -jkdZ
+de	l'	1.415e+08	de l': pv@a/mt- -> ksv-kZ
+de	et	5.696e+07	et de: e/pv@a -> R-jkdZ
+de	ce	2.038e+07	de ce: pv@a/s@a -> vt-jkZ
+de	pas	1.777e+07	pas de: pa/pv@a -> w-kZ
+de	ne	9.870e+06	de ne: pv@a/mR@a -> R*sknZ
+de	le	5.662e+06	de le: pv@a/mt@a -> s-jktZ
+d'	et	1.304e+07	et d': e/pv- -> R*jkdZ
+d'	pas	4.260e+06	pas d': pa/pv- -> w*kZ
+d'	s'	1.871e+06	s' agit d' une: s-/a/vti/-t/pv-/@in -> ksma/vti/-t/*@iknZ
+à	la	8.581e+07	à la: a/mta -> w-jsd
+à	l'	7.486e+07	à l': a/mt- -> ksvw-s
+à	et	1.626e+07	et à: e/a -> Rw-jsd
+à	ce	1.143e+07	à ce: a/s@a -> vtw-js
+à	qu'	6.820e+06	qu' à: k-/a -> w-sktR
+à	que	1.715e+06	à ce que: a/s@a/k@a -> vtw*jsktR
+qu'	il	1.050e+08	qu' il: k-/il -> t-jkdtR
+qu'	ne	4.290e+06	qu' il ne: k-/il/mR@a -> tR*jskdtRn
+qu'	ce	9.176e+06	ce qu' elle: s@a/k-/iel -> vtiejktRl
+qu'	et	2.633e+06	et qu' il: e/k-/il -> R-jkdtR/il
+qu'	que	3.571e+06	qu' est ce que: k-/ie/s@a/k@a -> iektR/vt*jktR
+qu'	n' y	2.238e+06	qu' il n' y: k-/il/mR-/i -> tR-#jskdtRn
+qu'	n'	2.312e+06	qu' il n' avait: k-/il/mR-/a/vie -> tRajskdtRn/vie
+qu'	pas	1.161e+06	qu' il n' est pas: k-/il/mR-/ie/pa -> tRwiejskdtRn
+que	je	3.330e+07	que je: k@a/vt@a -> p*jkdtR
+que	ce	5.327e+07	ce que: s@a/k@a -> vt*jktR
+que	la	2.034e+07	que la: k@a/mta -> *jkdtR
+que	l'	2.567e+07	que l': k@a/mt- -> ksv*ktR
+que	et	8.721e+06	et que: e/k@a -> R*jkdtR
+que	c'	7.684e+06	que c' est: k@a/s*/ie -> ksp*iektR
+que	ne	2.938e+06	que je ne: k@a/vt@a/mR@a -> pR*jskdtRn
+que	n'	2.256e+06	que je n' ai: k@a/vt@a/mR-/ie/-k -> pR*iejskdtRn/-k
+que	pas	1.055e+06	que ce n' est pas: k@a/s@a/mR-/ie/pa -> vtRw*iejsktRn
+n'	pas	6.909e+07	n' est pas: mR-/ie/pa -> Rwiesn
+n'	ce	2.312e+07	ce n' est: s@a/mR-/ie -> vtRiejsn
+n'	je	1.531e+07	je n' ai: vt@a/mR-/ie/-k -> pRiejsdn/-k
+n'	il	1.425e+07	il n' est: il/mR-/ie -> tRiejsdn
+n'	qui	2.840e+06	qui n' est: ki/mR-/ie -> pRwieskn
+ne	je	4.023e+07	je ne: vt@a/mR@a -> pR*jsdn
+ne	il	1.992e+07	il ne: il/mR@a -> tR*jsdn
+ne	pas	3.247e+07	ne pas: mR@a/pa -> Rw*sn
+ne	qui	8.431e+06	qui ne: ki/mR@a -> pRw*skn
+ne	l'	4.234e+06	ne l': mR@a/mt- -> ksvR*sn
+ne	s'	1.644e+06	il ne s' agit: il/mR@a/s-/a/vti/-t -> ksmtR*ajsdn/vti/-t
+n' y	il	1.740e+07	il n' y: il/mR-/i -> tR-#jsdn
+n' y	pas	6.781e+06	n' y a pas: mR-/i/*a/pa -> Rw*a#sn
+dans	le	4.679e+07	dans le: pv@/mt@a -> ksR-jt
+dans	la	4.379e+07	dans la: pv@/mta -> kR-jd
+dans	ce	7.363e+06	dans ce: pv@/s@a -> kvtR-j
+et	l'	2.125e+07	et l': e/mt- -> ksvR-jd
+et	qui	7.130e+06	et qui: e/ki -> pRw-jkd
+et	c'	3.042e+06	et c' est: e/s*/ie -> kspRiejd
+et	j' ai	1.314e+06	et j' ai: e/vt-/ie/-k -> vtR-jkd
+il	s'	2.413e+07	s' il: s-/il -> ksmt-jd
+il	pas	8.955e+06	il n' est pas: il/mR-/ie/pa -> tRwiejsdn
+c'	ce	2.340e+06	c' est ce que: s*/ie/s@a/k@a -> kspie/vt*jktR
+la	sur	2.520e+07	sur la: s@iR/mta -> kpv-jd
+la	par	1.791e+07	par la: paR/mta -> kw-jd
+la	avec	6.860e+06	avec la: a/viek/mta -> kRw-jd
+la	pas	4.681e+06	pas la: pa/mta -> w-jd
+pas	le	6.483e+06	pas le: pa/mt@a -> sw-jt
+pas	ce	1.043e+07	ce n' est pas: s@a/mR-/ie/pa -> vtRwiejsn
+pas	je	9.271e+06	je n' ai pas: vt@a/mR-/ie/-k/pa -> pRiejsdn/w-k
+l'	je	7.182e+06	je l': vt@a/mt- -> kspv-jd
+l'	qui	4.343e+06	qui l': ki/mt- -> kspvw-k
+ce	qui	3.507e+07	ce qui: s@a/ki -> pvtw-jk
+avec	le	7.505e+06	avec le: a/viek/mt@a -> ksRw-jt
+sur	le	3.024e+07	sur le: s@iR/mt@a -> kspv-jt
+par	le	1.687e+07	par le: paR/mt@a -> ksw-jt
+s'	qui	2.264e+06	qui s' est: ki/s-/ie -> kspmwiek

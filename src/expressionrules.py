@@ -32,6 +32,7 @@ is Phase 2 Stage B; `ExprRule.keys`/`beta` stay None until then.
 from __future__ import annotations
 
 from bisect import bisect_left
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 
 from src.affixes import PREFIX, SUFFIX, SimContext
@@ -47,11 +48,14 @@ MIN_LONGFORM_STROKES = 2      # expressions under 2 strokes never enter the queu
 MIN_OCCURRENCES = 5_000_000   # ditto for window-occurrence counts
 
 # Q4: the expression budget is SEPARATE from affixrules.RULE_BUDGET (30).
-# User decision 2026-10-02: fixed at 15 — the sweep's peak (14.0% attaches
-# alone, 272 exceptions; past 15 the disjointness crowding degrades the
-# strong families). Priority on the most frequent words/expressions (the
-# greedy's marginal frequency-weighted saving IS that priority).
-EXPR_RULE_BUDGET = 15
+# User decision 2026-10-02: fixed at 15 — the sweep's peak at the time (14.0%
+# attaches alone, 272 exceptions; past 15 the disjointness crowding degraded
+# the strong families). User decision 2026-10-04: raised to 20 after the
+# suffix-word list and the overlap/cluster changes; the 15/20/25/30 sweep is in
+# RESULTS_2026-10-04-slot-budget-sweep.md. Priority on the most frequent
+# words/expressions (the greedy's marginal frequency-weighted saving IS that
+# priority).
+EXPR_RULE_BUDGET = 20
 
 # Forced briefs (user decision 2026-10-01): tao entries too infrequent to
 # win a frequency slot get INVENTED brief strokes from their OWN budget,
@@ -541,25 +545,55 @@ def briefCandidates(pool: list[PoolExpression],
     return out
 
 
+# Suffix quality is lexical, not distributional (user decision 2026-10-04):
+# only words that attach BACKWARD to the verb or auxiliary before them can be
+# SUFFIX runs. A word seen at the end of a pool n-gram says nothing about it
+# ("il faut que": que always has a host after it, so a suffix que never fires
+# in running text). The post-verbal negation adverbs sit right after the verb
+# ("je n'ai plus de sel": ne + ai + plus); the adverbs below sit between the
+# auxiliary and the participle ("j'ai déjà mangé"). Sources and what was used
+# from each: docs/PRIOR_ART.md "French grammar sources".
+NEGATION_SUFFIX_WORDS: frozenset[str] = frozenset({
+    "pas", "plus", "jamais", "rien", "guère", "point", "personne",
+    "aucunement", "nullement"})
+# Suffix-ONLY: these adverbs lean on the auxiliary before them, never on the
+# word after, so they are not PREFIX candidates (a prefix `bien` on the
+# following host would fight the suffix on the auxiliary).
+AUXILIARY_ADVERB_WORDS: frozenset[str] = frozenset({
+    "déjà", "bien", "trop", "encore", "toujours", "souvent", "mal"})
+SUFFIX_WORDS: frozenset[str] = NEGATION_SUFFIX_WORDS | AUXILIARY_ADVERB_WORDS
+
+
 def attachCandidates(pool: list[PoolExpression], particles: frozenset[str],
-                     familyOf=None) -> list[ExprRule]:
+                     familyOf=None,
+                     unigramFreq: Mapping[str, float] | None = None) -> list[ExprRule]:
     """Attach-rule candidates: PROPER prefix/suffix runs of pool expressions
     (a proper run leaves a non-empty remainder), keyed by (run, position) —
     a run seen at an edge is a candidate for that edge only. A run's
     frequency evidence is the sum over expressions carrying it at that edge;
     a run that is itself a pool entry uses its own (true) occurrence count —
     every occurrence of "de la" is a potential prefix use. Every unit of a
-    run must be an elision unit or one of `particles` (function words):
-    particle runs, not content words. Proxy per-occurrence saving = the
+    PREFIX run must be an elision unit or one of `particles` (function words)
+    other than the auxiliary adverbs; every unit of a SUFFIX run must be one
+    of `SUFFIX_WORDS` (lexical list, see above), not merely a particle.
+    A one-unit SUFFIX word takes its evidence from `unigramFreq` (the word's
+    total occurrence count, same window as the pool) when given: host +
+    adverb mass is spread over hundreds of hosts ("a déjà", "est bien", ...),
+    so no single bigram reaches the pool slices, but every occurrence after
+    a verb is a potential use (the standalone bound's reasoning). Proxy per-occurrence saving = the
     run's stroke span (merge assumed clean)."""
     evidence: dict[tuple[tuple[str, ...], str], float] = {}
     for expr in pool:
         for k in range(1, len(expr.units)):
             prefix, suffix = expr.units[:k], expr.units[k:]
-            if all(u in particles or "'" in u for u in prefix):
+            if all((u in particles or "'" in u) and u not in AUXILIARY_ADVERB_WORDS
+                   for u in prefix):
                 evidence[(prefix, PREFIX)] = evidence.get((prefix, PREFIX), 0.0) + expr.freq
-            if all(u in particles or "'" in u for u in suffix):
+            if all(u in SUFFIX_WORDS for u in suffix):
                 evidence[(suffix, SUFFIX)] = evidence.get((suffix, SUFFIX), 0.0) + expr.freq
+    if unigramFreq:
+        for word in SUFFIX_WORDS & unigramFreq.keys():
+            evidence.setdefault(((word,), SUFFIX), 0.0)
     poolByUnits = {e.units: e for e in pool}
     out: list[ExprRule] = []
     for (units, position), freq in evidence.items():
@@ -572,6 +606,9 @@ def attachCandidates(pool: list[PoolExpression], particles: frozenset[str],
         # standalone entry the sum undercounts (top-slice contexts only) —
         # an acceptable proxy bound, like the affix proxy's.
         bound = standalone.freq if standalone else freq
+        if position == SUFFIX and len(units) == 1 and unigramFreq \
+                and units[0] in unigramFreq:
+            bound = unigramFreq[units[0]]
         if bound < MIN_OCCURRENCES:
             continue
         span = standalone.longformStrokes if standalone else len(units)

@@ -10,6 +10,7 @@ Usage: env/bin/python scratch/select_expression_rules.py [budget]
 
 from __future__ import annotations
 
+import os
 import sys
 from pathlib import Path
 
@@ -17,7 +18,7 @@ REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
 from scratch.build_expr_candidates import resolveTerm  # noqa: E402
-from src.affixes import SimContext  # noqa: E402
+from src.affixes import PREFIX, SimContext  # noqa: E402
 from src.expressionrules import (EXPR_RULE_BUDGET, PoolExpression,  # noqa: E402
                                  attachCandidates, briefCandidates,
                                  selectExpressionRules)
@@ -117,13 +118,37 @@ def main() -> None:
     def familyOf(units: tuple[str, ...]) -> str:
         return queFamilyOf(units) or lemmaOf.get(units[0], "")
 
+    # Unigram counts (same orgtre window as the pool) are the evidence of the
+    # suffix words, whose host + adverb mass no pool n-gram slice carries.
+    unigramFreq: dict[str, float] = {}
+    with open(REPO / "scratch" / "top_ngrams" / "1gram_top300.tsv",
+              encoding="utf-8") as fh:
+        for line in fh:
+            word, _, count = line.rstrip("\n").partition("\t")
+            if count.isdigit():
+                unigramFreq[word] = float(count)
+
     candidates = briefCandidates(pool, familyOf=queFamilyOf) \
-        + attachCandidates(pool, particles, familyOf)
+        + attachCandidates(pool, particles, familyOf, unigramFreq)
     # The pronoun family differentiates by briefs, never by a merged
     # keypress or a */# selector (user decision 2026-10-02): it gets no
     # attach candidates at all.
     candidates = [c for c in candidates
                   if not (c.kind == "attach" and c.family == "que+pron")]
+    # EXPERIMENT (user decision 2026-10-03, measured WORSE, so opt-in): FAMILY_MERGE=1
+    # makes un/une one family (both positions) and le/la/l'/les one PREFIX-only
+    # family; DEF_SUFFIX_FAMILY=1 also bundles their suffix rules. Result and
+    # why: RESUME_2026-10-03-que-briefs-overlap.md section 0b.
+    if os.environ.get("FAMILY_MERGE"):
+        for c in candidates:
+            if c.kind != "attach" or len(c.units) != 1:
+                continue
+            if c.units[0] in ("un", "une"):
+                c.family = "un+une"
+            elif c.units[0] in ("le", "la", "l'", "les") and c.position == PREFIX:
+                c.family = "le+la+l'+les"
+            elif c.units[0] in ("le", "la", "l'", "les") and os.environ.get("DEF_SUFFIX_FAMILY"):
+                c.family = "le+la+l'+les:suffix"
     families = {c.family for c in candidates if c.family}
     print(f"candidates: {len(candidates)} "
           f"({sum(1 for c in candidates if c.kind == 'brief')} briefs, "
@@ -225,6 +250,9 @@ def main() -> None:
                     if seg.kind in ("attach", "brief") and seg.rule is not None
                     and seg.rule.family})
             common = set.intersection(*signatures) if signatures else set()
+            print(f"  COLLISION {outline}: "
+                  + " | ".join(" ".join(u) + " ~ " + ", ".join(sorted(f"{fm}:{' '.join(ex)}" for fm, ex in sg))
+                               for u, sg in zip(exprs, signatures)))
             differing = set().union(*signatures) - common
             culpritFams = {fam for fam, _units in differing}
             if len(culpritFams) == 1:
@@ -262,6 +290,9 @@ def main() -> None:
                 keep = colliding[0] if len(colliding) > 1 else None
                 for drop in colliding:
                     if drop is not keep:
+                        print(f"  selector collapse: dropped {' '.join(drop.units)} "
+                              f"{drop.position} (family {fam!r}, kept "
+                              f"{' '.join(keep.units) if keep else '-'})")
                         result.selected.remove(drop)
                         progressed = True
                 continue

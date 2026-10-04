@@ -141,6 +141,10 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 - `STROKE_ASSIGNMENT_PENALTY = 1` — Base cost per stroke assignment
 - Solver timeout: 90 seconds
 
+## Process rules
+
+- Never wait for a background job with `pgrep -f NAME` (or `pkill -f NAME`) in a Monitor or until-loop: the pattern matches the waiting shell's own command line, so the loop never ends and reports a finished job as still running. Wait on the job's log (`until grep -q DONE LOG; do sleep 15; done`) or on its task id.
+
 ## Verification approach
 
 - `pytest src/test/` must pass after any `.py` change (740 tests at the time of writing; the 717 of main plus the affix branch).

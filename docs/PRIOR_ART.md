@@ -53,6 +53,28 @@ statuses and commit counts may have drifted since.
 - **Academic literature on automated steno-theory generation: essentially none found** (nearest
   formal work is HCI chorded-keyboard assignment research). The niche is open.
 
+## French grammar sources (searched 2026-10-04)
+
+Used to decide which words may be SUFFIX attach rules of the expression layer
+(`SUFFIX_WORDS`, `src/expressionrules.py`). Suffix quality is lexical, not read off n-gram
+edges (Google Books `_START_`/`_END_` follow punctuation, so they say nothing about which
+constituent a word leans on). Search-result summaries only; the pages were not read in full.
+
+- **[La négation](https://edtechbooks.org/docx/7740)** and
+  **[Quand utiliser ne point ?](https://www.synonyme-du-mot.com/les-articles/quand-utiliser-ne-point)**
+  — the list of post-verbal negation adverbs (`pas`, `plus`, `jamais`, `rien`, `guère`,
+  `point`, `personne`, `aucunement`, `nullement`; `nulle part` and `non plus` follow the
+  participle or infinitive, so they are left out) and their place: after the verb in simple
+  tenses, between the auxiliary and the participle in compound tenses. Used for
+  `NEGATION_SUFFIX_WORDS`.
+- **[Position of French Adverbs, compound tenses](https://french.kwiziq.com/my-languages/French/view/2990)**
+  and **[Tex's French Grammar](https://laits.utexas.edu/tex/pr/adv3.html)** — adverbs placed
+  between the auxiliary and the past participle (`déjà`, `bien`, `mal`, `trop`, `assez`,
+  `beaucoup`, `encore`, `toujours`, `souvent`, `vraiment`, ...; long `-ment` adverbs often follow the
+  participle). Used for `AUXILIARY_ADVERB_WORDS` (user-chosen subset: `déjà`, `bien`, `trop`,
+  `encore`, `toujours`, `souvent`, `mal`), treated as suffixes of the auxiliary and not as
+  prefixes of the next word.
+
 ---
 
 For how this prior art shaped Stenalgo's design — the layout approach, the dual-target

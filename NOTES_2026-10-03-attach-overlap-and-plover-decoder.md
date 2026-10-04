@@ -161,3 +161,11 @@ against the theory. Stacked attaches multiply the candidate count ((|K1|+1)(|K2|
 - Committed on `abbreviations`: overlap policy, cluster merge, no que briefs, deterministic Stage C, suffix-twin fix (see git log).
 - Baseline outputs: `scratch/md5_expr_deterministic.txt` (`md5sum -c` from the worktree root; same under PYTHONHASHSEED 1 and 2).
 - 808 tests pass.
+
+## 7. Family-merge experiment (late 2026-10-03)
+
+Merging `un`/`une` (both positions) and `le`/`la`/`l'`/`les` (prefix only) into families lowered the result (21.8% vs 23.3%, 1 shadow). A family
+of up to 4 variants separates its members by the `*`/`#` selectors, and a selector is lost whenever another rule or the host already carries that
+mark (`que` prefix has `*`; the host `a` of `il y a un/une` carries marks). Stage C then drops the weaker variant. For the decoder this is the same
+fact as section 4: a selector is only decodable when the host stroke cannot already hold it. Details, traces and the open decision:
+`RESUME_2026-10-03-que-briefs-overlap.md` section 0b.

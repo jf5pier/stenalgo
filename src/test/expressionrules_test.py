@@ -62,13 +62,43 @@ class TestAttachCandidates:
         assert all(r.strokesSaved == 1 for r in rules)
 
 
+class TestSuffixWords:
+    """Suffix quality is lexical (2026-10-04): only SUFFIX_WORDS end a run."""
+
+    def test_particle_run_at_the_end_is_not_a_suffix(self):
+        pool = [expr(["il", "faut", "que"], 10_000_000)]
+        got = {(r.units, r.position) for r in attachCandidates(pool, frozenset({"il", "que"}))}
+        assert got == {(("il",), PREFIX)}      # no suffix `que`
+
+    def test_negation_adverb_is_a_suffix(self):
+        pool = [expr(["n'", "ai", "plus"], 10_000_000)]
+        got = {(r.units, r.position) for r in attachCandidates(pool, frozenset({"plus"}))}
+        assert (("plus",), SUFFIX) in got
+
+    def test_auxiliary_adverb_is_suffix_only(self):
+        pool = [expr(["déjà", "a", "mangé"], 10_000_000),
+                expr(["a", "déjà"], 10_000_000)]
+        got = {(r.units, r.position) for r in
+               attachCandidates(pool, frozenset({"déjà"}))}
+        assert (("déjà",), SUFFIX) in got
+        assert (("déjà",), PREFIX) not in got
+
+
+    def test_suffix_word_evidence_comes_from_the_unigram_count(self):
+        pool = [expr(["a", "déjà"], 1_000_000)]
+        got = {(r.units, r.position): r for r in
+               attachCandidates(pool, frozenset({"déjà"}),
+                                unigramFreq={"déjà": 15_000_000.0, "bien": 60_000_000.0})}
+        assert got[(("déjà",), SUFFIX)].freq == 15_000_000.0
+        assert got[(("bien",), SUFFIX)].freq == 60_000_000.0   # absent from the pool
+        assert (("déjà",), PREFIX) not in got
+
+
 class TestTouched:
     def test_position_edges(self):
         from src.expressionrules import matchedSpans
-        pool = [expr(["maison", "de", "la"], 10_000_000)]
-        suffix = next(r for r in attachCandidates(pool, PARTICLES)
-                      if r.units == ("de", "la"))
-        assert suffix.position == SUFFIX
+        pool = [expr(["mange", "de", "la"], 10_000_000)]
+        suffix = ExprRule("attach", ("de", "la"), position=SUFFIX)
         assert touchedExpressions(suffix, pool) == {0}
         prefix = ExprRule("attach", ("de", "la"), position=PREFIX)
         assert matchedSpans(prefix, ("maison", "de", "la")) == []  # no host after

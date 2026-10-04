@@ -2,6 +2,38 @@
 
 Written to survive a `/clear` — read this file first in a fresh session.
 
+## Branch TODO — expression families and selector collapse (abbreviations branch, 2026-10-03)
+
+- Decide the family merge (`FAMILY_MERGE=1` in `scratch/select_expression_rules.py`, opt-in, measured worse): revert, keep `un`/`une` only, or improve
+  Stage C's selector-collapse heuristic (try another base/selector per colliding variant before dropping it). See `RESUME_2026-10-03-que-briefs-overlap.md` 0b.
+- The collapse drops variants of unmerged families too (`il y`, `ne`, `je me`, `de`...); check whether the baseline loses mass this way, and fix the
+  `il y` -> `tine` shadow risk (dropping the `il y` prefix rule exposes the outline (7,13,22)).
+- Check `pas`/`dans` exception mass in running text (hostless-token artifact?) before dropping `pas`, `pas le`, `dans ce`.
+
+## Branch TODO — attach keypress reused as a standalone stroke (abbreviations branch, 2026-10-04)
+
+- Today an attach keypress is not reserved for anything else: `deriveBriefStroke` (`src/expressionrules.py`) only
+  avoids existing outlines and other briefs, so a brief can land on a chord equal to an attach keypress (the joint
+  audit reports it as a collision, nothing prevents it), and a hostless attach keypress is just an exception that
+  falls back to the longform strokes (`noNeighbour`).
+- Idea (user, 2026-10-04): the attach keypress of an expression should also be the stroke that writes that expression
+  standalone when the attach fails. Example: with an attach `bien que`, a writer typing "Bien que bien des gens..."
+  tries the `bien que` keypress as an attach first; it fails against `bien` (the host's own stroke collides with the
+  attached expression, an evident `bien que` ~ `bien` collision), the writer deletes it and types the longform. Cognitively it is
+  far easier to RETYPE the same fresh keypress as a standalone stroke, then type `bien des gens`.
+- To investigate:
+  1. Decoder behaviour (NOTES section 3): when does a keypress mean "attach" and when "standalone"? A decoding Plover
+     plugin must make the fallback deterministic (try attach, else standalone) without a delete-and-retype cycle.
+  2. Reserve the attach keypresses against brief derivation (add them to `takenStrokes` in
+     `scratch/select_expression_rules.py` / `deriveBriefStroke`), or instead make the standalone meaning a feature:
+     each attach rule's keypress doubles as the brief of its own expression. Measure what the 40 forced briefs and the
+     selected briefs lose (a family takes up to 4 selector variants, about 20 slots times 3-4 chords).
+  3. Which expressions this makes sense for (an attach whose host stroke collides with its own expression: `bien que`
+     against `bien`, `pas` against `pas`, `plus`, ...) and whether the collision audit should then treat
+     "attach keypress = standalone stroke of the same expression" as legal, not a collision.
+  4. Interaction with `*`/`#` selectors: a standalone stroke carries its selector too, so the same selector-order
+     question as the `que` collision applies.
+
 ## Branch TODO — max-1-key overlap (abbreviations branch, 2026-10-03)
 
 - Study allowing up to 1 shared key between an attach keypress and its host stroke (today `keyOverlap` refuses ANY
