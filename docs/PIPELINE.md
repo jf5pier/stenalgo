@@ -48,7 +48,7 @@ The real dependency order. Steps 0 and 1 and the human loop 4h are run by hand, 
 | 6 | `python -m util.build_realization_report` | Discriminating-Feature Stroke Realization (Realization Phase), report build | before step 9's keyboard legend | Writes the realization report only. It does not feed the disambiguated theory or the Plover dictionary. |
 | 7 | `python -m util.build_disambiguated_theory` | Different-Lemma or Grammatical-Category Disambiguation (S7) | to refresh `disambiguated_theory.tsv` and the exporters' `DisambiguatedTheory.pickle` | Fast (pickles exist); hard-errors naming the exact prerequisite commands when the pickles or JSONs are missing. Also writes the fingerprinted `DisambiguatedTheory.pickle` every exporter loads instead of recomputing (fact 1). |
 | 8 | `python -m util.export_plover_dictionary`, `python -m util.export_plover_system` | Theory Export (S8), Plover branch | Plover | Either order. |
-| 8b | `PYTHONPATH=. python scratch/export_expression_data.py`, `python -m util.export_plover_plugin` | Theory Export (S8), Plover branch, expression dictionary plugin (S8.10) | the expression abbreviation layer in Plover | After step 8 (reads `plover_stenalgo_dictionary.json`). Copy the `.stenalgo` file and the JSON together. |
+| 8b | `python -m util.export_expression_data`, `python -m util.export_plover_plugin` | Theory Export (S8), Plover branch, expression dictionary plugin (S8.10) | the expression abbreviation layer in Plover | After step 8 (reads `plover_stenalgo_dictionary.json`). Copy the `.stenalgo` file and the JSON together. |
 | 9 | `python -m util.export_keyboard_layout` (after step 6), `python -m util.export_practice_words`, **then** `python -m util.export_practice_sentences`, then `python -m util.export_definitions` | Theory Export (S8), trainer branch | steno-trainer | `export_practice_sentences` reads `practice-words.json` (export_practice_sentences.py:157). |
 | opt | `python -m util.check_conjugation_disambiguation_order` | Elicitation Phase: Answer Collection, validator | checking answers | Writes `conjugation_disambiguation_report.json` (gitignored). |
 
@@ -184,7 +184,7 @@ The names below are used in every "Input state" and "Result" line.
 | **disambiguated theory** | `dict[Word, list[Strokes]]`: index 0 primary (with its star/hash mark), then alternate entries | `Dictionary.buildDisambiguatedTheory` dictionary.py:342 | `disambiguated_theory.tsv` (gitignored, read by nothing) |
 | **Plover dictionary** | `dict[str, str]` (RTFCRE steno → spelling); 167,719 entries | `export_plover_dictionary.main` | `plover_stenalgo_dictionary.json` (tracked) |
 | **Plover key table** | module with `KEYS`, `IMPLICIT_HYPHEN_KEYS`, `GEMINI_PR_KEYMAP` | `export_plover_system.main` | `plover_stenalgo/plover_stenalgo/_generated_keys.py` (tracked) |
-| **expression data** | JSON: `rules` (29 attaches, 40 briefs, `orderBan`), `wordIndex` (name + fingerprint of the stock dictionary the outline -> words index is read from), `unitStrokes` (attach particle words only), `attested` (1,150 pool readings with frequency and written text), `unitProbabilities` (the 5,000 most frequent words), `partners` (pinky-diagonal key conflicts), `legality` (chord legality of the layout); about 0.3 MB | `scratch/export_expression_data.py` (via `src/expressiondata.py`) | `plover_stenalgo_expressions.stenalgo` (generated, not tracked) |
+| **expression data** | JSON: `rules` (29 attaches, 40 briefs, `orderBan`), `wordIndex` (name + fingerprint of the stock dictionary the outline -> words index is read from), `unitStrokes` (attach particle words only), `attested` (1,150 pool readings with frequency and written text), `unitProbabilities` (the 5,000 most frequent words), `partners` (pinky-diagonal key conflicts), `legality` (chord legality of the layout); about 0.3 MB | `util/export_expression_data.py` (via `src/expressiondata.py`) | `plover_stenalgo_expressions.stenalgo` (generated, not tracked) |
 | **vendored decoder core** | the 7 stdlib-only modules of the decoder, package-relative imports | `util/export_plover_plugin.py` | `plover_stenalgo/plover_stenalgo/_core/` (tracked) |
 | **trainer data** | JSON: `keyboard-layout`, `practice-words`, `practice-sentences`, `definitions` | trainer exporters | `steno-trainer/public/data/*.json` (tracked) |
 
@@ -1859,7 +1859,8 @@ cannot be listed; the plugin decodes the stroke tuple (`src/expressiondecoder.py
 (`src/expressionranking.py`: plain word > pure brief > attested pool reading > the more probable) and renders the
 winner as a translation string.
 Transformation, in two exporters and one class:
-1. `scratch/export_expression_data.py` composes the pool with the committed rule set, builds the attested table
+1. `util/export_expression_data.py` (inputs rebuilt by `util/_expressioninput.loadExpressionInputs`, which the `scratch/` audits
+   share) composes the pool with the committed rule set, builds the attested table
    (reading, frequency, written text: the order of attaches merged into one stroke is lost in a reading, the pool
    remembers it) and writes the `.stenalgo` data (`src/expressiondata.py`, `FORMAT_VERSION`). The outline -> words
    index is NOT stored: the data names the stock dictionary beside it and records `wordIndexFingerprint` (sha256 of

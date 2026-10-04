@@ -73,7 +73,7 @@ python -m util.export_plover_dictionary      # Theory Export (S8), Plover branch
 python -m util.export_plover_system
 # Prerequisites: starboard3h.json. Outputs: plover_stenalgo/plover_stenalgo/_generated_keys.py.
 
-PYTHONPATH=. python scratch/export_expression_data.py [OUT]   # expression layer data for the Plover plugin
+python -m util.export_expression_data [OUT]   # expression layer data for the Plover plugin
 # Prerequisites: the committed rule set (scratch/expr-rules-final.json, expr-briefs.tsv, expr_candidates.tsv),
 # both pickles, starboard3h.json, plover_stenalgo_dictionary.json (the word index is read from it).
 # Outputs: plover_stenalgo_expressions.stenalgo (0.3 MB; default next to the repo root, OUT to choose).

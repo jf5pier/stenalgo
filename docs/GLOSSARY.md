@@ -1282,7 +1282,7 @@ The generated JSON the Plover plugin decodes with: the rules, the attested pool 
 5,000 most frequent unit probabilities, the particle stroke counts, the key conflicts and the chord legality, plus the name
 and fingerprint of the stock dictionary that holds the outline -> words index. About 0.3 MB; it is read together with that
 dictionary, never alone.
-- Code: `src/expressiondata.py` (`bundleToDict`, `loadBundle`), `scratch/export_expression_data.py`.
+- Code: `src/expressiondata.py` (`bundleToDict`, `loadBundle`), `util/export_expression_data.py`.
 
 ### Word-index fingerprint
 The sha256 of an outline -> words index (the sorted `outline<TAB>word` lines), independent of file formatting and order.

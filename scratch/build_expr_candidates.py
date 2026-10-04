@@ -39,9 +39,10 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
-from scratch.rebuild_ngrams import PARTICLES, loadBins, normalize, wordUnits  # noqa: E402
+from scratch.rebuild_ngrams import loadBins, normalize, wordUnits  # noqa: E402
 from src.keyboard import Starboard  # noqa: E402
 from src.word import Word  # noqa: E402
+from util._expressioninput import FULL_FORMS, PARTICLES, pickWord, resolveTerm, resolveToken  # noqa: E402,F401
 from util._stenorender import renderFinalStrokesToRTFCRE  # noqa: E402
 from util._theoryio import loadDisambiguatedTheory  # noqa: E402
 
@@ -51,60 +52,6 @@ OUT_TSV = REPO / "scratch" / "expr_candidates.tsv"
 DROPS_TXT = REPO / "scratch" / "expr_candidates_drops.txt"
 SLICES = {2: "2gram_top300.tsv", 3: "3gram_top200.tsv",
           4: "4gram_top100.tsv", 5: "5gram_top50.tsv"}
-# Elision particles whose fragment is not a theory word fall back to these.
-FULL_FORMS = {"c": "ce", "j": "je", "qu": "que", "quelqu": "quelque",
-              "quoiqu": "quoique", "presqu": "presque", "entr": "entre"}
-
-
-def pickWord(words: list[Word]) -> Word:
-    """Primary Word of an orthography: the most frequent (self-homographs
-    keep several strokes under one Word; different-lemma homographs differ)."""
-    return max(words, key=lambda w: w.frequency)
-
-
-def resolveToken(token: str, byOrtho: dict[str, list[Word]]) -> list[tuple[str, Word | None]]:
-    """Token -> [(unit display, Word or None)], trying whole token, hyphen
-    split, then elision split (fragment, bare, full form -- in that order)."""
-    if token in byOrtho:
-        return [(token, pickWord(byOrtho[token]))]
-    # The lexicons spell the œ ligature "oe" (oeil, oeuvre).
-    oe = token.replace("œ", "oe").replace("æ", "ae")
-    if oe != token and oe in byOrtho:
-        return [(token, pickWord(byOrtho[oe]))]
-    if "-" in token:
-        out: list[tuple[str, Word | None]] = []
-        for part in token.split("-"):
-            if not part:
-                continue
-            out.extend(resolveToken(part, byOrtho))
-        return out
-    if "'" in token:
-        left, _, host = token.partition("'")
-        if left in PARTICLES and host:
-            particle = None
-            for cand in (left + "'", left, FULL_FORMS.get(left)):
-                if cand and cand in byOrtho:
-                    particle = (cand, pickWord(byOrtho[cand]))
-                    break
-            resolved = [(left + "'", particle[1])] if particle else [(left + "'", None)]
-            return resolved + resolveToken(host, byOrtho)
-        if left in PARTICLES and not host:
-            # a BARE fragment unit ("c'", "qu'" — unlike n'/l'/d'/s' these are
-            # not theory words): fall back to its full form (ce/que/je...)
-            for cand in (left + "'", left, FULL_FORMS.get(left)):
-                if cand and cand in byOrtho:
-                    return [(token, pickWord(byOrtho[cand]))]
-    return [(token, None)]
-
-
-def resolveTerm(term: str, byOrtho: dict[str, list[Word]]) -> list[tuple[str, Word | None]]:
-    """Whole expression -> units: whitespace tokens, then per-token rules."""
-    out: list[tuple[str, Word | None]] = []
-    for token in term.split():
-        out.extend(resolveToken(token, byOrtho))
-    return out
-
-
 def main() -> None:
     spotcheck = "--spotcheck" in sys.argv
 

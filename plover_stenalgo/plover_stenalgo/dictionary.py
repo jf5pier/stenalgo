@@ -1,7 +1,7 @@
 """Plover dictionary plugin: reads the expression outlines of Stenalgo's abbreviation layer.
 
 Registered as the `stenalgo` dictionary extension: add `plover_stenalgo_expressions.stenalgo` (written by
-`scratch/export_expression_data.py`) to Plover's dictionary list, ABOVE the stock JSON dictionary. The two files
+`util/export_expression_data.py`) to Plover's dictionary list, ABOVE the stock JSON dictionary. The two files
 travel together: the word index is read from the JSON named in the data (same folder), and a fingerprint
 refuses a JSON built from another theory. A stroke that is a plain word still reads as that word. The dictionary answers only keys that decode, best reading first, as
 ONE expression piece (a brief, a merged attach, a standalone keypress or a cluster); longer keys return None

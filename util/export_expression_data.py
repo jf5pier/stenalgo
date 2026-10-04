@@ -1,6 +1,6 @@
 """Step 5 data export of PLAN_2026-10-04-expression-decoder.md: write the decoder's data (src/expressiondata.py)
 and check it reproduces the in-memory ranked decode on every pool outline plus a sample of the open set.
-Usage: PYTHONPATH=. env/bin/python scratch/export_expression_data.py [OUT.json]
+Run: python -m util.export_expression_data [OUT]
 Default OUT: plover_stenalgo_expressions.stenalgo"""
 
 from __future__ import annotations
@@ -12,7 +12,6 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
-from scratch.decode_roundtrip import loadAll  # noqa: E402
 from src.expressiondata import (bundleToDict, legalityFromStarboard, loadBundle,  # noqa: E402
                                 wordIndexFingerprint)
 from src.expressiondecoder import ExpressionDecoder  # noqa: E402
@@ -20,6 +19,7 @@ from src.expressionranking import (ReadingRanker, attestedTable, attestedTexts, 
                                    normalizedSignature, rankedDecode, unitProbabilities)
 from src.expressions import composeOutlineTraced, conflictsOf  # noqa: E402
 from src.keyboard import Starboard  # noqa: E402
+from util._expressioninput import loadExpressionInputs  # noqa: E402
 from util._theoryio import loadDisambiguatedTheory  # noqa: E402
 
 
@@ -37,7 +37,7 @@ def writtenText(units: tuple[str, ...]) -> str:
 
 def main() -> None:
     out = Path(sys.argv[1] if len(sys.argv) > 1 else REPO / "plover_stenalgo_expressions.stenalgo")
-    ctx, rules, pool, words, unitStrokes = loadAll()
+    ctx, rules, pool, words, unitStrokes = loadExpressionInputs()
     conflicts = conflictsOf(ctx)
     frequencies = [(w.ortho, w.frequency) for w in loadDisambiguatedTheory(Starboard.fromJSONFile("starboard3h.json"))]
     probabilities = unitProbabilities(frequencies, UNIT_PROBABILITY_WORDS)

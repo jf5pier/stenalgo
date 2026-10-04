@@ -13,7 +13,6 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
-from scratch.build_expr_candidates import resolveTerm  # noqa: E402
 from src.affixes import PREFIX, SimContext  # noqa: E402
 from src.expressiondecoder import ExpressionDecoder, Piece  # noqa: E402
 from src.expressionranking import composedReading, normalizedSignature  # noqa: E402
@@ -21,54 +20,11 @@ from src.expressionrules import ExprRule, PoolExpression, orderBan  # noqa: E402
 from src.expressions import (EXCEPTION, MERGED, STANDALONE, BriefRule, Rules, Token,  # noqa: E402
                              composeOutlineTraced, conflictsOf, planStream)
 from src.keyboard import Starboard, canonicalizeStrokes  # noqa: E402
+from util._expressioninput import loadExpressionInputs  # noqa: E402
 from util._theoryio import loadDisambiguatedTheory  # noqa: E402
 
 
-def loadAll():
-    starboard = Starboard.fromJSONFile("starboard3h.json")
-    theory = loadDisambiguatedTheory(starboard)
-    byOrtho: dict = {}
-    for w in theory:
-        byOrtho.setdefault(w.ortho, []).append(w)
-    ctx = SimContext(starboard, [])
-    ctx.finalOutlines = {canonicalizeStrokes(s) for alts in theory.values() for s in alts}
-    ctx.singleStrokeOutlines = {o[0] for o in ctx.finalOutlines if len(o) == 1}
-    pool: list[PoolExpression] = []
-    with open(REPO / "scratch" / "expr_candidates.tsv", encoding="utf-8") as fh:
-        header = fh.readline().rstrip("\n").split("\t")
-        for line in fh:
-            row = dict(zip(header, line.rstrip("\n").split("\t")))
-            units = [p.split("=")[0] for p in row["phonologies"].split(",") if p]
-            pairs = [resolveTerm(u, byOrtho) for u in units]
-            if any(any(w is None for _, w in p) for p in pairs):
-                continue
-            pool.append(PoolExpression(tuple(units), float(row["freq"]), tuple(
-                Token(u, theory[p[0][1]][0]) for u, p in zip(units, pairs))))
-    data = json.load(open(REPO / "scratch" / "expr-rules-final.json", encoding="utf-8"))
-    selected = [ExprRule(kind=r["kind"], units=tuple(r["units"]), position=r["position"],
-                         family=r["family"], freq=r["freq"], keys=tuple(r["keys"]) or None,
-                         beta=tuple(tuple(s) for s in r["beta"]) or None,
-                         elision=r.get("elision", ""), elisionBase=tuple(r.get("elisionBase", ())))
-                for r in data["rules"]]
-    forced = []
-    with open(REPO / "scratch" / "expr-briefs.tsv", encoding="utf-8") as fh:
-        fh.readline()
-        for line in fh:
-            f = line.rstrip("\n").split("\t")
-            forced.append((tuple(f[0].split()), tuple(int(k) for k in f[3].split(","))))
-    attachRules = [r for r in selected if r.kind == "attach" and r.keys]
-    briefRules = [r for r in selected if r.kind == "brief" and r.beta]
-    rules = Rules(attaches=tuple(r.toAttach() for r in attachRules),
-                  briefs=tuple(r.toBrief() for r in briefRules)
-                  + tuple(BriefRule(u, (s,)) for u, s in forced),
-                  orderBan=orderBan(selected, pool))
-    words: dict = defaultdict(set)
-    unitStrokes: dict = {}
-    for w, alts in theory.items():
-        for s in alts:
-            words[canonicalizeStrokes(s)].add(w.ortho)
-        unitStrokes[w.ortho] = max(unitStrokes.get(w.ortho, 0), len(alts[0]))
-    return ctx, rules, pool, words, unitStrokes
+loadAll = loadExpressionInputs
 
 
 def expectedReading(rules: Rules, expr: PoolExpression, traced) -> tuple:

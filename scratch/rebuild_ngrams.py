@@ -65,9 +65,7 @@ SLICES = {1: (300,), 2: (300, 100), 3: (200, 100), 4: (100,), 5: (50,)}
 
 ALLOWED = re.compile(r"^[a-zàâäéèêëîïôöùûüçñœæ'-]+$")
 HAS_LETTER = re.compile(r"[a-zàâäéèêëîïôöùûüçñœæ]")
-# Left parts of elision particles: `X'` gluing onto a host word.
-PARTICLES = {"l", "c", "d", "n", "s", "j", "m", "t", "qu", "jusqu", "lorsqu",
-             "quelqu", "puisqu", "quoiqu", "presqu", "entr"}
+from util._expressioninput import PARTICLES  # noqa: E402,F401  (left parts of elision particles, one source)
 
 
 def normalize(ngram: str) -> str:

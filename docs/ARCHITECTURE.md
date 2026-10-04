@@ -379,7 +379,7 @@ the pickle caches are never checked for staleness.
 | `realization_report.json` | The realization report: chosen coda keys per Keypress Group, costs, residual buckets | `python -m util.build_realization_report` (Realization Phase, report build) |
 | `plover_stenalgo_dictionary.json` | Plover dictionary: 163,238 RTFCRE steno → spelling entries | `python -m util.export_plover_dictionary` (Theory Export (S8)) |
 | `plover_stenalgo/plover_stenalgo/_generated_keys.py` | Plover key table (KEYS, implicit-hyphen keys, Gemini PR keymap) | `python -m util.export_plover_system` (Theory Export (S8)) |
-| `plover_stenalgo_expressions.stenalgo` | Expression-layer data for the Plover plugin (0.3 MB; used with `plover_stenalgo_dictionary.json`) | `PYTHONPATH=. python scratch/export_expression_data.py` (Theory Export (S8), S8.10; generated, not tracked) |
+| `plover_stenalgo_expressions.stenalgo` | Expression-layer data for the Plover plugin (0.3 MB; used with `plover_stenalgo_dictionary.json`) | `python -m util.export_expression_data` (Theory Export (S8), S8.10; generated, not tracked) |
 | `plover_stenalgo/plover_stenalgo/_core/` | Vendored stdlib-only decoder modules of the plugin | `python -m util.export_plover_plugin` |
 | `steno-trainer/public/data/*.json` | Trainer data: keyboard-layout, practice-words, practice-sentences, definitions | `python -m util.export_keyboard_layout`, `python -m util.export_practice_words`, then `python -m util.export_practice_sentences`, then `python -m util.export_definitions` (Theory Export (S8)) |
 | `excluded_words.txt` | Excluded words (44 spellings dropped in Dictionary Loading (S3)) | hand-maintained input |
