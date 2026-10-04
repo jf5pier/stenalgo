@@ -99,7 +99,21 @@ First attempt compared the particle with the CONTENT host (`ce n' est` was refus
 | decode: composed reading missing | 0 | | 3 (hostless clusters, 1.8e6) |
 | pool outlines with a rival | 21.5% | | 25.9% |
 
-Reading: elision pairs remove the elision families' collisions at the source, but the pool saving falls 1.4 points (6.5% with briefs) and the
-rival share is higher, so it stays OFF by default. The cause of the lost saving is not isolated (the elision refusals are gone after the next-word fix;
-the budget picks `un`, `elle`, `en`, `les` for the two freed slots while `sur` drops). Next, if wanted: re-weigh the freed slots, and decide
-`n' y`/`il n'`/`je me` (their `*` selector is swallowed by `a`, `est`... ).
+Reading: elision pairs remove the elision families' collisions at the source. The pool saving falls 1.4 points, but per-expression comparison
+(default vs `ELISION_PAIRS=1 SELECTOR_RETRY=1`, net -2.6e8 strokes) shows where:
+
+| pool expressions | default | elision |
+|---|---|---|
+| with a host word (real running text) | 2.465e9 | 2.562e9 (+3.9%) |
+| hostless fragments (n-gram slices ending in particles: `à l'`, `dans le`, `et les`, `sur la`) | 1.562e9 | 1.203e9 |
+
+So hosted expressions GAIN; the whole loss (-3.6e8) is fragments, which are 39% of the default saving and an artifact of the pool (a sentence always
+continues). A fragment saves its stroke through a CLUSTER (two hostless attaches in one stroke, needing a disjoint, legal union chord); the new shared
+chords (`l'` = `le`'s, ...) make several of those unions illegal (`à l'` 6.3e7, `dans le` 4.5e7, `sur le`, `et les`, `que les`... fall to `noNeighbour`
+exceptions) and `sur` is no longer selected. Real losses inside the hosted group: the `j' ai` brief is displaced by the new `j'` attach (-3.1e7, attach beats
+brief), and some `d'`/`l'` merges now fail on `spanOne` (-5e6 each at most). Consequence: compare runs on hosted expressions (or give fragments weight 0);
+the headline saving of every run in these files includes the fragment share.
+
+Related regression found at the same time (not elision): the Stage B shadow term moved the chords so that `il` + `n'` no longer stack on one host
+(union illegal, `n'` falls to `spanOne`; the run before it stacked, `il n' est` one stroke). Single-stroke particles that fail to merge: 2.9e7 -> 1.0e8
+occurrences (about 0.5 point). Cause: the repair only forces key-disjointness for co-occurring families, not a legal union chord.

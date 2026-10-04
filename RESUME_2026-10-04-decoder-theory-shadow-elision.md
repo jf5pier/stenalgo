@@ -21,9 +21,10 @@ Vocabulary: `docs/GLOSSARY.md` (theory shadow rate, decoder, elision pair).
 - `pas ce dans à` shadows too costly (user): fixed by the Stage B term. Limit stays 0.002 (0.01 tried, `la` shadows `les`).
 
 ## NEXT
+0. Regression: `il` + `n'` no longer stack (illegal union chord) since the Stage B shadow term; add union legality for stacking pairs to `repairKeypresses` and re-run. Fragments are 39% of the default saving: report hosted-only saving too.
 1. Build the ranking: attested table export, `loses(reading)` in the composer, decoder tie-break; the grammar filter of the elision experiment is already in the decoder.
 2. Remaining collisions: `n' y`, `il n'`, `je me` (their `*` is swallowed by hosts such as `a`/`est`), `le`, `qui`, `un`.
-3. Elision experiment: why the saving falls (freed slots go to `un`, `elle`, `en`, `les`, `sur` drops); try re-weighing before adopting. `ASPIRATED_H` / `NO_ELISION` are short lists, complete them from a lexicon if adopted.
+3. Elision experiment: the lost saving is all in hostless n-gram fragments (hosted expressions +3.9%), see the results file; compare runs on hosted expressions only. `ASPIRATED_H` / `NO_ELISION` are short lists, complete them from a lexicon if adopted.
 4. Step 4 leftovers (brief depending on a failed attach, standalone-as-attach, overlap max-1, `longest_key`), then step 5 (Plover plugin, needs a venv with Plover).
 5. The earlier list: preselect more than 4 candidates per family.
 
