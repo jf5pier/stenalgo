@@ -10,6 +10,22 @@ Written to survive a `/clear` — read this file first in a fresh session.
   `il y` -> `tine` shadow risk (dropping the `il y` prefix rule exposes the outline (7,13,22)).
 - Check `pas`/`dans` exception mass in running text (hostless-token artifact?) before dropping `pas`, `pas le`, `dans ce`.
 
+## Branch TODO — which variants fill a family's four selector slots (abbreviations branch, 2026-10-04)
+
+- Today Stage A absorbs a family's siblings in DESCENDING FREQUENCY until the cap of 4 (the selector count), using the
+  optimistic proxy marginal. Found 2026-10-04 with the `il` family: `il n'`, `il y`, `il ne` (marginal 0), `il s'` fill the cap,
+  and `il n' y` (frequency 6.4e6, marginal 9.6e6, above `il s'`'s 8.8e6) is never evaluated. Then Stage C collapses `il n'` and
+  `il y`, so the cap was spent on variants that do not survive.
+- Idea 1 (user, 2026-10-04): pick the cap's four variants by MARGINAL gain instead of by frequency (evaluate every sibling,
+  absorb the best). Cheap to try in the sibling loop of `selectExpressionRules`.
+- Idea 2 (user, 2026-10-04): pre-select MORE than 4 candidates per family as a reserve. When Stage C collapses a variant
+  (selector swallowed by the host's `*`/`#`), it measures the effect and promotes the next reserve into the freed selector
+  instead of leaving the slot empty. Needs: a reserve list on the family, a re-run of Stage B/C evaluation for the promoted
+  variant, and a stop rule so the loop terminates. Ties to the selector-retry and CP-SAT-permutation options
+  (`RESULTS_2026-10-04-slot-budget-sweep.md` 2b/2c).
+- Context for both: the proxy marginal ignores exceptions and collisions (`il n'` +1.69e7 in the proxy, -9.6e6 in the final
+  pool), so a marginal-based pick should ideally use the exact composed saving, not the proxy.
+
 ## Branch TODO — attach keypress reused as a standalone stroke (abbreviations branch, 2026-10-04)
 
 - Today an attach keypress is not reserved for anything else: `deriveBriefStroke` (`src/expressionrules.py`) only

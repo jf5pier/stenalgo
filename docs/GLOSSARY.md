@@ -1088,3 +1088,125 @@ A dataset state: all `src.word.Word`s after the identity merge (167,639), sorted
 film frequency; stored in `Dictionary.pickle`.
 - Code: `Dictionary.readCorpus` dictionary.py:92.
 - First used in: Dictionary Loading (S3).
+
+## Expression abbreviation layer (abbreviations branch)
+
+The layer that shortens frequent function-word expressions (`il n' a`, `que je`, `de la`) after the
+theory exists. It is separate from the affix layer and not yet wired into the build (Phase 4). Its
+"Stage A/B/C" are the three stages of Phase 2 below, not the pipeline's S1-S8. Design and results:
+`PLAN_2026-10-01-abbreviations-algorithm.md`, `NOTES_2026-10-03-attach-overlap-and-plover-decoder.md`,
+`RESULTS_2026-10-04-slot-budget-sweep.md`.
+
+### Expression
+A sequence of word units (`il`, `n'`, `a`; a glued particle like `n'` is its own unit), with a window
+frequency from the n-gram files and its **longform** strokes (the strokes written without any
+abbreviation). The **pool** is the set of candidate expressions the layer is selected and measured on.
+- Code: `PoolExpression`, `scratch/build_expr_candidates.py`, `scratch/expr_candidates.tsv`.
+
+### Attach rule (attach)
+A rule that gives a particle (or a short run of particles) a **keypress**; when written it is merged
+(key union) into the stroke of the neighbouring word, its **host**, so no stroke of its own is spent.
+A **prefix** attach merges into the FIRST stroke of the word after it, a **suffix** attach into the LAST
+stroke of the word before it. Only post-verbal negation adverbs and the auxiliary adverbs may be suffixes
+(`SUFFIX_WORDS`).
+- Code: `AttachRule` src/expressions.py; `ExprRule(kind="attach")` src/expressionrules.py.
+- Refused (the particle keeps its longform, an **exception**) when the keypress shares a syllabic key with the host
+  stroke (`attachKeysOverlap`), the union is not a legal chord, or there is no host.
+
+### Stack (composed attach)
+Two or more attaches next to each other merging into the same host: `il` + `n'` + `a` is ONE stroke, the union of the
+keypresses of `il`, `n'` and `a`. It needs no dedicated keypress for the group, only keypresses that share no syllabic
+key (the Stage C disjoint-pair constraint). Hostless (nothing after them), adjacent attaches merge with each other into one
+stroke instead (a **cluster**, `attachCluster`).
+- Code: `planStream`, `composeOutlineTraced` src/expressions.py.
+- Order matters for nothing: key union is commutative, which is why `ce que` and `que ce` would write the same chord (see **Order ban**).
+
+### Brief
+A rule that gives a WHOLE expression one invented standalone stroke (`j' ai`), derived from the member words' keys (union,
+skeleton, vowels) or any free legal chord. **Forced briefs** are the 40 most frequent Tao-list expressions no attach rule
+covers; **selected briefs** win a slot in the selection. Expressions of 3 or more units are briefs, never attaches
+(`MAX_ATTACH_UNITS = 2`).
+- Code: `BriefRule`, `deriveBriefStroke`, `assignBriefStrokes` src/expressionrules.py; `FORCED_BRIEF_BUDGET`.
+
+### Family and variant
+A **family** is the group of attach rules that share ONE base chord (the learnable unit): `de`, `d'`; `qu'`, `que`; `il`, `il n'`.
+A **variant** is one rule of a family, told apart by a **selector**. A family costs ONE slot; up to four variants.
+Families are grouped by the lemma of the first unit (the `que` domain has its own cut).
+- Code: `ExprRule.family`; `_familyGroups` src/expressionrules.py; `MAX_FAMILY_VARIANTS = 4`.
+
+### Selector
+The `*` and/or `#` keys that separate a family's variants: none, `*`, `#`, `*#`, assigned in variant order. The order is
+`freq + stackMass` (the variant that stacks most takes the bare slot), and for gendered/numbered families (`le la l' les`)
+m/s, f/s, m_or_f/s, m/p, f/p, m_or_f/p.
+- Code: `SELECTORS`, `variantSelectors`, `GENDER_NUMBER`, `ExprRule.stackMass`, `ExprRule.selector` (Stage C override).
+
+### Order ban
+The less frequent order of two adjacent attaches the pool contains in both orders (`que ce` against `ce que`): its second particle
+is left as a plain word, so the two orders write different chords.
+- Code: `orderBan`, `Rules.orderBan`.
+
+### Slot budget
+The number of families (and selected briefs) the selection may take: `EXPR_RULE_BUDGET` = 20. A family is one slot however many
+variants it holds.
+
+### Shadow
+A composed outline of an abbreviated expression that equals an existing live outline of the theory (a hard no).
+- Code: `ExprAudit.shadows`.
+
+### Collision (expression layer)
+Two different expressions composing to the same outline. Not the same as a theory **Collision**.
+- Code: `ExprAudit.collisions`.
+
+### Selector collapse
+A Stage C step (a variant "collapsed in Stage C", as against "dropped in Stage A"): when a variant's outline collides because the host's own `*`/`#` swallows its selector, the variant is removed
+from the rule set (`je me`, `il n'`, `il y` in the budget-20 run); its contexts then compose through the family's other rules (`il n'`
+stacks `il` and `n'`). Experimental alternatives: `KEEP_COLLAPSED=1`, `SELECTOR_RETRY=1`.
+- Code: `scratch/select_expression_rules.py` (Stage C loop).
+
+### Phase 0 - Phase 4 (expression layer)
+- **Phase 0, candidate pool**: n-gram slices + Tao list resolved to theory words (`expr_candidates.tsv`).
+- **Phase 1, composition algebra**: the pure composer `composeOutlineTraced` (src/expressions.py): longest-match attaches, briefs,
+  merges, the fallback ladder.
+- **Phase 2, selection, keypress assignment, collision audit**: Stages A, B and C below.
+- **Phase 3, simulation and report**: the `scratch/expr-*` files (per-rule attribution, savings, composability).
+- **Phase 4, wiring into the build and the Plover export**: not done; required before any merge to main.
+
+### Proxy (proxy stage, proxy saving)
+How Stage A scores a candidate before it has a keypress: the rule is matching-only (`proxyAttach`, `proxyBrief`, a placeholder
+keypress) and the saving is counted as if every attach merged cleanly (`proxySaving`/`savingAt`). Key overlap, illegal
+chords, exceptions and collisions are NOT seen, so a proxy marginal is optimistic: `il n'` shows +1.69e7 in the proxy and -9.6e6 in
+the final pool (`scratch/que_run_attribution.log`). The exact figures come from Stage B and the Stage C audit.
+- Code: `proxySaving`, `ExprRule.proxyAttach` src/expressionrules.py; `scratch/expr-rules-proxy.tsv`.
+
+### Marginal (marginal gain)
+The pool saving a rule adds given the rules already selected: the sum over the expressions it touches of
+frequency x (strokes saved with the rule minus without it), counted once per expression. In Stage A it is a proxy marginal.
+
+### Absorbed variant
+A Stage A step: when a family's head wins a slot, the family's other candidates (its siblings) are visited in DESCENDING
+FREQUENCY. A sibling whose fresh proxy marginal exceeds `FORM_COST` (100.0, a negligible figure next to millions of
+strokes) is absorbed: it joins the family as a variant at no extra slot (the head's `forms` counts it, its own is 0), until the
+family holds `MAX_FAMILY_VARIANTS` (4, the selector count). Siblings after the cap are never evaluated.
+- Code: the family bundling block of `selectExpressionRules`.
+
+### Dropped (dropped candidate)
+Two distinct events, say which one:
+- **dropped in Stage A**: a sibling whose marginal does not clear `FORM_COST` (its family is closed to it for good), or an
+  absorbed variant that `pruneRedundantVariants` removes because the other selected rules already produce its saving.
+- **collapsed in Stage C**: see **Selector collapse**; the variant had been selected and absorbed.
+
+### Stage A (selection)
+The greedy budgeted selection of attach rules and briefs by marginal frequency-weighted saving (a token's saving counts once),
+with territory skips and family bundling; keypresses are placeholders.
+- Code: `selectExpressionRules`, `pruneRedundantVariants`.
+
+### Stage B (keypress assignment)
+Per family, in isolation: try every legal base chord (stage 1 on a sample, stage 2 on all touched expressions) under the exception-rate
+gate and the no-shadow rule; briefs get their strokes. Cross-family truth is deliberately left to Stage C.
+- Code: `assignKeypresses`, `assignBriefStrokes`.
+
+### Stage C (joint repair and audit)
+A CP-SAT pass re-chooses the families' bases so that no two families share an effective keypress (disjoint keys for families that
+stack), then a full audit composes the whole pool; collisions feed back (ban a base, collapse a variant, re-derive a brief) for up to 6
+rounds.
+- Code: `repairKeypresses`, `auditExpressionRules`, the loop in `scratch/select_expression_rules.py`.

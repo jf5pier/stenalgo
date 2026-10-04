@@ -129,7 +129,9 @@ def main() -> None:
                 unigramFreq[word] = float(count)
 
     candidates = briefCandidates(pool, familyOf=queFamilyOf) \
-        + attachCandidates(pool, particles, familyOf, unigramFreq)
+        + attachCandidates(pool, particles, familyOf, unigramFreq,
+                           longRuns=frozenset({("il", "n'", "y")}
+                                              if os.environ.get("IL_N_Y") else ()))
     # The pronoun family differentiates by briefs, never by a merged
     # keypress or a */# selector (user decision 2026-10-02): it gets no
     # attach candidates at all.
@@ -149,6 +151,11 @@ def main() -> None:
                 c.family = "le+la+l'+les"
             elif c.units[0] in ("le", "la", "l'", "les") and os.environ.get("DEF_SUFFIX_FAMILY"):
                 c.family = "le+la+l'+les:suffix"
+    if os.environ.get("IL_Y_FAMILY") == "standalone":
+        # EXPERIMENT (2026-10-04): `il y` and `il n' y` form their own family
+        for c in candidates:
+            if c.kind == "attach" and c.units in (("il", "y"), ("il", "n'", "y")):
+                c.family = "il y"
     families = {c.family for c in candidates if c.family}
     print(f"candidates: {len(candidates)} "
           f"({sum(1 for c in candidates if c.kind == 'brief')} briefs, "
@@ -296,7 +303,42 @@ def main() -> None:
                     key=lambda r: -r.freq)
                 keep = colliding[0] if len(colliding) > 1 else None
                 for drop in colliding:
-                    if drop is not keep:
+                    if os.environ.get("SELECTOR_RETRY") and drop is not keep \
+                            and drop.keys is not None:
+                        # Stage C rework (2026-10-04): before dropping, try the
+                        # family's other selectors for this variant; keep one
+                        # that lowers the collision count without a shadow.
+                        from src.ambiguitychecker import HASH_KEY, STAR_KEY
+                        from src.expressionrules import SELECTORS
+                        marks = {STAR_KEY, HASH_KEY}
+                        base = tuple(k for k in drop.keys if k not in marks)
+                        current = tuple(k for k in drop.keys if k in marks)
+                        oldSelector = drop.selector
+                        fixed = False
+                        for sel in SELECTORS:
+                            if sel == current:
+                                continue
+                            drop.selector = sel
+                            drop.keys = tuple(sorted(set(base) | set(sel)))
+                            trial = auditExpressionRules(result.selected, pool, realCtx)
+                            if len(trial.collisions) < len(audit.collisions) \
+                                    and len(trial.shadows) <= len(audit.shadows):
+                                print(f"  selector retry: {' '.join(drop.units)} "
+                                      f"{drop.position} (family {fam!r}) {current} -> {sel}: "
+                                      f"collisions {len(audit.collisions)} -> {len(trial.collisions)}")
+                                fixed = True
+                                break
+                        if fixed:
+                            progressed = True
+                            continue
+                        drop.selector = oldSelector
+                        drop.keys = tuple(sorted(set(base) | set(current)))
+                    if os.environ.get("KEEP_COLLAPSED"):
+                        # EXPERIMENT (2026-10-04): keep the colliding variants and
+                        # report what they cost in collisions
+                        print(f"  selector collapse SKIPPED: {' '.join(drop.units)} "
+                              f"{drop.position} (family {fam!r})")
+                    elif drop is not keep:
                         print(f"  selector collapse: dropped {' '.join(drop.units)} "
                               f"{drop.position} (family {fam!r}, kept "
                               f"{' '.join(keep.units) if keep else '-'})")
@@ -330,6 +372,39 @@ def main() -> None:
     print(f"audit: saving {audit.savingMass:.3e} of {audit.longformMass:.3e} "
           f"longform strokes ({share:.1f}%), exceptions {audit.exceptions}, "
           f"shadows {len(audit.shadows)}, collisions {len(audit.collisions)}")
+    if os.environ.get("ATTRIBUTE"):
+        # Marginal value of the named rules (comma-separated expressions, e.g.
+        # "je me,il n',il y"), measured on the pool by removing each one from
+        # the final rule set. Report only: nothing is dropped.
+        def poolSaving(selected):
+            rs = Rules(attaches=tuple(r.toAttach() for r in selected
+                                      if r.kind == "attach" and r.keys is not None),
+                       briefs=tuple(r.toBrief() for r in selected
+                                    if r.kind == "brief" and r.beta is not None),
+                       orderBan=orderBan(selected, pool))
+            saved, exc, fired = 0.0, 0.0, 0
+            for e in pool:
+                t = composeOutlineTraced(rs, e.tokens, realCtx)
+                saved += e.freq * t.saving
+                exc += e.freq * t.exceptions
+                if any(seg.kind == "attach" and seg.rule is not None
+                       and seg.rule.expression == target for seg in t.segments):
+                    fired += 1
+            return saved, exc, fired
+        print("attribution (pool saving with / without the rule):")
+        for name in os.environ["ATTRIBUTE"].split(","):
+            target = tuple(name.split())
+            rule = next((r for r in result.selected
+                         if r.kind == "attach" and r.units == target), None)
+            if rule is None:
+                print(f"  {name}: not selected")
+                continue
+            withS, withE, fired = poolSaving(result.selected)
+            withoutS, withoutE, _ = poolSaving([r for r in result.selected if r is not rule])
+            print(f"  {name} ({rule.position}, keys {rule.keys}, family {rule.family!r}, "
+                  f"fires in {fired} pool expressions): with {withS:.3e}, without {withoutS:.3e}, "
+                  f"marginal {withS - withoutS:+.3e} strokes; exception mass "
+                  f"{withE:.3e} vs {withoutE:.3e}")
     for units, outline in audit.shadows[:5]:
         print("  SHADOW", " ".join(units), outline)
     for outline, exprs in list(audit.collisions.items())[:5]:

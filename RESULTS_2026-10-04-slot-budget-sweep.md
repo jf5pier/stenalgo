@@ -51,6 +51,22 @@ Reference before the suffix list (budget 15): 23.3% (3.328e9), 123 exceptions, 0
 - Stage C is still needed: round 0 still found 2 collisions and the loop dropped 3 variants (`je me`, `il n'`, `il y` prefix) to
   reach 0 by round 2. Those collisions are host-level (`il a` ~ `il n' a` ~ `il y a`), not the commutative pair kind.
 
+## 2c. Marginal value of the collapsed variants (`scratch/que_run_attribution.log`; `ATTRIBUTE="je me,il n',il y" KEEP_COLLAPSED=1`)
+
+Pool saving with the rule minus without it, everything else as selected (the two collisions still present; nothing dropped):
+
+| Rule | Fires in (pool expressions) | Marginal | Verdict |
+|---|---|---|---|
+| `je me` | 3 | -1.07e7 strokes | net negative |
+| `il n'` | 25 | -9.6e6 | net negative |
+| `il y` | 13 | +3.4e6 (exception mass +1.7e7) | marginal, 0.09% of total |
+| `je` (reference) | 33 | +9.0e7 | |
+| `il` (reference) | 45 | +1.19e8 | |
+
+Other tried variants of Stage C: `SELECTOR_RETRY=1` (selector override before dropping; rescues `je me` and `il n'`, still drops `il y`,
+25.5%, 156 exceptions) and `KEEP_COLLAPSED=1` (25.6%, 2 collisions): both lower than the collapse (25.7%). Option A (CP-SAT choosing
+the selector permutation) is therefore not justified by savings; only by "no variant dropped by construction".
+
 ## 3. Files
 
 - Budget-20 outputs: the tracked `scratch/expr-{rules,rules-proxy,rules-final,briefs,savings,composability}` (md5s below).

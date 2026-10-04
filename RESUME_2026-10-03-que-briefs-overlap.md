@@ -1,3 +1,5 @@
+> SUPERSEDED in part by `RESUME_2026-10-04-selector-order-and-variants.md` (slot budget is now 20, suffix-word list, selector order, order ban).
+
 # RESUME 2026-10-03 — abbreviations branch: que families, attach-overlap policy (session paused for a memory-limit restart)
 
 Continues `RESUME_2026-10-02-que-families.md` (which continues `RESUME_2026-10-01-abbreviations.md`: mission, phase history,

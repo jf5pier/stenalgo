@@ -122,6 +122,7 @@ class ExprRule:
     score: float = 0.0              # the accepted marginal total
     exactDone: bool = False         # Stage B ran (score is exact, not proxy)
     stackMass: float = 0.0          # pool mass where this rule meets another family's rule
+    selector: tuple[int, ...] | None = None   # Stage C override of the */# selector (None = by order)
 
     def proxyBrief(self) -> BriefRule:
         """The matching-only brief driving `planStream` in the proxy stage
@@ -263,6 +264,18 @@ def _familyGroups(selected: list[ExprRule]) -> list[list[ExprRule]]:
     return [groups[key] for key in order]
 
 
+def variantSelectors(variants: list[ExprRule],
+                     selectors: tuple[tuple[int, ...], ...] = SELECTORS,
+                     ) -> list[tuple[int, ...]]:
+    """The selector of each variant, in order: a variant with a Stage C
+    `selector` override keeps it; the others take the remaining selectors in
+    order (so the default, no override, is exactly `selectors[:n]`)."""
+    pinned = {r.selector for r in variants if r.selector is not None}
+    free = iter(sel for sel in selectors if sel not in pinned)
+    return [r.selector if r.selector is not None else next(free)
+            for r in variants]
+
+
 def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
                      ctx: SimContext, keypresses: list[Stroke],
                      selectors: tuple[tuple[int, ...], ...] = SELECTORS,
@@ -303,7 +316,7 @@ def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
                 AttachRule(r.units, r.position,
                            tuple(sorted(set(base) | set(selector))),
                            r.family)
-                for r, selector in zip(variants, selectors))
+                for r, selector in zip(variants, variantSelectors(variants, selectors)))
             variantKeys = {(r.units, r.position) for r in variants}
             savingMass = 0.0
             exceptionMass = 0.0
@@ -358,7 +371,7 @@ def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
             report[family] = info
             continue
         score, base = best
-        for rule, selector in zip(variants, selectors):
+        for rule, selector in zip(variants, variantSelectors(variants, selectors)):
             rule.keys = tuple(sorted(set(base) | set(selector)))
             rule.exactDone = True
         variants[0].score = score
@@ -409,7 +422,7 @@ def repairKeypresses(selected: list[ExprRule], report: dict,
         var = model.new_int_var(0, len(bases) - 1, f"family{i}")
         baseVars.append(var)
         effSets.append([tuple(tuple(sorted(set(base) | set(sel)))
-                              for sel in selectors[:len(group)])
+                              for sel in variantSelectors(group, selectors))
                         for _s, base in bases])
         scoreInts.append([int(round(s * 1e-6)) for s, _b in bases])
     # Stage B winners as determinism hints.
@@ -470,7 +483,7 @@ def repairKeypresses(selected: list[ExprRule], report: dict,
         return chosen
     for var, (name, group, bases) in zip(baseVars, fams):
         base = bases[solver.Value(var)][1]
-        for rule, selector in zip(group, selectors):
+        for rule, selector in zip(group, variantSelectors(group, selectors)):
             rule.keys = tuple(sorted(set(base) | set(selector)))
         chosen[name] = base
     return chosen
@@ -656,7 +669,9 @@ SUFFIX_WORDS: frozenset[str] = NEGATION_SUFFIX_WORDS | AUXILIARY_ADVERB_WORDS
 
 def attachCandidates(pool: list[PoolExpression], particles: frozenset[str],
                      familyOf=None,
-                     unigramFreq: Mapping[str, float] | None = None) -> list[ExprRule]:
+                     unigramFreq: Mapping[str, float] | None = None,
+                     longRuns: frozenset[tuple[str, ...]] = frozenset(),
+                     ) -> list[ExprRule]:
     """Attach-rule candidates: PROPER prefix/suffix runs of pool expressions
     (a proper run leaves a non-empty remainder), keyed by (run, position) —
     a run seen at an edge is a candidate for that edge only. A run's
@@ -670,7 +685,8 @@ def attachCandidates(pool: list[PoolExpression], particles: frozenset[str],
     total occurrence count, same window as the pool) when given: host +
     adverb mass is spread over hundreds of hosts ("a déjà", "est bien", ...),
     so no single bigram reaches the pool slices, but every occurrence after
-    a verb is a potential use (the standalone bound's reasoning). Proxy per-occurrence saving = the
+    a verb is a potential use (the standalone bound's reasoning).
+    `longRuns` names 3+-unit runs that stay attach candidates anyway. Proxy per-occurrence saving = the
     run's stroke span (merge assumed clean)."""
     evidence: dict[tuple[tuple[str, ...], str], float] = {}
     for expr in pool:
@@ -687,8 +703,9 @@ def attachCandidates(pool: list[PoolExpression], particles: frozenset[str],
     poolByUnits = {e.units: e for e in pool}
     out: list[ExprRule] = []
     for (units, position), freq in evidence.items():
-        if len(units) > MAX_ATTACH_UNITS:   # a 3+-unit run is a brief's job (it
-            continue                        # reuses the parts' phonemes)
+        if len(units) > MAX_ATTACH_UNITS and units not in longRuns:
+            continue        # a 3+-unit run is a brief's job (it reuses the parts'
+                            # phonemes), unless named in `longRuns` (experiments)
         standalone = poolByUnits.get(units)
         # A standalone entry's own count SUPERSEDES the summed evidence: every
         # occurrence of "de la" is a potential use, and the summed contexts
