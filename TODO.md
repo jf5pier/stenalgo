@@ -16,9 +16,10 @@ docs in `docs/PIPELINE.md` S8.10. Open items, most important first:
 - Remaining real-Plover mismatches (`scratch/plover_translator_sim.py`, 1,095 of 1,151 pool expressions = 97.4% of mass): the four shadows above; elision twins that share one chord (`que l'` /
   `que le`, `dans l'`, `et d'`: only the more frequent one is writable); wrong readings of unattested partial chords (`il m'a` -> `de l'a`, `rapport d'impôt` -> `rapport de hein peau`);
   `d'œil` written `d'oeil` (theory spelling vs pool spelling; check where the attested text is lost).
-- **Install source: `github.com/jf5pier/stenalgo-plover`** (reuse it: same layout as `plover_stenalgo/` here, `pyproject.toml` at the root, default branch `master`, it also tracks a
-  stray `plover_stenalgo.egg-info/`). Hand-sync from `plover_stenalgo/` after `python -m util.export_plover_plugin`; then `plover_plugins install git+https://github.com/jf5pier/stenalgo-plover`.
-  Consider a sync script and a `.gitignore` for the egg-info. The `.stenalgo` data and `plover_stenalgo_dictionary.json` are NOT in the package (build outputs, travel together).
+- **Install source: `github.com/jf5pier/stenalgo-plover`** — SYNCED 2026-10-04 (mirror commit `cd3734a`, from main-repo `eb0a610`; same layout as `plover_stenalgo/` here, default branch `master`;
+  egg-info and `__pycache__` untracked, `.gitignore` and README added). Remaining: test `plover_plugins install git+https://github.com/jf5pier/stenalgo-plover` in the real Plover (with `PYTHONUSERBASE`,
+  `--force-reinstall` since the version is still 0.1.0; decide a version bump), resync after every change of `plover_stenalgo/` (`python -m util.export_plover_plugin` first), consider a sync script.
+  The `.stenalgo` data and `plover_stenalgo_dictionary.json` are NOT in the package (build outputs, travel together).
 - **Briefs out of the `.stenalgo` file into their own `.json` for Plover.** The 40 forced briefs (and the selected briefs) are plain outline -> text entries, so a stock JSON dictionary can hold them: the
   decoder needs them only to recognise a brief as a reading, the plugin does not need to compose them. To do: export them (outline in RTFCRE, written text) as `plover_stenalgo_briefs.json` next to the
   stock dictionary, drop `rules.briefs` from the `.stenalgo` data, load them into the decoder's content index from that file (with its own fingerprint, like the word index) or leave them to Plover's own lookup
