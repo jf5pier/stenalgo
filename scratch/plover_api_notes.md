@@ -1,0 +1,9 @@
+# Plover 5.4.1 dictionary API, read from source (github v5.4.1 sdist; installed copy has .pyc only)
+
+- Plugin = entry point group `plover.dictionary`, name = FILE EXTENSION (`foo = pkg.mod:Cls`); `registry.get_plugin("dictionary", ext)`. Class subclasses `plover.steno_dictionary.StenoDictionary`; loaded via `Cls.load(resource)` -> `_load(filename)`; set `readonly = True` (class attr).
+- The translator only calls, on each dict: `enabled`, `longest_key` (property, int), `get(key)` (exact key = tuple of rtfcre strings; None = miss). `_lookup_keep_deleted` skips a dict when len(key) > d.longest_key. Value must be `str` (`.lower()` is called on it by collection).
+  `__contains__` -> get; reverse_lookup (suggestions) reads `d.reverse`/`d.casereverse` (empty defaultdicts are fine).
+- No prefix/"is this a stroke prefix" query exists. Per new stroke the translator does exact `get` for: [stroke], every suffix window of the buffered translations (up to longest_key strokes), each also with `('',)` PREFIX_STROKE prepended when len < longest_key, plus an implicit-suffix pass if a suffix key is in the stroke (SUFFIX_KEYS, system-defined). Misses are NOT cached by Plover -> the plugin must memoize (lru_cache on tuple) and return None fast for keys starting with ''.
+- `longest_key` bounds the window; set it to the longest composed expression in strokes (compute from data), larger costs misses per stroke.
+- Dict stack order: first dict with a non-None value wins -> put plugin BELOW plover_stenalgo_dictionary.json so plain words rank first (matches ranking order).
+- Glue/attach output: translation string with meta: `qu'{^}` = text then attach to next; `{^}` alone = orthography break. CAUTION `{^suffix}` triggers `add_suffix` orthography rewriting of the previous word; avoid for elision/attach joins (use `{^}` + plain text, or literal spaces).

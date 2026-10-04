@@ -96,7 +96,8 @@ from bisect import bisect_left
 from dataclasses import dataclass, field
 
 from src.affixes import PREFIX, SUFFIX, SimContext, hasBoundaryRisk
-from src.ambiguitychecker import HASH_KEY, STAR_KEY
+from src.expressionmodel import (HASH_KEY, RESERVED_MARK_KEYS, STAR_KEY, AttachRule, BriefRule,  # noqa: F401
+                                 Rules)
 from src.elision import elisionAgrees
 from src.keyboard import Stroke, Strokes, canonicalizeStrokes
 from src.keyconflicts import KeyConflicts
@@ -110,9 +111,6 @@ MERGED = "merged"          # attach outcome: kappa vanished into the host stroke
 STANDALONE = "standalone"  # attach outcome: constant stroke replaces the particle
 KEPT = "kept"              # word/brief outcome: outline used as-is
 EXCEPTION = "exception"    # attach outcome: longform kept, saving 0 (ladder bottom)
-
-RESERVED_MARK_KEYS = (STAR_KEY, HASH_KEY)  # the */# variant selectors (Q2)
-
 
 # How many syllabic keys an attach keypress may share with its host stroke
 # (the union hides a shared key). 0 = strict: every merge is exactly
@@ -153,53 +151,6 @@ def _syllabic(keys: Stroke) -> Stroke:
     """The syllabic-bank keys of a stroke — everything but the reserved mark
     keys, which both merge checks treat as transparent (spec step 3)."""
     return tuple(k for k in keys if k not in RESERVED_MARK_KEYS)
-
-
-@dataclass(frozen=True)
-class AttachRule:
-    expression: tuple[str, ...]       # particle word-units, contiguous
-    position: str                     # src.affixes.PREFIX or SUFFIX
-    keypress: tuple[int, ...]         # kappa; */# selector keys included
-    family: str = ""                  # Q2 learnable unit; variants share it
-    elision: str = ""                 # "base" | "elided": one chord for the pair, host decides (src/elision.py)
-
-    def __post_init__(self) -> None:
-        if not self.expression:
-            raise ValueError("attach rule needs a non-empty expression")
-        if self.position not in (PREFIX, SUFFIX):
-            raise ValueError(f"attach rule position must be {PREFIX!r} or {SUFFIX!r}")
-        if not self.keypress:
-            raise ValueError("attach rule needs a non-empty keypress")
-
-
-@dataclass(frozen=True)
-class BriefRule:
-    expression: tuple[str, ...]
-    strokes: Strokes                  # beta; usually one stroke (Q8 allows more)
-    family: str = ""
-
-    def __post_init__(self) -> None:
-        if not self.expression:
-            raise ValueError("brief rule needs a non-empty expression")
-        if not self.strokes:
-            raise ValueError("brief rule needs at least one stroke")
-
-
-@dataclass(frozen=True)
-class Rules:
-    briefs: tuple[BriefRule, ...] = ()
-    attaches: tuple[AttachRule, ...] = ()
-    # Ordered pairs (first expression, second expression) of adjacent attaches
-    # that may NOT both attach: the union of two attach keypresses is
-    # commutative, so `ce que` and `que ce` would write the same chord. The
-    # second particle of a banned pair is left as a content token (the first
-    # attaches onto its longform stroke). See `orderBan` in src/expressionrules.py.
-    orderBan: frozenset[tuple[tuple[str, ...], tuple[str, ...]]] = frozenset()
-
-    def __post_init__(self) -> None:
-        for rule in self.briefs + self.attaches:
-            if not all(isinstance(unit, str) and unit for unit in rule.expression):
-                raise ValueError("rule expressions are non-empty word-unit strings")
 
 
 @dataclass(frozen=True)

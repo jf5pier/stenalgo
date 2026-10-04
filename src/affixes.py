@@ -68,8 +68,7 @@ MAX_POOL = 200000   # raised one order of magnitude from the design's 20000 defa
                     # comparison) -- the natural growth bound is GROWTH_MAX_DEPTH/the marginal and
                     # lemma/stemRoot thresholds, not this cap, so raising it further changes nothing.
 
-PREFIX = "prefix"
-SUFFIX = "suffix"
+from src.expressionmodel import PREFIX, SUFFIX  # noqa: E402,F401  (single source: the rule model)
 MERGED = "merged"
 DEDICATED = "dedicated"
 RULE_PARTIAL_OVERLAP = False   # experiment flag (OFF = historical behaviour): a RULE binding fails to merge

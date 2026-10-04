@@ -353,8 +353,7 @@ def assignStarHashMarks(
 # see `src/keyboard.py:303`), and a legal cross-hand chord together (`*#` = both keys at
 # once). Keys 0/1 (left pinky) remain unassigned/reserved for a future 3rd logical mark
 # if the 4-lemma-per-stroke budget ever needs raising past what */#/*# already covers.
-STAR_KEY = 10
-HASH_KEY = 15
+from src.expressionmodel import HASH_KEY, STAR_KEY  # noqa: E402,F401  (single source: the rule model)
 
 _STAR_HASH_KEYS: dict[str, Stroke] = {
     STAR: (STAR_KEY,),
