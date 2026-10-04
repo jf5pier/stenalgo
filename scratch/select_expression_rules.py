@@ -130,8 +130,11 @@ def main() -> None:
 
     candidates = briefCandidates(pool, familyOf=queFamilyOf) \
         + attachCandidates(pool, particles, familyOf, unigramFreq,
-                           longRuns=frozenset({("il", "n'", "y")}
-                                              if os.environ.get("IL_N_Y") else ()))
+                           longRuns=frozenset(
+                               {("il", "n'", "y")} if os.environ.get("IL_N_Y") else
+                               {e.units for e in pool
+                                if len(e.units) > 2 and e.units[0] == "il"}
+                               if os.environ.get("IL_LONG") else ()))
     # The pronoun family differentiates by briefs, never by a merged
     # keypress or a */# selector (user decision 2026-10-02): it gets no
     # attach candidates at all.
@@ -162,7 +165,20 @@ def main() -> None:
           f"{sum(1 for c in candidates if c.kind == 'attach')} attaches, "
           f"{len(families)} families)")
 
-    result = selectExpressionRules(candidates, pool, budget=budget)
+    result = selectExpressionRules(candidates, pool, budget=budget,
+                                      siblingPick=os.environ.get("SIBLING_PICK", "freq"))
+    if os.environ.get("STAGE_A_ONLY"):
+        # DEBUG: what became of the il / ne candidates in Stage A, then exit
+        chosen = {id(r) for r in result.selected}
+        for c in candidates:
+            if c.kind == "attach" and c.units[0] in ("il", "n'", "ne") and len(c.units) <= 3 \
+                    and ("il" in c.units):
+                print(f"cand {' '.join(c.units)!r:18} fam={c.family!r} freq={c.freq:.2e} "
+                      f"{'SELECTED forms=%d score=%.3e' % (c.forms, c.score) if id(c) in chosen else 'not selected'}")
+        for sk in result.skips:
+            if "il" in sk[0].split() or "il" in sk[1].split():
+                print("skip", sk)
+        raise SystemExit
     from src.expressionrules import _familyGroups
     for group in _familyGroups(result.selected):
         if len(group) > 1:

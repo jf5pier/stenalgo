@@ -905,6 +905,7 @@ def selectExpressionRules(
     pool: list[PoolExpression],
     budget: int = EXPR_RULE_BUDGET,
     savingAt=proxySaving,
+    siblingPick: str = "freq",
 ) -> ExprSelectionResult:
     """Greedy budgeted selection in the `selectRules` tradition, evaluated on
     real segmentations of the pool: each round takes the candidate whose
@@ -916,6 +917,8 @@ def selectExpressionRules(
 
     `savingAt(briefs, attaches, expr)` is injectable so tests can run
     without a keyboard; production uses `proxySaving` (Stage A).
+    `siblingPick` orders a family's absorption: "freq" (descending
+    frequency, the default) or "marginal" (best fresh marginal first).
     """
     touchedOf = [touchedExpressions(c, pool) for c in candidates]
     spansOf = [[matchedSpans(c, e.units) for e in pool] for c in candidates]
@@ -998,24 +1001,37 @@ def selectExpressionRules(
             # */# selector count, brief families at the learnability bound
             cap = (MAX_BRIEF_FAMILY_VARIANTS if cand.kind == "brief"
                    else MAX_FAMILY_VARIANTS)
-            sibIdx = 0
-            while sibIdx < len(candOf) and cand.forms < cap:
-                sib = candOf[sibIdx]
-                if sib.family != cand.family or sib.kind != cand.kind:
-                    sibIdx += 1
-                    continue
-                sibBriefs = briefs + ((sib.proxyBrief(),) if sib.kind == "brief" else ())
-                sibAttaches = attaches + ((sib.proxyAttach(),) if sib.kind == "attach" else ())
-                sibMarg = 0.0
-                for e in touchedOf[sibIdx]:
-                    extra = savingAt(sibBriefs, sibAttaches, pool[e]) - currentSaving[e]
-                    if extra > 0:
-                        sibMarg += pool[e].freq * extra
-                candOf.pop(sibIdx)
-                sibTouched = touchedOf.pop(sibIdx)
-                spansOf.pop(sibIdx)
-                if sibMarg - FORM_COST > 0:
-                    sib.score = sibMarg - FORM_COST
+            # siblings of the family, in candOf order (descending frequency)
+            sibs = [i for i, c in enumerate(candOf)
+                    if c.family == cand.family and c.kind == cand.kind]
+            sibRules = [candOf[i] for i in sibs]
+            sibTouchedAll = [touchedOf[i] for i in sibs]
+            for i in reversed(sibs):
+                candOf.pop(i)
+                touchedOf.pop(i)
+                spansOf.pop(i)
+            while sibRules and cand.forms < cap:
+                bestJ, bestSibMarg = None, 0.0
+                for j, sib in enumerate(sibRules):
+                    sibBriefs = briefs + ((sib.proxyBrief(),) if sib.kind == "brief" else ())
+                    sibAttaches = attaches + ((sib.proxyAttach(),) if sib.kind == "attach" else ())
+                    sibMarg = 0.0
+                    for e in sibTouchedAll[j]:
+                        extra = savingAt(sibBriefs, sibAttaches, pool[e]) - currentSaving[e]
+                        if extra > 0:
+                            sibMarg += pool[e].freq * extra
+                    if siblingPick == "freq":
+                        # descending frequency: the first sibling decides, kept
+                        # or dropped for good
+                        bestJ, bestSibMarg = j, sibMarg
+                        break
+                    if sibMarg > bestSibMarg:
+                        bestJ, bestSibMarg = j, sibMarg
+                if bestJ is None:
+                    break
+                sib, sibTouched = sibRules.pop(bestJ), sibTouchedAll.pop(bestJ)
+                if bestSibMarg - FORM_COST > 0:
+                    sib.score = bestSibMarg - FORM_COST
                     sib.forms = 0          # the family's form count lives on the head
                     cand.forms += 1
                     selected.append(sib)
@@ -1027,6 +1043,7 @@ def selectExpressionRules(
                     for e in sibTouched:
                         currentSaving[e] = savingAt(briefs, attaches, pool[e])
                 # else: dropped permanently — the family is closed to it
+            # what is left (cap reached, or marginal too low) is dropped for good
         result.curve.append(sum(currentSaving[e] * pool[e].freq
                                 for e in range(len(pool))))
     result.selected = pruneRedundantVariants(selected, pool, savingAt)

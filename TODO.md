@@ -23,6 +23,12 @@ Written to survive a `/clear` — read this file first in a fresh session.
   instead of leaving the slot empty. Needs: a reserve list on the family, a re-run of Stage B/C evaluation for the promoted
   variant, and a stop rule so the loop terminates. Ties to the selector-retry and CP-SAT-permutation options
   (`RESULTS_2026-10-04-slot-budget-sweep.md` 2b/2c).
+- MEASURED 2026-10-04 (budget 20): idea 1 (`SIBLING_PICK=marginal`) alone is identical to the committed run (25.7%, 155 exc., md5 of
+  `expr-rules.tsv` unchanged); the `il` family has only 3 variants, so the cap of 4 does not bind. With `IL_LONG=1` (every 3+-unit `il`
+  run is an attach candidate) the marginal pick lets `il n' y` displace `il s'` (marginal 0), but `pruneRedundantVariants` then removes
+  `il n' y` and `il n'` (loss 9.6e6 -> 0 -> 0, order-dependent) and the result is 25.6%, 158 exc. Under `freq` the cap blocks `il n' y`.
+  Defaults stay `freq` and no long runs. Still open: what `il n'` covers (loss 7.2e6 in the committed run) that `il` + `n'` / `n' y` does not.
+  Idea 2 (reserve) has nothing to promote at budget 20. `STAGE_A_ONLY=1` in the driver prints the `il` candidates' fate and exits.
 - Context for both: the proxy marginal ignores exceptions and collisions (`il n'` +1.69e7 in the proxy, -9.6e6 in the final
   pool), so a marginal-based pick should ideally use the exact composed saving, not the proxy.
 
