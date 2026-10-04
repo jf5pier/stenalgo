@@ -1276,3 +1276,28 @@ A CP-SAT pass re-chooses the families' bases so that no two families share an ef
 stack), then a full audit composes the whole pool; collisions feed back (ban a base, collapse a variant, re-derive a brief) for up to 6
 rounds.
 - Code: `repairKeypresses`, `auditExpressionRules`, the loop in `scratch/select_expression_rules.py`.
+
+### Expression data (`.stenalgo`)
+The generated JSON the Plover plugin decodes with: the rules, the attested pool readings (with their written text), the
+5,000 most frequent unit probabilities, the particle stroke counts, the key conflicts and the chord legality, plus the name
+and fingerprint of the stock dictionary that holds the outline -> words index. About 0.3 MB; it is read together with that
+dictionary, never alone.
+- Code: `src/expressiondata.py` (`bundleToDict`, `loadBundle`), `scratch/export_expression_data.py`.
+
+### Word-index fingerprint
+The sha256 of an outline -> words index (the sorted `outline<TAB>word` lines), independent of file formatting and order.
+The expression data records it; the loader compares it with the index it reads from the stock dictionary and refuses a
+dictionary built from another theory.
+- Code: `wordIndexFingerprint` src/expressiondata.py.
+
+### Vendored decoder core
+The stdlib-only modules of the decoder (`strokes`, `expressionmodel`, `keyconflicts`, `elision`, `expressiondecoder`,
+`expressionranking`, `expressiondata`) copied with package-relative imports into `plover_stenalgo/plover_stenalgo/_core/`,
+so the installed plugin does not need the pipeline. Generated: edit `src/` and rerun the exporter.
+- Code: `util/export_plover_plugin.py`; `src/test/plover_plugin_test.py` checks it is current.
+
+### Expression dictionary plugin
+The Plover dictionary plugin (`.stenalgo` extension) that decodes expression chords: it answers only when the best reading
+is one expression piece (brief, merged attach, standalone keypress, cluster), so plain words stay with the stock dictionary
+and longer keys are read piece by piece by the translator.
+- Code: `plover_stenalgo/plover_stenalgo/dictionary.py` (`StenalgoExpressionDictionary`), `render.py`, `stroke.py`, `wordindex.py`.

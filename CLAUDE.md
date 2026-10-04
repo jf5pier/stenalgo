@@ -73,6 +73,16 @@ python -m util.export_plover_dictionary      # Theory Export (S8), Plover branch
 python -m util.export_plover_system
 # Prerequisites: starboard3h.json. Outputs: plover_stenalgo/plover_stenalgo/_generated_keys.py.
 
+PYTHONPATH=. python scratch/export_expression_data.py [OUT]   # expression layer data for the Plover plugin
+# Prerequisites: the committed rule set (scratch/expr-rules-final.json, expr-briefs.tsv, expr_candidates.tsv),
+# both pickles, starboard3h.json, plover_stenalgo_dictionary.json (the word index is read from it).
+# Outputs: plover_stenalgo_expressions.stenalgo (0.3 MB; default next to the repo root, OUT to choose).
+# It must travel with the plover_stenalgo_dictionary.json it was built against: a fingerprint refuses a mismatch.
+
+python -m util.export_plover_plugin
+# Copies the stdlib-only decoder modules src/{strokes,expressionmodel,keyconflicts,elision,expressiondecoder,
+# expressionranking,expressiondata}.py into plover_stenalgo/plover_stenalgo/_core/ (tracked; a test fails when stale).
+
 python -m util.export_keyboard_layout        # Theory Export (S8), trainer branch
 # Prerequisites: starboard3h.json; realization_report.json (marker legend; optional).
 # Outputs: steno-trainer/public/data/keyboard-layout.json.
@@ -122,7 +132,7 @@ Architecture and design rationale: `docs/ARCHITECTURE.md`. The eight stages:
 5. **Phonetic Theory Building (S5)** — `Dictionary.buildPhoneticTheory` → the phonetic theory (`PhoneticTheory.pickle` + `phonetic_theory.tsv`; base strokes only, no homophone marks)
 6. **Same-Lemma and Grammatical-Category Disambiguation (S6)** — three phases: Elicitation (`python -m src.elicitation --ask` / `--resolve`), Grouping (`python -m util.build_keypress_groups`), Realization (feature discriminating strokes; inline in `Dictionary.buildDisambiguatedTheory` + `python -m util.build_realization_report`)
 7. **Different-Lemma or Grammatical-Category Disambiguation (S7)** — star/hash marks (`decideStarHashMark` rule stack), composed on the phonetic theory by `python -m util.build_disambiguated_theory` → the disambiguated theory (`disambiguated_theory.tsv`)
-8. **Theory Export (S8)** — Plover (`util/export_plover_*`) and steno-trainer (`util/export_*`) branches; nothing reads `disambiguated_theory.tsv`, every exporter recomputes the disambiguated theory via `util/_theoryio.py`
+8. **Theory Export (S8)** — Plover (`util/export_plover_*`, plus the expression-layer dictionary plugin: `docs/PIPELINE.md` S8.10) and steno-trainer (`util/export_*`) branches; nothing reads `disambiguated_theory.tsv`, every exporter recomputes the disambiguated theory via `util/_theoryio.py`
 
 Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whenever they exist and never checks them against the lexicon or layout (`rm -f *.pickle` after any lexicon or layout change — `DisambiguatedTheory.pickle`, unlike the two, IS fingerprint-checked against its inputs (md5s of the lexicons, `starboard3h.json`, `keypress_groups.json`, `resolved_press_sets.json`) and reloads only on a match, so it needs no manual rm; the Synthetic Lexicon Building (S2) wrapper deletes and rebuilds the pickles itself for rows its appenders add, but hand-made lexicon or layout edits remain the caller's responsibility; the orchestrator aborts on the first failing step). Editing `resources/spellingVariants.tsv` or `resources/reform1990.tsv` counts as a lexicon change: rerun `python lexique.py`, prune the Synthetic file (`python -m util.prune_spelling_variants --apply`), then rebuild (the dropped spellings must not survive in `LexiqueSynthetic.tsv`; the S2 appenders read through the same choke point, so a dropped spelling that coincides with a conjugated form of a kept verb — `boite`/`boiter` — stays exempt, see `isDroppedOrthoRow`). The NOM/ADJ cross-checkers need the external Morphalou 3.1 CSV (see `docs/PIPELINE.md` Synthetic Lexicon Building (S2)). The legacy discriminator path (`buildDiscriminatorSelection`, `satOptimizeDiscriminator`, `assignDiscriminatorKeypresses`) no longer runs: those functions are gone; `src/featureextractor.py` feeds only Synthetic Lexicon Building (S2)'s gating and the `ambiguitychecker` diagnostic, and of `src/greedyoptimizer.py` only `GRAMCAT_PRIORITY` is live (category-priority rule (R6)). Suspected bugs are listed in `TODO.md` ("Suspected bugs").
 
@@ -147,7 +157,7 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 
 ## Verification approach
 
-- `pytest src/test/` must pass after any `.py` change (839 tests at the time of writing on the abbreviations branch).
+- `pytest src/test/` must pass after any `.py` change (853 tests at the time of writing on the abbreviations branch).
 - Behaviour-preserving changes are proven by a full rebuild following the rebuild table in
   `docs/PIPELINE.md`, comparing the md5s of `phonetic_theory.tsv`, `disambiguated_theory.tsv`,
   `resolved_press_sets.json`, `keypress_groups.json`, `realization_report.json`,
