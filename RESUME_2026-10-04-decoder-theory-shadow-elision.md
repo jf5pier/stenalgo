@@ -31,3 +31,5 @@ Vocabulary: `docs/GLOSSARY.md` (theory shadow rate, decoder, elision pair).
 
 ## Stop and ask the user when
 Any push, any merge into main, changing the slot budget (20) or the que family cut, touching main's affix code, installing Plover system-wide.
+
+(Superseded for the next session by `RESUME_2026-10-04-step5-plover-plugin.md`, the handoff for PLAN step 5.)

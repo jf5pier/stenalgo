@@ -611,4 +611,4 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
   hostless clusters read with either elision form (fragments only), complete `ASPIRATED_H`/`NO_ELISION` from a lexicon.
 - Report hosted-only saving (fragments excluded) next to the pool total in the driver.
 - Step 4 leftovers: brief that depends on a failed attach; attach keypress as standalone stroke (parked); overlap max-1; `longest_key` / prefix lookups in the Plover plugin.
-- Step 5 (Plover dictionary plugin) not started; Plover is not installed in the project env.
+- Step 5 (Plover dictionary plugin) not started; Plover is not installed in the project env. Handoff: `RESUME_2026-10-04-step5-plover-plugin.md` (data export first, then a venv with a real Plover).
