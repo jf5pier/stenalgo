@@ -1178,6 +1178,33 @@ readings (nested chords, selector variants swallowed by a marked host), so a plu
 attested pool reading > other).
 - Code: `src/expressiondecoder.py`, `scratch/decode_roundtrip.py`, `scratch/rank_loss.py`.
 
+### Elision pair (default; `ELISION_PAIRS=0` turns it off)
+`que`/`qu'`, `de`/`d'`, `ne`/`n'`, `ce`/`c'`, `le`/`l'`, `je`/`j'`, `s'`... written by ONE chord and ONE selector slot: before a
+vowel sound French requires the elided form, before a consonant the base form, so the decoder reads exactly one from the word
+written after the particle (a stack of particles is accepted when some order makes every form agree: `ce n' est`). The composer
+refuses a disagreeing merge (reason `elision`, longform kept). Measured against one chord per form: 24.2% attach saving against 24.8% but the best
+hosted-expression saving (2.560e9 against 2.462e9), hosted rival readings 24.1% against 27.3%, the `que`/`qu'`/`d'`/`n'`/`l'`/`c'` collisions under 1%
+(`RESULTS_2026-10-04-expression-decoder.md`). It runs with `SELECTOR_RETRY` on.
+- Code: `src/elision.py`, `AttachRule.elision`, `ExprRule.slot`, `fitVariants`, `variantSelectors`, `orderingExists`.
+
+### Attach-merge chord
+A one-stroke chord that an attach (or two stacked, or two clustered) can write over a one-stroke word. A brief on such a chord would be read as the merge, so brief
+derivation treats them as taken (`attachMergeChords`; found when `ce` + `me` wrote the brief `dans la`).
+
+### Key conflict (pinky diagonal)
+Two keys of one stroke that one finger cannot press together. On the Starboard each pinky owns a square of four keys (right 22-25, left 0-3) and cannot press a diagonal
+pair or a triple. A key occupies its own position and its diagonal partner (`KeyConflicts.expand`); two key sets share a stroke iff `expand(a)` and `b` are disjoint,
+which equals the keyboard's legality test for every pair of legal keypresses. It is the overlap test of the expression layer, so attaches or families that cannot stack
+because their keys sit on a pinky diagonal are rejected (`il` (7,16,24) with `n'` (8,20,23) before 2026-10-04).
+- Code: `src/keyconflicts.py` (`KeyConflicts`), `conflictsOf` and `attachKeysOverlap(conflicts=)` in `src/expressions.py`, `repairKeypresses(conflicts=)`.
+
+### Decoder (expression layer)
+The inverse of `composeOutlineTraced`: stroke tuple -> every reading (attach rules + host words, briefs, standalone keypresses,
+hostless clusters). Exact on the committed rules (0 unreadable, 0 mismatched outlines over the pool), but a stroke can have several
+readings (nested chords, selector variants swallowed by a marked host), so a plugin must rank them (plain word > pure brief >
+attested pool reading > other).
+- Code: `src/expressiondecoder.py`, `scratch/decode_roundtrip.py`, `scratch/rank_loss.py`.
+
 ### Elision pair (experiment `ELISION_PAIRS=1`)
 `que`/`qu'`, `de`/`d'`, `ne`/`n'`, `ce`/`c'`, `le`/`l'`, `je`/`j'`, `s'`... written by ONE chord and ONE selector slot: before a
 vowel sound French requires the elided form, before a consonant the base form, so the decoder reads exactly one from the word
@@ -1193,7 +1220,7 @@ Two different expressions composing to the same outline. Not the same as a theor
 ### Selector collapse
 A Stage C step (a variant "collapsed in Stage C", as against "dropped in Stage A"): when a variant's outline collides because the host's own `*`/`#` swallows its selector, the variant is removed
 from the rule set (`je me`, `il n'`, `il y` in the budget-20 run); its contexts then compose through the family's other rules (`il n'`
-stacks `il` and `n'`). Experimental alternatives: `KEEP_COLLAPSED=1`, `SELECTOR_RETRY=1`, `ELISION_PAIRS=1` (removes most of the collapses).
+stacks `il` and `n'`). Experimental alternatives: `KEEP_COLLAPSED=1`, `SELECTOR_RETRY=1`, `ELISION_PAIRS` (on by default, removes most of the collapses).
 - Code: `scratch/select_expression_rules.py` (Stage C loop).
 
 ### Phase 0 - Phase 4 (expression layer)

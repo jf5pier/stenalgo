@@ -27,6 +27,11 @@ from src.keyboard import Starboard  # noqa: E402
 from src.word import GramCat, Word  # noqa: E402
 from util._theoryio import loadDisambiguatedTheory  # noqa: E402
 
+# Elision pairs are the default since 2026-10-04 (ELISION_PAIRS=0 restores one chord per surface form); the
+# selector retry rescues the stacking variants (il n', n' y) that an elision slot would otherwise collapse.
+ELISION_ON = os.environ.get("ELISION_PAIRS", "1") != "0"
+SELECTOR_RETRY = os.environ.get("SELECTOR_RETRY", "1" if ELISION_ON else "") not in ("", "0")
+
 CANDIDATES_TSV = REPO / "scratch" / "expr_candidates.tsv"
 OUT_TSV = REPO / "scratch" / "expr-rules-proxy.tsv"
 
@@ -165,7 +170,7 @@ def main() -> None:
           f"{sum(1 for c in candidates if c.kind == 'attach')} attaches, "
           f"{len(families)} families)")
 
-    if os.environ.get("ELISION_PAIRS"):
+    if ELISION_ON:
         # EXPERIMENT (user decision 2026-10-04): an elided form (qu' d' n' c' l' j'...) shares its
         # base form's chord and selector slot; the decoder reads the host (src/elision.py)
         from src.elision import BASE, ELIDED, ELISION_BASES, ELISION_PAIRS
@@ -358,7 +363,7 @@ def main() -> None:
                     key=lambda r: -r.freq)
                 keep = colliding[0] if len(colliding) > 1 else None
                 for drop in colliding:
-                    if os.environ.get("SELECTOR_RETRY") and drop is not keep \
+                    if SELECTOR_RETRY and drop is not keep \
                             and drop.keys is not None:
                         # Stage C rework (2026-10-04): before dropping, try the
                         # family's other selectors for this variant; keep one
@@ -416,6 +421,32 @@ def main() -> None:
         if not progressed:
             break
 
+    # Brief chords against attach merges (user decision 2026-10-04, after `ce` + `me` = the brief `dans la`):
+    # a brief stroke equal to a merge of attach keys with a one-stroke word would be read as that merge.
+    # Attach keys are final here, so selected briefs on such a chord are re-derived, and the forced briefs
+    # below take these chords as taken.
+    mergeChords: set = set()
+    if hostIndex is not None:
+        from src.expressionrules import attachMergeChords
+        mergeChords = attachMergeChords([r.toAttach() for r in result.selected
+                                         if r.kind == "attach" and r.keys], hostIndex)
+        clash = [r for r in result.selected if r.kind == "brief" and r.beta
+                 and r.beta[0] in mergeChords]
+        print(f"attach-merge chords: {len(mergeChords)}; selected briefs on one: "
+              f"{[' '.join(r.units) for r in clash]}")
+        for r in clash:
+            got = deriveBriefStroke({e.units: e for e in pool}[r.units], realCtx,
+                                    selBriefTaken | mergeChords, freeChords=keypresses)
+            if got is None:
+                print(f"  brief {' '.join(r.units)}: no clash-free stroke, dropped")
+                result.selected.remove(r)
+            else:
+                print(f"  brief {' '.join(r.units)}: {r.beta[0]} -> {got[0]}")
+                selBriefTaken.add(got[0])
+                r.beta = (got[0],)
+        if clash:
+            audit = auditExpressionRules(result.selected, pool, realCtx)
+            print(f"  re-audit after brief moves: shadows {len(audit.shadows)}, collisions {len(audit.collisions)}")
     for family, info in keypressReport.items():
         if family in chosen:
             print(f"  family {family!r}: base={chosen[family]} "
@@ -657,6 +688,7 @@ def main() -> None:
     takenStrokes: set = {r.beta[0] for r in result.selected
                          if r.kind == "brief" and r.beta is not None}
     takenStrokes |= selBriefTaken
+    takenStrokes |= mergeChords
     # an attach keypress (selector included) and its selector-free base are
     # reserved: a forced brief on one would read as that attach standing alone
     # (found 2026-10-04: `après` on `ce`, `depuis` on `pas`)

@@ -527,3 +527,16 @@ def test_host_index_shadow_rate_counts_merges_landing_on_live_outlines() -> None
     # the suffix side uses the last stroke and the head
     tail = HostIndex({((1, 2), (13, 14)): 1.0, ((1, 2), (5, 13, 14)): 1.0})
     assert abs(tail.shadowRate(SUFFIX, (5,)) - 0.5) < 1e-9
+
+
+def test_attach_merge_chords_cover_stacks_and_clusters() -> None:
+    from src.affixes import PREFIX
+    from src.expressionrules import HostIndex, attachMergeChords
+    from src.expressions import AttachRule
+    index = HostIndex({((13, 14),): 1.0, ((13, 23),): 1.0, ((1, 2), (13, 14)): 1.0})
+    rules = [AttachRule(("ce",), PREFIX, (5,)), AttachRule(("de",), PREFIX, (18, 24))]
+    chords = attachMergeChords(rules, index)
+    assert (5, 13, 14) in chords and (5, 13, 23) in chords            # a rule on a one-stroke host
+    assert (5, 18, 24) in chords                                      # two hostless attaches in one stroke
+    assert (5, 13, 14, 18, 24) in chords                              # two stacked on a host
+    assert not any(c == (1, 2, 5) for c in chords)                    # multi-stroke hosts never write one stroke

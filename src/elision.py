@@ -1,6 +1,6 @@
 """
-French elision as a decoder-side rule (user decision 2026-10-04, experiment `ELISION_PAIRS=1`
-in scratch/select_expression_rules.py).
+French elision as a decoder-side rule (user decision 2026-10-04; the default of
+scratch/select_expression_rules.py, `ELISION_PAIRS=0` turns it off).
 
 An elision pair (`que`/`qu'`, `de`/`d'`, `ne`/`n'`, `ce`/`c'`, `le`/`l'`, `je`/`j'`...) is
 written by ONE attach keypress: the written form is fixed by the host that follows. Before a

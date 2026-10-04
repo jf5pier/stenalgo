@@ -147,3 +147,30 @@ briefs, `que/qu'/d'/n'/l'/c'/s'` collisions under 1% (`de` 26%, `j'` 12%, `je` 2
 (`ce` and `c'` 0.5% of host frequency each, onto the forced briefs `dans la` and `déjà`, which the host index does not see), 31.8% of pool mass with a rival (mostly clusters of
 hostless fragments, both elision forms), 4 hostless clusters missing from their own readings. The elision run has the best hosted saving; it stays off by default
 until the shadow index also sees brief chords and the remaining collision families are decided.
+
+## Brief chords against attach merges; elision pairs become the default
+
+Gap found by the elision run: `ce` + `me` wrote the chord of the forced brief `dans la`, `c'` + `au` that of `déjà`. Briefs get their strokes after Stage B and only the
+attach chord itself was reserved. Now (`attachMergeChords`, `scratch/select_expression_rules.py`, after Stage C when the attach keys are final) every one-stroke chord that an
+attach, two stacked attaches or two clustered attaches can write over a one-stroke word is treated as taken: selected briefs on one are re-derived (none needed it),
+the forced briefs avoid them (144k chords default, 170k with elision).
+
+| | default, no elision (`ELISION_PAIRS=0`) | elision (new default) |
+|---|---|---|
+| attach saving alone | 24.8% (3.541e9) | 24.2% (3.457e9) |
+| with the 40 briefs | 4.158e9 | 4.014e9 |
+| hosted saving (895 expr, run-independent split) | 2.462e9 | 2.560e9 (+4.0%; +2.2% over `e0b7514`) |
+| fragments saving | 1.685e9 | 1.443e9 |
+| exceptions | 201 | 235 |
+| theory shadow events (single rule) / share of host frequency | 7 / 0.004% | 46 / 0.230% (was 50 / 1.078%) |
+| top-5000 bigrams misread | 0 | 0 |
+| theory single-rule collisions | 43.5k | 35.3k |
+| hosted pool mass with a rival reading | 27.3% | 24.1% |
+| fragment pool mass with a rival reading | 15.2% | 41.2% (32 points: a hostless cluster read with either elision form) |
+| composed reading missing from decode / unreadable | 0 / 0 | 4 hostless clusters / 0 |
+
+Where the elision shadows come from: `un` 15 and `le` 12 (rules the elision run selects with the freed slots: 29 attach rules against 23), `c'` 9 (0.14%, `êtes` -> `jet`),
+`qu'` 6, `l'` 3, `ne` 1; none is a frequent phrase. The earlier 31.8% against 22.3% rival share was fragments (hostless clusters), not hosted text.
+
+Decision (user, 2026-10-04): elision pairs are the default (`ELISION_PAIRS=0` restores the previous behaviour; `SELECTOR_RETRY` is on with it). Files: `scratch/expr-*` = elision run
+(md5 `expr-rules.tsv` 7e5a6c68eb38...), `scratch/expr_noelision/` = the run without it.

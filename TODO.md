@@ -607,8 +607,8 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
 - Done: decoder (`src/expressiondecoder.py`), whole-theory shadow/collision audit, Stage B theory-wide shadow term (limit 0.002), pinky-diagonal key conflicts (attach saving 24.8%, `il n'` stacks again).
 - Build the decode-time ranking (plain word > pure brief > attested pool reading > rest) AND the matching `loses(reading)` check in the composer.
 - Remaining collisions: `n' y`, `il n'`, `je me` (host `*` swallows the selector), `le`, `qui`, `un`.
-- Experiment `ELISION_PAIRS=1` (off): one chord per elision pair; collisions of the elision families vanish, 24.2% vs 24.8% total but the best hosted saving; before adopting: let `HostIndex` see the
-  forced-brief chords (`ce`/`c'` shadow `dans la`/`déjà`), decide the remaining collision families, complete `ASPIRATED_H`/`NO_ELISION` from a lexicon.
+- Elision pairs are the default now. Open: the shadows of `un`, `le`, `c'`, `qu'` (46 events, 0.23% of host frequency, none a frequent phrase), the remaining collision families (`de`, `j'`, `je`, `il`, `à`, `n' y`, `il n'`, `je me`),
+  hostless clusters read with either elision form (fragments only), complete `ASPIRATED_H`/`NO_ELISION` from a lexicon.
 - Report hosted-only saving (fragments excluded) next to the pool total in the driver.
 - Step 4 leftovers: brief that depends on a failed attach; attach keypress as standalone stroke (parked); overlap max-1; `longest_key` / prefix lookups in the Plover plugin.
 - Step 5 (Plover dictionary plugin) not started; Plover is not installed in the project env.

@@ -7,8 +7,9 @@ Vocabulary: `docs/GLOSSARY.md` (theory shadow rate, decoder, elision pair).
 - Branch `abbreviations`, worktree `/home/jfsp/Steno/stenalgo-briefs`, interpreter `/home/jfsp/Steno/stenalgo/env/bin/python`, `PYTHONPATH=.`. Nothing pushed, main not merged.
 - Plan steps 1-3 done: `src/expressiondecoder.py` (+ tests), round trip (0 unreadable / 0 mismatched), whole-theory injectivity. Step 4 partly decided, step 5 (Plover plugin) not started.
 - New default Stage B: theory-wide shadow term (limit 0.002) + pinky-diagonal key conflicts: attach saving 24.8% (was 25.7% before the shadow term), 4.149e9 with briefs, 9 theory shadow events (was 4,467).
-  The committed `scratch/expr-*` files are this run.
-- Experiment `ELISION_PAIRS=1 SELECTOR_RETRY=1` (one chord + one slot per elision pair, the decoder reads the host): built and tested, OFF by default (24.2% total, best hosted saving 2.552e9 vs 2.454e9). Its files: `scratch/expr_elision/` (the footprint run).
+  Then elision became the default (see above); the committed `scratch/expr-*` files are that run (md5 `expr-rules.tsv` 7e5a6c68eb38...).
+- Elision pairs (one chord + one slot per pair, the decoder reads the host) are the DEFAULT (`ELISION_PAIRS=0` turns them off; `SELECTOR_RETRY` on with them): 24.2% total, hosted saving 2.560e9 (+4.0% over no elision), 46 theory shadow events (0.23% of host frequency). The run without elision: `scratch/expr_noelision/`.
+- Brief chords: `attachMergeChords` keeps forced briefs off any chord an attach can write over a one-stroke word.
 - Tests: all pass (`pytest src/test/`); new files `src/test/expressiondecoder_test.py`, `src/test/elision_test.py`, a `HostIndex` test in `expressionrules_test.py`.
 
 ## Switches (`scratch/select_expression_rules.py`)

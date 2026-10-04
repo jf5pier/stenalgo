@@ -198,6 +198,10 @@ class HostIndex:
             heads[masks[:-1]] = heads.get(masks[:-1], 0.0) + weight
         self._cache: dict[tuple[str, tuple[int, ...]], float] = {}
 
+    def singleStrokeHosts(self) -> list[int]:
+        """Key masks of every one-stroke theory outline (the hosts whose merge is itself one stroke)."""
+        return [stroke for stroke, tails in self._first.items() if () in tails]
+
     def shadowRate(self, position: str, keypress: Iterable[int]) -> float:
         keys = tuple(sorted(keypress))
         cached = self._cache.get((position, keys))
@@ -614,6 +618,30 @@ def repairKeypresses(selected: list[ExprRule], report: dict,
             rule.keys = tuple(sorted(set(base) | set(selector)))
         chosen[name] = base
     return chosen
+
+
+def attachMergeChords(attaches: Iterable[AttachRule], hosts: HostIndex) -> set[Stroke]:
+    """Every ONE-stroke chord an attach merge can write: one rule, or two stacked rules, merged into a
+    one-stroke theory word, or two rules clustered with no host. A brief stroke equal to one of them
+    would be read as the merge (found 2026-10-04: `ce` + `me` = the brief `dans la`), so brief
+    derivation treats them as taken. Same strict overlap test as the composer (`hosts.conflicts`)."""
+    rules = [(_mask(r.keypress), _mask(k for k in r.keypress if k not in RESERVED_MARK_KEYS))
+             for r in attaches]
+    conflicts = hosts.conflicts
+    marks = _mask(RESERVED_MARK_KEYS)
+    singles = hosts.singleStrokeHosts()
+    chords: set[int] = set()
+    combos = [(km, sm) for km, sm in rules]
+    for (k1, s1), (k2, s2) in combinations(rules, 2):
+        if not conflicts.expandMask(s1) & s2:
+            combos.append((k1 | k2, s1 | s2))
+            chords.add(k1 | k2)                         # hostless cluster
+    for km, sm in combos:
+        expanded = conflicts.expandMask(sm)
+        for host in singles:
+            if not expanded & host & ~marks:
+                chords.add(host | km)
+    return {tuple(k for k in range(64) if (m >> k) & 1) for m in chords}
 
 
 def deriveBriefStroke(expr: PoolExpression, ctx: SimContext,
