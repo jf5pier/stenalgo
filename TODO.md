@@ -43,6 +43,12 @@ Written to survive a `/clear` — read this file first in a fresh session.
   tries the `bien que` keypress as an attach first; it fails against `bien` (the host's own stroke collides with the
   attached expression, an evident `bien que` ~ `bien` collision), the writer deletes it and types the longform. Cognitively it is
   far easier to RETYPE the same fresh keypress as a standalone stroke, then type `bien des gens`.
+- MEASURED 2026-10-04 (`scratch/measure_attach_standalone.py`, committed run): attach occurrences in the pool: merged 57.9%,
+  `noNeighbour` exception 22.4%, `attachCluster` standalone 19.1%, `spanOne` 0.6%; no `keyOverlap`/`illegalChord`/`standaloneTrap`
+  fallback ever fires. Standalone-as-fallback would gain only on hostless attaches whose particle spans >= 2 strokes: `avec` 1.1e8 and
+  `n' y` 1.1e7 strokes (about 3% of the 3.672e9 attach saving). FIXED the real clash found on the way: forced briefs `après` and
+  `depuis` sat on the attach chords of `ce` and `pas` (single keys); the driver now reserves every attach chord and its selector-free
+  base before deriving the forced briefs (with briefs 4.288e9 -> 4.297e9, rules unchanged). Selected briefs are not reserved yet (none clash today).
 - To investigate:
   1. Decoder behaviour (NOTES section 3): when does a keypress mean "attach" and when "standalone"? A decoding Plover
      plugin must make the fallback deterministic (try attach, else standalone) without a delete-and-retype cycle.

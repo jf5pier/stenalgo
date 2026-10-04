@@ -612,6 +612,13 @@ def main() -> None:
     takenStrokes: set = {r.beta[0] for r in result.selected
                          if r.kind == "brief" and r.beta is not None}
     takenStrokes |= selBriefTaken
+    # an attach keypress (selector included) and its selector-free base are
+    # reserved: a forced brief on one would read as that attach standing alone
+    # (found 2026-10-04: `après` on `ce`, `depuis` on `pas`)
+    for r in result.selected:
+        if r.kind == "attach" and r.keys:
+            takenStrokes.add(tuple(sorted(r.keys)))
+            takenStrokes.add(tuple(k for k in sorted(r.keys) if k not in (10, 15)))
     for expr in forced:
         got = deriveBriefStroke(expr, realCtx, takenStrokes,
                                 freeChords=keypresses)

@@ -24,35 +24,35 @@ rank	kind	family	expression	position	freq	strokes_saved	keys	score
 23	attach	s'	s'	prefix	53867708	1	2,3,6	6.824e+07
 24	attach	qui	qui	prefix	57364820	1	4,9,16	6.532e+07
 25	brief		avec		4	p-	1.055e+08	1.055e+08	free	0			
-26	brief		après		5	v-	3.007e+07	3.007e+07	free	0			
-27	brief		ainsi		8	R-	2.540e+07	2.540e+07	free	0			
+26	brief		après		8	R-	3.007e+07	3.007e+07	free	0			
+27	brief		ainsi		16	-j	2.540e+07	2.540e+07	free	0			
 28	brief		avant		5,11,12	v@a	2.457e+07	2.457e+07	skeleton	0			
 29	brief		jamais		5,6,7,12,13,14	vmtaie	2.090e+07	2.090e+07	skeleton	0			
-30	brief		depuis		9	w-	1.920e+07	1.920e+07	free	0			
+30	brief		depuis		17	-s	1.920e+07	1.920e+07	free	0			
 31	brief		déjà		4,5,7,12,14	pvtae	1.522e+07	1.522e+07	skeleton	0			
 32	brief		petit		4,7,11,12,13	pt@ai	1.495e+07	1.495e+07	skeleton	0			
-33	brief		un peu		16	-j	1.372e+07	1.372e+07	free	0			
-34	brief		pendant		17	-s	1.317e+07	1.317e+07	free	0			
+33	brief		un peu		18	-k	1.372e+07	1.372e+07	free	0			
+34	brief		pendant		19	-d	1.317e+07	1.317e+07	free	0			
 35	brief		premier		4,6,8,9,11,13,14	pmRw@ie	1.255e+07	1.255e+07	skeleton	0			
 36	brief		première		4,6,8,9,11,13,14,21	pmRw@ieR	1.247e+07	1.247e+07	skeleton	0			
 37	brief		pourquoi		2,4,9,11,12,14,21	kpw@aeR	1.233e+07	1.233e+07	skeleton	0			
 38	brief		beaucoup		2,3,5,11,12,14	ksv@ae	1.224e+07	1.224e+07	skeleton	0			
-39	brief		souvent		18	-k	1.175e+07	1.175e+07	free	0			
+39	brief		souvent		20	-t	1.175e+07	1.175e+07	free	0			
 40	brief		question		2,7,8,9,12,13,14,17	ktRwaies	1.122e+07	1.122e+07	skeleton	0			
 41	brief		plusieurs		4,6,7,8,9,11,13,21	pmtRw@iR	1.119e+07	1.119e+07	skeleton	0			
-42	brief		maison		19	-d	1.093e+07	1.093e+07	free	0			
+42	brief		maison		21	-R	1.093e+07	1.093e+07	free	0			
 43	brief		peut être		4,10,11,13,14,20,21	p*@ietR	1.074e+07	1.074e+07	union	0			
 44	brief		enfin		2,4,11,12,13,14	kp@aie	1.037e+07	1.037e+07	skeleton	0			
 45	brief		exemple		13,14,18,19,22,23	iekdnl	1.028e+07	1.028e+07	union	0			
 46	brief		petite		4,7,11,12,13,20	pt@ait	9.878e+06	9.878e+06	skeleton	0			
-47	brief		toutes les		20	-t	1.955e+07	1.955e+07	free	0			
+47	brief		toutes les		22	-n	1.955e+07	1.955e+07	free	0			
 48	brief		lorsque		2,3,6,7,11,12,14,21	ksmt@aeR	9.631e+06	9.631e+06	skeleton	0			
 49	brief		maintenant		6,8,11,12,13,14	mR@aie	1.903e+07	1.903e+07	skeleton	0			
-50	brief		raison		21	-R	9.495e+06	9.495e+06	free	0			
+50	brief		raison		23	-l	9.495e+06	9.495e+06	free	0			
 51	brief		façon		2,3,4,12,13	kspai	9.325e+06	9.325e+06	skeleton	0			
 52	brief		ailleurs		8,9,11,12,21	Rw@aR	9.186e+06	9.186e+06	skeleton	0			
 53	brief		besoin		3,5,11,12	sv@a	9.045e+06	9.045e+06	union	0			
-54	brief		ensemble		22	-n	8.865e+06	8.865e+06	free	0			
+54	brief		ensemble		24	-Z	8.865e+06	8.865e+06	free	0			
 55	brief		aujourd'hui		4,5,11,12,13,14	pv@aie	1.749e+07	1.749e+07	skeleton	0			
 56	brief		surtout		3,7,11,13,14,21	st@ieR	8.648e+06	8.648e+06	skeleton	0			
 57	brief		société		3,7,12,14	stae	1.714e+07	1.714e+07	skeleton	0			
