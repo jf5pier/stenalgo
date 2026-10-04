@@ -174,3 +174,28 @@ Where the elision shadows come from: `un` 15 and `le` 12 (rules the elision run 
 
 Decision (user, 2026-10-04): elision pairs are the default (`ELISION_PAIRS=0` restores the previous behaviour; `SELECTOR_RETRY` is on with it). Files: `scratch/expr-*` = elision run
 (md5 `expr-rules.tsv` 7e5a6c68eb38...), `scratch/expr_noelision/` = the run without it.
+
+## Decode-time ranking built (`src/expressionranking.py`, `scratch/rank_check.py`)
+
+`ReadingRanker` orders the readings of one outline: 0 plain live words (an attested plain reading first, then the more probable), 1 a pure brief, 2 an attested pool
+reading (by frequency), 3 anything else by the independence probability (product of the unigram probabilities of every word of the reading, so extra or rarer words lose:
+`en je` beats `d'` + `en` + `avec`). `rankedDecode(decoder, ranker, strokes)` is the one-answer entry point for the plugin; the attested table (`attestedTable`, from
+`composedReading` over the pool) and the unigram probabilities (`unitProbabilities`, theory word frequencies) are its only data. The composer needs no `loses` check for
+attested expressions (the pool audit has no shadow or collision), and an unattested chord just reads as the winner.
+
+Measured on the committed run (elision default):
+- Pool: the top-ranked reading equals the composed reading for all 1,151 outlines (0 differ; hostless clusters compared with the elision forms folded). A first version
+  that preferred fewer pieces among plain words lost 15 (`et les` read as the word `hélé`, `par la` as `parla`): the stock theory writes both alike, the attestation and the
+  probability settle it.
+- Open set: 43,599 merges of a single-unit attach into a one-stroke word (every one the composer performs), weighted by rule frequency x host share:
+
+| decodes to | share |
+|---|---|
+| the merge itself | 86.19% |
+| the same words, grouped differently (`de le` read as the cluster `de` + `le`) | 12.21% |
+| another merge | 1.58% |
+| a plain word | 0.01% |
+
+So 98.4% of the weighted open-set merges read back as the words that were written. The first ranking (rule mass, more particles = more mass) put 22.5% on another merge.
+Largest remaining mis-decodes (weights 1e6): `dans` + `et` and `et` + `dans` (read as `avec` + `la`), `à` + `me`, `à` + `mon`, `de` + `ton`, `j'` + `est`: unnatural pairs for the
+most part.

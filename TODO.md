@@ -605,7 +605,7 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
 ## Expression decoder (2026-10-04; see RESULTS_2026-10-04-expression-decoder.md and RESUME_2026-10-04-decoder-theory-shadow-elision.md)
 
 - Done: decoder (`src/expressiondecoder.py`), whole-theory shadow/collision audit, Stage B theory-wide shadow term (limit 0.002), pinky-diagonal key conflicts (attach saving 24.8%, `il n'` stacks again).
-- Build the decode-time ranking (plain word > pure brief > attested pool reading > rest) AND the matching `loses(reading)` check in the composer.
+- Ranking built (`src/expressionranking.py`); no composer `loses` check is needed for attested expressions. To do: export the attested table and the unigram probabilities as data for the plugin; look at the 1.6% open-set mis-decodes (`dans` + `et`...).
 - Remaining collisions: `n' y`, `il n'`, `je me` (host `*` swallows the selector), `le`, `qui`, `un`.
 - Elision pairs are the default now. Open: the shadows of `un`, `le`, `c'`, `qu'` (46 events, 0.23% of host frequency, none a frequent phrase), the remaining collision families (`de`, `j'`, `je`, `il`, `à`, `n' y`, `il n'`, `je me`),
   hostless clusters read with either elision form (fragments only), complete `ASPIRATED_H`/`NO_ELISION` from a lexicon.

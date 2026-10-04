@@ -16,6 +16,7 @@ sys.path.insert(0, str(REPO))
 from scratch.build_expr_candidates import resolveTerm  # noqa: E402
 from src.affixes import PREFIX, SimContext  # noqa: E402
 from src.expressiondecoder import ExpressionDecoder, Piece  # noqa: E402
+from src.expressionranking import composedReading, normalizedSignature  # noqa: E402
 from src.expressionrules import ExprRule, PoolExpression, orderBan  # noqa: E402
 from src.expressions import (EXCEPTION, MERGED, STANDALONE, BriefRule, Rules, Token,  # noqa: E402
                              composeOutlineTraced, conflictsOf, planStream)
@@ -71,67 +72,12 @@ def loadAll():
 
 
 def expectedReading(rules: Rules, expr: PoolExpression, traced) -> tuple:
-    """The Piece sequence the composition produced, from its trace."""
-    tokens = list(expr.tokens)
-    plan = planStream(rules, tokens)
-    contentIdx = [i for i, e in enumerate(plan.entries) if e[0] == "content"]
-    prefix: dict[int, list] = defaultdict(list)
-    suffix: dict[int, list] = defaultdict(list)
-    clusterMember: set[int] = set()     # MERGED without a host target: a cluster follower
-    for n, seg in enumerate(traced.segments):
-        if seg.kind == "attach" and seg.outcome == MERGED:
-            start, end = seg.span
-            if seg.rule.position == PREFIX:
-                i = bisect_left(plan.residual, end)
-                target = plan.contentPosOf.get(plan.residual[i]) if i < len(plan.residual) else None
-                if target is not None:
-                    prefix[target].append(seg.rule)
-            else:
-                i = bisect_left(plan.residual, start) - 1
-                target = plan.contentPosOf.get(plan.residual[i]) if i >= 0 else None
-                if target is not None:
-                    suffix[target].append(seg.rule)
-            if target is None:
-                clusterMember.add(n)
-    pieces: list[Piece] = []
-    pos = 0
-    cluster: list = []
-    for n, seg in enumerate(traced.segments):
-        if seg.kind == "attach":
-            if seg.reason == "attachCluster" or n in clusterMember:
-                if seg.outcome == STANDALONE:
-                    if cluster:
-                        pieces.append(Piece("cluster", rules=tuple(cluster)))
-                    cluster = [seg.rule]
-                else:
-                    cluster.append(seg.rule)
-                continue
-            if cluster:
-                pieces.append(Piece("cluster", rules=tuple(cluster)))
-                cluster = []
-            if seg.outcome == MERGED:
-                continue
-            if seg.outcome == STANDALONE:
-                pieces.append(Piece("standalone", rules=(seg.rule,)))
-            elif seg.outcome == EXCEPTION:
-                for u in seg.units:
-                    pieces.append(Piece("content", (u,), False))
-        else:
-            if cluster:
-                pieces.append(Piece("cluster", rules=tuple(cluster)))
-                cluster = []
-            pieces.append(Piece("content", seg.units, seg.kind == "brief",
-                                tuple(prefix[pos]), tuple(suffix[pos])))
-            pos += 1
-    if cluster:
-        pieces.append(Piece("cluster", rules=tuple(cluster)))
-    return tuple(p.signature() for p in pieces)
+    """The composed reading as a (not yet normalized-twice) signature: see src/expressionranking.py."""
+    return composedReading(rules, expr.tokens, traced)
 
 
 def norm(sig: tuple) -> tuple:
-    """Spelling-insensitive signature: the pool unit "j'"/"œil" is the theory word "j"/"oeil"."""
-    fix = lambda u: u.replace("'", "").replace("œ", "oe")  # noqa: E731
-    return tuple((p[0], tuple(fix(u) for u in p[1])) + p[2:] for p in sig)
+    return normalizedSignature(sig)
 
 
 def rivalClass(sig: tuple) -> str:

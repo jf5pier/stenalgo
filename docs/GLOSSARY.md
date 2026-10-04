@@ -1171,6 +1171,12 @@ which equals the keyboard's legality test for every pair of legal keypresses. It
 because their keys sit on a pinky diagonal are rejected (`il` (7,16,24) with `n'` (8,20,23) before 2026-10-04).
 - Code: `src/keyconflicts.py` (`KeyConflicts`), `conflictsOf` and `attachKeysOverlap(conflicts=)` in `src/expressions.py`, `repairKeypresses(conflicts=)`.
 
+### Reading ranking
+The fixed order a dictionary uses to answer with ONE reading of a stroke tuple: plain live words, then a pure brief, then an attested pool reading (by frequency), then the more probable
+reading (product of the unigram probabilities of its words). Pure function of the reading plus two data tables (the attested readings of the pool, the word probabilities). Pool: 0 of 1,151
+outlines differ from the composed reading; open set: 98.4% of weighted merges read back as the written words (`RESULTS_2026-10-04-expression-decoder.md`).
+- Code: `src/expressionranking.py` (`ReadingRanker`, `rankedDecode`, `composedReading`, `attestedTable`), `scratch/rank_check.py`.
+
 ### Decoder (expression layer)
 The inverse of `composeOutlineTraced`: stroke tuple -> every reading (attach rules + host words, briefs, standalone keypresses,
 hostless clusters). Exact on the committed rules (0 unreadable, 0 mismatched outlines over the pool), but a stroke can have several

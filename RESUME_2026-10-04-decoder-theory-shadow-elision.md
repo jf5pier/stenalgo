@@ -23,7 +23,7 @@ Vocabulary: `docs/GLOSSARY.md` (theory shadow rate, decoder, elision pair).
 
 ## NEXT
 0. DONE: the `il` + `n'` stacking regression was a pinky-diagonal conflict (keys 23+24); `src/keyconflicts.py` (footprint model) is now the overlap test everywhere; default = 24.8%, hosted 2.454e9. Fragments (n-gram slices ending on a particle) are ~40% of the pool saving: compare runs on hosted expressions (results file, run-independent split).
-1. Build the ranking: attested table export, `loses(reading)` in the composer, decoder tie-break; the grammar filter of the elision experiment is already in the decoder.
+1. DONE: ranking (`src/expressionranking.py`: plain word > pure brief > attested > probability; pool 0 differ, open set 98.4% read back). Still to do for the plugin: export the attested table and the word probabilities as data files.
 2. Remaining collisions: `n' y`, `il n'`, `je me` (their `*` is swallowed by hosts such as `a`/`est`), `le`, `qui`, `un`.
 3. Elision experiment: the lost saving is all in hostless n-gram fragments (hosted expressions +3.9%), see the results file; compare runs on hosted expressions only. `ASPIRATED_H` / `NO_ELISION` are short lists, complete them from a lexicon if adopted.
 4. Step 4 leftovers (brief depending on a failed attach, standalone-as-attach, overlap max-1, `longest_key`), then step 5 (Plover plugin, needs a venv with Plover).
