@@ -1164,6 +1164,13 @@ collisions of `ce`, `pas`, `dans`, `à`, `avec`, `par` disappear, attach saving 
 (`RESULTS_2026-10-04-expression-decoder.md`).
 - Code: `HostIndex.shadowRate`, `assignKeypresses(hosts=...)`, `scratch/theory_injectivity.py`.
 
+### Key conflict (pinky diagonal)
+Two keys of one stroke that one finger cannot press together. On the Starboard each pinky owns a square of four keys (right 22-25, left 0-3) and cannot press a diagonal
+pair or a triple. A key occupies its own position and its diagonal partner (`KeyConflicts.expand`); two key sets share a stroke iff `expand(a)` and `b` are disjoint,
+which equals the keyboard's legality test for every pair of legal keypresses. It is the overlap test of the expression layer, so attaches or families that cannot stack
+because their keys sit on a pinky diagonal are rejected (`il` (7,16,24) with `n'` (8,20,23) before 2026-10-04).
+- Code: `src/keyconflicts.py` (`KeyConflicts`), `conflictsOf` and `attachKeysOverlap(conflicts=)` in `src/expressions.py`, `repairKeypresses(conflicts=)`.
+
 ### Decoder (expression layer)
 The inverse of `composeOutlineTraced`: stroke tuple -> every reading (attach rules + host words, briefs, standalone keypresses,
 hostless clusters). Exact on the committed rules (0 unreadable, 0 mismatched outlines over the pool), but a stroke can have several
@@ -1175,8 +1182,8 @@ attested pool reading > other).
 `que`/`qu'`, `de`/`d'`, `ne`/`n'`, `ce`/`c'`, `le`/`l'`, `je`/`j'`, `s'`... written by ONE chord and ONE selector slot: before a
 vowel sound French requires the elided form, before a consonant the base form, so the decoder reads exactly one from the word
 written after the particle (a stack of particles is accepted when some order makes every form agree: `ce n' est`). The composer
-refuses a disagreeing merge (reason `elision`, longform kept). Off by default: measured 22.6% attach saving against 24.0%,
-though the `que`/`de`/`ne`/`ce`/`le` collision shares fall from 20-41% to under 1% (see the results file).
+refuses a disagreeing merge (reason `elision`, longform kept). Off by default: with the key-conflict model it measures 24.2% attach saving against 24.8%
+but the best hosted-expression saving (2.552e9 against 2.454e9); the `que`/`qu'`/`d'`/`n'`/`l'`/`c'` collisions fall under 1% (see the results file).
 - Code: `src/elision.py`, `AttachRule.elision`, `ExprRule.slot`, `fitVariants`, `variantSelectors`, `orderingExists`.
 
 ### Collision (expression layer)

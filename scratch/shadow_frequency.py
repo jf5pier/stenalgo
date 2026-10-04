@@ -16,6 +16,7 @@ sys.path.insert(0, str(REPO))
 from scratch.decode_roundtrip import loadAll  # noqa: E402
 from scratch.theory_injectivity import MARKS, mask  # noqa: E402
 from src.affixes import PREFIX  # noqa: E402
+from src.expressions import conflictsOf  # noqa: E402
 from src.keyboard import canonicalizeStrokes  # noqa: E402
 
 
@@ -34,6 +35,7 @@ def main() -> None:
         o = tuple(mask(s) for s in canonicalizeStrokes(b.strokes))
         orthos[o].add("BRIEF:" + " ".join(b.expression))
         live.add(o)
+    conflicts = conflictsOf(ctx)
     legal: dict = {}
 
     def isLegal(m: int) -> bool:
@@ -51,7 +53,7 @@ def main() -> None:
                 pass
             idx = 0 if r.position == PREFIX else len(o) - 1
             h = o[idx]
-            if h & sm or not isLegal(h | km):
+            if conflicts.expandMask(h & ~MARKS) & sm or not isLegal(h | km):
                 continue
             composed = o[:idx] + (h | km,) + o[idx + 1:]
             if composed not in live:

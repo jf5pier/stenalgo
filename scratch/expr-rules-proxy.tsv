@@ -4,21 +4,21 @@ rank	kind	family	expression	position	freq	strokes_saved	keys	score
 3	attach	à	à	prefix	267408208	1	9,17,23	2.751e+08
 4	attach	que	qu'	prefix	217698158	1	17,18,19	4.479e+08
 5	attach	que	que	prefix	197909645	1	10,17,18,19	2.083e+08
-6	attach	ne	n'	prefix	152965207	1	8,20,23	2.998e+08
-7	attach	ne	ne	prefix	44860332	1	8,10,20,23	6.805e+07
-8	attach	ne	n' y	prefix	11093429	2	8,15,20,23	2.104e+07
+6	attach	ne	n'	prefix	152965207	1	2,5,8	2.998e+08
+7	attach	ne	ne	prefix	44860332	1	2,5,8,10	6.805e+07
+8	attach	ne	n' y	prefix	11093429	2	2,5,8,15	2.104e+07
 9	attach	dans	dans	prefix	253868505	1	2,16,19	2.236e+08
 10	attach	et	et	prefix	285239034	1	8,16,20	2.857e+08
 11	attach	il	il	prefix	168319881	1	7,16,24	2.357e+08
-12	attach	c	c'	prefix	134792591	1	2,4,5	1.466e+08
+12	attach	c	c'	prefix	134792591	1	2,5,6	1.466e+08
 13	attach	la	la	prefix	116132666	1	16,18,19	1.486e+08
 14	attach	pas	pas	suffix	206722861	1	9,21,25	1.155e+08
-15	attach	l'	l'	prefix	77616119	1	2,5,6	1.214e+08
-16	attach	je	je	prefix	112312128	1	4,16,24	1.088e+08
-17	attach	ce	ce	prefix	102898102	1	7,16,22	1.311e+08
+15	attach	l'	l'	prefix	77616119	1	2,5,7	1.214e+08
+16	attach	je	je	prefix	112312128	1	4,16,20	1.088e+08
+17	attach	ce	ce	prefix	102898102	1	14,16,20	1.311e+08
 18	brief		j' ai		30553370	2	5,7,18	7.550e+07
 19	attach	avec	avec	prefix	105501881	2	2,9,24	9.724e+07
-20	attach	sur	sur	prefix	100505968	1	2,5,8	1.005e+08
+20	attach	sur	sur	prefix	100505968	1	2,4,5	1.005e+08
 21	attach	par	par	prefix	156321990	1	9,16,20	9.067e+07
 22	attach	le	le	prefix	51233152	1	3,17,24	6.318e+07
 23	attach	s'	s'	prefix	53867708	1	2,3,5	6.824e+07

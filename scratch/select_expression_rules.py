@@ -227,11 +227,12 @@ def main() -> None:
         from collections import defaultdict
 
         from src.expressionrules import HostIndex
+        from src.expressions import conflictsOf
         hostWeights: dict = defaultdict(float)
         for word, alts in theory.items():
             for alt in alts:
                 hostWeights[canonicalizeStrokes(alt)] += word.frequency
-        hostIndex = HostIndex(hostWeights)
+        hostIndex = HostIndex(hostWeights, conflicts=conflictsOf(realCtx))
     shadowKwargs = {} if "SHADOW_MAX_RATE" not in os.environ else {
         "shadowMaxRate": float(os.environ["SHADOW_MAX_RATE"])}
     keypressReport = assignKeypresses(result.selected, pool, realCtx, keypresses,
@@ -266,6 +267,7 @@ def main() -> None:
     # feedback round: families implicated in an audit collision lose their
     # base and the repair re-solves (v1 heuristic, up to 6 rounds).
     from src.expressionrules import auditExpressionRules, repairKeypresses
+    from src.expressions import conflictsOf
     from src.expressions import Rules, composeOutlineTraced
 
     chosen: dict = {}
@@ -290,7 +292,8 @@ def main() -> None:
           f"family pairs: {sorted(tuple(sorted(p)) for p in disjointPairs)}")
     for round_ in range(6):
         chosen = repairKeypresses(result.selected, keypressReport,
-                                  disjointPairs=disjointPairs)
+                                  disjointPairs=disjointPairs,
+                                  conflicts=conflictsOf(realCtx))
         audit = auditExpressionRules(result.selected, pool, realCtx)
         print(f"Stage C round {round_}: re-based {len(chosen)} families, "
               f"collisions {len(audit.collisions)}, shadows {len(audit.shadows)}")

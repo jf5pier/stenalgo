@@ -21,6 +21,7 @@ sys.path.insert(0, str(REPO))
 from scratch.decode_roundtrip import loadAll  # noqa: E402
 from src.affixes import PREFIX  # noqa: E402
 from src.elision import elisionAgrees  # noqa: E402
+from src.expressions import conflictsOf  # noqa: E402
 from src.keyboard import canonicalizeStrokes  # noqa: E402
 from util._theoryio import loadDisambiguatedTheory  # noqa: E402
 from src.keyboard import Starboard  # noqa: E402
@@ -64,6 +65,7 @@ def main() -> None:
         fits the form (the composer refuses the rest, the decoder never reads them)."""
         return not elision or any(elisionAgrees(elision, w) for w in orthosOf.get(outline, ()))
 
+    conflicts = conflictsOf(ctx)
     legalCache: dict[int, bool] = {}
 
     def legal(m: int) -> bool:
@@ -119,7 +121,7 @@ def main() -> None:
                     pass
                 if forms and not all(agrees(f, o) for f in forms):
                     continue
-                if h & sm:
+                if conflicts.expandMask(h & ~MARKS) & sm:
                     tally(name, "refusedOverlap", hosts[o])
                     continue
                 u = h | km

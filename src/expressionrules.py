@@ -43,6 +43,7 @@ from src.expressions import (AttachRule, BriefRule, MERGED, RESERVED_MARK_KEYS,
                              Rules, STANDALONE, Token, composeOutlineTraced,
                              planStream)
 from src.keyboard import Stroke, Strokes
+from src.keyconflicts import KeyConflicts
 
 # Q6 floors — tunable in one place.
 MIN_LONGFORM_STROKES = 2      # expressions under 2 strokes never enter the queue
@@ -183,7 +184,9 @@ class HostIndex:
     subset of the chord's selectors kept: a host that already carries `*`/`#` swallows it),
     is a host stroke whose tail must also be a live tail of L."""
 
-    def __init__(self, weights: Mapping[Strokes, float]) -> None:
+    def __init__(self, weights: Mapping[Strokes, float],
+                 conflicts: KeyConflicts | None = None) -> None:
+        self.conflicts = conflicts or KeyConflicts()
         self.total = sum(weights.values()) or 1.0
         self._first: dict[int, dict[tuple[int, ...], float]] = {}
         self._last: dict[int, dict[tuple[int, ...], float]] = {}
@@ -211,6 +214,8 @@ class HostIndex:
             if stroke & ksyl != ksyl or stroke & ksel != ksel:
                 continue
             core = stroke & ~ksyl & ~ksel
+            if self.conflicts.expandMask(ksyl) & core:
+                continue            # a host key on a pinky diagonal of the chord: never merges
             for kept in subsets:
                 hostTails = index.get(core | kept)
                 if hostTails is None:
@@ -502,6 +507,7 @@ def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
 def repairKeypresses(selected: list[ExprRule], report: dict,
                      selectors: tuple[tuple[int, ...], ...] = SELECTORS,
                      disjointPairs: frozenset[frozenset[str]] = frozenset(),
+                     conflicts: KeyConflicts | None = None,
                      ) -> dict[str, tuple[int, ...]]:
     """Stage C joint repair: re-assign the families' bases so variants of
     DIFFERENT families never share an effective keypress (base + selector)
@@ -567,7 +573,9 @@ def repairKeypresses(selected: list[ExprRule], report: dict,
                     if mustDisjoint:
                         # no KEY overlap at all: both families can stack
                         # their merges on one stroke
-                        if not (keysA & keysB):
+                        # (a pinky diagonal counts as a shared key: `conflicts`)
+                        if not (keysA & keysB) and not (
+                                conflicts is not None and conflicts.conflict(keysA, keysB)):
                             allowed.append((a, b))
                     elif not any(set(k1) == set(k2) for k1 in effSets[i][a]
                                  for k2 in effSets[j][b]):

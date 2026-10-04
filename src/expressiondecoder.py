@@ -34,6 +34,7 @@ from src.expressions import RESERVED_MARK_KEYS, AttachRule, Rules
 from src.affixes import PREFIX, SUFFIX
 from src.elision import elisionAgrees, orderingExists
 from src.keyboard import Stroke, Strokes, canonicalizeStrokes
+from src.keyconflicts import KeyConflicts
 
 __all__ = ["Piece", "Decoding", "ExpressionDecoder"]
 
@@ -77,8 +78,10 @@ class ExpressionDecoder:
 
     def __init__(self, rules: Rules, words: dict[Strokes, Iterable[str]],
                  unitStrokes: dict[str, int] | None = None,
-                 isLegal: Callable[[Stroke], bool] | None = None) -> None:
+                 isLegal: Callable[[Stroke], bool] | None = None,
+                 conflicts: KeyConflicts | None = None) -> None:
         self.rules = rules
+        self.conflicts = conflicts or KeyConflicts()
         self.isLegal = isLegal
         self._attaches = tuple(sorted(rules.attaches, key=_ruleOrder))
         self._keys = {r: frozenset(r.keypress) for r in self._attaches}
@@ -116,7 +119,7 @@ class ExpressionDecoder:
             for i in range(start, len(cands)):
                 rule = cands[i]
                 syl = _syl(rule.keypress)
-                if syl & taken:                     # stacked attaches must be disjoint
+                if self.conflicts.conflict(taken, syl):   # stacked attaches: no shared key, no pinky diagonal
                     continue
                 now = chosen + [rule]
                 nowTaken = taken | syl
@@ -126,7 +129,7 @@ class ExpressionDecoder:
                 for r in range(len(selectors) + 1):
                     for kept in combinations(sorted(selectors), r):
                         host = tuple(sorted(base - (selectors - frozenset(kept))))
-                        if host:
+                        if host and not self.conflicts.conflict(_syl(host), nowTaken):
                             out.append((host, tuple(now)))
                 extend(i + 1, now, nowTaken)
 
@@ -197,8 +200,9 @@ class ExpressionDecoder:
             for group in combinations(cands, size):
                 if frozenset().union(*(self._keys[r] for r in group)) != have:
                     continue
-                if sum(len(_syl(r.keypress)) for r in group) != len(_syl(stroke)):
-                    continue                        # not disjoint on the syllabic keys
+                if any(self.conflicts.conflict(_syl(a.keypress), _syl(b.keypress))
+                       for a, b in combinations(group, 2)):
+                    continue                        # members share a key or a pinky diagonal
                 if stroke in self._singles:
                     continue
                 if self.isLegal is not None and not self.isLegal(tuple(sorted(_syl(stroke)))):

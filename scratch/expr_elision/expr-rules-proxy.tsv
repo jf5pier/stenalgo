@@ -1,36 +1,36 @@
 rank	kind	family	expression	position	freq	strokes_saved	keys	score
-1	attach	de	de	prefix	579342261	1	5,9,17	7.650e+08
-2	attach	de	d'	prefix	156154508	1	5,9,17	1.636e+08
-3	attach	à	à	prefix	267408208	1	9,17,23	2.751e+08
-4	attach	que	qu'	prefix	217698158	1	2,9,19	4.479e+08
-5	attach	que	que	prefix	197909645	1	2,9,19	2.083e+08
-6	attach	ne	n'	prefix	152965207	1	8,20,23	2.998e+08
-7	attach	ne	ne	prefix	44860332	1	8,20,23	6.805e+07
-8	attach	ne	n' y	prefix	11093429	2	8,10,15,20,23	2.104e+07
-9	attach	dans	dans	prefix	253868505	1	9,18,23	2.236e+08
-10	attach	et	et	prefix	285239034	1	8,16,20	2.857e+08
+1	attach	de	de	prefix	579342261	1	17,24	7.650e+08
+2	attach	de	d'	prefix	156154508	1	17,24	1.636e+08
+3	attach	à	à	prefix	267408208	1	8,17,24	2.751e+08
+4	attach	que	qu'	prefix	217698158	1	2,18,20	4.479e+08
+5	attach	que	que	prefix	197909645	1	2,18,20	2.083e+08
+6	attach	ne	n'	prefix	152965207	1	8,16,19	2.998e+08
+7	attach	ne	ne	prefix	44860332	1	8,16,19	6.805e+07
+8	attach	ne	n' y	prefix	11093429	2	8,10,15,16,19	2.104e+07
+9	attach	dans	dans	prefix	253868505	1	2,18,24	2.236e+08
+10	attach	et	et	prefix	285239034	1	9,16,19	2.857e+08
 11	attach	il	il	prefix	168319881	1	7,17,24	2.357e+08
 12	attach	il	il n'	prefix	27097496	2	7,10,15,17,24	1.686e+07
-13	attach	ce	c'	prefix	134792591	1	7,18,25	1.398e+08
-14	attach	ce	ce	prefix	102898102	1	7,18,25	2.733e+08
+13	attach	ce	c'	prefix	134792591	1	4,5,7	1.398e+08
+14	attach	ce	ce	prefix	102898102	1	4,5,7	2.733e+08
 15	attach	la	la	prefix	116132666	1	16,18,19	1.486e+08
-16	attach	pas	pas	suffix	206722861	1	16,21,22	1.155e+08
-17	attach	le	l'	prefix	77616119	1	3,16,24	9.229e+07
-18	attach	le	le	prefix	51233152	1	3,16,24	1.846e+08
-19	attach	je	je	prefix	112312128	1	4,18,25	1.617e+08
-20	attach	je	j'	prefix	44290485	1	4,18,25	5.290e+07
-21	attach	je	je me	prefix	13654387	2	4,10,18,25	2.999e+06
+16	attach	pas	pas	suffix	206722861	1	9,21,25	1.155e+08
+17	attach	le	l'	prefix	77616119	1	5,9,16	9.229e+07
+18	attach	le	le	prefix	51233152	1	5,9,16	1.846e+08
+19	attach	je	je	prefix	112312128	1	4,17,24	1.617e+08
+20	attach	je	j'	prefix	44290485	1	4,17,24	5.290e+07
+21	attach	je	je me	prefix	13654387	2	4,10,17,24	2.999e+06
 22	attach	avec	avec	prefix	105501881	2	2,9,24	9.724e+07
 23	attach	par	par	prefix	156321990	1	9,16,20	9.067e+07
 24	attach	s'	s'	prefix	53867708	1	2,3,5	6.824e+07
-25	attach	qui	qui	prefix	57364820	1	4,16,24	6.532e+07
-26	attach	un	un	prefix	41372215	1	6,16,24	4.341e+07
-27	attach	elle	elle	prefix	40112463	1	7,16,22	4.920e+07
+25	attach	qui	qui	prefix	57364820	1	9,17,22	6.532e+07
+26	attach	un	un	prefix	41372215	1	6,8,19	4.341e+07
+27	attach	elle	elle	prefix	40112463	1	7,17,25	4.920e+07
 28	attach	en	en	prefix	362205933	1	18,19,20	3.970e+07
 29	attach	les	les	prefix	33827184	1	2,16,19	3.569e+07
 30	brief		avec		4	p-	1.055e+08	1.055e+08	free	0			
-31	brief		dans le		4,5,6,7,11,12	pvmt@a	4.506e+07	4.506e+07	union	0			
-32	brief		dans la		11,12	@a	4.287e+07	4.287e+07	vowels	0			
+31	brief		dans la		4,5,6,7,11,12	pvmt@a	4.287e+07	4.287e+07	union	0			
+32	brief		dans les		4,5,6,7,11,14	pvmt@e	3.109e+07	3.109e+07	union	0			
 33	brief		après		5	v-	3.007e+07	3.007e+07	free	0			
 34	brief		ainsi		8	R-	2.540e+07	2.540e+07	free	0			
 35	brief		avant		5,11,12	v@a	2.457e+07	2.457e+07	skeleton	0			

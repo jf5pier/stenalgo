@@ -18,7 +18,7 @@ from src.affixes import PREFIX, SimContext  # noqa: E402
 from src.expressiondecoder import ExpressionDecoder, Piece  # noqa: E402
 from src.expressionrules import ExprRule, PoolExpression, orderBan  # noqa: E402
 from src.expressions import (EXCEPTION, MERGED, STANDALONE, BriefRule, Rules, Token,  # noqa: E402
-                             composeOutlineTraced, planStream)
+                             composeOutlineTraced, conflictsOf, planStream)
 from src.keyboard import Starboard, canonicalizeStrokes  # noqa: E402
 from util._theoryio import loadDisambiguatedTheory  # noqa: E402
 
@@ -148,7 +148,7 @@ def rivalClass(sig: tuple) -> str:
 
 def main() -> None:
     ctx, rules, pool, words, unitStrokes = loadAll()
-    dec = ExpressionDecoder(rules, words, unitStrokes, ctx.isLegal)
+    dec = ExpressionDecoder(rules, words, unitStrokes, ctx.isLegal, conflictsOf(ctx))
     mass: Counter = Counter()
     count: Counter = Counter()
     bad: list = []

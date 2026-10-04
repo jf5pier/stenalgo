@@ -117,3 +117,33 @@ the headline saving of every run in these files includes the fragment share.
 Related regression found at the same time (not elision): the Stage B shadow term moved the chords so that `il` + `n'` no longer stack on one host
 (union illegal, `n'` falls to `spanOne`; the run before it stacked, `il n' est` one stroke). Single-stroke particles that fail to merge: 2.9e7 -> 1.0e8
 occurrences (about 0.5 point). Cause: the repair only forces key-disjointness for co-occurring families, not a legal union chord.
+
+## Pinky-diagonal key conflicts (`src/keyconflicts.py`, user idea 2026-10-04)
+
+Why `il` (7,16,24) and `n'` (8,20,23) never stack: keys 24 and 23 sit on the right pinky, which owns a square of four keys (22-25) and cannot press a diagonal
+pair (23+24, 22+25) or any triple, only a single key, an edge pair or all four. The left pinky (0-3) is the same; every other finger accepts any combination.
+Footprint: each pinky key also occupies its diagonal partner; two key sets can share a stroke iff `expand(a)` and `b` are disjoint. Checked by brute force
+(`src/test/keyconflicts_test.py`): equal to `SimContext.isLegal` for every pair of legal keypresses of a finger (the all-four press aside). The partner map is derived
+from `Starboard._possibleKeypress`. It is now the overlap test of the composer (`attachKeysOverlap(conflicts=)`, reason `keyOverlap` instead of a late `illegalChord`), the
+cluster check, the repair's disjoint-pair constraint, `HostIndex` and the decoder (readings the composer cannot produce disappear).
+
+Fragment-free comparison. The pool counts n-gram slices that end on a particle (`à l'`, `dans le`, `et les`); in text a host always follows, so their saving is an
+artifact. Run-independent split (fragment = last unit is a prefix particle of ANY run, or first unit a suffix particle; 895 hosted + 255 fragment expressions),
+saving in strokes:
+
+| run | hosted | fragments | total |
+|---|---|---|---|
+| previous commit `e0b7514` (no theory term) | 2.504e9 | 1.782e9 | 4.286e9 |
+| shadow term (`f98fd383`) | 2.419e9 (-3.4%) | 1.608e9 | 4.027e9 |
+| shadow term + footprint (default now) | 2.454e9 (-2.0%) | 1.685e9 | 4.139e9 |
+| `ELISION_PAIRS=1 SELECTOR_RETRY=1`, no footprint | 2.520e9 | 1.245e9 | 3.765e9 |
+| `ELISION_PAIRS=1 SELECTOR_RETRY=1` + footprint | 2.552e9 (+1.9%) | 1.443e9 | 3.994e9 |
+
+(An earlier version of this file said hosted expressions gained 3.9% under elision: that split flagged fragments per run and was inconsistent. The table above replaces it.)
+
+Default + footprint: attach saving 24.8% (3.541e9), 201 exceptions, 4.149e9 with briefs, 0 pool shadows and collisions, `il` + `n'` stack again (`il n' est` one
+stroke), 9 theory shadow events, 0 top-5000 bigrams misread, 22.3% of pool mass has a rival reading. Elision + footprint + retry: 24.2% (3.457e9), 235 exceptions, 4.005e9 with
+briefs, `que/qu'/d'/n'/l'/c'/s'` collisions under 1% (`de` 26%, `j'` 12%, `je` 20% remain, as do `il`, `à`, `n' y`, `il n'`, `je me`), 50 theory shadow events
+(`ce` and `c'` 0.5% of host frequency each, onto the forced briefs `dans la` and `déjà`, which the host index does not see), 31.8% of pool mass with a rival (mostly clusters of
+hostless fragments, both elision forms), 4 hostless clusters missing from their own readings. The elision run has the best hosted saving; it stays off by default
+until the shadow index also sees brief chords and the remaining collision families are decided.

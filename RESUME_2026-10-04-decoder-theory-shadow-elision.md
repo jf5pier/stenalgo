@@ -6,9 +6,9 @@ Vocabulary: `docs/GLOSSARY.md` (theory shadow rate, decoder, elision pair).
 ## State
 - Branch `abbreviations`, worktree `/home/jfsp/Steno/stenalgo-briefs`, interpreter `/home/jfsp/Steno/stenalgo/env/bin/python`, `PYTHONPATH=.`. Nothing pushed, main not merged.
 - Plan steps 1-3 done: `src/expressiondecoder.py` (+ tests), round trip (0 unreadable / 0 mismatched), whole-theory injectivity. Step 4 partly decided, step 5 (Plover plugin) not started.
-- New default Stage B: theory-wide shadow term (limit 0.002): attach saving 24.0% (was 25.7%), 4.038e9 with briefs, 5 theory shadows (was 4,467).
-  The committed `scratch/expr-*` files are this run (md5 `expr-rules.tsv` f98fd383d538...).
-- Experiment `ELISION_PAIRS=1` (one chord + one slot per elision pair, the decoder reads the host): built and tested, OFF by default (22.6%, see results). Its files: `scratch/expr_elision/`.
+- New default Stage B: theory-wide shadow term (limit 0.002) + pinky-diagonal key conflicts: attach saving 24.8% (was 25.7% before the shadow term), 4.149e9 with briefs, 9 theory shadow events (was 4,467).
+  The committed `scratch/expr-*` files are this run.
+- Experiment `ELISION_PAIRS=1 SELECTOR_RETRY=1` (one chord + one slot per elision pair, the decoder reads the host): built and tested, OFF by default (24.2% total, best hosted saving 2.552e9 vs 2.454e9). Its files: `scratch/expr_elision/` (the footprint run).
 - Tests: all pass (`pytest src/test/`); new files `src/test/expressiondecoder_test.py`, `src/test/elision_test.py`, a `HostIndex` test in `expressionrules_test.py`.
 
 ## Switches (`scratch/select_expression_rules.py`)
@@ -21,7 +21,7 @@ Vocabulary: `docs/GLOSSARY.md` (theory shadow rate, decoder, elision pair).
 - `pas ce dans à` shadows too costly (user): fixed by the Stage B term. Limit stays 0.002 (0.01 tried, `la` shadows `les`).
 
 ## NEXT
-0. Regression: `il` + `n'` no longer stack (illegal union chord) since the Stage B shadow term; add union legality for stacking pairs to `repairKeypresses` and re-run. Fragments are 39% of the default saving: report hosted-only saving too.
+0. DONE: the `il` + `n'` stacking regression was a pinky-diagonal conflict (keys 23+24); `src/keyconflicts.py` (footprint model) is now the overlap test everywhere; default = 24.8%, hosted 2.454e9. Fragments (n-gram slices ending on a particle) are ~40% of the pool saving: compare runs on hosted expressions (results file, run-independent split).
 1. Build the ranking: attested table export, `loses(reading)` in the composer, decoder tie-break; the grammar filter of the elision experiment is already in the decoder.
 2. Remaining collisions: `n' y`, `il n'`, `je me` (their `*` is swallowed by hosts such as `a`/`est`), `le`, `qui`, `un`.
 3. Elision experiment: the lost saving is all in hostless n-gram fragments (hosted expressions +3.9%), see the results file; compare runs on hosted expressions only. `ASPIRATED_H` / `NO_ELISION` are short lists, complete them from a lexicon if adopted.

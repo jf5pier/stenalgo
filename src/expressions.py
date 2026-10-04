@@ -99,10 +99,11 @@ from src.affixes import PREFIX, SUFFIX, SimContext, hasBoundaryRisk
 from src.ambiguitychecker import HASH_KEY, STAR_KEY
 from src.elision import elisionAgrees
 from src.keyboard import Stroke, Strokes, canonicalizeStrokes
+from src.keyconflicts import KeyConflicts
 
 __all__ = [
     "AttachRule", "BriefRule", "Rules", "Token", "Composition", "Segment",
-    "Failure", "composeOutline", "composeOutlineTraced",
+    "Failure", "composeOutline", "composeOutlineTraced", "conflictsOf",
 ]
 
 MERGED = "merged"          # attach outcome: kappa vanished into the host stroke
@@ -125,12 +126,27 @@ EXPR_MAX_SHARED_KEYS = 0
 
 
 def attachKeysOverlap(neighbour: Stroke, keys: Stroke,
-                      maxShared: int | None = None) -> bool:
+                      maxShared: int | None = None,
+                      conflicts: KeyConflicts | None = None) -> bool:
     """True when `keys` cannot merge into `neighbour`: more than `maxShared`
     keys are shared (default `EXPR_MAX_SHARED_KEYS`). Callers pass syllabic
-    keys only; the */# selectors are transparent."""
+    keys only; the */# selectors are transparent. With `conflicts`, a key
+    also collides with the diagonal partner of a neighbour key (a pinky
+    cannot press a diagonal pair: `src/keyconflicts.py`), which makes the
+    test legality-aware."""
     limit = EXPR_MAX_SHARED_KEYS if maxShared is None else maxShared
+    if conflicts is not None:
+        return conflicts.conflictCount(neighbour, keys) > limit
     return len(set(neighbour) & set(keys)) > limit
+
+
+def conflictsOf(ctx: SimContext) -> KeyConflicts:
+    """The key-conflict model of the context's layout (derived once, cached on the context)."""
+    cached = getattr(ctx, "_keyConflicts", None)
+    if cached is None:
+        cached = KeyConflicts.fromStarboard(ctx.starboard)
+        ctx._keyConflicts = cached          # type: ignore[attr-defined]
+    return cached
 
 
 def _syllabic(keys: Stroke) -> Stroke:
@@ -302,6 +318,7 @@ def composeOutlineTraced(rules: Rules, tokens: tuple[Token, ...],
         return Composition(None)
 
     plan = planStream(rules, tokenList)
+    conflicts = conflictsOf(ctx)
 
     # Content-segment outlines: briefs use beta, words their longform.
     outlines = [entry[2].strokes if entry[2] is not None else entry[1][0].strokes
@@ -339,7 +356,8 @@ def composeOutlineTraced(rules: Rules, tokens: tuple[Token, ...],
                 continue
             neighbourIndex = 0 if position == PREFIX else len(outlines[target]) - 1
             neighbour = outlines[target][neighbourIndex]
-            if attachKeysOverlap(_syllabic(neighbour), _syllabic(rule.keypress)):
+            if attachKeysOverlap(_syllabic(neighbour), _syllabic(rule.keypress),
+                                 conflicts=conflicts):
                 reason = "keyOverlap"
             else:
                 union = tuple(sorted(set(neighbour) | set(rule.keypress)))
@@ -382,7 +400,7 @@ def composeOutlineTraced(rules: Rules, tokens: tuple[Token, ...],
     for index, (kind, rule, span) in enumerate(plan.entries):
         if kind == "attach" and results[index] == (EXCEPTION, "noNeighbour"):
             keys = _syllabic(rule.keypress)
-            if group and (attachKeysOverlap(tuple(union_), keys)
+            if group and (attachKeysOverlap(tuple(union_), keys, conflicts=conflicts)
                           or not ctx.isLegal(_syllabic(tuple(sorted(union_ | set(rule.keypress)))))):
                 flushCluster(group)
                 group, union_ = [], set()

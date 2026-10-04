@@ -144,13 +144,14 @@ class TestFailureLadder:
         assert traced.saving == 1  # two particle strokes become one
 
     def test_illegal_chord_falls_back_to_standalone(self):
-        """The union contains the illegal coda pair (22,25): illegalChord."""
+        """22 and 25 are pinky diagonal partners (src/keyconflicts.py): a legality-aware overlap
+        (keyOverlap) since 2026-10-04, formerly caught later as illegalChord."""
         host = ((11, 22),)
         rules = Rules(attaches=(AttachRule(("de", "la"), PREFIX, (25,)),))
         tokens = (tok("de", DE), tok("la", LA), tok("mot", host))
         traced = composeOutlineTraced(rules, tokens, Ctx())
         assert traced.segments[0].outcome == STANDALONE
-        assert traced.segments[0].reason == "illegalChord"
+        assert traced.segments[0].reason == "keyOverlap"
         assert traced.strokes == ((25,), (11, 22))
 
     def test_no_neighbour_keeps_longform(self):

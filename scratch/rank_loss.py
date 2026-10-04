@@ -16,14 +16,14 @@ sys.path.insert(0, str(REPO))
 
 from scratch.decode_roundtrip import expectedReading, loadAll, norm  # noqa: E402
 from src.expressiondecoder import ExpressionDecoder  # noqa: E402
-from src.expressions import composeOutlineTraced  # noqa: E402
+from src.expressions import composeOutlineTraced, conflictsOf  # noqa: E402
 
 STATIC = os.environ.get("MODE") == "static"
 
 
 def main() -> None:
     ctx, rules, pool, words, unitStrokes = loadAll()
-    dec = ExpressionDecoder(rules, words, unitStrokes, ctx.isLegal)
+    dec = ExpressionDecoder(rules, words, unitStrokes, ctx.isLegal, conflictsOf(ctx))
     data = json.load(open(REPO / "scratch" / "expr-rules-final.json", encoding="utf-8"))
     ruleMass = {(tuple(r["units"]), r["position"]): r["freq"] for r in data["rules"]}
     entries = []
