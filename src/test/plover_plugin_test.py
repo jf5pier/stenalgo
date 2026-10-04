@@ -84,11 +84,13 @@ class TestDictionary(unittest.TestCase):
         rules = Rules(attaches=(AttachRule(("de",), "prefix", (3,), "", "base"),
                                 AttachRule(("d'",), "prefix", (3,), "", "elided")),
                       briefs=(BriefRule(("a", "b"), ((8,),)),))
-        doc = bundleToDict(rules, {((5,),): ["mot"], ((6,),): ["arbre"]}, {"mot": 1, "arbre": 1}, {}, {},
-                           KeyConflicts(), legality)
+        words = {((5,),): ["mot"], ((6,),): ["arbre"]}
+        doc = bundleToDict(rules, words, {"mot": 1, "arbre": 1}, {}, {}, KeyConflicts(), legality,
+                           wordsFile="stock.json")
         cls.tmp = tempfile.TemporaryDirectory()
         cls.path = Path(cls.tmp.name) / "test.stenalgo"
         cls.path.write_text(json.dumps(doc), encoding="utf-8")
+        (Path(cls.tmp.name) / "stock.json").write_text(json.dumps({"v-": "mot", "m-": "arbre"}), encoding="utf-8")
         dictionary, _stroke = _pluginImports()
         cls.dictionary = dictionary.StenalgoExpressionDictionary.load(str(cls.path))
 
@@ -114,3 +116,20 @@ class TestDictionary(unittest.TestCase):
     def test_longest_key_and_readonly(self) -> None:
         self.assertTrue(self.dictionary.readonly)
         self.assertEqual(self.dictionary.longest_key, 1)
+
+    def test_wrong_or_missing_stock_dictionary_is_refused(self) -> None:
+        dictionary, _stroke = _pluginImports()
+        stock = Path(self.tmp.name) / "stock.json"
+        good = stock.read_text(encoding="utf-8")
+        try:
+            stock.write_text(json.dumps({"v-": "mot", "m-": "autre"}), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                dictionary.StenalgoExpressionDictionary.load(str(self.path))
+            stock.write_text(json.dumps({"zzz": "mot"}), encoding="utf-8")     # not this system's strokes
+            with self.assertRaises(ValueError):
+                dictionary.StenalgoExpressionDictionary.load(str(self.path))
+            stock.unlink()
+            with self.assertRaises(OSError):
+                dictionary.StenalgoExpressionDictionary.load(str(self.path))
+        finally:
+            stock.write_text(good, encoding="utf-8")

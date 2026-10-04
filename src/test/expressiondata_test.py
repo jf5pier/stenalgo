@@ -2,7 +2,8 @@ import random
 import unittest
 
 from src.affixes import SimContext
-from src.expressiondata import ChordLegality, bundleToDict, legalityFromStarboard, loadBundle
+from src.expressiondata import (ChordLegality, bundleToDict, legalityFromStarboard, loadBundle,
+                                wordIndexFingerprint)
 from src.expressions import AttachRule, BriefRule, Rules
 from src.keyboard import Starboard
 from src.keyconflicts import KeyConflicts
@@ -39,3 +40,28 @@ class TestExpressionData(unittest.TestCase):
         self.assertEqual(list(ranker.attested.values()), [2.0])
         (reading,) = decoder.decode(((1, 2),))
         self.assertEqual(reading[0].units, ("mot",))
+
+    def test_word_index_from_a_file_is_fingerprinted(self) -> None:
+        rules = Rules(attaches=(AttachRule(("de",), "prefix", (3, 4)),))
+        words = {((1, 2),): ["mot"], ((5,),): ["a", "b"]}
+        doc = bundleToDict(rules, words, {}, {}, {}, KeyConflicts(), self.legality, wordsFile="stock.json")
+        self.assertNotIn("words", doc)
+        self.assertEqual(doc["wordIndex"]["count"], 2)
+        decoder, _ranker = loadBundle(doc, words)
+        self.assertEqual(decoder.decode(((1, 2),))[0][0].units, ("mot",))
+        with self.assertRaises(ValueError):                       # the index was not passed
+            loadBundle(doc)
+        with self.assertRaises(ValueError):                       # another theory's index
+            loadBundle(doc, {((1, 2),): ["mot"], ((5,),): ["a", "c"]})
+
+    def test_fingerprint_ignores_order_and_duplicates(self) -> None:
+        a = {((1,),): ["x", "y"], ((2,),): ["z"]}
+        b = {((2,),): ["z", "z"], ((1,),): ["y", "x"]}
+        self.assertEqual(wordIndexFingerprint(a), wordIndexFingerprint(b))
+        self.assertNotEqual(wordIndexFingerprint(a), wordIndexFingerprint({((1,),): ["x"], ((2,),): ["z"]}))
+
+    def test_unit_strokes_keep_only_attach_particles(self) -> None:
+        rules = Rules(attaches=(AttachRule(("il", "n'"), "prefix", (3, 4)),))
+        doc = bundleToDict(rules, {((1,),): ["mot"]}, {"il": 1, "n'": 1, "mot": 1, "autre": 2}, {}, {},
+                           KeyConflicts(), self.legality)
+        self.assertEqual(doc["unitStrokes"], {"il": 1, "n'": 1})

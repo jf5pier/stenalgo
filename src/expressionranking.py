@@ -58,13 +58,19 @@ def normalizedSignature(sig: Signature) -> Signature:
     return tuple((p[0], tuple(_fix(u) for u in p[1])) + p[2:] for p in sig)
 
 
-def unitProbabilities(frequencies: Iterable[tuple[str, float]]) -> dict[str, float]:
-    """Unigram probabilities by spelling-normalized word, from (word, frequency) pairs."""
+def unitProbabilities(frequencies: Iterable[tuple[str, float]], limit: int | None = None) -> dict[str, float]:
+    """Unigram probabilities by spelling-normalized word, from (word, frequency) pairs. `limit`: keep only the
+    most frequent words (the probabilities stay those of the whole vocabulary); the rest read as `_UNSEEN`.
+    The ranking changes on 0.17% of the contested open-set mass at 5,000 words (scratch/rank_static_rule.py)."""
     mass: dict[str, float] = defaultdict(float)
     for word, freq in frequencies:
         mass[_fix(word)] += freq
     total = sum(mass.values()) or 1.0
-    return {w: f / total for w, f in mass.items()}
+    probabilities = {w: f / total for w, f in mass.items()}
+    if limit is not None:
+        top = sorted(probabilities, key=lambda w: (-probabilities[w], w))[:limit]
+        probabilities = {w: probabilities[w] for w in top}
+    return probabilities
 
 
 def composedReading(rules: Rules, tokens: tuple[Token, ...], traced: Composition) -> Signature:

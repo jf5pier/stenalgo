@@ -29,7 +29,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from itertools import combinations
-from typing import Callable, Iterable
+from typing import Callable, Iterable, Mapping
 
 from .expressionmodel import PREFIX, RESERVED_MARK_KEYS, SUFFIX, AttachRule, Rules
 from .elision import elisionAgrees, orderingExists
@@ -76,7 +76,7 @@ class ExpressionDecoder:
     `unitStrokes`: unit -> longform stroke count (a standalone needs a particle of >= 2 strokes).
     `isLegal`: optional chord-legality check on syllabic keys (the composer's `ctx.isLegal`)."""
 
-    def __init__(self, rules: Rules, words: dict[Strokes, Iterable[str]],
+    def __init__(self, rules: Rules, words: Mapping[Strokes, Iterable[str]],
                  unitStrokes: dict[str, int] | None = None,
                  isLegal: Callable[[Stroke], bool] | None = None,
                  conflicts: KeyConflicts | None = None) -> None:

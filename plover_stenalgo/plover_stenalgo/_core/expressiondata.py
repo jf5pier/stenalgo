@@ -4,14 +4,16 @@ Serialized data of the expression decoder (PLAN_2026-10-04-expression-decoder.md
 `ExpressionDecoder` and `ReadingRanker` need, as one JSON document, so a Plover plugin decodes without the
 pipeline (no lexicon, no pickles, no `Starboard`).
 
-Document (`FORMAT_VERSION`): ``rules`` (attaches, briefs, orderBan), ``words`` (outline -> surfaces, every theory
-outline), ``unitStrokes``, ``attested`` (outline, normalized reading, frequency, written text), ``unitProbabilities``,
+Document (`FORMAT_VERSION`): ``rules`` (attaches, briefs, orderBan), ``wordIndex`` (the stock Plover dictionary
+the outline -> word index is read from: its file name next to this one, a fingerprint of the index and its size;
+``words`` holds the index itself when no file is named), ``unitStrokes`` (attach particle words only), ``attested`` (outline, normalized reading, frequency, written text), ``unitProbabilities``,
 ``partners`` (pinky-diagonal key conflicts), ``legality`` (the layout's chord legality). A stroke is a list of
 key ids, an outline a list of strokes; both come back as sorted tuples.
 """
 
 from __future__ import annotations
 
+import hashlib
 import json
 from collections.abc import Iterable, Mapping
 from pathlib import Path
@@ -24,7 +26,7 @@ from .strokes import Stroke, Strokes
 
 __all__ = ["FORMAT_VERSION", "ChordLegality", "legalityFromStarboard", "bundleToDict", "loadBundle"]
 
-FORMAT_VERSION = 1
+FORMAT_VERSION = 2
 
 
 class ChordLegality:
@@ -70,6 +72,17 @@ def legalityFromStarboard(starboard: object) -> ChordLegality:
     return ChordLegality(partOf, {f: list(table[f]) for f in table.fingers})
 
 
+def wordIndexFingerprint(words: Mapping[Strokes, Iterable[str]]) -> str:
+    """Hash of an outline -> words index, independent of file formatting and order: the `.stenalgo` file records
+    it and the loader compares it with the index it read, so a dictionary built from another theory is refused."""
+    digest = hashlib.sha256()
+    for outline in sorted(words):
+        label = "/".join(",".join(map(str, stroke)) for stroke in outline)
+        for word in sorted(set(words[outline])):
+            digest.update(f"{label}\t{word}\n".encode("utf-8"))
+    return digest.hexdigest()
+
+
 def _stroke(stroke: Iterable[int]) -> list[int]:
     return sorted(stroke)
 
@@ -82,7 +95,10 @@ def _tuples(value):
 def bundleToDict(rules: Rules, words: Mapping[Strokes, Iterable[str]], unitStrokes: Mapping[str, int],
                  attested: Mapping[tuple[Strokes, tuple], float], unitProbabilities: Mapping[str, float],
                  conflicts: KeyConflicts, legality: ChordLegality,
-                 attestedText: Mapping[tuple[Strokes, tuple], str] | None = None) -> dict:
+                 attestedText: Mapping[tuple[Strokes, tuple], str] | None = None,
+                 wordsFile: str | None = None) -> dict:
+    """`wordsFile`: name (next to the written file) of the stock dictionary that holds the word index; the
+    document then stores its fingerprint instead of the 170,000 outlines."""
     outline = lambda o: [_stroke(s) for s in o]  # noqa: E731
     return {
         "format": FORMAT_VERSION,
@@ -94,8 +110,11 @@ def bundleToDict(rules: Rules, words: Mapping[Strokes, Iterable[str]], unitStrok
                        for r in rules.briefs],
             "orderBan": sorted([list(a), list(b)] for a, b in rules.orderBan),
         },
-        "words": [[outline(o), sorted(set(s))] for o, s in sorted(words.items())],
-        "unitStrokes": dict(sorted(unitStrokes.items())),
+        **({"wordIndex": {"file": wordsFile, "fingerprint": wordIndexFingerprint(words), "count": len(words)}}
+           if wordsFile else {"words": [[outline(o), sorted(set(s))] for o, s in sorted(words.items())]}),
+        # the decoder asks only about the words of attach particles (`_spans`): the rest is dead weight
+        "unitStrokes": {u: unitStrokes[u] for u in sorted({u for r in rules.attaches for u in r.expression})
+                        if u in unitStrokes},
         "attested": [[outline(o), sig, freq, (attestedText or {}).get((o, sig), "")]
                      for (o, sig), freq in sorted(attested.items(), key=repr)],
         "unitProbabilities": dict(sorted(unitProbabilities.items())),
@@ -104,8 +123,10 @@ def bundleToDict(rules: Rules, words: Mapping[Strokes, Iterable[str]], unitStrok
     }
 
 
-def loadBundle(source: "str | Path | dict") -> tuple[ExpressionDecoder, ReadingRanker]:
-    """The decoder and the ranker of a bundle (a path or an already parsed document)."""
+def loadBundle(source: "str | Path | dict", words: "Mapping[Strokes, Iterable[str]] | None" = None
+               ) -> tuple[ExpressionDecoder, ReadingRanker]:
+    """The decoder and the ranker of a bundle (a path or an already parsed document). A bundle that names a
+    word-index file needs `words`, the index read from it: it must match the recorded fingerprint."""
     data: dict
     if isinstance(source, dict):
         data = source
@@ -121,7 +142,14 @@ def loadBundle(source: "str | Path | dict") -> tuple[ExpressionDecoder, ReadingR
                                   a["family"], a["elision"]) for a in r["attaches"]),
         briefs=tuple(BriefRule(tuple(b["expression"]), outline(b["strokes"]), b["family"]) for b in r["briefs"]),
         orderBan=frozenset((tuple(a), tuple(b)) for a, b in r["orderBan"]))
-    words = {outline(o): s for o, s in data["words"]}
+    if "words" in data:
+        words = {outline(o): s for o, s in data["words"]}
+    else:
+        if words is None:
+            raise ValueError(f"the data names its word index ({data['wordIndex']['file']}): pass it as `words`")
+        if wordIndexFingerprint(words) != data["wordIndex"]["fingerprint"]:
+            raise ValueError(f"{data['wordIndex']['file']} is not the dictionary this data was built with "
+                             f"(word index fingerprint differs): regenerate both from the same theory")
     conflicts = KeyConflicts({int(k): frozenset(v) for k, v in data["partners"].items()})
     decoder = ExpressionDecoder(rules, words, data["unitStrokes"], ChordLegality.fromDict(data["legality"]),
                                 conflicts)

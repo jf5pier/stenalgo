@@ -1,12 +1,16 @@
 """Plover dictionary plugin: reads the expression outlines of Stenalgo's abbreviation layer.
 
 Registered as the `stenalgo` dictionary extension: add `plover_stenalgo_expressions.stenalgo` (written by
-`scratch/export_expression_data.py`) to Plover's dictionary list, BELOW the stock JSON dictionary so a stroke
-that is a plain word reads as that word. The dictionary answers only keys that decode, best reading first, as
+`scratch/export_expression_data.py`) to Plover's dictionary list, ABOVE the stock JSON dictionary. The two files
+travel together: the word index is read from the JSON named in the data (same folder), and a fingerprint
+refuses a JSON built from another theory. A stroke that is a plain word still reads as that word. The dictionary answers only keys that decode, best reading first, as
 ONE expression piece (a brief, a merged attach, a standalone keypress or a cluster); longer keys return None
 and the translator falls back to shorter windows, one piece at a time.
 """
 from __future__ import annotations
+
+import json
+import os
 
 from plover.steno_dictionary import StenoDictionary
 
@@ -16,6 +20,8 @@ from ._core.expressionranking import normalizedSignature, rankedDecode
 from ._core.strokes import canonicalizeStrokes
 from .render import isExpression, render
 from .stroke import parseOutline
+from .wordindex import readWordIndex
+
 
 CACHE_LIMIT = 50000
 
@@ -39,7 +45,12 @@ class StenalgoExpressionDictionary(StenoDictionary):
         self._cache: dict[tuple[str, ...], str | None] = {}
 
     def _load(self, filename: str) -> None:
-        self._decoder, self._ranker = loadBundle(filename)
+        with open(filename, encoding="utf-8") as fh:
+            data = json.load(fh)
+        words = None
+        if "words" not in data:       # the word index is the stock dictionary named next to this file
+            words = readWordIndex(os.path.join(os.path.dirname(os.path.abspath(filename)), data["wordIndex"]["file"]))
+        self._decoder, self._ranker = loadBundle(data, words)
         self._ban = self._decoder.rules.orderBan
         self._longest_key = self._decoder._maxLen
         self._cache = {}
