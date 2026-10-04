@@ -37,6 +37,20 @@ Reference before the suffix list (budget 15): 23.3% (3.328e9), 123 exceptions, 0
 - None of the adverbs (`bien`, `encore`, `toujours`, `déjà`, `trop`, `souvent`, `mal`) wins a slot at 15, 20, 25 or 30:
   each saves one stroke per occurrence with counts of 1e7-6e7, below `en`, `les`, `y`.
 
+## 2b. Selector order, order ban, 3+-grams as briefs (same day, budget 20; `scratch/que_run_orderban.log`)
+
+- Variant order = `freq + stackMass` (a stacking variant takes the bare slot) and, for gendered families, m/s, f/s,
+  m_or_f/s, m/p, f/p, m_or_f/p (`GENDER_NUMBER`, keyed by the variant's last unit). Alone: no change (the que family already
+  ranked `qu'` first; no default family is gendered, `le la l' les` only merge with the opt-in `FAMILY_MERGE=1`).
+- `orderBan` (`src/expressionrules.py`, `Rules.orderBan`, `planStream`): two attach keypresses unite commutatively, so
+  when the pool holds both orders of an adjacent pair the less frequent order is banned and its second particle stays a content
+  word. Bans found: `que + ce`, `s' + il`. This removes the `ce que` ~ `que ce` collision.
+- `MAX_ATTACH_UNITS = 2`: 3+-unit runs (`ce qu' il`) are no longer attach candidates; they compete as briefs.
+- Result: attaches alone 25.7% (3.672e9), 155 exceptions, 0 shadows, 0 collisions; with the 40 forced briefs 4.288e9 (budget 20
+  before: 25.6%, 160, 0, 1, 4.275e9). 24 selected rules in 20 slots.
+- Stage C is still needed: round 0 still found 2 collisions and the loop dropped 3 variants (`je me`, `il n'`, `il y` prefix) to
+  reach 0 by round 2. Those collisions are host-level (`il a` ~ `il n' a` ~ `il y a`), not the commutative pair kind.
+
 ## 3. Files
 
 - Budget-20 outputs: the tracked `scratch/expr-{rules,rules-proxy,rules-final,briefs,savings,composability}` (md5s below).

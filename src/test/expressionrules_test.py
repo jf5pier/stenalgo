@@ -94,6 +94,61 @@ class TestSuffixWords:
         assert (("déjà",), PREFIX) not in got
 
 
+class TestSelectorOrder:
+    """Q2 variant order: stacking mass first, gender/number order for gendered families."""
+
+    @staticmethod
+    def rule(unit, freq, family="f", position=PREFIX):
+        return ExprRule("attach", (unit,), position=position, family=family, freq=freq)
+
+    def test_gender_number_order_overrides_frequency(self):
+        from src.expressionrules import _familyGroups
+        rules = [self.rule("les", 50e6, "def"), self.rule("l'", 20e6, "def"),
+                 self.rule("la", 30e6, "def"), self.rule("le", 10e6, "def")]
+        got = [r.units[0] for r in _familyGroups(rules)[0]]
+        assert got == ["le", "la", "l'", "les"]
+
+    def test_family_with_a_non_gendered_variant_keeps_frequency_order(self):
+        from src.expressionrules import _familyGroups
+        rules = [self.rule("de", 50e6, "de"), self.rule("la", 60e6, "de")]
+        got = [r.units[0] for r in _familyGroups(rules)[0]]
+        assert got == ["la", "de"]
+
+    def test_stacking_variant_takes_the_bare_slot(self):
+        from src.expressionrules import _familyGroups, annotateStacking
+        que, qu = self.rule("que", 20e6, "que"), self.rule("qu'", 22e6, "que")
+        le = self.rule("le", 1e6, "le")
+        pool = [expr(["que", "le", "mot"], 30e6), expr(["qu'", "ils", "mot"], 1e6)]
+        annotateStacking([que, qu, le], pool)
+        assert que.stackMass == 30e6 and qu.stackMass == 0.0 and le.stackMass == 30e6
+        assert [r.units[0] for r in _familyGroups([que, qu, le])[0]] == ["que", "qu'"]
+
+
+class TestOrderBan:
+    def test_less_frequent_order_of_a_pair_is_banned(self):
+        from src.expressionrules import orderBan
+        ce = ExprRule("attach", ("ce",), position=PREFIX, family="ce", keys=(1,))
+        que = ExprRule("attach", ("que",), position=PREFIX, family="que", keys=(2,))
+        pool = [expr(["ce", "que", "mot"], 30e6), expr(["que", "ce", "mot"], 5e6)]
+        assert orderBan([ce, que], pool) == {(("que",), ("ce",))}
+
+    def test_one_order_only_is_not_banned(self):
+        from src.expressionrules import orderBan
+        ce = ExprRule("attach", ("ce",), position=PREFIX, family="ce", keys=(1,))
+        que = ExprRule("attach", ("que",), position=PREFIX, family="que", keys=(2,))
+        assert orderBan([ce, que], [expr(["ce", "que", "mot"], 30e6)]) == frozenset()
+
+    def test_attaches_do_not_stack_across_a_banned_pair(self):
+        from src.expressions import AttachRule, Rules, planStream, Token
+        rules = Rules(attaches=(AttachRule(("que",), PREFIX, (2,)),
+                                AttachRule(("ce",), PREFIX, (1,))),
+                      orderBan=frozenset({(("que",), ("ce",))}))
+        tokens = [Token("que", ((3,),)), Token("ce", ((4,),)), Token("mot", ((5,),))]
+        plan = planStream(rules, tokens)
+        kinds = [(e[0], e[1].expression if e[0] == "attach" else None) for e in plan.entries]
+        assert kinds[0] == ("attach", ("que",)) and kinds[1][0] == "content"
+
+
 class TestTouched:
     def test_position_edges(self):
         from src.expressionrules import matchedSpans

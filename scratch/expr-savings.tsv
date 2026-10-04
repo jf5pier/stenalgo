@@ -213,12 +213,12 @@ qui+a	7202986	2	1	1	0
 parce+que	7199901	2	2	0	1
 plutôt	7159659	2	2	0	0
 de+faire	7151140	2	1	1	0
-et+qui	7129984	2	1	1	0
+et+qui	7129984	2	2	0	2
 la+main	7129097	2	1	1	0
 et+en	7124766	2	1	1	0
 nous+avons	7119826	3	3	0	0
 elle+se	7116301	2	2	0	0
-ce+qu'+il	7114956	3	3	0	1
+ce+qu'+il	7114956	3	1	2	0
 est+un	7085973	2	2	0	0
 dernier	7044900	2	2	0	0
 aucune	7044743	2	2	0	0
@@ -434,7 +434,7 @@ et+de+l'	3963386	3	1	2	0
 sécurité	3923484	4	4	0	0
 il+n'+y+a	3918031	4	1	3	0
 plupart	3912285	2	2	0	0
-ce+que+je	3909311	3	2	1	1
+ce+que+je	3909311	3	1	2	0
 c'+est+une	3866550	3	2	1	0
 que+c'+est	3851020	3	1	2	0
 difficile	3832743	3	3	0	0
@@ -500,7 +500,7 @@ marche	2668147	1	1	0	0
 protection	2657088	3	3	0	0
 ce+n'+était	2650774	4	2	2	0
 novembre	2644056	2	2	0	0
-ce+que+tu	2641558	3	2	1	1
+ce+que+tu	2641558	3	1	2	0
 dans+leur	2636673	2	1	1	0
 et+qu'+il	2633304	3	2	1	1
 qu'+elle+avait	2611477	4	3	1	0
@@ -553,7 +553,7 @@ n'+ont+pas	2147479	3	1	2	0
 qu'+elle+ne	2145462	3	2	1	1
 du+tout	2138087	2	2	0	0
 ne+sais+pas	2129061	4	2	2	0
-que+ce+soit	2108231	4	2	2	0
+que+ce+soit	2108231	4	3	1	0
 c'+est+à	2105419	3	2	1	1
 c'+est+l'	2104810	3	2	1	1
 comme+ça	2086950	2	2	0	0
@@ -616,7 +616,7 @@ ne+peut+pas	1700085	3	1	2	0
 qu'+il+se	1694475	3	1	2	0
 n'+est+plus	1679793	3	2	1	0
 comité	1677219	3	3	0	0
-de+ce+qui	1674423	3	2	1	1
+de+ce+qui	1674423	3	1	2	0
 dessous	1667610	2	2	0	0
 de+l'+histoire	1665290	4	2	2	0
 en+cas+de	1665176	3	3	0	1
@@ -807,7 +807,7 @@ utilise	835206	3	3	0	0
 magasin	828411	3	3	0	0
 témoignage	823059	3	3	0	0
 prochain	822422	2	2	0	0
-qu'+est+ce+que+tu	813653	5	3	2	1
+qu'+est+ce+que+tu	813653	5	2	3	0
 résulte	813461	2	2	0	0
 il+y+a+une	809157	4	3	1	0
 totalité	801596	4	4	0	0
@@ -830,7 +830,7 @@ n'+y+avait+pas	747427	5	2	3	0
 à+la+fin+du	745206	4	2	2	0
 c'+est+ça	744793	3	2	1	0
 apporte	742133	2	2	0	0
-tout+ce+qu'+il	738510	4	4	0	1
+tout+ce+qu'+il	738510	4	2	2	0
 excellent	737136	3	3	0	0
 commercial	729534	3	3	0	0
 probable	728422	3	3	0	0
@@ -862,14 +862,14 @@ du+point+de+vue	647735	5	4	1	0
 bénéfice	647193	3	3	0	0
 dommage	645738	2	2	0	0
 mécanique	640568	3	3	0	0
-quoi+que+ce+soit	640311	5	3	2	0
+quoi+que+ce+soit	640311	5	4	1	0
 de+temps+en+temps	639982	4	3	1	0
 ce+que+c'+est	638792	4	1	3	0
 étudiant	638342	3	3	0	0
 à+l'+égard+de	631104	5	3	2	1
 droits+de+l'+homme	630670	5	3	2	0
 paragraphe	629019	3	3	0	0
-de+ce+qu'+il	625469	4	1	3	0
+de+ce+qu'+il	625469	4	2	2	0
 bien+être	625148	2	2	0	0
 combattre	623811	2	2	0	0
 répète	618079	2	2	0	0
@@ -913,7 +913,7 @@ si+ce+n'+est	520332	4	2	2	0
 proportion	518069	3	3	0	0
 il+n'+y+avait+pas	517845	6	2	4	0
 de+ça	512360	2	1	1	0
-que+ce+n'+est	506744	4	1	3	0
+que+ce+n'+est	506744	4	2	2	0
 excellence	505110	3	3	0	0
 ce+qui+s'+est	502738	4	1	3	0
 qu'+il+n'+est	500948	4	1	3	0
@@ -950,7 +950,7 @@ compagne	440875	2	2	0	0
 architecte	435652	3	3	0	0
 ce+qui+s'+est+passé	424148	6	3	3	0
 régulière	423476	3	3	0	0
-que+ce+n'+est+pas	414756	5	1	4	0
+que+ce+n'+est+pas	414756	5	2	3	0
 organise	406619	3	3	0	0
 camion	405641	2	2	0	0
 de+l'+autre+côté+de	403107	6	4	2	1
@@ -984,7 +984,7 @@ qu'+il+n'+est+pas	334980	5	1	4	0
 patiente	332969	2	2	0	0
 l'+autre+côté+de+la	332480	6	4	2	0
 fédéral	332308	3	3	0	0
-s'+il+vous+plaît	330385	4	2	2	0
+s'+il+vous+plaît	330385	4	3	1	0
 jeta+un+coup+d'+œil	327478	6	5	1	0
 qu'+il+y+a+de	326546	5	3	2	1
 respecte	325253	2	2	0	0
@@ -1002,7 +1002,7 @@ finance	297183	2	2	0	0
 il+n'+y+a+que	295958	5	2	3	1
 spécifiquement	294636	5	5	0	0
 certificat	291861	4	4	0	0
-jusqu'à+ce+qu'+il	291525	5	5	0	1
+jusqu'à+ce+qu'+il	291525	5	3	2	0
 ce+qui+n'+est+pas	290544	5	2	3	1
 maintes	288724	1	1	0	0
 à+la+fin+de+la	286729	5	2	3	0
@@ -1014,7 +1014,7 @@ qu'+est+ce+que+c'+est	274232	6	2	4	0
 crayon	273954	2	2	0	0
 intelligente	273164	4	4	0	0
 médicament	269795	4	4	0	0
-que+ce+n'+était+pas	268812	6	2	4	0
+que+ce+n'+était+pas	268812	6	3	3	0
 recommande	268793	3	3	0	0
 en+ce+qui+concerne+les	267558	6	4	2	0
 n'+y+avait+pas+de	267206	6	3	3	1

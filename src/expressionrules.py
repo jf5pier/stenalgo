@@ -77,6 +77,7 @@ PAIR_BONUS_WEIGHT = 0.0
 # Q2 families: one base keypress, variants separated by */# selector keys —
 # at most 4 distinguishable variants per family (selectors: none, *, #, *#).
 MAX_FAMILY_VARIANTS = 4
+MAX_ATTACH_UNITS = 2     # user decision 2026-10-04: 3+-unit expressions are briefs
 # Brief families are not selector-bound: their variants are standalone
 # strokes, so the cap is the learnability bound, not the selector count
 # (user decision 2026-10-02: the que+pronoun family briefs its 8 subject
@@ -120,6 +121,7 @@ class ExprRule:
     beta: tuple[tuple[int, ...], ...] | None = None  # brief strokes (Stage B)
     score: float = 0.0              # the accepted marginal total
     exactDone: bool = False         # Stage B ran (score is exact, not proxy)
+    stackMass: float = 0.0          # pool mass where this rule meets another family's rule
 
     def proxyBrief(self) -> BriefRule:
         """The matching-only brief driving `planStream` in the proxy stage
@@ -155,10 +157,90 @@ SAMPLE_EXPRESSIONS = 30   # stage-1 sample per family (affix SAMPLE_CARRIERS spi
 REPAIR_CANDIDATES = 20    # sample survivors fully evaluated; clean ones are repair candidates
 
 
+# Gender/number order of a gendered family's selector slots (user decision
+# 2026-10-04): m/s, f/s, m_or_f/s, m/p, f/p, m_or_f/p — "le la l' les" is the
+# order bare, `*`, `#`, `*#`. Keyed by the LAST unit of a variant ("de la"
+# orders as `la`); a family orders this way only when EVERY variant has an entry.
+_GN_ORDER = (("m", "s"), ("f", "s"), ("mf", "s"), ("m", "p"), ("f", "p"), ("mf", "p"))
+GENDER_NUMBER: dict[str, tuple[str, str]] = {
+    "le": ("m", "s"), "la": ("f", "s"), "l'": ("mf", "s"), "les": ("mf", "p"),
+    "un": ("m", "s"), "une": ("f", "s"), "des": ("mf", "p"),
+    "du": ("m", "s"), "au": ("m", "s"), "aux": ("mf", "p"),
+    "ce": ("m", "s"), "cet": ("m", "s"), "cette": ("f", "s"), "ces": ("mf", "p"),
+    "mon": ("m", "s"), "ma": ("f", "s"), "mes": ("mf", "p"),
+    "ton": ("m", "s"), "ta": ("f", "s"), "tes": ("mf", "p"),
+    "son": ("m", "s"), "sa": ("f", "s"), "ses": ("mf", "p"),
+    "notre": ("mf", "s"), "nos": ("mf", "p"), "votre": ("mf", "s"),
+    "vos": ("mf", "p"), "leur": ("mf", "s"), "leurs": ("mf", "p"),
+}
+
+
+def genderNumberRank(rule: ExprRule) -> int | None:
+    """Position of the rule's last unit in `_GN_ORDER`, None when it is not a
+    gendered/numbered word."""
+    gn = GENDER_NUMBER.get(rule.units[-1])
+    return _GN_ORDER.index(gn) if gn is not None else None
+
+
+def annotateStacking(selected: list[ExprRule], pool: list[PoolExpression]) -> None:
+    """Fill `stackMass` on every selected attach rule: the pool frequency of
+    the expressions where one of its matches sits immediately next to a match
+    of a rule of ANOTHER family (counted once per expression). Only a stacking
+    variant risks a selector collision (its */# merges into its neighbour's
+    chord), so it is the one that should keep the bare slot: Q2 orders a
+    family's variants by `freq + stackMass`, not by freq alone."""
+    attaches = [r for r in selected if r.kind == "attach"]
+    for r in attaches:
+        r.stackMass = 0.0
+    for expr in pool:
+        spans = [(r, matchedSpans(r, expr.units)) for r in attaches]
+        spans = [(r, sp) for r, sp in spans if sp]
+        if len(spans) < 2:
+            continue
+        for r, sp in spans:
+            if any(o is not r and o.family != r.family
+                   and any(a[1] == b[0] or b[1] == a[0]
+                           for a in sp for b in osp)
+                   for o, osp in spans):
+                r.stackMass += expr.freq
+
+
+def orderBan(selected: list[ExprRule], pool: list[PoolExpression],
+             ) -> frozenset[tuple[tuple[str, ...], tuple[str, ...]]]:
+    """Ordered pairs of selected attach rules that must not stack. Two
+    attaches' keypresses unite commutatively, so when the pool holds BOTH
+    orders of an adjacent pair (`ce que` and `que ce`) the outline would
+    collide: the less frequent order is banned (ties: the later one in
+    unit order); its second particle then stays a content word. Pairs seen
+    in one order only are unaffected."""
+    attaches = [r for r in selected if r.kind == "attach" and r.keys is not None]
+    pairFreq: dict[tuple[tuple[str, ...], tuple[str, ...]], float] = {}
+    for expr in pool:
+        spans = [(r, matchedSpans(r, expr.units)) for r in attaches]
+        spans = [(r, sp) for r, sp in spans if sp]
+        for a, spA in spans:
+            for b, spB in spans:
+                if a is not b and any(x[1] == y[0] for x in spA for y in spB):
+                    key = (a.units, b.units)
+                    pairFreq[key] = pairFreq.get(key, 0.0) + expr.freq
+    ban: set[tuple[tuple[str, ...], tuple[str, ...]]] = set()
+    for (a, b), freq in pairFreq.items():
+        reverse = pairFreq.get((b, a))
+        if reverse is not None and (freq, a) < (reverse, b):
+            ban.add((a, b))
+    return frozenset(ban)
+
+
 def _familyGroups(selected: list[ExprRule]) -> list[list[ExprRule]]:
     """Attach rules grouped one group per budget slot: a family (head +
     absorbed variants) or a standalone rule. Briefs are NOT Stage B's job
-    (their strokes come from the brief-derivation stage)."""
+    (their strokes come from the brief-derivation stage).
+
+    Variant order = selector order (bare, `*`, `#`, `*#`). The variants that
+    fit the selector budget are the highest by `freq + stackMass` (a variant
+    that stacks with another family's rule takes the bare slot); then, when
+    every one of them is a gendered/numbered word, they are reordered by
+    `_GN_ORDER` (ties by the same key)."""
     groups: dict[str, list[ExprRule]] = {}
     order: list[str] = []
     for rule in selected:
@@ -170,7 +252,14 @@ def _familyGroups(selected: list[ExprRule]) -> list[list[ExprRule]]:
             order.append(key)
         groups[key].append(rule)
     for key in order:
-        groups[key].sort(key=lambda r: (-r.freq, r.units, r.position))
+        group = groups[key]
+        group.sort(key=lambda r: (-(r.freq + r.stackMass), r.units, r.position))
+        head = group[:len(SELECTORS)]
+        ranks = [genderNumberRank(r) for r in head]
+        if len(head) > 1 and all(rank is not None for rank in ranks):
+            head.sort(key=lambda r: (genderNumberRank(r), -(r.freq + r.stackMass),
+                                     r.units, r.position))
+            group[:len(head)] = head
     return [groups[key] for key in order]
 
 
@@ -498,7 +587,8 @@ def auditExpressionRules(selected: list[ExprRule], pool: list[PoolExpression],
         attaches=tuple(r.toAttach() for r in selected
                        if r.kind == "attach" and r.keys is not None),
         briefs=tuple(r.toBrief() for r in selected
-                     if r.kind == "brief" and r.beta is not None))
+                     if r.kind == "brief" and r.beta is not None),
+        orderBan=orderBan(selected, pool))
     audit = ExprAudit()
     byOutline: dict[Strokes, list[tuple[str, ...]]] = {}
     for expr in pool:
@@ -597,8 +687,8 @@ def attachCandidates(pool: list[PoolExpression], particles: frozenset[str],
     poolByUnits = {e.units: e for e in pool}
     out: list[ExprRule] = []
     for (units, position), freq in evidence.items():
-        if len(units) > 6:      # a six-unit particle run is already a brief's job
-            continue
+        if len(units) > MAX_ATTACH_UNITS:   # a 3+-unit run is a brief's job (it
+            continue                        # reuses the parts' phonemes)
         standalone = poolByUnits.get(units)
         # A standalone entry's own count SUPERSEDES the summed evidence: every
         # occurrence of "de la" is a potential use, and the summed contexts
@@ -923,4 +1013,5 @@ def selectExpressionRules(
         result.curve.append(sum(currentSaving[e] * pool[e].freq
                                 for e in range(len(pool))))
     result.selected = pruneRedundantVariants(selected, pool, savingAt)
+    annotateStacking(result.selected, pool)
     return result

@@ -171,6 +171,12 @@ class BriefRule:
 class Rules:
     briefs: tuple[BriefRule, ...] = ()
     attaches: tuple[AttachRule, ...] = ()
+    # Ordered pairs (first expression, second expression) of adjacent attaches
+    # that may NOT both attach: the union of two attach keypresses is
+    # commutative, so `ce que` and `que ce` would write the same chord. The
+    # second particle of a banned pair is left as a content token (the first
+    # attaches onto its longform stroke). See `orderBan` in src/expressionrules.py.
+    orderBan: frozenset[tuple[tuple[str, ...], tuple[str, ...]]] = frozenset()
 
     def __post_init__(self) -> None:
         for rule in self.briefs + self.attaches:
@@ -228,10 +234,13 @@ def planStream(rules: Rules, tokens: list[Token]) -> StreamPlan:
                    key=lambda item: (-len(item[0]), item[0], item[1].position))
     marks: dict[int, tuple[int, AttachRule]] = {}
     i = 0
+    lastEnd, lastExpression = -1, ()      # the previous mark, for the order ban
     while i < len(tokens):
         for expression, rule in table:
             end = i + len(expression)
             if end <= len(tokens) and tuple(t.unit for t in tokens[i:end]) == expression:
+                if lastEnd == i and (lastExpression, expression) in rules.orderBan:
+                    continue
                 # a prefix rule with no token after it (a trailing particle) yields to
                 # the suffix rule of the same expression, which has a host before it
                 if rule.position == PREFIX and end == len(tokens) and i > 0:
@@ -240,6 +249,7 @@ def planStream(rules: Rules, tokens: list[Token]) -> StreamPlan:
                     if twin is not None:
                         rule = twin
                 marks[i] = (end, rule)
+                lastEnd, lastExpression = end, rule.expression
                 i = end
                 break
         else:

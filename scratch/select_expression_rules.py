@@ -21,7 +21,7 @@ from scratch.build_expr_candidates import resolveTerm  # noqa: E402
 from src.affixes import PREFIX, SimContext  # noqa: E402
 from src.expressionrules import (EXPR_RULE_BUDGET, PoolExpression,  # noqa: E402
                                  attachCandidates, briefCandidates,
-                                 selectExpressionRules)
+                                 orderBan, selectExpressionRules)
 from src.expressions import Token  # noqa: E402
 from src.keyboard import Starboard  # noqa: E402
 from src.word import GramCat, Word  # noqa: E402
@@ -156,6 +156,12 @@ def main() -> None:
           f"{len(families)} families)")
 
     result = selectExpressionRules(candidates, pool, budget=budget)
+    from src.expressionrules import _familyGroups
+    for group in _familyGroups(result.selected):
+        if len(group) > 1:
+            print("selector order " + (group[0].family or "?") + ": " + ", ".join(
+                f"{r.position[0]}:{' '.join(r.units)} (freq {r.freq:.2e}, stack {r.stackMass:.2e})"
+                for r in group))
 
     # Stage B: real keypresses over the real collision index.
     import time
@@ -236,7 +242,8 @@ def main() -> None:
             attaches=tuple(r.toAttach() for r in result.selected
                            if r.kind == "attach" and r.keys is not None),
             briefs=tuple(r.toBrief() for r in result.selected
-                         if r.kind == "brief" and r.beta is not None))
+                         if r.kind == "brief" and r.beta is not None),
+            orderBan=orderBan(result.selected, pool))
         banned: set[str] = set()
         progressed = False
         for outline, exprs in audit.collisions.items():
@@ -354,7 +361,11 @@ def main() -> None:
     rulesJoint = Rules(
         attaches=tuple(r.toAttach() for r in result.selected
                        if r.kind == "attach" and r.keys is not None),
-        briefs=tuple(r.toBrief() for r in result.selected if r.kind == "brief"))
+        briefs=tuple(r.toBrief() for r in result.selected if r.kind == "brief"),
+        orderBan=orderBan(result.selected, pool))
+    print(f"order ban: {len(rulesJoint.orderBan)} ordered pairs: "
+          + "; ".join(f"{' '.join(a)} + {' '.join(b)}"
+                      for a, b in sorted(rulesJoint.orderBan)))
     with open(REPO / "scratch" / "expr-savings.tsv", "w", encoding="utf-8") as fh:
         fh.write("expr\tfreq\tlongform\tcomposed\tsaving\texceptions\n")
         for expr in pool:
@@ -520,7 +531,8 @@ def main() -> None:
         briefs.append((expr, stroke, label))
     briefRules = tuple(BriefRule(e.units, (st,)) for e, st, _l in briefs)
     withBriefs = Rules(attaches=rulesJoint.attaches,
-                       briefs=rulesJoint.briefs + briefRules)
+                       briefs=rulesJoint.briefs + briefRules,
+                       orderBan=rulesJoint.orderBan)
     savingBrief = 0.0
     bShadows: list = []
     byOutline: dict = {}
