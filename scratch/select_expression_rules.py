@@ -165,6 +165,25 @@ def main() -> None:
           f"{sum(1 for c in candidates if c.kind == 'attach')} attaches, "
           f"{len(families)} families)")
 
+    if os.environ.get("ELISION_PAIRS"):
+        # EXPERIMENT (user decision 2026-10-04): an elided form (qu' d' n' c' l' j'...) shares its
+        # base form's chord and selector slot; the decoder reads the host (src/elision.py)
+        from src.elision import BASE, ELIDED, ELISION_BASES, ELISION_PAIRS
+        famOfBase = {c.units: c.family for c in candidates
+                     if c.kind == "attach" and c.position == PREFIX and len(c.units) == 1
+                     and c.units[0] in ELISION_BASES}
+        for c in candidates:
+            if c.kind != "attach" or c.position != PREFIX or len(c.units) != 1:
+                continue
+            if c.units[0] in ELISION_PAIRS:
+                c.elision = ELIDED
+                c.elisionBase = (ELISION_PAIRS[c.units[0]],)
+                if famOfBase.get(c.elisionBase):
+                    c.family = famOfBase[c.elisionBase]
+            elif c.units[0] in ELISION_BASES:
+                c.elision = BASE
+        print("elision pairs:", sorted(" ".join(c.units) + f"({c.elision})" for c in candidates
+                                       if c.elision))
     result = selectExpressionRules(candidates, pool, budget=budget,
                                       siblingPick=os.environ.get("SIBLING_PICK", "freq"))
     if os.environ.get("STAGE_A_ONLY"):
@@ -202,8 +221,25 @@ def main() -> None:
     keypresses = enumerateKeypresses(starboard, realCtx)
     print(f"{len(keypresses)} legal base keypresses ({time.time() - t:.0f}s)")
     t = time.time()
+    hostIndex = None
+    if os.environ.get("THEORY_SHADOW", "1") != "0":
+        # user decision 2026-10-04: theory-wide shadow term in Stage B (THEORY_SHADOW=0 = the old pool-only run)
+        from collections import defaultdict
+
+        from src.expressionrules import HostIndex
+        hostWeights: dict = defaultdict(float)
+        for word, alts in theory.items():
+            for alt in alts:
+                hostWeights[canonicalizeStrokes(alt)] += word.frequency
+        hostIndex = HostIndex(hostWeights)
+    shadowKwargs = {} if "SHADOW_MAX_RATE" not in os.environ else {
+        "shadowMaxRate": float(os.environ["SHADOW_MAX_RATE"])}
     keypressReport = assignKeypresses(result.selected, pool, realCtx, keypresses,
-                                 repairCandidates=200)
+                                      repairCandidates=200, hosts=hostIndex, **shadowKwargs)
+    if hostIndex is not None:
+        for fam, info in keypressReport.items():
+            print(f"  Stage B {fam!r}: base {info.get('base')} theory shadow rate "
+                  f"{info.get('theoryRate', float('nan')):.5f}, {len(info.get('alternatives', []))} candidates")
     print(f"Stage B assignment done ({time.time() - t:.0f}s)")
 
     # Stage B for the selected BRIEF rules (2026-10-02: the que families'
@@ -331,11 +367,15 @@ def main() -> None:
                         current = tuple(k for k in drop.keys if k in marks)
                         oldSelector = drop.selector
                         fixed = False
+                        # an elision partner shares the chord: the whole slot moves together
+                        mates = [r for r in result.selected if r.kind == "attach"
+                                 and r.family == drop.family and r.slot() == drop.slot()]
                         for sel in SELECTORS:
                             if sel == current:
                                 continue
-                            drop.selector = sel
-                            drop.keys = tuple(sorted(set(base) | set(sel)))
+                            for r in mates:
+                                r.selector = sel
+                                r.keys = tuple(sorted(set(base) | set(sel)))
                             trial = auditExpressionRules(result.selected, pool, realCtx)
                             if len(trial.collisions) < len(audit.collisions) \
                                     and len(trial.shadows) <= len(audit.shadows):
@@ -347,8 +387,9 @@ def main() -> None:
                         if fixed:
                             progressed = True
                             continue
-                        drop.selector = oldSelector
-                        drop.keys = tuple(sorted(set(base) | set(current)))
+                        for r in mates:
+                            r.selector = oldSelector
+                            r.keys = tuple(sorted(set(base) | set(current)))
                     if os.environ.get("KEEP_COLLAPSED"):
                         # EXPERIMENT (2026-10-04): keep the colliding variants and
                         # report what they cost in collisions
@@ -443,7 +484,8 @@ def main() -> None:
     finalRules = [
         {"kind": r.kind, "family": r.family, "units": list(r.units),
          "position": r.position, "keys": list(r.keys or ()),
-         "beta": [list(st) for st in (r.beta or ())], "freq": r.freq}
+         "beta": [list(st) for st in (r.beta or ())], "freq": r.freq,
+         "elision": r.elision, "elisionBase": list(r.elisionBase)}
         for r in result.selected]
     with open(REPO / "scratch" / "expr-rules-final.json", "w", encoding="utf-8") as fh:
         json.dump({"rules": finalRules, "chosen": {k: list(v)
@@ -643,6 +685,11 @@ def main() -> None:
             bShadows.append((expr.units, traced.strokes))
         byOutline.setdefault(traced.strokes, []).append(expr.units)
     bCollisions = {o: us for o, us in byOutline.items() if len(set(us)) > 1}
+    elidedSurfaces = {r.units[0]: r.elisionBase[0] for r in result.selected
+                      if r.kind == "attach" and r.elision == "elided" and r.elisionBase}
+    if elidedSurfaces:      # pool fragments differing only by a trailing elision form (src/expressionrules.py audit)
+        bCollisions = {o: us for o, us in bCollisions.items()
+                       if len({tuple(elidedSurfaces.get(u, u) for u in x) for x in set(us)}) > 1}
     with open(REPO / "scratch" / "expr-briefs.tsv", "w", encoding="utf-8") as out:
         out.write("expr\tfreq\tderivation\tstroke\trtfcre\t"
                   "longform_strokes\tstrokes_saved\n")

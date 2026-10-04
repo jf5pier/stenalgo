@@ -97,6 +97,7 @@ from dataclasses import dataclass, field
 
 from src.affixes import PREFIX, SUFFIX, SimContext, hasBoundaryRisk
 from src.ambiguitychecker import HASH_KEY, STAR_KEY
+from src.elision import elisionAgrees
 from src.keyboard import Stroke, Strokes, canonicalizeStrokes
 
 __all__ = [
@@ -144,6 +145,7 @@ class AttachRule:
     position: str                     # src.affixes.PREFIX or SUFFIX
     keypress: tuple[int, ...]         # kappa; */# selector keys included
     family: str = ""                  # Q2 learnable unit; variants share it
+    elision: str = ""                 # "base" | "elided": one chord for the pair, host decides (src/elision.py)
 
     def __post_init__(self) -> None:
         if not self.expression:
@@ -327,6 +329,13 @@ def composeOutlineTraced(rules: Rules, tokens: tuple[Token, ...],
             target = mergeTarget(span, position)
             if target is None:
                 results[index] = (EXCEPTION, "noNeighbour")
+                continue
+            if rule.elision and span[1] < len(tokenList) \
+                    and not elisionAgrees(rule.elision, tokenList[span[1]].unit):
+                # elision pair: the chord is shared by the base and the elided form and the
+                # decoder reads the word written right after the particle (the next token, which
+                # may itself be an attach particle: `ce n' est`), so a disagreement cannot merge
+                results[index] = (EXCEPTION, "elision")
                 continue
             neighbourIndex = 0 if position == PREFIX else len(outlines[target]) - 1
             neighbour = outlines[target][neighbourIndex]

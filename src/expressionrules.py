@@ -32,8 +32,9 @@ is Phase 2 Stage B; `ExprRule.keys`/`beta` stay None until then.
 from __future__ import annotations
 
 from bisect import bisect_left
-from collections.abc import Mapping
+from collections.abc import Iterable, Mapping
 from dataclasses import dataclass, field
+from itertools import combinations
 
 from src.affixes import PREFIX, SUFFIX, SimContext
 from src.affixrules import MAX_EXCEPTION_RATE
@@ -123,6 +124,13 @@ class ExprRule:
     exactDone: bool = False         # Stage B ran (score is exact, not proxy)
     stackMass: float = 0.0          # pool mass where this rule meets another family's rule
     selector: tuple[int, ...] | None = None   # Stage C override of the */# selector (None = by order)
+    elision: str = ""               # ELISION_PAIRS experiment: "base" | "elided" (src/elision.py)
+    elisionBase: tuple[str, ...] = ()   # elided only: the base form's units, the shared slot's name
+
+    def slot(self) -> tuple[str, ...]:
+        """The selector slot this rule occupies: an elided form shares its base form's slot (one
+        chord for the pair), every other rule is its own slot."""
+        return self.elisionBase if self.elision == "elided" and self.elisionBase else self.units
 
     def proxyBrief(self) -> BriefRule:
         """The matching-only brief driving `planStream` in the proxy stage
@@ -134,7 +142,7 @@ class ExprRule:
         """The matching-only attach rule for the proxy stage (placeholder
         kappa)."""
         assert self.kind == "attach"
-        return AttachRule(self.units, self.position, _PLACEHOLDER_KEYS, self.family)
+        return AttachRule(self.units, self.position, _PLACEHOLDER_KEYS, self.family, self.elision)
 
     def toBrief(self) -> BriefRule:
         """The Phase 1 brief for real composition (after Stage B's brief
@@ -146,7 +154,73 @@ class ExprRule:
         """The Phase 1 attach rule for real composition (after Stage B's
         keypress assignment)."""
         assert self.kind == "attach" and self.keys is not None
-        return AttachRule(self.units, self.position, self.keys, self.family)
+        return AttachRule(self.units, self.position, self.keys, self.family, self.elision)
+
+
+# Theory-wide shadow term (user decision 2026-10-04, after the decoder study in
+# RESULTS_2026-10-04-expression-decoder.md): the pool only holds the hosts that occur in the
+# 1,151 candidate n-grams, but an attach merges with ANY word. A chord such as `ce` (key 5)
+# merges with almost every host and often lands on another word's outline (`est` + `ce` =
+# `vais`), which a decoder reads as the plain word. Stage B therefore also measures, per
+# candidate chord, the share of THEORY hosts whose merge is a live outline (`HostIndex`).
+THEORY_SHADOW_ALPHA = 5.0       # score penalty per estimated shadowed occurrence (a misread is worse than an exception)
+THEORY_SHADOW_MAX_RATE = 0.002  # gate: share of the theory's host frequency a family's variants may shadow
+
+
+def _mask(keys: Iterable[int]) -> int:
+    m = 0
+    for k in keys:
+        m |= 1 << k
+    return m
+
+
+class HostIndex:
+    """Every theory outline as a potential merge host, weighted by word frequency.
+    `shadowRate(position, keypress)`: the probability, over hosts drawn by frequency, that
+    merging `keypress` (strict: no shared syllabic key, selectors transparent) into the host's
+    first (prefix) or last (suffix) stroke gives a LIVE outline of another word. Computed from
+    the live side: every first/last stroke L containing the chord, minus the chord (with each
+    subset of the chord's selectors kept: a host that already carries `*`/`#` swallows it),
+    is a host stroke whose tail must also be a live tail of L."""
+
+    def __init__(self, weights: Mapping[Strokes, float]) -> None:
+        self.total = sum(weights.values()) or 1.0
+        self._first: dict[int, dict[tuple[int, ...], float]] = {}
+        self._last: dict[int, dict[tuple[int, ...], float]] = {}
+        for outline, weight in weights.items():
+            masks = tuple(_mask(stroke) for stroke in outline)
+            tails = self._first.setdefault(masks[0], {})
+            tails[masks[1:]] = tails.get(masks[1:], 0.0) + weight
+            heads = self._last.setdefault(masks[-1], {})
+            heads[masks[:-1]] = heads.get(masks[:-1], 0.0) + weight
+        self._cache: dict[tuple[str, tuple[int, ...]], float] = {}
+
+    def shadowRate(self, position: str, keypress: Iterable[int]) -> float:
+        keys = tuple(sorted(keypress))
+        cached = self._cache.get((position, keys))
+        if cached is not None:
+            return cached
+        index = self._first if position == PREFIX else self._last
+        selectors = [k for k in keys if k in RESERVED_MARK_KEYS]
+        ksyl = _mask(k for k in keys if k not in RESERVED_MARK_KEYS)
+        ksel = _mask(selectors)
+        total = 0.0
+        subsets = [_mask(c) for r in range(len(selectors) + 1)
+                   for c in combinations(selectors, r)]
+        for stroke, others in index.items():
+            if stroke & ksyl != ksyl or stroke & ksel != ksel:
+                continue
+            core = stroke & ~ksyl & ~ksel
+            for kept in subsets:
+                hostTails = index.get(core | kept)
+                if hostTails is None:
+                    continue
+                for tail, weight in hostTails.items():
+                    if tail in others:
+                        total += weight
+        rate = total / self.total
+        self._cache[(position, keys)] = rate
+        return rate
 
 
 # Stage B (keypress assignment). Q2: families share ONE base keypress on the
@@ -255,32 +329,62 @@ def _familyGroups(selected: list[ExprRule]) -> list[list[ExprRule]]:
     for key in order:
         group = groups[key]
         group.sort(key=lambda r: (-(r.freq + r.stackMass), r.units, r.position))
-        head = group[:len(SELECTORS)]
+        head = fitVariants(group)
         ranks = [genderNumberRank(r) for r in head]
         if len(head) > 1 and all(rank is not None for rank in ranks):
             head.sort(key=lambda r: (genderNumberRank(r), -(r.freq + r.stackMass),
                                      r.units, r.position))
-            group[:len(head)] = head
+        headIds = {id(r) for r in head}
+        group[:] = head + [r for r in group if id(r) not in headIds]
     return [groups[key] for key in order]
+
+
+def fitVariants(group: list[ExprRule],
+                selectors: tuple[tuple[int, ...], ...] = SELECTORS) -> list[ExprRule]:
+    """The rules of a family group that get a selector, in group order: one selector per SLOT
+    (an elision pair shares one), so a partner never costs a selector."""
+    fit: list[ExprRule] = []
+    slots: list[tuple[str, ...]] = []
+    for rule in group:
+        slot = rule.slot()
+        if slot in slots:
+            fit.append(rule)
+        elif len(slots) < len(selectors):
+            slots.append(slot)
+            fit.append(rule)
+    return fit
 
 
 def variantSelectors(variants: list[ExprRule],
                      selectors: tuple[tuple[int, ...], ...] = SELECTORS,
                      ) -> list[tuple[int, ...]]:
     """The selector of each variant, in order: a variant with a Stage C
-    `selector` override keeps it; the others take the remaining selectors in
-    order (so the default, no override, is exactly `selectors[:n]`)."""
+    `selector` override keeps it (its whole slot does); the others take the
+    remaining selectors in order, one per slot (so the default, no override
+    and no elision pair, is exactly `selectors[:n]`)."""
     pinned = {r.selector for r in variants if r.selector is not None}
     free = iter(sel for sel in selectors if sel not in pinned)
-    return [r.selector if r.selector is not None else next(free)
-            for r in variants]
+    bySlot: dict[tuple[str, ...], tuple[int, ...]] = {}
+    for r in variants:
+        if r.selector is not None:
+            bySlot[r.slot()] = r.selector
+    for r in variants:
+        if r.slot() not in bySlot:
+            bySlot[r.slot()] = next(free)
+    return [bySlot[r.slot()] for r in variants]
 
 
 def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
                      ctx: SimContext, keypresses: list[Stroke],
                      selectors: tuple[tuple[int, ...], ...] = SELECTORS,
-                     repairCandidates: int = REPAIR_CANDIDATES) -> dict:
-    """Stage B: give every selected attach rule a real keypress. Per family:
+                     repairCandidates: int = REPAIR_CANDIDATES,
+                     hosts: HostIndex | None = None,
+                     shadowAlpha: float = THEORY_SHADOW_ALPHA,
+                     shadowMaxRate: float = THEORY_SHADOW_MAX_RATE) -> dict:
+    """Stage B: give every selected attach rule a real keypress. With `hosts`, the score also
+    pays `shadowAlpha` x the estimated shadowed occurrences over ALL theory hosts (variant
+    frequency x `HostIndex.shadowRate`) and a base whose frequency-weighted shadow rate
+    exceeds `shadowMaxRate` is not a candidate. Per family:
     try every legal base chord; variants take base + selector in
     descending-frequency order; stage 1 on the top-frequency sample with
     the MAX_EXCEPTION_RATE gate (occurrence-weighted: exceptional-expression
@@ -292,11 +396,24 @@ def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
     report: dict[str, dict] = {}
     for group in _familyGroups(selected):
         family = group[0].family or " ".join(group[0].units)
-        variants = group[:len(selectors)]
+        variants = fitVariants(group, selectors)
         touched = sorted({i for r in variants
                           for i in touchedExpressions(r, pool)})
         touched.sort(key=lambda i: -pool[i].freq)
         sample = touched[:SAMPLE_EXPRESSIONS]
+
+        def theoryRate(base: Stroke) -> float:
+            """Frequency-weighted theory shadow rate of the family's variants on this base."""
+            if hosts is None:
+                return 0.0
+            mass = sum(r.freq for r in variants) or 1.0
+            return sum(r.freq * hosts.shadowRate(r.position, tuple(sorted(set(base) | set(sel))))
+                       for r, sel in zip(variants, variantSelectors(variants, selectors))) / mass
+
+        def theoryPenalty(base: Stroke) -> float:
+            if hosts is None:
+                return 0.0
+            return shadowAlpha * sum(r.freq for r in variants) * theoryRate(base)
 
         def evaluate(base: Stroke, carrierIdx: list[int]) -> tuple[float, float, int]:
             """(score, exceptionRate, shadowCount) for this base over the
@@ -315,7 +432,7 @@ def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
             rules: tuple[AttachRule, ...] = tuple(
                 AttachRule(r.units, r.position,
                            tuple(sorted(set(base) | set(selector))),
-                           r.family)
+                           r.family, r.elision)
                 for r, selector in zip(variants, variantSelectors(variants, selectors)))
             variantKeys = {(r.units, r.position) for r in variants}
             savingMass = 0.0
@@ -346,7 +463,7 @@ def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
                 if any(seg.outcome == "exception" for seg in ours):
                     exceptionMass += expr.freq
             score = (savingMass - EXCEPTION_ALPHA * exceptionMass
-                     - FORM_COST * (len(variants) - 1))
+                     - FORM_COST * (len(variants) - 1) - theoryPenalty(base))
             return (score, (exceptionMass / carrierMass) if carrierMass else 1.0,
                     shadowCount)
 
@@ -362,7 +479,8 @@ def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
         alternatives: list[tuple[float, Stroke]] = []
         for _score, base in stage1[:repairCandidates]:
             score, rate, shadows = evaluate(base, touched)
-            if rate <= MAX_EXCEPTION_RATE and shadows == 0:
+            if rate <= MAX_EXCEPTION_RATE and shadows == 0 \
+                    and theoryRate(base) <= shadowMaxRate:
                 alternatives.append((score, base))
         best = min(alternatives, key=lambda t: (-t[0], t[1])) if alternatives else None
         info: dict[str, object] = {"variants": len(variants), "touched": len(touched)}
@@ -375,7 +493,8 @@ def assignKeypresses(selected: list[ExprRule], pool: list[PoolExpression],
             rule.keys = tuple(sorted(set(base) | set(selector)))
             rule.exactDone = True
         variants[0].score = score
-        info.update({"base": base, "score": score, "alternatives": alternatives})
+        info.update({"base": base, "score": score, "alternatives": alternatives,
+                     "theoryRate": theoryRate(base)})
         report[family] = info
     return report
 
@@ -412,7 +531,7 @@ def repairKeypresses(selected: list[ExprRule], report: dict,
         info = report.get(name, {})
         bases = [b for b in info.get("alternatives", [])]  # type: ignore[union-attr]
         if bases:
-            fams.append((name, group[:len(selectors)], bases))
+            fams.append((name, fitVariants(group, selectors), bases))
 
     model = cp_model.CpModel()
     baseVars = []
@@ -615,6 +734,16 @@ def auditExpressionRules(selected: list[ExprRule], pool: list[PoolExpression],
             audit.shadows.append((expr.units, traced.strokes))
         byOutline.setdefault(traced.strokes, []).append(expr.units)
     audit.collisions = {o: us for o, us in byOutline.items() if len(set(us)) > 1}
+    # elision pairs share one chord: two pool FRAGMENTS that differ only by a trailing elision
+    # form (`de l'` / `de le`, `je l'` / `je le`: no host follows, the n-gram slice cut it) write
+    # alike, but in running text a host always follows and the decoder reads it. Not collisions.
+    elided = {r.units[0]: r.elisionBase[0] for r in selected
+              if r.kind == "attach" and r.elision == "elided" and len(r.units) == 1 and r.elisionBase}
+    if elided:
+        def base(units: tuple[str, ...]) -> tuple[str, ...]:
+            return tuple(elided.get(u, u) for u in units)
+        audit.collisions = {o: us for o, us in audit.collisions.items()
+                            if len({base(u) for u in set(us)}) > 1}
     return audit
 
 
@@ -1010,7 +1139,16 @@ def selectExpressionRules(
                 candOf.pop(i)
                 touchedOf.pop(i)
                 spansOf.pop(i)
-            while sibRules and cand.forms < cap:
+            slotsUsed = {cand.slot()}
+            while True:
+                # a sibling needs a free selector slot unless it shares one already used
+                # (an elision partner shares its base form's chord)
+                keep = [j for j, r in enumerate(sibRules)
+                        if r.slot() in slotsUsed or len(slotsUsed) < cap]
+                sibRules = [sibRules[j] for j in keep]
+                sibTouchedAll = [sibTouchedAll[j] for j in keep]
+                if not sibRules:
+                    break
                 bestJ, bestSibMarg = None, 0.0
                 for j, sib in enumerate(sibRules):
                     sibBriefs = briefs + ((sib.proxyBrief(),) if sib.kind == "brief" else ())
@@ -1034,6 +1172,7 @@ def selectExpressionRules(
                     sib.score = bestSibMarg - FORM_COST
                     sib.forms = 0          # the family's form count lives on the head
                     cand.forms += 1
+                    slotsUsed.add(sib.slot())
                     selected.append(sib)
                     selectedSpans.append([])
                     if sib.kind == "brief":

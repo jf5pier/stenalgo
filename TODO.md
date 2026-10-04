@@ -600,3 +600,14 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
   phonology-class merge. Check also the `raie`/`rayer` family for the same split, then rebuild per `docs/PIPELINE.md`.
 
 - **Affix pipeline integration (2026-10-01).** Systematise the on-the-fly affix steps (scope proposer, combined-simulation gate, fusion policy, adopt step, deterministic pool: 12,138/12,141/12,149 nodes in three runs, unscoped lattice nodes only) per `PLAN_2026-10-01-affix-pipeline-integration.md`; six decisions to elicit from the user first.
+
+
+## Expression decoder (2026-10-04; see RESULTS_2026-10-04-expression-decoder.md and RESUME_2026-10-04-decoder-theory-shadow-elision.md)
+
+- Done: decoder (`src/expressiondecoder.py`), whole-theory shadow/collision audit, Stage B theory-wide shadow term (limit 0.002, attach saving 24.0%).
+- Build the decode-time ranking (plain word > pure brief > attested pool reading > rest) AND the matching `loses(reading)` check in the composer.
+- Remaining collisions: `n' y`, `il n'`, `je me` (host `*` swallows the selector), `le`, `qui`, `un`.
+- Experiment `ELISION_PAIRS=1` (off): one chord per elision pair; collisions of the elision families vanish, saving 22.6% vs 24.0%; investigate the lost saving,
+  complete `ASPIRATED_H`/`NO_ELISION` from a lexicon if adopted.
+- Step 4 leftovers: brief that depends on a failed attach; attach keypress as standalone stroke (parked); overlap max-1; `longest_key` / prefix lookups in the Plover plugin.
+- Step 5 (Plover dictionary plugin) not started; Plover is not installed in the project env.

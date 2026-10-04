@@ -8,12 +8,13 @@
    ],
    "position": "prefix",
    "keys": [
-    17,
-    24
+    5,
+    9,
+    17
    ],
    "beta": [],
    "freq": 579342261.0,
-   "elision": "",
+   "elision": "base",
    "elisionBase": []
   },
   {
@@ -24,14 +25,16 @@
    ],
    "position": "prefix",
    "keys": [
-    10,
-    17,
-    24
+    5,
+    9,
+    17
    ],
    "beta": [],
    "freq": 156154508.0,
-   "elision": "",
-   "elisionBase": []
+   "elision": "elided",
+   "elisionBase": [
+    "de"
+   ]
   },
   {
    "kind": "attach",
@@ -58,14 +61,16 @@
    ],
    "position": "prefix",
    "keys": [
-    17,
-    18,
+    2,
+    9,
     19
    ],
    "beta": [],
    "freq": 217698158.0,
-   "elision": "",
-   "elisionBase": []
+   "elision": "elided",
+   "elisionBase": [
+    "que"
+   ]
   },
   {
    "kind": "attach",
@@ -75,14 +80,13 @@
    ],
    "position": "prefix",
    "keys": [
-    10,
-    17,
-    18,
+    2,
+    9,
     19
    ],
    "beta": [],
    "freq": 197909645.0,
-   "elision": "",
+   "elision": "base",
    "elisionBase": []
   },
   {
@@ -99,8 +103,10 @@
    ],
    "beta": [],
    "freq": 152965207.0,
-   "elision": "",
-   "elisionBase": []
+   "elision": "elided",
+   "elisionBase": [
+    "ne"
+   ]
   },
   {
    "kind": "attach",
@@ -111,13 +117,12 @@
    "position": "prefix",
    "keys": [
     8,
-    10,
     20,
     23
    ],
    "beta": [],
    "freq": 44860332.0,
-   "elision": "",
+   "elision": "base",
    "elisionBase": []
   },
   {
@@ -130,6 +135,7 @@
    "position": "prefix",
    "keys": [
     8,
+    10,
     15,
     20,
     23
@@ -147,9 +153,9 @@
    ],
    "position": "prefix",
    "keys": [
-    2,
-    16,
-    19
+    9,
+    18,
+    23
    ],
    "beta": [],
    "freq": 253868505.0,
@@ -182,7 +188,7 @@
    "position": "prefix",
    "keys": [
     7,
-    16,
+    17,
     24
    ],
    "beta": [],
@@ -192,19 +198,58 @@
   },
   {
    "kind": "attach",
-   "family": "c",
+   "family": "il",
+   "units": [
+    "il",
+    "n'"
+   ],
+   "position": "prefix",
+   "keys": [
+    7,
+    10,
+    15,
+    17,
+    24
+   ],
+   "beta": [],
+   "freq": 27097496.0,
+   "elision": "",
+   "elisionBase": []
+  },
+  {
+   "kind": "attach",
+   "family": "ce",
    "units": [
     "c'"
    ],
    "position": "prefix",
    "keys": [
-    2,
-    4,
-    5
+    7,
+    18,
+    25
    ],
    "beta": [],
    "freq": 134792591.0,
-   "elision": "",
+   "elision": "elided",
+   "elisionBase": [
+    "ce"
+   ]
+  },
+  {
+   "kind": "attach",
+   "family": "ce",
+   "units": [
+    "ce"
+   ],
+   "position": "prefix",
+   "keys": [
+    7,
+    18,
+    25
+   ],
+   "beta": [],
+   "freq": 102898102.0,
+   "elision": "base",
    "elisionBase": []
   },
   {
@@ -232,9 +277,9 @@
    ],
    "position": "suffix",
    "keys": [
-    9,
+    16,
     21,
-    25
+    22
    ],
    "beta": [],
    "freq": 206722861.0,
@@ -243,19 +288,38 @@
   },
   {
    "kind": "attach",
-   "family": "l'",
+   "family": "le",
    "units": [
     "l'"
    ],
    "position": "prefix",
    "keys": [
-    2,
-    5,
-    6
+    3,
+    16,
+    24
    ],
    "beta": [],
    "freq": 77616119.0,
-   "elision": "",
+   "elision": "elided",
+   "elisionBase": [
+    "le"
+   ]
+  },
+  {
+   "kind": "attach",
+   "family": "le",
+   "units": [
+    "le"
+   ],
+   "position": "prefix",
+   "keys": [
+    3,
+    16,
+    24
+   ],
+   "beta": [],
+   "freq": 51233152.0,
+   "elision": "base",
    "elisionBase": []
   },
   {
@@ -267,48 +331,49 @@
    "position": "prefix",
    "keys": [
     4,
-    16,
-    24
+    18,
+    25
    ],
    "beta": [],
    "freq": 112312128.0,
-   "elision": "",
+   "elision": "base",
    "elisionBase": []
   },
   {
    "kind": "attach",
-   "family": "ce",
+   "family": "je",
    "units": [
-    "ce"
+    "j'"
    ],
    "position": "prefix",
    "keys": [
-    7,
-    16,
-    22
+    4,
+    18,
+    25
    ],
    "beta": [],
-   "freq": 102898102.0,
-   "elision": "",
-   "elisionBase": []
+   "freq": 44290485.0,
+   "elision": "elided",
+   "elisionBase": [
+    "je"
+   ]
   },
   {
-   "kind": "brief",
-   "family": "",
+   "kind": "attach",
+   "family": "je",
    "units": [
-    "j'",
-    "ai"
+    "je",
+    "me"
    ],
-   "position": "",
-   "keys": [],
-   "beta": [
-    [
-     5,
-     7,
-     18
-    ]
+   "position": "prefix",
+   "keys": [
+    4,
+    10,
+    18,
+    25
    ],
-   "freq": 30553370.0,
+   "beta": [],
+   "freq": 13654387.0,
    "elision": "",
    "elisionBase": []
   },
@@ -331,23 +396,6 @@
   },
   {
    "kind": "attach",
-   "family": "sur",
-   "units": [
-    "sur"
-   ],
-   "position": "prefix",
-   "keys": [
-    2,
-    5,
-    8
-   ],
-   "beta": [],
-   "freq": 100505968.0,
-   "elision": "",
-   "elisionBase": []
-  },
-  {
-   "kind": "attach",
    "family": "par",
    "units": [
     "par"
@@ -365,23 +413,6 @@
   },
   {
    "kind": "attach",
-   "family": "le",
-   "units": [
-    "le"
-   ],
-   "position": "prefix",
-   "keys": [
-    3,
-    17,
-    24
-   ],
-   "beta": [],
-   "freq": 51233152.0,
-   "elision": "",
-   "elisionBase": []
-  },
-  {
-   "kind": "attach",
    "family": "s'",
    "units": [
     "s'"
@@ -394,8 +425,10 @@
    ],
    "beta": [],
    "freq": 53867708.0,
-   "elision": "",
-   "elisionBase": []
+   "elision": "elided",
+   "elisionBase": [
+    "se"
+   ]
   },
   {
    "kind": "attach",
@@ -406,19 +439,88 @@
    "position": "prefix",
    "keys": [
     4,
-    17,
+    16,
     24
    ],
    "beta": [],
    "freq": 57364820.0,
    "elision": "",
    "elisionBase": []
+  },
+  {
+   "kind": "attach",
+   "family": "un",
+   "units": [
+    "un"
+   ],
+   "position": "prefix",
+   "keys": [
+    6,
+    16,
+    24
+   ],
+   "beta": [],
+   "freq": 41372215.0,
+   "elision": "",
+   "elisionBase": []
+  },
+  {
+   "kind": "attach",
+   "family": "elle",
+   "units": [
+    "elle"
+   ],
+   "position": "prefix",
+   "keys": [
+    7,
+    16,
+    22
+   ],
+   "beta": [],
+   "freq": 40112463.0,
+   "elision": "",
+   "elisionBase": []
+  },
+  {
+   "kind": "attach",
+   "family": "en",
+   "units": [
+    "en"
+   ],
+   "position": "prefix",
+   "keys": [
+    18,
+    19,
+    20
+   ],
+   "beta": [],
+   "freq": 362205933.0,
+   "elision": "",
+   "elisionBase": []
+  },
+  {
+   "kind": "attach",
+   "family": "les",
+   "units": [
+    "les"
+   ],
+   "position": "prefix",
+   "keys": [
+    2,
+    16,
+    19
+   ],
+   "beta": [],
+   "freq": 33827184.0,
+   "elision": "",
+   "elisionBase": []
   }
  ],
  "chosen": {
   "de": [
-   17,
-   24
+   5,
+   9,
+   17
   ],
   "à": [
    9,
@@ -426,8 +528,8 @@
    23
   ],
   "que": [
-   17,
-   18,
+   2,
+   9,
    19
   ],
   "ne": [
@@ -436,9 +538,9 @@
    23
   ],
   "dans": [
-   2,
-   16,
-   19
+   9,
+   18,
+   23
   ],
   "et": [
    8,
@@ -447,13 +549,13 @@
   ],
   "il": [
    7,
-   16,
+   17,
    24
   ],
-  "c": [
-   2,
-   4,
-   5
+  "ce": [
+   7,
+   18,
+   25
   ],
   "la": [
    16,
@@ -461,44 +563,29 @@
    19
   ],
   "pas": [
-   9,
+   16,
    21,
-   25
+   22
   ],
-  "l'": [
-   2,
-   5,
-   6
-  ],
-  "je": [
-   4,
+  "le": [
+   3,
    16,
    24
   ],
-  "ce": [
-   7,
-   16,
-   22
+  "je": [
+   4,
+   18,
+   25
   ],
   "avec": [
    2,
    9,
    24
   ],
-  "sur": [
-   2,
-   5,
-   8
-  ],
   "par": [
    9,
    16,
    20
-  ],
-  "le": [
-   3,
-   17,
-   24
   ],
   "s'": [
    2,
@@ -507,8 +594,28 @@
   ],
   "qui": [
    4,
-   17,
+   16,
    24
+  ],
+  "un": [
+   6,
+   16,
+   24
+  ],
+  "elle": [
+   7,
+   16,
+   22
+  ],
+  "en": [
+   18,
+   19,
+   20
+  ],
+  "les": [
+   2,
+   16,
+   19
   ]
  }
 }

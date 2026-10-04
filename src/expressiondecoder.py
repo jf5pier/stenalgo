@@ -1,0 +1,225 @@
+"""
+Offline decoder for the expression abbreviation layer (PLAN_2026-10-04-expression-decoder.md,
+step 1): the inverse of `src.expressions.composeOutlineTraced` on a committed rule set.
+
+Stock Plover dictionaries are exact lookups, so a stroke tuple such as ``(il+n'+host first
+stroke, ...)`` cannot be read without a decoder: stroke tuple -> readings. `decode` returns EVERY
+reading (empty list: not an expression outline; one: unambiguous; several: ambiguous, the
+caller ranks or the build forbids it). A reading is a tuple of `Piece`s in stroke order:
+
+- ``content``    a theory word or a brief (`brief=True`) with the attach rules merged into its
+                 first stroke (`prefix`) and last stroke (`suffix`); outline = the content's strokes;
+- ``standalone`` one attach keypress alone, replacing a particle that spans >= 2 strokes
+                 (never when the chord is a live single-stroke outline: `standaloneTrap`);
+- ``cluster``    two or more hostless attaches unioned into one stroke (`attachCluster`).
+
+An attach that fell to an exception (longform kept) leaves no trace: its strokes read as plain
+words. The decoder inverts the strict merge (`EXPR_MAX_SHARED_KEYS = 0`): a merged stroke is
+``host ∪ keys`` with ``host ∩ keys = ∅`` on the syllabic keys, so ``host = stroke \\ keys``. The
+`*`/`#` selectors are transparent to the overlap check, so a host that already carries one
+swallows a variant's selector: every subset of the stacked rules' selectors is tried as "the host
+had it" (the decoder cannot tell a selector from a host mark, see the plan, section 2).
+
+The order of attaches merged onto one host is lost in the union (commutative); the reading
+reports them as sorted tuples, never in stream order.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from itertools import combinations
+from typing import Callable, Iterable
+
+from src.expressions import RESERVED_MARK_KEYS, AttachRule, Rules
+from src.affixes import PREFIX, SUFFIX
+from src.elision import elisionAgrees, orderingExists
+from src.keyboard import Stroke, Strokes, canonicalizeStrokes
+
+__all__ = ["Piece", "Decoding", "ExpressionDecoder"]
+
+MAX_READINGS = 200   # parse cap per position (a runaway guard; real outlines read in a handful)
+
+
+@dataclass(frozen=True)
+class Piece:
+    kind: str                                   # "content" | "standalone" | "cluster"
+    units: tuple[str, ...] = ()                 # content: the word or brief expression
+    brief: bool = False
+    prefix: tuple[AttachRule, ...] = ()         # merged into the first stroke
+    suffix: tuple[AttachRule, ...] = ()         # merged into the last stroke
+    rules: tuple[AttachRule, ...] = ()          # standalone / cluster members
+
+    def signature(self) -> tuple:
+        """Hashable, order-free description (rules by expression and position)."""
+        key = lambda rs: tuple(sorted((r.expression, r.position) for r in rs))  # noqa: E731
+        return (self.kind, self.units, self.brief, key(self.prefix), key(self.suffix), key(self.rules))
+
+
+Decoding = tuple[Piece, ...]
+
+
+def _syl(keys: Iterable[int]) -> frozenset[int]:
+    return frozenset(k for k in keys if k not in RESERVED_MARK_KEYS)
+
+
+def _sel(keys: Iterable[int]) -> frozenset[int]:
+    return frozenset(k for k in keys if k in RESERVED_MARK_KEYS)
+
+
+def _ruleOrder(rule: AttachRule) -> tuple:
+    return (rule.expression, rule.position, rule.keypress)
+
+
+class ExpressionDecoder:
+    """`words`: outline -> word-unit surfaces (every theory outline, alternates included).
+    `unitStrokes`: unit -> longform stroke count (a standalone needs a particle of >= 2 strokes).
+    `isLegal`: optional chord-legality check on syllabic keys (the composer's `ctx.isLegal`)."""
+
+    def __init__(self, rules: Rules, words: dict[Strokes, Iterable[str]],
+                 unitStrokes: dict[str, int] | None = None,
+                 isLegal: Callable[[Stroke], bool] | None = None) -> None:
+        self.rules = rules
+        self.isLegal = isLegal
+        self._attaches = tuple(sorted(rules.attaches, key=_ruleOrder))
+        self._keys = {r: frozenset(r.keypress) for r in self._attaches}
+        self._content: dict[Strokes, tuple[tuple[tuple[str, ...], bool], ...]] = {}
+        index: dict[Strokes, set[tuple[tuple[str, ...], bool]]] = {}
+        for outline, surfaces in words.items():
+            for surface in surfaces:
+                index.setdefault(canonicalizeStrokes(outline), set()).add(((surface,), False))
+        for brief in rules.briefs:
+            index.setdefault(canonicalizeStrokes(brief.strokes), set()).add((brief.expression, True))
+        self._content = {o: tuple(sorted(v)) for o, v in index.items()}
+        self._maxLen = max((len(o) for o in self._content), default=1)
+        self._singles = {o[0] for o in self._content if len(o) == 1 and not any(
+            isBrief for _, isBrief in self._content[o])}
+        self._unitStrokes = unitStrokes or {}
+        self._decompCache: dict[tuple[Stroke, str], tuple[tuple[Stroke, tuple[AttachRule, ...]], ...]] = {}
+        self._memo: dict[tuple[Strokes, int], tuple[Decoding, ...]] = {}
+
+    # ---- merged stacks -------------------------------------------------------------------
+
+    def _decomps(self, stroke: Stroke, positions: str
+                 ) -> tuple[tuple[Stroke, tuple[AttachRule, ...]], ...]:
+        """Every (host stroke, stacked attach rules) with ``host ∪ keys == stroke`` under the strict
+        merge. `positions`: "prefix", "suffix" or "any" (a one-stroke segment takes both)."""
+        cacheKey = (stroke, positions)
+        cached = self._decompCache.get(cacheKey)
+        if cached is not None:
+            return cached
+        have = frozenset(stroke)
+        cands = [r for r in self._attaches
+                 if self._keys[r] <= have and positions in ("any", r.position)]
+        out: list[tuple[Stroke, tuple[AttachRule, ...]]] = [(stroke, ())]
+
+        def extend(start: int, chosen: list[AttachRule], taken: frozenset[int]) -> None:
+            for i in range(start, len(cands)):
+                rule = cands[i]
+                syl = _syl(rule.keypress)
+                if syl & taken:                     # stacked attaches must be disjoint
+                    continue
+                now = chosen + [rule]
+                nowTaken = taken | syl
+                union = frozenset().union(*(self._keys[r] for r in now))
+                selectors = _sel(union)
+                base = have - nowTaken
+                for r in range(len(selectors) + 1):
+                    for kept in combinations(sorted(selectors), r):
+                        host = tuple(sorted(base - (selectors - frozenset(kept))))
+                        if host:
+                            out.append((host, tuple(now)))
+                extend(i + 1, now, nowTaken)
+
+        extend(0, [], frozenset())
+        if self.isLegal is not None and not self.isLegal(tuple(sorted(_syl(stroke)))):
+            out = [(h, rs) for h, rs in out if not rs]     # an illegal union never merged
+        result = tuple(out)
+        self._decompCache[cacheKey] = result
+        return result
+
+    # ---- parse ---------------------------------------------------------------------------
+
+    def decode(self, strokes: Strokes) -> list[Decoding]:
+        """Every reading of the stroke tuple (deterministic order); [] when none."""
+        canonical = canonicalizeStrokes(strokes)
+        if not canonical:
+            return []
+        return list(self._parse(canonical, 0))
+
+    def _parse(self, strokes: Strokes, i: int) -> tuple[Decoding, ...]:
+        if i == len(strokes):
+            return ((),)
+        memoKey = (strokes, i)
+        if memoKey in self._memo:
+            return self._memo[memoKey]
+        results: list[Decoding] = []
+        seen: set[tuple] = set()
+
+        def emit(piece: Piece, consumed: int) -> None:
+            for rest in self._parse(strokes, i + consumed):
+                if len(results) >= MAX_READINGS:
+                    return
+                reading = (piece,) + rest
+                sig = tuple(p.signature() for p in reading)
+                if sig not in seen:
+                    seen.add(sig)
+                    results.append(reading)
+
+        stroke = strokes[i]
+        # content: a word or brief of L strokes, attaches on its first / last stroke
+        for length in range(1, min(self._maxLen, len(strokes) - i) + 1):
+            segment = strokes[i:i + length]
+            if length == 1:
+                for host, stack in self._decomps(segment[0], "any"):
+                    for units, brief in self._content.get((host,), ()):
+                        if self._elisionClash(stack, units):
+                            continue
+                        emit(Piece("content", units, brief,
+                                   tuple(r for r in stack if r.position == PREFIX),
+                                   tuple(r for r in stack if r.position == SUFFIX)), 1)
+            else:
+                for firstHost, prefix in self._decomps(segment[0], PREFIX):
+                    for lastHost, suffix in self._decomps(segment[-1], SUFFIX):
+                        outline = (firstHost,) + segment[1:-1] + (lastHost,)
+                        for units, brief in self._content.get(outline, ()):
+                            if self._elisionClash(prefix, units):
+                                continue
+                            emit(Piece("content", units, brief, prefix, suffix), length)
+        # standalone keypress, particle >= 2 strokes, chord not a live single-stroke outline
+        if stroke not in self._singles:
+            for rule in self._attaches:
+                if tuple(sorted(rule.keypress)) == stroke and self._spans(rule) >= 2:
+                    emit(Piece("standalone", rules=(rule,)), 1)
+        # cluster: >= 2 hostless attaches unioned into one stroke
+        have = frozenset(stroke)
+        cands = [r for r in self._attaches if self._keys[r] <= have]
+        for size in range(2, len(cands) + 1):
+            for group in combinations(cands, size):
+                if frozenset().union(*(self._keys[r] for r in group)) != have:
+                    continue
+                if sum(len(_syl(r.keypress)) for r in group) != len(_syl(stroke)):
+                    continue                        # not disjoint on the syllabic keys
+                if stroke in self._singles:
+                    continue
+                if self.isLegal is not None and not self.isLegal(tuple(sorted(_syl(stroke)))):
+                    continue
+                if any(r.elision for r in group) and not orderingExists(
+                        [(r.elision, r.expression[0]) for r in group], None):
+                    continue                    # no order of the members is French
+                emit(Piece("cluster", rules=tuple(group)), 1)
+        final = tuple(results)
+        self._memo[memoKey] = final
+        return final
+
+    @staticmethod
+    def _elisionClash(stack: tuple[AttachRule, ...], units: tuple[str, ...]) -> bool:
+        """A stack of prefix particles holding an elision-pair rule (base or elided form, one shared
+        chord) is read only if SOME order of the particles makes every form agree with the word
+        written after it (`qu'` before a vowel sound, `que` before a consonant)."""
+        prefixes = [r for r in stack if r.position == PREFIX]
+        if not any(r.elision for r in prefixes):
+            return False
+        return not orderingExists([(r.elision, r.expression[0]) for r in prefixes], units[0])
+
+    def _spans(self, rule: AttachRule) -> int:
+        return sum(self._unitStrokes.get(u, 2) for u in rule.expression)

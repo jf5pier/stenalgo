@@ -512,3 +512,18 @@ class TestAuditWithBriefs:
         audit = auditExpressionRules([ExprRule("brief", ("mot", "cle"), freq=9.0)],
                                      pool, TestDeriveBriefStroke.ctx())
         assert audit.savingMass == 0
+
+
+def test_host_index_shadow_rate_counts_merges_landing_on_live_outlines() -> None:
+    from src.affixes import PREFIX, SUFFIX
+    from src.expressionrules import HostIndex
+    # est=(13,14) + chord (5,) -> (5,13,14) is the live word "vais"; il=(13,23) + (5,) is not live
+    index = HostIndex({((13, 14),): 3.0, ((5, 13, 14),): 1.0, ((13, 23),): 4.0})
+    assert abs(index.shadowRate(PREFIX, (5,)) - 3.0 / 8.0) < 1e-9
+    assert index.shadowRate(PREFIX, (9,)) == 0.0
+    # a selector the host already carries is swallowed: il* + chord(5,*) lands on live (5,13,23,*)
+    swallow = HostIndex({((13, 23, 10),): 2.0, ((5, 10, 13, 23),): 1.0})
+    assert abs(swallow.shadowRate(PREFIX, (5, 10)) - 2.0 / 3.0) < 1e-9
+    # the suffix side uses the last stroke and the head
+    tail = HostIndex({((1, 2), (13, 14)): 1.0, ((1, 2), (5, 13, 14)): 1.0})
+    assert abs(tail.shadowRate(SUFFIX, (5,)) - 0.5) < 1e-9

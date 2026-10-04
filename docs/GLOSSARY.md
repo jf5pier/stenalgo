@@ -1151,7 +1151,33 @@ variants it holds.
 
 ### Shadow
 A composed outline of an abbreviated expression that equals an existing live outline of the theory (a hard no).
+The audit sees the pool's expressions; the **theory shadow rate** below sees every theory word as a host.
 - Code: `ExprAudit.shadows`.
+
+### Theory shadow rate (host index)
+For a candidate chord, the probability, over theory words drawn by frequency, that merging the chord into the word's first
+(prefix) or last (suffix) stroke gives the outline of ANOTHER word (`est` + `ce` = `vais`). The pool only holds the hosts of its
+1,151 n-grams, so the pool audit cannot see it. Stage B subtracts `THEORY_SHADOW_ALPHA` x the estimated shadowed occurrences
+from a chord's score and refuses a base above `THEORY_SHADOW_MAX_RATE` (0.002). `THEORY_SHADOW=0` restores the pool-only
+Stage B; `SHADOW_MAX_RATE=x` overrides the limit. Measured: 4,467 single-rule shadows over the theory become 5, the whole-theory
+collisions of `ce`, `pas`, `dans`, `à`, `avec`, `par` disappear, attach saving 25.7% -> 24.0%
+(`RESULTS_2026-10-04-expression-decoder.md`).
+- Code: `HostIndex.shadowRate`, `assignKeypresses(hosts=...)`, `scratch/theory_injectivity.py`.
+
+### Decoder (expression layer)
+The inverse of `composeOutlineTraced`: stroke tuple -> every reading (attach rules + host words, briefs, standalone keypresses,
+hostless clusters). Exact on the committed rules (0 unreadable, 0 mismatched outlines over the pool), but a stroke can have several
+readings (nested chords, selector variants swallowed by a marked host), so a plugin must rank them (plain word > pure brief >
+attested pool reading > other).
+- Code: `src/expressiondecoder.py`, `scratch/decode_roundtrip.py`, `scratch/rank_loss.py`.
+
+### Elision pair (experiment `ELISION_PAIRS=1`)
+`que`/`qu'`, `de`/`d'`, `ne`/`n'`, `ce`/`c'`, `le`/`l'`, `je`/`j'`, `s'`... written by ONE chord and ONE selector slot: before a
+vowel sound French requires the elided form, before a consonant the base form, so the decoder reads exactly one from the word
+written after the particle (a stack of particles is accepted when some order makes every form agree: `ce n' est`). The composer
+refuses a disagreeing merge (reason `elision`, longform kept). Off by default: measured 22.6% attach saving against 24.0%,
+though the `que`/`de`/`ne`/`ce`/`le` collision shares fall from 20-41% to under 1% (see the results file).
+- Code: `src/elision.py`, `AttachRule.elision`, `ExprRule.slot`, `fitVariants`, `variantSelectors`, `orderingExists`.
 
 ### Collision (expression layer)
 Two different expressions composing to the same outline. Not the same as a theory **Collision**.
@@ -1160,7 +1186,7 @@ Two different expressions composing to the same outline. Not the same as a theor
 ### Selector collapse
 A Stage C step (a variant "collapsed in Stage C", as against "dropped in Stage A"): when a variant's outline collides because the host's own `*`/`#` swallows its selector, the variant is removed
 from the rule set (`je me`, `il n'`, `il y` in the budget-20 run); its contexts then compose through the family's other rules (`il n'`
-stacks `il` and `n'`). Experimental alternatives: `KEEP_COLLAPSED=1`, `SELECTOR_RETRY=1`.
+stacks `il` and `n'`). Experimental alternatives: `KEEP_COLLAPSED=1`, `SELECTOR_RETRY=1`, `ELISION_PAIRS=1` (removes most of the collapses).
 - Code: `scratch/select_expression_rules.py` (Stage C loop).
 
 ### Phase 0 - Phase 4 (expression layer)
