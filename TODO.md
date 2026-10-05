@@ -648,6 +648,7 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
 
 ## Expression decoder (2026-10-04; see RESULTS_2026-10-04-expression-decoder.md and RESUME_2026-10-04-decoder-theory-shadow-elision.md)
 
+- Re-selected 2026-10-04 on the theory with `les`/`des`/`ses`/`mes`/`tes`/`ces` in /E/ (merge of origin/main): same 29 attach rules, a few keypresses shifted (`à`, `il`, `elle`, `ne`, `un`, the `de`/`ne` stacks) and 3 brief strokes reassigned; attach saving 24.1% (3.450e9), 4.006e9 with briefs, 0 pool shadows/collisions; decode round trip 4 mismatches (0.04%, the `ce que ...` pool rows, as before). Rules, briefs and `plover_stenalgo_expressions.stenalgo` regenerated.
 - Done: decoder (`src/expressiondecoder.py`), whole-theory shadow/collision audit, Stage B theory-wide shadow term (limit 0.002), pinky-diagonal key conflicts (attach saving 24.8%, `il n'` stacks again).
 - Ranking built (`src/expressionranking.py`); no composer `loses` check is needed for attested expressions. The attested table and the unigram probabilities are exported (`util/export_expression_data.py`); look at the 1.6% open-set mis-decodes (`dans` + `et`...).
 - Remaining collisions: `n' y`, `il n'`, `je me` (host `*` swallows the selector), `le`, `qui`, `un`.

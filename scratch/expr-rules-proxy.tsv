@@ -1,16 +1,16 @@
 rank	kind	family	expression	position	freq	strokes_saved	keys	score
 1	attach	de	de	prefix	579342261	1	17,24	7.650e+08
 2	attach	de	d'	prefix	156154508	1	17,24	1.636e+08
-3	attach	à	à	prefix	267408208	1	8,17,24	2.751e+08
+3	attach	à	à	prefix	267408208	1	8,17,23	2.751e+08
 4	attach	que	qu'	prefix	217698158	1	2,18,20	4.479e+08
 5	attach	que	que	prefix	197909645	1	2,18,20	2.083e+08
-6	attach	ne	n'	prefix	152965207	1	8,16,19	2.998e+08
-7	attach	ne	ne	prefix	44860332	1	8,16,19	6.805e+07
-8	attach	ne	n' y	prefix	11093429	2	8,10,15,16,19	2.104e+07
+6	attach	ne	n'	prefix	152965207	1	16,19	2.998e+08
+7	attach	ne	ne	prefix	44860332	1	16,19	6.805e+07
+8	attach	ne	n' y	prefix	11093429	2	10,15,16,19	2.104e+07
 9	attach	dans	dans	prefix	253868505	1	2,18,24	2.236e+08
 10	attach	et	et	prefix	285239034	1	9,16,19	2.857e+08
-11	attach	il	il	prefix	168319881	1	7,17,24	2.357e+08
-12	attach	il	il n'	prefix	27097496	2	7,10,15,17,24	1.686e+07
+11	attach	il	il	prefix	168319881	1	7,17,23	2.357e+08
+12	attach	il	il n'	prefix	27097496	2	7,10,15,17,23	1.686e+07
 13	attach	ce	c'	prefix	134792591	1	4,5,7	1.398e+08
 14	attach	ce	ce	prefix	102898102	1	4,5,7	2.733e+08
 15	attach	la	la	prefix	116132666	1	16,18,19	1.486e+08
@@ -24,8 +24,8 @@ rank	kind	family	expression	position	freq	strokes_saved	keys	score
 23	attach	par	par	prefix	156321990	1	9,16,20	9.067e+07
 24	attach	s'	s'	prefix	53867708	1	2,3,5	6.824e+07
 25	attach	qui	qui	prefix	57364820	1	9,17,22	6.532e+07
-26	attach	un	un	prefix	41372215	1	6,8,19	4.341e+07
-27	attach	elle	elle	prefix	40112463	1	7,17,25	4.920e+07
+26	attach	un	un	prefix	41372215	1	8,16,19	4.341e+07
+27	attach	elle	elle	prefix	40112463	1	7,17,24	4.920e+07
 28	attach	en	en	prefix	362205933	1	18,19,20	3.970e+07
 29	attach	les	les	prefix	33827184	1	2,16,19	3.569e+07
 30	brief		avec		4	p-	1.055e+08	1.055e+08	free	0			
@@ -51,18 +51,18 @@ rank	kind	family	expression	position	freq	strokes_saved	keys	score
 50	brief		enfin		2,4,11,12,13,14	kp@aie	1.037e+07	1.037e+07	skeleton	0			
 51	brief		exemple		13,14,18,19,22,23	iekdnl	1.028e+07	1.028e+07	union	0			
 52	brief		petite		4,7,11,12,13,20	pt@ait	9.878e+06	9.878e+06	skeleton	0			
-53	brief		toutes les		22	-n	1.955e+07	1.955e+07	free	0			
+53	brief		toutes les		6,7,11,13,14,20	mt@iet	1.955e+07	1.955e+07	union	0			
 54	brief		lorsque		2,3,6,7,11,12,14,21	ksmt@aeR	9.631e+06	9.631e+06	skeleton	0			
 55	brief		maintenant		6,8,11,12,13,14	mR@aie	1.903e+07	1.903e+07	skeleton	0			
-56	brief		raison		23	-l	9.495e+06	9.495e+06	free	0			
+56	brief		raison		22	-n	9.495e+06	9.495e+06	free	0			
 57	brief		façon		2,3,4,12,13	kspai	9.325e+06	9.325e+06	skeleton	0			
 58	brief		ailleurs		8,9,11,12,21	Rw@aR	9.186e+06	9.186e+06	skeleton	0			
 59	brief		besoin		3,5,11,12	sv@a	9.045e+06	9.045e+06	union	0			
-60	brief		ensemble		24	-Z	8.865e+06	8.865e+06	free	0			
+60	brief		ensemble		23	-l	8.865e+06	8.865e+06	free	0			
 61	brief		aujourd'hui		4,5,11,12,13,14	pv@aie	1.749e+07	1.749e+07	skeleton	0			
 62	brief		surtout		3,7,11,13,14,21	st@ieR	8.648e+06	8.648e+06	skeleton	0			
 63	brief		société		3,7,12,14	stae	1.714e+07	1.714e+07	skeleton	0			
-64	brief		avec les		25	-m	1.584e+07	1.584e+07	free	0			
+64	brief		avec les		24	-Z	1.584e+07	1.584e+07	free	0			
 65	brief		possible		3,4,12,13,14,16,23	spaiejl	7.912e+06	7.912e+06	skeleton	0			
 66	brief		autour		7,11,12,14,21	t@aeR	7.871e+06	7.871e+06	skeleton	0			
 67	brief		quelque chose		2,4,6,12,13,14,18,22,23	kpmaieknl	7.715e+06	7.715e+06	union	0			
