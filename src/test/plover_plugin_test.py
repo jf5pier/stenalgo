@@ -6,10 +6,11 @@ import tempfile
 import types
 import unittest
 from pathlib import Path
+from typing import Any
 
 from src.expressiondata import bundleToDict, legalityFromStarboard
 from src.expressionmodel import AttachRule, BriefRule, Rules
-from src.keyboard import Starboard
+from src.keyboard import Starboard, Strokes
 from src.keyconflicts import KeyConflicts
 from util.export_plover_plugin import generate
 
@@ -34,7 +35,7 @@ def _pluginImports():
             @classmethod
             def load(cls, resource: str):
                 d = cls()
-                d._load(resource)
+                d._load(resource)                                           # type: ignore[attr-defined]
                 return d
 
         plover = types.ModuleType("plover")
@@ -44,8 +45,8 @@ def _pluginImports():
         sys.modules.update({"plover": plover, "plover.steno_dictionary": module})
     for name in [n for n in sys.modules if n == "plover_stenalgo" or n.startswith("plover_stenalgo.")]:
         del sys.modules[name]
-    import plover_stenalgo.dictionary as dictionary
-    import plover_stenalgo.stroke as stroke
+    import plover_stenalgo.dictionary as dictionary   # type: ignore[import-not-found]
+    import plover_stenalgo.stroke as stroke   # type: ignore[import-not-found]
     return dictionary, stroke
 
 
@@ -78,13 +79,17 @@ class TestStrokeParser(unittest.TestCase):
 
 
 class TestDictionary(unittest.TestCase):
+    tmp: tempfile.TemporaryDirectory[str]
+    path: Path
+    dictionary: Any
+
     @classmethod
     def setUpClass(cls) -> None:
         legality = legalityFromStarboard(Starboard.fromJSONFile("starboard3h.json"))
         rules = Rules(attaches=(AttachRule(("de",), "prefix", (3,), "", "base"),
                                 AttachRule(("d'",), "prefix", (3,), "", "elided")),
                       briefs=(BriefRule(("a", "b"), ((8,),)),))
-        words = {((5,),): ["mot"], ((6,),): ["arbre"]}
+        words: dict[Strokes, list[str]] = {((5,),): ["mot"], ((6,),): ["arbre"]}
         doc = bundleToDict(rules, words, {"mot": 1, "arbre": 1}, {}, {}, KeyConflicts(), legality,
                            wordsFile="stock.json")
         cls.tmp = tempfile.TemporaryDirectory()

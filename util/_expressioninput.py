@@ -62,7 +62,7 @@ def resolveToken(token: str, byOrtho: dict[str, list[Word]]) -> list[tuple[str, 
                 if cand and cand in byOrtho:
                     particle = (cand, pickWord(byOrtho[cand]))
                     break
-            resolved = [(left + "'", particle[1])] if particle else [(left + "'", None)]
+            resolved: list[tuple[str, Word | None]] = [(left + "'", particle[1] if particle else None)]
             return resolved + resolveToken(host, byOrtho)
         if left in PARTICLES and not host:
             # a BARE fragment unit ("c'", "qu'" — unlike n'/l'/d'/s' these are
@@ -86,6 +86,7 @@ def loadExpressionInputs():
     and the theory indexes the composer, decoder and exporters need: (SimContext, Rules, pool, outline -> surfaces,
     unit -> longform stroke count)."""
     starboard = Starboard.fromJSONFile("starboard3h.json")
+    assert starboard is not None
     theory = loadDisambiguatedTheory(starboard)
     byOrtho: dict = {}
     for w in theory:
@@ -102,8 +103,12 @@ def loadExpressionInputs():
             pairs = [resolveTerm(u, byOrtho) for u in units]
             if any(any(w is None for _, w in p) for p in pairs):
                 continue
-            pool.append(PoolExpression(tuple(units), float(row["freq"]), tuple(
-                Token(u, theory[p[0][1]][0]) for u, p in zip(units, pairs))))
+            tokens = []
+            for u, p in zip(units, pairs):
+                word = p[0][1]
+                assert word is not None
+                tokens.append(Token(u, theory[word][0]))
+            pool.append(PoolExpression(tuple(units), float(row["freq"]), tuple(tokens)))
     data = json.load(open(RULES_JSON, encoding="utf-8"))
     selected = [ExprRule(kind=r["kind"], units=tuple(r["units"]), position=r["position"],
                          family=r["family"], freq=r["freq"], keys=tuple(r["keys"]) or None,

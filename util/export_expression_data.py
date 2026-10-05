@@ -39,7 +39,9 @@ def main() -> None:
     out = Path(sys.argv[1] if len(sys.argv) > 1 else REPO / "plover_stenalgo_expressions.stenalgo")
     ctx, rules, pool, words, unitStrokes = loadExpressionInputs()
     conflicts = conflictsOf(ctx)
-    frequencies = [(w.ortho, w.frequency) for w in loadDisambiguatedTheory(Starboard.fromJSONFile("starboard3h.json"))]
+    starboard = Starboard.fromJSONFile("starboard3h.json")
+    assert starboard is not None
+    frequencies = [(w.ortho, w.frequency) for w in loadDisambiguatedTheory(starboard)]
     probabilities = unitProbabilities(frequencies, UNIT_PROBABILITY_WORDS)
     entries = []
     texts = []
@@ -59,7 +61,7 @@ def main() -> None:
 
     # check 0: the stock dictionary next to the data is the one the fingerprint was taken from
     sys.path.insert(0, str(REPO / "plover_stenalgo"))
-    from plover_stenalgo.wordindex import readWordIndex   # the plugin's own reader
+    from plover_stenalgo.wordindex import readWordIndex   # type: ignore[import-not-found]  # the plugin's own reader
     stockPath = out.parent / WORDS_FILE
     if not stockPath.exists():
         stockPath = REPO / WORDS_FILE
@@ -69,6 +71,7 @@ def main() -> None:
 
     # check 1: the legality model equals SimContext.isLegal on every chord a decode asks about
     decoder, ranker = loadBundle(out, words)
+    assert decoder.isLegal is not None
     live = ExpressionDecoder(rules, words, unitStrokes, ctx.isLegal, conflicts)
     liveRanker = ReadingRanker(attested, unitProbabilities(frequencies))   # the full vocabulary
     checked = bad = 0

@@ -469,10 +469,14 @@ class TestAssignBriefStrokes:
         report = assignBriefStrokes(rules, self.pool(), self.ctx(),
                                     freeChords=[(2,), (3,), (4,)])
         assert all(v is not None for v in report.values())
-        strokes = [r.beta[0] for r in rules]
+        betas = [r.beta for r in rules]
+        assert all(b is not None for b in betas)
+        strokes = [b[0] for b in betas if b is not None]
         assert len(set(strokes)) == 2
         assert all(r.exactDone for r in rules)
-        assert report[("mot", "cle")][0] == (2, 13, 14, 23)    # most frequent first
+        cle = report[("mot", "cle")]
+        assert cle is not None
+        assert cle[0] == (2, 13, 14, 23)    # most frequent first
 
     def test_failure_keeps_beta_none(self):
         rules = [ExprRule("brief", ("a", "b"), freq=1.0)]

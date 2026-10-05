@@ -203,7 +203,7 @@ def planStream(rules: Rules, tokens: list[Token]) -> StreamPlan:
                    key=lambda item: (-len(item[0]), item[0], item[1].position))
     marks: dict[int, tuple[int, AttachRule]] = {}
     i = 0
-    lastEnd, lastExpression = -1, ()      # the previous mark, for the order ban
+    lastEnd, lastExpression = -1, tuple[str, ...]()      # the previous mark, for the order ban
     while i < len(tokens):
         for expression, rule in table:
             end = i + len(expression)

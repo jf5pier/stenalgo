@@ -7,8 +7,9 @@ from src.affixes import SimContext
 from src.keyboard import Starboard
 from src.keyconflicts import KeyConflicts
 
-sb = Starboard.fromJSONFile("starboard3h.json")
-assert sb is not None
+_loaded = Starboard.fromJSONFile("starboard3h.json")
+assert _loaded is not None
+sb: Starboard = _loaded
 conflicts = KeyConflicts.fromStarboard(sb)
 
 

@@ -6,15 +6,16 @@ from src.expressionranking import (ReadingRanker, attestedTable, composedReading
                                    rankedDecode)
 from src.expressions import AttachRule, BriefRule, Rules, Token, composeOutlineTraced
 from src.affixes import SimContext
-from src.keyboard import Starboard
+from src.keyboard import Starboard, Strokes
 
-sb = Starboard.fromJSONFile("starboard3h.json")
-assert sb is not None
+_loaded = Starboard.fromJSONFile("starboard3h.json")
+assert _loaded is not None
+sb: Starboard = _loaded
 
 CE, DE = (5,), (18, 24)
 PAN, DANS = (4, 11), (4, 5, 11)             # DANS == PAN + CE: `ce pan` is shadowed by the word `dans`
 EST, VAIS = (13, 14), (5, 13, 14)           # VAIS == EST + CE too
-WORDS = {(PAN,): ["pan"], (DANS,): ["dans"], (EST,): ["est"], (VAIS,): ["vais"], ((1, 12),): ["ba"]}
+WORDS: dict[Strokes, list[str]] = {(PAN,): ["pan"], (DANS,): ["dans"], (EST,): ["est"], (VAIS,): ["vais"], ((1, 12),): ["ba"]}
 
 
 class Ctx(SimContext):
@@ -59,7 +60,7 @@ def test_attested_merge_is_class_two_but_a_shadowing_word_still_wins() -> None:
 
 def test_attested_beats_probability() -> None:
     r = Rules(attaches=(AttachRule(("ce",), PREFIX, (5,)), AttachRule(("de",), PREFIX, (18, 24))))
-    words = {((1, 12),): ["ba"], ((1, 12, 18, 24),): ["bade"]}    # `de`+`ba` shadows nothing; stroke (1,5,12,18,24) is a stack
+    words: dict[Strokes, list[str]] = {((1, 12),): ["ba"], ((1, 12, 18, 24),): ["bade"]}    # `de`+`ba` shadows nothing; stroke (1,5,12,18,24) is a stack
     dec = ExpressionDecoder(r, words)
     outline = ((1, 5, 12, 18, 24),)
     readings = dec.decode(outline)

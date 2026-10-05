@@ -12,8 +12,9 @@ from src.expressions import (EXCEPTION, MERGED, STANDALONE, AttachRule,
                              composeOutlineTraced)
 from src.keyboard import Starboard, canonicalizeStrokes
 
-sb = Starboard.fromJSONFile("starboard3h.json")
-assert sb is not None
+_loaded = Starboard.fromJSONFile("starboard3h.json")
+assert _loaded is not None
+sb: Starboard = _loaded
 
 
 class Ctx(SimContext):
@@ -206,12 +207,14 @@ class TestFailureLadder:
                                 AttachRule(("de", "la"), SUFFIX, (14,))))
         tokens = (tok("mot", MOT), tok("de", DE), tok("la", LA))
         traced = composeOutlineTraced(rules, tokens, Ctx())
-        assert traced.segments[-1].rule.position == SUFFIX
+        last = traced.segments[-1].rule
+        assert isinstance(last, AttachRule) and last.position == SUFFIX
         assert traced.segments[-1].outcome == MERGED
         assert traced.saving == 2
         # a following token keeps the prefix rule
         followed = composeOutlineTraced(rules, tokens + (tok("est", EST),), Ctx())
-        assert followed.segments[1].rule.position == PREFIX
+        second = followed.segments[1].rule
+        assert isinstance(second, AttachRule) and second.position == PREFIX
 
     def test_span_one_never_goes_standalone(self):
         """A one-stroke particle with a failed merge keeps its longform
@@ -319,10 +322,10 @@ class TestFailuresAndValidation:
                 raise AssertionError("expected ValueError")
             except ValueError:
                 pass
-        for bad in (lambda: BriefRule((), ((3,),)),
-                    lambda: BriefRule(("il",), ())):
+        for badBrief in (lambda: BriefRule((), ((3,),)),
+                         lambda: BriefRule(("il",), ())):
             try:
-                bad()
+                badBrief()
                 raise AssertionError("expected ValueError")
             except ValueError:
                 pass
@@ -332,6 +335,7 @@ class TestFailuresAndValidation:
                       attaches=(AttachRule(("pas",), SUFFIX, KAPPA_PAS),))
         tokens = (tok("il", IL), tok("y", Y), tok("a", A), tok("pas", ((7, 8),)))
         traced = composeOutlineTraced(rules, tokens, Ctx())
+        assert traced.strokes is not None
         assert traced.saving == sum(len(t.strokes) for t in tokens) - len(traced.strokes)
         assert traced.saving == 2  # brief: 3->1; pas merged into the brief
 

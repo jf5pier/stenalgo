@@ -5,10 +5,11 @@ from src.affixes import PREFIX, SUFFIX, SimContext
 from src.expressiondecoder import ExpressionDecoder
 from src.expressions import (MERGED, STANDALONE, AttachRule, BriefRule, Rules, Token,
                              composeOutlineTraced)
-from src.keyboard import Starboard
+from src.keyboard import Starboard, Strokes
 
-sb = Starboard.fromJSONFile("starboard3h.json")
-assert sb is not None
+_loaded = Starboard.fromJSONFile("starboard3h.json")
+assert _loaded is not None
+sb: Starboard = _loaded
 
 EST, IL, Y, A = (13, 14), (13, 23), (13,), (12, 10)
 CAFE = ((1, 12), (2, 14))             # a two-stroke word
@@ -54,6 +55,7 @@ def test_prefix_merge_round_trips() -> None:
     r = rules()
     traced = composeOutlineTraced(r, (tok("de", (4, 5, 11, 12)), tok("est", EST)), ctx)
     assert [s.outcome for s in traced.segments if s.kind == "attach"] == [MERGED]
+    assert traced.strokes is not None
     readings = decoder(r, ctx).decode(traced.strokes)
     assert any(len(x) == 1 and x[0].units == ("est",) and
                [a.expression for a in x[0].prefix] == [("de",)] for x in readings)
@@ -64,6 +66,7 @@ def test_suffix_merge_lands_on_last_stroke() -> None:
     r = rules()
     traced = composeOutlineTraced(r, (tok("cafe", *CAFE), tok("pas", (8,), (9,))), ctx)
     assert traced.strokes is not None and len(traced.strokes) == 2
+    assert traced.strokes is not None
     readings = decoder(r, ctx).decode(traced.strokes)
     assert any(x[0].units == ("cafe",) and [a.expression for a in x[0].suffix] == [("pas",)]
                for x in readings)
@@ -75,6 +78,7 @@ def test_prefix_and_suffix_stack_on_one_stroke() -> None:
     traced = composeOutlineTraced(
         r, (tok("de", (4, 5, 11, 12)), tok("est", EST), tok("pas", (8,), (9,))), ctx)
     assert traced.strokes == ((4, 5, 9, 13, 14),)
+    assert traced.strokes is not None
     readings = decoder(r, ctx).decode(traced.strokes)
     pieces = [x[0] for x in readings if len(x) == 1 and x[0].units == ("est",)]
     assert pieces and [a.expression for a in pieces[0].prefix] == [("de",)]
@@ -85,7 +89,7 @@ def test_selector_swallowed_by_host_mark_gives_both_readings() -> None:
     # host il* with the d' keypress (4,5,10): the star is both a selector and the host mark
     ctx = Ctx()
     r = Rules(attaches=(AttachRule(("d'",), PREFIX, DEL, "de"),))
-    words = {((13, 23, 10),): ["il*"], ((13, 23),): ["il"]}
+    words: dict[Strokes, list[str]] = {((13, 23, 10),): ["il*"], ((13, 23),): ["il"]}
     dec = ExpressionDecoder(r, words, {}, ctx.isLegal)
     readings = dec.decode(((4, 5, 10, 13, 23),))
     assert {x[0].units for x in readings} == {("il",), ("il*",)}

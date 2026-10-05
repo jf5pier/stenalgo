@@ -5,10 +5,11 @@ from src.affixes import PREFIX, SimContext
 from src.elision import BASE, ELIDED, elisionAgrees, orderingExists, startsWithVowelSound
 from src.expressiondecoder import ExpressionDecoder
 from src.expressions import EXCEPTION, MERGED, AttachRule, Rules, Token, composeOutlineTraced
-from src.keyboard import Starboard
+from src.keyboard import Starboard, Strokes
 
-sb = Starboard.fromJSONFile("starboard3h.json")
-assert sb is not None
+_loaded = Starboard.fromJSONFile("starboard3h.json")
+assert _loaded is not None
+sb: Starboard = _loaded
 
 
 def test_vowel_sound_rules() -> None:
@@ -54,7 +55,7 @@ def test_composer_merges_only_the_agreeing_form() -> None:
 
 def test_decoder_reads_one_form_from_the_host() -> None:
     ctx = Ctx()
-    words = {((13, 23),): ["il"], ((14, 21),): ["ca"]}
+    words: dict[Strokes, list[str]] = {((13, 23),): ["il"], ((14, 21),): ["ca"]}
     dec = ExpressionDecoder(rules(), words, {}, None)
     forms = lambda strokes: [[a.expression for a in r[0].prefix] for r in dec.decode(strokes)]  # noqa: E731
     assert forms(((5, 9, 13, 17, 23),)) == [[("qu'",)]]       # vowel host: elided form only

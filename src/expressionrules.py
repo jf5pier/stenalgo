@@ -308,10 +308,10 @@ def orderBan(selected: list[ExprRule], pool: list[PoolExpression],
                     key = (a.units, b.units)
                     pairFreq[key] = pairFreq.get(key, 0.0) + expr.freq
     ban: set[tuple[tuple[str, ...], tuple[str, ...]]] = set()
-    for (a, b), freq in pairFreq.items():
-        reverse = pairFreq.get((b, a))
-        if reverse is not None and (freq, a) < (reverse, b):
-            ban.add((a, b))
+    for (unitsA, unitsB), freq in pairFreq.items():
+        reverse = pairFreq.get((unitsB, unitsA))
+        if reverse is not None and (freq, unitsA) < (reverse, unitsB):
+            ban.add((unitsA, unitsB))
     return frozenset(ban)
 
 

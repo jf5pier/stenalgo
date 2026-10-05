@@ -5,14 +5,20 @@ from src.affixes import SimContext
 from src.expressiondata import (ChordLegality, bundleToDict, legalityFromStarboard, loadBundle,
                                 wordIndexFingerprint)
 from src.expressions import AttachRule, BriefRule, Rules
-from src.keyboard import Starboard
+from src.keyboard import Starboard, Strokes
 from src.keyconflicts import KeyConflicts
 
 
 class TestExpressionData(unittest.TestCase):
+    starboard: Starboard
+    ctx: SimContext
+    legality: ChordLegality
+
     @classmethod
     def setUpClass(cls) -> None:
-        cls.starboard = Starboard.fromJSONFile("starboard3h.json")
+        loaded = Starboard.fromJSONFile("starboard3h.json")
+        assert loaded is not None
+        cls.starboard = loaded
         cls.ctx = SimContext(cls.starboard, [])
         cls.legality = legalityFromStarboard(cls.starboard)
 
@@ -32,7 +38,8 @@ class TestExpressionData(unittest.TestCase):
     def test_bundle_round_trip(self) -> None:
         rules = Rules(attaches=(AttachRule(("de",), "prefix", (3, 4)),),
                       briefs=(BriefRule(("a", "b"), ((5,),)),))
-        doc = bundleToDict(rules, {((1, 2),): ["mot"]}, {"mot": 1}, {(((1, 2),), (("content", ("mot",), False, (), (), ()),)): 2.0},
+        mot: dict[Strokes, list[str]] = {((1, 2),): ["mot"]}
+        doc = bundleToDict(rules, mot, {"mot": 1}, {(((1, 2),), (("content", ("mot",), False, (), (), ()),)): 2.0},
                            {"mot": 0.5}, KeyConflicts(), self.legality)
         decoder, ranker = loadBundle(doc)
         self.assertEqual(decoder.rules, rules)
@@ -43,7 +50,7 @@ class TestExpressionData(unittest.TestCase):
 
     def test_word_index_from_a_file_is_fingerprinted(self) -> None:
         rules = Rules(attaches=(AttachRule(("de",), "prefix", (3, 4)),))
-        words = {((1, 2),): ["mot"], ((5,),): ["a", "b"]}
+        words: dict[Strokes, list[str]] = {((1, 2),): ["mot"], ((5,),): ["a", "b"]}
         doc = bundleToDict(rules, words, {}, {}, {}, KeyConflicts(), self.legality, wordsFile="stock.json")
         self.assertNotIn("words", doc)
         self.assertEqual(doc["wordIndex"]["count"], 2)
@@ -52,16 +59,19 @@ class TestExpressionData(unittest.TestCase):
         with self.assertRaises(ValueError):                       # the index was not passed
             loadBundle(doc)
         with self.assertRaises(ValueError):                       # another theory's index
-            loadBundle(doc, {((1, 2),): ["mot"], ((5,),): ["a", "c"]})
+            other: dict[Strokes, list[str]] = {((1, 2),): ["mot"], ((5,),): ["a", "c"]}
+            loadBundle(doc, other)
 
     def test_fingerprint_ignores_order_and_duplicates(self) -> None:
-        a = {((1,),): ["x", "y"], ((2,),): ["z"]}
-        b = {((2,),): ["z", "z"], ((1,),): ["y", "x"]}
+        a: dict[Strokes, list[str]] = {((1,),): ["x", "y"], ((2,),): ["z"]}
+        b: dict[Strokes, list[str]] = {((2,),): ["z", "z"], ((1,),): ["y", "x"]}
         self.assertEqual(wordIndexFingerprint(a), wordIndexFingerprint(b))
-        self.assertNotEqual(wordIndexFingerprint(a), wordIndexFingerprint({((1,),): ["x"], ((2,),): ["z"]}))
+        c: dict[Strokes, list[str]] = {((1,),): ["x"], ((2,),): ["z"]}
+        self.assertNotEqual(wordIndexFingerprint(a), wordIndexFingerprint(c))
 
     def test_unit_strokes_keep_only_attach_particles(self) -> None:
         rules = Rules(attaches=(AttachRule(("il", "n'"), "prefix", (3, 4)),))
-        doc = bundleToDict(rules, {((1,),): ["mot"]}, {"il": 1, "n'": 1, "mot": 1, "autre": 2}, {}, {},
+        mot: dict[Strokes, list[str]] = {((1,),): ["mot"]}
+        doc = bundleToDict(rules, mot, {"il": 1, "n'": 1, "mot": 1, "autre": 2}, {}, {},
                            KeyConflicts(), self.legality)
         self.assertEqual(doc["unitStrokes"], {"il": 1, "n'": 1})
