@@ -31,7 +31,10 @@ word has no segments.
 
 `strokes` is the outline the hint shows. `alternates` lists other outlines
 that are equally accepted (an affix lesson's long outline next to the short
-one, see `util/export_affix_lessons.py`); usually empty. -}
+one, see `util/export_affix_lessons.py`); usually empty. `ruleRanks` names the
+expression abbreviation rules the outline uses (ranks in
+`expression-lessons.json`, see `util/export_expression_lessons.py`); empty for
+every other item. -}
 type alias PracticeWord =
     { ortho : String
     , before : String
@@ -42,6 +45,7 @@ type alias PracticeWord =
     , strokes : List (List Int)
     , segments : List Segment
     , alternates : List Outline
+    , ruleRanks : List Int
     }
 
 
@@ -76,6 +80,7 @@ wordDecoder =
         |> required "strokes" (D.list (D.list D.int))
         |> hardcoded []
         |> optional "alternates" (D.list outlineDecoder) []
+        |> optional "ruleRanks" (D.list D.int) []
 
 
 outlineDecoder : D.Decoder Outline
@@ -112,6 +117,7 @@ sentenceDecoder =
             |> required "strokes" (D.list (D.list D.int))
             |> required "words" (D.list segmentDecoder)
             |> optional "alternates" (D.list outlineDecoder) []
+            |> optional "ruleRanks" (D.list D.int) []
         )
 
 

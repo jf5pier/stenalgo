@@ -1,4 +1,4 @@
-module Keyboard exposing (AffixRule, KeyInfo, Layout, affixRuleDecoder, decoder, geminiKeymap, view, viewAffixLegend, viewChordBoard, viewLegends, isConjugationStroke)
+module Keyboard exposing (AffixRule, ExpressionRule, KeyInfo, Layout, affixRuleDecoder, decoder, expressionRuleDecoder, geminiKeymap, view, viewAffixLegend, viewChordBoard, viewExpressionLegend, viewLegends, isConjugationStroke)
 
 {-| The virtual Starboard: decodes `keyboard-layout.json` (exported by
 `util/export_keyboard_layout.py` from the repo's own `Starboard` class) and
@@ -89,6 +89,30 @@ affixRuleDecoder =
         (D.field "rank" D.int)
         (D.field "keys" (D.list D.int))
         (D.field "keyNames" (D.list D.string))
+        (D.field "label" D.string)
+
+
+{-| One expression abbreviation rule (`expression-lessons.json`, `rules`): an
+attach rule (its keys add a particle to the neighbouring word) or a brief (one
+stroke for a whole phrase, given as `steno`). Shown by `viewExpressionLegend`. -}
+type alias ExpressionRule =
+    { rank : Int
+    , kind : String
+    , keys : List Int
+    , keyNames : List String
+    , steno : Maybe String
+    , label : String
+    }
+
+
+expressionRuleDecoder : D.Decoder ExpressionRule
+expressionRuleDecoder =
+    D.map6 ExpressionRule
+        (D.field "rank" D.int)
+        (D.field "kind" D.string)
+        (D.field "keys" (D.list D.int))
+        (D.field "keyNames" (D.list D.string))
+        (D.maybe (D.field "steno" D.string))
         (D.field "label" D.string)
 
 
@@ -854,6 +878,35 @@ viewAffixLegend rules =
         , ul [ class "legend" ]
             (rules
                 |> List.map (\r -> li [] [ text (groupKeyNames r.keyNames ++ " : " ++ r.label) ])
+            )
+        ]
+
+
+{-| The expression rules the current item uses, one per line: the keys of an
+attach rule (key names grouped per side) or the stroke of a brief, then what
+they stand for. Shown under the chord board when the abbreviation hint is on. -}
+viewExpressionLegend : List ExpressionRule -> Html msg
+viewExpressionLegend rules =
+    div [ class "legend-block" ]
+        [ h3 [] [ text "Expression rules" ]
+        , ul [ class "legend" ]
+            (rules
+                |> List.map
+                    (\r ->
+                        li []
+                            [ text
+                                ((case r.steno of
+                                    Just steno ->
+                                        steno
+
+                                    Nothing ->
+                                        groupKeyNames r.keyNames
+                                 )
+                                    ++ " : "
+                                    ++ r.label
+                                )
+                            ]
+                    )
             )
         ]
 

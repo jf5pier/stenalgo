@@ -71,12 +71,15 @@ type alias Model =
     , abbreviations : Dict String (Dict String String) -- affix-abbreviations.json (spelling -> long outline -> short), optional
     , lessons : Maybe (LoadState Lessons)
     , affixData : Maybe Lessons.AffixData -- affix-lessons.json, when it came back (the stub stays otherwise)
+    , expressionData : Maybe Lessons.ExpressionData -- expression-lessons.json: the rules legend and the expressions lessons, when it came back
+    , expressionSentences : Maybe (List PracticeWord) -- expression-sentences.json (abbreviated sentences), optional
+    , abbreviatedSentences : Bool -- Sentences mode drills `expressionSentences` instead of the plain sentences
     , selectedLesson : Maybe String
     , query : String
     , hints : Bool
     , simulation : Maybe Simulation -- the Simulate button's run in progress
     , simulationRuns : Int -- runs started so far; a timer of an older run is ignored
-    , abbrevHints : Maybe Bool -- the learner's choice for the affix rule hint; Nothing = the default (`abbrevHintsOn`)
+    , abbrevHints : Maybe Bool -- the learner's choice for the abbreviation rule hint; Nothing = the default (`abbrevHintsOn`)
     , lastStroke : Set.Set Int
     , typed : TypedStrokes
     }
@@ -105,6 +108,9 @@ type Msg
     | GotAbbreviations (Result Http.Error (Dict String (Dict String String)))
     | GotLessons (Result Http.Error Lessons)
     | GotAffixData (Result Http.Error Lessons.AffixData)
+    | GotExpressionData (Result Http.Error Lessons.ExpressionData)
+    | GotExpressionSentences (Result Http.Error (List PracticeWord))
+    | ToggleAbbreviatedSentences
     | SelectLesson String
     | PrevLesson
     | NextLesson
@@ -137,6 +143,9 @@ init _ =
       , abbreviations = Dict.empty
       , lessons = Nothing
       , affixData = Nothing
+      , expressionData = Nothing
+      , expressionSentences = Nothing
+      , abbreviatedSentences = False
       , selectedLesson = Nothing
       , query = ""
       , hints = True
@@ -151,6 +160,8 @@ init _ =
         , Http.get { url = "public/data/practice-words.json", expect = Http.expectJson GotWords Drill.decoder }
         , Http.get { url = "public/data/practice-sentences.json", expect = Http.expectJson GotSentences Drill.sentenceDecoder }
         , Http.get { url = "public/data/affix-lessons.json", expect = Http.expectJson GotAffixData Lessons.affixDecoder }
+        , Http.get { url = "public/data/expression-lessons.json", expect = Http.expectJson GotExpressionData Lessons.expressionDecoder }
+        , Http.get { url = "public/data/expression-sentences.json", expect = Http.expectJson GotExpressionSentences Drill.sentenceDecoder }
         ]
     )
 
@@ -228,7 +239,7 @@ update msg unswitched =
             ( { model | definitions = Just (Failed (httpErrorToString err)) }, Cmd.none )
 
         GotLessons (Ok lessons) ->
-            ( { model | lessons = Just (Loaded (mergeAffix model.affixData lessons)) }, Cmd.none )
+            ( { model | lessons = Just (Loaded (mergeOptionalData model lessons)) }, Cmd.none )
 
         GotAffixData (Ok data) ->
             -- Whichever of lessons.json / affix-lessons.json arrives last does the merge.
@@ -248,6 +259,41 @@ update msg unswitched =
         GotAffixData (Err _) ->
             -- Optional layer: without the file the affixes track keeps its stub lesson.
             ( model, Cmd.none )
+
+        GotExpressionData (Ok data) ->
+            -- Same as the affix file: whichever of lessons.json / expression-lessons.json arrives last merges.
+            ( { model
+                | expressionData = Just data
+                , lessons =
+                    case model.lessons of
+                        Just (Loaded lessons) ->
+                            Just (Loaded (Lessons.mergeExpressionData data lessons))
+
+                        other ->
+                            other
+              }
+            , Cmd.none
+            )
+
+        GotExpressionData (Err _) ->
+            -- Optional layer: without the file the expressions track keeps its stub lesson.
+            ( model, Cmd.none )
+
+        GotExpressionSentences (Ok sentences) ->
+            ( { model | expressionSentences = Just sentences }, Cmd.none )
+
+        GotExpressionSentences (Err _) ->
+            -- Optional layer: without the file Sentences mode has no abbreviated-sentences switch.
+            ( model, Cmd.none )
+
+        ToggleAbbreviatedSentences ->
+            -- A fresh drill over the other sentence list (the same restart a mode switch does).
+            startDrillIfIdle
+                { model
+                    | abbreviatedSentences = not model.abbreviatedSentences
+                    , drill = Nothing
+                    , typed = noTypedStrokes
+                }
 
         GotLessons (Err err) ->
             ( { model | lessons = Just (Failed (httpErrorToString err)) }, Cmd.none )
@@ -401,14 +447,13 @@ update msg unswitched =
                     ( model, Cmd.none )
 
 
-mergeAffix : Maybe Lessons.AffixData -> Lessons -> Lessons
-mergeAffix affixData lessons =
-    case affixData of
-        Just data ->
-            Lessons.mergeAffixData data lessons
-
-        Nothing ->
-            lessons
+{-| `lessons.json` with the optional files that already came back merged in
+(`affix-lessons.json`, `expression-lessons.json`). -}
+mergeOptionalData : Model -> Lessons -> Lessons
+mergeOptionalData model lessons =
+    lessons
+        |> (\l -> model.affixData |> Maybe.map (\data -> Lessons.mergeAffixData data l) |> Maybe.withDefault l)
+        |> (\l -> model.expressionData |> Maybe.map (\data -> Lessons.mergeExpressionData data l) |> Maybe.withDefault l)
 
 
 noTypedStrokes : TypedStrokes
@@ -473,7 +518,12 @@ activeItems model =
             Just model.words
 
         SentenceMode ->
-            Just model.sentences
+            case ( model.abbreviatedSentences, model.expressionSentences ) of
+                ( True, Just sentences ) ->
+                    Just (Loaded sentences)
+
+                _ ->
+                    Just model.sentences
 
         DefinitionMode ->
             Nothing
@@ -617,6 +667,7 @@ view model =
                 :: viewModeSwitch model.mode
                 :: viewHintsToggle model
                 :: viewAbbrevHintsToggle model
+                :: viewAbbreviatedSentencesToggle model
                 :: viewNotationToggle model.notation
                 :: viewSidebarLegends model
             )
@@ -698,8 +749,9 @@ viewHintsToggle model =
             ]
 
 
-{-| Whether the affix rule hint shows: the learner's choice once made, else on
-for words, sentences and the affixes lesson track, off in the other lessons. -}
+{-| Whether the abbreviation rule hint (affix rules, expression rules) shows:
+the learner's choice once made, else on for words, sentences, the affixes and
+the expressions lesson tracks, off in the other lessons. -}
 abbrevHintsOn : Model -> Bool
 abbrevHintsOn model =
     case model.abbrevHints of
@@ -711,7 +763,7 @@ abbrevHintsOn model =
                 LessonMode ->
                     case ( model.lessons, model.selectedLesson ) of
                         ( Just (Loaded lessons), Just id ) ->
-                            List.any (\l -> l.id == id && l.track == "affixes") lessons.lessons
+                            List.any (\l -> l.id == id && List.member l.track [ "affixes", "expressions" ]) lessons.lessons
 
                         _ ->
                             False
@@ -723,9 +775,10 @@ abbrevHintsOn model =
                     True
 
 
-{-| Affix rule hint on: under the chord board, the affix rules' keys and,
+{-| Abbreviation rule hint on: under the chord board, the affix rules' keys and,
 for the drill's current word, the short outlines the affix layer gives it
-(`viewAbbreviationHints`). -}
+(`viewAbbreviationHints`), and the expression rules its outline uses
+(`viewExpressionHints`). -}
 viewAbbrevHintsToggle : Model -> Html Msg
 viewAbbrevHintsToggle model =
     if model.mode == DefinitionMode then
@@ -735,18 +788,18 @@ viewAbbrevHintsToggle model =
         p [ class "hints-toggle" ]
             [ text
                 (if abbrevHintsOn model then
-                    "Affix rule hint: on "
+                    "Abbreviation rule hint: on "
 
                  else
-                    "Affix rule hint: off "
+                    "Abbreviation rule hint: off "
                 )
             , button [ onClick ToggleAbbrevHints ]
                 [ text
                     (if abbrevHintsOn model then
-                        "Hide affix rule hint"
+                        "Hide abbreviation rule hint"
 
                      else
-                        "Show affix rule hint"
+                        "Show abbreviation rule hint"
                     )
                 ]
             ]
@@ -822,6 +875,62 @@ viewAbbreviationHints model =
                     ]
 
 
+{-| The expression rules the current item's outline uses (its `ruleRanks`: an
+expressions-lesson word, or an abbreviated sentence), in the legend under the
+chord board; nothing for the other items. -}
+viewExpressionHints : Model -> Html Msg
+viewExpressionHints model =
+    case ( model.expressionData, model.drill |> Maybe.andThen Drill.currentWord ) of
+        ( Just data, Just word ) ->
+            let
+                render =
+                    Notation.render model.notation
+
+                used =
+                    data.rules
+                        |> List.filter (\rule -> List.member rule.rank word.ruleRanks)
+                        |> List.map (\rule -> { rule | keyNames = List.map render rule.keyNames, steno = Maybe.map render rule.steno })
+            in
+            if List.isEmpty used then
+                text ""
+
+            else
+                div [ class "abbreviation-hints" ] [ Keyboard.viewExpressionLegend used ]
+
+        _ ->
+            text ""
+
+
+{-| Sentences mode with `expression-sentences.json` loaded: switch between the
+plain sentences and the same sentences written with the expression
+abbreviations (the plain outline stays accepted either way). -}
+viewAbbreviatedSentencesToggle : Model -> Html Msg
+viewAbbreviatedSentencesToggle model =
+    case ( model.mode, model.expressionSentences ) of
+        ( SentenceMode, Just _ ) ->
+            p [ class "hints-toggle" ]
+                [ text
+                    (if model.abbreviatedSentences then
+                        "Abbreviated sentences: on "
+
+                     else
+                        "Abbreviated sentences: off "
+                    )
+                , button [ onClick ToggleAbbreviatedSentences ]
+                    [ text
+                        (if model.abbreviatedSentences then
+                            "Show plain sentences"
+
+                         else
+                            "Show abbreviated sentences"
+                        )
+                    ]
+                ]
+
+        _ ->
+            text ""
+
+
 abbreviationsOf : String -> List Lessons.Abbreviation -> List Lessons.Abbreviation
 abbreviationsOf spelling =
     let
@@ -893,7 +1002,10 @@ viewTrainer model =
                             layout.keys
                         , Keyboard.viewChordBoard (simulatedKeys model) layout
                         , if abbrevHintsOn model && model.mode /= DefinitionMode then
-                            viewAbbreviationHints model
+                            div []
+                                [ viewAbbreviationHints model
+                                , viewExpressionHints model
+                                ]
 
                           else
                             text ""

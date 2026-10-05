@@ -13,9 +13,9 @@ with context words -- "la maison", "que tu viennes", "parle !"), **Sentences**
 (217 short sentences, word by word), **Definitions** (look up a spelling's
 homophones) and **Lessons** (the fixed progression of `lessons.json`: read a
 lesson's rules, then drill its own word pool). A hints toggle hides the
-expected strokes and keys; an "Affix rule hint" toggle (on by default in
-Words, Sentences and the Affixes lessons) shows under the chord board the affix
-rules that shorten the current word; an X-SAMPA/IPA
+expected strokes and keys; an "Abbreviation rule hint" toggle (on by default in
+Words, Sentences and the Affixes and Expressions lessons) shows under the chord board the affix
+rules that shorten the current word and the expression rules its outline uses; an X-SAMPA/IPA
 toggle switches every phoneme on the page. Every drill has "Previous word"/"Next word" buttons and a
 **Simulate** button over the keyboard, which lights the current word's strokes
 (1 s + 0.2 s per key for an intermediate stroke, 3 s for the last; green, yellow for a
@@ -53,6 +53,8 @@ python -m util.export_practice_sentences   # after export_practice_words: its vo
 python -m util.export_definitions          # definition mode's whole-lexicon lookup (~10 MB)
 python -m util.export_lessons              # lessons mode's generated progression (docs/specs/lessons.md)
 python -m util.export_affix_lessons        # optional, after util.export_affix_dictionary: the affixes track (docs/specs/affix-lessons.md)
+python -m util.export_expression_lessons   # optional: the expressions track (docs/specs/expression-lessons.md)
+python -m util.export_expression_sentences # optional, after export_practice_words: the abbreviated sentences
 ```
 
 `public/data/affix-lessons.json` is optional: it is fetched at startup, and its 30 rule lessons and its lesson on
@@ -62,6 +64,14 @@ conjugated forms replace the stub of the `affixes` track in `lessons.json`, and 
 fetches it and adds an "Abbrev." column to the base-chord tables with at least one abbreviated row.
 In those lessons a word's hint shows the short outline, but the drill accepts either the short or the long outline
 (`alternates` in the word record; `Drill.applyStroke` follows whichever outline the strokes typed so far start).
+
+`public/data/expression-lessons.json` is optional too: its lessons (one per rule family, composed phrases, the briefs) replace the stub of the
+`expressions` track in `lessons.json`, and its `rules` feed the "Expression rules" legend under the chord board, which lists the rules named by the
+current item's `ruleRanks` (an expressions-lesson word, or an abbreviated sentence). A word there accepts its composed outline, the partial compositions and the plain
+word-by-word outline (`alternates`). `public/data/expression-sentences.json` is optional as well: when it is loaded, Sentences mode shows an
+"Abbreviated sentences" switch between the plain sentences and the same sentences written with the abbreviations (off by default; 139 sentences).
+Known limitation: in an abbreviated sentence the per-word highlighting follows the abbreviated outline; a learner who types the plain outline instead
+is accepted, but the current-word highlight can then lag. Nothing is decoded in the trainer: every accepted outline is exported by Python.
 
 The sentences themselves come from `util/candidate_sentences.jsonl`, written
 once by an LLM with a per-token lemma/category/conjugation annotation (which

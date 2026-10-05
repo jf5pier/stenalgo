@@ -1,4 +1,4 @@
-module Lessons exposing (Abbreviation, AffixData, Lesson, Lessons, Rule, Track, affixDecoder, decoder, mergeAffixData, viewIntro, viewList, viewPrevNext)
+module Lessons exposing (Abbreviation, AffixData, ExpressionData, Lesson, Lessons, Rule, Track, affixDecoder, decoder, expressionDecoder, mergeAffixData, mergeExpressionData, viewIntro, viewList, viewPrevNext)
 
 {-| Lesson mode: the fixed learner progression exported by
 `util/export_lessons.py` (`lessons.json`) -- tracks of lessons, each lesson
@@ -112,12 +112,59 @@ abbreviationDecoder =
 {-| The lessons with the `affixes` track's lessons (the stub) replaced by the
 real ones. An empty list of affix lessons keeps the stub. -}
 mergeAffixData : AffixData -> Lessons -> Lessons
-mergeAffixData data lessons =
-    if List.isEmpty data.lessons then
+mergeAffixData data =
+    replaceTrack "affixes" data.lessons
+
+
+{-| `expression-lessons.json` (`util/export_expression_lessons.py`): the
+expression abbreviation rules (the legend) and the `expressions` track's
+lessons, which replace that track's stub lesson of `lessons.json`
+(`mergeExpressionData`). The words of those lessons, and the sentences of
+`expression-sentences.json`, name the rules they use by `ruleRanks`. -}
+type alias ExpressionData =
+    { rules : List Keyboard.ExpressionRule
+    , lessons : List Lesson
+    }
+
+
+expressionDecoder : D.Decoder ExpressionData
+expressionDecoder =
+    D.map2 ExpressionData
+        (D.field "rules" (D.list Keyboard.expressionRuleDecoder))
+        (D.field "lessons" (D.list lessonDecoder))
+
+
+{-| The lessons with the `expressions` track's lessons (the stub) replaced by
+the real ones. An empty list keeps the stub. -}
+mergeExpressionData : ExpressionData -> Lessons -> Lessons
+mergeExpressionData data =
+    replaceTrack "expressions" data.lessons
+
+
+{-| Replace the stub (or any earlier lessons) of one track by `replacements`,
+then put every lesson back in track order (the `tracks` list, then the lesson's
+`index`), so the order does not depend on which optional file arrived first.
+No replacements: the lessons stay as they are. -}
+replaceTrack : String -> List Lesson -> Lessons -> Lessons
+replaceTrack track replacements lessons =
+    if List.isEmpty replacements then
         lessons
 
     else
-        { lessons | lessons = List.filter (\l -> l.track /= "affixes") lessons.lessons ++ data.lessons }
+        let
+            trackPosition id =
+                lessons.tracks
+                    |> List.indexedMap Tuple.pair
+                    |> List.filter (\( _, t ) -> t.id == id)
+                    |> List.head
+                    |> Maybe.map Tuple.first
+                    |> Maybe.withDefault (List.length lessons.tracks)
+        in
+        { lessons
+            | lessons =
+                (List.filter (\l -> l.track /= track) lessons.lessons ++ replacements)
+                    |> List.sortBy (\l -> ( trackPosition l.track, l.index ))
+        }
 
 
 trackDecoder : D.Decoder Track
