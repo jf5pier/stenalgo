@@ -20,6 +20,11 @@ docs in `docs/PIPELINE.md` S8.10. Open items, most important first:
   Publish with `python -m util.sync_plover_mirror <clone> --push` after `export_expression_data` (mirror at `bffad81`, 2026-10-04; a pip install from it was checked in a scratch folder). Remaining: test the install in the real Plover
   (`plover_plugins install git+https://github.com/jf5pier/stenalgo-plover` with `PYTHONUSERBASE`, `--force-reinstall` on a same-version reinstall) and edit the existing `plover.cfg` dictionary list of the Stenalgo system (the
   defaults apply only to a config with no list of its own; Plover closed, ask first); bump `version` on every theory change.
+- **Expression lessons in the trainer (2026-10-04).** Python side DONE (S10a `util/export_expression_lessons.py`, S10b `util/export_expression_sentences.py`, spec `docs/specs/expression-lessons.md`,
+  files `expression-lessons.json` 27 lessons / 430 items and `expression-sentences.json` 139 sentences, `expressions` stub track in `lessons.json`). Elm side TODO (plan: `~/.claude/plans/1-by-family-rule-crispy-pumpkin.md`,
+  session B): merge the optional lessons file like the affix one (generalize the `"affixes"` filters in `Lessons.mergeAffixData` / `Main.abbrevHintsOn`), an expression rule legend reading `ruleRanks`, offer the abbreviated sentences,
+  extend the hint toggle. Known gap: a brief is composed alone because the composer matches attach particles first (`avec`, `dans la`, `dans les`, `toutes les`, `avec les` never use their brief in the full composition; check the decoder reads them).
+
 - **Clean-profile test of the Plover plugin install (2026-10-04, for another time).** Check that a first-time user gets working dictionaries without hand-editing `plover.cfg`: install only
   `git+https://github.com/jf5pier/stenalgo-plover` into a fresh Plover config (a spare Windows user, or an empty config directory; read how Plover 5.4.1 picks its config folder first), switch
   to the "Stenalgo French" system, and check in `plover.log` that the four default dictionaries load (`user.json`, `commands.json`, then the packaged expressions above the packaged stock JSON) with no

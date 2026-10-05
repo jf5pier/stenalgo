@@ -121,6 +121,7 @@ TRACKS = (
     ("verbe", "Verbes", "Les marques de conjugaison, temps par temps."),
     ("desambiguation", "Désambiguïsation", "Les marques * et # qui distinguent les homophones."),
     ("affixes", "Affixes", "Une règle d'abréviation par leçon : un contour court pour chaque mot, le long reste accepté."),
+    ("expressions", "Abréviations d'expressions", "Les particules qui se joignent au mot voisin, leurs combinaisons et les abréviations d'expressions : un contour court, le long reste accepté."),
 )
 TRACK_TITLES = {trackId: title for trackId, title, _description in TRACKS}
 
@@ -818,6 +819,12 @@ def buildLessons(
     _emitLesson(lessons, counters, "affixes", "Leçon un : à venir", "affixes",
                 TRACK_TITLES["affixes"], [], [],
                 [{"kind": "affixes", "text": "Abréviations d'affixes : à venir."}],
+                [])
+
+    # 4.6 expressions (stub)
+    _emitLesson(lessons, counters, "expressions", "Leçon un : à venir", "expressions",
+                TRACK_TITLES["expressions"], [], [],
+                [{"kind": "expressions", "text": "Abréviations d'expressions : à venir."}],
                 [])
 
     trackOrder = {trackId: i for i, (trackId, _t, _d) in enumerate(TRACKS)}

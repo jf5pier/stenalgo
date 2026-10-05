@@ -129,7 +129,15 @@ python -m util.export_affix_lessons          # Affix Abbreviation Building (S9c)
 python -m util.export_affix_abbreviations   # Affix Abbreviation Building (S9d): the Definitions page's "Abbrev." column
 # Prerequisites: affix_abbreviations.tsv (S9b). Outputs: steno-trainer/public/data/affix-abbreviations.json.
 
-python dictionary.py                         # the orchestrator over everything from S2 to S9
+python -m util.export_expression_lessons     # Expression Abbreviation Lessons (S10a): the trainer's expressions lesson track
+# Prerequisites: both pickles, starboard3h.json, the committed expression rule set (scratch/expr-rules-final.json, expr-briefs.tsv,
+# expr_candidates.tsv). Outputs: steno-trainer/public/data/expression-lessons.json (one lesson per rule family, composed phrases, the briefs).
+
+python -m util.export_expression_sentences   # Expression Abbreviation Lessons (S10b): the practice sentences with abbreviations
+# Prerequisites: the S10a inputs plus practice-words.json (export_practice_words) and util/candidate_sentences.jsonl.
+# Outputs: steno-trainer/public/data/expression-sentences.json (practice-sentences.json is untouched).
+
+python dictionary.py                         # the orchestrator over everything from S2 to S10
 # Prerequisites: as above (skips nothing; aborts on the first failing step).
 # Outputs: all of the S2-S9 outputs above, in dependency order; per-step wall times
 # appended to pipeline_timings.log (gitignored).
@@ -185,7 +193,7 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 
 ## Verification approach
 
-- `pytest src/test/` must pass after any `.py` change (1145 tests at the time of writing, expression layer, affix layer and lessons exporter included).
+- `pytest src/test/` must pass after any `.py` change (1164 tests at the time of writing, expression layer, affix layer and lessons exporter included).
 - `mypy` (bare, scope and options in `mypy.ini`) must report no issues after any `.py` change.
 - Behaviour-preserving changes are proven by a full rebuild following the rebuild table in
   `docs/PIPELINE.md`, comparing the md5s of `phonetic_theory.tsv`, `disambiguated_theory.tsv`,

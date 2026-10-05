@@ -52,6 +52,7 @@ The real dependency order. Steps 0 and 1 and the human loop 4h are run by hand, 
 | 9 | `python -m util.export_keyboard_layout` (after step 6), `python -m util.export_practice_words`, **then** `python -m util.export_practice_sentences`, then `python -m util.export_definitions`, then `python -m util.export_lessons` | Theory Export (S8), trainer branch | steno-trainer | `export_practice_sentences` reads `practice-words.json` (export_practice_sentences.py:157); `export_lessons` reads its Keypress Groups from `realization_report.json`, not `keypress_groups.json` (export_lessons.py:267). |
 | 10 | `python -m util.build_affix_rules`, then `python -m util.export_affix_dictionary`, then `python -m util.export_affix_lessons` | Affix Abbreviation Building (S9a, S9b, S9c) | the optional affix abbreviation layer | After the whole theory and its exports. S9a reads the committed `affix_decisions.json`; `AffixSelection.pickle` is its cache (absent: ~2.5 min full selection measured with 16 workers, the default is now at most 8; ~5.5 min with `--workers 1`; present: reused or cheaply reselected; `rm` it after any lexicon or layout change). Lists PENDING decisions, asks nothing. |
 | 10h | `python -m util.review_affix_rules` → `python -m util.build_affix_rules` | Affix Abbreviation Building, review | only when step 10 lists PENDING decisions | Hand-run and interactive: proposes each pending item with its help/hurt numbers (growth BEFORE fusion; a fusion is judged with its parts' decided growth, and a fused merge inherits its parts' growth), writes `affix_decisions.json` after every answer, then reselects by itself (cached, about a minute) and continues with what is newly pending, until nothing is pending, you quit, or a pass saved nothing. |
+| 11 | `python -m util.export_expression_lessons`, then `python -m util.export_expression_sentences` | Expression Abbreviation Lessons (S10a, S10b) | the trainer's expressions track and abbreviated sentences | After steps 8-9 (needs `practice-words.json` for the sentences). Reads the committed expression rule set and pool in `scratch/`; nothing is selected here. |
 | opt | `python -m util.check_conjugation_disambiguation_order` | Elicitation Phase: Answer Collection, validator | checking answers | Writes `conjugation_disambiguation_report.json` (gitignored). |
 
 **The orchestrated entrypoint.** `python dictionary.py` (no arguments) runs the whole chain
@@ -269,6 +270,11 @@ Affix Abbreviation Building (S9) ................. optional layer after the fini
 └─ S9b  Affix dictionary — python -m util.export_affix_dictionary → plover_stenalgo_affix_dictionary.json, affix_abbreviations.tsv
 └─ S9c  Trainer affix lessons — python -m util.export_affix_lessons → steno-trainer/public/data/affix-lessons.json
 └─ S9d  Trainer abbreviation column — python -m util.export_affix_abbreviations → steno-trainer/public/data/affix-abbreviations.json (from affix_abbreviations.tsv; the Definitions page's "Abbrev." column)
+
+Expression Abbreviation Lessons (S10) ............ optional layer after the finished theory; see below and docs/specs/expression-lessons.md
+├─ S10a Trainer expression lessons — python -m util.export_expression_lessons → steno-trainer/public/data/expression-lessons.json
+│       ← scratch/expr-rules-final.json, expr-briefs.tsv, expr_candidates.tsv (committed rule set and pool), both pickles
+└─ S10b Trainer expression sentences — python -m util.export_expression_sentences → steno-trainer/public/data/expression-sentences.json
 ```
 
 The two homophone problems have two mechanisms. Words that are forms of the same lemma and
@@ -2027,3 +2033,23 @@ then one lesson of the 20 most frequent marked routes (route >= 1) of verbs (one
 **Called by** `python dictionary.py` (after S9c), or by hand. **Input state** `affix_abbreviations.tsv` (S9b).
 **Transformation** spelling -> {long outline -> short outline}, first TSV row winning a shared long outline.
 **Artifacts** writes `steno-trainer/public/data/affix-abbreviations.json`, which the trainer's Definitions page matches by spelling and chord to fill its "Abbrev." column.
+
+### Trainer expression lessons — util/export_expression_lessons.main (S10a)
+
+**Called by** `python dictionary.py` (after S9d), or by hand.
+**Input state** the stable theory (both pickles), and the committed expression inputs read by `util/_expressioninput.loadExpressionInputs`
+(`scratch/expr-rules-final.json`, `expr-briefs.tsv`, `expr_candidates.tsv`).
+**Transformation** every pool phrase is composed with the full rule set (`composeOutlineTraced`); a phrase counts for the rules whose
+abbreviation is in its outline. One lesson per attach family (a particle and its elision twin share a chord, so a lesson), families ranked by
+frequency-weighted saving, the 20 most frequent one-piece phrases (topped up with multi-piece ones below ten); then up to three lessons of
+phrases that combine two, then three or more abbreviations; then four lessons of the ten most frequent forced briefs, each composed alone (the
+composer matches attach particles before briefs). Accepted outlines of a phrase: the composed one, the partial compositions, the plain
+word-by-word one. Schema and text conventions in `docs/specs/expression-lessons.md`.
+**Artifacts** writes `steno-trainer/public/data/expression-lessons.json` only (the stub of the `expressions` track lives in `lessons.json`).
+
+### Trainer expression sentences — util/export_expression_sentences.main (S10b)
+
+**Called by** `python dictionary.py` (after S10a), or by hand. **Input state** as S10a, plus `practice-words.json` and `util/candidate_sentences.jsonl`.
+**Transformation** the candidate sentences of `export_practice_sentences` (same token resolution and rejections), their tokens composed as one
+stream; only sentences that an abbreviation shortens are kept. The words' `strokeCount` follows `wordStrokeCounts` (a merged particle owns none).
+**Artifacts** writes `steno-trainer/public/data/expression-sentences.json`; `practice-sentences.json` stays byte-identical.

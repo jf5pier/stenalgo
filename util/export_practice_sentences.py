@@ -143,15 +143,9 @@ def buildSentence(candidate: dict[str, Any], chordsByOrtho: dict[str, list[Chord
     }
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--candidates", default=CANDIDATES_PATH)
-    parser.add_argument("--verbose", action="store_true", help="Print every rejection.")
-    args = parser.parse_args()
-
-    starboard = Starboard.fromJSONFile(KEYBOARD_JSON)
-    if starboard is None:
-        raise RuntimeError(f"{KEYBOARD_JSON} not found; it is a committed input -- run from the repo root.")
+def loadChordsByOrtho(starboard: Starboard) -> tuple[dict[str, list[Chord]], set[tuple[str, str]]]:
+    """Every chord of the disambiguated theory by spelling, and the (ortho, steno) pairs of `practice-words.json`:
+    what `buildSentence` resolves tokens against. Shared with `util.export_expression_sentences`."""
     theory, disambiguatedTheory, wordToStrokes, wordsByOrthoLemme = loadPhoneticAndDisambiguatedTheory(starboard)
     with open(RESOLVED_PRESS_SETS_PATH, encoding="utf-8") as f:
         readingsByWord = buildReadingsByWord(json.load(f), theory,
@@ -166,6 +160,19 @@ def main() -> None:
             Chord(word, strokes, renderFinalStrokesToRTFCRE(starboard, strokes), readings)
             for strokes, readings in chords
         )
+    return chordsByOrtho, drillItems
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--candidates", default=CANDIDATES_PATH)
+    parser.add_argument("--verbose", action="store_true", help="Print every rejection.")
+    args = parser.parse_args()
+
+    starboard = Starboard.fromJSONFile(KEYBOARD_JSON)
+    if starboard is None:
+        raise RuntimeError(f"{KEYBOARD_JSON} not found; it is a committed input -- run from the repo root.")
+    chordsByOrtho, drillItems = loadChordsByOrtho(starboard)
 
     with open(args.candidates, encoding="utf-8") as f:
         candidates = [json.loads(line) for line in f if line.strip()]

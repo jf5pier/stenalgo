@@ -24,6 +24,11 @@
    "id": "affixes",
    "title": "Affixes",
    "description": "Une règle d'abréviation par leçon : un contour court pour chaque mot, le long reste accepté."
+  },
+  {
+   "id": "expressions",
+   "title": "Abréviations d'expressions",
+   "description": "Les particules qui se joignent au mot voisin, leurs combinaisons et les abréviations d'expressions : un contour court, le long reste accepté."
   }
  ],
  "lessons": [
@@ -28487,6 +28492,23 @@
     {
      "kind": "affixes",
      "text": "Abréviations d'affixes : à venir."
+    }
+   ],
+   "words": []
+  },
+  {
+   "id": "expressions-01",
+   "track": "expressions",
+   "index": 1,
+   "sectionTitle": "Abréviations d'expressions",
+   "title": "Leçon un : à venir",
+   "kind": "expressions",
+   "newKeys": [],
+   "newChords": [],
+   "rules": [
+    {
+     "kind": "expressions",
+     "text": "Abréviations d'expressions : à venir."
     }
    ],
    "words": []

@@ -168,7 +168,7 @@ of word `w` is **eligible** for a lesson iff:
    reserved-free — so the two buckets partition the extra content; the exporter
    asserts this rather than assuming it.
 
-## 4. The five tracks
+## 4. The tracks
 
 Tracks are emitted in this order; ids are stable strings.
 
@@ -246,6 +246,12 @@ A single placeholder lesson, id `affixes-01`, kind `affixes`: rule text
 "Abréviations d'affixes : à venir." (§7.6), no words, no keys. It reserves the track
 so the UI can show it. The real affix lessons are a separate optional file (`affix-lessons.json`, see
 `docs/specs/affix-lessons.md`) that the trainer merges over this stub; without it the stub stays.
+
+### 4.6 `expressions` (stub)
+
+The same placeholder for the sixth track: id `expressions-01`, kind `expressions`, rule text "Abréviations d'expressions : à venir."
+(no words, no keys), track title "Abréviations d'expressions". The real lessons are the optional `expression-lessons.json`
+(`docs/specs/expression-lessons.md`), merged over the stub by the trainer.
 
 ## 5. Word selection and the word-count rule
 

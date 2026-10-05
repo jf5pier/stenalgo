@@ -602,6 +602,10 @@ def _runSteps(module: "Callable[[str, str], None]") -> None:
     module("Affix Abbreviation Building (S9b): affix dictionary", "util.export_affix_dictionary")
     module("Affix Abbreviation Building (S9c): trainer affix lessons", "util.export_affix_lessons")
     module("Affix Abbreviation Building (S9d): trainer abbreviation column", "util.export_affix_abbreviations")
+    # Expression Abbreviation Lessons (S10): the trainer's expressions lesson track and the abbreviated sentences, composed
+    # from the committed expression rule set (scratch/expr-*) on the finished theory; optional like S9.
+    module("Expression Abbreviation Lessons (S10a): trainer expression lessons", "util.export_expression_lessons")
+    module("Expression Abbreviation Lessons (S10b): trainer expression sentences", "util.export_expression_sentences")
 
     print("\nstenalgo pipeline complete: phonetic theory (pickles + phonetic_theory.tsv), "
           "LexiqueSynthetic.tsv, resolved_press_sets.json, keypress_groups.json, "

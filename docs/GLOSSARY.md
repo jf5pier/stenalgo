@@ -1074,6 +1074,12 @@ the PENDING decisions (the only affix command that asks questions).
 - Code: util/build_affix_rules.py, util/review_affix_rules.py, util/export_affix_dictionary.py; docs/AFFIX_RULES.md.
 - First used in: Affix Abbreviation Building (S9).
 
+### Expression Abbreviation Lessons (S10)
+The optional stage after Affix Abbreviation Building (S9): the trainer's `expressions` lesson track (S10a) and the practice sentences
+written with the expression abbreviations (S10b), composed from the committed expression rule set. The theory is unchanged by it.
+- Code: util/export_expression_lessons.py, util/export_expression_sentences.py; docs/specs/expression-lessons.md.
+- First used in: Expression Abbreviation Lessons (S10).
+
 ### Trainer data
 A dataset state: the five steno-trainer JSON files (`keyboard-layout`, `practice-words`,
 `practice-sentences`, `definitions`, `lessons`) under `steno-trainer/public/data/`; the output of the

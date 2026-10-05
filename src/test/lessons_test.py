@@ -852,7 +852,7 @@ class TestMarkRule:
 
 class TestBuildLessonsDocument:
 
-    def test_five_tracks_in_order(self, lessons):
+    def test_six_tracks_in_order(self, lessons):
         document, _counts = lessons
         assert document["tracks"] == [
             {"id": "phonemes", "title": "Phonèmes",
@@ -865,12 +865,14 @@ class TestBuildLessonsDocument:
              "description": "Les marques * et # qui distinguent les homophones."},
             {"id": "affixes", "title": "Affixes",
              "description": "Une règle d'abréviation par leçon : un contour court pour chaque mot, le long reste accepté."},
+            {"id": "expressions", "title": "Abréviations d'expressions",
+             "description": "Les particules qui se joignent au mot voisin, leurs combinaisons et les abréviations d'expressions : un contour court, le long reste accepté."},
         ]
 
     def test_per_track_counts_and_stream_counters(self, lessons):
         _document, counts = lessons
         assert counts == {"phonemes": 5, "accord": 2, "verbe": 1, "desambiguation": 1,
-                          "affixes": 1, "_records": 15, "_skippedWords": 1,
+                          "affixes": 1, "expressions": 1, "_records": 15, "_skippedWords": 1,
                           "_invalidRecords": 1}
 
     def test_lesson_ids_are_dense_and_generation_ordered(self, lessons):
@@ -880,11 +882,11 @@ class TestBuildLessonsDocument:
             byTrack.setdefault(lesson["track"], []).append(lesson["id"])
         assert byTrack == {trackId: [f"{trackId}-{index:02d}" for index in range(
             1, counts[trackId] + 1)] for trackId in
-            ("phonemes", "accord", "verbe", "desambiguation", "affixes")}
+            ("phonemes", "accord", "verbe", "desambiguation", "affixes", "expressions")}
         # Flat list in track order: the track of each lesson never goes back.
         trackOrder = [lesson["track"] for lesson in document["lessons"]]
         assert trackOrder == sorted(trackOrder, key=[
-            "phonemes", "accord", "verbe", "desambiguation", "affixes"].index)
+            "phonemes", "accord", "verbe", "desambiguation", "affixes", "expressions"].index)
 
     def test_words_reuse_the_practice_words_record_shape(self, lessons):
         document, _counts = lessons
@@ -1127,6 +1129,29 @@ class TestBuildLessonsAffixesTrack:
                                      "text": "Abréviations d'affixes : à venir."}],
                           "words": []}
         assert counts["affixes"] == 1
+
+
+class TestBuildLessonsExpressionsTrack:
+
+    def test_stub_lesson(self, lessons):
+        document, counts = lessons
+        lesson = _lessonOf(document, "expressions-01")
+        assert lesson == {"id": "expressions-01", "track": "expressions", "index": 1,
+                          "sectionTitle": "Abréviations d'expressions", "title": "Leçon un : à venir",
+                          "kind": "expressions", "newKeys": [], "newChords": [],
+                          "rules": [{"kind": "expressions",
+                                     "text": "Abréviations d'expressions : à venir."}],
+                          "words": []}
+        assert counts["expressions"] == 1
+
+    def test_wording_has_no_ipa_mapped_character(self, lessons):
+        document, _counts = lessons
+        track = next(t for t in document["tracks"] if t["id"] == "expressions")
+        lesson = _lessonOf(document, "expressions-01")
+        strings = [track["title"], track["description"], lesson["title"], lesson["sectionTitle"],
+                   *(rule["text"] for rule in lesson["rules"])]
+        for text in strings:
+            assert not set(text) & set("E@°§5O9821RZSNG"), text
 
 
 if __name__ == "__main__":
