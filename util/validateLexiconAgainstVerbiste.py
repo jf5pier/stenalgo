@@ -42,10 +42,10 @@ import argparse
 import csv
 from collections import Counter, defaultdict
 
+from src.word import Lemme
 from src.verbparadigm import (
     ConjugationTemplate,
     VerbModelException,
-    Lemme,
     PARTICIPE_PASSE_INDEX,
     generateOrthoForm,
     getTrustedTemplate,

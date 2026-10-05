@@ -58,7 +58,7 @@ from util._timing import recordTiming
 variantDrops = loadSpellingVariantDrops()
 
 
-def printVerbose(word: str, msg: list[Any]):
+def printVerbose(word: str, msg: list[Any]) -> None:
     # return
     if word in []:  # ["soleil"] :
         print(word, " :\n", " ".join(map(str, msg)))
@@ -205,7 +205,7 @@ class Dictionary:
             syllable_names = word.phonemesToSyllableNames(withSilent=False)
             spellings = word.graphemsToSyllables(withSilent=False)
             for (syllable_name, spelling) in zip(syllable_names, spellings):
-                _ = self.syllableCollection.updateSyllable(
+                self.syllableCollection.updateSyllable(
                     syllable_name, spelling, frequency, word)
 
         Syllable.sortPhonemesCollections()
@@ -351,7 +351,7 @@ class Dictionary:
             maxAmbiguityWords = []
             maxFrequencyAmbiguity = 0.0
             maxFrequencyAmbiguityWords = []
-            maxFrequencyAmbiguityStrokes= ()
+            maxFrequencyAmbiguityStrokes: Strokes = ()
             for syllableStrokes, words in phoneticTheory.items():
                 strokeString = keyboard.strokesToString(syllableStrokes)
                 wordOrthos = sorted(list(set(map(lambda w: w.ortho, words))))
@@ -593,13 +593,20 @@ def _runSteps(module: "Callable[[str, str], None]") -> None:
     module("Theory Export (S8): trainer word drills", "util.export_practice_words")
     module("Theory Export (S8): trainer sentences", "util.export_practice_sentences")
     module("Theory Export (S8): trainer definitions", "util.export_definitions")
-    # Optional affix abbreviations, on top of the finished theory (needs the committed affix_rules.json).
-    module("Theory Export (S8): optional affix dictionary", "util.export_affix_dictionary")
+    module("Theory Export (S8): trainer lessons", "util.export_lessons")
+    # Affix Abbreviation Building (S9): an optional layer on top of the finished theory (the theory is
+    # unchanged). S9a selects the 30 rules from affix_decisions.json (AffixSelection.pickle present: reused or
+    # cheaply reselected from its cache; absent: a full ~2.5 min (16 cores; ~5.5 min with --workers 1) selection) and lists PENDING decisions; it never
+    # asks a question (util.review_affix_rules is the hand-run command that does). S9b exports the dictionary, S9c the trainer's affix lessons.
+    module("Affix Abbreviation Building (S9a): rule selection", "util.build_affix_rules")
+    module("Affix Abbreviation Building (S9b): affix dictionary", "util.export_affix_dictionary")
+    module("Affix Abbreviation Building (S9c): trainer affix lessons", "util.export_affix_lessons")
+    module("Affix Abbreviation Building (S9d): trainer abbreviation column", "util.export_affix_abbreviations")
 
     print("\nstenalgo pipeline complete: phonetic theory (pickles + phonetic_theory.tsv), "
           "LexiqueSynthetic.tsv, resolved_press_sets.json, keypress_groups.json, "
           "realization_report.json, disambiguated_theory.tsv, the Plover outputs and "
-          "the four steno-trainer exports are up to date.", flush=True)
+          "the five steno-trainer exports are up to date.", flush=True)
 
 
 if __name__ == "__main__":

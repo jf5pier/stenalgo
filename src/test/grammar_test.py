@@ -923,6 +923,7 @@ class TestSyllableCollection:
         col = SyllableCollection()
         col.updateSyllable("ta", "ta", 5.0)
         syll = col.getSyllable("ta")
+        assert syll is not None
         assert col.getFrequency(syll) == 5.0
 
     def test_get_frequency_missing(self):
@@ -934,6 +935,7 @@ class TestSyllableCollection:
         word = _make_word("pas", "pa", 10.0)
         col.updateSyllable("pa", "pa", 10.0, word)
         syll = col.getSyllable("pa")
+        assert syll is not None
         assert "pa" in syll.phonoWords
         assert syll.phonoWords["pa"][0].ortho == "pas"
 
@@ -1116,6 +1118,7 @@ class TestSyllableCollectionEdgeCases:
         col.updateSyllable("vR", "ver", 5.0, w1)
         col.updateSyllable("vR", "verre", 3.0, w2)
         syll = col.getSyllable("vR")
+        assert syll is not None
         assert len(syll.phonoWords["vR"]) == 2
         orthos = [w.ortho for w in syll.phonoWords["vR"]]
         assert "ver" in orthos

@@ -10,14 +10,18 @@ import hashlib
 import os
 import pickle
 import sys
+from typing import TYPE_CHECKING
 
 from src.ambiguitychecker import buildWordToStrokes, buildWordsByOrthoLemme
 from src.grammar import Syllable
 from src.keyboard import Keyboard, Strokes
 from src.word import Word
 
+if TYPE_CHECKING:
+    from dictionary import Dictionary
 
-def loadDictionary():  # type: ignore[no-untyped-def]
+
+def loadDictionary() -> "Dictionary":
     """Dictionary.pickle plus its four trailing Syllable-collection pickles, WITHOUT
     PhoneticTheory.pickle -- for callers needing only the Dictionary and its layout
     statistics (Keyboard Layout Optimization (S4), util/optimize_keyboard.py)."""
@@ -32,7 +36,7 @@ def loadDictionary():  # type: ignore[no-untyped-def]
     if not os.path.exists("Dictionary.pickle"):
         raise RuntimeError("Run `python -m util.build_phonetic_theory` first to generate Dictionary.pickle.")
     with open("Dictionary.pickle", "rb") as pfile:
-        dictionary = pickle.load(pfile)
+        dictionary: Dictionary = pickle.load(pfile)
         Syllable.allPhonemeCol = pickle.load(pfile)
         Syllable.phonemeColByPart = pickle.load(pfile)
         Syllable.biphonemeColByPart = pickle.load(pfile)
@@ -40,7 +44,7 @@ def loadDictionary():  # type: ignore[no-untyped-def]
     return dictionary
 
 
-def _loadDictionaryAndPhoneticTheory():  # type: ignore[no-untyped-def]
+def _loadDictionaryAndPhoneticTheory() -> "tuple[Dictionary, dict[Strokes, list[Word]]]":
     dictionary = loadDictionary()
 
     if not os.path.exists("PhoneticTheory.pickle"):

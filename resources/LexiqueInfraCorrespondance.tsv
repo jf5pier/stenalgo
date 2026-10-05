@@ -3711,7 +3711,7 @@ ahurissants	ayRis@	ADJ	a.h.u.r.i.ss.an.ts	a-a.h-#.u-y.r-R.i-i.ss-s.an-@.ts-#	1.1
 ahurissement	ayRis°m@	NOM	a.h.u.r.i.ss.e.m.ent	a-a.h-#.u-y.r-R.i-i.ss-s.e-°.m-m.ent-@	1.1.1.1.1.1.0.1.1.
 ahurissements	ayRis°m@	NOM	a.h.u.r.i.ss.e.m.en.ts	a-a.h-#.u-y.r-R.i-i.ss-s.e-°.m-m.en-@.ts-#	1.1.1.1.1.1.0.1.1.1.
 ahurit	ayRi	VER	a.h.u.r.it	a-a.h-#.u-y.r-R.it-i	1.1.1.1.1.
-ai	E	AUX	ai	ai-E	1
+ai	e	AUX	ai	ai-e	1
 ai	e	VER	ai	ai-e	1
 aicher	ESe	VER	ai.ch.er	ai-E.ch-S.er-e	1.1.1.
 aida	Eda	VER	ai.d.a	ai-E.d-d.a-a	1.1.1.
@@ -11799,7 +11799,7 @@ bahut	bay	NOM	b.a.h.u.t	b-b.a-a.h-#.u-y.t-#	1.1.1.1.1.
 bahute	bayt	VER	b.a.h.u.t.e	b-b.a-a.h-#.u-y.t-t.e-#	1.1.1.1.1.1.
 bahutent	bayt	VER	b.a.h.u.t.ent	b-b.a-a.h-#.u-y.t-t.ent-#	1.1.1.1.1.0.
 bahuts	bay	NOM	b.a.h.u.ts	b-b.a-a.h-#.u-y.ts-#	1.1.1.1.1.
-bai	bE	ADJ	b.ai	b-b.ai-E	1.1.
+bai	be	ADJ	b.ai	b-b.ai-e	1.1.
 baie	bE	ADJ	b.ai.e	b-b.ai-E.e-#	1.1.1.
 baie	bE	NOM	b.ai.e	b-b.ai-E.e-#	1.1.1.
 baie	bE	VER	b.ai.e	b-b.ai-E.e-#	1.1.1.
@@ -21560,7 +21560,7 @@ cervicales	sERvikal	ADJ	c.e.r.v.i.c.a.l.es	c-s.e-E.r-R.v-v.i-i.c-k.a-a.l-l.es-#	
 cervicaux	sERviko	ADJ	c.e.r.v.i.c.au.x	c-s.e-E.r-R.v-v.i-i.c-k.au-o.x-#	0.1.1.1.1.0.1.1.
 cervidés	sERvide	NOM	c.e.r.v.i.d.é.s	c-s.e-E.r-R.v-v.i-i.d-d.é-e.s-#	0.1.1.1.1.1.1.1.
 cervoise	sERvwaz	NOM	c.e.r.v.oi.s.e	c-s.e-E.r-R.v-v.oi-wa.s-z.e-#	0.1.1.1.1.0.1.
-ces	se	ADJ:dem	c.e.s	c-s.e-e.s-#	0.0.1.
+ces	sE	ADJ:dem	c.e.s	c-s.e-E.s-#	0.0.1.
 cessa	sEsa	VER	c.e.ss.a	c-s.e-E.ss-s.a-a	0.1.1.1.
 cessai	sEse	VER	c.e.ss.ai	c-s.e-E.ss-s.ai-e	0.1.1.1.
 cessaient	sEsE	VER	c.e.ss.aient	c-s.e-E.ss-s.aient-E	0.1.1.1.
@@ -34195,7 +34195,7 @@ derrières	dERjER	NOM	d.e.rr.i.è.r.es	d-d.e-E.rr-R.i-j.è-E.r-R.es-#	1.1.1.0.1.
 ders	dER	NOM	d.e.r.s	d-d.e-E.r-R.s-#	1.1.1.1.
 derviche	dERviS	NOM	d.e.r.v.i.ch.e	d-d.e-E.r-R.v-v.i-i.ch-S.e-#	1.1.1.1.1.1.1.
 derviches	dERviS	NOM	d.e.r.v.i.ch.es	d-d.e-E.r-R.v-v.i-i.ch-S.es-#	1.1.1.1.1.1.1.
-des	de	ART:ind	d.e.s	d-d.e-e.s-#	1.0.1.
+des	dE	ART:ind	d.e.s	d-d.e-E.s-#	1.0.1.
 descamisados	dEskamizado	NOM	d.e.s.c.a.m.i.s.a.d.o.s	d-d.e-E.s-s.c-k.a-a.m-m.i-i.s-z.a-a.d-d.o-o.s-#	1.1.0.0.1.1.1.0.1.1.0.1.
 descella	dEsEla	VER	d.e.sc.e.ll.a	d-d.e-E.sc-s.e-E.ll-l.a-a	1.0.1.1.1.1.
 descellant	dEsEl@	VER	d.e.sc.e.ll.ant	d-d.e-E.sc-s.e-E.ll-l.ant-@	1.0.1.1.1.1.
@@ -58675,7 +58675,7 @@ gags	gag	NOM	g.a.g.s	g-g.a-a.g-g.s-#	1.1.0.1.
 gagé	gaZe	VER	g.a.g.é	g-g.a-a.g-Z.é-e	1.1.1.1.
 gagé	gaZe	ADJ	g.a.g.é	g-g.a-a.g-Z.é-e	1.1.1.1.
 gagée	gaZe	VER	g.a.g.é.e	g-g.a-a.g-Z.é-e.e-#	1.1.1.1.1.
-gai	gE	ADJ	g.ai	g-g.ai-E	1.1.
+gai	ge	ADJ	g.ai	g-g.ai-e	1.1.
 gaie	gE	ADJ	g.ai.e	g-g.ai-E.e-#	1.1.1.
 gaiement	gem@	ADV	g.ai.e.m.ent	g-g.ai-e.e-#.m-m.ent-@	1.0.0.1.1.
 gaies	ge	ADJ	g.ai.es	g-g.ai-e.es-#	1.0.1.
@@ -59509,7 +59509,7 @@ gaélique	gaelik	NOM	g.a.é.l.i.qu.e	g-g.a-a.é-e.l-l.i-i.qu-k.e-#	1.1.1.1.1.1.1
 gaîment	gem@	ADV	g.aî.m.ent	g-g.aî-e.m-m.ent-@	1.0.1.1.
 gaîté	gEte	NOM	g.aî.t.é	g-g.aî-E.t-t.é-e	1.0.1.1.
 gaîtés	gEte	NOM	g.aî.t.é.s	g-g.aî-E.t-t.é-e.s-#	1.1.1.1.1.
-geai	ZE	NOM	ge.ai	ge-Z.ai-E	1.1.
+geai	Ze	NOM	ge.ai	ge-Z.ai-e	1.1.
 geais	ZE	NOM	ge.ai.s	ge-Z.ai-E.s-#	1.1.1.
 gecko	ZEko	NOM	g.e.ck.o	g-Z.e-E.ck-k.o-o	0.1.1.1.
 geckos	ZEko	NOM	g.e.ck.o.s	g-Z.e-E.ck-k.o-o.s-#	0.1.1.0.1.
@@ -73174,8 +73174,8 @@ laguiole	lagjOl	NOM	l.a.gu.i.o.l.e	l-l.a-a.gu-g.i-j.o-O.l-l.e-#	1.1.1.0.1.1.1.
 lagunaire	lagynER	ADJ	l.a.g.u.n.ai.r.e	l-l.a-a.g-g.u-y.n-n.ai-E.r-R.e-#	1.1.0.1.1.1.1.1.
 lagune	lagyn	NOM	l.a.g.u.n.e	l-l.a-a.g-g.u-y.n-n.e-#	1.1.0.1.1.1.
 lagunes	lagyn	NOM	l.a.g.u.n.es	l-l.a-a.g-g.u-y.n-n.es-#	1.1.0.1.1.1.
-lai	lE	ADJ	l.ai	l-l.ai-E	1.1.
-lai	lE	NOM	l.ai	l-l.ai-E	1.1.
+lai	le	ADJ	l.ai	l-l.ai-e	1.1.
+lai	le	NOM	l.ai	l-l.ai-e	1.1.
 laid	lE	ADJ	l.ai.d	l-l.ai-E.d-#	1.1.1.
 laid	lE	NOM	l.ai.d	l-l.ai-E.d-#	1.1.1.
 laide	lEd	ADJ	l.ai.d.e	l-l.ai-E.d-d.e-#	1.1.1.1.
@@ -74022,8 +74022,8 @@ lequel	l°kEl	PRO:int	l.e.qu.e.l	l-l.e-°.qu-k.e-E.l-l	1.0.1.1.1.
 lequel	l°kEl	PRO:rel	l.e.qu.e.l	l-l.e-°.qu-k.e-E.l-l	1.0.1.1.1.
 lerch	lERS	ADV	l.e.r.ch	l-l.e-E.r-R.ch-S	1.1.1.1.
 lerche	lERS	ADV	l.e.r.ch.e	l-l.e-E.r-R.ch-S.e-#	1.1.1.1.1.
-les	le	ART:def	l.e.s	l-l.e-e.s-#	1.0.1.
-les	le	PRO:per	l.e.s	l-l.e-e.s-#	1.0.1.
+les	lE	ART:def	l.e.s	l-l.e-E.s-#	1.0.1.
+les	lE	PRO:per	l.e.s	l-l.e-E.s-#	1.0.1.
 lesbianisme	lEsbjanizm	NOM	l.e.s.b.i.a.n.i.s.m.e	l-l.e-E.s-s.b-b.i-j.a-a.n-n.i-i.s-z.m-m.e-#	1.1.0.1.0.1.1.1.0.1.1.
 lesbien	lEzbj5	ADJ	l.e.s.b.i.en	l-l.e-E.s-z.b-b.i-j.en-5	1.1.0.1.0.0.
 lesbien	lEzbj5	NOM	l.e.s.b.i.en	l-l.e-E.s-z.b-b.i-j.en-5	1.1.0.1.0.0.
@@ -76555,7 +76555,7 @@ mahonia	maonja	NOM	m.a.h.o.n.i.a	m-m.a-a.h-#.o-o.n-n.i-j.a-a	1.1.1.0.1.0.1.
 mahonias	maonja	NOM	m.a.h.o.n.i.a.s	m-m.a-a.h-#.o-o.n-n.i-j.a-a.s-#	1.1.1.0.1.0.1.1.
 mahousse	maus	ADJ	m.a.h.ou.ss.e	m-m.a-a.h-#.ou-u.ss-s.e-#	1.1.1.1.1.1.
 mahousses	maus	ADJ	m.a.h.ou.ss.es	m-m.a-a.h-#.ou-u.ss-s.es-#	1.1.1.1.1.1.
-mai	mE	NOM	m.ai	m-m.ai-E	1.1.
+mai	me	NOM	m.ai	m-m.ai-e	1.1.
 maid	mEd	NOM	m.ai.d	m-m.ai-E.d-d	1.1.0.
 maie	mE	NOM	m.ai.e	m-m.ai-E.e-#	1.1.1.
 maies	mE	NOM	m.ai.es	m-m.ai-E.es-#	1.1.1.
@@ -79152,9 +79152,9 @@ merveilleuses	mERvEj2z	NOM	m.e.r.v.ei.ll.eu.s.es	m-m.e-E.r-R.v-v.ei-E.ll-j.eu-2.
 merveilleux	mERvEj2	ADJ	m.e.r.v.ei.ll.eu.x	m-m.e-E.r-R.v-v.ei-E.ll-j.eu-2.x-#	1.1.1.1.1.0.1.1.
 merveilleux	mERvEj2	NOM	m.e.r.v.ei.ll.eu.x	m-m.e-E.r-R.v-v.ei-E.ll-j.eu-2.x-#	1.1.1.1.1.0.1.1.
 merveillosité	mERvEjozite	NOM	m.e.r.v.ei.ll.o.s.i.t.é	m-m.e-E.r-R.v-v.ei-E.ll-j.o-o.s-z.i-i.t-t.é-e	1.1.1.1.1.0.0.0.1.1.1.
-mes	me	NOM	m.e.s	m-m.e-e.s-#	1.0.1.
-mes	me	ADJ:pos	m.e.s	m-m.e-e.s-#	1.0.1.
-mes	me	PRO:pos	m.e.s	m-m.e-e.s-#	1.0.1.
+mes	mE	NOM	m.e.s	m-m.e-E.s-#	1.0.1.
+mes	mE	ADJ:pos	m.e.s	m-m.e-E.s-#	1.0.1.
+mes	mE	PRO:pos	m.e.s	m-m.e-E.s-#	1.0.1.
 mesa	meza	NOM	m.e.s.a	m-m.e-e.s-z.a-a	1.0.0.1.
 mescal	mEskal	NOM	m.e.s.c.a.l	m-m.e-E.s-s.c-k.a-a.l-l	1.1.0.0.1.1.
 mescaline	mEskalin	NOM	m.e.s.c.a.l.i.n.e	m-m.e-E.s-s.c-k.a-a.l-l.i-i.n-n.e-#	1.1.0.0.1.1.1.1.1.
@@ -88629,7 +88629,7 @@ papayer	papaje	NOM	p.a.p.a.y.er	p-p.a-a.p-p.a-a.y-j.er-e	1.1.1.1.0.1.
 papayers	papaje	NOM	p.a.p.a.y.er.s	p-p.a-a.p-p.a-a.y-j.er-e.s-#	1.1.1.1.0.1.1.
 papayes	papaj	NOM	p.a.p.a.y.es	p-p.a-a.p-p.a-a.y-j.es-#	1.1.1.1.0.1.
 pape	pap	NOM	p.a.p.e	p-p.a-a.p-p.e-#	1.1.1.1.
-papegai	papgE	NOM	p.a.p.e.g.ai	p-p.a-a.p-p.e-#.g-g.ai-E	1.1.1.0.0.1.
+papegai	papge	NOM	p.a.p.e.g.ai	p-p.a-a.p-p.e-#.g-g.ai-e	1.1.1.0.0.1.
 papegais	papgE	NOM	p.a.p.e.g.ai.s	p-p.a-a.p-p.e-#.g-g.ai-E.s-#	1.1.1.0.0.1.1.
 papelard	pap°laR	ADJ	p.a.p.e.l.a.r.d	p-p.a-a.p-p.e-°.l-l.a-a.r-R.d-#	1.1.1.0.1.1.1.1.
 papelard	pap°laR	NOM	p.a.p.e.l.a.r.d	p-p.a-a.p-p.e-°.l-l.a-a.r-R.d-#	1.1.1.0.1.1.1.1.
@@ -100211,7 +100211,7 @@ quadrupède	kwadRupEd	ADJ	qu.a.d.r.u.p.è.d.e	qu-kw.a-a.d-d.r-R.u-u.p-p.è-E.d-d
 quadrupède	kwadRupEd	NOM	qu.a.d.r.u.p.è.d.e	qu-kw.a-a.d-d.r-R.u-u.p-p.è-E.d-d.e-#	0.1.1.1.0.1.1.1.1.
 quadrupèdes	kwadRupEd	ADJ	qu.a.d.r.u.p.è.d.es	qu-kw.a-a.d-d.r-R.u-u.p-p.è-E.d-d.es-#	0.1.1.1.0.1.1.1.1.
 quadrupèdes	kwadRupEd	NOM	qu.a.d.r.u.p.è.d.es	qu-kw.a-a.d-d.r-R.u-u.p-p.è-E.d-d.es-#	0.1.1.1.0.1.1.1.1.
-quai	kE	NOM	qu.ai	qu-k.ai-E	1.1.
+quai	ke	NOM	qu.ai	qu-k.ai-e	1.1.
 quais	ke	NOM	qu.ai.s	qu-k.ai-e.s-#	1.0.1.
 quaker	kwEk9R	NOM	qu.a.k.e.r	qu-kw.a-E.k-k.e-9.r-R	0.0.1.0.1.
 quakeresse	kwEk°REs	NOM	qu.a.k.e.r.e.ss.e	qu-kw.a-E.k-k.e-°.r-R.e-E.ss-s.e-#	0.0.1.0.1.1.1.1.
@@ -115957,9 +115957,9 @@ servomécanisme	sERvomekanizm	NOM	s.e.r.v.o.m.é.c.a.n.i.s.m.e	s-s.e-E.r-R.v-v.o
 servons	sERv§	VER	s.e.r.v.ons	s-s.e-E.r-R.v-v.ons-§	1.1.1.1.1.
 servîmes	sERvim	VER	s.e.r.v.î.m.es	s-s.e-E.r-R.v-v.î-i.m-m.es-#	1.1.1.1.1.1.1.
 servît	sERvi	VER	s.e.r.v.ît	s-s.e-E.r-R.v-v.ît-i	1.1.1.1.1.
-ses	se	ADJ:pos	s.e.s	s-s.e-e.s-#	1.0.1.
-ses	se	NOM	s.e.s	s-s.e-e.s-#	1.0.1.
-ses	se	PRO:pos	s.e.s	s-s.e-e.s-#	1.0.1.
+ses	sE	ADJ:pos	s.e.s	s-s.e-E.s-#	1.0.1.
+ses	sE	NOM	s.e.s	s-s.e-E.s-#	1.0.1.
+ses	sE	PRO:pos	s.e.s	s-s.e-E.s-#	1.0.1.
 session	sesj§	NOM	s.e.ss.i.on	s-s.e-e.ss-s.i-j.on-§	1.0.1.0.1.
 sessions	sesj§	NOM	s.e.ss.i.on.s	s-s.e-e.ss-s.i-j.on-§.s-#	1.0.1.0.1.1.
 sesterces	sEstERs	NOM	s.e.s.t.e.r.c.es	s-s.e-E.s-s.t-t.e-E.r-R.c-s.es-#	1.1.0.1.1.1.1.1.
@@ -123857,7 +123857,7 @@ tertiaires	tERsjER	ADJ	t.e.r.t.i.ai.r.es	t-t.e-E.r-R.t-s.i-j.ai-E.r-R.es-#	1.1.1
 tertio	tERsjo	ADV	t.e.r.t.i.o	t-t.e-E.r-R.t-s.i-j.o-o	1.1.1.0.0.1.
 tertre	tERtR	NOM	t.e.r.t.r.e	t-t.e-E.r-R.t-t.r-R.e-#	1.1.1.1.1.1.
 tertres	tERtR	NOM	t.e.r.t.r.es	t-t.e-E.r-R.t-t.r-R.es-#	1.1.1.1.1.1.
-tes	te	ADJ:pos	t.e.s	t-t.e-e.s-#	1.0.1.
+tes	tE	ADJ:pos	t.e.s	t-t.e-E.s-#	1.0.1.
 tesla	tEsla	NOM	t.e.s.l.a	t-t.e-E.s-s.l-l.a-a	1.1.0.1.1.
 tessiture	tesityR	NOM	t.e.ss.i.t.u.r.e	t-t.e-e.ss-s.i-i.t-t.u-y.r-R.e-#	1.0.1.1.1.1.1.1.
 tesson	tes§	NOM	t.e.ss.on	t-t.e-e.ss-s.on-§	1.0.1.1.
@@ -136657,7 +136657,7 @@ zézettes	zezEt	NOM	z.é.z.e.tt.es	z-z.é-e.z-z.e-E.tt-t.es-#	1.1.1.1.1.1.
 étagées	etaZe	ADJ	é.t.a.g.é.es	é-e.t-t.a-a.g-Z.é-e.es-#	1.1.1.1.1.1.
 étagés	etaZe	VER	é.t.a.g.é.s	é-e.t-t.a-a.g-Z.é-e.s-#	1.1.1.1.1.1.
 étagés	etaZe	ADJ	é.t.a.g.é.s	é-e.t-t.a-a.g-Z.é-e.s-#	1.1.1.1.1.1.
-étai	etE	NOM	é.t.ai	é-e.t-t.ai-E	1.1.1.
+étai	ete	NOM	é.t.ai	é-e.t-t.ai-e	1.1.1.
 étaie	etE	VER	é.t.ai.e	é-e.t-t.ai-E.e-#	1.1.1.1.
 étaient	etE	AUX	é.t.aient	é-e.t-t.aient-E	1.1.1.
 étaient	etE	VER	é.t.aient	é-e.t-t.aient-E	1.1.1.

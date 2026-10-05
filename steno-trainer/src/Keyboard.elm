@@ -1,4 +1,4 @@
-module Keyboard exposing (KeyInfo, Layout, decoder, geminiKeymap, view, viewChordBoard, viewLegends)
+module Keyboard exposing (AffixRule, KeyInfo, Layout, affixRuleDecoder, decoder, geminiKeymap, view, viewAffixLegend, viewChordBoard, viewLegends, isConjugationStroke)
 
 {-| The virtual Starboard: decodes `keyboard-layout.json` (exported by
 `util/export_keyboard_layout.py` from the repo's own `Starboard` class) and
@@ -70,6 +70,26 @@ type alias ConjugationMarker =
     , keyNames : List String
     , label : String
     }
+
+
+{-| One affix abbreviation rule (`affix-lessons.json`, `rules`): the keys that
+stand for the affix and a French label ("préfixe « re- »"). Shown by
+`viewAffixLegend` when the abbreviation hints are on. -}
+type alias AffixRule =
+    { rank : Int
+    , keys : List Int
+    , keyNames : List String
+    , label : String
+    }
+
+
+affixRuleDecoder : D.Decoder AffixRule
+affixRuleDecoder =
+    D.map4 AffixRule
+        (D.field "rank" D.int)
+        (D.field "keys" (D.list D.int))
+        (D.field "keyNames" (D.list D.string))
+        (D.field "label" D.string)
 
 
 type alias Layout =
@@ -196,11 +216,11 @@ which hand(s) it touches. Badges are positioned by pixel math (`chordKeyCenterX`
 belong to several pairs, so grid-cell-sized overlays for each pair would
 overlap and stack on top of each other.
 -}
-viewChordBoard : Layout -> Html msg
-viewChordBoard layout =
+viewChordBoard : Set Int -> Layout -> Html msg
+viewChordBoard lit layout =
     case List.filter (\l -> l.keyCount == 2) layout.phonemeLayers of
         layer :: _ ->
-            div [ class "phoneme-layer" ] [ viewChordGrid layout.keys layer.strokes ]
+            div [ class "phoneme-layer" ] [ viewChordGrid lit layout.keys layer.strokes ]
 
         [] ->
             text ""
@@ -263,9 +283,14 @@ chordKeyCenterY key =
     toFloat key.row * chordKeyStride + chordKeyHalf
 
 
-viewChordGrid : List KeyInfo -> List PhonemeStroke -> Html msg
-viewChordGrid keys strokes =
+viewChordGrid : Set Int -> List KeyInfo -> List PhonemeStroke -> Html msg
+viewChordGrid lit keys strokes =
     let
+        -- A badge lights up when both keys of its pair are in the lit stroke
+        -- (the Simulate button's current stroke).
+        isLit a b =
+            Set.member a.index lit && Set.member b.index lit
+
         pairs =
             List.filterMap (chordStrokePair keys) strokes
 
@@ -312,8 +337,8 @@ viewChordGrid keys strokes =
         (List.map chordKeyView keys
             ++ List.concatMap chordConnectorViews droppedSkipPairs
             ++ chordOverlaysView
-                (List.map (\( a, b, label ) -> ( chordMidpoint a b, label )) adjacentPairs
-                    ++ List.map (\( ( a, b, label ), badgeX, kind ) -> ( ( badgeX, chordDropYFor kind a b ), label )) droppedSkipPairs
+                (List.map (\( a, b, label ) -> ( chordMidpoint a b, ( label, isLit a b ) )) adjacentPairs
+                    ++ List.map (\( ( a, b, label ), badgeX, kind ) -> ( ( badgeX, chordDropYFor kind a b ), ( label, isLit a b ) )) droppedSkipPairs
                 )
         )
 
@@ -693,14 +718,14 @@ same point (adjacent pairs use a plain midpoint, so e.g. a thumb cluster's
 two diagonal pairs could coincide there; `chordDropDepth`'s staggering
 already keeps today's data collision-free without relying on this).
 -}
-chordOverlaysView : List ( ( Float, Float ), String ) -> List (Html msg)
+chordOverlaysView : List ( ( Float, Float ), ( String, Bool ) ) -> List (Html msg)
 chordOverlaysView points =
     points
         |> groupByCenter
         |> List.concatMap viewOverlayGroup
 
 
-groupByCenter : List ( ( Float, Float ), String ) -> List ( ( Float, Float ), List String )
+groupByCenter : List ( ( Float, Float ), ( String, Bool ) ) -> List ( ( Float, Float ), List ( String, Bool ) )
 groupByCenter points =
     points
         |> List.foldl
@@ -728,10 +753,10 @@ pointKey ( x, y ) =
 {-| Vertical spacing (in `rem`) between co-located badges within a group. -}
 chordOverlayCollisionSpacing : Float
 chordOverlayCollisionSpacing =
-    0.55
+    0.65
 
 
-viewOverlayGroup : ( ( Float, Float ), List String ) -> List (Html msg)
+viewOverlayGroup : ( ( Float, Float ), List ( String, Bool ) ) -> List (Html msg)
 viewOverlayGroup ( ( x, y ), labels ) =
     let
         n =
@@ -739,9 +764,9 @@ viewOverlayGroup ( ( x, y ), labels ) =
     in
     labels
         |> List.indexedMap
-            (\i label ->
+            (\i ( label, lit ) ->
                 div
-                    [ class "chord-overlay"
+                    [ classList [ ( "chord-overlay", True ), ( "chord-overlay-lit", lit ) ]
                     , style "left" (String.fromFloat x ++ "rem")
                     , style "top" (String.fromFloat (y + (toFloat i - (toFloat n - 1) / 2) * chordOverlayCollisionSpacing) ++ "rem")
                     ]
@@ -755,33 +780,33 @@ keyByIndex keys index =
 
 
 {-| The two plain-text legends too sparse/small to draw as a board: the
-3-/4-key thumb-only chords, and the same-lemma/conjugation marker keys.
+3-/4-key thumb-only chords, the same-lemma/conjugation marker keys, and (once loaded) the affix rules.
 Meant for a narrow sidebar column next to the page title, not stacked under
 the (tall) keyboards.
 -}
-viewLegends : Layout -> Html msg
-viewLegends layout =
+viewLegends : Set Int -> Bool -> Layout -> Html msg
+viewLegends lit markLit layout =
     div [ class "legends" ]
-        [ viewStrokeLegend layout.keys (List.filter (\l -> l.keyCount > 2) layout.phonemeLayers)
-        , viewConjugationLegend layout.conjugationMarkers
+        [ viewStrokeLegend lit layout.keys (List.filter (\l -> l.keyCount > 2) layout.phonemeLayers)
+        , viewConjugationLegend (if markLit then lit else Set.empty) layout.conjugationMarkers
         ]
 
 
-viewStrokeLegend : List KeyInfo -> List PhonemeLayer -> Html msg
-viewStrokeLegend keys layers =
+viewStrokeLegend : Set Int -> List KeyInfo -> List PhonemeLayer -> Html msg
+viewStrokeLegend lit keys layers =
     div [ class "legend-block" ]
         [ h3 [] [ text "3- and 4-key strokes" ]
         , ul [ class "legend" ]
             (layers
                 |> List.concatMap .strokes
-                |> List.map (viewStrokeLegendItem keys)
+                |> List.map (viewStrokeLegendItem lit keys)
             )
         ]
 
 
-viewStrokeLegendItem : List KeyInfo -> PhonemeStroke -> Html msg
-viewStrokeLegendItem keys stroke =
-    li []
+viewStrokeLegendItem : Set Int -> List KeyInfo -> PhonemeStroke -> Html msg
+viewStrokeLegendItem lit keys stroke =
+    li [ classList [ ( "legend-lit", List.all (\k -> Set.member k lit) stroke.keys ) ] ]
         [ text (String.join " + " (List.map (keyLabel keys) stroke.keys) ++ " \u{2192} " ++ stroke.phonemes) ]
 
 
@@ -794,12 +819,72 @@ keyLabel keys index =
         |> Maybe.withDefault (String.fromInt index)
 
 
-viewConjugationLegend : List ConjugationMarker -> Html msg
-viewConjugationLegend markers =
+viewConjugationLegend : Set Int -> List ConjugationMarker -> Html msg
+viewConjugationLegend lit markers =
     div [ class "legend-block" ]
         [ h3 [] [ text "Conjugation markers" ]
         , ul [ class "legend" ]
             (markers
-                |> List.map (\m -> li [] [ text (String.join "+" m.keyNames ++ " : " ++ m.label) ])
+                |> List.map
+                    (\m ->
+                        li [ classList [ ( "legend-mark", not (Set.isEmpty lit) && Set.fromList m.keys == lit ) ] ]
+                            [ text (String.join "+" m.keyNames ++ " : " ++ m.label) ]
+                    )
             )
         ]
+
+
+{-| Whether `stroke` is exactly the keys of one conjugation marker: the extra
+stroke a conjugated form ends with (the Simulate button lights it yellow). -}
+isConjugationStroke : Layout -> List Int -> Bool
+isConjugationStroke layout stroke =
+    let
+        keys =
+            Set.fromList stroke
+    in
+    not (Set.isEmpty keys) && List.any (\m -> Set.fromList m.keys == keys) layout.conjugationMarkers
+
+
+{-| The affix rules, one per line: key names, then the affix they stand for.
+Shown under the chord board when the "Affix rule hint" toggle is on. -}
+viewAffixLegend : List AffixRule -> Html msg
+viewAffixLegend rules =
+    div [ class "legend-block" ]
+        [ h3 [] [ text "Affix rules" ]
+        , ul [ class "legend" ]
+            (rules
+                |> List.map (\r -> li [] [ text (groupKeyNames r.keyNames ++ " : " ++ r.label) ])
+            )
+        ]
+
+
+{-| A rule's key names with the keys of one side grouped: `-j`, `-s`, `-d` ->
+`-jsd`; `w-`, `p-`, `-j` -> `wp- + -j`. Left-hand names end with `-`,
+right-hand ones start with it (any other name stays as it is, after them). -}
+groupKeyNames : List String -> String
+groupKeyNames names =
+    let
+        left =
+            List.filter (String.endsWith "-") names
+
+        right =
+            List.filter (\n -> String.startsWith "-" n && not (String.endsWith "-" n)) names
+
+        other =
+            List.filter (\n -> not (List.member n left || List.member n right)) names
+
+        leftText =
+            if List.isEmpty left then
+                []
+
+            else
+                [ String.concat (List.map (String.dropRight 1) left) ++ "-" ]
+
+        rightText =
+            if List.isEmpty right then
+                []
+
+            else
+                [ "-" ++ String.concat (List.map (String.dropLeft 1) right) ]
+    in
+    String.join " + " (leftText ++ rightText ++ other)

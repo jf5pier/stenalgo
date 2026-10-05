@@ -26,6 +26,7 @@
 # Dry-run by default: only reads, prints what would be generated/skipped.
 # --apply appends to resources/LexiqueSynthetic.tsv. Idempotent: a slot
 # already present in either TSV is treated as satisfied, not regenerated.
+from typing import Any
 import argparse
 import os
 from collections import Counter, defaultdict
@@ -134,8 +135,8 @@ def main() -> None:
     )
 
     generated: list[Word] = []
-    sourceCounts: Counter = Counter()
-    skippedReasons: Counter = Counter()
+    sourceCounts: Counter[str] = Counter()
+    skippedReasons: Counter[str] = Counter()
 
     for lemmeGramCat, slotMap in sorted(slotsByLemme.items()):
         gramCat = next(iter(slotMap.values())).gramCat

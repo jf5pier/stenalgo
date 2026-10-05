@@ -628,7 +628,22 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
   split of `rayer` forms). Decision (user, 2026-09-30): `re` (`R°`) and `ré` (`Re`) stay separate rules, no
   phonology-class merge. Check also the `raie`/`rayer` family for the same split, then rebuild per `docs/PIPELINE.md`.
 
-- **Affix pipeline integration (2026-10-01).** Systematise the on-the-fly affix steps (scope proposer, combined-simulation gate, fusion policy, adopt step, deterministic pool: 12,138/12,141/12,149 nodes in three runs, unscoped lattice nodes only) per `PLAN_2026-10-01-affix-pipeline-integration.md`; six decisions to elicit from the user first.
+- **Affix pipeline integration (2026-10-01): DONE and committed on `affix-abbreviation-rules`.** Stage Affix Abbreviation Building (S9) per `docs/history/PLAN_2026-10-01-affix-pipeline-implementation.md` (decisions file, S9a/S9b, self-looping interactive review, per-rule cache; docs in `docs/AFFIX_RULES.md` and `docs/AFFIX_DESIGN.md`); a full rebuild from nothing is byte-identical. Trainer integration done on branch `affix-trainer` (2026-10-02, `util/export_affix_lessons.py`; the learner trial of the 30 rules stays open); the `ra`/`Re` phonology items above; re-review of the verdicts when the lexicon changes (pending items are listed by `util.build_affix_rules`).
+
+- **DONE (2026-10-02): Affix abbreviations carry the conjugation markings.** Records now keep every route of a Word in the disambiguated
+  theory (`WordRecord.routes`) and `src/affixabbrev.py` abbreviates each route with its own marks and trailing feature strokes:
+  79,715 abbreviations (72,121 primary-route entries and 7,594 for the other routes; TSV column `route`; a shared outline goes to the most frequent spelling whatever its route, which changed 60 of the 72,204 earlier entries to a more frequent word; `util.validate_affix_markings` checks it). The marks (keys 10/15)
+  never overlap a keypress; S9a output byte-identical. Not covered: a Word whose primary route has no free abbreviation can still
+  get one for another route (by design, each route is settled on its own).
+
+- **Plan a conjugation-engine plugin for Plover (2026-10-02, to plan, not to build yet).** Goal: for all homophones of a word
+  stenogram (the outline without conjugation marking) keep ONE entry in the theory, with a reference to a conjugation table
+  listing the possible conjugation strokes and endings, so the static dictionary no longer needs one entry per marked form.
+  The plan should cover: the table format (shared paradigm data, see [[dual-target architecture]] note: Plover static dict +
+  Javelin-style runtime engine), the plugin type (Plover extension / meta or command plugin vs a dictionary-replacing
+  engine), how marker strokes resolve to a form at runtime, interaction with the affix layer (S9) and the `*`/`#` homophone
+  marks, undo behaviour, and what the Plover dictionary export keeps as a static fallback. Output: a `PLAN_<date>-...md` in
+  `docs/history/` or `docs/`.
 
 
 ## Expression decoder (2026-10-04; see RESULTS_2026-10-04-expression-decoder.md and RESUME_2026-10-04-decoder-theory-shadow-elision.md)

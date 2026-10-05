@@ -5,16 +5,19 @@ import Definitions exposing (Definitions)
 import Dict exposing (Dict)
 import Drill exposing (PracticeWord)
 import GeminiPr
-import Html exposing (Html, button, div, h1, input, p, text)
-import Html.Attributes exposing (autofocus, class, disabled, placeholder, type_, value)
+import Html exposing (Html, button, div, h1, input, p, span, text)
+import Html.Attributes exposing (autofocus, class, classList, disabled, placeholder, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Http
 import Json.Decode as D
 import Keyboard exposing (KeyInfo, Layout)
+import Lessons exposing (Lessons)
 import Notation exposing (Notation)
 import Ports
+import Process
 import Random
 import Set
+import Task
 
 
 type LoadState a
@@ -28,11 +31,14 @@ common sentences word by word (`practice-sentences.json`, see
 `util/export_practice_sentences.py`). Both run through the same `Drill`
 state machine -- a sentence is just one long multi-stroke item. Definitions
 is a lookup, not a drill: type a spelling, see its homophones (see
-`Definitions`). -}
+`Definitions`). Lessons is the fixed progression of `lessons.json`: pick a
+lesson, read its rules, then drill its own word pool through the same `Drill`
+engine (see `Lessons`). -}
 type Mode
     = WordMode
     | SentenceMode
     | DefinitionMode
+    | LessonMode
 
 
 {-| The strokes correctly typed so far for the current target word (a
@@ -62,10 +68,26 @@ type alias Model =
     , serial : SerialStatus
     , notation : Notation
     , definitions : Maybe (LoadState Definitions)
+    , abbreviations : Dict String (Dict String String) -- affix-abbreviations.json (spelling -> long outline -> short), optional
+    , lessons : Maybe (LoadState Lessons)
+    , affixData : Maybe Lessons.AffixData -- affix-lessons.json, when it came back (the stub stays otherwise)
+    , selectedLesson : Maybe String
     , query : String
     , hints : Bool
+    , simulation : Maybe Simulation -- the Simulate button's run in progress
+    , simulationRuns : Int -- runs started so far; a timer of an older run is ignored
+    , abbrevHints : Maybe Bool -- the learner's choice for the affix rule hint; Nothing = the default (`abbrevHintsOn`)
     , lastStroke : Set.Set Int
     , typed : TypedStrokes
+    }
+
+
+{-| The Simulate button's run: the strokes to light one after the other and the
+one currently lit. `run` tells the timers of this run from an older one's. -}
+type alias Simulation =
+    { run : Int
+    , strokes : List (List Int)
+    , step : Int
     }
 
 
@@ -80,8 +102,20 @@ type Msg
     | IncomingBytes (List Int)
     | ToggleNotation
     | GotDefinitions (Result Http.Error Definitions)
+    | GotAbbreviations (Result Http.Error (Dict String (Dict String String)))
+    | GotLessons (Result Http.Error Lessons)
+    | GotAffixData (Result Http.Error Lessons.AffixData)
+    | SelectLesson String
+    | PrevLesson
+    | NextLesson
+    | BackToLessonList
+    | StartLessonDrill (List PracticeWord)
     | QueryChanged String
     | ToggleHints
+    | ToggleAbbrevHints
+    | SkipWords Int
+    | StartSimulation
+    | SimulationStep Int Int
 
 
 main : Program () Model Msg
@@ -100,8 +134,15 @@ init _ =
       , serial = CheckingSupport
       , notation = Notation.XSampa
       , definitions = Nothing
+      , abbreviations = Dict.empty
+      , lessons = Nothing
+      , affixData = Nothing
+      , selectedLesson = Nothing
       , query = ""
       , hints = True
+      , abbrevHints = Nothing
+      , simulation = Nothing
+      , simulationRuns = 0
       , lastStroke = Set.empty
       , typed = noTypedStrokes
       }
@@ -109,12 +150,23 @@ init _ =
         [ Http.get { url = "public/data/keyboard-layout.json", expect = Http.expectJson GotLayout Keyboard.decoder }
         , Http.get { url = "public/data/practice-words.json", expect = Http.expectJson GotWords Drill.decoder }
         , Http.get { url = "public/data/practice-sentences.json", expect = Http.expectJson GotSentences Drill.sentenceDecoder }
+        , Http.get { url = "public/data/affix-lessons.json", expect = Http.expectJson GotAffixData Lessons.affixDecoder }
         ]
     )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
+update msg unswitched =
+    let
+        -- Changing mode ends a Simulate run (its timers are then ignored).
+        model =
+            case msg of
+                SwitchMode _ ->
+                    { unswitched | simulation = Nothing }
+
+                _ ->
+                    unswitched
+    in
     case msg of
         GotLayout (Ok layout) ->
             ( { model | layout = Loaded layout, keymap = Keyboard.geminiKeymap layout.keys }, Cmd.none )
@@ -140,11 +192,34 @@ update msg model =
 
             else if mode == DefinitionMode && model.definitions == Nothing then
                 ( { model | mode = mode, drill = Nothing, typed = noTypedStrokes, definitions = Just Loading }
-                , Http.get { url = "public/data/definitions.json", expect = Http.expectJson GotDefinitions Definitions.decoder }
+                , Cmd.batch
+                    [ Http.get { url = "public/data/definitions.json", expect = Http.expectJson GotDefinitions Definitions.decoder }
+                    , Http.get { url = "public/data/affix-abbreviations.json", expect = Http.expectJson GotAbbreviations (D.dict (D.dict D.string)) }
+                    ]
+                )
+
+            else if mode == LessonMode && model.lessons == Nothing then
+                ( { model | mode = mode, drill = Nothing, typed = noTypedStrokes, selectedLesson = Nothing, lessons = Just Loading }
+                , Http.get { url = "public/data/lessons.json", expect = Http.expectJson GotLessons Lessons.decoder }
+                )
+
+            else if mode == LessonMode then
+                -- Already fetched (or fetching): back to the picker, not an
+                -- auto-resume of whatever lesson was last selected. No drill
+                -- starts (nothing is selected), so no `startDrillIfIdle`.
+                ( { model | mode = mode, drill = Nothing, typed = noTypedStrokes, selectedLesson = Nothing }
+                , Cmd.none
                 )
 
             else
                 startDrillIfIdle { model | mode = mode, drill = Nothing, typed = noTypedStrokes }
+
+        GotAbbreviations (Ok abbreviations) ->
+            ( { model | abbreviations = abbreviations }, Cmd.none )
+
+        GotAbbreviations (Err _) ->
+            -- Optional layer: without the file the Definitions page has no abbreviation column.
+            ( model, Cmd.none )
 
         GotDefinitions (Ok definitions) ->
             ( { model | definitions = Just (Loaded definitions) }, Cmd.none )
@@ -152,11 +227,106 @@ update msg model =
         GotDefinitions (Err err) ->
             ( { model | definitions = Just (Failed (httpErrorToString err)) }, Cmd.none )
 
+        GotLessons (Ok lessons) ->
+            ( { model | lessons = Just (Loaded (mergeAffix model.affixData lessons)) }, Cmd.none )
+
+        GotAffixData (Ok data) ->
+            -- Whichever of lessons.json / affix-lessons.json arrives last does the merge.
+            ( { model
+                | affixData = Just data
+                , lessons =
+                    case model.lessons of
+                        Just (Loaded lessons) ->
+                            Just (Loaded (Lessons.mergeAffixData data lessons))
+
+                        other ->
+                            other
+              }
+            , Cmd.none
+            )
+
+        GotAffixData (Err _) ->
+            -- Optional layer: without the file the affixes track keeps its stub lesson.
+            ( model, Cmd.none )
+
+        GotLessons (Err err) ->
+            ( { model | lessons = Just (Failed (httpErrorToString err)) }, Cmd.none )
+
+        SelectLesson id ->
+            -- Picking a lesson shows its intro; its drill only starts on the
+            -- intro's explicit button, so no auto-start here (unlike
+            -- `startDrillIfIdle` for the whole-pool modes).
+            ( { model | selectedLesson = Just id, drill = Nothing, typed = noTypedStrokes }
+            , Cmd.none
+            )
+
+        PrevLesson ->
+            stepLesson -1 model
+
+        NextLesson ->
+            stepLesson 1 model
+
+        BackToLessonList ->
+            ( { model | selectedLesson = Nothing, drill = Nothing, typed = noTypedStrokes }
+            , Cmd.none
+            )
+
+        StartLessonDrill words ->
+            -- The same shuffle path the Words mode uses: the shuffled list
+            -- comes back as `ShuffledWords`, which starts the drill.
+            ( model
+            , Random.generate ShuffledWords (shuffleGenerator words)
+            )
+
         QueryChanged query ->
             ( { model | query = query }, Cmd.none )
 
         ToggleHints ->
             ( { model | hints = not model.hints }, Cmd.none )
+
+        ToggleAbbrevHints ->
+            ( { model | abbrevHints = Just (not (abbrevHintsOn model)) }, Cmd.none )
+
+        StartSimulation ->
+            case currentStrokes model of
+                [] ->
+                    ( model, Cmd.none )
+
+                strokes ->
+                    let
+                        run =
+                            model.simulationRuns + 1
+                    in
+                    ( { model | simulation = Just { run = run, strokes = strokes, step = 0 }, simulationRuns = run }
+                    , simulationTimer run 0 strokes
+                    )
+
+        SimulationStep run step ->
+            case model.simulation of
+                Just simulation ->
+                    if simulation.run /= run then
+                        ( model, Cmd.none )
+
+                    else if step >= List.length simulation.strokes then
+                        ( { model | simulation = Nothing }, Cmd.none )
+
+                    else
+                        ( { model | simulation = Just { simulation | step = step } }
+                        , simulationTimer run step simulation.strokes
+                        )
+
+                Nothing ->
+                    ( model, Cmd.none )
+
+        SkipWords n ->
+            ( { model
+                | simulation = Nothing
+                , drill = Maybe.map (Drill.skipWords n) model.drill
+                , typed = noTypedStrokes
+                , lastStroke = Set.empty
+              }
+            , Cmd.none
+            )
 
         ShuffledWords words ->
             -- The first shuffle of a mode (after its list loads, or on
@@ -215,7 +385,7 @@ update msg model =
                                 , lastStroke = observed
                                 , typed =
                                     if newDrill.feedback == Just True then
-                                        recordTypedStroke drill model.typed
+                                        recordTypedStroke observed drill model.typed
 
                                     else
                                         model.typed
@@ -231,6 +401,16 @@ update msg model =
                     ( model, Cmd.none )
 
 
+mergeAffix : Maybe Lessons.AffixData -> Lessons -> Lessons
+mergeAffix affixData lessons =
+    case affixData of
+        Just data ->
+            Lessons.mergeAffixData data lessons
+
+        Nothing ->
+            lessons
+
+
 noTypedStrokes : TypedStrokes
 noTypedStrokes =
     { strokes = [], complete = False }
@@ -240,16 +420,21 @@ noTypedStrokes =
 line: a new line after a completed word, otherwise appended. A stroke
 completes the word when it's the last of the item, or of the current
 sentence word. -}
-recordTypedStroke : Drill.State -> TypedStrokes -> TypedStrokes
-recordTypedStroke drill typed =
+recordTypedStroke : Set.Set Int -> Drill.State -> TypedStrokes -> TypedStrokes
+recordTypedStroke observed drill typed =
     case Drill.currentWord drill of
         Just word ->
             let
                 index =
                     drill.currentStrokeIndex
 
+                -- the outline being typed: an alternate (long) one when the learner chose it
+                outline =
+                    Drill.matchedOutline observed drill
+                        |> Maybe.withDefault { steno = word.steno, strokes = word.strokes }
+
                 stroke =
-                    String.words word.steno
+                    String.words outline.steno
                         |> List.concatMap (String.split "/")
                         |> List.drop index
                         |> List.head
@@ -257,7 +442,7 @@ recordTypedStroke drill typed =
 
                 wordEnds =
                     if List.isEmpty word.segments then
-                        [ List.length word.strokes ]
+                        [ List.length outline.strokes ]
 
                     else
                         word.segments
@@ -276,7 +461,11 @@ recordTypedStroke drill typed =
             typed
 
 
-{-| The current drill mode's list; `Nothing` in definition mode (no drill). -}
+{-| The current drill mode's list; `Nothing` in definition mode (no drill)
+and in lesson mode until a lesson is picked (the drill runs over the selected
+lesson's own pool, not a whole exported file). The returned list is also the
+pass-boundary reshuffle source, so finishing a lesson's pass deals a fresh
+shuffle of that same lesson. -}
 activeItems : Model -> Maybe (LoadState (List PracticeWord))
 activeItems model =
     case model.mode of
@@ -288,6 +477,60 @@ activeItems model =
 
         DefinitionMode ->
             Nothing
+
+        LessonMode ->
+            case model.lessons of
+                Just (Loaded lessons) ->
+                    model.selectedLesson
+                        |> Maybe.andThen (\id -> lessons.lessons |> List.filter (\l -> l.id == id) |> List.head)
+                        |> Maybe.map (\lesson -> Loaded lesson.words)
+
+                _ ->
+                    Nothing
+
+
+{-| One step through the GLOBAL lesson order (the flat `lessons` list, i.e. the
+tracks' concatenation): lands on the target lesson's INTRO by reusing the
+`SelectLesson` path verbatim, so the drill state and the typed-strokes line
+reset exactly as a fresh pick does. Out-of-range steps and a missing selection
+are no-ops (the buttons are already disabled there). -}
+stepLesson : Int -> Model -> ( Model, Cmd Msg )
+stepLesson delta model =
+    case model.lessons of
+        Just (Loaded lessons) ->
+            let
+                target =
+                    model.selectedLesson
+                        |> Maybe.andThen (\id -> lessonIndexIn id lessons.lessons)
+                        |> Maybe.andThen (\i -> List.drop (i + delta) lessons.lessons |> List.head)
+            in
+            case target of
+                Just lesson ->
+                    update (SelectLesson lesson.id) model
+
+                Nothing ->
+                    ( model, Cmd.none )
+
+        _ ->
+            ( model, Cmd.none )
+
+
+lessonIndexIn : String -> List Lessons.Lesson -> Maybe Int
+lessonIndexIn id lessons =
+    let
+        step index remaining =
+            case remaining of
+                [] ->
+                    Nothing
+
+                first :: rest ->
+                    if first.id == id then
+                        Just index
+
+                    else
+                        step (index + 1) rest
+    in
+    step 0 lessons
 
 
 {-| Shuffle the current mode's list into a fresh drill, once it has loaded
@@ -373,6 +616,7 @@ view model =
                 :: viewConnectButton model.serial
                 :: viewModeSwitch model.mode
                 :: viewHintsToggle model
+                :: viewAbbrevHintsToggle model
                 :: viewNotationToggle model.notation
                 :: viewSidebarLegends model
             )
@@ -420,6 +664,8 @@ viewModeSwitch mode =
         , modeButton SentenceMode "Sentences"
         , text " "
         , modeButton DefinitionMode "Definitions"
+        , text " "
+        , modeButton LessonMode "Lessons"
         ]
 
 
@@ -452,6 +698,60 @@ viewHintsToggle model =
             ]
 
 
+{-| Whether the affix rule hint shows: the learner's choice once made, else on
+for words, sentences and the affixes lesson track, off in the other lessons. -}
+abbrevHintsOn : Model -> Bool
+abbrevHintsOn model =
+    case model.abbrevHints of
+        Just choice ->
+            choice
+
+        Nothing ->
+            case model.mode of
+                LessonMode ->
+                    case ( model.lessons, model.selectedLesson ) of
+                        ( Just (Loaded lessons), Just id ) ->
+                            List.any (\l -> l.id == id && l.track == "affixes") lessons.lessons
+
+                        _ ->
+                            False
+
+                DefinitionMode ->
+                    False
+
+                _ ->
+                    True
+
+
+{-| Affix rule hint on: under the chord board, the affix rules' keys and,
+for the drill's current word, the short outlines the affix layer gives it
+(`viewAbbreviationHints`). -}
+viewAbbrevHintsToggle : Model -> Html Msg
+viewAbbrevHintsToggle model =
+    if model.mode == DefinitionMode then
+        text ""
+
+    else
+        p [ class "hints-toggle" ]
+            [ text
+                (if abbrevHintsOn model then
+                    "Affix rule hint: on "
+
+                 else
+                    "Affix rule hint: off "
+                )
+            , button [ onClick ToggleAbbrevHints ]
+                [ text
+                    (if abbrevHintsOn model then
+                        "Hide affix rule hint"
+
+                     else
+                        "Show affix rule hint"
+                    )
+                ]
+            ]
+
+
 {-| Switches every phoneme on the page -- keys, chord board, legends, the
 drill's steno and phonology -- between X-SAMPA (what the dictionary is
 written in) and IPA. See `Notation`. -}
@@ -467,10 +767,68 @@ viewSidebarLegends : Model -> List (Html Msg)
 viewSidebarLegends model =
     case model.layout of
         Loaded layout ->
-            [ Keyboard.viewLegends (Notation.layout model.notation layout) ]
+            [ Keyboard.viewLegends (simulatedKeys model) (isMarkStep model) (Notation.layout model.notation layout) ]
 
         _ ->
             []
+
+
+{-| The extra hint under the chord board, only what affects the current word
+(every word of the current sentence in sentence mode): the rules shortening it,
+key names first. The words are looked up by spelling among
+the affix lessons' words -- so only the words those lessons teach have a hint --
+and nothing shows for the others. -}
+viewAbbreviationHints : Model -> Html Msg
+viewAbbreviationHints model =
+    case model.affixData of
+        Nothing ->
+            text ""
+
+        Just data ->
+            let
+                spellings =
+                    case model.drill |> Maybe.andThen Drill.currentWord of
+                        Just word ->
+                            if List.isEmpty word.segments then
+                                [ word.ortho ]
+
+                            else
+                                List.map .text word.segments
+
+                        Nothing ->
+                            []
+
+                found =
+                    spellings
+                        |> List.map (\spelling -> ( spelling, abbreviationsOf spelling data.abbreviations ))
+                        |> List.filter (\( _, entries ) -> not (List.isEmpty entries))
+
+                ranks =
+                    found |> List.concatMap (\( _, entries ) -> List.map .rule entries)
+
+                render =
+                    Notation.render model.notation
+            in
+            if List.isEmpty found then
+                text ""
+
+            else
+                div [ class "abbreviation-hints" ]
+                    [ Keyboard.viewAffixLegend
+                        (data.rules
+                            |> List.filter (\rule -> List.member rule.rank ranks)
+                            |> List.map (\rule -> { rule | keyNames = List.map render rule.keyNames })
+                        )
+                    ]
+
+
+abbreviationsOf : String -> List Lessons.Abbreviation -> List Lessons.Abbreviation
+abbreviationsOf spelling =
+    let
+        key =
+            String.toLower (String.trim spelling)
+    in
+    List.filter (\entry -> String.toLower entry.ortho == key)
 
 
 viewTrainer : Model -> Html Msg
@@ -480,41 +838,66 @@ viewTrainer model =
             ( DefinitionMode, _ ) ->
                 viewDefinitions model
 
+            ( LessonMode, _ ) ->
+                viewLessons model
+
             ( _, Just (Failed message) ) ->
                 p [ class "error" ] [ text ("Couldn't load practice " ++ modeNoun model.mode ++ ": " ++ message) ]
 
             ( _, Just (Loaded _) ) ->
-                viewDrill model
+                div []
+                    [ p [ class "word-nav-row" ] [ viewWordNav ]
+                    , viewDrill model
+                    ]
 
             _ ->
                 p [] [ text ("Loading practice " ++ modeNoun model.mode ++ "...") ]
-        , case model.layout of
-            Failed message ->
-                p [ class "error" ] [ text ("Couldn't load keyboard layout: " ++ message) ]
+        , if model.mode == LessonMode && model.drill == Nothing then
+            -- The lesson intro renders its own keyboard (highlighting the
+            -- lesson's new keys/chords); the list has nothing to highlight.
+            text ""
 
-            Loading ->
-                p [] [ text "Loading keyboard layout..." ]
+          else
+            case model.layout of
+                Failed message ->
+                    p [ class "error" ] [ text ("Couldn't load keyboard layout: " ++ message) ]
 
-            Loaded loadedLayout ->
-                let
-                    layout =
-                        Notation.layout model.notation loadedLayout
-                in
-                div []
-                    [ Keyboard.view
-                        (if model.hints && model.mode /= DefinitionMode then
-                            { highlighted = model.drill |> Maybe.andThen Drill.expectedStroke |> Maybe.withDefault Set.empty
-                            , correct = model.drill |> Maybe.andThen .feedback
-                            }
+                Loading ->
+                    p [] [ text "Loading keyboard layout..." ]
 
-                         else
-                            { highlighted = model.lastStroke
-                            , correct = model.drill |> Maybe.andThen .feedback
-                            }
-                        )
-                        layout.keys
-                    , Keyboard.viewChordBoard layout
-                    ]
+                Loaded loadedLayout ->
+                    let
+                        layout =
+                            Notation.layout model.notation loadedLayout
+                    in
+                    div [ classList [ ( "sim-mark", isMarkStep model ) ] ]
+                        [ if model.drill /= Nothing && model.mode /= DefinitionMode then
+                            p [ class "simulate-row" ] [ button [ onClick StartSimulation ] [ text "Simulate" ] ]
+
+                          else
+                            text ""
+                        , Keyboard.view
+                            (if model.simulation /= Nothing then
+                                { highlighted = simulatedKeys model, correct = Just True }
+
+                             else if model.hints && model.mode /= DefinitionMode then
+                                { highlighted = model.drill |> Maybe.andThen Drill.expectedStroke |> Maybe.withDefault Set.empty
+                                , correct = model.drill |> Maybe.andThen .feedback
+                                }
+
+                             else
+                                { highlighted = model.lastStroke
+                                , correct = model.drill |> Maybe.andThen .feedback
+                                }
+                            )
+                            layout.keys
+                        , Keyboard.viewChordBoard (simulatedKeys model) layout
+                        , if abbrevHintsOn model && model.mode /= DefinitionMode then
+                            viewAbbreviationHints model
+
+                          else
+                            text ""
+                        ]
         ]
 
 
@@ -529,6 +912,9 @@ modeNoun mode =
 
         DefinitionMode ->
             "definitions"
+
+        LessonMode ->
+            "lessons"
 
 
 viewDefinitions : Model -> Html Msg
@@ -545,13 +931,173 @@ viewDefinitions model =
             []
         , case model.definitions of
             Just (Loaded definitions) ->
-                Definitions.view (Notation.render model.notation) model.query definitions
+                Definitions.view (Notation.render model.notation) model.abbreviations model.query definitions
 
             Just (Failed message) ->
                 p [ class "error" ] [ text ("Couldn't load definitions: " ++ message) ]
 
             _ ->
                 p [] [ text "Loading definitions..." ]
+        ]
+
+
+{-| Lesson mode's three screens: the picker (no lesson selected), the intro
+of the selected lesson, and -- once its "Start drill" has gone through the
+shuffle -- the shared drill view over that lesson's words, with a back link
+above it so a run can be abandoned without leaving the mode. Both the intro
+and the drill page carry the Previous/Next pair over the global lesson order
+(`Lessons.viewPrevNext`); both land on the target lesson's intro. The
+keyboard under the drill is the trainer's usual one (hints follow the drill);
+the intro carries its own (see `Lessons.viewIntro`). -}
+viewLessons : Model -> Html Msg
+viewLessons model =
+    case model.lessons of
+        Just (Failed message) ->
+            p [ class "error" ] [ text ("Couldn't load lessons: " ++ message) ]
+
+        Just (Loaded lessons) ->
+            let
+                selected =
+                    model.selectedLesson
+                        |> Maybe.andThen (\id -> lessons.lessons |> List.filter (\l -> l.id == id) |> List.head)
+
+                ( onPrev, onNext ) =
+                    let
+                        length =
+                            List.length lessons.lessons
+                    in
+                    case model.selectedLesson |> Maybe.andThen (\id -> lessonIndexIn id lessons.lessons) of
+                        Just index ->
+                            ( (if index > 0 then Just PrevLesson else Nothing)
+                            , (if index < length - 1 then Just NextLesson else Nothing)
+                            )
+
+                        Nothing ->
+                            ( Nothing, Nothing )
+            in
+            case selected of
+                Just lesson ->
+                    if model.drill == Nothing then
+                        Lessons.viewIntro
+                            { onBack = BackToLessonList
+                            , onStart = StartLessonDrill
+                            , onPrev = onPrev
+                            , onNext = onNext
+                            , render = Notation.render model.notation
+                            , keys =
+                                case model.layout of
+                                    Loaded layout ->
+                                        (Notation.layout model.notation layout).keys
+
+                                    _ ->
+                                        []
+                            }
+                            lesson
+
+                    else
+                        div [ class "lesson-drill" ]
+                            [ p [ class "lesson-back lesson-back-drill" ]
+                                ([ button [ onClick BackToLessonList ] [ text "← Lessons" ] ]
+                                    ++ Lessons.viewPrevNext onPrev onNext
+                                    ++ [ viewWordNav ]
+                                )
+                            , viewDrill model
+                            ]
+
+                Nothing ->
+                    Lessons.viewList
+                        { onSelect = SelectLesson
+                        , selected = model.selectedLesson
+                        , render = Notation.render model.notation
+                        }
+                        lessons
+
+        _ ->
+            p [] [ text "Loading lessons..." ]
+
+
+{-| After the lit stroke `step` of `strokes` has been shown long enough, move to
+the next one (`SimulationStep`; past the last one it ends the run): 1 s plus
+0.2 s per key pressed for an intermediate stroke, 3 s for the last one (so 3 s
+for a single-stroke word). -}
+simulationTimer : Int -> Int -> List (List Int) -> Cmd Msg
+simulationTimer run step strokes =
+    let
+        milliseconds =
+            if step >= List.length strokes - 1 then
+                3000
+
+            else
+                1000 + 200 * (List.drop step strokes |> List.head |> Maybe.map List.length |> Maybe.withDefault 0)
+    in
+    Process.sleep (toFloat milliseconds) |> Task.perform (\_ -> SimulationStep run (step + 1))
+
+
+{-| The strokes the Simulate button lights for the current item: the word's
+outline, or, in a sentence, the current word's slice of it. -}
+currentStrokes : Model -> List (List Int)
+currentStrokes model =
+    case model.drill of
+        Just drill ->
+            case Drill.currentWord drill of
+                Just word ->
+                    if List.isEmpty word.segments then
+                        word.strokes
+
+                    else
+                        let
+                            index =
+                                Drill.currentSegmentIndex drill
+
+                            before =
+                                word.segments |> List.take index |> List.map .strokeCount |> List.sum
+
+                            count =
+                                word.segments |> List.drop index |> List.head |> Maybe.map .strokeCount |> Maybe.withDefault 0
+                        in
+                        word.strokes |> List.drop before |> List.take count
+
+                Nothing ->
+                    []
+
+        Nothing ->
+            []
+
+
+{-| The Simulate button lights a conjugation marker's stroke (after the first
+stroke of the word) yellow instead of green. -}
+isMarkStep : Model -> Bool
+isMarkStep model =
+    case ( model.simulation, model.layout ) of
+        ( Just simulation, Loaded layout ) ->
+            simulation.step > 0
+                && (List.drop simulation.step simulation.strokes
+                        |> List.head
+                        |> Maybe.map (Keyboard.isConjugationStroke layout)
+                        |> Maybe.withDefault False
+                   )
+
+        _ ->
+            False
+
+
+{-| The keys of the stroke the Simulate button currently lights, if it runs. -}
+simulatedKeys : Model -> Set.Set Int
+simulatedKeys model =
+    model.simulation
+        |> Maybe.andThen (\simulation -> List.drop simulation.step simulation.strokes |> List.head)
+        |> Maybe.map Set.fromList
+        |> Maybe.withDefault Set.empty
+
+
+{-| "Previous word" / "Next word": step the current drill, in every mode,
+pushed to the right of its row. -}
+viewWordNav : Html Msg
+viewWordNav =
+    span [ class "word-nav" ]
+        [ button [ onClick (SkipWords -1) ] [ text "← Previous word" ]
+        , text " "
+        , button [ onClick (SkipWords 1) ] [ text "Next word →" ]
         ]
 
 

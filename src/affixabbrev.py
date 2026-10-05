@@ -1,13 +1,17 @@
 """Optional affix abbreviations: extra short outlines for words of a STABLE, finished theory.
 
 The theory (base strokes, same-lemma feature strokes, star/hash marks) is complete without them and is never
-changed here. Each of the 30 affix rules (`affix_rules.json`, written by `util.affix_scan`) names an anchor and a
+changed here. Each of the 30 affix rules (`affix_rules.json`, written by `util.build_affix_rules`) names an anchor and a
 keypress; a carrier word gets, in addition to its long outline, a shorter one in which the rule's keys replace the
 affix syllable(s) (`src.affixes._newBase`). The long outline stays valid as a fallback for anyone who does not
 remember the rules, and the abbreviations ship as a separate, optional dictionary.
 
 Rules of the game:
-- one abbreviation per word: the one saving the most strokes (a tie goes to the better-ranked rule);
+- one abbreviation per word and ROUTE: the one saving the most strokes (a tie goes to the better-ranked rule). A route
+  is one of the word's outlines in the stable theory (the first is the primary one; the others carry other
+  conjugation or homograph marks and trailing feature strokes): the abbreviation keeps that route's marks and
+  strokes after the shortened base, so the writer still selects the reading with the same marking;
+- one entry per outline: the most frequent spelling keeps it, whatever its route (a tie goes to the primary route);
 - an abbreviation is added only if its outline collides with NO outline of the stable theory and with no better
   abbreviation of another spelling: it never needs a mark, so it cannot disturb the theory;
 - a growth form that is not allowed falls back to the rule's anchor alone, then to no abbreviation.
@@ -16,9 +20,9 @@ import json
 from dataclasses import dataclass, field
 
 from src.affixes import (
-    Binding, Candidate, Carrier, RULE, SimContext, _newBase, canonicalizeStrokes, withMarks)
+    Binding, Candidate, Carrier, RULE, SimContext, _newBase, routesOf, withMarks)
 from src.affixrules import buildCandidateRule, childrenIndex
-from src.keyboard import Strokes
+from src.keyboard import Strokes, canonicalizeStrokes
 
 RuleKey = tuple[str, int, str, str]
 
@@ -35,13 +39,16 @@ class RuleSpec:
 @dataclass(frozen=True)
 class Abbreviation:
     ortho: str
-    outline: Strokes          # the short outline (marks of the stable theory kept)
-    longOutline: Strokes      # the word's primary outline in the stable theory
+    outline: Strokes          # the short outline (the route's marks of the stable theory kept)
+    longOutline: Strokes      # the route's outline in the stable theory
     saved: int                # strokes saved
     rank: int                 # rank of the rule in `affix_rules.json`
     anchor: str               # the rule's anchor (spelling)
     k: int                    # 1 = the anchor alone, 2 = a growth form
     frequency: float
+    route: int = 0            # 0 = the word's primary outline, i > 0 = its i-th other route
+    wordIdx: int = -1         # the carrier's `WordRecord.idx`
+    gramCat: str = ""         # the carrier's grammatical category (`WordRecord.gramCat`)
 
 
 @dataclass
@@ -51,6 +58,7 @@ class AbbreviationStats:
     noOption: int = 0            # every form fails (no merge, no gain, or collides with the stable theory)
     outranked: int = 0           # lost the shared outline to a more frequent spelling
     byRank: dict[int, int] = field(default_factory=dict)   # rank -> abbreviations in the dictionary
+    skippedRules: list[int] = field(default_factory=list)  # ranks whose anchor is no longer in the pool (stale rules)
 
 
 def loadRuleSpecs(path: str = "affix_rules.json") -> list[RuleSpec]:
@@ -78,44 +86,47 @@ def buildAbbreviations(
     of the stable theory (all words, all readings); `longOutline`: rec.idx -> the word's primary final outline."""
     stats = AbbreviationStats()
     idx = childrenIndex(pool)
-    chosen: dict[int, Abbreviation] = {}
+    chosen: dict[tuple[int, int], Abbreviation] = {}
     seen: set[int] = set()
     for rule in sorted(rules, key=lambda r: r.rank):
         root = pool.get((rule.position, 1, rule.phono, rule.ortho))
         if root is None:
-            raise KeyError(f"affix rule {rule.rank} anchor {(rule.position, rule.phono, rule.ortho)} is not in the pool: "
-                           "affix_rules.json is stale (rerun util.affix_scan, or the lexicon/layout changed)")
+            # safe default: a rule whose anchor vanished (lexicon or layout change) yields no abbreviations
+            stats.skippedRules.append(rule.rank)
+            continue
         forms = buildCandidateRule(root, idx).forms
         binding = Binding(rule.position, RULE, rule.keys)
         for wordIdx, options in _options(forms, root).items():
             seen.add(wordIdx)
-            best: Abbreviation | None = None
+            rec = options[0].rec
+            shortened = []     # (carrier, new base, saved) best form first
             for carrier in options:
                 newBase, _why, mergedSaving = _newBase(binding, carrier, ctx)
-                if newBase is None:
-                    continue
                 saved = carrier.span if mergedSaving else carrier.span - 1
-                rec = carrier.rec
-                outline = canonicalizeStrokes(withMarks(newBase, rec.markKeys) + rec.extra)
-                if saved <= 0 or outline in takenOutlines:
-                    continue
-                best = Abbreviation(rec.ortho, outline, longOutline[wordIdx], saved, rule.rank, root.ortho,
-                                    carrier.span, rec.frequency)
-                break               # options are ordered best form first
-            if best is None:
-                continue
-            old = chosen.get(wordIdx)
-            if old is None or best.saved > old.saved:
-                chosen[wordIdx] = best
+                if newBase is not None and saved > 0:
+                    shortened.append((carrier, newBase, saved))
+            for route, (marks, extra) in enumerate(routesOf(rec)):
+                for carrier, newBase, saved in shortened:
+                    outline = canonicalizeStrokes(withMarks(newBase, marks) + extra)
+                    if outline in takenOutlines:
+                        continue
+                    long = (longOutline[wordIdx] if route == 0
+                            else canonicalizeStrokes(withMarks(rec.base, marks) + extra))
+                    best = Abbreviation(rec.ortho, outline, long, saved, rule.rank, root.ortho, carrier.span,
+                                        rec.frequency, route, wordIdx, rec.gramCat)
+                    old = chosen.get((wordIdx, route))
+                    if old is None or best.saved > old.saved:
+                        chosen[(wordIdx, route)] = best
+                    break           # options are ordered best form first
     stats.carriers = len(seen)
-    stats.noOption = len(seen - chosen.keys())
-    # one dictionary entry per outline: the most frequent spelling keeps it
+    stats.noOption = len(seen - {w for w, route in chosen if route == 0})
+    # one dictionary entry per outline: the most frequent spelling keeps it, whatever the route
     byOutline: dict[Strokes, list[Abbreviation]] = {}
     for a in chosen.values():
         byOutline.setdefault(a.outline, []).append(a)
     out: list[Abbreviation] = []
     for outline, group in byOutline.items():
-        group.sort(key=lambda a: (-a.frequency, a.ortho, a.rank))
+        group.sort(key=lambda a: (-a.frequency, a.ortho, a.route, a.rank))
         winner = group[0]
         out.append(winner)
         stats.outranked += sum(1 for a in group[1:] if a.ortho != winner.ortho)

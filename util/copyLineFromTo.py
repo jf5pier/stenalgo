@@ -86,7 +86,7 @@ def modifyLine(source: int, dest: int, subColumns: list[int], text: list[str], d
     return "\t".join(ret)
 
     
-def main():
+def main() -> None:
     import sys
 
     substituteMultipleValuesFromSourceToDest(sys.argv)

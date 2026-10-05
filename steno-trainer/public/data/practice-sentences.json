@@ -928,8 +928,8 @@
  },
  {
   "text": "Vous avez trouvé les clés.",
-  "phonology": "vu a.ve tRu.ve le kle",
-  "steno": "v@e a/ve tR@e/ve mte kmte/-s",
+  "phonology": "vu a.ve tRu.ve lE kle",
+  "steno": "v@e a/ve tR@e/ve mtie kmte/-s",
   "strokes": [
    [
     5,
@@ -956,6 +956,7 @@
    [
     6,
     7,
+    13,
     14
    ],
    [
@@ -990,7 +991,7 @@
    {
     "text": "les",
     "label": "article défini, pl.",
-    "steno": "mte",
+    "steno": "mtie",
     "strokeCount": 1
    },
    {
@@ -1511,8 +1512,8 @@
  },
  {
   "text": "Vous faites les courses.",
-  "phonology": "vu fEt le kuRs",
-  "steno": "v@e kpiet/-d mte k@esR/-s",
+  "phonology": "vu fEt lE kuRs",
+  "steno": "v@e kpiet/-d mtie k@esR/-s",
   "strokes": [
    [
     5,
@@ -1532,6 +1533,7 @@
    [
     6,
     7,
+    13,
     14
    ],
    [
@@ -1561,7 +1563,7 @@
    {
     "text": "les",
     "label": "article défini, pl.",
-    "steno": "mte",
+    "steno": "mtie",
     "strokeCount": 1
    },
    {
@@ -4484,7 +4486,7 @@
  {
   "text": "Bois ton lait chaud.",
   "phonology": "bwa t§ lE So",
-  "steno": "svwa/-k tai mtie pmae",
+  "steno": "svwa/-k tai mt*ie pmae",
   "strokes": [
    [
     3,
@@ -4503,6 +4505,7 @@
    [
     6,
     7,
+    10,
     13,
     14
    ],
@@ -4529,7 +4532,7 @@
    {
     "text": "lait",
     "label": "nom, m. sg.",
-    "steno": "mtie",
+    "steno": "mt*ie",
     "strokeCount": 1
    },
    {
@@ -5060,8 +5063,8 @@
  },
  {
   "text": "Vous êtes mes collègues.",
-  "phonology": "vu Et me ko.lEg",
-  "steno": "v@e iet me kae/mtiekd/-s",
+  "phonology": "vu Et mE ko.lEg",
+  "steno": "v@e iet m*ie kae/mtiekd/-s",
   "strokes": [
    [
     5,
@@ -5075,6 +5078,8 @@
    ],
    [
     6,
+    10,
+    13,
     14
    ],
    [
@@ -5110,7 +5115,7 @@
    {
     "text": "mes",
     "label": "adjectif possessif",
-    "steno": "me",
+    "steno": "m*ie",
     "strokeCount": 1
    },
    {
@@ -5244,8 +5249,8 @@
  },
  {
   "text": "On a des nouvelles.",
-  "phonology": "§ a de nu.vEl",
-  "steno": "ai *a pve mR@e/viel/-s",
+  "phonology": "§ a dE nu.vEl",
+  "steno": "ai *a pvie mR@e/viel/-s",
   "strokes": [
    [
     12,
@@ -5258,6 +5263,7 @@
    [
     4,
     5,
+    13,
     14
    ],
    [
@@ -5292,7 +5298,7 @@
    {
     "text": "des",
     "label": "article indéfini, pl.",
-    "steno": "pve",
+    "steno": "pvie",
     "strokeCount": 1
    },
    {
@@ -7313,8 +7319,8 @@
  },
  {
   "text": "Regarde ce que j'ai fait.",
-  "phonology": "R°.gaRd s° k° Z E fE",
-  "steno": "R@a/ksadR/-k s@a k@a vt- ie/-k kpie",
+  "phonology": "R°.gaRd s° k° Z e fE",
+  "steno": "R@a/ksadR/-k s@a k@a vt- e/-k kpie",
   "strokes": [
    [
     8,
@@ -7346,7 +7352,6 @@
     7
    ],
    [
-    13,
     14
    ],
    [
@@ -7387,7 +7392,7 @@
    {
     "text": "ai",
     "label": "indicatif présent, 1re sg.",
-    "steno": "ie/-k",
+    "steno": "e/-k",
     "strokeCount": 2
    },
    {
@@ -7835,11 +7840,12 @@
  },
  {
   "text": "Ces fleurs sont belles.",
-  "phonology": "se fl9R s§ bEl",
-  "steno": "se kpmt@R/-s sai sviel/-s",
+  "phonology": "sE fl9R s§ bEl",
+  "steno": "sie kpmt@R/-s sai sviel/-s",
   "strokes": [
    [
     3,
+    13,
     14
    ],
    [
@@ -7873,7 +7879,7 @@
    {
     "text": "ces",
     "label": "adjectif démonstratif, pl.",
-    "steno": "se",
+    "steno": "sie",
     "strokeCount": 1
    },
    {
@@ -8283,7 +8289,7 @@
  {
   "text": "Sûrement elle sait cela.",
   "phonology": "sy.R°.m@ El sE s°.la",
-  "steno": "s@i/R@a/m@ iel sie s@a/mta",
+  "steno": "s@i/R@a/m@ iel s*ie s@a/mta",
   "strokes": [
    [
     3,
@@ -8306,6 +8312,7 @@
    ],
    [
     3,
+    10,
     13,
     14
    ],
@@ -8336,7 +8343,7 @@
    {
     "text": "sait",
     "label": "indicatif présent, 3e sg.",
-    "steno": "sie",
+    "steno": "s*ie",
     "strokeCount": 1
    },
    {
@@ -9257,8 +9264,8 @@
  },
  {
   "text": "Je n'ai jamais mangé ça.",
-  "phonology": "Z° n E Za.mE m@.Ze sa",
-  "steno": "vt@a mR- ie/-k vta/mie m@/vte sa",
+  "phonology": "Z° n e Za.mE m@.Ze sa",
+  "steno": "vt@a mR- e/-k vta/mie m@/vte sa",
   "strokes": [
    [
     5,
@@ -9271,7 +9278,6 @@
     8
    ],
    [
-    13,
     14
    ],
    [
@@ -9317,7 +9323,7 @@
    {
     "text": "ai",
     "label": "indicatif présent, 1re sg.",
-    "steno": "ie/-k",
+    "steno": "e/-k",
     "strokeCount": 2
    },
    {
@@ -11400,7 +11406,7 @@
  {
   "text": "On sait que tu mens.",
   "phonology": "§ sE k° ty m@",
-  "steno": "ai sie k@a t@i m@/-d",
+  "steno": "ai s*ie k@a t@i m@/-d",
   "strokes": [
    [
     12,
@@ -11408,6 +11414,7 @@
    ],
    [
     3,
+    10,
     13,
     14
    ],
@@ -11439,7 +11446,7 @@
    {
     "text": "sait",
     "label": "indicatif présent, 3e sg.",
-    "steno": "sie",
+    "steno": "s*ie",
     "strokeCount": 1
    },
    {
@@ -12117,8 +12124,8 @@
  },
  {
   "text": "Ils les ont vus hier.",
-  "phonology": "il le § vy jER",
-  "steno": "il/-s mte *ai v@i/-s RwieR",
+  "phonology": "il lE § vy jER",
+  "steno": "il/-s mtie *ai v@i/-s RwieR",
   "strokes": [
    [
     13,
@@ -12130,6 +12137,7 @@
    [
     6,
     7,
+    13,
     14
    ],
    [
@@ -12163,7 +12171,7 @@
    {
     "text": "les",
     "label": "pronom personnel, pl.",
-    "steno": "mte",
+    "steno": "mtie",
     "strokeCount": 1
    },
    {
@@ -13633,8 +13641,8 @@
  },
  {
   "text": "Il se peigne les cheveux.",
-  "phonology": "il s° pEN le S°.v2",
-  "steno": "il s*@a pietn mte pm@a/v@ie/-s",
+  "phonology": "il s° pEN lE S°.v2",
+  "steno": "il s*@a pietn mtie pm@a/v@ie/-s",
   "strokes": [
    [
     13,
@@ -13656,6 +13664,7 @@
    [
     6,
     7,
+    13,
     14
    ],
    [
@@ -13696,7 +13705,7 @@
    {
     "text": "les",
     "label": "article défini, pl.",
-    "steno": "mte",
+    "steno": "mtie",
     "strokeCount": 1
    },
    {
@@ -13709,8 +13718,8 @@
  },
  {
   "text": "Elle se lave les mains.",
-  "phonology": "El s° lav le m5",
-  "steno": "iel s*@a mtajs mte maie/-s",
+  "phonology": "El s° lav lE m5",
+  "steno": "iel s*@a mtajs mtie maie/-s",
   "strokes": [
    [
     13,
@@ -13733,6 +13742,7 @@
    [
     6,
     7,
+    13,
     14
    ],
    [
@@ -13767,7 +13777,7 @@
    {
     "text": "les",
     "label": "article défini, pl.",
-    "steno": "mte",
+    "steno": "mtie",
     "strokeCount": 1
    },
    {
@@ -14707,8 +14717,8 @@
  },
  {
   "text": "On les rencontre souvent.",
-  "phonology": "§ le R@.k§tR su.v@",
-  "steno": "ai mte R@/kaitR s@e/v@",
+  "phonology": "§ lE R@.k§tR su.v@",
+  "steno": "ai mtie R@/kaitR s@e/v@",
   "strokes": [
    [
     12,
@@ -14717,6 +14727,7 @@
    [
     6,
     7,
+    13,
     14
    ],
    [
@@ -14750,7 +14761,7 @@
    {
     "text": "les",
     "label": "pronom personnel, pl.",
-    "steno": "mte",
+    "steno": "mtie",
     "strokeCount": 1
    },
    {
@@ -14769,8 +14780,8 @@
  },
  {
   "text": "Nous les cherchons partout.",
-  "phonology": "nu le SER.S§ paR.tu",
-  "steno": "mR@e mte pmieR/pmai paR/t@e",
+  "phonology": "nu lE SER.S§ paR.tu",
+  "steno": "mR@e mtie pmieR/pmai paR/t@e",
   "strokes": [
    [
     6,
@@ -14781,6 +14792,7 @@
    [
     6,
     7,
+    13,
     14
    ],
    [
@@ -14817,7 +14829,7 @@
    {
     "text": "les",
     "label": "pronom personnel, pl.",
-    "steno": "mte",
+    "steno": "mtie",
     "strokeCount": 1
    },
    {

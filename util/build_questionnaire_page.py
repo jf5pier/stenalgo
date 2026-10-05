@@ -4,15 +4,17 @@ questionnaire.json (written by `python -m src.elicitation`) into the elicitation
 questionnaire's HTML/JS, ready to publish as an Artifact (a web page with checkboxes and a
 save button backed by the Artifact `db` capability).
 """
+from typing import Any
 import json
 import os
 
 _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-def loadItems(path: str) -> list[dict]:
+def loadItems(path: str) -> list[dict[str, Any]]:
     with open(path, encoding="utf-8") as f:
-        return json.load(f)
+        items: list[dict[str, Any]] = json.load(f)
+    return items
 
 LABELS = {
     "pers_1": "1re pers.", "pers_2": "2e pers.", "pers_3": "3e pers.",

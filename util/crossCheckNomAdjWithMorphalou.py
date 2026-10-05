@@ -28,12 +28,13 @@
 #                   lemmas), so this is inconclusive, not a contradiction.
 #
 # Report-only: never modifies any file.
+from typing import Any
 import argparse
 import csv
 from collections import Counter
 
+from src.word import Lemme
 from src.nomAdjParadigm import (
-    Lemme,
     MorphalouIndex,
     NomAdjModelException,
     attestedSlots,
@@ -68,9 +69,9 @@ def classify(lemme: str, gramCatName: str, slot: tuple[str, str], ortho: str,
     return (MATCH if ortho in orthos else MISMATCH), orthos
 
 
-def checkAttested(words: list[Word], morphalou: MorphalouIndex) -> tuple[Counter, list[tuple[Word, set[str]]]]:
+def checkAttested(words: list[Word], morphalou: MorphalouIndex) -> tuple[Counter[str], list[tuple[Word, set[str]]]]:
     """Cross-check every row already in the lexicon (not just gaps) -- validates the donor tables' own training data."""
-    counts: Counter = Counter()
+    counts: Counter[str] = Counter()
     mismatches: list[tuple[Word, set[str]]] = []
     for slotMap in attestedSlots(words).values():
         for slot, word in slotMap.items():
@@ -83,11 +84,11 @@ def checkAttested(words: list[Word], morphalou: MorphalouIndex) -> tuple[Counter
 
 def checkCandidates(
     words: list[Word], morphalou: MorphalouIndex, exceptions: dict[tuple[Lemme, str], NomAdjModelException]
-) -> tuple[Counter, list[tuple[Word, set[str]]]]:
+) -> tuple[Counter[str], list[tuple[Word, set[str]]]]:
     """Cross-check what util/generateMissingNomAdjForms.py would generate right now (mirrors its own logic)."""
     tables = deriveNomAdjEndingTables(words)
     slotsByLemme = attestedSlots(words)
-    counts: Counter = Counter()
+    counts: Counter[str] = Counter()
     mismatches: list[tuple[Word, set[str]]] = []
     for lemmeGramCat, slotMap in slotsByLemme.items():
         gramCat = next(iter(slotMap.values())).gramCat
@@ -115,7 +116,7 @@ def checkCandidates(
     return counts, mismatches
 
 
-def printSection(title: str, counts: Counter, mismatches: list[tuple[Word, set[str]]]) -> None:
+def printSection(title: str, counts: Counter[str], mismatches: list[tuple[Word, set[str]]]) -> None:
     total = sum(counts.values())
     print(f"\n=== {title}: {total} checked ===")
     for outcome in (MATCH, MISMATCH, NOT_IN_MORPHALOU):

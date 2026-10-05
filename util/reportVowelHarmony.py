@@ -23,6 +23,7 @@
 import argparse
 import collections
 import csv
+from typing import Any
 from dataclasses import dataclass, field
 
 LEXIQUE_MIXTE_PATH = "resources/LexiqueMixte.tsv"
@@ -36,8 +37,8 @@ ACCENTED_ORTHO = frozenset({"é", "è", "ê", "ë", "ai", "ei", "aî", "eî", "�
 @dataclass
 class Variant:
     forms: list[str] = field(default_factory=list)
-    following: collections.Counter = field(default_factory=collections.Counter)
-    closed: collections.Counter = field(default_factory=collections.Counter)
+    following: collections.Counter[str] = field(default_factory=collections.Counter)
+    closed: collections.Counter[bool] = field(default_factory=collections.Counter)
 
 
 def alignedUnits(row: dict[str, str]) -> list[tuple[int, int, str, str]] | None:
@@ -46,7 +47,7 @@ def alignedUnits(row: dict[str, str]) -> list[tuple[int, int, str, str]] | None:
     ortho = [s.split("_") for s in row["orthosyll_cv"].split("|")]
     if [len(s) for s in phon] != [len(s) for s in ortho]:
         return None
-    flat = []
+    flat: list[tuple[int, int, str, str]] = []
     for si, (ps, os_) in enumerate(zip(phon, ortho)):
         for p, o in zip(ps, os_):
             flat.append((len(flat), si, p, o.lower()))
@@ -83,7 +84,7 @@ def main() -> None:
     for row in rows:
         byLemma[row["lemme"]].append(row)
 
-    report = []
+    report: list[dict[str, Any]] = []
     for lemme, lemmaRows in byLemma.items():
         positions: dict[tuple[int, str], dict[str, Variant]] = collections.defaultdict(
             lambda: collections.defaultdict(Variant))

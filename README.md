@@ -16,9 +16,10 @@ lexicon built out of Lexique383 [[1]](#1) and LexiqueInfra [[3]](#3).
   feature discriminating strokes from the elicited feature sets ([spec](docs/specs/discriminating-features.md)).
 - **Different-lemma homophones done** — lemma-homophones (`ver`/`vert`/`verre`) get star/hash
   marks on the reserved keys ([spec](docs/specs/star-hash-marking.md)).
-- **Affix abbreviations (optional layer, branch `affix-abbreviation-rules`)** — 30 affix rules on dedicated keypresses give 59,358 words a shorter outline in a
-  separate Plover dictionary; the theory is unchanged and the long outlines stay as the fallback ([docs/AFFIX_RULES.md](docs/AFFIX_RULES.md)). Not yet part of the
-  automatic pipeline's decisions: see `PLAN_2026-10-01-affix-pipeline-integration.md`.
+- **Affix abbreviations (optional layer, Affix Abbreviation Building (S9), branch `affix-abbreviation-rules`)** — 30 affix rules on dedicated keypresses give
+  72,204 words a shorter outline in a separate Plover dictionary (`plover_stenalgo_affix_dictionary.json`); the theory is unchanged and the long outlines stay
+  as the fallback. Part of `python dictionary.py`; the growth and fusion verdicts are committed in `affix_decisions.json` and decided with the interactive
+  `python -m util.review_affix_rules`. See [docs/AFFIX_RULES.md](docs/AFFIX_RULES.md) (reference) and [docs/AFFIX_DESIGN.md](docs/AFFIX_DESIGN.md) (why).
 - **Expression abbreviations (branch `abbreviations`)** — function-word expressions (`il n'`, `de la`, `que je`) shortened by attach keypresses and briefs, decoded in Plover by a dictionary
   plugin (`plover_stenalgo/`, installed from github.com/jf5pier/stenalgo-plover; data + stock dictionary side by side): `docs/PIPELINE.md` S8.10, `RESULTS_2026-10-04-expression-decoder.md`.
 - **Not done yet** — dictionary densification (conjugation tables, prefixes) and the personal
@@ -49,7 +50,7 @@ pip install -r requirements.txt             # install dependencies
 # Prerequisites: Python 3.12+. Outputs: installed packages only.
 pytest src/test/                            # run tests
 # Prerequisites: dependencies. Outputs: console report only.
-mypy src/                                   # type checking
+mypy                                        # type checking (scope in mypy.ini)
 # Prerequisites: dependencies. Outputs: console report only.
 
 # The pipeline in dependency order, run from the repo root; python dictionary.py orchestrates all of it:

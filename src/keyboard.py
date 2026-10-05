@@ -3,6 +3,7 @@ from dataclasses import dataclass, fields
 from functools import lru_cache
 from math import log,ceil
 from abc  import ABC, abstractmethod
+from collections.abc import Iterator
 from typing import override, Any, Self, TypeAlias
 import json
 import ast
@@ -74,12 +75,13 @@ class PositionWeights(object):
             list(self.rightIndex.items()) + list(self.rightMiddle.items()) +
             list(self.rightRing.items()) + list(self.rightPinky.items()))
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[dict[Keypress, int]]:
         return (getattr(self, field.name) 
             for field in fields(self) if field.name != "fingers")
 
     def __getitem__(self, key: str) -> dict[Keypress, int]:
-        return getattr(self, key)
+        weights: dict[Keypress, int] = getattr(self, key)
+        return weights
 
 class Keyboard(ABC):
     # One key keyboard template
@@ -210,7 +212,7 @@ class Keyboard(ABC):
                                                   recurse+1) #Compare the rest of the stroke
 
     def toJSONFile(self, fileName:str) -> None:
-        def convert_keys_to_strings(obj) -> Any :
+        def convert_keys_to_strings(obj: Any) -> Any:
             if isinstance(obj, dict):
                 # Recursively call the function for nested dictionaries
                 return {
@@ -236,7 +238,7 @@ class Keyboard(ABC):
         Reads a JSON file and returns a new instance of the class.
         It uses an object hook to convert string keys back to tuples.
         """
-        def convert_keys_from_strings(dictionary):
+        def convert_keys_from_strings(dictionary: dict[str, Any]) -> dict[Any, Any]:
             """
             Helper function for json.load's object_hook.
             """
@@ -478,7 +480,7 @@ Fingers assignments :
         self.__dict__.setdefault("_strokesOfPhonemeCache", {})[(phoneme, syllabicPart)] = assignedKeypress
         return assignedKeypress[:]
 
-    def getSinglekeyKeypress(self, syllabicPart: str) -> list[tuple[int]]:
+    def getSinglekeyKeypress(self, syllabicPart: str) -> list[tuple[int, ...]]:
         """ 
         Return key IDs for keys that can be pressed alone to register a phoneme 
         """
@@ -733,7 +735,7 @@ Fingers assignments :
         Memoized per instance (lazily; dropped by addToLayout/clearLayout with
         the key-name memo, since the rendering derives from the layout).
         """
-        rendered = self.__dict__.setdefault("_strokesToRTFCRECache", {}).get(strokes)
+        rendered: str | None = self.__dict__.setdefault("_strokesToRTFCRECache", {}).get(strokes)
         if rendered is not None:
             return rendered
         strokeString = ""
@@ -780,6 +782,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         print("Loading keyboard from", sys.argv[1])
         sb = Starboard.fromJSONFile(sys.argv[1])
+        assert sb is not None
         sb.printLayout()
         sys.exit(0)
 
@@ -793,4 +796,5 @@ if __name__ == "__main__":
 
     print("-----\nPhonetic rules of the Stenalgo French (1h optimization) Starboard keyboard\n")
     sb = Starboard.fromJSONFile("starboard1h.json")
+    assert sb is not None
     sb.printLayout()  

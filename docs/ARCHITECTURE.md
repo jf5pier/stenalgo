@@ -42,6 +42,10 @@ every transformation, threshold and dataset state — is in [PIPELINE.md](PIPELI
 8. **Theory Export (S8)** (`python -m util.export_*`) — two branches: Plover (dictionary,
    key table, system plugin) and steno-trainer (keyboard legend, word drill, sentences,
    definitions). Nothing reads `disambiguated_theory.tsv`; every exporter recomputes the disambiguated theory.
+9. **Affix Abbreviation Building (S9)** (`python -m util.build_affix_rules`, `python -m util.export_affix_dictionary`) — an OPTIONAL layer after the
+   finished theory: 30 affix rules, each on one dedicated keypress merged into the neighbouring stroke, selected under a budget from the user's
+   committed growth and fusion verdicts, and exported as a separate Plover dictionary. The theory is unchanged and the long outlines stay as the
+   fallback. Philosophy and algorithms: [AFFIX_DESIGN.md](AFFIX_DESIGN.md); reference: [AFFIX_RULES.md](AFFIX_RULES.md).
 
 ## Design rationale
 
@@ -382,6 +386,10 @@ the pickle caches are never checked for staleness.
 | `plover_stenalgo_expressions.stenalgo` | Expression-layer data for the Plover plugin (0.3 MB; used with `plover_stenalgo_dictionary.json`) | `python -m util.export_expression_data` (Theory Export (S8), S8.10; generated, not tracked) |
 | `plover_stenalgo/plover_stenalgo/_core/` | Vendored stdlib-only decoder modules of the plugin | `python -m util.export_plover_plugin` |
 | `steno-trainer/public/data/*.json` | Trainer data: keyboard-layout, practice-words, practice-sentences, definitions | `python -m util.export_keyboard_layout`, `python -m util.export_practice_words`, then `python -m util.export_practice_sentences`, then `python -m util.export_definitions` (Theory Export (S8)) |
+| `affix_decisions.json` | The user's affix growth and fusion verdicts (the only hand-decided input of Affix Abbreviation Building (S9)) | `python -m util.review_affix_rules` (interactive; writes after every answer) |
+| `affix_rules.json`, `affix_rules_report.md` | The 30 selected affix rules with their keys, and the deterministic report | `python -m util.build_affix_rules` (Affix Abbreviation Building (S9a)) |
+| `plover_stenalgo_affix_dictionary.json`, `affix_abbreviations.tsv` | The optional affix dictionary (79,715 short outlines, one per word and marked route) and its review table | `python -m util.export_affix_dictionary` (Affix Abbreviation Building (S9b)) |
+| `steno-trainer/public/data/affix-lessons.json` | The trainer's affix lessons (30 rules + conjugated forms) and rule legend; optional, merged over the stub of `lessons.json` | `python -m util.export_affix_lessons` (Affix Abbreviation Building (S9c)) |
 | `excluded_words.txt` | Excluded words (44 spellings dropped in Dictionary Loading (S3)) | hand-maintained input |
 | `resources/reform1990.tsv` | 1990-reform spelling table (source input of the reform rewrites and doublet pairs) | hand-maintained input |
 
@@ -391,6 +399,7 @@ the pickle caches are never checked for staleness.
 |---|---|---|
 | `Dictionary.pickle` | Word list + indexes + syllable and layout statistics (57.8 MB) | `python -m util.build_phonetic_theory` on a cache miss (Dictionary Loading (S3) + the layout statistics) |
 | `PhoneticTheory.pickle` | The phonetic theory (52 MB) | `python -m util.build_phonetic_theory` on a cache miss (Phonetic Theory Building (S5)) |
+| `AffixSelection.pickle` | Cached affix rule evaluations and the last selection (absent: full ~2.5 min (16 cores; ~5.5 min with --workers 1) selection) | `python -m util.build_affix_rules` |
 | `questionnaire.json` | Questionnaire items (200) | `python -m src.elicitation` (Questionnaire Generation) |
 | `resolved_press_sets.json` | Resolved discriminating feature sets (47,828 groups, ~32 MB) | `python -m src.elicitation` (Press-Set Resolution) |
 | `elicitation_questionnaire.html` | The Answer Collection questionnaire page | `python -m util.build_questionnaire_page` |
@@ -418,6 +427,7 @@ any rebuild.
 - [PIPELINE.md](PIPELINE.md) — the full per-call pipeline: every transformation, threshold
   and dataset state, stage by stage.
 - [GLOSSARY.md](GLOSSARY.md) — the canonical vocabulary, with legacy-name mappings.
+- [AFFIX_DESIGN.md](AFFIX_DESIGN.md) and [AFFIX_RULES.md](AFFIX_RULES.md) — the optional affix abbreviation layer (S9): why, and how to run it.
 - [specs/star-hash-marking.md](specs/star-hash-marking.md) — spec of Different-Lemma or
   Grammatical-Category Disambiguation (S7).
 - [specs/discriminating-features.md](specs/discriminating-features.md) — spec of

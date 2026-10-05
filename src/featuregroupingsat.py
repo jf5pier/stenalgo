@@ -18,6 +18,7 @@ this to ~200 distinct problems (see `groupSignatures`), making an exact CP-SAT
 formulation tractable.
 """
 
+from typing import Any
 from dataclasses import dataclass
 from itertools import combinations
 
@@ -166,7 +167,7 @@ def _breakTiesAlphabetically(
         keyIndexExpr = sum(k * x[marker, k] for k in range(numKeys))
         model.Minimize(keyIndexExpr)
         status = solver.Solve(model)
-        if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):  # type: ignore[comparison-overlap]  # ortools stubs type the statuses as different enums
             raise RuntimeError(
                 f"CP-SAT could not break ties for marker {marker!r} within {timeLimitS}s -- "
                 "this assignment was already proven feasible/optimal, so raise timeLimitS."
@@ -212,13 +213,13 @@ def _feasibleAssignment(
 
     solver = _newDeterministicSolver(timeLimitS)
     status = solver.Solve(model)
-    if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+    if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):  # type: ignore[comparison-overlap]  # ortools stubs type the statuses as different enums
         if breakTiesAlphabetically:
             colorOf = _breakTiesAlphabetically(model, x, solver, markers, numKeys, timeLimitS)
         else:
             colorOf = {m: next(k for k in range(numKeys) if solver.BooleanValue(x[m, k])) for m in markers}
         return True, colorOf
-    if status == cp_model.INFEASIBLE:
+    if status == cp_model.INFEASIBLE:  # type: ignore[comparison-overlap]  # ortools stubs type the statuses as different enums
         return False, None
     raise RuntimeError(
         f"CP-SAT could not prove numKeys={numKeys} feasible or infeasible within {timeLimitS}s "
@@ -334,7 +335,7 @@ def _bestAssignmentWithPriorities(
             model.Minimize(score)
 
         status = solver.Solve(model)
-        if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):  # type: ignore[comparison-overlap]  # ortools stubs type the statuses as different enums
             raise RuntimeError(
                 f"CP-SAT could not optimize preference tier {tierIdx} within {timeLimitS}s at "
                 f"numKeys={numKeys} -- this numKeys was already proven feasible, so raise timeLimitS."
@@ -424,7 +425,7 @@ def minKeypressesSatWithPriorities(
     return numKeys, colorOf, achieved
 
 
-def _serializeTier(tier: PreferenceTier, achieved: int) -> dict:
+def _serializeTier(tier: PreferenceTier, achieved: int) -> dict[str, Any]:
     if isinstance(tier, SameKeyPreference):
         return {"type": "sameKey", "pairs": [sorted(p) for p in sorted(tier.pairs, key=sorted)], "achieved": achieved}
     return {"type": "exclusiveGroup", "group": sorted(tier.group), "achieved": achieved}
@@ -442,7 +443,7 @@ def serializeAssignment(
     mustDifferGroups: frozenset[frozenset[str]] = frozenset(),
     preferenceTiers: list[PreferenceTier] | None = None,
     achievedPerTier: list[int] | None = None,
-) -> dict:
+) -> dict[str, Any]:
     """The persisted, adopted Discriminating-Feature Grouping (Grouping Phase) artifact --
     a specific CP-SAT-proven assignment
     (not the search machinery itself), JSON-serializable for `util/build_keypress_groups.py`.

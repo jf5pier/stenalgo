@@ -121,10 +121,10 @@ def main() -> None:
           f"(e.g. \"calmez\"): {len(extraGroupSetsByWord)} words, "
           f"{extraAlternateStrokeCount} extra strokes realized.")
     for marker, keys in PREFERRED_KEYS_BY_MARKER.items():
-        groupId = preferredKeysByGroup and next(
+        preferredGroupId = next(
             (gid for gid, k in preferredKeysByGroup.items() if k == keys), None
-        )
-        honored = assignment.preferredKeyHonoredByGroup.get(groupId) if groupId is not None else None
+        ) if preferredKeysByGroup else None
+        honored = assignment.preferredKeyHonoredByGroup.get(preferredGroupId) if preferredGroupId is not None else None
         status = "honored" if honored else ("NOT honored -- fell back to normal search" if honored is not None
                                              else "marker not live, no group to steer")
         print(f"Preferred key {list(keys)} for marker {marker!r}: {status}")

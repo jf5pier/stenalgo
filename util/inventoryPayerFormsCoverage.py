@@ -144,10 +144,10 @@ def main() -> None:
             yOrtho = radical + yEnding
             iTags = rowsByLemmeOrtho.get((lemme, iOrtho), set())
             yTags = rowsByLemmeOrtho.get((lemme, yOrtho), set())
-            iPresent = tag in iTags
-            yPresent = tag in yTags
+            iFound = tag in iTags
+            yFound = tag in yTags
             results.append((lemme, code, personNumber, iOrtho, yOrtho,
-                             "yes" if iPresent else "no", "yes" if yPresent else "no"))
+                             "yes" if iFound else "no", "yes" if yFound else "no"))
 
     statusCounts: Counter[str] = Counter()
     byLemmeStatus: dict[str, Counter[str]] = {}
@@ -183,8 +183,8 @@ def main() -> None:
         with open(args.dump_csv, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f, delimiter="\t")
             writer.writerow(["lemme", "code", "personNumber", "iOrtho", "yOrtho", "iPresent", "yPresent"])
-            for row in results:
-                writer.writerow(row)
+            for resultRow in results:
+                writer.writerow(resultRow)
         print(f"\nWrote {len(results)} rows to {args.dump_csv}")
 
 

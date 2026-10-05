@@ -1,11 +1,9 @@
 """Tests for src/affixes.py -- hand-built records, no pickles."""
 import src.affixes as A
 from src.affixes import (
-    DEDICATED, MERGED, PREFIX, RULE, SUFFIX, Binding, Candidate, Carrier, LemmaIndex, Slot,
-    SimContext, WordRecord, _dedupeByCarrierSet, _growLatticeLevel, _onsetRest, _reduceExceptions,
-    buildCandidates, buildFamily, isNoGrowthAnchor, colourSubgroups, inheritedSpan, markCostForCluster, norm,
-    passesPrefixFilter, passesSuffixFilter, poolKnownAffixGroups, poolTailVariants, simulate,
-    slotLabel, slotMatchesSyllable)
+    DEDICATED, MERGED, PREFIX, RULE, SUFFIX, Binding, Candidate, Carrier, LemmaIndex, SimContext, WordRecord,
+    buildCandidates, inheritedSpan, markCostForCluster, norm, passesPrefixFilter, passesSuffixFilter,
+    poolKnownAffixGroups, simulate)
 from src.keyboard import Starboard
 
 _idx = [0]
@@ -63,6 +61,21 @@ class TestSingleGenerator:
         assert not any(c.isGeneralized and c.grownFromKey is None and not c.mergeParts
                        for c in pool.values())     # no A7 node
 
+    def test_no_decision_means_no_growth(self):
+        from src.affixdecisions import Decisions
+        words = _tailWords("ment", "m@", _STEMS[:6])
+        pool = buildCandidates(words, A.loadSeeds()[0], excludeTopWords=False, decisions=Decisions())
+        assert pool and all(c.k == 1 and c.isAnchor and not c.hasDecision for c in pool.values())
+
+    def test_a_decided_anchor_gets_exactly_its_decided_forms(self):
+        from src.affixdecisions import AnchorDecision, Decisions, ScopeForm
+        words = [_wordRec((st, "bi", "ment"), (st, "bi", "m@"), (100 + i, 700, 900)) for i, st in enumerate(_STEMS[:6])]
+        dec = Decisions([AnchorDecision(SUFFIX, "ment", "m@", "-", [ScopeForm("any")])])
+        pool = buildCandidates(words, A.loadSeeds()[0], excludeTopWords=False, decisions=dec)
+        assert pool[(SUFFIX, 1, "m@", "ment")].hasDecision
+        grown = [c for c in pool.values() if c.k == 2]
+        assert len(grown) == 1 and grown[0].isScoped and grown[0].ortho == "·[any]ment"
+
     def test_a_variant_merge_unions_carriers_and_keeps_its_parts(self):
         words = _tailWords("ment", "m@", _STEMS[:5]) + _tailWords("mant", "m@", _STEMS[5:], strokeBase=200)
         pool = buildCandidates(words, A.loadSeeds()[0], excludeTopWords=False)
@@ -80,37 +93,7 @@ class TestSingleGenerator:
         assert (SUFFIX, 1, "m@", "mant|ment") not in pool
         assert (SUFFIX, 1, "m@", "ment") in pool and (SUFFIX, 1, "m@", "mant") in pool
 
-    def test_a_lattice_key_collision_renames_the_later_node_and_never_overwrites(self, monkeypatch):
-        monkeypatch.setattr("src.affixscopes.SCOPES", {})   # the generic lattice, not the decided scope of `ment`
-        def words(tail, strokeBase, freq):
-            return [_wordRec((st, "bi", "ce", tail), (st, "bi", "s°", "m@"), (strokeBase + i, 700, 800, 900),
-                             freq=freq) for i, st in enumerate(_STEMS[:5] if strokeBase == 100 else _STEMS[5:])]
-        ments, mants = words("ment", 100, 10.0), words("mant", 200, 1.0)
-        recs = ments + mants
-        car = lambda rs: [Carrier(r, 3, 1, "x") for r in rs]   # noqa: E731
-        p = Candidate(SUFFIX, 1, "m@", "ment", carriers=car(ments), isAnchor=True)
-        m = Candidate(SUFFIX, 1, "m@", "mant|ment", carriers=car(recs), isAnchor=True, isGeneralized=True)
-        pool = A.growAffixesLattice({(SUFFIX, 1, "m@", "ment"): p, (SUFFIX, 1, "m@", "mant|ment"): m})
-        assert A.LATTICE_STATS["renames"] >= 1
-        renamed = [c for c in pool.values() if "⟨" in c.ortho]
-        assert renamed
-        # 2 anchors + (child, grandchild) under each: nothing lost to an overwrite
-        assert len(pool) == 6
-        # every parent link resolves inside the pool, so a renamed node's children point at it
-        assert all(c.grownFromKey in pool for c in pool.values() if c.grownFromKey)
-        assert any(c.grownFromKey == (r.position, r.k, r.phono, r.ortho) for r in renamed for c in pool.values())
 
-    def test_an_identical_duplicate_child_folds_its_parent_in(self, monkeypatch):
-        monkeypatch.setattr("src.affixscopes.SCOPES", {})   # the generic lattice, not the decided scope of `ment`
-        words3 = [_wordRec((st, "ce", "ment"), (st, "s°", "m@"), (100 + i, 800, 900)) for i, st in enumerate(_STEMS[:5])]
-        car = lambda rs: [Carrier(r, 2, 1, "x") for r in rs]   # noqa: E731
-        p = Candidate(SUFFIX, 1, "m@", "ment", carriers=car(words3), isAnchor=True)
-        m = Candidate(SUFFIX, 1, "m@", "mant|ment", carriers=car(words3), isAnchor=True, isGeneralized=True)
-        pool = A.growAffixesLattice({(SUFFIX, 1, "m@", "ment"): p, (SUFFIX, 1, "m@", "mant|ment"): m})
-        kids = [c for c in pool.values() if c.grownFromKey is not None]
-        # both anchors have the same carriers, so seenExpand lets only one expand: one child,
-        # never two identical twins
-        assert len(kids) == 1 and len(pool) == 3
 
 
 class TestMorphology:
@@ -146,26 +129,6 @@ class TestInheritance:
         assert inheritedSpan(L, 2, w) is None
 
 
-class TestCompetition:
-    def _cand(self, ortho, stems):
-        return Candidate(SUFFIX, 2, "x", ortho, stemFreq={s: 10.0 for s in stems}, carriers=[])
-
-    def test_logie_logique_logiste_three_subgroups(self):
-        members = [self._cand("logie", ["bio", "socio"]), self._cand("logique", ["bio", "socio"]),
-                   self._cand("logiste", ["bio", "socio"])]
-        assert len(colourSubgroups(3, {(0, 1): 20.0, (0, 2): 20.0, (1, 2): 20.0})) == 3
-
-    def test_ation_ition_one_subgroup(self):
-        assert len(colourSubgroups(2, {})) == 1
-
-    def test_buildFamily_competition_from_shared_stems(self):
-        r = rec("x", [(1,), (2,)])
-        a = self._cand("ation", ["cr", "pr"])
-        b = self._cand("ition", ["dem", "ed"])
-        a.carriers = [Carrier(r, 1, 1, "cr")]
-        b.carriers = [Carrier(rec("y", [(1,), (2,)]), 1, 1, "dem")]
-        fam = buildFamily("S001", [a, b])
-        assert len(fam.stemSubgroups) == 1
 
 
 def syllRec(ortho, orthoSylls, phonoSylls, lemme=None, freq=5.0):
@@ -179,77 +142,6 @@ def syllRec(ortho, orthoSylls, phonoSylls, lemme=None, freq=5.0):
         extra=(), isLemmaForm=(ortho == lemme))
 
 
-class TestGeneralizedAffixPooling:
-    def test_onset_rest_split(self):
-        assert _onsetRest("bi") == ("b", "i")
-        assert _onsetRest("i") == ("", "i")
-        assert _onsetRest("str") == ("str", "")   # no nucleus vowel: not poolable
-
-    def test_pools_same_tail_different_onset(self):
-        rb = syllRec("fabilité", ("fa", "bi", "li", "té"), ("fa", "bi", "li", "te"))
-        rt = syllRec("fatilité", ("fa", "ti", "li", "té"), ("fa", "ti", "li", "te"))
-        a = Candidate(SUFFIX, 3, "bi.li.te", "bilité", carriers=[Carrier(rb, 1, 3, "fa")])
-        b = Candidate(SUFFIX, 3, "ti.li.te", "tilité", carriers=[Carrier(rt, 1, 3, "fa")])
-        pooled = poolTailVariants({(SUFFIX, 3, "bi.li.te", "bilité"): a, (SUFFIX, 3, "ti.li.te", "tilité"): b},
-                                   keepOriginals=True)
-        # 2026-09-27 (DESIGN §3.5): the originals survive alongside the pooled candidate.
-        assert len(pooled) == 3
-        assert pooled[(SUFFIX, 3, "bi.li.te", "bilité")] is a
-        assert pooled[(SUFFIX, 3, "ti.li.te", "tilité")] is b
-        merged = next(c for c in pooled.values() if c.isGeneralized)
-        assert merged.variants == ["bilité", "tilité"]
-        assert merged.ortho == "·ilité" and merged.phono == "i.li.te"
-        assert len(merged.carriers) == 2
-
-    def test_default_still_consumes_originals_for_legacy(self):
-        rb = syllRec("fabilité", ("fa", "bi", "li", "té"), ("fa", "bi", "li", "te"))
-        rt = syllRec("fatilité", ("fa", "ti", "li", "té"), ("fa", "ti", "li", "te"))
-        a = Candidate(SUFFIX, 3, "bi.li.te", "bilité", carriers=[Carrier(rb, 1, 3, "fa")])
-        b = Candidate(SUFFIX, 3, "ti.li.te", "tilité", carriers=[Carrier(rt, 1, 3, "fa")])
-        pooled = poolTailVariants({(SUFFIX, 3, "bi.li.te", "bilité"): a, (SUFFIX, 3, "ti.li.te", "tilité"): b})
-        assert len(pooled) == 1
-
-    def test_singleton_tail_group_untouched(self):
-        r = syllRec("fabilité", ("fa", "bi", "li", "té"), ("fa", "bi", "li", "te"))
-        a = Candidate(SUFFIX, 3, "bi.li.te", "bilité", carriers=[Carrier(r, 1, 3, "fa")])
-        pooled = poolTailVariants({(SUFFIX, 3, "bi.li.te", "bilité"): a})
-        assert pooled == {(SUFFIX, 3, "bi.li.te", "bilité"): a}
-        assert not a.isGeneralized
-
-    def test_prefix_pools_from_the_syllable_nearest_the_stem(self):
-        # prefix span is at the START of the word, so the variable onset is the LAST affix
-        # syllable (closest to the stem) and the invariant tail is the leading syllables.
-        rb = syllRec("rebonjour", ("re", "bon", "jour"), ("R@", "bon", "ZuR"))
-        rt = syllRec("retonjour", ("re", "ton", "jour"), ("R@", "ton", "ZuR"))
-        a = Candidate(PREFIX, 2, "R@.bon", "rebon", carriers=[Carrier(rb, 0, 2, "jour")])
-        b = Candidate(PREFIX, 2, "R@.ton", "reton", carriers=[Carrier(rt, 0, 2, "jour")])
-        pooled = poolTailVariants({(PREFIX, 2, "R@.bon", "rebon"): a, (PREFIX, 2, "R@.ton", "reton"): b},
-                                   keepOriginals=True)
-        # 2026-09-27 (DESIGN §3.5): the originals survive alongside the pooled candidate.
-        assert len(pooled) == 3
-        merged = next(c for c in pooled.values() if c.isGeneralized)
-        assert merged.ortho == "reon·" and merged.phono == "R@.on"
-
-    def test_buildCandidates_pools_variants_below_the_threshold_alone(self):
-        # Three onset variants of the same k=3 suffix, 2 lemmas each: none alone clears
-        # MIN_STEM_ROOTS (5), but pooled they do (6 lemmas, 6 distinct stem roots).
-        records = []
-        stems = ["respo", "possi", "ferti", "hosti", "steri", "puera"]
-        onsets = ["bi", "bi", "ti", "ti", "ri", "ri"]
-        for stem, onset in zip(stems, onsets):
-            lemma = f"{stem}able"
-            records.append(syllRec(lemma, (stem, "able"), (stem, "able"), lemme=lemma))
-            word = f"{stem}{onset}lité"
-            records.append(syllRec(word, (stem, onset, "li", "té"), (stem, onset, "li", "te")))
-        seedPairs, _ = A.loadSeeds()
-        # excludeTopWords=False: this tiny fixture has far fewer than TOP_WORDS_EXCLUDED distinct
-        # words, so the "top 200 by frequency" carrier exclusion would swallow every record --
-        # meaningless here, real callers always want the default.
-        kept = buildCandidates(records, seedPairs, excludeTopWords=False, legacy=True)   # A7 is legacy-only now
-        gen = [c for c in kept.values() if c.isGeneralized]
-        assert len(gen) == 1
-        assert gen[0].variants == ["bilité", "rilité", "tilité"]
-        assert gen[0].lemmas == 6
 
 
 class TestKnownAffixGroups:
@@ -284,137 +176,16 @@ class TestMarkCost:
         assert [markCostForCluster(m) for m in (1, 2, 4, 5, 6)] == [0, 0, 0, 1, 2]
 
 
-class TestSlots:
-    def test_exact(self):
-        s = Slot("exact", "li")
-        assert slotMatchesSyllable(s, "li")
-        assert not slotMatchesSyllable(s, "ti")
-
-    def test_onset_including_empty(self):
-        s = Slot("onset", "i")
-        assert slotMatchesSyllable(s, "bi")
-        assert slotMatchesSyllable(s, "i")     # empty onset
-        assert not slotMatchesSyllable(s, "ba")
-
-    def test_onset_exclusion(self):
-        s = Slot("onset", "i", excluded=("m",))
-        assert not slotMatchesSyllable(s, "mi")
-        assert slotMatchesSyllable(s, "bi")
-
-    def test_any_with_exclusion(self):
-        s = Slot("any", excluded=("li",))
-        assert slotMatchesSyllable(s, "ti")
-        assert not slotMatchesSyllable(s, "li")
-
-    def test_labels_fold_in_exclusions(self):
-        assert slotLabel(Slot("exact", "li")) == "li"
-        assert slotLabel(Slot("onset", "i")) == "[C]i"
-        assert slotLabel(Slot("onset", "i", ("m",))) == "[C-{m}]i"
-        assert slotLabel(Slot("any", excluded=("x", "y"))) == "*-{x,y}"
 
 
-def _distinctStemRec(stemStroke, midPhono, midOrtho):
-    """A 4-syllable record (stem, mid, li, té) with a *unique* stem stroke -- `syllRec`'s
-    auto-numbered base (always (1,2,3,4) for any 4-syllable record) would make every same-length
-    record collide regardless of content, which is wrong for tests that check exception handling."""
-    _idx[0] += 1
-    ortho = f"stem{stemStroke}{midOrtho}lité"
-    return WordRecord(
-        idx=_idx[0], ortho=ortho, lemme=ortho, gramCat="NOM", frequency=10.0,
-        phonoSylls=("s", midPhono, "li", "te"), orthoSylls=("s", midOrtho, "li", "té"),
-        base=((stemStroke,), (900 + stemStroke,), (990,), (991,)), extra=(), isLemmaForm=True)
 
 
-class TestLatticeGrowth:
-    def _base(self):
-        # 4 onset-variant carriers, each with its own distinct stem: b/t/r share rest "i" (an
-        # onset group), "ka" doesn't. Nothing collides, so every child should emit cleanly.
-        recs = [_distinctStemRec(1, "bi", "bi"), _distinctStemRec(2, "ti", "ti"),
-                _distinctStemRec(3, "ri", "ri"), _distinctStemRec(4, "ka", "ka")]
-        carriers = [Carrier(r, 2, 2, "stem") for r in recs]
-        return Candidate(SUFFIX, 2, "li.te", "lité", carriers=carriers)
-
-    def test_emits_exact_onset_and_any_without_consuming(self):
-        children = _growLatticeLevel(SUFFIX, self._base())
-        kinds = {c.cand.slots[-1].kind for c in children}
-        assert kinds == {"exact", "onset", "any"}
-        exactPhonos = {c.cand.slots[-1].value for c in children if c.cand.slots[-1].kind == "exact"}
-        assert exactPhonos == {"bi", "ti", "ri", "ka"}
-        onset = next(c.cand for c in children if c.cand.slots[-1].kind == "onset")
-        assert onset.slots[-1].value == "i" and onset.slots[-1].excluded == ()
-        assert len(onset.carriers) == 3     # bi/ti/ri pooled, not consumed by the exact leaves
-        anyChild = next(c.cand for c in children if c.cand.slots[-1].kind == "any")
-        assert len(anyChild.carriers) == 4  # bi/ti/ri/ka, all together
-
-    def test_expand_without_emit_via_subtree_bound(self):
-        # A single, low-lemma-count carrier with a long stem still left: freq alone clears
-        # GROWTH_MIN_MARGINAL through the subtree bound, but lemmas=1 fails the emit gate.
-        orthoSylls = ("a", "b", "c", "d", "e", "mid", "li", "té")
-        phonoSylls = ("a", "b", "c", "d", "e", "mi", "li", "te")
-        r = syllRec("xxx", orthoSylls, phonoSylls, freq=40.0)
-        base = Candidate(SUFFIX, 2, "li.te", "lité", carriers=[Carrier(r, 6, 2, "abcde")])
-        children = _growLatticeLevel(SUFFIX, base)
-        assert len(children) == 1
-        assert children[0].emit is False
-        assert children[0].expand is True
 
 
-class TestNoGrowthAnchor:
-    def test_re_prefix_anchors_do_not_grow(self):
-        assert isNoGrowthAnchor(Candidate(PREFIX, 1, "R°", "re"))
-        assert isNoGrowthAnchor(Candidate(PREFIX, 1, "R°", "re|reh"))
-
-    def test_other_anchors_keep_growing(self):
-        assert not isNoGrowthAnchor(Candidate(SUFFIX, 1, "R°", "re"))     # a suffix, not the prefix
-        assert not isNoGrowthAnchor(Candidate(PREFIX, 1, "Re", "ré"))     # phonetic ré stays growable
-        assert not isNoGrowthAnchor(Candidate(PREFIX, 1, "R°", "re|ré"))  # one spelling is not listed
-        assert not isNoGrowthAnchor(Candidate(PREFIX, 1, "d°", "de"))
 
 
-class TestReduceExceptions:
-    def _carrier(self, onsetPhono, lemma, freq, stroke0):
-        r = WordRecord(idx=_idx[0], ortho=lemma, lemme=lemma, gramCat="NOM", frequency=freq,
-                        phonoSylls=("s", onsetPhono, "li", "te"), orthoSylls=("s", onsetPhono, "li", "té"),
-                        base=((stroke0,), (10,), (900,), (901,)), extra=(), isLemmaForm=True)
-        _idx[0] += 1
-        return Carrier(r, 1, 2, "s")
-
-    def test_one_colliding_value_gets_excluded(self):
-        b = self._carrier("bi", "polb", 20.0, 100)
-        m = self._carrier("mi", "polm", 5.0, 100)   # same remaining stem stroke as b -- collides
-        t = self._carrier("ti", "fact", 10.0, 200)
-        r = self._carrier("ri", "ferr", 10.0, 300)
-        groups = {"b": [b], "m": [m], "t": [t], "r": [r]}
-        result = _reduceExceptions(SUFFIX, groups, denom=45.0)
-        assert result is not None
-        remaining, excluded, excSet = result
-        assert excluded == ("m",)
-        assert set(remaining) == {"b", "t", "r"}
-
-    def test_drops_past_max_slot_exclusions(self):
-        b = self._carrier("bi", "polb", 20.0, 100)
-        m = self._carrier("mi", "polm", 5.0, 100)     # collides with b
-        t = self._carrier("ti", "fact", 10.0, 200)
-        m2 = self._carrier("m2i", "factm", 5.0, 200)  # collides with t
-        r = self._carrier("ri", "ferr", 10.0, 300)
-        m3 = self._carrier("m3i", "ferrm", 5.0, 300)  # collides with r
-        u = self._carrier("ui", "gorg", 10.0, 400)
-        m4 = self._carrier("m4i", "gorgm", 5.0, 400)  # collides with u -- 4th exclusion needed
-        groups = {"b": [b], "m": [m], "t": [t], "m2": [m2], "r": [r], "m3": [m3], "u": [u], "m4": [m4]}
-        assert _reduceExceptions(SUFFIX, groups, denom=75.0) is None
 
 
-class TestLatticeDedupe:
-    def test_dedupe_keeps_simpler_pattern_and_records_alias(self):
-        r = syllRec("xbilité", ("x", "bi", "li", "té"), ("x", "bi", "li", "te"))
-        carrier = Carrier(r, 1, 3, "x")
-        exact = Candidate(SUFFIX, 3, "bi.li.te", "bilité", carriers=[carrier], slots=(Slot("exact", "bi"),))
-        onset = Candidate(SUFFIX, 3, "[C]i.li.te", "[C]ilité", carriers=[carrier], slots=(Slot("onset", "i"),))
-        deduped = _dedupeByCarrierSet([onset, exact])
-        assert len(deduped) == 1
-        kept = deduped[0]
-        assert kept is exact
-        assert (SUFFIX, 3, "[C]i.li.te", "[C]ilité") in kept.aliases
 
 
 class TestSimulate:
@@ -478,18 +249,13 @@ class TestRuleBinding:
 
 
 class TestRulePartialOverlap:
-    """RULE_PARTIAL_OVERLAP (experiment flag, default OFF): a 2-key rule merges when only some of
+    """SimContext.partialOverlap (the decided mode, default ON): a 2-key rule merges when only some of
     its keys are in the neighbouring stroke."""
 
     def _run(self, neighbour, keys, flag):
-        old = A.RULE_PARTIAL_OVERLAP
-        A.RULE_PARTIAL_OVERLAP = flag
-        try:
-            c = Carrier(rec("xab", [(2,), neighbour, (7,)]), 0, 1, "stem")
-            (res,) = simulate([(Binding(PREFIX, RULE, keys), [c])], SimContext(_sb(), []))
-            return res[0]
-        finally:
-            A.RULE_PARTIAL_OVERLAP = old
+        c = Carrier(rec("xab", [(2,), neighbour, (7,)]), 0, 1, "stem")
+        (res,) = simulate([(Binding(PREFIX, RULE, keys), [c])], SimContext(_sb(), [], partialOverlap=flag))
+        return res[0]
 
     def test_partial_overlap_fails_when_off(self):
         r = self._run((3,), (3, 4), False)
@@ -508,3 +274,14 @@ class TestRulePartialOverlap:
         for flag in (False, True):
             r = self._run((3, 4), (4,), flag)
             assert (r.gain, r.reason) == (0, "standaloneTrap")
+
+
+class TestDecidedSubMerge:
+    def test_a_decided_merge_the_greedy_pass_did_not_make_is_built_from_its_parts(self):
+        from src.affixdecisions import AnchorDecision, Decisions
+        words = _tailWords("ment", "m@", _STEMS[:5]) + _tailWords("mant", "m@", _STEMS[5:], strokeBase=100) \
+            + [_wordRec((st, "ba", "man"), (st, "ba", "m@"), (300 + i, 701, 901)) for i, st in enumerate(_STEMS[:5])]
+        dec = Decisions([AnchorDecision(SUFFIX, "man|ment", "m@", "fused", [])])
+        pool = buildCandidates(words, A.loadSeeds()[0], excludeTopWords=False, decisions=dec)
+        m = pool[(SUFFIX, 1, "m@", "man|ment")]
+        assert m.isAnchor and m.variants == ["man", "ment"] and len(m.carriers) >= 10

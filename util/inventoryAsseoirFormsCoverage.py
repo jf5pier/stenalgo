@@ -138,9 +138,9 @@ def main() -> None:
             for altIndex, ending in enumerate(alternatives):
                 ortho = radical + ending
                 tags = rowsByLemmeOrtho.get((lemme, ortho), set())
-                present = tag in tags
+                found = tag in tags
                 results.append((lemme, code, personNumber, altIndex, ending, ortho,
-                                 "yes" if present else "no"))
+                                 "yes" if found else "no"))
 
     statusCounts: Counter[str] = Counter()
     byLemmeStatus: dict[str, Counter[str]] = {}
@@ -184,8 +184,8 @@ def main() -> None:
         with open(args.dump_csv, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f, delimiter="\t")
             writer.writerow(["lemme", "code", "personNumber", "altIndex", "ending", "ortho", "present"])
-            for row in results:
-                writer.writerow(row)
+            for resultRow in results:
+                writer.writerow(resultRow)
         print(f"\nWrote {len(results)} rows to {args.dump_csv}")
 
 

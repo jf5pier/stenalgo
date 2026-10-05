@@ -57,7 +57,7 @@ def main() -> None:
         if fix is not None:
             mixteFixes[(row["ortho"], row["cgram"], row["phon"])] = (row["lemme"], *fix)
 
-    def lexiconFix(fields):
+    def lexiconFix(fields: dict[str, str]) -> dict[str, str] | None:
         fix = fixLexiconRow(fields)
         return None if fix is None else {"phon": fix[0], "syll_cv": fix[1]}
 
@@ -69,7 +69,7 @@ def main() -> None:
         for old, new in changes:
             print(f"  {old['phon']} -> {new['phon']}   {old['syll_cv']} -> {new['syll_cv']}")
 
-    def lexique383Fix(fields):
+    def lexique383Fix(fields: dict[str, str]) -> dict[str, str] | None:
         fix = mixteFixes.get((fields["ortho"], fields["cgram"], fields["phon"]))
         if fix is None:
             return None
@@ -80,7 +80,7 @@ def main() -> None:
             syll[offsets[k]] = newPhon[k]
         return {"phon": newPhon, "syll": "".join(syll), "phonrenv": newPhon[::-1]}
 
-    def infraFix(fields):
+    def infraFix(fields: dict[str, str]) -> dict[str, str] | None:
         fix = mixteFixes.get((fields["item"], fields["cgram"], fields["phono"]))
         if fix is None:
             return None

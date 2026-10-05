@@ -1,12 +1,13 @@
 import pytest
 from ..word import Word, GramCat, atomicFeatures
+from typing import Any
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 def _make_word(**overrides) -> Word:
     """Create a Word with sensible defaults, overriding any field."""
-    defaults = dict(
+    defaults: dict[str, Any] = dict(
         ortho="chat",
         phonology="Sa",
         lemme="chat",
@@ -82,6 +83,7 @@ class TestPostInit:
 
     def test_infoVerb_multiple_entries(self) -> None:
         w = _make_word(gramCat=GramCat.VER, infoVerb="ind:pre:1s;ind:pre:3s")
+        assert w._infoVerb is not None
         assert len(w._infoVerb) == 2
         assert w._infoVerb[0] == ["indicatif", "présent", "pers_1", "nbr_s"]
         assert w._infoVerb[1] == ["indicatif", "présent", "pers_3", "nbr_s"]

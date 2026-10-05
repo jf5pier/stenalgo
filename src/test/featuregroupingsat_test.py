@@ -2,6 +2,7 @@
 # coding: utf-8
 """Tests for src/featuregroupingsat.py"""
 
+from typing import Any
 import pytest
 
 from ..featuregrouping import verifyKeypressAssignment
@@ -85,7 +86,7 @@ def test_minKeypressesSat_lets_a_self_homographs_alternates_share_the_same_keypr
 def test_minKeypressesSat_allows_sharing_when_safe():
     """The plan's own worked example: pers_2 and nbr_p may share a keypress because
     nbr_p is never pressed alone -- CP-SAT should find K=2."""
-    pressSetsByGroup = {
+    pressSetsByGroup: Any = {
         "parler_VER": {
             "parle": [frozenset()],
             "parles": [frozenset({"pers_2"})],
@@ -102,7 +103,7 @@ def test_minKeypressesSat_solves_the_two_marker_bundle_collision_pairwise_checks
     CP-SAT's exact per-signature distinctness constraint should get this right in one
     shot, with no repair loop needed, and should find it's colorable with only 2 keys
     (pers_3 alone, {pers_1, pers_2, nbr_p} bundled) -- better than greedy's 3."""
-    pressSetsByGroup = {
+    pressSetsByGroup: Any = {
         "abaisser_VER": {
             "abaisseraient": [frozenset({"pers_3", "nbr_p"})],
             "abaisserais": [frozenset({"pers_2", "pers_1"})],
@@ -118,7 +119,7 @@ def test_minKeypressesSat_mustShareKey_forces_a_safe_pair_together():
     """The plan's own worked example (pers_2/nbr_p may share, since nbr_p is never
     pressed alone) -- forcing it explicitly should still land on K=2, matching what the
     solver already chooses freely (test_minKeypressesSat_allows_sharing_when_safe)."""
-    pressSetsByGroup = {
+    pressSetsByGroup: Any = {
         "parler_VER": {
             "parle": [frozenset()],
             "parles": [frozenset({"pers_2"})],
@@ -149,7 +150,7 @@ def test_minKeypressesSat_result_is_a_valid_assignment_for_a_combined_lexicon_sl
     """Combine both regression fixtures into one lexicon: CP-SAT's result must remain
     conflict-free against the FULL combined press-set data (the real ground-truth
     check), not just each fixture in isolation."""
-    pressSetsByGroup = {
+    pressSetsByGroup: Any = {
         "parler_VER": _parler_press_sets()["parler_VER"],
         "abaisser_VER": {
             "abaisseraient": [frozenset({"pers_3", "nbr_p"})],
@@ -205,7 +206,7 @@ def test_serializeAssignment_defaults_missing_weight_to_zero():
 
 # ── aloneKeys / mustDifferGroups (hard structural constraints) ───────────────────────
 
-def _safe_sharing_press_sets() -> dict[str, dict[str, frozenset[str]]]:
+def _safe_sharing_press_sets() -> dict[str, dict[str, list[frozenset[str]]]]:
     """The plan's own worked example: pers_2 and nbr_p CAN safely share a keypress
     (nbr_p is never pressed alone) -- free minimum is K=2."""
     return {
@@ -251,13 +252,13 @@ def test_mustDifferGroups_does_not_constrain_markers_outside_the_group():
 def test_minKeypressesSatWithPriorities_higher_tier_never_sacrificed_for_lower():
     """a can only ever match ONE of b/c's key (b and c are hard-forced apart) -- tier 0
     (prefer a~b) must win over tier 1 (prefer a~c), never partially compromised for it."""
-    pressSetsByGroup = {
+    pressSetsByGroup: Any = {
         "g1": {"w1": [frozenset()], "w2": [frozenset({"a"})]},
         "g2": {"w3": [frozenset()], "w4": [frozenset({"b"})]},
         "g3": {"w5": [frozenset()], "w6": [frozenset({"c"})]},
     }
     mustDifferGroups = frozenset({frozenset({"b", "c"})})
-    preferences = [
+    preferences: Any = [
         SameKeyPreference(frozenset({frozenset({"a", "b"})})),
         SameKeyPreference(frozenset({frozenset({"a", "c"})})),
     ]
@@ -295,7 +296,7 @@ def test_breakTiesAlphabetically_picks_alphabetical_order_onto_ascending_keys():
     """Three markers forced pairwise apart, with nothing else distinguishing WHICH gets
     which keypress (fully symmetric otherwise) -- the tie-break should deterministically
     land the alphabetically-earliest marker on keypress 0, the next on 1, and so on."""
-    pressSetsByGroup = {
+    pressSetsByGroup: Any = {
         "g1": {"w1": [frozenset()], "w2": [frozenset({"z"})]},
         "g2": {"w3": [frozenset()], "w4": [frozenset({"y"})]},
         "g3": {"w5": [frozenset()], "w6": [frozenset({"x"})]},
@@ -309,7 +310,7 @@ def test_breakTiesAlphabetically_picks_alphabetical_order_onto_ascending_keys():
 
 
 def test_breakTiesAlphabetically_is_reproducible_across_repeated_calls():
-    pressSetsByGroup = {
+    pressSetsByGroup: Any = {
         "g1": {"w1": [frozenset()], "w2": [frozenset({"z"})]},
         "g2": {"w3": [frozenset()], "w4": [frozenset({"y"})]},
         "g3": {"w5": [frozenset()], "w6": [frozenset({"x"})]},
@@ -326,7 +327,7 @@ def test_breakTiesAlphabetically_never_overrides_a_real_preference():
     """The tie-break is strictly lower priority than every real preference tier: 'a'
     prefers to share with 'b' (an explicit SameKeyPreference) even though alphabetical
     order alone would put 'a' before 'b' on separate ascending keys."""
-    pressSetsByGroup = {
+    pressSetsByGroup: Any = {
         "g1": {"w1": [frozenset()], "w2": [frozenset({"a"})]},
         "g2": {"w3": [frozenset()], "w4": [frozenset({"b"})]},
     }
@@ -338,7 +339,7 @@ def test_breakTiesAlphabetically_never_overrides_a_real_preference():
 
 
 def test_breakTiesAlphabetically_can_be_disabled():
-    pressSetsByGroup = {
+    pressSetsByGroup: Any = {
         "g1": {"w1": [frozenset()], "w2": [frozenset({"z"})]},
         "g2": {"w3": [frozenset()], "w4": [frozenset({"y"})]},
     }

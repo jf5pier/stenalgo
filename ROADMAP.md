@@ -44,11 +44,12 @@ distinct from the personal theory layer (Phase 7).
 - Interacts with the phoneme-layer freeze (Phase 3) and the stroke budget — decide scope
   before freezing.
 
-### Affix abbreviations: unattended pipeline (follows the optional affix dictionary)
+### Affix abbreviations (DONE 2026-10-01: Affix Abbreviation Building (S9))
 
-Goal: `python dictionary.py` produces the optional affix dictionary without an agent. The engine and the exporter exist ([docs/AFFIX_RULES.md](docs/AFFIX_RULES.md));
-what is missing is turning the interactive choices (growth scopes, fusions, prices, adoption of the rule list) into committed policy/data files and deterministic steps.
-Inventory and open decisions: `PLAN_2026-10-01-affix-pipeline-integration.md`. Related: trainer lessons from `affix_abbreviations.tsv`.
+`python dictionary.py` produces the optional affix dictionary without an agent: the growth and fusion verdicts are committed in `affix_decisions.json`,
+the selection is cached, and a full rebuild from nothing reproduces the committed outputs byte for byte ([docs/AFFIX_RULES.md](docs/AFFIX_RULES.md),
+[docs/AFFIX_DESIGN.md](docs/AFFIX_DESIGN.md)). The trainer teaches the rules (`affix-lessons.json`, branch `affix-trainer`; [docs/specs/affix-lessons.md](docs/specs/affix-lessons.md)). Open: a learner trial of the 30 rules before any
+further tuning; re-review of verdicts when the lexicon changes (`python -m util.review_affix_rules`).
 
 ### Dictionary densification (Phase 6)
 

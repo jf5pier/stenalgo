@@ -3658,7 +3658,7 @@ ahurissants	ayRis@	ahurissant	ADJ	ADJ	m	p		a_#|y|R_i|s_@_#	a_h|u|r_i|ss_an_ts	0.
 ahurissement	ayRis°m@	ahurissement	NOM	NOM	m	s		a_#|y|R_i|s_°|m_@	a_h|u|r_i|ss_e|m_ent	1.76	0.0
 ahurissements	ayRis°m@	ahurissement	NOM	NOM	m	p		a_#|y|R_i|s_°|m_@_#	a_h|u|r_i|ss_e|m_en_ts	0.07	0.0
 ahurit	ayRi	ahurir	VER	VER			ind:pre:3s;ind:pas:3s;	a_#|y|R_i	a_h|u|r_it	0.41	0.0
-ai	E	avoir	AUX	AUX,VER			ind:pre:1s;	E	ai	2119.12	4902.1
+ai	e	avoir	AUX	AUX,VER			ind:pre:1s;	e	ai	2119.12	4902.1
 ai	e	avoir	VER	AUX,VER			ind:pre:1s;	e	ai	619.05	2475.78
 aicher	ESe	aicher	VER	VER			inf;	E|S_e	ai|ch_er	0.0	0.1
 aida	Eda	aider	VER	VER			ind:pas:3s;	E|d_a	ai|d_a	7.09	0.81
@@ -11641,7 +11641,7 @@ bahut	bay	bahut	NOM	NOM	m	s		b_a_#|y_#	b_a_h|u_t	7.23	1.5
 bahute	bayt	bahuter	VER	VER			ind:pre:3s;	b_a_#|y_t_#	b_a_h|u_t_e	0.07	0.0
 bahutent	bayt	bahuter	VER	VER			ind:pre:3p;	b_a_#|y_t_#	b_a_h|u_t_ent	0.07	0.0
 bahuts	bay	bahut	NOM	NOM	m	p		b_a_#|y_#	b_a_h|u_ts	1.15	0.09
-bai	bE	bai	ADJ	ADJ	m	s		b_E	b_ai	1.22	0.86
+bai	be	bai	ADJ	ADJ	m	s		b_e	b_ai	1.22	0.86
 baie	bE	baie	NOM	ADJ,NOM,VER	f	s		b_E_#	b_ai_e	14.86	5.84
 baie	bE	baie	ADJ	ADJ,NOM,VER	f	s		b_E_#	b_ai_e	0.61	0.3
 baie	bE	bayer	VER	ADJ,NOM,VER			ind:pre:1s;ind:pre:3s;sub:pre:3s;	b_E_#	b_ai_e	0.0	0.03
@@ -21311,7 +21311,7 @@ cervicales	sERvikal	cervical	ADJ	ADJ	f	p		s_E_R|v_i|k_a_l_#	c_e_r|v_i|c_a_l_es	0
 cervicaux	sERviko	cervical	ADJ	ADJ	m	p		s_E_R|v_i|k_o_#	c_e_r|v_i|c_au_x	0.0	0.05
 cervidés	sERvide	cervidé	NOM	NOM	m	p		s_E_R|v_i|d_e_#	c_e_r|v_i|d_é_s	0.14	0.0
 cervoise	sERvwaz	cervoise	NOM	NOM	f	s		s_E_R|v_wa_z_#	c_e_r|v_oi_s_e	0.0	0.02
-ces	se	ces	ADJ:dem	ADJ:dem		p		s_e_#	c_e_s	1547.5	1222.51
+ces	sE	ces	ADJ:dem	ADJ:dem		p		s_E_#	c_e_s	1547.5	1222.51
 cessa	sEsa	cesser	VER	VER			ind:pas:3s;	s_E|s_a	c_e|ss_a	16.28	0.64
 cessai	sEse	cesser	VER	VER			ind:pas:1s;	s_E|s_e	c_e|ss_ai	2.16	0.28
 cessaient	sEsE	cesser	VER	VER			ind:imp:3p;	s_E|s_E	c_e|ss_aient	4.53	0.17
@@ -33794,7 +33794,7 @@ derrières	dERjER	derrière	NOM	NOM	m	p		d_E|R_j_E_R_#	d_e|rr_i_è_r_es	1.22	0.8
 ders	dER	der	NOM	NOM		p		d_E_R_#	d_e_r_s	0.34	0.17
 derviche	dERviS	derviche	NOM	NOM	m	s		d_E_R|v_i_S_#	d_e_r|v_i_ch_e	1.35	0.08
 derviches	dERviS	derviche	NOM	NOM	m	p		d_E_R|v_i_S_#	d_e_r|v_i_ch_es	0.41	0.03
-des	de	des	ART:ind	ART:ind		p		d_e_#	d_e_s	10624.93	6055.71
+des	dE	des	ART:ind	ART:ind		p		d_E_#	d_e_s	10624.93	6055.71
 descamisados	dEskamizado	descamisado	NOM	NOM	m	p		d_E_s|k_a|m_i|z_a|d_o_#	d_e_s|c_a|m_i|s_a|d_o_s	0.07	0.0
 descella	dEsEla	desceller	VER	VER			ind:pas:3s;	d_E|s_E|l_a	d_e|sc_e|ll_a	0.07	0.0
 descellant	dEsEl@	desceller	VER	VER			par:pre;	d_E|s_E|l_@	d_e|sc_e|ll_ant	0.07	0.0
@@ -57967,7 +57967,7 @@ gags	gag	gag	NOM	NOM	m	p		g_a_g_#	g_a_g_s	0.2	0.61
 gagé	gaZe	gager	VER	VER,ADJ	m	s	par:pas;	g_a|Z_e	g_a|g_é	0.0	0.16
 gagé	gaZe	gagé	ADJ	VER,ADJ	m	s		g_a|Z_e	g_a|g_é	0.07	0.01
 gagée	gaZe	gager	VER	VER	f	s	par:pas;	g_a|Z_e_#	g_a|g_é_e	0.0	0.02
-gai	gE	gai	ADJ	ADJ	m	s		g_E	g_ai	22.64	10.74
+gai	ge	gai	ADJ	ADJ	m	s		g_e	g_ai	22.64	10.74
 gaie	gE	gai	ADJ	ADJ	f	s		g_E_#	g_ai_e	12.7	6.58
 gaiement	gem@	gaiement	ADV	ADV				g_e_#|m_@	g_ai_e|m_ent	16.22	2.58
 gaies	ge	gai	ADJ	ADJ	f	p		g_e_#	g_ai_es	2.3	0.88
@@ -58797,7 +58797,7 @@ gaélique	gaelik	gaélique	ADJ	ADJ,NOM		s		g_a|e|l_i_k_#	g_a|é|l_i_qu_e	0.0	0.0
 gaîment	gem@	gaîment	ADV	ADV				g_e|m_@	g_aî|m_ent	0.47	0.03
 gaîté	gEte	gaîté	NOM	NOM	f	s		g_E|t_e	g_aî|t_é	6.28	0.55
 gaîtés	gEte	gaîté	NOM	NOM	f	p		g_E|t_e_#	g_aî|t_é_s	0.07	0.0
-geai	ZE	geai	NOM	NOM	m	s		Z_E	ge_ai	0.81	0.24
+geai	Ze	geai	NOM	NOM	m	s		Z_e	ge_ai	0.81	0.24
 geais	ZE	geai	NOM	NOM	m	p		Z_E_#	ge_ai_s	0.81	0.03
 gecko	ZEko	gecko	NOM	NOM	m	s		Z_E|k_o	g_e|ck_o	0.0	0.26
 geckos	ZEko	gecko	NOM	NOM	m	p		Z_E|k_o_#	g_e|ck_o_s	0.0	0.07
@@ -72326,8 +72326,8 @@ laguiole	lagjOl	laguiole	NOM	NOM	m	s		l_a|g_j_O_l_#	l_a|gu_i_o_l_e	0.07	0.0
 lagunaire	lagynER	lagunaire	ADJ	ADJ	m	s		l_a|g_y|n_E_R_#	l_a|g_u|n_ai_r_e	0.2	0.0
 lagune	lagyn	lagune	NOM	NOM	f	s		l_a|g_y_n_#	l_a|g_u_n_e	6.69	2.4
 lagunes	lagyn	lagune	NOM	NOM	f	p		l_a|g_y_n_#	l_a|g_u_n_es	2.23	0.44
-lai	lE	lai	ADJ	ADJ,NOM	m	s		l_E	l_ai	0.14	1.04
-lai	lE	lai	NOM	ADJ,NOM	m	s		l_E	l_ai	0.14	0.26
+lai	le	lai	ADJ	ADJ,NOM	m	s		l_e	l_ai	0.14	1.04
+lai	le	lai	NOM	ADJ,NOM	m	s		l_e	l_ai	0.14	0.26
 laid	lE	laid	ADJ	ADJ,NOM	m	s		l_E_#	l_ai_d	10.41	9.52
 laid	lE	laid	NOM	ADJ,NOM	m	s		l_E_#	l_ai_d	1.49	0.93
 laide	lEd	laid	ADJ	ADJ,NOM	f	s		l_E_d_#	l_ai_d_e	9.73	6.23
@@ -73166,8 +73166,8 @@ lequel	l°kEl	lequel	PRO:rel	PRO:int,PRO:rel	m	s		l_°|k_E_l	l_e|qu_e_l	133.99	5
 lequel	l°kEl	lequel	PRO:int	PRO:int,PRO:rel				l_°|k_E_l	l_e|qu_e_l	3.11	4.65
 lerch	lERS	lerch	ADV	ADV				l_E_R_S	l_e_r_ch	0.07	0.0
 lerche	lERS	lerche	ADV	ADV				l_E_R_S_#	l_e_r_ch_e	4.12	0.0
-les	le	les	ART:def	ART:def,PRO:per		p		l_e_#	l_e_s	14662.3	8720.38
-les	le	les	PRO:per	ART:def,PRO:per		p		l_e_#	l_e_s	1412.23	1240.75
+les	lE	les	ART:def	ART:def,PRO:per		p		l_E_#	l_e_s	14662.3	8720.38
+les	lE	les	PRO:per	ART:def,PRO:per		p		l_E_#	l_e_s	1412.23	1240.75
 lesbianisme	lEsbjanizm	lesbianisme	NOM	NOM	m	s		l_E_s|b_j_a|n_i_z_m_#	l_e_s|b_i_a|n_i_s_m_e	0.07	0.12
 lesbien	lEzbj5	lesbien	ADJ	ADJ,NOM	m	s		l_E_z|b_j_5	l_e_s|b_i_en	0.0	0.49
 lesbien	lEzbj5	lesbien	NOM	ADJ,NOM	m	s		l_E_z|b_j_5	l_e_s|b_i_en	0.0	0.13
@@ -75675,7 +75675,7 @@ mahonia	maonja	mahonia	NOM	NOM	m	s		m_a_#|o|n_j_a	m_a_h|o|n_i_a	0.41	0.0
 mahonias	maonja	mahonia	NOM	NOM	m	p		m_a_#|o|n_j_a_#	m_a_h|o|n_i_a_s	0.2	0.0
 mahousse	maus	mahousse	ADJ	ADJ	f	s		m_a_#|u_s_#	m_a_h|ou_ss_e	1.08	0.01
 mahousses	maus	mahousse	ADJ	ADJ	f	p		m_a_#|u_s_#	m_a_h|ou_ss_es	0.27	0.02
-mai	mE	mai	NOM	NOM		s		m_E	m_ai	45.88	24.34
+mai	me	mai	NOM	NOM		s		m_e	m_ai	45.88	24.34
 maid	mEd	maid	NOM	NOM	f	s		m_E_d	m_ai_d	0.07	0.13
 maie	mE	maie	NOM	NOM	f	s		m_E_#	m_ai_e	1.08	0.0
 maies	mE	maie	NOM	NOM	f	p		m_E_#	m_ai_es	0.14	0.01
@@ -78241,9 +78241,9 @@ merveilleuses	mERvEj2z	merveilleux	NOM	ADJ,NOM	f	p		m_E_R|v_E|j_2_z_#	m_e_r|v_ei
 merveilleux	mERvEj2	merveilleux	ADJ	ADJ,NOM	m			m_E_R|v_E|j_2_#	m_e_r|v_ei|ll_eu_x	21.28	54.44
 merveilleux	mERvEj2	merveilleux	NOM	ADJ,NOM	m			m_E_R|v_E|j_2_#	m_e_r|v_ei|ll_eu_x	4.93	9.62
 merveillosité	mERvEjozite	merveillosité	NOM	NOM	f	s		m_E_R|v_E|j_o|z_i|t_e	m_e_r|v_ei|ll_o|s_i|t_é	0.0	0.01
-mes	me	mes	ADJ:pos	NOM,ADJ:pos,PRO:pos				m_e_#	m_e_s	1023.11	1102.23
-mes	me	me	NOM	NOM,ADJ:pos,PRO:pos		p		m_e_#	m_e_s	0.0	0.49
-mes	me	mes	PRO:pos	NOM,ADJ:pos,PRO:pos		p		m_e_#	m_e_s	0.0	0.01
+mes	mE	mes	ADJ:pos	NOM,ADJ:pos,PRO:pos				m_E_#	m_e_s	1023.11	1102.23
+mes	mE	me	NOM	NOM,ADJ:pos,PRO:pos		p		m_E_#	m_e_s	0.0	0.49
+mes	mE	mes	PRO:pos	NOM,ADJ:pos,PRO:pos		p		m_E_#	m_e_s	0.0	0.01
 mesa	meza	mesa	NOM	NOM	f	s		m_e|z_a	m_e|s_a	0.07	0.51
 mescal	mEskal	mescal	NOM	NOM	m	s		m_E_s|k_a_l	m_e_s|c_a_l	0.0	0.26
 mescaline	mEskalin	mescaline	NOM	NOM	f	s		m_E_s|k_a|l_i_n_#	m_e_s|c_a|l_i_n_e	0.07	0.25
@@ -87632,7 +87632,7 @@ papayer	papaje	papayer	NOM	NOM	m	s		p_a|p_a|j_e	p_a|p_a|y_er	0.07	0.0
 papayers	papaje	papayer	NOM	NOM	m	p		p_a|p_a|j_e_#	p_a|p_a|y_er_s	0.07	0.0
 papayes	papaj	papaye	NOM	NOM	f	p		p_a|p_a_j_#	p_a|p_a_y_es	0.07	0.1
 pape	pap	pape	NOM	NOM	m	s		p_a_p_#	p_a_p_e	14.59	6.57
-papegai	papgE	papegai	NOM	NOM	m	s		p_a_p_#|g_E	p_a_p_e|g_ai	0.07	0.0
+papegai	papge	papegai	NOM	NOM	m	s		p_a_p_#|g_e	p_a_p_e|g_ai	0.07	0.0
 papegais	papgE	papegai	NOM	NOM	m	p		p_a_p_#|g_E_#	p_a_p_e|g_ai_s	0.07	0.0
 papelard	pap°laR	papelard	NOM	ADJ,NOM	m	s		p_a|p_°|l_a_R_#	p_a|p_e|l_a_r_d	1.62	0.16
 papelard	pap°laR	papelard	ADJ	ADJ,NOM	m	s		p_a|p_°|l_a_R_#	p_a|p_e|l_a_r_d	0.14	0.0
@@ -99089,7 +99089,7 @@ quadrupède	kwadRupEd	quadrupède	NOM	ADJ,NOM	m	s		kw_a|d_R_u|p_E_d_#	qu_a|d_r_u
 quadrupède	kwadRupEd	quadrupède	ADJ	ADJ,NOM		s		kw_a|d_R_u|p_E_d_#	qu_a|d_r_u|p_è_d_e	0.07	0.04
 quadrupèdes	kwadRupEd	quadrupède	ADJ	ADJ,NOM	m	p		kw_a|d_R_u|p_E_d_#	qu_a|d_r_u|p_è_d_es	0.07	0.01
 quadrupèdes	kwadRupEd	quadrupède	NOM	ADJ,NOM	m	p		kw_a|d_R_u|p_E_d_#	qu_a|d_r_u|p_è_d_es	0.2	0.01
-quai	kE	quai	NOM	NOM	m	s		k_E	qu_ai	55.14	10.37
+quai	ke	quai	NOM	NOM	m	s		k_e	qu_ai	55.14	10.37
 quais	ke	quai	NOM	NOM	m	p		k_e_#	qu_ai_s	18.85	3.64
 quaker	kwEk9R	quaker	NOM	NOM	m	s		kw_E|k_9_R	qu_a|k_e_r	0.47	0.49
 quakeresse	kwEk°REs	quakeresse	NOM	NOM	f	s		kw_E|k_°|R_E_s_#	qu_a|k_e|r_e_ss_e	0.14	0.02
@@ -114612,9 +114612,9 @@ servomoteurs	sERvomOt9R	servomoteur	NOM	NOM	m	p		s_E_R|v_o|m_O|t_9_R_#	s_e_r|v_o
 servomécanisme	sERvomekanizm	servomécanisme	NOM	NOM	m	s		s_E_R|v_o|m_e|k_a|n_i_z_m_#	s_e_r|v_o|m_é|c_a|n_i_s_m_e	0.0	0.01
 servons	sERv§	servir	VER	VER			imp:pre:1p;ind:pre:1p;	s_E_R|v_§	s_e_r|v_ons	0.47	1.36
 servîmes	sERvim	servir	VER	VER			ind:pas:1p;	s_E_R|v_i_m_#	s_e_r|v_î_m_es	0.07	0.0
-ses	se	ses	ADJ:pos	ADJ:pos,NOM,PRO:pos				s_e_#	s_e_s	3105.41	757.68
-ses	se	ses	PRO:pos	ADJ:pos,NOM,PRO:pos		p		s_e_#	s_e_s	0.0	0.1
-ses	se	ses	NOM	ADJ:pos,NOM,PRO:pos	f	s		s_e_#	s_e_s	0.0	0.06
+ses	sE	ses	ADJ:pos	ADJ:pos,NOM,PRO:pos				s_E_#	s_e_s	3105.41	757.68
+ses	sE	ses	PRO:pos	ADJ:pos,NOM,PRO:pos		p		s_E_#	s_e_s	0.0	0.1
+ses	sE	ses	NOM	ADJ:pos,NOM,PRO:pos	f	s		s_E_#	s_e_s	0.0	0.06
 session	sesj§	session	NOM	NOM	f	s		s_e|s_j_§	s_e|ss_i_on	1.89	2.36
 sessions	sesj§	session	NOM	NOM	f	p		s_e|s_j_§_#	s_e|ss_i_on_s	0.41	0.93
 sesterces	sEstERs	sesterce	NOM	NOM	m	p		s_E_s|t_E_R_s_#	s_e_s|t_e_r_c_es	0.34	0.85
@@ -122409,7 +122409,7 @@ tertiaires	tERsjER	tertiaire	ADJ	ADJ	m	p		t_E_R|s_j_E_R_#	t_e_r|t_i_ai_r_es	0.0	
 tertio	tERsjo	tertio	ADV	ADV				t_E_R|s_j_o	t_e_r|t_i_o	0.81	1.08
 tertre	tERtR	tertre	NOM	NOM	m	s		t_E_R_t_R_#	t_e_r_t_r_e	2.23	0.16
 tertres	tERtR	tertre	NOM	NOM	m	p		t_E_R_t_R_#	t_e_r_t_r_es	0.27	0.01
-tes	te	tes	ADJ:pos	ADJ:pos				t_e_#	t_e_s	145.0	690.24
+tes	tE	tes	ADJ:pos	ADJ:pos				t_E_#	t_e_s	145.0	690.24
 tesla	tEsla	tesla	NOM	NOM	m	s		t_E|s_l_a	t_e|s_l_a	0.0	0.02
 tessiture	tesityR	tessiture	NOM	NOM	f	s		t_e|s_i|t_y_R_#	t_e|ss_i|t_u_r_e	0.41	0.0
 tesson	tes§	tesson	NOM	NOM	m	s		t_e|s_§	t_e|ss_on	0.27	0.48
@@ -135039,7 +135039,7 @@ zézettes	zezEt	zézette	NOM	NOM	f	p		z_e|z_E_t_#	z_é|z_e_tt_es	0.27	0.0
 étagées	etaZe	étagé	ADJ	VER,ADJ	f	p		e|t_a|Z_e_#	é|t_a|g_é_es	0.27	0.0
 étagés	etaZe	étager	VER	VER,ADJ	m	p	par:pas;	e|t_a|Z_e_#	é|t_a|g_é_s	0.27	0.0
 étagés	etaZe	étagé	ADJ	VER,ADJ	m	p		e|t_a|Z_e_#	é|t_a|g_é_s	0.14	0.0
-étai	etE	étai	NOM	NOM	m	s		e|t_E	é|t_ai	0.54	0.19
+étai	ete	étai	NOM	NOM	m	s		e|t_e	é|t_ai	0.54	0.19
 étaie	etE	étayer	VER	VER			ind:pre:1s;ind:pre:3s;	e|t_E_#	é|t_ai_e	0.14	0.04
 étaient	etE	être	VER	AUX,VER			ind:imp:3p;	e|t_E	é|t_aient	534.19	197.09
 étaient	etE	être	AUX	AUX,VER			ind:imp:3p;	e|t_E	é|t_aient	393.85	55.3
