@@ -1891,7 +1891,7 @@ Transformation, in two exporters and one class:
    (`plover_stenalgo/dictionaries/`, `package-data` in `pyproject.toml`): it checks that the `.stenalgo` file's
    recorded fingerprint matches the stock JSON, then copies both. `plover_stenalgo/system.py` lists them in
    `DEFAULT_DICTIONARIES` as `asset:plover_stenalgo:dictionaries/...` (expressions above the stock JSON), which Plover
-   resolves to the installed package folder, so installing the plugin is enough; refreshing the theory means rebuilding
+   resolves to the installed package folder, so installing the plugin is enough (the install source, `github.com/jf5pier/stenalgo-plover`, is filled by `python -m util.sync_plover_mirror <clone> --push`, which also stores the gitignored `dictionaries/` there); refreshing the theory means rebuilding
    and reinstalling the plugin (bump `version`). Plover applies the defaults only to a config that has no dictionary
    list of its own for the system: an existing `plover.cfg` section keeps its list until that list is removed.
 3. `StenalgoExpressionDictionary` (a read-only `StenoDictionary`): `_load` reads the data and the stock JSON next to

@@ -85,6 +85,10 @@ python -m util.export_plover_plugin
 # plover_stenalgo_dictionary.json + plover_stenalgo_expressions.stenalgo into plover_stenalgo/plover_stenalgo/dictionaries/
 # (gitignored package assets, fingerprint-checked; run it after export_expression_data, then build/install the plugin).
 
+python -m util.sync_plover_mirror MIRROR_CLONE [--push]
+# Copies the plugin package, data included, into a clone of github.com/jf5pier/stenalgo-plover (the Plover install source)
+# and commits there; --push publishes it. Run after export_expression_data.
+
 python -m util.export_keyboard_layout        # Theory Export (S8), trainer branch
 # Prerequisites: starboard3h.json; realization_report.json (marker legend; optional).
 # Outputs: steno-trainer/public/data/keyboard-layout.json.
