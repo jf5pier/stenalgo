@@ -81,7 +81,9 @@ python -m util.export_expression_data [OUT]   # expression layer data for the Pl
 
 python -m util.export_plover_plugin
 # Copies the stdlib-only decoder modules src/{strokes,expressionmodel,keyconflicts,elision,expressiondecoder,
-# expressionranking,expressiondata}.py into plover_stenalgo/plover_stenalgo/_core/ (tracked; a test fails when stale).
+# expressionranking,expressiondata}.py into plover_stenalgo/plover_stenalgo/_core/ (tracked; a test fails when stale), and
+# plover_stenalgo_dictionary.json + plover_stenalgo_expressions.stenalgo into plover_stenalgo/plover_stenalgo/dictionaries/
+# (gitignored package assets, fingerprint-checked; run it after export_expression_data, then build/install the plugin).
 
 python -m util.export_keyboard_layout        # Theory Export (S8), trainer branch
 # Prerequisites: starboard3h.json; realization_report.json (marker legend; optional).
@@ -179,7 +181,7 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 
 ## Verification approach
 
-- `pytest src/test/` must pass after any `.py` change (1142 tests at the time of writing, expression layer, affix layer and lessons exporter included).
+- `pytest src/test/` must pass after any `.py` change (1145 tests at the time of writing, expression layer, affix layer and lessons exporter included).
 - `mypy` (bare, scope and options in `mypy.ini`) must report no issues after any `.py` change.
 - Behaviour-preserving changes are proven by a full rebuild following the rebuild table in
   `docs/PIPELINE.md`, comparing the md5s of `phonetic_theory.tsv`, `disambiguated_theory.tsv`,

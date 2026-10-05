@@ -6,16 +6,28 @@ Copies `src/<module>.py` to `plover_stenalgo/plover_stenalgo/_core/<module>.py`,
 to the package-relative `from .x import`. The copy is generated: edit `src/`, rerun this, commit both
 (`src/test/plover_plugin_test.py` fails when the copy is stale).
 
+It also ships the data the plugin needs as package assets (`plover_stenalgo/plover_stenalgo/dictionaries/`, listed by
+`system.DEFAULT_DICTIONARIES` as `asset:plover_stenalgo:...`): the stock `plover_stenalgo_dictionary.json` and the
+`plover_stenalgo_expressions.stenalgo` data built against it. The two are copied together, after checking that the data's
+recorded word-index fingerprint matches that JSON, so an installed plugin always holds a consistent pair. The asset
+copies are generated and gitignored; build the plugin package only after `util.export_expression_data`.
+
 Run: python -m util.export_plover_plugin
 """
 from __future__ import annotations
 
+import json
 import re
+import shutil
+import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 SOURCE = REPO / "src"
 TARGET = REPO / "plover_stenalgo" / "plover_stenalgo" / "_core"
+ASSETS = REPO / "plover_stenalgo" / "plover_stenalgo" / "dictionaries"
+STOCK = "plover_stenalgo_dictionary.json"
+EXPRESSIONS = "plover_stenalgo_expressions.stenalgo"
 
 # The closure of src.expressiondecoder / expressionranking / expressiondata (checked stdlib-only by the test).
 MODULES = ("strokes", "expressionmodel", "keyconflicts", "elision", "expressiondecoder", "expressionranking",
@@ -36,11 +48,42 @@ def generate() -> dict[Path, str]:
     return files
 
 
+def exportAssets(repo: Path = REPO, assets: Path = ASSETS) -> list[Path]:
+    """Copy the stock dictionary and the expression data into the package; raises when either is missing or the
+    data was built against another stock dictionary."""
+    from src.expressiondata import wordIndexFingerprint
+    sources = [repo / STOCK, repo / EXPRESSIONS]
+    for source in sources:
+        if not source.exists():
+            raise FileNotFoundError(f"{source.name} is missing: run util.export_plover_dictionary and "
+                                    f"util.export_expression_data first")
+    data = json.loads(sources[1].read_text(encoding="utf-8"))
+    pluginRoot = str(REPO / "plover_stenalgo")
+    sys.path.insert(0, pluginRoot)
+    try:
+        from plover_stenalgo.wordindex import readWordIndex  # type: ignore[import-not-found]
+        recorded = data["wordIndex"]["fingerprint"]
+        actual = wordIndexFingerprint(readWordIndex(str(sources[0])))
+    finally:
+        sys.path.remove(pluginRoot)
+    if recorded != actual:
+        raise ValueError(f"{EXPRESSIONS} was built against another {STOCK} (fingerprint mismatch): "
+                         f"rerun util.export_expression_data")
+    assets.mkdir(parents=True, exist_ok=True)
+    out = []
+    for source in sources:
+        shutil.copyfile(source, assets / source.name)
+        out.append(assets / source.name)
+    return out
+
+
 def main() -> None:
     TARGET.mkdir(parents=True, exist_ok=True)
     for path, text in generate().items():
         path.write_text(text, encoding="utf-8")
         print(f"wrote {path.relative_to(REPO)}")
+    for path in exportAssets():
+        print(f"copied {path.relative_to(REPO)} ({path.stat().st_size / 1e6:.1f} MB)")
 
 
 if __name__ == "__main__":

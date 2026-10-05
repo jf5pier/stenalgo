@@ -36,5 +36,15 @@ KEYMAPS: dict[str, dict[str, str | tuple[str, ...]]] = {
     "Gemini PR": dict(GEMINI_PR_KEYMAP),
 }
 
+# The theory ships inside this package (`dictionaries/`, copied by `python -m util.export_plover_plugin`). Plover
+# uses the default list when a config has no dictionary list of its own for this system, highest priority first:
+# the expression data answers merged chords and must sit above the stock dictionary, whose JSON it reads its word
+# index from (same folder).
+ASSET_PREFIX = "asset:plover_stenalgo:dictionaries/"
 DICTIONARIES_ROOT = "asset:plover:assets"
-DEFAULT_DICTIONARIES: tuple[str, ...] = ("user.json", "commands.json")
+DEFAULT_DICTIONARIES: tuple[str, ...] = (
+    "user.json",
+    "commands.json",
+    ASSET_PREFIX + "plover_stenalgo_expressions.stenalgo",
+    ASSET_PREFIX + "plover_stenalgo_dictionary.json",
+)

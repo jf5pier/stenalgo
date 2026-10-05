@@ -49,3 +49,4 @@ googlebooks-fre-1grams/
 # never committed. public/data/*.json ARE committed -- see steno-trainer/README.md.
 steno-trainer/main.js
 steno-trainer/elm-stuff/
+plover_stenalgo/plover_stenalgo/dictionaries/

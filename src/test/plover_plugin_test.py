@@ -12,7 +12,7 @@ from src.expressiondata import bundleToDict, legalityFromStarboard
 from src.expressionmodel import AttachRule, BriefRule, Rules
 from src.keyboard import Starboard, Strokes
 from src.keyconflicts import KeyConflicts
-from util.export_plover_plugin import generate
+from util.export_plover_plugin import EXPRESSIONS, STOCK, exportAssets, generate
 
 REPO = Path(__file__).resolve().parent.parent.parent
 PLUGIN = REPO / "plover_stenalgo"
@@ -64,6 +64,42 @@ class TestVendoredCore(unittest.TestCase):
                 "sys.exit(1 if bad else 0)")
         done = subprocess.run([sys.executable, "-I", "-c", code, str(PLUGIN)], capture_output=True, text=True)
         self.assertEqual(done.returncode, 0, done.stderr)
+
+
+class TestPackagedAssets(unittest.TestCase):
+    """The data travels inside the plugin package: system.DEFAULT_DICTIONARIES names it as asset URIs."""
+
+    def test_default_dictionaries_name_the_packaged_pair_in_priority_order(self) -> None:
+        sys.path.insert(0, str(PLUGIN))
+        try:
+            import importlib
+            system = importlib.import_module("plover_stenalgo.system")
+        finally:
+            sys.path.remove(str(PLUGIN))
+        names = [d for d in system.DEFAULT_DICTIONARIES if d.startswith("asset:plover_stenalgo:")]
+        self.assertEqual([n.rsplit("/", 1)[1] for n in names], [EXPRESSIONS, STOCK])   # expressions above the stock
+
+    def test_export_refuses_data_built_against_another_stock_dictionary(self) -> None:
+        stock, expressions = REPO / STOCK, REPO / EXPRESSIONS
+        if not (stock.exists() and expressions.exists()):
+            self.skipTest("generated data not built")
+        with tempfile.TemporaryDirectory() as tmp:
+            repo, assets = Path(tmp) / "repo", Path(tmp) / "assets"
+            repo.mkdir()
+            (repo / EXPRESSIONS).write_bytes(expressions.read_bytes())
+            (repo / STOCK).write_text(json.dumps({"v-": "mot"}), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                exportAssets(repo, assets)
+            (repo / STOCK).write_bytes(stock.read_bytes())
+            copied = exportAssets(repo, assets)
+            self.assertEqual(sorted(p.name for p in copied), sorted([EXPRESSIONS, STOCK]))
+            for p in copied:
+                self.assertEqual(p.read_bytes(), (repo / p.name).read_bytes())
+
+    def test_export_names_the_missing_file(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaises(FileNotFoundError):
+                exportAssets(Path(tmp), Path(tmp) / "assets")
 
 
 class TestStrokeParser(unittest.TestCase):
