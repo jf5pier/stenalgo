@@ -35966,7 +35966,7 @@ badgée	badZe	badgé	ADJ	ADJ	f	s		b_a|d_Z_e_#	b_a|d_g_é_e	0.0	0.0	synthetic
 badines	badin	badin	ADJ	ADJ	f	p		b_a|d_i_n_#	b_a|d_i_n_es	0.0	0.0	synthetic
 badoises	badwaz	badois	ADJ	ADJ	f	p		b_a|d_wa_z_#	b_a|d_oi_s_es	0.0	0.0	synthetic
 baie	bE	bai	ADJ	ADJ	f	s		b_E_#	b_ai_e	0.0	0.0	synthetic
-bai	bE	baie	ADJ	ADJ,NOM,VER	m	s		b_E	b_ai	0.0	0.0	synthetic
+bai	be	baie	ADJ	ADJ,NOM,VER	m	s		b_e	b_ai	0.0	0.0	synthetic
 baillives	bajiv	baillive	NOM	NOM	f	p		b_a|j_i_v_#	b_a|ill_i_v_es	0.0	0.0	synthetic
 baisades	b°zad	baisade	NOM	NOM	f	p		b_°|z_a_d_#	b_ai|s_a_d_es	0.0	0.0	synthetic
 baisodromes	bEzodRom	baisodrome	NOM	NOM	m	p		b_E|z_o|d_R_o_m_#	b_ai|s_o|d_r_o_m_es	0.0	0.0	synthetic
@@ -38540,7 +38540,7 @@ laguioles	lagjOl	laguiole	NOM	NOM	m	p		l_a|g_j_O_l_#	l_a|gu_i_o_l_es	0.0	0.0	syn
 laie	lE	lai	ADJ	ADJ,NOM	f	s		l_E_#	l_ai_e	0.0	0.0	synthetic
 laideronnes	lEd°ROn	laideron	ADJ	ADJ,NOM	f	p		l_E|d_°|R_O_n_#	l_ai|d_e|r_o_nn_es	0.0	0.0	synthetic
 laideronne	lEd°ROn	laideron	ADJ	ADJ,NOM	f	s		l_E|d_°|R_O_n_#	l_ai|d_e|r_o_nn_e	0.0	0.0	synthetic
-lai	lE	laie	ADJ	ADJ,NOM	m	s		l_E	l_ai	0.0	0.0	synthetic
+lai	le	laie	ADJ	ADJ,NOM	m	s		l_e	l_ai	0.0	0.0	synthetic
 lainiers	lEnje	lainier	ADJ	ADJ,NOM	m	p		l_E|n_j_e_#	l_ai|n_i_er_s	0.0	0.0	synthetic
 lambadas	l@bada	lambada	NOM	NOM	f	p		l_@|b_a|d_a_#	l_am|b_a|d_a_s	0.0	0.0	synthetic
 lambels	l@bEl	lambel	NOM	NOM	m	p		l_@|b_E_l_#	l_am|b_e_l_s	0.0	0.0	synthetic
@@ -50333,7 +50333,7 @@ furiosos	fyRjozo	furioso	ADJ	ADJ	m	p		f_y|R_j_o|z_o_#	f_u|r_i_o|s_o_s	0.0	0.0	sy
 féodals	feodal	féodal	NOM	ADJ,NOM	m	p		f_e|o|d_a_l_#	f_é|o|d_a_l_s	0.0	0.0	synthetic
 giocosos	dZjokozo	giocoso	ADJ	ADJ	m	p		dZ_j_o|k_o|z_o_#	g_i_o|c_o|s_o_s	0.0	0.0	synthetic
 hambourgeoi	@buRZwa	hambourgeois	NOM	ADJ,NOM	m	s		#_@|b_u_R|Z_wa	h_am|b_ou_r|ge_oi	0.0	0.0	synthetic
-hollandai	ol@dE	hollandais	NOM	ADJ,NOM	m	s		#_o|l_@|d_E	h_o|ll_an|d_ai	0.0	0.0	synthetic
+hollandai	ol@de	hollandais	NOM	ADJ,NOM	m	s		#_o|l_@|d_e	h_o|ll_an|d_ai	0.0	0.0	synthetic
 impavids	5pavi	impavide	ADJ	ADJ	m	p		5|p_a|v_i_#	im|p_a|v_i_ds	0.0	0.0	synthetic
 monocords	monokOR	monocorde	ADJ	ADJ	m	p		m_o|n_o|k_O_R_#	m_o|n_o|c_o_r_ds	0.0	0.0	synthetic
 mourids	muRi	mouride	ADJ	ADJ	m	p		m_u|R_i_#	m_ou|r_i_ds	0.0	0.0	synthetic

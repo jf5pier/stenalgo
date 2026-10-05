@@ -1485,21 +1485,6 @@
      "frequency": 1265.97
     },
     {
-     "ortho": "mes",
-     "before": "les",
-     "after": "",
-     "label": "nom, pl. · adjectif possessif · pronom possessif, pl.",
-     "phonology": "me",
-     "steno": "me",
-     "strokes": [
-      [
-       6,
-       14
-      ]
-     ],
-     "frequency": 1102.23
-    },
-    {
      "ortho": "été",
      "before": "l'",
      "after": "",
@@ -1567,21 +1552,6 @@
       ]
      ],
      "frequency": 823.62
-    },
-    {
-     "ortho": "tes",
-     "before": "",
-     "after": "",
-     "label": "adjectif possessif",
-     "phonology": "te",
-     "steno": "te",
-     "strokes": [
-      [
-       7,
-       14
-      ]
-     ],
-     "frequency": 690.24
     },
     {
      "ortho": "eu",
@@ -2009,6 +1979,42 @@
       ]
      ],
      "frequency": 97.13
+    },
+    {
+     "ortho": "tiré",
+     "before": "le",
+     "after": "",
+     "label": "participe passé, m. sg. · adjectif, m. sg.",
+     "phonology": "ti.Re",
+     "steno": "ti/Re",
+     "strokes": [
+      [
+       7,
+       13
+      ],
+      [
+       8,
+       14
+      ]
+     ],
+     "frequency": 76.78
+    },
+    {
+     "ortho": "trou",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg.",
+     "phonology": "tRu",
+     "steno": "tR@e",
+     "strokes": [
+      [
+       7,
+       8,
+       11,
+       14
+      ]
+     ],
+     "frequency": 75.32
     }
    ]
   },
@@ -2035,7 +2041,7 @@
     {
      "kind": "phoneme",
      "hand": "right",
-     "text": "La touche -t écrit le son /t/ en fin de syllabe (« juste », « vite »)."
+     "text": "La touche -t écrit le son /t/ en fin de syllabe (« juste », « vite », « toute »)."
     },
     {
      "kind": "phoneme",
@@ -2469,21 +2475,6 @@
      "frequency": 1122.37
     },
     {
-     "ortho": "mes",
-     "before": "les",
-     "after": "",
-     "label": "nom, pl. · adjectif possessif · pronom possessif, pl.",
-     "phonology": "me",
-     "steno": "me",
-     "strokes": [
-      [
-       6,
-       14
-      ]
-     ],
-     "frequency": 1102.23
-    },
-    {
      "ortho": "toujours",
      "before": "",
      "after": "",
@@ -2621,21 +2612,6 @@
       ]
      ],
      "frequency": 823.62
-    },
-    {
-     "ortho": "tes",
-     "before": "",
-     "after": "",
-     "label": "adjectif possessif",
-     "phonology": "te",
-     "steno": "te",
-     "strokes": [
-      [
-       7,
-       14
-      ]
-     ],
-     "frequency": 690.24
     },
     {
      "ortho": "avoir",
@@ -2864,6 +2840,43 @@
       ]
      ],
      "frequency": 465.77
+    },
+    {
+     "ortho": "amour",
+     "before": "l'",
+     "after": "",
+     "label": "nom, m. sg.",
+     "phonology": "a.muR",
+     "steno": "a/m@eR",
+     "strokes": [
+      [
+       12
+      ],
+      [
+       6,
+       11,
+       14,
+       21
+      ]
+     ],
+     "frequency": 450.46
+    },
+    {
+     "ortho": "toute",
+     "before": "la",
+     "after": "",
+     "label": "adjectif, f. sg. · adjectif indéfini, f. sg. · pronom indéfini, f. sg.",
+     "phonology": "tut",
+     "steno": "t@et",
+     "strokes": [
+      [
+       7,
+       11,
+       14,
+       20
+      ]
+     ],
+     "frequency": 441.79
     }
    ]
   },
@@ -3536,21 +3549,6 @@
      "frequency": 1265.97
     },
     {
-     "ortho": "ces",
-     "before": "",
-     "after": "",
-     "label": "adjectif démonstratif, pl.",
-     "phonology": "se",
-     "steno": "se",
-     "strokes": [
-      [
-       3,
-       14
-      ]
-     ],
-     "frequency": 1222.51
-    },
-    {
      "ortho": "encore",
      "before": "",
      "after": "",
@@ -3586,21 +3584,6 @@
       ]
      ],
      "frequency": 1122.37
-    },
-    {
-     "ortho": "mes",
-     "before": "les",
-     "after": "",
-     "label": "nom, pl. · adjectif possessif · pronom possessif, pl.",
-     "phonology": "me",
-     "steno": "me",
-     "strokes": [
-      [
-       6,
-       14
-      ]
-     ],
-     "frequency": 1102.23
     },
     {
      "ortho": "toujours",
@@ -3709,6 +3692,39 @@
       ]
      ],
      "frequency": 910.39
+    },
+    {
+     "ortho": "vu",
+     "before": "le",
+     "after": "",
+     "label": "participe passé, m. sg. · adjectif, m. sg. · nom, m. sg.",
+     "phonology": "vy",
+     "steno": "v@i",
+     "strokes": [
+      [
+       5,
+       11,
+       13
+      ]
+     ],
+     "frequency": 905.21
+    },
+    {
+     "ortho": "fois",
+     "before": "les",
+     "after": "",
+     "label": "nom, f. pl.",
+     "phonology": "fwa",
+     "steno": "kpwa",
+     "strokes": [
+      [
+       2,
+       4,
+       9,
+       12
+      ]
+     ],
+     "frequency": 899.25
     }
    ]
   },
@@ -5701,12 +5717,13 @@
      "before": "",
      "after": "",
      "label": "article défini, pl. · pronom personnel, pl.",
-     "phonology": "le",
-     "steno": "mte",
+     "phonology": "lE",
+     "steno": "mtie",
      "strokes": [
       [
        6,
        7,
+       13,
        14
       ]
      ],
@@ -5795,12 +5812,13 @@
      "before": "",
      "after": "",
      "label": "article indéfini, pl.",
-     "phonology": "de",
-     "steno": "pve",
+     "phonology": "dE",
+     "steno": "pvie",
      "strokes": [
       [
        4,
        5,
+       13,
        14
       ]
      ],
@@ -6529,12 +6547,13 @@
      "before": "",
      "after": "",
      "label": "article défini, pl. · pronom personnel, pl.",
-     "phonology": "le",
-     "steno": "mte",
+     "phonology": "lE",
+     "steno": "mtie",
      "strokes": [
       [
        6,
        7,
+       13,
        14
       ]
      ],
@@ -6623,12 +6642,13 @@
      "before": "",
      "after": "",
      "label": "article indéfini, pl.",
-     "phonology": "de",
-     "steno": "pve",
+     "phonology": "dE",
+     "steno": "pvie",
      "strokes": [
       [
        4,
        5,
+       13,
        14
       ]
      ],
@@ -7357,12 +7377,13 @@
      "before": "",
      "after": "",
      "label": "article défini, pl. · pronom personnel, pl.",
-     "phonology": "le",
-     "steno": "mte",
+     "phonology": "lE",
+     "steno": "mtie",
      "strokes": [
       [
        6,
        7,
+       13,
        14
       ]
      ],
@@ -7451,12 +7472,13 @@
      "before": "",
      "after": "",
      "label": "article indéfini, pl.",
-     "phonology": "de",
-     "steno": "pve",
+     "phonology": "dE",
+     "steno": "pvie",
      "strokes": [
       [
        4,
        5,
+       13,
        14
       ]
      ],
@@ -8214,12 +8236,13 @@
      "before": "",
      "after": "",
      "label": "article défini, pl. · pronom personnel, pl.",
-     "phonology": "le",
-     "steno": "mte",
+     "phonology": "lE",
+     "steno": "mtie",
      "strokes": [
       [
        6,
        7,
+       13,
        14
       ]
      ],
@@ -8308,12 +8331,13 @@
      "before": "",
      "after": "",
      "label": "article indéfini, pl.",
-     "phonology": "de",
-     "steno": "pve",
+     "phonology": "dE",
+     "steno": "pvie",
      "strokes": [
       [
        4,
        5,
+       13,
        14
       ]
      ],
@@ -9075,12 +9099,13 @@
      "before": "",
      "after": "",
      "label": "article défini, pl. · pronom personnel, pl.",
-     "phonology": "le",
-     "steno": "mte",
+     "phonology": "lE",
+     "steno": "mtie",
      "strokes": [
       [
        6,
        7,
+       13,
        14
       ]
      ],
@@ -9169,12 +9194,13 @@
      "before": "",
      "after": "",
      "label": "article indéfini, pl.",
-     "phonology": "de",
-     "steno": "pve",
+     "phonology": "dE",
+     "steno": "pvie",
      "strokes": [
       [
        4,
        5,
+       13,
        14
       ]
      ],
@@ -9938,12 +9964,13 @@
      "before": "",
      "after": "",
      "label": "article défini, pl. · pronom personnel, pl.",
-     "phonology": "le",
-     "steno": "mte",
+     "phonology": "lE",
+     "steno": "mtie",
      "strokes": [
       [
        6,
        7,
+       13,
        14
       ]
      ],
@@ -10032,12 +10059,13 @@
      "before": "",
      "after": "",
      "label": "article indéfini, pl.",
-     "phonology": "de",
-     "steno": "pve",
+     "phonology": "dE",
+     "steno": "pvie",
      "strokes": [
       [
        4,
        5,
+       13,
        14
       ]
      ],
@@ -10787,12 +10815,13 @@
      "before": "",
      "after": "",
      "label": "article défini, pl. · pronom personnel, pl.",
-     "phonology": "le",
-     "steno": "mte",
+     "phonology": "lE",
+     "steno": "mtie",
      "strokes": [
       [
        6,
        7,
+       13,
        14
       ]
      ],
@@ -10881,12 +10910,13 @@
      "before": "",
      "after": "",
      "label": "article indéfini, pl.",
-     "phonology": "de",
-     "steno": "pve",
+     "phonology": "dE",
+     "steno": "pvie",
      "strokes": [
       [
        4,
        5,
+       13,
        14
       ]
      ],
@@ -11619,12 +11649,13 @@
      "before": "",
      "after": "",
      "label": "article défini, pl. · pronom personnel, pl.",
-     "phonology": "le",
-     "steno": "mte",
+     "phonology": "lE",
+     "steno": "mtie",
      "strokes": [
       [
        6,
        7,
+       13,
        14
       ]
      ],
@@ -11713,12 +11744,13 @@
      "before": "",
      "after": "",
      "label": "article indéfini, pl.",
-     "phonology": "de",
-     "steno": "pve",
+     "phonology": "dE",
+     "steno": "pvie",
      "strokes": [
       [
        4,
        5,
+       13,
        14
       ]
      ],
@@ -14593,11 +14625,10 @@
      "before": "j'",
      "after": "",
      "label": "indicatif présent, 1re sg.",
-     "phonology": "E",
-     "steno": "ie/-k",
+     "phonology": "e",
+     "steno": "e/-k",
      "strokes": [
       [
-       13,
        14
       ],
       [
@@ -14765,23 +14796,6 @@
       ]
      ],
      "frequency": 2486.93
-    },
-    {
-     "ortho": "ai",
-     "before": "j'",
-     "after": "",
-     "label": "indicatif présent, 1re sg.",
-     "phonology": "e",
-     "steno": "e/-k",
-     "strokes": [
-      [
-       14
-      ],
-      [
-       18
-      ]
-     ],
-     "frequency": 2475.78
     },
     {
      "ortho": "était",
@@ -15485,6 +15499,25 @@
       ]
      ],
      "frequency": 751.29
+    },
+    {
+     "ortho": "aime",
+     "before": "j'",
+     "after": "",
+     "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
+     "phonology": "Em",
+     "steno": "iem/-k",
+     "strokes": [
+      [
+       13,
+       14,
+       25
+      ],
+      [
+       18
+      ]
+     ],
+     "frequency": 751.29
     }
    ]
   },
@@ -15524,11 +15557,10 @@
      "before": "j'",
      "after": "",
      "label": "indicatif présent, 1re sg.",
-     "phonology": "E",
-     "steno": "ie/-k",
+     "phonology": "e",
+     "steno": "e/-k",
      "strokes": [
       [
-       13,
        14
       ],
       [
@@ -15660,23 +15692,6 @@
       ]
      ],
      "frequency": 2486.93
-    },
-    {
-     "ortho": "ai",
-     "before": "j'",
-     "after": "",
-     "label": "indicatif présent, 1re sg.",
-     "phonology": "e",
-     "steno": "e/-k",
-     "strokes": [
-      [
-       14
-      ],
-      [
-       18
-      ]
-     ],
-     "frequency": 2475.78
     },
     {
      "ortho": "dit",
@@ -16441,6 +16456,26 @@
       ]
      ],
      "frequency": 517.64
+    },
+    {
+     "ortho": "allons",
+     "before": "nous",
+     "after": "",
+     "label": "impératif présent, 1re pl. · indicatif présent, 1re pl.",
+     "phonology": "a.l§",
+     "steno": "a/mtai",
+     "strokes": [
+      [
+       12
+      ],
+      [
+       6,
+       7,
+       12,
+       13
+      ]
+     ],
+     "frequency": 500.21
     }
    ]
   },
@@ -23284,6 +23319,23 @@
      "frequency": 96.47
     },
     {
+     "ortho": "ait",
+     "before": "qu'il",
+     "after": "",
+     "label": "subjonctif présent, 3e sg.",
+     "phonology": "e",
+     "steno": "e/-R",
+     "strokes": [
+      [
+       14
+      ],
+      [
+       21
+      ]
+     ],
+     "frequency": 95.36
+    },
+    {
      "ortho": "fasse",
      "before": "que je",
      "after": "",
@@ -23344,27 +23396,6 @@
       ]
      ],
      "frequency": 91.91
-    },
-    {
-     "ortho": "puisse",
-     "before": "que je",
-     "after": "",
-     "label": "subjonctif présent, 1re sg. / 3e sg.",
-     "phonology": "p8is",
-     "steno": "p@ais/-R",
-     "strokes": [
-      [
-       4,
-       11,
-       12,
-       13,
-       17
-      ],
-      [
-       21
-      ]
-     ],
-     "frequency": 90.37
     }
    ]
   },
@@ -24822,33 +24853,35 @@
      "before": "",
      "after": "",
      "label": "article défini, pl. · pronom personnel, pl.",
-     "phonology": "le",
-     "steno": "mte",
+     "phonology": "lE",
+     "steno": "mtie",
      "strokes": [
       [
        6,
        7,
+       13,
        14
       ]
      ],
      "frequency": 8720.38
     },
     {
-     "ortho": "lé",
+     "ortho": "lait",
      "before": "le",
      "after": "",
      "label": "nom, m. sg.",
-     "phonology": "le",
-     "steno": "mt*e",
+     "phonology": "lE",
+     "steno": "mt*ie",
      "strokes": [
       [
        6,
        7,
        10,
+       13,
        14
       ]
      ],
-     "frequency": 2.28
+     "frequency": 59.41
     },
     {
      "ortho": "on",
@@ -24919,33 +24952,35 @@
      "before": "",
      "after": "",
      "label": "article indéfini, pl.",
-     "phonology": "de",
-     "steno": "pve",
+     "phonology": "dE",
+     "steno": "pvie",
      "strokes": [
       [
        4,
        5,
+       13,
        14
       ]
      ],
      "frequency": 6055.71
     },
     {
-     "ortho": "dé",
-     "before": "le",
+     "ortho": "dès",
+     "before": "",
      "after": "",
-     "label": "nom, m. sg.",
-     "phonology": "de",
-     "steno": "pv*e",
+     "label": "préposition",
+     "phonology": "dE",
+     "steno": "pv*ie",
      "strokes": [
       [
        4,
        5,
        10,
+       13,
        14
       ]
      ],
-     "frequency": 5.74
+     "frequency": 143.72
     },
     {
      "ortho": "en",
@@ -25057,10 +25092,10 @@
      "frequency": 5179.05
     },
     {
-     "ortho": "mets",
-     "before": "",
+     "ortho": "mes",
+     "before": "les",
      "after": "",
-     "label": "nom, m.",
+     "label": "nom, pl. · adjectif possessif · pronom possessif, pl.",
      "phonology": "mE",
      "steno": "m*ie",
      "strokes": [
@@ -25071,44 +25106,7 @@
        14
       ]
      ],
-     "frequency": 45.09
-    },
-    {
-     "ortho": "ai",
-     "before": "j'",
-     "after": "",
-     "label": "indicatif présent, 1re sg.",
-     "phonology": "E",
-     "steno": "ie/-k",
-     "strokes": [
-      [
-       13,
-       14
-      ],
-      [
-       18
-      ]
-     ],
-     "frequency": 4902.1
-    },
-    {
-     "ortho": "aie",
-     "before": "",
-     "after": "!",
-     "label": "impératif présent, 2e sg.",
-     "phonology": "E",
-     "steno": "*ie/-k",
-     "strokes": [
-      [
-       10,
-       13,
-       14
-      ],
-      [
-       18
-      ]
-     ],
-     "frequency": 58.62
+     "frequency": 1102.23
     },
     {
      "ortho": "nous",
@@ -25311,6 +25309,41 @@
       ]
      ],
      "frequency": 29.54
+    },
+    {
+     "ortho": "non",
+     "before": "le",
+     "after": "",
+     "label": "adjectif, m. sg. · adverbe · nom, m. · pronom personnel, sg.",
+     "phonology": "n§",
+     "steno": "mRai",
+     "strokes": [
+      [
+       6,
+       8,
+       12,
+       13
+      ]
+     ],
+     "frequency": 4040.18
+    },
+    {
+     "ortho": "nom",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg.",
+     "phonology": "n§",
+     "steno": "mR*ai",
+     "strokes": [
+      [
+       6,
+       8,
+       10,
+       12,
+       13
+      ]
+     ],
+     "frequency": 528.17
     }
    ]
   },
@@ -25556,33 +25589,35 @@
      "before": "",
      "after": "",
      "label": "article défini, pl. · pronom personnel, pl.",
-     "phonology": "le",
-     "steno": "mte",
+     "phonology": "lE",
+     "steno": "mtie",
      "strokes": [
       [
        6,
        7,
+       13,
        14
       ]
      ],
      "frequency": 8720.38
     },
     {
-     "ortho": "laie",
-     "before": "qu'il",
+     "ortho": "laid",
+     "before": "le",
      "after": "",
-     "label": "subjonctif présent, 3e sg.",
-     "phonology": "le",
-     "steno": "mte#",
+     "label": "adjectif, m. sg. · nom, m. sg.",
+     "phonology": "lE",
+     "steno": "mtie#",
      "strokes": [
       [
        6,
        7,
+       13,
        14,
        15
       ]
      ],
-     "frequency": 0.0
+     "frequency": 9.52
     },
     {
      "ortho": "on",
@@ -25647,6 +25682,41 @@
       ]
      ],
      "frequency": 0.06
+    },
+    {
+     "ortho": "des",
+     "before": "",
+     "after": "",
+     "label": "article indéfini, pl.",
+     "phonology": "dE",
+     "steno": "pvie",
+     "strokes": [
+      [
+       4,
+       5,
+       13,
+       14
+      ]
+     ],
+     "frequency": 6055.71
+    },
+    {
+     "ortho": "dais",
+     "before": "",
+     "after": "",
+     "label": "nom, m.",
+     "phonology": "dE",
+     "steno": "pvie#",
+     "strokes": [
+      [
+       4,
+       5,
+       13,
+       14,
+       15
+      ]
+     ],
+     "frequency": 0.23
     },
     {
      "ortho": "en",
@@ -25727,10 +25797,10 @@
      "frequency": 5179.05
     },
     {
-     "ortho": "mai",
+     "ortho": "mets",
      "before": "",
      "after": "",
-     "label": "nom, sg.",
+     "label": "nom, m.",
      "phonology": "mE",
      "steno": "mie#",
      "strokes": [
@@ -25741,44 +25811,7 @@
        15
       ]
      ],
-     "frequency": 24.34
-    },
-    {
-     "ortho": "ai",
-     "before": "j'",
-     "after": "",
-     "label": "indicatif présent, 1re sg.",
-     "phonology": "E",
-     "steno": "ie/-k",
-     "strokes": [
-      [
-       13,
-       14
-      ],
-      [
-       18
-      ]
-     ],
-     "frequency": 4902.1
-    },
-    {
-     "ortho": "hais",
-     "before": "je",
-     "after": "",
-     "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
-     "phonology": "E",
-     "steno": "ie#/-k",
-     "strokes": [
-      [
-       13,
-       14,
-       15
-      ],
-      [
-       18
-      ]
-     ],
-     "frequency": 31.21
+     "frequency": 45.09
     },
     {
      "ortho": "dans",
@@ -26228,10 +26261,10 @@
      "frequency": 12909.08
     },
     {
-     "ortho": "ait",
-     "before": "qu'il",
+     "ortho": "ais",
+     "before": "",
      "after": "",
-     "label": "subjonctif présent, 3e sg.",
+     "label": "nom, m.",
      "phonology": "e",
      "steno": "*e#",
      "strokes": [
@@ -26241,7 +26274,7 @@
        15
       ]
      ],
-     "frequency": 95.36
+     "frequency": 10.14
     },
     {
      "ortho": "à",
@@ -26340,6 +26373,78 @@
       ]
      ],
      "frequency": 3.26
+    },
+    {
+     "ortho": "les",
+     "before": "",
+     "after": "",
+     "label": "article défini, pl. · pronom personnel, pl.",
+     "phonology": "lE",
+     "steno": "mtie",
+     "strokes": [
+      [
+       6,
+       7,
+       13,
+       14
+      ]
+     ],
+     "frequency": 8720.38
+    },
+    {
+     "ortho": "lei",
+     "before": "les",
+     "after": "",
+     "label": "nom, m. pl.",
+     "phonology": "lE",
+     "steno": "mt*ie#",
+     "strokes": [
+      [
+       6,
+       7,
+       10,
+       13,
+       14,
+       15
+      ]
+     ],
+     "frequency": 0.8
+    },
+    {
+     "ortho": "des",
+     "before": "",
+     "after": "",
+     "label": "article indéfini, pl.",
+     "phonology": "dE",
+     "steno": "pvie",
+     "strokes": [
+      [
+       4,
+       5,
+       13,
+       14
+      ]
+     ],
+     "frequency": 6055.71
+    },
+    {
+     "ortho": "dey",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg.",
+     "phonology": "dE",
+     "steno": "pv*ie#",
+     "strokes": [
+      [
+       4,
+       5,
+       10,
+       13,
+       14,
+       15
+      ]
+     ],
+     "frequency": 0.02
     },
     {
      "ortho": "mais",
@@ -26616,6 +26721,40 @@
      "frequency": 0.55
     },
     {
+     "ortho": "ces",
+     "before": "",
+     "after": "",
+     "label": "adjectif démonstratif, pl.",
+     "phonology": "sE",
+     "steno": "sie",
+     "strokes": [
+      [
+       3,
+       13,
+       14
+      ]
+     ],
+     "frequency": 1222.51
+    },
+    {
+     "ortho": "saie",
+     "before": "la",
+     "after": "",
+     "label": "nom, f. sg.",
+     "phonology": "sE",
+     "steno": "s*ie#",
+     "strokes": [
+      [
+       3,
+       10,
+       13,
+       14,
+       15
+      ]
+     ],
+     "frequency": 0.04
+    },
+    {
      "ortho": "avez",
      "before": "vous",
      "after": "",
@@ -26652,6 +26791,44 @@
       ]
      ],
      "frequency": 0.07
+    },
+    {
+     "ortho": "été",
+     "before": "l'",
+     "after": "",
+     "label": "nom, m. sg. · participe passé, m. sg.",
+     "phonology": "e.te",
+     "steno": "e/te",
+     "strokes": [
+      [
+       14
+      ],
+      [
+       7,
+       14
+      ]
+     ],
+     "frequency": 1041.22
+    },
+    {
+     "ortho": "étaie",
+     "before": "qu'il",
+     "after": "",
+     "label": "subjonctif présent, 3e sg.",
+     "phonology": "e.te",
+     "steno": "e/t*e#",
+     "strokes": [
+      [
+       14
+      ],
+      [
+       7,
+       10,
+       14,
+       15
+      ]
+     ],
+     "frequency": 0.0
     },
     {
      "ortho": "tant",
@@ -26794,6 +26971,40 @@
      "frequency": 0.0
     },
     {
+     "ortho": "tes",
+     "before": "",
+     "after": "",
+     "label": "adjectif possessif",
+     "phonology": "tE",
+     "steno": "tie",
+     "strokes": [
+      [
+       7,
+       13,
+       14
+      ]
+     ],
+     "frequency": 690.24
+    },
+    {
+     "ortho": "têt",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg.",
+     "phonology": "tE",
+     "steno": "t*ie#",
+     "strokes": [
+      [
+       7,
+       10,
+       13,
+       14,
+       15
+      ]
+     ],
+     "frequency": 0.34
+    },
+    {
      "ortho": "quel",
      "before": "",
      "after": "",
@@ -26862,180 +27073,6 @@
       ]
      ],
      "frequency": 0.88
-    },
-    {
-     "ortho": "plaît",
-     "before": "il",
-     "after": "",
-     "label": "indicatif présent, 3e sg.",
-     "phonology": "plE",
-     "steno": "pmtie",
-     "strokes": [
-      [
-       4,
-       6,
-       7,
-       13,
-       14
-      ]
-     ],
-     "frequency": 499.91
-    },
-    {
-     "ortho": "plet",
-     "before": "le",
-     "after": "",
-     "label": "nom, m. sg.",
-     "phonology": "plE",
-     "steno": "pmt*ie#",
-     "strokes": [
-      [
-       4,
-       6,
-       7,
-       10,
-       13,
-       14,
-       15
-      ]
-     ],
-     "frequency": 0.0
-    },
-    {
-     "ortho": "air",
-     "before": "l'",
-     "after": "",
-     "label": "nom, m. sg.",
-     "phonology": "ER",
-     "steno": "ieR",
-     "strokes": [
-      [
-       13,
-       14,
-       21
-      ]
-     ],
-     "frequency": 473.5
-    },
-    {
-     "ortho": "ers",
-     "before": "",
-     "after": "",
-     "label": "nom, m.",
-     "phonology": "ER",
-     "steno": "*ie#R",
-     "strokes": [
-      [
-       10,
-       13,
-       14,
-       15,
-       21
-      ]
-     ],
-     "frequency": 0.45
-    },
-    {
-     "ortho": "coup",
-     "before": "le",
-     "after": "",
-     "label": "nom, m. sg.",
-     "phonology": "ku",
-     "steno": "k@e",
-     "strokes": [
-      [
-       2,
-       11,
-       14
-      ]
-     ],
-     "frequency": 389.49
-    },
-    {
-     "ortho": "coud",
-     "before": "il",
-     "after": "",
-     "label": "indicatif présent, 3e sg.",
-     "phonology": "ku",
-     "steno": "k*@e#",
-     "strokes": [
-      [
-       2,
-       10,
-       11,
-       14,
-       15
-      ]
-     ],
-     "frequency": 0.63
-    },
-    {
-     "ortho": "mort",
-     "before": "le",
-     "after": "",
-     "label": "adjectif, m. sg. · nom, m. sg. · participe passé, m. sg.",
-     "phonology": "mOR",
-     "steno": "meR",
-     "strokes": [
-      [
-       6,
-       14,
-       21
-      ]
-     ],
-     "frequency": 372.07
-    },
-    {
-     "ortho": "more",
-     "before": "",
-     "after": "",
-     "label": "adjectif, sg. · nom, sg.",
-     "phonology": "mOR",
-     "steno": "m*e#R",
-     "strokes": [
-      [
-       6,
-       10,
-       14,
-       15,
-       21
-      ]
-     ],
-     "frequency": 3.68
-    },
-    {
-     "ortho": "sous",
-     "before": "",
-     "after": "",
-     "label": "préposition",
-     "phonology": "su",
-     "steno": "s@e",
-     "strokes": [
-      [
-       3,
-       11,
-       14
-      ]
-     ],
-     "frequency": 315.49
-    },
-    {
-     "ortho": "soue",
-     "before": "la",
-     "after": "",
-     "label": "nom, f. sg.",
-     "phonology": "su",
-     "steno": "s*@e#",
-     "strokes": [
-      [
-       3,
-       10,
-       11,
-       14,
-       15
-      ]
-     ],
-     "frequency": 0.11
     }
    ]
   },
@@ -27051,34 +27088,40 @@
    "rules": [
     {
      "kind": "mark",
-     "text": "La marque *# *# (*, #) distingue ais (*e#/*#) de et (e)."
+     "text": "La marque *# *# (*, #) distingue let (mt*ie#/*#) de les (mtie)."
     }
    ],
    "words": [
     {
-     "ortho": "et",
+     "ortho": "les",
      "before": "",
      "after": "",
-     "label": "conjonction",
-     "phonology": "e",
-     "steno": "e",
+     "label": "article défini, pl. · pronom personnel, pl.",
+     "phonology": "lE",
+     "steno": "mtie",
      "strokes": [
       [
+       6,
+       7,
+       13,
        14
       ]
      ],
-     "frequency": 12909.08
+     "frequency": 8720.38
     },
     {
-     "ortho": "ais",
+     "ortho": "let",
      "before": "",
      "after": "",
-     "label": "nom, m.",
-     "phonology": "e",
-     "steno": "*e#/*#",
+     "label": "adjectif",
+     "phonology": "lE",
+     "steno": "mt*ie#/*#",
      "strokes": [
       [
+       6,
+       7,
        10,
+       13,
        14,
        15
       ],
@@ -27087,7 +27130,7 @@
        15
       ]
      ],
-     "frequency": 10.14
+     "frequency": 3.56
     },
     {
      "ortho": "mais",
@@ -27780,46 +27823,6 @@
      "frequency": 0.3
     },
     {
-     "ortho": "lait",
-     "before": "le",
-     "after": "",
-     "label": "nom, m. sg.",
-     "phonology": "lE",
-     "steno": "mtie",
-     "strokes": [
-      [
-       6,
-       7,
-       13,
-       14
-      ]
-     ],
-     "frequency": 59.41
-    },
-    {
-     "ortho": "lai",
-     "before": "le",
-     "after": "",
-     "label": "adjectif, m. sg. · nom, m. sg.",
-     "phonology": "lE",
-     "steno": "mt*ie#/*#",
-     "strokes": [
-      [
-       6,
-       7,
-       10,
-       13,
-       14,
-       15
-      ],
-      [
-       10,
-       15
-      ]
-     ],
-     "frequency": 1.04
-    },
-    {
      "ortho": "mur",
      "before": "le",
      "after": "",
@@ -28026,6 +28029,46 @@
       ]
      ],
      "frequency": 0.01
+    },
+    {
+     "ortho": "sein",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg.",
+     "phonology": "s5",
+     "steno": "saie",
+     "strokes": [
+      [
+       3,
+       12,
+       13,
+       14
+      ]
+     ],
+     "frequency": 16.93
+    },
+    {
+     "ortho": "seing",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg.",
+     "phonology": "s5",
+     "steno": "s*aie#/*#",
+     "strokes": [
+      [
+       3,
+       10,
+       12,
+       13,
+       14,
+       15
+      ],
+      [
+       10,
+       15
+      ]
+     ],
+     "frequency": 0.01
     }
    ]
   },
@@ -28041,10 +28084,54 @@
    "rules": [
     {
      "kind": "mark",
-     "text": "La marque *# *# *# (*, #) distingue ho (*ae#/*#/*#) de au (ae)."
+     "text": "La marque *# *# *# (*, #) distingue lez (mt*ie#/*#/*#) de les (mtie)."
     }
    ],
    "words": [
+    {
+     "ortho": "les",
+     "before": "",
+     "after": "",
+     "label": "article défini, pl. · pronom personnel, pl.",
+     "phonology": "lE",
+     "steno": "mtie",
+     "strokes": [
+      [
+       6,
+       7,
+       13,
+       14
+      ]
+     ],
+     "frequency": 8720.38
+    },
+    {
+     "ortho": "lez",
+     "before": "",
+     "after": "",
+     "label": "préposition",
+     "phonology": "lE",
+     "steno": "mt*ie#/*#/*#",
+     "strokes": [
+      [
+       6,
+       7,
+       10,
+       13,
+       14,
+       15
+      ],
+      [
+       10,
+       15
+      ],
+      [
+       10,
+       15
+      ]
+     ],
+     "frequency": 0.36
+    },
     {
      "ortho": "au",
      "before": "",
@@ -28250,50 +28337,6 @@
       ]
      ],
      "frequency": 0.07
-    },
-    {
-     "ortho": "lait",
-     "before": "le",
-     "after": "",
-     "label": "nom, m. sg.",
-     "phonology": "lE",
-     "steno": "mtie",
-     "strokes": [
-      [
-       6,
-       7,
-       13,
-       14
-      ]
-     ],
-     "frequency": 59.41
-    },
-    {
-     "ortho": "lez",
-     "before": "",
-     "after": "",
-     "label": "préposition",
-     "phonology": "lE",
-     "steno": "mt*ie#/*#/*#",
-     "strokes": [
-      [
-       6,
-       7,
-       10,
-       13,
-       14,
-       15
-      ],
-      [
-       10,
-       15
-      ],
-      [
-       10,
-       15
-      ]
-     ],
-     "frequency": 0.36
     },
     {
      "ortho": "bite",
