@@ -20,6 +20,14 @@ docs in `docs/PIPELINE.md` S8.10. Open items, most important first:
   Publish with `python -m util.sync_plover_mirror <clone> --push` after `export_expression_data` (mirror at `bffad81`, 2026-10-04; a pip install from it was checked in a scratch folder). Remaining: test the install in the real Plover
   (`plover_plugins install git+https://github.com/jf5pier/stenalgo-plover` with `PYTHONUSERBASE`, `--force-reinstall` on a same-version reinstall) and edit the existing `plover.cfg` dictionary list of the Stenalgo system (the
   defaults apply only to a config with no list of its own; Plover closed, ask first); bump `version` on every theory change.
+- **Clean-profile test of the Plover plugin install (2026-10-04, for another time).** Check that a first-time user gets working dictionaries without hand-editing `plover.cfg`: install only
+  `git+https://github.com/jf5pier/stenalgo-plover` into a fresh Plover config (a spare Windows user, or an empty config directory; read how Plover 5.4.1 picks its config folder first), switch
+  to the "Stenalgo French" system, and check in `plover.log` that the four default dictionaries load (`user.json`, `commands.json`, then the packaged expressions above the packaged stock JSON) with no
+  invalid-steno or fingerprint errors. Also check: the English-system trap (dictionaries loaded before the system switch gave 171k invalid-steno errors), the machine (Gemini PR) and keymap steps a new user
+  still does by hand, and that a GUI dictionary-list edit freezes an explicit list that later plugin updates do not change. Then write the first-time install section of the mirror README (plugin install,
+  choose the system, choose the machine) and add it through `util.sync_plover_mirror`. Verified so far only on the existing profile: removing the `dictionaries =` line of the system section made
+  the defaults apply.
+
 - **Briefs out of the `.stenalgo` file into their own `.json` for Plover.** The 40 forced briefs (and the selected briefs) are plain outline -> text entries, so a stock JSON dictionary can hold them: the
   decoder needs them only to recognise a brief as a reading, the plugin does not need to compose them. To do: export them (outline in RTFCRE, written text) as `plover_stenalgo_briefs.json` next to the
   stock dictionary, drop `rules.briefs` from the `.stenalgo` data, load them into the decoder's content index from that file (with its own fingerprint, like the word index) or leave them to Plover's own lookup
