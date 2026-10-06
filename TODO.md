@@ -46,6 +46,145 @@ docs in `docs/PIPELINE.md` S8.10. Open items, most important first:
 - The 5,000-word probability cut (`UNIT_PROBABILITY_WORDS`) was measured on the committed rules (`scratch/rank_static_rule.py`: 0.17% of the contested open-set mass changes winner); re-measure
   after a rule-set change. `docs/GLOSSARY.md` has duplicated entries in the expression-layer section ("Decoder (expression layer)", "Key conflicts"), a merge leftover to clean.
 
+## Branch TODO — complementary Plover plugins and commands for the base theory (abbreviations branch, 2026-10-05)
+
+- **Review what the Plover ecosystem offers.** Survey the popular plugins and `commands.json` files (Plover's stock `commands.json`, `main.json`/`user.json` conventions, Lapwing, Plover Plugins Registry, and the dictionary-adjacent
+  plugins: plover-stroke / plover-dict-commands / plover-last-translation / plover-emoji / plover-number-format and the like) and rank them by popularity and by how well they complement a base theory.
+  Output: a short report (e.g. `docs/PLOVER_COMPLEMENTS.md`) listing, per candidate, what it adds, whether it depends on key positions, and whether it fits the Stenalgo French system.
+- **Minimum gaps in Stenalgo today** (the shipped dictionaries cover words and expressions only; `commands.json` is whatever the user brings): punctuation (with the French spacing rules: space before `: ; ? !`, none before `, .`, guillemets),
+  alphanumeric characters (letters, fingerspelling, capitals, digits and number mode; `NUMBER_KEY = None` in `plover_stenalgo/system.py` means no number key exists), special keyboard keys (Return, Tab, Escape, BackSpace, Delete,
+  Home/End, Page_Up/Page_Down, arrows, F1-F12) and their combos (`{#Control_L(Left)}`, `{#Control_L(c)}`, `{#Alt_L(Tab)}`, ...).
+- **Layout dependence.** Many stock entries are written for the Ireland (Plover default) key layout, so their RTFCRE outlines (`-PL`, `STPH-`...) hit different physical keys in the Stenalgo layout (`_generated_keys.py`, `GEMINI_PR_KEYMAP`).
+  Investigate what is needed to convert them: classify each entry as (a) layout-independent (the output side, e.g. `{#Return}`, kept as is), (b) outline-dependent (must be re-assigned a Stenalgo stroke), or (c) mnemonic-dependent
+  (letters/steno-order meaning lost), then design the conversion: a mapping from the Ireland key to the Stenalgo key per entry kind, a collision check against the existing theory (reuse `src/keyconflicts.py` and the attach/selector keys),
+  and a generator (`util/export_*`, output into the plugin's dictionaries, fingerprint-checked like the others). Decide the French-specific conventions at the same time (accented letters, AZERTY vs QWERTY effect of `{#...}` combos:
+  Plover sends key names, so check the keys meant by `Control_L(c)` on an AZERTY/Bépo host).
+- **Fit with the other TODOs.** Decide whether these entries ship in `user.json`/`commands.json` defaults of the system (`DEFAULT_DICTIONARIES` in `plover_stenalgo/system.py`) or as a new packaged dictionary, and keep the stroke budget
+  in mind: they must not take outlines already used by words or expression briefs (run the ambiguity checks after adding them).
+
+## Branch TODO — compare docs/GLOSSARY.md with the grahp.dev steno glossary (abbreviations branch, 2026-10-05)
+
+- **Reference to add.** `https://grahp.dev/steno-glossary` ("A glossary of steno terms I've made", unnamed author, ~80 terms, **CC BY-SA 4.0**). Add it to `docs/PRIOR_ART.md` (survey of existing theories and systems) and to the README `## References` list
+  (README lists numbered references `[1]`-`[3]` today, all papers; add the next number with title, URL and access date). Note the licence: reusing its wording needs attribution and share-alike, so prefer citing and comparing over copying definitions.
+- **Compare, term by term.** Its terms, as read from the page: Key, Chord, Stroke, Outline; Translation, Command, Untran, Entry, Dictionary, Lookup, Reverse Lookup; Generated, Programmatic, Modal, JSON Dictionary; Theory Rule, Theory, Long, Short,
+  Phonetic, Orthographic, Full-English, Hobbyist, Professional; Conflict, Conflict Resolution, Word Boundary, Word-affix, Homophonic, Proper Noun; Writing, Write-out, Brief, Misstroke, Arbitrary, Phrase, Shorten, Mandatory, Vestige, Raw Steno;
+  Steno Order, Layout, WSI Layout, Extended Stenotype Layout, Steno Writer/Machine/Keyboard, NKRO, QWERTY, WPM; Steno Engine, Plover, Javelin, Embedded, System, Text Input System; Chorded, Serial; Bank, Initial, Vowel, Final, Skeleton, Label, Merge;
+  Fingerspelling, Orthospelling, Shrimple, Unique, Dedicated, Realtime, Undo Stack. Method: read the page in full (the list above is a summary), and for each term mark it as (a) already in `docs/GLOSSARY.md` with a compatible meaning,
+  (b) in the Stenalgo glossary under a different name or a different meaning, (c) missing from ours, (d) not relevant (hardware, engines).
+- **Deliverable: a list of suggested corrections and additions**, not an automatic edit, for the user to decide (the glossary's terminology was settled in the Glossary Review, Pass 1d: do not re-litigate it without cause). Likely candidates to check:
+  *Brief*, *Conflict*/*Conflict Resolution* vs our ambiguity and disambiguation vocabulary, *Homophonic* vs our same-lemma / different-lemma homophones, *Long*/*Short* vs our long form and abbreviations, *Word-affix* vs the S9 affix rules,
+  *Phonetic*/*Orthographic* theory, *Misstroke*, *Untran*, *Shrimple*, *Mandatory*, *Vestige*, *Skeleton*, *Bank*/*Initial*/*Vowel*/*Final* vs our onset/nucleus/coda, *Steno Order*, *Layout* (vs the Starboard layout), *Realtime*.
+  Where Stenalgo uses a community term in another sense, flag the clash in the glossary ("avoid"/"not to be confused with") rather than renaming. Also check that our docs use the community terms for the Plover-facing parts (S8, the plugin, the README).
+- **Verify.** Doc-only change; if any term in `docs/GLOSSARY.md` is renamed or added, grep the docs and code comments for the old term, and run `pytest src/test/` only if a test checks the glossary.
+
+## Branch TODO — stand-alone brief suggestor for personal Plover dictionaries (abbreviations branch, 2026-10-05)
+
+- **Goal.** A tool for a user who wants to add their own brief to a personal `user.json`: type a word (or phrase), get several candidate brief strokes, each shown with the long form (the full-word outline from the published theory)
+  so the learner sees what the brief shortens. First target: the Elm trainer website (static, no server). Check whether that is feasible; fall back to a small stand-alone page or a CLI (`python -m util.suggest_brief WORD`) sharing the same algorithm.
+- **Limit by design.** It knows only the published Stenalgo theory (the data the trainer already loads: `practice-words.json`, `definitions.json`, `keyboard-layout.json`, the affix and expression JSONs). It cannot see the user's own `user.json`,
+  so it cannot detect conflicts with the user's entries: say so on the page, and offer an optional "paste your dictionary JSON" box that checks the candidates locally in the browser (nothing uploaded) as a later step.
+  It must still avoid conflicts with the published theory (words, affix abbreviations, expression briefs): look the candidate up in those data and drop or flag collisions, reusing the key-conflict rules (`src/keyconflicts.py`, the overlap rule of the max-1-key section above).
+- **Word known to the dictionary.** Take its long form (phonetic outline and strokes) and propose briefs by **phoneme overlap with the original**: keep the stressed/onset-and-coda skeleton in one stroke, drop unstressed syllables, try prefix/suffix
+  forms, ranked by how many phonemes survive in order and by finger cost (`FingerWeights`/`PositionWeights` in `src/keyboard.py`). Study what `deriveBriefStroke` (`src/expressionrules.py`) and the affix rules (`docs/AFFIX_DESIGN.md`) already do,
+  so the suggestions follow the same conventions as the shipped briefs; the algorithm should be ported to Elm or precomputed (decide: precompute per-word candidates into a trainer JSON, which is simple but large for 167,639 Words, versus a small Elm port working from the stroke data).
+- **Word new to the dictionary.** No phonetics available: use a **simple spelling heuristic** (grapheme-to-phoneme rules for French, e.g. the common digraphs `ou`, `on`, `ch`, `qu`, `eau`, silent final letters, `gn`) to guess a rough phoneme string, then run the same overlap procedure
+  and show the guessed long form, clearly labelled "guessed". Consider reusing the lexicon builder's or the Synthetic lexicon's phonetizer if one exists (`util/completeVerbParadigms.py`, S2 appenders) and measure the heuristic on known words (accuracy of guessed vs real phonemes) to set expectations.
+- **Output.** For each candidate: the brief stroke (keys highlighted on the Starboard picture, as in the trainer's keyboard view), the long form beside it, the length saved, and a copy-ready JSON line `"BRIEF": "word"` for `user.json`, plus a reminder that the user's dictionary
+  priority decides which entry wins. Several suggestions per word (e.g. 3 to 5), not a single answer.
+- **Verify.** Run the suggestor over the shipped briefs and affix abbreviations and check that it would have proposed (or ranked high) the real ones; pytest for the Python reference, an Elm test for the port; no pipeline rebuild unless a precomputed JSON is chosen (then add it to the exporter list and the md5 comparison).
+
+## Branch TODO — publish the Starboard layout as an SVG for plover_svg_layout_display (abbreviations branch, 2026-10-05)
+
+- **Target plugin** (`github.com/opensteno/plover_svg_layout_display`, MIT): it shows the last stroke on a custom picture. Per its README a layout is two files, settings being saved per steno system (`Ctrl+S` in the display window):
+  an **SVG** whose top-level `<g>` elements each have a unique `id`, and a **Python script** with `def convert_stroke(stroke: Tuple[str, ...], translation: str) -> List[str]` returning the ids of the shapes to draw (in order, later ones on top).
+  The default is `:/svgld/en_layout.svg` + `:/svgld/en_convert.py`; the layout and script paths are typed in the settings. The README does not say how a third-party system ships its layout.
+- **Still to search/read** (the README is thin): the plugin's source (how `stroke` is passed: RTFCRE keys of the active system? `translation` use?), its default `en_layout.svg` / `en_convert.py` as a model, the Plover plugin registry
+  entry, open issues about custom systems, and whether other systems (Lapwing, Emily's modifiers) already publish layouts for it.
+- **Design.** A generator `util/export_svg_layout.py` from `starboard3h.json` (via `src/keyboard.py` / `Starboard`, the same source as `util.export_plover_system` and `util.export_keyboard_layout`): one `<g id="key-<name>">` per
+  key of `KEYS` (`_generated_keys.py`) placed at the Starboard's physical positions (reuse the geometry the trainer's `keyboard-layout.json` already has), each labelled with its phoneme and, where useful, coloured by finger;
+  a base shape plus a lit variant per key; the star/hash/attach keys marked as in the realization-report legend. The generated `convert_stroke` maps the stroke's RTFCRE keys (as `plover_stenalgo/stroke.py` `parseStroke` reads them,
+  with `IMPLICIT_HYPHEN_KEYS`) to the lit-key ids, stdlib-only. Outputs: `stenalgo_layout.svg` + `stenalgo_convert.py`, and a check that the id set equals `KEYS` so a layout change cannot leave them stale (a test, like the `_core` staleness test).
+- **Evaluate where it lives.** Ship in the plugin package (`plover_stenalgo/plover_stenalgo/`, next to the dictionaries; `export_plover_plugin` copies them, the sync to the `stenalgo-plover` mirror carries them) with a README section: "in the SVG
+  Layout Display settings set the layout path to ... and the script path to ...", locating the installed files (the plugin's `site-packages` path, or a one-line `python -c` that prints it). Compare with a separate download/documented
+  location and with offering it as a PR to the display plugin's own layouts. Check that the paths accept absolute file paths on Windows (the Plover install is on Windows, see the install memory note) and that the `:/svgld/` resource form is not needed.
+- **Verify.** Load it in Plover 5.4.1 with the Stenalgo system, stroke a few chords (including `*`/`#` marks and two-stroke words) and compare with the trainer's keyboard view; add a pytest for the generator and mypy; no pipeline rebuild (layout-only output, rerun after an adopted layout change).
+
+## Branch TODO — trainer input mode: keyboard or Plover (abbreviations branch, 2026-10-05)
+
+- **Goal / UI.** Let the learner choose the trainer's input: the connected keyboard (Web Serial, Gemini PR: `steno-trainer/js/serial.js`, `src/Ports.elm`, `src/GeminiPr.elm`, `Main.elm` `IncomingBytes`)
+  or Plover typing into a text field. The mode switch is remembered in localStorage. In Plover mode the trainer shows a focused text field and compares the produced text to the expected word.
+  Weakness: text shows only the translation, not the strokes, so a right text from wrong strokes, abbreviations and undo are invisible; hence the two investigations below.
+- **INVESTIGATE — a Plover extension that emits the strokes.** `plover_stenalgo` is a pure dictionary plugin (entry points `plover.system` and `plover.dictionary` only): it subscribes to no engine hook and cannot observe strokes.
+  Add a `plover.extension` entry point (class with `__init__(engine)`, `start`, `stop`) using `engine.hook_connect('stroked', ...)` (the stroke's keys / RTFCRE) and `'translated'` (old/new translations, undo).
+  Check: the hook signatures in the installed Plover 5.4.1, whether `stroked` fires for the undo stroke `*`, the behaviour when the Stenalgo system is not the active one, and that the extension loads on the Windows install (see the Plover install memory note).
+- **INVESTIGATE — transport from the extension to the trainer.** (a) A local WebSocket server inside the extension; the trainer page connects to `ws://localhost:PORT` (check mixed content, CORS/origin, port conflicts; compare with the existing plover-websocket-server plugin).
+  (b) Localhost HTTP with SSE or polling. (c) No transport: the extension types a tagged sentinel into the focused field (fragile, pollutes the text). (d) Clipboard or file (awkward). Prefer (a).
+  Message: `{"keys": [ids], "rtfcre": "...", "undo": bool}`, using the key ids already shared through `_generated_keys.py` / `plover_stenalgo/stroke.py` `parseStroke`, so the trainer needs no re-mapping.
+- **Trainer side.** A new port `incomingStroke` plus a small `js/plover.js` WebSocket client (reconnect, status like `serialStatus`); the message becomes the `Set Int` that `Drill.applyStroke` already takes.
+  The Gemini PR path stays untouched. Without the extension, the text-field mode falls back to comparing the text only.
+- **Verification once built.** A pytest for the extension's message builder (stdlib-only, tested like `_core`), an Elm test for the port decoder, `mypy` clean, `util.export_plover_plugin` refreshed, a manual run
+  with real Plover and the trainer in Chromium and Firefox. No pipeline rebuild: the theory does not change.
+
+## Branch TODO — trainer lessons: focus or recap switch (abbreviations branch, 2026-10-05)
+
+- **Goal.** Each lesson gets a switch between two practice modes: **focus** (only the current lesson's words) and **recap** (a 50-50% mix: half current-lesson words, half words drawn from the previous lessons).
+  The mode is remembered in localStorage, like the other trainer preferences.
+- **To settle.** How the recap half is drawn (uniformly over all previous lessons, or weighted toward recent ones or toward words the learner missed); behaviour on the first lesson (no previous words: the switch is disabled or falls back to focus);
+  whether it applies to the affix and expression lesson tracks too (`affix-lessons.json`, `expression-lessons.json`) or only to the base lessons (`lessons.json`).
+- **Where.** Trainer side only (Elm: the lesson/drill word selection in `steno-trainer/src`, plus the switch in the lesson view); `util/export_lessons.py` already writes per-lesson words, so check that the previous lessons' words are reachable
+  from the JSON before adding any export field. No pipeline rebuild if the selection stays in Elm; add an Elm test for the 50-50 mix.
+
+## Branch TODO — trainer Definitions page: attach words and composed attach words (abbreviations branch, 2026-10-05)
+
+- **Goal.** The trainer's "Definitions" page (`steno-trainer/public/data/definitions.json`, `util/export_definitions.py`) should also present the **attach words** (the particles written as an attach keypress on a host:
+  `de`, `la`, `le`, `les`, `par`, `et`, `sur`...) and the **composed attach words** (several particles chained, e.g. `de la peau`, `sur le sol`), not only the dictionary words and the affix "Abbrev." column (S9d).
+- **Information per entry.** The long form (the plain outline(s) that write the words out), the shortest form (the attach/abbreviated outline the expression layer produces), and the homophones as usual (the page's existing homophone presentation).
+- **To settle.** Which entries to list (every attach rule of `scratch/expr-rules-final.json`, or only those that occur in the expression lessons; composed ones from the pool of `expr_candidates.tsv` or from the composer's output);
+  how a composed entry is keyed and searched (by its words, like a phrase); how the attach host is shown (a rule can need a host: the `noNeighbour` / hostless case, `docs/PIPELINE.md` S8.10);
+  whether the shortest form depends on the host (then show a representative one, or one per host class).
+- **Where.** Python side: a new exporter or a section of `util/export_definitions.py` / `util/export_expression_lessons.py` reading the same inputs as the expression layer (both pickles, `starboard3h.json`, the committed expression rule set, `plover_stenalgo_dictionary.json`), output next to the other trainer JSONs; Elm side: the Definitions view.
+  Reuse the expression composer so the shown shortest form equals what the Plover plugin emits. Rebuild and compare the md5s of the trainer JSONs other than the new one (they must stay identical), `pytest src/test/` and `mypy` clean.
+
+## Branch TODO — a Dosh/Taipo-style chorded French typing layer on the Starboard (abbreviations branch, 2026-10-05)
+
+- **Idea (user).** Use the Starboard as a plain chorded keyboard for French letters, symbols and control keys, with the left half of the keyboard defining the chords and the right half mirroring it
+  (hands alternate, as in Taipo/Dosh). Non-modal French letters: `é è ê à â ç ù`. Every other accented letter is built with a modal dead key `^` `¨` `` ` `` if needed. No dedicated `œ` key. This would also answer the open fingerspelling
+  point of `docs/PLOVER_COMPLEMENTS.md` (what the French theory uses to select a letter), and the letter selector of Emily's/Jeff's modifiers.
+- **Survey so far (2026-10-05, thin).** Dosh (<https://www.davidb.org/post/2026/dosh/>): an 18-key chording layout (9 keys per hand, fully symmetric halves, free hand alternation including double letters), built for the Taipo system
+  (<https://www.davidb.org/post/2024/taipo/>, not read yet): modifiers are Taipo's, on same-finger vertical pairs; 19 of the 26 letters are shared with Taipo; punctuation and digits follow the Posh layout (<https://inkeys.wiki/en/keymaps/posh>, not read);
+  the author measured chord times with a drill app and moved the apostrophe off a two-finger-both-thumbs chord (1330 ms average) to a single chord. The full cheat sheet is `DOSH.md` in the author's firmware repository (not read), the implementation is one file.
+  A search for other chording layouts only turned up Georgi (QMK chord engine), QMK combos, Half-QWERTY and ASETNIOP; nothing equivalent for French.
+- **To do.** (1) Read the Taipo and Posh pages and `DOSH.md`; check the Dosh licence before reusing chords (cite, do not copy). (2) Count the Starboard keys per half and which fingers can chord (the pinky-square rule of `src/keyconflicts.py`
+  forbids diagonals and three-key pinky presses, which Dosh also avoids by dropping the upper pinky key), and what the thumbs offer. (3) Frequency-rank the French characters (letters, `é è ê à â ç ù`, space, `, . ' - ? ! : ;`, digits, the control keys) from the corpora
+  already in `resources/` and assign chords by comfort, the way the layout solver weighs finger strain (S4); this is a new CP-SAT model or a hand design. (4) Dead keys: `^` `¨` `` ` `` as one-shot modifiers composing with a vowel (`ê`, `ï`, `ù`...);
+  decide whether `œ` and `æ` are then typed with no key of their own (`o` + `e` stroked in sequence, or a Plover entry). (5) Layer switching with the steno theory (a chord on a reserved key such as `&` or `%`, to be checked against the word theory with `src/keyconflicts.py`).
+  (6) Output as a firmware layer or a Plover dictionary; the static-JSON route keeps Plover's reverse lookup, firmware does not need Plover. (7) A drill in the trainer (a new lesson track) with the timing capture that Dosh used.
+- **Open.** Whether a typing layer belongs in Stenalgo at all, or only the symbol/control-key subset (which is the minimum gap of `docs/PLOVER_COMPLEMENTS.md`); how the mirrored half interacts with the star/hash keys.
+
+## Branch TODO — Plover system plugin: more machine protocols (abbreviations branch, 2026-10-05)
+
+- **Today.** `plover_stenalgo/system.py` has `KEYMAPS["Gemini PR"]` only, generated into `_generated_keys.py` (`GEMINI_PR_KEYMAP`) by `util/export_plover_system.py`.
+  Plover picks the keymap by the machine's name, so any other machine has no mapping.
+- **Add `KEYMAPS["Plover HID"]`** (machine from the `plover-machine-hid` plugin; the keyboard firmware side is in `docs/QMK_STARBOARD_TODO.md`, section B). Check that the plugin's key names are the Ireland names
+  of Gemini PR; if so the map is the same table, otherwise derive it. The 26 extra `X1`-`X26` keys have no Stenalgo role yet: leave unmapped, or use them for the typing layer.
+- **Review the other machines Plover offers** (the English Stenotype system lists, as far as I remember, `Keyboard`, `Passport`, `Stentura`, `TX Bolt`, `Treal` besides `Gemini PR`; check Plover 5.4.1):
+  `Keyboard` (QWERTY, NKRO) is worth a map as a no-hardware way to try the theory (also give `Keyboard` a printable key layout, e.g. in `docs/`); `TX Bolt` carries only 24 keys, fewer than Stenalgo's 22 phoneme keys plus `*`, `#`, `&`, `%`,
+  so it can only work for a subset and probably not at all; the others by key count. Decide per machine: map, document as unsupported, or skip.
+- **Generator and tests.** Extend `util/export_plover_system.py` to write one table per supported machine from `starboard3h.json`, keep `_generated_keys.py` as the single source, add a test that every mapped machine
+  key resolves to a Stenalgo key and that none is mapped twice; `util.export_plover_plugin` and `util.sync_plover_mirror` must carry the change (the install-source repository), and the plugin version bumps.
+- **Trainer follow-up (separate TODO above).** A Plover HID board needs a WebHID reader besides `serial.js` / `GeminiPr.elm`.
+- **No pipeline rebuild.** The theory, dictionaries and trainer data do not change; check `pytest src/test/` (the `_core` copy test) and `mypy`.
+
+## Branch TODO — clean up the stray MD files (abbreviations branch, 2026-10-05)
+
+- **Inventory.** The repo root holds about 20 working-note files next to the real docs (`README.md`, `CLAUDE.md`, `TODO.md`, `ROADMAP.md`): the dated `RESUME_*`, `PLAN_*`, `RESULTS_*`, `NOTES_*`, `QUESTIONS_*`, `PERF_*` files,
+  plus `affix_selection_speedup_notes.md`, `affix_rules_report.md` (a generated report), `Tao.md` and `birds.md`. Others lie in `scratch/` (`affix-H-*.md`) and untracked in `tmp/affix_golden/*_report.md`.
+  `docs/history/` already exists for the finished ones (affix work, 2026-09-25 to 10-01) and `docs/specs/` for the living specs.
+- **Triage each file** into: (a) still live, referenced by `TODO.md`, `CLAUDE.md` or the docs (e.g. the `RESULTS_`/`RESUME_2026-10-04-decoder-...` files cited under "Expression decoder"): keep, or fold into `docs/` and fix the references;
+  (b) finished: `git mv` into `docs/history/`; (c) superseded or generated: delete (`affix_rules_report.md` is rebuilt by `util.build_affix_rules`; check whether it must stay tracked); (d) unrelated (`Tao.md`, `birds.md`): ask the owner.
+- **Keep references intact.** `grep -rn` every moved or removed name across `*.md`, `*.py` and tests before touching it, and fix the links; run `pytest src/test/` and `mypy` after, since some tests may read these paths.
+- **Untracked clutter** (`tmp/`, `out`, `sorties/`, `notes.txt`, ...) is out of scope except the `*_report.md` files in `tmp/`; list the rest for a separate decision.
+
 ## Branch TODO — expression families and selector collapse (abbreviations branch, 2026-10-03)
 
 - Decide the family merge (`FAMILY_MERGE=1` in `scratch/select_expression_rules.py`, opt-in, measured worse): revert, keep `un`/`une` only, or improve
