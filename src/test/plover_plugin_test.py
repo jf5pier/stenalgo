@@ -66,6 +66,28 @@ class TestVendoredCore(unittest.TestCase):
         self.assertEqual(done.returncode, 0, done.stderr)
 
 
+class TestMachineKeymaps(unittest.TestCase):
+    """`system.KEYMAPS` names a machine's keys for every supported protocol."""
+
+    HID_KEYS = {"S1-", "T-", "K-", "P-", "W-", "H-", "R-", "A-", "O-", "*1", "-E", "-U", "-F", "-R", "-P", "-B", "-L",
+                "-G", "-T", "-S", "-D", "-Z", "#1", "S2-", "*2", "*3", "*4", "#2", "#3", "#4", "#5", "#6", "#7", "#8",
+                "#9", "#A", "#B", "#C"} | {f"X{i}" for i in range(1, 27)}     # plover-machine-hid STENO_KEY_CHART
+
+    def test_gemini_pr_and_plover_hid_cover_every_key_once(self) -> None:
+        sys.path.insert(0, str(PLUGIN))
+        try:
+            import importlib
+            system = importlib.import_module("plover_stenalgo.system")
+        finally:
+            sys.path.remove(str(PLUGIN))
+        for machine in ("Gemini PR", "Plover HID"):
+            keymap = system.KEYMAPS[machine]
+            self.assertEqual(set(keymap), set(system.KEYS), machine)
+            labels = list(keymap.values())
+            self.assertEqual(len(labels), len(set(labels)), f"{machine}: a machine key is mapped twice")
+        self.assertLessEqual(set(system.KEYMAPS["Plover HID"].values()), self.HID_KEYS)
+
+
 class TestPackagedAssets(unittest.TestCase):
     """The data travels inside the plugin package: system.DEFAULT_DICTIONARIES names it as asset URIs."""
 

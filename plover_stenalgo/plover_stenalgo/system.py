@@ -12,10 +12,11 @@ install into a real Plover.
 No new Plover *machine* plugin is needed: Gemini PR is just a fixed-bit-position
 wire format whose built-in machine plugin's internal (Ireland-named) labels get
 remapped to these key names by `KEYMAPS["Gemini PR"]`, entirely through Plover's
-own config -- see the "one more thing on flickering llama" plan for the research
-behind this design.
+own config. The same holds for the "Plover HID" machine (the `plover-machine-hid` plugin,
+which the user installs separately): `KEYMAPS["Plover HID"]` -- see the "one more thing on flickering llama" plan for the
+research behind this design.
 """
-from ._generated_keys import GEMINI_PR_KEYMAP, IMPLICIT_HYPHEN_KEYS, KEYS
+from ._generated_keys import GEMINI_PR_KEYMAP, IMPLICIT_HYPHEN_KEYS, KEYS, PLOVER_HID_KEYMAP
 
 SUFFIX_KEYS: tuple[str, ...] = ()
 
@@ -34,6 +35,7 @@ ORTHOGRAPHY_WORDLIST: str | None = None
 
 KEYMAPS: dict[str, dict[str, str | tuple[str, ...]]] = {
     "Gemini PR": dict(GEMINI_PR_KEYMAP),
+    "Plover HID": dict(PLOVER_HID_KEYMAP),
 }
 
 # The theory ships inside this package (`dictionaries/`, copied by `python -m util.export_plover_plugin`). Plover

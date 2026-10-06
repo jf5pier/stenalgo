@@ -34,6 +34,13 @@ GEMINI_PR_LABELS: tuple[str, ...] = (
     "-F", "-R", "-P", "-B", "-L", "-G", "-T", "-S", "-D", "-Z",  # 16-25: coda
 )
 
+# The "Plover HID" machine (plugin `plover-machine-hid`, QMK `PLOVER_HID_ENABLE`) names its keys like Gemini PR
+# (`S1-`..`-Z`, `*1`-`*4`, `#1`-`#9`, `#A`-`#C`, plus `X1`-`X26`), so the same labels apply. NOT sniffed yet: the Gemini
+# labels above were read off the wire, whereas the HID bit of each QMK steno keycode is fixed by the firmware, so
+# keys 0, 1, 2, 10 (`#A #B #C #1` under Gemini) and 15 (`*4`) must be re-checked on the reflashed board (press each key
+# alone with the Stenalgo system and the Plover HID machine active: the paper tape must show `&`, `%`, `k`, `*`, `#`).
+PLOVER_HID_LABELS: tuple[str, ...] = GEMINI_PR_LABELS
+
 
 def main() -> None:
     starboard = Starboard.fromJSONFile(KEYBOARD_JSON)
@@ -45,6 +52,7 @@ def main() -> None:
         names[i] for i in starboard.keyIDinSyllabicPart["nucleus"]
     ) + (names[10],)  # nucleus keys + star, mirroring English's A-/O-/-E/-U/*
     geminiKeymap = dict(zip(names, GEMINI_PR_LABELS))
+    hidKeymap = dict(zip(names, PLOVER_HID_LABELS))
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         f.write(
@@ -59,6 +67,10 @@ def main() -> None:
         f.write("GEMINI_PR_KEYMAP: dict[str, str] = {\n")
         for name in names:
             f.write(f"    {name!r}: {geminiKeymap[name]!r},\n")
+        f.write("}\n\n")
+        f.write("PLOVER_HID_KEYMAP: dict[str, str] = {\n")
+        for name in names:
+            f.write(f"    {name!r}: {hidKeymap[name]!r},\n")
         f.write("}\n")
     print(f"Wrote {OUTPUT_PATH} ({len(names)} keys).")
 

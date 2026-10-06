@@ -1858,7 +1858,9 @@ Transformation: `KEYS` = `Starboard.keyDisplayNames()` (keyboard.py:679) in key 
 `& % k- s- p- v- m- t- R- w- * @- a- -i -e # -j -s -k -d -t -R -n -l -Z -m`.
 `IMPLICIT_HYPHEN_KEYS` = nucleus names + `*` (:44-46). `GEMINI_PR_KEYMAP` zips names with the
 hardware-sniffed `GEMINI_PR_LABELS` (:28-35) — the **Gemini PR keymap**: keys 0, 1, 2, 10 are
-number-bar bits `#A #B #C #1`; key 15 (`#`) is the only star bit `*4`.
+number-bar bits `#A #B #C #1`; key 15 (`#`) is the only star bit `*4`. `PLOVER_HID_KEYMAP` zips the same names with
+`PLOVER_HID_LABELS` (the "Plover HID" machine of `plover-machine-hid` names its keys like Gemini PR; the labels are
+assumed equal, NOT yet sniffed on the reflashed board).
 Result: Plover key table.
 Artifacts: writes `plover_stenalgo/plover_stenalgo/_generated_keys.py`.
 Notes: the implicit-hyphen set is computed separately here and in `_renderMarkedStroke`; a
@@ -1868,7 +1870,8 @@ layout change moving `*` or the nucleus keys must update both.
 Called by: Plover, via entry point `"Stenalgo French" = "plover_stenalgo.system"` (plover_stenalgo/pyproject.toml:12-13).
 Registers: `KEYS`, `IMPLICIT_HYPHEN_KEYS`, `SUFFIX_KEYS = ()`, `NUMBER_KEY = None`,
 `NUMBERS = {}`, `UNDO_STROKE_STENO = "*"`, no orthography rules, `KEYMAPS = {"Gemini PR":
-GEMINI_PR_KEYMAP}` (no machine plugin), `DEFAULT_DICTIONARIES = ("user.json", "commands.json")`.
+GEMINI_PR_KEYMAP, "Plover HID": PLOVER_HID_KEYMAP}` (no machine plugin of our own; the HID machine comes from the separately
+installed `plover-machine-hid`), `DEFAULT_DICTIONARIES = ("user.json", "commands.json")`.
 Notes: bare `*` as undo is safe because the first star/hash symbol is always merged and
 \*/# marker strokes are always `*#`. The user adds `plover_stenalgo_dictionary.json` by hand.
 
