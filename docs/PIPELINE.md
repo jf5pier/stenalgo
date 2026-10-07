@@ -269,7 +269,7 @@ Affix Abbreviation Building (S9) ................. optional layer after the fini
 │       ← affix_decisions.json (committed verdicts), AffixSelection.pickle (cache) → affix_rules.json, affix_rules_report.md
 └─ S9b  Affix dictionary — python -m util.export_affix_dictionary → plover_stenalgo_affix_dictionary.json, affix_abbreviations.tsv
 └─ S9c  Trainer affix lessons — python -m util.export_affix_lessons → steno-trainer/public/data/affix-lessons.json
-└─ S9d  Trainer abbreviation column — python -m util.export_affix_abbreviations → steno-trainer/public/data/affix-abbreviations.json (from affix_abbreviations.tsv; the Definitions page's "Abbrev." column)
+└─ S9d  Trainer abbreviation column — python -m util.export_affix_abbreviations → steno-trainer/public/data/affix-abbreviations.json (from affix_abbreviations.tsv; the Definitions page's "Abbrev." column) and affix-word-rules.json (spelling -> rule ranks, for the Words-mode rule hint)
 
 Expression Abbreviation Lessons (S10) ............ optional layer after the finished theory; see below and docs/specs/expression-lessons.md
 ├─ S10a Trainer expression lessons — python -m util.export_expression_lessons → steno-trainer/public/data/expression-lessons.json

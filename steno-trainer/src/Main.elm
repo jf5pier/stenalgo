@@ -78,6 +78,7 @@ type alias Model =
     , notation : Notation
     , definitions : Maybe (LoadState Definitions)
     , abbreviations : Dict String (Dict String String) -- affix-abbreviations.json (spelling -> long outline -> short), optional
+    , wordRules : Dict String (List Int) -- affix-word-rules.json (lowercase spelling -> ranks of the affix rules shortening it), optional
     , lessons : Maybe (LoadState Lessons)
     , affixData : Maybe Lessons.AffixData -- affix-lessons.json, when it came back (the stub stays otherwise)
     , expressionData : Maybe Lessons.ExpressionData -- expression-lessons.json: the rules legend and the expressions lessons, when it came back
@@ -120,6 +121,7 @@ type Msg
     | ToggleNotation
     | GotDefinitions (Result Http.Error Definitions)
     | GotAbbreviations (Result Http.Error (Dict String (Dict String String)))
+    | GotWordRules (Result Http.Error (Dict String (List Int)))
     | GotLessons (Result Http.Error Lessons)
     | GotAffixData (Result Http.Error Lessons.AffixData)
     | GotExpressionData (Result Http.Error Lessons.ExpressionData)
@@ -171,6 +173,7 @@ init _ =
       , notation = Notation.XSampa
       , definitions = Nothing
       , abbreviations = Dict.empty
+      , wordRules = Dict.empty
       , lessons = Nothing
       , affixData = Nothing
       , expressionData = Nothing
@@ -192,6 +195,7 @@ init _ =
         , getFresh { url = "public/data/practice-words.json", expect = Http.expectJson GotWords Drill.decoder }
         , getFresh { url = "public/data/practice-sentences.json", expect = Http.expectJson GotSentences Drill.sentenceDecoder }
         , getFresh { url = "public/data/affix-lessons.json", expect = Http.expectJson GotAffixData Lessons.affixDecoder }
+        , getFresh { url = "public/data/affix-word-rules.json", expect = Http.expectJson GotWordRules (D.dict (D.list D.int)) }
         , getFresh { url = "public/data/expression-lessons.json", expect = Http.expectJson GotExpressionData Lessons.expressionDecoder }
         , getFresh { url = "public/data/expression-sentences.json", expect = Http.expectJson GotExpressionSentences Drill.sentenceDecoder }
         ]
@@ -262,6 +266,13 @@ update msg unswitched =
 
         GotAbbreviations (Err _) ->
             -- Optional layer: without the file the Definitions page has no abbreviation column.
+            ( model, Cmd.none )
+
+        GotWordRules (Ok wordRules) ->
+            ( { model | wordRules = wordRules }, Cmd.none )
+
+        GotWordRules (Err _) ->
+            -- Optional layer: without the file only the affix lessons' words have a rule hint.
             ( model, Cmd.none )
 
         GotDefinitions (Ok definitions) ->
@@ -943,7 +954,7 @@ viewSidebarLegends model =
 {-| The extra hint under the chord board, only what affects the current word
 (every word of the current sentence in sentence mode): the rules shortening it,
 key names first. The words are looked up by spelling among
-the affix lessons' words -- so only the words those lessons teach have a hint --
+the affix lessons' words and in `affix-word-rules.json` (every abbreviated word),
 and nothing shows for the others. -}
 viewAbbreviationHints : Model -> Html Msg
 viewAbbreviationHints model =
@@ -970,13 +981,16 @@ viewAbbreviationHints model =
                         |> List.map (\spelling -> ( spelling, abbreviationsOf spelling data.abbreviations ))
                         |> List.filter (\( _, entries ) -> not (List.isEmpty entries))
 
-                ranks =
+                lessonRanks =
                     found |> List.concatMap (\( _, entries ) -> List.map .rule entries)
+
+                ranks =
+                    lessonRanks ++ List.concatMap (wordRulesOf model.wordRules) spellings
 
                 render =
                     Notation.render model.notation
             in
-            if List.isEmpty found then
+            if List.isEmpty ranks then
                 text ""
 
             else
@@ -1026,6 +1040,13 @@ viewAbbreviatedSentencesToggle model =
 
         _ ->
             text ""
+
+
+{-| The ranks of the affix rules shortening `spelling`, from `affix-word-rules.json`
+(every abbreviated word, not only the lessons' words); empty when unknown. -}
+wordRulesOf : Dict String (List Int) -> String -> List Int
+wordRulesOf wordRules spelling =
+    Dict.get (String.toLower (String.trim spelling)) wordRules |> Maybe.withDefault []
 
 
 abbreviationsOf : String -> List Lessons.Abbreviation -> List Lessons.Abbreviation

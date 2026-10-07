@@ -59,9 +59,11 @@ python -m util.export_expression_sentences # optional, after export_practice_wor
 
 `public/data/affix-lessons.json` is optional: it is fetched at startup, and its 30 rule lessons and its lesson on
 conjugated forms replace the stub of the `affixes` track in `lessons.json`, and the "Affix rule hint" toggle shows, under the chord board, the rules that shorten the current word
-(its `rule` field; only the words those lessons teach have one).
+(its `rule` field, or `affix-word-rules.json` for the other words).
 `public/data/affix-abbreviations.json` (`python -m util.export_affix_abbreviations`, from `affix_abbreviations.tsv`, ~3.6 MB) is optional too: the Definitions page
 fetches it and adds an "Abbrev." column to the base-chord tables with at least one abbreviated row.
+`public/data/affix-word-rules.json` (same exporter, spelling -> ranks of the affix rules shortening it) is optional: with it the "Abbreviation rule hint" shows the
+rules of every abbreviated word in Words and Sentences modes, not only of the affix lessons' words.
 In those lessons a word's hint shows the short outline, but the drill accepts either the short or the long outline
 (`alternates` in the word record; `Drill.applyStroke` follows whichever outline the strokes typed so far start).
 
