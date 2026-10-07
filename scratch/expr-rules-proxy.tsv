@@ -29,7 +29,7 @@ rank	kind	family	expression	position	freq	strokes_saved	keys	score
 28	attach	en	en	prefix	362205933	1	18,19,20	3.970e+07
 29	attach	les	les	prefix	33827184	1	2,16,19	3.569e+07
 30	brief		avec		4	p-	1.055e+08	1.055e+08	free	0			
-31	brief		dans la		11,12	@a	4.287e+07	4.287e+07	vowels	0			
+31	brief		dans la		4,5,6,7,11,12	pvmt@a	4.287e+07	4.287e+07	union	0			
 32	brief		dans les		5	v-	3.109e+07	3.109e+07	free	0			
 33	brief		après		8	R-	3.007e+07	3.007e+07	free	0			
 34	brief		ainsi		9	w-	2.540e+07	2.540e+07	free	0			

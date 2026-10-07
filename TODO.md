@@ -175,11 +175,11 @@ docs in `docs/PIPELINE.md` S8.10. Open items, most important first:
 - **Trainer follow-up (separate TODO above).** A Plover HID board needs a WebHID reader besides `serial.js` / `GeminiPr.elm`.
 - **No pipeline rebuild.** The theory, dictionaries and trainer data do not change; check `pytest src/test/` (the `_core` copy test) and `mypy`.
 
-## Branch TODO — verify the `-ment` affix rule (abbreviations branch, 2026-10-06)
+## Branch TODO — Definitions page: "Abbrev." column missing for `seulement` (abbreviations branch, 2026-10-07)
 
-- **Observed.** `gouvernement` gets a `-ment` affix abbreviation, but `environnement` does not. Check why (`affix_rules_report.md`, `affix_rules.json`, `affix_decisions.json`,
-  `docs/AFFIX_RULES.md`, the trainer's affix lessons): a legitimate selection result (the rule's coverage or cost threshold, the stem/word being in a different route) or a bug in the matching of the suffix on `environnement`
-  (spelling `environement`/`environnement`, the `-nement` ending, a phonological mismatch of the final `@`/`mA~`). Fix or document, then rebuild the affix layer (S9) and compare the S9 md5s.
+- **Observed (user, in the trainer).** The Definitions page of `seulement` shows no "Abbrev." column, while `gouvernement` does. The data looks complete: `affix_abbreviations.tsv` has `seulement s@/mt@a/m@ -> s@jtm` (rule `ment`, 2 keys, saving 279.25),
+  and `steno-trainer/public/data/affix-abbreviations.json` contains the key `seulement`. So suspect the matching in the page (spelling + chord, `util/export_affix_abbreviations.py` and the Elm Definitions view in `steno-trainer/src/Main.elm`):
+  the long outline of the word in `definitions.json` vs the long outline keyed in `affix-abbreviations.json` (a different homophone entry, a mark, an alternate outline), or a cached/stale build of the trainer. Check other high-saving words for the same gap, then fix and rebuild S9d.
 
 ## Branch TODO — trainer Introduction page (abbreviations branch, 2026-10-06)
 
@@ -187,37 +187,9 @@ docs in `docs/PIPELINE.md` S8.10. Open items, most important first:
 
 ## Branch TODO — star/hash marks belong to the lemma (abbreviations branch, 2026-10-06)
 
-- **IMPLEMENTED 2026-10-06 (uncommitted, working tree): the family variant** (spec `docs/specs/star-hash-marking.md` section 5b, `markFamilyKey`/`assignMarkNodeCodes` in `src/ambiguitychecker.py`). Full rebuild done: 0 collisions, mark-key mass 48.6k -> 55.7k (+14%), no non-verb lemma group with mixed marks. The md5s of the theory exports changed as expected; `plover_stenalgo_expressions.stenalgo` and the plugin copy were refreshed; the plugin version is NOT bumped, the mirror is NOT synced. DONE 2026-10-06 too: the S1 lemma merge `aux`->`au` and 37 sibling closed-class plurals (`pronounParadigmLemme`, 38 pairs; rebuilt, 0 collisions; marked forms 6,866 -> 6,754; `aux` `ae/-s`). Left out because Lexique gives no number: `tiens` PRO:pos/ADJ:pos, `certaines` PRO:ind; `leurs` ADJ:pos keeps its own lemma (`+10`), `les`/`le`, `des`/`un`, `ces`/`ce`... differ in phonology, not merged. Open: the plugin version bump and mirror sync (the published install is stale), the expression rule set re-measure against the new theory, the optional-redundant-marks wish, the trainer check in a browser.
+- **DONE 2026-10-06 (committed 868940e, 759769b): the family variant and the S1 closed-class plural merges** (spec `docs/specs/star-hash-marking.md` section 5b; 0 collisions after the rebuild; details in the commit messages and `docs/PIPELINE.md`).
+  Still open: the plugin version bump and mirror sync (the published install is stale), the trainer check in a browser, and the wish below. Left out of the plural merges because Lexique gives no number: `tiens` PRO:pos/ADJ:pos, `certaines` PRO:ind.
 
-- **The principle to adopt.** A `*`/`#` mark applied to a word means its lemma accepts the same mark in all its forms: the singular and the plural of a noun or adjective, and every conjugated form of a verb, carry the same
-  mark, so the learner meets one mark per lemma. Today the plural of `eau` is `ae/-s` while `eau` is `*ae#`; `aux` is not even the plural of `au` (own lemma, `ae#`); `hauts` is `*ae/-s` while `haut` is `*ae#/*#`.
-- **The data (2026-10-06, read from `disambiguated_theory.tsv`, no code changed).** Grouped by (lemma, base strokes): 87,122 groups, 4,032 with a marked form, 1,949 mismatched (759 with a verb). Kinds: (1) one form marked, the others made unique
-  by a feature stroke `-s -j -k -d -t -R -l` (600 noun/adj, 617 verb: `son`/`sons/-s`, `sûr`/`sûre/-j`, `avoir` a`*`/as`/-d`, `savoir` sait`*`/sais`/-k`); (2) one form marked, another with neither mark nor feature stroke (450, 101: `une`/`unes*/-s`, `parler` noun `*`/
-  verb `-l`); (3) two different marks (140, 41: `ver #`/`vers *#/-s`, `faite #`/`faites */-s`, `sui *#`/`suis */-s`, `aller` noun/`allers #/-s`). Report with every group: `tmp/mark_mismatch_report.tsv` (untracked; regenerate by parsing
-  the `extraStrokes` column: a leading `+10,15` is a mark merged into the last phoneme stroke, appended strokes made only of keys 10/15 are further marks, any other appended stroke is a feature stroke). Some groups mix two categories
-  of one spelling (`aller` noun and verb) and look worse than they are.
-- **What the change involves** (nothing implemented yet; discussed 2026-10-06):
-  1. Lemma merges in `lexique.py`/S1 where a pair is one word split by Lexique: `aux` -> lemma `au` (today `aux` has lemma `aux`, so S6's same-lemma grouping never sees it, and S7 gives it `#`). Check that the same-lemma grouping
-     (S6, `-s` accord group) accepts `ART:def`; find the other such pairs (`les`/`le`, `des`/`un`, `du`...).
-  2. S7 `composeReservedKeyStrokesForEntries` (`src/ambiguitychecker.py`): cluster on the base strokes (up to the last phoneme stroke), rank LEMMAS (lemma frequency, not one form's), and let every form of a lemma take its lemma's
-     code in the last phoneme stroke, feature strokes after it. Expected: `au ae`, `aux ae/-s`, `oh *ae`, `eau *ae#`, `eaux *ae#/-s`, `haut *ae#/*#`, `hauts *ae#/*#/-s`. Forms with different base strokes (verbs: `parlai`, `parler`) cannot
-     share one cluster, so decide what "same mark" means for them (the lemma's mark pressed in the last phoneme stroke of EVERY form, even when the base stroke differs?).
-  3. Rewrite `docs/specs/star-hash-marking.md` (R1-R7 assume per-entry clustering), the S7 sections of `docs/PIPELINE.md`, the tests of `src/test/ambiguitychecker_test.py`.
-  4. Dry run first: a script applying the rule to the current theory, counting changed entries, new collisions (S7.17), extra marks added to forms that never needed one. Then the full rebuild and md5 comparison of `CLAUDE.md`.
-- **Dry run (2026-10-06, `scratch/lemma_mark_coloring.py`, read-only on `DisambiguatedTheory.pickle`; primary entries, frequency-only ranking, the R4-R6 rule stack NOT modelled).**
-  Finding 1: copying today's mark onto the other forms of its lemma is UNSAFE (524 to 954 new collisions, e.g. `sur`/`sûr`, `allez`/`halez`, `est`/`haie`): the mark must be chosen per lemma over ALL its clusters at once, i.e. a colouring.
-  Model: nodes = lemmas (merged when they share a spelling in one cluster or form a reform doublet), edge = two nodes with different spellings sharing one unmarked final stroke (4,130 clusters, 5,022 nodes in a conflict), greedy by lemma frequency.
-  Finding 2: it fits the budget: lemmas by code `()` 2,253, `*` 2,304, `#` 323, `*#` 101, escalated 41 (today 53 forms past the budget; top: `haute` 4, `ho` 5, `ô` 6). Collision-free by construction.
-  Finding 3: the price is more marks: marked forms 5,358 -> 13,157; mark-key mass (frequency x extra keys) 50k -> 79k per 900k word mass (+56%); 11,531 forms change code. Part of it is the rule stack being absent (a category rule would mark the rarer
-  lemma, not the more frequent form's neighbours): next step is to put R3-R6 into the lemma ranking (rank lemmas pairwise on their most frequent clashing forms), re-measure, and decide with the user whether +56% is acceptable.
-  Re-measure WITH the rule stack (`scratch/lemma_mark_coloring.py freq|rules|dominant`; mark-key mass, today 50k): frequency only 79k (+56%), rule stack on the lemmas' dominant forms 112k (+122%, 15% of the pairwise votes still
-  disagree), rule stack voted over every clashing form pair (Copeland) 216k (+330%: `a`, `fait`, `me`, `où` escalate). Escalated lemmas stay 41 in all three. Reading: R3-R6 assume a mark per ENTRY; a lemma's forms lose different clashes
-  under the category rules (a verb loses to a noun in one cluster, wins in another), so one code per lemma cannot follow them and costs mass. Frequency ordering is the cheap option; the category mnemonic is what is traded away.
-  ALTERNATIVE TRIED (`scratch/family_mark_coloring.py freq|dominant`, `NOFAMILY=1` = control): the lemma carries the mark only for m/f/s/p families (non-verbs by lemma+category; past participles by lemma), conjugated verb forms stay single-word nodes ranked
-  by the pairwise rules as today. Result: mark-key mass 51.8k (freq order) / 58.2k (rules on dominant forms) against 50.4k today; the control run (every form its own node, same greedy colouring) gives 65.4k, so about 15k is model noise (228 forms the greedy
-  order ranks differently from today's sort, some frequent); the family rule itself costs nothing measurable over the control. 2,782 forms change code (2,256 more marked, 526 less; 9.9k vs 1.9k of mass), escalated lemma nodes 45 (control 49).
-  Families end consistent: `eau *#`/`eaux *#`, `sûr *`/`sûre *`/`sûrs *`/`sûres *`. Collision-free by construction. Cost visible in the examples: `ans` (an), `mot`/`mots`, `sûre` gain a mark they did not need.
-  Caveats to settle: alternates (entries after the first) not modelled; verbs whose forms have different base strokes work in the colouring (the mark sits in each form's last phoneme stroke); `aux`/`au` still needs the S1 lemma merge.
 - **WISH LIST, may not be possible without the Plover entry below: redundant marks stay optional.** A form that is already unique without the mark (a feature stroke makes it so, e.g. `parlai/-t`) should stay writable without it even
   though its lemma `parler` has `*`: both `parlai/-t` and `*parlai/-t` accepted; the trainer would teach the lemma's mark but accept the shorter one (`Drill.alternates` exists for this). The principle above does NOT depend on it: without
   it, the lemma's mark is simply required on every form (consistent, at the cost of extra marks on forms that never needed one). Plover side: see the next entry.

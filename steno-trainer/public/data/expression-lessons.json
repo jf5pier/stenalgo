@@ -1482,16 +1482,24 @@
     "la"
    ],
    "keys": [
+    4,
+    5,
+    6,
+    7,
     11,
     12
    ],
    "keyNames": [
+    "p-",
+    "v-",
+    "m-",
+    "t-",
     "@-",
     "a-"
    ],
    "family": "",
    "label": "abréviation de « dans la »",
-   "steno": "@a"
+   "steno": "pvmt@a"
   },
   {
    "rank": 68,
@@ -27903,7 +27911,7 @@
     },
     {
      "kind": "expression",
-     "text": "Par exemple : « avec » : a/viek → p- ; « dans la » : pv@/mta → @a ; « dans les » : pv@/mtie → v-."
+     "text": "Par exemple : « avec » : a/viek → p- ; « dans la » : pv@/mta → pvmt@a ; « dans les » : pv@/mtie → v-."
     },
     {
      "kind": "expression",
@@ -27950,9 +27958,13 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "d@.la",
-     "steno": "@a",
+     "steno": "pvmt@a",
      "strokes": [
       [
+       4,
+       5,
+       6,
+       7,
        11,
        12
       ]
