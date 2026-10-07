@@ -5,7 +5,7 @@ import Definitions exposing (Definitions)
 import Dict exposing (Dict)
 import Drill exposing (PracticeWord)
 import GeminiPr
-import Html exposing (Html, button, div, h1, input, p, span, text)
+import Html exposing (Html, button, div, h1, h2, input, p, span, text)
 import Html.Attributes exposing (autofocus, class, classList, disabled, placeholder, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Http
@@ -13,6 +13,7 @@ import Json.Decode as D
 import Keyboard exposing (KeyInfo, Layout)
 import Lessons exposing (Lessons)
 import Notation exposing (Notation)
+import PloverHid
 import Ports
 import Process
 import Random
@@ -35,10 +36,17 @@ is a lookup, not a drill: type a spelling, see its homophones (see
 lesson, read its rules, then drill its own word pool through the same `Drill`
 engine (see `Lessons`). -}
 type Mode
-    = WordMode
+    = IntroMode
+    | WordMode
     | SentenceMode
     | DefinitionMode
     | LessonMode
+
+
+{-| The modes without a drill (no hints, no keyboard of their own). -}
+isInfoMode : Mode -> Bool
+isInfoMode mode =
+    mode == DefinitionMode || mode == IntroMode
 
 
 {-| The strokes correctly typed so far for the current target word (a
@@ -56,6 +64,7 @@ type SerialStatus
     | Unsupported
     | Disconnected
     | Connected
+    | ConnectError String
 
 
 type alias Model =
@@ -77,10 +86,12 @@ type alias Model =
     , selectedLesson : Maybe String
     , query : String
     , hints : Bool
+    , lessonMix : Bool -- the lesson drill mixes the current lesson's words 50/50 with those of the past lessons (default: current only)
     , simulation : Maybe Simulation -- the Simulate button's run in progress
     , simulationRuns : Int -- runs started so far; a timer of an older run is ignored
     , abbrevHints : Maybe Bool -- the learner's choice for the abbreviation rule hint; Nothing = the default (`abbrevHintsOn`)
     , lastStroke : Set.Set Int
+    , wrongRuns : Int -- wrong strokes so far; the 2 s red flash of an older one is ignored
     , typed : TypedStrokes
     }
 
@@ -101,8 +112,11 @@ type Msg
     | SwitchMode Mode
     | ShuffledWords (List PracticeWord)
     | ClickConnect
+    | ClickConnectHid
+    | IncomingHidChord (List Int)
     | SerialStatusChanged String
     | IncomingBytes (List Int)
+    | ClearWrong Int
     | ToggleNotation
     | GotDefinitions (Result Http.Error Definitions)
     | GotAbbreviations (Result Http.Error (Dict String (Dict String String)))
@@ -116,12 +130,28 @@ type Msg
     | NextLesson
     | BackToLessonList
     | StartLessonDrill (List PracticeWord)
+    | ToggleLessonMix
     | QueryChanged String
     | ToggleHints
     | ToggleAbbrevHints
     | SkipWords Int
     | StartSimulation
     | SimulationStep Int Int
+
+
+{-| `Http.get` that always revalidates (the exported JSON changes with every
+rebuild, and a static server's Last-Modified lets browsers keep a stale copy). -}
+getFresh : { url : String, expect : Http.Expect msg } -> Cmd msg
+getFresh { url, expect } =
+    Http.request
+        { method = "GET"
+        , headers = [ Http.header "Cache-Control" "no-cache" ]
+        , url = url
+        , body = Http.emptyBody
+        , expect = expect
+        , timeout = Nothing
+        , tracker = Nothing
+        }
 
 
 main : Program () Model Msg
@@ -134,7 +164,7 @@ init _ =
     ( { layout = Loading
       , words = Loading
       , sentences = Loading
-      , mode = WordMode
+      , mode = IntroMode
       , drill = Nothing
       , keymap = Dict.empty
       , serial = CheckingSupport
@@ -149,19 +179,21 @@ init _ =
       , selectedLesson = Nothing
       , query = ""
       , hints = True
+      , lessonMix = False
       , abbrevHints = Nothing
       , simulation = Nothing
       , simulationRuns = 0
       , lastStroke = Set.empty
+      , wrongRuns = 0
       , typed = noTypedStrokes
       }
     , Cmd.batch
-        [ Http.get { url = "public/data/keyboard-layout.json", expect = Http.expectJson GotLayout Keyboard.decoder }
-        , Http.get { url = "public/data/practice-words.json", expect = Http.expectJson GotWords Drill.decoder }
-        , Http.get { url = "public/data/practice-sentences.json", expect = Http.expectJson GotSentences Drill.sentenceDecoder }
-        , Http.get { url = "public/data/affix-lessons.json", expect = Http.expectJson GotAffixData Lessons.affixDecoder }
-        , Http.get { url = "public/data/expression-lessons.json", expect = Http.expectJson GotExpressionData Lessons.expressionDecoder }
-        , Http.get { url = "public/data/expression-sentences.json", expect = Http.expectJson GotExpressionSentences Drill.sentenceDecoder }
+        [ getFresh { url = "public/data/keyboard-layout.json", expect = Http.expectJson GotLayout Keyboard.decoder }
+        , getFresh { url = "public/data/practice-words.json", expect = Http.expectJson GotWords Drill.decoder }
+        , getFresh { url = "public/data/practice-sentences.json", expect = Http.expectJson GotSentences Drill.sentenceDecoder }
+        , getFresh { url = "public/data/affix-lessons.json", expect = Http.expectJson GotAffixData Lessons.affixDecoder }
+        , getFresh { url = "public/data/expression-lessons.json", expect = Http.expectJson GotExpressionData Lessons.expressionDecoder }
+        , getFresh { url = "public/data/expression-sentences.json", expect = Http.expectJson GotExpressionSentences Drill.sentenceDecoder }
         ]
     )
 
@@ -204,14 +236,14 @@ update msg unswitched =
             else if mode == DefinitionMode && model.definitions == Nothing then
                 ( { model | mode = mode, drill = Nothing, typed = noTypedStrokes, definitions = Just Loading }
                 , Cmd.batch
-                    [ Http.get { url = "public/data/definitions.json", expect = Http.expectJson GotDefinitions Definitions.decoder }
-                    , Http.get { url = "public/data/affix-abbreviations.json", expect = Http.expectJson GotAbbreviations (D.dict (D.dict D.string)) }
+                    [ getFresh { url = "public/data/definitions.json", expect = Http.expectJson GotDefinitions Definitions.decoder }
+                    , getFresh { url = "public/data/affix-abbreviations.json", expect = Http.expectJson GotAbbreviations (D.dict (D.dict D.string)) }
                     ]
                 )
 
             else if mode == LessonMode && model.lessons == Nothing then
                 ( { model | mode = mode, drill = Nothing, typed = noTypedStrokes, selectedLesson = Nothing, lessons = Just Loading }
-                , Http.get { url = "public/data/lessons.json", expect = Http.expectJson GotLessons Lessons.decoder }
+                , getFresh { url = "public/data/lessons.json", expect = Http.expectJson GotLessons Lessons.decoder }
                 )
 
             else if mode == LessonMode then
@@ -317,11 +349,35 @@ update msg unswitched =
             , Cmd.none
             )
 
-        StartLessonDrill words ->
+        StartLessonDrill fallbackWords ->
             -- The same shuffle path the Words mode uses: the shuffled list
-            -- comes back as `ShuffledWords`, which starts the drill.
+            -- comes back as `ShuffledWords`, which starts the drill. The words
+            -- are the lesson's drill mix (`activeItems`), not the whole pool.
             ( model
-            , Random.generate ShuffledWords (shuffleGenerator words)
+            , Random.generate ShuffledWords
+                (shuffleGenerator
+                    (case activeItems model of
+                        Just (Loaded words) ->
+                            words
+
+                        _ ->
+                            fallbackWords
+                    )
+                )
+            )
+
+        ToggleLessonMix ->
+            let
+                switched =
+                    { model | lessonMix = not model.lessonMix }
+            in
+            ( switched
+            , case activeItems switched of
+                Just (Loaded words) ->
+                    Random.generate ShuffledWords (shuffleGenerator words)
+
+                _ ->
+                    Cmd.none
             )
 
         QueryChanged query ->
@@ -399,8 +455,33 @@ update msg unswitched =
         SerialStatusChanged status ->
             ( { model | serial = parseSerialStatus status }, Cmd.none )
 
+        ClickConnectHid ->
+            ( model, Ports.requestConnectHid () )
+
+        IncomingHidChord bytes ->
+            applyLabels (PloverHid.decodeChord bytes) model
+
         IncomingBytes bytes ->
-            case GeminiPr.decodePacket bytes of
+            applyLabels (GeminiPr.decodePacket bytes) model
+
+        ClearWrong token ->
+            -- The red flash of a wrong stroke lasts 2 s, then the hint (gray) is back.
+            case model.drill of
+                Just drill ->
+                    if token == model.wrongRuns && drill.feedback == Just False then
+                        ( { model | drill = Just { drill | feedback = Nothing }, lastStroke = Set.empty }, Cmd.none )
+
+                    else
+                        ( model, Cmd.none )
+
+                Nothing ->
+                    ( model, Cmd.none )
+
+
+{-| One decoded stroke (from either machine protocol) fed to the drill. -}
+applyLabels : Result String (List String) -> Model -> ( Model, Cmd Msg )
+applyLabels decoded model =
+            case decoded of
                 Ok labels ->
                     let
                         observed =
@@ -413,6 +494,23 @@ update msg unswitched =
                             let
                                 ( newDrill, passCompleted ) =
                                     Drill.applyStroke observed drill
+
+                                wrong =
+                                    newDrill.feedback == Just False
+
+                                wrongRuns =
+                                    if wrong then
+                                        model.wrongRuns + 1
+
+                                    else
+                                        model.wrongRuns
+
+                                clearCmd =
+                                    if wrong then
+                                        Process.sleep 2000 |> Task.perform (\_ -> ClearWrong wrongRuns)
+
+                                    else
+                                        Cmd.none
 
                                 shuffleCmd =
                                     if passCompleted then
@@ -429,6 +527,7 @@ update msg unswitched =
                             ( { model
                                 | drill = Just newDrill
                                 , lastStroke = observed
+                                , wrongRuns = wrongRuns
                                 , typed =
                                     if newDrill.feedback == Just True then
                                         recordTypedStroke observed drill model.typed
@@ -436,7 +535,7 @@ update msg unswitched =
                                     else
                                         model.typed
                               }
-                            , shuffleCmd
+                            , Cmd.batch [ shuffleCmd, clearCmd ]
                             )
 
                         Nothing ->
@@ -525,6 +624,9 @@ activeItems model =
                 _ ->
                     Just model.sentences
 
+        IntroMode ->
+            Nothing
+
         DefinitionMode ->
             Nothing
 
@@ -533,7 +635,18 @@ activeItems model =
                 Just (Loaded lessons) ->
                     model.selectedLesson
                         |> Maybe.andThen (\id -> lessons.lessons |> List.filter (\l -> l.id == id) |> List.head)
-                        |> Maybe.map (\lesson -> Loaded lesson.words)
+                        |> Maybe.map
+                            (\lesson ->
+                                let
+                                    current =
+                                        Lessons.currentWords lesson
+                                in
+                                if model.lessonMix then
+                                    Loaded (current ++ List.take (List.length current) (Lessons.pastWords lessons lesson))
+
+                                else
+                                    Loaded current
+                            )
 
                 _ ->
                     Nothing
@@ -621,8 +734,12 @@ parseSerialStatus status =
         "disconnected" ->
             Disconnected
 
-        _ ->
-            Disconnected
+        other ->
+            if String.startsWith "error:" other then
+                ConnectError (String.dropLeft 6 other)
+
+            else
+                Disconnected
 
 
 httpErrorToString : Http.Error -> String
@@ -649,6 +766,7 @@ subscriptions _ =
     Sub.batch
         [ Ports.serialStatus SerialStatusChanged
         , Ports.incomingBytes IncomingBytes
+        , Ports.incomingHidChord IncomingHidChord
         ]
 
 
@@ -662,44 +780,71 @@ view : Model -> Html Msg
 view model =
     div [ class "app" ]
         [ div [ class "sidebar" ]
-            (h1 [] [ text "Stenalgo practice" ]
-                :: viewConnectButton model.serial
-                :: viewModeSwitch model.mode
-                :: viewHintsToggle model
-                :: viewAbbrevHintsToggle model
-                :: viewAbbreviatedSentencesToggle model
-                :: viewNotationToggle model.notation
-                :: viewSidebarLegends model
+            ([ h1 [] [ text "Pratique Stenalgo fran\u{00E7}ais" ]
+             , viewModeSwitch model.mode
+             , viewSection "Options"
+                [ viewHintsToggle model
+                , viewAbbrevHintsToggle model
+                , viewAbbreviatedSentencesToggle model
+                , viewNotationToggle model.notation
+                ]
+             ]
+                ++ viewSidebarLegends model
+                ++ [ viewSection "Connexion au clavier steno" [ viewConnectButton model.serial ] ]
             )
-        , div [ class "main" ]
-            [ case model.serial of
-                Unsupported ->
-                    p [ class "unsupported" ]
-                        [ text "This browser doesn't support the Web Serial API. Use Chrome or Edge to practice with real hardware." ]
-
-                _ ->
-                    viewTrainer model
-            ]
+        , div [ class "main" ] [ viewTrainer model ]
         ]
 
 
-{-| Nothing on a browser without Web Serial -- the main column says why instead. -}
+{-| A titled block of the sidebar. -}
+viewSection : String -> List (Html Msg) -> Html Msg
+viewSection title content =
+    div [ class "sidebar-section" ] (h2 [] [ text title ] :: content)
+
+
+{-| "label : [on] [off]" -- the current choice's button is the disabled one. -}
+viewOnOff : String -> Bool -> Msg -> Html Msg
+viewOnOff label isOn toggle =
+    p [ class "hints-toggle" ]
+        [ text (label ++ " : ")
+        , button [ onClick toggle, disabled isOn ] [ text "on" ]
+        , text " "
+        , button [ onClick toggle, disabled (not isOn) ] [ text "off" ]
+        ]
+
+
+{-| The Introduction page, the default landing. Its text is still to be written
+(see TODO.md). -}
+viewIntroPage : Html Msg
+viewIntroPage =
+    div [ class "intro-page" ]
+        [ h1 [] [ text "Introduction" ]
+        , p [] [ text "\u{00C0} venir." ]
+        ]
+
+
+{-| One button per protocol, Gemini PR (Web Serial) and Plover HID (WebHID); both
+APIs exist only in Chrome and Edge, which the browser-less case spells out. -}
 viewConnectButton : SerialStatus -> Html Msg
 viewConnectButton serial =
     case serial of
         Unsupported ->
-            text ""
+            p [ class "unsupported" ] [ text "Ce navigateur ne g\u{00E8}re ni Web Serial ni WebHID : utilisez Chrome ou Edge pour pratiquer avec le clavier." ]
 
         _ ->
-            button
-                [ class "connect-button", onClick ClickConnect, disabled (serial == Connected) ]
-                [ text
-                    (if serial == Connected then
-                        "Connected"
+            div [ class "connect-buttons" ]
+                [ button [ class "connect-button", onClick ClickConnect, disabled (serial == Connected) ] [ text "Gemini PR" ]
+                , text " "
+                , button [ class "connect-button", onClick ClickConnectHid, disabled (serial == Connected) ] [ text "Plover HID (chrome/edge only)" ]
+                , case serial of
+                    Connected ->
+                        p [] [ text "Connect\u{00E9}." ]
 
-                     else
-                        "Connect steno machine"
-                    )
+                    ConnectError message ->
+                        p [ class "unsupported" ] [ text ("\u{00C9}chec de la connexion : " ++ message) ]
+
+                    _ ->
+                        text ""
                 ]
 
 
@@ -709,14 +854,12 @@ viewModeSwitch mode =
         modeButton target name =
             button [ onClick (SwitchMode target), disabled (mode == target) ] [ text name ]
     in
-    p [ class "mode-switch" ]
-        [ modeButton WordMode "Words"
-        , text " "
-        , modeButton SentenceMode "Sentences"
-        , text " "
-        , modeButton DefinitionMode "Definitions"
-        , text " "
-        , modeButton LessonMode "Lessons"
+    div [ class "mode-switch" ]
+        [ modeButton IntroMode "Introduction"
+        , modeButton LessonMode "Le\u{00E7}ons"
+        , modeButton WordMode "Mots"
+        , modeButton SentenceMode "Phrases"
+        , modeButton DefinitionMode "D\u{00E9}finitions"
         ]
 
 
@@ -725,28 +868,11 @@ drill shows its chord. Off: the keyboard shows only the keys you typed, and
 the chord line becomes the strokes typed so far (see `TypedStrokes`). -}
 viewHintsToggle : Model -> Html Msg
 viewHintsToggle model =
-    if model.mode == DefinitionMode then
+    if isInfoMode model.mode then
         text ""
 
     else
-        p [ class "hints-toggle" ]
-            [ text
-                (if model.hints then
-                    "Hints: on "
-
-                 else
-                    "Hints: off "
-                )
-            , button [ onClick ToggleHints ]
-                [ text
-                    (if model.hints then
-                        "Hide hints"
-
-                     else
-                        "Show hints"
-                    )
-                ]
-            ]
+        viewOnOff "Indices clavier" model.hints ToggleHints
 
 
 {-| Whether the abbreviation rule hint (affix rules, expression rules) shows:
@@ -768,6 +894,9 @@ abbrevHintsOn model =
                         _ ->
                             False
 
+                IntroMode ->
+                    False
+
                 DefinitionMode ->
                     False
 
@@ -781,28 +910,11 @@ for the drill's current word, the short outlines the affix layer gives it
 (`viewExpressionHints`). -}
 viewAbbrevHintsToggle : Model -> Html Msg
 viewAbbrevHintsToggle model =
-    if model.mode == DefinitionMode then
+    if isInfoMode model.mode then
         text ""
 
     else
-        p [ class "hints-toggle" ]
-            [ text
-                (if abbrevHintsOn model then
-                    "Abbreviation rule hint: on "
-
-                 else
-                    "Abbreviation rule hint: off "
-                )
-            , button [ onClick ToggleAbbrevHints ]
-                [ text
-                    (if abbrevHintsOn model then
-                        "Hide abbreviation rule hint"
-
-                     else
-                        "Show abbreviation rule hint"
-                    )
-                ]
-            ]
+        viewOnOff "Indices abr\u{00E9}viation" (abbrevHintsOn model) ToggleAbbrevHints
 
 
 {-| Switches every phoneme on the page -- keys, chord board, legends, the
@@ -811,8 +923,10 @@ written in) and IPA. See `Notation`. -}
 viewNotationToggle : Notation -> Html Msg
 viewNotationToggle notation =
     p [ class "notation-toggle" ]
-        [ text ("Phonemes: " ++ Notation.label notation ++ " ")
-        , button [ onClick ToggleNotation ] [ text ("Show " ++ Notation.label (Notation.toggle notation)) ]
+        [ text "Norme phon\u{00E9}tique : "
+        , button [ onClick ToggleNotation, disabled (notation == Notation.XSampa) ] [ text "X-SAMPA" ]
+        , text " "
+        , button [ onClick ToggleNotation, disabled (notation == Notation.Ipa) ] [ text "IPA" ]
         ]
 
 
@@ -820,7 +934,7 @@ viewSidebarLegends : Model -> List (Html Msg)
 viewSidebarLegends model =
     case model.layout of
         Loaded layout ->
-            [ Keyboard.viewLegends (simulatedKeys model) (isMarkStep model) (Notation.layout model.notation layout) ]
+            [ Keyboard.viewLegends (simulatedKeys model) (isMarkStep model) (markKeys model layout) (currentReadingLabel model) (Notation.layout model.notation layout) ]
 
         _ ->
             []
@@ -908,24 +1022,7 @@ viewAbbreviatedSentencesToggle : Model -> Html Msg
 viewAbbreviatedSentencesToggle model =
     case ( model.mode, model.expressionSentences ) of
         ( SentenceMode, Just _ ) ->
-            p [ class "hints-toggle" ]
-                [ text
-                    (if model.abbreviatedSentences then
-                        "Abbreviated sentences: on "
-
-                     else
-                        "Abbreviated sentences: off "
-                    )
-                , button [ onClick ToggleAbbreviatedSentences ]
-                    [ text
-                        (if model.abbreviatedSentences then
-                            "Show plain sentences"
-
-                         else
-                            "Show abbreviated sentences"
-                        )
-                    ]
-                ]
+            viewOnOff "Phrases abr\u{00E9}g\u{00E9}es" model.abbreviatedSentences ToggleAbbreviatedSentences
 
         _ ->
             text ""
@@ -944,6 +1041,9 @@ viewTrainer : Model -> Html Msg
 viewTrainer model =
     div []
         [ case ( model.mode, activeItems model ) of
+            ( IntroMode, _ ) ->
+                viewIntroPage
+
             ( DefinitionMode, _ ) ->
                 viewDefinitions model
 
@@ -955,13 +1055,13 @@ viewTrainer model =
 
             ( _, Just (Loaded _) ) ->
                 div []
-                    [ p [ class "word-nav-row" ] [ viewWordNav ]
+                    [ p [ class "word-nav-row" ] [ viewWordNav model.mode ]
                     , viewDrill model
                     ]
 
             _ ->
                 p [] [ text ("Loading practice " ++ modeNoun model.mode ++ "...") ]
-        , if model.mode == LessonMode && model.drill == Nothing then
+        , if model.mode == IntroMode || (model.mode == LessonMode && model.drill == Nothing) then
             -- The lesson intro renders its own keyboard (highlighting the
             -- lesson's new keys/chords); the list has nothing to highlight.
             text ""
@@ -980,7 +1080,7 @@ viewTrainer model =
                             Notation.layout model.notation loadedLayout
                     in
                     div [ classList [ ( "sim-mark", isMarkStep model ) ] ]
-                        [ if model.drill /= Nothing && model.mode /= DefinitionMode then
+                        [ if model.drill /= Nothing && not (isInfoMode model.mode) then
                             p [ class "simulate-row" ] [ button [ onClick StartSimulation ] [ text "Simulate" ] ]
 
                           else
@@ -989,9 +1089,15 @@ viewTrainer model =
                             (if model.simulation /= Nothing then
                                 { highlighted = simulatedKeys model, correct = Just True }
 
-                             else if model.hints && model.mode /= DefinitionMode then
+                             else if model.hints && not (isInfoMode model.mode) && (model.drill |> Maybe.andThen .feedback) == Just False then
+                                -- A wrong press: the keys actually pressed, in red.
+                                { highlighted = model.lastStroke, correct = Just False }
+
+                             else if model.hints && not (isInfoMode model.mode) then
+                                -- A hint is the expected stroke, not a press: always gray (the
+                                -- previous word's lingering feedback must not turn it green/red).
                                 { highlighted = model.drill |> Maybe.andThen Drill.expectedStroke |> Maybe.withDefault Set.empty
-                                , correct = model.drill |> Maybe.andThen .feedback
+                                , correct = Nothing
                                 }
 
                              else
@@ -1000,8 +1106,9 @@ viewTrainer model =
                                 }
                             )
                             layout.keys
-                        , Keyboard.viewChordBoard (simulatedKeys model) layout
-                        , if abbrevHintsOn model && model.mode /= DefinitionMode then
+                        , Keyboard.viewChordBoard (simulatedKeys model) (hintKeys model) (pairAllowed model loadedLayout) layout
+                        , Keyboard.viewStrokeLegend (simulatedKeys model) (hintKeys model) (strokeInPhonology model loadedLayout) layout
+                        , if abbrevHintsOn model && not (isInfoMode model.mode) then
                             div []
                                 [ viewAbbreviationHints model
                                 , viewExpressionHints model
@@ -1021,6 +1128,9 @@ modeNoun mode =
 
         SentenceMode ->
             "sentences"
+
+        IntroMode ->
+            "introduction"
 
         DefinitionMode ->
             "definitions"
@@ -1096,6 +1206,7 @@ viewLessons model =
                             , onPrev = onPrev
                             , onNext = onNext
                             , render = Notation.render model.notation
+                            , title = Lessons.displayTitle (Notation.render model.notation) lessons lesson
                             , keys =
                                 case model.layout of
                                     Loaded layout ->
@@ -1109,9 +1220,22 @@ viewLessons model =
                     else
                         div [ class "lesson-drill" ]
                             [ p [ class "lesson-back lesson-back-drill" ]
-                                ([ button [ onClick BackToLessonList ] [ text "← Lessons" ] ]
+                                ([ button [ onClick BackToLessonList ] [ text "← Lessons" ]
+                                 , text " "
+                                 , button [ onClick (SelectLesson lesson.id) ] [ text "← Lesson text" ]
+                                 , text " "
+                                 , button [ onClick ToggleLessonMix ]
+                                    [ text
+                                        (if model.lessonMix then
+                                            "Current mix 50% old - 50% new"
+
+                                         else
+                                            "Current mix 100% new"
+                                        )
+                                    ]
+                                 ]
                                     ++ Lessons.viewPrevNext onPrev onNext
-                                    ++ [ viewWordNav ]
+                                    ++ [ viewWordNav model.mode ]
                                 )
                             , viewDrill model
                             ]
@@ -1153,21 +1277,7 @@ currentStrokes model =
         Just drill ->
             case Drill.currentWord drill of
                 Just word ->
-                    if List.isEmpty word.segments then
-                        word.strokes
-
-                    else
-                        let
-                            index =
-                                Drill.currentSegmentIndex drill
-
-                            before =
-                                word.segments |> List.take index |> List.map .strokeCount |> List.sum
-
-                            count =
-                                word.segments |> List.drop index |> List.head |> Maybe.map .strokeCount |> Maybe.withDefault 0
-                        in
-                        word.strokes |> List.drop before |> List.take count
+                    word.strokes
 
                 Nothing ->
                     []
@@ -1176,13 +1286,66 @@ currentStrokes model =
             []
 
 
+{-| Where the Simulate run's lit stroke sits in its word: 0 for a word's first
+stroke. A sentence is simulated whole, so this restarts at each word. -}
+simulationOffsetInWord : Model -> Int
+simulationOffsetInWord model =
+    case ( model.simulation, model.drill |> Maybe.andThen Drill.currentWord ) of
+        ( Just simulation, Just word ) ->
+            Tuple.second (strokePosition word simulation.step)
+
+        ( Just simulation, Nothing ) ->
+            simulation.step
+
+        _ ->
+            0
+
+
+{-| A stroke index of a sentence as (the word's index, the stroke's index within
+that word); a lone word is word 0. -}
+strokePosition : PracticeWord -> Int -> ( Int, Int )
+strokePosition word absolute =
+    if List.isEmpty word.segments then
+        ( 0, absolute )
+
+    else
+        word.segments
+            |> List.foldl
+                (\segment ( index, remaining, found ) ->
+                    case found of
+                        Just _ ->
+                            ( index, remaining, found )
+
+                        Nothing ->
+                            if remaining < segment.strokeCount then
+                                ( index, remaining, Just ( index, remaining ) )
+
+                            else
+                                ( index + 1, remaining - segment.strokeCount, Nothing )
+                )
+                ( 0, absolute, Nothing )
+            |> (\( index, remaining, found ) -> Maybe.withDefault ( index - 1, remaining ) found)
+
+
+{-| The word of a sentence being shown: the one the Simulate run is in while it
+runs, else the one the drill is at. -}
+shownSegment : Model -> Drill.State -> PracticeWord -> Int
+shownSegment model drill word =
+    case model.simulation of
+        Just simulation ->
+            Tuple.first (strokePosition word simulation.step)
+
+        Nothing ->
+            Drill.currentSegmentIndex drill
+
+
 {-| The Simulate button lights a conjugation marker's stroke (after the first
 stroke of the word) yellow instead of green. -}
 isMarkStep : Model -> Bool
 isMarkStep model =
     case ( model.simulation, model.layout ) of
         ( Just simulation, Loaded layout ) ->
-            simulation.step > 0
+            simulationOffsetInWord model > 0
                 && (List.drop simulation.step simulation.strokes
                         |> List.head
                         |> Maybe.map (Keyboard.isConjugationStroke layout)
@@ -1191,6 +1354,181 @@ isMarkStep model =
 
         _ ->
             False
+
+
+{-| The conjugation marker stroke being highlighted, if any: the Simulate
+button's lit one, or (hints on, no wrong press showing) the one the drill expects
+next after the word's first stroke. Its legend line gets its features in bold. -}
+markKeys : Model -> Layout -> Set.Set Int
+markKeys model layout =
+    case model.simulation of
+        Just _ ->
+            if isMarkStep model then
+                simulatedKeys model
+
+            else
+                Set.empty
+
+        Nothing ->
+            case model.drill of
+                Just drill ->
+                    if model.hints && drill.feedback /= Just False && drill.currentStrokeIndex > 0 then
+                        case Drill.expectedStroke drill of
+                            Just keys ->
+                                if Keyboard.isConjugationStroke layout (Set.toList keys) then
+                                    keys
+
+                                else
+                                    Set.empty
+
+                            Nothing ->
+                                Set.empty
+
+                    else
+                        Set.empty
+
+                Nothing ->
+                    Set.empty
+
+
+{-| The stroke the hint shows (the gray keys): the drill's expected one, with hints
+on, outside a Simulate run and while no wrong press is showing in red. The chord
+board and the 3-/4-key groups gray the phonemes of the word it composes. -}
+hintKeys : Model -> Set.Set Int
+hintKeys model =
+    if model.hints && model.simulation == Nothing && not (isInfoMode model.mode) && (model.drill |> Maybe.andThen .feedback) /= Just False then
+        model.drill |> Maybe.andThen Drill.expectedStroke |> Maybe.withDefault Set.empty
+
+    else
+        Set.empty
+
+
+{-| Whether a 2-key badge may light in the Simulate run. A 2-key stroke always
+lights its own badge; a 3-/4-key stroke ("2", "5", "1") contains several pairs
+(y, u, E...) that must stay dark unless the word's phonology has that phoneme. -}
+pairAllowed : Model -> Layout -> Set.Set Int -> List Int -> Bool
+pairAllowed model rawLayout strokeKeys pair =
+    if Set.size strokeKeys <= 2 then
+        True
+
+    else
+        let
+            phonology =
+                currentPhonology model
+        in
+        rawLayout.phonemeLayers
+            |> List.filter (\l -> l.keyCount == 2)
+            |> List.concatMap .strokes
+            |> List.filter (\stroke -> Set.fromList stroke.keys == Set.fromList pair)
+            |> List.any (\stroke -> List.any (\c -> String.contains (String.fromChar c) phonology) (String.toList stroke.phonemes))
+
+
+{-| Whether the stroke of this 3-/4-key group ("2", "5", "1") may light in the
+Simulate run: its phoneme must be in the word's phonology (the four thumb keys
+of "@aie" hold "2" and "5" too, which the word does not write). -}
+strokeInPhonology : Model -> Layout -> Set.Set Int -> List Int -> Bool
+strokeInPhonology model rawLayout _ keys =
+    let
+        phonology =
+            currentPhonology model
+    in
+    rawLayout.phonemeLayers
+        |> List.filter (\l -> l.keyCount > 2)
+        |> List.concatMap .strokes
+        |> List.filter (\stroke -> Set.fromList stroke.keys == Set.fromList keys)
+        |> List.any (\stroke -> List.any (\c -> String.contains (String.fromChar c) phonology) (String.toList stroke.phonemes))
+
+
+{-| The (raw X-SAMPA) phonology of the word (sentence mode: the current word) being drilled. -}
+currentPhonology : Model -> String
+currentPhonology model =
+    case model.drill of
+        Just drill ->
+            case Drill.currentWord drill of
+                Just word ->
+                    if model.mode == SentenceMode then
+                        String.split " " word.phonology |> List.drop (shownSegment model drill word) |> List.head |> Maybe.withDefault ""
+
+                    else
+                        word.phonology
+
+                Nothing ->
+                    ""
+
+        Nothing ->
+            ""
+
+
+{-| The stroke of the current word's chord line to put in bold: the one the
+Simulate run lights, else the next one to type. In a sentence the index counts
+from the sentence's first stroke. -}
+workingStroke : Model -> Drill.State -> PracticeWord -> Int
+workingStroke model drill word =
+    case model.simulation of
+        Just simulation ->
+            simulation.step
+
+        Nothing ->
+            drill.currentStrokeIndex
+
+
+{-| What of the reading label the highlighted conjugation marker stands for. -}
+labelEmphasis : Model -> List String
+labelEmphasis model =
+    case model.layout of
+        Loaded layout ->
+            Keyboard.markerPatterns layout (markKeys model layout) (currentReadingLabel model)
+
+        _ ->
+            []
+
+
+{-| `label` with each occurrence of one of `patterns` (at the start or after a
+space) in bold. -}
+emphasize : List String -> String -> List (Html Msg)
+emphasize patterns label =
+    let
+        -- The earliest (index, pattern) occurrence starting a word.
+        firstHit =
+            patterns
+                |> List.filterMap
+                    (\pattern ->
+                        String.indexes pattern label
+                            |> List.filter (\i -> i == 0 || String.slice (i - 1) i label == " ")
+                            |> List.head
+                            |> Maybe.map (\i -> ( i, pattern ))
+                    )
+                |> List.sortBy Tuple.first
+                |> List.head
+    in
+    case firstHit of
+        Just ( i, pattern ) ->
+            text (String.left i label)
+                :: Html.span [ class "legend-feature" ] [ text pattern ]
+                :: emphasize patterns (String.dropLeft (i + String.length pattern) label)
+
+        Nothing ->
+            [ text label ]
+
+
+{-| The reading label of the word (sentence mode: of the current word) being drilled. -}
+currentReadingLabel : Model -> String
+currentReadingLabel model =
+    case model.drill of
+        Just drill ->
+            case Drill.currentWord drill of
+                Just word ->
+                    if model.mode == SentenceMode then
+                        word.segments |> List.drop (shownSegment model drill word) |> List.head |> Maybe.map .label |> Maybe.withDefault ""
+
+                    else
+                        word.label
+
+                Nothing ->
+                    ""
+
+        Nothing ->
+            ""
 
 
 {-| The keys of the stroke the Simulate button currently lights, if it runs. -}
@@ -1204,12 +1542,20 @@ simulatedKeys model =
 
 {-| "Previous word" / "Next word": step the current drill, in every mode,
 pushed to the right of its row. -}
-viewWordNav : Html Msg
-viewWordNav =
+viewWordNav : Mode -> Html Msg
+viewWordNav mode =
+    let
+        noun =
+            if mode == SentenceMode then
+                "sentence"
+
+            else
+                "word"
+    in
     span [ class "word-nav" ]
-        [ button [ onClick (SkipWords -1) ] [ text "← Previous word" ]
+        [ button [ onClick (SkipWords -1) ] [ text ("← Previous " ++ noun) ]
         , text " "
-        , button [ onClick (SkipWords 1) ] [ text "Next word →" ]
+        , button [ onClick (SkipWords 1) ] [ text ("Next " ++ noun ++ " →") ]
         ]
 
 
@@ -1235,14 +1581,14 @@ viewDrill model =
             in
             case model.mode of
                 SentenceMode ->
-                    viewSentence chordDisplay (Drill.currentSegmentIndex drill) word
+                    viewSentence chordDisplay (labelEmphasis model) (shownSegment model drill word) (workingStroke model drill word) word
 
                 _ ->
                     div [ class "drill" ]
                         [ div [ class "drill-words" ]
                             [ div [ class "current-word" ]
                                 (p [ class "target-word" ] (viewInContext word)
-                                    :: viewReading chordDisplay word.label word.phonology word.steno word.strokes
+                                    :: viewReading chordDisplay (labelEmphasis model) (workingStroke model drill word) word.label word.phonology word.steno word.strokes
                                 )
                             , p [ class "next-word" ]
                                 (Drill.nextWord drill |> Maybe.map viewInContext |> Maybe.withDefault [ text "\u{00A0}" ])
@@ -1286,8 +1632,8 @@ viewInContext word =
 dimmed), and that word's reading/phonology/chord underneath -- the whole
 sentence's chords at once would be unreadable. `phonology` holds one
 space-separated transcription per word, parallel to `segments`. -}
-viewSentence : ChordDisplay -> Int -> PracticeWord -> Html Msg
-viewSentence chordDisplay currentIndex sentence =
+viewSentence : ChordDisplay -> List String -> Int -> Int -> PracticeWord -> Html Msg
+viewSentence chordDisplay emphasis currentIndex strokeIndex sentence =
     let
         segmentStart index =
             sentence.segments |> List.take index |> List.map .strokeCount |> List.sum
@@ -1352,6 +1698,8 @@ viewSentence chordDisplay currentIndex sentence =
                 :: (case List.drop currentIndex sentence.segments |> List.head of
                         Just segment ->
                             viewReading chordDisplay
+                                emphasis
+                                (strokeIndex - segmentStart currentIndex)
                                 segment.label
                                 (String.split " " sentence.phonology |> List.drop currentIndex |> List.head |> Maybe.withDefault "")
                                 segment.steno
@@ -1385,8 +1733,8 @@ homophone cluster's further symbols are strokes of their own, split onto
 their own line under the chord -- always rendered (even empty) so a word that
 has one doesn't shift the layout of the one after it.
 -}
-viewReading : ChordDisplay -> String -> String -> String -> List (List Int) -> List (Html Msg)
-viewReading chordDisplay label phonology steno strokes =
+viewReading : ChordDisplay -> List String -> Int -> String -> String -> String -> List (List Int) -> List (Html Msg)
+viewReading chordDisplay emphasis currentStroke label phonology steno strokes =
     let
         orSpace string =
             if String.isEmpty string then
@@ -1403,21 +1751,40 @@ viewReading chordDisplay label phonology steno strokes =
 
                 strokeParts =
                     List.map2 Tuple.pair (String.split "/" steno) strokes
+                        |> List.indexedMap (\i ( text_, stroke ) -> ( i, text_, stroke ))
 
-                basePart =
-                    strokeParts |> List.filter (\( _, stroke ) -> not (isMarkStroke stroke)) |> List.map Tuple.first |> String.join "/"
+                -- Each stroke its own span, the one being worked on in bold.
+                strokeSpans parts =
+                    parts
+                        |> List.map
+                            (\( i, text_, _ ) ->
+                                Html.span [ classList [ ( "current-stroke", i == currentStroke ) ] ] [ text (Notation.render notation text_) ]
+                            )
+                        |> List.intersperse (text "/")
+
+                baseParts =
+                    strokeParts |> List.filter (\( _, _, stroke ) -> not (isMarkStroke stroke))
+
+                markParts =
+                    strokeParts |> List.filter (\( _, _, stroke ) -> isMarkStroke stroke)
 
                 markPart =
-                    strokeParts |> List.filter (\( _, stroke ) -> isMarkStroke stroke) |> List.map Tuple.first |> String.join "/"
+                    markParts |> List.map (\( _, text_, _ ) -> text_) |> String.join "/"
             in
-            [ p [ class "target-label" ] [ text label ]
+            [ p [ class "target-label" ] (emphasize emphasis label)
             , p [ class "target-phonology" ] [ text ("/" ++ Notation.render notation phonology ++ "/") ]
-            , p [ class "target-steno" ] [ text (Notation.render notation basePart) ]
-            , p [ class "target-mark" ] [ text (orSpace markPart) ]
+            , p [ class "target-steno" ] (strokeSpans baseParts)
+            , p [ class "target-mark" ]
+                (if String.isEmpty markPart then
+                    [ text "\u{00A0}" ]
+
+                 else
+                    strokeSpans markParts
+                )
             ]
 
         ShowTyped notation typed ->
-            [ p [ class "target-label" ] [ text label ]
+            [ p [ class "target-label" ] (emphasize emphasis label)
             , p [ class "target-phonology" ] [ text ("/" ++ Notation.render notation phonology ++ "/") ]
             , p [ class "target-steno typed-strokes" ]
                 [ text

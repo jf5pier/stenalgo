@@ -90,11 +90,21 @@ Open `http://localhost:8000` in **Chrome or Edge**. Web Serial requires a
 secure context (`localhost` or HTTPS -- not `file://`), which is why a static
 server is needed even though there's no backend.
 
+## Two connection buttons
+
+- **Gemini PR (serial)**: Web Serial, 6-byte packets (`js/serial.js`, `src/GeminiPr.elm`).
+- **Plover HID**: WebHID, for a board set to Plover's HID machine (usage page
+  `0xFF50`, usage `0x4C56`). The device reports its full key state on every change;
+  `js/serial.js` ORs the keys seen until all are released, then hands the 8-byte chord to
+  `src/PloverHid.elm`, which uses the `plover-machine-hid` key chart. Close Plover first if
+  it holds the device (on some OSes only one program can read it).
+
 ## Known limitations
 
-- **Chromium-only.** `navigator.serial` doesn't exist in Firefox or Safari;
-  the app detects this and shows a message instead of a broken Connect
-  button.
+- **Chrome and Edge for sure.** `navigator.serial` and WebHID are Chromium APIs;
+  Gemini PR has been seen working in Firefox too (its Web Serial support is partial
+  or behind a setting), Plover HID needs Chrome or Edge. A browser with neither
+  API gets a message in the sidebar's connection section; the rest of the page still works.
 - **Secure context required.** HTTPS or `localhost` only -- serving the app
   from a plain LAN IP (`http://192.168.x.x:...`) will silently lack Web
   Serial.

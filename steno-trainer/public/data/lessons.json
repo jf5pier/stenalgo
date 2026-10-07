@@ -37,7 +37,7 @@
    "track": "phonemes",
    "index": 1,
    "sectionTitle": "Les premières touches",
-   "title": "Leçon un : R-, @-, a-, -j",
+   "title": "Leçon un : les phonèmes R- @ 9 a -j -b -w",
    "kind": "phonemes",
    "newKeys": [
     8,
@@ -50,7 +50,7 @@
     {
      "kind": "phoneme",
      "hand": "thumbs",
-     "text": "La touche @- écrit /@/ (« en », « rang », « hareng ») ou /9/ (« oeil »)."
+     "text": "La touche @- écrit /@/ (« en », « rang », « hareng »)\nou /9/ (« oeil »)."
     },
     {
      "kind": "phoneme",
@@ -60,7 +60,7 @@
     {
      "kind": "phoneme",
      "hand": "right",
-     "text": "La touche -j écrit /j/ (« oeil », « aïe »), /b/ (« arabe », « rab ») ou /w/ (« out », « house », « sertão »)."
+     "text": "La touche -j écrit /j/ (« oeil », « aïe »),\n/b/ (« arabe », « rab »)\nou /w/ (« out », « house », « sertão »)."
     },
     {
      "kind": "phoneme",
@@ -269,7 +269,7 @@
    "track": "phonemes",
    "index": 2,
    "sectionTitle": "Les premières touches",
-   "title": "Leçon deux : w-, -i, -e, -s",
+   "title": "Leçon deux : les phonèmes w- N- G- i e O -s",
    "kind": "phonemes",
    "newKeys": [
     9,
@@ -282,7 +282,7 @@
     {
      "kind": "phoneme",
      "hand": "left",
-     "text": "La touche w- écrit /w/ (« oui », « ouah », « oyez »), /N/ (« agneau », « ignorance », « ignorons ») ou /G/ (« bingo », « gringo », « mungo »)."
+     "text": "La touche w- écrit /w/ (« oui », « ouah », « oyez »),\n/N/ (« agneau », « ignorance », « ignorons »)\nou /G/ (« bingo », « gringo », « mungo »)."
     },
     {
      "kind": "phoneme",
@@ -297,7 +297,7 @@
     {
      "kind": "phoneme",
      "hand": "thumbs",
-     "text": "La touche -e écrit /e/ (« et », « héros », « ohé ») ou /O/ (« robe », « os », « oignon »)."
+     "text": "La touche -e écrit /e/ (« et », « héros », « ohé »)\nou /O/ (« robe », « os », « oignon »)."
     }
    ],
    "words": [
@@ -1152,7 +1152,7 @@
    "track": "phonemes",
    "index": 3,
    "sectionTitle": "Les autres doigts",
-   "title": "Leçon trois : m-, t-, -k, -d",
+   "title": "Leçon trois : les phonèmes m- t- -k -d",
    "kind": "phonemes",
    "newKeys": [
     6,
@@ -2028,7 +2028,7 @@
    "track": "phonemes",
    "index": 4,
    "sectionTitle": "Les autres doigts",
-   "title": "Leçon quatre : p-, v-, -t, -R",
+   "title": "Leçon quatre : les phonèmes p- v- -t -R",
    "kind": "phonemes",
    "newKeys": [
     4,
@@ -2890,7 +2890,7 @@
    "track": "phonemes",
    "index": 5,
    "sectionTitle": "Les autres doigts",
-   "title": "Leçon cinq : k-, s-, -n, -l",
+   "title": "Leçon cinq : les phonèmes k- s- -n -l",
    "kind": "phonemes",
    "newKeys": [
     2,
@@ -3738,7 +3738,7 @@
    "track": "phonemes",
    "index": 6,
    "sectionTitle": "Accords à deux touches",
-   "title": "Leçon six : R-, w-, @-, a-, -i, -e, -j, -s",
+   "title": "Leçon six : les phonèmes j- ° 8 E -v",
    "kind": "phonemes",
    "newKeys": [
     8,
@@ -3772,7 +3772,7 @@
     {
      "kind": "phoneme",
      "hand": "thumbs",
-     "text": "Les touches @-, a- pressées ensemble écrivent /°/ (« je », « ne », « ce ») ou /8/ (« lui », « suis », « nuit »)."
+     "text": "Les touches @-, a- pressées ensemble écrivent /°/ (« je », « ne », « ce »)\nou /8/ (« lui », « suis », « nuit »)."
     },
     {
      "kind": "phoneme",
@@ -4600,7 +4600,7 @@
    "track": "phonemes",
    "index": 7,
    "sectionTitle": "Accords à deux touches",
-   "title": "Leçon sept : -Z, -m",
+   "title": "Leçon sept : les phonèmes -Z -G -m",
    "kind": "phonemes",
    "newKeys": [
     24,
@@ -4611,7 +4611,7 @@
     {
      "kind": "phoneme",
      "hand": "right",
-     "text": "La touche -Z écrit /Z/ (« mariage », « âge », « visage ») ou /G/ (« parking », « thanksgiving », « ring »)."
+     "text": "La touche -Z écrit /Z/ (« mariage », « âge », « visage »)\nou /G/ (« parking », « thanksgiving », « ring »)."
     },
     {
      "kind": "phoneme",
@@ -5428,7 +5428,7 @@
    "track": "phonemes",
    "index": 8,
    "sectionTitle": "Accords à deux touches, suite",
-   "title": "Leçon huit : m-, t-, p-, v-, -k, -d, -n, -l",
+   "title": "Leçon huit : les phonèmes l- d- -g -z",
    "kind": "phonemes",
    "newKeys": [
     4,
@@ -6291,7 +6291,7 @@
    "track": "phonemes",
    "index": 9,
    "sectionTitle": "Accords à deux touches, suite",
-   "title": "Leçon neuf : k-, s-",
+   "title": "Leçon neuf : les phonèmes g-",
    "kind": "phonemes",
    "newKeys": [
     2,
@@ -7121,7 +7121,7 @@
    "track": "phonemes",
    "index": 10,
    "sectionTitle": "Derniers accords d'un doigt",
-   "title": "Leçon dix : -Z, -m",
+   "title": "Leçon dix : les phonèmes -S",
    "kind": "phonemes",
    "newKeys": [
     24,
@@ -7951,7 +7951,7 @@
    "track": "phonemes",
    "index": 11,
    "sectionTitle": "Voyelles à deux pouces",
-   "title": "Leçon onze : @-, -i, @-, -e, a-, -i, a-, -e",
+   "title": "Leçon onze : les phonèmes y u § o",
    "kind": "phonemes",
    "newKeys": [
     11,
@@ -8810,7 +8810,7 @@
    "track": "phonemes",
    "index": 12,
    "sectionTitle": "Consonnes à deux doigts",
-   "title": "Leçon douze : m-, R-, t-, w-, -j, -k, -s, -d",
+   "title": "Leçon douze : les phonèmes n- z- -p -f",
    "kind": "phonemes",
    "newKeys": [
     6,
@@ -9673,7 +9673,7 @@
    "track": "phonemes",
    "index": 13,
    "sectionTitle": "Accords à deux doigts, suite",
-   "title": "Leçon treize : p-, m-, @-, -i, -e, a-, -i, -e, -t, -n",
+   "title": "Leçon treize : les phonèmes S- 2 5 -N",
    "kind": "phonemes",
    "newKeys": [
     4,
@@ -10538,7 +10538,7 @@
    "track": "phonemes",
    "index": 14,
    "sectionTitle": "Accords à deux doigts, suite",
-   "title": "Leçon quatorze : v-, t-, k-, p-, s-, v-",
+   "title": "Leçon quatorze : les phonèmes Z- f- b-",
    "kind": "phonemes",
    "newKeys": [
     2,
@@ -11389,7 +11389,7 @@
    "track": "phonemes",
    "index": 15,
    "sectionTitle": "La voyelle complète",
-   "title": "Leçon quinze : @-, a-, -i, -e",
+   "title": "Leçon quinze : les phonèmes 1",
    "kind": "phonemes",
    "newKeys": [
     11,

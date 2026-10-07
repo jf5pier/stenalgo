@@ -344,7 +344,7 @@ Every phoneme carries its examples directly after it, parenthesized:
 
 Multi-phoneme keypress (the keypress is atomic, so one rule) lists each phoneme
 with its own examples, joined `", "` and `" ou "` before the last:
-`La touche {touche} écrit /j/ (« oeil », « aïe »), /b/ (« arabe ») ou /w/.`
+`La touche {touche} écrit /j/ (« oeil », « aïe »),\n/b/ (« arabe »)\nou /w/.` (one phoneme per line; the trainer renders the `\n`)
 (the coda /w/ stays bare — no stream record realizes /w/ in a coda; see
 `{exemples}` below) — there is no "selon la position" wording anymore.
 
@@ -410,6 +410,8 @@ first marked record alone: `La marque {marque} ({touches}) s'ajoute à la fin du
 mot : {exemple}.`).
 
 ### 7.6 Titles
+
+Phoneme-lesson titles list the phonemes the introduced keypresses write, one by one, by hand group, without repeats (`Leçon un : les phonèmes R- @ 9 a -j -b -w`: onset phonemes with a trailing hyphen, coda phonemes with a leading one, vowels bare). The trainer numbers the lessons continuously across tracks at display time (`Lessons.displayTitle`), whatever number the exported title carries.
 
 Track titles: `Phonèmes`, `Accord (genre et nombre)`, `Verbes`,
 `Désambiguïsation`, `Affixes`. Track descriptions are one French sentence each

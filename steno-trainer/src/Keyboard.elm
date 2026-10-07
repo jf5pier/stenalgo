@@ -1,4 +1,4 @@
-module Keyboard exposing (AffixRule, ExpressionRule, KeyInfo, Layout, affixRuleDecoder, decoder, expressionRuleDecoder, geminiKeymap, view, viewAffixLegend, viewChordBoard, viewExpressionLegend, viewLegends, isConjugationStroke)
+module Keyboard exposing (AffixRule, ExpressionRule, KeyInfo, Layout, affixRuleDecoder, decoder, expressionRuleDecoder, geminiKeymap, view, viewAffixLegend, viewChordBoard, viewExpressionLegend, viewLegends, viewStrokeLegend, isConjugationStroke, markerPatterns)
 
 {-| The virtual Starboard: decodes `keyboard-layout.json` (exported by
 `util/export_keyboard_layout.py` from the repo's own `Starboard` class) and
@@ -11,7 +11,7 @@ sparser 3-/4-key thumb chords plus the same-lemma/conjugation marker keys
 -}
 
 import Dict exposing (Dict)
-import Html exposing (Html, div, h3, li, text, ul)
+import Html exposing (Html, div, h2, h3, li, span, text, ul)
 import Html.Attributes exposing (class, classList, style)
 import Json.Decode as D
 import Json.Decode.Pipeline exposing (required)
@@ -206,6 +206,13 @@ keyDisplayName key =
         key.phonemes
 
 
+{-| The `*` and `#` star/hash mark keys: drawn like any phoneme key (not dimmed
+as reserved) and two rows tall, like the R + wNG pair beside the `*`. -}
+isMarkKey : KeyInfo -> Bool
+isMarkKey key =
+    key.name == "*" || key.name == "#"
+
+
 keyView : Set Int -> Maybe Bool -> KeyInfo -> Html msg
 keyView highlighted correct key =
     let
@@ -215,12 +222,19 @@ keyView highlighted correct key =
     div
         [ classList
             [ ( "key", True )
-            , ( "key-reserved", key.reserved )
+            , ( "key-reserved", key.reserved && not (isMarkKey key) )
+            , ( "key-tall", isMarkKey key )
             , ( "key-expected", isHighlighted )
             , ( "key-correct", isHighlighted && correct == Just True )
             , ( "key-incorrect", isHighlighted && correct == Just False )
             ]
-        , style "grid-row" (String.fromInt (key.row + 1))
+        , style "grid-row"
+            (if isMarkKey key then
+                String.fromInt (key.row + 1) ++ " / span 2"
+
+             else
+                String.fromInt (key.row + 1)
+            )
         , style "grid-column" (String.fromInt (key.col + 1))
         ]
         [ text (keyDisplayName key) ]
@@ -240,11 +254,11 @@ which hand(s) it touches. Badges are positioned by pixel math (`chordKeyCenterX`
 belong to several pairs, so grid-cell-sized overlays for each pair would
 overlap and stack on top of each other.
 -}
-viewChordBoard : Set Int -> Layout -> Html msg
-viewChordBoard lit layout =
+viewChordBoard : Set Int -> Set Int -> (Set Int -> List Int -> Bool) -> Layout -> Html msg
+viewChordBoard lit hint pairAllowed layout =
     case List.filter (\l -> l.keyCount == 2) layout.phonemeLayers of
         layer :: _ ->
-            div [ class "phoneme-layer" ] [ viewChordGrid lit layout.keys layer.strokes ]
+            div [ class "phoneme-layer" ] [ viewChordGrid lit hint pairAllowed layout.keys layer.strokes ]
 
         [] ->
             text ""
@@ -307,13 +321,30 @@ chordKeyCenterY key =
     toFloat key.row * chordKeyStride + chordKeyHalf
 
 
-viewChordGrid : Set Int -> List KeyInfo -> List PhonemeStroke -> Html msg
-viewChordGrid lit keys strokes =
+viewChordGrid : Set Int -> Set Int -> (Set Int -> List Int -> Bool) -> List KeyInfo -> List PhonemeStroke -> Html msg
+viewChordGrid lit hint pairAllowed keys strokes =
     let
         -- A badge lights up when both keys of its pair are in the lit stroke
         -- (the Simulate button's current stroke).
         isLit a b =
-            Set.member a.index lit && Set.member b.index lit
+            glowOf lit a b
+
+        glowOf keySet a b =
+            if Set.member a.index keySet && Set.member b.index keySet && pairAllowed keySet [ a.index, b.index ] then
+                True
+
+            else
+                False
+
+        glow a b =
+            if glowOf lit a b then
+                LitGlow
+
+            else if glowOf hint a b then
+                HintGlow
+
+            else
+                NoGlow
 
         pairs =
             List.filterMap (chordStrokePair keys) strokes
@@ -361,8 +392,8 @@ viewChordGrid lit keys strokes =
         (List.map chordKeyView keys
             ++ List.concatMap chordConnectorViews droppedSkipPairs
             ++ chordOverlaysView
-                (List.map (\( a, b, label ) -> ( chordMidpoint a b, ( label, isLit a b ) )) adjacentPairs
-                    ++ List.map (\( ( a, b, label ), badgeX, kind ) -> ( ( badgeX, chordDropYFor kind a b ), ( label, isLit a b ) )) droppedSkipPairs
+                (List.map (\( a, b, label ) -> ( chordMidpoint a b, ( label, glow a b ) )) adjacentPairs
+                    ++ List.map (\( ( a, b, label ), badgeX, kind ) -> ( ( badgeX, chordDropYFor kind a b ), ( label, glow a b ) )) droppedSkipPairs
                 )
         )
 
@@ -519,7 +550,7 @@ chordKeyView key =
     div
         [ classList
             [ ( "key", True )
-            , ( "key-reserved", key.reserved )
+            , ( "key-reserved", key.reserved && not (isMarkKey key) )
             ]
         , style "grid-row" (String.fromInt (key.row + 1))
         , style "grid-column" (String.fromInt (chordKeyColumn key))
@@ -735,6 +766,14 @@ chordConnectorSegment ( x1, y1 ) ( x2, y2 ) =
         []
 
 
+{-| How a badge is lit: by the Simulate run (green), by the hint, the stroke the
+drill expects (gray), or not. -}
+type Glow
+    = NoGlow
+    | HintGlow
+    | LitGlow
+
+
 {-| One small phoneme badge per already-positioned stroke. Badges are
 grouped by their exact position first and spread apart vertically within a
 group before rendering, as a defensive fallback in case two ever land on the
@@ -742,14 +781,14 @@ same point (adjacent pairs use a plain midpoint, so e.g. a thumb cluster's
 two diagonal pairs could coincide there; `chordDropDepth`'s staggering
 already keeps today's data collision-free without relying on this).
 -}
-chordOverlaysView : List ( ( Float, Float ), ( String, Bool ) ) -> List (Html msg)
+chordOverlaysView : List ( ( Float, Float ), ( String, Glow ) ) -> List (Html msg)
 chordOverlaysView points =
     points
         |> groupByCenter
         |> List.concatMap viewOverlayGroup
 
 
-groupByCenter : List ( ( Float, Float ), ( String, Bool ) ) -> List ( ( Float, Float ), List ( String, Bool ) )
+groupByCenter : List ( ( Float, Float ), ( String, Glow ) ) -> List ( ( Float, Float ), List ( String, Glow ) )
 groupByCenter points =
     points
         |> List.foldl
@@ -780,7 +819,7 @@ chordOverlayCollisionSpacing =
     0.65
 
 
-viewOverlayGroup : ( ( Float, Float ), List ( String, Bool ) ) -> List (Html msg)
+viewOverlayGroup : ( ( Float, Float ), List ( String, Glow ) ) -> List (Html msg)
 viewOverlayGroup ( ( x, y ), labels ) =
     let
         n =
@@ -788,9 +827,9 @@ viewOverlayGroup ( ( x, y ), labels ) =
     in
     labels
         |> List.indexedMap
-            (\i ( label, lit ) ->
+            (\i ( label, glowing ) ->
                 div
-                    [ classList [ ( "chord-overlay", True ), ( "chord-overlay-lit", lit ) ]
+                    [ classList [ ( "chord-overlay", True ), ( "chord-overlay-lit", glowing == LitGlow ), ( "chord-overlay-hint", glowing == HintGlow ) ]
                     , style "left" (String.fromFloat x ++ "rem")
                     , style "top" (String.fromFloat (y + (toFloat i - (toFloat n - 1) / 2) * chordOverlayCollisionSpacing) ++ "rem")
                     ]
@@ -808,30 +847,135 @@ keyByIndex keys index =
 Meant for a narrow sidebar column next to the page title, not stacked under
 the (tall) keyboards.
 -}
-viewLegends : Set Int -> Bool -> Layout -> Html msg
-viewLegends lit markLit layout =
+viewLegends : Set Int -> Bool -> Set Int -> String -> Layout -> Html msg
+viewLegends lit markLit markHighlighted readingLabel layout =
     div [ class "legends" ]
-        [ viewStrokeLegend lit layout.keys (List.filter (\l -> l.keyCount > 2) layout.phonemeLayers)
-        , viewConjugationLegend (if markLit then lit else Set.empty) layout.conjugationMarkers
+        [ viewConjugationLegend (if markLit then lit else Set.empty) markHighlighted readingLabel layout.conjugationMarkers
         ]
 
 
-viewStrokeLegend : Set Int -> List KeyInfo -> List PhonemeLayer -> Html msg
-viewStrokeLegend lit keys layers =
-    div [ class "legend-block" ]
-        [ h3 [] [ text "3- and 4-key strokes" ]
-        , ul [ class "legend" ]
-            (layers
+{-| The 3-/4-key thumb strokes, drawn under the chord board like the 2-key
+pairs: one mini board per stroke, the same four thumb keys on one line (left
+thumb pair, a gap, right thumb pair). The pressed keys are dark (the others
+faint), an elbow line drops from each pressed key to a round phoneme badge
+under the group, as on the chord board. All groups sit on one line.
+-}
+viewStrokeLegend : Set Int -> Set Int -> (Set Int -> List Int -> Bool) -> Layout -> Html msg
+viewStrokeLegend lit hint strokeAllowed layout =
+    let
+        strokes =
+            layout.phonemeLayers
+                |> List.filter (\l -> l.keyCount > 2)
                 |> List.concatMap .strokes
-                |> List.map (viewStrokeLegendItem lit keys)
-            )
-        ]
+
+        thumbKeys =
+            strokes
+                |> List.concatMap .keys
+                |> Set.fromList
+                |> Set.toList
+                |> List.filterMap (keyByIndex layout.keys)
+
+        leftKeys =
+            List.filter (\k -> k.hand == "left") thumbKeys
+
+        rightKeys =
+            List.filter (\k -> k.hand /= "left") thumbKeys
+
+        -- Grid position (0-based slot) of each thumb key: left pair, spacer, right pair.
+        slotOf key =
+            if key.hand == "left" then
+                indexOfKey key leftKeys
+
+            else
+                List.length leftKeys + 1 + indexOfKey key rightKeys
+
+        keyCenterX key =
+            let
+                slot =
+                    slotOf key
+            in
+            if key.hand == "left" then
+                toFloat slot * chordKeyStride + chordKeyHalf
+
+            else
+                toFloat (List.length leftKeys) * chordKeyStride + 1.75 + toFloat (slot - List.length leftKeys - 1) * chordKeyStride + chordKeyHalf
+
+        dropY =
+            2 * chordKeyHalf + 1.1
+
+        keyCell stroke key =
+            div
+                [ classList [ ( "key", True ), ( "stroke-legend-key", True ), ( "stroke-legend-pressed", List.member key.index stroke.keys ) ]
+                , style "grid-row" "1"
+                , style "grid-column" (String.fromInt (slotOf key + 1))
+                ]
+                [ text (keyDisplayName key) ]
+
+        group stroke =
+            let
+                pressed =
+                    List.filterMap (keyByIndex layout.keys) stroke.keys
+
+                -- All three badges are centered under the whole group of four keys (the middle of the gap).
+                badgeX =
+                    case ( List.map keyCenterX thumbKeys |> List.minimum, List.map keyCenterX thumbKeys |> List.maximum ) of
+                        ( Just lo, Just hi ) ->
+                            (lo + hi) / 2
+
+                        _ ->
+                            0
+
+                -- A group lights when its keys are all down and no bigger group's keys are
+                -- (the 4-key "1" must not also light "2" and "5"), and its phoneme is the word's.
+                containedIn bigger =
+                    List.all (\k -> List.member k bigger.keys) stroke.keys && List.length bigger.keys > List.length stroke.keys
+
+                groupGlowOf keySet =
+                    List.all (\k -> Set.member k keySet) stroke.keys
+                        && strokeAllowed keySet stroke.keys
+                        && not (List.any (\other -> containedIn other && List.all (\k -> Set.member k keySet) other.keys) strokes)
+
+                allLit =
+                    groupGlowOf lit
+
+                glowing =
+                    if allLit then
+                        LitGlow
+
+                    else if groupGlowOf hint then
+                        HintGlow
+
+                    else
+                        NoGlow
+            in
+            div
+                [ classList [ ( "chord-board", True ), ( "stroke-legend-group", True ), ( "legend-lit", allLit ) ] ]
+                (List.map (keyCell stroke) thumbKeys
+                    ++ List.concatMap
+                        (\key ->
+                            [ chordConnectorSegment ( keyCenterX key, 2 * chordKeyHalf ) ( keyCenterX key, dropY )
+                            , chordConnectorSegment ( keyCenterX key, dropY ) ( badgeX, dropY )
+                            ]
+                        )
+                        pressed
+                    ++ chordOverlaysView [ ( ( badgeX, dropY ), ( stroke.phonemes, glowing ) ) ]
+                )
+    in
+    if List.isEmpty strokes then
+        text ""
+
+    else
+        div [ class "stroke-legend" ] (List.map group strokes)
 
 
-viewStrokeLegendItem : Set Int -> List KeyInfo -> PhonemeStroke -> Html msg
-viewStrokeLegendItem lit keys stroke =
-    li [ classList [ ( "legend-lit", List.all (\k -> Set.member k lit) stroke.keys ) ] ]
-        [ text (String.join " + " (List.map (keyLabel keys) stroke.keys) ++ " \u{2192} " ++ stroke.phonemes) ]
+indexOfKey : KeyInfo -> List KeyInfo -> Int
+indexOfKey key keys =
+    keys
+        |> List.indexedMap Tuple.pair
+        |> List.filter (\( _, k ) -> k.index == key.index)
+        |> List.head
+        |> Maybe.map Tuple.first
+        |> Maybe.withDefault 0
 
 
 keyLabel : List KeyInfo -> Int -> String
@@ -843,22 +987,94 @@ keyLabel keys index =
         |> Maybe.withDefault (String.fromInt index)
 
 
-viewConjugationLegend : Set Int -> List ConjugationMarker -> Html msg
-viewConjugationLegend lit markers =
+viewConjugationLegend : Set Int -> Set Int -> String -> List ConjugationMarker -> Html msg
+viewConjugationLegend lit highlighted readingLabel markers =
     div [ class "legend-block" ]
-        [ h3 [] [ text "Conjugation markers" ]
+        [ h2 [] [ text "Marqueurs de conjugaison" ]
         , ul [ class "legend" ]
             (markers
                 |> List.map
                     (\m ->
-                        li [ classList [ ( "legend-mark", not (Set.isEmpty lit) && Set.fromList m.keys == lit ) ] ]
-                            [ text (String.join "+" m.keyNames ++ " : " ++ m.label) ]
+                        let
+                            isHighlighted =
+                                not (Set.isEmpty highlighted) && markerIn highlighted m
+
+                            features =
+                                String.split ", " m.label
+                                    |> List.map
+                                        (\feature ->
+                                            span [ classList [ ( "legend-feature", isHighlighted && featureMatches readingLabel feature ) ] ] [ text feature ]
+                                        )
+                                    |> List.intersperse (text ", ")
+                        in
+                        li [ classList [ ( "legend-mark", not (Set.isEmpty lit) && markerIn lit m ) ] ]
+                            (text (String.join "+" m.keyNames ++ " : ") :: features)
                     )
             )
         ]
 
 
-{-| Whether `stroke` is exactly the keys of one conjugation marker: the extra
+{-| Whether one feature of a marker's label ("futur", "3e personne", "pluriel",
+"féminin"...) is what the word's reading label (e.g. "indicatif futur, 3e sg.")
+says. -}
+featureMatches : String -> String -> Bool
+featureMatches readingLabel feature =
+    let
+        label =
+            String.toLower readingLabel
+    in
+    if feature == "pluriel" then
+        String.contains " pl." label
+
+    else if feature == "féminin" then
+        String.contains " f." label
+
+    else if String.endsWith " personne" feature then
+        String.contains (String.dropRight 9 feature ++ " ") label
+
+    else
+        String.contains feature label
+
+
+{-| The pieces of a reading label ("nom, pl. \u{00B7} adjectif, pl.") that the
+highlighted conjugation marker stands for: for each of the marker's features the
+reading label confirms, the text it shows there ("pl.", "3e", "futur"...).
+Empty when no marker is highlighted. -}
+markerPatterns : Layout -> Set Int -> String -> List String
+markerPatterns layout highlighted readingLabel =
+    layout.conjugationMarkers
+        |> List.filter (\m -> not (Set.isEmpty highlighted) && markerIn highlighted m)
+        |> List.concatMap (\m -> String.split ", " m.label)
+        |> List.filter (featureMatches readingLabel)
+        |> List.map
+            (\feature ->
+                if feature == "pluriel" then
+                    "pl."
+
+                else if feature == "f\u{00E9}minin" then
+                    "f."
+
+                else if String.endsWith " personne" feature then
+                    String.dropRight 9 feature
+
+                else
+                    feature
+            )
+
+
+{-| Whether a marker's keys are all in `stroke` (a stroke made of marker keys alone
+can hold several markers: "-st" is the plural and the third person). -}
+markerIn : Set Int -> ConjugationMarker -> Bool
+markerIn stroke marker =
+    List.all (\k -> Set.member k stroke) marker.keys
+
+
+markerKeys : Layout -> Set Int
+markerKeys layout =
+    layout.conjugationMarkers |> List.concatMap .keys |> Set.fromList
+
+
+{-| Whether `stroke` is made of conjugation marker keys alone, one or several: the extra
 stroke a conjugated form ends with (the Simulate button lights it yellow). -}
 isConjugationStroke : Layout -> List Int -> Bool
 isConjugationStroke layout stroke =
@@ -866,7 +1082,7 @@ isConjugationStroke layout stroke =
         keys =
             Set.fromList stroke
     in
-    not (Set.isEmpty keys) && List.any (\m -> Set.fromList m.keys == keys) layout.conjugationMarkers
+    not (Set.isEmpty keys) && Set.isEmpty (Set.diff keys (markerKeys layout))
 
 
 {-| The affix rules, one per line: key names, then the affix they stand for.

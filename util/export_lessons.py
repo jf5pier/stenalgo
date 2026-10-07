@@ -540,11 +540,11 @@ def _inlinePhoneme(phoneme: str, orthos: list[str]) -> str:
 
 def _multiPhonemeText(phonemes: tuple[str, ...],
                       examplesByPhoneme: dict[str, list[str]]) -> str:
-    """Each phoneme of an atomic multi-phoneme keypress with its own examples,
-    joined ", " and " ou " before the last: `/j/ (« oeil »), /b/ (« arabe ») ou
-    /w/ (« watt »)`."""
+    """Each phoneme of an atomic multi-phoneme keypress with its own examples, one per
+    line (the trainer shows the line breaks), "," ending every line but the last two and
+    "ou" opening the last: `/j/ (« oeil »),\n/b/ (« arabe »)\nou /w/ (« watt »)`."""
     parts = [_inlinePhoneme(phoneme, examplesByPhoneme[phoneme]) for phoneme in phonemes]
-    return ", ".join(parts[:-1]) + f" ou {parts[-1]}"
+    return ",\n".join(parts[:-1]) + f"\nou {parts[-1]}"
 
 
 def phonemeRule(item: dict[str, Any], starboard: Starboard, pool: list[dict[str, Any]],
@@ -709,14 +709,21 @@ def buildLessons(
             coveredKeypresses = newCovered  # the lesson's own pool may use its new keys
             pool = poolTop(lambda record: True)
             index = counters.get("phonemes", 0) + 1
-            # The title names the introduced keypresses' key names (keyboard-layout
-            # keys[i].name), ordered by hand group (gauche -> pouces -> droite), within
-            # a group in the exporter's step order (§7.6).
-            keyNamesByHand = [_keyNames(starboard, item["keypress"])
-                              for hand in HANDS
-                              for item in chunk
-                              if handOfKeypress(item["keypress"], starboard._fingerAssignments) == hand]
-            title = f"Leçon {numberInFrench(index)} : {', '.join(keyNamesByHand)}"
+            # The title lists the phonemes the introduced keypresses write, one by one
+            # ("les phonèmes R- @ 9 a -j -b -w"): an onset phoneme with a trailing
+            # hyphen, a coda phoneme with a leading one, a vowel bare, as the key names
+            # mark the syllable part. Ordered by hand group (gauche -> pouces -> droite),
+            # within a group in the exporter's step order (§7.6), without repeats.
+            def phonemeLabel(phoneme: str, part: str) -> str:
+                return phoneme + "-" if part == "onset" else "-" + phoneme if part == "coda" else phoneme
+
+            phonemesByHand = list(dict.fromkeys(
+                phonemeLabel(phoneme, item["part"])
+                for hand in HANDS
+                for item in chunk
+                if handOfKeypress(item["keypress"], starboard._fingerAssignments) == hand
+                for phoneme in item["phonemes"]))
+            title = f"Leçon {numberInFrench(index)} : les phonèmes {' '.join(phonemesByHand)}"
             _emitLesson(lessons, counters, "phonemes", title, "phonemes", sectionTitle,
                         sorted({key for item in chunk for key in item["keypress"]}),
                         [sorted(item["keypress"]) for item in chunk if len(item["keypress"]) >= 2],

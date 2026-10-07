@@ -90,9 +90,36 @@ body {
   font-size: 0.9rem;
 }
 
+.mode-switch {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: stretch;
+}
+
+.sidebar-section h2,
+.sidebar .legend-block h2 {
+  font-size: 1rem;
+  margin: 1.5rem 0 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
 .target-steno {
   font-family: monospace;
   color: #666;
+  font-size: calc(1rem + 2px);
+}
+
+.current-stroke {
+  font-weight: bold;
+}
+
+.target-steno .current-stroke {
+  color: #000;
+}
+
+.legend-feature {
+  font-weight: bold;
 }
 
 .target-mark {
@@ -336,6 +363,7 @@ body {
 }
 
 .lesson-rule-text {
+  white-space: pre-line;
   margin: 0;
 }
 
@@ -396,6 +424,10 @@ body {
 }
 
 /* The Simulate button's lit stroke: the same green as .key-correct on the three boards. */
+.chord-overlay-hint {
+  background: #eee;
+}
+
 .chord-overlay-lit {
   background: #8f8;
 }
@@ -411,4 +443,38 @@ body {
 .legend li.legend-mark {
   background: #ff0;
   color: #000;
+}
+
+/* The 3-/4-key strokes under the chord board: three groups of the four thumb keys on one line.
+   Pushed down so the deepest chord-board badges (the y/o/u pair labels) don't overlap it. */
+.stroke-legend {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: safe center;
+  gap: 1.5rem;
+  margin-top: 6rem;
+  font-family: monospace;
+}
+
+/* A mini chord board per stroke: 2 thumb keys, a gap, 2 thumb keys, then the badge and its lines below. */
+.stroke-legend-group.chord-board {
+  grid-template-columns: repeat(2, 3rem) 1.5rem repeat(2, 3rem);
+  grid-template-rows: 3rem;
+  grid-auto-rows: 0;
+  margin: 0;
+  padding-bottom: 2.2rem;
+}
+
+.stroke-legend-key {
+  box-sizing: border-box;
+  font-size: 1.15rem;
+  color: #bbb;
+}
+
+.stroke-legend-key.stroke-legend-pressed {
+  color: #000;
+}
+
+.stroke-legend-group.legend-lit .stroke-legend-key.stroke-legend-pressed {
+  background: #8f8;
 }

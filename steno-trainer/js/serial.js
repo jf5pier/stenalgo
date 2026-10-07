@@ -15,7 +15,9 @@
     app.ports.serialStatus.send(status);
   }
 
-  if (!("serial" in navigator)) {
+  var hasSerial = "serial" in navigator;
+  var hasHid = "hid" in navigator;
+  if (!hasSerial && !hasHid) {
     sendStatus("unsupported");
     return;
   }
@@ -84,9 +86,78 @@
 
   // Elm calls this only from a button click handler, satisfying Web
   // Serial's user-gesture requirement for requestPort().
-  app.ports.requestConnect.subscribe(connect);
-
-  navigator.serial.addEventListener("disconnect", function () {
-    sendStatus("disconnected");
+  app.ports.requestConnect.subscribe(function () {
+    if (!hasSerial) {
+      sendStatus("error:Web Serial is not available in this browser");
+      return;
+    }
+    connect();
   });
+
+  if (hasSerial) {
+    navigator.serial.addEventListener("disconnect", function () {
+      sendStatus("disconnected");
+    });
+  }
+
+  // --- Plover HID (WebHID) -------------------------------------------------
+  // The device sends its whole key state on every change (report id 0x50,
+  // then 8 bytes = 64 key bits, see Plover HID / plover-machine-hid). Like
+  // Plover's default (no first-up) mode, the keys seen since the last
+  // all-released report are ORed together and the chord is handed to Elm
+  // (port `incomingHidChord`, 8 bytes) when every key is up again.
+  var HID_USAGE_PAGE = 0xff50;
+  var HID_USAGE = 0x4c56;
+  var HID_REPORT_ID = 0x50;
+
+  function watchHid(device) {
+    var chord = [0, 0, 0, 0, 0, 0, 0, 0];
+    device.addEventListener("inputreport", function (event) {
+      if (event.reportId !== HID_REPORT_ID || event.data.byteLength < 8) {
+        return;
+      }
+      var any = false;
+      for (var k = 0; k < 8; k++) {
+        var b = event.data.getUint8(k);
+        chord[k] |= b;
+        any = any || b !== 0;
+      }
+      if (!any) {
+        app.ports.incomingHidChord.send(chord);
+        chord = [0, 0, 0, 0, 0, 0, 0, 0];
+      }
+    });
+  }
+
+  async function connectHid() {
+    if (!hasHid) {
+      sendStatus("error:WebHID is not available in this browser");
+      return;
+    }
+    try {
+      var devices = await navigator.hid.requestDevice({
+        filters: [{ usagePage: HID_USAGE_PAGE, usage: HID_USAGE }],
+      });
+      if (devices.length === 0) {
+        sendStatus("error:no Plover HID device chosen or found (is Plover holding it?)");
+        return;
+      }
+      var device = devices[0];
+      if (!device.opened) {
+        await device.open();
+      }
+      watchHid(device);
+      sendStatus("connected");
+    } catch (err) {
+      sendStatus("error:" + err.message);
+    }
+  }
+
+  app.ports.requestConnectHid.subscribe(connectHid);
+
+  if (hasHid) {
+    navigator.hid.addEventListener("disconnect", function () {
+      sendStatus("disconnected");
+    });
+  }
 })();

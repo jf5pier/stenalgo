@@ -690,14 +690,14 @@ class TestPhonemeRule:
         item = {"keypress": (12,), "phonemes": ("i", "e", "o"), "part": "nucleus"}
         assert phonemeRule(item, starboard_with_layout, _RULE_POOL, _FALLBACK) == {
             "kind": "phoneme", "hand": "thumbs",
-            "text": "La touche i- écrit /i/ (« mi »), /e/ ou /o/."}
+            "text": "La touche i- écrit /i/ (« mi »),\n/e/\nou /o/."}
 
     def test_two_phonemes_join_with_ou(self, starboard_with_layout: Starboard):
         # /e/ never occurs in a coda (it is a vowel), so only /t/ gets examples.
         item = {"keypress": (16,), "phonemes": ("t", "e"), "part": "coda"}
         assert phonemeRule(item, starboard_with_layout, [], _FALLBACK) == {
             "kind": "phoneme", "hand": "right",
-            "text": "La touche -t écrit /t/ (« te », « ta ») ou /e/."}
+            "text": "La touche -t écrit /t/ (« te », « ta »)\nou /e/."}
 
     def test_chord_onset(self, starboard_with_layout: Starboard):
         item = {"keypress": (8, 9), "phonemes": ("E",), "part": "onset"}
@@ -738,7 +738,7 @@ class TestPhonemeRule:
         fallback = examplesFallbackByKeypress(stream)
         item = {"keypress": (16,), "phonemes": ("j", "w"), "part": "coda"}
         rule = phonemeRule(item, starboard_with_layout, [], fallback)
-        assert rule["text"] == "La touche -t écrit /j/ (« croyais ») ou /w/."
+        assert rule["text"] == "La touche -t écrit /j/ (« croyais »)\nou /w/."
 
 
 class TestAccordRule:
@@ -960,10 +960,10 @@ class TestBuildLessonsPhonemesTrack:
         document, _counts = lessons
         lesson = _lessonOf(document, "phonemes-01")
         assert lesson["sectionTitle"] == "Les premières touches"
-        # The title names the introduced keypresses' KEY names, ordered by hand
-        # group gauche -> pouces -> droite, within a group in deal order:
-        # s- (left), a- and i- (thumbs), -t (right).
-        assert lesson["title"] == "Leçon un : s-, a-, i-, -t"
+        # The title names the PHONEMES the introduced keypresses write, ordered by
+        # hand group gauche -> pouces -> droite, within a group in deal order:
+        # s (left), a and i (thumbs), t (right).
+        assert lesson["title"] == "Leçon un : les phonèmes s- a i -t"
         assert lesson["kind"] == "phonemes"
         # Round-robin deal: nucleus (11), onset (8), coda (16), nucleus (12).
         assert lesson["newKeys"] == [8, 11, 12, 16]
@@ -972,8 +972,8 @@ class TestBuildLessonsPhonemesTrack:
     def test_titles_order_key_names_by_hand_group(self, lessons):
         document, _counts = lessons
         assert _lessonOf(document, "phonemes-02")["title"] \
-            == "Leçon deux : l-, -e, -o, -R"
-        assert _lessonOf(document, "phonemes-03")["title"] == "Leçon trois : p-"
+            == "Leçon deux : les phonèmes l- e o -R"
+        assert _lessonOf(document, "phonemes-03")["title"] == "Leçon trois : les phonèmes p-"
 
     def test_first_lesson_rules_in_deal_order_with_hands(self, lessons):
         document, _counts = lessons
@@ -1017,14 +1017,14 @@ class TestBuildLessonsPhonemesTrack:
     def test_chord_lessons_declare_new_chords(self, lessons):
         document, _counts = lessons
         lesson4 = _lessonOf(document, "phonemes-04")
-        assert lesson4["title"] == "Leçon quatre : s-, l-"
+        assert lesson4["title"] == "Leçon quatre : les phonèmes E-"
         assert lesson4["newKeys"] == [8, 9]
         assert lesson4["newChords"] == [[8, 9]]
         assert lesson4["rules"][0] == {
             "kind": "phoneme", "hand": "left",
             "text": "Les touches s-, l- pressées ensemble écrivent /E/ en début de syllabe."}
         lesson5 = _lessonOf(document, "phonemes-05")
-        assert lesson5["title"] == "Leçon cinq : a-, -e"
+        assert lesson5["title"] == "Leçon cinq : les phonèmes ô"
         assert lesson5["newKeys"] == [11, 13]
         assert lesson5["newChords"] == [[11, 13]]
         assert lesson5["rules"][0] == {

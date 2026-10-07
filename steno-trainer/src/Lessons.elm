@@ -1,4 +1,4 @@
-module Lessons exposing (Abbreviation, AffixData, ExpressionData, Lesson, Lessons, Rule, Track, affixDecoder, decoder, expressionDecoder, mergeAffixData, mergeExpressionData, viewIntro, viewList, viewPrevNext)
+module Lessons exposing (Abbreviation, AffixData, ExpressionData, Lesson, Lessons, Rule, Track, affixDecoder, currentWords, decoder, displayTitle, expressionDecoder, mergeAffixData, mergeExpressionData, pastWords, viewIntro, viewList, viewPrevNext)
 
 {-| Lesson mode: the fixed learner progression exported by
 `util/export_lessons.py` (`lessons.json`) -- tracks of lessons, each lesson
@@ -241,15 +241,16 @@ viewTrack config lessons track =
         [ h3 [] [ text (config.render track.title) ]
         , p [ class "lesson-track-description" ] [ text (config.render track.description) ]
         , ul [ class "lesson-list" ]
-            (List.map (viewLessonButton config) trackLessons)
+            (List.map (\lesson -> viewLessonButton config (displayTitle config.render lessons lesson) lesson) trackLessons)
         ]
 
 
 viewLessonButton :
     { config | onSelect : String -> msg, selected : Maybe String, render : String -> String }
+    -> String
     -> Lesson
     -> Html msg
-viewLessonButton config lesson =
+viewLessonButton config title lesson =
     li []
         [ button
             [ classList
@@ -258,7 +259,7 @@ viewLessonButton config lesson =
                 ]
             , onClick (config.onSelect lesson.id)
             ]
-            [ text (config.render lesson.title) ]
+            [ text title ]
         ]
 
 
@@ -281,6 +282,7 @@ viewIntro :
     , onNext : Maybe msg
     , render : String -> String
     , keys : List KeyInfo
+    , title : String
     }
     -> Lesson
     -> Html msg
@@ -291,7 +293,7 @@ viewIntro config lesson =
                 ++ viewPrevNext config.onPrev config.onNext
             )
         , p [ class "lesson-section-title" ] [ text (config.render lesson.sectionTitle) ]
-        , h2 [ class "lesson-title" ] [ text (config.render lesson.title) ]
+        , h2 [ class "lesson-title" ] [ text config.title ]
         , viewRules config.render lesson.rules
         , div [ class "lesson-keyboard" ]
             [ Keyboard.view
@@ -383,3 +385,83 @@ they all light up at once). -}
 highlightedKeys : Lesson -> Set Int
 highlightedKeys lesson =
     lesson.newKeys ++ List.concat lesson.newChords |> Set.fromList
+
+
+{-| The lesson's title with its number counted over ALL the lessons in
+export order, so the numbering carries on from one track to the next instead of
+restarting at 1 in each (the exported titles number within their track, in
+words). The number is a digit string put in AFTER `render` (the notation's
+rewriter would turn a "1" into an IPA glyph); only the rest of the title goes
+through it. -}
+displayTitle : (String -> String) -> Lessons -> Lesson -> String
+displayTitle render lessons lesson =
+    let
+        position =
+            lessons.lessons
+                |> List.indexedMap Tuple.pair
+                |> List.filter (\( _, l ) -> l.id == lesson.id)
+                |> List.head
+                |> Maybe.map (\( i, _ ) -> i + 1)
+                |> Maybe.withDefault 1
+    in
+    case String.split " : " lesson.title of
+        _ :: (_ :: _ as rest) ->
+            "Le\u{00E7}on " ++ String.fromInt position ++ " : " ++ render (String.join " : " rest)
+
+        _ ->
+            render lesson.title
+
+
+{-| The words a lesson drills by default: those that use something the lesson
+introduces (a stroke holding all the keys of one of its new chords, else a stroke
+with one of its new keys), the earlier keys being used as needed to complete
+them. A lesson introducing nothing of its own (the tense lessons) drills its
+whole pool, as does one where nothing matches. -}
+currentWords : Lesson -> List PracticeWord
+currentWords lesson =
+    let
+        usesNew word =
+            if List.isEmpty lesson.newChords then
+                List.any (\stroke -> List.any (\k -> List.member k lesson.newKeys) stroke) word.strokes
+
+            else
+                List.any
+                    (\stroke -> List.any (\chord -> List.all (\k -> List.member k stroke) chord) lesson.newChords)
+                    word.strokes
+
+        chosen =
+            if List.isEmpty lesson.newKeys && List.isEmpty lesson.newChords then
+                lesson.words
+
+            else
+                List.filter usesNew lesson.words
+    in
+    if List.isEmpty chosen then
+        lesson.words
+
+    else
+        chosen
+
+
+{-| The words of the earlier lessons of the same track (in order, without
+repeats): the "past" half of the 50/50 drill. -}
+pastWords : Lessons -> Lesson -> List PracticeWord
+pastWords lessons lesson =
+    lessons.lessons
+        |> List.filter (\l -> l.track == lesson.track && l.index < lesson.index)
+        |> List.concatMap .words
+        |> List.foldl
+            (\word ( seen, acc ) ->
+                let
+                    key =
+                        word.ortho ++ "|" ++ word.steno
+                in
+                if Set.member key seen then
+                    ( seen, acc )
+
+                else
+                    ( Set.insert key seen, word :: acc )
+            )
+            ( Set.empty, [] )
+        |> Tuple.second
+        |> List.reverse
