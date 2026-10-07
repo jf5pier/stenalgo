@@ -2467,12 +2467,14 @@
   "after": "",
   "label": "article défini, pl.",
   "phonology": "o",
-  "steno": "ae#",
+  "steno": "ae/-s",
   "strokes": [
    [
     12,
-    14,
-    15
+    14
+   ],
+   [
+    17
    ]
   ],
   "frequency": 835.65
@@ -5098,12 +5100,11 @@
   "after": "",
   "label": "participe passé, m. sg. · adjectif, m.",
   "phonology": "pRi",
-  "steno": "pR*i",
+  "steno": "pRi",
   "strokes": [
    [
     4,
     8,
-    10,
     13
    ]
   ],
@@ -5115,12 +5116,11 @@
   "after": "",
   "label": "indicatif passé, 2e sg.",
   "phonology": "pRi",
-  "steno": "pR*i/-d",
+  "steno": "pRi/-d",
   "strokes": [
    [
     4,
     8,
-    10,
     13
    ],
    [
@@ -5135,12 +5135,11 @@
   "after": "",
   "label": "indicatif passé, 1re sg.",
   "phonology": "pRi",
-  "steno": "pR*i/-k",
+  "steno": "pRi/-k",
   "strokes": [
    [
     4,
     8,
-    10,
     13
    ],
    [
@@ -5155,12 +5154,11 @@
   "after": "",
   "label": "participe passé, m. pl.",
   "phonology": "pRi",
-  "steno": "pR*i/-s",
+  "steno": "pRi/-s",
   "strokes": [
    [
     4,
     8,
-    10,
     13
    ],
    [
@@ -5422,7 +5420,7 @@
   "ortho": "toutes",
   "before": "les",
   "after": "",
-  "label": "adjectif, f. pl.",
+  "label": "adjectif, f. pl. · pronom indéfini, f. pl. · adjectif indéfini, f. pl.",
   "phonology": "tut",
   "steno": "t@et/-s",
   "strokes": [
@@ -5707,15 +5705,17 @@
   "after": "",
   "label": "adjectif indéfini, pl.",
   "phonology": "kElk",
-  "steno": "k*iekl",
+  "steno": "kiekl/-s",
   "strokes": [
    [
     2,
-    10,
     13,
     14,
     18,
     23
+   ],
+   [
+    17
    ]
   ],
   "frequency": 337.35
@@ -6308,10 +6308,9 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "o",
-  "steno": "*ae#",
+  "steno": "ae#",
   "strokes": [
    [
-    10,
     12,
     14,
     15
@@ -7392,18 +7391,20 @@
  },
  {
   "ortho": "autres",
-  "before": "",
+  "before": "les",
   "after": "",
-  "label": "pronom indéfini, pl. · adjectif numéral · adverbe",
+  "label": "pronom indéfini, pl. · adjectif, pl. · nom, m. pl.",
   "phonology": "otR",
-  "steno": "*aetR",
+  "steno": "aetR/-s",
   "strokes": [
    [
-    10,
     12,
     14,
     20,
     21
+   ],
+   [
+    17
    ]
   ],
   "frequency": 249.7
@@ -7523,11 +7524,12 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "pRi",
-  "steno": "pRi",
+  "steno": "pR*i",
   "strokes": [
    [
     4,
     8,
+    10,
     13
    ]
   ],
@@ -7539,11 +7541,12 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "pRi",
-  "steno": "pRi/-R",
+  "steno": "pR*i/-R",
   "strokes": [
    [
     4,
     8,
+    10,
     13
    ],
    [
@@ -7558,11 +7561,12 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "pRi",
-  "steno": "pRi/-k",
+  "steno": "pR*i/-k",
   "strokes": [
    [
     4,
     8,
+    10,
     13
    ],
    [
@@ -7632,7 +7636,7 @@
   "ortho": "leurs",
   "before": "",
   "after": "",
-  "label": "adjectif possessif · pronom possessif, pl.",
+  "label": "adjectif possessif",
   "phonology": "l9R",
   "steno": "mt*@R",
   "strokes": [
@@ -14991,26 +14995,6 @@
   "frequency": 117.83
  },
  {
-  "ortho": "autres",
-  "before": "les",
-  "after": "",
-  "label": "adjectif, pl. · nom, m. pl.",
-  "phonology": "otR",
-  "steno": "aetR/-s",
-  "strokes": [
-   [
-    12,
-    14,
-    20,
-    21
-   ],
-   [
-    17
-   ]
-  ],
-  "frequency": 117.61
- },
- {
   "ortho": "sens",
   "before": "le",
   "after": "",
@@ -15963,14 +15947,14 @@
   "after": "",
   "label": "nom, m. sg. · indicatif présent, 3e sg.",
   "phonology": "f§",
-  "steno": "kp*ai",
+  "steno": "kpai#",
   "strokes": [
    [
     2,
     4,
-    10,
     12,
-    13
+    13,
+    15
    ]
   ],
   "frequency": 110.07
@@ -16172,13 +16156,14 @@
   "after": "",
   "label": "onomatopée",
   "phonology": "2",
-  "steno": "*@ie",
+  "steno": "*@ie#",
   "strokes": [
    [
     10,
     11,
     13,
-    14
+    14,
+    15
    ]
   ],
   "frequency": 108.86
@@ -16422,10 +16407,11 @@
   "after": "",
   "label": "indicatif présent, 3e sg. · nom, f. sg.",
   "phonology": "tiR",
-  "steno": "tiR",
+  "steno": "t*iR",
   "strokes": [
    [
     7,
+    10,
     13,
     21
    ]
@@ -16438,10 +16424,11 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "tiR",
-  "steno": "tiR/-R",
+  "steno": "t*iR/-R",
   "strokes": [
    [
     7,
+    10,
     13,
     21
    ],
@@ -16457,10 +16444,11 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "tiR",
-  "steno": "tiR/-k",
+  "steno": "t*iR/-k",
   "strokes": [
    [
     7,
+    10,
     13,
     21
    ],
@@ -17524,11 +17512,12 @@
   "after": "",
   "label": "nom, m.",
   "phonology": "do",
-  "steno": "pvae",
+  "steno": "pv*ae",
   "strokes": [
    [
     4,
     5,
+    10,
     12,
     14
    ]
@@ -17607,13 +17596,13 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "mER",
-  "steno": "m*ieR",
+  "steno": "mie#R",
   "strokes": [
    [
     6,
-    10,
     13,
     14,
+    15,
     21
    ]
   ],
@@ -19263,10 +19252,11 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "mE",
-  "steno": "mie#",
+  "steno": "m*ie#",
   "strokes": [
    [
     6,
+    10,
     13,
     14,
     15
@@ -20656,10 +20646,11 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "po",
-  "steno": "pae",
+  "steno": "p*ae",
   "strokes": [
    [
     4,
+    10,
     12,
     14
    ]
@@ -20824,10 +20815,11 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "R@",
-  "steno": "R@",
+  "steno": "R*@",
   "strokes": [
    [
     8,
+    10,
     11
    ]
   ],
@@ -21378,7 +21370,7 @@
   "after": "",
   "label": "participe passé, m. sg.",
   "phonology": "sOR.ti",
-  "steno": "seR/ti",
+  "steno": "seR/t*i",
   "strokes": [
    [
     3,
@@ -21387,6 +21379,7 @@
    ],
    [
     7,
+    10,
     13
    ]
   ],
@@ -21470,10 +21463,11 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "v5",
-  "steno": "vaie",
+  "steno": "v*aie",
   "strokes": [
    [
     5,
+    10,
     12,
     13,
     14
@@ -22231,16 +22225,16 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "tj5",
-  "steno": "tRw*aie",
+  "steno": "tRwaie#",
   "strokes": [
    [
     7,
     8,
     9,
-    10,
     12,
     13,
-    14
+    14,
+    15
    ]
   ],
   "frequency": 78.32
@@ -23363,16 +23357,12 @@
   "after": "",
   "label": "nom, m. sg. · adverbe · adjectif, m. sg.",
   "phonology": "o",
-  "steno": "*ae#/*#",
+  "steno": "*ae#",
   "strokes": [
    [
     10,
     12,
     14,
-    15
-   ],
-   [
-    10,
     15
    ]
   ],
@@ -23563,10 +23553,11 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "s@",
-  "steno": "s@#",
+  "steno": "s*@#",
   "strokes": [
    [
     3,
+    10,
     11,
     15
    ]
@@ -24967,12 +24958,13 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "kRwa",
-  "steno": "kRwa",
+  "steno": "kRw*a",
   "strokes": [
    [
     2,
     8,
     9,
+    10,
     12
    ]
   ],
@@ -25528,10 +25520,11 @@
   "after": "",
   "label": "adjectif indéfini, m. sg. · pronom indéfini, m. sg.",
   "phonology": "tEl",
-  "steno": "tiel",
+  "steno": "t*iel",
   "strokes": [
    [
     7,
+    10,
     13,
     14,
     23
@@ -26452,11 +26445,10 @@
   "after": "",
   "label": "adjectif",
   "phonology": "kul",
-  "steno": "k*@el",
+  "steno": "k@el",
   "strokes": [
    [
     2,
-    10,
     11,
     14,
     23
@@ -27632,13 +27624,12 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "pl9R",
-  "steno": "pmt*@R",
+  "steno": "pmt@R",
   "strokes": [
    [
     4,
     6,
     7,
-    10,
     11,
     21
    ]
@@ -27651,13 +27642,12 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "pl9R",
-  "steno": "pmt*@R/-R",
+  "steno": "pmt@R/-R",
   "strokes": [
    [
     4,
     6,
     7,
-    10,
     11,
     21
    ],
@@ -27673,13 +27663,12 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "pl9R",
-  "steno": "pmt*@R/-k",
+  "steno": "pmt@R/-k",
   "strokes": [
    [
     4,
     6,
     7,
-    10,
     11,
     21
    ],
@@ -27775,13 +27764,14 @@
   "after": "",
   "label": "indicatif présent, 3e sg. · adjectif, sg.",
   "phonology": "a.mEn",
-  "steno": "a/mien",
+  "steno": "a/m*ien",
   "strokes": [
    [
     12
    ],
    [
     6,
+    10,
     13,
     14,
     22
@@ -27795,13 +27785,14 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "a.mEn",
-  "steno": "a/mien/-R",
+  "steno": "a/m*ien/-R",
   "strokes": [
    [
     12
    ],
    [
     6,
+    10,
     13,
     14,
     22
@@ -27818,13 +27809,14 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "a.mEn",
-  "steno": "a/mien/-k",
+  "steno": "a/m*ien/-k",
   "strokes": [
    [
     12
    ],
    [
     6,
+    10,
     13,
     14,
     22
@@ -27900,7 +27892,7 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "Re.vEj",
-  "steno": "Re/viej",
+  "steno": "Re/v*iej",
   "strokes": [
    [
     8,
@@ -27908,6 +27900,7 @@
    ],
    [
     5,
+    10,
     13,
     14,
     16
@@ -27921,7 +27914,7 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "Re.vEj",
-  "steno": "Re/viej/-R",
+  "steno": "Re/v*iej/-R",
   "strokes": [
    [
     8,
@@ -27929,6 +27922,7 @@
    ],
    [
     5,
+    10,
     13,
     14,
     16
@@ -27945,7 +27939,7 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "Re.vEj",
-  "steno": "Re/viej/-k",
+  "steno": "Re/v*iej/-k",
   "strokes": [
    [
     8,
@@ -27953,6 +27947,7 @@
    ],
    [
     5,
+    10,
     13,
     14,
     16
@@ -28921,11 +28916,11 @@
  },
  {
   "ortho": "certains",
-  "before": "",
+  "before": "les",
   "after": "",
-  "label": "adjectif indéfini, m. pl. · pronom indéfini, m. pl.",
+  "label": "adjectif indéfini, m. pl. · adjectif, m. pl.",
   "phonology": "sER.t5",
-  "steno": "sieR/taie",
+  "steno": "sieR/t*aie/-s",
   "strokes": [
    [
     3,
@@ -28935,9 +28930,13 @@
    ],
    [
     7,
+    10,
     12,
     13,
     14
+   ],
+   [
+    17
    ]
   ],
   "frequency": 57.58
@@ -29007,10 +29006,11 @@
   "after": "",
   "label": "indicatif présent, 3e sg. · nom, f. sg.",
   "phonology": "poz",
-  "steno": "paenl",
+  "steno": "p*aenl",
   "strokes": [
    [
     4,
+    10,
     12,
     14,
     22,
@@ -29025,10 +29025,11 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "poz",
-  "steno": "paenl/-R",
+  "steno": "p*aenl/-R",
   "strokes": [
    [
     4,
+    10,
     12,
     14,
     22,
@@ -29046,10 +29047,11 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "poz",
-  "steno": "paenl/-k",
+  "steno": "p*aenl/-k",
   "strokes": [
    [
     4,
+    10,
     12,
     14,
     22,
@@ -29470,14 +29472,16 @@
   "after": "",
   "label": "adjectif interrogatif, m. pl.",
   "phonology": "kEl",
-  "steno": "kie#l",
+  "steno": "kiel/-s",
   "strokes": [
    [
     2,
     13,
     14,
-    15,
     23
+   ],
+   [
+    17
    ]
   ],
   "frequency": 56.44
@@ -30642,11 +30646,12 @@
   "after": "",
   "label": "conjonction · adverbe",
   "phonology": "swa",
-  "steno": "swa",
+  "steno": "sw*a",
   "strokes": [
    [
     3,
     9,
+    10,
     12
    ]
   ],
@@ -31424,7 +31429,7 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "pa.Ri",
-  "steno": "pa/Ri",
+  "steno": "pa/R*i",
   "strokes": [
    [
     4,
@@ -31432,6 +31437,7 @@
    ],
    [
     8,
+    10,
     13
    ]
   ],
@@ -31443,7 +31449,7 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "pa.Ri",
-  "steno": "pa/Ri/-R",
+  "steno": "pa/R*i/-R",
   "strokes": [
    [
     4,
@@ -31451,6 +31457,7 @@
    ],
    [
     8,
+    10,
     13
    ],
    [
@@ -31465,7 +31472,7 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "pa.Ri",
-  "steno": "pa/Ri/-k",
+  "steno": "pa/R*i/-k",
   "strokes": [
    [
     4,
@@ -31473,6 +31480,7 @@
    ],
    [
     8,
+    10,
     13
    ],
    [
@@ -32388,7 +32396,7 @@
   "after": "",
   "label": "participe passé, m. sg. · adjectif, m. sg.",
   "phonology": "tu.Se",
-  "steno": "t@e/pm*e",
+  "steno": "t@e/pme",
   "strokes": [
    [
     7,
@@ -32398,7 +32406,6 @@
    [
     4,
     6,
-    10,
     14
    ]
   ],
@@ -32616,9 +32623,9 @@
   "ortho": "mienne",
   "before": "",
   "after": "",
-  "label": "pronom possessif, f. sg. · adjectif possessif, f. sg.",
+  "label": "pronom possessif, f. sg.",
   "phonology": "mjEn",
-  "steno": "mRwien",
+  "steno": "mRwien/-j",
   "strokes": [
    [
     6,
@@ -32627,6 +32634,9 @@
     13,
     14,
     22
+   ],
+   [
+    16
    ]
   ],
   "frequency": 50.46
@@ -33482,11 +33492,10 @@
   "after": "",
   "label": "indicatif présent, 3e sg. · adjectif, sg.",
   "phonology": "kit",
-  "steno": "k*it",
+  "steno": "kit",
   "strokes": [
    [
     2,
-    10,
     13,
     20
    ]
@@ -33499,11 +33508,10 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "kit",
-  "steno": "k*it/-R",
+  "steno": "kit/-R",
   "strokes": [
    [
     2,
-    10,
     13,
     20
    ],
@@ -33519,11 +33527,10 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "kit",
-  "steno": "k*it/-k",
+  "steno": "kit/-k",
   "strokes": [
    [
     2,
-    10,
     13,
     20
    ],
@@ -33671,11 +33678,10 @@
   "after": "",
   "label": "adjectif indéfini, f. sg. · pronom indéfini, f. sg.",
   "phonology": "tEl",
-  "steno": "t*iel",
+  "steno": "tiel",
   "strokes": [
    [
     7,
-    10,
     13,
     14,
     23
@@ -33934,11 +33940,11 @@
  },
  {
   "ortho": "certaines",
-  "before": "",
+  "before": "les",
   "after": "",
-  "label": "adjectif indéfini, f. pl. · pronom indéfini, f. pl.",
+  "label": "adjectif indéfini, f. pl. · adjectif, f. pl.",
   "phonology": "sER.tEn",
-  "steno": "sieR/tien",
+  "steno": "sieR/t*ien/-s",
   "strokes": [
    [
     3,
@@ -33948,9 +33954,13 @@
    ],
    [
     7,
+    10,
     13,
     14,
     22
+   ],
+   [
+    17
    ]
   ],
   "frequency": 48.41
@@ -34277,7 +34287,7 @@
   "after": "",
   "label": "indicatif présent, 1re pl.",
   "phonology": "sa.v§",
-  "steno": "sa/vai",
+  "steno": "sa/v*ai",
   "strokes": [
    [
     3,
@@ -34285,6 +34295,7 @@
    ],
    [
     5,
+    10,
     12,
     13
    ]
@@ -34754,15 +34765,17 @@
   "after": "",
   "label": "adjectif interrogatif, f. pl.",
   "phonology": "kEl",
-  "steno": "k*ie#l",
+  "steno": "k*iel/-s",
   "strokes": [
    [
     2,
     10,
     13,
     14,
-    15,
     23
+   ],
+   [
+    17
    ]
   ],
   "frequency": 46.92
@@ -35914,11 +35927,10 @@
   "after": "",
   "label": "nom, m.",
   "phonology": "mE",
-  "steno": "m*ie#",
+  "steno": "mie#",
   "strokes": [
    [
     6,
-    10,
     13,
     14,
     15
@@ -36057,11 +36069,10 @@
   "after": "",
   "label": "indicatif présent, 3e sg. · nom, sg.",
   "phonology": "kaS",
-  "steno": "k*aZm",
+  "steno": "kaZm",
   "strokes": [
    [
     2,
-    10,
     12,
     24,
     25
@@ -36075,11 +36086,10 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "kaS",
-  "steno": "k*aZm/-R",
+  "steno": "kaZm/-R",
   "strokes": [
    [
     2,
-    10,
     12,
     24,
     25
@@ -36096,11 +36106,10 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "kaS",
-  "steno": "k*aZm/-k",
+  "steno": "kaZm/-k",
   "strokes": [
    [
     2,
-    10,
     12,
     24,
     25
@@ -37166,6 +37175,29 @@
   "frequency": 43.67
  },
  {
+  "ortho": "certains",
+  "before": "",
+  "after": "",
+  "label": "pronom indéfini, m. pl.",
+  "phonology": "sER.t5",
+  "steno": "sieR/taie",
+  "strokes": [
+   [
+    3,
+    13,
+    14,
+    21
+   ],
+   [
+    7,
+    12,
+    13,
+    14
+   ]
+  ],
+  "frequency": 43.65
+ },
+ {
   "ortho": "regardes",
   "before": "tu",
   "after": "",
@@ -37519,12 +37551,16 @@
   "after": "",
   "label": "adjectif numéral · nom, m.",
   "phonology": "s@",
-  "steno": "s*@#",
+  "steno": "s*@#/*#",
   "strokes": [
    [
     3,
     10,
     11,
+    15
+   ],
+   [
+    10,
     15
    ]
   ],
@@ -37932,7 +37968,7 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "sOR.ti",
-  "steno": "seR/t*i",
+  "steno": "seR/ti",
   "strokes": [
    [
     3,
@@ -37941,7 +37977,6 @@
    ],
    [
     7,
-    10,
     13
    ]
   ],
@@ -39558,13 +39593,13 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "pER",
-  "steno": "p*ieR",
+  "steno": "pie#R",
   "strokes": [
    [
     4,
-    10,
     13,
     14,
+    15,
     21
    ]
   ],
@@ -41026,12 +41061,11 @@
   "after": "",
   "label": "participe passé, f. sg.",
   "phonology": "pRiz",
-  "steno": "pR*inl/-j",
+  "steno": "pRinl/-j",
   "strokes": [
    [
     4,
     8,
-    10,
     13,
     22,
     23
@@ -41213,11 +41247,12 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "S@",
-  "steno": "pm@",
+  "steno": "pm*@",
   "strokes": [
    [
     4,
     6,
+    10,
     11
    ]
   ],
@@ -43107,7 +43142,7 @@
   "after": "",
   "label": "participe passé, m. sg. · nom, m. sg. · adjectif, m. sg.",
   "phonology": "ku.Se",
-  "steno": "k@e/pm*e",
+  "steno": "k@e/pme",
   "strokes": [
    [
     2,
@@ -43117,7 +43152,6 @@
    [
     4,
     6,
-    10,
     14
    ]
   ],
@@ -43842,13 +43876,13 @@
   "after": "",
   "label": "onomatopée",
   "phonology": "2",
-  "steno": "@ie#",
+  "steno": "*@ie",
   "strokes": [
    [
+    10,
     11,
     13,
-    14,
-    15
+    14
    ]
   ],
   "frequency": 35.17
@@ -45570,7 +45604,7 @@
   "ortho": "mêmes",
   "before": "les",
   "after": "",
-  "label": "adjectif, pl.",
+  "label": "adjectif, pl. · pronom indéfini, pl.",
   "phonology": "mEm",
   "steno": "miem/-s",
   "strokes": [
@@ -46699,7 +46733,7 @@
   "after": "",
   "label": "adjectif, f. sg. · nom, f. sg.",
   "phonology": "ot",
-  "steno": "*ae#t/*#",
+  "steno": "*ae#t",
   "strokes": [
    [
     10,
@@ -46707,10 +46741,6 @@
     14,
     15,
     20
-   ],
-   [
-    10,
-    15
    ]
   ],
   "frequency": 32.44
@@ -50159,7 +50189,7 @@
   "after": "",
   "label": "participe passé, f. sg.",
   "phonology": "sOR.ti",
-  "steno": "seR/ti/-j",
+  "steno": "seR/t*i/-j",
   "strokes": [
    [
     3,
@@ -50168,6 +50198,7 @@
    ],
    [
     7,
+    10,
     13
    ],
    [
@@ -50414,10 +50445,11 @@
   "after": "",
   "label": "indicatif présent, 3e sg. · nom, f. sg.",
   "phonology": "pus",
-  "steno": "p@es",
+  "steno": "p*@es",
   "strokes": [
    [
     4,
+    10,
     11,
     14,
     17
@@ -50431,10 +50463,11 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "pus",
-  "steno": "p@es/-R",
+  "steno": "p*@es/-R",
   "strokes": [
    [
     4,
+    10,
     11,
     14,
     17
@@ -50451,10 +50484,11 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "pus",
-  "steno": "p@es/-k",
+  "steno": "p*@es/-k",
   "strokes": [
    [
     4,
+    10,
     11,
     14,
     17
@@ -50710,11 +50744,10 @@
   "after": "",
   "label": "adjectif numéral",
   "phonology": "v5",
-  "steno": "v*aie",
+  "steno": "vaie",
   "strokes": [
    [
     5,
-    10,
     12,
     13,
     14
@@ -51315,13 +51348,12 @@
   "after": "",
   "label": "nom, f.",
   "phonology": "kRwa",
-  "steno": "kRw*a",
+  "steno": "kRwa",
   "strokes": [
    [
     2,
     8,
     9,
-    10,
     12
    ]
   ],
@@ -52412,12 +52444,11 @@
   "after": "",
   "label": "pronom personnel, sg. · nom, m. sg.",
   "phonology": "swa",
-  "steno": "sw*a",
+  "steno": "swa",
   "strokes": [
    [
     3,
     9,
-    10,
     12
    ]
   ],
@@ -52882,13 +52913,13 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "mER",
-  "steno": "mie#R",
+  "steno": "m*ieR",
   "strokes": [
    [
     6,
+    10,
     13,
     14,
-    15,
     21
    ]
   ],
@@ -53417,16 +53448,11 @@
   "after": "",
   "label": "adjectif numéral",
   "phonology": "s@",
-  "steno": "s*@#/*#",
+  "steno": "s@#",
   "strokes": [
    [
     3,
-    10,
     11,
-    15
-   ],
-   [
-    10,
     15
    ]
   ],
@@ -53938,7 +53964,7 @@
   "after": "",
   "label": "adjectif, m. sg. · nom, m. sg.",
   "phonology": "e.gal",
-  "steno": "e/ksal",
+  "steno": "e/ks*al",
   "strokes": [
    [
     14
@@ -53946,6 +53972,7 @@
    [
     2,
     3,
+    10,
     12,
     23
    ]
@@ -53985,11 +54012,12 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "ba",
-  "steno": "sva",
+  "steno": "sv*a",
   "strokes": [
    [
     3,
     5,
+    10,
     12
    ]
   ],
@@ -54061,11 +54089,10 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "poz",
-  "steno": "p*aenl",
+  "steno": "paenl",
   "strokes": [
    [
     4,
-    10,
     12,
     14,
     22,
@@ -54421,7 +54448,7 @@
   "after": "",
   "label": "participe passé, m. sg. · adjectif, m. sg.",
   "phonology": "t°.ny",
-  "steno": "t@a/mR@i",
+  "steno": "t@a/mR*@i",
   "strokes": [
    [
     7,
@@ -54431,6 +54458,7 @@
    [
     6,
     8,
+    10,
     11,
     13
    ]
@@ -55989,16 +56017,16 @@
   "after": "",
   "label": "pronom possessif, m. sg. · adjectif possessif, m. sg.",
   "phonology": "tj5",
-  "steno": "tRwaie#",
+  "steno": "tRw*aie",
   "strokes": [
    [
     7,
     8,
     9,
+    10,
     12,
     13,
-    14,
-    15
+    14
    ]
   ],
   "frequency": 26.21
@@ -56503,10 +56531,9 @@
   "after": "",
   "label": "nom, m. pl.",
   "phonology": "2",
-  "steno": "*@ie#",
+  "steno": "@ie#",
   "strokes": [
    [
-    10,
     11,
     13,
     14,
@@ -56817,11 +56844,10 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "po",
-  "steno": "p*ae",
+  "steno": "pae",
   "strokes": [
    [
     4,
-    10,
     12,
     14
    ]
@@ -58269,7 +58295,7 @@
   "after": "",
   "label": "participe passé, m. sg. · adjectif, m. sg.",
   "phonology": "tuR.ne",
-  "steno": "t@eR/mRe",
+  "steno": "t@eR/mR*e",
   "strokes": [
    [
     7,
@@ -58280,6 +58306,7 @@
    [
     6,
     8,
+    10,
     14
    ]
   ],
@@ -58393,11 +58420,10 @@
   "after": "",
   "label": "adjectif, m. sg. · nom, m. sg.",
   "phonology": "vER",
-  "steno": "v*ie#R",
+  "steno": "vie#R",
   "strokes": [
    [
     5,
-    10,
     13,
     14,
     15,
@@ -58993,11 +59019,10 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "tiR",
-  "steno": "t*iR",
+  "steno": "tiR",
   "strokes": [
    [
     7,
-    10,
     13,
     21
    ]
@@ -59797,10 +59822,11 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "m@",
-  "steno": "m@",
+  "steno": "m*@",
   "strokes": [
    [
     6,
+    10,
     11
    ]
   ],
@@ -62280,12 +62306,11 @@
   "after": "",
   "label": "onomatopée",
   "phonology": "baj",
-  "steno": "sv*aj",
+  "steno": "svaj",
   "strokes": [
    [
     3,
     5,
-    10,
     12,
     16
    ]
@@ -62599,7 +62624,7 @@
   "ortho": "prise",
   "before": "la",
   "after": "",
-  "label": "nom, f. sg. · indicatif présent, 3e sg.",
+  "label": "nom, f. sg. · adjectif, f. sg. · indicatif présent, 3e sg.",
   "phonology": "pRiz",
   "steno": "pRinl",
   "strokes": [
@@ -63150,12 +63175,11 @@
   "after": "",
   "label": "onomatopée",
   "phonology": "ba",
-  "steno": "sv*a",
+  "steno": "sva",
   "strokes": [
    [
     3,
     5,
-    10,
     12
    ]
   ],
@@ -63754,7 +63778,7 @@
   "after": "",
   "label": "pronom possessif, pl. · adjectif possessif, pl.",
   "phonology": "notR",
-  "steno": "mRaetR",
+  "steno": "mRaetR/-s",
   "strokes": [
    [
     6,
@@ -63763,6 +63787,9 @@
     14,
     20,
     21
+   ],
+   [
+    17
    ]
   ],
   "frequency": 22.63
@@ -65244,11 +65271,12 @@
   "after": "",
   "label": "indicatif présent, 3e sg. · nom, sg.",
   "phonology": "bOs",
-  "steno": "sves",
+  "steno": "sv*es",
   "strokes": [
    [
     3,
     5,
+    10,
     14,
     17
    ]
@@ -65261,11 +65289,12 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "bOs",
-  "steno": "sves/-R",
+  "steno": "sv*es/-R",
   "strokes": [
    [
     3,
     5,
+    10,
     14,
     17
    ],
@@ -65281,11 +65310,12 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "bOs",
-  "steno": "sves/-k",
+  "steno": "sv*es/-k",
   "strokes": [
    [
     3,
     5,
+    10,
     14,
     17
    ],
@@ -68630,24 +68660,6 @@
   "frequency": 20.86
  },
  {
-  "ortho": "toutes",
-  "before": "",
-  "after": "",
-  "label": "pronom indéfini, f. pl. · adjectif indéfini, f. pl.",
-  "phonology": "tut",
-  "steno": "t*@et",
-  "strokes": [
-   [
-    7,
-    10,
-    11,
-    14,
-    20
-   ]
-  ],
-  "frequency": 20.86
- },
- {
   "ortho": "qualité",
   "before": "la",
   "after": "",
@@ -70605,16 +70617,12 @@
   "after": "",
   "label": "onomatopée",
   "phonology": "o",
-  "steno": "*ae#/*#/*#",
+  "steno": "*ae#/*#",
   "strokes": [
    [
     10,
     12,
     14,
-    15
-   ],
-   [
-    10,
     15
    ],
    [
@@ -71692,14 +71700,13 @@
   "after": "",
   "label": "onomatopée · nom, m.",
   "phonology": "a.mEn",
-  "steno": "a/m*ien",
+  "steno": "a/mien",
   "strokes": [
    [
     12
    ],
    [
     6,
-    10,
     13,
     14,
     22
@@ -71836,7 +71843,7 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "t°.ny",
-  "steno": "t@a/mR*@i",
+  "steno": "t@a/mR@i",
   "strokes": [
    [
     7,
@@ -71846,7 +71853,6 @@
    [
     6,
     8,
-    10,
     11,
     13
    ]
@@ -72591,11 +72597,10 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "R@",
-  "steno": "R*@",
+  "steno": "R@",
   "strokes": [
    [
     8,
-    10,
     11
    ]
   ],
@@ -72804,11 +72809,10 @@
   "after": "",
   "label": "nom, sg.",
   "phonology": "m@",
-  "steno": "m*@",
+  "steno": "m@",
   "strokes": [
    [
     6,
-    10,
     11
    ]
   ],
@@ -73355,11 +73359,12 @@
   "after": "",
   "label": "nom, m. pl.",
   "phonology": "S@",
-  "steno": "pm@/-s",
+  "steno": "pm*@/-s",
   "strokes": [
    [
     4,
     6,
+    10,
     11
    ],
    [
@@ -73814,12 +73819,11 @@
   "after": "",
   "label": "pronom possessif, sg. · adjectif possessif, sg.",
   "phonology": "notR",
-  "steno": "mR*aetR",
+  "steno": "mRaetR",
   "strokes": [
    [
     6,
     8,
-    10,
     12,
     14,
     20,
@@ -74902,7 +74906,7 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "tuR.ne",
-  "steno": "t@eR/mR*e",
+  "steno": "t@eR/mRe",
   "strokes": [
    [
     7,
@@ -74913,7 +74917,6 @@
    [
     6,
     8,
-    10,
     14
    ]
   ],
@@ -75948,11 +75951,10 @@
   "after": "",
   "label": "indicatif présent, 3e sg. · nom, f. sg.",
   "phonology": "kOl",
-  "steno": "k*el",
+  "steno": "kel",
   "strokes": [
    [
     2,
-    10,
     14,
     23
    ]
@@ -75965,11 +75967,10 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "kOl",
-  "steno": "k*el/-R",
+  "steno": "kel/-R",
   "strokes": [
    [
     2,
-    10,
     14,
     23
    ],
@@ -75985,11 +75986,10 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "kOl",
-  "steno": "k*el/-k",
+  "steno": "kel/-k",
   "strokes": [
    [
     2,
-    10,
     14,
     23
    ],
@@ -76032,13 +76032,13 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "pER",
-  "steno": "pie#R",
+  "steno": "p*ieR",
   "strokes": [
    [
     4,
+    10,
     13,
     14,
-    15,
     21
    ]
   ],
@@ -76398,10 +76398,9 @@
   "after": "",
   "label": "onomatopée",
   "phonology": "aj",
-  "steno": "*aj",
+  "steno": "aj",
   "strokes": [
    [
-    10,
     12,
     16
    ]
@@ -76694,7 +76693,7 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "Re.vEj",
-  "steno": "Re/v*iej",
+  "steno": "Re/viej",
   "strokes": [
    [
     8,
@@ -76702,7 +76701,6 @@
    ],
    [
     5,
-    10,
     13,
     14,
     16
@@ -78062,12 +78060,11 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "S@",
-  "steno": "pm*@",
+  "steno": "pm@",
   "strokes": [
    [
     4,
     6,
-    10,
     11
    ]
   ],
@@ -79804,7 +79801,7 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "a.le",
-  "steno": "a/mte#",
+  "steno": "a/mt*e",
   "strokes": [
    [
     12
@@ -79812,8 +79809,8 @@
    [
     6,
     7,
-    14,
-    15
+    10,
+    14
    ]
   ],
   "frequency": 17.21
@@ -82030,12 +82027,11 @@
   "after": "",
   "label": "nom, m.",
   "phonology": "do",
-  "steno": "pv*ae",
+  "steno": "pvae",
   "strokes": [
    [
     4,
     5,
-    10,
     12,
     14
    ]
@@ -83366,16 +83362,18 @@
   "after": "",
   "label": "pronom possessif, m. pl. · adjectif possessif, m. pl.",
   "phonology": "mj5",
-  "steno": "mRw*aie",
+  "steno": "mRwaie/-s",
   "strokes": [
    [
     6,
     8,
     9,
-    10,
     12,
     13,
     14
+   ],
+   [
+    17
    ]
   ],
   "frequency": 16.32
@@ -84337,16 +84335,12 @@
   "after": "",
   "label": "onomatopée",
   "phonology": "o",
-  "steno": "*ae#/*#/*#/*#",
+  "steno": "*ae#/*#/*#",
   "strokes": [
    [
     10,
     12,
     14,
-    15
-   ],
-   [
-    10,
     15
    ],
    [
@@ -85447,7 +85441,7 @@
   "after": "",
   "label": "indicatif imparfait, 3e sg.",
   "phonology": "va.lE",
-  "steno": "va/mt*ie",
+  "steno": "va/mtie",
   "strokes": [
    [
     5,
@@ -85456,7 +85450,6 @@
    [
     6,
     7,
-    10,
     13,
     14
    ]
@@ -85704,14 +85697,16 @@
   "after": "",
   "label": "pronom indéfini, m. pl.",
   "phonology": "1",
-  "steno": "*@aie",
+  "steno": "@aie/-s",
   "strokes": [
    [
-    10,
     11,
     12,
     13,
     14
+   ],
+   [
+    17
    ]
   ],
   "frequency": 15.74
@@ -86179,7 +86174,7 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "sa.v§",
-  "steno": "sa/v*ai",
+  "steno": "sa/vai",
   "strokes": [
    [
     3,
@@ -86187,7 +86182,6 @@
    ],
    [
     5,
-    10,
     12,
     13
    ]
@@ -86200,7 +86194,7 @@
   "after": "",
   "label": "indicatif passé, 2e sg.",
   "phonology": "sOR.ti",
-  "steno": "seR/ti/-dt",
+  "steno": "seR/t*i/-dt",
   "strokes": [
    [
     3,
@@ -86209,6 +86203,7 @@
    ],
    [
     7,
+    10,
     13
    ],
    [
@@ -86224,7 +86219,7 @@
   "after": "",
   "label": "indicatif passé, 1re sg.",
   "phonology": "sOR.ti",
-  "steno": "seR/ti/-kt",
+  "steno": "seR/t*i/-kt",
   "strokes": [
    [
     3,
@@ -86233,6 +86228,7 @@
    ],
    [
     7,
+    10,
     13
    ],
    [
@@ -86248,7 +86244,7 @@
   "after": "",
   "label": "participe passé, m. pl.",
   "phonology": "sOR.ti",
-  "steno": "seR/ti/-s",
+  "steno": "seR/t*i/-s",
   "strokes": [
    [
     3,
@@ -86257,6 +86253,7 @@
    ],
    [
     7,
+    10,
     13
    ],
    [
@@ -86316,11 +86313,10 @@
   "after": "",
   "label": "nom, m.",
   "phonology": "pu",
-  "steno": "p*@e",
+  "steno": "p@e",
   "strokes": [
    [
     4,
-    10,
     11,
     14
    ]
@@ -87336,7 +87332,7 @@
   "after": "",
   "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "sta.ty",
-  "steno": "sta/t*@i",
+  "steno": "sta/t@i",
   "strokes": [
    [
     3,
@@ -87345,7 +87341,6 @@
    ],
    [
     7,
-    10,
     11,
     13
    ]
@@ -88493,10 +88488,9 @@
   "after": "",
   "label": "nom, f. pl.",
   "phonology": "o",
-  "steno": "*ae#/-s",
+  "steno": "ae#/-s",
   "strokes": [
    [
-    10,
     12,
     14,
     15
@@ -88607,14 +88601,16 @@
   "after": "",
   "label": "adjectif indéfini, f. pl. · pronom indéfini, f. pl.",
   "phonology": "tEl",
-  "steno": "tie#l",
+  "steno": "tiel/-s",
   "strokes": [
    [
     7,
     13,
     14,
-    15,
     23
+   ],
+   [
+    17
    ]
   ],
   "frequency": 15.12
@@ -88759,14 +88755,14 @@
   "after": "",
   "label": "nom, m.",
   "phonology": "f§",
-  "steno": "kpai#",
+  "steno": "kp*ai",
   "strokes": [
    [
     2,
     4,
+    10,
     12,
-    13,
-    15
+    13
    ]
   ],
   "frequency": 15.1
@@ -90402,10 +90398,11 @@
   "after": "",
   "label": "indicatif présent, 3e sg. · nom, f. sg.",
   "phonology": "kul",
-  "steno": "k@el",
+  "steno": "k*@el",
   "strokes": [
    [
     2,
+    10,
     11,
     14,
     23
@@ -90419,10 +90416,11 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "kul",
-  "steno": "k@el/-R",
+  "steno": "k*@el/-R",
   "strokes": [
    [
     2,
+    10,
     11,
     14,
     23
@@ -90439,10 +90437,11 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "kul",
-  "steno": "k@el/-k",
+  "steno": "k*@el/-k",
   "strokes": [
    [
     2,
+    10,
     11,
     14,
     23
@@ -91010,14 +91009,13 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "a.p8i",
-  "steno": "a/p*@ai",
+  "steno": "a/p@ai",
   "strokes": [
    [
     12
    ],
    [
     4,
-    10,
     11,
     12,
     13
@@ -91031,14 +91029,13 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "a.p8i",
-  "steno": "a/p*@ai/-R",
+  "steno": "a/p@ai/-R",
   "strokes": [
    [
     12
    ],
    [
     4,
-    10,
     11,
     12,
     13
@@ -91055,14 +91052,13 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "a.p8i",
-  "steno": "a/p*@ai/-k",
+  "steno": "a/p@ai/-k",
   "strokes": [
    [
     12
    ],
    [
     4,
-    10,
     11,
     12,
     13
@@ -91388,24 +91384,6 @@
    ]
   ],
   "frequency": 14.5
- },
- {
-  "ortho": "mêmes",
-  "before": "",
-  "after": "",
-  "label": "pronom indéfini, pl.",
-  "phonology": "mEm",
-  "steno": "m*iem",
-  "strokes": [
-   [
-    6,
-    10,
-    13,
-    14,
-    25
-   ]
-  ],
-  "frequency": 14.48
  },
  {
   "ortho": "éteindre",
@@ -91810,7 +91788,7 @@
   "after": "",
   "label": "participe passé, m. sg. · adjectif, m. sg.",
   "phonology": "R°.vy",
-  "steno": "R@a/v*@i",
+  "steno": "R@a/v@i",
   "strokes": [
    [
     8,
@@ -91819,7 +91797,6 @@
    ],
    [
     5,
-    10,
     11,
     13
    ]
@@ -92600,11 +92577,10 @@
   "after": "",
   "label": "adjectif, f. sg.",
   "phonology": "vERt",
-  "steno": "v*ie#tR",
+  "steno": "vie#tR",
   "strokes": [
    [
     5,
-    10,
     13,
     14,
     15,
@@ -94481,7 +94457,7 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "pa.Ri",
-  "steno": "pa/R*i",
+  "steno": "pa/Ri",
   "strokes": [
    [
     4,
@@ -94489,7 +94465,6 @@
    ],
    [
     8,
-    10,
     13
    ]
   ],
@@ -96365,15 +96340,17 @@
   "after": "",
   "label": "adjectif indéfini, m. pl. · pronom indéfini, m. pl.",
   "phonology": "tEl",
-  "steno": "t*ie#l",
+  "steno": "t*iel/-s",
   "strokes": [
    [
     7,
     10,
     13,
     14,
-    15,
     23
+   ],
+   [
+    17
    ]
   ],
   "frequency": 13.65
@@ -96985,10 +96962,9 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "9f",
-  "steno": "*@#sd",
+  "steno": "@#sd",
   "strokes": [
    [
-    10,
     11,
     15,
     17,
@@ -97003,11 +96979,10 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "so",
-  "steno": "s*ae",
+  "steno": "sae",
   "strokes": [
    [
     3,
-    10,
     12,
     14
    ]
@@ -97587,12 +97562,11 @@
   "after": "",
   "label": "nom, m.",
   "phonology": "bOs",
-  "steno": "sv*es",
+  "steno": "sves",
   "strokes": [
    [
     3,
     5,
-    10,
     14,
     17
    ]
@@ -97970,13 +97944,12 @@
   "after": "",
   "label": "pronom possessif, m. sg. · adjectif possessif, m. sg.",
   "phonology": "sj5",
-  "steno": "sRw*aie",
+  "steno": "sRwaie",
   "strokes": [
    [
     3,
     8,
     9,
-    10,
     12,
     13,
     14
@@ -101190,7 +101163,7 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "mo.Ral",
-  "steno": "mae/Ral",
+  "steno": "mae/R*al",
   "strokes": [
    [
     6,
@@ -101199,6 +101172,7 @@
    ],
    [
     8,
+    10,
     12,
     23
    ]
@@ -102378,7 +102352,7 @@
   "after": "",
   "label": "nom, m. pl.",
   "phonology": "pa.Ri",
-  "steno": "pa/R*i/-s",
+  "steno": "pa/Ri/-s",
   "strokes": [
    [
     4,
@@ -102386,7 +102360,6 @@
    ],
    [
     8,
-    10,
     13
    ],
    [
@@ -105321,15 +105294,17 @@
   "after": "",
   "label": "pronom possessif, pl. · adjectif possessif, pl.",
   "phonology": "votR",
-  "steno": "v*aetR",
+  "steno": "vaetR/-s",
   "strokes": [
    [
     5,
-    10,
     12,
     14,
     20,
     21
+   ],
+   [
+    17
    ]
   ],
   "frequency": 12.14
@@ -107110,11 +107085,10 @@
   "after": "",
   "label": "nom, m. sg. · onomatopée",
   "phonology": "pus",
-  "steno": "p*@es",
+  "steno": "p@es",
   "strokes": [
    [
     4,
-    10,
     11,
     14,
     17
@@ -107675,13 +107649,13 @@
   "after": "",
   "label": "indicatif présent, 3e sg. · nom, f. sg.",
   "phonology": "sER",
-  "steno": "sie#R",
+  "steno": "s*ieR",
   "strokes": [
    [
     3,
+    10,
     13,
     14,
-    15,
     21
    ]
   ],
@@ -107693,13 +107667,13 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "sER",
-  "steno": "sie#R/-R",
+  "steno": "s*ieR/-R",
   "strokes": [
    [
     3,
+    10,
     13,
     14,
-    15,
     21
    ],
    [
@@ -107714,13 +107688,13 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "sER",
-  "steno": "sie#R/-k",
+  "steno": "s*ieR/-k",
   "strokes": [
    [
     3,
+    10,
     13,
     14,
-    15,
     21
    ],
    [
@@ -110548,11 +110522,12 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "baj",
-  "steno": "svaj",
+  "steno": "sv*aj",
   "strokes": [
    [
     3,
     5,
+    10,
     12,
     16
    ]
@@ -112441,7 +112416,7 @@
   "after": "",
   "label": "participe passé, f. sg. · adjectif, f. sg.",
   "phonology": "tu.Se",
-  "steno": "t@e/pm*e/-j",
+  "steno": "t@e/pme/-j",
   "strokes": [
    [
     7,
@@ -112451,7 +112426,6 @@
    [
     4,
     6,
-    10,
     14
    ],
    [
@@ -117000,10 +116974,11 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "kOk",
-  "steno": "kek",
+  "steno": "k*ek",
   "strokes": [
    [
     2,
+    10,
     14,
     18
    ]
@@ -122169,10 +122144,11 @@
   "after": "",
   "label": "nom, m. sg. · adjectif",
   "phonology": "vER",
-  "steno": "vie#R",
+  "steno": "v*ie#R",
   "strokes": [
    [
     5,
+    10,
     13,
     14,
     15,
@@ -122515,7 +122491,7 @@
   "after": "",
   "label": "nom, m. sg. · adjectif, m. sg.",
   "phonology": "mo.Ral",
-  "steno": "mae/R*al",
+  "steno": "mae/Ral",
   "strokes": [
    [
     6,
@@ -122524,7 +122500,6 @@
    ],
    [
     8,
-    10,
     12,
     23
    ]
@@ -123267,7 +123242,7 @@
   "after": "",
   "label": "adjectif, m. sg. · nom, m. sg.",
   "phonology": "s@.tRal",
-  "steno": "s@/tR*al",
+  "steno": "s@/tRal",
   "strokes": [
    [
     3,
@@ -123276,7 +123251,6 @@
    [
     7,
     8,
-    10,
     12,
     23
    ]
@@ -124783,7 +124757,7 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "a.le",
-  "steno": "a/mt*e",
+  "steno": "a/mte#",
   "strokes": [
    [
     12
@@ -124791,8 +124765,8 @@
    [
     6,
     7,
-    10,
-    14
+    14,
+    15
    ]
   ],
   "frequency": 9.89
@@ -126106,7 +126080,7 @@
   "after": "",
   "label": "adjectif, m. sg. · nom, m. sg.",
   "phonology": "fi.nal",
-  "steno": "kpi/mRal",
+  "steno": "kpi/mR*al",
   "strokes": [
    [
     2,
@@ -126116,6 +126090,7 @@
    [
     6,
     8,
+    10,
     12,
     23
    ]
@@ -126536,7 +126511,7 @@
   "after": "",
   "label": "pronom relatif, m. sg. · pronom interrogatif",
   "phonology": "o.kEl",
-  "steno": "ae/kiel",
+  "steno": "ae/k*iel",
   "strokes": [
    [
     12,
@@ -126544,6 +126519,7 @@
    ],
    [
     2,
+    10,
     13,
     14,
     23
@@ -129403,12 +129379,12 @@
   "after": "",
   "label": "nom, f. pl.",
   "phonology": "pat",
-  "steno": "pa#t/-s",
+  "steno": "p*at/-s",
   "strokes": [
    [
     4,
+    10,
     12,
-    15,
     20
    ],
    [
@@ -129731,12 +129707,13 @@
   "after": "",
   "label": "nom, m. pl.",
   "phonology": "pl9R",
-  "steno": "pmt@R/-s",
+  "steno": "pmt*@R/-s",
   "strokes": [
    [
     4,
     6,
     7,
+    10,
     11,
     21
    ],
@@ -129752,11 +129729,10 @@
   "after": "",
   "label": "adjectif, m. pl. · nom, m. pl.",
   "phonology": "vER",
-  "steno": "v*ie#R/-s",
+  "steno": "vie#R/-s",
   "strokes": [
    [
     5,
-    10,
     13,
     14,
     15,
@@ -129876,16 +129852,18 @@
   "after": "",
   "label": "pronom possessif, m. pl. · adjectif possessif, f. pl.",
   "phonology": "mjEn",
-  "steno": "mRw*ien",
+  "steno": "mRwien/-s",
   "strokes": [
    [
     6,
     8,
     9,
-    10,
     13,
     14,
     22
+   ],
+   [
+    17
    ]
   ],
   "frequency": 9.31
@@ -131023,7 +131001,7 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "va.lE",
-  "steno": "va/mtie",
+  "steno": "va/mt*ie",
   "strokes": [
    [
     5,
@@ -131032,6 +131010,7 @@
    [
     6,
     7,
+    10,
     13,
     14
    ]
@@ -131902,9 +131881,10 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "aj",
-  "steno": "aj",
+  "steno": "*aj",
   "strokes": [
    [
+    10,
     12,
     16
    ]
@@ -133080,11 +133060,12 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "bak",
-  "steno": "svak",
+  "steno": "sv*ak",
   "strokes": [
    [
     3,
     5,
+    10,
     12,
     18
    ]
@@ -133934,12 +133915,12 @@
   "after": "",
   "label": "nom, m. sg. · adjectif, sg.",
   "phonology": "mal",
-  "steno": "ma#l",
+  "steno": "m*al",
   "strokes": [
    [
     6,
+    10,
     12,
-    15,
     23
    ]
   ],
@@ -135400,11 +135381,10 @@
   "after": "",
   "label": "nom, m. pl.",
   "phonology": "R@",
-  "steno": "R*@/-s",
+  "steno": "R@/-s",
   "strokes": [
    [
     8,
-    10,
     11
    ],
    [
@@ -137568,13 +137548,14 @@
   "ortho": "boeuf",
   "before": "le",
   "after": "",
-  "label": "nom, m. sg. · adjectif",
+  "label": "nom, m. sg.",
   "phonology": "b9f",
-  "steno": "sv@sd",
+  "steno": "sv*@sd",
   "strokes": [
    [
     3,
     5,
+    10,
     11,
     17,
     19
@@ -138377,10 +138358,11 @@
   "after": "",
   "label": "nom, m. pl.",
   "phonology": "pu",
-  "steno": "p@e/-s",
+  "steno": "p*@e/-s",
   "strokes": [
    [
     4,
+    10,
     11,
     14
    ],
@@ -139367,12 +139349,11 @@
   "after": "",
   "label": "participe passé, f. pl.",
   "phonology": "pRiz",
-  "steno": "pR*inl/-js",
+  "steno": "pRinl/-js",
   "strokes": [
    [
     4,
     8,
-    10,
     13,
     22,
     23
@@ -139869,11 +139850,12 @@
   "after": "",
   "label": "nom, f. pl.",
   "phonology": "tRip",
-  "steno": "tRijk/-s",
+  "steno": "tR*ijk/-s",
   "strokes": [
    [
     7,
     8,
+    10,
     13,
     16,
     18
@@ -140384,10 +140366,11 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "kOl",
-  "steno": "kel",
+  "steno": "k*el",
   "strokes": [
    [
     2,
+    10,
     14,
     23
    ]
@@ -141892,12 +141875,11 @@
   "after": "",
   "label": "nom, m. pl.",
   "phonology": "S@",
-  "steno": "pm*@/-s",
+  "steno": "pm@/-s",
   "strokes": [
    [
     4,
     6,
-    10,
     11
    ],
    [
@@ -142128,11 +142110,12 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "din",
-  "steno": "pvin",
+  "steno": "pv*in",
   "strokes": [
    [
     4,
     5,
+    10,
     13,
     22
    ]
@@ -142145,11 +142128,12 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "din",
-  "steno": "pvin/-R",
+  "steno": "pv*in/-R",
   "strokes": [
    [
     4,
     5,
+    10,
     13,
     22
    ],
@@ -142165,11 +142149,12 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "din",
-  "steno": "pvin/-k",
+  "steno": "pv*in/-k",
   "strokes": [
    [
     4,
     5,
+    10,
     13,
     22
    ],
@@ -147162,13 +147147,14 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "a.p8i",
-  "steno": "a/p@ai",
+  "steno": "a/p*@ai",
   "strokes": [
    [
     12
    ],
    [
     4,
+    10,
     11,
     12,
     13
@@ -148127,7 +148113,7 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "R°.vy",
-  "steno": "R@a/v@i",
+  "steno": "R@a/v*@i",
   "strokes": [
    [
     8,
@@ -148136,6 +148122,7 @@
    ],
    [
     5,
+    10,
     11,
     13
    ]
@@ -149685,7 +149672,7 @@
   "after": "",
   "label": "adjectif, f. sg.",
   "phonology": "fi.nal",
-  "steno": "kpi/mRal/-j",
+  "steno": "kpi/mR*al/-j",
   "strokes": [
    [
     2,
@@ -149695,6 +149682,7 @@
    [
     6,
     8,
+    10,
     12,
     23
    ],
@@ -151241,11 +151229,10 @@
   "after": "",
   "label": "nom, m. pl.",
   "phonology": "tiR",
-  "steno": "t*iR/-s",
+  "steno": "tiR/-s",
   "strokes": [
    [
     7,
-    10,
     13,
     21
    ],
@@ -151843,7 +151830,7 @@
   "after": "",
   "label": "pronom possessif, m. pl. · adjectif possessif, m. pl.",
   "phonology": "sj5",
-  "steno": "sRwaie",
+  "steno": "sRwaie/-s",
   "strokes": [
    [
     3,
@@ -151852,6 +151839,9 @@
     12,
     13,
     14
+   ],
+   [
+    17
    ]
   ],
   "frequency": 7.54
@@ -154232,7 +154222,7 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "tu.Se",
-  "steno": "t@e/pme",
+  "steno": "t@e/pm*e",
   "strokes": [
    [
     7,
@@ -154242,6 +154232,7 @@
    [
     4,
     6,
+    10,
     14
    ]
   ],
@@ -155558,7 +155549,7 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "s@.tRal",
-  "steno": "s@/tRal",
+  "steno": "s@/tR*al",
   "strokes": [
    [
     3,
@@ -155567,6 +155558,7 @@
    [
     7,
     8,
+    10,
     12,
     23
    ]
@@ -155629,7 +155621,7 @@
   "after": "",
   "label": "adjectif, f. sg.",
   "phonology": "s@.tRal",
-  "steno": "s@/tR*al/-j",
+  "steno": "s@/tRal/-j",
   "strokes": [
    [
     3,
@@ -155638,7 +155630,6 @@
    [
     7,
     8,
-    10,
     12,
     23
    ],
@@ -157047,10 +157038,11 @@
   "after": "",
   "label": "adverbe · nom, m.",
   "phonology": "kaS",
-  "steno": "kaZm",
+  "steno": "k*aZm",
   "strokes": [
    [
     2,
+    10,
     12,
     24,
     25
@@ -158326,7 +158318,7 @@
   "after": "",
   "label": "adjectif, f. sg.",
   "phonology": "mo.Ral",
-  "steno": "mae/R*al/-j",
+  "steno": "mae/Ral/-j",
   "strokes": [
    [
     6,
@@ -158335,7 +158327,6 @@
    ],
    [
     8,
-    10,
     12,
     23
    ],
@@ -158632,7 +158623,7 @@
   "after": "",
   "label": "indicatif présent, 2e sg.",
   "phonology": "ga.R@.ti",
-  "steno": "ksa/R@/t*i/-d",
+  "steno": "ksa/R@/ti/-d",
   "strokes": [
    [
     2,
@@ -158645,7 +158636,6 @@
    ],
    [
     7,
-    10,
     13
    ],
    [
@@ -158660,7 +158650,7 @@
   "after": "",
   "label": "indicatif passé, 2e sg.",
   "phonology": "ga.R@.ti",
-  "steno": "ksa/R@/t*i/-dt",
+  "steno": "ksa/R@/ti/-dt",
   "strokes": [
    [
     2,
@@ -158673,7 +158663,6 @@
    ],
    [
     7,
-    10,
     13
    ],
    [
@@ -158689,7 +158678,7 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "ga.R@.ti",
-  "steno": "ksa/R@/t*i/-k",
+  "steno": "ksa/R@/ti/-k",
   "strokes": [
    [
     2,
@@ -158702,7 +158691,6 @@
    ],
    [
     7,
-    10,
     13
    ],
    [
@@ -158717,7 +158705,7 @@
   "after": "",
   "label": "participe passé, m. pl. · adjectif, m. pl.",
   "phonology": "ga.R@.ti",
-  "steno": "ksa/R@/t*i/-s",
+  "steno": "ksa/R@/ti/-s",
   "strokes": [
    [
     2,
@@ -158730,7 +158718,6 @@
    ],
    [
     7,
-    10,
     13
    ],
    [
@@ -159307,13 +159294,13 @@
   "after": "",
   "label": "nom, f. pl.",
   "phonology": "mER",
-  "steno": "m*ieR/-s",
+  "steno": "mie#R/-s",
   "strokes": [
    [
     6,
-    10,
     13,
     14,
+    15,
     21
    ],
    [
@@ -160182,7 +160169,7 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "ku.Se",
-  "steno": "k@e/pme",
+  "steno": "k@e/pm*e",
   "strokes": [
    [
     2,
@@ -160192,6 +160179,7 @@
    [
     4,
     6,
+    10,
     14
    ]
   ],
@@ -160756,12 +160744,12 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "pat",
-  "steno": "pa#t",
+  "steno": "p*at",
   "strokes": [
    [
     4,
+    10,
     12,
-    15,
     20
    ]
   ],
@@ -161099,12 +161087,13 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "so",
-  "steno": "sae",
+  "steno": "sae#",
   "strokes": [
    [
     3,
     12,
-    14
+    14,
+    15
    ]
   ],
   "frequency": 7.02
@@ -161543,10 +161532,11 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "kit",
-  "steno": "kit",
+  "steno": "k*it",
   "strokes": [
    [
     2,
+    10,
     13,
     20
    ]
@@ -164422,7 +164412,7 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "ga.R@.ti",
-  "steno": "ksa/R@/ti",
+  "steno": "ksa/R@/t*i",
   "strokes": [
    [
     2,
@@ -164435,6 +164425,7 @@
    ],
    [
     7,
+    10,
     13
    ]
   ],
@@ -165276,6 +165267,26 @@
     13,
     14,
     22
+   ]
+  ],
+  "frequency": 6.8
+ },
+ {
+  "ortho": "leurs",
+  "before": "",
+  "after": "",
+  "label": "pronom possessif, pl.",
+  "phonology": "l9R",
+  "steno": "mt@R/-s",
+  "strokes": [
+   [
+    6,
+    7,
+    11,
+    21
+   ],
+   [
+    17
    ]
   ],
   "frequency": 6.8
@@ -166824,7 +166835,7 @@
   "after": "",
   "label": "adjectif, f. pl. · nom, f. pl.",
   "phonology": "ot",
-  "steno": "*ae#t/-s/*#",
+  "steno": "*ae#t/-s",
   "strokes": [
    [
     10,
@@ -166835,10 +166846,6 @@
    ],
    [
     17
-   ],
-   [
-    10,
-    15
    ]
   ],
   "frequency": 6.72
@@ -169870,7 +169877,7 @@
   "after": "",
   "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "ba.lad",
-  "steno": "sva/mtad",
+  "steno": "sva/mt*ad",
   "strokes": [
    [
     3,
@@ -169880,6 +169887,7 @@
    [
     6,
     7,
+    10,
     12,
     19
    ]
@@ -170951,12 +170959,12 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "mal",
-  "steno": "m*al",
+  "steno": "ma#l",
   "strokes": [
    [
     6,
-    10,
     12,
+    15,
     23
    ]
   ],
@@ -171762,9 +171770,10 @@
   "after": "",
   "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "@kR",
-  "steno": "@kR",
+  "steno": "*@kR",
   "strokes": [
    [
+    10,
     11,
     18,
     21
@@ -172961,12 +172970,12 @@
   "after": "",
   "label": "nom, f. sg. · article indéfini, m. sg.",
   "phonology": "pa",
-  "steno": "p*a",
+  "steno": "pa#",
   "strokes": [
    [
     4,
-    10,
-    12
+    12,
+    15
    ]
   ],
   "frequency": 6.43
@@ -178019,13 +178028,13 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "sER",
-  "steno": "s*ieR",
+  "steno": "sie#R",
   "strokes": [
    [
     3,
-    10,
     13,
     14,
+    15,
     21
    ]
   ],
@@ -183592,10 +183601,11 @@
   "after": "",
   "label": "nom, m. pl.",
   "phonology": "v5",
-  "steno": "vaie/-s",
+  "steno": "v*aie/-s",
   "strokes": [
    [
     5,
+    10,
     12,
     13,
     14
@@ -184314,7 +184324,7 @@
   "after": "",
   "label": "participe passé, f. sg. · adjectif, f. sg.",
   "phonology": "ku.Se",
-  "steno": "k@e/pm*e/-j",
+  "steno": "k@e/pme/-j",
   "strokes": [
    [
     2,
@@ -184324,7 +184334,6 @@
    [
     4,
     6,
-    10,
     14
    ],
    [
@@ -189153,7 +189162,7 @@
   "after": "",
   "label": "participe passé, f. sg. · adjectif, f. sg.",
   "phonology": "R°.vy",
-  "steno": "R@a/v*@i/-j",
+  "steno": "R@a/v@i/-j",
   "strokes": [
    [
     8,
@@ -189162,7 +189171,6 @@
    ],
    [
     5,
-    10,
     11,
     13
    ],
@@ -190285,7 +190293,7 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "sta.ty",
-  "steno": "sta/t@i",
+  "steno": "sta/t*@i",
   "strokes": [
    [
     3,
@@ -190294,6 +190302,7 @@
    ],
    [
     7,
+    10,
     11,
     13
    ]
@@ -194503,7 +194512,7 @@
   "after": "",
   "label": "adjectif, m. pl. · nom, m. pl.",
   "phonology": "o",
-  "steno": "*ae#/-s/*#",
+  "steno": "*ae#/-s",
   "strokes": [
    [
     10,
@@ -194513,10 +194522,6 @@
    ],
    [
     17
-   ],
-   [
-    10,
-    15
    ]
   ],
   "frequency": 5.48
@@ -198844,7 +198849,7 @@
   "ortho": "prises",
   "before": "les",
   "after": "",
-  "label": "nom, f. pl.",
+  "label": "nom, f. pl. · adjectif, f. pl.",
   "phonology": "pRiz",
   "steno": "pRinl/-s",
   "strokes": [
@@ -201214,7 +201219,7 @@
   "after": "",
   "label": "nom, f. pl.",
   "phonology": "sOR.ti",
-  "steno": "seR/t*i/-s",
+  "steno": "seR/ti/-s",
   "strokes": [
    [
     3,
@@ -201223,7 +201228,6 @@
    ],
    [
     7,
-    10,
     13
    ],
    [
@@ -206185,7 +206189,7 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "ba.lad",
-  "steno": "sva/mtad/-R",
+  "steno": "sva/mt*ad/-R",
   "strokes": [
    [
     3,
@@ -206195,6 +206199,7 @@
    [
     6,
     7,
+    10,
     12,
     19
    ],
@@ -206210,7 +206215,7 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "ba.lad",
-  "steno": "sva/mtad/-k",
+  "steno": "sva/mt*ad/-k",
   "strokes": [
    [
     3,
@@ -206220,6 +206225,7 @@
    [
     6,
     7,
+    10,
     12,
     19
    ],
@@ -209865,11 +209871,10 @@
   "after": "",
   "label": "adjectif, pl.",
   "phonology": "kit",
-  "steno": "k*it/-s",
+  "steno": "kit/-s",
   "strokes": [
    [
     2,
-    10,
     13,
     20
    ],
@@ -209974,7 +209979,7 @@
   "after": "",
   "label": "nom, sg.",
   "phonology": "fi.nal",
-  "steno": "kpi/mR*al",
+  "steno": "kpi/mRal",
   "strokes": [
    [
     2,
@@ -209984,7 +209989,6 @@
    [
     6,
     8,
-    10,
     12,
     23
    ]
@@ -211097,12 +211101,11 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "bak",
-  "steno": "sv*ak",
+  "steno": "svak",
   "strokes": [
    [
     3,
     5,
-    10,
     12,
     18
    ]
@@ -216440,7 +216443,7 @@
   "after": "",
   "label": "adjectif, m. sg. · nom, m. sg.",
   "phonology": "e.ne",
-  "steno": "e/mR*e",
+  "steno": "e/mRe",
   "strokes": [
    [
     14
@@ -216448,7 +216451,6 @@
    [
     6,
     8,
-    10,
     14
    ]
   ],
@@ -217160,10 +217162,9 @@
   "after": "",
   "label": "nom, f. sg. · indicatif présent, 3e sg.",
   "phonology": "@kR",
-  "steno": "*@kR",
+  "steno": "@kR",
   "strokes": [
    [
-    10,
     11,
     18,
     21
@@ -218465,11 +218466,10 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "kOk",
-  "steno": "k*ek",
+  "steno": "kek",
   "strokes": [
    [
     2,
-    10,
     14,
     18
    ]
@@ -221492,7 +221492,7 @@
   "after": "",
   "label": "adjectif, f. sg.",
   "phonology": "e.gal",
-  "steno": "e/ksal/-j",
+  "steno": "e/ks*al/-j",
   "strokes": [
    [
     14
@@ -221500,6 +221500,7 @@
    [
     2,
     3,
+    10,
     12,
     23
    ],
@@ -223208,25 +223209,6 @@
     4,
     11,
     20
-   ]
-  ],
-  "frequency": 4.46
- },
- {
-  "ortho": "prise",
-  "before": "la",
-  "after": "",
-  "label": "adjectif, f. sg.",
-  "phonology": "pRiz",
-  "steno": "pR*inl",
-  "strokes": [
-   [
-    4,
-    8,
-    10,
-    13,
-    22,
-    23
    ]
   ],
   "frequency": 4.46
@@ -226253,6 +226235,25 @@
   "frequency": 4.39
  },
  {
+  "ortho": "mienne",
+  "before": "",
+  "after": "",
+  "label": "adjectif possessif, f. sg.",
+  "phonology": "mjEn",
+  "steno": "mRwien",
+  "strokes": [
+   [
+    6,
+    8,
+    9,
+    13,
+    14,
+    22
+   ]
+  ],
+  "frequency": 4.39
+ },
+ {
   "ortho": "onde",
   "before": "l'",
   "after": "",
@@ -227340,12 +227341,11 @@
   "after": "",
   "label": "nom, m. sg.",
   "phonology": "tRip",
-  "steno": "tR*ijk",
+  "steno": "tRijk",
   "strokes": [
    [
     7,
     8,
-    10,
     13,
     16,
     18
@@ -229951,11 +229951,10 @@
   "after": "",
   "label": "adjectif, f. pl.",
   "phonology": "vERt",
-  "steno": "v*ie#tR/-s",
+  "steno": "vie#tR/-s",
   "strokes": [
    [
     5,
-    10,
     13,
     14,
     15,
@@ -232475,6 +232474,28 @@
     9,
     12,
     18
+   ]
+  ],
+  "frequency": 4.22
+ },
+ {
+  "ortho": "ferraille",
+  "before": "la",
+  "after": "",
+  "label": "nom, f. sg. · indicatif présent, 3e sg.",
+  "phonology": "fE.Raj",
+  "steno": "kpie/Raj",
+  "strokes": [
+   [
+    2,
+    4,
+    13,
+    14
+   ],
+   [
+    8,
+    12,
+    16
    ]
   ],
   "frequency": 4.22

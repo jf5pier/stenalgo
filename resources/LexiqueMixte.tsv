@@ -10175,8 +10175,8 @@ aucun	ok1	aucun	PRO:ind	ADJ:ind,PRO:ind	m	s		o|k_1	au|c_un	53.18	71.6
 aucune	okyn	aucune	ADJ:ind	ADJ:ind,PRO:ind	f	s		o|k_y_n_#	au|c_u_n_e	174.73	207.0
 aucune	okyn	aucune	PRO:ind	ADJ:ind,PRO:ind	f	s		o|k_y_n_#	au|c_u_n_e	26.22	20.73
 aucunement	okyn°m@	aucunement	ADV	ADV				o|k_y|n_°|m_@	au|c_u|n_e|m_ent	5.81	1.01
-aucunes	okyn	aucunes	ADJ:ind	ADJ:ind	f	p		o|k_y_n_#	au|c_u_n_es	0.14	1.03
-aucuns	ok1	aucuns	ADJ:ind	ADJ:ind	m	p		o|k_1_#	au|c_un_s	3.11	1.22
+aucunes	okyn	aucune	ADJ:ind	ADJ:ind	f	p		o|k_y_n_#	au|c_u_n_es	0.14	1.03
+aucuns	ok1	aucun	ADJ:ind	ADJ:ind	m	p		o|k_1_#	au|c_un_s	3.11	1.22
 audace	odas	audace	NOM	NOM	f	s		o|d_a_s_#	au|d_a_c_e	16.55	5.1
 audaces	odas	audace	NOM	NOM	f	p		o|d_a_s_#	au|d_a_c_es	2.91	0.02
 audacieuse	odasj2z	audacieux	ADJ	ADJ	f	s		o|d_a|s_j_2_z_#	au|d_a|c_i_eu_s_e	1.76	1.46
@@ -10657,7 +10657,7 @@ autre	otR	autre	ADV	ADJ,ADV,NOM,PRO:ind				o_t_R_#	au_t_r_e	0.14	0.05
 autrefois	otR°fwa	autrefois	ADV	ADV,PRO:ind				o|t_R_°|f_wa_#	au|t_r_e|f_oi_s	96.96	26.89
 autrefois	otR°fwa	autrefois	PRO:ind	ADV,PRO:ind	f	s		o|t_R_°|f_wa_#	au|t_r_e|f_oi_s	0.07	0.0
 autrement	otR°m@	autrement	ADV	ADV				o|t_R_°|m_@	au|t_r_e|m_ent	62.77	40.16
-autres	otR	autres	PRO:ind	ADJ,NOM,ADJ:num,ADV,PRO:ind		p		o_t_R_#	au_t_r_es	375.14	249.7
+autres	otR	autre	PRO:ind	ADJ,NOM,ADJ:num,ADV,PRO:ind		p		o_t_R_#	au_t_r_es	375.14	249.7
 autres	otR	autre	ADJ	ADJ,NOM,ADJ:num,ADV,PRO:ind		p		o_t_R_#	au_t_r_es	169.46	117.61
 autres	otR	autre	NOM	ADJ,NOM,ADJ:num,ADV,PRO:ind	m	p		o_t_R_#	au_t_r_es	2.64	1.23
 autres	otR	autres	ADJ:num	ADJ,NOM,ADJ:num,ADV,PRO:ind				o_t_R_#	au_t_r_es	0.0	0.17
@@ -10687,7 +10687,7 @@ auvergnats	ovERNa	auvergnat	NOM	ADJ,NOM	m	p		o|v_E_R|N_a_#	au|v_e_r|gn_a_ts	0.74
 auvergne	ovERN	auvergne	NOM	NOM	f	s		o|v_E_R_N_#	au|v_e_r_gn_e	1.22	0.0
 auverpin	ovERp5	auverpin	NOM	NOM	m	s		o|v_E_R|p_5	au|v_e_r|p_in	0.41	0.0
 auverpins	ovERp5	auverpin	NOM	NOM	m	p		o|v_E_R|p_5_#	au|v_e_r|p_in_s	0.14	0.0
-aux	o	aux	ART:def	ART:def		p		o_#	au_x	1907.57	835.65
+aux	o	au	ART:def	ART:def		p		o_#	au_x	1907.57	835.65
 auxdits	odi	auxdits	PRE	PRE				o_#|d_i_#	au_x|d_i_ts	0.14	0.0
 auxerrois	osERwa	auxerrois	NOM	NOM	m			o|s_E|R_wa_#	au|x_e|rr_oi_s	0.07	0.0
 auxiliaire	oksiljER	auxiliaire	ADJ	ADJ,NOM		s		o|ks_i|l_j_E_R_#	au|x_i|l_i_ai_r_e	1.15	1.52
@@ -21266,10 +21266,10 @@ certaine	sERtEn	certain	ADJ	ADJ,ADJ:ind,PRO:ind	f	s		s_E_R|t_E_n_#	c_e_r|t_ai_n_
 certaine	sERtEn	certaine	ADJ:ind	ADJ,ADJ:ind,PRO:ind	f	s		s_E_R|t_E_n_#	c_e_r|t_ai_n_e	4.86	1.03
 certaine	sERtEn	certaine	PRO:ind	ADJ,ADJ:ind,PRO:ind				s_E_R|t_E_n_#	c_e_r|t_ai_n_e	1.35	0.9
 certainement	sERtEn°m@	certainement	ADV	ADV				s_E_R|t_E|n_°|m_@	c_e_r|t_ai|n_e|m_ent	59.93	55.16
-certaines	sERtEn	certaines	ADJ:ind	ADJ,ADJ:ind,PRO:ind	f	p		s_E_R|t_E_n_#	c_e_r|t_ai_n_es	51.55	48.41
+certaines	sERtEn	certaine	ADJ:ind	ADJ,ADJ:ind,PRO:ind	f	p		s_E_R|t_E_n_#	c_e_r|t_ai_n_es	51.55	48.41
 certaines	sERtEn	certaines	PRO:ind	ADJ,ADJ:ind,PRO:ind	f	p		s_E_R|t_E_n_#	c_e_r|t_ai_n_es	4.8	3.8
 certaines	sERtEn	certain	ADJ	ADJ,ADJ:ind,PRO:ind	f	p		s_E_R|t_E_n_#	c_e_r|t_ai_n_es	3.11	2.7
-certains	sERt5	certains	ADJ:ind	ADJ,ADJ:ind,PRO:ind	m	p		s_E_R|t_5_#	c_e_r|t_ain_s	101.28	57.58
+certains	sERt5	certain	ADJ:ind	ADJ,ADJ:ind,PRO:ind	m	p		s_E_R|t_5_#	c_e_r|t_ain_s	101.28	57.58
 certains	sERt5	certains	PRO:ind	ADJ,ADJ:ind,PRO:ind	m	p		s_E_R|t_5_#	c_e_r|t_ain_s	32.64	43.65
 certains	sERt5	certain	ADJ	ADJ,ADJ:ind,PRO:ind	m	p		s_E_R|t_5_#	c_e_r|t_ain_s	0.68	0.72
 certes	sERt	certes	ADV	ADV				s_E_R_t_#	c_e_r_t_es	69.66	14.88
@@ -64761,7 +64761,7 @@ icarienne	ikaRjEn	icarienne	ADJ	ADJ	f	s		i|k_a|R_j_E_n_#	i|c_a|r_i_e_nn_e	0.0	0.
 iceberg	ajsbERg	iceberg	NOM	NOM	m	s		aj|s_#_b_E_R_g	i|c_e_b_e_r_g	1.08	1.5
 icebergs	ajsbERg	iceberg	NOM	NOM	m	p		aj|s_#_b_E_R_g_#	i|c_e_b_e_r_g_s	0.34	0.39
 icelle	isEl	icelle	PRO:ind	PRO:ind	f	s		i|s_E_l_#	i|c_e_ll_e	0.34	0.0
-icelles	isEl	icelles	PRO:ind	PRO:ind	f	p		i|s_E_l_#	i|c_e_ll_es	0.2	0.0
+icelles	isEl	icelle	PRO:ind	PRO:ind	f	p		i|s_E_l_#	i|c_e_ll_es	0.2	0.0
 icelui	is°l8i	icelui	PRO:ind	PRO:ind	m	s		i|s_°|l_8_i	i|c_e|l_u_i	0.07	0.0
 ichtyologie	iktjoloZi	ichtyologie	NOM	NOM	f	s		i_k|t_j_o|l_o|Z_i_#	i_ch|t_y_o|l_o|g_i_e	0.0	0.15
 ichtyologiste	iktjoloZist	ichtyologiste	NOM	NOM		s		i_k|t_j_o|l_o|Z_i_s_t_#	i_ch|t_y_o|l_o|g_i_s_t_e	0.0	0.02
@@ -73267,7 +73267,7 @@ leurrons	l9R§	leurrer	VER	VER			imp:pre:1p;	l_9|R_§	l_eu|rr_ons	0.27	0.14
 leurré	l9Re	leurrer	VER	VER	m	s	par:pas;	l_9|R_e	l_eu|rr_é	0.27	0.09
 leurrés	l9Re	leurrer	VER	VER	m	p	par:pas;	l_9|R_e_#	l_eu|rr_é_s	0.07	0.03
 leurs	l9R	leurs	ADJ:pos	ADJ:pos,PRO:pos				l_9_R_#	l_eu_r_s	886.55	243.56
-leurs	l9R	leurs	PRO:pos	ADJ:pos,PRO:pos		p		l_9_R_#	l_eu_r_s	9.53	6.8
+leurs	l9R	leur	PRO:pos	ADJ:pos,PRO:pos		p		l_9_R_#	l_eu_r_s	9.53	6.8
 lev	lEv	lev	NOM	NOM	m	s		l_E_v	l_e_v	0.0	0.68
 leva	l°va	lever	VER	NOM,VER			ind:pas:3s;	l_°|v_a	l_e|v_a	123.58	1.28
 leva	l°va	leva	NOM	NOM,VER	m	p		l_°|v_a	l_e|v_a	0.0	0.01
@@ -75757,7 +75757,7 @@ maintenue	m5t°ny	maintenir	VER	VER,NOM	f	s	par:pas;	m_5|t_°|n_y_#	m_ain|t_e|n_
 maintenue	m5t°ny	maintenue	NOM	VER,NOM	f	s		m_5|t_°|n_y_#	m_ain|t_e|n_u_e	0.41	0.05
 maintenues	m5t°ny	maintenir	VER	VER	f	p	par:pas;	m_5|t_°|n_y_#	m_ain|t_e|n_u_es	1.35	0.14
 maintenus	m5t°ny	maintenir	VER	VER	m	p	par:pas;	m_5|t_°|n_y	m_ain|t_e|n_us	2.23	0.2
-maintes	m5t	maintes	ADJ:ind	ADJ:ind	f	p		m_5_t_#	m_ain_t_es	9.86	2.36
+maintes	m5t	mainte	ADJ:ind	ADJ:ind	f	p		m_5_t_#	m_ain_t_es	9.86	2.36
 maintien	m5tj5	maintien	NOM	NOM	m	s		m_5|t_j_5	m_ain|t_i_en	10.14	1.87
 maintiendra	m5tj5dRa	maintenir	VER	VER			ind:fut:3s;	m_5|t_j_5|d_R_a	m_ain|t_i_en|d_r_a	0.34	0.25
 maintiendrai	m5tj5dRe	maintenir	VER	VER			ind:fut:1s;	m_5|t_j_5|d_R_e	m_ain|t_i_en|d_r_ai	0.14	0.19
@@ -75776,7 +75776,7 @@ maintient	m5tj5	maintenir	VER	VER			ind:pre:3s;	m_5|t_j_5_#	m_ain|t_i_en_t	4.39	
 maintinrent	m5t5R	maintenir	VER	VER			ind:pas:3p;	m_5|t_5_R_#	m_ain|t_in_r_ent	0.34	0.0
 maintins	m5t5	maintenir	VER	VER			ind:pas:1s;	m_5|t_5	m_ain|t_ins	0.34	0.01
 maintint	m5t5	maintenir	VER	VER			ind:pas:3s;	m_5|t_5	m_ain|t_int	2.03	0.14
-maints	m5	maints	ADJ:ind	ADJ:ind	m	p		m_5_#	m_ain_ts	4.39	0.34
+maints	m5	maint	ADJ:ind	ADJ:ind	m	p		m_5_#	m_ain_ts	4.39	0.34
 maire	mER	maire	NOM	NOM	m	s		m_E_R_#	m_ai_r_e	13.11	27.91
 maires	mER	maire	NOM	NOM	m	p		m_E_R_#	m_ai_r_es	0.61	0.27
 mairesse	mEREs	maire	NOM	NOM	f	s		m_E|R_E_s_#	m_ai|r_e_ss_e	0.14	0.0
@@ -78587,10 +78587,10 @@ mien	mj5	mien	PRO:pos	ADJ:pos,PRO:pos	m	s		m_j_5	m_i_en	36.08	54.06
 mien	mj5	mien	ADJ:pos	ADJ:pos,PRO:pos	m	s		m_j_5	m_i_en	0.74	1.61
 mienne	mjEn	mienne	PRO:pos	ADJ:pos,PRO:pos	f	s		m_j_E_n_#	m_i_e_nn_e	41.28	50.46
 mienne	mjEn	mienne	ADJ:pos	ADJ:pos,PRO:pos	f	s		m_j_E_n_#	m_i_e_nn_e	1.22	4.39
-miennes	mjEn	miennes	PRO:pos	ADJ:pos,PRO:pos	m	p		m_j_E_n_#	m_i_e_nn_es	9.59	9.31
-miennes	mjEn	miennes	ADJ:pos	ADJ:pos,PRO:pos	f	p		m_j_E_n_#	m_i_e_nn_es	1.08	0.32
-miens	mj5	miens	PRO:pos	ADJ:pos,PRO:pos	m	p		m_j_5_#	m_i_en_s	21.15	16.32
-miens	mj5	miens	ADJ:pos	ADJ:pos,PRO:pos	m	p		m_j_5_#	m_i_en_s	0.27	0.76
+miennes	mjEn	mienne	PRO:pos	ADJ:pos,PRO:pos	m	p		m_j_E_n_#	m_i_e_nn_es	9.59	9.31
+miennes	mjEn	mienne	ADJ:pos	ADJ:pos,PRO:pos	f	p		m_j_E_n_#	m_i_e_nn_es	1.08	0.32
+miens	mj5	mien	PRO:pos	ADJ:pos,PRO:pos	m	p		m_j_5_#	m_i_en_s	21.15	16.32
+miens	mj5	mien	ADJ:pos	ADJ:pos,PRO:pos	m	p		m_j_5_#	m_i_en_s	0.27	0.76
 mies	mi	mie	NOM	NOM	f	p		m_i_#	m_i_es	0.07	0.03
 miette	mjEt	miette	NOM	NOM	f	s		m_j_E_t_#	m_i_e_tt_e	4.12	2.54
 miettes	mjEt	miette	NOM	NOM	f	p		m_j_E_t_#	m_i_e_tt_es	13.04	6.13
@@ -82466,7 +82466,7 @@ même	mEm	même	ADJ	ADJ,ADV,PRO:ind		s		m_E_m_#	m_ê_m_e	705.81	369.32
 même	mEm	même	PRO:ind	ADJ,ADV,PRO:ind		s		m_E_m_#	m_ê_m_e	55.74	43.18
 mêmement	mEm°m@	mêmement	ADV	ADV				m_E|m_°|m_@	m_ê|m_e|m_ent	0.34	0.1
 mêmes	mEm	même	ADJ	ADJ,PRO:ind		p		m_E_m_#	m_ê_m_es	98.99	33.61
-mêmes	mEm	mêmes	PRO:ind	ADJ,PRO:ind		p		m_E_m_#	m_ê_m_es	18.38	14.48
+mêmes	mEm	même	PRO:ind	ADJ,PRO:ind		p		m_E_m_#	m_ê_m_es	18.38	14.48
 mîmes	mim	mettre	VER	VER			ind:pas:1p;	m_i_m_#	m_î_m_es	1.42	0.0
 môle	mol	môle	NOM	NOM		s		m_o_l_#	m_ô_l_e	3.45	1.6
 môles	mol	môle	NOM	NOM		p		m_o_l_#	m_ô_l_es	0.47	0.0
@@ -84085,14 +84085,14 @@ nulle	nyl	nulle	PRO:ind	ADJ,ADJ:ind,PRO:ind	f	s		n_y_l_#	n_u_ll_e	7.16	19.46
 nulle	nyl	nul	ADJ	ADJ,ADJ:ind,PRO:ind	f	s		n_y_l_#	n_u_ll_e	8.45	6.68
 nullement	nyl°m@	nullement	ADV	ADV				n_y|l_°|m_@	n_u|ll_e|m_ent	14.19	1.45
 nulles	nyl	nul	ADJ	ADJ,ADJ:ind	f	p		n_y_l_#	n_u_ll_es	0.61	0.96
-nulles	nyl	nulles	ADJ:ind	ADJ,ADJ:ind	f	p		n_y_l_#	n_u_ll_es	0.34	0.41
+nulles	nyl	nulle	ADJ:ind	ADJ,ADJ:ind	f	p		n_y_l_#	n_u_ll_es	0.34	0.41
 nullissime	nylisim	nullissime	ADJ	ADJ		s		n_y|l_i|s_i_m_#	n_u|ll_i|ss_i_m_e	0.07	0.01
 nullité	nylite	nullité	NOM	NOM	f	s		n_y|l_i|t_e	n_u|ll_i|t_é	2.16	0.96
 nullités	nylite	nullité	NOM	NOM	f	p		n_y|l_i|t_e_#	n_u|ll_i|t_é_s	0.61	0.24
 nullos	nylo	nullos	ADJ	ADJ		s		n_y|l_o_#	n_u|ll_o_s	0.0	0.18
 nuls	nyl	nul	ADJ	ADJ,NOM,ADJ:ind	m	p		n_y_l_#	n_u_l_s	1.22	4.22
 nuls	nyl	nul	NOM	ADJ,NOM,ADJ:ind	m	p		n_y_l_#	n_u_l_s	0.68	2.41
-nuls	nyl	nuls	ADJ:ind	ADJ,NOM,ADJ:ind	m	p		n_y_l_#	n_u_l_s	0.34	0.63
+nuls	nyl	nul	ADJ:ind	ADJ,NOM,ADJ:ind	m	p		n_y_l_#	n_u_l_s	0.34	0.63
 numide	nymid	numide	NOM	ADJ,NOM		s		n_y|m_i_d_#	n_u|m_i_d_e	0.14	0.04
 numide	nymid	numide	ADJ	ADJ,NOM	m	s		n_y|m_i_d_#	n_u|m_i_d_e	0.07	0.0
 numides	nymid	numide	ADJ	ADJ		p		n_y|m_i_d_#	n_u|m_i_d_es	0.27	0.0
@@ -84469,8 +84469,8 @@ névé	neve	névé	NOM	NOM	m	s		n_e|v_e	n_é|v_é	0.14	0.0
 névés	neve	névé	NOM	NOM	m	p		n_e|v_e_#	n_é|v_é_s	0.14	0.0
 nôtre	notR	nôtre	PRO:pos	ADJ:pos,PRO:pos		s		n_o_t_R_#	n_ô_t_r_e	23.51	19.0
 nôtre	notR	nôtre	ADJ:pos	ADJ:pos,PRO:pos		s		n_o_t_R_#	n_ô_t_r_e	0.88	0.78
-nôtres	notR	nôtres	PRO:pos	ADJ:pos,PRO:pos		p		n_o_t_R_#	n_ô_t_r_es	21.35	22.63
-nôtres	notR	nôtres	ADJ:pos	ADJ:pos,PRO:pos		p		n_o_t_R_#	n_ô_t_r_es	0.27	0.14
+nôtres	notR	nôtre	PRO:pos	ADJ:pos,PRO:pos		p		n_o_t_R_#	n_ô_t_r_es	21.35	22.63
+nôtres	notR	nôtre	ADJ:pos	ADJ:pos,PRO:pos		p		n_o_t_R_#	n_ô_t_r_es	0.27	0.14
 oaristys	oaRistis	oaristys	NOM	NOM	f			o|a|R_i_s|t_i_s	o|a|r_i_s|t_y_s	0.07	0.0
 oasis	oazis	oasis	NOM	NOM	f			o|a|z_i_s	o|a|s_i_s	6.42	1.61
 ob	Ob	ob	NOM	NOM	m	s		O_b	o_b	0.07	0.25
@@ -99208,14 +99208,14 @@ quel	kEl	quel	ADJ:int	ADJ:int	m	s		k_E_l	qu_e_l	265.34	657.71
 quelconque	kElk§k	quelconque	ADJ	ADJ		s		k_E_l|k_§_k_#	qu_e_l|c_on_qu_e	27.57	9.79
 quelconques	kElk§k	quelconque	ADJ	ADJ		p		k_E_l|k_§_k_#	qu_e_l|c_on_qu_es	1.28	0.29
 quelle	kEl	quelle	ADJ:int	ADJ:int	f	s		k_E_l_#	qu_e_ll_e	244.39	512.55
-quelles	kEl	quelles	ADJ:int	ADJ:int	f	p		k_E_l_#	qu_e_ll_es	35.95	46.92
+quelles	kEl	quelle	ADJ:int	ADJ:int	f	p		k_E_l_#	qu_e_ll_es	35.95	46.92
 quelqu'un	kElk1	quelqu'un	PRO:ind	PRO:ind		s		k_E_l|k_#_1	qu_e_l|qu_'_un	128.92	629.0
 quelqu'une	kElkyn	quelqu'une	PRO:ind	PRO:ind	f	s		k_E_l|k_#_y_n_#	qu_e_l|qu_'_u_n_e	0.61	0.08
 quelque	kElk	quelque	ADJ:ind	ADJ:ind,ADV		s		k_E_l_k_#	qu_e_l_qu_e	557.77	884.61
 quelque	kElk	quelque	ADV	ADJ:ind,ADV				k_E_l_k_#	qu_e_l_qu_e	111.49	62.61
 quelquefois	kElk°fwa	quelquefois	ADV	ADV				k_E_l|k_°|f_wa_#	qu_e_l|qu_e|f_oi_s	60.47	11.87
-quelques	kElk	quelques	ADJ:ind	ADJ:ind		p		k_E_l_k_#	qu_e_l_qu_es	732.57	337.35
-quels	kEl	quels	ADJ:int	ADJ:int	m	p		k_E_l_#	qu_e_l_s	37.23	56.44
+quelques	kElk	quelque	ADJ:ind	ADJ:ind		p		k_E_l_k_#	qu_e_l_qu_es	732.57	337.35
+quels	kEl	quel	ADJ:int	ADJ:int	m	p		k_E_l_#	qu_e_l_s	37.23	56.44
 quenelle	k°nEl	quenelle	NOM	NOM	f	s		k_°|n_E_l_#	qu_e|n_e_ll_e	0.0	0.19
 quenelles	k°nEl	quenelle	NOM	NOM	f	p		k_°|n_E_l_#	qu_e|n_e_ll_es	0.74	0.16
 quenotte	k°nOt	quenotte	NOM	NOM	f	s		k_°|n_O_t_#	qu_e|n_o_tt_e	0.2	0.0
@@ -114854,14 +114854,14 @@ sien	sj5	sien	ADJ:pos	ADJ:pos,PRO:pos	m	s		s_j_5	s_i_en	1.08	0.28
 sienne	sjEn	sienne	PRO:pos	ADJ,ADJ:pos,PRO:pos	f	s		s_j_E_n_#	s_i_e_nn_e	40.68	14.21
 sienne	sjEn	sienne	ADJ:pos	ADJ,ADJ:pos,PRO:pos	f	s		s_j_E_n_#	s_i_e_nn_e	1.89	0.69
 sienne	sjEn	sienne	ADJ	ADJ,ADJ:pos,PRO:pos	m	s		s_j_E_n_#	s_i_e_nn_e	0.0	0.01
-siennes	sjEn	siennes	PRO:pos	ADJ:pos,PRO:pos	f	p		s_j_E_n_#	s_i_e_nn_es	9.73	2.74
-siennes	sjEn	siennes	ADJ:pos	ADJ:pos,PRO:pos	f	p		s_j_E_n_#	s_i_e_nn_es	0.54	0.17
+siennes	sjEn	sienne	PRO:pos	ADJ:pos,PRO:pos	f	p		s_j_E_n_#	s_i_e_nn_es	9.73	2.74
+siennes	sjEn	sienne	ADJ:pos	ADJ:pos,PRO:pos	f	p		s_j_E_n_#	s_i_e_nn_es	0.54	0.17
 siennois	sjEnwa	siennois	ADJ	ADJ,NOM	m	s		s_j_E|n_wa_#	s_i_e|nn_oi_s	0.07	0.0
 siennois	sjEnwa	siennois	NOM	ADJ,NOM	m			s_j_E|n_wa_#	s_i_e|nn_oi_s	0.2	0.0
 siennoise	sjEnwaz	siennois	ADJ	ADJ	f	s		s_j_E|n_wa_z_#	s_i_e|nn_oi_s_e	0.2	0.0
 siennoises	sjEnwaz	siennois	ADJ	ADJ	f	p		s_j_E|n_wa_z_#	s_i_e|nn_oi_s_es	0.14	0.0
-siens	sj5	siens	PRO:pos	ADJ:pos,PRO:pos	m	p		s_j_5_#	s_i_en_s	29.8	7.54
-siens	sj5	siens	ADJ:pos	ADJ:pos,PRO:pos	m	p		s_j_5_#	s_i_en_s	0.88	0.17
+siens	sj5	sien	PRO:pos	ADJ:pos,PRO:pos	m	p		s_j_5_#	s_i_en_s	29.8	7.54
+siens	sj5	sien	ADJ:pos	ADJ:pos,PRO:pos	m	p		s_j_5_#	s_i_en_s	0.88	0.17
 sierra	sjERa	sierra	NOM	NOM	f	s		s_j_E|R_a	s_i_e|rr_a	2.77	4.0
 sierras	sjERa	sierra	NOM	NOM	f	p		s_j_E|R_a_#	s_i_e|rr_a_s	0.74	0.27
 siesta	sjEsta	siester	VER	VER			ind:pas:3s;	s_j_E_s|t_a	s_i_e_s|t_a	0.0	0.06
@@ -121933,13 +121933,13 @@ tell	tEl	tell	NOM	NOM	m	s		t_E_l	t_e_ll	0.07	2.92
 telle	tEl	telle	ADJ:ind	ADJ:ind,PRO:ind	f	s		t_E_l_#	t_e_ll_e	118.58	48.77
 telle	tEl	telle	PRO:ind	ADJ:ind,PRO:ind	f	s		t_E_l_#	t_e_ll_e	9.19	2.01
 tellement	tEl°m@	tellement	ADV	ADV				t_E|l_°|m_@	t_e|ll_e|m_ent	168.51	183.7
-telles	tEl	telles	ADJ:ind	ADJ:ind,PRO:ind	f	p		t_E_l_#	t_e_ll_es	27.16	15.12
-telles	tEl	telles	PRO:ind	ADJ:ind,PRO:ind	f	p		t_E_l_#	t_e_ll_es	1.22	0.08
+telles	tEl	telle	ADJ:ind	ADJ:ind,PRO:ind	f	p		t_E_l_#	t_e_ll_es	27.16	15.12
+telles	tEl	telle	PRO:ind	ADJ:ind,PRO:ind	f	p		t_E_l_#	t_e_ll_es	1.22	0.08
 tellure	tElyR	tellure	NOM	NOM	m	s		t_E|l_y_R_#	t_e|ll_u_r_e	0.0	0.14
 tellurique	tElyRik	tellurique	ADJ	ADJ		s		t_E|l_y|R_i_k_#	t_e|ll_u|r_i_qu_e	1.42	0.0
 telluriques	tElyRik	tellurique	ADJ	ADJ	m	p		t_E|l_y|R_i_k_#	t_e|ll_u|r_i_qu_es	0.2	0.0
-tels	tEl	tels	ADJ:ind	ADJ:ind,PRO:ind	m	p		t_E_l_#	t_e_l_s	30.14	13.65
-tels	tEl	tels	PRO:ind	ADJ:ind,PRO:ind	m	p		t_E_l_#	t_e_l_s	5.27	1.32
+tels	tEl	tel	ADJ:ind	ADJ:ind,PRO:ind	m	p		t_E_l_#	t_e_l_s	30.14	13.65
+tels	tEl	tel	PRO:ind	ADJ:ind,PRO:ind	m	p		t_E_l_#	t_e_l_s	5.27	1.32
 telson	tEls§	telson	NOM	NOM	m	s		t_E_l|s_§	t_e_l|s_on	0.0	0.07
 tem	tEm	tem	NOM	NOM	m	s		t_E_m	t_e_m	0.07	0.03
 tempe	t@p	tempe	NOM	NOM	f	s		t_@_p_#	t_em_p_e	9.66	2.23
@@ -122711,9 +122711,9 @@ tienne	tjEn	tienne	PRO:pos	VER,ADJ:pos,PRO:pos	f	s		t_j_E_n_#	t_i_e_nn_e	5.81	25
 tienne	tjEn	tenir	VER	VER,ADJ:pos,PRO:pos			sub:pre:1s;sub:pre:3s;	t_j_E_n_#	t_i_e_nn_e	7.84	6.65
 tienne	tjEn	tienne	ADJ:pos	VER,ADJ:pos,PRO:pos	f	s		t_j_E_n_#	t_i_e_nn_e	0.34	3.25
 tiennent	tjEn	tenir	VER	VER			ind:pre:3p;	t_j_E_n_#	t_i_e_nn_ent	24.26	11.43
-tiennes	tjEn	tiennes	PRO:pos	VER,ADJ:pos,PRO:pos	f	p		t_j_E_n_#	t_i_e_nn_es	0.95	4.09
+tiennes	tjEn	tienne	PRO:pos	VER,ADJ:pos,PRO:pos	f	p		t_j_E_n_#	t_i_e_nn_es	0.95	4.09
 tiennes	tjEn	tenir	VER	VER,ADJ:pos,PRO:pos			sub:pre:2s;	t_j_E_n_#	t_i_e_nn_es	0.34	1.5
-tiennes	tjEn	tiennes	ADJ:pos	VER,ADJ:pos,PRO:pos	f	p		t_j_E_n_#	t_i_e_nn_es	0.0	0.39
+tiennes	tjEn	tienne	ADJ:pos	VER,ADJ:pos,PRO:pos	f	p		t_j_E_n_#	t_i_e_nn_es	0.0	0.39
 tiens	tj5	tiens	ONO	VER,NOM,ADJ:pos,ONO,PRO:pos				t_j_5_#	t_i_en_s	81.89	212.99
 tiens	tj5	tenir	VER	VER,NOM,ADJ:pos,ONO,PRO:pos			imp:pre:2s;ind:pre:1s;ind:pre:2s;	t_j_5_#	t_i_en_s	44.86	110.63
 tiens	tj5	tien	NOM	VER,NOM,ADJ:pos,ONO,PRO:pos	m	p		t_j_5_#	t_i_en_s	6.82	12.98
@@ -124046,8 +124046,8 @@ toute	tut	toute	ADJ:ind	ADJ,ADJ:ind,PRO:ind	f	s		t_u_t_#	t_ou_t_e	194.26	118.32
 toute	tut	toute	PRO:ind	ADJ,ADJ:ind,PRO:ind	f	s		t_u_t_#	t_ou_t_e	5.2	8.34
 toutefois	tut°fwa	toutefois	ADV	ADV				t_u|t_°|f_wa_#	t_ou|t_e|f_oi_s	35.47	5.37
 toutes	tut	tout	ADJ	ADJ,ADJ:ind,PRO:ind	f	p		t_u_t_#	t_ou_t_es	535.34	358.34
-toutes	tut	toutes	PRO:ind	ADJ,ADJ:ind,PRO:ind	f	p		t_u_t_#	t_ou_t_es	24.19	20.86
-toutes	tut	toutes	ADJ:ind	ADJ,ADJ:ind,PRO:ind	f	p		t_u_t_#	t_ou_t_es	50.47	16.68
+toutes	tut	toute	PRO:ind	ADJ,ADJ:ind,PRO:ind	f	p		t_u_t_#	t_ou_t_es	24.19	20.86
+toutes	tut	toute	ADJ:ind	ADJ,ADJ:ind,PRO:ind	f	p		t_u_t_#	t_ou_t_es	50.47	16.68
 toutim	tutim	toutim	NOM	NOM	m	s		t_u|t_i_m	t_ou|t_i_m	0.88	0.31
 toutime	tutim	toutime	NOM	NOM	m	s		t_u|t_i_m_#	t_ou|t_i_m_e	0.74	0.0
 toutou	tutu	toutou	NOM	NOM	m	s		t_u|t_u	t_ou|t_ou	1.55	5.65
@@ -127343,7 +127343,7 @@ une	yn	une	ART:ind	ADJ:num,ART:ind,NOM,PRO:ind	f	s		y_n_#	u_n_e	9587.97	7907.85
 une	yn	une	PRO:ind	ADJ:num,ART:ind,NOM,PRO:ind	f	s		y_n_#	u_n_e	199.93	210.01
 une	yn	une	ADJ:num	ADJ:num,ART:ind,NOM,PRO:ind				y_n_#	u_n_e	42.64	14.54
 une	yn	une	NOM	ADJ:num,ART:ind,NOM,PRO:ind	f	s		y_n_#	u_n_e	0.27	1.13
-unes	yn	unes	PRO:ind	PRO:ind	f	p		y_n_#	u_n_es	19.59	3.42
+unes	yn	une	PRO:ind	PRO:ind	f	p		y_n_#	u_n_es	19.59	3.42
 unetelle	yn°tEl	unetelle	NOM	NOM	m	s		y|n_°|t_E_l_#	u|n_e|t_e_ll_e	0.61	0.01
 unguéal	§g8eal	unguéal	ADJ	ADJ	m	s		§|g_8_e|a_l	un|g_u_é|a_l	0.0	0.01
 uni	yni	unir	VER	ADJ,NOM,VER	m	s	par:pas;	y|n_i	u|n_i	2.77	1.57
@@ -127461,7 +127461,7 @@ université	ynivERsite	université	NOM	NOM	f	s		y|n_i|v_E_R|s_i|t_e	u|n_i|v_e_r|
 universités	ynivERsite	université	NOM	NOM	f	p		y|n_i|v_E_R|s_i|t_e_#	u|n_i|v_e_r|s_i|t_é_s	1.76	2.42
 univoque	ynivOk	univoque	ADJ	ADJ	m	s		y|n_i|v_O_k_#	u|n_i|v_o_qu_e	0.2	0.25
 unième	ynjEm	unième	ADJ	ADJ		s		y|n_j_E_m_#	u|n_i_è_m_e	0.81	0.17
-uns	1	uns	PRO:ind	PRO:ind	m	p		1_#	un_s	62.91	15.74
+uns	1	un	PRO:ind	PRO:ind	m	p		1_#	un_s	62.91	15.74
 untel	1tEl	untel	NOM	NOM	m	s		1|t_E_l	un|t_e_l	2.77	1.03
 upanisads	ypanizad	upanisad	NOM	NOM	f	p		y|p_a|n_i|z_a_d_#	u|p_a|n_i|s_a_d_s	0.07	0.0
 upanishad	ypaniSa	upanishad	NOM	NOM	m			y|p_a|n_i|S_a_#	u|p_a|n_i|sh_a_d	0.07	0.02
@@ -130897,8 +130897,8 @@ vêtus	vety	vêtu	ADJ	VER,ADJ	m	p		v_e|t_y	v_ê|t_us	2.97	0.11
 vîmes	vim	voir	VER	VER			ind:pas:1p;	v_i_m_#	v_î_m_es	4.73	0.66
 vôtre	votR	vôtre	PRO:pos	ADJ:pos,PRO:pos		s		v_o_t_R_#	v_ô_t_r_e	11.69	33.05
 vôtre	votR	vôtre	ADJ:pos	ADJ:pos,PRO:pos		s		v_o_t_R_#	v_ô_t_r_e	0.95	1.61
-vôtres	votR	vôtres	PRO:pos	ADJ:pos,PRO:pos		p		v_o_t_R_#	v_ô_t_r_es	4.39	12.14
-vôtres	votR	vôtres	ADJ:pos	ADJ:pos,PRO:pos		p		v_o_t_R_#	v_ô_t_r_es	0.0	0.34
+vôtres	votR	vôtre	PRO:pos	ADJ:pos,PRO:pos		p		v_o_t_R_#	v_ô_t_r_es	4.39	12.14
+vôtres	votR	vôtre	ADJ:pos	ADJ:pos,PRO:pos		p		v_o_t_R_#	v_ô_t_r_es	0.0	0.34
 wagnérien	vagneRj5	wagnérien	ADJ	ADJ	m	s		v_a_g|n_e|R_j_5	w_a_g|n_é|r_i_en	0.34	0.01
 wagnérienne	vagneRjEn	wagnérien	ADJ	ADJ	f	s		v_a_g|n_e|R_j_E_n_#	w_a_g|n_é|r_i_e_nn_e	0.07	0.03
 wagnériennes	vagneRjEn	wagnérien	ADJ	ADJ	f	p		v_a_g|n_e|R_j_E_n_#	w_a_g|n_é|r_i_e_nn_es	0.07	0.0

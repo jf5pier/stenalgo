@@ -77,11 +77,11 @@
    "markers": [
     "f"
    ],
-   "affectedWords": 15751,
+   "affectedWords": 15752,
    "chosenKeys": [
     16
    ],
-   "cost": 91,
+   "cost": 90,
    "alternates": [
     {
      "keys": [
@@ -171,7 +171,7 @@
       24,
       25
      ],
-     "cost": 186
+     "cost": 185
     },
     {
      "keys": [
@@ -449,7 +449,7 @@
     "nbr_p",
     "p"
    ],
-   "affectedWords": 51805,
+   "affectedWords": 51843,
    "chosenKeys": [
     17
    ],
@@ -836,6 +836,10 @@
    [
     "vieux",
     "vieilles"
+   ],
+   [
+    "siennes",
+    "sciènes"
    ],
    [
     "écrierez",
@@ -2282,6 +2286,10 @@
     "tranchés"
    ],
    [
+    "quels",
+    "quelles"
+   ],
+   [
     "canées",
     "cannées"
    ],
@@ -2478,6 +2486,10 @@
     "empirés"
    ],
    [
+    "tells",
+    "tels"
+   ],
+   [
     "jetés",
     "jetées"
    ],
@@ -2496,6 +2508,10 @@
    [
     "entractes",
     "entr'actes"
+   ],
+   [
+    "leurres",
+    "leurs"
    ],
    [
     "toniques",
@@ -2826,6 +2842,10 @@
     "épicée"
    ],
    [
+    "huns",
+    "uns"
+   ],
+   [
     "matinées",
     "mâtinés"
    ],
@@ -2922,6 +2942,10 @@
     "tenues"
    ],
    [
+    "nuls",
+    "nulles"
+   ],
+   [
     "bâillés",
     "baillés"
    ],
@@ -2988,6 +3012,10 @@
    [
     "rails",
     "rabs"
+   ],
+   [
+    "tells",
+    "telles"
    ],
    [
     "cothurnes",
@@ -3746,6 +3774,10 @@
     "rangés"
    ],
    [
+    "vôtres",
+    "vautres"
+   ],
+   [
     "halée",
     "allée"
    ],
@@ -3828,6 +3860,10 @@
    [
     "lasserez",
     "lacerez"
+   ],
+   [
+    "eaux",
+    "aux"
    ],
    [
     "dégelées",
@@ -4248,6 +4284,10 @@
    [
     "ales",
     "hâles"
+   ],
+   [
+    "mains",
+    "maints"
    ],
    [
     "plinthes",
@@ -5218,6 +5258,10 @@
     "mattes"
    ],
    [
+    "tells",
+    "tels"
+   ],
+   [
     "tins",
     "teins"
    ],
@@ -5328,6 +5372,10 @@
    [
     "embouteillés",
     "embouteillées"
+   ],
+   [
+    "tells",
+    "telles"
    ],
    [
     "villes",

@@ -93,6 +93,50 @@ pronounParadigmLemme: dict[tuple[str, str], str] = {
     ("celle", "PRO:dem"): "celui",
     ("celles", "PRO:dem"): "celui",
     ("ceux", "PRO:dem"): "celui",
+    # Number-only pairs of the other closed classes (ART, ADJ:ind/int/pos, PRO:ind/pos): the plural is the
+    # singular's homophone with a lemme of its own (`aux`/`au`), so the pair was a different-lemma clash marked
+    # by S7 (`aux` `ae#`); as one lemma it gets the `-s` feature stroke and the star/hash mark of its family.
+    # Generated 2026-10-06 from LexiqueMixte.tsv: (X, X+s|x) in one category, same phonology, both lemmes = ortho.
+    # Left out: (`tiens`, PRO:pos), (`tiens`, ADJ:pos), (`certaines`, PRO:ind) -- Lexique383 gives the pair no usable number
+    # (`tiens` s/empty, `certaine` PRO:ind empty), so no `-s` feature can separate them and S7 would collide.
+    ("aux", "ART:def"): "au",
+    ("quelques", "ADJ:ind"): "quelque",
+    ("autres", "PRO:ind"): "autre",
+    ("certains", "ADJ:ind"): "certain",
+    ("quels", "ADJ:int"): "quel",
+    ("certaines", "ADJ:ind"): "certaine",
+    ("quelles", "ADJ:int"): "quelle",
+    ("nôtres", "PRO:pos"): "nôtre",
+    ("toutes", "PRO:ind"): "toute",
+    ("toutes", "ADJ:ind"): "toute",
+    ("miens", "PRO:pos"): "mien",
+    ("uns", "PRO:ind"): "un",
+    ("telles", "ADJ:ind"): "telle",
+    ("mêmes", "PRO:ind"): "même",
+    ("tels", "ADJ:ind"): "tel",
+    ("vôtres", "PRO:pos"): "vôtre",
+    ("miennes", "PRO:pos"): "mienne",
+    ("siens", "PRO:pos"): "sien",
+    ("leurs", "PRO:pos"): "leur",
+    ("tiennes", "PRO:pos"): "tienne",
+    ("unes", "PRO:ind"): "une",
+    ("siennes", "PRO:pos"): "sienne",
+    ("maintes", "ADJ:ind"): "mainte",
+    ("tels", "PRO:ind"): "tel",
+    ("aucuns", "ADJ:ind"): "aucun",
+    ("aucunes", "ADJ:ind"): "aucune",
+    ("miens", "ADJ:pos"): "mien",
+    ("nuls", "ADJ:ind"): "nul",
+    ("nulles", "ADJ:ind"): "nulle",
+    ("tiennes", "ADJ:pos"): "tienne",
+    ("maints", "ADJ:ind"): "maint",
+    ("vôtres", "ADJ:pos"): "vôtre",
+    ("miennes", "ADJ:pos"): "mienne",
+    ("siens", "ADJ:pos"): "sien",
+    ("siennes", "ADJ:pos"): "sienne",
+    ("nôtres", "ADJ:pos"): "nôtre",
+    ("telles", "PRO:ind"): "telle",
+    ("icelles", "PRO:ind"): "icelle",
 }
 
 # Off by default: merging the full 1990-reform word list changes `lemme` values for

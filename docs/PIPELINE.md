@@ -363,7 +363,7 @@ Frequencies are copied verbatim; lemma frequencies and the other Lexique383 colu
 ### Normalize lemma — normalizeLemme (S1.7.1)   lexique.py:540
 Called by: Read and filter Lexique383 (S1.7), lexique.py:977.
 Transformation: first `pronounParadigmLemme` (:81), keyed by (lemme, cgram): `ils→il`,
-`elles→elle` (PRO:per), `celle/celles/ceux→celui` (PRO:dem). This puts pronoun forms under
+`elles→elle` (PRO:per), `celle/celles/ceux→celui` (PRO:dem), then (2026-10-06) the number-only plurals of the other closed classes whose plural is the singular's homophone: `aux→au` (ART:def), `quels→quel`, `quelles→quelle`, `quelques→quelque`, `autres→autre`, `certains/certaines→certain/certaine`, `leurs→leur` (PRO:pos), the `-s` possessive and indefinite pronouns (`miens`, `toutes`, `tels`...), 38 pairs in all, generated from `LexiqueMixte.tsv`; the three pairs Lexique gives no usable number (`tiens` PRO:pos/ADJ:pos, `certaines` PRO:ind) stay out, S6 could not separate them and S7 collided. This puts pronoun forms under
 one LemmeGramCat, so Same-Lemma and Grammatical-Category Disambiguation (S6) handles them,
 not Different-Lemma or Grammatical-Category Disambiguation (S7). Otherwise `spellingVariantLemme` (`ile→île` + 55 reform lemmas), keyed by lemma only.
 Result: 5 rows get a **pronoun paradigm lemma**, 149 a reform or variant lemma.

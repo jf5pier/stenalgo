@@ -15588,10 +15588,11 @@
      "after": "",
      "label": "suffixe « -ner » (aussi -nez, -nner, -nnée) · économise un trait",
      "phonology": "tuR.ne",
-     "steno": "t@ejsRm",
+     "steno": "t*@ejsRm",
      "strokes": [
       [
        7,
+       10,
        11,
        14,
        16,
@@ -15603,7 +15604,7 @@
      "frequency": 24.84,
      "alternates": [
       {
-       "steno": "t@eR/mRe",
+       "steno": "t@eR/mR*e",
        "strokes": [
         [
          7,
@@ -15614,6 +15615,7 @@
         [
          6,
          8,
+         10,
          14
         ]
        ]
@@ -16091,11 +16093,10 @@
      "after": "",
      "label": "suffixe « -ner » (aussi -nez, -nner, -nnée) · économise un trait",
      "phonology": "tuR.ne",
-     "steno": "t*@ejsRm",
+     "steno": "t@ejsRm",
      "strokes": [
       [
        7,
-       10,
        11,
        14,
        16,
@@ -16107,7 +16108,23 @@
      "frequency": 18.64,
      "alternates": [
       {
-       "steno": "t@eR/mR*e",
+       "steno": "t@eR/mRe",
+       "strokes": [
+        [
+         7,
+         11,
+         14,
+         21
+        ],
+        [
+         6,
+         8,
+         14
+        ]
+       ]
+      },
+      {
+       "steno": "t@eR/mR*e/-j",
        "strokes": [
         [
          7,
@@ -16120,22 +16137,6 @@
          8,
          10,
          14
-        ]
-       ]
-      },
-      {
-       "steno": "t@eR/mRe/-j",
-       "strokes": [
-        [
-         7,
-         11,
-         14,
-         21
-        ],
-        [
-         6,
-         8,
-         14
         ],
         [
          16
@@ -16143,10 +16144,11 @@
        ]
       },
       {
-       "steno": "t@ejsRm/-j",
+       "steno": "t*@ejsRm/-j",
        "strokes": [
         [
          7,
+         10,
          11,
          14,
          16,
@@ -16324,12 +16326,13 @@
      "after": "",
      "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
      "phonology": "Re.vEj",
-     "steno": "spviej",
+     "steno": "spv*iej",
      "strokes": [
       [
        3,
        4,
        5,
+       10,
        13,
        14,
        16
@@ -16338,7 +16341,7 @@
      "frequency": 59.67,
      "alternates": [
       {
-       "steno": "Re/viej",
+       "steno": "Re/v*iej",
        "strokes": [
         [
          8,
@@ -16346,6 +16349,7 @@
         ],
         [
          5,
+         10,
          13,
          14,
          16
@@ -17449,12 +17453,13 @@
      "after": "",
      "label": "préfixe « pa- » · économise un trait",
      "phonology": "pa.Ri",
-     "steno": "kvRik",
+     "steno": "kvR*ik",
      "strokes": [
       [
        2,
        5,
        8,
+       10,
        13,
        18
       ]
@@ -17462,7 +17467,7 @@
      "frequency": 52.59,
      "alternates": [
       {
-       "steno": "pa/Ri",
+       "steno": "pa/R*i",
        "strokes": [
         [
          4,
@@ -17470,6 +17475,7 @@
         ],
         [
          8,
+         10,
          13
         ]
        ]
@@ -19983,10 +19989,11 @@
      "after": "",
      "label": "préfixe « sa- » (aussi sah-) · économise un trait",
      "phonology": "sa.v§",
-     "steno": "vaiZ",
+     "steno": "v*aiZ",
      "strokes": [
       [
        5,
+       10,
        12,
        13,
        24
@@ -19995,21 +20002,7 @@
      "frequency": 47.84,
      "alternates": [
       {
-       "steno": "sa/vai",
-       "strokes": [
-        [
-         3,
-         12
-        ],
-        [
-         5,
-         12,
-         13
-        ]
-       ]
-      },
-      {
-       "steno": "sa/v*ai/-s",
+       "steno": "sa/v*ai",
        "strokes": [
         [
          3,
@@ -20018,6 +20011,20 @@
         [
          5,
          10,
+         12,
+         13
+        ]
+       ]
+      },
+      {
+       "steno": "sa/vai/-s",
+       "strokes": [
+        [
+         3,
+         12
+        ],
+        [
+         5,
          12,
          13
         ],
@@ -20027,11 +20034,10 @@
        ]
       },
       {
-       "steno": "v*aiZ/-s",
+       "steno": "vaiZ/-s",
        "strokes": [
         [
          5,
-         10,
          12,
          13,
          24

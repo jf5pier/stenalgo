@@ -1525,7 +1525,7 @@
  {
   "text": "Il demande un verre d'eau.",
   "phonology": "il d°.m@d 1 vER d o",
-  "steno": "pvt@asl/m@d vR*iejdR *ae#sZ",
+  "steno": "pvt@asl/m@d vR*iejdR ae#sZ",
   "strokes": [
    [
     4,
@@ -1552,7 +1552,6 @@
     21
    ],
    [
-    10,
     12,
     14,
     15,
@@ -1594,13 +1593,13 @@
    {
     "text": "eau",
     "label": "nom, f. sg.",
-    "steno": "*ae#sZ",
+    "steno": "ae#sZ",
     "strokeCount": 1
    }
   ],
   "alternates": [
    {
-    "steno": "il/pv@a/m@d/@aie/v*ieR/pv-/*ae#",
+    "steno": "il/pv@a/m@d/@aie/v*ieR/pv-/ae#",
     "strokes": [
      [
       13,
@@ -1635,7 +1634,6 @@
       5
      ],
      [
-      10,
       12,
       14,
       15
@@ -1652,11 +1650,12 @@
  {
   "text": "Elle met son manteau.",
   "phonology": "El mE s§ m@.to",
-  "steno": "mtie#sZ s*ai m@/tae",
+  "steno": "mt*ie#sZ s*ai m@/tae",
   "strokes": [
    [
     6,
     7,
+    10,
     13,
     14,
     15,
@@ -1689,7 +1688,7 @@
    {
     "text": "met",
     "label": "indicatif présent, 3e sg.",
-    "steno": "mtie#sZ",
+    "steno": "mt*ie#sZ",
     "strokeCount": 1
    },
    {
@@ -1707,7 +1706,7 @@
   ],
   "alternates": [
    {
-    "steno": "iel/mie#/s*ai/m@/tae",
+    "steno": "iel/m*ie#/s*ai/m@/tae",
     "strokes": [
      [
       13,
@@ -1716,6 +1715,7 @@
      ],
      [
       6,
+      10,
       13,
       14,
       15
@@ -11779,7 +11779,7 @@
  {
   "text": "Nous savons qu'ils viendront.",
   "phonology": "nu sa.v§ k il vj5.dR§",
-  "steno": "mR@e sa/vai kiktl/-s vRwaie/pvRai/-st",
+  "steno": "mR@e sa/v*ai kiktl/-s vRwaie/pvRai/-st",
   "strokes": [
    [
     6,
@@ -11793,6 +11793,7 @@
    ],
    [
     5,
+    10,
     12,
     13
    ],
@@ -11836,7 +11837,7 @@
    {
     "text": "savons",
     "label": "indicatif présent, 1re pl.",
-    "steno": "sa/vai",
+    "steno": "sa/v*ai",
     "strokeCount": 2
    },
    {
@@ -11860,7 +11861,7 @@
   ],
   "alternates": [
    {
-    "steno": "mR@e/sa/vai/k-/il/-s/vRwaie/pvRai/-st",
+    "steno": "mR@e/sa/v*ai/k-/il/-s/vRwaie/pvRai/-st",
     "strokes": [
      [
       6,
@@ -11874,6 +11875,7 @@
      ],
      [
       5,
+      10,
       12,
       13
      ],
@@ -13675,7 +13677,7 @@
  {
   "text": "Nous sommes allés à la mer.",
   "phonology": "nu sOm a.le a la mER",
-  "steno": "mR@e sem a/mte/-s mR*iejskdRl",
+  "steno": "mR@e sem a/mte/-s mRie#jskdRl",
   "strokes": [
    [
     6,
@@ -13702,9 +13704,9 @@
    [
     6,
     8,
-    10,
     13,
     14,
+    15,
     16,
     17,
     18,
@@ -13747,13 +13749,13 @@
    {
     "text": "mer",
     "label": "nom, f. sg.",
-    "steno": "mR*iejskdRl",
+    "steno": "mRie#jskdRl",
     "strokeCount": 1
    }
   ],
   "alternates": [
    {
-    "steno": "mR@e/sem/a/mte/-s/a/mta/m*ieR",
+    "steno": "mR@e/sem/a/mte/-s/a/mta/mie#R",
     "strokes": [
      [
       6,
@@ -13787,9 +13789,9 @@
      ],
      [
       6,
-      10,
       13,
       14,
+      15,
       21
      ]
     ]

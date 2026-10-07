@@ -1843,7 +1843,7 @@
  {
   "text": "Il demande un verre d'eau.",
   "phonology": "il d°.m@d 1 vER d o",
-  "steno": "il pv@a/m@d @aie v*ieR pv- *ae#",
+  "steno": "il pv@a/m@d @aie v*ieR pv- ae#",
   "strokes": [
    [
     13,
@@ -1878,7 +1878,6 @@
     5
    ],
    [
-    10,
     12,
     14,
     15
@@ -1918,7 +1917,7 @@
    {
     "text": "eau",
     "label": "nom, f. sg.",
-    "steno": "*ae#",
+    "steno": "ae#",
     "strokeCount": 1
    }
   ]
@@ -1926,7 +1925,7 @@
  {
   "text": "Elle met son manteau.",
   "phonology": "El mE s§ m@.to",
-  "steno": "iel mie# s*ai m@/tae",
+  "steno": "iel m*ie# s*ai m@/tae",
   "strokes": [
    [
     13,
@@ -1935,6 +1934,7 @@
    ],
    [
     6,
+    10,
     13,
     14,
     15
@@ -1965,7 +1965,7 @@
    {
     "text": "met",
     "label": "indicatif présent, 3e sg.",
-    "steno": "mie#",
+    "steno": "m*ie#",
     "strokeCount": 1
    },
    {
@@ -8483,7 +8483,7 @@
  {
   "text": "On dîne dehors.",
   "phonology": "§ din d2.OR",
-  "steno": "ai pvin pv@ie/eR",
+  "steno": "ai pv*in pv@ie/eR",
   "strokes": [
    [
     12,
@@ -8492,6 +8492,7 @@
    [
     4,
     5,
+    10,
     13,
     22
    ],
@@ -8517,7 +8518,7 @@
    {
     "text": "dîne",
     "label": "indicatif présent, 3e sg.",
-    "steno": "pvin",
+    "steno": "pv*in",
     "strokeCount": 1
    },
    {
@@ -8641,7 +8642,7 @@
  {
   "text": "Elles montent là-haut.",
   "phonology": "El m§t la o",
-  "steno": "iel/-s mait/-st mt*a *ae#/*#",
+  "steno": "iel/-s mait/-st mt*a *ae#",
   "strokes": [
    [
     13,
@@ -8672,10 +8673,6 @@
     12,
     14,
     15
-   ],
-   [
-    10,
-    15
    ]
   ],
   "words": [
@@ -8700,8 +8697,8 @@
    {
     "text": "-haut",
     "label": "adverbe",
-    "steno": "*ae#/*#",
-    "strokeCount": 2
+    "steno": "*ae#",
+    "strokeCount": 1
    }
   ]
  },
@@ -11469,7 +11466,7 @@
  {
   "text": "Nous savons qu'ils viendront.",
   "phonology": "nu sa.v§ k il vj5.dR§",
-  "steno": "mR@e sa/vai k- il/-s vRwaie/pvRai/-st",
+  "steno": "mR@e sa/v*ai k- il/-s vRwaie/pvRai/-st",
   "strokes": [
    [
     6,
@@ -11483,6 +11480,7 @@
    ],
    [
     5,
+    10,
     12,
     13
    ],
@@ -11526,7 +11524,7 @@
    {
     "text": "savons",
     "label": "indicatif présent, 1re pl.",
-    "steno": "sa/vai",
+    "steno": "sa/v*ai",
     "strokeCount": 2
    },
    {
@@ -13187,7 +13185,7 @@
  {
   "text": "Nous sommes allés à la mer.",
   "phonology": "nu sOm a.le a la mER",
-  "steno": "mR@e sem a/mte/-s a mta m*ieR",
+  "steno": "mR@e sem a/mte/-s a mta mie#R",
   "strokes": [
    [
     6,
@@ -13221,9 +13219,9 @@
    ],
    [
     6,
-    10,
     13,
     14,
+    15,
     21
    ]
   ],
@@ -13261,7 +13259,7 @@
    {
     "text": "mer",
     "label": "nom, f. sg.",
-    "steno": "m*ieR",
+    "steno": "mie#R",
     "strokeCount": 1
    }
   ]

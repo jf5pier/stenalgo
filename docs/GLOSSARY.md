@@ -831,7 +831,7 @@ the primary drives the Realization Phase's key search; the others become alterna
 - First used in: Discriminating-Feature Elicitation (Elicitation Phase).
 
 ### Pronoun paradigm lemma
-The fold of pronoun lemmas into one paradigm (`ils→il`, `elles→elle`, `ceux→celui`), so their
+The fold of pronoun and closed-class plural lemmas into one paradigm (`ils→il`, `elles→elle`, `ceux→celui`, `aux→au`, `quels→quel`...), so their
 forms are separated by Same-Lemma and Grammatical-Category Disambiguation (S6).
 - Code: `pronounParadigmLemme` lexique.py:81.
 - First used in: Lexicon Building (S1).

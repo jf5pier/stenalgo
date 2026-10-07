@@ -4625,12 +4625,11 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "l.o",
-     "steno": "vw*ae#j",
+     "steno": "vwae#j",
      "strokes": [
       [
        5,
        9,
-       10,
        12,
        14,
        15,
@@ -4640,14 +4639,13 @@
      "frequency": 4832423.0,
      "alternates": [
       {
-       "steno": "mt-/*ae#",
+       "steno": "mt-/ae#",
        "strokes": [
         [
          6,
          7
         ],
         [
-         10,
          12,
          14,
          15
@@ -21508,7 +21506,7 @@
     },
     {
      "kind": "expression",
-     "text": "Par exemple : « les deux » : mtie/pv@ie → kpv@iejd ; « les yeux » : mtie/Rw@ie → kRw@iejd ; « les autres » : mtie/*aetR → k*aejdtR."
+     "text": "Par exemple : « les deux » : mtie/pv@ie → kpv@iejd ; « les yeux » : mtie/Rw@ie → kRw@iejd ; « les autres » : mtie/aetR/-s → kaejdtR/-s."
     },
     {
      "kind": "expression",
@@ -21610,23 +21608,25 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "le.otR",
-     "steno": "k*aejdtR",
+     "steno": "kaejdtR/-s",
      "strokes": [
       [
        2,
-       10,
        12,
        14,
        16,
        19,
        20,
        21
+      ],
+      [
+       17
       ]
      ],
      "frequency": 7934222.0,
      "alternates": [
       {
-       "steno": "mtie/*aetR",
+       "steno": "mtie/aetR/-s",
        "strokes": [
         [
          6,
@@ -21635,11 +21635,13 @@
          14
         ],
         [
-         10,
          12,
          14,
          20,
          21
+        ],
+        [
+         17
         ]
        ]
       }
