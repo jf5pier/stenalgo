@@ -3894,7 +3894,7 @@
        ]
       },
       {
-       "steno": "kai/ti/mR@i/-j",
+       "steno": "kai/ti/mR*@i/-j",
        "strokes": [
         [
          2,
@@ -3908,6 +3908,7 @@
         [
          6,
          8,
+         10,
          11,
          13
         ],
@@ -3917,7 +3918,7 @@
        ]
       },
       {
-       "steno": "twid/mR@i/-j",
+       "steno": "twid/mR*@i/-j",
        "strokes": [
         [
          7,
@@ -3928,6 +3929,7 @@
         [
          6,
          8,
+         10,
          11,
          13
         ],
@@ -10746,11 +10748,10 @@
      "after": "",
      "label": "suffixe « -cer » (aussi -cé, -cée, -cés) · économise un trait",
      "phonology": "p@.se",
-     "steno": "p*@jsd",
+     "steno": "p@jsd",
      "strokes": [
       [
        4,
-       10,
        11,
        16,
        17,
@@ -10760,7 +10761,7 @@
      "frequency": 151.67,
      "alternates": [
       {
-       "steno": "p@/s*e",
+       "steno": "p@/se",
        "strokes": [
         [
          4,
@@ -10768,7 +10769,6 @@
         ],
         [
          3,
-         10,
          14
         ]
        ]
@@ -15588,11 +15588,10 @@
      "after": "",
      "label": "suffixe « -ner » (aussi -nez, -nner, -nnée) · économise un trait",
      "phonology": "tuR.ne",
-     "steno": "t*@ejsRm",
+     "steno": "t@ejsRm",
      "strokes": [
       [
        7,
-       10,
        11,
        14,
        16,
@@ -15604,7 +15603,7 @@
      "frequency": 24.84,
      "alternates": [
       {
-       "steno": "t@eR/mR*e",
+       "steno": "t@eR/mRe",
        "strokes": [
         [
          7,
@@ -15615,7 +15614,6 @@
         [
          6,
          8,
-         10,
          14
         ]
        ]
@@ -15970,11 +15968,12 @@
      "after": "",
      "label": "suffixe « -ner » (aussi -nez, -nner, -nnée) · économise un trait",
      "phonology": "do.ne",
-     "steno": "pvaejsm/-s",
+     "steno": "pv*aejsm/-s",
      "strokes": [
       [
        4,
        5,
+       10,
        12,
        14,
        16,
@@ -15988,7 +15987,7 @@
      "frequency": 20.05,
      "alternates": [
       {
-       "steno": "pvae/mRe/-s",
+       "steno": "pvae/mR*e/-s",
        "strokes": [
         [
          4,
@@ -15999,6 +15998,7 @@
         [
          6,
          8,
+         10,
          14
         ],
         [
@@ -16091,10 +16091,11 @@
      "after": "",
      "label": "suffixe « -ner » (aussi -nez, -nner, -nnée) · économise un trait",
      "phonology": "tuR.ne",
-     "steno": "t@ejsRm",
+     "steno": "t*@ejsRm",
      "strokes": [
       [
        7,
+       10,
        11,
        14,
        16,
@@ -16106,7 +16107,7 @@
      "frequency": 18.64,
      "alternates": [
       {
-       "steno": "t@eR/mRe",
+       "steno": "t@eR/mR*e",
        "strokes": [
         [
          7,
@@ -16117,6 +16118,7 @@
         [
          6,
          8,
+         10,
          14
         ]
        ]
@@ -16322,13 +16324,12 @@
      "after": "",
      "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
      "phonology": "Re.vEj",
-     "steno": "spv*iej",
+     "steno": "spviej",
      "strokes": [
       [
        3,
        4,
        5,
-       10,
        13,
        14,
        16
@@ -16337,7 +16338,7 @@
      "frequency": 59.67,
      "alternates": [
       {
-       "steno": "Re/v*iej",
+       "steno": "Re/viej",
        "strokes": [
         [
          8,
@@ -16345,7 +16346,6 @@
         ],
         [
          5,
-         10,
          13,
          14,
          16
@@ -17449,13 +17449,12 @@
      "after": "",
      "label": "préfixe « pa- » · économise un trait",
      "phonology": "pa.Ri",
-     "steno": "kvR*ik",
+     "steno": "kvRik",
      "strokes": [
       [
        2,
        5,
        8,
-       10,
        13,
        18
       ]
@@ -17463,7 +17462,7 @@
      "frequency": 52.59,
      "alternates": [
       {
-       "steno": "pa/R*i",
+       "steno": "pa/Ri",
        "strokes": [
         [
          4,
@@ -17471,7 +17470,6 @@
         ],
         [
          8,
-         10,
          13
         ]
        ]
@@ -19985,11 +19983,10 @@
      "after": "",
      "label": "préfixe « sa- » (aussi sah-) · économise un trait",
      "phonology": "sa.v§",
-     "steno": "v*aiZ",
+     "steno": "vaiZ",
      "strokes": [
       [
        5,
-       10,
        12,
        13,
        24
@@ -19998,7 +19995,21 @@
      "frequency": 47.84,
      "alternates": [
       {
-       "steno": "sa/v*ai",
+       "steno": "sa/vai",
+       "strokes": [
+        [
+         3,
+         12
+        ],
+        [
+         5,
+         12,
+         13
+        ]
+       ]
+      },
+      {
+       "steno": "sa/v*ai/-s",
        "strokes": [
         [
          3,
@@ -20009,20 +20020,6 @@
          10,
          12,
          13
-        ]
-       ]
-      },
-      {
-       "steno": "sa/vai/-s",
-       "strokes": [
-        [
-         3,
-         12
-        ],
-        [
-         5,
-         12,
-         13
         ],
         [
          17
@@ -20030,10 +20027,11 @@
        ]
       },
       {
-       "steno": "vaiZ/-s",
+       "steno": "v*aiZ/-s",
        "strokes": [
         [
          5,
+         10,
          12,
          13,
          24
@@ -22366,7 +22364,7 @@
     },
     {
      "kind": "affix",
-     "text": "Exemples : « trouvé » : tR@e/ve → tR@ejsk ; « trouver » : tR@e/ve/-l → tR@ejsk/-l ; « arrivé » : a/Ri/v*e → *ajsk."
+     "text": "Exemples : « trouvé » : tR@e/ve → tR@ejsk ; « trouver » : tR@e/ve/-l → tR@ejsk/-l ; « arrivé » : a/Ri/ve → ajsk."
     },
     {
      "kind": "affix",
@@ -22462,10 +22460,9 @@
      "after": "",
      "label": "suffixe « -ver » · économise deux traits",
      "phonology": "a.Ri.ve",
-     "steno": "*ajsk",
+     "steno": "ajsk",
      "strokes": [
       [
-       10,
        12,
        16,
        17,
@@ -22475,7 +22472,7 @@
      "frequency": 203.06,
      "alternates": [
       {
-       "steno": "a/Ri/v*e",
+       "steno": "a/Ri/ve",
        "strokes": [
         [
          12
@@ -22486,7 +22483,6 @@
         ],
         [
          5,
-         10,
          14
         ]
        ]
@@ -22746,7 +22742,7 @@
        ]
       },
       {
-       "steno": "mt@a/ve",
+       "steno": "mt@a/v*e",
        "strokes": [
         [
          6,
@@ -22756,16 +22752,18 @@
         ],
         [
          5,
+         10,
          14
         ]
        ]
       },
       {
-       "steno": "mt@ajsk",
+       "steno": "mt*@ajsk",
        "strokes": [
         [
          6,
          7,
+         10,
          11,
          12,
          16,
@@ -22955,12 +22953,11 @@
      "after": "",
      "label": "suffixe « -ver » · économise un trait",
      "phonology": "l°.ve",
-     "steno": "mt*@ajsk",
+     "steno": "mt@ajsk",
      "strokes": [
       [
        6,
        7,
-       10,
        11,
        12,
        16,
@@ -22971,7 +22968,7 @@
      "frequency": 13.4,
      "alternates": [
       {
-       "steno": "mt@a/v*e",
+       "steno": "mt@a/ve",
        "strokes": [
         [
          6,
@@ -22981,7 +22978,6 @@
         ],
         [
          5,
-         10,
          14
         ]
        ]
@@ -24721,11 +24717,10 @@
      "after": "",
      "label": "suffixe « -rae » (aussi -rai, -raie, -re) · économise un trait",
      "phonology": "vi.Re",
-     "steno": "v*ijdR",
+     "steno": "vijdR",
      "strokes": [
       [
        5,
-       10,
        13,
        16,
        19,
@@ -24735,7 +24730,7 @@
      "frequency": 25.59,
      "alternates": [
       {
-       "steno": "vi/R*e",
+       "steno": "vi/Re",
        "strokes": [
         [
          5,
@@ -24743,7 +24738,6 @@
         ],
         [
          8,
-         10,
          14
         ]
        ]
@@ -27179,7 +27173,7 @@
        ]
       },
       {
-       "steno": "m@i/twe/-j",
+       "steno": "m@i/tw*e/-j",
        "strokes": [
         [
          6,
@@ -27189,6 +27183,7 @@
         [
          7,
          9,
+         10,
          14
         ],
         [
@@ -27197,10 +27192,11 @@
        ]
       },
       {
-       "steno": "m@iknl/-j",
+       "steno": "m*@iknl/-j",
        "strokes": [
         [
          6,
+         10,
          11,
          13,
          18,

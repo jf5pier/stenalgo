@@ -1696,13 +1696,13 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "d°.se",
-     "steno": "sie#sZ",
+     "steno": "s*iesZ",
      "strokes": [
       [
        3,
+       10,
        13,
        14,
-       15,
        17,
        24
       ]
@@ -1710,7 +1710,7 @@
      "frequency": 17029314.0,
      "alternates": [
       {
-       "steno": "pv@a/sie#",
+       "steno": "pv@a/s*ie",
        "strokes": [
         [
          4,
@@ -1720,9 +1720,9 @@
         ],
         [
          3,
+         10,
          13,
-         14,
-         15
+         14
         ]
        ]
       }
@@ -4415,13 +4415,12 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "l°.t@",
-     "steno": "vtw*@j",
+     "steno": "vtw@j",
      "strokes": [
       [
        5,
        7,
        9,
-       10,
        11,
        16
       ]
@@ -4429,7 +4428,7 @@
      "frequency": 8268400.0,
      "alternates": [
       {
-       "steno": "mt@a/t*@",
+       "steno": "mt@a/t@",
        "strokes": [
         [
          6,
@@ -4439,7 +4438,6 @@
         ],
         [
          7,
-         10,
          11
         ]
        ]
@@ -4969,13 +4967,12 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "l°.t@.d°",
-     "steno": "vtw*@j/pv@a",
+     "steno": "vtw@j/pv@a",
      "strokes": [
       [
        5,
        7,
        9,
-       10,
        11,
        16
       ],
@@ -4989,7 +4986,7 @@
      "frequency": 2366713.0,
      "alternates": [
       {
-       "steno": "mt@a/t*@/pv@a",
+       "steno": "mt@a/t@/pv@a",
        "strokes": [
         [
          6,
@@ -4999,7 +4996,6 @@
         ],
         [
          7,
-         10,
          11
         ],
         [
@@ -6117,11 +6113,12 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "il.m°",
-     "steno": "mt@asl",
+     "steno": "mt*@asl",
      "strokes": [
       [
        6,
        7,
+       10,
        11,
        12,
        17,
@@ -6131,7 +6128,7 @@
      "frequency": 3972997.0,
      "alternates": [
       {
-       "steno": "il/m@a",
+       "steno": "il/m*@a",
        "strokes": [
         [
          13,
@@ -6139,6 +6136,7 @@
         ],
         [
          6,
+         10,
          11,
          12
         ]
@@ -6524,11 +6522,12 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "il.m.a",
-     "steno": "mt-sl/*a",
+     "steno": "mt*sl/*a",
      "strokes": [
       [
        6,
        7,
+       10,
        17,
        23
       ],
@@ -6540,14 +6539,15 @@
      "frequency": 1473886.0,
      "alternates": [
       {
-       "steno": "il/m-/*a",
+       "steno": "il/m*/*a",
        "strokes": [
         [
          13,
          23
         ],
         [
-         6
+         6,
+         10
         ],
         [
          10,
@@ -7861,14 +7861,14 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "a.se",
-     "steno": "sRie#sl",
+     "steno": "sR*iesl",
      "strokes": [
       [
        3,
        8,
+       10,
        13,
        14,
-       15,
        17,
        23
       ]
@@ -7876,16 +7876,16 @@
      "frequency": 5421261.0,
      "alternates": [
       {
-       "steno": "a/sie#",
+       "steno": "a/s*ie",
        "strokes": [
         [
          12
         ],
         [
          3,
+         10,
          13,
-         14,
-         15
+         14
         ]
        ]
       }
@@ -10564,7 +10564,7 @@
      "frequency": 2999343.0,
      "alternates": [
       {
-       "steno": "vt@a/m@a/s@ai/-k",
+       "steno": "vt@a/m*@a/s@ai/-k",
        "strokes": [
         [
          5,
@@ -10574,6 +10574,7 @@
         ],
         [
          6,
+         10,
          11,
          12
         ],
@@ -11841,14 +11842,14 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "e.se",
-     "steno": "swie#jd",
+     "steno": "sw*iejd",
      "strokes": [
       [
        3,
        9,
+       10,
        13,
        14,
-       15,
        16,
        19
       ]
@@ -11856,16 +11857,16 @@
      "frequency": 4930123.0,
      "alternates": [
       {
-       "steno": "e/sie#",
+       "steno": "e/s*ie",
        "strokes": [
         [
          14
         ],
         [
          3,
+         10,
          13,
-         14,
-         15
+         14
         ]
        ]
       }
@@ -13147,7 +13148,7 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "1.sERt5.n§bR.d°",
-     "steno": "sRiejdR/taie/mRaijR/pv@a",
+     "steno": "sRiejdR/t*aie/mRaijR/pv@a",
      "strokes": [
       [
        3,
@@ -13160,6 +13161,7 @@
       ],
       [
        7,
+       10,
        12,
        13,
        14
@@ -13182,7 +13184,7 @@
      "frequency": 585454.0,
      "alternates": [
       {
-       "steno": "@aie/sieR/taie/mRaijR/pv@a",
+       "steno": "@aie/sieR/t*aie/mRaijR/pv@a",
        "strokes": [
         [
          11,
@@ -13198,6 +13200,7 @@
         ],
         [
          7,
+         10,
          12,
          13,
          14
@@ -14888,14 +14891,14 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "d@.se",
-     "steno": "ksie#kZ",
+     "steno": "ks*iekZ",
      "strokes": [
       [
        2,
        3,
+       10,
        13,
        14,
-       15,
        18,
        24
       ]
@@ -14903,7 +14906,7 @@
      "frequency": 4974861.0,
      "alternates": [
       {
-       "steno": "pv@/sie#",
+       "steno": "pv@/s*ie",
        "strokes": [
         [
          4,
@@ -14912,9 +14915,9 @@
         ],
         [
          3,
+         10,
          13,
-         14,
-         15
+         14
         ]
        ]
       }
@@ -15064,7 +15067,7 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "d@.la.m°zyR.u",
-     "steno": "mta/km@akZ/tw@iR/*@e",
+     "steno": "mta/km@akZ/tw@iR/@e",
      "strokes": [
       [
        6,
@@ -15087,7 +15090,6 @@
        21
       ],
       [
-       10,
        11,
        14
       ]
@@ -15095,7 +15097,7 @@
      "frequency": 921209.0,
      "alternates": [
       {
-       "steno": "pv@/mta/m@a/tw@iR/*@e",
+       "steno": "pv@/mta/m@a/tw@iR/@e",
        "strokes": [
         [
          4,
@@ -15120,7 +15122,6 @@
          21
         ],
         [
-         10,
          11,
          14
         ]
@@ -15669,11 +15670,12 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "ki.m°",
-     "steno": "mw@asn",
+     "steno": "mw*@asn",
      "strokes": [
       [
        6,
        9,
+       10,
        11,
        12,
        17,
@@ -15683,7 +15685,7 @@
      "frequency": 2991234.0,
      "alternates": [
       {
-       "steno": "ki/m@a",
+       "steno": "ki/m*@a",
        "strokes": [
         [
          2,
@@ -15691,6 +15693,7 @@
         ],
         [
          6,
+         10,
          11,
          12
         ]
@@ -20716,7 +20719,7 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "@.mEm.t@",
-     "steno": "miekdtm/t*@",
+     "steno": "miekdtm/t@",
      "strokes": [
       [
        6,
@@ -20729,14 +20732,13 @@
       ],
       [
        7,
-       10,
        11
       ]
      ],
      "frequency": 2585087.0,
      "alternates": [
       {
-       "steno": "@/miem/t*@",
+       "steno": "@/miem/t@",
        "strokes": [
         [
          11
@@ -20749,7 +20751,6 @@
         ],
         [
          7,
-         10,
          11
         ]
        ]
@@ -20818,10 +20819,11 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "@.t@.k°",
-     "steno": "t@kdt/k@a",
+     "steno": "t*@kdt/k@a",
      "strokes": [
       [
        7,
+       10,
        11,
        18,
        19,
@@ -20836,13 +20838,14 @@
      "frequency": 1970867.0,
      "alternates": [
       {
-       "steno": "@/t@/k@a",
+       "steno": "@/t*@/k@a",
        "strokes": [
         [
          11
         ],
         [
          7,
+         10,
          11
         ],
         [
@@ -21018,13 +21021,13 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "@.ba",
-     "steno": "sv*akdt",
+     "steno": "sva#kdt",
      "strokes": [
       [
        3,
        5,
-       10,
        12,
+       15,
        18,
        19,
        20
@@ -21033,7 +21036,7 @@
      "frequency": 989026.0,
      "alternates": [
       {
-       "steno": "@/sv*a",
+       "steno": "@/sva#",
        "strokes": [
         [
          11
@@ -21041,8 +21044,8 @@
         [
          3,
          5,
-         10,
-         12
+         12,
+         15
         ]
        ]
       }
@@ -21057,7 +21060,7 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "@.mEm.t@.k°",
-     "steno": "miekdtm/t*@/k@a",
+     "steno": "miekdtm/t@/k@a",
      "strokes": [
       [
        6,
@@ -21070,7 +21073,6 @@
       ],
       [
        7,
-       10,
        11
       ],
       [
@@ -21082,7 +21084,7 @@
      "frequency": 524271.0,
      "alternates": [
       {
-       "steno": "@/miem/t*@/k@a",
+       "steno": "@/miem/t@/k@a",
        "strokes": [
         [
          11
@@ -21095,7 +21097,6 @@
         ],
         [
          7,
-         10,
          11
         ],
         [

@@ -425,6 +425,103 @@ def composeReservedKeyStrokes(
     return {word: entries[0] for word, entries in composed.items()}
 
 
+MarkNode = tuple[str, ...]
+
+
+def markFamilyKey(word: Word) -> MarkNode:
+    """The unit that carries one star/hash mark (a mark node): the m/f/s/p family of a word. A non-verb is
+    keyed by its lemma and category (`eau`/`eaux`, `sûr`/`sûre`/`sûrs`/`sûres`), a past participle by its
+    lemma (`donné`/`donnée`/`donnés`/`données`); a conjugated verb form (and an auxiliary form) is its own
+    node, ranked by the pairwise rules as for any single entry."""
+    if word.gramCat.name in ("VER", "AUX"):
+        if word.gender is not None and "par:pas" in (word.infoVerb or ""):
+            return ("PP", word.lemme)
+        return ("W", word.ortho, word.lemmeGramCat)
+    return ("L", word.lemme, word.gramCat.name)
+
+
+def assignMarkNodeCodes(
+    wordsByNode: dict[MarkNode, list[Word]], clusters: list[list[Word]],
+    doubletPairs: frozenset[frozenset[str]] = frozenset(),
+) -> dict[MarkNode, tuple[str, ...]]:
+    """
+    The star/hash code of every mark node (`markFamilyKey`, a key of `wordsByNode`) that takes part in a cluster of `clusters` (words
+    sharing one unmarked final stroke, see `_isStarHashCluster`); every other node keeps the empty code.
+
+    Nodes of one cluster must get distinct codes, a node being in several clusters at once (a family's
+    forms sit on different strokes), so this is a colouring, not a per-cluster ranking. Two nodes that share a spelling (homograph exemption (R1)) or form a reform doublet (R2) merge first,
+    unless the merged node would hold two spellings on one stroke. The nodes are then taken canonical-first -- `decideStarHashMark` (R3-R7) on the two nodes' most
+    frequent forms, frequency when it has no signal -- and each takes the lowest code none of its conflicting
+    nodes holds yet (`assignStarHashCombos` order: (), *, #, *#, then more `*#` strokes).
+    """
+    parent: dict[MarkNode, MarkNode] = {}
+    # per root: cluster index -> the spellings the merged node has in that cluster
+    orthosIn: dict[MarkNode, dict[int, set[str]]] = defaultdict(dict)
+    for c, cluster in enumerate(clusters):
+        for word in cluster:
+            orthosIn[markFamilyKey(word)].setdefault(c, set()).add(word.ortho)
+
+    def find(node: MarkNode) -> MarkNode:
+        parent.setdefault(node, node)
+        while parent[node] != node:
+            parent[node] = parent[parent[node]]
+            node = parent[node]
+        return node
+
+    def merge(a: MarkNode, b: MarkNode) -> None:
+        """Merge two nodes, unless some cluster would then hold two spellings of the merged node that
+        the two nodes did not already hold (the merged node could not tell them apart: paillarde ADJ and
+        paillardes NOM, whose lemma is one but whose families stay apart)."""
+        ra, rb = find(a), find(b)
+        if ra == rb:
+            return
+        for c in orthosIn[ra].keys() & orthosIn[rb].keys():
+            both = orthosIn[ra][c] | orthosIn[rb][c]
+            if len(both) > max(len(orthosIn[ra][c]), len(orthosIn[rb][c])):
+                return
+        parent[ra] = rb
+        for c, orthos in orthosIn.pop(ra).items():
+            orthosIn[rb].setdefault(c, set()).update(orthos)
+
+    for cluster in clusters:
+        firstNodeOfOrtho: dict[str, MarkNode] = {}
+        for word in cluster:
+            node = markFamilyKey(word)
+            merge(firstNodeOfOrtho.setdefault(word.ortho, node), node)
+        for a, b in combinations(cluster, 2):
+            if frozenset({a.lemme, b.lemme}) in doubletPairs:
+                merge(markFamilyKey(a), markFamilyKey(b))
+
+    conflicts: dict[MarkNode, set[MarkNode]] = defaultdict(set)
+    for cluster in clusters:
+        nodes = {find(markFamilyKey(word)) for word in cluster}
+        for node in nodes:
+            conflicts[node] |= nodes - {node}
+
+    wordsByMerged: dict[MarkNode, list[Word]] = defaultdict(list)
+    for node, words in wordsByNode.items():
+        wordsByMerged[find(node)].extend(words)
+    representative = {node: max(words, key=lambda w: (w.frequency, w.ortho)) for node, words in wordsByMerged.items()}
+    frequency = {node: sum(w.frequency for w in words) for node, words in wordsByMerged.items()}
+
+    def compare(a: MarkNode, b: MarkNode) -> int:
+        marked = decideStarHashMark(representative[a], representative[b], doubletPairs)
+        if marked is representative[a]:
+            return 1
+        if marked is representative[b]:
+            return -1
+        return 0
+
+    ordered = sorted(conflicts, key=lambda node: (-frequency[node], node))
+    ordered.sort(key=cmp_to_key(compare))
+    index: dict[MarkNode, int] = {}
+    for node in ordered:
+        taken = {index[other] for other in conflicts[node] if other in index}
+        index[node] = next(r for r in range(len(taken) + 1) if r not in taken)
+    codes = assignStarHashCombos(max(index.values(), default=-1) + 1)
+    return {node: codes[index[find(node)]] for node in wordsByNode if find(node) in index}
+
+
 def composeReservedKeyStrokesForEntries(
     entriesByWord: dict[Word, list[Strokes]], doubletPairs: frozenset[frozenset[str]] = frozenset(),
     phonemeStrokeCounts: dict[Word, int] | None = None,
@@ -434,12 +531,13 @@ def composeReservedKeyStrokesForEntries(
     Grammatical-Category Disambiguation (S7): each entry of `entriesByWord` (a word's
     primary stroke of Discriminating-Feature Stroke Realization (Realization Phase),
     `buildFinalInducedStrokes`, then its alternate readings' strokes,
-    `buildExtraInducedStrokes`) plus its star/hash mark. Every entry is clustered on its
-    own final stroke, so an alternate reading gets the mark its OWN cluster needs:
-    "panse"'s alternate `p@s/-k` shares a cluster with "pense"'s alternate, not with
-    either word's primary stroke (B44). Entries keep their positions, which consumers
-    line up with the press-set alternates (util/export_practice_words.py); two entries of
-    one word on the same stroke (two readings realized alike) get the same mark. Given `phonemeStrokeCounts` (each word's phonetic-theory
+    `buildExtraInducedStrokes`) plus its star/hash mark.
+
+    The mark belongs to the word's m/f/s/p family (`markFamilyKey`, `assignMarkNodeCodes`): every form of
+    the family, and every entry of a form, carries the family's code, whether or not that form clashes by
+    itself; the clusters of ALL entries (primary and alternate, each on its own final stroke, B44) decide
+    which families conflict. Entries keep their positions, which consumers
+    line up with the press-set alternates (util/export_practice_words.py). Given `phonemeStrokeCounts` (each word's phonetic-theory
     stroke count), the mark's FIRST symbol is pressed together with the word's last
     phoneme stroke -- "a*", not "a/*" -- and only an escalated code's further symbols
     become extra trailing strokes; without it, every symbol is its own trailing stroke
@@ -451,28 +549,31 @@ def composeReservedKeyStrokesForEntries(
     reserved keys back out of a composed Strokes (and dropping its reserved-only trailing
     strokes -- the feature discriminating strokes are never reserved-only) recovers the
     entry's unmarked stroke exactly. Two different clusters' unmarked strokes already
-    differ, so their composed forms do too; within one cluster, the marking codes
-    differ. Entries with no star/hash mark needed (the canonical member of their
-    cluster, a spelling-doublet of it, or not part of any cluster at all) keep their
-    unmarked stroke. Pass `doubletPairs` (loadReform1990DoubletPairs) to also apply the
+    differ, so their composed forms do too; within one cluster, the families' codes
+    differ. Entries of a family in no cluster keep the family's code too (the empty code for a
+    family with no conflict anywhere). Pass `doubletPairs` (loadReform1990DoubletPairs) to also apply the
     reform-doublet exemption (R2).
     """
     composed = {word: list(entries) for word, entries in entriesByWord.items()}
-    byStroke: dict[Strokes, list[tuple[Word, int]]] = defaultdict(list)
+    byStroke: dict[Strokes, list[Word]] = defaultdict(list)
     for word, entries in entriesByWord.items():
-        for index, strokes in enumerate(entries):
-            byStroke[canonicalizeStrokes(strokes)].append((word, index))
+        for strokes in entries:
+            members = byStroke[canonicalizeStrokes(strokes)]
+            if word not in members:
+                members.append(word)
+    clusters = [words for words in byStroke.values() if _isStarHashCluster(words)]
 
-    for members in byStroke.values():
-        words = list(dict.fromkeys(word for word, _ in members))
-        if not _isStarHashCluster(words):
+    wordsByNode: dict[MarkNode, list[Word]] = defaultdict(list)
+    for word in entriesByWord:
+        wordsByNode[markFamilyKey(word)].append(word)
+    codeByNode = assignMarkNodeCodes(wordsByNode, clusters, doubletPairs)
+
+    for word, entries in entriesByWord.items():
+        code = codeByNode.get(markFamilyKey(word))
+        if not code:
             continue
-        extraByWord = assignStarHashPhysicalStrokes(words, doubletPairs)
-        for word, index in members:
-            extra = extraByWord[word]
-            if not extra:
-                continue
-            strokes = composed[word][index]
+        extra = starHashCodeToStrokes(code)
+        for index, strokes in enumerate(entries):
             if phonemeStrokeCounts is None:
                 composed[word][index] = strokes + extra
             else:

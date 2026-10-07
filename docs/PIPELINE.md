@@ -1567,9 +1567,12 @@ Transformation: buckets every entry (primary or alternate, any word) by
 `canonicalizeStrokes` — the per-entry generalization of
 what Lemma-homophone group detection (S7.5) does for primary strokes only. Each bucket with
 ≥2 entries, ≥2 distinct `lemmeGramCat` and ≥2 distinct `ortho` (`_isStarHashCluster`, :381-390)
-is a star/hash cluster: gets each member's star/hash strokes from Physical star/hash
-assignment (S7.6); entries with code `()` keep their unmarked stroke, the others go through
-Star/hash mark merge into the last phoneme stroke (S7.13).
+is a star/hash cluster. Since 2026-10-06 the clusters only decide which mark nodes conflict
+(`assignMarkNodeCodes`, spec section 5b): a node is a word's m/f/s/p family (`markFamilyKey`: a non-verb by
+lemma and category, a past participle by lemma, any other verb form alone), coloured canonical-first with
+`decideStarHashMark` on the nodes' most frequent forms, and every entry of every form of the node takes its
+code (the star/hash strokes of Physical star/hash assignment (S7.6)); entries with code `()` keep their
+unmarked stroke, the others go through Star/hash mark merge into the last phoneme stroke (S7.13).
 Result: `dict[Word, list[Strokes]]`: marked entries carry reserved keys 10/15, others
 unchanged; every entry keeps its position (index 0 the primary), since Trainer words export
 (util/export_practice_words.py) lines entries up with the press-set alternates by index. Two

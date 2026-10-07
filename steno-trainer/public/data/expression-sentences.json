@@ -514,7 +514,7 @@
  {
   "text": "Elles dansent à la fête.",
   "phonology": "El d@s a la fEt",
-  "steno": "iel/-s pv@s/-st kpRiejskdtl",
+  "steno": "iel/-s pv@s/-st kpR*iejskdtl",
   "strokes": [
    [
     13,
@@ -538,6 +538,7 @@
     2,
     4,
     8,
+    10,
     13,
     14,
     16,
@@ -576,13 +577,13 @@
    {
     "text": "fête",
     "label": "nom, f. sg.",
-    "steno": "kpRiejskdtl",
+    "steno": "kpR*iejskdtl",
     "strokeCount": 1
    }
   ],
   "alternates": [
    {
-    "steno": "iel/-s/pv@s/-st/a/mta/kpiet",
+    "steno": "iel/-s/pv@s/-st/a/mta/kp*iet",
     "strokes": [
      [
       13,
@@ -613,6 +614,7 @@
      [
       2,
       4,
+      10,
       13,
       14,
       20
@@ -1650,12 +1652,11 @@
  {
   "text": "Elle met son manteau.",
   "phonology": "El mE s§ m@.to",
-  "steno": "mt*ie#sZ s*ai m@/tae",
+  "steno": "mtie#sZ s*ai m@/tae",
   "strokes": [
    [
     6,
     7,
-    10,
     13,
     14,
     15,
@@ -1688,7 +1689,7 @@
    {
     "text": "met",
     "label": "indicatif présent, 3e sg.",
-    "steno": "mt*ie#sZ",
+    "steno": "mtie#sZ",
     "strokeCount": 1
    },
    {
@@ -1706,7 +1707,7 @@
   ],
   "alternates": [
    {
-    "steno": "iel/m*ie#/s*ai/m@/tae",
+    "steno": "iel/mie#/s*ai/m@/tae",
     "strokes": [
      [
       13,
@@ -1715,7 +1716,6 @@
      ],
      [
       6,
-      10,
       13,
       14,
       15
@@ -2065,7 +2065,7 @@
  {
   "text": "Elle habitait près d'ici.",
   "phonology": "El a.bi.tE pRE d i.si",
-  "steno": "tasZ/svi/tie pR*ie isZ/si",
+  "steno": "tasZ/svi/tie pRie isZ/si",
   "strokes": [
    [
     7,
@@ -2086,7 +2086,6 @@
    [
     4,
     8,
-    10,
     13,
     14
    ],
@@ -2116,7 +2115,7 @@
    {
     "text": "près",
     "label": "adverbe",
-    "steno": "pR*ie",
+    "steno": "pRie",
     "strokeCount": 1
    },
    {
@@ -2134,7 +2133,7 @@
   ],
   "alternates": [
    {
-    "steno": "iel/a/svi/tie/pR*ie/pv-/i/si",
+    "steno": "iel/a/svi/tie/pRie/pv-/i/si",
     "strokes": [
      [
       13,
@@ -2157,7 +2156,6 @@
      [
       4,
       8,
-      10,
       13,
       14
      ],
@@ -7970,7 +7968,7 @@
  {
   "text": "Cela m'intéresse beaucoup.",
   "phonology": "s°.la m 5.te.REs bo.ku",
-  "steno": "s@a/mta m- aie/te/Ries -d",
+  "steno": "s@a/mta m* aie/te/Ries -d",
   "strokes": [
    [
     3,
@@ -7983,7 +7981,8 @@
     12
    ],
    [
-    6
+    6,
+    10
    ],
    [
     12,
@@ -8014,7 +8013,7 @@
    {
     "text": "m'",
     "label": "pronom personnel, sg.",
-    "steno": "m-",
+    "steno": "m*",
     "strokeCount": 1
    },
    {
@@ -8032,7 +8031,7 @@
   ],
   "alternates": [
    {
-    "steno": "s@a/mta/m-/aie/te/Ries/svae/k@e",
+    "steno": "s@a/mta/m*/aie/te/Ries/svae/k@e",
     "strokes": [
      [
       3,
@@ -8045,7 +8044,8 @@
       12
      ],
      [
-      6
+      6,
+      10
      ],
      [
       12,
@@ -8467,7 +8467,7 @@
  {
   "text": "Sûrement elle sait cela.",
   "phonology": "sy.R°.m@ El sE s°.la",
-  "steno": "s@i/R@a/m@ st*iesZ s@a/mta",
+  "steno": "s@i/R@a/m@ stie#sZ s@a/mta",
   "strokes": [
    [
     3,
@@ -8486,9 +8486,9 @@
    [
     3,
     7,
-    10,
     13,
     14,
+    15,
     17,
     24
    ],
@@ -8519,7 +8519,7 @@
    {
     "text": "sait",
     "label": "indicatif présent, 3e sg.",
-    "steno": "st*iesZ",
+    "steno": "stie#sZ",
     "strokeCount": 1
    },
    {
@@ -8531,7 +8531,7 @@
   ],
   "alternates": [
    {
-    "steno": "s@i/R@a/m@/iel/s*ie/s@a/mta",
+    "steno": "s@i/R@a/m@/iel/sie#/s@a/mta",
     "strokes": [
      [
       3,
@@ -8554,9 +8554,9 @@
      ],
      [
       3,
-      10,
       13,
-      14
+      14,
+      15
      ],
      [
       3,
@@ -11678,7 +11678,7 @@
  {
   "text": "On sait que tu mens.",
   "phonology": "§ sE k° ty m@",
-  "steno": "ai s*ie kt@ikt m@/-d",
+  "steno": "ai sie# kt@ikt m@/-d",
   "strokes": [
    [
     12,
@@ -11686,9 +11686,9 @@
    ],
    [
     3,
-    10,
     13,
-    14
+    14,
+    15
    ],
    [
     2,
@@ -11716,7 +11716,7 @@
    {
     "text": "sait",
     "label": "indicatif présent, 3e sg.",
-    "steno": "s*ie",
+    "steno": "sie#",
     "strokeCount": 1
    },
    {
@@ -11740,7 +11740,7 @@
   ],
   "alternates": [
    {
-    "steno": "ai/s*ie/k@a/t@i/m@/-d",
+    "steno": "ai/sie#/k@a/t@i/m@/-d",
     "strokes": [
      [
       12,
@@ -11748,9 +11748,9 @@
      ],
      [
       3,
-      10,
       13,
-      14
+      14,
+      15
      ],
      [
       2,
@@ -11779,7 +11779,7 @@
  {
   "text": "Nous savons qu'ils viendront.",
   "phonology": "nu sa.v§ k il vj5.dR§",
-  "steno": "mR@e sa/v*ai kiktl/-s vRwaie/pvRai/-st",
+  "steno": "mR@e sa/vai kiktl/-s vRwaie/pvRai/-st",
   "strokes": [
    [
     6,
@@ -11793,7 +11793,6 @@
    ],
    [
     5,
-    10,
     12,
     13
    ],
@@ -11837,7 +11836,7 @@
    {
     "text": "savons",
     "label": "indicatif présent, 1re pl.",
-    "steno": "sa/v*ai",
+    "steno": "sa/vai",
     "strokeCount": 2
    },
    {
@@ -11861,7 +11860,7 @@
   ],
   "alternates": [
    {
-    "steno": "mR@e/sa/v*ai/k-/il/-s/vRwaie/pvRai/-st",
+    "steno": "mR@e/sa/vai/k-/il/-s/vRwaie/pvRai/-st",
     "strokes": [
      [
       6,
@@ -11875,7 +11874,6 @@
      ],
      [
       5,
-      10,
       12,
       13
      ],
@@ -12845,7 +12843,7 @@
  {
   "text": "Tu peux m'aider aujourd'hui.",
   "phonology": "ty p2 m E.de o.ZuR.d8i",
-  "steno": "t@i p@ie/-d m- ie/pve/-l pv@aie",
+  "steno": "t@i p@ie/-d m* ie/pve/-l pv@aie",
   "strokes": [
    [
     7,
@@ -12862,7 +12860,8 @@
     19
    ],
    [
-    6
+    6,
+    10
    ],
    [
     13,
@@ -12901,7 +12900,7 @@
    {
     "text": "m'",
     "label": "pronom personnel, sg.",
-    "steno": "m-",
+    "steno": "m*",
     "strokeCount": 1
    },
    {
@@ -12919,7 +12918,7 @@
   ],
   "alternates": [
    {
-    "steno": "t@i/p@ie/-d/m-/ie/pve/-l/ae/vt@eR/pv@ai",
+    "steno": "t@i/p@ie/-d/m*/ie/pve/-l/ae/vt@eR/pv@ai",
     "strokes": [
      [
       7,
@@ -12936,7 +12935,8 @@
       19
      ],
      [
-      6
+      6,
+      10
      ],
      [
       13,
@@ -13325,7 +13325,7 @@
  {
   "text": "Je suis allé au marché.",
   "phonology": "Z° s8i a.le o maR.Se",
-  "steno": "sp@aisZ a/mt*e ae maR/pme",
+  "steno": "sp@aisZ a/mte ae maR/pme",
   "strokes": [
    [
     3,
@@ -13342,7 +13342,6 @@
    [
     6,
     7,
-    10,
     14
    ],
    [
@@ -13376,7 +13375,7 @@
    {
     "text": "allé",
     "label": "participe passé, m. sg.",
-    "steno": "a/mt*e",
+    "steno": "a/mte",
     "strokeCount": 2
    },
    {
@@ -13394,7 +13393,7 @@
   ],
   "alternates": [
    {
-    "steno": "vt@a/s@ai/a/mt*e/ae/maR/pme",
+    "steno": "vt@a/s@ai/a/mte/ae/maR/pme",
     "strokes": [
      [
       5,
@@ -13414,7 +13413,6 @@
      [
       6,
       7,
-      10,
       14
      ],
      [
@@ -13886,7 +13884,7 @@
   ],
   "alternates": [
    {
-    "steno": "vt@a/m@a/mtiejs/-k/tae/pmak/ma/taie",
+    "steno": "vt@a/m*@a/mtiejs/-k/tae/pmak/ma/taie",
     "strokes": [
      [
       5,
@@ -13896,6 +13894,7 @@
      ],
      [
       6,
+      10,
       11,
       12
      ],
@@ -15203,7 +15202,7 @@
  {
   "text": "Elle vous appelle demain.",
   "phonology": "El vu a.pEl d°.m5",
-  "steno": "vt@esZ a/p*iel pv@a/maie",
+  "steno": "vt@esZ a/piel pv@a/maie",
   "strokes": [
    [
     5,
@@ -15218,7 +15217,6 @@
    ],
    [
     4,
-    10,
     13,
     14,
     23
@@ -15252,7 +15250,7 @@
    {
     "text": "appelle",
     "label": "indicatif présent, 3e sg.",
-    "steno": "a/p*iel",
+    "steno": "a/piel",
     "strokeCount": 2
    },
    {
@@ -15264,7 +15262,7 @@
   ],
   "alternates": [
    {
-    "steno": "iel/v@e/a/p*iel/pv@a/maie",
+    "steno": "iel/v@e/a/piel/pv@a/maie",
     "strokes": [
      [
       13,
@@ -15281,7 +15279,6 @@
      ],
      [
       4,
-      10,
       13,
       14,
       23
@@ -15810,7 +15807,7 @@
   ],
   "alternates": [
    {
-    "steno": "vt@a/m@a/s@e/vRwaie/-k/pv@a/t@e",
+    "steno": "vt@a/m*@a/s@e/vRwaie/-k/pv@a/t@e",
     "strokes": [
      [
       5,
@@ -15820,6 +15817,7 @@
      ],
      [
       6,
+      10,
       11,
       12
      ],

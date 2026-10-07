@@ -25,6 +25,7 @@ from src.ambiguitychecker import (
     detectCrossCategoryClash,
     groupHomophonesByReservedStroke,
     loadReform1990DoubletPairs,
+    markFamilyKey,
     rankHomophoneCluster,
     starHashCodeToStrokes,
     computeClusterSizeDistribution,
@@ -447,13 +448,13 @@ class TestComposeReservedKeyStrokesForEntries:
 
     def test_alternate_colliding_with_another_words_primary_is_marked(self):
         # "a"'s alternate lands on "b"'s primary stroke: a cluster neither primary
-        # stroke alone reveals.
+        # stroke alone reveals. The mark belongs to the word, so every entry of "a" carries it.
         a = _make_word(ortho="aa", lemme="aa", frequencyFilm=1.0)
         b = _make_word(ortho="bb", lemme="bb", frequencyFilm=5.0)
         entries: Any = {a: [((1,),), ((1,), (16,))], b: [((1,), (16,))]}
         composed = composeReservedKeyStrokesForEntries(entries)
         assert composed[b] == [((1,), (16,))]
-        assert composed[a] == [((1,),), ((1,), (16,), (10,))]
+        assert composed[a] == [((1,), (10,)), ((1,), (16,), (10,))]
 
     def test_duplicate_entries_of_one_word_are_kept_and_marked_alike(self):
         # Entry positions stay parallel to the press-set alternates.
@@ -461,7 +462,7 @@ class TestComposeReservedKeyStrokesForEntries:
         b = _make_word(ortho="bb", lemme="bb", frequencyFilm=5.0)
         entries: Any = {a: [((1,),), ((1,), (16,)), ((1,), (16,))], b: [((1,), (16,))]}
         composed = composeReservedKeyStrokesForEntries(entries)
-        assert composed[a] == [((1,),), ((1,), (16,), (10,)), ((1,), (16,), (10,))]
+        assert composed[a] == [((1,), (10,)), ((1,), (16,), (10,)), ((1,), (16,), (10,))]
 
     def test_all_composed_entries_are_distinct(self):
         words = [_make_word(ortho=f"w{i}", lemme=f"w{i}", frequencyFilm=float(10 - i)) for i in range(5)]
@@ -469,6 +470,57 @@ class TestComposeReservedKeyStrokesForEntries:
         composed = composeReservedKeyStrokesForEntries(entries, phonemeStrokeCounts={w: 1 for w in words})
         allStrokes = [s for strokesList in composed.values() for s in strokesList]
         assert len(set(allStrokes)) == len(allStrokes) == 10
+
+
+class TestMarkFamilies:
+
+    def test_family_key_groups_m_f_s_p_forms_but_not_conjugated_verbs(self):
+        sg = _make_word(ortho="sûr", lemme="sûr", gramCat=GramCat.ADJ)
+        pl = _make_word(ortho="sûres", lemme="sûr", gramCat=GramCat.ADJ, gender="f", number="p")
+        assert markFamilyKey(sg) == markFamilyKey(pl)
+        noun = _make_word(ortho="sûr", lemme="sûr", gramCat=GramCat.NOM)
+        assert markFamilyKey(noun) != markFamilyKey(sg)
+        part = _make_word(ortho="donnée", lemme="donner", gramCat=GramCat.VER, gender="f", number="s", infoVerb="par:pas;")
+        part2 = _make_word(ortho="donnés", lemme="donner", gramCat=GramCat.VER, gender="m", number="p", infoVerb="par:pas;")
+        assert markFamilyKey(part) == markFamilyKey(part2)
+        conj1 = _make_word(ortho="donne", lemme="donner", gramCat=GramCat.VER, gender=None, number=None, infoVerb="ind:pre:1s;")
+        conj2 = _make_word(ortho="donnes", lemme="donner", gramCat=GramCat.VER, gender=None, number=None, infoVerb="ind:pre:2s;")
+        assert markFamilyKey(conj1) != markFamilyKey(conj2)
+        assert markFamilyKey(conj1) != markFamilyKey(part)
+
+    def test_every_form_of_a_family_carries_its_lemmas_mark(self):
+        # "eau"/"haut" clash on one stroke; "eaux" (same family as "eau") sits alone on another yet carries eau's code.
+        eau = _make_word(ortho="eau", lemme="eau", frequencyFilm=1.0)
+        eaux = _make_word(ortho="eaux", lemme="eau", number="p", frequencyFilm=0.1)
+        haut = _make_word(ortho="haut", lemme="haut", gramCat=GramCat.ADJ, frequencyFilm=50.0)
+        entries: Any = {eau: [((1,),)], eaux: [((2,),)], haut: [((1,),)]}
+        composed = composeReservedKeyStrokesForEntries(entries, phonemeStrokeCounts={eau: 1, eaux: 1, haut: 1})
+        assert composed[haut] == [((1,),)]
+        assert composed[eau] == [((1, 10),)]
+        assert composed[eaux] == [((2, 10),)]
+
+    def test_families_conflicting_on_another_stroke_get_distinct_codes(self):
+        # A (2 forms) and B (1 form) clash on stroke 1; A's other form clashes with C on stroke 2.
+        a1 = _make_word(ortho="aa", lemme="aa", frequencyFilm=9.0)
+        a2 = _make_word(ortho="aas", lemme="aa", number="p", frequencyFilm=8.0)
+        b = _make_word(ortho="bb", lemme="bb", frequencyFilm=5.0)
+        c = _make_word(ortho="cc", lemme="cc", frequencyFilm=7.0)
+        entries: Any = {a1: [((1,),)], a2: [((2,),)], b: [((1,),)], c: [((2,),)]}
+        composed = composeReservedKeyStrokesForEntries(entries, phonemeStrokeCounts={w: 1 for w in entries})
+        assert composed[a1] == [((1,),)] and composed[a2] == [((2,),)]
+        assert composed[b] == [((1, 10),)]
+        assert composed[c] == [((2, 10),)]
+        assert len({s for lst in composed.values() for s in lst}) == 4
+
+    def test_homograph_families_do_not_merge_when_that_would_hide_two_spellings(self):
+        # paillarde ADJ / paillardes NOM share a stroke; the two lemma-categories also share the spelling
+        # "paillarde" elsewhere. Merging their nodes would give "paillarde" and "paillardes" one code.
+        adjSg = _make_word(ortho="paillarde", lemme="paillard", gramCat=GramCat.ADJ, gender="f", number="s", frequencyFilm=5.0)
+        nomSg = _make_word(ortho="paillarde", lemme="paillard", gramCat=GramCat.NOM, gender="f", number="s", frequencyFilm=1.0)
+        nomPl = _make_word(ortho="paillardes", lemme="paillard", gramCat=GramCat.NOM, gender="f", number="p", frequencyFilm=0.5)
+        entries: Any = {adjSg: [((1,),), ((2,),)], nomSg: [((2,),)], nomPl: [((1,),)]}
+        composed = composeReservedKeyStrokesForEntries(entries, phonemeStrokeCounts={w: 1 for w in entries})
+        assert composed[adjSg][0] != composed[nomPl][0]
 
 
 class TestFindFinalCollisions:

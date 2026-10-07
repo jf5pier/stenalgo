@@ -149,6 +149,35 @@ needs, not its word's primary cluster's. Two entries of one word on the same str
 readings realized alike) count once in the cluster and get the same mark; both are kept, so
 entry positions stay parallel to the press-set alternates.
 
+## 5b. The mark belongs to the lemma's m/f/s/p family (2026-10-06)
+
+Sections 3-4 rank the members of one cluster. Since 2026-10-06 the mark is no longer chosen per
+cluster but per **mark node** (`markFamilyKey`): the m/f/s/p family of a word, and every form of the
+family, on every one of its entries, carries the same code, so the learner meets one mark per lemma.
+
+- **Nodes.** A non-verb is keyed by its lemma and category (`eau`/`eaux`, `sûr`/`sûre`/`sûrs`/`sûres`); a
+  past participle (`par:pas` with a gender) by its lemma; every other verb or auxiliary form (a conjugated
+  form) is its own node and is ranked like a single entry, as before.
+- **Merge.** Nodes that share a spelling in a cluster (R1) or whose lemmas form a doublet (R2) merge,
+  unless the merged node would then hold two spellings on one stroke (`paillarde` ADJ / `paillardes` NOM).
+- **Colouring.** Two nodes conflict when they sit in one cluster (a family's forms sit in several, so the
+  clusters link up). Nodes are taken canonical-first, `decideStarHashMark` (R3-R7) on the two nodes' most
+  frequent forms (frequency when it gives no signal), and each takes the lowest code in the order of
+  section 4 that none of its conflicting nodes holds. A node in no conflict keeps `()`.
+- **Why the verbs stay out.** Measured 2026-10-06 (`scratch/lemma_mark_coloring.py`): one code per whole
+  lemma, verb forms included, costs +56% (frequency order) to +330% (rule votes) more mark keys, because a
+  verb's forms lose different clashes. Restricting the lemma rule to the families
+  (`scratch/family_mark_coloring.py`) costs +14% on the rebuilt theory (mark-key mass 48.6k -> 55.7k per 900k
+  words; marked forms 5,077 -> 6,866) and leaves no lemma-category group of non-verbs with mixed marks
+  (2,071 mixed groups before, 921 after, all verbs or auxiliaries).
+- **Collision safety** is unchanged: conflicting nodes differ in every shared cluster by construction, and
+  keys 10 and 15 never occur in an unmarked stroke. The build still fails on any cross-lemma collision.
+
+Consequences: `eau` `*ae#` and `eaux` `*ae#/-s`; `hauts` takes `haut`'s code; an alternate entry carries its
+word's code even when only the alternate clashes (the B44 per-entry marking is superseded: the alternate's
+cluster still creates the conflict, but the code is the word's). The worked examples of section 6 predate
+this change; their group-by-group codes are no longer what `disambiguated_theory.tsv` holds.
+
 ## 6. Worked examples
 
 Plover strokes are from `plover_stenalgo_dictionary.json`, 2026-09-22 data.
@@ -183,8 +212,8 @@ Plover strokes are from `plover_stenalgo_dictionary.json`, 2026-09-22 data.
   final induced strokes exactly.
 - Keys 0 and 1 are never emitted.
 - Canonical members' strokes are unchanged from the Realization Phase output.
-- Since the B44 fix, every entry (primary or alternate) is marked from its own final-stroke
-  cluster, not just a word's primary stroke.
+- Every entry (primary or alternate) joins the clusters that decide which families conflict (B44); its
+  code is its family's (section 5b).
 
 ## 8. Known gaps (tracked in `TODO.md`, "Suspected bugs")
 

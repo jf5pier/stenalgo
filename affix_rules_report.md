@@ -442,6 +442,7 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 ## Variant merges (verdicts of `affix_decisions.json`)
 
 - `ae|ai|aî|e|ei|he|hé|oe|é|éh` /e/ (parts é, e, hé, ai; new conflict freq 5.5): **apart**
+- `tai|taie|taient|tais|tait|tet|têt` /tE/ (parts tait, tais, taient, tet; new conflict freq 0.0): **apart** (undecided)
 - `a|ah|ha|hah|hâ|â` /a/ (parts a, ha, â, hâ, ah; new conflict freq 7.6): **apart**
 - `le|leh|ler|lers|ller|llé|llée|lée` /le/ (parts ler, ller, llée, lée, llé; new conflict freq 14.6): **apart** (undecided)
 - `am|an|ant|em|en|ench|enh|ham|han|hen` /@/ (parts en, em, an, am, han; new conflict freq 3.0): **fused**
@@ -817,7 +818,7 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `eu|eux` /2/ (parts eux; new conflict freq 0.0): **apart** (undecided)
 - `table|ttable` /tabl/ (parts table, ttable; new conflict freq 0.0): **apart** (undecided)
 - `cri|crii|cry` /kRij/ (parts cri; new conflict freq 0.0): **apart** (undecided)
-- `gai|ggae|gger|guer` /ge/ (parts guer; new conflict freq 0.1): **apart** (undecided)
+- `ggae|gger|guer` /ge/ (parts guer; new conflict freq 0.1): **apart** (undecided)
 - `ver|veur|weur` /v9R/ (parts veur; new conflict freq 0.0): **apart** (undecided)
 - `cain|kin|quain|quin` /k5/ (parts cain, quin; new conflict freq 0.2): **apart** (undecided)
 - `thon|ton|tons|tton` /t§/ (parts ton, tons; new conflict freq 0.7): **apart** (undecided)
@@ -1036,7 +1037,6 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `gai|gaî|ghe|gue|guê` /gE/ (parts gue; new conflict freq 0.6): **apart** (undecided)
 - `bain|bbin|bin` /b5/ (parts bin, bain; new conflict freq 0.0): **apart** (undecided)
 - `gli|gly` /gli/ (parts gli, gly; new conflict freq 0.0): **apart** (undecided)
-- `taie|taient|tais|tait|tet|têt` /tE/ (parts tait, tais, taient, tet; new conflict freq 0.0): **apart** (undecided)
 - `ge|gei|gey|gè|gê|je` /ZE/ (parts gei; new conflict freq 0.0): **apart** (undecided)
 - `tern|terne|ternes` /tERn/ (parts terne; new conflict freq 0.0): **apart** (undecided)
 - `sad|sade|ssade|çade` /sad/ (parts ssade; new conflict freq 0.0): **apart** (undecided)
@@ -1067,7 +1067,7 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `vie|viei` /vjE/ (parts viei; new conflict freq 0.0): **apart** (undecided)
 - `frai|fraî|fré|phré` /fRe/ (parts fré; new conflict freq 0.0): **apart** (undecided)
 - `cure|qûre` /kyR/ (parts cure; new conflict freq 0.0): **apart** (undecided)
-- `gaie|gais|gay|guais|guet` /gE/ (parts guet; new conflict freq 0.0): **apart** (undecided)
+- `gai|gaie|gais|gay|guais|guet` /gE/ (parts guet; new conflict freq 0.0): **apart** (undecided)
 - `nin|nnain|nnin` /n5/ (parts nin; new conflict freq 0.0): **apart** (undecided)
 - `bric|brique` /bRik/ (parts brique; new conflict freq 0.0): **apart** (undecided)
 - `grim|grin` /gR5/ (parts grim, grin; new conflict freq 0.0): **apart** (undecided)
