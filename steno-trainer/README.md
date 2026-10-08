@@ -16,7 +16,7 @@ lesson's rules, then drill its own word pool). A hints toggle hides the
 expected strokes and keys; an "Abbreviation rule hint" toggle (on by default in
 Words, Sentences and the Affixes and Expressions lessons) shows under the chord board the affix
 rules that shorten the current word and the expression rules its outline uses; an X-SAMPA/IPA
-toggle switches every phoneme on the page. Every drill has "Previous word"/"Next word" buttons and a
+toggle switches every phoneme on the page; a Plover/Pluvier switch changes the punctuation and command chords everywhere (the Ponctuation and Commandes lesson tracks, between the disambiguation and affixes tracks, and the Definitions page). Every drill has "Previous word"/"Next word" buttons and a
 **Simulate** button over the keyboard, which lights the current word's strokes
 (1 s + 0.2 s per key for an intermediate stroke, 3 s for the last; green, yellow for a
 conjugation marker; the 2-key phoneme badges and the 3-/4-key legend lines light with them). Deliberately no progress
@@ -55,6 +55,7 @@ python -m util.export_lessons              # lessons mode's generated progressio
 python -m util.export_affix_lessons        # optional, after util.export_affix_dictionary: the affixes track (docs/specs/affix-lessons.md)
 python -m util.export_expression_lessons   # optional: the expressions track (docs/specs/expression-lessons.md)
 python -m util.export_expression_sentences # optional, after export_practice_words: the abbreviated sentences
+python -m util.export_expression_definitions # optional: the Definitions page's attach words and composed phrases
 ```
 
 `public/data/affix-lessons.json` is optional: it is fetched at startup, and its 30 rule lessons and its lesson on

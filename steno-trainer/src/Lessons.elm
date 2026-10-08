@@ -1,4 +1,4 @@
-module Lessons exposing (Abbreviation, AffixData, ExpressionData, Lesson, Lessons, Rule, Track, affixDecoder, currentWords, decoder, displayTitle, expressionDecoder, mergeAffixData, mergeExpressionData, pastWords, viewIntro, viewList, viewPrevNext)
+module Lessons exposing (Abbreviation, AffixData, ExpressionData, Lesson, Lessons, NumberData, PunctuationData, Rule, Track, affixDecoder, currentWords, decoder, displayTitle, expressionDecoder, mergeAffixData, mergeExpressionData, mergeNumberData, mergePunctuationData, numberDecoder, numberEntries, pastWords, punctuationDecoder, punctuationEntries, viewIntro, viewList, viewPrevNext)
 
 {-| Lesson mode: the fixed learner progression exported by
 `util/export_lessons.py` (`lessons.json`) -- tracks of lessons, each lesson
@@ -19,14 +19,16 @@ under the fixed French headers "Main gauche", "Les pouces", "Main droite"
 skipping empty groups.
 -}
 
+import Definitions
 import Drill exposing (PracticeWord)
 import Html exposing (Html, button, div, h2, h3, li, p, text, ul)
 import Html.Attributes exposing (class, classList, disabled)
 import Html.Events exposing (onClick)
 import Json.Decode as D
-import Json.Decode.Pipeline exposing (optional, required)
+import Json.Decode.Pipeline exposing (custom, optional, required)
 import Keyboard exposing (KeyInfo)
 import Set exposing (Set)
+import Style exposing (NumberStyle, Style(..))
 
 
 type alias Track =
@@ -141,12 +143,156 @@ mergeExpressionData data =
     replaceTrack "expressions" data.lessons
 
 
+{-| `punctuation-lessons.json` (`util/export_punctuation_lessons.py`): the `ponctuation`
+and `commandes` tracks, whose lessons exist once per chord style (same ids in both),
+and the style's marks and commands for the Definitions page. -}
+type alias PunctuationData =
+    { tracks : List Track
+    , plover : List Lesson
+    , pluvier : List Lesson
+    , ploverEntries : List Definitions.PunctuationEntry
+    , pluvierEntries : List Definitions.PunctuationEntry
+    }
+
+
+punctuationDecoder : D.Decoder PunctuationData
+punctuationDecoder =
+    D.map5 PunctuationData
+        (D.field "tracks" (D.list trackDecoder))
+        (D.at [ "lessons", "plover" ] (D.list lessonDecoder))
+        (D.at [ "lessons", "pluvier" ] (D.list lessonDecoder))
+        (D.at [ "entries", "plover" ] (D.list Definitions.punctuationEntryDecoder))
+        (D.at [ "entries", "pluvier" ] (D.list Definitions.punctuationEntryDecoder))
+
+
+{-| The marks and commands of the chosen style, for the Definitions page. -}
+punctuationEntries : Style -> PunctuationData -> List Definitions.PunctuationEntry
+punctuationEntries style data =
+    case style of
+        Plover ->
+            data.ploverEntries
+
+        Pluvier ->
+            data.pluvierEntries
+
+
+{-| The lessons with the punctuation and command tracks of the chosen style: the
+tracks are slipped in before the affixes track when they are not there yet, and
+their lessons replaced by the style's, so switching style is a second merge. -}
+mergePunctuationData : Style -> PunctuationData -> Lessons -> Lessons
+mergePunctuationData style data lessons =
+    let
+        replacements =
+            case style of
+                Plover ->
+                    data.plover
+
+                Pluvier ->
+                    data.pluvier
+
+        withTracks =
+            if List.any (\t -> List.any (\known -> known.id == t.id) lessons.tracks) data.tracks then
+                lessons
+
+            else
+                { lessons | tracks = insertBeforeTrack [ "chiffres", "affixes" ] data.tracks lessons.tracks }
+    in
+    replaceTracks (List.map .id data.tracks) replacements withTracks
+
+
+{-| `number-lessons.json` (`util/export_number_lessons.py`): the `chiffres` track,
+whose lessons exist once per number theory AND per punctuation style (same ids in all
+four: the glued comma and point of the decimal lesson are the punctuation style's), and
+the theory's single-stroke numbers for the Definitions page. -}
+type alias NumberData =
+    { tracks : List Track
+    , lapwingPlover : List Lesson
+    , lapwingPluvier : List Lesson
+    , pluvierPlover : List Lesson
+    , pluvierPluvier : List Lesson
+    , lapwingEntries : List Definitions.PunctuationEntry
+    , pluvierEntries : List Definitions.PunctuationEntry
+    }
+
+
+numberDecoder : D.Decoder NumberData
+numberDecoder =
+    D.succeed NumberData
+        |> required "tracks" (D.list trackDecoder)
+        |> custom (D.at [ "lessons", "lapwing", "plover" ] (D.list lessonDecoder))
+        |> custom (D.at [ "lessons", "lapwing", "pluvier" ] (D.list lessonDecoder))
+        |> custom (D.at [ "lessons", "pluvier", "plover" ] (D.list lessonDecoder))
+        |> custom (D.at [ "lessons", "pluvier", "pluvier" ] (D.list lessonDecoder))
+        |> custom (D.at [ "entries", "lapwing" ] (D.list Definitions.punctuationEntryDecoder))
+        |> custom (D.at [ "entries", "pluvier" ] (D.list Definitions.punctuationEntryDecoder))
+
+
+{-| The single-stroke numbers of the chosen theory, for the Definitions page. -}
+numberEntries : NumberStyle -> NumberData -> List Definitions.PunctuationEntry
+numberEntries style data =
+    case style of
+        Style.Lapwing ->
+            data.lapwingEntries
+
+        Style.PluvierNumbers ->
+            data.pluvierEntries
+
+
+{-| The lessons with the `chiffres` track of the chosen number theory and punctuation
+style, slipped in before the affixes track when it is not there yet (after the
+punctuation tracks, which are inserted before it too), its lessons replaced on a switch. -}
+mergeNumberData : NumberStyle -> Style -> NumberData -> Lessons -> Lessons
+mergeNumberData numberStyle style data lessons =
+    let
+        replacements =
+            case ( numberStyle, style ) of
+                ( Style.Lapwing, Plover ) ->
+                    data.lapwingPlover
+
+                ( Style.Lapwing, Pluvier ) ->
+                    data.lapwingPluvier
+
+                ( Style.PluvierNumbers, Plover ) ->
+                    data.pluvierPlover
+
+                ( Style.PluvierNumbers, Pluvier ) ->
+                    data.pluvierPluvier
+
+        withTracks =
+            if List.any (\t -> List.any (\known -> known.id == t.id) lessons.tracks) data.tracks then
+                lessons
+
+            else
+                { lessons | tracks = insertBeforeTrack [ "affixes" ] data.tracks lessons.tracks }
+    in
+    replaceTracks (List.map .id data.tracks) replacements withTracks
+
+
+insertBeforeTrack : List String -> List Track -> List Track -> List Track
+insertBeforeTrack ids new tracks =
+    case tracks of
+        [] ->
+            new
+
+        track :: rest ->
+            if List.member track.id ids then
+                new ++ tracks
+
+            else
+                track :: insertBeforeTrack ids new rest
+
+
 {-| Replace the stub (or any earlier lessons) of one track by `replacements`,
 then put every lesson back in track order (the `tracks` list, then the lesson's
 `index`), so the order does not depend on which optional file arrived first.
 No replacements: the lessons stay as they are. -}
 replaceTrack : String -> List Lesson -> Lessons -> Lessons
-replaceTrack track replacements lessons =
+replaceTrack track replacements =
+    replaceTracks [ track ] replacements
+
+
+replaceTracks : List String -> List Lesson -> Lessons -> Lessons
+replaceTracks replacedTracks replacements lessons =
     if List.isEmpty replacements then
         lessons
 
@@ -162,7 +308,7 @@ replaceTrack track replacements lessons =
         in
         { lessons
             | lessons =
-                (List.filter (\l -> l.track /= track) lessons.lessons ++ replacements)
+                (List.filter (\l -> not (List.member l.track replacedTracks)) lessons.lessons ++ replacements)
                     |> List.sortBy (\l -> ( trackPosition l.track, l.index ))
         }
 

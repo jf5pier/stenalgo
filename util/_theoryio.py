@@ -72,6 +72,7 @@ DISAMBIGUATED_THEORY_FINGERPRINT_INPUTS = (
     "starboard3h.json",
     "keypress_groups.json",
     "resolved_press_sets.json",
+    "resources/reference/lapwing-numbers.json",     # the reserved number chords (Pluvier's are generated from the code)
 )
 # Format 2 also carries wordToStrokes/wordsByOrthoLemme -- the exact dicts
 # buildWordToStrokes/buildWordsByOrthoLemme produce from the phonetic theory --

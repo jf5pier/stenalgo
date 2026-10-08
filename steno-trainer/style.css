@@ -478,3 +478,10 @@ body {
 .stroke-legend-group.legend-lit .stroke-legend-key.stroke-legend-pressed {
   background: #8f8;
 }
+
+.chord-button {
+  font-family: monospace;
+  font-size: inherit;
+  cursor: pointer;
+  padding: 0.05rem 0.4rem;
+}

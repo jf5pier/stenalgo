@@ -2,7 +2,7 @@
 
 # RESUME 2026-10-03 — abbreviations branch: que families, attach-overlap policy (session paused for a memory-limit restart)
 
-Continues `RESUME_2026-10-02-que-families.md` (which continues `RESUME_2026-10-01-abbreviations.md`: mission, phase history,
+Continues `docs/history/RESUME_2026-10-02-que-families.md` (which continues `docs/history/RESUME_2026-10-01-abbreviations.md`: mission, phase history,
 round-2 decisions, pitfalls). Read `NOTES_2026-10-03-attach-overlap-and-plover-decoder.md` for the design discussion.
 
 ## 0. UPDATE (later the same day) — read this first; sections 1-5 below are the state BEFORE it

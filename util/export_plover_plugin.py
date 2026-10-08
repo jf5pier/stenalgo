@@ -28,6 +28,11 @@ TARGET = REPO / "plover_stenalgo" / "plover_stenalgo" / "_core"
 ASSETS = REPO / "plover_stenalgo" / "plover_stenalgo" / "dictionaries"
 STOCK = "plover_stenalgo_dictionary.json"
 EXPRESSIONS = "plover_stenalgo_expressions.stenalgo"
+# util.export_plover_complements; in priority order: the Pluvier chords sit below Plover's, which win a shared chord
+# (Plover enables every default dictionary, so a Pluvier user switches the set he does not use off in the dictionary panel)
+COMPLEMENTS = ("plover_stenalgo_commands.json", "plover_stenalgo_punctuation.json",
+               "plover_stenalgo_pluvier_punctuation.json", "plover_stenalgo_pluvier_numbers.json",
+               "plover_stenalgo_lapwing_numbers.json")
 
 # The closure of src.expressiondecoder / expressionranking / expressiondata (checked stdlib-only by the test).
 MODULES = ("strokes", "expressionmodel", "keyconflicts", "elision", "expressiondecoder", "expressionranking",
@@ -52,11 +57,11 @@ def exportAssets(repo: Path = REPO, assets: Path = ASSETS) -> list[Path]:
     """Copy the stock dictionary and the expression data into the package; raises when either is missing or the
     data was built against another stock dictionary."""
     from src.expressiondata import wordIndexFingerprint
-    sources = [repo / STOCK, repo / EXPRESSIONS]
+    sources = [repo / STOCK, repo / EXPRESSIONS] + [repo / name for name in COMPLEMENTS]
     for source in sources:
         if not source.exists():
-            raise FileNotFoundError(f"{source.name} is missing: run util.export_plover_dictionary and "
-                                    f"util.export_expression_data first")
+            raise FileNotFoundError(f"{source.name} is missing: run util.export_plover_dictionary, "
+                                    f"util.export_expression_data and util.export_plover_complements first")
     data = json.loads(sources[1].read_text(encoding="utf-8"))
     pluginRoot = str(REPO / "plover_stenalgo")
     sys.path.insert(0, pluginRoot)

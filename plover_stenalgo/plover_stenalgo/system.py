@@ -44,9 +44,21 @@ KEYMAPS: dict[str, dict[str, str | tuple[str, ...]]] = {
 # index from (same folder).
 ASSET_PREFIX = "asset:plover_stenalgo:dictionaries/"
 DICTIONARIES_ROOT = "asset:plover:assets"
+# The commands and punctuation are the system's own (util/export_plover_complements.py): the bare name "commands.json"
+# would resolve to the user's config folder and load Plover English's file, whose outlines mean other keys here.
+# `plover_stenalgo_pluvier_punctuation.json` (the Pluvier / TAO punctuation chords, for people coming from Pluvier) is listed below
+# the Plover-derived punctuation: Plover enables every default and offers no disabled-by-default entry, so both sets are on and the
+# higher one wins a shared chord (`spmR-jktn` is the colon in Plover English's and the exclamation mark in Pluvier's: the colon wins).
+# The numbers (util/export_plover_numbers.py) come in two files, Pluvier's number bar above Lapwing's numpad: the default is Pluvier's, and a
+# chord both define is Pluvier's. Either file is turned off in the dictionary panel.
+# A Pluvier user turns `plover_stenalgo_punctuation.json` off, or moves the Pluvier file up, in Plover's dictionary panel.
 DEFAULT_DICTIONARIES: tuple[str, ...] = (
     "user.json",
-    "commands.json",
+    ASSET_PREFIX + "plover_stenalgo_commands.json",
+    ASSET_PREFIX + "plover_stenalgo_punctuation.json",
+    ASSET_PREFIX + "plover_stenalgo_pluvier_punctuation.json",
+    ASSET_PREFIX + "plover_stenalgo_pluvier_numbers.json",
+    ASSET_PREFIX + "plover_stenalgo_lapwing_numbers.json",
     ASSET_PREFIX + "plover_stenalgo_expressions.stenalgo",
     ASSET_PREFIX + "plover_stenalgo_dictionary.json",
 )

@@ -440,9 +440,16 @@ def markFamilyKey(word: Word) -> MarkNode:
     return ("L", word.lemme, word.gramCat.name)
 
 
+def firstSymbolOfCodeIndex(index: int) -> str | None:
+    """The first symbol of the `index`th code of `assignStarHashCombos` (None for the empty code): the one pressed together
+    with the word's last phoneme stroke."""
+    return (None, STAR, HASH)[index] if index < 3 else STAR_HASH
+
+
 def assignMarkNodeCodes(
     wordsByNode: dict[MarkNode, list[Word]], clusters: list[list[Word]],
     doubletPairs: frozenset[frozenset[str]] = frozenset(),
+    forbiddenSymbols: dict[MarkNode, set[str]] | None = None,
 ) -> dict[MarkNode, tuple[str, ...]]:
     """
     The star/hash code of every mark node (`markFamilyKey`, a key of `wordsByNode`) that takes part in a cluster of `clusters` (words
@@ -512,19 +519,45 @@ def assignMarkNodeCodes(
             return -1
         return 0
 
+    forbiddenByRoot: dict[MarkNode, set[str]] = defaultdict(set)
+    for node, symbols in (forbiddenSymbols or {}).items():
+        forbiddenByRoot[find(node)] |= symbols
+
     ordered = sorted(conflicts, key=lambda node: (-frequency[node], node))
     ordered.sort(key=cmp_to_key(compare))
     index: dict[MarkNode, int] = {}
     for node in ordered:
         taken = {index[other] for other in conflicts[node] if other in index}
-        index[node] = next(r for r in range(len(taken) + 1) if r not in taken)
+        forbidden = forbiddenByRoot[node]
+        # the codes from the 4th on all start with `*#`, so the search ends after the (at most 3) forbidden ones
+        limit = len(taken) + 1 + len(forbidden)
+        index[node] = next((r for r in range(limit) if r not in taken and firstSymbolOfCodeIndex(r) not in forbidden), -1)
+        if index[node] < 0:
+            raise RuntimeError(f"no star/hash code is free for the mark node {node}: taken {sorted(taken)}, forbidden first symbols {sorted(forbidden)}")
     codes = assignStarHashCombos(max(index.values(), default=-1) + 1)
     return {node: codes[index[find(node)]] for node in wordsByNode if find(node) in index}
+
+
+def forbiddenMarkSymbols(
+    entriesByWord: dict[Word, list[Strokes]], phonemeStrokeCounts: dict[Word, int], reservedStrokes: frozenset[frozenset[int]],
+) -> dict[MarkNode, set[str]]:
+    """Per mark node, the first symbols (`*`, `#`, `*#`) that would turn one of its entries' last phoneme stroke into a reserved
+    chord (`reservedStrokes`, the number chords)."""
+    forbidden: dict[MarkNode, set[str]] = defaultdict(set)
+    for word, entries in entriesByWord.items():
+        last = phonemeStrokeCounts[word] - 1
+        for strokes in entries:
+            base = frozenset(strokes[last])
+            for symbol, keys in _STAR_HASH_KEYS.items():
+                if base | frozenset(keys) in reservedStrokes:
+                    forbidden[markFamilyKey(word)].add(symbol)
+    return forbidden
 
 
 def composeReservedKeyStrokesForEntries(
     entriesByWord: dict[Word, list[Strokes]], doubletPairs: frozenset[frozenset[str]] = frozenset(),
     phonemeStrokeCounts: dict[Word, int] | None = None,
+    reservedStrokes: frozenset[frozenset[int]] = frozenset(),
 ) -> dict[Word, list[Strokes]]:
     """
     Final realized Strokes for every entry touched by Different-Lemma or
@@ -553,6 +586,9 @@ def composeReservedKeyStrokesForEntries(
     differ. Entries of a family in no cluster keep the family's code too (the empty code for a
     family with no conflict anywhere). Pass `doubletPairs` (loadReform1990DoubletPairs) to also apply the
     reform-doublet exemption (R2).
+
+    `reservedStrokes` (needs `phonemeStrokeCounts`) are chords no word may type -- the number chords (util.export_plover_numbers.
+    reservedNumberStrokes): a family whose marked last stroke would be one takes the next free code instead.
     """
     composed = {word: list(entries) for word, entries in entriesByWord.items()}
     byStroke: dict[Strokes, list[Word]] = defaultdict(list)
@@ -566,7 +602,9 @@ def composeReservedKeyStrokesForEntries(
     wordsByNode: dict[MarkNode, list[Word]] = defaultdict(list)
     for word in entriesByWord:
         wordsByNode[markFamilyKey(word)].append(word)
-    codeByNode = assignMarkNodeCodes(wordsByNode, clusters, doubletPairs)
+    forbidden = forbiddenMarkSymbols(entriesByWord, phonemeStrokeCounts, reservedStrokes) \
+        if reservedStrokes and phonemeStrokeCounts is not None else None
+    codeByNode = assignMarkNodeCodes(wordsByNode, clusters, doubletPairs, forbidden)
 
     for word, entries in entriesByWord.items():
         code = codeByNode.get(markFamilyKey(word))

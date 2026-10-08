@@ -1,5 +1,5 @@
 """Phase 1 composition algebra (src/expressions.py): the canonical examples
-of PLAN_2026-10-01-abbreviations-algorithm.md — brief substitution, attach
+of docs/history/PLAN_2026-10-01-abbreviations-algorithm.md — brief substitution, attach
 merges, the failure ladder, confluence. Chord constants are verified legal
 against starboard3h.json (and (11,22,25) verified illegal: the coda pair
 22+25 is not a legal keypress)."""

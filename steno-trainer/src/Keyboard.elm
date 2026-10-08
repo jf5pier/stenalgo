@@ -1,4 +1,4 @@
-module Keyboard exposing (AffixRule, ExpressionRule, KeyInfo, Layout, affixRuleDecoder, decoder, expressionRuleDecoder, geminiKeymap, view, viewAffixLegend, viewChordBoard, viewExpressionLegend, viewLegends, viewStrokeLegend, isConjugationStroke, markerPatterns)
+module Keyboard exposing (AffixRule, ExpressionRule, KeyInfo, Layout, affixRuleDecoder, decoder, expressionRuleDecoder, geminiKeymap, parseOutline, view, viewAffixLegend, viewChordBoard, viewExpressionLegend, viewLegends, viewStrokeLegend, isConjugationStroke, markerPatterns)
 
 {-| The virtual Starboard: decodes `keyboard-layout.json` (exported by
 `util/export_keyboard_layout.py` from the repo's own `Starboard` class) and
@@ -176,6 +176,62 @@ geminiKeymap keys =
     keys
         |> List.map (\k -> ( k.geminiPrLabel, k.index ))
         |> Dict.fromList
+
+
+{-| The key presses of an outline as the exported steno text writes it ("s@jtm",
+"R@a/kpai", "pvR-#"): one list of key indices per stroke, `Nothing` when the text
+is not one of the layout's strokes. A stroke lists its keys in index order; a "-"
+splits the keys left of the `#` key (index 15, the first of the right bank) from
+the ones right of it, as `util/_stenorender.py` writes it, so a greedy ordered
+match of each side recovers the keys (checked against every outline of
+`definitions.json` and `affix-abbreviations.json`).
+-}
+parseOutline : List KeyInfo -> String -> Maybe (List (List Int))
+parseOutline keys outline =
+    let
+        named =
+            keys |> List.map (\k -> ( k.index, String.filter (\c -> c /= '-') k.name |> String.toList ))
+
+        firstRight =
+            15
+
+        matchKeys : List Char -> List ( Int, List Char ) -> Maybe (List Int)
+        matchKeys chars candidates =
+            case ( chars, candidates ) of
+                ( [], _ ) ->
+                    Just []
+
+                ( _, [] ) ->
+                    Nothing
+
+                ( c :: rest, ( index, name ) :: others ) ->
+                    if name == [ c ] then
+                        matchKeys rest others |> Maybe.map ((::) index)
+
+                    else
+                        matchKeys chars others
+
+        parseStroke stroke =
+            case String.split "-" stroke of
+                [ whole ] ->
+                    matchKeys (String.toList whole) named
+
+                [ left, right ] ->
+                    Maybe.map2 (++)
+                        (matchKeys (String.toList left) (List.filter (\( i, _ ) -> i < firstRight) named))
+                        (matchKeys (String.toList right) (List.filter (\( i, _ ) -> i >= firstRight) named))
+
+                _ ->
+                    Nothing
+
+        strokes =
+            String.split "/" outline |> List.map parseStroke
+    in
+    if List.isEmpty strokes || List.any ((==) Nothing) strokes then
+        Nothing
+
+    else
+        Just (List.filterMap identity strokes)
 
 
 {-| One CSS-grid cell per key: two rows for each side's onset/coda bank, plus

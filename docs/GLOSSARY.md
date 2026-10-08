@@ -1110,7 +1110,7 @@ film frequency; stored in `Dictionary.pickle`.
 The layer that shortens frequent function-word expressions (`il n' a`, `que je`, `de la`) after the
 theory exists. It is separate from the affix layer and not yet wired into the build (Phase 4). Its
 "Stage A/B/C" are the three stages of Phase 2 below, not the pipeline's S1-S8. Design and results:
-`PLAN_2026-10-01-abbreviations-algorithm.md`, `NOTES_2026-10-03-attach-overlap-and-plover-decoder.md`,
+`docs/history/PLAN_2026-10-01-abbreviations-algorithm.md`, `NOTES_2026-10-03-attach-overlap-and-plover-decoder.md`,
 `RESULTS_2026-10-04-slot-budget-sweep.md`.
 
 ### Expression

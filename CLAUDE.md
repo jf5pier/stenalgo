@@ -73,6 +73,17 @@ python -m util.export_plover_dictionary      # Theory Export (S8), Plover branch
 python -m util.export_plover_system
 # Prerequisites: starboard3h.json. Outputs: plover_stenalgo/plover_stenalgo/_generated_keys.py.
 
+python -m util.export_plover_complements
+# The system's own punctuation and cursor commands, converted key to key from Plover English / Lapwing (the `position` rows of
+# resources/outlineClassification.tsv; French spacing, collision filter). Prerequisites: starboard3h.json, plover_stenalgo_dictionary.json.
+# Outputs: plover_stenalgo_punctuation.json, plover_stenalgo_commands.json (listed above the theory in the plugin's DEFAULT_DICTIONARIES),
+# plover_stenalgo_pluvier_punctuation.json (the Pluvier chords: shipped in the package and listed in the defaults below the Plover punctuation, so Plover's chord wins a shared one).
+
+python -m util.export_plover_numbers
+# The number dictionaries, converted key to key (the number bar is the Stenalgo `#` key): Pluvier's bar digits (Plover mapping, 1023 subsets; the top `S` is the Stenalgo `k-`: `k-#` = 1)
+# and Lapwing's numpad (resources/reference/lapwing-numbers.json, hours in French). Prerequisites: starboard3h.json, plover_stenalgo_dictionary.json, the punctuation and commands files.
+# Outputs: plover_stenalgo_pluvier_numbers.json, plover_stenalgo_lapwing_numbers.json (shipped by export_plover_plugin; the Pluvier one is listed above the Lapwing one = the default).
+
 python -m util.export_expression_data [OUT]   # expression layer data for the Plover plugin
 # Prerequisites: the committed rule set (scratch/expr-rules-final.json, expr-briefs.tsv, expr_candidates.tsv),
 # both pickles, starboard3h.json, plover_stenalgo_dictionary.json (the word index is read from it).
@@ -82,7 +93,7 @@ python -m util.export_expression_data [OUT]   # expression layer data for the Pl
 python -m util.export_plover_plugin
 # Copies the stdlib-only decoder modules src/{strokes,expressionmodel,keyconflicts,elision,expressiondecoder,
 # expressionranking,expressiondata}.py into plover_stenalgo/plover_stenalgo/_core/ (tracked; a test fails when stale), and
-# plover_stenalgo_dictionary.json + plover_stenalgo_expressions.stenalgo into plover_stenalgo/plover_stenalgo/dictionaries/
+# plover_stenalgo_dictionary.json + plover_stenalgo_expressions.stenalgo + plover_stenalgo_punctuation.json + plover_stenalgo_commands.json + plover_stenalgo_pluvier_punctuation.json + plover_stenalgo_pluvier_numbers.json + plover_stenalgo_lapwing_numbers.json into plover_stenalgo/plover_stenalgo/dictionaries/
 # (gitignored package assets, fingerprint-checked; run it after export_expression_data, then build/install the plugin).
 
 python -m util.sync_plover_mirror MIRROR_CLONE [--push]
@@ -136,6 +147,17 @@ python -m util.export_expression_lessons     # Expression Abbreviation Lessons (
 python -m util.export_expression_sentences   # Expression Abbreviation Lessons (S10b): the practice sentences with abbreviations
 # Prerequisites: the S10a inputs plus practice-words.json (export_practice_words) and util/candidate_sentences.jsonl.
 # Outputs: steno-trainer/public/data/expression-sentences.json (practice-sentences.json is untouched).
+
+python -m util.export_expression_definitions # Expression Abbreviation Lessons (S10c): the Definitions page's attach words and composed phrases
+# Prerequisites: the S10a inputs. Outputs: steno-trainer/public/data/expression-definitions.json (definitions.json is untouched).
+
+python -m util.export_punctuation_lessons    # Punctuation and Command Lessons (S10d): the trainer's ponctuation and commandes tracks, Plover and Pluvier styles
+# Prerequisites: plover_stenalgo_{punctuation,commands,pluvier_punctuation}.json (util.export_plover_complements), starboard3h.json, practice-words.json,
+# the authored resources/punctuationLessons.json and util/punctuation_examples.jsonl. Outputs: steno-trainer/public/data/punctuation-lessons.json.
+
+python -m util.export_number_lessons        # Number Lessons (S10e): the trainer's chiffres track, Lapwing numpad and Pluvier number bar (its own trainer button)
+# Prerequisites: plover_stenalgo_{lapwing,pluvier}_numbers.json (util.export_plover_numbers), plover_stenalgo_punctuation.json, starboard3h.json, practice-words.json,
+# the authored resources/numberLessons.json. Outputs: steno-trainer/public/data/number-lessons.json.
 
 python dictionary.py                         # the orchestrator over everything from S2 to S10
 # Prerequisites: as above (skips nothing; aborts on the first failing step).
@@ -193,7 +215,7 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 
 ## Verification approach
 
-- `pytest src/test/` must pass after any `.py` change (1164 tests at the time of writing, expression layer, affix layer and lessons exporter included).
+- `pytest src/test/` must pass after any `.py` change (1225 tests at the time of writing, expression layer, affix layer and lessons exporter included).
 - `mypy` (bare, scope and options in `mypy.ini`) must report no issues after any `.py` change.
 - Behaviour-preserving changes are proven by a full rebuild following the rebuild table in
   `docs/PIPELINE.md`, comparing the md5s of `phonetic_theory.tsv`, `disambiguated_theory.tsv`,

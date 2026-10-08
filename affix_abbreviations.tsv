@@ -7850,7 +7850,7 @@ convois	kai/vwa/-s	vwad/-s	1	4	co+col+com+con+cor	1	1.53	0
 coopératif	kae/ae/pe/Ra/tisd	waed/pe/Ra/tisd	1	4	co+col+com+con+cor	1	1.53	0
 coopérative	kae/ae/pe/Ra/tijs	waed/pe/Ra/tijs	1	4	co+col+com+con+cor	1	1.53	0
 coquine	kae/kin	kwidn	1	4	co+col+com+con+cor	1	1.53	0
-différends	pvi/kpe/R@#/-s	kspejd/R@#/-s	1	29	de|dea|di|die|dis|dy|dî	1	1.53	0
+différends	pvi/kpe/R*@#/-s	kspejd/R*@#/-s	1	29	de|dea|di|die|dis|dy|dî	1	1.53	0
 démolition	pve/mae/mti/sRwai	pve/maejst	2	6	ccion|cion|cyon|sion|ssion|tion|tions	2	1.53	0
 déserts	pve/twieR/-s	stwiekR/-s	1	8	de|des|dé|déh	1	1.53	0
 détrompez	pve/tRai/pe/-k	stRwaik/pe/-k	1	8	de|des|dé|déh	1	1.53	0
@@ -9434,7 +9434,7 @@ basés	sva/twe/-s	svaknl/-s	1	30	ser|sée|zer|zé	1	1.15	0
 compartiments	kai/paR/ti/m@/-s	kai/pajtRm/-s	2	2	ment	2	1.15	0
 confiez	kai/kpRwe/-k	kpRwed/-k	1	4	co+col+com+con+cor	1	1.15	0
 confiez	kai/kpRwe/-d	kpRwed/-d	1	4	co+col+com+con+cor	1	1.15	1
-différend	pvi/kpe/R@#	kspejd/R@#	1	29	de|dea|di|die|dis|dy|dî	1	1.15	0
+différend	pvi/kpe/R*@#	kspejd/R*@#	1	29	de|dea|di|die|dis|dy|dî	1	1.15	0
 défenseurs	pve/kp@/s@R/-s	kspw@k/s@R/-s	1	8	de|des|dé|déh	1	1.15	0
 démolie	pve/mae/mti/-j	smwaek/mti/-j	1	8	de|des|dé|déh	1	1.15	0
 déraisonnable	pve/Rie/twae/mRajl	sRwiek/twae/mRajl	1	8	de|des|dé|déh	1	1.15	0
@@ -32289,7 +32289,7 @@ agrafez	a/ksRa/kpe/-k	ksRwaj/kpe/-k	1	1	a|ah|ha|hâ|â	1	0.06	0
 agrafez	a/ksRa/kpe/-d	ksRwaj/kpe/-d	1	1	a|ah|ha|hâ|â	1	0.06	1
 agrémentée	a/ksRe/m@/te/-j	ksRwej/m@/te/-j	1	1	a|ah|ha|hâ|â	1	0.06	0
 aguicheur	a/ksi/pm@R	kswij/pm@R	1	1	a|ah|ha|hâ|â	1	0.06	0
-ahi	a/i#	wi#j	1	1	a|ah|ha|hâ|â	1	0.06	0
+ahi	a/*i#	w*i#j	1	1	a|ah|ha|hâ|â	1	0.06	0
 aisances	ie/tw@s/-s	vtw@skd/-s	1	11	ai|aî|e|ei|hai|he|hê|é	1	0.06	0
 alertent	a/mtietR/-st	mtwiejtR/-st	1	1	a|ah|ha|hâ|â	1	0.06	0
 alertent	a/mtietR/-sR	mtwiejtR/-sR	1	1	a|ah|ha|hâ|â	1	0.06	1
@@ -43307,8 +43307,8 @@ commuent	kae/m@i/-st	mw@id/-st	1	4	co+col+com+con+cor	1	0.01	0
 commuent	kae/m@i/-sR	mw@id/-sR	1	4	co+col+com+con+cor	1	0.01	1
 communiants	kae/m@i/mRw@/-s	mw@id/mRw@/-s	1	4	co+col+com+con+cor	1	0.01	0
 communicables	kae/m@i/mRi/kajl/-s	mw@id/mRi/kajl/-s	1	4	co+col+com+con+cor	1	0.01	0
-communicant	kae/m@i/mRi/k@#	mw@id/mRi/k@#	1	4	co+col+com+con+cor	1	0.01	0
-communicantes	kae/m@i/mRi/k@#t	mw@id/mRi/k@#t	1	4	co+col+com+con+cor	1	0.01	0
+communicant	kae/m@i/mRi/k*@#	mw@id/mRi/k*@#	1	4	co+col+com+con+cor	1	0.01	0
+communicantes	kae/m@i/mRi/k*@#t	mw@id/mRi/k*@#t	1	4	co+col+com+con+cor	1	0.01	0
 communicants	kae/m@i/mRi/k*@	mw@id/mRi/k*@	1	4	co+col+com+con+cor	1	0.01	0
 communient	kae/m@i/mRi/-st	mw@id/mRi/-st	1	4	co+col+com+con+cor	1	0.01	0
 communient	kae/m@i/mRi/-sR	mw@id/mRi/-sR	1	4	co+col+com+con+cor	1	0.01	1
@@ -44279,7 +44279,7 @@ défectuosité	pve/kpiek/t@ae/twi/te	pve/kpiek/t@aedtm	2	15	té	2	0.01	0
 défendirent	pve/kp@/pviR	kspw@k/pviR	1	8	de|des|dé|déh	1	0.01	0
 défendit	pve/kp@/pvi	kspw@k/pvi	1	8	de|des|dé|déh	1	0.01	0
 défenestrant	pve/kp@a/mRies/tR@	kspw@ak/mRies/tR@	1	8	de|des|dé|déh	1	0.01	0
-défens	pve/kp@#	kspw@#k	1	8	de|des|dé|déh	1	0.01	0
+défens	pve/kp*@#	kspw*@#k	1	8	de|des|dé|déh	1	0.01	0
 déferais	pve/kp@a/Rie/-k	kspw@ak/Rie/-k	1	8	de|des|dé|déh	1	0.01	0
 déferlements	pve/kpieR/mt@a/m@/-s	pve/kpiejtRm/-s	2	2	ment	2	0.01	0
 déferlèrent	pve/kpieR/mtieR	kspwiekR/mtieR	1	8	de|des|dé|déh	1	0.01	0
@@ -47662,8 +47662,8 @@ repaie	R@a/p*ie	pw*iek	1	5	re|reh	1	0.01	0
 repaie	R@a/p*ie/-k	pw*iek/-k	1	5	re|reh	1	0.01	1
 repaie	R@a/p*ie/-R	pw*iek/-R	1	5	re|reh	1	0.01	2
 repaies	R@a/pie/-d	pwiek/-d	1	5	re|reh	1	0.01	0
-repais	R@a/pie#/-k	pwie#k/-k	1	5	re|reh	1	0.01	0
-repais	R@a/pie#/-d	pwie#k/-d	1	5	re|reh	1	0.01	1
+repais	R@a/p*ie#/-k	pw*ie#k/-k	1	5	re|reh	1	0.01	0
+repais	R@a/p*ie#/-d	pw*ie#k/-d	1	5	re|reh	1	0.01	1
 repaissaient	R@a/pie/sie/-st	pwiek/sie/-st	1	5	re|reh	1	0.01	0
 repaissant	R@a/pie/s@	pwiek/s@	1	5	re|reh	1	0.01	0
 reparaissaient	R@a/pa/Rie/sie/-st	pwak/Rie/sie/-st	1	5	re|reh	1	0.01	0
@@ -56603,7 +56603,7 @@ diffères	pvi/kpieR/-d	kspiejdR/-d	1	29	de|dea|di|die|dis|dy|dî	1	0.00	0
 diffères	pvi/kpieR/-dR	kspiejdR/-dR	1	29	de|dea|di|die|dis|dy|dî	1	0.00	1
 différa	pvi/kpe/Ra	kspejd/Ra	1	29	de|dea|di|die|dis|dy|dî	1	0.00	0
 différai	pvi/kpe/Re/-t	pvi/kpejdR/-t	1	27	rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée	1	0.00	0
-différant	pvi/kpe/R*@#	kspejd/R*@#	1	29	de|dea|di|die|dis|dy|dî	1	0.00	0
+différant	pvi/kpe/R*@#/*#	kspejd/R*@#/*#	1	29	de|dea|di|die|dis|dy|dî	1	0.00	0
 différas	pvi/kpe/Ra/-d	kspejd/Ra/-d	1	29	de|dea|di|die|dis|dy|dî	1	0.00	0
 différenciables	pvi/kpe/R@/sRwajl	kspejd/R@/sRwajl	1	29	de|dea|di|die|dis|dy|dî	1	0.00	0
 différenciais	pvi/kpe/R@/sRwie/-k	kspejd/R@/sRwie/-k	1	29	de|dea|di|die|dis|dy|dî	1	0.00	0
@@ -73386,7 +73386,7 @@ repentirons	R@a/p@/ti/Rai/-k	pw@k/ti/Rai/-k	1	5	re|reh	1	0.00	0
 repentiront	R@a/p@/ti/Rai/-st	pw@k/ti/Rai/-st	1	5	re|reh	1	0.00	0
 repentirs	R@a/p@/tiR/-s	pw@k/tiR/-s	1	5	re|reh	1	0.00	0
 repentîmes	R@a/p@/tim	pw@k/tim	1	5	re|reh	1	0.00	0
-reperd	R@a/pie#R	pwie#kR	1	5	re|reh	1	0.00	0
+reperd	R@a/p*ie#R	pw*ie#kR	1	5	re|reh	1	0.00	0
 reperdaient	R@a/pieR/pvie/-st	pwiekR/pvie/-st	1	5	re|reh	1	0.00	0
 reperdais	R@a/pieR/pvie/-k	pwiekR/pvie/-k	1	5	re|reh	1	0.00	0
 reperdais	R@a/pieR/pvie/-d	pwiekR/pvie/-d	1	5	re|reh	1	0.00	1

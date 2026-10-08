@@ -1,0 +1,10381 @@
+{
+ "tracks": [
+  {
+   "id": "ponctuation",
+   "title": "Ponctuation",
+   "description": "Les signes de ponctuation et les signes collés, dans des phrases : un style de frappes au choix, Plover ou Pluvier."
+  },
+  {
+   "id": "commandes",
+   "title": "Commandes",
+   "description": "Effacer, valider, se déplacer, sélectionner : les frappes de commande (elles ne sont pas exécutées ici), dans le style Plover ou Pluvier."
+  }
+ ],
+ "lessons": {
+  "plover": [
+   {
+    "id": "ponctuation-01",
+    "track": "ponctuation",
+    "index": 1,
+    "sectionTitle": "Les signes de fin et de pause",
+    "title": "Leçon un : le point, la virgule, les points de suspension",
+    "kind": "ponctuation",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      5,
+      7,
+      19,
+      21,
+      23
+     ],
+     [
+      3,
+      7,
+      19,
+      23
+     ],
+     [
+      4,
+      6,
+      18,
+      20
+     ],
+     [
+      5,
+      7,
+      19,
+      21
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "ponctuation",
+      "text": "Ces signes se collent au mot précédent. Le point met une majuscule au mot suivant."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le point ( . ) : pm-kt."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "La virgule ( , ) : vt-dR."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Les points de suspension ( … ) : st-dl."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Les points de suspension suivis d'une majuscule ( … ) : svt-dRl."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Je suis ici.",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "Z° s8i i.si ",
+      "steno": "vt@a s@ai/-k i/si pm-kt",
+      "strokes": [
+       [
+        5,
+        7,
+        11,
+        12
+       ],
+       [
+        3,
+        11,
+        12,
+        13
+       ],
+       [
+        18
+       ],
+       [
+        13
+       ],
+       [
+        3,
+        13
+       ],
+       [
+        4,
+        6,
+        18,
+        20
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Je",
+        "label": "pronom personnel, sg. · nom, f. sg.",
+        "steno": "vt@a",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "suis",
+        "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
+        "steno": "s@ai/-k",
+        "strokeCount": 2,
+        "spaceBefore": true
+       },
+       {
+        "text": "ici",
+        "label": "adverbe · adjectif numéral",
+        "steno": "i/si",
+        "strokeCount": 2,
+        "spaceBefore": true
+       },
+       {
+        "text": ".",
+        "label": "le point",
+        "steno": "pm-kt",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Oui, merci.",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "wi  mER.si ",
+      "steno": "wi vt-dR mieR/si pm-kt",
+      "strokes": [
+       [
+        9,
+        13
+       ],
+       [
+        5,
+        7,
+        19,
+        21
+       ],
+       [
+        6,
+        13,
+        14,
+        21
+       ],
+       [
+        3,
+        13
+       ],
+       [
+        4,
+        6,
+        18,
+        20
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": ",",
+        "label": "la virgule",
+        "steno": "vt-dR",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "merci",
+        "label": "onomatopée · nom, sg.",
+        "steno": "mieR/si",
+        "strokeCount": 2,
+        "spaceBefore": true
+       },
+       {
+        "text": ".",
+        "label": "le point",
+        "steno": "pm-kt",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Il ne sait pas...",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "il n° sE pa ",
+      "steno": "il mR@a sie# pa st-dl",
+      "strokes": [
+       [
+        13,
+        23
+       ],
+       [
+        6,
+        8,
+        11,
+        12
+       ],
+       [
+        3,
+        13,
+        14,
+        15
+       ],
+       [
+        4,
+        12
+       ],
+       [
+        3,
+        7,
+        19,
+        23
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Il",
+        "label": "pronom personnel, m. sg. · adjectif numéral · adverbe",
+        "steno": "il",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "ne",
+        "label": "adverbe",
+        "steno": "mR@a",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "sait",
+        "label": "indicatif présent, 3e sg.",
+        "steno": "sie#",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "pas",
+        "label": "adverbe · nom, sg.",
+        "steno": "pa",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "...",
+        "label": "les points de suspension",
+        "steno": "st-dl",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Tu viens... Oui",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "ty vj5  wi",
+      "steno": "t@i vRwaie/-d svt-dRl wi",
+      "strokes": [
+       [
+        7,
+        11,
+        13
+       ],
+       [
+        5,
+        8,
+        9,
+        12,
+        13,
+        14
+       ],
+       [
+        19
+       ],
+       [
+        3,
+        5,
+        7,
+        19,
+        21,
+        23
+       ],
+       [
+        9,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Tu",
+        "label": "pronom personnel, sg. · participe passé, m. sg. · nom, m. sg. · adjectif, m. sg.",
+        "steno": "t@i",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "viens",
+        "label": "indicatif présent, 2e sg.",
+        "steno": "vRwaie/-d",
+        "strokeCount": 2,
+        "spaceBefore": true
+       },
+       {
+        "text": "...",
+        "label": "les points de suspension suivis d'une majuscule",
+        "steno": "svt-dRl",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "Oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": true
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ponctuation-02",
+    "track": "ponctuation",
+    "index": 2,
+    "sectionTitle": "Les signes doubles",
+    "title": "Leçon deux : ? ! : ; avec leur espace",
+    "kind": "ponctuation",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      16,
+      18,
+      20,
+      22
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      16,
+      18,
+      20,
+      22
+     ],
+     [
+      4,
+      6,
+      19,
+      21
+     ],
+     [
+      8,
+      16
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "ponctuation",
+      "text": "En français, ces quatre signes sont précédés d'une espace insécable que la frappe ajoute elle-même ; le ? et le ! mettent une majuscule au mot suivant."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le point d'interrogation ( ? ) : R-j ; aussi spmR-, vt-kt."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le point d'exclamation ( ! ) : pm-dR."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Les deux-points ( : ) : spmR-jktn."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le point-virgule ( ; ) : spmR*jktn."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Oh !",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "o ",
+      "steno": "*ae pm-dR",
+      "strokes": [
+       [
+        10,
+        12,
+        14
+       ],
+       [
+        4,
+        6,
+        19,
+        21
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Oh",
+        "label": "onomatopée · nom, m. sg.",
+        "steno": "*ae",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": " !",
+        "label": "le point d'exclamation",
+        "steno": "pm-dR",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Tu viens ?",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "ty vj5 ",
+      "steno": "t@i vRwaie/-d R-j",
+      "strokes": [
+       [
+        7,
+        11,
+        13
+       ],
+       [
+        5,
+        8,
+        9,
+        12,
+        13,
+        14
+       ],
+       [
+        19
+       ],
+       [
+        8,
+        16
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Tu",
+        "label": "pronom personnel, sg. · participe passé, m. sg. · nom, m. sg. · adjectif, m. sg.",
+        "steno": "t@i",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "viens",
+        "label": "indicatif présent, 2e sg.",
+        "steno": "vRwaie/-d",
+        "strokeCount": 2,
+        "spaceBefore": true
+       },
+       {
+        "text": " ?",
+        "label": "le point d'interrogation",
+        "steno": "R-j",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Il dit : oui",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "il di  wi",
+      "steno": "il pvi spmR-jktn wi",
+      "strokes": [
+       [
+        13,
+        23
+       ],
+       [
+        4,
+        5,
+        13
+       ],
+       [
+        3,
+        4,
+        6,
+        8,
+        16,
+        18,
+        20,
+        22
+       ],
+       [
+        9,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Il",
+        "label": "pronom personnel, m. sg. · adjectif numéral · adverbe",
+        "steno": "il",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "dit",
+        "label": "participe passé, m. sg. · indicatif présent, 3e sg. · adjectif, m. sg. · nom, m. sg.",
+        "steno": "pvi",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": " :",
+        "label": "les deux-points",
+        "steno": "spmR-jktn",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": true
+       }
+      ]
+     },
+     {
+      "ortho": "Oui ; non",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "wi  n§",
+      "steno": "wi spmR*jktn mRai",
+      "strokes": [
+       [
+        9,
+        13
+       ],
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        16,
+        18,
+        20,
+        22
+       ],
+       [
+        6,
+        8,
+        12,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": " ;",
+        "label": "le point-virgule",
+        "steno": "spmR*jktn",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "non",
+        "label": "adverbe · nom, m. · adjectif, m. sg. · pronom personnel, sg.",
+        "steno": "mRai",
+        "strokeCount": 1,
+        "spaceBefore": true
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ponctuation-03",
+    "track": "ponctuation",
+    "index": 3,
+    "sectionTitle": "Les guillemets",
+    "title": "Leçon trois : les guillemets « et »",
+    "kind": "ponctuation",
+    "newKeys": [],
+    "newChords": [
+     [
+      5,
+      7,
+      11,
+      21,
+      23
+     ],
+     [
+      5,
+      7,
+      21,
+      23
+     ],
+     [
+      5,
+      9,
+      11,
+      21,
+      23
+     ],
+     [
+      5,
+      9,
+      21,
+      23
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "ponctuation",
+      "text": "Toujours par paire dans l'exercice : le guillemet ouvrant se colle au mot suivant, le fermant au mot précédent, avec une espace insécable à l'intérieur."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le guillemet ouvrant « ( « ) : vt-Rl."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le guillemet fermant » ( » ) : vw-Rl."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le guillemet droit ouvrant ( \" ) : vt@Rl."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le guillemet droit fermant ( \" ) : vw@Rl."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Il dit « merci »",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "il di  mER.si ",
+      "steno": "il pvi vt-Rl mieR/si vw-Rl",
+      "strokes": [
+       [
+        13,
+        23
+       ],
+       [
+        4,
+        5,
+        13
+       ],
+       [
+        5,
+        7,
+        21,
+        23
+       ],
+       [
+        6,
+        13,
+        14,
+        21
+       ],
+       [
+        3,
+        13
+       ],
+       [
+        5,
+        9,
+        21,
+        23
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Il",
+        "label": "pronom personnel, m. sg. · adjectif numéral · adverbe",
+        "steno": "il",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "dit",
+        "label": "participe passé, m. sg. · indicatif présent, 3e sg. · adjectif, m. sg. · nom, m. sg.",
+        "steno": "pvi",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "« ",
+        "label": "le guillemet ouvrant «",
+        "steno": "vt-Rl",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "merci",
+        "label": "onomatopée · nom, sg.",
+        "steno": "mieR/si",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": " »",
+        "label": "le guillemet fermant »",
+        "steno": "vw-Rl",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Il dit \"merci\"",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "il di  mER.si ",
+      "steno": "il pvi vt@Rl mieR/si vw@Rl",
+      "strokes": [
+       [
+        13,
+        23
+       ],
+       [
+        4,
+        5,
+        13
+       ],
+       [
+        5,
+        7,
+        11,
+        21,
+        23
+       ],
+       [
+        6,
+        13,
+        14,
+        21
+       ],
+       [
+        3,
+        13
+       ],
+       [
+        5,
+        9,
+        11,
+        21,
+        23
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Il",
+        "label": "pronom personnel, m. sg. · adjectif numéral · adverbe",
+        "steno": "il",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "dit",
+        "label": "participe passé, m. sg. · indicatif présent, 3e sg. · adjectif, m. sg. · nom, m. sg.",
+        "steno": "pvi",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "\"",
+        "label": "le guillemet droit ouvrant",
+        "steno": "vt@Rl",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "merci",
+        "label": "onomatopée · nom, sg.",
+        "steno": "mieR/si",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": "\"",
+        "label": "le guillemet droit fermant",
+        "steno": "vw@Rl",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ponctuation-04",
+    "track": "ponctuation",
+    "index": 4,
+    "sectionTitle": "Les guillemets",
+    "title": "Leçon quatre : les guillemets intérieurs “ et ”",
+    "kind": "ponctuation",
+    "newKeys": [],
+    "newChords": [
+     [
+      5,
+      9,
+      10,
+      17,
+      21
+     ],
+     [
+      5,
+      9,
+      17,
+      21
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "ponctuation",
+      "text": "Les guillemets de second niveau, à l'intérieur d'un passage entre « et »."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le guillemet intérieur ouvrant “ ( “ ) : vw-sR."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le guillemet intérieur fermant ” ( ” ) : vw*sR."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Il dit « elle a dit “non” »",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "il di  El a di  n§  ",
+      "steno": "il pvi vt-Rl iel *a pvi vw-sR mRai vw*sR vw-Rl",
+      "strokes": [
+       [
+        13,
+        23
+       ],
+       [
+        4,
+        5,
+        13
+       ],
+       [
+        5,
+        7,
+        21,
+        23
+       ],
+       [
+        13,
+        14,
+        23
+       ],
+       [
+        10,
+        12
+       ],
+       [
+        4,
+        5,
+        13
+       ],
+       [
+        5,
+        9,
+        17,
+        21
+       ],
+       [
+        6,
+        8,
+        12,
+        13
+       ],
+       [
+        5,
+        9,
+        10,
+        17,
+        21
+       ],
+       [
+        5,
+        9,
+        21,
+        23
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Il",
+        "label": "pronom personnel, m. sg. · adjectif numéral · adverbe",
+        "steno": "il",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "dit",
+        "label": "participe passé, m. sg. · indicatif présent, 3e sg. · adjectif, m. sg. · nom, m. sg.",
+        "steno": "pvi",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "« ",
+        "label": "le guillemet ouvrant «",
+        "steno": "vt-Rl",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "elle",
+        "label": "pronom personnel, f. sg.",
+        "steno": "iel",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "a",
+        "label": "indicatif présent, 3e sg. · nom, m.",
+        "steno": "*a",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "dit",
+        "label": "participe passé, m. sg. · indicatif présent, 3e sg. · adjectif, m. sg. · nom, m. sg.",
+        "steno": "pvi",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "“",
+        "label": "le guillemet intérieur ouvrant “",
+        "steno": "vw-sR",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "non",
+        "label": "adverbe · nom, m. · adjectif, m. sg. · pronom personnel, sg.",
+        "steno": "mRai",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "”",
+        "label": "le guillemet intérieur fermant ”",
+        "steno": "vw*sR",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": " »",
+        "label": "le guillemet fermant »",
+        "steno": "vw-Rl",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ponctuation-05",
+    "track": "ponctuation",
+    "index": 5,
+    "sectionTitle": "Les parenthèses",
+    "title": "Leçon cinq : parenthèses et crochets",
+    "kind": "ponctuation",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      16,
+      18,
+      20,
+      22,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      16,
+      18,
+      20,
+      22,
+      23
+     ],
+     [
+      6,
+      7,
+      9,
+      10,
+      19,
+      21,
+      22
+     ],
+     [
+      6,
+      7,
+      9,
+      19,
+      21,
+      22
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "ponctuation",
+      "text": "Le signe ouvrant se colle au mot suivant, le fermant au mot précédent ; ils vont par paire."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "La parenthèse ouvrante ( ( ) : spmR-jktnl."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "La parenthèse fermante ( ) ) : spmR*jktnl."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le crochet ouvrant ( [ ) : mtw-dRn."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le crochet fermant ( ] ) : mtw*dRn."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "(Voir page deux)",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": " vwaR paZ d2 ",
+      "steno": "spmR-jktnl vwaR paZ pv@ie spmR*jktnl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        16,
+        18,
+        20,
+        22,
+        23
+       ],
+       [
+        5,
+        9,
+        12,
+        21
+       ],
+       [
+        4,
+        12,
+        24
+       ],
+       [
+        4,
+        5,
+        11,
+        13,
+        14
+       ],
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        16,
+        18,
+        20,
+        22,
+        23
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "(",
+        "label": "la parenthèse ouvrante",
+        "steno": "spmR-jktnl",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "Voir",
+        "label": "infinitif",
+        "steno": "vwaR",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "page",
+        "label": "nom, sg.",
+        "steno": "paZ",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "deux",
+        "label": "adjectif numéral",
+        "steno": "pv@ie",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": ")",
+        "label": "la parenthèse fermante",
+        "steno": "spmR*jktnl",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Il est ici [voir page deux]",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "il E i.si  vwaR paZ d2 ",
+      "steno": "il ie i/si mtw-dRn vwaR paZ pv@ie mtw*dRn",
+      "strokes": [
+       [
+        13,
+        23
+       ],
+       [
+        13,
+        14
+       ],
+       [
+        13
+       ],
+       [
+        3,
+        13
+       ],
+       [
+        6,
+        7,
+        9,
+        19,
+        21,
+        22
+       ],
+       [
+        5,
+        9,
+        12,
+        21
+       ],
+       [
+        4,
+        12,
+        24
+       ],
+       [
+        4,
+        5,
+        11,
+        13,
+        14
+       ],
+       [
+        6,
+        7,
+        9,
+        10,
+        19,
+        21,
+        22
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Il",
+        "label": "pronom personnel, m. sg. · adjectif numéral · adverbe",
+        "steno": "il",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "est",
+        "label": "indicatif présent, 3e sg.",
+        "steno": "ie",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "ici",
+        "label": "adverbe · adjectif numéral",
+        "steno": "i/si",
+        "strokeCount": 2,
+        "spaceBefore": true
+       },
+       {
+        "text": "[",
+        "label": "le crochet ouvrant",
+        "steno": "mtw-dRn",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "voir",
+        "label": "infinitif",
+        "steno": "vwaR",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "page",
+        "label": "nom, sg.",
+        "steno": "paZ",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "deux",
+        "label": "adjectif numéral",
+        "steno": "pv@ie",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "]",
+        "label": "le crochet fermant",
+        "steno": "mtw*dRn",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ponctuation-06",
+    "track": "ponctuation",
+    "index": 6,
+    "sectionTitle": "Les signes collés",
+    "title": "Leçon six : les signes collés aux deux mots",
+    "kind": "ponctuation",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      5,
+      6,
+      7,
+      10,
+      18
+     ],
+     [
+      3,
+      5,
+      6,
+      7,
+      18
+     ],
+     [
+      3,
+      5,
+      7,
+      22
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      5,
+      20
+     ],
+     [
+      5,
+      23
+     ],
+     [
+      6,
+      18
+     ],
+     [
+      7,
+      19
+     ],
+     [
+      8,
+      10,
+      18,
+      19
+     ],
+     [
+      8,
+      10,
+      18,
+      19,
+      25
+     ],
+     [
+      10,
+      11,
+      22
+     ],
+     [
+      18,
+      19,
+      22
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "ponctuation",
+      "text": "Ces signes se collent au mot qui précède et à celui qui suit (« super-avion », « oui/non »)."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "La virgule collée ( , ) : v-l."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le point collé ( . ) : m-k."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Les deux-points collés ( : ) : v-t."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le trait d'union ( - ) : t-d ; aussi R-kd."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "La barre oblique ( / ) : svmt-k."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "La barre oblique inverse ( \\ ) : svmt*k."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "L'arobase ( @ ) : *@n."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "L'apostrophe collée au mot précédent ( ' ) : -kdn."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "L'apostrophe collée au mot suivant ( ' ) : svt-n."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le tiret ( - ) : R*kd."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le double tiret ( -- ) : R*kdm."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "La colle (rien, mais les mots voisins se collent) ( ^ ) : sm- ; aussi pv-tl."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Un,deux",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "1  d2",
+      "steno": "@aie v-l pv@ie",
+      "strokes": [
+       [
+        11,
+        12,
+        13,
+        14
+       ],
+       [
+        5,
+        23
+       ],
+       [
+        4,
+        5,
+        11,
+        13,
+        14
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Un",
+        "label": "article indéfini, m. sg. · pronom indéfini, m. sg. · adjectif numéral",
+        "steno": "@aie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": ",",
+        "label": "la virgule collée",
+        "steno": "v-l",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "deux",
+        "label": "adjectif numéral",
+        "steno": "pv@ie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Un.deux",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "1  d2",
+      "steno": "@aie m-k pv@ie",
+      "strokes": [
+       [
+        11,
+        12,
+        13,
+        14
+       ],
+       [
+        6,
+        18
+       ],
+       [
+        4,
+        5,
+        11,
+        13,
+        14
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Un",
+        "label": "article indéfini, m. sg. · pronom indéfini, m. sg. · adjectif numéral",
+        "steno": "@aie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": ".",
+        "label": "le point collé",
+        "steno": "m-k",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "deux",
+        "label": "adjectif numéral",
+        "steno": "pv@ie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Un:deux",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "1  d2",
+      "steno": "@aie v-t pv@ie",
+      "strokes": [
+       [
+        11,
+        12,
+        13,
+        14
+       ],
+       [
+        5,
+        20
+       ],
+       [
+        4,
+        5,
+        11,
+        13,
+        14
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Un",
+        "label": "article indéfini, m. sg. · pronom indéfini, m. sg. · adjectif numéral",
+        "steno": "@aie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": ":",
+        "label": "les deux-points collés",
+        "steno": "v-t",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "deux",
+        "label": "adjectif numéral",
+        "steno": "pv@ie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Super-avion",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "sy.pER  a.vj§",
+      "steno": "s@i/pieR t-d a/vRwai",
+      "strokes": [
+       [
+        3,
+        11,
+        13
+       ],
+       [
+        4,
+        13,
+        14,
+        21
+       ],
+       [
+        7,
+        19
+       ],
+       [
+        12
+       ],
+       [
+        5,
+        8,
+        9,
+        12,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Super",
+        "label": "adjectif · nom, m. sg.",
+        "steno": "s@i/pieR",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": "-",
+        "label": "le trait d'union",
+        "steno": "t-d",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "avion",
+        "label": "nom, m. sg.",
+        "steno": "a/vRwai",
+        "strokeCount": 2,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Oui/non",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "wi  n§",
+      "steno": "wi svmt-k mRai",
+      "strokes": [
+       [
+        9,
+        13
+       ],
+       [
+        3,
+        5,
+        6,
+        7,
+        18
+       ],
+       [
+        6,
+        8,
+        12,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "/",
+        "label": "la barre oblique",
+        "steno": "svmt-k",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "non",
+        "label": "adverbe · nom, m. · adjectif, m. sg. · pronom personnel, sg.",
+        "steno": "mRai",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Oui\\non",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "wi  n§",
+      "steno": "wi svmt*k mRai",
+      "strokes": [
+       [
+        9,
+        13
+       ],
+       [
+        3,
+        5,
+        6,
+        7,
+        10,
+        18
+       ],
+       [
+        6,
+        8,
+        12,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "\\",
+        "label": "la barre oblique inverse",
+        "steno": "svmt*k",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "non",
+        "label": "adverbe · nom, m. · adjectif, m. sg. · pronom personnel, sg.",
+        "steno": "mRai",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Nom@site",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "n§  sit",
+      "steno": "mR*ai *@n sit",
+      "strokes": [
+       [
+        6,
+        8,
+        10,
+        12,
+        13
+       ],
+       [
+        10,
+        11,
+        22
+       ],
+       [
+        3,
+        13,
+        20
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Nom",
+        "label": "nom, m. sg.",
+        "steno": "mR*ai",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "@",
+        "label": "l'arobase",
+        "steno": "*@n",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "site",
+        "label": "nom, m. sg.",
+        "steno": "sit",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Il est là'",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "il E la ",
+      "steno": "il ie mt*a -kdn",
+      "strokes": [
+       [
+        13,
+        23
+       ],
+       [
+        13,
+        14
+       ],
+       [
+        6,
+        7,
+        10,
+        12
+       ],
+       [
+        18,
+        19,
+        22
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Il",
+        "label": "pronom personnel, m. sg. · adjectif numéral · adverbe",
+        "steno": "il",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "est",
+        "label": "indicatif présent, 3e sg.",
+        "steno": "ie",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "là",
+        "label": "adverbe · onomatopée",
+        "steno": "mt*a",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "'",
+        "label": "l'apostrophe collée au mot précédent",
+        "steno": "-kdn",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "'Oui",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": " wi",
+      "steno": "svt-n wi",
+      "strokes": [
+       [
+        3,
+        5,
+        7,
+        22
+       ],
+       [
+        9,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "'",
+        "label": "l'apostrophe collée au mot suivant",
+        "steno": "svt-n",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "Oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Oui - non",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "wi  n§",
+      "steno": "wi R*kd mRai",
+      "strokes": [
+       [
+        9,
+        13
+       ],
+       [
+        8,
+        10,
+        18,
+        19
+       ],
+       [
+        6,
+        8,
+        12,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "-",
+        "label": "le tiret",
+        "steno": "R*kd",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "non",
+        "label": "adverbe · nom, m. · adjectif, m. sg. · pronom personnel, sg.",
+        "steno": "mRai",
+        "strokeCount": 1,
+        "spaceBefore": true
+       }
+      ]
+     },
+     {
+      "ortho": "Oui -- non",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "wi  n§",
+      "steno": "wi R*kdm mRai",
+      "strokes": [
+       [
+        9,
+        13
+       ],
+       [
+        8,
+        10,
+        18,
+        19,
+        25
+       ],
+       [
+        6,
+        8,
+        12,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "--",
+        "label": "le double tiret",
+        "steno": "R*kdm",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "non",
+        "label": "adverbe · nom, m. · adjectif, m. sg. · pronom personnel, sg.",
+        "steno": "mRai",
+        "strokeCount": 1,
+        "spaceBefore": true
+       }
+      ]
+     },
+     {
+      "ortho": "Undeux",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "1  d2",
+      "steno": "@aie sm- pv@ie",
+      "strokes": [
+       [
+        11,
+        12,
+        13,
+        14
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        4,
+        5,
+        11,
+        13,
+        14
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Un",
+        "label": "article indéfini, m. sg. · pronom indéfini, m. sg. · adjectif numéral",
+        "steno": "@aie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "^",
+        "label": "la colle (rien, mais les mots voisins se collent)",
+        "steno": "sm-",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "deux",
+        "label": "adjectif numéral",
+        "steno": "pv@ie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ponctuation-07",
+    "track": "ponctuation",
+    "index": 7,
+    "sectionTitle": "Espaces et lignes",
+    "title": "Leçon sept : espace, retour à la ligne, paragraphe",
+    "kind": "ponctuation",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      18
+     ],
+     [
+      9,
+      17
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "ponctuation",
+      "text": "Ces signes règlent l'espacement du texte."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "L'espace ( ␣ ) : s-k."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le retour à la ligne collé ( ↵ ) : w-s."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Bonjour monde",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "b§.ZuR  m§d",
+      "steno": "svai/vt@eR s-k maid",
+      "strokes": [
+       [
+        3,
+        5,
+        12,
+        13
+       ],
+       [
+        5,
+        7,
+        11,
+        14,
+        21
+       ],
+       [
+        3,
+        18
+       ],
+       [
+        6,
+        12,
+        13,
+        19
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Bonjour",
+        "label": "nom, m. sg.",
+        "steno": "svai/vt@eR",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": "␣",
+        "label": "l'espace",
+        "steno": "s-k",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "monde",
+        "label": "nom, m. sg.",
+        "steno": "maid",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Bonjour\nmonde",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "b§.ZuR  m§d",
+      "steno": "svai/vt@eR w-s maid",
+      "strokes": [
+       [
+        3,
+        5,
+        12,
+        13
+       ],
+       [
+        5,
+        7,
+        11,
+        14,
+        21
+       ],
+       [
+        9,
+        17
+       ],
+       [
+        6,
+        12,
+        13,
+        19
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Bonjour",
+        "label": "nom, m. sg.",
+        "steno": "svai/vt@eR",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": "↵",
+        "label": "le retour à la ligne collé",
+        "steno": "w-s",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "monde",
+        "label": "nom, m. sg.",
+        "steno": "maid",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "commandes-01",
+    "track": "commandes",
+    "index": 1,
+    "sectionTitle": "Édition",
+    "title": "Leçon un : effacer et valider",
+    "kind": "commandes",
+    "newKeys": [],
+    "newChords": [
+     [
+      4,
+      5,
+      10,
+      13,
+      14,
+      23
+     ],
+     [
+      4,
+      10,
+      11,
+      15,
+      19
+     ],
+     [
+      6,
+      7,
+      16,
+      18
+     ],
+     [
+      9,
+      10,
+      15,
+      17
+     ],
+     [
+      9,
+      10,
+      17
+     ],
+     [
+      9,
+      15,
+      17
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "commandes",
+      "text": "Effacer, valider une ligne. Dans l'exercice rien n'est exécuté : la frappe seule est contrôlée."
+     },
+     {
+      "kind": "commandes",
+      "text": "Entrée ( ↵ ) : w*s."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Entrée (variante) ( Maj+Entrée (variante) ) : w*#s."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Entrée ( Maj+Entrée ) : w-#s."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Tab ( Maj+Tab ) : p*@#d."
+     },
+     {
+      "kind": "commandes",
+      "text": "Retour arrière ( ⌫ ) : mt-jk."
+     },
+     {
+      "kind": "commandes",
+      "text": "Suppression ( ⌦ ) : pv*iel."
+     },
+     {
+      "kind": "commandes",
+      "text": "Dans l'exercice, la commande n'est pas exécutée : seule la frappe est contrôlée."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Cha",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "Sa ",
+      "steno": "pma mt-jk",
+      "strokes": [
+       [
+        4,
+        6,
+        12
+       ],
+       [
+        6,
+        7,
+        16,
+        18
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Chat",
+        "label": "nom, m. sg.",
+        "steno": "pma",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "⌫",
+        "label": "Retour arrière",
+        "steno": "mt-jk",
+        "strokeCount": 1,
+        "spaceBefore": true
+       }
+      ]
+     },
+     {
+      "ortho": "Chien",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "Sj5 ",
+      "steno": "pmRwaie pv*iel",
+      "strokes": [
+       [
+        4,
+        6,
+        8,
+        9,
+        12,
+        13,
+        14
+       ],
+       [
+        4,
+        5,
+        10,
+        13,
+        14,
+        23
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Chien",
+        "label": "nom, m. sg.",
+        "steno": "pmRwaie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "⌦",
+        "label": "Suppression",
+        "steno": "pv*iel",
+        "strokeCount": 1,
+        "spaceBefore": true
+       }
+      ]
+     },
+     {
+      "ortho": "Bonjour\nmonde",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "b§.ZuR  m§d",
+      "steno": "svai/vt@eR w*s maid",
+      "strokes": [
+       [
+        3,
+        5,
+        12,
+        13
+       ],
+       [
+        5,
+        7,
+        11,
+        14,
+        21
+       ],
+       [
+        9,
+        10,
+        17
+       ],
+       [
+        6,
+        12,
+        13,
+        19
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Bonjour",
+        "label": "nom, m. sg.",
+        "steno": "svai/vt@eR",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": "↵",
+        "label": "Entrée",
+        "steno": "w*s",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "monde",
+        "label": "nom, m. sg.",
+        "steno": "maid",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Entrée",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "w*s",
+      "strokes": [
+       [
+        9,
+        10,
+        17
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Entrée (variante)",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "w*#s",
+      "strokes": [
+       [
+        9,
+        10,
+        15,
+        17
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Entrée",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "w-#s",
+      "strokes": [
+       [
+        9,
+        15,
+        17
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Tab",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "p*@#d",
+      "strokes": [
+       [
+        4,
+        10,
+        11,
+        15,
+        19
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Retour arrière",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "mt-jk",
+      "strokes": [
+       [
+        6,
+        7,
+        16,
+        18
+       ]
+      ],
+      "frequency": 0,
+      "alternates": [
+       {
+        "steno": "mt*jk",
+        "strokes": [
+         [
+          6,
+          7,
+          10,
+          16,
+          18
+         ]
+        ]
+       }
+      ]
+     },
+     {
+      "ortho": "Suppression",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "pv*iel",
+      "strokes": [
+       [
+        4,
+        5,
+        10,
+        13,
+        14,
+        23
+       ]
+      ],
+      "frequency": 0
+     }
+    ]
+   },
+   {
+    "id": "commandes-02",
+    "track": "commandes",
+    "index": 2,
+    "sectionTitle": "Déplacements",
+    "title": "Leçon deux : les flèches",
+    "kind": "commandes",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      4,
+      6,
+      8,
+      17
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      22
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      22,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      18
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      18,
+      22
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      18,
+      22,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      18,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      19
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      19,
+      22
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      19,
+      22,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      19,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      21
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      21,
+      22
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      21,
+      22,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      21,
+      23
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "commandes",
+      "text": "Déplacer le curseur d'un caractère ou d'une ligne ; la même frappe avec l, n, ln... répète le déplacement 2, 3 ou 4 fois."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche gauche ( Flèche gauche ) : spmR-s."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche gauche ×2 ( Flèche gauche ×2 ) : spmR-sl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche gauche ×3 ( Flèche gauche ×3 ) : spmR-sn."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche gauche ×4 ( Flèche gauche ×4 ) : spmR-snl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche droite ( Flèche droite ) : spmR-R."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche droite ×2 ( Flèche droite ×2 ) : spmR-Rl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche droite ×3 ( Flèche droite ×3 ) : spmR-Rn."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche droite ×4 ( Flèche droite ×4 ) : spmR-Rnl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche haut ( Flèche haut ) : spmR-k."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche haut ×2 ( Flèche haut ×2 ) : spmR-kl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche haut ×3 ( Flèche haut ×3 ) : spmR-kn."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche haut ×4 ( Flèche haut ×4 ) : spmR-knl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche bas ( Flèche bas ) : spmR-d."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche bas ×2 ( Flèche bas ×2 ) : spmR-dl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche bas ×3 ( Flèche bas ×3 ) : spmR-dn."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche bas ×4 ( Flèche bas ×4 ) : spmR-dnl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Dans l'exercice, la commande n'est pas exécutée : seule la frappe est contrôlée."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Flèche gauche",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-s",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche gauche ×2",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-sl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche gauche ×3",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-sn",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        22
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche gauche ×4",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-snl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        22,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche droite",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-R",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche droite ×2",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-Rl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        21,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche droite ×3",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-Rn",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        21,
+        22
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche droite ×4",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-Rnl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        21,
+        22,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche haut",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-k",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        18
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche haut ×2",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-kl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        18,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche haut ×3",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-kn",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        18,
+        22
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche haut ×4",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-knl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        18,
+        22,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche bas",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-d",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        19
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche bas ×2",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-dl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        19,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche bas ×3",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-dn",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        19,
+        22
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche bas ×4",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-dnl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        19,
+        22,
+        23
+       ]
+      ],
+      "frequency": 0
+     }
+    ]
+   },
+   {
+    "id": "commandes-03",
+    "track": "commandes",
+    "index": 3,
+    "sectionTitle": "Déplacements",
+    "title": "Leçon trois : se déplacer de mot en mot",
+    "kind": "commandes",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      19
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      19,
+      22
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      19,
+      22,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      19,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      19,
+      21
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      19,
+      21,
+      22
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      19,
+      21,
+      22,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      19,
+      21,
+      23
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "commandes",
+      "text": "Ctrl + flèche gauche ou droite, répétable 2, 3 ou 4 fois."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Flèche gauche ( Ctrl+Flèche gauche ) : spmR-sd."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Flèche gauche ×2 ( Ctrl+Flèche gauche ×2 ) : spmR-sdl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Flèche gauche ×3 ( Ctrl+Flèche gauche ×3 ) : spmR-sdn."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Flèche gauche ×4 ( Ctrl+Flèche gauche ×4 ) : spmR-sdnl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Flèche droite ( Ctrl+Flèche droite ) : spmR-dR."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Flèche droite ×2 ( Ctrl+Flèche droite ×2 ) : spmR-dRl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Flèche droite ×3 ( Ctrl+Flèche droite ×3 ) : spmR-dRn."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Flèche droite ×4 ( Ctrl+Flèche droite ×4 ) : spmR-dRnl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Dans l'exercice, la commande n'est pas exécutée : seule la frappe est contrôlée."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Ctrl+Flèche gauche",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-sd",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        19
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Flèche gauche ×2",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-sdl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        19,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Flèche gauche ×3",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-sdn",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        19,
+        22
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Flèche gauche ×4",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-sdnl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        19,
+        22,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Flèche droite",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-dR",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        19,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Flèche droite ×2",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-dRl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        19,
+        21,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Flèche droite ×3",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-dRn",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        19,
+        21,
+        22
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Flèche droite ×4",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-dRnl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        19,
+        21,
+        22,
+        23
+       ]
+      ],
+      "frequency": 0
+     }
+    ]
+   },
+   {
+    "id": "commandes-04",
+    "track": "commandes",
+    "index": 4,
+    "sectionTitle": "Déplacements",
+    "title": "Leçon quatre : début, fin, pages",
+    "kind": "commandes",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      4,
+      6,
+      8,
+      16,
+      17
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      16,
+      18,
+      20
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      16,
+      19,
+      20
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      18,
+      21
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      19,
+      21
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      20,
+      21
+     ],
+     [
+      4,
+      6,
+      7,
+      17
+     ],
+     [
+      4,
+      6,
+      7,
+      21
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "commandes",
+      "text": "Début et fin de ligne ou de document, page précédente ou suivante, retour et avance dans l'historique."
+     },
+     {
+      "kind": "commandes",
+      "text": "Alt+Flèche gauche ( Alt+Flèche gauche ) : pmt-s."
+     },
+     {
+      "kind": "commandes",
+      "text": "Alt+Flèche droite ( Alt+Flèche droite ) : pmt-R."
+     },
+     {
+      "kind": "commandes",
+      "text": "Début ( Début ) : spmR-js."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Début ( Ctrl+Début ) : spmR-jkt."
+     },
+     {
+      "kind": "commandes",
+      "text": "Fin ( Fin ) : spmR-tR."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Fin ( Ctrl+Fin ) : spmR-sdR."
+     },
+     {
+      "kind": "commandes",
+      "text": "Page précédente ( Page précédente ) : spmR-skR."
+     },
+     {
+      "kind": "commandes",
+      "text": "Page suivante ( Page suivante ) : spmR-jdt."
+     },
+     {
+      "kind": "commandes",
+      "text": "Dans l'exercice, la commande n'est pas exécutée : seule la frappe est contrôlée."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Alt+Flèche gauche",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "pmt-s",
+      "strokes": [
+       [
+        4,
+        6,
+        7,
+        17
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Alt+Flèche droite",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "pmt-R",
+      "strokes": [
+       [
+        4,
+        6,
+        7,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Début",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-js",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        16,
+        17
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Début",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-jkt",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        16,
+        18,
+        20
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Fin",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-tR",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        20,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Fin",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-sdR",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        19,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Page précédente",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-skR",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        18,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Page suivante",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-jdt",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        16,
+        19,
+        20
+       ]
+      ],
+      "frequency": 0
+     }
+    ]
+   },
+   {
+    "id": "commandes-05",
+    "track": "commandes",
+    "index": 5,
+    "sectionTitle": "Sélection",
+    "title": "Leçon cinq : sélectionner",
+    "kind": "commandes",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      16,
+      17
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      16,
+      19,
+      20
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      17
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      17,
+      18,
+      21
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      17,
+      19
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      18
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      19
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      19,
+      21
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      20,
+      21
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      21
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "commandes",
+      "text": "Les mêmes déplacements avec Maj enfoncée : ils sélectionnent le texte parcouru."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Maj+Flèche gauche ( Ctrl+Maj+Flèche gauche ) : spmR*sd."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Flèche gauche ( Maj+Flèche gauche ) : spmR*s."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Maj+Flèche droite ( Ctrl+Maj+Flèche droite ) : spmR*dR."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Flèche droite ( Maj+Flèche droite ) : spmR*R."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Flèche haut ( Maj+Flèche haut ) : spmR*k."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Flèche bas ( Maj+Flèche bas ) : spmR*d."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Début ( Maj+Début ) : spmR*js."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Fin ( Maj+Fin ) : spmR*tR."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Page précédente ( Maj+Page précédente ) : spmR*skR."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Page suivante ( Maj+Page suivante ) : spmR*jdt."
+     },
+     {
+      "kind": "commandes",
+      "text": "Dans l'exercice, la commande n'est pas exécutée : seule la frappe est contrôlée."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Ctrl+Maj+Flèche gauche",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*sd",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        17,
+        19
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Flèche gauche",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*s",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        17
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Maj+Flèche droite",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*dR",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        19,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Flèche droite",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*R",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Flèche haut",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*k",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        18
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Flèche bas",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*d",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        19
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Début",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*js",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        16,
+        17
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Fin",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*tR",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        20,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Page précédente",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*skR",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        17,
+        18,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Page suivante",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*jdt",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        16,
+        19,
+        20
+       ]
+      ],
+      "frequency": 0
+     }
+    ]
+   },
+   {
+    "id": "commandes-06",
+    "track": "commandes",
+    "index": 6,
+    "sectionTitle": "Casse et corrections",
+    "title": "Leçon six : majuscules et corrections",
+    "kind": "commandes",
+    "newKeys": [],
+    "newChords": [
+     [
+      5,
+      6,
+      10,
+      11
+     ],
+     [
+      10,
+      15
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "commandes",
+      "text": "Mettre une majuscule au mot suivant sans espace, corriger la frappe précédente."
+     },
+     {
+      "kind": "commandes",
+      "text": "La majuscule au mot suivant, sans espace ( ⇧ ) : vm*@."
+     },
+     {
+      "kind": "commandes",
+      "text": "La bascule de l'astérisque sur la frappe précédente ( * ) : *#."
+     },
+     {
+      "kind": "commandes",
+      "text": "Dans l'exercice, la commande n'est pas exécutée : seule la frappe est contrôlée."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "BonjourMonde",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "b§.ZuR  m§d",
+      "steno": "svai/vt@eR vm*@ maid",
+      "strokes": [
+       [
+        3,
+        5,
+        12,
+        13
+       ],
+       [
+        5,
+        7,
+        11,
+        14,
+        21
+       ],
+       [
+        5,
+        6,
+        10,
+        11
+       ],
+       [
+        6,
+        12,
+        13,
+        19
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Bonjour",
+        "label": "nom, m. sg.",
+        "steno": "svai/vt@eR",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": "⇧",
+        "label": "la majuscule au mot suivant, sans espace",
+        "steno": "vm*@",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "Monde",
+        "label": "nom, m. sg.",
+        "steno": "maid",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "la majuscule au mot suivant, sans espace",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "vm*@",
+      "strokes": [
+       [
+        5,
+        6,
+        10,
+        11
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "la bascule de l'astérisque sur la frappe précédente",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "*#",
+      "strokes": [
+       [
+        10,
+        15
+       ]
+      ],
+      "frequency": 0
+     }
+    ]
+   }
+  ],
+  "pluvier": [
+   {
+    "id": "ponctuation-01",
+    "track": "ponctuation",
+    "index": 1,
+    "sectionTitle": "Les signes de fin et de pause",
+    "title": "Leçon un : le point, la virgule, les points de suspension",
+    "kind": "ponctuation",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      5,
+      7,
+      19,
+      21,
+      23
+     ],
+     [
+      7,
+      8,
+      9,
+      12,
+      16,
+      18
+     ],
+     [
+      16,
+      18,
+      20,
+      22
+     ],
+     [
+      17,
+      19,
+      21,
+      23
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "ponctuation",
+      "text": "Ces signes se collent au mot précédent. Le point met une majuscule au mot suivant."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le point ( . ) : -jktn."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "La virgule ( , ) : -sdRl."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Les points de suspension ( … ) : tRwajk ; aussi -jktn/-jktn/-jktn."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Les points de suspension suivis d'une majuscule ( … ) : svt-dRl."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Je suis ici.",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "Z° s8i i.si ",
+      "steno": "vt@a s@ai/-k i/si -jktn",
+      "strokes": [
+       [
+        5,
+        7,
+        11,
+        12
+       ],
+       [
+        3,
+        11,
+        12,
+        13
+       ],
+       [
+        18
+       ],
+       [
+        13
+       ],
+       [
+        3,
+        13
+       ],
+       [
+        16,
+        18,
+        20,
+        22
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Je",
+        "label": "pronom personnel, sg. · nom, f. sg.",
+        "steno": "vt@a",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "suis",
+        "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
+        "steno": "s@ai/-k",
+        "strokeCount": 2,
+        "spaceBefore": true
+       },
+       {
+        "text": "ici",
+        "label": "adverbe · adjectif numéral",
+        "steno": "i/si",
+        "strokeCount": 2,
+        "spaceBefore": true
+       },
+       {
+        "text": ".",
+        "label": "le point",
+        "steno": "-jktn",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Oui, merci.",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "wi  mER.si ",
+      "steno": "wi -sdRl mieR/si -jktn",
+      "strokes": [
+       [
+        9,
+        13
+       ],
+       [
+        17,
+        19,
+        21,
+        23
+       ],
+       [
+        6,
+        13,
+        14,
+        21
+       ],
+       [
+        3,
+        13
+       ],
+       [
+        16,
+        18,
+        20,
+        22
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": ",",
+        "label": "la virgule",
+        "steno": "-sdRl",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "merci",
+        "label": "onomatopée · nom, sg.",
+        "steno": "mieR/si",
+        "strokeCount": 2,
+        "spaceBefore": true
+       },
+       {
+        "text": ".",
+        "label": "le point",
+        "steno": "-jktn",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Il ne sait pas...",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "il n° sE pa ",
+      "steno": "il mR@a sie# pa tRwajk",
+      "strokes": [
+       [
+        13,
+        23
+       ],
+       [
+        6,
+        8,
+        11,
+        12
+       ],
+       [
+        3,
+        13,
+        14,
+        15
+       ],
+       [
+        4,
+        12
+       ],
+       [
+        7,
+        8,
+        9,
+        12,
+        16,
+        18
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Il",
+        "label": "pronom personnel, m. sg. · adjectif numéral · adverbe",
+        "steno": "il",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "ne",
+        "label": "adverbe",
+        "steno": "mR@a",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "sait",
+        "label": "indicatif présent, 3e sg.",
+        "steno": "sie#",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "pas",
+        "label": "adverbe · nom, sg.",
+        "steno": "pa",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "...",
+        "label": "les points de suspension",
+        "steno": "tRwajk",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Tu viens... Oui",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "ty vj5  wi",
+      "steno": "t@i vRwaie/-d svt-dRl wi",
+      "strokes": [
+       [
+        7,
+        11,
+        13
+       ],
+       [
+        5,
+        8,
+        9,
+        12,
+        13,
+        14
+       ],
+       [
+        19
+       ],
+       [
+        3,
+        5,
+        7,
+        19,
+        21,
+        23
+       ],
+       [
+        9,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Tu",
+        "label": "pronom personnel, sg. · participe passé, m. sg. · nom, m. sg. · adjectif, m. sg.",
+        "steno": "t@i",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "viens",
+        "label": "indicatif présent, 2e sg.",
+        "steno": "vRwaie/-d",
+        "strokeCount": 2,
+        "spaceBefore": true
+       },
+       {
+        "text": "...",
+        "label": "les points de suspension suivis d'une majuscule",
+        "steno": "svt-dRl",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "Oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": true
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ponctuation-02",
+    "track": "ponctuation",
+    "index": 2,
+    "sectionTitle": "Les signes doubles",
+    "title": "Leçon deux : ? ! : ; avec leur espace",
+    "kind": "ponctuation",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      4,
+      6,
+      8,
+      16,
+      18,
+      20,
+      22
+     ],
+     [
+      8,
+      16
+     ],
+     [
+      16,
+      18,
+      20,
+      22
+     ],
+     [
+      17,
+      19,
+      21,
+      23
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "ponctuation",
+      "text": "En français, ces quatre signes sont précédés d'une espace insécable que la frappe ajoute elle-même ; le ? et le ! mettent une majuscule au mot suivant."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le point d'interrogation ( ? ) : R-j ; aussi spmR-, vt-kt."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le point d'exclamation ( ! ) : spmR-jktn."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Les deux-points ( : ) : -jktn/-jktn."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le point-virgule ( ; ) : -jktn/-sdRl."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Oh !",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "o ",
+      "steno": "*ae spmR-jktn",
+      "strokes": [
+       [
+        10,
+        12,
+        14
+       ],
+       [
+        3,
+        4,
+        6,
+        8,
+        16,
+        18,
+        20,
+        22
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Oh",
+        "label": "onomatopée · nom, m. sg.",
+        "steno": "*ae",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": " !",
+        "label": "le point d'exclamation",
+        "steno": "spmR-jktn",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Tu viens ?",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "ty vj5 ",
+      "steno": "t@i vRwaie/-d R-j",
+      "strokes": [
+       [
+        7,
+        11,
+        13
+       ],
+       [
+        5,
+        8,
+        9,
+        12,
+        13,
+        14
+       ],
+       [
+        19
+       ],
+       [
+        8,
+        16
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Tu",
+        "label": "pronom personnel, sg. · participe passé, m. sg. · nom, m. sg. · adjectif, m. sg.",
+        "steno": "t@i",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "viens",
+        "label": "indicatif présent, 2e sg.",
+        "steno": "vRwaie/-d",
+        "strokeCount": 2,
+        "spaceBefore": true
+       },
+       {
+        "text": " ?",
+        "label": "le point d'interrogation",
+        "steno": "R-j",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Il dit : oui",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "il di  wi",
+      "steno": "il pvi -jktn/-jktn wi",
+      "strokes": [
+       [
+        13,
+        23
+       ],
+       [
+        4,
+        5,
+        13
+       ],
+       [
+        16,
+        18,
+        20,
+        22
+       ],
+       [
+        16,
+        18,
+        20,
+        22
+       ],
+       [
+        9,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Il",
+        "label": "pronom personnel, m. sg. · adjectif numéral · adverbe",
+        "steno": "il",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "dit",
+        "label": "participe passé, m. sg. · indicatif présent, 3e sg. · adjectif, m. sg. · nom, m. sg.",
+        "steno": "pvi",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": " :",
+        "label": "les deux-points",
+        "steno": "-jktn/-jktn",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": "oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": true
+       }
+      ]
+     },
+     {
+      "ortho": "Oui ; non",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "wi  n§",
+      "steno": "wi -jktn/-sdRl mRai",
+      "strokes": [
+       [
+        9,
+        13
+       ],
+       [
+        16,
+        18,
+        20,
+        22
+       ],
+       [
+        17,
+        19,
+        21,
+        23
+       ],
+       [
+        6,
+        8,
+        12,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": " ;",
+        "label": "le point-virgule",
+        "steno": "-jktn/-sdRl",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": "non",
+        "label": "adverbe · nom, m. · adjectif, m. sg. · pronom personnel, sg.",
+        "steno": "mRai",
+        "strokeCount": 1,
+        "spaceBefore": true
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ponctuation-03",
+    "track": "ponctuation",
+    "index": 3,
+    "sectionTitle": "Les guillemets",
+    "title": "Leçon trois : les guillemets « et »",
+    "kind": "ponctuation",
+    "newKeys": [],
+    "newChords": [
+     [
+      2,
+      3,
+      10,
+      13,
+      16
+     ],
+     [
+      4,
+      5,
+      13,
+      16
+     ],
+     [
+      5,
+      7,
+      11,
+      21,
+      23
+     ],
+     [
+      5,
+      9,
+      11,
+      21,
+      23
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "ponctuation",
+      "text": "Toujours par paire dans l'exercice : le guillemet ouvrant se colle au mot suivant, le fermant au mot précédent, avec une espace insécable à l'intérieur."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le guillemet ouvrant « ( « ) : ks*ij."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le guillemet fermant » ( » ) : ks*ij/ks*ij."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Les deux-points suivis d'un guillemet ouvrant ( :« ) : pvij."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le guillemet droit ouvrant ( \" ) : vt@Rl."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le guillemet droit fermant ( \" ) : vw@Rl."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Il dit « merci »",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "il di  mER.si ",
+      "steno": "il pvi ks*ij mieR/si ks*ij/ks*ij",
+      "strokes": [
+       [
+        13,
+        23
+       ],
+       [
+        4,
+        5,
+        13
+       ],
+       [
+        2,
+        3,
+        10,
+        13,
+        16
+       ],
+       [
+        6,
+        13,
+        14,
+        21
+       ],
+       [
+        3,
+        13
+       ],
+       [
+        2,
+        3,
+        10,
+        13,
+        16
+       ],
+       [
+        2,
+        3,
+        10,
+        13,
+        16
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Il",
+        "label": "pronom personnel, m. sg. · adjectif numéral · adverbe",
+        "steno": "il",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "dit",
+        "label": "participe passé, m. sg. · indicatif présent, 3e sg. · adjectif, m. sg. · nom, m. sg.",
+        "steno": "pvi",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "« ",
+        "label": "le guillemet ouvrant «",
+        "steno": "ks*ij",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "merci",
+        "label": "onomatopée · nom, sg.",
+        "steno": "mieR/si",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": " »",
+        "label": "le guillemet fermant »",
+        "steno": "ks*ij/ks*ij",
+        "strokeCount": 2,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Elle répond : « oui »",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "El Re.p§  wi ",
+      "steno": "iel Re/pai pvij wi ks*ij/ks*ij",
+      "strokes": [
+       [
+        13,
+        14,
+        23
+       ],
+       [
+        8,
+        14
+       ],
+       [
+        4,
+        12,
+        13
+       ],
+       [
+        4,
+        5,
+        13,
+        16
+       ],
+       [
+        9,
+        13
+       ],
+       [
+        2,
+        3,
+        10,
+        13,
+        16
+       ],
+       [
+        2,
+        3,
+        10,
+        13,
+        16
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Elle",
+        "label": "pronom personnel, f. sg.",
+        "steno": "iel",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "répond",
+        "label": "indicatif présent, 3e sg.",
+        "steno": "Re/pai",
+        "strokeCount": 2,
+        "spaceBefore": true
+       },
+       {
+        "text": " : « ",
+        "label": "les deux-points suivis d'un guillemet ouvrant",
+        "steno": "pvij",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": " »",
+        "label": "le guillemet fermant »",
+        "steno": "ks*ij/ks*ij",
+        "strokeCount": 2,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Il dit \"merci\"",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "il di  mER.si ",
+      "steno": "il pvi vt@Rl mieR/si vw@Rl",
+      "strokes": [
+       [
+        13,
+        23
+       ],
+       [
+        4,
+        5,
+        13
+       ],
+       [
+        5,
+        7,
+        11,
+        21,
+        23
+       ],
+       [
+        6,
+        13,
+        14,
+        21
+       ],
+       [
+        3,
+        13
+       ],
+       [
+        5,
+        9,
+        11,
+        21,
+        23
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Il",
+        "label": "pronom personnel, m. sg. · adjectif numéral · adverbe",
+        "steno": "il",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "dit",
+        "label": "participe passé, m. sg. · indicatif présent, 3e sg. · adjectif, m. sg. · nom, m. sg.",
+        "steno": "pvi",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "\"",
+        "label": "le guillemet droit ouvrant",
+        "steno": "vt@Rl",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "merci",
+        "label": "onomatopée · nom, sg.",
+        "steno": "mieR/si",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": "\"",
+        "label": "le guillemet droit fermant",
+        "steno": "vw@Rl",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ponctuation-04",
+    "track": "ponctuation",
+    "index": 4,
+    "sectionTitle": "Les guillemets",
+    "title": "Leçon quatre : les guillemets intérieurs “ et ”",
+    "kind": "ponctuation",
+    "newKeys": [],
+    "newChords": [
+     [
+      5,
+      9,
+      10,
+      17,
+      21
+     ],
+     [
+      5,
+      9,
+      17,
+      21
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "ponctuation",
+      "text": "Les guillemets de second niveau, à l'intérieur d'un passage entre « et »."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le guillemet intérieur ouvrant “ ( “ ) : vw-sR."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le guillemet intérieur fermant ” ( ” ) : vw*sR."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Il dit « elle a dit “non” »",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "il di  El a di  n§  ",
+      "steno": "il pvi ks*ij iel *a pvi vw-sR mRai vw*sR ks*ij/ks*ij",
+      "strokes": [
+       [
+        13,
+        23
+       ],
+       [
+        4,
+        5,
+        13
+       ],
+       [
+        2,
+        3,
+        10,
+        13,
+        16
+       ],
+       [
+        13,
+        14,
+        23
+       ],
+       [
+        10,
+        12
+       ],
+       [
+        4,
+        5,
+        13
+       ],
+       [
+        5,
+        9,
+        17,
+        21
+       ],
+       [
+        6,
+        8,
+        12,
+        13
+       ],
+       [
+        5,
+        9,
+        10,
+        17,
+        21
+       ],
+       [
+        2,
+        3,
+        10,
+        13,
+        16
+       ],
+       [
+        2,
+        3,
+        10,
+        13,
+        16
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Il",
+        "label": "pronom personnel, m. sg. · adjectif numéral · adverbe",
+        "steno": "il",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "dit",
+        "label": "participe passé, m. sg. · indicatif présent, 3e sg. · adjectif, m. sg. · nom, m. sg.",
+        "steno": "pvi",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "« ",
+        "label": "le guillemet ouvrant «",
+        "steno": "ks*ij",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "elle",
+        "label": "pronom personnel, f. sg.",
+        "steno": "iel",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "a",
+        "label": "indicatif présent, 3e sg. · nom, m.",
+        "steno": "*a",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "dit",
+        "label": "participe passé, m. sg. · indicatif présent, 3e sg. · adjectif, m. sg. · nom, m. sg.",
+        "steno": "pvi",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "“",
+        "label": "le guillemet intérieur ouvrant “",
+        "steno": "vw-sR",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "non",
+        "label": "adverbe · nom, m. · adjectif, m. sg. · pronom personnel, sg.",
+        "steno": "mRai",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "”",
+        "label": "le guillemet intérieur fermant ”",
+        "steno": "vw*sR",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": " »",
+        "label": "le guillemet fermant »",
+        "steno": "ks*ij/ks*ij",
+        "strokeCount": 2,
+        "spaceBefore": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ponctuation-05",
+    "track": "ponctuation",
+    "index": 5,
+    "sectionTitle": "Les parenthèses",
+    "title": "Leçon cinq : parenthèses et crochets",
+    "kind": "ponctuation",
+    "newKeys": [],
+    "newChords": [
+     [
+      4,
+      8,
+      22,
+      23
+     ],
+     [
+      6,
+      7,
+      9,
+      10,
+      19,
+      21,
+      22
+     ],
+     [
+      6,
+      7,
+      9,
+      19,
+      21,
+      22
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "ponctuation",
+      "text": "Le signe ouvrant se colle au mot suivant, le fermant au mot précédent ; ils vont par paire."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "La parenthèse ouvrante ( ( ) : pR-nl."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "La parenthèse fermante ( ) ) : pR-nl/pR-nl."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le crochet ouvrant ( [ ) : mtw-dRn."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le crochet fermant ( ] ) : mtw*dRn."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "(Voir page deux)",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": " vwaR paZ d2 ",
+      "steno": "pR-nl vwaR paZ pv@ie pR-nl/pR-nl",
+      "strokes": [
+       [
+        4,
+        8,
+        22,
+        23
+       ],
+       [
+        5,
+        9,
+        12,
+        21
+       ],
+       [
+        4,
+        12,
+        24
+       ],
+       [
+        4,
+        5,
+        11,
+        13,
+        14
+       ],
+       [
+        4,
+        8,
+        22,
+        23
+       ],
+       [
+        4,
+        8,
+        22,
+        23
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "(",
+        "label": "la parenthèse ouvrante",
+        "steno": "pR-nl",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "Voir",
+        "label": "infinitif",
+        "steno": "vwaR",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "page",
+        "label": "nom, sg.",
+        "steno": "paZ",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "deux",
+        "label": "adjectif numéral",
+        "steno": "pv@ie",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": ")",
+        "label": "la parenthèse fermante",
+        "steno": "pR-nl/pR-nl",
+        "strokeCount": 2,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Il est ici [voir page deux]",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "il E i.si  vwaR paZ d2 ",
+      "steno": "il ie i/si mtw-dRn vwaR paZ pv@ie mtw*dRn",
+      "strokes": [
+       [
+        13,
+        23
+       ],
+       [
+        13,
+        14
+       ],
+       [
+        13
+       ],
+       [
+        3,
+        13
+       ],
+       [
+        6,
+        7,
+        9,
+        19,
+        21,
+        22
+       ],
+       [
+        5,
+        9,
+        12,
+        21
+       ],
+       [
+        4,
+        12,
+        24
+       ],
+       [
+        4,
+        5,
+        11,
+        13,
+        14
+       ],
+       [
+        6,
+        7,
+        9,
+        10,
+        19,
+        21,
+        22
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Il",
+        "label": "pronom personnel, m. sg. · adjectif numéral · adverbe",
+        "steno": "il",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "est",
+        "label": "indicatif présent, 3e sg.",
+        "steno": "ie",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "ici",
+        "label": "adverbe · adjectif numéral",
+        "steno": "i/si",
+        "strokeCount": 2,
+        "spaceBefore": true
+       },
+       {
+        "text": "[",
+        "label": "le crochet ouvrant",
+        "steno": "mtw-dRn",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "voir",
+        "label": "infinitif",
+        "steno": "vwaR",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "page",
+        "label": "nom, sg.",
+        "steno": "paZ",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "deux",
+        "label": "adjectif numéral",
+        "steno": "pv@ie",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "]",
+        "label": "le crochet fermant",
+        "steno": "mtw*dRn",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ponctuation-06",
+    "track": "ponctuation",
+    "index": 6,
+    "sectionTitle": "Les signes collés",
+    "title": "Leçon six : les signes collés aux deux mots",
+    "kind": "ponctuation",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      5,
+      6,
+      7,
+      10,
+      18
+     ],
+     [
+      3,
+      5,
+      6,
+      7,
+      18
+     ],
+     [
+      3,
+      5,
+      7,
+      22
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      7,
+      8,
+      10,
+      14,
+      17,
+      19
+     ],
+     [
+      4,
+      8,
+      22
+     ],
+     [
+      5,
+      20
+     ],
+     [
+      7,
+      10,
+      13,
+      14,
+      15,
+      21
+     ],
+     [
+      7,
+      19
+     ],
+     [
+      8,
+      10,
+      18,
+      19,
+      25
+     ],
+     [
+      10,
+      11,
+      22
+     ],
+     [
+      16,
+      17,
+      19,
+      21,
+      23
+     ],
+     [
+      17,
+      18,
+      19,
+      21,
+      23
+     ],
+     [
+      18,
+      19,
+      22
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "ponctuation",
+      "text": "Ces signes se collent au mot qui précède et à celui qui suit (« super-avion », « oui/non »)."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "La virgule collée ( , ) : -jsdRl."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le point collé ( . ) : -skdRl."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Les deux-points collés ( : ) : v-t."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le trait d'union ( - ) : t-d ; aussi R-kd."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "La barre oblique ( / ) : svmt-k."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "La barre oblique inverse ( \\ ) : svmt*k."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "L'arobase ( @ ) : *@n."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le pour cent ( % ) : pR-n."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "L'apostrophe ( ' ) : stR*esd."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "L'apostrophe collée au mot précédent ( ' ) : -kdn."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "L'apostrophe collée au mot suivant ( ' ) : svt-n."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le tiret ( - ) : t*ie#R."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le double tiret ( -- ) : R*kdm."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "La colle (rien, mais les mots voisins se collent) ( ^ ) : sm- ; aussi pv-tl."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Un,deux",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "1  d2",
+      "steno": "@aie -jsdRl pv@ie",
+      "strokes": [
+       [
+        11,
+        12,
+        13,
+        14
+       ],
+       [
+        16,
+        17,
+        19,
+        21,
+        23
+       ],
+       [
+        4,
+        5,
+        11,
+        13,
+        14
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Un",
+        "label": "article indéfini, m. sg. · pronom indéfini, m. sg. · adjectif numéral",
+        "steno": "@aie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": ",",
+        "label": "la virgule collée",
+        "steno": "-jsdRl",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "deux",
+        "label": "adjectif numéral",
+        "steno": "pv@ie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Un.deux",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "1  d2",
+      "steno": "@aie -skdRl pv@ie",
+      "strokes": [
+       [
+        11,
+        12,
+        13,
+        14
+       ],
+       [
+        17,
+        18,
+        19,
+        21,
+        23
+       ],
+       [
+        4,
+        5,
+        11,
+        13,
+        14
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Un",
+        "label": "article indéfini, m. sg. · pronom indéfini, m. sg. · adjectif numéral",
+        "steno": "@aie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": ".",
+        "label": "le point collé",
+        "steno": "-skdRl",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "deux",
+        "label": "adjectif numéral",
+        "steno": "pv@ie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Un:deux",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "1  d2",
+      "steno": "@aie v-t pv@ie",
+      "strokes": [
+       [
+        11,
+        12,
+        13,
+        14
+       ],
+       [
+        5,
+        20
+       ],
+       [
+        4,
+        5,
+        11,
+        13,
+        14
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Un",
+        "label": "article indéfini, m. sg. · pronom indéfini, m. sg. · adjectif numéral",
+        "steno": "@aie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": ":",
+        "label": "les deux-points collés",
+        "steno": "v-t",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "deux",
+        "label": "adjectif numéral",
+        "steno": "pv@ie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Super-avion",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "sy.pER  a.vj§",
+      "steno": "s@i/pieR t-d a/vRwai",
+      "strokes": [
+       [
+        3,
+        11,
+        13
+       ],
+       [
+        4,
+        13,
+        14,
+        21
+       ],
+       [
+        7,
+        19
+       ],
+       [
+        12
+       ],
+       [
+        5,
+        8,
+        9,
+        12,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Super",
+        "label": "adjectif · nom, m. sg.",
+        "steno": "s@i/pieR",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": "-",
+        "label": "le trait d'union",
+        "steno": "t-d",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "avion",
+        "label": "nom, m. sg.",
+        "steno": "a/vRwai",
+        "strokeCount": 2,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Oui/non",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "wi  n§",
+      "steno": "wi svmt-k mRai",
+      "strokes": [
+       [
+        9,
+        13
+       ],
+       [
+        3,
+        5,
+        6,
+        7,
+        18
+       ],
+       [
+        6,
+        8,
+        12,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "/",
+        "label": "la barre oblique",
+        "steno": "svmt-k",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "non",
+        "label": "adverbe · nom, m. · adjectif, m. sg. · pronom personnel, sg.",
+        "steno": "mRai",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Oui\\non",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "wi  n§",
+      "steno": "wi svmt*k mRai",
+      "strokes": [
+       [
+        9,
+        13
+       ],
+       [
+        3,
+        5,
+        6,
+        7,
+        10,
+        18
+       ],
+       [
+        6,
+        8,
+        12,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "\\",
+        "label": "la barre oblique inverse",
+        "steno": "svmt*k",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "non",
+        "label": "adverbe · nom, m. · adjectif, m. sg. · pronom personnel, sg.",
+        "steno": "mRai",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Nom@site",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "n§  sit",
+      "steno": "mR*ai *@n sit",
+      "strokes": [
+       [
+        6,
+        8,
+        10,
+        12,
+        13
+       ],
+       [
+        10,
+        11,
+        22
+       ],
+       [
+        3,
+        13,
+        20
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Nom",
+        "label": "nom, m. sg.",
+        "steno": "mR*ai",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "@",
+        "label": "l'arobase",
+        "steno": "*@n",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "site",
+        "label": "nom, m. sg.",
+        "steno": "sit",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Cent%",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "s@ ",
+      "steno": "s*@#/*# pR-n",
+      "strokes": [
+       [
+        3,
+        10,
+        11,
+        15
+       ],
+       [
+        10,
+        15
+       ],
+       [
+        4,
+        8,
+        22
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Cent",
+        "label": "adjectif numéral · nom, m.",
+        "steno": "s*@#/*#",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": "%",
+        "label": "le pour cent",
+        "steno": "pR-n",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Rock'roll",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "ROk  ROl",
+      "steno": "Rek stR*esd Rel",
+      "strokes": [
+       [
+        8,
+        14,
+        18
+       ],
+       [
+        3,
+        7,
+        8,
+        10,
+        14,
+        17,
+        19
+       ],
+       [
+        8,
+        14,
+        23
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Rock",
+        "label": "nom, m. sg.",
+        "steno": "Rek",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "'",
+        "label": "l'apostrophe",
+        "steno": "stR*esd",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "roll",
+        "label": "nom, m. sg.",
+        "steno": "Rel",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Il est là'",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "il E la ",
+      "steno": "il ie mt*a -kdn",
+      "strokes": [
+       [
+        13,
+        23
+       ],
+       [
+        13,
+        14
+       ],
+       [
+        6,
+        7,
+        10,
+        12
+       ],
+       [
+        18,
+        19,
+        22
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Il",
+        "label": "pronom personnel, m. sg. · adjectif numéral · adverbe",
+        "steno": "il",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "est",
+        "label": "indicatif présent, 3e sg.",
+        "steno": "ie",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "là",
+        "label": "adverbe · onomatopée",
+        "steno": "mt*a",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "'",
+        "label": "l'apostrophe collée au mot précédent",
+        "steno": "-kdn",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "'Oui",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": " wi",
+      "steno": "svt-n wi",
+      "strokes": [
+       [
+        3,
+        5,
+        7,
+        22
+       ],
+       [
+        9,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "'",
+        "label": "l'apostrophe collée au mot suivant",
+        "steno": "svt-n",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "Oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Oui - non",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "wi  n§",
+      "steno": "wi t*ie#R mRai",
+      "strokes": [
+       [
+        9,
+        13
+       ],
+       [
+        7,
+        10,
+        13,
+        14,
+        15,
+        21
+       ],
+       [
+        6,
+        8,
+        12,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "-",
+        "label": "le tiret",
+        "steno": "t*ie#R",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "non",
+        "label": "adverbe · nom, m. · adjectif, m. sg. · pronom personnel, sg.",
+        "steno": "mRai",
+        "strokeCount": 1,
+        "spaceBefore": true
+       }
+      ]
+     },
+     {
+      "ortho": "Oui -- non",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "wi  n§",
+      "steno": "wi R*kdm mRai",
+      "strokes": [
+       [
+        9,
+        13
+       ],
+       [
+        8,
+        10,
+        18,
+        19,
+        25
+       ],
+       [
+        6,
+        8,
+        12,
+        13
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Oui",
+        "label": "adverbe",
+        "steno": "wi",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "--",
+        "label": "le double tiret",
+        "steno": "R*kdm",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "non",
+        "label": "adverbe · nom, m. · adjectif, m. sg. · pronom personnel, sg.",
+        "steno": "mRai",
+        "strokeCount": 1,
+        "spaceBefore": true
+       }
+      ]
+     },
+     {
+      "ortho": "Undeux",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "1  d2",
+      "steno": "@aie sm- pv@ie",
+      "strokes": [
+       [
+        11,
+        12,
+        13,
+        14
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        4,
+        5,
+        11,
+        13,
+        14
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Un",
+        "label": "article indéfini, m. sg. · pronom indéfini, m. sg. · adjectif numéral",
+        "steno": "@aie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "^",
+        "label": "la colle (rien, mais les mots voisins se collent)",
+        "steno": "sm-",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "deux",
+        "label": "adjectif numéral",
+        "steno": "pv@ie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ponctuation-07",
+    "track": "ponctuation",
+    "index": 7,
+    "sectionTitle": "Espaces et lignes",
+    "title": "Leçon sept : espace, retour à la ligne, paragraphe",
+    "kind": "ponctuation",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      18
+     ],
+     [
+      9,
+      17
+     ],
+     [
+      10,
+      18
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "ponctuation",
+      "text": "Ces signes règlent l'espacement du texte."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "L'espace ( ␣ ) : s-k."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le retour à la ligne collé ( ↵ ) : w-s."
+     },
+     {
+      "kind": "ponctuation",
+      "text": "Le nouveau paragraphe ( ¶ ) : *k."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Bonjour monde",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "b§.ZuR  m§d",
+      "steno": "svai/vt@eR s-k maid",
+      "strokes": [
+       [
+        3,
+        5,
+        12,
+        13
+       ],
+       [
+        5,
+        7,
+        11,
+        14,
+        21
+       ],
+       [
+        3,
+        18
+       ],
+       [
+        6,
+        12,
+        13,
+        19
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Bonjour",
+        "label": "nom, m. sg.",
+        "steno": "svai/vt@eR",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": "␣",
+        "label": "l'espace",
+        "steno": "s-k",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "monde",
+        "label": "nom, m. sg.",
+        "steno": "maid",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Bonjour\nmonde",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "b§.ZuR  m§d",
+      "steno": "svai/vt@eR w-s maid",
+      "strokes": [
+       [
+        3,
+        5,
+        12,
+        13
+       ],
+       [
+        5,
+        7,
+        11,
+        14,
+        21
+       ],
+       [
+        9,
+        17
+       ],
+       [
+        6,
+        12,
+        13,
+        19
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Bonjour",
+        "label": "nom, m. sg.",
+        "steno": "svai/vt@eR",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": "↵",
+        "label": "le retour à la ligne collé",
+        "steno": "w-s",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "monde",
+        "label": "nom, m. sg.",
+        "steno": "maid",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Bonjour\n\nMonde",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "b§.ZuR  m§d",
+      "steno": "svai/vt@eR *k maid",
+      "strokes": [
+       [
+        3,
+        5,
+        12,
+        13
+       ],
+       [
+        5,
+        7,
+        11,
+        14,
+        21
+       ],
+       [
+        10,
+        18
+       ],
+       [
+        6,
+        12,
+        13,
+        19
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Bonjour",
+        "label": "nom, m. sg.",
+        "steno": "svai/vt@eR",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": "¶",
+        "label": "le nouveau paragraphe",
+        "steno": "*k",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "Monde",
+        "label": "nom, m. sg.",
+        "steno": "maid",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "commandes-01",
+    "track": "commandes",
+    "index": 1,
+    "sectionTitle": "Édition",
+    "title": "Leçon un : effacer et valider",
+    "kind": "commandes",
+    "newKeys": [],
+    "newChords": [
+     [
+      4,
+      5,
+      10,
+      13,
+      14,
+      23
+     ],
+     [
+      4,
+      10,
+      11,
+      15,
+      19
+     ],
+     [
+      6,
+      7,
+      16,
+      18
+     ],
+     [
+      9,
+      10,
+      15,
+      17
+     ],
+     [
+      9,
+      10,
+      17
+     ],
+     [
+      9,
+      15,
+      17
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "commandes",
+      "text": "Effacer, valider une ligne. Dans l'exercice rien n'est exécuté : la frappe seule est contrôlée."
+     },
+     {
+      "kind": "commandes",
+      "text": "Entrée ( ↵ ) : w*s."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Entrée (variante) ( Maj+Entrée (variante) ) : w*#s."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Entrée ( Maj+Entrée ) : w-#s."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Tab ( Maj+Tab ) : p*@#d."
+     },
+     {
+      "kind": "commandes",
+      "text": "Retour arrière ( ⌫ ) : mt-jk."
+     },
+     {
+      "kind": "commandes",
+      "text": "Suppression ( ⌦ ) : pv*iel."
+     },
+     {
+      "kind": "commandes",
+      "text": "Dans l'exercice, la commande n'est pas exécutée : seule la frappe est contrôlée."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Cha",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "Sa ",
+      "steno": "pma mt-jk",
+      "strokes": [
+       [
+        4,
+        6,
+        12
+       ],
+       [
+        6,
+        7,
+        16,
+        18
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Chat",
+        "label": "nom, m. sg.",
+        "steno": "pma",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "⌫",
+        "label": "Retour arrière",
+        "steno": "mt-jk",
+        "strokeCount": 1,
+        "spaceBefore": true
+       }
+      ]
+     },
+     {
+      "ortho": "Chien",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "Sj5 ",
+      "steno": "pmRwaie pv*iel",
+      "strokes": [
+       [
+        4,
+        6,
+        8,
+        9,
+        12,
+        13,
+        14
+       ],
+       [
+        4,
+        5,
+        10,
+        13,
+        14,
+        23
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Chien",
+        "label": "nom, m. sg.",
+        "steno": "pmRwaie",
+        "strokeCount": 1,
+        "spaceBefore": false
+       },
+       {
+        "text": "⌦",
+        "label": "Suppression",
+        "steno": "pv*iel",
+        "strokeCount": 1,
+        "spaceBefore": true
+       }
+      ]
+     },
+     {
+      "ortho": "Bonjour\nmonde",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "b§.ZuR  m§d",
+      "steno": "svai/vt@eR w*s maid",
+      "strokes": [
+       [
+        3,
+        5,
+        12,
+        13
+       ],
+       [
+        5,
+        7,
+        11,
+        14,
+        21
+       ],
+       [
+        9,
+        10,
+        17
+       ],
+       [
+        6,
+        12,
+        13,
+        19
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Bonjour",
+        "label": "nom, m. sg.",
+        "steno": "svai/vt@eR",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": "↵",
+        "label": "Entrée",
+        "steno": "w*s",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "monde",
+        "label": "nom, m. sg.",
+        "steno": "maid",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "Entrée",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "w*s",
+      "strokes": [
+       [
+        9,
+        10,
+        17
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Entrée (variante)",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "w*#s",
+      "strokes": [
+       [
+        9,
+        10,
+        15,
+        17
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Entrée",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "w-#s",
+      "strokes": [
+       [
+        9,
+        15,
+        17
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Tab",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "p*@#d",
+      "strokes": [
+       [
+        4,
+        10,
+        11,
+        15,
+        19
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Retour arrière",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "mt-jk",
+      "strokes": [
+       [
+        6,
+        7,
+        16,
+        18
+       ]
+      ],
+      "frequency": 0,
+      "alternates": [
+       {
+        "steno": "mt*jk",
+        "strokes": [
+         [
+          6,
+          7,
+          10,
+          16,
+          18
+         ]
+        ]
+       }
+      ]
+     },
+     {
+      "ortho": "Suppression",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "pv*iel",
+      "strokes": [
+       [
+        4,
+        5,
+        10,
+        13,
+        14,
+        23
+       ]
+      ],
+      "frequency": 0
+     }
+    ]
+   },
+   {
+    "id": "commandes-02",
+    "track": "commandes",
+    "index": 2,
+    "sectionTitle": "Déplacements",
+    "title": "Leçon deux : les flèches",
+    "kind": "commandes",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      4,
+      6,
+      8,
+      17
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      22
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      22,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      18
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      18,
+      22
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      18,
+      22,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      18,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      19
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      19,
+      22
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      19,
+      22,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      19,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      21
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      21,
+      22
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      21,
+      22,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      21,
+      23
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "commandes",
+      "text": "Déplacer le curseur d'un caractère ou d'une ligne ; la même frappe avec l, n, ln... répète le déplacement 2, 3 ou 4 fois."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche gauche ( Flèche gauche ) : spmR-s."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche gauche ×2 ( Flèche gauche ×2 ) : spmR-sl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche gauche ×3 ( Flèche gauche ×3 ) : spmR-sn."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche gauche ×4 ( Flèche gauche ×4 ) : spmR-snl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche droite ( Flèche droite ) : spmR-R."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche droite ×2 ( Flèche droite ×2 ) : spmR-Rl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche droite ×3 ( Flèche droite ×3 ) : spmR-Rn."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche droite ×4 ( Flèche droite ×4 ) : spmR-Rnl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche haut ( Flèche haut ) : spmR-k."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche haut ×2 ( Flèche haut ×2 ) : spmR-kl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche haut ×3 ( Flèche haut ×3 ) : spmR-kn."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche haut ×4 ( Flèche haut ×4 ) : spmR-knl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche bas ( Flèche bas ) : spmR-d."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche bas ×2 ( Flèche bas ×2 ) : spmR-dl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche bas ×3 ( Flèche bas ×3 ) : spmR-dn."
+     },
+     {
+      "kind": "commandes",
+      "text": "Flèche bas ×4 ( Flèche bas ×4 ) : spmR-dnl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Dans l'exercice, la commande n'est pas exécutée : seule la frappe est contrôlée."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Flèche gauche",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-s",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche gauche ×2",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-sl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche gauche ×3",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-sn",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        22
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche gauche ×4",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-snl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        22,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche droite",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-R",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche droite ×2",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-Rl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        21,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche droite ×3",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-Rn",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        21,
+        22
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche droite ×4",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-Rnl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        21,
+        22,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche haut",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-k",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        18
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche haut ×2",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-kl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        18,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche haut ×3",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-kn",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        18,
+        22
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche haut ×4",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-knl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        18,
+        22,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche bas",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-d",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        19
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche bas ×2",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-dl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        19,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche bas ×3",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-dn",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        19,
+        22
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Flèche bas ×4",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-dnl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        19,
+        22,
+        23
+       ]
+      ],
+      "frequency": 0
+     }
+    ]
+   },
+   {
+    "id": "commandes-03",
+    "track": "commandes",
+    "index": 3,
+    "sectionTitle": "Déplacements",
+    "title": "Leçon trois : se déplacer de mot en mot",
+    "kind": "commandes",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      19
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      19,
+      22
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      19,
+      22,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      19,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      19,
+      21
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      19,
+      21,
+      22
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      19,
+      21,
+      22,
+      23
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      19,
+      21,
+      23
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "commandes",
+      "text": "Ctrl + flèche gauche ou droite, répétable 2, 3 ou 4 fois."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Flèche gauche ( Ctrl+Flèche gauche ) : spmR-sd."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Flèche gauche ×2 ( Ctrl+Flèche gauche ×2 ) : spmR-sdl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Flèche gauche ×3 ( Ctrl+Flèche gauche ×3 ) : spmR-sdn."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Flèche gauche ×4 ( Ctrl+Flèche gauche ×4 ) : spmR-sdnl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Flèche droite ( Ctrl+Flèche droite ) : spmR-dR."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Flèche droite ×2 ( Ctrl+Flèche droite ×2 ) : spmR-dRl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Flèche droite ×3 ( Ctrl+Flèche droite ×3 ) : spmR-dRn."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Flèche droite ×4 ( Ctrl+Flèche droite ×4 ) : spmR-dRnl."
+     },
+     {
+      "kind": "commandes",
+      "text": "Dans l'exercice, la commande n'est pas exécutée : seule la frappe est contrôlée."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Ctrl+Flèche gauche",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-sd",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        19
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Flèche gauche ×2",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-sdl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        19,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Flèche gauche ×3",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-sdn",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        19,
+        22
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Flèche gauche ×4",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-sdnl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        19,
+        22,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Flèche droite",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-dR",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        19,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Flèche droite ×2",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-dRl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        19,
+        21,
+        23
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Flèche droite ×3",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-dRn",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        19,
+        21,
+        22
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Flèche droite ×4",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-dRnl",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        19,
+        21,
+        22,
+        23
+       ]
+      ],
+      "frequency": 0
+     }
+    ]
+   },
+   {
+    "id": "commandes-04",
+    "track": "commandes",
+    "index": 4,
+    "sectionTitle": "Déplacements",
+    "title": "Leçon quatre : début, fin, pages",
+    "kind": "commandes",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      4,
+      6,
+      8,
+      16,
+      17
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      16,
+      18,
+      20
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      16,
+      19,
+      20
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      18,
+      21
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      17,
+      19,
+      21
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      20,
+      21
+     ],
+     [
+      4,
+      6,
+      7,
+      17
+     ],
+     [
+      4,
+      6,
+      7,
+      21
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "commandes",
+      "text": "Début et fin de ligne ou de document, page précédente ou suivante, retour et avance dans l'historique."
+     },
+     {
+      "kind": "commandes",
+      "text": "Alt+Flèche gauche ( Alt+Flèche gauche ) : pmt-s."
+     },
+     {
+      "kind": "commandes",
+      "text": "Alt+Flèche droite ( Alt+Flèche droite ) : pmt-R."
+     },
+     {
+      "kind": "commandes",
+      "text": "Début ( Début ) : spmR-js."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Début ( Ctrl+Début ) : spmR-jkt."
+     },
+     {
+      "kind": "commandes",
+      "text": "Fin ( Fin ) : spmR-tR."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Fin ( Ctrl+Fin ) : spmR-sdR."
+     },
+     {
+      "kind": "commandes",
+      "text": "Page précédente ( Page précédente ) : spmR-skR."
+     },
+     {
+      "kind": "commandes",
+      "text": "Page suivante ( Page suivante ) : spmR-jdt."
+     },
+     {
+      "kind": "commandes",
+      "text": "Dans l'exercice, la commande n'est pas exécutée : seule la frappe est contrôlée."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Alt+Flèche gauche",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "pmt-s",
+      "strokes": [
+       [
+        4,
+        6,
+        7,
+        17
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Alt+Flèche droite",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "pmt-R",
+      "strokes": [
+       [
+        4,
+        6,
+        7,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Début",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-js",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        16,
+        17
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Début",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-jkt",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        16,
+        18,
+        20
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Fin",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-tR",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        20,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Fin",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-sdR",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        19,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Page précédente",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-skR",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        17,
+        18,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Page suivante",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR-jdt",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        16,
+        19,
+        20
+       ]
+      ],
+      "frequency": 0
+     }
+    ]
+   },
+   {
+    "id": "commandes-05",
+    "track": "commandes",
+    "index": 5,
+    "sectionTitle": "Sélection",
+    "title": "Leçon cinq : sélectionner",
+    "kind": "commandes",
+    "newKeys": [],
+    "newChords": [
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      16,
+      17
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      16,
+      19,
+      20
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      17
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      17,
+      18,
+      21
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      17,
+      19
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      18
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      19
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      19,
+      21
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      20,
+      21
+     ],
+     [
+      3,
+      4,
+      6,
+      8,
+      10,
+      21
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "commandes",
+      "text": "Les mêmes déplacements avec Maj enfoncée : ils sélectionnent le texte parcouru."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Maj+Flèche gauche ( Ctrl+Maj+Flèche gauche ) : spmR*sd."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Flèche gauche ( Maj+Flèche gauche ) : spmR*s."
+     },
+     {
+      "kind": "commandes",
+      "text": "Ctrl+Maj+Flèche droite ( Ctrl+Maj+Flèche droite ) : spmR*dR."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Flèche droite ( Maj+Flèche droite ) : spmR*R."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Flèche haut ( Maj+Flèche haut ) : spmR*k."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Flèche bas ( Maj+Flèche bas ) : spmR*d."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Début ( Maj+Début ) : spmR*js."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Fin ( Maj+Fin ) : spmR*tR."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Page précédente ( Maj+Page précédente ) : spmR*skR."
+     },
+     {
+      "kind": "commandes",
+      "text": "Maj+Page suivante ( Maj+Page suivante ) : spmR*jdt."
+     },
+     {
+      "kind": "commandes",
+      "text": "Dans l'exercice, la commande n'est pas exécutée : seule la frappe est contrôlée."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "Ctrl+Maj+Flèche gauche",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*sd",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        17,
+        19
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Flèche gauche",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*s",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        17
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Ctrl+Maj+Flèche droite",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*dR",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        19,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Flèche droite",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*R",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Flèche haut",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*k",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        18
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Flèche bas",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*d",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        19
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Début",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*js",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        16,
+        17
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Fin",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*tR",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        20,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Page précédente",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*skR",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        17,
+        18,
+        21
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "Maj+Page suivante",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "spmR*jdt",
+      "strokes": [
+       [
+        3,
+        4,
+        6,
+        8,
+        10,
+        16,
+        19,
+        20
+       ]
+      ],
+      "frequency": 0
+     }
+    ]
+   },
+   {
+    "id": "commandes-06",
+    "track": "commandes",
+    "index": 6,
+    "sectionTitle": "Casse et corrections",
+    "title": "Leçon six : majuscules et corrections",
+    "kind": "commandes",
+    "newKeys": [],
+    "newChords": [
+     [
+      5,
+      6,
+      10,
+      11
+     ],
+     [
+      10,
+      15
+     ]
+    ],
+    "rules": [
+     {
+      "kind": "commandes",
+      "text": "Mettre une majuscule au mot suivant sans espace, corriger la frappe précédente."
+     },
+     {
+      "kind": "commandes",
+      "text": "La majuscule au mot suivant, sans espace ( ⇧ ) : vm*@."
+     },
+     {
+      "kind": "commandes",
+      "text": "La bascule de l'astérisque sur la frappe précédente ( * ) : *#."
+     },
+     {
+      "kind": "commandes",
+      "text": "Dans l'exercice, la commande n'est pas exécutée : seule la frappe est contrôlée."
+     }
+    ],
+    "words": [
+     {
+      "ortho": "BonjourMonde",
+      "before": "",
+      "after": "",
+      "label": "",
+      "phonology": "b§.ZuR  m§d",
+      "steno": "svai/vt@eR vm*@ maid",
+      "strokes": [
+       [
+        3,
+        5,
+        12,
+        13
+       ],
+       [
+        5,
+        7,
+        11,
+        14,
+        21
+       ],
+       [
+        5,
+        6,
+        10,
+        11
+       ],
+       [
+        6,
+        12,
+        13,
+        19
+       ]
+      ],
+      "frequency": 0,
+      "segments": [
+       {
+        "text": "Bonjour",
+        "label": "nom, m. sg.",
+        "steno": "svai/vt@eR",
+        "strokeCount": 2,
+        "spaceBefore": false
+       },
+       {
+        "text": "⇧",
+        "label": "la majuscule au mot suivant, sans espace",
+        "steno": "vm*@",
+        "strokeCount": 1,
+        "spaceBefore": true
+       },
+       {
+        "text": "Monde",
+        "label": "nom, m. sg.",
+        "steno": "maid",
+        "strokeCount": 1,
+        "spaceBefore": false
+       }
+      ]
+     },
+     {
+      "ortho": "la majuscule au mot suivant, sans espace",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "vm*@",
+      "strokes": [
+       [
+        5,
+        6,
+        10,
+        11
+       ]
+      ],
+      "frequency": 0
+     },
+     {
+      "ortho": "la bascule de l'astérisque sur la frappe précédente",
+      "before": "",
+      "after": "",
+      "label": "commande (non exécutée)",
+      "phonology": "",
+      "steno": "*#",
+      "strokes": [
+       [
+        10,
+        15
+       ]
+      ],
+      "frequency": 0
+     }
+    ]
+   }
+  ]
+ },
+ "entries": {
+  "plover": [
+   {
+    "name": "le point",
+    "glyph": ".",
+    "family": "point_virgule",
+    "primary": "pm-kt",
+    "chords": [
+     "pm-kt"
+    ],
+    "output": ".",
+    "keywords": []
+   },
+   {
+    "name": "la virgule",
+    "glyph": ",",
+    "family": "point_virgule",
+    "primary": "vt-dR",
+    "chords": [
+     "vt-dR"
+    ],
+    "output": ",",
+    "keywords": []
+   },
+   {
+    "name": "les points de suspension",
+    "glyph": "…",
+    "family": "point_virgule",
+    "primary": "st-dl",
+    "chords": [
+     "st-dl"
+    ],
+    "output": "...",
+    "keywords": []
+   },
+   {
+    "name": "les points de suspension suivis d'une majuscule",
+    "glyph": "…",
+    "family": "point_virgule",
+    "primary": "svt-dRl",
+    "chords": [
+     "svt-dRl"
+    ],
+    "output": "...",
+    "keywords": []
+   },
+   {
+    "name": "le point d'interrogation",
+    "glyph": "?",
+    "family": "marques",
+    "primary": "R-j",
+    "chords": [
+     "R-j",
+     "spmR-",
+     "vt-kt"
+    ],
+    "output": " ?",
+    "keywords": []
+   },
+   {
+    "name": "le point d'exclamation",
+    "glyph": "!",
+    "family": "marques",
+    "primary": "pm-dR",
+    "chords": [
+     "pm-dR"
+    ],
+    "output": " !",
+    "keywords": []
+   },
+   {
+    "name": "les deux-points",
+    "glyph": ":",
+    "family": "marques",
+    "primary": "spmR-jktn",
+    "chords": [
+     "spmR-jktn"
+    ],
+    "output": " :",
+    "keywords": []
+   },
+   {
+    "name": "le point-virgule",
+    "glyph": ";",
+    "family": "marques",
+    "primary": "spmR*jktn",
+    "chords": [
+     "spmR*jktn"
+    ],
+    "output": " ;",
+    "keywords": []
+   },
+   {
+    "name": "le guillemet ouvrant «",
+    "glyph": "«",
+    "family": "guillemets",
+    "primary": "vt-Rl",
+    "chords": [
+     "vt-Rl"
+    ],
+    "output": "« ",
+    "keywords": [
+     "\""
+    ]
+   },
+   {
+    "name": "le guillemet fermant »",
+    "glyph": "»",
+    "family": "guillemets",
+    "primary": "vw-Rl",
+    "chords": [
+     "vw-Rl",
+     "vt*Rl"
+    ],
+    "output": " »",
+    "keywords": [
+     "\""
+    ]
+   },
+   {
+    "name": "le guillemet droit ouvrant",
+    "glyph": "\"",
+    "family": "guillemets",
+    "primary": "vt@Rl",
+    "chords": [
+     "vt@Rl"
+    ],
+    "output": "\"",
+    "keywords": []
+   },
+   {
+    "name": "le guillemet droit fermant",
+    "glyph": "\"",
+    "family": "guillemets",
+    "primary": "vw@Rl",
+    "chords": [
+     "vw@Rl"
+    ],
+    "output": "\"",
+    "keywords": []
+   },
+   {
+    "name": "le guillemet intérieur ouvrant “",
+    "glyph": "“",
+    "family": "guillemets_simples",
+    "primary": "vw-sR",
+    "chords": [
+     "vw-sR"
+    ],
+    "output": "“",
+    "keywords": [
+     "'"
+    ]
+   },
+   {
+    "name": "le guillemet intérieur fermant ”",
+    "glyph": "”",
+    "family": "guillemets_simples",
+    "primary": "vw*sR",
+    "chords": [
+     "vw*sR"
+    ],
+    "output": "”",
+    "keywords": [
+     "'"
+    ]
+   },
+   {
+    "name": "la parenthèse ouvrante",
+    "glyph": "(",
+    "family": "parentheses",
+    "primary": "spmR-jktnl",
+    "chords": [
+     "spmR-jktnl"
+    ],
+    "output": "(",
+    "keywords": []
+   },
+   {
+    "name": "la parenthèse fermante",
+    "glyph": ")",
+    "family": "parentheses",
+    "primary": "spmR*jktnl",
+    "chords": [
+     "spmR*jktnl"
+    ],
+    "output": ")",
+    "keywords": []
+   },
+   {
+    "name": "le crochet ouvrant",
+    "glyph": "[",
+    "family": "parentheses",
+    "primary": "mtw-dRn",
+    "chords": [
+     "mtw-dRn"
+    ],
+    "output": "[",
+    "keywords": []
+   },
+   {
+    "name": "le crochet fermant",
+    "glyph": "]",
+    "family": "parentheses",
+    "primary": "mtw*dRn",
+    "chords": [
+     "mtw*dRn"
+    ],
+    "output": "]",
+    "keywords": []
+   },
+   {
+    "name": "la virgule collée",
+    "glyph": ",",
+    "family": "colles",
+    "primary": "v-l",
+    "chords": [
+     "v-l"
+    ],
+    "output": ",",
+    "keywords": []
+   },
+   {
+    "name": "le point collé",
+    "glyph": ".",
+    "family": "colles",
+    "primary": "m-k",
+    "chords": [
+     "m-k"
+    ],
+    "output": ".",
+    "keywords": []
+   },
+   {
+    "name": "les deux-points collés",
+    "glyph": ":",
+    "family": "colles",
+    "primary": "v-t",
+    "chords": [
+     "v-t"
+    ],
+    "output": ":",
+    "keywords": []
+   },
+   {
+    "name": "le trait d'union",
+    "glyph": "-",
+    "family": "colles",
+    "primary": "t-d",
+    "chords": [
+     "t-d",
+     "R-kd"
+    ],
+    "output": "-",
+    "keywords": []
+   },
+   {
+    "name": "la barre oblique",
+    "glyph": "/",
+    "family": "colles",
+    "primary": "svmt-k",
+    "chords": [
+     "svmt-k"
+    ],
+    "output": "/",
+    "keywords": []
+   },
+   {
+    "name": "la barre oblique inverse",
+    "glyph": "\\",
+    "family": "colles",
+    "primary": "svmt*k",
+    "chords": [
+     "svmt*k"
+    ],
+    "output": "\\",
+    "keywords": []
+   },
+   {
+    "name": "l'arobase",
+    "glyph": "@",
+    "family": "colles",
+    "primary": "*@n",
+    "chords": [
+     "*@n"
+    ],
+    "output": "@",
+    "keywords": []
+   },
+   {
+    "name": "l'apostrophe collée au mot précédent",
+    "glyph": "'",
+    "family": "colles",
+    "primary": "-kdn",
+    "chords": [
+     "-kdn",
+     "svt*n"
+    ],
+    "output": "'",
+    "keywords": []
+   },
+   {
+    "name": "l'apostrophe collée au mot suivant",
+    "glyph": "'",
+    "family": "colles",
+    "primary": "svt-n",
+    "chords": [
+     "svt-n"
+    ],
+    "output": "'",
+    "keywords": []
+   },
+   {
+    "name": "le tiret",
+    "glyph": "-",
+    "family": "colles",
+    "primary": "R*kd",
+    "chords": [
+     "R*kd"
+    ],
+    "output": "-",
+    "keywords": []
+   },
+   {
+    "name": "le double tiret",
+    "glyph": "--",
+    "family": "colles",
+    "primary": "R*kdm",
+    "chords": [
+     "R*kdm"
+    ],
+    "output": "--",
+    "keywords": []
+   },
+   {
+    "name": "la colle (rien, mais les mots voisins se collent)",
+    "glyph": "^",
+    "family": "colles",
+    "primary": "sm-",
+    "chords": [
+     "sm-",
+     "pv-tl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "l'espace",
+    "glyph": "␣",
+    "family": "espaces",
+    "primary": "s-k",
+    "chords": [
+     "s-k"
+    ],
+    "output": " ",
+    "keywords": []
+   },
+   {
+    "name": "le retour à la ligne collé",
+    "glyph": "↵",
+    "family": "espaces",
+    "primary": "w-s",
+    "chords": [
+     "w-s"
+    ],
+    "output": "\n",
+    "keywords": []
+   },
+   {
+    "name": "la majuscule au mot suivant, sans espace",
+    "glyph": "⇧",
+    "family": "casse",
+    "primary": "vm*@",
+    "chords": [
+     "vm*@"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "la bascule de l'astérisque sur la frappe précédente",
+    "glyph": "*",
+    "family": "casse",
+    "primary": "*#",
+    "chords": [
+     "*#"
+    ],
+    "output": "*",
+    "keywords": []
+   },
+   {
+    "name": "Flèche gauche",
+    "glyph": "Flèche gauche",
+    "family": "fleches",
+    "primary": "spmR-s",
+    "chords": [
+     "spmR-s"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche gauche ×2",
+    "glyph": "Flèche gauche ×2",
+    "family": "fleches",
+    "primary": "spmR-sl",
+    "chords": [
+     "spmR-sl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche gauche ×3",
+    "glyph": "Flèche gauche ×3",
+    "family": "fleches",
+    "primary": "spmR-sn",
+    "chords": [
+     "spmR-sn"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche gauche ×4",
+    "glyph": "Flèche gauche ×4",
+    "family": "fleches",
+    "primary": "spmR-snl",
+    "chords": [
+     "spmR-snl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Alt+Flèche gauche",
+    "glyph": "Alt+Flèche gauche",
+    "family": "debut_fin",
+    "primary": "pmt-s",
+    "chords": [
+     "pmt-s"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Flèche gauche",
+    "glyph": "Ctrl+Flèche gauche",
+    "family": "mots",
+    "primary": "spmR-sd",
+    "chords": [
+     "spmR-sd"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Flèche gauche ×2",
+    "glyph": "Ctrl+Flèche gauche ×2",
+    "family": "mots",
+    "primary": "spmR-sdl",
+    "chords": [
+     "spmR-sdl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Flèche gauche ×3",
+    "glyph": "Ctrl+Flèche gauche ×3",
+    "family": "mots",
+    "primary": "spmR-sdn",
+    "chords": [
+     "spmR-sdn"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Flèche gauche ×4",
+    "glyph": "Ctrl+Flèche gauche ×4",
+    "family": "mots",
+    "primary": "spmR-sdnl",
+    "chords": [
+     "spmR-sdnl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Maj+Flèche gauche",
+    "glyph": "Ctrl+Maj+Flèche gauche",
+    "family": "selection",
+    "primary": "spmR*sd",
+    "chords": [
+     "spmR*sd"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Flèche gauche",
+    "glyph": "Maj+Flèche gauche",
+    "family": "selection",
+    "primary": "spmR*s",
+    "chords": [
+     "spmR*s"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche droite",
+    "glyph": "Flèche droite",
+    "family": "fleches",
+    "primary": "spmR-R",
+    "chords": [
+     "spmR-R"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche droite ×2",
+    "glyph": "Flèche droite ×2",
+    "family": "fleches",
+    "primary": "spmR-Rl",
+    "chords": [
+     "spmR-Rl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche droite ×3",
+    "glyph": "Flèche droite ×3",
+    "family": "fleches",
+    "primary": "spmR-Rn",
+    "chords": [
+     "spmR-Rn"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche droite ×4",
+    "glyph": "Flèche droite ×4",
+    "family": "fleches",
+    "primary": "spmR-Rnl",
+    "chords": [
+     "spmR-Rnl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Alt+Flèche droite",
+    "glyph": "Alt+Flèche droite",
+    "family": "debut_fin",
+    "primary": "pmt-R",
+    "chords": [
+     "pmt-R"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Flèche droite",
+    "glyph": "Ctrl+Flèche droite",
+    "family": "mots",
+    "primary": "spmR-dR",
+    "chords": [
+     "spmR-dR"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Flèche droite ×2",
+    "glyph": "Ctrl+Flèche droite ×2",
+    "family": "mots",
+    "primary": "spmR-dRl",
+    "chords": [
+     "spmR-dRl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Flèche droite ×3",
+    "glyph": "Ctrl+Flèche droite ×3",
+    "family": "mots",
+    "primary": "spmR-dRn",
+    "chords": [
+     "spmR-dRn"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Flèche droite ×4",
+    "glyph": "Ctrl+Flèche droite ×4",
+    "family": "mots",
+    "primary": "spmR-dRnl",
+    "chords": [
+     "spmR-dRnl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Maj+Flèche droite",
+    "glyph": "Ctrl+Maj+Flèche droite",
+    "family": "selection",
+    "primary": "spmR*dR",
+    "chords": [
+     "spmR*dR"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Flèche droite",
+    "glyph": "Maj+Flèche droite",
+    "family": "selection",
+    "primary": "spmR*R",
+    "chords": [
+     "spmR*R"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche haut",
+    "glyph": "Flèche haut",
+    "family": "fleches",
+    "primary": "spmR-k",
+    "chords": [
+     "spmR-k"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche haut ×2",
+    "glyph": "Flèche haut ×2",
+    "family": "fleches",
+    "primary": "spmR-kl",
+    "chords": [
+     "spmR-kl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche haut ×3",
+    "glyph": "Flèche haut ×3",
+    "family": "fleches",
+    "primary": "spmR-kn",
+    "chords": [
+     "spmR-kn"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche haut ×4",
+    "glyph": "Flèche haut ×4",
+    "family": "fleches",
+    "primary": "spmR-knl",
+    "chords": [
+     "spmR-knl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Flèche haut",
+    "glyph": "Maj+Flèche haut",
+    "family": "selection",
+    "primary": "spmR*k",
+    "chords": [
+     "spmR*k"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche bas",
+    "glyph": "Flèche bas",
+    "family": "fleches",
+    "primary": "spmR-d",
+    "chords": [
+     "spmR-d"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche bas ×2",
+    "glyph": "Flèche bas ×2",
+    "family": "fleches",
+    "primary": "spmR-dl",
+    "chords": [
+     "spmR-dl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche bas ×3",
+    "glyph": "Flèche bas ×3",
+    "family": "fleches",
+    "primary": "spmR-dn",
+    "chords": [
+     "spmR-dn"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche bas ×4",
+    "glyph": "Flèche bas ×4",
+    "family": "fleches",
+    "primary": "spmR-dnl",
+    "chords": [
+     "spmR-dnl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Flèche bas",
+    "glyph": "Maj+Flèche bas",
+    "family": "selection",
+    "primary": "spmR*d",
+    "chords": [
+     "spmR*d"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Début",
+    "glyph": "Début",
+    "family": "debut_fin",
+    "primary": "spmR-js",
+    "chords": [
+     "spmR-js"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Début",
+    "glyph": "Ctrl+Début",
+    "family": "debut_fin",
+    "primary": "spmR-jkt",
+    "chords": [
+     "spmR-jkt"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Début",
+    "glyph": "Maj+Début",
+    "family": "selection",
+    "primary": "spmR*js",
+    "chords": [
+     "spmR*js"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Fin",
+    "glyph": "Fin",
+    "family": "debut_fin",
+    "primary": "spmR-tR",
+    "chords": [
+     "spmR-tR"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Fin",
+    "glyph": "Ctrl+Fin",
+    "family": "debut_fin",
+    "primary": "spmR-sdR",
+    "chords": [
+     "spmR-sdR"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Fin",
+    "glyph": "Maj+Fin",
+    "family": "selection",
+    "primary": "spmR*tR",
+    "chords": [
+     "spmR*tR"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Page précédente",
+    "glyph": "Page précédente",
+    "family": "debut_fin",
+    "primary": "spmR-skR",
+    "chords": [
+     "spmR-skR"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Page précédente",
+    "glyph": "Maj+Page précédente",
+    "family": "selection",
+    "primary": "spmR*skR",
+    "chords": [
+     "spmR*skR"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Page suivante",
+    "glyph": "Page suivante",
+    "family": "debut_fin",
+    "primary": "spmR-jdt",
+    "chords": [
+     "spmR-jdt"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Page suivante",
+    "glyph": "Maj+Page suivante",
+    "family": "selection",
+    "primary": "spmR*jdt",
+    "chords": [
+     "spmR*jdt"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Entrée",
+    "glyph": "↵",
+    "family": "edition",
+    "primary": "w*s",
+    "chords": [
+     "w*s"
+    ],
+    "output": "\n",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Entrée (variante)",
+    "glyph": "Maj+Entrée (variante)",
+    "family": "edition",
+    "primary": "w*#s",
+    "chords": [
+     "w*#s"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Entrée",
+    "glyph": "Maj+Entrée",
+    "family": "edition",
+    "primary": "w-#s",
+    "chords": [
+     "w-#s"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Tab",
+    "glyph": "Maj+Tab",
+    "family": "edition",
+    "primary": "p*@#d",
+    "chords": [
+     "p*@#d"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Retour arrière",
+    "glyph": "⌫",
+    "family": "edition",
+    "primary": "mt-jk",
+    "chords": [
+     "mt-jk",
+     "mt*jk"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Suppression",
+    "glyph": "⌦",
+    "family": "edition",
+    "primary": "pv*iel",
+    "chords": [
+     "pv*iel"
+    ],
+    "output": "",
+    "keywords": []
+   }
+  ],
+  "pluvier": [
+   {
+    "name": "le point",
+    "glyph": ".",
+    "family": "point_virgule",
+    "primary": "-jktn",
+    "chords": [
+     "-jktn"
+    ],
+    "output": ".",
+    "keywords": []
+   },
+   {
+    "name": "la virgule",
+    "glyph": ",",
+    "family": "point_virgule",
+    "primary": "-sdRl",
+    "chords": [
+     "-sdRl"
+    ],
+    "output": ",",
+    "keywords": []
+   },
+   {
+    "name": "les points de suspension",
+    "glyph": "…",
+    "family": "point_virgule",
+    "primary": "tRwajk",
+    "chords": [
+     "tRwajk",
+     "-jktn/-jktn/-jktn"
+    ],
+    "output": "...",
+    "keywords": []
+   },
+   {
+    "name": "les points de suspension suivis d'une majuscule",
+    "glyph": "…",
+    "family": "point_virgule",
+    "primary": "svt-dRl",
+    "chords": [
+     "svt-dRl"
+    ],
+    "output": "...",
+    "keywords": []
+   },
+   {
+    "name": "le point d'interrogation",
+    "glyph": "?",
+    "family": "marques",
+    "primary": "R-j",
+    "chords": [
+     "R-j",
+     "spmR-",
+     "vt-kt"
+    ],
+    "output": " ?",
+    "keywords": []
+   },
+   {
+    "name": "le point d'exclamation",
+    "glyph": "!",
+    "family": "marques",
+    "primary": "spmR-jktn",
+    "chords": [
+     "spmR-jktn"
+    ],
+    "output": " !",
+    "keywords": []
+   },
+   {
+    "name": "les deux-points",
+    "glyph": ":",
+    "family": "marques",
+    "primary": "-jktn/-jktn",
+    "chords": [
+     "-jktn/-jktn"
+    ],
+    "output": " :",
+    "keywords": []
+   },
+   {
+    "name": "le point-virgule",
+    "glyph": ";",
+    "family": "marques",
+    "primary": "-jktn/-sdRl",
+    "chords": [
+     "-jktn/-sdRl"
+    ],
+    "output": " ;",
+    "keywords": []
+   },
+   {
+    "name": "le guillemet ouvrant «",
+    "glyph": "«",
+    "family": "guillemets",
+    "primary": "ks*ij",
+    "chords": [
+     "ks*ij"
+    ],
+    "output": "« ",
+    "keywords": [
+     "\""
+    ]
+   },
+   {
+    "name": "le guillemet fermant »",
+    "glyph": "»",
+    "family": "guillemets",
+    "primary": "ks*ij/ks*ij",
+    "chords": [
+     "ks*ij/ks*ij"
+    ],
+    "output": " »",
+    "keywords": [
+     "\""
+    ]
+   },
+   {
+    "name": "les deux-points suivis d'un guillemet ouvrant",
+    "glyph": ":«",
+    "family": "guillemets",
+    "primary": "pvij",
+    "chords": [
+     "pvij"
+    ],
+    "output": " : « ",
+    "keywords": [
+     "\""
+    ]
+   },
+   {
+    "name": "le guillemet droit ouvrant",
+    "glyph": "\"",
+    "family": "guillemets",
+    "primary": "vt@Rl",
+    "chords": [
+     "vt@Rl"
+    ],
+    "output": "\"",
+    "keywords": []
+   },
+   {
+    "name": "le guillemet droit fermant",
+    "glyph": "\"",
+    "family": "guillemets",
+    "primary": "vw@Rl",
+    "chords": [
+     "vw@Rl"
+    ],
+    "output": "\"",
+    "keywords": []
+   },
+   {
+    "name": "le guillemet intérieur ouvrant “",
+    "glyph": "“",
+    "family": "guillemets_simples",
+    "primary": "vw-sR",
+    "chords": [
+     "vw-sR"
+    ],
+    "output": "“",
+    "keywords": [
+     "'"
+    ]
+   },
+   {
+    "name": "le guillemet intérieur fermant ”",
+    "glyph": "”",
+    "family": "guillemets_simples",
+    "primary": "vw*sR",
+    "chords": [
+     "vw*sR"
+    ],
+    "output": "”",
+    "keywords": [
+     "'"
+    ]
+   },
+   {
+    "name": "la parenthèse ouvrante",
+    "glyph": "(",
+    "family": "parentheses",
+    "primary": "pR-nl",
+    "chords": [
+     "pR-nl"
+    ],
+    "output": "(",
+    "keywords": []
+   },
+   {
+    "name": "la parenthèse fermante",
+    "glyph": ")",
+    "family": "parentheses",
+    "primary": "pR-nl/pR-nl",
+    "chords": [
+     "pR-nl/pR-nl"
+    ],
+    "output": ")",
+    "keywords": []
+   },
+   {
+    "name": "le crochet ouvrant",
+    "glyph": "[",
+    "family": "parentheses",
+    "primary": "mtw-dRn",
+    "chords": [
+     "mtw-dRn"
+    ],
+    "output": "[",
+    "keywords": []
+   },
+   {
+    "name": "le crochet fermant",
+    "glyph": "]",
+    "family": "parentheses",
+    "primary": "mtw*dRn",
+    "chords": [
+     "mtw*dRn"
+    ],
+    "output": "]",
+    "keywords": []
+   },
+   {
+    "name": "la virgule collée",
+    "glyph": ",",
+    "family": "colles",
+    "primary": "-jsdRl",
+    "chords": [
+     "-jsdRl"
+    ],
+    "output": ",",
+    "keywords": []
+   },
+   {
+    "name": "le point collé",
+    "glyph": ".",
+    "family": "colles",
+    "primary": "-skdRl",
+    "chords": [
+     "-skdRl"
+    ],
+    "output": ".",
+    "keywords": []
+   },
+   {
+    "name": "les deux-points collés",
+    "glyph": ":",
+    "family": "colles",
+    "primary": "v-t",
+    "chords": [
+     "v-t"
+    ],
+    "output": ":",
+    "keywords": []
+   },
+   {
+    "name": "le trait d'union",
+    "glyph": "-",
+    "family": "colles",
+    "primary": "t-d",
+    "chords": [
+     "t-d",
+     "R-kd"
+    ],
+    "output": "-",
+    "keywords": []
+   },
+   {
+    "name": "la barre oblique",
+    "glyph": "/",
+    "family": "colles",
+    "primary": "svmt-k",
+    "chords": [
+     "svmt-k"
+    ],
+    "output": "/",
+    "keywords": []
+   },
+   {
+    "name": "la barre oblique inverse",
+    "glyph": "\\",
+    "family": "colles",
+    "primary": "svmt*k",
+    "chords": [
+     "svmt*k"
+    ],
+    "output": "\\",
+    "keywords": []
+   },
+   {
+    "name": "l'arobase",
+    "glyph": "@",
+    "family": "colles",
+    "primary": "*@n",
+    "chords": [
+     "*@n"
+    ],
+    "output": "@",
+    "keywords": []
+   },
+   {
+    "name": "le pour cent",
+    "glyph": "%",
+    "family": "colles",
+    "primary": "pR-n",
+    "chords": [
+     "pR-n"
+    ],
+    "output": "%",
+    "keywords": []
+   },
+   {
+    "name": "l'apostrophe",
+    "glyph": "'",
+    "family": "colles",
+    "primary": "stR*esd",
+    "chords": [
+     "stR*esd"
+    ],
+    "output": "'",
+    "keywords": []
+   },
+   {
+    "name": "l'apostrophe collée au mot précédent",
+    "glyph": "'",
+    "family": "colles",
+    "primary": "-kdn",
+    "chords": [
+     "-kdn",
+     "svt*n"
+    ],
+    "output": "'",
+    "keywords": []
+   },
+   {
+    "name": "l'apostrophe collée au mot suivant",
+    "glyph": "'",
+    "family": "colles",
+    "primary": "svt-n",
+    "chords": [
+     "svt-n"
+    ],
+    "output": "'",
+    "keywords": []
+   },
+   {
+    "name": "le tiret",
+    "glyph": "-",
+    "family": "colles",
+    "primary": "t*ie#R",
+    "chords": [
+     "t*ie#R"
+    ],
+    "output": "-",
+    "keywords": []
+   },
+   {
+    "name": "le double tiret",
+    "glyph": "--",
+    "family": "colles",
+    "primary": "R*kdm",
+    "chords": [
+     "R*kdm"
+    ],
+    "output": "--",
+    "keywords": []
+   },
+   {
+    "name": "la colle (rien, mais les mots voisins se collent)",
+    "glyph": "^",
+    "family": "colles",
+    "primary": "sm-",
+    "chords": [
+     "sm-",
+     "pv-tl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "l'espace",
+    "glyph": "␣",
+    "family": "espaces",
+    "primary": "s-k",
+    "chords": [
+     "s-k"
+    ],
+    "output": " ",
+    "keywords": []
+   },
+   {
+    "name": "le retour à la ligne collé",
+    "glyph": "↵",
+    "family": "espaces",
+    "primary": "w-s",
+    "chords": [
+     "w-s"
+    ],
+    "output": "\n",
+    "keywords": []
+   },
+   {
+    "name": "le nouveau paragraphe",
+    "glyph": "¶",
+    "family": "espaces",
+    "primary": "*k",
+    "chords": [
+     "*k"
+    ],
+    "output": "\n\n",
+    "keywords": []
+   },
+   {
+    "name": "la majuscule au mot suivant, sans espace",
+    "glyph": "⇧",
+    "family": "casse",
+    "primary": "vm*@",
+    "chords": [
+     "vm*@"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "la bascule de l'astérisque sur la frappe précédente",
+    "glyph": "*",
+    "family": "casse",
+    "primary": "*#",
+    "chords": [
+     "*#"
+    ],
+    "output": "*",
+    "keywords": []
+   },
+   {
+    "name": "Flèche gauche",
+    "glyph": "Flèche gauche",
+    "family": "fleches",
+    "primary": "spmR-s",
+    "chords": [
+     "spmR-s"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche gauche ×2",
+    "glyph": "Flèche gauche ×2",
+    "family": "fleches",
+    "primary": "spmR-sl",
+    "chords": [
+     "spmR-sl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche gauche ×3",
+    "glyph": "Flèche gauche ×3",
+    "family": "fleches",
+    "primary": "spmR-sn",
+    "chords": [
+     "spmR-sn"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche gauche ×4",
+    "glyph": "Flèche gauche ×4",
+    "family": "fleches",
+    "primary": "spmR-snl",
+    "chords": [
+     "spmR-snl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Alt+Flèche gauche",
+    "glyph": "Alt+Flèche gauche",
+    "family": "debut_fin",
+    "primary": "pmt-s",
+    "chords": [
+     "pmt-s"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Flèche gauche",
+    "glyph": "Ctrl+Flèche gauche",
+    "family": "mots",
+    "primary": "spmR-sd",
+    "chords": [
+     "spmR-sd"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Flèche gauche ×2",
+    "glyph": "Ctrl+Flèche gauche ×2",
+    "family": "mots",
+    "primary": "spmR-sdl",
+    "chords": [
+     "spmR-sdl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Flèche gauche ×3",
+    "glyph": "Ctrl+Flèche gauche ×3",
+    "family": "mots",
+    "primary": "spmR-sdn",
+    "chords": [
+     "spmR-sdn"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Flèche gauche ×4",
+    "glyph": "Ctrl+Flèche gauche ×4",
+    "family": "mots",
+    "primary": "spmR-sdnl",
+    "chords": [
+     "spmR-sdnl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Maj+Flèche gauche",
+    "glyph": "Ctrl+Maj+Flèche gauche",
+    "family": "selection",
+    "primary": "spmR*sd",
+    "chords": [
+     "spmR*sd"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Flèche gauche",
+    "glyph": "Maj+Flèche gauche",
+    "family": "selection",
+    "primary": "spmR*s",
+    "chords": [
+     "spmR*s"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche droite",
+    "glyph": "Flèche droite",
+    "family": "fleches",
+    "primary": "spmR-R",
+    "chords": [
+     "spmR-R"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche droite ×2",
+    "glyph": "Flèche droite ×2",
+    "family": "fleches",
+    "primary": "spmR-Rl",
+    "chords": [
+     "spmR-Rl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche droite ×3",
+    "glyph": "Flèche droite ×3",
+    "family": "fleches",
+    "primary": "spmR-Rn",
+    "chords": [
+     "spmR-Rn"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche droite ×4",
+    "glyph": "Flèche droite ×4",
+    "family": "fleches",
+    "primary": "spmR-Rnl",
+    "chords": [
+     "spmR-Rnl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Alt+Flèche droite",
+    "glyph": "Alt+Flèche droite",
+    "family": "debut_fin",
+    "primary": "pmt-R",
+    "chords": [
+     "pmt-R"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Flèche droite",
+    "glyph": "Ctrl+Flèche droite",
+    "family": "mots",
+    "primary": "spmR-dR",
+    "chords": [
+     "spmR-dR"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Flèche droite ×2",
+    "glyph": "Ctrl+Flèche droite ×2",
+    "family": "mots",
+    "primary": "spmR-dRl",
+    "chords": [
+     "spmR-dRl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Flèche droite ×3",
+    "glyph": "Ctrl+Flèche droite ×3",
+    "family": "mots",
+    "primary": "spmR-dRn",
+    "chords": [
+     "spmR-dRn"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Flèche droite ×4",
+    "glyph": "Ctrl+Flèche droite ×4",
+    "family": "mots",
+    "primary": "spmR-dRnl",
+    "chords": [
+     "spmR-dRnl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Maj+Flèche droite",
+    "glyph": "Ctrl+Maj+Flèche droite",
+    "family": "selection",
+    "primary": "spmR*dR",
+    "chords": [
+     "spmR*dR"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Flèche droite",
+    "glyph": "Maj+Flèche droite",
+    "family": "selection",
+    "primary": "spmR*R",
+    "chords": [
+     "spmR*R"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche haut",
+    "glyph": "Flèche haut",
+    "family": "fleches",
+    "primary": "spmR-k",
+    "chords": [
+     "spmR-k"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche haut ×2",
+    "glyph": "Flèche haut ×2",
+    "family": "fleches",
+    "primary": "spmR-kl",
+    "chords": [
+     "spmR-kl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche haut ×3",
+    "glyph": "Flèche haut ×3",
+    "family": "fleches",
+    "primary": "spmR-kn",
+    "chords": [
+     "spmR-kn"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche haut ×4",
+    "glyph": "Flèche haut ×4",
+    "family": "fleches",
+    "primary": "spmR-knl",
+    "chords": [
+     "spmR-knl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Flèche haut",
+    "glyph": "Maj+Flèche haut",
+    "family": "selection",
+    "primary": "spmR*k",
+    "chords": [
+     "spmR*k"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche bas",
+    "glyph": "Flèche bas",
+    "family": "fleches",
+    "primary": "spmR-d",
+    "chords": [
+     "spmR-d"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche bas ×2",
+    "glyph": "Flèche bas ×2",
+    "family": "fleches",
+    "primary": "spmR-dl",
+    "chords": [
+     "spmR-dl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche bas ×3",
+    "glyph": "Flèche bas ×3",
+    "family": "fleches",
+    "primary": "spmR-dn",
+    "chords": [
+     "spmR-dn"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Flèche bas ×4",
+    "glyph": "Flèche bas ×4",
+    "family": "fleches",
+    "primary": "spmR-dnl",
+    "chords": [
+     "spmR-dnl"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Flèche bas",
+    "glyph": "Maj+Flèche bas",
+    "family": "selection",
+    "primary": "spmR*d",
+    "chords": [
+     "spmR*d"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Début",
+    "glyph": "Début",
+    "family": "debut_fin",
+    "primary": "spmR-js",
+    "chords": [
+     "spmR-js"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Début",
+    "glyph": "Ctrl+Début",
+    "family": "debut_fin",
+    "primary": "spmR-jkt",
+    "chords": [
+     "spmR-jkt"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Début",
+    "glyph": "Maj+Début",
+    "family": "selection",
+    "primary": "spmR*js",
+    "chords": [
+     "spmR*js"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Fin",
+    "glyph": "Fin",
+    "family": "debut_fin",
+    "primary": "spmR-tR",
+    "chords": [
+     "spmR-tR"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Ctrl+Fin",
+    "glyph": "Ctrl+Fin",
+    "family": "debut_fin",
+    "primary": "spmR-sdR",
+    "chords": [
+     "spmR-sdR"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Fin",
+    "glyph": "Maj+Fin",
+    "family": "selection",
+    "primary": "spmR*tR",
+    "chords": [
+     "spmR*tR"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Page précédente",
+    "glyph": "Page précédente",
+    "family": "debut_fin",
+    "primary": "spmR-skR",
+    "chords": [
+     "spmR-skR"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Page précédente",
+    "glyph": "Maj+Page précédente",
+    "family": "selection",
+    "primary": "spmR*skR",
+    "chords": [
+     "spmR*skR"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Page suivante",
+    "glyph": "Page suivante",
+    "family": "debut_fin",
+    "primary": "spmR-jdt",
+    "chords": [
+     "spmR-jdt"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Page suivante",
+    "glyph": "Maj+Page suivante",
+    "family": "selection",
+    "primary": "spmR*jdt",
+    "chords": [
+     "spmR*jdt"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Entrée",
+    "glyph": "↵",
+    "family": "edition",
+    "primary": "w*s",
+    "chords": [
+     "w*s"
+    ],
+    "output": "\n",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Entrée (variante)",
+    "glyph": "Maj+Entrée (variante)",
+    "family": "edition",
+    "primary": "w*#s",
+    "chords": [
+     "w*#s"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Entrée",
+    "glyph": "Maj+Entrée",
+    "family": "edition",
+    "primary": "w-#s",
+    "chords": [
+     "w-#s"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Maj+Tab",
+    "glyph": "Maj+Tab",
+    "family": "edition",
+    "primary": "p*@#d",
+    "chords": [
+     "p*@#d"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Retour arrière",
+    "glyph": "⌫",
+    "family": "edition",
+    "primary": "mt-jk",
+    "chords": [
+     "mt-jk",
+     "mt*jk"
+    ],
+    "output": "",
+    "keywords": []
+   },
+   {
+    "name": "Suppression",
+    "glyph": "⌦",
+    "family": "edition",
+    "primary": "pv*iel",
+    "chords": [
+     "pv*iel"
+    ],
+    "output": "",
+    "keywords": []
+   }
+  ]
+ }
+}

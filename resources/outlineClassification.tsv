@@ -1,0 +1,255 @@
+source	outline	output	kind	status	note
+plover-english	TP-PL	{.}	position	reviewed	punctuation: the letters are not sounds
+plover-english	KW-BG	{,}	position	reviewed	punctuation: the letters are not sounds
+plover-english	KW-PL	{?}	position	reviewed	punctuation: the letters are not sounds
+plover-english	H-F	{?}	position	reviewed	punctuation: the letters are not sounds
+plover-english	TP-BG	{!}	position	reviewed	punctuation: the letters are not sounds
+plover-english	STPH	{?}	position	reviewed	punctuation: the letters are not sounds
+plover-english	STPH-FPLT	{:}	position	reviewed	punctuation: the letters are not sounds
+plover-english	STPH*FPLT	{;}	position	reviewed	punctuation: the letters are not sounds
+plover-english	SW-BS	{^...}	position	reviewed	punctuation: the letters are not sounds
+plover-english	H-PB	{^-^}	position	reviewed	punctuation: the letters are not sounds
+plover-english	P-P	{^.^}	position	reviewed	punctuation: the letters are not sounds
+plover-english	OEU	{^/^}	position	reviewed	punctuation: the letters are not sounds
+plover-english	KW-GS	"{~|""^}"	position	reviewed	punctuation: the letters are not sounds
+plover-english	KR-GS	"{^~|""}"	position	reviewed	punctuation: the letters are not sounds
+plover-english	A*E	{~|'^}	position	reviewed	punctuation: the letters are not sounds
+plover-english	AE	{^~|'}	position	reviewed	punctuation: the letters are not sounds
+plover-english	STPH-FPLTS	{(^}	position	reviewed	punctuation: the letters are not sounds
+plover-english	STPH*FPLTS	{^)}	position	reviewed	punctuation: the letters are not sounds
+plover-english	PWR-BGT	{[^}	position	reviewed	punctuation: the letters are not sounds
+plover-english	PWR*BGT	{^]}	position	reviewed	punctuation: the letters are not sounds
+plover-english	-PBT	{^'}	position	reviewed	punctuation: the letters are not sounds
+plover-english	SKW-T	{'^}	position	reviewed	punctuation: the letters are not sounds
+plover-english	SKW*T	{^'}	position	reviewed	punctuation: the letters are not sounds
+plover-english	H*PB	-	position	reviewed	punctuation: the letters are not sounds
+plover-english	KPA*	{^}{-|}	position	reviewed	punctuation: the letters are not sounds
+plover-english	TK-LS	{^^}	position	reviewed	punctuation: the letters are not sounds
+plover-english	S-P	{^ ^}	position	reviewed	punctuation: the letters are not sounds
+lapwing	TP-PL	{.}	position	reviewed	punctuation: the letters are not sounds
+lapwing	KW-BG	{,}	position	reviewed	punctuation: the letters are not sounds
+lapwing	KW-PL	{?}	position	reviewed	punctuation: the letters are not sounds
+lapwing	H-F	{?}	position	reviewed	punctuation: the letters are not sounds
+lapwing	TP-BG	{!}	position	reviewed	punctuation: the letters are not sounds
+lapwing	STPH-FPLT	{:}	position	reviewed	punctuation: the letters are not sounds
+lapwing	STPH*FPLT	{;}	position	reviewed	punctuation: the letters are not sounds
+lapwing	SKW-BGS	{^}...{-|}	position	reviewed	punctuation: the letters are not sounds
+lapwing	SW-BS	{^...}	position	reviewed	punctuation: the letters are not sounds
+lapwing	H-PB	{^}-{^}	position	reviewed	punctuation: the letters are not sounds
+lapwing	P-P	{^}.{^}	position	reviewed	punctuation: the letters are not sounds
+lapwing	OEU	{^}/{^}	position	reviewed	punctuation: the letters are not sounds
+lapwing	K-L	{^}:{^}	position	reviewed	punctuation: the letters are not sounds
+lapwing	KW-GS	"{~|""^}"	position	reviewed	punctuation: the letters are not sounds
+lapwing	KW*GS	"{^~|""}"	position	reviewed	punctuation: the letters are not sounds
+lapwing	KR-RG	{~|'^}	position	reviewed	punctuation: the letters are not sounds
+lapwing	KR*RG	{^~|'}	position	reviewed	punctuation: the letters are not sounds
+lapwing	STPH-FPLTS	{(^}	position	reviewed	punctuation: the letters are not sounds
+lapwing	STPH*FPLTS	{^)}	position	reviewed	punctuation: the letters are not sounds
+lapwing	PWR-BGT	{[^}	position	reviewed	punctuation: the letters are not sounds
+lapwing	PWR*BGT	{^]}	position	reviewed	punctuation: the letters are not sounds
+lapwing	H*PB	-	position	reviewed	punctuation: the letters are not sounds
+lapwing	H*PBZ	--	position	reviewed	punctuation: the letters are not sounds
+lapwing	A*T	{^}@{^}	position	reviewed	punctuation: the letters are not sounds
+lapwing	KPA*	{^}{-|}	position	reviewed	punctuation: the letters are not sounds
+lapwing	TK-LS	{^^}	position	reviewed	punctuation: the letters are not sounds
+lapwing	S-P	{^ ^}	position	reviewed	punctuation: the letters are not sounds
+lapwing	SP	{^^}	position	reviewed	punctuation: the letters are not sounds
+plover-english	STPH-R	{#Left}{^}	position	reviewed	cursor key: STPH + the direction key
+plover-english	STPH-RB	{#Control_L(Left)}{^}	position	reviewed	cursor key: STPH + the direction key
+plover-english	STPH-P	{#Up}{^}	position	reviewed	cursor key: STPH + the direction key
+plover-english	STPH-B	{#Down}{^}	position	reviewed	cursor key: STPH + the direction key
+plover-english	STPH-BG	{#Control_L(Right)}{^}	position	reviewed	cursor key: STPH + the direction key
+plover-english	STPH-G	{#Right}{^}	position	reviewed	cursor key: STPH + the direction key
+plover-english	SKWRAEURBGS	{^\n\n^}{-|}	unclear	reviewed	new paragraph
+plover-english	SKWRAURBGS	{^\n\n^}{-|}	unclear	reviewed	new paragraph
+plover-english	SKW-BGS	{#Return}{^}	position	reviewed	Return
+plover-english	SH-FT	{#Control_L(Home)}{^}	unclear	reviewed	Ctrl+Home
+plover-english	SR-RS	{#Control_L(End)}{^}	unclear	reviewed	Ctrl+End
+plover-english	TK*EL	{#Delete}	phonetic-en	reviewed	del
+plover-english	TKUPT	{PLOVER:ADD_TRANSLATION}	unclear	reviewed	add translation
+plover-english	TPW-R	{#Alt_L(Left)}	position	reviewed	Alt+Left: TPW prefix + the arrow's R
+plover-english	TPW-G	{#Alt_L(Right)}	position	reviewed	Alt+Right
+plover-english	TPEFBG	{#Escape}	phonetic-en	reviewed	esc
+plover-english	TA*B	{#Tab}{^}	phonetic-en	reviewed	tab
+plover-english	TA*BT	{#Alt_L(Tab Tab)}	phonetic-en	reviewed	alt-tab
+plover-english	KPH*F	{#Super_L(v)}	mnemonic	reviewed	Super+V
+plover-english	KPH*BG	{#Super_L(k)}	mnemonic	reviewed	Super+K
+plover-english	KPH*T	{#Super_L(w)}	mnemonic	reviewed	Super+W
+plover-english	KPH-BG	{#Super_L(c)}	mnemonic	reviewed	Super+C
+plover-english	KPA*L	{<}	phonetic-en	reviewed	cap
+plover-english	KPAD	{*-|}	phonetic-en	reviewed	cap'd
+plover-english	KHR*F	{#Control_L(v)}	mnemonic	reviewed	Ctrl+V
+plover-english	KHR*BG	{#Control_L(k)}	mnemonic	reviewed	Ctrl+K
+plover-english	KHR*T	{#Control_L(w)}	mnemonic	reviewed	Ctrl+W
+plover-english	KHR-BG	{#Control_L(c)}	mnemonic	reviewed	Ctrl+C
+plover-english	KA*PD	{*-|}	phonetic-en	reviewed	cap'd
+plover-english	PW*FP	{#BackSpace}	unclear	reviewed	BackSpace
+plover-english	PW-FP	{#BackSpace}	unclear	reviewed	BackSpace
+plover-english	PHRO*F	{PLOVER:SUSPEND}	phonetic-en	reviewed	plover off
+plover-english	PHRO*PB	{PLOVER:RESUME}	phonetic-en	reviewed	plover on
+plover-english	PHROLG	{PLOVER:TOGGLE}	phonetic-en	reviewed	plover toggle
+plover-english	R*R	{#Return}{^}	mnemonic	reviewed	Return: R(eturn) twice
+plover-english	R-R	{^~|\n^}	mnemonic	reviewed	Return
+plover-english	*UPD	{*<}	phonetic-en	reviewed	up'd
+lapwing	#TPH*FR	{#Shift(Home)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH*FBL	{#Shift(Page_Down)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH*R	{#Shift(Left)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH*RPG	{#Shift(Page_Up)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH*RB	{#Control_L(Shift(Left))}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH*P	{#Shift(Up)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH*B	{#Shift(Down)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH*BG	{#Control_L(Shift(Right))}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH*LG	{#Shift(End)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH*G	{#Shift(Right)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-FR	{#Home}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-FPL	{#Control(Home)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-FBL	{#Page_Down}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-R	{#Left}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-RPG	{#Page_Up}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-RB	{#Control_L(Left)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-RBG	{#Control(End)}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-RBT	{#Control_L(Left)}{#Control_L(Left)}{#Control_L(Left)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-RBTS	{#Control_L(Left)}{#Control_L(Left)}{#Control_L(Left)}{#Control_L(Left)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-RBS	{#Control_L(Left)}{#Control_L(Left)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-RT	{#Left}{^}{#Left}{^}{#Left}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-RTS	{#Left}{^}{#Left}{^}{#Left}{^}{#Left}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-RS	{#Left}{^}{#Left}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-P	{#Up}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-PT	{#Up}{^}{#Up}{^}{#Up}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-PTS	{#Up}{^}{#Up}{^}{#Up}{^}{#Up}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-PS	{#Up}{^}{#Up}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-B	{#Down}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-BG	{#Control_L(Right)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-BGT	{#Control_L(Right)}{#Control_L(Right)}{#Control_L(Right)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-BGTS	{#Control_L(Right)}{#Control_L(Right)}{#Control_L(Right)}{#Control_L(Right)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-BGS	{#Control_L(Right)}{#Control_L(Right)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-BT	{#Down}{^}{#Down}{^}{#Down}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-BTS	{#Down}{^}{#Down}{^}{#Down}{^}{#Down}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-BS	{#Down}{^}{#Down}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-LG	{#End}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-G	{#Right}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-GT	{#Right}{^}{#Right}{^}{#Right}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-GTS	{#Right}{^}{#Right}{^}{#Right}{^}{#Right}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TPH-GS	{#Right}{^}{#Right}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	#TA*B	{#Shift(Tab)}	position	reviewed	Shift+Tab: number-bar variant of TA*B
+lapwing	#PHOED/TPHOG	{MODE:SET_SPACE:}	unclear	auto	not reviewed
+lapwing	#R*R	{#Shift(return)}{^}{~|}	position	reviewed	Shift+Return: number-bar variant of R*R
+lapwing	#R-R	{#Shift(Return)}{^}	position	reviewed	Shift+Return: number-bar variant of R-R
+lapwing	#*	{*}	position	reviewed	{*}: number bar + star
+lapwing	STPH*FR	{#Shift(Home)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH*FBL	{#Shift(Page_Down)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH*R	{#Shift(Left)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH*RPG	{#Shift(Page_Up)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH*RB	{#Control_L(Shift(Left))}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH*P	{#Shift(Up)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH*B	{#Shift(Down)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH*BG	{#Control_L(Shift(Right))}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH*LG	{#Shift(End)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH*G	{#Shift(Right)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-FR	{#Home}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-FPL	{#Control(Home)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-FBL	{#Page_Down}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-R	{#Left}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-RPG	{#Page_Up}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-RB	{#Control_L(Left)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-RBG	{#Control(End)}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-RBT	{#Control_L(Left)}{#Control_L(Left)}{#Control_L(Left)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-RBTS	{#Control_L(Left)}{#Control_L(Left)}{#Control_L(Left)}{#Control_L(Left)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-RBS	{#Control_L(Left)}{#Control_L(Left)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-RT	{#Left}{^}{#Left}{^}{#Left}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-RTS	{#Left}{^}{#Left}{^}{#Left}{^}{#Left}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-RS	{#Left}{^}{#Left}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-P	{#Up}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-PT	{#Up}{^}{#Up}{^}{#Up}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-PTS	{#Up}{^}{#Up}{^}{#Up}{^}{#Up}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-PS	{#Up}{^}{#Up}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-B	{#Down}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-BG	{#Control_L(Right)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-BGT	{#Control_L(Right)}{#Control_L(Right)}{#Control_L(Right)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-BGTS	{#Control_L(Right)}{#Control_L(Right)}{#Control_L(Right)}{#Control_L(Right)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-BGS	{#Control_L(Right)}{#Control_L(Right)}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-BT	{#Down}{^}{#Down}{^}{#Down}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-BTS	{#Down}{^}{#Down}{^}{#Down}{^}{#Down}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-BS	{#Down}{^}{#Down}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-LG	{#End}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-G	{#Right}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-GT	{#Right}{^}{#Right}{^}{#Right}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-GTS	{#Right}{^}{#Right}{^}{#Right}{^}{#Right}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	STPH-GS	{#Right}{^}{#Right}{^}	position	auto	cursor / selection block: prefix + direction keys
+lapwing	SKWR	{}	unclear	auto	not reviewed
+lapwing	SKWR-F	{}{:case:cap_first_word}	unclear	auto	not reviewed
+lapwing	SKWR-FP	{:case:upper_first_word}	unclear	auto	not reviewed
+lapwing	SKWR-FPD	{:retro_case:upper_first_word}	unclear	auto	not reviewed
+lapwing	SKWR-FD	{:retro_case:cap_first_word}	unclear	auto	not reviewed
+lapwing	SKWR-R	{:case:lower_first_char}	unclear	auto	not reviewed
+lapwing	SKWR-RD	{:retro_case:lower_first_char}	unclear	auto	not reviewed
+lapwing	SP-LS	{*!}	unclear	auto	not reviewed
+lapwing	SP-S	{^^}	unclear	auto	not reviewed
+lapwing	S-PD	{*?}	unclear	auto	not reviewed
+lapwing	TKHR	{#Delete}{^}	unclear	auto	not reviewed
+lapwing	TKHR*	{#Control(Delete)}{^}	unclear	auto	not reviewed
+lapwing	TKHR*E	{#Control(Delete)}{^}	unclear	auto	not reviewed
+lapwing	TKHRE	{#Delete}{^}	unclear	auto	not reviewed
+lapwing	TKAO*	{}	unclear	auto	not reviewed
+lapwing	TKUPT	{PLOVER:ADD_TRANSLATION}	unclear	auto	not reviewed
+lapwing	TK-FPS	{*!}	unclear	auto	not reviewed
+lapwing	TPWHREFPB	{#F11}	phonetic-en	auto	F-key: TPW + the English number word
+lapwing	TPWRAOE	{#F3}	phonetic-en	auto	F-key: TPW + the English number word
+lapwing	TPWAOE	{#F3}	phonetic-en	auto	F-key: TPW + the English number word
+lapwing	TPWAOEUF	{#F5}	phonetic-en	auto	F-key: TPW + the English number word
+lapwing	TPWAOEUPB	{#F9}	phonetic-en	auto	F-key: TPW + the English number word
+lapwing	TPWAEUT	{#F8}	phonetic-en	auto	F-key: TPW + the English number word
+lapwing	TPWO	{#F2}	phonetic-en	auto	F-key: TPW + the English number word
+lapwing	TPWOUR	{#F4}	phonetic-en	auto	F-key: TPW + the English number word
+lapwing	TPWEUBGS	{#F6}	phonetic-en	auto	F-key: TPW + the English number word
+lapwing	TPWEFPB	{#F7}	phonetic-en	auto	F-key: TPW + the English number word
+lapwing	TPWEFL	{#F12}	phonetic-en	auto	F-key: TPW + the English number word
+lapwing	TPWEPB	{#F10}	phonetic-en	auto	F-key: TPW + the English number word
+lapwing	TPWUPB	{#F1}	phonetic-en	auto	F-key: TPW + the English number word
+lapwing	TPHREFPB	{#F11}	unclear	auto	not reviewed
+lapwing	TPEFBG	{#Escape}{^}	unclear	auto	not reviewed
+lapwing	TH-FL	{^ ^}	unclear	auto	not reviewed
+lapwing	TA*B	{^}{#Tab}{^}	unclear	auto	not reviewed
+lapwing	KPA	{}{:case:cap_first_word}	phonetic-en	auto	cap
+lapwing	KPA*	{^}{-|}	phonetic-en	auto	cap
+lapwing	KPA*L	{:case:upper_first_word}	phonetic-en	auto	cap
+lapwing	KPA*LD	{:retro_case:upper_first_word}	phonetic-en	auto	cap
+lapwing	KPA*D	{*-|}	phonetic-en	auto	cap
+lapwing	KA*PS	{MODE:CAPS}	phonetic-en	auto	cap
+lapwing	KA*PD	{:retro_case:cap_first_word}	phonetic-en	auto	cap
+lapwing	PW*FP	{#Control(BackSpace)}{^}	unclear	auto	not reviewed
+lapwing	PW-FP	{#BackSpace}{^}	unclear	auto	not reviewed
+lapwing	PHROEUFBGS	{PLOVER:FOCUS}	phonetic-en	auto	Plover command word (plover ..., lookup)
+lapwing	PHROEFBG	{PLOVER:FOCUS}	phonetic-en	auto	Plover command word (plover ..., lookup)
+lapwing	PHROEFBGS	{PLOVER:FOCUS}	phonetic-en	auto	Plover command word (plover ..., lookup)
+lapwing	PHROFG	{PLOVER:CONFIGURE}	phonetic-en	auto	Plover command word (plover ..., lookup)
+lapwing	PHROLG	{PLOVER:TOGGLE}	phonetic-en	auto	Plover command word (plover ..., lookup)
+lapwing	PHR*UP	{PLOVER:LOOKUP}	phonetic-en	auto	Plover command word (plover ..., lookup)
+lapwing	PHRUP	{PLOVER:LOOKUP}	phonetic-en	auto	Plover command word (plover ..., lookup)
+lapwing	HRO*ER	{:case:lower_first_char}	unclear	auto	not reviewed
+lapwing	HRO*ERD	{:retro_case:lower_first_char}	unclear	auto	not reviewed
+lapwing	R*EFT	{MODE:RESET}	unclear	auto	not reviewed
+lapwing	R*R	{^\n}{^}{-|}	unclear	auto	not reviewed
+lapwing	R-R	{^~|\n^}	unclear	auto	not reviewed
+lapwing	*UPD	{*<}	unclear	auto	not reviewed
+lapwing	EFBG	{#Escape}{^}	unclear	auto	not reviewed
+pluvier-tao	-RBGS	,	position	reviewed	Tao.md: 'les lettres -RBGS signifient la virgule'
+pluvier-tao	-FPLT	.	position	reviewed	Tao.md
+pluvier-tao	-FPLT/-FPLT	:	position	reviewed	Tao.md
+pluvier-tao	-FPLT/-RBGS	;	position	reviewed	period + comma
+pluvier-tao	-FPLT/-FPLT/-FPLT	...	position	reviewed	tao_la_salle.json
+pluvier-tao	STPH	?	position	reviewed	Tao.md
+pluvier-tao	STPH-FPLT	!	position	reviewed	Tao.md
+pluvier-tao	*P	new paragraph	position	reviewed	Tao.md: 'le sténogramme *P'
+pluvier-tao	STROFL	'	phonetic-fr	reviewed	apostrophe /apostRof/
+pluvier-tao	TROEUP	...	phonetic-fr	reviewed	trois points
+pluvier-tao	P-RZ	(	phonetic-fr	unverified	skeleton of parenthèse: p R z
+pluvier-tao	P-RZ/P-RZ	)	phonetic-fr	unverified	the same, twice for the closing one
+pluvier-tao	BL-K	/	phonetic-fr	unverified	skeleton of (ligne) oblique: b l k
+pluvier-tao	G-LZ	«	phonetic-fr	table	guillemet /gij.mE/: G + -LZ = /ij/ (Pluvier: 'ij' -> -LZ), first syllable
+pluvier-tao	G-LZ/G-LZ	»	phonetic-fr	table	the same, twice for the closing one
+pluvier-tao	T-RS	-	phonetic-fr	table	tiret /ti.RE/: T + -RS = /RE/ (Pluvier: conditional ending /RE/ -> -RS)
+pluvier-tao	TKEULZ	: «	phonetic-fr	table	dialogue: TK + EU + -LZ = /d/ + /i/ + /j/ ('dia-'), first syllable
+pluvier-tao	OE	-	unclear	unverified	trait d'union
+pluvier-tao	PR-PB	%	unclear	unverified	in tao_la_salle.json only
+pluvier-tao	PWHR-BG	/	unclear	unverified	in tao_la_salle.json only (the TAO table writes BL-K)

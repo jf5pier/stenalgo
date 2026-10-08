@@ -368,3 +368,55 @@ Based on the READMEs and the plugin list; items marked (inferred) are not verifi
 - `plover-layout-display` and Spectra Lexer help learners without using strokes; they overlap with Jeff's Visual Stroke.
 
 **Recommendation:** copy the design (trigger, key roles, attachment flags) and generate static Stenalgo JSON; use the plugins for retro editing; use stock `commands.json` only for the output side of special keys.
+
+
+## Converter (2026-10-07)
+
+`python -m util.export_plover_complements` converts the rows of `resources/outlineClassification.tsv` whose kind is `position`
+(Plover English and Lapwing, Lapwing first) key to key through the Gemini PR buttons, writes `plover_stenalgo_punctuation.json`
+and `plover_stenalgo_commands.json`, and `util.export_plover_plugin` ships them in the plugin; `system.DEFAULT_DICTIONARIES`
+lists them above the theory and no longer lists the bare `commands.json` (which resolved to the user's config folder and loaded
+Plover English's file). French spacing: a no-break space before `: ; ? !` and inside the guillemets.
+The pressable test is each finger's own table of legal keypresses (`Starboard._possibleKeypress`), so the reserved keys `*` and `#`
+may join a chord (the first version used `SimContext.isLegal`, which refuses any key outside the onset/nucleus/coda banks and wrongly
+dropped every starred chord: the semicolon, capitalise-next, the standalone hyphen and dash, `@`, the closing quote). The Ireland number bar (`#` before a stroke) is the Stenalgo `#` key pressed with the stroke, and an Ireland `*` in such a stroke keeps
+only the `*` spelling; Lapwing's `#TPH-…` cursor twins (same output as `STPH-…`) are skipped as redundant, the four others
+(Shift+Tab, Shift+Return twice, `{*}`) are converted. Dropped
+(printed by the exporter): the redundant number-bar twins, `OEU` (the slash: equals the theory word `aie`, so it needs
+another chord). The single quotes are converted to the French inner quotes: Lapwing's chords give `vw-sR` = `{~|“^}` (open) and `vw*sR` / `vw-#sR` = `{^~|”}` (close); Plover English's `A*E` / `AE` land on theory outlines and are dropped. Phonetic aliases (`PHONETIC_ALIASES` in the exporter) add a second chord spelled from the French name, in the same punctuation file: `v-l` (virgule, the glued comma, which Plover and Lapwing lack) = `{^},{^}`, `t-d` (trait d'union) = `{^}-{^}`, `svmt-k` (barre oblique, /b l/ + /k/, Pluvier's `BL-K`) = `{^}/{^}`, `svmt*k` / `svmt-#k` = the backslash `{^\^}`. The period and the comma keep their 4-key Plover chords (`pm-kt` = `{.}`, `vt-dR` = `{,}`, glued period `m-k`); a phonetic point was tried and removed, and `v-l` stays for the glued comma only. `COMMAND_ALIASES` adds, in the commands file, the keys whose Plover chord is an English word or a mnemonic: BackSpace `mt-jk` / `mt*jk` / `mt-#jk`, Return `w*s` (`{#Return}{^}`) and the glued newline `w-s`, Delete `pv*iel` / `pvie#l` ("del"). Result: 44 punctuation and 63 command entries.
+
+### Pluvier set
+
+`plover_stenalgo_pluvier_punctuation.json` is a complete set (129 entries): all the punctuation and commands of the Plover-derived files (space, BackSpace, Return, Delete, cursor keys, quotes...) plus 22 Pluvier / TAO chords, which win a chord both define (only `spmR-jktn`: exclamation mark instead of colon). Either file works on its own. The Pluvier chords for people coming from Pluvier: the 8 key-position
+rows converted key to key (`-FPLT` period = `-jktn`, `-RBGS` comma = `-sdRl`, `STPH` question mark, `STPH-FPLT` exclamation mark, `*P` paragraph...),
+with the same French spacing, and the phonetic rows spelled with the Stenalgo phoneme keys: `tRwajk` (trois points), `pvij` (dialogue), `svmt-k`
+(barre oblique, also in the Plover file), plus the rows that needed a decision:
+
+- `STROFL` (apostrophe) is "strophe" /stRof/: Pluvier's own dictionary maps `STROFL` to the word *strophe*, so the `-L` is no sound. `stResd` is the word
+  strophe here, so the apostrophe `{^'^}` takes the star: `stR*esd`, with a `#` twin `stRe#sd`.
+- `G-LZ` and `G-LZ/G-LZ` (« and », /g/ + /ij/): `ksij` starts theory outlines, so the chord takes the star, `ks*ij` and `ks*ij/ks*ij`, with the `#` twins `ksi#j`.
+- `T-RS` (tiret, /ti/ + /RE/): `tieR`, `t*ieR` and `tie#R` are the words *terre*, *taire*, *ter*, so the dash uses both marks, `t*ie#R`.
+- `P-RZ` and `P-RZ/P-RZ` (parenthèses): the skeleton p R z (-z = the pair n+l), `pR-nl` opens `{(^}` and `pR-nl/pR-nl` closes `{^)}`.
+- `PR-PB` (percent): the skeleton p R n of *pour cent*, `pR-n`, glued to the preceding word (no space).
+- `OE` (trait d'union) and `PWHR-BG` (slash) get no chord of their own: `t-d` / `R-kd` and `svmt-k` already do the job (printed as covered).
+
+The file is shipped in the package and listed in `DEFAULT_DICTIONARIES` **below** the Plover-derived punctuation. Plover 5 enables every file of the
+default list (there is no disabled-by-default entry), and the two sets give a few chords other meanings (`spmR-jktn` is the colon in Plover English's
+and the exclamation mark in Pluvier's): the dictionary higher in the list wins, so the Plover meaning wins. A Pluvier user turns
+`plover_stenalgo_punctuation.json` off, or moves the Pluvier file above it, in Configure, Dictionaries.
+
+
+## Numbers (2026-10-07)
+
+`python -m util.export_plover_numbers` writes two independent files, converted key to key like the punctuation (the number bar is the Stenalgo `#` key):
+
+* `plover_stenalgo_pluvier_numbers.json` (default, listed first): Pluvier's bar, which is Plover's: `S T P H A O -F -P -L -T` + `#` = 1 2 3 4 5 0 6 7 8 9, any subset in one stroke (`#STPH` = 1234, 1023 subsets). The top-row `S` is the Stenalgo `k-` (the Gemini `#C` button), not `s-`: `k-#` is 1 (2026-10-07; it adds three collisions with the theory, which the reservation absorbs). Pluvier's `-FRBGS` / `-RPBGS` (glued comma / period, Tao.md Lesson 24) are in the Pluvier *punctuation* set (`-jsdRl`, `-skdRl`), since the number lessons take the glued comma and point from the punctuation style, not from the number theory. Pluvier's phonetic number words (`SUN`, `PHRIL`, the Tao.md table) are not duplicated: the theory spells `cent`, `mille`, ... itself.
+* `plover_stenalgo_lapwing_numbers.json`: `resources/reference/lapwing-numbers.json` (numpad `#-R` 1 ... `#-L` 9, `E`/`U`/`EU` tens, hundreds, thousands, `{^ ^}` variants, hours; "o'clock" and ":00" become " h").
+
+Both are shipped by the plugin and listed in `DEFAULT_DICTIONARIES` (Pluvier above Lapwing, so a shared chord is Pluvier's).
+
+**Reserved chords.** Every stroke of both number systems that holds `#` (`reservedNumberStrokes`, about 1100 chords) is reserved: the star/hash mark assignment (S7, `composeReservedKeyStrokesForEntries(reservedStrokes=...)`) never gives a family a mark that makes its last phoneme stroke one of them; the family takes the next free code (`*`, `#`, `*#`, ...; `forbiddenMarkSymbols`). Before the reservation, 27 Pluvier chords (24 words) and 9 Lapwing chords collided with theory words, and `@#` (5) / `a#` (0) were the words *han* / *ah*. After it both exporters drop nothing. `python -m util.check_number_collisions` is the diagnostic (also against punctuation and commands). `DisambiguatedTheory.pickle` fingerprints `resources/reference/lapwing-numbers.json`.
+
+**No `#` twins.** An Ireland `*` converts to the Stenalgo `*` only; the former `#` spelling of every starred chord (and the `#` aliases of the backslash, BackSpace, Delete, apostrophe and guillemets) was redundant and is gone, so `#` belongs to the numbers. The `#` chords left in the punctuation and command files are number-bar variants with a meaning of their own (`*#` = `{*}`, Shift+Tab, Shift+Return, the Pluvier dash `t*ie#R`).
+
+Not yet typed in Plover; the trainer lessons (switch Plover/Pluvier like the punctuation) come next, and TODO item (4) keeps letters/fingerspelling.

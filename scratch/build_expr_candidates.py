@@ -1,5 +1,5 @@
 """Build scratch/expr_candidates.tsv: the Phase 0 expression candidate pool
-(PLAN_2026-10-01-abbreviations-algorithm.md, Phase 0 step 3).
+(docs/history/PLAN_2026-10-01-abbreviations-algorithm.md, Phase 0 step 3).
 
 Pool = every row of the widest n-gram slice per order (2gram_top300,
 3gram_top300, 4gram_top100, 5gram_top50) UNION every term of

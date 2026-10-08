@@ -1,6 +1,6 @@
 """
 Expression rule selection — Phase 2 Stage A of
-PLAN_2026-10-01-abbreviations-algorithm.md: greedy budgeted selection where
+docs/history/PLAN_2026-10-01-abbreviations-algorithm.md: greedy budgeted selection where
 briefs and attach rules compete by marginal frequency-weighted saving, in the
 `affixrules.selectRules` tradition (fresh marginals against the current
 selection, once-credit per expression, territory skips, budget) but over

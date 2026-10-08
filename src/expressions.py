@@ -1,11 +1,11 @@
 """
 Composition algebra for expression abbreviation rules — Phase 1 of
-PLAN_2026-10-01-abbreviations-algorithm.md (whole-expression briefs and
+docs/history/PLAN_2026-10-01-abbreviations-algorithm.md (whole-expression briefs and
 attach keypresses: "il est", "il y a" -> one stroke; "de la + mot",
 "ne + verbe + pas" as constant extra keys merged into a host stroke).
 
 THE REWRITE SEMANTICS (spec; constraint set 3.5.5 of
-PLAN_2026-10-01-abbreviations-complexity.md)
+docs/history/PLAN_2026-10-01-abbreviations-complexity.md)
 
 Vocabulary: a token is one word-unit in the scratch/build_expr_candidates.py
 sense — an elision particle glued to its host ("n'", "l'") is its own unit.

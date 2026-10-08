@@ -1,0 +1,327 @@
+{
+ "families": [
+  {
+   "id": "chiffres",
+   "title": "les chiffres",
+   "section": "Les chiffres",
+   "intro": {
+    "lapwing": "La touche # tenue avec une touche du pavé de la main droite donne un chiffre : -s -d -R pour 1 2 3, -js -kd -tR pour 4 5 6, -j -k -t pour 7 8 9, et la voyelle i pour 0. Un chiffre par frappe, collé au précédent.",
+    "pluvier": "La touche # tenue avec une touche de chiffre donne le chiffre (la barre de Pluvier, la même que Plover) : k- p- m- R- @ a pour 1 2 3 4 5 0, puis -j -k -t -n pour 6 7 8 9. Un chiffre par frappe, collé au précédent."
+   },
+   "examples": [
+    [
+     "#1"
+    ],
+    [
+     "#2"
+    ],
+    [
+     "#3"
+    ],
+    [
+     "#4"
+    ],
+    [
+     "#5"
+    ],
+    [
+     "#6"
+    ],
+    [
+     "#7"
+    ],
+    [
+     "#8"
+    ],
+    [
+     "#9"
+    ],
+    [
+     "#0"
+    ]
+   ],
+   "rules": [
+    "#0",
+    "#1",
+    "#2",
+    "#3",
+    "#4",
+    "#5",
+    "#6",
+    "#7",
+    "#8",
+    "#9"
+   ]
+  },
+  {
+   "id": "plusieurs_frappes",
+   "title": "les nombres sur plusieurs frappes",
+   "section": "Les chiffres",
+   "intro": {
+    "lapwing": "Un nombre qui ne tient pas sur une seule frappe se tape en plusieurs : la première frappe est précédée d'une espace, les suivantes se collent à elle (2 puis 1 donnent 21). Chaque chiffre ou groupe de chiffres est sa propre frappe.",
+    "pluvier": "Un nombre qui ne tient pas sur une seule frappe se tape en plusieurs : la première frappe est précédée d'une espace, les suivantes se collent à elle (2 puis 1 donnent 21). Chaque chiffre ou groupe de chiffres est sa propre frappe."
+   },
+   "examples": [
+    [
+     "#21"
+    ],
+    [
+     "#32"
+    ],
+    [
+     "#54"
+    ],
+    [
+     "#91"
+    ],
+    [
+     "#73"
+    ],
+    [
+     "#98"
+    ],
+    [
+     "#987"
+    ],
+    [
+     "#321"
+    ],
+    [
+     "#4321"
+    ],
+    [
+     "#2025"
+    ],
+    [
+     "#1990"
+    ],
+    [
+     "#8765"
+    ]
+   ],
+   "rules": []
+  },
+  {
+   "id": "deux_chiffres",
+   "title": "les nombres à deux chiffres",
+   "section": "Les nombres",
+   "intro": {
+    "lapwing": "Un nombre est une suite de frappes qui se collent : la dizaine se fait avec la voyelle i (10, 20 … 90), les autres nombres avec deux chiffres.",
+    "pluvier": "Les chiffres qui se suivent dans l'ordre du clavier (1 2 3 4 5 0 6 7 8 9) se frappent ensemble, sur une seule frappe ; sinon on les frappe un par un."
+   },
+   "examples": [
+    [
+     "#12"
+    ],
+    [
+     "#13"
+    ],
+    [
+     "#25"
+    ],
+    [
+     "#47"
+    ],
+    [
+     "#38"
+    ],
+    [
+     "#69"
+    ],
+    [
+     "#89"
+    ],
+    [
+     "#10"
+    ],
+    [
+     "#20"
+    ],
+    [
+     "#30"
+    ],
+    [
+     "#40"
+    ],
+    [
+     "#50"
+    ]
+   ],
+   "rules": [
+    "#10",
+    "#20",
+    "#30",
+    "#40",
+    "#50",
+    "#60",
+    "#70",
+    "#80",
+    "#90"
+   ]
+  },
+  {
+   "id": "trois_chiffres",
+   "title": "les nombres à trois chiffres et plus",
+   "section": "Les nombres",
+   "intro": {
+    "lapwing": "Les centaines se font avec la voyelle e (100, 200 …), les milliers avec les deux voyelles i e (1000, 2000 …), collées aux frappes suivantes.",
+    "pluvier": "Tant que les chiffres suivent l'ordre du clavier, une seule frappe suffit, même pour un grand nombre ; l'ordre est coupé en deux frappes (ou plus) dès qu'un chiffre redescend."
+   },
+   "examples": [
+    [
+     "#123"
+    ],
+    [
+     "#246"
+    ],
+    [
+     "#359"
+    ],
+    [
+     "#789"
+    ],
+    [
+     "#100"
+    ],
+    [
+     "#250"
+    ],
+    [
+     "#405"
+    ],
+    [
+     "#987"
+    ],
+    [
+     "#340"
+    ],
+    [
+     "#1000"
+    ],
+    [
+     "#2025"
+    ],
+    [
+     "#1789"
+    ],
+    [
+     "#1990"
+    ],
+    [
+     "#12345"
+    ],
+    [
+     "#2468"
+    ],
+    [
+     "#12346789"
+    ]
+   ],
+   "rules": [
+    "#100",
+    "#200",
+    "#300",
+    "#400",
+    "#500",
+    "#600",
+    "#700",
+    "#800",
+    "#900",
+    "#1000"
+   ]
+  },
+  {
+   "id": "virgule_point",
+   "title": "la virgule et le point dans les nombres",
+   "section": "Les nombres",
+   "intro": {
+    "lapwing": "La virgule collée et le point collé viennent de la ponctuation que vous avez choisie (Plover ou Pluvier) : ils se placent entre deux nombres, 3,14 ou 1.500, sans espace.",
+    "pluvier": "La virgule collée et le point collé viennent de la ponctuation que vous avez choisie (Plover ou Pluvier) : ils se placent entre deux nombres, 3,14 ou 1.500, sans espace."
+   },
+   "examples": [
+    [
+     "#3",
+     "@virgule_collee",
+     "#14"
+    ],
+    [
+     "#0",
+     "@virgule_collee",
+     "#5"
+    ],
+    [
+     "#12",
+     "@virgule_collee",
+     "#75"
+    ],
+    [
+     "#38",
+     "@virgule_collee",
+     "#4"
+    ],
+    [
+     "#1",
+     "@point_colle",
+     "#500"
+    ],
+    [
+     "#2",
+     "@point_colle",
+     "#25"
+    ]
+   ],
+   "rules": [
+    "@virgule_collee",
+    "@point_colle"
+   ]
+  },
+  {
+   "id": "phrases",
+   "title": "des nombres dans des phrases",
+   "section": "Les nombres",
+   "intro": {
+    "lapwing": "Les nombres se mêlent aux mots : les frappes d'un nombre se collent entre elles, puis une espace le sépare des mots voisins.",
+    "pluvier": "Les nombres se mêlent aux mots : les frappes d'un nombre se collent entre elles, puis une espace le sépare des mots voisins."
+   },
+   "examples": [
+    [
+     "il",
+     "a",
+     "#25",
+     "ans"
+    ],
+    [
+     "tu",
+     "as",
+     "#12",
+     "ans"
+    ],
+    [
+     "elle",
+     "a",
+     "#3",
+     "chats"
+    ],
+    [
+     "il",
+     "est",
+     "#10"
+    ],
+    [
+     "en",
+     "#2025"
+    ],
+    [
+     "pour",
+     "#100"
+    ],
+    [
+     "on",
+     "est",
+     "#4"
+    ]
+   ],
+   "rules": []
+  }
+ ]
+}

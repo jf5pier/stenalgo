@@ -1,0 +1,35 @@
+{"lesson": "point_virgule", "tokens": ["je", "suis", "ici", "@point"]}
+{"lesson": "point_virgule", "tokens": ["oui", "@virgule", "merci", "@point"]}
+{"lesson": "point_virgule", "tokens": ["il", "ne", "sait", "pas", "@suspension"]}
+{"lesson": "point_virgule", "tokens": ["tu", "viens", "@suspension_maj", "oui"]}
+{"lesson": "marques", "tokens": ["oh", "@exclam"]}
+{"lesson": "marques", "tokens": ["tu", "viens", "@interro"]}
+{"lesson": "marques", "tokens": ["il", "dit", "@deux_points", "oui"]}
+{"lesson": "marques", "tokens": ["oui", "@point_virgule", "non"]}
+{"lesson": "guillemets", "tokens": ["il", "dit", "@lq", "merci", "@rq"]}
+{"lesson": "guillemets", "tokens": ["elle", "répond", "@dialogue", "oui", "@rq"]}
+{"lesson": "guillemets", "tokens": ["il", "dit", "@lstraight", "merci", "@rstraight"]}
+{"lesson": "guillemets_simples", "tokens": ["il", "dit", "@lq", "elle", "a", "dit", "@lsq", "non", "@rsq", "@rq"]}
+{"lesson": "parentheses", "tokens": ["@lp", "voir", "page", "deux", "@rp"]}
+{"lesson": "parentheses", "tokens": ["il", "est", "ici", "@lb", "voir", "page", "deux", "@rb"]}
+{"lesson": "colles", "tokens": ["un", "@virgule_collee", "deux"]}
+{"lesson": "colles", "tokens": ["un", "@point_colle", "deux"]}
+{"lesson": "colles", "tokens": ["un", "@deux_points_colles", "deux"]}
+{"lesson": "colles", "tokens": ["super", "@trait_union", "avion"]}
+{"lesson": "colles", "tokens": ["oui", "@barre", "non"]}
+{"lesson": "colles", "tokens": ["oui", "@antislash", "non"]}
+{"lesson": "colles", "tokens": ["nom", "@arobase", "site"]}
+{"lesson": "colles", "tokens": ["cent", "@pourcent"]}
+{"lesson": "colles", "tokens": ["rock", "@apostrophe", "roll"]}
+{"lesson": "colles", "tokens": ["il", "est", "là", "@apostrophe_gauche"]}
+{"lesson": "colles", "tokens": ["@apostrophe_droite", "oui"]}
+{"lesson": "colles", "tokens": ["oui", "@tiret", "non"]}
+{"lesson": "colles", "tokens": ["oui", "@tiret_double", "non"]}
+{"lesson": "colles", "tokens": ["un", "@colle", "deux"]}
+{"lesson": "espaces", "tokens": ["bonjour", "@espace", "monde"]}
+{"lesson": "espaces", "tokens": ["bonjour", "@retour", "monde"]}
+{"lesson": "espaces", "tokens": ["bonjour", "@paragraphe", "monde"]}
+{"lesson": "edition", "tokens": ["chat", "@backspace"]}
+{"lesson": "edition", "tokens": ["chien", "@delete"]}
+{"lesson": "edition", "tokens": ["bonjour", "@return", "monde"]}
+{"lesson": "casse", "tokens": ["bonjour", "@maj_suivante", "monde"]}

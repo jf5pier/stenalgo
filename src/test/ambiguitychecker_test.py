@@ -5,6 +5,8 @@
 from unittest.mock import MagicMock
 from typing import Any
 
+import pytest
+
 from src.word import Word, GramCat
 from src.ambiguitychecker import (
     StrokeClusterReport,
@@ -445,6 +447,26 @@ class TestComposeReservedKeyStrokesForEntries:
         composed = composeReservedKeyStrokesForEntries(entries, phonemeStrokeCounts={panse: 1, pense: 1})
         assert composed[pense] == [((1,),), ((1,), (16,))]
         assert composed[panse] == [((1, 10),), ((1, 10), (16,))]
+
+    def test_a_reserved_chord_is_never_a_marked_stroke(self):
+        # The number chords are reserved: "panse" would be `*` (keys 1+10), but 1+10 is a number chord, so it takes `#` (1+15).
+        panse = _make_word(ortho="panse", lemme="panser", gramCat=GramCat.VER, frequencyFilm=0.1)
+        pense = _make_word(ortho="pense", lemme="penser", gramCat=GramCat.VER, frequencyFilm=500.0)
+        entries: Any = {panse: [((1,),)], pense: [((1,),)]}
+        counts = {panse: 1, pense: 1}
+        assert composeReservedKeyStrokesForEntries(entries, phonemeStrokeCounts=counts)[panse] == [((1, 10),)]
+        reserved: Any = frozenset({frozenset({1, 10})})
+        composed = composeReservedKeyStrokesForEntries(entries, phonemeStrokeCounts=counts, reservedStrokes=reserved)
+        assert composed[pense] == [((1,),)]
+        assert composed[panse] == [((1, 15),)]
+
+    def test_reserving_every_mark_of_a_conflict_raises(self):
+        a = _make_word(ortho="aa", lemme="aa", frequencyFilm=1.0)
+        b = _make_word(ortho="bb", lemme="bb", frequencyFilm=5.0)
+        entries: Any = {a: [((1,),)], b: [((1,),)]}
+        reserved: Any = frozenset({frozenset({1, 10}), frozenset({1, 15}), frozenset({1, 10, 15})})
+        with pytest.raises(RuntimeError):
+            composeReservedKeyStrokesForEntries(entries, phonemeStrokeCounts={a: 1, b: 1}, reservedStrokes=reserved)
 
     def test_alternate_colliding_with_another_words_primary_is_marked(self):
         # "a"'s alternate lands on "b"'s primary stroke: a cluster neither primary

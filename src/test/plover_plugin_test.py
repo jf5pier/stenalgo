@@ -12,7 +12,7 @@ from src.expressiondata import bundleToDict, legalityFromStarboard
 from src.expressionmodel import AttachRule, BriefRule, Rules
 from src.keyboard import Starboard, Strokes
 from src.keyconflicts import KeyConflicts
-from util.export_plover_plugin import EXPRESSIONS, STOCK, exportAssets, generate
+from util.export_plover_plugin import COMPLEMENTS, EXPRESSIONS, STOCK, exportAssets, generate
 
 REPO = Path(__file__).resolve().parent.parent.parent
 PLUGIN = REPO / "plover_stenalgo"
@@ -99,7 +99,9 @@ class TestPackagedAssets(unittest.TestCase):
         finally:
             sys.path.remove(str(PLUGIN))
         names = [d for d in system.DEFAULT_DICTIONARIES if d.startswith("asset:plover_stenalgo:")]
-        self.assertEqual([n.rsplit("/", 1)[1] for n in names], [EXPRESSIONS, STOCK])   # expressions above the stock
+        # the system's own commands and punctuation, then the expressions above the stock
+        self.assertEqual([n.rsplit("/", 1)[1] for n in names], [*COMPLEMENTS, EXPRESSIONS, STOCK])
+        self.assertNotIn("commands.json", system.DEFAULT_DICTIONARIES)   # a bare name would load Plover English's file
 
     def test_export_refuses_data_built_against_another_stock_dictionary(self) -> None:
         stock, expressions = REPO / STOCK, REPO / EXPRESSIONS
@@ -109,12 +111,14 @@ class TestPackagedAssets(unittest.TestCase):
             repo, assets = Path(tmp) / "repo", Path(tmp) / "assets"
             repo.mkdir()
             (repo / EXPRESSIONS).write_bytes(expressions.read_bytes())
+            for name in COMPLEMENTS:
+                (repo / name).write_text("{}", encoding="utf-8")
             (repo / STOCK).write_text(json.dumps({"v-": "mot"}), encoding="utf-8")
             with self.assertRaises(ValueError):
                 exportAssets(repo, assets)
             (repo / STOCK).write_bytes(stock.read_bytes())
             copied = exportAssets(repo, assets)
-            self.assertEqual(sorted(p.name for p in copied), sorted([EXPRESSIONS, STOCK]))
+            self.assertEqual(sorted(p.name for p in copied), sorted([EXPRESSIONS, STOCK, *COMPLEMENTS]))
             for p in copied:
                 self.assertEqual(p.read_bytes(), (repo / p.name).read_bytes())
 

@@ -24,7 +24,9 @@ reading(s) that item's chord writes (see `util/export_practice_words.py`),
 and `before`/`after` the context words shown around it for that reading
 ("la", "que tu", "!") -- display only, never typed.
 
-A practice sentence is the same shape -- `ortho` its text, `strokes` all its
+A punctuation lesson's phrase ("Oh !", `segments` with the marks as their own
+segments, `spaceBefore` false where a mark attaches to its neighbour) is a sentence
+too. A practice sentence is the same shape -- `ortho` its text, `strokes` all its
 words' strokes in order -- plus one `Segment` per word, so the view can say
 which word the next stroke belongs to (see `sentenceDecoder`). A single
 word has no segments.
@@ -65,6 +67,7 @@ type alias Segment =
     , label : String
     , steno : String
     , strokeCount : Int
+    , spaceBefore : Bool
     }
 
 
@@ -78,7 +81,7 @@ wordDecoder =
         |> required "phonology" D.string
         |> required "steno" D.string
         |> required "strokes" (D.list (D.list D.int))
-        |> hardcoded []
+        |> optional "segments" (D.list segmentDecoder) []
         |> optional "alternates" (D.list outlineDecoder) []
         |> optional "ruleRanks" (D.list D.int) []
 
@@ -97,11 +100,12 @@ decoder =
 
 segmentDecoder : D.Decoder Segment
 segmentDecoder =
-    D.map4 Segment
+    D.map5 Segment
         (D.field "text" D.string)
         (D.field "label" D.string)
         (D.field "steno" D.string)
         (D.field "strokeCount" D.int)
+        (D.oneOf [ D.field "spaceBefore" D.bool, D.succeed True ])
 
 
 sentenceDecoder : D.Decoder (List PracticeWord)

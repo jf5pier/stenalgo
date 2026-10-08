@@ -50,6 +50,7 @@ from tqdm import tqdm
 import sys
 
 from util._timing import recordTiming
+from util.export_plover_numbers import reservedNumberStrokes
 
 # Non-canonical spellings of the ACTIVE sets of resources/spellingVariants.tsv,
 # dropped at this single load choke point for LexiqueMixte.tsv AND
@@ -385,7 +386,7 @@ class Dictionary:
         (buildPhoneticTheory) composed with the
         same-lemma coda-bank realization of Discriminating-Feature Stroke Realization
         (Realization Phase) (src.ambiguitychecker.realizeKeypressGroupsAsExtraStroke)
-        and the star/hash mark reserved keys of Different-Lemma or Grammatical-Category
+        and the star/hash mark reserved keys (never making a number chord, `reservedNumberStrokes`) of Different-Lemma or Grammatical-Category
         Disambiguation (S7) (src.ambiguitychecker.composeReservedKeyStrokesForEntries) on
         top, its first mark key pressed together with the word's last phoneme stroke. Any
         further entries are the word's OTHER readings
@@ -438,6 +439,7 @@ class Dictionary:
              for word, strokes in finalInduced.items() if word not in spellingTwins},
             loadReform1990DoubletPairs(),
             phonemeStrokeCounts={word: len(strokes) for word, strokes in wordToStrokes.items()},
+            reservedStrokes=reservedNumberStrokes(),
         )
 
     def writeDisambiguatedTheory(
@@ -589,6 +591,8 @@ def _runSteps(module: "Callable[[str, str], None]") -> None:
 
     module("Theory Export (S8): Plover dictionary", "util.export_plover_dictionary")
     module("Theory Export (S8): Plover key table", "util.export_plover_system")
+    module("Theory Export (S8): Plover punctuation and commands", "util.export_plover_complements")
+    module("Theory Export (S8): Plover numbers (Pluvier and Lapwing)", "util.export_plover_numbers")
     module("Theory Export (S8): trainer keyboard layout", "util.export_keyboard_layout")
     module("Theory Export (S8): trainer word drills", "util.export_practice_words")
     module("Theory Export (S8): trainer sentences", "util.export_practice_sentences")
@@ -606,6 +610,11 @@ def _runSteps(module: "Callable[[str, str], None]") -> None:
     # from the committed expression rule set (scratch/expr-*) on the finished theory; optional like S9.
     module("Expression Abbreviation Lessons (S10a): trainer expression lessons", "util.export_expression_lessons")
     module("Expression Abbreviation Lessons (S10b): trainer expression sentences", "util.export_expression_sentences")
+    module("Expression Abbreviation Lessons (S10c): trainer Definitions page attach words and composed phrases", "util.export_expression_definitions")
+    # Punctuation and Command Lessons (S10d): the trainer's ponctuation/commandes tracks for the Plover and Pluvier chord styles
+    # (reads the S8 complements' JSONs, so run `util.export_plover_complements` first when the layout or the sets changed).
+    module("Punctuation and Command Lessons (S10d): trainer punctuation and command lessons", "util.export_punctuation_lessons")
+    module("Number Lessons (S10e): trainer number lessons", "util.export_number_lessons")
 
     print("\nstenalgo pipeline complete: phonetic theory (pickles + phonetic_theory.tsv), "
           "LexiqueSynthetic.tsv, resolved_press_sets.json, keypress_groups.json, "

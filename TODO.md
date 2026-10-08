@@ -59,6 +59,7 @@ docs in `docs/PIPELINE.md` S8.10. Open items, most important first:
   (letters/steno-order meaning lost), then design the conversion: a mapping from the Ireland key to the Stenalgo key per entry kind, a collision check against the existing theory (reuse `src/keyconflicts.py` and the attach/selector keys),
   and a generator (`util/export_*`, output into the plugin's dictionaries, fingerprint-checked like the others). Decide the French-specific conventions at the same time (accented letters, AZERTY vs QWERTY effect of `{#...}` combos:
   Plover sends key names, so check the keys meant by `Control_L(c)` on an AZERTY/Bépo host).
+- **Classification (2026-10-07).** `resources/outlineClassification.tsv` (generator `scratch/classify_outlines.py`) says for each punctuation/command outline of Plover English, Lapwing and Pluvier/TAO how it means what it means: `position` (convert key to key), `phonetic-fr` (convert by phoneme), `phonetic-en`, `mnemonic`, `unclear`; `status` reviewed / auto / unverified. Pluvier's sound tables (`src/steno.py`) settled `G-LZ`, `T-RS`, `TKEULZ` as `phonetic-fr` (status `table`); still `unverified`: `P-RZ`, `P-RZ/P-RZ`, `BL-K` (phonetic by skeleton) and `OE`, `PR-PB`, `PWHR-BG` (unclear). **DONE 2026-10-07 (uncommitted): the Plover/Lapwing key-to-key converter** (`util/export_plover_complements.py`, `plover_stenalgo_{punctuation,commands}.json`, the plugin ships them and `DEFAULT_DICTIONARIES` lists them instead of the bare `commands.json`; French spacing with a no-break space). Starred chords are kept (the pressable test is the per-finger keypress table, not `SimContext.isLegal`): 44 punctuation (39 converted + 5 phonetic aliases: `v-l` glued comma, `t-d` trait d'union, `svmt-k` slash, `svmt*k`/`svmt-#k` backslash; the period and comma keep their 4-key Plover chords `pm-kt`, `vt-dR`, no phonetic point; `v-l` is the glued comma only) + 56 command entries (the number bar is the Stenalgo `#` key; the `#TPH-…` cursor twins are skipped as redundant). Open: (1) DONE 2026-10-07: the single quotes are the French inner quotes “ ” (`vw-sR` open, `vw*sR`/`vw-#sR` close); the Pluvier file is now a complete set (Plover punctuation + commands + Pluvier chords); (1b) the expression data (`plover_stenalgo_expressions.stenalgo`) was not compared with the new chords; (2) the Pluvier set is DONE (`plover_stenalgo_pluvier_punctuation.json`, 22 entries, docs/PLOVER_COMPLEMENTS.md "Pluvier set"): listed in `DEFAULT_DICTIONARIES` below the Plover punctuation (Plover 5 has no disabled-by-default entry; a Pluvier user toggles a set in the dictionary panel), every row settled (`STROFL` = "strophe", no extra sound; guillemets, apostrophe and dash take `*`/`#`; `OE` and `PWHR-BG` covered by `t-d` and `svmt-k`); still open: the chords chosen for `T-RS` (`t*ie#R`), `P-RZ` and `PR-PB` are mine, to be confirmed by typing them, and a way to switch between the two sets without the dictionary panel; (2b) DONE 2026-10-07 (uncommitted): trainer lessons for both styles (`util/export_punctuation_lessons.py`, S10d; `Style.elm` global Plover/Pluvier switch; Ponctuation and Commandes tracks between désambiguïsation and affixes; Definitions lists every chord incl. twins). Not yet in the sets, hence not taught: Tab, Ctrl/Super shortcuts, Plover control commands; (3) the `phonetic-en` / `mnemonic` commands (F-keys, Tab, Esc, Ctrl+C...) re-derived from French names; (4) letters and fingerspelling (digits DONE 2026-10-07: `util/export_plover_numbers.py`, the number chords reserved in S7, trainer track `chiffres` (`util/export_number_lessons.py`, `resources/numberLessons.json`, its own Lapwing/Pluvier button); not yet typed in Plover or checked in the browser); (5) plugin version bump and reinstall, then a check in Plover that the commands/punctuation load and the `no-break space` types on Windows (an installed cfg with an explicit `dictionaries =` list keeps the old defaults: remove that line with Plover closed).
 - **Fit with the other TODOs.** Decide whether these entries ship in `user.json`/`commands.json` defaults of the system (`DEFAULT_DICTIONARIES` in `plover_stenalgo/system.py`) or as a new packaged dictionary, and keep the stroke budget
   in mind: they must not take outlines already used by words or expression briefs (run the ambiguity checks after adding them).
 
@@ -134,16 +135,11 @@ docs in `docs/PIPELINE.md` S8.10. Open items, most important first:
 - **Where.** Trainer side only (Elm: the lesson/drill word selection in `steno-trainer/src`, plus the switch in the lesson view); `util/export_lessons.py` already writes per-lesson words, so check that the previous lessons' words are reachable
   from the JSON before adding any export field. No pipeline rebuild if the selection stays in Elm; add an Elm test for the 50-50 mix.
 
-## Branch TODO — trainer Definitions page: attach words and composed attach words (abbreviations branch, 2026-10-05)
+## Branch TODO — trainer Definitions page: attach words and composed attach words (abbreviations branch, 2026-10-07)
 
-- **Goal.** The trainer's "Definitions" page (`steno-trainer/public/data/definitions.json`, `util/export_definitions.py`) should also present the **attach words** (the particles written as an attach keypress on a host:
-  `de`, `la`, `le`, `les`, `par`, `et`, `sur`...) and the **composed attach words** (several particles chained, e.g. `de la peau`, `sur le sol`), not only the dictionary words and the affix "Abbrev." column (S9d).
-- **Information per entry.** The long form (the plain outline(s) that write the words out), the shortest form (the attach/abbreviated outline the expression layer produces), and the homophones as usual (the page's existing homophone presentation).
-- **To settle.** Which entries to list (every attach rule of `scratch/expr-rules-final.json`, or only those that occur in the expression lessons; composed ones from the pool of `expr_candidates.tsv` or from the composer's output);
-  how a composed entry is keyed and searched (by its words, like a phrase); how the attach host is shown (a rule can need a host: the `noNeighbour` / hostless case, `docs/PIPELINE.md` S8.10);
-  whether the shortest form depends on the host (then show a representative one, or one per host class).
-- **Where.** Python side: a new exporter or a section of `util/export_definitions.py` / `util/export_expression_lessons.py` reading the same inputs as the expression layer (both pickles, `starboard3h.json`, the committed expression rule set, `plover_stenalgo_dictionary.json`), output next to the other trainer JSONs; Elm side: the Definitions view.
-  Reuse the expression composer so the shown shortest form equals what the Plover plugin emits. Rebuild and compare the md5s of the trainer JSONs other than the new one (they must stay identical), `pytest src/test/` and `mypy` clean.
+- **DONE 2026-10-07 (uncommitted): S10c `util/export_expression_definitions.py` → `expression-definitions.json`, Elm `Definitions.view`.** Searching `de` / `d'` / `la`... shows the attach rule (the keypress as a button, its label, six example phrases with long and abbreviated outlines);
+  searching `de la`, `et les`, `il n'`, `n' y` shows the composed entry. Open: check in a browser; the attach rule's text only matches its own spelling (a typed `de la` never lists the `de` rule); a phrase lists one outline
+  (the composer's full composition, no partial ones); the hostless / `noNeighbour` case is not shown; phrases come from the pool only (579), so a phrase outside it has no entry.
 
 ## Branch TODO — a Dosh/Taipo-style chorded French typing layer on the Starboard (abbreviations branch, 2026-10-05)
 
@@ -175,11 +171,14 @@ docs in `docs/PIPELINE.md` S8.10. Open items, most important first:
 - **Trainer follow-up (separate TODO above).** A Plover HID board needs a WebHID reader besides `serial.js` / `GeminiPr.elm`.
 - **No pipeline rebuild.** The theory, dictionaries and trainer data do not change; check `pytest src/test/` (the `_core` copy test) and `mypy`.
 
-## Branch TODO — Definitions page: "Abbrev." column missing for `seulement` (abbreviations branch, 2026-10-07)
+## Branch TODO — refactor the trainer's Simulate code shared with the Definitions page (abbreviations branch, 2026-10-07)
 
-- **Observed (user, in the trainer).** The Definitions page of `seulement` shows no "Abbrev." column, while `gouvernement` does. The data looks complete: `affix_abbreviations.tsv` has `seulement s@/mt@a/m@ -> s@jtm` (rule `ment`, 2 keys, saving 279.25),
-  and `steno-trainer/public/data/affix-abbreviations.json` contains the key `seulement`. So suspect the matching in the page (spelling + chord, `util/export_affix_abbreviations.py` and the Elm Definitions view in `steno-trainer/src/Main.elm`):
-  the long outline of the word in `definitions.json` vs the long outline keyed in `affix-abbreviations.json` (a different homophone entry, a mark, an alternate outline), or a cached/stale build of the trainer. Check other high-saving words for the same gap, then fix and rebuild S9d.
+- **Why.** The Definitions page's chord/abbreviation buttons (`SimulateOutline` in `steno-trainer/src/Main.elm`) reuse the Simulate engine (`Simulation`, `simulationTimer`, `SimulationStep`, `simulatedKeys`, the boards)
+  but not its start: `StartSimulation` takes the strokes from `currentStrokes` and the boards' phonology from `currentPhonology`, both read the practice drill, so `SimulateOutline` is a copy of the start code, with a `phonology`
+  field added to `Simulation` and a `DefinitionMode` special case in `currentPhonology` (what lights the combo phonemes of the 2-/3-/4-key boards).
+- **Do.** (1) One `startSimulation strokes phonology model` helper called by both messages. (2) The boards take their phonology from the simulation, not from the drill; in sentence mode it changes with the lit word
+  (`shownSegment`), so it cannot simply be fixed at the start of the run: store it per step, or derive it from the step. (3) Check `currentReadingLabel` and the conjugation-marker legend (`markKeys`, `labelEmphasis`): they read the drill too,
+  so they probably stay dark on the Definitions page when a chord is pressed (unverified); pass the entry's reading label the same way as the phonology.
 
 ## Branch TODO — trainer Introduction page (abbreviations branch, 2026-10-06)
 
@@ -205,16 +204,6 @@ docs in `docs/PIPELINE.md` S8.10. Open items, most important first:
   answers computed lookups above the stock JSON) a fallback: a lookup that misses is retried with the reserved keys `*`/`#` (and the `-s`-style feature strokes kept) added or removed, accepting only a unique answer; costs lookup time and must never
   override a real entry. (c) Both: the plugin answers, the JSON stays the single-outline theory. Decide after the dry run of the previous entry shows how many forms are involved; keep the fingerprint check between JSON and plugin data.
 - **Trainer.** `Drill.PracticeWord.alternates` already accepts other outlines; the exporters would list the unmarked outline as an alternate for those forms (`util/export_practice_words.py`, lesson exporters).
-
-## Branch TODO — clean up the stray MD files (abbreviations branch, 2026-10-05)
-
-- **Inventory.** The repo root holds about 20 working-note files next to the real docs (`README.md`, `CLAUDE.md`, `TODO.md`, `ROADMAP.md`): the dated `RESUME_*`, `PLAN_*`, `RESULTS_*`, `NOTES_*`, `QUESTIONS_*`, `PERF_*` files,
-  plus `affix_selection_speedup_notes.md`, `affix_rules_report.md` (a generated report), `Tao.md` and `birds.md`. Others lie in `scratch/` (`affix-H-*.md`) and untracked in `tmp/affix_golden/*_report.md`.
-  `docs/history/` already exists for the finished ones (affix work, 2026-09-25 to 10-01) and `docs/specs/` for the living specs.
-- **Triage each file** into: (a) still live, referenced by `TODO.md`, `CLAUDE.md` or the docs (e.g. the `RESULTS_`/`RESUME_2026-10-04-decoder-...` files cited under "Expression decoder"): keep, or fold into `docs/` and fix the references;
-  (b) finished: `git mv` into `docs/history/`; (c) superseded or generated: delete (`affix_rules_report.md` is rebuilt by `util.build_affix_rules`; check whether it must stay tracked); (d) unrelated (`Tao.md`, `birds.md`): ask the owner.
-- **Keep references intact.** `grep -rn` every moved or removed name across `*.md`, `*.py` and tests before touching it, and fix the links; run `pytest src/test/` and `mypy` after, since some tests may read these paths.
-- **Untracked clutter** (`tmp/`, `out`, `sorties/`, `notes.txt`, ...) is out of scope except the `*_report.md` files in `tmp/`; list the rest for a separate decision.
 
 ## Branch TODO — expression families and selector collapse (abbreviations branch, 2026-10-03)
 

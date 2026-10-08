@@ -13,6 +13,7 @@ import Json.Decode as D
 import Keyboard exposing (KeyInfo, Layout)
 import Lessons exposing (Lessons)
 import Notation exposing (Notation)
+import Style exposing (NumberStyle, Style)
 import PloverHid
 import Ports
 import Process
@@ -76,12 +77,17 @@ type alias Model =
     , keymap : Dict String Int
     , serial : SerialStatus
     , notation : Notation
+    , style : Style -- the punctuation and command chord set taught and shown: Plover (default) or Pluvier
+    , numberStyle : NumberStyle -- the number theory taught and shown: Pluvier's bar (default) or Lapwing's numpad
     , definitions : Maybe (LoadState Definitions)
+    , expressionDefinitions : Definitions.ExpressionDefinitions -- expression-definitions.json (attach words, composed phrases), optional
     , abbreviations : Dict String (Dict String String) -- affix-abbreviations.json (spelling -> long outline -> short), optional
     , wordRules : Dict String (List Int) -- affix-word-rules.json (lowercase spelling -> ranks of the affix rules shortening it), optional
     , lessons : Maybe (LoadState Lessons)
     , affixData : Maybe Lessons.AffixData -- affix-lessons.json, when it came back (the stub stays otherwise)
     , expressionData : Maybe Lessons.ExpressionData -- expression-lessons.json: the rules legend and the expressions lessons, when it came back
+    , punctuationData : Maybe Lessons.PunctuationData -- punctuation-lessons.json: the punctuation and command tracks of both styles, when it came back
+    , numberData : Maybe Lessons.NumberData -- number-lessons.json: the chiffres track of both number theories, when it came back
     , expressionSentences : Maybe (List PracticeWord) -- expression-sentences.json (abbreviated sentences), optional
     , abbreviatedSentences : Bool -- Sentences mode drills `expressionSentences` instead of the plain sentences
     , selectedLesson : Maybe String
@@ -103,6 +109,7 @@ type alias Simulation =
     { run : Int
     , strokes : List (List Int)
     , step : Int
+    , phonology : String -- Definitions page only: the clicked word's (raw X-SAMPA) phonology, for the 2-/3-/4-key phoneme boards
     }
 
 
@@ -119,12 +126,17 @@ type Msg
     | IncomingBytes (List Int)
     | ClearWrong Int
     | ToggleNotation
+    | ToggleStyle
+    | ToggleNumberStyle
     | GotDefinitions (Result Http.Error Definitions)
+    | GotExpressionDefinitions (Result Http.Error Definitions.ExpressionDefinitions)
     | GotAbbreviations (Result Http.Error (Dict String (Dict String String)))
     | GotWordRules (Result Http.Error (Dict String (List Int)))
     | GotLessons (Result Http.Error Lessons)
     | GotAffixData (Result Http.Error Lessons.AffixData)
     | GotExpressionData (Result Http.Error Lessons.ExpressionData)
+    | GotPunctuationData (Result Http.Error Lessons.PunctuationData)
+    | GotNumberData (Result Http.Error Lessons.NumberData)
     | GotExpressionSentences (Result Http.Error (List PracticeWord))
     | ToggleAbbreviatedSentences
     | SelectLesson String
@@ -138,6 +150,7 @@ type Msg
     | ToggleAbbrevHints
     | SkipWords Int
     | StartSimulation
+    | SimulateOutline String String
     | SimulationStep Int Int
 
 
@@ -171,12 +184,17 @@ init _ =
       , keymap = Dict.empty
       , serial = CheckingSupport
       , notation = Notation.XSampa
+      , style = Style.Plover
+      , numberStyle = Style.PluvierNumbers
       , definitions = Nothing
+      , expressionDefinitions = Definitions.emptyExpressions
       , abbreviations = Dict.empty
       , wordRules = Dict.empty
       , lessons = Nothing
       , affixData = Nothing
       , expressionData = Nothing
+      , punctuationData = Nothing
+      , numberData = Nothing
       , expressionSentences = Nothing
       , abbreviatedSentences = False
       , selectedLesson = Nothing
@@ -197,6 +215,8 @@ init _ =
         , getFresh { url = "public/data/affix-lessons.json", expect = Http.expectJson GotAffixData Lessons.affixDecoder }
         , getFresh { url = "public/data/affix-word-rules.json", expect = Http.expectJson GotWordRules (D.dict (D.list D.int)) }
         , getFresh { url = "public/data/expression-lessons.json", expect = Http.expectJson GotExpressionData Lessons.expressionDecoder }
+        , getFresh { url = "public/data/punctuation-lessons.json", expect = Http.expectJson GotPunctuationData Lessons.punctuationDecoder }
+        , getFresh { url = "public/data/number-lessons.json", expect = Http.expectJson GotNumberData Lessons.numberDecoder }
         , getFresh { url = "public/data/expression-sentences.json", expect = Http.expectJson GotExpressionSentences Drill.sentenceDecoder }
         ]
     )
@@ -242,6 +262,7 @@ update msg unswitched =
                 , Cmd.batch
                     [ getFresh { url = "public/data/definitions.json", expect = Http.expectJson GotDefinitions Definitions.decoder }
                     , getFresh { url = "public/data/affix-abbreviations.json", expect = Http.expectJson GotAbbreviations (D.dict (D.dict D.string)) }
+                    , getFresh { url = "public/data/expression-definitions.json", expect = Http.expectJson GotExpressionDefinitions Definitions.expressionsDecoder }
                     ]
                 )
 
@@ -263,6 +284,13 @@ update msg unswitched =
 
         GotAbbreviations (Ok abbreviations) ->
             ( { model | abbreviations = abbreviations }, Cmd.none )
+
+        GotExpressionDefinitions (Ok expressions) ->
+            ( { model | expressionDefinitions = expressions }, Cmd.none )
+
+        GotExpressionDefinitions (Err _) ->
+            -- Optional layer: without the file the Definitions page has no attach or composed entries.
+            ( model, Cmd.none )
 
         GotAbbreviations (Err _) ->
             -- Optional layer: without the file the Definitions page has no abbreviation column.
@@ -320,6 +348,43 @@ update msg unswitched =
 
         GotExpressionData (Err _) ->
             -- Optional layer: without the file the expressions track keeps its stub lesson.
+            ( model, Cmd.none )
+
+        GotPunctuationData (Ok data) ->
+            -- Same as the other files: whichever of lessons.json / punctuation-lessons.json arrives last merges.
+            ( { model
+                | punctuationData = Just data
+                , lessons =
+                    case model.lessons of
+                        Just (Loaded lessons) ->
+                            Just (Loaded (Lessons.mergePunctuationData model.style data lessons))
+
+                        other ->
+                            other
+              }
+            , Cmd.none
+            )
+
+        GotPunctuationData (Err _) ->
+            -- Optional layer: without the file there are no punctuation and command tracks.
+            ( model, Cmd.none )
+
+        GotNumberData (Ok data) ->
+            ( { model
+                | numberData = Just data
+                , lessons =
+                    case model.lessons of
+                        Just (Loaded lessons) ->
+                            Just (Loaded (Lessons.mergeNumberData model.numberStyle model.style data lessons))
+
+                        other ->
+                            other
+              }
+            , Cmd.none
+            )
+
+        GotNumberData (Err _) ->
+            -- Optional layer: without the file there is no chiffres track.
             ( model, Cmd.none )
 
         GotExpressionSentences (Ok sentences) ->
@@ -410,9 +475,23 @@ update msg unswitched =
                         run =
                             model.simulationRuns + 1
                     in
-                    ( { model | simulation = Just { run = run, strokes = strokes, step = 0 }, simulationRuns = run }
+                    ( { model | simulation = Just { run = run, strokes = strokes, step = 0, phonology = "" }, simulationRuns = run }
                     , simulationTimer run 0 strokes
                     )
+
+        SimulateOutline phonology outline ->
+            case ( model.layout, model.layout |> loadedKeys |> (\keys -> Keyboard.parseOutline keys outline) ) of
+                ( Loaded _, Just strokes ) ->
+                    let
+                        run =
+                            model.simulationRuns + 1
+                    in
+                    ( { model | simulation = Just { run = run, strokes = strokes, step = 0, phonology = phonology }, simulationRuns = run }
+                    , simulationTimer run 0 strokes
+                    )
+
+                _ ->
+                    ( model, Cmd.none )
 
         SimulationStep run step ->
             case model.simulation of
@@ -459,6 +538,61 @@ update msg unswitched =
 
         ToggleNotation ->
             ( { model | notation = Notation.toggle model.notation }, Cmd.none )
+
+        ToggleStyle ->
+            -- The lessons of the two styles have the same ids: the selection stays, but a running lesson drill
+            -- (whose items are the old style's chords) goes back to the lesson text.
+            let
+                style =
+                    Style.toggle model.style
+            in
+            ( { model
+                | style = style
+                , lessons =
+                    case ( model.lessons, model.punctuationData ) of
+                        ( Just (Loaded lessons), Just data ) ->
+                            Just (Loaded (mergeNumbers model.numberStyle style model.numberData (Lessons.mergePunctuationData style data lessons)))
+
+                        ( other, _ ) ->
+                            other
+                , drill =
+                    if model.mode == LessonMode then
+                        Nothing
+
+                    else
+                        model.drill
+                , typed = noTypedStrokes
+                , simulation = Nothing
+              }
+            , Cmd.none
+            )
+
+        ToggleNumberStyle ->
+            -- Same ids in both theories: the selection stays, a running lesson drill goes back to the lesson text.
+            let
+                numberStyle =
+                    Style.toggleNumber model.numberStyle
+            in
+            ( { model
+                | numberStyle = numberStyle
+                , lessons =
+                    case ( model.lessons, model.numberData ) of
+                        ( Just (Loaded lessons), Just data ) ->
+                            Just (Loaded (Lessons.mergeNumberData numberStyle model.style data lessons))
+
+                        ( other, _ ) ->
+                            other
+                , drill =
+                    if model.mode == LessonMode then
+                        Nothing
+
+                    else
+                        model.drill
+                , typed = noTypedStrokes
+                , simulation = Nothing
+              }
+            , Cmd.none
+            )
 
         ClickConnect ->
             ( model, Ports.requestConnect () )
@@ -557,6 +691,12 @@ applyLabels decoded model =
                     ( model, Cmd.none )
 
 
+{-| The lessons with the `chiffres` track of the chosen theory and punctuation style, when `number-lessons.json` came back. -}
+mergeNumbers : NumberStyle -> Style -> Maybe Lessons.NumberData -> Lessons.Lessons -> Lessons.Lessons
+mergeNumbers numberStyle style numberData lessons =
+    numberData |> Maybe.map (\data -> Lessons.mergeNumberData numberStyle style data lessons) |> Maybe.withDefault lessons
+
+
 {-| `lessons.json` with the optional files that already came back merged in
 (`affix-lessons.json`, `expression-lessons.json`). -}
 mergeOptionalData : Model -> Lessons -> Lessons
@@ -564,6 +704,8 @@ mergeOptionalData model lessons =
     lessons
         |> (\l -> model.affixData |> Maybe.map (\data -> Lessons.mergeAffixData data l) |> Maybe.withDefault l)
         |> (\l -> model.expressionData |> Maybe.map (\data -> Lessons.mergeExpressionData data l) |> Maybe.withDefault l)
+        |> (\l -> model.punctuationData |> Maybe.map (\data -> Lessons.mergePunctuationData model.style data l) |> Maybe.withDefault l)
+        |> (\l -> model.numberData |> Maybe.map (\data -> Lessons.mergeNumberData model.numberStyle model.style data l) |> Maybe.withDefault l)
 
 
 noTypedStrokes : TypedStrokes
@@ -798,6 +940,8 @@ view model =
                 , viewAbbrevHintsToggle model
                 , viewAbbreviatedSentencesToggle model
                 , viewNotationToggle model.notation
+                , viewStyleToggle model.style
+                , viewNumberStyleToggle model.numberStyle
                 ]
              ]
                 ++ viewSidebarLegends model
@@ -938,6 +1082,32 @@ viewNotationToggle notation =
         , button [ onClick ToggleNotation, disabled (notation == Notation.XSampa) ] [ text "X-SAMPA" ]
         , text " "
         , button [ onClick ToggleNotation, disabled (notation == Notation.Ipa) ] [ text "IPA" ]
+        ]
+
+
+{-| Switches the punctuation and command chords -- the lessons' texts and drills,
+the Definitions page -- between the Plover set (default) and the Pluvier one. See
+`Style`. -}
+viewStyleToggle : Style -> Html Msg
+viewStyleToggle style =
+    p [ class "notation-toggle" ]
+        [ text "Ponctuation et commandes : "
+        , button [ onClick ToggleStyle, disabled (style == Style.Plover) ] [ text "Plover" ]
+        , text " "
+        , button [ onClick ToggleStyle, disabled (style == Style.Pluvier) ] [ text "Pluvier" ]
+        ]
+
+
+{-| Switches the number theory -- the chiffres lessons' texts and drills, the numbers of
+the Definitions page -- between Pluvier's number bar (default, the same as Plover's) and
+Lapwing's numpad. See `Style.NumberStyle`. -}
+viewNumberStyleToggle : NumberStyle -> Html Msg
+viewNumberStyleToggle numberStyle =
+    p [ class "notation-toggle" ]
+        [ text "Chiffres : "
+        , button [ onClick ToggleNumberStyle, disabled (numberStyle == Style.PluvierNumbers) ] [ text "Pluvier" ]
+        , text " "
+        , button [ onClick ToggleNumberStyle, disabled (numberStyle == Style.Lapwing) ] [ text "Lapwing" ]
         ]
 
 
@@ -1160,6 +1330,16 @@ modeNoun mode =
             "lessons"
 
 
+loadedKeys : LoadState Layout -> List KeyInfo
+loadedKeys layout =
+    case layout of
+        Loaded loaded ->
+            loaded.keys
+
+        _ ->
+            []
+
+
 viewDefinitions : Model -> Html Msg
 viewDefinitions model =
     div [ class "definitions" ]
@@ -1174,7 +1354,16 @@ viewDefinitions model =
             []
         , case model.definitions of
             Just (Loaded definitions) ->
-                Definitions.view (Notation.render model.notation) model.abbreviations model.query definitions
+                Definitions.view (Notation.render model.notation)
+                    SimulateOutline
+                    model.abbreviations
+                    model.expressionDefinitions
+                    ((model.punctuationData |> Maybe.map (Lessons.punctuationEntries model.style) |> Maybe.withDefault [])
+                        ++ (model.numberData |> Maybe.map (Lessons.numberEntries model.numberStyle) |> Maybe.withDefault [])
+                    )
+                    model.numberStyle
+                    model.query
+                    definitions
 
             Just (Failed message) ->
                 p [ class "error" ] [ text ("Couldn't load definitions: " ++ message) ]
@@ -1348,6 +1537,13 @@ strokePosition word absolute =
             |> (\( index, remaining, found ) -> Maybe.withDefault ( index - 1, remaining ) found)
 
 
+{-| Whether the item is shown as a sentence, word by word: every Sentences item, and the
+phrases of the punctuation lessons (they carry segments). -}
+isSegmented : Model -> PracticeWord -> Bool
+isSegmented model word =
+    model.mode == SentenceMode || not (List.isEmpty word.segments)
+
+
 {-| The word of a sentence being shown: the one the Simulate run is in while it
 runs, else the one the drill is at. -}
 shownSegment : Model -> Drill.State -> PracticeWord -> Int
@@ -1463,11 +1659,21 @@ strokeInPhonology model rawLayout _ keys =
 {-| The (raw X-SAMPA) phonology of the word (sentence mode: the current word) being drilled. -}
 currentPhonology : Model -> String
 currentPhonology model =
+    case ( model.mode, model.simulation ) of
+        ( DefinitionMode, Just simulation ) ->
+            simulation.phonology
+
+        _ ->
+            drillPhonology model
+
+
+drillPhonology : Model -> String
+drillPhonology model =
     case model.drill of
         Just drill ->
             case Drill.currentWord drill of
                 Just word ->
-                    if model.mode == SentenceMode then
+                    if isSegmented model word then
                         String.split " " word.phonology |> List.drop (shownSegment model drill word) |> List.head |> Maybe.withDefault ""
 
                     else
@@ -1539,7 +1745,7 @@ currentReadingLabel model =
         Just drill ->
             case Drill.currentWord drill of
                 Just word ->
-                    if model.mode == SentenceMode then
+                    if isSegmented model word then
                         word.segments |> List.drop (shownSegment model drill word) |> List.head |> Maybe.map .label |> Maybe.withDefault ""
 
                     else
@@ -1600,21 +1806,20 @@ viewDrill model =
                     else
                         ShowTyped model.notation model.typed
             in
-            case model.mode of
-                SentenceMode ->
-                    viewSentence chordDisplay (labelEmphasis model) (shownSegment model drill word) (workingStroke model drill word) word
+            if isSegmented model word then
+                viewSentence chordDisplay (labelEmphasis model) (shownSegment model drill word) (workingStroke model drill word) word
 
-                _ ->
-                    div [ class "drill" ]
-                        [ div [ class "drill-words" ]
-                            [ div [ class "current-word" ]
-                                (p [ class "target-word" ] (viewInContext word)
-                                    :: viewReading chordDisplay (labelEmphasis model) (workingStroke model drill word) word.label word.phonology word.steno word.strokes
-                                )
-                            , p [ class "next-word" ]
-                                (Drill.nextWord drill |> Maybe.map viewInContext |> Maybe.withDefault [ text "\u{00A0}" ])
-                            ]
+            else
+                div [ class "drill" ]
+                    [ div [ class "drill-words" ]
+                        [ div [ class "current-word" ]
+                            (p [ class "target-word" ] (viewInContext word)
+                                :: viewReading chordDisplay (labelEmphasis model) (workingStroke model drill word) word.label word.phonology word.steno word.strokes
+                            )
+                        , p [ class "next-word" ]
+                            (Drill.nextWord drill |> Maybe.map viewInContext |> Maybe.withDefault [ text "\u{00A0}" ])
                         ]
+                    ]
 
         _ ->
             p [] [ text "Nothing to practice." ]
@@ -1671,7 +1876,7 @@ viewSentence chordDisplay emphasis currentIndex strokeIndex sentence =
 
         -- Elided words ("j'") and inversions ("-tu") attach to their neighbour.
         spaceBefore index segment =
-            if index == 0 || String.startsWith "-" segment.text then
+            if index == 0 || not segment.spaceBefore || String.startsWith "-" segment.text then
                 ""
 
             else
@@ -1693,10 +1898,14 @@ viewSentence chordDisplay emphasis currentIndex strokeIndex sentence =
             else
                 segment.text
 
+        -- A punctuation lesson's phrase carries its marks as segments already.
+        lastSegmentEnds c =
+            sentence.segments |> List.reverse |> List.head |> Maybe.map (\segment -> String.endsWith c segment.text) |> Maybe.withDefault False
+
         finalPunctuation =
             String.right 1 sentence.ortho
                 |> (\c ->
-                        if String.contains c ".?!" then
+                        if String.contains c ".?!" && not (lastSegmentEnds c) then
                             " " ++ c
 
                         else
@@ -1731,6 +1940,16 @@ viewSentence chordDisplay emphasis currentIndex strokeIndex sentence =
                    )
             )
         ]
+
+
+{-| The pronunciation between slashes; a mark or a command has none. -}
+phonologyLine : String -> String
+phonologyLine phonology =
+    if String.isEmpty phonology then
+        "\u{00A0}"
+
+    else
+        "/" ++ phonology ++ "/"
 
 
 {-| How a drilled word's chord line is shown: the chord itself (hints on,
@@ -1793,7 +2012,7 @@ viewReading chordDisplay emphasis currentStroke label phonology steno strokes =
                     markParts |> List.map (\( _, text_, _ ) -> text_) |> String.join "/"
             in
             [ p [ class "target-label" ] (emphasize emphasis label)
-            , p [ class "target-phonology" ] [ text ("/" ++ Notation.render notation phonology ++ "/") ]
+            , p [ class "target-phonology" ] [ text (phonologyLine (Notation.render notation phonology)) ]
             , p [ class "target-steno" ] (strokeSpans baseParts)
             , p [ class "target-mark" ]
                 (if String.isEmpty markPart then
@@ -1806,7 +2025,7 @@ viewReading chordDisplay emphasis currentStroke label phonology steno strokes =
 
         ShowTyped notation typed ->
             [ p [ class "target-label" ] (emphasize emphasis label)
-            , p [ class "target-phonology" ] [ text ("/" ++ Notation.render notation phonology ++ "/") ]
+            , p [ class "target-phonology" ] [ text (phonologyLine (Notation.render notation phonology)) ]
             , p [ class "target-steno typed-strokes" ]
                 [ text
                     (orSpace

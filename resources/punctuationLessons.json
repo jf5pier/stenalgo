@@ -1,0 +1,372 @@
+{
+ "families": [
+  {
+   "id": "point_virgule",
+   "track": "ponctuation",
+   "title": "le point, la virgule, les points de suspension",
+   "section": "Les signes de fin et de pause",
+   "intro": "Ces signes se collent au mot précédent. Le point met une majuscule au mot suivant."
+  },
+  {
+   "id": "marques",
+   "track": "ponctuation",
+   "title": "? ! : ; avec leur espace",
+   "section": "Les signes doubles",
+   "intro": "En français, ces quatre signes sont précédés d'une espace insécable que la frappe ajoute elle-même ; le ? et le ! mettent une majuscule au mot suivant."
+  },
+  {
+   "id": "guillemets",
+   "track": "ponctuation",
+   "title": "les guillemets « et »",
+   "section": "Les guillemets",
+   "intro": "Toujours par paire dans l'exercice : le guillemet ouvrant se colle au mot suivant, le fermant au mot précédent, avec une espace insécable à l'intérieur."
+  },
+  {
+   "id": "guillemets_simples",
+   "track": "ponctuation",
+   "title": "les guillemets intérieurs “ et ”",
+   "section": "Les guillemets",
+   "intro": "Les guillemets de second niveau, à l'intérieur d'un passage entre « et »."
+  },
+  {
+   "id": "parentheses",
+   "track": "ponctuation",
+   "title": "parenthèses et crochets",
+   "section": "Les parenthèses",
+   "intro": "Le signe ouvrant se colle au mot suivant, le fermant au mot précédent ; ils vont par paire."
+  },
+  {
+   "id": "colles",
+   "track": "ponctuation",
+   "title": "les signes collés aux deux mots",
+   "section": "Les signes collés",
+   "intro": "Ces signes se collent au mot qui précède et à celui qui suit (« super-avion », « oui/non »)."
+  },
+  {
+   "id": "espaces",
+   "track": "ponctuation",
+   "title": "espace, retour à la ligne, paragraphe",
+   "section": "Espaces et lignes",
+   "intro": "Ces signes règlent l'espacement du texte."
+  },
+  {
+   "id": "edition",
+   "track": "commandes",
+   "title": "effacer et valider",
+   "section": "Édition",
+   "intro": "Effacer, valider une ligne. Dans l'exercice rien n'est exécuté : la frappe seule est contrôlée."
+  },
+  {
+   "id": "fleches",
+   "track": "commandes",
+   "title": "les flèches",
+   "section": "Déplacements",
+   "intro": "Déplacer le curseur d'un caractère ou d'une ligne ; la même frappe avec l, n, ln... répète le déplacement 2, 3 ou 4 fois."
+  },
+  {
+   "id": "mots",
+   "track": "commandes",
+   "title": "se déplacer de mot en mot",
+   "section": "Déplacements",
+   "intro": "Ctrl + flèche gauche ou droite, répétable 2, 3 ou 4 fois."
+  },
+  {
+   "id": "debut_fin",
+   "track": "commandes",
+   "title": "début, fin, pages",
+   "section": "Déplacements",
+   "intro": "Début et fin de ligne ou de document, page précédente ou suivante, retour et avance dans l'historique."
+  },
+  {
+   "id": "selection",
+   "track": "commandes",
+   "title": "sélectionner",
+   "section": "Sélection",
+   "intro": "Les mêmes déplacements avec Maj enfoncée : ils sélectionnent le texte parcouru."
+  },
+  {
+   "id": "casse",
+   "track": "commandes",
+   "title": "majuscules et corrections",
+   "section": "Casse et corrections",
+   "intro": "Mettre une majuscule au mot suivant sans espace, corriger la frappe précédente."
+  }
+ ],
+ "entries": [
+  {
+   "slug": "point",
+   "translation": "{.}",
+   "name": "le point",
+   "family": "point_virgule"
+  },
+  {
+   "slug": "virgule",
+   "translation": "{,}",
+   "name": "la virgule",
+   "family": "point_virgule"
+  },
+  {
+   "slug": "suspension",
+   "translation": "{^...}",
+   "name": "les points de suspension",
+   "family": "point_virgule",
+   "glyph": "…"
+  },
+  {
+   "slug": "suspension_maj",
+   "translation": "{^}...{-|}",
+   "name": "les points de suspension suivis d'une majuscule",
+   "family": "point_virgule",
+   "glyph": "…"
+  },
+  {
+   "slug": "interro",
+   "translation": "{^ ?}{-|}",
+   "name": "le point d'interrogation",
+   "family": "marques"
+  },
+  {
+   "slug": "exclam",
+   "translation": "{^ !}{-|}",
+   "name": "le point d'exclamation",
+   "family": "marques"
+  },
+  {
+   "slug": "deux_points",
+   "translation": "{^ :}",
+   "name": "les deux-points",
+   "family": "marques"
+  },
+  {
+   "slug": "point_virgule",
+   "translation": "{^ ;}",
+   "name": "le point-virgule",
+   "family": "marques"
+  },
+  {
+   "slug": "lq",
+   "translation": "{~|« ^}",
+   "name": "le guillemet ouvrant «",
+   "family": "guillemets",
+   "glyph": "«",
+   "keywords": [
+    "\""
+   ]
+  },
+  {
+   "slug": "rq",
+   "translation": "{^~| »}",
+   "name": "le guillemet fermant »",
+   "family": "guillemets",
+   "glyph": "»",
+   "keywords": [
+    "\""
+   ]
+  },
+  {
+   "slug": "dialogue",
+   "translation": "{^ :}{~|« ^}",
+   "name": "les deux-points suivis d'un guillemet ouvrant",
+   "family": "guillemets",
+   "glyph": ":«",
+   "keywords": [
+    "\""
+   ]
+  },
+  {
+   "slug": "lstraight",
+   "translation": "{~|\"^}",
+   "name": "le guillemet droit ouvrant",
+   "family": "guillemets",
+   "glyph": "\""
+  },
+  {
+   "slug": "rstraight",
+   "translation": "{^~|\"}",
+   "name": "le guillemet droit fermant",
+   "family": "guillemets",
+   "glyph": "\""
+  },
+  {
+   "slug": "lsq",
+   "translation": "{~|“^}",
+   "name": "le guillemet intérieur ouvrant “",
+   "family": "guillemets_simples",
+   "glyph": "“",
+   "keywords": [
+    "'"
+   ]
+  },
+  {
+   "slug": "rsq",
+   "translation": "{^~|”}",
+   "name": "le guillemet intérieur fermant ”",
+   "family": "guillemets_simples",
+   "glyph": "”",
+   "keywords": [
+    "'"
+   ]
+  },
+  {
+   "slug": "lp",
+   "translation": "{(^}",
+   "name": "la parenthèse ouvrante",
+   "family": "parentheses",
+   "glyph": "("
+  },
+  {
+   "slug": "rp",
+   "translation": "{^)}",
+   "name": "la parenthèse fermante",
+   "family": "parentheses",
+   "glyph": ")"
+  },
+  {
+   "slug": "lb",
+   "translation": "{[^}",
+   "name": "le crochet ouvrant",
+   "family": "parentheses",
+   "glyph": "["
+  },
+  {
+   "slug": "rb",
+   "translation": "{^]}",
+   "name": "le crochet fermant",
+   "family": "parentheses",
+   "glyph": "]"
+  },
+  {
+   "slug": "virgule_collee",
+   "translation": "{^},{^}",
+   "name": "la virgule collée",
+   "family": "colles",
+   "glyph": ","
+  },
+  {
+   "slug": "point_colle",
+   "translation": "{^}.{^}",
+   "name": "le point collé",
+   "family": "colles",
+   "glyph": "."
+  },
+  {
+   "slug": "deux_points_colles",
+   "translation": "{^}:{^}",
+   "name": "les deux-points collés",
+   "family": "colles",
+   "glyph": ":"
+  },
+  {
+   "slug": "trait_union",
+   "translation": "{^}-{^}",
+   "name": "le trait d'union",
+   "family": "colles",
+   "glyph": "-"
+  },
+  {
+   "slug": "barre",
+   "translation": "{^}/{^}",
+   "name": "la barre oblique",
+   "family": "colles",
+   "glyph": "/"
+  },
+  {
+   "slug": "antislash",
+   "translation": "{^\\^}",
+   "name": "la barre oblique inverse",
+   "family": "colles",
+   "glyph": "\\"
+  },
+  {
+   "slug": "arobase",
+   "translation": "{^}@{^}",
+   "name": "l'arobase",
+   "family": "colles",
+   "glyph": "@"
+  },
+  {
+   "slug": "pourcent",
+   "translation": "{^%}",
+   "name": "le pour cent",
+   "family": "colles",
+   "glyph": "%"
+  },
+  {
+   "slug": "apostrophe",
+   "translation": "{^'^}",
+   "name": "l'apostrophe",
+   "family": "colles",
+   "glyph": "'"
+  },
+  {
+   "slug": "apostrophe_gauche",
+   "translation": "{^'}",
+   "name": "l'apostrophe collée au mot précédent",
+   "family": "colles",
+   "glyph": "'"
+  },
+  {
+   "slug": "apostrophe_droite",
+   "translation": "{'^}",
+   "name": "l'apostrophe collée au mot suivant",
+   "family": "colles",
+   "glyph": "'"
+  },
+  {
+   "slug": "tiret",
+   "translation": "-",
+   "name": "le tiret",
+   "family": "colles",
+   "glyph": "-"
+  },
+  {
+   "slug": "tiret_double",
+   "translation": "--",
+   "name": "le double tiret",
+   "family": "colles",
+   "glyph": "--"
+  },
+  {
+   "slug": "colle",
+   "translation": "{^^}",
+   "name": "la colle (rien, mais les mots voisins se collent)",
+   "family": "colles",
+   "glyph": "^"
+  },
+  {
+   "slug": "espace",
+   "translation": "{^ ^}",
+   "name": "l'espace",
+   "family": "espaces",
+   "glyph": "␣"
+  },
+  {
+   "slug": "retour",
+   "translation": "{^~|\n^}",
+   "name": "le retour à la ligne collé",
+   "family": "espaces",
+   "glyph": "↵"
+  },
+  {
+   "slug": "paragraphe",
+   "translation": "{^\n\n^}{-|}",
+   "name": "le nouveau paragraphe",
+   "family": "espaces",
+   "glyph": "¶"
+  },
+  {
+   "slug": "maj_suivante",
+   "translation": "{^}{-|}",
+   "name": "la majuscule au mot suivant, sans espace",
+   "family": "casse",
+   "glyph": "⇧"
+  },
+  {
+   "slug": "bascule_etoile",
+   "translation": "{*}",
+   "name": "la bascule de l'astérisque sur la frappe précédente",
+   "family": "casse",
+   "glyph": "*"
+  }
+ ]
+}

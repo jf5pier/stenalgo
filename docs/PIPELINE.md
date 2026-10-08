@@ -47,12 +47,12 @@ The real dependency order. Steps 0 and 1 and the human loop 4h are run by hand, 
 | 5 | `python -m util.build_keypress_groups` | Discriminating-Feature Grouping (Grouping Phase) | when the live features or discriminating feature sets change | The tracked output rarely changes after a lexicon fix. |
 | 6 | `python -m util.build_realization_report` | Discriminating-Feature Stroke Realization (Realization Phase), report build | before step 9's keyboard legend and lessons export | Writes the realization report only. It does not feed the disambiguated theory or the Plover dictionary. |
 | 7 | `python -m util.build_disambiguated_theory` | Different-Lemma or Grammatical-Category Disambiguation (S7) | to refresh `disambiguated_theory.tsv` and the exporters' `DisambiguatedTheory.pickle` | Fast (pickles exist); hard-errors naming the exact prerequisite commands when the pickles or JSONs are missing. Also writes the fingerprinted `DisambiguatedTheory.pickle` every exporter loads instead of recomputing (fact 1). |
-| 8 | `python -m util.export_plover_dictionary`, `python -m util.export_plover_system` | Theory Export (S8), Plover branch | Plover | Either order. |
+| 8 | `python -m util.export_plover_dictionary`, `python -m util.export_plover_system`, then `python -m util.export_plover_complements` | Theory Export (S8), Plover branch | Plover | The first two in either order; the complements read the stock dictionary (collision check) and `resources/outlineClassification.tsv`, and write the system's punctuation and commands dictionaries. |
 | 8b | `python -m util.export_expression_data`, `python -m util.export_plover_plugin` | Theory Export (S8), Plover branch, expression dictionary plugin (S8.10) | the expression abbreviation layer in Plover | After step 8 (reads `plover_stenalgo_dictionary.json`); `export_plover_plugin` also copies the JSON and the `.stenalgo` file into the plugin package (`plover_stenalgo/plover_stenalgo/dictionaries/`, gitignored) after checking their fingerprint, so a built and installed plugin carries a consistent pair. |
 | 9 | `python -m util.export_keyboard_layout` (after step 6), `python -m util.export_practice_words`, **then** `python -m util.export_practice_sentences`, then `python -m util.export_definitions`, then `python -m util.export_lessons` | Theory Export (S8), trainer branch | steno-trainer | `export_practice_sentences` reads `practice-words.json` (export_practice_sentences.py:157); `export_lessons` reads its Keypress Groups from `realization_report.json`, not `keypress_groups.json` (export_lessons.py:267). |
 | 10 | `python -m util.build_affix_rules`, then `python -m util.export_affix_dictionary`, then `python -m util.export_affix_lessons` | Affix Abbreviation Building (S9a, S9b, S9c) | the optional affix abbreviation layer | After the whole theory and its exports. S9a reads the committed `affix_decisions.json`; `AffixSelection.pickle` is its cache (absent: ~2.5 min full selection measured with 16 workers, the default is now at most 8; ~5.5 min with `--workers 1`; present: reused or cheaply reselected; `rm` it after any lexicon or layout change). Lists PENDING decisions, asks nothing. |
 | 10h | `python -m util.review_affix_rules` → `python -m util.build_affix_rules` | Affix Abbreviation Building, review | only when step 10 lists PENDING decisions | Hand-run and interactive: proposes each pending item with its help/hurt numbers (growth BEFORE fusion; a fusion is judged with its parts' decided growth, and a fused merge inherits its parts' growth), writes `affix_decisions.json` after every answer, then reselects by itself (cached, about a minute) and continues with what is newly pending, until nothing is pending, you quit, or a pass saved nothing. |
-| 11 | `python -m util.export_expression_lessons`, then `python -m util.export_expression_sentences` | Expression Abbreviation Lessons (S10a, S10b) | the trainer's expressions track and abbreviated sentences | After steps 8-9 (needs `practice-words.json` for the sentences). Reads the committed expression rule set and pool in `scratch/`; nothing is selected here. |
+| 11 | `python -m util.export_expression_lessons`, then `python -m util.export_expression_sentences`, then `python -m util.export_expression_definitions` | Expression Abbreviation Lessons (S10a, S10b, S10c) | the trainer's expressions track, abbreviated sentences, and the Definitions page's attach and composed entries | After steps 8-9 (needs `practice-words.json` for the sentences). Reads the committed expression rule set and pool in `scratch/`; nothing is selected here. |
 | opt | `python -m util.check_conjugation_disambiguation_order` | Elicitation Phase: Answer Collection, validator | checking answers | Writes `conjugation_disambiguation_report.json` (gitignored). |
 
 **The orchestrated entrypoint.** `python dictionary.py` (no arguments) runs the whole chain
@@ -274,7 +274,11 @@ Affix Abbreviation Building (S9) ................. optional layer after the fini
 Expression Abbreviation Lessons (S10) ............ optional layer after the finished theory; see below and docs/specs/expression-lessons.md
 ├─ S10a Trainer expression lessons — python -m util.export_expression_lessons → steno-trainer/public/data/expression-lessons.json
 │       ← scratch/expr-rules-final.json, expr-briefs.tsv, expr_candidates.tsv (committed rule set and pool), both pickles
-└─ S10b Trainer expression sentences — python -m util.export_expression_sentences → steno-trainer/public/data/expression-sentences.json
+├─ S10b Trainer expression sentences — python -m util.export_expression_sentences → steno-trainer/public/data/expression-sentences.json
+├─ S10c Trainer Definitions expression entries — python -m util.export_expression_definitions → steno-trainer/public/data/expression-definitions.json
+└─ S10d Trainer punctuation and command lessons — python -m util.export_punctuation_lessons → steno-trainer/public/data/punctuation-lessons.json
+└─ S10e Trainer number lessons — python -m util.export_number_lessons → steno-trainer/public/data/number-lessons.json
+        ← plover_stenalgo_{punctuation,commands,pluvier_punctuation}.json (S8), practice-words.json, resources/punctuationLessons.json, util/punctuation_examples.jsonl (authored)
 ```
 
 The two homophone problems have two mechanisms. Words that are forms of the same lemma and
@@ -1509,7 +1513,9 @@ induced strokes, finds every set of Words that share one canonical stroke **and*
 1990-reform **doublets**, ranks the group from most canonical to most marked with the
 **star/hash rule stack**, and gives each rank a **star/hash code**: `()`, `*`, `#`, `*#`, then
 escalated `*#` codes. The first symbol is pressed with the word's **last phoneme stroke** (a
-**merged star/hash mark**); further symbols become **\*/# marker strokes**. The result is
+**merged star/hash mark**); further symbols become **\*/# marker strokes**. A code whose merged
+stroke would be a **reserved number chord** (`util.export_plover_numbers.reservedNumberStrokes`: every `#` stroke of the
+Pluvier and Lapwing number systems) is skipped for that family (`forbiddenMarkSymbols`; docs/PLOVER_COMPLEMENTS.md "Numbers"). The result is
 the disambiguated theory, in memory, plus the human view `disambiguated_theory.tsv`.
 
 Scale: 4,450 lemma-homophone groups. Sizes (Words): 2: 2,947; 3: 989; 4: 341; 5: 104; 6:
@@ -2059,3 +2065,21 @@ word-by-word one. Schema and text conventions in `docs/specs/expression-lessons.
 **Transformation** the candidate sentences of `export_practice_sentences` (same token resolution and rejections), their tokens composed as one
 stream; only sentences that an abbreviation shortens are kept. The words' `strokeCount` follows `wordStrokeCounts` (a merged particle owns none).
 **Artifacts** writes `steno-trainer/public/data/expression-sentences.json`; `practice-sentences.json` stays byte-identical.
+
+### Trainer Definitions expression entries — util/export_expression_definitions.main (S10c)
+
+**Called by** `python dictionary.py` (after S10b), or by hand. **Input state** as S10a (both pickles, `starboard3h.json`, the committed expression rule set and pool).
+**Transformation** every attach rule (single-unit `de`, `d'`, `la`... and multi-unit `il n'`, `n' y`) becomes an entry with its keypress alone (rendered like any outline, so the trainer parses it back
+into keys), its label and up to six of the phrases it shortens; every composed pool phrase of two units or more that the full rule set shortens (`de la`, `et les`) becomes a phrase entry with its
+composed outline and its longform (`composeOutlineTraced`, the composer of the plugin and of S10a). The Definitions page looks both up by the typed spelling next to the dictionary words.
+**Artifacts** writes `steno-trainer/public/data/expression-definitions.json` only (`definitions.json` is untouched).
+
+### Trainer punctuation and command lessons — util/export_punctuation_lessons.main (S10d)
+Number lessons (S10e, `util/export_number_lessons.py` -> `number-lessons.json`): the `chiffres` track in two theories, Lapwing's numpad and Pluvier's number bar (Plover English's is Pluvier's), with a trainer button of its own beside the Plover/Pluvier punctuation one (`Style.NumberStyle`, default Pluvier). Reads `plover_stenalgo_{lapwing,pluvier}_numbers.json`, `plover_stenalgo_punctuation.json` (the glued comma and point of the Lapwing lessons) and the authored `resources/numberLessons.json`; `util/number_lessons.py` splits each example number into the strokes of the theory (bar: runs in the keyboard order 1 2 3 4 5 0 6 7 8 9; lapwing: a digit with its trailing zeros); 6 lessons per theory and punctuation style (the glued comma and point of the decimal lesson are the punctuation style's, so the lessons exist per (number theory, punctuation style)), and every single-stroke number (1023 for the bar) is a Definitions entry.
+
+**Called by** `python dictionary.py` (after S10c), or by hand. **Input state** the S8 complements' three JSONs (`plover_stenalgo_punctuation.json`, `plover_stenalgo_commands.json`, `plover_stenalgo_pluvier_punctuation.json`),
+`starboard3h.json`, `steno-trainer/public/data/practice-words.json`, and the two authored files `resources/punctuationLessons.json` (lesson families, the punctuation entries by translation) and `util/punctuation_examples.jsonl` (the drill phrases).
+**Transformation** the Plover style is the punctuation + commands files, the Pluvier style is its own file (a complete set); a style's own chords come first (`chordOrder`: own, unmarked, shortest). Each meaning (one Plover translation) is an entry with a primary chord, the other spellings (`*`/`#`
+twins, the other style's chord) being alternates. Commands are classified from their `{#...}` key combination (`commandInfo`). A punctuation drill item is a phrase (`Oh !`, `Il dit : « Merci »`, paired marks always together) whose words come from `practice-words.json`
+and whose text and per-segment spacing come from a small simulation of Plover's formatting (`typePieces`); a command item is the bare chord (the trainer never executes commands). Both styles have the same lesson ids.
+**Artifacts** writes `steno-trainer/public/data/punctuation-lessons.json` only: `tracks`, `lessons` per style, `entries` per style (every chord, twins included, for the Definitions page). The trainer's global Plover/Pluvier switch (`Style.elm`) picks the style.

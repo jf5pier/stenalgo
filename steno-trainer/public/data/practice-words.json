@@ -3353,9 +3353,10 @@
   "after": "",
   "label": "onomatopée",
   "phonology": "a",
-  "steno": "a#",
+  "steno": "*a#",
   "strokes": [
    [
+    10,
     12,
     15
    ]
@@ -6450,9 +6451,10 @@
   "after": "",
   "label": "onomatopée",
   "phonology": "e",
-  "steno": "e#",
+  "steno": "*e#",
   "strokes": [
    [
+    10,
     14,
     15
    ]
@@ -39593,10 +39595,11 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "pER",
-  "steno": "pie#R",
+  "steno": "p*ie#R",
   "strokes": [
    [
     4,
+    10,
     13,
     14,
     15,
@@ -66590,11 +66593,15 @@
   "after": "",
   "label": "onomatopée · nom, m.",
   "phonology": "a",
-  "steno": "*a#",
+  "steno": "*a#/*#",
   "strokes": [
    [
     10,
     12,
+    15
+   ],
+   [
+    10,
     15
    ]
   ],
@@ -122852,11 +122859,15 @@
   "after": "",
   "label": "nom, m.",
   "phonology": "e",
-  "steno": "*e#",
+  "steno": "*e#/*#",
   "strokes": [
    [
     10,
     14,
+    15
+   ],
+   [
+    10,
     15
    ]
   ],
@@ -145898,10 +145909,11 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "k@",
-  "steno": "k@#",
+  "steno": "k*@#",
   "strokes": [
    [
     2,
+    10,
     11,
     15
    ]
@@ -151999,9 +152011,10 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "E",
-  "steno": "ie#",
+  "steno": "*ie#",
   "strokes": [
    [
+    10,
     13,
     14,
     15
@@ -172970,10 +172983,11 @@
   "after": "",
   "label": "nom, f. sg. · article indéfini, m. sg.",
   "phonology": "pa",
-  "steno": "pa#",
+  "steno": "p*a#",
   "strokes": [
    [
     4,
+    10,
     12,
     15
    ]
@@ -184461,10 +184475,11 @@
   "after": "",
   "label": "adjectif, m. · nom, m. · adverbe",
   "phonology": "Ra",
-  "steno": "Ra#",
+  "steno": "R*a#",
   "strokes": [
    [
     8,
+    10,
     12,
     15
    ]
@@ -219974,9 +219989,10 @@
   "after": "",
   "label": "nom, f. sg.",
   "phonology": "ER",
-  "steno": "ie#R",
+  "steno": "*ie#R",
   "strokes": [
    [
+    10,
     13,
     14,
     15,
@@ -220043,10 +220059,11 @@
   "after": "",
   "label": "indicatif présent, 3e sg.",
   "phonology": "mat",
-  "steno": "ma#t",
+  "steno": "m*a#t",
   "strokes": [
    [
     6,
+    10,
     12,
     15,
     20
@@ -220060,10 +220077,11 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "mat",
-  "steno": "ma#t/-R",
+  "steno": "m*a#t/-R",
   "strokes": [
    [
     6,
+    10,
     12,
     15,
     20
@@ -220080,10 +220098,11 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "mat",
-  "steno": "ma#t/-k",
+  "steno": "m*a#t/-k",
   "strokes": [
    [
     6,
+    10,
     12,
     15,
     20
@@ -225728,11 +225747,12 @@
   "after": "",
   "label": "indicatif présent, 3e sg. · nom, f. sg.",
   "phonology": "kRak",
-  "steno": "kRa#k",
+  "steno": "kR*a#k",
   "strokes": [
    [
     2,
     8,
+    10,
     12,
     15,
     18
@@ -225746,11 +225766,12 @@
   "after": "",
   "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "kRak",
-  "steno": "kRa#k/-R",
+  "steno": "kR*a#k/-R",
   "strokes": [
    [
     2,
     8,
+    10,
     12,
     15,
     18
@@ -225767,11 +225788,12 @@
   "after": "",
   "label": "impératif présent, 2e sg. · indicatif présent, 1re sg.",
   "phonology": "kRak",
-  "steno": "kRa#k/-k",
+  "steno": "kR*a#k/-k",
   "strokes": [
    [
     2,
     8,
+    10,
     12,
     15,
     18
