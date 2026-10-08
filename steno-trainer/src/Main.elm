@@ -1916,7 +1916,8 @@ viewSentence chordDisplay emphasis currentIndex strokeIndex sentence =
                         " "
 
         displayText index segment =
-            if index == 0 then
+            -- The sentence's first word is capitalized as the sentence is; a spelling drill ("bal", letters as typed) is not.
+            if index == 0 && String.left 1 sentence.ortho /= String.toLower (String.left 1 sentence.ortho) then
                 String.toUpper (String.left 1 segment.text) ++ String.dropLeft 1 segment.text
 
             else
