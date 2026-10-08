@@ -492,3 +492,43 @@ body {
 
 /* The 0.5 s tick above the keyboard when a word or sentence was typed right (the line keeps its height when idle). */
 .done-signal { font-weight: bold; color: #0a7a0a; text-align: center; margin: 0.3em 0; }
+
+/* Dark mode: the `dark` class of <html>, set by js/serial.js from the stored setting. */
+html.dark { color-scheme: dark; }
+html.dark body { background: #1b1d1f; color: #e4e4e4; }
+html.dark .target-label,
+html.dark .target-phonology,
+html.dark .target-steno,
+html.dark .definition-hint,
+html.dark .definition-table th,
+html.dark .lesson-track-description,
+html.dark .lesson-section-title,
+html.dark .keyboard-reference .key { color: #aaa; }
+html.dark .target-steno .current-stroke { color: #fff; }
+html.dark .definition-table tr.near-homophone { color: #888; }
+html.dark .target-mark { color: #f06fb0; }
+html.dark .error { color: #ff6b6b; }
+html.dark .wrong-report { color: #ff6b6b; }
+html.dark .typed-strokes, html.dark .done-signal { color: #6fdc6f; }
+html.dark .sidebar .legend-block h2,
+html.dark .definition-table th { border-bottom-color: #444; }
+html.dark .key { border-color: #666; background: #25282b; }
+html.dark .key-reserved { opacity: 0.5; }
+html.dark .key-expected,
+html.dark .chord-overlay-hint,
+html.dark .lesson-item.selected { background: #3a3f44; }
+html.dark .key-correct,
+html.dark .key-incorrect,
+html.dark .chord-overlay-lit,
+html.dark .legend li.legend-lit,
+html.dark .legend li.legend-mark,
+html.dark .stroke-legend-group.legend-lit .stroke-legend-key.stroke-legend-pressed { color: #000; }
+html.dark .key-incorrect { background: #e86a6a; }
+html.dark .chord-connector { background: #666; }
+html.dark .stroke-legend-key { color: #777; }
+html.dark .stroke-legend-key.stroke-legend-pressed { color: #eee; }
+html.dark .chord-overlay { background: #25282b; color: #eee; border-color: #666; }
+
+.intro-page { max-width: 46rem; line-height: 1.5; }
+.intro-layout img { max-width: 100%; height: auto; }
+html.dark .intro-page a { color: #8ab4f8; }

@@ -1,4 +1,4 @@
-port module Ports exposing (incomingBytes, incomingHidChord, requestConnect, requestConnectHid, serialStatus)
+port module Ports exposing (incomingBytes, incomingHidChord, requestConnect, requestConnectHid, saveSettings, serialStatus)
 
 {-| The boundary to `js/serial.js` -- the only hand-written JS in this app,
 kept deliberately dumb (raw port/byte I/O only, no protocol decoding; see
@@ -33,3 +33,10 @@ port requestConnectHid : () -> Cmd msg
 (64 key bits, big-endian) ORed over the press; decoded by `PloverHid`.
 -}
 port incomingHidChord : (List Int -> msg) -> Sub msg
+
+
+{-| Elm -> JS: the sidebar settings as a JSON string, to store in the `stenalgo_settings`
+cookie (and, for the dark mode, to switch the page's theme class). Read back at start-up as
+the `settings` flag.
+-}
+port saveSettings : String -> Cmd msg

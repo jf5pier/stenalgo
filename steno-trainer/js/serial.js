@@ -9,7 +9,43 @@
 // - Requires a secure context (HTTPS or localhost, not file://).
 // - requestPort() must be called from a direct click handler (see below).
 (function () {
-  var app = Elm.Main.init({ node: document.getElementById("app") });
+  // The sidebar settings live in a cookie (JSON, written by Elm through the saveSettings port).
+  var COOKIE = "stenalgo_settings";
+
+  function readSettings() {
+    try {
+      var match = document.cookie.split("; ").filter(function (c) {
+        return c.indexOf(COOKIE + "=") === 0;
+      })[0];
+      return match ? decodeURIComponent(match.slice(COOKIE.length + 1)) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function setTheme(dark) {
+    document.documentElement.classList.toggle("dark", dark);
+  }
+
+  var storedSettings = readSettings();
+  var storedDark = null;
+  try {
+    storedDark = storedSettings ? JSON.parse(storedSettings).dark : null;
+  } catch (e) {}
+  setTheme(typeof storedDark === "boolean" ? storedDark : true);
+
+  var app = Elm.Main.init({
+    node: document.getElementById("app"),
+    flags: { settings: storedSettings },
+  });
+
+  app.ports.saveSettings.subscribe(function (json) {
+    try {
+      document.cookie =
+        COOKIE + "=" + encodeURIComponent(json) + "; max-age=31536000; path=/; SameSite=Lax";
+      setTheme(JSON.parse(json).dark === true);
+    } catch (e) {}
+  });
 
   function sendStatus(status) {
     app.ports.serialStatus.send(status);

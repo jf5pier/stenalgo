@@ -6,11 +6,12 @@ import Definitions exposing (Definitions)
 import Dict exposing (Dict)
 import Drill exposing (PracticeWord)
 import GeminiPr
-import Html exposing (Html, button, div, h1, h2, input, p, span, text, textarea)
-import Html.Attributes exposing (autofocus, class, classList, disabled, id, placeholder, rows, type_, value)
+import Html exposing (Html, a, button, div, h1, h2, img, input, p, span, text, textarea)
+import Html.Attributes exposing (alt, autofocus, class, classList, disabled, href, id, placeholder, rows, src, target, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Http
 import Json.Decode as D
+import Json.Encode as E
 import Keyboard exposing (KeyInfo, Layout)
 import Lessons exposing (Lessons)
 import Notation exposing (Notation)
@@ -130,6 +131,7 @@ type alias Model =
     , captureStrokes : Int -- bursts of text (one per Plover stroke) since the box was last empty: the stroke the hint is at
     , captureAt : Int -- millisecond time of the last change of the box
     , captureRuns : Int -- changes so far; an idle timer of an older change is ignored
+    , dark : Bool -- dark mode (the theme class itself is set by js/serial.js)
     , completion : Maybe Completion
     , completionRuns : Int
     , wrongReport : Maybe WrongReport -- the last wrong text of the capture box and the last strokes that write it, until the red flash ends
@@ -187,6 +189,7 @@ type Msg
     | SimulateOutline String String
     | SimulationStep Int Int
     | ToggleTextCapture
+    | ToggleDark
     | CaptureTyped String
     | CaptureStamped String Time.Posix
     | CaptureIdle Int
@@ -209,13 +212,23 @@ getFresh { url, expect } =
         }
 
 
-main : Program () Model Msg
+main : Program D.Value Model Msg
 main =
-    Browser.element { init = init, update = update, subscriptions = subscriptions, view = view }
+    Browser.element { init = init, update = updateAndSave, subscriptions = subscriptions, view = view }
 
 
-init : () -> ( Model, Cmd Msg )
-init _ =
+init : D.Value -> ( Model, Cmd Msg )
+init flags =
+    let
+        ( model, cmd ) =
+            initialModel
+    in
+    startUp flags model cmd
+
+
+{-| The model before the stored settings, and the loads every start makes. -}
+initialModel : ( Model, Cmd Msg )
+initialModel =
     ( { layout = Loading
       , words = Loading
       , sentences = Loading
@@ -248,11 +261,12 @@ init _ =
       , lastStroke = Set.empty
       , wrongRuns = 0
       , typed = noTypedStrokes
-      , textCapture = False
+      , textCapture = True
       , captureText = ""
       , captureStrokes = 0
       , captureAt = 0
       , captureRuns = 0
+      , dark = True
       , completion = Nothing
       , completionRuns = 0
       , wrongReport = Nothing
@@ -270,6 +284,101 @@ init _ =
         , getFresh { url = "public/data/expression-sentences.json", expect = Http.expectJson GotExpressionSentences Drill.sentenceDecoder }
         ]
     )
+
+
+{-| The sidebar settings kept in the `stenalgo_settings` cookie. -}
+type alias Settings =
+    { hints : Bool
+    , abbrevHints : Maybe Bool
+    , abbreviatedSentences : Bool
+    , notation : Notation
+    , style : Style
+    , numberStyle : NumberStyle
+    , textCapture : Bool
+    , dark : Bool
+    }
+
+
+settingsOf : Model -> Settings
+settingsOf model =
+    { hints = model.hints
+    , abbrevHints = model.abbrevHints
+    , abbreviatedSentences = model.abbreviatedSentences
+    , notation = model.notation
+    , style = model.style
+    , numberStyle = model.numberStyle
+    , textCapture = model.textCapture
+    , dark = model.dark
+    }
+
+
+encodeSettings : Settings -> String
+encodeSettings settings =
+    E.encode 0
+        (E.object
+            [ ( "hints", E.bool settings.hints )
+            , ( "abbrevHints", settings.abbrevHints |> Maybe.map E.bool |> Maybe.withDefault E.null )
+            , ( "abbreviatedSentences", E.bool settings.abbreviatedSentences )
+            , ( "notation", E.string (if settings.notation == Notation.Ipa then "ipa" else "xsampa") )
+            , ( "style", E.string (if settings.style == Style.Pluvier then "pluvier" else "plover") )
+            , ( "numberStyle", E.string (if settings.numberStyle == Style.Lapwing then "lapwing" else "pluvier") )
+            , ( "textCapture", E.bool settings.textCapture )
+            , ( "dark", E.bool settings.dark )
+            ]
+        )
+
+
+{-| The stored settings over the defaults of `model`; a missing or unreadable field keeps its default. -}
+applySettings : D.Value -> Model -> Model
+applySettings flags model =
+    let
+        stored =
+            D.decodeValue (D.field "settings" D.string) flags |> Result.withDefault ""
+
+        field name decoder fallback =
+            D.decodeString (D.field name decoder) stored |> Result.withDefault fallback
+    in
+    { model
+        | hints = field "hints" D.bool model.hints
+        , abbrevHints = field "abbrevHints" (D.nullable D.bool) model.abbrevHints
+        , abbreviatedSentences = field "abbreviatedSentences" D.bool model.abbreviatedSentences
+        , notation = field "notation" (D.map (\n -> if n == "ipa" then Notation.Ipa else Notation.XSampa) D.string) model.notation
+        , style = field "style" (D.map (\n -> if n == "pluvier" then Style.Pluvier else Style.Plover) D.string) model.style
+        , numberStyle = field "numberStyle" (D.map (\n -> if n == "lapwing" then Style.Lapwing else Style.PluvierNumbers) D.string) model.numberStyle
+        , textCapture = field "textCapture" D.bool model.textCapture
+        , dark = field "dark" D.bool model.dark
+    }
+
+
+{-| Start-up: the stored settings over the defaults (text mode and dark mode on), and the
+whole-lexicon definitions that Plover text mode's reverse lookup needs when that mode is on. -}
+startUp : D.Value -> Model -> Cmd Msg -> ( Model, Cmd Msg )
+startUp flags model cmd =
+    let
+        configured =
+            applySettings flags model
+    in
+    if configured.textCapture then
+        ( { configured | definitions = Just Loading }
+        , Cmd.batch [ cmd, getFresh { url = "public/data/definitions.json", expect = Http.expectJson GotDefinitions Definitions.decoder } ]
+        )
+
+    else
+        ( configured, cmd )
+
+
+{-| `update`, saving the settings to the cookie whenever one of them changed. -}
+updateAndSave : Msg -> Model -> ( Model, Cmd Msg )
+updateAndSave msg model =
+    let
+        ( newModel, cmd ) =
+            update msg model
+    in
+    if settingsOf newModel /= settingsOf model then
+        ( newModel, Cmd.batch [ cmd, Ports.saveSettings (encodeSettings (settingsOf newModel)) ] )
+
+    else
+        ( newModel, cmd )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -627,6 +736,9 @@ update msg unswitched =
                     Cmd.none
                 ]
             )
+
+        ToggleDark ->
+            ( { model | dark = not model.dark }, Cmd.none )
 
         NoOp ->
             ( model, Cmd.none )
@@ -1437,15 +1549,15 @@ view model =
              , viewSection "Options"
                 [ viewHintsToggle model
                 , viewAbbrevHintsToggle model
-                , viewTextCaptureToggle model
                 , viewAbbreviatedSentencesToggle model
                 , viewNotationToggle model.notation
                 , viewStyleToggle model.style
                 , viewNumberStyleToggle model.numberStyle
+                , viewOnOff "Mode sombre" model.dark ToggleDark
                 ]
              ]
                 ++ viewSidebarLegends model
-                ++ [ viewSection "Connexion au clavier steno" [ viewConnectButton model.serial ] ]
+                ++ [ viewSection "Connexion au clavier steno" [ viewTextCaptureToggle model, viewConnectButton model.textCapture model.serial ] ]
             )
         , div [ class "main" ] [ viewTrainer model ]
         ]
@@ -1472,11 +1584,7 @@ viewOnOff label isOn toggle =
 drill, not the board's strokes (no board connection needed; no per-stroke feedback). -}
 viewTextCaptureToggle : Model -> Html Msg
 viewTextCaptureToggle model =
-    if isInfoMode model.mode then
-        text ""
-
-    else
-        viewOnOff "Saisie Plover (texte)" model.textCapture ToggleTextCapture
+    viewOnOff "Saisie Plover (texte)" model.textCapture ToggleTextCapture
 
 
 {-| The 0.5 s tick above the keyboard when an item was typed right (see `Completion`). -}
@@ -1538,23 +1646,42 @@ viewIntroPage : Html Msg
 viewIntroPage =
     div [ class "intro-page" ]
         [ h1 [] [ text "Introduction" ]
-        , p [] [ text "\u{00C0} venir." ]
+        , p []
+            [ text "Stenalgo fran\u{00E7}ais est une th\u{00E9}orie de st\u{00E9}nographie optimis\u{00E9}e de toutes pi\u{00E8}ces, fond\u{00E9}e sur les fr\u{00E9}quences lexicales des mots et des expressions de la langue fran\u{00E7}aise. L'algorithme est entra\u{00EE}n\u{00E9} sur pr\u{00E8}s de 136\u{00A0}000 mots dont l'occurrence a \u{00E9}t\u{00E9} mesur\u{00E9}e dans des textes de livres et de films, mais aussi sur 50\u{00A0}000 formes (surtout des conjugaisons) qui manquaient au lexique. La th\u{00E9}orie est donc compl\u{00E8}te et sans conflit."
+            ]
+        , p []
+            [ text "Ce site vous fournit les le\u{00E7}ons pour apprendre \u{00E0} utiliser le clavier phon\u{00E9}tique, l'entr\u{00E9}e des mots homophones (accords et conjugaisons compris), la ponctuation et les touches sp\u{00E9}ciales du clavier, les nombres et l'\u{00E9}pellation des mots qui ne font pas partie de la th\u{00E9}orie. Vous y trouverez aussi des rubriques avanc\u{00E9}es qui offrent des raccourcis (briefs) pour les mots et les expressions courants, et pour certains pr\u{00E9}fixes et suffixes fr\u{00E9}quents."
+            ]
+        , p []
+            [ text "Pour pratiquer sur ce site, vous pouvez connecter un clavier de disposition \u{00AB}\u{00A0}Irlande\u{00A0}\u{00BB} dot\u{00E9} d'au moins 24 touches, par le protocole Gemini PR ou Plover machine HID. Sinon, vous pouvez utiliser le plugin Stenalgo pour Plover (test\u{00E9} avec la version 5.4.1) en suivant les instructions de la page "
+            , a [ href "https://github.com/jf5pier/stenalgo-plover", target "_blank" ] [ text "github.com/jf5pier/stenalgo-plover" ]
+            , text ". Avec la saisie Plover (texte) activ\u{00E9}e dans la colonne de gauche, ce site v\u{00E9}rifie alors le texte que Plover \u{00E9}crit."
+            ]
+        , p []
+            [ text "La disposition des touches du clavier Stenalgo a elle aussi \u{00E9}t\u{00E9} optimis\u{00E9}e selon la fr\u{00E9}quence et l'ordre des phon\u{00E8}mes du fran\u{00E7}ais\u{00A0}:" ]
+        , p [ class "intro-layout" ]
+            [ img [ src "public/stenalgo_layout.svg", alt "Disposition des touches du clavier Stenalgo (Starboard)" ] [] ]
+        , p []
+            [ text "Pour en savoir plus sur la philosophie et le travail derri\u{00E8}re Stenalgo, visitez la page GitHub du projet\u{00A0}: "
+            , a [ href "https://github.com/jf5pier/stenalgo", target "_blank" ] [ text "github.com/jf5pier/stenalgo" ]
+            , text "."
+            ]
         ]
 
 
 {-| One button per protocol, Gemini PR (Web Serial) and Plover HID (WebHID); both
 APIs exist only in Chrome and Edge, which the browser-less case spells out. -}
-viewConnectButton : SerialStatus -> Html Msg
-viewConnectButton serial =
+viewConnectButton : Bool -> SerialStatus -> Html Msg
+viewConnectButton textCapture serial =
     case serial of
         Unsupported ->
             p [ class "unsupported" ] [ text "Ce navigateur ne g\u{00E8}re ni Web Serial ni WebHID : utilisez Chrome ou Edge pour pratiquer avec le clavier." ]
 
         _ ->
             div [ class "connect-buttons" ]
-                [ button [ class "connect-button", onClick ClickConnect, disabled (serial == Connected) ] [ text "Gemini PR" ]
+                [ button [ class "connect-button", onClick ClickConnect, disabled (textCapture || serial == Connected) ] [ text "Gemini PR" ]
                 , text " "
-                , button [ class "connect-button", onClick ClickConnectHid, disabled (serial == Connected) ] [ text "Plover HID (chrome/edge only)" ]
+                , button [ class "connect-button", onClick ClickConnectHid, disabled (textCapture || serial == Connected) ] [ text "Plover HID (chrome/edge only)" ]
                 , case serial of
                     Connected ->
                         p [] [ text "Connect\u{00E9}." ]

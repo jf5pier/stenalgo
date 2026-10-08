@@ -109,6 +109,9 @@ python -m util.export_keyboard_layout        # Theory Export (S8), trainer branc
 # Prerequisites: starboard3h.json; realization_report.json (marker legend; optional).
 # Outputs: steno-trainer/public/data/keyboard-layout.json.
 
+python -m util.export_svg_layout [OUTPUT]   # the Starboard picture (one <g id="key-NN"> per key): the trainer's Introduction page
+# Prerequisites: starboard3h.json. Outputs: steno-trainer/public/stenalgo_layout.svg (committed; rerun after an adopted layout change).
+
 python -m util.export_practice_words
 # Prerequisites: both pickles, starboard3h.json, keypress_groups.json,
 # resolved_press_sets.json. Outputs: steno-trainer/public/data/practice-words.json.
