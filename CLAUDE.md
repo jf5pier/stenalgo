@@ -84,6 +84,11 @@ python -m util.export_plover_numbers
 # and Lapwing's numpad (resources/reference/lapwing-numbers.json, hours in French). Prerequisites: starboard3h.json, plover_stenalgo_dictionary.json, the punctuation and commands files.
 # Outputs: plover_stenalgo_pluvier_numbers.json, plover_stenalgo_lapwing_numbers.json (shipped by export_plover_plugin; the Pluvier one is listed above the Lapwing one = the default).
 
+python -m util.export_plover_spelling
+# Single-letter typing: a-z, à â é è ê ë î ï ô ù û ü ç, lower/UPPER x no space/space after (docs/PLOVER_COMPLEMENTS.md "Spelling").
+# Prerequisites: starboard3h.json, the theory, affix, punctuation, commands and number files, the expression data. Outputs: plover_stenalgo_spelling.json
+# (shipped by export_plover_plugin; raises on any collision).
+
 python -m util.export_expression_data [OUT]   # expression layer data for the Plover plugin
 # Prerequisites: the committed rule set (scratch/expr-rules-final.json, expr-briefs.tsv, expr_candidates.tsv),
 # both pickles, starboard3h.json, plover_stenalgo_dictionary.json (the word index is read from it).
@@ -93,7 +98,7 @@ python -m util.export_expression_data [OUT]   # expression layer data for the Pl
 python -m util.export_plover_plugin
 # Copies the stdlib-only decoder modules src/{strokes,expressionmodel,keyconflicts,elision,expressiondecoder,
 # expressionranking,expressiondata}.py into plover_stenalgo/plover_stenalgo/_core/ (tracked; a test fails when stale), and
-# plover_stenalgo_dictionary.json + plover_stenalgo_expressions.stenalgo + plover_stenalgo_punctuation.json + plover_stenalgo_commands.json + plover_stenalgo_pluvier_punctuation.json + plover_stenalgo_pluvier_numbers.json + plover_stenalgo_lapwing_numbers.json into plover_stenalgo/plover_stenalgo/dictionaries/
+# plover_stenalgo_dictionary.json + plover_stenalgo_expressions.stenalgo + plover_stenalgo_punctuation.json + plover_stenalgo_commands.json + plover_stenalgo_pluvier_punctuation.json + plover_stenalgo_pluvier_numbers.json + plover_stenalgo_lapwing_numbers.json + plover_stenalgo_spelling.json into plover_stenalgo/plover_stenalgo/dictionaries/
 # (gitignored package assets, fingerprint-checked; run it after export_expression_data, then build/install the plugin).
 
 python -m util.sync_plover_mirror MIRROR_CLONE [--push]
@@ -215,7 +220,7 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 
 ## Verification approach
 
-- `pytest src/test/` must pass after any `.py` change (1225 tests at the time of writing, expression layer, affix layer and lessons exporter included).
+- `pytest src/test/` must pass after any `.py` change (1233 tests at the time of writing, expression layer, affix layer and lessons exporter included).
 - `mypy` (bare, scope and options in `mypy.ini`) must report no issues after any `.py` change.
 - Behaviour-preserving changes are proven by a full rebuild following the rebuild table in
   `docs/PIPELINE.md`, comparing the md5s of `phonetic_theory.tsv`, `disambiguated_theory.tsv`,

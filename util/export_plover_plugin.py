@@ -32,7 +32,7 @@ EXPRESSIONS = "plover_stenalgo_expressions.stenalgo"
 # (Plover enables every default dictionary, so a Pluvier user switches the set he does not use off in the dictionary panel)
 COMPLEMENTS = ("plover_stenalgo_commands.json", "plover_stenalgo_punctuation.json",
                "plover_stenalgo_pluvier_punctuation.json", "plover_stenalgo_pluvier_numbers.json",
-               "plover_stenalgo_lapwing_numbers.json")
+               "plover_stenalgo_lapwing_numbers.json", "plover_stenalgo_spelling.json")
 
 # The closure of src.expressiondecoder / expressionranking / expressiondata (checked stdlib-only by the test).
 MODULES = ("strokes", "expressionmodel", "keyconflicts", "elision", "expressiondecoder", "expressionranking",

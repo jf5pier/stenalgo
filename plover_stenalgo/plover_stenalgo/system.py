@@ -51,6 +51,7 @@ DICTIONARIES_ROOT = "asset:plover:assets"
 # higher one wins a shared chord (`spmR-jktn` is the colon in Plover English's and the exclamation mark in Pluvier's: the colon wins).
 # The numbers (util/export_plover_numbers.py) come in two files, Pluvier's number bar above Lapwing's numpad: the default is Pluvier's, and a
 # chord both define is Pluvier's. Either file is turned off in the dictionary panel.
+# The spelling (util/export_plover_spelling.py, one theory of our own, no chord shared with anything else) comes after the numbers.
 # A Pluvier user turns `plover_stenalgo_punctuation.json` off, or moves the Pluvier file up, in Plover's dictionary panel.
 DEFAULT_DICTIONARIES: tuple[str, ...] = (
     "user.json",
@@ -59,6 +60,7 @@ DEFAULT_DICTIONARIES: tuple[str, ...] = (
     ASSET_PREFIX + "plover_stenalgo_pluvier_punctuation.json",
     ASSET_PREFIX + "plover_stenalgo_pluvier_numbers.json",
     ASSET_PREFIX + "plover_stenalgo_lapwing_numbers.json",
+    ASSET_PREFIX + "plover_stenalgo_spelling.json",
     ASSET_PREFIX + "plover_stenalgo_expressions.stenalgo",
     ASSET_PREFIX + "plover_stenalgo_dictionary.json",
 )

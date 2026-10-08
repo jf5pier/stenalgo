@@ -132,3 +132,10 @@ c (k or s), h, q, x, y. Vowels a e i o u y have thumb chords. The designer shoul
 - Lessons: `util/export_punctuation_lessons.py` (`phraseItem`, `typePieces` with `{&..}` glue, `ruleLines`), `util/export_number_lessons.py`,
   `util/number_lessons.py`, `resources/numberLessons.json`, Elm `Lessons.elm` (`mergeNumberData`), `Definitions.elm`.
 - Reference data for comparison: Lapwing `lapwing-base.json` (aerickt/plover-lapwing-aio), Plover `main.json`, Tao.md "Le mode épellation".
+
+## 9. Progress (2026-10-08, same day)
+
+Decided with the user: extra characters î û ë ü (no œ æ ÿ); own keys for acute and cedilla, `&` `%` NOT used; letters by sound position; the three Ireland-based spellings dropped.
+DONE and committed-ready: the design (docs/PLOVER_COMPLEMENTS.md "Spelling"), `util/export_plover_spelling.py` (+ `src/test/plover_spelling_test.py`), `plover_stenalgo_spelling.json`
+(156 strokes, zero collisions), plugin shipping (`COMPLEMENTS`, `DEFAULT_DICTIONARIES`), S7 reservation (`reservedSpellingStrokes`, theory md5s unchanged).
+STILL TO DO: trainer spelling lessons (step 5: `util/export_spelling_lessons.py` -> `spelling-lessons.json`, Elm side), typing check in Plover (`{&a}{^ ^}` spacing), a plugin version bump and reinstall.

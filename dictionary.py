@@ -51,6 +51,7 @@ import sys
 
 from util._timing import recordTiming
 from util.export_plover_numbers import reservedNumberStrokes
+from util.export_plover_spelling import reservedSpellingStrokes
 
 # Non-canonical spellings of the ACTIVE sets of resources/spellingVariants.tsv,
 # dropped at this single load choke point for LexiqueMixte.tsv AND
@@ -386,7 +387,7 @@ class Dictionary:
         (buildPhoneticTheory) composed with the
         same-lemma coda-bank realization of Discriminating-Feature Stroke Realization
         (Realization Phase) (src.ambiguitychecker.realizeKeypressGroupsAsExtraStroke)
-        and the star/hash mark reserved keys (never making a number chord, `reservedNumberStrokes`) of Different-Lemma or Grammatical-Category
+        and the star/hash mark reserved keys (never making a number or spelling chord, `reservedNumberStrokes`, `reservedSpellingStrokes`) of Different-Lemma or Grammatical-Category
         Disambiguation (S7) (src.ambiguitychecker.composeReservedKeyStrokesForEntries) on
         top, its first mark key pressed together with the word's last phoneme stroke. Any
         further entries are the word's OTHER readings
@@ -439,7 +440,7 @@ class Dictionary:
              for word, strokes in finalInduced.items() if word not in spellingTwins},
             loadReform1990DoubletPairs(),
             phonemeStrokeCounts={word: len(strokes) for word, strokes in wordToStrokes.items()},
-            reservedStrokes=reservedNumberStrokes(),
+            reservedStrokes=reservedNumberStrokes() | reservedSpellingStrokes(),
         )
 
     def writeDisambiguatedTheory(

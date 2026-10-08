@@ -1515,7 +1515,7 @@ induced strokes, finds every set of Words that share one canonical stroke **and*
 escalated `*#` codes. The first symbol is pressed with the word's **last phoneme stroke** (a
 **merged star/hash mark**); further symbols become **\*/# marker strokes**. A code whose merged
 stroke would be a **reserved number chord** (`util.export_plover_numbers.reservedNumberStrokes`: every `#` stroke of the
-Pluvier and Lapwing number systems) is skipped for that family (`forbiddenMarkSymbols`; docs/PLOVER_COMPLEMENTS.md "Numbers"). The result is
+Pluvier and Lapwing number systems) is skipped for that family (`forbiddenMarkSymbols`; docs/PLOVER_COMPLEMENTS.md "Numbers"), as is a spelling stroke holding a mark key (`util.export_plover_spelling.reservedSpellingStrokes`). The result is
 the disambiguated theory, in memory, plus the human view `disambiguated_theory.tsv`.
 
 Scale: 4,450 lemma-homophone groups. Sizes (Words): 2: 2,947; 3: 989; 4: 341; 5: 104; 6:
