@@ -1,4 +1,4 @@
-module Drill exposing (Outline, PracticeWord, Segment, State, applyStroke, currentSegmentIndex, currentWord, decoder, skipWords, matchedOutline, expectedStroke, init, nextWord, reshuffle, sentenceDecoder, wordDecoder)
+module Drill exposing (TextStatus(..), textStatus, applyText, Outline, PracticeWord, Segment, State, applyStroke, currentSegmentIndex, currentWord, decoder, skipWords, matchedOutline, expectedStroke, init, nextWord, reshuffle, sentenceDecoder, wordDecoder)
 
 {-| The drill engine: a shuffled walk through the word list (loaded already
 frequency-ordered by `util/export_practice_words.py`, but drilled in a
@@ -298,6 +298,91 @@ applyStroke observed state =
                   }
                 , False
                 )
+
+        Nothing ->
+            ( state, False )
+
+
+{-| How the text a learner typed into the Plover capture box stands against the
+current item. -}
+type TextStatus
+    = TextDone -- the whole item's text
+    | TextPartial -- the start of it (Plover may still be mid-item, or has just untranslated)
+    | TextWrong
+
+
+{-| Whitespace as Plover emits it: runs collapsed to one space (no-break and narrow
+no-break spaces included), the trailing space Plover adds after a word dropped. -}
+normalizeText : String -> String
+normalizeText text =
+    text
+        |> String.map
+            (\c ->
+                if c == '\u{00A0}' || c == '\u{202F}' || c == '\n' || c == '\t' then
+                    ' '
+
+                else
+                    c
+            )
+        |> String.words
+        |> String.join " "
+
+
+{-| The same text up to the case of its first character (Plover capitalizes after a
+sentence end, and the item's own case is not what the capture box checks). -}
+sameText : String -> String -> Bool
+sameText expected typed =
+    expected == typed || (String.toLower (String.left 1 expected) == String.toLower (String.left 1 typed) && String.dropLeft 1 expected == String.dropLeft 1 typed)
+
+
+textStatus : String -> PracticeWord -> TextStatus
+textStatus typed word =
+    let
+        expected =
+            normalizeText word.ortho
+
+        written =
+            normalizeText typed
+    in
+    if sameText expected written && (not (String.isEmpty written)) then
+        TextDone
+
+    else if String.isEmpty written then
+        TextPartial
+
+    else if sameText (String.left (String.length written) expected) written then
+        TextPartial
+
+    else
+        TextWrong
+
+
+{-| Advance the drill on a text the capture box accepted as the whole item: the
+counterpart of the last-stroke branch of `applyStroke` (same pass-boundary flag). -}
+applyText : String -> State -> ( State, Bool )
+applyText typed state =
+    case currentWord state of
+        Just word ->
+            case textStatus typed word of
+                TextDone ->
+                    let
+                        newIndex =
+                            wrappedIndex state (state.currentWordIndex + 1)
+                    in
+                    ( { state
+                        | currentWordIndex = newIndex
+                        , currentStrokeIndex = 0
+                        , typed = []
+                        , feedback = Just True
+                      }
+                    , newIndex == 0
+                    )
+
+                TextPartial ->
+                    ( state, False )
+
+                TextWrong ->
+                    ( { state | feedback = Just False }, False )
 
         Nothing ->
             ( state, False )

@@ -1,12 +1,13 @@
 module Main exposing (main)
 
 import Browser
+import Browser.Dom as Dom
 import Definitions exposing (Definitions)
 import Dict exposing (Dict)
 import Drill exposing (PracticeWord)
 import GeminiPr
-import Html exposing (Html, button, div, h1, h2, input, p, span, text)
-import Html.Attributes exposing (autofocus, class, classList, disabled, placeholder, type_, value)
+import Html exposing (Html, button, div, h1, h2, input, p, span, text, textarea)
+import Html.Attributes exposing (autofocus, class, classList, disabled, id, placeholder, rows, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Http
 import Json.Decode as D
@@ -20,6 +21,7 @@ import Process
 import Random
 import Set
 import Task
+import Time
 
 
 type LoadState a
@@ -57,6 +59,28 @@ screen (the drill has already moved on) until the next word's first stroke. -}
 type alias TypedStrokes =
     { strokes : List String
     , complete : Bool
+    }
+
+
+{-| What a wrong text of the capture box says about the keys pressed: the text Plover wrote
+(`written`) and the last stroke of each chord that writes its last word (`strokes`, steno
+text; empty when the lexicon does not know the word or is not loaded yet). -}
+type alias WrongReport =
+    { written : String
+    , strokes : List String
+    }
+
+
+{-| The 0.5 s signal that an item (word or sentence) was typed right: its last stroke's keys,
+lit green on the keyboard (yellow for a conjugation marker stroke). `run` tells the timer
+of this signal from an older one's. -}
+type alias Completion =
+    { run : Int
+    , keys : Set.Set Int
+    , mark : Bool
+    , next : Drill.State -- the drill once the signal is over: the shown item is held until then
+    , passCompleted : Bool -- the item ended a pass: reshuffle when moving on
+    , from : Int -- the index of the held item, to drop `next` when the learner skipped meanwhile
     }
 
 
@@ -101,6 +125,14 @@ type alias Model =
     , lastStroke : Set.Set Int
     , wrongRuns : Int -- wrong strokes so far; the 2 s red flash of an older one is ignored
     , typed : TypedStrokes
+    , textCapture : Bool -- Plover text mode: the drill reads the text Plover types into the capture box instead of the board's strokes
+    , captureText : String -- what the capture box holds now
+    , captureStrokes : Int -- bursts of text (one per Plover stroke) since the box was last empty: the stroke the hint is at
+    , captureAt : Int -- millisecond time of the last change of the box
+    , captureRuns : Int -- changes so far; an idle timer of an older change is ignored
+    , completion : Maybe Completion
+    , completionRuns : Int
+    , wrongReport : Maybe WrongReport -- the last wrong text of the capture box and the last strokes that write it, until the red flash ends
     }
 
 
@@ -154,6 +186,12 @@ type Msg
     | StartSimulation
     | SimulateOutline String String
     | SimulationStep Int Int
+    | ToggleTextCapture
+    | CaptureTyped String
+    | CaptureStamped String Time.Posix
+    | CaptureIdle Int
+    | ClearCompletion Int
+    | NoOp
 
 
 {-| `Http.get` that always revalidates (the exported JSON changes with every
@@ -210,6 +248,14 @@ init _ =
       , lastStroke = Set.empty
       , wrongRuns = 0
       , typed = noTypedStrokes
+      , textCapture = False
+      , captureText = ""
+      , captureStrokes = 0
+      , captureAt = 0
+      , captureRuns = 0
+      , completion = Nothing
+      , completionRuns = 0
+      , wrongReport = Nothing
       }
     , Cmd.batch
         [ getFresh { url = "public/data/keyboard-layout.json", expect = Http.expectJson GotLayout Keyboard.decoder }
@@ -261,10 +307,19 @@ update msg unswitched =
             if mode == model.mode then
                 ( model, Cmd.none )
 
-            else if mode == DefinitionMode && model.definitions == Nothing then
-                ( { model | mode = mode, drill = Nothing, typed = noTypedStrokes, definitions = Just Loading }
+            else if mode == DefinitionMode && (model.definitions == Nothing || Dict.isEmpty model.abbreviations) then
+                ( { model
+                    | mode = mode
+                    , drill = Nothing
+                    , typed = noTypedStrokes
+                    , definitions = Just (Maybe.withDefault Loading model.definitions)
+                  }
                 , Cmd.batch
-                    [ getFresh { url = "public/data/definitions.json", expect = Http.expectJson GotDefinitions Definitions.decoder }
+                    [ if model.definitions == Nothing then
+                        getFresh { url = "public/data/definitions.json", expect = Http.expectJson GotDefinitions Definitions.decoder }
+
+                      else
+                        Cmd.none
                     , getFresh { url = "public/data/affix-abbreviations.json", expect = Http.expectJson GotAbbreviations (D.dict (D.dict D.string)) }
                     , getFresh { url = "public/data/expression-definitions.json", expect = Http.expectJson GotExpressionDefinitions Definitions.expressionsDecoder }
                     ]
@@ -538,9 +593,96 @@ update msg unswitched =
                 , drill = Maybe.map (Drill.skipWords n) model.drill
                 , typed = noTypedStrokes
                 , lastStroke = Set.empty
+                , captureText = ""
               }
-            , Cmd.none
+            , focusCapture model.textCapture
             )
+
+        ToggleTextCapture ->
+            let
+                turningOn =
+                    not model.textCapture
+
+                -- the reverse lookup of a wrong text needs the whole-lexicon definitions
+                needsDefinitions =
+                    turningOn && model.definitions == Nothing
+            in
+            ( { model
+                | textCapture = turningOn
+                , captureText = ""
+                , wrongReport = Nothing
+                , definitions =
+                    if needsDefinitions then
+                        Just Loading
+
+                    else
+                        model.definitions
+              }
+            , Cmd.batch
+                [ focusCapture turningOn
+                , if needsDefinitions then
+                    getFresh { url = "public/data/definitions.json", expect = Http.expectJson GotDefinitions Definitions.decoder }
+
+                  else
+                    Cmd.none
+                ]
+            )
+
+        NoOp ->
+            ( model, Cmd.none )
+
+        CaptureTyped typedText ->
+            ( { model | captureText = typedText }, Task.perform (CaptureStamped typedText) Time.now )
+
+        CaptureStamped typedText posix ->
+            -- an older change of the box is judged by the newer one
+            if model.completion /= Nothing then
+                -- the finished item is held for its signal: text meanwhile is dropped
+                ( { model | captureText = "" }, Cmd.none )
+
+            else if typedText /= model.captureText then
+                ( model, Cmd.none )
+
+            else
+                applyCapturedText typedText (Time.posixToMillis posix) model
+
+        ClearCompletion run ->
+            case model.completion of
+                Just completion ->
+                    if completion.run == run then
+                        ( { model
+                            | completion = Nothing
+                            , drill =
+                                -- the learner may have skipped to another item meanwhile
+                                if Maybe.map .currentWordIndex model.drill == Just completion.from then
+                                    Just completion.next
+
+                                else
+                                    model.drill
+                            , captureText = ""
+                            , captureStrokes = 0
+                            , lastStroke = Set.empty
+                            , typed = noTypedStrokes
+                          }
+                        , if Maybe.map .currentWordIndex model.drill == Just completion.from then
+                            shuffleIf completion.passCompleted model
+
+                          else
+                            Cmd.none
+                        )
+
+                    else
+                        ( model, Cmd.none )
+
+                Nothing ->
+                    ( model, Cmd.none )
+
+        CaptureIdle token ->
+            if token == model.captureRuns then
+                settleCapture model
+
+            else
+                ( model, Cmd.none )
 
         ShuffledWords words ->
             -- The first shuffle of a mode (after its list loads, or on
@@ -636,7 +778,7 @@ update msg unswitched =
             case model.drill of
                 Just drill ->
                     if token == model.wrongRuns && drill.feedback == Just False then
-                        ( { model | drill = Just { drill | feedback = Nothing }, lastStroke = Set.empty }, Cmd.none )
+                        ( { model | drill = Just { drill | feedback = Nothing }, lastStroke = Set.empty, wrongReport = Nothing }, Cmd.none )
 
                     else
                         ( model, Cmd.none )
@@ -645,10 +787,326 @@ update msg unswitched =
                     ( model, Cmd.none )
 
 
+{-| Give the focus to the capture box, so that what Plover types lands in it. -}
+focusCapture : Bool -> Cmd Msg
+focusCapture on =
+    if on then
+        Task.attempt (\_ -> NoOp) (Dom.focus captureBoxId)
+
+    else
+        Cmd.none
+
+
+{-| The last stroke of each chord writing the last word of `typedText` (that word, or its
+part after an apostrophe, as written or lower-cased, without its end punctuation). -}
+wrongReportOf : Model -> String -> WrongReport
+wrongReportOf model typedText =
+    let
+        written =
+            String.words (String.map (\c -> if c == '\u{00A0}' || c == '\u{202F}' then ' ' else c) typedText) |> String.join " "
+
+        lastWord =
+            String.words written |> List.reverse |> List.head |> Maybe.withDefault ""
+
+        chords =
+            chordsOfWritten model lastWord
+
+        lastStrokes =
+            chords
+                |> List.filterMap (\chord -> String.split "/" chord |> List.reverse |> List.head)
+                |> List.foldl
+                    (\stroke seen ->
+                        if List.member stroke seen then
+                            seen
+
+                        else
+                            seen ++ [ stroke ]
+                    )
+                    []
+    in
+    { written = String.trim written, strokes = lastStrokes }
+
+
+{-| The keys of the first candidate last stroke, to light red on the keyboard. -}
+wrongKeys : Model -> WrongReport -> Set.Set Int
+wrongKeys model report =
+    report.strokes
+        |> List.head
+        |> Maybe.andThen (Keyboard.parseOutline (loadedKeys model.layout))
+        |> Maybe.andThen List.head
+        |> Maybe.map Set.fromList
+        |> Maybe.withDefault Set.empty
+
+
+{-| The chords (steno text) that write one written word: the word without its end
+punctuation, lower-cased or not, or its part after an apostrophe; the first form the
+lexicon knows. Empty when the lexicon is not loaded or does not know the word. -}
+chordsOfWritten : Model -> String -> List String
+chordsOfWritten model lastWord =
+    let
+        bare =
+            lastWord |> String.filter (\c -> not (List.member c [ '.', ',', ';', ':', '!', '?', '\u{2026}' ]))
+
+        afterApostrophe =
+            String.split "'" bare |> List.reverse |> List.head |> Maybe.withDefault bare
+    in
+    case model.definitions of
+        Just (Loaded definitions) ->
+            case
+                [ bare, String.toLower bare, afterApostrophe, String.toLower afterApostrophe ]
+                    |> List.map (Definitions.chordsOfSpelling definitions)
+                    |> List.filter (not << List.isEmpty)
+                    |> List.head
+            of
+                Just chords ->
+                    chords
+
+                Nothing ->
+                    unspelledStroke model bare
+
+        _ ->
+            unspelledStroke model bare
+
+
+{-| A stroke that spells no word: Plover has no entry for it and types the stroke itself, in
+the steno notation of the layout ("pe"), so the written word is the chord when it parses
+as a stroke of the layout. -}
+unspelledStroke : Model -> String -> List String
+unspelledStroke model written =
+    case Keyboard.parseOutline (loadedKeys model.layout) written of
+        Just _ ->
+            [ written ]
+
+        Nothing ->
+            []
+
+
+{-| How many strokes of the item the written text amounts to, when the text is just the
+first strokes of one of its outlines written as other words ("transe" for the first stroke
+of "transport"): each word of the text is looked up, and some choice of their chords must
+equal the start of an accepted outline, short of all of it. Nothing otherwise (not
+the start of the item, or the lexicon is not loaded). -}
+strokePrefixOf : Model -> PracticeWord -> String -> Maybe Int
+strokePrefixOf model word typedText =
+    let
+        strokesOf steno =
+            String.words steno |> List.concatMap (String.split "/")
+
+        outlines =
+            (word.steno :: List.map .steno word.alternates) |> List.map strokesOf
+
+        extend chordsOfWord sequences =
+            List.concatMap (\sequence -> List.map (\chord -> sequence ++ strokesOf chord) (List.take 4 chordsOfWord)) sequences
+                |> List.take 64
+
+        wordsWritten =
+            typedText
+                |> String.map (\c -> if c == '\u{00A0}' || c == '\u{202F}' then ' ' else c)
+                |> String.words
+
+        perWord =
+            List.map (chordsOfWritten model) wordsWritten
+
+        isPrefix sequence outline =
+            List.take (List.length sequence) outline == sequence && List.length sequence < List.length outline
+    in
+    if List.isEmpty wordsWritten || List.any List.isEmpty perWord then
+        Nothing
+
+    else
+        List.foldl extend [ [] ] perWord
+            |> List.filter (\sequence -> List.any (isPrefix sequence) outlines)
+            |> List.head
+            |> Maybe.map List.length
+
+
+captureBoxId : String
+captureBoxId =
+    "capture-box"
+
+
+{-| A new shuffled pass, when the item just done ended the current one. -}
+shuffleIf : Bool -> Model -> Cmd Msg
+shuffleIf passCompleted model =
+    if passCompleted then
+        case activeItems model of
+            Just (Loaded words) ->
+                Random.generate ShuffledWords (shuffleGenerator words)
+
+            _ ->
+                Cmd.none
+
+    else
+        Cmd.none
+
+
+completionSignalMs : Float
+completionSignalMs =
+    500
+
+
+{-| The signal for an item just completed with the stroke `keys` (the item's last): the
+completion itself (the item `held` stays on screen, and `next` takes over, when the timer ends). A marker stroke (a conjugation stroke after
+the item's first) is yellow. -}
+signalCompletion : Model -> Drill.State -> Drill.State -> Bool -> Bool -> Set.Set Int -> ( Completion, Cmd Msg )
+signalCompletion model held next passCompleted afterFirstStroke keys =
+    let
+        run =
+            model.completionRuns + 1
+
+        mark =
+            afterFirstStroke
+                && (case model.layout of
+                        Loaded layout ->
+                            Keyboard.isConjugationStroke layout (Set.toList keys)
+
+                        _ ->
+                            False
+                   )
+    in
+    ( { run = run, keys = keys, mark = mark, next = next, passCompleted = passCompleted, from = held.currentWordIndex }
+    , Process.sleep completionSignalMs |> Task.perform (\_ -> ClearCompletion run)
+    )
+
+
+{-| Plover pauses between the strokes of a word less than this long (ms): the changes of
+the box it makes within one pause belong to one stroke, and a text that is not the whole
+item is judged wrong only once the box has been quiet this long (a multi-stroke word's
+first strokes write other words, "au" "re", before the last one rewrites them). -}
+captureIdleMs : Float
+captureIdleMs =
+    1500
+
+
+burstMs : Int
+burstMs =
+    250
+
+
+{-| The text Plover typed into the capture box, checked against the current item:
+the whole item advances the drill (and empties the box); anything else waits, moves the
+hint to the stroke after those already written, and is judged by `settleCapture`
+when the box falls quiet. -}
+applyCapturedText : String -> Int -> Model -> ( Model, Cmd Msg )
+applyCapturedText typedText now model =
+    case model.drill of
+        Just drill ->
+            let
+                ( newDrill, passCompleted ) =
+                    Drill.applyText typedText drill
+
+                advanced =
+                    newDrill.currentWordIndex /= drill.currentWordIndex || passCompleted
+
+                bursts =
+                    if String.isEmpty typedText then
+                        0
+
+                    else if model.captureStrokes == 0 || now - model.captureAt > burstMs then
+                        model.captureStrokes + 1
+
+                    else
+                        model.captureStrokes
+
+                lastIndex =
+                    Drill.currentWord drill |> Maybe.map (\word -> List.length word.strokes - 1) |> Maybe.withDefault 0
+
+                -- what the text says it has written, when it is the first strokes of the item
+                writtenStrokes =
+                    Drill.currentWord drill |> Maybe.andThen (\word -> strokePrefixOf model word typedText)
+
+                token =
+                    model.captureRuns + 1
+            in
+            if advanced then
+                let
+                    itemStrokes =
+                        Drill.currentWord drill |> Maybe.map .strokes |> Maybe.withDefault []
+
+                    ( completion, signalCmd ) =
+                        signalCompletion model heldDrill newDrill passCompleted (List.length itemStrokes > 1) (itemStrokes |> List.reverse |> List.head |> Maybe.withDefault [] |> Set.fromList)
+
+                    -- the item stays on screen, at its last stroke, during the signal
+                    heldDrill =
+                        { drill | currentStrokeIndex = lastIndex, feedback = Just True }
+                in
+                ( { model
+                    | drill = Just heldDrill
+                    , captureText = ""
+                    , captureStrokes = 0
+                    , captureRuns = token
+                    , lastStroke = Set.empty
+                    , wrongReport = Nothing
+                    , typed = noTypedStrokes
+                    , completion = Just completion
+                    , completionRuns = completion.run
+                  }
+                , signalCmd
+                )
+
+            else
+                ( { model
+                    | drill = Just { drill | currentStrokeIndex = clamp 0 lastIndex (Maybe.withDefault (max 0 (bursts - 1)) writtenStrokes), feedback = Nothing }
+                    , captureStrokes = bursts
+                    , captureAt = now
+                    , captureRuns = token
+                    , lastStroke = Set.empty
+                    , typed = noTypedStrokes
+                  }
+                , if String.isEmpty typedText then
+                    Cmd.none
+
+                  else
+                    Process.sleep captureIdleMs |> Task.perform (\_ -> CaptureIdle token)
+                )
+
+        Nothing ->
+            ( model, Cmd.none )
+
+
+{-| The box has been quiet: a text that is not the whole item is wrong -- reported (the
+last strokes that write the last word written), the keys of that word lit red, the box
+emptied and the hint back at the item's first stroke. -}
+settleCapture : Model -> ( Model, Cmd Msg )
+settleCapture model =
+    case Maybe.andThen Drill.currentWord model.drill of
+        Just word ->
+            if String.isEmpty (String.trim model.captureText) || Drill.textStatus model.captureText word == Drill.TextDone || strokePrefixOf model word model.captureText /= Nothing then
+                ( model, Cmd.none )
+
+            else
+                let
+                    report =
+                        wrongReportOf model model.captureText
+
+                    wrongRuns =
+                        model.wrongRuns + 1
+                in
+                ( { model
+                    | drill = Maybe.map (\drill -> { drill | feedback = Just False, currentStrokeIndex = 0 }) model.drill
+                    , captureText = ""
+                    , captureStrokes = 0
+                    , lastStroke = wrongKeys model report
+                    , wrongReport = Just report
+                    , wrongRuns = wrongRuns
+                  }
+                , Process.sleep 2000 |> Task.perform (\_ -> ClearWrong wrongRuns)
+                )
+
+        Nothing ->
+            ( model, Cmd.none )
+
+
 {-| One decoded stroke (from either machine protocol) fed to the drill. -}
 applyLabels : Result String (List String) -> Model -> ( Model, Cmd Msg )
 applyLabels decoded model =
-            case decoded of
+            case ( model.completion, decoded ) of
+              ( Just _, _ ) ->
+                    -- the finished item is held for its signal: strokes meanwhile are dropped
+                    ( model, Cmd.none )
+
+              ( Nothing, _ ) ->
+               case decoded of
                 Ok labels ->
                     let
                         observed =
@@ -679,20 +1137,31 @@ applyLabels decoded model =
                                     else
                                         Cmd.none
 
-                                shuffleCmd =
-                                    if passCompleted then
-                                        case activeItems model of
-                                            Just (Loaded words) ->
-                                                Random.generate ShuffledWords (shuffleGenerator words)
+                                completed =
+                                    newDrill.currentWordIndex /= drill.currentWordIndex || passCompleted
 
-                                            _ ->
-                                                Cmd.none
-
-                                    else
-                                        Cmd.none
+                                ( completion, signalCmd ) =
+                                    signalCompletion model drill newDrill passCompleted (drill.currentStrokeIndex > 0) observed
                             in
                             ( { model
-                                | drill = Just newDrill
+                                | drill =
+                                    if completed then
+                                        Just { drill | feedback = Just True }
+
+                                    else
+                                        Just newDrill
+                                , completion =
+                                    if completed then
+                                        Just completion
+
+                                    else
+                                        model.completion
+                                , completionRuns =
+                                    if completed then
+                                        completion.run
+
+                                    else
+                                        model.completionRuns
                                 , lastStroke = observed
                                 , wrongRuns = wrongRuns
                                 , typed =
@@ -702,7 +1171,14 @@ applyLabels decoded model =
                                     else
                                         model.typed
                               }
-                            , Cmd.batch [ shuffleCmd, clearCmd ]
+                            , Cmd.batch
+                                [ clearCmd
+                                , if completed then
+                                    signalCmd
+
+                                  else
+                                    Cmd.none
+                                ]
                             )
 
                         Nothing ->
@@ -961,6 +1437,7 @@ view model =
              , viewSection "Options"
                 [ viewHintsToggle model
                 , viewAbbrevHintsToggle model
+                , viewTextCaptureToggle model
                 , viewAbbreviatedSentencesToggle model
                 , viewNotationToggle model.notation
                 , viewStyleToggle model.style
@@ -989,6 +1466,70 @@ viewOnOff label isOn toggle =
         , text " "
         , button [ onClick toggle, disabled (not isOn) ] [ text "off" ]
         ]
+
+
+{-| Plover text mode: the drill checks the text Plover types into a box under the
+drill, not the board's strokes (no board connection needed; no per-stroke feedback). -}
+viewTextCaptureToggle : Model -> Html Msg
+viewTextCaptureToggle model =
+    if isInfoMode model.mode then
+        text ""
+
+    else
+        viewOnOff "Saisie Plover (texte)" model.textCapture ToggleTextCapture
+
+
+{-| The 0.5 s tick above the keyboard when an item was typed right (see `Completion`). -}
+viewCompletionSignal : Model -> Html Msg
+viewCompletionSignal model =
+    case model.completion of
+        Just _ ->
+            p [ class "done-signal" ] [ text "\u{2713} Correct" ]
+
+        Nothing ->
+            p [ class "done-signal done-signal-idle" ] [ text "\u{00A0}" ]
+
+
+{-| The box Plover types into in text mode: always empty after a word, a wrong
+text or a skip. -}
+viewCaptureBox : Model -> Html Msg
+viewCaptureBox model =
+    if model.textCapture then
+        div [ class "capture" ]
+            [ textarea
+                [ id captureBoxId
+                , class "capture-box"
+                , rows 2
+                , autofocus True
+                , value model.captureText
+                , onInput CaptureTyped
+                , placeholder "Cliquez ici, puis \u{00E9}crivez le mot avec Plover."
+                ]
+                []
+            , viewWrongReport model
+            ]
+
+    else
+        text ""
+
+
+{-| After a wrong text: what Plover wrote and the last stroke(s) that write it (the keys
+you pressed, in red on the keyboard too); gone with the red flash. -}
+viewWrongReport : Model -> Html Msg
+viewWrongReport model =
+    case model.wrongReport of
+        Just report ->
+            p [ class "wrong-report" ]
+                [ text ("\u{00C9}crit : \u{00AB}\u{00A0}" ++ report.written ++ "\u{00A0}\u{00BB} \u{2014} ")
+                , if List.isEmpty report.strokes then
+                    text (if model.definitions == Just Loading then "dictionnaire en chargement" else "dernier coup inconnu")
+
+                  else
+                    text ("dernier coup : " ++ (report.strokes |> List.map (Notation.render model.notation) |> String.join "  \u{00B7}  "))
+                ]
+
+        Nothing ->
+            text ""
 
 
 {-| The Introduction page, the default landing. Its text is still to be written
@@ -1293,8 +1834,9 @@ viewTrainer model =
                         layout =
                             Notation.layout model.notation loadedLayout
                     in
-                    div [ classList [ ( "sim-mark", isMarkStep model ) ] ]
-                        [ if model.drill /= Nothing && not (isInfoMode model.mode) then
+                    div [ classList [ ( "sim-mark", isMarkStep model || (model.completion |> Maybe.map .mark |> Maybe.withDefault False) ) ] ]
+                        [ viewCompletionSignal model
+                        , if model.drill /= Nothing && not (isInfoMode model.mode) then
                             p [ class "simulate-row" ] [ button [ onClick StartSimulation ] [ text "Simulate" ] ]
 
                           else
@@ -1302,6 +1844,10 @@ viewTrainer model =
                         , Keyboard.view
                             (if model.simulation /= Nothing then
                                 { highlighted = simulatedKeys model, correct = Just True }
+
+                             else if model.completion /= Nothing then
+                                -- An item just typed right: its last stroke, green (yellow for a marker).
+                                { highlighted = model.completion |> Maybe.map .keys |> Maybe.withDefault Set.empty, correct = Just True }
 
                              else if model.hints && not (isInfoMode model.mode) && (model.drill |> Maybe.andThen .feedback) == Just False then
                                 -- A wrong press: the keys actually pressed, in red.
@@ -1831,7 +2377,7 @@ viewDrill model =
                         ShowTyped model.notation model.typed
             in
             if isSegmented model word then
-                viewSentence chordDisplay (labelEmphasis model) (shownSegment model drill word) (workingStroke model drill word) word
+                div [] [ viewSentence chordDisplay (labelEmphasis model) (shownSegment model drill word) (workingStroke model drill word) word, viewCaptureBox model ]
 
             else
                 div [ class "drill" ]
@@ -1843,6 +2389,7 @@ viewDrill model =
                         , p [ class "next-word" ]
                             (Drill.nextWord drill |> Maybe.map viewInContext |> Maybe.withDefault [ text "\u{00A0}" ])
                         ]
+                    , viewCaptureBox model
                     ]
 
         _ ->

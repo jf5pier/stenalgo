@@ -1,4 +1,4 @@
-module Definitions exposing (Definitions, ExpressionDefinitions, PunctuationEntry, decoder, emptyExpressions, expressionsDecoder, punctuationEntryDecoder, view)
+module Definitions exposing (Definitions, ExpressionDefinitions, PunctuationEntry, chordsOfSpelling, decoder, emptyExpressions, expressionsDecoder, punctuationEntryDecoder, view)
 
 {-| Definition mode: type a spelling, get every word sharing a base chord
 with it -- its homophones, the words the conjugation marks and the `*`/`#`
@@ -515,3 +515,26 @@ ifFirst i string =
 
     else
         ""
+
+
+{-| Reverse lookup: every chord (steno text, possibly several strokes joined by `/`)
+that writes the exact spelling, most frequent entry first, without duplicates. -}
+chordsOfSpelling : Definitions -> String -> List String
+chordsOfSpelling definitions spelling =
+    Dict.get spelling definitions.groupsByOrtho
+        |> Maybe.withDefault []
+        |> List.reverse
+        |> List.filterMap (\index -> Array.get index definitions.groups)
+        |> List.concatMap .entries
+        |> List.filter (\entry -> entry.ortho == spelling)
+        |> List.concatMap .chords
+        |> List.map .steno
+        |> List.foldl
+            (\steno seen ->
+                if List.member steno seen then
+                    seen
+
+                else
+                    seen ++ [ steno ]
+            )
+            []

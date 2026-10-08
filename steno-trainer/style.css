@@ -485,3 +485,10 @@ body {
   cursor: pointer;
   padding: 0.05rem 0.4rem;
 }
+
+.capture { margin-top: 1em; }
+.capture-box { width: 100%; box-sizing: border-box; font-size: 1.2em; padding: 0.4em; }
+.wrong-report { color: #b00020; font-family: monospace; margin: 0.4em 0; }
+
+/* The 0.5 s tick above the keyboard when a word or sentence was typed right (the line keeps its height when idle). */
+.done-signal { font-weight: bold; color: #0a7a0a; text-align: center; margin: 0.3em 0; }

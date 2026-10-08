@@ -19,8 +19,22 @@ rules that shorten the current word and the expression rules its outline uses; a
 toggle switches every phoneme on the page; a Plover/Pluvier switch changes the punctuation and command chords everywhere (the Ponctuation and Commandes lesson tracks, between the disambiguation and affixes tracks, and the Definitions page). Every drill has "Previous word"/"Next word" buttons and a
 **Simulate** button over the keyboard, which lights the current word's strokes
 (1 s + 0.2 s per key for an intermediate stroke, 3 s for the last; green, yellow for a
-conjugation marker; the 2-key phoneme badges and the 3-/4-key legend lines light with them). Deliberately no progress
+conjugation marker; the 2-key phoneme badges and the 3-/4-key legend lines light with them). A word or sentence typed right (in any drill, from the board or in Plover text mode) is signalled for 0.5 s, during which the finished item stays on screen at its last stroke (strokes and text typed meanwhile are dropped) before the next one appears: a green "✓ Correct" above the keyboard and its last stroke lit green on it (yellow for a conjugation marker stroke). Deliberately no progress
 tracking/persistence and no WPM stats: reloading starts a fresh shuffle.
+
+**Plover text mode** (sidebar, "Saisie Plover (texte)"): instead of reading the board, the drill
+checks the text that Plover types into a box under the drill (click it first so it has the focus). The whole
+item's text, up to the case of its first letter, moves on; any other text
+is judged only once the box has been quiet 1.5 s (a multi-stroke word's first strokes write
+other words, which its last stroke rewrites): then it flashes red and empties the box (retry the whole item). The hint
+moves to the next stroke after each burst of text (one Plover stroke). When the text written is the first
+stroke(s) of the item written as other words ("transe" for the first stroke of "transport"; found by the same reverse
+lookup), it is not judged wrong at all, however slow the next stroke: the hint moves to the stroke after those. A wrong text is reported under the box ("Écrit : « … » — dernier coup : …") and the last stroke of the
+word that was written is lit red on the keyboard, until the 2 s flash ends: a reverse lookup of the last written word in
+`definitions.json` (a stroke that spells no word, which Plover types as its own steno text such as `pe`, is read as that
+chord), which the mode fetches when switched on (about 10 MB). No board connection is needed (and none may be open: Plover owns the port), but there is no
+per-stroke feedback; any chord that produces the right text counts, so it tests Plover's whole chain (theory,
+expressions, affixes, spelling, punctuation, numbers).
 
 ## Stack
 
