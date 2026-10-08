@@ -268,8 +268,9 @@ def segmentOf(text: str, label: str, steno: str, strokeCount: int, spaceBefore: 
 
 
 def phraseItem(tokens: list[str], bySlug: dict[str, dict[str, Any]], words: dict[str, dict[str, Any]],
-               outlines: dict[str, tuple[tuple[int, ...], ...]]) -> dict[str, Any] | None:
-    """One drill item from an example, None when a mark of the example does not exist in this style."""
+               outlines: dict[str, tuple[tuple[int, ...], ...]], capitalizeFirst: bool = True) -> dict[str, Any] | None:
+    """One drill item from an example, None when a mark of the example does not exist in this style. `capitalizeFirst` False: the
+    spelling lessons show the letters as typed (a lower-case first letter stays one)."""
     parts: list[str] = []
     marks: list[dict[str, Any] | None] = []
     strokes: list[list[int]] = []
@@ -293,7 +294,7 @@ def phraseItem(tokens: list[str], bySlug: dict[str, dict[str, Any]], words: dict
             strokes += [list(s) for s in word["strokes"]]
             stenos.append(word["steno"])
             phonology.append(word["phonology"])
-    text, pieces = typePieces(parts)
+    text, pieces = typePieces(parts, capitalizeFirst)
     segments = []
     for token, entry, (shown, spaced) in zip(tokens, marks, pieces):
         if entry is None:

@@ -616,6 +616,9 @@ def _runSteps(module: "Callable[[str, str], None]") -> None:
     # (reads the S8 complements' JSONs, so run `util.export_plover_complements` first when the layout or the sets changed).
     module("Punctuation and Command Lessons (S10d): trainer punctuation and command lessons", "util.export_punctuation_lessons")
     module("Number Lessons (S10e): trainer number lessons", "util.export_number_lessons")
+    # Spelling (S8 Plover branch + S10f): checked against the affix dictionary (S9b) and the expression data, hence after them.
+    module("Theory Export (S8): Plover spelling", "util.export_plover_spelling")
+    module("Spelling Lessons (S10f): trainer spelling lessons", "util.export_spelling_lessons")
 
     print("\nstenalgo pipeline complete: phonetic theory (pickles + phonetic_theory.tsv), "
           "LexiqueSynthetic.tsv, resolved_press_sets.json, keypress_groups.json, "

@@ -164,6 +164,10 @@ python -m util.export_number_lessons        # Number Lessons (S10e): the trainer
 # Prerequisites: plover_stenalgo_{lapwing,pluvier}_numbers.json (util.export_plover_numbers), plover_stenalgo_punctuation.json, starboard3h.json, practice-words.json,
 # the authored resources/numberLessons.json. Outputs: steno-trainer/public/data/number-lessons.json.
 
+python -m util.export_spelling_lessons       # Spelling Lessons (S10f): the trainer's epellation track
+# Prerequisites: plover_stenalgo_spelling.json (util.export_plover_spelling), starboard3h.json, the authored resources/spellingLessons.json.
+# Outputs: steno-trainer/public/data/spelling-lessons.json (11 lessons + the 156 letter strokes for the Definitions page).
+
 python dictionary.py                         # the orchestrator over everything from S2 to S10
 # Prerequisites: as above (skips nothing; aborts on the first failing step).
 # Outputs: all of the S2-S9 outputs above, in dependency order; per-step wall times
@@ -220,7 +224,7 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 
 ## Verification approach
 
-- `pytest src/test/` must pass after any `.py` change (1233 tests at the time of writing, expression layer, affix layer and lessons exporter included).
+- `pytest src/test/` must pass after any `.py` change (1240 tests at the time of writing, expression layer, affix layer and lessons exporter included).
 - `mypy` (bare, scope and options in `mypy.ini`) must report no issues after any `.py` change.
 - Behaviour-preserving changes are proven by a full rebuild following the rebuild table in
   `docs/PIPELINE.md`, comparing the md5s of `phonetic_theory.tsv`, `disambiguated_theory.tsv`,

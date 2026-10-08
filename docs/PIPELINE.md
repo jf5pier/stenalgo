@@ -279,6 +279,8 @@ Expression Abbreviation Lessons (S10) ............ optional layer after the fini
 └─ S10d Trainer punctuation and command lessons — python -m util.export_punctuation_lessons → steno-trainer/public/data/punctuation-lessons.json
 └─ S10e Trainer number lessons — python -m util.export_number_lessons → steno-trainer/public/data/number-lessons.json
         ← plover_stenalgo_{punctuation,commands,pluvier_punctuation}.json (S8), practice-words.json, resources/punctuationLessons.json, util/punctuation_examples.jsonl (authored)
+└─ S10f Trainer spelling lessons — python -m util.export_plover_spelling → plover_stenalgo_spelling.json, then python -m util.export_spelling_lessons → steno-trainer/public/data/spelling-lessons.json
+        ← starboard3h.json, the S8/S9b dictionaries, resources/spellingLessons.json (authored)
 ```
 
 The two homophone problems have two mechanisms. Words that are forms of the same lemma and
@@ -2083,3 +2085,5 @@ Number lessons (S10e, `util/export_number_lessons.py` -> `number-lessons.json`):
 twins, the other style's chord) being alternates. Commands are classified from their `{#...}` key combination (`commandInfo`). A punctuation drill item is a phrase (`Oh !`, `Il dit : « Merci »`, paired marks always together) whose words come from `practice-words.json`
 and whose text and per-segment spacing come from a small simulation of Plover's formatting (`typePieces`); a command item is the bare chord (the trainer never executes commands). Both styles have the same lesson ids.
 **Artifacts** writes `steno-trainer/public/data/punctuation-lessons.json` only: `tracks`, `lessons` per style, `entries` per style (every chord, twins included, for the Definitions page). The trainer's global Plover/Pluvier switch (`Style.elm`) picks the style.
+
+Spelling lessons (S10f, `util/export_spelling_lessons.py` -> `spelling-lessons.json`): the `epellation` track of the one spelling theory (`util/export_plover_spelling.py`, docs/PLOVER_COMPLEMENTS.md "Spelling"), no style switch: 11 lessons (vowels, consonants, h q c x, capitals, the space after, the five accents, whole words) from the authored `resources/spellingLessons.json`; an example is a word spelled letter by letter (`spell`: an upper-case letter takes the UPPER ending, a space is the space-after ending), built by `phraseItem(..., capitalizeFirst=False)`. The 156 letter strokes are Definitions entries (family `epellation`). The exporter refuses a `plover_stenalgo_spelling.json` that is not what `export_plover_spelling` would write now.

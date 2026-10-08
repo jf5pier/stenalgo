@@ -1,4 +1,4 @@
-module Lessons exposing (Abbreviation, AffixData, ExpressionData, Lesson, Lessons, NumberData, PunctuationData, Rule, Track, affixDecoder, currentWords, decoder, displayTitle, expressionDecoder, mergeAffixData, mergeExpressionData, mergeNumberData, mergePunctuationData, numberDecoder, numberEntries, pastWords, punctuationDecoder, punctuationEntries, viewIntro, viewList, viewPrevNext)
+module Lessons exposing (Abbreviation, AffixData, ExpressionData, Lesson, Lessons, NumberData, PunctuationData, Rule, SpellingData, Track, affixDecoder, currentWords, decoder, displayTitle, expressionDecoder, mergeAffixData, mergeExpressionData, mergeNumberData, mergePunctuationData, mergeSpellingData, numberDecoder, numberEntries, pastWords, punctuationDecoder, punctuationEntries, spellingDecoder, spellingEntries, viewIntro, viewList, viewPrevNext)
 
 {-| Lesson mode: the fixed learner progression exported by
 `util/export_lessons.py` (`lessons.json`) -- tracks of lessons, each lesson
@@ -266,6 +266,44 @@ mergeNumberData numberStyle style data lessons =
                 { lessons | tracks = insertBeforeTrack [ "affixes" ] data.tracks lessons.tracks }
     in
     replaceTracks (List.map .id data.tracks) replacements withTracks
+
+
+{-| `spelling-lessons.json` (`util/export_spelling_lessons.py`): the `epellation` track
+of the one spelling theory (no style: a single lesson list) and its 156 letter strokes
+for the Definitions page. -}
+type alias SpellingData =
+    { tracks : List Track
+    , lessons : List Lesson
+    , entries : List Definitions.PunctuationEntry
+    }
+
+
+spellingDecoder : D.Decoder SpellingData
+spellingDecoder =
+    D.map3 SpellingData
+        (D.field "tracks" (D.list trackDecoder))
+        (D.field "lessons" (D.list lessonDecoder))
+        (D.field "entries" (D.list Definitions.punctuationEntryDecoder))
+
+
+spellingEntries : SpellingData -> List Definitions.PunctuationEntry
+spellingEntries data =
+    data.entries
+
+
+{-| The lessons with the `epellation` track, slipped in before the affixes track
+when it is not there yet (after the punctuation and number tracks, inserted before it too). -}
+mergeSpellingData : SpellingData -> Lessons -> Lessons
+mergeSpellingData data lessons =
+    let
+        withTracks =
+            if List.any (\t -> List.any (\known -> known.id == t.id) lessons.tracks) data.tracks then
+                lessons
+
+            else
+                { lessons | tracks = insertBeforeTrack [ "affixes" ] data.tracks lessons.tracks }
+    in
+    replaceTracks (List.map .id data.tracks) data.lessons withTracks
 
 
 insertBeforeTrack : List String -> List Track -> List Track -> List Track

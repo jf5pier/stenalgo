@@ -87,6 +87,7 @@ type alias Model =
     , affixData : Maybe Lessons.AffixData -- affix-lessons.json, when it came back (the stub stays otherwise)
     , expressionData : Maybe Lessons.ExpressionData -- expression-lessons.json: the rules legend and the expressions lessons, when it came back
     , punctuationData : Maybe Lessons.PunctuationData -- punctuation-lessons.json: the punctuation and command tracks of both styles, when it came back
+    , spellingData : Maybe Lessons.SpellingData -- spelling-lessons.json: the epellation track, when it came back
     , numberData : Maybe Lessons.NumberData -- number-lessons.json: the chiffres track of both number theories, when it came back
     , expressionSentences : Maybe (List PracticeWord) -- expression-sentences.json (abbreviated sentences), optional
     , abbreviatedSentences : Bool -- Sentences mode drills `expressionSentences` instead of the plain sentences
@@ -137,6 +138,7 @@ type Msg
     | GotExpressionData (Result Http.Error Lessons.ExpressionData)
     | GotPunctuationData (Result Http.Error Lessons.PunctuationData)
     | GotNumberData (Result Http.Error Lessons.NumberData)
+    | GotSpellingData (Result Http.Error Lessons.SpellingData)
     | GotExpressionSentences (Result Http.Error (List PracticeWord))
     | ToggleAbbreviatedSentences
     | SelectLesson String
@@ -194,6 +196,7 @@ init _ =
       , affixData = Nothing
       , expressionData = Nothing
       , punctuationData = Nothing
+      , spellingData = Nothing
       , numberData = Nothing
       , expressionSentences = Nothing
       , abbreviatedSentences = False
@@ -216,6 +219,7 @@ init _ =
         , getFresh { url = "public/data/affix-word-rules.json", expect = Http.expectJson GotWordRules (D.dict (D.list D.int)) }
         , getFresh { url = "public/data/expression-lessons.json", expect = Http.expectJson GotExpressionData Lessons.expressionDecoder }
         , getFresh { url = "public/data/punctuation-lessons.json", expect = Http.expectJson GotPunctuationData Lessons.punctuationDecoder }
+        , getFresh { url = "public/data/spelling-lessons.json", expect = Http.expectJson GotSpellingData Lessons.spellingDecoder }
         , getFresh { url = "public/data/number-lessons.json", expect = Http.expectJson GotNumberData Lessons.numberDecoder }
         , getFresh { url = "public/data/expression-sentences.json", expect = Http.expectJson GotExpressionSentences Drill.sentenceDecoder }
         ]
@@ -385,6 +389,24 @@ update msg unswitched =
 
         GotNumberData (Err _) ->
             -- Optional layer: without the file there is no chiffres track.
+            ( model, Cmd.none )
+
+        GotSpellingData (Ok data) ->
+            ( { model
+                | spellingData = Just data
+                , lessons =
+                    case model.lessons of
+                        Just (Loaded lessons) ->
+                            Just (Loaded (Lessons.mergeSpellingData data lessons))
+
+                        other ->
+                            other
+              }
+            , Cmd.none
+            )
+
+        GotSpellingData (Err _) ->
+            -- Optional layer: without the file there is no epellation track.
             ( model, Cmd.none )
 
         GotExpressionSentences (Ok sentences) ->
@@ -706,6 +728,7 @@ mergeOptionalData model lessons =
         |> (\l -> model.expressionData |> Maybe.map (\data -> Lessons.mergeExpressionData data l) |> Maybe.withDefault l)
         |> (\l -> model.punctuationData |> Maybe.map (\data -> Lessons.mergePunctuationData model.style data l) |> Maybe.withDefault l)
         |> (\l -> model.numberData |> Maybe.map (\data -> Lessons.mergeNumberData model.numberStyle model.style data l) |> Maybe.withDefault l)
+        |> (\l -> model.spellingData |> Maybe.map (\data -> Lessons.mergeSpellingData data l) |> Maybe.withDefault l)
 
 
 noTypedStrokes : TypedStrokes
@@ -1360,6 +1383,7 @@ viewDefinitions model =
                     model.expressionDefinitions
                     ((model.punctuationData |> Maybe.map (Lessons.punctuationEntries model.style) |> Maybe.withDefault [])
                         ++ (model.numberData |> Maybe.map (Lessons.numberEntries model.numberStyle) |> Maybe.withDefault [])
+                        ++ (model.spellingData |> Maybe.map Lessons.spellingEntries |> Maybe.withDefault [])
                     )
                     model.numberStyle
                     model.query
