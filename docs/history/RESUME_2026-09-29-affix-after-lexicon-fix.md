@@ -17,12 +17,12 @@ reference comparison"). Work paused here to fix lexicon data on `main`, then ret
   big pickles/logs in `scratch/` are untracked and regenerable via `python -m util.affix_scan`).
 - Nothing about the theory/Plover output changed by this branch.
 
-## Step 1 (on `main`): data fix -- DONE 2026-09-29 (`-ption` afa8fac, `-ction` a9b85cf; pushed)
+## Step 1 (on `main`): data fix -- DONE 2026-09-29 (`-ption` 9f871e7, `-ction` 27668cf; pushed)
 Resyllabify the 5 wrong `-ption` lemmas (`absorption(s)`, `réabsorption`, `résorption(s)`):
-`p_s_j_§` -> `p|s_j_§` in `resources/LexiqueMixte.tsv` (see TODO.md, commit 3de3273; source is
+`p_s_j_§` -> `p|s_j_§` in `resources/LexiqueMixte.tsv` (see TODO.md, commit 525414f; source is
 Lexique383 syllable columns, so fix at the S1 origin, `lexique.py`, not by hand-editing the TSV).
 Then `rm -f *.pickle` and rebuild per `docs/PIPELINE.md`; check md5 changes are limited to those
-lemmas. The 5 `-ction` lemmas with an x were fixed too (`fix_x_k_s`, a9b85cf); `-xion`/`-xtion` deliberately left. `-th` still unchecked.
+lemmas. The 5 `-ction` lemmas with an x were fixed too (`fix_x_k_s`, 27668cf); `-xion`/`-xtion` deliberately left. `-th` still unchecked.
 
 ## Step 2 (back on this branch)
 Integration of `main` into this branch is deliberately deferred (user: not ready). Until then the
@@ -57,7 +57,7 @@ different sound)? Needs full rebuild + md5 comparison.
 `scratch/` pickles and logs.
 
 ## Update 2026-09-29 (evening): speedup done, cluster-onset fusion measured
-- Sweep speedup committed (93a36eb, 7c0ee5f): full sweep 669 s instead of ~5,200 s, rule tables
+- Sweep speedup committed (e31e6a7, 5068501): full sweep 669 s instead of ~5,200 s, rule tables
   byte-identical. See `PLAN_2026-09-29-affix-scan-speedup.md`. Stray `psj§ ption` / `ksj§ ction`
   anchors are gone; `tion` 2,355 -> 2,365 carriers.
 - Cluster-onset fusion scope (`scratch/cluster_fusion_scope.py`, `scratch/same_ortho_scope.py`):

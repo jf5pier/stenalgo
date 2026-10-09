@@ -19,7 +19,7 @@ The engine (`src/affixes.py`, `src/affixrules.py`) does NOT yet accept regex sco
 
 ## 2. Where things are
 
-- Repo `/home/jfsp/stenalgo`, branch `affix-abbreviation-rules` (base `main`), HEAD `7c0ee5f`. Interpreter:
+- Repo `/home/jfsp/stenalgo`, branch `affix-abbreviation-rules` (base `main`), HEAD `5068501`. Interpreter:
   `env/bin/python` (bare `python` is not on PATH); ~7 GB RAM → one heavy run at a time; long runs with
   `PYTHONUNBUFFERED=1`. Another worktree exists (`/home/jfsp/stenalgo-fix`, branch `lesson-generator`): not ours.
 - Uncommitted, intentional, from the previous session (flag `RULE_PARTIAL_OVERLAP`, see
@@ -319,7 +319,7 @@ counts as `lostDistinction` — an artefact of the lexicon error.) Keys (16,19),
 
 ## UPDATE 2026-09-30 (evening) — lexicon fix landed; `re`/`ré` remeasured on the REAL lexicon
 
-- `R2` fix done on main (`5087bd5`, `util/fixReSchwa.py`, 164 Lexique383 rows; pushed), merged into this branch (`066897d`).
+- `R2` fix done on main (`2a6bad2`, `util/fixReSchwa.py`, 164 Lexique383 rows; pushed), merged into this branch (`5699ab1`).
   Records and pool regenerated (`--refresh --part a --partial-overlap`); H-only sweep rerun
   (`util.affix_scan --part b --reuse-pool --sweep --partial-overlap --settings H`, 25 min, 1,365 s of it in the
   variant-rival step): `scratch/affix-sweep-partial/H/`. `re` anchor `R°` now 807 lemmas, freq 6,248 (was 715 / 6,211);

@@ -2,7 +2,7 @@
 
 # Resume: one key per territory -- the `ment` / `·°ment` fix (2026-09-28)
 
-> **SUPERSEDED (2026-09-28, later the same day):** committed as checkpoint `8630552` and never
+> **SUPERSEDED (2026-09-28, later the same day):** committed as checkpoint `30662bc` and never
 > run. Follow `PLAN_2026-09-28-affix-single-generator-rewrite.md` instead.
 
 **Read after `RESUME_2026-09-27-affix-phase3-4-budgeted-selection.md`; where they disagree, this

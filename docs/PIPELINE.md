@@ -21,7 +21,7 @@ How to read it:
 - Each call uses the same fields: **Called by**, **Input state**, **Transformation**,
   **Result**, **Artifacts** (files read/written), **Helpers not expanded** (small functions
   folded into the call) and **Notes**. Empty fields are left out.
-- `file:line` anchors were checked on branch `docs-refactor` at 5ae0118. Counts come from
+- `file:line` anchors were checked on branch `docs-refactor` at 4ed85f0. Counts come from
   read-only probes of the pickles and JSON files rebuilt on 2026-09-22; a later rebuild can
   shift them slightly.
 - Suspected defects are only pointed to here ("see TODO.md § Suspected bugs, item B1").
@@ -180,7 +180,7 @@ The names below are used in every "Input state" and "Result" line.
 | **Word list** | `list[src.word.Word]`, deduplicated by identity (`ortho, phonology, lemme, gramCat, gender, number`); 168,314 Words | `Dictionary.readCorpus` dictionary.py:92 | inside `Dictionary.pickle` (gitignored) |
 | **syllable statistics** | `SyllableCollection` + `Syllable.*ColByPart` class state | `analyseSyllabification` dictionary.py:169 | `Dictionary.pickle` (objects 1-5) |
 | **layout statistics** | best permutation, pairwise order matrix (`pairwiseBiphonemeOrderScore`) and `syllabicPartAmbiguity`, per syllabic part | `optimizeBiphonemeOrder` grammar.py:644, `analyseAmbiguities` dictionary.py:183 | `Dictionary.pickle` |
-| **keyboard layout** | `Starboard` (26 keys; reserved keys 0, 1, 10, 15) | Keyboard Layout Optimization (S4), last run before 37fdc4e; loaded by `Keyboard.fromJSONFile` keyboard.py:252 | `starboard3h.json` (tracked; rewritten only deliberately — `util.optimize_keyboard --output starboard3h.json`; the solver's default output is `starboard3h_optimized.json`) |
+| **keyboard layout** | `Starboard` (26 keys; reserved keys 0, 1, 10, 15) | Keyboard Layout Optimization (S4), last run before e060dd2; loaded by `Keyboard.fromJSONFile` keyboard.py:252 | `starboard3h.json` (tracked; rewritten only deliberately — `util.optimize_keyboard --output starboard3h.json`; the solver's default output is `starboard3h_optimized.json`) |
 | **phonetic theory** | `dict[Strokes, list[Word]]` keyed by raw Strokes; 78,680 entries | `Dictionary.buildPhoneticTheory` dictionary.py:305 | `PhoneticTheory.pickle` (gitignored); human view `phonetic_theory.tsv` |
 | **homophone groups** | `dict[LemmaHomophoneGroupKey, list[Word]]`, key = (canonical Strokes, LemmeGramCat); 47,830 | `buildLemmaHomophoneGroups` elicitation.py:61 | no |
 | **questionnaire items** | `list[QuestionnaireItem]`, one per distinct opposition; 200 | `buildQuestionnaireItems` elicitation.py:220 | `questionnaire.json` (gitignored) |
@@ -550,7 +550,7 @@ util.build_synthetic_lexicon` (always `--apply`, looped to convergence); the one
 scripts stay hand-run. Each is a dry run unless given `--apply`. `lexique.py`
 never reads or writes `resources/LexiqueSynthetic.tsv`: 46,199 **synthetic rows** (39,933
 VER, 3,868 NOM, 2,398 ADJ), mixed-lexicon columns plus `source` (always `synthetic`), all
-frequencies 0.0, no duplicates, no `sub:imp` rows (removed in fd7e242 by an unrecorded edit).
+frequencies 0.0, no duplicates, no `sub:imp` rows (removed in 3249c05 by an unrecorded edit).
 13,970 rows share an identity with an earlier row and only merge their `infover` (readCorpus's
 identity-dedup print); the rest become new Words.
 
@@ -681,7 +681,7 @@ Both dual-form fillers are also called by `python -m util.build_synthetic_lexico
   keeps its own phon and only gains (feminine) or loses (masculine) its lemma's
   feminine-stem consonant, via `spliceParticiplePhon` with the row as a donor of the other
   gender; deletes the synthetic participle rows that duplicate an attested `LexiqueMixte`
-  row (same ortho, lemma, gender, number), stale since e3b0358 filled those rows'
+  row (same ortho, lemma, gender, number), stale since d1fceb0 filled those rows'
   gender/number. Corrected 62 rows and deleted 17 (item B45). One-off, not called by
   `util.build_synthetic_lexicon`.
 
@@ -821,7 +821,7 @@ Artifacts: writes `Dictionary.pickle`.
 Keyboard Layout Optimization (S4) chooses which keys type which phoneme, per syllabic part,
 and produces the keyboard layout `starboard3h.json`. It is a real stage, rarely run and
 costly (several CP-SAT solves), not dead code. Its layout was last produced by an
-uncommitted run and committed in 37fdc4e (2026-09-13); every later stage reads that file.
+uncommitted run and committed in e060dd2 (2026-09-13); every later stage reads that file.
 
 The two **layout statistics**, Phoneme order search (S4.1) and Ambiguity statistics (S4.2),
 run on **every fresh rebuild** (a `Dictionary.pickle` miss inside
@@ -1326,8 +1326,8 @@ Result: keypress groups: `keypressCount` 7, `markersByKeypress` {0: conditionnel
 1: f, 2: future+passé+pers_3, 3: imparfait+subjonctif, 4: impératif+pers_1, 5: nbr_p+p, 6:
 pers_2}, hard/soft provenance, 7 unpressable features, usage weights.
 Artifacts: writes `keypress_groups.json`.
-Notes: **K history** from git: K=5 at 8330b8e and 0fa69af; K=6 from 4e73533 (impératif
-answer fix); **K=7 from 688c74d** (per-combination alternates) to HEAD. The claim that the
+Notes: **K history** from git: K=5 at b3b7fd5 and 812eb20; K=6 from fbda37e (impératif
+answer fix); **K=7 from 9114fbb** (per-combination alternates) to HEAD. The claim that the
 hard constraints cost nothing extra was checked at K=6 only. The greedy grouping path is
 gone (removed as dead code; the CP-SAT solver is the only one); `src/featuregrouping.py`
 now holds only the loaders and verifiers (`loadResolvedPressSets`,

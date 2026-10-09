@@ -39,8 +39,8 @@ one stroke when the union is legal and free).
 
 ## Phase 0 — dependency merge + candidate pool
 
-**Inputs**: branches `abbreviations` (ae6ad5d) and `affix-abbreviation-rules`
-(755b4f2, 8 commits: growth scopes, fusions, sweep speedups — the scope engine
+**Inputs**: branches `abbreviations` (923c657) and `affix-abbreviation-rules`
+(64d3558, 8 commits: growth scopes, fusions, sweep speedups — the scope engine
 this work builds on); `scratch/tao_abbreviations.txt` (567 entries, 121
 multi-word); `scratch/top_ngrams/*.tsv` + orgtre intermediates;
 PhoneticTheory/DisambiguatedTheory pickles; `util/ngram_data.py`.

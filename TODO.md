@@ -188,7 +188,7 @@ docs in `docs/PIPELINE.md` S8.10. Open items, most important first:
 
 ## Branch TODO — star/hash marks belong to the lemma (abbreviations branch, 2026-10-06)
 
-- **DONE 2026-10-06 (committed 868940e, 759769b): the family variant and the S1 closed-class plural merges** (spec `docs/specs/star-hash-marking.md` section 5b; 0 collisions after the rebuild; details in the commit messages and `docs/PIPELINE.md`).
+- **DONE 2026-10-06 (committed f1f90fc, 55a6a9e): the family variant and the S1 closed-class plural merges** (spec `docs/specs/star-hash-marking.md` section 5b; 0 collisions after the rebuild; details in the commit messages and `docs/PIPELINE.md`).
   Still open: the plugin version bump and mirror sync (the published install is stale), the trainer check in a browser, and the wish below. Left out of the plural merges because Lexique gives no number: `tiens` PRO:pos/ADJ:pos, `certaines` PRO:ind.
 
 - **WISH LIST, may not be possible without the Plover entry below: redundant marks stay optional.** A form that is already unique without the mark (a feature stroke makes it so, e.g. `parlai/-t`) should stay writable without it even
@@ -359,7 +359,7 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
   one, `feminineParticipleConsonant` :306; util/completeVerbParadigms.py prefers a same-gender
   donor; `util/fixParticipleGenderPhon.py --apply` added the consonant to 45 feminine rows
   (`découverte`, `cuite`, `feinte`, `jointe`, `méprise`…), dropped it from 17 masculine plurals
-  and deleted 17 synthetic rows duplicating an attested one (`promis` m_s, stale since e3b0358)).
+  and deleted 17 synthetic rows duplicating an attested one (`promis` m_s, stale since d1fceb0)).
   Backtest over 22,168 attested cross-gender pairs: 96.7% → 99.5% exact phon, no regression.
   Rebuild: S2 appended 82 rows (`recuire`, `romancer`, `introduire`), Plover +60 entries
   (`enclos` `@/kmtae` / `enclose` `@/kmtaenl`; `promis` loses its star-marked stroke), no
@@ -732,7 +732,7 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
     spellings. Before-state `scratch/fse-before/`, log `scratch/fse-rebuild.log`. OPEN: the generator's
     first-syllable exclusion in NON_FINAL_DOUBLED now contradicts the corpus (first-syllable `E`
     everywhere) — revisit, and the coarse-infinitive upgrade script is no longer needed for this set.
-  - `python lexique.py` stopped reproducing the committed LexiqueMixte.tsv after 0b5eace (found
+  - `python lexique.py` stopped reproducing the committed LexiqueMixte.tsv after a8779e0 (found
     and FIXED 2026-09-26): the 49 verbs remapped to `ach:eter`/`p:eler` dropped out of
     `loadElerEterQualifyingVerbs`, so reform rule 5 no longer regularized their Lexique383
     doubled rows (56 rows reverted, `amoncèle` → `amoncelle`). The loader now also accepts those

@@ -10,7 +10,7 @@ Read first, in this order: this file, `PLAN_2026-10-04-expression-decoder.md` (s
 
 ## 1. State (verify with `git log`, `git status`)
 
-- Worktree `/home/jfsp/Steno/stenalgo-briefs`, branch `abbreviations`, last commit `4516d77`. Nothing pushed, main not merged. Interpreter `/home/jfsp/Steno/stenalgo/env/bin/python`,
+- Worktree `/home/jfsp/Steno/stenalgo-briefs`, branch `abbreviations`, last commit `9abb513`. Nothing pushed, main not merged. Interpreter `/home/jfsp/Steno/stenalgo/env/bin/python`,
   always `PYTHONPATH=.`. `pytest src/test/` = 839 pass (853 after the plugin work). NEVER `git add -A` (untracked logs, `AffixSelection.pickle`, the box-drawing-named file, `scratch/*.log`, experiment folders stay out).
   Commit and push only when asked; no merge of main.
 - The committed rule set (`scratch/expr-*`, md5 of `expr-rules.tsv` `7e5a6c68eb38...`) is the DEFAULT run of `PYTHONPATH=. env/bin/python scratch/select_expression_rules.py` (about 5 minutes; it

@@ -14,7 +14,7 @@ Done, in order, with the user's go at each step:
 3. que briefs: user chose option 1, NO que briefs. `QUE_BRIEF_BUDGET` and the driver's que-brief stage are gone; `queFamilyOf` stays.
 4. Option 2 (brief wins when its attach fails) was built, measured (+2.9% with briefs) and REJECTED/removed for decodability; details in
    the NOTES file, section 5.
-5. `util/build_affix_rules.py` (MAIN checkout, not this worktree; committed there as `cea684f`): `--workers` default is now `min(8, os.cpu_count())`.
+5. `util/build_affix_rules.py` (MAIN checkout, not this worktree; committed there as `d571891`): `--workers` default is now `min(8, os.cpu_count())`.
    The docs' "~2.5 min on 16 cores" timings (CLAUDE.md, docs/PIPELINE.md, docs/ARCHITECTURE.md, the module docstring) were left unchanged.
 6. Committed on `abbreviations` (not pushed). Tests: 807 pass. `mypy` run bare in this worktree needs checking (a bare call from the repo root
    with the worktree's mypy.ini was not verified at the end).
@@ -30,14 +30,14 @@ CURRENT RESULT (deterministic, seeds 1 and 2 identical): attaches alone 23.3% of
 NEXT (ranked): (a) review the low-mass rules (`je ne`, `je me`, `ce qu' il`, `pas le`) and the slot list now that suffix `le`/`les` fire;
 (b) max-1-key overlap study (section 5 item 5; just `EXPR_MAX_SHARED_KEYS`, needs the decoder decision, NOTES section 4);
 (c) Phase 4: wiring into the build + Plover export + docs (CLAUDE.md, docs/PIPELINE.md, docs/GLOSSARY.md), required before any merge to main;
-(d) drop the temporary `from __future__ import annotations` in `src/affixes.py` when main is merged. MAIN checkout: commit `cea684f`
+(d) drop the temporary `from __future__ import annotations` in `src/affixes.py` when main is merged. MAIN checkout: commit `d571891`
 caps the affix search at 8 workers (done and committed there, not pushed). Nothing is pushed on either branch.
 
 (Section 5 items 1-3 and the `le`/`les` part of 4 are done; see NEXT above.)
 
 ## 0b. UPDATE (end of the same day) — low-mass review and the family-merge experiment; read after section 0
 
-State: branch `abbreviations`, HEAD `9bc2219`; uncommitted: `scratch/select_expression_rules.py` (opt-in family merge, collapse/collision
+State: branch `abbreviations`, HEAD `fb5b79d`; uncommitted: `scratch/select_expression_rules.py` (opt-in family merge, collapse/collision
 prints), new untracked `scratch/trace_families.py`, `scratch/why_shadow.py`, `scratch/before_families/`, `scratch/after_families/`, run logs
 `scratch/que_run_families*.log`. The tracked `scratch/expr-*` outputs were RESTORED from git: `md5sum -c scratch/md5_expr_deterministic.txt` passes.
 The default driver run therefore reproduces the baseline (23.3%, 123 exceptions, 0 shadows, with briefs 4.088e9).
@@ -74,11 +74,11 @@ The default driver run therefore reproduces the baseline (23.3%, 123 exceptions,
 
 ## 1. Where things are
 
-- Worktree `/home/jfsp/Steno/stenalgo-briefs`, branch `abbreviations` (HEAD `94000fe`, tracks origin, last pushed `1884dae`;
-  94000fe is local only). Main checkout `/home/jfsp/Steno/stenalgo` is on `main`. Interpreter:
+- Worktree `/home/jfsp/Steno/stenalgo-briefs`, branch `abbreviations` (HEAD `58d0480`, tracks origin, last pushed `1076a3c`;
+  58d0480 is local only). Main checkout `/home/jfsp/Steno/stenalgo` is on `main`. Interpreter:
   `/home/jfsp/Steno/stenalgo/env/bin/python`, run with `PYTHONPATH=.` from the worktree. Driver runs need more memory than the
   previous session allowed (a run was killed/stopped at Stage C); run ONE heavy job at a time, in the background with a log.
-- (Superseded by section 0: committed later.) Nothing was committed since `94000fe`. NEVER `git add -A` (untracked `AffixSelection.pickle`, `log_last_session`, a box-drawing-named file).
+- (Superseded by section 0: committed later.) Nothing was committed since `58d0480`. NEVER `git add -A` (untracked `AffixSelection.pickle`, `log_last_session`, a box-drawing-named file).
   Commit and push only when the user asks. No merge of main for now (user decision 2026-10-03).
 - Tests: `PYTHONPATH=. env/bin/python -m pytest src/test/ -q` -> **804 passed** (resources present via the worktree). `mypy` clean on
   `src/expressions.py`, `src/expressionrules.py`, `src/test/expressions_test.py`, `src/test/expressionrules_test.py`.

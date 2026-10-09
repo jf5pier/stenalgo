@@ -15,11 +15,11 @@ OFF-by-default flag, the default output is byte-identical to today's, a flagged 
 with the baseline, and the user has the comparison to decide.
 
 ## 2. Where things are
-- Repo `/home/jfsp/stenalgo`, branch `affix-abbreviation-rules` (base `main`), HEAD `7c0ee5f`. Use `env/bin/python`,
+- Repo `/home/jfsp/stenalgo`, branch `affix-abbreviation-rules` (base `main`), HEAD `5068501`. Use `env/bin/python`,
   `PYTHONPATH=.`, and **always `PYTHONUNBUFFERED=1` + a redirected log for long runs**. 8 cores, 7 GB RAM.
-- Commits this session: `855627e`, `8e811b2` (cherry-picked -ption/-ction lexicon fixes from main),
-  `93a36eb` (sweep speedup: `_exceptionRateFloor` prefilter in `src/affixrules.py`, `simulate(boundaryRisk=)`,
-  lru_cache on `markCostForCluster`; full sweep 669 s instead of ~5,200 s), `7c0ee5f` (refreshed sweep outputs).
+- Commits this session: `9ea9d51`, `c9d3b68` (cherry-picked -ption/-ction lexicon fixes from main),
+  `e31e6a7` (sweep speedup: `_exceptionRateFloor` prefilter in `src/affixrules.py`, `simulate(boundaryRisk=)`,
+  lru_cache on `markCostForCluster`; full sweep 669 s instead of ~5,200 s), `5068501` (refreshed sweep outputs).
 - Uncommitted (intentional, keep): `RESUME_2026-09-29-affix-after-lexicon-fix.md` (edited),
   `FINDINGS_2026-09-29-affix-exceptions-analysis.md`, this file, and ~20 new `scratch/*.py` analysis scripts + outputs.
   Nothing in `src/` or `util/` is uncommitted. Commit the notes only when the user asks.

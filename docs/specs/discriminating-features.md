@@ -160,8 +160,8 @@ refuses to write if there is any conflict.
 | 5 | nbr_p, p | 17 `-s` |
 | 6 | pers_2 | 19 `-d` |
 
-K has changed as the answers changed: 5, then 6 (impératif answer fix, 4e73533), then 7
-(per-combination alternates, 688c74d). Group ids are not stable between runs, so code looks up
+K has changed as the answers changed: 5, then 6 (impératif answer fix, fbda37e), then 7
+(per-combination alternates, 9114fbb). Group ids are not stable between runs, so code looks up
 features, not ids.
 
 ## 4. Realization Phase

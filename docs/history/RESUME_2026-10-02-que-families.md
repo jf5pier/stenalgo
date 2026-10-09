@@ -7,7 +7,7 @@ covers what happened after its item 12).
 ## 1. Where things are
 
 - Worktree: `/home/jfsp/Steno/stenalgo-briefs` (branch `abbreviations`, tracks
-  `origin/abbreviations`, last pushed tip `1884dae`). Work and run everything
+  `origin/abbreviations`, last pushed tip `1076a3c`). Work and run everything
   from there. The main checkout `/home/jfsp/Steno/stenalgo` is on `main`.
 - Interpreter: `/home/jfsp/Steno/stenalgo/env/bin/python` (bare `python` is
   not on PATH; the worktree has no `env/`).

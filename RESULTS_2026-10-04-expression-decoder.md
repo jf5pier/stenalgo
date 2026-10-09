@@ -133,7 +133,7 @@ saving in strokes:
 
 | run | hosted | fragments | total |
 |---|---|---|---|
-| previous commit `e0b7514` (no theory term) | 2.504e9 | 1.782e9 | 4.286e9 |
+| previous commit `e8444c3` (no theory term) | 2.504e9 | 1.782e9 | 4.286e9 |
 | shadow term (`f98fd383`) | 2.419e9 (-3.4%) | 1.608e9 | 4.027e9 |
 | shadow term + footprint (default now) | 2.454e9 (-2.0%) | 1.685e9 | 4.139e9 |
 | `ELISION_PAIRS=1 SELECTOR_RETRY=1`, no footprint | 2.520e9 | 1.245e9 | 3.765e9 |
@@ -159,7 +159,7 @@ the forced briefs avoid them (144k chords default, 170k with elision).
 |---|---|---|
 | attach saving alone | 24.8% (3.541e9) | 24.2% (3.457e9) |
 | with the 40 briefs | 4.158e9 | 4.014e9 |
-| hosted saving (895 expr, run-independent split) | 2.462e9 | 2.560e9 (+4.0%; +2.2% over `e0b7514`) |
+| hosted saving (895 expr, run-independent split) | 2.462e9 | 2.560e9 (+4.0%; +2.2% over `e8444c3`) |
 | fragments saving | 1.685e9 | 1.443e9 |
 | exceptions | 201 | 235 |
 | theory shadow events (single rule) / share of host frequency | 7 / 0.004% | 46 / 0.230% (was 50 / 1.078%) |

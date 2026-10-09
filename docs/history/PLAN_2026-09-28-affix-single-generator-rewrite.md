@@ -8,7 +8,7 @@ default given here, note it in your report, and continue. Stop at each **STOP** 
 
 This plan **supersedes**:
 - `RESUME_2026-09-28-affix-territory-merge.md`. Its territory merge was committed as checkpoint
-  `8630552` and is never run; this plan removes most of it.
+  `30662bc` and is never run; this plan removes most of it.
 - §5-6 of `RESUME_2026-09-27-affix-phase3-4-budgeted-selection.md`.
 
 `DESIGN_2026-09-27-affix-rule-selection.md` still holds wherever this file doesn't override it:
@@ -165,7 +165,7 @@ This plan **supersedes**:
    only for anchors**.
    - `MAX_RULE_FORMS`: 4 → **6**, as a compute safety cap only. `FORM_COST` carries the
      learnability cost, and the sweep varies it.
-2. **Delete the territory merge** from checkpoint `8630552`:
+2. **Delete the territory merge** from checkpoint `30662bc`:
    - `buildMergedRule`;
    - `handleTerritory`;
    - the merge branch of `selectRules`;

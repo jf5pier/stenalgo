@@ -6,8 +6,8 @@ family, selector...): `docs/GLOSSARY.md`, section "Expression abbreviation layer
 
 ## 1. State
 
-- Worktree `/home/jfsp/Steno/stenalgo-briefs`, branch `abbreviations`. Commits of this session: `4e0faf2` (suffix words, unigram evidence, budget 20),
-  `62435c6` (selector order, order ban, 3+-grams as briefs), then the final commit of this session (docs, switches, selector override).
+- Worktree `/home/jfsp/Steno/stenalgo-briefs`, branch `abbreviations`. Commits of this session: `51d18a7` (suffix words, unigram evidence, budget 20),
+  `9e8e5d7` (selector order, order ban, 3+-grams as briefs), then the final commit of this session (docs, switches, selector override).
   Nothing is pushed. Interpreter `/home/jfsp/Steno/stenalgo/env/bin/python`, `PYTHONPATH=.`. Tests: 818 pass. One heavy job at a time, in the
   background with a log (the driver takes about 5 minutes: `PYTHONPATH=. env/bin/python scratch/select_expression_rules.py [budget]`).
 - Committed result (budget 20): attaches alone 25.7% (3.672e9 of 1.430e10 pool longform strokes), 155 exceptions, 0 shadows, 0 collisions;

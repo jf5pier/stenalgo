@@ -15,7 +15,7 @@ Outcome: one tracked, human-editable **`config.toml`** at the repo root + a type
 - **In**: A tense/mood scope · B marker & marking preferences · C corpus & orthography policy · E ergonomic/solver weights
 - **Out**: D trainer export knobs (DEFAULT_LIMIT, CONTEXT_MOOD_PRIORITY, PRONOUNS, H_ASPIRE_LEMMAS) and all structural facts (phoneme inventories, GramCat, reserved keys, finger wiring, key partition, reform exception sub-tables)
 
-## Key architectural facts (verified against HEAD d2d4fa0)
+## Key architectural facts (verified against HEAD 3a84cc5)
 
 1. **Import cycle**: `word.py` needs CONFIG (frequency) but CONFIG validation needs the verb-tag vocabulary inside `Word.splitInfoVerb` (`src/word.py:102-127`) → extract those tables to a new **leaf module `src/verbfeatures.py`**. Layers: `word → config → verbfeatures`.
 2. **`lexique.py` executes at module level** (no `__main__` guard; `Lexique()` at :1261); its six reform flags are consumed at import. It already imports `src.grammar`, so importing `src.config` works.

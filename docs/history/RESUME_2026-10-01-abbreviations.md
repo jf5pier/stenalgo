@@ -14,19 +14,19 @@ the affix rules (`scratch/expr-rules.tsv`), later wired into the theory build.
 
 - Worktree: `/home/jfsp/stenalgo-fix` (a git worktree; the main checkout
   `/home/jfsp/stenalgo` is busy on `affix-abbreviation-rules` — do not touch it).
-- Branch: `abbreviations` (from `main` @5087bd5). Base/main last merged state:
-  main @49d223c contains the lesson-generator merge (pushed to origin).
-- Commits on branch (chronological): `5230068` (n-gram data + tao list +
-  queryViewer corpus-30 fix), `ae6ad5d` (rebuilt TSVs, particle word-units),
-  `20b047f` (planning docs), `c5c78ac` (round-2 answers registered),
-  `a6e4bd8` (merge of `affix-abbreviation-rules` @bde9a34), `1f4d2f1`
-  (Phase 0: coverage + candidate pool), `f8ea2bc` (Phase 1: composition
-  algebra), `95a9555` (Phase 2 Stage A: proxy selection), `fab8461` (Q2
-  rule families), `46b4878` (Stage B: keypress assignment), `dce8dfb`
-  (Stage C: joint repair + audit), `7f2e6fa` (attach-stacking disjointness
-  fix), `bf2562b` (Q3 decision registered), `69611b1` (Phase 3 report).
+- Branch: `abbreviations` (from `main` @2a6bad2). Base/main last merged state:
+  main @a3c8d4e contains the lesson-generator merge (pushed to origin).
+- Commits on branch (chronological): `b5aca46` (n-gram data + tao list +
+  queryViewer corpus-30 fix), `923c657` (rebuilt TSVs, particle word-units),
+  `3143632` (planning docs), `242b3d8` (round-2 answers registered),
+  `39f92d7` (merge of `affix-abbreviation-rules` @813ed6e), `76321f2`
+  (Phase 0: coverage + candidate pool), `198ab48` (Phase 1: composition
+  algebra), `6006f4c` (Phase 2 Stage A: proxy selection), `d691b1a` (Q2
+  rule families), `2ce23f7` (Stage B: keypress assignment), `766c0bf`
+  (Stage C: joint repair + audit), `dc243c6` (attach-stacking disjointness
+  fix), `cb6f6a7` (Q3 decision registered), `96f63a9` (Phase 3 report).
 - Interpreter: `/home/jfsp/stenalgo/env/bin/python` (bare `python` not on PATH).
-- **Committed 2026-10-02 and pushed**: `de27537` "Add forced briefs with
+- **Committed 2026-10-02 and pushed**: `c52fd93` "Add forced briefs with
   multi-stroke eligibility, pool fragment fix, budget sweep" —
   `src/expressionrules.py`
   (FORCED_BRIEF_BUDGET=40 + `deriveBriefStroke`), `src/test/
@@ -47,7 +47,7 @@ the affix rules (`scratch/expr-rules.tsv`), later wired into the theory build.
 
 ## 3. State
 
-- **Planning round 1 complete** (committed 20b047f): complexity analysis
+- **Planning round 1 complete** (committed 3143632): complexity analysis
   (`PLAN_2026-10-01-abbreviations-complexity.md`), 5-phase algorithm
   (`PLAN_2026-10-01-abbreviations-algorithm.md`), 12 questions
   (`QUESTIONS_2026-10-01-abbreviations.md`). All cited code refs verified by
@@ -63,7 +63,7 @@ the affix rules (`scratch/expr-rules.tsv`), later wired into the theory build.
   multi-word.
 - Verified this session: 964 tests pass on main post-merge; abbreviation
   branch is docs+scratch only so far (no src changes beyond the
-  util/ngram_data.py corpus default in 5230068).
+  util/ngram_data.py corpus default in b5aca46).
 
 ## 4. Decisions and constraints (round-2 answers, 2026-10-01)
 
@@ -89,12 +89,12 @@ Full table: end of `QUESTIONS_2026-10-01-abbreviations.md`. Essentials:
 
 ## 5. Next steps
 
-1. ~~Commit the round-2 planning docs~~ DONE (c5c78ac).
+1. ~~Commit the round-2 planning docs~~ DONE (242b3d8).
 2. Phase 0 DONE (2026-10-01):
-   a. ~~Merge `affix-abbreviation-rules`~~ DONE (a6e4bd8, merge-tree clean,
+   a. ~~Merge `affix-abbreviation-rules`~~ DONE (39f92d7, merge-tree clean,
       no conflicts). `pytest src/test/` green — **740 tests, not ~964**:
-      the lesson-generator merge (49d223c) is on main but in NEITHER this
-      branch nor the affix branch (fork point 5087bd5 predates it); the ~224
+      the lesson-generator merge (a3c8d4e) is on main but in NEITHER this
+      branch nor the affix branch (fork point 2a6bad2 predates it); the ~224
       lesson tests arrive only when this branch eventually merges to main.
    b. ~~tao coverage gap~~ DONE: `scratch/rebuild_ngrams.py --query
       scratch/tao_abbreviations.txt --fill` → `scratch/tao_coverage.tsv`.
@@ -211,9 +211,9 @@ Full table: end of `QUESTIONS_2026-10-01-abbreviations.md`. Essentials:
    que je=+* que l'=+# que nous=+*#; dans et à il la le les pas l' je ce
    s'; il lost both absorbed variants (il n', il y) to selector collapse.
    Suite 781; mypy clean (ortools snake_case API).
-8. ~~Uncommitted (ask user): Stage C changes~~ committed (dce8dfb Stage C,
-   7f2e6fa disjointness, bf2562b Q3, 69611b1 Phase 3 report).
-9. **Q3 circumfix experiments DONE (2026-10-01, commit 7f2e6fa); user
+8. ~~Uncommitted (ask user): Stage C changes~~ committed (766c0bf Stage C,
+   dc243c6 disjointness, cb6f6a7 Q3, 96f63a9 Phase 3 report).
+9. **Q3 circumfix experiments DONE (2026-10-01, commit dc243c6); user
    DECIDED Option C (decomposition + disjoint keys) — decision registered
    in the plan's Decisions block and the questions file's Q3 row.**
    Data on the ne…pas contexts (110M mass):
@@ -238,7 +238,7 @@ Full table: end of `QUESTIONS_2026-10-01-abbreviations.md`. Essentials:
      "ce qui n' est pas", ~1.5M each) — another marked-host selector
      collapse, mis-attributed by the drop heuristic (two differing
      families). Phase 3 polish.
-10. **Phase 3 (report) DONE (2026-10-01, commit 69611b1)**: the driver
+10. **Phase 3 (report) DONE (2026-10-01, commit 96f63a9)**: the driver
     attributes the joint composition per rule (strokes saved = span
     merged / span-1 standalone, exception mass + top exception
     expressions, 3 worked examples with longform->composed RTFCRE,

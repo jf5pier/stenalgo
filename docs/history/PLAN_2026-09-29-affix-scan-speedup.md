@@ -75,7 +75,7 @@ Precompute per (position, neighbour stroke, key) once per `chooseRuleKeypress`, 
   steps 1-4 leave the sweep above ~15 min.
 
 ## State at time of writing
-- Cherry-picked the `-ption`/`-ction` lexicon fixes (855627e, 8e811b2); pickles and the
+- Cherry-picked the `-ption`/`-ction` lexicon fixes (9ea9d51, c9d3b68); pickles and the
   sweep outputs in `scratch/` were regenerated from the fixed lexicon on 2026-09-29.
 - Still to check (cheap, from `scratch/affix-candidates.tsv`): the stray `psj§ ption` and
   `ksj§ ction` anchors are gone and `tion`'s carriers grew. Bash was down when I tried.

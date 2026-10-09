@@ -1,4 +1,4 @@
-# Performance review — 2026-09-29 (branch `performance-optim`, HEAD 8e811b2)
+# Performance review — 2026-09-29 (branch `performance-optim`, HEAD c9d3b68)
 
 Stage 1 (profiling) + Stage 2 (this report) of the plan
 `~/.claude/plans/i-want-to-plan-sleepy-parrot.md`. No pipeline source was modified; the only
@@ -280,12 +280,12 @@ determinism question for this machine):
 | Batch | Commit | Pipeline (s) | Notes |
 |---|---|---|---|
 | baseline | — | 596.4 | §4 step 2 baseline (`scratch/baseline_A_md5s.txt`) |
-| A | 133a766 | 463.8 | exporters 53.8/60.7/60.2/74.3 → 15.6/25.2/17.6/23.4 s; miss/hit paths tested |
-| C | 70bd2e2 | 312.6 | S3-S5 pass 1 127.6 → 37.1 s (report's ~90 s/pass estimate confirmed exactly) |
-| B | ca153cf | 271.5 | S7 48.6 → 26.9 s, realization report 36.8 → 16.3 s |
-| E | f0f4eed | 258.7 | exporters 73.3 → 62.2 s total; verified together with D |
-| D | 3e4f655 | (258.7) | measurement half only — see correction 2 below |
-| F | 82609f7 | 251.0 | elicitation cross-product computed once |
+| A | 03faa64 | 463.8 | exporters 53.8/60.7/60.2/74.3 → 15.6/25.2/17.6/23.4 s; miss/hit paths tested |
+| C | 6a114eb | 312.6 | S3-S5 pass 1 127.6 → 37.1 s (report's ~90 s/pass estimate confirmed exactly) |
+| B | 5d8a843 | 271.5 | S7 48.6 → 26.9 s, realization report 36.8 → 16.3 s |
+| E | 10c640a | 258.7 | exporters 73.3 → 62.2 s total; verified together with D |
+| D | 550d451 | (258.7) | measurement half only — see correction 2 below |
+| F | ff6b465 | 251.0 | elicitation cross-product computed once |
 
 Corrections to this report, found while implementing:
 
