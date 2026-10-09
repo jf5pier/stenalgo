@@ -50,3 +50,19 @@ googlebooks-fre-1grams/
 steno-trainer/main.js
 steno-trainer/elm-stuff/
 plover_stenalgo/plover_stenalgo/dictionaries/
+# GLÀFF (external French lexicon from Wiktionnaire, CC BY-SA 3.0): downloaded for util/check_against_glaff.py, never committed.
+glaff/
+# diagnostic reports (util.check_synthetic_regeneration, util.check_against_wiktionary)
+synthetic_regen_report.tsv
+synthetic_wiktionary_report.tsv
+lexicon_completeness.tsv
+lexicon_decision_examples.json
+# lexicon audit reports (util.audit_mixte)
+mixte_audit_report.md
+mixte_audit_misaligned.tsv
+synthetic_audit_report.md
+synthetic_audit_misaligned.tsv
+verb_template_proposals.tsv
+verb_template_groups.tsv
+synthetic_bar_rejections.tsv
+synthetic_skip_reasons.tsv
