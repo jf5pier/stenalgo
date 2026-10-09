@@ -1,0 +1,36 @@
+# Hand-maintained corrections of LexiqueMixte.tsv rows (same format and replay as mixteCorrections.tsv, which is generated from
+# the accepted decisions and must not be edited by hand; this file is the home of the rows found by hand). Loaded by
+# `loadAllMixteCorrections` (src/mixtecorrections.py); a key present in both files, or matching no output row, fails the build.
+# manual-stray-glide-i (2026-10-09): the 26 rows where Mixte had a stray `i` before the glide (`contorsionnait` ...sijonE, not ...sjonE;
+#   `ij` -> `j`, `industrialis-` `ij` -> `i`), and `riant` Rj@ -> Rij@. Letters follow Lexique383 (no `=`); closed `O` kept.
+ortho	lemme	cgram	infover	genre	nombre	phon	syll_cv	orthosyll_cv	group_id
+autopsiais	autopsier	VER	ind:imp:1s;ind:imp:2s;			otOpsjE	o|t_O_p|s_j_E	au|t_o_p|s_i_ais	manual-stray-glide-i
+contorsionna	contorsionner	VER	ind:pas:3s;			k§tORsjona	k_§|t_O_R|s_j_o|n_a	c_on|t_o_r|s_i_o|nn_a	manual-stray-glide-i
+contorsionnait	contorsionner	VER	ind:imp:3s;			k§tORsjonE	k_§|t_O_R|s_j_o|n_E	c_on|t_o_r|s_i_o|nn_ait	manual-stray-glide-i
+contorsionnant	contorsionner	VER	par:pre;			k§tORsjon@	k_§|t_O_R|s_j_o|n_@	c_on|t_o_r|s_i_o|nn_ant	manual-stray-glide-i
+contorsionne	contorsionner	VER	imp:pre:2s;ind:pre:3s;			k§tORsjOn	k_§|t_O_R|s_j_O_n_#	c_on|t_o_r|s_i_o_nn_e	manual-stray-glide-i
+contorsionnent	contorsionner	VER	ind:pre:3p;			k§tORsjOn	k_§|t_O_R|s_j_O_n_#	c_on|t_o_r|s_i_o_nn_ent	manual-stray-glide-i
+contorsionné	contorsionner	VER	par:pas;	m	s	k§tORsjone	k_§|t_O_R|s_j_o|n_e	c_on|t_o_r|s_i_o|nn_é	manual-stray-glide-i
+contorsionnée	contorsionner	VER	par:pas;	f	s	k§tORsjone	k_§|t_O_R|s_j_o|n_e_#	c_on|t_o_r|s_i_o|nn_é_e	manual-stray-glide-i
+contorsionnées	contorsionner	VER	par:pas;	f	p	k§tORsjone	k_§|t_O_R|s_j_o|n_e_#	c_on|t_o_r|s_i_o|nn_é_es	manual-stray-glide-i
+contorsionnés	contorsionner	VER	par:pas;	m	p	k§tORsjone	k_§|t_O_R|s_j_o|n_e_#	c_on|t_o_r|s_i_o|nn_é_s	manual-stray-glide-i
+dématérialiser	dématérialiser	VER	inf;			demateRjalize	d_e|m_a|t_e|R_j_a|l_i|z_e	d_é|m_a|t_é|r_i_a|l_i|s_er	manual-stray-glide-i
+dématérialisé	dématérialiser	VER	par:pas;	m	s	demateRjalize	d_e|m_a|t_e|R_j_a|l_i|z_e	d_é|m_a|t_é|r_i_a|l_i|s_é	manual-stray-glide-i
+espionnais	espionner	VER	ind:imp:1s;ind:imp:2s;			EspjonE	E_s|p_j_o|n_E	e_s|p_i_o|nn_ais	manual-stray-glide-i
+espionnait	espionner	VER	ind:imp:3s;			EspjonE	E_s|p_j_o|n_E	e_s|p_i_o|nn_ait	manual-stray-glide-i
+espionnant	espionner	VER	par:pre;			Espjon@	E_s|p_j_o|n_@	e_s|p_i_o|nn_ant	manual-stray-glide-i
+espionnent	espionner	VER	ind:pre:3p;			EspjOn	E_s|p_j_O_n_#	e_s|p_i_o_nn_ent	manual-stray-glide-i
+excursionnant	excursionner	VER	par:pre;			EkskyRsjon@	E|ks_k_y_R|s_j_o|n_@	e|x_c_u_r|s_i_o|nn_ant	manual-stray-glide-i
+industrialiser	industrialiser	VER	inf;			5dystRialize	5|d_y_s|t_R_i|a|l_i|z_e	in|d_u_s|t_r_i|a|l_i|s_er	manual-stray-glide-i
+industrialisé	industrialiser	VER	par:pas;	m	s	5dystRialize	5|d_y_s|t_R_i|a|l_i|z_e	in|d_u_s|t_r_i|a|l_i|s_é	manual-stray-glide-i
+industrialisée	industrialiser	VER	par:pas;	f	s	5dystRialize	5|d_y_s|t_R_i|a|l_i|z_e_#	in|d_u_s|t_r_i|a|l_i|s_é_e	manual-stray-glide-i
+marchiez	marcher	VER	ind:imp:2p;sub:pre:2p;			maRSje	m_a_R|S_j_e	m_a_r|ch_i_ez	manual-stray-glide-i
+rallions	raller	VER	ind:imp:1p;			Ralj§	R_a|l_j_§	r_a|ll_i_ons	manual-stray-glide-i
+remerciai	remercier	VER	ind:pas:1s;			R°mERsje	R_°|m_E_R|s_j_e	r_e|m_e_r|c_i_ai	manual-stray-glide-i
+remerciais	remercier	VER	ind:imp:1s;			R°mERsjE	R_°|m_E_R|s_j_E	r_e|m_e_r|c_i_ais	manual-stray-glide-i
+remerciait	remercier	VER	ind:imp:3s;			R°mERsjE	R_°|m_E_R|s_j_E	r_e|m_e_r|c_i_ait	manual-stray-glide-i
+remerciant	remercier	VER	par:pre;			R°mERsj@	R_°|m_E_R|s_j_@	r_e|m_e_r|c_i_ant	manual-stray-glide-i
+remerciâmes	remercier	VER	ind:pas:1p;			R°mERsjam	R_°|m_E_R|s_j_a_m_#	r_e|m_e_r|c_i_â_m_es	manual-stray-glide-i
+riant	riant	ADJ		m	s	Rij@	R_i|j_@	r_i|=_ant	manual-stray-glide-i
+riant	rire	VER	par:pre;			Rij@	R_i|j_@	r_i|=_ant	manual-stray-glide-i
+travaillerions	travailler	VER	cnd:pre:1p;			tRavaj°Rj§	t_R_a|v_a|j_°|R_j_§	t_r_a|v_a|ill_e|r_i_ons	manual-stray-glide-i

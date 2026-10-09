@@ -1,0 +1,7 @@
+# Corrections of LexiqueMixte.tsv rows (spec docs/specs/lexicon-decisions.md section 6), written by
+# `python -m util.build_mixte_corrections` from the accepted mixte_rule / mixte_typo decisions. Do not edit by hand.
+# ortho, lemme, cgram, infover, genre, nombre: the key of the OUTPUT row (infover as written, trailing ';' included;
+#   genre and nombre tell the NOM/ADJ slots of one spelling apart); it must match
+#   exactly one row of the build, else the build fails | phon, syll_cv, orthosyll_cv: the corrected fields
+# group_id: the decision that produced the row. Sorted by key.
+ortho	lemme	cgram	infover	genre	nombre	phon	syll_cv	orthosyll_cv	group_id

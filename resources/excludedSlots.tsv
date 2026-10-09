@@ -1,0 +1,36 @@
+# excludedSlots.tsv
+#
+# Slots ruled out BY DESIGN, read by util/lexicon_completeness.py: a (lemme, cgram, slot) matching a row below gets the status
+# "excluded:<reason>" in the completeness census, even if a conjugation template or a NOM/ADJ paradigm defines it. They are not
+# counted as missing.
+#
+# Columns (tab-separated): lemme, cgram, slot, reason.
+#   lemme  a lemma, or * for every lemma.
+#   cgram  VER, NOM or ADJ.
+#   slot   VER: a tag as in the infover column (ind:pre:1s, inf, par:pre) or par:pas:<m|f><s|p) (par:pas:ms); NOM/ADJ: <m|f><s|p> (ms).
+#          A trailing * matches a prefix (sub:imp:* = the whole subjonctif imparfait; * alone = every slot).
+#   reason a short code without spaces or tabs, after a free comment if needed (the census prints "excluded:<reason>").
+#
+# Rows:
+# - sub:imp:*   subjonctif imparfait declared out of scope for the theory on 2026-09-21 (archaic, literary tense; src/verbparadigm.py
+#               FINITE_SLOT_EXCLUDED_CODES, src/elicitation.py).
+# - neiger, bruiner (and other weather verbs): 1st and 2nd person impossible, util/fixDeleteWeatherVerbErrors.py (neiges sub:pre:2s,
+#   bruinasse sub:imp:1s deleted). The templates (grêl:er and the like) already leave these persons empty; the rows make the ruling explicit.
+# - sourdre: strictly 3rd person, util/fixSourdreDefectiveGaps.py ("sourds" imp:pre:2s / ind:pre:1s deleted).
+# - foutre, advenir, renaître, grêler: NOT excluded, util/fixFoutreDefectiveTenses.py, fixAdvenirRenaitreGaps.py and fixGrelerFigurativePlural.py
+#   completed their templates (the slots exist), so nothing to list.
+lemme	cgram	slot	reason
+*	VER	sub:imp:*	archaic_out_of_scope_2026-09-21
+neiger	VER	ind:pre:1s	weather_verb_3rd_person_only
+neiger	VER	ind:pre:2s	weather_verb_3rd_person_only
+neiger	VER	sub:pre:1s	weather_verb_3rd_person_only
+neiger	VER	sub:pre:2s	weather_verb_3rd_person_only
+neiger	VER	imp:pre:2s	weather_verb_3rd_person_only
+bruiner	VER	ind:pre:1s	weather_verb_3rd_person_only
+bruiner	VER	ind:pre:2s	weather_verb_3rd_person_only
+bruiner	VER	sub:pre:1s	weather_verb_3rd_person_only
+bruiner	VER	sub:pre:2s	weather_verb_3rd_person_only
+bruiner	VER	imp:pre:2s	weather_verb_3rd_person_only
+sourdre	VER	ind:pre:1s	defective_3rd_person_only
+sourdre	VER	ind:pre:2s	defective_3rd_person_only
+sourdre	VER	imp:pre:2s	defective_3rd_person_only
