@@ -21,11 +21,16 @@
 #
 import sys
 import csv
+import unicodedata
+import os
 import re
 import xml.etree.ElementTree as ET
 from copy import deepcopy
 from dataclasses import dataclass
 from src.grammar import Syllable, SyllableCollection
+from src.lexicondecisions import DECISIONS_PATH, Decisions, loadDecisions
+from src.mixterules import activeRules, applyRules
+from src.mixtecorrections import applyMixteCorrections, loadAllMixteCorrections
 from src.spellingvariants import (
     loadSpellingVariantDrops,
     reconcileOutputOrtho,
@@ -204,6 +209,9 @@ class OrthoRewriteRule:
     oldPrefix: str
     oldChar: str
     newChar: str
+    # A deletion only fires when the letter after the deleted one is the old spelling's (asseoir -> assoir deletes the `e`
+    # of `asseo-`, never the `e` of `assey-`, whose forms the reform leaves alone: asseyiez, not assyiez). "" = no guard.
+    followingChar: str = ""
 
 
 def computeSingleEditRule(oldSpelling: str, newSpelling: str) -> "OrthoRewriteRule":
@@ -229,7 +237,8 @@ def computeSingleEditRule(oldSpelling: str, newSpelling: str) -> "OrthoRewriteRu
         for position in range(len(oldSpelling)):
             if oldSpelling[:position] + oldSpelling[position + 1:] == newSpelling:
                 return OrthoRewriteRule(position, oldSpelling[:position],
-                                         oldSpelling[position], "")
+                                         oldSpelling[position], "",
+                                         oldSpelling[position + 1] if position + 1 < len(oldSpelling) else "")
         raise ValueError(
             f"reform1990.tsv: {oldSpelling!r} isn't newSpelling {newSpelling!r} plus one "
             "inserted character, can't derive a single-character deletion")
@@ -288,6 +297,11 @@ def loadReform1990OrthoRewrites(tsvPath: str) -> dict[str, tuple["OrthoRewriteRu
     return {key: tuple(rules) for key, rules in rewrites.items()}
 
 
+def baseLetter(char: str) -> str:
+    """`char` without its accent (`è` -> `e`), for the following-letter guard of a deletion rule."""
+    return unicodedata.normalize("NFD", char)[:1]
+
+
 def orthoRewriteOccurrence(ortho: str, rule: OrthoRewriteRule) -> int | None:
     """
     Return which occurrence (1-based) of the rule's anchor character in `ortho` is the
@@ -314,6 +328,9 @@ def orthoRewriteOccurrence(ortho: str, rule: OrthoRewriteRule) -> int | None:
         return ortho[:rule.position].count(rule.oldPrefix[-1])
     if len(ortho) <= rule.position or ortho[:rule.position] != rule.oldPrefix \
             or ortho[rule.position] != rule.oldChar:
+        return None
+    if rule.newChar == "" and rule.followingChar \
+            and baseLetter(ortho[rule.position + 1:rule.position + 2]) != baseLetter(rule.followingChar):
         return None
     return ortho[:rule.position + 1].count(rule.oldChar)
 
@@ -364,9 +381,13 @@ def applyOrthoRewrite(text: str, rule: OrthoRewriteRule, occurrence: int) -> str
         chars[targetIndex] = rule.newChar
         return "".join(chars)
     del chars[targetIndex]
-    if targetIndex < len(chars) and chars[targetIndex] in "_|":
+    # Drop a separator only when the deleted letter was a unit of its own: deleting one letter of a
+    # multi-letter unit (the first `l` of `p_e|ll_a`, interpeller -> interpeler) keeps the boundaries.
+    emptiedUnit = (targetIndex == len(chars) or chars[targetIndex] in "_|") \
+        and (targetIndex == 0 or chars[targetIndex - 1] in "_|")
+    if emptiedUnit and targetIndex < len(chars) and chars[targetIndex] in "_|":
         del chars[targetIndex]
-    elif targetIndex > 0 and chars[targetIndex - 1] in "_|":
+    elif emptiedUnit and targetIndex > 0 and chars[targetIndex - 1] in "_|":
         del chars[targetIndex - 1]
     return "".join(chars)
 
@@ -925,9 +946,13 @@ class Word:
                                 self.syll_cv.append(syll_phon)
                                 self.orthosyll_cv.append(syll_graph)
                                 return
-                        if graph_phon_pairs[0][0] not in [
+                        # The biphoneme "wa" (voyons o-wa.y-j) fills the Y and V
+                        # slots at once: it takes the V slot like "oi" (loi), so the
+                        # glide that follows opens the next syllable (vwa-j§).
+                        if (graph_phon_pairs[0][1] == "wa"
+                                or graph_phon_pairs[0][0] not in [
                                 "i", "ll", "o", "y", "u", "ill",
-                                "il", "ou", "l", "lli", "w", "ï"]:
+                                "il", "ou", "l", "lli", "w", "ï"]):
                             printVerbose(
                                 self.ortho, ["skip Y of", graph_phon_pairs[0]])
                             skip_next_Y = False
@@ -1288,6 +1313,7 @@ class Lexique:
             corpus = csv.DictWriter(f, fieldnames=fieldnames, delimiter='\t')
             corpus.writeheader()
 
+            outRows: list[dict[str, Any]] = []
             for word in sorted(self.words, key=lambda w: w.ortho):
                 if word.orthosyll_cv != []:
                     infoVerbOut = self.stripSubjonctifImparfait(word.info_verb)
@@ -1366,7 +1392,8 @@ class Lexique:
                         continue
                     if not reconciled[1]:
                         orthoOut, orthosyllOut = preSnapshot
-                    corpus.writerow({
+                    syllOut = word.writePhonoSyll()
+                    outRows.append({
                         "ortho": orthoOut,
                         "phon": word.phonology,
                         "lemme": word.lemme,
@@ -1375,11 +1402,18 @@ class Lexique:
                         "genre": word.gender,
                         "nombre": word.number,
                         "infover": infoVerbOut,
-                        "syll_cv": word.writePhonoSyll(),
+                        "syll_cv": syllOut,
                         "orthosyll_cv": orthosyllOut,
                         "freqlivres": word.frequency,
                         "freqfilms2": word.frequencyFilm
                     })
+            # Accepted lexicon decisions (docs/specs/lexicon-decisions.md section 6): the systematic
+            # rules (src/mixterules.py, only for accepted group ids), then the correction rows, on the
+            # output rows, after every reform rewrite above. Both are no-ops while nothing is accepted.
+            decisions = loadDecisions(DECISIONS_PATH) if os.path.exists(DECISIONS_PATH) else Decisions()
+            outRows = applyRules(outRows, activeRules(decisions))
+            outRows = applyMixteCorrections(outRows, loadAllMixteCorrections())
+            corpus.writerows(outRows)
 
 
 lexique = Lexique()

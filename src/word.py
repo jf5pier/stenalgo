@@ -8,6 +8,8 @@ from enum import Enum
 from typing import override
 from itertools import combinations
 
+from src.orthounits import stripMarks
+
 GramCat = Enum(
     "GramCat",
     [
@@ -364,7 +366,7 @@ class Word:
         if withSilent:
             return [symbol.join(syll) for syll in self.orthosyllCV]
         else:
-            return [symbol.join(syll).replace("#", "") for syll in self.orthosyllCV]
+            return [stripMarks(symbol.join(syll)) for syll in self.orthosyllCV]
 
     def syllablesToWord(self) -> str:
         return "".join(self.phonemesToSyllableNames())

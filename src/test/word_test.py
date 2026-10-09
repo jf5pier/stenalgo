@@ -450,6 +450,11 @@ class TestGraphemsToSyllables:
     def test_without_silent(self, word_sample: Word) -> None:
         assert word_sample.graphemsToSyllables(withSilent=False) == ["en", "ivre"]
 
+    def test_repeat_unit_adds_no_letter(self) -> None:
+        w = _make_word(rawSyllCV="k_R_i|j_a", rawOrthosyllCV="c_r_i|=_a")
+        assert w.graphemsToSyllables() == ["cri", "=a"]
+        assert w.graphemsToSyllables(withSilent=False) == ["cri", "a"]
+
     def test_symbol_separator(self, word_sample: Word) -> None:
         result = word_sample.graphemsToSyllables(symbol="-")
         assert result == ["en", "i-v-r-e"]
