@@ -50,7 +50,7 @@ Start from the current tree (glide-/j/ fix and the K=7 elicitation answers, both
   fixEvaserWordFinalZSyllabification; fixes that also touch Lexique383/Infra/Mixte and whose Synthetic half should follow from regenerating off the fixed Mixte: fixOuGlideConsistency,
   fixFirstSyllableE, fixHarmonyVowels, fixMixedHarmonyVowels (`util/harmonyVowelTargets.tsv`), fixCeSchwa, fixReSchwa, fixFinalAiE; prunes: fixRectifiedEConjugations (check the 49 templates are
   already patched in `resources/verbiste`), `prune_spelling_variants`; hand data: fixAsseoirDualFormGapsManual (26 rows -> `resources/syntheticManualRows.tsv` read by a new appender in `S2_APPENDERS`);
-  the unrecorded `sub:imp` removal (fd7e242) -> apply the rule of `Lexique.stripSubjonctifImparfait` (lexique.py) in the appenders. Where regeneration does not reproduce a fix, add the same
+  the unrecorded `sub:imp` removal (3249c05) -> apply the rule of `Lexique.stripSubjonctifImparfait` (lexique.py) in the appenders. Where regeneration does not reproduce a fix, add the same
   data-driven rewrite as an idempotent S2 post-step (reuse `readRows`/`rewriteTsv` of the fix scripts). Fixed order in `util/build_synthetic_lexicon.py`: appenders (convergence loop kept), then post-steps.
 - [ ] **3. From scratch by default [S].** `util/build_synthetic_lexicon.py` `main()` first truncates the file to its header and deletes the pickles; `--incremental` keeps the old behaviour.
   `dictionary.py` (`module("Synthetic Lexicon Building (S2), converged", ...)`) needs only its label/timing note; `lexique.py` never reads Synthetic, so S1 ordering is unaffected.
@@ -69,7 +69,7 @@ Start from the current tree (glide-/j/ fix and the K=7 elicitation answers, both
   not diagnosed), 9,899 only-regenerated (new full paradigms and NOM/ADJ plurals, all wanted). Rows differing in content, compared as loaded `Word`s (the TSV text is not the right level: `Word.__post_init__`
   normalizes `e|n_`->`en|` and the `-ayer` conditional `R_j_`->`R|j_`, so 27 keys that differ in the file load identically):
   * 218 vowel-quality rows: DECIDED 2026-10-08 (user): adopt the regenerated value in every case. (1) 89 doubled-consonant `-eler` rows `°`->`E` (attested `appellerons` `apEl°R§`); (2) 81 `-ayer` rows `e`->`E`
-    (the `ay` rule; attested `balayé` `balEje`); (3) 30 `-ier` subjunctives lose the final glide (`publie` `pyblij`->`pybli`, attested `crie` `kRi`); (4) 4 `baie`/`laie` `E`->`e` (d0cb3d3); (5) 13 rows where the
+    (the `ay` rule; attested `balayé` `balEje`); (3) 30 `-ier` subjunctives lose the final glide (`publie` `pyblij`->`pybli`, attested `crie` `kRi`); (4) 4 `baie`/`laie` `E`->`e` (d9bd9fb); (5) 13 rows where the
     regeneration re-sharpens the validated harmony vowels (`autographie` `O`->`o`, `clone` `o`->`O`, `piochés`, `interconnectées`: `normalizeSplicedBreakdown`'s mid-vowel table overrides the infinitive's quality,
     against `util/harmonyVowelTargets.tsv`) -- adopted although the targets file says otherwise, so DO NOT hand-run `fixHarmonyVowels` / `fixMixedHarmonyVowels` on the Synthetic file (they would revert them);
     (6) `décaties` `dekati`->`dekasi` (Mixte itself has `décatie` as `dekasi`: a Lexique383 error to fix at the source). Nothing to implement: the pipeline already produces these.
@@ -302,7 +302,7 @@ docs in `docs/PIPELINE.md` S8.10. Open items, most important first:
 
 ## Branch TODO — star/hash marks belong to the lemma (abbreviations branch, 2026-10-06)
 
-- **DONE 2026-10-06 (committed 868940e, 759769b): the family variant and the S1 closed-class plural merges** (spec `docs/specs/star-hash-marking.md` section 5b; 0 collisions after the rebuild; details in the commit messages and `docs/PIPELINE.md`).
+- **DONE 2026-10-06 (committed f1f90fc, 55a6a9e): the family variant and the S1 closed-class plural merges** (spec `docs/specs/star-hash-marking.md` section 5b; 0 collisions after the rebuild; details in the commit messages and `docs/PIPELINE.md`).
   Still open: the plugin version bump and mirror sync (the published install is stale), the trainer check in a browser, and the wish below. Left out of the plural merges because Lexique gives no number: `tiens` PRO:pos/ADJ:pos, `certaines` PRO:ind.
 
 - **WISH LIST, may not be possible without the Plover entry below: redundant marks stay optional.** A form that is already unique without the mark (a feature stroke makes it so, e.g. `parlai/-t`) should stay writable without it even
@@ -473,7 +473,7 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
   one, `feminineParticipleConsonant` :306; util/completeVerbParadigms.py prefers a same-gender
   donor; `util/fixParticipleGenderPhon.py --apply` added the consonant to 45 feminine rows
   (`découverte`, `cuite`, `feinte`, `jointe`, `méprise`…), dropped it from 17 masculine plurals
-  and deleted 17 synthetic rows duplicating an attested one (`promis` m_s, stale since e3b0358)).
+  and deleted 17 synthetic rows duplicating an attested one (`promis` m_s, stale since d1fceb0)).
   Backtest over 22,168 attested cross-gender pairs: 96.7% → 99.5% exact phon, no regression.
   Rebuild: S2 appended 82 rows (`recuire`, `romancer`, `introduire`), Plover +60 entries
   (`enclos` `@/kmtae` / `enclose` `@/kmtaenl`; `promis` loses its star-marked stroke), no
@@ -846,7 +846,7 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
     spellings. Before-state `scratch/fse-before/`, log `scratch/fse-rebuild.log`. OPEN: the generator's
     first-syllable exclusion in NON_FINAL_DOUBLED now contradicts the corpus (first-syllable `E`
     everywhere) — revisit, and the coarse-infinitive upgrade script is no longer needed for this set.
-  - `python lexique.py` stopped reproducing the committed LexiqueMixte.tsv after 0b5eace (found
+  - `python lexique.py` stopped reproducing the committed LexiqueMixte.tsv after a8779e0 (found
     and FIXED 2026-09-26): the 49 verbs remapped to `ach:eter`/`p:eler` dropped out of
     `loadElerEterQualifyingVerbs`, so reform rule 5 no longer regularized their Lexique383
     doubled rows (56 rows reverted, `amoncèle` → `amoncelle`). The loader now also accepts those

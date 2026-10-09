@@ -23,9 +23,9 @@ patterns yet ("option C", about a day of work, needs the user's go-ahead).
   2026-09-30). Interpreter `env/bin/python` (bare `python` is not on PATH). ~7 GB RAM: one heavy job at a time;
   long runs with `PYTHONUNBUFFERED=1`; wait on a PID (never `pgrep -f` in a loop).
 - Other worktree `/home/jfsp/stenalgo-fix` (branch `lesson-generator`): not ours. A prunable detached worktree under /tmp is junk.
-- Commits on this branch since the previous resume: `066897d` merge of main (R2 -> R° lexicon fix `5087bd5`,
-  `util/fixReSchwa.py`), `9e2ac38` (affix pool + H sweep rerun, `--settings` option), `e5a7966` (re/ré notes), and the
-  preclear commit (see `git log`). Main also has `5087bd5` pushed.
+- Commits on this branch since the previous resume: `5699ab1` merge of main (R2 -> R° lexicon fix `2a6bad2`,
+  `util/fixReSchwa.py`), `b340fe1` (affix pool + H sweep rerun, `--settings` option), `671902a` (re/ré notes), and the
+  preclear commit (see `git log`). Main also has `2a6bad2` pushed.
 - Code changed on this branch (tests: 723 pass): `src/affixes.py` (`NO_GROWTH_PREFIX_ORTHOS`, `isNoGrowthAnchor`: no growth
   for the `re`/`reh` prefix anchor, used in `growAffixesLattice`), `src/test/affixes_test.py` (+2 tests), `util/affix_scan.py`
   (`--settings H` runs only the named weight settings; comparison.md untouched then).

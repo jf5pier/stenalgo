@@ -14,7 +14,7 @@
 # from any feminine participle row of the same lemma in either lexicon. Rows that
 # duplicate an attested LexiqueMixte participle (same ortho, lemma, gender, number)
 # are deleted: they were generated before a lexicon fix filled the attested row's
-# gender/number (e3b0358), and the attested row supersedes them.
+# gender/number (d1fceb0), and the attested row supersedes them.
 #
 # Dry-run by default: only reads and reports. --apply rewrites the phon and syll_cv
 # fields in place (keeping every row's own line ending) and drops the duplicates.

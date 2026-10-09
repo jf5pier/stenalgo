@@ -16,7 +16,7 @@ Supersedes `RESUME_2026-09-30-scope-decisions-to-engine.md` ("Next steps"). Bran
   `scratch/fusion_growth.py`, `scratch/fusion_growth_all.sh`; outputs `scratch/combined-scopes-2026-10-01.md`, `scratch/fusion-check-2026-10-01.md`,
   `scratch/fusion-growth-all-2026-10-01.out`.
 
-## Usable output (2026-10-01, after the engine commit 755b4f2)
+## Usable output (2026-10-01, after the engine commit 64d3558)
 User design: the stable theory is never changed; affix abbreviations are an optional layer added after it, long forms stay as fallback,
 one abbreviation per word (largest saving). Implemented: `src/affixabbrev.py`, `util/export_affix_dictionary.py` (last step of `dictionary.py`),
 committed input `affix_rules.json` (written by the sweep as `affix-rules.json`), outputs `plover_stenalgo_affix_dictionary.json` +

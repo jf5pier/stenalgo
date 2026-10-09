@@ -1,6 +1,6 @@
 # RESUME 2026-10-02 — affix layer (S9) MERGED and PUSHED; what is left
 
-Start here in a fresh session (Sonnet is fine). Repo `/home/jfsp/stenalgo`, branch `main`, HEAD `9e08475` (pushed 2026-10-02 with the preclear; S9 merge `3c644af` deployed earlier). Environment: `env/bin/python`, `PYTHONPATH=.`, long runs with `PYTHONUNBUFFERED=1` in the background, ONE heavy job at a time
+Start here in a fresh session (Sonnet is fine). Repo `/home/jfsp/stenalgo`, branch `main`, HEAD `4f1a837` (pushed 2026-10-02 with the preclear; S9 merge `b9ede78` deployed earlier). Environment: `env/bin/python`, `PYTHONPATH=.`, long runs with `PYTHONUNBUFFERED=1` in the background, ONE heavy job at a time
 (7 GB RAM); wait on a PID with `timeout 595 tail --pid=PID -f /dev/null`. Never commit/push without an explicit request. Branch
 `affix-abbreviation-rules` still exists locally (merged; may be deleted if the user agrees).
 
@@ -22,7 +22,7 @@ It is done; the remaining work is a learner trial and the non-affix items below.
 ## Decisions for the user (recommendation first; ask, do not guess)
 
 1. **Delete the merged local branch `affix-abbreviation-rules`?** Ask the user.
-2. **Repo-root tidy: DONE 2026-10-02 (`dc5bc93`).** Historical RESUME/PLAN/DESIGN/FINDINGS notes now live in `docs/history/`; this file stays at the root.
+2. **Repo-root tidy: DONE 2026-10-02 (`bd6c659`).** Historical RESUME/PLAN/DESIGN/FINDINGS notes now live in `docs/history/`; this file stays at the root.
    `scratch/` untracked snapshots stay (never `git clean -x`).
 3. **Key search is not proven exhaustive.** With 30 finalists it fixed the 3 known misses (`a|ah|ha|hâ|â` +3%, `am|an|...` +2%,
    `de|des|dé|déh` +7%); the best key for `am|an|...` was found at 7,324 whereas a top-60 check found 7,342, so a miss of about 0.25% remains
@@ -33,7 +33,7 @@ It is done; the remaining work is a learner trial and the non-affix items below.
 5. **Budget of 30.** If the trial in 4 says some rules are not worth their memory cost, lower `RULE_BUDGET`; the selection reruns in about 20
    minutes (the cache is keyed on the budget). Do not split rules into several keys (rejected 2026-09-29).
 
-## New TODO items (2026-10-02, in `TODO.md`, commit `9e08475`)
+## New TODO items (2026-10-02, in `TODO.md`, commit `4f1a837`)
 
 - Affix abbreviations lack conjugation markings: add them from the root words' marked strokes (homographs included); touches
   `src/affixabbrev.py`, `util/export_affix_dictionary.py`; verify with the S9 md5s.

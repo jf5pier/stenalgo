@@ -18,7 +18,7 @@ dictionary plugin. Non-goals now: changing the rule selection, the slot budget (
 
 ## 1. State to start from (verify with `git log`, `git status`)
 
-- Worktree `/home/jfsp/Steno/stenalgo-briefs`, branch `abbreviations`, last commit `e0b7514`. Nothing pushed. Interpreter
+- Worktree `/home/jfsp/Steno/stenalgo-briefs`, branch `abbreviations`, last commit `e8444c3`. Nothing pushed. Interpreter
   `/home/jfsp/Steno/stenalgo/env/bin/python`, always `PYTHONPATH=.`. `pytest src/test/` must stay green (818 tests).
 - NEVER `git add -A` (untracked logs, `AffixSelection.pickle`, the box-drawing-named file, `scratch/que_run_*.log`, experiment
   folders stay out). Commit only when asked; no push, no merge of main.
@@ -81,7 +81,7 @@ each stack of two from the disjoint families) and each host first/last stroke, c
 live outline of ANOTHER word (shadowing, Q7); (ii) two different (rule, host) pairs with the same union (collision); (iii) hosts
 refused by overlap/illegal chord (fine, they become exceptions). Report counts and frequency mass, per rule. This decides whether a
 decoder may legally return ONE reading per stroke tuple, or must rank readings. Also report the forced-brief and attach-chord
-clashes (already fixed for the pool in `e0b7514`; re-check over the whole theory).
+clashes (already fixed for the pool in `e8444c3`; re-check over the whole theory).
 
 ### Step 4 — decisions (STOP and ask the user; do not decide alone)
 

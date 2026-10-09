@@ -1,6 +1,6 @@
 #!/bin/env python
 #
-# Follow-up to util/fixGniezPronunciation.py (commit 83d9a32): that script
+# Follow-up to util/fixGniezPronunciation.py (commit 2948571): that script
 # corrected Lexique383.tsv's phon column (adding the yod dropped from
 # "-iez", e.g. accompagniez ak\xa7paNe -> ak\xa7paNje) and
 # LexiqueInfraCorrespondance.tsv's assoc column, but never updated

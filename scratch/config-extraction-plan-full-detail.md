@@ -1,6 +1,6 @@
 # Implementation plan: extract user-preference parameters into `config.toml`
 
-Repo: /home/jfsp/stenalgo (branch `main`, HEAD d2d4fa0). Python 3.14.7 (`tomllib` is stdlib).
+Repo: /home/jfsp/stenalgo (branch `main`, HEAD 3a84cc5). Python 3.14.7 (`tomllib` is stdlib).
 Goal: one tracked TOML file at the repo root holding every user-preference parameter currently
 hardcoded in Python, plus a typed, fail-loudly loader (`src/config.py`). Committed defaults must
 reproduce today's outputs byte-identically (md5 protocol below). Nothing structural moves.

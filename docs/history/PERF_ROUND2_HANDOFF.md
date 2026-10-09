@@ -11,10 +11,10 @@ moved.
 
 - Branch `performance-optim`, worktree `/home/jfsp/stenalgo-fix`, interpreter
   `/home/jfsp/stenalgo/env/bin/python` (bare `python` is NOT on PATH in Claude's shell).
-- Round-1 commits: A `133a766` (fingerprinted `DisambiguatedTheory.pickle`), C `70bd2e2`
-  (`lexicalSyllabicPartAmbiguityScore` hoist), B `ca153cf` (coda-search sharing +
-  `getStrokeCost` memo), E `f0f4eed` (render-path memos), D `3e4f655` (per-round S2
-  timing lines), F `82609f7` (elicitation cross-product once), outcome note `f4141e8`
+- Round-1 commits: A `03faa64` (fingerprinted `DisambiguatedTheory.pickle`), C `6a114eb`
+  (`lexicalSyllabicPartAmbiguityScore` hoist), B `5d8a843` (coda-search sharing +
+  `getStrokeCost` memo), E `10c640a` (render-path memos), D `550d451` (per-round S2
+  timing lines), F `ff6b465` (elicitation cross-product once), outcome note `aa681e2`
   (report §7 — read its three corrections before proposing anything).
 - Converged orchestrated run is now **251.0 s** (was 596.4 s pre-round-1). Last run's
   steps: S3-S5 pass 1 **36.8**; S2 appender round **61.8**; Elicitation **22.9**;

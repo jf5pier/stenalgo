@@ -1,4 +1,4 @@
-# Performance review round 2 — 2026-09-29 (branch `performance-optim`, HEAD 4b53c14)
+# Performance review round 2 — 2026-09-29 (branch `performance-optim`, HEAD 2fb3488)
 
 Follow-up to `PERF_REVIEW_2026-09-29.md` (round 1, proposals A–F, all landed; pipeline
 596.4 → 251.0 s). Mission per `PERF_ROUND2_HANDOFF.md`: re-profile the optimized code,
@@ -208,11 +208,11 @@ suspect an iteration-order leak; investigate, never sort-to-match.
 
 | Batch | Commit | Pipeline (s) | Notes |
 |---|---|---|---|
-| baseline (round-1 end) | 4b53c14 | 251.0 | |
-| R2a | 6609e63 | 242.6 | S3-S5 36.8→30.2, definitions 20.0→17.1; md5s identical |
-| R2b | 88ecc2b | 215.4 | Plover dict 11.8→4.6 (hit loads no large pickle), words 17.9→11.2, sentences 13.9→9.3, definitions 17.1→11.9, realization 16.5→14.3; md5s identical; miss path + format-1-miss tested |
-| R2c | 39c3ff9 | 211.1 | S2 appender round 61.8→52.6 (extractDiscriminatingFeatures + buildFeasibleDiscriminatorOptions); LexiqueSynthetic.tsv unchanged (S2 still converged) |
-| R2d | 447fa9c | 208.2 | S3-S5 pass 1 30.3→29.1 (fork-stage fix; wall capped by slowest worker) |
+| baseline (round-1 end) | 2fb3488 | 251.0 | |
+| R2a | e479ea9 | 242.6 | S3-S5 36.8→30.2, definitions 20.0→17.1; md5s identical |
+| R2b | d7df8d9 | 215.4 | Plover dict 11.8→4.6 (hit loads no large pickle), words 17.9→11.2, sentences 13.9→9.3, definitions 17.1→11.9, realization 16.5→14.3; md5s identical; miss path + format-1-miss tested |
+| R2c | 6aef21f | 211.1 | S2 appender round 61.8→52.6 (extractDiscriminatingFeatures + buildFeasibleDiscriminatorOptions); LexiqueSynthetic.tsv unchanged (S2 still converged) |
+| R2d | 2d93978 | 208.2 | S3-S5 pass 1 30.3→29.1 (fork-stage fix; wall capped by slowest worker) |
 
 **Total round 2: 251.0 → 208.2 s (−17%). Round 1 + 2 together: 596.4 → 208.2 s (−65%).**
 

@@ -18,7 +18,7 @@ possible first, tier 1 only as a tiebreaker among colorings that already achieve
 
 Confirmed against the real lexicon on 2026-09-19: still K=6 (the hard constraints didn't cost
 anything extra there), all three soft tiers fully achieved, 0 conflicts. K=7 since the
-per-combination alternates (688c74d); all three soft tiers still achieved.
+per-combination alternates (9114fbb); all three soft tiers still achieved.
 
 This is the canonical, checked-in artifact other work (Discriminating-Feature Stroke
 Realization (Realization Phase), or future re-runs)

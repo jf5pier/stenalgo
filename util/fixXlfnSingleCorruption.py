@@ -4,7 +4,7 @@
 # whose "phono" field was corrupted into a literal Excel internal formula
 # token, e.g. "@_xlfn.SINGLE(SJ5)" instead of "@sj5" (for "ancien") -- an
 # artifact of the file having been opened/saved in Excel at some point
-# (commit 7da7bf3). Since every affected ortho has exactly one distinct
+# (commit 9ac6f78). Since every affected ortho has exactly one distinct
 # phon value in resources/Lexique383.tsv, that value is an unambiguous
 # source of truth to restore the correct phono.
 #

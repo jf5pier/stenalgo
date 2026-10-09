@@ -1,6 +1,6 @@
 # The 30 affix rules, H setting, partial-overlap flag on, no growth for `re-`
 
-Source: `scratch/affix-sweep-partial/H/affix-rules.tsv` (sweep of 2026-09-30 on the lexicon after the `R2` -> `R°` fix; merged into the branch at 066897d, no-growth for `re|reh` in `src/affixes.py`). Regenerate with `env/bin/python scratch/rules_table.py`.
+Source: `scratch/affix-sweep-partial/H/affix-rules.tsv` (sweep of 2026-09-30 on the lexicon after the `R2` -> `R°` fix; merged into the branch at 5699ab1, no-growth for `re|reh` in `src/affixes.py`). Regenerate with `env/bin/python scratch/rules_table.py`.
 
 Notation: `/` separates alternatives, `[a/b]` = any one of them, `·` = where the anchor sits, `k=n` = syllables on the stroke, `⟨…⟩` and `-{…}` are engine notation. Words = carrier words of the rule; saved = stroke-frequency saved; exceptions = words (frequency).
 

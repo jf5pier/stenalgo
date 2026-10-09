@@ -45,7 +45,7 @@ phase codes, older stage names and older terms. They map as follows.
 
 ### Renamed files
 
-The files and identifiers carrying the letter codes were renamed in commit df71a24. Commit
+The files and identifiers carrying the letter codes were renamed in commit 649809f. Commit
 messages before it keep the old names.
 
 | Old path | New path |

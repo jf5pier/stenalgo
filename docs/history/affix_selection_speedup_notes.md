@@ -113,11 +113,11 @@ and the finals pass dominates what remains.
 ## 9. Environment note
 
 A stray empty root `__init__.py` made 8 tests fail through double-import of modules. It was deleted. All 1005 tests pass
-on `main` at `ebb7a2e` without it.
+on `main` at `fb7a471` without it.
 
 ## 10. Reproducibility check of the clean run
 
-After deleting the cache pickles and running `lexique.py` + `dictionary.py` on `main` (`ebb7a2e`), `git status` showed
+After deleting the cache pickles and running `lexique.py` + `dictionary.py` on `main` (`fb7a471`), `git status` showed
 **no modified tracked files**. Every tracked generated output is byte-identical to what is committed: `affix_rules.json`,
 `affix_rules_report.md`, `affix_abbreviations.tsv`, both Plover dictionaries, `keypress_groups.json`,
 `realization_report.json`, `resources/LexiqueMixte.tsv`, `resources/LexiqueSynthetic.tsv` and the five

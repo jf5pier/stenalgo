@@ -3,7 +3,7 @@
 # Findings 2026-09-29: where the affix rules' exceptions come from (H/M/L sweep, fixed lexicon)
 
 Written for a reader with no memory of the session. Data: `scratch/affix-sweep/{L,M,H}/affix-rules.tsv`
-(committed 7c0ee5f), `scratch/affix-pool.pickle`. All numbers below are reproducible with the scripts
+(committed 5068501), `scratch/affix-pool.pickle`. All numbers below are reproducible with the scripts
 listed in section 7. Frequency units = the lexicon's carrier frequency (same as `strokeFreqSaved`).
 
 ## 1. L/M/H at a glance (30 rules each)
@@ -74,7 +74,7 @@ its prefilter `_exceptionRateFloor`, `bindKeypresses`/`_jointLoss` all use the s
 effect needs a full re-optimised sweep.
 
 ## 7. Scripts and outputs (all under scratch/, untracked except where noted)
-Speedup (committed 93a36eb): `choose_bench.py` (+ `choose-baseline.json`), `bound_tightness.py`,
+Speedup (committed e31e6a7): `choose_bench.py` (+ `choose-baseline.json`), `bound_tightness.py`,
 `profile_choose.py`, `profile_rules.py`. Analyses: `weights_comparison.py`, `coverage_exceptions.py`,
 `ment_exceptions.py`, `ment_why.py`, `h_prune_experiment.py`, `split_rules.py`, `split_rules_keys.py`,
 `en_detail.py`, `en_detail2.py`, `en_words.py`, `en_collide.py`, `scope_prune.py`, `overlap_relax.py`,
