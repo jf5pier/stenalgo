@@ -26,14 +26,19 @@ from an empirically-derived per-template ending table instead
 (deriveConjugationEndingTables, generateMissingConjugatedForm).
 """
 
+import copy
 import difflib
+import math
 import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
-from dataclasses import dataclass
+from collections.abc import Callable, Iterator
+from dataclasses import dataclass, replace
+from dataclasses import field as dataclassField
 from pathlib import Path
 
 from src.grammar import Phoneme
 from src.keyboard import Strokes
+from src.orthounits import spellingOf
 from src.word import GramCat, Lemme, LemmeGramCat, Word, WordFeature
 
 VERBISTE_TRUSTED_STATUSES = {"regular", "family_template"}
@@ -343,12 +348,17 @@ def spliceParticiplePhon(attestedParticiple: Word, gender: str, ortho: str) -> t
     consonant (feminineParticipleConsonant) to the masculine's phon, as a coda
     of the last syllable, and the masculine drops it (item B45: "promis" had
     been given the /z/ of "promise"). Any trailing '#' in rawSyllCV is
-    dropped: it's a silent-grapheme bookkeeping artifact of the source
+    dropped (a leading "#_" is kept): it's a silent-grapheme bookkeeping artifact of the source
     alignment data (see lexique.py), not a phonological signal --
     src/word.py already strips it before building the plain phoneme string.
     """
     phon = attestedParticiple.phonology
-    rawSyllCV = attestedParticiple.rawSyllCV.replace("_#", "").replace("#", "")
+    # Only the TRAILING silent units are bookkeeping (_padSilentUnits restores them); a leading
+    # "#_" is the silent initial h ("hanchée" #_@|S_e_#) and must survive, or the unit count no
+    # longer matches the orthographic breakdown.
+    rawSyllCV = attestedParticiple.rawSyllCV
+    while rawSyllCV.endswith("_#"):
+        rawSyllCV = rawSyllCV[:-2]
     if gender == attestedParticiple.gender:
         return phon, rawSyllCV
     feminineOrtho = ortho if gender == "f" else attestedParticiple.ortho
@@ -465,6 +475,13 @@ def generateMissingParticiple(
         raise ValueError(f"template {template.name!r} has no par:pas form for {gender}_{number}")
     phon, rawSyllCV = spliceParticiplePhon(attestedParticiple, gender, ortho)
     rawOrthosyllCV = generateParticipeOrthosyll(attestedParticiple, gender, number)
+    if spellingOf(rawOrthosyllCV) != ortho:
+        # The attested participle is spelled differently from the template's regular spelling
+        # (Lexique's "persifflé" for persifler): splicing its breakdown would make "persif|flée".
+        raise ValueError(
+            f"orthosyll_cv {rawOrthosyllCV!r} does not spell {ortho!r} "
+            f"(the attested participle {attestedParticiple.ortho!r} is spelled differently)"
+        )
     rawSyllCV = _padSilentUnits(rawSyllCV, rawOrthosyllCV)
     return Word(
         ortho=ortho, phonology=phon, lemme=lemme,
@@ -556,6 +573,51 @@ def _unitsAndBoundaries(rawBreakdown: str) -> tuple[list[str], set[int]]:
 
 def _joinBreakdown(units: list[str], boundaries: set[int]) -> str:
     return "".join(("|" if i in boundaries else "_" if i else "") + unit for i, unit in enumerate(units))
+
+
+GLIDE_FUTURE_CODES = ("ind:fut", "cnd:pre")
+
+
+def hasGlideFutureStem(lemme: str, code: str) -> bool:
+    """True for the future and the conditional of a verb in -ier, -uer or -ouer (not -guer/-quer, where the u is silent): the
+    infinitive's final glide, followed by the schwa of the ending, is pronounced as its vowel (affiliera /afiliRa/, accentuera
+    /aks@tyRa/, allouera /aluRa/; the verbs in -éier and -ouier keep the glide after a vowel, they are never touched)."""
+    return code in GLIDE_FUTURE_CODES and lemme.endswith(("ier", "uer")) and not lemme.endswith(("guer", "quer"))
+
+
+def vocalizeGlideBeforeFutureR(phonology: str, rawSyllCV: str, rawOrthosyllCV: str) -> tuple[str, str, str]:
+    """
+    Rule `glide-future-stem` (src/synthrules.py): in a spliced future or conditional, `<consonant> j °|R` becomes `<consonant> i #|R`
+    (`l_j_°|R_a` -> `l_i_#|R_a`), likewise `w` -> `u` and `8` -> `y`, and `i|j_°|R` loses its glide (`b_l_i|j_°|R_a` -> `b_l_i_#|R_a`; the
+    letters' `=` unit goes with it), exactly the shape of the attested rows (aliRa `a|l_i_#|R_a`). A glide after a vowel is left alone.
+    The breakdowns come back unchanged when the shape is not found.
+    """
+    units, boundaries = _unitsAndBoundaries(rawSyllCV)
+    orthoUnits, orthoBoundaries = _unitsAndBoundaries(rawOrthosyllCV)
+    aligned = len(units) == len(orthoUnits)
+    for k in range(1, len(units) - 2):
+        glide = units[k]
+        if glide not in FINAL_GLIDE_VOWEL or units[k + 1] != "°" or units[k + 2] != "R":
+            continue
+        if glide == "j" and units[k - 1] == "i":
+            # cluster + i + j: the glide goes, the i stays
+            if aligned and orthoUnits[k] != "=":
+                return phonology, rawSyllCV, rawOrthosyllCV
+            units[k + 1] = "#"
+            del units[k]
+            newBoundaries = {i if i <= k else i - 1 for i in boundaries if i != k}
+            if aligned:
+                del orthoUnits[k]
+                orthoBoundaries = {i if i <= k else i - 1 for i in orthoBoundaries if i != k}
+            boundaries = newBoundaries
+        elif not _hasNucleus(units[k - 1]):
+            units[k] = FINAL_GLIDE_VOWEL[glide]
+            units[k + 1] = "#"
+        else:
+            continue
+        return (_joinPhonology(units), _joinBreakdown(units, boundaries),
+                _joinBreakdown(orthoUnits, orthoBoundaries) if aligned else rawOrthosyllCV)
+    return phonology, rawSyllCV, rawOrthosyllCV
 
 
 ClusterKey = tuple[str, ...]
@@ -822,6 +884,34 @@ def _longestCommonSuffix(strings: list[str]) -> str:
     return ""
 
 
+# The share of a template's donor infinitives that must end with the common infinitive suffix of a field: a donor that
+# does not (a loanword such as dealer /dil9R/ among the -er verbs) is an outlier, kept out of the tables.
+MIN_SUFFIX_DONOR_SHARE = 0.9
+
+
+def majoritySuffix(strings: list[str], share: float = MIN_SUFFIX_DONOR_SHARE) -> str:
+    """The longest suffix shared by at least `share` of `strings` (ties between equally long suffixes: the one shared by
+    most, then the smallest); equal to _longestCommonSuffix when every string agrees and no longer suffix has the share."""
+    if not strings:
+        return ""
+    needed = math.ceil(len(strings) * share)
+    for length in range(max(map(len, strings)), 0, -1):
+        counts = Counter(string[-length:] for string in strings if len(string) >= length)
+        best = sorted(counts.items(), key=lambda item: (-item[1], item[0]))[0] if counts else None
+        if best is not None and best[1] >= needed:
+            return best[0]
+    return ""
+
+
+def robustSuffix(strings: list[str]) -> str:
+    """The suffix the ending tables cut off a field of a template's infinitives: the longest suffix all of them share
+    (so a template whose donors agree is unchanged) and, when a few outliers shorten it (dealer /dil9R/ among the -er verbs
+    collapses the phonology's to nothing; the units `e_r` of the same loanwords shorten the orthosyll's "er" to "r", which
+    loses the accent of every participle's "é"), the longer one `majoritySuffix` finds."""
+    common, majority = _longestCommonSuffix(strings), majoritySuffix(strings)
+    return majority if len(majority) > len(common) else common
+
+
 @dataclass(frozen=True)
 class ConjugationEndingTables:
     """
@@ -847,6 +937,9 @@ class ConjugationEndingTables:
       breakdowns get their boundaries from it (normalizeSplicedBreakdown).
     - midVowelByOrtho: the mid vowel a nucleus gets from its spelling, over the same
       Words (deriveMidVowelTable).
+    - jointEndingsByKey[(template, code, personNumber)]: the donors' (phonology, rawSyllCV, rawOrthosyllCV)
+      ending triples with their donor counts, most common first (ties by the triple): the competing
+      endings of a slot, for the reference-validated agreement bar (generateMissingConjugatedForm).
     """
     infinitiveSuffixByKey: dict[tuple[str, str], str]
     slotEndingByKey: dict[tuple[str, str, str, str], str]
@@ -854,6 +947,15 @@ class ConjugationEndingTables:
     slotDonorCountByKey: dict[tuple[str, str, str, str], int]
     syllableSplitByCluster: dict[ClusterKey, int | None]
     midVowelByOrtho: dict[MidVowelKey, str]
+    jointEndingsByKey: dict[tuple[str, str, str], tuple[tuple[tuple[str, str, str], int], ...]] = dataclassField(
+        default_factory=dict)
+    infinitiveOutliers: frozenset[Lemme] = frozenset()  # donor lemmas whose infinitive lacks the template's suffix (majoritySuffix)
+
+    def isInfinitiveOutlier(self, tableTemplate: str, infinitiveWord: Word) -> bool:
+        """Whether the infinitive does not end with the table template's infinitive suffix in some field."""
+        return any(
+            not getattr(infinitiveWord, field).endswith(self.infinitiveSuffixByKey.get((field, tableTemplate), ""))
+            for field in CONJUGATION_STRING_FIELDS)
 
 
 def endingTemplateKey(template: str, infinitiveWord: Word) -> str:
@@ -898,12 +1000,17 @@ def deriveConjugationEndingTables(
             infinitivesByTemplate[endingTemplateKey(template, donorInfinitive)].append(donorInfinitive)
 
     infinitiveSuffixByKey: dict[tuple[str, str], str] = {
-        (field, template): _longestCommonSuffix([getattr(w, field) for w in infinitiveWords])
+        (field, template): robustSuffix([getattr(w, field) for w in infinitiveWords])
         for template, infinitiveWords in infinitivesByTemplate.items()
         for field in CONJUGATION_STRING_FIELDS
     }
+    outliers = frozenset(
+        word.lemme for template, infinitiveWords in infinitivesByTemplate.items() for word in infinitiveWords
+        if any(not getattr(word, field).endswith(infinitiveSuffixByKey[(field, template)])
+               for field in CONJUGATION_STRING_FIELDS))
 
     candidatesByKey: dict[tuple[str, str, str, str], list[str]] = defaultdict(list)
+    jointCandidates: dict[tuple[str, str, str], Counter[tuple[str, str, str]]] = defaultdict(Counter)
     for words in theory.values():
         for word in words:
             if word.gramCat != GramCat.VER:
@@ -923,12 +1030,15 @@ def deriveConjugationEndingTables(
             infinitiveWord = infinitiveByLemme.get(word.lemme)
             if template is None or infinitiveWord is None:
                 continue
+            if word.lemme in outliers:
+                continue
             template = endingTemplateKey(template, infinitiveWord)
             for tag in _rawInfoVerbTags(word):
                 parts = tag.split(":")
                 if len(parts) != 3:
                     continue  # "inf" (1 part) and "par:pre"/"par:pas" (2 parts) aren't finite slots
                 code, personNumber = f"{parts[0]}:{parts[1]}", parts[2]
+                endings: list[str] = []
                 for field in CONJUGATION_STRING_FIELDS:
                     suffix = infinitiveSuffixByKey.get((field, template), "")
                     infinitiveValue = getattr(infinitiveWord, field)
@@ -937,6 +1047,9 @@ def deriveConjugationEndingTables(
                         continue
                     slotValue = getattr(word, field)
                     candidatesByKey[(field, template, code, personNumber)].append(slotValue[radicalLen:])
+                    endings.append(slotValue[radicalLen:])
+                if len(endings) == len(CONJUGATION_STRING_FIELDS):
+                    jointCandidates[(template, code, personNumber)][(endings[0], endings[1], endings[2])] += 1
 
     slotEndingByKey: dict[tuple[str, str, str, str], str] = {}
     slotMatchRateByKey: dict[tuple[str, str, str, str], float] = {}
@@ -956,6 +1069,11 @@ def deriveConjugationEndingTables(
     return ConjugationEndingTables(
         infinitiveSuffixByKey, slotEndingByKey, slotMatchRateByKey, slotDonorCountByKey,
         deriveSyllableSplitTable(corpusWords), deriveMidVowelTable(corpusWords),
+        {
+            key: tuple(sorted(counter.items(), key=lambda item: (-item[1], item[0])))
+            for key, counter in jointCandidates.items()
+        },
+        outliers,
     )
 
 
@@ -1056,6 +1174,67 @@ def rewriteSplicePhon(phonology: str, rawSyllCV: str) -> str | None:
     return joined
 
 
+# Competing endings tried by the reference-validated agreement bar after the majority one: at most this many,
+# each attested by at least this many donor lemmas.
+BAR_MAX_ALTERNATIVES = 4
+BAR_MIN_ALTERNATIVE_DONORS = 2
+
+# (word, table template key, rank of the ending tried (0 = the per-field majority, n = the n-th competing one), its donor rate) -> accepted
+FiniteValidator = Callable[[Word, str, int, float], bool]
+
+
+def _normalizedFields(
+        fieldValues: dict[str, str], endingTables: ConjugationEndingTables
+    ) -> tuple[str, str, str] | None:
+    """(phonology, syll_cv, orthosyll_cv) of the spliced `fieldValues` after normalizeSplicedBreakdown and
+    repairSpliceUnits, None when isWellFormedSplice refuses them."""
+    phonology, rawSyllCV, rawOrthosyllCV = normalizeSplicedBreakdown(
+        fieldValues["phonology"], fieldValues["rawSyllCV"], fieldValues["rawOrthosyllCV"],
+        endingTables.syllableSplitByCluster, endingTables.midVowelByOrtho,
+    )
+    rawSyllCV = repairSpliceUnits(rawSyllCV)
+    if not isWellFormedSplice(phonology, rawSyllCV):
+        return None
+    return phonology, rawSyllCV, rawOrthosyllCV
+
+
+def _spliceFiniteWord(
+        lemme: Lemme,
+        ortho: str,
+        code: str,
+        personNumber: str,
+        infinitiveWord: Word,
+        radicalLengths: dict[str, int],
+        endings: tuple[str, str, str],
+        endingTables: ConjugationEndingTables,
+        gender: str | None = None,
+        number: str | None = None,
+        infoVerb: str | None = None,
+        glideFutureStem: bool = False,
+    ) -> Word | None:
+    """The normalized, repaired and checked Word of a finite slot (None when isWellFormedSplice refuses it); a
+    participle slot passes its `infoVerb`, `gender` and `number`. `glideFutureStem` (rule `glide-future-stem`) vocalizes the
+    glide of the future and conditional of a -ier/-uer/-ouer verb (vocalizeGlideBeforeFutureR) before the normalization."""
+    spliced = {
+        field: getattr(infinitiveWord, field)[:radicalLengths[field]] + ending
+        for field, ending in zip(CONJUGATION_STRING_FIELDS, endings)
+    }
+    if glideFutureStem and hasGlideFutureStem(lemme, code):
+        spliced["phonology"], spliced["rawSyllCV"], spliced["rawOrthosyllCV"] = vocalizeGlideBeforeFutureR(
+            spliced["phonology"], spliced["rawSyllCV"], spliced["rawOrthosyllCV"])
+    fields = _normalizedFields(spliced, endingTables)
+    if fields is None:
+        return None
+    phonology, rawSyllCV, rawOrthosyllCV = fields
+    return Word(
+        ortho=ortho, phonology=phonology, lemme=lemme,
+        gramCat=GramCat.VER, orthoGramCat=[GramCat.VER],
+        gender=gender, number=number, infoVerb=infoVerb or f"{code}:{personNumber};",
+        rawSyllCV=rawSyllCV, rawOrthosyllCV=rawOrthosyllCV,
+        frequencyBook=0.0, frequencyFilm=0.0,
+    )
+
+
 def generateMissingConjugatedForm(
         lemme: Lemme,
         template: ConjugationTemplate,
@@ -1064,6 +1243,10 @@ def generateMissingConjugatedForm(
         personNumber: str,
         endingTables: ConjugationEndingTables,
         minMatchRate: float = 1.0,
+        barFloor: float | None = None,
+        validate: FiniteValidator | None = None,
+        onSkip: Callable[[str], None] | None = None,
+        glideFutureStem: bool = False,
     ) -> Word | None:
     """
     Generate a full candidate Word for a missing finite conjugation slot (mood:tense +
@@ -1072,41 +1255,94 @@ def generateMissingConjugatedForm(
     table entry exists for it (never attested for this template); or the entry's
     empirical match rate across donor lemmas is below `minMatchRate` -- callers should
     treat that as "not confident enough to synthesize", never silently accept it.
+
+    Reference-validated agreement bar (barFloor and validate both given, see src/synthrules.py): when a
+    field's rate is below `minMatchRate`, the slot is not abandoned; the candidate is built from the
+    per-field majority endings, provided every field's rate is at least `barFloor`, through the same
+    normalization and isWellFormedSplice, and kept only when `validate` accepts it (the callback checks
+    the phonology against the references). When it refuses, the competing joint endings of the slot are
+    tried in descending donor count (at most BAR_MAX_ALTERNATIVES, each with at least
+    BAR_MIN_ALTERNATIVE_DONORS donors, no rate floor: the references are the judge) and the first one
+    accepted wins. A slot whose every field reaches `minMatchRate` is generated as before, unvalidated.
+
+    `glideFutureStem` (rule `glide-future-stem`) vocalizes the glide before the future/conditional ending of a -ier/-uer/-ouer verb
+    (hasGlideFutureStem, vocalizeGlideBeforeFutureR); off, the candidates are as before.
+
+    `onSkip`, when given, is called with the reason of a None result (synthetic_skip_reasons.tsv): `no_template_ortho`,
+    `unattested_ending` (the template slot has no donor ending), `radical_too_short`, `below_bar` (no reference bar),
+    `no_majority_above_floor` (nor any competing ending), `splice_rejected` (every ending tried failed isWellFormedSplice)
+    or `validation_failed` (a well-formed candidate the validator refused; the caller tells reference_differs from
+    no_reference).
     """
+    def skip(reason: str) -> None:
+        if onSkip is not None:
+            onSkip(reason)
+
     radical = infinitiveRadical(lemme, template)
     ortho = generateOrthoForm(radical, template, code, personNumber=personNumber)
     if ortho is None:
+        skip("no_template_ortho")
         return None
 
-    fieldValues: dict[str, str] = {}
     tableTemplate = endingTemplateKey(template.name, infinitiveWord)
+    if endingTables.isInfinitiveOutlier(tableTemplate, infinitiveWord):
+        skip("infinitive_outlier")
+        return None
+    radicalLengths: dict[str, int] = {}
+    majority: list[str] = []
+    rates: list[float] = []
     for field in CONJUGATION_STRING_FIELDS:
         suffix = endingTables.infinitiveSuffixByKey.get((field, tableTemplate))
         endingKey = (field, tableTemplate, code, personNumber)
         ending = endingTables.slotEndingByKey.get(endingKey)
         matchRate = endingTables.slotMatchRateByKey.get(endingKey, 0.0)
-        if suffix is None or ending is None or matchRate < minMatchRate:
+        if suffix is None or ending is None:
+            skip("unattested_ending")
             return None
-        infinitiveValue = getattr(infinitiveWord, field)
-        radicalLen = len(infinitiveValue) - len(suffix)
+        radicalLen = len(getattr(infinitiveWord, field)) - len(suffix)
         if radicalLen < 0:
+            skip("radical_too_short")
             return None
-        fieldValues[field] = infinitiveValue[:radicalLen] + ending
+        radicalLengths[field] = radicalLen
+        majority.append(ending)
+        rates.append(matchRate)
+    majorityEndings = (majority[0], majority[1], majority[2])
 
-    phonology, rawSyllCV, rawOrthosyllCV = normalizeSplicedBreakdown(
-        fieldValues["phonology"], fieldValues["rawSyllCV"], fieldValues["rawOrthosyllCV"],
-        endingTables.syllableSplitByCluster, endingTables.midVowelByOrtho,
-    )
-    rawSyllCV = repairSpliceUnits(rawSyllCV)
-    if not isWellFormedSplice(phonology, rawSyllCV):
+    if min(rates) >= minMatchRate:
+        return _spliceFiniteWord(
+            lemme, ortho, code, personNumber, infinitiveWord, radicalLengths, majorityEndings, endingTables,
+            glideFutureStem=glideFutureStem)
+    if barFloor is None or validate is None:
+        skip("below_bar")
         return None
-    return Word(
-        ortho=ortho, phonology=phonology, lemme=lemme,
-        gramCat=GramCat.VER, orthoGramCat=[GramCat.VER],
-        gender=None, number=None, infoVerb=f"{code}:{personNumber};",
-        rawSyllCV=rawSyllCV, rawOrthosyllCV=rawOrthosyllCV,
-        frequencyBook=0.0, frequencyFilm=0.0,
-    )
+
+    tried: list[tuple[int, tuple[str, str, str], float]] = []
+    if min(rates) >= barFloor:
+        tried.append((0, majorityEndings, min(rates)))
+    joint = endingTables.jointEndingsByKey.get((tableTemplate, code, personNumber), ())
+    total = sum(count for _endings, count in joint)
+    alternatives = 0
+    for endings, count in joint:
+        if endings == majorityEndings or count < BAR_MIN_ALTERNATIVE_DONORS:
+            continue
+        if alternatives == BAR_MAX_ALTERNATIVES:
+            break
+        alternatives += 1
+        tried.append((alternatives, endings, count / total))
+    if not tried:
+        skip("no_majority_above_floor")
+        return None
+    wellFormed = False
+    for rank, endings, rate in tried:
+        word = _spliceFiniteWord(
+            lemme, ortho, code, personNumber, infinitiveWord, radicalLengths, endings, endingTables,
+            glideFutureStem=glideFutureStem)
+        if word is not None:
+            wellFormed = True
+            if validate(word, tableTemplate, rank, rate):
+                return word
+    skip("validation_failed" if wellFormed else "splice_rejected")
+    return None
 
 
 def crossLemmaFeatureSetCollisions(
@@ -1240,3 +1476,420 @@ def detectUndersampledLemmas(
                 )
 
     return undersampled
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Participles from the infinitive (rule `participle-from-infinitive`, src/synthrules.py)
+# ---------------------------------------------------------------------------------------------------------------------
+
+# A participle ending the donors agree on is "plain" (a candidate with no reference may then be accepted by the
+# `unvalidated` mode) when every donor agrees and at least this many lemmas attest it.
+MIN_PLAIN_PARTICIPLE_DONORS = 3
+
+
+@dataclass(frozen=True)
+class ParticipleEndingTables:
+    """
+    The (phonology, syll_cv, orthosyll_cv) ending triple of a past-participle slot, relative to the infinitive's radical
+    as in ConjugationEndingTables: endingByKey[(table template, gender, number)] is the most common triple over the donor
+    lemmas (those with an attested infinitive and an attested participle of the slot), rateByKey the share of donors that
+    agree with it, donorsByKey their count.
+    """
+    endingByKey: dict[tuple[str, str, str], tuple[str, str, str]]
+    rateByKey: dict[tuple[str, str, str], float]
+    donorsByKey: dict[tuple[str, str, str], int]
+
+
+def _deriveEndingTables(
+        theory: dict[Strokes, list[Word]],
+        verbisteTemplates: dict[Lemme, str],
+        exceptions: dict[Lemme, VerbModelException],
+        endingTables: ConjugationEndingTables,
+        tag: str,
+        slotOf: Callable[[Word], tuple[str, str] | None],
+    ) -> ParticipleEndingTables:
+    """The ParticipleEndingTables of the rows tagged `tag` (par:pas, par:pre), keyed by (table template, *slotOf(row));
+    a row whose `slotOf` is None is left out."""
+    infinitiveByLemme = attestedInfinitiveWordByLemme(theory)
+    candidates: dict[tuple[str, str, str], Counter[tuple[str, str, str]]] = defaultdict(Counter)
+    for words in theory.values():
+        for word in words:
+            if word.gramCat != GramCat.VER:
+                continue
+            slot = slotOf(word)
+            tags = _rawInfoVerbTags(word)
+            if slot is None or tag not in tags or "inf" in tags:
+                continue
+            template = getTrustedTemplate(word.lemme, verbisteTemplates, exceptions)
+            infinitiveWord = infinitiveByLemme.get(word.lemme)
+            if template is None or infinitiveWord is None:
+                continue
+            tableTemplate = endingTemplateKey(template, infinitiveWord)
+            if word.lemme in endingTables.infinitiveOutliers:
+                continue
+            endings: list[str] = []
+            for field in CONJUGATION_STRING_FIELDS:
+                suffix = endingTables.infinitiveSuffixByKey.get((field, tableTemplate), "")
+                radicalLen = len(getattr(infinitiveWord, field)) - len(suffix)
+                if radicalLen < 0:
+                    break
+                endings.append(getattr(word, field)[radicalLen:])
+            if len(endings) == len(CONJUGATION_STRING_FIELDS):
+                candidates[(tableTemplate, *slot)][(endings[0], endings[1], endings[2])] += 1
+    endingByKey: dict[tuple[str, str, str], tuple[str, str, str]] = {}
+    rateByKey: dict[tuple[str, str, str], float] = {}
+    donorsByKey: dict[tuple[str, str, str], int] = {}
+    for key, counter in candidates.items():
+        mode, modeCount = sorted(counter.items(), key=lambda item: (-item[1], item[0]))[0]
+        endingByKey[key] = mode
+        rateByKey[key] = modeCount / counter.total()
+        donorsByKey[key] = counter.total()
+    return ParticipleEndingTables(endingByKey, rateByKey, donorsByKey)
+
+
+def deriveParticipleEndingTables(
+        theory: dict[Strokes, list[Word]],
+        verbisteTemplates: dict[Lemme, str],
+        exceptions: dict[Lemme, VerbModelException],
+        endingTables: ConjugationEndingTables,
+    ) -> ParticipleEndingTables:
+    """The ParticipleEndingTables over `theory`, with the infinitive suffixes of `endingTables` (same radical lengths)."""
+    return _deriveEndingTables(
+        theory, verbisteTemplates, exceptions, endingTables, "par:pas",
+        lambda word: (word.gender, word.number) if word.gender is not None and word.number is not None else None)
+
+
+# The slot key of the present participle in a ParticipleEndingTables (invariable: no gender, no number).
+PRESENT_PARTICIPLE_SLOT = ("", "")
+
+
+def deriveParticiplePresentTables(
+        theory: dict[Strokes, list[Word]],
+        verbisteTemplates: dict[Lemme, str],
+        exceptions: dict[Lemme, VerbModelException],
+        endingTables: ConjugationEndingTables,
+    ) -> ParticipleEndingTables:
+    """The ending triple of the present participle (`par:pre`) per table template, learned from the donor rows the same way
+    the past participle's are (key (table template, "", ""))."""
+    return _deriveEndingTables(theory, verbisteTemplates, exceptions, endingTables, "par:pre", lambda word: PRESENT_PARTICIPLE_SLOT)
+
+
+@dataclass(frozen=True)
+class ParticipleBuild:
+    """A masculine-singular participle built from the infinitive: the Word, the donors' agreement on its ending, their
+    count, and whether the ending is plain (every donor agrees, at least MIN_PLAIN_PARTICIPLE_DONORS of them, and the
+    orthographic breakdown ends with the template's own ending)."""
+    word: Word
+    rate: float
+    donors: int
+    plain: bool
+
+
+def generateParticipleFromInfinitive(
+        lemme: Lemme,
+        template: ConjugationTemplate,
+        infinitiveWord: Word,
+        participleTables: ParticipleEndingTables,
+        endingTables: ConjugationEndingTables,
+        onSkip: Callable[[str], None] | None = None,
+    ) -> ParticipleBuild | None:
+    """
+    The masculine-singular past participle of a lemma that has no attested one, spliced from its infinitive's breakdowns
+    and the donors' participle ending of its template (deriveParticipleEndingTables), normalized as a finite splice is
+    and padded with the silent units of the participle rows. The other three forms follow from it through
+    generateMissingParticiple. None (with the `onSkip` reason `unattested_ending`, `radical_too_short` or
+    `splice_rejected`) when the template has no donor ending, the radical is shorter than the donors', the splice is not
+    well formed or does not spell the template's orthography.
+    """
+    def skip(reason: str) -> None:
+        if onSkip is not None:
+            onSkip(reason)
+
+    ortho = generateOrthoForm(infinitiveRadical(lemme, template), template, "par:pas", gender="m", number="s")
+    tableTemplate = endingTemplateKey(template.name, infinitiveWord)
+    key = (tableTemplate, "m", "s")
+    if endingTables.isInfinitiveOutlier(tableTemplate, infinitiveWord):
+        skip("infinitive_outlier")
+        return None
+    endings = participleTables.endingByKey.get(key)
+    if ortho is None or endings is None:
+        skip("unattested_ending")
+        return None
+    radicalLengths: dict[str, int] = {}
+    for field in CONJUGATION_STRING_FIELDS:
+        suffix = endingTables.infinitiveSuffixByKey.get((field, tableTemplate))
+        radicalLength = len(getattr(infinitiveWord, field)) - len(suffix) if suffix is not None else -1
+        if radicalLength < 0:
+            skip("radical_too_short")
+            return None
+        radicalLengths[field] = radicalLength
+    word = _spliceFiniteWord(
+        lemme, ortho, "par:pas", "", infinitiveWord, radicalLengths, endings, endingTables,
+        gender="m", number="s", infoVerb="par:pas;")
+    if word is None or spellingOf(word.rawOrthosyllCV) != ortho:
+        skip("splice_rejected")
+        return None
+    rawSyllCV = word.rawSyllCV
+    while rawSyllCV.endswith("_#"):
+        rawSyllCV = rawSyllCV[:-2]
+    try:
+        rawSyllCV = _padSilentUnits(rawSyllCV, word.rawOrthosyllCV)
+    except ValueError:
+        skip("splice_rejected")
+        return None
+    word = replace(word, rawSyllCV=rawSyllCV)
+    rate, donors = participleTables.rateByKey[key], participleTables.donorsByKey[key]
+    templateEnding = template.forms["par:pas"][PARTICIPE_PASSE_INDEX[("m", "s")]] or ""
+    plain = (rate == 1.0 and donors >= MIN_PLAIN_PARTICIPLE_DONORS
+             and spellingOf(word.rawOrthosyllCV).endswith(templateEnding))
+    return ParticipleBuild(word, rate, donors, plain)
+
+
+def generateParticiplePresent(
+        lemme: Lemme,
+        template: ConjugationTemplate,
+        infinitiveWord: Word,
+        presentTables: ParticipleEndingTables,
+        endingTables: ConjugationEndingTables,
+        onSkip: Callable[[str], None] | None = None,
+    ) -> ParticipleBuild | None:
+    """
+    The present participle (`par:pre`, aimant /Em@/) of a lemma that has none, spliced from its infinitive's breakdowns and
+    the donors' `par:pre` ending of its template (deriveParticiplePresentTables), normalized as a finite splice is. The
+    skip reasons are those of generateParticipleFromInfinitive; the build's `plain` flag is its rule: every donor agrees
+    (at least MIN_PLAIN_PARTICIPLE_DONORS of them) and the orthography ends with the template's ending.
+    """
+    def skip(reason: str) -> None:
+        if onSkip is not None:
+            onSkip(reason)
+
+    ortho = generateOrthoForm(infinitiveRadical(lemme, template), template, "par:pre")
+    tableTemplate = endingTemplateKey(template.name, infinitiveWord)
+    key = (tableTemplate, *PRESENT_PARTICIPLE_SLOT)
+    if endingTables.isInfinitiveOutlier(tableTemplate, infinitiveWord):
+        skip("infinitive_outlier")
+        return None
+    endings = presentTables.endingByKey.get(key)
+    if ortho is None or endings is None:
+        skip("unattested_ending")
+        return None
+    radicalLengths: dict[str, int] = {}
+    for field in CONJUGATION_STRING_FIELDS:
+        suffix = endingTables.infinitiveSuffixByKey.get((field, tableTemplate))
+        radicalLength = len(getattr(infinitiveWord, field)) - len(suffix) if suffix is not None else -1
+        if radicalLength < 0:
+            skip("radical_too_short")
+            return None
+        radicalLengths[field] = radicalLength
+    word = _spliceFiniteWord(
+        lemme, ortho, "par:pre", "", infinitiveWord, radicalLengths, endings, endingTables, infoVerb="par:pre;")
+    if word is None or spellingOf(word.rawOrthosyllCV) != ortho:
+        skip("splice_rejected")
+        return None
+    rate, donors = presentTables.rateByKey[key], presentTables.donorsByKey[key]
+    templateEnding = template.forms["par:pre"][0] or ""
+    plain = rate == 1.0 and donors >= MIN_PLAIN_PARTICIPLE_DONORS and ortho.endswith(templateEnding)
+    return ParticipleBuild(word, rate, donors, plain)
+
+
+def repairLostNasalInfinitive(infinitiveWord: Word) -> Word | None:
+    """
+    The infinitive Word of an en-/em- + vowel verb with the n/m unit its syll_cv lost put back (enivrer, enorgueillir:
+    reinsertLostNasalUnit), usable as the donor of a splice; None when the infinitive lost nothing (or the repair is
+    ambiguous).
+    """
+    repaired = reinsertLostNasalUnit(infinitiveWord.phonology, infinitiveWord.rawSyllCV, infinitiveWord.rawOrthosyllCV)
+    if repaired is None:
+        return None
+    # A copy with the two raw fields assigned: building a new Word would run fix_e_n_en and take the unit out again
+    # (the finished Word of a spliced form is normalized that way, like the attested ones).
+    fixed = copy.copy(infinitiveWord)
+    fixed.rawSyllCV, fixed.rawOrthosyllCV = repaired
+    return fixed
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Slot-to-slot derivation (rule `slot-map`, src/synthrules.py)
+# ---------------------------------------------------------------------------------------------------------------------
+
+JointEnding = tuple[str, str, str]
+
+
+# The lowest agreement of the donors on a slot's ending for the slot to serve as the source of a pseudo-infinitive: the
+# references judge every form built from it.
+MIN_PSEUDO_SOURCE_RATE = 0.9
+
+
+def pseudoInfinitive(
+        lemme: Lemme,
+        template: ConjugationTemplate,
+        forms: dict[tuple[str, str], Word],
+        endingTables: ConjugationEndingTables,
+        participles: dict[tuple[str, str], Word] | None = None,
+        participleTables: ParticipleEndingTables | None = None,
+        presentParticiple: Word | None = None,
+        presentTables: ParticipleEndingTables | None = None,
+    ) -> Iterator[tuple[Word, Word]]:
+    """
+    The infinitive Words (pseudo-infinitive, donor form) of a lemma with no attested infinitive, derived from its other
+    forms through the ending tables run backwards: the attested form's radical is its value minus the template's ending
+    for the slot (the donors must agree on all three fields at MIN_PSEUDO_SOURCE_RATE, and the form must end with the
+    ending), and the infinitive is that radical plus the template's common infinitive suffix. The sources are the finite
+    `forms` (the slots with the most donors first), then the `participles` (when `participleTables` is given), then the
+    `presentParticiple` (when `presentTables` is given: rule `infinitive-participle-present`). Each
+    result is normalized and checked like a spliced finite form and must spell the lemma; they are yielded in that fixed
+    order and the caller keeps the first the references accept.
+    """
+    sources: list[tuple[Word, Callable[[str, str], tuple[str | None, float]]]] = []
+
+    def finiteEnding(slot: tuple[str, str]) -> Callable[[str, str], tuple[str | None, float]]:
+        def lookup(field: str, tableTemplate: str) -> tuple[str | None, float]:
+            key = (field, tableTemplate, *slot)
+            return endingTables.slotEndingByKey.get(key), endingTables.slotMatchRateByKey.get(key, 0.0)
+        return lookup
+
+    def participleEnding(slot: tuple[str, str]) -> Callable[[str, str], tuple[str | None, float]]:
+        def lookup(field: str, tableTemplate: str) -> tuple[str | None, float]:
+            assert participleTables is not None
+            key = (tableTemplate, *slot)
+            endings = participleTables.endingByKey.get(key)
+            if endings is None:
+                return None, 0.0
+            return endings[CONJUGATION_STRING_FIELDS.index(field)], participleTables.rateByKey[key]
+        return lookup
+
+    for slot in sorted(forms, key=lambda slot: (
+            -endingTables.slotDonorCountByKey.get(("phonology", template.name, *slot), 0), slot)):
+        sources.append((forms[slot], finiteEnding(slot)))
+    if participleTables is not None:
+        for slot in sorted(participles or {}, key=lambda slot: ("ms mp fs fp".split().index(slot[0] + slot[1]), slot)):
+            sources.append(((participles or {})[slot], participleEnding(slot)))
+    if presentParticiple is not None and presentTables is not None:
+        def presentEnding(field: str, tableTemplate: str) -> tuple[str | None, float]:
+            assert presentTables is not None
+            key = (tableTemplate, *PRESENT_PARTICIPLE_SLOT)
+            endings = presentTables.endingByKey.get(key)
+            if endings is None:
+                return None, 0.0
+            return endings[CONJUGATION_STRING_FIELDS.index(field)], presentTables.rateByKey[key]
+        sources.append((presentParticiple, presentEnding))
+    for tableTemplate in (template.name, template.name + "#ij"):
+        for word, lookup in sources:
+            fieldValues: dict[str, str] = {}
+            for field in CONJUGATION_STRING_FIELDS:
+                ending, rate = lookup(field, tableTemplate)
+                suffix = endingTables.infinitiveSuffixByKey.get((field, tableTemplate))
+                value = getattr(word, field)
+                if ending is None or suffix is None or rate < MIN_PSEUDO_SOURCE_RATE or not value.endswith(ending):
+                    break
+                fieldValues[field] = value[:len(value) - len(ending)] + suffix
+            else:
+                fields = _normalizedFields(fieldValues, endingTables)
+                if fields is None or spellingOf(fields[2]) != lemme:
+                    continue
+                yield Word(
+                    ortho=lemme, phonology=fields[0], lemme=lemme, gramCat=GramCat.VER, orthoGramCat=[GramCat.VER],
+                    gender=None, number=None, infoVerb="inf;", rawSyllCV=fields[1], rawOrthosyllCV=fields[2],
+                    frequencyBook=0.0, frequencyFilm=0.0,
+                ), word
+
+
+# The competing endings a borrowed slot tries at most, as the reference-validated bar does.
+BORROW_MAX_ALTERNATIVES = 4
+# Slots of the lemma's own template whose ending is read to find the siblings, at most.
+BORROW_MAX_SOURCES = 6
+
+
+@dataclass(frozen=True)
+class SlotBorrowIndex:
+    """
+    The slot-to-slot map learned across templates: byEnding[(code, personNumber, joint ending)] lists the table templates
+    whose most common ending for that slot is that joint (phonology, syll_cv, orthosyll_cv) ending. Two templates that
+    inflect the source slot alike are taken to inflect a target slot alike: the template that lacks the target slot's
+    ending (créer's cnd:pre:1p, no donor attests it) borrows it from the templates that share its source endings.
+    """
+    byEnding: dict[tuple[str, str, JointEnding], tuple[str, ...]]
+    mostCommon: dict[tuple[str, str, str], tuple[JointEnding, int]]  # (table template, code, personNumber) -> ending, donors
+    sourcesByTemplate: dict[str, tuple[tuple[str, str], ...]]  # a template's slots, most donors first (ties by name)
+    cache: dict[tuple[str, str, str], list[tuple[JointEnding, float]]] = dataclassField(default_factory=dict)
+
+
+def deriveSlotBorrowIndex(endingTables: ConjugationEndingTables) -> SlotBorrowIndex:
+    byEnding: dict[tuple[str, str, JointEnding], list[str]] = defaultdict(list)
+    mostCommon: dict[tuple[str, str, str], tuple[JointEnding, int]] = {}
+    for (tableTemplate, code, personNumber), joint in sorted(endingTables.jointEndingsByKey.items()):
+        if not joint:
+            continue
+        ending, donors = joint[0]
+        mostCommon[(tableTemplate, code, personNumber)] = (ending, donors)
+        byEnding[(code, personNumber, ending)].append(tableTemplate)
+    slotsByTemplate: dict[str, list[tuple[int, tuple[str, str]]]] = defaultdict(list)
+    for (tableTemplate, code, personNumber), (_ending, donors) in mostCommon.items():
+        slotsByTemplate[tableTemplate].append((donors, (code, personNumber)))
+    sourcesByTemplate = {
+        template: tuple(slot for _donors, slot in sorted(slots, key=lambda item: (-item[0], item[1])))
+        for template, slots in slotsByTemplate.items()
+    }
+    return SlotBorrowIndex({key: tuple(value) for key, value in byEnding.items()}, mostCommon, sourcesByTemplate)
+
+
+def borrowedEndings(
+        index: SlotBorrowIndex, tableTemplate: str, code: str, personNumber: str,
+    ) -> list[tuple[JointEnding, float]]:
+    """
+    The joint endings the slot (code, personNumber) of `tableTemplate` may take, most likely first (at most
+    BORROW_MAX_ALTERNATIVES, with their share of the evidence): for the template's best-attested source slots, the target
+    endings of the other templates that share the source ending, weighted by the donors of the target.
+    """
+    cached = index.cache.get((tableTemplate, code, personNumber))
+    if cached is not None:
+        return cached
+    sources = [slot for slot in index.sourcesByTemplate.get(tableTemplate, ()) if slot != (code, personNumber)]
+    votes: Counter[JointEnding] = Counter()
+    for sourceCode, sourcePerson in sources[:BORROW_MAX_SOURCES]:
+        sourceEnding = index.mostCommon[(tableTemplate, sourceCode, sourcePerson)][0]
+        for sibling in index.byEnding.get((sourceCode, sourcePerson, sourceEnding), ()):
+            if sibling == tableTemplate:
+                continue
+            target = index.mostCommon.get((sibling, code, personNumber))
+            if target is not None:
+                votes[target[0]] += target[1]
+    total = votes.total()
+    ranked = sorted(votes.items(), key=lambda item: (-item[1], item[0]))[:BORROW_MAX_ALTERNATIVES]
+    result = [(ending, count / total) for ending, count in ranked]
+    index.cache[(tableTemplate, code, personNumber)] = result
+    return result
+
+
+def generateBorrowedForm(
+        lemme: Lemme,
+        template: ConjugationTemplate,
+        infinitiveWord: Word,
+        code: str,
+        personNumber: str,
+        endingTables: ConjugationEndingTables,
+        index: SlotBorrowIndex,
+        validate: FiniteValidator,
+    ) -> Word | None:
+    """
+    A finite slot built from an ending borrowed from the sibling templates (borrowedEndings), the first one `validate`
+    accepts (its rank and share are passed along, as the reference-validated bar does). None when the template gives no
+    orthographic form for the slot, the radical is too short, or no borrowed ending is well formed and accepted.
+    """
+    ortho = generateOrthoForm(infinitiveRadical(lemme, template), template, code, personNumber=personNumber)
+    if ortho is None:
+        return None
+    tableTemplate = endingTemplateKey(template.name, infinitiveWord)
+    if endingTables.isInfinitiveOutlier(tableTemplate, infinitiveWord):
+        return None
+    radicalLengths: dict[str, int] = {}
+    for field in CONJUGATION_STRING_FIELDS:
+        suffix = endingTables.infinitiveSuffixByKey.get((field, tableTemplate))
+        if suffix is None or len(getattr(infinitiveWord, field)) < len(suffix):
+            return None
+        radicalLengths[field] = len(getattr(infinitiveWord, field)) - len(suffix)
+    for rank, (endings, share) in enumerate(borrowedEndings(index, tableTemplate, code, personNumber)):
+        word = _spliceFiniteWord(lemme, ortho, code, personNumber, infinitiveWord, radicalLengths, endings, endingTables)
+        if word is not None and validate(word, tableTemplate, rank, share):
+            return word
+    return None

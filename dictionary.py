@@ -556,10 +556,11 @@ def _runSteps(module: "Callable[[str, str], None]") -> None:
     # trusted (manual-rm policy); this step writes the phonetic theory only.
     module("Dictionary loading + phonetic theory (S3-S5), pass 1", "util.build_phonetic_theory")
 
-    # Synthetic Lexicon Building (S2), converged: the wrapper reruns the four
-    # steady-state appenders (--apply) until a full round appends nothing, and after
-    # any round that appended rows it deletes the pickles and reruns the build above
-    # itself. Hand-made lexicon or layout edits outside this run remain the caller's
+    # Synthetic Lexicon Building (S2), converged: the wrapper first empties
+    # resources/LexiqueSynthetic.tsv to its header (it is rebuilt from scratch on every run, a pure
+    # function of its committed inputs; about 2 minutes), then reruns the steady-state appenders
+    # (--apply) until a full round appends nothing, and after any round that appended rows it
+    # deletes the pickles and reruns the build above itself. Hand-made lexicon or layout edits outside this run remain the caller's
     # responsibility: rm -f the pickles first (the cache is never checked for
     # staleness).
     module("Synthetic Lexicon Building (S2), converged", "util.build_synthetic_lexicon")

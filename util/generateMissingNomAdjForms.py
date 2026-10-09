@@ -37,10 +37,13 @@ from src.nomAdjParadigm import (
     Slot,
     attestedSlots,
     chooseSourceSlot,
+    NomAdjEndingTables,
+    MorphalouIndex,
     deriveNomAdjEndingTables,
     generateAuthoritativeForm,
     isSuspectedInvariableForm,
     loadAllOrthosByLemme,
+    loadMorphalouForms,
     loadMorphalouIndex,
     loadNomAdjModelExceptions,
     loadWords,
@@ -53,6 +56,7 @@ LEXIQUE_MIXTE_PATH = "resources/LexiqueMixte.tsv"
 LEXIQUE_SYNTHETIC_PATH = "resources/LexiqueSynthetic.tsv"
 EXCEPTIONS_PATH = "resources/nomAdjModelExceptions.tsv"
 MORPHALOU_PATH_DEFAULT = "morphalou/Morphalou3.1_CSV.csv"
+MORPHALOU_FORMS_PATH = "resources/morphalouNomAdjForms.tsv"  # committed distillate, see util/build_morphalou_forms.py
 
 SYNTHETIC_HEADER = (
     "ortho\tphon\tlemme\tcgram\tcgramortho\tgenre\tnombre\tinfover\t"
@@ -97,43 +101,17 @@ def overrideCandidate(sourceWord: Word, slot: Slot, gramCat: GramCat, overrideOr
     )
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--apply", action="store_true",
-                         help="Append generated rows to resources/LexiqueSynthetic.tsv (default: dry-run report only).")
-    parser.add_argument("--morphalou", default=MORPHALOU_PATH_DEFAULT,
-                         help="Path to Morphalou3.1_CSV.csv (authoritative ortho source). "
-                              "If missing, falls back to the donor table alone with a loud warning.")
-    parser.add_argument("--no-morphalou", action="store_true",
-                         help="Skip Morphalou entirely and trust the donor table alone (not recommended).")
-    args = parser.parse_args()
-
-    morphalou = None
-    if args.no_morphalou:
-        print("--no-morphalou: generating from the donor table alone, unverified against an external source.")
-    elif os.path.exists(args.morphalou):
-        print(f"Loading Morphalou from {args.morphalou} ...")
-        morphalou = loadMorphalouIndex(args.morphalou)
-        print(f"Indexed {len(morphalou)} NOM/ADJ lemma groups from Morphalou.")
-    else:
-        print(f"WARNING: Morphalou not found at {args.morphalou!r} -- generating from the donor table alone, "
-              f"unverified against an external source. Pass --morphalou PATH or --no-morphalou to silence this.")
-
-    words = loadWords([LEXIQUE_MIXTE_PATH, LEXIQUE_SYNTHETIC_PATH])
-    exceptions = loadNomAdjModelExceptions(EXCEPTIONS_PATH)
-    tables = deriveNomAdjEndingTables(words)
+def generateRows(
+    words: list[Word],
+    morphalou: MorphalouIndex | None,
+    exceptions: dict[tuple[str, str], Any],
+    tables: NomAdjEndingTables,
+    existingOrthoByLemme: dict[str, set[str]],
+) -> tuple[list[Word], Counter[str], Counter[str]]:
+    """The generation loop of main(), callable on its own: (generated rows, count by source, skip reasons).
+    `tables` is passed in so a caller can learn them from other rows than `words` (see the TODO on the
+    NOM/ADJ cascade); main() derives them from `words`."""
     slotsByLemme = attestedSlots(words)
-    # Deliberately built from the UNFILTERED files (excluded rows included --
-    # see loadAllOrthosByLemme) rather than from `words`: a slot whose only
-    # attested spelling is itself excluded (e.g. "laponne", a deprecated
-    # alternate of "lapone") still looks genuinely missing to attestedSlots,
-    # and without this the generator would re-derive and re-append that same
-    # excluded ortho every run, never recognizing its own prior output as
-    # already covering it (found via the conversation).
-    existingOrthoByLemme: dict[str, set[str]] = defaultdict(
-        set, loadAllOrthosByLemme([LEXIQUE_MIXTE_PATH, LEXIQUE_SYNTHETIC_PATH])
-    )
-
     generated: list[Word] = []
     sourceCounts: Counter[str] = Counter()
     skippedReasons: Counter[str] = Counter()
@@ -179,7 +157,68 @@ def main() -> None:
 
             generated.append(candidate)
             sourceCounts[source] += 1
-            existingOrthoByLemme[lemme].add(candidate.ortho)
+            # No memory of the spelling just generated: the same spelling is a legitimate row for another
+            # slot (allèles m.p. and f.p.) or the other category (audiovisuels NOM and ADJ). The slot itself
+            # is attested in the next iteration; excluded spellings are caught by the file-based set above.
+
+    return generated, sourceCounts, skippedReasons
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--apply", action="store_true",
+                         help="Append generated rows to resources/LexiqueSynthetic.tsv (default: dry-run report only).")
+    parser.add_argument("--morphalou", default=MORPHALOU_PATH_DEFAULT,
+                         help="Path to Morphalou3.1_CSV.csv (authoritative ortho source). "
+                              "If missing, falls back to the donor table alone with a loud warning.")
+    parser.add_argument("--no-morphalou", action="store_true",
+                         help="Skip Morphalou entirely and trust the donor table alone (not recommended).")
+    args = parser.parse_args()
+
+    morphalou = None
+    if args.no_morphalou:
+        print("--no-morphalou: generating from the donor table alone, unverified against an external source.")
+    elif os.path.exists(args.morphalou):
+        print(f"Loading Morphalou from {args.morphalou} ...")
+        morphalou = loadMorphalouIndex(args.morphalou)
+        print(f"Indexed {len(morphalou)} NOM/ADJ lemma groups from Morphalou.")
+    elif os.path.exists(MORPHALOU_FORMS_PATH):
+        print(f"Morphalou CSV not found; loading the committed distillate {MORPHALOU_FORMS_PATH} ...")
+        morphalou = loadMorphalouForms(MORPHALOU_FORMS_PATH)
+        print(f"Loaded {len(morphalou)} NOM/ADJ lemma groups.")
+    else:
+        print(f"WARNING: Morphalou not found at {args.morphalou!r} -- generating from the donor table alone, "
+              f"unverified against an external source. Pass --morphalou PATH or --no-morphalou to silence this.")
+
+    words = loadWords([LEXIQUE_MIXTE_PATH, LEXIQUE_SYNTHETIC_PATH])
+    exceptions = loadNomAdjModelExceptions(EXCEPTIONS_PATH)
+    # The donor tables are learned from the mixed lexicon alone: learning them from this appender's
+    # own earlier rows let generated rows promote rare ending classes (the cross-round cascade).
+    tables = deriveNomAdjEndingTables(loadWords([LEXIQUE_MIXTE_PATH]))
+    # Deliberately built from the UNFILTERED files (excluded rows included --
+    # see loadAllOrthosByLemme) rather than from `words`: a slot whose only
+    # attested spelling is itself excluded (e.g. "laponne", a deprecated
+    # alternate of "lapone") still looks genuinely missing to attestedSlots,
+    # and without this the generator would re-derive and re-append that same
+    # excluded ortho every run, never recognizing its own prior output as
+    # already covering it (found via the conversation).
+    existingOrthoByLemme: dict[str, set[str]] = defaultdict(
+        set, loadAllOrthosByLemme([LEXIQUE_MIXTE_PATH, LEXIQUE_SYNTHETIC_PATH])
+    )
+
+    # A generated row can be the source slot of another missing slot of its lemma: iterate to the
+    # fixed point here, not in the caller's rounds.
+    generated: list[Word] = []
+    sourceCounts: Counter[str] = Counter()
+    roundWords = words
+    while True:
+        newRows, roundSourceCounts, skippedReasons = generateRows(
+            roundWords, morphalou, exceptions, tables, existingOrthoByLemme)
+        if not newRows:
+            break
+        generated += newRows
+        sourceCounts += roundSourceCounts
+        roundWords = roundWords + newRows
 
     print(f"\nGenerated: {len(generated)}")
     for source, count in sourceCounts.most_common():

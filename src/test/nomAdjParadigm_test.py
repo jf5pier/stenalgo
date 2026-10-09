@@ -13,9 +13,11 @@ from src.nomAdjParadigm import (
     generateAuthoritativeForm,
     generateMissingForm,
     isSuspectedInvariableForm,
+    loadMorphalouForms,
     loadNomAdjModelExceptions,
     missingSlots,
     orthoClassKeys,
+    writeMorphalouForms,
 )
 from src.word import GramCat, Word
 
@@ -282,3 +284,83 @@ class TestLoadNomAdjModelExceptions:
         assert exceptions[("cheval", "NOM")].overrideOrtho == "cheval;chevaux"
         assert exceptions[("bras", "NOM")].status == "invariable"
         assert exceptions[("beau", "ADJ")].overrideOrtho == "beau;beaux;belle;belles"
+
+
+class TestMorphalouRelaxedDonorAgreement:
+    """Nine donors write the plural -ats and one -ax: the ending class is 90% unanimous, so the strict
+    donor table refuses; a Morphalou-confirmed spelling lets the majority ending through."""
+
+    @staticmethod
+    def _tables():
+        donors = []
+        for i, stem in enumerate(["ch", "pl", "br", "gr", "tr", "cr", "fl", "dr", "pr"]):
+            donors += [_nom(stem + "at", stem + "a", f"lemme{i}", "m", "s"), _nom(stem + "ats", stem + "a", f"lemme{i}", "m", "p")]
+        donors += [_nom("zat", "za", "zat", "m", "s"), _nom("zax", "za", "zat", "m", "p")]
+        target = _nom("format", "fORma", "format", "m", "s")
+        return target, deriveNomAdjEndingTables(donors + [target])
+
+    def test_strict_table_refuses_a_90_percent_ending(self):
+        target, tables = self._tables()
+        assert generateMissingForm(target, ("m", "p"), tables) is None
+        assert generateAuthoritativeForm(target, ("m", "p"), tables, None) == (None, "none")
+
+    def test_morphalou_confirmed_spelling_is_accepted_at_the_relaxed_rate(self):
+        target, tables = self._tables()
+        morphalou = {("format", "NOM"): {("m", "p"): {"formats"}}}
+        candidate, source = generateAuthoritativeForm(target, ("m", "p"), tables, morphalou)
+        assert source == "morphalou_relaxed"
+        assert candidate is not None and candidate.ortho == "formats" and candidate.phonology == "fORma"
+
+    def test_a_spelling_morphalou_does_not_list_is_still_refused(self):
+        target, tables = self._tables()
+        morphalou = {("format", "NOM"): {("m", "p"): {"formatz"}}}
+        assert generateAuthoritativeForm(target, ("m", "p"), tables, morphalou) == (None, "morphalou_no_phon")
+
+
+class TestMorphalouFormsFile:
+
+    def test_round_trip_is_sorted_and_lossless(self, tmp_path):
+        index = {
+            ("zèbre", "NOM"): {("m", "p"): {"zèbres"}},
+            ("abaca", "NOM"): {("m", "p"): {"abacas", "abacas2"}},
+            ("beau", "ADJ"): {("f", "s"): {"belle"}, ("m", "p"): {"beaux"}},
+        }
+        path = tmp_path / "forms.tsv"
+        assert writeMorphalouForms(index, path) == 5
+        lines = path.read_text(encoding="utf-8").splitlines()
+        assert lines[0] == "lemme\tcgram\tgenre\tnombre\tortho"
+        assert lines[1:] == sorted(lines[1:])
+        assert loadMorphalouForms(path) == index
+
+    def test_load_rejects_a_foreign_header(self, tmp_path):
+        path = tmp_path / "forms.tsv"
+        path.write_text("a\tb\n", encoding="utf-8")
+        with pytest.raises(AssertionError):
+            loadMorphalouForms(path)
+
+
+class TestDonorOnlyRelaxedAgreement:
+    """Nineteen donors write the plural -ats and one -ax (95% agreement): with no Morphalou entry for the
+    slot the strict bar (100%) refuses, the donor-only bar (95%) accepts."""
+
+    @staticmethod
+    def _tables(irregular: int):
+        donors = []
+        for i in range(20 - irregular):
+            stem = f"x{i}"
+            donors += [_nom(stem + "at", stem + "a", f"lemme{i}", "m", "s"), _nom(stem + "ats", stem + "a", f"lemme{i}", "m", "p")]
+        for j in range(irregular):
+            donors += [_nom(f"z{j}at", f"z{j}a", f"zz{j}", "m", "s"), _nom(f"z{j}ax", f"z{j}a", f"zz{j}", "m", "p")]
+        target = _nom("format", "fORma", "format", "m", "s")
+        return target, deriveNomAdjEndingTables(donors + [target])
+
+    def test_strict_table_refuses_but_the_donor_only_bar_accepts(self):
+        target, tables = self._tables(irregular=1)
+        assert generateMissingForm(target, ("m", "p"), tables) is None
+        candidate, source = generateAuthoritativeForm(target, ("m", "p"), tables, None)
+        assert source == "donor_table_relaxed"
+        assert candidate is not None and candidate.ortho == "formats"
+
+    def test_below_the_donor_only_bar_nothing_is_generated(self):
+        target, tables = self._tables(irregular=2)  # 90% agreement
+        assert generateAuthoritativeForm(target, ("m", "p"), tables, None) == (None, "none")

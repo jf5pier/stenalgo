@@ -473,6 +473,11 @@ MORPHALOU_NUMBER_MAP = {"singular": ("s",), "plural": ("p",), "invariable": ("s"
 # that axis (see MORPHALOU_GENDER_MAP/MORPHALOU_NUMBER_MAP above).
 MorphalouIndex = dict[tuple[str, str], dict[Slot, set[str]]]
 
+# Minimum donor agreement for a slot whose spelling Morphalou confirms (see generateAuthoritativeForm).
+MORPHALOU_CONFIRMED_MIN_MATCH_RATE = 0.9
+# Minimum donor agreement for a slot Morphalou has no entry for (the strict bar is 1.0).
+DONOR_ONLY_MIN_MATCH_RATE = 0.95
+
 
 def loadMorphalouIndex(path: str | Path) -> MorphalouIndex:
     """
@@ -511,6 +516,36 @@ def loadMorphalouIndex(path: str | Path) -> MorphalouIndex:
     return {k: dict(v) for k, v in index.items()}
 
 
+MORPHALOU_FORMS_HEADER = "lemme\tcgram\tgenre\tnombre\tortho"
+
+
+def writeMorphalouForms(index: MorphalouIndex, path: str | Path) -> int:
+    """Write a (distilled) MorphalouIndex as a sorted TSV, one (lemme, cgram, slot, ortho) per row; returns the row count."""
+    rows = sorted(
+        (lemme, cgram, genre, number, ortho)
+        for (lemme, cgram), slots in index.items()
+        for (genre, number), orthos in slots.items()
+        for ortho in orthos
+    )
+    with open(path, "w", encoding="utf-8", newline="") as out:
+        out.write(MORPHALOU_FORMS_HEADER + "\n")
+        for row in rows:
+            out.write("\t".join(row) + "\n")
+    return len(rows)
+
+
+def loadMorphalouForms(path: str | Path) -> MorphalouIndex:
+    """Read the TSV written by writeMorphalouForms back into a MorphalouIndex."""
+    index: dict[tuple[str, str], dict[Slot, set[str]]] = defaultdict(lambda: defaultdict(set))
+    with open(path, encoding="utf-8", newline="") as tsv:
+        header = tsv.readline().rstrip("\n")
+        assert header == MORPHALOU_FORMS_HEADER, f"unexpected header in {path}: {header!r}"
+        for line in tsv:
+            lemme, cgram, genre, number, ortho = line.rstrip("\n").split("\t")
+            index[(lemme, cgram)][(genre, number)].add(ortho)
+    return {key: dict(slots) for key, slots in index.items()}
+
+
 def morphalouOrthos(morphalou: MorphalouIndex, lemme: Lemme, gramCat: GramCat, slot: Slot) -> set[str] | None:
     """Morphalou's attested ortho(s) for this exact (lemme, gramCat, slot), or None if it has no entry there."""
     slotsByGender = morphalou.get((lemme, gramCat.name))
@@ -538,6 +573,11 @@ def generateAuthoritativeForm(
                              far more reliable for spelling specifically,
                              every hand-checked disagreement was a donor-
                              table mistake, never a Morphalou one).
+      "morphalou_relaxed" -- the donor table was not unanimous enough alone, but its
+                             majority candidate (match rate >= MORPHALOU_CONFIRMED_MIN_MATCH_RATE)
+                             has an ortho Morphalou confirms.
+      "donor_table_relaxed" -- no Morphalou entry and the donor table was not unanimous, but its
+                             majority candidate has a match rate >= DONOR_ONLY_MIN_MATCH_RATE.
       "donor_table"       -- no Morphalou entry for this slot; donor-table
                              candidate used as-is (unverified against an
                              external source).
@@ -555,7 +595,19 @@ def generateAuthoritativeForm(
     donorCandidate = generateMissingForm(fromWord, toSlot, tables)
     morphOrthos = morphalouOrthos(morphalou, fromWord.lemme, fromWord.gramCat, toSlot) if morphalou else None
     if morphOrthos is None:
+        if donorCandidate is None and DONOR_ONLY_MIN_MATCH_RATE < 1.0:
+            # Nothing external vouches for this slot: a lower bar than the Morphalou-confirmed one,
+            # so one noisy donor does not sink a regular plural (ancestralité -> ancestralités).
+            donorCandidate = generateMissingForm(fromWord, toSlot, tables, DONOR_ONLY_MIN_MATCH_RATE)
+            if donorCandidate is not None:
+                return donorCandidate, "donor_table_relaxed"
         return donorCandidate, ("donor_table" if donorCandidate is not None else "none")
+    if donorCandidate is None:
+        # Morphalou vouches for the spelling, so the unanimity bar (a single noisy donor sinks
+        # an ending class at 99% agreement) is relaxed for the phon/syllable fields.
+        relaxed = generateMissingForm(fromWord, toSlot, tables, MORPHALOU_CONFIRMED_MIN_MATCH_RATE)
+        if relaxed is not None and relaxed.ortho in morphOrthos:
+            return relaxed, "morphalou_relaxed"
     if donorCandidate is not None and donorCandidate.ortho in morphOrthos:
         return donorCandidate, "morphalou"
     if donorCandidate is not None:

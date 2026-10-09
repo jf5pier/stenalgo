@@ -1,0 +1,22 @@
+ortho	phon	lemme	cgram	cgramortho	genre	nombre	infover	syll_cv	orthosyll_cv	freqlivres	freqfilms2	source
+assoyais	aswajE	asseoir	VER	VER			ind:imp:1s;ind:imp:2s;	a|s_wa_j|E	a|ss_o_y|ais	0.0	0.0	synthetic
+assoyaient	aswajE	asseoir	VER	VER			ind:imp:3p;	a|s_wa_j|E	a|ss_o_y|aient	0.0	0.0	synthetic
+assoyions	aswajj§	asseoir	VER	VER			ind:imp:1p;	a|s_wa_j_j|§	a|ss_o_y_i|ons	0.0	0.0	synthetic
+assoyiez	aswaje	asseoir	VER	VER			ind:imp:2p;	a|s_wa_j_#|e	a|ss_o_y_i|ez	0.0	0.0	synthetic
+asseyerai	asEj°Re	asseoir	VER	VER			ind:fut:1s;	a|s_E|j_°|R_e	a|ss_e|y_e|r_ai	0.0	0.0	synthetic
+asseyeras	asEj°Ra	asseoir	VER	VER			ind:fut:2s;	a|s_E|j_°|R_a	a|ss_e|y_e|r_as	0.0	0.0	synthetic
+asseyera	asEj°Ra	asseoir	VER	VER			ind:fut:3s;	a|s_E|j_°|R_a	a|ss_e|y_e|r_a	0.0	0.0	synthetic
+asseyeront	asEj°R§	asseoir	VER	VER			ind:fut:3p;	a|s_E|j_°|R_§	a|ss_e|y_e|r_ont	0.0	0.0	synthetic
+asseyerais	asEj°RE	asseoir	VER	VER			cnd:pre:1s;cnd:pre:2s;	a|s_E|j_°|R_E	a|ss_e|y_e|r_ais	0.0	0.0	synthetic
+asseyerait	asEj°RE	asseoir	VER	VER			cnd:pre:3s;	a|s_E|j_°|R_E	a|ss_e|y_e|r_ait	0.0	0.0	synthetic
+asseyeraient	asEj°RE	asseoir	VER	VER			cnd:pre:3p;	a|s_E|j_°|R_E	a|ss_e|y_e|r_aient	0.0	0.0	synthetic
+asseyerions	asEj°Rj§	asseoir	VER	VER			cnd:pre:1p;	a|s_E|j_°|R_j_§	a|ss_e|y_e|r_i_ons	0.0	0.0	synthetic
+assoirions	aswaRj§	asseoir	VER	VER			cnd:pre:1p;	a|s_wa|R_j_§	a|ss_oi|r_i_ons	0.0	0.0	synthetic
+assiéraient	asjeRE	asseoir	VER	VER			cnd:pre:3p;	a|s_j_e|R_E	a|ss_i_é|r_aient	0.0	0.0	synthetic
+rassoyons	Raswaj§	rasseoir	VER	VER			ind:pre:1p;	R_a|s_wa_j|§	r_a|ss_o_y|ons	0.0	0.0	synthetic
+rassoyez	Raswaje	rasseoir	VER	VER			imp:pre:2p;ind:pre:2p;	R_a|s_wa_j|e	r_a|ss_o_y|ez	0.0	0.0	synthetic
+rassoyais	RaswajE	rasseoir	VER	VER			ind:imp:1s;	R_a|s_wa_j|E	r_a|ss_o_y|ais	0.0	0.0	synthetic
+rassoyaient	RaswajE	rasseoir	VER	VER			ind:imp:3p;	R_a|s_wa_j|E	r_a|ss_o_y|aient	0.0	0.0	synthetic
+rasseyes	RasEj	rasseoir	VER	VER			sub:pre:2s;	R_a|s_E_j_#	r_a|ss_e_y_es	0.0	0.0	synthetic
+rasseye	RasEj	rasseoir	VER	VER			sub:pre:3s;	R_a|s_E_j_#	r_a|ss_e_y_e	0.0	0.0	synthetic
+rassois	Raswa	rasseoir	VER	VER			imp:pre:2s;	R_a|s_wa_#	r_a|ss_oi_s	0.0	0.0	synthetic

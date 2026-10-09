@@ -4,8 +4,11 @@ from util.build_synthetic_lexicon import (
     MAX_ROUNDS,
     PICKLE_CACHE_PATHS,
     S2_APPENDERS,
+    SYNTHETIC_HEADER,
     SYNTHETIC_TSV_PATH,
+    canonicalizeSynthetic,
     nextRoundAction,
+    resetToHeader,
 )
 
 
@@ -36,18 +39,19 @@ def test_custom_cap_boundary():
 
 # ── S2_APPENDERS / moved constants ───────────────────────────────────────────
 
-def test_appenders_are_the_four_steady_state_modules():
+def test_appenders_are_the_five_steady_state_modules():
     modules = {modArgs[1] for _, modArgs in S2_APPENDERS}
     assert modules == {
         "util.completeVerbParadigms",
         "util.generateMissingNomAdjForms",
         "util.fixPayerDualFormGaps",
         "util.fixAsseoirDualFormGaps",
+        "util.appendSyntheticManualRows",
     }
 
 
 def test_every_appender_runs_with_apply():
-    assert len(S2_APPENDERS) == 4
+    assert len(S2_APPENDERS) == 5
     for label, modArgs in S2_APPENDERS:
         assert isinstance(label, str) and label
         assert isinstance(modArgs, list)
@@ -61,3 +65,33 @@ def test_moved_constants_keep_their_values():
     assert PICKLE_CACHE_PATHS == ("Dictionary.pickle", "PhoneticTheory.pickle",
                                   "DisambiguatedTheory.pickle")
     assert SYNTHETIC_TSV_PATH == "resources/LexiqueSynthetic.tsv"
+
+
+# ── from-scratch reset and canonical order ───────────────────────────────────
+
+def test_reset_to_header_empties_the_file_and_deletes_the_pickles(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    synthetic = tmp_path / "LexiqueSynthetic.tsv"
+    synthetic.write_bytes(b"ortho\tphon\r\nb\tx\r\na\ty\n")
+    for name in PICKLE_CACHE_PATHS:
+        (tmp_path / name).write_text("stale")
+    dropped = resetToHeader(str(synthetic))
+    assert dropped == 2
+    assert synthetic.read_bytes() == b"ortho\tphon\n"  # header kept, its CRLF normalized
+    assert not any((tmp_path / name).exists() for name in PICKLE_CACHE_PATHS)
+
+
+def test_reset_to_header_creates_a_missing_file(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    path = tmp_path / "LexiqueSynthetic.tsv"
+    assert resetToHeader(str(path)) == 0
+    assert path.read_text() == SYNTHETIC_HEADER
+
+
+def test_canonicalize_sorts_data_lines_and_keeps_the_header(tmp_path):
+    path = tmp_path / "s.tsv"
+    path.write_text("ortho\tphon\nb\t2\na\t1\nc\t3\n")
+    canonicalizeSynthetic(str(path))
+    assert path.read_text() == "ortho\tphon\na\t1\nb\t2\nc\t3\n"
+    canonicalizeSynthetic(str(path))  # idempotent
+    assert path.read_text() == "ortho\tphon\na\t1\nb\t2\nc\t3\n"

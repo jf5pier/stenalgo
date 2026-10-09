@@ -1,6 +1,6 @@
 #!/bin/env python
 #
-# Hand-derived completion of the 26 ass:eoir dual-form gaps that
+# Hand-derived completion of the ass:eoir dual-form gaps (now data: resources/syntheticManualRows.tsv) that
 # util/fixAsseoirDualFormGaps.py's donor-borrowing approach couldn't fill
 # (only 2 lemmas -- asseoir, rasseoir -- share this template, so most
 # missing forms have zero cross-lemma donor data). Derived with the user,

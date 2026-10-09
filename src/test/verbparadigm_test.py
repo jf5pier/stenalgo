@@ -446,6 +446,27 @@ class TestParticipleSplicing:
         assert generated.rawSyllCV == "p_R_o|m_i_z"
         assert generated.rawOrthosyllCV == "p_r_o|m_is_es"
 
+    def test_silent_initial_h_marker_survives_the_splice(self):
+        """hancher: the silent h is the leading unit "#_" of the breakdown (#_@|S_e_#, h_an|ch_é_e); only
+        the TRAILING silent units are bookkeeping. Dropping the leading one left the breakdown a unit
+        short of the orthographic one for every h-initial participle (66 regenerated rows)."""
+        templates = parseConjugationTemplates("resources/verbiste/conjugations-fr.xml")
+        hanchee = _make_participle("hanchée", "@Se", "hancher", "f", "s", "#_@|S_e_#", "h_an|ch_é_e")
+        phon, rawSyllCV = spliceParticiplePhon(hanchee, "m", "hanché")
+        assert (phon, rawSyllCV) == ("@Se", "#_@|S_e")
+        generated = generateMissingParticiple("hancher", templates["aim:er"], hanchee, "m", "p")
+        assert generated.rawSyllCV == "#_@|S_e_#"
+        assert generated.rawOrthosyllCV == "h_an|ch_é_s"
+
+    def test_generate_missing_participle_rejects_a_misspelled_donor(self):
+        """Lexique spells persifler's participle "persifflé"; splicing its breakdown under the regular
+        "persiflée" would give p_e_r|s_if|f_l_é_e, a breakdown that does not spell its word."""
+        templates = parseConjugationTemplates("resources/verbiste/conjugations-fr.xml")
+        verbs = loadVerbisteTemplates("resources/verbiste/verbs-fr.xml")
+        persiffle = _make_participle("persifflé", "pERsifle", "persifler", "m", "s", "p_E_R|s_i|f_l_e", "p_e_r|s_if|f_l_é")
+        with pytest.raises(ValueError, match="does not spell"):
+            generateMissingParticiple("persifler", templates[verbs["persifler"]], persiffle, "f", "s")
+
     def test_derive_radical_rejects_mismatched_suffix(self):
         badWord = _make_participle("garnie", "gaRni", "garnir", "f", "s", "g_a_R|n_i", "g_a_r|n_x")
         with pytest.raises(ValueError):
@@ -739,16 +760,16 @@ class TestDeriveSyllableSplitTable:
             "es8i", "e|s_8_i#", "e|ss_ui_e"
         )
 
-    def test_context_overrides_bare_run(self):
-        # "j" starts the next syllable (payer) except after "wa" (voyez "v_wa_j|e").
+    def test_glide_before_a_vowel_starts_the_next_syllable(self):
+        # voyez: the /j/ is the onset of "ez", after "wa" as after any other vowel.
         words = [_make_corpus_word("payer", "pEje", "p_E|j_e", "p_a|y_er")] * 6 + [
-            _make_corpus_word("voyez", "vwaje", "v_wa_j|e", "v_o_y|ez")
+            _make_corpus_word("voyez", "vwaje", "v_wa|j_e", "v_o|y_ez")
         ] * 5
         table = deriveSyllableSplitTable(words)
         assert table[("", "j")] == 0
-        assert table[("wa", "j", "e")] == 1
-        assert normalizeSplicedBreakdown("vwaje", "v_wa|j_e", "v_o|y_ez", table, {}) == (
-            "vwaje", "v_wa_j|e", "v_o_y|ez"
+        assert table[("wa", "j", "e")] == 0
+        assert normalizeSplicedBreakdown("vwaje", "v_wa_j|e", "v_o_y|ez", table, {}) == (
+            "vwaje", "v_wa|j_e", "v_o|y_ez"
         )
 
 
