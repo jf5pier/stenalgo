@@ -2,6 +2,120 @@
 
 Written to survive a `/clear` — read this file first in a fresh session.
 
+## Branch TODO — clean the */# homophone groups: spelling variants and same-word-other-lemma (2026-10-08)
+
+Why: of the 4,286 star/hash groups (2+ words sharing one unmarked final stroke, 10,599 words; measured 2026-10-08 on the disambiguated theory), 316 hold a tie that no rule can break and 5 a
+cycle (B5, B25 in "Suspected bugs"; the total-order key). Most of the ties are not real homophones: they are the SAME word under two spellings (placage/plaquage, soutra/sutra,
+cleptomanie/kleptomanie, séfarade/sépharade) or the SAME word whose forms were filed under two lemmas (personne/personnes ADJ, auxquels/auxquelles PRO:int). A mark spent on them is waste.
+
+- [ ] **0. Baseline.** Record BEFORE: number of star/hash groups (4,286), words in them (10,599), groups with a tie (316), with a cycle (5), and the mark-key mass. The scan script is the
+  one that regroups `disambiguated_theory` by its unmarked final strokes (`scratch/` copy to keep; groups as `_isStarHashCluster`).
+- [ ] **1. Submit every star/hash group to two checks** (all groups, not only the tied ones):
+  (a) *spelling variant*: the group's spellings are one word (reuse `util/build_spelling_variants.py`'s one-pattern-once discovery, extended to the group members, and the reform/B44 lists);
+  (b) *same word, different lemma*: the forms are inflections of one lemma that Lexique filed under two (personne/personnes, auxquels/auxquelles).
+  Print a review table per group (spellings, lemmes, categories, frequencies, verdict); nothing is applied before the user has seen it (AskUserQuestion for every doubtful set).
+- [ ] **2. Spelling variants: keep one.** Choose the canonical spelling with the Google Books Ngram count of the last 10 years (the 2010-2019 window of `resources/LexiqueGoogleNgram.tsv`, via
+  `util/ngram_data.py extract-lexique`, as `build_spelling_variants.py` already does; widen to the newest shard year if the data has one). Record the set in `resources/spellingVariants.tsv`
+  (`active`) and the dropped spellings, conjugated and inflected forms included, in `resources/lexiconExclusions.tsv`; follow CLAUDE.md "Pitfalls" (rerun `lexique.py`,
+  `python -m util.prune_spelling_variants --apply`, rm the pickles, rebuild).
+- [ ] **3. Same word, other lemma: fix the lemma.** Correct the lemme of the wrong Lexique line and add the conjugation/inflection features (genre, nombre, infover) so the form joins its
+  lemma's family. Not a hand edit of the generated `resources/LexiqueMixte.tsv`: add a data file read by `lexique.py` (e.g. `resources/lemmaCorrections.tsv`, one row per form: ortho, cgram,
+  wrong lemme, right lemme, genre, nombre, infover) so S1 stays reproducible (see the Synthetic regeneration item).
+- [ ] **4. Report AFTER** with the same counts as item 0 (groups, words, ties, cycles, mark-key mass) and the list of removed/corrected words.
+- Design question answered with the total-order key (2026-10-08, `docs/specs/star-hash-marking.md` section 3): when two lemmas meet in 2+ star/hash groups (comparer/comparaître), the
+  frequency of the LEMMA (sum over its forms) always decides which of the two is less marked, in every group they meet in (`_orderLemmasByFrequency`); a pair that meets once, and every
+  other word, is ranked by the form's own frequency decade, category and frequency. Ranking by the lemma first everywhere was measured and rejected: +17% mark keys typed, since
+  the rare form of a frequent lemma (`a` of avoir) then takes the unmarked stroke over a frequent word (`à`).
+
+## Branch TODO — make LexiqueSynthetic.tsv fully regenerable (2026-10-08)
+
+Why: `resources/LexiqueSynthetic.tsv` (S2) is append-only and was edited by hand-run `util/fix*.py` scripts, so it is not a function of the committed inputs. Verified 2026-10-08
+(rows keyed by ortho, lemme, cgram, genre, nombre): emptying it to its header and running `python -m util.build_synthetic_lexicon` (4 rounds, ~6 min) gives 46,867 rows against 50,345
+committed: 3,963 rows only in the committed file (2,928 VER, 639 NOM, 92 ADJ; lemmas such as confédérer, inférer, fédérer, ordonnancer, ~37-40 rows each), 485 only in the regenerated one
+(ressourcer, épucer, contrebalancer, délacer, pager, proscrire…), about 290 shared rows differing in `phon`/`syll_cv`/`infover`/`orthosyll_cv`.
+Goal: the file is a pure function of Lexique383, Infra, Verbiste, `LexiqueMixte.tsv` and `resources/*.tsv`; `python dictionary.py` rebuilds it from an empty file on every run (user decision,
+about +6 min). Acceptance: two from-scratch runs are byte-identical and the pipeline output is the committed file. For a fresh Sonnet session; delegate the mechanical steps (marked [H]) to
+Haiku subagents (`Agent` with `model: "haiku"`), keep the judgement steps [S] in the main session. Wait on job logs, never with `pgrep -f` (see CLAUDE.md "Process rules").
+Start from the current tree (glide-/j/ fix and the K=7 elicitation answers, both uncommitted): do not revert them.
+
+- [ ] **0. Safety net [H].** `util/check_synthetic_regeneration.py` (hand-run diagnostic): rsync the repo (without .git, env, scratch, steno-trainer, node_modules, googlebooks-fre-1grams)
+  to a temp dir, replace `resources/LexiqueSynthetic.tsv` by its header, delete `*.pickle`, run `env/bin/python -m util.build_synthetic_lexicon` there, write `synthetic_regen_report.tsv`
+  (`only-committed | only-regenerated | column-diff:<cols>` per key, per-lemma counts). Run it twice and `md5sum` the two regenerated files: they must be identical (report, do not fix).
+- [ ] **1. Classify the differences [H stats, S judgement].** Table by lemma and by `infover` tense (lemma still in Mixte? spelling in `spellingVariants.tsv`/`lexiconExclusions.tsv`? one of the
+  49 `fixRectifiedEConjugations` verbs?). Assign each category a cause: (a) stale rows from an older Mixte (variant/reform drop, exclusion) -> vanish, (b) generator since fixed -> regenerated
+  is right, (c) hand data -> resource file, (d) generator regression or template difference -> fix generator, (e) appender order dependence. Show the user a one-page summary with 3 examples per
+  category BEFORE changing anything; AskUserQuestion for any class where the committed value looks better.
+- [ ] **2. Move every non-reproducible fix into the pipeline [S].** Inventory (`grep -l LexiqueSynthetic util/*.py`):
+  in-place fixes whose generator now includes the fix (verify with the diff): fixSplicedVerbBreakdowns, fixMalformedSyntheticSplices, fixParticipleGenderPhon, fixParticipleSilentUnits,
+  fixEvaserWordFinalZSyllabification; fixes that also touch Lexique383/Infra/Mixte and whose Synthetic half should follow from regenerating off the fixed Mixte: fixOuGlideConsistency,
+  fixFirstSyllableE, fixHarmonyVowels, fixMixedHarmonyVowels (`util/harmonyVowelTargets.tsv`), fixCeSchwa, fixReSchwa, fixFinalAiE; prunes: fixRectifiedEConjugations (check the 49 templates are
+  already patched in `resources/verbiste`), `prune_spelling_variants`; hand data: fixAsseoirDualFormGapsManual (26 rows -> `resources/syntheticManualRows.tsv` read by a new appender in `S2_APPENDERS`);
+  the unrecorded `sub:imp` removal (fd7e242) -> apply the rule of `Lexique.stripSubjonctifImparfait` (lexique.py) in the appenders. Where regeneration does not reproduce a fix, add the same
+  data-driven rewrite as an idempotent S2 post-step (reuse `readRows`/`rewriteTsv` of the fix scripts). Fixed order in `util/build_synthetic_lexicon.py`: appenders (convergence loop kept), then post-steps.
+- [ ] **3. From scratch by default [S].** `util/build_synthetic_lexicon.py` `main()` first truncates the file to its header and deletes the pickles; `--incremental` keeps the old behaviour.
+  `dictionary.py` (`module("Synthetic Lexicon Building (S2), converged", ...)`) needs only its label/timing note; `lexique.py` never reads Synthetic, so S1 ordering is unaffected.
+- [ ] **4. Tests and docs [H, S reviews wording].** `src/test/build_synthetic_lexicon_test.py`: truncation before round 1, `--incremental` skips it, the manual-rows appender is idempotent on a toy
+  file. Update `CLAUDE.md` (S2 command block), `docs/PIPELINE.md` (one-shot table gets a "Superseded by" column; S2 section: "pure function of Mixte"), and close the related items below
+  (B13 non-idempotence, B2 residue).
+- [ ] **5. Verification [H runs, S reads].** `pytest src/test/` and `mypy` clean; the diagnostic twice -> identical; one-time user-approved refresh of the committed Synthetic with the regenerated file;
+  full `python dictionary.py` from a clean state and md5 comparison of `phonetic_theory.tsv`, `disambiguated_theory.tsv`, `resolved_press_sets.json`, `keypress_groups.json`,
+  `realization_report.json`, `plover_stenalgo_dictionary.json`, `steno-trainer/public/data/*.json` (they change where Synthetic rows change; the user judges), then a second run with identical md5s.
+- [x] **NOM/ADJ cascade (2026-10-08): DONE.** Two mechanisms, measured in-process: (A) ~104 of the 190 late rows used a generated row as the source slot of another missing slot of the lemma
+  (kept: `main()` now iterates `generateRows` to its own fixed point); (B) ~86 rows came from ending classes that crossed the donor-count bar thanks to generated donors (removed: the NOM/ADJ ending
+  tables are learned from `LexiqueMixte.tsv` alone). 138 of the 190 had a Morphalou-confirmed spelling. Result: 14,423 NOM/ADJ rows in one call, `build_synthetic_lexicon` converges in 2 rounds (was 5).
+  Still open: the same question for the verb ending tables (`deriveConjugationEndingTables` reads the theory, which contains Synthetic rows); lift `MIN_FINITE_MATCH_RATE = 1.0`?
+- [ ] **Remaining differences against the committed file (regen of 2026-10-08, from scratch by default, manual-rows appender, no self-blocking of generated NOM/ADJ spellings: 61,981 rows vs 50,345; deterministic, md5 7812d625; 412 only-committed (355 VER, 29 NOM, 28 ADJ), 11,505 only-regenerated; donor-only agreement bar 0.95)**: 508 only-committed (373 VER:
+  `asseoir`/`rasseoir` hand rows, `enorgueillir`, and tenses the strict finite ending tables skip for `bitter corseter stripper valeter agréer créer enivrer clouer déshabiller`; 85 NOM + 50 ADJ
+  not diagnosed), 9,899 only-regenerated (new full paradigms and NOM/ADJ plurals, all wanted). Rows differing in content, compared as loaded `Word`s (the TSV text is not the right level: `Word.__post_init__`
+  normalizes `e|n_`->`en|` and the `-ayer` conditional `R_j_`->`R|j_`, so 27 keys that differ in the file load identically):
+  * 218 vowel-quality rows: DECIDED 2026-10-08 (user): adopt the regenerated value in every case. (1) 89 doubled-consonant `-eler` rows `°`->`E` (attested `appellerons` `apEl°R§`); (2) 81 `-ayer` rows `e`->`E`
+    (the `ay` rule; attested `balayé` `balEje`); (3) 30 `-ier` subjunctives lose the final glide (`publie` `pyblij`->`pybli`, attested `crie` `kRi`); (4) 4 `baie`/`laie` `E`->`e` (d0cb3d3); (5) 13 rows where the
+    regeneration re-sharpens the validated harmony vowels (`autographie` `O`->`o`, `clone` `o`->`O`, `piochés`, `interconnectées`: `normalizeSplicedBreakdown`'s mid-vowel table overrides the infinitive's quality,
+    against `util/harmonyVowelTargets.tsv`) -- adopted although the targets file says otherwise, so DO NOT hand-run `fixHarmonyVowels` / `fixMixedHarmonyVowels` on the Synthetic file (they would revert them);
+    (6) `décaties` `dekati`->`dekasi` (Mixte itself has `décatie` as `dekasi`: a Lexique383 error to fix at the source). Nothing to implement: the pipeline already produces these.
+  * NOM/ADJ leftovers (diagnosed 2026-10-08; 132 -> 89 after fixing the self-blocking of `existingOrthoByLemme`, which blocked a homographic slot such as `allèles` m.p./f.p. or `audiovisuels` NOM/ADJ):
+    - 45 rows the donor table refuses with no Morphalou entry for the slot (regular `+s` plurals such as `ancestralités`, `angulosités`, `babels`) and 23 where Morphalou lists the spelling but no donor
+      candidate exists (the `-ène` adjectives `autogènes` `endogènes`, `bodys`/`caddys`/`catchs`). Measured against the committed rows: donor agreement >= 0.97 reproduces 24 exactly (2 differ), >= 0.95 30
+      (2 differ), >= 0.9 38 (3 differ), 27 still have no candidate at 0.9. DECIDED (user, 2026-10-08): donor-only agreement bar 0.95 (`DONOR_ONLY_MIN_MATCH_RATE`, source label `donor_table_relaxed`): +872 rows, 32 of them in the committed file (30 identical), 840 new; the `-ène` adjectives and `bodys`/`caddys`/`catchs` still have no candidate.
+    - 13 rows blocked by the tag-gap rule (`bifids`: the spelling exists in Mixte without gender/number); by design, nothing to do.
+    - 6 committed rows are corrupt (truncated spellings `autolog`, `burgond`, `hambourgeoi`, `hollandai`): good riddance. `laponnes` (not an expected slot), `mediae` vs `médiae`: trivial.
+  * 83 participle rows whose silent unit sits elsewhere: committed `a|y|R_i_#_#` (the old splice stripped every `#` and padded at the end, 1 attested Mixte participle ends `_#_#`), regenerated
+    `a_#|y|R_i_#` (Mixte's own convention for `ahuri`, `désherbé`, `cohabité`). FIXED in `spliceParticiplePhon` (only trailing `_#` is stripped; the leading `#_` of h-initial participles survives).
+  * 7 + 3 orthosyll rows: committed wrong `épagomène`/`turkmène` `è_n_es`, `paseos` `é`; regenerated wrong `benoîtes` `oi`, `cashmeres` `è`, `manips`/`portraites` unit shape. Not fixed.
+  * `persifler`'s participles (Lexique spells the attested one `persifflé`) are now skipped by a guard in `generateMissingParticiple` (orthosyll must spell the ortho); the same guard skips `croître` m.pl.
+    `crus` (`c_r_û_s`) and `dissous` (a dropped variant). ~176 homograph tag rows (`regrées` sub:pre:2s next to ind:pre:2s) are still skipped by the strict finite ending tables.
+- [ ] **INVESTIGATE LATER — why do the `-iions`/`-iiez` imparfait/subjonctif forms (`criions`) escape the glide-/j/ fix? (raised 2026-10-08).** The uncommitted `lexique.py` change
+  (hunk near line 925, "The biphoneme `wa` (voyons o-wa.y-j) fills the Y and V slots at once ... the glide that follows opens the next syllable (vwa-j§)") only fires when the first
+  grapheme-phoneme pair is the biphoneme `"wa"`. The `-ier` verbs stay in the old shape: Mixte `criions` `kRij§` `k_R_ij_#|§` (the glide is fused into the vowel unit `ij`, then a silent `#`,
+  then `§`), `confiions` `k§fij§`, `oubliions` `ublij§`, `essuyions` `Es8ij§` `E|s_8_ij_#|§`; whereas the `-oyer`/`-ayer` family already has the doubled glide opening the next syllable
+  (`envoyions` `@vwajj§` `@|v_wa_j|j_§`, `payions` `pEjj§` `p_E_j|j_§`, `assoyions` `aswajj§`). External pronunciations (checked 2026-10-08): current fr.wiktionary `kʁij.jɔ̃` (criions),
+  `kɔ̃.fij.jɔ̃`, `dis.tɑ̃.sij.jɔ̃`; GLÀFF (older snapshot) `kʁi.jɔ̃`, `kɔ̃.fi.jɔ̃`; so a doubled glide `i_j|j_§` would match Wiktionary and our own `-oyer` encoding, and the fused `ij_#|§` does not.
+  To do: (1) find which Lexique-Infra grapheme alignment yields the fused `ij` unit for `i`+`i` (criions: `cr-i-i-ons`) and whether the Y slot logic of `lexique.py` can treat `i` like `wa`
+  (glide opens the next syllable); (2) measure the rows concerned (Mixte `ij_#|` before a 1p/2p ending, the `-ierions` stems `ij#|R_j_` of `endingTemplateKey`'s `#ij` class, the 184 Wiktionary
+  rows with `ij.j`); (3) check the effect on strokes, homophones (`criions` vs `cries`) and the elicitation; (4) decide the target encoding with the user before changing S1; the regeneration
+  of the Synthetic file follows from Mixte (no Synthetic-side fix). Also compare with the `Word.fix_ayer_conditionnel_onset_glide` split (`R_j_` -> `R|j_`).
+- [ ] **Glide encodings of the `i`/`y` + vowel and `-ions`/`-iez` forms: rulings of 2026-10-09, IMPLEMENTED in Mixte (`splitGlides`, `dropStrayGlide`, the `=` unit, the `assey-` fix); the 30 stray-`i`/`riant` correction rows are done too; the Synthetic regeneration on the new donors is done (clean, deterministic); `glide-future-stem` implemented (accepted `f9f81b950d`); verdict #1 `reference-bar` recorded; still to do: verdicts #2-#5 + the `infinitive-participle-present` row, 6 Mixte correction rows (`graciera`, `réconcilier-`, `épier-`), the ~2,000 remaining bar refusals. Resume point: `docs/LEXICON_COMPLETION_CONTINUATION.md`.**
+- [x] **Systematic vowel policies: DROPPED (user, 2026-10-09).** Closed `O` -> `o` is not done (Mixte keeps Lexique383's `O`/`o`), the `ress-`/`dess-` schwa reform is not done (prefix `°` is right: OQLF, Académie), and `8_i` stays two nucleus units (`8` is a nucleus phoneme). Only low-priority, optional: root-internal `e` before a doubled consonant (`ardennais`, `crevettier`, `empennage`, `prunellier`, `ravennate`: 14 Mixte rows) and the Synthetic `-eler`/`-eter` verbs (~130 rows) may want `E` instead of `°`. The 26 stray-`i` rows (28 with `industrialisé`/`-ée`) and `riant` (2 rows) are DONE 2026-10-09: 30 rows in the hand-maintained `resources/mixteManualCorrections.tsv` (group `manual-stray-glide-i`, loaded with `mixteCorrections.tsv` by `loadAllMixteCorrections`); Mixte md5 `d73812fb92ece0c19a5382f36799f813`. `souriant`/`rions` (`Rj@`/`Rj§`) left as they are.
+  Rulings: `-yions`/`-yiez` and `-illions`/`-illiez` take the doubled glide split across the syllable break (`f_8_ij|j_§`, `b_R_ij|j_§`; `phon` gains the second `j`);
+  `-illons`/`-illez` stay single; `-Cions`/`-Ciez` and `i`/`y` before a vowel (`cria`, `plié`, `appropriant`, `accablions`) take a single glide with the break between
+  vowel and glide (`k_R_i|j_a`), phon unchanged; the `-rions`/`-riez` conditionals and futures wait (references split on the `i`: Wiktionary `pliRj§`, GLÀFF `Rij§`/`Rj§`).
+  Single-letter case: the letter carries two units, so a new orthosyll marker `=` ("the previous grapheme repeated in the onset of the next unit", the vocal counterpart of the
+  silent `#`) is proposed: `c_r_i|=_a`. `=` occurs nowhere in Lexique383, Infra, Mixte or Synthetic. To teach: the choke point `Word.graphemsToSyllables(withSilent=False)` (strip `=` as `#`;
+  feeds `dictionary.py` and `src/affixes.py`), `src/verbparadigm.py` (spelling check at the splice, `_padSilentUnits`, the unit-aligned donor tables), `check_lexicon_features.check_units`,
+  `src/diffsignature.py` (resolve `=` to the previous grapheme), `lexique.py:1043` (graphem/phonem check), `util/reportVowelHarmony.py`. (`&` was rejected: special in `sed`/`awk` replacement strings; `=` is inert there, in regexes, TSV, JSON and HTML.)
+  Mixte defects to correct on the way: `marchiez` (stray `i`, `maRSije` -> `maRSje`), `riant` (`Rj@` -> `Rij@`), `-yer` 1p/2p inconsistencies (`croyions` jj / `croyiez` j).
+  Later, with the non-verbs: `crayon` `k_R_Ej|@` (fused `Ej` for the grapheme `ay`) should become `k_R_E|j_@` (`c_r_a|y_on`), likewise the 229 `ay` rows, and the `ill`/`ll` lexicon (`appareillions`, `surveillions`).
+- [ ] **Install instructions: document the external downloads (raised 2026-10-08).** Add to `README.md` (the install/setup part, now only a sentence about Morphalou at "The NOM/ADJ cross-checkers
+  additionally need ...") and to the prerequisites in `CLAUDE.md` / `docs/PIPELINE.md`: (1) **Morphalou 3.1** (LGPL-LR), needed only to rebuild `resources/morphalouNomAdjForms.tsv` with
+  `python -m util.build_morphalou_forms` and by `util/crossCheckNomAdjWithMorphalou.py`; download `Morphalou3.1_formatCSV_toutEnUn.zip` (38 MB) from
+  `https://repository.ortolang.fr/api/content/morphalou/3/`, extract `Morphalou3.1_CSV.csv` to `morphalou/` (gitignored); the pipeline itself no longer needs it (committed distillate).
+  (2) **GLÀFF 1.2.2** (CC BY-SA 3.0, a Wiktionnaire-derived lexicon with IPA for every inflected form, 158 MB), only for the planned `util/check_against_wiktionary.py` / coverage diagnostics:
+  `https://huggingface.co/datasets/datasets-CNRS/GLAFF/resolve/main/data/glaff-1.2.2.txt` (+ `README.txt`, `LISEZMOI.txt`) into `glaff/` (gitignored, already in `.gitignore`).
+  (3) The committed `resources/wiktionaryVerbPronunciations.tsv` needs no download; `python -m util.fetch_wiktionary_conjugations` refreshes it (about 50 minutes, one request every 0.25 s).
+  Possible helper: `python -m util.download_external_resources [--morphalou] [--glaff]` (curl with a project user agent, skips files already present) so the instructions are one command; state for
+  each resource whether it is REQUIRED (none is, for the standard rebuild) or optional, its licence, and the path the code expects.
+- Do not edit `starboard3h.json` or `affix_decisions.json`; do not run `util.optimize_keyboard`.
+
 ## Branch TODO — Plover expression dictionary plugin (abbreviations branch, 2026-10-04)
 
 State: plugin built, installed in the user's Windows Plover 5.4.1 and working on a Starboard (`de l'` verified live); data export in `util/export_expression_data.py`,

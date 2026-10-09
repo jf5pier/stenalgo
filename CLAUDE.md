@@ -31,10 +31,18 @@ python lexique.py                            # Lexicon Building (S1)
 # Prerequisites: resources/Lexique383.tsv, LexiqueInfraCorrespondance.tsv, verbiste/*.xml.
 # Outputs: resources/LexiqueMixte.tsv.
 
-python -m util.build_synthetic_lexicon       # Synthetic Lexicon Building (S2), converged
-# Prerequisites: LexiqueMixte.tsv (and PhoneticTheory.pickle for S2.1; rebuilt in memory if absent).
-# Outputs: appends to resources/LexiqueSynthetic.tsv; if any round appended rows, deletes
-# Dictionary.pickle/PhoneticTheory.pickle and reruns the S3-S5 build.
+python -m util.build_synthetic_lexicon       # Synthetic Lexicon Building (S2), from scratch and converged (--incremental keeps the old rows)
+# Prerequisites: LexiqueMixte.tsv, resources/morphalouNomAdjForms.tsv, resources/syntheticManualRows.tsv,
+# spellingVariants.tsv (PhoneticTheory.pickle for S2.1; rebuilt in memory if absent).
+# Outputs: resources/LexiqueSynthetic.tsv, emptied to its header first, so a pure function of its inputs
+# (about 2 rounds, 2 min); each round appends, prunes the dropped spelling variants and sorts the file; after
+# a round that appended rows it deletes Dictionary.pickle/PhoneticTheory.pickle and reruns the S3-S5 build.
+
+python -m util.check_synthetic_regeneration  # hand-run diagnostic: regenerates the Synthetic file twice in a temp copy, checks both are
+                                             # byte-identical, writes synthetic_regen_report.tsv (differences against the committed file); ~12 min
+
+python -m util.build_morphalou_forms         # rare: distils the external Morphalou 3.1 CSV (morphalou/, gitignored) into the committed
+# resources/morphalouNomAdjForms.tsv (NOM/ADJ spellings of the slots Mixte lacks; attribution in morphalouNomAdjForms.NOTICE.md)
 
 python -m util.optimize_keyboard             # Keyboard Layout Optimization (S4); rare, costly
 # Prerequisites: Dictionary.pickle (or the lexicons, for an in-memory build), starboard3h.json.
@@ -195,7 +203,7 @@ and the affix-rule decisions (`affix_decisions.json`, see `docs/AFFIX_RULES.md`)
 Architecture and design rationale: `docs/ARCHITECTURE.md`. The nine stages:
 
 1. **Lexicon Building (S1)** — `python lexique.py` → `resources/LexiqueMixte.tsv` (136,203 rows); enforces `resources/spellingVariants.tsv` (one canonical spelling per variant set; `src/spellingvariants.py` hooks reconcile both the lemme normalization and the 1990-reform ortho rewrites, so the canonical may sit on either side of a reform pair)
-2. **Synthetic Lexicon Building (S2)** — `util/completeVerbParadigms.py` etc., run converged by `python -m util.build_synthetic_lexicon` (which the `python dictionary.py` orchestrator calls) → `resources/LexiqueSynthetic.tsv`
+2. **Synthetic Lexicon Building (S2)** — `util/completeVerbParadigms.py` etc., rebuilt from scratch and converged by `python -m util.build_synthetic_lexicon` (which the `python dictionary.py` orchestrator calls) → `resources/LexiqueSynthetic.tsv`, a pure function of Mixte, the spelling rulings, `morphalouNomAdjForms.tsv` and `syntheticManualRows.tsv`
 3. **Dictionary Loading (S3)** — inside `python -m util.build_phonetic_theory` → 167,639 Words, syllable inventory (cached in `Dictionary.pickle`)
 4. **Keyboard Layout Optimization (S4)** — CP-SAT layout solve; rare and costly — `python -m util.optimize_keyboard` (seeds from the committed `starboard3h.json`, writes `starboard3h_optimized.json`)
 5. **Phonetic Theory Building (S5)** — `Dictionary.buildPhoneticTheory` → the phonetic theory (`PhoneticTheory.pickle` + `phonetic_theory.tsv`; base strokes only, no homophone marks)
@@ -227,7 +235,7 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 
 ## Verification approach
 
-- `pytest src/test/` must pass after any `.py` change (1240 tests at the time of writing, expression layer, affix layer and lessons exporter included).
+- `pytest src/test/` must pass after any `.py` change (1496 tests at the time of writing, expression layer, affix layer, lessons exporter and the Mixte rules included; the one known failure is the stale-expressions `plover_plugin_test` until the expressions file is rebuilt).
 - `mypy` (bare, scope and options in `mypy.ini`) must report no issues after any `.py` change.
 - Behaviour-preserving changes are proven by a full rebuild following the rebuild table in
   `docs/PIPELINE.md`, comparing the md5s of `phonetic_theory.tsv`, `disambiguated_theory.tsv`,

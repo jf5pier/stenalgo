@@ -37,7 +37,7 @@ The real dependency order. Steps 0 and 1 and the human loop 4h are run by hand, 
 | # | Command | Stage | Needed when | Notes |
 |---|---|---|---|---|
 | 0 | `python -m util.fix<Name> --apply`, `python -m util.completeVerbParadigms --apply`, `python -m util.generateMissingNomAdjForms --apply`, … | Lexicon Building (S1), Synthetic Lexicon Building (S2) | only after a lexicon correction | Patch `Lexique383.tsv`, `LexiqueInfraCorrespondance.tsv`, Verbiste XML and/or `LexiqueMixte.tsv`, or append rows to `LexiqueSynthetic.tsv`. Run by hand, one fix at a time. The four steady-state appenders are also run, converged, by `python -m util.build_synthetic_lexicon` (see Synthetic Lexicon Building (S2)). |
-| 1 | `python lexique.py` | Lexicon Building (S1) | a full regeneration of `LexiqueMixte.tsv` | Everything runs at import time (no `__main__` guard, lexique.py:1261-1263). A rerun today is byte-identical to the committed file. Also the enforcement point for `resources/spellingVariants.tsv`: `read_corpus` reconciles every lemme through `reconcileLemme` (a canonical on the OLD side of a reform pair suppresses the lemme normalization instead of being dropped by it), and `outputMixedLexique` runs every output spelling through `reconcileOutputOrtho` after the whole 1990-reform rewrite chain — the canonical may sit on either side of a reform pair, so the rewrite is overridable in both directions from one place. |
+| 1 | `python lexique.py` | Lexicon Building (S1) | a full regeneration of `LexiqueMixte.tsv` | Everything runs at import time (no `__main__` guard, lexique.py:1261-1263). A rerun today is byte-identical to the committed file (after the 2026-10-09 glide work, to the working-tree file: the accepted `mixte_rule` groups of `src/mixterules.py` run in `outputMixedLexique` before the correction rows, and a deletion rule of `reform1990.tsv` needs the old spelling's following letter). Also the enforcement point for `resources/spellingVariants.tsv`: `read_corpus` reconciles every lemme through `reconcileLemme` (a canonical on the OLD side of a reform pair suppresses the lemme normalization instead of being dropped by it), and `outputMixedLexique` runs every output spelling through `reconcileOutputOrtho` after the whole 1990-reform rewrite chain — the canonical may sit on either side of a reform pair, so the rewrite is overridable in both directions from one place. |
 | 1b | `python -m util.prune_spelling_variants --apply` | Lexicon Building (S1), hygiene | after editing `resources/spellingVariants.tsv` | Rewrites `LexiqueSynthetic.tsv` in place, dropping stale rows of dropped spellings (dry-run by default). Then step 2 and the full chain. |
 | 2 | `rm -f Dictionary.pickle PhoneticTheory.pickle` | — | **any** lexicon or layout change | The pickle-cache trap: see below. Editing `resources/spellingVariants.tsv` or `resources/reform1990.tsv` counts as a lexicon change. |
 | 3 | `python -m util.build_phonetic_theory` | Dictionary Loading (S3), Keyboard Layout Optimization (S4) statistics, Phonetic Theory Building (S5) | everything downstream | Writes the phonetic theory and both pickles, always refreshing `phonetic_theory.tsv` (pickle hit or miss; the bytes are deterministic). Never touches the disambiguated theory — that is step 7's job, so no transient output is ever written from stale JSONs here. |
@@ -488,7 +488,7 @@ later companion script.
 | fixAbregerFutureAccent | conjugations-fr.xml | no | n/a | abr:éger futur/cnd `è`→`é` |
 | fixAdvenirRenaitreGaps | conjugations-fr.xml | no | n/a | adv:enir 3p présent; ren:aître participles |
 | fixAsseoirDualFormGaps | Synthetic (append) | no | n/a | ass:eoir alternants (S2.3) |
-| fixAsseoirDualFormGapsManual | Lexique383 tags, Synthetic | no | yes | 26 hand rows + missing tags |
+| fixAsseoirDualFormGapsManual | Lexique383 tags, Synthetic | no | yes | 21 hand rows (now `resources/syntheticManualRows.tsv`, appended by S2.4) + missing tags |
 | fixAyGraphemeEjQuality | Lexique383, Mixte | yes | yes† | `ay` is always open `Ej` |
 | fixAyGraphemeInfraPhono | Infra | no | yes | same rule in Infra |
 | fixCeSchwa | Lexique383, Infra, Mixte | yes | yes | `ce` /s2/ → /s°/ |
@@ -545,9 +545,17 @@ forms, missing NOM/ADJ gender or number forms, dual spellings) and appends the g
 to `resources/LexiqueSynthetic.tsv`. It is its own stage, not part of Lexicon Building (S1):
 its scripts read the phonetic theory or the lexicon TSVs, write a different file, and are run by hand.
 
-The four steady-state appenders run in every orchestrated rebuild through `python -m
-util.build_synthetic_lexicon` (always `--apply`, looped to convergence); the one-shot fix
-scripts stay hand-run. Each is a dry run unless given `--apply`. `lexique.py`
+The Synthetic file is a **pure function of its committed inputs** (Lexique383, Infra, Verbiste,
+`LexiqueMixte.tsv`, `spellingVariants.tsv`, `morphalouNomAdjForms.tsv`, `syntheticManualRows.tsv`):
+`python -m util.build_synthetic_lexicon` empties it to its header on every run (`--incremental` keeps
+the old rows), then loops the five appenders (S2.1 verbs, S2.2 NOM/ADJ, S2.3 `pa:yer` and `ass:eoir`
+dual forms, S2.4 the hand-derived rows) with `--apply` to convergence. After each appender the dropped
+spelling variants are pruned (`util.prune_spelling_variants`) and the file is sorted, so two runs are
+byte-identical (checked by `util.check_synthetic_regeneration`). Verb completion (S2.1) completes
+**every** verb with a trusted Verbiste template and keeps every generated candidate (the former
+discriminator-collision filter and undersampling detector are `--only-colliding` / `--undersampled-only`);
+the NOM/ADJ appender learns its ending tables from Mixte alone and iterates to its own fixed point. The
+one-shot fix scripts stay hand-run. Each is a dry run unless given `--apply`. `lexique.py`
 never reads or writes `resources/LexiqueSynthetic.tsv`: 46,199 **synthetic rows** (39,933
 VER, 3,868 NOM, 2,398 ADJ), mixed-lexicon columns plus `source` (always `synthetic`), all
 frequencies 0.0, no duplicates, no `sub:imp` rows (removed in fd7e242 by an unrecorded edit).
@@ -559,6 +567,13 @@ LGPL-LR), an external download from the
 [Ortolang repository](https://repository.ortolang.fr) — extract the CSV to
 `morphalou/Morphalou3.1_CSV.csv` (gitignored; the code default path); `--morphalou PATH`
 overrides and `--no-morphalou` disables it.
+
+Verb-form reference pronunciations are drawn from **GLÀFF 1.2.2** (Sajous, Hathout, Calderone,
+CLLE-ERSS; built from a ~2013 Wiktionnaire snapshot; licence CC BY-SA 3.0), an external
+download from http://redac.univ-tlse2.fr/lexiques/glaff.html — extract to `glaff/glaff-1.2.2.txt`
+(gitignored; ~158 MB). Used by reference checks in `util/check_against_wiktionary.py` and the
+upcoming `util/_verbreferences.py` reference index; those tools require it (see the
+[README](README.md#external-resources) section).
 
 ### Verb paradigm completion — completeVerbParadigms.main (S2.1)   util/completeVerbParadigms.py:350
 Called by: a person, `python -m util.completeVerbParadigms [--apply]`, and `python -m util.build_synthetic_lexicon` (with `--apply`).

@@ -90,9 +90,17 @@ Lexicon Building (S2) wrapper loops the appenders to convergence and deletes/reb
 pickles itself whenever they added rows. The NOM/ADJ cross-checkers additionally need the
 external Morphalou 3.1 corpus, extracted under `morphalou/` (gitignored, ~670 MB; CSV at
 `morphalou/Morphalou3.1_CSV.csv`) — without it the NOM/ADJ appender generates
-donor-table-only rows. After any hand-made lexicon or layout change, still delete
-`Dictionary.pickle`/`PhoneticTheory.pickle` before running — the caches are never checked for
-staleness (see [docs/PIPELINE.md](docs/PIPELINE.md)).
+donor-table-only rows. Verb-form reference pronunciations from **GLÀFF 1.2.2** (Sajous,
+Hathout, Calderone, CLLE-ERSS; built from a ~2013 Wiktionnaire snapshot; licence CC BY-SA
+3.0) are downloaded from http://redac.univ-tlse2.fr/lexiques/glaff.html and extracted under
+`glaff/` (gitignored, ~158 MB; file at `glaff/glaff-1.2.2.txt`). The reference checks
+(`util/check_against_wiktionary.py`, the reference index `util/_verbreferences.py`) use it as
+the fallback source; a tool that requires it fails with an error pointing to this section.
+Additionally, `resources/wiktionaryVerbPronunciations.tsv` contains IPA pronunciations of
+conjugated forms fetched from French Wiktionary on 2026-10-08 (CC BY-SA 4.0; see
+`resources/wiktionaryVerbPronunciations.NOTICE.md`). After any hand-made lexicon or layout
+change, still delete `Dictionary.pickle`/`PhoneticTheory.pickle` before running — the caches
+are never checked for staleness (see [docs/PIPELINE.md](docs/PIPELINE.md)).
 
 ## Documentation
 - [docs/PIPELINE.md](docs/PIPELINE.md) — the full pipeline, call by call, with rebuild order
@@ -118,3 +126,10 @@ subtitles to estimate word frequencies. Applied Psycholinguistics, 28(4), 661-67
 phoneme-grapheme regularity, consistency, and other sublexical statistics for 137,717
 polysyllabic French words. Behavior Research Methods.
 [doi](https://doi.org/10.3758/s13428-020-01396-2)
+
+<a id="4">[4]</a> ATILF. *Morphalou 3.1*, lexicon of French inflected forms (CNRS and Université de Lorraine;
+distributed by the CNRTL on [ORTOLANG](https://www.ortolang.fr/market/lexicons/morphalou), licence LGPL-LR).
+`resources/morphalouNomAdjForms.tsv` is a distillate of it (see `resources/morphalouNomAdjForms.NOTICE.md`).
+
+<a id="5">[5]</a> Sajous F., Hathout N., Calderone B. (2013). GLÀFF, un Gros Lexique À tout Faire du
+Français. TALN 2013. [PDF](http://redac.univ-tlse2.fr/lexiques/glaff/glaff-taln2013.pdf)
