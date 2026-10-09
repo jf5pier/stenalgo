@@ -599,7 +599,8 @@ displayTitle render lessons lesson =
 {-| The words a lesson drills by default: those that use something the lesson
 introduces (a stroke holding all the keys of one of its new chords, else a stroke
 with one of its new keys), the earlier keys being used as needed to complete
-them. A lesson introducing nothing of its own (the tense lessons) drills its
+them. A phoneme lesson's pool is already the words it unlocks (spec §2.6), so it
+drills all of it. A lesson introducing nothing of its own (the tense lessons) drills its
 whole pool, as does one where nothing matches. -}
 currentWords : Lesson -> List PracticeWord
 currentWords lesson =
@@ -614,7 +615,8 @@ currentWords lesson =
                     word.strokes
 
         chosen =
-            if List.isEmpty lesson.newKeys && List.isEmpty lesson.newChords then
+            if lesson.track == "phonemes" || (List.isEmpty lesson.newKeys && List.isEmpty lesson.newChords) then
+                -- a phoneme lesson's pool is already the words it unlocks
                 lesson.words
 
             else

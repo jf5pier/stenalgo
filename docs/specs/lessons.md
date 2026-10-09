@@ -125,10 +125,38 @@ Worked example, step (100, 1). Part queues after the tail sort — nucleus: `(11
 sequence: `(11,), (8,), (16,), (12,), (9,), (17,), (13,), (14,)` (dealing continues
 with the remaining nucleus once onset and coda are exhausted). Chunked at 4:
 lesson 1 = `{R, j-b-w, a, @/9}` — keys 8, 11, 12, 16 — and lesson 2 = `{s, w-N-G,
-i, e}` — keys 9, 13, 14, 17. Lesson 1's pool
+i, e}` — keys 9, 13, 14, 17 (before the vowel exchange of §2.6, which swaps `@/9` and `e/O`'s lessons into lesson 1 = keys 8, 12, 14, 16 and lesson 2 = keys 9, 11, 13, 17). Lesson 1's pool
 includes unmarked vowel-only words such as `à`; `a`/`ah`/`ha` stay out until the
 star/hash track (§3, rule 2). On the current layout this yields **15 phoneme
 lessons**.
+
+### 2.6 Lesson order and unlocked words
+
+The chunks of §2.5 are emitted in an optimized order, not step order: lessons 1-2 keep
+their place, lessons 3-5 are permuted among themselves, lessons 6-15 likewise
+(`PHONEME_REORDER_SEGMENTS`). Before that, lessons 1-2 exchange vowel keypresses (`exchangeFirstLessonVowels`): lesson 1 keeps `a` and `e/O` (keys 12, 14) and lesson 2 gets `@/9` and `i` (keys 11, 13), which lifts lesson 1 from 12 to 18 unlocked words. A chunk keeps its keys, rules and section title; only its
+position (hence its title number and `index`) moves.
+
+A phoneme record **needs** a lesson when one of its per-finger keypresses is that
+lesson's, or when one of its strokes holds every key of one of that lesson's chords
+(multi-key keypresses; the trainer's `usesNew` test). The lesson that completes the set
+of lessons a record needs **unlocks** it. Chords gate nothing in §3 (words need only
+the per-finger keypresses), which is why lessons made of chords only unlock words
+through this rule.
+
+The order maximizes, summed over lessons, `min(n, 30) + min(lemmas, 15)` (ties: `n`,
+then the smallest order), `n` and `lemmas` counting the words the lesson unlocks among
+the 20,000 most frequent spellings (`MIN_NEW_WORDS`, `MIN_NEW_LEMMAS`, `TOP_WORDS`).
+A lesson's gain depends only on the set of lessons before it, so an exact DP over
+subsets finds the optimum per segment. A lesson never precedes the lessons that
+introduce the per-finger components of its chords. Lessons 1-2 cannot reach the
+targets (the layout writes 12 and 49 words with their keys).
+
+**Pool.** A phoneme lesson's `words` are the records it unlocks, ranked
+`(-frequency, ortho, steno)`: first the top-20,000 spellings, at most 3 per lemma, up
+to 50; if fewer than 30, the remaining top-20,000 ones, then rarer ones, until 30.
+The trainer's "100% new" mode shows exactly these words (the 50/50 mix adds earlier
+lessons' words).
 
 ## 3. Coverage and eligibility
 
@@ -179,7 +207,8 @@ sorted union of the lesson's keypress keys; `newChords` = the keypresses of ≥ 
 as sorted lists (e.g. lesson with keypress `(8, 9)` gets `newChords: [[8, 9]]`). One
 rule per keypress (kind `phoneme`, §7.1), carrying its keypress's hand group
 (`hand`: left/thumbs/right, §6). After each lesson, its keypresses enter
-the covered set.
+the covered set. The lessons come in the §2.6 order, and each pool is the words the
+lesson unlocks (§2.6), not the global top 50.
 
 ### 4.2 `accord`
 

@@ -6,6 +6,7 @@ the pickles, the realization report) are multi-MB repo artifacts the unit tests
 must not depend on, so every fixture here is hand-built."""
 
 import re
+import types
 
 import pytest
 from ..keyboard import Starboard
@@ -16,7 +17,7 @@ from util.export_lessons import (
     eligible, examplesFallbackByKeypress, fingerKeypressesOfStroke,
     handOfKeypress, loadKeypressGroups, markRule, numberInFrench,
     phonemeOrderingKey, phonemePartsOfWord, phonemeRule, phonemeSteps,
-    selectTopWords, starHashCodeOf, verbMarkerRule, verbTenseOf, verbTenseRule,
+    selectTopWords, selectUnlockedWords, reorderPhonemeChunks, topSpellings, starHashCodeOf, verbMarkerRule, verbTenseOf, verbTenseRule,
 )
 
 STAR_KEY = 10
@@ -999,12 +1000,11 @@ class TestBuildLessonsPhonemesTrack:
         # four keypresses: the marked pairs are code-gated, the accord nouns
         # group-gated, and lise/lire/li/la wait for keys 9 and 17.
         assert _orthosOf(_lessonOf(document, "phonemes-01")) == ["dis", "sa"]
-        # Lesson 2 adds keys 9, 13, 14, 17: lise and lire become writable.
-        assert _orthosOf(_lessonOf(document, "phonemes-02")) \
-            == ["lise", "lire", "dis", "sa", "li", "la"]
+        # A phoneme lesson's pool is the words it UNLOCKS (§2.6): lesson 2 adds keys 9,
+        # 13, 14, 17, so lise and lire become writable (dis and sa stay lesson 1's).
+        assert _orthosOf(_lessonOf(document, "phonemes-02")) == ["lise", "lire", "li", "la"]
         # Lesson 3 adds key 3: the pa/pat pair's canonical members join.
-        assert _orthosOf(_lessonOf(document, "phonemes-03")) \
-            == ["lise", "lire", "dis", "pa", "sa", "li", "la", "pat"]
+        assert _orthosOf(_lessonOf(document, "phonemes-03")) == ["pa", "pat"]
 
     def test_sections_follow_the_weight_tiers(self, lessons):
         document, _counts = lessons
@@ -1156,3 +1156,43 @@ class TestBuildLessonsExpressionsTrack:
 
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__]))
+
+
+class TestUnlockedWords:
+    @staticmethod
+    def _record(ortho: str, frequency: float, lemme: str) -> dict[str, Any]:
+        return {"ortho": ortho, "steno": ortho, "frequency": frequency,
+                "_word": types.SimpleNamespace(lemme=lemme)}
+
+    def test_per_lemma_cap_and_fill_to_minimum(self) -> None:
+        records = [self._record(f"a{i}", 100 - i, "same") for i in range(10)]
+        top = topSpellings(records)
+        pool = selectUnlockedWords(records, top)
+        assert len(pool) == 30 or len(pool) == 10  # no more than exist
+        assert [r["ortho"] for r in pool[:3]] == ["a0", "a1", "a2"]
+
+    def test_diverse_lemmas_capped_at_pool_size(self) -> None:
+        records = [self._record(f"w{i:03d}", 1000 - i, f"l{i}") for i in range(80)]
+        pool = selectUnlockedWords(records, topSpellings(records))
+        assert len(pool) == 50
+        assert pool[0]["ortho"] == "w000"
+
+    def test_rare_words_only_top_up_below_minimum(self) -> None:
+        records = [self._record(f"w{i:03d}", 1000 - i, f"l{i}") for i in range(40)]
+        top = frozenset(r["ortho"] for r in records[:10])
+        pool = selectUnlockedWords(records, top)
+        assert len(pool) == 30
+
+    def test_reorder_keeps_fixed_lessons_and_respects_dependencies(self) -> None:
+        chunks = [[{"keypress": (i,)}] for i in range(15)]
+        word = types.SimpleNamespace(lemme="x")
+        records = [({"ortho": f"w{k}", "_word": word}, 1 << 13 | 1 << 5) for k in range(40)]
+        top = frozenset(str(r["ortho"]) for r, _ in records)
+        order = reorderPhonemeChunks(chunks, records, top, [0] * 15)
+        assert order[:2] == [0, 1]
+        assert sorted(order[2:5]) == [2, 3, 4] and sorted(order[5:]) == list(range(5, 15))
+        assert order.index(5) < order.index(13)  # ties: the smallest order
+        dependencies = [0] * 15
+        dependencies[5] = 1 << 13  # lesson 6 needs lesson 14's keys first
+        order = reorderPhonemeChunks(chunks, records, top, dependencies)
+        assert order.index(13) < order.index(5)

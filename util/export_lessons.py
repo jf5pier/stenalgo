@@ -60,6 +60,13 @@ HASH_KEY = 15
 RESERVED_KEYS = frozenset({0, 1, STAR_KEY, HASH_KEY})
 
 POOL_SIZE = 50           # records per lesson pool (§5)
+MIN_NEW_WORDS = 30       # a phoneme lesson ideally unlocks this many words (§2.6)
+MIN_NEW_LEMMAS = 15      # ... of at least this many different lemmas (§2.6)
+TOP_WORDS = 20000        # ... all within the TOP_WORDS most frequent spellings (§2.6)
+MAX_PER_LEMMA = 3        # pool diversity: records of one lemma before the relaxed fill (§2.6)
+FIXED_PHONEME_LESSONS = 2          # lessons 1-2 keep their place
+FIRST_LESSON_VOWELS = (("a",), ("e", "O"))  # the vowels lesson 1 keeps; lesson 2 gets the others (§2.6)
+PHONEME_REORDER_SEGMENTS = ((2, 5), (5, 15))  # lessons 3-5, then 6-15, each permuted within
 MIN_DROP_POOL = 10       # coverage-free lessons below this are dropped (§5)
 MAX_LESSON_KEYPRESSES = 4  # phoneme-track chunk size (§2.5)
 
@@ -330,6 +337,153 @@ def eligible(record: dict[str, Any], coveredKeypresses: frozenset[Keypress],
 def selectTopWords(records: list[dict[str, Any]], limit: int = POOL_SIZE) -> list[dict[str, Any]]:
     """The pool ranking of §5: top `limit` by `(-frequency, ortho, steno)`."""
     return sorted(records, key=lambda r: (-r["frequency"], r["ortho"], r["steno"]))[:limit]
+
+
+def exchangeFirstLessonVowels(chunks: list[list[dict[str, Any]]]) -> list[list[dict[str, Any]]]:
+    """§2.6: lessons 1-2 exchange vowel keypresses so that lesson 1 holds the vowels
+    `FIRST_LESSON_VOWELS` (the pair that unlocks the most words with R, -j/-b/-w; 18
+    against 12 for the unexchanged @/9 + a). The two lessons keep their sizes and their
+    consonants; the keypresses stay in their dealt order. A layout without those two
+    vowels in lessons 1-2 is left alone."""
+    if len(chunks) < 2:
+        return chunks
+    dealt = chunks[0] + chunks[1]
+    wanted = [item for item in dealt if item["part"] == "nucleus"
+              and tuple(item["phonemes"]) in FIRST_LESSON_VOWELS]
+    nuclei = [item for item in dealt if item["part"] == "nucleus"]
+    if len(wanted) != len(FIRST_LESSON_VOWELS) or len(nuclei) != 2 * len(wanted):
+        return chunks
+    swapped = [[item for item in dealt if item in chunks[0] and item["part"] != "nucleus"
+                or any(item is vowel for vowel in wanted)],
+               [item for item in dealt if item in chunks[1] and item["part"] != "nucleus"
+                or (item["part"] == "nucleus" and not any(item is vowel for vowel in wanted))]]
+    return swapped + chunks[2:]
+
+
+def topSpellings(stream: list[dict[str, Any]], limit: int = TOP_WORDS) -> frozenset[str]:
+    """The `limit` most frequent distinct spellings of the stream (ties by spelling)."""
+    best: dict[str, float] = {}
+    for record in stream:
+        if record["ortho"] not in best or record["frequency"] > best[record["ortho"]]:
+            best[record["ortho"]] = record["frequency"]
+    ranked = sorted(best, key=lambda ortho: (-best[ortho], ortho))
+    return frozenset(ranked[:limit])
+
+
+def chunkMasks(chunks: list[list[dict[str, Any]]], stream: list[dict[str, Any]]
+               ) -> list[tuple[dict[str, Any], int]]:
+    """§2.6: `(record, mask)` pairs. A phoneme record (empty star/hash code, no
+    feature group) NEEDS the lessons of its per-finger keypresses and of every chord
+    (a multi-key keypress) all of whose keys one of its strokes holds -- the trainer's
+    own `usesNew` test -- as a bitmask over `chunks`; records with a keypress no lesson
+    introduces are left out."""
+    chunkOfKeypress = {item["keypress"]: i for i, chunk in enumerate(chunks) for item in chunk}
+    chords = [(i, frozenset(item["keypress"])) for i, chunk in enumerate(chunks)
+              for item in chunk if len(item["keypress"]) >= 2]
+    records: list[tuple[dict[str, Any], int]] = []
+    for record in stream:
+        if record["_code"] != "" or record["_groups"]:
+            continue
+        if not all(keypress in chunkOfKeypress for keypress in record["_keyps"]):
+            continue
+        mask = 0
+        for keypress in record["_keyps"]:
+            mask |= 1 << chunkOfKeypress[keypress]
+        for stroke in record["strokes"]:
+            strokeKeys = frozenset(stroke)
+            for i, keys in chords:
+                if keys <= strokeKeys:
+                    mask |= 1 << i
+        records.append((record, mask))
+    return records
+
+
+def chunkDependencies(chunks: list[list[dict[str, Any]]], fingerAssignments: list[str]) -> list[int]:
+    """Bitmask per lesson of the other lessons that introduce the per-finger
+    components of its chords (a chord lesson comes after its components)."""
+    chunkOfKeypress = {item["keypress"]: i for i, chunk in enumerate(chunks) for item in chunk}
+    dependencies = [0] * len(chunks)
+    for i, chunk in enumerate(chunks):
+        for item in chunk:
+            for part in fingerKeypressesOfStroke(item["keypress"], fingerAssignments):
+                owner = chunkOfKeypress.get(part)
+                if owner is not None and owner != i:
+                    dependencies[i] |= 1 << owner
+    return dependencies
+
+
+def reorderPhonemeChunks(chunks: list[list[dict[str, Any]]],
+                         masked: list[tuple[dict[str, Any], int]], top: frozenset[str],
+                         dependencies: list[int]) -> list[int]:
+    """§2.6: the order of the phoneme lessons (indexes into `chunks`). Lessons 1-2 stay,
+    then each segment of `PHONEME_REORDER_SEGMENTS` is permuted on its own to maximize
+    the words each lesson unlocks (a word is unlocked by the lesson that completes the
+    lessons it needs, see `chunkMasks`): per lesson `min(n, MIN_NEW_WORDS) +
+    min(lemmas, MIN_NEW_LEMMAS)` over the unlocked top-`TOP_WORDS` words, ties broken by
+    `n`. The gain of a lesson depends only on the SET of lessons before it, so an exact
+    DP over subsets finds the best order (ties: the smallest order). A lesson never
+    precedes the lessons in its `dependencies`."""
+    lemmasByMask: dict[int, set[str]] = {}
+    countByMask: dict[int, int] = {}
+    for record, mask in masked:
+        if record["ortho"] in top:
+            countByMask[mask] = countByMask.get(mask, 0) + 1
+            lemmasByMask.setdefault(mask, set()).add(record["_word"].lemme)
+
+    def gain(chunk: int, before: int) -> int:
+        covered = before | 1 << chunk
+        count = 0
+        lemmas: set[str] = set()
+        for mask, n in countByMask.items():
+            if mask & ~covered == 0 and mask >> chunk & 1:
+                count += n
+                lemmas |= lemmasByMask[mask]
+        return (min(count, MIN_NEW_WORDS) + min(len(lemmas), MIN_NEW_LEMMAS)) * 1000 + min(count, 999)
+
+    order = list(range(FIXED_PHONEME_LESSONS))
+    before = sum(1 << i for i in order)
+    for start, stop in PHONEME_REORDER_SEGMENTS:
+        members = list(range(start, min(stop, len(chunks))))
+        best: dict[int, tuple[int, list[int]]] = {0: (0, [])}
+        for subset in sorted(range(1 << len(members)), key=lambda m: (bin(m).count("1"), m)):
+            if subset not in best:
+                continue
+            score, path = best[subset]
+            covered = before | sum(1 << members[j] for j in range(len(members)) if subset >> j & 1)
+            for j, chunk in enumerate(members):
+                if subset >> j & 1 or dependencies[chunk] & ~covered:
+                    continue
+                candidate = (score + gain(chunk, covered), path + [chunk])
+                target = subset | 1 << j
+                if target not in best or candidate[0] > best[target][0] \
+                        or (candidate[0] == best[target][0] and candidate[1] < best[target][1]):
+                    best[target] = candidate
+        order += best[(1 << len(members)) - 1][1]
+        before |= sum(1 << chunk for chunk in members)
+    return order
+
+
+def selectUnlockedWords(unlocked: list[dict[str, Any]], top: frozenset[str]) -> list[dict[str, Any]]:
+    """§2.6: the pool of a phoneme lesson from the records it unlocks, ranked by
+    `(-frequency, ortho, steno)`. Tier 1: top-`TOP_WORDS` spellings, at most
+    `MAX_PER_LEMMA` per lemma, up to `POOL_SIZE`. Tier 2 (only below `MIN_NEW_WORDS`):
+    the remaining top spellings. Tier 3 (still below): the rarer unlocked words."""
+    ranked = sorted(unlocked, key=lambda r: (-r["frequency"], r["ortho"], r["steno"]))
+    common = [r for r in ranked if r["ortho"] in top]
+    chosen: list[dict[str, Any]] = []
+    perLemma: dict[str, int] = {}
+    for record in common:
+        lemma = record["_word"].lemme
+        if len(chosen) < POOL_SIZE and perLemma.get(lemma, 0) < MAX_PER_LEMMA:
+            chosen.append(record)
+            perLemma[lemma] = perLemma.get(lemma, 0) + 1
+    for tier in (common, [r for r in ranked if r["ortho"] not in top]):
+        for record in tier:
+            if len(chosen) >= MIN_NEW_WORDS:
+                break
+            if not any(record is picked for picked in chosen):
+                chosen.append(record)
+    return sorted(chosen, key=lambda r: (-r["frequency"], r["ortho"], r["steno"]))
 
 
 def loadKeypressGroups(realizationReport: dict[str, Any]) -> list[dict[str, Any]]:
@@ -701,35 +855,51 @@ def buildLessons(
                                             introducedCodes)])
 
     # 4.1 phonemes
+    chunkEntries: list[tuple[str, list[dict[str, Any]]]] = []
     for weightSum, nFingers, items in phonemeSteps(starboard):
         sectionTitle = SECTION_TITLES.get((weightSum, nFingers),
                                          f"Complexité {numberInFrench(weightSum)}")
-        for chunk in chunkStep(items):
-            newCovered = coveredKeypresses | {item["keypress"] for item in chunk}
-            coveredKeypresses = newCovered  # the lesson's own pool may use its new keys
-            pool = poolTop(lambda record: True)
-            index = counters.get("phonemes", 0) + 1
-            # The title lists the phonemes the introduced keypresses write, one by one
-            # ("les phonèmes R- @ 9 a -j -b -w"): an onset phoneme with a trailing
-            # hyphen, a coda phoneme with a leading one, a vowel bare, as the key names
-            # mark the syllable part. Ordered by hand group (gauche -> pouces -> droite),
-            # within a group in the exporter's step order (§7.6), without repeats.
-            def phonemeLabel(phoneme: str, part: str) -> str:
-                return phoneme + "-" if part == "onset" else "-" + phoneme if part == "coda" else phoneme
+        chunkEntries.extend((sectionTitle, chunk) for chunk in chunkStep(items))
+    exchanged = exchangeFirstLessonVowels([chunk for _title, chunk in chunkEntries])
+    chunkEntries = [(title, chunk) for (title, _old), chunk in zip(chunkEntries, exchanged)]
+    topSet = topSpellings(stream)
+    chunkList = [chunk for _title, chunk in chunkEntries]
+    masked = chunkMasks(chunkList, stream)
+    chunkOrder = reorderPhonemeChunks(chunkList, masked, topSet,
+                                      chunkDependencies(chunkList, starboard._fingerAssignments))
+    coveredMask = 0
+    for chunkIndex in chunkOrder:
+        sectionTitle, chunk = chunkEntries[chunkIndex]
+        coveredKeypresses = coveredKeypresses | {item["keypress"] for item in chunk}
+        # The pool is what the lesson UNLOCKS: eligible now, not eligible before it.
+        previousMask = coveredMask
+        coveredMask |= 1 << chunkIndex
+        pool = selectUnlockedWords(
+            [record for record, mask in masked
+             if mask & ~coveredMask == 0 and mask & ~previousMask],
+            topSet)
+        index = counters.get("phonemes", 0) + 1
+        # The title lists the phonemes the introduced keypresses write, one by one
+        # ("les phonèmes R- @ 9 a -j -b -w"): an onset phoneme with a trailing
+        # hyphen, a coda phoneme with a leading one, a vowel bare, as the key names
+        # mark the syllable part. Ordered by hand group (gauche -> pouces -> droite),
+        # within a group in the exporter's step order (§7.6), without repeats.
+        def phonemeLabel(phoneme: str, part: str) -> str:
+            return phoneme + "-" if part == "onset" else "-" + phoneme if part == "coda" else phoneme
 
-            phonemesByHand = list(dict.fromkeys(
-                phonemeLabel(phoneme, item["part"])
-                for hand in HANDS
-                for item in chunk
-                if handOfKeypress(item["keypress"], starboard._fingerAssignments) == hand
-                for phoneme in item["phonemes"]))
-            title = f"Leçon {numberInFrench(index)} : les phonèmes {' '.join(phonemesByHand)}"
-            _emitLesson(lessons, counters, "phonemes", title, "phonemes", sectionTitle,
-                        sorted({key for item in chunk for key in item["keypress"]}),
-                        [sorted(item["keypress"]) for item in chunk if len(item["keypress"]) >= 2],
-                        [phonemeRule(item, starboard, pool, fallbackByKeypress)
-                         for item in chunk],
-                        _wordsOf(pool))
+        phonemesByHand = list(dict.fromkeys(
+            phonemeLabel(phoneme, item["part"])
+            for hand in HANDS
+            for item in chunk
+            if handOfKeypress(item["keypress"], starboard._fingerAssignments) == hand
+            for phoneme in item["phonemes"]))
+        title = f"Leçon {numberInFrench(index)} : les phonèmes {' '.join(phonemesByHand)}"
+        _emitLesson(lessons, counters, "phonemes", title, "phonemes", sectionTitle,
+                    sorted({key for item in chunk for key in item["keypress"]}),
+                    [sorted(item["keypress"]) for item in chunk if len(item["keypress"]) >= 2],
+                    [phonemeRule(item, starboard, pool, fallbackByKeypress)
+                     for item in chunk],
+                    _wordsOf(pool))
 
     # 4.2 accord
     for groupIndex in accordGroupIndexes:
