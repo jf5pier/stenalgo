@@ -74,6 +74,32 @@ star/hash mark. Rule ids R1–R7 follow code order and are always cited with the
 | R6 | category-priority rule | both categories are in `GRAMCAT_PRIORITY` | mark the lower priority |
 | R7 | frequency fallback | at least one category is missing from the table | mark the rarer |
 
+**Ranking since 2026-10-08: one total order.** The pairwise stack above can cycle and, on equal frequencies, answers by argument
+order (B5, B25), so the production ranking (`assignMarkNodeCodes`) no longer sorts with it. It sorts the mark nodes by `starHashRankKey` of
+each node's representative (smaller = more canonical = less marked):
+
+1. the **decade** of the word's own frequency (`frequencyBand`, `floor(log10)`; 0 is one band below all): a gap outranks the category (R4, as a total order);
+2. the **category priority** (`GRAMCAT_PRIORITY`; a category missing from it takes `UNLISTED_CATEGORY_PRIORITY`, that of `NOM`: R6, and R7's "missing category"
+   case; best agreement, 95.8%, with the pairwise rules over the 5,999 decided pairs of 4,286 groups);
+3. the word's frequency, then the frequency of its LEMMA (the sum over the words of the same `lemmeGramCat`), its spelling and its `lemmeGramCat`: ties are broken
+   by the data, never by the input order.
+
+**The lemma rule.** Two lemmas (`lemmeGramCat`) that meet in two or more groups (`MIN_SHARED_GROUPS`; comparer and comparaître, with several homophone pairs among
+their forms) are ranked by their LEMMA frequency in all of them: the more popular lemma is the less marked, whichever of their forms is the more frequent in a
+given group. Lemmas linked this way form families; after the sort by the key above (`_orderLemmasByFrequency`), the nodes of a family keep their positions and are
+redistributed over them by lemma frequency, so the order stays a total order. A code is shared by all of a node's groups, so the greedy colouring also keeps
+a lemma's code above its more popular partner's (a lower bound on the code, `sharedLemmas`): in every group where two such lemmas conflict, the more popular one is the less marked.
+Two lemmas that meet in one group are ranked by the key alone.
+
+**Why the form's frequency leads the key, and the lemma rule is not global.** Measured 2026-10-08 on the whole theory (mark keys typed = sum over words of
+frequency x star/hash keys): 54.4k with the pairwise rules, 54.2k with the key alone, 54.7k with the key and the lemma rule (1,005 of 6,896 conflicting nodes
+move), 63.8k (+17%) with the lemma frequency leading everywhere, because the rare form of a frequent lemma then takes the unmarked stroke (`a` of avoir over `à`).
+R3 overrides are applied after the sort (`_applyMarkingOverrides`).
+R1/R2 stay the merges of section 5b. The clusters, their words and the merge direction are also processed in a canonical order, and the representative
+of a node breaks frequency ties by `_wordIdentityKey`: the marks depend only on the words and the lexicon (shuffle tests, `TestStarHashTotalOrder`, and
+5 shuffles of the 171,464 entries: identical). `decideStarHashMark` stays as the pairwise explanation used by the legacy per-cluster ranking and the
+diagnostics.
+
 Details:
 
 - **Doublet pairs** come from `resources/reform1990.tsv` (`loadReform1990DoubletPairs`): every
@@ -217,10 +243,10 @@ Plover strokes are from `plover_stenalgo_dictionary.json`, 2026-09-22 data.
 
 ## 8. Known gaps (tracked in `TODO.md`, "Suspected bugs")
 
-- **B5**: on equal frequency, R4, R5 and R7 mark the first argument, so the comparator is not
+- **B5** (fixed 2026-10-08 by the total-order key, see section 3): on equal frequency, R4, R5 and R7 mark the first argument, so the comparator is not
   antisymmetric and the result depends on input order (`pas`/`pâts`, both 0.0). Shuffling the
   input changes the marks in 619 of the 4,450 groups.
-- **B25**: R4 and R6 can form a cycle (A < B by R6, B < C by R6, C < A by R4), which again
+- **B25** (fixed 2026-10-08, same key): R4 and R6 can form a cycle (A < B by R6, B < C by R6, C < A by R4), which again
   makes the order depend on input. There are 0 such cycles among live representatives.
 - **B26**: the doublet merge checks only the representatives' lemmas (0 live instances).
 - **B4** (fixed 2026-09-24 as B44): alternate entries used to carry no star/hash mark and

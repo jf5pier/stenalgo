@@ -2,6 +2,7 @@
 # coding: utf-8
 """Tests for src/ambiguitychecker.py — Phase 0 ambiguity checker."""
 
+import itertools
 from unittest.mock import MagicMock
 from typing import Any
 
@@ -28,6 +29,9 @@ from src.ambiguitychecker import (
     groupHomophonesByReservedStroke,
     loadReform1990DoubletPairs,
     markFamilyKey,
+    starHashRankKey,
+    frequencyBand,
+    assignMarkNodeCodes,
     rankHomophoneCluster,
     starHashCodeToStrokes,
     computeClusterSizeDistribution,
@@ -1126,3 +1130,107 @@ class TestBuildExtraInducedStrokes:
         theory: Any = {((1,),): [w]}
         assignment = KeypressGroupPhysicalAssignment(chosenKeysByGroup={})
         assert buildExtraInducedStrokes(theory, assignment, {w: [frozenset({0})]}) == {}
+
+
+class TestStarHashTotalOrder:
+    """The star/hash ranking is one total order (`starHashRankKey`), so the marks depend only on the words, never on their order."""
+
+    @staticmethod
+    def _codes(words: list[Any], clusters: list[list[Any]]) -> dict[str, tuple[str, ...]]:
+        wordsByNode: dict[Any, list[Any]] = {}
+        for word in words:
+            wordsByNode.setdefault(markFamilyKey(word), []).append(word)
+        codes = assignMarkNodeCodes(wordsByNode, clusters)
+        return {word.ortho + "/" + word.lemme: codes[markFamilyKey(word)] for word in words if markFamilyKey(word) in codes}
+
+    def test_frequency_band_is_the_decade(self):
+        assert frequencyBand(9.9) == 0 and frequencyBand(10.0) == 1 and frequencyBand(0.05) == -2
+        assert frequencyBand(0.0) < frequencyBand(0.0001)
+
+    def test_cycle_of_the_pairwise_rules_gets_one_order(self):
+        # ail < aille (aller) < aïe < ail under the pairwise rules R6/R7: a cycle
+        ail = _make_word(ortho="ail", lemme="ail", gramCat=GramCat.NOM, frequencyFilm=9.14)
+        aille = _make_word(ortho="aille", lemme="aller", gramCat=GramCat.VER, frequencyFilm=89.81, number="s", gender=None)
+        aie = _make_word(ortho="aïe", lemme="aïe", gramCat=GramCat.ONO, frequencyFilm=18.25, gender=None, number=None)
+        words = [ail, aille, aie]
+        reference = self._codes(words, [words])
+        for order in itertools.permutations(words):
+            assert self._codes(list(order), [list(order)]) == reference
+        assert sorted(reference.values()) == [(), ("#",), ("*",)]
+
+    def test_equal_frequencies_are_ranked_by_spelling(self):
+        placage = _make_word(ortho="placage", lemme="placage", frequencyFilm=0.22)
+        plaquage = _make_word(ortho="plaquage", lemme="plaquage", frequencyFilm=0.22)
+        for order in ([placage, plaquage], [plaquage, placage]):
+            assert self._codes(order, [order]) == {"placage/placage": (), "plaquage/plaquage": ("*",)}
+
+    def test_the_more_popular_lemma_wins_between_forms_of_equal_frequency(self):
+        # comparer is the frequent lemma (its other forms add up); both rare forms are as frequent as each other
+        comparait = _make_word(ortho="comparait", lemme="comparer", gramCat=GramCat.VER, frequencyFilm=0.19, gender=None)
+        comparer = _make_word(ortho="comparé", lemme="comparer", gramCat=GramCat.VER, frequencyFilm=80.0, gender=None)
+        comparaitre = _make_word(ortho="comparaît", lemme="comparaître", gramCat=GramCat.VER, frequencyFilm=0.19, gender=None)
+        for order in itertools.permutations([comparait, comparer, comparaitre]):
+            codes = self._codes(list(order), [[comparait, comparaitre]])
+            assert codes["comparait/comparer"] == () and codes["comparaît/comparaître"] == ("*",)
+
+    def test_the_form_frequency_leads_the_lemma_frequency(self):
+        # `a` of the very frequent avoir (form 6350, lemma 60000) does not outrank `à` (12190)
+        a = _make_word(ortho="a", lemme="avoir", gramCat=GramCat.AUX, frequencyFilm=6350.0, gender=None)
+        avoirOther = _make_word(ortho="avait", lemme="avoir", gramCat=GramCat.AUX, frequencyFilm=54000.0, gender=None)
+        a_grave = _make_word(ortho="à", lemme="à", gramCat=GramCat.PRE, frequencyFilm=12190.0, gender=None, number=None)
+        codes = self._codes([a, avoirOther, a_grave], [[a, a_grave]])
+        assert codes["à/à"] == () and codes["a/avoir"] == ("*",)
+
+    def test_override_pair_is_kept(self):
+        sales = _make_word(ortho="sales", lemme="sale", frequencyFilm=1.0)
+        salles = _make_word(ortho="salles", lemme="salle", frequencyFilm=50.0)
+        codes = self._codes([salles, sales], [[sales, salles]])
+        assert codes["sales/sale"] == () and codes["salles/salle"] == ("*",)
+
+    def test_rank_key_is_a_total_order_on_distinct_words(self):
+        a = _make_word(ortho="a", lemme="a", frequencyFilm=1.0)
+        b = _make_word(ortho="b", lemme="b", frequencyFilm=1.0)
+        assert starHashRankKey(a, 1.0) < starHashRankKey(b, 1.0)
+
+    def test_codes_do_not_depend_on_the_order_of_words_or_clusters(self):
+        # two families sharing a spelling across clusters (paillé ADJ / paillé VER-participle style merges), listed in every order
+        a = _make_word(ortho="paillé", lemme="paillé", gramCat=GramCat.ADJ, frequencyFilm=0.01)
+        b = _make_word(ortho="paillé", lemme="pailler", gramCat=GramCat.VER, infoVerb="par:pas", frequencyFilm=0.01)
+        c = _make_word(ortho="pailler", lemme="pailler", gramCat=GramCat.NOM, frequencyFilm=0.01)
+        d = _make_word(ortho="paillée", lemme="paillé", gramCat=GramCat.ADJ, gender="f", frequencyFilm=0.0)
+        e = _make_word(ortho="paillée", lemme="pailler", gramCat=GramCat.VER, infoVerb="par:pas", gender="f", frequencyFilm=0.0)
+        words = [a, b, c, d, e]
+        clusters = [[a, b, c], [d, e, c]]
+        reference = self._codes(words, clusters)
+        for wordOrder in itertools.permutations(words):
+            for clusterOrder in (clusters, clusters[::-1], [clusters[0][::-1], clusters[1]]):
+                assert self._codes(list(wordOrder), [list(cl) for cl in clusterOrder]) == reference
+
+    def test_lemma_frequency_decides_when_two_lemmas_meet_in_several_groups(self):
+        # lemma A (forms a1, a2, and a frequent a3 elsewhere) and lemma B (b1, b2) collide twice: form by form, B wins group 1 and A group 2
+        a1 = _make_word(ortho="aa1", lemme="aa", gramCat=GramCat.VER, gender=None, frequencyFilm=1.0)
+        a2 = _make_word(ortho="aa2", lemme="aa", gramCat=GramCat.VER, gender=None, frequencyFilm=1.0)
+        a3 = _make_word(ortho="aa3", lemme="aa", gramCat=GramCat.VER, gender=None, frequencyFilm=500.0)
+        b1 = _make_word(ortho="bb1", lemme="bb", gramCat=GramCat.VER, gender=None, frequencyFilm=50.0)
+        b2 = _make_word(ortho="bb2", lemme="bb", gramCat=GramCat.VER, gender=None, frequencyFilm=0.5)
+        words = [a1, a2, a3, b1, b2]
+        twice = self._codes(words, [[a1, b1], [a2, b2]])
+        assert twice["aa1/aa"] == () and twice["aa2/aa"] == ()
+        assert twice["bb1/bb"] != () and twice["bb2/bb"] != ()
+        once = self._codes(words, [[a1, b1]])
+        assert once["bb1/bb"] == () and once["aa1/aa"] != ()  # one shared group: the forms decide
+        for order in itertools.permutations(words):
+            assert self._codes(list(order), [[a2, b2], [b1, a1]]) == twice
+
+    def test_a_less_popular_lemma_never_gets_a_lower_code_than_its_partner(self):
+        # aa1 conflicts with the very frequent x and so takes `*`; bb1 meets only aa1, and must not take the free `()` below it
+        x = _make_word(ortho="xx", lemme="xx", gramCat=GramCat.VER, gender=None, frequencyFilm=1000.0)
+        a1 = _make_word(ortho="aa1", lemme="aa", gramCat=GramCat.VER, gender=None, frequencyFilm=10.0)
+        a2 = _make_word(ortho="aa2", lemme="aa", gramCat=GramCat.VER, gender=None, frequencyFilm=10.0)
+        a3 = _make_word(ortho="aa3", lemme="aa", gramCat=GramCat.VER, gender=None, frequencyFilm=500.0)
+        b1 = _make_word(ortho="bb1", lemme="bb", gramCat=GramCat.VER, gender=None, frequencyFilm=9.0)
+        b2 = _make_word(ortho="bb2", lemme="bb", gramCat=GramCat.VER, gender=None, frequencyFilm=9.0)
+        codes = self._codes([x, a1, a2, a3, b1, b2], [[x, a1], [a1, b1], [a2, b2]])
+        assert codes["xx/xx"] == () and codes["aa1/aa"] == ("*",)
+        assert codes["bb1/bb"] == ("#",)  # above aa1's code
+        assert codes["aa2/aa"] == () and codes["bb2/bb"] == ("*",)

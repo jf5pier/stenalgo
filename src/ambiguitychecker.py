@@ -21,6 +21,8 @@ Building (S5)); the rest of the module is the live Realization Phase and star/ha
 """
 
 from typing import Any
+import math
+from collections.abc import Callable
 import os
 import pickle
 from collections import defaultdict
@@ -446,6 +448,106 @@ def firstSymbolOfCodeIndex(index: int) -> str | None:
     return (None, STAR, HASH)[index] if index < 3 else STAR_HASH
 
 
+UNLISTED_CATEGORY_PRIORITY = GRAMCAT_PRIORITY["NOM"]
+"""The priority of a category missing from `GRAMCAT_PRIORITY`: that of `NOM` (best agreement, 95.8%, with the pairwise rules R4-R7
+over the 5,999 decided pairs of the 4,286 groups, measured 2026-10-08; 0 to 60 all give 95.7-95.8%)."""
+
+
+def frequencyBand(frequency: float) -> int:
+    """The decade of a frequency (`floor(log10)`; every frequency of 0 or less is one band below all others): two frequencies in different
+    bands are 'a frequency gap' (the frequency-ratio rule R4, as a total order instead of a pairwise ratio test)."""
+    return -99 if frequency <= 0 else math.floor(math.log10(frequency))
+
+
+def starHashRankKey(word: Word, lemmaFrequency: float) -> tuple[int, int, float, float, str, str]:
+    """The total order of the star/hash ranking (smaller = more canonical = less marked). Replaces the pairwise vote of
+    `decideStarHashMark` R4-R7, which can cycle and, on equal frequencies, depends on the order of its arguments. In order: the decade of
+    the word's own frequency (a gap outranks the category, as R4), the category priority (`GRAMCAT_PRIORITY`, `UNLISTED_CATEGORY_PRIORITY`
+    for the others, as R6), the word's frequency, then the frequency of its LEMMA (the sum over the words of its `lemmeGramCat`), its spelling
+    and its `lemmeGramCat`. The last three only separate words the earlier fields tie on, so the more popular lemma wins between two rare
+    forms of equal frequency (comparait/comparaît). Two lemmas that meet in several groups are ranked by their lemma frequency only,
+    in all of them (`_orderLemmasByFrequency`, applied on the list sorted by this key).
+    The word's own frequency leads and not its lemma's: measured 2026-10-08 on the whole theory, the mark keys typed (sum over the words of
+    frequency x star/hash keys) are 54.2k with this key, 54.4k with the pairwise rules and 63.8k (+17%) when the lemma frequency leads, as then
+    the rare form of a frequent lemma takes the unmarked stroke (`a` of avoir over `à`)."""
+    priority = GRAMCAT_PRIORITY.get(word.gramCat.name, UNLISTED_CATEGORY_PRIORITY)
+    return (-frequencyBand(word.frequency), -priority, -word.frequency, -lemmaFrequency, word.ortho, word.lemmeGramCat)
+
+
+def _wordIdentityKey(word: Word) -> tuple[str, str, str, str, str]:
+    """A total order on distinct Words (spelling, `lemmeGramCat`, gender, number, verb info), the last tie-break of every choice among words."""
+    return (word.ortho, word.lemmeGramCat, str(word.gender), str(word.number), str(word.infoVerb))
+
+
+def _frequenciesByLemmeGramCat(wordsByNode: dict[MarkNode, list[Word]]) -> dict[str, list[float]]:
+    """Every word's own frequency, listed per `lemmeGramCat` (the lemma-level frequency of `starHashRankKey` is their sum)."""
+    byLemma: dict[str, list[float]] = defaultdict(list)
+    for words in wordsByNode.values():
+        for word in words:
+            byLemma[word.lemmeGramCat].append(word.frequency)
+    return byLemma
+
+
+MIN_SHARED_GROUPS = 2
+"""Two lemmas that meet in at least this many star/hash groups are ranked by their lemma frequency in all of them."""
+
+
+def _orderLemmasByFrequency(ordered: list[MarkNode], clusters: list[list[Word]], find: Callable[[MarkNode], MarkNode],
+                            representative: dict[MarkNode, Word], lemmaFrequency: dict[str, float]) -> set[frozenset[str]]:
+    """The lemma rule, on a ranked node list, in place: two lemmas (`lemmeGramCat`) that meet in `MIN_SHARED_GROUPS` or more groups (comparer
+    and comparaître, with several homophone pairs among their forms) are always ranked by the frequency of the LEMMA, the more popular one
+    less marked, whichever of their forms is the more frequent in a given group. The lemmas linked this way form families; the nodes of a
+    family keep the positions they hold in `ordered` and are redistributed over them by (lemma frequency, then their old order), so the
+    result is again one total order (a permutation of the list, nothing can cycle). Returns the lemma pairs that meet in `MIN_SHARED_GROUPS`
+    groups or more, for which the colouring keeps the more popular lemma's code below the other's."""
+    shared: dict[tuple[str, str], int] = defaultdict(int)
+    for cluster in clusters:
+        lemmas = sorted({representative[find(markFamilyKey(word))].lemmeGramCat for word in cluster})
+        for pair in combinations(lemmas, 2):
+            shared[pair] += 1
+    parent: dict[str, str] = {}
+
+    def root(lemma: str) -> str:
+        parent.setdefault(lemma, lemma)
+        while parent[lemma] != lemma:
+            parent[lemma] = parent[parent[lemma]]
+            lemma = parent[lemma]
+        return lemma
+
+    for (first, second), count in sorted(shared.items()):
+        if count >= MIN_SHARED_GROUPS:
+            a, b = sorted((root(first), root(second)))
+            parent[b] = a
+    familyOf = {lemma: root(lemma) for lemma in parent}
+    positions: dict[str, list[int]] = defaultdict(list)
+    for i, node in enumerate(ordered):
+        family = familyOf.get(representative[node].lemmeGramCat)
+        if family is not None:
+            positions[family].append(i)
+    oldRank = {node: i for i, node in enumerate(ordered)}
+    for slots in positions.values():
+        members = sorted((ordered[i] for i in slots), key=lambda node: (
+            -lemmaFrequency[representative[node].lemmeGramCat], representative[node].lemmeGramCat, oldRank[node]))
+        for i, node in zip(slots, members):
+            ordered[i] = node
+    return {frozenset(pair) for pair, count in shared.items() if count >= MIN_SHARED_GROUPS}
+
+
+def _applyMarkingOverrides(ordered: list[MarkNode], conflicts: dict[MarkNode, set[MarkNode]],
+                           representative: dict[MarkNode, Word]) -> None:
+    """The per-pair overrides (R3, `MARKING_OVERRIDES`) on a ranked node list, in place: when two conflicting nodes' representatives are an
+    override pair, the one that must carry the mark is moved right after the other if it ranks before it. The pairs are taken in a fixed
+    order, so the result does not depend on the order of the input."""
+    for canonical in sorted(conflicts):
+        for other in sorted(conflicts[canonical]):
+            override = MARKING_OVERRIDES.get(frozenset({representative[canonical].ortho, representative[other].ortho}))
+            if override is None or representative[other].ortho != override or representative[canonical].ortho == override:
+                continue
+            if ordered.index(other) < ordered.index(canonical):
+                ordered.remove(other)
+                ordered.insert(ordered.index(canonical) + 1, other)
+
+
 def assignMarkNodeCodes(
     wordsByNode: dict[MarkNode, list[Word]], clusters: list[list[Word]],
     doubletPairs: frozenset[frozenset[str]] = frozenset(),
@@ -461,6 +563,8 @@ def assignMarkNodeCodes(
     frequent forms, frequency when it has no signal -- and each takes the lowest code none of its conflicting
     nodes holds yet (`assignStarHashCombos` order: (), *, #, *#, then more `*#` strokes).
     """
+    clusters = sorted(([*sorted(cluster, key=_wordIdentityKey)] for cluster in clusters),
+                      key=lambda cluster: [_wordIdentityKey(word) for word in cluster])  # the merges below are order-dependent
     parent: dict[MarkNode, MarkNode] = {}
     # per root: cluster index -> the spellings the merged node has in that cluster
     orthosIn: dict[MarkNode, dict[int, set[str]]] = defaultdict(dict)
@@ -486,6 +590,8 @@ def assignMarkNodeCodes(
             both = orthosIn[ra][c] | orthosIn[rb][c]
             if len(both) > max(len(orthosIn[ra][c]), len(orthosIn[rb][c])):
                 return
+        if rb > ra:
+            ra, rb = rb, ra  # the smaller node stays the root: the root is the node's name in the ranking
         parent[ra] = rb
         for c, orthos in orthosIn.pop(ra).items():
             orthosIn[rb].setdefault(c, set()).update(orthos)
@@ -508,30 +614,32 @@ def assignMarkNodeCodes(
     wordsByMerged: dict[MarkNode, list[Word]] = defaultdict(list)
     for node, words in wordsByNode.items():
         wordsByMerged[find(node)].extend(words)
-    representative = {node: max(words, key=lambda w: (w.frequency, w.ortho)) for node, words in wordsByMerged.items()}
-    frequency = {node: sum(w.frequency for w in words) for node, words in wordsByMerged.items()}
-
-    def compare(a: MarkNode, b: MarkNode) -> int:
-        marked = decideStarHashMark(representative[a], representative[b], doubletPairs)
-        if marked is representative[a]:
-            return 1
-        if marked is representative[b]:
-            return -1
-        return 0
+    representative = {node: max(words, key=lambda w: (w.frequency, _wordIdentityKey(w))) for node, words in wordsByMerged.items()}
+    lemmaFrequency: dict[str, float] = {}
+    for lemmeGramCat, frequencies in _frequenciesByLemmeGramCat(wordsByNode).items():
+        lemmaFrequency[lemmeGramCat] = math.fsum(frequencies)  # exactly rounded: independent of the order of the words
 
     forbiddenByRoot: dict[MarkNode, set[str]] = defaultdict(set)
     for node, symbols in (forbiddenSymbols or {}).items():
         forbiddenByRoot[find(node)] |= symbols
 
-    ordered = sorted(conflicts, key=lambda node: (-frequency[node], node))
-    ordered.sort(key=cmp_to_key(compare))
+    ordered = sorted(conflicts, key=lambda node: starHashRankKey(
+        representative[node], lemmaFrequency[representative[node].lemmeGramCat]) + (node,))
+    sharedLemmas = _orderLemmasByFrequency(ordered, clusters, find, representative, lemmaFrequency)
+    _applyMarkingOverrides(ordered, conflicts, representative)
     index: dict[MarkNode, int] = {}
     for node in ordered:
         taken = {index[other] for other in conflicts[node] if other in index}
         forbidden = forbiddenByRoot[node]
+        # a lemma that meets a more popular one in several groups takes a code above its partners' (the lemma rule)
+        lemma = representative[node].lemmeGramCat
+        floor = max((index[other] + 1 for other in conflicts[node] if other in index
+                     and frozenset({lemma, representative[other].lemmeGramCat}) in sharedLemmas
+                     and representative[other].lemmeGramCat != lemma), default=0)
         # the codes from the 4th on all start with `*#`, so the search ends after the (at most 3) forbidden ones
         limit = len(taken) + 1 + len(forbidden)
-        index[node] = next((r for r in range(limit) if r not in taken and firstSymbolOfCodeIndex(r) not in forbidden), -1)
+        index[node] = next((r for r in range(floor, floor + limit)
+                            if r not in taken and firstSymbolOfCodeIndex(r) not in forbidden), -1)
         if index[node] < 0:
             raise RuntimeError(f"no star/hash code is free for the mark node {node}: taken {sorted(taken)}, forbidden first symbols {sorted(forbidden)}")
     codes = assignStarHashCombos(max(index.values(), default=-1) + 1)
