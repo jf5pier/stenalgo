@@ -304,6 +304,27 @@
      "frequency": 0.12
     },
     {
+     "ortho": "aéra",
+     "before": "il",
+     "after": "",
+     "label": "indicatif passé, 3e sg.",
+     "phonology": "a.e.Ra",
+     "steno": "a/e/Ra",
+     "strokes": [
+      [
+       12
+      ],
+      [
+       14
+      ],
+      [
+       8,
+       12
+      ]
+     ],
+     "frequency": 0.0
+    },
+    {
      "ortho": "éraille",
      "before": "il",
      "after": "",
@@ -29822,9 +29843,9 @@
     },
     {
      "ortho": "cèle",
-     "before": "je",
+     "before": "il",
      "after": "",
-     "label": "impératif présent, 2e sg. · indicatif présent, 1re sg. / 3e sg. · subjonctif présent, 1re sg. / 3e sg.",
+     "label": "indicatif présent, 3e sg.",
      "phonology": "sEl",
      "steno": "s*ie#l/*#",
      "strokes": [

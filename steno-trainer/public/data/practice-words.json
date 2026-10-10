@@ -191499,17 +191499,22 @@
  },
  {
   "ortho": "rejeté",
-  "before": "le",
+  "before": "",
   "after": "",
-  "label": "participe passé, m. sg. · adjectif, m. sg.",
-  "phonology": "R°Z.te",
-  "steno": "R@aZ/te",
+  "label": "participe passé, m. sg.",
+  "phonology": "R°.Z°.te",
+  "steno": "R@a/vt@a/te",
   "strokes": [
    [
     8,
     11,
-    12,
-    24
+    12
+   ],
+   [
+    5,
+    7,
+    11,
+    12
    ],
    [
     7,
@@ -226038,6 +226043,32 @@
   "frequency": 4.43
  },
  {
+  "ortho": "rejette",
+  "before": "que je",
+  "after": "",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
+  "phonology": "R°.ZEt",
+  "steno": "R@a/vtiet/-l",
+  "strokes": [
+   [
+    8,
+    11,
+    12
+   ],
+   [
+    5,
+    7,
+    13,
+    14,
+    20
+   ],
+   [
+    23
+   ]
+  ],
+  "frequency": 4.43
+ },
+ {
   "ortho": "sofa",
   "before": "le",
   "after": "",
@@ -230332,7 +230363,7 @@
   "ortho": "bridge",
   "before": "le",
   "after": "",
-  "label": "nom, m. sg.",
+  "label": "nom, m. sg. · indicatif présent, 3e sg.",
   "phonology": "bRidZ",
   "steno": "svRidZ",
   "strokes": [
@@ -232531,33 +232562,6 @@
    [
     8,
     12
-   ]
-  ],
-  "frequency": 4.26
- },
- {
-  "ortho": "présidence",
-  "before": "la",
-  "after": "",
-  "label": "nom, f. sg.",
-  "phonology": "pRe.zi.d@s",
-  "steno": "pRe/twi/pv@s",
-  "strokes": [
-   [
-    4,
-    8,
-    14
-   ],
-   [
-    7,
-    9,
-    13
-   ],
-   [
-    4,
-    5,
-    11,
-    17
    ]
   ],
   "frequency": 4.26
