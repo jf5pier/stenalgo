@@ -407,12 +407,20 @@ def loadAllOrthosByLemme(paths: list[str]) -> dict[Lemme, set[str]]:
     but excluded-ortho output.
     """
     orthosByLemme: dict[Lemme, set[str]] = defaultdict(set)
-    for word in loadWords(paths, excludedWords=set()):
-        orthosByLemme[word.lemme].add(word.ortho)
+    # Only (lemme, ortho) is needed: read the rows raw, building a Word per row costs several seconds on the full lexicons
+    # (same row filter as loadWords: an empty ortho and a `#` comment row are skipped).
+    for path in paths:
+        if not os.path.exists(path):
+            continue
+        with open(path, encoding="utf-8", newline="") as tsvFile:
+            for row in csv.DictReader(tsvFile, delimiter="\t"):
+                if row.get("ortho") and not row["ortho"].startswith("#"):
+                    orthosByLemme[row["lemme"]].add(row["ortho"])
     return dict(orthosByLemme)
 
 
-def loadWords(paths: list[str], excludedWords: set[str] | None = None) -> list[Word]:
+def loadWords(paths: list[str], excludedWords: set[str] | None = None,
+              gramCats: frozenset[str] | None = None) -> list[Word]:
     """
     Lightweight standalone lexicon reader (row->Word mapping mirrors
     dictionary.py's Dictionary.readCorpus), independent of the full
@@ -426,6 +434,9 @@ def loadWords(paths: list[str], excludedWords: set[str] | None = None) -> list[W
     never be used as a donor/source for generation either, or a *derived*
     word (e.g. "juans") ends up in resources/LexiqueSynthetic.tsv carrying
     the same problem without itself being on the exclusion list.
+
+    `gramCats` (category names, e.g. {"NOM", "ADJ"}) keeps only the rows of those categories, without building a Word
+    for the others: a caller that reads one category (attestedSlots) saves most of the parse.
     """
     if excludedWords is None:
         excludedWords = loadExcludedWords()
@@ -436,6 +447,8 @@ def loadWords(paths: list[str], excludedWords: set[str] | None = None) -> list[W
         with open(path, encoding="utf-8") as tsvFile:
             for row in csv.DictReader(tsvFile, delimiter="\t"):
                 if not row.get("ortho") or row["ortho"].startswith("#") or row["ortho"] in excludedWords:
+                    continue
+                if gramCats is not None and row["cgram"] not in gramCats:
                     continue
                 words.append(Word(
                     ortho=row["ortho"], phonology=row["phon"], lemme=row["lemme"],

@@ -1,5 +1,7 @@
 """Unit tests for util/build_synthetic_lexicon.py: the convergence loop's pure
 decision function and the invariants of the moved S2_APPENDERS/constants."""
+from typing import Any
+
 from util.build_synthetic_lexicon import (
     MAX_ROUNDS,
     PICKLE_CACHE_PATHS,
@@ -95,3 +97,38 @@ def test_canonicalize_sorts_data_lines_and_keeps_the_header(tmp_path):
     assert path.read_text() == "ortho\tphon\na\t1\nb\t2\nc\t3\n"
     canonicalizeSynthetic(str(path))  # idempotent
     assert path.read_text() == "ortho\tphon\na\t1\nb\t2\nc\t3\n"
+
+
+# ── generateMissingNomAdjForms.inputsFingerprint (the S2.2 skip in rounds after the first) ─────────────────────
+
+def _fingerprintAfter(monkeypatch: Any, tmp_path: Any, mixte: list[str], synthetic: list[str]) -> str:
+    from util import generateMissingNomAdjForms as module
+    header = "ortho\tphon\tlemme\tcgram\tcgramortho\tgenre\tnombre\tinfover\tsyll_cv\torthosyll_cv\tfreqlivres\tfreqfilms2\tsource\n"
+    mixtePath, syntheticPath = tmp_path / "mixte.tsv", tmp_path / "synthetic.tsv"
+    mixtePath.write_text(header + "".join(mixte), encoding="utf-8")
+    syntheticPath.write_text(header + "".join(synthetic), encoding="utf-8")
+    monkeypatch.setattr(module, "LEXIQUE_MIXTE_PATH", str(mixtePath))
+    monkeypatch.setattr(module, "LEXIQUE_SYNTHETIC_PATH", str(syntheticPath))
+    monkeypatch.setattr(module, "EXCEPTIONS_PATH", str(tmp_path / "none1"))
+    monkeypatch.setattr(module, "MORPHALOU_FORMS_PATH", str(tmp_path / "none2"))
+    return module.inputsFingerprint(str(tmp_path / "none3"))
+
+
+def _row(ortho: str, lemme: str, cgram: str, genre: str = "", nombre: str = "") -> str:
+    return f"{ortho}\tp\t{lemme}\t{cgram}\t{cgram}\t{genre}\t{nombre}\t\ts\ts\t0\t0\tsynthetic\n"
+
+
+def test_fingerprint_ignores_the_order_and_the_unrelated_verb_rows(monkeypatch: Any, tmp_path: Any) -> None:
+    mixte = [_row("chat", "chat", "NOM", "m", "s")]
+    a = _fingerprintAfter(monkeypatch, tmp_path, mixte, [_row("chats", "chat", "NOM", "m", "p"), _row("aime", "aimer", "VER")])
+    b = _fingerprintAfter(monkeypatch, tmp_path, mixte, [_row("aime", "aimer", "VER"), _row("chats", "chat", "NOM", "m", "p"),
+                                                         _row("aimes", "aimer", "VER")])
+    assert a == b  # another verb's rows (what S2.1 adds in a later round) do not matter
+
+
+def test_fingerprint_sees_a_new_nom_adj_row_and_a_verb_row_under_a_noun_lemma(monkeypatch: Any, tmp_path: Any) -> None:
+    mixte = [_row("boire", "boire", "NOM", "m", "s")]
+    base = _fingerprintAfter(monkeypatch, tmp_path, mixte, [])
+    assert _fingerprintAfter(monkeypatch, tmp_path, mixte, [_row("boires", "boire", "NOM", "m", "p")]) != base
+    # `boire` is also a verb: a verb row filed under the lemme of a NOM/ADJ changes the spellings already present
+    assert _fingerprintAfter(monkeypatch, tmp_path, mixte, [_row("bois", "boire", "VER")]) != base

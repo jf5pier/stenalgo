@@ -5,13 +5,18 @@ the keyboard layout, then load or build the phonetic theory (PhoneticTheory.pick
 base onset/nucleus/coda strokes only, no homophone marks) and write its human view
 phonetic_theory.tsv -- always, pickle hit or miss.
 
-Run: python -m util.build_phonetic_theory   (from the repo root; it chdirs there)
+Run: python -m util.build_phonetic_theory [--theory-only]   (from the repo root; it chdirs there)
+--theory-only is the light rebuild between the rounds of the Synthetic Lexicon Building (S2) loop: it parses the
+lexicons, syllabifies, builds the phonetic theory and writes PhoneticTheory.pickle only (no Dictionary.pickle, no
+phonetic_theory.tsv), always from the lexicons. The ambiguity statistics of the layout work are not computed by
+either mode (Dictionary.ensureAmbiguityStats, called by util/optimize_keyboard.py).
 Requires resources/LexiqueMixte.tsv, resources/LexiqueSynthetic.tsv (python -m
 util.build_synthetic_lexicon; python lexique.py before that) and starboard3h.json.
 rm -f Dictionary.pickle PhoneticTheory.pickle after ANY lexicon or layout change
 (the cache is never checked for staleness).
 Outputs: Dictionary.pickle, PhoneticTheory.pickle, phonetic_theory.tsv.
 """
+import argparse
 import os
 import pickle
 
@@ -33,9 +38,10 @@ KEYBOARD_JSON_PATH = "starboard3h.json"
 
 def loadOrBuildDictionary() -> Dictionary:
     """Dictionary.pickle (hit) or the full S3 build (miss): Dictionary() ->
-    analyseSyllabification() -> Syllable.optimizeBiphonemeOrder() ->
-    analyseAmbiguities(), the Dictionary and its four Syllable-collection pickles
-    dumped back to back."""
+    analyseSyllabification() -> Syllable.optimizeBiphonemeOrder(), the Dictionary and
+    its four Syllable-collection pickles dumped back to back. The ambiguity statistics
+    (analyseAmbiguities, 16 s) are left out: the theory is the same without them and only
+    the keyboard layout work reads them (Dictionary.ensureAmbiguityStats)."""
     if os.path.exists(DICTIONARY_PICKLE_PATH):
         with open(DICTIONARY_PICKLE_PATH, "rb") as pfile:
             dictionary: Dictionary = pickle.load(pfile)
@@ -51,7 +57,6 @@ def loadOrBuildDictionary() -> Dictionary:
         dictionary.analyseSyllabification()
         Syllable.optimizeBiphonemeOrder()
 
-        dictionary.analyseAmbiguities()
         with open(DICTIONARY_PICKLE_PATH, "wb") as pfile:
             pickle.dump(dictionary, pfile)
             pickle.dump(Syllable.allPhonemeCol, pfile)
@@ -85,8 +90,30 @@ def loadOrBuildPhoneticTheory(dictionary: Dictionary, starboard: Starboard) -> d
     return phoneticTheory
 
 
-def main() -> None:
+def buildTheoryOnly() -> None:
+    """The light rebuild: the lexicons -> the phonetic theory -> PhoneticTheory.pickle, nothing else written. Always
+    rebuilds (a PhoneticTheory.pickle already there is overwritten)."""
+    with timedCall("phase", "util.build_phonetic_theory: light Dictionary build"):
+        dictionary = Dictionary()
+        dictionary.analyseSyllabification()
+        Syllable.optimizeBiphonemeOrder()
+    starboard = loadKeyboard(dictionary)
+    with timedCall("phase", "util.build_phonetic_theory: light phonetic theory"):
+        phoneticTheory = dictionary.buildPhoneticTheory(starboard)
+        with open(PHONETIC_THEORY_PICKLE_PATH, "wb") as pfile:
+            pickle.dump(phoneticTheory, pfile)
+    print(f"\nWrote {PHONETIC_THEORY_PICKLE_PATH} only (--theory-only): {len(phoneticTheory)} phonetic-theory entries.")
+
+
+def main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--theory-only", action="store_true",
+                        help="light rebuild: write PhoneticTheory.pickle only (the S2 loop's between-rounds step)")
+    args = parser.parse_args(argv)
     os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    if args.theory_only:
+        buildTheoryOnly()
+        return
     with timedCall("phase", "util.build_phonetic_theory: loadOrBuildDictionary"):
         dictionary = loadOrBuildDictionary()
     with timedCall("phase", "util.build_phonetic_theory: loadKeyboard"):

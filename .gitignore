@@ -6,6 +6,8 @@ __pycache__/
 Dictionary.pickle
 FeatureDiscrimator.pickle
 PhoneticTheory.pickle
+VerbReferences.pickle
+VerbReferences.pickle.*.tmp
 DisambiguatedTheory.pickle
 AugTheory.pickle*
 

@@ -28,6 +28,8 @@
 # already present in either TSV is treated as satisfied, not regenerated.
 from typing import Any
 import argparse
+import csv
+import hashlib
 import os
 from collections import Counter, defaultdict
 
@@ -51,6 +53,7 @@ from src.nomAdjParadigm import (
     morphalouOrthos,
 )
 from src.word import GramCat, Word
+from util._timing import timedCall
 
 LEXIQUE_MIXTE_PATH = "resources/LexiqueMixte.tsv"
 LEXIQUE_SYNTHETIC_PATH = "resources/LexiqueSynthetic.tsv"
@@ -62,6 +65,43 @@ SYNTHETIC_HEADER = (
     "ortho\tphon\tlemme\tcgram\tcgramortho\tgenre\tnombre\tinfover\t"
     "syll_cv\torthosyll_cv\tfreqlivres\tfreqfilms2\tsource\n"
 )
+
+
+STATE_ENV = "S2_NOMADJ_STATE"  # set by util.build_synthetic_lexicon for the length of one run, see inputsFingerprint
+NOM_ADJ = ("NOM", "ADJ")
+
+
+def _fileDigest(path: str) -> str:
+    if not os.path.exists(path):
+        return "absent"
+    digest = hashlib.md5()
+    with open(path, "rb") as f:
+        for block in iter(lambda: f.read(1 << 20), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def inputsFingerprint(morphalouPath: str = MORPHALOU_PATH_DEFAULT) -> str:
+    """A digest of everything the generation reads, for the Synthetic Lexicon Building (S2) loop to tell that a later
+    round has nothing new for this appender (the other appenders add verb rows). It reads: the NOM/ADJ rows of both
+    lexicons, the spellings already present under any NOM/ADJ lemma (any category: `boire` is a verb and a noun), the
+    exceptions table, Morphalou and the exclusion list. The Synthetic rows are taken as a set, so the order the
+    driver sorts them in does not matter."""
+    digest = hashlib.md5()
+    for path in (LEXIQUE_MIXTE_PATH, EXCEPTIONS_PATH, MORPHALOU_FORMS_PATH, morphalouPath, "excluded_words.txt"):
+        digest.update(f"{path}:{_fileDigest(path)}\n".encode())
+    nomAdjLemmes: set[str] = set()
+    with open(LEXIQUE_MIXTE_PATH, encoding="utf-8", newline="") as f:
+        nomAdjLemmes.update(row["lemme"] for row in csv.DictReader(f, delimiter="\t") if row["cgram"] in NOM_ADJ)
+    syntheticRows: list[dict[str, str]] = []
+    if os.path.exists(LEXIQUE_SYNTHETIC_PATH):
+        with open(LEXIQUE_SYNTHETIC_PATH, encoding="utf-8", newline="") as f:
+            syntheticRows = list(csv.DictReader(f, delimiter="\t"))
+    nomAdjLemmes.update(row["lemme"] for row in syntheticRows if row["cgram"] in NOM_ADJ)
+    nomAdjRows = sorted(tuple(row.values()) for row in syntheticRows if row["cgram"] in NOM_ADJ)
+    spellings = sorted({(row["lemme"], row["ortho"]) for row in syntheticRows if row["lemme"] in nomAdjLemmes})
+    digest.update(repr((nomAdjRows, spellings)).encode())
+    return digest.hexdigest()
 
 
 def wordToSyntheticRow(word: Word) -> str:
@@ -175,6 +215,14 @@ def main() -> None:
                          help="Skip Morphalou entirely and trust the donor table alone (not recommended).")
     args = parser.parse_args()
 
+    statePath = os.environ.get(STATE_ENV) if args.apply else None
+    if statePath and os.path.exists(statePath):
+        with timedCall("phase", "util.generateMissingNomAdjForms: inputs fingerprint"):
+            unchanged = open(statePath, encoding="utf-8").read() == inputsFingerprint(args.morphalou)
+        if unchanged:
+            print("Nothing this appender reads changed since its previous round: skipped (nothing to generate).")
+            return
+
     morphalou = None
     if args.no_morphalou:
         print("--no-morphalou: generating from the donor table alone, unverified against an external source.")
@@ -190,11 +238,17 @@ def main() -> None:
         print(f"WARNING: Morphalou not found at {args.morphalou!r} -- generating from the donor table alone, "
               f"unverified against an external source. Pass --morphalou PATH or --no-morphalou to silence this.")
 
-    words = loadWords([LEXIQUE_MIXTE_PATH, LEXIQUE_SYNTHETIC_PATH])
+    with timedCall("phase", "util.generateMissingNomAdjForms: parse the lexicons"):
+        # Each file is parsed once: the donor pool is Mixte then Synthetic, the donor tables use Mixte alone.
+        # Only NOM/ADJ rows are read (attestedSlots, the donor tables): the other categories are not even built.
+        nomAdj = frozenset(NOM_ADJ)
+        mixteWords = loadWords([LEXIQUE_MIXTE_PATH], gramCats=nomAdj)
+        words = mixteWords + loadWords([LEXIQUE_SYNTHETIC_PATH], gramCats=nomAdj)
     exceptions = loadNomAdjModelExceptions(EXCEPTIONS_PATH)
     # The donor tables are learned from the mixed lexicon alone: learning them from this appender's
     # own earlier rows let generated rows promote rare ending classes (the cross-round cascade).
-    tables = deriveNomAdjEndingTables(loadWords([LEXIQUE_MIXTE_PATH]))
+    with timedCall("phase", "util.generateMissingNomAdjForms: donor tables"):
+        tables = deriveNomAdjEndingTables(mixteWords)
     # Deliberately built from the UNFILTERED files (excluded rows included --
     # see loadAllOrthosByLemme) rather than from `words`: a slot whose only
     # attested spelling is itself excluded (e.g. "laponne", a deprecated
@@ -202,9 +256,10 @@ def main() -> None:
     # and without this the generator would re-derive and re-append that same
     # excluded ortho every run, never recognizing its own prior output as
     # already covering it (found via the conversation).
-    existingOrthoByLemme: dict[str, set[str]] = defaultdict(
-        set, loadAllOrthosByLemme([LEXIQUE_MIXTE_PATH, LEXIQUE_SYNTHETIC_PATH])
-    )
+    with timedCall("phase", "util.generateMissingNomAdjForms: existing spellings by lemme"):
+        existingOrthoByLemme: dict[str, set[str]] = defaultdict(
+            set, loadAllOrthosByLemme([LEXIQUE_MIXTE_PATH, LEXIQUE_SYNTHETIC_PATH])
+        )
 
     # A generated row can be the source slot of another missing slot of its lemma: iterate to the
     # fixed point here, not in the caller's rounds.
@@ -212,8 +267,9 @@ def main() -> None:
     sourceCounts: Counter[str] = Counter()
     roundWords = words
     while True:
-        newRows, roundSourceCounts, skippedReasons = generateRows(
-            roundWords, morphalou, exceptions, tables, existingOrthoByLemme)
+        with timedCall("phase", "util.generateMissingNomAdjForms: generateRows"):
+            newRows, roundSourceCounts, skippedReasons = generateRows(
+                roundWords, morphalou, exceptions, tables, existingOrthoByLemme)
         if not newRows:
             break
         generated += newRows
@@ -236,6 +292,11 @@ def main() -> None:
         print(f"Appended {len(generated)} rows to {LEXIQUE_SYNTHETIC_PATH}")
     elif generated:
         print("Dry-run: pass --apply to append these rows.")
+    if statePath:
+        # taken after the append: a later round whose inputs still match has nothing left to generate (the loop above
+        # runs to its own fixed point)
+        with open(statePath, "w", encoding="utf-8") as stateFile:
+            stateFile.write(inputsFingerprint(args.morphalou))
 
 
 if __name__ == "__main__":

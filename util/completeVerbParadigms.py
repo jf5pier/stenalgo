@@ -75,6 +75,7 @@ from src.verbparadigm import (
 from src.synthrules import UNVALIDATED_MODES, isRuleActive, loadDecisionsIfPresent, parseForcedRules
 from src.word import GramCat, Lemme, LemmeGramCat, Word
 from util._pronunciation import compare
+from util._timing import timedCall
 from util._verbreferences import VerbReferences, loadVerbReferences
 
 VERBISTE_VERBS_PATH = "resources/verbiste/verbs-fr.xml"
@@ -822,11 +823,16 @@ def writeSynthetic(path: str, candidates: list[Candidate]) -> int:
         if not fileExists:
             syntheticFile.write(SYNTHETIC_HEADER)
         for _lemmeGramCat, _info, word, _referenceWord in candidates:
+            # The Word constructor folds the n/m unit of an en-/em- + vowel verb into the nasal vowel (fix_e_n_en: enivre
+            # "@|i_v_R_#"), but the lexicons store the unit (Mixte and the committed Synthetic rows: "@|n_i_v_R_#",
+            # "e|n_i_v_r_e"), so the file keeps it, whichever rule built the row (enivrais, enamouré).
+            syllCV, orthosyllCV = reinsertLostNasalUnit(word.phonology, word.rawSyllCV, word.rawOrthosyllCV) or (
+                word.rawSyllCV, word.rawOrthosyllCV)
             fields = [
                 word.ortho, word.phonology, word.lemme, word.gramCat.name,
                 ",".join(gramCat.name for gramCat in word.orthoGramCat),
                 word.gender or "", word.number or "", word.infoVerb or "",
-                word.rawSyllCV, word.rawOrthosyllCV,
+                syllCV, orthosyllCV,
                 str(word.frequencyBook), str(word.frequencyFilm), "synthetic",
             ]
             line = "\t".join(fields)
@@ -875,32 +881,43 @@ def main() -> None:
     )
     args = parser.parse_args()
     references: VerbReferences | None = None
-    mechanisms = buildMechanisms(args.force_rule)
-    if mechanisms.judge is not None:
-        references = mechanisms.judge.references
-    referenceBar = buildReferenceBar(args.force_rule, references)
+    with timedCall("phase", "util.completeVerbParadigms: mechanisms and references"):
+        mechanisms = buildMechanisms(args.force_rule)
+        if mechanisms.judge is not None:
+            references = mechanisms.judge.references
+        referenceBar = buildReferenceBar(args.force_rule, references)
 
     print("Loading theory (uses PhoneticTheory.pickle if present)...")
-    theory, _starboard = loadTheoryAndKeyboard()
+    with timedCall("phase", "util.completeVerbParadigms: load the theory"):
+        theory, _starboard = loadTheoryAndKeyboard()
 
-    verbisteTemplates = loadVerbisteTemplates(VERBISTE_VERBS_PATH)
-    exceptions = loadVerbModelExceptions(EXCEPTIONS_PATH)
-    conjugationTemplates = parseConjugationTemplates(VERBISTE_CONJUGATIONS_PATH)
+    with timedCall("phase", "util.completeVerbParadigms: templates and exceptions"):
+        verbisteTemplates = loadVerbisteTemplates(VERBISTE_VERBS_PATH)
+        exceptions = loadVerbModelExceptions(EXCEPTIONS_PATH)
+        conjugationTemplates = parseConjugationTemplates(VERBISTE_CONJUGATIONS_PATH)
 
-    baselineDiscBy, baselineOrdered, strokeLemmeDiscriminators = extractDiscriminatingFeatures(theory)
+    # The discriminator features feed only the historical paths (--undersampled-only detection, --only-colliding filter):
+    # a default run skips these two full passes over the theory.
+    baselineDiscBy: dict[Any, Any] = {}
+    strokeLemmeDiscriminators: dict[Any, Any] = {}
+    if args.undersampled_only or args.only_colliding:
+        baselineDiscBy, _baselineOrdered, strokeLemmeDiscriminators = extractDiscriminatingFeatures(theory)
 
-    endingTables = deriveConjugationEndingTables(theory, verbisteTemplates, exceptions)
+    with timedCall("phase", "util.completeVerbParadigms: conjugation ending tables"):
+        endingTables = deriveConjugationEndingTables(theory, verbisteTemplates, exceptions)
     if endingTables.infinitiveOutliers:
         print(f"{len(endingTables.infinitiveOutliers)} infinitive outliers kept out of the ending tables "
               f"(sample: {', '.join(sorted(endingTables.infinitiveOutliers)[:10])})")
 
     skipLog: list[SkipReason] = []
-    structuralCandidates, structuralSkipped = findStructuralCandidates(
-        strokeLemmeDiscriminators, theory, verbisteTemplates, exceptions, conjugationTemplates,
-        endingTables, fullParadigms=not args.undersampled_only,
-        referenceBar=referenceBar, skipLog=skipLog, mechanisms=mechanisms,
-    )
-    writeSkipReasons(SKIP_REASONS_PATH, skipLog)
+    with timedCall("phase", "util.completeVerbParadigms: findStructuralCandidates"):
+        structuralCandidates, structuralSkipped = findStructuralCandidates(
+            strokeLemmeDiscriminators, theory, verbisteTemplates, exceptions, conjugationTemplates,
+            endingTables, fullParadigms=not args.undersampled_only,
+            referenceBar=referenceBar, skipLog=skipLog, mechanisms=mechanisms,
+        )
+    with timedCall("phase", "util.completeVerbParadigms: write the skip reasons and rejections"):
+        writeSkipReasons(SKIP_REASONS_PATH, skipLog)
     if referenceBar is not None or mechanisms.judge is not None:
         with open(BAR_REJECTIONS_PATH, "w", encoding="utf-8", newline="") as rejectionsFile:
             rejectionsFile.write(BAR_REJECTIONS_HEADER)
@@ -915,13 +932,14 @@ def main() -> None:
     # the full-corpus extraction results before the augmented pass builds its
     # own copy of them -- never hold two of these at once (see
     # temporarilyAugmented's docstring for why this matters).
-    baselineFeaturesetWords = buildDiscriminatorSelection(theory, baselineDiscBy)
-    del baselineDiscBy, baselineOrdered, strokeLemmeDiscriminators
+    baselineFeaturesetWords = buildDiscriminatorSelection(theory, baselineDiscBy) if args.only_colliding else {}
+    del baselineDiscBy, strokeLemmeDiscriminators
     gc.collect()
 
-    confirmedCandidates, collisionSkipped = confirmCandidates(
-        structuralCandidates, theory, baselineFeaturesetWords, args.only_colliding
-    )
+    with timedCall("phase", "util.completeVerbParadigms: confirmCandidates"):
+        confirmedCandidates, collisionSkipped = confirmCandidates(
+            structuralCandidates, theory, baselineFeaturesetWords, args.only_colliding
+        )
     skipped = structuralSkipped + collisionSkipped
 
     printReport(confirmedCandidates, skipped)
@@ -934,7 +952,8 @@ def main() -> None:
                 debugFile.write(f"SKIPPED\t{lemme}\t{reason}\n")
 
     if args.apply:
-        written = writeSynthetic(SYNTHETIC_PATH, confirmedCandidates)
+        with timedCall("phase", "util.completeVerbParadigms: writeSynthetic"):
+            written = writeSynthetic(SYNTHETIC_PATH, confirmedCandidates)
         print(f"\n--apply: appended {written} rows to {SYNTHETIC_PATH}")
         print(
             "NOTE: resources/LexiqueSynthetic.tsv is not yet merged into "

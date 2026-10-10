@@ -62,6 +62,7 @@ def _buildDictionaryInMemory() -> "Dictionary":
 def main(argv: list[str] | None = None) -> None:
     args = parseArgs(argv)
     dictionary = loadDictionary() if os.path.exists("Dictionary.pickle") else _buildDictionaryInMemory()
+    dictionary.ensureAmbiguityStats()  # Dictionary.pickle no longer carries them (util.build_phonetic_theory skips them)
 
     starboard = Starboard.fromJSONFile(SEED_PATH)
     if starboard is None:

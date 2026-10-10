@@ -25,7 +25,9 @@ rule exactly: the first source (Wiktionary, then GLÀFF) that has any variant fo
 Run: python -m util._verbreferences --conflicts OUT.tsv [--wiktionary PATH] [--glaff PATH]
 """
 import argparse
+import hashlib
 import os
+import pickle
 import sys
 from collections import defaultdict
 from collections.abc import Iterable, Iterator, Mapping
@@ -216,8 +218,44 @@ class VerbReferences:
         return "wiktionary plausible: wiktionary" if ref.preferred <= wik else "wiktionary implausible: glaff"
 
 
+REFERENCES_CACHE_PATH = "VerbReferences.pickle"  # gitignored; the parse of the two sources takes about 40 s, the cache 4 s
+
+
+def _referencesFingerprint(wiktionaryPath: str, glaffPath: str) -> str:
+    """md5 over the content of both source files and of this module (a change of the parser invalidates the cache),
+    so a stale cache cannot be served: the cache is keyed by what it was built from, not by its age."""
+    digest = hashlib.md5()
+    for path in (os.path.abspath(__file__), wiktionaryPath, glaffPath):
+        with open(path, "rb") as f:
+            for block in iter(lambda: f.read(1 << 22), b""):
+                digest.update(block)
+        digest.update(b"\0")
+    return digest.hexdigest()
+
+
 def loadVerbReferences(wiktionaryPath: str = WIKTIONARY_PATH, glaffPath: str = GLAFF_PATH,
-                       requireGlaff: bool = False) -> VerbReferences:
+                       requireGlaff: bool = False, cachePath: str | None = REFERENCES_CACHE_PATH) -> VerbReferences:
+    """The two reference sources, parsed (about 40 s) or read back from `cachePath` (a pickle of the parsed result,
+    first line = the fingerprint of its inputs, see _referencesFingerprint). The cache is used and written only when
+    both source files exist; `cachePath=None` always parses."""
+    cacheable = cachePath is not None and os.path.exists(wiktionaryPath) and bool(glaffPath) and os.path.exists(glaffPath)
+    fingerprint = _referencesFingerprint(wiktionaryPath, glaffPath) if cacheable else ""
+    if cacheable and cachePath is not None and os.path.exists(cachePath):
+        with open(cachePath, "rb") as cacheFile:
+            if cacheFile.readline().decode("ascii", "replace").strip() == fingerprint:
+                cached: VerbReferences = pickle.load(cacheFile)
+                return cached
+    references = _parseVerbReferences(wiktionaryPath, glaffPath, requireGlaff)
+    if cacheable and cachePath is not None:
+        temporary = f"{cachePath}.{os.getpid()}.tmp"
+        with open(temporary, "wb") as cacheFile:
+            cacheFile.write(fingerprint.encode("ascii") + b"\n")
+            pickle.dump(references, cacheFile, protocol=pickle.HIGHEST_PROTOCOL)
+        os.replace(temporary, cachePath)  # atomic: a reader never sees a half-written cache
+    return references
+
+
+def _parseVerbReferences(wiktionaryPath: str, glaffPath: str, requireGlaff: bool) -> VerbReferences:
     wiktionary, glaff = _Source(), _Source()
     with open(wiktionaryPath, encoding="utf-8", newline="") as f:
         header = f.readline().rstrip("\n")

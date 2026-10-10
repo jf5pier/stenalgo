@@ -9,6 +9,7 @@ from src.synthrules import (
     DEFAULT_PARAMS, SYNTH_RULES, isRuleActive, parseForcedRules, ruleGroupId,
 )
 from src.verbparadigm import deriveConjugationEndingTables, generateMissingConjugatedForm
+from src.word import GramCat, Word
 from src.test.verbparadigm_test import _FAKE_TEMPLATE, _make_finite, _make_infinitive
 from util._verbreferences import VerbReferences, _Source
 from util.completeVerbParadigms import ReferenceBar
@@ -145,3 +146,20 @@ def test_write_synthetic_never_appends_a_line_the_file_already_has(tmp_path: Any
     assert writeSynthetic(path, candidates) == 0
     with open(path, encoding="utf-8") as f:
         assert len(f.readlines()) == 2  # header + one row
+
+
+def test_write_synthetic_keeps_the_nasal_unit_of_en_em_verbs(tmp_path: Any) -> None:
+    """The Word constructor folds the n unit into the nasal vowel; the file stores it, as Mixte does."""
+    from util.completeVerbParadigms import writeSynthetic
+    word = Word(
+        ortho="enivrais", phonology="@nivRE", lemme="enivrer", gramCat=GramCat.VER, orthoGramCat=[GramCat.VER],
+        gender=None, number=None, infoVerb="ind:imp:1s;", rawSyllCV="@|i|v_R_E", rawOrthosyllCV="en|i|v_r_ais",
+        frequencyBook=0.0, frequencyFilm=0.0)
+    unrelated = _make_infinitive("efir", "efiR")
+    path = str(tmp_path / "LexiqueSynthetic.tsv")
+    candidates: Any = [("enivrer_VER", None, word, TARGET), ("efir_VER", None, unrelated, TARGET)]
+    assert writeSynthetic(path, candidates) == 2
+    with open(path, encoding="utf-8") as f:
+        rows = [line.rstrip("\n").split("\t") for line in f.readlines()[1:]]
+    assert rows[0][8:10] == ["@|n_i|v_R_E", "e|n_i|v_r_ais"]
+    assert rows[1][8:10] == [unrelated.rawSyllCV, unrelated.rawOrthosyllCV]

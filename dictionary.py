@@ -212,6 +212,19 @@ class Dictionary:
 
         Syllable.sortPhonemesCollections()
 
+    def hasAmbiguityStats(self) -> bool:
+        """Whether the three ambiguity tables are filled for every syllabic part (a Dictionary.pickle written before
+        2026-10-09 carries them; the phonetic-theory build no longer computes them, see ensureAmbiguityStats)."""
+        tables = (self.syllabicAmbiguity, self.lexicalAmbiguity, self.syllabicPartAmbiguity)
+        return all(table[part] for table in tables for part in ("onset", "nucleus", "coda"))
+
+    def ensureAmbiguityStats(self) -> None:
+        """analyseAmbiguities unless the tables are already there. Only the keyboard layout work reads them (S4,
+        util/optimize_keyboard.py, and generateBaseKeymap): the phonetic theory is the same without them, so
+        util.build_phonetic_theory leaves them out and the readers ask for them here."""
+        if not self.hasAmbiguityStats():
+            self.analyseAmbiguities()
+
     def analyseAmbiguities(self) -> None:
         """
         Analyse the syllabic ambiguities in the syllable collection.
@@ -246,6 +259,7 @@ class Dictionary:
         Generates a keymap of the different phonemes by trying to minimize ambiguities and 
         maximize the number of keystrokes that are in the right order to spell the words phonetically.
         """
+        self.ensureAmbiguityStats()
         
         def _greadyAssignKeymapPartition(keyboard: Keyboard, syllabicPart: str) -> list[str]:
             phonemeCol = Syllable.phonemeCollectionByPart(syllabicPart)
