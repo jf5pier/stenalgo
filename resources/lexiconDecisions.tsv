@@ -328,6 +328,7 @@ group_id	kind	level	signature	verdict	param	slots	counter	examples	note	date
 9000425906	mixte_rule	L1	R→∅ @ r [medial]	pending		14	21802	interrelations:5tERR°lasj§>5tER°lasj§;interrègne:5tERREN>5tEREN°;surréaliste:syRRealist>syRealist°	rec: review (heterogeneous, precision 0.00; corrects its member rows only)	
 90cae078aa	mixte_rule	L1	2→° @ e [medial]	pending		99	0	agnelage:aN2laZ>aN°laZ°;agnelet:aN2lE>aN°lE;agneline:aN2lin>aN°lin°	rec(opus): accept: schwa written 2 where Mixte writes ° elsewhere (amenuiser, chanceler)	
 910f9784fe	mixte_rule	L3	e→E @ é [medial] | abr:éger ind:fut:1s	pending		4	0	abrégerai:abReZ°Re>abREZ°Re;piégerai:pjeZ°Re>pjEZ°Re;protégerai:pRoteZ°Re>pROtEZ°Re	rec: accept (precision 1.00)	
+9122e600e4	mixte_rule	-	verb 2 on the plain letter e is the stem schwa: 2 -> ° (corseter, peser, menuiser; not eu)	accept		62	0	corseter;peser;menuiser	ruling 2026-10-10: systematic S1 rule src/mixterules.py schwaOfE; 62 verb rows, 25 lemmas, flageller excepted (E in the references); 41 exact, 8 up to o/O, 12 without reference	2026-10-10
 91e732cb58	mixte_typo	L4	s→S @ sc [initial] | NOM:um ms | schproum	pending		1	0	schproum:spRum>SpRum	rec: typo (single row)	
 92445f01fb	mixte_typo	L4	∅→j,i→u @ t,e [medial,medial] | NOM:rd ms | steward	pending		1	0	steward:stiwaRd>stjuwaRd	rec: typo (single row)	
 924dba635f	mixte_typo	L4	∅→i @ r [medial] | ADJ:er ms | marbrier	pending		1	0	marbrier:maRbRje>maRbRije	rec: typo (single row)	

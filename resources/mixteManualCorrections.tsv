@@ -3,6 +3,8 @@
 # `loadAllMixteCorrections` (src/mixtecorrections.py); a key present in both files, or matching no output row, fails the build.
 # manual-stray-glide-i (2026-10-09): the 26 rows where Mixte had a stray `i` before the glide (`contorsionnait` ...sijonE, not ...sjonE;
 #   `ij` -> `j`, `industrialis-` `ij` -> `i`), and `riant` Rj@ -> Rij@. Letters follow Lexique383 (no `=`); closed `O` kept.
+# manual-dropped-schwa (2026-10-10): the 15 rows of `rejeter` (13 finite and participle forms, the infinitive) and `épousseter` (infinitive) where Lexique383 drops the stem schwa (`rejeta` R°Zta -> R°Z°ta, `épousseter` epuste -> epus°te; `rejetions` R°Z°tj§ has it);
+#   (the other forms of `épousseter`, `époussetez` epus°te, have it); GLAFF lists the schwa variant of both.
 ortho	lemme	cgram	infover	genre	nombre	phon	syll_cv	orthosyll_cv	group_id
 autopsiais	autopsier	VER	ind:imp:1s;ind:imp:2s;			otOpsjE	o|t_O_p|s_j_E	au|t_o_p|s_i_ais	manual-stray-glide-i
 contorsionna	contorsionner	VER	ind:pas:3s;			k§tORsjona	k_§|t_O_R|s_j_o|n_a	c_on|t_o_r|s_i_o|nn_a	manual-stray-glide-i
@@ -34,3 +36,18 @@ remerciâmes	remercier	VER	ind:pas:1p;			R°mERsjam	R_°|m_E_R|s_j_a_m_#	r_e|m_e
 riant	riant	ADJ		m	s	Rij@	R_i|j_@	r_i|=_ant	manual-stray-glide-i
 riant	rire	VER	par:pre;			Rij@	R_i|j_@	r_i|=_ant	manual-stray-glide-i
 travaillerions	travailler	VER	cnd:pre:1p;			tRavaj°Rj§	t_R_a|v_a|j_°|R_j_§	t_r_a|v_a|ill_e|r_i_ons	manual-stray-glide-i
+rejeta	rejeter	VER	ind:pas:3s;			R°Z°ta	R_°|Z_°|t_a	r_e|j_e|t_a	manual-dropped-schwa
+rejetai	rejeter	VER	ind:pas:1s;			R°Z°te	R_°|Z_°|t_e	r_e|j_e|t_ai	manual-dropped-schwa
+rejetaient	rejeter	VER	ind:imp:3p;			R°Z°tE	R_°|Z_°|t_E	r_e|j_e|t_aient	manual-dropped-schwa
+rejetais	rejeter	VER	ind:imp:1s;ind:imp:2s;			R°Z°tE	R_°|Z_°|t_E	r_e|j_e|t_ais	manual-dropped-schwa
+rejetait	rejeter	VER	ind:imp:3s;			R°Z°tE	R_°|Z_°|t_E	r_e|j_e|t_ait	manual-dropped-schwa
+rejetant	rejeter	VER	par:pre;			R°Z°t@	R_°|Z_°|t_@	r_e|j_e|t_ant	manual-dropped-schwa
+rejetez	rejeter	VER	imp:pre:2p;ind:pre:2p;			R°Z°te	R_°|Z_°|t_e	r_e|j_e|t_ez	manual-dropped-schwa
+rejetons	rejeter	VER	imp:pre:1p;ind:pre:1p;			R°Z°t§	R_°|Z_°|t_§	r_e|j_e|t_ons	manual-dropped-schwa
+rejetèrent	rejeter	VER	ind:pas:3p;			R°Z°tER	R_°|Z_°|t_E_R_#	r_e|j_e|t_è_r_ent	manual-dropped-schwa
+rejeté	rejeter	VER	par:pas;	m	s	R°Z°te	R_°|Z_°|t_e	r_e|j_e|t_é	manual-dropped-schwa
+rejetée	rejeter	VER	par:pas;	f	s	R°Z°te	R_°|Z_°|t_e_#	r_e|j_e|t_é_e	manual-dropped-schwa
+rejetées	rejeter	VER	par:pas;	f	p	R°Z°te	R_°|Z_°|t_e_#	r_e|j_e|t_é_es	manual-dropped-schwa
+rejetés	rejeter	VER	par:pas;	m	p	R°Z°te	R_°|Z_°|t_e_#	r_e|j_e|t_é_s	manual-dropped-schwa
+rejeter	rejeter	VER	inf;			R°Z°te	R_°|Z_°|t_e	r_e|j_e|t_er	manual-dropped-schwa
+épousseter	épousseter	VER	inf;			epus°te	e|p_u|s_°|t_e	é|p_ou|ss_e|t_er	manual-dropped-schwa

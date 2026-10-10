@@ -16,6 +16,8 @@
 #               FINITE_SLOT_EXCLUDED_CODES, src/elicitation.py).
 # - neiger, bruiner (and other weather verbs): 1st and 2nd person impossible, util/fixDeleteWeatherVerbErrors.py (neiges sub:pre:2s,
 #   bruinasse sub:imp:1s deleted). The templates (grêl:er and the like) already leave these persons empty; the rows make the ruling explicit.
+# - bitter, stripper (every slot) and 50 NOM/ADJ slots (old_synthetic_row_not_promoted_2026-10-10): forms of the pre-regeneration Synthetic file
+#   that were reviewed on 2026-10-10 and not promoted (truncated or invented spellings, loanword plurals); not counted as missing.
 # - sourdre: strictly 3rd person, util/fixSourdreDefectiveGaps.py ("sourds" imp:pre:2s / ind:pre:1s deleted).
 # - foutre, advenir, renaître, grêler: NOT excluded, util/fixFoutreDefectiveTenses.py, fixAdvenirRenaitreGaps.py and fixGrelerFigurativePlural.py
 #   completed their templates (the slots exist), so nothing to list.
@@ -34,3 +36,55 @@ bruiner	VER	imp:pre:2s	weather_verb_3rd_person_only
 sourdre	VER	ind:pre:1s	defective_3rd_person_only
 sourdre	VER	ind:pre:2s	defective_3rd_person_only
 sourdre	VER	imp:pre:2s	defective_3rd_person_only
+bitter	VER	*	unreliable_anglicism_forms_2026-10-10
+stripper	VER	*	unreliable_anglicism_forms_2026-10-10
+autologue	ADJ	ms	old_synthetic_row_not_promoted_2026-10-10
+bifide	ADJ	mp	old_synthetic_row_not_promoted_2026-10-10
+burgonde	ADJ	ms	old_synthetic_row_not_promoted_2026-10-10
+constat	ADJ	fp	old_synthetic_row_not_promoted_2026-10-10
+deltoïde	ADJ	mp	old_synthetic_row_not_promoted_2026-10-10
+dégueu	ADJ	fp	old_synthetic_row_not_promoted_2026-10-10
+frigide	ADJ	mp	old_synthetic_row_not_promoted_2026-10-10
+furioso	ADJ	mp	old_synthetic_row_not_promoted_2026-10-10
+giocoso	ADJ	mp	old_synthetic_row_not_promoted_2026-10-10
+huguenot	ADJ	fp	old_synthetic_row_not_promoted_2026-10-10
+impavide	ADJ	mp	old_synthetic_row_not_promoted_2026-10-10
+monocorde	ADJ	mp	old_synthetic_row_not_promoted_2026-10-10
+mouride	ADJ	fs	old_synthetic_row_not_promoted_2026-10-10
+mouride	ADJ	mp	old_synthetic_row_not_promoted_2026-10-10
+paca	ADJ	fp	old_synthetic_row_not_promoted_2026-10-10
+paca	ADJ	fs	old_synthetic_row_not_promoted_2026-10-10
+sienne	ADJ	fp	old_synthetic_row_not_promoted_2026-10-10
+solognot	ADJ	fp	old_synthetic_row_not_promoted_2026-10-10
+turpide	ADJ	fs	old_synthetic_row_not_promoted_2026-10-10
+turpide	ADJ	mp	old_synthetic_row_not_promoted_2026-10-10
+zarbi	ADJ	fs	old_synthetic_row_not_promoted_2026-10-10
+aprèm	NOM	fp	old_synthetic_row_not_promoted_2026-10-10
+bardo	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+body	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+caddy	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+catch	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+durit	NOM	fp	old_synthetic_row_not_promoted_2026-10-10
+fiat	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+féodal	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+ganja	NOM	fp	old_synthetic_row_not_promoted_2026-10-10
+goy	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+hambourgeois	NOM	ms	old_synthetic_row_not_promoted_2026-10-10
+hollandais	NOM	ms	old_synthetic_row_not_promoted_2026-10-10
+ketch	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+lapon	NOM	fp	old_synthetic_row_not_promoted_2026-10-10
+media	NOM	fp	old_synthetic_row_not_promoted_2026-10-10
+moria	NOM	fp	old_synthetic_row_not_promoted_2026-10-10
+paddy	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+permalloy	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+pitch	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+potlatch	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+ria	NOM	fp	old_synthetic_row_not_promoted_2026-10-10
+rébecca	NOM	fp	old_synthetic_row_not_promoted_2026-10-10
+scratch	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+stegomya	NOM	fp	old_synthetic_row_not_promoted_2026-10-10
+stretch	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+tact	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+tsarévitch	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+tzarevitch	NOM	mp	old_synthetic_row_not_promoted_2026-10-10
+une	NOM	fp	old_synthetic_row_not_promoted_2026-10-10
