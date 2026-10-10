@@ -7895,15 +7895,16 @@
   "before": "",
   "after": "",
   "label": "adjectif · adverbe",
-  "phonology": "o.k",
-  "steno": "ae/k-",
+  "phonology": "o.ke",
+  "steno": "ae/ke",
   "strokes": [
    [
     12,
     14
    ],
    [
-    2
+    2,
+    14
    ]
   ],
   "frequency": 234.89
@@ -14057,8 +14058,8 @@
   "before": "",
   "after": "",
   "label": "participe passé, m. sg.",
-  "phonology": "E.sEj.e",
-  "steno": "ie/siej/e",
+  "phonology": "E.sE.je",
+  "steno": "ie/sie/Rwe",
   "strokes": [
    [
     13,
@@ -14067,10 +14068,11 @@
    [
     3,
     13,
-    14,
-    16
+    14
    ],
    [
+    8,
+    9,
     14
    ]
   ],
@@ -29178,9 +29180,9 @@
  },
  {
   "ortho": "essaye",
-  "before": "qu'il",
+  "before": "que j'",
   "after": "",
-  "label": "subjonctif présent, 3e sg.",
+  "label": "subjonctif présent, 1re sg. / 3e sg.",
   "phonology": "E.sEj",
   "steno": "ie/siej/-l",
   "strokes": [
@@ -29661,14 +29663,15 @@
   "before": "",
   "after": "",
   "label": "infinitif",
-  "phonology": "@.pe.Se",
-  "steno": "@/pe/pme/-R",
+  "phonology": "@.pE.Se",
+  "steno": "@/pie/pme/-R",
   "strokes": [
    [
     11
    ],
    [
     4,
+    13,
     14
    ],
    [
@@ -66018,15 +66021,16 @@
   "before": "",
   "after": "",
   "label": "participe présent",
-  "phonology": "Ej.@",
-  "steno": "iej/@",
+  "phonology": "E.j@",
+  "steno": "ie/Rw@",
   "strokes": [
    [
     13,
-    14,
-    16
+    14
    ],
    [
+    8,
+    9,
     11
    ]
   ],
@@ -68707,25 +68711,6 @@
   "frequency": 20.81
  },
  {
-  "ortho": "ayez",
-  "before": "que vous",
-  "after": "",
-  "label": "subjonctif présent, 2e pl.",
-  "phonology": "Ej.e",
-  "steno": "iej/e",
-  "strokes": [
-   [
-    13,
-    14,
-    16
-   ],
-   [
-    14
-   ]
-  ],
-  "frequency": 20.8
- },
- {
   "ortho": "prenons",
   "before": "nous",
   "after": "",
@@ -71180,14 +71165,15 @@
   "before": "l'",
   "after": "",
   "label": "participe passé, m. sg. · adjectif, m. sg.",
-  "phonology": "@.te.Re",
-  "steno": "@/te/Re",
+  "phonology": "@.tE.Re",
+  "steno": "@/tie/Re",
   "strokes": [
    [
     11
    ],
    [
     7,
+    13,
     14
    ],
    [
@@ -72766,16 +72752,17 @@
   "before": "le",
   "after": "",
   "label": "nom, m. sg.",
-  "phonology": "REj.§",
-  "steno": "Riej/ai",
+  "phonology": "RE.j§",
+  "steno": "Rie/Rwai",
   "strokes": [
    [
     8,
     13,
-    14,
-    16
+    14
    ],
    [
+    8,
+    9,
     12,
     13
    ]
@@ -79650,14 +79637,15 @@
   "before": "",
   "after": "",
   "label": "infinitif",
-  "phonology": "@.te.Re",
-  "steno": "@/te/Re/-R",
+  "phonology": "@.tE.Re",
+  "steno": "@/tie/Re/-R",
   "strokes": [
    [
     11
    ],
    [
     7,
+    13,
     14
    ],
    [
@@ -87528,8 +87516,8 @@
   "before": "",
   "after": "",
   "label": "infinitif",
-  "phonology": "@.tRe.ne",
-  "steno": "@/tRe/mRe/-R",
+  "phonology": "@.tRE.ne",
+  "steno": "@/tRie/mRe/-R",
   "strokes": [
    [
     11
@@ -87537,6 +87525,7 @@
    [
     7,
     8,
+    13,
     14
    ],
    [
@@ -97578,8 +97567,8 @@
   "before": "la",
   "after": "",
   "label": "nom, f. sg.",
-  "phonology": "lEj",
-  "steno": "mtiej",
+  "phonology": "lEj.di",
+  "steno": "mtiej/pvi",
   "strokes": [
    [
     6,
@@ -97587,6 +97576,11 @@
     13,
     14,
     16
+   ],
+   [
+    4,
+    5,
+    13
    ]
   ],
   "frequency": 13.47
@@ -123643,8 +123637,8 @@
   "before": "l'",
   "after": "",
   "label": "adjectif, m. sg.",
-  "phonology": "e.fREj.@",
-  "steno": "e/kpRiej/@",
+  "phonology": "e.fRE.j@",
+  "steno": "e/kpRie/Rw@",
   "strokes": [
    [
     14
@@ -123654,10 +123648,11 @@
     4,
     8,
     13,
-    14,
-    16
+    14
    ],
    [
+    8,
+    9,
     11
    ]
   ],
@@ -123798,14 +123793,15 @@
   "before": "",
   "after": "",
   "label": "infinitif",
-  "phonology": "@.se.Ne",
-  "steno": "@/se/we/-R",
+  "phonology": "@.sE.Ne",
+  "steno": "@/sie/we/-R",
   "strokes": [
    [
     11
    ],
    [
     3,
+    13,
     14
    ],
    [
@@ -141393,8 +141389,8 @@
   "before": "l'",
   "after": "",
   "label": "participe passé, m. sg. · adjectif, m. sg.",
-  "phonology": "@.tRe.ne",
-  "steno": "@/tRe/mRe",
+  "phonology": "@.tRE.ne",
+  "steno": "@/tRie/mRe",
   "strokes": [
    [
     11
@@ -141402,6 +141398,7 @@
    [
     7,
     8,
+    13,
     14
    ],
    [
@@ -144521,17 +144518,18 @@
   "before": "le",
   "after": "",
   "label": "nom, m. sg.",
-  "phonology": "kREj.§",
-  "steno": "kRiej/ai",
+  "phonology": "kRE.j§",
+  "steno": "kRie/Rwai",
   "strokes": [
    [
     2,
     8,
     13,
-    14,
-    16
+    14
    ],
    [
+    8,
+    9,
     12,
     13
    ]
@@ -148038,14 +148036,15 @@
   "before": "l'",
   "after": "",
   "label": "participe passé, m. sg. · adjectif, m. sg.",
-  "phonology": "@.pe.Se",
-  "steno": "@/pe/pme",
+  "phonology": "@.pE.Se",
+  "steno": "@/pie/pme",
   "strokes": [
    [
     11
    ],
    [
     4,
+    13,
     14
    ],
    [
@@ -150088,8 +150087,8 @@
   "before": "",
   "after": "",
   "label": "infinitif",
-  "phonology": "@.be.te",
-  "steno": "@/sve/te/-R",
+  "phonology": "@.bE.te",
+  "steno": "@/svie/te/-R",
   "strokes": [
    [
     11
@@ -150097,6 +150096,7 @@
    [
     3,
     5,
+    13,
     14
    ],
    [
@@ -150946,16 +150946,17 @@
   "before": "les",
   "after": "",
   "label": "nom, m. pl.",
-  "phonology": "REj.§",
-  "steno": "Riej/ai/-s",
+  "phonology": "RE.j§",
+  "steno": "Rie/Rwai/-s",
   "strokes": [
    [
     8,
     13,
-    14,
-    16
+    14
    ],
    [
+    8,
+    9,
     12,
     13
    ],
@@ -156853,14 +156854,15 @@
   "before": "",
   "after": "",
   "label": "infinitif",
-  "phonology": "@.ke.te",
-  "steno": "@/ke/te/-R",
+  "phonology": "@.kE.te",
+  "steno": "@/kie/te/-R",
   "strokes": [
    [
     11
    ],
    [
     2,
+    13,
     14
    ],
    [
@@ -175312,8 +175314,8 @@
   "before": "",
   "after": "",
   "label": "participe passé, m. sg.",
-  "phonology": "E.fREj.e",
-  "steno": "ie/kpRiej/e",
+  "phonology": "E.fRE.je",
+  "steno": "ie/kpRie/Rwe",
   "strokes": [
    [
     13,
@@ -175324,10 +175326,11 @@
     4,
     8,
     13,
-    14,
-    16
+    14
    ],
    [
+    8,
+    9,
     14
    ]
   ],
@@ -185379,14 +185382,15 @@
   "before": "l'",
   "after": "",
   "label": "participe passé, f. sg. · adjectif, f. sg.",
-  "phonology": "@.te.Re",
-  "steno": "@/te/Re/-j",
+  "phonology": "@.tE.Re",
+  "steno": "@/tie/Re/-j",
   "strokes": [
    [
     11
    ],
    [
     7,
+    13,
     14
    ],
    [
@@ -208033,8 +208037,8 @@
   "before": "",
   "after": "",
   "label": "participe passé, f. sg.",
-  "phonology": "E.fREj.e",
-  "steno": "ie/kpRiej/e/-j",
+  "phonology": "E.fRE.je",
+  "steno": "ie/kpRie/Rwe/-j",
   "strokes": [
    [
     13,
@@ -208045,10 +208049,11 @@
     4,
     8,
     13,
-    14,
-    16
+    14
    ],
    [
+    8,
+    9,
     14
    ],
    [
@@ -211669,14 +211674,15 @@
   "before": "",
   "after": "",
   "label": "infinitif",
-  "phonology": "@.ke.se",
-  "steno": "@/ke/se/-R",
+  "phonology": "@.kE.se",
+  "steno": "@/kie/se/-R",
   "strokes": [
    [
     11
    ],
    [
     2,
+    13,
     14
    ],
    [
@@ -228851,26 +228857,6 @@
   "frequency": 4.37
  },
  {
-  "ortho": "ayons",
-  "before": "que nous",
-  "after": "",
-  "label": "subjonctif présent, 1re pl.",
-  "phonology": "Ej.§",
-  "steno": "iej/ai",
-  "strokes": [
-   [
-    13,
-    14,
-    16
-   ],
-   [
-    12,
-    13
-   ]
-  ],
-  "frequency": 4.36
- },
- {
   "ortho": "conduite",
   "before": "",
   "after": "",
@@ -232562,6 +232548,52 @@
    [
     8,
     12
+   ]
+  ],
+  "frequency": 4.26
+ },
+ {
+  "ortho": "présidence",
+  "before": "la",
+  "after": "",
+  "label": "nom, f. sg.",
+  "phonology": "pRe.zi.d@s",
+  "steno": "pRe/twi/pv@s",
+  "strokes": [
+   [
+    4,
+    8,
+    14
+   ],
+   [
+    7,
+    9,
+    13
+   ],
+   [
+    4,
+    5,
+    11,
+    17
+   ]
+  ],
+  "frequency": 4.26
+ },
+ {
+  "ortho": "pubs",
+  "before": "les",
+  "after": "",
+  "label": "nom, pl.",
+  "phonology": "p9b",
+  "steno": "p@j/-s",
+  "strokes": [
+   [
+    4,
+    11,
+    16
+   ],
+   [
+    17
    ]
   ],
   "frequency": 4.26

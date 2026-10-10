@@ -2,37 +2,39 @@
 
 Constants: RULE_BUDGET=30, EXCEPTION_ALPHA=2.0, EXCLUSION_COST=5.0, FORM_COST=100.0, SWAP_CANDIDATES=20, SWAP_PASSES=3, RULE_OVERLAP_MAX=0.5, MAX_EXCEPTION_RATE=0.05. Growth forms and fusions come from `affix_decisions.json`.
 
-Pending decisions: **0** (none)
+Pending decisions: **3**
 
+- growth prefix `ré` /Re/ -- no growth verdict: anchor alone
+- fusion prefix `rai|re|rhé|ré|réh` /Re/ -- parts ré, re, rhé; closest decided merge `ra|rai|raie|re|rhé|ré|réh`
+- fusion suffix `er|ve|ver|wé|é` /ve/ -- parts ver; closest decided merge `ve|ver|wé`
 
-Selected rules with attestedShare < 0.5 (candidate pseudo-affixes like `ma-`): **13** -- `a|ah|ha|hâ|â`, `co+col+com+con+cor`, `é`, `ain|hin|im|in`, `ai|aî|e|ei|hai|he|hê|é`, `au`, `der|dé|dée`, `ra|rai|raie|re|rhé|ré|réh`, `pa`, `ma|mah|mâ`, `e|hi|hy|i|y|î`, `o`, `de|dea|di|die|dis|dy|dî`
+Selected rules with attestedShare < 0.5 (candidate pseudo-affixes like `ma-`): **12** -- `a|ah|ha|hâ|â`, `co+col+com+con+cor`, `é`, `ain|hin|im|in`, `ai|aî|e|ei|hai|he|hê|é`, `au`, `der|dé|dée`, `pa`, `ma|mah|mâ`, `e|hi|hy|i|y|î`, `de|dea|di|die|dis|dy|dî`, `o`
 
 ## Savings curve (cumulative total after each acceptance, 1..40)
 
-17432, 25935, 32557, 39882, 45984, 51527, 56970, 61539, 66231, 70863, 75536, 80263, 85234, 88807, 92339, 95639, 98895, 101916, 105099, 108164, 110814, 113222, 116389, 118859, 121241, 123696, 125974, 128189, 130385, 132514
+16046, 24110, 31048, 37031, 43152, 48545, 53988, 58568, 63289, 67981, 72615, 77343, 82302, 85875, 89373, 92575, 95783, 98806, 101834, 104482, 107203, 110368, 112751, 115206, 117412, 119655, 121870, 123998, 126194, 128311
 
-## 1. prefix `a|ah|ha|hâ|â` -- keys (9, 16) = `w-j`
+## 1. prefix `a|ah|ha|hâ|â` -- keys (2, 18) = `k-k`
 
 forms: `a|ah|ha|hâ|â`(k=1), `a|ah|ha|hâ|â[R@|RE|Re]·`(k=2)
-- score 17432.3, strokeFreqSaved 17983.3, keySimilarity -0.90 -- NOT phonetically motivated
+- score 16045.6, strokeFreqSaved 17591.6, keySimilarity -0.90 -- NOT phonetically motivated
 - attestedShare 0.26; exception rate 1.5%; top categories: VER 52%, NOM 32%, ADJ 6%
 - fused spelling variants: a, ah, ha, hâ, â (new conflict freq 7.6)
-- word exceptions 160 (freq 188.0); scope fallbacks 15
-- top exceptions: attaque, attaque, allée, âgée, âgé, attaques, arabes, attaquent, arabe, arabe
-    arrête: a/Riet -> Rwiejt
-    amour: a/m@eR -> mw@ejR
-    avais: a/vie/-d -> vwiej/-d
-    assez: a/se -> swej
-    avais: a/vie/-k -> vwiej/-k
-    ami: a/mi -> mwij
+- word exceptions 239 (freq 680.5); scope fallbacks 17
+- top exceptions: assez, arrière, arrêt, arrière, accueil, affection, allée, âgée, âgé, attaquent
+    arrête: a/Riet -> kRiekt
+    amour: a/m@eR -> km@ekR
+    avais: a/vie/-d -> kviek/-d
+    avais: a/vie/-k -> kviek/-k
+    ami: a/mi -> kmik
 
 ## 2. suffix `ment` -- keys (16, 20, 25) = `-jtm`
 
 forms: `ment`(k=1), `·[C{1,2}[eui]+]ment`(k=2)
-- score 8503.2, strokeFreqSaved 8763.2, keySimilarity 0.44 -- NOT phonetically motivated
-- attestedShare 0.76; exception rate 0.0%; top categories: ADV 60%, NOM 39%, ADJ 0%
-- word exceptions 1 (freq 0.0); scope fallbacks 32
-- top exceptions: blèsement
+- score 8064.7, strokeFreqSaved 8479.7, keySimilarity 0.44 -- NOT phonetically motivated
+- attestedShare 0.76; exception rate 0.1%; top categories: ADV 60%, NOM 39%, ADJ 0%
+- word exceptions 2 (freq 0.0); scope fallbacks 63
+- top exceptions: blèsement, blèsements
     moment: mae/m@ -> maejtm
     seulement: s@/mt@a/m@ -> s@jtm
     tellement: tie/mt@a/m@ -> tiejtm
@@ -40,64 +42,50 @@ forms: `ment`(k=1), `·[C{1,2}[eui]+]ment`(k=2)
     sûrement: s@i/R@a/m@ -> s@ijtm
     complètement: kai/pmtie/t@a/m@ -> kai/pmtiejtm
 
-## 3. prefix `am|an|ant|em|en|ench|enh|ham|han|hen` -- keys (4, 6, 16) = `pm-j`
+## 3. prefix `am|an|ant|em|en|ench|enh|ham|han|hen` -- keys (3, 6, 18) = `sm-k`
 
 forms: `am|an|ant|em|en|ench|enh|ham|han|hen`(k=1), `am|an|ant|em|en|ench|enh|ham|han|hen[en:C{1,2}@]·`(k=2)
-- score 7324.3, strokeFreqSaved 7617.2, keySimilarity 0.02 -- NOT phonetically motivated
-- attestedShare 0.54; exception rate 0.9%; top categories: VER 48%, NOM 33%, ADV 10%
+- score 6937.6, strokeFreqSaved 7565.0, keySimilarity -0.44 -- NOT phonetically motivated
+- attestedShare 0.54; exception rate 0.8%; top categories: VER 48%, NOM 33%, ADV 10%
 - fused spelling variants: am, an, ant, em, en, ench, enh, ham, han, hen (new conflict freq 3.0)
-- word exceptions 64 (freq 18.9); scope fallbacks 31
-- top exceptions: emplacement, emplit, amplement, empli, entassés, enchaîne, emplacements, ampli, entasser, envient
-    enfants: @/kp@/-s -> kpm@j/-s
-    enfant: @/kp@ -> kpm@j
-    enfin: @/kpaie -> kpmaiej
-    entendu: @/t@/pv@i -> pvm@ij
-    ensemble: @/s@jl -> spm@jl
-    envie: @/vi -> pvmij
+- word exceptions 97 (freq 71.2); scope fallbacks 77
+- top exceptions: engagé, engager, engagée, engrais, envol, enchaîné, engagés, engagez, engagé, enchaîner
+    enfants: @/kp@/-s -> kspm@k/-s
+    enfant: @/kp@ -> kspm@k
+    enfin: @/kpaie -> kspmaiek
+    entendu: @/t@/pv@i -> spvm@ik
+    ensemble: @/s@jl -> sm@jkl
+    envie: @/vi -> svmik
 
-## 4. prefix `co+col+com+con+cor` -- keys (9, 19) = `w-d`
+## 4. prefix `re|reh` -- keys (9, 16) = `w-j`
+
+forms: `re|reh`(k=1)
+- score 6121.1, strokeFreqSaved 6220.0, keySimilarity -0.33 -- NOT phonetically motivated
+- attestedShare 0.82; exception rate 1.4%; top categories: VER 75%, NOM 22%, ADJ 3%
+- fused spelling variants: re, reh (new conflict freq 0.0)
+- word exceptions 138 (freq 49.5); scope fallbacks 0
+- top exceptions: relax, relais, recours, relax, relève, reçoivent, reçoive, relaxe, rené, relaxe
+    revoir: R@a/vwaR -> vwajR
+    regardez: R@a/ksaR/pve/-k -> kswajR/pve/-k
+    reviens: R@a/vRwaie/-k -> vRwaiej/-k
+    regarder: R@a/ksaR/pve/-R -> kswajR/pve/-R
+    retour: R@a/t@eR -> tw@ejR
+    retard: R@a/taR -> twajR
+
+## 5. prefix `co+col+com+con+cor` -- keys (9, 19) = `w-d`
 
 forms: `co+col+com+con+cor`(k=1), `co+col+com+con+cor[m@]·`(k=2)
-- score 6621.9, strokeFreqSaved 8180.7, keySimilarity -0.08 -- NOT phonetically motivated
-- attestedShare 0.42; exception rate 3.3%; top categories: VER 48%, NOM 37%, ADJ 8%
-- word exceptions 203 (freq 674.4); scope fallbacks 22
-- top exceptions: connais, connaît, connard, connard, connards, connu, coté, coté, coffrer, connue
+- score 5983.2, strokeFreqSaved 7861.7, keySimilarity -0.08 -- NOT phonetically motivated
+- attestedShare 0.42; exception rate 3.8%; top categories: VER 48%, NOM 37%, ADJ 8%
+- word exceptions 364 (freq 756.8); scope fallbacks 53
+- top exceptions: connais, connaît, connard, connard, concert, confier, confié, connards, connu, coté
     combien: kai/svRwaie -> svRwaied
     comprends: kai/pR@/-k -> pRw@d/-k
     compris: kai/pRi -> pRwid
     confiance: kai/kpRw@s -> kpRw@sd
     commence: kae/m@s -> mw@sd
 
-## 5. prefix `re|reh` -- keys (9, 18) = `w-k`
-
-forms: `re|reh`(k=1)
-- score 6102.2, strokeFreqSaved 6199.8, keySimilarity -0.33 -- NOT phonetically motivated
-- attestedShare 0.82; exception rate 0.6%; top categories: VER 75%, NOM 22%, ADJ 3%
-- fused spelling variants: re, reh (new conflict freq 0.0)
-- word exceptions 40 (freq 48.8); scope fallbacks 0
-- top exceptions: remords, relax, requin, relax, requins, relis, rené, recoins, relique, reliques
-    revoir: R@a/vwaR -> vwakR
-    regardez: R@a/ksaR/pve/-k -> kswakR/pve/-k
-    reviens: R@a/vRwaie/-k -> vRwaiek/-k
-    regarder: R@a/ksaR/pve/-l -> kswakR/pve/-l
-    retour: R@a/t@eR -> tw@ekR
-    retard: R@a/taR -> twakR
-
-## 6. suffix `ccion|cion|cyon|sion|ssion|tion|tions` -- keys (16, 17, 20) = `-jst`
-
-forms: `ccion|cion|cyon|sion|ssion|tion|tions`(k=1), `·[tion:C*[ai]]ccion|cion|cyon|sion|ssion|tion|tions`(k=2)
-- score 5542.8, strokeFreqSaved 5915.0, keySimilarity 0.66
-- attestedShare 0.84; exception rate 0.2%; top categories: NOM 96%, ONO 4%, ADJ 0%
-- fused spelling variants: ccion, cion, cyon, sion, ssion, tion, tions (new conflict freq 0.1)
-- word exceptions 4 (freq 101.1); scope fallbacks 14
-- top exceptions: impression, caution, impressions, cautions
-    attention: a/t@/sRwai -> a/t@jst
-    attention: a/t@/sRwai -> a/t@jst
-    situation: si/t@a/sRwai -> si/t@ajst
-    mission: mi/sRwai -> mijst
-    félicitations: kpe/mti/si/ta/sRwai/-s -> kpe/mti/sijst/-s
-
-## 7. prefix `é` -- keys (2, 5) = `kv-`
+## 6. prefix `é` -- keys (2, 5) = `kv-`
 
 forms: `é`(k=1)
 - score 5443.4, strokeFreqSaved 5449.0, keySimilarity -1.00 -- NOT phonetically motivated
@@ -111,13 +99,27 @@ forms: `é`(k=1)
     écrit: e/kRi -> kvRi
     équipe: e/kijk -> kvijk
 
+## 7. suffix `ccion|cion|cyon|sion|ssion|tion|tions` -- keys (16, 19, 20) = `-jdt`
+
+forms: `ccion|cion|cyon|sion|ssion|tion|tions`(k=1), `·[tion:C*[ai]]ccion|cion|cyon|sion|ssion|tion|tions`(k=2)
+- score 5392.7, strokeFreqSaved 5853.4, keySimilarity 0.36 -- NOT phonetically motivated
+- attestedShare 0.84; exception rate 0.4%; top categories: NOM 96%, ONO 4%, ADJ 0%
+- fused spelling variants: ccion, cion, cyon, sion, ssion, tion, tions (new conflict freq 0.1)
+- word exceptions 12 (freq 145.4); scope fallbacks 14
+- top exceptions: impression, nation, caution, dépression, nations, notion, session, impressions, sessions, notions
+    attention: a/t@/sRwai -> a/t@jdt
+    attention: a/t@/sRwai -> a/t@jdt
+    situation: si/t@a/sRwai -> si/t@ajdt
+    mission: mi/sRwai -> mijdt
+    félicitations: kpe/mti/si/ta/sRwai/-s -> kpe/mti/sijdt/-s
+
 ## 8. prefix `de|des|dé|déh` -- keys (3, 9, 18) = `sw-k`
 
 forms: `de|des|dé|déh`(k=1)
-- score 4970.9, strokeFreqSaved 5077.7, keySimilarity -0.50 -- NOT phonetically motivated
-- attestedShare 0.63; exception rate 1.1%; top categories: VER 58%, NOM 28%, ADJ 13%
+- score 4959.1, strokeFreqSaved 5073.7, keySimilarity -0.50 -- NOT phonetically motivated
+- attestedShare 0.63; exception rate 1.2%; top categories: VER 58%, NOM 28%, ADJ 13%
 - fused spelling variants: de, des, dé, déh (new conflict freq 3.5)
-- word exceptions 116 (freq 53.4); scope fallbacks 0
+- word exceptions 239 (freq 57.3); scope fallbacks 0
 - top exceptions: dégâts, débat, débarque, dévoiler, débats, débarquent, déballer, dévoilé, débarques, débat
     désolé: pve/twae/mte -> stwaek/mte
     désolé: pve/twae/mte -> stwaek/mte
@@ -129,8 +131,8 @@ forms: `de|des|dé|déh`(k=1)
 ## 9. prefix `ain|hin|im|in` -- keys (7, 8, 9) = `tRw-`
 
 forms: `ain|hin|im|in`(k=1), `ain|hin|im|in[in+té]·`(k=2)
-- score 4727.4, strokeFreqSaved 4832.7, keySimilarity -0.62 -- NOT phonetically motivated
-- attestedShare 0.49; exception rate 0.1%; top categories: NOM 33%, VER 33%, ADJ 29%
+- score 4727.9, strokeFreqSaved 4833.2, keySimilarity -0.62 -- NOT phonetically motivated
+- attestedShare 0.49; exception rate 0.0%; top categories: NOM 33%, VER 33%, ADJ 29%
 - fused spelling variants: ain, hin, im, in (new conflict freq 0.0)
 - word exceptions 3 (freq 2.7); scope fallbacks 0
 - top exceptions: indemne, indemnes, intiment
@@ -141,7 +143,22 @@ forms: `ain|hin|im|in`(k=1), `ain|hin|im|in[in+té]·`(k=2)
     inquiète: aie/kRwiet -> ktRwiet
     intérieur: aie/te/Rw@R -> tRw@R
 
-## 10. prefix `de` -- keys (2, 6, 19) = `km-d`
+## 10. prefix `ai|aî|e|ei|hai|he|hê|é` -- keys (3, 18, 19) = `s-kd`
+
+forms: `ai|aî|e|ei|hai|he|hê|é`(k=1), `ai|aî|e|ei|hai|he|hê|é[e:ksky|kspli|sE|n°]·`(k=2)
+- score 4721.6, strokeFreqSaved 4905.2, keySimilarity 0.03 -- NOT phonetically motivated
+- attestedShare 0.35; exception rate 0.4%; top categories: VER 73%, NOM 17%, ADJ 9%
+- fused spelling variants: ai, aî, e, ei, hai, he, hê, é (new conflict freq 0.1)
+- word exceptions 13 (freq 19.3); scope fallbacks 9
+- top exceptions: excès, aimé, aimée, aimés, exsangue, aimées, excède, excèdent, erriez, exsangues
+    aider: ie/pve/-R -> spvekd/-R
+    excusez: ie/ks@i/twe/-k -> stwekd/-k
+    aimerais: ie/m@a/Rie/-k -> sm@akd/Rie/-k
+    essaie: ie/sie -> siekd
+    essayer: ie/sie/Rwe/-R -> sRwekd/-R
+    essayé: ie/sie/Rwe -> sRwekd
+
+## 11. prefix `de` -- keys (2, 6, 19) = `km-d`
 
 forms: `de`(k=1), `de[man|ve]·`(k=2)
 - score 4692.3, strokeFreqSaved 4792.3, keySimilarity 0.22 -- NOT phonetically motivated
@@ -154,68 +171,69 @@ forms: `de`(k=1), `de[man|ve]·`(k=2)
     devrait: pv@a/vRie -> kvmRied
     devant: pv@a/v@ -> kvm@d
 
-## 11. prefix `ai|aî|e|ei|hai|he|hê|é` -- keys (5, 18, 19) = `v-kd`
-
-forms: `ai|aî|e|ei|hai|he|hê|é`(k=1), `ai|aî|e|ei|hai|he|hê|é[e:ksky|kspli|sE|n°]·`(k=2)
-- score 4673.2, strokeFreqSaved 4803.2, keySimilarity -0.44 -- NOT phonetically motivated
-- attestedShare 0.35; exception rate 0.0%; top categories: VER 73%, NOM 17%, ADJ 9%
-- fused spelling variants: ai, aî, e, ei, hai, he, hê, é (new conflict freq 0.1)
-- word exceptions 0 (freq 0.0); scope fallbacks 6
-    aider: ie/pve/-l -> pvekd/-l
-    excusez: ie/ks@i/twe/-k -> vtwekd/-k
-    aimerais: ie/m@a/Rie/-k -> vm@akd/Rie/-k
-    essaie: ie/sie -> sviekd
-    essayer: ie/sie/Rwe/-l -> vRwekd/-l
-    essayé: ie/siej/e -> sviejkd/e
-
 ## 12. suffix `cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé` -- keys (16, 17, 19) = `-jsd`
 
 forms: `cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé`(k=1), `·[cé:m@]cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé`(k=2)
-- score 4632.0, strokeFreqSaved 4732.0, keySimilarity 0.33 -- NOT phonetically motivated
+- score 4633.4, strokeFreqSaved 4733.4, keySimilarity 0.33 -- NOT phonetically motivated
 - attestedShare 0.66; exception rate 0.0%; top categories: VER 85%, ADV 9%, ADJ 3%
-- fused spelling variants: cer, cé, cée, cés, scer, se, ser, sser, ssez, ssée, sé (new conflict freq 89.0)
+- fused spelling variants: cer, cé, cée, cés, scer, se, ser, sser, ssez, ssée, sé (new conflict freq 89.5)
 - word exceptions 0 (freq 0.0); scope fallbacks 0
     assez: a/se -> ajsd
-    passer: pa/se/-l -> pajsd/-l
+    passer: pa/se/-R -> pajsd/-R
     passé: pa/se -> pajsd
     laissez: mtie/se/-k -> mtiejsd/-k
-    laisser: mtie/se/-l -> mtiejsd/-l
+    laisser: mtie/se/-R -> mtiejsd/-R
     pensé: p@/se -> p@jsd
 
 ## 13. suffix `ter` -- keys (16, 20, 22) = `-jtn`
 
 forms: `ter`(k=1)
-- score 4568.5, strokeFreqSaved 4568.5, keySimilarity 0.33 -- NOT phonetically motivated
+- score 4579.3, strokeFreqSaved 4579.3, keySimilarity 0.33 -- NOT phonetically motivated
 - attestedShare 0.92; exception rate 0.0%; top categories: VER 100%, NOM 0%, ADJ 0%
 - word exceptions 0 (freq 0.0); scope fallbacks 0
-    rester: Ries/te/-l -> Riejstn/-l
-    arrêter: a/Rie/te/-l -> a/Riejtn/-l
+    rester: Ries/te/-R -> Riejstn/-R
+    arrêter: a/Rie/te/-R -> a/Riejtn/-R
     arrêtez: a/Rie/te/-k -> a/Riejtn/-k
-    acheter: a/pm@a/te/-l -> a/pm@ajtn/-l
+    acheter: a/pm@a/te/-R -> a/pm@ajtn/-R
     restez: Ries/te/-k -> Riejstn/-k
     écoutez: e/k@e/te/-k -> e/k@ejtn/-k
 
-## 14. prefix `au` -- keys (7, 8, 19) = `tR-d`
+## 14. prefix `au` -- keys (4, 8, 19) = `pR-d`
 
 forms: `au`(k=1), `au[jour|to|tre|di]·`(k=2)
-- score 3572.7, strokeFreqSaved 3673.4, keySimilarity 0.24 -- NOT phonetically motivated
+- score 3572.7, strokeFreqSaved 3673.4, keySimilarity -0.12 -- NOT phonetically motivated
 - attestedShare 0.39; exception rate 0.2%; top categories: AUX 28%, ADV 23%, VER 22%
-- word exceptions 1 (freq 0.3); scope fallbacks 0
-- top exceptions: autisme
-    aujourd'hui: ae/vt@eR/pv@ai -> pvtR@aid
-    aurais: ae/Rie/-d -> tRied/-d
-    aurait: ae/Rie -> tRied
-    aucune: ae/k@in -> ktR@idn
-    aura: ae/Ra -> tRad
-    aucun: ae/k@aie -> ktR@aied
+- word exceptions 2 (freq 0.3); scope fallbacks 0
+- top exceptions: autisme, autismes
+    aujourd'hui: ae/vt@eR/pv@ai -> pvR@aid
+    aurais: ae/Rie/-d -> pRied/-d
+    aurait: ae/Rie -> pRied
+    aucune: ae/k@in -> kpR@idn
+    aura: ae/Ra -> pRad
+    aucun: ae/k@aie -> kpR@aied
 
-## 15. suffix `té` -- keys (19, 20, 25) = `-dtm`
+## 15. suffix `der|dé|dée` -- keys (18, 19, 25) = `-kdm`
+
+forms: `der|dé|dée`(k=1), `·[dez|der|dé:gaR|m@]der|dé|dée`(k=2)
+- score 3498.4, strokeFreqSaved 3607.6, keySimilarity 0.62
+- attestedShare 0.31; exception rate 0.2%; top categories: VER 82%, NOM 17%, ADJ 2%
+- fused spelling variants: der, dé, dée (new conflict freq 52.2)
+- word exceptions 3 (freq 2.1); scope fallbacks 1
+- top exceptions: codé, codée, codés
+    aider: ie/pve/-R -> iekdm/-R
+    idée: i/pve -> ikdm
+    regardez: R@a/ksaR/pve/-k -> R@akdm/-k
+    demandé: pv@a/m@/pve -> pv@akdm
+    demander: pv@a/m@/pve/-R -> pv@akdm/-R
+    regarder: R@a/ksaR/pve/-R -> R@akdm/-R
+
+## 16. suffix `té` -- keys (19, 20, 25) = `-dtm`
 
 forms: `té`(k=1), `·[C\{bv}{1,2}i]té`(k=2)
-- score 3546.3, strokeFreqSaved 4047.2, keySimilarity 0.46 -- NOT phonetically motivated
-- attestedShare 0.69; exception rate 0.4%; top categories: NOM 83%, VER 9%, ADJ 8%
-- word exceptions 11 (freq 10.5); scope fallbacks 76
-- top exceptions: gravité, limité, agilité, limités, lité, caté, agilités, lités, litée, litées
+- score 3449.6, strokeFreqSaved 4066.9, keySimilarity 0.46 -- NOT phonetically motivated
+- attestedShare 0.69; exception rate 0.3%; top categories: NOM 83%, VER 9%, ADJ 8%
+- word exceptions 8 (freq 1.2); scope fallbacks 103
+- top exceptions: agilité, délité, caté, agilités, délitée, délitées, délités, catés
     côté: kae/te -> kaedtm
     vérité: ve/Ri/te -> vedtm
     sécurité: se/k@i/Ri/te -> se/k@idtm
@@ -223,73 +241,42 @@ forms: `té`(k=1), `·[C\{bv}{1,2}i]té`(k=2)
     liberté: mti/svieR/te -> mti/sviedtRm
     société: sae/sRwe/te -> sae/sRwedtm
 
-## 16. suffix `der|dé|dée` -- keys (18, 19, 25) = `-kdm`
-
-forms: `der|dé|dée`(k=1), `·[dez|der|dé:gaR|m@]der|dé|dée`(k=2)
-- score 3531.7, strokeFreqSaved 3638.5, keySimilarity 0.62
-- attestedShare 0.31; exception rate 0.6%; top categories: VER 82%, NOM 17%, ADJ 2%
-- fused spelling variants: der, dé, dée (new conflict freq 52.2)
-- word exceptions 8 (freq 3.4); scope fallbacks 0
-- top exceptions: codé, codée, codé, codées, codés, codée, coder, codés
-    aider: ie/pve/-l -> iekdm/-l
-    idée: i/pve -> ikdm
-    regardez: R@a/ksaR/pve/-k -> R@akdm/-k
-    demandé: pv@a/m@/pve -> pv@akdm
-    demander: pv@a/m@/pve/-l -> pv@akdm/-l
-    regarder: R@a/ksaR/pve/-l -> R@akdm/-l
-
 ## 17. suffix `ner|nez|nner|nnée|née|nées` -- keys (16, 17, 25) = `-jsm`
 
 forms: `ner|nez|nner|nnée|née|nées`(k=1), `·[né:C{1,2}[i°]]ner|nez|nner|nnée|née|nées`(k=2)
-- score 3256.2, strokeFreqSaved 3371.3, keySimilarity 0.04 -- NOT phonetically motivated
+- score 3208.5, strokeFreqSaved 3373.5, keySimilarity 0.04 -- NOT phonetically motivated
 - attestedShare 0.57; exception rate 0.0%; top categories: VER 77%, NOM 23%, ADJ 0%
 - fused spelling variants: ner, nez, nner, nnée, née, nées (new conflict freq 52.2)
-- word exceptions 1 (freq 0.0); scope fallbacks 3
-- top exceptions: tannées
+- word exceptions 0 (freq 0.0); scope fallbacks 13
     donné: pvae/mRe -> pvaejsm
-    donner: pvae/mRe/-l -> pvaejsm/-l
+    donner: pvae/mRe/-R -> pvaejsm/-R
     années: a/mRe/-s -> ajsm/-s
     journée: vt@eR/mRe -> vt@ejsRm
     année: a/mRe -> ajsm
     donnez: pvae/mRe/-k -> pvaejsm/-k
 
-## 18. prefix `ra|rai|raie|re|rhé|ré|réh` -- keys (3, 4, 16) = `sp-j`
-
-forms: `ra|rai|raie|re|rhé|ré|réh`(k=1), `ra|rai|raie|re|rhé|ré|réh[ré:a|fle|vE|C{1,2}y]·`(k=2)
-- score 3183.4, strokeFreqSaved 3367.3, keySimilarity -0.27 -- NOT phonetically motivated
-- attestedShare 0.49; exception rate 0.5%; top categories: VER 59%, NOM 32%, ADJ 7%
-- fused spelling variants: ra, rai, raie, re, rhé, ré, réh (new conflict freq 0.3)
-- word exceptions 17 (freq 7.0); scope fallbacks 14
-- top exceptions: régner, régnez, régné, récria, récriai, récrié, récriée, récriées, récriés, récriaient
-    réponse: Re/pais -> spaijs
-    réussi: Re/@i/si -> sp@ij/si
-    réponds: Re/pai/-k -> spaij/-k
-    réveille: Re/v*iej -> spv*iej
-    répondre: Re/paidR -> spaijdR
-    réalité: Re/a/mti/te -> spmtij/te
-
-## 19. prefix `pa` -- keys (2, 5, 18) = `kv-k`
+## 18. prefix `pa` -- keys (2, 5, 18) = `kv-k`
 
 forms: `pa`(k=1)
-- score 3167.3, strokeFreqSaved 3171.3, keySimilarity -0.33 -- NOT phonetically motivated
-- attestedShare 0.27; exception rate 0.8%; top categories: NOM 49%, VER 38%, ADJ 12%
-- word exceptions 13 (freq 2.0); scope fallbacks 0
-- top exceptions: pager, pagaie, pagaie, patine, pagaies, papisme, pagaient, pagaies, pagé, paginer
-    passer: pa/se/-l -> ksve/-l
+- score 3164.9, strokeFreqSaved 3170.5, keySimilarity -0.33 -- NOT phonetically motivated
+- attestedShare 0.27; exception rate 1.1%; top categories: NOM 49%, VER 38%, ADJ 12%
+- word exceptions 30 (freq 2.8); scope fallbacks 0
+- top exceptions: patiner, pagaie, patiné, patinez, package, pagaie, patine, pagaies, papisme, pavage
+    passer: pa/se/-R -> ksve/-R
     passé: pa/se -> ksve
     papa: pa/pa -> kpva
     parents: pa/R@/-s -> kvR@/-s
     patron: pa/tRai -> kvtRai
     passé: pa/se -> ksve
 
-## 20. prefix `ma|mah|mâ` -- keys (17, 18, 19) = `-skd`
+## 19. prefix `ma|mah|mâ` -- keys (17, 18, 19) = `-skd`
 
 forms: `ma|mah|mâ`(k=1), `ma|mah|mâ[ni]·`(k=2), `ma|mah|mâ[Ni]·`(k=2), `ma|mah|mâ[l2|la]·`(k=2)
-- score 3065.5, strokeFreqSaved 3403.9, keySimilarity -0.46 -- NOT phonetically motivated
-- attestedShare 0.44; exception rate 1.2%; top categories: NOM 70%, ADJ 18%, VER 11%
+- score 3028.7, strokeFreqSaved 3405.0, keySimilarity -0.46 -- NOT phonetically motivated
+- attestedShare 0.44; exception rate 1.3%; top categories: NOM 70%, ADJ 18%, VER 11%
 - fused spelling variants: ma, mah, mâ (new conflict freq 0.5)
-- word exceptions 23 (freq 11.7); scope fallbacks 3
-- top exceptions: marais, marions, maraud, machisme, manage, manioc, maraude, matisse, mati, manient
+- word exceptions 40 (freq 10.6); scope fallbacks 11
+- top exceptions: marais, maraud, mara, mata, machisme, manage, marrait, manioc, maraude, matisse
     matin: ma/taie -> taieskd
     mari: ma/Ri -> Riskd
     madame: ma/pvam -> pvaskdm
@@ -297,54 +284,54 @@ forms: `ma|mah|mâ`(k=1), `ma|mah|mâ[ni]·`(k=2), `ma|mah|mâ[Ni]·`(k=2), `ma|
     malade: ma/mtad -> mtaskd
     magnifique: ma/wi/kpik -> kpiskd
 
-## 21. prefix `e|hi|hy|i|y|î` -- keys (16, 19) = `-jd`
+## 20. prefix `e|hi|hy|i|y|î` -- keys (16, 18, 19) = `-jkd`
 
 forms: `e|hi|hy|i|y|î`(k=1), `e|hi|hy|i|y|î[i:[mn][aeiouy]]·`(k=2)
-- score 3020.6, strokeFreqSaved 3200.0, keySimilarity -0.57 -- NOT phonetically motivated
+- score 3022.6, strokeFreqSaved 3197.8, keySimilarity -0.85 -- NOT phonetically motivated
 - attestedShare 0.22; exception rate 0.3%; top categories: NOM 41%, VER 32%, ADJ 24%
 - fused spelling variants: e, hi, hy, i, y, î (new conflict freq 0.2)
-- word exceptions 7 (freq 4.7); scope fallbacks 14
-- top exceptions: hissez, hisser, hissé, hissai, hissées, hissés, hissée
-    idée: i/pve -> pvejd
-    ira: i/Ra -> Rajd
-    imagine: i/ma/vtin -> vtijdn
-    ignore: i/waeR -> waejdR
-    irai: i/Re/-t -> Rejd/-t
-    inutile: i/mR@i/til -> tijdl
+- word exceptions 10 (freq 5.1); scope fallbacks 13
+- top exceptions: hissez, hisser, hissé, hippy, hissai, hippy, hissées, hissés, hissée, hissiez
+    idée: i/pve -> pvejkd
+    ira: i/Ra -> Rajkd
+    imagine: i/ma/vtin -> vtijkdn
+    ignore: i/waeR -> waejkdR
+    irai: i/Re/-t -> Rejkd/-t
+    inutile: i/mR@i/til -> tijkdl
 
-## 22. prefix `sa|sah` -- keys (5, 24) = `v-Z`
+## 21. prefix `ré` -- keys (3, 7, 8) = `stR-`
+
+forms: `ré`(k=1)
+- score 2721.9, strokeFreqSaved 2721.9, keySimilarity 0.33 -- NOT phonetically motivated
+- attestedShare 0.52; exception rate 0.0%; top categories: VER 60%, NOM 31%, ADJ 7%
+- word exceptions 0 (freq 0.0); scope fallbacks 0
+    réponse: Re/pais -> sptRais
+    réussi: Re/@i/si -> stR@i/si
+    réponds: Re/pai/-k -> sptRai/-k
+    réveille: Re/v*iej -> svtR*iej
+    répondre: Re/paidR -> sptRaidR
+    réalité: Re/a/mti/te -> stRa/mti/te
+
+## 22. prefix `sa|sah` -- keys (18, 24) = `-kZ`
 
 forms: `sa|sah`(k=1)
-- score 2649.0, strokeFreqSaved 2649.5, keySimilarity -0.33 -- NOT phonetically motivated
-- attestedShare 0.82; exception rate 1.4%; top categories: VER 55%, NOM 32%, ONO 8%
+- score 2647.1, strokeFreqSaved 2648.8, keySimilarity -0.33 -- NOT phonetically motivated
+- attestedShare 0.82; exception rate 1.5%; top categories: VER 55%, NOM 32%, ONO 8%
 - fused spelling variants: sa, sah (new conflict freq 0.0)
-- word exceptions 14 (freq 0.2); scope fallbacks 0
-- top exceptions: sableuse, saroual, sableuses, sarouals, sabelles, saboule, saboulent, saboules, samizdats, sanieuses
-    savoir: sa/vwaR -> vwaRZ
-    savez: sa/ve -> veZ
-    salut: sa/mt@i -> vmt@iZ
-    savais: sa/vie/-k -> vieZ/-k
-    salut: sa/mt@i -> vmt@iZ
-    savait: sa/vie -> vieZ
+- word exceptions 25 (freq 0.9); scope fallbacks 0
+- top exceptions: saccage, sableuse, saccagent, saccage, salique, saccages, saccages, saroual, sableuses, saliques
+    savoir: sa/vwaR -> vwakRZ
+    savez: sa/ve -> vekZ
+    salut: sa/mt@i -> mt@ikZ
+    savais: sa/vie/-k -> viekZ/-k
+    salut: sa/mt@i -> mt@ikZ
+    savait: sa/vie -> viekZ
 
-## 23. prefix `o` -- keys (16, 17, 19) = `-jsd`
-
-forms: `o`(k=1), `o[C{1,2}i|kV]·`(k=2)
-- score 2469.1, strokeFreqSaved 2584.1, keySimilarity 0.05 -- NOT phonetically motivated
-- attestedShare 0.24; exception rate 0.0%; top categories: VER 39%, NOM 34%, ADJ 20%
-- word exceptions 0 (freq 0.0); scope fallbacks 3
-    ok: ae/k- -> k-jsd
-    occupe: ae/k@ijk -> k@ijskd
-    ok: ae/k- -> k-jsd
-    occuper: ae/k@i/pe/-l -> pejsd/-l
-    occasion: ae/ka/tRwai -> tRwaijsd
-    offrir: ae/kpRiR -> kpRijsdR
-
-## 24. prefix `pro|proh|prô` -- keys (4, 5, 8) = `pvR-`
+## 23. prefix `pro|proh|prô` -- keys (4, 5, 8) = `pvR-`
 
 forms: `pro|proh|prô`(k=1)
 - score 2455.1, strokeFreqSaved 2455.1, keySimilarity 0.70
-- attestedShare 0.68; exception rate 0.3%; top categories: NOM 56%, VER 28%, ADJ 12%
+- attestedShare 0.68; exception rate 0.2%; top categories: NOM 56%, VER 28%, ADJ 12%
 - fused spelling variants: pro, proh, prô (new conflict freq 0.0)
 - word exceptions 4 (freq 0.0); scope fallbacks 0
 - top exceptions: prodrome, prodromes, procréerai, procréerez
@@ -355,20 +342,7 @@ forms: `pro|proh|prô`(k=1)
     promis: pRae/mi -> pvmRi
     probablement: pRae/sva/svmt@a/m@ -> spvRa/svmt@a/m@
 
-## 25. suffix `ver` -- keys (16, 17, 18) = `-jsk`
-
-forms: `ver`(k=1), `·[vé:Ri]ver`(k=2)
-- score 2408.5, strokeFreqSaved 2508.5, keySimilarity 0.46 -- NOT phonetically motivated
-- attestedShare 0.82; exception rate 0.0%; top categories: VER 100%, NOM 0%, ADJ 0%
-- word exceptions 0 (freq 0.0); scope fallbacks 0
-    trouvé: tR@e/ve -> tR@ejsk
-    trouver: tR@e/ve/-l -> tR@ejsk/-l
-    arrivé: a/Ri/ve -> ajsk
-    arriver: a/Ri/ve/-l -> a/Rijsk/-l
-    sauver: sae/ve/-l -> saejsk/-l
-    retrouver: R@a/tR@e/ve/-l -> R@a/tR@ejsk/-l
-
-## 26. prefix `ce|sce|se` -- keys (3, 6) = `sm-`
+## 24. prefix `ce|sce|se` -- keys (3, 6) = `sm-`
 
 forms: `ce|sce|se`(k=1)
 - score 2382.7, strokeFreqSaved 2382.7, keySimilarity 0.50 -- NOT phonetically motivated
@@ -382,36 +356,50 @@ forms: `ce|sce|se`(k=1)
     ceci: s@a/si -> smi
     semaines: s@a/mien/-s -> smien/-s
 
-## 27. suffix `rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée` -- keys (16, 19, 21) = `-jdR`
+## 25. suffix `rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée` -- keys (16, 19, 21) = `-jdR`
 
 forms: `rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée`(k=1), `·[rer:p[aeiouy]|C*e|sy]rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée`(k=2)
-- score 2277.8, strokeFreqSaved 2387.8, keySimilarity 0.59
-- attestedShare 0.64; exception rate 0.1%; top categories: VER 93%, NOM 7%, AUX 0%
+- score 2243.4, strokeFreqSaved 2353.4, keySimilarity 0.59
+- attestedShare 0.64; exception rate 0.0%; top categories: VER 93%, NOM 7%, AUX 0%
 - fused spelling variants: rae, rai, raie, re, rer, rez, rrer, rrhée, rrée, rée (new conflict freq 17.9)
 - word exceptions 1 (freq 0.0); scope fallbacks 2
 - top exceptions: aurai
-    tirer: ti/Re/-l -> tijdR/-l
+    tirer: ti/Re/-R -> tijdR/-R
     soirée: swa/Re -> swajdR
     tiré: ti/Re -> tijdR
-    pleurer: pmt@ie/Re/-l -> pmt@iejdR/-l
-    préparer: pRe/pa/Re/-l -> pRejdR/-l
+    pleurer: pmt@ie/Re/-R -> pmt@iejdR/-R
+    préparer: pRe/pa/Re/-R -> pRejdR/-R
     tirez: ti/Re/-k -> tijdR/-k
 
-## 28. prefix `pou|pu` -- keys (4, 7, 18) = `pt-k`
+## 26. prefix `pou|pu` -- keys (4, 7, 16) = `pt-j`
 
 forms: `pou|pu`(k=1)
 - score 2215.0, strokeFreqSaved 2215.0, keySimilarity 0.33 -- NOT phonetically motivated
-- attestedShare 0.89; exception rate 0.0%; top categories: VER 86%, NOM 13%, ADJ 1%
+- attestedShare 0.89; exception rate 3.1%; top categories: VER 86%, NOM 13%, ADJ 1%
 - fused spelling variants: pou, pu (new conflict freq 0.2)
-- word exceptions 0 (freq 0.0); scope fallbacks 0
-    pouvez: p@e/ve -> pvtek
-    pourrait: p@e/Rie -> ptRiek
-    pourrais: p@e/Rie/-k -> ptRiek/-k
-    pouvoir: p@e/vwaR -> pvtwakR
-    pouvais: p@e/vie/-k -> pvtiek/-k
-    pouvait: p@e/vie -> pvtiek
+- word exceptions 12 (freq 0.0); scope fallbacks 0
+- top exceptions: poudroieriez, poudroierions, poudroyai, poudroyer, poudroyez, poudroyé, poudroyée, poudroyées, poudroyés, poudroyiez
+    pouvez: p@e/ve -> pvtej
+    pourrait: p@e/Rie -> ptRiej
+    pourrais: p@e/Rie/-k -> ptRiej/-k
+    pouvoir: p@e/vwaR -> pvtwajR
+    pouvais: p@e/vie/-k -> pvtiej/-k
+    pouvait: p@e/vie -> pvtiej
 
-## 29. prefix `de|dea|di|die|dis|dy|dî` -- keys (3, 16, 19) = `s-jd`
+## 27. suffix `ver` -- keys (16, 17, 18) = `-jsk`
+
+forms: `ver`(k=1), `·[vé:Ri]ver`(k=2)
+- score 2205.5, strokeFreqSaved 2305.5, keySimilarity 0.46 -- NOT phonetically motivated
+- attestedShare 0.82; exception rate 0.0%; top categories: VER 100%, NOM 0%, ADJ 0%
+- word exceptions 0 (freq 0.0); scope fallbacks 0
+    trouvé: tR@e/ve -> tR@ejsk
+    trouver: tR@e/ve/-R -> tR@ejsk/-R
+    arrivé: a/Ri/ve -> ajsk
+    arriver: a/Ri/ve/-R -> a/Rijsk/-R
+    sauver: sae/ve/-R -> saejsk/-R
+    retrouver: R@a/tR@e/ve/-R -> R@a/tR@ejsk/-R
+
+## 28. prefix `de|dea|di|die|dis|dy|dî` -- keys (3, 16, 19) = `s-jd`
 
 forms: `de|dea|di|die|dis|dy|dî`(k=1), `de|dea|di|die|dis|dy|dî[di:C{1,2}i]·`(k=2)
 - score 2195.6, strokeFreqSaved 2295.6, keySimilarity 0.16 -- NOT phonetically motivated
@@ -425,29 +413,45 @@ forms: `de|dea|di|die|dis|dy|dî`(k=1), `de|dea|di|die|dis|dy|dî[di:C{1,2}i]·`
     dîner: pvi/mRe -> smRejd
     dirai: pvi/Re/-t -> sRejd/-t
 
-## 30. suffix `ser|sée|zer|zé` -- keys (18, 22, 23) = `-knl`
+## 29. suffix `ser|sée|zer|zé` -- keys (18, 22, 23) = `-knl`
 
 forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|sée|zer|zé`(k=2)
-- score 2129.4, strokeFreqSaved 2354.4, keySimilarity 0.62
-- attestedShare 0.70; exception rate 0.0%; top categories: VER 94%, NOM 6%, ADJ 0%
-- fused spelling variants: ser, sée, zer, zé (new conflict freq 5.8)
-- word exceptions 0 (freq 0.0); scope fallbacks 5
+- score 2128.0, strokeFreqSaved 2351.1, keySimilarity 0.62
+- attestedShare 0.70; exception rate 0.3%; top categories: VER 94%, NOM 6%, ADJ 0%
+- fused spelling variants: ser, sée, zer, zé (new conflict freq 6.4)
+- word exceptions 11 (freq 11.5); scope fallbacks 0
+- top exceptions: basé, basée, basés, basées, baser, basez, basai, vaser, vasai, vasez
     excusez: ie/ks@i/twe/-k -> ieknl/-k
-    poser: pae/twe/-l -> paeknl/-l
-    utiliser: @i/ti/mti/twe/-l -> @i/tiknl/-l
-    épouser: e/p@e/twe/-l -> e/p@eknl/-l
-    amuser: a/m@i/twe/-l -> a/m@iknl/-l
-    excuser: ie/ks@i/twe/-l -> ie/ks@iknl/-l
+    poser: pae/twe/-R -> paeknl/-R
+    utiliser: @i/ti/mti/twe/-R -> @i/tiknl/-R
+    épouser: e/p@e/twe/-R -> e/p@eknl/-R
+    amuser: a/m@i/twe/-R -> a/m@iknl/-R
+    excuser: ie/ks@i/twe/-R -> ie/ks@iknl/-R
+
+## 30. prefix `o` -- keys (2, 6, 16) = `km-j`
+
+forms: `o`(k=1), `o[C{1,2}i|kV]·`(k=2)
+- score 2117.2, strokeFreqSaved 2538.6, keySimilarity 0.18 -- NOT phonetically motivated
+- attestedShare 0.24; exception rate 0.8%; top categories: VER 39%, NOM 34%, ADJ 20%
+- word exceptions 14 (freq 0.7); scope fallbacks 64
+- top exceptions: orée, orées, ocrée, ocrés, ocré, ocrées, oka, okas, ocra, ocras
+    ok: ae/ke -> kmej
+    occupe: ae/k@ijk -> km@ijk
+    ok: ae/ke -> kmej
+    occuper: ae/k@i/pe/-R -> kpmej/-R
+    occasion: ae/ka/tRwai -> kmtRwaij
+    offrir: ae/kpRiR -> kpmRijR
 
 ## Variant merges (verdicts of `affix_decisions.json`)
 
 - `ae|ai|aî|e|ei|he|hé|oe|é|éh` /e/ (parts é, e, hé, ai; new conflict freq 5.5): **apart**
+- `au|aul|ho|hos|o|oi` /O/ (parts o, ho; new conflict freq -0.0): **apart** (undecided)
 - `a|ah|ha|hah|hâ|â` /a/ (parts a, ha, â, hâ, ah; new conflict freq 7.6): **apart**
 - `le|leh|ler|lers|ller|llé|llée|lée` /le/ (parts ler, ller, llée, lée, llé; new conflict freq 14.6): **apart** (undecided)
 - `am|an|ant|em|en|ench|enh|ham|han|hen` /@/ (parts en, em, an, am, han; new conflict freq 3.0): **fused**
-- `ve|ver|wé` /ve/ (parts ver; new conflict freq 0.1): **apart**
-- `au|aul|ho|hos|o|oi` /O/ (parts o, ho; new conflict freq -0.0): **apart** (undecided)
+- `er|ve|ver|wé|é` /ve/ (parts ver; new conflict freq 0.1): **apart** (undecided)
 - `bai|be` /b°/ (parts be; new conflict freq 0.0): **apart** (undecided)
+- `vo|voi` /vwa/ (parts voi, vo; new conflict freq 0.0): **apart** (undecided)
 - `re|reh` /R°/ (parts re; new conflict freq 0.0): **fused**
 - `mai|maî|me|mei|mes|mè|mê` /mE/ (parts me, mai, mê; new conflict freq 0.0): **apart** (undecided)
 - `bom|bon` /b§/ (parts bon, bom; new conflict freq 0.2): **apart** (undecided)
@@ -459,12 +463,12 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `rette|rrette|rète|rête` /REt/ (parts rette; new conflict freq 0.0): **apart** (undecided)
 - `fan|fang|fant|fends|fens|ffant|phant` /f@/ (parts ffant; new conflict freq 0.0): **apart** (undecided)
 - `main|men|min` /m5/ (parts main, min; new conflict freq 0.0): **apart** (undecided)
-- `ra|rai|re|rei|rè|rê` /RE/ (parts rai, rê, re; new conflict freq 0.0): **apart** (undecided)
+- `ra|rai|raie|re|rei|rè|rê` /RE/ (parts rai, rê, ra, re; new conflict freq 0.0): **apart** (undecided)
 - `son|zon` /z§/ (parts son, zon; new conflict freq 0.0): **apart** (undecided)
-- `sa|sah` /sa/ (parts sa; new conflict freq 0.0): **fused**
+- `cei|sa|sah` /sa/ (parts sa; new conflict freq 0.0): **apart** (undecided)
 - `voir|voire` /vwaR/ (parts voir; new conflict freq 0.0): **apart** (undecided)
 - `vou|voue|voû|woo` /vu/ (parts vou; new conflict freq 0.0): **apart** (undecided)
-- `cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé` /se/ (parts sser, cer, ser, sé, cé, cée, ssée; new conflict freq 89.0): **fused**
+- `cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé` /se/ (parts sser, cer, ser, sé, cé, cée, ssée; new conflict freq 89.5): **fused**
 - `ssé|sée` /se/ (parts ssé; new conflict freq 0.0): **apart** (undecided)
 - `mau|mo|moh` /mo/ (parts mo, mau; new conflict freq 0.1): **apart** (undecided)
 - `man|mand|mant|ment|ments|mmant|mment` /m@/ (parts ment, mment, mant, mand, man; new conflict freq 1.4): **apart**
@@ -475,7 +479,7 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `tra|trah|trâ` /tRa/ (parts tra; new conflict freq 0.0): **apart** (undecided)
 - `vail|vaille|vailles` /vaj/ (parts vail; new conflict freq 0.0): **apart** (undecided)
 - `nhir|nir|nnir` /niR/ (parts nir, nnir; new conflict freq 0.0): **apart** (undecided)
-- `ai|aî|e|ei|hai|he|hê|é` /E/ (parts e, ai, é, he; new conflict freq 0.1): **fused**
+- `a|ai|aî|e|ei|ha|hai|he|hê|é` /E/ (parts e, ai, é, he; new conflict freq 0.3): **apart** (undecided)
 - `der|dé|dée` /de/ (parts der, dée, dé; new conflict freq 52.2): **fused**
 - `mi|mie|mis|mmies|mmis|mmy|my` /mi/ (parts mi, mie, mis; new conflict freq 0.9): **apart** (undecided)
 - `au|aux|hau|haut|ho|hô|o|oh|ô` /o/ (parts au, o, ho, hô, hau; new conflict freq 34.4): **apart**
@@ -502,19 +506,20 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `pau|peau|po` /po/ (parts po, pau, peau; new conflict freq 0.1): **apart** (undecided)
 - `lice|lis|lisse|llis|lysse` /lis/ (parts lice, lis; new conflict freq 0.0): **apart** (undecided)
 - `fain|ffin|fin|fins|phin` /f5/ (parts fin, ffin; new conflict freq 0.0): **apart** (undecided)
-- `la|lai|le|les|lè` /lE/ (parts lai, le; new conflict freq 0.2): **apart** (undecided)
+- `la|lai|laie|le|les|lè` /lE/ (parts lai, le; new conflict freq 0.2): **apart** (undecided)
 - `pa|pas|pat|ppa|ppât` /pa/ (parts pa, pas, ppa; new conflict freq 1.2): **apart** (undecided)
 - `du|due|dus` /dy/ (parts du; new conflict freq 1.9): **apart** (undecided)
 - `ree|ri|rie|ries|rii|ris|rit|rri|rrie|rril|rris|rry|ry|rye` /Ri/ (parts ri, rie, ry, rri; new conflict freq 1.3): **apart** (undecided)
 - `ain|hin|im|in` /5/ (parts in, im; new conflict freq 0.0): **fused**
 - `cau|cho|coa|coh|cô|ko|quo` /ko/ (parts cô, cau, quo, cho, coh, ko; new conflict freq 0.4): **apart** (undecided)
 - `nnu|nue|nut` /ny/ (parts nue, nnu; new conflict freq 0.0): **apart** (undecided)
+- `cker|cquer|cquée|k|ker|ké|quer|quée` /ke/ (parts quer; new conflict freq 1.4): **apart** (undecided)
 - `moo|mou|mu` /mu/ (parts mou; new conflict freq 0.0): **apart** (undecided)
 - `rir|rire|rrir` /RiR/ (parts rir, rrir; new conflict freq 0.0): **apart** (undecided)
 - `dau|dho|do` /do/ (parts do, dau; new conflict freq 0.3): **apart** (undecided)
 - `ner|nez|nner|nnée|née|nées` /ne/ (parts ner, nner, née, nnée; new conflict freq 52.2): **fused**
 - `nné|né` /ne/ (parts né, nné; new conflict freq 1.2): **apart** (undecided)
-- `ser|sée|zer|zé` /ze/ (parts ser, sée, zer; new conflict freq 5.8): **fused**
+- `ser|sée|zer|zé` /ze/ (parts ser, sée, zer; new conflict freq 6.4): **fused**
 - `ter|teur|tter|tteur|ttheure` /t9R/ (parts teur, tteur, ter; new conflict freq 0.3): **apart** (undecided)
 - `son|sson|çon` /s§/ (parts çon, sson, son; new conflict freq 0.0): **apart** (undecided)
 - `vi|vie|vis|vit` /vi/ (parts vis, vi; new conflict freq 0.0): **apart** (undecided)
@@ -533,7 +538,8 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `col|cole|colle|cool` /kOl/ (parts cole; new conflict freq 0.0): **apart** (undecided)
 - `cible|scible|sible|ssible` /sibl/ (parts ssible, sible, scible; new conflict freq 0.0): **apart** (undecided)
 - `de|des|dé|déh` /de/ (parts dé, de, déh; new conflict freq 3.5): **fused**
-- `er|ée|ë` /e/ (parts er; new conflict freq 0.4): **apart** (undecided)
+- `er|ier|iller|illier|illée|ller|llier|llée|yer|yé|yée` /je/ (parts yer, iller, er, ller, yé, ier, llier; new conflict freq 37.9): **apart** (undecided)
+- `illé|llé` /je/ (parts llé, illé; new conflict freq 0.0): **apart** (undecided)
 - `de|dea|di|die|dis|dy|dî` /di/ (parts di, dy; new conflict freq 0.0): **fused**
 - `ve|vei|vé|véh|vê` /ve/ (parts vé, ve, vei; new conflict freq 0.0): **apart** (undecided)
 - `su|sue|sû` /sy/ (parts su; new conflict freq 0.0): **apart** (undecided)
@@ -557,10 +563,12 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `mu|mue|mû` /my/ (parts mu, mû; new conflict freq 0.0): **apart** (undecided)
 - `sic|sique|zique` /zik/ (parts sique; new conflict freq 0.0): **apart** (undecided)
 - `ram|ran|rem|ren` /R@/ (parts ren, rem, ran, ram; new conflict freq 3.1): **apart** (undecided)
-- `trer|tré|ttré` /tRe/ (parts trer, tré; new conflict freq 15.1): **apart** (undecided)
+- `trer|tré|ttré` /tRe/ (parts trer, tré; new conflict freq 15.5): **apart** (undecided)
 - `ci|cy|sci|scie|sea|si|sy` /si/ (parts si, ci, cy, sy; new conflict freq 0.7): **apart** (undecided)
 - `nnon|nom|non` /n§/ (parts non, nom; new conflict freq 0.0): **apart** (undecided)
 - `vien|vient` /vj5/ (parts vien; new conflict freq 0.0): **apart** (undecided)
+- `cro|croi|croî` /kRwa/ (parts croi; new conflict freq 0.0): **apart** (undecided)
+- `nu|nue` /ny/ (parts nu; new conflict freq 0.0): **apart** (undecided)
 - `jo|raud|raut|raux|reau|ro|rop|ros|rot|rrau|rreau|rro|rrot` /Ro/ (parts ro, reau, rreau, rot, raud; new conflict freq 5.5): **apart** (undecided)
 - `seoir|soir|soire|sseoir|ssoir|ssoire|çoir|çoire` /swaR/ (parts soir, ssoire, ssoir; new conflict freq 0.0): **apart** (undecided)
 - `mir|mire` /miR/ (parts mir; new conflict freq 0.0): **apart** (undecided)
@@ -576,10 +584,9 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `hoo|hou|houh|ou` /u/ (parts ou, hou; new conflict freq 0.1): **apart** (undecided)
 - `cil|cile|cille|sile|ssile` /sil/ (parts cile; new conflict freq 0.0): **apart** (undecided)
 - `taine|taines|ten|tenne|thène|tène` /tEn/ (parts taine; new conflict freq 3.8): **apart** (undecided)
-- `pa|pai|paie|paî|pe|pei|pè|pé|pê` /pE/ (parts pe, pei; new conflict freq 1.3): **apart** (undecided)
-- `illé|yé` /je/ (parts illé; new conflict freq 0.0): **apart** (undecided)
+- `pa|pai|paie|paî|pe|pei|pè|pé|pê` /pE/ (parts pa, pe, pei; new conflict freq 1.3): **apart** (undecided)
 - `tou|tout|tu` /tu/ (parts tout, tou; new conflict freq 0.0): **apart** (undecided)
-- `ce|cei|cè|cé|sai|say|sce|se|sei|sep|sè|sé` /sE/ (parts sai, ce, se; new conflict freq 2.6): **apart** (undecided)
+- `ce|cei|cè|cé|sa|sai|say|sce|se|sei|sep|sè|sé` /sE/ (parts sai, ce, se; new conflict freq 2.6): **apart** (undecided)
 - `gneur|gneurs` /N9R/ (parts gneur; new conflict freq 0.0): **apart** (undecided)
 - `lade|llade` /lad/ (parts lade; new conflict freq 4.5): **apart** (undecided)
 - `mier|mié|mmier` /mje/ (parts mier; new conflict freq 0.0): **apart** (undecided)
@@ -588,12 +595,12 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `cham|chan|sham|shan` /S@/ (parts chan, cham; new conflict freq 0.0): **apart** (undecided)
 - `nier|nié|nnier` /nje/ (parts nier, nnier; new conflict freq 0.2): **apart** (undecided)
 - `vais|vet|vêt` /vE/ (parts vet; new conflict freq 0.0): **apart** (undecided)
-- `ta|tas|tat|tha|tta|tà` /ta/ (parts tat, ta, tta; new conflict freq 0.2): **apart** (undecided)
+- `ta|tas|tat|tha|tta|tà` /ta/ (parts tat, ta, tta, tas; new conflict freq 0.2): **apart** (undecided)
 - `mom|mon|mont` /m§/ (parts mon, mont; new conflict freq 0.0): **apart** (undecided)
 - `pprendre|prendre` /pR@dR/ (parts prendre; new conflict freq 0.0): **apart** (undecided)
 - `gen|jam|jan` /Z@/ (parts gen, jam; new conflict freq 0.0): **apart** (undecided)
 - `prae|prai|pre|pré|préh|prê` /pRe/ (parts pré; new conflict freq 0.0): **apart** (undecided)
-- `illeur|illeurs|lleur|yeur` /j9R/ (parts lleur, illeur; new conflict freq 0.0): **apart** (undecided)
+- `illeur|illeurs|lleur|yer|yeur` /j9R/ (parts lleur, illeur, yeur; new conflict freq 0.0): **apart** (undecided)
 - `cri|crie|crit` /kRi/ (parts crit; new conflict freq 0.0): **apart** (undecided)
 - `ner|neur|nheur|nneur` /n9R/ (parts nneur, neur, ner; new conflict freq 0.0): **apart** (undecided)
 - `tal|thal|ttal` /tal/ (parts tal; new conflict freq 0.1): **apart** (undecided)
@@ -618,6 +625,7 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `rré|ré` /Re/ (parts ré, rré; new conflict freq 0.0): **apart** (undecided)
 - `cae|ce|coe|cé|sai|scé|se|sé` /se/ (parts sé, cé, se, ce, sai, scé; new conflict freq 0.2): **apart** (undecided)
 - `cin|cinct|sain|seing|sin|ssaim|ssain|ssaint|ssin` /s5/ (parts cin, ssin; new conflict freq 0.0): **apart** (undecided)
+- `illage|illiage|llage|yage` /jaZ/ (parts yage, llage, illage; new conflict freq 0.0): **apart** (undecided)
 - `ssu|ssue|ssus|su|sue|çu` /sy/ (parts çu, ssu; new conflict freq 5.2): **apart** (undecided)
 - `bu|bue|bus|but` /by/ (parts bu; new conflict freq 0.9): **apart** (undecided)
 - `coo|cou|coû|cu|kou|ku` /ku/ (parts cou; new conflict freq 0.2): **apart** (undecided)
@@ -628,9 +636,10 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `lance|lence|llence` /l@s/ (parts lence, lance; new conflict freq 0.0): **apart** (undecided)
 - `dai|de|dé` /dE/ (parts de, dé; new conflict freq 0.0): **apart** (undecided)
 - `rière|rrière` /RjER/ (parts rrière; new conflict freq 0.0): **apart** (undecided)
-- `dou|du` /du/ (parts dou; new conflict freq 0.0): **apart** (undecided)
+- `dou|doue|du` /du/ (parts dou; new conflict freq 0.0): **apart** (undecided)
 - `tram|tran|trem|tren` /tR@/ (parts tran, trem; new conflict freq 0.0): **apart** (undecided)
 - `nel|nelle|nnel|nnelle` /nEl/ (parts nel, nnel, nelle; new conflict freq 0.0): **apart** (undecided)
+- `so|soi|soie|swah` /swa/ (parts soi; new conflict freq 0.1): **apart** (undecided)
 - `geô|jau|jo` /Zo/ (parts jo, jau; new conflict freq 0.0): **apart** (undecided)
 - `li|lie|lies|lis|lit|lli|llie|llye|ly` /li/ (parts li, lie, lis; new conflict freq 0.5): **apart** (undecided)
 - `reur|rreur` /R9R/ (parts rreur, reur; new conflict freq 0.0): **apart** (undecided)
@@ -643,7 +652,6 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `dale|del|delle|dèle` /dEl/ (parts dèle, delle; new conflict freq 1.0): **apart** (undecided)
 - `per|pper|ppé|ppée|pée` /pe/ (parts per, pper, pée, ppé; new conflict freq 10.1): **apart** (undecided)
 - `reil|reille` /REj/ (parts reille; new conflict freq 0.0): **apart** (undecided)
-- `soi|soie|swah` /swa/ (parts soi; new conflict freq 0.0): **apart** (undecided)
 - `mer|mmer|mmé|mmée|mées` /me/ (parts mer, mmer, mmé; new conflict freq 10.9): **apart** (undecided)
 - `cha|chah|char|châ|scha|sha` /Sa/ (parts cha, châ; new conflict freq 1.4): **apart** (undecided)
 - `ga|gha|gua|gâ` /ga/ (parts ga, gâ; new conflict freq 0.0): **apart** (undecided)
@@ -654,7 +662,6 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `ccer|ceur|seur|soeur|sser|sseur` /s9R/ (parts sseur, seur, ceur; new conflict freq 0.0): **apart** (undecided)
 - `ab|ap|hap` /ap/ (parts ab; new conflict freq 0.0): **apart** (undecided)
 - `ca|cas|cat|cca|ka|kha|kka|qu'à|qua|quat` /ka/ (parts cat, ca, ka; new conflict freq 0.3): **apart** (undecided)
-- `cker|cquer|cquée|ker|ké|quer|quée` /ke/ (parts quer; new conflict freq 1.4): **apart** (undecided)
 - `sam|sang|sem|sen` /s@/ (parts sen, sem, sam; new conflict freq 0.0): **apart** (undecided)
 - `cen|san` /s@/ (parts cen, san; new conflict freq 0.0): **apart** (undecided)
 - `chi|ki|ky|qui` /ki/ (parts qui, ki; new conflict freq 0.0): **apart** (undecided)
@@ -670,7 +677,7 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `nuer|nué` /n8e/ (parts nuer; new conflict freq 0.8): **apart** (undecided)
 - `cer|cerre|cert|cère|saire|scère|sert|ssaire|sserre|ssert` /sER/ (parts ssaire; new conflict freq 0.0): **apart** (undecided)
 - `nan|nant|nent|nnant` /n@/ (parts nant, nnant, nent; new conflict freq 0.0): **apart** (undecided)
-- `ra|rai|raie|re|rhé|ré|réh` /Re/ (parts ré, re, rhé; new conflict freq 0.3): **fused**
+- `rai|re|rhé|ré|réh` /Re/ (parts ré, re, rhé; new conflict freq 0.3): **apart** (undecided)
 - `vau|vo|vos` /vo/ (parts vo, vau; new conflict freq 0.0): **apart** (undecided)
 - `fic|fique|phique` /fik/ (parts fique, phique; new conflict freq 0.0): **apart** (undecided)
 - `vai|ve|vei|vé|vê` /vE/ (parts ve, vai, vê, vei; new conflict freq 2.0): **apart** (undecided)
@@ -678,13 +685,14 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `bau|bo|boh` /bo/ (parts bo, bau; new conflict freq 0.0): **apart** (undecided)
 - `pea|pee|pi|py` /pi/ (parts pi, py; new conflict freq 0.5): **apart** (undecided)
 - `lea|li|lie|ly` /li/ (parts li, ly; new conflict freq 1.8): **apart** (undecided)
-- `moe|moi` /mwa/ (parts moi; new conflict freq 0.0): **apart** (undecided)
+- `mo|moe|moi` /mwa/ (parts mo, moi; new conflict freq -0.0): **apart** (undecided)
 - `sel|selle|selles|zel|zelle` /zEl/ (parts selle; new conflict freq 0.1): **apart** (undecided)
 - `vir|vire` /viR/ (parts vir; new conflict freq 0.0): **apart** (undecided)
-- `nal|nales|nnal|nnale|nnales` /nal/ (parts nal; new conflict freq 0.8): **apart** (undecided)
+- `nal|nales|nnal|nnale|nnales` /nal/ (parts nal, nnal; new conflict freq 0.8): **apart** (undecided)
 - `rol|role|rolle` /ROl/ (parts role; new conflict freq 0.0): **apart** (undecided)
 - `rage|rrage` /RaZ/ (parts rage, rrage; new conflict freq 0.0): **apart** (undecided)
 - `cours|court` /kuR/ (parts cours; new conflict freq 0.0): **apart** (undecided)
+- `illable|yable` /jabl/ (parts yable; new conflict freq 0.0): **apart** (undecided)
 - `laire|ler|llaire|lère` /lER/ (parts laire, llaire; new conflict freq 0.0): **apart** (undecided)
 - `va|vah|wa` /va/ (parts va; new conflict freq 0.0): **apart** (undecided)
 - `cance|kaans|quance|quence` /k@s/ (parts quence; new conflict freq 0.0): **apart** (undecided)
@@ -706,11 +714,11 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `pon|pons|pont|ppon` /p§/ (parts pon; new conflict freq 0.0): **apart** (undecided)
 - `lope|loppe` /lOp/ (parts lope; new conflict freq 0.0): **apart** (undecided)
 - `ma|mac|mas|mat|mma|mmas` /ma/ (parts ma, mat, mas; new conflict freq 0.0): **apart** (undecided)
-- `hu|u|uh` /y/ (parts u, hu; new conflict freq 0.0): **apart** (undecided)
+- `hu|hue|u|uh` /y/ (parts u, hu; new conflict freq 0.0): **apart** (undecided)
 - `pain|paing|peint|pin|ppin` /p5/ (parts pin; new conflict freq 0.0): **apart** (undecided)
 - `chau|cho|chô|sho|show` /So/ (parts chau, cho, chô; new conflict freq 0.0): **apart** (undecided)
 - `ssure|ssures|sure|çure` /syR/ (parts ssure, sure; new conflict freq 0.0): **apart** (undecided)
-- `gou|goû` /gu/ (parts gou; new conflict freq 0.1): **apart** (undecided)
+- `gou|goû|gu` /gu/ (parts gou; new conflict freq 0.2): **apart** (undecided)
 - `bite|bitent|bites|byte` /bit/ (parts bite, bites, bitent; new conflict freq 0.0): **apart** (undecided)
 - `mage|mmage` /maZ/ (parts mmage, mage; new conflict freq 0.0): **apart** (undecided)
 - `ta|tah|tei|tha|tâ` /ta/ (parts ta, tâ, tha; new conflict freq 5.4): **apart** (undecided)
@@ -728,20 +736,22 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `pla|plai|plâ` /pla/ (parts pla, plâ; new conflict freq 0.0): **apart** (undecided)
 - `net|neth|nette|nettes|nnette|nnête|nète` /nEt/ (parts nnette, nette; new conflict freq 0.0): **apart** (undecided)
 - `car|kar|quar` /kaR/ (parts car, quar; new conflict freq 0.0): **apart** (undecided)
-- `da|dah|das|dat|date|ddha` /da/ (parts dat, da; new conflict freq 0.1): **apart** (undecided)
-- `illeux|lleux|ïeu|ïeux` /j2/ (parts lleux, illeux; new conflict freq 0.0): **apart** (undecided)
+- `da|dah|das|dat|ddha` /da/ (parts dat, da; new conflict freq 0.1): **apart** (undecided)
+- `illeux|lleux|yeu|yeux|ïeu|ïeux` /j2/ (parts lleux, yeux, illeux; new conflict freq 0.0): **apart** (undecided)
 - `dain|din` /d5/ (parts din; new conflict freq 0.0): **apart** (undecided)
 - `cquette|ket|kette|quette|quête` /kEt/ (parts quette; new conflict freq 0.0): **apart** (undecided)
-- `an|and|ans|ant|empt|ent` /@/ (parts ant, ent, an; new conflict freq 0.2): **apart** (undecided)
+- `an|and|ans|ant|empt|ent` /@/ (parts ent, ant, an; new conflict freq 0.2): **apart** (undecided)
 - `poi|poê` /pwa/ (parts poi; new conflict freq 0.0): **apart** (undecided)
+- `ien|yen|yin|ïen` /j5/ (parts yen, ïen, ien; new conflict freq 0.0): **apart** (undecided)
 - `toi|toua` /twa/ (parts toi; new conflict freq 0.0): **apart** (undecided)
-- `laite|leth|lette|llaite|llaitent|llaites|llette|lète` /lEt/ (parts lette; new conflict freq 0.0): **apart** (undecided)
+- `laite|laitent|laites|leth|lette|llaite|llaitent|llaites|llette|lète` /lEt/ (parts lette; new conflict freq 0.0): **apart** (undecided)
 - `gar|gard|gare|garre|guar` /gaR/ (parts gard; new conflict freq 0.0): **apart** (undecided)
-- `ddie|ddy|dee|dhi|di|die|dis|dit|dits|dy` /di/ (parts di, die, dit, dis; new conflict freq 2.2): **apart** (undecided)
+- `ddie|ddy|dee|dhi|di|die|dis|dit|dits|dy` /di/ (parts di, die, dit, dis, dy; new conflict freq 2.2): **apart** (undecided)
 - `sain|sein|sin|zain|zin` /z5/ (parts sin; new conflict freq 0.0): **apart** (undecided)
 - `des|dés` /des/ (parts des, dés; new conflict freq 0.0): **apart** (undecided)
 - `rance|rence|rrance|rrence` /R@s/ (parts rence, rance; new conflict freq 0.0): **apart** (undecided)
 - `ccu|cu|cul|cus|ku` /ky/ (parts cu; new conflict freq 0.2): **apart** (undecided)
+- `tou|toue` /tu/ (parts tou; new conflict freq 0.0): **apart** (undecided)
 - `tice|tis|tiss|tisse|tys` /tis/ (parts tice, tis; new conflict freq 0.0): **apart** (undecided)
 - `pais|pect|pet` /pE/ (parts pect; new conflict freq 0.0): **apart** (undecided)
 - `blai|ble|blê` /blE/ (parts ble; new conflict freq 0.0): **apart** (undecided)
@@ -767,10 +777,10 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `ciance|cience|science|tience|tiens` /sj@s/ (parts science; new conflict freq 0.0): **apart** (undecided)
 - `nae|ne|nei|né` /ne/ (parts né; new conflict freq 0.1): **apart** (undecided)
 - `fra|phra` /fRa/ (parts fra, phra; new conflict freq 0.0): **apart** (undecided)
-- `hoi|houa|oi|oua|wa` /wa/ (parts oi, wa, oua; new conflict freq 0.0): **apart** (undecided)
+- `ho|hoi|houa|o|oi|oua|wa` /wa/ (parts oi, wa, oua; new conflict freq 0.0): **apart** (undecided)
 - `seau|so|zo` /zo/ (parts seau, zo, so; new conflict freq 0.1): **apart** (undecided)
 - `sième|xième|zième` /zjEm/ (parts zième; new conflict freq 0.0): **apart** (undecided)
-- `mau|maux|meau|mmeau|mo|moan|mot` /mo/ (parts mo, meau; new conflict freq 0.1): **apart** (undecided)
+- `mau|maux|meau|mmeau|mo|mot` /mo/ (parts mo, meau; new conflict freq 0.1): **apart** (undecided)
 - `nic|nich|nik|nique|nnique` /nik/ (parts nique; new conflict freq 1.2): **apart** (undecided)
 - `illie|illis|illy|lli|llis|lly` /ji/ (parts illis; new conflict freq 0.0): **apart** (undecided)
 - `prai|pre|pré|prê` /pRE/ (parts pre, prê; new conflict freq -0.0): **apart** (undecided)
@@ -814,9 +824,8 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `lain|lin|llin` /l5/ (parts lin, lain; new conflict freq 0.0): **apart** (undecided)
 - `cien|ssien|tien` /sj5/ (parts cien, tien, ssien; new conflict freq 0.0): **apart** (undecided)
 - `lai|laie|lais|legs|let|lley` /lE/ (parts let, lais; new conflict freq 2.8): **apart** (undecided)
-- `eu|eux` /2/ (parts eux; new conflict freq 0.0): **apart** (undecided)
 - `table|ttable` /tabl/ (parts table, ttable; new conflict freq 0.0): **apart** (undecided)
-- `cri|crii|cry` /kRij/ (parts cri; new conflict freq 0.0): **apart** (undecided)
+- `chry|cri|crie|cry` /kRi/ (parts cri; new conflict freq 0.0): **apart** (undecided)
 - `gai|ggae|gger|guer` /ge/ (parts guer; new conflict freq 0.1): **apart** (undecided)
 - `ver|veur|weur` /v9R/ (parts veur; new conflict freq 0.0): **apart** (undecided)
 - `cain|kin|quain|quin` /k5/ (parts cain, quin; new conflict freq 0.2): **apart** (undecided)
@@ -838,9 +847,10 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `vit|vite|vitent|vites` /vit/ (parts vite, vites, vitent; new conflict freq 0.0): **apart** (undecided)
 - `tau|thau|tho|to|tô` /to/ (parts to, tau, tho; new conflict freq 0.3): **apart** (undecided)
 - `lam|lan|len` /l@/ (parts lan, len, lam; new conflict freq 0.0): **apart** (undecided)
-- `plai|ple|plei` /plE/ (parts plai; new conflict freq 0.0): **apart** (undecided)
+- `pla|plai|ple|plei` /plE/ (parts plai; new conflict freq 0.0): **apart** (undecided)
 - `bau|baud|beau|bo|bot` /bo/ (parts bo, bot, beau; new conflict freq 0.1): **apart** (undecided)
 - `chré|cre|cré|crée|crê` /kRe/ (parts cré; new conflict freq 0.2): **apart** (undecided)
+- `er|é|ée|ë` /e/ (parts er, é; new conflict freq 1.9): **apart** (undecided)
 - `thyste|tiste|ttiste` /tist/ (parts tiste, ttiste; new conflict freq 0.0): **apart** (undecided)
 - `la|lacs|lah|las|lat|lla|llah|llat|là` /la/ (parts lat, la, las, lla; new conflict freq 1.3): **apart** (undecided)
 - `nage|nnage` /naZ/ (parts nage, nnage; new conflict freq 0.0): **apart** (undecided)
@@ -852,12 +862,12 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `naie|nais|nay|net|ney|nnaie|nnais|nnay|nnet|nêt` /nE/ (parts net, nais, nnet, nnais; new conflict freq 0.0): **apart** (undecided)
 - `mar|mard|marre|mart|mmard` /maR/ (parts mar, mard; new conflict freq 0.0): **apart** (undecided)
 - `gage|guage` /gaZ/ (parts gage; new conflict freq 0.0): **apart** (undecided)
-- `na|nas|nat|naüm|nha|nna|nnah|nnat` /na/ (parts na, nat; new conflict freq 0.1): **apart** (undecided)
+- `na|nas|nat|nha|nna|nnah|nnat` /na/ (parts na, nat; new conflict freq 0.1): **apart** (undecided)
 - `cu|ku` /ky/ (parts cu; new conflict freq 0.0): **apart** (undecided)
 - `llois|loi|lois` /lwa/ (parts loi; new conflict freq 0.0): **apart** (undecided)
 - `paim|pein|pen|pim|pin` /p5/ (parts pein, pin, pen; new conflict freq 0.0): **apart** (undecided)
 - `frau|fro|frô` /fRo/ (parts fro; new conflict freq 0.0): **apart** (undecided)
-- `pri|prii` /pRij/ (parts pri; new conflict freq 0.0): **apart** (undecided)
+- `fo|foi|foua` /fwa/ (parts foi; new conflict freq 0.0): **apart** (undecided)
 - `tra|trai|traî|tre|trei` /tRE/ (parts trai, traî, tre, trei; new conflict freq 0.0): **apart** (undecided)
 - `cide|side` /sid/ (parts cide; new conflict freq 0.0): **apart** (undecided)
 - `thrine|trine|ttrine` /tRin/ (parts trine; new conflict freq 0.0): **apart** (undecided)
@@ -869,6 +879,7 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `roir|roire|rroir` /RwaR/ (parts roir; new conflict freq 0.0): **apart** (undecided)
 - `liste|lliste|lyste` /list/ (parts liste, lliste; new conflict freq 0.0): **apart** (undecided)
 - `lace|las|lasse|llace` /las/ (parts lasse; new conflict freq 0.0): **apart** (undecided)
+- `ro|roi|roue` /Rwa/ (parts ro; new conflict freq 0.0): **apart** (undecided)
 - `rrus|rus` /Rys/ (parts rus; new conflict freq 0.0): **apart** (undecided)
 - `el|elle|elles|ël` /El/ (parts el, elle; new conflict freq 0.0): **apart** (undecided)
 - `naire|naires|ner|nnaire|nner|nnerre|nère` /nER/ (parts naire, nnaire, ner; new conflict freq 0.7): **apart** (undecided)
@@ -902,7 +913,7 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `fai|faî|fe|fei|fê` /fE/ (parts fê, fe, fai; new conflict freq 0.3): **apart** (undecided)
 - `pas|passe` /pas/ (parts pas; new conflict freq 0.0): **apart** (undecided)
 - `cir|seer|sir` /siR/ (parts cir; new conflict freq 0.0): **apart** (undecided)
-- `ra|ray` /REj/ (parts ray; new conflict freq 0.0): **apart** (undecided)
+- `illon|ion|llion|llon|llons|yon` /j§/ (parts llon, yon, illon; new conflict freq 0.0): **apart** (undecided)
 - `bbi|bbies|bby|bee|bi|bie|bis|bit|by` /bi/ (parts bi, by, bit, bie; new conflict freq 0.9): **apart** (undecided)
 - `thu|tu|tue` /ty/ (parts tu; new conflict freq 0.0): **apart** (undecided)
 - `car|card|carre|cart|cquard|kare|kkar|quard` /kaR/ (parts card, cart; new conflict freq 1.1): **apart** (undecided)
@@ -912,9 +923,10 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `dal|dale` /dal/ (parts dale, dal; new conflict freq 0.0): **apart** (undecided)
 - `free|fri|phry` /fRi/ (parts fri; new conflict freq 0.0): **apart** (undecided)
 - `gaud|gaux|gho|go|got|goth|guo` /go/ (parts go, got; new conflict freq 0.2): **apart** (undecided)
-- `illance|llance|ïence` /j@s/ (parts llance; new conflict freq 0.0): **apart** (undecided)
+- `illance|llance|yance|ïence` /j@s/ (parts llance, yance; new conflict freq 0.0): **apart** (undecided)
 - `mance|mence|mmense` /m@s/ (parts mence, mance; new conflict freq 0.0): **apart** (undecided)
 - `rel|relle|relles` /REl/ (parts rel, relle; new conflict freq 0.0): **apart** (undecided)
+- `cla|clai` /klE/ (parts clai; new conflict freq 0.0): **apart** (undecided)
 - `sa|sat|za` /za/ (parts za, sa; new conflict freq 0.1): **apart** (undecided)
 - `ance|ence` /@s/ (parts ance, ence; new conflict freq 0.0): **apart** (undecided)
 - `page|ppage` /paZ/ (parts page; new conflict freq 0.0): **apart** (undecided)
@@ -926,12 +938,13 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `gaie|gaî|gei|gué|guê` /ge/ (parts gué; new conflict freq 0.0): **apart** (undecided)
 - `pal|pale|ppal` /pal/ (parts pal; new conflict freq 0.0): **apart** (undecided)
 - `cal|cale|ccal|qual` /kal/ (parts cal, cale; new conflict freq 1.7): **apart** (undecided)
-- `chry|cri|crie|cry` /kRi/ (parts cri; new conflict freq 0.0): **apart** (undecided)
-- `la|lai|laie|le|lé` /le/ (parts lé, le; new conflict freq 0.4): **apart** (undecided)
+- `ant|illant|llan|llant|yant` /j@/ (parts yant, llant, illant; new conflict freq 0.0): **apart** (undecided)
+- `lai|le|lé` /le/ (parts lé, le; new conflict freq 0.4): **apart** (undecided)
 - `ette|ète` /Et/ (parts ette; new conflict freq 0.0): **apart** (undecided)
 - `tomne|ton|tone|tonne` /tOn/ (parts tone; new conflict freq 0.0): **apart** (undecided)
 - `bbon|bon|bond` /b§/ (parts bon, bond; new conflict freq 0.0): **apart** (undecided)
 - `feuil|feuille` /f9j/ (parts feuille; new conflict freq 0.1): **apart** (undecided)
+- `lo|loi|loua` /lwa/ (parts lo; new conflict freq 0.0): **apart** (undecided)
 - `pli|plie|plies|plis` /pli/ (parts pli; new conflict freq 0.0): **apart** (undecided)
 - `cra|crai|crâ|kra` /kRa/ (parts cra, crâ; new conflict freq 0.0): **apart** (undecided)
 - `xuel|xuelle` /ks8El/ (parts xuel; new conflict freq 0.3): **apart** (undecided)
@@ -939,7 +952,7 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `trique|ttrique` /tRik/ (parts trique; new conflict freq 0.0): **apart** (undecided)
 - `ffice|fice` /fis/ (parts fice; new conflict freq 0.0): **apart** (undecided)
 - `sier|sié|zier` /zje/ (parts sier; new conflict freq 0.6): **apart** (undecided)
-- `al|ale` /al/ (parts al; new conflict freq 0.3): **apart** (undecided)
+- `al|ale` /al/ (parts al; new conflict freq 0.0): **apart** (undecided)
 - `pette|pettes|ppette|pète|pètes|pête` /pEt/ (parts pette; new conflict freq 0.4): **apart** (undecided)
 - `bri|brie` /bRi/ (parts bri; new conflict freq 0.0): **apart** (undecided)
 - `cru|crû` /kRy/ (parts cru; new conflict freq 0.0): **apart** (undecided)
@@ -956,7 +969,6 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `chia|ria|riat` /Rja/ (parts riat, ria; new conflict freq 0.0): **apart** (undecided)
 - `rou|roue` /Ru/ (parts rou; new conflict freq 0.0): **apart** (undecided)
 - `illir|llir` /jiR/ (parts illir; new conflict freq 0.0): **apart** (undecided)
-- `illant|llan|llant|yant` /j@/ (parts llant, illant; new conflict freq 0.0): **apart** (undecided)
 - `mid|mide|myde` /mid/ (parts mide; new conflict freq 0.0): **apart** (undecided)
 - `ddhique|dic|dique` /dik/ (parts dique; new conflict freq 0.0): **apart** (undecided)
 - `log|logue` /lOg/ (parts logue; new conflict freq 0.0): **apart** (undecided)
@@ -980,23 +992,20 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `meu|meux|mmeux` /m2/ (parts meux; new conflict freq 0.0): **apart** (undecided)
 - `grafe|graphe` /gRaf/ (parts graphe; new conflict freq 0.0): **apart** (undecided)
 - `ffee|ffi|fi|fis|fit|fix|phi|phie` /fi/ (parts phie; new conflict freq 0.0): **apart** (undecided)
-- `croi|croî` /kRwa/ (parts croi; new conflict freq 0.0): **apart** (undecided)
 - `cable|ccable|quable` /kabl/ (parts quable, cable; new conflict freq 0.0): **apart** (undecided)
 - `cace|cas|casse|quace` /kas/ (parts casse; new conflict freq 0.0): **apart** (undecided)
 - `cel|celle|celles|cèle|sel|ssel|sselle` /sEl/ (parts celle; new conflict freq 0.0): **apart** (undecided)
 - `rhu|ru|rue` /Ry/ (parts ru; new conflict freq 0.0): **apart** (undecided)
 - `lluer|llué|luer` /l8e/ (parts luer; new conflict freq 0.0): **apart** (undecided)
-- `boi|boî` /bwa/ (parts boi; new conflict freq 0.0): **apart** (undecided)
-- `ou|u` /u/ (parts ou; new conflict freq 0.0): **apart** (undecided)
+- `bo|boi|boî` /bwa/ (parts boi; new conflict freq 0.0): **apart** (undecided)
 - `coi|coua|cua|qua|quoi` /kwa/ (parts coi, qua; new conflict freq 0.0): **apart** (undecided)
 - `thine|tine|ttine` /tin/ (parts tine; new conflict freq 0.0): **apart** (undecided)
 - `baire|ber|bert|bère` /bER/ (parts bert, bère; new conflict freq 0.0): **apart** (undecided)
 - `ciel|tiel` /sjEl/ (parts tiel, ciel; new conflict freq 0.0): **apart** (undecided)
-- `illette|llette|llettes` /jEt/ (parts llette, illette; new conflict freq 0.0): **apart** (undecided)
+- `illette|llette|llettes|yette` /jEt/ (parts llette, illette; new conflict freq 0.0): **apart** (undecided)
 - `laine|leine|len|llen|llène|lène` /lEn/ (parts lène; new conflict freq 0.2): **apart** (undecided)
 - `bam|ban` /b@/ (parts ban, bam; new conflict freq 0.0): **apart** (undecided)
 - `psi|psy` /psi/ (parts psy; new conflict freq 0.0): **apart** (undecided)
-- `illage|illiage|llage|yage` /jaZ/ (parts llage, illage; new conflict freq 0.0): **apart** (undecided)
 - `ccro|chro|cro|croc` /kRo/ (parts cro; new conflict freq 0.0): **apart** (undecided)
 - `mette|mmette|mète` /mEt/ (parts mette; new conflict freq 0.0): **apart** (undecided)
 - `le|leus|leux|lle|lleux` /l2/ (parts leux, lleux; new conflict freq 0.0): **apart** (undecided)
@@ -1006,11 +1015,11 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `dro|drô` /dRo/ (parts dro; new conflict freq 0.0): **apart** (undecided)
 - `riste|rriste|ryste` /Rist/ (parts riste; new conflict freq 0.0): **apart** (undecided)
 - `tache|ttache|tâche` /taS/ (parts tache; new conflict freq 0.0): **apart** (undecided)
-- `lite|litent|lites|lithe|llite|lyte` /lit/ (parts lite, lithe, litent; new conflict freq 0.0): **apart** (undecided)
+- `lite|litent|lites|lithe|llite|lyte` /lit/ (parts lite, lithe, litent, lites; new conflict freq 0.0): **apart** (undecided)
 - `caire|cker|ker|kère|quaire|querre|quère` /kER/ (parts ker, caire; new conflict freq 0.0): **apart** (undecided)
+- `dies|dise` /diz/ (parts dise; new conflict freq 0.0): **apart** (undecided)
 - `brou|brouh` /bRu/ (parts brou; new conflict freq 0.0): **apart** (undecided)
-- `illard|llard|llart|yard` /jaR/ (parts illard, llard; new conflict freq 0.0): **apart** (undecided)
-- `illon|ion|llion|llon|llons|yon` /j§/ (parts llon, illon; new conflict freq 0.0): **apart** (undecided)
+- `illard|llard|llart|yard` /jaR/ (parts illard, llard, yard; new conflict freq 0.0): **apart** (undecided)
 - `rion|rions|ryon` /Rj§/ (parts rions; new conflict freq 0.0): **apart** (undecided)
 - `pom|pon` /p§/ (parts pom, pon; new conflict freq 0.0): **apart** (undecided)
 - `man|mane` /man/ (parts man, mane; new conflict freq 0.0): **apart** (undecided)
@@ -1031,17 +1040,18 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `dia|diat` /dja/ (parts dia; new conflict freq 0.0): **apart** (undecided)
 - `gnard|gnare` /NaR/ (parts gnard; new conflict freq 0.0): **apart** (undecided)
 - `plom|plon` /pl§/ (parts plon, plom; new conflict freq -0.0): **apart** (undecided)
-- `crai|cre|crè|cré|crê` /kRE/ (parts crê; new conflict freq 0.0): **apart** (undecided)
+- `cra|crai|cre|crè|cré|crê` /kRE/ (parts cra, crê; new conflict freq 0.0): **apart** (undecided)
 - `pie|pied|pié` /pje/ (parts pié; new conflict freq 0.2): **apart** (undecided)
 - `gai|gaî|ghe|gue|guê` /gE/ (parts gue; new conflict freq 0.6): **apart** (undecided)
 - `bain|bbin|bin` /b5/ (parts bin, bain; new conflict freq 0.0): **apart** (undecided)
 - `gli|gly` /gli/ (parts gli, gly; new conflict freq 0.0): **apart** (undecided)
+- `no|noi|noie` /nwa/ (parts no; new conflict freq 0.0): **apart** (undecided)
 - `taie|taient|tais|tait|tet|têt` /tE/ (parts tait, tais, taient, tet; new conflict freq 0.0): **apart** (undecided)
 - `ge|gei|gey|gè|gê|je` /ZE/ (parts gei; new conflict freq 0.0): **apart** (undecided)
 - `tern|terne|ternes` /tERn/ (parts terne; new conflict freq 0.0): **apart** (undecided)
 - `sad|sade|ssade|çade` /sad/ (parts ssade; new conflict freq 0.0): **apart** (undecided)
 - `rick|rique|rrhique|rrick|rrique` /Rik/ (parts rique; new conflict freq 0.0): **apart** (undecided)
-- `tri|trii` /tRij/ (parts tri; new conflict freq 0.0): **apart** (undecided)
+- `tri|trill` /tRij/ (parts tri; new conflict freq 0.0): **apart** (undecided)
 - `cit|cite|citent|cites|cyte|scite|scitent|scites|site|ssit|ssite|ssitent|ssites` /sit/ (parts cite, citent, cites; new conflict freq 0.0): **apart** (undecided)
 - `tex|thex` /tEks/ (parts tex; new conflict freq 0.0): **apart** (undecided)
 - `cas|casse|kas` /kas/ (parts cas; new conflict freq 0.0): **apart** (undecided)
@@ -1049,7 +1059,7 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `geon|jon|jonc` /Z§/ (parts geon; new conflict freq 0.0): **apart** (undecided)
 - `rine|rrine` /Rin/ (parts rine; new conflict freq 0.0): **apart** (undecided)
 - `gnan|gnant` /N@/ (parts gnant; new conflict freq 0.0): **apart** (undecided)
-- `illot|llaud|llo|llot|yot|ïaut` /jo/ (parts illot; new conflict freq 0.0): **apart** (undecided)
+- `illot|llaud|llo|llot|yau|yot|ïaut` /jo/ (parts illot, yau; new conflict freq 0.0): **apart** (undecided)
 - `vet|vete|vette|vète` /vEt/ (parts vette; new conflict freq 0.0): **apart** (undecided)
 - `ger|gger|ggeur|gueur` /g9R/ (parts gueur, gger; new conflict freq 0.0): **apart** (undecided)
 - `vier|viers|viller|vié` /vje/ (parts vier; new conflict freq 0.0): **apart** (undecided)
@@ -1082,11 +1092,10 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `teux|theux|tteux` /t2/ (parts teux, tteux; new conflict freq 0.0): **apart** (undecided)
 - `cha|chas|chat|sha|shad` /Sa/ (parts chat; new conflict freq 0.0): **apart** (undecided)
 - `rien|rrien|ryen` /Rj5/ (parts rien; new conflict freq 0.0): **apart** (undecided)
-- `foi|foua` /fwa/ (parts foi; new conflict freq 0.0): **apart** (undecided)
 - `chlée|cler` /kle/ (parts cler; new conflict freq 0.0): **apart** (undecided)
 - `mel|melle|mmel` /mEl/ (parts melle, mel; new conflict freq 0.0): **apart** (undecided)
 - `spea|spee|spi` /spi/ (parts spi; new conflict freq 0.0): **apart** (undecided)
-- `enne|ène` /En/ (parts enne, ène; new conflict freq 0.0): **apart** (undecided)
+- `ienne|yenne` /jEn/ (parts ienne; new conflict freq 0.0): **apart** (undecided)
 - `hos|os` /Os/ (parts hos, os; new conflict freq 0.0): **apart** (undecided)
 - `cker|ckeur|coeur|ker|kkeur|queur` /k9R/ (parts queur, ker, cker; new conflict freq 0.4): **apart** (undecided)
 - `ban|bant|ben` /b@/ (parts ban, bant; new conflict freq 0.0): **apart** (undecided)
@@ -1126,11 +1135,11 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `illère|ière|llière|llère|yère` /jER/ (parts illère, ière; new conflict freq 0.0): **apart** (undecided)
 - `dace|das|dasse` /das/ (parts dasse; new conflict freq 0.0): **apart** (undecided)
 - `gan|gand|gant|ggan|ghan|guent` /g@/ (parts gant, gan; new conflict freq 0.0): **apart** (undecided)
-- `pli|plii` /plij/ (parts pli; new conflict freq 0.0): **apart** (undecided)
+- `pli|plie` /pli/ (parts pli; new conflict freq 0.0): **apart** (undecided)
 - `tesque|ttesque` /tEsk/ (parts tesque; new conflict freq 0.0): **apart** (undecided)
 - `mur|mure` /myR/ (parts mure; new conflict freq 0.0): **apart** (undecided)
 - `a|at|â` /a/ (parts a; new conflict freq 0.0): **apart** (undecided)
-- `ffrer|ffré|frer|fré|phré` /fRe/ (parts ffrer; new conflict freq 0.2): **apart** (undecided)
+- `ffrer|ffré|frer|fré|phré` /fRe/ (parts ffrer, frer; new conflict freq 0.2): **apart** (undecided)
 - `fage|ffage|phage` /faZ/ (parts ffage, phage; new conflict freq 0.0): **apart** (undecided)
 - `lisme|llisme` /lizm/ (parts lisme; new conflict freq 0.0): **apart** (undecided)
 - `nisme|nnisme` /nizm/ (parts nisme, nnisme; new conflict freq 0.0): **apart** (undecided)
@@ -1161,7 +1170,6 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `ves|wes` /vEs/ (parts ves; new conflict freq 0.0): **apart** (undecided)
 - `rhomme|rum` /ROm/ (parts rum; new conflict freq 0.0): **apart** (undecided)
 - `rium|ryum` /RjOm/ (parts rium; new conflict freq 0.0): **apart** (undecided)
-- `pe|peu` /p2/ (parts pe, peu; new conflict freq 0.0): **apart** (undecided)
 - `chiste|chyste|sciste` /Sist/ (parts chiste; new conflict freq 0.0): **apart** (undecided)
 - `ciste|siste|ssiste` /sist/ (parts ciste, ssiste; new conflict freq 0.0): **apart** (undecided)
 - `ec|ek|hec` /Ek/ (parts ec; new conflict freq 0.0): **apart** (undecided)
@@ -1170,13 +1178,12 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `sol|sole|ssole` /sOl/ (parts sol; new conflict freq 0.0): **apart** (undecided)
 - `beur|beurre` /b9R/ (parts beur; new conflict freq 0.0): **apart** (undecided)
 - `naise|nnaise|nèse` /nEz/ (parts nèse; new conflict freq 0.0): **apart** (undecided)
-- `rou|rrou|rroux` /Ru/ (parts rou; new conflict freq 0.0): **apart** (undecided)
+- `rou|rrou|rroux|ru` /Ru/ (parts rou; new conflict freq 0.1): **apart** (undecided)
 - `gau|go` /go/ (parts go, gau; new conflict freq 0.0): **apart** (undecided)
-- `git|gite|gitent|gites` /Zit/ (parts gite; new conflict freq 0.0): **apart** (undecided)
+- `git|gite|gitent|gites` /Zit/ (parts gite, gitent, gites; new conflict freq 0.0): **apart** (undecided)
 - `ting|tting` /tiG/ (parts ting; new conflict freq 0.0): **apart** (undecided)
 - `diaire|dière` /djER/ (parts dière; new conflict freq 0.0): **apart** (undecided)
 - `tille|ttille` /tij/ (parts tille; new conflict freq 0.0): **apart** (undecided)
-- `er|eur` /9R/ (parts eur; new conflict freq 0.0): **apart** (undecided)
 - `trage|ttrage` /tRaZ/ (parts trage; new conflict freq 0.0): **apart** (undecided)
 - `cot|cote|cott|cotte` /kOt/ (parts cotte; new conflict freq 0.0): **apart** (undecided)
 - `ique|ïk|ïque` /ik/ (parts ïque, ique; new conflict freq 0.0): **apart** (undecided)
@@ -1227,7 +1234,6 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `seux|zeux` /z2/ (parts seux; new conflict freq 0.0): **apart** (undecided)
 - `geat|ja|jah|jat` /Za/ (parts ja; new conflict freq 0.0): **apart** (undecided)
 - `bette|bète|bête` /bEt/ (parts bette; new conflict freq 0.0): **apart** (undecided)
-- `ar|ard` /aR/ (parts ard; new conflict freq 0.0): **apart** (undecided)
 - `cya|scia|scie|sia` /sja/ (parts cya; new conflict freq 0.0): **apart** (undecided)
 - `ce|cher|tcher` /tSe/ (parts ce, tcher; new conflict freq 0.0): **apart** (undecided)
 - `ide|ides|yde|ïd|ïde` /id/ (parts ïde, ïd; new conflict freq 0.0): **apart** (undecided)
@@ -1237,14 +1243,13 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `hui|huî` /8i/ (parts hui; new conflict freq 0.0): **apart** (undecided)
 - `piste|ppiste` /pist/ (parts piste; new conflict freq 0.0): **apart** (undecided)
 - `tit|tite|ttite` /tit/ (parts tite; new conflict freq 0.0): **apart** (undecided)
-- `cai|ché|ke|kei|khé|ké|que|qué` /ke/ (parts ké; new conflict freq 0.0): **apart** (undecided)
+- `cai|ché|ke|kei|khé|ké|que|qué` /ke/ (parts ké, qué; new conflict freq 0.0): **apart** (undecided)
 - `quim|quin` /k5/ (parts quin; new conflict freq 0.0): **apart** (undecided)
 - `rhin|rhyn|rim|rin` /R5/ (parts rin; new conflict freq 0.0): **apart** (undecided)
 - `ddhiste|diste` /dist/ (parts diste; new conflict freq 0.0): **apart** (undecided)
-- `ien|yen|yin|ïen` /j5/ (parts ïen, ien; new conflict freq 0.0): **apart** (undecided)
+- `bri|brill` /bRij/ (parts bri; new conflict freq 0.0): **apart** (undecided)
 - `chu|schu` /Sy/ (parts chu; new conflict freq 0.0): **apart** (undecided)
 - `chage|shage` /SaZ/ (parts chage; new conflict freq 0.0): **apart** (undecided)
-- `ad|ade` /ad/ (parts ade; new conflict freq 0.0): **apart** (undecided)
 - `ponc|punc` /p§k/ (parts ponc; new conflict freq 0.0): **apart** (undecided)
 - `ciable|tiable` /sjabl/ (parts ciable; new conflict freq 0.0): **apart** (undecided)
 - `thrite|trite` /tRit/ (parts trite; new conflict freq 0.0): **apart** (undecided)
@@ -1258,9 +1263,10 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `mac|mak|maque` /mak/ (parts mac; new conflict freq 0.0): **apart** (undecided)
 - `rienne|ryenne` /RjEn/ (parts rienne; new conflict freq 0.0): **apart** (undecided)
 - `bleu|bleux` /bl2/ (parts bleu; new conflict freq 0.0): **apart** (undecided)
-- `liaire|lière|lliaire|llière` /ljER/ (parts lière; new conflict freq 0.0): **apart** (undecided)
+- `liaire|lière|lliaire|llière` /ljER/ (parts liaire, lière; new conflict freq 0.0): **apart** (undecided)
 - `hour|our` /uR/ (parts our; new conflict freq 0.0): **apart** (undecided)
 - `door|dor|dore` /dOR/ (parts dor; new conflict freq 0.0): **apart** (undecided)
+- `pe|peu` /p2/ (parts peu, pe; new conflict freq 0.0): **apart** (undecided)
 - `bleu|blu` /bl9/ (parts bleu; new conflict freq 0.0): **apart** (undecided)
 - `resque|rresque` /REsk/ (parts resque; new conflict freq 0.0): **apart** (undecided)
 - `can|cane` /kan/ (parts cane; new conflict freq 0.0): **apart** (undecided)
@@ -1281,6 +1287,7 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `grai|gre|grè|grê` /gRE/ (parts grai; new conflict freq 0.0): **apart** (undecided)
 - `gus|gusse` /gys/ (parts gus; new conflict freq 0.0): **apart** (undecided)
 - `mo|moh|moo` /mO/ (parts mo; new conflict freq 0.0): **apart** (undecided)
+- `ad|ade` /ad/ (parts ade; new conflict freq 0.0): **apart** (undecided)
 - `lloc|lloque|loch|lock|locks|loque` /lOk/ (parts loque; new conflict freq 0.0): **apart** (undecided)
 - `ol|ole` /Ol/ (parts ole; new conflict freq 0.0): **apart** (undecided)
 - `cryp|kryp` /kRip/ (parts cryp; new conflict freq 0.0): **apart** (undecided)
@@ -1303,11 +1310,13 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `fein|fin` /f5/ (parts fin; new conflict freq 0.0): **apart** (undecided)
 - `dienne|diène` /djEn/ (parts dienne; new conflict freq 0.0): **apart** (undecided)
 - `miau|myo` /mjo/ (parts myo; new conflict freq 0.0): **apart** (undecided)
+- `thyal|tial` /tjal/ (parts tial; new conflict freq 0.0): **apart** (undecided)
 - `tose|tôse` /toz/ (parts tose; new conflict freq 0.0): **apart** (undecided)
 - `sal|sales|zal` /zal/ (parts sal; new conflict freq 0.0): **apart** (undecided)
 - `late|llat` /lat/ (parts late; new conflict freq 0.0): **apart** (undecided)
 - `pic|pick` /pik/ (parts pic; new conflict freq 0.0): **apart** (undecided)
 - `guim|guin` /g5/ (parts guin; new conflict freq 0.0): **apart** (undecided)
+- `enne|ène` /En/ (parts enne, ène; new conflict freq 0.0): **apart** (undecided)
 - `flu|flû` /fly/ (parts flu; new conflict freq 0.0): **apart** (undecided)
 - `bage|bages` /baZ/ (parts bage; new conflict freq 0.0): **apart** (undecided)
 - `pien|piens` /pj5/ (parts pien; new conflict freq 0.0): **apart** (undecided)
@@ -1330,11 +1339,9 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `fisme|phisme` /fizm/ (parts phisme; new conflict freq 0.0): **apart** (undecided)
 - `nol|nole` /nOl/ (parts nol; new conflict freq 0.0): **apart** (undecided)
 - `cau|cho|coh|ko|quo` /kO/ (parts cho, ko; new conflict freq 0.0): **apart** (undecided)
-- `pli|plie` /pli/ (parts pli; new conflict freq 0.0): **apart** (undecided)
 - `lloche|loche` /lOS/ (parts loche; new conflict freq 0.0): **apart** (undecided)
 - `llum|lom|lome|lum` /lOm/ (parts lum; new conflict freq 0.0): **apart** (undecided)
 - `trisme|ttrisme` /tRizm/ (parts trisme; new conflict freq 0.0): **apart** (undecided)
-- `ienne|yenne` /jEn/ (parts ienne; new conflict freq 0.0): **apart** (undecided)
 - `bbeux|beu|beux` /b2/ (parts beux; new conflict freq 0.0): **apart** (undecided)
 - `bbleur|bleur` /bl9R/ (parts bleur; new conflict freq 0.0): **apart** (undecided)
 - `hin|in` /in/ (parts in; new conflict freq 0.0): **apart** (undecided)
@@ -1342,11 +1349,14 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - `nisme|nnisme` /nism/ (parts nisme; new conflict freq 0.0): **apart** (undecided)
 - `el|hel` /El/ (parts hel; new conflict freq 0.0): **apart** (undecided)
 - `neuse|nneuse` /n2z/ (parts neuse; new conflict freq 0.0): **apart** (undecided)
+- `ai|aî|e|ei|hai|he|hê|é` /E/ (parts ai, e, he, é; new conflict freq 0.1): **fused**
 - `a|ah|ha|hâ|â` /a/ (parts a, ah, ha, hâ, â; new conflict freq 7.6): **fused**
+- `sa|sah` /sa/ (parts sa; new conflict freq 0.0): **fused**
 
 ## Decided merges that are no longer in the pool (lexicon change?)
 
-- none
+- prefix `ra|rai|raie|re|rhé|ré|réh` /Re/
+- suffix `ve|ver|wé` /ve/
 
 ## Overlaps among selected rules (must all be < 0.5)
 

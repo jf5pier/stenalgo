@@ -2181,8 +2181,8 @@
  },
  {
   "text": "Je cherche mon crayon rouge.",
-  "phonology": "Z° SERS m§ kREj.§ RuZ",
-  "steno": "vt@a pmieRZm/-k mai kRiej/ai R@eZ",
+  "phonology": "Z° SERS m§ kRE.j§ RuZ",
+  "steno": "vt@a pmieRZm/-k mai kRie/Rwai R@eZ",
   "strokes": [
    [
     5,
@@ -2211,10 +2211,11 @@
     2,
     8,
     13,
-    14,
-    16
+    14
    ],
    [
+    8,
+    9,
     12,
     13
    ],
@@ -2247,7 +2248,7 @@
    {
     "text": "crayon",
     "label": "nom, m. sg.",
-    "steno": "kRiej/ai",
+    "steno": "kRie/Rwai",
     "strokeCount": 2
    },
    {

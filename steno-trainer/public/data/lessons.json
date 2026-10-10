@@ -1542,28 +1542,6 @@
      "frequency": 21.47
     },
     {
-     "ortho": "enterré",
-     "before": "l'",
-     "after": "",
-     "label": "participe passé, m. sg. · adjectif, m. sg.",
-     "phonology": "@.te.Re",
-     "steno": "@/te/Re",
-     "strokes": [
-      [
-       11
-      ],
-      [
-       7,
-       14
-      ],
-      [
-       8,
-       14
-      ]
-     ],
-     "frequency": 19.9
-    },
-    {
      "ortho": "man",
      "before": "",
      "after": "",
@@ -1829,6 +1807,26 @@
       ]
      ],
      "frequency": 9.5
+    },
+    {
+     "ortho": "atroce",
+     "before": "l'",
+     "after": "",
+     "label": "adjectif, sg.",
+     "phonology": "a.tROs",
+     "steno": "a/tRes",
+     "strokes": [
+      [
+       12
+      ],
+      [
+       7,
+       8,
+       14,
+       17
+      ]
+     ],
+     "frequency": 8.41
     }
    ]
   },
@@ -5395,15 +5393,16 @@
      "before": "",
      "after": "",
      "label": "adjectif · adverbe",
-     "phonology": "o.k",
-     "steno": "ae/k-",
+     "phonology": "o.ke",
+     "steno": "ae/ke",
      "strokes": [
       [
        12,
        14
       ],
       [
-       2
+       2,
+       14
       ]
      ],
      "frequency": 234.89
@@ -21610,8 +21609,8 @@
      "before": "",
      "after": "",
      "label": "participe passé, m. sg.",
-     "phonology": "E.sEj.e",
-     "steno": "ie/siej/e",
+     "phonology": "E.sE.je",
+     "steno": "ie/sie/Rwe",
      "strokes": [
       [
        13,
@@ -21620,10 +21619,11 @@
       [
        3,
        13,
-       14,
-       16
+       14
       ],
       [
+       8,
+       9,
        14
       ]
      ],

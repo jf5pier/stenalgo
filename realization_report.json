@@ -5,7 +5,7 @@
     "conditionnel",
     "infinitif"
    ],
-   "affectedWords": 5220,
+   "affectedWords": 5224,
    "chosenKeys": [
     21
    ],
@@ -176,7 +176,7 @@
     "passé",
     "pers_3"
    ],
-   "affectedWords": 32654,
+   "affectedWords": 32693,
    "chosenKeys": [
     20
    ],
@@ -286,7 +286,7 @@
     "imparfait",
     "subjonctif"
    ],
-   "affectedWords": 1400,
+   "affectedWords": 1403,
    "chosenKeys": [
     23
    ],
@@ -359,7 +359,7 @@
     "impératif",
     "pers_1"
    ],
-   "affectedWords": 21903,
+   "affectedWords": 21931,
    "chosenKeys": [
     18
    ],
@@ -463,7 +463,7 @@
     "nbr_p",
     "p"
    ],
-   "affectedWords": 71221,
+   "affectedWords": 71251,
    "chosenKeys": [
     17
    ],
@@ -578,7 +578,7 @@
    "markers": [
     "pers_2"
    ],
-   "affectedWords": 20816,
+   "affectedWords": 20858,
    "chosenKeys": [
     19
    ],
@@ -2237,6 +2237,10 @@
    [
     "dédis",
     "dédies"
+   ],
+   [
+    "égaillent",
+    "égayent"
    ],
    [
     "repères",
@@ -6479,6 +6483,10 @@
     "hâlées"
    ],
    [
+    "égailles",
+    "égayes"
+   ],
+   [
     "enseignent",
     "enceignent"
    ],
@@ -6519,16 +6527,16 @@
     "forets"
    ],
    [
+    "seillons",
+    "sayons"
+   ],
+   [
     "panserez",
     "penserez"
    ],
    [
     "choperai",
     "chopperai"
-   ],
-   [
-    "guets",
-    "games"
    ],
    [
     "saignaient",
@@ -9589,10 +9597,6 @@
    [
     "lansquinas",
     "lancequinas"
-   ],
-   [
-    "interviewés",
-    "interviews"
    ],
    [
     "comtés",

@@ -5,8 +5,8 @@
   "ortho": "a|ah|ha|hâ|â",
   "phono": "a",
   "keys": [
-   9,
-   16
+   2,
+   18
   ]
  },
  {
@@ -26,13 +26,23 @@
   "ortho": "am|an|ant|em|en|ench|enh|ham|han|hen",
   "phono": "@",
   "keys": [
-   4,
+   3,
    6,
-   16
+   18
   ]
  },
  {
   "rank": 4,
+  "position": "prefix",
+  "ortho": "re|reh",
+  "phono": "R°",
+  "keys": [
+   9,
+   16
+  ]
+ },
+ {
+  "rank": 5,
   "position": "prefix",
   "ortho": "co+col+com+con+cor",
   "phono": "kO+kOR+kOl+kOm+ko+koR+k§",
@@ -42,34 +52,24 @@
   ]
  },
  {
-  "rank": 5,
-  "position": "prefix",
-  "ortho": "re|reh",
-  "phono": "R°",
-  "keys": [
-   9,
-   18
-  ]
- },
- {
   "rank": 6,
-  "position": "suffix",
-  "ortho": "ccion|cion|cyon|sion|ssion|tion|tions",
-  "phono": "sj§",
-  "keys": [
-   16,
-   17,
-   20
-  ]
- },
- {
-  "rank": 7,
   "position": "prefix",
   "ortho": "é",
   "phono": "e",
   "keys": [
    2,
    5
+  ]
+ },
+ {
+  "rank": 7,
+  "position": "suffix",
+  "ortho": "ccion|cion|cyon|sion|ssion|tion|tions",
+  "phono": "sj§",
+  "keys": [
+   16,
+   19,
+   20
   ]
  },
  {
@@ -97,22 +97,22 @@
  {
   "rank": 10,
   "position": "prefix",
-  "ortho": "de",
-  "phono": "d°",
+  "ortho": "ai|aî|e|ei|hai|he|hê|é",
+  "phono": "E",
   "keys": [
-   2,
-   6,
+   3,
+   18,
    19
   ]
  },
  {
   "rank": 11,
   "position": "prefix",
-  "ortho": "ai|aî|e|ei|hai|he|hê|é",
-  "phono": "E",
+  "ortho": "de",
+  "phono": "d°",
   "keys": [
-   5,
-   18,
+   2,
+   6,
    19
   ]
  },
@@ -144,7 +144,7 @@
   "ortho": "au",
   "phono": "o",
   "keys": [
-   7,
+   4,
    8,
    19
   ]
@@ -152,22 +152,22 @@
  {
   "rank": 15,
   "position": "suffix",
-  "ortho": "té",
-  "phono": "te",
+  "ortho": "der|dé|dée",
+  "phono": "de",
   "keys": [
+   18,
    19,
-   20,
    25
   ]
  },
  {
   "rank": 16,
   "position": "suffix",
-  "ortho": "der|dé|dée",
-  "phono": "de",
+  "ortho": "té",
+  "phono": "te",
   "keys": [
-   18,
    19,
+   20,
    25
   ]
  },
@@ -185,17 +185,6 @@
  {
   "rank": 18,
   "position": "prefix",
-  "ortho": "ra|rai|raie|re|rhé|ré|réh",
-  "phono": "Re",
-  "keys": [
-   3,
-   4,
-   16
-  ]
- },
- {
-  "rank": 19,
-  "position": "prefix",
   "ortho": "pa",
   "phono": "pa",
   "keys": [
@@ -205,7 +194,7 @@
   ]
  },
  {
-  "rank": 20,
+  "rank": 19,
   "position": "prefix",
   "ortho": "ma|mah|mâ",
   "phono": "ma",
@@ -216,13 +205,25 @@
   ]
  },
  {
-  "rank": 21,
+  "rank": 20,
   "position": "prefix",
   "ortho": "e|hi|hy|i|y|î",
   "phono": "i",
   "keys": [
    16,
+   18,
    19
+  ]
+ },
+ {
+  "rank": 21,
+  "position": "prefix",
+  "ortho": "ré",
+  "phono": "Re",
+  "keys": [
+   3,
+   7,
+   8
   ]
  },
  {
@@ -231,23 +232,12 @@
   "ortho": "sa|sah",
   "phono": "sa",
   "keys": [
-   5,
+   18,
    24
   ]
  },
  {
   "rank": 23,
-  "position": "prefix",
-  "ortho": "o",
-  "phono": "o",
-  "keys": [
-   16,
-   17,
-   19
-  ]
- },
- {
-  "rank": 24,
   "position": "prefix",
   "ortho": "pro|proh|prô",
   "phono": "pRo",
@@ -258,18 +248,7 @@
   ]
  },
  {
-  "rank": 25,
-  "position": "suffix",
-  "ortho": "ver",
-  "phono": "ve",
-  "keys": [
-   16,
-   17,
-   18
-  ]
- },
- {
-  "rank": 26,
+  "rank": 24,
   "position": "prefix",
   "ortho": "ce|sce|se",
   "phono": "s°",
@@ -279,7 +258,7 @@
   ]
  },
  {
-  "rank": 27,
+  "rank": 25,
   "position": "suffix",
   "ortho": "rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée",
   "phono": "Re",
@@ -290,18 +269,29 @@
   ]
  },
  {
-  "rank": 28,
+  "rank": 26,
   "position": "prefix",
   "ortho": "pou|pu",
   "phono": "pu",
   "keys": [
    4,
    7,
+   16
+  ]
+ },
+ {
+  "rank": 27,
+  "position": "suffix",
+  "ortho": "ver",
+  "phono": "ve",
+  "keys": [
+   16,
+   17,
    18
   ]
  },
  {
-  "rank": 29,
+  "rank": 28,
   "position": "prefix",
   "ortho": "de|dea|di|die|dis|dy|dî",
   "phono": "di",
@@ -312,7 +302,7 @@
   ]
  },
  {
-  "rank": 30,
+  "rank": 29,
   "position": "suffix",
   "ortho": "ser|sée|zer|zé",
   "phono": "ze",
@@ -320,6 +310,17 @@
    18,
    22,
    23
+  ]
+ },
+ {
+  "rank": 30,
+  "position": "prefix",
+  "ortho": "o",
+  "phono": "o",
+  "keys": [
+   2,
+   6,
+   16
   ]
  }
 ]
