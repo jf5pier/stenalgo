@@ -87,7 +87,7 @@ def test_load_all_rejects_a_key_in_two_files(tmp_path: Path) -> None:
 
 def test_manual_corrections_file_loads_and_pairs_units() -> None:
     rows = loadMixteCorrections(MANUAL_CORRECTIONS_PATH)
-    assert len(rows) == 30
+    assert len(rows) == 45  # 30 stray-i rows + 15 dropped-schwa rows (rejeter, épousseter)
     for c in rows:
         assert len(c.syllCV.split("|")) == len(c.orthosyllCV.split("|"))
         assert all(len(a.split("_")) == len(b.split("_")) for a, b in zip(c.syllCV.split("|"), c.orthosyllCV.split("|")))

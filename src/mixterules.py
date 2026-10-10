@@ -164,13 +164,43 @@ def dropStrayGlide(row: dict[str, Any]) -> dict[str, Any]:
     return row
 
 
+def schwaOfE(row: dict[str, Any]) -> dict[str, Any]:
+    """
+    A verb's stem schwa written `2` (Lexique383 spells the /ø/-like schwa of the letter `e` with the eu vowel: `corseter`
+    `kORs2te`, `peser` `p2za`, `menuiser` `m2n8ize`) is the project's schwa `°` (ruling of 2026-10-10): every `2` unit whose
+    letter unit is a plain `e` becomes `°`; the `2` of `eu`/`oeu`/`eû` letters is the real vowel and stays (`ameuter` `am2te`).
+    `flageller` is the one exception (`flagellant` is `flaZEl@` in Wiktionary and GLAFF). 62 Mixte verb rows, 25 lemmas;
+    against the references 41 agree exactly, 8 more up to the mid vowel `o`/`O`, 12 have no reference.
+    """
+    if row.get("cgram") != "VER" or row.get("lemme") in SCHWA_OF_E_EXCEPTIONS:
+        return row
+    sounds, soundBreaks = _parseUnits(row["syll_cv"])
+    letters, letterBreaks = _parseUnits(row["orthosyll_cv"])
+    if len(sounds) != len(letters) or soundBreaks != letterBreaks:
+        return row
+    if "".join(unit for unit in sounds if unit != SILENT) != row["phon"]:
+        return row
+    changed = [k for k, (sound, letter) in enumerate(zip(sounds, letters)) if sound == "2" and letter.lower() == "e"]
+    if not changed:
+        return row
+    for k in changed:
+        sounds[k] = "°"
+    return _glideRow(row, sounds, letters, soundBreaks)
+
+
+SCHWA_OF_E_EXCEPTIONS = frozenset({"flageller"})
+
 STRAY_GLIDE_SIGNATURE = "verb ij before a silent e unit (dévierait, sciera): the glide j is stray, ij -> i"
 STRAY_GLIDE_RULE_ID = groupIdFor("mixte_rule", "-", STRAY_GLIDE_SIGNATURE)
 
 GLIDE_RULE_SIGNATURE = "verb glides opening the next syllable: ij -> i|j, doubled j|j after y and ill, repeat unit ="
 GLIDE_RULE_ID = groupIdFor("mixte_rule", "-", GLIDE_RULE_SIGNATURE)
 
-MIXTE_RULES: dict[str, MixteRule] = {GLIDE_RULE_ID: splitGlides, STRAY_GLIDE_RULE_ID: dropStrayGlide}
+SCHWA_OF_E_SIGNATURE = "verb 2 on the plain letter e is the stem schwa: 2 -> ° (corseter, peser, menuiser; not eu)"
+SCHWA_OF_E_RULE_ID = groupIdFor("mixte_rule", "-", SCHWA_OF_E_SIGNATURE)
+
+MIXTE_RULES: dict[str, MixteRule] = {
+    GLIDE_RULE_ID: splitGlides, STRAY_GLIDE_RULE_ID: dropStrayGlide, SCHWA_OF_E_RULE_ID: schwaOfE}
 
 
 def activeRules(decisions: Decisions, registry: Mapping[str, MixteRule] | None = None) -> list[tuple[str, MixteRule]]:

@@ -21,6 +21,7 @@
 #
 import csv
 import json
+import argparse
 import os
 import subprocess
 import time
@@ -537,7 +538,7 @@ def runStep(description: str, args: list[str]) -> None:
         raise SystemExit(completed.returncode or 1)
 
 
-def runPipeline() -> None:
+def runPipeline(optimizeKeyboard: bool = False) -> None:
     """Orchestrate the whole chain in one `python dictionary.py` execution.
 
     Synthetic Lexicon Building (S2) (converged, via util/build_synthetic_lexicon.py),
@@ -549,6 +550,10 @@ def runPipeline() -> None:
     is also why the S3+S5 build lives in its own module (util.build_phonetic_theory),
     not as a function of this file. The run's and every step's wall times are
     appended to pipeline_timings.log (util/_timing.py).
+
+    `optimizeKeyboard` (the `--optimize-keyboard` flag) adds the Keyboard Layout Optimization (S4) step after the
+    converged Synthetic lexicon: the CP-SAT solve seeded from starboard3h.json, written to starboard3h_optimized.json only
+    (the committed layout is never overwritten, and nothing downstream reads the result).
     """
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     startedAt = time.monotonic()
@@ -557,13 +562,13 @@ def runPipeline() -> None:
         runStep(label, [sys.executable, "-m", mod])
 
     try:
-        _runSteps(module)
+        _runSteps(module, optimizeKeyboard)
     finally:
         recordTiming("pipeline", "orchestrated run",
                      time.monotonic() - startedAt)
 
 
-def _runSteps(module: "Callable[[str, str], None]") -> None:
+def _runSteps(module: "Callable[[str, str], None]", optimizeKeyboard: bool = False) -> None:
     """The step sequence itself, in dependency order (runPipeline's `module` helper)."""
 
     # Pass 1: the plain `python dictionary.py` run's first half. The pickle cache is
@@ -578,6 +583,12 @@ def _runSteps(module: "Callable[[str, str], None]") -> None:
     # responsibility: rm -f the pickles first (the cache is never checked for
     # staleness).
     module("Synthetic Lexicon Building (S2), converged", "util.build_synthetic_lexicon")
+
+    # Keyboard Layout Optimization (S4), only on request (`--optimize-keyboard`; rare and costly, about 90 s per syllabic
+    # part): CP-SAT seeded from starboard3h.json on the converged lexicon. It writes starboard3h_optimized.json (the
+    # command's default output) and never the committed layout: compare the two by hand to see whether the layout converged.
+    if optimizeKeyboard:
+        module("Keyboard Layout Optimization (S4), seeded from starboard3h.json", "util.optimize_keyboard")
 
     # Elicitation Phase: non-interactive; unresolved oppositions warn and continue
     # (watch the output -- the docs/PIPELINE.md rebuild step 4h human loop fixes
@@ -641,7 +652,18 @@ def _runSteps(module: "Callable[[str, str], None]") -> None:
           "the five steno-trainer exports are up to date.", flush=True)
 
 
+def parseArgs(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        prog="python dictionary.py",
+        description="The orchestrated pipeline, Synthetic Lexicon Building (S2) to the trainer exports (S10).")
+    parser.add_argument("--optimize-keyboard", action="store_true",
+                        help="also run the Keyboard Layout Optimization (S4) after the converged Synthetic lexicon: the CP-SAT "
+                             "solve seeded from starboard3h.json, written to starboard3h_optimized.json (the committed layout "
+                             "is never overwritten; default: not run)")
+    return parser.parse_args(argv)
+
+
 if __name__ == "__main__":
-    runPipeline()
+    runPipeline(optimizeKeyboard=parseArgs().optimize_keyboard)
 
 

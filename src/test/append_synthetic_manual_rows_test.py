@@ -30,9 +30,10 @@ def test_committed_manual_rows_have_the_synthetic_header_and_are_well_formed():
     manualHeader, manualLines = readDataLines(MANUAL_ROWS_PATH)
     syntheticHeader, _ = readDataLines(SYNTHETIC_PATH)
     assert manualHeader == syntheticHeader
-    assert len(manualLines) == 21
+    assert len(manualLines) == 218  # the 21 asseoir rows + 197 rows promoted from the pre-regeneration file (2026-10-10)
+    assert sum(line.split("\t")[2] in ("asseoir", "rasseoir") for line in manualLines) == 21
     for line in manualLines:
         fields = line.split("\t")
         assert len(fields) == len(manualHeader.split("\t"))
         assert fields[3] == "VER" and fields[-1] == "synthetic"
-        assert fields[2] in ("asseoir", "rasseoir")
+        assert len(fields[8].split("|")) == len(fields[9].split("|"))

@@ -5,7 +5,7 @@ import pytest
 from src.diffsignature import graphemesOf, unitTriples
 from src.lexicondecisions import ACCEPT, Decision, Decisions
 from src.mixterules import (GLIDE_RULE_ID, GLIDE_RULE_SIGNATURE, MIXTE_RULES, STRAY_GLIDE_RULE_ID, activeRules,
-                            dropStrayGlide, splitGlides)
+                            dropStrayGlide, schwaOfE, splitGlides, SCHWA_OF_E_RULE_ID)
 from src.orthounits import spellingOf, stripMarks
 from util.check_lexicon_features import check_units
 
@@ -126,3 +126,25 @@ def testStrayGlideLeavesOtherShapes() -> None:
     nonVerb = _row("sciera", "sijRa", "s_ij_#|R_a", "sc_i_e|r_a", cgram="NOM")
     assert dropStrayGlide(nonVerb) == nonVerb
     assert MIXTE_RULES[STRAY_GLIDE_RULE_ID] is dropStrayGlide
+
+
+@pytest.mark.parametrize("before, after", [
+    (("corseter", "kORs2te", "k_O_R|s_2|t_e", "c_o_r|s_e|t_er"), ("kORs°te", "k_O_R|s_°|t_e")),
+    (("pesai", "p2ze", "p_2|z_e", "p_e|s_ai"), ("p°ze", "p_°|z_e")),
+    (("menuiser", "m2n8ize", "m_2|n_8_i|z_e", "m_e|n_u_i|s_er"), ("m°n8ize", "m_°|n_8_i|z_e")),
+])
+def testSchwaOfE(before: tuple[str, str, str, str], after: tuple[str, str]) -> None:
+    new = schwaOfE(_row(*before, infover="inf;"))
+    assert (new["phon"], new["syll_cv"]) == after
+    assert new["orthosyll_cv"] == before[3]
+    assert schwaOfE(new) == new
+
+
+def testSchwaOfELeavesEuFlagellerAndNonVerbs() -> None:
+    for row in (_row("ameuter", "am2te", "a|m_2|t_e", "a|m_eu|t_er", infover="inf;"),
+                _row("arsenal", "aRs2nal", "a_R|s_2|n_a_l", "a_r|s_e|n_a_l", cgram="NOM", infover="")):
+        assert schwaOfE(row) == row
+    flagellant = _row("flagellant", "flaZ2l@", "f_l_a|Z_2|l_@", "f_l_a|g_e|ll_ant", infover="par:pre;")
+    flagellant["lemme"] = "flageller"
+    assert schwaOfE(flagellant) == flagellant
+    assert MIXTE_RULES[SCHWA_OF_E_RULE_ID] is schwaOfE

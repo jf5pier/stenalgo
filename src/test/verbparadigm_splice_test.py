@@ -52,3 +52,20 @@ def testReinsertLostNasalUnit():
 def testReinsertLostNasalUnitRefusesOtherLosses():
     assert reinsertLostNasalUnit("5tERvjuve", "5|t_E_R|v_j_u_#_#", "in|t_e_r|v_i_ew_é_e") is None
     assert reinsertLostNasalUnit("@nivR", "@|n_i_v_R_#", "e|n_i_v_r_e") is None
+
+
+class TestHiatusBoundary:
+    """A hiatus -ir verb (trahir /t_R_a_#|i_R/) differs from the -ir suffix `_i_R` only by the syllable boundary: it is
+    no outlier, and its splices keep its own boundary."""
+
+    def test_ending_takes_the_infinitives_boundary(self) -> None:
+        from src.verbparadigm import _endingWithOwnBoundary
+        assert _endingWithOwnBoundary("_i|R_a", "t_R_a_#|i_R", 7, "_i_R") == "|i|R_a"
+
+    def test_ending_unchanged_when_the_infinitive_agrees(self) -> None:
+        from src.verbparadigm import _endingWithOwnBoundary
+        assert _endingWithOwnBoundary("_i|R_a", "f_i_n_i_R", 5, "_i_R") == "_i|R_a"
+
+    def test_ending_unchanged_when_it_starts_differently_from_the_suffix(self) -> None:
+        from src.verbparadigm import _endingWithOwnBoundary
+        assert _endingWithOwnBoundary("_a", "t_a|b_u|e", 7, "|e") == "_a"

@@ -952,10 +952,18 @@ class ConjugationEndingTables:
     infinitiveOutliers: frozenset[Lemme] = frozenset()  # donor lemmas whose infinitive lacks the template's suffix (majoritySuffix)
 
     def isInfinitiveOutlier(self, tableTemplate: str, infinitiveWord: Word) -> bool:
-        """Whether the infinitive does not end with the table template's infinitive suffix in some field."""
+        """Whether the infinitive does not end with the table template's infinitive suffix in some field, the syllable
+        boundary `|` and the in-syllable `_` being interchangeable (a hiatus verb such as trahir /t_R_a_#|i_R/ against the
+        -ir suffix `_i_R`: its splices keep the infinitive's own boundary, see _spliceFiniteWord)."""
         return any(
-            not getattr(infinitiveWord, field).endswith(self.infinitiveSuffixByKey.get((field, tableTemplate), ""))
+            not _separatorBlind(getattr(infinitiveWord, field)).endswith(
+                _separatorBlind(self.infinitiveSuffixByKey.get((field, tableTemplate), "")))
             for field in CONJUGATION_STRING_FIELDS)
+
+
+def _separatorBlind(units: str) -> str:
+    """A unit string with the syllable boundary `|` read as the in-syllable `_`."""
+    return units.replace("|", "_")
 
 
 def endingTemplateKey(template: str, infinitiveWord: Word) -> str:
@@ -1198,6 +1206,15 @@ def _normalizedFields(
     return phonology, rawSyllCV, rawOrthosyllCV
 
 
+def _endingWithOwnBoundary(ending: str, infinitiveValue: str, radicalLength: int, templateSuffix: str) -> str:
+    """The donors' `ending` with its first unit separator replaced by the infinitive's own at the cut, when the infinitive
+    differs from the template's suffix only by that separator (the ending then starts with the suffix's)."""
+    if (not ending or not templateSuffix or ending[0] != templateSuffix[0] or ending[0] not in "|_"
+            or infinitiveValue[radicalLength:radicalLength + 1] not in ("|", "_")):
+        return ending
+    return infinitiveValue[radicalLength] + ending[1:]
+
+
 def _spliceFiniteWord(
         lemme: Lemme,
         ortho: str,
@@ -1211,12 +1228,17 @@ def _spliceFiniteWord(
         number: str | None = None,
         infoVerb: str | None = None,
         glideFutureStem: bool = False,
+        tableTemplate: str = "",
     ) -> Word | None:
     """The normalized, repaired and checked Word of a finite slot (None when isWellFormedSplice refuses it); a
     participle slot passes its `infoVerb`, `gender` and `number`. `glideFutureStem` (rule `glide-future-stem`) vocalizes the
-    glide of the future and conditional of a -ier/-uer/-ouer verb (vocalizeGlideBeforeFutureR) before the normalization."""
+    glide of the future and conditional of a -ier/-uer/-ouer verb (vocalizeGlideBeforeFutureR) before the normalization.
+    `tableTemplate` (the ending tables' key of the lemma) lets an ending that starts with the template's own boundary
+    take the infinitive's when it differs from it (a hiatus -ir verb: `|i` for the donors' `_i`)."""
     spliced = {
-        field: getattr(infinitiveWord, field)[:radicalLengths[field]] + ending
+        field: getattr(infinitiveWord, field)[:radicalLengths[field]]
+        + _endingWithOwnBoundary(ending, getattr(infinitiveWord, field), radicalLengths[field],
+                                 endingTables.infinitiveSuffixByKey.get((field, tableTemplate), ""))
         for field, ending in zip(CONJUGATION_STRING_FIELDS, endings)
     }
     if glideFutureStem and hasGlideFutureStem(lemme, code):
@@ -1285,6 +1307,9 @@ def generateMissingConjugatedForm(
         return None
 
     tableTemplate = endingTemplateKey(template.name, infinitiveWord)
+    if (tableTemplate != template.name and (CONJUGATION_STRING_FIELDS[0], tableTemplate, code, personNumber)
+            not in endingTables.slotEndingByKey):
+        tableTemplate = template.name  # a slot no glide-shaped donor attests (criâtes) takes the plain template's ending
     if endingTables.isInfinitiveOutlier(tableTemplate, infinitiveWord):
         skip("infinitive_outlier")
         return None
@@ -1311,7 +1336,7 @@ def generateMissingConjugatedForm(
     if min(rates) >= minMatchRate:
         return _spliceFiniteWord(
             lemme, ortho, code, personNumber, infinitiveWord, radicalLengths, majorityEndings, endingTables,
-            glideFutureStem=glideFutureStem)
+            glideFutureStem=glideFutureStem, tableTemplate=tableTemplate)
     if barFloor is None or validate is None:
         skip("below_bar")
         return None
@@ -1336,7 +1361,7 @@ def generateMissingConjugatedForm(
     for rank, endings, rate in tried:
         word = _spliceFiniteWord(
             lemme, ortho, code, personNumber, infinitiveWord, radicalLengths, endings, endingTables,
-            glideFutureStem=glideFutureStem)
+            glideFutureStem=glideFutureStem, tableTemplate=tableTemplate)
         if word is not None:
             wellFormed = True
             if validate(word, tableTemplate, rank, rate):
@@ -1625,7 +1650,7 @@ def generateParticipleFromInfinitive(
         radicalLengths[field] = radicalLength
     word = _spliceFiniteWord(
         lemme, ortho, "par:pas", "", infinitiveWord, radicalLengths, endings, endingTables,
-        gender="m", number="s", infoVerb="par:pas;")
+        gender="m", number="s", infoVerb="par:pas;", tableTemplate=tableTemplate)
     if word is None or spellingOf(word.rawOrthosyllCV) != ortho:
         skip("splice_rejected")
         return None
@@ -1682,7 +1707,8 @@ def generateParticiplePresent(
             return None
         radicalLengths[field] = radicalLength
     word = _spliceFiniteWord(
-        lemme, ortho, "par:pre", "", infinitiveWord, radicalLengths, endings, endingTables, infoVerb="par:pre;")
+        lemme, ortho, "par:pre", "", infinitiveWord, radicalLengths, endings, endingTables, infoVerb="par:pre;",
+        tableTemplate=tableTemplate)
     if word is None or spellingOf(word.rawOrthosyllCV) != ortho:
         skip("splice_rejected")
         return None
@@ -1889,7 +1915,8 @@ def generateBorrowedForm(
             return None
         radicalLengths[field] = len(getattr(infinitiveWord, field)) - len(suffix)
     for rank, (endings, share) in enumerate(borrowedEndings(index, tableTemplate, code, personNumber)):
-        word = _spliceFiniteWord(lemme, ortho, code, personNumber, infinitiveWord, radicalLengths, endings, endingTables)
+        word = _spliceFiniteWord(lemme, ortho, code, personNumber, infinitiveWord, radicalLengths, endings, endingTables,
+                                 tableTemplate=tableTemplate)
         if word is not None and validate(word, tableTemplate, rank, share):
             return word
     return None
