@@ -4,6 +4,14 @@ Resume point after a context clear. Read this first, then `docs/LEXICON_COMPLETI
 questions, the tools table, the measured numbers; its answered questions are marked below) and `TODO.md` ("Glide encodings of the
 `i`/`y` + vowel and `-ions`/`-iez` forms"). Plan of record: `/home/jfsp/.claude/plans/have-a-look-at-whimsical-gray.md`.
 
+**Update 2026-10-10: verdicts recorded, Synthetic regenerated in a temp copy, S2 about 2.3x faster (supersedes the "still to do" of the evening update).**
+- All `synth_rule` verdicts are recorded `accept` in `resources/lexiconDecisions.tsv` (user): `slot-map` (+25,815 rows, 753 verbs), `participle-from-infinitive` param `unvalidated` (strict +2,106 rows and 72 rows with no reference: ragée, hennie, claquetée, transparue), `lost-nasal` (+21), `homograph-tag` strict (+1,934, no new spelling), and the new row `1aa3c5d45d` `infinitive-participle-present` (+3,183: 2,174 present participles, 79 of them sharing a spelling with an ADJ/NOM/VER row, plus the full paradigms of 24 verbs known only by their present participle). Seven rules active with `reference-bar` and `glide-future-stem`.
+- Regeneration (`python -m util.check_synthetic_regeneration`, temp copy; the repo's `LexiqueSynthetic.tsv` is still the old file): 184,404 rows, 4 rounds, two runs byte-identical (md5 `a6e16bec58b7499a2e3e03d5946b6f51`), 100,710 only-regenerated, **528** only-committed (741 before; 471 VER: `acquiescer`, `aérer`, `aboierions`...), `check_lexicon_features`: units 21 (committed file 33), duplicateIdentity 10,522 (same as committed), sounded 332 (committed 80, Mixte 132).
+- A defect found and fixed: the Word constructor folds the n/m unit of en-/em- verbs (`fix_e_n_en`) but the lexicons store it; `writeSynthetic` now puts it back (`reinsertLostNasalUnit`; 57 raw rows, 3 folded rows remain: `enamouré`, `enamourés`, `enivrements`). The other 317 `sounded` rows are `E`/`e` disagreements between `phon` and `syll_cv` that Mixte already has in its en-/em- verbs (e.g. `embouteiller`) and that the generator copies into every conjugated form (the low-priority E/e item of the 2026-10-09 rulings).
+- Speed (S2 loop about 14 min to about 6 min; details in `docs/PIPELINE.md`, Synthetic Lexicon Building (S2)): S2.1 skips the discriminator passes (118 s to 86 s per call), the ambiguity statistics are computed on demand, light theory rebuilds between rounds, `VerbReferences.pickle` cache, S2.2 parses once and skips unchanged rounds, prune/sort only after a writing appender, per-step timers, `S2_PROFILE_DIR`, `S2_SNAPSHOT_DIR`. Proven identical on `phonetic_theory.tsv`, `PhoneticTheory.pickle`, `disambiguated_theory.tsv`, `DisambiguatedTheory.pickle` (new vs old code, same lexicons). The Plover export and the elicitation chain were not re-run (the collision gate of `build_disambiguated_theory` fails on stale keypress groups in both trees).
+- Why 4 rounds, and what was measured and dropped: see PIPELINE.md. Frozen donor tables (Mixte alone) converge in 3 rounds but lose 327 real forms (318 are in Wiktionary/GLÀFF): not adopted, the flag was removed. About 84% of the later-round rows are lemma-local, the rest depend on donors that other verbs' generated rows supply.
+- Still to do: replace the repo's `LexiqueSynthetic.tsv` (run `python -m util.build_synthetic_lexicon` in place, then the full rebuild, phases 4-5 below, with elicitation for the new rows), look at the 528 only-committed rows, the 3 folded rows, the E/e rows. Possible further saving of about 60 s: build `Word`s directly instead of the theory in S2.1 (output must stay byte-identical: the theory lists words in stroke order).
+
 **Update 2026-10-09 (evening): the synth_rule work.**
 - Verdict #1 `reference-bar` (`21dde669cb`) is recorded `accept`, param `0.5` (user: the references are right wherever the bar refuses; the sub-question "Wiktionary first or the union of Wiktionary and GLÀFF" is still open, about 1,400 rows).
 - New rule `glide-future-stem` (`f9f81b950d`, recorded `accept`): the future and conditional of `-ier`/`-uer`/`-ouer` verbs (not `-guer`/`-quer`, never after a vowel, so `-éier`/`-ouier` are untouched) vocalize the glide before the schwa of the ending (`afilj°Ra` -> `afiliRa`, `aks@t8°Ra` -> `aks@tyRa`, `alw°Ra` -> `aluRa`; `cluster+i+j°R` loses the glide and its `=` unit). Code: `hasGlideFutureStem`, `vocalizeGlideBeforeFutureR` and the `glideFutureStem` flag in `src/verbparadigm.py`, the `Mechanisms.glideFutureStem` field in `util/completeVerbParadigms.py`, the registry entry in `src/synthrules.py`, tests in `src/test/glidefuture_test.py`. Dry run: bar-accepted slots 84,713 -> 87,305, refused 4,603 -> 2,011. pytest 1,513 pass + the 1 known failure, mypy clean.
@@ -12,8 +20,16 @@ questions, the tools table, the measured numbers; its answered questions are mar
 
 **Update 2026-10-09 (late):** open decisions 1-3 are settled (section 4, "Answers") and the correction rows are implemented: 30 rows in `resources/mixteManualCorrections.tsv` (28 stray-`i` rows incl. `industrialisé`/`-ée`, + 2 `riant`), loaded with `mixteCorrections.tsv` by `loadAllMixteCorrections`; Mixte md5 now `d73812fb92ece0c19a5382f36799f813`; pytest 1,497 pass + the 1 known failure, mypy clean. Next: step 5.3.
 
-**Nothing is committed.** The working tree also carries the earlier uncommitted work of the handoff (decision store, audit tools,
-synth rules, lexicon files).
+**Git state (2026-10-09 night).** The work is committed on branch `lexique-completion` (pushed to `origin`) in 5 commits (decisions + audit tools,
+verb-form references, Mixte S1, Synthetic S2, docs) on top of `main`, which has the two unrelated commits (star/hash ranking, lessons) and the
+commit-id docs. The author of the 24 early commits was rewritten (every commit id changed): see `docs/HISTORY_AUTHOR_REWRITE_PLAN.md` (DONE),
+`docs/history/COMMIT_MAP_2026-10-09.tsv` (old -> new ids) and `docs/history/OLD_BRANCH_COMMIT_REFERENCES.md` (ids cited by the other branches).
+**Still uncommitted in the working tree (leave them for now):** `resources/LexiqueSynthetic.tsv` (modified, not regenerated; commit it only
+after the regeneration with verdicts #2-#5), the generated outputs of an older rebuild (`plover_stenalgo_*dictionary.json`, `affix_abbreviations.tsv`,
+`keypress_groups.json`, `realization_report.json`, `elicitation_answers.json` K=7, `steno-trainer/public/data/*.json`: to regenerate and commit
+together after the full rebuild, phases 4-5 below), a few untracked doc files and ~35 scratch files (never commit). Identity: every commit as
+`jf5pier <jf.stpierre@gmail.com>` (the global git config is another identity; pass `-c user.name=jf5pier -c user.email=jf.stpierre@gmail.com`).
+The agent may not force-push or `reset --hard` (the action classifier refuses); the user runs those with `!`.
 
 ## 1. What this session did
 
@@ -25,10 +41,10 @@ State of the repo:
 | Item | State |
 |---|---|
 | `resources/LexiqueMixte.tsv` | rebuilt by `python lexique.py`, md5 `d73812fb92ece0c19a5382f36799f813` (was `e176db7d…` before the 30 correction rows, `34560521…` before the glide rules) |
-| `resources/LexiqueSynthetic.tsv` | **not regenerated**: the committed file is unchanged |
+| `resources/LexiqueSynthetic.tsv` | **not regenerated in the repo** (the working-tree file is the old, hand-edited one and is not committed); the regeneration was run in a temp copy, see the evening update |
 | pickles (`Dictionary`, `PhoneticTheory`) | **stale**: `rm -f *.pickle` before any rebuild |
-| tests | `pytest src/test/`: 1,495 pass, 1 known failure (`plover_plugin_test::test_export_refuses_data_built_against_another_stock_dictionary`, stale expressions file); `mypy` clean |
-| decisions | 2 new accepted `mixte_rule` rows in `resources/lexiconDecisions.tsv` (see 2); the 5 `synth_rule` and all other rows are still `pending` |
+| tests | `pytest src/test/`: 1,513 pass, 1 known failure (`plover_plugin_test::test_export_refuses_data_built_against_another_stock_dictionary`, stale expressions file); `mypy` clean |
+| decisions | in `resources/lexiconDecisions.tsv`: 2 accepted `mixte_rule` rows (see 2), `reference-bar` and `glide-future-stem` accepted; the other 4 `synth_rule` rows (`slot-map`, `participle-from-infinitive`, `homograph-tag`, `lost-nasal`), the missing `infinitive-participle-present` row and all other rows are still `pending` / absent |
 
 ### New code
 

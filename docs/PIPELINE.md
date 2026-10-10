@@ -179,7 +179,7 @@ The names below are used in every "Input state" and "Result" line.
 | **synthetic lexicon rows** | same TSV plus a `source` column; 46,199 rows | Synthetic Lexicon Building (S2) scripts | `resources/LexiqueSynthetic.tsv` (tracked) |
 | **Word list** | `list[src.word.Word]`, deduplicated by identity (`ortho, phonology, lemme, gramCat, gender, number`); 168,314 Words | `Dictionary.readCorpus` dictionary.py:92 | inside `Dictionary.pickle` (gitignored) |
 | **syllable statistics** | `SyllableCollection` + `Syllable.*ColByPart` class state | `analyseSyllabification` dictionary.py:169 | `Dictionary.pickle` (objects 1-5) |
-| **layout statistics** | best permutation, pairwise order matrix (`pairwiseBiphonemeOrderScore`) and `syllabicPartAmbiguity`, per syllabic part | `optimizeBiphonemeOrder` grammar.py:644, `analyseAmbiguities` dictionary.py:183 | `Dictionary.pickle` |
+| **layout statistics** | best permutation, pairwise order matrix (`pairwiseBiphonemeOrderScore`) and `syllabicPartAmbiguity`, per syllabic part | `optimizeBiphonemeOrder` grammar.py:644, `analyseAmbiguities` dictionary.py:183 | computed on demand by `Dictionary.ensureAmbiguityStats` (since 2026-10-09 not part of `Dictionary.pickle`: the phonetic theory is identical without them) |
 | **keyboard layout** | `Starboard` (26 keys; reserved keys 0, 1, 10, 15) | Keyboard Layout Optimization (S4), last run before e060dd2; loaded by `Keyboard.fromJSONFile` keyboard.py:252 | `starboard3h.json` (tracked; rewritten only deliberately — `util.optimize_keyboard --output starboard3h.json`; the solver's default output is `starboard3h_optimized.json`) |
 | **phonetic theory** | `dict[Strokes, list[Word]]` keyed by raw Strokes; 78,680 entries | `Dictionary.buildPhoneticTheory` dictionary.py:305 | `PhoneticTheory.pickle` (gitignored); human view `phonetic_theory.tsv` |
 | **homophone groups** | `dict[LemmaHomophoneGroupKey, list[Word]]`, key = (canonical Strokes, LemmeGramCat); 47,830 | `buildLemmaHomophoneGroups` elicitation.py:61 | no |
@@ -220,11 +220,11 @@ Dictionary Loading (S3) .......................... python -m util.build_phonetic
 ├─ Dictionary cache check ......................................... S3.1  ← Dictionary.pickle
 ├─ Lexicon reading and identity merge — readCorpus ................ S3.2.1  (Word list)
 ├─ Syllable inventory — analyseSyllabification .................... S3.3  (syllable statistics)
-└─ Dictionary cache write (after S4.1, S4.2) ...................... S3.4  → Dictionary.pickle
+└─ Dictionary cache write (after S4.1) ............................ S3.4  → Dictionary.pickle
 
 Keyboard Layout Optimization (S4) ................ rare, costly; python -m util.optimize_keyboard
 ├─ Phoneme order search — optimizeBiphonemeOrder .................. S4.1  (layout statistics, every fresh rebuild)
-├─ Ambiguity statistics — analyseAmbiguities ...................... S4.2  (layout statistics, every fresh rebuild)
+├─ Ambiguity statistics — analyseAmbiguities ...................... S4.2  (layout statistics, on demand: ensureAmbiguityStats, from optimize_keyboard / generateBaseKeymap)
 ├─ Fallback keymap — generateBaseKeymap ........................... S4.3  (only if starboard3h.json is missing)
 └─ Layout solve — optimizeKeyboard (CP-SAT) ....................... S4.4  → starboard3h_optimized.json (--output starboard3h.json to replace the seed deliberately)
 
@@ -549,9 +549,25 @@ The Synthetic file is a **pure function of its committed inputs** (Lexique383, I
 `LexiqueMixte.tsv`, `spellingVariants.tsv`, `morphalouNomAdjForms.tsv`, `syntheticManualRows.tsv`):
 `python -m util.build_synthetic_lexicon` empties it to its header on every run (`--incremental` keeps
 the old rows), then loops the five appenders (S2.1 verbs, S2.2 NOM/ADJ, S2.3 `pa:yer` and `ass:eoir`
-dual forms, S2.4 the hand-derived rows) with `--apply` to convergence. After each appender the dropped
+dual forms, S2.4 the hand-derived rows) with `--apply` to convergence. After each appender that wrote, the dropped
 spelling variants are pruned (`util.prune_spelling_variants`) and the file is sorted, so two runs are
-byte-identical (checked by `util.check_synthetic_regeneration`). Verb completion (S2.1) completes
+byte-identical (checked by `util.check_synthetic_regeneration`).
+
+**The round structure and its cost (measured 2026-10-10, about 6 min, 4 rounds).** S2.1 generates only from the theory as it stood at
+the start of the round, so a round feeds the next: 165,936 rows in round 1, 2,002 in round 2 (1,507 of them a second tag of a spelling
+round 1 created: `homograph-tag` copies a row that must already be attested), 54 in round 3 (the donor tables learn from every verb
+row, generated ones included), 0 in round 4, the confirmation round. Between rounds only S2.1 reads the theory, so the loop rebuilds
+it with `python -m util.build_phonetic_theory --theory-only` (`PhoneticTheory.pickle` alone); one full S3-S5 build follows the last
+append. `analyseAmbiguities` is not part of that build any more (`Dictionary.ensureAmbiguityStats`, used by `util.optimize_keyboard`:
+the theories are byte-identical without it). Caches and skips that keep the rounds cheap: `VerbReferences.pickle` (the parsed
+Wiktionary + GLÀFF references, keyed by the md5 of the sources and of the parser: 36 s to 4 s per round), S2.2 parses each lexicon
+once, only the NOM/ADJ rows, and skips a round whose inputs it did not see change (state file of the run), prune and sort run only
+after an appender that wrote. Every step and phase is timed in `pipeline_timings.log`; `S2_PROFILE_DIR=DIR` runs each step under cProfile and
+`S2_SNAPSHOT_DIR=DIR` keeps the file after each writing step. Measured and dropped: donor tables frozen on Mixte alone give 3 rounds
+but lose 327 forms that the references confirm (318 of 327; 223 `-eter` verbs, all 44 forms of `impulser`), so the generated rows
+stay donors of later rounds.
+
+Verb completion (S2.1) completes
 **every** verb with a trusted Verbiste template and keeps every generated candidate (the former
 discriminator-collision filter and undersampling detector are `--only-colliding` / `--undersampled-only`);
 the NOM/ADJ appender learns its ending tables from Mixte alone and iterates to its own fixed point. The
@@ -717,15 +733,15 @@ of a kept verb, like `boite`/`boiter`, is exempt unless its lemme carries the se
 merges identical identities, indexes Words by spelling and lemma and registers every
 syllable (5,866) in the syllable statistics. It is the first half of `python -m
 util.build_phonetic_theory` (loadOrBuildDictionary), cached in `Dictionary.pickle`; on a cache
-miss the layout statistics (S4.1, S4.2) run between Syllable inventory (S3.3) and Dictionary
-cache write (S3.4).
+miss the Phoneme order search (S4.1) runs between Syllable inventory (S3.3) and Dictionary
+cache write (S3.4); the Ambiguity statistics (S4.2) no longer do (see below).
 
 ### Dictionary cache check — loadOrBuildDictionary (S3.1)   util/build_phonetic_theory.py:33
 Called by: `python -m util.build_phonetic_theory` (`main` util/build_phonetic_theory.py:86).
 Transformation: if `Dictionary.pickle` exists, loads five objects (the `Dictionary`, then
 `Syllable.allPhonemeCol`, `phonemeColByPart`, `biphonemeColByPart`,
 `multiphonemeColByPart`, assigned back onto the class, util/build_phonetic_theory.py:40-44) and skips Dictionary
-construction (S3.2), Syllable inventory (S3.3), the layout statistics (S4.1, S4.2) and
+construction (S3.2), Syllable inventory (S3.3), the Phoneme order search (S4.1) and
 Dictionary cache write (S3.4). No staleness check.
 Result: Word list + syllable statistics + layout statistics, restored.
 Artifacts: reads `Dictionary.pickle`.
@@ -838,10 +854,12 @@ and produces the keyboard layout `starboard3h.json`. It is a real stage, rarely 
 costly (several CP-SAT solves), not dead code. Its layout was last produced by an
 uncommitted run and committed in e060dd2 (2026-09-13); every later stage reads that file.
 
-The two **layout statistics**, Phoneme order search (S4.1) and Ambiguity statistics (S4.2),
-run on **every fresh rebuild** (a `Dictionary.pickle` miss inside
-`util.build_phonetic_theory`; S4.2 is
-the slowest step) and are the solver's inputs (src/cpsatsolver.py:14, :48
+The two **layout statistics**: Phoneme order search (S4.1) runs on every fresh rebuild (a
+`Dictionary.pickle` miss inside `util.build_phonetic_theory`). Ambiguity statistics (S4.2, 16 s, the
+slowest step of that build) are **computed on demand** since 2026-10-09 (`Dictionary.ensureAmbiguityStats`,
+called by `util.optimize_keyboard` and `generateBaseKeymap`): the phonetic and disambiguated theories
+are byte-identical without them, and an older `Dictionary.pickle` that carries them is used as is. Both
+are the solver's inputs (src/cpsatsolver.py:14, :48
 `syllabicPartAmbiguity`; :363 `pairwiseBiphonemeOrderScore`). The solver call lives behind
 `python -m util.optimize_keyboard`, which regenerates a layout into
 `starboard3h_optimized.json` — overwriting the seed `starboard3h.json` requires an explicit

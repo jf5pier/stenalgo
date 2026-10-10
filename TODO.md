@@ -116,6 +116,8 @@ Start from the current tree (glide-/j/ fix and the K=7 elicitation answers, both
   each resource whether it is REQUIRED (none is, for the standard rebuild) or optional, its licence, and the path the code expects.
 - Do not edit `starboard3h.json` or `affix_decisions.json`; do not run `util.optimize_keyboard`.
 
+Status 2026-10-10: regenerated in a temp copy with all synthesis rules accepted: 184,404 rows, 4 rounds in about 6 min, byte-identical twice (md5 `a6e16bec58b7499a2e3e03d5946b6f51`), 528 rows only in the committed file (741 before). The repo file is not replaced yet; open: those 528 rows (471 VER), 3 rows with the n unit folded (`enamouré`, `enamourés`, `enivrements`), 317 `E`/`e` phon/syll_cv disagreements inherited from Mixte's en-/em- verbs. See `docs/LEXICON_COMPLETION_CONTINUATION.md` and `docs/PIPELINE.md` (S2).
+
 ## Branch TODO — Plover expression dictionary plugin (abbreviations branch, 2026-10-04)
 
 State: plugin built, installed in the user's Windows Plover 5.4.1 and working on a Starboard (`de l'` verified live); data export in `util/export_expression_data.py`,

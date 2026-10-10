@@ -34,9 +34,11 @@ python lexique.py                            # Lexicon Building (S1)
 python -m util.build_synthetic_lexicon       # Synthetic Lexicon Building (S2), from scratch and converged (--incremental keeps the old rows)
 # Prerequisites: LexiqueMixte.tsv, resources/morphalouNomAdjForms.tsv, resources/syntheticManualRows.tsv,
 # spellingVariants.tsv (PhoneticTheory.pickle for S2.1; rebuilt in memory if absent).
+# Caches: VerbReferences.pickle (the parsed Wiktionary + GLÀFF references, gitignored, keyed by the md5 of its sources and of the parser: never stale).
+# Env knobs: S2_PROFILE_DIR=DIR (cProfile per step), S2_SNAPSHOT_DIR=DIR (the file after each writing step); timings in pipeline_timings.log.
 # Outputs: resources/LexiqueSynthetic.tsv, emptied to its header first, so a pure function of its inputs
-# (about 2 rounds, 2 min); each round appends, prunes the dropped spelling variants and sorts the file; after
-# a round that appended rows it deletes Dictionary.pickle/PhoneticTheory.pickle and reruns the S3-S5 build.
+# (4 rounds, about 6 min; the last is the empty confirmation round); each round appends, prunes the dropped spelling variants and sorts the file; after
+# a round that appended rows it deletes the pickles and rebuilds the theory (the light `--theory-only` build, PhoneticTheory.pickle only); after the last append one full S3-S5 build.
 
 python -m util.check_synthetic_regeneration  # hand-run diagnostic: regenerates the Synthetic file twice in a temp copy, checks both are
                                              # byte-identical, writes synthetic_regen_report.tsv (differences against the committed file); ~12 min
@@ -56,6 +58,8 @@ python -m util.build_phonetic_theory        # Dictionary Loading (S3) + Phonetic
 # after ANY lexicon or layout change (those two caches are never checked for staleness;
 # DisambiguatedTheory.pickle fingerprint-checks itself, see Pitfalls below).
 # Outputs: Dictionary.pickle, PhoneticTheory.pickle, phonetic_theory.tsv.
+# --theory-only: the light rebuild the S2 loop runs between rounds (PhoneticTheory.pickle only; no Dictionary.pickle, no TSV).
+# The ambiguity statistics are no longer in Dictionary.pickle: util.optimize_keyboard computes them on demand.
 
 python -m src.elicitation --ask              # Elicitation Phase: Questionnaire Generation
 # Prerequisites: Dictionary.pickle + PhoneticTheory.pickle.
@@ -235,7 +239,7 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 
 ## Verification approach
 
-- `pytest src/test/` must pass after any `.py` change (1496 tests at the time of writing, expression layer, affix layer, lessons exporter and the Mixte rules included; the one known failure is the stale-expressions `plover_plugin_test` until the expressions file is rebuilt).
+- `pytest src/test/` must pass after any `.py` change (1521 tests at the time of writing, expression layer, affix layer, lessons exporter and the Mixte rules included; the one known failure is the stale-expressions `plover_plugin_test` until the expressions file is rebuilt).
 - `mypy` (bare, scope and options in `mypy.ini`) must report no issues after any `.py` change.
 - Behaviour-preserving changes are proven by a full rebuild following the rebuild table in
   `docs/PIPELINE.md`, comparing the md5s of `phonetic_theory.tsv`, `disambiguated_theory.tsv`,
