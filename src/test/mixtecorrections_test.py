@@ -87,7 +87,7 @@ def test_load_all_rejects_a_key_in_two_files(tmp_path: Path) -> None:
 
 def test_manual_corrections_file_loads_and_pairs_units() -> None:
     rows = loadMixteCorrections(MANUAL_CORRECTIONS_PATH)
-    assert len(rows) == 45  # 30 stray-i rows + 15 dropped-schwa rows (rejeter, épousseter)
+    assert len(rows) == 74  # 30 stray-i + 15 dropped-schwa (rejeter, épousseter) + 29 arguer, décatie and loanword unit rebuilds
     for c in rows:
         assert len(c.syllCV.split("|")) == len(c.orthosyllCV.split("|"))
         assert all(len(a.split("_")) == len(b.split("_")) for a, b in zip(c.syllCV.split("|"), c.orthosyllCV.split("|")))
@@ -112,3 +112,48 @@ def test_tag_corrections_replace_genre_and_number(tmp_path: Path) -> None:
 def test_committed_tag_corrections_load() -> None:
     from src.mixtecorrections import loadTagCorrections
     assert [c.ortho for c in loadTagCorrections()] == ["ioniennes"]
+
+
+def test_lemma_corrections_replace_the_lemma(tmp_path: Path) -> None:
+    from src.mixtecorrections import LemmaCorrection, applyLemmaCorrections, loadLemmaCorrections
+    path = tmp_path / "lemmas.tsv"
+    path.write_text("ortho\tcgram\tlemme\tnew_lemme\tgenre\tnombre\tinfover\treason\n"
+                    "liseré\tVER\tliserer\tlisérer\tm\ts\tpar:pas;\twhy\n", encoding="utf-8")
+    loaded = loadLemmaCorrections(str(path))
+    assert loaded == [LemmaCorrection("liseré", "VER", "liserer", "lisérer", "m", "s", "par:pas;", "why")]
+    row = {"ortho": "liseré", "lemme": "liserer", "cgram": "VER", "infover": "par:pas;", "genre": "m", "nombre": "s", "phon": "x"}
+    other = dict(row, lemme="liseré", cgram="NOM", infover="")
+    out = applyLemmaCorrections([other, row], loaded)
+    assert out[1]["lemme"] == "lisérer" and out[1]["phon"] == "x" and out[0] == other and row["lemme"] == "liserer"
+    with pytest.raises(MixteCorrectionError, match="no output row"):
+        applyLemmaCorrections([other], loaded)
+    with pytest.raises(MixteCorrectionError, match="2 output rows"):
+        applyLemmaCorrections([row, dict(row)], loaded)
+
+
+def test_lemma_corrections_reject_a_no_op_row(tmp_path: Path) -> None:
+    from src.mixtecorrections import loadLemmaCorrections
+    path = tmp_path / "lemmas.tsv"
+    path.write_text("ortho\tcgram\tlemme\tnew_lemme\tgenre\tnombre\tinfover\treason\n"
+                    "liseré\tVER\tliserer\tliserer\tm\ts\tpar:pas;\twhy\n", encoding="utf-8")
+    with pytest.raises(MixteCorrectionError, match="must differ"):
+        loadLemmaCorrections(str(path))
+
+
+def test_committed_lemma_corrections_match_exactly_one_mixte_row() -> None:
+    from src.mixtecorrections import applyLemmaCorrections, loadLemmaCorrections
+    corrections = loadLemmaCorrections()
+    assert [c.ortho for c in corrections] == ["liseré", "liserée"]
+    mixte = Path("resources/LexiqueMixte.tsv")
+    if not mixte.exists():
+        pytest.skip("no LexiqueMixte.tsv")
+    wanted = {c.key for c in corrections}
+    rows = []
+    for line in mixte.read_text(encoding="utf-8").splitlines()[1:]:
+        cells = line.split("\t")
+        row = {"ortho": cells[0], "lemme": cells[2], "cgram": cells[3], "genre": cells[5], "nombre": cells[6], "infover": cells[7]}
+        if (row["ortho"], row["lemme"], row["cgram"], row["infover"], row["genre"], row["nombre"]) in wanted:
+            rows.append(row)
+    # Once the file has been rebuilt with the corrections the old keys are gone: accept either state.
+    if rows:
+        assert [r["lemme"] for r in applyLemmaCorrections(rows, corrections)] == ["lisérer", "lisérer"]

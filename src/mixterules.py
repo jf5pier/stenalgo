@@ -59,8 +59,43 @@ def _glideRow(row: dict[str, Any], sounds: list[str], letters: list[str], breaks
 
 
 def splitGlides(row: dict[str, Any]) -> dict[str, Any]:
+    """The glide rule (cases A-G of `_splitVerbGlides`, then the cgram-agnostic case H of `_splitFusedEj`)."""
+    return _splitFusedEj(_splitVerbGlides(row))
+
+
+def _splitFusedEj(row: dict[str, Any]) -> dict[str, Any]:
     """
-    The glide rule (rulings of 2026-10-09, TODO.md "Glide encodings"): a verb's glide opens the next syllable, as its own unit.
+    Case H (group e3e2ed7746, any grammatical category): the fused sound unit `Ej` on the letters `ay` (`crayon` `k_R_Ej|@`
+    `c_r_ay|on`, `balaya` `b_a|l_Ej|a`, `ayant`, `attrayant`) is two units, `phon` unchanged:
+    - the next unit is sounded after a syllable break: `E`, `j` on the letters `a`, `y`, the break moved between them
+      (`k_R_E|j_@` `c_r_a|y_on`);
+    - the next unit is silent with no break, or the word ends (`balaye` `b_a|l_Ej_#`, `spray` `s_p_R_Ej`): `E_j` on `a_y`, no break.
+    Any other shape and any row whose breakdowns do not pair unit for unit are left alone. The `ay` rows whose sound is a lone
+    `E` (about 18) are not touched.
+    """
+    sounds, soundBreaks = _parseUnits(row["syll_cv"])
+    letters, letterBreaks = _parseUnits(row["orthosyll_cv"])
+    if len(sounds) != len(letters) or soundBreaks != letterBreaks:
+        return row
+    for k in range(len(sounds)):
+        if sounds[k] != "Ej" or letters[k] != "ay":
+            continue
+        following = sounds[k + 1] if k + 1 < len(sounds) else None
+        if following is None or (following == SILENT and k not in soundBreaks):
+            breaks2 = {b if b < k else b + 1 for b in soundBreaks}
+        elif following != SILENT and k in soundBreaks:
+            breaks2 = {b if b <= k else b + 1 for b in soundBreaks}
+        else:
+            continue
+        sounds2 = sounds[:k] + ["E", "j"] + sounds[k + 1:]
+        letters2 = letters[:k] + ["a", "y"] + letters[k + 1:]
+        return _splitFusedEj(_glideRow(row, sounds2, letters2, breaks2))
+    return row
+
+
+def _splitVerbGlides(row: dict[str, Any]) -> dict[str, Any]:
+    """
+    The verb glide rule (rulings of 2026-10-09, TODO.md "Glide encodings"): a verb's glide opens the next syllable, as its own unit.
 
     Sounds (`syll_cv`) and letters (`orthosyll_cv`) are cut into the same units; the first matching case wins:
     - A  `-Ciions`/`-Ciiez` (letters `i` + `i`): `s_ij_#|§` -> `s_i|j_§` (`phon` unchanged);
@@ -188,6 +223,36 @@ def schwaOfE(row: dict[str, Any]) -> dict[str, Any]:
     return _glideRow(row, sounds, letters, soundBreaks)
 
 
+def syllFromPhon(row: dict[str, Any]) -> dict[str, Any]:
+    """
+    Ruling of 2026-10-10 "phon wins": when `phon` differs from the sounded join of `syll_cv` (every unit but `#`) ONLY by
+    `E`/`e` swaps at equal length, the swapped units of `syll_cv` take the `phon` vowel. The 108 rows of `em-`/`en-` +
+    `ê`/`ei` (`embêter` `@|b_e|t_e` -> `@|b_E|t_e`, `emmêler`, `embouteiller`) keep their open `E` in `phon`, as the rest of
+    their paradigm does (`embêtez` `@|b_E|t_e`); the other disagreeing rows (loanwords: `capharnaüm`, `samoan`, `spoiler`)
+    differ by more than the swap and are untouched.
+    """
+    sounds, breaks = _parseUnits(row["syll_cv"])
+    joined = "".join(unit for unit in sounds if unit != SILENT)
+    phon = row["phon"]
+    if joined == phon or len(joined) != len(phon):
+        return row
+    if any(a != b and {a, b} != {"E", "e"} for a, b in zip(joined, phon)):
+        return row
+    fixed: list[str] = []
+    at = 0
+    for unit in sounds:
+        if unit == SILENT:
+            fixed.append(unit)
+            continue
+        fixed.append(phon[at:at + len(unit)] if len(unit) == 1 and unit in "Ee" else unit)
+        at += len(unit)
+    if "".join(unit for unit in fixed if unit != SILENT) != phon:
+        return row
+    new = dict(row)
+    new["syll_cv"] = _renderUnits(fixed, breaks)
+    return new
+
+
 SCHWA_OF_E_EXCEPTIONS = frozenset({"flageller"})
 
 STRAY_GLIDE_SIGNATURE = "verb ij before a silent e unit (dévierait, sciera): the glide j is stray, ij -> i"
@@ -199,8 +264,12 @@ GLIDE_RULE_ID = groupIdFor("mixte_rule", "-", GLIDE_RULE_SIGNATURE)
 SCHWA_OF_E_SIGNATURE = "verb 2 on the plain letter e is the stem schwa: 2 -> ° (corseter, peser, menuiser; not eu)"
 SCHWA_OF_E_RULE_ID = groupIdFor("mixte_rule", "-", SCHWA_OF_E_SIGNATURE)
 
+SYLL_FROM_PHON_SIGNATURE = "phon differs from the sounded join of syll_cv only by E/e swaps (embêter, emmêler): syll_cv takes the phon vowel"
+SYLL_FROM_PHON_RULE_ID = groupIdFor("mixte_rule", "-", SYLL_FROM_PHON_SIGNATURE)
+
 MIXTE_RULES: dict[str, MixteRule] = {
-    GLIDE_RULE_ID: splitGlides, STRAY_GLIDE_RULE_ID: dropStrayGlide, SCHWA_OF_E_RULE_ID: schwaOfE}
+    GLIDE_RULE_ID: splitGlides, STRAY_GLIDE_RULE_ID: dropStrayGlide, SCHWA_OF_E_RULE_ID: schwaOfE,
+    SYLL_FROM_PHON_RULE_ID: syllFromPhon}
 
 
 def activeRules(decisions: Decisions, registry: Mapping[str, MixteRule] | None = None) -> list[tuple[str, MixteRule]]:

@@ -232,7 +232,7 @@ group_id	kind	level	signature	verdict	param	slots	counter	examples	note	date
 627c2dbb6a	mixte_typo	L4	e→E,e→E @ e,e [medial,medial] | NOM:do ms | desperado	pending		1	0	desperado:despeRado>dEspERado	rec: typo (single row)	
 63e70cf2b1	mixte_typo	L4	S→s @ sh [medial] | ADJ:es fp | casher	pending		1	0	cashères:kaSER>kasER°	rec: typo (single row)	
 641ca5434b	mixte_typo	L4	e→° @ e [final] | NOM:ve m | ave	pending		1	0	ave:ave>av°	rec: typo (single row)	
-64402d8bce	mixte_typo	L4	∅→y @ e [final] | aim:er imp:pre:2s | arguer	pending		1	0	argue:aRg>aRgy	rec(opus): accept: if b3efd1782d is accepted (arguer [ɡɥ])	
+64402d8bce	mixte_typo	L4	∅→y @ e [final] | aim:er imp:pre:2s | arguer	reject		1	0	argue:aRg>aRgy	ruling 2026-10-10: arguer is [aRg8e], not aRgy; argue is fixed by manual rows	2026-10-10
 64c48efece	mixte_rule	L1	∅→i @ r [medial]	pending		6	27635	comprendriez:k§pR@dRje>k§pR@dRije;souriaient:suRjE>suRijE;souriais:suRjE>suRijE	rec: review (heterogeneous, precision 0.00; corrects its member rows only)	
 64cd26b89d	mixte_typo	L4	i→j @ y [initial] | NOM:es fp | yeuse	pending		1	0	yeuses:i2z>j2z°	rec: typo (single row)	
 64e7399bad	mixte_typo	L4	E→∅,ks→∅,t→∅,a→∅,z→∅ @ e,x,t,a,s [initial,medial,medial,medial,medial] | aim:er ind:pre:1s | extasier	pending		1	0	extasie:Ekstazi>i	rec(opus): reject: the reference is wrong	
@@ -412,7 +412,7 @@ b1ea21ab16	mixte_typo	L4	∅→a,u→w @ r,ou [initial,medial] | NOM:ds mp | rou
 b2a3084269	mixte_typo	L4	z→∅ @ x [final] | NOM:ux m | râleux	pending		1	0	râleux:Ral2z>Ral2	rec: typo (single row)	
 b343c8ecc6	mixte_typo	L4	j→∅ @ yi [final] | NOM:es fp | cécidomyie	pending		1	0	cécidomyies:sesidomij>sesidOmi	rec: typo (single row)	
 b3e103eb39	mixte_typo	L4	i→∅,n→5 @ i,n [medial,final] | NOM:in ms | pitchpin	pending		1	0	pitchpin:pitSpin>pitSp5	rec: typo (single row)	
-b3efd1782d	mixte_rule	L1	∅→8 @ gu [medial]	pending		3	572	argua:aRga>aRg8a;arguais:aRgE>aRg8E;arguait:aRgE>aRg8E	rec(opus): accept: arguer is traditionally [aʁɡɥe]; current Wiktionary also lists [aʁɡe] (your call; must match 64402d8bce)	
+b3efd1782d	mixte_rule	L1	∅→8 @ gu [medial]	accept		3	572	argua:aRga>aRg8a;arguais:aRgE>aRg8E;arguait:aRgE>aRg8E	ruling 2026-10-10: arguer [aRg8e]; applied by manual rows in mixteManualCorrections.tsv (do not run build_mixte_corrections for it)	2026-10-10
 b3f8dd604a	mixte_typo	L4	∅→n @ en [medial] | NOM:ie fs | tomodensitométrie	pending		1	0	tomodensitométrie:tomod@sitOmEtRi>tOmOd@nsitOmEtRi	rec: typo (single row)	
 b483dd4d49	template	-	-loir → va:loir	pending		37	0	revaloir	rec:va:loir	
 b5a01b00e1	mixte_typo	L4	wa→Oj @ oi [medial] | NOM:il ms | gasoil	pending		1	0	gasoil:gazwal>gazOjl	rec: typo (single row)	
@@ -602,6 +602,7 @@ f664d01ed2	mixte_typo	L4	∅→t,y→u,°→e @ ch,u,e [initial,medial,medial] |
 f6e71083a9	mixte_rule	L3	e→E @ é [medial] | décr:éter cnd:pre:3s	pending		7	0	compléterait:k§plet°RE>k§plEt°RE;décréterait:dekRet°RE>dekREt°RE;inquiéterait:5kjet°RE>5kjEt°RE	rec: accept (precision 1.00)	
 f79b5fceb0	mixte_typo	L4	∅→d @ d [final] | NOM:rd ms | yard	pending		1	0	yard:jaR>jaRd	rec: typo (single row)	
 f828d1da74	mixte_typo	L4	o→§ @ o [medial] | untemplated ind:pre:3s | surconsommer	pending		1	0	surconsomme:syRkosOm>syRk§sOm	rec(opus): accept: surconsomme [syʁkɔ̃sɔm]	
+732bebf8fd	mixte_rule	-	phon differs from the sounded join of syll_cv only by E/e swaps (embêter, emmêler): syll_cv takes the phon vowel	accept		108	0	embêter;emmêler;embouteiller	ruling 2026-10-10 (revised): phon wins, the E stays as in the rest of the paradigm (embêtez); systematic S1 rule src/mixterules.py syllFromPhon; 108 rows em-/en- + ê/ei, the 24 other disagreeing rows (loanwords) untouched	2026-10-10
 f84d79926a	mixte_typo	L4	b→∅ @ b [final] | NOM:bs mp | coulomb	pending		1	0	coulombs:kul§b>kul§	rec: typo (single row)	
 f8ef7b57ab	template	-	-vir → ser:vir	pending		44	0	reservir	rec:ser:vir	
 f9ef807069	mixte_typo	L4	∅→8 @ gu [medial] | ADJ:es fp | inguinal	pending		1	0	inguinales:5ginal>5g8inal°	rec: typo (single row)	

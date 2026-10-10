@@ -52,6 +52,7 @@ from src.nomAdjParadigm import (
     missingSlots,
     morphalouOrthos,
 )
+from src.verbparadigm import storedBreakdown
 from src.word import GramCat, Word
 from util._timing import timedCall
 
@@ -106,10 +107,11 @@ def inputsFingerprint(morphalouPath: str = MORPHALOU_PATH_DEFAULT) -> str:
 
 def wordToSyntheticRow(word: Word) -> str:
     cgramortho = ",".join(gc.name for gc in word.orthoGramCat)
+    syllCV, orthosyllCV = storedBreakdown(word)
     return "\t".join([
         word.ortho, word.phonology, word.lemme, word.gramCat.name, cgramortho,
         word.gender or "", word.number or "", word.infoVerb or "",
-        word.rawSyllCV, word.rawOrthosyllCV,
+        syllCV, orthosyllCV,
         f"{word.frequencyBook}", f"{word.frequencyFilm}", "synthetic",
     ]) + "\n"
 

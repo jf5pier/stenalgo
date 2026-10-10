@@ -1,0 +1,9 @@
+# Hand-found lemma defects of LexiqueMixte.tsv rows (TODO.md item 3), replayed by `lexique.py` `outputMixedLexique` after the tag
+# corrections (src/mixtecorrections.py `applyLemmaCorrections`). Key: the output row as Lexique383 has it (ortho, cgram, the WRONG lemme,
+# genre, nombre, infover as written, trailing ';' included); only the lemme is replaced (new_lemme), so the sounds and the syllabification
+# stay as they are. A key that matches no row, or several, fails the build.
+# Not here: `rapiécer` (right lemma, no Verbiste template: see resources/verbModelExceptions.tsv), `retraire` (right lemma and template:
+# traire is defective, no passé simple), `écher` (right lemma, see verbModelExceptions.tsv).
+ortho	cgram	lemme	new_lemme	genre	nombre	infover	reason
+liseré	VER	liserer	lisérer	m	s	par:pas;	Lexique383 files this accentless spelling under the non-word liserer; lisérait / liséré / lisérés have lemma lisérer
+liserée	VER	liserer	lisérer	f	s	par:pas;	same: feminine participle of lisérer (the Mixte file has no lisérée)

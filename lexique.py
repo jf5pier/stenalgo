@@ -30,7 +30,7 @@ from dataclasses import dataclass
 from src.grammar import Syllable, SyllableCollection
 from src.lexicondecisions import DECISIONS_PATH, Decisions, loadDecisions
 from src.mixterules import activeRules, applyRules
-from src.mixtecorrections import applyMixteCorrections, applyTagCorrections, loadAllMixteCorrections, loadTagCorrections
+from src.mixtecorrections import applyLemmaCorrections, applyMixteCorrections, applyTagCorrections, loadAllMixteCorrections, loadLemmaCorrections, loadTagCorrections
 from src.spellingvariants import (
     loadSpellingVariantDrops,
     reconcileOutputOrtho,
@@ -1414,6 +1414,7 @@ class Lexique:
             outRows = applyRules(outRows, activeRules(decisions))
             outRows = applyMixteCorrections(outRows, loadAllMixteCorrections())
             outRows = applyTagCorrections(outRows, loadTagCorrections())
+            outRows = applyLemmaCorrections(outRows, loadLemmaCorrections())
             corpus.writerows(outRows)
 
 

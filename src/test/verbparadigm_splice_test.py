@@ -2,7 +2,9 @@
 # coding: utf-8
 """Tests for repairSpliceUnits / isWellFormedSplice in src/verbparadigm.py."""
 
-from src.verbparadigm import isWellFormedSplice, reinsertLostNasalUnit, repairSpliceUnits, rewriteSplicePhon
+from src.verbparadigm import isWellFormedSplice, reinsertLostNasalUnit, repairSpliceUnits, rewriteSplicePhon, storedBreakdown
+from src.word import GramCat, Word
+from util.generateMissingNomAdjForms import wordToSyntheticRow
 
 
 def testRepairFusedUnit():
@@ -52,6 +54,29 @@ def testReinsertLostNasalUnit():
 def testReinsertLostNasalUnitRefusesOtherLosses():
     assert reinsertLostNasalUnit("5tERvjuve", "5|t_E_R|v_j_u_#_#", "in|t_e_r|v_i_ew_é_e") is None
     assert reinsertLostNasalUnit("@nivR", "@|n_i_v_R_#", "e|n_i_v_r_e") is None
+
+
+def _nomAdjWord(ortho: str, phon: str, lemme: str, gramCat: GramCat, syll: str, orthoSyll: str) -> Word:
+    return Word(
+        ortho=ortho, phonology=phon, lemme=lemme, gramCat=gramCat, orthoGramCat=[gramCat],
+        gender="m", number="p", infoVerb=None, rawSyllCV=syll, rawOrthosyllCV=orthoSyll,
+        frequencyBook=0.0, frequencyFilm=0.0)
+
+
+def testStoredBreakdownKeepsNasalUnitOfFoldedWord():
+    word = _nomAdjWord("enivrements", "@nivR°m@", "enivrement", GramCat.NOM,
+                       "@|n_i|v_R_°|m_@_#", "e|n_i|v_r_e|m_en_ts")
+    assert word.rawSyllCV.startswith("@|i|")  # the constructor folded it
+    assert storedBreakdown(word) == ("@|n_i|v_R_°|m_@_#", "e|n_i|v_r_e|m_en_ts")
+
+
+def testNomAdjWriterKeepsNasalUnit():
+    for word in (
+        _nomAdjWord("enamourés", "@namuRe", "enamouré", GramCat.ADJ, "@|n_a|m_u|R_e_#", "e|n_a|m_ou|r_é_s"),
+        _nomAdjWord("enivrements", "@nivR°m@", "enivrement", GramCat.NOM, "@|n_i|v_R_°|m_@_#", "e|n_i|v_r_e|m_en_ts"),
+    ):
+        fields = wordToSyntheticRow(word).rstrip("\n").split("\t")
+        assert fields[8].startswith("@|n_") and fields[9].startswith("e|n_")
 
 
 class TestHiatusBoundary:

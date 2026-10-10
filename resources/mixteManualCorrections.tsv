@@ -5,6 +5,11 @@
 #   `ij` -> `j`, `industrialis-` `ij` -> `i`), and `riant` Rj@ -> Rij@. Letters follow Lexique383 (no `=`); closed `O` kept.
 # manual-dropped-schwa (2026-10-10): the 15 rows of `rejeter` (13 finite and participle forms, the infinitive) and `épousseter` (infinitive) where Lexique383 drops the stem schwa (`rejeta` R°Zta -> R°Z°ta, `épousseter` epuste -> epus°te; `rejetions` R°Z°tj§ has it);
 #   (the other forms of `épousseter`, `époussetez` epus°te, have it); GLAFF lists the schwa variant of both.
+# manual-arguer-gu (2026-10-10): ruling arguer [aRg8e]: the 6 finite and participle forms of `arguer` other than `argué` (already aRg8e) get the 8 after the g;
+#   the `gu` letter unit splits g_u so that the units pair (as aiguille, linguiste). Applies decisions b3efd1782d and 64402d8bce.
+# manual-decatie-t (2026-10-10): `décatie` (ADJ and the par:pas row) dekasi -> dekati (Lexique's s is a typo; the other forms have t).
+# manual-loanword-units (2026-10-10): the loanword rows where Lexique's phon is kept and syll_cv / orthosyll_cv are rebuilt to carry exactly its sounds
+#   with paired units (`=` repeats the previous letter unit for a glide or a repeated sound; `#` marks a silent letter). Skipped: etc, mm (abbreviations of et cetera / millimetre).
 ortho	lemme	cgram	infover	genre	nombre	phon	syll_cv	orthosyll_cv	group_id
 autopsiais	autopsier	VER	ind:imp:1s;ind:imp:2s;			otOpsjE	o|t_O_p|s_j_E	au|t_o_p|s_i_ais	manual-stray-glide-i
 contorsionna	contorsionner	VER	ind:pas:3s;			k§tORsjona	k_§|t_O_R|s_j_o|n_a	c_on|t_o_r|s_i_o|nn_a	manual-stray-glide-i
@@ -51,3 +56,32 @@ rejetées	rejeter	VER	par:pas;	f	p	R°Z°te	R_°|Z_°|t_e_#	r_e|j_e|t_é_es	manu
 rejetés	rejeter	VER	par:pas;	m	p	R°Z°te	R_°|Z_°|t_e_#	r_e|j_e|t_é_s	manual-dropped-schwa
 rejeter	rejeter	VER	inf;			R°Z°te	R_°|Z_°|t_e	r_e|j_e|t_er	manual-dropped-schwa
 épousseter	épousseter	VER	inf;			epus°te	e|p_u|s_°|t_e	é|p_ou|ss_e|t_er	manual-dropped-schwa
+argua	arguer	VER	ind:pas:3s;			aRg8a	a_R|g_8_a	a_r|g_u_a	manual-arguer-gu
+arguais	arguer	VER	ind:imp:2s;			aRg8E	a_R|g_8_E	a_r|g_u_ais	manual-arguer-gu
+arguait	arguer	VER	ind:imp:3s;			aRg8E	a_R|g_8_E	a_r|g_u_ait	manual-arguer-gu
+arguant	arguer	VER	par:pre;			aRg8@	a_R|g_8_@	a_r|g_u_ant	manual-arguer-gu
+argue	arguer	VER	imp:pre:2s;ind:pre:3s;			aRg8	a_R|g_8_#	a_r|g_u_e	manual-arguer-gu
+arguer	arguer	VER	inf;			aRg8e	a_R|g_8_e	a_r|g_u_er	manual-arguer-gu
+décatie	décati	ADJ		f	s	dekati	d_e|k_a|t_i_#	d_é|c_a|t_i_e	manual-decatie-t
+décatie	décatir	VER	par:pas;	f	s	dekati	d_e|k_a|t_i_#	d_é|c_a|t_i_e	manual-decatie-t
+capharnaüm	capharnaüm	NOM		m	s	kafaRnaOm	k_a|f_a_R|n_a_O_m	c_a|ph_a_r|n_a_ü_m	manual-loanword-units
+game	game	NOM		m	s	gEjm	g_E_j_m_#	g_a_=_m_e	manual-loanword-units
+guru	guru	NOM		m	s	guRu	g_u|R_u	g_u|r_u	manual-loanword-units
+interviewé	interviewer	VER	par:pas;	m	s	5tERvjuve	5|t_E_R|v_j_u|v_e	in|t_e_r|v_i_ew|=_é	manual-loanword-units
+interviewé	interviewé	ADJ		m	s	5tERvjuve	5|t_E_R|v_j_u|v_e	in|t_e_r|v_i_ew|=_é	manual-loanword-units
+interviewé	interviewé	NOM		m	s	5tERvjuve	5|t_E_R|v_j_u|v_e	in|t_e_r|v_i_ew|=_é	manual-loanword-units
+interviewés	interviewer	VER	par:pas;	m	p	5tERvjuve	5|t_E_R|v_j_u|v_e_#	in|t_e_r|v_i_ew|=_é_s	manual-loanword-units
+interviewés	interviewé	NOM		m	p	5tERvjuve	5|t_E_R|v_j_u|v_e_#	in|t_e_r|v_i_ew|=_é_s	manual-loanword-units
+kreutzer	kreutzer	NOM		m	s	kROjts9R	k_R_O_j|t_s_9_R	k_r_e_u|t_z_e_r	manual-loanword-units
+ladies	ladies	NOM		f	p	lEjdiz	l_E_j|d_i_z	l_a_=|d_i_es	manual-loanword-units
+lady	lady	NOM		f	s	lEjdi	l_E_j|d_i	l_a_=|d_y	manual-loanword-units
+ladys	lady	NOM		f	p	lEjdiz	l_E_j|d_i_z	l_a_=|d_y_s	manual-loanword-units
+lobbying	lobbying	NOM		m	s	lObijiG	l_O|b_i|j_i_G	l_o|bb_y|=_i_ng	manual-loanword-units
+ok	ok	ADJ				oke	o|k_e	o|k_=	manual-loanword-units
+ok	ok	ADV				oke	o|k_e	o|k_=	manual-loanword-units
+samoan	samoan	ADJ		m	s	samo@	s_a|m_o_@	s_a|m_o_an	manual-loanword-units
+samoans	samoan	ADJ		m	p	samo@	s_a|m_o_@_#	s_a|m_o_an_s	manual-loanword-units
+spoiler	spoiler	NOM		m	s	spOjlER	s_p_O_j|l_E_R	s_p_o_i|l_e_r	manual-loanword-units
+steamboat	steamboat	NOM		m	s	stimbOwt	s_t_i_m|b_O_w_t	s_t_ea_m|b_o_a_t	manual-loanword-units
+sweepstake	sweepstake	NOM		m	s	swipstEjk	s_w_i_p|s_t_E_j_k_#	s_w_ee_p|s_t_a_=_k_e	manual-loanword-units
+update	update	NOM		f	s	9pdajt	9_p|d_a_j_t_#	u_p|d_a_=_t_e	manual-loanword-units

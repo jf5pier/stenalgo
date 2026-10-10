@@ -5,7 +5,8 @@ import pytest
 from src.diffsignature import graphemesOf, unitTriples
 from src.lexicondecisions import ACCEPT, Decision, Decisions
 from src.mixterules import (GLIDE_RULE_ID, GLIDE_RULE_SIGNATURE, MIXTE_RULES, STRAY_GLIDE_RULE_ID, activeRules,
-                            dropStrayGlide, schwaOfE, splitGlides, SCHWA_OF_E_RULE_ID)
+                            dropStrayGlide, syllFromPhon, schwaOfE, splitGlides, SCHWA_OF_E_RULE_ID, SYLL_FROM_PHON_RULE_ID,
+                            SYLL_FROM_PHON_SIGNATURE)
 from src.orthounits import spellingOf, stripMarks
 from util.check_lexicon_features import check_units
 
@@ -148,3 +149,46 @@ def testSchwaOfELeavesEuFlagellerAndNonVerbs() -> None:
     flagellant["lemme"] = "flageller"
     assert schwaOfE(flagellant) == flagellant
     assert MIXTE_RULES[SCHWA_OF_E_RULE_ID] is schwaOfE
+
+
+@pytest.mark.parametrize("cgram, before, after", [
+    ("NOM", ("crayon", "kREj@", "k_R_Ej|@", "c_r_ay|on"), ("kREj@", "k_R_E|j_@", "c_r_a|y_on")),
+    ("VER", ("balaya", "balEja", "b_a|l_Ej|a", "b_a|l_ay|a"), ("balEja", "b_a|l_E|j_a", "b_a|l_a|y_a")),
+    ("VER", ("ayant", "Ej@", "Ej|@", "ay|ant"), ("Ej@", "E|j_@", "a|y_ant")),
+    ("VER", ("balaye", "balEj", "b_a|l_Ej_#", "b_a|l_ay_e"), ("balEj", "b_a|l_E_j_#", "b_a|l_a_y_e")),
+    ("NOM", ("spray", "spREj", "s_p_R_Ej", "s_p_r_ay"), ("spREj", "s_p_R_E_j", "s_p_r_a_y")),
+])
+def testFusedEjAnyCgram(cgram: str, before: tuple[str, str, str, str], after: tuple[str, str, str]) -> None:
+    new = splitGlides(_row(*before, cgram=cgram))
+    assert (new["phon"], new["syll_cv"], new["orthosyll_cv"]) == after
+    assert check_units(new["syll_cv"], new["orthosyll_cv"])
+    assert splitGlides(new) == new
+
+
+def testFusedEjLeavesOtherShapes() -> None:
+    for row in (_row("pays", "pei", "p_E|i", "p_ay|s", cgram="NOM"),                    # no fused Ej
+                _row("paye", "pEj", "p_Ej_#", "p_ay|e", cgram="NOM"),                    # breakdowns break differently
+                _row("paye", "pEj", "p_Ej_#", "p_ay", cgram="NOM")):                     # not unit for unit
+        assert splitGlides(row) == row
+
+
+@pytest.mark.parametrize("ortho, phon, syll, letters, expected", [
+    ("embêter", "@bEte", "@|b_e|t_e", "en|b_ê|t_er", "@|b_E|t_e"),
+    ("emmêlée", "@mEle", "@|m_e|l_e_#", "em|m_ê|l_é_e", "@|m_E|l_e_#"),
+    ("embouteiller", "@butEje", "@|b_u|t_e|j_e", "em|b_ou|t_ei|ll_er", "@|b_u|t_E|j_e"),
+])
+def testSyllFromPhon(ortho: str, phon: str, syll: str, letters: str, expected: str) -> None:
+    new = syllFromPhon(_row(ortho, phon, syll, letters, cgram="VER"))
+    assert new["syll_cv"] == expected and new["phon"] == phon and new["orthosyll_cv"] == letters
+    assert syllFromPhon(new) == new
+
+
+def testSyllFromPhonLeavesOtherDisagreements() -> None:
+    for row in (_row("capharnaüm", "kafaRnaOm", "k_a|f_a_R|n_a_#_#", "c_a|p_h_a_r|n_a_ü_m", cgram="NOM"),    # lengths differ
+                _row("samoan", "samo@", "s_a|m_o_#", "s_a|m_o_an", cgram="ADJ"),
+                _row("spoiler", "spOjlER", "s_p_O_j_#_#", "s_p_o_i_l_er", cgram="NOM"),
+                _row("marche", "maRS", "m_a_R_S_#", "m_a_r_ch_e", cgram="NOM")):                         # already agrees
+        assert syllFromPhon(row) == row
+    assert MIXTE_RULES[SYLL_FROM_PHON_RULE_ID] is syllFromPhon
+    decisions = Decisions([Decision(SYLL_FROM_PHON_RULE_ID, "mixte_rule", "-", SYLL_FROM_PHON_SIGNATURE, ACCEPT)])
+    assert [groupId for groupId, _ in activeRules(decisions)] == [SYLL_FROM_PHON_RULE_ID]

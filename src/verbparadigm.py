@@ -1157,6 +1157,14 @@ def reinsertLostNasalUnit(
     return _joinBreakdown(newUnits, newBounds), _joinBreakdown(newOUnits, newBounds)
 
 
+def storedBreakdown(word: Word) -> tuple[str, str]:
+    """(syll_cv, orthosyll_cv) as the lexicon files store them for `word`: the Word constructor folds the n/m unit of
+    an en-/em- + vowel word into the nasal vowel (fix_e_n_en), the files keep it (reinsertLostNasalUnit). Every
+    Synthetic writer goes through this."""
+    return reinsertLostNasalUnit(word.phonology, word.rawSyllCV, word.rawOrthosyllCV) or (
+        word.rawSyllCV, word.rawOrthosyllCV)
+
+
 def rewriteSplicePhon(phonology: str, rawSyllCV: str) -> str | None:
     """
     The sounded join of a repaired syll_cv, offered as the phonology of a row whose

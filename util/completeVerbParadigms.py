@@ -65,7 +65,7 @@ from src.verbparadigm import (
     infinitiveRadical,
     lemmeOfVerbLemmeGramCat,
     loadVerbisteTemplates,
-    reinsertLostNasalUnit,
+    storedBreakdown,
     repairLostNasalInfinitive,
     loadVerbModelExceptions,
     newlyCollidingLemmas,
@@ -826,8 +826,7 @@ def writeSynthetic(path: str, candidates: list[Candidate]) -> int:
             # The Word constructor folds the n/m unit of an en-/em- + vowel verb into the nasal vowel (fix_e_n_en: enivre
             # "@|i_v_R_#"), but the lexicons store the unit (Mixte and the committed Synthetic rows: "@|n_i_v_R_#",
             # "e|n_i_v_r_e"), so the file keeps it, whichever rule built the row (enivrais, enamouré).
-            syllCV, orthosyllCV = reinsertLostNasalUnit(word.phonology, word.rawSyllCV, word.rawOrthosyllCV) or (
-                word.rawSyllCV, word.rawOrthosyllCV)
+            syllCV, orthosyllCV = storedBreakdown(word)
             fields = [
                 word.ortho, word.phonology, word.lemme, word.gramCat.name,
                 ",".join(gramCat.name for gramCat in word.orthoGramCat),

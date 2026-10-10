@@ -198,3 +198,78 @@ def applyTagCorrections(rows: list[dict[str, Any]], corrections: Sequence[TagCor
     for k, at in positions.items():
         out[at[0]] = {**rows[at[0]], "genre": wanted[k].newGenre, "nombre": wanted[k].newNombre}
     return out
+
+
+LEMMA_CORRECTIONS_PATH = "resources/lemmaCorrections.tsv"
+LEMMA_COLUMNS = ("ortho", "cgram", "lemme", "new_lemme", "genre", "nombre", "infover", "reason")
+
+
+@dataclass(frozen=True)
+class LemmaCorrection:
+    """A hand-found lemma defect of a Mixte row (TODO.md item 3): the key is the Lexique383 row's (`lemme` is the wrong lemma),
+    `newLemme` replaces it. The sounds, the genre, the number and the infover are untouched, so the row stays in step with its
+    syllabification and joins the family of the right lemma."""
+    ortho: str
+    cgram: str
+    lemme: str
+    newLemme: str
+    genre: str
+    nombre: str
+    infover: str
+    reason: str
+
+    @property
+    def key(self) -> tuple[str, str, str, str, str, str]:
+        return (self.ortho, self.lemme, self.cgram, self.infover, self.genre, self.nombre)
+
+
+def loadLemmaCorrections(path: str = LEMMA_CORRECTIONS_PATH) -> list[LemmaCorrection]:
+    """The lemma corrections of `path` (absent or header-only: []); MixteCorrectionError on a malformed row, a duplicated key or
+    a row that does not change the lemma."""
+    if not os.path.exists(path):
+        return []
+    out: list[LemmaCorrection] = []
+    seen: set[tuple[str, str, str, str, str, str]] = set()
+    headerSeen = False
+    with open(path, encoding="utf-8") as f:
+        for number, line in enumerate(f, 1):
+            line = line.rstrip("\n")
+            if not line or line.startswith("#"):
+                continue
+            cells = line.split("\t")
+            if not headerSeen:
+                if tuple(cells) != LEMMA_COLUMNS:
+                    raise MixteCorrectionError(f"{path}:{number}: header {cells!r}, expected {list(LEMMA_COLUMNS)!r}")
+                headerSeen = True
+                continue
+            if len(cells) != len(LEMMA_COLUMNS):
+                raise MixteCorrectionError(f"{path}:{number}: {len(cells)} columns, expected {len(LEMMA_COLUMNS)}")
+            c = LemmaCorrection(*cells)
+            if c.lemme == c.newLemme or not c.newLemme:
+                raise MixteCorrectionError(f"{path}:{number}: the new lemma {c.newLemme!r} must differ from {c.lemme!r} and be non-empty")
+            if c.key in seen:
+                raise MixteCorrectionError(f"{path}:{number}: duplicate key {c.key!r}")
+            seen.add(c.key)
+            out.append(c)
+    return out
+
+
+def applyLemmaCorrections(rows: list[dict[str, Any]], corrections: Sequence[LemmaCorrection]) -> list[dict[str, Any]]:
+    """`rows` with every lemma correction applied (lemme replaced); a new list. Raises MixteCorrectionError listing every key that
+    matches no row and every key that matches several."""
+    if not corrections:
+        return rows
+    wanted = {c.key: c for c in corrections}
+    positions: dict[tuple[str, str, str, str, str, str], list[int]] = {}
+    for i, row in enumerate(rows):
+        k = rowKeyOf(row)
+        if k in wanted:
+            positions.setdefault(k, []).append(i)
+    problems = [f"no output row for {k!r}" for k in sorted(wanted) if k not in positions]
+    problems += [f"{len(at)} output rows for {k!r}" for k, at in sorted(positions.items()) if len(at) > 1]
+    if problems:
+        raise MixteCorrectionError("Mixte lemma corrections do not match exactly one row each:\n  " + "\n  ".join(problems))
+    out = list(rows)
+    for k, at in positions.items():
+        out[at[0]] = {**rows[at[0]], "lemme": wanted[k].newLemme}
+    return out
