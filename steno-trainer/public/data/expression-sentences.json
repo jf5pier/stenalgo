@@ -1078,7 +1078,7 @@
  {
   "text": "Je vais manger du pain.",
   "phonology": "Z° vE m@.Ze dy p5",
-  "steno": "pviesZ m@/vte/-l pv@i paie",
+  "steno": "pviesZ m@/vte/-R pv@i paie",
   "strokes": [
    [
     4,
@@ -1098,7 +1098,7 @@
     14
    ],
    [
-    23
+    21
    ],
    [
     4,
@@ -1129,7 +1129,7 @@
    {
     "text": "manger",
     "label": "infinitif",
-    "steno": "m@/vte/-l",
+    "steno": "m@/vte/-R",
     "strokeCount": 3
    },
    {
@@ -1147,7 +1147,7 @@
   ],
   "alternates": [
    {
-    "steno": "vt@a/vie/m@/vte/-l/pv@i/paie",
+    "steno": "vt@a/vie/m@/vte/-R/pv@i/paie",
     "strokes": [
      [
       5,
@@ -1170,7 +1170,7 @@
       14
      ],
      [
-      23
+      21
      ],
      [
       4,
@@ -3286,7 +3286,7 @@
  {
   "text": "Elle serait contente ainsi.",
   "phonology": "El s°.RE k§.t@t 5.si",
-  "steno": "st@asZ/Rie kai/t@t w-",
+  "steno": "st@asZ/Rie kai/t*@t w-",
   "strokes": [
    [
     3,
@@ -3308,6 +3308,7 @@
    ],
    [
     7,
+    10,
     11,
     20
    ],
@@ -3331,7 +3332,7 @@
    {
     "text": "contente",
     "label": "adjectif, f. sg.",
-    "steno": "kai/t@t",
+    "steno": "kai/t*@t",
     "strokeCount": 2
    },
    {
@@ -3343,7 +3344,7 @@
   ],
   "alternates": [
    {
-    "steno": "iel/s@a/Rie/kai/t@t/aie/si",
+    "steno": "iel/s@a/Rie/kai/t*@t/aie/si",
     "strokes": [
      [
       13,
@@ -3367,6 +3368,7 @@
      ],
      [
       7,
+      10,
       11,
       20
      ],
@@ -6024,7 +6026,7 @@
  {
   "text": "On ne peut pas attendre.",
   "phonology": "§ n° p2 pa a.t@dR",
-  "steno": "ai pw*@iejdRm a/t@dR",
+  "steno": "ai pw@iejdRm a/t@dR",
   "strokes": [
    [
     12,
@@ -6033,7 +6035,6 @@
    [
     4,
     9,
-    10,
     11,
     13,
     14,
@@ -6068,7 +6069,7 @@
    {
     "text": "peut",
     "label": "indicatif présent, 3e sg.",
-    "steno": "pw*@iejdRm",
+    "steno": "pw@iejdRm",
     "strokeCount": 1
    },
    {
@@ -6086,7 +6087,7 @@
   ],
   "alternates": [
    {
-    "steno": "ai/mR@a/p*@ie/pa/a/t@dR",
+    "steno": "ai/mR@a/p@ie/pa/a/t@dR",
     "strokes": [
      [
       12,
@@ -6100,7 +6101,6 @@
      ],
      [
       4,
-      10,
       11,
       13,
       14
@@ -8467,7 +8467,7 @@
  {
   "text": "Sûrement elle sait cela.",
   "phonology": "sy.R°.m@ El sE s°.la",
-  "steno": "s@i/R@a/m@ stie#sZ s@a/mta",
+  "steno": "s@i/R@a/m@ st*iesZ s@a/mta",
   "strokes": [
    [
     3,
@@ -8486,9 +8486,9 @@
    [
     3,
     7,
+    10,
     13,
     14,
-    15,
     17,
     24
    ],
@@ -8519,7 +8519,7 @@
    {
     "text": "sait",
     "label": "indicatif présent, 3e sg.",
-    "steno": "stie#sZ",
+    "steno": "st*iesZ",
     "strokeCount": 1
    },
    {
@@ -8531,7 +8531,7 @@
   ],
   "alternates": [
    {
-    "steno": "s@i/R@a/m@/iel/sie#/s@a/mta",
+    "steno": "s@i/R@a/m@/iel/s*ie/s@a/mta",
     "strokes": [
      [
       3,
@@ -8554,9 +8554,9 @@
      ],
      [
       3,
+      10,
       13,
-      14,
-      15
+      14
      ],
      [
       3,
@@ -9470,7 +9470,7 @@
  {
   "text": "Je dois aller à l'église.",
   "phonology": "Z° dwa a.le a l e.gliz",
-  "steno": "vt@a pvwa/-k a/mte/-l vRwejsl/ksmtinl",
+  "steno": "vt@a pvwa/-k a/mte/-R vRwejsl/ksmtinl",
   "strokes": [
    [
     5,
@@ -9496,7 +9496,7 @@
     14
    ],
    [
-    23
+    21
    ],
    [
     5,
@@ -9533,7 +9533,7 @@
    {
     "text": "aller",
     "label": "infinitif",
-    "steno": "a/mte/-l",
+    "steno": "a/mte/-R",
     "strokeCount": 3
    },
    {
@@ -9557,7 +9557,7 @@
   ],
   "alternates": [
    {
-    "steno": "vt@a/pvwa/-k/a/mte/-l/a/mt-/e/ksmtinl",
+    "steno": "vt@a/pvwa/-k/a/mte/-R/a/mt-/e/ksmtinl",
     "strokes": [
      [
       5,
@@ -9583,7 +9583,7 @@
       14
      ],
      [
-      23
+      21
      ],
      [
       12
@@ -9615,7 +9615,7 @@
  {
   "text": "Tu veux visiter la bibliothèque.",
   "phonology": "ty v2 vi.zi.te la bi.blij.o.tEk",
-  "steno": "t@i v@ie/-d vi/twi/te/-l svijkd/svmtij/ae/tiek",
+  "steno": "t@i v@ie/-d vi/twi/te/-R svijkd/svmtij/ae/tiek",
   "strokes": [
    [
     7,
@@ -9645,7 +9645,7 @@
     14
    ],
    [
-    23
+    21
    ],
    [
     3,
@@ -9690,7 +9690,7 @@
    {
     "text": "visiter",
     "label": "infinitif",
-    "steno": "vi/twi/te/-l",
+    "steno": "vi/twi/te/-R",
     "strokeCount": 4
    },
    {
@@ -9708,7 +9708,7 @@
   ],
   "alternates": [
    {
-    "steno": "t@i/v@ie/-d/vi/twi/te/-l/mta/svi/svmtij/ae/tiek",
+    "steno": "t@i/v@ie/-d/vi/twi/te/-R/mta/svi/svmtij/ae/tiek",
     "strokes": [
      [
       7,
@@ -9738,7 +9738,7 @@
       14
      ],
      [
-      23
+      21
      ],
      [
       6,
@@ -9778,12 +9778,11 @@
  {
   "text": "Il peut aller à la gare.",
   "phonology": "il p2 a.le a la gaR",
-  "steno": "pt*@iesl a/mte/-l ksRajskdRl",
+  "steno": "pt@iesl a/mte/-R ksRajskdRl",
   "strokes": [
    [
     4,
     7,
-    10,
     11,
     13,
     14,
@@ -9799,7 +9798,7 @@
     14
    ],
    [
-    23
+    21
    ],
    [
     2,
@@ -9824,13 +9823,13 @@
    {
     "text": "peut",
     "label": "indicatif présent, 3e sg.",
-    "steno": "pt*@iesl",
+    "steno": "pt@iesl",
     "strokeCount": 1
    },
    {
     "text": "aller",
     "label": "infinitif",
-    "steno": "a/mte/-l",
+    "steno": "a/mte/-R",
     "strokeCount": 3
    },
    {
@@ -9854,7 +9853,7 @@
   ],
   "alternates": [
    {
-    "steno": "il/p*@ie/a/mte/-l/a/mta/ksaR",
+    "steno": "il/p@ie/a/mte/-R/a/mta/ksaR",
     "strokes": [
      [
       13,
@@ -9862,7 +9861,6 @@
      ],
      [
       4,
-      10,
       11,
       13,
       14
@@ -9876,7 +9874,7 @@
       14
      ],
      [
-      23
+      21
      ],
      [
       12
@@ -9904,7 +9902,7 @@
  {
   "text": "Elle aime aller à la plage.",
   "phonology": "El Em a.le a la plaZ",
-  "steno": "tiesZm a/mte/-l a pmtajkdZ",
+  "steno": "tiesZm a/mte/-R a pmtajkdZ",
   "strokes": [
    [
     7,
@@ -9923,7 +9921,7 @@
     14
    ],
    [
-    23
+    21
    ],
    [
     12
@@ -9955,7 +9953,7 @@
    {
     "text": "aller",
     "label": "infinitif",
-    "steno": "a/mte/-l",
+    "steno": "a/mte/-R",
     "strokeCount": 3
    },
    {
@@ -9979,7 +9977,7 @@
   ],
   "alternates": [
    {
-    "steno": "iel/iem/a/mte/-l/a/mta/pmtaZ",
+    "steno": "iel/iem/a/mte/-R/a/mta/pmtaZ",
     "strokes": [
      [
       13,
@@ -10000,7 +9998,7 @@
       14
      ],
      [
-      23
+      21
      ],
      [
       12
@@ -10028,7 +10026,7 @@
  {
   "text": "Nous souhaitons aller en vacances.",
   "phonology": "nu swE.t§ a.le @ va.k@s",
-  "steno": "mR@e swie/tai a/mte/-l vakdt/k@s/-s",
+  "steno": "mR@e swie/tai a/mte/-R vakdt/k@s/-s",
   "strokes": [
    [
     6,
@@ -10056,7 +10054,7 @@
     14
    ],
    [
-    23
+    21
    ],
    [
     5,
@@ -10090,7 +10088,7 @@
    {
     "text": "aller",
     "label": "infinitif",
-    "steno": "a/mte/-l",
+    "steno": "a/mte/-R",
     "strokeCount": 3
    },
    {
@@ -10108,7 +10106,7 @@
   ],
   "alternates": [
    {
-    "steno": "mR@e/swie/tai/a/mte/-l/@/va/k@s/-s",
+    "steno": "mR@e/swie/tai/a/mte/-R/@/va/k@s/-s",
     "strokes": [
      [
       6,
@@ -10136,7 +10134,7 @@
       14
      ],
      [
-      23
+      21
      ],
      [
       11
@@ -10163,7 +10161,7 @@
  {
   "text": "Ils refusent d'aller à l'école.",
   "phonology": "il R°.fyz d a.le a l e.kOl",
-  "steno": "il/-s R@a/kp@inl/-st asZ/mte/-l vRwejsl/kel",
+  "steno": "il/-s R@a/kp@inl/-st asZ/mte/-R vRwejsl/kel",
   "strokes": [
    [
     13,
@@ -10200,7 +10198,7 @@
     14
    ],
    [
-    23
+    21
    ],
    [
     5,
@@ -10239,7 +10237,7 @@
    {
     "text": "aller",
     "label": "infinitif",
-    "steno": "asZ/mte/-l",
+    "steno": "asZ/mte/-R",
     "strokeCount": 3
    },
    {
@@ -10263,7 +10261,7 @@
   ],
   "alternates": [
    {
-    "steno": "il/-s/R@a/kp@inl/-st/pv-/a/mte/-l/a/mt-/e/kel",
+    "steno": "il/-s/R@a/kp@inl/-st/pv-/a/mte/-R/a/mt-/e/kel",
     "strokes": [
      [
       13,
@@ -10302,7 +10300,7 @@
       14
      ],
      [
-      23
+      21
      ],
      [
       12
@@ -10579,7 +10577,7 @@
  {
   "text": "Il continue de travailler.",
   "phonology": "il k§.ti.ny d° tRa.va.je",
-  "steno": "ktaisl/ti/mR@i tRasZ/va/Rwe/-l",
+  "steno": "ktaisl/ti/mR@i tRasZ/va/Rwe/-R",
   "strokes": [
    [
     2,
@@ -10616,7 +10614,7 @@
     14
    ],
    [
-    23
+    21
    ]
   ],
   "words": [
@@ -10641,13 +10639,13 @@
    {
     "text": "travailler",
     "label": "infinitif",
-    "steno": "tRasZ/va/Rwe/-l",
+    "steno": "tRasZ/va/Rwe/-R",
     "strokeCount": 4
    }
   ],
   "alternates": [
    {
-    "steno": "il/kai/ti/mR@i/pv@a/tRa/va/Rwe/-l",
+    "steno": "il/kai/ti/mR@i/pv@a/tRa/va/Rwe/-R",
     "strokes": [
      [
       13,
@@ -10689,7 +10687,7 @@
       14
      ],
      [
-      23
+      21
      ]
     ]
    }
@@ -10841,7 +10839,7 @@
  {
   "text": "On réussit à trouver la solution.",
   "phonology": "§ Re.y.si a tRu.ve la so.ly.sj§",
-  "steno": "ai Re/@i/si/-t a tR@e/ve/-l saejkd/mt@i/sRwai",
+  "steno": "ai Re/@i/si/-t a tR@e/ve/-R saejkd/mt@i/sRwai",
   "strokes": [
    [
     12,
@@ -10876,7 +10874,7 @@
     14
    ],
    [
-    23
+    21
    ],
    [
     3,
@@ -10922,7 +10920,7 @@
    {
     "text": "trouver",
     "label": "infinitif",
-    "steno": "tR@e/ve/-l",
+    "steno": "tR@e/ve/-R",
     "strokeCount": 3
    },
    {
@@ -10940,7 +10938,7 @@
   ],
   "alternates": [
    {
-    "steno": "ai/Re/@i/si/-t/a/tR@e/ve/-l/mta/sae/mt@i/sRwai",
+    "steno": "ai/Re/@i/si/-t/a/tR@e/ve/-R/mta/sae/mt@i/sRwai",
     "strokes": [
      [
       12,
@@ -10975,7 +10973,7 @@
       14
      ],
      [
-      23
+      21
      ],
      [
       6,
@@ -11010,7 +11008,7 @@
  {
   "text": "Vous commencez à danser.",
   "phonology": "vu ko.m@.se a d@.se",
-  "steno": "v@e kae/m@/se/-d pvR@sl/se/-l",
+  "steno": "v@e kae/m@/se/-d pvR@sl/se/-R",
   "strokes": [
    [
     5,
@@ -11046,7 +11044,7 @@
     14
    ],
    [
-    23
+    21
    ]
   ],
   "words": [
@@ -11071,13 +11069,13 @@
    {
     "text": "danser",
     "label": "infinitif",
-    "steno": "pvR@sl/se/-l",
+    "steno": "pvR@sl/se/-R",
     "strokeCount": 3
    }
   ],
   "alternates": [
    {
-    "steno": "v@e/kae/m@/se/-d/a/pv@/se/-l",
+    "steno": "v@e/kae/m@/se/-d/a/pv@/se/-R",
     "strokes": [
      [
       5,
@@ -11113,7 +11111,7 @@
       14
      ],
      [
-      23
+      21
      ]
     ]
    }
@@ -11678,7 +11676,7 @@
  {
   "text": "On sait que tu mens.",
   "phonology": "§ sE k° ty m@",
-  "steno": "ai sie# kt@ikt m@/-d",
+  "steno": "ai s*ie kt@ikt m@/-d",
   "strokes": [
    [
     12,
@@ -11686,9 +11684,9 @@
    ],
    [
     3,
+    10,
     13,
-    14,
-    15
+    14
    ],
    [
     2,
@@ -11716,7 +11714,7 @@
    {
     "text": "sait",
     "label": "indicatif présent, 3e sg.",
-    "steno": "sie#",
+    "steno": "s*ie",
     "strokeCount": 1
    },
    {
@@ -11740,7 +11738,7 @@
   ],
   "alternates": [
    {
-    "steno": "ai/sie#/k@a/t@i/m@/-d",
+    "steno": "ai/s*ie/k@a/t@i/m@/-d",
     "strokes": [
      [
       12,
@@ -11748,9 +11746,9 @@
      ],
      [
       3,
+      10,
       13,
-      14,
-      15
+      14
      ],
      [
       2,
@@ -12063,8 +12061,8 @@
  },
  {
   "text": "Elles pensent que nous avons oublié.",
-  "phonology": "El p@s k° nu a.v§ u.blij.e",
-  "steno": "iel/-s p@s/-st kmR@ekt a/vai @e/svmtij/e",
+  "phonology": "El p@s k° nu a.v§ u.bli.je",
+  "steno": "iel/-s p@s/-st kmR@ekt a/vai @e/svmti/Rwe",
   "strokes": [
    [
     13,
@@ -12109,10 +12107,11 @@
     5,
     6,
     7,
-    13,
-    16
+    13
    ],
    [
+    8,
+    9,
     14
    ]
   ],
@@ -12150,13 +12149,13 @@
    {
     "text": "oublié",
     "label": "participe passé, m. sg.",
-    "steno": "@e/svmtij/e",
+    "steno": "@e/svmti/Rwe",
     "strokeCount": 3
    }
   ],
   "alternates": [
    {
-    "steno": "iel/-s/p@s/-st/k@a/mR@e/a/vai/@e/svmtij/e",
+    "steno": "iel/-s/p@s/-st/k@a/mR@e/a/vai/@e/svmti/Rwe",
     "strokes": [
      [
       13,
@@ -12203,10 +12202,11 @@
       5,
       6,
       7,
-      13,
-      16
+      13
      ],
      [
+      8,
+      9,
       14
      ]
     ]
@@ -12526,7 +12526,7 @@
  {
   "text": "Elle vous invite à dîner.",
   "phonology": "El vu 5.vit a di.ne",
-  "steno": "vt@esZ aie/vit pvRisl/mRe/-l",
+  "steno": "vt@esZ aie/vit pvRisl/mRe/-R",
   "strokes": [
    [
     5,
@@ -12560,7 +12560,7 @@
     14
    ],
    [
-    23
+    21
    ]
   ],
   "words": [
@@ -12591,13 +12591,13 @@
    {
     "text": "dîner",
     "label": "infinitif",
-    "steno": "pvRisl/mRe/-l",
+    "steno": "pvRisl/mRe/-R",
     "strokeCount": 3
    }
   ],
   "alternates": [
    {
-    "steno": "iel/v@e/aie/vit/a/pvi/mRe/-l",
+    "steno": "iel/v@e/aie/vit/a/pvi/mRe/-R",
     "strokes": [
      [
       13,
@@ -12633,7 +12633,7 @@
       14
      ],
      [
-      23
+      21
      ]
     ]
    }
@@ -12845,7 +12845,7 @@
  {
   "text": "Tu peux m'aider aujourd'hui.",
   "phonology": "ty p2 m E.de o.ZuR.d8i",
-  "steno": "t@i p@ie/-d m* ie/pve/-l pv@aie",
+  "steno": "t@i p@ie/-d m* ie/pve/-R pv@aie",
   "strokes": [
    [
     7,
@@ -12875,7 +12875,7 @@
     14
    ],
    [
-    23
+    21
    ],
    [
     4,
@@ -12908,7 +12908,7 @@
    {
     "text": "aider",
     "label": "infinitif",
-    "steno": "ie/pve/-l",
+    "steno": "ie/pve/-R",
     "strokeCount": 3
    },
    {
@@ -12920,7 +12920,7 @@
   ],
   "alternates": [
    {
-    "steno": "t@i/p@ie/-d/m*/ie/pve/-l/ae/vt@eR/pv@ai",
+    "steno": "t@i/p@ie/-d/m*/ie/pve/-R/ae/vt@eR/pv@ai",
     "strokes": [
      [
       7,
@@ -12950,7 +12950,7 @@
       14
      ],
      [
-      23
+      21
      ],
      [
       12,
@@ -13089,12 +13089,11 @@
  {
   "text": "Elle peut parler anglais.",
   "phonology": "El p2 paR.le @.glE",
-  "steno": "pt*@iesZ paR/mte/-l @/ksmtie",
+  "steno": "pt@iesZ paR/mte/-R @/ksmtie",
   "strokes": [
    [
     4,
     7,
-    10,
     11,
     13,
     14,
@@ -13112,7 +13111,7 @@
     14
    ],
    [
-    23
+    21
    ],
    [
     11
@@ -13136,13 +13135,13 @@
    {
     "text": "peut",
     "label": "indicatif présent, 3e sg.",
-    "steno": "pt*@iesZ",
+    "steno": "pt@iesZ",
     "strokeCount": 1
    },
    {
     "text": "parler",
     "label": "infinitif",
-    "steno": "paR/mte/-l",
+    "steno": "paR/mte/-R",
     "strokeCount": 3
    },
    {
@@ -13154,7 +13153,7 @@
   ],
   "alternates": [
    {
-    "steno": "iel/p*@ie/paR/mte/-l/@/ksmtie",
+    "steno": "iel/p@ie/paR/mte/-R/@/ksmtie",
     "strokes": [
      [
       13,
@@ -13163,7 +13162,6 @@
      ],
      [
       4,
-      10,
       11,
       13,
       14
@@ -13179,7 +13177,7 @@
       14
      ],
      [
-      23
+      21
      ],
      [
       11
@@ -13202,7 +13200,7 @@
  {
   "text": "Nous voulons manger maintenant.",
   "phonology": "nu vu.l§ m@.Ze m5.t°.n@",
-  "steno": "mR@e v@e/mtai m@/vte/-l mR@aie",
+  "steno": "mR@e v@e/mtai m@/vte/-R mR@aie",
   "strokes": [
    [
     6,
@@ -13231,7 +13229,7 @@
     14
    ],
    [
-    23
+    21
    ],
    [
     6,
@@ -13258,7 +13256,7 @@
    {
     "text": "manger",
     "label": "infinitif",
-    "steno": "m@/vte/-l",
+    "steno": "m@/vte/-R",
     "strokeCount": 3
    },
    {
@@ -13270,7 +13268,7 @@
   ],
   "alternates": [
    {
-    "steno": "mR@e/v@e/mtai/m@/vte/-l/maie/t@a/mR@",
+    "steno": "mR@e/v@e/mtai/m@/vte/-R/maie/t@a/mR@",
     "strokes": [
      [
       6,
@@ -13299,7 +13297,7 @@
       14
      ],
      [
-      23
+      21
      ],
      [
       6,
@@ -13441,7 +13439,7 @@
  {
   "text": "Il est parti hier matin.",
   "phonology": "il E paR.ti jER ma.t5",
-  "steno": "tiesl paR/t*i RwieR ma/taie",
+  "steno": "tiesl paR/ti RwieR ma/taie",
   "strokes": [
    [
     7,
@@ -13457,7 +13455,6 @@
    ],
    [
     7,
-    10,
     13
    ],
    [
@@ -13494,7 +13491,7 @@
    {
     "text": "parti",
     "label": "participe passé, m. sg.",
-    "steno": "paR/t*i",
+    "steno": "paR/ti",
     "strokeCount": 2
    },
    {
@@ -13512,7 +13509,7 @@
   ],
   "alternates": [
    {
-    "steno": "il/ie/paR/t*i/RwieR/ma/taie",
+    "steno": "il/ie/paR/ti/RwieR/ma/taie",
     "strokes": [
      [
       13,
@@ -13529,7 +13526,6 @@
      ],
      [
       7,
-      10,
       13
      ],
      [
@@ -13677,7 +13673,7 @@
  {
   "text": "Nous sommes allés à la mer.",
   "phonology": "nu sOm a.le a la mER",
-  "steno": "mR@e sem a/mte/-s mRie#jskdRl",
+  "steno": "mR@e sem a/mte/-s mR*iejskdRl",
   "strokes": [
    [
     6,
@@ -13704,9 +13700,9 @@
    [
     6,
     8,
+    10,
     13,
     14,
-    15,
     16,
     17,
     18,
@@ -13749,13 +13745,13 @@
    {
     "text": "mer",
     "label": "nom, f. sg.",
-    "steno": "mRie#jskdRl",
+    "steno": "mR*iejskdRl",
     "strokeCount": 1
    }
   ],
   "alternates": [
    {
-    "steno": "mR@e/sem/a/mte/-s/a/mta/mie#R",
+    "steno": "mR@e/sem/a/mte/-s/a/mta/m*ieR",
     "strokes": [
      [
       6,
@@ -13789,9 +13785,9 @@
      ],
      [
       6,
+      10,
       13,
       14,
-      15,
       21
      ]
     ]
@@ -14977,8 +14973,8 @@
  },
  {
   "text": "Elle partait en voyage.",
-  "phonology": "El paR.tE @ vwaj.aZ",
-  "steno": "ptasRZ/tie vwajkdt/aZ",
+  "phonology": "El paR.tE @ vwa.jaZ",
+  "steno": "ptasRZ/tie vwakdt/RwaZ",
   "strokes": [
    [
     4,
@@ -14997,12 +14993,13 @@
     5,
     9,
     12,
-    16,
     18,
     19,
     20
    ],
    [
+    8,
+    9,
     12,
     24
    ]
@@ -15029,13 +15026,13 @@
    {
     "text": "voyage",
     "label": "nom, m. sg.",
-    "steno": "vwajkdt/aZ",
+    "steno": "vwakdt/RwaZ",
     "strokeCount": 2
    }
   ],
   "alternates": [
    {
-    "steno": "iel/paR/tie/@/vwaj/aZ",
+    "steno": "iel/paR/tie/@/vwa/RwaZ",
     "strokes": [
      [
       13,
@@ -15058,10 +15055,11 @@
      [
       5,
       9,
-      12,
-      16
+      12
      ],
      [
+      8,
+      9,
       12,
       24
      ]

@@ -92,3 +92,23 @@ def test_manual_corrections_file_loads_and_pairs_units() -> None:
         assert len(c.syllCV.split("|")) == len(c.orthosyllCV.split("|"))
         assert all(len(a.split("_")) == len(b.split("_")) for a, b in zip(c.syllCV.split("|"), c.orthosyllCV.split("|")))
         assert c.syllCV.replace("_", "").replace("|", "").replace("#", "") == c.phon
+
+
+def test_tag_corrections_replace_genre_and_number(tmp_path: Path) -> None:
+    from src.mixtecorrections import TagCorrection, applyTagCorrections, loadTagCorrections
+    path = tmp_path / "tags.tsv"
+    path.write_text("ortho\tlemme\tcgram\tinfover\tgenre\tnombre\tnew_genre\tnew_nombre\treason\n"
+                    "ioniennes\tionien\tADJ\t\tf\t\tf\tp\twhy\n", encoding="utf-8")
+    loaded = loadTagCorrections(str(path))
+    assert loaded == [TagCorrection("ioniennes", "ionien", "ADJ", "", "f", "", "f", "p", "why")]
+    row = {"ortho": "ioniennes", "lemme": "ionien", "cgram": "ADJ", "infover": "", "genre": "f", "nombre": "", "phon": "x"}
+    other = dict(row, ortho="ionienne", nombre="s")
+    out = applyTagCorrections([other, row], loaded)
+    assert out[1]["nombre"] == "p" and out[1]["phon"] == "x" and out[0] == other and row["nombre"] == ""
+    with pytest.raises(MixteCorrectionError, match="no output row"):
+        applyTagCorrections([other], loaded)
+
+
+def test_committed_tag_corrections_load() -> None:
+    from src.mixtecorrections import loadTagCorrections
+    assert [c.ortho for c in loadTagCorrections()] == ["ioniennes"]

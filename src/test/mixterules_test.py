@@ -29,6 +29,12 @@ CASES = [
     (("aillions", "aj§", "a|j_#_§", "a|ill_i_ons"), ("ajj§", "a_j|j_§", "a_ill|i_ons")),
     (("asseyiez", "asEje", "a|s_E|j_#_e", "a|ss_e|y_i_ez"), ("asEjje", "a|s_E_j|j_e", "a|ss_e_y|i_ez")),
     (("croyiez", "kRwaje", "k_R_wa|j_#_e", "c_r_o|y_i_ez"), ("kRwajje", "k_R_wa_j|j_e", "c_r_o_y|i_ez")),
+    # G: the fused Ej of the letters ay
+    (("abstrayions", "apstREj§", "a_p|s_t_R_Ej_#|§", "a_b|s_t_r_ay_i|ons"),
+     ("apstREjj§", "a_p|s_t_R_E_j|j_§", "a_b|s_t_r_a_y|i_ons")),
+    (("abstrayons", "apstREj§", "a_p|s_t_R_Ej|§", "a_b|s_t_r_ay|ons"), ("apstREj§", "a_p|s_t_R_E|j_§", "a_b|s_t_r_a|y_ons")),
+    (("payiez", "pEje", "p_Ej_#|e", "p_ay_i|ez"), ("pEjje", "p_E_j|j_e", "p_a_y|i_ez")),
+    (("ayez", "Eje", "Ej|e", "ay|ez"), ("Eje", "E|j_e", "a|y_ez")),
     # F: lli, one j and the fused jj
     (("appareillions", "apaREj§", "a|p_a|R_E|j_§", "a|pp_a|r_ei|lli_ons"),
      ("apaREjj§", "a|p_a|R_E_j|j_§", "a|pp_a|r_ei_lli|=_ons")),

@@ -15,6 +15,8 @@ from typing import Any, Sequence
 
 CORRECTIONS_PATH = "resources/mixteCorrections.tsv"
 MANUAL_CORRECTIONS_PATH = "resources/mixteManualCorrections.tsv"
+TAG_CORRECTIONS_PATH = "resources/mixteTagCorrections.tsv"
+TAG_COLUMNS = ("ortho", "lemme", "cgram", "infover", "genre", "nombre", "new_genre", "new_nombre", "reason")
 COLUMNS = ("ortho", "lemme", "cgram", "infover", "genre", "nombre", "phon", "syll_cv", "orthosyll_cv", "group_id")
 HEADER_COMMENT = (
     "# Corrections of LexiqueMixte.tsv rows (spec docs/specs/lexicon-decisions.md section 6), written by\n"
@@ -127,4 +129,72 @@ def applyMixteCorrections(rows: list[dict[str, Any]], corrections: Sequence[Corr
     for k, at in positions.items():
         c = wanted[k]
         out[at[0]] = {**rows[at[0]], "phon": c.phon, "syll_cv": c.syllCV, "orthosyll_cv": c.orthosyllCV}
+    return out
+
+
+@dataclass(frozen=True)
+class TagCorrection:
+    """A hand-found tag defect of a Mixte row: the key is the Lexique383 row's, `newGenre` / `newNombre` replace its genre and
+    number (the sounds are untouched, so the row stays in step with its syllabification)."""
+    ortho: str
+    lemme: str
+    cgram: str
+    infover: str
+    genre: str
+    nombre: str
+    newGenre: str
+    newNombre: str
+    reason: str
+
+    @property
+    def key(self) -> tuple[str, str, str, str, str, str]:
+        return (self.ortho, self.lemme, self.cgram, self.infover, self.genre, self.nombre)
+
+
+def loadTagCorrections(path: str = TAG_CORRECTIONS_PATH) -> list[TagCorrection]:
+    """The tag corrections of `path` (absent or header-only: []); MixteCorrectionError on a malformed row or a duplicated key."""
+    if not os.path.exists(path):
+        return []
+    out: list[TagCorrection] = []
+    seen: set[tuple[str, str, str, str, str, str]] = set()
+    headerSeen = False
+    with open(path, encoding="utf-8") as f:
+        for number, line in enumerate(f, 1):
+            line = line.rstrip("\n")
+            if not line or line.startswith("#"):
+                continue
+            cells = line.split("\t")
+            if not headerSeen:
+                if tuple(cells) != TAG_COLUMNS:
+                    raise MixteCorrectionError(f"{path}:{number}: header {cells!r}, expected {list(TAG_COLUMNS)!r}")
+                headerSeen = True
+                continue
+            if len(cells) != len(TAG_COLUMNS):
+                raise MixteCorrectionError(f"{path}:{number}: {len(cells)} columns, expected {len(TAG_COLUMNS)}")
+            c = TagCorrection(*cells)
+            if c.key in seen:
+                raise MixteCorrectionError(f"{path}:{number}: duplicate key {c.key!r}")
+            seen.add(c.key)
+            out.append(c)
+    return out
+
+
+def applyTagCorrections(rows: list[dict[str, Any]], corrections: Sequence[TagCorrection]) -> list[dict[str, Any]]:
+    """`rows` with every tag correction applied (genre and nombre replaced); a new list. Raises MixteCorrectionError listing every
+    key that matches no row and every key that matches several."""
+    if not corrections:
+        return rows
+    wanted = {c.key: c for c in corrections}
+    positions: dict[tuple[str, str, str, str, str, str], list[int]] = {}
+    for i, row in enumerate(rows):
+        k = rowKeyOf(row)
+        if k in wanted:
+            positions.setdefault(k, []).append(i)
+    problems = [f"no output row for {k!r}" for k in sorted(wanted) if k not in positions]
+    problems += [f"{len(at)} output rows for {k!r}" for k, at in sorted(positions.items()) if len(at) > 1]
+    if problems:
+        raise MixteCorrectionError("Mixte tag corrections do not match exactly one row each:\n  " + "\n  ".join(problems))
+    out = list(rows)
+    for k, at in positions.items():
+        out[at[0]] = {**rows[at[0]], "genre": wanted[k].newGenre, "nombre": wanted[k].newNombre}
     return out

@@ -895,7 +895,7 @@
      "after": "",
      "label": "préfixe « a- » (aussi ah-, ha-, hâ-) · économise un trait",
      "phonology": "a.p°.le",
-     "steno": "pw@aj/mte/-l",
+     "steno": "pw@aj/mte/-R",
      "strokes": [
       [
        4,
@@ -910,13 +910,13 @@
        14
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 192.69,
      "alternates": [
       {
-       "steno": "a/p@a/mte/-l",
+       "steno": "a/p@a/mte/-R",
        "strokes": [
         [
          12
@@ -932,7 +932,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -1064,7 +1064,7 @@
      "after": "",
      "label": "préfixe « a- » (aussi ah-, ha-, hâ-) · économise un trait",
      "phonology": "a.Ri.ve",
-     "steno": "Rwij/ve/-l",
+     "steno": "Rwij/ve/-R",
      "strokes": [
       [
        8,
@@ -1077,13 +1077,13 @@
        14
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 182.88,
      "alternates": [
       {
-       "steno": "a/Ri/ve/-l",
+       "steno": "a/Ri/ve/-R",
        "strokes": [
         [
          12
@@ -1097,7 +1097,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -1110,7 +1110,7 @@
      "after": "",
      "label": "préfixe « a- » (aussi ah-, ha-, hâ-) · économise deux traits",
      "phonology": "a.RE.te",
-     "steno": "twej/-l",
+     "steno": "twej/-R",
      "strokes": [
       [
        7,
@@ -1119,13 +1119,13 @@
        16
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 178.62,
      "alternates": [
       {
-       "steno": "a/Rie/te/-l",
+       "steno": "a/Rie/te/-R",
        "strokes": [
         [
          12
@@ -1140,7 +1140,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -2728,7 +2728,7 @@
      "after": "",
      "label": "préfixe « am- » (aussi an-, ant-, em-) · économise un trait",
      "phonology": "@.tRe",
-     "steno": "pmtRej/-l",
+     "steno": "pmtRej/-R",
      "strokes": [
       [
        4,
@@ -2739,13 +2739,13 @@
        16
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 160.13,
      "alternates": [
       {
-       "steno": "@/tRe/-l",
+       "steno": "@/tRe/-R",
        "strokes": [
         [
          11
@@ -2756,7 +2756,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -2958,8 +2958,8 @@
      "before": "",
      "after": "",
      "label": "préfixe « am- » (aussi an-, ant-, em-) · économise un trait",
-     "phonology": "@.vwaj.e",
-     "steno": "pvmwaj/e",
+     "phonology": "@.vwa.je",
+     "steno": "pvmwaj/Rwe",
      "strokes": [
       [
        4,
@@ -2970,13 +2970,15 @@
        16
       ],
       [
+       8,
+       9,
        14
       ]
      ],
      "frequency": 82.52,
      "alternates": [
       {
-       "steno": "@/vwaj/e",
+       "steno": "@/vwa/Rwe",
        "strokes": [
         [
          11
@@ -2984,10 +2986,11 @@
         [
          5,
          9,
-         12,
-         16
+         12
         ],
         [
+         8,
+         9,
          14
         ]
        ]
@@ -3037,7 +3040,7 @@
      "after": "",
      "label": "préfixe « am- » (aussi an-, ant-, em-) · économise un trait",
      "phonology": "@.m°.ne",
-     "steno": "pm@aj/mRe/-l",
+     "steno": "pm@aj/mRe/-R",
      "strokes": [
       [
        4,
@@ -3052,13 +3055,13 @@
        14
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 70.34,
      "alternates": [
       {
-       "steno": "@/m@a/mRe/-l",
+       "steno": "@/m@a/mRe/-R",
        "strokes": [
         [
          11
@@ -3074,7 +3077,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -3086,8 +3089,8 @@
      "before": "",
      "after": "",
      "label": "préfixe « am- » (aussi an-, ant-, em-) · économise un trait",
-     "phonology": "@.vwaj.e",
-     "steno": "pvmwaj/e/-l",
+     "phonology": "@.vwa.je",
+     "steno": "pvmwaj/Rwe/-R",
      "strokes": [
       [
        4,
@@ -3098,16 +3101,18 @@
        16
       ],
       [
+       8,
+       9,
        14
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 69.77,
      "alternates": [
       {
-       "steno": "@/vwaj/e/-l",
+       "steno": "@/vwa/Rwe/-R",
        "strokes": [
         [
          11
@@ -3115,14 +3120,15 @@
         [
          5,
          9,
-         12,
-         16
+         12
         ],
         [
+         8,
+         9,
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -3179,7 +3185,7 @@
      "after": "",
      "label": "préfixe « am- » (aussi an-, ant-, em-) · économise un trait",
      "phonology": "@.pe.Se",
-     "steno": "pmej/pme/-l",
+     "steno": "pmej/pme/-R",
      "strokes": [
       [
        4,
@@ -3193,13 +3199,13 @@
        14
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 55.99,
      "alternates": [
       {
-       "steno": "@/pe/pme/-l",
+       "steno": "@/pe/pme/-R",
        "strokes": [
         [
          11
@@ -3214,7 +3220,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -3716,7 +3722,7 @@
      "after": "",
      "label": "préfixe « co- » (aussi col-, com-, con-) · économise deux traits",
      "phonology": "ko.m@.se",
-     "steno": "swed/-l",
+     "steno": "swed/-R",
      "strokes": [
       [
        3,
@@ -3725,13 +3731,13 @@
        19
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 92.51,
      "alternates": [
       {
-       "steno": "kae/m@/se/-l",
+       "steno": "kae/m@/se/-R",
        "strokes": [
         [
          2,
@@ -3747,7 +3753,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -3802,7 +3808,7 @@
      "after": "",
      "label": "préfixe « co- » (aussi col-, com-, con-) · économise un trait",
      "phonology": "k§.ti.n8e",
-     "steno": "twid/mR@ae/-l",
+     "steno": "twid/mR@ae/-R",
      "strokes": [
       [
        7,
@@ -3818,13 +3824,13 @@
        14
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 82.29,
      "alternates": [
       {
-       "steno": "kai/ti/mR@ae/-l",
+       "steno": "kai/ti/mR@ae/-R",
        "strokes": [
         [
          2,
@@ -3843,7 +3849,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -4404,7 +4410,7 @@
      "after": "",
      "label": "préfixe « re- » (aussi reh-) · économise un trait",
      "phonology": "R°.tRu.ve",
-     "steno": "tRw@ek/ve/-l",
+     "steno": "tRw@ek/ve/-R",
      "strokes": [
       [
        7,
@@ -4419,13 +4425,13 @@
        14
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 100.9,
      "alternates": [
       {
-       "steno": "R@a/tR@e/ve/-l",
+       "steno": "R@a/tR@e/ve/-R",
        "strokes": [
         [
          8,
@@ -4443,7 +4449,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -4534,7 +4540,7 @@
      "after": "",
      "label": "préfixe « re- » (aussi reh-) · économise un trait",
      "phonology": "R°.tuR.ne",
-     "steno": "tw@ekR/mRe/-l",
+     "steno": "tw@ekR/mRe/-R",
      "strokes": [
       [
        7,
@@ -4550,13 +4556,13 @@
        14
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 76.96,
      "alternates": [
       {
-       "steno": "R@a/t@eR/mRe/-l",
+       "steno": "R@a/t@eR/mRe/-R",
        "strokes": [
         [
          8,
@@ -4575,7 +4581,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -6401,7 +6407,7 @@
      "after": "",
      "label": "préfixe « é- » · économise un trait",
      "phonology": "e.ku.te",
-     "steno": "kv@e/te/-l",
+     "steno": "kv@e/te/-R",
      "strokes": [
       [
        2,
@@ -6414,13 +6420,13 @@
        14
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 73.13,
      "alternates": [
       {
-       "steno": "e/k@e/te/-l",
+       "steno": "e/k@e/te/-R",
        "strokes": [
         [
          14
@@ -6435,7 +6441,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -6559,7 +6565,7 @@
      "after": "",
      "label": "préfixe « é- » · économise un trait",
      "phonology": "e.pu.ze",
-     "steno": "kpv@e/twe/-l",
+     "steno": "kpv@e/twe/-R",
      "strokes": [
       [
        2,
@@ -6574,13 +6580,13 @@
        14
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 57.87,
      "alternates": [
       {
-       "steno": "e/p@e/twe/-l",
+       "steno": "e/p@e/twe/-R",
        "strokes": [
         [
          14
@@ -6596,7 +6602,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -6609,7 +6615,7 @@
      "after": "",
      "label": "préfixe « é- » · économise un trait",
      "phonology": "e.vi.te",
-     "steno": "kvi/te/-l",
+     "steno": "kvi/te/-R",
      "strokes": [
       [
        2,
@@ -6621,13 +6627,13 @@
        14
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 53.71,
      "alternates": [
       {
-       "steno": "e/vi/te/-l",
+       "steno": "e/vi/te/-R",
        "strokes": [
         [
          14
@@ -6641,7 +6647,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -6816,7 +6822,7 @@
      "after": "",
      "label": "préfixe « é- » · économise un trait",
      "phonology": "e.Sa.pe",
-     "steno": "kpvma/pe/-l",
+     "steno": "kpvma/pe/-R",
      "strokes": [
       [
        2,
@@ -6830,13 +6836,13 @@
        14
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 39.72,
      "alternates": [
       {
-       "steno": "e/pma/pe/-l",
+       "steno": "e/pma/pe/-R",
        "strokes": [
         [
          14
@@ -6851,7 +6857,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -7365,7 +7371,7 @@
        ]
       },
       {
-       "steno": "pve/vt@/mRe/-l",
+       "steno": "pve/vt@/mRe/-R",
        "strokes": [
         [
          4,
@@ -7383,12 +7389,12 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       },
       {
-       "steno": "svtw@k/mRe/-l",
+       "steno": "svtw@k/mRe/-R",
        "strokes": [
         [
          3,
@@ -7404,7 +7410,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -7583,7 +7589,7 @@
      "after": "",
      "label": "préfixe « de- » (aussi des-, dé-, déh-) · économise un trait",
      "phonology": "de.si.de",
-     "steno": "swik/pve/-l",
+     "steno": "swik/pve/-R",
      "strokes": [
       [
        3,
@@ -7597,13 +7603,13 @@
        14
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 42.27,
      "alternates": [
       {
-       "steno": "pve/si/pve/-l",
+       "steno": "pve/si/pve/-R",
        "strokes": [
         [
          4,
@@ -7620,7 +7626,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -8598,7 +8604,7 @@
      "after": "",
      "label": "préfixe « ain- » (aussi hin-, im-, in-) · économise un trait",
      "phonology": "5.kje.te",
-     "steno": "ktRwe/te/-l",
+     "steno": "ktRwe/te/-R",
      "strokes": [
       [
        2,
@@ -8612,13 +8618,13 @@
        14
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 27.98,
      "alternates": [
       {
-       "steno": "aie/kRwe/te/-l",
+       "steno": "aie/kRwe/te/-R",
        "strokes": [
         [
          12,
@@ -8636,7 +8642,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -9028,7 +9034,7 @@
      "after": "",
      "label": "préfixe « de- » · économise deux traits",
      "phonology": "d°.m@.de",
-     "steno": "kpvmed/-l",
+     "steno": "kpvmed/-R",
      "strokes": [
       [
        2,
@@ -9039,13 +9045,13 @@
        19
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 188.86,
      "alternates": [
       {
-       "steno": "pv@a/m@/pve/-l",
+       "steno": "pv@a/m@/pve/-R",
        "strokes": [
         [
          4,
@@ -9063,7 +9069,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -9640,7 +9646,7 @@
     },
     {
      "kind": "affix",
-     "text": "Exemples : « aider » : ie/pve/-l → pvekd/-l ; « excusez » : ie/ks@i/twe/-k → vtwekd/-k ; « aimerais » : ie/m@a/Rie/-k → vm@akd/Rie/-k."
+     "text": "Exemples : « aider » : ie/pve/-R → pvekd/-R ; « excusez » : ie/ks@i/twe/-k → vtwekd/-k ; « aimerais » : ie/m@a/Rie/-k → vm@akd/Rie/-k."
     },
     {
      "kind": "affix",
@@ -9654,7 +9660,7 @@
      "after": "",
      "label": "préfixe « ai- » (aussi aî-, e-, ei-) · économise un trait",
      "phonology": "E.de",
-     "steno": "pvekd/-l",
+     "steno": "pvekd/-R",
      "strokes": [
       [
        4,
@@ -9664,13 +9670,13 @@
        19
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 362.77,
      "alternates": [
       {
-       "steno": "ie/pve/-l",
+       "steno": "ie/pve/-R",
        "strokes": [
         [
          13,
@@ -9682,7 +9688,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -9795,7 +9801,7 @@
      "after": "",
      "label": "préfixe « ai- » (aussi aî-, e-, ei-) · économise deux traits",
      "phonology": "E.sE.je",
-     "steno": "vRwekd/-l",
+     "steno": "vRwekd/-R",
      "strokes": [
       [
        5,
@@ -9806,13 +9812,13 @@
        19
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 134.69,
      "alternates": [
       {
-       "steno": "ie/sie/Rwe/-l",
+       "steno": "ie/sie/Rwe/-R",
        "strokes": [
         [
          13,
@@ -9829,7 +9835,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -9964,7 +9970,7 @@
      "after": "",
      "label": "préfixe « ai- » (aussi aî-, e-, ei-) · économise un trait",
      "phonology": "E.me",
-     "steno": "vmekd/-l",
+     "steno": "vmekd/-R",
      "strokes": [
       [
        5,
@@ -9974,13 +9980,13 @@
        19
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 90.44,
      "alternates": [
       {
-       "steno": "ie/me/-l",
+       "steno": "ie/me/-R",
        "strokes": [
         [
          13,
@@ -9991,7 +9997,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -10004,7 +10010,7 @@
      "after": "",
      "label": "préfixe « ai- » (aussi aî-, e-, ei-) · économise deux traits",
      "phonology": "E.kspli.ke",
-     "steno": "kvekd/-l",
+     "steno": "kvekd/-R",
      "strokes": [
       [
        2,
@@ -10014,13 +10020,13 @@
        19
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 89.21,
      "alternates": [
       {
-       "steno": "ie/kspmti/ke/-l",
+       "steno": "ie/kspmti/ke/-R",
        "strokes": [
         [
          13,
@@ -10039,7 +10045,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -10572,7 +10578,7 @@
     },
     {
      "kind": "affix",
-     "text": "Exemples : « passer » : pa/se/-l → pajsd/-l ; « passé » : pa/se → pajsd ; « laissez » : mtie/se/-k → mtiejsd/-k."
+     "text": "Exemples : « passer » : pa/se/-R → pajsd/-R ; « passé » : pa/se → pajsd ; « laissez » : mtie/se/-k → mtiejsd/-k."
     },
     {
      "kind": "affix",
@@ -10586,7 +10592,7 @@
      "after": "",
      "label": "suffixe « -cer » (aussi -cé, -cée, -cés) · économise un trait",
      "phonology": "pa.se",
-     "steno": "pajsd/-l",
+     "steno": "pajsd/-R",
      "strokes": [
       [
        4,
@@ -10596,13 +10602,13 @@
        19
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 345.68,
      "alternates": [
       {
-       "steno": "pa/se/-l",
+       "steno": "pa/se/-R",
        "strokes": [
         [
          4,
@@ -10613,7 +10619,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -10704,7 +10710,7 @@
      "after": "",
      "label": "suffixe « -cer » (aussi -cé, -cée, -cés) · économise un trait",
      "phonology": "lE.se",
-     "steno": "mtiejsd/-l",
+     "steno": "mtiejsd/-R",
      "strokes": [
       [
        6,
@@ -10716,13 +10722,13 @@
        19
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 243.13,
      "alternates": [
       {
-       "steno": "mtie/se/-l",
+       "steno": "mtie/se/-R",
        "strokes": [
         [
          6,
@@ -10735,7 +10741,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -10822,7 +10828,7 @@
      "after": "",
      "label": "suffixe « -cer » (aussi -cé, -cée, -cés) · économise un trait",
      "phonology": "p@.se",
-     "steno": "p@jsd/-l",
+     "steno": "p@jsd/-R",
      "strokes": [
       [
        4,
@@ -10832,13 +10838,13 @@
        19
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 140.24,
      "alternates": [
       {
-       "steno": "p@/se/-l",
+       "steno": "p@/se/-R",
        "strokes": [
         [
          4,
@@ -10849,7 +10855,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -10900,7 +10906,7 @@
      "after": "",
      "label": "suffixe « -cer » (aussi -cé, -cée, -cés) · économise un trait",
      "phonology": "d@.se",
-     "steno": "pv@jsd/-l",
+     "steno": "pv@jsd/-R",
      "strokes": [
       [
        4,
@@ -10911,13 +10917,13 @@
        19
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 70.06,
      "alternates": [
       {
-       "steno": "pv@/se/-l",
+       "steno": "pv@/se/-R",
        "strokes": [
         [
          4,
@@ -10929,7 +10935,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -11128,7 +11134,7 @@
      "after": "",
      "label": "suffixe « -cer » (aussi -cé, -cée, -cés) · économise un trait",
      "phonology": "ka.se",
-     "steno": "kajsd/-l",
+     "steno": "kajsd/-R",
      "strokes": [
       [
        2,
@@ -11138,13 +11144,13 @@
        19
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 36.24,
      "alternates": [
       {
-       "steno": "ka/se/-l",
+       "steno": "ka/se/-R",
        "strokes": [
         [
          2,
@@ -11155,7 +11161,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -11254,7 +11260,7 @@
      "after": "",
      "label": "suffixe « -cer » (aussi -cé, -cée, -cés) · économise un trait",
      "phonology": "pu.se",
-     "steno": "p@ejsd/-l",
+     "steno": "p@ejsd/-R",
      "strokes": [
       [
        4,
@@ -11265,13 +11271,13 @@
        19
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 27.51,
      "alternates": [
       {
-       "steno": "p@e/se/-l",
+       "steno": "p@e/se/-R",
        "strokes": [
         [
          4,
@@ -11283,7 +11289,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -11296,7 +11302,7 @@
      "after": "",
      "label": "suffixe « -cer » (aussi -cé, -cée, -cés) · économise un trait",
      "phonology": "bo.se",
-     "steno": "svaejsd/-l",
+     "steno": "svaejsd/-R",
      "strokes": [
       [
        3,
@@ -11308,13 +11314,13 @@
        19
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 26.82,
      "alternates": [
       {
-       "steno": "svae/se/-l",
+       "steno": "svae/se/-R",
        "strokes": [
         [
          3,
@@ -11327,7 +11333,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -11402,7 +11408,7 @@
     },
     {
      "kind": "affix",
-     "text": "Exemples : « rester » : Ries/te/-l → Riejstn/-l ; « restez » : Ries/te/-k → Riejstn/-k ; « monter » : mai/te/-l → maijtn/-l."
+     "text": "Exemples : « rester » : Ries/te/-R → Riejstn/-R ; « restez » : Ries/te/-k → Riejstn/-k ; « monter » : mai/te/-R → maijtn/-R."
     },
     {
      "kind": "affix",
@@ -11416,7 +11422,7 @@
      "after": "",
      "label": "suffixe « -ter » · économise un trait",
      "phonology": "REs.te",
-     "steno": "Riejstn/-l",
+     "steno": "Riejstn/-R",
      "strokes": [
       [
        8,
@@ -11428,13 +11434,13 @@
        22
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 310.38,
      "alternates": [
       {
-       "steno": "Ries/te/-l",
+       "steno": "Ries/te/-R",
        "strokes": [
         [
          8,
@@ -11447,7 +11453,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -11504,7 +11510,7 @@
      "after": "",
      "label": "suffixe « -ter » · économise un trait",
      "phonology": "m§.te",
-     "steno": "maijtn/-l",
+     "steno": "maijtn/-R",
      "strokes": [
       [
        6,
@@ -11515,13 +11521,13 @@
        22
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 85.7,
      "alternates": [
       {
-       "steno": "mai/te/-l",
+       "steno": "mai/te/-R",
        "strokes": [
         [
          6,
@@ -11533,7 +11539,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -11584,7 +11590,7 @@
      "after": "",
      "label": "suffixe « -ter » · économise un trait",
      "phonology": "Z°.te",
-     "steno": "vt@ajtn/-l",
+     "steno": "vt@ajtn/-R",
      "strokes": [
       [
        5,
@@ -11596,13 +11602,13 @@
        22
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 59.28,
      "alternates": [
       {
-       "steno": "vt@a/te/-l",
+       "steno": "vt@a/te/-R",
        "strokes": [
         [
          5,
@@ -11615,7 +11621,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       },
@@ -11659,7 +11665,7 @@
      "after": "",
      "label": "suffixe « -ter » · économise un trait",
      "phonology": "so.te",
-     "steno": "saejtn/-l",
+     "steno": "saejtn/-R",
      "strokes": [
       [
        3,
@@ -11670,13 +11676,13 @@
        22
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 57.89,
      "alternates": [
       {
-       "steno": "sae/te/-l",
+       "steno": "sae/te/-R",
        "strokes": [
         [
          3,
@@ -11688,7 +11694,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -11701,7 +11707,7 @@
      "after": "",
      "label": "suffixe « -ter » · économise un trait",
      "phonology": "Ra.k§.te",
-     "steno": "Ra/kaijtn/-l",
+     "steno": "Ra/kaijtn/-R",
      "strokes": [
       [
        8,
@@ -11716,13 +11722,13 @@
        22
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 57.79,
      "alternates": [
       {
-       "steno": "Ra/kai/te/-l",
+       "steno": "Ra/kai/te/-R",
        "strokes": [
         [
          8,
@@ -11738,7 +11744,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -11751,7 +11757,7 @@
      "after": "",
      "label": "suffixe « -ter » · économise un trait",
      "phonology": "pRe.z@.te",
-     "steno": "pRe/tw@jtn/-l",
+     "steno": "pRe/tw@jtn/-R",
      "strokes": [
       [
        4,
@@ -11767,13 +11773,13 @@
        22
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 56.16,
      "alternates": [
       {
-       "steno": "pRe/tw@/te/-l",
+       "steno": "pRe/tw@/te/-R",
        "strokes": [
         [
          4,
@@ -11790,7 +11796,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -11803,7 +11809,7 @@
      "after": "",
      "label": "suffixe « -ter » · économise un trait",
      "phonology": "dis.ky.te",
-     "steno": "pvis/k@ijtn/-l",
+     "steno": "pvis/k@ijtn/-R",
      "strokes": [
       [
        4,
@@ -11820,13 +11826,13 @@
        22
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 50.43,
      "alternates": [
       {
-       "steno": "pvis/k@i/te/-l",
+       "steno": "pvis/k@i/te/-R",
        "strokes": [
         [
          4,
@@ -11844,7 +11850,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -11857,7 +11863,7 @@
      "after": "",
      "label": "suffixe « -ter » · économise un trait",
      "phonology": "S@.te",
-     "steno": "pm@jtn/-l",
+     "steno": "pm@jtn/-R",
      "strokes": [
       [
        4,
@@ -11868,13 +11874,13 @@
        22
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 48.12,
      "alternates": [
       {
-       "steno": "pm@/te/-l",
+       "steno": "pm@/te/-R",
        "strokes": [
         [
          4,
@@ -11886,7 +11892,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -11899,7 +11905,7 @@
      "after": "",
      "label": "suffixe « -ter » · économise un trait",
      "phonology": "k§.te",
-     "steno": "kaijtn/-l",
+     "steno": "kaijtn/-R",
      "strokes": [
       [
        2,
@@ -11910,13 +11916,13 @@
        22
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 45.05,
      "alternates": [
       {
-       "steno": "kai/te/-l",
+       "steno": "kai/te/-R",
        "strokes": [
         [
          2,
@@ -11928,7 +11934,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -11979,7 +11985,7 @@
      "after": "",
      "label": "suffixe « -ter » · économise un trait",
      "phonology": "ak.sEp.te",
-     "steno": "ak/siejktn/-l",
+     "steno": "ak/siejktn/-R",
      "strokes": [
       [
        12,
@@ -11995,13 +12001,13 @@
        22
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 43.39,
      "alternates": [
       {
-       "steno": "ak/siejk/te/-l",
+       "steno": "ak/siejk/te/-R",
        "strokes": [
         [
          12,
@@ -12019,7 +12025,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -12243,7 +12249,7 @@
      "after": "",
      "label": "suffixe « -ter » · économise un trait",
      "phonology": "tRE.te",
-     "steno": "tRiejtn/-l",
+     "steno": "tRiejtn/-R",
      "strokes": [
       [
        7,
@@ -12255,13 +12261,13 @@
        22
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 25.23,
      "alternates": [
       {
-       "steno": "tRie/te/-l",
+       "steno": "tRie/te/-R",
        "strokes": [
         [
          7,
@@ -12274,7 +12280,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -12287,7 +12293,7 @@
      "after": "",
      "label": "suffixe « -ter » · économise un trait",
      "phonology": "Ra.te",
-     "steno": "Rajtn/-l",
+     "steno": "Rajtn/-R",
      "strokes": [
       [
        8,
@@ -12297,13 +12303,13 @@
        22
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 24.71,
      "alternates": [
       {
-       "steno": "Ra/te/-l",
+       "steno": "Ra/te/-R",
        "strokes": [
         [
          8,
@@ -12314,7 +12320,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -13161,12 +13167,11 @@
      "after": "",
      "label": "préfixe « au- » · économise un trait",
      "phonology": "o.t9R",
-     "steno": "tR*@dR",
+     "steno": "tR@dR",
      "strokes": [
       [
        7,
        8,
-       10,
        11,
        19,
        21
@@ -13175,7 +13180,7 @@
      "frequency": 17.62,
      "alternates": [
       {
-       "steno": "ae/t*@R",
+       "steno": "ae/t@R",
        "strokes": [
         [
          12,
@@ -13183,7 +13188,6 @@
         ],
         [
          7,
-         10,
          11,
          21
         ]
@@ -14211,7 +14215,7 @@
     },
     {
      "kind": "affix",
-     "text": "Exemples : « idée » : i/pve → ikdm ; « regardez » : R@a/ksaR/pve/-k → R@akdm/-k ; « regarder » : R@a/ksaR/pve/-l → R@akdm/-l."
+     "text": "Exemples : « idée » : i/pve → ikdm ; « regardez » : R@a/ksaR/pve/-k → R@akdm/-k ; « regarder » : R@a/ksaR/pve/-R → R@akdm/-R."
     },
     {
      "kind": "affix",
@@ -14307,7 +14311,7 @@
      "after": "",
      "label": "suffixe « -der » (aussi -dé, -dée) · économise deux traits",
      "phonology": "R°.gaR.de",
-     "steno": "R@akdm/-l",
+     "steno": "R@akdm/-R",
      "strokes": [
       [
        8,
@@ -14318,13 +14322,13 @@
        25
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 138.3,
      "alternates": [
       {
-       "steno": "R@a/ksaR/pve/-l",
+       "steno": "R@a/ksaR/pve/-R",
        "strokes": [
         [
          8,
@@ -14343,7 +14347,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -14356,7 +14360,7 @@
      "after": "",
      "label": "suffixe « -der » (aussi -dé, -dée) · économise un trait",
      "phonology": "gaR.de",
-     "steno": "ksakdRm/-l",
+     "steno": "ksakdRm/-R",
      "strokes": [
       [
        2,
@@ -14368,13 +14372,13 @@
        25
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 123.09,
      "alternates": [
       {
-       "steno": "ksaR/pve/-l",
+       "steno": "ksaR/pve/-R",
        "strokes": [
         [
          2,
@@ -14388,7 +14392,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -14637,7 +14641,7 @@
      "after": "",
      "label": "suffixe « -der » (aussi -dé, -dée) · économise un trait",
      "phonology": "taR.de",
-     "steno": "takdRm/-l",
+     "steno": "takdRm/-R",
      "strokes": [
       [
        7,
@@ -14648,13 +14652,13 @@
        25
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 15.01,
      "alternates": [
       {
-       "steno": "taR/pve/-l",
+       "steno": "taR/pve/-R",
        "strokes": [
         [
          7,
@@ -14667,7 +14671,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -14680,7 +14684,7 @@
      "after": "",
      "label": "suffixe « -der » (aussi -dé, -dée) · économise un trait",
      "phonology": "ba.la.de",
-     "steno": "sva/mtakdm/-l",
+     "steno": "sva/mtakdm/-R",
      "strokes": [
       [
        3,
@@ -14696,13 +14700,13 @@
        25
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 12.41,
      "alternates": [
       {
-       "steno": "sva/mta/pve/-l",
+       "steno": "sva/mta/pve/-R",
        "strokes": [
         [
          3,
@@ -14720,7 +14724,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -14733,7 +14737,7 @@
      "after": "",
      "label": "suffixe « -der » (aussi -dé, -dée) · économise un trait",
      "phonology": "s8i.si.de",
-     "steno": "s@ai/sikdm/-l",
+     "steno": "s@ai/sikdm/-R",
      "strokes": [
       [
        3,
@@ -14749,13 +14753,13 @@
        25
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 10.49,
      "alternates": [
       {
-       "steno": "s@ai/si/pve/-l",
+       "steno": "s@ai/si/pve/-R",
        "strokes": [
         [
          3,
@@ -14773,7 +14777,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -14825,7 +14829,7 @@
      "after": "",
      "label": "suffixe « -der » (aussi -dé, -dée) · économise un trait",
      "phonology": "ba.vaR.de",
-     "steno": "sva/vakdRm/-l",
+     "steno": "sva/vakdRm/-R",
      "strokes": [
       [
        3,
@@ -14841,13 +14845,13 @@
        25
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 8.66,
      "alternates": [
       {
-       "steno": "sva/vaR/pve/-l",
+       "steno": "sva/vaR/pve/-R",
        "strokes": [
         [
          3,
@@ -14865,7 +14869,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -14925,7 +14929,7 @@
      "after": "",
      "label": "suffixe « -der » (aussi -dé, -dée) · économise un trait",
      "phonology": "vi.de",
-     "steno": "vikdm/-l",
+     "steno": "vikdm/-R",
      "strokes": [
       [
        5,
@@ -14935,13 +14939,13 @@
        25
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 8.31,
      "alternates": [
       {
-       "steno": "vi/pve/-l",
+       "steno": "vi/pve/-R",
        "strokes": [
         [
          5,
@@ -14953,7 +14957,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -15007,7 +15011,7 @@
      "after": "",
      "label": "suffixe « -der » (aussi -dé, -dée) · économise un trait",
      "phonology": "gi.de",
-     "steno": "ksikdm/-l",
+     "steno": "ksikdm/-R",
      "strokes": [
       [
        2,
@@ -15018,13 +15022,13 @@
        25
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 7.29,
      "alternates": [
       {
-       "steno": "ksi/pve/-l",
+       "steno": "ksi/pve/-R",
        "strokes": [
         [
          2,
@@ -15037,7 +15041,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -15107,7 +15111,7 @@
     },
     {
      "kind": "affix",
-     "text": "Exemples : « donné » : pvae/mRe → pvaejsm ; « donner » : pvae/mRe/-l → pvaejsm/-l ; « journée » : vt@eR/mRe → vt@ejsRm."
+     "text": "Exemples : « donné » : pvae/mRe → pvaejsm ; « donner » : pvae/mRe/-R → pvaejsm/-R ; « journée » : vt@eR/mRe → vt@ejsRm."
     },
     {
      "kind": "affix",
@@ -15160,7 +15164,7 @@
      "after": "",
      "label": "suffixe « -ner » (aussi -nez, -nner, -nnée) · économise un trait",
      "phonology": "do.ne",
-     "steno": "pvaejsm/-l",
+     "steno": "pvaejsm/-R",
      "strokes": [
       [
        4,
@@ -15172,13 +15176,13 @@
        25
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 233.3,
      "alternates": [
       {
-       "steno": "pvae/mRe/-l",
+       "steno": "pvae/mRe/-R",
        "strokes": [
         [
          4,
@@ -15192,7 +15196,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       },
@@ -15352,7 +15356,7 @@
        ]
       },
       {
-       "steno": "pvi/mRe/-l",
+       "steno": "pvi/mRe/-R",
        "strokes": [
         [
          4,
@@ -15365,12 +15369,12 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       },
       {
-       "steno": "pvijsm/-l",
+       "steno": "pvijsm/-R",
        "strokes": [
         [
          4,
@@ -15381,7 +15385,7 @@
          25
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -15437,7 +15441,7 @@
      "after": "",
      "label": "suffixe « -ner » (aussi -nez, -nner, -nnée) · économise un trait",
      "phonology": "Ra.m°.ne",
-     "steno": "Ra/m@ajsm/-l",
+     "steno": "Ra/m@ajsm/-R",
      "strokes": [
       [
        8,
@@ -15452,13 +15456,13 @@
        25
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 51.43,
      "alternates": [
       {
-       "steno": "Ra/m@a/mRe/-l",
+       "steno": "Ra/m@a/mRe/-R",
        "strokes": [
         [
          8,
@@ -15475,7 +15479,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -15488,7 +15492,7 @@
      "after": "",
      "label": "suffixe « -ner » (aussi -nez, -nner, -nnée) · économise un trait",
      "phonology": "tuR.ne",
-     "steno": "t@ejsRm/-l",
+     "steno": "t@ejsRm/-R",
      "strokes": [
       [
        7,
@@ -15500,13 +15504,13 @@
        25
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 51.05,
      "alternates": [
       {
-       "steno": "t@eR/mRe/-l",
+       "steno": "t@eR/mRe/-R",
        "strokes": [
         [
          7,
@@ -15520,7 +15524,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -15588,11 +15592,10 @@
      "after": "",
      "label": "suffixe « -ner » (aussi -nez, -nner, -nnée) · économise un trait",
      "phonology": "tuR.ne",
-     "steno": "t*@ejsRm",
+     "steno": "t@ejsRm",
      "strokes": [
       [
        7,
-       10,
        11,
        14,
        16,
@@ -15604,7 +15607,7 @@
      "frequency": 24.84,
      "alternates": [
       {
-       "steno": "t@eR/mR*e",
+       "steno": "t@eR/mRe",
        "strokes": [
         [
          7,
@@ -15615,7 +15618,6 @@
         [
          6,
          8,
-         10,
          14
         ]
        ]
@@ -15707,7 +15709,7 @@
      "after": "",
      "label": "suffixe « -ner » (aussi -nez, -nner, -nnée) · économise un trait",
      "phonology": "m°.ne",
-     "steno": "m@ajsm/-l",
+     "steno": "m@ajsm/-R",
      "strokes": [
       [
        6,
@@ -15718,13 +15720,13 @@
        25
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 22.45,
      "alternates": [
       {
-       "steno": "m@a/mRe/-l",
+       "steno": "m@a/mRe/-R",
        "strokes": [
         [
          6,
@@ -15737,7 +15739,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -15750,7 +15752,7 @@
      "after": "",
      "label": "suffixe « -ner » (aussi -nez, -nner, -nnée) · économise un trait",
      "phonology": "paR.do.ne",
-     "steno": "paR/pvaejsm/-l",
+     "steno": "paR/pvaejsm/-R",
      "strokes": [
       [
        4,
@@ -15767,13 +15769,13 @@
        25
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 21.72,
      "alternates": [
       {
-       "steno": "paR/pvae/mRe/-l",
+       "steno": "paR/pvae/mRe/-R",
        "strokes": [
         [
          4,
@@ -15792,7 +15794,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -15805,7 +15807,7 @@
      "after": "",
      "label": "suffixe « -ner » (aussi -nez, -nner, -nnée) · économise un trait",
      "phonology": "tRE.ne",
-     "steno": "tRiejsm/-l",
+     "steno": "tRiejsm/-R",
      "strokes": [
       [
        7,
@@ -15817,13 +15819,13 @@
        25
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 21.48,
      "alternates": [
       {
-       "steno": "tRie/mRe/-l",
+       "steno": "tRie/mRe/-R",
        "strokes": [
         [
          7,
@@ -15837,7 +15839,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -15907,7 +15909,7 @@
      "after": "",
      "label": "suffixe « -ner » (aussi -nez, -nner, -nnée) · économise un trait",
      "phonology": "te.le.fo.ne",
-     "steno": "te/mte/kpaejsm/-l",
+     "steno": "te/mte/kpaejsm/-R",
      "strokes": [
       [
        7,
@@ -15928,13 +15930,13 @@
        25
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 20.22,
      "alternates": [
       {
-       "steno": "te/mte/kpae/mRe/-l",
+       "steno": "te/mte/kpae/mRe/-R",
        "strokes": [
         [
          7,
@@ -15957,7 +15959,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -16093,10 +16095,11 @@
      "after": "",
      "label": "suffixe « -ner » (aussi -nez, -nner, -nnée) · économise un trait",
      "phonology": "tuR.ne",
-     "steno": "t@ejsRm",
+     "steno": "t*@ejsRm",
      "strokes": [
       [
        7,
+       10,
        11,
        14,
        16,
@@ -16108,23 +16111,7 @@
      "frequency": 18.64,
      "alternates": [
       {
-       "steno": "t@eR/mRe",
-       "strokes": [
-        [
-         7,
-         11,
-         14,
-         21
-        ],
-        [
-         6,
-         8,
-         14
-        ]
-       ]
-      },
-      {
-       "steno": "t@eR/mR*e/-j",
+       "steno": "t@eR/mR*e",
        "strokes": [
         [
          7,
@@ -16136,6 +16123,22 @@
          6,
          8,
          10,
+         14
+        ]
+       ]
+      },
+      {
+       "steno": "t@eR/mRe/-j",
+       "strokes": [
+        [
+         7,
+         11,
+         14,
+         21
+        ],
+        [
+         6,
+         8,
          14
         ],
         [
@@ -16144,11 +16147,10 @@
        ]
       },
       {
-       "steno": "t*@ejsRm/-j",
+       "steno": "t@ejsRm/-j",
        "strokes": [
         [
          7,
-         10,
          11,
          14,
          16,
@@ -16171,916 +16173,7 @@
    "track": "affixes",
    "index": 18,
    "sectionTitle": "Les règles onze à vingt",
-   "title": "Leçon dix-huit : préfixe « ra- » (aussi rai-, raie-, re-)",
-   "kind": "affixes",
-   "newKeys": [
-    3,
-    4,
-    16
-   ],
-   "newChords": [
-    [
-     3,
-     4,
-     16
-    ]
-   ],
-   "rules": [
-    {
-     "kind": "affix",
-     "text": "Les touches sp- + -j pressées ensemble remplacent le préfixe « ra- » (aussi rai-, raie-, re-) : elles se joignent à la frappe de la syllabe voisine, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
-    },
-    {
-     "kind": "affix",
-     "text": "Exemples : « réponse » : Re/pais → spaijs ; « réussi » : Re/@i/si → sp@ij/si ; « réponds » : Re/pai/-k → spaij/-k."
-    },
-    {
-     "kind": "affix",
-     "text": "Chaque mot s'écrit aussi avec son contour long, qui reste valable : le contour court économise au plus deux traits."
-    }
-   ],
-   "words": [
-    {
-     "ortho": "réponse",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
-     "phonology": "Re.p§s",
-     "steno": "spaijs",
-     "strokes": [
-      [
-       3,
-       4,
-       12,
-       13,
-       16,
-       17
-      ]
-     ],
-     "frequency": 79.19,
-     "alternates": [
-      {
-       "steno": "Re/pais",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         4,
-         12,
-         13,
-         17
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "réussi",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
-     "phonology": "Re.y.si",
-     "steno": "sp@ij/si",
-     "strokes": [
-      [
-       3,
-       4,
-       11,
-       13,
-       16
-      ],
-      [
-       3,
-       13
-      ]
-     ],
-     "frequency": 78.63,
-     "alternates": [
-      {
-       "steno": "Re/@i/si",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         11,
-         13
-        ],
-        [
-         3,
-         13
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "réponds",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
-     "phonology": "Re.p§",
-     "steno": "spaij/-k",
-     "strokes": [
-      [
-       3,
-       4,
-       12,
-       13,
-       16
-      ],
-      [
-       18
-      ]
-     ],
-     "frequency": 63.59,
-     "alternates": [
-      {
-       "steno": "Re/pai/-k",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         4,
-         12,
-         13
-        ],
-        [
-         18
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "réveille",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
-     "phonology": "Re.vEj",
-     "steno": "spv*iej",
-     "strokes": [
-      [
-       3,
-       4,
-       5,
-       10,
-       13,
-       14,
-       16
-      ]
-     ],
-     "frequency": 59.67,
-     "alternates": [
-      {
-       "steno": "Re/v*iej",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         5,
-         10,
-         13,
-         14,
-         16
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "répondre",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
-     "phonology": "Re.p§dR",
-     "steno": "spaijdR",
-     "strokes": [
-      [
-       3,
-       4,
-       12,
-       13,
-       16,
-       19,
-       21
-      ]
-     ],
-     "frequency": 57.76,
-     "alternates": [
-      {
-       "steno": "Re/paidR",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         4,
-         12,
-         13,
-         19,
-         21
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "réunion",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
-     "phonology": "Re.y.nj§",
-     "steno": "sp@ij/mRwai",
-     "strokes": [
-      [
-       3,
-       4,
-       11,
-       13,
-       16
-      ],
-      [
-       6,
-       8,
-       9,
-       12,
-       13
-      ]
-     ],
-     "frequency": 49.17,
-     "alternates": [
-      {
-       "steno": "Re/@i/mRwai",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         11,
-         13
-        ],
-        [
-         6,
-         8,
-         9,
-         12,
-         13
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "réfléchir",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise deux traits",
-     "phonology": "Re.fle.SiR",
-     "steno": "spmijR",
-     "strokes": [
-      [
-       3,
-       4,
-       6,
-       13,
-       16,
-       21
-      ]
-     ],
-     "frequency": 47.59,
-     "alternates": [
-      {
-       "steno": "Re/kpmte/pmiR",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         2,
-         4,
-         6,
-         7,
-         14
-        ],
-        [
-         4,
-         6,
-         13,
-         21
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "répète",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
-     "phonology": "Re.pEt",
-     "steno": "spiejt",
-     "strokes": [
-      [
-       3,
-       4,
-       13,
-       14,
-       16,
-       20
-      ]
-     ],
-     "frequency": 45.14,
-     "alternates": [
-      {
-       "steno": "Re/piet",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         4,
-         13,
-         14,
-         20
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "récupérer",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise deux traits",
-     "phonology": "Re.ky.pe.Re",
-     "steno": "spej/Re/-l",
-     "strokes": [
-      [
-       3,
-       4,
-       14,
-       16
-      ],
-      [
-       8,
-       14
-      ],
-      [
-       23
-      ]
-     ],
-     "frequency": 44.59,
-     "alternates": [
-      {
-       "steno": "Re/k@i/pe/Re/-l",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         2,
-         11,
-         13
-        ],
-        [
-         4,
-         14
-        ],
-        [
-         8,
-         14
-        ],
-        [
-         23
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "régler",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
-     "phonology": "Re.gle",
-     "steno": "kspmtej/-l",
-     "strokes": [
-      [
-       2,
-       3,
-       4,
-       6,
-       7,
-       14,
-       16
-      ],
-      [
-       23
-      ]
-     ],
-     "frequency": 42.27,
-     "alternates": [
-      {
-       "steno": "Re/ksmte/-l",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         2,
-         3,
-         6,
-         7,
-         14
-        ],
-        [
-         23
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "réveiller",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise deux traits",
-     "phonology": "Re.vE.je",
-     "steno": "spRwej/-l",
-     "strokes": [
-      [
-       3,
-       4,
-       8,
-       9,
-       14,
-       16
-      ],
-      [
-       23
-      ]
-     ],
-     "frequency": 36.66,
-     "alternates": [
-      {
-       "steno": "Re/vie/Rwe/-l",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         5,
-         13,
-         14
-        ],
-        [
-         8,
-         9,
-         14
-        ],
-        [
-         23
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "répondu",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
-     "phonology": "Re.p§.dy",
-     "steno": "spaij/pv@i",
-     "strokes": [
-      [
-       3,
-       4,
-       12,
-       13,
-       16
-      ],
-      [
-       4,
-       5,
-       11,
-       13
-      ]
-     ],
-     "frequency": 34.9,
-     "alternates": [
-      {
-       "steno": "Re/pai/pv@i",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         4,
-         12,
-         13
-        ],
-        [
-         4,
-         5,
-         11,
-         13
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "résultats",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
-     "phonology": "Re.zyl.ta",
-     "steno": "sptw@ijl/ta/-s",
-     "strokes": [
-      [
-       3,
-       4,
-       7,
-       9,
-       11,
-       13,
-       16,
-       23
-      ],
-      [
-       7,
-       12
-      ],
-      [
-       17
-      ]
-     ],
-     "frequency": 34.31,
-     "alternates": [
-      {
-       "steno": "Re/tw@il/ta/-s",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         7,
-         9,
-         11,
-         13,
-         23
-        ],
-        [
-         7,
-         12
-        ],
-        [
-         17
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "répondez",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
-     "phonology": "Re.p§.de",
-     "steno": "spaij/pve",
-     "strokes": [
-      [
-       3,
-       4,
-       12,
-       13,
-       16
-      ],
-      [
-       4,
-       5,
-       14
-      ]
-     ],
-     "frequency": 31.77,
-     "alternates": [
-      {
-       "steno": "Re/pai/pve",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         4,
-         12,
-         13
-        ],
-        [
-         4,
-         5,
-         14
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "réveillé",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise deux traits",
-     "phonology": "Re.vE.je",
-     "steno": "spRwej",
-     "strokes": [
-      [
-       3,
-       4,
-       8,
-       9,
-       14,
-       16
-      ]
-     ],
-     "frequency": 30.63,
-     "alternates": [
-      {
-       "steno": "Re/vie/Rwe",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         5,
-         13,
-         14
-        ],
-        [
-         8,
-         9,
-         14
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "revolver",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
-     "phonology": "Re.vOl.vER",
-     "steno": "spvejl/vieR",
-     "strokes": [
-      [
-       3,
-       4,
-       5,
-       14,
-       16,
-       23
-      ],
-      [
-       5,
-       13,
-       14,
-       21
-      ]
-     ],
-     "frequency": 28.05,
-     "alternates": [
-      {
-       "steno": "Re/vel/vieR",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         5,
-         14,
-         23
-        ],
-        [
-         5,
-         13,
-         14,
-         21
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "répond",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
-     "phonology": "Re.p§",
-     "steno": "spaij",
-     "strokes": [
-      [
-       3,
-       4,
-       12,
-       13,
-       16
-      ]
-     ],
-     "frequency": 27.42,
-     "alternates": [
-      {
-       "steno": "Re/pai",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         4,
-         12,
-         13
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "réfléchi",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise deux traits",
-     "phonology": "Re.fle.Si",
-     "steno": "spmij",
-     "strokes": [
-      [
-       3,
-       4,
-       6,
-       13,
-       16
-      ]
-     ],
-     "frequency": 27.23,
-     "alternates": [
-      {
-       "steno": "Re/kpmte/pmi",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         2,
-         4,
-         6,
-         7,
-         14
-        ],
-        [
-         4,
-         6,
-         13
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "région",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
-     "phonology": "Re.Zj§",
-     "steno": "spvtRwaij",
-     "strokes": [
-      [
-       3,
-       4,
-       5,
-       7,
-       8,
-       9,
-       12,
-       13,
-       16
-      ]
-     ],
-     "frequency": 25.8,
-     "alternates": [
-      {
-       "steno": "Re/vtRwai",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         5,
-         7,
-         8,
-         9,
-         12,
-         13
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    },
-    {
-     "ortho": "résultat",
-     "before": "",
-     "after": "",
-     "label": "préfixe « ra- » (aussi rai-, raie-, re-) · économise un trait",
-     "phonology": "Re.zyl.ta",
-     "steno": "sptw@ijl/ta",
-     "strokes": [
-      [
-       3,
-       4,
-       7,
-       9,
-       11,
-       13,
-       16,
-       23
-      ],
-      [
-       7,
-       12
-      ]
-     ],
-     "frequency": 25.15,
-     "alternates": [
-      {
-       "steno": "Re/tw@il/ta",
-       "strokes": [
-        [
-         8,
-         14
-        ],
-        [
-         7,
-         9,
-         11,
-         13,
-         23
-        ],
-        [
-         7,
-         12
-        ]
-       ]
-      }
-     ],
-     "rule": 18
-    }
-   ]
-  },
-  {
-   "id": "affixes-19",
-   "track": "affixes",
-   "index": 19,
-   "sectionTitle": "Les règles onze à vingt",
-   "title": "Leçon dix-neuf : préfixe « pa- »",
+   "title": "Leçon dix-huit : préfixe « pa- »",
    "kind": "affixes",
    "newKeys": [
     2,
@@ -17875,11 +16968,11 @@
    ]
   },
   {
-   "id": "affixes-20",
+   "id": "affixes-19",
    "track": "affixes",
-   "index": 20,
+   "index": 19,
    "sectionTitle": "Les règles onze à vingt",
-   "title": "Leçon vingt : préfixe « ma- » (aussi mah-, mâ-)",
+   "title": "Leçon dix-neuf : préfixe « ma- » (aussi mah-, mâ-)",
    "kind": "affixes",
    "newKeys": [
     17,
@@ -18202,7 +17295,7 @@
      "after": "",
      "label": "préfixe « ma- » (aussi mah-, mâ-) · économise un trait",
      "phonology": "ma.Rje",
-     "steno": "Rweskd/-l",
+     "steno": "Rweskd/-R",
      "strokes": [
       [
        8,
@@ -18213,13 +17306,13 @@
        19
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 63.88,
      "alternates": [
       {
-       "steno": "ma/Rwe/-l",
+       "steno": "ma/Rwe/-R",
        "strokes": [
         [
          6,
@@ -18231,7 +17324,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -18441,41 +17534,6 @@
          6,
          13,
          22
-        ]
-       ]
-      },
-      {
-       "steno": "ma/pmin/-R",
-       "strokes": [
-        [
-         6,
-         12
-        ],
-        [
-         4,
-         6,
-         13,
-         22
-        ],
-        [
-         21
-        ]
-       ]
-      },
-      {
-       "steno": "pmiskdn/-R",
-       "strokes": [
-        [
-         4,
-         6,
-         13,
-         17,
-         18,
-         19,
-         22
-        ],
-        [
-         21
         ]
        ]
       }
@@ -18766,11 +17824,11 @@
    ]
   },
   {
-   "id": "affixes-21",
+   "id": "affixes-20",
    "track": "affixes",
-   "index": 21,
+   "index": 20,
    "sectionTitle": "Les règles vingt et un à trente",
-   "title": "Leçon vingt et un : préfixe « e- » (aussi hi-, hy-, i-)",
+   "title": "Leçon vingt : préfixe « e- » (aussi hi-, hy-, i-)",
    "kind": "affixes",
    "newKeys": [
     16,
@@ -18903,7 +17961,7 @@
        ]
       },
       {
-       "steno": "i/weR/-R",
+       "steno": "i/weR/-l",
        "strokes": [
         [
          13
@@ -18914,12 +17972,12 @@
          21
         ],
         [
-         21
+         23
         ]
        ]
       },
       {
-       "steno": "wejdR/-R",
+       "steno": "wejdR/-l",
        "strokes": [
         [
          9,
@@ -18929,7 +17987,7 @@
          21
         ],
         [
-         21
+         23
         ]
        ]
       }
@@ -19130,7 +18188,7 @@
      "after": "",
      "label": "préfixe « e- » (aussi hi-, hy-, i-) · économise deux traits",
      "phonology": "i.ma.Zi.ne",
-     "steno": "vtijd/mRe/-l",
+     "steno": "vtijd/mRe/-R",
      "strokes": [
       [
        5,
@@ -19145,13 +18203,13 @@
        14
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 37.09,
      "alternates": [
       {
-       "steno": "i/ma/vti/mRe/-l",
+       "steno": "i/ma/vti/mRe/-R",
        "strokes": [
         [
          13
@@ -19171,7 +18229,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -19661,11 +18719,11 @@
    ]
   },
   {
-   "id": "affixes-22",
+   "id": "affixes-21",
    "track": "affixes",
-   "index": 22,
+   "index": 21,
    "sectionTitle": "Les règles vingt et un à trente",
-   "title": "Leçon vingt-deux : préfixe « sa- » (aussi sah-)",
+   "title": "Leçon vingt et un : préfixe « sa- » (aussi sah-)",
    "kind": "affixes",
    "newKeys": [
     5,
@@ -19941,42 +18999,6 @@
          14,
          16,
          18
-        ]
-       ]
-      },
-      {
-       "steno": "sa/mtejk/-R",
-       "strokes": [
-        [
-         3,
-         12
-        ],
-        [
-         6,
-         7,
-         14,
-         16,
-         18
-        ],
-        [
-         21
-        ]
-       ]
-      },
-      {
-       "steno": "vmtejkZ/-R",
-       "strokes": [
-        [
-         5,
-         6,
-         7,
-         14,
-         16,
-         18,
-         24
-        ],
-        [
-         21
         ]
        ]
       }
@@ -20552,11 +19574,11 @@
    ]
   },
   {
-   "id": "affixes-23",
+   "id": "affixes-22",
    "track": "affixes",
-   "index": 23,
+   "index": 22,
    "sectionTitle": "Les règles vingt et un à trente",
-   "title": "Leçon vingt-trois : préfixe « o- »",
+   "title": "Leçon vingt-deux : préfixe « o- »",
    "kind": "affixes",
    "newKeys": [
     16,
@@ -20577,7 +19599,7 @@
     },
     {
      "kind": "affix",
-     "text": "Exemples : « ok » : ae/k- → k-jsd ; « occupe » : ae/k@ijk → k@ijskd ; « occuper » : ae/k@i/pe/-l → pejsd/-l."
+     "text": "Exemples : « ok » : ae/k- → k-jsd ; « occupe » : ae/k@ijk → k@ijskd ; « occuper » : ae/k@i/pe/-R → pejsd/-R."
     },
     {
      "kind": "affix",
@@ -20662,7 +19684,7 @@
      "after": "",
      "label": "préfixe « o- » · économise deux traits",
      "phonology": "o.ky.pe",
-     "steno": "pejsd/-l",
+     "steno": "pejsd/-R",
      "strokes": [
       [
        4,
@@ -20672,13 +19694,13 @@
        19
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 97.22,
      "alternates": [
       {
-       "steno": "ae/k@i/pe/-l",
+       "steno": "ae/k@i/pe/-R",
        "strokes": [
         [
          12,
@@ -20694,7 +19716,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -20989,7 +20011,7 @@
        ]
       },
       {
-       "steno": "ae/kpi/sRwe/-l",
+       "steno": "ae/kpi/sRwe/-R",
        "strokes": [
         [
          12,
@@ -21007,12 +20029,12 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       },
       {
-       "steno": "sRwejsd/-l",
+       "steno": "sRwejsd/-R",
        "strokes": [
         [
          3,
@@ -21024,7 +20046,7 @@
          19
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -21454,11 +20476,11 @@
    ]
   },
   {
-   "id": "affixes-24",
+   "id": "affixes-23",
    "track": "affixes",
-   "index": 24,
+   "index": 23,
    "sectionTitle": "Les règles vingt et un à trente",
-   "title": "Leçon vingt-quatre : préfixe « pro- » (aussi proh-, prô-)",
+   "title": "Leçon vingt-trois : préfixe « pro- » (aussi proh-, prô-)",
    "kind": "affixes",
    "newKeys": [
     4,
@@ -21747,7 +20769,7 @@
      "after": "",
      "label": "préfixe « pro- » (aussi proh-, prô-) · économise un trait",
      "phonology": "pRo.te.Ze",
-     "steno": "pvtRe/vte/-l",
+     "steno": "pvtRe/vte/-R",
      "strokes": [
       [
        4,
@@ -21762,13 +20784,13 @@
        14
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 62.53,
      "alternates": [
       {
-       "steno": "pRae/te/vte/-l",
+       "steno": "pRae/te/vte/-R",
        "strokes": [
         [
          4,
@@ -21786,7 +20808,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -22345,11 +21367,11 @@
    ]
   },
   {
-   "id": "affixes-25",
+   "id": "affixes-24",
    "track": "affixes",
-   "index": 25,
+   "index": 24,
    "sectionTitle": "Les règles vingt et un à trente",
-   "title": "Leçon vingt-cinq : suffixe « -ver »",
+   "title": "Leçon vingt-quatre : suffixe « -ver »",
    "kind": "affixes",
    "newKeys": [
     16,
@@ -22370,7 +21392,7 @@
     },
     {
      "kind": "affix",
-     "text": "Exemples : « trouvé » : tR@e/ve → tR@ejsk ; « trouver » : tR@e/ve/-l → tR@ejsk/-l ; « arrivé » : a/Ri/ve → ajsk."
+     "text": "Exemples : « trouvé » : tR@e/ve → tR@ejsk ; « trouver » : tR@e/ve/-R → tR@ejsk/-R ; « arrivé » : a/Ri/ve → ajsk."
     },
     {
      "kind": "affix",
@@ -22422,7 +21444,7 @@
      "after": "",
      "label": "suffixe « -ver » · économise un trait",
      "phonology": "tRu.ve",
-     "steno": "tR@ejsk/-l",
+     "steno": "tR@ejsk/-R",
      "strokes": [
       [
        7,
@@ -22434,13 +21456,13 @@
        18
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 324.94,
      "alternates": [
       {
-       "steno": "tR@e/ve/-l",
+       "steno": "tR@e/ve/-R",
        "strokes": [
         [
          7,
@@ -22453,7 +21475,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -22502,7 +21524,7 @@
      "after": "",
      "label": "suffixe « -ver » · économise un trait",
      "phonology": "so.ve",
-     "steno": "saejsk/-l",
+     "steno": "saejsk/-R",
      "strokes": [
       [
        3,
@@ -22513,13 +21535,13 @@
        18
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 103.1,
      "alternates": [
       {
-       "steno": "sae/ve/-l",
+       "steno": "sae/ve/-R",
        "strokes": [
         [
          3,
@@ -22531,7 +21553,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -22624,7 +21646,7 @@
      "after": "",
      "label": "suffixe « -ver » · économise un trait",
      "phonology": "pRu.ve",
-     "steno": "pR@ejsk/-l",
+     "steno": "pR@ejsk/-R",
      "strokes": [
       [
        4,
@@ -22636,13 +21658,13 @@
        18
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 41.06,
      "alternates": [
       {
-       "steno": "pR@e/ve/-l",
+       "steno": "pR@e/ve/-R",
        "strokes": [
         [
          4,
@@ -22655,7 +21677,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -22712,7 +21734,7 @@
      "after": "",
      "label": "suffixe « -ver » · économise un trait",
      "phonology": "l°.ve",
-     "steno": "mt@ajsk/-l",
+     "steno": "mt@ajsk/-R",
      "strokes": [
       [
        6,
@@ -22724,13 +21746,13 @@
        18
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 35.9,
      "alternates": [
       {
-       "steno": "mt@a/ve/-l",
+       "steno": "mt@a/ve/-R",
        "strokes": [
         [
          6,
@@ -22743,7 +21765,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       },
@@ -22787,7 +21809,7 @@
      "after": "",
      "label": "suffixe « -ver » · économise un trait",
      "phonology": "la.ve",
-     "steno": "mtajsk/-l",
+     "steno": "mtajsk/-R",
      "strokes": [
       [
        6,
@@ -22798,13 +21820,13 @@
        18
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 34.01,
      "alternates": [
       {
-       "steno": "mta/ve/-l",
+       "steno": "mta/ve/-R",
        "strokes": [
         [
          6,
@@ -22816,7 +21838,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -22829,7 +21851,7 @@
      "after": "",
      "label": "suffixe « -ver » · économise un trait",
      "phonology": "kR°.ve",
-     "steno": "kR@ajsk/-l",
+     "steno": "kR@ajsk/-R",
      "strokes": [
       [
        2,
@@ -22841,13 +21863,13 @@
        18
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 25.27,
      "alternates": [
       {
-       "steno": "kR@a/ve/-l",
+       "steno": "kR@a/ve/-R",
        "strokes": [
         [
          2,
@@ -22860,7 +21882,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -22917,7 +21939,7 @@
      "after": "",
      "label": "suffixe « -ver » · économise un trait",
      "phonology": "RE.ve",
-     "steno": "Riejsk/-l",
+     "steno": "Riejsk/-R",
      "strokes": [
       [
        8,
@@ -22928,13 +21950,13 @@
        18
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 20.8,
      "alternates": [
       {
-       "steno": "Rie/ve/-l",
+       "steno": "Rie/ve/-R",
        "strokes": [
         [
          8,
@@ -22946,7 +21968,55 @@
          14
         ],
         [
-         23
+         21
+        ]
+       ]
+      }
+     ],
+     "rule": 25
+    },
+    {
+     "ortho": "réservé",
+     "before": "",
+     "after": "",
+     "label": "suffixe « -ver » · économise un trait",
+     "phonology": "Re.zER.ve",
+     "steno": "Re/twiejskR",
+     "strokes": [
+      [
+       8,
+       14
+      ],
+      [
+       7,
+       9,
+       13,
+       14,
+       16,
+       17,
+       18,
+       21
+      ]
+     ],
+     "frequency": 14.65,
+     "alternates": [
+      {
+       "steno": "Re/twieR/ve",
+       "strokes": [
+        [
+         8,
+         14
+        ],
+        [
+         7,
+         9,
+         13,
+         14,
+         21
+        ],
+        [
+         5,
+         14
         ]
        ]
       }
@@ -23081,7 +22151,7 @@
      "after": "",
      "label": "suffixe « -ver » · économise un trait",
      "phonology": "op.sER.ve",
-     "steno": "aejk/siejskR/-l",
+     "steno": "aejk/siejskR/-R",
      "strokes": [
       [
        12,
@@ -23099,13 +22169,13 @@
        21
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 11.22,
      "alternates": [
       {
-       "steno": "aejk/sieR/ve/-l",
+       "steno": "aejk/sieR/ve/-R",
        "strokes": [
         [
          12,
@@ -23124,7 +22194,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -23212,57 +22282,15 @@
       }
      ],
      "rule": 25
-    },
-    {
-     "ortho": "sauvés",
-     "before": "",
-     "after": "",
-     "label": "suffixe « -ver » · économise un trait",
-     "phonology": "so.ve",
-     "steno": "saejsk/-s",
-     "strokes": [
-      [
-       3,
-       12,
-       14,
-       16,
-       17,
-       18
-      ],
-      [
-       17
-      ]
-     ],
-     "frequency": 9.28,
-     "alternates": [
-      {
-       "steno": "sae/ve/-s",
-       "strokes": [
-        [
-         3,
-         12,
-         14
-        ],
-        [
-         5,
-         14
-        ],
-        [
-         17
-        ]
-       ]
-      }
-     ],
-     "rule": 25
     }
    ]
   },
   {
-   "id": "affixes-26",
+   "id": "affixes-25",
    "track": "affixes",
-   "index": 26,
+   "index": 25,
    "sectionTitle": "Les règles vingt et un à trente",
-   "title": "Leçon vingt-six : préfixe « ce- » (aussi sce-, se-)",
+   "title": "Leçon vingt-cinq : préfixe « ce- » (aussi sce-, se-)",
    "kind": "affixes",
    "newKeys": [
     3,
@@ -24168,11 +23196,11 @@
    ]
   },
   {
-   "id": "affixes-27",
+   "id": "affixes-26",
    "track": "affixes",
-   "index": 27,
+   "index": 26,
    "sectionTitle": "Les règles vingt et un à trente",
-   "title": "Leçon vingt-sept : suffixe « -rae » (aussi -rai, -raie, -re)",
+   "title": "Leçon vingt-six : suffixe « -rae » (aussi -rai, -raie, -re)",
    "kind": "affixes",
    "newKeys": [
     16,
@@ -24193,7 +23221,7 @@
     },
     {
      "kind": "affix",
-     "text": "Exemples : « tirer » : ti/Re/-l → tijdR/-l ; « soirée » : swa/Re → swajdR ; « tiré » : ti/Re → tijdR."
+     "text": "Exemples : « tirer » : ti/Re/-R → tijdR/-R ; « soirée » : swa/Re → swajdR ; « tiré » : ti/Re → tijdR."
     },
     {
      "kind": "affix",
@@ -24207,7 +23235,7 @@
      "after": "",
      "label": "suffixe « -rae » (aussi -rai, -raie, -re) · économise un trait",
      "phonology": "ti.Re",
-     "steno": "tijdR/-l",
+     "steno": "tijdR/-R",
      "strokes": [
       [
        7,
@@ -24217,13 +23245,13 @@
        21
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 113.71,
      "alternates": [
       {
-       "steno": "ti/Re/-l",
+       "steno": "ti/Re/-R",
        "strokes": [
         [
          7,
@@ -24234,7 +23262,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -24317,7 +23345,7 @@
      "after": "",
      "label": "suffixe « -rae » (aussi -rai, -raie, -re) · économise un trait",
      "phonology": "pl2.Re",
-     "steno": "pmt@iejdR/-l",
+     "steno": "pmt@iejdR/-R",
      "strokes": [
       [
        4,
@@ -24331,13 +23359,13 @@
        21
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 61.6,
      "alternates": [
       {
-       "steno": "pmt@ie/Re/-l",
+       "steno": "pmt@ie/Re/-R",
        "strokes": [
         [
          4,
@@ -24352,7 +23380,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -24365,7 +23393,7 @@
      "after": "",
      "label": "suffixe « -rae » (aussi -rai, -raie, -re) · économise deux traits",
      "phonology": "pRe.pa.Re",
-     "steno": "pRejdR/-l",
+     "steno": "pRejdR/-R",
      "strokes": [
       [
        4,
@@ -24376,13 +23404,13 @@
        21
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 46.71,
      "alternates": [
       {
-       "steno": "pRe/pa/Re/-l",
+       "steno": "pRe/pa/Re/-R",
        "strokes": [
         [
          4,
@@ -24398,7 +23426,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -24446,12 +23474,66 @@
      "rule": 27
     },
     {
+     "ortho": "récupérer",
+     "before": "",
+     "after": "",
+     "label": "suffixe « -rae » (aussi -rai, -raie, -re) · économise deux traits",
+     "phonology": "Re.ky.pe.Re",
+     "steno": "Re/k@ijdR/-R",
+     "strokes": [
+      [
+       8,
+       14
+      ],
+      [
+       2,
+       11,
+       13,
+       16,
+       19,
+       21
+      ],
+      [
+       21
+      ]
+     ],
+     "frequency": 44.59,
+     "alternates": [
+      {
+       "steno": "Re/k@i/pe/Re/-R",
+       "strokes": [
+        [
+         8,
+         14
+        ],
+        [
+         2,
+         11,
+         13
+        ],
+        [
+         4,
+         14
+        ],
+        [
+         8,
+         14
+        ],
+        [
+         21
+        ]
+       ]
+      }
+     ],
+     "rule": 27
+    },
+    {
      "ortho": "réparer",
      "before": "",
      "after": "",
      "label": "suffixe « -rae » (aussi -rai, -raie, -re) · économise deux traits",
      "phonology": "Re.pa.Re",
-     "steno": "RejdR/-l",
+     "steno": "RejdR/-R",
      "strokes": [
       [
        8,
@@ -24461,13 +23543,13 @@
        21
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 39.13,
      "alternates": [
       {
-       "steno": "Re/pa/Re/-l",
+       "steno": "Re/pa/Re/-R",
        "strokes": [
         [
          8,
@@ -24482,7 +23564,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -24495,7 +23577,7 @@
      "after": "",
      "label": "suffixe « -rae » (aussi -rai, -raie, -re) · économise deux traits",
      "phonology": "a.sy.Re",
-     "steno": "ajdR/-l",
+     "steno": "ajdR/-R",
      "strokes": [
       [
        12,
@@ -24504,13 +23586,13 @@
        21
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 34.92,
      "alternates": [
       {
-       "steno": "a/s@i/Re/-l",
+       "steno": "a/s@i/Re/-R",
        "strokes": [
         [
          12
@@ -24525,7 +23607,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -24538,7 +23620,7 @@
      "after": "",
      "label": "suffixe « -rae » (aussi -rai, -raie, -re) · économise deux traits",
      "phonology": "REs.pi.Re",
-     "steno": "RiejsdR/-l",
+     "steno": "RiejsdR/-R",
      "strokes": [
       [
        8,
@@ -24550,13 +23632,13 @@
        21
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 27.58,
      "alternates": [
       {
-       "steno": "Ries/pi/Re/-l",
+       "steno": "Ries/pi/Re/-R",
        "strokes": [
         [
          8,
@@ -24573,7 +23655,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -24636,7 +23718,7 @@
      "after": "",
      "label": "suffixe « -rae » (aussi -rai, -raie, -re) · économise deux traits",
      "phonology": "li.be.Re",
-     "steno": "mtijdR/-l",
+     "steno": "mtijdR/-R",
      "strokes": [
       [
        6,
@@ -24647,13 +23729,13 @@
        21
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 26.16,
      "alternates": [
       {
-       "steno": "mti/sve/Re/-l",
+       "steno": "mti/sve/Re/-R",
        "strokes": [
         [
          6,
@@ -24670,7 +23752,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -24683,7 +23765,7 @@
      "after": "",
      "label": "suffixe « -rae » (aussi -rai, -raie, -re) · économise un trait",
      "phonology": "vi.Re",
-     "steno": "vijdR/-l",
+     "steno": "vijdR/-R",
      "strokes": [
       [
        5,
@@ -24693,13 +23775,13 @@
        21
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 25.74,
      "alternates": [
       {
-       "steno": "vi/Re/-l",
+       "steno": "vi/Re/-R",
        "strokes": [
         [
          5,
@@ -24710,7 +23792,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -24801,7 +23883,7 @@
      "after": "",
      "label": "suffixe « -rae » (aussi -rai, -raie, -re) · économise un trait",
      "phonology": "dy.Re",
-     "steno": "pv@ijdR/-l",
+     "steno": "pv@ijdR/-R",
      "strokes": [
       [
        4,
@@ -24813,13 +23895,13 @@
        21
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 20.59,
      "alternates": [
       {
-       "steno": "pv@i/Re/-l",
+       "steno": "pv@i/Re/-R",
        "strokes": [
         [
          4,
@@ -24832,7 +23914,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -24845,7 +23927,7 @@
      "after": "",
      "label": "suffixe « -rae » (aussi -rai, -raie, -re) · économise deux traits",
      "phonology": "se.pa.Re",
-     "steno": "sejdR/-l",
+     "steno": "sejdR/-R",
      "strokes": [
       [
        3,
@@ -24855,13 +23937,13 @@
        21
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 20.34,
      "alternates": [
       {
-       "steno": "se/pa/Re/-l",
+       "steno": "se/pa/Re/-R",
        "strokes": [
         [
          3,
@@ -24876,7 +23958,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -24973,7 +24055,7 @@
      "after": "",
      "label": "suffixe « -rae » (aussi -rai, -raie, -re) · économise un trait",
      "phonology": "Ze.Re",
-     "steno": "vtejdR/-l",
+     "steno": "vtejdR/-R",
      "strokes": [
       [
        5,
@@ -24984,13 +24066,13 @@
        21
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 16.57,
      "alternates": [
       {
-       "steno": "vte/Re/-l",
+       "steno": "vte/Re/-R",
        "strokes": [
         [
          5,
@@ -25002,53 +24084,7 @@
          14
         ],
         [
-         23
-        ]
-       ]
-      }
-     ],
-     "rule": 27
-    },
-    {
-     "ortho": "libéré",
-     "before": "",
-     "after": "",
-     "label": "suffixe « -rae » (aussi -rai, -raie, -re) · économise un trait",
-     "phonology": "li.be.Re",
-     "steno": "mti/svejdR",
-     "strokes": [
-      [
-       6,
-       7,
-       13
-      ],
-      [
-       3,
-       5,
-       14,
-       16,
-       19,
-       21
-      ]
-     ],
-     "frequency": 15.75,
-     "alternates": [
-      {
-       "steno": "mti/sve/Re",
-       "strokes": [
-        [
-         6,
-         7,
-         13
-        ],
-        [
-         3,
-         5,
-         14
-        ],
-        [
-         8,
-         14
+         21
         ]
        ]
       }
@@ -25058,11 +24094,11 @@
    ]
   },
   {
-   "id": "affixes-28",
+   "id": "affixes-27",
    "track": "affixes",
-   "index": 28,
+   "index": 27,
    "sectionTitle": "Les règles vingt et un à trente",
-   "title": "Leçon vingt-huit : préfixe « pou- » (aussi pu-)",
+   "title": "Leçon vingt-sept : préfixe « pou- » (aussi pu-)",
    "kind": "affixes",
    "newKeys": [
     4,
@@ -25893,11 +24929,11 @@
    ]
   },
   {
-   "id": "affixes-29",
+   "id": "affixes-28",
    "track": "affixes",
-   "index": 29,
+   "index": 28,
    "sectionTitle": "Les règles vingt et un à trente",
-   "title": "Leçon vingt-neuf : préfixe « de- » (aussi dea-, di-, die-)",
+   "title": "Leçon vingt-huit : préfixe « de- » (aussi dea-, di-, die-)",
    "kind": "affixes",
    "newKeys": [
     3,
@@ -26811,11 +25847,11 @@
    ]
   },
   {
-   "id": "affixes-30",
+   "id": "affixes-29",
    "track": "affixes",
-   "index": 30,
+   "index": 29,
    "sectionTitle": "Les règles vingt et un à trente",
-   "title": "Leçon trente : suffixe « -ser » (aussi -sée, -zer, -zé)",
+   "title": "Leçon vingt-neuf : suffixe « -ser » (aussi -sée, -zer, -zé)",
    "kind": "affixes",
    "newKeys": [
     18,
@@ -26836,7 +25872,7 @@
     },
     {
      "kind": "affix",
-     "text": "Exemples : « poser » : pae/twe/-l → paeknl/-l ; « utiliser » : @i/ti/mti/twe/-l → @i/tiknl/-l ; « baiser » : svie/twe/-l → svieknl/-l."
+     "text": "Exemples : « poser » : pae/twe/-R → paeknl/-R ; « utiliser » : @i/ti/mti/twe/-R → @i/tiknl/-R ; « baiser » : svie/twe/-R → svieknl/-R."
     },
     {
      "kind": "affix",
@@ -26850,7 +25886,7 @@
      "after": "",
      "label": "suffixe « -ser » (aussi -sée, -zer, -zé) · économise un trait",
      "phonology": "po.ze",
-     "steno": "paeknl/-l",
+     "steno": "paeknl/-R",
      "strokes": [
       [
        4,
@@ -26861,13 +25897,13 @@
        23
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 73.73,
      "alternates": [
       {
-       "steno": "pae/twe/-l",
+       "steno": "pae/twe/-R",
        "strokes": [
         [
          4,
@@ -26880,7 +25916,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -26893,7 +25929,7 @@
      "after": "",
      "label": "suffixe « -ser » (aussi -sée, -zer, -zé) · économise deux traits",
      "phonology": "y.ti.li.ze",
-     "steno": "@i/tiknl/-l",
+     "steno": "@i/tiknl/-R",
      "strokes": [
       [
        11,
@@ -26907,13 +25943,13 @@
        23
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 61.97,
      "alternates": [
       {
-       "steno": "@i/ti/mti/twe/-l",
+       "steno": "@i/ti/mti/twe/-R",
        "strokes": [
         [
          11,
@@ -26934,7 +25970,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -26947,7 +25983,7 @@
      "after": "",
      "label": "suffixe « -ser » (aussi -sée, -zer, -zé) · économise un trait",
      "phonology": "bE.ze",
-     "steno": "svieknl/-l",
+     "steno": "svieknl/-R",
      "strokes": [
       [
        3,
@@ -26959,13 +25995,13 @@
        23
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 42.25,
      "alternates": [
       {
-       "steno": "svie/twe/-l",
+       "steno": "svie/twe/-R",
        "strokes": [
         [
          3,
@@ -26979,12 +26015,12 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       },
       {
-       "steno": "svie/twe",
+       "steno": "svie/tw*e",
        "strokes": [
         [
          3,
@@ -26995,16 +26031,18 @@
         [
          7,
          9,
+         10,
          14
         ]
        ]
       },
       {
-       "steno": "svieknl",
+       "steno": "sv*ieknl",
        "strokes": [
         [
          3,
          5,
+         10,
          13,
          14,
          18,
@@ -27145,6 +26183,52 @@
      "rule": 30
     },
     {
+     "ortho": "réalisé",
+     "before": "",
+     "after": "",
+     "label": "suffixe « -ser » (aussi -sée, -zer, -zé) · économise deux traits",
+     "phonology": "Re.a.li.ze",
+     "steno": "Re/aknl",
+     "strokes": [
+      [
+       8,
+       14
+      ],
+      [
+       12,
+       18,
+       22,
+       23
+      ]
+     ],
+     "frequency": 21.23,
+     "alternates": [
+      {
+       "steno": "Re/a/mti/twe",
+       "strokes": [
+        [
+         8,
+         14
+        ],
+        [
+         12
+        ],
+        [
+         6,
+         7,
+         13
+        ],
+        [
+         7,
+         9,
+         14
+        ]
+       ]
+      }
+     ],
+     "rule": 30
+    },
+    {
      "ortho": "musée",
      "before": "",
      "after": "",
@@ -27223,12 +26307,11 @@
      "after": "",
      "label": "suffixe « -ser » (aussi -sée, -zer, -zé) · économise un trait",
      "phonology": "bE.ze",
-     "steno": "sv*ieknl",
+     "steno": "svieknl",
      "strokes": [
       [
        3,
        5,
-       10,
        13,
        14,
        18,
@@ -27239,7 +26322,7 @@
      "frequency": 17.65,
      "alternates": [
       {
-       "steno": "svie/tw*e",
+       "steno": "svie/twe",
        "strokes": [
         [
          3,
@@ -27250,8 +26333,59 @@
         [
          7,
          9,
-         10,
          14
+        ]
+       ]
+      }
+     ],
+     "rule": 30
+    },
+    {
+     "ortho": "réaliser",
+     "before": "",
+     "after": "",
+     "label": "suffixe « -ser » (aussi -sée, -zer, -zé) · économise deux traits",
+     "phonology": "Re.a.li.ze",
+     "steno": "Re/aknl/-R",
+     "strokes": [
+      [
+       8,
+       14
+      ],
+      [
+       12,
+       18,
+       22,
+       23
+      ],
+      [
+       21
+      ]
+     ],
+     "frequency": 16.95,
+     "alternates": [
+      {
+       "steno": "Re/a/mti/twe/-R",
+       "strokes": [
+        [
+         8,
+         14
+        ],
+        [
+         12
+        ],
+        [
+         6,
+         7,
+         13
+        ],
+        [
+         7,
+         9,
+         14
+        ],
+        [
+         21
         ]
        ]
       }
@@ -27303,7 +26437,7 @@
      "after": "",
      "label": "suffixe « -ser » (aussi -sée, -zer, -zé) · économise un trait",
      "phonology": "ko.ze",
-     "steno": "kaeknl/-l",
+     "steno": "kaeknl/-R",
      "strokes": [
       [
        2,
@@ -27314,13 +26448,13 @@
        23
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 15.47,
      "alternates": [
       {
-       "steno": "kae/twe/-l",
+       "steno": "kae/twe/-R",
        "strokes": [
         [
          2,
@@ -27333,7 +26467,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -27346,7 +26480,7 @@
      "after": "",
      "label": "suffixe « -ser » (aussi -sée, -zer, -zé) · économise un trait",
      "phonology": "bRi.ze",
-     "steno": "svRiknl/-l",
+     "steno": "svRiknl/-R",
      "strokes": [
       [
        3,
@@ -27358,13 +26492,13 @@
        23
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 14.99,
      "alternates": [
       {
-       "steno": "svRi/twe/-l",
+       "steno": "svRi/twe/-R",
        "strokes": [
         [
          3,
@@ -27378,7 +26512,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -27472,7 +26606,7 @@
      "after": "",
      "label": "suffixe « -ser » (aussi -sée, -zer, -zé) · économise un trait",
      "phonology": "OR.ga.ni.ze",
-     "steno": "eR/ksa/mRiknl/-l",
+     "steno": "eR/ksa/mRiknl/-R",
      "strokes": [
       [
        14,
@@ -27492,13 +26626,13 @@
        23
       ],
       [
-       23
+       21
       ]
      ],
      "frequency": 13.93,
      "alternates": [
       {
-       "steno": "eR/ksa/mRi/twe/-l",
+       "steno": "eR/ksa/mRi/twe/-R",
        "strokes": [
         [
          14,
@@ -27520,7 +26654,7 @@
          14
         ],
         [
-         23
+         21
         ]
        ]
       }
@@ -27634,11 +26768,12 @@
      "after": "",
      "label": "suffixe « -ser » (aussi -sée, -zer, -zé) · économise un trait",
      "phonology": "bE.ze",
-     "steno": "svieknl/-s",
+     "steno": "sv*ieknl/-s",
      "strokes": [
       [
        3,
        5,
+       10,
        13,
        14,
        18,
@@ -27652,7 +26787,7 @@
      "frequency": 11.25,
      "alternates": [
       {
-       "steno": "svie/twe/-s",
+       "steno": "svie/tw*e/-s",
        "strokes": [
         [
          3,
@@ -27663,6 +26798,7 @@
         [
          7,
          9,
+         10,
          14
         ],
         [
@@ -27727,103 +26863,15 @@
       }
      ],
      "rule": 30
-    },
-    {
-     "ortho": "creuser",
-     "before": "",
-     "after": "",
-     "label": "suffixe « -ser » (aussi -sée, -zer, -zé) · économise un trait",
-     "phonology": "kR2.ze",
-     "steno": "kR@ieknl/-l",
-     "strokes": [
-      [
-       2,
-       8,
-       11,
-       13,
-       14,
-       18,
-       22,
-       23
-      ],
-      [
-       23
-      ]
-     ],
-     "frequency": 10.34,
-     "alternates": [
-      {
-       "steno": "kR@ie/twe/-l",
-       "strokes": [
-        [
-         2,
-         8,
-         11,
-         13,
-         14
-        ],
-        [
-         7,
-         9,
-         14
-        ],
-        [
-         23
-        ]
-       ]
-      }
-     ],
-     "rule": 30
-    },
-    {
-     "ortho": "raser",
-     "before": "",
-     "after": "",
-     "label": "suffixe « -ser » (aussi -sée, -zer, -zé) · économise un trait",
-     "phonology": "Ra.ze",
-     "steno": "Raknl/-l",
-     "strokes": [
-      [
-       8,
-       12,
-       18,
-       22,
-       23
-      ],
-      [
-       23
-      ]
-     ],
-     "frequency": 10.27,
-     "alternates": [
-      {
-       "steno": "Ra/twe/-l",
-       "strokes": [
-        [
-         8,
-         12
-        ],
-        [
-         7,
-         9,
-         14
-        ],
-        [
-         23
-        ]
-       ]
-      }
-     ],
-     "rule": 30
     }
    ]
   },
   {
-   "id": "affixes-31",
+   "id": "affixes-30",
    "track": "affixes",
-   "index": 31,
+   "index": 30,
    "sectionTitle": "Formes conjuguées",
-   "title": "Leçon trente et un : les formes conjuguées",
+   "title": "Leçon trente : les formes conjuguées",
    "kind": "affixes",
    "newKeys": [],
    "newChords": [],
@@ -27834,7 +26882,7 @@
     },
     {
      "kind": "affix",
-     "text": "Exemples : « arrête » : a/Riet/-k → Rwiejt/-k ; « arrête » : a/Riet/-R → Rwiejt/-R ; « connais » : kae/mRie/-d → mRwied/-d."
+     "text": "Exemples : « arrête » : a/Riet/-k → Rwiejt/-k ; « arrête » : a/Riet/-l → Rwiejt/-l ; « connais » : kae/mRie/-d → mRwied/-d."
     }
    ],
    "words": [
@@ -27886,7 +26934,7 @@
      "after": "",
      "label": "arrêter : impér. prés., deuxième pers. sing. ; ind. prés., première et troisième pers. sing. ; subj. prés., première et troisième pers. sing. · économise un trait",
      "phonology": "a.REt",
-     "steno": "Rwiejt/-R",
+     "steno": "Rwiejt/-l",
      "strokes": [
       [
        8,
@@ -27897,13 +26945,13 @@
        20
       ],
       [
-       21
+       23
       ]
      ],
      "frequency": 456.59,
      "alternates": [
       {
-       "steno": "a/Riet/-R",
+       "steno": "a/Riet/-l",
        "strokes": [
         [
          12
@@ -27915,7 +26963,7 @@
          20
         ],
         [
-         21
+         23
         ]
        ]
       }
@@ -28056,7 +27104,7 @@
      "after": "",
      "label": "demander : impér. prés., deuxième pers. sing. ; ind. prés., première et troisième pers. sing. ; subj. prés., première et troisième pers. sing. · économise un trait",
      "phonology": "d°.m@d",
-     "steno": "km@d/-R",
+     "steno": "km@d/-l",
      "strokes": [
       [
        2,
@@ -28065,13 +27113,13 @@
        19
       ],
       [
-       21
+       23
       ]
      ],
      "frequency": 289.34,
      "alternates": [
       {
-       "steno": "pv@a/m@d/-R",
+       "steno": "pv@a/m@d/-l",
        "strokes": [
         [
          4,
@@ -28085,7 +27133,7 @@
          19
         ],
         [
-         21
+         23
         ]
        ]
       }
@@ -28236,7 +27284,7 @@
      "after": "",
      "label": "importer : impér. prés., deuxième pers. sing. ; ind. prés., première et troisième pers. sing. ; subj. prés., première et troisième pers. sing. · économise un trait",
      "phonology": "5.pORt",
-     "steno": "ptRwetR/-R",
+     "steno": "ptRwetR/-l",
      "strokes": [
       [
        4,
@@ -28248,13 +27296,13 @@
        21
       ],
       [
-       21
+       23
       ]
      ],
      "frequency": 251.39,
      "alternates": [
       {
-       "steno": "aie/petR/-R",
+       "steno": "aie/petR/-l",
        "strokes": [
         [
          12,
@@ -28268,7 +27316,7 @@
          21
         ],
         [
-         21
+         23
         ]
        ]
       }
@@ -28551,7 +27599,7 @@
      "after": "",
      "label": "écouter : impér. prés., deuxième pers. sing. ; ind. prés., première et troisième pers. sing. ; subj. prés., première et troisième pers. sing. · économise un trait",
      "phonology": "e.kut",
-     "steno": "kv@et/-R",
+     "steno": "kv@et/-l",
      "strokes": [
       [
        2,
@@ -28561,13 +27609,13 @@
        20
       ],
       [
-       21
+       23
       ]
      ],
      "frequency": 214.67,
      "alternates": [
       {
-       "steno": "e/k@et/-R",
+       "steno": "e/k@et/-l",
        "strokes": [
         [
          14
@@ -28579,54 +27627,12 @@
          20
         ],
         [
-         21
+         23
         ]
        ]
       }
      ],
      "rule": 7
-    },
-    {
-     "ortho": "compris",
-     "before": "",
-     "after": "",
-     "label": "comprendre : ind. passé, première et deuxième pers. sing. ; part. passé · économise un trait",
-     "phonology": "k§.pRi",
-     "steno": "pRwid/-s",
-     "strokes": [
-      [
-       4,
-       8,
-       9,
-       13,
-       19
-      ],
-      [
-       17
-      ]
-     ],
-     "frequency": 198.16,
-     "alternates": [
-      {
-       "steno": "kai/pRi/-s",
-       "strokes": [
-        [
-         2,
-         12,
-         13
-        ],
-        [
-         4,
-         8,
-         13
-        ],
-        [
-         17
-        ]
-       ]
-      }
-     ],
-     "rule": 4
     },
     {
      "ortho": "compris",
@@ -28711,6 +27717,49 @@
       }
      ],
      "rule": 4
+    },
+    {
+     "ortho": "arrêtez",
+     "before": "",
+     "after": "",
+     "label": "arrêter : impér. prés., deuxième pers. plur. ; ind. prés., deuxième pers. plur. · économise deux traits",
+     "phonology": "a.RE.te",
+     "steno": "twej/-d",
+     "strokes": [
+      [
+       7,
+       9,
+       14,
+       16
+      ],
+      [
+       19
+      ]
+     ],
+     "frequency": 174.12,
+     "alternates": [
+      {
+       "steno": "a/Rie/te/-d",
+       "strokes": [
+        [
+         12
+        ],
+        [
+         8,
+         13,
+         14
+        ],
+        [
+         7,
+         14
+        ],
+        [
+         19
+        ]
+       ]
+      }
+     ],
+     "rule": 1
     }
    ]
   }

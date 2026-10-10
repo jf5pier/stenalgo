@@ -1,0 +1,6 @@
+# Hand-found tag defects of LexiqueMixte.tsv rows (genre / nombre), replayed by `lexique.py` `outputMixedLexique` after the phonology
+# corrections (src/mixtecorrections.py `applyTagCorrections`). Key: the output row as Lexique383 has it; a key that matches no row, or
+# several, fails the build. Lexique383 leaves the number empty on ~1,800 NOM/ADJ rows; nearly all are invariable (`abus`, `voix`),
+# only a row that has a singular twin and is plainly plural belongs here.
+ortho	lemme	cgram	infover	genre	nombre	new_genre	new_nombre	reason
+ioniennes	ionien	ADJ		f		f	p	plural of ionienne with an empty number: the elicitation could not tell it from ionienne

@@ -11223,9 +11223,9 @@ ayant	Ej@	avoir	AUX	AUX,VER			par:pre;	Ej|@	ay|ant	147.84	21.68
 ayant	Ej@	avoir	VER	AUX,VER			par:pre;	Ej|@	ay|ant	3.85	0.9
 ayatollah	ajatola	ayatollah	NOM	NOM	m	s		a|j_a|t_o|l_a_#	a|y_a|t_o|ll_a_h	0.14	0.5
 ayatollahs	ajatola	ayatollah	NOM	NOM	m	p		a|j_a|t_o|l_a_#	a|y_a|t_o|ll_a_hs	0.14	0.03
-ayez	Eje	avoir	VER	AUX,VER			imp:pre:2p;sub:pre:2p;	Ej|e	ay|ez	10.54	34.3
+ayez	Eje	avoir	VER	AUX,VER			imp:pre:2p;sub:pre:2p;	E|j_e	a|y_ez	10.54	34.3
 ayez	Eje	avoir	AUX	AUX,VER			sub:pre:2p;	Ej|e	ay|ez	5.34	20.8
-ayons	Ej§	avoir	VER	AUX,VER			imp:pre:1p;sub:pre:1p;	Ej|§	ay|ons	3.24	5.92
+ayons	Ej§	avoir	VER	AUX,VER			imp:pre:1p;sub:pre:1p;	E|j_§	a|y_ons	3.24	5.92
 ayons	Ej§	avoir	AUX	AUX,VER			sub:pre:1p;	Ej|§	ay|ons	4.39	4.36
 ayuntamiento	ajuntamjEnto	ayuntamiento	NOM	NOM	m	s		a|j_u_n|t_a|m_j_E_n|t_o	a|y_u_n|t_a|m_i_e_n|t_o	0.07	0.0
 azalée	azale	azalée	NOM	NOM	f	s		a|z_a|l_e_#	a|z_a|l_é_e	0.2	0.05
@@ -11934,8 +11934,8 @@ balayeur	balEj9R	balayeur	NOM	NOM	m	s		b_a|l_Ej|9_R	b_a|l_ay|eu_r	1.42	0.48
 balayeurs	balEj9R	balayeur	NOM	NOM	m	p		b_a|l_Ej|9_R_#	b_a|l_ay|eu_r_s	1.35	0.11
 balayeuse	balEj2z	balayeur	NOM	NOM	f	s		b_a|l_Ej|2_z_#	b_a|l_ay|eu_s_e	0.07	0.21
 balayeuses	balEj2z	balayeur	NOM	NOM	f	p		b_a|l_Ej|2_z_#	b_a|l_ay|eu_s_es	0.14	0.02
-balayez	balEje	balayer	VER	VER			imp:pre:2p;ind:pre:2p;	b_a|l_Ej|e	b_a|l_ay|ez	0.07	0.6
-balayons	balEj§	balayer	VER	VER			imp:pre:1p;	b_a|l_Ej|§	b_a|l_ay|ons	0.07	0.05
+balayez	balEje	balayer	VER	VER			imp:pre:2p;ind:pre:2p;	b_a|l_E|j_e	b_a|l_a|y_ez	0.07	0.6
+balayons	balEj§	balayer	VER	VER			imp:pre:1p;	b_a|l_E|j_§	b_a|l_a|y_ons	0.07	0.05
 balayure	balEjyR	balayure	NOM	NOM	f	s		b_a|l_Ej|y_R_#	b_a|l_ay|u_r_e	0.14	0.0
 balayures	balEjyR	balayure	NOM	NOM	f	p		b_a|l_Ej|y_R_#	b_a|l_ay|u_r_es	0.2	0.0
 balayèrent	balEjER	balayer	VER	VER			ind:pas:3p;	b_a|l_Ej|E_R_#	b_a|l_ay|è_r_ent	0.41	0.0
@@ -35765,8 +35765,8 @@ distrayant	distREj@	distraire	VER	VER,ADJ			par:pre;	d_i_s|t_R_Ej|@	d_i_s|t_r_ay
 distrayante	distREj@t	distrayant	ADJ	ADJ	f	s		d_i_s|t_R_Ej|@_t_#	d_i_s|t_r_ay|an_t_e	0.0	0.25
 distrayantes	distREj@t	distrayant	ADJ	ADJ	f	p		d_i_s|t_R_Ej|@_t_#	d_i_s|t_r_ay|an_t_es	0.14	0.03
 distrayants	distREj@	distrayant	ADJ	ADJ	m	p		d_i_s|t_R_Ej|@_#	d_i_s|t_r_ay|an_ts	0.14	0.03
-distrayez	distREje	distraire	VER	VER			imp:pre:2p;ind:pre:2p;	d_i_s|t_R_Ej|e	d_i_s|t_r_ay|ez	0.0	0.34
-distrayons	distREj§	distraire	VER	VER			imp:pre:1p;ind:pre:1p;	d_i_s|t_R_Ej|§	d_i_s|t_r_ay|ons	0.07	0.11
+distrayez	distREje	distraire	VER	VER			imp:pre:2p;ind:pre:2p;	d_i_s|t_R_E|j_e	d_i_s|t_r_a|y_ez	0.0	0.34
+distrayons	distREj§	distraire	VER	VER			imp:pre:1p;ind:pre:1p;	d_i_s|t_R_E|j_§	d_i_s|t_r_a|y_ons	0.07	0.11
 distribua	distRib8a	distribuer	VER	VER			ind:pas:3s;	d_i_s|t_R_i|b_8_a	d_i_s|t_r_i|b_u_a	1.55	0.18
 distribuai	distRib8e	distribuer	VER	VER			ind:pas:1s;	d_i_s|t_R_i|b_8_e	d_i_s|t_r_i|b_u_ai	0.2	0.0
 distribuaient	distRib8E	distribuer	VER	VER			ind:imp:3p;	d_i_s|t_R_i|b_8_E	d_i_s|t_r_i|b_u_aient	1.15	0.18
@@ -37616,7 +37616,7 @@ déblayer	deblEje	déblayer	VER	VER			inf;	d_e|b_l_E|j_e	d_é|b_l_a|y_er	1.55	0.
 déblayera	deblEj°Ra	déblayer	VER	VER			ind:fut:3s;	d_e|b_l_E|j_°|R_a	d_é|b_l_a|y_e|r_a	0.07	0.0
 déblayeur	deblEj9R	déblayeur	ADJ	ADJ	m	s		d_e|b_l_Ej|9_R	d_é|b_l_ay|eu_r	0.0	0.01
 déblayeurs	deblEj9R	déblayeur	NOM	NOM	m	p		d_e|b_l_Ej|9_R_#	d_é|b_l_ay|eu_r_s	0.07	0.0
-déblayez	deblEje	déblayer	VER	VER			imp:pre:2p;ind:pre:2p;	d_e|b_l_Ej|e	d_é|b_l_ay|ez	0.0	0.11
+déblayez	deblEje	déblayer	VER	VER			imp:pre:2p;ind:pre:2p;	d_e|b_l_E|j_e	d_é|b_l_a|y_ez	0.0	0.11
 déblayé	deblEje	déblayer	VER	VER	m	s	par:pas;	d_e|b_l_E|j_e	d_é|b_l_a|y_é	0.54	0.31
 déblayée	deblEje	déblayer	VER	VER	f	s	par:pas;	d_e|b_l_E|j_e_#	d_é|b_l_a|y_é_e	0.07	0.0
 déblayées	deblEje	déblayer	VER	VER	f	p	par:pas;	d_e|b_l_E|j_e_#	d_é|b_l_a|y_é_es	0.14	0.0
@@ -37837,7 +37837,7 @@ débraye	debREj	débrayer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	d_e|b_R_E_
 débrayent	debREj	débrayer	VER	VER			ind:pre:3p;	d_e|b_R_E_j_#	d_é|b_r_a_y_ent	0.07	0.0
 débrayer	debREje	débrayer	VER	VER			inf;	d_e|b_R_E|j_e	d_é|b_r_a|y_er	0.47	0.01
 débrayes	debREj	débrayer	VER	VER			ind:pre:2s;	d_e|b_R_E_j_#	d_é|b_r_a_y_es	0.07	0.01
-débrayez	debREje	débrayer	VER	VER			imp:pre:2p;ind:pre:2p;	d_e|b_R_Ej|e	d_é|b_r_ay|ez	0.0	0.02
+débrayez	debREje	débrayer	VER	VER			imp:pre:2p;ind:pre:2p;	d_e|b_R_E|j_e	d_é|b_r_a|y_ez	0.0	0.02
 débrayé	debREje	débrayer	VER	VER	m	s	par:pas;	d_e|b_R_E|j_e	d_é|b_r_a|y_é	0.27	0.01
 débrayée	debREje	débrayer	VER	VER	f	s	par:pas;	d_e|b_R_E|j_e_#	d_é|b_r_a|y_é_e	0.07	0.0
 débridait	debRidE	débrider	VER	VER			ind:imp:3s;	d_e|b_R_i|d_E	d_é|b_r_i|d_ait	0.07	0.0
@@ -52017,8 +52017,8 @@ extravéhiculaire	EkstRaveikylER	extravéhiculaire	ADJ	ADJ		s		E|ks_t_R_a|v_e_#|
 extrayaient	EkstRajE	extraire	VER	VER			ind:imp:3p;	E|ks_t_R_a|j_E	e|x_t_r_a|y_aient	0.34	0.0
 extrayait	EkstRajE	extraire	VER	VER			ind:imp:3s;	E|ks_t_R_a|j_E	e|x_t_r_a|y_ait	0.95	0.04
 extrayant	EkstRaj@	extraire	VER	VER			par:pre;	E|ks_t_R_a|j_@	e|x_t_r_a|y_ant	0.41	0.04
-extrayez	EkstREje	extraire	VER	VER			imp:pre:2p;ind:pre:2p;	E|ks_t_R_Ej|e	e|x_t_r_ay|ez	0.0	0.18
-extrayions	EkstREj§	extraire	VER	VER			ind:imp:1p;	E|ks_t_R_Ej_#|§	e|x_t_r_ay_i|ons	0.0	0.01
+extrayez	EkstREje	extraire	VER	VER			imp:pre:2p;ind:pre:2p;	E|ks_t_R_E|j_e	e|x_t_r_a|y_ez	0.0	0.18
+extrayions	EkstREjj§	extraire	VER	VER			ind:imp:1p;	E|ks_t_R_E_j|j_§	e|x_t_r_a_y|i_ons	0.0	0.01
 extroverti	EkstRovERti	extroverti	ADJ	ADJ	m	s		E|ks_t_R_o|v_E_R|t_i	e|x_t_r_o|v_e_r|t_i	0.0	0.01
 extrovertie	EkstRovERti	extroverti	ADJ	ADJ	f	s		E|ks_t_R_o|v_E_R|t_i_#	e|x_t_r_o|v_e_r|t_i_e	0.0	0.01
 extrusion	EkstRyzj§	extrusion	NOM	NOM	f	s		E|ks_t_R_y|z_j_§	e|x_t_r_u|s_i_on	0.0	0.03
@@ -56413,7 +56413,7 @@ frayer	fREje	frayer	VER	VER			inf;	f_R_E|j_e	f_r_a|y_er	4.86	1.03
 frayes	fREj	frayer	VER	VER			ind:pre:2s;	f_R_E_j_#	f_r_a_y_es	0.07	0.03
 frayeur	fREj9R	frayeur	NOM	NOM	f	s		f_R_Ej|9_R	f_r_ay|eu_r	5.88	3.43
 frayeurs	fREj9R	frayeur	NOM	NOM	f	p		f_R_Ej|9_R_#	f_r_ay|eu_r_s	1.01	0.43
-frayez	fREje	frayer	VER	VER			imp:pre:2p;ind:pre:2p;	f_R_Ej|e	f_r_ay|ez	0.0	0.26
+frayez	fREje	frayer	VER	VER			imp:pre:2p;ind:pre:2p;	f_R_E|j_e	f_r_a|y_ez	0.0	0.26
 frayons	fREj§	frayer	VER	VER			imp:pre:1p;ind:pre:1p;	f_R_E|j_§	f_r_a|y_ons	0.07	0.01
 frayèrent	fREjER	frayer	VER	VER			ind:pas:3p;	f_R_E|j_E_R_#	f_r_a|y_è_r_ent	0.07	0.0
 frayé	fREje	frayer	VER	VER	m	s	par:pas;	f_R_E|j_e	f_r_a|y_é	0.74	0.27
@@ -70314,7 +70314,7 @@ iodée	jode	ioder	VER	VER,ADJ	f	s	par:pas;	j_o|d_e_#	i_o|d_é_e	0.14	0.0
 ion	j§	ion	NOM	NOM	m	s		j_§	i_on	0.07	0.37
 ionien	jonj5	ionien	ADJ	ADJ	m	s		j_o|n_j_5	i_o|n_i_en	0.07	0.0
 ionienne	jonjEn	ionienne	ADJ	ADJ	f	s		j_o|n_j_E_n_#	i_o|n_i_e_nn_e	0.07	0.01
-ioniennes	jonjEn	ionien	ADJ	ADJ	f			j_o|n_j_E_n_#	i_o|n_i_e_nn_es	0.27	0.0
+ioniennes	jonjEn	ionien	ADJ	ADJ	f	p		j_o|n_j_E_n_#	i_o|n_i_e_nn_es	0.27	0.0
 ioniens	jonj5	ionien	ADJ	ADJ	m	p		j_o|n_j_5_#	i_o|n_i_en_s	0.07	0.0
 ionique	jonik	ionique	ADJ	ADJ		s		j_o|n_i_k_#	i_o|n_i_qu_e	0.07	0.35
 ioniques	jonik	ionique	ADJ	ADJ		p		j_o|n_i_k_#	i_o|n_i_qu_es	0.0	0.1
@@ -87056,7 +87056,7 @@ pagaye	pagaj	pagayer	VER	NOM,VER			ind:pre:3s;	p_a|g_a_j_#	p_a|g_a_y_e	0.14	0.01
 pagayer	pagEje	pagayer	VER	VER			inf;	p_a|g_E|j_e	p_a|g_a|y_er	0.34	0.13
 pagayeur	pagEj9R	pagayeur	NOM	NOM	m	s		p_a|g_Ej|9_R	p_a|g_ay|eu_r	0.07	0.0
 pagayeurs	pagEj9R	pagayeur	NOM	NOM	m	p		p_a|g_Ej|9_R_#	p_a|g_ay|eu_r_s	0.07	0.03
-pagayez	pagEje	pagayer	VER	VER			imp:pre:2p;	p_a|g_Ej|e	p_a|g_ay|ez	0.0	0.09
+pagayez	pagEje	pagayer	VER	VER			imp:pre:2p;	p_a|g_E|j_e	p_a|g_a|y_ez	0.0	0.09
 pagayèrent	pagEjER	pagayer	VER	VER			ind:pas:3p;	p_a|g_E|j_E_R_#	p_a|g_a|y_è_r_ent	0.07	0.0
 pagayé	pagEje	pagayer	VER	VER	m	s	par:pas;	p_a|g_E|j_e	p_a|g_a|y_é	0.14	0.05
 pagaïe	pagaj	pagaïe	NOM	NOM	f	s		p_a|g_a_j_#	p_a|g_a_ï_e	0.74	0.07
@@ -89298,7 +89298,7 @@ payeur	pEj9R	payeur	ADJ	ADJ,NOM	m	s		p_Ej|9_R	p_ay|eu_r	0.0	0.05
 payeurs	pEj9R	payeur	NOM	ADJ,NOM	m	p		p_Ej|9_R_#	p_ay|eu_r_s	0.14	0.14
 payeurs	pEj9R	payeur	ADJ	ADJ,NOM	m	p		p_Ej|9_R_#	p_ay|eu_r_s	0.0	0.01
 payez	pEje	payer	VER	VER			imp:pre:2p;ind:pre:2p;	p_E|j_e	p_a|y_ez	1.01	13.15
-payiez	pEje	payer	VER	VER			ind:imp:2p;	p_Ej_#|e	p_ay_i|ez	0.0	0.55
+payiez	pEjje	payer	VER	VER			ind:imp:2p;	p_E_j|j_e	p_a_y|i_ez	0.0	0.55
 payions	pEjj§	payer	VER	VER			ind:imp:1p;	p_E_j|j_§	p_a_y|i_ons	0.07	0.03
 payons	pEj§	payer	VER	VER			imp:pre:1p;ind:pre:1p;	p_E|j_§	p_a|y_ons	0.74	1.68
 pays	pei	pays	NOM	NOM	m			p_e|i_#	p_a|y_s	241.55	202.57
@@ -101701,7 +101701,7 @@ rayonneur	REjOn9R	rayonneur	NOM	NOM	m	s		R_Ej|O|n_9_R	r_ay|o|nn_eu_r	0.0	0.03
 rayonnez	REjone	rayonner	VER	VER			imp:pre:2p;ind:pre:2p;	R_Ej|o|n_e	r_ay|o|nn_ez	0.0	0.06
 rayonné	REjone	rayonner	VER	VER	m	s	par:pas;	R_Ej|o|n_e	r_ay|o|nn_é	0.07	0.05
 rayons	REj§	rayon	NOM	VER,NOM	m	p		R_Ej|§	r_ay|ons	28.04	7.62
-rayons	REj§	rayer	VER	VER,NOM			imp:pre:1p;ind:pre:1p;	R_Ej|§	r_ay|ons	0.0	0.02
+rayons	REj§	rayer	VER	VER,NOM			imp:pre:1p;ind:pre:1p;	R_E|j_§	r_a|y_ons	0.0	0.02
 rayure	REjyR	rayure	NOM	NOM	f	s		R_E|j_y_R_#	r_a|y_u_r_e	0.61	0.36
 rayures	REjyR	rayure	NOM	NOM	f	p		R_E|j_y_R_#	r_a|y_u_r_es	6.76	2.46
 rayé	REje	rayer	VER	VER,ADJ	m	s	par:pas;	R_E|j_e	r_a|y_é	3.04	2.09
@@ -103845,7 +103845,7 @@ relayer	R°lEje	relayer	VER	VER			inf;	R_°|l_E|j_e	r_e|l_a|y_er	1.01	0.93
 relayera	R°lEj°Ra	relayer	VER	VER			ind:fut:3s;	R_°|l_E|j_°|R_a	r_e|l_a|y_e|r_a	0.07	0.01
 relayerai	R°lEj°Re	relayer	VER	VER			ind:fut:1s;	R_°|l_E|j_°|R_e	r_e|l_a|y_e|r_ai	0.0	0.1
 relayeur	R°lEj9R	relayeur	NOM	NOM	m	s		R_°|l_E|j_9_R	r_e|l_a|y_eu_r	0.0	0.02
-relayez	R°lEje	relayer	VER	VER			imp:pre:2p;	R_°|l_Ej|e	r_e|l_ay|ez	0.0	0.05
+relayez	R°lEje	relayer	VER	VER			imp:pre:2p;	R_°|l_E|j_e	r_e|l_a|y_ez	0.0	0.05
 relayions	R°lEjj§	relayer	VER	VER			ind:imp:1p;	R_°|l_E_j|j_§	r_e|l_a_y|i_ons	0.07	0.0
 relayons	R°lEj§	relayer	VER	VER			imp:pre:1p;ind:pre:1p;	R_°|l_E|j_§	r_e|l_a|y_ons	0.07	0.02
 relayâmes	R°lEjam	relayer	VER	VER			ind:pas:1p;	R_°|l_E|j_a_m_#	r_e|l_a|y_â_m_es	0.14	0.0
@@ -109951,9 +109951,9 @@ réessaieront	ReesER§	réessayer	VER	VER			ind:fut:3p;	R_e|e|s_E_#|R_§	r_é|e|
 réessayant	ReesEj@	réessayer	VER	VER			par:pre;	R_e|e|s_E|j_@	r_é|e|ss_a|y_ant	0.07	0.0
 réessaye	ReesEj	réessayer	VER	VER			imp:pre:2s;ind:pre:1s;ind:pre:3s;	R_e|e|s_Ej_#	r_é|e|ss_ay_e	0.0	0.37
 réessayer	ReesEje	réessayer	VER	VER			inf;	R_e|e|s_E|j_e	r_é|e|ss_a|y_er	0.07	2.4
-réessayez	ReesEje	réessayer	VER	VER			imp:pre:2p;ind:pre:2p;	R_e|e|s_Ej|e	r_é|e|ss_ay|ez	0.0	0.61
-réessayiez	ReesEje	réessayer	VER	VER			ind:imp:2p;	R_e|e|s_Ej_#|e	r_é|e|ss_ay_i|ez	0.0	0.01
-réessayons	ReesEj§	réessayer	VER	VER			imp:pre:1p;ind:pre:1p;	R_e|e|s_Ej|§	r_é|e|ss_ay|ons	0.0	0.31
+réessayez	ReesEje	réessayer	VER	VER			imp:pre:2p;ind:pre:2p;	R_e|e|s_E|j_e	r_é|e|ss_a|y_ez	0.0	0.61
+réessayiez	ReesEjje	réessayer	VER	VER			ind:imp:2p;	R_e|e|s_E_j|j_e	r_é|e|ss_a_y|i_ez	0.0	0.01
+réessayons	ReesEj§	réessayer	VER	VER			imp:pre:1p;ind:pre:1p;	R_e|e|s_E|j_§	r_é|e|ss_a|y_ons	0.0	0.31
 réessayé	ReesEje	réessayer	VER	VER	m	s	par:pas;	R_e|e|s_Ej|e	r_é|e|ss_ay|é	0.0	0.16
 réexamen	ReEgzam5	réexamen	NOM	NOM	m	s		R_e|E_gz|a|m_5	r_é|e_x|a|m_en	0.0	0.07
 réexaminant	ReEgzamin@	réexaminer	VER	VER			par:pre;	R_e|E_gz|a|m_i|n_@	r_é|e_x|a|m_i|n_ant	0.07	0.0
@@ -116874,7 +116874,7 @@ soustraits	sustRE	soustraire	VER	VER	m	p	par:pas;	s_u_s|t_R_E_#	s_ou_s|t_r_ai_ts
 soustrayaient	sustREjE	soustraire	VER	VER			ind:imp:3p;	s_u_s|t_R_Ej|E	s_ou_s|t_r_ay|aient	0.07	0.0
 soustrayait	sustREjE	soustraire	VER	VER			ind:imp:3s;	s_u_s|t_R_Ej|E	s_ou_s|t_r_ay|ait	0.27	0.0
 soustrayant	sustREj@	soustraire	VER	VER			par:pre;	s_u_s|t_R_Ej|@	s_ou_s|t_r_ay|ant	0.2	0.0
-soustrayez	sustREje	soustraire	VER	VER			imp:pre:2p;	s_u_s|t_R_Ej|e	s_ou_s|t_r_ay|ez	0.0	0.03
+soustrayez	sustREje	soustraire	VER	VER			imp:pre:2p;	s_u_s|t_R_E|j_e	s_ou_s|t_r_a|y_ez	0.0	0.03
 soutachait	sutaSE	soutacher	VER	VER			ind:imp:3s;	s_u|t_a|S_E	s_ou|t_a|ch_ait	0.07	0.0
 soutache	sutaS	soutache	NOM	NOM	f	s		s_u|t_a_S_#	s_ou|t_a_ch_e	0.07	0.0
 soutaches	sutaS	soutache	NOM	NOM	f	p		s_u|t_a_S_#	s_ou|t_a_ch_es	0.07	0.0
@@ -132895,7 +132895,7 @@ zézettes	zezEt	zézette	NOM	NOM	f	p		z_e|z_E_t_#	z_é|z_e_tt_es	0.27	0.0
 égaye	egEj	égayer	VER	VER			imp:pre:2s;ind:pre:3s;	e|g_Ej_#	é|g_ay_e	0.54	0.07
 égayer	egEje	égayer	VER	VER			inf;	e|g_E|j_e	é|g_a|y_er	1.42	1.0
 égayerais	egEj°RE	égayer	VER	VER			cnd:pre:1s;	e|g_E|j_°|R_E	é|g_a|y_e|r_ais	0.0	0.01
-égayez	egEje	égayer	VER	VER			imp:pre:2p;	e|g_Ej|e	é|g_ay|ez	0.0	0.01
+égayez	egEje	égayer	VER	VER			imp:pre:2p;	e|g_E|j_e	é|g_a|y_ez	0.0	0.01
 égayèrent	egEjER	égayer	VER	VER			ind:pas:3p;	e|g_Ej|E_R_#	é|g_ay|è_r_ent	0.07	0.0
 égayé	egEje	égayer	VER	VER	m	s	par:pas;	e|g_Ej|e	é|g_ay|é	0.95	0.06
 égayée	egEje	égayer	VER	VER	f	s	par:pas;	e|g_Ej|e_#	é|g_ay|é_e	0.54	0.01

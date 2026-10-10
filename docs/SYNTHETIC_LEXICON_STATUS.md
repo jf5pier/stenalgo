@@ -143,7 +143,7 @@ The glide fix of `lexique.py` only fires for the biphoneme `wa`; `criions` stays
 unit). Current Wiktionary has `kʁij.jɔ̃`. **Decided and implemented 2026-10-09** (`docs/LEXICON_COMPLETION_CONTINUATION.md` §2): the
 glide opens the next syllable as its own unit (`criions` `k_R_i|j_§`), doubled `j|j` after `y` and `ill` (`essuyions` `8_ij|j_§`, `brillions`
 `i_j|j_§`), and a letter carrying a vowel and a glide gets a repeat unit `=` (`cria` `k_R_i|j_a` / `c_r_i|=_a`); rule `splitGlides` in
-`src/mixterules.py`, 481 verb rows. Still open: the effect on strokes, homophones and the elicitation (not measured), and the Synthetic
+`src/mixterules.py`, 481 verb rows. 2026-10-10: case G adds the fused `Ej` of the letters `ay` (`abstrayons` `Ej|§` -> `E|j_§`, `abstrayions` `Ej_#|§` -> `E_j|j_§`, `phon` gains a `j`; 20 Mixte rows: `balayons`, `distrayons`, `extrayions`, `payiez`...), which removed the `abstrayions`/`abstrayons` collision. Still open: the effect on strokes, homophones and the elicitation (not measured), and the Synthetic
 regeneration on the new donors.
 
 ### 6.6 Leftover rows against the committed file

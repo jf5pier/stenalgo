@@ -67,6 +67,9 @@ def splitGlides(row: dict[str, Any]) -> dict[str, Any]:
     - B  `-yions`/`-yiez` (letters `y` + `i`): `8_ij_#|§` -> `8_ij|j_§` (`phon` gains a `j`: the doubled glide);
     - C  `-illions`/`-illiez`, `-oyiez` (letters `ill`/`ll`/`y` + `i`): `i|j_#_§` -> `i_j|j_§` (`phon` gains a `j`);
     - F  the letters `lli` (`appareillions`, `surveillions`): one `j` or the fused `jj` -> `j|j`, the second `j` on a repeat unit;
+    - G  the fused `Ej` unit on the letters `ay` before a first- or second-person plural ending (`abstrayons` `Ej|§`, `abstrayions`
+         `Ej_#|§`): `-ayons`/`-ayez` `E|j_§` (letters `a|y_ons`, `phon` unchanged), `-ayions`/`-ayiez` `E_j|j_§` (letters
+         `a_y|i_ons`, `phon` gains a `j`), the shapes `payons` and `payions` already have;
     - E  one letter carrying a vowel and a glide (`cria` `k_R_ij|a`, `accablions` `b_l_ij|§`, `devrions` `v_R_ij|§`): the fused
          `ij` unit -> `i|j`, the glide on a repeat unit (`c_r_i|=_a`, src/orthounits.py); `phon` unchanged.
     Only a verb row whose two breakdowns pair unit for unit and break at the same places is touched; the result is left alone
@@ -79,6 +82,24 @@ def splitGlides(row: dict[str, Any]) -> dict[str, Any]:
     if len(sounds) != len(letters) or soundBreaks != letterBreaks:
         return row
     ending = re.search(r"(ions|iez)$", row["ortho"]) is not None
+    if re.search(r"(ions|iez|ons|ez)$", row["ortho"]):
+        for k in range(len(sounds) - 1):
+            if sounds[k] != "Ej" or letters[k] != "ay":
+                continue
+            if sounds[k + 1] in ("§", "e") and k in soundBreaks:
+                sounds2 = sounds[:k] + ["E", "j"] + sounds[k + 1:]
+                letters2 = letters[:k] + ["a", "y"] + letters[k + 1:]
+                breaks2 = {b if b <= k else b + 1 for b in soundBreaks}
+                return _glideRow(row, sounds2, letters2, breaks2)
+            if sounds[k + 1] == SILENT and letters[k + 1] == "i" and k + 2 < len(sounds) and sounds[k + 2] in ("§", "e") \
+                    and k + 1 in soundBreaks:
+                sounds2 = sounds[:k] + ["E", "j", "j"] + sounds[k + 2:]
+                letters2 = letters[:k] + ["a", "y", "i"] + letters[k + 2:]
+                breaks2 = {b if b <= k else b + 1 for b in soundBreaks}
+                breaks2.discard(k + 1)
+                breaks2.discard(k + 2)
+                breaks2.add(k + 1)
+                return _glideRow(row, sounds2, letters2, breaks2)
     for k in range(len(sounds) - 1):
         following = sounds[k + 2] if k + 2 < len(sounds) else ""
         if sounds[k] == "ij" and sounds[k + 1] == SILENT and letters[k + 1] == "i" and following in ("§", "e") \

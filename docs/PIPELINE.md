@@ -470,6 +470,13 @@ identity (24 cases, item B9). `borough` has an `orthosyll_cv` that does not spel
   fixed forms. 13 rows.
 - **absous/dissous → absout/dissout (S1.9.7)** lexique.py:1238-1244 — VER only; the ADJ
   homographs are left alone (:525-533). 2 rows.
+- **Accepted Mixte rules, correction rows and tag corrections (S1.9.8)** lexique.py `outputMixedLexique`, after the loop, on the output
+  rows, in this order: (1) the systematic rules of `src/mixterules.py` whose decision is `accept` (`splitGlides`: the verb glide cases A, B,
+  C, E, F, and G, the fused `Ej` of the letters `ay` before `-ons`/`-ez`/`-ions`/`-iez`, split into `E|j_§` / `E_j|j|j_§` as `payons` and
+  `payions` already are; `dropStrayGlide`); (2) the phonology correction rows (`resources/mixteCorrections.tsv`, generated, and the
+  hand-found `resources/mixteManualCorrections.tsv`; `phon`, `syll_cv`, `orthosyll_cv`); (3) the tag corrections
+  (`resources/mixteTagCorrections.tsv`, `applyTagCorrections` of `src/mixtecorrections.py`: `genre` / `nombre` of a row whose Lexique383 tag
+  is wrong; one row, `ioniennes` f, number empty -> `p`). A correction key that matches no row, or several, fails the build.
 
 The **reform rewrites** (Apply reform ortho rewrite (S1.9.3) through absous/dissous →
 absout/dissout (S1.9.7)) change only `ortho`/`orthosyll_cv`, never `phon`.

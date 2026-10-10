@@ -692,7 +692,7 @@
    "keyNames": [
     "-R"
    ],
-   "label": "imparfait, subjonctif"
+   "label": "conditionnel, infinitif"
   },
   {
    "keys": [
@@ -701,7 +701,7 @@
    "keyNames": [
     "-l"
    ],
-   "label": "conditionnel, infinitif"
+   "label": "imparfait, subjonctif"
   }
  ]
 }

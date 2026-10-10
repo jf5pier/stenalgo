@@ -104,6 +104,7 @@ Start from the current tree (glide-/j/ fix and the K=7 elicitation answers, both
   feeds `dictionary.py` and `src/affixes.py`), `src/verbparadigm.py` (spelling check at the splice, `_padSilentUnits`, the unit-aligned donor tables), `check_lexicon_features.check_units`,
   `src/diffsignature.py` (resolve `=` to the previous grapheme), `lexique.py:1043` (graphem/phonem check), `util/reportVowelHarmony.py`. (`&` was rejected: special in `sed`/`awk` replacement strings; `=` is inert there, in regexes, TSV, JSON and HTML.)
   Mixte defects to correct on the way: `marchiez` (stray `i`, `maRSije` -> `maRSje`), `riant` (`Rj@` -> `Rij@`), `-yer` 1p/2p inconsistencies (`croyions` jj / `croyiez` j).
+  2026-10-10: the VERB `ay` rows before `-ons`/`-ez`/`-ions`/`-iez` are done (case G of `splitGlides`, 20 rows); the fused `Ej` before other vowels (`balayé`, `balaya`) is still fused.
   Later, with the non-verbs: `crayon` `k_R_Ej|@` (fused `Ej` for the grapheme `ay`) should become `k_R_E|j_@` (`c_r_a|y_on`), likewise the 229 `ay` rows, and the `ill`/`ll` lexicon (`appareillions`, `surveillions`).
 - [ ] **Install instructions: document the external downloads (raised 2026-10-08).** Add to `README.md` (the install/setup part, now only a sentence about Morphalou at "The NOM/ADJ cross-checkers
   additionally need ...") and to the prerequisites in `CLAUDE.md` / `docs/PIPELINE.md`: (1) **Morphalou 3.1** (LGPL-LR), needed only to rebuild `resources/morphalouNomAdjForms.tsv` with
