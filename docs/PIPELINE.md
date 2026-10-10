@@ -55,7 +55,7 @@ The real dependency order. Steps 0 and 1 and the human loop 4h are run by hand, 
 | 11 | `python -m util.export_expression_lessons`, then `python -m util.export_expression_sentences`, then `python -m util.export_expression_definitions` | Expression Abbreviation Lessons (S10a, S10b, S10c) | the trainer's expressions track, abbreviated sentences, and the Definitions page's attach and composed entries | After steps 8-9 (needs `practice-words.json` for the sentences). Reads the committed expression rule set and pool in `scratch/`; nothing is selected here. |
 | opt | `python -m util.check_conjugation_disambiguation_order` | Elicitation Phase: Answer Collection, validator | checking answers | Writes `conjugation_disambiguation_report.json` (gitignored). |
 
-**The orchestrated entrypoint.** `python dictionary.py` (no arguments) runs the whole chain
+**The orchestrated entrypoint.** `python dictionary.py` (`--optimize-keyboard` adds the Keyboard Layout Optimization (S4) step after the converged Synthetic lexicon: `util.optimize_keyboard`, seeded from `starboard3h.json`, writing `starboard3h_optimized.json` only; off by default) runs the whole chain
 itself: table steps 3-9 plus the four steady-state Synthetic Lexicon Building (S2) appenders
 (`util.completeVerbParadigms`, `util.generateMissingNomAdjForms`, `util.fixPayerDualFormGaps`,
 `util.fixAsseoirDualFormGaps`, all with `--apply`) through `python -m
@@ -473,8 +473,8 @@ identity (24 cases, item B9). `borough` has an `orthosyll_cv` that does not spel
 - **Accepted Mixte rules, correction rows and tag corrections (S1.9.8)** lexique.py `outputMixedLexique`, after the loop, on the output
   rows, in this order: (1) the systematic rules of `src/mixterules.py` whose decision is `accept` (`splitGlides`: the verb glide cases A, B,
   C, E, F, and G, the fused `Ej` of the letters `ay` before `-ons`/`-ez`/`-ions`/`-iez`, split into `E|j_§` / `E_j|j|j_§` as `payons` and
-  `payions` already are; `dropStrayGlide`); (2) the phonology correction rows (`resources/mixteCorrections.tsv`, generated, and the
-  hand-found `resources/mixteManualCorrections.tsv`; `phon`, `syll_cv`, `orthosyll_cv`); (3) the tag corrections
+  `payions` already are; `dropStrayGlide`; `schwaOfE`, group `9122e600e4`: a verb's `2` on the plain letter `e` is the stem schwa `°`, 62 rows, `flageller` excepted, `eu` rows untouched); (2) the phonology correction rows (`resources/mixteCorrections.tsv`, generated, and the
+  hand-found `resources/mixteManualCorrections.tsv`, which also holds the dropped stem schwa of the infinitives `rejeter` and `épousseter`; `phon`, `syll_cv`, `orthosyll_cv`); (3) the tag corrections
   (`resources/mixteTagCorrections.tsv`, `applyTagCorrections` of `src/mixtecorrections.py`: `genre` / `nombre` of a row whose Lexique383 tag
   is wrong; one row, `ioniennes` f, number empty -> `p`). A correction key that matches no row, or several, fails the build.
 
@@ -495,7 +495,7 @@ later companion script.
 | fixAbregerFutureAccent | conjugations-fr.xml | no | n/a | abr:éger futur/cnd `è`→`é` |
 | fixAdvenirRenaitreGaps | conjugations-fr.xml | no | n/a | adv:enir 3p présent; ren:aître participles |
 | fixAsseoirDualFormGaps | Synthetic (append) | no | n/a | ass:eoir alternants (S2.3) |
-| fixAsseoirDualFormGapsManual | Lexique383 tags, Synthetic | no | yes | 21 hand rows (now `resources/syntheticManualRows.tsv`, appended by S2.4) + missing tags |
+| fixAsseoirDualFormGapsManual | Lexique383 tags, Synthetic | no | yes | 21 hand rows (now `resources/syntheticManualRows.tsv`, appended by S2.4, which holds 218 rows since 2026-10-10) + missing tags |
 | fixAyGraphemeEjQuality | Lexique383, Mixte | yes | yes† | `ay` is always open `Ej` |
 | fixAyGraphemeInfraPhono | Infra | no | yes | same rule in Infra |
 | fixCeSchwa | Lexique383, Infra, Mixte | yes | yes | `ce` /s2/ → /s°/ |

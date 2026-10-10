@@ -184,6 +184,7 @@ python -m util.export_spelling_lessons       # Spelling Lessons (S10f): the trai
 # Outputs: steno-trainer/public/data/spelling-lessons.json (11 lessons + the 156 letter strokes for the Definitions page).
 
 python dictionary.py                         # the orchestrator over everything from S2 to S10
+# --optimize-keyboard: also runs S4 (util.optimize_keyboard, seeded from starboard3h.json, writes starboard3h_optimized.json only) after S2; off by default.
 # Prerequisites: as above (skips nothing; aborts on the first failing step).
 # Outputs: all of the S2-S9 outputs above, in dependency order; per-step wall times
 # appended to pipeline_timings.log (gitignored).
@@ -239,7 +240,7 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 
 ## Verification approach
 
-- `pytest src/test/` must pass after any `.py` change (1521 tests at the time of writing, expression layer, affix layer, lessons exporter and the Mixte rules included; the one known failure is the stale-expressions `plover_plugin_test` until the expressions file is rebuilt).
+- `pytest src/test/` must pass after any `.py` change (1534 tests at the time of writing, expression layer, affix layer, lessons exporter and the Mixte rules included; the one known failure is the stale-expressions `plover_plugin_test` until the expressions file is rebuilt).
 - `mypy` (bare, scope and options in `mypy.ini`) must report no issues after any `.py` change.
 - Behaviour-preserving changes are proven by a full rebuild following the rebuild table in
   `docs/PIPELINE.md`, comparing the md5s of `phonetic_theory.tsv`, `disambiguated_theory.tsv`,
