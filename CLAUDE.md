@@ -183,6 +183,13 @@ python -m util.export_spelling_lessons       # Spelling Lessons (S10f): the trai
 # Prerequisites: plover_stenalgo_spelling.json (util.export_plover_spelling), starboard3h.json, the authored resources/spellingLessons.json.
 # Outputs: steno-trainer/public/data/spelling-lessons.json (11 lessons + the 156 letter strokes for the Definitions page).
 
+python -m util.compare_theories --pluvier-dict PLUVIER/dicofr.json --pluvier-dict PLUVIER/dicofr-plural.json --pluvier-dict PLUVIER/verbs.json --pluvier-dict PLUVIER/tao_la_salle_simple.json --pluvier-dup PLUVIER/dup.json --stenalgo-abbreviations affix_abbreviations.tsv   # hand-run diagnostic: Stenalgo (Starboard) vs Pluvier (Ireland); PLUVIER = the clone's resources/, files lowest priority first (never dicofr.json alone: it lacks the TAO briefs)
+# Stenalgo long form (the dictionary) and short form (+ the affix abbreviations); Pluvier short (briefest outline) and long (longest) form.
+# Coverage, collisions, strokes per word (also with the extra stroke of a collision), chord cost (Starboard and Ireland models) and phoneme-order violations, frequency-weighted over Lexique383 (--freq films|livres).
+# Prerequisites: plover_stenalgo_dictionary.json, starboard3h.json, resources/Lexique383.tsv, resources/pluvierPhonemeKeys.tsv, a Pluvier clone; no pickle.
+# Outputs: theory_comparison.json, theory_comparison.md in --out (default repo root, untracked). ~40 s.
+# Reference: docs/THEORY_COMPARISON.md; findings of the first runs: docs/PLUVIER_COMPARISON_2026-10-10.md.
+
 python dictionary.py                         # the orchestrator over everything from S2 to S10
 # --optimize-keyboard: also runs S4 (util.optimize_keyboard, seeded from starboard3h.json, writes starboard3h_optimized.json only) after S2; off by default.
 # Prerequisites: as above (skips nothing; aborts on the first failing step).

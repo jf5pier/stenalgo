@@ -1,0 +1,81 @@
+# Pluvier phoneme -> Ireland keys, copied from github Pluvier clone commit 47ab823 (pluvier.py, src/steno_encoding.py); source 'added' rows are this repo's.
+part	phonemes	keys	source
+nucleus	a	A	pluvier.py VOWELS
+nucleus	e	E	pluvier.py VOWELS
+nucleus	2	AO	pluvier.py VOWELS
+nucleus	9	AO	pluvier.py VOWELS
+nucleus	E	AEU	pluvier.py VOWELS
+nucleus	i	EU	pluvier.py VOWELS
+nucleus	o	OE	pluvier.py VOWELS
+nucleus	O	O	pluvier.py VOWELS
+nucleus	y	U	pluvier.py VOWELS
+nucleus	u	OU	pluvier.py VOWELS
+nucleus	5	EUFR	pluvier.py VOWELS
+nucleus	8i	AU	pluvier.py DIPHTONGS (last duplicate wins)
+nucleus	j2	AOEU	pluvier.py DIPHTONGS (last duplicate wins)
+nucleus	je	AE	pluvier.py DIPHTONGS (last duplicate wins)
+nucleus	ja	RA	pluvier.py DIPHTONGS (last duplicate wins)
+nucleus	jO	AO	pluvier.py DIPHTONGS (last duplicate wins)
+nucleus	j§	AO	pluvier.py DIPHTONGS (last duplicate wins)
+nucleus	wa	OEU	pluvier.py DIPHTONGS (last duplicate wins)
+nucleus	w5	OEUPB	pluvier.py DIPHTONGS (last duplicate wins)
+nucleus	wi	AOU	pluvier.py DIPHTONGS (last duplicate wins)
+nucleus	j5	AEPB	pluvier.py DIPHTONGS (last duplicate wins)
+nucleus	ey	EU	pluvier.py DIPHTONGS (last duplicate wins)
+nucleus	ya	WA	pluvier.py DIPHTONGS (last duplicate wins)
+nucleus	ij	-LZ	pluvier.py DIPHTONGS (last duplicate wins)
+nucleus	jo	AO	pluvier.py DIPHTONGS (last duplicate wins)
+onset	b	PW	pluvier.py CONSONANTS_LHS
+onset	d	TK	pluvier.py CONSONANTS_LHS
+onset	f	TP	pluvier.py CONSONANTS_LHS
+onset	g	TKPW	pluvier.py CONSONANTS_LHS
+onset	k	K	pluvier.py CONSONANTS_LHS
+onset	l	HR	pluvier.py CONSONANTS_LHS
+onset	m	PH	pluvier.py CONSONANTS_LHS
+onset	n	TPH	pluvier.py CONSONANTS_LHS
+onset	p	P	pluvier.py CONSONANTS_LHS
+onset	R	R	pluvier.py CONSONANTS_LHS
+onset	s	S	pluvier.py CONSONANTS_LHS
+onset	S	SH	pluvier.py CONSONANTS_LHS
+onset	t	T	pluvier.py CONSONANTS_LHS
+onset	v	W	pluvier.py CONSONANTS_LHS
+onset	8	W	pluvier.py CONSONANTS_LHS
+onset	j	KWR	pluvier.py CONSONANTS_LHS
+onset	z	SWR	pluvier.py CONSONANTS_LHS
+onset	Z	SKWR	pluvier.py CONSONANTS_LHS
+onset	gz	KP	pluvier.py CONSONANT_PAIRS_LHS
+onset	ps	S	pluvier.py CONSONANT_PAIRS_LHS
+onset	pn	TPH	pluvier.py CONSONANT_PAIRS_LHS
+onset	kw	KW	pluvier.py CONSONANT_PAIRS_LHS
+onset	tS	SK	pluvier.py CONSONANT_PAIRS_LHS
+coda	v	F	pluvier.py CONSONANTS_RHS (last duplicate wins)
+coda	l	FL	pluvier.py CONSONANTS_RHS (last duplicate wins)
+coda	b	B	pluvier.py CONSONANTS_RHS (last duplicate wins)
+coda	n	PB	pluvier.py CONSONANTS_RHS (last duplicate wins)
+coda	g	G	pluvier.py CONSONANTS_RHS (last duplicate wins)
+coda	d	D	pluvier.py CONSONANTS_RHS (last duplicate wins)
+coda	z	Z	pluvier.py CONSONANTS_RHS (last duplicate wins)
+coda	k	BG	pluvier.py CONSONANTS_RHS (last duplicate wins)
+coda	m	PL	pluvier.py CONSONANTS_RHS (last duplicate wins)
+coda	Z	G	pluvier.py CONSONANTS_RHS (last duplicate wins)
+coda	S	FP	pluvier.py CONSONANTS_RHS (last duplicate wins)
+coda	N	PG	pluvier.py CONSONANTS_RHS (last duplicate wins)
+coda	tR	TS	pluvier.py CONSONANT_PAIRS_RHS
+coda	st	*S	pluvier.py CONSONANT_PAIRS_RHS
+coda	ks	BGS	pluvier.py CONSONANT_PAIRS_RHS
+coda	bZ	PBLG	pluvier.py CONSONANT_PAIRS_RHS
+coda	dZ	PBLG	pluvier.py CONSONANT_PAIRS_RHS
+coda	sm	FLP	pluvier.py CONSONANT_PAIRS_RHS
+coda	kR	RBG	pluvier.py CONSONANT_PAIRS_RHS
+coda	vR	FR	pluvier.py CONSONANT_PAIRS_RHS
+coda	fR	FR	pluvier.py CONSONANT_PAIRS_RHS
+nucleus	°		src/steno_encoding.py VOWELS/CHUNKS (§ written ON there, OPB here)
+nucleus	@	APB	src/steno_encoding.py VOWELS/CHUNKS (§ written ON there, OPB here)
+nucleus	§	OPB	src/steno_encoding.py VOWELS/CHUNKS (§ written ON there, OPB here)
+nucleus	1	U	src/steno_encoding.py VOWELS/CHUNKS (§ written ON there, OPB here)
+onset	w	W	added
+coda	t	T	added (plain letter keys; absent from pluvier.py)
+coda	s	S	added (plain letter keys; absent from pluvier.py)
+coda	p	P	added (plain letter keys; absent from pluvier.py)
+coda	R	R	added (plain letter keys; absent from pluvier.py)
+coda	f	F	added (plain letter keys; absent from pluvier.py)

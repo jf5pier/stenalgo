@@ -586,6 +586,38 @@ Fingers assignments :
         strokeCostCache[memoKey] = strokeCost
         return strokeCost
 
+    def getChordCost(self, stroke: Stroke) -> int | None:
+        """
+        Cost of pressing a whole chord (any keys of the board, reserved keys included) without knowing its
+        syllabic part: the finger-table cost of every finger, plus the shape cost of the onset keys (2..9) and of
+        the coda keys (16..25) taken separately, then the same multi-finger discount as `getStrokeCost`. For a
+        stroke of onset keys only it equals `getStrokeCost(stroke, "onset")`, likewise for the coda and (no shape
+        term) the nucleus. None when some finger's key union is not a legal keypress.
+        """
+        chordCostCache: dict[Stroke, int | None] = self.__dict__.setdefault("_chordCostCache", {})
+        if stroke in chordCostCache:
+            return chordCostCache[stroke]
+        cost: int = 0
+        fingerInUse: set[str] = set()
+        result: int | None = None
+        legal = True
+        for finger in self._possibleKeypress.fingers:
+            fingerKeypress = self._possibleKeypress[finger]
+            combo = tuple(sorted(set(k for k in stroke if (k,) in fingerKeypress)))
+            if combo not in fingerKeypress:
+                legal = False
+                break
+            if combo:
+                fingerInUse.add(finger)
+            cost += fingerKeypress[combo]
+        if legal:
+            onsetKeys = tuple(sorted(k for k in stroke if 2 <= k <= 9))
+            codaKeys = tuple(sorted(k for k in stroke if 16 <= k <= 25))
+            cost += self.getStrokeShapeCost(onsetKeys) + self.getStrokeShapeCost(codaKeys)
+            result = int(cost * 0.85 ** len(fingerInUse))
+        chordCostCache[stroke] = result
+        return result
+
     def _strokeZigZagCost(self, stroke: Stroke) -> int:
         s1, s2 = stroke
         if (s1 % 2 == 0 and s2 % 2 == 1 and s2 - s1 == 3):
