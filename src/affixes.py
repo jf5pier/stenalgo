@@ -469,7 +469,7 @@ def growScopedForms(parent: Candidate, decisions: Decisions) -> list[Candidate]:
 
 
 TOP_WORDS_EXCLUDED = 200  # 2026-09-27 (user decision): the N most frequent distinct words earn
-                          # their own dedicated stenogram in the real theory regardless of shape
+                          # their own dedicated outline in the real theory regardless of shape
                           # (e.g. "jamais" was propping up 99.7% of the "ja-" prefix rule's score),
                           # so they must not count toward -- or inflate -- any affix rule's carrier
                           # frequency; monosyllabic words get the same treatment (one stroke

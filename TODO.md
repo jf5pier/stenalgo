@@ -27,6 +27,35 @@ cleptomanie/kleptomanie, séfarade/sépharade) or the SAME word whose forms were
   other word, is ranked by the form's own frequency decade, category and frequency. Ranking by the lemma first everywhere was measured and rejected: +17% mark keys typed, since
   the rare form of a frequent lemma (`a` of avoir) then takes the unmarked stroke over a frequent word (`à`).
 
+## Branch TODO — unpressable base codas reach the theory (2026-10-11)
+
+Found while measuring a hypothetical "conjugation key attached to the last stroke" (not a cause: the problem is in the BASE strokes, before any discriminator key). `Starboard.getStrokeCost(coda, "coda")`
+is `None` for some coda chords that the phonetic theory nevertheless assigns to real words, so those words get an outline the keyboard cannot press. Measured 2026-10-11 on the 448 words whose
+base last stroke is already unpressable (`scratchpad` script, not kept): 431 end in the coda `(22, 23, 25)` = `z` (22+23) + `m` (25), i.e. the plural `-ismes` nouns (absentéismes, absolutismes, académismes,
+activismes, affairismes); `(22, 25)` n+m (hymnes, indemnes, démènent, promènent, 4); `(23, 24)` (belges, bolges, 3); `(19, 23, 24)` (bulges, 1). All four chords return `None` for the bare coda.
+
+- [ ] **1. Find how it happens.** Which step lets a `None`-cost chord through? Candidates: the layout solve (S4) models only single phonemes and biphonemes, not every phoneme-cluster coda; Phonetic Theory Building (S5) composes
+  a coda from per-phoneme keys without checking `getStrokeCost`; the pressability check exists only in the Realization Phase (`_feasible`) and for the number/spelling reserved chords. Trace `absentéismes` from
+  `Dictionary.buildPhoneticTheory` to its stroke and name the missing check.
+- [ ] **2. Measure.** (`docs/CONJUGATION_FUSION_STATS.md` "baseUnpressable" already counts 893 words whose last base stroke is unpressable: 870 in `(22, 23, 25)`, also `(22, 24, 25)` ponchs/french/brunch/lunch.) Count every word of the phonetic theory (and of the disambiguated theory, extra strokes and star/hash marks included) with any stroke whose chord has no cost, by part (onset/nucleus/coda) and by
+  frequency; the 448 above only counts the last stroke of words that need a conjugation group.
+- [ ] **3. Decide the fix** with the user: a pressability step in S5 that splits the cluster over two strokes (as for an unpressable onset), an S4 constraint, or a documented exception list. Add the missing step to
+  `docs/PIPELINE.md` and a test that fails on any exported outline with a `None` cost.
+- Correction of my 2026-10-11 reading: I first explained the 442 group-5 words as "17 added to a crowded coda makes a 4-key chord". The base coda is already unpressable without the 17.
+
+## Branch TODO — conjugation key fused into the last stroke instead of the extra stroke (2026-10-11)
+
+Question: could the 7 conjugation keypress groups be an attached suffix key (united with the word's last stroke) instead of the extra coda stroke? Measured 2026-10-11 with
+`python -m util.analyze_conjugation_fusion` (method and tables in `docs/CONJUGATION_FUSION_STATS.md`; star/hash marks left out): of 139,757 words needing a group, 91.5% stay clean (71.5% of frequency),
+2.9% + 0.1% hit a same-lemma conflict, 1.6% a NEW cross-lemma one (8.3% of frequency), 0.1% only an affix abbreviation (1.6% of frequency); 3,484 words absorb the key (it is already in their coda).
+Worst groups: 3 imparfait+subjonctif (-l, 32% same-lemma: fasse/fassent) and 5 nbr_p+p (-s, 4.4%: livres/livre, allés/allers).
+
+- [ ] **1. Decide whether the saving is worth it** (strokes per word saved vs the 3% same-lemma conflicts); absorption (key already in the stem's coda: -s, -d, -t) is the main cause, so a fusion would need an
+  extra-stroke fallback for those words only, or keys that cannot be a stem coda.
+- [ ] **2. Check the star/hash budget** (4 lemmas per cluster) against the 2,247 NEW cross-lemma pairs the fusion would add.
+- [ ] **3. Rerun the diagnostic after the unpressable-coda fix** (section above): its `unpressable` rows mix fusion-made and base-made cases (`baseUnpressable` lists the latter).
+- Not measured: the fusion's chord cost (a fused chord can cost more than a one-key extra stroke), the real star/hash marks on top, the alternate readings of self-homographs in the per-group counts.
+
 ## Branch TODO — make LexiqueSynthetic.tsv fully regenerable (2026-10-08)
 
 Why: `resources/LexiqueSynthetic.tsv` (S2) is append-only and was edited by hand-run `util/fix*.py` scripts, so it is not a function of the committed inputs. Verified 2026-10-08
@@ -405,6 +434,38 @@ docs in `docs/PIPELINE.md` S8.10. Open items, most important first:
   Still open: low-mass rules (`je ne`, `je me`, `ce qu' il`, `pas le`) are worth reviewing; Stage C feedback loop is a v1 heuristic (6 rounds).
 - Decided 2026-10-03: no que briefs (`QUE_BRIEF_BUDGET` removed); adjacent hostless attaches merge (`attachCluster`);
   a brief-wins-when-attach-fails fallback was measured (+2.9%) and rejected for decodability. See the NOTES file, section 5.
+
+## Branch TODO — o/O (open and closed mid back vowel): real collisions, probable lexicon errors, and a Plover-side synonym (2026-10-10)
+
+Why: the layout solve sees ONE ambiguity entry for the nucleus pair `o`/`O` (weighted frequency 249.94, x `AMBIGUITY_PENALTY` 30,000 = 7.5M). Forcing the two phonemes onto one stroke raises the
+nucleus penalty from 58,613,993 (the proven optimum) to 66,543,317, i.e. +7,929,324 (+13.5%); the rest of the increase is the displacement of `9` and `@`. Measured 2026-10-10 on the
+lexicons of `b643f87` (the 666 groups of words whose phonologies differ only by `o`/`O`; the lesser side's frequency is what the ambiguity cannot recover):
+
+| group kind | groups | weight | share |
+|---|---|---|---|
+| different lemma, both sides in Mixte | 73 | 165.5 | 66% |
+| different lemma, a side Synthetic-only | 61 | about 0 | |
+| same lemma, different spelling | 424 | 73.8 | 30% |
+| same spelling | 108 | 10.7 | 4% |
+
+- **Real collisions (the 73 different-lemma groups).** Genuine standard-French contrasts: `votre`/`vautre` (47.5) and `notre`/`nôtre` (42.6) alone are 36% of the whole entry, then `côte`/`cote`, `coq`/`coke`,
+  `fausse`/`fosse`, `top`/`taupe`, `saute`/`sotte`, `rôle`/`roll`, `homme`/`heaume`, `os`/`hausse`. Nothing to fix; they are the cost of keeping `o` and `O` apart.
+- **Probable errors (the 532 same-lemma and same-spelling groups, about 84 of the 250 = 34%).** 517 are a Mixte row against a Synthetic row (`interpolez` Mixte `5tERpole` / Synthetic `5tERpOle`;
+  `rode` `Rod` / `ROd`; `implorerais`; `perfectionnerais`), 14 are Mixte against Mixte, i.e. Lexique383's own inconsistency (`porter` inf `poRte` while `portai`/`portez`/`porté` are `pORte`;
+  `supporter`, `reporter`, `promenez`/`promené`, `offrant` verb against adjective, `polluant`), 1 is Synthetic against Synthetic (`émotionnant`). Which side is right varies: `porter`'s infinitive and
+  `interpolez` look wrong in Mixte, `rode`'s `ROd` looks right in Synthetic; only these were looked at.
+  - [ ] **Rule: no `-er` verb sounds different in its infinitive, `-é` and `-ez` forms (nor in any form of the lemma that shares the stem) — in particular by an `o`<->`O` exchange.** Same family as the
+    E/e item (`syllFromPhon`, 2026-10-10). Build the check first as a REPORT (one row per lemma: the stems per form, the sources Mixte/Synthetic, the Wiktionary and GLÀFF verdicts from
+    `util._verbreferences`), then decide per lemma which vowel wins (reference first; majority of the paradigm otherwise) and apply it as a Mixte rule or `resources/mixteManualCorrections.tsv` rows
+    and a Synthetic generator guard (the generator copies the donor's vowel: find where the `o` and the `O` enter). Expected effect: the `o`/`O` entry falls by up to about 84 of 250, so tying `o` and `O`
+    would cost less than the 7.9M above. Re-measure with the same scan (group the Dictionary words by their phonology with `O` -> `o`, keep the groups holding both spellings).
+  - [ ] Check the same for the other mid-vowel pairs (`e`/`E` is done for the em-/en- verbs only; `2`/`9`), with the same scan.
+- **Idea to investigate: `o` and `O` as synonyms in a Plover plugin.** Keep the two vowels on their own keys (the layout stays as it is: the layout solve found no gain worth a relearning, see the 2026-10-10
+  optimisation runs), but let the decoder accept either one wherever no homophone exists: when a stroke sequence with `o` (or `O`) matches no word and the same with the other vowel matches exactly one
+  (or the lexicon has no `o`/`O` minimal pair for that phonology), output that word. Where a minimal pair exists (the 73 groups) the strokes must stay distinct. Questions: how many words have an
+  `o`/`O` twin at all (666 groups out of about 268k words, so the synonym rule would apply almost everywhere); how it fits the expression layer's `_core` decoder (`src/expressiondecoder.py`) and the
+  stdlib-only constraint of the plugin; whether it should be a dictionary extension (extra outlines written into the dictionary, with the collision check of `export_plover_dictionary`) or a lookup-time
+  fallback; and the interaction with the star/hash marks (a mark chosen for an `o`/`O` pair is wasted if the user never needs to tell them apart).
 
 ## Suspected bugs (from docs refactor, 2026-09-22)
 

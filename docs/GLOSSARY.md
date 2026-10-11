@@ -743,6 +743,17 @@ spellings with the same feature combination (no feature can separate them; skipp
 - Code: `OppositionSample` src/elicitation.py:99; `AnswerByOpposition` :276; :356-363.
 - First used in: Discriminating-Feature Elicitation (Elicitation Phase).
 
+### Outline
+The whole stroke sequence that types one word or expression: a `Strokes` tuple, or its rendered
+Plover string such as `a/vtit`, the key of a dictionary entry. An outline is made of strokes; one
+stroke is not an outline. A word can have several outlines (alternate entries, an affix
+abbreviation); two words on one outline are a **Collision**.
+- Code: `Strokes` src/keyboard.py:28; `renderFinalStrokesToRTFCRE` util/_stenorender.py:40;
+  `composeOutlineTraced` src/expressions.py.
+- Preferred over "stenogram", "steno string". Say **Strokes** for the index tuples and
+  **outline** for a word's whole entry key.
+- First used in: Theory Export (S8).
+
 ### Phoneme
 A single-character X-SAMPA sound: 16 nucleus (vowel) and 20 consonant symbols, plus a
 temporary `x`. A `Biphoneme`/`Multiphoneme` is a sequence of phonemes within one syllabic part.
@@ -1006,6 +1017,10 @@ name with its number, e.g. "frequency-ratio rule (R4)".
 The 26-key target keyboard; its layout is `starboard3h.json`.
 - Code: `Starboard` src/keyboard.py:290.
 - First used in: Keyboard Layout Optimization (S4).
+
+### Stenogram
+Avoid. A synonym of **Outline**, once used loosely in two comments.
+- Preferred synonym: **Outline** (a whole word's strokes) or **Stroke** (one set of keys pressed at once).
 
 ### Stroke / Strokes
 A `Stroke` is the key indices pressed at once (one per syllable, plus extra strokes and

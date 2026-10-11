@@ -14,7 +14,7 @@ stdout. Two runs on the same inputs give byte-identical files.
 Metrics (definitions and the choices made are in the docstring of `src/theorycompare.py`): word coverage, collisions on the
 words both theories cover, frequency-weighted strokes per word, frequency-weighted chord cost (Stenalgo on Starboard, Pluvier
 converted to Starboard keys, Pluvier on the Ireland model of `src/irelandkeyboard.py`), and the frequency-weighted share of
-words whose phoneme order is not left to right in the stenogram. The CP-SAT score is not part of this tool; the report is a
+words whose phoneme order is not left to right in the outline. The CP-SAT score is not part of this tool; the report is a
 dict of named metrics so one can be added.
 """
 from __future__ import annotations
