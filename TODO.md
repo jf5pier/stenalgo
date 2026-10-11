@@ -45,6 +45,9 @@ activismes, affairismes); `(22, 25)` n+m (hymnes, indemnes, démènent, promène
 
 ## Branch TODO — conjugation key fused into the last stroke instead of the extra stroke (2026-10-11)
 
+**Superseded by `docs/MERGED_FEATURE_KEYS_PLAN.md`** (design interview 2026-10-11: decisions D1–D15, iterations 0–6, gates,
+metrics, Haiku/Sonnet split). Items 1–3 below are answered or scheduled there; kept for the measurements.
+
 Question: could the 7 conjugation keypress groups be an attached suffix key (united with the word's last stroke) instead of the extra coda stroke? Measured 2026-10-11 with
 `python -m util.analyze_conjugation_fusion` (method and tables in `docs/CONJUGATION_FUSION_STATS.md`; star/hash marks left out): of 139,757 words needing a group, 91.5% stay clean (71.5% of frequency),
 2.9% + 0.1% hit a same-lemma conflict, 1.6% a NEW cross-lemma one (8.3% of frequency), 0.1% only an affix abbreviation (1.6% of frequency); 3,484 words absorb the key (it is already in their coda).
@@ -603,6 +606,12 @@ B11, B14, B27, B43, B44, B45, B46 and B47 have since been fixed.
   order-dependent like B5.
 
 ### Tier 2 — affects reports or tracked artifacts (not the Plover output)
+
+- **B48** (found 2026-10-11, merged feature keys planning) `resolved_press_sets.json` field `frequencies` is 0 for frequent
+  spellings: 24 entries above 50/M in Lexique383 `freqfilms2` (`ai` avoir AUX 4902, `sais` 2493, `veux` 2487, `es` 1849, `suis`
+  suivre 1819, `peux`, `allez`, `fais`, `dis` 1026). To do: find which step writes the field (Press-Set Resolution) and why
+  it zeroes these, and whether the Elicitation, Grouping or Realization Phase reads it (tier 1 if a frequency-weighted
+  choice uses it). Until fixed, analyses read frequencies from Lexique / `Word.frequency`, never from this field.
 
 - **B11** RESOLVED 2026-09-24 (`Word._hash` is now a blake2b digest of `Word.identity()`, `__eq__` compares the identity fields; a clean unpinned `python dictionary.py` rebuild is byte-identical to a `PYTHONHASHSEED=0` one on all 11 tracked outputs). The realization report is identical under seeds 0, 1 and unset (37 cross-category, 1,326 cross-lemma). Original entry: Residual-collision lists in the realization report change between clean rebuilds —
   src/word.py:94, :155; src/ambiguitychecker.py:739-747, :1248-1257 — salted `hash()` stored in the

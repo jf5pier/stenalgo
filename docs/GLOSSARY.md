@@ -71,6 +71,12 @@ merged into the last phoneme stroke. One of the two kinds of extra stroke.
 - Avoid "bare mark stroke", "bare `*#` stroke".
 - First used in: Different-Lemma or Grammatical-Category Disambiguation (S7).
 
+### Absorbed feature key
+A feature key that is already in the word's last phoneme stroke (`livres`: the plural `-s` key is in the coda of
+`mtijsR`), so merging it changes nothing: the merged outline equals the base outline and cannot carry the feature.
+- Code: diagnostic only, `absorbed` in util/analyze_conjugation_fusion.py.
+- First used in: merged feature keys (planned, 2026-10-11).
+
 ### Affix abbreviation
 An optional short outline for a word of the finished theory, in which an affix rule's keys replace the affix syllable(s). One per word
 (the one saving the most strokes); it exists only when its outline collides with no outline of the stable theory, keeps the word's own
@@ -723,6 +729,38 @@ the old file names listed under Renamed files.
 Legacy name. Use **Feature discriminating stroke** (not to be confused with the **\*/#
 marker stroke**).
 - First used in: Discriminating-Feature Stroke Realization (Realization Phase).
+
+### Merged feature keys
+A word's feature keys (the chosen keys of every keypress group it needs) pressed together with its last phoneme stroke,
+instead of as a separate feature discriminating stroke; named after the merged star/hash mark. All 7 keypress groups
+merge (gender and number included), each on the same physical key as in the feature discriminating stroke (f and plural
+may get a dedicated merge key-set instead: under test). A word whose merged outline loses on the merge precedence
+ladder keeps the feature discriminating stroke.
+- Code: not yet; diagnostic util/analyze_conjugation_fusion.py, docs/CONJUGATION_FUSION_STATS.md.
+- Avoid "conjugation fusion", "fused conjugation stroke" (Affix fusion is another thing; "conjugation" omits gender
+  and number). The existing file names keep "fusion".
+- First used in: merged feature keys (planned, 2026-10-11).
+
+### Merge precedence ladder
+Who keeps a merged outline when it meets another outline, in order: (1) phonetic first, the word for which the shared
+keys are sounds beats the word for which they are feature keys (`sec` `siek` beats `sais` `sie`+k; `dites` `pvit`+k
+beats `dis` `pvi`+k+t); (2) features second, between same-base words of one lemme and category, the word with an
+absorbed feature key loses (`fasse` beats `fassent`); (3) marks third, same base and same feature keys across lemmas or
+categories never block a merge, the star/hash marks separate them. Frequency does not decide; the rule for a tie at
+level (1) (`laisses`/`laides`) is under test.
+- First used in: merged feature keys (planned, 2026-10-11).
+
+### Merge-eligible tense
+A tense/mood (or the nominal gender/number reading) whose entries may merge their feature keys: présent, impératif,
+infinitif, participe and nominal (f, p). Entries in future, passé simple, conditionnel, imparfait and subjonctif never
+merge and always keep the feature discriminating stroke (user decision 2026-10-11, from their frequency shares).
+Decided per entry from the tense of its reading, not from the keys it presses (imparfait entries press person keys).
+- First used in: merged feature keys (planned, 2026-10-11).
+
+### Merged outline
+A word's outline with its feature keys merged: one stroke shorter than the outline with a feature discriminating stroke.
+It is the word's primary outline; the longer outline stays a valid alternate entry.
+- First used in: merged feature keys (planned, 2026-10-11).
 
 ### Mixed lexicon
 A dataset state: `resources/LexiqueMixte.tsv`, 136,456 rows × 12 columns (rows, not distinct words).
