@@ -43,6 +43,13 @@ conflicts. The excluded tenses keep 1.5–2.7% of running words on the extra str
 | D21 | Order, one commit per step: (1) `src/mergedfeaturekeys.py`, simulator switched to it, same numbers; (2) confirmation run (D18); (3) I1 behind a constant off by default, md5-identical rebuild when off; (4) iteration 6 gate; (5) I2 (D19, D20), I3, I4, I5. |
 | D22 | A merge also gives way to the attested expressions: the outline of every pool expression (`scratch/expr_candidates.tsv`) composed on the theory before the merge is reserved (`util/_reservedchords.py`, with a theory). Open-set expression readings are not protected, only reported. |
 | D23 | M8 (expression-layer savings) is measured when I2 rebuilds the expression data on the merged theory; a drop of more than 5% is a gate. |
+| D24 | Word and sentence practice accept every outline of a word: long, merged, every affix abbreviation; sentences are matched word by word (each word any of its outlines); composed expression outlines only in "Phrases abrégées" mode, as before. Supersedes D19's "the long outline as alternate" (2026-10-12). |
+| D25 | Hints: the long outline above the keyboard; under it (the "Indices abréviation" switch) the short outlines with what shortens them (merged feature keys, the affix rule and keys, the expression rules); the lit keys follow the long outline until the strokes typed match a short one. |
+| D26 | The exporters tag each outline: `outlines: [{steno, strokes, kind, rule?}]`, kind `long`, `merged`, `affix` (rule rank) or `expression` (rules); the trainer only displays. |
+| D27 | Lesson drills: the hint above the keyboard is the lesson's form (merged in accord/verbe, rule k's abbreviation in affix lesson k); accepted: the long outline, the lesson's form and the forms of earlier lessons, never those of later lessons. |
+| D28 | "Previously covered content" is the focus/recap switch (TODO "trainer lessons: focus or recap switch"): recap mixes earlier lessons' words in. |
+| D29 | The merge becomes the default (`MERGE_FEATURE_KEYS` on, full rebuild) once I5 passes, after the trainer work, in one commit with the rebuilt outputs. |
+| D30 | I5 checks H1-H4 with a hand-run `util/check_merged_feature_keys.py` on the built outputs (non-zero exit on a failure), the orchestrator's last step when the merge is on. |
 
 ## Open questions answered by experiment
 
