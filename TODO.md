@@ -59,6 +59,33 @@ Worst groups: 3 imparfait+subjonctif (-l, 32% same-lemma: fasse/fassent) and 5 n
 - [ ] **3. Rerun the diagnostic after the unpressable-coda fix** (section above): its `unpressable` rows mix fusion-made and base-made cases (`baseUnpressable` lists the latter).
 - Not measured: the fusion's chord cost (a fused chord can cost more than a one-key extra stroke), the real star/hash marks on top, the alternate readings of self-homographs in the per-group counts.
 
+## Branch TODO — pipeline speed: profiled optimization candidates (2026-10-12)
+
+Profiled with cProfile on the S7-S10 chain (flag off; times are wall seconds of one module run). Fixed: the
+`DisambiguatedTheory.pickle` loaders checked 5 fingerprint inputs, the writer 6, so every exporter rebuilt the theory
+(~80 s each, ~16 min per orchestrated run); S7-S10 went from ~20 to ~8.6 min. Candidates, largest first:
+1. **One process for the S8-S10 exporters** (~2-3 min): each of ~12 subprocesses unpickles the theory (9-18 s) and
+   rebuilds the same indexes. They are pure functions of the loaded theory; the orchestrator could import and call
+   them in one process (the Dictionary-built-once rule concerns S3/S5, not the exporters).
+2. **`buildReadingsByWord` once** (~1 min): 10-12 s in practice words, sentences, definitions, lessons and expression
+   sentences, mostly `_resolveEntryWord` (208k calls, canonicalizing strokes each time); store the result in the
+   pickle envelope next to `wordToStrokes`.
+3. **The Realization Phase search runs twice** (~50 s): `realizeKeypressGroupsAsExtraStroke` (47-50 s, `_feasible`
+   33 s over 123 calls) in S7 and again in `build_realization_report`; let S7 persist the assignment for the report,
+   and index `_feasible`'s collision checks.
+4. **S9b/S9c rebuild the abbreviations** (~45 s): `loadAbbreviations` (59 s: `buildCandidates` 20 s, `extractRecords`
+   16 s, `canonicalizeStrokes` 14 s) runs in `export_affix_dictionary` and again in `export_affix_lessons`; cache it
+   with a fingerprint or let S9c read S9b's output.
+5. **`export_lessons`** (83 s): `buildRecordStream` 50 s (a per-finger keypress generator, 2.5M calls, 11 s) and
+   `poolTop` 11 s (11 scans of the 288k-record stream; index by group and tense).
+6. **`Word.__hash__`** (25-30M calls, 8-11 s per process): cache the hash on the frozen Word.
+7. **`buildWordsByOrthoLemme`** (7-10 s per build): a single slow loop.
+Instrumentation gaps: only orchestrated steps (kind `step`) and the phases of `build_phonetic_theory` and
+`build_disambiguated_theory` are logged; a hand-run module logs nothing, and no exporter logs its phases. A
+`timedCall` around each module's `main` (and its load / build / write phases) would make every run comparable.
+Memory: a full S9a selection holds ~2 GB per sweep worker; the default is now at most 4 (8 were OOM-killed in the
+14 GiB cgroup that runs Claude Code's shells).
+
 ## Branch TODO — make LexiqueSynthetic.tsv fully regenerable (2026-10-08)
 
 Why: `resources/LexiqueSynthetic.tsv` (S2) is append-only and was edited by hand-run `util/fix*.py` scripts, so it is not a function of the committed inputs. Verified 2026-10-08
