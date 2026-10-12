@@ -77,3 +77,11 @@ def test_format1_envelope_is_a_miss(tmp_path):
         pickle.dump((1, disambiguatedTheoryFingerprint(inputs), {"ami": [(1, 2)]}), f,
                     protocol=pickle.HIGHEST_PROTOCOL)
     assert loadCachedDisambiguatedTheory(path=cachePath, inputs=inputs) is None
+
+
+def test_loaders_check_the_writers_fingerprint_inputs() -> None:
+    """A loader that checks fewer inputs than the writer fingerprints misses the cache every time."""
+    from util._theoryio import DISAMBIGUATED_THEORY_FINGERPRINT_INPUTS, _fingerprintInputs
+    assert _fingerprintInputs("keypress_groups.json", "resolved_press_sets.json") == \
+        DISAMBIGUATED_THEORY_FINGERPRINT_INPUTS
+    assert "k.json" in _fingerprintInputs("k.json", "resolved_press_sets.json")

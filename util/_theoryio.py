@@ -87,6 +87,13 @@ DISAMBIGUATED_THEORY_FINGERPRINT_INPUTS = (
 _ENVELOPE_FORMAT = 2  # bump when the envelope layout below changes
 
 
+def _fingerprintInputs(keypressGroupsPath: str, resolvedPressSetsPath: str) -> tuple[str, ...]:
+    """The writer's fingerprint inputs with the caller's two JSON paths: a loader that checked a shorter list than
+    the writer wrote (before 2026-10-12: without lapwing-numbers.json) missed the cache every time."""
+    swap = {"keypress_groups.json": keypressGroupsPath, "resolved_press_sets.json": resolvedPressSetsPath}
+    return tuple(swap.get(path, path) for path in DISAMBIGUATED_THEORY_FINGERPRINT_INPUTS)
+
+
 def _md5(path: str) -> str | None:
     if not os.path.exists(path):
         return None
@@ -198,8 +205,7 @@ def loadDisambiguatedTheory(
         raise RuntimeError(f"Run `python -m src.elicitation` first to generate {resolvedPressSetsPath}.")
 
     cached = loadCachedDisambiguatedTheory(
-        inputs=("resources/LexiqueMixte.tsv", "resources/LexiqueSynthetic.tsv",
-                "starboard3h.json", keypressGroupsPath, resolvedPressSetsPath))
+        inputs=_fingerprintInputs(keypressGroupsPath, resolvedPressSetsPath))
     if cached is not None:
         return cached[0]
     dictionary, phoneticTheory = _loadDictionaryAndPhoneticTheory()
@@ -231,8 +237,7 @@ def loadPhoneticAndDisambiguatedTheory(
     # The layout input is pinned to starboard3h.json: every caller builds
     # `keyboard` from it (no exporter loads a different layout).
     cached = loadCachedDisambiguatedTheory(
-        inputs=("resources/LexiqueMixte.tsv", "resources/LexiqueSynthetic.tsv",
-                "starboard3h.json", keypressGroupsPath, resolvedPressSetsPath))
+        inputs=_fingerprintInputs(keypressGroupsPath, resolvedPressSetsPath))
     if cached is not None:
         disambiguatedTheory, wordToStrokes, wordsByOrthoLemme = cached
         return _loadPhoneticTheoryOnly(), disambiguatedTheory, wordToStrokes, wordsByOrthoLemme
