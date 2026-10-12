@@ -206,6 +206,11 @@ the Ngram toolbox (`python -m util.ngram_data download|extract-lexique|scan|quer
 `googlebooks-fre-1grams/`), the variant-set builder (`python -m util.build_spelling_variants`
 — emits the draft `resources/spellingVariants.tsv`; discovered sets never auto-activate),
 and the Synthetic pruner (`python -m util.prune_spelling_variants`, dry-run by default),
+the reading-share table (`python -m util.build_reading_shares [--validate]` → `resources/readingShares.tsv`, the
+per-reading split of a spelling's frequency for the merged-feature-keys simulator; inputs gitignored `ud-french/` +
+`opensubtitles-fr/`, see `resources/readingShares.NOTICE.md`), the merged-feature-keys simulator
+(`python -m util.analyze_merged_feature_keys [--eligible|--tie|--order|--merge-keys|--search|--regression] --out DIR`,
+~2 min, `docs/MERGED_FEATURE_KEYS_PLAN.md`),
 and the affix-rule decisions (`affix_decisions.json`, see `docs/AFFIX_RULES.md`).)
 
 ## Architecture

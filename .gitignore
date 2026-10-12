@@ -41,6 +41,11 @@ env/
 # extracted locally.
 morphalou/
 
+# Universal Dependencies French treebanks and an OpenSubtitles sample, inputs of
+# util/build_reading_shares.py (resources/readingShares.NOTICE.md says how to fetch them).
+ud-french/
+opensubtitles-fr/
+
 # Raw Google Books French 1-gram shards (util/ngram_data.py download), ~5 GB
 # compressed, never committed. Kept on disk until LexiqueGoogleNgram.tsv and
 # LexiqueGoogleNgramAdditions.tsv are final and committed, then deleted by the
@@ -68,3 +73,8 @@ verb_template_proposals.tsv
 verb_template_groups.tsv
 synthetic_bar_rejections.tsv
 synthetic_skip_reasons.tsv
+
+# Per-entry dumps and logs of util/analyze_merged_feature_keys.py runs (~14 MB each);
+# only the metrics/search/diff .md files of each run are committed.
+scratch/merged-keys/**/*.tsv
+scratch/merged-keys/**/*.log

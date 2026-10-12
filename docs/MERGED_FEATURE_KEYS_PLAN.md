@@ -32,7 +32,7 @@ conflicts. The excluded tenses keep 1.5–2.7% of running words on the extra str
 | D10 | No per-word chord-cost veto: an eligible entry merges whenever it wins the ladder and the merged stroke is pressable. |
 | D11 | Keys 0 and 1 are not touched. The Grouping Phase (K=7, the user's elicitation answers) stays fixed. |
 | D12 | Words whose BASE last stroke is already unpressable (~893, `-ismes`; TODO "unpressable base codas") are set aside: automatic fallback, reported apart, fixed later. |
-| D13 | A reading's share of its spelling's frequency comes from a reading-share table (iteration 0); equal split until it exists. Never read the `frequencies` field of `resolved_press_sets.json` (bug B48). |
+| D13 | A reading's share of its spelling's frequency comes from the reading-share table `resources/readingShares.tsv` (iteration 0, `util/build_reading_shares.py`), looked up by the entry's reading set in LexiqueMixte + LexiqueSynthetic (not Lexique383's `infover`, which misses readings). Never read the `frequencies` field of `resolved_press_sets.json` (bug B48). |
 | D14 | Everything is simulated offline in an analysis script first; the pipeline is changed only for the chosen variant. |
 | D15 | Haiku is the default worker (under 100k tokens per session); Sonnet writes code, takes judgement steps, prepares gates, and redoes a Haiku task whose result fails its acceptance check. The user decides at every gate. |
 
@@ -82,7 +82,7 @@ Why: Lexique gives one frequency per spelling; a reading's share is unknown. The
 unambiguous forms of each reading type) works for présent/imparfait/nominal but credits impératif with 0.02% of running
 words (no imperative is unambiguous in Lexique: `dis`, `fais`, `regarde`), against 1.6–2.3% with an equal split.
 
-- [ ] **0.1 [Haiku]** Download the French Universal Dependencies treebanks (GitHub `UniversalDependencies/UD_French-ParisStories`,
+- [x] **0.1 [Haiku]** Download the French Universal Dependencies treebanks (GitHub `UniversalDependencies/UD_French-ParisStories`,
   `UD_French-Rhapsodie` (spoken), `UD_French-GSD`, `UD_French-Sequoia`) into a gitignored `ud-french/`. Write
   `util/build_reading_shares.py`: for every VERB/AUX/NOUN/ADJ token, map the UD features to Lexique's reading notation
   (Mood=Ind+Tense=Pres → `ind:pre`, Tense=Imp → `ind:imp`, Tense=Past → `ind:pas`, Tense=Fut → `ind:fut`; Mood=Sub →
@@ -92,14 +92,14 @@ words (no imperative is unambiguous in Lexique: `dis`, `fais`, `regarde`), again
   treebanks first; fall back to all treebanks, then to the Lexique prior, for classes with fewer than 20 tokens.
   Output: `resources/readingShares.tsv` (class, reading, count, share, source) and a NOTICE with the treebank licences
   (as `resources/morphalouNomAdjForms.NOTICE.md`). Budget: under 100k tokens.
-- [ ] **0.2 [Sonnet]** Acceptance: plausible shares for `dis`, `fais`, `sois`, `regarde`, `finis` (impératif well above 0);
+- [x] **0.2 [Sonnet]** Acceptance: plausible shares for `dis`, `fais`, `sois`, `regarde`, `finis` (impératif well above 0);
   coverage = share of the frequency of ambiguous theory entries whose class is UD-backed. Then recompute the
   "discriminator need" table (below, Results 2026-10-11) with the new shares and replace the three-column version.
   mypy strict and a unit test for the UD→Lexique mapping.
 
 ### Iteration 1 — simulator and baseline [Sonnet writes, Haiku runs]
 
-- [ ] **1.1 [Sonnet]** `util/analyze_merged_feature_keys.py` (hand-run diagnostic; reuse the loading and rendering of
+- [x] **1.1 [Sonnet]** `util/analyze_merged_feature_keys.py` (hand-run diagnostic; reuse the loading and rendering of
   `util/analyze_conjugation_fusion.py`: `loadPhoneticAndDisambiguatedTheory`, `buildKeypressGroupToWords`,
   `buildKeypressGroupExtraAlternates`, `renderFinalStrokesToRTFCRE`). Options: `--eligible` (tense list, default D5),
   `--tie fallback|frequency|precedence`, `--order after-s7|before-s7`, `--merge-keys f=…,p=…`, `--out`.
@@ -109,31 +109,31 @@ words (no imperative is unambiguous in Lexique: `dis`, `fais`, `regarde`), again
   JSONs). Resolve each contested merged outline with the ladder (D7; an occupying base outline has only phonetic keys, so
   it always wins level 1), ties by `--tie`. Losers keep the long outline, which is already unique, so one pass suffices.
   Writes the metrics table (M1–M5) as Markdown and a TSV of every entry (word, reading, tense, merged?, reason, outlines).
-- [ ] **1.2 [Sonnet]** Regression check: with every tense eligible, no ladder (any conflict counts) and marks ignored, the
+- [x] **1.2 [Sonnet]** Regression check: with every tense eligible, no ladder (any conflict counts) and marks ignored, the
   script reproduces the counts of `docs/CONJUGATION_FUSION_STATS.md` (127,839 clean of 139,757).
-- [ ] **1.3 [Haiku]** Run the baseline: D5 eligibility, current keys, `after-s7`, tie (a). Paste the table under Results.
+- [x] **1.3 [Haiku]** Run the baseline: D5 eligibility, current keys, `after-s7`, tie (a). Paste the table under Results.
 
 ### Iteration 2 — check of the eligibility choice [Haiku]
 
-- [ ] Run all-eligible against D5. Report, per excluded tense: strokes it would save, conflicts it causes for the eligible
+- [x] Run all-eligible against D5. Report, per excluded tense: strokes it would save, conflicts it causes for the eligible
   ones. GATE only if a figure contradicts D5 (e.g. an excluded tense that would merge almost for free); otherwise no gate.
 
 ### Iteration 3 — level-1 tie rule [Sonnet adds rule (c), Haiku runs] GATE
 
-- [ ] Tie rules (a), (b), (c). Report M1–M3 and the list of tied pairs that each rule resolves differently (top 30 by frequency).
+- [ ] (run 2026-10-11, gate pending) Tie rules (a), (b), (c). Report M1–M3 and the list of tied pairs that each rule resolves differently (top 30 by frequency).
 
 ### Iteration 4 — merge before or after S7 [Sonnet] GATE
 
-- [ ] `before-s7`: merge on unmarked outlines, then recompute the star/hash marks on the merged entries
+- [ ] (run 2026-10-11, gate pending) `before-s7`: merge on unmarked outlines, then recompute the star/hash marks on the merged entries
   (`composeReservedKeyStrokesForEntries`, src/ambiguitychecker.py, with the merged strokes as each entry's stroke and
   the phoneme stroke count unchanged). Compare with `after-s7` on M1–M5; show the words that merge only under `after-s7`
   (a mark made room, the `sais`/`sec*` case) and the mark changes `before-s7` causes.
 
 ### Iteration 5 — keys [Sonnet search, Haiku runs] GATE after 5b, GATE after 5c
 
-- [ ] **5a [Haiku]** Absorption risk per coda key: frequency-weighted share of eligible entries whose last phoneme stroke
+- [x] **5a [Haiku]** Absorption risk per coda key: frequency-weighted share of eligible entries whose last phoneme stroke
   already holds the key, and pressability of the key with the 50 most frequent last-stroke codas.
-- [ ] **5b [Sonnet]** Joint search of the f and plural merge key-sets (group 1 f, group 5 nbr_p+p; the merge key-set is
+- [ ] (run 2026-10-11, gate pending) **5b [Sonnet]** Joint search of the f and plural merge key-sets (group 1 f, group 5 nbr_p+p; the merge key-set is
   per group, so nbr_p uses group 5's). Candidates: coda keys 18–25 and the coda digraphs of the Realization Phase; f may keep
   16. Constraints: f, p and f+p distinct, pressable with the stems, distinct from the other 5 groups' keys and every union
   that occurs; f's key before p's in coda order (soft: report violations). Objective: M1 under the settled semantics,
@@ -183,40 +183,165 @@ theory through `util/_theoryio.py`.
 
 ## Results
 
-### 2026-10-11 — discriminator need (before iteration 0)
+### 2026-10-11 — iteration 0: reading-share table
+
+`python -m util.build_reading_shares [--validate]` (about 10 s) → `resources/readingShares.tsv` (91 classes, 45 with
+several readings, 171 rows) + `resources/readingShares.NOTICE.md`; tests `src/test/build_reading_shares_test.py`.
+
+Changed from the 0.1 brief (gate answer (a), 2026-10-11):
+- The four UD treebanks alone underrate the impératif. The spoken ones are 87k tokens of narrative monologue
+  (`fais` 0/38 impératif, `regarde` 0/9), so the first source is now film dialogue: every 400th line of OPUS
+  OpenSubtitles v2018 fr (267k lines, gitignored `opensubtitles-fr/`). spaCy `fr_core_news_md` cannot tag it ("Regarde !"
+  → Ind 3s; "Fais gaffe", "Viens ici" get no verb at all), so a dialogue heuristic labels each token. A subject clitic gives the person.
+  A subjectless clause start or a `-moi`/`-le` suffix gives the impératif, and coordination keeps the earlier subject. An auxiliary
+  before the form gives the participle; after `que` the mood stays open and is split with weights fitted on the UD tokens that follow `que`.
+  A form is counted only when a single verb lemma carries ≥ 80% of its film frequency (this drops `juge`, `voyage` and `suis`).
+- Source order per class (≥ 20 tokens): subtitles, UD spoken, UD all, then a Luce choice model fitted on the
+  observed classes (replaces the Lexique prior, which credits the impératif with ~0).
+- Classes come from LexiqueMixte + LexiqueSynthetic, the theory's reading sets. With Lexique383 classes, 27k theory
+  readings (45k frequency) had no share (`importe` lacks `sub:pre:1s/3s` there); now 0 do.
+
+Acceptance:
+- Heuristic against UD gold (`--validate`, verb tokens of multi-reading classes): `ind:1s`/`ind:2s` 98–99% right, `ind:3s`
+  87–89%, `sub:3s` 76–79%, impératif recall 58% (spoken, no punctuation) and 89% (written). Impératif precision is
+  poor on written news (noun subjects before a comma) but good on subtitles. In a random sample of 50 subtitle tokens
+  labelled impératif, 45 were right; the 5 noun homographs (`juge`, `police`...) are now filtered out.
+- Shares (impératif first): `dis` 0.50 (ind:pre:1s 0.28, 2s 0.16, passé simple 0.06); `fais`, `viens` 0.26 (1s 0.46,
+  2s 0.27); `regarde` 0.25 (1s 0.32, 3s 0.43, subjonctif 0.01); `finis` 0.25 (participe 0.25); `sois` 0.53
+  (sub 1s 0.21, 2s 0.27).
+- Coverage: of the film frequency of multi-reading rows (verbs and NOM/ADJ), 97.4% has data-backed shares (subtitles
+  68.5%, UD spoken 28.9%, UD all 0.6%), 1.9% pooled. Nearly all of the pooled part is `suis` credited to suivre (1,819/M in Lexique).
+
+### 2026-10-11 — discriminator need (recomputed with the reading shares)
 
 Share of all theory running words (film frequency, 267,040 words, 135,785 in Lexique383) needing each discriminator, from
 `resolved_press_sets.json` press-sets (they agree with `disambiguated_theory.tsv` for 207,699 of 207,984 words; the rest
-are spelling twins). Columns: lexicon prior | equal split | primary reading only. Any feature stroke: 13.5 | 15.2 | 13.0%.
+are spelling twins). Columns: **reading shares** (D13) | lexicon prior | equal split | primary reading only. Any feature
+stroke: **14.4** | 13.5 | 15.2 | 13.0%.
 
 | Pressed discriminator | Group, key | Share |
 |---|---|---|
-| p | 5, 17 | 3.57 / 3.59 / 3.56% |
-| pers_2 | 6, 19 | 3.61 / 2.96 / 1.36% |
-| pers_1 | 4, 18 | 2.65 / 2.65 / 2.21% |
+| p | 5, 17 | **3.57** / 3.57 / 3.59 / 3.56% |
+| pers_1 | 4, 18 | **3.17** / 2.65 / 2.65 / 2.21% |
+| pers_2 | 6, 19 | **2.36** / 3.61 / 2.96 / 1.36% |
 | infinitif | 0, 21 | 2.01% |
-| impératif | 4, 18 | 0.02 / 1.63 / 2.25% |
-| subjonctif | 3, 23 | 0.29 / 1.11 / 0.21% |
-| f | 1, 16 | 0.83 / 0.85 / 0.82% |
+| impératif | 4, 18 | **1.62** / 0.02 / 1.63 / 2.25% |
+| f | 1, 16 | **0.82** / 0.83 / 0.85 / 0.82% |
+| pers_3 | 2, 20 | **0.51** / 0.52 / 0.35 / 0.46% |
 | nbr_p | 5, 17 | 0.47% |
-| pers_3 | 2, 20 | 0.52 / 0.35 / 0.46% |
-| passé | 2, 20 | 0.02 / 0.24 / 0.08% |
+| subjonctif | 3, 23 | **0.29** / 0.29 / 1.11 / 0.21% |
 | future | 2, 20 | 0.19% |
+| passé | 2, 20 | **0.04** / 0.02 / 0.24 / 0.08% |
 | conditionnel, imparfait | 0, 3 | 0.00% (never pressed) |
 
-| Tense of the reading needing one | Share (and % of that tense's own frequency, equal split) |
-|---|---|
-| présent | 5.63 / 4.53 / 2.92% (45%) |
-| nominal f/p | 3.71% (17%) |
-| infinitif | 2.01% (83%) |
-| impératif | 0.02 / 1.63 / 2.25% (100%) |
-| subjonctif | 0.29 / 1.11 / 0.21% (100%) |
-| participe passé | 0.58% (21%) |
-| imparfait | 0.56% (44%, pressed through the person keys) |
-| future | 0.44% (58%) |
-| conditionnel | 0.25% (52%) |
-| passé simple | 0.03 / 0.34 / 0.09% (86%) |
+| Tense of the reading needing one | Share (and % of that tense's own frequency, reading shares) | Tense's whole mass |
+|---|---|---|
+| présent | **4.89** / 5.63 / 4.53 / 2.92% (44%) | 11.03% |
+| nominal f/p | 3.71% (17%) | 21.42% |
+| infinitif | 2.01% (83%) | 2.43% |
+| impératif | **1.62** / 0.02 / 1.63 / 2.25% (100%) | 1.62% |
+| participe passé | **0.58** / 0.58 / 0.59 / 0.57% (19%) | 3.00% |
+| imparfait | 0.56% (44%, pressed through the person keys) | 1.27% |
+| future | 0.44% (58%) | 0.77% |
+| subjonctif | **0.29** / 0.29 / 1.11 / 0.21% (100%) | 0.29% |
+| conditionnel | 0.25% (52%) | 0.48% |
+| passé simple | **0.05** / 0.03 / 0.34 / 0.09% (47%) | 0.10% |
 
-Method: frequency per (ortho, lemme_cgram) from Lexique383; a spelling's frequency split over its press-set alternates by
-the column's rule, then over each alternate's feature combinations; the lexicon prior is the summed frequency of the
-Lexique forms with a single `infover` reading (verbs) or a single genre/nombre cell (NOM/ADJ). Iteration 0 replaces it.
+Method: frequency per (ortho, lemme_cgram) from Lexique383, split over a spelling's press-set alternates and then over
+each alternate's feature combinations. **Reading shares**: the share of the combination's reading in the class of the
+entry's Mixte + Synthetic reading set (`par:pas` and `nom:` cells summed when gender or number is open). The lexicon prior
+uses the summed frequency of the Lexique forms with a single `infover` reading or a single genre/nombre cell. The
+eligible tenses of D5 (présent, impératif, infinitif, participe, nominal) are now 12.8% of running words, the ceiling of
+the merge; the excluded tenses keep 1.6%.
+
+### 2026-10-11 — iteration 1: simulator and baseline
+
+`python -m util.analyze_merged_feature_keys [--eligible …|all] [--tie fallback|frequency|precedence]
+[--order after-s7|before-s7] [--merge-keys f=…,p=…] [--search] [--regression] [--out DIR]` (about 2 min; outputs
+`OUT/metrics.md` + `OUT/entries.tsv`, runs under `scratch/merged-keys/`); tests `src/test/analyze_merged_feature_keys_test.py`.
+Alternate ↔ press-set alignment: 0 mismatches over 311,373 entries (267,406 words); 82 reading-share misses.
+
+1.2 regression (`--regression`): 139,757 words needing a group, 127,961 without a conflict (= clean 127,839 +
+abbrevOnly 122), 11,348 conflicts (= 4,107 + 141 + 2,247 + 4,853), 448 unpressable: identical to
+docs/CONJUGATION_FUSION_STATS.md.
+
+1.3 baseline (D5, current keys, after-s7, tie (a) fallback), `scratch/merged-keys/baseline/metrics.md`:
+
+| Metric | Value |
+|---|---|
+| H1 new collisions / H2 unpressable merged | 0 / 0 (one outline already shared today) |
+| M1 strokes per running word | 1.5101 → **1.3977 (−7.45%)**; unweighted per word 3.657 → 3.381 |
+| M2 merge rate | 89,980 of 96,161 eligible entries (93.6%); by frequency 11.2% of 13.3% of running words (84.3%) |
+| M2 per group (freq) | inf 93.0%, f 91.7%, pers_3/passé/future 72.4%, impératif/pers_1 85.7%, plural 81.5%, pers_2 77.6% |
+| M2 per tense (freq) | présent 83.2%, impératif 81.0%, infinitif 93.0%, participe 97.9%, nominal 81.1% |
+| M3 fallbacks (freq of running words) | occupied 1.8% (31 of the top 1,000 spellings), tie 0.2% (11), level 1 146 entries, level 2 7, base unpressable 437 (D12), other dictionary 1 (`tuer` = an expression brief) |
+| M4 merged stroke cost | 364.5 vs 393.7 (last base stroke + feature stroke) |
+| M5 marks | unchanged (after-s7): 10,795 marked entries, 158 escalated codes, 0.0618 mark keys per word |
+
+Largest fallbacks (all occupied by a phonetic outline): `es` (`aide`), `sais` (`sec`, `cède`), `allez` (`alloc`), `aux`
+(`hausse`), `aller` (`alors`), `dis` (`dyke`), `enfants` (`enfance`), `va` (`vaque`), `seule` (`semble`), `femmes`
+(`phasmes`), `mains` (`mince`); ties: `toutes`/`toussent`, `minutes`/`minutent`, `laisse`/`leks`, `trouve`/`troupes`.
+
+### 2026-10-11 — iteration 2: eligibility check (`--eligible all`)
+
+M1 −8.07% (against −7.45%). Per excluded tense, the share of running words its merges would save, and the eligible merges
+it would take:
+
+| Excluded tense | Saved (running words) | Eligible merges lost |
+|---|---|---|
+| imparfait | 0.49% | none |
+| future | 0.44% | none |
+| conditionnel | 0.25% | none |
+| subjonctif | 0.22% | 355 entries, 0.48% (`ils`/`hisse`, `elles`/`aient`, `films`/`filment`, `belles`/`baisse` become ties) |
+| passé simple | 0.02% | none |
+
+This contradicts D5 for imparfait, future and conditionnel: they would merge almost for free (98.7–100% merge rate).
+GATE question queued; D5 kept until answered.
+
+### 2026-10-11 — iteration 3: tie rule (gate pending)
+
+| Rule | M1 | Merged (freq of running words) | Ties left |
+|---|---|---|---|
+| (a) fallback | −7.45% | 11.2% | 832 entries (0.2%) |
+| (b) frequency | **−7.59%** | 11.5% | 409 (0.0%) |
+| (c) GRAMCAT_PRIORITY, precedence spec, frequency | −7.55% | 11.4% | 425 (0.1%) |
+
+(b) and (c) resolve 332 of the 831 tied entries differently, listed in `scratch/merged-keys/tie-differences.md`. (c) ranks
+NOM above VER, so `troupes` (20.6) takes `tR@ejsk` from `trouve` (160, présent + impératif), `sortes` from `sortent`,
+`commandes` from `commences`. (b) gives the frequent verb forms. Recommendation: (b).
+
+### 2026-10-11 — iteration 4: merge before or after S7 (gate pending)
+
+| Order | M1 | Merged (freq) | Mark keys per word | Long outlines whose marks change |
+|---|---|---|---|---|
+| after-s7 | **−7.45%** | 11.2% | 0.0618 (unchanged) | 0 |
+| before-s7 | −7.33% | 11.1% | 0.0745 | 19 entries, 1.4% of running words: `a` (avoir) `*a` → `*a#`, `ah` `*a#` → `*a`, `ère`, `fie` |
+
+627 entries (0.17% of running words) merge only under after-s7, where a mark made room: `ans` `*@s` (`anse` keeps `@s`),
+`mots` `m*aes`, `prêts` `pR*ies`, `noms`, `mètres`, `tue`, `verres`, `eaux`, `risque`. None merge only under before-s7
+(`scratch/merged-keys/order-differences.md`). Recommendation: after-s7.
+
+### 2026-10-11 — iteration 5a/5b: merge key-sets for f and plural (gate pending)
+
+`python -m util.analyze_merged_feature_keys --search` (after-s7, tie (a), D5; ~25 min), full tables in
+`scratch/merged-keys/search/search.md`. 5a: every coda key and digraph is pressable with the 50 most frequent last-stroke
+codas of the f/plural entries, except `-Z` (24: 38/50, 81.7% of their frequency), `-Zm`, `-n`, `-l` and `-m` (94–98%).
+Keys already in the last stroke of f/plural entries: `-l` 18.3%, `-R` 15.6%, `-t` 8.5%, `-s` 6.0%, `-j` 5.4%, `-Z` 2.1%.
+
+5b: 272 (f, p) pairs over the 10 coda keys and the 7 Realization Phase digraphs; 146 rejected because f, p or f+p equals
+the key-set of another occurring group set; 126 evaluated.
+
+| Merge key-sets | M1 | f/plural merged (freq) | M4 merged-stroke cost |
+|---|---|---|---|
+| today f=16 p=17 | −7.45% | 82.9% | 364.5 |
+| best: f=17 p=18+19 (and f=20+22 p=18+19, f=16+17 p=18+19) | **−7.65%** | 88.4% | 376.8 |
+| best without the other groups' keys: f=17 p=16 (swap) | −7.58% | 85.6% | 360.0 |
+| f=22 p=16 | −7.56% | 85.2% | 360.5 |
+| f=22 p=17 (f moves to `-n` only) | −7.47% | 83.5% | 367.3 |
+
+The ceiling of a dedicated key-set is +0.2 points of M1 (≈ 0.3% of running words more merged). The best pairs give the
+plural `-kd`, the keys of impératif/pers_1 and pers_2 (allowed: no entry needs both groups 4 and 6). Recommendation:
+keep f=16, p=17 (no new key to learn, lowest effort), unless +0.2 points is worth a two-key plural. 5c looks
+unlikely to pay: the residual is mostly "occupied" (1.8% of running words, phonetic outlines); other keys would hit
+other phonetic outlines, and for f/plural the whole grid moved M1 by at most 0.2 points.
+
