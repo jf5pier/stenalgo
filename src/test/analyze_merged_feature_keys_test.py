@@ -1,12 +1,13 @@
 from types import SimpleNamespace
 from typing import Any
 
-from util.analyze_merged_feature_keys import Entry, beats, comboReading, comboTense, mergeStroke, stripMarks
+from src.mergedfeaturekeys import beats, comboTense, mergeStroke, stripMarks
+from util.analyze_merged_feature_keys import Entry, comboReading
 
 
 def entry(ortho: str, lemmeGramCat: str, lastBase: tuple[int, ...], featureKeys: set[int]) -> Entry:
     word: Any = SimpleNamespace(ortho=ortho, lemmeGramCat=lemmeGramCat, frequency=1.0)
-    return Entry(word, 0, (lastBase, tuple(sorted(featureKeys))), 1, frozenset(), frozenset({"présent"}), 1.0,
+    return Entry(word, 0, (lastBase, tuple(sorted(featureKeys))), 1, frozenset(), frozenset({"présent"}), frequency=1.0,
                  featureKeys=frozenset(featureKeys), mergeKeys=frozenset(featureKeys))
 
 
@@ -55,3 +56,17 @@ class TestStrokes:
     def test_merge_and_strip(self) -> None:
         assert mergeStroke((3, 13, 14), (18,)) == (3, 13, 14, 18)
         assert stripMarks(((6, 7, 13, 14, 19, 15), (17,), (10, 15))) == ((6, 7, 13, 14, 19), (17,))
+
+
+class TestReservedChords:
+    def test_sources(self) -> None:
+        from src.keyboard import Starboard
+        from util._reservedchords import attachKeypressesOf, reservedChords
+        keyboard = Starboard.fromJSONFile("starboard3h.json")
+        assert keyboard is not None
+        reserved = reservedChords(keyboard)
+        sources = set(reserved.values())
+        assert {"punctuation", "commands", "pluvier punctuation", "pluvier numbers", "lapwing numbers", "spelling",
+                "expression brief", "expression attach"} <= sources
+        assert sum(1 for s in reserved.values() if s == "pluvier numbers") == 1023
+        assert len(attachKeypressesOf()) == sum(1 for s in reserved.values() if s == "expression attach")

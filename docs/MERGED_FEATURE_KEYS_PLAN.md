@@ -364,3 +364,28 @@ unlikely to pay: the residual is mostly "occupied" (1.8% of running words, phone
 other phonetic outlines, and for f/plural the whole grid moved M1 by at most 0.2 points.
 
 **Gate decision (2026-10-12):** keep f=16, p=17, no merge key-set; 5c skipped. D9 updated.
+
+### 2026-10-12 — step 1: shared module, reserved chords from their sources (D16, D17)
+
+`src/mergedfeaturekeys.py` holds the rules (eligibility, ladder, tie rules, entries aligned with the press-sets);
+`util/analyze_merged_feature_keys.py` keeps options, frequencies, reports and search. Rerun with the old options, the
+baseline, tie-frequency, before-s7 and regression runs give byte-identical `entries.tsv` (the metrics differ only in
+report wording added after those runs). `util/_reservedchords.py` builds the reserved chords from their sources:
+1,462 against 1,436 read from the shipped JSONs, every shipped chord included; the extra ones are the 23 expression
+attach keypresses (a standalone keypress decodes as its particle; no theory outline equals one today) and 3
+punctuation chords the theory already takes (dropped by the exporter as before; they make "outlines already shared
+today" 4 instead of 1).
+
+### 2026-10-12 — step 2: confirmation run (D18), `scratch/merged-keys/decided/`
+
+D5 as amended, tie (b) frequency, after-s7, keys 16/17, reserved chords from the sources: H1 0, H2 0; **M1 1.5101 →
+1.3836 (−8.38%)**; merged 149,759 of 155,737 eligible entries (96.2%), 12.7% of 14.6% of running words (86.7%);
+excluded tenses keep 0.3% of running words on the feature stroke. Fallbacks: occupied 1.8% (32 of the top 1,000
+spellings), level 1 0.1%, tie 0.0% (409 entries), base unpressable 437 entries.
+
+Expression layer (not covered by H1–H3; one-off check with the shipped decoder,
+scratch pad `expr_overlap.py`): of the merged outlines, 628 entries (1.2% of the merged frequency) are expression
+chords today and become words (the word wins the ranking every time, no merged word is hidden). 617 of those readings
+are open-set compositions (`que paix`, `le past`); 11 are attested expressions, 1.29% of the attested pool frequency:
+`il est` (taken by `tels`), `il y` (`tills`), `qu'on` (`compte`), `à une` (`ruses`), `il a` (`talles`), `qu'est`
+(`quête`), `de ma`, `de même`, `que ça`, `que ces`, `de ça`.

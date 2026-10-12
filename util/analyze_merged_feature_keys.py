@@ -1,21 +1,8 @@
 """
 Hand-run diagnostic: the merged-feature-keys simulator (docs/MERGED_FEATURE_KEYS_PLAN.md, iteration 1).
 
-Every entry (one word, one press-set alternate, so `dis` has 5) whose outline ends with a feature discriminating
-stroke gets a candidate merged outline: its last base stroke (star/hash keys merged in included) united with the
-feature stroke's keys; an escalated code's */# marker strokes stay after it. An entry merges when its reading's tense
-is merge-eligible (D5, every combination of the alternate), the merged last stroke is pressable, the outline is free
-and the entry wins the merge precedence ladder (D7) against the other candidates of that outline:
-  occupied   the outline is already a final outline of the theory (any word, alternates included) or a chord of
-             another shipped dictionary (D8): the occupant keeps it;
-  level 1    two candidates of different spellings: the one whose last base stroke strictly contains the other's
-             (the shared keys are sounds) wins;
-  level 2    equal last base strokes, same lemme+category: the one with an absorbed feature key (already in its
-             last base stroke) loses;
-  tie        neither: --tie fallback (all keep the long outline), frequency (the more frequent spelling merges) or
-             precedence (the higher GRAMCAT_PRIORITY category, then the earlier line of
-             conjugation_disambiguation_order.txt for the entry's reading, then frequency).
-Losers keep the long outline, already unique, so one pass suffices. The long outline always stays an alternate (D3).
+The merge rules (eligibility, the merge precedence ladder, the tie rules) are those of src/mergedfeaturekeys.py (D17);
+this script adds the options, the frequency of each entry and the reports.
 
 --order after-s7 (default) compares today's final outlines, star/hash marks included (a mark can make room:
 `sais` takes `siek` when `sec` is `sie*k`). --order before-s7 compares unmarked outlines (level 3: two spellings with
@@ -29,12 +16,12 @@ Frequency = Lexique film frequency of the word, split over its alternates with t
 spelling on the outline is a conflict), words counted by their primary alternate.
 
 Prerequisites: DisambiguatedTheory.pickle (or both pickles), starboard3h.json, keypress_groups.json,
-resolved_press_sets.json, realization_report.json, resources/readingShares.tsv, the lexicons, the shipped
-plover_stenalgo_*.json chords and scratch/expr-briefs.tsv.
+resolved_press_sets.json, realization_report.json, resources/readingShares.tsv, the lexicons and the sources of the
+reserved chords (util/_reservedchords.py: the complement, number and spelling sources, the committed expression rules).
 Outputs: OUT/metrics.md and OUT/entries.tsv. ~2 min.
 
-Run: python -m util.analyze_merged_feature_keys [--eligible T,T...] [--tie fallback|frequency|precedence]
-     [--order after-s7|before-s7] [--regression] [--out DIR]
+Run: python -m util.analyze_merged_feature_keys [--eligible T,T...|all] [--tie frequency|fallback|precedence]
+     [--order after-s7|before-s7] [--regression] [--merge-keys f=…,p=…] [--search] [--out DIR]
 """
 import argparse
 import csv
@@ -45,48 +32,33 @@ from collections.abc import Iterable
 from dataclasses import dataclass, field
 from typing import Any
 
-from src.ambiguitychecker import (
-    UNLISTED_CATEGORY_PRIORITY,
-    _resolveEntryWord,
-    composeReservedKeyStrokesForEntries,
-    loadReform1990DoubletPairs,
-)
-from src.greedyoptimizer import GRAMCAT_PRIORITY
+from src.ambiguitychecker import composeReservedKeyStrokesForEntries, loadReform1990DoubletPairs
 from src.keyboard import Starboard, Stroke, Strokes
+from src.mergedfeaturekeys import (
+    MARK_KEYS,
+    MERGE_ELIGIBLE_TENSES,
+    TENSES,
+    TIE_RULES,
+    MergeEntry,
+    applyMergeKeys,
+    buildMergeEntries,
+    occupiedOutlines,
+    resolveMerges,
+    stripMarks,
+)
 from src.word import Word
 from util._stenorender import renderFinalStrokesToRTFCRE
+from util._reservedchords import reservedChords
 from util._theoryio import loadPhoneticAndDisambiguatedTheory
 from util.build_reading_shares import LEXICON_DEFAULTS, classKey, loadLexiqueClasses
 from util.check_conjugation_disambiguation_order import parsePrecedenceOrder
 from util.export_plover_numbers import reservedNumberStrokes
 from util.export_plover_spelling import reservedSpellingStrokes
 
-MARK_KEYS = frozenset({10, 15})
-ELIGIBLE_DEFAULT = ("présent", "impératif", "infinitif", "participe", "nominal")
-EXCLUDED_DEFAULT = ("future", "passé simple", "conditionnel", "imparfait", "subjonctif")
-RESERVED_DICTIONARIES = ("plover_stenalgo_punctuation.json", "plover_stenalgo_commands.json",
-                         "plover_stenalgo_pluvier_punctuation.json", "plover_stenalgo_pluvier_numbers.json",
-                         "plover_stenalgo_lapwing_numbers.json", "plover_stenalgo_spelling.json")
-EXPRESSION_BRIEFS = "scratch/expr-briefs.tsv"
 READING_SHARES = "resources/readingShares.tsv"
 OUT_DEFAULT = "scratch/merged-keys/baseline"
 TOP_EXAMPLES = 30
 MOODS = {"indicatif": "ind", "subjonctif": "sub", "conditionnel": "cnd", "impératif": "imp"}
-
-
-def comboTense(combo: Iterable[str]) -> str:
-    """The tense of one feature combination of a reading (`nominal` for NOM/ADJ gender/number)."""
-    features = set(combo)
-    for tense in ("infinitif", "participe", "conditionnel", "subjonctif", "impératif"):
-        if tense in features:
-            return tense
-    if "indicatif" in features:
-        if "imparfait" in features:
-            return "imparfait"
-        if "future" in features:
-            return "future"
-        return "passé simple" if "passé" in features else "présent"
-    return "nominal"
 
 
 def comboReading(combo: Iterable[str]) -> str:
@@ -155,38 +127,12 @@ def precedenceIndex(combos: Iterable[Iterable[str]], order: list[frozenset[str]]
 
 
 @dataclass
-class Entry:
-    """One alternate of one word: today's outline, its candidate merged outline and the simulator's verdict."""
-    word: Word
-    index: int
-    final: Strokes
-    baseLength: int
-    groups: frozenset[int]
-    tenses: frozenset[str]
-    frequency: float
-    featureKeys: frozenset[int] = frozenset()
-    mergeKeys: frozenset[int] = frozenset()
-    merged: Strokes | None = None
-    mergedOutline: str = ""
-    outcome: str = "no feature stroke"
-    partner: str = ""
-    eligible: bool = False
-    precedence: int = 0
+class Entry(MergeEntry):
+    """A merge entry with the simulator's figures: its frequency share, today's outline and the S7 recomposition."""
+    frequency: float = 0.0
     today: Strokes = ()
     composedPrimary: Strokes | None = None
     composedLong: Strokes | None = None
-
-    @property
-    def lastBase(self) -> frozenset[int]:
-        return frozenset(self.final[self.baseLength - 1])
-
-    @property
-    def absorbed(self) -> bool:
-        return bool(self.mergeKeys & self.lastBase)
-
-    @property
-    def primary(self) -> Strokes:
-        return self.merged if self.outcome == "merged" and self.merged is not None else self.final
 
     @property
     def shipped(self) -> Strokes:
@@ -196,10 +142,6 @@ class Entry:
     @property
     def shippedLong(self) -> Strokes:
         return self.composedLong if self.composedLong is not None else self.final
-
-    @property
-    def contestKey(self) -> tuple[frozenset[int], frozenset[int]]:
-        return self.lastBase, self.mergeKeys
 
 
 @dataclass
@@ -225,81 +167,30 @@ class Simulation:
     markChanges: list[Entry] = field(default_factory=list)
 
 
-def stripMarks(strokes: Strokes) -> Strokes:
-    """The strokes without star/hash keys and without */# marker strokes (the --regression view)."""
-    return tuple(tuple(k for k in s if k not in MARK_KEYS) for s in strokes if not set(s) <= MARK_KEYS)
-
-
-def mergeStroke(stroke: Stroke, keys: Iterable[int]) -> Stroke:
-    return tuple(sorted(set(stroke) | set(keys)))
-
-
-def loadReservedChords() -> dict[str, str]:
-    """Outline -> source of every chord of the other shipped dictionaries and of the expression briefs (D8)."""
-    reserved: dict[str, str] = {}
-    for path in RESERVED_DICTIONARIES:
-        with open(path, encoding="utf-8") as f:
-            for outline in json.load(f):
-                reserved.setdefault(outline, path.removeprefix("plover_stenalgo_").removesuffix(".json"))
-    with open(EXPRESSION_BRIEFS, encoding="utf-8") as f:
-        for row in csv.DictReader(f, delimiter="\t"):
-            reserved.setdefault(row["rtfcre"], "expression brief")
-    return reserved
-
-
 def buildEntries(disambiguated: dict[Word, list[Strokes]], wordToStrokes: dict[Word, Strokes],
                  wordsByOrthoLemme: dict[tuple[str, str], list[Word]], resolved: list[dict[str, Any]],
                  markers: dict[int, frozenset[str]], keysOf: dict[int, tuple[int, ...]],
                  shares: ReadingShares, options: Options) -> tuple[list[Entry], int]:
     """Every (word, alternate) of the disambiguated theory, with its frequency share and candidate merged outline."""
-    pressOf: dict[Word, tuple[list[list[str]], list[list[list[str]]]]] = {}
-    for record in resolved:
-        for ortho, alternates in record["pressSets"].items():
-            word = _resolveEntryWord(record, ortho, wordToStrokes, wordsByOrthoLemme)
-            if word is not None:
-                pressOf[word] = (alternates, record["readings"][ortho])
-    entries: list[Entry] = []
-    mismatches = 0
+    built, mismatches = buildMergeEntries(disambiguated, wordToStrokes, wordsByOrthoLemme, resolved, markers,
+                                          options.eligible, unmarked=options.regression or options.order == "before-s7",
+                                          everyTense=options.regression, entryFactory=Entry)
+    entries = [e for e in built if isinstance(e, Entry)]
     order = parsePrecedenceOrder()
-    for word, finals in disambiguated.items():
-        alternates, readings = pressOf.get(word, ([[]], [[]]))
-        if len(alternates) != len(finals):
-            mismatches += 1
-            alternates, readings = [[]] * len(finals), [[]] * len(finals)
-        weights = [sum(shares.share(word, combo) for combo in combos) if combos else 1.0 for combos in readings]
+    byWord: dict[Word, list[Entry]] = defaultdict(list)
+    for entry in entries:
+        byWord[entry.word].append(entry)
+    for word, wordEntries in byWord.items():
+        weights = [sum(shares.share(word, combo) for combo in e.readings) if e.readings else 1.0 for e in wordEntries]
         if sum(weights) <= 0:
             weights = [1.0] * len(weights)
-        baseLength = len(wordToStrokes[word])
-        for index, today in enumerate(finals):
-            final = stripMarks(today) if options.regression or options.order == "before-s7" else today
-            groups = frozenset(g for g, groupMarkers in markers.items() if groupMarkers & set(alternates[index]))
-            entry = Entry(word, index, final, baseLength, groups,
-                          frozenset(comboTense(combo) for combo in readings[index]),
-                          word.frequency * weights[index] / sum(weights),
-                          precedence=precedenceIndex(readings[index], order), today=today)
-            hasFeatureStroke = len(final) > baseLength and not set(final[baseLength]) <= MARK_KEYS
-            if hasFeatureStroke:
-                entry.featureKeys = frozenset(final[baseLength])
-                if entry.featureKeys != {k for g in groups for k in keysOf[g]}:
-                    mismatches += 1
-                entry.eligible = options.regression or (bool(entry.tenses) and entry.tenses <= options.eligible)
-            entries.append(entry)
+        for entry, weight in zip(wordEntries, weights):
+            entry.frequency = word.frequency * weight / sum(weights)
+            entry.precedence = precedenceIndex(entry.readings, order)
+            entry.today = disambiguated[word][entry.index]
+            if entry.featureKeys and entry.featureKeys != {k for g in entry.groups for k in keysOf[g]}:
+                mismatches += 1
     return entries, mismatches
-
-
-def applyMergeKeys(entries: Iterable[Entry], mergeKeysOf: dict[int, tuple[int, ...]]) -> None:
-    """(Re)sets every entry's candidate merged outline for the merge key-set of each group (D9), verdicts cleared."""
-    for entry in entries:
-        entry.partner, entry.mergedOutline = "", ""
-        entry.composedPrimary = entry.composedLong = None
-        if not entry.featureKeys:
-            entry.merged, entry.outcome = None, "no feature stroke"
-            continue
-        entry.mergeKeys = frozenset(k for g in entry.groups for k in mergeKeysOf[g])
-        last = entry.baseLength - 1
-        entry.merged = entry.final[:last] + (mergeStroke(entry.final[last], entry.mergeKeys),) \
-            + entry.final[entry.baseLength + 1:]
-        entry.outcome = "eligible" if entry.eligible else "excluded tense"
 
 
 def encodingClashes(entries: Iterable[Entry], mergeKeysOf: dict[int, tuple[int, ...]]) -> list[str]:
@@ -311,94 +202,6 @@ def encodingClashes(entries: Iterable[Entry], mergeKeysOf: dict[int, tuple[int, 
         byKeys[frozenset(k for g in groups for k in mergeKeysOf[g])].append(groups)
     return [f"{sorted(keys)}: {' / '.join(str(sorted(g)) for g in sets)}"
             for keys, sets in byKeys.items() if len(sets) > 1]
-
-
-def beats(a: Entry, b: Entry) -> str:
-    """The ladder level at which `a` beats `b` (`level 1`, `level 2`), or '' when it does not."""
-    if a.lastBase > b.lastBase:
-        return "level 1"
-    if a.lastBase == b.lastBase and a.word.lemmeGramCat == b.word.lemmeGramCat and b.absorbed and not a.absorbed:
-        return "level 2"
-    return ""
-
-
-def occupiedOutlines(entries: list[Entry], options: Options, render: Any) -> dict[str, set[str]]:
-    """Outline -> spellings of every final outline of the theory (long outlines included)."""
-    occupied: dict[str, set[str]] = defaultdict(set)
-    for entry in entries:
-        if options.regression and entry.featureKeys:
-            continue  # the fusion statistics replaced the long outline instead of keeping it
-        occupied[render(entry.final)].add(entry.word.ortho)
-    return occupied
-
-
-def resolveMerges(entries: list[Entry], keyboard: Starboard, reserved: dict[str, str], options: Options,
-                  render: Any, occupied: dict[str, set[str]] | None = None) -> None:
-    """Sets each eligible entry's outcome: merged, or the reason it keeps its long outline."""
-    if occupied is None:
-        occupied = occupiedOutlines(entries, options, render)
-    candidates: dict[str, list[Entry]] = defaultdict(list)
-    for entry in entries:
-        if not entry.eligible or entry.merged is None:
-            continue
-        if keyboard.getStrokeCost(stripMarks(entry.final[entry.baseLength - 1:entry.baseLength])[0], "coda") is None:
-            entry.outcome = "base unpressable"
-            continue
-        if keyboard.getStrokeCost(entry.merged[entry.baseLength - 1], "coda") is None:
-            entry.outcome = "unpressable"
-            continue
-        entry.mergedOutline = render(entry.merged)
-        candidates[entry.mergedOutline].append(entry)
-    for outline, group in candidates.items():
-        others = occupied.get(outline, set())
-        if outline in reserved:
-            for entry in group:
-                entry.outcome, entry.partner = "other dictionary", reserved[outline]
-            continue
-        for entry in group:
-            occupants = others - {entry.word.ortho}
-            if occupants:
-                entry.outcome, entry.partner = "occupied", ",".join(sorted(occupants))
-        open_ = [e for e in group if e.outcome == "eligible"]
-        if options.regression:
-            for entry in open_:
-                rivals = [r for r in open_ if r.word.ortho != entry.word.ortho]
-                entry.outcome = "conflict" if rivals else "merged"
-                entry.partner = rivals[0].word.ortho if rivals else ""
-            continue
-        def competes(a: Entry, b: Entry) -> bool:
-            if a.word.ortho == b.word.ortho:
-                return False
-            return options.order != "before-s7" or a.contestKey != b.contestKey  # level 3: S7 marks them apart
-
-        undominated: list[Entry] = []
-        for entry in open_:
-            beaten = next(((r, level) for r in open_ if competes(r, entry)
-                           for level in [beats(r, entry)] if level), None)
-            if beaten is not None:
-                entry.outcome, entry.partner = beaten[1], beaten[0].word.ortho
-            else:
-                undominated.append(entry)
-        spellings: dict[str, float] = defaultdict(float)
-        for entry in undominated:
-            spellings[entry.word.ortho] += entry.word.frequency
-        if all(not competes(a, b) for a in undominated for b in undominated):
-            for entry in undominated:
-                entry.outcome = "merged"
-            continue
-        rank: dict[str, tuple[int, int, float]] = {}
-        for entry in undominated:
-            key = (GRAMCAT_PRIORITY.get(entry.word.gramCat.name, UNLISTED_CATEGORY_PRIORITY), -entry.precedence,
-                   spellings[entry.word.ortho])
-            rank[entry.word.ortho] = max(rank.get(entry.word.ortho, key), key)
-        winner = max(spellings, key=lambda s: (spellings[s], s)) if options.tie == "frequency" \
-            else max(rank, key=lambda s: (rank[s], s)) if options.tie == "precedence" else None
-        for entry in undominated:
-            if entry.word.ortho == winner:
-                entry.outcome = "merged"
-            else:
-                entry.outcome = "tie"
-                entry.partner = ",".join(sorted(s for s in spellings if s != entry.word.ortho))
 
 
 def recomposeMarks(entries: list[Entry], wordToStrokes: dict[Word, Strokes]) -> list[Entry]:
@@ -477,13 +280,14 @@ def loadContext(options: Options) -> Context:
     shares = ReadingShares()
     entries, mismatches = buildEntries(disambiguated, wordToStrokes, wordsByOrthoLemme, resolved, markers, keysOf,
                                        shares, options)
-    reserved = {} if options.regression else loadReservedChords()
+    reserved = {} if options.regression else reservedChords(keyboard)
     return Context(keyboard, entries, wordToStrokes, keysOf, markers, reserved, mismatches, shares.misses)
 
 
 def simulate(ctx: Context, options: Options, occupied: dict[str, set[str]] | None = None) -> Simulation:
     applyMergeKeys(ctx.entries, {**ctx.keysOf, **options.mergeKeys})
-    resolveMerges(ctx.entries, ctx.keyboard, ctx.reserved, options, ctx.render, occupied)
+    resolveMerges(list(ctx.entries), ctx.keyboard, ctx.reserved, ctx.render, options.tie,
+                  marksApart=options.order == "before-s7", anyConflict=options.regression, occupied=occupied)
     markChanges = recomposeMarks(ctx.entries, ctx.wordToStrokes) if options.order == "before-s7" else []
     before, newCollisions = checkCollisions(ctx.entries, ctx.reserved, ctx.render)
     return Simulation(ctx.entries, ctx.keysOf, ctx.markers, len(ctx.reserved), before, ctx.mismatches,
@@ -572,7 +376,7 @@ def metricsReport(sim: Simulation, options: Options) -> list[str]:
     for group in sorted(sim.keysOf):
         lines.append(rateRow(f"group {group} {'+'.join(sorted(sim.markers[group]))} {sim.keysOf[group]}",
                              [e for e in eligible if group in e.groups]))
-    for tense in ELIGIBLE_DEFAULT + EXCLUDED_DEFAULT:
+    for tense in TENSES:
         pool = [e for e in eligible if tense in e.tenses]
         if pool:
             lines.append(rateRow(f"tense {tense}", pool))
@@ -680,7 +484,7 @@ def searchMergeKeys(ctx: Context, options: Options) -> list[str]:
     """5b: every (f, plural) merge key-set pair among the coda keys and the Realization Phase digraphs, ranked by M1,
     then M4; a pair whose key-sets clash with another group set's (f, p, f+p and every occurring union) is rejected."""
     total = sum(e.frequency for e in ctx.entries)
-    occupied = occupiedOutlines(ctx.entries, options, ctx.render)
+    occupied = occupiedOutlines(ctx.entries, ctx.render, replaceLong=options.regression)
     for e in ctx.entries:
         e.composedPrimary = e.composedLong = None
     today = sum(e.frequency * len(e.today) for e in ctx.entries) / total
@@ -736,9 +540,9 @@ def writeEntries(entries: list[Entry], path: str, render: Any) -> None:
 def main() -> None:
     os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--eligible", default=",".join(ELIGIBLE_DEFAULT),
+    parser.add_argument("--eligible", default=",".join(t for t in TENSES if t in MERGE_ELIGIBLE_TENSES),
                         help="comma-separated tenses; 'all' for every tense")
-    parser.add_argument("--tie", choices=("fallback", "frequency", "precedence"), default="fallback")
+    parser.add_argument("--tie", choices=TIE_RULES, default=TIE_RULES[0])
     parser.add_argument("--order", choices=("after-s7", "before-s7"), default="after-s7")
     parser.add_argument("--regression", action="store_true")
     parser.add_argument("--merge-keys", default="",
@@ -746,8 +550,8 @@ def main() -> None:
     parser.add_argument("--search", action="store_true", help="iteration 5: absorption table and (f, p) key search")
     parser.add_argument("--out", default=OUT_DEFAULT)
     args = parser.parse_args()
-    eligible = ELIGIBLE_DEFAULT + EXCLUDED_DEFAULT if args.eligible == "all" else tuple(args.eligible.split(","))
-    unknown = set(eligible) - set(ELIGIBLE_DEFAULT + EXCLUDED_DEFAULT)
+    eligible = TENSES if args.eligible == "all" else tuple(args.eligible.split(","))
+    unknown = set(eligible) - set(TENSES)
     if unknown:
         parser.error(f"unknown tenses {sorted(unknown)}")
     options = Options(frozenset(eligible), args.tie, args.order, args.regression, args.out)
