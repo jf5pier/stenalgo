@@ -78,7 +78,7 @@ def test_word_record_shape_and_alternates(starboard):
     word = _build(starboard)["lessons"][1]["words"][0]
     assert list(word)[:len(RECORD_FIELDS)] == list(RECORD_FIELDS) and "alternates" in word
     assert word["strokes"] == [[9, 12], [13]] and word["rule"] == 2
-    assert word["alternates"] == [{"steno": starboard_steno((3,), (12,), (13,)), "strokes": [[3], [12], [13]]}]
+    assert word["alternates"] == [{"steno": starboard_steno((3,), (12,), (13,)), "strokes": [[3], [12], [13]], "kind": "long"}]
     assert all(stroke == sorted(stroke) for stroke in word["strokes"] + word["alternates"][0]["strokes"])
     assert word["before"] == word["after"] == ""
 

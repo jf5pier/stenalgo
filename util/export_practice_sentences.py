@@ -30,15 +30,16 @@ Requires the same inputs as `util.export_practice_words`, plus its output.
 from typing import Any
 import argparse
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from src.keyboard import Starboard, Strokes
 from src.word import Word
+from util._outlines import AffixShorts, taggedOutlines
 from util._stenorender import renderFinalStrokesToRTFCRE
 from util._theoryio import loadPhoneticAndDisambiguatedTheory
 from util.export_practice_words import (
     KEYBOARD_JSON, OUTPUT_PATH as PRACTICE_WORDS_PATH, RESOLVED_PRESS_SETS_PATH, Reading,
-    buildReadingsByWord, chordsWithReadings, formatPhonology, formatReadingsLabel,
+    buildReadingsByWord, chordsWithAlternates, formatPhonology, formatReadingsLabel,
 )
 
 CANDIDATES_PATH = "util/candidate_sentences.jsonl"
@@ -49,10 +50,14 @@ FINAL_PUNCTUATION = ".?!"
 
 @dataclass(frozen=True)
 class Chord:
+    """`strokes`/`steno`: the theory's primary outline (what the expression layer composes on); `hint`: the outline
+    the drill shows (the long one, D25) and `alternates` the other accepted ones (D24, `util._outlines`)."""
     word: Word
     strokes: Strokes
     steno: str
     readings: list[Reading]
+    hint: dict[str, Any] = field(default_factory=dict)
+    alternates: list[dict[str, Any]] = field(default_factory=list)
 
 
 class Rejected(Exception):
@@ -128,18 +133,22 @@ def buildSentence(candidate: dict[str, Any], chordsByOrtho: dict[str, list[Chord
             raise Rejected(f"{token[0]!r} ({chord.steno}): not a drilled word")
         words.append((token[0], chord, meant))
 
+    def segment(form: str, chord: Chord, meant: list[Reading]) -> dict[str, Any]:
+        hint = chord.hint or {"steno": chord.steno, "strokes": [sorted(set(s)) for s in chord.strokes]}
+        record = {"text": form, "label": formatReadingsLabel(chord.word.gramCat, meant),
+                  "steno": hint["steno"], "strokeCount": len(hint["strokes"])}
+        if chord.alternates:
+            record["alternates"] = chord.alternates   # D24: the word may be written with any of them
+        return record
+
+    segments = [segment(form, chord, meant) for form, chord, meant in words]
     return {
         "text": text,
         "phonology": " ".join(formatPhonology(chord.word) for _, chord, _ in words),
-        "steno": " ".join(chord.steno for _, chord, _ in words),
-        "strokes": [sorted(set(stroke)) for _, chord, _ in words for stroke in chord.strokes],
-        "words": [
-            {
-                "text": form, "label": formatReadingsLabel(chord.word.gramCat, meant),
-                "steno": chord.steno, "strokeCount": len(chord.strokes),
-            }
-            for form, chord, meant in words
-        ],
+        "steno": " ".join(s["steno"] for s in segments),
+        "strokes": [stroke for _, chord, _ in words
+                    for stroke in (chord.hint["strokes"] if chord.hint else [sorted(set(s)) for s in chord.strokes])],
+        "words": segments,
     }
 
 
@@ -151,15 +160,18 @@ def loadChordsByOrtho(starboard: Starboard) -> tuple[dict[str, list[Chord]], set
         readingsByWord = buildReadingsByWord(json.load(f), theory,
                                              wordToStrokes=wordToStrokes, wordsByOrthoLemme=wordsByOrthoLemme)
     with open(PRACTICE_WORDS_PATH, encoding="utf-8") as f:
-        drillItems = {(item["ortho"], item["steno"]) for item in json.load(f)}
+        # Every outline a drill item accepts: the hint (long) one and its alternates (merged, abbreviated).
+        drillItems = {(item["ortho"], steno) for item in json.load(f)
+                      for steno in [item["steno"]] + [a["steno"] for a in item.get("alternates", [])]}
 
+    affix = AffixShorts(starboard)
     chordsByOrtho: dict[str, list[Chord]] = {}
     for word, strokesList in disambiguatedTheory.items():
-        chords, _aligned = chordsWithReadings(word, strokesList, readingsByWord)
-        chordsByOrtho.setdefault(word.ortho, []).extend(
-            Chord(word, strokes, renderFinalStrokesToRTFCRE(starboard, strokes), readings)
-            for strokes, readings in chords
-        )
+        chords, _aligned = chordsWithAlternates(word, strokesList, readingsByWord)
+        for strokes, readings, longs in chords:
+            hint, alternates = taggedOutlines(starboard, strokes, longs, affix)
+            chordsByOrtho.setdefault(word.ortho, []).append(
+                Chord(word, strokes, renderFinalStrokesToRTFCRE(starboard, strokes), readings, hint, alternates))
     return chordsByOrtho, drillItems
 
 

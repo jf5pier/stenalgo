@@ -1,4 +1,4 @@
-module Drill exposing (TextStatus(..), textStatus, applyText, Outline, PracticeWord, Segment, State, applyStroke, currentSegmentIndex, currentWord, decoder, skipWords, matchedOutline, expectedStroke, init, nextWord, reshuffle, sentenceDecoder, wordDecoder)
+module Drill exposing (TextStatus(..), textStatus, applyText, Outline, PracticeWord, Progress, Segment, State, applyStroke, currentSegmentIndex, currentWord, decoder, skipWords, matchedOutline, expectedStroke, init, nextWord, progress, progressAfter, reshuffle, sentenceDecoder, shortOutlines, wordDecoder)
 
 {-| The drill engine: a shuffled walk through the word list (loaded already
 frequency-ordered by `util/export_practice_words.py`, but drilled in a
@@ -52,10 +52,14 @@ type alias PracticeWord =
 
 
 {-| An accepted way of writing an item: its steno text (what the hint and the
-typed-strokes line show) and its chords. -}
+typed-strokes line show), its chords, and its kind (`util/_outlines.py`): "long"
+(the hint above the keyboard), "merged" (merged feature keys), "affix" (an affix
+abbreviation, `rule` its rank) or "expression". -}
 type alias Outline =
     { steno : String
     , strokes : List (List Int)
+    , kind : String
+    , rule : Maybe Int
     }
 
 
@@ -68,6 +72,7 @@ type alias Segment =
     , steno : String
     , strokeCount : Int
     , spaceBefore : Bool
+    , alternates : List Outline
     }
 
 
@@ -88,9 +93,11 @@ wordDecoder =
 
 outlineDecoder : D.Decoder Outline
 outlineDecoder =
-    D.map2 Outline
+    D.map4 Outline
         (D.field "steno" D.string)
         (D.field "strokes" (D.list (D.list D.int)))
+        (D.oneOf [ D.field "kind" D.string, D.succeed "long" ])
+        (D.oneOf [ D.field "rule" (D.map Just D.int), D.succeed Nothing ])
 
 
 decoder : D.Decoder (List PracticeWord)
@@ -100,12 +107,13 @@ decoder =
 
 segmentDecoder : D.Decoder Segment
 segmentDecoder =
-    D.map5 Segment
+    D.map6 Segment
         (D.field "text" D.string)
         (D.field "label" D.string)
         (D.field "steno" D.string)
         (D.field "strokeCount" D.int)
         (D.oneOf [ D.field "spaceBefore" D.bool, D.succeed True ])
+        (D.oneOf [ D.field "alternates" (D.list outlineDecoder), D.succeed [] ])
 
 
 sentenceDecoder : D.Decoder (List PracticeWord)
@@ -190,68 +198,212 @@ wrappedIndex state index =
     modBy (max 1 (Array.length state.words)) index
 
 
+{-| Where the strokes typed so far stand in the item: the word (`segment`, 0 for
+a lone word), the outline of it being followed and how many of its strokes are
+in (`within`), whether the item is `complete`, and the outline and index of the
+last stroke typed (`last`, with whether it ended a word). -}
+type alias Progress =
+    { segment : Int
+    , outline : Outline
+    , within : Int
+    , complete : Bool
+    , last : Maybe { outline : Outline, index : Int, endsWord : Bool }
+    }
+
+
+{-| Each word's accepted outlines, the hint first: a lone word's own outline and
+its alternates; a sentence's words their slice of the hint strokes and their own
+alternates (D24: every word may be written with any of its outlines). -}
+segmentOutlines : PracticeWord -> List (List Outline)
+segmentOutlines word =
+    if List.isEmpty word.segments then
+        [ { steno = word.steno, strokes = word.strokes, kind = "long", rule = Nothing } :: word.alternates ]
+
+    else
+        word.segments
+            |> List.foldl
+                (\segment ( start, acc ) ->
+                    ( start + segment.strokeCount
+                    , ({ steno = segment.steno
+                       , strokes = word.strokes |> List.drop start |> List.take segment.strokeCount
+                       , kind = "long"
+                       , rule = Nothing
+                       }
+                        :: segment.alternates
+                      )
+                        :: acc
+                    )
+                )
+                ( 0, [] )
+            |> Tuple.second
+            |> List.reverse
+
+
+{-| The first parse (hint outlines first, word by word) of `typed` as whole words
+then the start of one; Nothing when the strokes are no accepted way to write the
+item. A sentence's own alternates (an abbreviated sentence's rivals) are whole
+outlines of the item, tried after the word-by-word parse. -}
+progress : PracticeWord -> List (List Int) -> Maybe Progress
+progress word typed =
+    let
+        firstJust options =
+            case options of
+                [] ->
+                    Nothing
+
+                option :: rest ->
+                    case option () of
+                        Just found ->
+                            Just found
+
+                        Nothing ->
+                            firstJust rest
+
+        parse index segments remaining last =
+            case segments of
+                [] ->
+                    Nothing
+
+                outlines :: rest ->
+                    outlines
+                        |> List.map
+                            (\outline () ->
+                                let
+                                    k =
+                                        List.length outline.strokes
+
+                                    n =
+                                        List.length remaining
+                                in
+                                if n < k && List.take n outline.strokes == remaining then
+                                    Just
+                                        { segment = index
+                                        , outline = outline
+                                        , within = n
+                                        , complete = False
+                                        , last =
+                                            if n > 0 then
+                                                Just { outline = outline, index = n - 1, endsWord = False }
+
+                                            else
+                                                last
+                                        }
+
+                                else if List.take k remaining == outline.strokes then
+                                    let
+                                        ended =
+                                            Just { outline = outline, index = k - 1, endsWord = True }
+                                    in
+                                    if List.isEmpty rest then
+                                        if n == k then
+                                            Just { segment = index, outline = outline, within = k, complete = True, last = ended }
+
+                                        else
+                                            Nothing
+
+                                    else
+                                        parse (index + 1) rest (List.drop k remaining) ended
+
+                                else
+                                    Nothing
+                            )
+                        |> firstJust
+
+        wholeItem =
+            if List.isEmpty word.segments then
+                []
+
+            else
+                List.map (\outline () -> parse 0 [ [ outline ] ] typed Nothing) word.alternates
+    in
+    firstJust ((\() -> parse 0 (segmentOutlines word) typed Nothing) :: wholeItem)
+
+
+{-| `progress` of the current item after one more stroke (`observed`). -}
+progressAfter : Set Int -> State -> Maybe Progress
+progressAfter observed state =
+    currentWord state |> Maybe.andThen (\word -> progress word (state.typed ++ [ Set.toList observed ]))
+
+
+{-| The position in the hint strokes that a progress stands for: the start of its
+word in the hint plus the strokes in, kept inside the word (a short outline may
+be shorter or longer than the hint's). -}
+hintIndex : PracticeWord -> Progress -> Int
+hintIndex word p =
+    let
+        counts =
+            if List.isEmpty word.segments then
+                [ List.length word.strokes ]
+
+            else
+                List.map .strokeCount word.segments
+
+        start =
+            counts |> List.take p.segment |> List.sum
+
+        count =
+            counts |> List.drop p.segment |> List.head |> Maybe.withDefault 1
+    in
+    if p.complete then
+        List.sum counts
+
+    else
+        start + min p.within (max 0 (count - 1))
+
+
 {-| Which of the current sentence's words the next expected stroke belongs to
-(0 for a single word, which has no segments). -}
+(0 for a lone word, which has no segments). -}
 currentSegmentIndex : State -> Int
 currentSegmentIndex state =
     currentWord state
-        |> Maybe.map
-            (\word ->
-                word.segments
-                    |> List.foldl
-                        (\segment ( index, strokesBefore, found ) ->
-                            case found of
-                                Just _ ->
-                                    ( index, strokesBefore, found )
-
-                                Nothing ->
-                                    if state.currentStrokeIndex < strokesBefore + segment.strokeCount then
-                                        ( index, strokesBefore, Just index )
-
-                                    else
-                                        ( index + 1, strokesBefore + segment.strokeCount, Nothing )
-                        )
-                        ( 0, 0, Nothing )
-                    |> (\( _, _, found ) -> Maybe.withDefault 0 found)
-            )
+        |> Maybe.andThen (\word -> progress word state.typed)
+        |> Maybe.map .segment
         |> Maybe.withDefault 0
 
 
+{-| The next stroke of the outline being followed (the hint's until the strokes
+typed match only a short one, D25). -}
 expectedStroke : State -> Maybe (Set Int)
 expectedStroke state =
     currentWord state
-        |> Maybe.andThen (\word -> List.drop state.currentStrokeIndex word.strokes |> List.head)
+        |> Maybe.andThen (\word -> progress word state.typed)
+        |> Maybe.andThen (\p -> List.drop p.within p.outline.strokes |> List.head)
         |> Maybe.map Set.fromList
 
 
-{-| The item's accepted outlines (the primary one first) that start with the
-given strokes. -}
-consistentOutlines : List (List Int) -> PracticeWord -> List Outline
-consistentOutlines typedNow word =
-    { steno = word.steno, strokes = word.strokes }
-        :: word.alternates
-        |> List.filter (\outline -> List.take (List.length typedNow) outline.strokes == typedNow)
+{-| The short outlines (merged, abbreviated) of the current word of the item,
+for the hint under the keyboard. -}
+shortOutlines : State -> List Outline
+shortOutlines state =
+    case currentWord state of
+        Just word ->
+            segmentOutlines word
+                |> List.drop (currentSegmentIndex state)
+                |> List.head
+                |> Maybe.withDefault []
+                |> List.filter (\outline -> outline.kind /= "long")
+
+        Nothing ->
+            []
 
 
-{-| The outline the next stroke would continue, were it accepted: the first
-(the primary one wins) outline consistent with the strokes so far plus
-`observed`. `Main.elm` uses it, on the state BEFORE `applyStroke`, to show
-what the learner typed. -}
+{-| The outline the next stroke would continue, were it accepted: the outline
+of the word the stroke would be in. `Main.elm` uses it, on the state BEFORE
+`applyStroke`, to show what the learner typed. -}
 matchedOutline : Set Int -> State -> Maybe Outline
 matchedOutline observed state =
-    currentWord state
-        |> Maybe.andThen (\word -> consistentOutlines (state.typed ++ [ Set.toList observed ]) word |> List.head)
+    progressAfter observed state |> Maybe.andThen .last |> Maybe.map .outline
 
 
 {-| Advance the drill on a decoded stroke: match -> flash correct, move to the
-next stroke (or the next word, wrapping, if that was the word's last stroke);
+next stroke (or the next word, wrapping, if that was the item's last stroke);
 no match -> flash incorrect, retry the same word/stroke. No counter, no
 penalty, no lockout -- deliberately bare minimum.
 
-A stroke matches when the strokes accepted so far plus this one are the start
-of ANY accepted outline of the word (`strokes` or one of `alternates`); the
-word is done when they are a whole outline. Without alternates this is the
-plain one-outline comparison. The hint (`expectedStroke`) stays on `strokes`.
+A stroke matches when the strokes accepted so far plus this one are a way to
+write the item: word by word, each word with any of its outlines (`progress`);
+the item is done when every word is whole. `currentStrokeIndex` stays in the
+hint's strokes (`hintIndex`), `typed` holds the strokes as typed.
 
 Returns whether this stroke completed the last word of the current pass (the
 index wrapped back to 0), so `Main.elm` knows to generate a new shuffle --
@@ -265,39 +417,34 @@ applyStroke observed state =
             let
                 typedNow =
                     state.typed ++ [ Set.toList observed ]
-
-                n =
-                    List.length typedNow
-
-                consistent =
-                    consistentOutlines typedNow word
-                        |> List.map .strokes
             in
-            if List.isEmpty consistent then
-                ( { state | feedback = Just False }, False )
+            case progress word typedNow of
+                Nothing ->
+                    ( { state | feedback = Just False }, False )
 
-            else if List.any (\outline -> List.length outline == n) consistent then
-                let
-                    newIndex =
-                        wrappedIndex state (state.currentWordIndex + 1)
-                in
-                ( { state
-                    | currentWordIndex = newIndex
-                    , currentStrokeIndex = 0
-                    , typed = []
-                    , feedback = Just True
-                  }
-                , newIndex == 0
-                )
+                Just p ->
+                    if p.complete then
+                        let
+                            newIndex =
+                                wrappedIndex state (state.currentWordIndex + 1)
+                        in
+                        ( { state
+                            | currentWordIndex = newIndex
+                            , currentStrokeIndex = 0
+                            , typed = []
+                            , feedback = Just True
+                          }
+                        , newIndex == 0
+                        )
 
-            else
-                ( { state
-                    | currentStrokeIndex = n
-                    , typed = typedNow
-                    , feedback = Just True
-                  }
-                , False
-                )
+                    else
+                        ( { state
+                            | currentStrokeIndex = hintIndex word p
+                            , typed = typedNow
+                            , feedback = Just True
+                          }
+                        , False
+                        )
 
         Nothing ->
             ( state, False )

@@ -532,3 +532,22 @@ html.dark .chord-overlay { background: #25282b; color: #eee; border-color: #666;
 .intro-page { max-width: 46rem; line-height: 1.5; }
 .intro-layout img { max-width: 100%; height: auto; }
 html.dark .intro-page a { color: #8ab4f8; }
+
+.short-outlines {
+  /* below the chord board's thumb-chord connectors, like .abbreviation-hints */
+  margin-top: 6rem;
+  font-size: 1.15rem;
+}
+
+.short-outlines + .abbreviation-hints {
+  margin-top: 1rem;
+}
+
+.short-outlines h3 {
+  font-size: 1.3rem;
+}
+
+.short-outlines .steno {
+  font-family: monospace;
+  font-weight: bold;
+}

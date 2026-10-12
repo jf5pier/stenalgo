@@ -634,6 +634,10 @@ def _runSteps(module: "Callable[[str, str], None]", optimizeKeyboard: bool = Fal
     module("Theory Export (S8): Plover punctuation and commands", "util.export_plover_complements")
     module("Theory Export (S8): Plover numbers (Pluvier and Lapwing)", "util.export_plover_numbers")
     module("Theory Export (S8): trainer keyboard layout", "util.export_keyboard_layout")
+    # S9a/S9b before the trainer exports: the drills accept every outline of a word, its affix abbreviations included
+    # (affix_abbreviations.tsv; docs/MERGED_FEATURE_KEYS_PLAN.md D24).
+    module("Affix Abbreviation Building (S9a): rule selection", "util.build_affix_rules")
+    module("Affix Abbreviation Building (S9b): affix dictionary", "util.export_affix_dictionary")
     module("Theory Export (S8): trainer word drills", "util.export_practice_words")
     module("Theory Export (S8): trainer sentences", "util.export_practice_sentences")
     module("Theory Export (S8): trainer definitions", "util.export_definitions")
@@ -642,8 +646,6 @@ def _runSteps(module: "Callable[[str, str], None]", optimizeKeyboard: bool = Fal
     # unchanged). S9a selects the 30 rules from affix_decisions.json (AffixSelection.pickle present: reused or
     # cheaply reselected from its cache; absent: a full ~2.5 min (16 cores; ~5.5 min with --workers 1) selection) and lists PENDING decisions; it never
     # asks a question (util.review_affix_rules is the hand-run command that does). S9b exports the dictionary, S9c the trainer's affix lessons.
-    module("Affix Abbreviation Building (S9a): rule selection", "util.build_affix_rules")
-    module("Affix Abbreviation Building (S9b): affix dictionary", "util.export_affix_dictionary")
     module("Affix Abbreviation Building (S9c): trainer affix lessons", "util.export_affix_lessons")
     module("Affix Abbreviation Building (S9d): trainer abbreviation column", "util.export_affix_abbreviations")
     # Expression Abbreviation Lessons (S10): the trainer's expressions lesson track and the abbreviated sentences, composed

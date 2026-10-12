@@ -465,3 +465,18 @@ M8 (D23): attested pool expressions, strokes per expression (longform / composed
 
 Flag off: every tracked output md5-identical. Not done: the practice sentences accept only the primary outline of each
 word (a sentence-level `alternates` would need every combination).
+
+### 2026-10-12 — trainer: every outline accepted, long hint above, short ones under (D24-D28)
+
+Exporters: `util/_outlines.py` tags each outline (`long`, `merged`, `affix` with its rule); practice words and the
+words of practice sentences show the long outline and accept the merged one and every affix abbreviation
+(`affix_abbreviations.tsv`, so the orchestrator now runs S9a/S9b before the trainer exports); base lessons keep the
+merged outline as the lesson's form with the long one tagged; affix lesson k accepts the long and merged outlines and
+the abbreviations of rules up to k. Trainer (`Drill.elm`): `progress` parses the strokes typed word by word, each word
+with any of its outlines (a sentence's own alternates, the abbreviated sentences' rivals, as whole outlines after
+that); the lit keys follow the outline being typed; `viewShortOutlines` lists the current word's short outlines under
+the keyboard (the "Indices abréviation" switch). D28 needed nothing: the lesson mix switch (`lessonMix`, current and
+past words 50/50) already exists. Flag off: practice words gain 3,937 tagged alternates (affix abbreviations),
+practice sentences 133 word alternates, affix lessons the tags; sentence counts unchanged (216, 139); lessons.json
+unchanged. Checked with a throwaway Elm worker under node: a word or a sentence word typed long or merged is
+accepted, a wrong stroke refused, the hint follows the merged outline.

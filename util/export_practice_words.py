@@ -45,6 +45,7 @@ from src.ambiguitychecker import _resolveEntryWord, buildWordsByOrthoLemme, buil
 from src.elicitation import wordFeatureCombinations
 from src.keyboard import Starboard, Strokes
 from src.mergedfeaturekeys import splitLongAlternates
+from util._outlines import AffixShorts, taggedOutlines
 from src.word import GramCat, Word
 from util._stenorender import renderFinalStrokesToRTFCRE
 from util._theoryio import loadPhoneticAndDisambiguatedTheory
@@ -236,7 +237,7 @@ def outlineRecords(starboard: Starboard, outlines: list[Strokes]) -> list[dict[s
     records: list[dict[str, Any]] = []
     for strokes in outlines:
         record = {"steno": renderFinalStrokesToRTFCRE(starboard, strokes),
-                  "strokes": [sorted(set(stroke)) for stroke in strokes]}
+                  "strokes": [sorted(set(stroke)) for stroke in strokes], "kind": "long"}
         if record not in records:
             records.append(record)
     return records
@@ -260,13 +261,15 @@ def main() -> None:
     # Keyed by (ortho, steno), not ortho alone: a self-homograph's alternate strokes, and
     # two different words sharing a spelling but not a chord ("est" = être / nom), are
     # each their own drill item now that every item says which reading it's for.
+    affix = AffixShorts(starboard)
     byOrthoSteno: dict[tuple[str, str], dict[str, Any]] = {}
     misalignedWords = 0
     for word, strokesList in disambiguatedTheory.items():
         chords, aligned = chordsWithAlternates(word, strokesList, readingsByWord)
         misalignedWords += not aligned
         for strokes, readings, longs in chords:
-            steno = renderFinalStrokesToRTFCRE(starboard, strokes)
+            hint, alternates = taggedOutlines(starboard, strokes, longs, affix)
+            steno = hint["steno"]
             label = formatReadingsLabel(word.gramCat, readings)
             existing = byOrthoSteno.get((word.ortho, steno))
             if existing is not None:
@@ -280,19 +283,21 @@ def main() -> None:
                         and after != "!":
                     existing["before"], existing["after"] = before, after
                 existing["frequency"] = max(existing["frequency"], round(word.frequency, 3))
-                for record in outlineRecords(starboard, longs):
+                for record in alternates:
                     if record not in existing.setdefault("alternates", []):
                         existing["alternates"].append(record)
+                if not existing.get("alternates", True):
+                    del existing["alternates"]
                 continue
             before, after = formatContext(word, readings)
             byOrthoSteno[(word.ortho, steno)] = {
                 "ortho": word.ortho, "before": before, "after": after,
                 "label": label, "phonology": formatPhonology(word), "steno": steno,
-                "strokes": [sorted(set(stroke)) for stroke in strokes],
+                "strokes": hint["strokes"],
                 "frequency": round(word.frequency, 3),
             }
-            if longs:
-                byOrthoSteno[(word.ortho, steno)]["alternates"] = outlineRecords(starboard, longs)
+            if alternates:
+                byOrthoSteno[(word.ortho, steno)]["alternates"] = alternates
 
     records = sorted(byOrthoSteno.values(), key=lambda r: (-r["frequency"], r["ortho"], r["steno"]))
     records = records[:args.limit]

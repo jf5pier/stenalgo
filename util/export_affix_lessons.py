@@ -19,6 +19,7 @@ from typing import Any, Iterable
 
 from src.affixabbrev import Abbreviation, RuleSpec, loadRuleSpecs
 from src.keyboard import Starboard, Strokes
+from src.mergedfeaturekeys import isLongOf
 from util._affixio import loadAbbreviations
 from util._stenorender import renderFinalStrokesToRTFCRE
 from util.export_lessons import RECORD_FIELDS, numberInFrench
@@ -91,12 +92,17 @@ def _wordRecord(group: list[Abbreviation], starboard: Starboard, phonology: str,
     record = {field: values[field] for field in RECORD_FIELDS}
     seen = {a.outline}
     alternates = []
+    longs = {b.longOutline for b in group}
     for b in group:
-        for outline in (b.longOutline, b.outline):
-            if outline not in seen:
+        # D27: the long outline, the merged one and the abbreviations of this rule and the earlier ones, never a later rule's.
+        kind = "merged" if any(isLongOf(other, b.longOutline) for other in longs) else "long"
+        tags: tuple[tuple[Strokes, dict[str, Any]], ...] = ((b.longOutline, {"kind": kind}),
+                                                            (b.outline, {"kind": "affix", "rule": b.rank}))
+        for outline, tag in tags:
+            if outline not in seen and not (tag["kind"] == "affix" and b.rank > a.rank):
                 seen.add(outline)
                 alternates.append({"steno": renderFinalStrokesToRTFCRE(starboard, outline),
-                                   "strokes": _strokesList(outline)})
+                                   "strokes": _strokesList(outline)} | tag)
     record["alternates"] = alternates
     record["rule"] = a.rank   # the affix rule that shortens it (the trainer shows only the rules touching the current word)
     return record

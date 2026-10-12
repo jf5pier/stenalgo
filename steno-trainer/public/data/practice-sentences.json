@@ -153,7 +153,22 @@
     "text": "école",
     "label": "nom, f. sg.",
     "steno": "e/kel",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kvel",
+      "strokes": [
+       [
+        2,
+        5,
+        14,
+        23
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     }
+    ]
    }
   ]
  },
@@ -331,7 +346,27 @@
     "text": "regardez",
     "label": "indicatif présent, 2e pl.",
     "steno": "R@a/ksaR/pve/-d",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "R@akdm/-d",
+      "strokes": [
+       [
+        8,
+        11,
+        12,
+        18,
+        19,
+        25
+       ],
+       [
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 15
+     }
+    ]
    },
    {
     "text": "un",
@@ -406,7 +441,27 @@
     "text": "écoutent",
     "label": "indicatif présent, 3e pl.",
     "steno": "e/k@et/-st",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "kv@et/-st",
+      "strokes": [
+       [
+        2,
+        5,
+        11,
+        14,
+        20
+       ],
+       [
+        17,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     }
+    ]
    },
    {
     "text": "de",
@@ -641,7 +696,24 @@
     "text": "demain",
     "label": "adverbe",
     "steno": "pv@a/maie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kmaied",
+      "strokes": [
+       [
+        2,
+        6,
+        12,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 11
+     }
+    ]
    }
   ]
  },
@@ -904,7 +976,23 @@
     "text": "avons",
     "label": "indicatif présent, 1re pl.",
     "steno": "a/vai",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kvaik",
+      "strokes": [
+       [
+        2,
+        5,
+        12,
+        13,
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "vu",
@@ -986,7 +1074,25 @@
     "text": "trouvé",
     "label": "participe passé, m. sg.",
     "steno": "tR@e/ve",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "tR@ejsk",
+      "strokes": [
+       [
+        7,
+        8,
+        11,
+        14,
+        16,
+        17,
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 27
+     }
+    ]
    },
    {
     "text": "les",
@@ -1264,7 +1370,23 @@
     "text": "écrire",
     "label": "infinitif",
     "steno": "e/kRiR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kvRiR",
+      "strokes": [
+       [
+        2,
+        5,
+        8,
+        13,
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     }
+    ]
    },
    {
     "text": "une",
@@ -1406,7 +1528,23 @@
     "text": "comprend",
     "label": "indicatif présent, 3e sg.",
     "steno": "kai/pR@",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "pRw@d",
+      "strokes": [
+       [
+        4,
+        8,
+        9,
+        11,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     }
+    ]
    },
    {
     "text": "bien",
@@ -1506,7 +1644,24 @@
     "text": "demain",
     "label": "adverbe",
     "steno": "pv@a/maie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kmaied",
+      "strokes": [
+       [
+        2,
+        6,
+        12,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 11
+     }
+    ]
    }
   ]
  },
@@ -1628,7 +1783,29 @@
     "text": "connaissent",
     "label": "indicatif présent, 3e pl.",
     "steno": "kae/mRies/-st",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "mRwiesd/-st",
+      "strokes": [
+       [
+        6,
+        8,
+        9,
+        13,
+        14,
+        17,
+        19
+       ],
+       [
+        17,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     }
+    ]
    },
    {
     "text": "ma",
@@ -1702,7 +1879,25 @@
     "text": "réponse",
     "label": "nom, f. sg.",
     "steno": "Re/pais",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "sptRais",
+      "strokes": [
+       [
+        3,
+        4,
+        7,
+        8,
+        12,
+        13,
+        17
+       ]
+      ],
+      "kind": "affix",
+      "rule": 21
+     }
+    ]
    }
   ]
  },
@@ -1823,7 +2018,26 @@
     "text": "entends",
     "label": "indicatif présent, 2e sg.",
     "steno": "@/t@/-d",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "smt@k/-d",
+      "strokes": [
+       [
+        3,
+        6,
+        7,
+        11,
+        18
+       ],
+       [
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 3
+     }
+    ]
    },
    {
     "text": "ce",
@@ -1893,7 +2107,22 @@
     "text": "demande",
     "label": "indicatif présent, 3e sg.",
     "steno": "pv@a/m@d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "km@d",
+      "strokes": [
+       [
+        2,
+        6,
+        11,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 11
+     }
+    ]
    },
    {
     "text": "un",
@@ -2041,13 +2270,56 @@
     "text": "ensemble",
     "label": "adverbe",
     "steno": "@/s@jl",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "sm@jkl",
+      "strokes": [
+       [
+        3,
+        6,
+        11,
+        16,
+        18,
+        23
+       ]
+      ],
+      "kind": "affix",
+      "rule": 3
+     }
+    ]
    },
    {
     "text": "aujourd'hui",
     "label": "adverbe",
     "steno": "ae/vt@eR/pv@ai",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "pvtR@edR/pv@ai",
+      "strokes": [
+       [
+        4,
+        5,
+        7,
+        8,
+        11,
+        14,
+        19,
+        21
+       ],
+       [
+        4,
+        5,
+        11,
+        12,
+        13
+       ]
+      ],
+      "kind": "affix",
+      "rule": 14
+     }
+    ]
    }
   ]
  },
@@ -2329,7 +2601,23 @@
     "text": "difficile",
     "label": "adjectif, sg.",
     "steno": "pvi/kpi/sil",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "sijdl",
+      "strokes": [
+       [
+        3,
+        13,
+        16,
+        19,
+        23
+       ]
+      ],
+      "kind": "affix",
+      "rule": 28
+     }
+    ]
    }
   ]
  },
@@ -2451,7 +2739,28 @@
     "text": "habitait",
     "label": "indicatif imparfait, 3e sg.",
     "steno": "a/svi/tie",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "ksvik/tie",
+      "strokes": [
+       [
+        2,
+        3,
+        5,
+        13,
+        18
+       ],
+       [
+        7,
+        13,
+        14
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "près",
@@ -2669,7 +2978,24 @@
     "text": "aviez",
     "label": "indicatif imparfait, 2e pl.",
     "steno": "a/vRwe",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kvRwek",
+      "strokes": [
+       [
+        2,
+        5,
+        8,
+        9,
+        14,
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "faim",
@@ -2749,7 +3075,25 @@
     "text": "serai",
     "label": "indicatif futur, 1re sg.",
     "steno": "s@a/Re/-t",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "smRe/-t",
+      "strokes": [
+       [
+        3,
+        6,
+        8,
+        14
+       ],
+       [
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 24
+     }
+    ]
    },
    {
     "text": "heureux",
@@ -2761,7 +3105,24 @@
     "text": "demain",
     "label": "adverbe",
     "steno": "pv@a/maie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kmaied",
+      "strokes": [
+       [
+        2,
+        6,
+        12,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 11
+     }
+    ]
    }
   ]
  },
@@ -2826,13 +3187,47 @@
     "text": "seras",
     "label": "indicatif futur, 2e sg.",
     "steno": "s@a/Ra/-d",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "smRa/-d",
+      "strokes": [
+       [
+        3,
+        6,
+        8,
+        12
+       ],
+       [
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 24
+     }
+    ]
    },
    {
     "text": "occupé",
     "label": "adjectif, m. sg.",
     "steno": "ae/k@i/pe",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "kpmej",
+      "strokes": [
+       [
+        2,
+        4,
+        6,
+        14,
+        16
+       ]
+      ],
+      "kind": "affix",
+      "rule": 30
+     }
+    ]
    },
    {
     "text": "bientôt",
@@ -2899,7 +3294,22 @@
     "text": "aura",
     "label": "indicatif futur, 3e sg.",
     "steno": "ae/Ra",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "pRad",
+      "strokes": [
+       [
+        4,
+        8,
+        12,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 14
+     }
+    ]
    },
    {
     "text": "une",
@@ -2983,7 +3393,25 @@
     "text": "devoir",
     "label": "nom, m. sg.",
     "steno": "pv@a/vwaR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kvmwadR",
+      "strokes": [
+       [
+        2,
+        5,
+        6,
+        9,
+        12,
+        19,
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 11
+     }
+    ]
    }
   ]
  },
@@ -3037,7 +3465,24 @@
     "text": "ensemble",
     "label": "adverbe",
     "steno": "@/s@jl",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "sm@jkl",
+      "strokes": [
+       [
+        3,
+        6,
+        11,
+        16,
+        18,
+        23
+       ]
+      ],
+      "kind": "affix",
+      "rule": 3
+     }
+    ]
    }
   ]
  },
@@ -3227,7 +3672,28 @@
     "text": "iront",
     "label": "indicatif futur, 3e pl.",
     "steno": "i/Rai/-st",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "Raijkd/-st",
+      "strokes": [
+       [
+        8,
+        12,
+        13,
+        16,
+        18,
+        19
+       ],
+       [
+        17,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 20
+     }
+    ]
    },
    {
     "text": "à",
@@ -3317,7 +3783,23 @@
     "text": "vérité",
     "label": "nom, f. sg.",
     "steno": "ve/Ri/te",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "vedtm",
+      "strokes": [
+       [
+        5,
+        14,
+        19,
+        20,
+        25
+       ]
+      ],
+      "kind": "affix",
+      "rule": 16
+     }
+    ]
    }
   ]
  },
@@ -3380,7 +3862,27 @@
     "text": "pourrais",
     "label": "conditionnel présent, 1re sg.",
     "steno": "p@e/Rie/-k",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "ptRiej/-k",
+      "strokes": [
+       [
+        4,
+        7,
+        8,
+        13,
+        14,
+        16
+       ],
+       [
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 26
+     }
+    ]
    },
    {
     "text": "venir",
@@ -3392,7 +3894,24 @@
     "text": "demain",
     "label": "adverbe",
     "steno": "pv@a/maie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kmaied",
+      "strokes": [
+       [
+        2,
+        6,
+        12,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 11
+     }
+    ]
    }
   ]
  },
@@ -3458,13 +3977,60 @@
     "text": "devrais",
     "label": "conditionnel présent, 2e sg.",
     "steno": "pv@a/vRie/-d",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "kvmRied/-d",
+      "strokes": [
+       [
+        2,
+        5,
+        6,
+        8,
+        13,
+        14,
+        19
+       ],
+       [
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 11
+     }
+    ]
    },
    {
     "text": "étudier",
     "label": "infinitif",
     "steno": "e/t@i/pvRwe/-R",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "kvt@i/pvRwe/-R",
+      "strokes": [
+       [
+        2,
+        5,
+        7,
+        11,
+        13
+       ],
+       [
+        4,
+        5,
+        8,
+        9,
+        14
+       ],
+       [
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     }
+    ]
    },
    {
     "text": "plus",
@@ -3591,19 +4157,68 @@
     "text": "serait",
     "label": "conditionnel présent, 3e sg.",
     "steno": "s@a/Rie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "smRie",
+      "strokes": [
+       [
+        3,
+        6,
+        8,
+        13,
+        14
+       ]
+      ],
+      "kind": "affix",
+      "rule": 24
+     }
+    ]
    },
    {
     "text": "contente",
     "label": "adjectif, f. sg.",
     "steno": "kai/t*@t",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "tw*@dt",
+      "strokes": [
+       [
+        7,
+        9,
+        10,
+        11,
+        19,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     }
+    ]
    },
    {
     "text": "ainsi",
     "label": "adverbe",
     "steno": "aie/si",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "stRwi",
+      "strokes": [
+       [
+        3,
+        7,
+        8,
+        9,
+        13
+       ]
+      ],
+      "kind": "affix",
+      "rule": 9
+     }
+    ]
    }
   ]
  },
@@ -3653,7 +4268,24 @@
     "text": "pourrait",
     "label": "conditionnel présent, 3e sg.",
     "steno": "p@e/Rie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "ptRiej",
+      "strokes": [
+       [
+        4,
+        7,
+        8,
+        13,
+        14,
+        16
+       ]
+      ],
+      "kind": "affix",
+      "rule": 26
+     }
+    ]
    },
    {
     "text": "partir",
@@ -3792,7 +4424,27 @@
     "text": "auraient",
     "label": "conditionnel présent, 3e pl.",
     "steno": "ae/Rie/-st",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "pRied/-st",
+      "strokes": [
+       [
+        4,
+        8,
+        13,
+        14,
+        19
+       ],
+       [
+        17,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 14
+     }
+    ]
    },
    {
     "text": "besoin",
@@ -4106,7 +4758,27 @@
     "text": "arrête",
     "label": "impératif présent, 2e sg.",
     "steno": "a/Riet/-k",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "kRiekt/-k",
+      "strokes": [
+       [
+        2,
+        8,
+        13,
+        14,
+        18,
+        20
+       ],
+       [
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "de",
@@ -4367,7 +5039,22 @@
     "text": "avis",
     "label": "nom, m. pl.",
     "steno": "a/vi",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kvik",
+      "strokes": [
+       [
+        2,
+        5,
+        13,
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    }
   ]
  },
@@ -4466,7 +5153,26 @@
     "text": "écoute",
     "label": "impératif présent, 2e sg.",
     "steno": "e/k@et/-k",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "kv@et/-k",
+      "strokes": [
+       [
+        2,
+        5,
+        11,
+        14,
+        20
+       ],
+       [
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     }
+    ]
    },
    {
     "text": "-moi",
@@ -4673,7 +5379,22 @@
     "text": "ami",
     "label": "nom, m. sg.",
     "steno": "a/mi",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kmik",
+      "strokes": [
+       [
+        2,
+        6,
+        13,
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "maintenant",
@@ -4797,7 +5518,24 @@
     "text": "moment",
     "label": "nom, m. sg.",
     "steno": "mae/m@",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "maejtm",
+      "strokes": [
+       [
+        6,
+        12,
+        14,
+        16,
+        20,
+        25
+       ]
+      ],
+      "kind": "affix",
+      "rule": 2
+     }
+    ]
    }
   ]
  },
@@ -4923,7 +5661,22 @@
     "text": "ami",
     "label": "nom, m. sg.",
     "steno": "a/mi",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kmik",
+      "strokes": [
+       [
+        2,
+        6,
+        13,
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    }
   ]
  },
@@ -5056,7 +5809,32 @@
     "text": "intelligent",
     "label": "adjectif, m. sg.",
     "steno": "aie/te/mti/vt@",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "tRwe/mti/vt@",
+      "strokes": [
+       [
+        7,
+        8,
+        9,
+        14
+       ],
+       [
+        6,
+        7,
+        13
+       ],
+       [
+        5,
+        7,
+        11
+       ]
+      ],
+      "kind": "affix",
+      "rule": 9
+     }
+    ]
    }
   ]
  },
@@ -5121,7 +5899,28 @@
     "text": "collègues",
     "label": "nom, pl.",
     "steno": "kae/mtiekd/-s",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "mtwiekd/-s",
+      "strokes": [
+       [
+        6,
+        7,
+        9,
+        13,
+        14,
+        18,
+        19
+       ],
+       [
+        17
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     }
+    ]
    }
   ]
  },
@@ -5186,7 +5985,27 @@
     "text": "problème",
     "label": "nom, m. sg.",
     "steno": "pRae/svmtiem",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "spvmtRiem",
+      "strokes": [
+       [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        13,
+        14,
+        25
+       ]
+      ],
+      "kind": "affix",
+      "rule": 23
+     }
+    ]
    }
   ]
  },
@@ -5350,7 +6169,23 @@
     "text": "avons",
     "label": "indicatif présent, 1re pl.",
     "steno": "a/vai",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kvaik",
+      "strokes": [
+       [
+        2,
+        5,
+        12,
+        13,
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "un",
@@ -5607,7 +6442,22 @@
     "text": "ami",
     "label": "nom, m. sg.",
     "steno": "a/mi",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kmik",
+      "strokes": [
+       [
+        2,
+        6,
+        13,
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    }
   ]
  },
@@ -5682,7 +6532,22 @@
     "text": "école",
     "label": "nom, f. sg.",
     "steno": "e/kel",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kvel",
+      "strokes": [
+       [
+        2,
+        5,
+        14,
+        23
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     }
+    ]
    }
   ]
  },
@@ -5799,7 +6664,28 @@
     "text": "étudie",
     "label": "indicatif présent, 3e sg.",
     "steno": "e/t@i/pvi",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "kvt@i/pvi",
+      "strokes": [
+       [
+        2,
+        5,
+        7,
+        11,
+        13
+       ],
+       [
+        4,
+        5,
+        13
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     }
+    ]
    },
    {
     "text": "le",
@@ -5959,7 +6845,23 @@
     "text": "occupé",
     "label": "adjectif, m. sg.",
     "steno": "ae/k@i/pe",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "kpmej",
+      "strokes": [
+       [
+        2,
+        4,
+        6,
+        14,
+        16
+       ]
+      ],
+      "kind": "affix",
+      "rule": 30
+     }
+    ]
    }
   ]
  },
@@ -6226,7 +7128,24 @@
     "text": "attendre",
     "label": "infinitif",
     "steno": "a/t@dR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kt@kdR",
+      "strokes": [
+       [
+        2,
+        7,
+        11,
+        18,
+        19,
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    }
   ]
  },
@@ -6289,13 +7208,48 @@
     "text": "avons",
     "label": "indicatif présent, 1re pl.",
     "steno": "a/vai",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kvaik",
+      "strokes": [
+       [
+        2,
+        5,
+        12,
+        13,
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "aucun",
     "label": "adjectif indéfini, m. sg.",
     "steno": "ae/k@aie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kpR@aied",
+      "strokes": [
+       [
+        2,
+        4,
+        8,
+        11,
+        12,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 14
+     }
+    ]
    },
    {
     "text": "doute",
@@ -6359,7 +7313,29 @@
     "text": "comprenez",
     "label": "indicatif présent, 2e pl.",
     "steno": "kai/pR@a/mRe",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "pRw@ad/mRe",
+      "strokes": [
+       [
+        4,
+        8,
+        9,
+        11,
+        12,
+        19
+       ],
+       [
+        6,
+        8,
+        14
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     }
+    ]
    },
    {
     "text": "pas",
@@ -6632,7 +7608,24 @@
     "text": "demain",
     "label": "adverbe",
     "steno": "pv@a/maie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kmaied",
+      "strokes": [
+       [
+        2,
+        6,
+        12,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 11
+     }
+    ]
    }
   ]
  },
@@ -6808,7 +7801,26 @@
     "text": "combien",
     "label": "adverbe",
     "steno": "kai/svRwaie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "svRwaied",
+      "strokes": [
+       [
+        3,
+        5,
+        8,
+        9,
+        12,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     }
+    ]
    },
    {
     "text": "coûte",
@@ -7077,7 +8089,23 @@
     "text": "difficile",
     "label": "adjectif, sg.",
     "steno": "pvi/kpi/sil",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "sijdl",
+      "strokes": [
+       [
+        3,
+        13,
+        16,
+        19,
+        23
+       ]
+      ],
+      "kind": "affix",
+      "rule": 28
+     }
+    ]
    }
   ]
  },
@@ -7215,7 +8243,27 @@
     "text": "problème",
     "label": "nom, m. sg.",
     "steno": "pRae/svmtiem",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "spvmtRiem",
+      "strokes": [
+       [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        13,
+        14,
+        25
+       ]
+      ],
+      "kind": "affix",
+      "rule": 23
+     }
+    ]
    }
   ]
  },
@@ -7264,7 +8312,22 @@
     "text": "ami",
     "label": "nom, m. sg.",
     "steno": "a/mi",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kmik",
+      "strokes": [
+       [
+        2,
+        6,
+        13,
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    }
   ]
  },
@@ -7463,7 +8526,24 @@
     "text": "celui",
     "label": "pronom démonstratif, m. sg.",
     "steno": "s@a/mt@ai",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "smt@ai",
+      "strokes": [
+       [
+        3,
+        6,
+        7,
+        11,
+        12,
+        13
+       ]
+      ],
+      "kind": "affix",
+      "rule": 24
+     }
+    ]
    },
    {
     "text": "qui",
@@ -7636,7 +8716,25 @@
     "text": "trouvé",
     "label": "participe passé, m. sg.",
     "steno": "tR@e/ve",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "tR@ejsk",
+      "strokes": [
+       [
+        7,
+        8,
+        11,
+        14,
+        16,
+        17,
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 27
+     }
+    ]
    },
    {
     "text": "ce",
@@ -7730,7 +8828,23 @@
     "text": "avons",
     "label": "indicatif présent, 1re pl.",
     "steno": "a/vai",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kvaik",
+      "strokes": [
+       [
+        2,
+        5,
+        12,
+        13,
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "ce",
@@ -7827,7 +8941,24 @@
     "text": "intéresse",
     "label": "indicatif présent, 3e sg.",
     "steno": "aie/te/Ries",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "tRwies",
+      "strokes": [
+       [
+        7,
+        8,
+        9,
+        13,
+        14,
+        17
+       ]
+      ],
+      "kind": "affix",
+      "rule": 9
+     }
+    ]
    },
    {
     "text": "beaucoup",
@@ -8041,7 +9172,32 @@
     "text": "préférée",
     "label": "adjectif, f. sg.",
     "steno": "pRe/kpe/Re/-j",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "pRe/kpejdR/-j",
+      "strokes": [
+       [
+        4,
+        8,
+        14
+       ],
+       [
+        2,
+        4,
+        14,
+        16,
+        19,
+        21
+       ],
+       [
+        16
+       ]
+      ],
+      "kind": "affix",
+      "rule": 25
+     }
+    ]
    }
   ]
  },
@@ -8104,7 +9260,24 @@
     "text": "celui",
     "label": "pronom démonstratif, m. sg.",
     "steno": "s@a/mt@ai",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "smt@ai",
+      "strokes": [
+       [
+        3,
+        6,
+        7,
+        11,
+        12,
+        13
+       ]
+      ],
+      "kind": "affix",
+      "rule": 24
+     }
+    ]
    },
    {
     "text": "-là",
@@ -8116,7 +9289,31 @@
     "text": "appartient",
     "label": "indicatif présent, 3e sg.",
     "steno": "a/paR/tRwaie",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "kpakR/tRwaie",
+      "strokes": [
+       [
+        2,
+        4,
+        12,
+        18,
+        21
+       ],
+       [
+        7,
+        8,
+        9,
+        12,
+        13,
+        14
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "à",
@@ -8257,7 +9454,30 @@
     "text": "heureusement",
     "label": "adverbe",
     "steno": "@ie/R@ie/tw@a/m@",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "@ie/R@iejtm",
+      "strokes": [
+       [
+        11,
+        13,
+        14
+       ],
+       [
+        8,
+        11,
+        13,
+        14,
+        16,
+        20,
+        25
+       ]
+      ],
+      "kind": "affix",
+      "rule": 2
+     }
+    ]
    },
    {
     "text": "qu'",
@@ -8331,7 +9551,24 @@
     "text": "sûrement",
     "label": "adverbe",
     "steno": "s@i/R@a/m@",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "s@ijtm",
+      "strokes": [
+       [
+        3,
+        11,
+        13,
+        16,
+        20,
+        25
+       ]
+      ],
+      "kind": "affix",
+      "rule": 2
+     }
+    ]
    },
    {
     "text": "elle",
@@ -8406,7 +9643,24 @@
     "text": "lentement",
     "label": "adverbe",
     "steno": "mt@/t@a/m@",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "mt@jtm",
+      "strokes": [
+       [
+        6,
+        7,
+        11,
+        16,
+        20,
+        25
+       ]
+      ],
+      "kind": "affix",
+      "rule": 2
+     }
+    ]
    }
   ]
  },
@@ -8471,13 +9725,60 @@
     "text": "comprenais",
     "label": "indicatif imparfait, 2e sg.",
     "steno": "kai/pR@a/mRie/-d",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "pRw@ad/mRie/-d",
+      "strokes": [
+       [
+        4,
+        8,
+        9,
+        11,
+        12,
+        19
+       ],
+       [
+        6,
+        8,
+        13,
+        14
+       ],
+       [
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     }
+    ]
    },
    {
     "text": "facilement",
     "label": "adverbe",
     "steno": "kpa/si/mt@a/m@",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "kpa/sijtm",
+      "strokes": [
+       [
+        2,
+        4,
+        12
+       ],
+       [
+        3,
+        13,
+        16,
+        20,
+        25
+       ]
+      ],
+      "kind": "affix",
+      "rule": 2
+     }
+    ]
    }
   ]
  },
@@ -8762,7 +10063,25 @@
     "text": "matin",
     "label": "nom, m. sg.",
     "steno": "ma/taie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "taieskd",
+      "strokes": [
+       [
+        7,
+        12,
+        13,
+        14,
+        17,
+        18,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 19
+     }
+    ]
    }
   ]
  },
@@ -8811,7 +10130,25 @@
     "text": "écris",
     "label": "indicatif présent, 2e sg.",
     "steno": "e/kRi/-d",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "kvRi/-d",
+      "strokes": [
+       [
+        2,
+        5,
+        8,
+        13
+       ],
+       [
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     }
+    ]
    },
    {
     "text": "le",
@@ -9004,7 +10341,25 @@
     "text": "repose",
     "label": "indicatif présent, 3e sg.",
     "steno": "R@a/paenl",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "pwaejnl",
+      "strokes": [
+       [
+        4,
+        9,
+        12,
+        14,
+        16,
+        22,
+        23
+       ]
+      ],
+      "kind": "affix",
+      "rule": 4
+     }
+    ]
    },
    {
     "text": "l'",
@@ -9196,7 +10551,23 @@
     "text": "rarement",
     "label": "adverbe",
     "steno": "Ra/R@a/m@",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "Rajtm",
+      "strokes": [
+       [
+        8,
+        12,
+        16,
+        20,
+        25
+       ]
+      ],
+      "kind": "affix",
+      "rule": 2
+     }
+    ]
    }
   ]
  },
@@ -9403,7 +10774,23 @@
     "text": "rarement",
     "label": "adverbe",
     "steno": "Ra/R@a/m@",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "Rajtm",
+      "strokes": [
+       [
+        8,
+        12,
+        16,
+        20,
+        25
+       ]
+      ],
+      "kind": "affix",
+      "rule": 2
+     }
+    ]
    },
    {
     "text": "vu",
@@ -9597,7 +10984,24 @@
     "text": "ensemble",
     "label": "adverbe",
     "steno": "@/s@jl",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "sm@jkl",
+      "strokes": [
+       [
+        3,
+        6,
+        11,
+        16,
+        18,
+        23
+       ]
+      ],
+      "kind": "affix",
+      "rule": 3
+     }
+    ]
    }
   ]
  },
@@ -9849,7 +11253,27 @@
     "text": "écoutent",
     "label": "indicatif présent, 3e pl.",
     "steno": "e/k@et/-st",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "kv@et/-st",
+      "strokes": [
+       [
+        2,
+        5,
+        11,
+        14,
+        20
+       ],
+       [
+        17,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     }
+    ]
    },
    {
     "text": "encore",
@@ -9945,7 +11369,26 @@
     "text": "église",
     "label": "nom, f. sg.",
     "steno": "e/ksmtinl",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "ksvmtinl",
+      "strokes": [
+       [
+        2,
+        3,
+        5,
+        6,
+        7,
+        13,
+        22,
+        23
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     }
+    ]
    }
   ]
  },
@@ -10030,7 +11473,31 @@
     "text": "visiter",
     "label": "infinitif",
     "steno": "vi/twi/te/-R",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "vi/twijtn/-R",
+      "strokes": [
+       [
+        5,
+        13
+       ],
+       [
+        7,
+        9,
+        13,
+        16,
+        20,
+        22
+       ],
+       [
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 13
+     }
+    ]
    },
    {
     "text": "la",
@@ -10265,7 +11732,24 @@
     "text": "adore",
     "label": "indicatif présent, 3e sg.",
     "steno": "a/pveR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kpvekR",
+      "strokes": [
+       [
+        2,
+        4,
+        5,
+        14,
+        18,
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "aller",
@@ -10440,7 +11924,30 @@
     "text": "refusent",
     "label": "indicatif présent, 3e pl.",
     "steno": "R@a/kp@inl/-st",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "kpw@ijnl/-st",
+      "strokes": [
+       [
+        2,
+        4,
+        9,
+        11,
+        13,
+        16,
+        22,
+        23
+       ],
+       [
+        17,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 4
+     }
+    ]
    },
    {
     "text": "d'",
@@ -10470,7 +11977,22 @@
     "text": "école",
     "label": "nom, f. sg.",
     "steno": "e/kel",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kvel",
+      "strokes": [
+       [
+        2,
+        5,
+        14,
+        23
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     }
+    ]
    }
   ]
  },
@@ -10525,7 +12047,26 @@
     "text": "commence",
     "label": "indicatif présent, 1re sg.",
     "steno": "kae/m@s/-k",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "mw@sd/-k",
+      "strokes": [
+       [
+        6,
+        9,
+        11,
+        17,
+        19
+       ],
+       [
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     }
+    ]
    },
    {
     "text": "à",
@@ -10537,7 +12078,24 @@
     "text": "comprendre",
     "label": "infinitif",
     "steno": "kai/pR@dR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "pRw@dR",
+      "strokes": [
+       [
+        4,
+        8,
+        9,
+        11,
+        19,
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     }
+    ]
    }
   ]
  },
@@ -10602,7 +12160,27 @@
     "text": "arrêtes",
     "label": "indicatif présent, 2e sg.",
     "steno": "a/Riet/-d",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "kRiekt/-d",
+      "strokes": [
+       [
+        2,
+        8,
+        13,
+        14,
+        18,
+        20
+       ],
+       [
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "de",
@@ -10689,7 +12267,28 @@
     "text": "continue",
     "label": "indicatif présent, 3e sg.",
     "steno": "kai/ti/mR@i",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "twid/mR@i",
+      "strokes": [
+       [
+        7,
+        9,
+        13,
+        19
+       ],
+       [
+        6,
+        8,
+        11,
+        13
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     }
+    ]
    },
    {
     "text": "de",
@@ -10778,7 +12377,23 @@
     "text": "écrire",
     "label": "infinitif",
     "steno": "e/kRiR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kvRiR",
+      "strokes": [
+       [
+        2,
+        5,
+        8,
+        13,
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     }
+    ]
    },
    {
     "text": "la",
@@ -10869,7 +12484,30 @@
     "text": "réussit",
     "label": "indicatif présent, 3e sg.",
     "steno": "Re/@i/si/-t",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "stR@i/si/-t",
+      "strokes": [
+       [
+        3,
+        7,
+        8,
+        11,
+        13
+       ],
+       [
+        3,
+        13
+       ],
+       [
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 21
+     }
+    ]
    },
    {
     "text": "à",
@@ -10881,7 +12519,28 @@
     "text": "trouver",
     "label": "infinitif",
     "steno": "tR@e/ve/-R",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "tR@ejsk/-R",
+      "strokes": [
+       [
+        7,
+        8,
+        11,
+        14,
+        16,
+        17,
+        18
+       ],
+       [
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 27
+     }
+    ]
    },
    {
     "text": "la",
@@ -10893,7 +12552,30 @@
     "text": "solution",
     "label": "nom, f. sg.",
     "steno": "sae/mt@i/sRwai",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "sae/mt@ijdt",
+      "strokes": [
+       [
+        3,
+        12,
+        14
+       ],
+       [
+        6,
+        7,
+        11,
+        13,
+        16,
+        19,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 7
+     }
+    ]
    }
   ]
  },
@@ -10950,7 +12632,25 @@
     "text": "commencez",
     "label": "indicatif présent, 2e pl.",
     "steno": "kae/m@/se/-d",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "swed/-d",
+      "strokes": [
+       [
+        3,
+        9,
+        14,
+        19
+       ],
+       [
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     }
+    ]
    },
    {
     "text": "à",
@@ -10962,7 +12662,27 @@
     "text": "danser",
     "label": "infinitif",
     "steno": "pv@/se/-R",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "pv@jsd/-R",
+      "strokes": [
+       [
+        4,
+        5,
+        11,
+        16,
+        17,
+        19
+       ],
+       [
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 12
+     }
+    ]
    }
   ]
  },
@@ -11033,7 +12753,28 @@
     "text": "rester",
     "label": "infinitif",
     "steno": "Ries/te/-R",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "Riejstn/-R",
+      "strokes": [
+       [
+        8,
+        13,
+        14,
+        16,
+        17,
+        20,
+        22
+       ],
+       [
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 13
+     }
+    ]
    },
    {
     "text": "ici",
@@ -11127,13 +12868,54 @@
     "text": "arrivera",
     "label": "indicatif futur, 3e sg.",
     "steno": "a/Ri/v@a/Ra",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "kRik/v@a/Ra",
+      "strokes": [
+       [
+        2,
+        8,
+        13,
+        18
+       ],
+       [
+        5,
+        11,
+        12
+       ],
+       [
+        8,
+        12
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "demain",
     "label": "adverbe",
     "steno": "pv@a/maie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kmaied",
+      "strokes": [
+       [
+        2,
+        6,
+        12,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 11
+     }
+    ]
    }
   ]
  },
@@ -11369,7 +13151,25 @@
     "text": "annonce",
     "label": "indicatif présent, 3e sg.",
     "steno": "a/mRais",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kmRaisk",
+      "strokes": [
+       [
+        2,
+        6,
+        8,
+        12,
+        13,
+        17,
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "qu'",
@@ -11525,7 +13325,24 @@
     "text": "savons",
     "label": "indicatif présent, 1re pl.",
     "steno": "sa/v*ai",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "v*aikZ",
+      "strokes": [
+       [
+        5,
+        10,
+        12,
+        13,
+        18,
+        24
+       ]
+      ],
+      "kind": "affix",
+      "rule": 22
+     }
+    ]
    },
    {
     "text": "qu'",
@@ -11610,7 +13427,29 @@
     "text": "comprennent",
     "label": "indicatif présent, 3e pl.",
     "steno": "kai/pRien/-st",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "pRwiedn/-st",
+      "strokes": [
+       [
+        4,
+        8,
+        9,
+        13,
+        14,
+        19,
+        22
+       ],
+       [
+        17,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     }
+    ]
    },
    {
     "text": "qu'",
@@ -11725,7 +13564,23 @@
     "text": "avons",
     "label": "indicatif présent, 1re pl.",
     "steno": "a/vai",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kvaik",
+      "strokes": [
+       [
+        2,
+        5,
+        12,
+        13,
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "oublié",
@@ -11860,7 +13715,33 @@
     "text": "comprenais",
     "label": "indicatif imparfait, 2e sg.",
     "steno": "kai/pR@a/mRie/-d",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "pRw@ad/mRie/-d",
+      "strokes": [
+       [
+        4,
+        8,
+        9,
+        11,
+        12,
+        19
+       ],
+       [
+        6,
+        8,
+        13,
+        14
+       ],
+       [
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     }
+    ]
    },
    {
     "text": "bien",
@@ -11926,7 +13807,28 @@
     "text": "trouvés",
     "label": "participe passé, m. pl.",
     "steno": "tR@e/ve/-s",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "tR@ejsk/-s",
+      "strokes": [
+       [
+        7,
+        8,
+        11,
+        14,
+        16,
+        17,
+        18
+       ],
+       [
+        17
+       ]
+      ],
+      "kind": "affix",
+      "rule": 27
+     }
+    ]
    }
   ]
  },
@@ -11989,7 +13891,24 @@
     "text": "invite",
     "label": "indicatif présent, 3e sg.",
     "steno": "aie/vit",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "vtRwit",
+      "strokes": [
+       [
+        5,
+        7,
+        8,
+        9,
+        13,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 9
+     }
+    ]
    },
    {
     "text": "à",
@@ -12001,7 +13920,27 @@
     "text": "dîner",
     "label": "infinitif",
     "steno": "pvi/mRe/-R",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "pvijsm/-R",
+      "strokes": [
+       [
+        4,
+        5,
+        13,
+        16,
+        17,
+        25
+       ],
+       [
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 17
+     }
+    ]
    }
   ]
  },
@@ -12194,7 +14133,28 @@
     "text": "rester",
     "label": "infinitif",
     "steno": "Ries/te/-R",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "Riejstn/-R",
+      "strokes": [
+       [
+        8,
+        13,
+        14,
+        16,
+        17,
+        20,
+        22
+       ],
+       [
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 13
+     }
+    ]
    },
    {
     "text": "ici",
@@ -12281,13 +14241,59 @@
     "text": "aider",
     "label": "infinitif",
     "steno": "ie/pve/-R",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "spvekd/-R",
+      "strokes": [
+       [
+        3,
+        4,
+        5,
+        14,
+        18,
+        19
+       ],
+       [
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 10
+     }
+    ]
    },
    {
     "text": "aujourd'hui",
     "label": "adverbe",
     "steno": "ae/vt@eR/pv@ai",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "pvtR@edR/pv@ai",
+      "strokes": [
+       [
+        4,
+        5,
+        7,
+        8,
+        11,
+        14,
+        19,
+        21
+       ],
+       [
+        4,
+        5,
+        11,
+        12,
+        13
+       ]
+      ],
+      "kind": "affix",
+      "rule": 14
+     }
+    ]
    }
   ]
  },
@@ -12425,7 +14431,25 @@
     "text": "anglais",
     "label": "nom, m.",
     "steno": "@/ksmtie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "ksmtiek",
+      "strokes": [
+       [
+        2,
+        3,
+        6,
+        7,
+        13,
+        14,
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 3
+     }
+    ]
    }
   ]
  },
@@ -12477,7 +14501,25 @@
     "text": "devrait",
     "label": "conditionnel présent, 3e sg.",
     "steno": "pv@a/vRie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kvmRied",
+      "strokes": [
+       [
+        2,
+        5,
+        6,
+        8,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 11
+     }
+    ]
    },
    {
     "text": "partir",
@@ -12636,13 +14678,54 @@
     "text": "appeler",
     "label": "infinitif",
     "steno": "a/p@a/mte/-R",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "kp@ak/mte/-R",
+      "strokes": [
+       [
+        2,
+        4,
+        11,
+        12,
+        18
+       ],
+       [
+        6,
+        7,
+        14
+       ],
+       [
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "demain",
     "label": "adverbe",
     "steno": "pv@a/maie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kmaied",
+      "strokes": [
+       [
+        2,
+        6,
+        12,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 11
+     }
+    ]
    }
   ]
  },
@@ -12698,7 +14781,24 @@
     "text": "attendre",
     "label": "infinitif",
     "steno": "a/t@dR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kt@kdR",
+      "strokes": [
+       [
+        2,
+        7,
+        11,
+        18,
+        19,
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "ici",
@@ -12914,7 +15014,25 @@
     "text": "resté",
     "label": "participe passé, m. sg.",
     "steno": "Ries/te",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "Riejstn",
+      "strokes": [
+       [
+        8,
+        13,
+        14,
+        16,
+        17,
+        20,
+        22
+       ]
+      ],
+      "kind": "affix",
+      "rule": 13
+     }
+    ]
    },
    {
     "text": "longtemps",
@@ -12993,7 +15111,25 @@
     "text": "matin",
     "label": "nom, m. sg.",
     "steno": "ma/taie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "taieskd",
+      "strokes": [
+       [
+        7,
+        12,
+        13,
+        14,
+        17,
+        18,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 19
+     }
+    ]
    }
   ]
  },
@@ -13346,7 +15482,28 @@
     "text": "restés",
     "label": "participe passé, m. pl.",
     "steno": "Ries/te/-s",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "Riejstn/-s",
+      "strokes": [
+       [
+        8,
+        13,
+        14,
+        16,
+        17,
+        20,
+        22
+       ],
+       [
+        17
+       ]
+      ],
+      "kind": "affix",
+      "rule": 13
+     }
+    ]
    },
    {
     "text": "une",
@@ -13358,7 +15515,23 @@
     "text": "semaine",
     "label": "nom, f. sg.",
     "steno": "s@a/mien",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "smien",
+      "strokes": [
+       [
+        3,
+        6,
+        13,
+        14,
+        22
+       ]
+      ],
+      "kind": "affix",
+      "rule": 24
+     }
+    ]
    }
   ]
  },
@@ -13517,7 +15690,25 @@
     "text": "matin",
     "label": "nom, m. sg.",
     "steno": "ma/taie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "taieskd",
+      "strokes": [
+       [
+        7,
+        12,
+        13,
+        14,
+        17,
+        18,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 19
+     }
+    ]
    }
   ]
  },
@@ -13784,7 +15975,25 @@
     "text": "amuse",
     "label": "indicatif présent, 3e sg.",
     "steno": "a/m@inl",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "km@iknl",
+      "strokes": [
+       [
+        2,
+        6,
+        11,
+        13,
+        18,
+        22,
+        23
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "bien",
@@ -13922,7 +16131,28 @@
     "text": "connaissez",
     "label": "indicatif présent, 2e pl.",
     "steno": "kae/mRie/se",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "mRwied/se",
+      "strokes": [
+       [
+        6,
+        8,
+        9,
+        13,
+        14,
+        19
+       ],
+       [
+        3,
+        14
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     }
+    ]
    },
    {
     "text": "bien",
@@ -13987,7 +16217,30 @@
     "text": "écoutais",
     "label": "indicatif imparfait, 2e sg.",
     "steno": "e/k@e/tie/-d",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "kv@e/tie/-d",
+      "strokes": [
+       [
+        2,
+        5,
+        11,
+        14
+       ],
+       [
+        7,
+        13,
+        14
+       ],
+       [
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     }
+    ]
    },
    {
     "text": "la",
@@ -14065,7 +16318,30 @@
     "text": "regardait",
     "label": "indicatif imparfait, 3e sg.",
     "steno": "R@a/ksaR/pvie",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "kswajR/pvie",
+      "strokes": [
+       [
+        2,
+        3,
+        9,
+        12,
+        16,
+        21
+       ],
+       [
+        4,
+        5,
+        13,
+        14
+       ]
+      ],
+      "kind": "affix",
+      "rule": 4
+     }
+    ]
    },
    {
     "text": "par",
@@ -14235,7 +16511,25 @@
     "text": "réponse",
     "label": "nom, f. sg.",
     "steno": "Re/pais",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "sptRais",
+      "strokes": [
+       [
+        3,
+        4,
+        7,
+        8,
+        12,
+        13,
+        17
+       ]
+      ],
+      "kind": "affix",
+      "rule": 21
+     }
+    ]
    }
   ]
  },
@@ -14441,7 +16735,23 @@
     "text": "semaine",
     "label": "nom, f. sg.",
     "steno": "s@a/mien",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "smien",
+      "strokes": [
+       [
+        3,
+        6,
+        13,
+        14,
+        22
+       ]
+      ],
+      "kind": "affix",
+      "rule": 24
+     }
+    ]
    }
   ]
  },
@@ -14518,7 +16828,28 @@
     "text": "facilement",
     "label": "adverbe",
     "steno": "kpa/si/mt@a/m@",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "kpa/sijtm",
+      "strokes": [
+       [
+        2,
+        4,
+        12
+       ],
+       [
+        3,
+        13,
+        16,
+        20,
+        25
+       ]
+      ],
+      "kind": "affix",
+      "rule": 2
+     }
+    ]
    }
   ]
  },
@@ -14588,7 +16919,30 @@
     "text": "sincèrement",
     "label": "adverbe",
     "steno": "saie/sie/R@a/m@",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "saie/siejtm",
+      "strokes": [
+       [
+        3,
+        12,
+        13,
+        14
+       ],
+       [
+        3,
+        13,
+        14,
+        16,
+        20,
+        25
+       ]
+      ],
+      "kind": "affix",
+      "rule": 2
+     }
+    ]
    }
   ]
  },
@@ -14652,7 +17006,24 @@
     "text": "demain",
     "label": "adverbe",
     "steno": "pv@a/maie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kmaied",
+      "strokes": [
+       [
+        2,
+        6,
+        12,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 11
+     }
+    ]
    }
   ]
  },
@@ -14847,7 +17218,24 @@
     "text": "conseil",
     "label": "nom, m. sg.",
     "steno": "kai/siej",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "swiejd",
+      "strokes": [
+       [
+        3,
+        9,
+        13,
+        14,
+        16,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     }
+    ]
    }
   ]
  },
@@ -14914,7 +17302,28 @@
     "text": "recevra",
     "label": "indicatif futur, 3e sg.",
     "steno": "R@a/s@a/vRa",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "sw@aj/vRa",
+      "strokes": [
+       [
+        3,
+        9,
+        11,
+        12,
+        16
+       ],
+       [
+        5,
+        8,
+        12
+       ]
+      ],
+      "kind": "affix",
+      "rule": 4
+     }
+    ]
    },
    {
     "text": "une",
@@ -14926,13 +17335,48 @@
     "text": "réponse",
     "label": "nom, f. sg.",
     "steno": "Re/pais",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "sptRais",
+      "strokes": [
+       [
+        3,
+        4,
+        7,
+        8,
+        12,
+        13,
+        17
+       ]
+      ],
+      "kind": "affix",
+      "rule": 21
+     }
+    ]
    },
    {
     "text": "demain",
     "label": "adverbe",
     "steno": "pv@a/maie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kmaied",
+      "strokes": [
+       [
+        2,
+        6,
+        12,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 11
+     }
+    ]
    }
   ]
  },
@@ -14993,7 +17437,36 @@
     "text": "arriveront",
     "label": "indicatif futur, 3e pl.",
     "steno": "a/Ri/v@a/Rai/-st",
-    "strokeCount": 5
+    "strokeCount": 5,
+    "alternates": [
+     {
+      "steno": "kRik/v@a/Rai/-st",
+      "strokes": [
+       [
+        2,
+        8,
+        13,
+        18
+       ],
+       [
+        5,
+        11,
+        12
+       ],
+       [
+        8,
+        12,
+        13
+       ],
+       [
+        17,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     }
+    ]
    },
    {
     "text": "à",
@@ -15215,13 +17688,51 @@
     "text": "endort",
     "label": "indicatif présent, 3e sg.",
     "steno": "@/pveR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "spvmekR",
+      "strokes": [
+       [
+        3,
+        4,
+        5,
+        6,
+        14,
+        18,
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 3
+     }
+    ]
    },
    {
     "text": "rapidement",
     "label": "adverbe",
     "steno": "Ra/pi/pv@a/m@",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "Ra/pijtm",
+      "strokes": [
+       [
+        8,
+        12
+       ],
+       [
+        4,
+        13,
+        16,
+        20,
+        25
+       ]
+      ],
+      "kind": "affix",
+      "rule": 2
+     }
+    ]
    }
   ]
  }

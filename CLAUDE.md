@@ -126,7 +126,8 @@ python -m util.export_svg_layout [OUTPUT]   # the Starboard picture (one <g id="
 
 python -m util.export_practice_words
 # Prerequisites: both pickles, starboard3h.json, keypress_groups.json,
-# resolved_press_sets.json. Outputs: steno-trainer/public/data/practice-words.json.
+# resolved_press_sets.json, affix_abbreviations.tsv (S9b, optional: every outline of a word is accepted, tagged long/merged/affix,
+# util/_outlines.py; the orchestrator runs S9a/S9b before the trainer exports). Outputs: steno-trainer/public/data/practice-words.json.
 
 python -m util.export_practice_sentences
 # Prerequisites: steno-trainer/public/data/practice-words.json (from export_practice_words),

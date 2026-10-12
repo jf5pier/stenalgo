@@ -28,7 +28,7 @@ from pathlib import Path
 from typing import Any
 
 from src.keyboard import Starboard
-from util._stenorender import renderFinalStrokesToRTFCRE
+from util._stenorender import checkedOutline, parseOutline, parseStroke, renderFinalStrokesToRTFCRE  # noqa: F401
 from util.export_lessons import numberInFrench
 
 KEYBOARD_JSON = "starboard3h.json"
@@ -51,38 +51,6 @@ NO_EXECUTION = "Dans l'exercice, la commande n'est pas exécutée : seule la fra
 
 
 # --- chords ---------------------------------------------------------------------------------------------------------------
-
-def parseStroke(text: str, keys: tuple[str, ...]) -> tuple[int, ...]:
-    """The key indices of one steno stroke written in the system's key order (`KEYS`), the way
-    `renderFinalStrokesToRTFCRE` writes it. Keys are matched left to right, the `-` jumping to the first right-hand key."""
-    firstRight = next(i for i, name in enumerate(keys) if name.startswith("-") and name not in ("-i", "-e"))
-    pressed: list[int] = []
-    pointer = 0
-    for char in text:
-        if char == "-":
-            pointer = max(pointer, firstRight)
-            continue
-        if char == "#":
-            pressed.append(keys.index("#"))
-            continue
-        index = next((i for i in range(pointer, len(keys)) if keys[i].strip("-") == char), None)
-        if index is None:
-            raise ValueError(f"cannot parse stroke {text!r} at {char!r}")
-        pressed.append(index)
-        pointer = index + 1
-    return tuple(sorted(pressed))
-
-
-def parseOutline(text: str, keys: tuple[str, ...]) -> tuple[tuple[int, ...], ...]:
-    return tuple(parseStroke(stroke, keys) for stroke in text.split("/"))
-
-
-def checkedOutline(text: str, keys: tuple[str, ...], starboard: Starboard) -> tuple[tuple[int, ...], ...]:
-    outline = parseOutline(text, keys)
-    if renderFinalStrokesToRTFCRE(starboard, outline) != text:
-        raise ValueError(f"chord {text!r} does not round-trip ({renderFinalStrokesToRTFCRE(starboard, outline)!r})")
-    return outline
-
 
 def isMarked(chord: str) -> bool:
     return "*" in chord or "#" in chord

@@ -1330,40 +1330,22 @@ completes the word when it's the last of the item, or of the current
 sentence word. -}
 recordTypedStroke : Set.Set Int -> Drill.State -> TypedStrokes -> TypedStrokes
 recordTypedStroke observed drill typed =
-    case Drill.currentWord drill of
-        Just word ->
+    case Drill.progressAfter observed drill |> Maybe.andThen .last of
+        Just last ->
             let
-                index =
-                    drill.currentStrokeIndex
-
-                -- the outline being typed: an alternate (long) one when the learner chose it
-                outline =
-                    Drill.matchedOutline observed drill
-                        |> Maybe.withDefault { steno = word.steno, strokes = word.strokes }
-
+                -- the outline being typed (a short one when the learner chose it) and the stroke's place in it
                 stroke =
-                    String.words outline.steno
+                    String.words last.outline.steno
                         |> List.concatMap (String.split "/")
-                        |> List.drop index
+                        |> List.drop last.index
                         |> List.head
                         |> Maybe.withDefault ""
-
-                wordEnds =
-                    if List.isEmpty word.segments then
-                        [ List.length outline.strokes ]
-
-                    else
-                        word.segments
-                            |> List.foldl (\segment ends -> (segment.strokeCount + (List.head ends |> Maybe.withDefault 0)) :: ends) []
-
-                complete =
-                    List.member (index + 1) wordEnds
             in
             if typed.complete then
-                { strokes = [ stroke ], complete = complete }
+                { strokes = [ stroke ], complete = last.endsWord }
 
             else
-                { strokes = typed.strokes ++ [ stroke ], complete = complete }
+                { strokes = typed.strokes ++ [ stroke ], complete = last.endsWord }
 
         Nothing ->
             typed
@@ -1812,6 +1794,48 @@ viewSidebarLegends model =
             []
 
 
+{-| The short outlines (D25) of the word being drilled, under the keyboard, with
+what makes each short: merged feature keys or an affix rule. The long outline is
+the hint above the keyboard. -}
+viewShortOutlines : Model -> Html Msg
+viewShortOutlines model =
+    let
+        render =
+            Notation.render model.notation
+
+        describe outline =
+            case ( outline.kind, outline.rule ) of
+                ( "merged", _ ) ->
+                    "marque pressée avec la dernière syllabe"
+
+                ( "affix", Just rank ) ->
+                    "abréviation, règle " ++ String.fromInt rank
+
+                ( "affix", Nothing ) ->
+                    "abréviation"
+
+                _ ->
+                    outline.kind
+
+        shorts =
+            model.drill |> Maybe.map Drill.shortOutlines |> Maybe.withDefault []
+    in
+    if List.isEmpty shorts then
+        text ""
+
+    else
+        div [ class "short-outlines" ]
+            [ Html.h3 [] [ text "Formes courtes" ]
+            , Html.ul []
+                (List.map
+                    (\outline ->
+                        Html.li [] [ Html.span [ class "steno" ] [ text (render outline.steno) ], text (" : " ++ describe outline) ]
+                    )
+                    shorts
+                )
+            ]
+
+
 {-| The extra hint under the chord board, only what affects the current word
 (every word of the current sentence in sentence mode): the rules shortening it,
 key names first. The words are looked up by spelling among
@@ -1997,7 +2021,8 @@ viewTrainer model =
                         , Keyboard.viewStrokeLegend (simulatedKeys model) (hintKeys model) (strokeInPhonology model loadedLayout) layout
                         , if abbrevHintsOn model && not (isInfoMode model.mode) then
                             div []
-                                [ viewAbbreviationHints model
+                                [ viewShortOutlines model
+                                , viewAbbreviationHints model
                                 , viewExpressionHints model
                                 ]
 
