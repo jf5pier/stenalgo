@@ -38,6 +38,9 @@ conflicts. The excluded tenses keep 1.5–2.7% of running words on the extra str
 | D16 | The reserved chords of D8 come from their sources, never from the shipped JSONs (built after the theory, from it): `reservedNumberStrokes`, `reservedSpellingStrokes`, the punctuation/command/Lapwing chords converted from the layout before their theory filter, and `scratch/expr-briefs.tsv`. One function, used by the pipeline and the simulator. |
 | D17 | The merge rules live in one module, `src/mergedfeaturekeys.py`, used by the pipeline (I1) and the simulator (which keeps only options, metrics and search); the simulator's runs before and after the move must match. |
 | D18 | Gates 3–5 are not rerun after the D5 change; one confirmation run with the decided settings becomes the new baseline and the simulator's defaults. |
+| D19 | The trainer shows the merged outline and also accepts the long one: an `alternates` field in the practice-word and lesson JSONs, checked by the trainer. |
+| D20 | The accord and verbe lessons teach the merged outlines in place (verbe-01 explains the merge once); one new lesson at the end of the verbe track, "quand les marques ne fusionnent pas", covers subjonctif, passé simple and the frequent fallbacks. |
+| D21 | Order, one commit per step: (1) `src/mergedfeaturekeys.py`, simulator switched to it, same numbers; (2) confirmation run (D18); (3) I1 behind a constant off by default, md5-identical rebuild when off; (4) iteration 6 gate; (5) I2 (D19, D20), I3, I4, I5. |
 
 ## Open questions answered by experiment
 
