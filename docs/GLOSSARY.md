@@ -733,8 +733,7 @@ marker stroke**).
 ### Merged feature keys
 A word's feature keys (the chosen keys of every keypress group it needs) pressed together with its last phoneme stroke,
 instead of as a separate feature discriminating stroke; named after the merged star/hash mark. All 7 keypress groups
-merge (gender and number included), each on the same physical key as in the feature discriminating stroke (f and plural
-may get a dedicated merge key-set instead: under test). A word whose merged outline loses on the merge precedence
+merge (gender and number included), each on the same physical key as in the feature discriminating stroke. A word whose merged outline loses on the merge precedence
 ladder keeps the feature discriminating stroke.
 - Code: not yet; diagnostic util/analyze_conjugation_fusion.py, docs/CONJUGATION_FUSION_STATS.md.
 - Avoid "conjugation fusion", "fused conjugation stroke" (Affix fusion is another thing; "conjugation" omits gender
@@ -746,14 +745,16 @@ Who keeps a merged outline when it meets another outline, in order: (1) phonetic
 keys are sounds beats the word for which they are feature keys (`sec` `siek` beats `sais` `sie`+k; `dites` `pvit`+k
 beats `dis` `pvi`+k+t); (2) features second, between same-base words of one lemme and category, the word with an
 absorbed feature key loses (`fasse` beats `fassent`); (3) marks third, same base and same feature keys across lemmas or
-categories never block a merge, the star/hash marks separate them. Frequency does not decide; the rule for a tie at
-level (1) (`laisses`/`laides`) is under test.
+categories never block a merge, the star/hash marks separate them. A tie at level (1), where each word's feature keys
+are the other's sounds (`laisses` `mties`+d, `laides` `mtied`+s), goes to the more frequent word; frequency decides
+nothing else. Outlines are compared with their star/hash marks.
 - First used in: merged feature keys (planned, 2026-10-11).
 
 ### Merge-eligible tense
 A tense/mood (or the nominal gender/number reading) whose entries may merge their feature keys: présent, impératif,
-infinitif, participe and nominal (f, p). Entries in future, passé simple, conditionnel, imparfait and subjonctif never
-merge and always keep the feature discriminating stroke (user decision 2026-10-11, from their frequency shares).
+infinitif, participe, nominal (f, p), imparfait, future and conditionnel. Entries in passé simple and subjonctif never
+merge and always keep the feature discriminating stroke (user decisions 2026-10-11 and 2026-10-12, from simulated
+savings: subjonctif merges would take outlines from eligible words, passé simple saves almost nothing).
 Decided per entry from the tense of its reading, not from the keys it presses (imparfait entries press person keys).
 - First used in: merged feature keys (planned, 2026-10-11).
 

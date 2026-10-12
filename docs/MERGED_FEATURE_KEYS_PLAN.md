@@ -24,17 +24,20 @@ conflicts. The excluded tenses keep 1.5–2.7% of running words on the extra str
 | D2 | All 7 keypress groups can merge, gender (f) and number (p) included. |
 | D3 | The long outline stays a valid alternate entry of every merged word. |
 | D4 | Merged outline = primary outline in `plover_stenalgo_dictionary.json` and in the trainer (not a separate dictionary). |
-| D5 | **Merge-eligible tenses**: présent, impératif, infinitif, participe, nominal (f/p). **Never merge**: future, passé simple, conditionnel, imparfait, subjonctif. Decided per entry from the tense of its reading, not from the keys it presses. |
+| D5 | **Merge-eligible tenses**: présent, impératif, infinitif, participe, nominal (f/p), and since gate 2 (2026-10-12) imparfait, future, conditionnel. **Never merge**: passé simple, subjonctif. Decided per entry from the tense of its reading, not from the keys it presses. |
 | D6 | Every entry (alternate readings of self-homographs included, `dis` has 4) merges independently. |
-| D7 | **Merge precedence ladder** for a merged outline meeting another outline: (1) phonetic first: the word for which the shared keys are sounds wins (`sec` beats `sais`, `livre` beats `livres`, `dites` beats `dis`); (2) features second: same base, same lemme+category, the word with an absorbed feature key loses (`fasse` beats `fassent`); (3) marks third: same base and same feature keys across lemmas/categories never block, star/hash marks separate them. Frequency does not decide. |
+| D7 | **Merge precedence ladder** for a merged outline meeting another outline: (1) phonetic first: the word for which the shared keys are sounds wins (`sec` beats `sais`, `livre` beats `livres`, `dites` beats `dis`); a tie at level 1 (each word's feature keys are the other's sounds) goes to the more frequent word (gate 3); (2) features second: same base, same lemme+category, the word with an absorbed feature key loses (`fasse` beats `fassent`); (3) marks third: same base and same feature keys across lemmas/categories never block, star/hash marks separate them. Frequency decides nothing else. The merge runs after S7: marks are part of the compared outlines (gate 4). |
 | D8 | A merge always gives way to the number chords, spelling chords, punctuation, commands and expression briefs (nothing shipped changes). |
-| D9 | One feature = one physical key, merged or not, **except f and plural**: they may get a dedicated **merge key-set**, used only when merged; their feature discriminating stroke keeps 16 and 17. |
+| D9 | One feature = one physical key, merged or not, f (16) and plural (17) included: no dedicated merge key-set (gate 5b); the other groups' keys are not re-searched (5c skipped). |
 | D10 | No per-word chord-cost veto: an eligible entry merges whenever it wins the ladder and the merged stroke is pressable. |
 | D11 | Keys 0 and 1 are not touched. The Grouping Phase (K=7, the user's elicitation answers) stays fixed. |
 | D12 | Words whose BASE last stroke is already unpressable (~893, `-ismes`; TODO "unpressable base codas") are set aside: automatic fallback, reported apart, fixed later. |
 | D13 | A reading's share of its spelling's frequency comes from the reading-share table `resources/readingShares.tsv` (iteration 0, `util/build_reading_shares.py`), looked up by the entry's reading set in LexiqueMixte + LexiqueSynthetic (not Lexique383's `infover`, which misses readings). Never read the `frequencies` field of `resolved_press_sets.json` (bug B48). |
 | D14 | Everything is simulated offline in an analysis script first; the pipeline is changed only for the chosen variant. |
-| D15 | Haiku is the default worker (under 100k tokens per session); Sonnet writes code, takes judgement steps, prepares gates, and redoes a Haiku task whose result fails its acceptance check. The user decides at every gate. |
+| D15 | From 2026-10-12 the work is done inline in one session (no Haiku/Sonnet subagents: each would re-read the context cold); long rebuilds run in the background. The user decides at every gate. (Iterations 0–5 used Haiku workers and Sonnet for code and gates.) |
+| D16 | The reserved chords of D8 come from their sources, never from the shipped JSONs (built after the theory, from it): `reservedNumberStrokes`, `reservedSpellingStrokes`, the punctuation/command/Lapwing chords converted from the layout before their theory filter, and `scratch/expr-briefs.tsv`. One function, used by the pipeline and the simulator. |
+| D17 | The merge rules live in one module, `src/mergedfeaturekeys.py`, used by the pipeline (I1) and the simulator (which keeps only options, metrics and search); the simulator's runs before and after the move must match. |
+| D18 | Gates 3–5 are not rerun after the D5 change; one confirmation run with the decided settings becomes the new baseline and the simulator's defaults. |
 
 ## Open questions answered by experiment
 
@@ -120,11 +123,11 @@ words (no imperative is unambiguous in Lexique: `dis`, `fais`, `regarde`), again
 
 ### Iteration 3 — level-1 tie rule [Sonnet adds rule (c), Haiku runs] GATE
 
-- [ ] (run 2026-10-11, gate pending) Tie rules (a), (b), (c). Report M1–M3 and the list of tied pairs that each rule resolves differently (top 30 by frequency).
+- [x] (run 2026-10-11, gate 2026-10-12) Tie rules (a), (b), (c). Report M1–M3 and the list of tied pairs that each rule resolves differently (top 30 by frequency).
 
 ### Iteration 4 — merge before or after S7 [Sonnet] GATE
 
-- [ ] (run 2026-10-11, gate pending) `before-s7`: merge on unmarked outlines, then recompute the star/hash marks on the merged entries
+- [x] (run 2026-10-11, gate 2026-10-12) `before-s7`: merge on unmarked outlines, then recompute the star/hash marks on the merged entries
   (`composeReservedKeyStrokesForEntries`, src/ambiguitychecker.py, with the merged strokes as each entry's stroke and
   the phoneme stroke count unchanged). Compare with `after-s7` on M1–M5; show the words that merge only under `after-s7`
   (a mark made room, the `sais`/`sec*` case) and the mark changes `before-s7` causes.
@@ -133,14 +136,14 @@ words (no imperative is unambiguous in Lexique: `dis`, `fais`, `regarde`), again
 
 - [x] **5a [Haiku]** Absorption risk per coda key: frequency-weighted share of eligible entries whose last phoneme stroke
   already holds the key, and pressability of the key with the 50 most frequent last-stroke codas.
-- [ ] (run 2026-10-11, gate pending) **5b [Sonnet]** Joint search of the f and plural merge key-sets (group 1 f, group 5 nbr_p+p; the merge key-set is
+- [x] (run 2026-10-11, gate 2026-10-12) **5b [Sonnet]** Joint search of the f and plural merge key-sets (group 1 f, group 5 nbr_p+p; the merge key-set is
   per group, so nbr_p uses group 5's). Candidates: coda keys 18–25 and the coda digraphs of the Realization Phase; f may keep
   16. Constraints: f, p and f+p distinct, pressable with the stems, distinct from the other 5 groups' keys and every union
   that occurs; f's key before p's in coda order (soft: report violations). Objective: M1 under the settled semantics,
   M4 as tie-breaker. Make the evaluation incremental (only entries needing group 1 or 5 change) so the full candidate
   grid runs in minutes. Report the top 5 pairs with M1–M4. Expected side effect: `fasse`/`fassent` and most of group 3's
   same-lemma conflicts disappear (they come from the absorbed plural `s`).
-- [ ] **5c [Sonnet]** Only if the residual conflicts of the other 5 groups justify it (gate 5b decides): re-search their
+- [x] **5c [Sonnet]** (skipped, gate 5b) Only if the residual conflicts of the other 5 groups justify it (gate 5b decides): re-search their
   keys with the merge objective under today's Realization constraints (one key per group in both strokes, D9).
 
 ### Iteration 6 — merge before or after S9 [Sonnet] GATE
@@ -298,7 +301,15 @@ it would take:
 This contradicts D5 for imparfait, future and conditionnel: they would merge almost for free (98.7–100% merge rate).
 GATE question queued; D5 kept until answered.
 
-### 2026-10-11 — iteration 3: tie rule (gate pending)
+Breakdown (share of running words; merged with one group / with several): imparfait 0.47% / 0.09% (93% / 62%, `étaient`
+2+5 = `-st`), future 0.39% / 0.05% (100% / 100%), conditionnel 0.23% / 0.02% (100% / 100%), subjonctif 0.19% / 0.08%
+(84% / 70%). Imparfait and conditionnel press only person keys (their ending `-ie` carries the tense), future presses
+`-t` (shared with pers_3, passé): merging them gives no key a new meaning.
+
+**Gate decision (2026-10-12):** imparfait, future and conditionnel become merge-eligible; subjonctif and passé simple
+stay excluded. D5 updated.
+
+### 2026-10-11 — iteration 3: tie rule (gate decided)
 
 | Rule | M1 | Merged (freq of running words) | Ties left |
 |---|---|---|---|
@@ -310,7 +321,9 @@ GATE question queued; D5 kept until answered.
 NOM above VER, so `troupes` (20.6) takes `tR@ejsk` from `trouve` (160, présent + impératif), `sortes` from `sortent`,
 `commandes` from `commences`. (b) gives the frequent verb forms. Recommendation: (b).
 
-### 2026-10-11 — iteration 4: merge before or after S7 (gate pending)
+**Gate decision (2026-10-12):** (b) frequency. D7 updated.
+
+### 2026-10-11 — iteration 4: merge before or after S7 (gate decided)
 
 | Order | M1 | Merged (freq) | Mark keys per word | Long outlines whose marks change |
 |---|---|---|---|---|
@@ -321,7 +334,9 @@ NOM above VER, so `troupes` (20.6) takes `tR@ejsk` from `trouve` (160, présent 
 `mots` `m*aes`, `prêts` `pR*ies`, `noms`, `mètres`, `tue`, `verres`, `eaux`, `risque`. None merge only under before-s7
 (`scratch/merged-keys/order-differences.md`). Recommendation: after-s7.
 
-### 2026-10-11 — iteration 5a/5b: merge key-sets for f and plural (gate pending)
+**Gate decision (2026-10-12):** after-s7. D7 updated.
+
+### 2026-10-11 — iteration 5a/5b: merge key-sets for f and plural (gate decided)
 
 `python -m util.analyze_merged_feature_keys --search` (after-s7, tie (a), D5; ~25 min), full tables in
 `scratch/merged-keys/search/search.md`. 5a: every coda key and digraph is pressable with the 50 most frequent last-stroke
@@ -345,3 +360,4 @@ keep f=16, p=17 (no new key to learn, lowest effort), unless +0.2 points is wort
 unlikely to pay: the residual is mostly "occupied" (1.8% of running words, phonetic outlines); other keys would hit
 other phonetic outlines, and for f/plural the whole grid moved M1 by at most 0.2 points.
 
+**Gate decision (2026-10-12):** keep f=16, p=17, no merge key-set; 5c skipped. D9 updated.
