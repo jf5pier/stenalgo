@@ -280,7 +280,7 @@ def loadContext(options: Options) -> Context:
     shares = ReadingShares()
     entries, mismatches = buildEntries(disambiguated, wordToStrokes, wordsByOrthoLemme, resolved, markers, keysOf,
                                        shares, options)
-    reserved = {} if options.regression else reservedChords(keyboard)
+    reserved = {} if options.regression else reservedChords(keyboard, disambiguated)
     return Context(keyboard, entries, wordToStrokes, keysOf, markers, reserved, mismatches, shares.misses)
 
 

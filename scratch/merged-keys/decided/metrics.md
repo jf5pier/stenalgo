@@ -1,11 +1,11 @@
 # Merged feature keys: simulation
 
 Options: eligible conditionnel, future, imparfait, impératif, infinitif, nominal, participe, présent; tie frequency; order after-s7.
-Entries 311373 (267406 words); film frequency mass 900816; reserved chords 1462; alternate/feature-key mismatches 0; reading-share misses 82.
+Entries 311373 (267406 words); film frequency mass 900816; reserved chords 2571; alternate/feature-key mismatches 0; reading-share misses 82.
 
 ## Hard constraints
 
-- H1 new collisions: **0** (outlines already shared today: 4) 
+- H1 new collisions: **0** (outlines already shared today: 387) 
 - H2 unpressable merged strokes: **0**
 - H3 reserved dictionaries unchanged by construction (a merge never takes a reserved chord).
 - H4 not checked by the simulator (pipeline step I5).
@@ -14,28 +14,28 @@ Entries 311373 (267406 words); film frequency mass 900816; reserved chords 1462;
 
 | | Today | Merged | Delta |
 |---|---|---|---|
-| frequency-weighted (all entries) | 1.5101 | 1.3836 | -0.1265 (-8.38%) |
+| frequency-weighted (all entries) | 1.5101 | 1.3838 | -0.1263 (-8.36%) |
 | unweighted (primary alternate of each word) | 3.6572 | 3.1984 | -0.4588 |
 
 ## M2 merge rate
 
-Entries with a feature stroke: 183724 (14.9% of running words); eligible 155737 (14.6%); merged 149759 (12.7%).
+Entries with a feature stroke: 183724 (14.9% of running words); eligible 155737 (14.6%); merged 149724 (12.6%).
 
 | Slice | Eligible | Merged | Rate | Eligible freq | Merged freq | Rate (freq) |
 |---|---|---|---|---|---|---|
-| all | 155737 | 149759 | 96.2% | 14.6% | 12.7% | 86.7% |
+| all | 155737 | 149724 | 96.1% | 14.6% | 12.6% | 86.6% |
 | group 0 conditionnel+infinitif (21,) | 5233 | 5216 | 99.7% | 2.0% | 1.9% | 93.0% |
 | group 1 f (16,) | 17731 | 17648 | 99.5% | 0.8% | 0.8% | 91.7% |
 | group 2 future+passé+pers_3 (20,) | 27405 | 26412 | 96.4% | 0.7% | 0.6% | 84.9% |
 | group 3 imparfait+subjonctif (23,) | 88 | 88 | 100.0% | 0.0% | 0.0% | 100.0% |
-| group 4 impératif+pers_1 (18,) | 32299 | 31989 | 99.0% | 4.7% | 4.2% | 87.7% |
-| group 5 nbr_p+p (17,) | 71794 | 66955 | 93.3% | 4.6% | 3.9% | 84.9% |
+| group 4 impératif+pers_1 (18,) | 32299 | 31963 | 99.0% | 4.7% | 4.1% | 87.2% |
+| group 5 nbr_p+p (17,) | 71794 | 66946 | 93.2% | 4.6% | 3.9% | 84.8% |
 | group 6 pers_2 (19,) | 31879 | 31377 | 98.4% | 2.3% | 1.9% | 81.7% |
-| tense présent | 21734 | 20307 | 93.4% | 4.9% | 4.1% | 84.4% |
-| tense impératif | 10482 | 10324 | 98.5% | 1.6% | 1.3% | 82.6% |
+| tense présent | 21734 | 20294 | 93.4% | 4.9% | 4.1% | 84.1% |
+| tense impératif | 10482 | 10311 | 98.4% | 1.6% | 1.3% | 82.0% |
 | tense infinitif | 4985 | 4968 | 99.7% | 2.0% | 1.9% | 93.0% |
 | tense participe | 16137 | 16094 | 99.7% | 0.6% | 0.6% | 97.9% |
-| tense nominal | 42823 | 38710 | 90.4% | 4.3% | 3.6% | 84.3% |
+| tense nominal | 42823 | 38701 | 90.4% | 4.3% | 3.6% | 84.2% |
 | tense imparfait | 16491 | 16276 | 98.7% | 0.6% | 0.5% | 88.0% |
 | tense future | 26660 | 26659 | 100.0% | 0.4% | 0.4% | 100.0% |
 | tense conditionnel | 16425 | 16421 | 100.0% | 0.3% | 0.3% | 100.0% |
@@ -46,12 +46,12 @@ Excluded tenses keep 27987 entries (0.3% of running words) on the feature stroke
 
 | Reason | Entries | Freq | In top 1,000 spellings | In top 5,000 |
 |---|---|---|---|---|
-| occupied | 4769 | 1.8% | 32 | 195 |
+| occupied | 4717 | 1.7% | 30 | 185 |
 | base unpressable | 437 | 0.0% | 0 | 0 |
 | tie | 409 | 0.0% | 2 | 14 |
 | level 1 | 355 | 0.1% | 1 | 12 |
+| other dictionary | 88 | 0.2% | 6 | 23 |
 | level 2 | 7 | 0.0% | 0 | 0 |
-| other dictionary | 1 | 0.0% | 1 | 1 |
 
 Top 30 by frequency:
 
@@ -65,9 +65,9 @@ Top 30 by frequency:
 - `dis` (dire_VER, impératif, 514.0) [pvik]: occupied vs `dyke`
 - `enfants` (enfant_NOM, nominal, 448.3) [@/kp@s]: occupied vs `enfance`
 - `va` (aller_VER, impératif, 368.1) [vak]: occupied vs `vaque`
-- `seule` (seul_ADJ, nominal, 349.7) [s@jl]: occupied vs `semble`
+- `seule` (seul_ADJ, nominal, 349.7) [s@jl]: other dictionary vs `attested expression`
 - `tuer` (tuer_VER, infinitif, 346.2) [t@aeR]: other dictionary vs `expression brief`
-- `avais` (avoir_VER, imparfait, 296.7) [a/viek]: occupied vs `avec`
+- `avais` (avoir_VER, imparfait, 296.7) [a/viek]: other dictionary vs `attested expression`
 - `dis` (dire_VER, présent, 286.3) [pvik]: occupied vs `dyke`
 - `femmes` (femme_NOM, nominal, 242.8) [kpasm]: occupied vs `phasmes`
 - `mains` (main_NOM, nominal, 213.0) [maies]: occupied vs `mince`
@@ -88,7 +88,7 @@ Top 30 by frequency:
 
 ## M4 chord cost of the merged entries (frequency-weighted mean `getStrokeCost`, coda)
 
-Merged last stroke 368.9 vs last base stroke + feature stroke 398.8.
+Merged last stroke 368.9 vs last base stroke + feature stroke 398.7.
 
 ## M5 star/hash load (primary outlines)
 

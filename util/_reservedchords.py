@@ -11,6 +11,8 @@ built after the theory, from it). A merged outline gives way to every one of the
   expression brief            the committed briefs, scratch/expr-briefs.tsv
   expression attach           the attach keypresses of the committed rule set, scratch/expr-rules-final.json, as a
                               stroke of their own (a standalone keypress decodes as its particle)
+  attested expression         with a theory: the outline of every pool expression (scratch/expr_candidates.tsv)
+                              composed on that theory before the merge (D22), the expressions the decoder ranks first
 
 A chord the theory already takes today is still listed: the exporters drop it as before, a merge just cannot take a
 new one.
@@ -19,7 +21,10 @@ import csv
 import json
 from collections.abc import Iterable
 
-from src.keyboard import Starboard
+from src.expressions import composeOutlineTraced
+from src.keyboard import Starboard, Strokes, canonicalizeStrokes
+from src.word import Word
+from util._expressioninput import loadExpressionInputs
 from util._stenorender import renderFinalStrokesToRTFCRE
 from util.export_plover_complements import (
     COMMAND_ALIASES,
@@ -44,8 +49,20 @@ def attachKeypressesOf(rulesPath: str = EXPRESSION_RULES) -> set[tuple[int, ...]
     return {tuple(sorted(rule["keys"])) for rule in rules if rule["kind"] == "attach" and rule["keys"]}
 
 
-def reservedChords(starboard: Starboard) -> dict[str, str]:
-    """Outline (RTFCRE) -> the source that reserves it; the first source listed wins a shared chord."""
+def attestedExpressionOutlines(theory: dict[Word, list[Strokes]]) -> set[Strokes]:
+    """The canonical outline of every pool expression the committed rules compose on `theory`."""
+    ctx, rules, pool, _words, _unitStrokes = loadExpressionInputs(theory)
+    outlines: set[Strokes] = set()
+    for expression in pool:
+        traced = composeOutlineTraced(rules, expression.tokens, ctx)
+        if traced.strokes is not None:
+            outlines.add(canonicalizeStrokes(traced.strokes))
+    return outlines
+
+
+def reservedChords(starboard: Starboard, theory: dict[Word, list[Strokes]] | None = None) -> dict[str, str]:
+    """Outline (RTFCRE) -> the source that reserves it; the first source listed wins a shared chord. With `theory`
+    (the disambiguated theory before the merge), the attested expressions' outlines too."""
     keys = tuple(starboard.keyDisplayNames())
     buttonKey = {label: index for index, label in enumerate(GEMINI_PR_LABELS)}
     reserved: dict[str, str] = {}
@@ -70,4 +87,7 @@ def reservedChords(starboard: Starboard) -> dict[str, str]:
         add((row["rtfcre"] for row in csv.DictReader(f, delimiter="\t")), "expression brief")
     add((renderFinalStrokesToRTFCRE(starboard, (keypress,)) for keypress in sorted(attachKeypressesOf())),
         "expression attach")
+    if theory is not None:
+        add((renderFinalStrokesToRTFCRE(starboard, outline) for outline in sorted(attestedExpressionOutlines(theory))),
+            "attested expression")
     return reserved

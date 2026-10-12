@@ -41,6 +41,8 @@ conflicts. The excluded tenses keep 1.5–2.7% of running words on the extra str
 | D19 | The trainer shows the merged outline and also accepts the long one: an `alternates` field in the practice-word and lesson JSONs, checked by the trainer. |
 | D20 | The accord and verbe lessons teach the merged outlines in place (verbe-01 explains the merge once); one new lesson at the end of the verbe track, "quand les marques ne fusionnent pas", covers subjonctif, passé simple and the frequent fallbacks. |
 | D21 | Order, one commit per step: (1) `src/mergedfeaturekeys.py`, simulator switched to it, same numbers; (2) confirmation run (D18); (3) I1 behind a constant off by default, md5-identical rebuild when off; (4) iteration 6 gate; (5) I2 (D19, D20), I3, I4, I5. |
+| D22 | A merge also gives way to the attested expressions: the outline of every pool expression (`scratch/expr_candidates.tsv`) composed on the theory before the merge is reserved (`util/_reservedchords.py`, with a theory). Open-set expression readings are not protected, only reported. |
+| D23 | M8 (expression-layer savings) is measured when I2 rebuilds the expression data on the merged theory; a drop of more than 5% is a gate. |
 
 ## Open questions answered by experiment
 
@@ -75,6 +77,8 @@ Indicators:
 - **M5** star/hash load: lemma-homophone groups, escalated codes, frequency-weighted mark keys typed.
 - **M6** affix abbreviations: count and frequency-weighted strokes saved (iteration 6 on).
 - **M7** `python -m util.compare_theories` summary against Pluvier (final iterations only; command in CLAUDE.md).
+- **M8** expression layer: strokes saved by the attested pool expressions (frequency-weighted), today against the
+  expression data rebuilt on the merged theory (D23); and the merged outlines that take an open-set expression reading.
 
 ## Iterations
 
@@ -389,3 +393,10 @@ chords today and become words (the word wins the ranking every time, no merged w
 are open-set compositions (`que paix`, `le past`); 11 are attested expressions, 1.29% of the attested pool frequency:
 `il est` (taken by `tels`), `il y` (`tills`), `qu'on` (`compte`), `à une` (`ruses`), `il a` (`talles`), `qu'est`
 (`quête`), `de ma`, `de même`, `que ça`, `que ces`, `de ça`.
+
+Gate decision (2026-10-12, Q13/Q14): reserve the attested expressions (D22), M8 with a 5% gate (D23). Rerun with
+them reserved (2,571 reserved chords, 1,109 attested expression outlines): M1 −8.36%; 87 entries now fall back to
+"other dictionary" for an attested expression (`seule` and `avais` were already occupied by `semble` and `avec`);
+no attested expression lies on a merged outline any more, 611 open-set readings still do (1.1% of the merged
+frequency, none hides a word). "Outlines already shared today" is 387: 383 attested expressions compose to a chord
+that is a theory word today.

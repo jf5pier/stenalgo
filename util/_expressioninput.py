@@ -14,7 +14,7 @@ from pathlib import Path
 from src.affixes import SimContext
 from src.expressionrules import ExprRule, PoolExpression, orderBan
 from src.expressions import BriefRule, Rules, Token
-from src.keyboard import Starboard, canonicalizeStrokes
+from src.keyboard import Starboard, Strokes, canonicalizeStrokes
 from src.word import Word
 from util._theoryio import loadDisambiguatedTheory
 
@@ -81,13 +81,14 @@ def resolveTerm(term: str, byOrtho: dict[str, list[Word]]) -> list[tuple[str, Wo
     return out
 
 
-def loadExpressionInputs():
+def loadExpressionInputs(theory: "dict[Word, list[Strokes]] | None" = None):
     """The committed rule set (`scratch/expr-rules-final.json`, `expr-briefs.tsv`), the pool (`expr_candidates.tsv`)
     and the theory indexes the composer, decoder and exporters need: (SimContext, Rules, pool, outline -> surfaces,
-    unit -> longform stroke count)."""
+    unit -> longform stroke count). `theory`: the disambiguated theory to compose on (default: the cached one)."""
     starboard = Starboard.fromJSONFile("starboard3h.json")
     assert starboard is not None
-    theory = loadDisambiguatedTheory(starboard)
+    if theory is None:
+        theory = loadDisambiguatedTheory(starboard)
     byOrtho: dict = {}
     for w in theory:
         byOrtho.setdefault(w.ortho, []).append(w)
