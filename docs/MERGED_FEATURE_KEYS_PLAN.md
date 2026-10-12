@@ -157,7 +157,7 @@ words (no imperative is unambiguous in Lexique: `dis`, `fais`, `regarde`), again
 
 Needs the merged theory inside the pipeline (step I1 below, behind a flag), because S9 recomputes the disambiguated
 theory through `util/_theoryio.py`.
-- [ ] Run `python -m util.build_affix_rules` (delete `AffixSelection.pickle` first) and `python -m util.export_affix_dictionary`
+- [x] (2026-10-12) Run `python -m util.build_affix_rules` (delete `AffixSelection.pickle` first) and `python -m util.export_affix_dictionary`
   on the merged theory (before), and alternatively filter merges against today's abbreviations (after). Report M1, M6,
   the merges lost (after) and the abbreviations lost (before); list any affix decision that turns PENDING.
 
@@ -171,7 +171,7 @@ theory through `util/_theoryio.py`.
   `export_keyboard_layout` (conjugation-feature legend with the merge keys), `export_practice_words` / `export_lessons`
   (a lesson on merged keys and on the tenses that never merge), then the complement, number and spelling exporters (they
   must still pass their own collision checks), `export_expression_data` + `export_plover_plugin` (fingerprint).
-- [ ] **I3** S9 per gate 6.
+- [x] **I3** S9 per gate 6: before, nothing to change (S9 reads the merged theory); `build_affix_rules` defaults to at most 4 workers.
 - [ ] **I4** Docs: docs/PIPELINE.md, docs/specs/discriminating-features.md (new section), GLOSSARY code references,
   CLAUDE.md commands, TODO.md.
 - [ ] **I5** Verification: `pytest src/test/` and bare `mypy`; full rebuild per the docs/PIPELINE.md rebuild table; H1–H4
@@ -411,7 +411,7 @@ first len(press-set alternates) outlines stay aligned with the readings (consume
 covers the flag and the reserved chords' sources. Flag off: S7 to S10 rebuilt (pickle deleted first), all 29 tracked
 outputs md5-identical.
 
-### 2026-10-12 — iteration 6: merge before or after S9 (gate pending)
+### 2026-10-12 — iteration 6: merge before or after S9 (gate decided)
 
 Strokes saved per running word (film frequency mass 900,816; abbreviations counted per spelling, its best one):
 
@@ -433,3 +433,6 @@ Strokes saved per running word (film frequency mass 900,816; abbreviations count
   the abbreviation layer loses words (`trouvé`, `aurait`), which still have their full outline.
 - The full selection with the default 8 workers was OOM-killed (cgroup 14 GiB), which ended the session; 4 workers
   finished in about 4.5 minutes within the limit. Outputs restored to flag off afterwards (md5-identical).
+
+**Gate decision (2026-10-12):** before S9: the affix abbreviations are rebuilt on the merged theory (the pipeline
+order as built in I1). `build_affix_rules` now defaults to at most 4 workers.
