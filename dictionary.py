@@ -31,7 +31,8 @@ from src.grammar import Phoneme, Syllable, SyllableCollection
 from src.spellingvariants import loadSpellingVariantDrops
 from src.word import GramCat, Word
 from typing import Any, Callable
-from src.keyboard import Keyboard, Strokes
+from src.keyboard import Keyboard, Starboard, Strokes
+from src.mergedfeaturekeys import MERGE_FEATURE_KEYS, mergeFeatureKeys
 from src.ambiguitychecker import (
     buildExtraInducedStrokes,
     buildFinalInducedStrokes,
@@ -53,6 +54,8 @@ import sys
 from util._timing import recordTiming
 from util.export_plover_numbers import reservedNumberStrokes
 from util.export_plover_spelling import reservedSpellingStrokes
+from util._reservedchords import reservedChords
+from util._stenorender import renderFinalStrokesToRTFCRE
 
 # Non-canonical spellings of the ACTIVE sets of resources/spellingVariants.tsv,
 # dropped at this single load choke point for LexiqueMixte.tsv AND
@@ -450,13 +453,23 @@ class Dictionary:
         # bare stroke buildFinalInducedStrokes would leave them shadows the group's
         # default reading (B47).
         spellingTwins = findSpellingTwinWords(resolvedGroups, wordToStrokes, wordsByOrthoLemme)
-        return composeReservedKeyStrokesForEntries(
+        composed = composeReservedKeyStrokesForEntries(
             {word: [strokes] + extraByWord.get(word, [])
              for word, strokes in finalInduced.items() if word not in spellingTwins},
             loadReform1990DoubletPairs(),
             phonemeStrokeCounts={word: len(strokes) for word, strokes in wordToStrokes.items()},
             reservedStrokes=reservedNumberStrokes() | reservedSpellingStrokes(),
         )
+        if not MERGE_FEATURE_KEYS:
+            return composed
+        # Merged feature keys (docs/MERGED_FEATURE_KEYS_PLAN.md, I1): after S7, the merged outline becomes the
+        # primary one and the long outline an alternate; a merge gives way to the reserved chords (D8, D16, D22).
+        assert isinstance(keyboard, Starboard)
+        starboard = keyboard
+        merged, _entries = mergeFeatureKeys(
+            composed, wordToStrokes, wordsByOrthoLemme, resolvedGroups, markersByKeypress, starboard,
+            reservedChords(starboard, composed), lambda strokes: renderFinalStrokesToRTFCRE(starboard, strokes))
+        return merged
 
     def writeDisambiguatedTheory(
         self, phoneticTheory: dict[Strokes, list[Word]], disambiguatedTheory: dict[Word, list[Strokes]],

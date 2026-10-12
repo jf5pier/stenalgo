@@ -163,7 +163,7 @@ theory through `util/_theoryio.py`.
 
 ### Implementation (after gate 5, detailed then) [Sonnet; Haiku for rebuilds, tests and md5s]
 
-- [ ] **I1** The merge in the pipeline, behind a constant defaulting to off (md5-identical rebuild when off): a function
+- [x] **I1** (2026-10-12) The merge in the pipeline, behind a constant defaulting to off (md5-identical rebuild when off): a function
   next to `realizeKeypressGroupsAsExtraStroke` (src/ambiguitychecker.py) applied on the inline path
   (`Dictionary.buildDisambiguatedTheory`) and in `util/build_realization_report.py`; the long outline becomes an
   alternate entry; S7 placement per gate 4.
@@ -400,3 +400,13 @@ them reserved (2,571 reserved chords, 1,109 attested expression outlines): M1 âˆ
 no attested expression lies on a merged outline any more, 611 open-set readings still do (1.1% of the merged
 frequency, none hides a word). "Outlines already shared today" is 387: 383 attested expressions compose to a chord
 that is a theory word today.
+
+### 2026-10-12 â€” step 3: I1, the merge in the pipeline
+
+`mergeFeatureKeys` (src/mergedfeaturekeys.py) runs at the end of `Dictionary.buildDisambiguatedTheory`, after S7,
+when `MERGE_FEATURE_KEYS` is on (`STENALGO_MERGE_FEATURE_KEYS=1`; off by default). Each word keeps its outlines in
+order, a merged entry's merged outline in place of its long one, then the long outlines of its merged entries: the
+first len(press-set alternates) outlines stay aligned with the readings (consumers that align them, such as
+`export_practice_words`, read only those; I2). With the flag on, the `DisambiguatedTheory.pickle` fingerprint also
+covers the flag and the reserved chords' sources. Flag off: S7 to S10 rebuilt (pickle deleted first), all 29 tracked
+outputs md5-identical.

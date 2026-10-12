@@ -15,6 +15,7 @@ from typing import TYPE_CHECKING
 from src.ambiguitychecker import buildWordToStrokes, buildWordsByOrthoLemme
 from src.grammar import Syllable
 from src.keyboard import Keyboard, Strokes
+from src.mergedfeaturekeys import MERGE_FEATURE_KEYS
 from src.word import Word
 
 if TYPE_CHECKING:
@@ -66,6 +67,11 @@ def _loadDictionaryAndPhoneticTheory() -> "tuple[Dictionary, dict[Strokes, list[
 # it (util/build_synthetic_lexicon.py PICKLE_CACHE_PATHS) whenever it appends
 # rows, alongside the two unchecked pickles.
 DISAMBIGUATED_THEORY_PICKLE_PATH = "DisambiguatedTheory.pickle"
+# The sources of the merge's reserved chords (util/_reservedchords.py), fingerprinted only with the merge on.
+MERGE_FINGERPRINT_INPUTS = (
+    "resources/outlineClassification.tsv", "resources/reference/lapwing-numbers.json", "scratch/expr-briefs.tsv",
+    "scratch/expr-rules-final.json", "scratch/expr_candidates.tsv",
+)
 DISAMBIGUATED_THEORY_FINGERPRINT_INPUTS = (
     "resources/LexiqueMixte.tsv",
     "resources/LexiqueSynthetic.tsv",
@@ -95,8 +101,14 @@ def disambiguatedTheoryFingerprint(
     inputs: tuple[str, ...] = DISAMBIGUATED_THEORY_FINGERPRINT_INPUTS,
 ) -> dict[str, str | None]:
     """Per-input md5s of the disambiguated theory's five inputs (None for a
-    missing file, so a deleted input never validates a cache)."""
-    return {path: _md5(path) for path in inputs}
+    missing file, so a deleted input never validates a cache). With merged
+    feature keys on, the flag and the sources of the reserved chords too
+    (util/_reservedchords.py); off, the fingerprint is unchanged."""
+    fingerprint = {path: _md5(path) for path in inputs}
+    if MERGE_FEATURE_KEYS:
+        fingerprint["MERGE_FEATURE_KEYS"] = "1"
+        fingerprint.update({path: _md5(path) for path in MERGE_FINGERPRINT_INPUTS})
+    return fingerprint
 
 
 def writeDisambiguatedTheoryPickle(

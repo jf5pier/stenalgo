@@ -18,6 +18,7 @@ is free and the entry wins the merge precedence ladder (D7) against the other ca
              rank, then frequency).
 Losers keep the long outline, already unique, so one pass suffices. The long outline always stays an alternate (D3).
 """
+import os
 from collections import defaultdict
 from collections.abc import Callable, Iterable, Mapping
 from dataclasses import dataclass, field
@@ -241,3 +242,32 @@ def resolveMerges(entries: list[MergeEntry], keyboard: Starboard, reserved: Mapp
             else:
                 entry.outcome = "tie"
                 entry.partner = ",".join(sorted(s for s in spellings if s != entry.word.ortho))
+
+
+# The merge in the pipeline (I1): off by default, so the theory is unchanged; STENALGO_MERGE_FEATURE_KEYS=1 turns it
+# on for a build.
+MERGE_FEATURE_KEYS = os.environ.get("STENALGO_MERGE_FEATURE_KEYS", "") == "1"
+
+
+def mergeFeatureKeys(disambiguated: dict[Word, list[Strokes]], wordToStrokes: dict[Word, Strokes],
+                     wordsByOrthoLemme: dict[tuple[str, str], list[Word]], resolved: list[dict[str, Any]],
+                     markers: Mapping[int, frozenset[str]], keyboard: Starboard, reserved: Mapping[str, str],
+                     render: Callable[[Strokes], str]) -> tuple[dict[Word, list[Strokes]], list[MergeEntry]]:
+    """
+    The merged theory, after S7 (gate 4): each word's outlines in their order, an entry that merges taking its merged
+    outline in place of its long one, then the long outlines of its merged entries (D3), in the same order. A word's
+    first len(press-set alternates) outlines therefore stay aligned with its readings. Returns the theory and the
+    merge entries (verdicts for the reports).
+    """
+    entries, _mismatches = buildMergeEntries(disambiguated, wordToStrokes, wordsByOrthoLemme, resolved, markers)
+    applyMergeKeys(entries)
+    resolveMerges(entries, keyboard, reserved, render)
+    byWord: dict[Word, list[MergeEntry]] = defaultdict(list)
+    for entry in entries:
+        byWord[entry.word].append(entry)
+    merged: dict[Word, list[Strokes]] = {}
+    for word, outlines in disambiguated.items():
+        wordEntries = sorted(byWord[word], key=lambda e: e.index)
+        merged[word] = [e.primary for e in wordEntries] + [e.final for e in wordEntries if e.outcome == "merged"]
+        assert len(wordEntries) == len(outlines)
+    return merged, entries
