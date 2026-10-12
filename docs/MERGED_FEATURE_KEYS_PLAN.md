@@ -410,3 +410,26 @@ first len(press-set alternates) outlines stay aligned with the readings (consume
 `export_practice_words`, read only those; I2). With the flag on, the `DisambiguatedTheory.pickle` fingerprint also
 covers the flag and the reserved chords' sources. Flag off: S7 to S10 rebuilt (pickle deleted first), all 29 tracked
 outputs md5-identical.
+
+### 2026-10-12 — iteration 6: merge before or after S9 (gate pending)
+
+Strokes saved per running word (film frequency mass 900,816; abbreviations counted per spelling, its best one):
+
+| Variant | Theory M1 | Merge gain | Affix abbreviations | Abbreviation gain | Total gain |
+|---|---|---|---|---|---|
+| today (no merge) | 1.5101 | – | 115,896 spellings | 0.1270 | 0.1270 |
+| after S9: merges avoid today's abbreviation outlines | 1.3878 (−8.10%) | 0.1223 | unchanged | 0.1270 | **0.2493** |
+| before S9: S9 rebuilt on the merged theory (flag on) | 1.3838 (−8.36%) | 0.1263 | 115,074 spellings | 0.1223 | **0.2486** |
+
+- After S9 (simulator, today's 135,817 abbreviation outlines reserved): 735 merges lost, 0.39% of running words,
+  mostly frequent verbs to rare abbreviated words: `fais` `kpiek` (`happait`), `crois` `kRwak` (`aria`), `viens`
+  (`convient`), `dois` (`commanda`), `vois` (`convoi`), `sois` (`déçoit`), `trouve` (`trouvé`).
+- Before S9 (pipeline, `STENALGO_MERGE_FEATURE_KEYS=1`, `build_affix_rules --workers 4`, AffixSelection.pickle
+  deleted): the same 30 rules, the same 3 pending decisions, selection score unchanged (128,311); 850 abbreviated
+  spellings lose their abbreviation, 0.39% of running words, mostly to a merged outline: `trouvé` (`tR@ejsk` =
+  `trouve` merged), `aurait`, `mari`, `devrait`, `confiance`, `ira`, `laissé`, `connaît`, `disait`; 28 gain one.
+- The totals differ by 0.0007 strokes per word: a wash. The choice is which layer takes the exceptions: after S9,
+  frequent conjugated forms (`fais`, `crois`, `dois`) keep a separate feature stroke; before S9, those merge and
+  the abbreviation layer loses words (`trouvé`, `aurait`), which still have their full outline.
+- The full selection with the default 8 workers was OOM-killed (cgroup 14 GiB), which ended the session; 4 workers
+  finished in about 4.5 minutes within the limit. Outputs restored to flag off afterwards (md5-identical).
