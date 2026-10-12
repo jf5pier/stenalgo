@@ -45,9 +45,10 @@ from src.grammar import Phoneme
 from src.keyboard import Keypress, Starboard, Strokes, canonicalizeStrokes
 from src.word import GramCat, Word
 from util._stenorender import renderFinalStrokesToRTFCRE
+from src.mergedfeaturekeys import MERGE_ELIGIBLE_TENSES, comboTense, mergeStroke
 from util._theoryio import loadPhoneticAndDisambiguatedTheory
 from util.export_practice_words import (
-    KEYBOARD_JSON, RESOLVED_PRESS_SETS_PATH, buildReadingsByWord, chordsWithReadings,
+    KEYBOARD_JSON, RESOLVED_PRESS_SETS_PATH, buildReadingsByWord, chordsWithAlternates, outlineRecords,
     formatContext, formatPhonology, formatReadingsLabel,
 )
 
@@ -545,14 +546,16 @@ def buildRecordStream(
         phoneticKeypresses = frozenset(
             keypress for stroke in phonetic
             for keypress in fingerKeypressesOfStroke(stroke, starboard._fingerAssignments))
-        chords, _aligned = chordsWithReadings(word, disambiguatedTheory[word], readingsByWord)
-        for strokes, readings in chords:
-            code = starHashCodeOf(strokes)
+        chords, _aligned = chordsWithAlternates(word, disambiguatedTheory[word], readingsByWord)
+        for strokes, readings, longs in chords:
+            # A merged outline is analysed through its long outline (its feature keys are inside a phoneme stroke).
+            analysed = longs[0] if longs else strokes
+            code = starHashCodeOf(analysed)
             neededGroups: frozenset[int] = frozenset()
             unmarked: list[tuple[int, ...]] = []
             if code is not None:
                 valid = True
-                for stroke in canonicalizeStrokes(strokes):
+                for stroke in canonicalizeStrokes(analysed):
                     keys = frozenset(stroke)
                     residue = tuple(sorted(keys - RESERVED_KEYS))
                     if not residue:
@@ -588,9 +591,13 @@ def buildRecordStream(
                 existing["_phonemeParts"] = existing["_phonemeParts"] | phonemePartsOfWord(word)
                 existing["_groups"] = existing["_groups"] | neededGroups
                 existing["_gramCats"] = existing["_gramCats"] | {word.gramCat}
+                existing["_tenses"] = existing["_tenses"] | {comboTense(reading) for reading in readings}
                 for reading in readings:
                     if reading not in existing["_readings"]:
                         existing["_readings"].append(reading)
+                for alternate in outlineRecords(starboard, longs):
+                    if alternate not in existing.setdefault("alternates", []):
+                        existing["alternates"].append(alternate)
                 continue
             before, after = formatContext(word, readings)
             byOrthoSteno[(word.ortho, steno)] = {
@@ -603,7 +610,10 @@ def buildRecordStream(
                 "_groups": neededGroups,
                 "_code": code, "_cluster": tuple(unmarked),
                 "_gramCats": {word.gramCat}, "_readings": list(readings),
+                "_tenses": frozenset(comboTense(reading) for reading in readings), "_long": analysed,
             }
+            if longs:
+                byOrthoSteno[(word.ortho, steno)]["alternates"] = outlineRecords(starboard, longs)
     records = sorted(byOrthoSteno.values(), key=lambda r: (r["ortho"], r["steno"]))
     return records, skippedWords, invalidRecords
 
@@ -777,6 +787,39 @@ def verbTenseRule(tenseLabel: str, touchedKeys: list[int], starboard: Starboard,
     return {"kind": "verb-tense", "text": text}
 
 
+def mergeRule(pool: list[dict[str, Any]]) -> dict[str, Any] | None:
+    """Merged feature keys (D20): the marks are pressed with the word's last syllable; the separate stroke stays
+    accepted. None when no record of the pool is merged."""
+    merged = next((r for r in pool if r.get("alternates")), None)
+    if merged is None:
+        return None
+    return {"kind": "merge", "text": (
+        f"Les marques se pressent avec la dernière syllabe du mot : {merged['ortho']} → {merged['steno']} "
+        f"plutôt que {merged['alternates'][0]['steno']}, qui reste accepté. Quand ce n'est pas possible, "
+        "la marque garde son temps à part (voir la dernière leçon de verbes).")}
+
+
+def exceptionRules(pool: list[dict[str, Any]], partners: dict[str, str]) -> list[dict[str, Any]]:
+    """The lesson on the marks that do not merge (D20): the tenses that never merge, then the words whose merged
+    form is another word's outline."""
+    def unique(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        first: dict[str, dict[str, Any]] = {}
+        for record in records:
+            first.setdefault(record["ortho"], record)
+        return list(first.values())
+    never = unique([r for r in pool if r["_tenses"] - MERGE_ELIGIBLE_TENSES])
+    taken = unique([r for r in pool if r["ortho"] in partners and not r["_tenses"] - MERGE_ELIGIBLE_TENSES])
+    rules = [{"kind": "merge", "text": (
+        "Le subjonctif et le passé simple gardent toujours la marque en un temps à part"
+        + (f" : {_quotedExamples(_exampleOrthos(never))}." if never else "."))}]
+    if taken:
+        examples = ", ".join(f"« {r['ortho']} » ({partners[r['ortho']]})" for r in taken[:4])
+        rules.append({"kind": "merge", "text": (
+            "Quand la forme fusionnée écrit déjà un autre mot, le mot avec le son l'emporte et la marque reste "
+            f"à part : {examples}.")})
+    return rules
+
+
 def markRule(code: str, starboard: Starboard, pool: list[dict[str, Any]]) -> dict[str, Any]:
     """§7.5: the first complete lemma-homophone contrast of the pool (the marked record
     and the canonical member of its group); without a canonical member in the pool, the
@@ -816,7 +859,30 @@ def _emitLesson(lessons: list[dict[str, Any]], counters: dict[str, int], track: 
 
 
 def _wordsOf(pool: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    return [{field: record[field] for field in RECORD_FIELDS} for record in pool]
+    return [{field: record[field] for field in RECORD_FIELDS}
+            | ({"alternates": record["alternates"]} if record.get("alternates") else {}) for record in pool]
+
+
+def mergePartners(starboard: Starboard, disambiguatedTheory: dict[Word, list[Strokes]],
+                  wordToStrokes: dict[Word, Strokes], stream: list[dict[str, Any]]) -> dict[str, str]:
+    """Spelling of an unmerged record with a feature stroke -> "merged steno = « other word »" when its merged form
+    is another word's outline (the merge precedence ladder kept it long)."""
+    owners: dict[Strokes, str] = {}
+    for word, outlines in disambiguatedTheory.items():
+        for outline in outlines:
+            owners.setdefault(tuple(tuple(sorted(set(s))) for s in outline), word.ortho)
+    partners: dict[str, str] = {}
+    for record in stream:
+        word, long = record["_word"], record["_long"]
+        base = len(wordToStrokes.get(word, ()))
+        if record.get("alternates") or not record["_groups"] or not 0 < base < len(long):
+            continue
+        merged = long[:base - 1] + (mergeStroke(long[base - 1], long[base]),) + long[base + 1:]
+        owner = owners.get(tuple(tuple(sorted(set(s))) for s in merged))
+        if owner is not None and owner != record["ortho"]:
+            partners.setdefault(record["ortho"],
+                                f"{renderFinalStrokesToRTFCRE(starboard, merged)} = « {owner} »")
+    return partners
 
 
 def buildLessons(
@@ -913,7 +979,8 @@ def buildLessons(
                     "accord", TRACK_TITLES["accord"],
                     sorted(group["chosenKeys"]),
                     [list(group["chosenKeys"])] if len(group["chosenKeys"]) >= 2 else [],
-                    [accordRule(group, starboard, wordToStrokes, pool)],
+                    [accordRule(group, starboard, wordToStrokes, pool)]
+                    + [rule for rule in [mergeRule(pool)] if rule is not None],
                     _wordsOf(pool))
 
     # 4.3 verbe
@@ -925,7 +992,8 @@ def buildLessons(
                 "les marques de conjugaison",
                 "verbe", TRACK_TITLES["verbe"], markerNewKeys, [],
                 [verbMarkerRule(keypressGroups[i], starboard, markerPool)
-                 for i in verbGroupIndexes],
+                 for i in verbGroupIndexes]
+                + [rule for rule in [mergeRule(markerPool)] if rule is not None],
                 _wordsOf(markerPool))
     for tenseId, _atoms, tenseLabel in TENSES:
         def hasTense(record: dict[str, Any], tid: Any = tenseId) -> bool:
@@ -942,6 +1010,16 @@ def buildLessons(
                     "verbe", TRACK_TITLES["verbe"], [], [],
                     [verbTenseRule(tenseLabel, touchedKeys, starboard, pool)],
                     _wordsOf(pool))
+
+    # Merged feature keys (D20): the marks that stay a stroke of their own, when the theory merges any.
+    if any(record.get("alternates") for record in stream):
+        partners = mergePartners(starboard, disambiguatedTheory, wordToStrokes, stream)
+        pool = poolTop(lambda record: bool(record["_groups"]) and not record.get("alternates")
+                       and (bool(record["_tenses"] - MERGE_ELIGIBLE_TENSES) or record["ortho"] in partners))
+        if pool:
+            _emitLesson(lessons, counters, "verbe",
+                        f"Leçon {numberInFrench(counters.get('verbe', 0) + 1)} : quand les marques ne fusionnent pas",
+                        "verbe", TRACK_TITLES["verbe"], [], [], exceptionRules(pool, partners), _wordsOf(pool))
 
     # 4.4 desambiguation
     presentCodes = {record["_code"] for record in stream if record["_code"]}

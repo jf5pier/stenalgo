@@ -44,6 +44,7 @@ import json
 from src.ambiguitychecker import _resolveEntryWord, buildWordsByOrthoLemme, buildWordToStrokes
 from src.elicitation import wordFeatureCombinations
 from src.keyboard import Starboard, Strokes
+from src.mergedfeaturekeys import splitLongAlternates
 from src.word import GramCat, Word
 from util._stenorender import renderFinalStrokesToRTFCRE
 from util._theoryio import loadPhoneticAndDisambiguatedTheory
@@ -200,18 +201,45 @@ def buildReadingsByWord(
     return readingsByWord
 
 
-def chordsWithReadings(
+def chordsWithAlternates(
     word: Word, strokesList: list[Strokes], readingsByWord: dict[Word, list[list[Reading]]],
-) -> tuple[list[tuple[Strokes, list[Reading]]], bool]:
-    """Each of `word`'s final strokes paired with the reading(s) it writes, and whether
-    `buildReadingsByWord`'s readings lined up with the strokes. A word that isn't a
-    same-lemma homophone (or is misaligned) writes every one of its readings with every
-    stroke."""
+) -> tuple[list[tuple[Strokes, list[Reading], list[Strokes]]], bool]:
+    """Each of `word`'s final strokes paired with the reading(s) it writes and its long alternates, and whether
+    `buildReadingsByWord`'s readings lined up with the strokes. With merged feature keys a merged word's long
+    outlines are appended after its aligned strokes (`src.mergedfeaturekeys.mergeFeatureKeys`): they come back as
+    the alternates of the merged stroke they belong to, not as chords of their own. A word that isn't a same-lemma
+    homophone (or is misaligned) writes every one of its readings with every stroke."""
     readingsPerStroke = readingsByWord.get(word)
+    longs: list[list[Strokes]] | None = None
+    if readingsPerStroke is not None and len(strokesList) > len(readingsPerStroke):
+        longs = splitLongAlternates(strokesList, len(readingsPerStroke))
+        if longs is not None:
+            strokesList = strokesList[:len(readingsPerStroke)]
     aligned = readingsPerStroke is None or len(readingsPerStroke) == len(strokesList)
     if readingsPerStroke is None or not aligned:
         readingsPerStroke = [wordFeatureCombinations(word)] * len(strokesList)
-    return list(zip(strokesList, readingsPerStroke)), aligned
+    if longs is None:
+        longs = [[] for _ in strokesList]
+    return list(zip(strokesList, readingsPerStroke, longs)), aligned
+
+
+def chordsWithReadings(
+    word: Word, strokesList: list[Strokes], readingsByWord: dict[Word, list[list[Reading]]],
+) -> tuple[list[tuple[Strokes, list[Reading]]], bool]:
+    """`chordsWithAlternates` without the long alternates."""
+    chords, aligned = chordsWithAlternates(word, strokesList, readingsByWord)
+    return [(strokes, readings) for strokes, readings, _longs in chords], aligned
+
+
+def outlineRecords(starboard: Starboard, outlines: list[Strokes]) -> list[dict[str, Any]]:
+    """The trainer's accepted-outline records (`Drill.elm` `Outline`)."""
+    records: list[dict[str, Any]] = []
+    for strokes in outlines:
+        record = {"steno": renderFinalStrokesToRTFCRE(starboard, strokes),
+                  "strokes": [sorted(set(stroke)) for stroke in strokes]}
+        if record not in records:
+            records.append(record)
+    return records
 
 
 def main() -> None:
@@ -235,9 +263,9 @@ def main() -> None:
     byOrthoSteno: dict[tuple[str, str], dict[str, Any]] = {}
     misalignedWords = 0
     for word, strokesList in disambiguatedTheory.items():
-        chords, aligned = chordsWithReadings(word, strokesList, readingsByWord)
+        chords, aligned = chordsWithAlternates(word, strokesList, readingsByWord)
         misalignedWords += not aligned
-        for strokes, readings in chords:
+        for strokes, readings, longs in chords:
             steno = renderFinalStrokesToRTFCRE(starboard, strokes)
             label = formatReadingsLabel(word.gramCat, readings)
             existing = byOrthoSteno.get((word.ortho, steno))
@@ -252,6 +280,9 @@ def main() -> None:
                         and after != "!":
                     existing["before"], existing["after"] = before, after
                 existing["frequency"] = max(existing["frequency"], round(word.frequency, 3))
+                for record in outlineRecords(starboard, longs):
+                    if record not in existing.setdefault("alternates", []):
+                        existing["alternates"].append(record)
                 continue
             before, after = formatContext(word, readings)
             byOrthoSteno[(word.ortho, steno)] = {
@@ -260,6 +291,8 @@ def main() -> None:
                 "strokes": [sorted(set(stroke)) for stroke in strokes],
                 "frequency": round(word.frequency, 3),
             }
+            if longs:
+                byOrthoSteno[(word.ortho, steno)]["alternates"] = outlineRecords(starboard, longs)
 
     records = sorted(byOrthoSteno.values(), key=lambda r: (-r["frequency"], r["ortho"], r["steno"]))
     records = records[:args.limit]

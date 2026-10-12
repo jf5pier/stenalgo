@@ -271,3 +271,28 @@ def mergeFeatureKeys(disambiguated: dict[Word, list[Strokes]], wordToStrokes: di
         merged[word] = [e.primary for e in wordEntries] + [e.final for e in wordEntries if e.outcome == "merged"]
         assert len(wordEntries) == len(outlines)
     return merged, entries
+
+
+def isLongOf(long: Strokes, primary: Strokes) -> bool:
+    """Whether `long` is the long outline of the merged outline `primary`: one of its strokes united with the next
+    one gives `primary` (the merge of `mergeFeatureKeys`)."""
+    if len(long) != len(primary) + 1:
+        return False
+    return any(long[:b] + (mergeStroke(long[b], long[b + 1]),) + long[b + 2:] == primary
+               for b in range(len(primary)))
+
+
+def splitLongAlternates(strokesList: list[Strokes], alignedCount: int) -> list[list[Strokes]] | None:
+    """For a word of the merged theory whose first `alignedCount` outlines are aligned with its readings: the long
+    outlines appended after them, grouped by the aligned outline each belongs to. None when an appended outline is
+    the long outline of none of them (the list is then not a merged word's)."""
+    longs: list[list[Strokes]] = [[] for _ in range(alignedCount)]
+    for long in strokesList[alignedCount:]:
+        # Two readings can share an outline (`prie` impératif and présent 1s): each long goes to the first owner
+        # that has none yet, as `mergeFeatureKeys` appends them in reading order.
+        owners = [i for i in range(alignedCount) if isLongOf(long, strokesList[i])]
+        if not owners:
+            return None
+        owner = next((i for i in owners if not longs[i]), owners[0])
+        longs[owner].append(long)
+    return longs

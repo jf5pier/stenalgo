@@ -49,3 +49,25 @@ class TestMergeFeatureKeys:
         aa = FakeWord("aa", "aa_VER")
         merged = run({aa: [((1, 2), (18,))]}, [record("aa", (1, 2), [SUBJ_1])])
         assert merged[aa] == [((1, 2), (18,))]
+
+
+class TestLongAlternates:
+    def test_is_long_of(self) -> None:
+        from src.mergedfeaturekeys import isLongOf
+        assert isLongOf(((1, 2), (18,)), ((1, 2, 18),))
+        assert isLongOf(((3,), (1, 2), (18,), (10, 15)), ((3,), (1, 2, 18), (10, 15)))
+        assert not isLongOf(((1, 2), (18,)), ((1, 2),))
+        assert not isLongOf(((1, 2), (18,)), ((1, 2, 19),))
+
+    def test_split(self) -> None:
+        from src.mergedfeaturekeys import splitLongAlternates
+        outlines: list[Any] = [((1, 2, 18),), ((1, 2), (19,)), ((1, 2), (18,))]
+        assert splitLongAlternates(outlines, 2) == [[((1, 2), (18,))], []]
+        assert splitLongAlternates(outlines[:2], 2) == [[], []]
+        unrelated: list[Any] = [((1, 2),), ((5,), (6,))]
+        assert splitLongAlternates(unrelated, 1) is None
+
+    def test_split_shared_outline(self) -> None:
+        from src.mergedfeaturekeys import splitLongAlternates
+        outlines: list[Any] = [((1, 2),), ((1, 2, 18),), ((1, 2, 18),), ((1, 2), (18,)), ((1, 2), (18,))]
+        assert splitLongAlternates(outlines, 3) == [[], [((1, 2), (18,))], [((1, 2), (18,))]]

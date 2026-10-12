@@ -167,7 +167,7 @@ theory through `util/_theoryio.py`.
   next to `realizeKeypressGroupsAsExtraStroke` (src/ambiguitychecker.py) applied on the inline path
   (`Dictionary.buildDisambiguatedTheory`) and in `util/build_realization_report.py`; the long outline becomes an
   alternate entry; S7 placement per gate 4.
-- [ ] **I2** S8: `export_plover_dictionary` (merged primary, long alternate), `realization_report.json` (merge key-sets),
+- [x] **I2** (2026-10-12) S8: `export_plover_dictionary` (merged primary, long alternate), `realization_report.json` (merge key-sets),
   `export_keyboard_layout` (conjugation-feature legend with the merge keys), `export_practice_words` / `export_lessons`
   (a lesson on merged keys and on the tenses that never merge), then the complement, number and spelling exporters (they
   must still pass their own collision checks), `export_expression_data` + `export_plover_plugin` (fingerprint).
@@ -436,3 +436,25 @@ Strokes saved per running word (film frequency mass 900,816; abbreviations count
 
 **Gate decision (2026-10-12):** before S9: the affix abbreviations are rebuilt on the merged theory (the pipeline
 order as built in I1). `build_affix_rules` now defaults to at most 4 workers.
+
+### 2026-10-12 — step 5: I2, the exporters on the merged theory
+
+`chordsWithAlternates` (util/export_practice_words.py) hands every exporter a word's aligned outlines with the long
+outlines that belong to them (`splitLongAlternates`, src/mergedfeaturekeys.py; two readings sharing an outline each
+get their copy). Practice words and lesson words carry them as `alternates` (D19; the trainer's `Drill.elm` already
+accepts them); the lessons analyse a merged record through its long outline. Lessons (D20): accord-01/02 and verbe-01
+get a "merge" rule (« choses → pmaesnl plutôt que pmaenl/-s, qui reste accepté »), and verbe-10 « quand les marques
+ne fusionnent pas » lists the subjonctif / passé simple and the words whose merged form is another word's outline
+(« va » vak = « vaque », « sais » sied = « cède », « es » ied = « aide », « allez » a/mtek = « alloc »).
+
+Flag on, S7 to S10 plus `export_expression_data` (outputs kept in the scratch pad, the tracked files restored to flag
+off): Plover dictionary 424,690 outlines, 0 collisions; punctuation, commands, Pluvier and Lapwing numbers and
+spelling unchanged in count, spelling's collision check passes; expression data checks pass (legality 0 differ, pool
+round trip 0 differ); lessons 35 (verbe 10), 0 invalid records; 3,395 of the 10,000 practice words carry a long
+alternate; accord-01/02 lessons 43 and 45 merged words of 50, verbe-02 to 09 6 to 40 (subjonctif 0).
+
+M8 (D23): attested pool expressions, strokes per expression (longform / composed / saved): merge off 1.9080 / 1.3739 /
+0.5341; on 1.8845 / 1.3522 / 0.5323. Savings drop 0.3%, under the 5% gate; the composed expressions get shorter.
+
+Flag off: every tracked output md5-identical. Not done: the practice sentences accept only the primary outline of each
+word (a sentence-level `alternates` would need every combination).
