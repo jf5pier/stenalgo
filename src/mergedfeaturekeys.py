@@ -244,9 +244,9 @@ def resolveMerges(entries: list[MergeEntry], keyboard: Starboard, reserved: Mapp
                 entry.partner = ",".join(sorted(s for s in spellings if s != entry.word.ortho))
 
 
-# The merge in the pipeline (I1): off by default, so the theory is unchanged; STENALGO_MERGE_FEATURE_KEYS=1 turns it
-# on for a build.
-MERGE_FEATURE_KEYS = os.environ.get("STENALGO_MERGE_FEATURE_KEYS", "") == "1"
+# The merge in the pipeline (I1): on by default since 2026-10-12 (D29); STENALGO_MERGE_FEATURE_KEYS=0 builds the theory
+# without it (every word on its long outline).
+MERGE_FEATURE_KEYS = os.environ.get("STENALGO_MERGE_FEATURE_KEYS", "1") != "0"
 
 
 def mergeFeatureKeys(disambiguated: dict[Word, list[Strokes]], wordToStrokes: dict[Word, Strokes],

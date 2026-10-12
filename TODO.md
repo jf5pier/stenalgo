@@ -45,8 +45,9 @@ activismes, affairismes); `(22, 25)` n+m (hymnes, indemnes, démènent, promène
 
 ## Branch TODO — conjugation key fused into the last stroke instead of the extra stroke (2026-10-11)
 
-**Superseded by `docs/MERGED_FEATURE_KEYS_PLAN.md`** (design interview 2026-10-11: decisions D1–D15, iterations 0–6, gates,
-metrics, Haiku/Sonnet split). Items 1–3 below are answered or scheduled there; kept for the measurements.
+**Done 2026-10-12: `docs/MERGED_FEATURE_KEYS_PLAN.md`** (decisions D1–D30; the merge is on by default, `src/mergedfeaturekeys.py`).
+Items 1–3 below were answered there; kept for the measurements. Open: practice sentences of the expression layer accept
+only whole outlines; the D12 words (unpressable base codas) still fall back.
 
 Question: could the 7 conjugation keypress groups be an attached suffix key (united with the word's last stroke) instead of the extra coda stroke? Measured 2026-10-11 with
 `python -m util.analyze_conjugation_fusion` (method and tables in `docs/CONJUGATION_FUSION_STATS.md`; star/hash marks left out): of 139,757 words needing a group, 91.5% stay clean (71.5% of frequency),
@@ -307,6 +308,9 @@ docs in `docs/PIPELINE.md` S8.10. Open items, most important first:
   with real Plover and the trainer in Chromium and Firefox. No pipeline rebuild: the theory does not change.
 
 ## Branch TODO — trainer lessons: focus or recap switch (abbreviations branch, 2026-10-05)
+
+(Found done 2026-10-12: `lessonMix` in steno-trainer/src/Main.elm mixes the current lesson's words with as many from the past
+lessons; not kept in the settings cookie.)
 
 - **Goal.** Each lesson gets a switch between two practice modes: **focus** (only the current lesson's words) and **recap** (a 50-50% mix: half current-lesson words, half words drawn from the previous lessons).
   The mode is remembered in localStorage, like the other trainer preferences.

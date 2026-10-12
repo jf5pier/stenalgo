@@ -179,9 +179,9 @@ theory through `util/_theoryio.py`.
   (a lesson on merged keys and on the tenses that never merge), then the complement, number and spelling exporters (they
   must still pass their own collision checks), `export_expression_data` + `export_plover_plugin` (fingerprint).
 - [x] **I3** S9 per gate 6: before, nothing to change (S9 reads the merged theory); `build_affix_rules` defaults to at most 4 workers.
-- [ ] **I4** Docs: docs/PIPELINE.md, docs/specs/discriminating-features.md (new section), GLOSSARY code references,
+- [x] (2026-10-12) **I4** Docs: docs/PIPELINE.md, docs/specs/discriminating-features.md (new section), GLOSSARY code references,
   CLAUDE.md commands, TODO.md.
-- [ ] **I5** Verification: `pytest src/test/` and bare `mypy`; full rebuild per the docs/PIPELINE.md rebuild table; H1–H4
+- [x] (2026-10-12) **I5** Verification: `pytest src/test/` and bare `mypy`; full rebuild per the docs/PIPELINE.md rebuild table; H1–H4
   as unit tests on the exported dictionaries; M7.
 
 ## Delegation notes
@@ -480,3 +480,11 @@ past words 50/50) already exists. Flag off: practice words gain 3,937 tagged alt
 practice sentences 133 word alternates, affix lessons the tags; sentence counts unchanged (216, 139); lessons.json
 unchanged. Checked with a throwaway Elm worker under node: a word or a sentence word typed long or merged is
 accepted, a wrong stroke refused, the hint follows the merged outline.
+
+### 2026-10-12 — I4, I5 and the switch (D29, D30)
+
+The merge is on by default (`STENALGO_MERGE_FEATURE_KEYS=0` turns it off). Full rebuild from S7 (AffixSelection.pickle
+deleted), then `export_expression_data`, `export_plover_plugin` and `util.check_merged_feature_keys`: 424,690 theory
+outlines, 149,724 merged; H1, H2, H3, H4 all 0. `pytest src/test/` 1608 passed (the plugin test, stale before, passes
+on the rebuilt expression data), bare mypy clean. Docs: PIPELINE.md (S7 tree, rebuild table), the spec's section 8,
+GLOSSARY code references, CLAUDE.md commands, TODO.md. Not run: M7 (`util.compare_theories`, needs the Pluvier clone).

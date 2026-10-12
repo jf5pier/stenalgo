@@ -191,6 +191,11 @@ python -m util.compare_theories --pluvier-dict PLUVIER/dicofr.json --pluvier-dic
 # Outputs: theory_comparison.json, theory_comparison.md in --out (default repo root, untracked). ~40 s.
 # Reference: docs/THEORY_COMPARISON.md; findings of the first runs: docs/PLUVIER_COMPARISON_2026-10-10.md.
 
+python -m util.check_merged_feature_keys     # Merged feature keys: H1-H4 on the built outputs (exit 1 on a failure); the orchestrator's
+                                             # last step. The merge itself runs inside S7 (src/mergedfeaturekeys.py), on by default;
+                                             # STENALGO_MERGE_FEATURE_KEYS=0 builds the long-outline theory (rm DisambiguatedTheory.pickle
+                                             # not needed: the flag is in its fingerprint). docs/MERGED_FEATURE_KEYS_PLAN.md.
+
 python dictionary.py                         # the orchestrator over everything from S2 to S10
 # --optimize-keyboard: also runs S4 (util.optimize_keyboard, seeded from starboard3h.json, writes starboard3h_optimized.json only) after S2; off by default.
 # Prerequisites: as above (skips nothing; aborts on the first failing step).

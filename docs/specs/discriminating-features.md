@@ -234,3 +234,20 @@ then `python -m util.build_keypress_groups`, then `python -m util.build_realizat
 then the exports. See [PIPELINE.md §How to run a full rebuild](../PIPELINE.md#how-to-run-a-full-rebuild).
 Test a suspected answer fix in memory first, and report any exceptions before writing it to
 disk.
+
+## 8. Merged feature keys
+
+After S7, an entry's feature keys are pressed with its last phoneme stroke when it can be (`mergeFeatureKeys`,
+src/mergedfeaturekeys.py; plan and measurements in docs/MERGED_FEATURE_KEYS_PLAN.md). The merged outline becomes the
+entry's primary outline; the long outline (with the feature discriminating stroke) stays an alternate entry, appended
+after the word's aligned outlines (`splitLongAlternates` finds it back).
+
+- Eligible: every reading of the entry in a merge-eligible tense (présent, impératif, infinitif, participe, nominal,
+  imparfait, future, conditionnel); subjonctif and passé simple never merge.
+- Kept long: the merged stroke is unpressable (or the base one already is); the merged outline is a theory outline
+  (any word, alternates included) or a reserved chord (punctuation, commands, numbers, spelling, expression briefs,
+  attach keypresses and attested expressions: util/_reservedchords.py); or the entry loses the merge precedence ladder
+  (phonetic first; a tie at that level to the more frequent spelling; an absorbed feature key loses within one
+  lemmeGramCat; marks separate the rest).
+- Every feature keeps its own key; the affix abbreviations (S9) are built on the merged theory.
+- The section 5 invariant holds on the merged theory; `python -m util.check_merged_feature_keys` checks it with H1-H3.

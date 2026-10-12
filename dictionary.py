@@ -660,6 +660,9 @@ def _runSteps(module: "Callable[[str, str], None]", optimizeKeyboard: bool = Fal
     # Spelling (S8 Plover branch + S10f): checked against the affix dictionary (S9b) and the expression data, hence after them.
     module("Theory Export (S8): Plover spelling", "util.export_plover_spelling")
     module("Spelling Lessons (S10f): trainer spelling lessons", "util.export_spelling_lessons")
+    # Merged feature keys: the hard constraints H1-H4 on the built outputs (docs/MERGED_FEATURE_KEYS_PLAN.md, D30).
+    if MERGE_FEATURE_KEYS:
+        module("Merged feature keys: check H1-H4", "util.check_merged_feature_keys")
 
     print("\nstenalgo pipeline complete: phonetic theory (pickles + phonetic_theory.tsv), "
           "LexiqueSynthetic.tsv, resolved_press_sets.json, keypress_groups.json, "

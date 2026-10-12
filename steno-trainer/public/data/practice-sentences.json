@@ -85,7 +85,21 @@
     "text": "aimes",
     "label": "indicatif présent, 2e sg.",
     "steno": "iem/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iedm",
+      "strokes": [
+       [
+        13,
+        14,
+        19,
+        25
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "lire",
@@ -349,6 +363,29 @@
     "strokeCount": 4,
     "alternates": [
      {
+      "steno": "R@a/ksaR/pved",
+      "strokes": [
+       [
+        8,
+        11,
+        12
+       ],
+       [
+        2,
+        3,
+        12,
+        21
+       ],
+       [
+        4,
+        5,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "R@akdm/-d",
       "strokes": [
        [
@@ -435,7 +472,20 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "écoutent",
@@ -443,6 +493,22 @@
     "steno": "e/k@et/-st",
     "strokeCount": 3,
     "alternates": [
+     {
+      "steno": "e/k@est",
+      "strokes": [
+       [
+        14
+       ],
+       [
+        2,
+        11,
+        14,
+        17,
+        20
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "kv@et/-st",
       "strokes": [
@@ -454,6 +520,21 @@
         20
        ],
        [
+        17,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     },
+     {
+      "steno": "kv@est",
+      "strokes": [
+       [
+        2,
+        5,
+        11,
+        14,
         17,
         20
        ]
@@ -528,13 +609,42 @@
     "text": "elles",
     "label": "pronom personnel, f. pl.",
     "steno": "iel/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iesl",
+      "strokes": [
+       [
+        13,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "dansent",
     "label": "indicatif présent, 3e pl.",
     "steno": "pv@s/-st",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "pv@st",
+      "strokes": [
+       [
+        4,
+        5,
+        11,
+        17,
+        20
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "à",
@@ -614,7 +724,22 @@
     "text": "dois",
     "label": "indicatif présent, 1re sg.",
     "steno": "pvwa/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "pvwak",
+      "strokes": [
+       [
+        4,
+        5,
+        9,
+        12,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "partir",
@@ -684,7 +809,22 @@
     "text": "peux",
     "label": "indicatif présent, 2e sg.",
     "steno": "p@ie/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "p@ied",
+      "strokes": [
+       [
+        4,
+        11,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "venir",
@@ -1074,25 +1214,7 @@
     "text": "trouvé",
     "label": "participe passé, m. sg.",
     "steno": "tR@e/ve",
-    "strokeCount": 2,
-    "alternates": [
-     {
-      "steno": "tR@ejsk",
-      "strokes": [
-       [
-        7,
-        8,
-        11,
-        14,
-        16,
-        17,
-        18
-       ]
-      ],
-      "kind": "affix",
-      "rule": 27
-     }
-    ]
+    "strokeCount": 2
    },
    {
     "text": "les",
@@ -1104,7 +1226,22 @@
     "text": "clés",
     "label": "nom, f. pl.",
     "steno": "kmte/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kmtes",
+      "strokes": [
+       [
+        2,
+        6,
+        7,
+        14,
+        17
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    }
   ]
  },
@@ -1147,7 +1284,20 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "ont",
@@ -1217,7 +1367,21 @@
     "text": "elles",
     "label": "pronom personnel, f. pl.",
     "steno": "iel/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iesl",
+      "strokes": [
+       [
+        13,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "sont",
@@ -1229,7 +1393,26 @@
     "text": "parties",
     "label": "participe passé, f. pl.",
     "steno": "paR/ti/-js",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "paR/tijs",
+      "strokes": [
+       [
+        4,
+        12,
+        21
+       ],
+       [
+        7,
+        13,
+        16,
+        17
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "tôt",
@@ -1297,7 +1480,25 @@
     "text": "manger",
     "label": "infinitif",
     "steno": "m@/vte/-R",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "m@/vteR",
+      "strokes": [
+       [
+        6,
+        11
+       ],
+       [
+        5,
+        7,
+        14,
+        21
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "du",
@@ -1364,7 +1565,20 @@
     "text": "vas",
     "label": "indicatif présent, 2e sg.",
     "steno": "va/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "vad",
+      "strokes": [
+       [
+        5,
+        12,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "écrire",
@@ -1528,23 +1742,7 @@
     "text": "comprend",
     "label": "indicatif présent, 3e sg.",
     "steno": "kai/pR@",
-    "strokeCount": 2,
-    "alternates": [
-     {
-      "steno": "pRw@d",
-      "strokes": [
-       [
-        4,
-        8,
-        9,
-        11,
-        19
-       ]
-      ],
-      "kind": "affix",
-      "rule": 5
-     }
-    ]
+    "strokeCount": 2
    },
    {
     "text": "bien",
@@ -1713,7 +1911,23 @@
     "text": "faites",
     "label": "indicatif présent, 2e pl.",
     "steno": "kpiet/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kpiedt",
+      "strokes": [
+       [
+        2,
+        4,
+        13,
+        14,
+        19,
+        20
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "les",
@@ -1777,7 +1991,20 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "connaissent",
@@ -1785,6 +2012,25 @@
     "steno": "kae/mRies/-st",
     "strokeCount": 3,
     "alternates": [
+     {
+      "steno": "kae/mRiest",
+      "strokes": [
+       [
+        2,
+        12,
+        14
+       ],
+       [
+        6,
+        8,
+        13,
+        14,
+        17,
+        20
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "mRwiesd/-st",
       "strokes": [
@@ -1799,6 +2045,23 @@
        ],
        [
         17,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     },
+     {
+      "steno": "mRwiesdt",
+      "strokes": [
+       [
+        6,
+        8,
+        9,
+        13,
+        14,
+        17,
+        19,
         20
        ]
       ],
@@ -1861,7 +2124,21 @@
     "text": "elles",
     "label": "pronom personnel, f. pl.",
     "steno": "iel/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iesl",
+      "strokes": [
+       [
+        13,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "savent",
@@ -1951,7 +2228,23 @@
     "text": "laisse",
     "label": "indicatif présent, 1re sg.",
     "steno": "mties/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "mtiesk",
+      "strokes": [
+       [
+        6,
+        7,
+        13,
+        14,
+        17,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "mon",
@@ -2020,6 +2313,20 @@
     "steno": "@/t@/-d",
     "strokeCount": 3,
     "alternates": [
+     {
+      "steno": "@/t@d",
+      "strokes": [
+       [
+        11
+       ],
+       [
+        7,
+        11,
+        19
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "smt@k/-d",
       "strokes": [
@@ -2362,13 +2669,46 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "travaillent",
     "label": "indicatif présent, 3e pl.",
     "steno": "tRa/vaj/-st",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "tRa/vajst",
+      "strokes": [
+       [
+        7,
+        8,
+        12
+       ],
+       [
+        5,
+        12,
+        16,
+        17,
+        20
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "dur",
@@ -2429,13 +2769,44 @@
     "text": "elles",
     "label": "pronom personnel, f. pl.",
     "steno": "iel/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iesl",
+      "strokes": [
+       [
+        13,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "marchent",
     "label": "indicatif présent, 3e pl.",
     "steno": "maRZm/-st",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "mastRZm",
+      "strokes": [
+       [
+        6,
+        12,
+        17,
+        20,
+        21,
+        24,
+        25
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "vite",
@@ -2509,7 +2880,25 @@
     "text": "cherche",
     "label": "indicatif présent, 1re sg.",
     "steno": "pmieRZm/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "pmiekRZm",
+      "strokes": [
+       [
+        4,
+        6,
+        13,
+        14,
+        18,
+        21,
+        24,
+        25
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "mon",
@@ -2589,7 +2978,24 @@
     "text": "trouves",
     "label": "indicatif présent, 2e sg.",
     "steno": "tR@ejs/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "tR@ejsd",
+      "strokes": [
+       [
+        7,
+        8,
+        11,
+        14,
+        16,
+        17,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "cela",
@@ -2604,13 +3010,19 @@
     "strokeCount": 3,
     "alternates": [
      {
-      "steno": "sijdl",
+      "steno": "kspijd/sil",
       "strokes": [
+       [
+        2,
+        3,
+        4,
+        13,
+        16,
+        19
+       ],
        [
         3,
         13,
-        16,
-        19,
         23
        ]
       ],
@@ -3078,6 +3490,22 @@
     "strokeCount": 3,
     "alternates": [
      {
+      "steno": "s@a/Ret",
+      "strokes": [
+       [
+        3,
+        11,
+        12
+       ],
+       [
+        8,
+        14,
+        20
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "smRe/-t",
       "strokes": [
        [
@@ -3087,6 +3515,20 @@
         14
        ],
        [
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 24
+     },
+     {
+      "steno": "smRet",
+      "strokes": [
+       [
+        3,
+        6,
+        8,
+        14,
         20
        ]
       ],
@@ -3190,6 +3632,22 @@
     "strokeCount": 3,
     "alternates": [
      {
+      "steno": "s@a/Rad",
+      "strokes": [
+       [
+        3,
+        11,
+        12
+       ],
+       [
+        8,
+        12,
+        19
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "smRa/-d",
       "strokes": [
        [
@@ -3199,6 +3657,20 @@
         12
        ],
        [
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 24
+     },
+     {
+      "steno": "smRad",
+      "strokes": [
+       [
+        3,
+        6,
+        8,
+        12,
         19
        ]
       ],
@@ -3537,7 +4009,28 @@
     "text": "prendrons",
     "label": "indicatif futur, 1re pl.",
     "steno": "pR@/pvRai/-k",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "pR@/pvRaik",
+      "strokes": [
+       [
+        4,
+        8,
+        11
+       ],
+       [
+        4,
+        5,
+        8,
+        12,
+        13,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "un",
@@ -3605,7 +4098,25 @@
     "text": "verrez",
     "label": "indicatif futur, 2e pl.",
     "steno": "vie/Re/-d",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "vie/Red",
+      "strokes": [
+       [
+        5,
+        13,
+        14
+       ],
+       [
+        8,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "le",
@@ -3666,7 +4177,20 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "iront",
@@ -3674,6 +4198,22 @@
     "steno": "i/Rai/-st",
     "strokeCount": 3,
     "alternates": [
+     {
+      "steno": "i/Raist",
+      "strokes": [
+       [
+        13
+       ],
+       [
+        8,
+        12,
+        13,
+        17,
+        20
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "Raijkd/-st",
       "strokes": [
@@ -3687,6 +4227,23 @@
        ],
        [
         17,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 20
+     },
+     {
+      "steno": "Raijskdt",
+      "strokes": [
+       [
+        8,
+        12,
+        13,
+        16,
+        17,
+        18,
+        19,
         20
        ]
       ],
@@ -3765,13 +4322,47 @@
     "text": "elles",
     "label": "pronom personnel, f. pl.",
     "steno": "iel/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iesl",
+      "strokes": [
+       [
+        13,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "sauront",
     "label": "indicatif futur, 3e pl.",
     "steno": "sae/Rai/-st",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "sae/Raist",
+      "strokes": [
+       [
+        3,
+        12,
+        14
+       ],
+       [
+        8,
+        12,
+        13,
+        17,
+        20
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "la",
@@ -3865,6 +4456,23 @@
     "strokeCount": 3,
     "alternates": [
      {
+      "steno": "p@e/Riek",
+      "strokes": [
+       [
+        4,
+        11,
+        14
+       ],
+       [
+        8,
+        13,
+        14,
+        18
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "ptRiej/-k",
       "strokes": [
        [
@@ -3876,6 +4484,22 @@
         16
        ],
        [
+        18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 26
+     },
+     {
+      "steno": "ptRiejk",
+      "strokes": [
+       [
+        4,
+        7,
+        8,
+        13,
+        14,
+        16,
         18
        ]
       ],
@@ -3980,6 +4604,25 @@
     "strokeCount": 3,
     "alternates": [
      {
+      "steno": "pv@a/vRied",
+      "strokes": [
+       [
+        4,
+        5,
+        11,
+        12
+       ],
+       [
+        5,
+        8,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "kvmRied/-d",
       "strokes": [
        [
@@ -3997,6 +4640,22 @@
       ],
       "kind": "affix",
       "rule": 11
+     },
+     {
+      "steno": "kvmRied",
+      "strokes": [
+       [
+        2,
+        5,
+        6,
+        8,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 11
      }
     ]
    },
@@ -4006,6 +4665,28 @@
     "steno": "e/t@i/pvRwe/-R",
     "strokeCount": 4,
     "alternates": [
+     {
+      "steno": "e/t@i/pvRweR",
+      "strokes": [
+       [
+        14
+       ],
+       [
+        7,
+        11,
+        13
+       ],
+       [
+        4,
+        5,
+        8,
+        9,
+        14,
+        21
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "kvt@i/pvRwe/-R",
       "strokes": [
@@ -4024,6 +4705,28 @@
         14
        ],
        [
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     },
+     {
+      "steno": "kvt@i/pvRweR",
+      "strokes": [
+       [
+        2,
+        5,
+        7,
+        11,
+        13
+       ],
+       [
+        4,
+        5,
+        8,
+        9,
+        14,
         21
        ]
       ],
@@ -4418,7 +5121,20 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "auraient",
@@ -4426,6 +5142,23 @@
     "steno": "ae/Rie/-st",
     "strokeCount": 3,
     "alternates": [
+     {
+      "steno": "ae/Riest",
+      "strokes": [
+       [
+        12,
+        14
+       ],
+       [
+        8,
+        13,
+        14,
+        17,
+        20
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "pRied/-st",
       "strokes": [
@@ -4438,6 +5171,22 @@
        ],
        [
         17,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 14
+     },
+     {
+      "steno": "pRiesdt",
+      "strokes": [
+       [
+        4,
+        8,
+        13,
+        14,
+        17,
+        19,
         20
        ]
       ],
@@ -4522,7 +5271,26 @@
     "text": "parlez",
     "label": "impératif présent, 2e pl.",
     "steno": "paR/mte/-k",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "paR/mtek",
+      "strokes": [
+       [
+        4,
+        12,
+        21
+       ],
+       [
+        6,
+        7,
+        14,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "plus",
@@ -4609,7 +5377,24 @@
     "text": "viens",
     "label": "impératif présent, 2e sg.",
     "steno": "vRwaie/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "vRwaiek",
+      "strokes": [
+       [
+        5,
+        8,
+        9,
+        12,
+        13,
+        14,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "ici",
@@ -4692,7 +5477,28 @@
     "text": "chercher",
     "label": "infinitif",
     "steno": "pmieR/pme/-R",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "pmieR/pmeR",
+      "strokes": [
+       [
+        4,
+        6,
+        13,
+        14,
+        21
+       ],
+       [
+        4,
+        6,
+        14,
+        21
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "du",
@@ -4760,6 +5566,22 @@
     "steno": "a/Riet/-k",
     "strokeCount": 3,
     "alternates": [
+     {
+      "steno": "a/Riekt",
+      "strokes": [
+       [
+        12
+       ],
+       [
+        8,
+        13,
+        14,
+        18,
+        20
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "kRiekt/-k",
       "strokes": [
@@ -4865,7 +5687,23 @@
     "text": "ouvre",
     "label": "impératif présent, 2e sg.",
     "steno": "@ejsR/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "@ejskR",
+      "strokes": [
+       [
+        11,
+        14,
+        16,
+        17,
+        18,
+        21
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "la",
@@ -4956,7 +5794,24 @@
     "text": "ferme",
     "label": "impératif présent, 2e sg.",
     "steno": "kpieRm/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kpiekRm",
+      "strokes": [
+       [
+        2,
+        4,
+        13,
+        14,
+        18,
+        21,
+        25
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "la",
@@ -5021,7 +5876,22 @@
     "text": "donne",
     "label": "impératif présent, 2e sg.",
     "steno": "pven/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "pvekn",
+      "strokes": [
+       [
+        4,
+        5,
+        14,
+        18,
+        22
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "-moi",
@@ -5094,7 +5964,23 @@
     "text": "montre",
     "label": "impératif présent, 2e sg.",
     "steno": "maitR/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "maiktR",
+      "strokes": [
+       [
+        6,
+        12,
+        13,
+        18,
+        20,
+        21
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "-moi",
@@ -5156,6 +6042,22 @@
     "strokeCount": 3,
     "alternates": [
      {
+      "steno": "e/k@ekt",
+      "strokes": [
+       [
+        14
+       ],
+       [
+        2,
+        11,
+        14,
+        18,
+        20
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "kv@et/-k",
       "strokes": [
        [
@@ -5167,6 +6069,21 @@
        ],
        [
         18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     },
+     {
+      "steno": "kv@ekt",
+      "strokes": [
+       [
+        2,
+        5,
+        11,
+        14,
+        18,
+        20
        ]
       ],
       "kind": "affix",
@@ -5226,7 +6143,22 @@
     "text": "bois",
     "label": "impératif présent, 2e sg.",
     "steno": "svwa/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "svwak",
+      "strokes": [
+       [
+        3,
+        5,
+        9,
+        12,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "ton",
@@ -5292,7 +6224,21 @@
     "text": "sois",
     "label": "impératif présent, 2e sg.",
     "steno": "swa/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "swak",
+      "strokes": [
+       [
+        3,
+        9,
+        12,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "prudent",
@@ -5448,7 +6394,26 @@
     "text": "finis",
     "label": "impératif présent, 2e sg.",
     "steno": "kpi/mRi/-k",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "kpi/mRik",
+      "strokes": [
+       [
+        2,
+        4,
+        13
+       ],
+       [
+        6,
+        8,
+        13,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "ton",
@@ -5506,7 +6471,23 @@
     "text": "attends",
     "label": "impératif présent, 2e sg.",
     "steno": "a/t@/-k",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "a/t@k",
+      "strokes": [
+       [
+        12
+       ],
+       [
+        7,
+        11,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "un",
@@ -5575,7 +6556,23 @@
     "text": "reste",
     "label": "impératif présent, 2e sg.",
     "steno": "Riest/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "Rieskt",
+      "strokes": [
+       [
+        8,
+        13,
+        14,
+        17,
+        18,
+        20
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "avec",
@@ -5902,6 +6899,26 @@
     "strokeCount": 3,
     "alternates": [
      {
+      "steno": "kae/mtieskd",
+      "strokes": [
+       [
+        2,
+        12,
+        14
+       ],
+       [
+        6,
+        7,
+        13,
+        14,
+        17,
+        18,
+        19
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "mtwiekd/-s",
       "strokes": [
        [
@@ -5915,6 +6932,23 @@
        ],
        [
         17
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     },
+     {
+      "steno": "mtwieskd",
+      "strokes": [
+       [
+        6,
+        7,
+        9,
+        13,
+        14,
+        17,
+        18,
+        19
        ]
       ],
       "kind": "affix",
@@ -5973,7 +7007,19 @@
     "text": "as",
     "label": "indicatif présent, 2e sg.",
     "steno": "a/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "ad",
+      "strokes": [
+       [
+        12,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "un",
@@ -6123,7 +7169,28 @@
     "text": "nouvelles",
     "label": "adjectif, f. pl.",
     "steno": "mR@e/viel/-s",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "mR@e/viesl",
+      "strokes": [
+       [
+        6,
+        8,
+        11,
+        14
+       ],
+       [
+        5,
+        13,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    }
   ]
  },
@@ -6281,7 +7348,20 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "ont",
@@ -6343,7 +7423,21 @@
     "text": "elles",
     "label": "pronom personnel, f. pl.",
     "steno": "iel/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iesl",
+      "strokes": [
+       [
+        13,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "ont",
@@ -6424,7 +7518,22 @@
     "text": "parle",
     "label": "indicatif présent, 1re sg.",
     "steno": "paRl/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "pakRl",
+      "strokes": [
+       [
+        4,
+        12,
+        18,
+        21,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "avec",
@@ -6514,7 +7623,26 @@
     "text": "travailles",
     "label": "indicatif présent, 2e sg.",
     "steno": "tRa/vaj/-d",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "tRa/vajd",
+      "strokes": [
+       [
+        7,
+        8,
+        12
+       ],
+       [
+        5,
+        12,
+        16,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "dans",
@@ -6923,7 +8051,22 @@
     "text": "veux",
     "label": "indicatif présent, 2e sg.",
     "steno": "v@ie/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "v@ied",
+      "strokes": [
+       [
+        5,
+        11,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "pas",
@@ -7386,7 +8529,20 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "ne",
@@ -7479,7 +8635,24 @@
     "text": "viens",
     "label": "indicatif présent, 2e sg.",
     "steno": "vRwaie/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "vRwaied",
+      "strokes": [
+       [
+        5,
+        8,
+        9,
+        12,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    }
   ]
  },
@@ -7596,7 +8769,24 @@
     "text": "allez",
     "label": "indicatif présent, 2e pl.",
     "steno": "a/mte/-d",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "a/mted",
+      "strokes": [
+       [
+        12
+       ],
+       [
+        6,
+        7,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "-vous",
@@ -7747,7 +8937,22 @@
     "text": "fais",
     "label": "indicatif présent, 2e sg.",
     "steno": "kpie/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kpied",
+      "strokes": [
+       [
+        2,
+        4,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "cela",
@@ -8092,13 +9297,19 @@
     "strokeCount": 3,
     "alternates": [
      {
-      "steno": "sijdl",
+      "steno": "kspijd/sil",
       "strokes": [
+       [
+        2,
+        3,
+        4,
+        13,
+        16,
+        19
+       ],
        [
         3,
         13,
-        16,
-        19,
         23
        ]
       ],
@@ -8430,7 +9641,28 @@
     "text": "regarde",
     "label": "impératif présent, 2e sg.",
     "steno": "R@a/ksadR/-k",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "R@a/ksakdR",
+      "strokes": [
+       [
+        8,
+        11,
+        12
+       ],
+       [
+        2,
+        3,
+        12,
+        18,
+        19,
+        21
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "ce",
@@ -8454,7 +9686,19 @@
     "text": "ai",
     "label": "indicatif présent, 1re sg.",
     "steno": "e/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "ek",
+      "strokes": [
+       [
+        14,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "fait",
@@ -8644,7 +9888,22 @@
     "text": "veux",
     "label": "indicatif présent, 2e sg.",
     "steno": "v@ie/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "v@ied",
+      "strokes": [
+       [
+        5,
+        11,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    }
   ]
  },
@@ -8716,25 +9975,7 @@
     "text": "trouvé",
     "label": "participe passé, m. sg.",
     "steno": "tR@e/ve",
-    "strokeCount": 2,
-    "alternates": [
-     {
-      "steno": "tR@ejsk",
-      "strokes": [
-       [
-        7,
-        8,
-        11,
-        14,
-        16,
-        17,
-        18
-       ]
-      ],
-      "kind": "affix",
-      "rule": 27
-     }
-    ]
+    "strokeCount": 2
    },
    {
     "text": "ce",
@@ -8868,7 +10109,19 @@
     "text": "as",
     "label": "indicatif présent, 2e sg.",
     "steno": "a/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "ad",
+      "strokes": [
+       [
+        12,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "besoin",
@@ -9016,7 +10269,24 @@
     "text": "fleurs",
     "label": "nom, f. pl.",
     "steno": "kpmt@R/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kpmt@sR",
+      "strokes": [
+       [
+        2,
+        4,
+        6,
+        7,
+        11,
+        17,
+        21
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "sont",
@@ -9028,7 +10298,23 @@
     "text": "belles",
     "label": "adjectif, f. pl.",
     "steno": "sviel/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "sviesl",
+      "strokes": [
+       [
+        3,
+        5,
+        13,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    }
   ]
  },
@@ -9174,6 +10460,27 @@
     "steno": "pRe/kpe/Re/-j",
     "strokeCount": 4,
     "alternates": [
+     {
+      "steno": "pRe/kpe/Rej",
+      "strokes": [
+       [
+        4,
+        8,
+        14
+       ],
+       [
+        2,
+        4,
+        14
+       ],
+       [
+        8,
+        14,
+        16
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "pRe/kpejdR/-j",
       "strokes": [
@@ -9637,7 +10944,23 @@
     "text": "marche",
     "label": "indicatif présent, 1re sg.",
     "steno": "maRZm/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "makRZm",
+      "strokes": [
+       [
+        6,
+        12,
+        18,
+        21,
+        24,
+        25
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "lentement",
@@ -9728,6 +11051,30 @@
     "strokeCount": 4,
     "alternates": [
      {
+      "steno": "kai/pR@a/mRied",
+      "strokes": [
+       [
+        2,
+        12,
+        13
+       ],
+       [
+        4,
+        8,
+        11,
+        12
+       ],
+       [
+        6,
+        8,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "pRw@ad/mRie/-d",
       "strokes": [
        [
@@ -9745,6 +11092,28 @@
         14
        ],
        [
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     },
+     {
+      "steno": "pRw@ad/mRied",
+      "strokes": [
+       [
+        4,
+        8,
+        9,
+        11,
+        12,
+        19
+       ],
+       [
+        6,
+        8,
+        13,
+        14,
         19
        ]
       ],
@@ -9931,7 +11300,30 @@
     "text": "travaillez",
     "label": "indicatif présent, 2e pl.",
     "steno": "tRa/va/Rwe/-d",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "tRa/va/Rwed",
+      "strokes": [
+       [
+        7,
+        8,
+        12
+       ],
+       [
+        5,
+        12
+       ],
+       [
+        8,
+        9,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "partout",
@@ -9982,13 +11374,42 @@
     "text": "elles",
     "label": "pronom personnel, f. pl.",
     "steno": "iel/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iesl",
+      "strokes": [
+       [
+        13,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "montent",
     "label": "indicatif présent, 3e pl.",
     "steno": "mait/-st",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "maist",
+      "strokes": [
+       [
+        6,
+        12,
+        13,
+        17,
+        20
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "là",
@@ -10051,7 +11472,21 @@
     "text": "lis",
     "label": "indicatif présent, 1re sg.",
     "steno": "mti/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "mtik",
+      "strokes": [
+       [
+        6,
+        7,
+        13,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "le",
@@ -10133,6 +11568,21 @@
     "strokeCount": 3,
     "alternates": [
      {
+      "steno": "e/kRid",
+      "strokes": [
+       [
+        14
+       ],
+       [
+        2,
+        8,
+        13,
+        19
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "kvRi/-d",
       "strokes": [
        [
@@ -10142,6 +11592,20 @@
         13
        ],
        [
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     },
+     {
+      "steno": "kvRid",
+      "strokes": [
+       [
+        2,
+        5,
+        8,
+        13,
         19
        ]
       ],
@@ -10488,7 +11952,22 @@
     "text": "jouez",
     "label": "indicatif présent, 2e pl.",
     "steno": "vtwe/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "vtwed",
+      "strokes": [
+       [
+        5,
+        7,
+        9,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "souvent",
@@ -10539,13 +12018,41 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "partent",
     "label": "indicatif présent, 3e pl.",
     "steno": "patR/-st",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "pastR",
+      "strokes": [
+       [
+        4,
+        12,
+        17,
+        20,
+        21
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "rarement",
@@ -10612,13 +12119,42 @@
     "text": "elles",
     "label": "pronom personnel, f. pl.",
     "steno": "iel/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iesl",
+      "strokes": [
+       [
+        13,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "dansent",
     "label": "indicatif présent, 3e pl.",
     "steno": "pv@s/-st",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "pv@st",
+      "strokes": [
+       [
+        4,
+        5,
+        11,
+        17,
+        20
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "toujours",
@@ -10690,7 +12226,19 @@
     "text": "ai",
     "label": "indicatif présent, 1re sg.",
     "steno": "e/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "ek",
+      "strokes": [
+       [
+        14,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "jamais",
@@ -10768,7 +12316,19 @@
     "text": "as",
     "label": "indicatif présent, 2e sg.",
     "steno": "a/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "ad",
+      "strokes": [
+       [
+        12,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "rarement",
@@ -11191,7 +12751,20 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "restent",
@@ -11247,7 +12820,21 @@
     "text": "elles",
     "label": "pronom personnel, f. pl.",
     "steno": "iel/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iesl",
+      "strokes": [
+       [
+        13,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "écoutent",
@@ -11255,6 +12842,22 @@
     "steno": "e/k@et/-st",
     "strokeCount": 3,
     "alternates": [
+     {
+      "steno": "e/k@est",
+      "strokes": [
+       [
+        14
+       ],
+       [
+        2,
+        11,
+        14,
+        17,
+        20
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "kv@et/-st",
       "strokes": [
@@ -11266,6 +12869,21 @@
         20
        ],
        [
+        17,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     },
+     {
+      "steno": "kv@est",
+      "strokes": [
+       [
+        2,
+        5,
+        11,
+        14,
         17,
         20
        ]
@@ -11345,7 +12963,22 @@
     "text": "dois",
     "label": "indicatif présent, 1re sg.",
     "steno": "pvwa/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "pvwak",
+      "strokes": [
+       [
+        4,
+        5,
+        9,
+        12,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "aller",
@@ -11467,7 +13100,22 @@
     "text": "veux",
     "label": "indicatif présent, 2e sg.",
     "steno": "v@ie/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "v@ied",
+      "strokes": [
+       [
+        5,
+        11,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "visiter",
@@ -11475,6 +13123,26 @@
     "steno": "vi/twi/te/-R",
     "strokeCount": 4,
     "alternates": [
+     {
+      "steno": "vi/twi/teR",
+      "strokes": [
+       [
+        5,
+        13
+       ],
+       [
+        7,
+        9,
+        13
+       ],
+       [
+        7,
+        14,
+        21
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "vi/twijtn/-R",
       "strokes": [
@@ -11492,6 +13160,26 @@
        ],
        [
         21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 13
+     },
+     {
+      "steno": "vi/twijtRn",
+      "strokes": [
+       [
+        5,
+        13
+       ],
+       [
+        7,
+        9,
+        13,
+        16,
+        20,
+        21,
+        22
        ]
       ],
       "kind": "affix",
@@ -11918,7 +13606,20 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "refusent",
@@ -11926,6 +13627,27 @@
     "steno": "R@a/kp@inl/-st",
     "strokeCount": 3,
     "alternates": [
+     {
+      "steno": "R@a/kp@istnl",
+      "strokes": [
+       [
+        8,
+        11,
+        12
+       ],
+       [
+        2,
+        4,
+        11,
+        13,
+        17,
+        20,
+        22,
+        23
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "kpw@ijnl/-st",
       "strokes": [
@@ -11942,6 +13664,25 @@
        [
         17,
         20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 4
+     },
+     {
+      "steno": "kpw@ijstnl",
+      "strokes": [
+       [
+        2,
+        4,
+        9,
+        11,
+        13,
+        16,
+        17,
+        20,
+        22,
+        23
        ]
       ],
       "kind": "affix",
@@ -12050,6 +13791,23 @@
     "strokeCount": 3,
     "alternates": [
      {
+      "steno": "kae/m@sk",
+      "strokes": [
+       [
+        2,
+        12,
+        14
+       ],
+       [
+        6,
+        11,
+        17,
+        18
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "mw@sd/-k",
       "strokes": [
        [
@@ -12061,6 +13819,21 @@
        ],
        [
         18
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     },
+     {
+      "steno": "mw@skd",
+      "strokes": [
+       [
+        6,
+        9,
+        11,
+        17,
+        18,
+        19
        ]
       ],
       "kind": "affix",
@@ -12163,6 +13936,22 @@
     "strokeCount": 3,
     "alternates": [
      {
+      "steno": "a/Riedt",
+      "strokes": [
+       [
+        12
+       ],
+       [
+        8,
+        13,
+        14,
+        19,
+        20
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "kRiekt/-d",
       "strokes": [
        [
@@ -12175,6 +13964,22 @@
        ],
        [
         19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     },
+     {
+      "steno": "kRiekdt",
+      "strokes": [
+       [
+        2,
+        8,
+        13,
+        14,
+        18,
+        19,
+        20
        ]
       ],
       "kind": "affix",
@@ -12300,7 +14105,30 @@
     "text": "travailler",
     "label": "infinitif",
     "steno": "tRa/va/Rwe/-R",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "tRa/va/RweR",
+      "strokes": [
+       [
+        7,
+        8,
+        12
+       ],
+       [
+        5,
+        12
+       ],
+       [
+        8,
+        9,
+        14,
+        21
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    }
   ]
  },
@@ -12522,6 +14350,23 @@
     "strokeCount": 3,
     "alternates": [
      {
+      "steno": "tR@e/veR",
+      "strokes": [
+       [
+        7,
+        8,
+        11,
+        14
+       ],
+       [
+        5,
+        14,
+        21
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "tR@ejsk/-R",
       "strokes": [
        [
@@ -12534,6 +14379,23 @@
         18
        ],
        [
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 27
+     },
+     {
+      "steno": "tR@ejskR",
+      "strokes": [
+       [
+        7,
+        8,
+        11,
+        14,
+        16,
+        17,
+        18,
         21
        ]
       ],
@@ -12635,6 +14497,26 @@
     "strokeCount": 4,
     "alternates": [
      {
+      "steno": "kae/m@/sed",
+      "strokes": [
+       [
+        2,
+        12,
+        14
+       ],
+       [
+        6,
+        11
+       ],
+       [
+        3,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "swed/-d",
       "strokes": [
        [
@@ -12665,6 +14547,22 @@
     "strokeCount": 3,
     "alternates": [
      {
+      "steno": "pv@/seR",
+      "strokes": [
+       [
+        4,
+        5,
+        11
+       ],
+       [
+        3,
+        14,
+        21
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "pv@jsd/-R",
       "strokes": [
        [
@@ -12676,6 +14574,22 @@
         19
        ],
        [
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 12
+     },
+     {
+      "steno": "pv@jsdR",
+      "strokes": [
+       [
+        4,
+        5,
+        11,
+        16,
+        17,
+        19,
         21
        ]
       ],
@@ -12741,13 +14655,49 @@
     "text": "elles",
     "label": "pronom personnel, f. pl.",
     "steno": "iel/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iesl",
+      "strokes": [
+       [
+        13,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "préfèrent",
     "label": "indicatif présent, 3e pl.",
     "steno": "pRe/kpieR/-st",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "pRe/kpiestR",
+      "strokes": [
+       [
+        4,
+        8,
+        14
+       ],
+       [
+        2,
+        4,
+        13,
+        14,
+        17,
+        20,
+        21
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "rester",
@@ -12755,6 +14705,23 @@
     "steno": "Ries/te/-R",
     "strokeCount": 3,
     "alternates": [
+     {
+      "steno": "Ries/teR",
+      "strokes": [
+       [
+        8,
+        13,
+        14,
+        17
+       ],
+       [
+        7,
+        14,
+        21
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "Riejstn/-R",
       "strokes": [
@@ -12769,6 +14736,23 @@
        ],
        [
         21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 13
+     },
+     {
+      "steno": "RiejstRn",
+      "strokes": [
+       [
+        8,
+        13,
+        14,
+        16,
+        17,
+        20,
+        21,
+        22
        ]
       ],
       "kind": "affix",
@@ -12850,7 +14834,21 @@
     "text": "pense",
     "label": "indicatif présent, 1re sg.",
     "steno": "p@s/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "p@sk",
+      "strokes": [
+       [
+        4,
+        11,
+        17,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "qu'",
@@ -12974,7 +14972,22 @@
     "text": "crois",
     "label": "indicatif présent, 2e sg.",
     "steno": "kRwa/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "kRwad",
+      "strokes": [
+       [
+        2,
+        8,
+        9,
+        12,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "que",
@@ -13354,13 +15367,51 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "viendront",
     "label": "indicatif futur, 3e pl.",
     "steno": "vRwaie/pvRai/-st",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "vRwaie/pvRaist",
+      "strokes": [
+       [
+        5,
+        8,
+        9,
+        12,
+        13,
+        14
+       ],
+       [
+        4,
+        5,
+        8,
+        12,
+        13,
+        17,
+        20
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    }
   ]
  },
@@ -13421,7 +15472,20 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "comprennent",
@@ -13429,6 +15493,26 @@
     "steno": "kai/pRien/-st",
     "strokeCount": 3,
     "alternates": [
+     {
+      "steno": "kai/pRiestn",
+      "strokes": [
+       [
+        2,
+        12,
+        13
+       ],
+       [
+        4,
+        8,
+        13,
+        14,
+        17,
+        20,
+        22
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "pRwiedn/-st",
       "strokes": [
@@ -13444,6 +15528,24 @@
        [
         17,
         20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     },
+     {
+      "steno": "pRwiesdtn",
+      "strokes": [
+       [
+        4,
+        8,
+        9,
+        13,
+        14,
+        17,
+        19,
+        20,
+        22
        ]
       ],
       "kind": "affix",
@@ -13540,13 +15642,41 @@
     "text": "elles",
     "label": "pronom personnel, f. pl.",
     "steno": "iel/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iesl",
+      "strokes": [
+       [
+        13,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "pensent",
     "label": "indicatif présent, 3e pl.",
     "steno": "p@s/-st",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "p@st",
+      "strokes": [
+       [
+        4,
+        11,
+        17,
+        20
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "que",
@@ -13642,7 +15772,21 @@
     "text": "aime",
     "label": "indicatif présent, 1re sg.",
     "steno": "iem/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iekm",
+      "strokes": [
+       [
+        13,
+        14,
+        18,
+        25
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "beaucoup",
@@ -13718,6 +15862,30 @@
     "strokeCount": 4,
     "alternates": [
      {
+      "steno": "kai/pR@a/mRied",
+      "strokes": [
+       [
+        2,
+        12,
+        13
+       ],
+       [
+        4,
+        8,
+        11,
+        12
+       ],
+       [
+        6,
+        8,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "pRw@ad/mRie/-d",
       "strokes": [
        [
@@ -13735,6 +15903,28 @@
         14
        ],
        [
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 5
+     },
+     {
+      "steno": "pRw@ad/mRied",
+      "strokes": [
+       [
+        4,
+        8,
+        9,
+        11,
+        12,
+        19
+       ],
+       [
+        6,
+        8,
+        13,
+        14,
         19
        ]
       ],
@@ -13809,6 +15999,23 @@
     "steno": "tR@e/ve/-s",
     "strokeCount": 3,
     "alternates": [
+     {
+      "steno": "tR@e/ves",
+      "strokes": [
+       [
+        7,
+        8,
+        11,
+        14
+       ],
+       [
+        5,
+        14,
+        17
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "tR@ejsk/-s",
       "strokes": [
@@ -13923,6 +16130,23 @@
     "strokeCount": 3,
     "alternates": [
      {
+      "steno": "pvi/mReR",
+      "strokes": [
+       [
+        4,
+        5,
+        13
+       ],
+       [
+        6,
+        8,
+        14,
+        21
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "pvijsm/-R",
       "strokes": [
        [
@@ -13935,6 +16159,22 @@
        ],
        [
         21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 17
+     },
+     {
+      "steno": "pvijsRm",
+      "strokes": [
+       [
+        4,
+        5,
+        13,
+        16,
+        17,
+        21,
+        25
        ]
       ],
       "kind": "affix",
@@ -14047,7 +16287,20 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "les",
@@ -14065,7 +16318,21 @@
     "text": "vus",
     "label": "participe passé, m. pl.",
     "steno": "v@i/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "v@is",
+      "strokes": [
+       [
+        5,
+        11,
+        13,
+        17
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "hier",
@@ -14127,7 +16394,22 @@
     "text": "dois",
     "label": "indicatif présent, 1re sg.",
     "steno": "pvwa/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "pvwak",
+      "strokes": [
+       [
+        4,
+        5,
+        9,
+        12,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "rester",
@@ -14135,6 +16417,23 @@
     "steno": "Ries/te/-R",
     "strokeCount": 3,
     "alternates": [
+     {
+      "steno": "Ries/teR",
+      "strokes": [
+       [
+        8,
+        13,
+        14,
+        17
+       ],
+       [
+        7,
+        14,
+        21
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "Riejstn/-R",
       "strokes": [
@@ -14149,6 +16448,23 @@
        ],
        [
         21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 13
+     },
+     {
+      "steno": "RiejstRn",
+      "strokes": [
+       [
+        8,
+        13,
+        14,
+        16,
+        17,
+        20,
+        21,
+        22
        ]
       ],
       "kind": "affix",
@@ -14229,7 +16545,22 @@
     "text": "peux",
     "label": "indicatif présent, 2e sg.",
     "steno": "p@ie/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "p@ied",
+      "strokes": [
+       [
+        4,
+        11,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "m'",
@@ -14244,6 +16575,22 @@
     "strokeCount": 3,
     "alternates": [
      {
+      "steno": "ie/pveR",
+      "strokes": [
+       [
+        13,
+        14
+       ],
+       [
+        4,
+        5,
+        14,
+        21
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "spvekd/-R",
       "strokes": [
        [
@@ -14255,6 +16602,22 @@
         19
        ],
        [
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 10
+     },
+     {
+      "steno": "spvekdR",
+      "strokes": [
+       [
+        3,
+        4,
+        5,
+        14,
+        18,
+        19,
         21
        ]
       ],
@@ -14425,7 +16788,26 @@
     "text": "parler",
     "label": "infinitif",
     "steno": "paR/mte/-R",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "paR/mteR",
+      "strokes": [
+       [
+        4,
+        12,
+        21
+       ],
+       [
+        6,
+        7,
+        14,
+        21
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "anglais",
@@ -14501,25 +16883,7 @@
     "text": "devrait",
     "label": "conditionnel présent, 3e sg.",
     "steno": "pv@a/vRie",
-    "strokeCount": 2,
-    "alternates": [
-     {
-      "steno": "kvmRied",
-      "strokes": [
-       [
-        2,
-        5,
-        6,
-        8,
-        13,
-        14,
-        19
-       ]
-      ],
-      "kind": "affix",
-      "rule": 11
-     }
-    ]
+    "strokeCount": 2
    },
    {
     "text": "partir",
@@ -14603,7 +16967,25 @@
     "text": "manger",
     "label": "infinitif",
     "steno": "m@/vte/-R",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "m@/vteR",
+      "strokes": [
+       [
+        6,
+        11
+       ],
+       [
+        5,
+        7,
+        14,
+        21
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "maintenant",
@@ -14681,6 +17063,26 @@
     "strokeCount": 4,
     "alternates": [
      {
+      "steno": "a/p@a/mteR",
+      "strokes": [
+       [
+        12
+       ],
+       [
+        4,
+        11,
+        12
+       ],
+       [
+        6,
+        7,
+        14,
+        21
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "kp@ak/mte/-R",
       "strokes": [
        [
@@ -14696,6 +17098,26 @@
         14
        ],
        [
+        21
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     },
+     {
+      "steno": "kp@ak/mteR",
+      "strokes": [
+       [
+        2,
+        4,
+        11,
+        12,
+        18
+       ],
+       [
+        6,
+        7,
+        14,
         21
        ]
       ],
@@ -14769,7 +17191,20 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "peuvent",
@@ -14864,13 +17299,44 @@
     "text": "elles",
     "label": "pronom personnel, f. pl.",
     "steno": "iel/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iesl",
+      "strokes": [
+       [
+        13,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "doivent",
     "label": "indicatif présent, 3e pl.",
     "steno": "pvwajs/-st",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "pvwajst",
+      "strokes": [
+       [
+        4,
+        5,
+        9,
+        12,
+        16,
+        17,
+        20
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "venir",
@@ -15193,7 +17659,27 @@
     "text": "venue",
     "label": "participe passé, f. sg.",
     "steno": "v@a/mR@i/-j",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "v@a/mR@ij",
+      "strokes": [
+       [
+        5,
+        11,
+        12
+       ],
+       [
+        6,
+        8,
+        11,
+        13,
+        16
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "avec",
@@ -15324,7 +17810,24 @@
     "text": "allés",
     "label": "participe passé, m. pl.",
     "steno": "a/mte/-s",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "a/mtes",
+      "strokes": [
+       [
+        12
+       ],
+       [
+        6,
+        7,
+        14,
+        17
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "à",
@@ -15402,7 +17905,25 @@
     "text": "partis",
     "label": "participe passé, m. pl.",
     "steno": "paR/ti/-s",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "paR/tis",
+      "strokes": [
+       [
+        4,
+        12,
+        21
+       ],
+       [
+        7,
+        13,
+        17
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "trop",
@@ -15470,7 +17991,20 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "sont",
@@ -15484,6 +18018,23 @@
     "steno": "Ries/te/-s",
     "strokeCount": 3,
     "alternates": [
+     {
+      "steno": "Ries/tes",
+      "strokes": [
+       [
+        8,
+        13,
+        14,
+        17
+       ],
+       [
+        7,
+        14,
+        17
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "Riejstn/-s",
       "strokes": [
@@ -15583,7 +18134,21 @@
     "text": "elles",
     "label": "pronom personnel, f. pl.",
     "steno": "iel/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iesl",
+      "strokes": [
+       [
+        13,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "sont",
@@ -15595,13 +18160,49 @@
     "text": "venues",
     "label": "participe passé, f. pl.",
     "steno": "v@a/mR@i/-js",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "v@a/mR@ijs",
+      "strokes": [
+       [
+        5,
+        11,
+        12
+       ],
+       [
+        6,
+        8,
+        11,
+        13,
+        16,
+        17
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "seules",
     "label": "adjectif, f. pl.",
     "steno": "s@l/-js",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "s@jsl",
+      "strokes": [
+       [
+        3,
+        11,
+        16,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    }
   ]
  },
@@ -15672,7 +18273,24 @@
     "text": "lève",
     "label": "indicatif présent, 1re sg.",
     "steno": "mtiejs/-k",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "mtiejsk",
+      "strokes": [
+       [
+        6,
+        7,
+        13,
+        14,
+        16,
+        17,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "tôt",
@@ -15760,7 +18378,23 @@
     "text": "couches",
     "label": "indicatif présent, 2e sg.",
     "steno": "k@eZm/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "k@edZm",
+      "strokes": [
+       [
+        2,
+        11,
+        14,
+        19,
+        24,
+        25
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "tard",
@@ -15843,7 +18477,28 @@
     "text": "cheveux",
     "label": "nom, m. pl.",
     "steno": "pm@a/v@ie/-s",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "pm@a/v@ies",
+      "strokes": [
+       [
+        4,
+        6,
+        11,
+        12
+       ],
+       [
+        5,
+        11,
+        13,
+        14,
+        17
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    }
   ]
  },
@@ -16220,6 +18875,26 @@
     "strokeCount": 4,
     "alternates": [
      {
+      "steno": "e/k@e/tied",
+      "strokes": [
+       [
+        14
+       ],
+       [
+        2,
+        11,
+        14
+       ],
+       [
+        7,
+        13,
+        14,
+        19
+       ]
+      ],
+      "kind": "merged"
+     },
+     {
       "steno": "kv@e/tie/-d",
       "strokes": [
        [
@@ -16234,6 +18909,25 @@
         14
        ],
        [
+        19
+       ]
+      ],
+      "kind": "affix",
+      "rule": 6
+     },
+     {
+      "steno": "kv@e/tied",
+      "strokes": [
+       [
+        2,
+        5,
+        11,
+        14
+       ],
+       [
+        7,
+        13,
+        14,
         19
        ]
       ],
@@ -16493,13 +19187,52 @@
     "text": "ils",
     "label": "pronom personnel, m. pl.",
     "steno": "il/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "isl",
+      "strokes": [
+       [
+        13,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "trouveront",
     "label": "indicatif futur, 3e pl.",
     "steno": "tR@e/v@a/Rai/-st",
-    "strokeCount": 4
+    "strokeCount": 4,
+    "alternates": [
+     {
+      "steno": "tR@e/v@a/Raist",
+      "strokes": [
+       [
+        7,
+        8,
+        11,
+        14
+       ],
+       [
+        5,
+        11,
+        12
+       ],
+       [
+        8,
+        12,
+        13,
+        17,
+        20
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "la",
@@ -16822,7 +19555,27 @@
     "text": "pardonne",
     "label": "indicatif présent, 1re sg.",
     "steno": "paR/pven/-k",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "paR/pvekn",
+      "strokes": [
+       [
+        4,
+        12,
+        21
+       ],
+       [
+        4,
+        5,
+        14,
+        18,
+        22
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "facilement",
@@ -16913,7 +19666,21 @@
     "text": "aimes",
     "label": "indicatif présent, 2e sg.",
     "steno": "iem/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iedm",
+      "strokes": [
+       [
+        13,
+        14,
+        19,
+        25
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "sincèrement",
@@ -17431,7 +20198,21 @@
     "text": "elles",
     "label": "pronom personnel, f. pl.",
     "steno": "iel/-s",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "iesl",
+      "strokes": [
+       [
+        13,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "arriveront",
@@ -17439,6 +20220,31 @@
     "steno": "a/Ri/v@a/Rai/-st",
     "strokeCount": 5,
     "alternates": [
+     {
+      "steno": "a/Ri/v@a/Raist",
+      "strokes": [
+       [
+        12
+       ],
+       [
+        8,
+        13
+       ],
+       [
+        5,
+        11,
+        12
+       ],
+       [
+        8,
+        12,
+        13,
+        17,
+        20
+       ]
+      ],
+      "kind": "merged"
+     },
      {
       "steno": "kRik/v@a/Rai/-st",
       "strokes": [
@@ -17459,6 +20265,31 @@
         13
        ],
        [
+        17,
+        20
+       ]
+      ],
+      "kind": "affix",
+      "rule": 1
+     },
+     {
+      "steno": "kRik/v@a/Raist",
+      "strokes": [
+       [
+        2,
+        8,
+        13,
+        18
+       ],
+       [
+        5,
+        11,
+        12
+       ],
+       [
+        8,
+        12,
+        13,
         17,
         20
        ]
@@ -17550,7 +20381,29 @@
     "text": "souviens",
     "label": "indicatif présent, 1re sg.",
     "steno": "s@e/vRwaie/-k",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "s@e/vRwaiek",
+      "strokes": [
+       [
+        3,
+        11,
+        14
+       ],
+       [
+        5,
+        8,
+        9,
+        12,
+        13,
+        14,
+        18
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "de",
@@ -17621,7 +20474,26 @@
     "text": "rappelles",
     "label": "indicatif présent, 2e sg.",
     "steno": "Ra/piel/-d",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "Ra/piedl",
+      "strokes": [
+       [
+        8,
+        12
+       ],
+       [
+        4,
+        13,
+        14,
+        19,
+        23
+       ]
+      ],
+      "kind": "merged"
+     }
+    ]
    },
    {
     "text": "bien",
@@ -17688,25 +20560,7 @@
     "text": "endort",
     "label": "indicatif présent, 3e sg.",
     "steno": "@/pveR",
-    "strokeCount": 2,
-    "alternates": [
-     {
-      "steno": "spvmekR",
-      "strokes": [
-       [
-        3,
-        4,
-        5,
-        6,
-        14,
-        18,
-        21
-       ]
-      ],
-      "kind": "affix",
-      "rule": 3
-     }
-    ]
+    "strokeCount": 2
    },
    {
     "text": "rapidement",

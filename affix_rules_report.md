@@ -24,7 +24,7 @@ forms: `a|ah|ha|hâ|â`(k=1), `a|ah|ha|hâ|â[R@|RE|Re]·`(k=2)
 - top exceptions: assez, arrière, arrêt, arrière, accueil, affection, allée, âgée, âgé, attaquent
     arrête: a/Riet -> kRiekt
     amour: a/m@eR -> km@ekR
-    avais: a/vie/-d -> kviek/-d
+    avais: a/vied -> kviekd
     avais: a/vie/-k -> kviek/-k
     ami: a/mi -> kmik
 
@@ -66,9 +66,9 @@ forms: `re|reh`(k=1)
 - word exceptions 138 (freq 49.5); scope fallbacks 0
 - top exceptions: relax, relais, recours, relax, relève, reçoivent, reçoive, relaxe, rené, relaxe
     revoir: R@a/vwaR -> vwajR
-    regardez: R@a/ksaR/pve/-k -> kswajR/pve/-k
-    reviens: R@a/vRwaie/-k -> vRwaiej/-k
-    regarder: R@a/ksaR/pve/-R -> kswajR/pve/-R
+    regardez: R@a/ksaR/pvek -> kswajR/pvek
+    reviens: R@a/vRwaiek -> vRwaiejk
+    regarder: R@a/ksaR/pveR -> kswajR/pveR
     retour: R@a/t@eR -> tw@ejR
     retard: R@a/taR -> twajR
 
@@ -80,7 +80,7 @@ forms: `co+col+com+con+cor`(k=1), `co+col+com+con+cor[m@]·`(k=2)
 - word exceptions 364 (freq 756.8); scope fallbacks 53
 - top exceptions: connais, connaît, connard, connard, concert, confier, confié, connards, connu, coté
     combien: kai/svRwaie -> svRwaied
-    comprends: kai/pR@/-k -> pRw@d/-k
+    comprends: kai/pR@k -> pRw@kd
     compris: kai/pRi -> pRwid
     confiance: kai/kpRw@s -> kpRw@sd
     commence: kae/m@s -> mw@sd
@@ -111,7 +111,7 @@ forms: `ccion|cion|cyon|sion|ssion|tion|tions`(k=1), `·[tion:C*[ai]]ccion|cion|
     attention: a/t@/sRwai -> a/t@jdt
     situation: si/t@a/sRwai -> si/t@ajdt
     mission: mi/sRwai -> mijdt
-    félicitations: kpe/mti/si/ta/sRwai/-s -> kpe/mti/sijdt/-s
+    félicitations: kpe/mti/si/ta/sRwais -> kpe/mti/sijsdt
 
 ## 8. prefix `de|des|dé|déh` -- keys (3, 9, 18) = `sw-k`
 
@@ -124,9 +124,9 @@ forms: `de|des|dé|déh`(k=1)
     désolé: pve/twae/mte -> stwaek/mte
     désolé: pve/twae/mte -> stwaek/mte
     début: pve/sv@i -> svw@ik
-    désolée: pve/twae/mte/-j -> stwaek/mte/-j
+    désolée: pve/twae/mtej -> stwaek/mtej
     décidé: pve/si/pve -> swik/pve
-    désolée: pve/twae/mte/-j -> stwaek/mte/-j
+    désolée: pve/twae/mtej -> stwaek/mtej
 
 ## 9. prefix `ain|hin|im|in` -- keys (7, 8, 9) = `tRw-`
 
@@ -151,11 +151,11 @@ forms: `ai|aî|e|ei|hai|he|hê|é`(k=1), `ai|aî|e|ei|hai|he|hê|é[e:ksky|kspli
 - fused spelling variants: ai, aî, e, ei, hai, he, hê, é (new conflict freq 0.1)
 - word exceptions 13 (freq 19.3); scope fallbacks 9
 - top exceptions: excès, aimé, aimée, aimés, exsangue, aimées, excède, excèdent, erriez, exsangues
-    aider: ie/pve/-R -> spvekd/-R
-    excusez: ie/ks@i/twe/-k -> stwekd/-k
-    aimerais: ie/m@a/Rie/-k -> sm@akd/Rie/-k
+    aider: ie/pveR -> spvekdR
+    excusez: ie/ks@i/twek -> stwekd
+    aimerais: ie/m@a/Riek -> sm@akd/Riek
     essaie: ie/sie -> siekd
-    essayer: ie/sie/Rwe/-R -> sRwekd/-R
+    essayer: ie/sie/RweR -> sRwekdR
     essayé: ie/sie/Rwe -> sRwekd
 
 ## 11. prefix `de` -- keys (2, 6, 19) = `km-d`
@@ -166,7 +166,7 @@ forms: `de`(k=1), `de[man|ve]·`(k=2)
 - word exceptions 0 (freq 0.0); scope fallbacks 0
     demain: pv@a/maie -> kmaied
     demande: pv@a/m@d -> km@d
-    devrais: pv@a/vRie/-k -> kvmRied/-k
+    devrais: pv@a/vRiek -> kvmRiekd
     demandé: pv@a/m@/pve -> kpvmed
     devrait: pv@a/vRie -> kvmRied
     devant: pv@a/v@ -> kvm@d
@@ -179,10 +179,10 @@ forms: `cer|cé|cée|cés|scer|se|ser|sser|ssez|ssée|sé`(k=1), `·[cé:m@]cer|
 - fused spelling variants: cer, cé, cée, cés, scer, se, ser, sser, ssez, ssée, sé (new conflict freq 89.5)
 - word exceptions 0 (freq 0.0); scope fallbacks 0
     assez: a/se -> ajsd
-    passer: pa/se/-R -> pajsd/-R
+    passer: pa/seR -> pajsdR
     passé: pa/se -> pajsd
-    laissez: mtie/se/-k -> mtiejsd/-k
-    laisser: mtie/se/-R -> mtiejsd/-R
+    laissez: mtie/sek -> mtiejskd
+    laisser: mtie/seR -> mtiejsdR
     pensé: p@/se -> p@jsd
 
 ## 13. suffix `ter` -- keys (16, 20, 22) = `-jtn`
@@ -191,12 +191,12 @@ forms: `ter`(k=1)
 - score 4579.3, strokeFreqSaved 4579.3, keySimilarity 0.33 -- NOT phonetically motivated
 - attestedShare 0.92; exception rate 0.0%; top categories: VER 100%, NOM 0%, ADJ 0%
 - word exceptions 0 (freq 0.0); scope fallbacks 0
-    rester: Ries/te/-R -> Riejstn/-R
-    arrêter: a/Rie/te/-R -> a/Riejtn/-R
-    arrêtez: a/Rie/te/-k -> a/Riejtn/-k
-    acheter: a/pm@a/te/-R -> a/pm@ajtn/-R
-    restez: Ries/te/-k -> Riejstn/-k
-    écoutez: e/k@e/te/-k -> e/k@ejtn/-k
+    rester: Ries/teR -> RiejstRn
+    arrêter: a/Rie/teR -> a/RiejtRn
+    arrêtez: a/Rie/tek -> a/Riejktn
+    acheter: a/pm@a/teR -> a/pm@ajtRn
+    restez: Ries/tek -> Riejsktn
+    écoutez: e/k@e/tek -> e/k@ejktn
 
 ## 14. prefix `au` -- keys (4, 8, 19) = `pR-d`
 
@@ -206,7 +206,7 @@ forms: `au`(k=1), `au[jour|to|tre|di]·`(k=2)
 - word exceptions 2 (freq 0.3); scope fallbacks 0
 - top exceptions: autisme, autismes
     aujourd'hui: ae/vt@eR/pv@ai -> pvR@aid
-    aurais: ae/Rie/-d -> pRied/-d
+    aurais: ae/Ried -> pRied
     aurait: ae/Rie -> pRied
     aucune: ae/k@in -> kpR@idn
     aura: ae/Ra -> pRad
@@ -220,12 +220,12 @@ forms: `der|dé|dée`(k=1), `·[dez|der|dé:gaR|m@]der|dé|dée`(k=2)
 - fused spelling variants: der, dé, dée (new conflict freq 52.2)
 - word exceptions 3 (freq 2.1); scope fallbacks 1
 - top exceptions: codé, codée, codés
-    aider: ie/pve/-R -> iekdm/-R
+    aider: ie/pveR -> iekdRm
     idée: i/pve -> ikdm
-    regardez: R@a/ksaR/pve/-k -> R@akdm/-k
+    regardez: R@a/ksaR/pvek -> R@akdm
     demandé: pv@a/m@/pve -> pv@akdm
-    demander: pv@a/m@/pve/-R -> pv@akdm/-R
-    regarder: R@a/ksaR/pve/-R -> R@akdm/-R
+    demander: pv@a/m@/pveR -> pv@akdRm
+    regarder: R@a/ksaR/pveR -> R@akdRm
 
 ## 16. suffix `té` -- keys (19, 20, 25) = `-dtm`
 
@@ -249,11 +249,11 @@ forms: `ner|nez|nner|nnée|née|nées`(k=1), `·[né:C{1,2}[i°]]ner|nez|nner|nn
 - fused spelling variants: ner, nez, nner, nnée, née, nées (new conflict freq 52.2)
 - word exceptions 0 (freq 0.0); scope fallbacks 13
     donné: pvae/mRe -> pvaejsm
-    donner: pvae/mRe/-R -> pvaejsm/-R
-    années: a/mRe/-s -> ajsm/-s
+    donner: pvae/mReR -> pvaejsRm
+    années: a/mRes -> ajsm
     journée: vt@eR/mRe -> vt@ejsRm
     année: a/mRe -> ajsm
-    donnez: pvae/mRe/-k -> pvaejsm/-k
+    donnez: pvae/mRek -> pvaejskm
 
 ## 18. prefix `pa` -- keys (2, 5, 18) = `kv-k`
 
@@ -262,10 +262,10 @@ forms: `pa`(k=1)
 - attestedShare 0.27; exception rate 1.1%; top categories: NOM 49%, VER 38%, ADJ 12%
 - word exceptions 30 (freq 2.8); scope fallbacks 0
 - top exceptions: patiner, pagaie, patiné, patinez, package, pagaie, patine, pagaies, papisme, pavage
-    passer: pa/se/-R -> ksve/-R
+    passer: pa/seR -> ksveR
     passé: pa/se -> ksve
     papa: pa/pa -> kpva
-    parents: pa/R@/-s -> kvR@/-s
+    parents: pa/R@s -> kvR@s
     patron: pa/tRai -> kvtRai
     passé: pa/se -> ksve
 
@@ -296,7 +296,7 @@ forms: `e|hi|hy|i|y|î`(k=1), `e|hi|hy|i|y|î[i:[mn][aeiouy]]·`(k=2)
     ira: i/Ra -> Rajkd
     imagine: i/ma/vtin -> vtijkdn
     ignore: i/waeR -> waejkdR
-    irai: i/Re/-t -> Rejkd/-t
+    irai: i/Ret -> Rejkdt
     inutile: i/mR@i/til -> tijkdl
 
 ## 21. prefix `ré` -- keys (3, 7, 8) = `stR-`
@@ -307,7 +307,7 @@ forms: `ré`(k=1)
 - word exceptions 0 (freq 0.0); scope fallbacks 0
     réponse: Re/pais -> sptRais
     réussi: Re/@i/si -> stR@i/si
-    réponds: Re/pai/-k -> sptRai/-k
+    réponds: Re/paik -> sptRaik
     réveille: Re/v*iej -> svtR*iej
     répondre: Re/paidR -> sptRaidR
     réalité: Re/a/mti/te -> stRa/mti/te
@@ -323,7 +323,7 @@ forms: `sa|sah`(k=1)
     savoir: sa/vwaR -> vwakRZ
     savez: sa/ve -> vekZ
     salut: sa/mt@i -> mt@ikZ
-    savais: sa/vie/-k -> viekZ/-k
+    savais: sa/viek -> viekZ
     salut: sa/mt@i -> mt@ikZ
     savait: sa/vie -> viekZ
 
@@ -336,7 +336,7 @@ forms: `pro|proh|prô`(k=1)
 - word exceptions 4 (freq 0.0); scope fallbacks 0
 - top exceptions: prodrome, prodromes, procréerai, procréerez
     problème: pRae/svmtiem -> spvmtRiem
-    problèmes: pRae/svmtiem/-s -> spvmtRiem/-s
+    problèmes: pRae/svmtiesm -> spvmtRiesm
     propos: pRae/pae -> pvRae
     prochaine: pRae/pmien -> pvmRien
     promis: pRae/mi -> pvmRi
@@ -352,9 +352,9 @@ forms: `ce|sce|se`(k=1)
     serait: s@a/Rie -> smRie
     celui: s@a/mt@ai -> smt@ai
     semaine: s@a/mien -> smien
-    serai: s@a/Re/-t -> smRe/-t
+    serai: s@a/Ret -> smRet
     ceci: s@a/si -> smi
-    semaines: s@a/mien/-s -> smien/-s
+    semaines: s@a/miesn -> smiesn
 
 ## 25. suffix `rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée` -- keys (16, 19, 21) = `-jdR`
 
@@ -364,12 +364,12 @@ forms: `rae|rai|raie|re|rer|rez|rrer|rrhée|rrée|rée`(k=1), `·[rer:p[aeiouy]|
 - fused spelling variants: rae, rai, raie, re, rer, rez, rrer, rrhée, rrée, rée (new conflict freq 17.9)
 - word exceptions 1 (freq 0.0); scope fallbacks 2
 - top exceptions: aurai
-    tirer: ti/Re/-R -> tijdR/-R
+    tirer: ti/ReR -> tijdR
     soirée: swa/Re -> swajdR
     tiré: ti/Re -> tijdR
-    pleurer: pmt@ie/Re/-R -> pmt@iejdR/-R
-    préparer: pRe/pa/Re/-R -> pRejdR/-R
-    tirez: ti/Re/-k -> tijdR/-k
+    pleurer: pmt@ie/ReR -> pmt@iejdR
+    préparer: pRe/pa/ReR -> pRejdR
+    tirez: ti/Rek -> tijkdR
 
 ## 26. prefix `pou|pu` -- keys (4, 7, 16) = `pt-j`
 
@@ -381,9 +381,9 @@ forms: `pou|pu`(k=1)
 - top exceptions: poudroieriez, poudroierions, poudroyai, poudroyer, poudroyez, poudroyé, poudroyée, poudroyées, poudroyés, poudroyiez
     pouvez: p@e/ve -> pvtej
     pourrait: p@e/Rie -> ptRiej
-    pourrais: p@e/Rie/-k -> ptRiej/-k
+    pourrais: p@e/Riek -> ptRiejk
     pouvoir: p@e/vwaR -> pvtwajR
-    pouvais: p@e/vie/-k -> pvtiej/-k
+    pouvais: p@e/viek -> pvtiejk
     pouvait: p@e/vie -> pvtiej
 
 ## 27. suffix `ver` -- keys (16, 17, 18) = `-jsk`
@@ -393,11 +393,11 @@ forms: `ver`(k=1), `·[vé:Ri]ver`(k=2)
 - attestedShare 0.82; exception rate 0.0%; top categories: VER 100%, NOM 0%, ADJ 0%
 - word exceptions 0 (freq 0.0); scope fallbacks 0
     trouvé: tR@e/ve -> tR@ejsk
-    trouver: tR@e/ve/-R -> tR@ejsk/-R
+    trouver: tR@e/veR -> tR@ejskR
     arrivé: a/Ri/ve -> ajsk
-    arriver: a/Ri/ve/-R -> a/Rijsk/-R
-    sauver: sae/ve/-R -> saejsk/-R
-    retrouver: R@a/tR@e/ve/-R -> R@a/tR@ejsk/-R
+    arriver: a/Ri/veR -> a/RijskR
+    sauver: sae/veR -> saejskR
+    retrouver: R@a/tR@e/veR -> R@a/tR@ejskR
 
 ## 28. prefix `de|dea|di|die|dis|dy|dî` -- keys (3, 16, 19) = `s-jd`
 
@@ -408,10 +408,10 @@ forms: `de|dea|di|die|dis|dy|dî`(k=1), `de|dea|di|die|dis|dy|dî[di:C{1,2}i]·`
 - word exceptions 0 (freq 0.0); scope fallbacks 0
     dirait: pvi/Rie -> sRiejd
     difficile: pvi/kpi/sil -> sijdl
-    disais: pvi/twie/-k -> stwiejd/-k
+    disais: pvi/twiek -> stwiejkd
     disait: pvi/twie -> stwiejd
     dîner: pvi/mRe -> smRejd
-    dirai: pvi/Re/-t -> sRejd/-t
+    dirai: pvi/Ret -> sRejdt
 
 ## 29. suffix `ser|sée|zer|zé` -- keys (18, 22, 23) = `-knl`
 
@@ -421,12 +421,12 @@ forms: `ser|sée|zer|zé`(k=1), `·[sez:C*y]ser|sée|zer|zé`(k=2), `·[li]ser|s
 - fused spelling variants: ser, sée, zer, zé (new conflict freq 6.4)
 - word exceptions 11 (freq 11.5); scope fallbacks 0
 - top exceptions: basé, basée, basés, basées, baser, basez, basai, vaser, vasai, vasez
-    excusez: ie/ks@i/twe/-k -> ieknl/-k
-    poser: pae/twe/-R -> paeknl/-R
-    utiliser: @i/ti/mti/twe/-R -> @i/tiknl/-R
-    épouser: e/p@e/twe/-R -> e/p@eknl/-R
-    amuser: a/m@i/twe/-R -> a/m@iknl/-R
-    excuser: ie/ks@i/twe/-R -> ie/ks@iknl/-R
+    excusez: ie/ks@i/twek -> ieknl
+    poser: pae/tweR -> paekRnl
+    utiliser: @i/ti/mti/tweR -> @i/tikRnl
+    épouser: e/p@e/tweR -> e/p@ekRnl
+    amuser: a/m@i/tweR -> a/m@ikRnl
+    excuser: ie/ks@i/tweR -> ie/ks@ikRnl
 
 ## 30. prefix `o` -- keys (2, 6, 16) = `km-j`
 
@@ -438,7 +438,7 @@ forms: `o`(k=1), `o[C{1,2}i|kV]·`(k=2)
     ok: ae/ke -> kmej
     occupe: ae/k@ijk -> km@ijk
     ok: ae/ke -> kmej
-    occuper: ae/k@i/pe/-R -> kpmej/-R
+    occuper: ae/k@i/peR -> kpmejR
     occasion: ae/ka/tRwai -> kmtRwaij
     offrir: ae/kpRiR -> kpmRijR
 

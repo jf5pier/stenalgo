@@ -81,26 +81,6 @@
    "kind": "attach",
    "position": "prefix",
    "units": [
-    "la"
-   ],
-   "keys": [
-    16,
-    18,
-    19
-   ],
-   "keyNames": [
-    "-j",
-    "-k",
-    "-d"
-   ],
-   "family": "la",
-   "label": "« la » : se joint au mot suivant"
-  },
-  {
-   "rank": 6,
-   "kind": "attach",
-   "position": "prefix",
-   "units": [
     "le"
    ],
    "keys": [
@@ -117,7 +97,7 @@
    "label": "« le » ou « l' » : se joint au mot suivant"
   },
   {
-   "rank": 7,
+   "rank": 6,
    "kind": "attach",
    "position": "prefix",
    "units": [
@@ -135,6 +115,26 @@
    ],
    "family": "le",
    "label": "« l' » ou « le » : se joint au mot suivant"
+  },
+  {
+   "rank": 7,
+   "kind": "attach",
+   "position": "prefix",
+   "units": [
+    "la"
+   ],
+   "keys": [
+    16,
+    18,
+    19
+   ],
+   "keyNames": [
+    "-j",
+    "-k",
+    "-d"
+   ],
+   "family": "la",
+   "label": "« la » : se joint au mot suivant"
   },
   {
    "rank": 8,
@@ -2423,7 +2423,7 @@
     },
     {
      "kind": "expression",
-     "text": "Par exemple : « qu'on » : k-/ai → kaikt ; « qu'ils » : k-/il/-s → kiktl/-s ; « que nous » : k@a/mR@e → kmR@ekt."
+     "text": "Par exemple : « qu'on » : k-/ai → kaikt ; « qu'ils » : k-/isl → kisktl ; « que nous » : k@a/mR@e → kmR@ekt."
     },
     {
      "kind": "expression",
@@ -2472,33 +2472,29 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "k.il",
-     "steno": "kiktl/-s",
+     "steno": "kisktl",
      "strokes": [
       [
        2,
        13,
+       17,
        18,
        20,
        23
-      ],
-      [
-       17
       ]
      ],
      "frequency": 14813829.0,
      "alternates": [
       {
-       "steno": "k-/il/-s",
+       "steno": "k-/isl",
        "strokes": [
         [
          2
         ],
         [
          13,
+         17,
          23
-        ],
-        [
-         17
         ]
        ]
       }
@@ -3281,7 +3277,893 @@
    "track": "expressions",
    "index": 3,
    "sectionTitle": "Les dix premières familles",
-   "title": "Leçon trois : « la »",
+   "title": "Leçon trois : « le » · « l' »",
+   "kind": "expressions",
+   "newKeys": [
+    5,
+    9,
+    16
+   ],
+   "newChords": [
+    [
+     5,
+     9,
+     16
+    ]
+   ],
+   "rules": [
+    {
+     "kind": "expression",
+     "text": "Les touches pressées avec un mot ajoutent une particule : vw- + -j pour « le » ou « l' ». Elles se joignent à la frappe du mot suivant, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
+    },
+    {
+     "kind": "expression",
+     "text": "Par exemple : « l'on » : mt-/ai → vwaij ; « l'autre » : mt-/aetR → vwaejtR ; « le plus » : mt@a/pmt@i → pvmtw@ij."
+    },
+    {
+     "kind": "expression",
+     "text": "Le contour long de chaque phrase reste valable, comme celui où une partie seulement des abréviations est faite."
+    }
+   ],
+   "words": [
+    {
+     "ortho": "l'on",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l.§",
+     "steno": "vwaij",
+     "strokes": [
+      [
+       5,
+       9,
+       12,
+       13,
+       16
+      ]
+     ],
+     "frequency": 12730809.0,
+     "alternates": [
+      {
+       "steno": "mt-/ai",
+       "strokes": [
+        [
+         6,
+         7
+        ],
+        [
+         12,
+         13
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      6
+     ]
+    },
+    {
+     "ortho": "l'autre",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l.otR",
+     "steno": "vwaejtR",
+     "strokes": [
+      [
+       5,
+       9,
+       12,
+       14,
+       16,
+       20,
+       21
+      ]
+     ],
+     "frequency": 12468123.0,
+     "alternates": [
+      {
+       "steno": "mt-/aetR",
+       "strokes": [
+        [
+         6,
+         7
+        ],
+        [
+         12,
+         14,
+         20,
+         21
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      6
+     ]
+    },
+    {
+     "ortho": "le plus",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l°.ply",
+     "steno": "pvmtw@ij",
+     "strokes": [
+      [
+       4,
+       5,
+       6,
+       7,
+       9,
+       11,
+       13,
+       16
+      ]
+     ],
+     "frequency": 10748872.0,
+     "alternates": [
+      {
+       "steno": "mt@a/pmt@i",
+       "strokes": [
+        [
+         6,
+         7,
+         11,
+         12
+        ],
+        [
+         4,
+         6,
+         7,
+         11,
+         13
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      5
+     ]
+    },
+    {
+     "ortho": "l'homme",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l.Om",
+     "steno": "vwejm",
+     "strokes": [
+      [
+       5,
+       9,
+       14,
+       16,
+       25
+      ]
+     ],
+     "frequency": 9381347.0,
+     "alternates": [
+      {
+       "steno": "mt-/em",
+       "strokes": [
+        [
+         6,
+         7
+        ],
+        [
+         14,
+         25
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      6
+     ]
+    },
+    {
+     "ortho": "le monde",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l°.m§d",
+     "steno": "vmwaijd",
+     "strokes": [
+      [
+       5,
+       6,
+       9,
+       12,
+       13,
+       16,
+       19
+      ]
+     ],
+     "frequency": 8737886.0,
+     "alternates": [
+      {
+       "steno": "mt@a/maid",
+       "strokes": [
+        [
+         6,
+         7,
+         11,
+         12
+        ],
+        [
+         6,
+         12,
+         13,
+         19
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      5
+     ]
+    },
+    {
+     "ortho": "le temps",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l°.t@",
+     "steno": "vtw@j",
+     "strokes": [
+      [
+       5,
+       7,
+       9,
+       11,
+       16
+      ]
+     ],
+     "frequency": 8268400.0,
+     "alternates": [
+      {
+       "steno": "mt@a/t@",
+       "strokes": [
+        [
+         6,
+         7,
+         11,
+         12
+        ],
+        [
+         7,
+         11
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      5
+     ]
+    },
+    {
+     "ortho": "l'état",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l.eta",
+     "steno": "vwej/ta",
+     "strokes": [
+      [
+       5,
+       9,
+       14,
+       16
+      ],
+      [
+       7,
+       12
+      ]
+     ],
+     "frequency": 6184748.0,
+     "alternates": [
+      {
+       "steno": "mt-/e/ta",
+       "strokes": [
+        [
+         6,
+         7
+        ],
+        [
+         14
+        ],
+        [
+         7,
+         12
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      6
+     ]
+    },
+    {
+     "ortho": "l'air",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l.ER",
+     "steno": "vwiejR",
+     "strokes": [
+      [
+       5,
+       9,
+       13,
+       14,
+       16,
+       21
+      ]
+     ],
+     "frequency": 5943558.0,
+     "alternates": [
+      {
+       "steno": "mt-/ieR",
+       "strokes": [
+        [
+         6,
+         7
+        ],
+        [
+         13,
+         14,
+         21
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      6
+     ]
+    },
+    {
+     "ortho": "l'histoire",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l.istwaR",
+     "steno": "vwijs/twaR",
+     "strokes": [
+      [
+       5,
+       9,
+       13,
+       16,
+       17
+      ],
+      [
+       7,
+       9,
+       12,
+       21
+      ]
+     ],
+     "frequency": 5525652.0,
+     "alternates": [
+      {
+       "steno": "mt-/is/twaR",
+       "strokes": [
+        [
+         6,
+         7
+        ],
+        [
+         13,
+         17
+        ],
+        [
+         7,
+         9,
+         12,
+         21
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      6
+     ]
+    },
+    {
+     "ortho": "l'avait",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l.avE",
+     "steno": "vwaj/vie",
+     "strokes": [
+      [
+       5,
+       9,
+       12,
+       16
+      ],
+      [
+       5,
+       13,
+       14
+      ]
+     ],
+     "frequency": 5317910.0,
+     "alternates": [
+      {
+       "steno": "mt-/a/vie",
+       "strokes": [
+        [
+         6,
+         7
+        ],
+        [
+         12
+        ],
+        [
+         5,
+         13,
+         14
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      6
+     ]
+    },
+    {
+     "ortho": "l'eau",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l.o",
+     "steno": "vwae#j",
+     "strokes": [
+      [
+       5,
+       9,
+       12,
+       14,
+       15,
+       16
+      ]
+     ],
+     "frequency": 4832423.0,
+     "alternates": [
+      {
+       "steno": "mt-/ae#",
+       "strokes": [
+        [
+         6,
+         7
+        ],
+        [
+         12,
+         14,
+         15
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      6
+     ]
+    },
+    {
+     "ortho": "l'a",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l.a",
+     "steno": "vw*aj",
+     "strokes": [
+      [
+       5,
+       9,
+       10,
+       12,
+       16
+      ]
+     ],
+     "frequency": 4731090.0,
+     "alternates": [
+      {
+       "steno": "mt-/*a",
+       "strokes": [
+        [
+         6,
+         7
+        ],
+        [
+         10,
+         12
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      6
+     ]
+    },
+    {
+     "ortho": "le cas",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l°.ka",
+     "steno": "kvwaj",
+     "strokes": [
+      [
+       2,
+       5,
+       9,
+       12,
+       16
+      ]
+     ],
+     "frequency": 4610602.0,
+     "alternates": [
+      {
+       "steno": "mt@a/ka",
+       "strokes": [
+        [
+         6,
+         7,
+         11,
+         12
+        ],
+        [
+         2,
+         12
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      5
+     ]
+    },
+    {
+     "ortho": "l'esprit",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l.EspRi",
+     "steno": "vwiejs/pRi",
+     "strokes": [
+      [
+       5,
+       9,
+       13,
+       14,
+       16,
+       17
+      ],
+      [
+       4,
+       8,
+       13
+      ]
+     ],
+     "frequency": 4386980.0,
+     "alternates": [
+      {
+       "steno": "mt-/ies/pRi",
+       "strokes": [
+        [
+         6,
+         7
+        ],
+        [
+         13,
+         14,
+         17
+        ],
+        [
+         4,
+         8,
+         13
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      6
+     ]
+    },
+    {
+     "ortho": "l'idée",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l.ide",
+     "steno": "vwij/pve",
+     "strokes": [
+      [
+       5,
+       9,
+       13,
+       16
+      ],
+      [
+       4,
+       5,
+       14
+      ]
+     ],
+     "frequency": 4372863.0,
+     "alternates": [
+      {
+       "steno": "mt-/i/pve",
+       "strokes": [
+        [
+         6,
+         7
+        ],
+        [
+         13
+        ],
+        [
+         4,
+         5,
+         14
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      6
+     ]
+    },
+    {
+     "ortho": "le fait",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l°.fE",
+     "steno": "kpvwiej",
+     "strokes": [
+      [
+       2,
+       4,
+       5,
+       9,
+       13,
+       14,
+       16
+      ]
+     ],
+     "frequency": 4238832.0,
+     "alternates": [
+      {
+       "steno": "mt@a/kpie",
+       "strokes": [
+        [
+         6,
+         7,
+         11,
+         12
+        ],
+        [
+         2,
+         4,
+         13,
+         14
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      5
+     ]
+    },
+    {
+     "ortho": "le même",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l°.mEm",
+     "steno": "vmwiejm",
+     "strokes": [
+      [
+       5,
+       6,
+       9,
+       13,
+       14,
+       16,
+       25
+      ]
+     ],
+     "frequency": 4221282.0,
+     "alternates": [
+      {
+       "steno": "mt@a/miem",
+       "strokes": [
+        [
+         6,
+         7,
+         11,
+         12
+        ],
+        [
+         6,
+         13,
+         14,
+         25
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      5
+     ]
+    },
+    {
+     "ortho": "tout le monde",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "tu.l°.m§d",
+     "steno": "t@e/vmwaijd",
+     "strokes": [
+      [
+       7,
+       11,
+       14
+      ],
+      [
+       5,
+       6,
+       9,
+       12,
+       13,
+       16,
+       19
+      ]
+     ],
+     "frequency": 3720257.0,
+     "alternates": [
+      {
+       "steno": "t@e/mt@a/maid",
+       "strokes": [
+        [
+         7,
+         11,
+         14
+        ],
+        [
+         6,
+         7,
+         11,
+         12
+        ],
+        [
+         6,
+         12,
+         13,
+         19
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      5
+     ]
+    },
+    {
+     "ortho": "le temps de",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "l°.t@.d°",
+     "steno": "vtw@j/pv@a",
+     "strokes": [
+      [
+       5,
+       7,
+       9,
+       11,
+       16
+      ],
+      [
+       4,
+       5,
+       11,
+       12
+      ]
+     ],
+     "frequency": 2366713.0,
+     "alternates": [
+      {
+       "steno": "mt@a/t@/pv@a",
+       "strokes": [
+        [
+         6,
+         7,
+         11,
+         12
+        ],
+        [
+         7,
+         11
+        ],
+        [
+         4,
+         5,
+         11,
+         12
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      5
+     ]
+    },
+    {
+     "ortho": "dans le cadre",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "d@.l°.kadR",
+     "steno": "pv@/kvwajdR",
+     "strokes": [
+      [
+       4,
+       5,
+       11
+      ],
+      [
+       2,
+       5,
+       9,
+       12,
+       16,
+       19,
+       21
+      ]
+     ],
+     "frequency": 2216650.0,
+     "alternates": [
+      {
+       "steno": "pv@/mt@a/kadR",
+       "strokes": [
+        [
+         4,
+         5,
+         11
+        ],
+        [
+         6,
+         7,
+         11,
+         12
+        ],
+        [
+         2,
+         12,
+         19,
+         21
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      5
+     ]
+    }
+   ]
+  },
+  {
+   "id": "expressions-04",
+   "track": "expressions",
+   "index": 4,
+   "sectionTitle": "Les dix premières familles",
+   "title": "Leçon quatre : « la »",
    "kind": "expressions",
    "newKeys": [
     16,
@@ -3344,7 +4226,7 @@
       }
      ],
      "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -3385,7 +4267,7 @@
       }
      ],
      "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -3426,7 +4308,7 @@
       }
      ],
      "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -3467,7 +4349,7 @@
       }
      ],
      "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -3508,7 +4390,7 @@
       }
      ],
      "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -3551,7 +4433,7 @@
       }
      ],
      "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -3594,7 +4476,7 @@
       }
      ],
      "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -3633,7 +4515,7 @@
       }
      ],
      "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -3676,7 +4558,7 @@
       }
      ],
      "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -3717,7 +4599,7 @@
       }
      ],
      "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -3756,7 +4638,7 @@
       }
      ],
      "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -3797,7 +4679,7 @@
       }
      ],
      "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -3848,7 +4730,7 @@
       }
      ],
      "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -3913,7 +4795,7 @@
       }
      ],
      "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -3968,60 +4850,7 @@
       }
      ],
      "ruleRanks": [
-      5
-     ]
-    },
-    {
-     "ortho": "la mise en",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "la.miz.@",
-     "steno": "mijkdnl/-j/@",
-     "strokes": [
-      [
-       6,
-       13,
-       16,
-       18,
-       19,
-       22,
-       23
-      ],
-      [
-       16
-      ],
-      [
-       11
-      ]
-     ],
-     "frequency": 2207050.0,
-     "alternates": [
-      {
-       "steno": "mta/minl/-j/@",
-       "strokes": [
-        [
-         6,
-         7,
-         12
-        ],
-        [
-         6,
-         13,
-         22,
-         23
-        ],
-        [
-         16
-        ],
-        [
-         11
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -4076,7 +4905,7 @@
       }
      ],
      "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -4129,7 +4958,7 @@
       }
      ],
      "ruleRanks": [
-      5
+      7
      ]
     },
     {
@@ -4180,893 +5009,7 @@
       }
      ],
      "ruleRanks": [
-      5
-     ]
-    }
-   ]
-  },
-  {
-   "id": "expressions-04",
-   "track": "expressions",
-   "index": 4,
-   "sectionTitle": "Les dix premières familles",
-   "title": "Leçon quatre : « le » · « l' »",
-   "kind": "expressions",
-   "newKeys": [
-    5,
-    9,
-    16
-   ],
-   "newChords": [
-    [
-     5,
-     9,
-     16
-    ]
-   ],
-   "rules": [
-    {
-     "kind": "expression",
-     "text": "Les touches pressées avec un mot ajoutent une particule : vw- + -j pour « le » ou « l' ». Elles se joignent à la frappe du mot suivant, ou forment une frappe à elles seules quand elles ne peuvent pas s'y joindre."
-    },
-    {
-     "kind": "expression",
-     "text": "Par exemple : « l'on » : mt-/ai → vwaij ; « l'autre » : mt-/aetR → vwaejtR ; « le plus » : mt@a/pmt@i → pvmtw@ij."
-    },
-    {
-     "kind": "expression",
-     "text": "Le contour long de chaque phrase reste valable, comme celui où une partie seulement des abréviations est faite."
-    }
-   ],
-   "words": [
-    {
-     "ortho": "l'on",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l.§",
-     "steno": "vwaij",
-     "strokes": [
-      [
-       5,
-       9,
-       12,
-       13,
-       16
-      ]
-     ],
-     "frequency": 12730809.0,
-     "alternates": [
-      {
-       "steno": "mt-/ai",
-       "strokes": [
-        [
-         6,
-         7
-        ],
-        [
-         12,
-         13
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
       7
-     ]
-    },
-    {
-     "ortho": "l'autre",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l.otR",
-     "steno": "vwaejtR",
-     "strokes": [
-      [
-       5,
-       9,
-       12,
-       14,
-       16,
-       20,
-       21
-      ]
-     ],
-     "frequency": 12468123.0,
-     "alternates": [
-      {
-       "steno": "mt-/aetR",
-       "strokes": [
-        [
-         6,
-         7
-        ],
-        [
-         12,
-         14,
-         20,
-         21
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      7
-     ]
-    },
-    {
-     "ortho": "le plus",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l°.ply",
-     "steno": "pvmtw@ij",
-     "strokes": [
-      [
-       4,
-       5,
-       6,
-       7,
-       9,
-       11,
-       13,
-       16
-      ]
-     ],
-     "frequency": 10748872.0,
-     "alternates": [
-      {
-       "steno": "mt@a/pmt@i",
-       "strokes": [
-        [
-         6,
-         7,
-         11,
-         12
-        ],
-        [
-         4,
-         6,
-         7,
-         11,
-         13
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      6
-     ]
-    },
-    {
-     "ortho": "l'homme",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l.Om",
-     "steno": "vwejm",
-     "strokes": [
-      [
-       5,
-       9,
-       14,
-       16,
-       25
-      ]
-     ],
-     "frequency": 9381347.0,
-     "alternates": [
-      {
-       "steno": "mt-/em",
-       "strokes": [
-        [
-         6,
-         7
-        ],
-        [
-         14,
-         25
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      7
-     ]
-    },
-    {
-     "ortho": "le monde",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l°.m§d",
-     "steno": "vmwaijd",
-     "strokes": [
-      [
-       5,
-       6,
-       9,
-       12,
-       13,
-       16,
-       19
-      ]
-     ],
-     "frequency": 8737886.0,
-     "alternates": [
-      {
-       "steno": "mt@a/maid",
-       "strokes": [
-        [
-         6,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         12,
-         13,
-         19
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      6
-     ]
-    },
-    {
-     "ortho": "le temps",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l°.t@",
-     "steno": "vtw@j",
-     "strokes": [
-      [
-       5,
-       7,
-       9,
-       11,
-       16
-      ]
-     ],
-     "frequency": 8268400.0,
-     "alternates": [
-      {
-       "steno": "mt@a/t@",
-       "strokes": [
-        [
-         6,
-         7,
-         11,
-         12
-        ],
-        [
-         7,
-         11
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      6
-     ]
-    },
-    {
-     "ortho": "l'état",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l.eta",
-     "steno": "vwej/ta",
-     "strokes": [
-      [
-       5,
-       9,
-       14,
-       16
-      ],
-      [
-       7,
-       12
-      ]
-     ],
-     "frequency": 6184748.0,
-     "alternates": [
-      {
-       "steno": "mt-/e/ta",
-       "strokes": [
-        [
-         6,
-         7
-        ],
-        [
-         14
-        ],
-        [
-         7,
-         12
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      7
-     ]
-    },
-    {
-     "ortho": "l'air",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l.ER",
-     "steno": "vwiejR",
-     "strokes": [
-      [
-       5,
-       9,
-       13,
-       14,
-       16,
-       21
-      ]
-     ],
-     "frequency": 5943558.0,
-     "alternates": [
-      {
-       "steno": "mt-/ieR",
-       "strokes": [
-        [
-         6,
-         7
-        ],
-        [
-         13,
-         14,
-         21
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      7
-     ]
-    },
-    {
-     "ortho": "l'histoire",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l.istwaR",
-     "steno": "vwijs/twaR",
-     "strokes": [
-      [
-       5,
-       9,
-       13,
-       16,
-       17
-      ],
-      [
-       7,
-       9,
-       12,
-       21
-      ]
-     ],
-     "frequency": 5525652.0,
-     "alternates": [
-      {
-       "steno": "mt-/is/twaR",
-       "strokes": [
-        [
-         6,
-         7
-        ],
-        [
-         13,
-         17
-        ],
-        [
-         7,
-         9,
-         12,
-         21
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      7
-     ]
-    },
-    {
-     "ortho": "l'avait",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l.avE",
-     "steno": "vwaj/vie",
-     "strokes": [
-      [
-       5,
-       9,
-       12,
-       16
-      ],
-      [
-       5,
-       13,
-       14
-      ]
-     ],
-     "frequency": 5317910.0,
-     "alternates": [
-      {
-       "steno": "mt-/a/vie",
-       "strokes": [
-        [
-         6,
-         7
-        ],
-        [
-         12
-        ],
-        [
-         5,
-         13,
-         14
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      7
-     ]
-    },
-    {
-     "ortho": "l'eau",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l.o",
-     "steno": "vwae#j",
-     "strokes": [
-      [
-       5,
-       9,
-       12,
-       14,
-       15,
-       16
-      ]
-     ],
-     "frequency": 4832423.0,
-     "alternates": [
-      {
-       "steno": "mt-/ae#",
-       "strokes": [
-        [
-         6,
-         7
-        ],
-        [
-         12,
-         14,
-         15
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      7
-     ]
-    },
-    {
-     "ortho": "l'a",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l.a",
-     "steno": "vw*aj",
-     "strokes": [
-      [
-       5,
-       9,
-       10,
-       12,
-       16
-      ]
-     ],
-     "frequency": 4731090.0,
-     "alternates": [
-      {
-       "steno": "mt-/*a",
-       "strokes": [
-        [
-         6,
-         7
-        ],
-        [
-         10,
-         12
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      7
-     ]
-    },
-    {
-     "ortho": "le cas",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l°.ka",
-     "steno": "kvwaj",
-     "strokes": [
-      [
-       2,
-       5,
-       9,
-       12,
-       16
-      ]
-     ],
-     "frequency": 4610602.0,
-     "alternates": [
-      {
-       "steno": "mt@a/ka",
-       "strokes": [
-        [
-         6,
-         7,
-         11,
-         12
-        ],
-        [
-         2,
-         12
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      6
-     ]
-    },
-    {
-     "ortho": "l'esprit",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l.EspRi",
-     "steno": "vwiejs/pRi",
-     "strokes": [
-      [
-       5,
-       9,
-       13,
-       14,
-       16,
-       17
-      ],
-      [
-       4,
-       8,
-       13
-      ]
-     ],
-     "frequency": 4386980.0,
-     "alternates": [
-      {
-       "steno": "mt-/ies/pRi",
-       "strokes": [
-        [
-         6,
-         7
-        ],
-        [
-         13,
-         14,
-         17
-        ],
-        [
-         4,
-         8,
-         13
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      7
-     ]
-    },
-    {
-     "ortho": "l'idée",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l.ide",
-     "steno": "vwij/pve",
-     "strokes": [
-      [
-       5,
-       9,
-       13,
-       16
-      ],
-      [
-       4,
-       5,
-       14
-      ]
-     ],
-     "frequency": 4372863.0,
-     "alternates": [
-      {
-       "steno": "mt-/i/pve",
-       "strokes": [
-        [
-         6,
-         7
-        ],
-        [
-         13
-        ],
-        [
-         4,
-         5,
-         14
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      7
-     ]
-    },
-    {
-     "ortho": "le fait",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l°.fE",
-     "steno": "kpvwiej",
-     "strokes": [
-      [
-       2,
-       4,
-       5,
-       9,
-       13,
-       14,
-       16
-      ]
-     ],
-     "frequency": 4238832.0,
-     "alternates": [
-      {
-       "steno": "mt@a/kpie",
-       "strokes": [
-        [
-         6,
-         7,
-         11,
-         12
-        ],
-        [
-         2,
-         4,
-         13,
-         14
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      6
-     ]
-    },
-    {
-     "ortho": "le même",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l°.mEm",
-     "steno": "vmwiejm",
-     "strokes": [
-      [
-       5,
-       6,
-       9,
-       13,
-       14,
-       16,
-       25
-      ]
-     ],
-     "frequency": 4221282.0,
-     "alternates": [
-      {
-       "steno": "mt@a/miem",
-       "strokes": [
-        [
-         6,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         13,
-         14,
-         25
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      6
-     ]
-    },
-    {
-     "ortho": "tout le monde",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "tu.l°.m§d",
-     "steno": "t@e/vmwaijd",
-     "strokes": [
-      [
-       7,
-       11,
-       14
-      ],
-      [
-       5,
-       6,
-       9,
-       12,
-       13,
-       16,
-       19
-      ]
-     ],
-     "frequency": 3720257.0,
-     "alternates": [
-      {
-       "steno": "t@e/mt@a/maid",
-       "strokes": [
-        [
-         7,
-         11,
-         14
-        ],
-        [
-         6,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         12,
-         13,
-         19
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      6
-     ]
-    },
-    {
-     "ortho": "le temps de",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "l°.t@.d°",
-     "steno": "vtw@j/pv@a",
-     "strokes": [
-      [
-       5,
-       7,
-       9,
-       11,
-       16
-      ],
-      [
-       4,
-       5,
-       11,
-       12
-      ]
-     ],
-     "frequency": 2366713.0,
-     "alternates": [
-      {
-       "steno": "mt@a/t@/pv@a",
-       "strokes": [
-        [
-         6,
-         7,
-         11,
-         12
-        ],
-        [
-         7,
-         11
-        ],
-        [
-         4,
-         5,
-         11,
-         12
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      6
-     ]
-    },
-    {
-     "ortho": "dans le cadre",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "d@.l°.kadR",
-     "steno": "pv@/kvwajdR",
-     "strokes": [
-      [
-       4,
-       5,
-       11
-      ],
-      [
-       2,
-       5,
-       9,
-       12,
-       16,
-       19,
-       21
-      ]
-     ],
-     "frequency": 2216650.0,
-     "alternates": [
-      {
-       "steno": "pv@/mt@a/kadR",
-       "strokes": [
-        [
-         4,
-         5,
-         11
-        ],
-        [
-         6,
-         7,
-         11,
-         12
-        ],
-        [
-         2,
-         12,
-         19,
-         21
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      6
      ]
     }
    ]
@@ -5355,30 +5298,26 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "n.E",
-     "steno": "ejd/-k",
+     "steno": "ejkd",
      "strokes": [
       [
        14,
        16,
+       18,
        19
-      ],
-      [
-       18
       ]
      ],
      "frequency": 6169512.0,
      "alternates": [
       {
-       "steno": "mR-/e/-k",
+       "steno": "mR-/ek",
        "strokes": [
         [
          6,
          8
         ],
         [
-         14
-        ],
-        [
+         14,
          18
         ]
        ]
@@ -5557,7 +5496,7 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "Z°.n°.p2",
-     "steno": "vt@a/p@iejd/-k",
+     "steno": "vt@a/p@iejkd",
      "strokes": [
       [
        5,
@@ -5571,16 +5510,14 @@
        13,
        14,
        16,
+       18,
        19
-      ],
-      [
-       18
       ]
      ],
      "frequency": 1701690.0,
      "alternates": [
       {
-       "steno": "vt@a/mR@a/p@ie/-k",
+       "steno": "vt@a/mR@a/p@iek",
        "strokes": [
         [
          5,
@@ -5598,9 +5535,7 @@
          4,
          11,
          13,
-         14
-        ],
-        [
+         14,
          18
         ]
        ]
@@ -7448,6 +7383,61 @@
      ]
     },
     {
+     "ortho": "ce que j'ai",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "s°.k°.Z.E",
+     "steno": "k@a/vt-/pvtek",
+     "strokes": [
+      [
+       2,
+       11,
+       12
+      ],
+      [
+       5,
+       7
+      ],
+      [
+       4,
+       5,
+       7,
+       14,
+       18
+      ]
+     ],
+     "frequency": 851681.0,
+     "alternates": [
+      {
+       "steno": "s@a/k@a/vt-/ek",
+       "strokes": [
+        [
+         3,
+         11,
+         12
+        ],
+        [
+         2,
+         11,
+         12
+        ],
+        [
+         5,
+         7
+        ],
+        [
+         14,
+         18
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      13
+     ]
+    },
+    {
      "ortho": "c'est ça",
      "before": "",
      "after": "",
@@ -7529,52 +7519,6 @@
          6,
          9,
          12
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      14
-     ]
-    },
-    {
-     "ortho": "c'est mon",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "s.E.m§",
-     "steno": "pvtie/mai",
-     "strokes": [
-      [
-       4,
-       5,
-       7,
-       13,
-       14
-      ],
-      [
-       6,
-       12,
-       13
-      ]
-     ],
-     "frequency": 401319.0,
-     "alternates": [
-      {
-       "steno": "s*/ie/mai",
-       "strokes": [
-        [
-         3,
-         10
-        ],
-        [
-         13,
-         14
-        ],
-        [
-         6,
-         12,
-         13
         ]
        ]
       }
@@ -8255,7 +8199,7 @@
     },
     {
      "kind": "expression",
-     "text": "Par exemple : « sont pas » : sai/pa → swaiRm ; « n'est pas » : mR-/ie/pa → wiejdRm ; « pas de » : pa/pv@a → w-sRZm."
+     "text": "Par exemple : « sont pas » : sai/pa → swaiRm ; « tu n'as pas » : t@i/mR-/ad/pa → t@i/mR-/wadRm ; « n'est pas » : mR-/ie/pa → wiejdRm."
     },
     {
      "kind": "expression",
@@ -8289,6 +8233,60 @@
          3,
          12,
          13
+        ],
+        [
+         4,
+         12
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      16
+     ]
+    },
+    {
+     "ortho": "tu n'as pas",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "ty.n.a.pa",
+     "steno": "t@i/mR-/wadRm",
+     "strokes": [
+      [
+       7,
+       11,
+       13
+      ],
+      [
+       6,
+       8
+      ],
+      [
+       9,
+       12,
+       19,
+       21,
+       25
+      ]
+     ],
+     "frequency": 684975.0,
+     "alternates": [
+      {
+       "steno": "t@i/mR-/ad/pa",
+       "strokes": [
+        [
+         7,
+         11,
+         13
+        ],
+        [
+         6,
+         8
+        ],
+        [
+         12,
+         19
         ],
         [
          4,
@@ -8883,7 +8881,7 @@
       }
      ],
      "ruleRanks": [
-      5,
+      7,
       16
      ]
     },
@@ -9253,16 +9251,14 @@
      "after": "",
      "label": "économise deux traits",
      "phonology": "n.E.pa",
-     "steno": "ejd/w-kRm",
+     "steno": "wejkdRm",
      "strokes": [
       [
+       9,
        14,
        16,
-       19
-      ],
-      [
-       9,
        18,
+       19,
        21,
        25
       ]
@@ -9270,17 +9266,15 @@
      "frequency": 2975507.0,
      "alternates": [
       {
-       "steno": "mR-/e/w-kRm",
+       "steno": "mR-/wekRm",
        "strokes": [
         [
          6,
          8
         ],
         [
-         14
-        ],
-        [
          9,
+         14,
          18,
          21,
          25
@@ -9288,15 +9282,13 @@
        ]
       },
       {
-       "steno": "ejd/-k/pa",
+       "steno": "ejkd/pa",
        "strokes": [
         [
          14,
          16,
+         18,
          19
-        ],
-        [
-         18
         ],
         [
          4,
@@ -9305,16 +9297,14 @@
        ]
       },
       {
-       "steno": "mR-/e/-k/pa",
+       "steno": "mR-/ek/pa",
        "strokes": [
         [
          6,
          8
         ],
         [
-         14
-        ],
-        [
+         14,
          18
         ],
         [
@@ -9335,27 +9325,25 @@
      "after": "",
      "label": "économise trois traits",
      "phonology": "Z°.n.E.pa",
-     "steno": "pejsdZ/w-kRm",
+     "steno": "pwejskdRZm",
      "strokes": [
       [
        4,
+       9,
        14,
        16,
        17,
-       19,
-       24
-      ],
-      [
-       9,
        18,
+       19,
        21,
+       24,
        25
       ]
      ],
      "frequency": 2945490.0,
      "alternates": [
       {
-       "steno": "pmR-sZ/e/w-kRm",
+       "steno": "pmR-sZ/wekRm",
        "strokes": [
         [
          4,
@@ -9365,10 +9353,8 @@
          24
         ],
         [
-         14
-        ],
-        [
          9,
+         14,
          18,
          21,
          25
@@ -9376,27 +9362,25 @@
        ]
       },
       {
-       "steno": "pejsdZ/-k/pa",
+       "steno": "pejskdZ/pa",
        "strokes": [
         [
          4,
          14,
          16,
          17,
+         18,
          19,
          24
         ],
         [
-         18
-        ],
-        [
          4,
          12
         ]
        ]
       },
       {
-       "steno": "vt@a/ejd/w-kRm",
+       "steno": "vt@a/wejkdRm",
        "strokes": [
         [
          5,
@@ -9405,20 +9389,18 @@
          12
         ],
         [
+         9,
          14,
          16,
-         19
-        ],
-        [
-         9,
          18,
+         19,
          21,
          25
         ]
        ]
       },
       {
-       "steno": "pmR-sZ/e/-k/pa",
+       "steno": "pmR-sZ/ek/pa",
        "strokes": [
         [
          4,
@@ -9428,9 +9410,7 @@
          24
         ],
         [
-         14
-        ],
-        [
+         14,
          18
         ],
         [
@@ -9440,7 +9420,7 @@
        ]
       },
       {
-       "steno": "vt@a/mR-/e/w-kRm",
+       "steno": "vt@a/mR-/wekRm",
        "strokes": [
         [
          5,
@@ -9453,10 +9433,8 @@
          8
         ],
         [
-         14
-        ],
-        [
          9,
+         14,
          18,
          21,
          25
@@ -9464,7 +9442,7 @@
        ]
       },
       {
-       "steno": "vt@a/ejd/-k/pa",
+       "steno": "vt@a/ejkd/pa",
        "strokes": [
         [
          5,
@@ -9475,10 +9453,8 @@
         [
          14,
          16,
+         18,
          19
-        ],
-        [
-         18
         ],
         [
          4,
@@ -9487,7 +9463,7 @@
        ]
       },
       {
-       "steno": "vt@a/mR-/e/-k/pa",
+       "steno": "vt@a/mR-/ek/pa",
        "strokes": [
         [
          5,
@@ -9500,9 +9476,7 @@
          8
         ],
         [
-         14
-        ],
-        [
+         14,
          18
         ],
         [
@@ -9984,207 +9958,6 @@
       16,
       17
      ]
-    },
-    {
-     "ortho": "ce n'était pas",
-     "before": "",
-     "after": "",
-     "label": "économise trois traits",
-     "phonology": "s°.n.etE.pa",
-     "steno": "pvtejd/twieRm",
-     "strokes": [
-      [
-       4,
-       5,
-       7,
-       14,
-       16,
-       19
-      ],
-      [
-       7,
-       9,
-       13,
-       14,
-       21,
-       25
-      ]
-     ],
-     "frequency": 1916144.0,
-     "alternates": [
-      {
-       "steno": "s@a/ejd/twieRm",
-       "strokes": [
-        [
-         3,
-         11,
-         12
-        ],
-        [
-         14,
-         16,
-         19
-        ],
-        [
-         7,
-         9,
-         13,
-         14,
-         21,
-         25
-        ]
-       ]
-      },
-      {
-       "steno": "pvmtR-/e/twieRm",
-       "strokes": [
-        [
-         4,
-         5,
-         6,
-         7,
-         8
-        ],
-        [
-         14
-        ],
-        [
-         7,
-         9,
-         13,
-         14,
-         21,
-         25
-        ]
-       ]
-      },
-      {
-       "steno": "pvtejd/tie/pa",
-       "strokes": [
-        [
-         4,
-         5,
-         7,
-         14,
-         16,
-         19
-        ],
-        [
-         7,
-         13,
-         14
-        ],
-        [
-         4,
-         12
-        ]
-       ]
-      },
-      {
-       "steno": "s@a/mR-/e/twieRm",
-       "strokes": [
-        [
-         3,
-         11,
-         12
-        ],
-        [
-         6,
-         8
-        ],
-        [
-         14
-        ],
-        [
-         7,
-         9,
-         13,
-         14,
-         21,
-         25
-        ]
-       ]
-      },
-      {
-       "steno": "s@a/ejd/tie/pa",
-       "strokes": [
-        [
-         3,
-         11,
-         12
-        ],
-        [
-         14,
-         16,
-         19
-        ],
-        [
-         7,
-         13,
-         14
-        ],
-        [
-         4,
-         12
-        ]
-       ]
-      },
-      {
-       "steno": "pvmtR-/e/tie/pa",
-       "strokes": [
-        [
-         4,
-         5,
-         6,
-         7,
-         8
-        ],
-        [
-         14
-        ],
-        [
-         7,
-         13,
-         14
-        ],
-        [
-         4,
-         12
-        ]
-       ]
-      },
-      {
-       "steno": "s@a/mR-/e/tie/pa",
-       "strokes": [
-        [
-         3,
-         11,
-         12
-        ],
-        [
-         6,
-         8
-        ],
-        [
-         14
-        ],
-        [
-         7,
-         13,
-         14
-        ],
-        [
-         4,
-         12
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      10,
-      13,
-      16
-     ]
     }
    ]
   },
@@ -10221,7 +9994,7 @@
     },
     {
      "kind": "expression",
-     "text": "Par exemple : « j'ai » : vt-/e/-k → pesZ/-k ; « je suis » : vt@a/s@ai/-k → sp@aisZ/-k ; « j'avais » : vt-/a/vie/-d → pasZ/vie/-d."
+     "text": "Par exemple : « j'ai » : vt-/ek → peskZ ; « je suis » : vt@a/s@aik → sp@aiskZ ; « j'avais » : vt-/a/vied → pasZ/vied."
     },
     {
      "kind": "expression",
@@ -10235,31 +10008,27 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "Z.E",
-     "steno": "pesZ/-k",
+     "steno": "peskZ",
      "strokes": [
       [
        4,
        14,
        17,
+       18,
        24
-      ],
-      [
-       18
       ]
      ],
      "frequency": 30553370.0,
      "alternates": [
       {
-       "steno": "vt-/e/-k",
+       "steno": "vt-/ek",
        "strokes": [
         [
          5,
          7
         ],
         [
-         14
-        ],
-        [
+         14,
          18
         ]
        ]
@@ -10275,7 +10044,7 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "Z°.s8i",
-     "steno": "sp@aisZ/-k",
+     "steno": "sp@aiskZ",
      "strokes": [
       [
        3,
@@ -10284,16 +10053,14 @@
        12,
        13,
        17,
+       18,
        24
-      ],
-      [
-       18
       ]
      ],
      "frequency": 14670144.0,
      "alternates": [
       {
-       "steno": "vt@a/s@ai/-k",
+       "steno": "vt@a/s@aik",
        "strokes": [
         [
          5,
@@ -10305,9 +10072,7 @@
          3,
          11,
          12,
-         13
-        ],
-        [
+         13,
          18
         ]
        ]
@@ -10323,7 +10088,7 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "Z.avE",
-     "steno": "pasZ/vie/-d",
+     "steno": "pasZ/vied",
      "strokes": [
       [
        4,
@@ -10334,16 +10099,14 @@
       [
        5,
        13,
-       14
-      ],
-      [
+       14,
        19
       ]
      ],
      "frequency": 7511028.0,
      "alternates": [
       {
-       "steno": "vt-/a/vie/-d",
+       "steno": "vt-/a/vied",
        "strokes": [
         [
          5,
@@ -10355,9 +10118,7 @@
         [
          5,
          13,
-         14
-        ],
-        [
+         14,
          19
         ]
        ]
@@ -10413,7 +10174,7 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "Z.etE",
-     "steno": "pesZ/tie/-k",
+     "steno": "pesZ/tiek",
      "strokes": [
       [
        4,
@@ -10424,16 +10185,14 @@
       [
        7,
        13,
-       14
-      ],
-      [
+       14,
        18
       ]
      ],
      "frequency": 5740660.0,
      "alternates": [
       {
-       "steno": "vt-/e/tie/-k",
+       "steno": "vt-/e/tiek",
        "strokes": [
         [
          5,
@@ -10445,9 +10204,7 @@
         [
          7,
          13,
-         14
-        ],
-        [
+         14,
          18
         ]
        ]
@@ -10495,6 +10252,52 @@
      ],
      "ruleRanks": [
       17
+     ]
+    },
+    {
+     "ortho": "que j'ai",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "k°.Z.E",
+     "steno": "k@a/peskZ",
+     "strokes": [
+      [
+       2,
+       11,
+       12
+      ],
+      [
+       4,
+       14,
+       17,
+       18,
+       24
+      ]
+     ],
+     "frequency": 4544225.0,
+     "alternates": [
+      {
+       "steno": "k@a/vt-/ek",
+       "strokes": [
+        [
+         2,
+         11,
+         12
+        ],
+        [
+         5,
+         7
+        ],
+        [
+         14,
+         18
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      19
      ]
     },
     {
@@ -10547,7 +10350,7 @@
      "after": "",
      "label": "économise deux traits",
      "phonology": "Z°.m°.s8i",
-     "steno": "sp*@aisZ/-k",
+     "steno": "sp*@aiskZ",
      "strokes": [
       [
        3,
@@ -10557,16 +10360,14 @@
        12,
        13,
        17,
+       18,
        24
-      ],
-      [
-       18
       ]
      ],
      "frequency": 2999343.0,
      "alternates": [
       {
-       "steno": "vt@a/m*@a/s@ai/-k",
+       "steno": "vt@a/m*@a/s@aik",
        "strokes": [
         [
          5,
@@ -10584,9 +10385,7 @@
          3,
          11,
          12,
-         13
-        ],
-        [
+         13,
          18
         ]
        ]
@@ -10597,12 +10396,66 @@
      ]
     },
     {
+     "ortho": "que je suis",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "k°.Z°.s8i",
+     "steno": "k@a/sp@aiskZ",
+     "strokes": [
+      [
+       2,
+       11,
+       12
+      ],
+      [
+       3,
+       4,
+       11,
+       12,
+       13,
+       17,
+       18,
+       24
+      ]
+     ],
+     "frequency": 1738290.0,
+     "alternates": [
+      {
+       "steno": "k@a/vt@a/s@aik",
+       "strokes": [
+        [
+         2,
+         11,
+         12
+        ],
+        [
+         5,
+         7,
+         11,
+         12
+        ],
+        [
+         3,
+         11,
+         12,
+         13,
+         18
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      17
+     ]
+    },
+    {
      "ortho": "je crois que",
      "before": "",
      "after": "",
      "label": "économise un trait",
      "phonology": "Z°.kRwa.k°",
-     "steno": "kpRwasZ/-k/k@a",
+     "steno": "kpRwaskZ/k@a",
      "strokes": [
       [
        2,
@@ -10611,10 +10464,8 @@
        9,
        12,
        17,
+       18,
        24
-      ],
-      [
-       18
       ],
       [
        2,
@@ -10625,7 +10476,7 @@
      "frequency": 1311144.0,
      "alternates": [
       {
-       "steno": "vt@a/kRwa/-k/k@a",
+       "steno": "vt@a/kRwak/k@a",
        "strokes": [
         [
          5,
@@ -10637,9 +10488,7 @@
          2,
          8,
          9,
-         12
-        ],
-        [
+         12,
          18
         ],
         [
@@ -10651,961 +10500,6 @@
       }
      ],
      "ruleRanks": [
-      17
-     ]
-    },
-    {
-     "ortho": "que je",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "k°.Z°",
-     "steno": "kp-sktZ",
-     "strokes": [
-      [
-       2,
-       4,
-       17,
-       18,
-       20,
-       24
-      ]
-     ],
-     "frequency": 25758482.0,
-     "alternates": [
-      {
-       "steno": "kvt@akt",
-       "strokes": [
-        [
-         2,
-         5,
-         7,
-         11,
-         12,
-         18,
-         20
-        ]
-       ]
-      },
-      {
-       "steno": "k@a/vt@a",
-       "strokes": [
-        [
-         2,
-         11,
-         12
-        ],
-        [
-         5,
-         7,
-         11,
-         12
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      3,
-      17
-     ]
-    },
-    {
-     "ortho": "je ne",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "Z°.n°",
-     "steno": "p-jsdZ",
-     "strokes": [
-      [
-       4,
-       16,
-       17,
-       19,
-       24
-      ]
-     ],
-     "frequency": 25361333.0,
-     "alternates": [
-      {
-       "steno": "pmR@asZ",
-       "strokes": [
-        [
-         4,
-         6,
-         8,
-         11,
-         12,
-         17,
-         24
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/mR@a",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         8,
-         11,
-         12
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      9,
-      17
-     ]
-    },
-    {
-     "ortho": "et je",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "e.Z°",
-     "steno": "pw-jsdZ",
-     "strokes": [
-      [
-       4,
-       9,
-       16,
-       17,
-       19,
-       24
-      ]
-     ],
-     "frequency": 9503500.0,
-     "alternates": [
-      {
-       "steno": "vtw@ajd",
-       "strokes": [
-        [
-         5,
-         7,
-         9,
-         11,
-         12,
-         16,
-         19
-        ]
-       ]
-      },
-      {
-       "steno": "e/vt@a",
-       "strokes": [
-        [
-         14
-        ],
-        [
-         5,
-         7,
-         11,
-         12
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      17,
-      20
-     ]
-    },
-    {
-     "ortho": "je n'ai",
-     "before": "",
-     "after": "",
-     "label": "économise deux traits",
-     "phonology": "Z°.n.E",
-     "steno": "pejsdZ/-k",
-     "strokes": [
-      [
-       4,
-       14,
-       16,
-       17,
-       19,
-       24
-      ],
-      [
-       18
-      ]
-     ],
-     "frequency": 6028024.0,
-     "alternates": [
-      {
-       "steno": "pmR-sZ/e/-k",
-       "strokes": [
-        [
-         4,
-         6,
-         8,
-         17,
-         24
-        ],
-        [
-         14
-        ],
-        [
-         18
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/ejd/-k",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         14,
-         16,
-         19
-        ],
-        [
-         18
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/mR-/e/-k",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         8
-        ],
-        [
-         14
-        ],
-        [
-         18
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      10,
-      17
-     ]
-    },
-    {
-     "ortho": "je l'",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "Z°.l",
-     "steno": "pvw-jsZ",
-     "strokes": [
-      [
-       4,
-       5,
-       9,
-       16,
-       17,
-       24
-      ]
-     ],
-     "frequency": 4918777.0,
-     "alternates": [
-      {
-       "steno": "pmt-sZ",
-       "strokes": [
-        [
-         4,
-         6,
-         7,
-         17,
-         24
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/mt-",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         7
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      7,
-      17
-     ]
-    },
-    {
-     "ortho": "que j'ai",
-     "before": "",
-     "after": "",
-     "label": "économise deux traits",
-     "phonology": "k°.Z.E",
-     "steno": "kpesktZ/-k",
-     "strokes": [
-      [
-       2,
-       4,
-       14,
-       17,
-       18,
-       20,
-       24
-      ],
-      [
-       18
-      ]
-     ],
-     "frequency": 4544225.0,
-     "alternates": [
-      {
-       "steno": "kvt-kt/e/-k",
-       "strokes": [
-        [
-         2,
-         5,
-         7,
-         18,
-         20
-        ],
-        [
-         14
-        ],
-        [
-         18
-        ]
-       ]
-      },
-      {
-       "steno": "k@a/pesZ/-k",
-       "strokes": [
-        [
-         2,
-         11,
-         12
-        ],
-        [
-         4,
-         14,
-         17,
-         24
-        ],
-        [
-         18
-        ]
-       ]
-      },
-      {
-       "steno": "k@a/vt-/e/-k",
-       "strokes": [
-        [
-         2,
-         11,
-         12
-        ],
-        [
-         5,
-         7
-        ],
-        [
-         14
-        ],
-        [
-         18
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      3,
-      19
-     ]
-    },
-    {
-     "ortho": "je le",
-     "before": "",
-     "after": "",
-     "label": "économise un trait",
-     "phonology": "Z°.l°",
-     "steno": "pvw-jsZ",
-     "strokes": [
-      [
-       4,
-       5,
-       9,
-       16,
-       17,
-       24
-      ]
-     ],
-     "frequency": 4270065.0,
-     "alternates": [
-      {
-       "steno": "pmt@asZ",
-       "strokes": [
-        [
-         4,
-         6,
-         7,
-         11,
-         12,
-         17,
-         24
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/mt@a",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         7,
-         11,
-         12
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      6,
-      17
-     ]
-    },
-    {
-     "ortho": "je ne sais",
-     "before": "",
-     "after": "",
-     "label": "économise deux traits",
-     "phonology": "Z°.n°.sE",
-     "steno": "spiejsdZ/-k",
-     "strokes": [
-      [
-       3,
-       4,
-       13,
-       14,
-       16,
-       17,
-       19,
-       24
-      ],
-      [
-       18
-      ]
-     ],
-     "frequency": 3133429.0,
-     "alternates": [
-      {
-       "steno": "pmR@asZ/sie/-k",
-       "strokes": [
-        [
-         4,
-         6,
-         8,
-         11,
-         12,
-         17,
-         24
-        ],
-        [
-         3,
-         13,
-         14
-        ],
-        [
-         18
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/siejd/-k",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         3,
-         13,
-         14,
-         16,
-         19
-        ],
-        [
-         18
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/mR@a/sie/-k",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         8,
-         11,
-         12
-        ],
-        [
-         3,
-         13,
-         14
-        ],
-        [
-         18
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      9,
-      17
-     ]
-    },
-    {
-     "ortho": "je n'ai pas",
-     "before": "",
-     "after": "",
-     "label": "économise trois traits",
-     "phonology": "Z°.n.E.pa",
-     "steno": "pejsdZ/w-kRm",
-     "strokes": [
-      [
-       4,
-       14,
-       16,
-       17,
-       19,
-       24
-      ],
-      [
-       9,
-       18,
-       21,
-       25
-      ]
-     ],
-     "frequency": 2945490.0,
-     "alternates": [
-      {
-       "steno": "pmR-sZ/e/w-kRm",
-       "strokes": [
-        [
-         4,
-         6,
-         8,
-         17,
-         24
-        ],
-        [
-         14
-        ],
-        [
-         9,
-         18,
-         21,
-         25
-        ]
-       ]
-      },
-      {
-       "steno": "pejsdZ/-k/pa",
-       "strokes": [
-        [
-         4,
-         14,
-         16,
-         17,
-         19,
-         24
-        ],
-        [
-         18
-        ],
-        [
-         4,
-         12
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/ejd/w-kRm",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         14,
-         16,
-         19
-        ],
-        [
-         9,
-         18,
-         21,
-         25
-        ]
-       ]
-      },
-      {
-       "steno": "pmR-sZ/e/-k/pa",
-       "strokes": [
-        [
-         4,
-         6,
-         8,
-         17,
-         24
-        ],
-        [
-         14
-        ],
-        [
-         18
-        ],
-        [
-         4,
-         12
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/mR-/e/w-kRm",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         8
-        ],
-        [
-         14
-        ],
-        [
-         9,
-         18,
-         21,
-         25
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/ejd/-k/pa",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         14,
-         16,
-         19
-        ],
-        [
-         18
-        ],
-        [
-         4,
-         12
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/mR-/e/-k/pa",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         8
-        ],
-        [
-         14
-        ],
-        [
-         18
-        ],
-        [
-         4,
-         12
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      10,
-      16,
-      17
-     ]
-    },
-    {
-     "ortho": "que je ne",
-     "before": "",
-     "after": "",
-     "label": "économise deux traits",
-     "phonology": "k°.Z°.n°",
-     "steno": "kp-jskdtZ",
-     "strokes": [
-      [
-       2,
-       4,
-       16,
-       17,
-       18,
-       19,
-       20,
-       24
-      ]
-     ],
-     "frequency": 2937698.0,
-     "alternates": [
-      {
-       "steno": "kpmR@asktZ",
-       "strokes": [
-        [
-         2,
-         4,
-         6,
-         8,
-         11,
-         12,
-         17,
-         18,
-         20,
-         24
-        ]
-       ]
-      },
-      {
-       "steno": "kvt@akt/mR@a",
-       "strokes": [
-        [
-         2,
-         5,
-         7,
-         11,
-         12,
-         18,
-         20
-        ],
-        [
-         6,
-         8,
-         11,
-         12
-        ]
-       ]
-      },
-      {
-       "steno": "k@a/p-jsdZ",
-       "strokes": [
-        [
-         2,
-         11,
-         12
-        ],
-        [
-         4,
-         16,
-         17,
-         19,
-         24
-        ]
-       ]
-      },
-      {
-       "steno": "k@a/pmR@asZ",
-       "strokes": [
-        [
-         2,
-         11,
-         12
-        ],
-        [
-         4,
-         6,
-         8,
-         11,
-         12,
-         17,
-         24
-        ]
-       ]
-      },
-      {
-       "steno": "k@a/vt@a/mR@a",
-       "strokes": [
-        [
-         2,
-         11,
-         12
-        ],
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         8,
-         11,
-         12
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      3,
-      9,
-      17
-     ]
-    },
-    {
-     "ortho": "je ne suis",
-     "before": "",
-     "after": "",
-     "label": "économise deux traits",
-     "phonology": "Z°.n°.s8i",
-     "steno": "sp@aijsdZ/-k",
-     "strokes": [
-      [
-       3,
-       4,
-       11,
-       12,
-       13,
-       16,
-       17,
-       19,
-       24
-      ],
-      [
-       18
-      ]
-     ],
-     "frequency": 2400784.0,
-     "alternates": [
-      {
-       "steno": "pmR@asZ/s@ai/-k",
-       "strokes": [
-        [
-         4,
-         6,
-         8,
-         11,
-         12,
-         17,
-         24
-        ],
-        [
-         3,
-         11,
-         12,
-         13
-        ],
-        [
-         18
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/s@aijd/-k",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         3,
-         11,
-         12,
-         13,
-         16,
-         19
-        ],
-        [
-         18
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/mR@a/s@ai/-k",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         8,
-         11,
-         12
-        ],
-        [
-         3,
-         11,
-         12,
-         13
-        ],
-        [
-         18
-        ]
-       ]
-      }
-     ],
-     "ruleRanks": [
-      9,
       17
      ]
     }
@@ -14328,7 +13222,7 @@
      "after": "",
      "label": "économise trois traits",
      "phonology": "d.1.pw5.d°.vy",
-     "steno": "pRwaiejsdZ/v@isZ/-j",
+     "steno": "pRwaiejsdZ/v@ijsZ",
      "strokes": [
       [
        4,
@@ -14346,17 +13240,15 @@
        5,
        11,
        13,
+       16,
        17,
        24
-      ],
-      [
-       16
       ]
      ],
      "frequency": 318447.0,
      "alternates": [
       {
-       "steno": "pv-/pRwaiejd/v@isZ/-j",
+       "steno": "pv-/pRwaiejd/v@ijsZ",
        "strokes": [
         [
          4,
@@ -14376,16 +13268,14 @@
          5,
          11,
          13,
+         16,
          17,
          24
-        ],
-        [
-         16
         ]
        ]
       },
       {
-       "steno": "pRwaiejsdZ/pv@a/v@i/-j",
+       "steno": "pRwaiejsdZ/pv@a/v@ij",
        "strokes": [
         [
          4,
@@ -14408,15 +13298,13 @@
         [
          5,
          11,
-         13
-        ],
-        [
+         13,
          16
         ]
        ]
       },
       {
-       "steno": "@aiesZ/pwaie/v@isZ/-j",
+       "steno": "@aiesZ/pwaie/v@ijsZ",
        "strokes": [
         [
          11,
@@ -14437,16 +13325,14 @@
          5,
          11,
          13,
+         16,
          17,
          24
-        ],
-        [
-         16
         ]
        ]
       },
       {
-       "steno": "pv-/pRwaiejd/pv@a/v@i/-j",
+       "steno": "pv-/pRwaiejd/pv@a/v@ij",
        "strokes": [
         [
          4,
@@ -14471,15 +13357,13 @@
         [
          5,
          11,
-         13
-        ],
-        [
+         13,
          16
         ]
        ]
       },
       {
-       "steno": "pv-/@aie/pwaie/v@isZ/-j",
+       "steno": "pv-/@aie/pwaie/v@ijsZ",
        "strokes": [
         [
          4,
@@ -14502,16 +13386,14 @@
          5,
          11,
          13,
+         16,
          17,
          24
-        ],
-        [
-         16
         ]
        ]
       },
       {
-       "steno": "@aiesZ/pwaie/pv@a/v@i/-j",
+       "steno": "@aiesZ/pwaie/pv@a/v@ij",
        "strokes": [
         [
          11,
@@ -14537,15 +13419,13 @@
         [
          5,
          11,
-         13
-        ],
-        [
+         13,
          16
         ]
        ]
       },
       {
-       "steno": "pv-/@aie/pwaie/pv@a/v@i/-j",
+       "steno": "pv-/@aie/pwaie/pv@a/v@ij",
        "strokes": [
         [
          4,
@@ -14573,9 +13453,7 @@
         [
          5,
          11,
-         13
-        ],
-        [
+         13,
          16
         ]
        ]
@@ -15193,7 +14071,7 @@
       }
      ],
      "ruleRanks": [
-      6,
+      5,
       22
      ]
     },
@@ -15244,7 +14122,7 @@
       }
      ],
      "ruleRanks": [
-      7,
+      6,
       22
      ]
     },
@@ -15442,7 +14320,7 @@
       }
      ],
      "ruleRanks": [
-      6,
+      5,
       22
      ]
     }
@@ -21063,6 +19941,134 @@
      ]
     },
     {
+     "ortho": "la mise en place",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "la.miz.@.plas",
+     "steno": "mta/mijnl/pmtaskdt",
+     "strokes": [
+      [
+       6,
+       7,
+       12
+      ],
+      [
+       6,
+       13,
+       16,
+       22,
+       23
+      ],
+      [
+       4,
+       6,
+       7,
+       12,
+       17,
+       18,
+       19,
+       20
+      ]
+     ],
+     "frequency": 563479.0,
+     "alternates": [
+      {
+       "steno": "mta/mijnl/@/pmtas",
+       "strokes": [
+        [
+         6,
+         7,
+         12
+        ],
+        [
+         6,
+         13,
+         16,
+         22,
+         23
+        ],
+        [
+         11
+        ],
+        [
+         4,
+         6,
+         7,
+         12,
+         17
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      26
+     ]
+    },
+    {
+     "ortho": "la mise en œuvre",
+     "before": "",
+     "after": "",
+     "label": "économise un trait",
+     "phonology": "la.miz.@.9vR",
+     "steno": "mta/mijnl/@jskdtR",
+     "strokes": [
+      [
+       6,
+       7,
+       12
+      ],
+      [
+       6,
+       13,
+       16,
+       22,
+       23
+      ],
+      [
+       11,
+       16,
+       17,
+       18,
+       19,
+       20,
+       21
+      ]
+     ],
+     "frequency": 545460.0,
+     "alternates": [
+      {
+       "steno": "mta/mijnl/@/@jsR",
+       "strokes": [
+        [
+         6,
+         7,
+         12
+        ],
+        [
+         6,
+         13,
+         16,
+         22,
+         23
+        ],
+        [
+         11
+        ],
+        [
+         11,
+         16,
+         17,
+         21
+        ]
+       ]
+      }
+     ],
+     "ruleRanks": [
+      26
+     ]
+    },
+    {
      "ortho": "en même temps que",
      "before": "",
      "after": "",
@@ -21484,7 +20490,7 @@
       }
      ],
      "ruleRanks": [
-      5,
+      7,
       27
      ]
     }
@@ -21516,7 +20522,7 @@
     },
     {
      "kind": "expression",
-     "text": "Par exemple : « les deux » : mtie/pv@ie → kpv@iejd ; « les yeux » : mtie/Rw@ie → kRw@iejd ; « les autres » : mtie/aetR/-s → kaejdtR/-s."
+     "text": "Par exemple : « les deux » : mtie/pv@ie → kpv@iejd ; « les yeux » : mtie/Rw@ie → kRw@iejd ; « les autres » : mtie/aestR → kaejsdtR."
     },
     {
      "kind": "expression",
@@ -21618,25 +20624,23 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "le.otR",
-     "steno": "kaejdtR/-s",
+     "steno": "kaejsdtR",
      "strokes": [
       [
        2,
        12,
        14,
        16,
+       17,
        19,
        20,
        21
-      ],
-      [
-       17
       ]
      ],
      "frequency": 7934222.0,
      "alternates": [
       {
-       "steno": "mtie/aetR/-s",
+       "steno": "mtie/aestR",
        "strokes": [
         [
          6,
@@ -21647,11 +20651,9 @@
         [
          12,
          14,
+         17,
          20,
          21
-        ],
-        [
-         17
         ]
        ]
       }
@@ -21710,7 +20712,7 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "tus.le.ZuR",
-     "steno": "t@es/kvt@ejdR/-s",
+     "steno": "t@es/kvt@ejsdR",
      "strokes": [
       [
        7,
@@ -21725,17 +20727,15 @@
        11,
        14,
        16,
+       17,
        19,
        21
-      ],
-      [
-       17
       ]
      ],
      "frequency": 1590588.0,
      "alternates": [
       {
-       "steno": "t@es/mtie/vt@eR/-s",
+       "steno": "t@es/mtie/vt@esR",
        "strokes": [
         [
          7,
@@ -21754,10 +20754,8 @@
          7,
          11,
          14,
+         17,
          21
-        ],
-        [
-         17
         ]
        ]
       }
@@ -21772,7 +20770,7 @@
      "after": "",
      "label": "économise un trait",
      "phonology": "uvER.tus.le.ZuR.d°",
-     "steno": "@e/vieR/t@es/kvt@ejdR/-s/pv@a",
+     "steno": "@e/vieR/t@es/kvt@ejsdR/pv@a",
      "strokes": [
       [
        11,
@@ -21797,11 +20795,9 @@
        11,
        14,
        16,
+       17,
        19,
        21
-      ],
-      [
-       17
       ],
       [
        4,
@@ -21813,7 +20809,7 @@
      "frequency": 276334.0,
      "alternates": [
       {
-       "steno": "@e/vieR/t@es/mtie/vt@eR/-s/pv@a",
+       "steno": "@e/vieR/t@es/mtie/vt@esR/pv@a",
        "strokes": [
         [
          11,
@@ -21842,10 +20838,8 @@
          7,
          11,
          14,
+         17,
          21
-        ],
-        [
-         17
         ],
         [
          4,
@@ -22344,7 +21338,7 @@
      ],
      "ruleRanks": [
       1,
-      5
+      7
      ]
     },
     {
@@ -22394,7 +21388,7 @@
      ],
      "ruleRanks": [
       1,
-      7
+      6
      ]
     },
     {
@@ -22444,7 +21438,7 @@
       }
      ],
      "ruleRanks": [
-      5,
+      7,
       15
      ]
     },
@@ -22542,7 +21536,7 @@
       }
      ],
      "ruleRanks": [
-      7,
+      6,
       15
      ]
     },
@@ -22701,7 +21695,7 @@
       }
      ],
      "ruleRanks": [
-      6,
+      5,
       22
      ]
     },
@@ -23022,7 +22016,7 @@
      ],
      "ruleRanks": [
       3,
-      6
+      5
      ]
     },
     {
@@ -23072,7 +22066,7 @@
       }
      ],
      "ruleRanks": [
-      7,
+      6,
       22
      ]
     },
@@ -23179,7 +22173,7 @@
      ],
      "ruleRanks": [
       3,
-      7
+      6
      ]
     },
     {
@@ -24124,7 +23118,7 @@
       }
      ],
      "ruleRanks": [
-      5,
+      7,
       39
      ]
     },
@@ -24478,7 +23472,7 @@
       }
      ],
      "ruleRanks": [
-      5,
+      7,
       27
      ]
     },
@@ -25039,27 +24033,25 @@
      "after": "",
      "label": "trois abréviations · économise trois traits",
      "phonology": "Z°.n.E.pa",
-     "steno": "pejsdZ/w-kRm",
+     "steno": "pwejskdRZm",
      "strokes": [
       [
        4,
+       9,
        14,
        16,
        17,
-       19,
-       24
-      ],
-      [
-       9,
        18,
+       19,
        21,
+       24,
        25
       ]
      ],
      "frequency": 2945490.0,
      "alternates": [
       {
-       "steno": "pmR-sZ/e/w-kRm",
+       "steno": "pmR-sZ/wekRm",
        "strokes": [
         [
          4,
@@ -25069,10 +24061,8 @@
          24
         ],
         [
-         14
-        ],
-        [
          9,
+         14,
          18,
          21,
          25
@@ -25080,27 +24070,25 @@
        ]
       },
       {
-       "steno": "pejsdZ/-k/pa",
+       "steno": "pejskdZ/pa",
        "strokes": [
         [
          4,
          14,
          16,
          17,
+         18,
          19,
          24
         ],
         [
-         18
-        ],
-        [
          4,
          12
         ]
        ]
       },
       {
-       "steno": "vt@a/ejd/w-kRm",
+       "steno": "vt@a/wejkdRm",
        "strokes": [
         [
          5,
@@ -25109,20 +24097,18 @@
          12
         ],
         [
+         9,
          14,
          16,
-         19
-        ],
-        [
-         9,
          18,
+         19,
          21,
          25
         ]
        ]
       },
       {
-       "steno": "pmR-sZ/e/-k/pa",
+       "steno": "pmR-sZ/ek/pa",
        "strokes": [
         [
          4,
@@ -25132,9 +24118,7 @@
          24
         ],
         [
-         14
-        ],
-        [
+         14,
          18
         ],
         [
@@ -25144,7 +24128,7 @@
        ]
       },
       {
-       "steno": "vt@a/mR-/e/w-kRm",
+       "steno": "vt@a/mR-/wekRm",
        "strokes": [
         [
          5,
@@ -25157,10 +24141,8 @@
          8
         ],
         [
-         14
-        ],
-        [
          9,
+         14,
          18,
          21,
          25
@@ -25168,7 +24150,7 @@
        ]
       },
       {
-       "steno": "vt@a/ejd/-k/pa",
+       "steno": "vt@a/ejkd/pa",
        "strokes": [
         [
          5,
@@ -25179,10 +24161,8 @@
         [
          14,
          16,
+         18,
          19
-        ],
-        [
-         18
         ],
         [
          4,
@@ -25191,7 +24171,7 @@
        ]
       },
       {
-       "steno": "vt@a/mR-/e/-k/pa",
+       "steno": "vt@a/mR-/ek/pa",
        "strokes": [
         [
          5,
@@ -25204,9 +24184,7 @@
          8
         ],
         [
-         14
-        ],
-        [
+         14,
          18
         ],
         [
@@ -25784,7 +24762,7 @@
      ],
      "ruleRanks": [
       1,
-      5,
+      7,
       58
      ]
     },
@@ -26323,30 +25301,28 @@
      "after": "",
      "label": "trois abréviations · économise trois traits",
      "phonology": "Z°.n°.s8i.pa",
-     "steno": "sp@aijsdZ/w-kRm",
+     "steno": "spw@aijskdRZm",
      "strokes": [
       [
        3,
        4,
+       9,
        11,
        12,
        13,
        16,
        17,
-       19,
-       24
-      ],
-      [
-       9,
        18,
+       19,
        21,
+       24,
        25
       ]
      ],
      "frequency": 1825030.0,
      "alternates": [
       {
-       "steno": "sp@aijsdZ/-k/pa",
+       "steno": "sp@aijskdZ/pa",
        "strokes": [
         [
          3,
@@ -26356,20 +25332,65 @@
          13,
          16,
          17,
+         18,
          19,
          24
         ],
         [
-         18
-        ],
-        [
          4,
          12
         ]
        ]
       },
       {
-       "steno": "pmR@asZ/s@ai/w-kRm",
+       "steno": "pmR@asZ/sw@aikRm",
+       "strokes": [
+        [
+         4,
+         6,
+         8,
+         11,
+         12,
+         17,
+         24
+        ],
+        [
+         3,
+         9,
+         11,
+         12,
+         13,
+         18,
+         21,
+         25
+        ]
+       ]
+      },
+      {
+       "steno": "vt@a/sw@aijkdRm",
+       "strokes": [
+        [
+         5,
+         7,
+         11,
+         12
+        ],
+        [
+         3,
+         9,
+         11,
+         12,
+         13,
+         16,
+         18,
+         19,
+         21,
+         25
+        ]
+       ]
+      },
+      {
+       "steno": "pmR@asZ/s@aik/pa",
        "strokes": [
         [
          4,
@@ -26384,18 +25405,17 @@
          3,
          11,
          12,
-         13
+         13,
+         18
         ],
         [
-         9,
-         18,
-         21,
-         25
+         4,
+         12
         ]
        ]
       },
       {
-       "steno": "vt@a/s@aijd/w-kRm",
+       "steno": "vt@a/s@aijkd/pa",
        "strokes": [
         [
          5,
@@ -26409,36 +25429,8 @@
          12,
          13,
          16,
-         19
-        ],
-        [
-         9,
          18,
-         21,
-         25
-        ]
-       ]
-      },
-      {
-       "steno": "pmR@asZ/s@ai/-k/pa",
-       "strokes": [
-        [
-         4,
-         6,
-         8,
-         11,
-         12,
-         17,
-         24
-        ],
-        [
-         3,
-         11,
-         12,
-         13
-        ],
-        [
-         18
+         19
         ],
         [
          4,
@@ -26447,11 +25439,44 @@
        ]
       },
       {
-       "steno": "vt@a/s@aijd/-k/pa",
+       "steno": "vt@a/mR@a/sw@aikRm",
        "strokes": [
         [
          5,
          7,
+         11,
+         12
+        ],
+        [
+         6,
+         8,
+         11,
+         12
+        ],
+        [
+         3,
+         9,
+         11,
+         12,
+         13,
+         18,
+         21,
+         25
+        ]
+       ]
+      },
+      {
+       "steno": "vt@a/mR@a/s@aik/pa",
+       "strokes": [
+        [
+         5,
+         7,
+         11,
+         12
+        ],
+        [
+         6,
+         8,
          11,
          12
         ],
@@ -26460,69 +25485,6 @@
          11,
          12,
          13,
-         16,
-         19
-        ],
-        [
-         18
-        ],
-        [
-         4,
-         12
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/mR@a/s@ai/w-kRm",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         8,
-         11,
-         12
-        ],
-        [
-         3,
-         11,
-         12,
-         13
-        ],
-        [
-         9,
-         18,
-         21,
-         25
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/mR@a/s@ai/-k/pa",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         8,
-         11,
-         12
-        ],
-        [
-         3,
-         11,
-         12,
-         13
-        ],
-        [
          18
         ],
         [
@@ -26939,7 +25901,7 @@
      ],
      "ruleRanks": [
       1,
-      5,
+      7,
       45
      ]
     },
@@ -27103,7 +26065,7 @@
       }
      ],
      "ruleRanks": [
-      5,
+      7,
       15,
       45
      ]
@@ -27301,7 +26263,7 @@
      ],
      "ruleRanks": [
       1,
-      5,
+      7,
       62
      ]
     },
@@ -27311,7 +26273,7 @@
      "after": "",
      "label": "trois abréviations · économise trois traits",
      "phonology": "Z°.n.avE.pa",
-     "steno": "pajsdZ/vie/w-dRm",
+     "steno": "pajsdZ/vwiedRm",
      "strokes": [
       [
        4,
@@ -27323,11 +26285,9 @@
       ],
       [
        5,
-       13,
-       14
-      ],
-      [
        9,
+       13,
+       14,
        19,
        21,
        25
@@ -27336,7 +26296,79 @@
      "frequency": 950747.0,
      "alternates": [
       {
-       "steno": "pmR-sZ/a/vie/w-dRm",
+       "steno": "pmR-sZ/a/vwiedRm",
+       "strokes": [
+        [
+         4,
+         6,
+         8,
+         17,
+         24
+        ],
+        [
+         12
+        ],
+        [
+         5,
+         9,
+         13,
+         14,
+         19,
+         21,
+         25
+        ]
+       ]
+      },
+      {
+       "steno": "pajsdZ/vied/pa",
+       "strokes": [
+        [
+         4,
+         12,
+         16,
+         17,
+         19,
+         24
+        ],
+        [
+         5,
+         13,
+         14,
+         19
+        ],
+        [
+         4,
+         12
+        ]
+       ]
+      },
+      {
+       "steno": "vt@a/ajd/vwiedRm",
+       "strokes": [
+        [
+         5,
+         7,
+         11,
+         12
+        ],
+        [
+         12,
+         16,
+         19
+        ],
+        [
+         5,
+         9,
+         13,
+         14,
+         19,
+         21,
+         25
+        ]
+       ]
+      },
+      {
+       "steno": "pmR-sZ/a/vied/pa",
        "strokes": [
         [
          4,
@@ -27351,33 +26383,7 @@
         [
          5,
          13,
-         14
-        ],
-        [
-         9,
-         19,
-         21,
-         25
-        ]
-       ]
-      },
-      {
-       "steno": "pajsdZ/vie/-d/pa",
-       "strokes": [
-        [
-         4,
-         12,
-         16,
-         17,
-         19,
-         24
-        ],
-        [
-         5,
-         13,
-         14
-        ],
-        [
+         14,
          19
         ],
         [
@@ -27387,7 +26393,34 @@
        ]
       },
       {
-       "steno": "vt@a/ajd/vie/w-dRm",
+       "steno": "vt@a/mR-/a/vwiedRm",
+       "strokes": [
+        [
+         5,
+         7,
+         11,
+         12
+        ],
+        [
+         6,
+         8
+        ],
+        [
+         12
+        ],
+        [
+         5,
+         9,
+         13,
+         14,
+         19,
+         21,
+         25
+        ]
+       ]
+      },
+      {
+       "steno": "vt@a/ajd/vied/pa",
        "strokes": [
         [
          5,
@@ -27403,35 +26436,7 @@
         [
          5,
          13,
-         14
-        ],
-        [
-         9,
-         19,
-         21,
-         25
-        ]
-       ]
-      },
-      {
-       "steno": "pmR-sZ/a/vie/-d/pa",
-       "strokes": [
-        [
-         4,
-         6,
-         8,
-         17,
-         24
-        ],
-        [
-         12
-        ],
-        [
-         5,
-         13,
-         14
-        ],
-        [
+         14,
          19
         ],
         [
@@ -27441,7 +26446,7 @@
        ]
       },
       {
-       "steno": "vt@a/mR-/a/vie/w-dRm",
+       "steno": "vt@a/mR-/a/vied/pa",
        "strokes": [
         [
          5,
@@ -27459,66 +26464,7 @@
         [
          5,
          13,
-         14
-        ],
-        [
-         9,
-         19,
-         21,
-         25
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/ajd/vie/-d/pa",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         12,
-         16,
-         19
-        ],
-        [
-         5,
-         13,
-         14
-        ],
-        [
-         19
-        ],
-        [
-         4,
-         12
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/mR-/a/vie/-d/pa",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         8
-        ],
-        [
-         12
-        ],
-        [
-         5,
-         13,
-         14
-        ],
-        [
+         14,
          19
         ],
         [
@@ -27680,30 +26626,28 @@
      "after": "",
      "label": "trois abréviations · économise trois traits",
      "phonology": "Z°.n°.v2.pa",
-     "steno": "pv@iejsdZ/w-kRm",
+     "steno": "pvw@iejskdRZm",
      "strokes": [
       [
        4,
        5,
+       9,
        11,
        13,
        14,
        16,
        17,
-       19,
-       24
-      ],
-      [
-       9,
        18,
+       19,
        21,
+       24,
        25
       ]
      ],
      "frequency": 928387.0,
      "alternates": [
       {
-       "steno": "pv@iejsdZ/-k/pa",
+       "steno": "pv@iejskdZ/pa",
        "strokes": [
         [
          4,
@@ -27713,20 +26657,65 @@
          14,
          16,
          17,
+         18,
          19,
          24
         ],
         [
-         18
-        ],
-        [
          4,
          12
         ]
        ]
       },
       {
-       "steno": "pmR@asZ/v@ie/w-kRm",
+       "steno": "pmR@asZ/vw@iekRm",
+       "strokes": [
+        [
+         4,
+         6,
+         8,
+         11,
+         12,
+         17,
+         24
+        ],
+        [
+         5,
+         9,
+         11,
+         13,
+         14,
+         18,
+         21,
+         25
+        ]
+       ]
+      },
+      {
+       "steno": "vt@a/vw@iejkdRm",
+       "strokes": [
+        [
+         5,
+         7,
+         11,
+         12
+        ],
+        [
+         5,
+         9,
+         11,
+         13,
+         14,
+         16,
+         18,
+         19,
+         21,
+         25
+        ]
+       ]
+      },
+      {
+       "steno": "pmR@asZ/v@iek/pa",
        "strokes": [
         [
          4,
@@ -27741,18 +26730,17 @@
          5,
          11,
          13,
-         14
+         14,
+         18
         ],
         [
-         9,
-         18,
-         21,
-         25
+         4,
+         12
         ]
        ]
       },
       {
-       "steno": "vt@a/v@iejd/w-kRm",
+       "steno": "vt@a/v@iejkd/pa",
        "strokes": [
         [
          5,
@@ -27766,36 +26754,8 @@
          13,
          14,
          16,
-         19
-        ],
-        [
-         9,
          18,
-         21,
-         25
-        ]
-       ]
-      },
-      {
-       "steno": "pmR@asZ/v@ie/-k/pa",
-       "strokes": [
-        [
-         4,
-         6,
-         8,
-         11,
-         12,
-         17,
-         24
-        ],
-        [
-         5,
-         11,
-         13,
-         14
-        ],
-        [
-         18
+         19
         ],
         [
          4,
@@ -27804,11 +26764,44 @@
        ]
       },
       {
-       "steno": "vt@a/v@iejd/-k/pa",
+       "steno": "vt@a/mR@a/vw@iekRm",
        "strokes": [
         [
          5,
          7,
+         11,
+         12
+        ],
+        [
+         6,
+         8,
+         11,
+         12
+        ],
+        [
+         5,
+         9,
+         11,
+         13,
+         14,
+         18,
+         21,
+         25
+        ]
+       ]
+      },
+      {
+       "steno": "vt@a/mR@a/v@iek/pa",
+       "strokes": [
+        [
+         5,
+         7,
+         11,
+         12
+        ],
+        [
+         6,
+         8,
          11,
          12
         ],
@@ -27817,69 +26810,6 @@
          11,
          13,
          14,
-         16,
-         19
-        ],
-        [
-         18
-        ],
-        [
-         4,
-         12
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/mR@a/v@ie/w-kRm",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         8,
-         11,
-         12
-        ],
-        [
-         5,
-         11,
-         13,
-         14
-        ],
-        [
-         9,
-         18,
-         21,
-         25
-        ]
-       ]
-      },
-      {
-       "steno": "vt@a/mR@a/v@ie/-k/pa",
-       "strokes": [
-        [
-         5,
-         7,
-         11,
-         12
-        ],
-        [
-         6,
-         8,
-         11,
-         12
-        ],
-        [
-         5,
-         11,
-         13,
-         14
-        ],
-        [
          18
         ],
         [
@@ -28711,7 +27641,7 @@
     },
     {
      "kind": "expression",
-     "text": "Par exemple : « exemple » : iekdnl/@jkl → iekdnl ; « petite » : p@a/tit → pt@ait ; « toutes les » : t@et/-s/mtie → mt@iet."
+     "text": "Par exemple : « exemple » : iekdnl/@jkl → iekdnl ; « petite » : p@a/tit → pt@ait ; « toutes les » : t@est/mtie → mt@iet."
     },
     {
      "kind": "expression",
@@ -28805,7 +27735,7 @@
      "ortho": "toutes les",
      "before": "",
      "after": "",
-     "label": "économise deux traits",
+     "label": "économise un trait",
      "phonology": "tut.le",
      "steno": "mt@iet",
      "strokes": [
@@ -28821,16 +27751,14 @@
      "frequency": 9776735.0,
      "alternates": [
       {
-       "steno": "t@et/-s/mtie",
+       "steno": "t@est/mtie",
        "strokes": [
         [
          7,
          11,
          14,
+         17,
          20
-        ],
-        [
-         17
         ],
         [
          6,
