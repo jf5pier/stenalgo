@@ -60,6 +60,21 @@ Worst groups: 3 imparfait+subjonctif (-l, 32% same-lemma: fasse/fassent) and 5 n
 - [ ] **3. Rerun the diagnostic after the unpressable-coda fix** (section above): its `unpressable` rows mix fusion-made and base-made cases (`baseUnpressable` lists the latter).
 - Not measured: the fusion's chord cost (a fused chord can cost more than a one-key extra stroke), the real star/hash marks on top, the alternate readings of self-homographs in the per-group counts.
 
+## Branch TODO — investigate and choose which words should get a brief (2026-10-13)
+
+`python -m util.find_pluvier_shorter_words --pluvier-root ../Pluvier` lists the 100 most frequent words that Pluvier types in
+fewer strokes than Stenalgo (both short forms, as in the theory comparison; 22,102 words in all), with each Pluvier outline's
+kind: `brief` (hand-written TAO entry the generator does not give, 61), `affix` (generated with an identified Pluvier affix
+rule, 24), `compressed` (generated, fewer strokes than syllables, no rule identified, 12), `phonetic` (3). Output:
+`pluvier_shorter_words.tsv` (untracked). Most are two-syllable words Stenalgo writes in two strokes (avec, était, pourquoi,
+alors, comment, toujours, beaucoup...).
+
+- [ ] **1. Investigate** the list: which Pluvier mechanisms Stenalgo could adopt as rules (its sound suffixes `m@` = `-PLT`,
+  final `e` = `-D` fused into the last stroke, `-ci` = `-RB`, schwa dropping in `sera`/`cela`) against the dedicated briefs.
+- [ ] **2. Choose** the words that get a word brief (glossary "Word brief") (frequency threshold, free one-stroke chords, collision check against the
+  theory, the affix abbreviations and the expression layer) and where briefs live (a new layer after S9, or the affix layer).
+- [ ] **3. Rerun the theory comparison** after adding them (`docs/THEORY_COMPARISON.md`).
+
 ## Branch TODO — pipeline speed: profiled optimization candidates (2026-10-12)
 
 Profiled with cProfile on the S7-S10 chain (flag off; times are wall seconds of one module run). Fixed: the

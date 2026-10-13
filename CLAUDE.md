@@ -217,6 +217,8 @@ per-reading split of a spelling's frequency for the merged-feature-keys simulato
 `opensubtitles-fr/`, see `resources/readingShares.NOTICE.md`), the merged-feature-keys simulator
 (`python -m util.analyze_merged_feature_keys [--eligible|--tie|--order|--merge-keys|--search|--regression] --out DIR`,
 ~2 min, `docs/MERGED_FEATURE_KEYS_PLAN.md`),
+the brief candidates (`python -m util.find_pluvier_shorter_words --pluvier-root PLUVIER_CLONE` → untracked
+`pluvier_shorter_words.tsv`: the top-100 words Pluvier types in fewer strokes, each tagged brief/affix/compressed/phonetic, ~25 s),
 and the affix-rule decisions (`affix_decisions.json`, see `docs/AFFIX_RULES.md`).)
 
 ## Architecture

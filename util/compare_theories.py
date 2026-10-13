@@ -63,11 +63,33 @@ def parseStenalgoOutline(text: str) -> tuple[tuple[int, ...], ...] | None:
     return strokes  # type: ignore[return-value]
 
 
+def buttonKeyMap() -> dict[str, int]:
+    """The Ireland (Gemini PR) button -> Starboard key map used to convert Pluvier chords."""
+    return starboardKeys(KEYS, GEMINI_PR_KEYMAP)
+
+
+def starboardStrokeCost(board: Starboard, buttonKey: dict[str, int] | None = None) -> Callable[[str], int | None]:
+    """A cached chord pricer on the Starboard: of a Stenalgo stroke text, or (with `buttonKey`) of a Pluvier chord
+    converted key to key to the Starboard. None for an unparsable or unconvertible chord."""
+    cache: dict[str, int | None] = {}
+
+    def cost(text: str) -> int | None:
+        if text not in cache:
+            if buttonKey is None:
+                keys = parseStroke(text)
+                cache[text] = None if keys is None else board.getChordCost(keys)
+            else:
+                converted = convertStroke(text, buttonKey)
+                cache[text] = board.getChordCost(converted[0]) if converted else None
+        return cache[text]
+    return cost
+
+
 def compare(args: argparse.Namespace) -> dict[str, Any]:
     board = Starboard.fromJSONFile(args.stenalgo_layout)
     if board is None:
         raise SystemExit(f"cannot read the layout {args.stenalgo_layout}")
-    buttonKey = starboardKeys(KEYS, GEMINI_PR_KEYMAP)
+    buttonKey = buttonKeyMap()
     ireland = IrelandKeyboard()
 
     lexicon = tc.loadLexicon(args.lexicon, args.freq)
@@ -76,21 +98,8 @@ def compare(args: argparse.Namespace) -> dict[str, Any]:
     pluvierFiles = [args.pluvier_dict] if isinstance(args.pluvier_dict, str) else list(args.pluvier_dict)
     plu = tc.loadPluvierTheory(pluvierFiles, args.pluvier_dup)
 
-    stenCache: dict[str, int | None] = {}
-    pluCache: dict[str, int | None] = {}
-
-    def stenStroke(text: str) -> int | None:
-        if text not in stenCache:
-            keys = parseStroke(text)
-            stenCache[text] = None if keys is None else board.getChordCost(keys)
-        return stenCache[text]
-
-    def pluStroke(text: str) -> int | None:
-        """A Pluvier chord converted key to key to the Starboard, priced there."""
-        if text not in pluCache:
-            converted = convertStroke(text, buttonKey)
-            pluCache[text] = board.getChordCost(converted[0]) if converted else None
-        return pluCache[text]
+    stenStroke = starboardStrokeCost(board)
+    pluStroke = starboardStrokeCost(board, buttonKey)        # a Pluvier chord converted key to key to the Starboard
 
     tallSCache: dict[str, int | None] = {}
 

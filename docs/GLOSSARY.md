@@ -1387,6 +1387,16 @@ what a typist actually types; a word with one outline has the same short and lon
 - Code: `TheoryView.choose` (short), `longForm` (Pluvier long), `withAbbreviations` (Stenalgo short) src/theorycompare.py.
 - Avoid "brief" for a short form (a brief is an expression-layer entry).
 
+### Word brief
+A dedicated outline for ONE word, chosen by hand and shorter than the theory's rules give it (Pluvier `avec` `W-`,
+`pourquoi` `PROEUBG`): in Pluvier the entries of the hand-written TAO layer (`tao_la_salle_simple.json`) that no generator
+layer gives the word. Stenalgo has none yet; the candidates are listed by `util/find_pluvier_shorter_words.py` (kind
+`brief`, beside `affix`, `compressed` and `phonetic`) and chosen in the `TODO.md` item "investigate and choose which words
+should get a brief".
+- Not a **Brief** of the expression layer (a whole multi-word expression), and not a short form (an affix abbreviation is
+  rule-made).
+- First used in: the brief-candidate list (2026-10-13).
+
 ### Cost on its own keyboard
 A theory's frequency-weighted chord cost on the keyboard it was designed for: Stenalgo on the Starboard, Pluvier on the
 Ireland layout. The headline cost of the comparison; "both on Starboard" is the secondary view.

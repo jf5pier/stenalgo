@@ -34,12 +34,13 @@ Pluvier's two forms need no option: `longForm` (`src/theorycompare.py`) picks th
 
 | File | Role |
 |---|---|
-| `util/compare_theories.py` | the command: loads both theories, prices them, assembles and renders the report (`compare`, `renderMarkdown`, `main`; `--stenalgo-abbreviations` = the short form) |
+| `util/compare_theories.py` | the command: loads both theories, prices them, assembles and renders the report (`compare`, `renderMarkdown`, `main`; `--stenalgo-abbreviations` = the short form); `starboardStrokeCost`, `buttonKeyMap`, `parseStenalgoOutline` are shared with the brief-candidate list |
+| `util/find_pluvier_shorter_words.py` | the brief-candidate list (below): the top words Pluvier types in fewer strokes, tagged brief/affix/compressed/phonetic |
 | `src/theorycompare.py` | the metrics, pure functions and small dataclasses (`Lexicon`, `TheoryView`, `buildLayeredView` / `loadPluvierTheory` for the Pluvier layers, `coverage`, `lemmaCoverage`, `verbCoverageByTense`, `coverageByFeature`, `collisions`, `strokesPerWord`, `outlineCosts`, `complexity`, `markedForResolution`, `strokesPerWordResolved`, `costsResolved`, order-violation helpers, `PluvierEncoder`) |
 | `src/irelandkeyboard.py` | `IrelandKeyboard`: Ireland chord parsing (`parseChord`, `renderChord`) and a cost model in the Starboard currency |
 | `src/keyboard.py` `Starboard.getChordCost` | additive method: cost of a whole chord with no syllabic part (below) |
 | `resources/pluvierPhonemeKeys.tsv` | Pluvier phoneme -> Ireland keys per syllabic part (`part phonemes keys source`), copied from the Pluvier clone; rows marked `added` are this repo's |
-| `src/test/irelandkeyboard_test.py`, `theorycompare_test.py`, `compare_theories_test.py` | 32 tests: tiny hand-built theories with asserted numbers, the Ireland cost against `FingerWeights`, `getChordCost` against `getStrokeCost`, a smoke run on fixture files |
+| `src/test/irelandkeyboard_test.py`, `theorycompare_test.py`, `compare_theories_test.py`, `find_pluvier_shorter_words_test.py` | 32 tests: tiny hand-built theories with asserted numbers, the Ireland cost against `FingerWeights`, `getChordCost` against `getStrokeCost`, a smoke run on fixture files |
 | `scratch/compare_top_words.py`, `scratch/compare_s_key_gap.py` | the two follow-up diagnostics of the first findings (top-N word comparison; the `S`-key price gap) |
 
 Reused, unchanged: `util/export_plover_complements.py` (`convertStroke`, `starboardKeys`, `GEMINI`), `plover_stenalgo/plover_stenalgo/stroke.py`
@@ -107,6 +108,22 @@ Reused, unchanged: `util/export_plover_complements.py` (`convertStroke`, `starbo
 `wordsOnlyInCollisionRecord`; Pluvier also `layerEntries` and `outlinesTakenByAnotherLayer`) · `coverage` · `lemmaCoverage` · `verbCoverageByTense` · `coverageByFeature` (per key of TENSES + FEATURES: `forms`, and per theory `forms`, `frequencyShare`, `frequencyShareSplit`, `colliding`, `collidingFrequencyShare`, `collidingFrequencyShareSplit`) · `collisionsOnCommonWords` · `commonWords` and `fullCoverage` (the same block for the common words and for each theory's whole coverage):
 `strokesPerWord`, `complexity` {`stenalgoOnStarboard`, `pluvierOnStarboard`, `pluvierOnStarboardTallS`, `pluvierOnIreland`, `pressableInBoth`}, `phonemeOrder`,
 `withoutCollisions` {`extraStrokeCost`, `winnerKeeps`, `everyClaimant`, each with `markedWords`, `strokesPerWord`, `complexity`}, `stenalgoShort`, `pluvierLong` (its `withoutCollisions.<rule>` has `costOnStarboard` and `costOnIreland`) · `pluvierEncodingMatchesDicofr` (the key keeps its first name; it compares the table encoding with the word's outlines in ANY Pluvier layer).
+
+## Brief candidates: words Pluvier types in fewer strokes
+
+`python -m util.find_pluvier_shorter_words --pluvier-root PLUVIER [--top 100] [--out pluvier_shorter_words.tsv]` (~25 s; the
+Stenalgo options as for the comparison) ranks by frequency the words both theories cover whose Pluvier short form has fewer
+strokes than the Stenalgo short form (the same views and choice as the comparison; 22,102 words on 2026-10-13) and writes the top
+N to a TSV (untracked): word, frequency, syllables, both outlines and stroke counts, the Pluvier layer, `kind` and `rule`.
+`kind`, first match wins: `brief` = the outline is only in the hand-written TAO layer (no generator layer gives it to the word);
+`affix` = generated with an identified Pluvier affix rule; `compressed` = generated, no rule found, fewer strokes than syllables
+(the generator's syllable merging); `phonetic` = generated, at least one stroke per syllable. `rule` names the affix rule, for a
+brief too. Rules are read from the clone: `OrthoSuffix`/`OrthoPrefix` and the sound tables `SUFFIXES`/`REAL_SUFFIXES` of
+`src/steno.py`, the "Keys `X` designate ... ending in" lines of `TAO_rules.md`, plus the verb endings of
+`ortho_add_alone_keys_on_verb` transcribed in `VERB_ENDINGS` (verb forms only). The matching is a heuristic (spelling or
+final phonemes plus the chord ending the last stroke): a coincidence can tag a word, and `compressed` means no rule was found,
+not that there is none (other Pluvier tables, `m°n` = `KH`, are not read). First run (top 100): 61 brief, 24 affix,
+12 compressed, 3 phonetic. Follow-up: `TODO.md` "investigate and choose which words should get a brief".
 
 ## Reusing it
 
