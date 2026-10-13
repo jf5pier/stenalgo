@@ -25,7 +25,7 @@ import json
 import os
 import subprocess
 import sys
-from typing import Any
+from typing import Any, Callable
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "plover_stenalgo"))
 
@@ -178,7 +178,8 @@ def compare(args: argparse.Namespace) -> dict[str, Any]:
         return {"markedWords": len(marked),
                 "markedFrequencyShare": tc.share(tc.mass(freq, marked), tc.mass(freq, words & pluCovered)),
                 "strokesPerWord": tc.strokesPerWordResolved(pluLong, freq, words & pluCovered, marked),
-                "costOnStarboard": tc.complexity(tc.costsResolved(pluLongOnStar, marked, extraOnStar), freq, words & pluCovered)}
+                "costOnStarboard": tc.complexity(tc.costsResolved(pluLongOnStar, marked, extraOnStar), freq, words & pluCovered),
+                "costOnIreland": tc.complexity(tc.costsResolved(pluLongOnIre, marked, extraOnIre), freq, words & pluCovered)}
 
     def block(words: set[str]) -> dict[str, Any]:
         shortBlock: dict[str, Any] = {}
@@ -227,7 +228,11 @@ def compare(args: argparse.Namespace) -> dict[str, Any]:
     pluLongOnIre = tc.outlineCosts(pluLong, lambda s: ireland.getStrokeCost(s), pluCovered)
     shortCosts = tc.outlineCosts(short, stenStroke, stenCovered) if short is not None else None
     pluOnly = pluCovered & universe
+    lemmaReport = tc.lemmaCoverage(lexicon, sten, plu)
+    tenseReport = tc.verbCoverageByTense(lexicon, sten, plu)
     return {
+        "lemmaCoverage": lemmaReport,
+        "verbCoverageByTense": tenseReport,
         "inputs": {
             "stenalgoDict": {"path": args.stenalgo_dict, "md5": md5(args.stenalgo_dict)},
             "stenalgoLayout": {"path": args.stenalgo_layout, "md5": md5(args.stenalgo_layout)},
@@ -262,75 +267,131 @@ def num(x: float | None) -> str:
     return "n/a" if x is None else f"{x:.3f}"
 
 
+TENSE_LABELS = {"ind:pre": "indicatif présent", "ind:imp": "indicatif imparfait", "ind:pas": "passé simple", "ind:fut": "futur simple",
+                "cnd:pre": "conditionnel présent", "sub:pre": "subjonctif présent", "sub:imp": "subjonctif imparfait",
+                "imp:pre": "impératif présent", "inf": "infinitif", "par:pre": "participe présent", "par:pas": "participe passé"}
+NOT_APPLICABLE, NO_SHORT_FORM = "—", "n/a"
+Row = tuple[str, str, str]  # label, Stenalgo cell, Pluvier cell
+
+
+def withShare(count: int, share: float | None) -> str:
+    return f"{count} ({pct(share)})"
+
+
+def table(rows: list[Row]) -> list[str]:
+    return ["| metric | Stenalgo | Pluvier |", "|---|---|---|", *(f"| {label} | {sten} | {plu} |" for label, sten, plu in rows), ""]
+
+
 def renderMarkdown(report: dict[str, Any]) -> str:
-    cov, col, com = report["coverage"], report["collisionsOnCommonWords"], report["commonWords"]
-    lines = ["# Stenalgo (Starboard) vs Pluvier (Ireland)", "",
-             f"Frequency: {report['inputs']['lexicon']['frequency']}; Pluvier commit {report['inputs']['pluvierDicts'][0]['commit']}; "
-             f"Pluvier layers (lowest priority first): {', '.join(os.path.basename(d['path']) for d in report['inputs']['pluvierDicts'])}.", "",
-             "## Coverage (Lexique383 spellings)", "", "| set | spellings | with frequency | frequency share |", "|---|---|---|---|"]
-    for key in ("universe", "stenalgo", "pluvier", "both", "stenalgoOnly", "pluvierOnly", "neither"):
-        b = cov[key]
-        lines.append(f"| {key} | {b['spellings']} | {b['withFrequency']} | {pct(b['frequencyShare'])} |")
-    lines += ["", "## Collisions on the words covered by both", "", "| | stenalgo | pluvier |", "|---|---|---|"]
-    for key, label, fmt in (("wordsColliding", "words colliding", str), ("frequencyShare", "frequency share", pct),
-                            ("groups", "groups", str), ("wordsInGroupsFullyCommon", "words in groups fully common", str)):
-        lines.append(f"| {label} | {fmt(col['stenalgo'][key])} | {fmt(col['pluvier'][key])} |")
-    lines += ["", "## Strokes, complexity and phoneme order on the words covered by both", "",
-              "| metric | stenalgo | pluvier |", "|---|---|---|",
-              f"| strokes per word | {num(com['strokesPerWord']['stenalgo'])} | {num(com['strokesPerWord']['pluvier'])} |"]
-    cx = com["complexity"]
-    lines += [f"| cost on Starboard | {num(cx['stenalgoOnStarboard']['meanCost'])} | {num(cx['pluvierOnStarboard']['meanCost'])} |",
-              f"| unpressable on Starboard (freq share) | {pct(cx['stenalgoOnStarboard']['unpricedFrequencyShare'])} "
-              f"| {pct(cx['pluvierOnStarboard']['unpricedFrequencyShare'])} |",
-              f"| cost on Starboard, pressable in both ({cx['pressableInBoth']['words']} words) | {num(cx['pressableInBoth']['meanA'])} "
-              f"| {num(cx['pressableInBoth']['meanB'])} |",
-              f"| cost on Starboard, Ireland `S` on the cheaper pinky key | | {num(cx['pluvierOnStarboardTallS']['meanCost'])} |",
-              f"| cost on Ireland | | {num(cx['pluvierOnIreland']['meanCost'])} |",
-              f"| cost, the {cx['pluvierTallSVersusIreland']['words']} words priced on both boards: Starboard tall `S` / Ireland | "
-              f"| {num(cx['pluvierTallSVersusIreland']['meanA'])} / {num(cx['pluvierTallSVersusIreland']['meanB'])} |"]
-    ss = com.get("stenalgoShort")
-    if ss is not None:
-        lines += [f"| *Stenalgo short form (affix abbreviations)*: strokes per word | {num(ss['strokesPerWord'])} | |",
-                  f"| *Stenalgo short form*: cost on Starboard | {num(ss['complexity']['meanCost'])} | |",
-                  f"| *Stenalgo short form*: words abbreviated (freq share) | {ss['abbreviatedWords']} ({pct(ss['abbreviatedFrequencyShare'])}) | |"]
+    cov, com = report["coverage"], report["commonWords"]
+    col = report["collisionsOnCommonWords"]
+    inputs = report["inputs"]
+    ss = com.get("stenalgoShort")                  # None without --stenalgo-abbreviations
     pl = com["pluvierLong"]
-    lines += [f"| *Pluvier long form (the longest outline of each word; the rows above are its short form)*: strokes per word | | {num(pl['strokesPerWord'])} |",
-              f"| *Pluvier long form*: cost on Starboard | | {num(pl['complexity']['pluvierOnStarboard']['meanCost'])} |",
-              f"| *Pluvier long form*: cost on Starboard, Ireland `S` on the cheaper pinky key | | {num(pl['complexity']['pluvierOnStarboardTallS']['meanCost'])} |",
-              f"| *Pluvier long form*: cost on Ireland | | {num(pl['complexity']['pluvierOnIreland']['meanCost'])} |",
-              f"| *Pluvier*: words with several outlines (freq share) | | {pl['wordsWithSeveralOutlines']} ({pct(pl['severalOutlinesFrequencyShare'])}) |",
-              f"| *Pluvier*: words whose long and short form differ (freq share) | | {pl['wordsWithDifferentLongAndShort']} ({pct(pl['differentFrequencyShare'])}) |"]
-    wc = com["withoutCollisions"]
-    ss0 = ss["strokesPerWord"] if ss is not None else None
-    lines += ["", "## Strokes per word, long and short form, with the extra stroke for disambiguation", "",
-              "| | Stenalgo long | Stenalgo short | Pluvier long | Pluvier short |", "|---|---|---|---|---|",
-              f"| as listed (no extra stroke) | {num(com['strokesPerWord']['stenalgo'])} | {num(ss0)} "
-              f"| {num(pl['strokesPerWord'])} | {num(com['strokesPerWord']['pluvier'])} |"]
-    for rule, label in (("winnerKeeps", "most frequent claimant keeps the outline"), ("everyClaimant", "every claimant marked")):
-        lines.append(f"| {label} | {num(wc[rule]['strokesPerWord']['stenalgo'])} | {num(ss0)} "
-                     f"| {num(pl['withoutCollisions'][rule]['strokesPerWord'])} | {num(wc[rule]['strokesPerWord']['pluvier'])} |")
-    lines += ["", "Stenalgo has no collision in either form (the long outlines and the affix outlines share no outline with another word), so its rows do not change.", ""]
-    lines += ["", f"## If every colliding word took one more stroke (cheapest single key: {wc['extraStrokeCost']['starboard']} on "
-              f"Starboard, {wc['extraStrokeCost']['ireland']} on Ireland)", "",
-              "| metric | stenalgo | pluvier |", "|---|---|---|"]
-    for rule, label in (("winnerKeeps", "most frequent claimant keeps the outline"), ("everyClaimant", "every claimant marked")):
-        r = wc[rule]
-        lines += [f"| *{label}* | | |",
-                  f"| words given a stroke | {r['markedWords']['stenalgo']} | {r['markedWords']['pluvier']} "
-                  f"({pct(r['markedWords']['pluvierFrequencyShare'])} of frequency) |",
-                  f"| strokes per word | {num(r['strokesPerWord']['stenalgo'])} | {num(r['strokesPerWord']['pluvier'])} |",
-                  f"| cost on Starboard | {num(r['complexity']['stenalgoOnStarboard']['meanCost'])} "
-                  f"| {num(r['complexity']['pluvierOnStarboard']['meanCost'])} |",
-                  f"| cost on Starboard, Ireland `S` on the cheaper pinky key | | {num(r['complexity']['pluvierOnStarboardTallS']['meanCost'])} |",
-                  f"| cost on Ireland | | {num(r['complexity']['pluvierOnIreland']['meanCost'])} |"]
-    lines += ["", "## Phoneme order", "", "| metric | stenalgo | pluvier |", "|---|---|---|"]
+    cx, plcx, wc = com["complexity"], pl["complexity"], com["withoutCollisions"]
+
+    def short(getter: Callable[[dict[str, Any]], str]) -> str:
+        return NO_SHORT_FORM if ss is None else getter(ss)
+
+    lines = ["# Stenalgo (Starboard) vs Pluvier (Ireland)", "",
+             f"Frequency: {inputs['lexicon']['frequency']}; Pluvier commit {inputs['pluvierDicts'][0]['commit']}; "
+             f"Pluvier layers (lowest priority first): {', '.join(os.path.basename(d['path']) for d in inputs['pluvierDicts'])}.", ""]
+
+    def section(title: str, text: str, rows: list[Row]) -> None:
+        lines.extend([f"## {title}", "", text, "", *table(rows)])
+
+    def covered(key: str) -> str:
+        return withShare(cov[key]["spellings"], cov[key]["frequencyShare"])
+
+    lines += ["## 1. Word coverage (Lexique383 spellings)", "",
+              f"Of the {cov['universe']['spellings']} spellings of Lexique383, {covered('both')} are covered by both theories "
+              f"and {covered('neither')} by neither; a higher share of the word frequency means more of what is typed is available.", ""]
+    lines += table([("words covered", covered("stenalgo"), covered("pluvier")),
+                    ("words covered by this theory only", covered("stenalgoOnly"), covered("pluvierOnly"))])
+
+    lem = report["lemmaCoverage"]
+
+    def lemmaRow(label: str, key: str) -> Row:
+        return (label, withShare(lem["stenalgo"][key]["lemmas"], lem["stenalgo"][key]["frequencyShare"]),
+                withShare(lem["pluvier"][key]["lemmas"], lem["pluvier"][key]["frequencyShare"]))
+
+    section("2. Lemma coverage", f"A lemma is a lemme with its grammatical category ({lem['lemmas']} in all, weighted by lemma frequency): "
+            "a lemma with some form covered can be typed in at least one form, one with all forms covered in every form.",
+            [lemmaRow("some form covered", "someFormCovered"), lemmaRow("all forms covered", "allFormsCovered")])
+
+    tenses = report["verbCoverageByTense"]
+    section("3. Verb coverage by mood and tense",
+            "Each row counts the verb and auxiliary forms of Lexique383 in that tense (a form shared by several tenses counts in each), "
+            "as covered forms (share of their frequency); Stenalgo leaves out the subjonctif imparfait by design.",
+            [(f"{TENSE_LABELS.get(key, key)} ({t['forms']} forms)", withShare(t["stenalgo"]["forms"], t["stenalgo"]["frequencyShare"]),
+              withShare(t["pluvier"]["forms"], t["pluvier"]["frequencyShare"])) for key, t in tenses.items()])
+
+    common = f"words covered by both: {cov['both']['spellings']}"
+    section(f"4. Collisions ({common})",
+            "A word collides when its outline also belongs to another word; fewer colliding words means fewer ambiguities left to the typist.",
+            [("words colliding (freq share)", withShare(col["stenalgo"]["wordsColliding"], col["stenalgo"]["frequencyShare"]),
+              withShare(col["pluvier"]["wordsColliding"], col["pluvier"]["frequencyShare"])),
+             ("collision groups", str(col["stenalgo"]["groups"]), str(col["pluvier"]["groups"])),
+             ("words in groups fully common", str(col["stenalgo"]["wordsInGroupsFullyCommon"]), str(col["pluvier"]["wordsInGroupsFullyCommon"]))])
+
+    both = cx["pressableInBoth"]
+    abbreviated = short(lambda x: withShare(x["abbreviatedWords"], x["abbreviatedFrequencyShare"]))
+    section(f"5. Strokes and cost ({common})",
+            "The cost of a word is the sum of the chord costs of its outline, averaged over the word frequency (lower is easier), "
+            "both keyboard models using the same units; the short form is what a typist types, the long form is the dictionary alone for "
+            "Stenalgo and the longest outline for Pluvier.",
+            [("strokes per word, short form", short(lambda x: num(x["strokesPerWord"])), num(com["strokesPerWord"]["pluvier"])),
+             ("strokes per word, long form", num(com["strokesPerWord"]["stenalgo"]), num(pl["strokesPerWord"])),
+             ("cost on its own keyboard, short form", short(lambda x: num(x["complexity"]["meanCost"])), num(cx["pluvierOnIreland"]["meanCost"])),
+             ("cost on its own keyboard, long form", num(cx["stenalgoOnStarboard"]["meanCost"]), num(plcx["pluvierOnIreland"]["meanCost"])),
+             ("cost, both on Starboard, short form", short(lambda x: num(x["complexity"]["meanCost"])), num(cx["pluvierOnStarboard"]["meanCost"])),
+             ("cost, both on Starboard, long form", num(cx["stenalgoOnStarboard"]["meanCost"]), num(plcx["pluvierOnStarboard"]["meanCost"])),
+             ("unpressable on Starboard (freq share)", pct(cx["stenalgoOnStarboard"]["unpricedFrequencyShare"]),
+              pct(cx["pluvierOnStarboard"]["unpricedFrequencyShare"])),
+             ("words whose short form differs from the long form", abbreviated,
+              withShare(pl["wordsWithDifferentLongAndShort"], pl["differentFrequencyShare"])),
+             ("words with several outlines", NOT_APPLICABLE, withShare(pl["wordsWithSeveralOutlines"], pl["severalOutlinesFrequencyShare"]))])
+    tall, tallIre = cx["pluvierTallSVersusIreland"], cx["pluvierOnStarboardTallS"]
+    lines += [
+        f"On the {both['words']} words that can be pressed on Starboard with both theories, Stenalgo (long form) costs {num(both['meanA'])} "
+        f"and Pluvier (short form) {num(both['meanB'])}.", "",
+        f"With Ireland's `S` moved to the cheaper pinky key of Starboard, Pluvier on Starboard costs {num(tallIre['meanCost'])} (short form) "
+        f"and {num(plcx['pluvierOnStarboardTallS']['meanCost'])} (long form); on the {tall['words']} words priced on both boards, "
+        f"that variant costs {num(tall['meanA'])} on Starboard against {num(tall['meanB'])} on Ireland.", ""]
+
+    extra = wc["extraStrokeCost"]
+    lines += [f"### 5b. If every colliding word took one more stroke ({common})", "",
+              f"The extra stroke is the cheapest single key (cost {extra['starboard']} on Starboard, {extra['ireland']} on Ireland); "
+              "the first rule gives it only to the colliding words that lose the outline, the second to every word that claims it"
+              + (", and Stenalgo, having no collision, is unchanged." if wc["everyClaimant"]["markedWords"]["stenalgo"] == 0 else "."), ""]
+    for rule, title in (("winnerKeeps", "The most frequent claimant keeps the outline"), ("everyClaimant", "Every claimant takes the stroke")):
+        r, pr = wc[rule], pl["withoutCollisions"][rule]
+        noMark = r["markedWords"]["stenalgo"] == 0     # Stenalgo has no collision: its figures do not change
+        sShort = (lambda f: short(f)) if noMark else (lambda f: NO_SHORT_FORM if ss is None else NOT_APPLICABLE)
+        sMarked = withShare(0, 0.0) if noMark else NOT_APPLICABLE
+        lines += [f"#### {title}", ""]
+        lines += table([
+            ("words given a stroke, short form", sMarked if ss is not None else NO_SHORT_FORM,
+             withShare(r["markedWords"]["pluvier"], r["markedWords"]["pluvierFrequencyShare"])),
+            ("words given a stroke, long form", sMarked,
+             withShare(pr["markedWords"], pr["markedFrequencyShare"])),
+            ("strokes per word, short form", sShort(lambda x: num(x["strokesPerWord"])), num(r["strokesPerWord"]["pluvier"])),
+            ("strokes per word, long form", num(r["strokesPerWord"]["stenalgo"]), num(pr["strokesPerWord"])),
+            ("cost on its own keyboard, short form", sShort(lambda x: num(x["complexity"]["meanCost"])),
+             num(r["complexity"]["pluvierOnIreland"]["meanCost"])),
+            ("cost on its own keyboard, long form", num(r["complexity"]["stenalgoOnStarboard"]["meanCost"]),
+             num(pr["costOnIreland"]["meanCost"]))])
+
     po = com["phonemeOrder"]
-    lines += [f"| words with a phoneme order violation | {pct(po['stenalgo']['shareWithViolation'])} | {pct(po['pluvier']['shareWithViolation'])} |",
-              f"| mean violations per word | {num(po['stenalgo']['meanViolations'])} | {num(po['pluvier']['meanViolations'])} |",
-              f"| unencodable words (freq share) | {pct(po['stenalgo']['unencodableFrequencyShare'])} "
-              f"| {pct(po['pluvier']['unencodableFrequencyShare'])} |", "",
-              f"Pluvier table encoding equals one of the word's Pluvier outlines for {pct(report['pluvierEncodingMatchesDicofr']['share'])} of its words "
-              f"({pct(report['pluvierEncodingMatchesDicofr']['frequencyShare'])} of frequency).", ""]
+    match = report["pluvierEncodingMatchesDicofr"]
+    section(f"6. Phoneme order ({common})",
+            "A violation is a phoneme pressed in an order other than the spoken one; the unencodable words are those whose phonemes "
+            "the theory's keys cannot write at all.",
+            [("words with a phoneme order violation", pct(po["stenalgo"]["shareWithViolation"]), pct(po["pluvier"]["shareWithViolation"])),
+             ("mean violations per word", num(po["stenalgo"]["meanViolations"]), num(po["pluvier"]["meanViolations"])),
+             ("unencodable words (freq share)", pct(po["stenalgo"]["unencodableFrequencyShare"]), pct(po["pluvier"]["unencodableFrequencyShare"]))])
+    lines += [f"Pluvier table encoding equals one of the word's Pluvier outlines for {pct(match['share'])} of its words "
+              f"({pct(match['frequencyShare'])} of frequency).", ""]
     return "\n".join(lines)
 
 

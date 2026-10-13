@@ -36,6 +36,62 @@ class TestLoadLexicon(unittest.TestCase):
         self.assertEqual(films.syll["etoile"], "etwal")          # the most frequent row
 
 
+class TestLemmaAndTenseCoverage(unittest.TestCase):
+    HEADER = "ortho\tsyll\tlemme\tcgram\tfreqlemfilms2\tfreqlemlivres\tfreqfilms2\tfreqlivres\tinfover"
+    ROWS = [
+        "mange\tmaZ\tmanger\tVER\t10\t1\t6\t1\tind:pre:1s;ind:pre:3s;sub:pre:1s;imp:pre:2s;",
+        "manges\tmaZ\tmanger\tVER\t10\t1\t2\t1\tind:pre:2s;sub:pre:2s;",
+        "manger\tmaZe\tmanger\tVER\t10\t1\t4\t1\tinf;",
+        "mang\u00e9\tmaZe\tmanger\tVER\t10\t1\t3\t1\tpar:pas;",
+        "chat\tSa\tchat\tNOM\t20\t1\t5\t1\t",
+        "chats\tSa\tchat\tNOM\t20\t1\t1\t1\t",
+        "zut\tzyt\tzut\tNOM\t5\t1\t2\t1\t",
+    ]
+
+    def lexicon(self) -> tc.Lexicon:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "lex.tsv")
+            with open(path, "w", encoding="utf-8") as handle:
+                handle.write("\n".join([self.HEADER] + self.ROWS) + "\n")
+            return tc.loadLexicon(path, "films")
+
+    def views(self) -> tuple[tc.TheoryView, tc.TheoryView]:
+        a = tc.buildStenalgoView({"1": "mange", "2": "manger", "3": "chat", "4": "chats"}, parseDigits)
+        b = tc.buildPluvierView({"M": "mange", "MS": "manges", "C": "chat"}, {})
+        return a, b
+
+    def test_loader_collects_lemmas_and_tenses(self) -> None:
+        lex = self.lexicon()
+        self.assertEqual(lex.lemmaForms[("manger", "VER")], {"mange", "manges", "manger", "mang\u00e9"})
+        self.assertEqual(lex.lemmaFreq[("chat", "NOM")], 20.0)
+        self.assertEqual(lex.tenseForms["ind:pre"], {"mange", "manges"})
+        self.assertEqual(lex.tenseForms["sub:pre"], {"mange", "manges"})      # mange is in three tenses
+        self.assertEqual(lex.tenseForms["inf"], {"manger"})
+        self.assertNotIn("chat", set().union(*lex.tenseForms.values()))
+
+    def test_lemma_coverage(self) -> None:
+        a, b = self.views()
+        report = tc.lemmaCoverage(self.lexicon(), a, b)
+        self.assertEqual(report["lemmas"], 3)
+        self.assertEqual(report[a.name]["someFormCovered"], {"lemmas": 2, "frequencyShare": 30 / 35})
+        self.assertEqual(report[a.name]["allFormsCovered"], {"lemmas": 1, "frequencyShare": 20 / 35})
+        self.assertEqual(report[b.name]["someFormCovered"], {"lemmas": 2, "frequencyShare": 30 / 35})
+        self.assertEqual(report[b.name]["allFormsCovered"], {"lemmas": 0, "frequencyShare": 0.0})
+
+    def test_verb_coverage_by_tense(self) -> None:
+        a, b = self.views()
+        report = tc.verbCoverageByTense(self.lexicon(), a, b)
+        self.assertEqual(list(report), list(tc.TENSES))
+        self.assertEqual(report["ind:pre"], {"forms": 2, a.name: {"forms": 1, "frequencyShare": 6 / 8},
+                                             b.name: {"forms": 2, "frequencyShare": 1.0}})
+        self.assertEqual(report["sub:pre"]["forms"], 2)
+        self.assertEqual(report["imp:pre"][a.name], {"forms": 1, "frequencyShare": 1.0})
+        self.assertEqual(report["inf"][b.name], {"forms": 0, "frequencyShare": 0.0})
+        self.assertEqual(report["par:pas"][a.name], {"forms": 0, "frequencyShare": 0.0})
+        self.assertEqual(report["ind:imp"], {"forms": 0, a.name: {"forms": 0, "frequencyShare": None},
+                                             b.name: {"forms": 0, "frequencyShare": None}})
+
+
 class TestViews(unittest.TestCase):
     def test_stenalgo_collisions_are_measured(self) -> None:
         view = tc.buildStenalgoView({"12": "star", "21": "tsar", "1/2": "chat", "1/2x": "only"}, parseDigits)

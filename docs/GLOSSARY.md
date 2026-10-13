@@ -1372,3 +1372,22 @@ The Plover dictionary plugin (`.stenalgo` extension) that decodes expression cho
 is one expression piece (brief, merged attach, standalone keypress, cluster), so plain words stay with the stock dictionary
 and longer keys are read piece by piece by the translator.
 - Code: `plover_stenalgo/plover_stenalgo/dictionary.py` (`StenalgoExpressionDictionary`), `render.py`, `stroke.py`, `wordindex.py`.
+
+## Theory comparison (Stenalgo vs Pluvier)
+
+### Word universe
+The set of words two theories are compared on: the lower-cased Lexique383 spellings, each weighted by its corpus frequency.
+A theory **covers** a word when it has at least one outline for it.
+- Code: `loadLexicon`, `coverage` src/theorycompare.py.
+
+### Short form / Long form
+The briefest and the longest outline a theory offers for a word. Stenalgo's short form comes from the affix
+abbreviations (its long form is the dictionary alone); Pluvier's from its several outlines per word. The short form is
+what a typist actually types; a word with one outline has the same short and long form.
+- Code: `TheoryView.choose` (short), `longForm` (Pluvier long), `withAbbreviations` (Stenalgo short) src/theorycompare.py.
+- Avoid "brief" for a short form (a brief is an expression-layer entry).
+
+### Cost on its own keyboard
+A theory's frequency-weighted chord cost on the keyboard it was designed for: Stenalgo on the Starboard, Pluvier on the
+Ireland layout. The headline cost of the comparison; "both on Starboard" is the secondary view.
+- Avoid "complexity" for it (older report and code name).

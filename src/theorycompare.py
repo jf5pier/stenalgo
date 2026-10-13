@@ -48,10 +48,30 @@ CostFn = Callable[[str], int | None]
 class Lexicon:
     freq: dict[str, float]                 # lower-cased spelling -> summed frequency (0.0 allowed)
     syll: dict[str, str]                   # spelling -> `syll` of its most frequent row
+    lemmaForms: dict[tuple[str, str], set[str]] = field(default_factory=dict)   # (lemme, cgram) -> spellings
+    lemmaFreq: dict[tuple[str, str], float] = field(default_factory=dict)       # (lemme, cgram) -> lemma frequency (max over rows)
+    tenseForms: dict[str, set[str]] = field(default_factory=dict)               # tense key -> spellings (VER and AUX rows)
+
+
+TENSES = ("ind:pre", "ind:imp", "ind:pas", "ind:fut", "cnd:pre", "sub:pre", "sub:imp", "imp:pre", "inf", "par:pre", "par:pas")
+
+
+def tenseKeys(infover: str) -> set[str]:
+    """The tense keys of a Lexique `infover` field: the first two `:`-fields of each `;`-separated entry (`inf` alone)."""
+    keys: set[str] = set()
+    for entry in infover.split(";"):
+        entry = entry.strip()
+        if entry:
+            keys.add("inf" if entry == "inf" else ":".join(entry.split(":")[:2]))
+    return keys
 
 
 def loadLexicon(path: str, freq: str = "films") -> Lexicon:
     column = {"films": "freqfilms2", "livres": "freqlivres"}[freq]
+    lemmaColumn = {"films": "freqlemfilms2", "livres": "freqlemlivres"}[freq]
+    lemmaForms: dict[tuple[str, str], set[str]] = defaultdict(set)
+    lemmaFreq: dict[tuple[str, str], float] = {}
+    tenseForms: dict[str, set[str]] = defaultdict(set)
     sums: dict[str, float] = defaultdict(float)
     best: dict[str, tuple[float, str]] = {}
     with open(path, encoding="utf-8", newline="") as handle:
@@ -61,7 +81,14 @@ def loadLexicon(path: str, freq: str = "films") -> Lexicon:
             sums[word] += value
             if word not in best or value > best[word][0]:
                 best[word] = (value, row["syll"])
-    return Lexicon(dict(sums), {w: s for w, (_, s) in best.items()})
+            lemma = (row.get("lemme", "").lower(), row.get("cgram", ""))
+            if lemma[0]:
+                lemmaForms[lemma].add(word)
+                lemmaFreq[lemma] = max(lemmaFreq.get(lemma, 0.0), float(row.get(lemmaColumn) or 0.0))
+            if lemma[1] in ("VER", "AUX"):
+                for key in tenseKeys(row.get("infover", "")):
+                    tenseForms[key].add(word)
+    return Lexicon(dict(sums), {w: s for w, (_, s) in best.items()}, dict(lemmaForms), lemmaFreq, dict(tenseForms))
 
 
 @dataclass
@@ -239,6 +266,36 @@ def coverage(freq: dict[str, float], a: TheoryView, b: TheoryView) -> dict[str, 
         "outsideUniverse": {a.name: len(set(a.outlines) - universe), b.name: len(set(b.outlines) - universe)},
         "lostToCollisionsOnly": {b.name: block(b.lostWords & universe - setB)} if b.lostWords else {},
     }
+
+
+def lemmaCoverage(lexicon: Lexicon, a: TheoryView, b: TheoryView) -> dict[str, Any]:
+    """Lemmas (lemme, cgram) with some / all of their forms in each theory, counted and weighted by lemma frequency."""
+    lemmas = sorted(lexicon.lemmaForms)
+    weight = {lemma: lexicon.lemmaFreq.get(lemma, 0.0) for lemma in lemmas}
+    total = math.fsum(weight[lemma] for lemma in lemmas)
+
+    def block(view: TheoryView) -> dict[str, Any]:
+        some = [lemma for lemma in lemmas if any(w in view.outlines for w in lexicon.lemmaForms[lemma])]
+        full = [lemma for lemma in lemmas if all(w in view.outlines for w in lexicon.lemmaForms[lemma])]
+        return {"lemmas": len(lemmas),
+                "someFormCovered": {"lemmas": len(some), "frequencyShare": share(math.fsum(weight[x] for x in some), total)},
+                "allFormsCovered": {"lemmas": len(full), "frequencyShare": share(math.fsum(weight[x] for x in full), total)}}
+
+    return {"lemmas": len(lemmas), a.name: block(a), b.name: block(b)}
+
+
+def verbCoverageByTense(lexicon: Lexicon, a: TheoryView, b: TheoryView) -> dict[str, Any]:
+    """Per verb tense: the forms listed in it, and the count and frequency share covered by each theory."""
+    out: dict[str, Any] = {}
+    for tense in TENSES:
+        forms = lexicon.tenseForms.get(tense, set())
+        total = mass(lexicon.freq, forms)
+        row: dict[str, Any] = {"forms": len(forms)}
+        for view in (a, b):
+            covered = {w for w in forms if w in view.outlines}
+            row[view.name] = {"forms": len(covered), "frequencyShare": share(mass(lexicon.freq, covered), total)}
+        out[tense] = row
+    return out
 
 
 # --- collisions -----------------------------------------------------------------------------------------------------------

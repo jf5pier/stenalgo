@@ -43,7 +43,8 @@ class TestCompareTheories(unittest.TestCase):
             order = first["fullCoverage"]["phonemeOrder"]["pluvier"]
             self.assertAlmostEqual(order["shareWithViolation"], 5 / 23)                             # tsar only, of star+tsar+chat+froid
             text = compare_theories.renderMarkdown(first)
-            self.assertIn("## Coverage", text)
+            self.assertIn("## 1. Word coverage", text)
+            self.assertIn("#### Every claimant takes the stroke", text)
 
     def test_main_writes_files(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
