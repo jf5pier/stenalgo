@@ -169,7 +169,7 @@
    }
   ],
   "ruleRanks": [
-   6,
+   4,
    11,
    15
   ]
@@ -494,7 +494,7 @@
   ],
   "ruleRanks": [
    1,
-   7
+   10
   ]
  },
  {
@@ -599,121 +599,8 @@
    }
   ],
   "ruleRanks": [
-   7,
+   10,
    15
-  ]
- },
- {
-  "text": "Je dois partir maintenant.",
-  "phonology": "Z° dwa paR.tiR m5.t°.n@",
-  "steno": "vt@a pvwak paR/tiR mR@aie",
-  "strokes": [
-   [
-    5,
-    7,
-    11,
-    12
-   ],
-   [
-    4,
-    5,
-    9,
-    12,
-    18
-   ],
-   [
-    4,
-    12,
-    21
-   ],
-   [
-    7,
-    13,
-    21
-   ],
-   [
-    6,
-    8,
-    11,
-    12,
-    13,
-    14
-   ]
-  ],
-  "words": [
-   {
-    "text": "je",
-    "label": "pronom personnel, sg.",
-    "steno": "vt@a",
-    "strokeCount": 1
-   },
-   {
-    "text": "dois",
-    "label": "indicatif présent, 1re sg.",
-    "steno": "pvwak",
-    "strokeCount": 1
-   },
-   {
-    "text": "partir",
-    "label": "infinitif",
-    "steno": "paR/tiR",
-    "strokeCount": 2
-   },
-   {
-    "text": "maintenant",
-    "label": "adverbe",
-    "steno": "mR@aie",
-    "strokeCount": 1
-   }
-  ],
-  "alternates": [
-   {
-    "steno": "vt@a/pvwak/paR/tiR/maie/t@a/mR@",
-    "strokes": [
-     [
-      5,
-      7,
-      11,
-      12
-     ],
-     [
-      4,
-      5,
-      9,
-      12,
-      18
-     ],
-     [
-      4,
-      12,
-      21
-     ],
-     [
-      7,
-      13,
-      21
-     ],
-     [
-      6,
-      12,
-      13,
-      14
-     ],
-     [
-      7,
-      11,
-      12
-     ],
-     [
-      6,
-      8,
-      11
-     ]
-    ]
-   }
-  ],
-  "ruleRanks": [
-   50
   ]
  },
  {
@@ -1388,7 +1275,7 @@
    }
   ],
   "ruleRanks": [
-   5
+   3
   ]
  },
  {
@@ -1483,7 +1370,7 @@
    }
   ],
   "ruleRanks": [
-   7
+   10
   ]
  },
  {
@@ -1704,215 +1591,6 @@
   ],
   "ruleRanks": [
    24
-  ]
- },
- {
-  "text": "Vous riez ensemble aujourd'hui.",
-  "phonology": "vu Rje @.s@bl o.ZuR.d8i",
-  "steno": "v@e Rwe -l pv@aie",
-  "strokes": [
-   [
-    5,
-    11,
-    14
-   ],
-   [
-    8,
-    9,
-    14
-   ],
-   [
-    23
-   ],
-   [
-    4,
-    5,
-    11,
-    12,
-    13,
-    14
-   ]
-  ],
-  "words": [
-   {
-    "text": "vous",
-    "label": "pronom personnel, pl.",
-    "steno": "v@e",
-    "strokeCount": 1
-   },
-   {
-    "text": "riez",
-    "label": "indicatif présent, 2e pl.",
-    "steno": "Rwe",
-    "strokeCount": 1
-   },
-   {
-    "text": "ensemble",
-    "label": "adverbe",
-    "steno": "-l",
-    "strokeCount": 1
-   },
-   {
-    "text": "aujourd'hui",
-    "label": "adverbe",
-    "steno": "pv@aie",
-    "strokeCount": 1
-   }
-  ],
-  "alternates": [
-   {
-    "steno": "v@e/Rwe/@/s@jl/ae/vt@eR/pv@ai",
-    "strokes": [
-     [
-      5,
-      11,
-      14
-     ],
-     [
-      8,
-      9,
-      14
-     ],
-     [
-      11
-     ],
-     [
-      3,
-      11,
-      16,
-      23
-     ],
-     [
-      12,
-      14
-     ],
-     [
-      5,
-      7,
-      11,
-      14,
-      21
-     ],
-     [
-      4,
-      5,
-      11,
-      12,
-      13
-     ]
-    ]
-   }
-  ],
-  "ruleRanks": [
-   55,
-   56
-  ]
- },
- {
-  "text": "Elles marchent vite maintenant.",
-  "phonology": "El maRS vit m5.t°.n@",
-  "steno": "iesl mastRZm vit mR@aie",
-  "strokes": [
-   [
-    13,
-    14,
-    17,
-    23
-   ],
-   [
-    6,
-    12,
-    17,
-    20,
-    21,
-    24,
-    25
-   ],
-   [
-    5,
-    13,
-    20
-   ],
-   [
-    6,
-    8,
-    11,
-    12,
-    13,
-    14
-   ]
-  ],
-  "words": [
-   {
-    "text": "elles",
-    "label": "pronom personnel, f. pl.",
-    "steno": "iesl",
-    "strokeCount": 1
-   },
-   {
-    "text": "marchent",
-    "label": "indicatif présent, 3e pl.",
-    "steno": "mastRZm",
-    "strokeCount": 1
-   },
-   {
-    "text": "vite",
-    "label": "adverbe",
-    "steno": "vit",
-    "strokeCount": 1
-   },
-   {
-    "text": "maintenant",
-    "label": "adverbe",
-    "steno": "mR@aie",
-    "strokeCount": 1
-   }
-  ],
-  "alternates": [
-   {
-    "steno": "iesl/mastRZm/vit/maie/t@a/mR@",
-    "strokes": [
-     [
-      13,
-      14,
-      17,
-      23
-     ],
-     [
-      6,
-      12,
-      17,
-      20,
-      21,
-      24,
-      25
-     ],
-     [
-      5,
-      13,
-      20
-     ],
-     [
-      6,
-      12,
-      13,
-      14
-     ],
-     [
-      7,
-      11,
-      12
-     ],
-     [
-      6,
-      8,
-      11
-     ]
-    ]
-   }
-  ],
-  "ruleRanks": [
-   50
   ]
  },
  {
@@ -2241,7 +1919,7 @@
    }
   ],
   "ruleRanks": [
-   5
+   3
   ]
  },
  {
@@ -2353,7 +2031,7 @@
   ],
   "ruleRanks": [
    1,
-   7
+   10
   ]
  },
  {
@@ -2477,7 +2155,7 @@
  {
   "text": "Il aura une maison nouvelle.",
   "phonology": "il o.Ra yn mE.z§ nu.vEl",
-  "steno": "taesl/Ra @in -R mR@e/viel",
+  "steno": "taesl/Ra @in mie/twai mR@e/viel",
   "strokes": [
    [
     7,
@@ -2496,7 +2174,15 @@
     22
    ],
    [
-    21
+    6,
+    13,
+    14
+   ],
+   [
+    7,
+    9,
+    12,
+    13
    ],
    [
     6,
@@ -2533,8 +2219,8 @@
    {
     "text": "maison",
     "label": "nom, sg.",
-    "steno": "-R",
-    "strokeCount": 1
+    "steno": "mie/twai",
+    "strokeCount": 2
    },
    {
     "text": "nouvelle",
@@ -2591,8 +2277,7 @@
    }
   ],
   "ruleRanks": [
-   11,
-   45
+   11
   ]
  },
  {
@@ -2703,91 +2388,6 @@
   ]
  },
  {
-  "text": "On viendra ensemble.",
-  "phonology": "§ vj5.dRa @.s@bl",
-  "steno": "ai vRwaie/pvRa -l",
-  "strokes": [
-   [
-    12,
-    13
-   ],
-   [
-    5,
-    8,
-    9,
-    12,
-    13,
-    14
-   ],
-   [
-    4,
-    5,
-    8,
-    12
-   ],
-   [
-    23
-   ]
-  ],
-  "words": [
-   {
-    "text": "on",
-    "label": "pronom personnel, sg.",
-    "steno": "ai",
-    "strokeCount": 1
-   },
-   {
-    "text": "viendra",
-    "label": "indicatif futur, 3e sg.",
-    "steno": "vRwaie/pvRa",
-    "strokeCount": 2
-   },
-   {
-    "text": "ensemble",
-    "label": "adverbe",
-    "steno": "-l",
-    "strokeCount": 1
-   }
-  ],
-  "alternates": [
-   {
-    "steno": "ai/vRwaie/pvRa/@/s@jl",
-    "strokes": [
-     [
-      12,
-      13
-     ],
-     [
-      5,
-      8,
-      9,
-      12,
-      13,
-      14
-     ],
-     [
-      4,
-      5,
-      8,
-      12
-     ],
-     [
-      11
-     ],
-     [
-      3,
-      11,
-      16,
-      23
-     ]
-    ]
-   }
-  ],
-  "ruleRanks": [
-   55
-  ]
- },
- {
   "text": "Vous verrez le soleil.",
   "phonology": "vu vE.Re l° so.lEj",
   "steno": "v@e vie/Red svwaej/mtiej",
@@ -2890,7 +2490,7 @@
    }
   ],
   "ruleRanks": [
-   5
+   3
   ]
  },
  {
@@ -2997,7 +2597,7 @@
    }
   ],
   "ruleRanks": [
-   7
+   10
   ]
  },
  {
@@ -3108,7 +2708,7 @@
    }
   ],
   "ruleRanks": [
-   7
+   10
   ]
  },
  {
@@ -3218,7 +2818,7 @@
  {
   "text": "Elle serait contente ainsi.",
   "phonology": "El s°.RE k§.t@t 5.si",
-  "steno": "st@asZ/Rie kai/t*@t w-",
+  "steno": "st@asZ/Rie kai/t*@t aie/si",
   "strokes": [
    [
     3,
@@ -3245,7 +2845,13 @@
     20
    ],
    [
-    9
+    12,
+    13,
+    14
+   ],
+   [
+    3,
+    13
    ]
   ],
   "words": [
@@ -3270,8 +2876,8 @@
    {
     "text": "ainsi",
     "label": "adverbe",
-    "steno": "w-",
-    "strokeCount": 1
+    "steno": "aie/si",
+    "strokeCount": 2
    }
   ],
   "alternates": [
@@ -3317,8 +2923,7 @@
    }
   ],
   "ruleRanks": [
-   24,
-   31
+   24
   ]
  },
  {
@@ -3426,7 +3031,7 @@
  {
   "text": "Ils auraient besoin d'aide.",
   "phonology": "il o.RE b°.zw5 d Ed",
-  "steno": "isl ae/Riest sv@a iesdZ",
+  "steno": "isl ae/Riest sv@a/twaie iesdZ",
   "strokes": [
    [
     13,
@@ -3449,6 +3054,13 @@
     5,
     11,
     12
+   ],
+   [
+    7,
+    9,
+    12,
+    13,
+    14
    ],
    [
     13,
@@ -3474,8 +3086,8 @@
    {
     "text": "besoin",
     "label": "nom, m. sg.",
-    "steno": "sv@a",
-    "strokeCount": 1
+    "steno": "sv@a/twaie",
+    "strokeCount": 2
    },
    {
     "text": "d'",
@@ -3536,8 +3148,7 @@
    }
   ],
   "ruleRanks": [
-   2,
-   54
+   2
   ]
  },
  {
@@ -4067,7 +3678,7 @@
    }
   ],
   "ruleRanks": [
-   7,
+   10,
    25
   ]
  },
@@ -4191,7 +3802,7 @@
    }
   ],
   "ruleRanks": [
-   7
+   10
   ]
  },
  {
@@ -4300,114 +3911,7 @@
    }
   ],
   "ruleRanks": [
-   7
-  ]
- },
- {
-  "text": "Aide ton ami maintenant.",
-  "phonology": "Ed t§ a.mi m5.t°.n@",
-  "steno": "ied/-k tai a/mi mR@aie",
-  "strokes": [
-   [
-    13,
-    14,
-    19
-   ],
-   [
-    18
-   ],
-   [
-    7,
-    12,
-    13
-   ],
-   [
-    12
-   ],
-   [
-    6,
-    13
-   ],
-   [
-    6,
-    8,
-    11,
-    12,
-    13,
-    14
-   ]
-  ],
-  "words": [
-   {
-    "text": "aide",
-    "label": "impératif présent, 2e sg.",
-    "steno": "ied/-k",
-    "strokeCount": 2
-   },
-   {
-    "text": "ton",
-    "label": "adjectif possessif",
-    "steno": "tai",
-    "strokeCount": 1
-   },
-   {
-    "text": "ami",
-    "label": "nom, m. sg.",
-    "steno": "a/mi",
-    "strokeCount": 2
-   },
-   {
-    "text": "maintenant",
-    "label": "adverbe",
-    "steno": "mR@aie",
-    "strokeCount": 1
-   }
-  ],
-  "alternates": [
-   {
-    "steno": "ied/-k/tai/a/mi/maie/t@a/mR@",
-    "strokes": [
-     [
-      13,
-      14,
-      19
-     ],
-     [
-      18
-     ],
-     [
-      7,
-      12,
-      13
-     ],
-     [
-      12
-     ],
-     [
-      6,
-      13
-     ],
-     [
-      6,
-      12,
-      13,
-      14
-     ],
-     [
-      7,
-      11,
-      12
-     ],
-     [
-      6,
-      8,
-      11
-     ]
-    ]
-   }
-  ],
-  "ruleRanks": [
-   50
+   10
   ]
  },
  {
@@ -4665,7 +4169,7 @@
    }
   ],
   "ruleRanks": [
-   7,
+   10,
    24
   ]
  },
@@ -4953,81 +4457,6 @@
   ],
   "ruleRanks": [
    21
-  ]
- },
- {
-  "text": "Vous avez raison.",
-  "phonology": "vu a.ve RE.z§",
-  "steno": "v@e a/ve -n",
-  "strokes": [
-   [
-    5,
-    11,
-    14
-   ],
-   [
-    12
-   ],
-   [
-    5,
-    14
-   ],
-   [
-    22
-   ]
-  ],
-  "words": [
-   {
-    "text": "vous",
-    "label": "pronom personnel, pl.",
-    "steno": "v@e",
-    "strokeCount": 1
-   },
-   {
-    "text": "avez",
-    "label": "indicatif présent, 2e pl.",
-    "steno": "a/ve",
-    "strokeCount": 2
-   },
-   {
-    "text": "raison",
-    "label": "nom, f. sg.",
-    "steno": "-n",
-    "strokeCount": 1
-   }
-  ],
-  "alternates": [
-   {
-    "steno": "v@e/a/ve/Rie/twai",
-    "strokes": [
-     [
-      5,
-      11,
-      14
-     ],
-     [
-      12
-     ],
-     [
-      5,
-      14
-     ],
-     [
-      8,
-      13,
-      14
-     ],
-     [
-      7,
-      9,
-      12,
-      13
-     ]
-    ]
-   }
-  ],
-  "ruleRanks": [
-   51
   ]
  },
  {
@@ -5361,7 +4790,7 @@
    }
   ],
   "ruleRanks": [
-   5,
+   3,
    24
   ]
  },
@@ -5485,7 +4914,7 @@
    }
   ],
   "ruleRanks": [
-   7
+   10
   ]
  },
  {
@@ -5596,7 +5025,7 @@
    }
   ],
   "ruleRanks": [
-   9,
+   8,
    16,
    17
   ]
@@ -5798,7 +5227,7 @@
  {
   "text": "Elle n'a jamais dormi.",
   "phonology": "El n a Za.mE dOR.mi",
-  "steno": "t*ajsdZ vmtaie pveR/mi",
+  "steno": "t*ajsdZ vta/mie pveR/mi",
   "strokes": [
    [
     7,
@@ -5811,9 +5240,11 @@
    ],
    [
     5,
-    6,
     7,
-    12,
+    12
+   ],
+   [
+    6,
     13,
     14
    ],
@@ -5850,8 +5281,8 @@
    {
     "text": "jamais",
     "label": "adverbe",
-    "steno": "vmtaie",
-    "strokeCount": 1
+    "steno": "vta/mie",
+    "strokeCount": 2
    },
    {
     "text": "dormi",
@@ -5901,9 +5332,8 @@
    }
   ],
   "ruleRanks": [
-   10,
-   24,
-   33
+   9,
+   24
   ]
  },
  {
@@ -6005,7 +5435,7 @@
    }
   ],
   "ruleRanks": [
-   9,
+   8,
    16
   ]
  },
@@ -6125,7 +5555,7 @@
    }
   ],
   "ruleRanks": [
-   10
+   9
   ]
  },
  {
@@ -6225,7 +5655,7 @@
    }
   ],
   "ruleRanks": [
-   9,
+   8,
    16
   ]
  },
@@ -6326,7 +5756,7 @@
    }
   ],
   "ruleRanks": [
-   9,
+   8,
    16
   ]
  },
@@ -6430,22 +5860,24 @@
    }
   ],
   "ruleRanks": [
-   3
+   5
   ]
  },
  {
   "text": "Pourquoi elle arrive tard ?",
   "phonology": "puR.kwa El a.Riv taR",
-  "steno": "kpw@aeR tasZ/Rijs taR",
+  "steno": "p@eR/kwa tasZ/Rijs taR",
   "strokes": [
    [
-    2,
     4,
-    9,
     11,
-    12,
     14,
     21
+   ],
+   [
+    2,
+    9,
+    12
    ],
    [
     7,
@@ -6469,8 +5901,8 @@
    {
     "text": "pourquoi",
     "label": "adverbe",
-    "steno": "kpw@aeR",
-    "strokeCount": 1
+    "steno": "p@eR/kwa",
+    "strokeCount": 2
    },
    {
     "text": "elle",
@@ -6529,8 +5961,7 @@
    }
   ],
   "ruleRanks": [
-   24,
-   40
+   24
   ]
  },
  {
@@ -6628,7 +6059,7 @@
    }
   ],
   "ruleRanks": [
-   5
+   3
   ]
  },
  {
@@ -6829,7 +6260,7 @@
    }
   ],
   "ruleRanks": [
-   9,
+   8,
    16,
    17
   ]
@@ -6937,7 +6368,7 @@
  {
   "text": "Ce n'est pas possible.",
   "phonology": "s° n E pa po.sibl",
-  "steno": "pvtwiejdRm spaiejl",
+  "steno": "pvtwiejdRm pae/sijl",
   "strokes": [
    [
     4,
@@ -6952,11 +6383,13 @@
     25
    ],
    [
-    3,
     4,
     12,
+    14
+   ],
+   [
+    3,
     13,
-    14,
     16,
     23
    ]
@@ -6989,8 +6422,8 @@
    {
     "text": "possible",
     "label": "adjectif, sg.",
-    "steno": "spaiejl",
-    "strokeCount": 1
+    "steno": "pae/sijl",
+    "strokeCount": 2
    }
   ],
   "alternates": [
@@ -7029,10 +6462,9 @@
    }
   ],
   "ruleRanks": [
-   10,
+   9,
    13,
-   16,
-   59
+   16
   ]
  },
  {
@@ -7525,7 +6957,7 @@
    }
   ],
   "ruleRanks": [
-   3,
+   5,
    17
   ]
  },
@@ -7673,271 +7105,8 @@
    }
   ],
   "ruleRanks": [
-   4,
+   6,
    24
-  ]
- },
- {
-  "text": "Nous avons ce dont tu as besoin.",
-  "phonology": "nu a.v§ s° d§ ty a b°.zw5",
-  "steno": "mR@e a/vai s@a pvai t@i ad sv@a",
-  "strokes": [
-   [
-    6,
-    8,
-    11,
-    14
-   ],
-   [
-    12
-   ],
-   [
-    5,
-    12,
-    13
-   ],
-   [
-    3,
-    11,
-    12
-   ],
-   [
-    4,
-    5,
-    12,
-    13
-   ],
-   [
-    7,
-    11,
-    13
-   ],
-   [
-    12,
-    19
-   ],
-   [
-    3,
-    5,
-    11,
-    12
-   ]
-  ],
-  "words": [
-   {
-    "text": "nous",
-    "label": "pronom personnel, pl.",
-    "steno": "mR@e",
-    "strokeCount": 1
-   },
-   {
-    "text": "avons",
-    "label": "indicatif présent, 1re pl.",
-    "steno": "a/vai",
-    "strokeCount": 2
-   },
-   {
-    "text": "ce",
-    "label": "pronom démonstratif, m. sg.",
-    "steno": "s@a",
-    "strokeCount": 1
-   },
-   {
-    "text": "dont",
-    "label": "pronom relatif",
-    "steno": "pvai",
-    "strokeCount": 1
-   },
-   {
-    "text": "tu",
-    "label": "pronom personnel, sg.",
-    "steno": "t@i",
-    "strokeCount": 1
-   },
-   {
-    "text": "as",
-    "label": "indicatif présent, 2e sg.",
-    "steno": "ad",
-    "strokeCount": 1
-   },
-   {
-    "text": "besoin",
-    "label": "nom, m. sg.",
-    "steno": "sv@a",
-    "strokeCount": 1
-   }
-  ],
-  "alternates": [
-   {
-    "steno": "mR@e/a/vai/s@a/pvai/t@i/ad/sv@a/twaie",
-    "strokes": [
-     [
-      6,
-      8,
-      11,
-      14
-     ],
-     [
-      12
-     ],
-     [
-      5,
-      12,
-      13
-     ],
-     [
-      3,
-      11,
-      12
-     ],
-     [
-      4,
-      5,
-      12,
-      13
-     ],
-     [
-      7,
-      11,
-      13
-     ],
-     [
-      12,
-      19
-     ],
-     [
-      3,
-      5,
-      11,
-      12
-     ],
-     [
-      7,
-      9,
-      12,
-      13,
-      14
-     ]
-    ]
-   }
-  ],
-  "ruleRanks": [
-   54
-  ]
- },
- {
-  "text": "Cela m'intéresse beaucoup.",
-  "phonology": "s°.la m 5.te.REs bo.ku",
-  "steno": "s@a/mta m* aie/te/Ries -d",
-  "strokes": [
-   [
-    3,
-    11,
-    12
-   ],
-   [
-    6,
-    7,
-    12
-   ],
-   [
-    6,
-    10
-   ],
-   [
-    12,
-    13,
-    14
-   ],
-   [
-    7,
-    14
-   ],
-   [
-    8,
-    13,
-    14,
-    17
-   ],
-   [
-    19
-   ]
-  ],
-  "words": [
-   {
-    "text": "cela",
-    "label": "pronom démonstratif, sg.",
-    "steno": "s@a/mta",
-    "strokeCount": 2
-   },
-   {
-    "text": "m'",
-    "label": "pronom personnel, sg.",
-    "steno": "m*",
-    "strokeCount": 1
-   },
-   {
-    "text": "intéresse",
-    "label": "indicatif présent, 3e sg.",
-    "steno": "aie/te/Ries",
-    "strokeCount": 3
-   },
-   {
-    "text": "beaucoup",
-    "label": "adverbe",
-    "steno": "-d",
-    "strokeCount": 1
-   }
-  ],
-  "alternates": [
-   {
-    "steno": "s@a/mta/m*/aie/te/Ries/svae/k@e",
-    "strokes": [
-     [
-      3,
-      11,
-      12
-     ],
-     [
-      6,
-      7,
-      12
-     ],
-     [
-      6,
-      10
-     ],
-     [
-      12,
-      13,
-      14
-     ],
-     [
-      7,
-      14
-     ],
-     [
-      8,
-      13,
-      14,
-      17
-     ],
-     [
-      3,
-      5,
-      12,
-      14
-     ],
-     [
-      2,
-      11,
-      14
-     ]
-    ]
-   }
-  ],
-  "ruleRanks": [
-   41
   ]
  },
  {
@@ -8185,8 +7354,8 @@
    }
   ],
   "ruleRanks": [
-   5,
-   6
+   3,
+   4
   ]
  },
  {
@@ -8320,7 +7489,7 @@
    }
   ],
   "ruleRanks": [
-   4,
+   6,
    11
   ]
  },
@@ -8525,7 +7694,7 @@
    }
   ],
   "ruleRanks": [
-   5,
+   3,
    17
   ]
  },
@@ -8610,7 +7779,7 @@
    }
   ],
   "ruleRanks": [
-   7,
+   10,
    11
   ]
  },
@@ -8704,7 +7873,7 @@
  {
   "text": "On se repose l'après-midi.",
   "phonology": "§ s° R°.poz l a.pRE mi.di",
-  "steno": "ai s*@a R@a/paenl vRw-j mi/pvi",
+  "steno": "ai s*@a R@a/paenl vwaj/pRie mi/pvi",
   "strokes": [
    [
     12,
@@ -8730,9 +7899,15 @@
    ],
    [
     5,
-    8,
     9,
+    12,
     16
+   ],
+   [
+    4,
+    8,
+    13,
+    14
    ],
    [
     6,
@@ -8772,8 +7947,8 @@
    {
     "text": "après",
     "label": "adverbe",
-    "steno": "vRw-j",
-    "strokeCount": 1
+    "steno": "vwaj/pRie",
+    "strokeCount": 2
    },
    {
     "text": "-midi",
@@ -8834,87 +8009,13 @@
    }
   ],
   "ruleRanks": [
-   6,
-   30
-  ]
- },
- {
-  "text": "Vous jouez souvent.",
-  "phonology": "vu Zwe su.v@",
-  "steno": "v@e vtwed -t",
-  "strokes": [
-   [
-    5,
-    11,
-    14
-   ],
-   [
-    5,
-    7,
-    9,
-    14,
-    19
-   ],
-   [
-    20
-   ]
-  ],
-  "words": [
-   {
-    "text": "vous",
-    "label": "pronom personnel, pl.",
-    "steno": "v@e",
-    "strokeCount": 1
-   },
-   {
-    "text": "jouez",
-    "label": "indicatif présent, 2e pl.",
-    "steno": "vtwed",
-    "strokeCount": 1
-   },
-   {
-    "text": "souvent",
-    "label": "adverbe",
-    "steno": "-t",
-    "strokeCount": 1
-   }
-  ],
-  "alternates": [
-   {
-    "steno": "v@e/vtwed/s@e/v@",
-    "strokes": [
-     [
-      5,
-      11,
-      14
-     ],
-     [
-      5,
-      7,
-      9,
-      14,
-      19
-     ],
-     [
-      3,
-      11,
-      14
-     ],
-     [
-      5,
-      11
-     ]
-    ]
-   }
-  ],
-  "ruleRanks": [
-   42
+   4
   ]
  },
  {
   "text": "Je n'ai jamais mangé ça.",
   "phonology": "Z° n e Za.mE m@.Ze sa",
-  "steno": "pejskdZ vmtaie m@/vte sa",
+  "steno": "pejskdZ vta/mie m@/vte sa",
   "strokes": [
    [
     4,
@@ -8927,9 +8028,11 @@
    ],
    [
     5,
-    6,
     7,
-    12,
+    12
+   ],
+   [
+    6,
     13,
     14
    ],
@@ -8969,8 +8072,8 @@
    {
     "text": "jamais",
     "label": "adverbe",
-    "steno": "vmtaie",
-    "strokeCount": 1
+    "steno": "vta/mie",
+    "strokeCount": 2
    },
    {
     "text": "mangé",
@@ -9030,15 +8133,14 @@
    }
   ],
   "ruleRanks": [
-   10,
-   17,
-   33
+   9,
+   17
   ]
  },
  {
   "text": "Elle arrive souvent tard.",
   "phonology": "El a.Riv su.v@ taR",
-  "steno": "tasZ/Rijs -t taR",
+  "steno": "tasZ/Rijs s@e/v@ taR",
   "strokes": [
    [
     7,
@@ -9053,7 +8155,13 @@
     17
    ],
    [
-    20
+    3,
+    11,
+    14
+   ],
+   [
+    5,
+    11
    ],
    [
     7,
@@ -9077,8 +8185,8 @@
    {
     "text": "souvent",
     "label": "adverbe",
-    "steno": "-t",
-    "strokeCount": 1
+    "steno": "s@e/v@",
+    "strokeCount": 2
    },
    {
     "text": "tard",
@@ -9123,196 +8231,7 @@
    }
   ],
   "ruleRanks": [
-   24,
-   42
-  ]
- },
- {
-  "text": "On mange bien ensemble.",
-  "phonology": "§ m@Z bj5 @.s@bl",
-  "steno": "ai m@Z svRwaie -l",
-  "strokes": [
-   [
-    12,
-    13
-   ],
-   [
-    6,
-    11,
-    24
-   ],
-   [
-    3,
-    5,
-    8,
-    9,
-    12,
-    13,
-    14
-   ],
-   [
-    23
-   ]
-  ],
-  "words": [
-   {
-    "text": "on",
-    "label": "pronom personnel, sg.",
-    "steno": "ai",
-    "strokeCount": 1
-   },
-   {
-    "text": "mange",
-    "label": "indicatif présent, 3e sg.",
-    "steno": "m@Z",
-    "strokeCount": 1
-   },
-   {
-    "text": "bien",
-    "label": "adverbe",
-    "steno": "svRwaie",
-    "strokeCount": 1
-   },
-   {
-    "text": "ensemble",
-    "label": "adverbe",
-    "steno": "-l",
-    "strokeCount": 1
-   }
-  ],
-  "alternates": [
-   {
-    "steno": "ai/m@Z/svRwaie/@/s@jl",
-    "strokes": [
-     [
-      12,
-      13
-     ],
-     [
-      6,
-      11,
-      24
-     ],
-     [
-      3,
-      5,
-      8,
-      9,
-      12,
-      13,
-      14
-     ],
-     [
-      11
-     ],
-     [
-      3,
-      11,
-      16,
-      23
-     ]
-    ]
-   }
-  ],
-  "ruleRanks": [
-   55
-  ]
- },
- {
-  "text": "Vous venez très souvent.",
-  "phonology": "vu v°.ne tRE su.v@",
-  "steno": "v@e v@a/mRe tRie -t",
-  "strokes": [
-   [
-    5,
-    11,
-    14
-   ],
-   [
-    5,
-    11,
-    12
-   ],
-   [
-    6,
-    8,
-    14
-   ],
-   [
-    7,
-    8,
-    13,
-    14
-   ],
-   [
-    20
-   ]
-  ],
-  "words": [
-   {
-    "text": "vous",
-    "label": "pronom personnel, pl.",
-    "steno": "v@e",
-    "strokeCount": 1
-   },
-   {
-    "text": "venez",
-    "label": "indicatif présent, 2e pl.",
-    "steno": "v@a/mRe",
-    "strokeCount": 2
-   },
-   {
-    "text": "très",
-    "label": "adverbe",
-    "steno": "tRie",
-    "strokeCount": 1
-   },
-   {
-    "text": "souvent",
-    "label": "adverbe",
-    "steno": "-t",
-    "strokeCount": 1
-   }
-  ],
-  "alternates": [
-   {
-    "steno": "v@e/v@a/mRe/tRie/s@e/v@",
-    "strokes": [
-     [
-      5,
-      11,
-      14
-     ],
-     [
-      5,
-      11,
-      12
-     ],
-     [
-      6,
-      8,
-      14
-     ],
-     [
-      7,
-      8,
-      13,
-      14
-     ],
-     [
-      3,
-      11,
-      14
-     ],
-     [
-      5,
-      11
-     ]
-    ]
-   }
-  ],
-  "ruleRanks": [
-   42
+   24
   ]
  },
  {
@@ -9452,7 +8371,7 @@
    }
   ],
   "ruleRanks": [
-   6,
+   4,
    15
   ]
  },
@@ -9608,7 +8527,7 @@
    }
   ],
   "ruleRanks": [
-   7
+   10
   ]
  },
  {
@@ -9730,7 +8649,7 @@
    }
   ],
   "ruleRanks": [
-   7,
+   10,
    11,
    15
   ]
@@ -9855,7 +8774,7 @@
    }
   ],
   "ruleRanks": [
-   7,
+   10,
    24
   ]
  },
@@ -10150,7 +9069,7 @@
   ],
   "ruleRanks": [
    2,
-   6,
+   4,
    15
   ]
  },
@@ -10648,7 +9567,7 @@
   ],
   "ruleRanks": [
    2,
-   7,
+   10,
    24
   ]
  },
@@ -10814,7 +9733,7 @@
    }
   ],
   "ruleRanks": [
-   7
+   10
   ]
  },
  {
@@ -11069,14 +9988,14 @@
    }
   ],
   "ruleRanks": [
-   4,
+   6,
    11
   ]
  },
  {
   "text": "Tu crois que c'est possible.",
   "phonology": "ty kRwa k° s E po.sibl",
-  "steno": "t@i kRwad kpvtiekt spaiejl",
+  "steno": "t@i kRwad kpvtiekt pae/sijl",
   "strokes": [
    [
     7,
@@ -11101,11 +10020,13 @@
     20
    ],
    [
-    3,
     4,
     12,
+    14
+   ],
+   [
+    3,
     13,
-    14,
     16,
     23
    ]
@@ -11144,8 +10065,8 @@
    {
     "text": "possible",
     "label": "adjectif, sg.",
-    "steno": "spaiejl",
-    "strokeCount": 1
+    "steno": "pae/sijl",
+    "strokeCount": 2
    }
   ],
   "alternates": [
@@ -11192,15 +10113,14 @@
    }
   ],
   "ruleRanks": [
-   3,
-   14,
-   59
+   5,
+   14
   ]
  },
  {
   "text": "Il dit que vous avez raison.",
   "phonology": "il di k° vu a.ve RE.z§",
-  "steno": "pvtisl kv@ekt a/ve -n",
+  "steno": "pvtisl kv@ekt a/ve Rie/twai",
   "strokes": [
    [
     4,
@@ -11226,7 +10146,15 @@
     14
    ],
    [
-    22
+    8,
+    13,
+    14
+   ],
+   [
+    7,
+    9,
+    12,
+    13
    ]
   ],
   "words": [
@@ -11263,8 +10191,8 @@
    {
     "text": "raison",
     "label": "nom, f. sg.",
-    "steno": "-n",
-    "strokeCount": 1
+    "steno": "Rie/twai",
+    "strokeCount": 2
    }
   ],
   "alternates": [
@@ -11312,9 +10240,8 @@
    }
   ],
   "ruleRanks": [
-   3,
-   11,
-   51
+   5,
+   11
   ]
  },
  {
@@ -11465,7 +10392,7 @@
    }
   ],
   "ruleRanks": [
-   4,
+   6,
    24
   ]
  },
@@ -11567,7 +10494,7 @@
    }
   ],
   "ruleRanks": [
-   3
+   5
   ]
  },
  {
@@ -11698,7 +10625,7 @@
    }
   ],
   "ruleRanks": [
-   4
+   6
   ]
  },
  {
@@ -11983,13 +10910,13 @@
    }
   ],
   "ruleRanks": [
-   3
+   5
   ]
  },
  {
   "text": "Je l'aime beaucoup.",
   "phonology": "Z° l Em bo.ku",
-  "steno": "pvwiejskZm -d",
+  "steno": "pvwiejskZm svae/k@e",
   "strokes": [
    [
     4,
@@ -12004,7 +10931,15 @@
     25
    ],
    [
-    19
+    3,
+    5,
+    12,
+    14
+   ],
+   [
+    2,
+    11,
+    14
    ]
   ],
   "words": [
@@ -12029,8 +10964,8 @@
    {
     "text": "beaucoup",
     "label": "adverbe",
-    "steno": "-d",
-    "strokeCount": 1
+    "steno": "svae/k@e",
+    "strokeCount": 2
    }
   ],
   "alternates": [
@@ -12068,9 +11003,8 @@
    }
   ],
   "ruleRanks": [
-   6,
-   17,
-   41
+   4,
+   17
   ]
  },
  {
@@ -12186,7 +11120,7 @@
    }
   ],
   "ruleRanks": [
-   5
+   3
   ]
  },
  {
@@ -12398,93 +11332,6 @@
   ]
  },
  {
-  "text": "On te doit beaucoup.",
-  "phonology": "§ t° dwa bo.ku",
-  "steno": "ai t@a pvwa -d",
-  "strokes": [
-   [
-    12,
-    13
-   ],
-   [
-    7,
-    11,
-    12
-   ],
-   [
-    4,
-    5,
-    9,
-    12
-   ],
-   [
-    19
-   ]
-  ],
-  "words": [
-   {
-    "text": "on",
-    "label": "pronom personnel, sg.",
-    "steno": "ai",
-    "strokeCount": 1
-   },
-   {
-    "text": "te",
-    "label": "pronom personnel, sg.",
-    "steno": "t@a",
-    "strokeCount": 1
-   },
-   {
-    "text": "doit",
-    "label": "indicatif présent, 3e sg.",
-    "steno": "pvwa",
-    "strokeCount": 1
-   },
-   {
-    "text": "beaucoup",
-    "label": "adverbe",
-    "steno": "-d",
-    "strokeCount": 1
-   }
-  ],
-  "alternates": [
-   {
-    "steno": "ai/t@a/pvwa/svae/k@e",
-    "strokes": [
-     [
-      12,
-      13
-     ],
-     [
-      7,
-      11,
-      12
-     ],
-     [
-      4,
-      5,
-      9,
-      12
-     ],
-     [
-      3,
-      5,
-      12,
-      14
-     ],
-     [
-      2,
-      11,
-      14
-     ]
-    ]
-   }
-  ],
-  "ruleRanks": [
-   41
-  ]
- },
- {
   "text": "Ils les ont vus hier.",
   "phonology": "il lE § vy jER",
   "steno": "isl k*aijd v@is RwieR",
@@ -12586,133 +11433,6 @@
   ],
   "ruleRanks": [
    28
-  ]
- },
- {
-  "text": "Tu peux m'aider aujourd'hui.",
-  "phonology": "ty p2 m E.de o.ZuR.d8i",
-  "steno": "t@i p@ied m* ie/pveR pv@aie",
-  "strokes": [
-   [
-    7,
-    11,
-    13
-   ],
-   [
-    4,
-    11,
-    13,
-    14,
-    19
-   ],
-   [
-    6,
-    10
-   ],
-   [
-    13,
-    14
-   ],
-   [
-    4,
-    5,
-    14,
-    21
-   ],
-   [
-    4,
-    5,
-    11,
-    12,
-    13,
-    14
-   ]
-  ],
-  "words": [
-   {
-    "text": "tu",
-    "label": "pronom personnel, sg.",
-    "steno": "t@i",
-    "strokeCount": 1
-   },
-   {
-    "text": "peux",
-    "label": "indicatif présent, 2e sg.",
-    "steno": "p@ied",
-    "strokeCount": 1
-   },
-   {
-    "text": "m'",
-    "label": "pronom personnel, sg.",
-    "steno": "m*",
-    "strokeCount": 1
-   },
-   {
-    "text": "aider",
-    "label": "infinitif",
-    "steno": "ie/pveR",
-    "strokeCount": 2
-   },
-   {
-    "text": "aujourd'hui",
-    "label": "adverbe",
-    "steno": "pv@aie",
-    "strokeCount": 1
-   }
-  ],
-  "alternates": [
-   {
-    "steno": "t@i/p@ied/m*/ie/pveR/ae/vt@eR/pv@ai",
-    "strokes": [
-     [
-      7,
-      11,
-      13
-     ],
-     [
-      4,
-      11,
-      13,
-      14,
-      19
-     ],
-     [
-      6,
-      10
-     ],
-     [
-      13,
-      14
-     ],
-     [
-      4,
-      5,
-      14,
-      21
-     ],
-     [
-      12,
-      14
-     ],
-     [
-      5,
-      7,
-      11,
-      14,
-      21
-     ],
-     [
-      4,
-      5,
-      11,
-      12,
-      13
-     ]
-    ]
-   }
-  ],
-  "ruleRanks": [
-   56
   ]
  },
  {
@@ -12929,127 +11649,6 @@
   ],
   "ruleRanks": [
    24
-  ]
- },
- {
-  "text": "Nous voulons manger maintenant.",
-  "phonology": "nu vu.l§ m@.Ze m5.t°.n@",
-  "steno": "mR@e v@e/mtai m@/vteR mR@aie",
-  "strokes": [
-   [
-    6,
-    8,
-    11,
-    14
-   ],
-   [
-    5,
-    11,
-    14
-   ],
-   [
-    6,
-    7,
-    12,
-    13
-   ],
-   [
-    6,
-    11
-   ],
-   [
-    5,
-    7,
-    14,
-    21
-   ],
-   [
-    6,
-    8,
-    11,
-    12,
-    13,
-    14
-   ]
-  ],
-  "words": [
-   {
-    "text": "nous",
-    "label": "pronom personnel, pl.",
-    "steno": "mR@e",
-    "strokeCount": 1
-   },
-   {
-    "text": "voulons",
-    "label": "indicatif présent, 1re pl.",
-    "steno": "v@e/mtai",
-    "strokeCount": 2
-   },
-   {
-    "text": "manger",
-    "label": "infinitif",
-    "steno": "m@/vteR",
-    "strokeCount": 2
-   },
-   {
-    "text": "maintenant",
-    "label": "adverbe",
-    "steno": "mR@aie",
-    "strokeCount": 1
-   }
-  ],
-  "alternates": [
-   {
-    "steno": "mR@e/v@e/mtai/m@/vteR/maie/t@a/mR@",
-    "strokes": [
-     [
-      6,
-      8,
-      11,
-      14
-     ],
-     [
-      5,
-      11,
-      14
-     ],
-     [
-      6,
-      7,
-      12,
-      13
-     ],
-     [
-      6,
-      11
-     ],
-     [
-      5,
-      7,
-      14,
-      21
-     ],
-     [
-      6,
-      12,
-      13,
-      14
-     ],
-     [
-      7,
-      11,
-      12
-     ],
-     [
-      6,
-      8,
-      11
-     ]
-    ]
-   }
-  ],
-  "ruleRanks": [
-   50
   ]
  },
  {
@@ -13516,7 +12115,7 @@
    }
   ],
   "ruleRanks": [
-   7,
+   10,
    15
   ]
  },
@@ -13998,107 +12597,6 @@
   ]
  },
  {
-  "text": "Nous nous parlons souvent.",
-  "phonology": "nu nu paR.l§ su.v@",
-  "steno": "mR@e mR@e paR/mtai -t",
-  "strokes": [
-   [
-    6,
-    8,
-    11,
-    14
-   ],
-   [
-    6,
-    8,
-    11,
-    14
-   ],
-   [
-    4,
-    12,
-    21
-   ],
-   [
-    6,
-    7,
-    12,
-    13
-   ],
-   [
-    20
-   ]
-  ],
-  "words": [
-   {
-    "text": "nous",
-    "label": "pronom personnel, pl.",
-    "steno": "mR@e",
-    "strokeCount": 1
-   },
-   {
-    "text": "nous",
-    "label": "pronom personnel, pl.",
-    "steno": "mR@e",
-    "strokeCount": 1
-   },
-   {
-    "text": "parlons",
-    "label": "indicatif présent, 1re pl.",
-    "steno": "paR/mtai",
-    "strokeCount": 2
-   },
-   {
-    "text": "souvent",
-    "label": "adverbe",
-    "steno": "-t",
-    "strokeCount": 1
-   }
-  ],
-  "alternates": [
-   {
-    "steno": "mR@e/mR@e/paR/mtai/s@e/v@",
-    "strokes": [
-     [
-      6,
-      8,
-      11,
-      14
-     ],
-     [
-      6,
-      8,
-      11,
-      14
-     ],
-     [
-      4,
-      12,
-      21
-     ],
-     [
-      6,
-      7,
-      12,
-      13
-     ],
-     [
-      3,
-      11,
-      14
-     ],
-     [
-      5,
-      11
-     ]
-    ]
-   }
-  ],
-  "ruleRanks": [
-   42
-  ]
- },
- {
   "text": "Tu écoutais la radio.",
   "phonology": "ty e.ku.tE la Ra.djo",
   "steno": "t@i e/k@e/tied Rajkd/pvRwae",
@@ -14208,7 +12706,7 @@
    }
   ],
   "ruleRanks": [
-   7
+   10
   ]
  },
  {
@@ -14585,7 +13083,7 @@
    }
   ],
   "ruleRanks": [
-   7
+   10
   ]
  },
  {
@@ -15003,7 +13501,7 @@
  {
   "text": "On les rencontre souvent.",
   "phonology": "§ lE R@.k§tR su.v@",
-  "steno": "ai kR@jd/kaitR -t",
+  "steno": "ai kR@jd/kaitR s@e/v@",
   "strokes": [
    [
     12,
@@ -15024,7 +13522,13 @@
     21
    ],
    [
-    20
+    3,
+    11,
+    14
+   ],
+   [
+    5,
+    11
    ]
   ],
   "words": [
@@ -15049,8 +13553,8 @@
    {
     "text": "souvent",
     "label": "adverbe",
-    "steno": "-t",
-    "strokeCount": 1
+    "steno": "s@e/v@",
+    "strokeCount": 2
    }
   ],
   "alternates": [
@@ -15091,8 +13595,7 @@
    }
   ],
   "ruleRanks": [
-   28,
-   42
+   28
   ]
  },
  {
@@ -15426,7 +13929,7 @@
    }
   ],
   "ruleRanks": [
-   6,
+   4,
    15
   ]
  },

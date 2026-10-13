@@ -242,7 +242,22 @@
     "text": "café",
     "label": "nom, m. sg.",
     "steno": "ka/kpe",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "k*ae#",
+      "strokes": [
+       [
+        2,
+        10,
+        12,
+        14,
+        15
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -751,7 +766,20 @@
     "text": "maintenant",
     "label": "adverbe",
     "steno": "maie/t@a/mR@",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "mt-n",
+      "strokes": [
+       [
+        6,
+        7,
+        22
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -830,7 +858,21 @@
     "text": "venir",
     "label": "infinitif",
     "steno": "v@a/mRiR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "vi#R",
+      "strokes": [
+       [
+        5,
+        13,
+        15,
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "demain",
@@ -1208,7 +1250,18 @@
     "text": "avez",
     "label": "indicatif présent, 2e pl.",
     "steno": "a/ve",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "v-",
+      "strokes": [
+       [
+        5
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "trouvé",
@@ -1681,7 +1734,22 @@
     "text": "café",
     "label": "nom, m. sg.",
     "steno": "ka/kpe",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "k*ae#",
+      "strokes": [
+       [
+        2,
+        10,
+        12,
+        14,
+        15
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -2052,6 +2120,21 @@
       "rule": 5
      },
      {
+      "steno": "k-sn/-st",
+      "strokes": [
+       [
+        2,
+        17,
+        22
+       ],
+       [
+        17,
+        20
+       ]
+      ],
+      "kind": "brief"
+     },
+     {
       "steno": "mRwiesdt",
       "strokes": [
        [
@@ -2080,7 +2163,21 @@
     "text": "famille",
     "label": "nom, f. sg.",
     "steno": "kpa/mij",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "*aij",
+      "strokes": [
+       [
+        10,
+        12,
+        13,
+        16
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -2262,7 +2359,19 @@
     "text": "ici",
     "label": "adverbe",
     "steno": "i/si",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "*s",
+      "strokes": [
+       [
+        10,
+        17
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -2593,6 +2702,18 @@
       ],
       "kind": "affix",
       "rule": 3
+     },
+     {
+      "steno": "s*@j",
+      "strokes": [
+       [
+        3,
+        10,
+        11,
+        16
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    },
@@ -2625,6 +2746,16 @@
       ],
       "kind": "affix",
       "rule": 14
+     },
+     {
+      "steno": "R-d",
+      "strokes": [
+       [
+        8,
+        19
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    }
@@ -2707,6 +2838,32 @@
        ]
       ],
       "kind": "merged"
+     },
+     {
+      "steno": "v-j/-st",
+      "strokes": [
+       [
+        5,
+        16
+       ],
+       [
+        17,
+        20
+       ]
+      ],
+      "kind": "brief"
+     },
+     {
+      "steno": "v-jst",
+      "strokes": [
+       [
+        5,
+        16,
+        17,
+        20
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    },
@@ -2818,7 +2975,20 @@
     "text": "maintenant",
     "label": "adverbe",
     "steno": "maie/t@a/mR@",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "mt-n",
+      "strokes": [
+       [
+        6,
+        7,
+        22
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -3001,7 +3171,19 @@
     "text": "cela",
     "label": "pronom démonstratif, sg.",
     "steno": "s@a/mta",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "s-l",
+      "strokes": [
+       [
+        3,
+        23
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "difficile",
@@ -3028,6 +3210,18 @@
       ],
       "kind": "affix",
       "rule": 28
+     },
+     {
+      "steno": "si#l",
+      "strokes": [
+       [
+        3,
+        13,
+        15,
+        23
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    }
@@ -3190,7 +3384,19 @@
     "text": "ici",
     "label": "adverbe",
     "steno": "i/si",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "*s",
+      "strokes": [
+       [
+        10,
+        17
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -3664,6 +3870,19 @@
       "rule": 24
      },
      {
+      "steno": "s-R/-d",
+      "strokes": [
+       [
+        3,
+        21
+       ],
+       [
+        19
+       ]
+      ],
+      "kind": "brief"
+     },
+     {
       "steno": "smRad",
       "strokes": [
        [
@@ -3676,6 +3895,17 @@
       ],
       "kind": "affix",
       "rule": 24
+     },
+     {
+      "steno": "s-dR",
+      "strokes": [
+       [
+        3,
+        19,
+        21
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    },
@@ -3705,7 +3935,20 @@
     "text": "bientôt",
     "label": "adverbe",
     "steno": "svRwaie/tae",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "Rw-t",
+      "strokes": [
+       [
+        8,
+        9,
+        20
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -3793,7 +4036,18 @@
     "text": "maison",
     "label": "nom, sg.",
     "steno": "mie/twai",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "-m",
+      "strokes": [
+       [
+        25
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "nouvelle",
@@ -3853,7 +4107,19 @@
     "text": "fera",
     "label": "indicatif futur, 3e sg.",
     "steno": "kp@a/Ra",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "R*",
+      "strokes": [
+       [
+        8,
+        10
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "son",
@@ -3953,6 +4219,18 @@
       ],
       "kind": "affix",
       "rule": 3
+     },
+     {
+      "steno": "s*@j",
+      "strokes": [
+       [
+        3,
+        10,
+        11,
+        16
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    }
@@ -4512,7 +4790,21 @@
     "text": "venir",
     "label": "infinitif",
     "steno": "v@a/mRiR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "vi#R",
+      "strokes": [
+       [
+        5,
+        13,
+        15,
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "demain",
@@ -4642,6 +4934,19 @@
       "rule": 11
      },
      {
+      "steno": "v-R/-d",
+      "strokes": [
+       [
+        5,
+        21
+       ],
+       [
+        19
+       ]
+      ],
+      "kind": "brief"
+     },
+     {
       "steno": "kvmRied",
       "strokes": [
        [
@@ -4656,6 +4961,17 @@
       ],
       "kind": "affix",
       "rule": 11
+     },
+     {
+      "steno": "v-dR",
+      "strokes": [
+       [
+        5,
+        19,
+        21
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    },
@@ -4804,7 +5120,19 @@
     "text": "cadeau",
     "label": "nom, m. sg.",
     "steno": "ka/pvae",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "-kd",
+      "strokes": [
+       [
+        18,
+        19
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -4920,6 +5248,16 @@
       ],
       "kind": "affix",
       "rule": 9
+     },
+     {
+      "steno": "s-#",
+      "strokes": [
+       [
+        3,
+        15
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    }
@@ -5199,7 +5537,18 @@
     "text": "besoin",
     "label": "nom, m. sg.",
     "steno": "sv@a/twaie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "w-",
+      "strokes": [
+       [
+        9
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "d'",
@@ -5400,7 +5749,19 @@
     "text": "ici",
     "label": "adverbe",
     "steno": "i/si",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "*s",
+      "strokes": [
+       [
+        10,
+        17
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "tout",
@@ -5471,7 +5832,24 @@
     "text": "allez",
     "label": "impératif présent, 2e pl.",
     "steno": "a/mte/-k",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "*ael/-k",
+      "strokes": [
+       [
+        10,
+        12,
+        14,
+        23
+       ],
+       [
+        18
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "chercher",
@@ -5715,7 +6093,19 @@
     "text": "fenêtre",
     "label": "nom, f. sg.",
     "steno": "kp@a/mRietR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "t-R",
+      "strokes": [
+       [
+        7,
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "s'",
@@ -5829,7 +6219,20 @@
     "text": "derrière",
     "label": "préposition",
     "steno": "pvie/RwieR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "R-dR",
+      "strokes": [
+       [
+        8,
+        19,
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "toi",
@@ -6346,7 +6749,20 @@
     "text": "maintenant",
     "label": "adverbe",
     "steno": "maie/t@a/mR@",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "mt-n",
+      "strokes": [
+       [
+        6,
+        7,
+        22
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -6412,6 +6828,28 @@
        ]
       ],
       "kind": "merged"
+     },
+     {
+      "steno": "-n/-k",
+      "strokes": [
+       [
+        22
+       ],
+       [
+        18
+       ]
+      ],
+      "kind": "brief"
+     },
+     {
+      "steno": "-kn",
+      "strokes": [
+       [
+        18,
+        22
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    },
@@ -6425,7 +6863,19 @@
     "text": "travail",
     "label": "nom, m. sg.",
     "steno": "tRa/vaj",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "v-j",
+      "strokes": [
+       [
+        5,
+        16
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "vite",
@@ -6578,7 +7028,19 @@
     "text": "avec",
     "label": "préposition",
     "steno": "a/viek",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "v-k",
+      "strokes": [
+       [
+        5,
+        18
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "nous",
@@ -6640,7 +7102,20 @@
     "text": "es",
     "label": "indicatif présent, 2e sg.",
     "steno": "ie/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "ieZ",
+      "strokes": [
+       [
+        13,
+        14,
+        24
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "mon",
@@ -6652,7 +7127,20 @@
     "text": "meilleur",
     "label": "adjectif, m. sg.",
     "steno": "mie/Rw@R",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "mR-j",
+      "strokes": [
+       [
+        6,
+        8,
+        16
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "ami",
@@ -7308,13 +7796,37 @@
     "text": "avez",
     "label": "indicatif présent, 2e pl.",
     "steno": "a/ve",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "v-",
+      "strokes": [
+       [
+        5
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "raison",
     "label": "nom, f. sg.",
     "steno": "Rie/twai",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "R-nl",
+      "strokes": [
+       [
+        8,
+        22,
+        23
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -7461,7 +7973,19 @@
     "text": "travail",
     "label": "nom, m. sg.",
     "steno": "tRa/vaj",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "v-j",
+      "strokes": [
+       [
+        5,
+        16
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -7539,7 +8063,19 @@
     "text": "avec",
     "label": "préposition",
     "steno": "a/viek",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "v-k",
+      "strokes": [
+       [
+        5,
+        18
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "mon",
@@ -7641,6 +8177,30 @@
        ]
       ],
       "kind": "merged"
+     },
+     {
+      "steno": "v-j/-d",
+      "strokes": [
+       [
+        5,
+        16
+       ],
+       [
+        19
+       ]
+      ],
+      "kind": "brief"
+     },
+     {
+      "steno": "v-jd",
+      "strokes": [
+       [
+        5,
+        16,
+        19
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    },
@@ -8078,7 +8638,21 @@
     "text": "venir",
     "label": "infinitif",
     "steno": "v@a/mRiR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "vi#R",
+      "strokes": [
+       [
+        5,
+        13,
+        15,
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -8197,7 +8771,19 @@
     "text": "jamais",
     "label": "adverbe",
     "steno": "vta/mie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "-Zm",
+      "strokes": [
+       [
+        24,
+        25
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "dormi",
@@ -8477,6 +9063,17 @@
       ],
       "kind": "affix",
       "rule": 5
+     },
+     {
+      "steno": "kp-n",
+      "strokes": [
+       [
+        2,
+        4,
+        22
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    },
@@ -8697,7 +9294,19 @@
     "text": "pourquoi",
     "label": "adverbe",
     "steno": "p@eR/kwa",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "Rw-",
+      "strokes": [
+       [
+        8,
+        9
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "elle",
@@ -8709,7 +9318,20 @@
     "text": "arrive",
     "label": "indicatif présent, 3e sg.",
     "steno": "a/Rijs",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "R-js",
+      "strokes": [
+       [
+        8,
+        16,
+        17
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "tard",
@@ -8785,6 +9407,34 @@
        ]
       ],
       "kind": "merged"
+     },
+     {
+      "steno": "*ael/-d",
+      "strokes": [
+       [
+        10,
+        12,
+        14,
+        23
+       ],
+       [
+        19
+       ]
+      ],
+      "kind": "brief"
+     },
+     {
+      "steno": "*aedl",
+      "strokes": [
+       [
+        10,
+        12,
+        14,
+        19,
+        23
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    },
@@ -8925,7 +9575,20 @@
     "text": "comment",
     "label": "adverbe",
     "steno": "kae/m@",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "k@m",
+      "strokes": [
+       [
+        2,
+        11,
+        25
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "tu",
@@ -8958,7 +9621,19 @@
     "text": "cela",
     "label": "pronom démonstratif, sg.",
     "steno": "s@a/mta",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "s-l",
+      "strokes": [
+       [
+        3,
+        23
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -9315,6 +9990,18 @@
       ],
       "kind": "affix",
       "rule": 28
+     },
+     {
+      "steno": "si#l",
+      "strokes": [
+       [
+        3,
+        13,
+        15,
+        23
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    }
@@ -9383,7 +10070,20 @@
     "text": "possible",
     "label": "adjectif, sg.",
     "steno": "pae/sijl",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "p-js",
+      "strokes": [
+       [
+        4,
+        16,
+        17
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -9573,7 +10273,20 @@
     "text": "voici",
     "label": "préposition",
     "steno": "vwa/si",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "v-js",
+      "strokes": [
+       [
+        5,
+        16,
+        17
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "ta",
@@ -10127,7 +10840,18 @@
     "text": "besoin",
     "label": "nom, m. sg.",
     "steno": "sv@a/twaie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "w-",
+      "strokes": [
+       [
+        9
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -10182,7 +10906,19 @@
     "text": "cela",
     "label": "pronom démonstratif, sg.",
     "steno": "s@a/mta",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "s-l",
+      "strokes": [
+       [
+        3,
+        23
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "m'",
@@ -10217,7 +10953,19 @@
     "text": "beaucoup",
     "label": "adverbe",
     "steno": "svae/k@e",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "-jk",
+      "strokes": [
+       [
+        16,
+        18
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -10808,7 +11556,20 @@
     "text": "venu",
     "label": "participe passé, m. sg.",
     "steno": "v@a/mR@i",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "@an",
+      "strokes": [
+       [
+        11,
+        12,
+        22
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -10893,7 +11654,19 @@
     "text": "cela",
     "label": "pronom démonstratif, sg.",
     "steno": "s@a/mta",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "s-l",
+      "strokes": [
+       [
+        3,
+        23
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -11322,6 +12095,40 @@
        ]
       ],
       "kind": "merged"
+     },
+     {
+      "steno": "v-j/Rwe/-d",
+      "strokes": [
+       [
+        5,
+        16
+       ],
+       [
+        8,
+        9,
+        14
+       ],
+       [
+        19
+       ]
+      ],
+      "kind": "brief"
+     },
+     {
+      "steno": "v-j/Rwed",
+      "strokes": [
+       [
+        5,
+        16
+       ],
+       [
+        8,
+        9,
+        14,
+        19
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    },
@@ -11329,7 +12136,20 @@
     "text": "partout",
     "label": "adverbe",
     "steno": "paR/t@e",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "p-tR",
+      "strokes": [
+       [
+        4,
+        20,
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -11835,7 +12655,19 @@
     "text": "après",
     "label": "adverbe",
     "steno": "a/pRie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "p-R",
+      "strokes": [
+       [
+        4,
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "-midi",
@@ -11896,7 +12728,25 @@
     "text": "travaillons",
     "label": "indicatif présent, 1re pl.",
     "steno": "tRa/va/Rwai",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "v-j/Rwai",
+      "strokes": [
+       [
+        5,
+        16
+       ],
+       [
+        8,
+        9,
+        12,
+        13
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "le",
@@ -11973,7 +12823,21 @@
     "text": "souvent",
     "label": "adverbe",
     "steno": "s@e/v@",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "sv@#",
+      "strokes": [
+       [
+        3,
+        5,
+        11,
+        15
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -12160,7 +13024,19 @@
     "text": "toujours",
     "label": "adverbe",
     "steno": "t@e/vt@eR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "-tR",
+      "strokes": [
+       [
+        20,
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -12244,7 +13120,19 @@
     "text": "jamais",
     "label": "adverbe",
     "steno": "vta/mie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "-Zm",
+      "strokes": [
+       [
+        24,
+        25
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "mangé",
@@ -12362,7 +13250,19 @@
     "text": "cela",
     "label": "pronom démonstratif, sg.",
     "steno": "s@a/mta",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "s-l",
+      "strokes": [
+       [
+        3,
+        23
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -12417,7 +13317,19 @@
     "text": "toujours",
     "label": "adverbe",
     "steno": "t@e/vt@eR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "-tR",
+      "strokes": [
+       [
+        20,
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "fort",
@@ -12472,13 +13384,40 @@
     "text": "arrive",
     "label": "indicatif présent, 3e sg.",
     "steno": "a/Rijs",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "R-js",
+      "strokes": [
+       [
+        8,
+        16,
+        17
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "souvent",
     "label": "adverbe",
     "steno": "s@e/v@",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "sv@#",
+      "strokes": [
+       [
+        3,
+        5,
+        11,
+        15
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "tard",
@@ -12560,6 +13499,18 @@
       ],
       "kind": "affix",
       "rule": 3
+     },
+     {
+      "steno": "s*@j",
+      "strokes": [
+       [
+        3,
+        10,
+        11,
+        16
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    }
@@ -12689,7 +13640,19 @@
     "text": "venez",
     "label": "indicatif présent, 2e pl.",
     "steno": "v@a/mRe",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "v-n",
+      "strokes": [
+       [
+        5,
+        22
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "très",
@@ -12701,7 +13664,21 @@
     "text": "souvent",
     "label": "adverbe",
     "steno": "s@e/v@",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "sv@#",
+      "strokes": [
+       [
+        3,
+        5,
+        11,
+        15
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -12984,7 +13961,24 @@
     "text": "aller",
     "label": "infinitif",
     "steno": "a/mte/-R",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "*ael/-R",
+      "strokes": [
+       [
+        10,
+        12,
+        14,
+        23
+       ],
+       [
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "à",
@@ -13259,7 +14253,24 @@
     "text": "aller",
     "label": "infinitif",
     "steno": "a/mte/-R",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "*ael/-R",
+      "strokes": [
+       [
+        10,
+        12,
+        14,
+        23
+       ],
+       [
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "à",
@@ -13340,7 +14351,24 @@
     "text": "aller",
     "label": "infinitif",
     "steno": "a/mte/-R",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "*ael/-R",
+      "strokes": [
+       [
+        10,
+        12,
+        14,
+        23
+       ],
+       [
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "à",
@@ -13443,7 +14471,24 @@
     "text": "aller",
     "label": "infinitif",
     "steno": "a/mte/-R",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "*ael/-R",
+      "strokes": [
+       [
+        10,
+        12,
+        14,
+        23
+       ],
+       [
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "au",
@@ -13525,7 +14570,24 @@
     "text": "aller",
     "label": "infinitif",
     "steno": "a/mte/-R",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "*ael/-R",
+      "strokes": [
+       [
+        10,
+        12,
+        14,
+        23
+       ],
+       [
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "en",
@@ -13537,7 +14599,19 @@
     "text": "vacances",
     "label": "nom, f. pl.",
     "steno": "va/k@s/-s",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "ks-",
+      "strokes": [
+       [
+        2,
+        3
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -13700,7 +14774,24 @@
     "text": "aller",
     "label": "infinitif",
     "steno": "a/mte/-R",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "*ael/-R",
+      "strokes": [
+       [
+        10,
+        12,
+        14,
+        23
+       ],
+       [
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "à",
@@ -14092,6 +15183,17 @@
       ],
       "kind": "affix",
       "rule": 5
+     },
+     {
+      "steno": "k-tn",
+      "strokes": [
+       [
+        2,
+        20,
+        22
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    },
@@ -14127,6 +15229,40 @@
        ]
       ],
       "kind": "merged"
+     },
+     {
+      "steno": "v-j/Rwe/-R",
+      "strokes": [
+       [
+        5,
+        16
+       ],
+       [
+        8,
+        9,
+        14
+       ],
+       [
+        21
+       ]
+      ],
+      "kind": "brief"
+     },
+     {
+      "steno": "v-j/RweR",
+      "strokes": [
+       [
+        5,
+        16
+       ],
+       [
+        8,
+        9,
+        14,
+        21
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    }
@@ -14193,7 +15329,21 @@
     "text": "finit",
     "label": "indicatif présent, 3e sg.",
     "steno": "kpi/mRi/-t",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "-n/-t",
+      "strokes": [
+       [
+        22
+       ],
+       [
+        20
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "d'",
@@ -14696,6 +15846,36 @@
        ]
       ],
       "kind": "merged"
+     },
+     {
+      "steno": "Re#R/-st",
+      "strokes": [
+       [
+        8,
+        14,
+        15,
+        21
+       ],
+       [
+        17,
+        20
+       ]
+      ],
+      "kind": "brief"
+     },
+     {
+      "steno": "Re#stR",
+      "strokes": [
+       [
+        8,
+        14,
+        15,
+        17,
+        20,
+        21
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    },
@@ -14764,7 +15944,19 @@
     "text": "ici",
     "label": "adverbe",
     "steno": "i/si",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "*s",
+      "strokes": [
+       [
+        10,
+        17
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -15011,7 +16203,20 @@
     "text": "possible",
     "label": "adjectif, sg.",
     "steno": "pae/sijl",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "p-js",
+      "strokes": [
+       [
+        4,
+        16,
+        17
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -15087,13 +16292,37 @@
     "text": "avez",
     "label": "indicatif présent, 2e pl.",
     "steno": "a/ve",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "v-",
+      "strokes": [
+       [
+        5
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "raison",
     "label": "nom, f. sg.",
     "steno": "Rie/twai",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "R-nl",
+      "strokes": [
+       [
+        8,
+        22,
+        23
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -15206,7 +16435,20 @@
     "text": "bientôt",
     "label": "adverbe",
     "steno": "svRwaie/tae",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "Rw-t",
+      "strokes": [
+       [
+        8,
+        9,
+        20
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -15716,7 +16958,21 @@
     "text": "oublié",
     "label": "participe passé, m. sg.",
     "steno": "@e/svmti/Rwe",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "*iej",
+      "strokes": [
+       [
+        10,
+        13,
+        14,
+        16
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -15792,7 +17048,19 @@
     "text": "beaucoup",
     "label": "adverbe",
     "steno": "svae/k@e",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "-jk",
+      "strokes": [
+       [
+        16,
+        18
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -16239,7 +17507,19 @@
     "text": "beaucoup",
     "label": "adverbe",
     "steno": "svae/k@e",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "-jk",
+      "strokes": [
+       [
+        16,
+        18
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -16476,7 +17756,19 @@
     "text": "ici",
     "label": "adverbe",
     "steno": "i/si",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "*s",
+      "strokes": [
+       [
+        10,
+        17
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -16655,6 +17947,16 @@
       ],
       "kind": "affix",
       "rule": 14
+     },
+     {
+      "steno": "R-d",
+      "strokes": [
+       [
+        8,
+        19
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    }
@@ -16883,7 +18185,19 @@
     "text": "devrait",
     "label": "conditionnel présent, 3e sg.",
     "steno": "pv@a/vRie",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "v-R",
+      "strokes": [
+       [
+        5,
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "partir",
@@ -16991,7 +18305,20 @@
     "text": "maintenant",
     "label": "adverbe",
     "steno": "maie/t@a/mR@",
-    "strokeCount": 3
+    "strokeCount": 3,
+    "alternates": [
+     {
+      "steno": "mt-n",
+      "strokes": [
+       [
+        6,
+        7,
+        22
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -17054,7 +18381,22 @@
     "text": "pouvez",
     "label": "indicatif présent, 2e pl.",
     "steno": "p@e/ve",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "pv*e#",
+      "strokes": [
+       [
+        4,
+        5,
+        10,
+        14,
+        15
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "appeler",
@@ -17239,7 +18581,19 @@
     "text": "ici",
     "label": "adverbe",
     "steno": "i/si",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "*s",
+      "strokes": [
+       [
+        10,
+        17
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -17342,13 +18696,40 @@
     "text": "venir",
     "label": "infinitif",
     "steno": "v@a/mRiR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "vi#R",
+      "strokes": [
+       [
+        5,
+        13,
+        15,
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "bientôt",
     "label": "adverbe",
     "steno": "svRwaie/tae",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "Rw-t",
+      "strokes": [
+       [
+        8,
+        9,
+        20
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -17474,7 +18855,20 @@
     "text": "es",
     "label": "indicatif présent, 2e sg.",
     "steno": "ie/-d",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "ieZ",
+      "strokes": [
+       [
+        13,
+        14,
+        24
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "resté",
@@ -17504,7 +18898,19 @@
     "text": "longtemps",
     "label": "adverbe",
     "steno": "mtai/t@",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "@l",
+      "strokes": [
+       [
+        11,
+        23
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -17678,6 +19084,32 @@
        ]
       ],
       "kind": "merged"
+     },
+     {
+      "steno": "@an/-j",
+      "strokes": [
+       [
+        11,
+        12,
+        22
+       ],
+       [
+        16
+       ]
+      ],
+      "kind": "brief"
+     },
+     {
+      "steno": "@ajn",
+      "strokes": [
+       [
+        11,
+        12,
+        16,
+        22
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    },
@@ -17685,7 +19117,19 @@
     "text": "avec",
     "label": "préposition",
     "steno": "a/viek",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "v-k",
+      "strokes": [
+       [
+        5,
+        18
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    },
    {
     "text": "moi",
@@ -17826,6 +19270,34 @@
        ]
       ],
       "kind": "merged"
+     },
+     {
+      "steno": "*ael/-s",
+      "strokes": [
+       [
+        10,
+        12,
+        14,
+        23
+       ],
+       [
+        17
+       ]
+      ],
+      "kind": "brief"
+     },
+     {
+      "steno": "*aesl",
+      "strokes": [
+       [
+        10,
+        12,
+        14,
+        17,
+        23
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    },
@@ -18180,6 +19652,34 @@
        ]
       ],
       "kind": "merged"
+     },
+     {
+      "steno": "@an/-js",
+      "strokes": [
+       [
+        11,
+        12,
+        22
+       ],
+       [
+        16,
+        17
+       ]
+      ],
+      "kind": "brief"
+     },
+     {
+      "steno": "@ajsn",
+      "strokes": [
+       [
+        11,
+        12,
+        16,
+        17,
+        22
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    },
@@ -18497,6 +19997,17 @@
        ]
       ],
       "kind": "merged"
+     },
+     {
+      "steno": "pvm-",
+      "strokes": [
+       [
+        4,
+        5,
+        6
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    }
@@ -18660,7 +20171,19 @@
     "text": "ici",
     "label": "adverbe",
     "steno": "i/si",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "*s",
+      "strokes": [
+       [
+        10,
+        17
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -18725,7 +20248,21 @@
     "text": "souvent",
     "label": "adverbe",
     "steno": "s@e/v@",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "sv@#",
+      "strokes": [
+       [
+        3,
+        5,
+        11,
+        15
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -18806,6 +20343,20 @@
       ],
       "kind": "affix",
       "rule": 5
+     },
+     {
+      "steno": "k-n/se",
+      "strokes": [
+       [
+        2,
+        22
+       ],
+       [
+        3,
+        14
+       ]
+      ],
+      "kind": "brief"
      }
     ]
    },
@@ -18946,7 +20497,21 @@
     "text": "radio",
     "label": "nom, sg.",
     "steno": "Ra/pvRwae",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "Ra#d",
+      "strokes": [
+       [
+        8,
+        12,
+        15,
+        19
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -19053,7 +20618,19 @@
     "text": "fenêtre",
     "label": "nom, f. sg.",
     "steno": "kp@a/mRietR",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "t-R",
+      "strokes": [
+       [
+        7,
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -19378,7 +20955,20 @@
     "text": "voyage",
     "label": "nom, m. sg.",
     "steno": "vwa/RwaZ",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "w-jZ",
+      "strokes": [
+       [
+        9,
+        16,
+        24
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -19853,7 +21443,21 @@
     "text": "souvent",
     "label": "adverbe",
     "steno": "s@e/v@",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "sv@#",
+      "strokes": [
+       [
+        3,
+        5,
+        11,
+        15
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },
@@ -19921,7 +21525,20 @@
     "text": "partout",
     "label": "adverbe",
     "steno": "paR/t@e",
-    "strokeCount": 2
+    "strokeCount": 2,
+    "alternates": [
+     {
+      "steno": "p-tR",
+      "strokes": [
+       [
+        4,
+        20,
+        21
+       ]
+      ],
+      "kind": "brief"
+     }
+    ]
    }
   ]
  },

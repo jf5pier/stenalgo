@@ -683,7 +683,19 @@
     18
    ]
   ],
-  "frequency": 3704.89
+  "frequency": 3704.89,
+  "alternates": [
+   {
+    "steno": "v-k",
+    "strokes": [
+     [
+      5,
+      18
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "moi",
@@ -1019,7 +1031,19 @@
     13
    ]
   ],
-  "frequency": 2411.21
+  "frequency": 2411.21,
+  "alternates": [
+   {
+    "steno": "*s",
+    "strokes": [
+     [
+      10,
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "rien",
@@ -1056,7 +1080,21 @@
     14
    ]
   ],
-  "frequency": 2356.65
+  "frequency": 2356.65,
+  "alternates": [
+   {
+    "steno": "*e#t",
+    "strokes": [
+     [
+      10,
+      14,
+      15,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "ma",
@@ -1253,7 +1291,20 @@
     19
    ]
   ],
-  "frequency": 1849.07
+  "frequency": 1849.07,
+  "alternates": [
+   {
+    "steno": "ieZ",
+    "strokes": [
+     [
+      13,
+      14,
+      24
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "quand",
@@ -1358,7 +1409,20 @@
     21
    ]
   ],
-  "frequency": 1777.65
+  "frequency": 1777.65,
+  "alternates": [
+   {
+    "steno": "aeR",
+    "strokes": [
+     [
+      12,
+      14,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "par",
@@ -1628,6 +1692,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "*ael/-d",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      23
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "*aedl",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      19,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -1651,7 +1743,24 @@
     18
    ]
   ],
-  "frequency": 1414.85
+  "frequency": 1414.85,
+  "alternates": [
+   {
+    "steno": "*ael/-k",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      23
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "aussi",
@@ -1670,7 +1779,21 @@
     13
    ]
   ],
-  "frequency": 1402.33
+  "frequency": 1402.33,
+  "alternates": [
+   {
+    "steno": "*aie",
+    "strokes": [
+     [
+      10,
+      12,
+      13,
+      14
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "voir",
@@ -1794,7 +1917,19 @@
     14
    ]
   ],
-  "frequency": 1360.22
+  "frequency": 1360.22,
+  "alternates": [
+   {
+    "steno": "-Zm",
+    "strokes": [
+     [
+      24,
+      25
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "pourquoi",
@@ -1816,7 +1951,19 @@
     12
    ]
   ],
-  "frequency": 1348.04
+  "frequency": 1348.04,
+  "alternates": [
+   {
+    "steno": "Rw-",
+    "strokes": [
+     [
+      8,
+      9
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "chose",
@@ -1970,7 +2117,18 @@
     14
    ]
   ],
-  "frequency": 1122.37
+  "frequency": 1122.37,
+  "alternates": [
+   {
+    "steno": "v-",
+    "strokes": [
+     [
+      5
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "être",
@@ -2027,7 +2185,19 @@
     21
    ]
   ],
-  "frequency": 1072.36
+  "frequency": 1072.36,
+  "alternates": [
+   {
+    "steno": "-tR",
+    "strokes": [
+     [
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "ont",
@@ -2061,7 +2231,19 @@
     14
    ]
   ],
-  "frequency": 1041.22
+  "frequency": 1041.22,
+  "alternates": [
+   {
+    "steno": "t*",
+    "strokes": [
+     [
+      7,
+      10
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "temps",
@@ -2103,7 +2285,20 @@
     11
    ]
   ],
-  "frequency": 1028.86
+  "frequency": 1028.86,
+  "alternates": [
+   {
+    "steno": "mt-n",
+    "strokes": [
+     [
+      6,
+      7,
+      22
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "dis",
@@ -2329,7 +2524,18 @@
     11
    ]
   ],
-  "frequency": 968.57
+  "frequency": 968.57,
+  "alternates": [
+   {
+    "steno": "R-",
+    "strokes": [
+     [
+      8
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "viens",
@@ -2428,7 +2634,20 @@
     13
    ]
   ],
-  "frequency": 936.01
+  "frequency": 936.01,
+  "alternates": [
+   {
+    "steno": "mR-s",
+    "strokes": [
+     [
+      6,
+      8,
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "comment",
@@ -2448,7 +2667,20 @@
     11
    ]
   ],
-  "frequency": 922.93
+  "frequency": 922.93,
+  "alternates": [
+   {
+    "steno": "k@m",
+    "strokes": [
+     [
+      2,
+      11,
+      25
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "tous",
@@ -2812,7 +3044,20 @@
     17
    ]
   ],
-  "frequency": 835.65
+  "frequency": 835.65,
+  "alternates": [
+   {
+    "steno": "aek",
+    "strokes": [
+     [
+      12,
+      14,
+      18
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "monde",
@@ -2851,7 +3096,24 @@
     21
    ]
   ],
-  "frequency": 816.76
+  "frequency": 816.76,
+  "alternates": [
+   {
+    "steno": "*ael/-R",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      23
+     ],
+     [
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "femme",
@@ -2920,7 +3182,21 @@
     21
    ]
   ],
-  "frequency": 761.77
+  "frequency": 761.77,
+  "alternates": [
+   {
+    "steno": "*aeR",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "besoin",
@@ -2944,7 +3220,18 @@
     14
    ]
   ],
-  "frequency": 758.04
+  "frequency": 758.04,
+  "alternates": [
+   {
+    "steno": "w-",
+    "strokes": [
+     [
+      9
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "ses",
@@ -3244,7 +3531,19 @@
     12
    ]
   ],
-  "frequency": 681.89
+  "frequency": 681.89,
+  "alternates": [
+   {
+    "steno": "eZ",
+    "strokes": [
+     [
+      14,
+      24
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "vrai",
@@ -3281,7 +3580,21 @@
     21
    ]
   ],
-  "frequency": 674.24
+  "frequency": 674.24,
+  "alternates": [
+   {
+    "steno": "wa#R",
+    "strokes": [
+     [
+      9,
+      12,
+      15,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "mère",
@@ -3440,6 +3753,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "*e#t/-d",
+    "strokes": [
+     [
+      10,
+      14,
+      15,
+      20
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "*e#dt",
+    "strokes": [
+     [
+      10,
+      14,
+      15,
+      19,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -3479,6 +3820,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "*e#t/-k",
+    "strokes": [
+     [
+      10,
+      14,
+      15,
+      20
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "*e#kt",
+    "strokes": [
+     [
+      10,
+      14,
+      15,
+      18,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -3539,7 +3908,19 @@
     14
    ]
   ],
-  "frequency": 629.0
+  "frequency": 629.0,
+  "alternates": [
+   {
+    "steno": "k-k",
+    "strokes": [
+     [
+      2,
+      18
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "fille",
@@ -3578,7 +3959,19 @@
     14
    ]
   ],
-  "frequency": 626.0
+  "frequency": 626.0,
+  "alternates": [
+   {
+    "steno": "-jk",
+    "strokes": [
+     [
+      16,
+      18
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "regarde",
@@ -3747,7 +4140,19 @@
     14
    ]
   ],
-  "frequency": 593.92
+  "frequency": 593.92,
+  "alternates": [
+   {
+    "steno": "p-R",
+    "strokes": [
+     [
+      4,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "monsieur",
@@ -3771,7 +4176,20 @@
     14
    ]
   ],
-  "frequency": 583.45
+  "frequency": 583.45,
+  "alternates": [
+   {
+    "steno": "m-js",
+    "strokes": [
+     [
+      6,
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "bonne",
@@ -3810,7 +4228,19 @@
     22
    ]
   ],
-  "frequency": 577.6
+  "frequency": 577.6,
+  "alternates": [
+   {
+    "steno": "R-s",
+    "strokes": [
+     [
+      8,
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "ah",
@@ -3846,7 +4276,18 @@
     13
    ]
   ],
-  "frequency": 573.72
+  "frequency": 573.72,
+  "alternates": [
+   {
+    "steno": "p-",
+    "strokes": [
+     [
+      4
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "maison",
@@ -3868,7 +4309,18 @@
     13
    ]
   ],
-  "frequency": 570.3
+  "frequency": 570.3,
+  "alternates": [
+   {
+    "steno": "-m",
+    "strokes": [
+     [
+      25
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "bonjour",
@@ -3892,7 +4344,20 @@
     21
    ]
   ],
-  "frequency": 569.88
+  "frequency": 569.88,
+  "alternates": [
+   {
+    "steno": "aiR",
+    "strokes": [
+     [
+      12,
+      13,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "nuit",
@@ -3948,7 +4413,21 @@
     14
    ]
   ],
-  "frequency": 553.4
+  "frequency": 553.4,
+  "alternates": [
+   {
+    "steno": "ve#l",
+    "strokes": [
+     [
+      5,
+      14,
+      15,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "peur",
@@ -4098,7 +4577,21 @@
     11
    ]
   ],
-  "frequency": 537.44
+  "frequency": 537.44,
+  "alternates": [
+   {
+    "steno": "ma#m",
+    "strokes": [
+     [
+      6,
+      12,
+      15,
+      25
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "ouais",
@@ -4132,7 +4625,21 @@
     11
    ]
   ],
-  "frequency": 529.51
+  "frequency": 529.51,
+  "alternates": [
+   {
+    "steno": "a#js",
+    "strokes": [
+     [
+      12,
+      15,
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "nom",
@@ -4170,7 +4677,20 @@
     17
    ]
   ],
-  "frequency": 525.1
+  "frequency": 525.1,
+  "alternates": [
+   {
+    "steno": "R-js",
+    "strokes": [
+     [
+      8,
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "arrive",
@@ -4210,6 +4730,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R-js/-k",
+    "strokes": [
+     [
+      8,
+      16,
+      17
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R-jsk",
+    "strokes": [
+     [
+      8,
+      16,
+      17,
+      18
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -4234,7 +4780,23 @@
     23
    ]
   ],
-  "frequency": 525.1
+  "frequency": 525.1,
+  "alternates": [
+   {
+    "steno": "R-js/-l",
+    "strokes": [
+     [
+      8,
+      16,
+      17
+     ],
+     [
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "nos",
@@ -4431,7 +4993,20 @@
     13
    ]
   ],
-  "frequency": 500.21
+  "frequency": 500.21,
+  "alternates": [
+   {
+    "steno": "ail",
+    "strokes": [
+     [
+      12,
+      13,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "cet",
@@ -4488,7 +5063,19 @@
     12
    ]
   ],
-  "frequency": 492.56
+  "frequency": 492.56,
+  "alternates": [
+   {
+    "steno": "s-l",
+    "strokes": [
+     [
+      3,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "vite",
@@ -4611,7 +5198,19 @@
     13
    ]
   ],
-  "frequency": 483.95
+  "frequency": 483.95,
+  "alternates": [
+   {
+    "steno": "p-d",
+    "strokes": [
+     [
+      4,
+      19
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "fils",
@@ -4816,7 +5415,19 @@
     12
    ]
   ],
-  "frequency": 478.03
+  "frequency": 478.03,
+  "alternates": [
+   {
+    "steno": "s-R",
+    "strokes": [
+     [
+      3,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "air",
@@ -5426,7 +6037,20 @@
     13
    ]
   ],
-  "frequency": 424.28
+  "frequency": 424.28,
+  "alternates": [
+   {
+    "steno": "R-nl",
+    "strokes": [
+     [
+      8,
+      22,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "savoir",
@@ -5559,6 +6183,30 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-n/-d",
+    "strokes": [
+     [
+      2,
+      22
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "k-dn",
+    "strokes": [
+     [
+      2,
+      19,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -5624,6 +6272,19 @@
     "rule": 5
    },
    {
+    "steno": "k-n/-k",
+    "strokes": [
+     [
+      2,
+      22
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "mRwiekd",
     "strokes": [
      [
@@ -5638,6 +6299,17 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-kn",
+    "strokes": [
+     [
+      2,
+      18,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -6522,7 +7194,19 @@
     16
    ]
   ],
-  "frequency": 367.43
+  "frequency": 367.43,
+  "alternates": [
+   {
+    "steno": "v-j",
+    "strokes": [
+     [
+      5,
+      16
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "venir",
@@ -6544,7 +7228,21 @@
     21
    ]
   ],
-  "frequency": 367.13
+  "frequency": 367.13,
+  "alternates": [
+   {
+    "steno": "vi#R",
+    "strokes": [
+     [
+      5,
+      13,
+      15,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "pu",
@@ -6740,6 +7438,16 @@
     ],
     "kind": "affix",
     "rule": 14
+   },
+   {
+    "steno": "R-d",
+    "strokes": [
+     [
+      8,
+      19
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -6797,7 +7505,21 @@
     16
    ]
   ],
-  "frequency": 357.75
+  "frequency": 357.75,
+  "alternates": [
+   {
+    "steno": "*aij",
+    "strokes": [
+     [
+      10,
+      12,
+      13,
+      16
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "petite",
@@ -6818,7 +7540,19 @@
     20
    ]
   ],
-  "frequency": 355.66
+  "frequency": 355.66,
+  "alternates": [
+   {
+    "steno": "p-t",
+    "strokes": [
+     [
+      4,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "aurais",
@@ -6910,7 +7644,22 @@
     14
    ]
   ],
-  "frequency": 353.43
+  "frequency": 353.43,
+  "alternates": [
+   {
+    "steno": "pv*e#",
+    "strokes": [
+     [
+      4,
+      5,
+      10,
+      14,
+      15
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "vient",
@@ -6984,7 +7733,22 @@
     21
    ]
   ],
-  "frequency": 346.18
+  "frequency": 346.18,
+  "alternates": [
+   {
+    "steno": "t@aeR",
+    "strokes": [
+     [
+      7,
+      11,
+      12,
+      14,
+      21
+     ]
+    ],
+    "kind": "merged"
+   }
+  ]
  },
  {
   "ortho": "passer",
@@ -7543,7 +8307,21 @@
     11
    ]
   ],
-  "frequency": 312.62
+  "frequency": 312.62,
+  "alternates": [
+   {
+    "steno": "p*@d",
+    "strokes": [
+     [
+      4,
+      10,
+      11,
+      19
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "mois",
@@ -7824,7 +8602,19 @@
     14
    ]
   ],
-  "frequency": 304.03
+  "frequency": 304.03,
+  "alternates": [
+   {
+    "steno": "v-n",
+    "strokes": [
+     [
+      5,
+      22
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "part",
@@ -7984,7 +8774,20 @@
     13
    ]
   ],
-  "frequency": 293.63
+  "frequency": 293.63,
+  "alternates": [
+   {
+    "steno": "ks-j",
+    "strokes": [
+     [
+      2,
+      3,
+      16
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "fini",
@@ -8005,7 +8808,18 @@
     13
    ]
   ],
-  "frequency": 292.55
+  "frequency": 292.55,
+  "alternates": [
+   {
+    "steno": "-n",
+    "strokes": [
+     [
+      22
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "avons",
@@ -8077,7 +8891,19 @@
     11
    ]
   ],
-  "frequency": 290.36
+  "frequency": 290.36,
+  "alternates": [
+   {
+    "steno": "@l",
+    "strokes": [
+     [
+      11,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "gars",
@@ -8655,7 +9481,20 @@
     13
    ]
   ],
-  "frequency": 277.59
+  "frequency": 277.59,
+  "alternates": [
+   {
+    "steno": "v-js",
+    "strokes": [
+     [
+      5,
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "leur",
@@ -8767,7 +9606,19 @@
     17
    ]
   ],
-  "frequency": 274.31
+  "frequency": 274.31,
+  "alternates": [
+   {
+    "steno": "p-l",
+    "strokes": [
+     [
+      4,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "suite",
@@ -8843,6 +9694,18 @@
     ],
     "kind": "affix",
     "rule": 3
+   },
+   {
+    "steno": "*@sd",
+    "strokes": [
+     [
+      10,
+      11,
+      17,
+      19
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -9407,6 +10270,18 @@
     ],
     "kind": "affix",
     "rule": 3
+   },
+   {
+    "steno": "s*@j",
+    "strokes": [
+     [
+      3,
+      10,
+      11,
+      16
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -10131,7 +11006,20 @@
     13
    ]
   ],
-  "frequency": 244.7
+  "frequency": 244.7,
+  "alternates": [
+   {
+    "steno": "@an",
+    "strokes": [
+     [
+      11,
+      12,
+      22
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "train",
@@ -10266,7 +11154,20 @@
     17
    ]
   ],
-  "frequency": 242.75
+  "frequency": 242.75,
+  "alternates": [
+   {
+    "steno": "kpm-",
+    "strokes": [
+     [
+      2,
+      4,
+      6
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "sens",
@@ -10556,6 +11457,19 @@
     "rule": 11
    },
    {
+    "steno": "v-R/-d",
+    "strokes": [
+     [
+      5,
+      21
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "kvmRied",
     "strokes": [
      [
@@ -10570,6 +11484,17 @@
     ],
     "kind": "affix",
     "rule": 11
+   },
+   {
+    "steno": "v-dR",
+    "strokes": [
+     [
+      5,
+      19,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -10638,6 +11563,19 @@
     "rule": 11
    },
    {
+    "steno": "v-R/-k",
+    "strokes": [
+     [
+      5,
+      21
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "kvmRiekd",
     "strokes": [
      [
@@ -10653,6 +11591,17 @@
     ],
     "kind": "affix",
     "rule": 11
+   },
+   {
+    "steno": "v-kR",
+    "strokes": [
+     [
+      5,
+      18,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -11382,7 +12331,19 @@
     21
    ]
   ],
-  "frequency": 224.41
+  "frequency": 224.41,
+  "alternates": [
+   {
+    "steno": "R-R",
+    "strokes": [
+     [
+      8,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "hier",
@@ -11422,7 +12383,20 @@
     21
    ]
   ],
-  "frequency": 223.48
+  "frequency": 223.48,
+  "alternates": [
+   {
+    "steno": "k-tR",
+    "strokes": [
+     [
+      2,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "merde",
@@ -11858,7 +12832,20 @@
     13
    ]
   ],
-  "frequency": 212.6
+  "frequency": 212.6,
+  "alternates": [
+   {
+    "steno": "a#s",
+    "strokes": [
+     [
+      12,
+      15,
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "envie",
@@ -11915,7 +12902,20 @@
     14
    ]
   ],
-  "frequency": 210.4
+  "frequency": 210.4,
+  "alternates": [
+   {
+    "steno": "-jkt",
+    "strokes": [
+     [
+      16,
+      18,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "espère",
@@ -11981,6 +12981,17 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "s-jk",
+    "strokes": [
+     [
+      3,
+      16,
+      18
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -12052,7 +13063,19 @@
     14
    ]
   ],
-  "frequency": 208.85
+  "frequency": 208.85,
+  "alternates": [
+   {
+    "steno": "v-R",
+    "strokes": [
+     [
+      5,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "devant",
@@ -12124,6 +13147,16 @@
     ],
     "kind": "affix",
     "rule": 9
+   },
+   {
+    "steno": "s-#",
+    "strokes": [
+     [
+      3,
+      15
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -12798,6 +13831,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "mi#t/-s",
+    "strokes": [
+     [
+      6,
+      13,
+      15,
+      20
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "mi#st",
+    "strokes": [
+     [
+      6,
+      13,
+      15,
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -12825,7 +13886,20 @@
     21
    ]
   ],
-  "frequency": 197.34
+  "frequency": 197.34,
+  "alternates": [
+   {
+    "steno": "pmR-",
+    "strokes": [
+     [
+      4,
+      6,
+      8
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "étaient",
@@ -12867,6 +13941,22 @@
     ],
     "kind": "affix",
     "rule": 6
+   },
+   {
+    "steno": "*e#t/-st",
+    "strokes": [
+     [
+      10,
+      14,
+      15,
+      20
+     ],
+     [
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -13076,7 +14166,20 @@
     23
    ]
   ],
-  "frequency": 193.91
+  "frequency": 193.91,
+  "alternates": [
+   {
+    "steno": "p-js",
+    "strokes": [
+     [
+      4,
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "font",
@@ -13141,6 +14244,17 @@
     ],
     "kind": "affix",
     "rule": 8
+   },
+   {
+    "steno": "enl",
+    "strokes": [
+     [
+      14,
+      22,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -13612,7 +14726,21 @@
     19
    ]
   ],
-  "frequency": 186.9
+  "frequency": 186.9,
+  "alternates": [
+   {
+    "steno": "p@#s",
+    "strokes": [
+     [
+      4,
+      11,
+      15,
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "penses",
@@ -13632,7 +14760,22 @@
     23
    ]
   ],
-  "frequency": 186.9
+  "frequency": 186.9,
+  "alternates": [
+   {
+    "steno": "p@#sl",
+    "strokes": [
+     [
+      4,
+      11,
+      15,
+      17,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "point",
@@ -13861,7 +15004,20 @@
     14
    ]
   ],
-  "frequency": 184.96
+  "frequency": 184.96,
+  "alternates": [
+   {
+    "steno": "Rw-t",
+    "strokes": [
+     [
+      8,
+      9,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "tellement",
@@ -14337,7 +15493,22 @@
     21
    ]
   ],
-  "frequency": 177.4
+  "frequency": 177.4,
+  "alternates": [
+   {
+    "steno": "p*i#R",
+    "strokes": [
+     [
+      4,
+      10,
+      13,
+      15,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "parents",
@@ -14544,7 +15715,19 @@
     14
    ]
   ],
-  "frequency": 175.12
+  "frequency": 175.12,
+  "alternates": [
+   {
+    "steno": "p-n",
+    "strokes": [
+     [
+      4,
+      22
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "mot",
@@ -14768,7 +15951,20 @@
     14
    ]
   ],
-  "frequency": 173.82
+  "frequency": 173.82,
+  "alternates": [
+   {
+    "steno": "*ej",
+    "strokes": [
+     [
+      10,
+      14,
+      16
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "fort",
@@ -14822,7 +16018,19 @@
     12
    ]
   ],
-  "frequency": 170.7
+  "frequency": 170.7,
+  "alternates": [
+   {
+    "steno": "R*",
+    "strokes": [
+     [
+      8,
+      10
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "aimes",
@@ -14982,6 +16190,17 @@
     ],
     "kind": "affix",
     "rule": 9
+   },
+   {
+    "steno": "pt@",
+    "strokes": [
+     [
+      4,
+      7,
+      11
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -15223,7 +16442,21 @@
     13
    ]
   ],
-  "frequency": 164.85
+  "frequency": 164.85,
+  "alternates": [
+   {
+    "steno": "s*in",
+    "strokes": [
+     [
+      3,
+      10,
+      13,
+      22
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "entends",
@@ -15577,7 +16810,20 @@
     17
    ]
   ],
-  "frequency": 162.88
+  "frequency": 162.88,
+  "alternates": [
+   {
+    "steno": "k-js",
+    "strokes": [
+     [
+      2,
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "croyais",
@@ -15697,7 +16943,19 @@
     14
    ]
   ],
-  "frequency": 162.08
+  "frequency": 162.08,
+  "alternates": [
+   {
+    "steno": "m-R",
+    "strokes": [
+     [
+      6,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "cinq",
@@ -15895,6 +17153,17 @@
     ],
     "kind": "affix",
     "rule": 1
+   },
+   {
+    "steno": "@aj",
+    "strokes": [
+     [
+      11,
+      12,
+      16
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -15975,7 +17244,22 @@
     14
    ]
   ],
-  "frequency": 157.56
+  "frequency": 157.56,
+  "alternates": [
+   {
+    "steno": "k*ae#",
+    "strokes": [
+     [
+      2,
+      10,
+      12,
+      14,
+      15
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "jeu",
@@ -16015,7 +17299,20 @@
     14
    ]
   ],
-  "frequency": 156.68
+  "frequency": 156.68,
+  "alternates": [
+   {
+    "steno": "sv-R",
+    "strokes": [
+     [
+      3,
+      5,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "sors",
@@ -16103,7 +17400,20 @@
     17
    ]
   ],
-  "frequency": 156.0
+  "frequency": 156.0,
+  "alternates": [
+   {
+    "steno": "sv-s",
+    "strokes": [
+     [
+      3,
+      5,
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "heureux",
@@ -16151,7 +17461,21 @@
     22
    ]
   ],
-  "frequency": 155.68
+  "frequency": 155.68,
+  "alternates": [
+   {
+    "steno": "t*el",
+    "strokes": [
+     [
+      7,
+      10,
+      14,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "messieurs",
@@ -16174,7 +17498,19 @@
     14
    ]
   ],
-  "frequency": 155.66
+  "frequency": 155.66,
+  "alternates": [
+   {
+    "steno": "m-j",
+    "strokes": [
+     [
+      6,
+      16
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "soeur",
@@ -16212,7 +17548,20 @@
     21
    ]
   ],
-  "frequency": 154.83
+  "frequency": 154.83,
+  "alternates": [
+   {
+    "steno": "sp-R",
+    "strokes": [
+     [
+      3,
+      4,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "marche",
@@ -16333,7 +17682,21 @@
     14
    ]
   ],
-  "frequency": 154.09
+  "frequency": 154.09,
+  "alternates": [
+   {
+    "steno": "*iej",
+    "strokes": [
+     [
+      10,
+      13,
+      14,
+      16
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "facile",
@@ -16354,7 +17717,21 @@
     23
    ]
   ],
-  "frequency": 153.57
+  "frequency": 153.57,
+  "alternates": [
+   {
+    "steno": "*ail",
+    "strokes": [
+     [
+      10,
+      12,
+      13,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "lieu",
@@ -16761,7 +18138,20 @@
     13
    ]
   ],
-  "frequency": 151.04
+  "frequency": 151.04,
+  "alternates": [
+   {
+    "steno": "v*l",
+    "strokes": [
+     [
+      5,
+      10,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "quatre",
@@ -16978,7 +18368,20 @@
     16
    ]
   ],
-  "frequency": 149.22
+  "frequency": 149.22,
+  "alternates": [
+   {
+    "steno": "v*j",
+    "strokes": [
+     [
+      5,
+      10,
+      16
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "travaille",
@@ -17022,6 +18425,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "v*j/-k",
+    "strokes": [
+     [
+      5,
+      10,
+      16
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "v*jk",
+    "strokes": [
+     [
+      5,
+      10,
+      16,
+      18
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -17048,7 +18477,23 @@
     23
    ]
   ],
-  "frequency": 149.22
+  "frequency": 149.22,
+  "alternates": [
+   {
+    "steno": "v*j/-l",
+    "strokes": [
+     [
+      5,
+      10,
+      16
+     ],
+     [
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "payer",
@@ -17259,7 +18704,19 @@
     14
    ]
   ],
-  "frequency": 148.66
+  "frequency": 148.66,
+  "alternates": [
+   {
+    "steno": "R-t",
+    "strokes": [
+     [
+      8,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "an",
@@ -17292,7 +18749,20 @@
     12
    ]
   ],
-  "frequency": 148.34
+  "frequency": 148.34,
+  "alternates": [
+   {
+    "steno": "*iR",
+    "strokes": [
+     [
+      10,
+      13,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "travailler",
@@ -17342,6 +18812,40 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "v-j/Rwe/-R",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      8,
+      9,
+      14
+     ],
+     [
+      21
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "v-j/RweR",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      8,
+      9,
+      14,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -17426,7 +18930,20 @@
     14
    ]
   ],
-  "frequency": 146.12
+  "frequency": 146.12,
+  "alternates": [
+   {
+    "steno": "pm-j",
+    "strokes": [
+     [
+      4,
+      6,
+      16
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "ferai",
@@ -17541,7 +19058,21 @@
     20
    ]
   ],
-  "frequency": 144.83
+  "frequency": 144.83,
+  "alternates": [
+   {
+    "steno": "mi#t",
+    "strokes": [
+     [
+      6,
+      13,
+      15,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "exactement",
@@ -17854,7 +19385,20 @@
     13
    ]
   ],
-  "frequency": 142.97
+  "frequency": 142.97,
+  "alternates": [
+   {
+    "steno": "p-nl",
+    "strokes": [
+     [
+      4,
+      22,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "veulent",
@@ -17928,7 +19472,20 @@
     14
    ]
   ],
-  "frequency": 141.94
+  "frequency": 141.94,
+  "alternates": [
+   {
+    "steno": "p-tR",
+    "strokes": [
+     [
+      4,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "ouvre",
@@ -18447,7 +20004,19 @@
     14
    ]
   ],
-  "frequency": 138.57
+  "frequency": 138.57,
+  "alternates": [
+   {
+    "steno": "R-n",
+    "strokes": [
+     [
+      8,
+      22
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "drôle",
@@ -18768,7 +20337,21 @@
     11
    ]
   ],
-  "frequency": 135.54
+  "frequency": 135.54,
+  "alternates": [
+   {
+    "steno": "sv@#",
+    "strokes": [
+     [
+      3,
+      5,
+      11,
+      15
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "comprendre",
@@ -18855,6 +20438,18 @@
     ],
     "kind": "affix",
     "rule": 28
+   },
+   {
+    "steno": "si#l",
+    "strokes": [
+     [
+      3,
+      13,
+      15,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -19316,7 +20911,21 @@
     13
    ]
   ],
-  "frequency": 131.7
+  "frequency": 131.7,
+  "alternates": [
+   {
+    "steno": "sRi#",
+    "strokes": [
+     [
+      3,
+      8,
+      13,
+      15
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "président",
@@ -19364,7 +20973,20 @@
     8
    ]
   ],
-  "frequency": 131.47
+  "frequency": 131.47,
+  "alternates": [
+   {
+    "steno": "p-dR",
+    "strokes": [
+     [
+      4,
+      19,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "voix",
@@ -19635,6 +21257,17 @@
     ],
     "kind": "affix",
     "rule": 1
+   },
+   {
+    "steno": "Rw-R",
+    "strokes": [
+     [
+      8,
+      9,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -19806,7 +21439,19 @@
     21
    ]
   ],
-  "frequency": 126.78
+  "frequency": 126.78,
+  "alternates": [
+   {
+    "steno": "@n",
+    "strokes": [
+     [
+      11,
+      22
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "prix",
@@ -19846,7 +21491,21 @@
     23
    ]
   ],
-  "frequency": 126.08
+  "frequency": 126.08,
+  "alternates": [
+   {
+    "steno": "pi#l",
+    "strokes": [
+     [
+      4,
+      13,
+      15,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "retard",
@@ -19904,7 +21563,21 @@
     24
    ]
   ],
-  "frequency": 125.52
+  "frequency": 125.52,
+  "alternates": [
+   {
+    "steno": "v*aZ",
+    "strokes": [
+     [
+      5,
+      10,
+      12,
+      24
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "connaissez",
@@ -19950,6 +21623,20 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-n/se",
+    "strokes": [
+     [
+      2,
+      22
+     ],
+     [
+      3,
+      14
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -20394,7 +22081,20 @@
     14
    ]
   ],
-  "frequency": 122.47
+  "frequency": 122.47,
+  "alternates": [
+   {
+    "steno": "kp-t",
+    "strokes": [
+     [
+      2,
+      4,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "patron",
@@ -20482,6 +22182,16 @@
     ],
     "kind": "affix",
     "rule": 9
+   },
+   {
+    "steno": "s-j",
+    "strokes": [
+     [
+      3,
+      16
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -20966,6 +22676,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "aRl/-s",
+    "strokes": [
+     [
+      12,
+      21,
+      23
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "asRl",
+    "strokes": [
+     [
+      12,
+      17,
+      21,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -21047,7 +22783,20 @@
     23
    ]
   ],
-  "frequency": 119.61
+  "frequency": 119.61,
+  "alternates": [
+   {
+    "steno": "eRl",
+    "strokes": [
+     [
+      14,
+      21,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "plan",
@@ -21326,6 +23075,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "ks-j/-s",
+    "strokes": [
+     [
+      2,
+      3,
+      16
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "ks-js",
+    "strokes": [
+     [
+      2,
+      3,
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -21644,6 +23419,17 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "pvm-",
+    "strokes": [
+     [
+      4,
+      5,
+      6
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -21710,7 +23496,21 @@
     21
    ]
   ],
-  "frequency": 115.57
+  "frequency": 115.57,
+  "alternates": [
+   {
+    "steno": "Ra#R",
+    "strokes": [
+     [
+      8,
+      12,
+      15,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "bois",
@@ -22015,7 +23815,20 @@
     14
    ]
   ],
-  "frequency": 114.34
+  "frequency": 114.34,
+  "alternates": [
+   {
+    "steno": "pm-m",
+    "strokes": [
+     [
+      4,
+      6,
+      25
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "inquiète",
@@ -22356,6 +24169,28 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "p-/-s",
+    "strokes": [
+     [
+      4
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "p-s",
+    "strokes": [
+     [
+      4,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -22405,6 +24240,17 @@
     ],
     "kind": "affix",
     "rule": 16
+   },
+   {
+    "steno": "s-kt",
+    "strokes": [
+     [
+      3,
+      18,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -22505,7 +24351,20 @@
     24
    ]
   ],
-  "frequency": 112.19
+  "frequency": 112.19,
+  "alternates": [
+   {
+    "steno": "w-jZ",
+    "strokes": [
+     [
+      9,
+      16,
+      24
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "excuse",
@@ -22757,7 +24616,20 @@
     14
    ]
   ],
-  "frequency": 110.88
+  "frequency": 110.88,
+  "alternates": [
+   {
+    "steno": "kp-l",
+    "strokes": [
+     [
+      2,
+      4,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "pièce",
@@ -22916,6 +24788,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "kp-R/-d",
+    "strokes": [
+     [
+      2,
+      4,
+      21
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "kp-dR",
+    "strokes": [
+     [
+      2,
+      4,
+      19,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -22961,6 +24859,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "kp-R/-k",
+    "strokes": [
+     [
+      2,
+      4,
+      21
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "kp-kR",
+    "strokes": [
+     [
+      2,
+      4,
+      18,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -23483,7 +25407,19 @@
     11
    ]
   ],
-  "frequency": 108.69
+  "frequency": 108.69,
+  "alternates": [
+   {
+    "steno": "k-R",
+    "strokes": [
+     [
+      2,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "pieds",
@@ -23614,7 +25550,19 @@
     14
    ]
   ],
-  "frequency": 107.92
+  "frequency": 107.92,
+  "alternates": [
+   {
+    "steno": "s-Z",
+    "strokes": [
+     [
+      3,
+      24
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "hôtel",
@@ -23635,7 +25583,19 @@
     23
    ]
   ],
-  "frequency": 107.73
+  "frequency": 107.73,
+  "alternates": [
+   {
+    "steno": "t-l",
+    "strokes": [
+     [
+      7,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "tire",
@@ -23724,7 +25684,19 @@
     14
    ]
   ],
-  "frequency": 106.55
+  "frequency": 106.55,
+  "alternates": [
+   {
+    "steno": "t-j",
+    "strokes": [
+     [
+      7,
+      16
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "trucs",
@@ -23870,6 +25842,19 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R-s/-s",
+    "strokes": [
+     [
+      8,
+      17
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -24230,6 +26215,17 @@
     ],
     "kind": "affix",
     "rule": 2
+   },
+   {
+    "steno": "kp-m",
+    "strokes": [
+     [
+      2,
+      4,
+      25
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -24255,7 +26251,20 @@
     21
    ]
   ],
-  "frequency": 105.1
+  "frequency": 105.1,
+  "alternates": [
+   {
+    "steno": "R-dR",
+    "strokes": [
+     [
+      8,
+      19,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "calme",
@@ -24294,7 +26303,19 @@
     17
    ]
   ],
-  "frequency": 105.04
+  "frequency": 105.04,
+  "alternates": [
+   {
+    "steno": "s-s",
+    "strokes": [
+     [
+      3,
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "agit",
@@ -24740,7 +26761,21 @@
     14
    ]
   ],
-  "frequency": 104.35
+  "frequency": 104.35,
+  "alternates": [
+   {
+    "steno": "te#l",
+    "strokes": [
+     [
+      7,
+      14,
+      15,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "jure",
@@ -24950,7 +26985,19 @@
     14
    ]
   ],
-  "frequency": 103.42
+  "frequency": 103.42,
+  "alternates": [
+   {
+    "steno": "k-n",
+    "strokes": [
+     [
+      2,
+      22
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "tranquille",
@@ -24971,7 +27018,21 @@
     23
    ]
   ],
-  "frequency": 103.28
+  "frequency": 103.28,
+  "alternates": [
+   {
+    "steno": "R@i#",
+    "strokes": [
+     [
+      8,
+      11,
+      13,
+      15
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "honte",
@@ -25258,6 +27319,28 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "-Z/-j",
+    "strokes": [
+     [
+      24
+     ],
+     [
+      16
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "-jZ",
+    "strokes": [
+     [
+      16,
+      24
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -25306,6 +27389,18 @@
     ],
     "kind": "affix",
     "rule": 7
+   },
+   {
+    "steno": "s*aj",
+    "strokes": [
+     [
+      3,
+      10,
+      12,
+      16
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -25564,7 +27659,20 @@
     21
    ]
   ],
-  "frequency": 99.59
+  "frequency": 99.59,
+  "alternates": [
+   {
+    "steno": "mR-j",
+    "strokes": [
+     [
+      6,
+      8,
+      16
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "mer",
@@ -25603,7 +27711,19 @@
     14
    ]
   ],
-  "frequency": 99.49
+  "frequency": 99.49,
+  "alternates": [
+   {
+    "steno": "t-n",
+    "strokes": [
+     [
+      7,
+      22
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "rêve",
@@ -26159,6 +28279,20 @@
     "rule": 8
    },
    {
+    "steno": "enl/-j",
+    "strokes": [
+     [
+      14,
+      22,
+      23
+     ],
+     [
+      16
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "stwaek/mtej",
     "strokes": [
      [
@@ -26178,6 +28312,18 @@
     ],
     "kind": "affix",
     "rule": 8
+   },
+   {
+    "steno": "ejnl",
+    "strokes": [
+     [
+      14,
+      16,
+      22,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -26200,7 +28346,19 @@
     14
    ]
   ],
-  "frequency": 98.09
+  "frequency": 98.09,
+  "alternates": [
+   {
+    "steno": "-kd",
+    "strokes": [
+     [
+      18,
+      19
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "foutre",
@@ -26396,7 +28554,19 @@
     21
    ]
   ],
-  "frequency": 96.48
+  "frequency": 96.48,
+  "alternates": [
+   {
+    "steno": "-Rn",
+    "strokes": [
+     [
+      21,
+      22
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "compte",
@@ -26735,7 +28905,18 @@
     13
    ]
   ],
-  "frequency": 94.55
+  "frequency": 94.55,
+  "alternates": [
+   {
+    "steno": "-Z",
+    "strokes": [
+     [
+      24
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "soirée",
@@ -26868,7 +29049,19 @@
     14
    ]
   ],
-  "frequency": 93.97
+  "frequency": 93.97,
+  "alternates": [
+   {
+    "steno": "R-m",
+    "strokes": [
+     [
+      8,
+      25
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "fasse",
@@ -26888,7 +29081,20 @@
     23
    ]
   ],
-  "frequency": 93.83
+  "frequency": 93.83,
+  "alternates": [
+   {
+    "steno": "kp-s",
+    "strokes": [
+     [
+      2,
+      4,
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "garde",
@@ -26987,7 +29193,20 @@
     14
    ]
   ],
-  "frequency": 93.61
+  "frequency": 93.61,
+  "alternates": [
+   {
+    "steno": "pm-k",
+    "strokes": [
+     [
+      4,
+      6,
+      18
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "coin",
@@ -27065,6 +29284,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "@an/-j",
+    "strokes": [
+     [
+      11,
+      12,
+      22
+     ],
+     [
+      16
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "@ajn",
+    "strokes": [
+     [
+      11,
+      12,
+      16,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -27655,7 +29900,20 @@
     23
    ]
   ],
-  "frequency": 91.83
+  "frequency": 91.83,
+  "alternates": [
+   {
+    "steno": "p@l",
+    "strokes": [
+     [
+      4,
+      11,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "debout",
@@ -27828,7 +30086,20 @@
     23
    ]
   ],
-  "frequency": 90.37
+  "frequency": 90.37,
+  "alternates": [
+   {
+    "steno": "@as",
+    "strokes": [
+     [
+      11,
+      12,
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "préfère",
@@ -27851,7 +30122,21 @@
     21
    ]
   ],
-  "frequency": 90.34
+  "frequency": 90.34,
+  "alternates": [
+   {
+    "steno": "Re#R",
+    "strokes": [
+     [
+      8,
+      14,
+      15,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "préfère",
@@ -27897,6 +30182,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "Re#R/-k",
+    "strokes": [
+     [
+      8,
+      14,
+      15,
+      21
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "Re#kR",
+    "strokes": [
+     [
+      8,
+      14,
+      15,
+      18,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -27924,7 +30237,24 @@
     23
    ]
   ],
-  "frequency": 90.34
+  "frequency": 90.34,
+  "alternates": [
+   {
+    "steno": "Re#R/-l",
+    "strokes": [
+     [
+      8,
+      14,
+      15,
+      21
+     ],
+     [
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "groupe",
@@ -28210,6 +30540,18 @@
     ],
     "kind": "affix",
     "rule": 1
+   },
+   {
+    "steno": "va#k",
+    "strokes": [
+     [
+      5,
+      12,
+      15,
+      18
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -28339,7 +30681,20 @@
     23
    ]
   ],
-  "frequency": 89.07
+  "frequency": 89.07,
+  "alternates": [
+   {
+    "steno": "s-nl",
+    "strokes": [
+     [
+      3,
+      22,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "suppose",
@@ -28385,6 +30740,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "s-nl/-k",
+    "strokes": [
+     [
+      3,
+      22,
+      23
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "s-knl",
+    "strokes": [
+     [
+      3,
+      18,
+      22,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -28412,7 +30793,23 @@
     23
    ]
   ],
-  "frequency": 89.07
+  "frequency": 89.07,
+  "alternates": [
+   {
+    "steno": "s-nl/-l",
+    "strokes": [
+     [
+      3,
+      22,
+      23
+     ],
+     [
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "heureuse",
@@ -28478,6 +30875,18 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-tRn",
+    "strokes": [
+     [
+      2,
+      20,
+      21,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -28666,6 +31075,16 @@
     ],
     "kind": "affix",
     "rule": 7
+   },
+   {
+    "steno": "p-j",
+    "strokes": [
+     [
+      4,
+      16
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -28752,6 +31171,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "m*ij/-s",
+    "strokes": [
+     [
+      6,
+      10,
+      13,
+      16
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "m*ijs",
+    "strokes": [
+     [
+      6,
+      10,
+      13,
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -28790,7 +31237,21 @@
     14
    ]
   ],
-  "frequency": 87.79
+  "frequency": 87.79,
+  "alternates": [
+   {
+    "steno": "s*et",
+    "strokes": [
+     [
+      3,
+      10,
+      14,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "bouche",
@@ -28830,7 +31291,21 @@
     24
    ]
   ],
-  "frequency": 87.6
+  "frequency": 87.6,
+  "alternates": [
+   {
+    "steno": "vi#l",
+    "strokes": [
+     [
+      5,
+      13,
+      15,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "diable",
@@ -28960,6 +31435,17 @@
     ],
     "kind": "affix",
     "rule": 14
+   },
+   {
+    "steno": "*tR",
+    "strokes": [
+     [
+      10,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -29133,7 +31619,20 @@
     14
    ]
   ],
-  "frequency": 86.88
+  "frequency": 86.88,
+  "alternates": [
+   {
+    "steno": "kp-R",
+    "strokes": [
+     [
+      2,
+      4,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "photos",
@@ -29177,6 +31676,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "kp-t/-s",
+    "strokes": [
+     [
+      2,
+      4,
+      20
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "kp-st",
+    "strokes": [
+     [
+      2,
+      4,
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -29375,6 +31900,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "*iej/-R",
+    "strokes": [
+     [
+      10,
+      13,
+      14,
+      16
+     ],
+     [
+      21
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "*iejR",
+    "strokes": [
+     [
+      10,
+      13,
+      14,
+      16,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -29400,7 +31953,19 @@
     20
    ]
   ],
-  "frequency": 85.86
+  "frequency": 85.86,
+  "alternates": [
+   {
+    "steno": "s-t",
+    "strokes": [
+     [
+      3,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "existe",
@@ -29448,6 +32013,19 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "s-t/-k",
+    "strokes": [
+     [
+      3,
+      20
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -29476,7 +32054,22 @@
     23
    ]
   ],
-  "frequency": 85.86
+  "frequency": 85.86,
+  "alternates": [
+   {
+    "steno": "s-t/-l",
+    "strokes": [
+     [
+      3,
+      20
+     ],
+     [
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "faudra",
@@ -29710,7 +32303,19 @@
     14
    ]
   ],
-  "frequency": 85.44
+  "frequency": 85.44,
+  "alternates": [
+   {
+    "steno": "m-t",
+    "strokes": [
+     [
+      6,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "montre",
@@ -29808,7 +32413,21 @@
     23
    ]
   ],
-  "frequency": 85.42
+  "frequency": 85.42,
+  "alternates": [
+   {
+    "steno": "va#l",
+    "strokes": [
+     [
+      5,
+      12,
+      15,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "doivent",
@@ -30361,7 +32980,21 @@
     14
    ]
   ],
-  "frequency": 83.48
+  "frequency": 83.48,
+  "alternates": [
+   {
+    "steno": "*@dR",
+    "strokes": [
+     [
+      10,
+      11,
+      19,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "ressemble",
@@ -30713,7 +33346,20 @@
     21
    ]
   ],
-  "frequency": 82.83
+  "frequency": 82.83,
+  "alternates": [
+   {
+    "steno": "itR",
+    "strokes": [
+     [
+      13,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "rencontrer",
@@ -31360,6 +34006,19 @@
     "rule": 24
    },
    {
+    "steno": "s-R/-d",
+    "strokes": [
+     [
+      3,
+      21
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "smRad",
     "strokes": [
      [
@@ -31372,6 +34031,17 @@
     ],
     "kind": "affix",
     "rule": 24
+   },
+   {
+    "steno": "s-dR",
+    "strokes": [
+     [
+      3,
+      19,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -31671,7 +34341,21 @@
     14
    ]
   ],
-  "frequency": 80.99
+  "frequency": 80.99,
+  "alternates": [
+   {
+    "steno": "se#R",
+    "strokes": [
+     [
+      3,
+      14,
+      15,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "vin",
@@ -31998,7 +34682,20 @@
     11
    ]
   ],
-  "frequency": 80.05
+  "frequency": 80.05,
+  "alternates": [
+   {
+    "steno": "t@n",
+    "strokes": [
+     [
+      7,
+      11,
+      22
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "mission",
@@ -32561,7 +35258,22 @@
     14
    ]
   ],
-  "frequency": 79.01
+  "frequency": 79.01,
+  "alternates": [
+   {
+    "steno": "v*e#l",
+    "strokes": [
+     [
+      5,
+      10,
+      14,
+      15,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "bruit",
@@ -32865,7 +35577,20 @@
     21
    ]
   ],
-  "frequency": 78.34
+  "frequency": 78.34,
+  "alternates": [
+   {
+    "steno": "mR-R",
+    "strokes": [
+     [
+      6,
+      8,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "tient",
@@ -32925,7 +35650,20 @@
     20
    ]
   ],
-  "frequency": 78.06
+  "frequency": 78.06,
+  "alternates": [
+   {
+    "steno": "R-kt",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "raconte",
@@ -32967,6 +35705,31 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R-kt/-k",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R-kt",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -32992,7 +35755,23 @@
     23
    ]
   ],
-  "frequency": 78.06
+  "frequency": 78.06,
+  "alternates": [
+   {
+    "steno": "R-kt/-l",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ],
+     [
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "emmène",
@@ -33896,7 +36675,20 @@
     14
    ]
   ],
-  "frequency": 76.73
+  "frequency": 76.73,
+  "alternates": [
+   {
+    "steno": "@eZ",
+    "strokes": [
+     [
+      11,
+      14,
+      24
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "exact",
@@ -33920,7 +36712,21 @@
     20
    ]
   ],
-  "frequency": 76.66
+  "frequency": 76.66,
+  "alternates": [
+   {
+    "steno": "*akt",
+    "strokes": [
+     [
+      10,
+      12,
+      18,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "continue",
@@ -33966,6 +36772,17 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-tn",
+    "strokes": [
+     [
+      2,
+      20,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -34043,6 +36860,20 @@
     "rule": 5
    },
    {
+    "steno": "k-tn/-k",
+    "strokes": [
+     [
+      2,
+      20,
+      22
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "twid/mR@ik",
     "strokes": [
      [
@@ -34061,6 +36892,18 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-ktn",
+    "strokes": [
+     [
+      2,
+      18,
+      20,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -34114,6 +36957,20 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-tn/-l",
+    "strokes": [
+     [
+      2,
+      20,
+      22
+     ],
+     [
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -34137,7 +36994,20 @@
     23
    ]
   ],
-  "frequency": 76.56
+  "frequency": 76.56,
+  "alternates": [
+   {
+    "steno": "t-Rl",
+    "strokes": [
+     [
+      7,
+      21,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "dedans",
@@ -34317,7 +37187,21 @@
     11
    ]
   ],
-  "frequency": 76.38
+  "frequency": 76.38,
+  "alternates": [
+   {
+    "steno": "v@i#",
+    "strokes": [
+     [
+      5,
+      11,
+      13,
+      15
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "liberté",
@@ -34367,6 +37251,17 @@
     ],
     "kind": "affix",
     "rule": 16
+   },
+   {
+    "steno": "ijR",
+    "strokes": [
+     [
+      13,
+      16,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -34640,7 +37535,23 @@
     23
    ]
   ],
-  "frequency": 75.62
+  "frequency": 75.62,
+  "alternates": [
+   {
+    "steno": "Ri#Rnl",
+    "strokes": [
+     [
+      8,
+      13,
+      15,
+      21,
+      22,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "trou",
@@ -35336,7 +38247,21 @@
     14
    ]
   ],
-  "frequency": 73.82
+  "frequency": 73.82,
+  "alternates": [
+   {
+    "steno": "Re#t",
+    "strokes": [
+     [
+      8,
+      14,
+      15,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "but",
@@ -35475,6 +38400,20 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "mR-j/-j",
+    "strokes": [
+     [
+      6,
+      8,
+      16
+     ],
+     [
+      16
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -35515,7 +38454,23 @@
     21
    ]
   ],
-  "frequency": 73.55
+  "frequency": 73.55,
+  "alternates": [
+   {
+    "steno": "sv*i#R",
+    "strokes": [
+     [
+      3,
+      5,
+      10,
+      13,
+      15,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "sert",
@@ -35730,7 +38685,19 @@
     23
    ]
   ],
-  "frequency": 72.5
+  "frequency": 72.5,
+  "alternates": [
+   {
+    "steno": "R-l",
+    "strokes": [
+     [
+      8,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "avenir",
@@ -36040,7 +39007,21 @@
     14
    ]
   ],
-  "frequency": 71.31
+  "frequency": 71.31,
+  "alternates": [
+   {
+    "steno": "Ra#d",
+    "strokes": [
+     [
+      8,
+      12,
+      15,
+      19
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "bonnes",
@@ -36452,7 +39433,19 @@
     21
    ]
   ],
-  "frequency": 70.2
+  "frequency": 70.2,
+  "alternates": [
+   {
+    "steno": "t-R",
+    "strokes": [
+     [
+      7,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "danser",
@@ -36668,6 +39661,17 @@
     ],
     "kind": "affix",
     "rule": 2
+   },
+   {
+    "steno": "R@m",
+    "strokes": [
+     [
+      8,
+      11,
+      25
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -36930,6 +39934,19 @@
     ],
     "kind": "affix",
     "rule": 16
+   },
+   {
+    "steno": "s*e#t",
+    "strokes": [
+     [
+      3,
+      10,
+      14,
+      15,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -37077,6 +40094,18 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "kai#",
+    "strokes": [
+     [
+      2,
+      12,
+      13,
+      15
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -37126,6 +40155,17 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "kp-n",
+    "strokes": [
+     [
+      2,
+      4,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -37383,7 +40423,21 @@
     14
    ]
   ],
-  "frequency": 68.6
+  "frequency": 68.6,
+  "alternates": [
+   {
+    "steno": "mi#j",
+    "strokes": [
+     [
+      6,
+      13,
+      15,
+      16
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "beauté",
@@ -37560,6 +40614,36 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "v*e#l/-R",
+    "strokes": [
+     [
+      5,
+      10,
+      14,
+      15,
+      23
+     ],
+     [
+      21
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "v*e#Rl",
+    "strokes": [
+     [
+      5,
+      10,
+      14,
+      15,
+      21,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -37768,7 +40852,19 @@
     17
    ]
   ],
-  "frequency": 67.6
+  "frequency": 67.6,
+  "alternates": [
+   {
+    "steno": "ks-",
+    "strokes": [
+     [
+      2,
+      3
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "flic",
@@ -38139,7 +41235,21 @@
     21
    ]
   ],
-  "frequency": 66.98
+  "frequency": 66.98,
+  "alternates": [
+   {
+    "steno": "p@#R",
+    "strokes": [
+     [
+      4,
+      11,
+      15,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "laquelle",
@@ -38161,7 +41271,19 @@
     23
    ]
   ],
-  "frequency": 66.95
+  "frequency": 66.95,
+  "alternates": [
+   {
+    "steno": "k-l",
+    "strokes": [
+     [
+      2,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "tel",
@@ -38237,7 +41359,20 @@
     25
    ]
   ],
-  "frequency": 66.47
+  "frequency": 66.47,
+  "alternates": [
+   {
+    "steno": "kim",
+    "strokes": [
+     [
+      2,
+      13,
+      25
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "tombe",
@@ -38390,7 +41525,21 @@
     25
    ]
   ],
-  "frequency": 66.12
+  "frequency": 66.12,
+  "alternates": [
+   {
+    "steno": "si#m",
+    "strokes": [
+     [
+      3,
+      13,
+      15,
+      25
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "sept",
@@ -38585,7 +41734,21 @@
     21
    ]
   ],
-  "frequency": 65.78
+  "frequency": 65.78,
+  "alternates": [
+   {
+    "steno": "@#dR",
+    "strokes": [
+     [
+      11,
+      15,
+      19,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "avance",
@@ -38642,7 +41805,21 @@
     21
    ]
   ],
-  "frequency": 65.6
+  "frequency": 65.6,
+  "alternates": [
+   {
+    "steno": "R*aR",
+    "strokes": [
+     [
+      8,
+      10,
+      12,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "différent",
@@ -38687,6 +41864,18 @@
     ],
     "kind": "affix",
     "rule": 28
+   },
+   {
+    "steno": "i#dR",
+    "strokes": [
+     [
+      13,
+      15,
+      19,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -38711,7 +41900,22 @@
     21
    ]
   ],
-  "frequency": 65.28
+  "frequency": 65.28,
+  "alternates": [
+   {
+    "steno": "s@#dR",
+    "strokes": [
+     [
+      3,
+      11,
+      15,
+      19,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "tas",
@@ -38751,7 +41955,21 @@
     14
    ]
   ],
-  "frequency": 65.2
+  "frequency": 65.2,
+  "alternates": [
+   {
+    "steno": "s*tR",
+    "strokes": [
+     [
+      3,
+      10,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "capable",
@@ -38793,7 +42011,21 @@
     11
    ]
   ],
-  "frequency": 65.14
+  "frequency": 65.14,
+  "alternates": [
+   {
+    "steno": "p*et",
+    "strokes": [
+     [
+      4,
+      10,
+      14,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "asseoir",
@@ -38968,6 +42200,30 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "p-t/-s",
+    "strokes": [
+     [
+      4,
+      20
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "p-st",
+    "strokes": [
+     [
+      4,
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -39284,7 +42540,20 @@
     21
    ]
   ],
-  "frequency": 64.12
+  "frequency": 64.12,
+  "alternates": [
+   {
+    "steno": "p-kt",
+    "strokes": [
+     [
+      4,
+      18,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "inutile",
@@ -39424,7 +42693,19 @@
     21
    ]
   ],
-  "frequency": 63.87
+  "frequency": 63.87,
+  "alternates": [
+   {
+    "steno": "w-R",
+    "strokes": [
+     [
+      9,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "dérange",
@@ -40391,6 +43672,21 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "s@#R/-d",
+    "strokes": [
+     [
+      3,
+      11,
+      15,
+      21
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -40434,6 +43730,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "s@#R/-k",
+    "strokes": [
+     [
+      3,
+      11,
+      15,
+      21
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "s@#kR",
+    "strokes": [
+     [
+      3,
+      11,
+      15,
+      18,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -41061,6 +44385,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "p*et/-k",
+    "strokes": [
+     [
+      4,
+      10,
+      14,
+      20
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "p*ekt",
+    "strokes": [
+     [
+      4,
+      10,
+      14,
+      18,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -41087,7 +44439,24 @@
     23
    ]
   ],
-  "frequency": 61.59
+  "frequency": 61.59,
+  "alternates": [
+   {
+    "steno": "p*et/-l",
+    "strokes": [
+     [
+      4,
+      10,
+      14,
+      20
+     ],
+     [
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "retrouve",
@@ -41846,7 +45215,21 @@
     19
    ]
   ],
-  "frequency": 60.06
+  "frequency": 60.06,
+  "alternates": [
+   {
+    "steno": "s*id",
+    "strokes": [
+     [
+      3,
+      10,
+      13,
+      19
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "ennemi",
@@ -42112,7 +45495,21 @@
     21
    ]
   ],
-  "frequency": 59.8
+  "frequency": 59.8,
+  "alternates": [
+   {
+    "steno": "*atR",
+    "strokes": [
+     [
+      10,
+      12,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "c",
@@ -42361,7 +45758,20 @@
     23
    ]
   ],
-  "frequency": 59.66
+  "frequency": 59.66,
+  "alternates": [
+   {
+    "steno": "@ak",
+    "strokes": [
+     [
+      11,
+      12,
+      18
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "contact",
@@ -42596,7 +46006,21 @@
     24
    ]
   ],
-  "frequency": 59.43
+  "frequency": 59.43,
+  "alternates": [
+   {
+    "steno": "m*aZ",
+    "strokes": [
+     [
+      6,
+      10,
+      12,
+      24
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "taxi",
@@ -43355,7 +46779,24 @@
     23
    ]
   ],
-  "frequency": 58.12
+  "frequency": 58.12,
+  "alternates": [
+   {
+    "steno": "R-js/-sl",
+    "strokes": [
+     [
+      8,
+      16,
+      17
+     ],
+     [
+      17,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "arrivent",
@@ -43396,6 +46837,33 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R-js/-st",
+    "strokes": [
+     [
+      8,
+      16,
+      17
+     ],
+     [
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R-jst",
+    "strokes": [
+     [
+      8,
+      16,
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -43809,6 +47277,24 @@
     "rule": 13
    },
    {
+    "steno": "R-kt/te/-R",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ],
+     [
+      7,
+      14
+     ],
+     [
+      21
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "Ra/kaijtRn",
     "strokes": [
      [
@@ -43827,6 +47313,22 @@
     ],
     "kind": "affix",
     "rule": 13
+   },
+   {
+    "steno": "R-kt/teR",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ],
+     [
+      7,
+      14,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -44094,6 +47596,17 @@
     ],
     "kind": "affix",
     "rule": 28
+   },
+   {
+    "steno": "R-tR",
+    "strokes": [
+     [
+      8,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -44250,6 +47763,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "s*tR/-s",
+    "strokes": [
+     [
+      3,
+      10,
+      20,
+      21
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "s*stR",
+    "strokes": [
+     [
+      3,
+      10,
+      17,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -44810,7 +48351,20 @@
     21
    ]
   ],
-  "frequency": 56.83
+  "frequency": 56.83,
+  "alternates": [
+   {
+    "steno": "v*R",
+    "strokes": [
+     [
+      5,
+      10,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "signifie",
@@ -45502,6 +49056,25 @@
     "rule": 13
    },
    {
+    "steno": "p*et/te/-R",
+    "strokes": [
+     [
+      4,
+      10,
+      14,
+      20
+     ],
+     [
+      7,
+      14
+     ],
+     [
+      21
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "pRe/tw@jtRn",
     "strokes": [
      [
@@ -45521,6 +49094,23 @@
     ],
     "kind": "affix",
     "rule": 13
+   },
+   {
+    "steno": "p*et/teR",
+    "strokes": [
+     [
+      4,
+      10,
+      14,
+      20
+     ],
+     [
+      7,
+      14,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -46706,7 +50296,21 @@
     14
    ]
   ],
-  "frequency": 54.44
+  "frequency": 54.44,
+  "alternates": [
+   {
+    "steno": "mR*j",
+    "strokes": [
+     [
+      6,
+      8,
+      10,
+      16
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "avaient",
@@ -47719,6 +51323,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "@an/-s",
+    "strokes": [
+     [
+      11,
+      12,
+      22
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "@asn",
+    "strokes": [
+     [
+      11,
+      12,
+      17,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -47780,7 +51410,21 @@
     14
    ]
   ],
-  "frequency": 53.27
+  "frequency": 53.27,
+  "alternates": [
+   {
+    "steno": "wa#j",
+    "strokes": [
+     [
+      9,
+      12,
+      15,
+      16
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "métier",
@@ -48032,6 +51676,34 @@
     ],
     "kind": "affix",
     "rule": 1
+   },
+   {
+    "steno": "*ael/-j",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      23
+     ],
+     [
+      16
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "*aejl",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      16,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -51090,7 +54762,24 @@
     14
    ]
   ],
-  "frequency": 49.81
+  "frequency": 49.81,
+  "alternates": [
+   {
+    "steno": "v-j/Rwe",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      8,
+      9,
+      14
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "aimait",
@@ -51252,6 +54941,21 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "*iej/-d",
+    "strokes": [
+     [
+      10,
+      13,
+      14,
+      16
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -51307,6 +55011,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "*iej/-k",
+    "strokes": [
+     [
+      10,
+      13,
+      14,
+      16
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "*iejk",
+    "strokes": [
+     [
+      10,
+      13,
+      14,
+      16,
+      18
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -51409,7 +55141,19 @@
     12
    ]
   ],
-  "frequency": 49.36
+  "frequency": 49.36,
+  "alternates": [
+   {
+    "steno": "R-k",
+    "strokes": [
+     [
+      8,
+      18
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "belles",
@@ -53556,6 +57300,20 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-tn/e",
+    "strokes": [
+     [
+      2,
+      20,
+      22
+     ],
+     [
+      14
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -54148,7 +57906,20 @@
     18
    ]
   ],
-  "frequency": 46.72
+  "frequency": 46.72,
+  "alternates": [
+   {
+    "steno": "p-jk",
+    "strokes": [
+     [
+      4,
+      16,
+      18
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "pourrai",
@@ -54774,7 +58545,20 @@
     14
    ]
   ],
-  "frequency": 45.92
+  "frequency": 45.92,
+  "alternates": [
+   {
+    "steno": "R-sd",
+    "strokes": [
+     [
+      8,
+      17,
+      19
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "tirez",
@@ -57684,6 +61468,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R-nl/-s",
+    "strokes": [
+     [
+      8,
+      22,
+      23
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R-snl",
+    "strokes": [
+     [
+      8,
+      17,
+      22,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -57708,7 +61518,20 @@
     14
    ]
   ],
-  "frequency": 43.65
+  "frequency": 43.65,
+  "alternates": [
+   {
+    "steno": "s-tR",
+    "strokes": [
+     [
+      3,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "regardes",
@@ -58592,6 +62415,30 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R*/-d",
+    "strokes": [
+     [
+      8,
+      10
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R*d",
+    "strokes": [
+     [
+      8,
+      10,
+      19
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -60017,6 +63864,30 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R-n/-s",
+    "strokes": [
+     [
+      8,
+      22
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R-sn",
+    "strokes": [
+     [
+      8,
+      17,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -62285,6 +66156,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "kim/-s",
+    "strokes": [
+     [
+      2,
+      13,
+      25
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "kism",
+    "strokes": [
+     [
+      2,
+      13,
+      17,
+      25
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -66074,7 +69971,21 @@
     13
    ]
   ],
-  "frequency": 36.78
+  "frequency": 36.78,
+  "alternates": [
+   {
+    "steno": "m*ij",
+    "strokes": [
+     [
+      6,
+      10,
+      13,
+      16
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "montagne",
@@ -66356,7 +70267,22 @@
     13
    ]
   ],
-  "frequency": 36.58
+  "frequency": 36.58,
+  "alternates": [
+   {
+    "steno": "sv*i#",
+    "strokes": [
+     [
+      3,
+      5,
+      10,
+      13,
+      15
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "nombre",
@@ -68109,6 +72035,28 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "-m/-s",
+    "strokes": [
+     [
+      25
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "-sm",
+    "strokes": [
+     [
+      17,
+      25
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -68720,6 +72668,18 @@
     ],
     "kind": "affix",
     "rule": 9
+   },
+   {
+    "steno": "pt@t",
+    "strokes": [
+     [
+      4,
+      7,
+      11,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -68898,6 +72858,21 @@
     "rule": 5
    },
    {
+    "steno": "k*tn/-j",
+    "strokes": [
+     [
+      2,
+      10,
+      20,
+      22
+     ],
+     [
+      16
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "twid/mR*@ij",
     "strokes": [
      [
@@ -68917,6 +72892,19 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k*jtn",
+    "strokes": [
+     [
+      2,
+      10,
+      16,
+      20,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -69193,6 +73181,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R-kt/-d",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R-kdt",
+    "strokes": [
+     [
+      8,
+      18,
+      19,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -69219,7 +73233,24 @@
     23
    ]
   ],
-  "frequency": 34.95
+  "frequency": 34.95,
+  "alternates": [
+   {
+    "steno": "R-kt/-dl",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ],
+     [
+      19,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "français",
@@ -70721,6 +74752,24 @@
     "rule": 5
    },
    {
+    "steno": "k-n/sie/-d",
+    "strokes": [
+     [
+      2,
+      22
+     ],
+     [
+      3,
+      13,
+      14
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "mRwied/sied",
     "strokes": [
      [
@@ -70740,6 +74789,22 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-n/sied",
+    "strokes": [
+     [
+      2,
+      22
+     ],
+     [
+      3,
+      13,
+      14,
+      19
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -70820,6 +74885,24 @@
     "rule": 5
    },
    {
+    "steno": "k-n/sie/-k",
+    "strokes": [
+     [
+      2,
+      22
+     ],
+     [
+      3,
+      13,
+      14
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "mRwied/siek",
     "strokes": [
      [
@@ -70839,6 +74922,22 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-n/siek",
+    "strokes": [
+     [
+      2,
+      22
+     ],
+     [
+      3,
+      13,
+      14,
+      18
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -71474,6 +75573,21 @@
     ],
     "kind": "affix",
     "rule": 13
+   },
+   {
+    "steno": "R-kt/te",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ],
+     [
+      7,
+      14
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -73683,6 +77797,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "mR-j/-s",
+    "strokes": [
+     [
+      6,
+      8,
+      16
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "mR-js",
+    "strokes": [
+     [
+      6,
+      8,
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -75686,7 +79826,23 @@
     17
    ]
   ],
-  "frequency": 31.67
+  "frequency": 31.67,
+  "alternates": [
+   {
+    "steno": "sv-s/-s",
+    "strokes": [
+     [
+      3,
+      5,
+      17
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "envoyez",
@@ -79052,6 +83208,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "wa#j/-s",
+    "strokes": [
+     [
+      9,
+      12,
+      15,
+      16
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "wa#js",
+    "strokes": [
+     [
+      9,
+      12,
+      15,
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -79349,7 +83533,21 @@
     20
    ]
   ],
-  "frequency": 29.97
+  "frequency": 29.97,
+  "alternates": [
+   {
+    "steno": "-n/-t",
+    "strokes": [
+     [
+      22
+     ],
+     [
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "échange",
@@ -81849,6 +86047,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R-js/-d",
+    "strokes": [
+     [
+      8,
+      16,
+      17
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R-jsd",
+    "strokes": [
+     [
+      8,
+      16,
+      17,
+      19
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -81874,7 +86098,24 @@
     23
    ]
   ],
-  "frequency": 28.82
+  "frequency": 28.82,
+  "alternates": [
+   {
+    "steno": "R-js/-dl",
+    "strokes": [
+     [
+      8,
+      16,
+      17
+     ],
+     [
+      19,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "nul",
@@ -83250,7 +87491,22 @@
     20
    ]
   ],
-  "frequency": 28.12
+  "frequency": 28.12,
+  "alternates": [
+   {
+    "steno": "v@i#t",
+    "strokes": [
+     [
+      5,
+      11,
+      13,
+      15,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "posé",
@@ -84580,6 +88836,30 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "-kd/-s",
+    "strokes": [
+     [
+      18,
+      19
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "-skd",
+    "strokes": [
+     [
+      17,
+      18,
+      19
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -86237,6 +90517,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "*aij/-s",
+    "strokes": [
+     [
+      10,
+      12,
+      13,
+      16
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "*aijs",
+    "strokes": [
+     [
+      10,
+      12,
+      13,
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -86675,6 +90983,28 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "-n/-j",
+    "strokes": [
+     [
+      22
+     ],
+     [
+      16
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "-jn",
+    "strokes": [
+     [
+      16,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -88635,6 +92965,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "*ael/-s",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      23
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "*aesl",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      17,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -88833,6 +93191,30 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R-R/-s",
+    "strokes": [
+     [
+      8,
+      21
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R-sR",
+    "strokes": [
+     [
+      8,
+      17,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -89411,7 +93793,21 @@
     11
    ]
   ],
-  "frequency": 26.09
+  "frequency": 26.09,
+  "alternates": [
+   {
+    "steno": "s@#R",
+    "strokes": [
+     [
+      3,
+      11,
+      15,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "responsabilité",
@@ -89866,7 +94262,26 @@
     14
    ]
   ],
-  "frequency": 25.89
+  "frequency": 25.89,
+  "alternates": [
+   {
+    "steno": "s@#R/pve",
+    "strokes": [
+     [
+      3,
+      11,
+      15,
+      21
+     ],
+     [
+      4,
+      5,
+      14
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "oeufs",
@@ -92505,6 +96920,32 @@
     ],
     "kind": "affix",
     "rule": 20
+   },
+   {
+    "steno": "*iR/-d",
+    "strokes": [
+     [
+      10,
+      13,
+      21
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "*idR",
+    "strokes": [
+     [
+      10,
+      13,
+      19,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -93555,7 +97996,21 @@
     13
    ]
   ],
-  "frequency": 24.64
+  "frequency": 24.64,
+  "alternates": [
+   {
+    "steno": "Ri#R",
+    "strokes": [
+     [
+      8,
+      13,
+      15,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "surpris",
@@ -93580,7 +98035,24 @@
     19
    ]
   ],
-  "frequency": 24.64
+  "frequency": 24.64,
+  "alternates": [
+   {
+    "steno": "Ri#R/-d",
+    "strokes": [
+     [
+      8,
+      13,
+      15,
+      21
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "surpris",
@@ -93605,7 +98077,24 @@
     18
    ]
   ],
-  "frequency": 24.64
+  "frequency": 24.64,
+  "alternates": [
+   {
+    "steno": "Ri#R/-k",
+    "strokes": [
+     [
+      8,
+      13,
+      15,
+      21
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "sport",
@@ -93776,7 +98265,25 @@
     14
    ]
   ],
-  "frequency": 24.57
+  "frequency": 24.57,
+  "alternates": [
+   {
+    "steno": "v-j/Rwie",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      8,
+      9,
+      13,
+      14
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "pourrions",
@@ -93975,6 +98482,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "Ra#R/-s",
+    "strokes": [
+     [
+      8,
+      12,
+      15,
+      21
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "Ra#sR",
+    "strokes": [
+     [
+      8,
+      12,
+      15,
+      17,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -94155,6 +98690,19 @@
     ],
     "kind": "affix",
     "rule": 28
+   },
+   {
+    "steno": "i#dtR",
+    "strokes": [
+     [
+      13,
+      15,
+      19,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -95100,6 +99648,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "sRi#/-s",
+    "strokes": [
+     [
+      3,
+      8,
+      13,
+      15
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "sRi#s",
+    "strokes": [
+     [
+      3,
+      8,
+      13,
+      15,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -96893,6 +101469,20 @@
     "rule": 11
    },
    {
+    "steno": "v-R/-st",
+    "strokes": [
+     [
+      5,
+      21
+     ],
+     [
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "kvmRiesdt",
     "strokes": [
      [
@@ -96909,6 +101499,18 @@
     ],
     "kind": "affix",
     "rule": 11
+   },
+   {
+    "steno": "v-stR",
+    "strokes": [
+     [
+      5,
+      17,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -97159,7 +101761,23 @@
     23
    ]
   ],
-  "frequency": 23.64
+  "frequency": 23.64,
+  "alternates": [
+   {
+    "steno": "se#Rnl",
+    "strokes": [
+     [
+      3,
+      14,
+      15,
+      21,
+      22,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "née",
@@ -98946,6 +103564,22 @@
     "rule": 28
    },
    {
+    "steno": "i#dtR/-s",
+    "strokes": [
+     [
+      13,
+      15,
+      19,
+      20,
+      21
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "kspejd/R@st",
     "strokes": [
      [
@@ -98965,6 +103599,20 @@
     ],
     "kind": "affix",
     "rule": 28
+   },
+   {
+    "steno": "i#sdtR",
+    "strokes": [
+     [
+      13,
+      15,
+      17,
+      19,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -101318,6 +105966,25 @@
     "rule": 12
    },
    {
+    "steno": "R*aR/se/-R",
+    "strokes": [
+     [
+      8,
+      10,
+      12,
+      21
+     ],
+     [
+      3,
+      14
+     ],
+     [
+      21
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "tRa/viejsdR",
     "strokes": [
      [
@@ -101337,6 +106004,23 @@
     ],
     "kind": "affix",
     "rule": 12
+   },
+   {
+    "steno": "R*aR/seR",
+    "strokes": [
+     [
+      8,
+      10,
+      12,
+      21
+     ],
+     [
+      3,
+      14,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -101586,6 +106270,40 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "v-j/Rwe/-d",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      8,
+      9,
+      14
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "v-j/Rwed",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      8,
+      9,
+      14,
+      19
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -101637,6 +106355,40 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "v-j/Rwe/-k",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      8,
+      9,
+      14
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "v-j/Rwek",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      8,
+      9,
+      14,
+      18
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -101745,6 +106497,21 @@
     ],
     "kind": "affix",
     "rule": 28
+   },
+   {
+    "steno": "i#dR/-s",
+    "strokes": [
+     [
+      13,
+      15,
+      19,
+      21
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -103086,6 +107853,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "v*tR/-j",
+    "strokes": [
+     [
+      5,
+      10,
+      20,
+      21
+     ],
+     [
+      16
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "v*jtR",
+    "strokes": [
+     [
+      5,
+      10,
+      16,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -105084,6 +109879,28 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "-n/-d",
+    "strokes": [
+     [
+      22
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "-dn",
+    "strokes": [
+     [
+      19,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -105110,7 +109927,22 @@
     20
    ]
   ],
-  "frequency": 21.82
+  "frequency": 21.82,
+  "alternates": [
+   {
+    "steno": "-n/-dt",
+    "strokes": [
+     [
+      22
+     ],
+     [
+      19,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "finis",
@@ -105152,6 +109984,28 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "-n/-k",
+    "strokes": [
+     [
+      22
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "-kn",
+    "strokes": [
+     [
+      18,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -105178,7 +110032,22 @@
     20
    ]
   ],
-  "frequency": 21.82
+  "frequency": 21.82,
+  "alternates": [
+   {
+    "steno": "-n/-kt",
+    "strokes": [
+     [
+      22
+     ],
+     [
+      18,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "finis",
@@ -105220,6 +110089,28 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "-n/-s",
+    "strokes": [
+     [
+      22
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "-sn",
+    "strokes": [
+     [
+      17,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -106290,6 +111181,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "Re#R/-d",
+    "strokes": [
+     [
+      8,
+      14,
+      15,
+      21
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "Re#dR",
+    "strokes": [
+     [
+      8,
+      14,
+      15,
+      19,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -106318,7 +111237,25 @@
     23
    ]
   ],
-  "frequency": 21.62
+  "frequency": 21.62,
+  "alternates": [
+   {
+    "steno": "Re#R/-dl",
+    "strokes": [
+     [
+      8,
+      14,
+      15,
+      21
+     ],
+     [
+      19,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "voudra",
@@ -109293,7 +114230,22 @@
     21
    ]
   ],
-  "frequency": 21.03
+  "frequency": 21.03,
+  "alternates": [
+   {
+    "steno": "Ra#tR",
+    "strokes": [
+     [
+      8,
+      12,
+      15,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "rapporte",
@@ -109335,6 +114287,36 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "Ra#tR/-k",
+    "strokes": [
+     [
+      8,
+      12,
+      15,
+      20,
+      21
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "Ra#ktR",
+    "strokes": [
+     [
+      8,
+      12,
+      15,
+      18,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -109360,7 +114342,25 @@
     23
    ]
   ],
-  "frequency": 21.03
+  "frequency": 21.03,
+  "alternates": [
+   {
+    "steno": "Ra#tR/-l",
+    "strokes": [
+     [
+      8,
+      12,
+      15,
+      20,
+      21
+     ],
+     [
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "mesure",
@@ -109773,6 +114773,30 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "-Z/-js",
+    "strokes": [
+     [
+      24
+     ],
+     [
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "-jsZ",
+    "strokes": [
+     [
+      16,
+      17,
+      24
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -109948,6 +114972,30 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "v-j/-d",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "v-jd",
+    "strokes": [
+     [
+      5,
+      16,
+      19
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -109974,7 +115022,23 @@
     23
    ]
   ],
-  "frequency": 20.96
+  "frequency": 20.96,
+  "alternates": [
+   {
+    "steno": "v-j/-dl",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      19,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "studio",
@@ -110030,7 +115094,23 @@
     23
    ]
   ],
-  "frequency": 20.93
+  "frequency": 20.93,
+  "alternates": [
+   {
+    "steno": "mR*jnl",
+    "strokes": [
+     [
+      6,
+      8,
+      10,
+      16,
+      22,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "sel",
@@ -112970,6 +118050,30 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "t-R/-s",
+    "strokes": [
+     [
+      7,
+      21
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "t-sR",
+    "strokes": [
+     [
+      7,
+      17,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -112996,7 +118100,22 @@
     12
    ]
   ],
-  "frequency": 20.35
+  "frequency": 20.35,
+  "alternates": [
+   {
+    "steno": "-n/Ra",
+    "strokes": [
+     [
+      22
+     ],
+     [
+      8,
+      12
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "séparer",
@@ -113459,7 +118578,21 @@
     23
    ]
   ],
-  "frequency": 20.2
+  "frequency": 20.2,
+  "alternates": [
+   {
+    "steno": "kp-sd",
+    "strokes": [
+     [
+      2,
+      4,
+      17,
+      19
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "précis",
@@ -114509,6 +119642,21 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-n/sie",
+    "strokes": [
+     [
+      2,
+      22
+     ],
+     [
+      3,
+      13,
+      14
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -117506,6 +122654,40 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "w-j/vte/-R",
+    "strokes": [
+     [
+      9,
+      16
+     ],
+     [
+      5,
+      7,
+      14
+     ],
+     [
+      21
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "w-j/vteR",
+    "strokes": [
+     [
+      9,
+      16
+     ],
+     [
+      5,
+      7,
+      14,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -117822,6 +123004,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "pm-j/-s",
+    "strokes": [
+     [
+      4,
+      6,
+      16
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "pm-js",
+    "strokes": [
+     [
+      4,
+      6,
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -117876,7 +123084,21 @@
     20
    ]
   ],
-  "frequency": 19.32
+  "frequency": 19.32,
+  "alternates": [
+   {
+    "steno": "R-sdt",
+    "strokes": [
+     [
+      8,
+      17,
+      19,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "rayon",
@@ -122094,7 +127316,23 @@
     23
    ]
   ],
-  "frequency": 18.51
+  "frequency": 18.51,
+  "alternates": [
+   {
+    "steno": "v-j/-sl",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      17,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "travaillent",
@@ -122138,6 +127376,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "v-j/-st",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "v-jst",
+    "strokes": [
+     [
+      5,
+      16,
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -123209,6 +128473,21 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-sn/-sl",
+    "strokes": [
+     [
+      2,
+      17,
+      22
+     ],
+     [
+      17,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -123277,6 +128556,21 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-sn/-st",
+    "strokes": [
+     [
+      2,
+      17,
+      22
+     ],
+     [
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
    },
    {
     "steno": "mRwiesdt",
@@ -123651,6 +128945,30 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "t-j/-s",
+    "strokes": [
+     [
+      7,
+      16
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "t-js",
+    "strokes": [
+     [
+      7,
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -124860,7 +130178,27 @@
     13
    ]
   ],
-  "frequency": 18.05
+  "frequency": 18.05,
+  "alternates": [
+   {
+    "steno": "s@#R/pv@i",
+    "strokes": [
+     [
+      3,
+      11,
+      15,
+      21
+     ],
+     [
+      4,
+      5,
+      11,
+      13
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "terminer",
@@ -125501,6 +130839,20 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "a#s/-s",
+    "strokes": [
+     [
+      12,
+      15,
+      17
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -125745,6 +131097,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "*ej/-s",
+    "strokes": [
+     [
+      10,
+      14,
+      16
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "*ejs",
+    "strokes": [
+     [
+      10,
+      14,
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -129047,7 +134425,25 @@
     14
    ]
   ],
-  "frequency": 17.34
+  "frequency": 17.34,
+  "alternates": [
+   {
+    "steno": "R*aR/se",
+    "strokes": [
+     [
+      8,
+      10,
+      12,
+      21
+     ],
+     [
+      3,
+      14
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "bonté",
@@ -129466,7 +134862,21 @@
     14
    ]
   ],
-  "frequency": 17.21
+  "frequency": 17.21,
+  "alternates": [
+   {
+    "steno": "*ael",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "trompes",
@@ -129942,6 +135352,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "v@i#/-s",
+    "strokes": [
+     [
+      5,
+      11,
+      13,
+      15
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "v@i#s",
+    "strokes": [
+     [
+      5,
+      11,
+      13,
+      15,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -130722,7 +136160,22 @@
     21
    ]
   ],
-  "frequency": 17.04
+  "frequency": 17.04,
+  "alternates": [
+   {
+    "steno": "*aedR",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      19,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "accorde",
@@ -130779,6 +136232,36 @@
     ],
     "kind": "affix",
     "rule": 1
+   },
+   {
+    "steno": "*aedR/-k",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      19,
+      21
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "*aekdR",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      18,
+      19,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -130821,6 +136304,22 @@
     ],
     "kind": "affix",
     "rule": 1
+   },
+   {
+    "steno": "*aedR/-l",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      19,
+      21
+     ],
+     [
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -130997,6 +136496,24 @@
     "rule": 13
    },
    {
+    "steno": "R-kt/te/-d",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ],
+     [
+      7,
+      14
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "Ra/kaijdtn",
     "strokes": [
      [
@@ -131015,6 +136532,22 @@
     ],
     "kind": "affix",
     "rule": 13
+   },
+   {
+    "steno": "R-kt/ted",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ],
+     [
+      7,
+      14,
+      19
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -131088,6 +136621,24 @@
     "rule": 13
    },
    {
+    "steno": "R-kt/te/-k",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ],
+     [
+      7,
+      14
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "Ra/kaijktn",
     "strokes": [
      [
@@ -131106,6 +136657,22 @@
     ],
     "kind": "affix",
     "rule": 13
+   },
+   {
+    "steno": "R-kt/tek",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ],
+     [
+      7,
+      14,
+      18
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -133193,7 +138760,21 @@
     21
    ]
   ],
-  "frequency": 16.67
+  "frequency": 16.67,
+  "alternates": [
+   {
+    "steno": "v*tR",
+    "strokes": [
+     [
+      5,
+      10,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "sauvage",
@@ -134242,6 +139823,20 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "p-jk/-j",
+    "strokes": [
+     [
+      4,
+      16,
+      18
+     ],
+     [
+      16
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -135150,6 +140745,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R@i#/-s",
+    "strokes": [
+     [
+      8,
+      11,
+      13,
+      15
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R@i#s",
+    "strokes": [
+     [
+      8,
+      11,
+      13,
+      15,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -139667,6 +145290,21 @@
     "rule": 1
    },
    {
+    "steno": "va#k/-s",
+    "strokes": [
+     [
+      5,
+      12,
+      15,
+      18
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "kvaek/kas",
     "strokes": [
      [
@@ -139684,6 +145322,19 @@
     ],
     "kind": "affix",
     "rule": 1
+   },
+   {
+    "steno": "va#sk",
+    "strokes": [
+     [
+      5,
+      12,
+      15,
+      17,
+      18
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -140066,6 +145717,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "v*aZ/-s",
+    "strokes": [
+     [
+      5,
+      10,
+      12,
+      24
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "v*asZ",
+    "strokes": [
+     [
+      5,
+      10,
+      12,
+      17,
+      24
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -142846,6 +148525,21 @@
     "rule": 28
    },
    {
+    "steno": "si#l/-s",
+    "strokes": [
+     [
+      3,
+      13,
+      15,
+      23
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "sijsdl",
     "strokes": [
      [
@@ -142859,6 +148553,19 @@
     ],
     "kind": "affix",
     "rule": 28
+   },
+   {
+    "steno": "si#sl",
+    "strokes": [
+     [
+      3,
+      13,
+      15,
+      17,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -144095,6 +149802,21 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "mR-j/-js",
+    "strokes": [
+     [
+      6,
+      8,
+      16
+     ],
+     [
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -153421,6 +159143,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "pmR-/-s",
+    "strokes": [
+     [
+      4,
+      6,
+      8
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "pmR-s",
+    "strokes": [
+     [
+      4,
+      6,
+      8,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -156203,7 +161951,20 @@
     21
    ]
   ],
-  "frequency": 13.89
+  "frequency": 13.89,
+  "alternates": [
+   {
+    "steno": "aRl",
+    "strokes": [
+     [
+      12,
+      21,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "pensons",
@@ -157416,6 +163177,21 @@
     "rule": 9
    },
    {
+    "steno": "pt@t/-s",
+    "strokes": [
+     [
+      4,
+      7,
+      11,
+      20
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "ptRweR/t@st",
     "strokes": [
      [
@@ -157435,6 +163211,19 @@
     ],
     "kind": "affix",
     "rule": 9
+   },
+   {
+    "steno": "pt@st",
+    "strokes": [
+     [
+      4,
+      7,
+      11,
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -157524,7 +163313,21 @@
     23
    ]
   ],
-  "frequency": 13.79
+  "frequency": 13.79,
+  "alternates": [
+   {
+    "steno": "@asd",
+    "strokes": [
+     [
+      11,
+      12,
+      17,
+      19
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "laissera",
@@ -158233,6 +164036,22 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-n/sRwe",
+    "strokes": [
+     [
+      2,
+      22
+     ],
+     [
+      3,
+      8,
+      9,
+      14
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -158749,6 +164568,42 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "v-j/Rwie/-d",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      8,
+      9,
+      13,
+      14
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "v-j/Rwied",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      8,
+      9,
+      13,
+      14,
+      19
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -158802,6 +164657,42 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "v-j/Rwie/-k",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      8,
+      9,
+      13,
+      14
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "v-j/Rwiek",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      8,
+      9,
+      13,
+      14,
+      18
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -159147,7 +165038,23 @@
     23
    ]
   ],
-  "frequency": 13.61
+  "frequency": 13.61,
+  "alternates": [
+   {
+    "steno": "*@dRnl",
+    "strokes": [
+     [
+      10,
+      11,
+      19,
+      21,
+      22,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "événement",
@@ -159912,7 +165819,22 @@
     21
    ]
   ],
-  "frequency": 13.53
+  "frequency": 13.53,
+  "alternates": [
+   {
+    "steno": "R*asR",
+    "strokes": [
+     [
+      8,
+      10,
+      12,
+      17,
+      21
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "traverse",
@@ -159958,6 +165880,36 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R*asR/-k",
+    "strokes": [
+     [
+      8,
+      10,
+      12,
+      17,
+      21
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R*askR",
+    "strokes": [
+     [
+      8,
+      10,
+      12,
+      17,
+      18,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -159985,7 +165937,25 @@
     23
    ]
   ],
-  "frequency": 13.53
+  "frequency": 13.53,
+  "alternates": [
+   {
+    "steno": "R*asR/-l",
+    "strokes": [
+     [
+      8,
+      10,
+      12,
+      17,
+      21
+     ],
+     [
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "arrache",
@@ -163826,6 +169796,18 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "w-/-s",
+    "strokes": [
+     [
+      9
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -170599,6 +176581,22 @@
     ],
     "kind": "affix",
     "rule": 13
+   },
+   {
+    "steno": "p*et/te",
+    "strokes": [
+     [
+      4,
+      10,
+      14,
+      20
+     ],
+     [
+      7,
+      14
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -171481,6 +177479,19 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "s-Z/-s",
+    "strokes": [
+     [
+      3,
+      24
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -174000,7 +180011,26 @@
     12
    ]
   ],
-  "frequency": 12.2
+  "frequency": 12.2,
+  "alternates": [
+   {
+    "steno": "sv*i#/Ra",
+    "strokes": [
+     [
+      3,
+      5,
+      10,
+      13,
+      15
+     ],
+     [
+      8,
+      12
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "efficace",
@@ -174961,6 +180991,25 @@
     "rule": 13
    },
    {
+    "steno": "Ra#R/te/-R",
+    "strokes": [
+     [
+      8,
+      12,
+      15,
+      21
+     ],
+     [
+      7,
+      14
+     ],
+     [
+      21
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "Ra/pejtRn",
     "strokes": [
      [
@@ -174978,6 +181027,23 @@
     ],
     "kind": "affix",
     "rule": 13
+   },
+   {
+    "steno": "Ra#R/teR",
+    "strokes": [
+     [
+      8,
+      12,
+      15,
+      21
+     ],
+     [
+      7,
+      14,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -175662,7 +181728,25 @@
     14
    ]
   ],
-  "frequency": 12.07
+  "frequency": 12.07,
+  "alternates": [
+   {
+    "steno": "s-nl/twe",
+    "strokes": [
+     [
+      3,
+      22,
+      23
+     ],
+     [
+      7,
+      9,
+      14
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "honnêtement",
@@ -179994,6 +186078,21 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-n/sai",
+    "strokes": [
+     [
+      2,
+      22
+     ],
+     [
+      3,
+      12,
+      13
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -181181,6 +187280,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "s*id/-s",
+    "strokes": [
+     [
+      3,
+      10,
+      13,
+      19
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "s*isd",
+    "strokes": [
+     [
+      3,
+      10,
+      13,
+      17,
+      19
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -181953,6 +188080,20 @@
     "rule": 5
    },
    {
+    "steno": "k-tn/-d",
+    "strokes": [
+     [
+      2,
+      20,
+      22
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "twid/mR@id",
     "strokes": [
      [
@@ -181971,6 +188112,18 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-dtn",
+    "strokes": [
+     [
+      2,
+      19,
+      20,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -182026,6 +188179,21 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-tn/-dl",
+    "strokes": [
+     [
+      2,
+      20,
+      22
+     ],
+     [
+      19,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -182174,6 +188342,20 @@
     ],
     "kind": "affix",
     "rule": 9
+   },
+   {
+    "steno": "pt@/-s",
+    "strokes": [
+     [
+      4,
+      7,
+      11
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -184255,7 +190437,22 @@
     17
    ]
   ],
-  "frequency": 11.47
+  "frequency": 11.47,
+  "alternates": [
+   {
+    "steno": "s-s/-s",
+    "strokes": [
+     [
+      3,
+      17
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "moquer",
@@ -185798,6 +191995,30 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "m-R/-s",
+    "strokes": [
+     [
+      6,
+      21
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "m-sR",
+    "strokes": [
+     [
+      6,
+      17,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -190593,6 +196814,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "t-Rl/-s",
+    "strokes": [
+     [
+      7,
+      21,
+      23
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "t-sRl",
+    "strokes": [
+     [
+      7,
+      17,
+      21,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -192170,6 +198417,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "w-jZ/-s",
+    "strokes": [
+     [
+      9,
+      16,
+      24
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "w-jsZ",
+    "strokes": [
+     [
+      9,
+      16,
+      17,
+      24
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -192191,7 +198464,20 @@
     14
    ]
   ],
-  "frequency": 10.97
+  "frequency": 10.97,
+  "alternates": [
+   {
+    "steno": "R*m",
+    "strokes": [
+     [
+      8,
+      10,
+      25
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "formule",
@@ -193731,6 +200017,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "pm-m/-s",
+    "strokes": [
+     [
+      4,
+      6,
+      25
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "pm-sm",
+    "strokes": [
+     [
+      4,
+      6,
+      17,
+      25
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -194251,6 +200563,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "kp-R/-st",
+    "strokes": [
+     [
+      2,
+      4,
+      21
+     ],
+     [
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "kp-stR",
+    "strokes": [
+     [
+      2,
+      4,
+      17,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -194352,6 +200692,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "si#m/-s",
+    "strokes": [
+     [
+      3,
+      13,
+      15,
+      25
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "si#sm",
+    "strokes": [
+     [
+      3,
+      13,
+      15,
+      17,
+      25
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -194857,6 +201225,20 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-sn/-l",
+    "strokes": [
+     [
+      2,
+      17,
+      22
+     ],
+     [
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -195399,7 +201781,23 @@
     23
    ]
   ],
-  "frequency": 10.74
+  "frequency": 10.74,
+  "alternates": [
+   {
+    "steno": "s-t/-sl",
+    "strokes": [
+     [
+      3,
+      20
+     ],
+     [
+      17,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "existent",
@@ -195427,7 +201825,23 @@
     20
    ]
   ],
-  "frequency": 10.74
+  "frequency": 10.74,
+  "alternates": [
+   {
+    "steno": "s-t/-st",
+    "strokes": [
+     [
+      3,
+      20
+     ],
+     [
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "gai",
@@ -198002,6 +204416,26 @@
     "rule": 1
    },
    {
+    "steno": "*aeR/pve/-R",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      21
+     ],
+     [
+      4,
+      5,
+      14
+     ],
+     [
+      21
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "kekR/pveR",
     "strokes": [
      [
@@ -198019,6 +204453,24 @@
     ],
     "kind": "affix",
     "rule": 1
+   },
+   {
+    "steno": "*aeR/pveR",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      21
+     ],
+     [
+      4,
+      5,
+      14,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -200276,6 +206728,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "sv-R/-s",
+    "strokes": [
+     [
+      3,
+      5,
+      21
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "sv-sR",
+    "strokes": [
+     [
+      3,
+      5,
+      17,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -203305,6 +209783,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "eRl/-j",
+    "strokes": [
+     [
+      14,
+      21,
+      23
+     ],
+     [
+      16
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "ejRl",
+    "strokes": [
+     [
+      14,
+      16,
+      21,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -205811,6 +212315,36 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "v*e#l/-j",
+    "strokes": [
+     [
+      5,
+      10,
+      14,
+      15,
+      23
+     ],
+     [
+      16
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "v*e#jl",
+    "strokes": [
+     [
+      5,
+      10,
+      14,
+      15,
+      16,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -206003,6 +212537,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "@#dR/-s",
+    "strokes": [
+     [
+      11,
+      15,
+      19,
+      21
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "@#sdR",
+    "strokes": [
+     [
+      11,
+      15,
+      17,
+      19,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -207219,6 +213781,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R-sdt/-j",
+    "strokes": [
+     [
+      8,
+      17,
+      19,
+      20
+     ],
+     [
+      16
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R-jsdt",
+    "strokes": [
+     [
+      8,
+      16,
+      17,
+      19,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -207372,6 +213962,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "w-jZ/-k",
+    "strokes": [
+     [
+      9,
+      16,
+      24
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "w-jkZ",
+    "strokes": [
+     [
+      9,
+      16,
+      18,
+      24
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -207398,7 +214014,23 @@
     23
    ]
   ],
-  "frequency": 10.01
+  "frequency": 10.01,
+  "alternates": [
+   {
+    "steno": "w-jZ/-l",
+    "strokes": [
+     [
+      9,
+      16,
+      24
+     ],
+     [
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "allure",
@@ -207840,6 +214472,38 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "Ri#Rnl/-j",
+    "strokes": [
+     [
+      8,
+      13,
+      15,
+      21,
+      22,
+      23
+     ],
+     [
+      16
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "Ri#jRnl",
+    "strokes": [
+     [
+      8,
+      13,
+      15,
+      16,
+      21,
+      22,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -208904,6 +215568,19 @@
     ],
     "kind": "affix",
     "rule": 1
+   },
+   {
+    "steno": "*ae#l",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      15,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -211487,6 +218164,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "k-tR/-s",
+    "strokes": [
+     [
+      2,
+      20,
+      21
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "k-stR",
+    "strokes": [
+     [
+      2,
+      17,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -213775,7 +220478,24 @@
     14
    ]
   ],
-  "frequency": 9.58
+  "frequency": 9.58,
+  "alternates": [
+   {
+    "steno": "s-t/tie",
+    "strokes": [
+     [
+      3,
+      20
+     ],
+     [
+      7,
+      13,
+      14
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "interrogatoire",
@@ -215369,6 +222089,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "t*el/-k",
+    "strokes": [
+     [
+      7,
+      10,
+      14,
+      23
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "t*ekl",
+    "strokes": [
+     [
+      7,
+      10,
+      14,
+      18,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -215399,7 +222147,24 @@
     23
    ]
   ],
-  "frequency": 9.44
+  "frequency": 9.44,
+  "alternates": [
+   {
+    "steno": "t*el/-l",
+    "strokes": [
+     [
+      7,
+      10,
+      14,
+      23
+     ],
+     [
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "effrayer",
@@ -216464,6 +223229,18 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "-Z/-s",
+    "strokes": [
+     [
+      24
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -216978,7 +223755,22 @@
     23
    ]
   ],
-  "frequency": 9.34
+  "frequency": 9.34,
+  "alternates": [
+   {
+    "steno": "-sn/-l",
+    "strokes": [
+     [
+      17,
+      22
+     ],
+     [
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "inspire",
@@ -224472,6 +231264,36 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "p*i#R/-s",
+    "strokes": [
+     [
+      4,
+      10,
+      13,
+      15,
+      21
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "p*i#sR",
+    "strokes": [
+     [
+      4,
+      10,
+      13,
+      15,
+      17,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -227613,6 +234435,21 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "*iej/-j",
+    "strokes": [
+     [
+      10,
+      13,
+      14,
+      16
+     ],
+     [
+      16
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -231075,6 +237912,23 @@
     "rule": 13
    },
    {
+    "steno": "s-t/te/-R",
+    "strokes": [
+     [
+      3,
+      20
+     ],
+     [
+      7,
+      14
+     ],
+     [
+      21
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "iekdnl/ijstRn",
     "strokes": [
      [
@@ -231096,6 +237950,21 @@
     ],
     "kind": "affix",
     "rule": 13
+   },
+   {
+    "steno": "s-t/teR",
+    "strokes": [
+     [
+      3,
+      20
+     ],
+     [
+      7,
+      14,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -231581,6 +238450,22 @@
     ],
     "kind": "affix",
     "rule": 16
+   },
+   {
+    "steno": "Ra#R/te",
+    "strokes": [
+     [
+      8,
+      12,
+      15,
+      21
+     ],
+     [
+      7,
+      14
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -232887,7 +239772,23 @@
     23
    ]
   ],
-  "frequency": 8.49
+  "frequency": 8.49,
+  "alternates": [
+   {
+    "steno": "-sn/-sl",
+    "strokes": [
+     [
+      17,
+      22
+     ],
+     [
+      17,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "finissent",
@@ -232932,6 +239833,31 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "-sn/-st",
+    "strokes": [
+     [
+      17,
+      22
+     ],
+     [
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "-stn",
+    "strokes": [
+     [
+      17,
+      20,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -239725,6 +246651,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "vi#l/-s",
+    "strokes": [
+     [
+      5,
+      13,
+      15,
+      23
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "vi#sl",
+    "strokes": [
+     [
+      5,
+      13,
+      15,
+      17,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -248486,7 +255440,23 @@
     13
    ]
   ],
-  "frequency": 7.82
+  "frequency": 7.82,
+  "alternates": [
+   {
+    "steno": "-n/sai",
+    "strokes": [
+     [
+      22
+     ],
+     [
+      3,
+      12,
+      13
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "amours",
@@ -249990,6 +256960,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R*m/-j",
+    "strokes": [
+     [
+      8,
+      10,
+      25
+     ],
+     [
+      16
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R*jm",
+    "strokes": [
+     [
+      8,
+      10,
+      16,
+      25
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -253932,6 +260928,21 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-tn/-sl",
+    "strokes": [
+     [
+      2,
+      20,
+      22
+     ],
+     [
+      17,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -254012,6 +261023,21 @@
     "rule": 5
    },
    {
+    "steno": "k-tn/-st",
+    "strokes": [
+     [
+      2,
+      20,
+      22
+     ],
+     [
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "twid/mR@ist",
     "strokes": [
      [
@@ -254031,6 +261057,18 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-stn",
+    "strokes": [
+     [
+      2,
+      17,
+      20,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -254378,6 +261416,21 @@
     "rule": 7
    },
    {
+    "steno": "s*aj/-s",
+    "strokes": [
+     [
+      3,
+      10,
+      12,
+      16
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "si/t@ajsdt",
     "strokes": [
      [
@@ -254396,6 +261449,19 @@
     ],
     "kind": "affix",
     "rule": 7
+   },
+   {
+    "steno": "s*ajs",
+    "strokes": [
+     [
+      3,
+      10,
+      12,
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -255458,6 +262524,19 @@
     ],
     "kind": "affix",
     "rule": 1
+   },
+   {
+    "steno": "va#kt",
+    "strokes": [
+     [
+      5,
+      12,
+      15,
+      18,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -255962,6 +263041,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "*akt/-j",
+    "strokes": [
+     [
+      10,
+      12,
+      18,
+      20
+     ],
+     [
+      16
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "*ajkt",
+    "strokes": [
+     [
+      10,
+      12,
+      16,
+      18,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -258270,6 +265377,20 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "p-js/-s",
+    "strokes": [
+     [
+      4,
+      16,
+      17
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -260702,6 +267823,20 @@
     ],
     "kind": "affix",
     "rule": 13
+   },
+   {
+    "steno": "s-t/te",
+    "strokes": [
+     [
+      3,
+      20
+     ],
+     [
+      7,
+      14
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -262774,6 +269909,36 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "-n/Ra/-d",
+    "strokes": [
+     [
+      22
+     ],
+     [
+      8,
+      12
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "-n/Rad",
+    "strokes": [
+     [
+      22
+     ],
+     [
+      8,
+      12,
+      19
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -263871,6 +271036,38 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "Ri#Rnl/-s",
+    "strokes": [
+     [
+      8,
+      13,
+      15,
+      21,
+      22,
+      23
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "Ri#sRnl",
+    "strokes": [
+     [
+      8,
+      13,
+      15,
+      17,
+      21,
+      22,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -267172,6 +274369,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "v*R/-s",
+    "strokes": [
+     [
+      5,
+      10,
+      21
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "v*sR",
+    "strokes": [
+     [
+      5,
+      10,
+      17,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -271143,6 +278366,30 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R-m/-s",
+    "strokes": [
+     [
+      8,
+      25
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R-sm",
+    "strokes": [
+     [
+      8,
+      17,
+      25
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -275637,6 +282884,19 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "t-l/-s",
+    "strokes": [
+     [
+      7,
+      23
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -276643,6 +283903,21 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "Ra#d/-s",
+    "strokes": [
+     [
+      8,
+      12,
+      15,
+      19
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -278257,6 +285532,23 @@
     ],
     "kind": "affix",
     "rule": 1
+   },
+   {
+    "steno": "*aeR/pve",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      21
+     ],
+     [
+      4,
+      5,
+      14
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -281239,6 +288531,50 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R-kt/t@a/Re/-t",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ],
+     [
+      7,
+      11,
+      12
+     ],
+     [
+      8,
+      14
+     ],
+     [
+      20
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R-kt/t@a/Ret",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ],
+     [
+      7,
+      11,
+      12
+     ],
+     [
+      8,
+      14,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -284490,6 +291826,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R*m/-s",
+    "strokes": [
+     [
+      8,
+      10,
+      25
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R*sm",
+    "strokes": [
+     [
+      8,
+      10,
+      17,
+      25
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -290063,6 +297425,20 @@
     "rule": 2
    },
    {
+    "steno": "R@m/-s",
+    "strokes": [
+     [
+      8,
+      11,
+      25
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "a/pajstRm",
     "strokes": [
      [
@@ -290080,6 +297456,18 @@
     ],
     "kind": "affix",
     "rule": 2
+   },
+   {
+    "steno": "R@sm",
+    "strokes": [
+     [
+      8,
+      11,
+      17,
+      25
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -296156,7 +303544,27 @@
     14
    ]
   ],
-  "frequency": 6.4
+  "frequency": 6.4,
+  "alternates": [
+   {
+    "steno": "sv*i#/Rie",
+    "strokes": [
+     [
+      3,
+      5,
+      10,
+      13,
+      15
+     ],
+     [
+      8,
+      13,
+      14
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "écrirai",
@@ -305028,6 +312436,21 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "m*aZ/-s",
+    "strokes": [
+     [
+      6,
+      10,
+      12,
+      24
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -309120,6 +316543,22 @@
     "rule": 16
    },
    {
+    "steno": "s*e#t/-s",
+    "strokes": [
+     [
+      3,
+      10,
+      14,
+      15,
+      20
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "sae/sRwesdtm",
     "strokes": [
      [
@@ -309140,6 +316579,20 @@
     ],
     "kind": "affix",
     "rule": 16
+   },
+   {
+    "steno": "s*e#st",
+    "strokes": [
+     [
+      3,
+      10,
+      14,
+      15,
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -310291,6 +317744,21 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-tn/Ra",
+    "strokes": [
+     [
+      2,
+      20,
+      22
+     ],
+     [
+      8,
+      12
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -312006,6 +319474,26 @@
     "rule": 1
    },
    {
+    "steno": "*aeR/pve/-d",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      21
+     ],
+     [
+      4,
+      5,
+      14
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "kekR/pved",
     "strokes": [
      [
@@ -312023,6 +319511,24 @@
     ],
     "kind": "affix",
     "rule": 1
+   },
+   {
+    "steno": "*aeR/pved",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      21
+     ],
+     [
+      4,
+      5,
+      14,
+      19
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -312095,6 +319601,26 @@
     "rule": 1
    },
    {
+    "steno": "*aeR/pve/-k",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      21
+     ],
+     [
+      4,
+      5,
+      14
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "kekR/pvek",
     "strokes": [
      [
@@ -312112,6 +319638,24 @@
     ],
     "kind": "affix",
     "rule": 1
+   },
+   {
+    "steno": "*aeR/pvek",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      21
+     ],
+     [
+      4,
+      5,
+      14,
+      18
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -312230,6 +319774,36 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "k*ae#/-s",
+    "strokes": [
+     [
+      2,
+      10,
+      12,
+      14,
+      15
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "k*ae#s",
+    "strokes": [
+     [
+      2,
+      10,
+      12,
+      14,
+      15,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -312955,7 +320529,25 @@
     13
    ]
   ],
-  "frequency": 5.99
+  "frequency": 5.99,
+  "alternates": [
+   {
+    "steno": "v-j/Rwai",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      8,
+      9,
+      12,
+      13
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "accompli",
@@ -315178,7 +322770,25 @@
     23
    ]
   ],
-  "frequency": 5.94
+  "frequency": 5.94,
+  "alternates": [
+   {
+    "steno": "Re#R/-sl",
+    "strokes": [
+     [
+      8,
+      14,
+      15,
+      21
+     ],
+     [
+      17,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "préfèrent",
@@ -315226,6 +322836,36 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "Re#R/-st",
+    "strokes": [
+     [
+      8,
+      14,
+      15,
+      21
+     ],
+     [
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "Re#stR",
+    "strokes": [
+     [
+      8,
+      14,
+      15,
+      17,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -317328,7 +324968,24 @@
     14
    ]
   ],
-  "frequency": 5.9
+  "frequency": 5.9,
+  "alternates": [
+   {
+    "steno": "w-j/vte",
+    "strokes": [
+     [
+      9,
+      16
+     ],
+     [
+      5,
+      7,
+      14
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "clairs",
@@ -319882,6 +327539,38 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "se#Rnl/-s",
+    "strokes": [
+     [
+      3,
+      14,
+      15,
+      21,
+      22,
+      23
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "se#sRnl",
+    "strokes": [
+     [
+      3,
+      14,
+      15,
+      17,
+      21,
+      22,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -320641,6 +328330,25 @@
     "rule": 13
    },
    {
+    "steno": "p*et/te/-d",
+    "strokes": [
+     [
+      4,
+      10,
+      14,
+      20
+     ],
+     [
+      7,
+      14
+     ],
+     [
+      19
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "pRe/tw@jdtn",
     "strokes": [
      [
@@ -320660,6 +328368,23 @@
     ],
     "kind": "affix",
     "rule": 13
+   },
+   {
+    "steno": "p*et/ted",
+    "strokes": [
+     [
+      4,
+      10,
+      14,
+      20
+     ],
+     [
+      7,
+      14,
+      19
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -320736,6 +328461,25 @@
     "rule": 13
    },
    {
+    "steno": "p*et/te/-k",
+    "strokes": [
+     [
+      4,
+      10,
+      14,
+      20
+     ],
+     [
+      7,
+      14
+     ],
+     [
+      18
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "pRe/tw@jktn",
     "strokes": [
      [
@@ -320755,6 +328499,23 @@
     ],
     "kind": "affix",
     "rule": 13
+   },
+   {
+    "steno": "p*et/tek",
+    "strokes": [
+     [
+      4,
+      10,
+      14,
+      20
+     ],
+     [
+      7,
+      14,
+      18
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -321750,7 +329511,22 @@
     14
    ]
   ],
-  "frequency": 5.8
+  "frequency": 5.8,
+  "alternates": [
+   {
+    "steno": "-n/se",
+    "strokes": [
+     [
+      22
+     ],
+     [
+      3,
+      14
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "reviendrais",
@@ -322836,6 +330612,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "*ail/-s",
+    "strokes": [
+     [
+      10,
+      12,
+      13,
+      23
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "*aisl",
+    "strokes": [
+     [
+      10,
+      12,
+      13,
+      17,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -327749,6 +335553,36 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "-n/Re/-t",
+    "strokes": [
+     [
+      22
+     ],
+     [
+      8,
+      14
+     ],
+     [
+      20
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "-n/Ret",
+    "strokes": [
+     [
+      22
+     ],
+     [
+      8,
+      14,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -331709,6 +339543,33 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "p-jk/-js",
+    "strokes": [
+     [
+      4,
+      16,
+      18
+     ],
+     [
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "p-jsk",
+    "strokes": [
+     [
+      4,
+      16,
+      17,
+      18
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -334931,6 +342792,34 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "@an/-js",
+    "strokes": [
+     [
+      11,
+      12,
+      22
+     ],
+     [
+      16,
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "@ajsn",
+    "strokes": [
+     [
+      11,
+      12,
+      16,
+      17,
+      22
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -336255,6 +344144,19 @@
     "rule": 6
    },
    {
+    "steno": "t*/-s",
+    "strokes": [
+     [
+      7,
+      10
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "kvtes",
     "strokes": [
      [
@@ -336267,6 +344169,17 @@
     ],
     "kind": "affix",
     "rule": 6
+   },
+   {
+    "steno": "t*s",
+    "strokes": [
+     [
+      7,
+      10,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -339923,7 +347836,24 @@
     11
    ]
   ],
-  "frequency": 5.39
+  "frequency": 5.39,
+  "alternates": [
+   {
+    "steno": "v-j/Rw@",
+    "strokes": [
+     [
+      5,
+      16
+     ],
+     [
+      8,
+      9,
+      11
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "vide",
@@ -340397,7 +348327,24 @@
     17
    ]
   ],
-  "frequency": 5.38
+  "frequency": 5.38,
+  "alternates": [
+   {
+    "steno": "p*et/-s",
+    "strokes": [
+     [
+      4,
+      10,
+      14,
+      20
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "représenter",
@@ -347647,6 +355594,25 @@
     "rule": 5
    },
    {
+    "steno": "k-n/sie/-st",
+    "strokes": [
+     [
+      2,
+      22
+     ],
+     [
+      3,
+      13,
+      14
+     ],
+     [
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "mRwied/siest",
     "strokes": [
      [
@@ -347667,6 +355633,23 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "k-n/siest",
+    "strokes": [
+     [
+      2,
+      22
+     ],
+     [
+      3,
+      13,
+      14,
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -352497,6 +360480,21 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "t*el/-s",
+    "strokes": [
+     [
+      7,
+      10,
+      14,
+      23
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -358371,6 +366369,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "p-kt/-s",
+    "strokes": [
+     [
+      4,
+      18,
+      20
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "p-skt",
+    "strokes": [
+     [
+      4,
+      17,
+      18,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -360587,6 +368611,36 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "v*e#l/-s",
+    "strokes": [
+     [
+      5,
+      10,
+      14,
+      15,
+      23
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "v*e#sl",
+    "strokes": [
+     [
+      5,
+      10,
+      14,
+      15,
+      17,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -362486,6 +370540,21 @@
     "rule": 5
    },
    {
+    "steno": "kai#/-s",
+    "strokes": [
+     [
+      2,
+      12,
+      13,
+      15
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "pwad/wis",
     "strokes": [
      [
@@ -362502,6 +370571,19 @@
     ],
     "kind": "affix",
     "rule": 5
+   },
+   {
+    "steno": "kai#s",
+    "strokes": [
+     [
+      2,
+      12,
+      13,
+      15,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -364322,6 +372404,20 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "p-jk/-s",
+    "strokes": [
+     [
+      4,
+      16,
+      18
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -370302,6 +378398,38 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "*@dRnl/-s",
+    "strokes": [
+     [
+      10,
+      11,
+      19,
+      21,
+      22,
+      23
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "*@sdRnl",
+    "strokes": [
+     [
+      10,
+      11,
+      17,
+      19,
+      21,
+      22,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -381009,6 +389137,25 @@
     "rule": 13
    },
    {
+    "steno": "p*et/te/-s",
+    "strokes": [
+     [
+      4,
+      10,
+      14,
+      20
+     ],
+     [
+      7,
+      14
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
     "steno": "pRe/tw@jstn",
     "strokes": [
      [
@@ -381028,6 +389175,23 @@
     ],
     "kind": "affix",
     "rule": 13
+   },
+   {
+    "steno": "p*et/tes",
+    "strokes": [
+     [
+      4,
+      10,
+      14,
+      20
+     ],
+     [
+      7,
+      14,
+      17
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -382746,7 +390910,26 @@
     13
    ]
   ],
-  "frequency": 4.54
+  "frequency": 4.54,
+  "alternates": [
+   {
+    "steno": "s-nl/twai",
+    "strokes": [
+     [
+      3,
+      22,
+      23
+     ],
+     [
+      7,
+      9,
+      12,
+      13
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "violents",
@@ -383493,6 +391676,32 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "p-nl/-s",
+    "strokes": [
+     [
+      4,
+      22,
+      23
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "p-snl",
+    "strokes": [
+     [
+      4,
+      17,
+      22,
+      23
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -383709,7 +391918,23 @@
     14
    ]
   ],
-  "frequency": 4.51
+  "frequency": 4.51,
+  "alternates": [
+   {
+    "steno": "-n/Rie",
+    "strokes": [
+     [
+      22
+     ],
+     [
+      8,
+      13,
+      14
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "forment",
@@ -384450,7 +392675,25 @@
     14
    ]
   ],
-  "frequency": 4.5
+  "frequency": 4.5,
+  "alternates": [
+   {
+    "steno": "R-kt/tie",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ],
+     [
+      7,
+      13,
+      14
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "secouer",
@@ -390413,6 +398656,34 @@
     ],
     "kind": "affix",
     "rule": 1
+   },
+   {
+    "steno": "*aeR/-s",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      21
+     ],
+     [
+      17
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "*aesR",
+    "strokes": [
+     [
+      10,
+      12,
+      14,
+      17,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -397688,7 +405959,24 @@
     23
    ]
   ],
-  "frequency": 4.32
+  "frequency": 4.32,
+  "alternates": [
+   {
+    "steno": "R-kt/-sl",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ],
+     [
+      17,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "racontent",
@@ -397731,6 +406019,33 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "R-kt/-st",
+    "strokes": [
+     [
+      8,
+      18,
+      20
+     ],
+     [
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "R-skt",
+    "strokes": [
+     [
+      8,
+      17,
+      18,
+      20
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },
@@ -398705,7 +407020,27 @@
     13
    ]
   ],
-  "frequency": 4.3
+  "frequency": 4.3,
+  "alternates": [
+   {
+    "steno": "s@#R/pvai",
+    "strokes": [
+     [
+      3,
+      11,
+      15,
+      21
+     ],
+     [
+      4,
+      5,
+      12,
+      13
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "dimanches",
@@ -400746,7 +409081,26 @@
     23
    ]
   ],
-  "frequency": 4.27
+  "frequency": 4.27,
+  "alternates": [
+   {
+    "steno": "s@#dR/-sl",
+    "strokes": [
+     [
+      3,
+      11,
+      15,
+      19,
+      21
+     ],
+     [
+      17,
+      23
+     ]
+    ],
+    "kind": "brief"
+   }
+  ]
  },
  {
   "ortho": "descendent",
@@ -400792,6 +409146,38 @@
      ]
     ],
     "kind": "merged"
+   },
+   {
+    "steno": "s@#dR/-st",
+    "strokes": [
+     [
+      3,
+      11,
+      15,
+      19,
+      21
+     ],
+     [
+      17,
+      20
+     ]
+    ],
+    "kind": "brief"
+   },
+   {
+    "steno": "s@#sdtR",
+    "strokes": [
+     [
+      3,
+      11,
+      15,
+      17,
+      19,
+      20,
+      21
+     ]
+    ],
+    "kind": "brief"
    }
   ]
  },

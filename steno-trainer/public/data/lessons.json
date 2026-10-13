@@ -25900,19 +25900,34 @@
      "after": "",
      "label": "infinitif",
      "phonology": "t8e",
-     "steno": "t@ae/-R",
+     "steno": "t@aeR",
      "strokes": [
       [
        7,
        11,
        12,
-       14
-      ],
-      [
+       14,
        21
       ]
      ],
-     "frequency": 346.18
+     "frequency": 346.18,
+     "alternates": [
+      {
+       "steno": "t@ae/-R",
+       "strokes": [
+        [
+         7,
+         11,
+         12,
+         14
+        ],
+        [
+         21
+        ]
+       ],
+       "kind": "long"
+      }
+     ]
     },
     {
      "ortho": "passer",
