@@ -233,6 +233,7 @@ def compare(args: argparse.Namespace) -> dict[str, Any]:
     return {
         "lemmaCoverage": lemmaReport,
         "verbCoverageByTense": tenseReport,
+        "coverageByFeature": tc.coverageByFeature(lexicon, sten, plu),
         "inputs": {
             "stenalgoDict": {"path": args.stenalgo_dict, "md5": md5(args.stenalgo_dict)},
             "stenalgoLayout": {"path": args.stenalgo_layout, "md5": md5(args.stenalgo_layout)},
@@ -269,7 +270,10 @@ def num(x: float | None) -> str:
 
 TENSE_LABELS = {"ind:pre": "indicatif présent", "ind:imp": "indicatif imparfait", "ind:pas": "passé simple", "ind:fut": "futur simple",
                 "cnd:pre": "conditionnel présent", "sub:pre": "subjonctif présent", "sub:imp": "subjonctif imparfait",
-                "imp:pre": "impératif présent", "inf": "infinitif", "par:pre": "participe présent", "par:pas": "participe passé"}
+                "imp:pre": "impératif présent", "inf": "infinitif", "par:pre": "participe présent", "par:pas": "participe passé",
+                "pers:1": "1st person", "pers:2": "2nd person", "pers:3": "3rd person",
+                "nbr:s": "person singular", "nbr:p": "person plural",
+                "genre:m": "masculine", "genre:f": "feminine", "nombre:s": "singular", "nombre:p": "plural"}
 NOT_APPLICABLE, NO_SHORT_FORM = "—", "n/a"
 Row = tuple[str, str, str]  # label, Stenalgo cell, Pluvier cell
 
@@ -319,12 +323,30 @@ def renderMarkdown(report: dict[str, Any]) -> str:
             "a lemma with some form covered can be typed in at least one form, one with all forms covered in every form.",
             [lemmaRow("some form covered", "someFormCovered"), lemmaRow("all forms covered", "allFormsCovered")])
 
-    tenses = report["verbCoverageByTense"]
-    section("3. Verb coverage by mood and tense",
-            "Each row counts the verb and auxiliary forms of Lexique383 in that tense (a form shared by several tenses counts in each), "
-            "as covered forms (share of their frequency); Stenalgo leaves out the subjonctif imparfait by design.",
-            [(f"{TENSE_LABELS.get(key, key)} ({t['forms']} forms)", withShare(t["stenalgo"]["forms"], t["stenalgo"]["frequencyShare"]),
-              withShare(t["pluvier"]["forms"], t["pluvier"]["frequencyShare"])) for key, t in tenses.items()])
+    features = report["coverageByFeature"]
+
+    def shareRange(count: int, split: float | None, whole: float | None) -> str:
+        if split is None or whole is None or pct(split) == pct(whole):
+            return withShare(count, whole)
+        low, high = sorted((split, whole))
+        return f"{count} ({100 * low:.2f}–{pct(high)})"
+
+    def featureCells(cell: dict[str, Any]) -> str:
+        return (f"{shareRange(cell['forms'], cell['frequencyShareSplit'], cell['frequencyShare'])} | "
+                f"{shareRange(cell['colliding'], cell['collidingFrequencyShareSplit'], cell['collidingFrequencyShare'])}")
+
+    lines += ["## 3. Coverage by mood, tense, person, gender and number", "",
+              "The features the conjugation, gender and number keypress groups of Stenalgo discriminate. A row counts the "
+              "Lexique383 forms carrying the feature: the tense and person rows the verb and auxiliary forms, the gender and "
+              "number rows the forms of every category. A form weighs only the frequency of its Lexique rows carrying the "
+              "feature; a verb row with several readings (`mange`: 1st and 3rd person, indicatif and subjonctif) gives a "
+              "range, from an equal part of its frequency in each reading to the whole in each. Covered and colliding forms "
+              "(whose outline also belongs to another word) are given with their share of the row's frequency; Stenalgo "
+              "leaves out the subjonctif imparfait by design.", "",
+              "| feature | forms | Stenalgo covered | Stenalgo colliding | Pluvier covered | Pluvier colliding |",
+              "|---|---|---|---|---|---|",
+              *(f"| {TENSE_LABELS.get(key, key)} | {f['forms']} | {featureCells(f['stenalgo'])} | {featureCells(f['pluvier'])} |"
+                for key, f in features.items()), ""]
 
     common = f"words covered by both: {cov['both']['spellings']}"
     section(f"4. Collisions ({common})",

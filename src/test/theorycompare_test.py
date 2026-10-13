@@ -92,6 +92,55 @@ class TestLemmaAndTenseCoverage(unittest.TestCase):
                                              b.name: {"forms": 0, "frequencyShare": None}})
 
 
+class TestCoverageByFeature(unittest.TestCase):
+    HEADER = "ortho\tsyll\tlemme\tcgram\tgenre\tnombre\tfreqlemfilms2\tfreqlemlivres\tfreqfilms2\tfreqlivres\tinfover"
+    ROWS = [
+        "parle\tpaRl\tparler\tVER\t\t\t9\t1\t6\t1\tind:pre:1s;ind:pre:3s;imp:pre:2s;",
+        "parles\tpaRl\tparler\tVER\t\t\t9\t1\t2\t1\tind:pre:2s;",
+        "parlons\tpaRlO\tparler\tVER\t\t\t9\t1\t1\t1\tind:pre:1p;imp:pre:1p;",
+        "parl\u00e9e\tpaRle\tparler\tVER\tf\ts\t9\t1\t3\t1\tpar:pas;",
+        "belles\tbEl\tbeau\tADJ\tf\tp\t5\t1\t1\t1\t",
+        "parles\tpaRl\tparle\tNOM\tf\tp\t9\t1\t50\t1\t",
+    ]
+
+    def lexicon(self) -> tc.Lexicon:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "lex.tsv")
+            with open(path, "w", encoding="utf-8") as handle:
+                handle.write("\n".join([self.HEADER] + self.ROWS) + "\n")
+            return tc.loadLexicon(path, "films")
+
+    def test_person_number_and_gender_keys(self) -> None:
+        self.assertEqual(tc.personKeys("ind:pre:1s;imp:pre:2p;par:pas;inf"), {"pers:1", "pers:2", "nbr:s", "nbr:p"})
+        lex = self.lexicon()
+        self.assertEqual(lex.featureForms["pers:1"], {"parle", "parlons"})
+        self.assertEqual(lex.featureForms["nbr:s"], {"parle", "parles"})
+        self.assertEqual(lex.featureForms["genre:f"], {"parl\u00e9e", "belles", "parles"})     # every category
+        self.assertEqual(lex.featureForms["nombre:p"], {"belles", "parles"})
+        self.assertEqual(lex.featureFreq["pers:2"], {"parle": 6.0, "parles": 2.0})     # the NOM row of parles is not 2nd person
+        self.assertEqual(lex.featureFreqSplit["pers:2"], {"parle": 2.0, "parles": 2.0})  # parle: 6 over its three readings
+        self.assertNotIn("genre:m", lex.featureForms)
+
+    def test_covered_and_colliding(self) -> None:
+        a = tc.buildStenalgoView({"1": "parle", "2": "parles", "3": "parlons"}, parseDigits)
+        b = tc.buildPluvierView({"P": "parle", "PB": "parlons", "B": "belles"}, {"P": ["parle", "parles"]})
+        for view in (a, b):
+            view.choose(unitCost)
+        report = tc.coverageByFeature(self.lexicon(), a, b)
+        self.assertEqual(list(report), list(tc.TENSES + tc.FEATURES))
+        # parle (6, three readings, one 2nd person) and parles (2, one reading): whole 6/8, split 2/4
+        self.assertEqual(report["pers:2"], {"forms": 2,
+                                            a.name: {"forms": 2, "frequencyShare": 1.0, "frequencyShareSplit": 1.0,
+                                                     "colliding": 0, "collidingFrequencyShare": 0.0, "collidingFrequencyShareSplit": 0.0},
+                                            b.name: {"forms": 1, "frequencyShare": 6 / 8, "frequencyShareSplit": 2 / 4,
+                                                     "colliding": 1, "collidingFrequencyShare": 6 / 8,
+                                                     "collidingFrequencyShareSplit": 2 / 4}})
+        self.assertEqual(report["nbr:p"][b.name]["collidingFrequencyShare"], 0.0)
+        self.assertEqual(report["genre:f"][b.name]["forms"], 1)
+        self.assertEqual(report["nombre:p"][a.name]["frequencyShare"], 50 / 51)
+        self.assertEqual(report["nombre:p"][a.name]["frequencyShareSplit"], 50 / 51)   # one reading per NOM/ADJ row
+        self.assertEqual(report["genre:m"][a.name]["frequencyShare"], None)
+
 class TestViews(unittest.TestCase):
     def test_stenalgo_collisions_are_measured(self) -> None:
         view = tc.buildStenalgoView({"12": "star", "21": "tsar", "1/2": "chat", "1/2x": "only"}, parseDigits)

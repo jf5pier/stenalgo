@@ -35,7 +35,7 @@ Pluvier's two forms need no option: `longForm` (`src/theorycompare.py`) picks th
 | File | Role |
 |---|---|
 | `util/compare_theories.py` | the command: loads both theories, prices them, assembles and renders the report (`compare`, `renderMarkdown`, `main`; `--stenalgo-abbreviations` = the short form) |
-| `src/theorycompare.py` | the metrics, pure functions and small dataclasses (`Lexicon`, `TheoryView`, `buildLayeredView` / `loadPluvierTheory` for the Pluvier layers, `coverage`, `lemmaCoverage`, `verbCoverageByTense`, `collisions`, `strokesPerWord`, `outlineCosts`, `complexity`, `markedForResolution`, `strokesPerWordResolved`, `costsResolved`, order-violation helpers, `PluvierEncoder`) |
+| `src/theorycompare.py` | the metrics, pure functions and small dataclasses (`Lexicon`, `TheoryView`, `buildLayeredView` / `loadPluvierTheory` for the Pluvier layers, `coverage`, `lemmaCoverage`, `verbCoverageByTense`, `coverageByFeature`, `collisions`, `strokesPerWord`, `outlineCosts`, `complexity`, `markedForResolution`, `strokesPerWordResolved`, `costsResolved`, order-violation helpers, `PluvierEncoder`) |
 | `src/irelandkeyboard.py` | `IrelandKeyboard`: Ireland chord parsing (`parseChord`, `renderChord`) and a cost model in the Starboard currency |
 | `src/keyboard.py` `Starboard.getChordCost` | additive method: cost of a whole chord with no syllabic part (below) |
 | `resources/pluvierPhonemeKeys.tsv` | Pluvier phoneme -> Ireland keys per syllabic part (`part phonemes keys source`), copied from the Pluvier clone; rows marked `added` are this repo's |
@@ -84,6 +84,15 @@ Reused, unchanged: `util/export_plover_complements.py` (`convertStroke`, `starbo
   ind:pre, ind:imp, ind:pas, ind:fut, cnd:pre, sub:pre, sub:imp, imp:pre, inf, par:pre, par:pas. Per tense:
   the number of forms and the frequency share covered by each theory. Stenalgo covers almost no subjonctif imparfait by design.
   Code: `verbCoverageByTense`, `tenseKeys` src/theorycompare.py.
+- **Coverage by feature** (report section 3). The features the 7 conjugation, gender and number keypress groups discriminate:
+  the 11 tenses above, person (1, 2, 3) and its number (singular, plural) from the third `infover` field of VER/AUX rows
+  (`1s`..`3p`), gender (m, f) and number (s, p) from the `genre`/`nombre` columns of every category. Per feature and theory:
+  covered forms and colliding forms (covered, chosen outline claimed by another word, as in Collisions but over every covered
+  form, not only the common words), each with its share of the feature's frequency. A form weighs only its rows carrying the
+  feature (the VER row of `y`, not its pronoun row). A VER/AUX row with several readings gives two weights: its whole
+  frequency in each reading (`frequencyShare`, `collidingFrequencyShare`) and an equal part in each (`...Split`); the Markdown
+  prints the range. `verbCoverageByTense` uses the whole-row weight too.
+  Code: `coverageByFeature`, `personKeys`, `FEATURES`, `Lexicon.featureFreq`/`featureFreqSplit` src/theorycompare.py.
 - **Phoneme order.** Per syllable (Lexique383 `syll` of the spelling's most frequent row), consecutive phonemes whose exclusive keys (shared keys dropped) are not
   left to right are a violation. Reported: share of words with at least one, mean violations per word, share not encodable (a phoneme missing from the table).
   Stenalgo keys: `getStrokesOfPhoneme(...)[0]` of the layout (the ideal encoding of the phonology, not the shipped outline). Pluvier keys: `pluvierPhonemeKeys.tsv`, a per-syllable encoding
@@ -92,10 +101,10 @@ Reused, unchanged: `util/export_plover_complements.py` (`convertStroke`, `starbo
 
 ## Report layout
 
-**Markdown** (`theory_comparison.md`): tables with Stenalgo and Pluvier columns side by side; short form and long form rows paired (short first); `—` = does not apply, `0` = real zero; coverage cells read "count (freq share)". Sections in order: word coverage, lemma coverage, verb coverage by mood and tense, then on words covered by both: collisions, strokes and cost (headline row: cost on its own keyboard, Stenalgo on Starboard and Pluvier on Ireland; then both on Starboard; the tall-`S` variant as a footnote), one-more-stroke resolution, phoneme order. One "how to read" sentence per section.
+**Markdown** (`theory_comparison.md`): tables with Stenalgo and Pluvier columns side by side; short form and long form rows paired (short first); `—` = does not apply, `0` = real zero; coverage cells read "count (freq share)". Sections in order: word coverage, lemma coverage, coverage by mood, tense, person, gender and number (its own six-column table: forms, then covered and colliding per theory; a verb cell shows the split-to-whole range), then on words covered by both: collisions, strokes and cost (headline row: cost on its own keyboard, Stenalgo on Starboard and Pluvier on Ireland; then both on Starboard; the tall-`S` variant as a footnote), one-more-stroke resolution, phoneme order. One "how to read" sentence per section.
 
 **JSON** (`theory_comparison.json`): `inputs` (paths, md5; `pluvierDicts` with the commit of each file's clone) · `theories` (notes per theory: entries, duplicate keys, unparsable outlines, apostrophe forms, one-letter words,
-`wordsOnlyInCollisionRecord`; Pluvier also `layerEntries` and `outlinesTakenByAnotherLayer`) · `coverage` · `lemmaCoverage` · `verbCoverageByTense` · `collisionsOnCommonWords` · `commonWords` and `fullCoverage` (the same block for the common words and for each theory's whole coverage):
+`wordsOnlyInCollisionRecord`; Pluvier also `layerEntries` and `outlinesTakenByAnotherLayer`) · `coverage` · `lemmaCoverage` · `verbCoverageByTense` · `coverageByFeature` (per key of TENSES + FEATURES: `forms`, and per theory `forms`, `frequencyShare`, `frequencyShareSplit`, `colliding`, `collidingFrequencyShare`, `collidingFrequencyShareSplit`) · `collisionsOnCommonWords` · `commonWords` and `fullCoverage` (the same block for the common words and for each theory's whole coverage):
 `strokesPerWord`, `complexity` {`stenalgoOnStarboard`, `pluvierOnStarboard`, `pluvierOnStarboardTallS`, `pluvierOnIreland`, `pressableInBoth`}, `phonemeOrder`,
 `withoutCollisions` {`extraStrokeCost`, `winnerKeeps`, `everyClaimant`, each with `markedWords`, `strokesPerWord`, `complexity`}, `stenalgoShort`, `pluvierLong` (its `withoutCollisions.<rule>` has `costOnStarboard` and `costOnIreland`) · `pluvierEncodingMatchesDicofr` (the key keeps its first name; it compares the table encoding with the word's outlines in ANY Pluvier layer).
 

@@ -51,9 +51,27 @@ class Lexicon:
     lemmaForms: dict[tuple[str, str], set[str]] = field(default_factory=dict)   # (lemme, cgram) -> spellings
     lemmaFreq: dict[tuple[str, str], float] = field(default_factory=dict)       # (lemme, cgram) -> lemma frequency (max over rows)
     tenseForms: dict[str, set[str]] = field(default_factory=dict)               # tense key -> spellings (VER and AUX rows)
+    featureForms: dict[str, set[str]] = field(default_factory=dict)             # FEATURES key -> spellings
+    featureFreq: dict[str, dict[str, float]] = field(default_factory=dict)      # TENSES/FEATURES key -> spelling -> summed
+                                                                                # frequency of the rows carrying the key
+    featureFreqSplit: dict[str, dict[str, float]] = field(default_factory=dict) # the same, each VER/AUX row split equally
+                                                                                # over its `infover` readings
 
 
 TENSES = ("ind:pre", "ind:imp", "ind:pas", "ind:fut", "cnd:pre", "sub:pre", "sub:imp", "imp:pre", "inf", "par:pre", "par:pas")
+# The other features the conjugation, gender and number keypress groups discriminate: person and its number from the
+# VER/AUX `infover` (third field, `1s`..`3p`), gender and number from the `genre`/`nombre` columns of every category.
+FEATURES = ("pers:1", "pers:2", "pers:3", "nbr:s", "nbr:p", "genre:m", "genre:f", "nombre:s", "nombre:p")
+
+
+def personKeys(infover: str) -> set[str]:
+    """The person and person-number keys of a Lexique `infover` field (`ind:pre:3s` gives `pers:3`, `nbr:s`)."""
+    keys: set[str] = set()
+    for entry in infover.split(";"):
+        fields = entry.strip().split(":")
+        if len(fields) == 3 and len(fields[2]) == 2 and fields[2][0] in "123" and fields[2][1] in "sp":
+            keys |= {"pers:" + fields[2][0], "nbr:" + fields[2][1]}
+    return keys
 
 
 def tenseKeys(infover: str) -> set[str]:
@@ -72,6 +90,9 @@ def loadLexicon(path: str, freq: str = "films") -> Lexicon:
     lemmaForms: dict[tuple[str, str], set[str]] = defaultdict(set)
     lemmaFreq: dict[tuple[str, str], float] = {}
     tenseForms: dict[str, set[str]] = defaultdict(set)
+    featureForms: dict[str, set[str]] = defaultdict(set)
+    featureFreq: dict[str, dict[str, float]] = defaultdict(lambda: defaultdict(float))
+    featureFreqSplit: dict[str, dict[str, float]] = defaultdict(lambda: defaultdict(float))
     sums: dict[str, float] = defaultdict(float)
     best: dict[str, tuple[float, str]] = {}
     with open(path, encoding="utf-8", newline="") as handle:
@@ -86,9 +107,26 @@ def loadLexicon(path: str, freq: str = "films") -> Lexicon:
                 lemmaForms[lemma].add(word)
                 lemmaFreq[lemma] = max(lemmaFreq.get(lemma, 0.0), float(row.get(lemmaColumn) or 0.0))
             if lemma[1] in ("VER", "AUX"):
-                for key in tenseKeys(row.get("infover", "")):
+                infover = row.get("infover", "")
+                for key in tenseKeys(infover):
                     tenseForms[key].add(word)
-    return Lexicon(dict(sums), {w: s for w, (_, s) in best.items()}, dict(lemmaForms), lemmaFreq, dict(tenseForms))
+                    featureFreq[key][word] += value
+                for key in personKeys(infover):
+                    featureForms[key].add(word)
+                    featureFreq[key][word] += value
+                readings = [entry.strip() for entry in infover.split(";") if entry.strip()]
+                for entry in readings:
+                    for key in tenseKeys(entry) | personKeys(entry):
+                        featureFreqSplit[key][word] += value / len(readings)
+            for inflection in ("genre", "nombre"):
+                if row.get(inflection) in ("m", "f", "s", "p"):
+                    key = f"{inflection}:{row[inflection]}"
+                    featureForms[key].add(word)
+                    featureFreq[key][word] += value
+                    featureFreqSplit[key][word] += value
+    return Lexicon(dict(sums), {w: s for w, (_, s) in best.items()}, dict(lemmaForms), lemmaFreq, dict(tenseForms),
+                   dict(featureForms), {key: dict(words) for key, words in featureFreq.items()},
+                   {key: dict(words) for key, words in featureFreqSplit.items()})
 
 
 @dataclass
@@ -285,16 +323,42 @@ def lemmaCoverage(lexicon: Lexicon, a: TheoryView, b: TheoryView) -> dict[str, A
 
 
 def verbCoverageByTense(lexicon: Lexicon, a: TheoryView, b: TheoryView) -> dict[str, Any]:
-    """Per verb tense: the forms listed in it, and the count and frequency share covered by each theory."""
+    """Per verb tense: the forms listed in it, and the count and frequency share covered by each theory (a form weighs the
+    frequency of its VER/AUX rows in that tense, as in `coverageByFeature`)."""
     out: dict[str, Any] = {}
     for tense in TENSES:
         forms = lexicon.tenseForms.get(tense, set())
-        total = mass(lexicon.freq, forms)
+        weights = lexicon.featureFreq.get(tense, {})
+        total = mass(weights, forms)
         row: dict[str, Any] = {"forms": len(forms)}
         for view in (a, b):
             covered = {w for w in forms if w in view.outlines}
-            row[view.name] = {"forms": len(covered), "frequencyShare": share(mass(lexicon.freq, covered), total)}
+            row[view.name] = {"forms": len(covered), "frequencyShare": share(mass(weights, covered), total)}
         out[tense] = row
+    return out
+
+
+def coverageByFeature(lexicon: Lexicon, a: TheoryView, b: TheoryView) -> dict[str, Any]:
+    """Per tense (TENSES) and per other feature (FEATURES): the forms carrying it, and for each theory the covered forms and
+    the covered forms whose chosen outline is claimed by another word (colliding), each with its share of the feature's
+    frequency. A form weighs the frequency of its rows carrying the feature only (the VER row of `y`, not its pronoun row).
+    A row with several readings (`mange` ind:pre:1s;ind:pre:3s;sub:pre:1s) weighs its whole frequency in each (the
+    `...Share` keys, an upper bound) or an equal part in each (the `...ShareSplit` keys)."""
+    out: dict[str, Any] = {}
+    for key in TENSES + FEATURES:
+        weights = lexicon.featureFreq.get(key, {})
+        split = lexicon.featureFreqSplit.get(key, {})
+        forms = set(weights)
+        total, totalSplit = mass(weights, forms), mass(split, forms)
+        row: dict[str, Any] = {"forms": len(forms)}
+        for view in (a, b):
+            covered = {w for w in forms if w in view.outlines}
+            colliding = {w for w in covered if view.chosen.get(w) in view.claimants}
+            row[view.name] = {"forms": len(covered), "frequencyShare": share(mass(weights, covered), total),
+                              "frequencyShareSplit": share(mass(split, covered), totalSplit),
+                              "colliding": len(colliding), "collidingFrequencyShare": share(mass(weights, colliding), total),
+                              "collidingFrequencyShareSplit": share(mass(split, colliding), totalSplit)}
+        out[key] = row
     return out
 
 
