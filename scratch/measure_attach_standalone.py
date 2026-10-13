@@ -1,5 +1,5 @@
 """Item 2b measurement (2026-10-04): how the committed expression rules (scratch/expr-rules-final.json
-+ the forced briefs in scratch/expr-briefs.tsv) behave when an attach keypress doubles as a standalone
++ the pinned expression briefs in briefs.json) behave when an attach keypress doubles as a standalone
 stroke. Read-only: per attach rule, the pool mass by composition outcome and reason, and chord clashes
 against live single-stroke outlines, briefs and other attach chords.
 
@@ -54,12 +54,8 @@ def main() -> None:
                          keys=tuple(r["keys"]) or None,
                          beta=tuple(tuple(s) for s in r["beta"]) or None)
                 for r in data["rules"]]
-    forced = []
-    with open(REPO / "scratch" / "expr-briefs.tsv", encoding="utf-8") as fh:
-        fh.readline()
-        for line in fh:
-            f = line.rstrip("\n").split("\t")
-            forced.append((tuple(f[0].split()), tuple(int(k) for k in f[3].split(","))))
+    from util._briefpins import loadPins
+    forced = [(pin.units, pin.chord) for pin in loadPins(starboard) if pin.kind == "expression"]
     attachRules = [r for r in selected if r.kind == "attach" and r.keys]
     briefRules = [r for r in selected if r.kind == "brief" and r.beta]
     rules = Rules(attaches=tuple(r.toAttach() for r in attachRules),

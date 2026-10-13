@@ -69,7 +69,7 @@ def _loadDictionaryAndPhoneticTheory() -> "tuple[Dictionary, dict[Strokes, list[
 DISAMBIGUATED_THEORY_PICKLE_PATH = "DisambiguatedTheory.pickle"
 # The sources of the merge's reserved chords (util/_reservedchords.py), fingerprinted only with the merge on.
 MERGE_FINGERPRINT_INPUTS = (
-    "resources/outlineClassification.tsv", "resources/reference/lapwing-numbers.json", "scratch/expr-briefs.tsv",
+    "resources/outlineClassification.tsv", "resources/reference/lapwing-numbers.json", "briefs.json",
     "scratch/expr-rules-final.json", "scratch/expr_candidates.tsv",
 )
 DISAMBIGUATED_THEORY_FINGERPRINT_INPUTS = (

@@ -26,7 +26,7 @@ class TestCompareTheories(unittest.TestCase):
             stenalgo = write("dict.json", json.dumps({"k": "star", "s": "chat"}))
             abbreviations = write("abbr.tsv", "spelling\tshort\nchat\tk/s\n")
             args = compare_theories.argparse.Namespace(
-                stenalgo_abbreviations=abbreviations, stenalgo_dict=stenalgo, stenalgo_layout=os.path.join(ROOT, "starboard3h.json"), pluvier_dict=dicofr,
+                stenalgo_abbreviations=[abbreviations], stenalgo_dict=stenalgo, stenalgo_layout=os.path.join(ROOT, "starboard3h.json"), pluvier_dict=dicofr,
                 pluvier_dup=dup, lexicon=lexicon, phoneme_keys=os.path.join(ROOT, "resources", "pluvierPhonemeKeys.tsv"),
                 freq="films", out=tmp)
             first = compare_theories.compare(args)

@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from src.keyboard import Starboard
-from util._outlines import AffixShorts, taggedOutlines
+from util._outlines import ShortForms, taggedOutlines
 from util._stenorender import renderFinalStrokesToRTFCRE
 
 
@@ -23,7 +23,19 @@ def test_merged_word_hints_the_long_outline(tmp_path: Path) -> None:
     path = tmp_path / "abbreviations.tsv"
     path.write_text(f"spelling\tlong\tshort\tsaved\trank\tanchor\tk\tfrequency\troute\nai\t{long}\t{short}\t1\t4\tx\t1\t1\t0\n",
                     encoding="utf-8")
-    hint, alternates = taggedOutlines(keyboard, ((14, 18),), [((14,), (18,))], AffixShorts(keyboard, str(path)))
+    hint, alternates = taggedOutlines(keyboard, ((14, 18),), [((14,), (18,))], ShortForms(keyboard, str(path), str(path) + ".none"))
     assert hint["steno"] == long and hint["kind"] == "long"
     assert [(a["kind"], a.get("rule")) for a in alternates] == [("merged", None), ("affix", 4)]
     assert alternates[1]["strokes"] == [[2, 14, 18]]
+
+
+def test_brief_of_a_word_is_a_tagged_alternate(tmp_path: Path) -> None:
+    keyboard = starboard()
+    long = renderFinalStrokesToRTFCRE(keyboard, ((14,), (18,)))
+    short = renderFinalStrokesToRTFCRE(keyboard, ((2, 14, 18),))
+    briefs = tmp_path / "briefs.tsv"
+    briefs.write_text(f"spelling\tlong\tshort\tsaved\tbrief\tscope\nai\t{long}\t{short}\t1\t{short}\tfamily\n", encoding="utf-8")
+    hint, alternates = taggedOutlines(keyboard, ((14, 18),), [((14,), (18,))],
+                                      ShortForms(keyboard, str(tmp_path / "none.tsv"), str(briefs)))
+    assert hint["steno"] == long
+    assert [(a["kind"], a.get("rule")) for a in alternates] == [("merged", None), ("brief", None)]

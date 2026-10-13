@@ -270,12 +270,13 @@ Affix Abbreviation Building (S9) ................. optional layer after the fini
 ├─ S9a  Rule selection and keypress binding — python -m util.build_affix_rules
 │       ← affix_decisions.json (committed verdicts), AffixSelection.pickle (cache) → affix_rules.json, affix_rules_report.md
 └─ S9b  Affix dictionary — python -m util.export_affix_dictionary → plover_stenalgo_affix_dictionary.json, affix_abbreviations.tsv
+└─ S9e  Briefs — python -m util.build_briefs → plover_stenalgo_brief_dictionary.json, briefs.tsv (pins: briefs.json, written only by --rederive)
 └─ S9c  Trainer affix lessons — python -m util.export_affix_lessons → steno-trainer/public/data/affix-lessons.json
 └─ S9d  Trainer abbreviation column — python -m util.export_affix_abbreviations → steno-trainer/public/data/affix-abbreviations.json (from affix_abbreviations.tsv; the Definitions page's "Abbrev." column) and affix-word-rules.json (spelling -> rule ranks, for the Words-mode rule hint)
 
 Expression Abbreviation Lessons (S10) ............ optional layer after the finished theory; see below and docs/specs/expression-lessons.md
 ├─ S10a Trainer expression lessons — python -m util.export_expression_lessons → steno-trainer/public/data/expression-lessons.json
-│       ← scratch/expr-rules-final.json, expr-briefs.tsv, expr_candidates.tsv (committed rule set and pool), both pickles
+│       ← scratch/expr-rules-final.json, expr_candidates.tsv (committed rule set and pool), briefs.json (pinned expression briefs), both pickles
 ├─ S10b Trainer expression sentences — python -m util.export_expression_sentences → steno-trainer/public/data/expression-sentences.json
 ├─ S10c Trainer Definitions expression entries — python -m util.export_expression_definitions → steno-trainer/public/data/expression-definitions.json
 └─ S10d Trainer punctuation and command lessons — python -m util.export_punctuation_lessons → steno-trainer/public/data/punctuation-lessons.json
@@ -2076,6 +2077,19 @@ same marking, a shared outline going to the most frequent spelling; a rule whose
 **Artifacts** writes `plover_stenalgo_affix_dictionary.json` (short outline → word) and `affix_abbreviations.tsv`; fails if an abbreviation
 collides with `plover_stenalgo_dictionary.json`.
 
+### Briefs — util/build_briefs.main (S9e)
+
+**Called by** `python dictionary.py` (after S9b, before the trainer exports), or by hand.
+**Input state** the disambiguated theory, `plover_stenalgo_dictionary.json`, `affix_abbreviations.tsv`, `resources/briefs.tsv` (the hand-edited subjects: words, `family` or `word` scope, and expressions),
+`briefs.json` (the pinned chords: the committed version 1 of every brief), the reserved chords without their own `brief` source (`util/_reservedchords.reservedChords(briefs=False)`),
+the attach-merge chords and `resources/Lexique383.tsv`. About 160 s, almost all of it loading the theory and the reserved chords.
+**Transformation** default mode: each pin is validated (legal chord, free, zero boundary risk) and its word family re-expanded by `src/briefs.py` (a form takes the brief chord, its extra coda keys and all marks, then its tail strokes);
+an invalid pin, a colliding family outline or an unpinned subject is left out with a warning naming `--rederive SUBJECT`. It never writes `briefs.json`. `--rederive [SUBJECT ...]` derives all the subjects, or the named and unpinned ones, in `resources/briefs.tsv` order
+and rewrites `briefs.json` (the only way a brief moves, as only `util.optimize_keyboard` moves the layout). `--propose CANDIDATES.tsv` reproduces the study of `pluvier_shorter_words.tsv`.
+**Artifacts** writes `plover_stenalgo_brief_dictionary.json` (word briefs and their family outlines, listed by the plugin just above the stock dictionary) and `briefs.tsv` (columns of `affix_abbreviations.tsv`; the trainer and the theory comparison read it).
+**Reserved chords** the `brief` source of `util/_reservedchords.py` holds every pinned chord and the word briefs' one-stroke family outlines, so the merged feature keys (S7) never take one; `briefs.json` is a fingerprint input of `DisambiguatedTheory.pickle`.
+**Rebuild** a change of `resources/briefs.tsv` or `briefs.json` reruns S7 (fingerprint), then S8, S9e and the trainer and expression exports; the expression data (`export_expression_data`, `export_plover_plugin`) is hand-run.
+
 ### Trainer affix lessons — util/export_affix_lessons.main (S9c)
 
 **Called by** `python dictionary.py` (after S9b), or by hand.
@@ -2094,7 +2108,7 @@ then one lesson of the 20 most frequent marked routes (route >= 1) of verbs (one
 
 **Called by** `python dictionary.py` (after S9d), or by hand.
 **Input state** the stable theory (both pickles), and the committed expression inputs read by `util/_expressioninput.loadExpressionInputs`
-(`scratch/expr-rules-final.json`, `expr-briefs.tsv`, `expr_candidates.tsv`).
+(`scratch/expr-rules-final.json`, `expr_candidates.tsv`, and the pinned expression briefs of `briefs.json`).
 **Transformation** every pool phrase is composed with the full rule set (`composeOutlineTraced`); a phrase counts for the rules whose
 abbreviation is in its outline. One lesson per attach family (a particle and its elision twin share a chord, so a lesson), families ranked by
 frequency-weighted saving, the 20 most frequent one-piece phrases (topped up with multi-piece ones below ten); then up to three lessons of

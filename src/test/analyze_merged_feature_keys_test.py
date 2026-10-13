@@ -67,6 +67,6 @@ class TestReservedChords:
         reserved = reservedChords(keyboard)
         sources = set(reserved.values())
         assert {"punctuation", "commands", "pluvier punctuation", "pluvier numbers", "lapwing numbers", "spelling",
-                "expression brief", "expression attach"} <= sources
+                "brief", "expression attach"} <= sources
         assert sum(1 for s in reserved.values() if s == "pluvier numbers") == 1023
         assert len(attachKeypressesOf()) == sum(1 for s in reserved.values() if s == "expression attach")

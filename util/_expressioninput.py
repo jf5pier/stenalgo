@@ -2,7 +2,7 @@
 Inputs of the expression abbreviation layer's decoder side, shared by `util/export_expression_data.py` and the
 `scratch/` audits (which re-import them): the elision particles and the token -> theory resolution that built the
 pool, and `loadExpressionInputs`, which rebuilds the rule set, the pool and the theory indexes from the committed
-files (`scratch/expr-rules-final.json`, `scratch/expr-briefs.tsv`, `scratch/expr_candidates.tsv`).
+files (`scratch/expr-rules-final.json`, `scratch/expr_candidates.tsv`) and the pinned expression briefs (`briefs.json`).
 """
 
 from __future__ import annotations
@@ -16,12 +16,12 @@ from src.expressionrules import ExprRule, PoolExpression, orderBan
 from src.expressions import BriefRule, Rules, Token
 from src.keyboard import Starboard, Strokes, canonicalizeStrokes
 from src.word import Word
+from util._briefpins import loadPins
 from util._theoryio import loadDisambiguatedTheory
 
 REPO = Path(__file__).resolve().parent.parent
 CANDIDATES = REPO / "scratch" / "expr_candidates.tsv"
 RULES_JSON = REPO / "scratch" / "expr-rules-final.json"
-BRIEFS_TSV = REPO / "scratch" / "expr-briefs.tsv"
 
 # Left parts of elision particles: `X'` gluing onto a host word.
 PARTICLES = {"l", "c", "d", "n", "s", "j", "m", "t", "qu", "jusqu", "lorsqu",
@@ -81,10 +81,11 @@ def resolveTerm(term: str, byOrtho: dict[str, list[Word]]) -> list[tuple[str, Wo
     return out
 
 
-def loadExpressionInputs(theory: "dict[Word, list[Strokes]] | None" = None):
-    """The committed rule set (`scratch/expr-rules-final.json`, `expr-briefs.tsv`), the pool (`expr_candidates.tsv`)
-    and the theory indexes the composer, decoder and exporters need: (SimContext, Rules, pool, outline -> surfaces,
-    unit -> longform stroke count). `theory`: the disambiguated theory to compose on (default: the cached one)."""
+def loadExpressionInputs(theory: "dict[Word, list[Strokes]] | None" = None, pinned: bool = True):
+    """The committed rule set (`scratch/expr-rules-final.json`), the pinned expression briefs (`briefs.json`; none with
+    `pinned=False`, which the brief builder itself uses), the pool (`expr_candidates.tsv`) and the theory indexes the
+    composer, decoder and exporters need: (SimContext, Rules, pool, outline -> surfaces, unit -> longform stroke count).
+    `theory`: the disambiguated theory to compose on (default: the cached one)."""
     starboard = Starboard.fromJSONFile("starboard3h.json")
     assert starboard is not None
     if theory is None:
@@ -116,17 +117,12 @@ def loadExpressionInputs(theory: "dict[Word, list[Strokes]] | None" = None):
                          beta=tuple(tuple(s) for s in r["beta"]) or None,
                          elision=r.get("elision", ""), elisionBase=tuple(r.get("elisionBase", ())))
                 for r in data["rules"]]
-    forced = []
-    with open(BRIEFS_TSV, encoding="utf-8") as fh:
-        fh.readline()
-        for line in fh:
-            f = line.rstrip("\n").split("\t")
-            forced.append((tuple(f[0].split()), tuple(int(k) for k in f[3].split(","))))
+    forced = [BriefRule(pin.units, (pin.chord,)) for pin in loadPins(starboard) if pin.kind == "expression"] \
+        if pinned else []
     attachRules = [r for r in selected if r.kind == "attach" and r.keys]
     briefRules = [r for r in selected if r.kind == "brief" and r.beta]
     rules = Rules(attaches=tuple(r.toAttach() for r in attachRules),
-                  briefs=tuple(r.toBrief() for r in briefRules)
-                  + tuple(BriefRule(u, (s,)) for u, s in forced),
+                  briefs=tuple(r.toBrief() for r in briefRules) + tuple(forced),
                   orderBan=orderBan(selected, pool))
     words: dict = defaultdict(set)
     unitStrokes: dict = {}

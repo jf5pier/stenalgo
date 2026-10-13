@@ -45,7 +45,7 @@ from src.ambiguitychecker import _resolveEntryWord, buildWordsByOrthoLemme, buil
 from src.elicitation import wordFeatureCombinations
 from src.keyboard import Starboard, Strokes
 from src.mergedfeaturekeys import splitLongAlternates
-from util._outlines import AffixShorts, taggedOutlines
+from util._outlines import ShortForms, taggedOutlines
 from src.word import GramCat, Word
 from util._stenorender import renderFinalStrokesToRTFCRE
 from util._theoryio import loadPhoneticAndDisambiguatedTheory
@@ -261,7 +261,7 @@ def main() -> None:
     # Keyed by (ortho, steno), not ortho alone: a self-homograph's alternate strokes, and
     # two different words sharing a spelling but not a chord ("est" = être / nom), are
     # each their own drill item now that every item says which reading it's for.
-    affix = AffixShorts(starboard)
+    affix = ShortForms(starboard)
     byOrthoSteno: dict[tuple[str, str], dict[str, Any]] = {}
     misalignedWords = 0
     for word, strokesList in disambiguatedTheory.items():

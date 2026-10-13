@@ -34,7 +34,7 @@ from dataclasses import dataclass, field
 
 from src.keyboard import Starboard, Strokes
 from src.word import Word
-from util._outlines import AffixShorts, taggedOutlines
+from util._outlines import ShortForms, taggedOutlines
 from util._stenorender import renderFinalStrokesToRTFCRE
 from util._theoryio import loadPhoneticAndDisambiguatedTheory
 from util.export_practice_words import (
@@ -164,7 +164,7 @@ def loadChordsByOrtho(starboard: Starboard) -> tuple[dict[str, list[Chord]], set
         drillItems = {(item["ortho"], steno) for item in json.load(f)
                       for steno in [item["steno"]] + [a["steno"] for a in item.get("alternates", [])]}
 
-    affix = AffixShorts(starboard)
+    affix = ShortForms(starboard)
     chordsByOrtho: dict[str, list[Chord]] = {}
     for word, strokesList in disambiguatedTheory.items():
         chords, _aligned = chordsWithAlternates(word, strokesList, readingsByWord)

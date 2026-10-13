@@ -1193,11 +1193,17 @@ stroke instead (a **cluster**, `attachCluster`).
 - Order matters for nothing: key union is commutative, which is why `ce que` and `que ce` would write the same chord (see **Order ban**).
 
 ### Brief
-A rule that gives a WHOLE expression one invented standalone stroke (`j' ai`), derived from the member words' keys (union,
-skeleton, vowels) or any free legal chord. **Forced briefs** are the 40 most frequent Tao-list expressions no attach rule
-covers; **selected briefs** win a slot in the selection. Expressions of 3 or more units are briefs, never attaches
-(`MAX_ATTACH_UNITS = 2`).
-- Code: `BriefRule`, `deriveBriefStroke`, `assignBriefStrokes` src/expressionrules.py; `FORCED_BRIEF_BUDGET`.
+One invented standalone stroke that replaces the first K strokes of an outline (src/briefs.py, one mechanic for words and expressions). The chord is chosen among all legal chords
+(with each subset of the `*`/`#` marks): best first by boundary risk, then phoneme sharing and chord cost, and it must give free outlines. It is pinned in `briefs.json`;
+only `python -m util.build_briefs --rederive` moves it. Expressions of 3 or more units are briefs, never attaches (`MAX_ATTACH_UNITS = 2`). The retired "forced brief" was the old
+first-acceptable-chord derivation for the 40 most frequent Tao-list expressions; its 40 subjects are regenerated with the one mechanic.
+- Code: `BriefGenerator` src/briefs.py; `BriefRule` src/expressionmodel.py; `util/build_briefs.py`.
+
+### Stem brief
+A word brief that replaces only the first K strokes of a multi-stroke word (the stem: strokes 1..K-1 and part of the K-th), the tail strokes following: `travail` stem `tRa/va` gives the brief + `j`, `travailler` the brief + `/RweR`.
+
+### Boundary risk
+For a one-stroke chord C, the number of live outlines X/C with X live (the word before C swallows it) plus C/Y with Y live (C swallows the next word). A brief must have zero.
 
 ### Family and variant
 A **family** is the group of attach rules that share ONE base chord (the learnable unit): `de`, `d'`; `qu'`, `que`; `il`, `il n'`.
@@ -1390,11 +1396,11 @@ what a typist actually types; a word with one outline has the same short and lon
 ### Word brief
 A dedicated outline for ONE word, chosen by hand and shorter than the theory's rules give it (Pluvier `avec` `W-`,
 `pourquoi` `PROEUBG`): in Pluvier the entries of the hand-written TAO layer (`tao_la_salle_simple.json`) that no generator
-layer gives the word. Stenalgo has none yet; the candidates are listed by `util/find_pluvier_shorter_words.py` (kind
-`brief`, beside `affix`, `compressed` and `phonetic`) and chosen in the `TODO.md` item "investigate and choose which words
-should get a brief".
-- Not a **Brief** of the expression layer (a whole multi-word expression), and not a short form (an affix abbreviation is
-  rule-made).
+layer gives the word. Stenalgo has them since S9e: the candidates are listed by `util/find_pluvier_shorter_words.py` (kind
+`brief`, beside `affix`, `compressed` and `phonetic`), the subjects are in `resources/briefs.tsv`, and the generator rewrites the word's
+lemma family on the brief (`petit` `p-`, `petite` `p-t`; scope `family`, or `word` for the word alone).
+- Made by the same mechanic as the expression **Brief**, but for one word and its family; not a short form (an affix abbreviation is
+  rule-made), although the comparison counts both in the short form.
 - First used in: the brief-candidate list (2026-10-13).
 
 ### Cost on its own keyboard

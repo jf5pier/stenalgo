@@ -8,7 +8,8 @@ built after the theory, from it). A merged outline gives way to every one of the
   pluvier punctuation         the Pluvier chords (buildPluvier, same)
   pluvier / lapwing numbers   the number-bar subsets and resources/reference/lapwing-numbers.json (convertEntries, same)
   spelling                    the letter strokes (util.export_plover_spelling.strokes)
-  expression brief            the committed briefs, scratch/expr-briefs.tsv
+  brief                       the pinned briefs, briefs.json: every chord, and with a theory the one-stroke outlines the
+                              word briefs give their family forms (util._briefpins.pinnedChords)
   expression attach           the attach keypresses of the committed rule set, scratch/expr-rules-final.json, as a
                               stroke of their own (a standalone keypress decodes as its particle)
   attested expression         with a theory: the outline of every pool expression (scratch/expr_candidates.tsv)
@@ -17,13 +18,13 @@ built after the theory, from it). A merged outline gives way to every one of the
 A chord the theory already takes today is still listed: the exporters drop it as before, a merge just cannot take a
 new one.
 """
-import csv
 import json
 from collections.abc import Iterable
 
 from src.expressions import composeOutlineTraced
 from src.keyboard import Starboard, Strokes, canonicalizeStrokes
 from src.word import Word
+from util._briefpins import pinnedChords
 from util._expressioninput import loadExpressionInputs
 from util._stenorender import renderFinalStrokesToRTFCRE
 from util.export_plover_complements import (
@@ -38,7 +39,6 @@ from util.export_plover_numbers import LAPWING_SOURCE, PLUVIER_GEMINI, convertEn
 from util.export_plover_spelling import strokes as spellingStrokes
 from util.export_plover_system import GEMINI_PR_LABELS
 
-EXPRESSION_BRIEFS = "scratch/expr-briefs.tsv"
 EXPRESSION_RULES = "scratch/expr-rules-final.json"
 
 
@@ -49,9 +49,10 @@ def attachKeypressesOf(rulesPath: str = EXPRESSION_RULES) -> set[tuple[int, ...]
     return {tuple(sorted(rule["keys"])) for rule in rules if rule["kind"] == "attach" and rule["keys"]}
 
 
-def attestedExpressionOutlines(theory: dict[Word, list[Strokes]]) -> set[Strokes]:
-    """The canonical outline of every pool expression the committed rules compose on `theory`."""
-    ctx, rules, pool, _words, _unitStrokes = loadExpressionInputs(theory)
+def attestedExpressionOutlines(theory: dict[Word, list[Strokes]], pinned: bool = True) -> set[Strokes]:
+    """The canonical outline of every pool expression the committed rules (and, with `pinned`, the pinned expression briefs)
+    compose on `theory`."""
+    ctx, rules, pool, _words, _unitStrokes = loadExpressionInputs(theory, pinned)
     outlines: set[Strokes] = set()
     for expression in pool:
         traced = composeOutlineTraced(rules, expression.tokens, ctx)
@@ -60,9 +61,11 @@ def attestedExpressionOutlines(theory: dict[Word, list[Strokes]]) -> set[Strokes
     return outlines
 
 
-def reservedChords(starboard: Starboard, theory: dict[Word, list[Strokes]] | None = None) -> dict[str, str]:
+def reservedChords(starboard: Starboard, theory: dict[Word, list[Strokes]] | None = None,
+                   briefs: bool = True) -> dict[str, str]:
     """Outline (RTFCRE) -> the source that reserves it; the first source listed wins a shared chord. With `theory`
-    (the disambiguated theory before the merge), the attested expressions' outlines too."""
+    (the disambiguated theory before the merge), the attested expressions' outlines too. `briefs=False` leaves the `brief`
+    source out and composes the attested expressions without the pinned briefs (what the brief builder checks against)."""
     keys = tuple(starboard.keyDisplayNames())
     buttonKey = {label: index for index, label in enumerate(GEMINI_PR_LABELS)}
     reserved: dict[str, str] = {}
@@ -83,11 +86,11 @@ def reservedChords(starboard: Starboard, theory: dict[Word, list[Strokes]] | Non
         "pluvier numbers")
     add(convertEntries(lapwing, starboard, buttonKey, set(), set(), set())["entries"], "lapwing numbers")
     add((renderFinalStrokesToRTFCRE(starboard, (stroke,)) for stroke in spellingStrokes()), "spelling")
-    with open(EXPRESSION_BRIEFS, encoding="utf-8") as f:
-        add((row["rtfcre"] for row in csv.DictReader(f, delimiter="\t")), "expression brief")
+    if briefs:
+        add(pinnedChords(starboard, theory), "brief")
     add((renderFinalStrokesToRTFCRE(starboard, (keypress,)) for keypress in sorted(attachKeypressesOf())),
         "expression attach")
     if theory is not None:
-        add((renderFinalStrokesToRTFCRE(starboard, outline) for outline in sorted(attestedExpressionOutlines(theory))),
+        add((renderFinalStrokesToRTFCRE(starboard, outline) for outline in sorted(attestedExpressionOutlines(theory, briefs))),
             "attested expression")
     return reserved

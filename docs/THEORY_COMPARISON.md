@@ -25,7 +25,7 @@ and the first run, which did, understated Pluvier's coverage (72% of frequency i
 Pluvier git commit (clone at `/home/jfsp/Steno/Pluvier`, upstream https://github.com/Vermoot/Pluvier, commit `47ab823`, 2024-04-06).
 The repo-root `dicofr.json` is an untracked variant that differs from the clone's: always pass the clone's file explicitly.
 
-`--stenalgo-abbreviations` adds the **short form** of Stenalgo next to the long form (the dictionary alone): `loadAbbreviations` reads the `short` column of `affix_abbreviations.tsv`, `withAbbreviations`
+`--stenalgo-abbreviations` (repeat it: `affix_abbreviations.tsv` and `briefs.tsv`, the S9b abbreviations and the S9e word briefs) adds the **short form** of Stenalgo next to the long form (the dictionary alone): `loadAbbreviations` reads the `short` column of each file, `withAbbreviations`
 gives each word its long and short outlines and `choose` takes the cheapest (fewest strokes, then Starboard cost). The report gets `stenalgoShort` {`strokesPerWord`, `complexity`, `abbreviatedWords`, `abbreviatedFrequencyShare`}
 in `commonWords` and `fullCoverage`, and three rows in the markdown. The expression layer is not in it (phrases have no per-word outline).
 Pluvier's two forms need no option: `longForm` (`src/theorycompare.py`) picks the LONGEST outline of each word (most strokes, then cheapest); `choose` already picks the briefest (the short form). Report key `pluvierLong` {`wordsWithSeveralOutlines`, `wordsWithDifferentLongAndShort`, `strokesPerWord`, `complexity` on Starboard / tall-`S` / Ireland}. Collisions are not recomputed for the long form.
@@ -34,7 +34,7 @@ Pluvier's two forms need no option: `longForm` (`src/theorycompare.py`) picks th
 
 | File | Role |
 |---|---|
-| `util/compare_theories.py` | the command: loads both theories, prices them, assembles and renders the report (`compare`, `renderMarkdown`, `main`; `--stenalgo-abbreviations` = the short form); `starboardStrokeCost`, `buttonKeyMap`, `parseStenalgoOutline` are shared with the brief-candidate list |
+| `util/compare_theories.py` | the command: loads both theories, prices them, assembles and renders the report (`compare`, `renderMarkdown`, `main`; `--stenalgo-abbreviations`, repeatable = the short form); `starboardStrokeCost`, `buttonKeyMap`, `parseStenalgoOutline` are shared with the brief-candidate list |
 | `util/find_pluvier_shorter_words.py` | the brief-candidate list (below): the top words Pluvier types in fewer strokes, tagged brief/affix/compressed/phonetic |
 | `src/theorycompare.py` | the metrics, pure functions and small dataclasses (`Lexicon`, `TheoryView`, `buildLayeredView` / `loadPluvierTheory` for the Pluvier layers, `coverage`, `lemmaCoverage`, `verbCoverageByTense`, `coverageByFeature`, `collisions`, `strokesPerWord`, `outlineCosts`, `complexity`, `markedForResolution`, `strokesPerWordResolved`, `costsResolved`, order-violation helpers, `PluvierEncoder`) |
 | `src/irelandkeyboard.py` | `IrelandKeyboard`: Ireland chord parsing (`parseChord`, `renderChord`) and a cost model in the Starboard currency |

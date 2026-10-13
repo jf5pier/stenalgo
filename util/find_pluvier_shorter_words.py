@@ -4,7 +4,7 @@ dedicated brief, an identifiable Pluvier affix rule, the generator's syllable co
 
 Run: python -m util.find_pluvier_shorter_words --pluvier-root PLUVIER [--top 100] [--out pluvier_shorter_words.tsv]
          [--stenalgo-dict plover_stenalgo_dictionary.json] [--stenalgo-layout starboard3h.json]
-         [--stenalgo-abbreviations affix_abbreviations.tsv] [--lexicon resources/Lexique383.tsv] [--freq films|livres]
+         [--stenalgo-abbreviations affix_abbreviations.tsv --stenalgo-abbreviations briefs.tsv] [--lexicon resources/Lexique383.tsv] [--freq films|livres]
 PLUVIER is a Pluvier clone: its four dictionary layers (resources/dicofr.json, dicofr-plural.json, verbs.json,
 tao_la_salle_simple.json, lowest priority first, as in util/compare_theories.py) and dup.json, plus src/steno.py and
 TAO_rules.md, read for the affix rules. No pickle is read.
@@ -42,7 +42,7 @@ from dataclasses import dataclass
 
 from src import theorycompare as tc
 from src.keyboard import Starboard
-from util.compare_theories import buttonKeyMap, parseStenalgoOutline, starboardStrokeCost
+from util.compare_theories import buttonKeyMap, loadAbbreviationFiles, parseStenalgoOutline, starboardStrokeCost
 
 TAO_LAYER = "tao_la_salle_simple.json"
 LAYERS = ("dicofr.json", "dicofr-plural.json", "verbs.json", TAO_LAYER)
@@ -156,7 +156,8 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--out", default="pluvier_shorter_words.tsv")
     parser.add_argument("--stenalgo-dict", default="plover_stenalgo_dictionary.json")
     parser.add_argument("--stenalgo-layout", default="starboard3h.json")
-    parser.add_argument("--stenalgo-abbreviations", default="affix_abbreviations.tsv")
+    parser.add_argument("--stenalgo-abbreviations", action="append", default=None,
+                        help="repeat the option (default: affix_abbreviations.tsv and briefs.tsv)")
     parser.add_argument("--lexicon", default="resources/Lexique383.tsv")
     parser.add_argument("--freq", choices=("films", "livres"), default="films")
     args = parser.parse_args(argv)
@@ -167,7 +168,8 @@ def main(argv: list[str] | None = None) -> None:
     lexicon = tc.loadLexicon(args.lexicon, args.freq)
     resources = os.path.join(args.pluvier_root, "resources")
     sten = tc.withAbbreviations(tc.loadStenalgoTheory(args.stenalgo_dict, parseStenalgoOutline),
-                                tc.loadAbbreviations(args.stenalgo_abbreviations))
+                                loadAbbreviationFiles(args.stenalgo_abbreviations or [p for p in ("affix_abbreviations.tsv", "briefs.tsv")
+                                                                                      if os.path.exists(p)]))
     plu = tc.loadPluvierTheory([os.path.join(resources, name) for name in LAYERS], os.path.join(resources, "dup.json"))
     stenCost, pluCost = starboardStrokeCost(board), starboardStrokeCost(board, buttonKeyMap())
     sten.choose(stenCost)

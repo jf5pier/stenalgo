@@ -62,5 +62,6 @@ DEFAULT_DICTIONARIES: tuple[str, ...] = (
     ASSET_PREFIX + "plover_stenalgo_lapwing_numbers.json",
     ASSET_PREFIX + "plover_stenalgo_spelling.json",
     ASSET_PREFIX + "plover_stenalgo_expressions.stenalgo",
+    ASSET_PREFIX + "plover_stenalgo_brief_dictionary.json",
     ASSET_PREFIX + "plover_stenalgo_dictionary.json",
 )

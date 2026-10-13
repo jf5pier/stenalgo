@@ -6,9 +6,9 @@ Frequencies are >= 5M so the Q6 floors pass."""
 
 from src.expressionrules import (MAX_BRIEF_FAMILY_VARIANTS, MIN_OCCURRENCES,
                                  ExprRule, PoolExpression, _fallbackPair,
-                                 assignBriefStrokes, assignKeypresses,
+                                 assignKeypresses,
                                  attachCandidates, auditExpressionRules,
-                                 briefCandidates, deriveBriefStroke,
+                                 briefCandidates,
                                  jointFrequency, proxySaving,
                                  selectExpressionRules, touchedExpressions)
 from src.expressions import (PREFIX, SUFFIX, AttachRule, BriefRule, Token)
@@ -336,58 +336,6 @@ class TestAssignKeypresses:
         assert rule.keys is None and not rule.exactDone
 
 
-class TestDeriveBriefStroke:
-    """The brief-creation mechanic: forced tao entries / later word additions
-    get ONE invented stroke — mnemonic derivations first, free chords last,
-    never shadowing a live outline or another brief."""
-
-    @staticmethod
-    def ctx(singles=frozenset(), outlines=frozenset()):
-        from src.affixes import SimContext
-        from src.keyboard import Starboard
-        sb = Starboard.fromJSONFile("starboard3h.json")
-        assert sb is not None
-        c = SimContext(sb, [])
-        c.singleStrokeOutlines = set(singles)
-        c.finalOutlines = set(outlines)
-        return c
-
-    @staticmethod
-    def expr(units, strokes):
-        return PoolExpression(tuple(units), 1.0,
-                              tuple(Token(u, s) for u, s in zip(units, strokes)))
-
-    def test_union_derivation_first(self):
-        e = self.expr(("mot", "cle"), (((2, 13),), ((14, 23),)))
-        got = deriveBriefStroke(e, self.ctx(), set())
-        assert got is not None and got[1] == "union"
-        assert got[0] == (2, 13, 14, 23)
-
-    def test_taken_stroke_falls_through(self):
-        e = self.expr(("mot", "cle"), (((2, 13),), ((14, 23),)))
-        got = deriveBriefStroke(e, self.ctx(), {(2, 13, 14, 23)})
-        assert got is not None and got[0] != (2, 13, 14, 23)  # next derivation
-
-    def test_shadowing_outline_skipped(self):
-        e = self.expr(("mot", "cle"), (((2, 13),), ((14, 23),)))
-        got = deriveBriefStroke(e, self.ctx(outlines={((2, 13, 14, 23),)}),
-                                set())
-        assert got is None or got[0] != (2, 13, 14, 23)
-
-    def test_free_chord_fallback(self):
-        # both tokens carry (13,): every mnemonic derivation yields the live
-        # single-stroke outline (13,) -- the free-chord ladder must fire
-        e = self.expr(("a", "b"), (((13,),), ((13,),)))
-        got = deriveBriefStroke(e, self.ctx(singles={(13,)}), set(),
-                                freeChords=[(2,), (3,), (2, 13)])
-        assert got is not None and got[1] == "free" and got[0] == (2,)
-
-    def test_none_when_nothing_legal(self):
-        e = self.expr(("a", "b"), (((13,),), ((13,),)))
-        assert deriveBriefStroke(e, self.ctx(singles={(13,)}), set(),
-                                 freeChords=[]) is None
-
-
 class TestBriefFamilies:
     """2026-10-02: briefs carry a family, compete with the family's attaches
     in one greedy, and their variant cap is the learnability bound (8), not
@@ -453,8 +401,14 @@ class TestFallbackPair:
         assert result.skips[0][:2] == ("que le chat", "le chat")
 
 
-class TestAssignBriefStrokes:
-    ctx = staticmethod(TestDeriveBriefStroke.ctx)
+class TestAuditWithBriefs:
+    @staticmethod
+    def ctx():
+        from src.affixes import SimContext
+        from src.keyboard import Starboard
+        sb = Starboard.fromJSONFile("starboard3h.json")
+        assert sb is not None
+        return SimContext(sb, [])
 
     @staticmethod
     def pool():
@@ -463,58 +417,18 @@ class TestAssignBriefStrokes:
                 PoolExpression(("mot", "rue"), 8.0,
                                (Token("mot", ((2, 13),)), Token("rue", ((14, 24),))))]
 
-    def test_distinct_strokes_and_beta_set(self):
-        rules = [ExprRule("brief", ("mot", "cle"), freq=9.0),
-                 ExprRule("brief", ("mot", "rue"), freq=8.0)]
-        report = assignBriefStrokes(rules, self.pool(), self.ctx(),
-                                    freeChords=[(2,), (3,), (4,)])
-        assert all(v is not None for v in report.values())
-        betas = [r.beta for r in rules]
-        assert all(b is not None for b in betas)
-        strokes = [b[0] for b in betas if b is not None]
-        assert len(set(strokes)) == 2
-        assert all(r.exactDone for r in rules)
-        cle = report[("mot", "cle")]
-        assert cle is not None
-        assert cle[0] == (2, 13, 14, 23)    # most frequent first
-
-    def test_failure_keeps_beta_none(self):
-        rules = [ExprRule("brief", ("a", "b"), freq=1.0)]
-        pool = [PoolExpression(("a", "b"), 1.0,
-                               (Token("a", ((13,),)), Token("b", ((13,),))))]
-        report = assignBriefStrokes(rules, pool, self.ctx(singles={(13,)}),
-                                    freeChords=[])
-        assert report == {("a", "b"): None}
-        assert rules[0].beta is None
-
-    def test_unknown_expression_fails_and_attaches_are_ignored(self):
-        rules = [ExprRule("brief", ("nowhere", "here"), freq=1.0),
-                 ExprRule("attach", ("de",), position=PREFIX)]
-        report = assignBriefStrokes(rules, self.pool(), self.ctx())
-        assert report == {("nowhere", "here"): None}
-
-    def test_taken_strokes_are_respected(self):
-        rules = [ExprRule("brief", ("mot", "cle"), freq=9.0)]
-        report = assignBriefStrokes(rules, self.pool(), self.ctx(),
-                                    freeChords=[(2,)],
-                                    takenStrokes={(2, 13, 14, 23)})
-        assert report[("mot", "cle")] != ((2, 13, 14, 23), "union")
-        assert rules[0].beta is None or rules[0].beta[0] != (2, 13, 14, 23)
-
-
-class TestAuditWithBriefs:
     def test_selected_briefs_compose_in_the_audit(self):
-        pool = TestAssignBriefStrokes.pool()
+        pool = self.pool()
         rule = ExprRule("brief", ("mot", "cle"), freq=9.0)
         rule.beta = ((2, 13, 14, 23),)
-        audit = auditExpressionRules([rule], pool, TestDeriveBriefStroke.ctx())
+        audit = auditExpressionRules([rule], pool, self.ctx())
         assert audit.savingMass == 9.0 * 1      # 2 strokes -> 1, only the first expr
         assert audit.shadows == [] and audit.collisions == {}
 
     def test_brief_without_beta_is_ignored(self):
-        pool = TestAssignBriefStrokes.pool()
+        pool = self.pool()
         audit = auditExpressionRules([ExprRule("brief", ("mot", "cle"), freq=9.0)],
-                                     pool, TestDeriveBriefStroke.ctx())
+                                     pool, self.ctx())
         assert audit.savingMass == 0
 
 

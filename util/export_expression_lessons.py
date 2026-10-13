@@ -5,7 +5,7 @@ lessons on phrases that combine several abbreviations in one outline, then four 
 
 Run: python -m util.export_expression_lessons
 Requires the inputs of util.export_expression_data (both pickles, starboard3h.json and the committed expression files of
-scratch/: expr-rules-final.json, expr-briefs.tsv, expr_candidates.tsv). Nothing is composed from the plugin's data file.
+scratch/: expr-rules-final.json, expr_candidates.tsv; the pinned briefs: briefs.json). Nothing is composed from the plugin's data file.
 Output: steno-trainer/public/data/expression-lessons.json
     {"rules": [{"rank", "kind", "position", "units", "keys", "keyNames", "family", "label"[, "steno"]}, ...],
      "lessons": [<lesson>, ...]}

@@ -63,6 +63,15 @@ def parseStenalgoOutline(text: str) -> tuple[tuple[int, ...], ...] | None:
     return strokes  # type: ignore[return-value]
 
 
+def loadAbbreviationFiles(paths: list[str]) -> dict[str, set[str]]:
+    """The short outlines of several abbreviation files (affix_abbreviations.tsv, briefs.tsv), merged per spelling."""
+    merged: dict[str, set[str]] = {}
+    for path in paths:
+        for word, shorts in tc.loadAbbreviations(path).items():
+            merged.setdefault(word, set()).update(shorts)
+    return merged
+
+
 def buttonKeyMap() -> dict[str, int]:
     """The Ireland (Gemini PR) button -> Starboard key map used to convert Pluvier chords."""
     return starboardKeys(KEYS, GEMINI_PR_KEYMAP)
@@ -125,7 +134,7 @@ def compare(args: argparse.Namespace) -> dict[str, Any]:
     # sequences and have no per-word outline: not part of it.
     short: tc.TheoryView | None = None
     if args.stenalgo_abbreviations:
-        short = tc.withAbbreviations(sten, tc.loadAbbreviations(args.stenalgo_abbreviations))
+        short = tc.withAbbreviations(sten, loadAbbreviationFiles(args.stenalgo_abbreviations))
         short.choose(stenStroke)
 
     universe = set(freq)
@@ -250,7 +259,7 @@ def compare(args: argparse.Namespace) -> dict[str, Any]:
             "pluvierDup": None if args.pluvier_dup is None else {"path": args.pluvier_dup, "md5": md5(args.pluvier_dup)},
             "lexicon": {"path": args.lexicon, "md5": md5(args.lexicon), "frequency": args.freq},
             "stenalgoAbbreviations": None if not args.stenalgo_abbreviations else
-                {"path": args.stenalgo_abbreviations, "md5": md5(args.stenalgo_abbreviations)},
+                [{"path": path, "md5": md5(path)} for path in args.stenalgo_abbreviations],
             "phonemeKeys": {"path": args.phoneme_keys, "md5": md5(args.phoneme_keys)},
         },
         "theories": {"stenalgo": sten.notes, "pluvier": {**plu.notes,
@@ -435,8 +444,9 @@ def main(argv: list[str] | None = None) -> None:
                              "takes an outline from an earlier one; the TAO briefs go last)")
     parser.add_argument("--pluvier-dup", default=None,
                         help="the generator's collision record (dup.json: outline -> every word that claimed it), optional")
-    parser.add_argument("--stenalgo-abbreviations", default=None, metavar="TSV",
-                        help="affix_abbreviations.tsv (S9b): adds the Stenalgo SHORT form next to the long form (the dictionary alone)")
+    parser.add_argument("--stenalgo-abbreviations", action="append", default=None, metavar="TSV",
+                        help="affix_abbreviations.tsv (S9b) or briefs.tsv (S9e); repeat the option: adds the Stenalgo SHORT form "
+                             "next to the long form (the dictionary alone)")
     parser.add_argument("--lexicon", default="resources/Lexique383.tsv")
     parser.add_argument("--phoneme-keys", default="resources/pluvierPhonemeKeys.tsv")
     parser.add_argument("--freq", choices=("films", "livres"), default="films")

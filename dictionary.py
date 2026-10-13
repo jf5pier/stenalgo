@@ -638,6 +638,7 @@ def _runSteps(module: "Callable[[str, str], None]", optimizeKeyboard: bool = Fal
     # (affix_abbreviations.tsv; docs/MERGED_FEATURE_KEYS_PLAN.md D24).
     module("Affix Abbreviation Building (S9a): rule selection", "util.build_affix_rules")
     module("Affix Abbreviation Building (S9b): affix dictionary", "util.export_affix_dictionary")
+    module("Brief Building (S9e): word and expression briefs", "util.build_briefs")
     module("Theory Export (S8): trainer word drills", "util.export_practice_words")
     module("Theory Export (S8): trainer sentences", "util.export_practice_sentences")
     module("Theory Export (S8): trainer definitions", "util.export_definitions")

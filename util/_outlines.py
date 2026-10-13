@@ -4,7 +4,8 @@ the hint shows above the keyboard, and every other outline the drill accepts, ea
   long      the outline with the feature discriminating stroke (or the only outline of a word without one)
   merged    the merged outline (merged feature keys)
   affix     an affix abbreviation (`rule` = the rule rank, affix_abbreviations.tsv from S9b)
-The trainer shows the long outline above the keyboard and the short ones (merged, affix) under it.
+  brief     a word or stem brief (briefs.tsv from S9e)
+The trainer shows the long outline above the keyboard and the short ones (merged, affix, brief) under it.
 """
 import csv
 import os
@@ -14,27 +15,40 @@ from src.keyboard import Starboard, Strokes
 from util._stenorender import checkedOutline, renderFinalStrokesToRTFCRE
 
 AFFIX_ABBREVIATIONS = "affix_abbreviations.tsv"
+BRIEF_ABBREVIATIONS = "briefs.tsv"
 
 
-class AffixShorts:
-    """The affix abbreviations of S9b by the outline they shorten (RTFCRE); empty without the file (optional layer)."""
+class ShortForms:
+    """The short forms of S9b (affix abbreviations, with their rule rank) and S9e (briefs) by the outline they shorten (RTFCRE);
+    empty without the files (optional layers)."""
 
-    def __init__(self, starboard: Starboard, path: str = AFFIX_ABBREVIATIONS) -> None:
+    def __init__(self, starboard: Starboard, affixPath: str = AFFIX_ABBREVIATIONS, briefPath: str = BRIEF_ABBREVIATIONS) -> None:
         self.starboard = starboard
         self.keys = tuple(starboard.keyDisplayNames())
-        self.byLong: dict[str, list[tuple[str, int]]] = {}
-        if os.path.exists(path):
+        self.byLong: dict[str, list[tuple[str, str, int | None]]] = {}
+        for path, kind in ((affixPath, "affix"), (briefPath, "brief")):
+            if not os.path.exists(path):
+                continue
             with open(path, encoding="utf-8") as f:
                 for row in csv.DictReader(f, delimiter="\t"):
+                    rank = int(row["rank"]) if kind == "affix" else None
                     shorts = self.byLong.setdefault(row["long"], [])
-                    if (row["short"], int(row["rank"])) not in shorts:
-                        shorts.append((row["short"], int(row["rank"])))
+                    if (row["short"], kind, rank) not in shorts:
+                        shorts.append((row["short"], kind, rank))
 
     def recordsFor(self, steno: str, maxRank: int | None = None) -> list[dict[str, Any]]:
-        """The affix outline records shortening `steno`, rule rank at most `maxRank` when given."""
-        return [{"steno": short, "strokes": [list(stroke) for stroke in checkedOutline(short, self.keys, self.starboard)],
-                 "kind": "affix", "rule": rank}
-                for short, rank in self.byLong.get(steno, []) if maxRank is None or rank <= maxRank]
+        """The short-form records shortening `steno`: affix ones with rule rank at most `maxRank` when given, every brief."""
+        records: list[dict[str, Any]] = []
+        for short, kind, rank in self.byLong.get(steno, []):
+            if rank is not None and maxRank is not None and rank > maxRank:
+                continue
+            record: dict[str, Any] = {"steno": short, "strokes": [list(stroke) for stroke in
+                                                                   checkedOutline(short, self.keys, self.starboard)],
+                                      "kind": kind}
+            if rank is not None:
+                record["rule"] = rank
+            records.append(record)
+        return records
 
 
 def outlineRecord(starboard: Starboard, strokes: Strokes, kind: str) -> dict[str, Any]:
@@ -43,7 +57,7 @@ def outlineRecord(starboard: Starboard, strokes: Strokes, kind: str) -> dict[str
 
 
 def taggedOutlines(starboard: Starboard, strokes: Strokes, longs: list[Strokes],
-                   affix: AffixShorts | None) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+                   affix: ShortForms | None) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Practice (D24, D25): the hint is the long outline; the alternates are the merged outline, the other long
     outlines and the affix abbreviations of each of them."""
     if longs:

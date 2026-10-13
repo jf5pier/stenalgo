@@ -1814,6 +1814,9 @@ viewShortOutlines model =
                 ( "affix", Nothing ) ->
                     "abréviation"
 
+                ( "brief", _ ) ->
+                    "brief du mot"
+
                 _ ->
                     outline.kind
 

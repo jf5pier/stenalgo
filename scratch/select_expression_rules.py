@@ -248,25 +248,9 @@ def main() -> None:
                   f"{info.get('theoryRate', float('nan')):.5f}, {len(info.get('alternatives', []))} candidates")
     print(f"Stage B assignment done ({time.time() - t:.0f}s)")
 
-    # Stage B for the selected BRIEF rules (2026-10-02: the que families'
-    # briefs win slots in the same greedy as the attaches): derived strokes
-    # in descending-frequency order over one shared taken set.
-    from src.expressionrules import assignBriefStrokes, deriveBriefStroke
-    t = time.time()
-    briefReport = assignBriefStrokes(result.selected, pool, realCtx,
-                                     freeChords=keypresses)
-    failedBriefs = sorted(u for u, got in briefReport.items() if got is None)
-    if failedBriefs:
-        print(f"{len(failedBriefs)} brief rules got no stroke (dropped): "
-              + "; ".join(" ".join(u) for u in failedBriefs))
-        result.selected = [r for r in result.selected
-                           if r.kind != "brief" or r.beta is not None]
-    print(f"brief strokes: {sum(1 for v in briefReport.values() if v)} derived "
-          f"({time.time() - t:.0f}s)")
-    # every stroke a selected brief now holds — re-derivations and the
-    # forced-brief section must not take it again
-    selBriefTaken = {r.beta[0] for r in result.selected
-                     if r.kind == "brief" and r.beta is not None}
+    # Briefs are no longer selected here: the word, stem and expression briefs come from `python -m util.build_briefs`
+    # (src/briefs.py, subjects in resources/briefs.tsv, pinned in briefs.json); a selected brief rule is dropped.
+    result.selected = [r for r in result.selected if r.kind != "brief"]
 
     # Stage C: joint repair (cross-family distinctness) + audit, with a
     # feedback round: families implicated in an audit collision lose their
@@ -331,27 +315,6 @@ def main() -> None:
             culpritFams = {fam for fam, _units in differing}
             if len(culpritFams) == 1:
                 fam = next(iter(culpritFams))
-                if any(r.family == fam and r.kind == "brief"
-                       for r in result.selected):
-                    # a BRIEF family's stroke collides: re-derive every
-                    # family brief with the colliding outline (and each
-                    # brief's own stroke) in the taken set
-                    famRules = [r for r in result.selected
-                                if r.kind == "brief" and r.family == fam
-                                and r.beta is not None]
-                    for r in famRules:
-                        selBriefTaken.add(r.beta[0])   # force a move
-                    for r in famRules:
-                        got = deriveBriefStroke(poolByUnits[r.units], realCtx,
-                                                selBriefTaken,
-                                                freeChords=keypresses)
-                        if got is None:
-                            result.selected.remove(r)
-                        else:
-                            r.beta = (got[0],)
-                            selBriefTaken.add(got[0])
-                    progressed = True
-                    continue
                 # Selector collapse on a marked host (the host's own * / #
                 # swallows the variant's selector — no base can fix it):
                 # drop the weaker differing variant; its contexts compose
@@ -421,32 +384,6 @@ def main() -> None:
         if not progressed:
             break
 
-    # Brief chords against attach merges (user decision 2026-10-04, after `ce` + `me` = the brief `dans la`):
-    # a brief stroke equal to a merge of attach keys with a one-stroke word would be read as that merge.
-    # Attach keys are final here, so selected briefs on such a chord are re-derived, and the forced briefs
-    # below take these chords as taken.
-    mergeChords: set = set()
-    if hostIndex is not None:
-        from src.expressionrules import attachMergeChords
-        mergeChords = attachMergeChords([r.toAttach() for r in result.selected
-                                         if r.kind == "attach" and r.keys], hostIndex)
-        clash = [r for r in result.selected if r.kind == "brief" and r.beta
-                 and r.beta[0] in mergeChords]
-        print(f"attach-merge chords: {len(mergeChords)}; selected briefs on one: "
-              f"{[' '.join(r.units) for r in clash]}")
-        for r in clash:
-            got = deriveBriefStroke({e.units: e for e in pool}[r.units], realCtx,
-                                    selBriefTaken | mergeChords, freeChords=keypresses)
-            if got is None:
-                print(f"  brief {' '.join(r.units)}: no clash-free stroke, dropped")
-                result.selected.remove(r)
-            else:
-                print(f"  brief {' '.join(r.units)}: {r.beta[0]} -> {got[0]}")
-                selBriefTaken.add(got[0])
-                r.beta = (got[0],)
-        if clash:
-            audit = auditExpressionRules(result.selected, pool, realCtx)
-            print(f"  re-audit after brief moves: shadows {len(audit.shadows)}, collisions {len(audit.collisions)}")
     for family, info in keypressReport.items():
         if family in chosen:
             print(f"  family {family!r}: base={chosen[family]} "
@@ -666,89 +603,6 @@ def main() -> None:
     print(f"report: scratch/expr-rules.tsv ({len(rulesFinal)} rules), "
           f"expr-composability.tsv ({len(seenPairs)} pairs >= 1e6)")
 
-    # ---- Forced briefs (user decision 2026-10-01): tao entries with no
-    # coverage from the selected rules get invented strokes from their OWN
-    # budget (FORCED_BRIEF_BUDGET); the same mechanic adds words later.
-    from src.expressionrules import FORCED_BRIEF_BUDGET, deriveBriefStroke
-    from src.expressions import BriefRule
-
-    taoSet = {tuple(p.split("=")[0] for p in row["phonologies"].split(",") if p)
-              for row in rows if "tao" in row["flags"].split(",")}
-    # selected briefs already own their expressions and their strokes
-    selBriefUnits = {r.units for r in result.selected if r.kind == "brief"}
-    covered = set(selBriefUnits)
-    for expr in pool:
-        if composeOutlineTraced(rulesJoint, expr.tokens, realCtx).saving > 0:
-            covered.add(expr.units)
-    forced = sorted((e for e in pool if e.units in taoSet
-                     and e.units not in covered
-                     and e.longformStrokes >= 2),
-                    key=lambda e: (-e.freq, e.units))[:FORCED_BRIEF_BUDGET]
-    briefs: list[tuple] = []
-    takenStrokes: set = {r.beta[0] for r in result.selected
-                         if r.kind == "brief" and r.beta is not None}
-    takenStrokes |= selBriefTaken
-    takenStrokes |= mergeChords
-    # an attach keypress (selector included) and its selector-free base are
-    # reserved: a forced brief on one would read as that attach standing alone
-    # (found 2026-10-04: `après` on `ce`, `depuis` on `pas`)
-    for r in result.selected:
-        if r.kind == "attach" and r.keys:
-            takenStrokes.add(tuple(sorted(r.keys)))
-            takenStrokes.add(tuple(k for k in sorted(r.keys) if k not in (10, 15)))
-    for expr in forced:
-        got = deriveBriefStroke(expr, realCtx, takenStrokes,
-                                freeChords=keypresses)
-        if got is None:
-            continue
-        stroke, label = got
-        takenStrokes.add(stroke)
-        briefs.append((expr, stroke, label))
-    briefRules = tuple(BriefRule(e.units, (st,)) for e, st, _l in briefs)
-    withBriefs = Rules(attaches=rulesJoint.attaches,
-                       briefs=rulesJoint.briefs + briefRules,
-                       orderBan=rulesJoint.orderBan)
-    savingBrief = 0.0
-    bShadows: list = []
-    byOutline: dict = {}
-    for expr in pool:
-        traced = composeOutlineTraced(withBriefs, expr.tokens, realCtx)
-        if traced.strokes is None:
-            continue
-        savingBrief += expr.freq * traced.saving
-        if traced.saving > 0 and traced.strokes in realCtx.finalOutlines:
-            bShadows.append((expr.units, traced.strokes))
-        byOutline.setdefault(traced.strokes, []).append(expr.units)
-    bCollisions = {o: us for o, us in byOutline.items() if len(set(us)) > 1}
-    elidedSurfaces = {r.units[0]: r.elisionBase[0] for r in result.selected
-                      if r.kind == "attach" and r.elision == "elided" and r.elisionBase}
-    if elidedSurfaces:      # pool fragments differing only by a trailing elision form (src/expressionrules.py audit)
-        bCollisions = {o: us for o, us in bCollisions.items()
-                       if len({tuple(elidedSurfaces.get(u, u) for u in x) for x in set(us)}) > 1}
-    with open(REPO / "scratch" / "expr-briefs.tsv", "w", encoding="utf-8") as out:
-        out.write("expr\tfreq\tderivation\tstroke\trtfcre\t"
-                  "longform_strokes\tstrokes_saved\n")
-        for expr, stroke, label in briefs:
-            out.write(f"{' '.join(expr.units)}\t{expr.freq:.0f}\t{label}\t"
-                      f"{','.join(map(str, stroke))}\t"
-                      f"{renderFinalStrokesToRTFCRE(starboard, (stroke,))}\t"
-                      f"{expr.longformStrokes}\t{expr.longformStrokes - 1}\n")
-    with open(OUT_TSV, "a", encoding="utf-8") as out:
-        for rank, (expr, stroke, label) in enumerate(briefs, len(rulesFinal) + 1):
-            out.write("\t".join([str(rank), "brief", "", " ".join(expr.units),
-                                  "", ",".join(map(str, stroke)),
-                                  renderFinalStrokesToRTFCRE(starboard, (stroke,)),
-                                  f"{expr.freq * (expr.longformStrokes - 1):.3e}",
-                                  f"{expr.freq * (expr.longformStrokes - 1):.3e}",
-                                  label, "0", "", "", ""]) + "\n")
-    print(f"briefs: {len(briefs)} created ({len(forced)} uncovered tao entries, "
-          f"budget {FORCED_BRIEF_BUDGET}) -> scratch/expr-briefs.tsv")
-    print(f"with briefs: saving {savingBrief:.3e}, shadows {len(bShadows)}, "
-          f"collisions {len(bCollisions)}")
-    for units, outline in bShadows[:3]:
-        print("  SHADOW", " ".join(units), outline)
-    for outline, exprs in list(bCollisions.items())[:3]:
-        print("  COLLISION", outline, [" ".join(u) for u in exprs[:4]])
     slots = {(r.family or " ".join(r.units)) if r.kind == "attach"
              else " ".join(r.units) for r in result.selected}
     print(f"selected {len(result.selected)} rules in {len(slots)} slots -> {OUT_TSV}")

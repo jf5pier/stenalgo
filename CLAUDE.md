@@ -102,7 +102,7 @@ python -m util.export_plover_spelling
 # (shipped by export_plover_plugin; raises on any collision).
 
 python -m util.export_expression_data [OUT]   # expression layer data for the Plover plugin
-# Prerequisites: the committed rule set (scratch/expr-rules-final.json, expr-briefs.tsv, expr_candidates.tsv),
+# Prerequisites: the committed rule set (scratch/expr-rules-final.json, expr_candidates.tsv, and the pinned briefs.json),
 # both pickles, starboard3h.json, plover_stenalgo_dictionary.json (the word index is read from it).
 # Outputs: plover_stenalgo_expressions.stenalgo (0.3 MB; default next to the repo root, OUT to choose).
 # It must travel with the plover_stenalgo_dictionary.json it was built against: a fingerprint refuses a mismatch.
@@ -110,7 +110,7 @@ python -m util.export_expression_data [OUT]   # expression layer data for the Pl
 python -m util.export_plover_plugin
 # Copies the stdlib-only decoder modules src/{strokes,expressionmodel,keyconflicts,elision,expressiondecoder,
 # expressionranking,expressiondata}.py into plover_stenalgo/plover_stenalgo/_core/ (tracked; a test fails when stale), and
-# plover_stenalgo_dictionary.json + plover_stenalgo_expressions.stenalgo + plover_stenalgo_punctuation.json + plover_stenalgo_commands.json + plover_stenalgo_pluvier_punctuation.json + plover_stenalgo_pluvier_numbers.json + plover_stenalgo_lapwing_numbers.json + plover_stenalgo_spelling.json into plover_stenalgo/plover_stenalgo/dictionaries/
+# plover_stenalgo_dictionary.json + plover_stenalgo_expressions.stenalgo + plover_stenalgo_punctuation.json + plover_stenalgo_commands.json + plover_stenalgo_pluvier_punctuation.json + plover_stenalgo_pluvier_numbers.json + plover_stenalgo_lapwing_numbers.json + plover_stenalgo_spelling.json + plover_stenalgo_brief_dictionary.json into plover_stenalgo/plover_stenalgo/dictionaries/
 # (gitignored package assets, fingerprint-checked; run it after export_expression_data, then build/install the plugin).
 
 python -m util.sync_plover_mirror MIRROR_CLONE [--push]
@@ -158,11 +158,21 @@ python -m util.export_affix_lessons          # Affix Abbreviation Building (S9c)
 # Prerequisites: both pickles, starboard3h.json, the committed affix_rules.json. Outputs: steno-trainer/public/data/affix-lessons.json
 # (30 rule lessons + one on conjugated forms; the other trainer JSONs are untouched).
 
+python -m util.build_briefs                 # Brief Building (S9e): word, stem and expression briefs (src/briefs.py is the generator)
+# Prerequisites: both pickles, starboard3h.json, plover_stenalgo_dictionary.json, affix_abbreviations.tsv, resources/briefs.tsv (the hand-edited subjects),
+# the committed briefs.json (the pinned chords). ~160 s, almost all loading the theory and reserved chords.
+# Default (pipeline) mode: validates each pin (legal, free, zero boundary risk), re-expands the word families, exports; NEVER writes briefs.json
+# (an invalid pin or unpinned subject is left out with a warning naming --rederive). Only `--rederive [SUBJECT ...]` moves a brief (all subjects, or the
+# named and unpinned ones; rewrites briefs.json, prints old -> new chords), the way only util.optimize_keyboard moves the layout.
+# `--propose CANDIDATES.tsv [--top N] [--out PATH] [--pluvier-root ../Pluvier]` reproduces the study (untracked proposal TSV + the strokes/word line).
+# Outputs: plover_stenalgo_brief_dictionary.json (shipped by export_plover_plugin), briefs.tsv (columns of affix_abbreviations.tsv; read by the trainer exporters
+# and, as a second --stenalgo-abbreviations, by compare_theories).
+
 python -m util.export_affix_abbreviations   # Affix Abbreviation Building (S9d): the Definitions page's "Abbrev." column
 # Prerequisites: affix_abbreviations.tsv (S9b). Outputs: steno-trainer/public/data/affix-abbreviations.json.
 
 python -m util.export_expression_lessons     # Expression Abbreviation Lessons (S10a): the trainer's expressions lesson track
-# Prerequisites: both pickles, starboard3h.json, the committed expression rule set (scratch/expr-rules-final.json, expr-briefs.tsv,
+# Prerequisites: both pickles, starboard3h.json, the committed expression rule set (scratch/expr-rules-final.json, briefs.json,
 # expr_candidates.tsv). Outputs: steno-trainer/public/data/expression-lessons.json (one lesson per rule family, composed phrases, the briefs).
 
 python -m util.export_expression_sentences   # Expression Abbreviation Lessons (S10b): the practice sentences with abbreviations
@@ -184,7 +194,7 @@ python -m util.export_spelling_lessons       # Spelling Lessons (S10f): the trai
 # Prerequisites: plover_stenalgo_spelling.json (util.export_plover_spelling), starboard3h.json, the authored resources/spellingLessons.json.
 # Outputs: steno-trainer/public/data/spelling-lessons.json (11 lessons + the 156 letter strokes for the Definitions page).
 
-python -m util.compare_theories --pluvier-dict PLUVIER/dicofr.json --pluvier-dict PLUVIER/dicofr-plural.json --pluvier-dict PLUVIER/verbs.json --pluvier-dict PLUVIER/tao_la_salle_simple.json --pluvier-dup PLUVIER/dup.json --stenalgo-abbreviations affix_abbreviations.tsv   # hand-run diagnostic: Stenalgo (Starboard) vs Pluvier (Ireland); PLUVIER = the clone's resources/, files lowest priority first (never dicofr.json alone: it lacks the TAO briefs)
+python -m util.compare_theories --pluvier-dict PLUVIER/dicofr.json --pluvier-dict PLUVIER/dicofr-plural.json --pluvier-dict PLUVIER/verbs.json --pluvier-dict PLUVIER/tao_la_salle_simple.json --pluvier-dup PLUVIER/dup.json --stenalgo-abbreviations affix_abbreviations.tsv --stenalgo-abbreviations briefs.tsv   # hand-run diagnostic: Stenalgo (Starboard) vs Pluvier (Ireland); PLUVIER = the clone's resources/, files lowest priority first (never dicofr.json alone: it lacks the TAO briefs)
 # Stenalgo long form (the dictionary) and short form (+ the affix abbreviations); Pluvier short (briefest outline) and long (longest) form.
 # Coverage, lemma and verb-tense coverage, collisions, strokes per word (also with the extra stroke of a collision), chord cost (Starboard and Ireland models) and phoneme-order violations, frequency-weighted over Lexique383 (--freq films|livres).
 # Prerequisites: plover_stenalgo_dictionary.json, starboard3h.json, resources/Lexique383.tsv, resources/pluvierPhonemeKeys.tsv, a Pluvier clone; no pickle.
@@ -235,7 +245,7 @@ Architecture and design rationale: `docs/ARCHITECTURE.md`. The nine stages:
 6. **Same-Lemma and Grammatical-Category Disambiguation (S6)** — three phases: Elicitation (`python -m src.elicitation --ask` / `--resolve`), Grouping (`python -m util.build_keypress_groups`), Realization (feature discriminating strokes; inline in `Dictionary.buildDisambiguatedTheory` + `python -m util.build_realization_report`)
 7. **Different-Lemma or Grammatical-Category Disambiguation (S7)** — star/hash marks (`decideStarHashMark` rule stack), composed on the phonetic theory by `python -m util.build_disambiguated_theory` → the disambiguated theory (`disambiguated_theory.tsv`)
 8. **Theory Export (S8)** — Plover (`util/export_plover_*`, plus the expression-layer dictionary plugin: `docs/PIPELINE.md` S8.10) and steno-trainer (`util/export_*`) branches; nothing reads `disambiguated_theory.tsv`, every exporter recomputes the disambiguated theory via `util/_theoryio.py`
-9. **Affix Abbreviation Building (S9)** — optional layer after S8, the theory is unchanged: S9a `util/build_affix_rules.py` selects 30 affix rules from the committed verdicts `affix_decisions.json` (cache `AffixSelection.pickle`; `util/review_affix_rules.py` is the hand-run interactive review of the pending decisions), S9b `util/export_affix_dictionary.py` writes the abbreviation dictionary; see `docs/AFFIX_RULES.md` (reference) and `docs/AFFIX_DESIGN.md` (philosophy, design choices, algorithms)
+9. **Affix Abbreviation Building (S9)** — optional layer after S8, the theory is unchanged: S9a `util/build_affix_rules.py` selects 30 affix rules from the committed verdicts `affix_decisions.json` (cache `AffixSelection.pickle`; `util/review_affix_rules.py` is the hand-run interactive review of the pending decisions), S9b `util/export_affix_dictionary.py` writes the abbreviation dictionary, S9e `util/build_briefs.py` builds the word, stem and expression briefs (generator `src/briefs.py`, subjects `resources/briefs.tsv`, chords pinned in `briefs.json`, moved only by `--rederive`); see `docs/AFFIX_RULES.md` (reference) and `docs/AFFIX_DESIGN.md` (philosophy, design choices, algorithms)
 
 Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whenever they exist and never checks them against the lexicon or layout (`rm -f *.pickle` after any lexicon or layout change — `DisambiguatedTheory.pickle`, unlike the two, IS fingerprint-checked against its inputs (md5s of the lexicons, `starboard3h.json`, `keypress_groups.json`, `resolved_press_sets.json`) and reloads only on a match, so it needs no manual rm; the Synthetic Lexicon Building (S2) wrapper deletes and rebuilds the pickles itself for rows its appenders add, but hand-made lexicon or layout edits remain the caller's responsibility; the orchestrator aborts on the first failing step). Editing `resources/spellingVariants.tsv` or `resources/reform1990.tsv` counts as a lexicon change: rerun `python lexique.py`, prune the Synthetic file (`python -m util.prune_spelling_variants --apply`), then rebuild (the dropped spellings must not survive in `LexiqueSynthetic.tsv`; the S2 appenders read through the same choke point, so a dropped spelling that coincides with a conjugated form of a kept verb — `boite`/`boiter` — stays exempt, see `isDroppedOrthoRow`). The NOM/ADJ cross-checkers need the external Morphalou 3.1 CSV (see `docs/PIPELINE.md` Synthetic Lexicon Building (S2)). The legacy discriminator path (`buildDiscriminatorSelection`, `satOptimizeDiscriminator`, `assignDiscriminatorKeypresses`) no longer runs: those functions are gone; `src/featureextractor.py` feeds only Synthetic Lexicon Building (S2)'s gating and the `ambiguitychecker` diagnostic, and of `src/greedyoptimizer.py` only `GRAMCAT_PRIORITY` is live (category-priority rule (R6)). Suspected bugs are listed in `TODO.md` ("Suspected bugs").
 
@@ -260,7 +270,7 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 
 ## Verification approach
 
-- `pytest src/test/` must pass after any `.py` change (1534 tests at the time of writing, expression layer, affix layer, lessons exporter and the Mixte rules included; the one known failure is the stale-expressions `plover_plugin_test` until the expressions file is rebuilt).
+- `pytest src/test/` must pass after any `.py` change (1631 tests at the time of writing, expression layer, affix layer, brief generator, lessons exporter and the Mixte rules included; the stale-expressions `plover_plugin_test` fails until `export_expression_data` is rerun after a theory change).
 - `mypy` (bare, scope and options in `mypy.ini`) must report no issues after any `.py` change.
 - Behaviour-preserving changes are proven by a full rebuild following the rebuild table in
   `docs/PIPELINE.md`, comparing the md5s of `phonetic_theory.tsv`, `disambiguated_theory.tsv`,

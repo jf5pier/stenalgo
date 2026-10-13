@@ -59,12 +59,6 @@ MIN_OCCURRENCES = 5_000_000   # ditto for window-occurrence counts
 # priority).
 EXPR_RULE_BUDGET = 20
 
-# Forced briefs (user decision 2026-10-01): tao entries too infrequent to
-# win a frequency slot get INVENTED brief strokes from their OWN budget,
-# separate from the selection budget; `deriveBriefStroke` is also the
-# word-adding mechanic for later additions to the theory.
-FORCED_BRIEF_BUDGET = 40
-
 # Pricing in the affix sweep-D tradition (2026-09-30 user decision:
 # exception alpha 2, fallback/exclusion price 5, form cost 100), extended
 # with the family notion: a family's variants are its forms.
@@ -642,95 +636,6 @@ def attachMergeChords(attaches: Iterable[AttachRule], hosts: HostIndex) -> set[S
             if not expanded & host & ~marks:
                 chords.add(host | km)
     return {tuple(k for k in range(64) if (m >> k) & 1) for m in chords}
-
-
-def deriveBriefStroke(expr: PoolExpression, ctx: SimContext,
-                      takenStrokes: set[Stroke],
-                      freeChords: list[Stroke] | tuple[()] = (),
-                      ) -> tuple[Stroke, str] | None:
-    """The brief-creation mechanic (user decision 2026-10-01): invent ONE
-    standalone stroke for a FORCED expression — tao entries too infrequent
-    to win a frequency slot, or a word added to the theory later. Q9's
-    mnemonic AND free-chord derivations, in preference order:
-
-      1. `union` — every member word's first-stroke keys pressed together;
-      2. `skeleton` — first word's first stroke + last word's last stroke;
-      3. `vowels` — the expression's nucleus keys, first occurrence order;
-      4. `free` — legal chords from `freeChords` (smallest first, then key
-         order; deterministic), the free-chord fallback.
-
-    A candidate must be a legal chord, must not be a live single-stroke
-    outline (Q7 no-shadowing -- `ctx.finalOutlines` is the canonical live
-    index), and must not be taken by another brief.
-    Single stroke only (multi-stroke briefs, Q8, would need boundary-risk
-    gating — none of the forced entries need it). Returns (stroke,
-    derivation label) or None."""
-    tokens = expr.tokens
-
-    def acceptable(keys: tuple[int, ...]) -> Stroke | None:
-        stroke = tuple(sorted(set(keys)))
-        # reserved keys are legality-transparent (the composer's convention)
-        syllabic = tuple(k for k in stroke if k not in RESERVED_MARK_KEYS)
-        if not stroke or not ctx.isLegal(syllabic):
-            return None
-        if stroke in ctx.singleStrokeOutlines or (stroke,) in ctx.finalOutlines:
-            return None
-        if stroke in takenStrokes:
-            return None
-        return stroke
-
-    candidates: list[tuple[Stroke, str]] = []
-    union = tuple(k for t in tokens for k in t.strokes[0])
-    if (stroke := acceptable(union)) is not None:
-        candidates.append((stroke, "union"))
-    skeleton = tuple(set(tokens[0].strokes[0]) | set(tokens[-1].strokes[-1]))
-    if (stroke := acceptable(skeleton)) is not None and (not candidates or candidates[0][0] != stroke):
-        candidates.append((stroke, "skeleton"))
-    nucleus = set(ctx.starboard.keyIDinSyllabicPart["nucleus"])
-    vowels = []
-    for token in tokens:
-        for stroke in token.strokes:
-            for key in stroke:
-                if key in nucleus and key not in vowels:
-                    vowels.append(key)
-    if (stroke := acceptable(tuple(vowels))) is not None and all(stroke != s for s, _ in candidates):
-        candidates.append((stroke, "vowels"))
-    if candidates:
-        return candidates[0]
-    for chord in sorted(freeChords, key=lambda c: (len(c), c)):
-        if (stroke := acceptable(chord)) is not None:
-            return stroke, "free"
-    return None
-
-
-def assignBriefStrokes(selected: list[ExprRule], pool: list[PoolExpression],
-                       ctx: SimContext, freeChords: list[Stroke] | tuple[()] = (),
-                       takenStrokes: set[Stroke] | frozenset[Stroke] = frozenset(),
-                       ) -> dict[tuple[str, ...], tuple[Stroke, str] | None]:
-    """Stage B for selected BRIEF rules (user decision 2026-10-02: the que
-    families' briefs are selected by the same greedy as the attaches): derive
-    each one's stroke with `deriveBriefStroke` in descending-frequency order,
-    one shared taken-strokes set so no two briefs collide. A rule whose
-    derivation fails keeps `beta` None and stays selected — its contexts
-    fall back to composition — but the caller usually drops it. Sets
-    `beta`/`exactDone`; returns units -> (stroke, derivation label) | None."""
-    poolByUnits = {e.units: e for e in pool}
-    taken = set(takenStrokes)
-    report: dict[tuple[str, ...], tuple[Stroke, str] | None] = {}
-    for rule in sorted((r for r in selected if r.kind == "brief"),
-                       key=lambda r: (-r.freq, r.units)):
-        expr = poolByUnits.get(rule.units)
-        got = deriveBriefStroke(expr, ctx, taken, freeChords=freeChords) \
-            if expr is not None else None
-        if got is None:
-            report[rule.units] = None
-            continue
-        stroke, label = got
-        taken.add(stroke)
-        rule.beta = (stroke,)
-        rule.exactDone = True
-        report[rule.units] = (stroke, label)
-    return report
 
 
 @dataclass

@@ -99,8 +99,10 @@ class TestPackagedAssets(unittest.TestCase):
         finally:
             sys.path.remove(str(PLUGIN))
         names = [d for d in system.DEFAULT_DICTIONARIES if d.startswith("asset:plover_stenalgo:")]
-        # the system's own commands and punctuation, then the expressions above the stock
-        self.assertEqual([n.rsplit("/", 1)[1] for n in names], [*COMPLEMENTS, EXPRESSIONS, STOCK])
+        # the system's own commands and punctuation, then the expressions, then the word briefs, just above the stock
+        briefs = "plover_stenalgo_brief_dictionary.json"
+        self.assertEqual([n.rsplit("/", 1)[1] for n in names],
+                         [*(c for c in COMPLEMENTS if c != briefs), EXPRESSIONS, briefs, STOCK])
         self.assertNotIn("commands.json", system.DEFAULT_DICTIONARIES)   # a bare name would load Plover English's file
 
     def test_export_refuses_data_built_against_another_stock_dictionary(self) -> None:
