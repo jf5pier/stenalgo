@@ -207,7 +207,7 @@ the layout happens to fold onto the same keys (e.g. /e/ and /O/ share one),
 which needs its marks just the same. Every chord and abbreviation is a button
 that sends `onChord` the word's phonology and its steno text (the page simulates it on the keyboard).
 -}
-view : (String -> String) -> (String -> String -> msg) -> Dict String (Dict String String) -> ExpressionDefinitions -> List PunctuationEntry -> NumberStyle -> String -> Definitions -> Html msg
+view : (String -> String) -> (String -> String -> msg) -> Dict String (Dict String (List String)) -> ExpressionDefinitions -> List PunctuationEntry -> NumberStyle -> String -> Definitions -> Html msg
 view render onChord abbreviations expressions punctuation numberStyle query definitions =
     let
         spelling =
@@ -402,15 +402,16 @@ visibleSpaces output =
         |> String.replace "\n" "\u{21B5}"
 
 
-viewGroup : (String -> String) -> (String -> String -> msg) -> Dict String (Dict String String) -> String -> Group -> Html msg
+viewGroup : (String -> String) -> (String -> String -> msg) -> Dict String (Dict String (List String)) -> String -> Group -> Html msg
 viewGroup render onChord abbreviations spelling group =
     let
-        abbreviationOf entry chord =
+        abbreviationsOf entry chord =
             Dict.get entry.ortho abbreviations
                 |> Maybe.andThen (Dict.get chord.steno)
+                |> Maybe.withDefault []
 
         hasAbbreviations =
-            List.any (\entry -> List.any (\chord -> abbreviationOf entry chord /= Nothing) entry.chords) group.entries
+            List.any (\entry -> List.any (\chord -> not (List.isEmpty (abbreviationsOf entry chord))) entry.chords) group.entries
 
         searchedPhonologies =
             group.entries |> List.filter (\e -> e.ortho == spelling) |> List.map .phonology |> Set.fromList
@@ -429,7 +430,11 @@ viewGroup render onChord abbreviations spelling group =
                          , td [] [ text chord.label ]
                          ]
                             ++ (if hasAbbreviations then
-                                    [ td [ class "definition-steno" ] [ abbreviationOf entry chord |> Maybe.map (chordButton render (onChord entry.phonology)) |> Maybe.withDefault (text "") ] ]
+                                    [ td [ class "definition-steno" ]
+                                        (abbreviationsOf entry chord
+                                            |> List.map (\short -> Html.div [] [ chordButton render (onChord entry.phonology) short ])
+                                        )
+                                    ]
 
                                 else
                                     []

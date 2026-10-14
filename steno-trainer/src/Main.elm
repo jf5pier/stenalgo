@@ -106,7 +106,7 @@ type alias Model =
     , numberStyle : NumberStyle -- the number theory taught and shown: Pluvier's bar (default) or Lapwing's numpad
     , definitions : Maybe (LoadState Definitions)
     , expressionDefinitions : Definitions.ExpressionDefinitions -- expression-definitions.json (attach words, composed phrases), optional
-    , abbreviations : Dict String (Dict String String) -- affix-abbreviations.json (spelling -> long outline -> short), optional
+    , abbreviations : Dict String (Dict String (List String)) -- affix-abbreviations.json (spelling -> long outline -> its short outlines, briefs first), optional
     , wordRules : Dict String (List Int) -- affix-word-rules.json (lowercase spelling -> ranks of the affix rules shortening it), optional
     , lessons : Maybe (LoadState Lessons)
     , affixData : Maybe Lessons.AffixData -- affix-lessons.json, when it came back (the stub stays otherwise)
@@ -165,7 +165,7 @@ type Msg
     | ToggleNumberStyle
     | GotDefinitions (Result Http.Error Definitions)
     | GotExpressionDefinitions (Result Http.Error Definitions.ExpressionDefinitions)
-    | GotAbbreviations (Result Http.Error (Dict String (Dict String String)))
+    | GotAbbreviations (Result Http.Error (Dict String (Dict String (List String))))
     | GotWordRules (Result Http.Error (Dict String (List Int)))
     | GotLessons (Result Http.Error Lessons)
     | GotAffixData (Result Http.Error Lessons.AffixData)
@@ -429,7 +429,7 @@ update msg unswitched =
 
                       else
                         Cmd.none
-                    , getFresh { url = "public/data/affix-abbreviations.json", expect = Http.expectJson GotAbbreviations (D.dict (D.dict D.string)) }
+                    , getFresh { url = "public/data/affix-abbreviations.json", expect = Http.expectJson GotAbbreviations (D.dict (D.dict (D.list D.string))) }
                     , getFresh { url = "public/data/expression-definitions.json", expect = Http.expectJson GotExpressionDefinitions Definitions.expressionsDecoder }
                     ]
                 )
@@ -1794,49 +1794,48 @@ viewSidebarLegends model =
             []
 
 
-{-| The short outlines (D25) of the word being drilled, under the keyboard, with
-what makes each short: merged feature keys or an affix rule. The long outline is
-the hint above the keyboard. -}
+{-| `viewShortOutlines` when the abbreviation hint is on in a drill mode. -}
+viewShortOutlinesIfOn : Model -> Html Msg
+viewShortOutlinesIfOn model =
+    if abbrevHintsOn model && not (isInfoMode model.mode) then
+        viewShortOutlines model
+
+    else
+        text ""
+
+
+{-| The short outlines (D25) of the word being drilled, between the long outline
+and the keyboard (under it, centered with it). Each stroke typed so far that an outline starts with is
+emphasized in it; an outline the typed strokes do not start with is dimmed. The
+strokes are matched in order. -}
 viewShortOutlines : Model -> Html Msg
 viewShortOutlines model =
     let
         render =
             Notation.render model.notation
 
-        describe outline =
-            case ( outline.kind, outline.rule ) of
-                ( "merged", _ ) ->
-                    "marque pressée avec la dernière syllabe"
-
-                ( "affix", Just rank ) ->
-                    "abréviation, règle " ++ String.fromInt rank
-
-                ( "affix", Nothing ) ->
-                    "abréviation"
-
-                ( "brief", _ ) ->
-                    "brief du mot"
-
-                _ ->
-                    outline.kind
+        -- Like the long outline: the stroke to type next in bold, the others plain.
+        strokeSpans matched outline =
+            String.split "/" outline.steno
+                |> List.indexedMap
+                    (\i part -> Html.span [ classList [ ( "current-stroke", i == matched ) ] ] [ text (render part) ])
+                |> List.intersperse (text "/")
 
         shorts =
-            model.drill |> Maybe.map Drill.shortOutlines |> Maybe.withDefault []
+            model.drill |> Maybe.map Drill.shortOutlineMatches |> Maybe.withDefault []
     in
     if List.isEmpty shorts then
         text ""
 
     else
         div [ class "short-outlines" ]
-            [ Html.h3 [] [ text "Formes courtes" ]
-            , Html.ul []
-                (List.map
-                    (\outline ->
-                        Html.li [] [ Html.span [ class "steno" ] [ text (render outline.steno) ], text (" : " ++ describe outline) ]
+            (shorts
+                |> List.map
+                    (\short ->
+                        p [ classList [ ( "target-steno", True ), ( "short-outline", True ), ( "ruled-out", short.ruledOut ) ] ]
+                            (strokeSpans short.matched short.outline)
                     )
-                    shorts
-                )
-            ]
+            )
 
 
 {-| The extra hint under the chord board, only what affects the current word
@@ -2024,8 +2023,7 @@ viewTrainer model =
                         , Keyboard.viewStrokeLegend (simulatedKeys model) (hintKeys model) (strokeInPhonology model loadedLayout) layout
                         , if abbrevHintsOn model && not (isInfoMode model.mode) then
                             div []
-                                [ viewShortOutlines model
-                                , viewAbbreviationHints model
+                                [ viewAbbreviationHints model
                                 , viewExpressionHints model
                                 ]
 
@@ -2532,7 +2530,7 @@ viewDrill model =
                         ShowTyped model.notation model.typed
             in
             if isSegmented model word then
-                div [] [ viewSentence chordDisplay (labelEmphasis model) (shownSegment model drill word) (workingStroke model drill word) word, viewCaptureBox model ]
+                div [] [ viewSentence chordDisplay (labelEmphasis model) (shownSegment model drill word) (workingStroke model drill word) (viewShortOutlinesIfOn model) word, viewCaptureBox model ]
 
             else
                 div [ class "drill" ]
@@ -2540,6 +2538,7 @@ viewDrill model =
                         [ div [ class "current-word" ]
                             (p [ class "target-word" ] (viewInContext word)
                                 :: viewReading chordDisplay (labelEmphasis model) (workingStroke model drill word) word.label word.phonology word.steno word.strokes
+                                ++ [ viewShortOutlinesIfOn model ]
                             )
                         , p [ class "next-word" ]
                             (Drill.nextWord drill |> Maybe.map viewInContext |> Maybe.withDefault [ text "\u{00A0}" ])
@@ -2584,8 +2583,8 @@ viewInContext word =
 dimmed), and that word's reading/phonology/chord underneath -- the whole
 sentence's chords at once would be unreadable. `phonology` holds one
 space-separated transcription per word, parallel to `segments`. -}
-viewSentence : ChordDisplay -> List String -> Int -> Int -> PracticeWord -> Html Msg
-viewSentence chordDisplay emphasis currentIndex strokeIndex sentence =
+viewSentence : ChordDisplay -> List String -> Int -> Int -> Html Msg -> PracticeWord -> Html Msg
+viewSentence chordDisplay emphasis currentIndex strokeIndex shortForms sentence =
     let
         segmentStart index =
             sentence.segments |> List.take index |> List.map .strokeCount |> List.sum
@@ -2665,6 +2664,7 @@ viewSentence chordDisplay emphasis currentIndex strokeIndex sentence =
                         Nothing ->
                             []
                    )
+                ++ [ shortForms ]
             )
         ]
 

@@ -1146,7 +1146,7 @@ Shown under the chord board when the "Affix rule hint" toggle is on. -}
 viewAffixLegend : List AffixRule -> Html msg
 viewAffixLegend rules =
     div [ class "legend-block" ]
-        [ h3 [] [ text "Affix rules" ]
+        [ h3 [] [ text "R\u{00E8}gles d'abr\u{00E9}viation" ]
         , ul [ class "legend" ]
             (rules
                 |> List.map (\r -> li [] [ text (groupKeyNames r.keyNames ++ " : " ++ r.label) ])

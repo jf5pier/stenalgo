@@ -1,4 +1,5 @@
 body {
+  background: #f1ede4; /* a soft paper tone instead of white (dark mode overrides) */
   font-family: system-ui, sans-serif;
   max-width: 64rem;
   margin: 2rem auto;
@@ -28,7 +29,7 @@ body {
 
 .drill {
   text-align: center;
-  margin: 0 0 2rem;
+  margin: 0;
 }
 
 .drill-words {
@@ -105,6 +106,7 @@ body {
 }
 
 .target-steno {
+  margin-bottom: 0.2rem;
   font-family: monospace;
   color: #666;
   font-size: calc(1rem + 2px);
@@ -123,6 +125,7 @@ body {
 }
 
 .target-mark {
+  margin-bottom: 0;
   font-family: monospace;
   color: #a06;
   font-size: 0.9rem;
@@ -163,7 +166,7 @@ body {
 }
 
 .key-expected {
-  background: #eee;
+  background: #ddd7ca;
   font-weight: bold;
 }
 
@@ -214,7 +217,7 @@ body {
   font-family: monospace;
   font-weight: bold;
   font-size: 1.05rem;
-  background: #fff;
+  background: #faf7f0;
   color: #000;
   border: 1px solid #999;
   border-radius: 50%;
@@ -333,7 +336,7 @@ body {
 }
 
 .lesson-item.selected {
-  background: #eee;
+  background: #ddd7ca;
   font-weight: bold;
 }
 
@@ -425,7 +428,7 @@ body {
 
 /* The Simulate button's lit stroke: the same green as .key-correct on the three boards. */
 .chord-overlay-hint {
-  background: #eee;
+  background: #ddd7ca;
 }
 
 .chord-overlay-lit {
@@ -534,20 +537,33 @@ html.dark .chord-overlay { background: #25282b; color: #eee; border-color: #666;
 html.dark .intro-page a { color: #8ab4f8; }
 
 .short-outlines {
-  /* below the chord board's thumb-chord connectors, like .abbreviation-hints */
-  margin-top: 6rem;
-  font-size: 1.15rem;
+  /* in the drill's centered block, one line per outline right under the long one */
+  margin: 0 0 0.4rem;
 }
 
-.short-outlines + .abbreviation-hints {
-  margin-top: 1rem;
+.short-outlines .short-outline {
+  margin: 0 0 0.1rem;
 }
 
-.short-outlines h3 {
-  font-size: 1.3rem;
+.short-outline.ruled-out {
+  opacity: 0.3;
 }
 
-.short-outlines .steno {
-  font-family: monospace;
+
+/* Dark mode: the Simulate run's lit keys and strokes glow, bright and outlined, against the dark keys. */
+html.dark .key-correct,
+html.dark .chord-overlay-lit,
+html.dark .legend li.legend-lit,
+html.dark .stroke-legend-group.legend-lit .stroke-legend-key.stroke-legend-pressed {
+  background: #2dff5a;
+  color: #000;
   font-weight: bold;
+  outline: 2px solid #fff;
+  box-shadow: 0 0 12px 3px rgba(45, 255, 90, 0.8);
+}
+html.dark .sim-mark .key-correct,
+html.dark .sim-mark .chord-overlay-lit,
+html.dark .legend li.legend-mark {
+  background: #ffee00;
+  box-shadow: 0 0 12px 3px rgba(255, 238, 0, 0.8);
 }

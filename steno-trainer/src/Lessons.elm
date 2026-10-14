@@ -538,7 +538,67 @@ steno examples) per the notation toggle. -}
 viewRule : (String -> String) -> Rule -> Html msg
 viewRule render rule =
     li [ class "lesson-rule" ]
-        [ p [ class "lesson-rule-text" ] [ text (render rule.text) ] ]
+        [ p [ class "lesson-rule-text" ] (boldRuleText rule.kind (render rule.text)) ]
+
+
+{-| A rule's (already rendered) text with its key names -- "La touche R- écrit",
+"Les touches a- e pressées ensemble écrivent" -- and, in a phoneme rule, every
+`/phoneme/` span in bold. -}
+boldRuleText : String -> String -> List (Html msg)
+boldRuleText kind rendered =
+    let
+        bold string =
+            Html.strong [] [ text string ]
+
+        prefixes =
+            [ "La touche ", "Les touches " ]
+
+        enders =
+            [ " écrit", " écrivent", " pressées", " marque" ]
+
+        splitKeys string =
+            prefixes
+                |> List.filter (\prefix -> String.startsWith prefix string)
+                |> List.head
+                |> Maybe.andThen
+                    (\prefix ->
+                        let
+                            rest =
+                                String.dropLeft (String.length prefix) string
+
+                            cut =
+                                enders
+                                    |> List.filterMap (\ender -> List.head (String.indices ender rest))
+                                    |> List.minimum
+                        in
+                        cut
+                            |> Maybe.map
+                                (\at ->
+                                    ( prefix, String.left at rest, String.dropLeft at rest )
+                                )
+                    )
+
+        phonemeSpans string =
+            if kind == "phoneme" then
+                String.split "/" string
+                    |> List.indexedMap
+                        (\i part ->
+                            if modBy 2 i == 1 then
+                                bold ("/" ++ part ++ "/")
+
+                            else
+                                text part
+                        )
+
+            else
+                [ text string ]
+    in
+    case splitKeys rendered of
+        Just ( prefix, keys, rest ) ->
+            text prefix :: bold keys :: phonemeSpans rest
+
+        Nothing ->
+            phonemeSpans rendered
 
 
 {-| The "Previous lesson"/"Next lesson" pair (English chrome, like "Start

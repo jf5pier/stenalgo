@@ -1,4 +1,4 @@
-module Drill exposing (TextStatus(..), textStatus, applyText, Outline, PracticeWord, Progress, Segment, State, applyStroke, currentSegmentIndex, currentWord, decoder, skipWords, matchedOutline, expectedStroke, init, nextWord, progress, progressAfter, reshuffle, sentenceDecoder, shortOutlines, wordDecoder)
+module Drill exposing (TextStatus(..), textStatus, applyText, Outline, PracticeWord, Progress, Segment, State, applyStroke, currentSegmentIndex, currentWord, decoder, skipWords, matchedOutline, expectedStroke, init, nextWord, progress, progressAfter, reshuffle, sentenceDecoder, shortOutlineMatches, shortOutlines, wordDecoder)
 
 {-| The drill engine: a shuffled walk through the word list (loaded already
 frequency-ordered by `util/export_practice_words.py`, but drilled in a
@@ -369,6 +369,48 @@ expectedStroke state =
         |> Maybe.andThen (\word -> progress word state.typed)
         |> Maybe.andThen (\p -> List.drop p.within p.outline.strokes |> List.head)
         |> Maybe.map Set.fromList
+
+
+{-| Each short outline of the current word with how the strokes typed so far in
+the word fit it: `matched` is the number of leading strokes it shares with them
+(0 before any stroke), `ruledOut` when strokes were typed and it does not start
+with them. -}
+shortOutlineMatches : State -> List { outline : Outline, matched : Int, ruledOut : Bool }
+shortOutlineMatches state =
+    let
+        within =
+            currentWord state
+                |> Maybe.andThen (\word -> progress word state.typed)
+                |> Maybe.map
+                    (\p ->
+                        if p.complete then
+                            0
+
+                        else
+                            p.within
+                    )
+                |> Maybe.withDefault 0
+
+        typedHere =
+            List.drop (List.length state.typed - within) state.typed
+    in
+    shortOutlines state
+        |> List.map
+            (\outline ->
+                let
+                    fits =
+                        within > 0 && List.take within outline.strokes == typedHere
+                in
+                { outline = outline
+                , matched =
+                    if fits then
+                        within
+
+                    else
+                        0
+                , ruledOut = within > 0 && not fits
+                }
+            )
 
 
 {-| The short outlines (merged, abbreviated) of the current word of the item,
