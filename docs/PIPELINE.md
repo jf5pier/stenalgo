@@ -2101,7 +2101,7 @@ then one lesson of the 20 most frequent marked routes (route >= 1) of verbs (one
 ### Trainer abbreviation column — util/export_affix_abbreviations.main (S9d)
 
 **Called by** `python dictionary.py` (after S9c), or by hand. **Input state** `affix_abbreviations.tsv` (S9b).
-**Transformation** spelling -> {long outline -> short outline}, first TSV row winning a shared long outline.
+**Transformation** spelling -> {long outline -> [short outlines]}: `briefs.tsv` rows first, then the affix rows, every distinct short kept; a short whose long outline is not a chord of `definitions.json` (the unmerged long of a merged chord) is folded under the page's chord with the same letters. Also reads `briefs.tsv` and `definitions.json`.
 **Artifacts** writes `steno-trainer/public/data/affix-abbreviations.json`, which the trainer's Definitions page matches by spelling and chord to fill its "Abbrev." column.
 
 ### Trainer expression lessons — util/export_expression_lessons.main (S10a)
