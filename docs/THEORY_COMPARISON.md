@@ -100,6 +100,15 @@ Reused, unchanged: `util/export_plover_complements.py` (`convertStroke`, `starbo
   (diphthongs, then pairs, then single phonemes). Pluvier's real generator (`src/steno_encoding.py` `CHUNKS`) has whole-syllable exceptions that are NOT reproduced: the table
   encoding equals a shipped outline for only 2.77% of words (34.4% of frequency, four layers), so the Pluvier order figure is an approximation. The report prints that validity share.
 
+- **Same-stroke words (section 5a).** Among the words both theories cover, those whose shortest outline has as many strokes in Stenalgo (the short form
+  with `--stenalgo-abbreviations`, else the dictionary form) as in Pluvier, restricted to the words priced on Starboard in both theories and in both forms
+  (short and long) so the sums are comparable. Reported for the short form and the long form (Stenalgo's dictionary outline, Pluvier's longest): the sum of the
+  chord costs of Stenalgo and of Pluvier (converted to Starboard), the mean per word and the frequency-weighted mean. Code: `sameStrokeCosts` src/theorycompare.py;
+  JSON `sameStrokeWords` in the `commonWords` and `fullCoverage` blocks.
+- **Strokes by feature (section 3b).** For each key of TENSES + FEATURES (mood and tense, person, gender, number): of the forms carrying it that both theories cover,
+  how many Stenalgo writes in fewer (`shorter`), as many (`equal`) or more (`longer`) strokes than Pluvier in their shortest forms. Code:
+  `strokeComparisonByFeature`; JSON `strokesByFeature` (`forms`, `shorter`, `equal`, `longer` per key).
+
 ## Report layout
 
 **Markdown** (`theory_comparison.md`): tables with Stenalgo and Pluvier columns side by side; short form and long form rows paired (short first); `—` = does not apply, `0` = real zero; coverage cells read "count (freq share)". Sections in order: word coverage, lemma coverage, coverage by mood, tense, person, gender and number (its own six-column table: forms, then covered and colliding per theory; a verb cell shows the split-to-whole range), then on words covered by both: collisions, strokes and cost (headline row: cost on its own keyboard, Stenalgo on Starboard and Pluvier on Ireland; then both on Starboard; the tall-`S` variant as a footnote), one-more-stroke resolution, phoneme order. One "how to read" sentence per section.

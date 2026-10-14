@@ -441,6 +441,41 @@ def complexityBoth(costsA: dict[str, int | None], costsB: dict[str, int | None],
             "meanB": weightedMean({w: float(c) for w, c in costsB.items() if c is not None and w in both}, freq, both)}
 
 
+def sameStrokeCosts(shortA: dict[str, str], shortB: dict[str, str], costs: dict[str, dict[str, int | None]],
+                    freq: dict[str, float], words: set[str]) -> dict[str, Any]:
+    """The words whose shortest outline has as many strokes in A as in B (`shortA`, `shortB`: word -> shortest outline text),
+    among those priceable in all four of `costs` (`shortA`, `shortB`, `longA`, `longB`: word -> summed chord cost). For the short
+    and the long form: the sum of the costs of A and of B over these words, their mean per word and their frequency-weighted
+    mean, so the two theories are compared on words they write in the same number of strokes."""
+    same = {w for w in words if w in shortA and w in shortB
+            and len(shortA[w].split("/")) == len(shortB[w].split("/"))}
+    priced = {w for w in same if all(costs[name].get(w) is not None for name in ("shortA", "shortB", "longA", "longB"))}
+    out: dict[str, Any] = {"sameStrokeWords": len(same), "pricedWords": len(priced),
+                           "frequencyShare": share(mass(freq, priced), mass(freq, words & shortA.keys() & shortB.keys()))}
+    for form, (nameA, nameB) in {"short": ("shortA", "shortB"), "long": ("longA", "longB")}.items():
+        sums: dict[str, Any] = {}
+        for side, name in (("a", nameA), ("b", nameB)):
+            values = {w: float(costs[name][w] or 0) for w in priced}
+            sums[side] = {"sum": sum(values.values()), "meanPerWord": share(sum(values.values()), len(priced)),
+                          "frequencyWeightedMean": weightedMean(values, freq, priced)}
+        out[form] = sums
+    return out
+
+
+def strokeComparisonByFeature(lexicon: Lexicon, shortA: dict[str, str], shortB: dict[str, str]) -> dict[str, Any]:
+    """Per tense (TENSES) and per other feature (FEATURES): of the forms carrying it that both theories cover, how many are
+    written in fewer, as many or more strokes by A than by B in their shortest outline (`shortA`, `shortB`: word -> outline)."""
+    out: dict[str, Any] = {}
+    for key in TENSES + FEATURES:
+        forms = [w for w in lexicon.featureFreq.get(key, {}) if w in shortA and w in shortB]
+        counts = {"shorter": 0, "equal": 0, "longer": 0}
+        for w in forms:
+            a, b = len(shortA[w].split("/")), len(shortB[w].split("/"))
+            counts["shorter" if a < b else "equal" if a == b else "longer"] += 1
+        out[key] = {"forms": len(forms), **counts}
+    return out
+
+
 # --- phoneme order --------------------------------------------------------------------------------------------------------
 
 def countViolations(groups: list[tuple[int, ...]]) -> int:

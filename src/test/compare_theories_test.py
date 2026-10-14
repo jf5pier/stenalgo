@@ -5,6 +5,7 @@ import os
 import tempfile
 import unittest
 
+from src import theorycompare as tc
 from util import compare_theories
 
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
@@ -42,9 +43,29 @@ class TestCompareTheories(unittest.TestCase):
             self.assertEqual(first["theories"]["pluvier"]["wordsOnlyInCollisionRecord"], 1)
             order = first["fullCoverage"]["phonemeOrder"]["pluvier"]
             self.assertAlmostEqual(order["shareWithViolation"], 5 / 23)                             # tsar only, of star+tsar+chat+froid
+            self.assertIn("sameStrokeWords", first["fullCoverage"])
+            self.assertIn("ind:pre", first["strokesByFeature"])
             text = compare_theories.renderMarkdown(first)
             self.assertIn("## 1. Word coverage", text)
+            self.assertIn("### 3b. Strokes by mood", text)
+            self.assertIn("### 5a. Words written in as many strokes", text)
             self.assertIn("#### Every claimant takes the stroke", text)
+
+    def test_same_stroke_costs_and_stroke_comparison(self) -> None:
+        shortA = {"a": "x", "b": "x/y", "c": "x", "d": "x/y"}
+        shortB = {"a": "p", "b": "p", "c": "p/q", "d": "p/q"}
+        costs: dict[str, dict[str, int | None]] = {"shortA": {"a": 10, "b": 5, "c": 7, "d": None}, "shortB": {"a": 12, "b": 5, "c": 7, "d": 9},
+                 "longA": {"a": 20, "d": 3}, "longB": {"a": 24, "d": 3}}
+        freq = {"a": 3.0, "b": 1.0, "c": 1.0, "d": 1.0}
+        report = tc.sameStrokeCosts(shortA, shortB, costs, freq, set(freq))
+        self.assertEqual(report["sameStrokeWords"], 2)                                    # a (1 = 1 stroke) and d (2 = 2)
+        self.assertEqual(report["pricedWords"], 1)                                        # d has no Stenalgo short cost
+        self.assertEqual((report["short"]["a"]["sum"], report["short"]["b"]["sum"]), (10.0, 12.0))
+        self.assertEqual((report["long"]["a"]["sum"], report["long"]["b"]["sum"]), (20.0, 24.0))
+        lexicon = tc.Lexicon({}, {})
+        lexicon.featureFreq = {"inf": {"a": 1.0, "b": 1.0, "c": 1.0, "zz": 1.0}}
+        by = tc.strokeComparisonByFeature(lexicon, shortA, shortB)["inf"]
+        self.assertEqual(by, {"forms": 3, "shorter": 1, "equal": 1, "longer": 1})        # a equal, b longer (2 > 1), c shorter (1 < 2)
 
     def test_main_writes_files(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

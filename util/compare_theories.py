@@ -208,6 +208,12 @@ def compare(args: argparse.Namespace) -> dict[str, Any]:
                 "complexity": tc.complexity(shortCosts, freq, words & stenCovered),
                 "abbreviatedWords": len(abbreviated),
                 "abbreviatedFrequencyShare": tc.share(tc.mass(freq, abbreviated), tc.mass(freq, words & stenCovered))}}
+        both = words & stenCovered & pluCovered
+        shortestSten = (short or sten).chosen
+        sameStroke = tc.sameStrokeCosts(
+            shortestSten, plu.chosen,
+            {"shortA": shortCosts if shortCosts is not None else stenCosts, "shortB": pluOnStar,
+             "longA": stenCosts, "longB": pluLongOnStar}, freq, both)
         multi = {w for w in words & pluCovered if len(plu.outlines[w]) > 1}
         differing = {w for w in multi if pluLong.chosen[w] != plu.chosen[w]}
         pluLongBlock = {
@@ -222,7 +228,7 @@ def compare(args: argparse.Namespace) -> dict[str, Any]:
                 "pluvierOnStarboardTallS": tc.complexity(pluLongOnStarTallS, freq, words & pluCovered),
                 "pluvierOnIreland": tc.complexity(pluLongOnIre, freq, words & pluCovered)}}
         return {
-            **shortBlock, "pluvierLong": pluLongBlock,
+            **shortBlock, "pluvierLong": pluLongBlock, "sameStrokeWords": sameStroke,
             "withoutCollisions": {"extraStrokeCost": {"starboard": extraOnStar, "ireland": extraOnIre},
                                   "winnerKeeps": resolved(words, "winnerKeeps"),
                                   "everyClaimant": resolved(words, "everyClaimant")},
@@ -252,6 +258,7 @@ def compare(args: argparse.Namespace) -> dict[str, Any]:
         "lemmaCoverage": lemmaReport,
         "verbCoverageByTense": tenseReport,
         "coverageByFeature": tc.coverageByFeature(lexicon, sten, plu),
+        "strokesByFeature": tc.strokeComparisonByFeature(lexicon, (short or sten).chosen, plu.chosen),
         "inputs": {
             "stenalgoDict": {"path": args.stenalgo_dict, "md5": md5(args.stenalgo_dict)},
             "stenalgoLayout": {"path": args.stenalgo_layout, "md5": md5(args.stenalgo_layout)},
@@ -276,6 +283,10 @@ def compare(args: argparse.Namespace) -> dict[str, Any]:
             "share": tc.share(sum(pluMatch.values()), len(pluMatch)),
             "frequencyShare": tc.weightedMean(pluMatch, freq, pluOnly)},
     }
+
+
+def share(part: float, whole: float) -> float | None:
+    return tc.share(part, whole)
 
 
 def pct(x: float | None) -> str:
@@ -366,6 +377,17 @@ def renderMarkdown(report: dict[str, Any]) -> str:
               *(f"| {TENSE_LABELS.get(key, key)} | {f['forms']} | {featureCells(f['stenalgo'])} | {featureCells(f['pluvier'])} |"
                 for key, f in features.items()), ""]
 
+    strokes = report["strokesByFeature"]
+    lines += ["### 3b. Strokes by mood, tense, person, gender and number", "",
+              "For the forms carrying each feature that both theories cover: how many Stenalgo writes in fewer strokes, as many or more "
+              "strokes than Pluvier, each in its shortest form (Stenalgo's short form with `--stenalgo-abbreviations`, else its "
+              "dictionary form).", "",
+              "| feature | forms in both | Stenalgo shorter | equal | Stenalgo longer |", "|---|---|---|---|---|",
+              *(f"| {TENSE_LABELS.get(key, key)} | {f['forms']} | "
+                + " | ".join(withShare(f[column], share(f[column], f["forms"]) if f["forms"] else None)
+                             for column in ("shorter", "equal", "longer")) + " |"
+                for key, f in strokes.items()), ""]
+
     common = f"words covered by both: {cov['both']['spellings']}"
     section(f"4. Collisions ({common})",
             "A word collides when its outline also belongs to another word; fewer colliding words means fewer ambiguities left to the typist.",
@@ -398,6 +420,21 @@ def renderMarkdown(report: dict[str, Any]) -> str:
         f"With Ireland's `S` moved to the cheaper pinky key of Starboard, Pluvier on Starboard costs {num(tallIre['meanCost'])} (short form) "
         f"and {num(plcx['pluvierOnStarboardTallS']['meanCost'])} (long form); on the {tall['words']} words priced on both boards, "
         f"that variant costs {num(tall['meanA'])} on Starboard against {num(tall['meanB'])} on Ireland.", ""]
+
+    sw = com["sameStrokeWords"]
+    lines += [f"### 5a. Words written in as many strokes by both ({common})", "",
+              f"Among the words both theories cover, {sw['sameStrokeWords']} take the same number of strokes in their shortest "
+              f"form in Stenalgo ({'short form' if ss is not None else 'dictionary form, no abbreviation file given'}) and in Pluvier; "
+              f"{sw['pricedWords']} of them ({pct(sw['frequencyShare'])} of the frequency of the words covered by both) can be priced "
+              "on Starboard in both theories and in both forms. Pluvier is converted key to key to the Starboard. "
+              "Complexity is the sum of the chord costs of the word's outline; the long form is Stenalgo's dictionary outline and "
+              "Pluvier's longest.", ""]
+    lines += table([(f"sum of the complexity, {form} form", f"{sw[form]['a']['sum']:.0f}", f"{sw[form]['b']['sum']:.0f}")
+                    for form in ("short", "long")]
+                   + [(f"mean complexity per word, {form} form", num(sw[form]['a']['meanPerWord']), num(sw[form]['b']['meanPerWord']))
+                      for form in ("short", "long")]
+                   + [(f"frequency-weighted mean complexity, {form} form", num(sw[form]['a']['frequencyWeightedMean']),
+                       num(sw[form]['b']['frequencyWeightedMean'])) for form in ("short", "long")])
 
     extra = wc["extraStrokeCost"]
     lines += [f"### 5b. If every colliding word took one more stroke ({common})", "",
