@@ -1183,6 +1183,19 @@ class TestUnlockedWords:
         pool = selectUnlockedWords(records, top)
         assert len(pool) == 30
 
+    def test_each_introduced_phoneme_gets_five_words_when_unlocked(self) -> None:
+        common = [self._record(f"w{i:03d}", 1000 - i, f"l{i}") for i in range(60)]
+        rare = [self._record(f"g{i}", 10 - i, f"m{i}") for i in range(7)]
+        for record in common:
+            record["_phonemeParts"] = frozenset({("a", "nucleus")})
+        for record in rare:
+            record["_phonemeParts"] = frozenset({("g", "coda")})
+        records = common + rare
+        pool = selectUnlockedWords(records, topSpellings(records), [("g", "coda"), ("a", "nucleus")])
+        assert [r["ortho"] for r in pool if ("g", "coda") in r["_phonemeParts"]] == [f"g{i}" for i in range(5)]
+        few = selectUnlockedWords(common + rare[:2], topSpellings(records), [("g", "coda")])
+        assert sum(("g", "coda") in r["_phonemeParts"] for r in few) == 2
+
     def test_reorder_keeps_fixed_lessons_and_respects_dependencies(self) -> None:
         chunks = [[{"keypress": (i,)}] for i in range(15)]
         word = types.SimpleNamespace(lemme="x")

@@ -155,6 +155,10 @@ targets (the layout writes 12 and 49 words with their keys).
 **Pool.** A phoneme lesson's `words` are the records it unlocks, ranked
 `(-frequency, ortho, steno)`: first the top-20,000 spellings, at most 3 per lemma, up
 to 50; if fewer than 30, the remaining top-20,000 ones, then rarer ones, until 30.
+Then every `(phoneme, part)` the lesson introduces gets at least 5 words realizing it in
+that part (`MIN_PER_PHONEME`), the most frequent unlocked ones added to the pool when it
+holds fewer (all of them when fewer are unlocked), so a rarer phoneme such as the coda /g/
+is never missing from the drill; the pool may then exceed 50.
 The trainer's "100% new" mode shows exactly these words (the 50/50 mix adds earlier
 lessons' words).
 

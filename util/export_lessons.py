@@ -62,6 +62,7 @@ RESERVED_KEYS = frozenset({0, 1, STAR_KEY, HASH_KEY})
 
 POOL_SIZE = 50           # records per lesson pool (§5)
 MIN_NEW_WORDS = 30       # a phoneme lesson ideally unlocks this many words (§2.6)
+MIN_PER_PHONEME = 5      # ... and at least this many words realizing each phoneme the lesson introduces, when it unlocks that many
 MIN_NEW_LEMMAS = 15      # ... of at least this many different lemmas (§2.6)
 TOP_WORDS = 20000        # ... all within the TOP_WORDS most frequent spellings (§2.6)
 MAX_PER_LEMMA = 3        # pool diversity: records of one lemma before the relaxed fill (§2.6)
@@ -464,11 +465,16 @@ def reorderPhonemeChunks(chunks: list[list[dict[str, Any]]],
     return order
 
 
-def selectUnlockedWords(unlocked: list[dict[str, Any]], top: frozenset[str]) -> list[dict[str, Any]]:
+def selectUnlockedWords(unlocked: list[dict[str, Any]], top: frozenset[str],
+                        introduced: Iterable[tuple[str, str]] = ()) -> list[dict[str, Any]]:
     """§2.6: the pool of a phoneme lesson from the records it unlocks, ranked by
     `(-frequency, ortho, steno)`. Tier 1: top-`TOP_WORDS` spellings, at most
     `MAX_PER_LEMMA` per lemma, up to `POOL_SIZE`. Tier 2 (only below `MIN_NEW_WORDS`):
-    the remaining top spellings. Tier 3 (still below): the rarer unlocked words."""
+    the remaining top spellings. Tier 3 (still below): the rarer unlocked words.
+    Then each `(phoneme, part)` of `introduced` (what the lesson's keypresses write) gets
+    at least `MIN_PER_PHONEME` words that realize it in that part, the most frequent
+    unlocked ones added when the pool holds fewer (all of them when it unlocks fewer):
+    a rarer phoneme such as the coda /g/ must not be missing from the drill."""
     ranked = sorted(unlocked, key=lambda r: (-r["frequency"], r["ortho"], r["steno"]))
     common = [r for r in ranked if r["ortho"] in top]
     chosen: list[dict[str, Any]] = []
@@ -484,6 +490,14 @@ def selectUnlockedWords(unlocked: list[dict[str, Any]], top: frozenset[str]) -> 
                 break
             if not any(record is picked for picked in chosen):
                 chosen.append(record)
+    for pair in introduced:
+        holding = [r for r in chosen if pair in r["_phonemeParts"]]
+        for record in ranked:
+            if len(holding) >= MIN_PER_PHONEME:
+                break
+            if pair in record["_phonemeParts"] and not any(record is picked for picked in chosen):
+                chosen.append(record)
+                holding.append(record)
     return sorted(chosen, key=lambda r: (-r["frequency"], r["ortho"], r["steno"]))
 
 
@@ -943,7 +957,8 @@ def buildLessons(
         pool = selectUnlockedWords(
             [record for record, mask in masked
              if mask & ~coveredMask == 0 and mask & ~previousMask],
-            topSet)
+            topSet,
+            [(phoneme, item["part"]) for item in chunk for phoneme in item["phonemes"]])
         index = counters.get("phonemes", 0) + 1
         # The title lists the phonemes the introduced keypresses write, one by one
         # ("les phonèmes R- @ 9 a -j -b -w"): an onset phoneme with a trailing

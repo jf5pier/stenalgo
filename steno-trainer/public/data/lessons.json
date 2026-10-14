@@ -896,6 +896,41 @@
       ]
      ],
      "frequency": 0.03
+    },
+    {
+     "ortho": "ouaille",
+     "before": "l'",
+     "after": "",
+     "label": "nom, f. sg.",
+     "phonology": "waj",
+     "steno": "waj",
+     "strokes": [
+      [
+       9,
+       12,
+       16
+      ]
+     ],
+     "frequency": 0.01
+    },
+    {
+     "ortho": "hoirie",
+     "before": "l'",
+     "after": "",
+     "label": "nom, f. sg.",
+     "phonology": "wa.Ri",
+     "steno": "wa/Ri",
+     "strokes": [
+      [
+       9,
+       12
+      ],
+      [
+       8,
+       13
+      ]
+     ],
+     "frequency": 0.0
     }
    ]
   },
@@ -1837,6 +1872,68 @@
       ]
      ],
      "frequency": 6.81
+    },
+    {
+     "ortho": "admis",
+     "before": "",
+     "after": "",
+     "label": "participe passé, m. sg. · adjectif, m. · nom, m.",
+     "phonology": "ad.mi",
+     "steno": "ad/mi",
+     "strokes": [
+      [
+       12,
+       19
+      ],
+      [
+       6,
+       13
+      ]
+     ],
+     "frequency": 6.74
+    },
+    {
+     "ortho": "hystérique",
+     "before": "l'",
+     "after": "",
+     "label": "adjectif, sg. · nom, sg.",
+     "phonology": "is.te.Rik",
+     "steno": "is/te/Rik",
+     "strokes": [
+      [
+       13,
+       17
+      ],
+      [
+       7,
+       14
+      ],
+      [
+       8,
+       13,
+       18
+      ]
+     ],
+     "frequency": 5.6
+    },
+    {
+     "ortho": "antique",
+     "before": "l'",
+     "after": "",
+     "label": "adjectif, sg. · nom, sg.",
+     "phonology": "@.tik",
+     "steno": "@/tik",
+     "strokes": [
+      [
+       11
+      ],
+      [
+       7,
+       13,
+       18
+      ]
+     ],
+     "frequency": 5.59
     }
    ]
   },
@@ -2764,6 +2861,23 @@
       ]
      ],
      "frequency": 65.03
+    },
+    {
+     "ortho": "piste",
+     "before": "la",
+     "after": "",
+     "label": "nom, f. sg. · indicatif présent, 3e sg.",
+     "phonology": "pist",
+     "steno": "pist",
+     "strokes": [
+      [
+       4,
+       13,
+       17,
+       20
+      ]
+     ],
+     "frequency": 43.01
     }
    ]
   },
@@ -2790,7 +2904,7 @@
     {
      "kind": "phoneme",
      "hand": "right",
-     "text": "La touche -n écrit le son /n/ en fin de syllabe (« une », « bonne », « personne »)."
+     "text": "La touche -n écrit le son /n/ en fin de syllabe (« in », « mine », « sonne »)."
     },
     {
      "kind": "phoneme",
@@ -3685,6 +3799,92 @@
       ]
      ],
      "frequency": 58.48
+    },
+    {
+     "ortho": "in",
+     "before": "",
+     "after": "",
+     "label": "adjectif",
+     "phonology": "in",
+     "steno": "in",
+     "strokes": [
+      [
+       13,
+       22
+      ]
+     ],
+     "frequency": 47.17
+    },
+    {
+     "ortho": "mine",
+     "before": "la",
+     "after": "",
+     "label": "nom, f. sg. · indicatif présent, 3e sg.",
+     "phonology": "min",
+     "steno": "min",
+     "strokes": [
+      [
+       6,
+       13,
+       22
+      ]
+     ],
+     "frequency": 36.84
+    },
+    {
+     "ortho": "sonne",
+     "before": "il",
+     "after": "",
+     "label": "indicatif présent, 3e sg.",
+     "phonology": "sOn",
+     "steno": "sen",
+     "strokes": [
+      [
+       3,
+       14,
+       22
+      ]
+     ],
+     "frequency": 31.69
+    },
+    {
+     "ortho": "crâne",
+     "before": "le",
+     "after": "",
+     "label": "adjectif, sg. · nom, m. sg. · indicatif présent, 3e sg.",
+     "phonology": "kRan",
+     "steno": "kRan",
+     "strokes": [
+      [
+       2,
+       8,
+       12,
+       22
+      ]
+     ],
+     "frequency": 26.88
+    },
+    {
+     "ortho": "poitrine",
+     "before": "la",
+     "after": "",
+     "label": "nom, f. sg.",
+     "phonology": "pwa.tRin",
+     "steno": "pwa/tRin",
+     "strokes": [
+      [
+       4,
+       9,
+       12
+      ],
+      [
+       7,
+       8,
+       13,
+       22
+      ]
+     ],
+     "frequency": 25.31
     }
    ]
   },
@@ -3727,17 +3927,17 @@
     {
      "kind": "phoneme",
      "hand": "thumbs",
-     "text": "Les touches @-, a- pressées ensemble écrivent /°/ (« ce », « te », « que »)\nou /8/ (« lui », « suis », « nuit »)."
+     "text": "Les touches @-, a- pressées ensemble écrivent /°/ (« ce », « te », « que »)\nou /8/ (« tueur », « sueur », « tuant »)."
     },
     {
      "kind": "phoneme",
      "hand": "left",
-     "text": "Les touches R-, w- pressées ensemble écrivent /j/ en début de syllabe (« hier », « voyez »)."
+     "text": "Les touches R-, w- pressées ensemble écrivent /j/ en début de syllabe (« hier », « voyez », « croyez »)."
     },
     {
      "kind": "phoneme",
      "hand": "right",
-     "text": "Les touches -j, -s pressées ensemble écrivent /v/ en fin de syllabe (« arrive », « vivre »)."
+     "text": "Les touches -j, -s pressées ensemble écrivent /v/ en fin de syllabe (« arrive », « vivre », « peuvent »)."
     },
     {
      "kind": "phoneme",
@@ -4654,6 +4854,209 @@
       ]
      ],
      "frequency": 156.0
+    },
+    {
+     "ortho": "croyez",
+     "before": "vous",
+     "after": "",
+     "label": "indicatif présent, 2e pl.",
+     "phonology": "kRwa.je",
+     "steno": "kRwa/Rwe",
+     "strokes": [
+      [
+       2,
+       8,
+       9,
+       12
+      ],
+      [
+       8,
+       9,
+       14
+      ]
+     ],
+     "frequency": 152.54
+    },
+    {
+     "ortho": "ciel",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg.",
+     "phonology": "sjEl",
+     "steno": "sRwiel",
+     "strokes": [
+      [
+       3,
+       8,
+       9,
+       13,
+       14,
+       23
+      ]
+     ],
+     "frequency": 142.22
+    },
+    {
+     "ortho": "peuvent",
+     "before": "ils",
+     "after": "",
+     "label": "indicatif présent, 3e pl.",
+     "phonology": "p9v",
+     "steno": "p@js",
+     "strokes": [
+      [
+       4,
+       11,
+       16,
+       17
+      ]
+     ],
+     "frequency": 133.3
+    },
+    {
+     "ortho": "ailleurs",
+     "before": "",
+     "after": "",
+     "label": "adverbe",
+     "phonology": "a.j9R",
+     "steno": "a/Rw@R",
+     "strokes": [
+      [
+       12
+      ],
+      [
+       8,
+       9,
+       11,
+       21
+      ]
+     ],
+     "frequency": 128.74
+    },
+    {
+     "ortho": "rêve",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg. · indicatif présent, 3e sg.",
+     "phonology": "REv",
+     "steno": "Riejs",
+     "strokes": [
+      [
+       8,
+       13,
+       14,
+       16,
+       17
+      ]
+     ],
+     "frequency": 99.39
+    },
+    {
+     "ortho": "savent",
+     "before": "ils",
+     "after": "",
+     "label": "indicatif présent, 3e pl.",
+     "phonology": "sav",
+     "steno": "sajs",
+     "strokes": [
+      [
+       3,
+       12,
+       16,
+       17
+      ]
+     ],
+     "frequency": 64.32
+    },
+    {
+     "ortho": "tueur",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg.",
+     "phonology": "t89R",
+     "steno": "t@aR",
+     "strokes": [
+      [
+       7,
+       11,
+       12,
+       21
+      ]
+     ],
+     "frequency": 52.42
+    },
+    {
+     "ortho": "sueur",
+     "before": "la",
+     "after": "",
+     "label": "nom, f. sg.",
+     "phonology": "s89R",
+     "steno": "s@aR",
+     "strokes": [
+      [
+       3,
+       11,
+       12,
+       21
+      ]
+     ],
+     "frequency": 10.27
+    },
+    {
+     "ortho": "tuant",
+     "before": "",
+     "after": "",
+     "label": "participe présent",
+     "phonology": "t8.@",
+     "steno": "t@a/@",
+     "strokes": [
+      [
+       7,
+       11,
+       12
+      ],
+      [
+       11
+      ]
+     ],
+     "frequency": 6.42
+    },
+    {
+     "ortho": "puanteur",
+     "before": "la",
+     "after": "",
+     "label": "nom, f. sg.",
+     "phonology": "p8@.t9R",
+     "steno": "p@a/t@R",
+     "strokes": [
+      [
+       4,
+       11,
+       12
+      ],
+      [
+       7,
+       11,
+       21
+      ]
+     ],
+     "frequency": 3.32
+    },
+    {
+     "ortho": "puant",
+     "before": "le",
+     "after": "",
+     "label": "adjectif, m. sg.",
+     "phonology": "p8@",
+     "steno": "p@a",
+     "strokes": [
+      [
+       4,
+       11,
+       12
+      ]
+     ],
+     "frequency": 2.74
     }
    ]
   },
@@ -5667,7 +6070,7 @@
     {
      "kind": "phoneme",
      "hand": "right",
-     "text": "Les touches -k, -d pressées ensemble écrivent /g/ en fin de syllabe (« exactement », « exemple », « existe »)."
+     "text": "Les touches -k, -d pressées ensemble écrivent /g/ en fin de syllabe (« exactement », « existe », « exact »)."
     },
     {
      "kind": "phoneme",
@@ -5677,7 +6080,7 @@
     {
      "kind": "phoneme",
      "hand": "right",
-     "text": "Les touches -n, -l pressées ensemble écrivent /z/ en fin de syllabe (« cause »)."
+     "text": "Les touches -n, -l pressées ensemble écrivent /z/ en fin de syllabe (« cause », « exactement », « suppose »)."
     }
    ],
    "words": [
@@ -6672,6 +7075,146 @@
       ]
      ],
      "frequency": 151.04
+    },
+    {
+     "ortho": "exactement",
+     "before": "",
+     "after": "",
+     "label": "adverbe",
+     "phonology": "Egz.ak.t°.m@",
+     "steno": "iekdnl/ak/t@a/m@",
+     "strokes": [
+      [
+       13,
+       14,
+       18,
+       19,
+       22,
+       23
+      ],
+      [
+       12,
+       18
+      ],
+      [
+       7,
+       11,
+       12
+      ],
+      [
+       6,
+       11
+      ]
+     ],
+     "frequency": 144.62
+    },
+    {
+     "ortho": "suppose",
+     "before": "il",
+     "after": "",
+     "label": "indicatif présent, 3e sg.",
+     "phonology": "sy.poz",
+     "steno": "s@i/paenl",
+     "strokes": [
+      [
+       3,
+       11,
+       13
+      ],
+      [
+       4,
+       12,
+       14,
+       22,
+       23
+      ]
+     ],
+     "frequency": 89.07
+    },
+    {
+     "ortho": "existe",
+     "before": "il",
+     "after": "",
+     "label": "indicatif présent, 3e sg.",
+     "phonology": "Egz.ist",
+     "steno": "iekdnl/ist",
+     "strokes": [
+      [
+       13,
+       14,
+       18,
+       19,
+       22,
+       23
+      ],
+      [
+       13,
+       17,
+       20
+      ]
+     ],
+     "frequency": 85.86
+    },
+    {
+     "ortho": "exact",
+     "before": "l'",
+     "after": "",
+     "label": "adjectif, m. sg.",
+     "phonology": "Egz.akt",
+     "steno": "iekdnl/akt",
+     "strokes": [
+      [
+       13,
+       14,
+       18,
+       19,
+       22,
+       23
+      ],
+      [
+       12,
+       18,
+       20
+      ]
+     ],
+     "frequency": 76.66
+    },
+    {
+     "ortho": "langue",
+     "before": "la",
+     "after": "",
+     "label": "nom, f. sg.",
+     "phonology": "l@g",
+     "steno": "mt@kd",
+     "strokes": [
+      [
+       6,
+       7,
+       11,
+       18,
+       19
+      ]
+     ],
+     "frequency": 58.95
+    },
+    {
+     "ortho": "longue",
+     "before": "la",
+     "after": "",
+     "label": "adjectif, f. sg. · nom, f. sg.",
+     "phonology": "l§g",
+     "steno": "mtaikd",
+     "strokes": [
+      [
+       6,
+       7,
+       12,
+       13,
+       18,
+       19
+      ]
+     ],
+     "frequency": 54.12
     }
    ]
   },
@@ -7826,6 +8369,96 @@
       ]
      ],
      "frequency": 84.73
+    },
+    {
+     "ortho": "offre",
+     "before": "l'",
+     "after": "",
+     "label": "nom, f. sg. · indicatif présent, 3e sg.",
+     "phonology": "OfR",
+     "steno": "esdR",
+     "strokes": [
+      [
+       14,
+       17,
+       19,
+       21
+      ]
+     ],
+     "frequency": 51.81
+    },
+    {
+     "ortho": "stop",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg.",
+     "phonology": "stOp",
+     "steno": "stejk",
+     "strokes": [
+      [
+       3,
+       7,
+       14,
+       16,
+       18
+      ]
+     ],
+     "frequency": 44.36
+    },
+    {
+     "ortho": "coffre",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg. · indicatif présent, 3e sg.",
+     "phonology": "kOfR",
+     "steno": "kesdR",
+     "strokes": [
+      [
+       2,
+       14,
+       17,
+       19,
+       21
+      ]
+     ],
+     "frequency": 35.97
+    },
+    {
+     "ortho": "neuf",
+     "before": "le",
+     "after": "",
+     "label": "adjectif, m. sg. · adjectif numéral",
+     "phonology": "n9f",
+     "steno": "mR@sd",
+     "strokes": [
+      [
+       6,
+       8,
+       11,
+       17,
+       19
+      ]
+     ],
+     "frequency": 32.05
+    },
+    {
+     "ortho": "souffre",
+     "before": "il",
+     "after": "",
+     "label": "indicatif présent, 3e sg.",
+     "phonology": "sufR",
+     "steno": "s@esdR",
+     "strokes": [
+      [
+       3,
+       11,
+       14,
+       17,
+       19,
+       21
+      ]
+     ],
+     "frequency": 31.52
     }
    ]
   },
@@ -8875,6 +9508,109 @@
       ]
      ],
      "frequency": 119.54
+    },
+    {
+     "ortho": "ligne",
+     "before": "la",
+     "after": "",
+     "label": "nom, f. sg. · indicatif présent, 3e sg.",
+     "phonology": "liN",
+     "steno": "mtitn",
+     "strokes": [
+      [
+       6,
+       7,
+       13,
+       20,
+       22
+      ]
+     ],
+     "frequency": 69.42
+    },
+    {
+     "ortho": "signe",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg. · indicatif présent, 3e sg.",
+     "phonology": "siN",
+     "steno": "sitn",
+     "strokes": [
+      [
+       3,
+       13,
+       20,
+       22
+      ]
+     ],
+     "frequency": 67.74
+    },
+    {
+     "ortho": "campagne",
+     "before": "la",
+     "after": "",
+     "label": "nom, f. sg.",
+     "phonology": "k@.paN",
+     "steno": "k@/patn",
+     "strokes": [
+      [
+       2,
+       11
+      ],
+      [
+       4,
+       12,
+       20,
+       22
+      ]
+     ],
+     "frequency": 48.61
+    },
+    {
+     "ortho": "montagne",
+     "before": "la",
+     "after": "",
+     "label": "nom, f. sg.",
+     "phonology": "m§.taN",
+     "steno": "mai/tatn",
+     "strokes": [
+      [
+       6,
+       12,
+       13
+      ],
+      [
+       7,
+       12,
+       20,
+       22
+      ]
+     ],
+     "frequency": 36.76
+    },
+    {
+     "ortho": "accompagne",
+     "before": "il",
+     "after": "",
+     "label": "indicatif présent, 3e sg.",
+     "phonology": "a.k§.paN",
+     "steno": "a/kai/patn",
+     "strokes": [
+      [
+       12
+      ],
+      [
+       2,
+       12,
+       13
+      ],
+      [
+       4,
+       12,
+       20,
+       22
+      ]
+     ],
+     "frequency": 33.28
     }
    ]
   },
@@ -9942,7 +10678,7 @@
     {
      "kind": "phoneme",
      "hand": "right",
-     "text": "La touche -Z écrit /Z/ (« mariage », « âge », « visage »)\nou /G/ (« parking », « thanksgiving », « ring »)."
+     "text": "La touche -Z écrit /Z/ (« mariage », « âge », « visage »)\nou /G/ (« parking », « ring », « shopping »)."
     },
     {
      "kind": "phoneme",
@@ -10911,6 +11647,111 @@
       ]
      ],
      "frequency": 29.46
+    },
+    {
+     "ortho": "parking",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg.",
+     "phonology": "paR.kiG",
+     "steno": "paR/kiZ",
+     "strokes": [
+      [
+       4,
+       12,
+       21
+      ],
+      [
+       2,
+       13,
+       24
+      ]
+     ],
+     "frequency": 17.38
+    },
+    {
+     "ortho": "ring",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg.",
+     "phonology": "RiG",
+     "steno": "RiZ",
+     "strokes": [
+      [
+       8,
+       13,
+       24
+      ]
+     ],
+     "frequency": 6.19
+    },
+    {
+     "ortho": "shopping",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg.",
+     "phonology": "SO.piG",
+     "steno": "pme/piZ",
+     "strokes": [
+      [
+       4,
+       6,
+       14
+      ],
+      [
+       4,
+       13,
+       24
+      ]
+     ],
+     "frequency": 5.64
+    },
+    {
+     "ortho": "kidnapping",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg.",
+     "phonology": "kid.na.piG",
+     "steno": "kid/mRa/piZ",
+     "strokes": [
+      [
+       2,
+       13,
+       19
+      ],
+      [
+       6,
+       8,
+       12
+      ],
+      [
+       4,
+       13,
+       24
+      ]
+     ],
+     "frequency": 5.33
+    },
+    {
+     "ortho": "smoking",
+     "before": "le",
+     "after": "",
+     "label": "nom, m. sg.",
+     "phonology": "smO.kiG",
+     "steno": "sme/kiZ",
+     "strokes": [
+      [
+       3,
+       6,
+       14
+      ],
+      [
+       2,
+       13,
+       24
+      ]
+     ],
+     "frequency": 4.74
     }
    ]
   },
