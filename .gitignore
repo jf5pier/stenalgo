@@ -78,3 +78,7 @@ synthetic_skip_reasons.tsv
 # only the metrics/search/diff .md files of each run are committed.
 scratch/merged-keys/**/*.tsv
 scratch/merged-keys/**/*.log
+
+# Optimisation exploration run logs and old copies (scratch/optimisation_exploration)
+scratch/optimisation_exploration/out/*.log
+scratch/optimisation_exploration/out/prev/
