@@ -94,7 +94,7 @@ def _wordRecord(group: list[Abbreviation], starboard: Starboard, phonology: str,
     alternates = []
     longs = {b.longOutline for b in group}
     for b in group:
-        # D27: the long outline, the merged one and the abbreviations of this rule and the earlier ones, never a later rule's.
+        # MKD27: the long outline, the merged one and the abbreviations of this rule and the earlier ones, never a later rule's.
         kind = "merged" if any(isLongOf(other, b.longOutline) for other in longs) else "long"
         tags: tuple[tuple[Strokes, dict[str, Any]], ...] = ((b.longOutline, {"kind": kind}),
                                                             (b.outline, {"kind": "affix", "rule": b.rank}))

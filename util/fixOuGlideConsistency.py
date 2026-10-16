@@ -1,11 +1,11 @@
 #!/bin/env python
 #
-# B2 residue follow-up (TODO.md, "Close the B2 residue"): the "ou" grapheme
+# TOD2 residue follow-up (TODO.md, "Close the TOD2 residue"): the "ou" grapheme
 # before a vowel is transcribed inconsistently WITHIN a lemma. Lexique383 and
 # LexiqueInfraCorrespondance mostly write the glide /w/ in its own syllable
 # onset (jouer Z_w_e, évanouissait n_w_i), but scatter hiatus rows with the
 # vowel /u/ closing a syllable of its own (jouez Z_u|e, réjouirai Z_u|i,
-# évanouir n_u|i). The B2 generator learns its splits from the lemma's own
+# évanouir n_u|i). The TOD2 generator learns its splits from the lemma's own
 # attested rows, so the split surfaces as unreproducible finite forms, and the
 # two readings put one lemma's forms on different strokes.
 #

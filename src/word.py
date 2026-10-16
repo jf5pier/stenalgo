@@ -96,7 +96,7 @@ class Word:
         self.frequency = self.frequencyFilm
         # Stable across processes (unlike the salted builtin hash()), so a pickled Word and a
         # freshly built one agree, and set[Word] iteration order no longer follows
-        # PYTHONHASHSEED (B43, B27).
+        # PYTHONHASHSEED (TOD43, TOD27).
         self._hash = int.from_bytes(
             hashlib.blake2b("\x1f".join(map(str, self.identity())).encode(),
                             digest_size=8).digest(),

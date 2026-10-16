@@ -462,8 +462,8 @@ class Dictionary:
         )
         if not MERGE_FEATURE_KEYS:
             return composed
-        # Merged feature keys (docs/MERGED_FEATURE_KEYS_PLAN.md, I1): after S7, the merged outline becomes the
-        # primary one and the long outline an alternate; a merge gives way to the reserved chords (D8, D16, D22).
+        # Merged feature keys (docs/MERGED_FEATURE_KEYS_PLAN.md, MKI1): after S7, the merged outline becomes the
+        # primary one and the long outline an alternate; a merge gives way to the reserved chords (MKD8, MKD16, MKD22).
         assert isinstance(keyboard, Starboard)
         starboard = keyboard
         merged, _entries = mergeFeatureKeys(
@@ -635,7 +635,7 @@ def _runSteps(module: "Callable[[str, str], None]", optimizeKeyboard: bool = Fal
     module("Theory Export (S8): Plover numbers (Pluvier and Lapwing)", "util.export_plover_numbers")
     module("Theory Export (S8): trainer keyboard layout", "util.export_keyboard_layout")
     # S9a/S9b before the trainer exports: the drills accept every outline of a word, its affix abbreviations included
-    # (affix_abbreviations.tsv; docs/MERGED_FEATURE_KEYS_PLAN.md D24).
+    # (affix_abbreviations.tsv; docs/MERGED_FEATURE_KEYS_PLAN.md MKD24).
     module("Affix Abbreviation Building (S9a): rule selection", "util.build_affix_rules")
     module("Affix Abbreviation Building (S9b): affix dictionary", "util.export_affix_dictionary")
     module("Brief Building (S9e): word and expression briefs", "util.build_briefs")
@@ -661,9 +661,9 @@ def _runSteps(module: "Callable[[str, str], None]", optimizeKeyboard: bool = Fal
     # Spelling (S8 Plover branch + S10f): checked against the affix dictionary (S9b) and the expression data, hence after them.
     module("Theory Export (S8): Plover spelling", "util.export_plover_spelling")
     module("Spelling Lessons (S10f): trainer spelling lessons", "util.export_spelling_lessons")
-    # Merged feature keys: the hard constraints H1-H4 on the built outputs (docs/MERGED_FEATURE_KEYS_PLAN.md, D30).
+    # Merged feature keys: the hard constraints MKH1-MKH4 on the built outputs (docs/MERGED_FEATURE_KEYS_PLAN.md, MKD30).
     if MERGE_FEATURE_KEYS:
-        module("Merged feature keys: check H1-H4", "util.check_merged_feature_keys")
+        module("Merged feature keys: check MKH1-MKH4", "util.check_merged_feature_keys")
 
     print("\nstenalgo pipeline complete: phonetic theory (pickles + phonetic_theory.tsv), "
           "LexiqueSynthetic.tsv, resolved_press_sets.json, keypress_groups.json, "

@@ -6,7 +6,7 @@
 # (src/spellingvariants.py enforces it).
 #
 # A variant set is a group of spellings of the SAME word -- 1990-reform pairs
-# (resources/reform1990.tsv), the B44-known non-reform families (seeded below,
+# (resources/reform1990.tsv), the TOD44-known non-reform families (seeded below,
 # e.g. trimbaler/trimballer, chlinguer/schlinguer), plus sets discovered
 # empirically in the lexicons: two distinct lemmes that share one phonology
 # string and one grammatical category, and whose spellings differ by exactly
@@ -45,7 +45,7 @@ DECISION_WINDOW_COLUMN = "count2010_2019"
 REVIEW_RATIO = 2.0
 REVIEW_MIN_OCCURRENCES = 50
 
-# The B44-known non-reform variant families (TODO.md), verbatim. Seeds are
+# The TOD44-known non-reform variant families (TODO.md), verbatim. Seeds are
 # known truth: if one fails the discovery guards, the script says so loudly
 # instead of silently dropping it.
 SEED_VARIANT_SETS = (
@@ -323,7 +323,7 @@ def resolveSets(variantSets: list[frozenset[str]],
         # distinct words (tache/tâche, sur/sûr, date/datte, foret/forêt,
         # mari/marri, bite/bitte...), often with lopsided counts that would
         # otherwise look decisive. Only the curated sources (reform1990.tsv,
-        # OQLF-verified; the B44 seeds) may activate without review.
+        # OQLF-verified; the TOD44 seeds) may activate without review.
         needsReview = needsReview or source == "discovered"
         note = "discovered set -- human confirms it is one word (or vetoes)" \
             if source == "discovered" else \

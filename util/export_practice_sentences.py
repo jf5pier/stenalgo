@@ -51,7 +51,7 @@ FINAL_PUNCTUATION = ".?!"
 @dataclass(frozen=True)
 class Chord:
     """`strokes`/`steno`: the theory's primary outline (what the expression layer composes on); `hint`: the outline
-    the drill shows (the long one, D25) and `alternates` the other accepted ones (D24, `util._outlines`)."""
+    the drill shows (the long one, MKD25) and `alternates` the other accepted ones (MKD24, `util._outlines`)."""
     word: Word
     strokes: Strokes
     steno: str
@@ -138,7 +138,7 @@ def buildSentence(candidate: dict[str, Any], chordsByOrtho: dict[str, list[Chord
         record = {"text": form, "label": formatReadingsLabel(chord.word.gramCat, meant),
                   "steno": hint["steno"], "strokeCount": len(hint["strokes"])}
         if chord.alternates:
-            record["alternates"] = chord.alternates   # D24: the word may be written with any of them
+            record["alternates"] = chord.alternates   # MKD24: the word may be written with any of them
         return record
 
     segments = [segment(form, chord, meant) for form, chord, meant in words]

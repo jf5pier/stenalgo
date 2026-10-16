@@ -1,7 +1,7 @@
 """
 Builds the reading-share table (docs/MERGED_FEATURE_KEYS_PLAN.md, iteration 0): for every lexicon
 ambiguity class, the observed share of each of its readings, so that a row's single frequency can be
-split over its readings (decision D13).
+split over its readings (decision MKD13).
 
 A class is the set of readings of one (ortho, lemme, cgram) row of the theory's lexicons: its deduplicated `infover`
 readings for VER/AUX (`imp:pre:2s;ind:pre:1s;ind:pre:2s` for `fais`), its gender/number cells for

@@ -250,4 +250,4 @@ after the word's aligned outlines (`splitLongAlternates` finds it back).
   (phonetic first; a tie at that level to the more frequent spelling; an absorbed feature key loses within one
   lemmeGramCat; marks separate the rest).
 - Every feature keeps its own key; the affix abbreviations (S9) are built on the merged theory.
-- The section 5 invariant holds on the merged theory; `python -m util.check_merged_feature_keys` checks it with H1-H3.
+- The section 5 invariant holds on the merged theory; `python -m util.check_merged_feature_keys` checks it with MKH1-MKH3.

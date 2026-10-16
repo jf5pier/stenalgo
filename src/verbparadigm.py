@@ -346,7 +346,7 @@ def spliceParticiplePhon(attestedParticiple: Word, gender: str, ortho: str) -> t
     allophone noise, not a real phonological effect) -- only the written
     ending differs. Across genders, a consonant-final feminine stem adds its
     consonant (feminineParticipleConsonant) to the masculine's phon, as a coda
-    of the last syllable, and the masculine drops it (item B45: "promis" had
+    of the last syllable, and the masculine drops it (item TOD45: "promis" had
     been given the /z/ of "promise"). Any trailing '#' in rawSyllCV is
     dropped (a leading "#_" is kept): it's a silent-grapheme bookkeeping artifact of the source
     alignment data (see lexique.py), not a phonological signal --
@@ -435,7 +435,7 @@ def generateParticipeOrthosyll(attestedParticiple: Word, gender: str, number: st
 def _padSilentUnits(rawSyllCV: str, rawOrthosyllCV: str) -> str:
     """
     Append one silent '#' unit per orthographic unit the phonemic breakdown is
-    short of (item B46): the gender/number suffix adds an orthographic unit
+    short of (item TOD46): the gender/number suffix adds an orthographic unit
     ("garnis" g_a_r|n_i_s) whose phonemic counterpart is silent, and attested
     rows mark it as a trailing '#' in the last syllable ("garnis" g_a_R|n_i_#,
     "garnie" g_a_R|n_i_#). Attested participle rows align unit for unit, and
@@ -796,7 +796,7 @@ def normalizeSplicedBreakdown(
     ) -> tuple[str, str, str]:
     """
     Repair the phonology and syllable breakdowns that generateMissingConjugatedForm
-    builds by cutting the infinitive at a fixed character count (item B2). The cut keeps
+    builds by cutting the infinitive at a fixed character count (item TOD2). The cut keeps
     the infinitive's syllable boundaries, which move once the ending changes: a
     word-final form gets a vowel-less last syllable (canner "k_a|n_e" -> cannes "k_a|n_#",
     where the attested canne is "k_a_n_#") and a vowel-initial ending misses its onset
@@ -813,7 +813,7 @@ def normalizeSplicedBreakdown(
     breakdowns had one for a run the table has never seen. The orthographic breakdown
     gets the same boundaries when it has as many units as the phonemic one (attested rows
     keep them aligned unit for unit), and is returned unchanged otherwise. When the
-    phonology spells out the phonemic breakdown's units (all but B3's rows do), it also
+    phonology spells out the phonemic breakdown's units (all but TOD3's rows do), it also
     vocalizes a word-final glide after a consonant (FINAL_GLIDE_VOWEL) and, when the
     breakdowns are aligned, gives every mid vowel the quality its spelling calls for
     (`midVowelByOrtho`, deriveMidVowelTable: the closed-final rule of the vowel's

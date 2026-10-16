@@ -1,6 +1,6 @@
 #!/bin/env python
 #
-# B2 residue follow-up (TODO.md, "Close the B2 residue"): the plain-`e` non-final
+# TOD2 residue follow-up (TODO.md, "Close the TOD2 residue"): the plain-`e` non-final
 # syllables the generator cannot decide from spelling (descendre /des@dR/ vs
 # condescendre /dEs@dR/, essayer /esEje/ vs essaie /EsE/, ...). The lexicon
 # writes /e/ in some rows of a lemma and /E/ in others; the /e/ rows are errors or

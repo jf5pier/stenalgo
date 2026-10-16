@@ -17,7 +17,7 @@ Outputs: disambiguated_theory.tsv, DisambiguatedTheory.pickle.
 Fails (exit 1, after writing the TSV) when two differently-spelled words of different
 lemmas or categories share a final stroke -- a collision S7 should have marked apart
 (src.ambiguitychecker.findFinalCollisions). The Realization Phase's same-lemma residuals
-and the reform-doublet exemption (R2) pairs are reported, not failed on.
+and the reform-doublet exemption (SHM2) pairs are reported, not failed on.
 """
 import os
 import sys
@@ -47,7 +47,7 @@ def reportFinalCollisions(report: FinalCollisionReport, keyboard: Starboard) -> 
 
     print(f"Final-stroke collisions: {len(report.crossLemma)} cross-lemma,"
           f" {len(report.sameLemmeGramCat)} same-lemma residual (Realization Phase),"
-          f" {len(report.reformDoublet)} reform doublet (R2, exempted).")
+          f" {len(report.reformDoublet)} reform doublet (SHM2, exempted).")
     for stroke, words in sorted(report.sameLemmeGramCat.items(), key=lambda item: describe(item[1]))[:10]:
         print(f"  same-lemma residual {renderFinalStrokesToRTFCRE(keyboard, stroke)!r}: {describe(words)}")
     if report.crossLemma:

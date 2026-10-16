@@ -97,7 +97,7 @@ def loadReform1990DoubletPairs(tsvPath: str = "resources/reform1990.tsv") -> fro
     """
     Parses resources/reform1990.tsv into a set of {oldSpelling, newSpelling} pairs --
     genuine same-word pre/post-1990-reform spelling doublets, not real lexical
-    ambiguity (decideStarHashMark's reform-doublet exemption (R2); in the design
+    ambiguity (decideStarHashMark's reform-doublet exemption (SHM2); in the design
     notes (git history, RESUME_2026-09-20-starhash-priority.md) the earlier
     collision-count heuristic version of this rule was tested and disproven against
     real Google Ngram data; this cross-references the file's own sourced, OQLF- and
@@ -211,8 +211,8 @@ def decideStarHashMark(
       6. GRAMCAT_PRIORITY for the remaining cross-category residual -- the
          lower-priority (more marked) category is marked. A category pair outside
          this 6-entry table (not observed in the design session's residual) falls
-         back to per-pair frequency (the frequency fallback (R7)).
-    Rules 1-6 are the homograph exemption (R1) ... category-priority rule (R6) of
+         back to per-pair frequency (the frequency fallback (SHM7)).
+    Rules 1-6 are the homograph exemption (SHM1) ... category-priority rule (SHM6) of
     docs/specs/star-hash-marking.md.
     Returns the Word to mark, or None if no mark is needed.
     """
@@ -252,7 +252,7 @@ def _starHashCompare(
 ) -> int:
     """Comparator for ranking a cluster canonical-first (least marked first): -1 if a
     is more canonical than b, +1 if b is. Delegates to decideStarHashMark for the real
-    decision; a None result (homograph exemption (R1) or reform-doublet exemption (R2)) has
+    decision; a None result (homograph exemption (SHM1) or reform-doublet exemption (SHM2)) has
     no ordering signal of its own, so it falls back to frequency then ortho purely to
     keep sort() stable and deterministic -- it does not imply one is "more canonical"
     than the other."""
@@ -306,9 +306,9 @@ def assignStarHashMarks(
     collapse to ONE representative -- their merged group's highest-frequency member --
     before ranking, keeping the cluster from consuming extra slots or escalating to an
     extra syllable it doesn't actually need:
-      - identical `ortho` (decideStarHashMark's homograph exemption (R1): same typed output regardless of
+      - identical `ortho` (decideStarHashMark's homograph exemption (SHM1): same typed output regardless of
         intended reading);
-      - lemmes forming a `doubletPairs` entry (reform-doublet exemption (R2): genuinely the same word under
+      - lemmes forming a `doubletPairs` entry (reform-doublet exemption (SHM2): genuinely the same word under
         two 1990-reform spelling conventions, see loadReform1990DoubletPairs).
     Every word in a merged group then gets its representative's code.
     """
@@ -408,7 +408,7 @@ def groupHomophonesByReservedStroke(finalInduced: dict[Word, Strokes]) -> dict[S
         already separated those onto different strokes);
       - >= 2 distinct `ortho` values -- an all-homograph group types identically
         regardless of which reading was meant, so it was never a real ambiguity
-        (decideStarHashMark's homograph exemption (R1)).
+        (decideStarHashMark's homograph exemption (SHM1)).
     """
     byStroke: dict[Strokes, list[Word]] = defaultdict(list)
     for word, stroke in finalInduced.items():
@@ -449,21 +449,21 @@ def firstSymbolOfCodeIndex(index: int) -> str | None:
 
 
 UNLISTED_CATEGORY_PRIORITY = GRAMCAT_PRIORITY["NOM"]
-"""The priority of a category missing from `GRAMCAT_PRIORITY`: that of `NOM` (best agreement, 95.8%, with the pairwise rules R4-R7
+"""The priority of a category missing from `GRAMCAT_PRIORITY`: that of `NOM` (best agreement, 95.8%, with the pairwise rules SHM4-SHM7
 over the 5,999 decided pairs of the 4,286 groups, measured 2026-10-08; 0 to 60 all give 95.7-95.8%)."""
 
 
 def frequencyBand(frequency: float) -> int:
     """The decade of a frequency (`floor(log10)`; every frequency of 0 or less is one band below all others): two frequencies in different
-    bands are 'a frequency gap' (the frequency-ratio rule R4, as a total order instead of a pairwise ratio test)."""
+    bands are 'a frequency gap' (the frequency-ratio rule SHM4, as a total order instead of a pairwise ratio test)."""
     return -99 if frequency <= 0 else math.floor(math.log10(frequency))
 
 
 def starHashRankKey(word: Word, lemmaFrequency: float) -> tuple[int, int, float, float, str, str]:
     """The total order of the star/hash ranking (smaller = more canonical = less marked). Replaces the pairwise vote of
-    `decideStarHashMark` R4-R7, which can cycle and, on equal frequencies, depends on the order of its arguments. In order: the decade of
-    the word's own frequency (a gap outranks the category, as R4), the category priority (`GRAMCAT_PRIORITY`, `UNLISTED_CATEGORY_PRIORITY`
-    for the others, as R6), the word's frequency, then the frequency of its LEMMA (the sum over the words of its `lemmeGramCat`), its spelling
+    `decideStarHashMark` SHM4-SHM7, which can cycle and, on equal frequencies, depends on the order of its arguments. In order: the decade of
+    the word's own frequency (a gap outranks the category, as SHM4), the category priority (`GRAMCAT_PRIORITY`, `UNLISTED_CATEGORY_PRIORITY`
+    for the others, as SHM6), the word's frequency, then the frequency of its LEMMA (the sum over the words of its `lemmeGramCat`), its spelling
     and its `lemmeGramCat`. The last three only separate words the earlier fields tie on, so the more popular lemma wins between two rare
     forms of equal frequency (comparait/comparaît). Two lemmas that meet in several groups are ranked by their lemma frequency only,
     in all of them (`_orderLemmasByFrequency`, applied on the list sorted by this key).
@@ -535,7 +535,7 @@ def _orderLemmasByFrequency(ordered: list[MarkNode], clusters: list[list[Word]],
 
 def _applyMarkingOverrides(ordered: list[MarkNode], conflicts: dict[MarkNode, set[MarkNode]],
                            representative: dict[MarkNode, Word]) -> None:
-    """The per-pair overrides (R3, `MARKING_OVERRIDES`) on a ranked node list, in place: when two conflicting nodes' representatives are an
+    """The per-pair overrides (SHM3, `MARKING_OVERRIDES`) on a ranked node list, in place: when two conflicting nodes' representatives are an
     override pair, the one that must carry the mark is moved right after the other if it ranks before it. The pairs are taken in a fixed
     order, so the result does not depend on the order of the input."""
     for canonical in sorted(conflicts):
@@ -558,8 +558,8 @@ def assignMarkNodeCodes(
     sharing one unmarked final stroke, see `_isStarHashCluster`); every other node keeps the empty code.
 
     Nodes of one cluster must get distinct codes, a node being in several clusters at once (a family's
-    forms sit on different strokes), so this is a colouring, not a per-cluster ranking. Two nodes that share a spelling (homograph exemption (R1)) or form a reform doublet (R2) merge first,
-    unless the merged node would hold two spellings on one stroke. The nodes are then taken canonical-first -- `decideStarHashMark` (R3-R7) on the two nodes' most
+    forms sit on different strokes), so this is a colouring, not a per-cluster ranking. Two nodes that share a spelling (homograph exemption (SHM1)) or form a reform doublet (SHM2) merge first,
+    unless the merged node would hold two spellings on one stroke. The nodes are then taken canonical-first -- `decideStarHashMark` (SHM3-SHM7) on the two nodes' most
     frequent forms, frequency when it has no signal -- and each takes the lowest code none of its conflicting
     nodes holds yet (`assignStarHashCombos` order: (), *, #, *#, then more `*#` strokes).
     """
@@ -676,7 +676,7 @@ def composeReservedKeyStrokesForEntries(
 
     The mark belongs to the word's m/f/s/p family (`markFamilyKey`, `assignMarkNodeCodes`): every form of
     the family, and every entry of a form, carries the family's code, whether or not that form clashes by
-    itself; the clusters of ALL entries (primary and alternate, each on its own final stroke, B44) decide
+    itself; the clusters of ALL entries (primary and alternate, each on its own final stroke, TOD44) decide
     which families conflict. Entries keep their positions, which consumers
     line up with the press-set alternates (util/export_practice_words.py). Given `phonemeStrokeCounts` (each word's phonetic-theory
     stroke count), the mark's FIRST symbol is pressed together with the word's last
@@ -693,7 +693,7 @@ def composeReservedKeyStrokesForEntries(
     differ, so their composed forms do too; within one cluster, the families' codes
     differ. Entries of a family in no cluster keep the family's code too (the empty code for a
     family with no conflict anywhere). Pass `doubletPairs` (loadReform1990DoubletPairs) to also apply the
-    reform-doublet exemption (R2).
+    reform-doublet exemption (SHM2).
 
     `reservedStrokes` (needs `phonemeStrokeCounts`) are chords no word may type -- the number chords (util.export_plover_numbers.
     reservedNumberStrokes): a family whose marked last stroke would be one takes the next free code instead.
@@ -745,7 +745,7 @@ def findFinalCollisions(
     share -- a collision (docs/GLOSSARY.md); the same spelling twice is a same-stroke
     homograph, never counted. Each collision is filed under its cause:
       - `reformDoublet`: every differently-spelled pair is a reform-doublet exemption
-        (R2) pair, left unmarked on purpose;
+        (SHM2) pair, left unmarked on purpose;
       - `sameLemmeGramCat`: every differently-spelled pair not exempted that way shares
         one `lemmeGramCat` -- a Realization Phase residual, outside S7's scope;
       - `crossLemma`: any other -- a pair S7 should have marked apart. Always empty
@@ -1048,7 +1048,7 @@ def findSpellingTwinWords(
     alternates already realize every reading of the spelling on the resolved Word (one
     independently-valid stroke per alternate, labeled by the parallel "readings" field),
     so a twin must NOT get its own entry on top: `buildFinalInducedStrokes` would give it
-    a residual bare primary stroke (B47) shadowing the group's default reading
+    a residual bare primary stroke (TOD47) shadowing the group's default reading
     ("affadis" indicatif passé 2e sg. on the bare chord that belongs to "affadi"), and in
     a star/hash cluster it would even consume a */# slot for a spelling that is already
     reachable through its feature strokes. `Dictionary.buildDisambiguatedTheory` drops

@@ -15,7 +15,7 @@ second time" convergence. On an already-converged tree nothing is deleted and
 no rebuild runs.
 
 MAX_ROUNDS guards against the appenders never converging (non-idempotence,
-TODO.md item B13): if it trips, investigate the appenders' reports instead of
+TODO.md item TOD13): if it trips, investigate the appenders' reports instead of
 raising the cap.
 
 From scratch by default: the Synthetic file is emptied to its header first, so it is a pure function of
@@ -227,7 +227,7 @@ def _runRounds(args: argparse.Namespace) -> None:
             break
         if action == "abort":
             print(f"\nSynthetic Lexicon Building (S2) DID NOT converge after {roundsDone} rounds "
-                  "-- the appenders keep appending rows (non-idempotence, cf. TODO.md item B13). "
+                  "-- the appenders keep appending rows (non-idempotence, cf. TODO.md item TOD13). "
                   "Investigate the reports above instead of raising MAX_ROUNDS.",
                   file=sys.stderr, flush=True)
             raise SystemExit(1)

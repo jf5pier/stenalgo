@@ -20,42 +20,72 @@ conflicts. The excluded tenses keep 1.5–2.7% of running words on the extra str
 
 | # | Decision |
 |---|---|
-| D1 | Terms: merged feature keys, merged outline, absorbed feature key (glossary). Avoid "conjugation fusion". |
-| D2 | All 7 keypress groups can merge, gender (f) and number (p) included. |
-| D3 | The long outline stays a valid alternate entry of every merged word. |
-| D4 | Merged outline = primary outline in `plover_stenalgo_dictionary.json` and in the trainer (not a separate dictionary). |
-| D5 | **Merge-eligible tenses**: présent, impératif, infinitif, participe, nominal (f/p), and since gate 2 (2026-10-12) imparfait, future, conditionnel. **Never merge**: passé simple, subjonctif. Decided per entry from the tense of its reading, not from the keys it presses. |
-| D6 | Every entry (alternate readings of self-homographs included, `dis` has 4) merges independently. |
-| D7 | **Merge precedence ladder** for a merged outline meeting another outline: (1) phonetic first: the word for which the shared keys are sounds wins (`sec` beats `sais`, `livre` beats `livres`, `dites` beats `dis`); a tie at level 1 (each word's feature keys are the other's sounds) goes to the more frequent word (gate 3); (2) features second: same base, same lemme+category, the word with an absorbed feature key loses (`fasse` beats `fassent`); (3) marks third: same base and same feature keys across lemmas/categories never block, star/hash marks separate them. Frequency decides nothing else. The merge runs after S7: marks are part of the compared outlines (gate 4). |
-| D8 | A merge always gives way to the number chords, spelling chords, punctuation, commands and expression briefs (nothing shipped changes). |
-| D9 | One feature = one physical key, merged or not, f (16) and plural (17) included: no dedicated merge key-set (gate 5b); the other groups' keys are not re-searched (5c skipped). |
-| D10 | No per-word chord-cost veto: an eligible entry merges whenever it wins the ladder and the merged stroke is pressable. |
-| D11 | Keys 0 and 1 are not touched. The Grouping Phase (K=7, the user's elicitation answers) stays fixed. |
-| D12 | Words whose BASE last stroke is already unpressable (~893, `-ismes`; TODO "unpressable base codas") are set aside: automatic fallback, reported apart, fixed later. |
-| D13 | A reading's share of its spelling's frequency comes from the reading-share table `resources/readingShares.tsv` (iteration 0, `util/build_reading_shares.py`), looked up by the entry's reading set in LexiqueMixte + LexiqueSynthetic (not Lexique383's `infover`, which misses readings). Never read the `frequencies` field of `resolved_press_sets.json` (bug B48). |
-| D14 | Everything is simulated offline in an analysis script first; the pipeline is changed only for the chosen variant. |
-| D15 | From 2026-10-12 the work is done inline in one session (no Haiku/Sonnet subagents: each would re-read the context cold); long rebuilds run in the background. The user decides at every gate. (Iterations 0–5 used Haiku workers and Sonnet for code and gates.) |
-| D16 | The reserved chords of D8 come from their sources, never from the shipped JSONs (built after the theory, from it): `reservedNumberStrokes`, `reservedSpellingStrokes`, the punctuation/command/Lapwing chords converted from the layout before their theory filter, and `scratch/expr-briefs.tsv`. One function, used by the pipeline and the simulator. |
-| D17 | The merge rules live in one module, `src/mergedfeaturekeys.py`, used by the pipeline (I1) and the simulator (which keeps only options, metrics and search); the simulator's runs before and after the move must match. |
-| D18 | Gates 3–5 are not rerun after the D5 change; one confirmation run with the decided settings becomes the new baseline and the simulator's defaults. |
-| D19 | The trainer shows the merged outline and also accepts the long one: an `alternates` field in the practice-word and lesson JSONs, checked by the trainer. |
-| D20 | The accord and verbe lessons teach the merged outlines in place (verbe-01 explains the merge once); one new lesson at the end of the verbe track, "quand les marques ne fusionnent pas", covers subjonctif, passé simple and the frequent fallbacks. |
-| D21 | Order, one commit per step: (1) `src/mergedfeaturekeys.py`, simulator switched to it, same numbers; (2) confirmation run (D18); (3) I1 behind a constant off by default, md5-identical rebuild when off; (4) iteration 6 gate; (5) I2 (D19, D20), I3, I4, I5. |
-| D22 | A merge also gives way to the attested expressions: the outline of every pool expression (`scratch/expr_candidates.tsv`) composed on the theory before the merge is reserved (`util/_reservedchords.py`, with a theory). Open-set expression readings are not protected, only reported. |
-| D23 | M8 (expression-layer savings) is measured when I2 rebuilds the expression data on the merged theory; a drop of more than 5% is a gate. |
-| D24 | Word and sentence practice accept every outline of a word: long, merged, every affix abbreviation; sentences are matched word by word (each word any of its outlines); composed expression outlines only in "Phrases abrégées" mode, as before. Supersedes D19's "the long outline as alternate" (2026-10-12). |
-| D25 | Hints: the long outline above the keyboard; under it (the "Indices abréviation" switch) the short outlines with what shortens them (merged feature keys, the affix rule and keys, the expression rules); the lit keys follow the long outline until the strokes typed match a short one. |
-| D26 | The exporters tag each outline: `outlines: [{steno, strokes, kind, rule?}]`, kind `long`, `merged`, `affix` (rule rank) or `expression` (rules); the trainer only displays. |
-| D27 | Lesson drills: the hint above the keyboard is the lesson's form (merged in accord/verbe, rule k's abbreviation in affix lesson k); accepted: the long outline, the lesson's form and the forms of earlier lessons, never those of later lessons. |
-| D28 | "Previously covered content" is the focus/recap switch (TODO "trainer lessons: focus or recap switch"): recap mixes earlier lessons' words in. |
-| D29 | The merge becomes the default (`MERGE_FEATURE_KEYS` on, full rebuild) once I5 passes, after the trainer work, in one commit with the rebuilt outputs. |
-| D30 | I5 checks H1-H4 with a hand-run `util/check_merged_feature_keys.py` on the built outputs (non-zero exit on a failure), the orchestrator's last step when the merge is on. |
+| MKD1 | Terms: merged feature keys, merged outline, absorbed feature key (glossary). Avoid "conjugation fusion". |
+| MKD2 | All 7 keypress groups can merge, gender (f) and number (p) included. |
+| MKD3 | The long outline stays a valid alternate entry of every merged word. |
+| MKD4 | Merged outline = primary outline in `plover_stenalgo_dictionary.json` and in the trainer (not a separate dictionary). |
+| MKD5 | **Merge-eligible tenses**: présent, impératif, infinitif, participe, nominal (f/p), and since gate 2 (2026-10-12) imparfait, future, conditionnel. **Never merge**: passé simple, subjonctif. Decided per entry from the tense of its reading, not from the keys it presses. |
+| MKD6 | Every entry (alternate readings of self-homographs included, `dis` has 4) merges independently. |
+| MKD7 | **Merge precedence ladder** for a merged outline meeting another outline: (1) phonetic first: the word for which the shared keys are sounds wins (`sec` beats `sais`, `livre` beats `livres`, `dites` beats `dis`); a tie at level 1 (each word's feature keys are the other's sounds) goes to the more frequent word (gate 3); (2) features second: same base, same lemme+category, the word with an absorbed feature key loses (`fasse` beats `fassent`); (3) marks third: same base and same feature keys across lemmas/categories never block, star/hash marks separate them. Frequency decides nothing else. The merge runs after S7: marks are part of the compared outlines (gate 4). |
+| MKD8 | A merge always gives way to the number chords, spelling chords, punctuation, commands and expression briefs (nothing shipped changes). |
+| MKD9 | One feature = one physical key, merged or not, f (16) and plural (17) included: no dedicated merge key-set (gate 5b); the other groups' keys are not re-searched (5c skipped). |
+| MKD10 | No per-word chord-cost veto: an eligible entry merges whenever it wins the ladder and the merged stroke is pressable. |
+| MKD11 | Keys 0 and 1 are not touched. The Grouping Phase (K=7, the user's elicitation answers) stays fixed. |
+| MKD12 | Words whose BASE last stroke is already unpressable (~893, `-ismes`; TODO "unpressable base codas") are set aside: automatic fallback, reported apart, fixed later. |
+| MKD13 | A reading's share of its spelling's frequency comes from the reading-share table `resources/readingShares.tsv` (iteration 0, `util/build_reading_shares.py`), looked up by the entry's reading set in LexiqueMixte + LexiqueSynthetic (not Lexique383's `infover`, which misses readings). Never read the `frequencies` field of `resolved_press_sets.json` (bug TOD48). |
+| MKD14 | Everything is simulated offline in an analysis script first; the pipeline is changed only for the chosen variant. |
+| MKD15 | From 2026-10-12 the work is done inline in one session (no Haiku/Sonnet subagents: each would re-read the context cold); long rebuilds run in the background. The user decides at every gate. (Iterations 0–5 used Haiku workers and Sonnet for code and gates.) |
+| MKD16 | The reserved chords of MKD8 come from their sources, never from the shipped JSONs (built after the theory, from it): `reservedNumberStrokes`, `reservedSpellingStrokes`, the punctuation/command/Lapwing chords converted from the layout before their theory filter, and `scratch/expr-briefs.tsv`. One function, used by the pipeline and the simulator. |
+| MKD17 | The merge rules live in one module, `src/mergedfeaturekeys.py`, used by the pipeline (MKI1) and the simulator (which keeps only options, metrics and search); the simulator's runs before and after the move must match. |
+| MKD18 | Gates 3–5 are not rerun after the MKD5 change; one confirmation run with the decided settings becomes the new baseline and the simulator's defaults. |
+| MKD19 | The trainer shows the merged outline and also accepts the long one: an `alternates` field in the practice-word and lesson JSONs, checked by the trainer. |
+| MKD20 | The accord and verbe lessons teach the merged outlines in place (verbe-01 explains the merge once); one new lesson at the end of the verbe track, "quand les marques ne fusionnent pas", covers subjonctif, passé simple and the frequent fallbacks. |
+| MKD21 | Order, one commit per step: (1) `src/mergedfeaturekeys.py`, simulator switched to it, same numbers; (2) confirmation run (MKD18); (3) MKI1 behind a constant off by default, md5-identical rebuild when off; (4) iteration 6 gate; (5) MKI2 (MKD19, MKD20), MKI3, MKI4, MKI5. |
+| MKD22 | A merge also gives way to the attested expressions: the outline of every pool expression (`scratch/expr_candidates.tsv`) composed on the theory before the merge is reserved (`util/_reservedchords.py`, with a theory). Open-set expression readings are not protected, only reported. |
+| MKD23 | MKM8 (expression-layer savings) is measured when MKI2 rebuilds the expression data on the merged theory; a drop of more than 5% is a gate. |
+| MKD24 | Word and sentence practice accept every outline of a word: long, merged, every affix abbreviation; sentences are matched word by word (each word any of its outlines); composed expression outlines only in "Phrases abrégées" mode, as before. Supersedes MKD19's "the long outline as alternate" (2026-10-12). |
+| MKD25 | Hints: the long outline above the keyboard; under it (the "Indices abréviation" switch) the short outlines with what shortens them (merged feature keys, the affix rule and keys, the expression rules); the lit keys follow the long outline until the strokes typed match a short one. |
+| MKD26 | The exporters tag each outline: `outlines: [{steno, strokes, kind, rule?}]`, kind `long`, `merged`, `affix` (rule rank) or `expression` (rules); the trainer only displays. |
+| MKD27 | Lesson drills: the hint above the keyboard is the lesson's form (merged in accord/verbe, rule k's abbreviation in affix lesson k); accepted: the long outline, the lesson's form and the forms of earlier lessons, never those of later lessons. |
+| MKD28 | "Previously covered content" is the focus/recap switch (TODO "trainer lessons: focus or recap switch"): recap mixes earlier lessons' words in. |
+| MKD29 | The merge becomes the default (`MERGE_FEATURE_KEYS` on, full rebuild) once MKI5 passes, after the trainer work, in one commit with the rebuilt outputs. |
+| MKD30 | MKI5 checks MKH1-MKH4 with a hand-run `util/check_merged_feature_keys.py` on the built outputs (non-zero exit on a failure), the orchestrator's last step when the merge is on. |
+<!-- tag: MKD1 | Terms: merged feature keys, merged outline, absorbed feature key; "conjugation fusion" avoided. -->
+<!-- tag: MKD2 | All 7 keypress groups can merge, gender (f) and number (p) included. -->
+<!-- tag: MKD3 | The long outline stays a valid alternate entry of every merged word. -->
+<!-- tag: MKD4 | The merged outline is the primary outline in the Plover dictionary and the trainer (no separate dictionary). -->
+<!-- tag: MKD5 | Merge-eligible tenses: présent, impératif, infinitif, participe, nominal, imparfait, future, conditionnel; never passé simple and subjonctif; decided per entry from the reading's tense. -->
+<!-- tag: MKD6 | Every entry (alternate readings of self-homographs included) merges independently. -->
+<!-- tag: MKD7 | Merge precedence ladder: phonetic first (a tie goes to the more frequent word), features second, marks third; the merge runs after S7, marks part of the compared outlines. -->
+<!-- tag: MKD8 | A merge always gives way to the number, spelling, punctuation, command and expression-brief chords (nothing shipped changes). -->
+<!-- tag: MKD9 | One feature = one physical key, f (16) and plural (17) included: no dedicated merge key-set. -->
+<!-- tag: MKD10 | No per-word chord-cost veto: an eligible entry merges whenever it wins the ladder and the merged stroke is pressable. -->
+<!-- tag: MKD11 | Keys 0 and 1 are not touched; the Grouping Phase (K=7, the user's elicitation answers) stays fixed. -->
+<!-- tag: MKD12 | Words whose base last stroke is already unpressable are set aside: automatic fallback, reported apart, fixed later. -->
+<!-- tag: MKD13 | A reading's frequency share comes from resources/readingShares.tsv; never read the frequencies field of resolved_press_sets.json (bug TOD48). -->
+<!-- tag: MKD14 | Everything is simulated offline in an analysis script first; the pipeline changes only for the chosen variant. -->
+<!-- tag: MKD15 | The work is done inline in one session (no subagents); long rebuilds run in the background; the user decides at every gate. -->
+<!-- tag: MKD16 | The reserved chords come from their sources through one function, never from the shipped JSONs. -->
+<!-- tag: MKD17 | The merge rules live in one module, src/mergedfeaturekeys.py, used by the pipeline and the simulator. -->
+<!-- tag: MKD18 | Gates 3-5 are not rerun after the MKD5 change; one confirmation run with the decided settings becomes the new baseline. -->
+<!-- tag: MKD19 | The trainer shows the merged outline and also accepts the long one (an alternates field, checked by the trainer). -->
+<!-- tag: MKD20 | The accord and verbe lessons teach the merged outlines in place; one new lesson covers subjonctif, passé simple and the frequent fallbacks. -->
+<!-- tag: MKD21 | Order, one commit per step: the module, the confirmation run, MKI1 behind a flag, the iteration-6 gate, then the exporters. -->
+<!-- tag: MKD22 | A merge also gives way to the attested pool expressions' composed outlines; open-set expression readings are only reported. -->
+<!-- tag: MKD23 | MKM8 (expression-layer savings) is measured when MKI2 rebuilds the expression data; a drop of more than 5% is a gate. -->
+<!-- tag: MKD24 | Word and sentence practice accept every outline of a word, sentences matched word by word (supersedes MKD19's alternate wording, 2026-10-12). -->
+<!-- tag: MKD25 | Hints: the long outline above the keyboard; under it the short outlines with what shortens them. -->
+<!-- tag: MKD26 | The exporters tag each outline (kind long, merged, affix or expression); the trainer only displays. -->
+<!-- tag: MKD27 | Lesson drills: the hint is the lesson's form; accepted are the long outline and the earlier lessons' forms, never later ones. -->
+<!-- tag: MKD28 | "Previously covered content" is the focus/recap switch: recap mixes earlier lessons' words in. -->
+<!-- tag: MKD29 | The merge becomes the default (MERGE_FEATURE_KEYS on, full rebuild) once MKI5 passes, in one commit with the rebuilt outputs. -->
+<!-- tag: MKD30 | MKI5 checks the hard constraints with a hand-run util/check_merged_feature_keys.py on the built outputs (non-zero exit on a failure). -->
 
 ## Open questions answered by experiment
 
 | Q | Alternatives | Iteration |
 |---|---|---|
-| Tie at ladder level (1) (`laisses` `mties`+d vs `laides` `mtied`+s) | (a) both fall back; (b) more frequent merges; (c) `GRAMCAT_PRIORITY` (src/greedyoptimizer.py, rule R6), then the precedence spec `conjugation_disambiguation_order.txt` (`parsePrecedenceOrder`, util/check_conjugation_disambiguation_order.py), then frequency | 3 |
+| Tie at ladder level (1) (`laisses` `mties`+d vs `laides` `mtied`+s) | (a) both fall back; (b) more frequent merges; (c) `GRAMCAT_PRIORITY` (src/greedyoptimizer.py, rule SHM6), then the precedence spec `conjugation_disambiguation_order.txt` (`parsePrecedenceOrder`, util/check_conjugation_disambiguation_order.py), then frequency | 3 |
 | Merge before or after S7 (star/hash marks) | A: after, marks are part of the compared outlines (a mark can make room); B: before, compare unmarked outlines, S7 then marks the merged theory | 4 |
 | f / plural merge key-sets | keep 16/17; dedicated merge key-sets (joint choice for f, p, f+p) | 5 |
 | Re-search the other 5 groups' keys | only if residual conflicts justify it | 5c |
@@ -63,29 +93,41 @@ conflicts. The excluded tenses keep 1.5–2.7% of running words on the extra str
 
 ## Metrics (one table per iteration, same columns every time)
 
-Frequency = Lexique383 `freqfilms2` (film), split over a spelling's entries with the reading-share table (D13).
+Frequency = Lexique383 `freqfilms2` (film), split over a spelling's entries with the reading-share table (MKD13).
 
 Hard constraints (a variant violating one is rejected, not weighed):
-- **H1** 0 collisions: no outline shared by two spellings across every shipped dictionary (theory with alternates and
+<!-- tag: MKH1 | 0 collisions: no outline shared by two spellings across every shipped dictionary. -->
+- **MKH1** 0 collisions: no outline shared by two spellings across every shipped dictionary (theory with alternates and
   marks, numbers, spelling, punctuation, commands, Pluvier punctuation/numbers, expression briefs).
-- **H2** 0 unpressable merged strokes (`Starboard.getStrokeCost(stroke, "coda") is None`), D12 words reported apart.
-- **H3** number, spelling, punctuation, command and brief outputs unchanged.
-- **H4** the same-lemmeGramCat invariant (docs/specs/discriminating-features.md §5) still holds.
+<!-- tag: MKH2 | 0 unpressable merged strokes; the set-aside words (MKD12) reported apart. -->
+- **MKH2** 0 unpressable merged strokes (`Starboard.getStrokeCost(stroke, "coda") is None`), MKD12 words reported apart.
+<!-- tag: MKH3 | The number, spelling, punctuation, command and brief outputs are unchanged. -->
+- **MKH3** number, spelling, punctuation, command and brief outputs unchanged.
+<!-- tag: MKH4 | The same-lemmeGramCat invariant (docs/specs/discriminating-features.md section 5) still holds. -->
+- **MKH4** the same-lemmeGramCat invariant (docs/specs/discriminating-features.md §5) still holds.
 
 Primary:
-- **M1** frequency-weighted strokes per word over all theory words (primary outline of each entry); also the unweighted
+<!-- tag: MKM1 | Frequency-weighted strokes per word over all theory words (primary outline of each entry); delta against today's theory. -->
+- **MKM1** frequency-weighted strokes per word over all theory words (primary outline of each entry); also the unweighted
   mean. Report the delta against today's theory.
 
 Indicators:
-- **M2** merge rate: merged / eligible entries needing a feature stroke, by count and by frequency; per keypress group and per tense.
-- **M3** exceptions: eligible entries that fell back, with the reason (ladder level 1/2, tie, other dictionary,
+<!-- tag: MKM2 | Merge rate: merged / eligible entries needing a feature stroke, by count and by frequency, per group and per tense. -->
+- **MKM2** merge rate: merged / eligible entries needing a feature stroke, by count and by frequency; per keypress group and per tense.
+<!-- tag: MKM3 | Exceptions: eligible entries that fell back, with the reason; ranked among the most frequent words. -->
+- **MKM3** exceptions: eligible entries that fell back, with the reason (ladder level 1/2, tie, other dictionary,
   unpressable); how many among the 1,000 and 5,000 most frequent words (Lexique rank), and the top 30 by frequency.
-- **M4** chord cost: frequency-weighted mean `getStrokeCost` of the merged last stroke vs (base last stroke + feature stroke).
-- **M5** star/hash load: lemma-homophone groups, escalated codes, frequency-weighted mark keys typed.
-- **M6** affix abbreviations: count and frequency-weighted strokes saved (iteration 6 on).
-- **M7** `python -m util.compare_theories` summary against Pluvier (final iterations only; command in CLAUDE.md).
-- **M8** expression layer: strokes saved by the attested pool expressions (frequency-weighted), today against the
-  expression data rebuilt on the merged theory (D23); and the merged outlines that take an open-set expression reading.
+<!-- tag: MKM4 | Chord cost: frequency-weighted mean getStrokeCost of the merged last stroke vs (base last stroke + feature stroke). -->
+- **MKM4** chord cost: frequency-weighted mean `getStrokeCost` of the merged last stroke vs (base last stroke + feature stroke).
+<!-- tag: MKM5 | Star/hash load: lemma-homophone groups, escalated codes, frequency-weighted mark keys typed. -->
+- **MKM5** star/hash load: lemma-homophone groups, escalated codes, frequency-weighted mark keys typed.
+<!-- tag: MKM6 | Affix abbreviations: count and frequency-weighted strokes saved (iteration 6 on). -->
+- **MKM6** affix abbreviations: count and frequency-weighted strokes saved (iteration 6 on).
+<!-- tag: MKM7 | compare_theories summary against Pluvier (final iterations only). -->
+- **MKM7** `python -m util.compare_theories` summary against Pluvier (final iterations only; command in CLAUDE.md).
+<!-- tag: MKM8 | Expression layer: strokes saved by the pool expressions, today against the expression data rebuilt on the merged theory. -->
+- **MKM8** expression layer: strokes saved by the attested pool expressions (frequency-weighted), today against the
+  expression data rebuilt on the merged theory (MKD23); and the merged outlines that take an open-set expression reading.
 
 ## Iterations
 
@@ -118,32 +160,32 @@ words (no imperative is unambiguous in Lexique: `dis`, `fais`, `regarde`), again
 
 - [x] **1.1 [Sonnet]** `util/analyze_merged_feature_keys.py` (hand-run diagnostic; reuse the loading and rendering of
   `util/analyze_conjugation_fusion.py`: `loadPhoneticAndDisambiguatedTheory`, `buildKeypressGroupToWords`,
-  `buildKeypressGroupExtraAlternates`, `renderFinalStrokesToRTFCRE`). Options: `--eligible` (tense list, default D5),
+  `buildKeypressGroupExtraAlternates`, `renderFinalStrokesToRTFCRE`). Options: `--eligible` (tense list, default MKD5),
   `--tie fallback|frequency|precedence`, `--order after-s7|before-s7`, `--merge-keys f=…,p=…`, `--out`.
   Per entry: candidate merged outline = base strokes with the last stroke ∪ the entry's group keys (∪ its merged
   star/hash symbol when `after-s7`; an escalated code's */# marker strokes stay after). Occupied outlines: every final
-  outline of the theory (alternates included) plus the reserved chords of the other dictionaries (D8; read the shipped
-  JSONs). Resolve each contested merged outline with the ladder (D7; an occupying base outline has only phonetic keys, so
+  outline of the theory (alternates included) plus the reserved chords of the other dictionaries (MKD8; read the shipped
+  JSONs). Resolve each contested merged outline with the ladder (MKD7; an occupying base outline has only phonetic keys, so
   it always wins level 1), ties by `--tie`. Losers keep the long outline, which is already unique, so one pass suffices.
-  Writes the metrics table (M1–M5) as Markdown and a TSV of every entry (word, reading, tense, merged?, reason, outlines).
+  Writes the metrics table (MKM1–MKM5) as Markdown and a TSV of every entry (word, reading, tense, merged?, reason, outlines).
 - [x] **1.2 [Sonnet]** Regression check: with every tense eligible, no ladder (any conflict counts) and marks ignored, the
   script reproduces the counts of `docs/CONJUGATION_FUSION_STATS.md` (127,839 clean of 139,757).
-- [x] **1.3 [Haiku]** Run the baseline: D5 eligibility, current keys, `after-s7`, tie (a). Paste the table under Results.
+- [x] **1.3 [Haiku]** Run the baseline: MKD5 eligibility, current keys, `after-s7`, tie (a). Paste the table under Results.
 
 ### Iteration 2 — check of the eligibility choice [Haiku]
 
-- [x] Run all-eligible against D5. Report, per excluded tense: strokes it would save, conflicts it causes for the eligible
-  ones. GATE only if a figure contradicts D5 (e.g. an excluded tense that would merge almost for free); otherwise no gate.
+- [x] Run all-eligible against MKD5. Report, per excluded tense: strokes it would save, conflicts it causes for the eligible
+  ones. GATE only if a figure contradicts MKD5 (e.g. an excluded tense that would merge almost for free); otherwise no gate.
 
 ### Iteration 3 — level-1 tie rule [Sonnet adds rule (c), Haiku runs] GATE
 
-- [x] (run 2026-10-11, gate 2026-10-12) Tie rules (a), (b), (c). Report M1–M3 and the list of tied pairs that each rule resolves differently (top 30 by frequency).
+- [x] (run 2026-10-11, gate 2026-10-12) Tie rules (a), (b), (c). Report MKM1–MKM3 and the list of tied pairs that each rule resolves differently (top 30 by frequency).
 
 ### Iteration 4 — merge before or after S7 [Sonnet] GATE
 
 - [x] (run 2026-10-11, gate 2026-10-12) `before-s7`: merge on unmarked outlines, then recompute the star/hash marks on the merged entries
   (`composeReservedKeyStrokesForEntries`, src/ambiguitychecker.py, with the merged strokes as each entry's stroke and
-  the phoneme stroke count unchanged). Compare with `after-s7` on M1–M5; show the words that merge only under `after-s7`
+  the phoneme stroke count unchanged). Compare with `after-s7` on MKM1–MKM5; show the words that merge only under `after-s7`
   (a mark made room, the `sais`/`sec*` case) and the mark changes `before-s7` causes.
 
 ### Iteration 5 — keys [Sonnet search, Haiku runs] GATE after 5b, GATE after 5c
@@ -153,41 +195,46 @@ words (no imperative is unambiguous in Lexique: `dis`, `fais`, `regarde`), again
 - [x] (run 2026-10-11, gate 2026-10-12) **5b [Sonnet]** Joint search of the f and plural merge key-sets (group 1 f, group 5 nbr_p+p; the merge key-set is
   per group, so nbr_p uses group 5's). Candidates: coda keys 18–25 and the coda digraphs of the Realization Phase; f may keep
   16. Constraints: f, p and f+p distinct, pressable with the stems, distinct from the other 5 groups' keys and every union
-  that occurs; f's key before p's in coda order (soft: report violations). Objective: M1 under the settled semantics,
-  M4 as tie-breaker. Make the evaluation incremental (only entries needing group 1 or 5 change) so the full candidate
-  grid runs in minutes. Report the top 5 pairs with M1–M4. Expected side effect: `fasse`/`fassent` and most of group 3's
+  that occurs; f's key before p's in coda order (soft: report violations). Objective: MKM1 under the settled semantics,
+  MKM4 as tie-breaker. Make the evaluation incremental (only entries needing group 1 or 5 change) so the full candidate
+  grid runs in minutes. Report the top 5 pairs with MKM1–MKM4. Expected side effect: `fasse`/`fassent` and most of group 3's
   same-lemma conflicts disappear (they come from the absorbed plural `s`).
 - [x] **5c [Sonnet]** (skipped, gate 5b) Only if the residual conflicts of the other 5 groups justify it (gate 5b decides): re-search their
-  keys with the merge objective under today's Realization constraints (one key per group in both strokes, D9).
+  keys with the merge objective under today's Realization constraints (one key per group in both strokes, MKD9).
 
 ### Iteration 6 — merge before or after S9 [Sonnet] GATE
 
-Needs the merged theory inside the pipeline (step I1 below, behind a flag), because S9 recomputes the disambiguated
+Needs the merged theory inside the pipeline (step MKI1 below, behind a flag), because S9 recomputes the disambiguated
 theory through `util/_theoryio.py`.
 - [x] (2026-10-12) Run `python -m util.build_affix_rules` (delete `AffixSelection.pickle` first) and `python -m util.export_affix_dictionary`
-  on the merged theory (before), and alternatively filter merges against today's abbreviations (after). Report M1, M6,
+  on the merged theory (before), and alternatively filter merges against today's abbreviations (after). Report MKM1, MKM6,
   the merges lost (after) and the abbreviations lost (before); list any affix decision that turns PENDING.
 
 ### Implementation (after gate 5, detailed then) [Sonnet; Haiku for rebuilds, tests and md5s]
 
-- [x] **I1** (2026-10-12) The merge in the pipeline, behind a constant defaulting to off (md5-identical rebuild when off): a function
+<!-- tag: MKI1 | The merge in the pipeline, behind a constant defaulting to off (md5-identical rebuild when off); on by default since 2026-10-12. -->
+- [x] **MKI1** (2026-10-12) The merge in the pipeline, behind a constant defaulting to off (md5-identical rebuild when off): a function
   next to `realizeKeypressGroupsAsExtraStroke` (src/ambiguitychecker.py) applied on the inline path
   (`Dictionary.buildDisambiguatedTheory`) and in `util/build_realization_report.py`; the long outline becomes an
   alternate entry; S7 placement per gate 4.
-- [x] **I2** (2026-10-12) S8: `export_plover_dictionary` (merged primary, long alternate), `realization_report.json` (merge key-sets),
+<!-- tag: MKI2 | S8 on the merged theory: Plover dictionary, realization report, trainer exports, then the complement, number and spelling exporters and the expression data. -->
+- [x] **MKI2** (2026-10-12) S8: `export_plover_dictionary` (merged primary, long alternate), `realization_report.json` (merge key-sets),
   `export_keyboard_layout` (conjugation-feature legend with the merge keys), `export_practice_words` / `export_lessons`
   (a lesson on merged keys and on the tenses that never merge), then the complement, number and spelling exporters (they
   must still pass their own collision checks), `export_expression_data` + `export_plover_plugin` (fingerprint).
-- [x] **I3** S9 per gate 6: before, nothing to change (S9 reads the merged theory); `build_affix_rules` defaults to at most 4 workers.
-- [x] (2026-10-12) **I4** Docs: docs/PIPELINE.md, docs/specs/discriminating-features.md (new section), GLOSSARY code references,
+<!-- tag: MKI3 | S9 per gate 6: before, nothing to change (S9 reads the merged theory); build_affix_rules defaults to at most 4 workers. -->
+- [x] **MKI3** S9 per gate 6: before, nothing to change (S9 reads the merged theory); `build_affix_rules` defaults to at most 4 workers.
+<!-- tag: MKI4 | Docs: PIPELINE, the discriminating-features spec, GLOSSARY code references, CLAUDE.md commands, TODO.md. -->
+- [x] (2026-10-12) **MKI4** Docs: docs/PIPELINE.md, docs/specs/discriminating-features.md (new section), GLOSSARY code references,
   CLAUDE.md commands, TODO.md.
-- [x] (2026-10-12) **I5** Verification: `pytest src/test/` and bare `mypy`; full rebuild per the docs/PIPELINE.md rebuild table; H1–H4
-  as unit tests on the exported dictionaries; M7.
+<!-- tag: MKI5 | Verification: pytest and mypy, a full rebuild per the PIPELINE rebuild table, the hard constraints as unit tests, MKM7. -->
+- [x] (2026-10-12) **MKI5** Verification: `pytest src/test/` and bare `mypy`; full rebuild per the docs/PIPELINE.md rebuild table; MKH1–MKH4
+  as unit tests on the exported dictionaries; MKM7.
 
 ## Delegation notes
 
 - A Haiku task gets a self-contained brief: the exact command, the files it may write, the table template to fill, and the
-  acceptance check (row counts, totals equal to the previous run's where they must be, H1–H4). It stays under 100k tokens:
+  acceptance check (row counts, totals equal to the previous run's where they must be, MKH1–MKH4). It stays under 100k tokens:
   it never reads the large TSVs or pickles into its context, only script output.
 - Sonnet redoes or fixes a Haiku task whose output fails its acceptance check, writes all code (mypy strict, CLAUDE.md
   typing conventions) and words each gate as a question with a recommended answer.
@@ -195,8 +242,8 @@ theory through `util/_theoryio.py`.
 
 ## Related, not prerequisites
 
-- B48 (TODO "Suspected bugs"): the `frequencies` field of `resolved_press_sets.json` is 0 for frequent words.
-- TODO "unpressable base codas": the D12 words; rerun the simulator after that fix.
+- TOD48 (TODO "Suspected bugs"): the `frequencies` field of `resolved_press_sets.json` is 0 for frequent words.
+- TODO "unpressable base codas": the MKD12 words; rerun the simulator after that fix.
 
 ## Results
 
@@ -233,7 +280,7 @@ Acceptance:
 
 Share of all theory running words (film frequency, 267,040 words, 135,785 in Lexique383) needing each discriminator, from
 `resolved_press_sets.json` press-sets (they agree with `disambiguated_theory.tsv` for 207,699 of 207,984 words; the rest
-are spelling twins). Columns: **reading shares** (D13) | lexicon prior | equal split | primary reading only. Any feature
+are spelling twins). Columns: **reading shares** (MKD13) | lexicon prior | equal split | primary reading only. Any feature
 stroke: **14.4** | 13.5 | 15.2 | 13.0%.
 
 | Pressed discriminator | Group, key | Share |
@@ -268,7 +315,7 @@ Method: frequency per (ortho, lemme_cgram) from Lexique383, split over a spellin
 each alternate's feature combinations. **Reading shares**: the share of the combination's reading in the class of the
 entry's Mixte + Synthetic reading set (`par:pas` and `nom:` cells summed when gender or number is open). The lexicon prior
 uses the summed frequency of the Lexique forms with a single `infover` reading or a single genre/nombre cell. The
-eligible tenses of D5 (présent, impératif, infinitif, participe, nominal) are now 12.8% of running words, the ceiling of
+eligible tenses of MKD5 (présent, impératif, infinitif, participe, nominal) are now 12.8% of running words, the ceiling of
 the merge; the excluded tenses keep 1.6%.
 
 ### 2026-10-11 — iteration 1: simulator and baseline
@@ -282,18 +329,18 @@ Alternate ↔ press-set alignment: 0 mismatches over 311,373 entries (267,406 wo
 abbrevOnly 122), 11,348 conflicts (= 4,107 + 141 + 2,247 + 4,853), 448 unpressable: identical to
 docs/CONJUGATION_FUSION_STATS.md.
 
-1.3 baseline (D5, current keys, after-s7, tie (a) fallback), `scratch/merged-keys/baseline/metrics.md`:
+1.3 baseline (MKD5, current keys, after-s7, tie (a) fallback), `scratch/merged-keys/baseline/metrics.md`:
 
 | Metric | Value |
 |---|---|
-| H1 new collisions / H2 unpressable merged | 0 / 0 (one outline already shared today) |
-| M1 strokes per running word | 1.5101 → **1.3977 (−7.45%)**; unweighted per word 3.657 → 3.381 |
-| M2 merge rate | 89,980 of 96,161 eligible entries (93.6%); by frequency 11.2% of 13.3% of running words (84.3%) |
-| M2 per group (freq) | inf 93.0%, f 91.7%, pers_3/passé/future 72.4%, impératif/pers_1 85.7%, plural 81.5%, pers_2 77.6% |
-| M2 per tense (freq) | présent 83.2%, impératif 81.0%, infinitif 93.0%, participe 97.9%, nominal 81.1% |
-| M3 fallbacks (freq of running words) | occupied 1.8% (31 of the top 1,000 spellings), tie 0.2% (11), level 1 146 entries, level 2 7, base unpressable 437 (D12), other dictionary 1 (`tuer` = an expression brief) |
-| M4 merged stroke cost | 364.5 vs 393.7 (last base stroke + feature stroke) |
-| M5 marks | unchanged (after-s7): 10,795 marked entries, 158 escalated codes, 0.0618 mark keys per word |
+| MKH1 new collisions / MKH2 unpressable merged | 0 / 0 (one outline already shared today) |
+| MKM1 strokes per running word | 1.5101 → **1.3977 (−7.45%)**; unweighted per word 3.657 → 3.381 |
+| MKM2 merge rate | 89,980 of 96,161 eligible entries (93.6%); by frequency 11.2% of 13.3% of running words (84.3%) |
+| MKM2 per group (freq) | inf 93.0%, f 91.7%, pers_3/passé/future 72.4%, impératif/pers_1 85.7%, plural 81.5%, pers_2 77.6% |
+| MKM2 per tense (freq) | présent 83.2%, impératif 81.0%, infinitif 93.0%, participe 97.9%, nominal 81.1% |
+| MKM3 fallbacks (freq of running words) | occupied 1.8% (31 of the top 1,000 spellings), tie 0.2% (11), level 1 146 entries, level 2 7, base unpressable 437 (MKD12), other dictionary 1 (`tuer` = an expression brief) |
+| MKM4 merged stroke cost | 364.5 vs 393.7 (last base stroke + feature stroke) |
+| MKM5 marks | unchanged (after-s7): 10,795 marked entries, 158 escalated codes, 0.0618 mark keys per word |
 
 Largest fallbacks (all occupied by a phonetic outline): `es` (`aide`), `sais` (`sec`, `cède`), `allez` (`alloc`), `aux`
 (`hausse`), `aller` (`alors`), `dis` (`dyke`), `enfants` (`enfance`), `va` (`vaque`), `seule` (`semble`), `femmes`
@@ -301,7 +348,7 @@ Largest fallbacks (all occupied by a phonetic outline): `es` (`aide`), `sais` (`
 
 ### 2026-10-11 — iteration 2: eligibility check (`--eligible all`)
 
-M1 −8.07% (against −7.45%). Per excluded tense, the share of running words its merges would save, and the eligible merges
+MKM1 −8.07% (against −7.45%). Per excluded tense, the share of running words its merges would save, and the eligible merges
 it would take:
 
 | Excluded tense | Saved (running words) | Eligible merges lost |
@@ -312,8 +359,8 @@ it would take:
 | subjonctif | 0.22% | 355 entries, 0.48% (`ils`/`hisse`, `elles`/`aient`, `films`/`filment`, `belles`/`baisse` become ties) |
 | passé simple | 0.02% | none |
 
-This contradicts D5 for imparfait, future and conditionnel: they would merge almost for free (98.7–100% merge rate).
-GATE question queued; D5 kept until answered.
+This contradicts MKD5 for imparfait, future and conditionnel: they would merge almost for free (98.7–100% merge rate).
+GATE question queued; MKD5 kept until answered.
 
 Breakdown (share of running words; merged with one group / with several): imparfait 0.47% / 0.09% (93% / 62%, `étaient`
 2+5 = `-st`), future 0.39% / 0.05% (100% / 100%), conditionnel 0.23% / 0.02% (100% / 100%), subjonctif 0.19% / 0.08%
@@ -321,11 +368,11 @@ Breakdown (share of running words; merged with one group / with several): imparf
 `-t` (shared with pers_3, passé): merging them gives no key a new meaning.
 
 **Gate decision (2026-10-12):** imparfait, future and conditionnel become merge-eligible; subjonctif and passé simple
-stay excluded. D5 updated.
+stay excluded. MKD5 updated.
 
 ### 2026-10-11 — iteration 3: tie rule (gate decided)
 
-| Rule | M1 | Merged (freq of running words) | Ties left |
+| Rule | MKM1 | Merged (freq of running words) | Ties left |
 |---|---|---|---|
 | (a) fallback | −7.45% | 11.2% | 832 entries (0.2%) |
 | (b) frequency | **−7.59%** | 11.5% | 409 (0.0%) |
@@ -335,11 +382,11 @@ stay excluded. D5 updated.
 NOM above VER, so `troupes` (20.6) takes `tR@ejsk` from `trouve` (160, présent + impératif), `sortes` from `sortent`,
 `commandes` from `commences`. (b) gives the frequent verb forms. Recommendation: (b).
 
-**Gate decision (2026-10-12):** (b) frequency. D7 updated.
+**Gate decision (2026-10-12):** (b) frequency. MKD7 updated.
 
 ### 2026-10-11 — iteration 4: merge before or after S7 (gate decided)
 
-| Order | M1 | Merged (freq) | Mark keys per word | Long outlines whose marks change |
+| Order | MKM1 | Merged (freq) | Mark keys per word | Long outlines whose marks change |
 |---|---|---|---|---|
 | after-s7 | **−7.45%** | 11.2% | 0.0618 (unchanged) | 0 |
 | before-s7 | −7.33% | 11.1% | 0.0745 | 19 entries, 1.4% of running words: `a` (avoir) `*a` → `*a#`, `ah` `*a#` → `*a`, `ère`, `fie` |
@@ -348,11 +395,11 @@ NOM above VER, so `troupes` (20.6) takes `tR@ejsk` from `trouve` (160, présent 
 `mots` `m*aes`, `prêts` `pR*ies`, `noms`, `mètres`, `tue`, `verres`, `eaux`, `risque`. None merge only under before-s7
 (`scratch/merged-keys/order-differences.md`). Recommendation: after-s7.
 
-**Gate decision (2026-10-12):** after-s7. D7 updated.
+**Gate decision (2026-10-12):** after-s7. MKD7 updated.
 
 ### 2026-10-11 — iteration 5a/5b: merge key-sets for f and plural (gate decided)
 
-`python -m util.analyze_merged_feature_keys --search` (after-s7, tie (a), D5; ~25 min), full tables in
+`python -m util.analyze_merged_feature_keys --search` (after-s7, tie (a), MKD5; ~25 min), full tables in
 `scratch/merged-keys/search/search.md`. 5a: every coda key and digraph is pressable with the 50 most frequent last-stroke
 codas of the f/plural entries, except `-Z` (24: 38/50, 81.7% of their frequency), `-Zm`, `-n`, `-l` and `-m` (94–98%).
 Keys already in the last stroke of f/plural entries: `-l` 18.3%, `-R` 15.6%, `-t` 8.5%, `-s` 6.0%, `-j` 5.4%, `-Z` 2.1%.
@@ -360,7 +407,7 @@ Keys already in the last stroke of f/plural entries: `-l` 18.3%, `-R` 15.6%, `-t
 5b: 272 (f, p) pairs over the 10 coda keys and the 7 Realization Phase digraphs; 146 rejected because f, p or f+p equals
 the key-set of another occurring group set; 126 evaluated.
 
-| Merge key-sets | M1 | f/plural merged (freq) | M4 merged-stroke cost |
+| Merge key-sets | MKM1 | f/plural merged (freq) | MKM4 merged-stroke cost |
 |---|---|---|---|
 | today f=16 p=17 | −7.45% | 82.9% | 364.5 |
 | best: f=17 p=18+19 (and f=20+22 p=18+19, f=16+17 p=18+19) | **−7.65%** | 88.4% | 376.8 |
@@ -368,15 +415,15 @@ the key-set of another occurring group set; 126 evaluated.
 | f=22 p=16 | −7.56% | 85.2% | 360.5 |
 | f=22 p=17 (f moves to `-n` only) | −7.47% | 83.5% | 367.3 |
 
-The ceiling of a dedicated key-set is +0.2 points of M1 (≈ 0.3% of running words more merged). The best pairs give the
+The ceiling of a dedicated key-set is +0.2 points of MKM1 (≈ 0.3% of running words more merged). The best pairs give the
 plural `-kd`, the keys of impératif/pers_1 and pers_2 (allowed: no entry needs both groups 4 and 6). Recommendation:
 keep f=16, p=17 (no new key to learn, lowest effort), unless +0.2 points is worth a two-key plural. 5c looks
 unlikely to pay: the residual is mostly "occupied" (1.8% of running words, phonetic outlines); other keys would hit
-other phonetic outlines, and for f/plural the whole grid moved M1 by at most 0.2 points.
+other phonetic outlines, and for f/plural the whole grid moved MKM1 by at most 0.2 points.
 
-**Gate decision (2026-10-12):** keep f=16, p=17, no merge key-set; 5c skipped. D9 updated.
+**Gate decision (2026-10-12):** keep f=16, p=17, no merge key-set; 5c skipped. MKD9 updated.
 
-### 2026-10-12 — step 1: shared module, reserved chords from their sources (D16, D17)
+### 2026-10-12 — step 1: shared module, reserved chords from their sources (MKD16, MKD17)
 
 `src/mergedfeaturekeys.py` holds the rules (eligibility, ladder, tie rules, entries aligned with the press-sets);
 `util/analyze_merged_feature_keys.py` keeps options, frequencies, reports and search. Rerun with the old options, the
@@ -387,34 +434,34 @@ attach keypresses (a standalone keypress decodes as its particle; no theory outl
 punctuation chords the theory already takes (dropped by the exporter as before; they make "outlines already shared
 today" 4 instead of 1).
 
-### 2026-10-12 — step 2: confirmation run (D18), `scratch/merged-keys/decided/`
+### 2026-10-12 — step 2: confirmation run (MKD18), `scratch/merged-keys/decided/`
 
-D5 as amended, tie (b) frequency, after-s7, keys 16/17, reserved chords from the sources: H1 0, H2 0; **M1 1.5101 →
+MKD5 as amended, tie (b) frequency, after-s7, keys 16/17, reserved chords from the sources: MKH1 0, MKH2 0; **MKM1 1.5101 →
 1.3836 (−8.38%)**; merged 149,759 of 155,737 eligible entries (96.2%), 12.7% of 14.6% of running words (86.7%);
 excluded tenses keep 0.3% of running words on the feature stroke. Fallbacks: occupied 1.8% (32 of the top 1,000
 spellings), level 1 0.1%, tie 0.0% (409 entries), base unpressable 437 entries.
 
-Expression layer (not covered by H1–H3; one-off check with the shipped decoder,
+Expression layer (not covered by MKH1–MKH3; one-off check with the shipped decoder,
 scratch pad `expr_overlap.py`): of the merged outlines, 628 entries (1.2% of the merged frequency) are expression
 chords today and become words (the word wins the ranking every time, no merged word is hidden). 617 of those readings
 are open-set compositions (`que paix`, `le past`); 11 are attested expressions, 1.29% of the attested pool frequency:
 `il est` (taken by `tels`), `il y` (`tills`), `qu'on` (`compte`), `à une` (`ruses`), `il a` (`talles`), `qu'est`
 (`quête`), `de ma`, `de même`, `que ça`, `que ces`, `de ça`.
 
-Gate decision (2026-10-12, Q13/Q14): reserve the attested expressions (D22), M8 with a 5% gate (D23). Rerun with
-them reserved (2,571 reserved chords, 1,109 attested expression outlines): M1 −8.36%; 87 entries now fall back to
+Gate decision (2026-10-12, Q13/Q14): reserve the attested expressions (MKD22), MKM8 with a 5% gate (MKD23). Rerun with
+them reserved (2,571 reserved chords, 1,109 attested expression outlines): MKM1 −8.36%; 87 entries now fall back to
 "other dictionary" for an attested expression (`seule` and `avais` were already occupied by `semble` and `avec`);
 no attested expression lies on a merged outline any more, 611 open-set readings still do (1.1% of the merged
 frequency, none hides a word). "Outlines already shared today" is 387: 383 attested expressions compose to a chord
 that is a theory word today.
 
-### 2026-10-12 — step 3: I1, the merge in the pipeline
+### 2026-10-12 — step 3: MKI1, the merge in the pipeline
 
 `mergeFeatureKeys` (src/mergedfeaturekeys.py) runs at the end of `Dictionary.buildDisambiguatedTheory`, after S7,
 when `MERGE_FEATURE_KEYS` is on (`STENALGO_MERGE_FEATURE_KEYS=1`; off by default). Each word keeps its outlines in
 order, a merged entry's merged outline in place of its long one, then the long outlines of its merged entries: the
 first len(press-set alternates) outlines stay aligned with the readings (consumers that align them, such as
-`export_practice_words`, read only those; I2). With the flag on, the `DisambiguatedTheory.pickle` fingerprint also
+`export_practice_words`, read only those; MKI2). With the flag on, the `DisambiguatedTheory.pickle` fingerprint also
 covers the flag and the reserved chords' sources. Flag off: S7 to S10 rebuilt (pickle deleted first), all 29 tracked
 outputs md5-identical.
 
@@ -422,7 +469,7 @@ outputs md5-identical.
 
 Strokes saved per running word (film frequency mass 900,816; abbreviations counted per spelling, its best one):
 
-| Variant | Theory M1 | Merge gain | Affix abbreviations | Abbreviation gain | Total gain |
+| Variant | Theory MKM1 | Merge gain | Affix abbreviations | Abbreviation gain | Total gain |
 |---|---|---|---|---|---|
 | today (no merge) | 1.5101 | – | 115,896 spellings | 0.1270 | 0.1270 |
 | after S9: merges avoid today's abbreviation outlines | 1.3878 (−8.10%) | 0.1223 | unchanged | 0.1270 | **0.2493** |
@@ -442,14 +489,14 @@ Strokes saved per running word (film frequency mass 900,816; abbreviations count
   finished in about 4.5 minutes within the limit. Outputs restored to flag off afterwards (md5-identical).
 
 **Gate decision (2026-10-12):** before S9: the affix abbreviations are rebuilt on the merged theory (the pipeline
-order as built in I1). `build_affix_rules` now defaults to at most 4 workers.
+order as built in MKI1). `build_affix_rules` now defaults to at most 4 workers.
 
-### 2026-10-12 — step 5: I2, the exporters on the merged theory
+### 2026-10-12 — step 5: MKI2, the exporters on the merged theory
 
 `chordsWithAlternates` (util/export_practice_words.py) hands every exporter a word's aligned outlines with the long
 outlines that belong to them (`splitLongAlternates`, src/mergedfeaturekeys.py; two readings sharing an outline each
-get their copy). Practice words and lesson words carry them as `alternates` (D19; the trainer's `Drill.elm` already
-accepts them); the lessons analyse a merged record through its long outline. Lessons (D20): accord-01/02 and verbe-01
+get their copy). Practice words and lesson words carry them as `alternates` (MKD19; the trainer's `Drill.elm` already
+accepts them); the lessons analyse a merged record through its long outline. Lessons (MKD20): accord-01/02 and verbe-01
 get a "merge" rule (« choses → pmaesnl plutôt que pmaenl/-s, qui reste accepté »), and verbe-10 « quand les marques
 ne fusionnent pas » lists the subjonctif / passé simple and the words whose merged form is another word's outline
 (« va » vak = « vaque », « sais » sied = « cède », « es » ied = « aide », « allez » a/mtek = « alloc »).
@@ -460,13 +507,13 @@ spelling unchanged in count, spelling's collision check passes; expression data 
 round trip 0 differ); lessons 35 (verbe 10), 0 invalid records; 3,395 of the 10,000 practice words carry a long
 alternate; accord-01/02 lessons 43 and 45 merged words of 50, verbe-02 to 09 6 to 40 (subjonctif 0).
 
-M8 (D23): attested pool expressions, strokes per expression (longform / composed / saved): merge off 1.9080 / 1.3739 /
+MKM8 (MKD23): attested pool expressions, strokes per expression (longform / composed / saved): merge off 1.9080 / 1.3739 /
 0.5341; on 1.8845 / 1.3522 / 0.5323. Savings drop 0.3%, under the 5% gate; the composed expressions get shorter.
 
 Flag off: every tracked output md5-identical. Not done: the practice sentences accept only the primary outline of each
 word (a sentence-level `alternates` would need every combination).
 
-### 2026-10-12 — trainer: every outline accepted, long hint above, short ones under (D24-D28)
+### 2026-10-12 — trainer: every outline accepted, long hint above, short ones under (MKD24-MKD28)
 
 Exporters: `util/_outlines.py` tags each outline (`long`, `merged`, `affix` with its rule); practice words and the
 words of practice sentences show the long outline and accept the merged one and every affix abbreviation
@@ -475,16 +522,16 @@ merged outline as the lesson's form with the long one tagged; affix lesson k acc
 the abbreviations of rules up to k. Trainer (`Drill.elm`): `progress` parses the strokes typed word by word, each word
 with any of its outlines (a sentence's own alternates, the abbreviated sentences' rivals, as whole outlines after
 that); the lit keys follow the outline being typed; `viewShortOutlines` lists the current word's short outlines under
-the keyboard (the "Indices abréviation" switch). D28 needed nothing: the lesson mix switch (`lessonMix`, current and
+the keyboard (the "Indices abréviation" switch). MKD28 needed nothing: the lesson mix switch (`lessonMix`, current and
 past words 50/50) already exists. Flag off: practice words gain 3,937 tagged alternates (affix abbreviations),
 practice sentences 133 word alternates, affix lessons the tags; sentence counts unchanged (216, 139); lessons.json
 unchanged. Checked with a throwaway Elm worker under node: a word or a sentence word typed long or merged is
 accepted, a wrong stroke refused, the hint follows the merged outline.
 
-### 2026-10-12 — I4, I5 and the switch (D29, D30)
+### 2026-10-12 — MKI4, MKI5 and the switch (MKD29, MKD30)
 
 The merge is on by default (`STENALGO_MERGE_FEATURE_KEYS=0` turns it off). Full rebuild from S7 (AffixSelection.pickle
 deleted), then `export_expression_data`, `export_plover_plugin` and `util.check_merged_feature_keys`: 424,690 theory
-outlines, 149,724 merged; H1, H2, H3, H4 all 0. `pytest src/test/` 1608 passed (the plugin test, stale before, passes
+outlines, 149,724 merged; MKH1, MKH2, MKH3, MKH4 all 0. `pytest src/test/` 1608 passed (the plugin test, stale before, passes
 on the rebuilt expression data), bare mypy clean. Docs: PIPELINE.md (S7 tree, rebuild table), the spec's section 8,
-GLOSSARY code references, CLAUDE.md commands, TODO.md. Not run: M7 (`util.compare_theories`, needs the Pluvier clone).
+GLOSSARY code references, CLAUDE.md commands, TODO.md. Not run: MKM7 (`util.compare_theories`, needs the Pluvier clone).

@@ -235,7 +235,7 @@ class TestHashAndEq:
         assert w.__eq__(None) is NotImplemented
 
     def test_hash_independent_of_pythonhashseed(self):
-        """B43: the hash is pickled with the Word, so it must not follow the salted
+        """TOD43: the hash is pickled with the Word, so it must not follow the salted
         builtin hash() -- two processes with different seeds must agree."""
         import subprocess, sys, os
         code = ("from src.test.word_test import _make_word; print(hash(_make_word()))")

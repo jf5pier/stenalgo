@@ -37,7 +37,7 @@ phase codes, older stage names and older terms. They map as follows.
 | mark, marker (for `*`/`#`) | **star/hash mark**, **star/hash code** |
 | marker stroke, Phase P stroke, coda extra stroke, trailing stroke | **Feature discriminating stroke** |
 | bare mark stroke | **\*/# marker stroke** |
-| 10x rule, frequency-ratio exemption | **frequency-ratio rule (R4)** |
+| 10x rule, frequency-ratio exemption | **frequency-ratio rule (SHM4)** |
 | in-scope collision | **Same-lemmeGramCat collision** |
 | same-steno collision (exporter output, same spelling) | **Same-stroke homograph** (not a **Collision**) |
 | theory 1, first theory, `FirstTheory.pickle`, `theory.tsv` | **phonetic theory** (renamed 2026-09-24) |
@@ -131,7 +131,7 @@ non-primary alternate (base strokes plus that alternate's feature discriminating
 It is a separate concept, **not** an extra stroke. `buildExtraInducedStrokes` builds it
 unmarked; Different-Lemma or Grammatical-Category Disambiguation (S7)
 (`composeReservedKeyStrokesForEntries`) then marks it from its own final-stroke cluster, same
-as a primary stroke (item B4, fixed 2026-09-24 as B44).
+as a primary stroke (item TOD4, fixed 2026-09-24 as TOD44).
 - Code: `buildExtraInducedStrokes` src/ambiguitychecker.py:1196; `composeReservedKeyStrokesForEntries`
   :424; dictionary.py:389-391.
 - Avoid "alternate stroke", "alternates" (for the entry).
@@ -259,7 +259,7 @@ phonetic-theory collision (before any marks), and the residual-collision buckets
 Realization Phase (same-lemmeGramCat collision, cross-category clash, cross-lemma collision);
 also the final-collision buckets of `findFinalCollisions` (`crossLemma`, `sameLemmeGramCat`,
 `reformDoublet`), checked after Different-Lemma or Grammatical-Category Disambiguation (S7),
-over every entry (primary and alternate) — item B44, fixed 2026-09-24.
+over every entry (primary and alternate) — item TOD44, fixed 2026-09-24.
 - Code: `findFinalCollisions` src/ambiguitychecker.py:489, called by
   `util/build_disambiguated_theory.py` (exits 1 on any `crossLemma` collision) and
   `export_plover_dictionary.main`.
@@ -309,7 +309,7 @@ stroke (with its star/hash mark), then alternate entries. Recomputed by every ex
 ### Different-Lemma or Grammatical-Category Disambiguation (S7)
 The stage that adds star/hash marks to words that still collide after the Realization Phase
 with a different `lemmeGramCat` (different lemma, or same lemma in another category),
-producing the disambiguated theory. Its rule stack is the star/hash rule stack (R1-R7);
+producing the disambiguated theory. Its rule stack is the star/hash rule stack (SHM1-SHM7);
 it marks every entry (primary and alternate), each on its own final-stroke cluster.
 - Code: `composeReservedKeyStrokesForEntries` src/ambiguitychecker.py:424, called from `Dictionary.buildDisambiguatedTheory` dictionary.py:390.
 - Avoid "Lemma-Homophone Marking (S4)", "`*`/`#` track", "cross-lemma track", "reserved-key track".
@@ -464,8 +464,8 @@ A one-shot `util/fix*.py` lexicon patch: dry run by default, `--apply` writes.
 - Preferred over "fixer".
 - First used in: Lexicon Building (S1).
 
-### Frequency-ratio rule (R4)
-Rule R4 of the star/hash rule stack: when one word's film frequency is at least 10 times the
+### Frequency-ratio rule (SHM4)
+Rule SHM4 of the star/hash rule stack: when one word's film frequency is at least 10 times the
 other's (or the other is 0), the rarer word is marked, without looking at categories.
 - Code: `RATIO_EXEMPTION_THRESHOLD` src/ambiguitychecker.py:91 (name unchanged); `decideStarHashMark` :221-225.
 - Avoid "10x ratio exemption" / "frequency-ratio exemption" (code and ROADMAP.md wording):
@@ -510,7 +510,7 @@ lexicographic preferences applied at the fixed minimum K (`PREFERENCE_TIERS`).
 Two Words with the same spelling; they type the same text, so they are never separated. A
 **self-homograph** is one spelling with several feature combinations inside one homophone
 group ("calmez": impératif or indicatif 2p); it gets one alternate per combination.
-- Code: `decideStarHashMark` homograph exemption (R1) src/ambiguitychecker.py:211; `resolveGroupPressSets` src/elicitation.py:374.
+- Code: `decideStarHashMark` homograph exemption (SHM1) src/ambiguitychecker.py:211; `resolveGroupPressSets` src/elicitation.py:374.
 - By final strokes, homographs are either **same-stroke homographs** or **distinct-stroke
   homographs**; neither is a collision.
 - First used in: Discriminating-Feature Elicitation (Elicitation Phase).
@@ -567,7 +567,7 @@ groups: the union of all features of the groups touched.
 The two call sites of the Realization Phase. The **inline path** runs inside
 `Dictionary.buildDisambiguatedTheory` and feeds the disambiguated theory and all exports; the **report build**
 (`util/build_realization_report.py`) writes only the realization report. The trainer legend
-reads the report while Plover recomputes inline, so the two can drift (item B18).
+reads the report while Plover recomputes inline, so the two can drift (item TOD18).
 - Code: dictionary.py:373-389; util/build_realization_report.py:38.
 - First used in: Discriminating-Feature Stroke Realization (Realization Phase).
 
@@ -939,9 +939,9 @@ occurrence); the per-pair optimum is `min(fA, fB)` (mark the rarer); the **gap**
 equivalently the **regret** of the choice — is `cost − optimum`. Summed over all clashing
 pairs and divided by their total mass it becomes **gap%**, the headline quality metric of
 the star/hash rules (about 0.5 %; [specs/star-hash-marking.md §2](specs/star-hash-marking.md)).
-Regret is the reason the frequency-ratio rule (R4) exists (≥ 10× pairs: marking the rarer
-word is near-free, so the ratio is its own mnemonic) and why the same-category (R5) and
-category-priority (R6) rules take that specific linear order: it matches every observed
+Regret is the reason the frequency-ratio rule (SHM4) exists (≥ 10× pairs: marking the rarer
+word is near-free, so the ratio is its own mnemonic) and why the same-category (SHM5) and
+category-priority (SHM6) rules take that specific linear order: it matches every observed
 category pair's regret-optimal direction.
 - Code: `decideStarHashMark` src/ambiguitychecker.py:183; the design-time numbers are
   reproduced by `scratch/combined_regret.py`.
@@ -999,7 +999,7 @@ Legacy stage name. Use **Same-Lemma and Grammatical-Category Disambiguation (S6)
 Two or more Words with the same spelling on the same final stroke (for example a VER
 participle and its ADJ reading). They type the same text whichever Word Plover keeps, so
 this is never an ambiguity.
-- Code: the homograph exemption (R1) in `decideStarHashMark` src/ambiguitychecker.py:211.
+- Code: the homograph exemption (SHM1) in `decideStarHashMark` src/ambiguitychecker.py:211.
 - Not a collision. Contrast **Distinct-stroke homograph**.
 - First used in: Phonetic Theory Building (S5).
 
@@ -1019,7 +1019,7 @@ Two or more Words in one homophone group with the same spelling and `lemmeGramCa
 different identity ("finis" participle m:p and "finis" finite form). The Elicitation Phase
 merges them into one spelling; every reading is realized as one of the resolved Word's
 primary/alternate entries, and the twin Words get no entry of their own — the bare
-placement belongs to the group's default reading only (items B1, B47).
+placement belongs to the group's default reading only (items TOD1, TOD47).
 - Code: `findSpellingTwinWords` src/ambiguitychecker.py:785; `_resolveEntryWord` :676.
 - First used in: Discriminating-Feature Elicitation (Elicitation Phase).
 
@@ -1041,12 +1041,12 @@ them).
 - Avoid bare "mark".
 - First used in: Different-Lemma or Grammatical-Category Disambiguation (S7).
 
-### Star/hash rule stack (R1-R7)
+### Star/hash rule stack (SHM1-SHM7)
 The ordered pairwise rules that decide which of two lemma-homophones gets the star/hash mark:
-homograph exemption (R1), reform-doublet exemption (R2), per-pair override (R3),
-frequency-ratio rule (R4), same-category rule (R5), category-priority rule (R6), frequency
-fallback (R7). The first match decides. Numbers follow code order; always cite a rule by
-name with its number, e.g. "frequency-ratio rule (R4)".
+homograph exemption (SHM1), reform-doublet exemption (SHM2), per-pair override (SHM3),
+frequency-ratio rule (SHM4), same-category rule (SHM5), category-priority rule (SHM6), frequency
+fallback (SHM7). The first match decides. Numbers follow code order; always cite a rule by
+name with its number, e.g. "frequency-ratio rule (SHM4)".
 - Code: `decideStarHashMark` src/ambiguitychecker.py:183-232.
 - Avoid "marking rule stack". Older design notes (git history,
   `RESUME_2026-09-20-starhash-priority.md`) use another numbering (ratio = Rule 1,

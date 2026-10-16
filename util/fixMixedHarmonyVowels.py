@@ -1,6 +1,6 @@
 #!/bin/env python
 #
-# B2 residue, vowel-harmony batch 3 (docs/VOWEL_HARMONY_CANDIDATES.md, the `mixed` rows). Same
+# TOD2 residue, vowel-harmony batch 3 (docs/VOWEL_HARMONY_CANDIDATES.md, the `mixed` rows). Same
 # design choice as util/fixFirstSyllableE.py and util/fixHarmonyVowels.py (docs/ARCHITECTURE.md
 # decision 6): the harmony is ignored when that protects the lemma's phonetics. The 243
 # (lemma, position) targets of util/harmonyVowelTargets.tsv were validated by hand against

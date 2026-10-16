@@ -1,7 +1,7 @@
 """
 Hand-run diagnostic: the merged-feature-keys simulator (docs/MERGED_FEATURE_KEYS_PLAN.md, iteration 1).
 
-The merge rules (eligibility, the merge precedence ladder, the tie rules) are those of src/mergedfeaturekeys.py (D17);
+The merge rules (eligibility, the merge precedence ladder, the tie rules) are those of src/mergedfeaturekeys.py (MKD17);
 this script adds the options, the frequency of each entry and the reports.
 
 --order after-s7 (default) compares today's final outlines, star/hash marks included (a mark can make room:
@@ -10,7 +10,7 @@ the same last base stroke and the same feature keys never block each other) and 
 the whole merged theory (composeReservedKeyStrokesForEntries, long outlines kept as alternates).
 
 Frequency = Lexique film frequency of the word, split over its alternates with the reading-share table
-(resources/readingShares.tsv, D13).
+(resources/readingShares.tsv, MKD13).
 
 --regression reproduces docs/CONJUGATION_FUSION_STATS.md: every tense eligible, marks ignored, no ladder (any other
 spelling on the outline is a conflict), words counted by their primary alternate.
@@ -82,7 +82,7 @@ def comboReading(combo: Iterable[str]) -> str:
 
 
 class ReadingShares:
-    """The reading-share table looked up by an entry's reading set in the theory's lexicons (D13)."""
+    """The reading-share table looked up by an entry's reading set in the theory's lexicons (MKD13)."""
 
     def __init__(self, sharesPath: str = READING_SHARES, lexiconPaths: Iterable[str] = LEXICON_DEFAULTS) -> None:
         self.classes, _frequencies = loadLexiqueClasses(lexiconPaths)
@@ -207,7 +207,7 @@ def encodingClashes(entries: Iterable[Entry], mergeKeysOf: dict[int, tuple[int, 
 def recomposeMarks(entries: list[Entry], wordToStrokes: dict[Word, Strokes]) -> list[Entry]:
     """
     before-s7: S7 over the merged theory, each word's entries = its primary outlines (merged or long, unmarked) then
-    the long outlines of its merged entries (D3). Returns the entries whose long outline's marks changed.
+    the long outlines of its merged entries (MKD3). Returns the entries whose long outline's marks changed.
     """
     byWord: dict[Word, list[Entry]] = defaultdict(list)
     for entry in entries:
@@ -232,7 +232,7 @@ def recomposeMarks(entries: list[Entry], wordToStrokes: dict[Word, Strokes]) -> 
 
 
 def checkCollisions(entries: list[Entry], reserved: dict[str, str], render: Any) -> tuple[int, list[str]]:
-    """H1: outlines shared by two spellings, before (today's outlines) and after (shipped primary and long outlines)."""
+    """MKH1: outlines shared by two spellings, before (today's outlines) and after (shipped primary and long outlines)."""
     def collisions(outlines: Iterable[tuple[str, str]]) -> list[str]:
         owners: dict[str, set[str]] = defaultdict(set)
         for outline, ortho in outlines:
@@ -333,33 +333,33 @@ def metricsReport(sim: Simulation, options: Options) -> list[str]:
              f"reserved chords {sim.reservedCount}; alternate/feature-key mismatches {sim.alignmentMismatches}; "
              f"reading-share misses {sim.shareMisses}.", ""]
 
-    # H1, H2
+    # MKH1, MKH2
     unpressableMerged = sum(1 for e in entries if e.outcome == "merged"
                             and keyboard.getStrokeCost(e.shipped[e.baseLength - 1], "coda") is None)
     lines += ["## Hard constraints", "",
-              f"- H1 new collisions: **{len(sim.finalCollisions)}** (outlines already shared today: "
+              f"- MKH1 new collisions: **{len(sim.finalCollisions)}** (outlines already shared today: "
               f"{sim.preexistingCollisions}) {', '.join(sim.finalCollisions[:10])}",
-              f"- H2 unpressable merged strokes: **{unpressableMerged}**",
-              "- H3 reserved dictionaries unchanged by construction (a merge never takes a reserved chord).",
-              "- H4 not checked by the simulator (pipeline step I5).", ""]
+              f"- MKH2 unpressable merged strokes: **{unpressableMerged}**",
+              "- MKH3 reserved dictionaries unchanged by construction (a merge never takes a reserved chord).",
+              "- MKH4 not checked by the simulator (pipeline step MKI5).", ""]
 
-    # M1
+    # MKM1
     today = sum(e.frequency * len(e.today) for e in entries) / total
     merged = sum(e.frequency * len(e.shipped) for e in entries) / total
     primaries = [e for e in entries if e.index == 0]
     todayCount = sum(len(e.today) for e in primaries) / len(primaries)
     mergedCount = sum(len(e.shipped) for e in primaries) / len(primaries)
-    lines += ["## M1 strokes per word", "", "| | Today | Merged | Delta |", "|---|---|---|---|",
+    lines += ["## MKM1 strokes per word", "", "| | Today | Merged | Delta |", "|---|---|---|---|",
               f"| frequency-weighted (all entries) | {today:.4f} | {merged:.4f} | {merged - today:+.4f} "
               f"({100 * (merged - today) / today:+.2f}%) |",
               f"| unweighted (primary alternate of each word) | {todayCount:.4f} | {mergedCount:.4f} | "
               f"{mergedCount - todayCount:+.4f} |", ""]
 
-    # M2
+    # MKM2
     withFeature = [e for e in entries if e.merged is not None]
     eligible = [e for e in withFeature if e.eligible]
     done = [e for e in eligible if e.outcome == "merged"]
-    lines += ["## M2 merge rate", "",
+    lines += ["## MKM2 merge rate", "",
               f"Entries with a feature stroke: {len(withFeature)} ({pct(sum(e.frequency for e in withFeature), total)} "
               f"of running words); eligible {len(eligible)} ({pct(sum(e.frequency for e in eligible), total)}); "
               f"merged {len(done)} ({pct(sum(e.frequency for e in done), total)}).", "",
@@ -384,7 +384,7 @@ def metricsReport(sim: Simulation, options: Options) -> list[str]:
     lines += ["", f"Excluded tenses keep {len(excluded)} entries ({pct(sum(e.frequency for e in excluded), total)} "
               "of running words) on the feature stroke.", ""]
 
-    # M3
+    # MKM3
     spellingFrequency: dict[str, float] = defaultdict(float)
     for word in {e.word for e in entries}:
         spellingFrequency[word.ortho] += word.frequency
@@ -394,7 +394,7 @@ def metricsReport(sim: Simulation, options: Options) -> list[str]:
     reasonFreq: dict[str, float] = defaultdict(float)
     for e in fallbacks:
         reasonFreq[e.outcome] += e.frequency
-    lines += ["## M3 exceptions (eligible entries keeping the long outline)", "",
+    lines += ["## MKM3 exceptions (eligible entries keeping the long outline)", "",
               "| Reason | Entries | Freq | In top 1,000 spellings | In top 5,000 |", "|---|---|---|---|---|"]
     for reason, n in reasons.most_common():
         inTop = [e for e in fallbacks if e.outcome == reason]
@@ -408,23 +408,23 @@ def metricsReport(sim: Simulation, options: Options) -> list[str]:
                      f"{' vs `' + e.partner + '`' if e.partner else ''}")
     lines.append("")
 
-    # M4
+    # MKM4
     weight = sum(e.frequency for e in done)
     mergedCost = sum(e.frequency * strokeCost(keyboard, e.shipped[e.baseLength - 1]) for e in done)
     longCost = sum(e.frequency * (strokeCost(keyboard, e.today[e.baseLength - 1])
                                   + strokeCost(keyboard, e.today[e.baseLength])) for e in done)
-    lines += ["## M4 chord cost of the merged entries (frequency-weighted mean `getStrokeCost`, coda)", "",
+    lines += ["## MKM4 chord cost of the merged entries (frequency-weighted mean `getStrokeCost`, coda)", "",
               f"Merged last stroke {mergedCost / weight if weight else 0:.1f} vs last base stroke + feature stroke "
               f"{longCost / weight if weight else 0:.1f}.", ""]
 
-    # M5
+    # MKM5
     def markLoad(outline: Any) -> tuple[int, int, float]:
         marked = sum(1 for e in entries if any(set(s) & MARK_KEYS for s in outline(e)))
         escalated = sum(1 for e in entries if any(set(s) <= MARK_KEYS for s in outline(e)))
         return marked, escalated, sum(e.frequency * sum(len(set(s) & MARK_KEYS) for s in outline(e))
                                       for e in entries) / total
     todayLoad, shippedLoad = markLoad(lambda e: e.today), markLoad(lambda e: e.shipped)
-    lines += ["## M5 star/hash load (primary outlines)", "", "| | Entries with a mark | Escalated codes | "
+    lines += ["## MKM5 star/hash load (primary outlines)", "", "| | Entries with a mark | Escalated codes | "
               "Mark keys typed per word (freq-weighted) |", "|---|---|---|---|",
               f"| today | {todayLoad[0]} | {todayLoad[1]} | {todayLoad[2]:.4f} |",
               f"| merged | {shippedLoad[0]} | {shippedLoad[1]} | {shippedLoad[2]:.4f} |", ""]
@@ -481,8 +481,8 @@ def absorptionReport(ctx: Context) -> list[str]:
 
 
 def searchMergeKeys(ctx: Context, options: Options) -> list[str]:
-    """5b: every (f, plural) merge key-set pair among the coda keys and the Realization Phase digraphs, ranked by M1,
-    then M4; a pair whose key-sets clash with another group set's (f, p, f+p and every occurring union) is rejected."""
+    """5b: every (f, plural) merge key-set pair among the coda keys and the Realization Phase digraphs, ranked by MKM1,
+    then MKM4; a pair whose key-sets clash with another group set's (f, p, f+p and every occurring union) is rejected."""
     total = sum(e.frequency for e in ctx.entries)
     occupied = occupiedOutlines(ctx.entries, ctx.render, replaceLong=options.regression)
     for e in ctx.entries:
@@ -516,8 +516,8 @@ def searchMergeKeys(ctx: Context, options: Options) -> list[str]:
                          f"{pct(unpressable, sum(e.frequency for e in fpEligible))} | {len(done)} | {cost:.1f} |"))
             print(rows[-1][2], flush=True)
     rows.sort()
-    header = ["| Merge key-sets | M1 strokes/word (vs today) | f/plural merged (freq) | f/plural unpressable "
-              "(freq) | Entries merged | M4 merged-stroke cost |", "|---|---|---|---|---|---|"]
+    header = ["| Merge key-sets | MKM1 strokes/word (vs today) | f/plural merged (freq) | f/plural unpressable "
+              "(freq) | Entries merged | MKM4 merged-stroke cost |", "|---|---|---|---|---|---|"]
     return (["## 5b merge key-sets for f (group 1) and plural (group 5)", "",
              f"Options: eligible {', '.join(sorted(options.eligible))}; tie {options.tie}; order {options.order}. "
              f"Today {today:.4f} strokes per word. {len(rows)} valid pairs, {len(rejected)} rejected (key-set clash).",

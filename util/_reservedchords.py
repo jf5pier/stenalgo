@@ -1,5 +1,5 @@
 """
-The reserved chords of the merged feature keys (docs/MERGED_FEATURE_KEYS_PLAN.md, D8 and D16): every outline of the
+The reserved chords of the merged feature keys (docs/MERGED_FEATURE_KEYS_PLAN.md, MKD8 and MKD16): every outline of the
 other shipped dictionaries, computed from their sources and the layout, never from the shipped JSONs (those are
 built after the theory, from it). A merged outline gives way to every one of them.
 
@@ -13,7 +13,7 @@ built after the theory, from it). A merged outline gives way to every one of the
   expression attach           the attach keypresses of the committed rule set, scratch/expr-rules-final.json, as a
                               stroke of their own (a standalone keypress decodes as its particle)
   attested expression         with a theory: the outline of every pool expression (scratch/expr_candidates.tsv)
-                              composed on that theory before the merge (D22), the expressions the decoder ranks first
+                              composed on that theory before the merge (MKD22), the expressions the decoder ranks first
 
 A chord the theory already takes today is still listed: the exporters drop it as before, a merge just cannot take a
 new one.

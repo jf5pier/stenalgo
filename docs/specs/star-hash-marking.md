@@ -62,24 +62,31 @@ category pair's regret-optimal direction.
 ## 3. The pairwise rule stack — `decideStarHashMark(a, b)`
 
 The first rule that matches decides. "Mark X" means X is the less canonical Word and gets the
-star/hash mark. Rule ids R1–R7 follow code order and are always cited with the rule's name.
+star/hash mark. Rule ids SHM1–SHM7 follow code order and are always cited with the rule's name.
 
 | # | Rule | Condition | Outcome |
 |---|---|---|---|
-| R1 | homograph exemption | `a.ortho == b.ortho` | no mark: same typed output |
-| R2 | reform-doublet exemption | `{a.lemme, b.lemme}` is a 1990-reform pair | no mark: one word, two spellings |
-| R3 | per-pair override | `MARKING_OVERRIDES[{a.ortho, b.ortho}]` exists | mark the stored spelling |
-| R4 | frequency-ratio rule | `max(f)/min(f) ≥ 10` (`RATIO_EXEMPTION_THRESHOLD`; a zero frequency counts as infinite ratio) | mark the rarer |
-| R5 | same-category rule | `a.gramCat == b.gramCat` (exact enum: `ADJ` ≠ `ADJ:pos`) | mark the rarer |
-| R6 | category-priority rule | both categories are in `GRAMCAT_PRIORITY` | mark the lower priority |
-| R7 | frequency fallback | at least one category is missing from the table | mark the rarer |
+| SHM1 | homograph exemption | `a.ortho == b.ortho` | no mark: same typed output |
+| SHM2 | reform-doublet exemption | `{a.lemme, b.lemme}` is a 1990-reform pair | no mark: one word, two spellings |
+| SHM3 | per-pair override | `MARKING_OVERRIDES[{a.ortho, b.ortho}]` exists | mark the stored spelling |
+| SHM4 | frequency-ratio rule | `max(f)/min(f) ≥ 10` (`RATIO_EXEMPTION_THRESHOLD`; a zero frequency counts as infinite ratio) | mark the rarer |
+| SHM5 | same-category rule | `a.gramCat == b.gramCat` (exact enum: `ADJ` ≠ `ADJ:pos`) | mark the rarer |
+| SHM6 | category-priority rule | both categories are in `GRAMCAT_PRIORITY` | mark the lower priority |
+| SHM7 | frequency fallback | at least one category is missing from the table | mark the rarer |
+<!-- tag: SHM1 | Homograph exemption: same ortho, no mark (same typed output). -->
+<!-- tag: SHM2 | Reform-doublet exemption: the lemmas form a 1990-reform pair, no mark (one word, two spellings). -->
+<!-- tag: SHM3 | Per-pair override: the spelling pair is in MARKING_OVERRIDES, mark the stored spelling. -->
+<!-- tag: SHM4 | Frequency-ratio rule: max/min frequency >= 10, mark the rarer. -->
+<!-- tag: SHM5 | Same-category rule: same exact GramCat, mark the rarer. -->
+<!-- tag: SHM6 | Category-priority rule: both categories in GRAMCAT_PRIORITY, mark the lower priority. -->
+<!-- tag: SHM7 | Frequency fallback: a category missing from the priority table, mark the rarer. -->
 
 **Ranking since 2026-10-08: one total order.** The pairwise stack above can cycle and, on equal frequencies, answers by argument
-order (B5, B25), so the production ranking (`assignMarkNodeCodes`) no longer sorts with it. It sorts the mark nodes by `starHashRankKey` of
+order (TOD5, TOD25), so the production ranking (`assignMarkNodeCodes`) no longer sorts with it. It sorts the mark nodes by `starHashRankKey` of
 each node's representative (smaller = more canonical = less marked):
 
-1. the **decade** of the word's own frequency (`frequencyBand`, `floor(log10)`; 0 is one band below all): a gap outranks the category (R4, as a total order);
-2. the **category priority** (`GRAMCAT_PRIORITY`; a category missing from it takes `UNLISTED_CATEGORY_PRIORITY`, that of `NOM`: R6, and R7's "missing category"
+1. the **decade** of the word's own frequency (`frequencyBand`, `floor(log10)`; 0 is one band below all): a gap outranks the category (SHM4, as a total order);
+2. the **category priority** (`GRAMCAT_PRIORITY`; a category missing from it takes `UNLISTED_CATEGORY_PRIORITY`, that of `NOM`: SHM6, and SHM7's "missing category"
    case; best agreement, 95.8%, with the pairwise rules over the 5,999 decided pairs of 4,286 groups);
 3. the word's frequency, then the frequency of its LEMMA (the sum over the words of the same `lemmeGramCat`), its spelling and its `lemmeGramCat`: ties are broken
    by the data, never by the input order.
@@ -94,8 +101,8 @@ Two lemmas that meet in one group are ranked by the key alone.
 **Why the form's frequency leads the key, and the lemma rule is not global.** Measured 2026-10-08 on the whole theory (mark keys typed = sum over words of
 frequency x star/hash keys): 54.4k with the pairwise rules, 54.2k with the key alone, 54.7k with the key and the lemma rule (1,005 of 6,896 conflicting nodes
 move), 63.8k (+17%) with the lemma frequency leading everywhere, because the rare form of a frequent lemma then takes the unmarked stroke (`a` of avoir over `à`).
-R3 overrides are applied after the sort (`_applyMarkingOverrides`).
-R1/R2 stay the merges of section 5b. The clusters, their words and the merge direction are also processed in a canonical order, and the representative
+SHM3 overrides are applied after the sort (`_applyMarkingOverrides`).
+SHM1/SHM2 stay the merges of section 5b. The clusters, their words and the merge direction are also processed in a canonical order, and the representative
 of a node breaks frequency ties by `_wordIdentityKey`: the marks depend only on the words and the lexicon (shuffle tests, `TestStarHashTotalOrder`, and
 5 shuffles of the 171,464 entries: identical). `decideStarHashMark` stays as the pairwise explanation used by the legacy per-cluster ranking and the
 diagnostics.
@@ -109,16 +116,16 @@ Details:
   therefore needs an override for its adjective forms (`boursouflée`/`boursoufflée`).
 - **`GRAMCAT_PRIORITY`** (higher = more canonical): `ADV` 50, `PRO:pos` 40, `NOM` 30, `VER` 20,
   `ADJ` 10, `ADJ:pos` 0. Every other category (`PRE`, `ONO`, `ART:def`, `PRO:per`, `AUX`,
-  `CON`, …) falls to the frequency fallback (R7), even when the other side is `NOM`.
+  `CON`, …) falls to the frequency fallback (SHM7), even when the other side is `NOM`.
 - **Overrides** (`MARKING_OVERRIDES`, keyed by the unordered pair of spellings, value = the
-  spelling that gets the mark) cover the pairs where R4–R7 still leave regret > 0 against
+  spelling that gets the mark) cover the pairs where SHM4–SHM7 still leave regret > 0 against
   the per-pair optimum. The entries are mostly deverbal masculine/feminine plurals
   (`portés`/**`portées`**) and a few near-homographs (`sales`/**`salles`**,
   `new`/**`news`**). The list is provisional: it was built from 2026-09-20 data and never
   regenerated from one canonical run. The current list lives in the code.
-- **Ties.** In R4, R5 and R7, equal frequencies mark the first argument (`fA <= fB`).
-- R4 is called a "ratio exemption" in the code: it exempts the pair from the category rules
-  (R5–R6), **not** from marking.
+- **Ties.** In SHM4, SHM5 and SHM7, equal frequencies mark the first argument (`fA <= fB`).
+- SHM4 is called a "ratio exemption" in the code: it exempts the pair from the category rules
+  (SHM5–SHM6), **not** from marking.
 
 ## 4. From pairs to a whole group — ranking and codes
 
@@ -150,7 +157,7 @@ The **canonical member** (rank 0, code `()`) keeps its final induced strokes unc
 `starHashCodeToStrokes` maps `*` → key 10, `#` → key 15 and `*#` → keys 10 and 15 in one
 stroke. `composeReservedKeyStrokesForEntries` then combines these with each entry's strokes
 (a word's primary final induced stroke, and separately each of its alternate entries — item
-B44, fixed 2026-09-24: an alternate is clustered and marked on its own final stroke, not on
+TOD44, fixed 2026-09-24: an alternate is clustered and marked on its own final stroke, not on
 the word's primary cluster):
 
 - The **first** symbol is pressed together with the word's **last phoneme stroke** (the last
@@ -167,7 +174,7 @@ base stroke count − 1:
 **Collision safety.** The Realization Phase picks only coda phoneme keys, and keys 10 and 15
 are never in `Keyboard.allowedKeys`. Removing the reserved keys, and the reserved-only
 trailing strokes, gives back the entry's unmarked stroke exactly. So two groups cannot collide
-after composition, and inside a group every code is distinct. Since the B44 fix this covers
+after composition, and inside a group every code is distinct. Since the TOD44 fix this covers
 **every** entry, primary and alternate: each is clustered on its own final stroke
 (`groupHomophonesByReservedStroke`'s per-entry generalization inside
 `composeReservedKeyStrokesForEntries`), so an alternate reading gets the mark its own cluster
@@ -184,10 +191,10 @@ family, on every one of its entries, carries the same code, so the learner meets
 - **Nodes.** A non-verb is keyed by its lemma and category (`eau`/`eaux`, `sûr`/`sûre`/`sûrs`/`sûres`); a
   past participle (`par:pas` with a gender) by its lemma; every other verb or auxiliary form (a conjugated
   form) is its own node and is ranked like a single entry, as before.
-- **Merge.** Nodes that share a spelling in a cluster (R1) or whose lemmas form a doublet (R2) merge,
+- **Merge.** Nodes that share a spelling in a cluster (SHM1) or whose lemmas form a doublet (SHM2) merge,
   unless the merged node would then hold two spellings on one stroke (`paillarde` ADJ / `paillardes` NOM).
 - **Colouring.** Two nodes conflict when they sit in one cluster (a family's forms sit in several, so the
-  clusters link up). Nodes are taken canonical-first, `decideStarHashMark` (R3-R7) on the two nodes' most
+  clusters link up). Nodes are taken canonical-first, `decideStarHashMark` (SHM3-SHM7) on the two nodes' most
   frequent forms (frequency when it gives no signal), and each takes the lowest code in the order of
   section 4 that none of its conflicting nodes holds. A node in no conflict keeps `()`.
 - **Why the verbs stay out.** Measured 2026-10-06 (`scratch/lemma_mark_coloring.py`): one code per whole
@@ -200,7 +207,7 @@ family, on every one of its entries, carries the same code, so the learner meets
   keys 10 and 15 never occur in an unmarked stroke. The build still fails on any cross-lemma collision.
 
 Consequences: `eau` `*ae#` and `eaux` `*ae#/-s`; `hauts` takes `haut`'s code; an alternate entry carries its
-word's code even when only the alternate clashes (the B44 per-entry marking is superseded: the alternate's
+word's code even when only the alternate clashes (the TOD44 per-entry marking is superseded: the alternate's
 cluster still creates the conflict, but the code is the word's). The worked examples of section 6 predate
 this change; their group-by-group codes are no longer what `disambiguated_theory.tsv` holds.
 
@@ -208,14 +215,14 @@ this change; their group-by-group codes are no longer what `disambiguated_theory
 
 Plover strokes are from `plover_stenalgo_dictionary.json`, 2026-09-22 data.
 
-1. **Category-priority rule (R6) beats frequency.** `appel` NOM (80.9) vs `appelle` VER
+1. **Category-priority rule (SHM6) beats frequency.** `appel` NOM (80.9) vs `appelle` VER
    (485.8): the ratio is 6.0 < 10 and the categories differ, NOM 30 > VER 20, so `appelle` is
    marked even though it is 6× more frequent. `appel` → `a/piel`, `appelle` → `a/p*iel`.
-2. **Homograph merge, frequency-ratio rule (R4) and frequency fallback (R7).** Group /a/:
+2. **Homograph merge, frequency-ratio rule (SHM4) and frequency fallback (SHM7).** Group /a/:
    `à` PRE 12,190; `a` (AUX 6,351, also VER and NOM, one entry after the homograph merge);
    `ah` ONO 577; `ha` ONO/NOM 22. `à` vs `a`: ratio 1.9, and PRE is not in the table, so the
-   frequency fallback (R7) marks `a`. `ah` vs `a`: ratio 11, so the frequency-ratio rule (R4)
-   marks `ah`. `ha` loses to every other entry by R4. Result: `à` `a`, `a` `*a`, `ah` `a#`,
+   frequency fallback (SHM7) marks `a`. `ah` vs `a`: ratio 11, so the frequency-ratio rule (SHM4)
+   marks `ah`. `ha` loses to every other entry by SHM4. Result: `à` `a`, `a` `*a`, `ah` `a#`,
    `ha` `*a#`.
 3. **Five readings, one escalation.** Group /vɛʁ/: `vers` (PRE/NOM) `()` → `vieR`; `verre`
    `*` → `v*ieR`; `ver` `#` → `vie#R`; `vert` `*#` → `v*ie#R`; `vair` `*# *#` → `v*ie#R/*#`.
@@ -238,23 +245,23 @@ Plover strokes are from `plover_stenalgo_dictionary.json`, 2026-09-22 data.
   final induced strokes exactly.
 - Keys 0 and 1 are never emitted.
 - Canonical members' strokes are unchanged from the Realization Phase output.
-- Every entry (primary or alternate) joins the clusters that decide which families conflict (B44); its
+- Every entry (primary or alternate) joins the clusters that decide which families conflict (TOD44); its
   code is its family's (section 5b).
 
 ## 8. Known gaps (tracked in `TODO.md`, "Suspected bugs")
 
-- **B5** (fixed 2026-10-08 by the total-order key, see section 3): on equal frequency, R4, R5 and R7 mark the first argument, so the comparator is not
+- **TOD5** (fixed 2026-10-08 by the total-order key, see section 3): on equal frequency, SHM4, SHM5 and SHM7 mark the first argument, so the comparator is not
   antisymmetric and the result depends on input order (`pas`/`pâts`, both 0.0). Shuffling the
   input changes the marks in 619 of the 4,450 groups.
-- **B25** (fixed 2026-10-08, same key): R4 and R6 can form a cycle (A < B by R6, B < C by R6, C < A by R4), which again
+- **TOD25** (fixed 2026-10-08, same key): SHM4 and SHM6 can form a cycle (A < B by SHM6, B < C by SHM6, C < A by SHM4), which again
   makes the order depend on input. There are 0 such cycles among live representatives.
-- **B26**: the doublet merge checks only the representatives' lemmas (0 live instances).
-- **B4** (fixed 2026-09-24 as B44): alternate entries used to carry no star/hash mark and
+- **TOD26**: the doublet merge checks only the representatives' lemmas (0 live instances).
+- **TOD4** (fixed 2026-09-24 as TOD44): alternate entries used to carry no star/hash mark and
   could take another word's only stroke (`subits`/`subis`, `pais`/`paie`, `amplis`/`emplis`).
   `composeReservedKeyStrokesForEntries` now clusters and marks every entry on its own final
   stroke; `python -m util.build_disambiguated_theory` fails loudly
   (`src.ambiguitychecker.findFinalCollisions`, cross-lemma bucket) if this regresses.
-- **B1**: spelling twins (Words sharing a spelling and a `lemmeGramCat`) are not fully
+- **TOD1**: spelling twins (Words sharing a spelling and a `lemmeGramCat`) are not fully
   separated by the Realization Phase, and the one-`lemmeGramCat` filter keeps them out of this
   stage: 99 pairs in 98 strokes reach the disambiguated theory unmarked.
 

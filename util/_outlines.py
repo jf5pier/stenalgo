@@ -1,5 +1,5 @@
 """
-The accepted outlines of a trainer word, tagged by kind (docs/MERGED_FEATURE_KEYS_PLAN.md, D24-D27): the outline
+The accepted outlines of a trainer word, tagged by kind (docs/MERGED_FEATURE_KEYS_PLAN.md, MKD24-MKD27): the outline
 the hint shows above the keyboard, and every other outline the drill accepts, each `{steno, strokes, kind, rule?}`:
   long      the outline with the feature discriminating stroke (or the only outline of a word without one)
   merged    the merged outline (merged feature keys)
@@ -58,7 +58,7 @@ def outlineRecord(starboard: Starboard, strokes: Strokes, kind: str) -> dict[str
 
 def taggedOutlines(starboard: Starboard, strokes: Strokes, longs: list[Strokes],
                    affix: ShortForms | None) -> tuple[dict[str, Any], list[dict[str, Any]]]:
-    """Practice (D24, D25): the hint is the long outline; the alternates are the merged outline, the other long
+    """Practice (MKD24, MKD25): the hint is the long outline; the alternates are the merged outline, the other long
     outlines and the affix abbreviations of each of them."""
     if longs:
         hint = outlineRecord(starboard, longs[0], "long")

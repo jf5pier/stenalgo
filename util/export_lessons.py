@@ -802,7 +802,7 @@ def verbTenseRule(tenseLabel: str, touchedKeys: list[int], starboard: Starboard,
 
 
 def mergeRule(pool: list[dict[str, Any]]) -> dict[str, Any] | None:
-    """Merged feature keys (D20): the marks are pressed with the word's last syllable; the separate stroke stays
+    """Merged feature keys (MKD20): the marks are pressed with the word's last syllable; the separate stroke stays
     accepted. None when no record of the pool is merged."""
     merged = next((r for r in pool if r.get("alternates")), None)
     if merged is None:
@@ -814,7 +814,7 @@ def mergeRule(pool: list[dict[str, Any]]) -> dict[str, Any] | None:
 
 
 def exceptionRules(pool: list[dict[str, Any]], partners: dict[str, str]) -> list[dict[str, Any]]:
-    """The lesson on the marks that do not merge (D20): the tenses that never merge, then the words whose merged
+    """The lesson on the marks that do not merge (MKD20): the tenses that never merge, then the words whose merged
     form is another word's outline."""
     def unique(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
         first: dict[str, dict[str, Any]] = {}
@@ -1026,7 +1026,7 @@ def buildLessons(
                     [verbTenseRule(tenseLabel, touchedKeys, starboard, pool)],
                     _wordsOf(pool))
 
-    # Merged feature keys (D20): the marks that stay a stroke of their own, when the theory merges any.
+    # Merged feature keys (MKD20): the marks that stay a stroke of their own, when the theory merges any.
     if any(record.get("alternates") for record in stream):
         partners = mergePartners(starboard, disambiguatedTheory, wordToStrokes, stream)
         pool = poolTop(lambda record: bool(record["_groups"]) and not record.get("alternates")

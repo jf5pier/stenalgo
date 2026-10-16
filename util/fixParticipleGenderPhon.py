@@ -1,6 +1,6 @@
 #!/bin/env python
 #
-# Corrects item B45 in resources/LexiqueSynthetic.tsv: the past participles that
+# Corrects item TOD45 in resources/LexiqueSynthetic.tsv: the past participles that
 # src/verbparadigm.py's generateMissingParticiple synthesized while
 # spliceParticiplePhon still copied its donor's phonology across genders. A masculine
 # spliced from a consonant-final feminine kept the feminine's consonant ("promis"
@@ -56,7 +56,7 @@ def readRows(path: str) -> list[dict[str, str]]:
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Add or drop the feminine-stem consonant in the synthetic past-participle "
-        "rows of resources/LexiqueSynthetic.tsv, and drop the ones an attested row supersedes (item B45)."
+        "rows of resources/LexiqueSynthetic.tsv, and drop the ones an attested row supersedes (item TOD45)."
     )
     parser.add_argument(
         "--apply", action="store_true",

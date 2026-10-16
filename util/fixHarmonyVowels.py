@@ -1,6 +1,6 @@
 #!/bin/env python
 #
-# B2 residue, vowel-harmony batch 2 (docs/VOWEL_HARMONY_CANDIDATES.md, family 2). Same design
+# TOD2 residue, vowel-harmony batch 2 (docs/VOWEL_HARMONY_CANDIDATES.md, family 2). Same design
 # choice as util/fixFirstSyllableE.py (docs/ARCHITECTURE.md decision 6): the harmony is ignored
 # to protect the lemma's phonetics. Every /o/ or /O/ that a lemma's `o`/`au`/`ô` letter unit
 # carries is set to the vowel fr.wiktionary lists for the lemma (checked 2026-09-26):

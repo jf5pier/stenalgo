@@ -24,7 +24,7 @@ How to read it:
 - `file:line` anchors were checked on branch `docs-refactor` at 4ed85f0. Counts come from
   read-only probes of the pickles and JSON files rebuilt on 2026-09-22; a later rebuild can
   shift them slightly.
-- Suspected defects are only pointed to here ("see TODO.md § Suspected bugs, item B1").
+- Suspected defects are only pointed to here ("see TODO.md § Suspected bugs, item TOD1").
   They are described in full in TODO.md's "Suspected bugs" section; the refactor's evidence
   write-ups live in git history (docs/refactor/callgraph/90-findings.md).
 
@@ -92,13 +92,13 @@ Four facts that the command list does not show:
    checked against the lexicon TSVs, `excluded_words.txt` or `starboard3h.json`. After a
    lexicon or layout change without step 2, every later step silently works on the old
    Word list and old strokes. `phonetic_theory.tsv` is rewritten on every run (2026-09-24,
-   TODO.md B14 fixed), so it always matches the cached theory the run used — stale or not.
+   TODO.md TOD14 fixed), so it always matches the cached theory the run used — stale or not.
 3. **The realization report is read by two exporters.** `export_keyboard_layout.py:128`
    takes the conjugation-feature legend from the tracked `realization_report.json`, and
    `export_lessons.py:267` the Keypress Groups for the lesson progression,
    while the Plover dictionary and drills use the keys recomputed on the inline path. Skip
    step 6 after a change of keypress groups and the legend (or the lesson progression) disagrees with the dictionary
-   (item B18).
+   (item TOD18).
 4. **`starboard3h.json` is regenerated only deliberately.** Keyboard Layout Optimization
    (S4) is a real stage with its own command, `python -m util.optimize_keyboard`, which
    writes `starboard3h_optimized.json` by default (`--output starboard3h.json` targets the
@@ -254,7 +254,7 @@ Same-Lemma and Grammatical-Category Disambiguation (S6)
 Different-Lemma or Grammatical-Category Disambiguation (S7) .. python -m util.build_disambiguated_theory (Dictionary.buildDisambiguatedTheory, S7.1)
 ├─ Alternate entry strokes — buildExtraInducedStrokes (unmarked) .. S7.14
 ├─ Reserved-key composition — composeReservedKeyStrokesForEntries, per-entry clustering  S7.4
-├─ Star/hash code assignment + star/hash rule stack (R1-R7) ....... S7.7-S7.11
+├─ Star/hash code assignment + star/hash rule stack (SHM1-SHM7) ....... S7.7-S7.11
 ├─ Star/hash mark merge into the last phoneme stroke .............. S7.13
 ├─ Merged feature keys — mergeFeatureKeys (src/mergedfeaturekeys.py; MERGE_FEATURE_KEYS) . merged outline primary, long outline appended
 ├─ Disambiguated-theory report — writeDisambiguatedTheory ............................. S7.15 → disambiguated_theory.tsv
@@ -344,7 +344,7 @@ Transformation and result, one bullet per call (rows with `isException` are alwa
   insertion; more than one edit raises at import. Keyed under `oldSpelling`; **only
   substitutions** also under `newSpelling` (:224-225), so a deletion is not re-applied to a
   reformed word (`grole` → `groe`, :214-223). `_reform1990OrthoRewrites`: 237 keys. With
-  Load 1990-reform lemma table (S1.2), deletion/insertion rules miss inflected forms (item B6).
+  Load 1990-reform lemma table (S1.2), deletion/insertion rules miss inflected forms (item TOD6).
 - **Load 1990-reform plural rewrites — loadReform1990PluralRewrites (S1.4)** :329, bound
   :374-377 — whole-word `{oldPlural: newPlural}`: 33 entries (`barmen→barmans`, `lieder→lieds`).
 - **Load -eler/-eter qualifying verbs — loadElerEterQualifyingVerbs (S1.5)** :423, bound
@@ -366,7 +366,7 @@ genre, nombre, infover, syll, cv-cv, orthosyll, `freqlivres`, `freqfilms2`; appe
 Result: raw lexicon rows, 142,507 `lexique.Word`: 137,655 with a breakdown, 4,852 orphans.
 Artifacts: reads `resources/Lexique383.tsv`.
 Helpers not expanded: `printVerbose` (:34, debug print for the 6 words of `verboseList` :32).
-Notes: `words`/`words_by_ortho` are class-level lists (lexique.py:957-958), see item B34.
+Notes: `words`/`words_by_ortho` are class-level lists (lexique.py:957-958), see item TOD34.
 Frequencies are copied verbatim; lemma frequencies and the other Lexique383 columns are dropped.
 
 ### Normalize lemma — normalizeLemme (S1.7.1)   lexique.py:540
@@ -376,7 +376,7 @@ Transformation: first `pronounParadigmLemme` (:81), keyed by (lemme, cgram): `il
 one LemmeGramCat, so Same-Lemma and Grammatical-Category Disambiguation (S6) handles them,
 not Different-Lemma or Grammatical-Category Disambiguation (S7). Otherwise `spellingVariantLemme` (`ile→île` + 55 reform lemmas), keyed by lemma only.
 Result: 5 rows get a **pronoun paradigm lemma**, 149 a reform or variant lemma.
-Notes: the lemma changes before the ortho rewrite looks rules up by lemma (item B6).
+Notes: the lemma changes before the ortho rewrite looks rules up by lemma (item TOD6).
 
 ### Repair affricate syllabification — lexique.Word.__post_init__ (S1.7.2)   lexique.py:598
 Called by: `lexique.Word(...)` in Read and filter Lexique383 (S1.7).
@@ -403,7 +403,7 @@ compounds (4,795 contain a space, hyphen or apostrophe): 3,491 NOM, 794 ADJ, 212
 real miss: `engraisser` VER `@gRese`.
 Artifacts: reads `resources/LexiqueInfraCorrespondance.tsv`.
 Notes: the match uses Infra `phono`, but the breakdown is built from `assoc`, which can
-disagree. See item B3.
+disagree. See item TOD3.
 
 ### Correct LexiqueInfra associations — Word.fixLexiqueInfraGraphPhon (S1.7.3.1)   lexique.py:652
 Called by: Align associations onto syllables (S1.7.3.2), lexique.py:770.
@@ -447,7 +447,7 @@ Result: mixed lexicon, 136,202 rows (142,507 − 4,852 − 1,199 − 254 spellin
 Artifacts: writes `resources/LexiqueMixte.tsv`.
 Notes: `cgramortho` is not recomputed after a rewrite; rewritten rows sit at their old sort
 position (`acuponcture` where `acupuncture` was). Rewriting can duplicate an existing
-identity (24 cases, item B9). `borough` has an `orthosyll_cv` that does not spell its ortho.
+identity (24 cases, item TOD9). `borough` has an `orthosyll_cv` that does not spell its ortho.
 
 - **Drop breakdown orphans (S1.9.1)** lexique.py:1184 — rows with `orthosyll_cv == []` are
   skipped silently: 4,852 rows (`a priori`, `abaisse-langue`, …).
@@ -461,7 +461,7 @@ identity (24 cases, item B9). `borough` has an `orthosyll_cv` that does not spel
   outside the family); `applyOrthoRewrite` (:259) edits `ortho` and `orthosyll_cv` alike (a
   deletion also removes one adjacent separator; an insertion creates a digraph token).
   243 rows rewritten (`allégement→allègement`, `asseoir→assoir`); 77 harmless no-ops. Misses
-  67 rows of 24 `-otter`/`-olle`/`-illier` lemmas (item B6).
+  67 rows of 24 `-otter`/`-olle`/`-illier` lemmas (item TOD6).
 - **Regularize -eler/-eter (S1.9.4)** lexique.py:1208-1215 — for qualifying verbs and the 9
   derived nouns, a doubled-consonant prefix (`amoncell`) becomes `è`+single consonant; the
   orthosyll string gets the first `e[_|]ll`→`è[_|]l`. 130 rows (`amoncelle→amoncèle`,
@@ -528,13 +528,13 @@ later companion script.
 | fixResidualRowErrors | Lexique383, Mixte | yes | yes | 4 row fixes (`lamer` → `inf;`) |
 | fixSourdreDefectiveGaps | conjugations-fr.xml, Lexique383, Mixte | yes | yes | sourdre slots |
 | fixSpuriousDuplicateVerbRows | Lexique383, Mixte | yes | yes | duplicate VER/AUX rows |
-| fixSplicedVerbBreakdowns | Synthetic (in place) | no | n/a | spliced finite forms re-normalized, item B2 (S2.4) |
+| fixSplicedVerbBreakdowns | Synthetic (in place) | no | n/a | spliced finite forms re-normalized, item TOD2 (S2.4) |
 | fixOuGlideConsistency | Lexique383, Infra, Mixte, Synthetic | yes | yes | `ou`+vowel /u/ hiatus → glide /w/ in the 25 lemmas that mix both (jouez, évanouir…) |
 | fixFirstSyllableE | Lexique383, Infra, Mixte, Synthetic | yes | yes | first-syllable `e` → `E` in the validated lemmas (`essayer`, `descendre`, `effacer`…), decision 6 |
 | fixHarmonyVowels | Lexique383, Infra, Mixte, Synthetic | yes | yes | `o`/`O` of 14 validated genuine-harmony lemmas (`-ologique`, `coronarien`…) |
 | fixMixedHarmonyVowels | Lexique383, Infra, Mixte, Synthetic | yes | yes | 282 Mixte rows: `e`/`E`, `o`/`O` per `util/harmonyVowelTargets.tsv` (hand-validated against fr.wiktionary); `python -m util.reportVowelHarmony` + `python -m util.buildMixedHarmonyCandidates` (hand-run, read-only) build the candidate list |
 | fixMalformedSyntheticSplices | Synthetic (in place) | no | n/a | repairs empty/fused `u#` units, lost R (`kluj§`), lost `n` unit; deletes the rest (S2.4) |
-| fixParticipleGenderPhon | Synthetic (in place) | no | n/a | synthetic participles' feminine-stem consonant added/dropped, item B45 (S2.4) |
+| fixParticipleGenderPhon | Synthetic (in place) | no | n/a | synthetic participles' feminine-stem consonant added/dropped, item TOD45 (S2.4) |
 | fixXlfnSingleCorruption | Infra | no | yes | `_xlfn.SINGLE(...)` (Excel) |
 | completeVerbParadigms | Synthetic (append) | no | n/a | Verb paradigm completion (S2.1) |
 | generateMissingNomAdjForms | Synthetic (append) | no | n/a | NOM/ADJ gap generation (S2.2) |
@@ -613,7 +613,7 @@ Result: VER synthetic rows (participle gender/number forms and finite forms).
 Artifacts: reads `PhoneticTheory.pickle`, `starboard3h.json`, Verbiste, `verbModelExceptions.tsv`; appends to `LexiqueSynthetic.tsv`.
 Notes: its gating depends on the retired solver-picks-features design; the selection it
 gates on (`selectSharedDiscriminators` src/featureextractor.py:222) is coverage-first, with a
-feature-complexity tie-break. Not idempotent (item B13). Template note (2026-09-25): which
+feature-complexity tie-break. Not idempotent (item TOD13). Template note (2026-09-25): which
 -eter/-eler convention a verb follows is per-verb lexicon data — `verbs-fr.xml` maps the 49
 verbs whose LexiqueMixte forms attest the rectified `è` spelling (caqueter, atteler,
 renouveler, …) to the accent-grave templates `ach:eter`/`p:eler`, not the consonant-doubling
@@ -658,7 +658,7 @@ used to leave 6 unresolvable same-lemma collisions.
     word-final glide after a consonant (`denj` → `deni`), re-places every boundary from the
     split table (`k_a|n_#` → `k_a_n_#`, `a|t_@_d_e` → `a|t_@|d_e`), gives the orthographic
     breakdown the same boundaries when it has as many units, and sets mid vowels from the
-    mid-vowel table (`abon` → `abOn`, `aS°tRa` → `aSEtRa`) (item B2, resolved).
+    mid-vowel table (`abon` → `abOn`, `aS°tRa` → `aSEtRa`) (item TOD2, resolved).
 - **Confirm by legacy collision check — confirmCandidates (S2.1.4)** :266 —
   temporarily adds each candidate to its reference word's phonetic-theory entry
   (`temporarilyAugmented` :238), reruns `extractDiscriminatingFeatures` and
@@ -691,7 +691,7 @@ Artifacts: appends to `LexiqueSynthetic.tsv` (:191).
 - **Exception-table override — overrideCandidate (S2.2.3)** generateMissingNomAdjForms.py:77
   — `irregular` rows supply `override_ortho` and `override_phonology` (blank → source phon
   as placeholder, :88); **`syll_cv`/`orthosyll_cv` always come from the source word** (:94).
-  See item B7.
+  See item TOD7.
 - **Morphalou-authoritative form (S2.2.4)** nomAdjParadigm.py:522 → `generateMissingForm`
   (:309) — class keys from most to least specific, match rate 1.0 and
   `MIN_DONOR_COUNT_BY_CLASS_KEY_LENGTH` {3:1, 2:2, 1:4} (:306); cross-axis ADJ go through a
@@ -711,19 +711,19 @@ Both dual-form fillers are also called by `python -m util.build_synthetic_lexico
   `(ortho, lemme)` dedup :173) plus `TAG_ONLY_FIXES` written into `Lexique383.tsv`
   (:142-163). Its header (:34-43) records an earlier fix lost by patching `LexiqueMixte.tsv` only.
 - `util/fixEvaserWordFinalZSyllabification.py` main :109 — rewrites the `évaser` rows with
-  phon `evaz` so the word-final `z` is a coda (`|z_#` → `_z_#`). One lemma of item B2,
+  phon `evaz` so the word-final `z` is a coda (`|z_#` → `_z_#`). One lemma of item TOD2,
   kept for the record.
 - `util/fixSplicedVerbBreakdowns.py` main — applies `normalizeSplicedBreakdown`, with the
   tables `deriveConjugationEndingTables` derives from the phonetic theory, to every synthetic
   VER row whose tags are all finite slots (pa:yer and -seoir rows excepted: their fillers
-  above use their own endings); corrected the 14,926 rows spliced before the fix (item B2).
+  above use their own endings); corrected the 14,926 rows spliced before the fix (item TOD2).
   One-off, not called by `util.build_synthetic_lexicon`.
 - `util/fixParticipleGenderPhon.py` main — row-local: each synthetic past-participle row
   keeps its own phon and only gains (feminine) or loses (masculine) its lemma's
   feminine-stem consonant, via `spliceParticiplePhon` with the row as a donor of the other
   gender; deletes the synthetic participle rows that duplicate an attested `LexiqueMixte`
   row (same ortho, lemma, gender, number), stale since d1fceb0 filled those rows'
-  gender/number. Corrected 62 rows and deleted 17 (item B45). One-off, not called by
+  gender/number. Corrected 62 rows and deleted 17 (item TOD45). One-off, not called by
   `util.build_synthetic_lexicon`.
 
 ### Consumption
@@ -757,7 +757,7 @@ Result: Word list + syllable statistics + layout statistics, restored.
 Artifacts: reads `Dictionary.pickle`.
 Notes: four downstream loaders repeat this five-object read (util/_theoryio.py:26-30,
 src/elicitation.py:540-543, util/check_conjugation_disambiguation_order.py:141-144,
-src/ambiguitychecker.py:1334-1337); none uses the class state. Cache trap: item B15.
+src/ambiguitychecker.py:1334-1337); none uses the class state. Cache trap: item TOD15.
 
 ### Dictionary construction — Dictionary.__init__ (S3.2)   dictionary.py:76
 Called by: Dictionary cache check (S3.1), on a miss.
@@ -779,7 +779,7 @@ Transformation:
   later row with a known identity only folds its `infover` into the first Word
   (`mergeInfoVerb`) or is dropped. 10,990 rows fold (10,973 with a tag, 17 without); 6,759
   synthetic rows share an identity with a mixed-lexicon row. **The first row's syllabification and frequency win**: 5,369
-  folded rows had another `syll_cv`, 6,028 another film frequency (item B9).
+  folded rows had another `syll_cv`, 6,028 another film frequency (item TOD9).
 - Otherwise builds a `Word` (Word construction (S3.2.1.1)) and indexes it in
   `wordsByLemme[lemme]` (bare lemma) and `wordsByOrtho[ortho]`.
 Result: Word list, 168,314 Words in load order (136,202 + 46,199 rows, minus 14,087 identity
@@ -797,7 +797,7 @@ hash(ortho+phonology+lemme+gramCat.name+gender+number)` (:94: salted per process
 separators), parses `_infoVerb`, sets `lemmeGramCat = f"{lemme}_{gramCat.name}"`.
 Result: one Word.
 Helpers not expanded: `parseOrthoSyll` :358, `parsePhonoSyll` :365, `splitInfoVerb` :102.
-Notes: `__eq__`/`__hash__` use only `_hash` (:155, :161); see items B11 and B27.
+Notes: `__eq__`/`__hash__` use only `_hash` (:155, :161); see items TOD11 and TOD27.
 
 The four **syllable-break exceptions** (steno reasons, not phonology):
 - **e+n syllable repair — fix_e_n_en (S3.2.1.1.1)** word.py:202 — `@|n_` → `@|`, `e|n_` →
@@ -829,7 +829,7 @@ phonetic syllable names with orthographic syllables (:177) and registers each pa
 Result: syllable statistics: 5,866 `Syllable` objects + class-level phoneme, biphoneme and
 multiphoneme collections. The syllable lookup feeds Phonetic-theory construction (S5.3); the
 frequencies feed the layout statistics (S4.1, S4.2).
-Notes: `zip` truncates for the 99 Words whose two syllable lists differ in length (item B28).
+Notes: `zip` truncates for the 99 Words whose two syllable lists differ in length (item TOD28).
 
 - **Syllable registration — updateSyllable (S3.3.1)** grammar.py:803 — creates
   `Syllable(name, spelling)` on first sight, adds frequency (Frequency accumulation
@@ -845,7 +845,7 @@ Notes: `zip` truncates for the 99 Words whose two syllable lists differ in lengt
   `phonemeNamesByPart()` (:569) feeds the stroke rule.
 - **Frequency accumulation — increaseSpellingFrequency (S3.3.1.2)** grammar.py:586 — adds
   to spelling, syllable, phonemes and biphonemes (`increaseFrequency` :574). Multiphonemes
-  are never updated: all 353 have frequency 0.0 (item B31).
+  are never updated: all 353 have frequency 0.0 (item TOD31).
 - **Collection sorting — sortPhonemesCollections (S3.3.2)** grammar.py:592 — sorts
   phonemes and biphonemes by frequency (read by Fallback keymap (S4.3) and Layout solve (S4.4)).
 
@@ -894,7 +894,7 @@ Input state: syllable statistics.
 Transformation: for each part, runs a greedy local search (`BiphonemeCollection.optimizeOrder`
 :318): n passes, each moving every phoneme to the insertion point that maximizes
 `scorePermutation` (:347: +frequency for each biphoneme typed in order, −frequency out of
-order), starting from `set` order (so it depends on the hash seed, item B30). Then
+order), starting from `set` order (so it depends on the hash seed, item TOD30). Then
 `generateBiphonemeOrderMatrix` (:361) records, for every pair, `<`/`>`/`=` and the score
 difference of p1-before-p2 vs after (`pairwiseBiphonemeOrderScore`, :387).
 Result: layout statistics: **best permutation** and **pairwise order matrix** per part.
@@ -915,7 +915,7 @@ Transformation: three scorers:
   three frequencies.
 - `analysePhonemeLexicalAmbiguity` (:1098, `lexicalPhonemeAmbiguityScore` :883): same at word
   level via `Word.replaceSyllables` (word.py:369). Looks up a word phonology as a syllable
-  name at :913, :931 (item B29).
+  name at :913, :931 (item TOD29).
 - `analyseMultiphonemeLexicalAmbiguity_serial` (:1111, `lexicalSyllabicPartAmbiguityScore`
   :996): for every pair of whole-part phoneme groups, swaps group 1 for group 2 and adds
   min(word frequency, mutated-word frequency) when the mutated word exists — the
@@ -958,7 +958,7 @@ Transformation: one CP-SAT model per syllabic part, the objective described abov
 - *Order term:* `pairwise order score × ORDER_PENALTY` (500), signed by which stroke is
   further left; a shared stroke pays half. `SOLVER_TIME` = 90 s per part.
 Result (if run): `keyboard.clearLayout()` (:422) then the solved strokes; destructive (item
-B32). The write goes through `util.optimize_keyboard`'s explicit `--output`.
+TOD32). The write goes through `util.optimize_keyboard`'s explicit `--output`.
 Notes: consistent with the committed layout sharing entries only among rare phonemes (`N`,
 `G`, `9`, `O`, `w`). See also `src/cpsatprinter.py`.
 
@@ -1003,7 +1003,7 @@ second half of `python -m util.build_phonetic_theory`, cached in `PhoneticTheory
    collisions**), all with different spellings; 4,535 raw Strokes repeat a key. Later stages
    canonicalize before testing collisions; `phonetic_theory.tsv` and raw-key counts under-report.
 7. Different syllable breaks give different Strokes for equal phonemes (`ka/n` vs `kan`),
-   which is why item B2 matters.
+   which is why item TOD2 matters.
 
 ### Keyboard layout loading — Keyboard.fromJSONFile (S5.1)   src/keyboard.py:252
 Called by: `loadKeyboard` (util/build_phonetic_theory.py:63).
@@ -1029,7 +1029,7 @@ Notes: produced by Keyboard Layout Optimization (S4). "3h" is apparently solve t
 Called by: `main` (util/build_phonetic_theory.py:88).
 Transformation: loads `PhoneticTheory.pickle` if present and skips Phonetic-theory construction (S5.3)
 through Phonetic-theory cache write (S5.5). Not keyed on `Dictionary.pickle` or `starboard3h.json`
-(item B15).
+(item TOD15).
 Result: the phonetic theory.
 
 ### Phonetic-theory construction — Dictionary.buildPhoneticTheory (S5.3)   dictionary.py:305
@@ -1042,7 +1042,7 @@ Result: the phonetic theory: 78,680 entries covering 168,314 Words; 42,312 entri
 (129,505 Words), 41,640 with ≥2 spellings. Strokes per entry: 1 → 3,111; 2 → 20,701; 3 →
 33,534; 4 → 18,069; 5+ → 5,310. Every entry's list is frequency-descending.
 Notes: legality of the whole stroke is never checked: 529 Words (39 canonical strokes, mostly
-"-isme", coda `z`(22,23)+`m`(25)) contain an **illegal stroke** (item B8).
+"-isme", coda `z`(22,23)+`m`(25)) contain an **illegal stroke** (item TOD8).
 
 #### Phonetic stroke rule — Starboard.getStrokeOfSyllableByPart (S5.3.1)   src/keyboard.py:607
 Called by: Phonetic-theory construction (S5.3).
@@ -1054,7 +1054,7 @@ all 36 phonemes are covered).
 Result: one raw Stroke per syllable: `plyR` → `(4, 6,7, 11,13, 21)`; `ce` (`s°`) → `(3, 11,12)`.
 
 ### Phonetic-theory report — Dictionary.writePhoneticTheory (S5.4)   dictionary.py:317
-Called by: `main` (util/build_phonetic_theory.py:94), always — pickle hit or miss (item B14
+Called by: `main` (util/build_phonetic_theory.py:94), always — pickle hit or miss (item TOD14
 fixed 2026-09-24).
 Transformation: one line per phonetic-theory entry: `strokesToString(strokes)` (:622) + sorted
 spellings; prints the entry with most spellings and the one with highest summed frequency.
@@ -1184,7 +1184,7 @@ pers_1, nbr_p}. Only participle combinations also get the Word's gender and numb
 Result: `dict[WordOrtho, list[FeatureCombination]]` per group; a feature combination is a
 `frozenset[str]` of atomic features.
 Notes: from here on, the Elicitation Phase reasons per spelling; the Realization Phase must
-map a spelling back to one Word (**spelling twins**, items B1/B47 — every reading is realized
+map a spelling back to one Word (**spelling twins**, items TOD1/TOD47 — every reading is realized
 on that one Word, and the twin Words get no entry of their own).
 
 ##### Scale report — reportScale (S6.Elicitation.3)   src/elicitation.py:164
@@ -1232,7 +1232,7 @@ impératif or infinitif set must be exactly that feature; (3) a non-empty subjon
 `subjonctif` plus at most one `pers_*`/`nbr_*`.
 Result: console summary; never rewrites answers.
 Artifacts: reads the spec, `elicitation_answers.json`, pickles; writes `conjugation_disambiguation_report.json`.
-Notes: coverage gaps: item B12.
+Notes: coverage gaps: item TOD12.
 
 
 #### Press-Set Resolution
@@ -1348,7 +1348,7 @@ Result: `(numKeys=7, colorOf: feature → keypress group id, achieved=[1, 1, 0])
 - **Alphabetical tie-break — _breakTiesAlphabetically (S6.Grouping.2.6)** :153 — per feature
   in alphabetical order, minimizes its keypress group index and locks it. Single-threaded,
   seed 0 (`_newDeterministicSolver` :139). Unique lexicographic minimum, provided every solve
-  is OPTIMAL (item B24).
+  is OPTIMAL (item TOD24).
 
 #### Ground-truth verification — verifyKeypressAssignment (S6.Grouping.3)   src/featuregrouping.py:160
 Called by: Grouping Phase entry (:69); also tests.
@@ -1385,7 +1385,7 @@ and (on a `DisambiguatedTheory.pickle` miss) every exporter (util/_theoryio.py:8
 **report build** is `util/build_realization_report.py` main
 (:58-72) and writes the **realization report**. Both read `keypress_groups.json`
 and `resolved_press_sets.json`. Only the trainer keyboard legend reads the report, so the two
-can drift (item B18, TODO.md § Queued follow-ups).
+can drift (item TOD18, TODO.md § Queued follow-ups).
 
 **The realization rule.** Each keypress group gets one physical **key-set**. **Candidate
 key-sets** are the coda-bank keys of the 20 consonants: single keys 16-25 and the digraphs
@@ -1422,7 +1422,7 @@ Result: exactly one Word per spelling.
 Notes: when a spelling has several matching Words (**spelling twins**, 259 spellings in the
 current resolved sets), the alternates realize every reading on the resolved Word and the
 twin Words get no entry of their own (Spelling-twin population, S6.Realization.3.1; item
-B47, fixed 2026-09-25). Fallback: item B20.
+TOD47, fixed 2026-09-25). Fallback: item TOD20.
 
 #### Spelling-twin population — findSpellingTwinWords (S6.Realization.3.1)   src/ambiguitychecker.py:785
 Called by: Disambiguated-theory assembly (S7.1) only (dictionary.py:426).
@@ -1432,7 +1432,7 @@ Elicitation Phase homophone group — the entry's alternates already cover its r
 `featureCombinationsByOrtho`).
 Result: the twin Word set (272 Words over 259 spellings at last measurement), which
 Disambiguated-theory assembly (S7.1) drops from the disambiguated theory entirely.
-Notes: before item B47 (fixed 2026-09-25) each twin kept a residual bare primary stroke from
+Notes: before item TOD47 (fixed 2026-09-25) each twin kept a residual bare primary stroke from
 Final induced strokes (S6.Realization.6), shadowing the group's default reading
 (`affadis` indicatif passé 2e sg. on `affadi`'s bare chord) and, in a star/hash cluster,
 consuming a */# slot for a spelling already reachable through its feature strokes.
@@ -1497,16 +1497,16 @@ callers that already built it instead of being rebuilt here.
   `residualCollisions` (same-lemmeGramCat, :1248), `crossCategoryClashCollisions` (same bare
   lemme, different `lemmeGramCat`, :1251) or `crossLemmaCollisions` (:1255); same-ortho pairs
   are dropped. Today: 0 theory, 0 same-lemmeGramCat, 34 to 40 **cross-category clashes** and
-  about 1,290 **cross-lemma collisions** (the lists vary between clean rebuilds, item B11).
+  about 1,290 **cross-lemma collisions** (the lists vary between clean rebuilds, item TOD11).
   **The "0 residual same-lemmeGramCat collisions" invariant** is
   `len(assignment.residualCollisions) == 0`, printed and persisted only by the report build
   (build_realization_report.py:89-91, :108, :129) and asserted by unit tests on fixtures
   (src/test/ambiguitychecker_test.py:844). `buildDisambiguatedTheory` discards the residuals and
-  `unassignedGroups` (item B17). The check sees only `allWords` (not canonical members,
-  unchosen spelling twins or dropped groups) and only first-seen pairs (item B16). An
+  `unassignedGroups` (item TOD17). The check sees only `allWords` (not canonical members,
+  unchosen spelling twins or dropped groups) and only first-seen pairs (item TOD16). An
   all-pairs canonical check over the whole lexicon finds 230 same-lemmeGramCat pairs in the
-  final induced strokes, all from spelling twins (item B1) — which Disambiguated-theory
-  assembly (S7.1) then drops from the disambiguated theory (item B47).
+  final induced strokes, all from spelling twins (item TOD1) — which Disambiguated-theory
+  assembly (S7.1) then drops from the disambiguated theory (item TOD47).
 
 #### Final induced strokes — buildFinalInducedStrokes (S6.Realization.6)   src/ambiguitychecker.py:1217
 Called by: `Dictionary.buildDisambiguatedTheory` only (dictionary.py:384).
@@ -1523,8 +1523,8 @@ discriminating stroke with that alternate's union of chosen keys (empty key-sets
 Result: `dict[Word, list[Strokes]]`, the **alternate entries**, appended after index 0 in
 the disambiguated theory, unmarked. Disambiguated-theory assembly (S7.1) passes them into
 Reserved-key composition (S7.4) alongside the primary stroke, so each gets its own star/hash
-mark from its own final-stroke cluster (item B4, fixed 2026-09-24 as B44). They are never
-collision-checked at THIS call when the primary is empty (item B21) — Reserved-key
+mark from its own final-stroke cluster (item TOD4, fixed 2026-09-24 as TOD44). They are never
+collision-checked at THIS call when the primary is empty (item TOD21) — Reserved-key
 composition (S7.4)'s final check runs later, over the whole disambiguated theory.
 
 #### Report serialization — build_realization_report.main (S6.Realization.8)   util/build_realization_report.py:38
@@ -1579,10 +1579,10 @@ feature sets (:374-375); (2) runs the Realization Phase on its inline path (S7.2
 induced strokes; (3) calls Alternate entry strokes (S7.14) (:420) for the unmarked alternate
 entries; (4) drops the spelling twins (Spelling-twin population, S6.Realization.3.1, :426)
 — every reading of their spellings is already an alternate on the resolved Word, and the
-residual bare stroke they would keep shadows the group's default reading (item B47); (5)
+residual bare stroke they would keep shadows the group's default reading (item TOD47); (5)
 calls Reserved-key composition (S7.4) once, over `{word: [primary] +
 alternates}` for every remaining word, with Reform-doublet loading (S7.3) and `phonemeStrokeCounts` =
-each Word's base stroke count (turns on the merge) — since the B44 fix (2026-09-24) this marks
+each Word's base stroke count (turns on the merge) — since the TOD44 fix (2026-09-24) this marks
 every entry, not just the primary (`composeReservedKeyStrokesForEntries` clusters each entry
 on its own final stroke).
 Result: the disambiguated theory, 168,042 Words in phonetic-theory order; `disambiguated_theory.tsv` has 186,234 data rows, so 18,192
@@ -1631,12 +1631,12 @@ entries of one word on the same stroke (2,633 words today, e.g. `joue` impérati
 indicatif 1s both on `vt@e/-k`) count once in the cluster and get the same mark.
 Notes: safety argument (docstring :443-452): keys 10/15 are never in `allowedKeys`
 (keyboard.py:376), so removing them (and reserved-only trailing strokes) gives back the
-entry's unmarked stroke exactly. Since the B44 fix (2026-09-24) this covers every entry,
+entry's unmarked stroke exactly. Since the TOD44 fix (2026-09-24) this covers every entry,
 primary and alternate — previously only primary strokes were clustered and marked, so an
-alternate identical to an unrelated word's alternate went out unmarked (item B4).
+alternate identical to an unrelated word's alternate went out unmarked (item TOD4).
 
 ### Lemma-homophone group detection — groupHomophonesByReservedStroke (S7.5)   src/ambiguitychecker.py:391
-Called by: nothing in the pipeline since the B44 fix (2026-09-24) — Reserved-key composition
+Called by: nothing in the pipeline since the TOD44 fix (2026-09-24) — Reserved-key composition
 (S7.4) now inlines the equivalent per-entry bucketing itself. Kept as a standalone helper,
 exercised directly by `src/test/ambiguitychecker_test.py`.
 Transformation: buckets Words by `canonicalizeStrokes(finalInduced[word])` (:406-408); keeps a
@@ -1647,8 +1647,8 @@ Notes: a bucket with one `lemmeGramCat` and several spellings is dropped on purp
 comment leaves it to the Realization Phase): 0 such buckets survive into the disambiguated
 theory (the `-eter`/`-eler` variant conjugations, `caquette`/`caquète`…, were fixed by the
 rectified-è template remap — see Synthetic Lexicon Building (S2.1)'s template note); the
-spelling-twin ones (item B1) are dropped at Disambiguated-theory assembly (S7.1) since item
-B47. Same-lemma cross-category clashes ("appel" NOM / "appelle" VER)
+spelling-twin ones (item TOD1) are dropped at Disambiguated-theory assembly (S7.1) since item
+TOD47. Same-lemma cross-category clashes ("appel" NOM / "appelle" VER)
 are in scope because their `lemmeGramCat`s differ.
 
 ### Physical star/hash assignment — assignStarHashPhysicalStrokes (S7.6)   src/ambiguitychecker.py:370
@@ -1665,7 +1665,7 @@ Transformation:
    `max(group, key=frequency)`, first wins ties.
 2. **Doublet merge** (:313-330): union-find over ortho-group representatives; union when
    `{rep_i.lemme, rep_j.lemme}` is a doublet pair (path-halving `find`, `parent[ri] = rj`, no
-   ranks). Only representatives' lemmas are checked (item B26).
+   ranks). Only representatives' lemmas are checked (item TOD26).
 3. Each merged set's **group representative** = `max(set, key=frequency)` (:332).
 4. Group ranking (S7.8) of the representatives; Star/hash code sequence (S7.11) for their
    count; zip in rank order (:333-335).
@@ -1678,7 +1678,7 @@ Called by: Star/hash code assignment (S7.7), :333.
 Transformation: `sorted(words, key=cmp_to_key(_starHashCompare))`, most canonical first.
 Result: ranked representatives; position 0 is the canonical member.
 Notes: a stable sort gives a unique result only for a consistent total order; this
-comparator is not one (items B5, B25).
+comparator is not one (items TOD5, TOD25).
 
 ### Ranking comparator — _starHashCompare (S7.9)   src/ambiguitychecker.py:242
 Called by: Group ranking (S7.8).
@@ -1687,9 +1687,9 @@ decision (S7.10)); `None` → higher frequency first, then `ortho` ascending, th
 +1 if `a` is marked, −1 if `b`.
 Result: −1/0/+1.
 Notes: the `None` branch never runs in the pipeline (homographs and doublets are merged
-first). On equal frequency under the frequency-ratio rule (R4), same-category rule (R5) or
-frequency fallback (R7), `decideStarHashMark` marks its first argument, so `compare(a,b) ==
-compare(b,a) == +1` (item B5).
+first). On equal frequency under the frequency-ratio rule (SHM4), same-category rule (SHM5) or
+frequency fallback (SHM7), `decideStarHashMark` marks its first argument, so `compare(a,b) ==
+compare(b,a) == +1` (item TOD5).
 
 ### Pairwise star/hash decision — decideStarHashMark (S7.10)   src/ambiguitychecker.py:183
 Called by: Ranking comparator (S7.9), :253.
@@ -1698,17 +1698,17 @@ less canonical and gets the star/hash mark. Frequency is the film frequency.
 
 | Rule | Line | Condition | Outcome |
 |---|---|---|---|
-| homograph exemption (R1) | :211 | same `ortho` | `None` (no star/hash mark) |
-| reform-doublet exemption (R2) | :214 | `{lemmeA, lemmeB}` in the 259 doublet pairs | `None` |
-| per-pair override (R3) | :217-219 | `MARKING_OVERRIDES[frozenset({orthoA, orthoB})]` exists (49 entries, :130-180, keyed by ortho) | mark the stored spelling |
-| frequency-ratio rule (R4) | :221-225 | `hi/lo ≥ RATIO_EXEMPTION_THRESHOLD` (10.0, :91), `inf` if `lo == 0` | mark the rarer; tie → first argument |
-| same-category rule (R5) | :224-225 | equal `GramCat` enums (`ADJ` ≠ `ADJ:pos`) | mark the rarer; tie → first argument |
-| category-priority rule (R6) | :227-230 | both categories in `GRAMCAT_PRIORITY` (src/greedyoptimizer.py:62) | mark the lower priority |
-| frequency fallback (R7) | :232 | a category is missing from the table | mark the rarer; tie → first argument |
+| homograph exemption (SHM1) | :211 | same `ortho` | `None` (no star/hash mark) |
+| reform-doublet exemption (SHM2) | :214 | `{lemmeA, lemmeB}` in the 259 doublet pairs | `None` |
+| per-pair override (SHM3) | :217-219 | `MARKING_OVERRIDES[frozenset({orthoA, orthoB})]` exists (49 entries, :130-180, keyed by ortho) | mark the stored spelling |
+| frequency-ratio rule (SHM4) | :221-225 | `hi/lo ≥ RATIO_EXEMPTION_THRESHOLD` (10.0, :91), `inf` if `lo == 0` | mark the rarer; tie → first argument |
+| same-category rule (SHM5) | :224-225 | equal `GramCat` enums (`ADJ` ≠ `ADJ:pos`) | mark the rarer; tie → first argument |
+| category-priority rule (SHM6) | :227-230 | both categories in `GRAMCAT_PRIORITY` (src/greedyoptimizer.py:62) | mark the lower priority |
+| frequency fallback (SHM7) | :232 | a category is missing from the table | mark the rarer; tie → first argument |
 
 `GRAMCAT_PRIORITY` (higher = more canonical): `ADV` 50, `PRO:pos` 40, `NOM` 30, `VER` 20,
 `ADJ` 10, `ADJ:pos` 0. Everything else (`PRE`, `ONO`, `ART:def`, `PRO:per`, `AUX`, `CON`, …)
-falls to the frequency fallback (R7), even against `NOM`.
+falls to the frequency fallback (SHM7), even against `NOM`.
 
 `MARKING_OVERRIDES` (pair → **marked** spelling): sales/**salles**, entrés/**entrées**,
 alentours/**alentour**, virés/**virées**, portés/**portées**, envolés/**envolées**,
@@ -1725,12 +1725,12 @@ hautains/**hautins**, boursouflée/**boursoufflée**, bouillis/**bouillies**,
 bivalves/**bivalve**, nichés/**nichées**, stabilisante/**stabilisant**, camés/**camées**.
 
 Result: the Word to mark, or `None`.
-Rule usage among representative pairs: frequency-ratio rule (R4) 4,284 · same-category rule
-(R5) 854 · category-priority rule (R6) 838 · frequency fallback (R7) 93 · per-pair override
-(R3) 45 · reform-doublet exemption (R2) 0 · homograph exemption (R1) 0.
-Notes: the code calls the frequency-ratio rule (R4) a "ratio exemption"; it exempts the pair
+Rule usage among representative pairs: frequency-ratio rule (SHM4) 4,284 · same-category rule
+(SHM5) 854 · category-priority rule (SHM6) 838 · frequency fallback (SHM7) 93 · per-pair override
+(SHM3) 45 · reform-doublet exemption (SHM2) 0 · homograph exemption (SHM1) 0.
+Notes: the code calls the frequency-ratio rule (SHM4) a "ratio exemption"; it exempts the pair
 from the category rules, not from marking. Any zero-frequency word loses to any non-zero
-word. The code docstring numbers R1-R6 the same way; comments at :392/:431 and a RESUME note
+word. The code docstring numbers SHM1-SHM6 the same way; comments at :392/:431 and a RESUME note
 use another numbering.
 
 ### Star/hash code sequence — assignStarHashCombos (S7.11)   src/ambiguitychecker.py:272
@@ -1764,10 +1764,10 @@ Called by: Disambiguated-theory assembly (S7.1), dictionary.py:389, BEFORE Reser
 composition (S7.4) now (it feeds that call's `entriesByWord`). Described as Alternate entry
 strokes (S6.Realization.7).
 Notes: builds each alternate unmarked; Reserved-key composition (S7.4) marks it afterwards,
-from its own final-stroke cluster. Before the B44 fix (2026-09-24), alternate entries were
+from its own final-stroke cluster. Before the TOD44 fix (2026-09-24), alternate entries were
 never clustered or marked at all and could take an unrelated word's only stroke (`subits`
 lost to `subis`'s alternate entry, `pais` to `paie`, `amplis` to `emplis`: 9 spellings
-without a Plover entry, item B4) — `findFinalCollisions` now catches a regression of this
+without a Plover entry, item TOD4) — `findFinalCollisions` now catches a regression of this
 kind (`crossLemma` bucket) and `util.build_disambiguated_theory` fails on it.
 
 ### Disambiguated-theory report — Dictionary.writeDisambiguatedTheory (S7.15)   dictionary.py:396
@@ -1802,13 +1802,13 @@ Input state: the disambiguated theory (every Word's full entry list), doublet pa
 Transformation: for every final stroke reached by ≥2 differently-spelled entries (any entry,
 primary or alternate — a **collision**, GLOSSARY.md; same spelling twice is a same-stroke
 homograph, never counted), files it under one cause: `reformDoublet` if every differently-spelled
-pair is a reform-doublet exemption (R2) pair; else `sameLemmeGramCat` if every remaining pair
+pair is a reform-doublet exemption (SHM2) pair; else `sameLemmeGramCat` if every remaining pair
 shares one `lemmeGramCat` (a Realization Phase residual, out of S7's scope); else `crossLemma`
 (a pair S7 should have marked apart — the marking-bug bucket, empty unless the marking itself
 regresses).
 Result: `FinalCollisionReport` (`crossLemma`, `sameLemmeGramCat`, `reformDoublet`, each
-canonical Strokes → `list[Word]`). Measured after the B47 fix + the rectified-è template
-remap (2026-09-25): 0 cross-lemma, 0 same-lemma residual (104 before B47 — the spelling
+canonical Strokes → `list[Word]`). Measured after the TOD47 fix + the rectified-è template
+remap (2026-09-25): 0 cross-lemma, 0 same-lemma residual (104 before TOD47 — the spelling
 twins, dropped at Disambiguated-theory assembly (S7.1) — and 6 `-eter`/`-eler` variant
 conjugations, gone with the remap), 0 reform-doublet.
 Notes: `reportFinalCollisions` (util/build_disambiguated_theory.py:39) prints the three counts,
@@ -1818,28 +1818,28 @@ regression.
 
 ### Worked examples (2026-09-22 data)
 
-1. **Category-priority rule (R6).** Group `((12,), (4,13,14,23))`: `appel` NOM 80.88,
+1. **Category-priority rule (SHM6).** Group `((12,), (4,13,14,23))`: `appel` NOM 80.88,
    `appelle` VER 485.77. Ratio 6.0 < 10, categories differ, NOM 30 > VER 20 → `appelle` is
    marked although 6× more frequent. Plover: `a/piel` → appel, `a/p*iel` → appelle; since the
-   B44 fix (2026-09-24) its alternate entries `a/piel/-k`, `a/piel/-l` are marked too, each from
+   TOD44 fix (2026-09-24) its alternate entries `a/piel/-k`, `a/piel/-l` are marked too, each from
    its own final-stroke cluster (whichever other word's alternate lands on the same stroke),
    not left unmarked as before.
-2. **Homograph merge, frequency-ratio rule (R4) and frequency fallback (R7).** Group
+2. **Homograph merge, frequency-ratio rule (SHM4) and frequency fallback (SHM7).** Group
    `((12,),)`: `à` PRE 12,190.4; `a` AUX 6,350.91 / VER 5,498.34 / NOM 81.36 (representative
    AUX); `ah` ONO 576.53; `ha` ONO 21.54 / NOM 2.94. à vs a: ratio 1.9, PRE not in the table →
-   frequency fallback (R7) → `a` marked; ah vs a: ratio 11.0 → frequency-ratio rule (R4);
-   `ha` loses to all by the frequency-ratio rule (R4). Codes: à `()`, a `*`, ah `#`, ha `*#` →
+   frequency fallback (SHM7) → `a` marked; ah vs a: ratio 11.0 → frequency-ratio rule (SHM4);
+   `ha` loses to all by the frequency-ratio rule (SHM4). Codes: à `()`, a `*`, ah `#`, ha `*#` →
    Plover `a`, `*a`, `a#`, `*a#`.
 3. **Escalation.** Group `((12,14),)` (11 Words, 8 representatives): au ART:def `()`; oh
-   ONO `*`; aux ART:def `#` (vs oh: ratio 1.07 → frequency fallback (R7)); eau NOM `*#`; haut
+   ONO `*`; aux ART:def `#` (vs oh: ratio 1.07 → frequency fallback (SHM7)); eau NOM `*#`; haut
    `*# *#`; ho `(*#)×3`; ô `(*#)×4`; aulx NOM 0.0 `(*#)×5`. Plover `ae`, `*ae`, `ae#`, `*ae#`,
    `*ae#/*#`, …, `*ae#/*#/*#/*#/*#`.
 4. **Doublet.** Group `((3,5,13),(7,9,11,13))`: `bizut` 2.05 and `bizuths` 0.0 (lemmas
    bizut/bizuth, a reform pair) are merged and both get `()`; Plover keeps `bizut`.
 5. **Tie decided by input order.** `pas` NOM 0.0 vs `pâts` NOM 0.0: the frequency-ratio rule
-   (R4) (lo = 0) marks the first argument; the insertion sort calls `compare(later,
+   (SHM4) (lo = 0) marks the first argument; the insertion sort calls `compare(later,
    earlier)`, so the later Word in phonetic-theory order is marked (`pâts` → `p*a/-s`); reversed
-   input marks `pas` (item B5).
+   input marks `pas` (item TOD5).
 
 ---
 
@@ -1893,13 +1893,13 @@ Helpers not expanded: `Starboard.keyDisplayName` keyboard.py:654 (reserved names
 Called by: `python -m util.export_plover_dictionary`.
 Transformation: renders every stroke of every Word into `stenoToWords[steno]` (exact
 duplicate Words skipped, :50); per steno keeps `max(words, key=frequency)` (:56), first in
-phonetic-theory order on a tie (item B10); then runs Final-collision check (S7.17)
+phonetic-theory order on a tie (item TOD10); then runs Final-collision check (S7.17)
 (`findFinalCollisions`) over the disambiguated theory and prints its three counts plus up to
-10 `crossLemma` entries (no longer the pre-B44 "same-steno collisions" figure, which lumped
+10 `crossLemma` entries (no longer the pre-TOD44 "same-steno collisions" figure, which lumped
 same-stroke homographs in with real collisions).
 Result: Plover dictionary, 167,719 entries at last measurement (`sort_keys=True`,
-`indent=1`); 4,859 contain `*`/`#`; 49 end in a \*/# marker stroke. Since the B44 fix
-(2026-09-24), losing an output to a cross-lemma collision (formerly item B4: 9 spellings
+`indent=1`); 4,859 contain `*`/`#`; 49 end in a \*/# marker stroke. Since the TOD44 fix
+(2026-09-24), losing an output to a cross-lemma collision (formerly item TOD4: 9 spellings
 shadowed by an unmarked alternate entry, e.g. `subits`/`subis`) should no longer happen; a
 spelling can still lose to a reform-doublet or near-doublet winner (`bizuths`,
 `dégottés`, `toquade`, `cuissot`, …, the `reformDoublet` bucket, exempted by design) or, more
@@ -1988,7 +1988,7 @@ phoneme layers (`_phonemeLayers` :81); the **conjugation-feature legend**
 `chosenKeys`, key names and French feature labels. Does not call `buildDisambiguatedTheory`.
 Result: `steno-trainer/public/data/keyboard-layout.json`.
 Notes: inline-path and report keys agree today (0→21 … 6→19); nothing detects a mismatch
-(item B18). A null `chosenKeys` would crash (item B19).
+(item TOD18). A null `chosenKeys` would crash (item TOD19).
 
 #### Trainer word drill — export_practice_words.main (S8.7)   util/export_practice_words.py:208
 Called by: `python -m util.export_practice_words [--limit N]`.
@@ -2009,7 +2009,7 @@ Transformation: builds `chordsByOrtho` from the disambiguated theory; for each L
 verb tag and gender/number; rejects `sub:`/`ind:pas` tags, unknown forms, ambiguous stenos, and
 tokens that are not a drill item (`practice-words.json`, :158).
 Result: `steno-trainer/public/data/practice-sentences.json` (217 sentences).
-Notes: the drill-item gate compares against another process's recompute (item B35).
+Notes: the drill-item gate compares against another process's recompute (item TOD35).
 
 #### Trainer definitions — export_definitions.main (S8.9)   util/export_definitions.py:46
 Called by: `python -m util.export_definitions`.

@@ -1,14 +1,14 @@
 """
-Merged feature keys (docs/MERGED_FEATURE_KEYS_PLAN.md, D17): the rules shared by the pipeline and the hand-run
+Merged feature keys (docs/MERGED_FEATURE_KEYS_PLAN.md, MKD17): the rules shared by the pipeline and the hand-run
 simulator `util/analyze_merged_feature_keys.py`.
 
 Every entry (one word, one press-set alternate, so `dis` has 5) whose outline ends with a feature discriminating
 stroke gets a candidate merged outline: its last base stroke (star/hash keys merged in included) united with the
 feature stroke's keys; an escalated code's */# marker strokes stay after it. An entry merges when its reading's tense
-is a merge-eligible tense (D5, every combination of the alternate), the merged last stroke is pressable, the outline
-is free and the entry wins the merge precedence ladder (D7) against the other candidates of that outline:
+is a merge-eligible tense (MKD5, every combination of the alternate), the merged last stroke is pressable, the outline
+is free and the entry wins the merge precedence ladder (MKD7) against the other candidates of that outline:
   occupied   the outline is already a final outline of the theory (any word, alternates included) or a reserved
-             chord of another shipped dictionary (D8): the occupant keeps it;
+             chord of another shipped dictionary (MKD8): the occupant keeps it;
   level 1    two candidates of different spellings: the one whose last base stroke strictly contains the other's
              (the shared keys are sounds) wins;
   level 2    equal last base strokes, same lemme+category: the one with an absorbed feature key (already in its
@@ -16,7 +16,7 @@ is free and the entry wins the merge precedence ladder (D7) against the other ca
   tie        neither: the more frequent spelling merges (gate 3; the simulator also offers `fallback`, all keep the
              long outline, and `precedence`, the higher GRAMCAT_PRIORITY category, then the entry's `precedence`
              rank, then frequency).
-Losers keep the long outline, already unique, so one pass suffices. The long outline always stays an alternate (D3).
+Losers keep the long outline, already unique, so one pass suffices. The long outline always stays an alternate (MKD3).
 """
 import os
 from collections import defaultdict
@@ -33,7 +33,7 @@ from src.word import Word
 MARK_KEYS = frozenset({STAR_KEY, HASH_KEY})
 TENSES = ("présent", "impératif", "infinitif", "participe", "nominal", "imparfait", "future", "conditionnel",
           "subjonctif", "passé simple")
-MERGE_ELIGIBLE_TENSES = frozenset(TENSES[:8])         # D5 (gates 2026-10-11 and 2026-10-12)
+MERGE_ELIGIBLE_TENSES = frozenset(TENSES[:8])         # MKD5 (gates 2026-10-11 and 2026-10-12)
 TIE_RULES = ("frequency", "fallback", "precedence")
 
 
@@ -133,7 +133,7 @@ def buildMergeEntries(disambiguated: dict[Word, list[Strokes]], wordToStrokes: d
 
 def applyMergeKeys(entries: Iterable[MergeEntry], mergeKeysOf: Mapping[int, tuple[int, ...]] | None = None) -> None:
     """(Re)sets every entry's candidate merged outline, verdicts cleared. The merge keys are the feature stroke's keys
-    (D9), or the union of `mergeKeysOf` over the entry's keypress groups (the simulator's key-set search)."""
+    (MKD9), or the union of `mergeKeysOf` over the entry's keypress groups (the simulator's key-set search)."""
     for entry in entries:
         entry.partner, entry.mergedOutline = "", ""
         if not entry.featureKeys:
@@ -172,7 +172,7 @@ def resolveMerges(entries: list[MergeEntry], keyboard: Starboard, reserved: Mapp
                   render: Callable[[Strokes], str], tie: str = "frequency", marksApart: bool = False,
                   anyConflict: bool = False, occupied: dict[str, set[str]] | None = None) -> None:
     """Sets each eligible entry's outcome: merged, or the reason it keeps its long outline. `reserved` maps the chords
-    of the other dictionaries to their source (D8, D16). `marksApart` is ladder level 3 on unmarked outlines (two
+    of the other dictionaries to their source (MKD8, MKD16). `marksApart` is ladder level 3 on unmarked outlines (two
     entries with the same last base stroke and merge keys never block each other: S7 marks them apart afterwards);
     `anyConflict` drops the ladder (any other spelling on the outline blocks, the fusion statistics' view)."""
     if tie not in TIE_RULES:
@@ -244,7 +244,7 @@ def resolveMerges(entries: list[MergeEntry], keyboard: Starboard, reserved: Mapp
                 entry.partner = ",".join(sorted(s for s in spellings if s != entry.word.ortho))
 
 
-# The merge in the pipeline (I1): on by default since 2026-10-12 (D29); STENALGO_MERGE_FEATURE_KEYS=0 builds the theory
+# The merge in the pipeline (MKI1): on by default since 2026-10-12 (MKD29); STENALGO_MERGE_FEATURE_KEYS=0 builds the theory
 # without it (every word on its long outline).
 MERGE_FEATURE_KEYS = os.environ.get("STENALGO_MERGE_FEATURE_KEYS", "1") != "0"
 
@@ -255,7 +255,7 @@ def mergeFeatureKeys(disambiguated: dict[Word, list[Strokes]], wordToStrokes: di
                      render: Callable[[Strokes], str]) -> tuple[dict[Word, list[Strokes]], list[MergeEntry]]:
     """
     The merged theory, after S7 (gate 4): each word's outlines in their order, an entry that merges taking its merged
-    outline in place of its long one, then the long outlines of its merged entries (D3), in the same order. A word's
+    outline in place of its long one, then the long outlines of its merged entries (MKD3), in the same order. A word's
     first len(press-set alternates) outlines therefore stay aligned with its readings. Returns the theory and the
     merge entries (verdicts for the reports).
     """

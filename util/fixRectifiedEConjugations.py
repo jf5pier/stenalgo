@@ -20,7 +20,7 @@ slots with the doubled spelling ("que je caquette") beside the attested rectifie
 forms ("je caquète") -- perfect same-lemma homophones the Elicitation Phase
 cannot separate (an unanswered subjonctif-vs-indicatif cross-spelling
 opposition skips the whole group), leaving final same-lemma collisions (the 6
-residuals after the B47 fix).
+residuals after the TOD47 fix).
 
 This script scans LexiqueMixte.tsv's attested présent/subjonctif/impératif
 1s/2s/3s/3p forms of every verb Verbiste maps to a doubling template: a lemma

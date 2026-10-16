@@ -1,6 +1,6 @@
 #!/bin/env python
 #
-# Corrects item B2 in resources/LexiqueSynthetic.tsv: the finite verb forms that
+# Corrects item TOD2 in resources/LexiqueSynthetic.tsv: the finite verb forms that
 # src/verbparadigm.py's generateMissingConjugatedForm synthesized before it normalized
 # its spliced output (normalizeSplicedBreakdown). The splice cut the infinitive's
 # phonology and syllable breakdowns at a fixed character count, which kept the
@@ -58,7 +58,7 @@ def main() -> None:
     _capMemory()
     parser = argparse.ArgumentParser(
         description="Re-normalize the phonology and syllable breakdowns of the spliced "
-        "finite verb rows of resources/LexiqueSynthetic.tsv (item B2)."
+        "finite verb rows of resources/LexiqueSynthetic.tsv (item TOD2)."
     )
     parser.add_argument(
         "--apply", action="store_true",

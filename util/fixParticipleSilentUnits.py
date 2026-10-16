@@ -1,6 +1,6 @@
 #!/bin/env python
 #
-# Corrects item B46 in resources/LexiqueSynthetic.tsv: the past participles that
+# Corrects item TOD46 in resources/LexiqueSynthetic.tsv: the past participles that
 # src/verbparadigm.py's generateMissingParticiple synthesized while its phonemic
 # splice (spliceParticiplePhon) still dropped every '#' unit while the
 # orthographic splice (generateParticipeOrthosyll) appended the gender/number
@@ -38,7 +38,7 @@ def isParticipleRow(row: dict[str, str]) -> bool:
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Pad the syll_cv of the synthetic past-participle rows of "
-        "resources/LexiqueSynthetic.tsv with one silent '#' per missing orthographic unit (item B46)."
+        "resources/LexiqueSynthetic.tsv with one silent '#' per missing orthographic unit (item TOD46)."
     )
     parser.add_argument(
         "--apply", action="store_true",

@@ -343,7 +343,7 @@ class TestParticipleSplicing:
     ECONDUITE = ("éconduite", "ek§d8it", "éconduire", "f", "s", "e|k_§|d_8_i_t_#", "é|c_on|d_u_i_t_e")
 
     def test_splice_phon_adds_or_drops_the_feminine_consonant(self):
-        """Item B45: the masculine of a consonant-final feminine stem drops its
+        """Item TOD45: the masculine of a consonant-final feminine stem drops its
         consonant, the feminine adds it; same-gender splices stay verbatim."""
         promis = _make_participle(*self.PROMIS)
         promise = _make_participle(*self.PROMISE)
@@ -429,7 +429,7 @@ class TestParticipleSplicing:
         assert f_p.rawOrthosyllCV == "r_e|ch_am|p_i_es"
 
     def test_generate_missing_participle_pads_silent_suffix_units(self):
-        """Item B46: each orthographic unit the phonemic breakdown lacks gets a
+        """Item TOD46: each orthographic unit the phonemic breakdown lacks gets a
         silent trailing '#' (garnis g_a_R|n_i_# beside g_a_r|n_i_s), so the two
         breakdowns align unit for unit like attested rows. The count depends on
         the donor's segmentation: promise's radical keeps "i_s" as two units, so
@@ -696,7 +696,7 @@ class TestNormalizeSplicedBreakdown:
         )
 
     def test_phonology_not_spelled_by_breakdown_is_left_alone(self):
-        # B3's rows: the breakdown's "e" is the phonology's "E"; only boundaries move.
+        # TOD3's rows: the breakdown's "e" is the phonology's "E"; only boundaries move.
         vowels = {("ê", "any"): "E"}
         assert normalizeSplicedBreakdown("@bEt", "@|b_e|t_#", "em|b_ê|t_e", _SPLITS, vowels) == (
             "@bEt", "@|b_e_t_#", "em|b_ê_t_e"

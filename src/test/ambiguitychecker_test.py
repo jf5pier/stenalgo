@@ -442,7 +442,7 @@ class TestComposeReservedKeyStrokes:
 class TestComposeReservedKeyStrokesForEntries:
 
     def test_alternate_entries_are_marked_in_their_own_cluster(self):
-        # B44: "panse"/"pense" share both their primary stroke and an alternate
+        # TOD44: "panse"/"pense" share both their primary stroke and an alternate
         # reading's stroke; the rarer "panse" must be marked on both, not only on its
         # primary.
         panse = _make_word(ortho="panse", lemme="panser", gramCat=GramCat.VER, frequencyFilm=0.1)
@@ -739,7 +739,7 @@ class TestBuildKeypressGroupExtraAlternates:
 class TestFindSpellingTwinWords:
 
     def test_same_stroke_reading_of_a_covered_spelling_is_a_twin(self):
-        """B47, "affadis" shape: two Words share the entry's ortho, lemmeGramCat and
+        """TOD47, "affadis" shape: two Words share the entry's ortho, lemmeGramCat and
         canonical base stroke; _resolveEntryWord picks one, the other is a spelling twin
         whose readings the entry's alternates already cover."""
         wParticipe = _make_word(ortho="affadis", lemme="affadir", gramCat=GramCat.VER, gender="m", number="p")
@@ -1148,7 +1148,7 @@ class TestStarHashTotalOrder:
         assert frequencyBand(0.0) < frequencyBand(0.0001)
 
     def test_cycle_of_the_pairwise_rules_gets_one_order(self):
-        # ail < aille (aller) < aïe < ail under the pairwise rules R6/R7: a cycle
+        # ail < aille (aller) < aïe < ail under the pairwise rules SHM6/SHM7: a cycle
         ail = _make_word(ortho="ail", lemme="ail", gramCat=GramCat.NOM, frequencyFilm=9.14)
         aille = _make_word(ortho="aille", lemme="aller", gramCat=GramCat.VER, frequencyFilm=89.81, number="s", gender=None)
         aie = _make_word(ortho="aïe", lemme="aïe", gramCat=GramCat.ONO, frequencyFilm=18.25, gender=None, number=None)

@@ -120,7 +120,7 @@ def main(argv: list[str] | None = None) -> None:
         starboard = loadKeyboard(dictionary)
     with timedCall("phase", "util.build_phonetic_theory: loadOrBuildPhoneticTheory"):
         phoneticTheory = loadOrBuildPhoneticTheory(dictionary, starboard)
-    # Always written, pickle hit or miss (TODO.md B14, fixed 2026-09-24):
+    # Always written, pickle hit or miss (TODO.md TOD14, fixed 2026-09-24):
     # writePhoneticTheory iterates the dict in insertion order, which a pickle
     # round-trip preserves, so the bytes on a cache hit equal the build-time bytes.
     with timedCall("phase", f"util.build_phonetic_theory: writePhoneticTheory ({PHONETIC_THEORY_TSV_PATH})"):

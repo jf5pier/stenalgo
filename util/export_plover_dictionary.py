@@ -11,7 +11,7 @@ Until 2026-09-21 this only used the phonetic theory (`PhoneticTheory.pickle`), s
 the marking pipeline is specifically built to distinguish (e.g. "a"/"as"/"à")
 collided onto the same steno string in the real dictionary. The most frequent word
 of each steno is kept. Collisions (different spellings on one steno) are counted by
-cause (src.ambiguitychecker.findFinalCollisions): a reform-doublet exemption (R2) pair,
+cause (src.ambiguitychecker.findFinalCollisions): a reform-doublet exemption (SHM2) pair,
 a Realization Phase same-lemma residual, or a cross-lemma one -- the last a marking
 bug, which `python -m util.build_disambiguated_theory` fails on.
 
@@ -68,7 +68,7 @@ def main() -> None:
     print(f"Wrote {OUTPUT_PATH}: {len(stenoDict)} strokes. Collisions (different spellings"
           f" on one steno, the most frequent kept): {len(report.crossLemma)} cross-lemma,"
           f" {len(report.sameLemmeGramCat)} same-lemma residual,"
-          f" {len(report.reformDoublet)} reform doublet (R2).")
+          f" {len(report.reformDoublet)} reform doublet (SHM2).")
     for words in list(report.crossLemma.values())[:10]:
         print(f"  CROSS-LEMMA: {sorted({w.ortho for w in words})}")
 
