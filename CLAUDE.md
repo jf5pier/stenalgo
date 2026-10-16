@@ -272,11 +272,11 @@ Pitfalls: `dictionary.py` reuses `Dictionary.pickle`/`PhoneticTheory.pickle` whe
 
 Documents cite decisions, rules and items by tags — `PREFIX` + number (as in `PRP2`) — with `docs/TAGS.tsv` mapping each prefix to the document that defines its items (naming rule and standing exclusions in the registry's header comments).
 
-- Before creating tagged items in a new document, reserve its prefix: `bin/tagreserve docs/FILE.md [PREFIX [DESCRIPTION]]` (proposes the mechanical one; writes nothing if taken).
+- Before creating tagged items in a new document, reserve its prefix: `~/.claude/tag-tools/tagreserve docs/FILE.md [PREFIX [DESCRIPTION]]` (proposes the mechanical one; writes nothing if taken).
 - One-line definitions live in the document that describes the item: `<!-- tag: PREFIX2 | one-line definition -->` directly above the item's heading or list item, or as a block of such comments immediately after the table that defines the items (one per row, in row order). When editing a tagged item's long description, update its one-line definition in the same edit; a new tagged item gets its definition line in the same commit.
-- `bin/tagdef PRP2 [PRB7 ...]` prints definitions; it works from any directory in the repo and exits non-zero for an unknown or undefined tag.
-- `bin/tagcheck` verifies the registry, the definition lines and every citation of a registered prefix in `docs/`, `CLAUDE.md`, `TODO.md` and the python sources. Run it after any edit to a tagged document or to `docs/TAGS.tsv`.
-- A user-level Stop hook (`~/.claude/hooks/stop_definitions.py`, registered in `~/.claude/settings.json`) surfaces the definitions of the registered tags a reply cites as a system message after the turn — silent when no registered tag is cited, and never blocking. It prefers the repo's `bin/tagdef` and falls back to the shared `~/.claude/tag-tools/tagdef`; when a new document's prefix enters `docs/TAGS.tsv`, the hook picks it up automatically.
+- `~/.claude/tag-tools/tagdef PRP2 [PRB7 ...]` prints definitions; it works from any directory in the repo and exits non-zero for an unknown or undefined tag.
+- `~/.claude/tag-tools/tagcheck` verifies the registry, the definition lines and every citation of a registered prefix in `docs/`, `CLAUDE.md`, `TODO.md` and the python sources. Run it after any edit to a tagged document or to `docs/TAGS.tsv`.
+- A user-level Stop hook (`~/.claude/hooks/stop_definitions.py`, registered in `~/.claude/settings.json`) surfaces the definitions of the registered tags a reply cites as a system message after the turn — silent when no registered tag is cited, and never blocking; it runs the same shared `~/.claude/tag-tools/tagdef`. When a new document's prefix enters `docs/TAGS.tsv`, the hook picks it up automatically.
 - Bare tags outside the system (pipeline stages `S1`-`S10`, code-level families `L1`-`L4`, `E1`-`E6`, `T1`-`T3.x`, the historical `docs/history` affix families, `Q1`-`Q7`) are ignored by `tagcheck` by design; never prefix them in this pass.
 
 ## Verification approach
