@@ -1407,3 +1407,71 @@ lemma family on the brief (`petit` `p-`, `petite` `p-t`; scope `family`, or `wor
 A theory's frequency-weighted chord cost on the keyboard it was designed for: Stenalgo on the Starboard, Pluvier on the
 Ireland layout. The headline cost of the comparison; "both on Starboard" is the secondary view.
 - Avoid "complexity" for it (older report and code name).
+
+## Phonology rewrite (optional and retired phonemes)
+
+### Long form / Reduced form / Short form / Shortest form
+Long form: the full phonetic outline of a spelling, before any abbreviation or phoneme removal (the dictionary alone).
+Reduced form: the long form with its optional phonemes left out under the phonology rule, wherever that causes no collision;
+the new base of the theory. Short form: any outline that carries an affix abbreviation, a brief or another rule, built on the
+reduced form. Shortest form: the best-scoring short form of a spelling.
+- Avoid "new long form" for the reduced form; a reduced-form score is never compared with a long-form score.
+- First used in: the phonology rewrite design (2026-10-15).
+
+### Optional phoneme
+A phoneme occurrence in a word's phonology that the typist may leave out: the word accepts its outline with and without it.
+The phoneme keeps its layout key; only this word, and only this occurrence, may skip it.
+- Avoid "removable phoneme", "dropped phoneme".
+- First used in: the phonology rewrite design (2026-10-15).
+
+### Optional phoneme set
+The optional phonemes of one word that may be left out in any combination: every combination of them gives an outline that
+conflicts neither with an existing outline nor with any outline another word gets by leaving out any combination of its own
+optional phonemes.
+- Avoid "multi-phoneme optional".
+- First used in: the phonology rewrite design (2026-10-15).
+
+### Retired phoneme
+A phoneme (per syllabic part: `Z/onset`, `Z/coda`) that the layout gives no key: it is absent from every word's phonology except
+the residual words'. Proposed by the retirement recommendation, not by hand.
+- Avoid "removed phoneme".
+- First used in: the phonology rewrite design (2026-10-15).
+
+### Residual word
+A word that still needs a retired phoneme to stay collision-free. It is written either with its retired-keypress outline or,
+without the phoneme, with a star/hash mark; which of the two is the user's decision per retired phoneme.
+- Not a **Residual collision** (a collision left unresolved after the Realization Phase).
+- First used in: the phonology rewrite design (2026-10-15).
+
+### Retired-phoneme keypress
+The keypress a residual word uses for its retired phoneme: at most one per retired phoneme and syllabic part, ideally one
+shared by several retired phonemes, chosen after every other outline, brief and abbreviation has claimed its chords.
+- Avoid "late keypress".
+- First used in: the phonology rewrite design (2026-10-15).
+
+### Reduced phonology outline
+A word's outline written from its phonology minus its retired phonemes and minus the optional phonemes left out.
+- Avoid "reduced form". Not the **Short form** of the theory comparison (the briefest outline over abbreviations and briefs).
+- First used in: the phonology rewrite design (2026-10-15).
+
+### Retired-keypress outline
+A residual word's outline that keeps its retired phoneme, written with the retired-phoneme keypress.
+- Avoid "conflict-avoiding long form" (**Long form** is the longest outline of the theory comparison).
+- First used in: the phonology rewrite design (2026-10-15).
+
+### Keypress-group placeholder
+A pseudo-phoneme standing for one keypress group (one symbol per group, before the group has physical keys), written after a word's
+phonemes so that words told apart only by their features (`mot` / `mots`) stay apart in the phonology the layout is optimized on.
+- Not a feature key (the physical keys a keypress group gets) nor a star/hash mark.
+- First used in: the phonology rewrite design (2026-10-15).
+
+### Phonology override
+A hand-decided rewrite applied before the optionality search: either a spelling's new phonology (`je` written `Z`, without its
+schwa), or an elided form (`j'`, `d'`, `qu'`...) ranked below its base form, so that the elided form takes the star/hash mark.
+- Avoid "early brief" (a **Word brief** is chosen after the theory exists).
+- First used in: the phonology rewrite design (2026-10-15).
+
+### Phoneme modifier
+A pseudo-phoneme with its own key that turns a base phoneme into another (`a` + nasal `~` = `@`; `o` + open = `O`), so that one
+phoneme is written as a base phoneme plus the modifier. Required for a decomposed phoneme, optional for a neutralized pair.
+- First used in: the phonology rewrite design (2026-10-15), iteration 2.
