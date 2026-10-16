@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# tagdef: print the one-line definition of one or more tags.
+# Usage: bin/tagdef TAG [TAG ...]        e.g. bin/tagdef PRP2 PRB7
+# Works from any directory inside the repository. Exits non-zero (after
+# printing everything it found) when a tag is malformed, unregistered or
+# undefined.
+set -uo pipefail
+self_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+. "$self_dir/taglib.sh"
+
+if [ $# -eq 0 ]; then
+  echo "usage: bin/tagdef TAG [TAG ...]   e.g. bin/tagdef PRP2" >&2
+  exit 2
+fi
+root="$(tag_root)" || { echo "tagdef: not inside the repository" >&2; exit 1; }
+cd "$root"
+if [ ! -f "$TAGS_FILE" ]; then
+  echo "tagdef: $TAGS_FILE missing (see bin/tagreserve)" >&2
+  exit 1
+fi
+
+status=0
+for tag in "$@"; do
+  if [[ ! "$tag" =~ ^[A-Z]{2,5}[0-9]+$ ]]; then
+    echo "tagdef: $tag: malformed tag (PREFIX + number, e.g. PRP2)" >&2
+    status=1
+    continue
+  fi
+  prefix="${tag%%[0-9]*}"
+  file="$(tag_file_of "$prefix")"
+  if [ -z "$file" ]; then
+    echo "tagdef: $tag: prefix $prefix not registered in $TAGS_FILE" >&2
+    status=1
+    continue
+  fi
+  if [ ! -f "$file" ]; then
+    echo "tagdef: $tag: registered file $file missing" >&2
+    status=1
+    continue
+  fi
+  if ! definition="$(tag_definition_in "$tag" "$file")"; then
+    echo "tagdef: $tag: no definition line in $file" >&2
+    status=1
+    continue
+  fi
+  printf '%s | %s\n' "$tag" "$definition"
+done
+exit "$status"

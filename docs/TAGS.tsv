@@ -1,0 +1,29 @@
+# Tag registry: PREFIX <TAB> repo-relative path <TAB> short description.
+# A tag is PREFIX + number (e.g. PREFIX2) and cites one item of exactly one
+# document. Rule (mechanical initials): the prefix comes from the file name's
+# initials (PHONOLOGY_REWRITE_PLAN.md -> PRP, TODO.md -> TOD; 2-5 uppercase
+# letters); a document with several item families appends the family letter
+# (PHONOLOGY_REWRITE_BLIND_SPOTS.md -> PRA/PRB/PRC/PRD for its A/B/C/D items);
+# on collision, extend with the next word's initial, then further letters,
+# until free. Reserve a prefix: bin/tagreserve docs/FILE.md [PREFIX [DESC]]
+# (writes nothing if the prefix is taken). Definitions live in the document
+# that describes the item, as one line:
+#   <!-- tag: PREFIX2 | one-line definition -->
+# placed directly above the item's heading or list item, or as a block of such
+# comments immediately after the table that defines the items (one per row, in
+# row order). Look up: bin/tagdef PREFIX2. Check: bin/tagcheck.
+# Standing exclusions (bare on purpose; tagcheck and the reply hook ignore
+# unregistered prefixes): pipeline stages S1-S10; code-level ids L1-L4, E1-E6,
+# T1-T3.x; the historical docs/history affix families A1-A9, B1-B6, D1-D6;
+# Q1-Q7.
+PRP	docs/PHONOLOGY_REWRITE_PLAN.md	phonology-rewrite decisions
+PRA	docs/PHONOLOGY_REWRITE_BLIND_SPOTS.md	rewrite blind spots, family A
+PRB	docs/PHONOLOGY_REWRITE_BLIND_SPOTS.md	rewrite blind spots, family B
+PRC	docs/PHONOLOGY_REWRITE_BLIND_SPOTS.md	rewrite blind spots, family C
+PRD	docs/PHONOLOGY_REWRITE_BLIND_SPOTS.md	rewrite blind spots, family D
+TOD	TODO.md	suspected-bug items
+SHM	docs/specs/star-hash-marking.md	star/hash rule stack
+MKD	docs/MERGED_FEATURE_KEYS_PLAN.md	merged-feature-keys decisions
+MKH	docs/MERGED_FEATURE_KEYS_PLAN.md	merged-feature-keys invariants
+MKM	docs/MERGED_FEATURE_KEYS_PLAN.md	merged-feature-keys metrics
+MKI	docs/MERGED_FEATURE_KEYS_PLAN.md	merged-feature-keys implementation steps
