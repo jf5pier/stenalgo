@@ -47,10 +47,24 @@ python -m util.build_morphalou_forms         # rare: distils the external Morpha
 # resources/morphalouNomAdjForms.tsv (NOM/ADJ spellings of the slots Mixte lacks; attribution in morphalouNomAdjForms.NOTICE.md)
 
 python -m util.optimize_keyboard             # Keyboard Layout Optimization (S4); rare, costly
-# Prerequisites: Dictionary.pickle (or the lexicons, for an in-memory build), starboard3h.json.
+# Prerequisites: Dictionary.pickle (or the lexicons, for an in-memory build), starboard3h.json; --statistics PATH solves on a util.build_layout_statistics file instead.
+# Run settings: --parts onset|nucleus|coda (a subset gives a partial layout; never overwrites the seed), --time SECONDS per part (90), --workers N, --seed N, --log,
+# --incumbent-dir DIR (best solution so far per part), --report PATH (status, objective, best bound, relative gap per part).
 # Outputs: starboard3h_optimized.json (--output PATH to choose; starboard3h.json is overwritten
 # only by an explicit --output starboard3h.json). ~90 s per syllabic part, plus model building.
 # After adopting a layout: rm -f Dictionary.pickle PhoneticTheory.pickle DisambiguatedTheory.pickle, then rebuild.
+
+python -m util.build_layout_statistics [--rewrite]   # the S4 statistics rebuilt from the words of PhoneticTheory.pickle (phonology rewrite, PRP11)
+# Prerequisites: PhoneticTheory.pickle, starboard3h.json (+ resources/phonologyOverrides.tsv with --rewrite). ~1 min.
+# Outputs: LayoutStatistics.pickle (gitignored, self-contained: --output PATH to choose), for `python -m util.optimize_keyboard --statistics PATH`.
+# --rewrite applies the phonology overrides first and weighs the overridden spellings (je te se le ce de me ne que); the rest of the top-200 stays at 0.
+# Never touches Dictionary.pickle. Proof it is right: python -m util.check_layout_statistics (hand-run, ~3 min; the original theory must reproduce Dictionary.pickle's statistics).
+
+python -m util.package_remote_solve --statistics LayoutStatistics.pickle   # a remote-machine layout solve, packaged (0.2 MB tar.gz, only what the solve imports)
+# Prerequisites: a util.build_layout_statistics file, starboard3h.json. Outputs: remote_solve_<date>.tar.gz (src modules found by importing the commands, requirements-remote.txt,
+# run_remote.sh, MANIFEST.md5). Remote: tar xzf, python3 -m venv venv && venv/bin/pip install -r requirements-remote.txt, PYTHON=venv/bin/python ./run_remote.sh SECONDS_PER_PART
+# -> result/merged.json (one process per part, the cores split 5:5:2; incumbents, reports with status/bound/gap per part). Adopt a layout deliberately.
+python -m util.merge_layouts --output PATH onset=FILE nucleus=FILE coda=FILE   # combines per-part layouts (optimize_keyboard --parts PART --output FILE); missing parts come from the seed
 
 python -m util.build_phonetic_theory        # Dictionary Loading (S3) + Phonetic Theory
                                              # Building (S5)

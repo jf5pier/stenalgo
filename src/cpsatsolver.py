@@ -3,16 +3,34 @@
 #
 from ortools.sat.python.cp_model import IntVar
 from ortools.sat.python import cp_model
+import copy
+import json
 import time
+from dataclasses import dataclass
 from functools import cmp_to_key
 from src.keyboard import Keyboard
 from src.grammar import Phoneme, Syllable
 from src.cpsatprinter import SolutionPrinter
 from tqdm import tqdm
 
+@dataclass
+class SolverSettings:
+    """How a solve runs (the defaults are the historical behaviour of `optimizeKeyboard`: 90 s per part, every core, solver's own seed, quiet).
+    `incumbentPath` and `reportPath` may contain `{part}`; the incumbent file is a full layout file (loadable by `Starboard.fromJSONFile`)
+    holding the best solution of the part so far, rewritten at most every `incumbentInterval` seconds, so a killed run keeps its work."""
+    timeSeconds: float = 90.0
+    workers: int = 0            # 0: the solver's default (all cores)
+    seed: int | None = None
+    log: bool = False
+    incumbentPath: str | None = None
+    incumbentInterval: float = 5.0
+    reportPath: str | None = None
+
+
 def optimizeKeyboard(keyboard: Keyboard,
                      syllabicPartAmbiguity: dict[str, dict[tuple[tuple[str, ...], tuple[str, ...]], float]], 
-                     syllabicParts: list[str]) -> None:
+                     syllabicParts: list[str],
+                     settings: SolverSettings | None = None) -> None:
     """
     Using OR-tools, encode the optimisation rules and objectives to find the best keymap.
     Starting from the theory, tries to optimize the keymap to :
@@ -25,8 +43,9 @@ def optimizeKeyboard(keyboard: Keyboard,
     STROKE_ASSIGNMENT_PENALTY = 1
     AMBIGUITY_PENALTY = 30000
     ORDER_PENALTY= 500
-    SOLVER_TIME = 90.0  # seconds
-    SOLVER_LOG = False
+    settings = settings if settings is not None else SolverSettings()
+    SOLVER_TIME = settings.timeSeconds  # seconds
+    SOLVER_LOG = settings.log
     MAX_MULTIPHONEMES: int = 2000
     
     phonemesByPart: dict[str, str] = {
@@ -419,16 +438,46 @@ def optimizeKeyboard(keyboard: Keyboard,
     # Solve
     print("Solving the models...")
     solver = {p: cp_model.CpSolver() for p in PARTS}
+    scratchLayout = copy.deepcopy(keyboard) if settings.incumbentPath is not None else None  # the incumbent files are written from a copy
     keyboard.clearLayout()
+    report: dict[str, dict[str, object]] = {}
     for part in PARTS:
         solver[part].parameters.max_time_in_seconds = SOLVER_TIME
         solver[part].parameters.log_search_progress = SOLVER_LOG
+        solver[part].parameters.num_workers = settings.workers
+        if settings.seed is not None:
+            solver[part].parameters.random_seed = settings.seed
         print(f"Solving for {part} model...")
+
+        def saveIncumbent(callback: SolutionPrinter, part: str = part, lastWrite: list[float] = [0.0]) -> None:
+            now = time.time()
+            if scratchLayout is None or settings.incumbentPath is None or now - lastWrite[0] < settings.incumbentInterval:
+                return
+            lastWrite[0] = now
+            scratchLayout.clearLayout()
+            for stroke in strokesInPart[part]:
+                for phoneme in phonemesByPart[part]:
+                    if callback.Value(strokeIsAssignedToPhoneme[part][(phoneme, stroke)]) == 1:
+                        scratchLayout.addToLayout(stroke, phoneme, Syllable.getSortedPhonemesNames(part))
+            scratchLayout.toJSONFile(settings.incumbentPath.format(part=part))
+
+        startTime = time.time()
         printer = SolutionPrinter(model[part], 1.0,
               [overlapCosts[part], allStrokesPenaltyCost[part],
-              allPhonemePairsOrderPenaltyCost[part]])
+              allPhonemePairsOrderPenaltyCost[part]], saveIncumbent)
         status = solver[part].Solve(model[part],
               printer,)
+        report[part] = {
+            "status": solver[part].StatusName(status), "workers": settings.workers, "seed": settings.seed,
+            "timeLimit": SOLVER_TIME, "wallTime": round(time.time() - startTime, 1),
+        }
+        if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:  # type: ignore[comparison-overlap]
+            report[part].update({"objective": solver[part].ObjectiveValue(), "bestBound": solver[part].BestObjectiveBound()})
+            report[part]["relativeGap"] = abs(solver[part].ObjectiveValue() - solver[part].BestObjectiveBound()) \
+                / max(1.0, abs(solver[part].ObjectiveValue()))
+        if settings.reportPath is not None:
+            with open(settings.reportPath.format(part=part), "w", encoding="utf-8") as reportFile:
+                json.dump(report, reportFile, indent=2)  # rewritten after each part: a killed run keeps the finished parts' lines
 
         # Output
         print(f"Status for {part}: {status}")

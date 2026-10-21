@@ -3,13 +3,16 @@
 #
 from ortools.sat.python import cp_model
 import time
+from collections.abc import Callable
 
 class SolutionPrinter(cp_model.CpSolverSolutionCallback):
     """Callback to print intermediate solutions."""
 
     def __init__(self, model:cp_model.CpModel, print_interval_seconds:float=2.0,
-                    variables: list[cp_model.IntVar]|None = None) -> None:
+                    variables: list[cp_model.IntVar]|None = None,
+                    onSolution: Callable[["SolutionPrinter"], None] | None = None) -> None:
         cp_model.CpSolverSolutionCallback.__init__(self)
+        self.__onSolution = onSolution
         self.__model = model
         self.__solution_count = 0
         self.__first_print_time = time.time()
@@ -20,6 +23,8 @@ class SolutionPrinter(cp_model.CpSolverSolutionCallback):
 
     def on_solution_callback(self) -> None:
         """Called by the solver when a new solution is found."""
+        if self.__onSolution is not None:
+            self.__onSolution(self)  # e.g. the incumbent saver of src/cpsatsolver.py
         current_time = time.time()
         self.__solution_count += 1
         self.__print_count += 1

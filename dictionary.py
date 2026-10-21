@@ -28,6 +28,7 @@ import time
 from copy import deepcopy
 
 from src.grammar import Phoneme, Syllable, SyllableCollection
+from src.layoutstatistics import buildSyllableStatistics
 from src.spellingvariants import loadSpellingVariantDrops
 from src.word import GramCat, Word
 from typing import Any, Callable
@@ -205,16 +206,8 @@ class Dictionary:
     def analyseSyllabification(self) -> None:
         print("Analyzing syllabification...")
         self.words.sort(key=lambda x: x.frequency, reverse=True)
-        for word in tqdm(self.words, unit=" words", ascii=True, ncols=80):
-            # Remove the frequent words from syllable frequency statistics
-            frequency = word.frequency if word.ortho not in self.frequentWords else 0.0
-            syllable_names = word.phonemesToSyllableNames(withSilent=False)
-            spellings = word.graphemsToSyllables(withSilent=False)
-            for (syllable_name, spelling) in zip(syllable_names, spellings):
-                self.syllableCollection.updateSyllable(
-                    syllable_name, spelling, frequency, word)
-
-        Syllable.sortPhonemesCollections()
+        # Remove the frequent words from syllable frequency statistics (the same pass runs on a theory's words: src/layoutstatistics.py)
+        buildSyllableStatistics(self.words, set(self.frequentWords), self.syllableCollection)
 
     def hasAmbiguityStats(self) -> bool:
         """Whether the three ambiguity tables are filled for every syllabic part (a Dictionary.pickle written before

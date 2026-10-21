@@ -4,6 +4,7 @@ __pycache__/
 
 # Regenerable caches (dictionary.py pipeline; util.build_phonetic_theory)
 Dictionary.pickle
+LayoutStatistics.pickle
 FeatureDiscrimator.pickle
 PhoneticTheory.pickle
 VerbReferences.pickle

@@ -2,7 +2,14 @@
 Keyboard Layout Optimization (S4) as a command: the CP-SAT phoneme-to-key
 layout solve, runnable without editing code.
 
-Run: python -m util.optimize_keyboard [--output PATH]   (from the repo root)
+Run: python -m util.optimize_keyboard [--output PATH] [--statistics PATH] [--parts onset nucleus coda] [--time SECONDS] [--workers N]
+                                      [--seed N] [--log] [--incumbent-dir DIR] [--report PATH]   (from the repo root)
+--statistics PATH solves on the layout statistics file of `python -m util.build_layout_statistics` (rewritten phonology, typed frequencies)
+instead of Dictionary.pickle; it is self-contained, so nothing else of the lexicon side is needed.
+Remote run: one process per part (`--parts onset`, `--parts coda`), each with its own --output, --workers and --time; a partial output holds only its
+parts' strokes and is combined with `python -m util.merge_layouts`. --incumbent-dir keeps the best solution found so far of each part
+(`DIR/incumbent_<part>.json`, a layout file, rewritten every few seconds) so a killed run loses nothing; --report writes status, objective, best bound and
+relative gap per part (a gap of 0 means converged). Defaults are the historical ones: all parts, 90 s each, every core, quiet.
 Seeds from starboard3h.json (the solver uses the committed layout only as CP-SAT
 hints, then clears and refills it), optimizes onset/nucleus/coda against
 dictionary.syllabicPartAmbiguity, and writes the solved Starboard via toJSONFile.
@@ -24,14 +31,15 @@ import os
 import sys
 from typing import TYPE_CHECKING
 
-from src.cpsatsolver import optimizeKeyboard
+from src.cpsatsolver import SolverSettings, optimizeKeyboard
 from src.keyboard import Starboard
-from util._theoryio import loadDictionary
+from src.layoutstatistics import loadLayoutStatistics
 
 if TYPE_CHECKING:
     from dictionary import Dictionary
 
 SEED_PATH = "starboard3h.json"
+PARTS = ("onset", "nucleus", "coda")
 DEFAULT_OUTPUT = "starboard3h_optimized.json"
 
 
@@ -43,6 +51,18 @@ def parseArgs(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--output", metavar="PATH", default=DEFAULT_OUTPUT,
                         help=f"where to write the solved layout (default: {DEFAULT_OUTPUT}; "
                              f"{SEED_PATH} is overwritten only if passed explicitly)")
+    parser.add_argument("--statistics", metavar="PATH", default=None,
+                        help="layout statistics file (util.build_layout_statistics) to solve on; default: Dictionary.pickle")
+    parser.add_argument("--parts", nargs="+", choices=PARTS, default=list(PARTS), metavar="PART",
+                        help="syllabic parts to solve (default: onset nucleus coda); a subset gives a partial layout, see util.merge_layouts")
+    parser.add_argument("--time", type=float, default=SolverSettings.timeSeconds, metavar="SECONDS",
+                        help="solver time limit PER PART (default: %(default)s)")
+    parser.add_argument("--workers", type=int, default=0, metavar="N", help="solver threads (default 0: every core)")
+    parser.add_argument("--seed", type=int, default=None, metavar="N", help="solver random seed (default: the solver's own)")
+    parser.add_argument("--log", action="store_true", help="print the solver's search log")
+    parser.add_argument("--incumbent-dir", metavar="DIR", default=None,
+                        help="keep the best solution so far of each part as DIR/incumbent_<part>.json")
+    parser.add_argument("--report", metavar="PATH", default=None, help="write status, objective, best bound and gap per part (JSON)")
     return parser.parse_args(argv)
 
 
@@ -61,18 +81,36 @@ def _buildDictionaryInMemory() -> "Dictionary":
 
 def main(argv: list[str] | None = None) -> None:
     args = parseArgs(argv)
-    dictionary = loadDictionary() if os.path.exists("Dictionary.pickle") else _buildDictionaryInMemory()
-    dictionary.ensureAmbiguityStats()  # Dictionary.pickle no longer carries them (util.build_phonetic_theory skips them)
+    overwritingSeed = os.path.abspath(args.output) == os.path.abspath(SEED_PATH)
+    partial = set(args.parts) != set(PARTS)
+    if partial and overwritingSeed:
+        raise SystemExit(f"--parts {' '.join(args.parts)} gives a partial layout: it cannot overwrite {SEED_PATH}; "
+                         "write it elsewhere and combine the parts with `python -m util.merge_layouts`.")
+    if args.statistics is not None:
+        envelope = loadLayoutStatistics(args.statistics)
+        syllabicPartAmbiguity = envelope["tables"]["syllabicPartAmbiguity"]
+        print(f"Layout statistics from {args.statistics}: {envelope['meta']['words']} words, "
+              f"phonology rewrite {'on' if envelope['meta']['rewrite'] else 'off'}.")
+    else:
+        from util._theoryio import loadDictionary  # lazy: --statistics needs none of the lexicon side (the remote machine has only src/)
+        dictionary = loadDictionary() if os.path.exists("Dictionary.pickle") else _buildDictionaryInMemory()
+        dictionary.ensureAmbiguityStats()  # Dictionary.pickle no longer carries them (util.build_phonetic_theory skips them)
+        syllabicPartAmbiguity = dictionary.syllabicPartAmbiguity
 
     starboard = Starboard.fromJSONFile(SEED_PATH)
     if starboard is None:
         raise SystemExit(f"{SEED_PATH} not found: the solve needs it as the CP-SAT hint seed.")
 
-    optimizeKeyboard(starboard, dictionary.syllabicPartAmbiguity, ["onset", "nucleus", "coda"])
+    incumbentPath = None
+    if args.incumbent_dir is not None:
+        os.makedirs(args.incumbent_dir, exist_ok=True)
+        incumbentPath = os.path.join(args.incumbent_dir, "incumbent_{part}.json")
+    settings = SolverSettings(timeSeconds=args.time, workers=args.workers, seed=args.seed, log=args.log,
+                              incumbentPath=incumbentPath, reportPath=args.report)
+    optimizeKeyboard(starboard, syllabicPartAmbiguity, list(args.parts), settings)
     if not starboard.phonemesAssignedToStroke:
         raise SystemExit("optimizeKeyboard produced no layout (no solution found); nothing written.")
 
-    overwritingSeed = os.path.abspath(args.output) == os.path.abspath(SEED_PATH)
     if overwritingSeed:
         print(f"WARNING: overwriting the committed seed layout {SEED_PATH} "
               "(--output was given explicitly).", file=sys.stderr, flush=True)

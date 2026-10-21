@@ -7,13 +7,12 @@ measuring, D is about everything downstream.
 
 ## Settled 2026-10-15 (user answers)
 
-- **PRA1.** Only the words that later get a brief are left out of the layout solve: a brief chord is not phonetic and is re-assigned after any
-  new layout. Measured on `briefs.tsv` against the first 200 words of `resources/top500_film.txt`: **34 of the 200 spellings are briefed**
-  (avec, ici, était, alors, jamais, pourquoi, toujours, maintenant, merci, comment, beaucoup, après, bonjour...), about **6.9% of the top-200
-  frequency mass**. The other 166 (je, de, est, pas, la, tu, le, vous, ne, il, et, à, un, ça, les, on, une, pour, des, en, qui, ce, mais...)
-  are typed with their phonetic outlines and must weigh in the solve, at their typed outline's phonemes (so after the PRP3 overrides).
-  Next: replace the `nbFrequentWords` cut (dictionary.py:79) by "briefed spellings excluded", and measure that change alone
-  (re-solve, `compare_theories`) before any other change.
+- **PRA1.** (revised 2026-10-21, user) The top-200 cut of the layout solve STAYS as today (weight 0): the briefs of the pipeline (avec, ici, ...) are generated
+  later, and the 200 words are not weighed wholesale. **Exception: the spellings whose phonology the overrides force** (`phonology` rows of
+  `resources/phonologyOverrides.tsv`: je te se le ce de me ne que) are weighed, with their forced phonology, since that outline is decided and the brief
+  generator will not move it. The elided forms (`j' c' qu' ...`) are outside the top-200 and count by themselves. Built in `src/layoutstatistics.py`
+  (`layoutInput`), 2026-10-21. The earlier 2026-10-15 answer (weigh the 166 non-briefed top-200 words, measured: 34 of the 200 are briefed, about 6.9% of the
+  top-200 frequency mass) is superseded; `nbFrequentWords` (dictionary.py:79) is unchanged.
 - **PRA2.** (revised) No resyllabification in the rewrite: a syllable left without nucleus stays an onset-only stroke. Merging it into the next
   syllable's onset is a later optimisation, applied downstream in the pipeline (a post-pass that merges strokes when the result is a legal chord
   and causes no collision); it is not part of the optionality test or the CP-SAT input.
@@ -35,7 +34,7 @@ measuring, D is about everything downstream.
 
 ## A. Premises at risk
 
-<!-- tag: PRA1 | The layout solve weighs the frequent words except the briefed spellings (the top-200 cut weighed them all 0). -->
+<!-- tag: PRA1 | The top-200 cut of the layout solve stays (weight 0), except the spellings with a forced phonology override (je te se le ce de me ne que), which are weighed with that phonology. -->
 ### PRA1. The CP-SAT ignores the most frequent words (64.4% of running text)
 - **Problem.** `Dictionary.analyseSyllabification` (dictionary.py:209-210) sets a word's frequency to 0 in the syllable and phoneme
   statistics when it is one of the `nbFrequentWords = 200` first words of `resources/top500_film.txt`. Those statistics are the CP-SAT's

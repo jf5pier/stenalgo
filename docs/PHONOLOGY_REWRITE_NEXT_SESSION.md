@@ -55,3 +55,58 @@ after the solve is it worth rebuilding abbreviations and briefs. Order:
 - Process rules: never wait with `pgrep -f`/`pkill -f` (they match the shell itself); stop background jobs by task id.
 - Known clashes dropped by the writer in the 4-variant set: `sRwiek` (dédiait/sciais) and, in larger sets, patois/plaza, extrusion/scrutions, suaient/suintaient.
 - Open blind spots still unsettled: PRB2-PRB11, PRC1 (learnability beyond coverage counts: needs the user's view on exception lists), PRC2-PRC5, PRD1-PRD3.
+
+## 5. Update 2026-10-20: step 1 of the order of work is built (overrides + elided ranking), measured, uncommitted
+
+- Code: `src/phonologyrewrite.py` (rules loader, in-memory rewrite, `STENALGO_PHONOLOGY_REWRITE`, default off), `resources/phonologyOverrides.tsv`
+  (9 `phonology` rows, 9 `elided` rows), the hook `_rewritten` in `util/_theoryio.py` (both theory loaders; never pickled; flag and file md5 in the
+  DisambiguatedTheory fingerprint), `_placeElidedRightAfterBase` and `ELIDED_BASES` in `src/ambiguitychecker.py`, tests `src/test/phonologyrewrite_test.py`.
+  Flag off: `pytest src/test/` 1641 passed, `mypy` clean, no output touched.
+- PRP4 refinement found while testing: `d'`, `n'`, `m'` carry the lemma of their base in the lexicon (`l'`, `s'`, `t'` have their own), which makes
+  the pair a same-lemma one (S6, no star/hash). The rewrite gives every elided form its own lemma (`d'` lemme `d'`).
+- PRP19 holds on the real S7: `ce` `s`, `c'` `s*`, `se` `s#`, `s'` `s*#` (the letter `c` falls to `s*#/*#`, two strokes; `j` takes `vt#`, `qu` `k*#`).
+- Measured (flag on, the shipped affix abbreviations and briefs NOT regenerated, `scratch/overrides/export_flag_dictionary.py` +
+  `compare_theories --stenalgo-dict`): 0 collisions, dictionary alone (long form) 281.115 -> 273.076, **short form 255.156 -> 247.116** (Pluvier 253.186,
+  PRP18 target met by the overrides alone), 1.166 strokes per word unchanged. The earlier cheap-route set (`Z/onset,d/onset,°,E`, 250.812) is superseded
+  as a baseline; the optional sets must now be searched on top of these overrides.
+- `me`/`m'`/`mm` (2026-10-21, solved): `me` came out `m*`, `m'` bare. Cause: the lexicon's junk NOM `me` (freq 2.6, plural `mes`) is merged with the pronoun
+  `me` by the same-spelling homograph exemption, so the node inherited `mes`'s conflicts with mais/met/mets, and mais (5179) took the bare code first;
+  `m'` conflicts only with me/mm and, coloured greedily after me, reused the bare code. Fix: a `drop` row kind in `resources/phonologyOverrides.tsv`
+  (`drop me NOM`). Real S7 now: me `m`, m' `m*`, mm `m*#`; every base (je te se le ce de me ne que) is bare, every elided form follows its ruling.
+  pytest 1643 passed, mypy clean (flag off).
+  Still open: The expression layer, the trainer exports and the `.stenalgo` data were not rebuilt under the flag. `j'`, `c'`, `qu'` have frequency 0 (no lexicon row).
+- Schwa-merge study (rejected as a main lever, 0.4 cost per word on the short form): `docs/SCHWA_MERGE_STUDY_2026-10-20.md`.
+- Next: step 2 (optional-phoneme sets on top of the overrides), then the rest of the CP-SAT input (placeholders, PRP16 group keys).
+
+## 6. Update 2026-10-21: the layout statistics from a theory are built and proven (uncommitted)
+
+- **PRA1 decision (user, 2026-10-21): the top-200 cut stays as today** (weight 0, the other briefs avec/ici... are generated later by the pipeline),
+  **except the nine spellings whose phonology the overrides force** (`je te se le ce de me ne que`): they count with their forced phonology. The "weigh
+  the whole top-200" suggestion of PRA1 is NOT applied. The elided forms (`j' c' qu' ...`) are not in the top-200 and count by themselves.
+- Code: `src/layoutstatistics.py` (`buildSyllableStatistics`, `wordsOfTheory`, `layoutInput`, `ambiguityTables`, `canonicalStatistics`, save/load),
+  `Dictionary.analyseSyllabification` is now a caller of it, `util/build_layout_statistics.py` (writes the gitignored, self-contained
+  `LayoutStatistics.pickle`, ~700 KB), `util/optimize_keyboard.py --statistics PATH`, proof `util/check_layout_statistics.py`, tests
+  `src/test/layoutstatistics_test.py`. `Dictionary.pickle` is never touched.
+- Proof (`python -m util.check_layout_statistics`): (1) a fresh lexicon build reproduces `Dictionary.pickle`'s statistics (0 differences of content, order lists
+  identical); (2) the words of the ORIGINAL `PhoneticTheory.pickle` reproduce them too (0 differences; 268402 distinct words in both). Two optimizer outputs
+  are not deterministic across processes and are compared loosely: the best-permutation string (it starts from a set, so it follows the hash seed; its scores
+  agree) and the pairwise order scores (differences ~1e-13).
+- Rewrite effect on the onset weights (nucleus and coda unchanged): Z +25,988, d +25,221, l +16,954, n +13,357, s +10,772, m +4,929, k +4,101, t +4,006
+  (268401 words: `me` NOM dropped). The `Z` onset weight goes from 21,988 to 47,977.
+- Environment note: this session's shell had no `python` and no ortools; a venv in the scratchpad was built from `requirements.txt`. With that venv,
+  bare `mypy` reports 87 errors, all in `src/cpsatsolver.py` and `src/featuregroupingsat.py` (the ortools 9.15 stubs have no `CpModel.Add`...), none in the new code.
+- **Remote-run tooling (built the same day, uncommitted)**: `SolverSettings` in `src/cpsatsolver.py` (time, workers, seed, log, incumbent file, report file; the
+  defaults are the historical run), `optimize_keyboard --parts/--time/--workers/--seed/--log/--incumbent-dir/--report`, `util/merge_layouts.py` (per-part layouts back into
+  one, validated: each part's phonemes assigned once, keys of the part only; refuses to overwrite the seed), `util/package_remote_solve.py` (a 0.2 MB tar.gz with
+  `run_remote.sh`, which runs one process per part with the cores split 5:5:2, then merges). Tested from an extracted package with no repo files visible:
+  90 s per part gave `result/merged.json`. `src/test/remote_solve_test.py` guards the import closure (no `dictionary`, `ambiguitychecker`, `_theoryio`).
+- Observed with the rewritten statistics, a few minutes each (NOT a result, only the noise to expect): onset objective 799,396 (16 cores, 90 s), 1,021,702 (4 workers, 60 s),
+  281,040 (6 workers, 90 s); coda 10,188,503 in all three runs (probably the seed's own cost: no improvement found); nucleus 57,565,840 in all three. The onset
+  bound stays very negative (about -30 M) at these times, so its relative gap is meaningless short of a long run; gaps of 47% (onset) and 7% (coda) were seen at 30 min on 16 cores.
+  A 20 s limit finds no onset or coda solution at all (UNKNOWN, no layout written).
+- **Incumbent files, known gaps** (`--incumbent-dir`, one `incumbent_<part>.json` per part, a full layout file that `util.merge_layouts` accepts, rewritten at most every
+  5 s on improvement): (1) the write is not atomic (a kill during it can leave a truncated file); (2) an improvement inside the 5 s window of the last write is lost if
+  the process dies before the next one; (3) only the latest solution is kept; (4) no resume: `optimize_keyboard` always hints from `starboard3h.json` (`SEED_PATH`), so a
+  restart cannot start from merged incumbents. Planned: atomic write (temp file + `os.replace`), a final flush, and `--seed-layout PATH`.
+- Still to do: the control solves of the original statistics (the noise floor, PRA4) before reading any layout difference as an effect of the rewrite; the optional-phoneme
+  sets and keypress-group placeholders in the statistics (PRP5, PRP11), PRP16 group keys.
