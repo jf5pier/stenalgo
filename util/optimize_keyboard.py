@@ -3,13 +3,15 @@ Keyboard Layout Optimization (S4) as a command: the CP-SAT phoneme-to-key
 layout solve, runnable without editing code.
 
 Run: python -m util.optimize_keyboard [--output PATH] [--statistics PATH] [--parts onset nucleus coda] [--time SECONDS] [--workers N]
-                                      [--seed N] [--log] [--incumbent-dir DIR] [--report PATH]   (from the repo root)
+                                      [--seed N] [--log] [--incumbent-dir DIR] [--report PATH] [--seed-layout PATH]   (from the repo root)
 --statistics PATH solves on the layout statistics file of `python -m util.build_layout_statistics` (rewritten phonology, typed frequencies)
 instead of Dictionary.pickle; it is self-contained, so nothing else of the lexicon side is needed.
 Remote run: one process per part (`--parts onset`, `--parts coda`), each with its own --output, --workers and --time; a partial output holds only its
 parts' strokes and is combined with `python -m util.merge_layouts`. --incumbent-dir keeps the best solution found so far of each part
 (`DIR/incumbent_<part>.json`, a layout file, rewritten every few seconds) so a killed run loses nothing; --report writes status, objective, best bound and
-relative gap per part (a gap of 0 means converged). Defaults are the historical ones: all parts, 90 s each, every core, quiet.
+relative gap per part (a gap of 0 means converged).
+--seed-layout PATH hints from another layout than starboard3h.json (a hint only: the search does not restart from its cost). After a crash the
+incumbent files ARE the result: combine them with util.merge_layouts. Defaults are the historical ones: all parts, 90 s each, every core, quiet.
 Seeds from starboard3h.json (the solver uses the committed layout only as CP-SAT
 hints, then clears and refills it), optimizes onset/nucleus/coda against
 dictionary.syllabicPartAmbiguity, and writes the solved Starboard via toJSONFile.
@@ -55,6 +57,8 @@ def parseArgs(argv: list[str] | None = None) -> argparse.Namespace:
                         help="layout statistics file (util.build_layout_statistics) to solve on; default: Dictionary.pickle")
     parser.add_argument("--parts", nargs="+", choices=PARTS, default=list(PARTS), metavar="PART",
                         help="syllabic parts to solve (default: onset nucleus coda); a subset gives a partial layout, see util.merge_layouts")
+    parser.add_argument("--seed-layout", metavar="PATH", default=SEED_PATH,
+                        help=f"layout the solver hints from (default {SEED_PATH}). Only a hint: CP-SAT does not restart from it at its cost, so this does not resume a run")
     parser.add_argument("--time", type=float, default=SolverSettings.timeSeconds, metavar="SECONDS",
                         help="solver time limit PER PART (default: %(default)s)")
     parser.add_argument("--workers", type=int, default=0, metavar="N", help="solver threads (default 0: every core)")
@@ -97,9 +101,9 @@ def main(argv: list[str] | None = None) -> None:
         dictionary.ensureAmbiguityStats()  # Dictionary.pickle no longer carries them (util.build_phonetic_theory skips them)
         syllabicPartAmbiguity = dictionary.syllabicPartAmbiguity
 
-    starboard = Starboard.fromJSONFile(SEED_PATH)
+    starboard = Starboard.fromJSONFile(args.seed_layout)
     if starboard is None:
-        raise SystemExit(f"{SEED_PATH} not found: the solve needs it as the CP-SAT hint seed.")
+        raise SystemExit(f"{args.seed_layout} not found: the solve needs it as the CP-SAT hint seed.")
 
     incumbentPath = None
     if args.incumbent_dir is not None:

@@ -104,9 +104,12 @@ after the solve is it worth rebuilding abbreviations and briefs. Order:
   281,040 (6 workers, 90 s); coda 10,188,503 in all three runs (probably the seed's own cost: no improvement found); nucleus 57,565,840 in all three. The onset
   bound stays very negative (about -30 M) at these times, so its relative gap is meaningless short of a long run; gaps of 47% (onset) and 7% (coda) were seen at 30 min on 16 cores.
   A 20 s limit finds no onset or coda solution at all (UNKNOWN, no layout written).
-- **Incumbent files, known gaps** (`--incumbent-dir`, one `incumbent_<part>.json` per part, a full layout file that `util.merge_layouts` accepts, rewritten at most every
-  5 s on improvement): (1) the write is not atomic (a kill during it can leave a truncated file); (2) an improvement inside the 5 s window of the last write is lost if
-  the process dies before the next one; (3) only the latest solution is kept; (4) no resume: `optimize_keyboard` always hints from `starboard3h.json` (`SEED_PATH`), so a
-  restart cannot start from merged incumbents. Planned: atomic write (temp file + `os.replace`), a final flush, and `--seed-layout PATH`.
+- **Incumbent files** (`--incumbent-dir`, one `incumbent_<part>.json` per part, a full layout file that `util.merge_layouts` accepts): written atomically
+  (`Starboard.toJSONFile` writes a temp file and renames it), at most every 5 s on improvement, and once more with the best solution when the solve ends.
+  After a crash they ARE the result (merge them). Drill on the package (SIGKILL of the whole process group 100 s into a run): all three incumbents valid.
+  **A restart does not continue from them**: `--seed-layout PATH` only hints, and CP-SAT does not take the hint as a complete solution (the cost variables are not
+  hinted): the first solution of a resumed run costs billions (nucleus 769 M, onset 15 G), a 60 s resumed coda ended at 35.8 M against 10.2 M before the kill, and
+  `repair_hint` did not change it. A rerun also overwrites the old incumbent files with its poor first solutions: use a new `OUT`. A real continuation needs a two-phase
+  solve (fix the assignment variables to the incumbent to get its exact cost and a complete hint, then `total_cost <= that cost`); not built.
 - Still to do: the control solves of the original statistics (the noise floor, PRA4) before reading any layout difference as an effect of the rewrite; the optional-phoneme
   sets and keypress-group placeholders in the statistics (PRP5, PRP11), PRP16 group keys.

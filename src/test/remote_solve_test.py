@@ -44,6 +44,10 @@ class TestArguments:
         args = parseArgs(["--parts", "onset", "coda", "--time", "3600", "--workers", "64", "--seed", "7", "--incumbent-dir", "d", "--report", "r.json"])
         assert args.parts == ["onset", "coda"] and args.time == 3600.0 and args.workers == 64 and args.seed == 7
 
+    def test_the_seed_layout_defaults_to_the_committed_seed(self) -> None:
+        assert parseArgs([]).seed_layout == "starboard3h.json"
+        assert parseArgs(["--seed-layout", "resume.json"]).seed_layout == "resume.json"
+
     def test_an_unknown_part_is_refused(self) -> None:
         with pytest.raises(SystemExit):
             parseArgs(["--parts", "vowel"])
@@ -83,6 +87,59 @@ class TestMerge:
         seed = _seed()
         with pytest.raises(ValueError, match="not made of nucleus keys"):
             merge(_seed(), {"nucleus": _partFile(tmp_path, seed, "onset", "wrong.json")})
+
+
+def _toyNucleusSolve(tmp_path: Any, board: Starboard, settings: SolverSettings) -> None:
+    """A nucleus-only solve on a small made-up statistics set (every vowel has a weight, four of them are ambiguous with one another)."""
+    def word(ortho: str, phon: str, freq: float) -> Word:
+        return Word(ortho=ortho, phonology=phon, lemme=ortho, gramCat=GramCat.NOM, orthoGramCat=[GramCat.NOM], gender=None, number=None,
+                    infoVerb=None, rawSyllCV="_".join(phon), rawOrthosyllCV="_".join(ortho), frequencyBook=freq, frequencyFilm=freq)
+    saved = (Syllable.allPhonemeCol, Syllable.phonemeColByPart, Syllable.biphonemeColByPart, Syllable.multiphonemeColByPart)
+    try:
+        vowels = Phoneme.nucleusPhonemes
+        buildSyllableStatistics([word("p" + v, "p" + v, 100.0 - 5.0 * i) for i, v in enumerate(vowels)], set())
+        Syllable.optimizeBiphonemeOrder()
+        nucleus = [(v,) for v in vowels[:4]]
+        ambiguity: dict[str, dict[Any, float]] = {
+            "onset": {}, "coda": {},
+            "nucleus": {(nucleus[i], nucleus[j]): 10.0 * (i + j + 1) for i in range(4) for j in range(i + 1, 4)},
+        }
+        optimizeKeyboard(board, ambiguity, ["nucleus"], settings)
+    finally:
+        Syllable.allPhonemeCol, Syllable.phonemeColByPart, Syllable.biphonemeColByPart, Syllable.multiphonemeColByPart = saved
+
+
+class TestIncumbent:
+    def test_the_best_solution_is_written_at_the_end_whatever_the_write_interval(self, tmp_path: Any) -> None:
+        # a poor hint (the most frequent vowels on the worst chords, swapped pairwise) so that the search improves on it, and an interval so long that
+        # only the first solution is written during the search: the file must still end up holding the final layout
+        poor = _seed()
+        order = list(Phoneme.nucleusPhonemes)
+        strokes = {v: poor.getStrokesOfPhoneme(v, "nucleus")[0] for v in order}
+        for v in order:
+            poor.removeFromLayout(strokes[v], v)
+        for v, other in zip(order, reversed(order)):
+            poor.addToLayout(strokes[other], v)
+        board = _seed()
+        board.phonemesAssignedToStroke = dict(poor.phonemesAssignedToStroke)
+        settings = SolverSettings(timeSeconds=10.0, workers=2, seed=1, incumbentPath=str(tmp_path / "inc_{part}.json"), incumbentInterval=1e9)
+        _toyNucleusSolve(tmp_path, board, settings)
+        incumbent = Starboard.fromJSONFile(str(tmp_path / "inc_nucleus.json"))
+        assert incumbent is not None
+        assert incumbent.phonemesAssignedToStroke == board.phonemesAssignedToStroke
+        assert incumbent.phonemesAssignedToStroke != poor.phonemesAssignedToStroke  # the search did improve on the hint
+
+    def test_a_layout_write_leaves_no_temporary_file_and_a_failed_one_keeps_the_old_file(self, tmp_path: Any) -> None:
+        board = _seed()
+        path = tmp_path / "layout.json"
+        board.toJSONFile(str(path))
+        assert [f.name for f in tmp_path.iterdir()] == ["layout.json"]
+        before = path.read_text()
+        broken = _seed()
+        broken.phonemesAssignedToStroke = {(1,): [object()]}  # type: ignore[list-item]  # not JSON serializable
+        with pytest.raises(TypeError):
+            broken.toJSONFile(str(path))
+        assert path.read_text() == before and [f.name for f in tmp_path.iterdir()] == ["layout.json"]
 
 
 class TestSolve:
@@ -128,3 +185,13 @@ class TestPackage:
         from util.package_remote_solve import pinnedRequirements
         pins = pinnedRequirements()
         assert sorted(pin.split("==")[0] for pin in pins) == ["ortools", "rich", "tqdm"] and all("==" in pin for pin in pins)
+
+
+class TestRunScript:
+    def test_the_run_script_is_valid_bash_and_passes_the_seed_layout(self, tmp_path: Any) -> None:
+        import subprocess
+        from util.package_remote_solve import RUN_SCRIPT
+        path = tmp_path / "run_remote.sh"
+        path.write_text(RUN_SCRIPT)
+        assert subprocess.run(["bash", "-n", str(path)], capture_output=True, text=True).returncode == 0
+        assert '--seed-layout "$SEED_LAYOUT"' in RUN_SCRIPT and "RESUME" not in RUN_SCRIPT

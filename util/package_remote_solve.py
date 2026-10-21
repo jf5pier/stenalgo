@@ -28,10 +28,13 @@ ROOT = "remote_solve"
 RUN_SCRIPT = """#!/bin/bash
 # Layout solve, one process per syllabic part, then the merge. Usage: ./run_remote.sh [SECONDS_PER_PART]   (default 3600)
 # Environment: PYTHON (default python3), SEED (default 1), OUT (default result), STATISTICS (default LayoutStatistics.pickle),
-#              WORKERS_ONSET / WORKERS_CODA / WORKERS_NUCLEUS (default: the cores split 5:5:2).
+#              WORKERS_ONSET / WORKERS_CODA / WORKERS_NUCLEUS (default: the cores split 5:5:2), SEED_LAYOUT (the hint layout, default starboard3h.json).
+# After a crash the files in $OUT/incumbents ARE the result (best solution so far per part); combine them with util.merge_layouts. A rerun does NOT
+# continue from them (CP-SAT takes a hint as a suggestion only), so use a new OUT and keep the old one.
 set -u
 cd "$(dirname "$0")"
 PYTHON="${PYTHON:-python3}"; SEED="${SEED:-1}"; OUT="${OUT:-result}"; STATISTICS="${STATISTICS:-LayoutStatistics.pickle}"
+SEED_LAYOUT="${SEED_LAYOUT:-starboard3h.json}"
 TIME="${1:-3600}"
 CORES="$(nproc)"
 WORKERS_ONSET="${WORKERS_ONSET:-$(( CORES * 5 / 12 ))}"; WORKERS_CODA="${WORKERS_CODA:-$(( CORES * 5 / 12 ))}"
@@ -41,7 +44,7 @@ mkdir -p "$OUT/incumbents"
 echo "cores $CORES, workers onset $WORKERS_ONSET coda $WORKERS_CODA nucleus $WORKERS_NUCLEUS, ${TIME}s per part, seed $SEED"
 for PART_WORKERS in "onset:$WORKERS_ONSET" "coda:$WORKERS_CODA" "nucleus:$WORKERS_NUCLEUS"; do
   PART="${PART_WORKERS%%:*}"; WORKERS="${PART_WORKERS##*:}"
-  "$PYTHON" -m util.optimize_keyboard --statistics "$STATISTICS" --parts "$PART" --time "$TIME" --workers "$WORKERS" --seed "$SEED" \\
+  "$PYTHON" -m util.optimize_keyboard --statistics "$STATISTICS" --parts "$PART" --time "$TIME" --workers "$WORKERS" --seed "$SEED" --seed-layout "$SEED_LAYOUT" \\
       --incumbent-dir "$OUT/incumbents" --report "$OUT/report_$PART.json" --output "$OUT/$PART.json" > "$OUT/$PART.log" 2>&1 &
 done
 wait

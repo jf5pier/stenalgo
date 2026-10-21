@@ -7,6 +7,7 @@ from collections.abc import Iterator
 from typing import override, Any, Self, TypeAlias
 import json
 import ast
+import os
 import sys
 
 
@@ -225,12 +226,19 @@ class Keyboard(ABC):
             else:
                 return obj
 
-        with open(fileName, "w", encoding="utf-8") as f:
-            json.dump(
-                convert_keys_to_strings(self.__dict__), # Call the conversion function on the object's dictionary
-                f,
-                indent=4
-            )
+        # Written to a temporary file and renamed over the target: a crash or a kill mid-write (the solver's incumbent files) never leaves a truncated layout
+        temporaryName = f"{fileName}.tmp{os.getpid()}"
+        try:
+            with open(temporaryName, "w", encoding="utf-8") as f:
+                json.dump(
+                    convert_keys_to_strings(self.__dict__), # Call the conversion function on the object's dictionary
+                    f,
+                    indent=4
+                )
+            os.replace(temporaryName, fileName)
+        finally:
+            if os.path.exists(temporaryName):
+                os.remove(temporaryName)
 
     @classmethod
     def fromJSONFile(cls, fileName: str)-> Self|None:
