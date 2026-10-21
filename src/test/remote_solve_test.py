@@ -178,6 +178,7 @@ class TestPackage:
         from util.package_remote_solve import importedRepoFiles
         files = importedRepoFiles()
         assert "src/cpsatsolver.py" in files and "util/optimize_keyboard.py" in files and "util/merge_layouts.py" in files
+        assert all(name.split("/")[0] in ("src", "util") and name.endswith(".py") for name in files), files  # no virtualenv content, whatever its name
         forbidden = {"dictionary.py", "lexique.py", "src/ambiguitychecker.py", "util/_theoryio.py"}
         assert not forbidden & set(files), f"the remote package would need {sorted(forbidden & set(files))}"
 

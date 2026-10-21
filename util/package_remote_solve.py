@@ -65,10 +65,10 @@ def importedRepoFiles() -> list[str]:
             f"for m in {list(COMMANDS)!r}: importlib.import_module(m)\n"
             "repo = os.getcwd()\n"
             "print('\\n'.join(sorted(os.path.relpath(m.__file__, repo) for m in sys.modules.values()\n"
-            "    if getattr(m, '__file__', None) and os.path.abspath(m.__file__).startswith(repo + os.sep)\n"
-            "    and not os.path.relpath(m.__file__, repo).startswith(('venv', '.venv')))))\n")
+            "    if getattr(m, '__file__', None) and os.path.abspath(m.__file__).startswith(repo + os.sep))))\n")
     out = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True, check=True, env={**os.environ, "PYTHONPATH": os.getcwd()})
-    return [line for line in out.stdout.splitlines() if line]
+    # only the project's own sources: a virtualenv kept inside the repo (env/, venv/, .venv/ ...) puts third-party modules under the repo path too
+    return [line for line in out.stdout.splitlines() if line.split(os.sep)[0] in ("src", "util") and line.endswith(".py")]
 
 
 def pinnedRequirements(path: str = "requirements.txt") -> list[str]:
@@ -124,6 +124,9 @@ def main(argv: list[str] | None = None) -> None:
             info.mtime = int(time.time())
             info.mode = 0o755 if name.endswith(".sh") else 0o644
             tar.addfile(info, io.BytesIO(data))
+    size = os.path.getsize(output)
+    if size > 5_000_000:
+        print(f"WARNING: {size / 1e6:.1f} MB, expected about 0.2 MB: look at `tar tzvf {output} | sort -k3 -n | tail`")
     print(f"Wrote {output}: {len(files)} files, {os.path.getsize(output) / 1e6:.1f} MB, commit {manifest['commit']}.")
     print("Python files:", ", ".join(name for name in sorted(files) if name.endswith(".py")))
 
