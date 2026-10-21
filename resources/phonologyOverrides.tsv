@@ -1,0 +1,29 @@
+# Phonology overrides (PRP3, docs/PHONOLOGY_REWRITE_PLAN.md): hand-edited, committed, applied in memory when STENALGO_PHONOLOGY_REWRITE=1.
+# kind      spelling  phonology  base   gramcat  note
+#   phonology: every reading of the spelling is typed with the given phonology (a single vowel-less syllable of onset phonemes).
+#   elided:    the spelling is the elided form of `base` and ranks right after it in the star/hash order (PRP4, PRP19). When the
+#              lexicon has no row for it (j', c', qu'), one reading is created from each frequent reading of `base` with the given
+#              phonology; when it has rows, the phonology column stays empty.
+#   drop:      the reading (spelling, gramcat) is removed from the theory: a junk reading whose family (`me` NOM, plural `mes`) would drag the
+#              spelling's star/hash node into conflicts with other strokes (`mes` with mais/met), so the base could not be bare.
+# A phoneme written in a `phonology` row is pinned: the optionality search and retirement never remove it (PRB4).
+kind	spelling	phonology	base	gramcat	note
+phonology	je	Z			
+phonology	te	t			
+phonology	se	s			hash after ce (PRP19)
+phonology	le	l			
+phonology	ce	s			bare, base of c' (PRP19)
+phonology	de	d			
+phonology	me	m			
+phonology	ne	n			
+phonology	que	k			
+elided	j'	Z	je		no lexicon row: created
+elided	c'	s	ce		no lexicon row: created; star (PRP19)
+elided	qu'	k	que		no lexicon row: created
+elided	l'		le		
+elided	d'		de		
+elided	n'		ne		
+elided	m'		me		
+elided	t'		te		
+elided	s'		se		star+hash (PRP19)
+drop	me			NOM	junk reading (freq 2.6, plural mes): ties the pronoun me to the mais/met cluster, so me was not bare

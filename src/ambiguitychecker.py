@@ -37,6 +37,7 @@ from src.word import (
     Lemme, LemmeGramCat, Word, groupWordsByBareLemme, groupWordsByLemme,
 )
 from src.greedyoptimizer import GRAMCAT_PRIORITY
+from src.phonologyrewrite import PHONOLOGY_REWRITE, loadPhonologyRules
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -184,6 +185,13 @@ MARKING_OVERRIDES: dict[frozenset[str], str] = {
     frozenset({"stabilisante", "stabilisant"}): "stabilisant",
     frozenset({"camés", "camées"}): "camées",
 }
+
+ELIDED_BASES: dict[str, str] = {}      # elided spelling -> base spelling, filled with the phonology rewrite (PRP4)
+if PHONOLOGY_REWRITE:
+    # PRP4/PRP19: an elided form (l', s', c'...) carries the mark right after its base. They are pair overrides like the above,
+    # and the rank order within a shared stroke then gives ce `s`, c' `s*`, se `s#`, s' `s*#`.
+    MARKING_OVERRIDES.update(loadPhonologyRules().markingOverrides())
+    ELIDED_BASES.update(loadPhonologyRules().elidedBases())
 
 
 def decideStarHashMark(
@@ -548,6 +556,18 @@ def _applyMarkingOverrides(ordered: list[MarkNode], conflicts: dict[MarkNode, se
                 ordered.insert(ordered.index(canonical) + 1, other)
 
 
+def _placeElidedRightAfterBase(ordered: list[MarkNode], conflicts: dict[MarkNode, set[MarkNode]],
+                               representative: dict[MarkNode, Word]) -> None:
+    """PRP4/PRP19, on a ranked node list, in place: an elided form (`ELIDED_BASES`, empty unless STENALGO_PHONOLOGY_REWRITE) takes the code
+    right after its base's, ahead of the other spellings of the stroke (ce `s`, c' `s*`, se `s#`, s' `s*#`). Taken in a fixed order."""
+    for canonical in sorted(conflicts):
+        for other in sorted(conflicts[canonical]):
+            if ELIDED_BASES.get(representative[other].ortho) != representative[canonical].ortho:
+                continue
+            ordered.remove(other)
+            ordered.insert(ordered.index(canonical) + 1, other)
+
+
 def assignMarkNodeCodes(
     wordsByNode: dict[MarkNode, list[Word]], clusters: list[list[Word]],
     doubletPairs: frozenset[frozenset[str]] = frozenset(),
@@ -627,6 +647,8 @@ def assignMarkNodeCodes(
         representative[node], lemmaFrequency[representative[node].lemmeGramCat]) + (node,))
     sharedLemmas = _orderLemmasByFrequency(ordered, clusters, find, representative, lemmaFrequency)
     _applyMarkingOverrides(ordered, conflicts, representative)
+    if ELIDED_BASES:
+        _placeElidedRightAfterBase(ordered, conflicts, representative)
     index: dict[MarkNode, int] = {}
     for node in ordered:
         taken = {index[other] for other in conflicts[node] if other in index}

@@ -14,8 +14,11 @@ from typing import TYPE_CHECKING
 
 from src.ambiguitychecker import buildWordToStrokes, buildWordsByOrthoLemme
 from src.grammar import Syllable
-from src.keyboard import Keyboard, Strokes
+from src.keyboard import Keyboard, Starboard, Strokes
 from src.mergedfeaturekeys import MERGE_FEATURE_KEYS
+from src.phonologyrewrite import (
+    OVERRIDES_PATH, PHONOLOGY_REWRITE, applyPhonologyRewrite, loadPhonologyRules, overridesMd5,
+)
 from src.word import Word
 
 if TYPE_CHECKING:
@@ -45,6 +48,16 @@ def loadDictionary() -> "Dictionary":
     return dictionary
 
 
+def _rewritten(phoneticTheory: "dict[Strokes, list[Word]]") -> "dict[Strokes, list[Word]]":
+    """The phonology overrides (PRP3), applied in memory after the pickle loads and never pickled (PRB12); the theory itself when the
+    flag STENALGO_PHONOLOGY_REWRITE is off. The layout is pinned to starboard3h.json, as for the disambiguated-theory cache."""
+    if not PHONOLOGY_REWRITE:
+        return phoneticTheory
+    keyboard = Starboard.fromJSONFile("starboard3h.json")
+    assert keyboard is not None
+    return applyPhonologyRewrite(phoneticTheory, keyboard, loadPhonologyRules())
+
+
 def _loadDictionaryAndPhoneticTheory() -> "tuple[Dictionary, dict[Strokes, list[Word]]]":
     dictionary = loadDictionary()
 
@@ -53,7 +66,7 @@ def _loadDictionaryAndPhoneticTheory() -> "tuple[Dictionary, dict[Strokes, list[
     with open("PhoneticTheory.pickle", "rb") as pfile:
         phoneticTheory: dict[Strokes, list[Word]] = pickle.load(pfile)
 
-    return dictionary, phoneticTheory
+    return dictionary, _rewritten(phoneticTheory)
 
 
 # The disambiguated-theory cache. Unlike Dictionary.pickle/PhoneticTheory.pickle
@@ -115,6 +128,9 @@ def disambiguatedTheoryFingerprint(
     if MERGE_FEATURE_KEYS:
         fingerprint["MERGE_FEATURE_KEYS"] = "1"
         fingerprint.update({path: _md5(path) for path in MERGE_FINGERPRINT_INPUTS})
+    if PHONOLOGY_REWRITE:
+        fingerprint["STENALGO_PHONOLOGY_REWRITE"] = "1"
+        fingerprint[OVERRIDES_PATH] = overridesMd5()
     return fingerprint
 
 
@@ -166,7 +182,7 @@ def _loadPhoneticTheoryOnly() -> dict[Strokes, list[Word]]:
         raise RuntimeError("Run `python -m util.build_phonetic_theory` first to generate PhoneticTheory.pickle.")
     with open("PhoneticTheory.pickle", "rb") as pfile:
         phoneticTheory: dict[Strokes, list[Word]] = pickle.load(pfile)
-    return phoneticTheory
+    return _rewritten(phoneticTheory)
 
 
 def loadPhoneticTheory() -> dict[Strokes, list[Word]]:
