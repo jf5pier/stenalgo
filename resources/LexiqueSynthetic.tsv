@@ -22479,6 +22479,7 @@ bûchèrent	bySER	bûcher	VER	VER			ind:pas:3p;	b_y|S_E_R_#	b_û|ch_è_r_ent	0.0
 bûchée	bySe	bûcher	VER	VER	f	s	par:pas;	b_y|S_e_#	b_û|ch_é_e	0.0	0.0	synthetic
 bûchées	bySe	bûcher	VER	VER	f	p	par:pas;	b_y|S_e_#	b_û|ch_é_es	0.0	0.0	synthetic
 bûchés	bySe	bûcher	VER	VER	m	p	par:pas;	b_y|S_e_#	b_û|ch_é_s	0.0	0.0	synthetic
+c'	s	ce	PRO:dem	PRO:dem	m	s		s_#	c_'	1296.44	2287.00	synthetic
 caballeros	kabajeRo	caballero	NOM	NOM	f	p		k_a|b_a|j_e|R_o_#	c_a|b_a|ll_e|r_o_s	0.0	0.0	synthetic
 cabanai	kabane	cabaner	VER	VER			ind:pas:1s;	k_a|b_a|n_e	c_a|b_a|n_ai	0.0	0.0	synthetic
 cabanaient	kabanE	cabaner	VER	VER			ind:imp:3p;	k_a|b_a|n_E	c_a|b_a|n_aient	0.0	0.0	synthetic
@@ -100679,6 +100680,7 @@ ixé	ikse	ixer	VER	VER	m	s	par:pas;	i|ks_e	i|x_é	0.0	0.0	synthetic
 ixée	ikse	ixer	VER	VER	f	s	par:pas;	i|ks_e_#	i|x_é_e	0.0	0.0	synthetic
 ixées	ikse	ixer	VER	VER	f	p	par:pas;	i|ks_e_#	i|x_é_es	0.0	0.0	synthetic
 ixés	ikse	ixer	VER	VER	m	p	par:pas;	i|ks_e_#	i|x_é_s	0.0	0.0	synthetic
+j'	Z	je	PRO:per	PRO:per		s		Z_#	j_'	4093.69	9791.89	synthetic
 jabota	Zabota	jaboter	VER	VER			ind:pas:3s;	Z_a|b_o|t_a	j_a|b_o|t_a	0.0	0.0	synthetic
 jabotai	Zabote	jaboter	VER	VER			ind:pas:1s;	Z_a|b_o|t_e	j_a|b_o|t_ai	0.0	0.0	synthetic
 jabotaient	ZabotE	jaboter	VER	VER			ind:imp:3p;	Z_a|b_o|t_E	j_a|b_o|t_aient	0.0	0.0	synthetic
@@ -101981,6 +101983,7 @@ jurions	ZyRj§	jurer	VER	VER			sub:pre:1p;	Z_y|R_j_§	j_u|r_i_ons	0.0	0.0	synthe
 jurisprudences	ZyRispRyd@s	jurisprudence	NOM	NOM	f	p		Z_y|R_i_s|p_R_y|d_@_s_#	j_u|r_i_s|p_r_u|d_en_c_es	0.0	0.0	synthetic
 jurâtes	ZyRat	jurer	VER	VER			ind:pas:2p;	Z_y|R_a_t_#	j_u|r_â_t_es	0.0	0.0	synthetic
 jusants	Zyz@	jusant	NOM	NOM	m	p		Z_y|z_@_#	j_u|s_an_ts	0.0	0.0	synthetic
+jusqu'	Zysk	jusque	PRE	PRE				Z_y_s_k_#	j_u_s_qu_'	424.80	170.49	synthetic
 jusquiames	Zyskjam	jusquiame	NOM	NOM	f	p		Z_y_s|k_j_a_m_#	j_u_s|qu_i_a_m_es	0.0	0.0	synthetic
 justesses	ZystEs	justesse	NOM	NOM	f	p		Z_y_s|t_E_s_#	j_u_s|t_e_ss_es	0.0	0.0	synthetic
 justicières	ZystisjER	justicier	NOM	NOM	f	p		Z_y_s|t_i|s_j_E_R_#	j_u_s|t_i|c_i_è_r_es	0.0	0.0	synthetic
@@ -104647,6 +104650,7 @@ lorgnâmes	lORNam	lorgner	VER	VER			ind:pas:1p;	l_O_R|N_a_m_#	l_o_r|gn_â_m_es	0
 lorgnâtes	lORNat	lorgner	VER	VER			ind:pas:2p;	l_O_R|N_a_t_#	l_o_r|gn_â_t_es	0.0	0.0	synthetic
 lorgnée	lORNe	lorgner	VER	VER	f	s	par:pas;	l_O_R|N_e_#	l_o_r|gn_é_e	0.0	0.0	synthetic
 loris	lORi	lori	NOM	NOM	m	p		l_O|R_i_#	l_o|r_i_s	0.0	0.0	synthetic
+lorsqu'	lORsk	lorsque	CON	CON				l_O_R|s_k_#	l_o_r|s_qu_'	175.11	41.74	synthetic
 losangées	loz@Ze	losangé	ADJ	ADJ	f	p		l_o|z_@|Z_e_#	l_o|s_an|g_é_es	0.0	0.0	synthetic
 lotiers	lotje	lotier	NOM	NOM	m	p		l_o|t_j_e_#	l_o|t_i_er_s	0.0	0.0	synthetic
 loties	loti	lotir	VER	VER	f	p	par:pas;	l_o|t_i_#	l_o|t_i_es	0.0	0.0	synthetic
@@ -127431,6 +127435,7 @@ prescrivis	pREskRivi	prescrire	VER	VER			ind:pas:2s;	p_R_E_s|k_R_i|v_i	p_r_e_s|c
 prescrivons	pREskRiv§	prescrire	VER	VER			imp:pre:1p;	p_R_E_s|k_R_i|v_§	p_r_e_s|c_r_i|v_ons	0.0	0.0	synthetic
 prescrivons	pREskRiv§	prescrire	VER	VER			ind:pre:1p;	p_R_E_s|k_R_i|v_§	p_r_e_s|c_r_i|v_ons	0.0	0.0	synthetic
 prescrivîmes	pREskRivim	prescrire	VER	VER			ind:pas:1p;	p_R_E_s|k_R_i|v_i_m_#	p_r_e_s|c_r_i|v_î_m_es	0.0	0.0	synthetic
+presqu'	pREsk	presque	ADV	ADV				p_R_E_s_k_#	p_r_e_s_qu_'	15.53	6.06	synthetic
 pressages	pREsaZ	pressage	NOM	NOM	m	p		p_R_E|s_a_Z_#	p_r_e|ss_a_g_es	0.0	0.0	synthetic
 pressas	pREsa	presser	VER	VER			ind:pas:2s;	p_R_E|s_a	p_r_e|ss_as	0.0	0.0	synthetic
 presse	pREs	presser	VER	VER			sub:pre:1s;	p_R_E_s_#	p_r_e_ss_e	0.0	0.0	synthetic
@@ -130438,6 +130443,7 @@ puisettes	p8izEt	puisette	NOM	NOM	f	p		p_8_i|z_E_t_#	p_u_i|s_e_tt_es	0.0	0.0	syn
 puisiez	p8izje	puiser	VER	VER			ind:imp:2p;	p_8_i|z_j_e	p_u_i|s_i_ez	0.0	0.0	synthetic
 puisiez	p8izje	puiser	VER	VER			sub:pre:2p;	p_8_i|z_j_e	p_u_i|s_i_ez	0.0	0.0	synthetic
 puisions	p8izj§	puiser	VER	VER			sub:pre:1p;	p_8_i|z_j_§	p_u_i|s_i_ons	0.0	0.0	synthetic
+puisqu'	p8isk	puisque	CON	CON				p_8_i_s|k_#	p_u_i_s|qu_'	82.93	37.18	synthetic
 puisâmes	p8izam	puiser	VER	VER			ind:pas:1p;	p_8_i|z_a_m_#	p_u_i|s_â_m_es	0.0	0.0	synthetic
 puisâtes	p8izat	puiser	VER	VER			ind:pas:2p;	p_8_i|z_a_t_#	p_u_i|s_â_t_es	0.0	0.0	synthetic
 puisèrent	p8izER	puiser	VER	VER			ind:pas:3p;	p_8_i|z_E_R_#	p_u_i|s_è_r_ent	0.0	0.0	synthetic
@@ -131771,6 +131777,8 @@ pêchèrent	pESER	pêcher	VER	VER			ind:pas:3p;	p_E|S_E_R_#	p_ê|ch_è_r_ent	0.0
 pêchée	pESe	pêché	ADJ	VER,ADJ	f	s		p_E|S_e_#	p_ê|ch_é_e	0.0	0.0	synthetic
 pêchées	pESe	pêché	ADJ	VER,ADJ	f	p		p_E|S_e_#	p_ê|ch_é_es	0.0	0.0	synthetic
 pênes	pEn	pêne	NOM	NOM	m	p		p_E_n_#	p_ê_n_es	0.0	0.0	synthetic
+qu'	k	que	PRO:int	PRO:int,PRO:rel				k_#	qu_'	196.78	444.86	synthetic
+qu'	k	que	PRO:rel	PRO:int,PRO:rel				k_#	qu_'	1718.94	1924.35	synthetic
 quadrangles	kwadR@gl	quadrangle	NOM	NOM	m	p		kw_a|d_R_@_g_l_#	qu_a|d_r_an_g_l_es	0.0	0.0	synthetic
 quadratures	kwadRatyR	quadrature	NOM	NOM	f	p		kw_a|d_R_a|t_y_R_#	qu_a|d_r_a|t_u_r_es	0.0	0.0	synthetic
 quadridimensionnelle	kwadRidim@sjOnEl	quadridimensionnel	ADJ	ADJ	f	s		kw_a|d_R_i|d_i|m_@|s_j_O|n_E_l_#	qu_a|d_r_i|d_i|m_en|s_i_o|nn_e_ll_e	0.0	0.0	synthetic
@@ -132337,6 +132345,7 @@ quièrent	kjER	quérir	VER	VER			sub:pre:3p;	k_j_E_R_#	qu_i_è_r_ent	0.0	0.0	syn
 quiétismes	kjetizm	quiétisme	NOM	NOM	m	p		k_j_e|t_i_z_m_#	qu_i_é|t_i_s_m_es	0.0	0.0	synthetic
 quoie	kwa	quoi	ADJ	ADJ,ONO,PRO:int,PRO:rel	f	s		k_wa_#	qu_oi_e	0.0	0.0	synthetic
 quoies	kwa	quoi	ADJ	ADJ,ONO,PRO:int,PRO:rel	f	p		k_wa_#	qu_oi_es	0.0	0.0	synthetic
+quoiqu'	kwak	quoique	CON	CON				k_wa|k_#	qu_oi|qu_'	7.92	4.86	synthetic
 quois	kwa	quoi	ADJ	ADJ,ONO,PRO:int,PRO:rel	m	p		k_wa_#	qu_oi_s	0.0	0.0	synthetic
 quorums	koROm	quorum	NOM	NOM	m	p		k_o|R_O_m_#	qu_o|r_u_m_s	0.0	0.0	synthetic
 quotidiennetés	kotidjEn°te	quotidienneté	NOM	NOM	f	p		k_o|t_i|d_j_E|n_°|t_e_#	qu_o|t_i|d_i_e|nn_e|t_é_s	0.0	0.0	synthetic

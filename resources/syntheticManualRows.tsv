@@ -217,3 +217,12 @@ zézayerions	zezEj°Rj§	zézayer	VER	VER			cnd:pre:1p;	z_e|z_E|j_°|R_j_§	z_é
 éploierions	eplwaRj§	éployer	VER	VER			cnd:pre:1p;	e_p|l_wa_#_#|R_j_§	é_p|l_o_i_e|r_i_ons	0.0	0.0	synthetic
 étaye	etEj	étayer	VER	VER			ind:pre:1s;	e|t_E_j_#	é|t_a_y_e	0.0	0.0	synthetic
 étayerions	etEj°Rj§	étayer	VER	VER			cnd:pre:1p;	e|t_E|j_°|R_j_§	é|t_a|y_e|r_i_ons	0.0	0.0	synthetic
+j'	Z	je	PRO:per	PRO:per		s		Z_#	j_'	4093.69	9791.89	synthetic
+c'	s	ce	PRO:dem	PRO:dem	m	s		s_#	c_'	1296.44	2287.00	synthetic
+qu'	k	que	PRO:rel	PRO:int,PRO:rel				k_#	qu_'	1718.94	1924.35	synthetic
+qu'	k	que	PRO:int	PRO:int,PRO:rel				k_#	qu_'	196.78	444.86	synthetic
+jusqu'	Zysk	jusque	PRE	PRE				Z_y_s_k_#	j_u_s_qu_'	424.80	170.49	synthetic
+lorsqu'	lORsk	lorsque	CON	CON				l_O_R|s_k_#	l_o_r|s_qu_'	175.11	41.74	synthetic
+puisqu'	p8isk	puisque	CON	CON				p_8_i_s|k_#	p_u_i_s|qu_'	82.93	37.18	synthetic
+quoiqu'	kwak	quoique	CON	CON				k_wa|k_#	qu_oi|qu_'	7.92	4.86	synthetic
+presqu'	pREsk	presque	ADV	ADV				p_R_E_s_k_#	p_r_e_s_qu_'	15.53	6.06	synthetic
